@@ -71,7 +71,7 @@ ShopOwner N(Owner) = {
     .idleAnim = ANIM_HarryT_Idle,
     .talkAnim = ANIM_HarryT_Talk,
     .onBuyEvt = &N(EVS_OnBuy),
-    .shopMsgIDs = N(ShopMessages) ,
+    .shopMsgIDs = N(ShopMessages),
 };
 
 EvtScript N(EVS_SetupShop) = {

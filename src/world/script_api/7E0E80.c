@@ -827,7 +827,7 @@ void draw_shop_items(void) {
                     xOffset = 0;
                 }
 
-                if (!(get_item_entity(shopItemEntities->index)->flags & ITEM_ENTITY_FLAGS_40)) {
+                if (!(get_item_entity(shopItemEntities->index)->flags & ITEM_ENTITY_FLAGS_HIDDEN)) {
                     draw_number(itemData->price, xTemp + xOffset, yTemp, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, 0);
                 }
 

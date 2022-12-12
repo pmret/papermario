@@ -32,6 +32,60 @@
     ANIM_Dryite_Green_Idle, \
 }
 
+#define GOOMA_DROPS \
+{ \
+    .dropFlags = NPC_DROP_FLAGS_80, \
+    .heartDrops  = NO_DROPS, \
+    .flowerDrops = NO_DROPS, \
+}
+
+#define GOOMA_ANIMS \
+{ \
+    .idle   = ANIM_Gooma_Idle, \
+    .walk   = ANIM_Gooma_Walk, \
+    .run    = ANIM_Gooma_Run, \
+    .chase  = ANIM_Gooma_Run, \
+    .anim_4 = ANIM_Gooma_Idle, \
+    .anim_5 = ANIM_Gooma_Idle, \
+    .death  = ANIM_Gooma_Still, \
+    .hit    = ANIM_Gooma_Still, \
+    .anim_8 = ANIM_Gooma_Run, \
+    .anim_9 = ANIM_Gooma_Run, \
+    .anim_A = ANIM_Gooma_Run, \
+    .anim_B = ANIM_Gooma_Run, \
+    .anim_C = ANIM_Gooma_Run, \
+    .anim_D = ANIM_Gooma_Run, \
+    .anim_E = ANIM_Gooma_Run, \
+    .anim_F = ANIM_Gooma_Run, \
+}
+
+#define GOOMPAPA_DROPS \
+{ \
+    .dropFlags = NPC_DROP_FLAGS_80, \
+    .heartDrops  = NO_DROPS, \
+    .flowerDrops = NO_DROPS, \
+}
+
+#define GOOMPAPA_ANIMS \
+{ \
+    .idle   = ANIM_Goompapa_Idle, \
+    .walk   = ANIM_Goompapa_Walk, \
+    .run    = ANIM_Goompapa_Run, \
+    .chase  = ANIM_Goompapa_Run, \
+    .anim_4 = ANIM_Goompapa_Idle, \
+    .anim_5 = ANIM_Goompapa_Idle, \
+    .death  = ANIM_Goompapa_Still, \
+    .hit    = ANIM_Goompapa_Still, \
+    .anim_8 = ANIM_Goompapa_Run, \
+    .anim_9 = ANIM_Goompapa_Run, \
+    .anim_A = ANIM_Goompapa_Run, \
+    .anim_B = ANIM_Goompapa_Run, \
+    .anim_C = ANIM_Goompapa_Run, \
+    .anim_D = ANIM_Goompapa_Run, \
+    .anim_E = ANIM_Goompapa_Run, \
+    .anim_F = ANIM_Goompapa_Run, \
+}
+
 #define GOOMAMA_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAGS_80, \

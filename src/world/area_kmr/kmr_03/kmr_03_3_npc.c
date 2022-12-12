@@ -11,7 +11,7 @@ API_CALLABLE(N(func_802401B0_8C8140)) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/todo/UnkPositionFunc.inc.c"
+#include "world/common/util/CheckPositionRelativeToPlane.inc.c"
 
 NpcSettings N(NpcSettings_Goompa) = {
     .height = 22,
@@ -56,7 +56,7 @@ EvtScript N(EVS_NpcAI_Goompa) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_EQ(STORY_CH0_FELL_OFF_CLIFF)
             EVT_LABEL(89)
-            EVT_CALL(N(UnkPositionFunc), -118, 86, -70, -15)
+            EVT_CALL(N(CheckPositionRelativeToPlane), -118, 86, -70, -15)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar0, 0)
                 EVT_GOTO(89)

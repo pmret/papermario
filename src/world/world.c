@@ -271,7 +271,6 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
     .dmaEnd = map##_ROM_END, \
     .dmaDest = map##_VRAM \
 
-
 // these, along with all the *_maps, almost certainly belong in the next file
 s16 gEntityColliderFaces[] = { 4, 6, 5, 4, 7, 6, 0, 3, 4, 3, 7, 4, 3, 2, 7, 2, 6, 7, 2, 1, 6, 1, 5, 6, 1, 0, 5,
                                  0, 4, 5, 0, 1, 2, 0, 2, 3};
@@ -284,8 +283,8 @@ f32 gEntityColliderNormals[] = { 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
 #include "area_mac/mac.h"
 MapConfig mac_maps[] = {
     { MAP(machi), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(mac_00, 0x80243BE0), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(mac_01, 0x80246730), .bgName = "nok_bg" },
+    { MAP(mac_00), .bgName = "nok_bg" },
+    { MAP(mac_01), .bgName = "nok_bg" },
     { MAP(mac_02), .bgName = "nok_bg" },
     { MAP(mac_03), .bgName = "nok_bg" },
     { MAP_WITH_INIT(mac_04), .bgName = "nok_bg" },

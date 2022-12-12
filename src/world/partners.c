@@ -2412,7 +2412,7 @@ void partner_set_tether_distance(f32 dist) {
     wPartnerTetherDistance = dist;
 }
 
-void repartner_set_tether_distance(void) {
+void partner_reset_tether_distance(void) {
     wPartnerTetherDistance = 40.0f;
 }
 

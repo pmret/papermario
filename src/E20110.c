@@ -197,5 +197,5 @@ void func_802B79C8_E20AD8(void) {
     gPlayerStatusPtr->encounteredNPC = NULL;
     gPlayerStatusPtr->animFlags &= ~PA_FLAGS_INTERACT_PROMPT_AVAILABLE;
     func_800EF3D4(0);
-    repartner_set_tether_distance();
+    partner_reset_tether_distance();
 }

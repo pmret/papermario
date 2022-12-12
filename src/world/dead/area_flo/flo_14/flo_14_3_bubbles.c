@@ -225,14 +225,14 @@ void N(gfx_build_big_bubble)(void) {
     matrix[2][1] = (cos_rad(N(BubblePhase) / 17.0f) * 0.04);
 
     guMtxF2L(matrix, &gDisplayContext->matrixStack[gMatrixListPos]);
-    mdl_get_copied_vertices(0, &src, &dest, &copyCount);
+    mdl_get_copied_vertices(VTX_COPY_0, &src, &dest, &copyCount);
 
     new_var = 0;
     while (new_var); // TODO required to match
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(0));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_0));
 
     N(BubblePhase) += 1.0f;
 }
@@ -247,7 +247,7 @@ void N(gfx_build_bubble_flower)(void) {
     f32 openedScale; // controls how open the flower is
     f32 lengthScale; // controls longitudinal pulsing
 
-    mdl_get_copied_vertices(1, &verts, &copied, &numCopied);
+    mdl_get_copied_vertices(VTX_COPY_1, &verts, &copied, &numCopied);
 
     for (i = 0; i < numCopied; i++) {
         Vtx* src = &verts[i];
@@ -262,7 +262,7 @@ void N(gfx_build_bubble_flower)(void) {
         }
     }
 
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(1));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_1));
 
     if (evt_get_variable(NULL, AF_FLO_BlowingBigBubble)) {
         if (N(FlowerPhase) > 90) {
@@ -386,17 +386,17 @@ EvtScript N(EVS_SetupBubbles) = {
     EVT_EXEC(N(EVS_ManageBlownBubble))
     EVT_SET(LVar0, CLONED_MODEL(5))
     EVT_EXEC(N(EVS_ManageBlownBubble))
-    EVT_CALL(MakeLocalVertexCopy, 0, MODEL_o167, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, 1, EVT_PTR(N(gfx_build_big_bubble)), 0)
-    EVT_CALL(SetModelCustomGfx, MODEL_o167, 1, -1)
-    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(1), 1, -1)
-    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(2), 1, -1)
-    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(3), 1, -1)
-    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(4), 1, -1)
-    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(5), 1, -1)
-    EVT_CALL(MakeLocalVertexCopy, 1, MODEL_o57, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, 2, EVT_PTR(N(gfx_build_bubble_flower)), 0)
-    EVT_CALL(SetModelCustomGfx, MODEL_o57, 2, -1)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o167, TRUE)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(gfx_build_big_bubble)), 0)
+    EVT_CALL(SetModelCustomGfx, MODEL_o167, CUSTOM_GFX_1, -1)
+    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(1), CUSTOM_GFX_1, -1)
+    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(2), CUSTOM_GFX_1, -1)
+    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(3), CUSTOM_GFX_1, -1)
+    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(4), CUSTOM_GFX_1, -1)
+    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(5), CUSTOM_GFX_1, -1)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_1, MODEL_o57, TRUE)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_2, EVT_PTR(N(gfx_build_bubble_flower)), 0)
+    EVT_CALL(SetModelCustomGfx, MODEL_o57, CUSTOM_GFX_2, -1)
     EVT_RETURN
     EVT_END
 };

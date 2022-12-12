@@ -22,7 +22,7 @@ Vec3f N(FlightPath_TwinkDepart)[] = {
 EvtScript N(EVS_NpcIdle_TwinkStartCh4) = {
     EVT_CALL(WaitForPlayerInputEnabled)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PushSong, 112, 0)
+    EVT_CALL(PushSong, SONG_TWINK_THEME, 0)
     EVT_CALL(ShowMessageAtScreenPos, MSG_MAC_Bridge_008F, 160, 40)
     EVT_CALL(GetPlayerPos, LVar4, LVar5, LVar6)
     EVT_SUBF(LVar4, EVT_FLOAT(50.0))

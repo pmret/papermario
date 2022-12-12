@@ -468,7 +468,7 @@ StaticNpc N(NpcData_PostChapter4)[] = {
 StaticNpc N(NpcData_GoombaFamily)[] = {
     {
         .id = NPC_Goomama,
-        .settings = &N(NpcSettings_Goomba_Family),
+        .settings = &N(NpcSettings_GoombaFamily),
         .pos = { -126.0f, 0.0f, 329.0f },
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
@@ -479,7 +479,7 @@ StaticNpc N(NpcData_GoombaFamily)[] = {
     },
     {
         .id = NPC_Goombaria,
-        .settings = &N(NpcSettings_Goomba_Family),
+        .settings = &N(NpcSettings_GoombaFamily),
         .pos = { -117.0f, 0.0f, 305.0f },
         .yaw = 270,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,

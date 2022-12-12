@@ -61,9 +61,9 @@ void N(make_tongue_gfx)(s32 index) {
     Vtx* vtxCopy;
     s32 numCopied;
 
-    mdl_get_copied_vertices(1, &vtxSrc, &vtxCopy, &numCopied);
+    mdl_get_copied_vertices(VTX_COPY_1, &vtxSrc, &vtxCopy, &numCopied);
     N(add_tongue_deformation)(vtxSrc, vtxCopy, numCopied, N(TongueWiggleTime));
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(1));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_1));
 
     N(TongueWiggleTime) += TONGUE_WIGGLE_RATE;
 }
@@ -106,9 +106,9 @@ EvtScript N(EVS_StartTongueWiggle) = {
     EVT_CALL(ParentColliderToModel, COLLIDER_sita, TONGUE_COPY_MODEL_ID)
     EVT_CALL(EnableModel, TONGUE_COPY_MODEL_ID, FALSE)
     EVT_EXEC(N(EVS_WiggleTongue))
-    EVT_CALL(MakeLocalVertexCopy, 1, MODEL_sita, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, 1, EVT_PTR(N(make_tongue_gfx)), 0)
-    EVT_CALL(SetModelCustomGfx, MODEL_sita, 1, -1)
+    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_1, MODEL_sita, TRUE)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(make_tongue_gfx)), 0)
+    EVT_CALL(SetModelCustomGfx, MODEL_sita, CUSTOM_GFX_1, -1)
     EVT_CALL(HidePlayerShadow, TRUE)
     EVT_RETURN
     EVT_END

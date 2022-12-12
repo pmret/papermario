@@ -495,8 +495,8 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
     EVT_SET(LVar0, EVT_PTR(N(D_80242BFC_B2035C)))
     EVT_EXEC(N(D_80240600_B1DD60))
-    EVT_CALL(SetModelCustomGfx, MODEL_o152, 0, -1)
-    EVT_CALL(SetCustomGfxBuilders, 0, 0, EVT_PTR(N(func_8024013C_B1D89C)))
+    EVT_CALL(SetModelCustomGfx, MODEL_o152, CUSTOM_GFX_0, -1)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, 0, EVT_PTR(N(func_8024013C_B1D89C)))
     EVT_RETURN
     EVT_END
 };

@@ -61,6 +61,10 @@ class N64SegGfx(CommonSegCodeSubsegment):
             yaml=yaml,
         )
         self.file_text = None
+        self.data_only = isinstance(yaml, dict) and yaml.get("data_only", False)
+
+    def format_sym_name(self, sym) -> str:
+        return sym.name
 
     def get_linker_section(self) -> str:
         return ".data"
@@ -75,15 +79,15 @@ class N64SegGfx(CommonSegCodeSubsegment):
         opt = options.opts.gfx_ucode
 
         if opt == "f3d":
-            return gfxd_f3d  # type: ignore
+            return gfxd_f3d
         elif opt == "f3db":
-            return gfxd_f3db  # type: ignore
+            return gfxd_f3db
         elif opt == "f3dex":
-            return gfxd_f3dex  # type: ignore
+            return gfxd_f3dex
         elif opt == "f3dexb":
-            return gfxd_f3dexb  # type: ignore
+            return gfxd_f3dexb
         elif opt == "f3dex2":
-            return gfxd_f3dex2  # type: ignore
+            return gfxd_f3dex2
         else:
             log.error(f"Unknown target {opt}")
 
@@ -91,56 +95,56 @@ class N64SegGfx(CommonSegCodeSubsegment):
         sym = self.create_symbol(
             addr=addr, in_segment=True, type="data", reference=True
         )
-        gfxd_printf(sym.name)
+        gfxd_printf(self.format_sym_name(sym))
         return 1
 
     def timg_handler(self, addr, fmt, size, width, height, pal):
         sym = self.create_symbol(
             addr=addr, in_segment=True, type="data", reference=True
         )
-        gfxd_printf(sym.name)
+        gfxd_printf(self.format_sym_name(sym))
         return 1
 
     def cimg_handler(self, addr, fmt, size, width):
         sym = self.create_symbol(
             addr=addr, in_segment=True, type="data", reference=True
         )
-        gfxd_printf(sym.name)
+        gfxd_printf(self.format_sym_name(sym))
         return 1
 
     def zimg_handler(self, addr):
         sym = self.create_symbol(
             addr=addr, in_segment=True, type="data", reference=True
         )
-        gfxd_printf(sym.name)
+        gfxd_printf(self.format_sym_name(sym))
         return 1
 
     def dl_handler(self, addr):
         sym = self.create_symbol(
             addr=addr, in_segment=True, type="data", reference=True
         )
-        gfxd_printf(sym.name)
+        gfxd_printf(self.format_sym_name(sym))
         return 1
 
     def mtx_handler(self, addr):
         sym = self.create_symbol(
             addr=addr, in_segment=True, type="data", reference=True
         )
-        gfxd_printf(sym.name)
+        gfxd_printf(self.format_sym_name(sym))
         return 1
 
     def lookat_handler(self, addr, count):
         sym = self.create_symbol(
             addr=addr, in_segment=True, type="data", reference=True
         )
-        gfxd_printf(sym.name)
+        gfxd_printf(self.format_sym_name(sym))
         return 1
 
     def light_handler(self, addr, count):
         sym = self.create_symbol(
             addr=addr, in_segment=True, type="data", reference=True
         )
-        gfxd_printf(sym.name)
+        gfxd_printf(self.format_sym_name(sym))
         return 1
 
     def vtx_handler(self, addr, count):
@@ -148,14 +152,14 @@ class N64SegGfx(CommonSegCodeSubsegment):
             addr=addr, in_segment=True, type="data", reference=True, search_ranges=True
         )
         index = int((addr - sym.vram_start) / 0x10)
-        gfxd_printf(f"&{sym.name}[{index}]")
+        gfxd_printf(f"&{self.format_sym_name(sym)}[{index}]")
         return 1
 
     def vp_handler(self, addr):
         sym = self.create_symbol(
             addr=addr, in_segment=True, type="data", reference=True
         )
-        gfxd_printf(sym.name)
+        gfxd_printf(self.format_sym_name(sym))
         return 1
 
     def macro_fn(self):
@@ -175,7 +179,7 @@ class N64SegGfx(CommonSegCodeSubsegment):
                 f"Error: gfx segment {self.name} length ({segment_length}) is not a multiple of 8!"
             )
 
-        out_str = options.opts.generated_c_preamble + "\n\n"
+        out_str = "" if self.data_only else options.opts.generated_c_preamble + "\n\n"
 
         sym = self.create_symbol(
             addr=self.vram_start, in_segment=True, type="data", define=True
@@ -211,9 +215,14 @@ class N64SegGfx(CommonSegCodeSubsegment):
         # gfxd_dram_callback ?
 
         gfxd_execute()
-        out_str += "Gfx " + sym.name + "[] = {\n"
-        out_str += gfxd_buffer_to_string(outbuf)
-        out_str += "};\n"
+
+        if self.data_only:
+            out_str += gfxd_buffer_to_string(outbuf)
+        else:
+            out_str += "Gfx " + self.format_sym_name(sym) + "[] = {\n"
+            out_str += gfxd_buffer_to_string(outbuf)
+            out_str += "};\n"
+
         return out_str
 
     def split(self, rom_bytes: bytes):

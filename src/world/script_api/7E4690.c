@@ -99,7 +99,7 @@ ApiStatus ShortenPartnerTetherDistance(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus ResetPartnerTetherDistance(Evt* script, s32 isInitialCall) {
-    repartner_set_tether_distance();
+    partner_reset_tether_distance();
     return ApiStatus_DONE2;
 }
 

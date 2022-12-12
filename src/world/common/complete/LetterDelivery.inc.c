@@ -197,7 +197,7 @@ EvtScript N(EVS_DoLetterDelivery) = {
     EvtScript N(EVS_##npcName##_LetterReward) = { \
         EVT_IF_EQ(LVarC, 2) \
             EVT_SET(LVar0, ITEM_STAR_PIECE) \
-            EVT_SET(LVar1, 3) \
+            EVT_SET(LVar1, ITEM_TYPE_STAR_PIECE) \
             EVT_EXEC_WAIT(N(GiveKeyReward)) \
             EVT_CALL(AddStarPieces, 1) \
         EVT_END_IF \
