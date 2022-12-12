@@ -625,10 +625,10 @@ dlabel gCollisionDataZoneBackup
 dlabel D_800A426C
 .space 4
 
-dlabel D_800A4270
+dlabel IdleThread
 .space 0x000001b0
 
-dlabel D_800A4420
+dlabel MainThread
 .space 0x000021b0
 
 dlabel nuScStack

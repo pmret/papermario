@@ -173,7 +173,7 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
             // fallthrough
         case 11:
             temp = D_80246538_kkj_19[D_80246550_kkj_19];
-            if (gGameStatusPtr->pressedButtons[0] & A_BUTTON) {
+            if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
                 dgb_08_npcGroup_80246528++;
             }
             if (dgb_08_npcGroup_80246528 > temp) {
@@ -210,7 +210,7 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
             return ApiStatus_DONE2;
     }
 
-    D_80246578[D_802465A0++] = gGameStatusPtr->pressedButtons[0] & A_BUTTON;
+    D_80246578[D_802465A0++] = gGameStatusPtr->pressedButtons[0] & BUTTON_A;
 
     if (D_802465A0 >= 10) {
         D_802465A0 = 0;

@@ -1,14 +1,15 @@
-from typing import Dict, List, Optional, TYPE_CHECKING, Set
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Set, TYPE_CHECKING
+
 import spimdisasm
 import tqdm
-from dataclasses import dataclass
-from intervaltree import IntervalTree, Interval
+from intervaltree import Interval, IntervalTree
 
 # circular import
 if TYPE_CHECKING:
     from segtypes.segment import Segment
 
-from util import options, log
+from util import log, options
 
 all_symbols: List["Symbol"] = []
 all_symbols_dict: Dict[int, List["Symbol"]] = {}
@@ -179,6 +180,12 @@ def initialize(all_segments: "List[Segment]"):
                                         if attr_name == "ignore":
                                             ignore_sym = tf_val
                                             continue
+                                        if attr_name == "force_migration":
+                                            sym.force_migration = tf_val
+                                            continue
+                                        if attr_name == "force_not_migration":
+                                            sym.force_not_migration = tf_val
+                                            continue
                         if ignore_sym:
                             ignored_addresses.add(sym.vram_start)
                             ignore_sym = False
@@ -196,6 +203,7 @@ def initialize_spim_context(all_segments: "List[Segment]") -> None:
     global_vrom_end = None
     global_vram_start = None
     global_vram_end = None
+    overlay_segments: Set[spimdisasm.common.SymbolsSegment] = set()
 
     spim_context.bannedSymbols |= ignored_addresses
 
@@ -204,6 +212,10 @@ def initialize_spim_context(all_segments: "List[Segment]") -> None:
     for segment in all_segments:
         if not isinstance(segment, CommonSegCode):
             # We only care about the VRAMs of code segments
+            continue
+
+        if segment.special_vram_segment:
+            # Special segments which should not be accounted in the global VRAM calculation, like N64's IPL3
             continue
 
         if (
@@ -249,15 +261,31 @@ def initialize_spim_context(all_segments: "List[Segment]") -> None:
                 for sym in symbols_list:
                     add_symbol_to_spim_segment(spim_segment, sym)
 
+            overlay_segments.add(spim_segment)
+
     if (
         global_vram_start is not None
         and global_vram_end is not None
         and global_vrom_start is not None
         and global_vrom_end is not None
     ):
-        spim_context.globalSegment.changeRanges(
+        spim_context.changeGlobalSegmentRanges(
             global_vrom_start, global_vrom_end, global_vram_start, global_vram_end
         )
+
+        # Check the vram range of the global segment does not overlap with any overlay segment
+        for ovl_segment in overlay_segments:
+            assert (
+                ovl_segment.vramStart <= ovl_segment.vramEnd
+            ), f"{ovl_segment.vramStart:X} {ovl_segment.vramEnd:X}"
+            if (
+                ovl_segment.vramEnd > global_vram_start
+                and global_vram_end > ovl_segment.vramStart
+            ):
+                log.write(
+                    f"Warning: the vram range ([0x{ovl_segment.vramStart:X}, 0x{ovl_segment.vramEnd:X}]) of the non-global segment at rom address 0x{ovl_segment.vromStart:X} overlaps with the global vram range ([0x{global_vram_start:X}, 0x{global_vram_end:X}])",
+                    status="warn",
+                )
 
     # pass the global symbols to spimdisasm
     for segment in all_segments:
@@ -308,6 +336,10 @@ def add_symbol_to_spim_segment(
         context_sym.vromAddress = sym.rom
     if sym.given_size is not None:
         context_sym.size = sym.size
+    if sym.force_migration:
+        context_sym.forceMigration = True
+    if sym.force_not_migration:
+        context_sym.forceNotMigration = True
     context_sym.setNameGetCallbackIfUnset(lambda _: sym.name)
 
     return context_sym
@@ -347,6 +379,10 @@ def add_symbol_to_spim_section(
         context_sym.vromAddress = sym.rom
     if sym.given_size is not None:
         context_sym.size = sym.size
+    if sym.force_migration:
+        context_sym.forceMigration = True
+    if sym.force_not_migration:
+        context_sym.forceNotMigration = True
     context_sym.setNameGetCallbackIfUnset(lambda _: sym.name)
 
     return context_sym
@@ -430,6 +466,9 @@ class Symbol:
     extract: bool = True
     user_declared: bool = False
 
+    force_migration: bool = False
+    force_not_migration: bool = False
+
     _generated_default_name: Optional[str] = None
     _last_type: Optional[str] = None
 
@@ -487,9 +526,7 @@ class Symbol:
             prefix = "func"
         elif self.type == "jtbl":
             prefix = "jtbl"
-        elif self.type == "jtbl_label":
-            return f"L{suffix}"
-        elif self.type == "label":
+        elif self.type in {"jtbl_label", "label"}:
             return f".L{suffix}"
         else:
             prefix = "D"

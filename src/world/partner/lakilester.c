@@ -767,7 +767,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             } else {
                 npc->duration--;
                 if (npc->duration != 0) {
-                    if (partnerActionStatus->pressedButtons & (B_BUTTON | D_CBUTTONS) && lakilester_raycast_below()) {
+                    if (partnerActionStatus->pressedButtons & (BUTTON_B | D_CBUTTONS) && lakilester_raycast_below()) {
                         D_802BFF14 = 3;
                     }
                     break;
@@ -791,7 +791,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             }
 
             if (!(playerStatus->flags & PS_FLAGS_HIT_FIRE)) {
-                if (partnerActionStatus->pressedButtons & (B_BUTTON | D_CBUTTONS)) {
+                if (partnerActionStatus->pressedButtons & (BUTTON_B | D_CBUTTONS)) {
                     if (lakilester_raycast_below()) {
                         D_802BFF14 = 3;
                     } else {

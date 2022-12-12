@@ -691,9 +691,9 @@ typedef struct UiStatus {
     /* 0x54 */ s8 coinsBlinking; /* bool */
     /* 0x55 */ s8 coinsBlinkCounter;
     /* 0x56 */ s8 coinsBlinkTimer; /* until stop */
-    /* 0x57 */ u8 unk_57;
-    /* 0x58 */ u8 unk_58;
-    /* 0x59 */ u8 unk_59;
+    /* 0x57 */ s8 unk_57;
+    /* 0x58 */ s8 unk_58;
+    /* 0x59 */ s8 unk_59;
     /* 0x5A */ s8 spBarsToBlink; /* how many sp bars to blink */
     /* 0x5B */ char unk_5B;
     /* 0x5C */ s32 iconIndex10;
@@ -1104,7 +1104,7 @@ typedef struct ModelAnimator {
     /* 0x2CC */ s32 treeIndexPos;
     /* 0x2D0 */ s32 savedTreePos;
     /* 0x2D4 */ void (*fpRenderCallback)(void*);
-    /* 0x2D8 */ s32 renderCallbackArg;
+    /* 0x2D8 */ void* renderCallbackArg;
     /* 0x2DC */ char unk_2DC[4];
 } ModelAnimator; // size = 0x2E0
 
@@ -1743,7 +1743,7 @@ typedef struct AnimatedModel {
     /* 0x10 */ Vec3f rot;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Mtx mtx;
-    /* 0x68 */ u32 currentAnimData;
+    /* 0x68 */ s16* currentAnimData;
     /* 0x6C */ char unk_6C[4];
 } AnimatedModel; // size = 0x70
 
@@ -2120,8 +2120,10 @@ typedef struct MenuPanel {
 typedef struct WindowBackground {
     /* 0x00 */ IMG_PTR imgData;
     /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
-    /* 0x05 */ s8 width;
-    /* 0x06 */ s8 height;
+//     /* 0x04 */ u8 packedTileFormatHigh : 4;
+//     /* 0x04 */ u8 packedTileFormatLow : 4;
+    /* 0x05 */ u8 width;
+    /* 0x06 */ u8 height;
     /* 0x07 */ char unk_07[4];
     /* 0x0B */ s8 size;
 } WindowBackground; // size = 0xC
@@ -2129,6 +2131,8 @@ typedef struct WindowBackground {
 typedef struct WindowCorners {
     /* 0x00 */ IMG_PTR imgData;
     /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
+//     /* 0x04 */ u8 packedTileFormatHigh : 4;
+//     /* 0x04 */ u8 packedTileFormatLow : 4;
     /* 0x05 */ Vec2b size1;
     /* 0x07 */ Vec2b size2;
     /* 0x09 */ Vec2b size3;

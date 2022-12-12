@@ -245,8 +245,6 @@ void entity_StarBoxLauncher_init(Entity* entity) {
     data->basePosZ = entity->position.z;
 }
 
-
-
 EntityScript Entity_StarBoxLauncher_Script = {
     es_SetCallback(entity_StarBoxLauncher_check_launch, 0)
     es_SetCallback(entity_StarBoxLauncher_shake_box, 4)

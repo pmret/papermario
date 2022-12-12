@@ -1,8 +1,9 @@
 #! /usr/bin/env python3
 
 import argparse
-import spimdisasm
+
 import rabbitizer
+import spimdisasm
 
 
 def int_any_base(x):

@@ -8,7 +8,7 @@ dlabel D_80257F10_8C7F80
 
 .section .text
 
-glabel func_802439A0_8B3A10
+glabel kmr_02_LoadPartyImage
 /* 8B3A10 802439A0 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 8B3A14 802439A4 3C048025 */  lui       $a0, %hi(D_80257F10_8C7F80)
 /* 8B3A18 802439A8 24847F10 */  addiu     $a0, $a0, %lo(D_80257F10_8C7F80)

@@ -1,7 +1,7 @@
 import spimdisasm
+from util import compiler, options, symbols
 
 from segtypes.common.data import CommonSegData
-from util import symbols, options, compiler
 
 
 class CommonSegRodata(CommonSegData):
@@ -48,19 +48,17 @@ class CommonSegRodata(CommonSegData):
         super().split(rom_bytes)
 
         if options.opts.migrate_rodata_to_functions:
-            if self.spim_section and (
-                not self.type.startswith(".") or self.partial_migration
-            ):
-                path_folder = options.opts.data_path / self.dir
-                path_folder.parent.mkdir(parents=True, exist_ok=True)
+            if self.spim_section is not None and self.partial_migration:
+                path_folder = options.opts.nonmatchings_path / self.dir / self.name
+                path_folder.mkdir(parents=True, exist_ok=True)
 
                 for rodataSym in self.spim_section.symbolList:
-                    if not rodataSym.isRdata():
+                    if rodataSym.shouldMigrate():
                         continue
 
                     path = path_folder / f"{rodataSym.getName()}.s"
                     with open(path, "w", newline="\n") as f:
-                        if options.opts.compiler.include_macro_inc:
+                        if options.opts.include_macro_inc:
                             f.write('.include "macro.inc"\n\n')
                         preamble = options.opts.generated_s_preamble
                         if preamble:

@@ -163,20 +163,14 @@ ApiStatus func_802428B8_9C7C98(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// Requires BSS
-#ifdef NON_MATCHING
 ApiStatus func_802428D8_9C7CB8(Evt* script, s32 isInitialCall) {
-    static s16 D_80250810_9D5BF0[] = { 0, 2, 1, 4 };
-
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
 
+    NOP_FIX // TODO: REMOVE WHEN DATA (D_80250810_9D5BF0) IS MIGRATED
     snd_ambient_80055848(D_80250810_9D5BF0[index]);
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802428D8_9C7CB8);
-#endif
 
 ApiStatus func_80242910_9C7CF0(Evt* script, s32 isInitialCall) {
     gPlayerData.tradeEventStartTime = gPlayerData.frameCounter;
