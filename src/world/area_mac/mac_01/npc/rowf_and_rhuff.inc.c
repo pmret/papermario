@@ -409,8 +409,8 @@ s32 N(D_802555AC_815E2C)[] = {
       0,   0,   0,   0, 
 };
 
-EvtScript N(D_8025573C_815FBC) = {
-    EVT_SET(MF_Unk_0B, TRUE)
+EvtScript N(EVS_Rhuff_RevealBadges) = {
+    EVT_SET(MF_BadgeShopOpen, TRUE)
     EVT_CALL(SetNpcYaw, NPC_Rowf, 270)
     EVT_THREAD
         EVT_CALL(PlaySoundAt, SOUND_A9, 0, -220, 37, 271)
@@ -475,8 +475,8 @@ EvtScript N(D_8025573C_815FBC) = {
     EVT_END
 };
 
-EvtScript N(D_80255B30_8163B0) = {
-    EVT_SET(MF_Unk_0B, FALSE)
+EvtScript N(EVS_Rhuff_HideBadges) = {
+    EVT_SET(MF_BadgeShopOpen, FALSE)
     EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableA, FALSE)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b3, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_IF
@@ -546,36 +546,45 @@ EvtScript N(D_80255B30_8163B0) = {
     EVT_END
 };
 
-EvtScript N(D_80255F60_8167E0) = {
-    EVT_IF_GE(MV_Unk_0D, 1)
+enum BadgeShopStates {
+    BADGE_SHOP_OPEN_READY         = 0,
+    BADGE_SHOP_OPENING            = 1,
+    BADGE_SHOP_OPEN               = 2,
+    BADGE_SHOP_CLOSE_WAITING      = 1,
+    BADGE_SHOP_CLOSING            = 2,
+    BADGE_SHOP_CLOSE_READY        = 0,
+};
+
+EvtScript N(EVS_EnterBadgeShop) = {
+    EVT_IF_GE(MV_BadgeShopOpenState, BADGE_SHOP_OPENING)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_GE(MV_Unk_0E, 1)
+    EVT_IF_GE(MV_BadgeShopCloseState, BADGE_SHOP_CLOSE_WAITING)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(MF_Unk_0B, TRUE)
-    EVT_SET(MV_Unk_0D, 1)
-    EVT_EXEC_WAIT(N(D_8025573C_815FBC))
-    EVT_SET(MV_Unk_0D, 2)
+    EVT_SET(MF_BadgeShopOpen, TRUE)
+    EVT_SET(MV_BadgeShopOpenState, BADGE_SHOP_OPENING)
+    EVT_EXEC_WAIT(N(EVS_Rhuff_RevealBadges))
+    EVT_SET(MV_BadgeShopOpenState, BADGE_SHOP_OPEN)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80255FEC_81686C) = {
-    EVT_IF_EQ(MV_Unk_0D, 0)
+EvtScript N(EVS_ExitBadgeShop) = {
+    EVT_IF_EQ(MV_BadgeShopOpenState, BADGE_SHOP_OPEN_READY)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(MV_Unk_0E, 1)
-    EVT_SET(MF_Unk_0B, FALSE)
+    EVT_SET(MV_BadgeShopCloseState, BADGE_SHOP_CLOSE_WAITING)
+    EVT_SET(MF_BadgeShopOpen, FALSE)
     EVT_LABEL(10)
-    EVT_IF_EQ(MV_Unk_0D, 1)
-        EVT_WAIT(1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_SET(MV_Unk_0E, 2)
-    EVT_EXEC_WAIT(N(D_80255B30_8163B0))
-    EVT_SET(MV_Unk_0D, 0)
-    EVT_SET(MV_Unk_0E, 0)
+        EVT_IF_EQ(MV_BadgeShopOpenState, BADGE_SHOP_OPENING)
+            EVT_WAIT(1)
+            EVT_GOTO(10)
+        EVT_END_IF
+    EVT_SET(MV_BadgeShopCloseState, BADGE_SHOP_CLOSING)
+    EVT_EXEC_WAIT(N(EVS_Rhuff_HideBadges))
+    EVT_SET(MV_BadgeShopOpenState, BADGE_SHOP_OPEN_READY)
+    EVT_SET(MV_BadgeShopCloseState, BADGE_SHOP_CLOSE_READY)
     EVT_RETURN
     EVT_END
 };
@@ -592,8 +601,8 @@ API_CALLABLE(N(RowfShop_SetBadgePos)) {
 }
 
 EvtScript N(EVS_NpcInit_Rowf) = {
-    EVT_SET(MV_Unk_0D, 0)
-    EVT_SET(MV_Unk_0E, 0)
+    EVT_SET(MV_BadgeShopOpenState, 0)
+    EVT_SET(MV_BadgeShopCloseState, 0)
     EVT_SET(AF_MAC_40, FALSE)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH1_DEFEATED_JR_TROOPA)
@@ -612,7 +621,7 @@ EvtScript N(EVS_NpcInit_Rowf) = {
             EVT_END_IF
     EVT_END_SWITCH
     EVT_SET(AF_MAC_41, FALSE)
-    EVT_CALL(SetModelFlags, MODEL_ju_2, 512, FALSE)
+    EVT_CALL(SetModelFlags, MODEL_ju_2, MODEL_FLAGS_FLAG_200, FALSE)
     EVT_CALL(EnableGroup, MODEL_jutan1, FALSE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
@@ -625,8 +634,8 @@ EvtScript N(EVS_NpcInit_Rowf) = {
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, EVT_PTR(N(gfx_build_rowf_rug_with_ripples)), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_ju_1, CUSTOM_GFX_0, -1)
     EVT_IF_EQ(AF_MAC_40, TRUE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(D_80255F60_8167E0)), TRIGGER_FLOOR_TOUCH, COLLIDER_roten, 1, 0)
-        EVT_BIND_TRIGGER(EVT_PTR(N(D_80255FEC_81686C)), TRIGGER_FLOOR_TOUCH, COLLIDER_o444, 1, 0)
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_EnterBadgeShop)), TRIGGER_FLOOR_TOUCH, COLLIDER_roten, 1, 0)
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitBadgeShop)), TRIGGER_FLOOR_TOUCH, COLLIDER_o444, 1, 0)
         EVT_CALL(SetNpcJumpscale, NPC_Rowf, 1)
     EVT_END_IF
     EVT_THREAD

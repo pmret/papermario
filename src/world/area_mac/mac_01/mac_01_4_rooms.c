@@ -114,10 +114,10 @@ EvtScript N(EVS_ToggleVis_ToadHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(SetGroupEnabled, MODEL_kino_in, 1)
-            EVT_SET(MF_Unk_0F, TRUE)
+            EVT_SET(MF_InsideToadHouse, TRUE)
         EVT_CASE_EQ(3)
             EVT_CALL(SetGroupEnabled, MODEL_kino_in, 0)
-            EVT_SET(MF_Unk_0F, FALSE)
+            EVT_SET(MF_InsideToadHouse, FALSE)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

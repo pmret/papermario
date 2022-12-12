@@ -30,8 +30,8 @@ MusicProximityTrigger N(MusicMixTrigger3) = {
 EvtScript N(EVS_SetupMusicMix) = {
     EVT_CALL(SetMusicTrack, 0, SONG_TOAD_TOWN, 0, 8)
     EVT_CALL(EnableMusicProximityMix, 0)
-    EVT_IF_EQ(MF_Unk_0E, FALSE)
-        EVT_SET(MF_Unk_0E, TRUE)
+    EVT_IF_EQ(MF_SetupMusicMixes, FALSE)
+        EVT_SET(MF_SetupMusicMixes, TRUE)
         EVT_THREAD
             EVT_CALL(N(MonitorMusicProximityTrigger), EVT_PTR(N(MusicMixTrigger1)))
         EVT_END_THREAD

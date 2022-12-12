@@ -303,10 +303,10 @@ EvtScript N(EVS_Merlon_GiveHint) = {
     EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Gather1, ANIM_Merlon_Gather1, 0, MSG_MAC_Plaza_0038)
     EVT_EXEC(N(EVS_PlaySpellcastSong))
     EVT_WAIT(20)
-    EVT_IF_EQ(MV_Unk_0C, 0)
-        EVT_MALLOC_ARRAY(20, MV_Unk_0C)
+    EVT_IF_EQ(MV_FortuneFXHandles, 0)
+        EVT_MALLOC_ARRAY(20, MV_FortuneFXHandles)
     EVT_END_IF
-    EVT_USE_ARRAY(MV_Unk_0C)
+    EVT_USE_ARRAY(MV_FortuneFXHandles)
     EVT_EXEC_WAIT(N(EVS_Merlon_ReadFortuneFX))
     EVT_WAIT(20)
     EVT_EXEC(N(EVS_ResetMusicAfterFortune))

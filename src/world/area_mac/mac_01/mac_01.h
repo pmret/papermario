@@ -85,20 +85,20 @@ enum {
     MV_RowfRugRotateAngle   = MapVar(1),
     MV_RowfShopBuyFlags     = MapVar(2),
     MV_KnockdownWorker      = MapVar(10),
-    MV_Unk_0C       = MapVar(12),
-    MV_Unk_0D       = MapVar(13),
-    MV_Unk_0E       = MapVar(14),
+    MV_FortuneFXHandles     = MapVar(12),
+    MV_BadgeShopOpenState   = MapVar(13),
+    MV_BadgeShopCloseState  = MapVar(14),
 };
 
 enum {
-    MF_MusicMixTrigger1       = MapFlag(10),
-    MF_MusicMixTrigger2       = MapFlag(11),
-    MF_MusicMixTrigger3       = MapFlag(12),
-	MF_Unk_0B		= MapFlag(11),
-    MF_Unk_0D       = MapFlag(13),
-    MF_Unk_0E       = MapFlag(14),
-    MF_Unk_0F       = MapFlag(15),
-	MF_Unk_14		= MapFlag(20),
+    MF_MusicMixTrigger1     = MapFlag(10),
+    MF_MusicMixTrigger2     = MapFlag(11),
+    MF_MusicMixTrigger3     = MapFlag(12),
+	MF_BadgeShopOpen		= MapFlag(11),
+    MF_SpawnFlag_Tree1      = MapFlag(13),
+    MF_SetupMusicMixes      = MapFlag(14),
+    MF_InsideToadHouse      = MapFlag(15),
+	MF_KoopaBrosSceneLock   = MapFlag(20),
 };
 
 #define NAMESPACE mac_01

@@ -542,7 +542,7 @@ EvtScript N(D_80250D14_811594) = {
     EVT_END
 };
 
-EvtScript N(D_80250DFC_81167C) = {
+EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
     EVT_CALL(SetNpcVar, NPC_Merlon, 0, 0)
     EVT_CALL(func_802CF56C, 2)
     EVT_THREAD
@@ -604,12 +604,12 @@ EvtScript N(D_80250DFC_81167C) = {
     EVT_ADD(LVar1, 180)
     EVT_CALL(PlayerFaceNpc, NPC_DarkToad_01, FALSE)
     EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(4.0), 480, 0, 0, 320, 15, -6)
-    EVT_CALL(PushSong, 82, 0)
+    EVT_CALL(PushSong, SONG_KOOPA_BROS_THEME, 0)
     EVT_THREAD
-        EVT_SET(MF_Unk_14, FALSE)
+        EVT_SET(MF_KoopaBrosSceneLock, FALSE)
         EVT_WAIT(5)
         EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Anim0B, ANIM_KoopaBros_Red_Anim0B, 5, MSG_MAC_Plaza_002F)
-        EVT_SET(MF_Unk_14, TRUE)
+        EVT_SET(MF_KoopaBrosSceneLock, TRUE)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_20A, 0)
@@ -678,7 +678,7 @@ EvtScript N(D_80250DFC_81167C) = {
     EVT_CALL(NpcJump0, NPC_KoopaBros_04, LVar3, LVar4, LVar5, 10)
     EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
     EVT_LOOP(0)
-        EVT_IF_EQ(MF_Unk_14, TRUE)
+        EVT_IF_EQ(MF_KoopaBrosSceneLock, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
@@ -973,7 +973,7 @@ EvtScript N(EVS_NpcIdle_DarkToad_01) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_EXEC_WAIT(N(D_80250DFC_81167C))
+    EVT_EXEC_WAIT(N(EVS_Scene_KoopaBrosUnmasked))
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -1878,14 +1878,14 @@ EvtScript N(EVS_NpcIdle_ShyGuy_02) = {
     EVT_LOOP(0)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
         EVT_WAIT(3)
-        EVT_IF_EQ(MF_Unk_0F, TRUE)
+        EVT_IF_EQ(MF_InsideToadHouse, TRUE)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
         EVT_END_IF
         EVT_CALL(NpcJump0, NPC_SELF, 539, 36, -242, 8)
         EVT_WAIT(2)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
         EVT_WAIT(3)
-        EVT_IF_EQ(MF_Unk_0F, TRUE)
+        EVT_IF_EQ(MF_InsideToadHouse, TRUE)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
         EVT_END_IF
         EVT_CALL(NpcJump0, NPC_SELF, 572, 36, -226, 8)

@@ -10,7 +10,7 @@ FoliageDropList N(Tree1_Drops) = {
             .pos = { -480, 120, -174 },
             .spawnMode = ITEM_SPAWN_MODE_FALL_NEVER_VANISH,
             .pickupFlag = GF_MAC01_Tree1_StarPiece,
-            .spawnFlag = MF_Unk_0D,
+            .spawnFlag = MF_SpawnFlag_Tree1,
         },
     }
 };
