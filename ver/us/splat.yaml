@@ -9018,7 +9018,7 @@ segments:
       name: mac_01_9_npc
       subsegments:
       - [0x970C40]
-      - [0x80BE10, vtx, ../../toad_house/blanket]
+      - [0x80BE10, vtx_common, ../../toad_house/blanket]
       - [0x80D3F0, gfx_common, ../../toad_house/blanket]
       - [0x80D558, rgba16, ../../toad_house/blanket, 16, 32]
       - [0x80D958]
