@@ -5139,7 +5139,28 @@ segments:
     subsegments:
     - [0x3B5CF0, c, water_block]
     - [0x3B69E0]
-  - [0x3B6BF0, bin] # water_block gfx
+  - name: effect_gfx_water_block
+    dir: effects/gfx
+    type: code
+    start: 0x3B6BF0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3B6BF0, c, water_block]
+    - start: 0x3B6BF0
+      type: .data
+      name: water_block
+      subsegments:
+        - [0x3B6BF0, i4, D_09000000_3B6BF0, 16, 32]
+        - [0x3B6CF0, ia4, D_09000100_3B6CF0, 32, 32]
+        - [0x3B6EF0, gfx, D_09000300_3B6EF0]
+        - [0x3B6FA0, gfx, D_090003B0_3B6FA0]
+        - [0x3B7050, vtx, D_09000460_3B7050]
+        - [0x3B7090, gfx, D_090004A0_3B7090]
+        - [0x3B70B0] # unmapped
+        - [0x3B70C8, gfx, D_090004D8_3B70C8]
+        - [0x3B7128, gfx, D_09000538_3B7128]
+        - [0x3B7158] # padding
   - name: effect_waterfall
     dir: effects
     type: code

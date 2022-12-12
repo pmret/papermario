@@ -125,7 +125,7 @@ EffectInstance* stat_change_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* snaking_static_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* thunderbolt_ring_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* squirt_main(s32, f32, f32, f32, f32, f32, f32, f32, s32);
-FX_MAIN(water_block_main);
+EffectInstance* water_block_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* waterfall_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* water_fountain_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* underwater_main(s32, f32, f32, f32, f32, s32);
