@@ -1,28 +1,26 @@
 #include "obk_03.h"
 #include "model.h"
-#include "mapfs/obk_03_shape.h"
-#include "mapfs/obk_03_hit.h"
+
+typedef struct RockingChairPhysics {
+    /* 0x00 */ f32 angleDelta;
+    /* 0x04 */ f32 angularAccel;
+    /* 0x08 */ f32 rotationAngle;
+    /* 0x0C */ f32 verticalOffset;
+    /* 0x10 */ f32 angleB;
+    /* 0x14 */ f32 angleA;
+    /* 0x18 */ f32 mass;
+    /* 0x1C */ f32 equilibriumAngle;
+} RockingChairPhysics; // size = 0x20
+
+enum RockingChairState {
+    CHAIR_STATE_INITIAL             = 0,
+    CHAIR_STATE_PLAYER_TOUCHING     = 1,
+    CHAIR_STATE_PLAYER_NOT_TOUCHING = 2
+};
 
 // identical to (copy-pasted from) obk_05_RockingChair_UpdatePhysics aside from a few constants
 // TODO de-duplicate?
-ApiStatus func_802408D0_BC4B50(Evt* script, s32 isInitialCall) {
-    typedef struct RockingChairPhysics {
-        /* 0x00 */ f32 angleDelta;
-        /* 0x04 */ f32 angularAccel;
-        /* 0x08 */ f32 rotationAngle;
-        /* 0x0C */ f32 verticalOffset;
-        /* 0x10 */ f32 angleB;
-        /* 0x14 */ f32 angleA;
-        /* 0x18 */ f32 mass;
-        /* 0x1C */ f32 equilibriumAngle;
-    } RockingChairPhysics; // size = 0x20
-
-    enum RockingChairState {
-        CHAIR_STATE_INITIAL             = 0,
-        CHAIR_STATE_PLAYER_TOUCHING     = 1,
-        CHAIR_STATE_PLAYER_NOT_TOUCHING = 2
-    };
-
+API_CALLABLE(N(UpdateRockingChair)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     RockingChairPhysics* physics;
@@ -187,3 +185,12 @@ ApiStatus func_802408D0_BC4B50(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
+
+EvtScript N(EVS_SetupRockingChair) = {
+    EVT_CALL(ParentColliderToModel, COLLIDER_i1, MODEL_i1)
+    EVT_CALL(ParentColliderToModel, COLLIDER_i2, MODEL_i3)
+    EVT_CALL(ParentColliderToModel, COLLIDER_i3, MODEL_i3)
+    EVT_CALL(N(UpdateRockingChair))
+    EVT_RETURN
+    EVT_END
+};

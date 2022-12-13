@@ -86,5 +86,3 @@ extern EvtScript N(EVS_MakeEntities);
 extern NpcGroupList N(IntroNPCs);
 extern NpcGroupList N(EpilogueNPCs);
 extern NpcGroupList N(DefaultNPCs);
-
-extern EvtScript ItemShopInteract;

@@ -1667,7 +1667,7 @@ enum ItemIDs {
     ITEM_LETTER_TO_MINHT              = 0x0000003E,
     ITEM_UNUSED_LETTER02              = 0x0000003F,
     ITEM_LETTER10                     = 0x00000040,
-    ITEM_LETTER11                     = 0x00000041,
+    ITEM_LETTER_TO_IGOR               = 0x00000041,
     ITEM_UNUSED_LETTER03              = 0x00000042,
     ITEM_UNUSED_LETTER04              = 0x00000043,
     ITEM_UNUSED_LETTER05              = 0x00000044,

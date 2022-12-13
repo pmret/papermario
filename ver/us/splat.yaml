@@ -12457,17 +12457,15 @@ segments:
     start: 0xBC4280
     vram: 0x80240000
     subsegments:
-    - [0xBC4280, c]
-    - [0xBC43F0, c]
-    - [0xBC4B50, c]
-    - [0xBC5270, data]
-    - [0xBC5350, data]
-    - [0xBC5770, data]
-    - [0xBC5A00, data]
-    - [0xBC6250, data]
-    - [0xBC7120, data]
-    - [0xBC7DE0, data]
-    - [0xBC7E40]
+    - [0xBC4280, c, obk_03_0_header]
+    - [0xBC4280, c, obk_03_1_music]
+    - [0xBC4280, c, obk_03_2_main]
+    - [0xBC4280, c, obk_03_3_shop]
+    - [0xBC4280, c, obk_03_4_entity]
+    - [0xBC43F0, c, obk_03_5_stairs]
+    - [0xBC43F0, c, obk_03_6_npc]
+    - [0xBC4B50, c, obk_03_7_rocking_chair]
+    - [0xBC5270]
   - name: obk_04
     dir: world/area_obk/obk_04
     type: code

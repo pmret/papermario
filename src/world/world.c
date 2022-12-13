@@ -626,8 +626,8 @@ MapConfig mim_maps[] = {
 #include "area_obk/obk.h"
 MapConfig obk_maps[] = {
     { MAP(obk_01), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(obk_02, 0x802402E0), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(obk_03, 0x80241020), .songVariation = 1, .sfxReverb = 1 },
+    { MAP(obk_02), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(obk_03), .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(obk_04, 0x80240E90), .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(obk_05, 0x802409F0), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(obk_06, 0x80240020), .songVariation = 1, .sfxReverb = 1 },

@@ -24,6 +24,9 @@ enum {
     AF_OBK01_CabinetMoved           = AreaFlag(1),
     AF_OBK01_IsPlayerNearPortrait   = AreaFlag(3),
     AF_OBK01_WasPlayerNearPortrait  = AreaFlag(4),
+    AF_OBK03_HitFirstSwitch         = AreaFlag(5),
+    AF_OBK03_HitSecondSwitch        = AreaFlag(6),
+    AF_OBK03_HitThirdSwitch         = AreaFlag(7),
 };
 
 extern MapSettings obk_01_settings;
