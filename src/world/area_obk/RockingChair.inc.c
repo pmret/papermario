@@ -1,41 +1,34 @@
-#include "obk_05.h"
+#include "common.h"
 #include "model.h"
-#include "mapfs/obk_05_shape.h"
-#include "mapfs/obk_05_hit.h"
 
-static char* N(exit_str_0) = "obk_01";
-static char* N(exit_str_1) = "obk_06";
+#ifndef ROCKING_CHAIR_CENTER_X
+#error ROCKING_CHAIR_CENTER_X is not defined!
+#endif
 
-#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
+/*
+    Also assumes the following are defined:
+    MODEL_i1, MODEL_i2, MODEL_i3
+    COLLIDER_i1, COLLIDER_i2, COLLIDER_i3
+*/
 
-#include "world/common/todo/SetCamera0MoveFlag1.inc.c"
+typedef struct RockingChairPhysics {
+    /* 0x00 */ f32 angleDelta;
+    /* 0x04 */ f32 angularAccel;
+    /* 0x08 */ f32 rotationAngle;
+    /* 0x0C */ f32 verticalOffset;
+    /* 0x10 */ f32 angleB;
+    /* 0x14 */ f32 angleA;
+    /* 0x18 */ f32 mass;
+    /* 0x1C */ f32 equilibriumAngle;
+} RockingChairPhysics; // size = 0x20
 
-ApiStatus N(RetroJar_AwaitPlayerEntry)(Evt* script, s32 isInitialCall) {
-    if (gCollisionStatus.currentFloor == COLLIDER_o420) {
-        return ApiStatus_DONE2;
-    } else {
-        return ApiStatus_BLOCK;
-    }
-}
+enum RockingChairState {
+    CHAIR_STATE_INITIAL             = 0,
+    CHAIR_STATE_PLAYER_TOUCHING     = 1,
+    CHAIR_STATE_PLAYER_NOT_TOUCHING = 2
+};
 
-ApiStatus N(RockingChair_UpdatePhysics)(Evt* script, s32 isInitialCall) {
-    typedef struct RockingChairPhysics {
-        /* 0x00 */ f32 angleDelta;
-        /* 0x04 */ f32 angularAccel;
-        /* 0x08 */ f32 rotationAngle;
-        /* 0x0C */ f32 verticalOffset;
-        /* 0x10 */ f32 angleB;
-        /* 0x14 */ f32 angleA;
-        /* 0x18 */ f32 mass;
-        /* 0x1C */ f32 equilibriumAngle;
-    } RockingChairPhysics; // size = 0x20
-
-    enum RockingChairState {
-        CHAIR_STATE_INITIAL             = 0,
-        CHAIR_STATE_PLAYER_TOUCHING     = 1,
-        CHAIR_STATE_PLAYER_NOT_TOUCHING = 2
-    };
-
+API_CALLABLE(N(UpdateRockingChair)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     RockingChairPhysics* physics;
@@ -85,13 +78,13 @@ ApiStatus N(RockingChair_UpdatePhysics)(Evt* script, s32 isInitialCall) {
                 script->functionTemp[0] = CHAIR_STATE_PLAYER_NOT_TOUCHING;
             }
             if (fabsf(physics->rotationAngle) < 5.0f) {
-                physics->angularAccel = fabsf(0.0 - playerStatus->position.x) / 200.0f;
+                physics->angularAccel = fabsf(ROCKING_CHAIR_CENTER_X - playerStatus->position.x) / 200.0f;
             } else {
                 physics->angularAccel = 0.1f;
             }
-            if (playerStatus->position.x <= 0.0) {
+            if (playerStatus->position.x <= ROCKING_CHAIR_CENTER_X) {
                 physics->angleB += physics->angularAccel;
-                physics->equilibriumAngle = SQ(fabsf(0.0 - playerStatus->position.x)) / 50.0f;
+                physics->equilibriumAngle = SQ(fabsf(ROCKING_CHAIR_CENTER_X - playerStatus->position.x)) / 50.0f;
                 if (physics->equilibriumAngle > 15.0f) {
                     physics->equilibriumAngle = 15.0f;
                 }
@@ -100,7 +93,7 @@ ApiStatus N(RockingChair_UpdatePhysics)(Evt* script, s32 isInitialCall) {
                 }
             } else {
                 physics->angleA += physics->angularAccel;
-                physics->equilibriumAngle = -SQ(-fabsf(0.0 - playerStatus->position.x) * 0.5f) / 50.0f;
+                physics->equilibriumAngle = -SQ(-fabsf(ROCKING_CHAIR_CENTER_X - playerStatus->position.x) * 0.5f) / 50.0f;
                 if (physics->equilibriumAngle < -5.0f) {
                     physics->equilibriumAngle = -5.0f;
                 }

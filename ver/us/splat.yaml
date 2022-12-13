@@ -12486,13 +12486,14 @@ segments:
     start: 0xBCD060
     vram: 0x80240000
     subsegments:
-    - [0xBCD060, c]
-    - [0xBCD7D0, c]
-    - [0xBCDA40, data]
-    - [0xBCDB00, data]
-    - [0xBCDFF0, data]
-    - [0xBCE040, data]
-    - [0xBCE680]
+    - [0xBCD060, c, obk_05_0_header]
+    - [0xBCD060, c, obk_05_1_music]
+    - [0xBCD060, c, obk_05_2_main]
+    - [0xBCD7D0, c, obk_05_3_rocking_chair]
+    - [0xBCD800, c, obk_05_4_hole]
+    - [0xBCD800, c, obk_05_5_npc]
+    - [0xBCDA40, c, obk_05_6_entity]
+    - [0xBCDA40]
   - name: obk_06
     dir: world/area_obk/obk_06
     type: code

@@ -1,12 +1,12 @@
-#include "obk_02.h"
+#include "obk_05.h"
 
 #include "world/common/npc/Boo.inc.c"
 
-#define TRAFFIC_BOO_START_Y 80.0f
-#define TRAFFIC_BOO_START_Z -300.0f
+#define TRAFFIC_BOO_START_Y 40.0f
+#define TRAFFIC_BOO_START_Z -430.0f
 #include "../TrafficBoos.inc.c"
 
-StaticNpc N(NpcData_Boos)[] = {
+StaticNpc N(NpcData_Boo_01)[] = {
     {
         .id = NPC_Boo_01,
         .settings = &N(NpcSettings_Boo),
@@ -30,6 +30,6 @@ StaticNpc N(NpcData_Boos)[] = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_Boos)),
+    NPC_GROUP(N(NpcData_Boo_01)),
     {}
 };
