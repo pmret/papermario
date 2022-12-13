@@ -12499,11 +12499,12 @@ segments:
     start: 0xBCE690
     vram: 0x80240000
     subsegments:
-    - [0xBCE690, c]
-    - [0xBCE690, data]
-    - [0xBCE760, data]
-    - [0xBCEAD0, data]
-    - [0xBCEBE0]
+    - [0xBCE690, c, obk_06_0_header]
+    - [0xBCE690, c, obk_06_1_music]
+    - [0xBCE690, c, obk_06_2_main]
+    - [0xBCE690, c, obk_06_3_bombable]
+    - [0xBCE690, c, obk_06_4_entity]
+    - [0xBCE690]
   - name: obk_07
     dir: world/area_obk/obk_07
     type: code
