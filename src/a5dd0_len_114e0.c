@@ -5,6 +5,7 @@
 #include "entity.h"
 #include "hud_element.h"
 #include "effects.h"
+#include "nu/nusys.h"
 
 #ifdef SHIFT
 #define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
@@ -24,6 +25,11 @@ typedef struct Fog {
     /* 0x14 */ s32 startDistance;
     /* 0x18 */ s32 endDistance;
 } Fog; // size = 0x1C
+
+typedef struct Struct_8011CFBC {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+} Struct_8011CFBC; // size = 0x08
 
 extern s32 D_801516FC;
 
@@ -438,7 +444,17 @@ Matrix4s mdl_RDPIdentity = {
     }
 };
 
-s32 D_8014B7A8[] = { 0x00000006, 0x00000000, 0x00000005, 0x00020000, 0x00000004, 0x00030000, 0x00000003, 0x00038000, 0x00000002, 0x0003C000, 0x00000001, 0x0003E000, 0x00000000, 0x0003F000, 0x00000000, 0x0003F800, 0x00000000, 0x00000000, };
+Struct_8011CFBC D_8014B7A8[] = {
+    { 6, 0x00000 },
+    { 5, 0x20000 },
+    { 4, 0x30000 },
+    { 3, 0x38000 },
+    { 2, 0x3C000 },
+    { 1, 0x3E000 },
+    { 0, 0x3F000 },
+    { 0, 0x3F800 },
+    { 0, 0x00000 },
+};
 
 s32 D_8014B7F0 = 0;
 
@@ -1077,6 +1093,8 @@ extern TextureHandle mdl_textureHandles[128];
 extern RenderTask mdl_clearRenderTasks[3][0x100];
 
 extern s32 D_801A7000; // todo ???
+
+extern u16 D_80153380[16];
 
 void update_shadows(void);
 s32 step_entity_commandlist(Entity* entity);
@@ -4580,9 +4598,168 @@ Gfx* mdl_get_copied_gfx(s32 copyIndex) {
 void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, Matrix4f destMtx, void* destVertices);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_project_tex_coords);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C80C);
+s32 func_8011C80C(u16 arg0, s32 arg3, f32* arg4, f32* arg5) {
+    Camera* camera = &gCameras[gCurrentCameraID];
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(arg0));
+    f32 outX;
+    f32 outY;
+    f32 outZ;
+    f32 outS;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011CFBC);
+    s32 temp1;
+    s32 temp2;
+    u32 temp3, temp4;
+    u32 temp6;
+    s32 temp5;
+    Struct_8011CFBC* v1;
+
+    if (arg3 >= 16) {
+        return FALSE;
+    }
+    transform_point(camera->perspectiveMatrix, model->center.x, model->center.y, model->center.z, 1.0f, &outX, &outY, &outZ, &outS);
+    if (outS == 0.0f) {
+        *arg4 = 0.0f;
+        *arg5 = 0.0f;
+        return TRUE;
+    }
+    outS = 1.0f / outS;
+    outX *= outS;
+    outY *= -outS;
+    outZ *= outS;
+    outX = (outX * camera->viewportW + camera->viewportW) * 0.5;
+    outX += camera->viewportStartX;
+    outY = (outY * camera->viewportH + camera->viewportH) * 0.5;
+    outY += camera->viewportStartY;
+    outZ = (outZ + 1.0f) * 0.5;
+    *arg4 = (s32)outX;
+    *arg5 = (s32)outY;
+    if (arg3 < 0) {
+        if (outZ > 0.0f) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+    if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]));
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
+        gDPLoadSync(gMasterGfxPos++);
+        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, (s32) outX * 4, 0, ((s32) outX + 3) * 4, 0);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, (s32) outX * 4, 0, ((s32) outX + 3) * 4, 0);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, D_80153380);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+        gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+        gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+        gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+        gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+        gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
+        gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, arg3, 0, arg3 + 1, 1);
+        gSPTextureRectangle(gMasterGfxPos++, arg3 * 4, 0 * 4, 4 * 4, 1 * 4, G_TX_RENDERTILE, (s32) outX * 32, 0, 0x0400, 0x0400);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, camera->viewportStartX, camera->viewportStartY, camera->viewportStartX + camera->viewportW, camera->viewportStartY + camera->viewportH);
+
+        temp1 = D_80153380[arg3] >> 13;
+        temp2 = (D_80153380[arg3] & 0x1FFF) / 4;
+        v1 = &D_8014B7A8[temp1];
+        temp3 = temp2 << v1->unk_00;
+        temp4 = v1->unk_04;
+        temp6 = (temp3 + temp4) / 8;
+        temp5 = outZ * 32704.0f;
+        if (temp6 < temp5) {
+            return FALSE;
+        }
+    }
+    return outZ > 0.0f;
+}
+
+s32 func_8011CFBC(f32 x, f32 y, f32 z, s32 arg3, f32* arg4, f32* arg5) {
+    Camera* camera = &gCameras[gCurrentCameraID];
+    f32 outX;
+    f32 outY;
+    f32 outZ;
+    f32 outS;
+
+    s32 temp1;
+    s32 temp2;
+    u32 temp3, temp4;
+    u32 temp6;
+    s32 temp5;
+    Struct_8011CFBC* v1;
+
+    if (arg3 >= 16) {
+        return FALSE;
+    }
+    transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &outX, &outY, &outZ, &outS);
+    if (outS == 0.0f) {
+        *arg4 = 0.0f;
+        *arg5 = 0.0f;
+        return TRUE;
+    }
+    outS = 1.0f / outS;
+    outX *= outS;
+    outY *= -outS;
+    outZ *= outS;
+    outX = (outX * camera->viewportW + camera->viewportW) * 0.5;
+    outX += camera->viewportStartX;
+    outY = (outY * camera->viewportH + camera->viewportH) * 0.5;
+    outY += camera->viewportStartY;
+    outZ = (outZ + 1.0f) * 0.5;
+    *arg4 = outX;
+    *arg5 = outY;
+    if (arg3 < 0) {
+        return outZ > 0.0f;
+    }
+    if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]));
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
+        gDPLoadSync(gMasterGfxPos++);
+        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, (s32) outX * 4, 0, ((s32) outX + 3) * 4, 0);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, (s32) outX * 4, 0, ((s32) outX + 3) * 4, 0);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, D_80153380);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+        gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+        gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+        gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+        gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+        gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
+        gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, arg3, 0, arg3 + 1, 1);
+        gSPTextureRectangle(gMasterGfxPos++, arg3 * 4, 0 * 4, (arg3 + 1) * 4, 1 * 4, G_TX_RENDERTILE, (s32) outX * 32, 0, 0x0400, 0x0400);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, camera->viewportStartX, camera->viewportStartY, camera->viewportStartX + camera->viewportW, camera->viewportStartY + camera->viewportH);
+
+        temp1 = D_80153380[arg3] >> 13;
+        temp2 = (D_80153380[arg3] & 0x1FFF) / 4;
+        v1 = &D_8014B7A8[temp1];
+        temp3 = temp2 << v1->unk_00;
+        temp4 = v1->unk_04;
+        temp6 = (temp3 + temp4) / 8;
+        temp5 = outZ * 32704.0f;
+        if (temp6 < temp5) {
+            return FALSE;
+        }
+    }
+    return outZ > 0.0f;
+}
 
 void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
