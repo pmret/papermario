@@ -24,6 +24,7 @@
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
 #define NOP_FIX __asm__(".set nogpopt");
+#define NOP_UNFIX __asm__(".set gpopt");
 
 #define PTR_LIST_END ((void*) -1)
 

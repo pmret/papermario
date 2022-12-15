@@ -11,25 +11,26 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/entity/Pipe.inc.c"
 
-extern s32 D_80244B2C_8B4B9C[];
+extern s32* D_80244B2C_8B4B9C[];
+extern s32* D_802480AC_8B811C[];
 
-// reg swap & data migration
-#ifdef NON_MATCHING
+NOP_FIX // TODO remove when D_80244B2C_8B4B9C is migrated
 ApiStatus func_802402E0_8B0350(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
-    s32* var_s0 = D_80244B2C_8B4B9C[evt_get_variable(script, *args++)];
+    s32 territoryIndex = evt_get_variable(script, *args++);
+    s32* var_s0 = D_80244B2C_8B4B9C[territoryIndex];
     Enemy* enemy = get_enemy(npcID);
     s32 i;
 
-    for (i = 0; i < 14; i++) {
-        enemy->territory->temp[i] = *var_s0++;
+    for (i = 0; i < (s32) (sizeof(enemy->territory->wander) / sizeof(i)); i++) {
+        s32* wander = (s32*) &enemy->territory->wander;
+
+        wander[i] = var_s0[i];
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802402E0_8B0350);
-#endif
+NOP_UNFIX // TODO remove when D_80244B2C_8B4B9C is migrated
 
 ApiStatus func_80240370_8B03E0(Evt* script, s32 isInitialCall) {
     set_map_change_fade_rate(1);
@@ -98,8 +99,23 @@ ApiStatus func_802422F8_8B2368(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// duplicate of func_802402E0_8B0350
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242394_8B2404);
+NOP_FIX // TODO remove when D_802480AC_8B811C is migrated
+ApiStatus func_80242394_8B2404(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 npcID = evt_get_variable(script, *args++);
+    s32 territoryIndex = evt_get_variable(script, *args++);
+    s32* var_s0 = D_802480AC_8B811C[territoryIndex];
+    Enemy* enemy = get_enemy(npcID);
+    s32 i;
+
+    for (i = 0; i < (s32) (sizeof(enemy->territory->wander) / sizeof(i)); i++) {
+        s32* wander = (s32*) &enemy->territory->wander;
+
+        wander[i] = var_s0[i];
+    }
+    return ApiStatus_DONE2;
+}
+NOP_UNFIX // TODO remove when D_802480AC_8B811C is migrated
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/todo/LetterDelivery.inc.c"
@@ -207,11 +223,10 @@ ApiStatus func_80242BA8_8B2C18(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// will match when preceding bss is worked out
-#ifdef NON_MATCHING
-s32 func_80242BC0_8B2C30(Evt* script, s32 isInitialCall) {
+ApiStatus func_80242BC0_8B2C30(Evt* script, s32 isInitialCall) {
     Bytecode* args;
 
+    static s32 padding;
     static u8 oldPrimR, oldPrimG, oldPrimB;
     static u8 oldEnvR, oldEnvG, oldEnvB;
 
@@ -249,9 +264,6 @@ s32 func_80242BC0_8B2C30(Evt* script, s32 isInitialCall) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242BC0_8B2C30);
-#endif
 
 ApiStatus func_80242F08_8B2F78(Evt* script, s32 isInitialCall) {
     mdl_set_all_fog_mode(3);
