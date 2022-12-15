@@ -12472,14 +12472,14 @@ segments:
     start: 0xBC7E60
     vram: 0x80240000
     subsegments:
-    - [0xBC7E60, c]
-    - [0xBC7EB0, c]
-    - [0xBC8CE0, data]
-    - [0xBC8DE0, data]
-    - [0xBC9020, data]
-    - [0xBCB260, data]
-    - [0xBCB870, data]
-    - [0xBCD030]
+    - [0xBC7E60, c, obk_04_0_header]
+    - [0xBC7E60, c, obk_04_1_music]
+    - [0xBC7E60, c, obk_04_2_entity]
+    - [0xBC7EB0, c, obk_04_3_npc]
+    - [0xBC87A0, c, obk_04_4_main]
+    - [0xBC87A0, c, obk_04_5_hole]
+    - [0xBC87A0, c, obk_04_6_game]
+    - [0xBC8CE0]
   - name: obk_05
     dir: world/area_obk/obk_05
     type: code
