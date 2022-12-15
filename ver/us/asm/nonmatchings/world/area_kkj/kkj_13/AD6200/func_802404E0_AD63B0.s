@@ -13,7 +13,7 @@ dlabel D_80244FB0_ADAE80
 .double 0.4
 
 dlabel D_80244FB8_ADAE88
-.double 0.2, 7.370960555125578e+228, 1.1479345603117537e+195
+.double 0.2
 
 .section .text
 

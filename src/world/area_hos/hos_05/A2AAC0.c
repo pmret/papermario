@@ -86,7 +86,7 @@ extern s32 D_8024AAB4_A34CF4; // func_802440D0_A2E310 can be matched once this i
 extern s32 D_8024AAB8_A34CF8;
 extern u32 D_8024AABC_A34CFC;
 extern s32 D_8024AAC0_A34D00[];
-extern s32 D_8024AAD6_A34D14[];
+extern s32 D_8024AAD4_A34D14[];
 extern u8 D_8024AB3C_A34D7C[];
 extern u8 D_8024AC7B_A34EBB;
 extern u16 D_8024AC7C_A34EBC[];
@@ -859,8 +859,8 @@ void func_80243ED0_A2E110(s32 arg0, s32 idx) {
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80243FC4_A2E204);
 
-// needs D_8024AAB4_A34CF4 to be migrated
-#ifdef NON_MATCHING
+NOP_FIX // TODO remove when D_8024AAB4_A34CF4 is migrated
+
 ApiStatus func_802440D0_A2E310(Evt* script, s32 isInitialCall) {
     switch (D_8024AAB0_A34CF0) {
         case 0:
@@ -880,10 +880,10 @@ ApiStatus func_802440D0_A2E310(Evt* script, s32 isInitialCall) {
             if (D_8024AAB8_A34CF8 != 0) {
                 D_8024AAB8_A34CF8--;
                 if (!D_8024AA20_A34C60->unk_58) {
-                    D_8024AA20_A34C60->unk_3C = D_8024AAD6_A34D14[25 - D_8024AAB8_A34CF8];
+                    D_8024AA20_A34C60->unk_3C = D_8024AAD4_A34D14[25 - D_8024AAB8_A34CF8];
                     D_8024AA20_A34C60->unk_3E = 0;
                 } else {
-                    D_8024AA20_A34C60->unk_40 = D_8024AAD6_A34D14[25 - D_8024AAB8_A34CF8];
+                    D_8024AA20_A34C60->unk_40 = D_8024AAD4_A34D14[25 - D_8024AAB8_A34CF8];
                     D_8024AA20_A34C60->unk_42 = 0;
                 }
             } else {
@@ -942,10 +942,10 @@ ApiStatus func_802440D0_A2E310(Evt* script, s32 isInitialCall) {
             if (D_8024AAB8_A34CF8 != 0) {
                 D_8024AAB8_A34CF8--;
                 if (!D_8024AA20_A34C60->unk_58) {
-                    D_8024AA20_A34C60->unk_40 = D_8024AAD6_A34D14[25 - D_8024AAB8_A34CF8];
+                    D_8024AA20_A34C60->unk_40 = D_8024AAD4_A34D14[25 - D_8024AAB8_A34CF8];
                     D_8024AA20_A34C60->unk_42 = 0;
                 } else {
-                    D_8024AA20_A34C60->unk_3C = D_8024AAD6_A34D14[25 - D_8024AAB8_A34CF8];
+                    D_8024AA20_A34C60->unk_3C = D_8024AAD4_A34D14[25 - D_8024AAB8_A34CF8];
                     D_8024AA20_A34C60->unk_3E = 0;
                 }
             } else {
@@ -958,9 +958,6 @@ ApiStatus func_802440D0_A2E310(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-#else
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802440D0_A2E310);
-#endif
 
 ApiStatus func_80244454_A2E694(Evt* script, s32 isInitialCall) {
     if (D_8024ACB8_A34EF8 != 0) {

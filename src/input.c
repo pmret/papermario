@@ -24,7 +24,6 @@ void func_80028838(void) {
     D_8009A6A6 = 0;
 }
 
-#ifdef NON_MATCHING
 void update_input(void) {
     OSContPad* contData = &D_8009A5B8;
     s16 handleInput = FALSE;
@@ -204,10 +203,10 @@ void update_input(void) {
         }
     }
 
+    gGameStatusPtr->currentButtons[0] = buttons;
+    gGameStatusPtr->pressedButtons[0] = gGameStatusPtr->currentButtons[0] ^ gGameStatusPtr->prevButtons[0];
+    gGameStatusPtr->pressedButtons[0] &= gGameStatusPtr->currentButtons[0];
     do {
-        gGameStatusPtr->pressedButtons[0] = buttons ^ gGameStatusPtr->prevButtons[0];
-        gGameStatusPtr->currentButtons[0] = buttons;
-        gGameStatusPtr->pressedButtons[0] &= buttons;
         if (gGameStatusPtr->currentButtons[0] == 0) {
             gGameStatusPtr->heldButtons[0] = 0;
         } else if (gGameStatusPtr->prevButtons[0] != gGameStatusPtr->currentButtons[0]) {
@@ -239,6 +238,3 @@ void update_input(void) {
 
     gGameStatusPtr->prevButtons[0] = gGameStatusPtr->currentButtons[0];
 }
-#else
-INCLUDE_ASM(s32, "input", update_input);
-#endif
