@@ -68,3 +68,6 @@ ApiStatus func_8024046C_AD633C(Evt* script, s32 isInitialCall) {
 }
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_13/AD6200", func_802404E0_AD63B0);
+
+const char* N(exit_str_0) = "osr_03";
+const char* N(exit_str_1) = "hos_10";
