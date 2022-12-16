@@ -4241,7 +4241,64 @@ void clone_model(u16 srcModelID, u16 newModelID) {
     newModel->modelID = newModelID;
 }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", func_8011B7C0, u16 arg0, s32 arg1, s32 arg2);
+void func_8011B7C0(u16 arg0, s32 arg1, s32 arg2) {
+    s32 t0 = -1;
+    s32 i;
+    s32 t1;
+    s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[arg0].modelIndex;
+    s32 modelIndex2;
+
+    if (modelIndex < 255) {
+        t1 = t0 = modelIndex;
+    } else {
+        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[arg0].treeDepth;
+        for (i = arg0 - 1; i >= 0; i--) {
+            if ((*mdl_currentModelTreeNodeInfo)[i].treeDepth <= treeDepth) {
+                break;
+            }
+
+            modelIndex2 = (*mdl_currentModelTreeNodeInfo)[i].modelIndex;
+
+            if (modelIndex2 < 255) {
+                if (t0 == -1) {
+                    t0 = modelIndex2;
+                }
+                t1 = modelIndex2;
+            }
+        }
+    }
+
+    if (arg2 < 2) {
+        for (i = t1; i <= t0; i++) {
+            Model* model = (*gCurrentModels)[i];
+            if (arg2 != 0) {
+                model->flags &= ~arg1;
+            } else {
+                model->flags |= arg1;
+            }
+        }
+    } else {
+        for (i = 0; i < t1; i++) {
+            Model* model = (*gCurrentModels)[i];
+            if (arg2 == 3) {
+                model->flags &= ~arg1;
+            } else {
+                model->flags |= arg1;
+            }
+        }
+        for (i = t0 + 1; i < 256; i++) {
+            Model* model = (*gCurrentModels)[i];
+            if (model != NULL) {
+                if (arg2 == 3) {
+                    model->flags &= ~arg1;
+                } else {
+                    model->flags |= arg1;
+                }
+            }
+        }
+    }
+
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B950);
 

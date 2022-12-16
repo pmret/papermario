@@ -20,19 +20,19 @@ Gfx* D_E0044DB0[] = {
     D_09001210, D_09001228, D_09001240, D_09001258, D_09001270, D_090011C8, D_090011E0, D_090011F8
 };
 
-u8 D_E0044DD0[][3] = {
-    { 254, 172, 172 }, 
-    { 254, 172, 213 }, 
-    { 254, 180, 154 }, 
-    { 213, 180, 254 },
-    { 180, 180, 254 }, 
-    { 180, 221, 254 }, 
-    { 180, 254, 254 }, 
-    { 180, 254, 213 },
-    { 180, 254, 180 }, 
-    { 213, 254, 180 }, 
-    { 254, 254, 180 }, 
-    { 254, 213, 172 },
+u8 D_E0044DD0[] = {
+    254, 172, 172,
+    254, 172, 213,
+    254, 180, 154,
+    213, 180, 254,
+    180, 180, 254,
+    180, 221, 254,
+    180, 254, 254,
+    180, 254, 213,
+    180, 254, 180,
+    213, 254, 180,
+    254, 254, 180,
+    254, 213, 172,
 };
 
 u8 D_E0044DF4[] = {
@@ -164,7 +164,7 @@ void stars_shimmer_update(EffectInstance* effect) {
     s32 var_v0;
     s32 i;
 
-    
+
     temp_s3 = data->unk_02;
     data->timeLeft--;
     data->lifeTime++;
@@ -300,17 +300,14 @@ void stars_shimmer_render(EffectInstance* effect) {
     retTask = shim_queue_render_task(&renderTask);
 }
 
-// this one sucks too
-#ifdef NON_EQUIVALENT
 void stars_shimmer_appendGfx(void* effect) {
     Matrix4f sp18, sp58, sp98;
     StarsShimmerFXData* data = ((EffectInstance*)effect)->data.starsShimmer;
     s32 type;
     s32 temp_s4;
-    s32 timeLeft;
+    s32 unk_28;
     f32 rf, gf, bf;
     s32 r, g, b;
-    u8* var_s0;
     s32 i;
 
     type = data->unk_02;
@@ -354,22 +351,20 @@ void stars_shimmer_appendGfx(void* effect) {
             break;
     }
 
-    var_s0 = D_E0044DD0[temp_s4];
-
     data++;
     for (i = 0; i < ((EffectInstance*)effect)->numParts - 1; i++, data++) {
-        timeLeft = data->timeLeft;
-        if (timeLeft >= 0) {
+        unk_28 = data->unk_28;
+        if (unk_28 >= 0) {
             shim_guTranslateF(sp58, data->pos.x, data->pos.y, data->pos.z);
-            sp58[0][0] = data->unk_1C;
+            sp58[0][0] = sp58[1][1] = sp58[2][2] = data->unk_1C;
             shim_guMtxCatF(sp58, sp98, sp18);
             shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
-            if (var_s0 >= &D_E0044DD0[36]) {
-                var_s0 = D_E0044DD0;
+            if (temp_s4 >= 36) {
+                temp_s4 = 0;
             }
-            r = *var_s0++ * rf;
-            g = *var_s0++ * gf;
-            b = *var_s0++ * bf;
+            r = D_E0044DD0[temp_s4++] * rf;
+            g = D_E0044DD0[temp_s4++] * gf;
+            b = D_E0044DD0[temp_s4++] * bf;
             if (r > 255) {
                 r = 255;
             }
@@ -380,14 +375,11 @@ void stars_shimmer_appendGfx(void* effect) {
                 b = 255;
             }
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, r, g, b, 255);
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_E0044DB0[timeLeft & 7]);
+            gSPDisplayList(gMasterGfxPos++, D_E0044DB0[unk_28 & 7]);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         }
     }
     gDPPipeSync(gMasterGfxPos++);
 }
-#else
-INCLUDE_ASM(s32, "effects/stars_shimmer", stars_shimmer_appendGfx);
-#endif
