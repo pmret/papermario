@@ -83,17 +83,17 @@ void func_802B71E8_E202F8(void) {
     }
 }
 
+// similar to check_for_interactables
 s32 func_802B7450_E20560(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 s2 = -1;
     s32 curInteraction = collisionStatus->currentWall;
     Npc* npc = playerStatus->encounteredNPC;
 
     if (curInteraction == -1) {
         s32 floor = gCollisionStatus.currentFloor;
 
-        if ((floor >= 0) && (floor & COLLISION_WITH_ENTITY_BIT)) {
+        if (floor >= 0 && (floor & COLLISION_WITH_ENTITY_BIT)) {
             curInteraction = floor;
             switch (get_entity_type(floor)) {
                 case ENTITY_TYPE_PADLOCK:

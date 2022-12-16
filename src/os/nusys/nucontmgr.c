@@ -1,15 +1,13 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-#define NOP_UNFIX __asm__(".set gpopt");
-
 NOP_FIX
 
 static s32 contRetrace(NUSiCommonMesg* mesg);
 static s32 contRead(NUSiCommonMesg* mesg);
 static s32 contReadNW(NUSiCommonMesg* mesg);
 static inline s32 contReadData(OSContPad* pad, u32 lockflag);
-s32 contQuery(void);
+static s32 contQuery(NUSiCommonMesg* mesg);
 
 NUContReadFunc nuContReadFunc = NULL;
 
@@ -145,7 +143,7 @@ static s32 contReadNW(NUSiCommonMesg* mesg) {
 
 NOP_FIX
 
-s32 contQuery(void) {
+static s32 contQuery(NUSiCommonMesg* mesg) {
     s32 ret = osContStartQuery(&nuSiMesgQ);
 
     if (ret != 0) {

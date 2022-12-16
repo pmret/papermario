@@ -26,6 +26,13 @@
 #define NOP_FIX __asm__(".set nogpopt");
 #define NOP_UNFIX __asm__(".set gpopt");
 
+#define SWAP16(in, out) \
+{ \
+    s16 t = out; \
+    out = in; \
+    in = t; \
+}
+
 #define PTR_LIST_END ((void*) -1)
 
 #define API_CALLABLE(name) ApiStatus name(Evt* script, s32 isInitialCall)

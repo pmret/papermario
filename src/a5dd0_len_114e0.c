@@ -4241,66 +4241,124 @@ void clone_model(u16 srcModelID, u16 newModelID) {
     newModel->modelID = newModelID;
 }
 
-void func_8011B7C0(u16 arg0, s32 arg1, s32 arg2) {
-    s32 t0 = -1;
+void func_8011B7C0(u16 treeIndex, s32 flags, s32 arg2) {
+    s32 maxGroupIndex = -1;
     s32 i;
-    s32 t1;
-    s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[arg0].modelIndex;
-    s32 modelIndex2;
+    s32 minGroupIndex;
+    s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[treeIndex].modelIndex;
+    s32 siblingIndex;
 
     if (modelIndex < 255) {
-        t1 = t0 = modelIndex;
+        minGroupIndex = maxGroupIndex = modelIndex;
     } else {
-        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[arg0].treeDepth;
-        for (i = arg0 - 1; i >= 0; i--) {
+        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[treeIndex].treeDepth;
+        for (i = treeIndex - 1; i >= 0; i--) {
             if ((*mdl_currentModelTreeNodeInfo)[i].treeDepth <= treeDepth) {
                 break;
             }
 
-            modelIndex2 = (*mdl_currentModelTreeNodeInfo)[i].modelIndex;
+            siblingIndex = (*mdl_currentModelTreeNodeInfo)[i].modelIndex;
 
-            if (modelIndex2 < 255) {
-                if (t0 == -1) {
-                    t0 = modelIndex2;
+            if (siblingIndex < 255) {
+                if (maxGroupIndex == -1) {
+                    maxGroupIndex = siblingIndex;
                 }
-                t1 = modelIndex2;
+                minGroupIndex = siblingIndex;
             }
         }
     }
 
     if (arg2 < 2) {
-        for (i = t1; i <= t0; i++) {
+        for (i = minGroupIndex; i <= maxGroupIndex; i++) {
             Model* model = (*gCurrentModels)[i];
             if (arg2 != 0) {
-                model->flags &= ~arg1;
+                model->flags &= ~flags;
             } else {
-                model->flags |= arg1;
+                model->flags |= flags;
             }
         }
     } else {
-        for (i = 0; i < t1; i++) {
+        for (i = 0; i < minGroupIndex; i++) {
             Model* model = (*gCurrentModels)[i];
             if (arg2 == 3) {
-                model->flags &= ~arg1;
+                model->flags &= ~flags;
             } else {
-                model->flags |= arg1;
+                model->flags |= flags;
             }
         }
-        for (i = t0 + 1; i < 256; i++) {
+        for (i = maxGroupIndex + 1; i < 256; i++) {
             Model* model = (*gCurrentModels)[i];
             if (model != NULL) {
                 if (arg2 == 3) {
-                    model->flags &= ~arg1;
+                    model->flags &= ~flags;
                 } else {
-                    model->flags |= arg1;
+                    model->flags |= flags;
                 }
             }
         }
     }
-
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B950);
+void func_8011B950(u16 treeIndex, s32 arg1, s32 arg2, s32 arg3) {
+    s32 maxGroupIndex = -1;
+    s32 i;
+    s32 minGroupIndex;
+    s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[treeIndex].modelIndex;
+    s32 siblingIndex;
+    s32 maskLow, maskHigh, newIndex;
+
+    if (modelIndex < 255) {
+        minGroupIndex = maxGroupIndex = modelIndex;
+    } else {
+        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[treeIndex].treeDepth;
+        for (i = treeIndex - 1; i >= 0; i--) {
+            if ((*mdl_currentModelTreeNodeInfo)[i].treeDepth <= treeDepth) {
+                break;
+            }
+
+            siblingIndex = (*mdl_currentModelTreeNodeInfo)[i].modelIndex;
+
+            if (siblingIndex < 255) {
+                if (maxGroupIndex == -1) {
+                    maxGroupIndex = siblingIndex;
+                }
+                minGroupIndex = siblingIndex;
+            }
+        }
+    }
+
+    maskLow = maskHigh = 0;
+
+    if (arg1 < 0) {
+        maskLow = 0xF;
+        arg1 = 0;
+    }
+
+    if (arg2 < 0) {
+        maskHigh = 0xF0;
+        arg2 = 0;
+    }
+
+    newIndex = arg1 + (arg2 << 4);
+
+    if (arg3 == 0) {
+        for (i = minGroupIndex; i <= maxGroupIndex; i++) {
+            Model* model = (*gCurrentModels)[i];
+            model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
+        }
+    } else {
+        for (i = 0; i < minGroupIndex; i++) {
+            Model* model = (*gCurrentModels)[i];
+            model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
+        }
+        for (i = maxGroupIndex + 1; i < 256; i++) {
+            Model* model = (*gCurrentModels)[i];
+            if (model != NULL) {
+                model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
+            }
+        }
+    }
+}
 
 void func_8011BAE8(void) {
     s32 i;
