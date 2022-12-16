@@ -164,7 +164,6 @@ void stars_shimmer_update(EffectInstance* effect) {
     s32 var_v0;
     s32 i;
 
-
     temp_s3 = data->unk_02;
     data->timeLeft--;
     data->lifeTime++;
