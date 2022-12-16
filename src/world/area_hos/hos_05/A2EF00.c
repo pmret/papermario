@@ -15,7 +15,7 @@ extern u8 D_802D9D73;
 
 ApiStatus func_802452C4_A2F504(Evt* script, s32 isInitialCall) {
     Bytecode* args;
-    static char N(bss_padding)[0x2B0]; // TODO remove / relocate this
+    static char N(bss_padding)[0x200]; // TODO remove / relocate this
     static u8 oldPrimR, oldPrimG, oldPrimB;
     static u8 oldEnvR, oldEnvG, oldEnvB;
     static s32 newPrimR, newPrimG, newPrimB;

@@ -4,7 +4,8 @@
 #define NAMESPACE battle_move_power_bounce
 
 extern s32 D_802A2730_745520;
-extern s32 D_802A4020;
+
+BSS s32 D_802A4020;
 
 #include "world/common/todo/UnkMoveFunc1.inc.c"
 

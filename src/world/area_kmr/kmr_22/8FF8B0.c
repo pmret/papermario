@@ -24,7 +24,7 @@ enum {
 
 extern s32 N(VineAnimationsDmaTable)[];
 extern Gfx N(lava_piranha_vine_gfx)[];
-extern s32 N(VineRenderState);
+BSS s32 N(VineRenderState);
 
 void N(make_vine_interpolation)(LavaPiranhaVine* vine) {
     Evt dummyEvt;

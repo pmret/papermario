@@ -7,8 +7,9 @@ extern f32 D_80241B7C_A28A4C;
 extern u16* D_80241B80_A28A50;
 extern s32 D_80241B84_A28A54;
 extern s32 D_80241B88_A28A58;
-extern f32 D_80243370;
-extern f32 D_80243374;
+
+BSS f32 D_80243370;
+BSS f32 D_80243374;
 
 ApiStatus N(SetCamXXVfov)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -59,7 +59,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x1D */ FX_ENTRY(smoke_impact, effect_gfx_landing_dust),
     /* 0x1E */ FX_ENTRY(damage_indicator, effect_gfx_damage_indicator),
     /* 0x1F */ FX_ENTRY(purple_ring, effect_gfx_purple_ring),
-    /* 0x20 */ FX_ENTRY(flame, _353BB0),
+    /* 0x20 */ FX_ENTRY(flame, effect_gfx_flame),
     /* 0x21 */ FX_ENTRY(stars_burst, effect_gfx_damage_stars),
     /* 0x22 */ FX_ENTRY(stars_shimmer, effect_gfx_sparkles),
     /* 0x23 */ FX_ENTRY(rising_bubble, effect_gfx_rising_bubble),

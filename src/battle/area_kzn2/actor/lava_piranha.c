@@ -285,8 +285,8 @@ enum {
     VINE_3_BASE = 0x8022C000,
 };
 
-static LavaPiranhaVine N(VineData)[NUM_VINES];
-static s32 N(VineRenderState);
+BSS LavaPiranhaVine N(VineData)[NUM_VINES];
+BSS s32 N(VineRenderState);
 
 void N(make_vine_interpolation)(LavaPiranhaVine* vine) {
     Evt dummyEvt;

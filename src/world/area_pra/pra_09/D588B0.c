@@ -20,7 +20,8 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-extern s32 flo_18_shakeTree[];
+BSS s32 pra_09_80246A20[114];
+BSS s32 D_80246BE8[92];
 
 ApiStatus func_802411D8_D59A68(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -29,19 +30,17 @@ ApiStatus func_802411D8_D59A68(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            flo_18_shakeTree[i] = ptr[i];
+            pra_09_80246A20[i] = ptr[i];
         }
-        flo_18_shakeTree[i] = 0;
+        pra_09_80246A20[i] = 0;
     } else {
         for (i = 0; i < 112; i++) {
-            flo_18_shakeTree[i] = i + 16;
-            flo_18_shakeTree[112] = 0;
+            pra_09_80246A20[i] = i + 16;
+            pra_09_80246A20[112] = 0;
         }
     }
     return ApiStatus_DONE2;
 }
-
-extern s32 D_80246BE8[];
 
 ApiStatus func_80241274_D59B04(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

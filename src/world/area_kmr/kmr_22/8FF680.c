@@ -2,8 +2,9 @@
 #include "effects.h"
 
 extern s16 D_80240DE0_900450[];
-extern EffectInstance* D_802483C0;
-extern s32 D_802483C4;
+
+BSS EffectInstance* D_802483C0;
+BSS s32 D_802483C4;
 
 ApiStatus func_80240010_8FF680(Evt* script, s32 isInitialCall) {
     s32 var_s0 = script->varTable[0];

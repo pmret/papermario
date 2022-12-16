@@ -3,6 +3,8 @@
 
 #define NAMESPACE action_command_hammer
 
+extern s32 actionCmdTableHammer[];
+
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;

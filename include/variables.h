@@ -111,8 +111,6 @@ extern SpriteShadingProfile* D_80151328;
 
 extern Window gWindows[64];
 
-extern s32 D_802A3838;
-
 extern s32 gEncounterState;
 extern s16 gNpcCount;
 extern s32 gOverrideFlags;

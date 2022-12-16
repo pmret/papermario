@@ -3,6 +3,8 @@
 
 #define NAMESPACE action_command_body_slam
 
+extern s32 actionCmdTableBodySlam[];
+
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;

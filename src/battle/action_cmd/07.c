@@ -3,9 +3,11 @@
 
 #define NAMESPACE action_command_07
 
+void func_8024FAFC(void);
+
 BSS s32 D_802A9620;
 
-void func_8024FAFC(void);
+extern s32 actionCmdTable07[];
 
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

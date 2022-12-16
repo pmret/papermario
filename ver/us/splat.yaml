@@ -3475,7 +3475,27 @@ segments:
     subsegments:
     - [0x353300, c, flame]
     - [0x353B40]
-  - [0x353BB0, bin] # flame gfx
+  - name: effect_gfx_flame
+    dir: effects/gfx
+    type: code
+    start: 0x353BB0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x353BB0, c, flame]
+    - start: 0x353BB0
+      type: .data
+      name: flame
+      subsegments:
+      - [0x353BB0, i4, D_09000000_353BB0, 32, 32]
+      - [0x353DB0, i4, D_09000200_353DB0, 32, 32]
+      - [0x353FB0, i4, D_09000400_353FB0, 32, 32]
+      - [0x3541B0, i4, D_09000600_3541B0, 32, 32]
+      - [0x3543B0, gfx, D_09000800_3543B0]
+      - [0x354468, vtx, D_090008B8_354468]
+      - [0x3544A8, gfx, D_090008F8_3544A8]
+      - [0x3544C8, gfx, D_09000918_3544C8]
+      - [0x354590, gfx, D_090009E0_354590]
   - name: effect_stars_burst
     dir: effects
     type: code
@@ -14597,8 +14617,7 @@ segments:
     vram: 0x802B6000
     subsegments:
     - [0xE24ED0, c, hammer]
-    - [0xE25C80, data, hammer]
-    - [0xE25C90]
+    - [0xE25C80]
   - type: code
     name: world_action_spin
     dir: world/action

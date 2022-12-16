@@ -67,7 +67,7 @@
 #define switch_to_partner dead_switch_to_partner
 #define set_npc_yaw dead_set_npc_yaw
 #define disable_npc_shadow dead_disable_npc_shadow
-#define func_800EB2A4 func_800F2E98
+#define func_800EB2A4 dead_func_800EB2A4
 #define partner_clear_player_tracking dead_partner_clear_player_tracking
 #define sfx_play_sound_with_params dead_sfx_play_sound_with_params
 #define sfx_get_spatialized_sound_params dead_sfx_get_spatialized_sound_params

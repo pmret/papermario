@@ -78,7 +78,8 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-extern s32 kmr_02_D_80257F58[];
+BSS s32 kmr_02_D_80257F2C[11]; // unused?
+BSS s32 kmr_02_D_80257F58[114];
 
 ApiStatus func_802422F8_8B2368(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -127,7 +128,8 @@ ApiStatus func_80242710_8B2780(Evt* script, s32 isInitialCall) {
 
 extern u8 D_80257B00_8C7B70;
 extern u16 D_80257D00_8C7D70;
-extern MessageImageData D_80258120;
+
+BSS MessageImageData D_80258120;
 
 ApiStatus func_80242734_8B27A4(void) {
     D_80258120.raster = &D_80257B00_8C7B70; // TODO extract image

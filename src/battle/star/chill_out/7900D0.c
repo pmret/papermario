@@ -4,7 +4,7 @@
 
 #define NAMESPACE battle_star_chill_out
 
-extern s32 D_802A2CC0;
+BSS s32 D_802A2CC0;
 
 #include "common/StarPower.inc.c"
 

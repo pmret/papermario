@@ -25,7 +25,9 @@ void* __printfunc = NULL;
 u32 __kmc_pt_mode;
 #endif
 
-s32 paddingmeowplol[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+s32 D_80095904[3] = { 0 }; // padding?
+s32 D_80095910[10] = { 0 };
+s32 D_80095938[2] = { 0 };
 
 void __createSpeedParam(void) {
     __Dom1SpeedParam.type = DEVICE_TYPE_INIT;
