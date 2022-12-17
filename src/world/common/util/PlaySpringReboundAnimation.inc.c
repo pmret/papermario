@@ -1,6 +1,7 @@
 #include "common.h"
+#include "animation_script.h"
 
-extern Addr EntityModel_Spring_ReboundAnim;
+extern AnimScript Entity_SimpleSpring_AnimLaunch;
 
 API_CALLABLE(N(PlaySpringReboundAnimation)) {
     Bytecode* args = script->ptrReadPos;
@@ -10,6 +11,6 @@ API_CALLABLE(N(PlaySpringReboundAnimation)) {
         return ApiStatus_BLOCK;
     }
 
-    play_model_animation(entity->virtualModelIndex, (s16*) EntityModel_Spring_ReboundAnim);
+    play_model_animation(entity->virtualModelIndex, Entity_SimpleSpring_AnimLaunch);
     return ApiStatus_DONE2;
 }

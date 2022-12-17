@@ -12,7 +12,6 @@ D_000B3AE0 = 0x000B3AE0; // todo look into
 
 // hacks for various things
 fx_sun_undeclared = fx_sun;
-EntityModel_Spring_ReboundAnim = 0x1E4;
 D_802AD673 = 0x802AD673; // remove when func_802A45D8 is decompiled with D_802AD670 instead of D_802AD673
 
 // hard-coded heapy things
