@@ -274,4 +274,59 @@ void nuScEventBroadcast(NUScMsg* msg) {
     }
 }
 
-INCLUDE_ASM(void, "os/nusys/nusched", nuScWaitTaskReady);
+// copy of nuScAddClient
+static inline void nuScAddClient_inline(NUScClient* c, OSMesgQueue* mq, NUScMsg msgType) {
+    s32 mask;
+
+    mask = osSetIntMask(OS_IM_NONE);
+
+    c->msgQ = mq;
+    c->next = nusched.clientList;
+    c->msgType = msgType;
+
+    nusched.clientList = c;
+
+    if ((msgType & NU_SC_PRENMI_MSG) && nuScPreNMIFlag) {
+        osSendMesg(mq, &nusched.prenmiMsg, OS_MESG_NOBLOCK);
+    }
+
+    osSetIntMask(mask);
+}
+
+// copy of nuScRemoveClient
+static inline void nuScRemoveClient_inline(NUScClient* client) {
+    s32 mask = osSetIntMask(OS_IM_NONE);
+    NUScClient* clientList = nusched.clientList;
+    NUScClient* prev = NULL;
+
+    while (clientList != NULL) {
+        if (clientList == client) {
+            if (prev != NULL) {
+                prev->next = clientList->next;
+            } else {
+                nusched.clientList = clientList->next;
+            }
+            break;
+        }
+        prev = clientList;
+        clientList = clientList->next;
+    }
+
+    osSetIntMask(mask);
+}
+
+// TODO: investigate why nuScAddClient and nuScRemoveClient were inlined
+void nuScWaitTaskReady(NUScTask* task) {
+    NUScClient client;
+    void* fb = task->framebuffer;
+
+    if(nusched.frameBufferNum == 1) {
+        return;
+    }
+
+    while(osViGetCurrentFramebuffer() == fb || osViGetNextFramebuffer() == fb) {
+        nuScAddClient_inline(&client, &nusched.waitMQ, NU_SC_RETRACE_MSG);
+	    osRecvMesg(&nusched.waitMQ, NULL, OS_MESG_BLOCK);
+        nuScRemoveClient_inline(&client);
+    }
+}

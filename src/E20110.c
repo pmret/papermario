@@ -83,8 +83,68 @@ void func_802B71E8_E202F8(void) {
     }
 }
 
-s32 func_802B7450_E20560(void);
-INCLUDE_ASM(s32, "E20110", func_802B7450_E20560);
+// similar to check_for_interactables
+s32 func_802B7450_E20560(void) {
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 curInteraction = collisionStatus->currentWall;
+    Npc* npc = playerStatus->encounteredNPC;
+
+    if (curInteraction == -1) {
+        s32 floor = gCollisionStatus.currentFloor;
+
+        if (floor >= 0 && (floor & COLLISION_WITH_ENTITY_BIT)) {
+            curInteraction = floor;
+            switch (get_entity_type(floor)) {
+                case ENTITY_TYPE_PADLOCK:
+                case ENTITY_TYPE_PADLOCK_RED_FRAME:
+                case ENTITY_TYPE_PADLOCK_RED_FACE:
+                case ENTITY_TYPE_PADLOCK_BLUE_FACE:
+                case ENTITY_TYPE_PUSH_BLOCK:
+                case ENTITY_TYPE_CHEST:
+                case ENTITY_TYPE_SIGNPOST:
+                    curInteraction = -1;
+                    break;
+            }
+        } else if (((playerStatus->flags & (PS_FLAGS_HAS_CONVERSATION_NPC | PS_FLAGS_INPUT_DISABLED)) == PS_FLAGS_HAS_CONVERSATION_NPC)
+                        && (npc != NULL) && (npc->flags & NPC_FLAG_10000000)) {
+            curInteraction = npc->npcID | COLLISION_WITH_NPC_BIT;
+            if (playerStatus->interactingWithID == curInteraction) {
+                return TRUE;
+            }
+        } else {
+            playerStatus->interactingWithID = -1;
+            playerStatus->flags &= ~PS_FLAGS_INTERACTED;
+            return FALSE;
+        }
+    } else {
+        if (!(curInteraction & COLLISION_WITH_ENTITY_BIT)) {
+            if (!(curInteraction & COLLISION_WITH_NPC_BIT)) {
+                if (!should_collider_allow_interact(curInteraction)) {
+                    playerStatus->interactingWithID = -1;
+                    playerStatus->flags &= ~PS_FLAGS_INTERACTED;
+                    return FALSE;
+                }
+            }
+        } else {
+            if (!phys_can_player_interact()) {
+                playerStatus->interactingWithID = -1;
+                playerStatus->flags &= ~PS_FLAGS_INTERACTED;
+                return FALSE;
+            }
+        }
+    }
+    if (playerStatus->interactingWithID == curInteraction) {
+        if ((playerStatus->flags & PS_FLAGS_INTERACTED)) {
+            return FALSE;
+        }
+    } else {
+        playerStatus->flags &= ~PS_FLAGS_INTERACTED;
+    }
+
+    playerStatus->interactingWithID = curInteraction;
+    return TRUE;
+}
 
 void func_802B75E8_E206F8(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -174,7 +234,7 @@ void func_802B7728_E20838(void) {
     D_802B7CB8_E20DC8->unk_24 = var_s0;
 
     actionState = playerStatus->actionState;
-    if ((func_802B7450_E20560() == 0) ||
+    if (!func_802B7450_E20560() ||
         (playerStatus->inputEnabledCounter != 0) ||
         (playerStatus->flags & PS_FLAGS_PAUSED) ||
         !(actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK || actionState == ACTION_STATE_RUN))
