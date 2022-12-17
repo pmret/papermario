@@ -5,7 +5,9 @@
 
 s32 D_802A9AA0_42D9B0[] = { 0, 25, 50, 75, 75, 0, 0, 0};
 
-static s32 D_802A9B00;
+BSS s32 D_802A9B00;
+
+extern s32 actionCmdTablePowerShock[];
 
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -32,7 +34,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudPosX = -48;
     actionCommandStatus->isBarFilled = FALSE;
     actionCommandStatus->thresholdMoveDir = 0;
-    D_802A9B00 = 0;
+    D_802A9B00 = FALSE;
     actionCommandStatus->hudPosY = 80;
 
     id = hud_element_create(&HES_AButton);
@@ -156,7 +158,7 @@ void N(update)(void) {
             hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_5C = 0;
-            D_802A9B00 = 1;
+            D_802A9B00 = TRUE;
             actionCommandStatus->frameCounter = actionCommandStatus->duration;
             sfx_play_sound_with_params(SOUND_80000041, 0, 0, 0);
             actionCommandStatus->state = 11;
@@ -299,7 +301,7 @@ void N(draw)(void) {
     // Redundant call, but needed to match.
     hud_element_get_render_pos(id, &x, &y);
 
-    if (D_802A9B00 == 0) {
+    if (!D_802A9B00) {
         draw_mash_meter_multicolor_with_divisor(x, y, actionCommandStatus->barFillLevel / 100, 1);
     } else if (!actionCommandStatus->isBarFilled) {
         draw_mash_meter_multicolor_with_divisor(x, y, actionCommandStatus->barFillLevel / 100, 4);

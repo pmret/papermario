@@ -34,7 +34,8 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
 }
 #define NAMESPACE nok_02
 
-extern s32 nok_02_D_802549D0[];
+BSS s32 nok_02_D_802549A0[12]; // unused?
+BSS s32 nok_02_D_802549D0[114];
 
 ApiStatus func_80242C5C_9D9C7C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

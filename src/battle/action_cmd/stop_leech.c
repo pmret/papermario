@@ -3,6 +3,8 @@
 
 #define NAMESPACE action_command_stop_leech
 
+extern s32 actionCmdTableStopLeech[];
+
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;

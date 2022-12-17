@@ -13,12 +13,11 @@ s32 N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     #endif
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
+    EnemyDetectVolume territory;
     #ifdef _DEAD_H_
     MobileAISettings* npcAISettings = (MobileAISettings*)evt_get_variable(script, *args++);
-    EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
     #else
-    EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
     MobileAISettings* npcAISettings = (MobileAISettings*)evt_get_variable(script, *args++);
     #endif

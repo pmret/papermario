@@ -2,13 +2,14 @@
 #include "effects.h"
 #include "hud_element.h"
 
-extern s32 D_80262F68;
-extern PopupMenu D_80262C38;
 extern IconHudScriptPair gItemHudScripts[];
 extern EvtScript N(EVS_ToadHouse_GetInBed);
 extern EvtScript N(EVS_ToadHouse_SetDialogue);
 extern EvtScript N(EVS_ToadHouse_ReturnFromRest);
 extern EvtScript N(EVS_MerlonBargeOut);
+
+extern PopupMenu D_80262C38;
+extern s32 D_80262F68;
 
 #include "world/common/npc/Toad_Wander.inc.c"
 #include "world/common/npc/Toad_Patrol.inc.c"
@@ -77,7 +78,7 @@ EvtScript N(EVS_LetterReward_Merlon) = {
 
 s32 N(LetterList_MinhT)[] = {
     ITEM_LETTER_TO_MINHT,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_MinhT) = {
@@ -101,7 +102,7 @@ EvtScript N(EVS_LetterReward_MinhT) = {
 
 s32 N(LetterList_Kolorado)[] = {
     ITEM_LETTER25,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_Kolorado) = {
@@ -125,7 +126,7 @@ EvtScript N(EVS_LetterReward_Kolorado) = {
 
 s32 N(ItemList_Artifact)[] = {
     ITEM_ARTIFACT,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_ArtifactReward_Kolorado) = {

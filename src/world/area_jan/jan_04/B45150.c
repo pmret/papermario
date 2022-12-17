@@ -4,7 +4,7 @@
 // #include "world/common/todo/LoadPartyImage.inc.c"
 API_CALLABLE(N(LoadPartyImage)) {
     static PAL_BIN palette[256];
-    static IMG_BIN raster[0x3DA0]; // similar to LoadPartyImage include but with 0x10 bytes added for padding
+    static IMG_BIN raster[0x3DA0]; // similar to LoadPartyImage include but with 0x10 bytes added for padding (look at D_8024A290 - I think this goes in between the two)
     static MessageImageData image;
 
     u32 decompressedSize;

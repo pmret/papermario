@@ -9,6 +9,8 @@ s32 D_802A9964_427334[4] = { 40, 70, 99, 200 };
 s32 D_802A9974_427344[5] = { 35, 60, 80, 99, 200 };
 s32 D_802A9988_427358[6] = { 35, 35, 60, 80, 99, 200 };
 
+extern s32 actionCmdTableFireShell[];
+
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;

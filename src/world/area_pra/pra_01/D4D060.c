@@ -26,7 +26,8 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-extern s32 D_80242FB0[];
+BSS s32 D_80242FB0[114];
+BSS s32 pra_01_80243178[92];
 
 ApiStatus func_80241238_D4E278(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -46,8 +47,6 @@ ApiStatus func_80241238_D4E278(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-
-extern s32 pra_01_80243178[];
 
 ApiStatus func_802412D4_D4E314(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

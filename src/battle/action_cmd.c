@@ -1,5 +1,4 @@
 #include "common.h"
-#include "action_cmd.h"
 #include "ld_addrs.h"
 
 u8 mashMeter_bgColors[15] = {
@@ -85,6 +84,11 @@ BSS s32 D_8029FBC4_pad[3];
 // TODO move to actor_api
 BSS s32 D_8029FBD0;
 BSS s8 D_8029FBD4;
+BSS s32 D_8029FBD8_pad[2];
+
+#include "action_cmd.h"
+
+BSS ActionCommandStatus gActionCommandStatus;
 
 ApiStatus LoadActionCommand(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -1090,6 +1090,7 @@ extern s32 mdl_renderTaskQueueIdx;
 extern s32 mdl_renderTaskCount;
 
 extern TextureHandle mdl_textureHandles[128];
+
 extern RenderTask mdl_clearRenderTasks[3][0x100];
 
 extern s32 D_801A7000; // todo ???

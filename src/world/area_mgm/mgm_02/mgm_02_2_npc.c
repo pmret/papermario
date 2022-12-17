@@ -30,7 +30,8 @@ extern s32 N(InitialConfigurations)[3][NUM_BOXES];
 extern s32 N(BoxModelIDs)[NUM_BOXES];
 extern s32 N(BoxColliderIDs)[NUM_BOXES];
 extern s32 N(PanelModelIDs)[NUM_PANELS];
-extern s32 D_80248600[NUM_PANELS]; //TODO set name: PanelModelsAssigned
+
+BSS s32 D_80248600[NUM_PANELS]; //TODO set name: PanelModelsAssigned
 
 extern IMG_BIN N(panel_peach_img);
 extern PAL_BIN N(panel_peach_pal);

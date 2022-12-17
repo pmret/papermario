@@ -73,7 +73,7 @@ s32 N(VineAnimationsDmaTable)[] = {
     PIRANHA_DMA_ENTRY(24),
 };
 
-static s32 N(VineRenderState);
+BSS s32 N(VineRenderState);
 
 MAP_STATIC_PAD(1, unk_static_pad);
 

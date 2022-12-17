@@ -21,7 +21,7 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-extern s32 D_80243BE0[];
+BSS s32 D_80243BE0[114];
 
 ApiStatus func_80240540_BC47C0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

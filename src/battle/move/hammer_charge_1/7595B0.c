@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-extern s32 D_802A43D0;
+BSS s32 D_802A43D0;
 
 #define NAMESPACE battle_move_hammer_charge_1
 

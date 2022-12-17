@@ -48,7 +48,8 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
 }
 #define NAMESPACE nok_02
 
-extern s32 nok_02_D_80254BA0[];
+BSS s32 nok_02_D_80254BA0[114];
+BSS s32 nok_02_D_80254D68[92];
 
 ApiStatus func_80243C78_9DAC98(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -68,8 +69,6 @@ ApiStatus func_80243C78_9DAC98(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-
-extern s32 nok_02_D_80254D68[];
 
 ApiStatus func_80243D14_9DAD34(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
