@@ -9753,7 +9753,7 @@ segments:
     - [0x91E6D0, c, iwa_10_4_train]
     - [0x91F5A0, c, iwa_10_5_entity]
     - [0x91FA80, c, iwa_10_6_parakarry]
-    - [0x91FA80, c, iwa_10_7_new_party]
+    - [0x91FA80, c, iwa_10_7_new_partner]
     - [0x91FB20, c, iwa_10_8_foliage]
     - [0x91FD60]
   - name: iwa_11
@@ -12543,14 +12543,14 @@ segments:
     start: 0xBDA7B0
     vram: 0x80240000
     subsegments:
-    - [0xBDA7B0, c]
-    - [0xBDA940, c]
-    - [0xBDAB00, c]
-    - [0xBDABA0, c]
-    - [0xBDABE0, data]
-    - [0xBDB140, data]
-    - [0xBDCE10, data]
-    - [0xBDD190]
+    - [0xBDA7B0, c, obk_09_0_header]
+    - [0xBDA7B0, c, obk_09_1_music]
+    - [0xBDA7B0, c, obk_09_2_main]
+    - [0xBDA7B0, c, obk_09_3_meet_bow]
+    - [0xBDA940, c, obk_09_4_npc]
+    - [0xBDAB00, c, obk_09_5_new_partner]
+    - [0xBDABA0, c, obk_09_6_epilogue]
+    - [0xBDABE0]
   - name: arn_02
     dir: world/area_arn/arn_02
     type: code
@@ -13485,7 +13485,7 @@ segments:
     - [0xCC3810, c, flo_13_2_entity]
     - [0xCC3810, c, flo_13_3_main]
     - [0xCC3850, c, flo_13_4_npc]
-    - [0xCC6DE0, c, flo_13_5_new_party]
+    - [0xCC6DE0, c, flo_13_5_new_partner]
     - [0xCC6E80]
   - name: flo_14
     dir: world/area_flo/flo_14
@@ -16059,7 +16059,7 @@ segments:
     - [0xEDE9C0, c, flo_13_2_entity]
     - [0xEDE9C0, c, flo_13_3_main]
     - [0xEDEA00, c, flo_13_4_npc]
-    - [0xEE2040, c, flo_13_5_new_party]
+    - [0xEE2040, c, flo_13_5_new_partner]
     - [0xEE20E0]
   - name: dead_flo_14
     dir: world/dead/area_flo/flo_14

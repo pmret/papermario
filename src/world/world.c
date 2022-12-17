@@ -633,7 +633,7 @@ MapConfig obk_maps[] = {
     { MAP(obk_06), .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(obk_07, 0x80241BA0), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(obk_08, 0x802417B0), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(obk_09, 0x80240460), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(obk_09), .songVariation = 1, .sfxReverb = 2 },
 };
 
 /// Gusty Gulch
