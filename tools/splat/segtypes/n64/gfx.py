@@ -3,6 +3,8 @@ N64 f3dex display list splitter
 Dumps out Gfx[] as a .inc.c file.
 """
 
+import re
+
 from pathlib import Path
 
 from pygfxd import (
@@ -38,6 +40,8 @@ from util import log, options
 from util.log import error
 
 from segtypes.common.codesubsegment import CommonSegCodeSubsegment
+
+LIGHTS_RE = re.compile(r"\*\(Lightsn \*\)0x[0-9A-F]{8}")
 
 
 class N64SegGfx(CommonSegCodeSubsegment):
@@ -222,6 +226,17 @@ class N64SegGfx(CommonSegCodeSubsegment):
             out_str += "Gfx " + self.format_sym_name(sym) + "[] = {\n"
             out_str += gfxd_buffer_to_string(outbuf)
             out_str += "};\n"
+
+        # Poor man's light fix until we get my libgfxd PR merged
+        def light_sub_func(match):
+            light = match.group(0)
+            addr = int(light[12:], 0)
+            sym = self.create_symbol(
+                addr=addr, in_segment=True, type="data", reference=True
+            )
+            return self.format_sym_name(sym)
+
+        out_str = re.sub(LIGHTS_RE, light_sub_func, out_str)
 
         return out_str
 

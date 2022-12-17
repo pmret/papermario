@@ -270,7 +270,7 @@ void phys_update_action_state(void) {
 
             if (dmaStart != NULL && dmaStart != D_8010C924) {
                 D_8010C924 = dmaStart;
-                dma_copy(dmaStart, PlayerActionsTable[playerStatus->actionState].dmaEnd, (void* )0x802B6000); // TODO fix
+                dma_copy(dmaStart, PlayerActionsTable[playerStatus->actionState].dmaEnd, (void* )0x802B6000); // TODO shiftability fix
             }
         }
         PlayerActionsTable[playerStatus->actionState].update();
@@ -295,7 +295,7 @@ void phys_peach_update(void) {
                     D_8010C924 = action->dmaStart;
 
                     // TODO: This needs to be a defined linker define for full shiftability
-                    dma_copy(D_8010C924, PlayerActionsTable[playerStatus->actionState].dmaEnd, (void* )0x802B6000);
+                    dma_copy(D_8010C924, PlayerActionsTable[playerStatus->actionState].dmaEnd, (void* )0x802B6000); // TODO shiftability fix
                 }
 
                 if (PlayerActionsTable[playerStatus->actionState].flag) {

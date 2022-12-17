@@ -10,10 +10,10 @@
 #ifdef SHIFT
 #define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
 #else
-#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shift
-#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shift
+#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shiftability fix
+#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shiftability fix
 #define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
-#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shift
+#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shiftability fix
 #endif
 
 typedef struct Fog {
@@ -2864,7 +2864,7 @@ GameMode* set_game_mode_slot(s32 i, GameMode* mode) {
 
     ASSERT(i < ARRAY_COUNT(gMainGameState));
 
-    gameMode->flags = 1 | 2;
+    gameMode->flags = 2 | 1;
     gameMode->init = mode->init;
     gameMode->step = mode->step;
     gameMode->render = mode->render;

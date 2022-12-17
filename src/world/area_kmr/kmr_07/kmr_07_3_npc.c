@@ -1,8 +1,9 @@
 #include "kmr_07.h"
+#include "animation_script.h"
 
 #include "world/common/enemy/complete/GoombaBros_Stationary.inc.c"
 
-extern Addr EntityModel_Spring_ReboundAnim;
+extern AnimScript Entity_SimpleSpring_AnimLaunch;
 
 API_CALLABLE(N(PlaySpringReboundAnimation)) {
     Entity* entity = get_entity_by_index(evt_get_variable(NULL, MV_SpringEntityIndex));
@@ -11,7 +12,7 @@ API_CALLABLE(N(PlaySpringReboundAnimation)) {
         return ApiStatus_BLOCK;
     }
 
-    play_model_animation(entity->virtualModelIndex, (s16*) EntityModel_Spring_ReboundAnim);
+    play_model_animation(entity->virtualModelIndex, Entity_SimpleSpring_AnimLaunch);
     return ApiStatus_DONE2;
 }
 

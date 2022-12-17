@@ -38,14 +38,14 @@
 extern s16 MessagePlural;
 extern s16 MessageSingular;
 
-static s32 N(Quizmo_Worker);
-static s32 N(pad_D_8024EFA4);
-static s32 N(Quizmo_ScriptArray)[4];
-static s32 N(Quizmo_AnswerResult);
+BSS s32 N(Quizmo_Worker);
+BSS s32 N(pad_D_8024EFA4);
+BSS s32 N(Quizmo_ScriptArray)[4];
+BSS s32 N(Quizmo_AnswerResult);
 MAP_STATIC_PAD(1,quizmo_unk)
-static EffectInstance* N(Quizmo_StageEffect);
-static EffectInstance* N(Quizmo_AudienceEffect);
-static EffectInstance* N(Quizmo_VannaTEffect);
+BSS EffectInstance* N(Quizmo_StageEffect);
+BSS EffectInstance* N(Quizmo_AudienceEffect);
+BSS EffectInstance* N(Quizmo_VannaTEffect);
 
 #include "world/common/complete/GiveReward.inc.c"
 

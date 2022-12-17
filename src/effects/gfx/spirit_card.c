@@ -66,25 +66,7 @@ Lights1 D_09003F80_3FE430 = gdSPDefLights1(200, 200, 200, 255, 255, 255, 231, 93
 #include "effects/gfx/D_09004178_3FE628.gfx.inc.c"
 #include "effects/gfx/D_090041F0_3FE6A0.gfx.inc.c"
 #include "effects/gfx/D_09004268_3FE718.gfx.inc.c"
-
-//#include "effects/gfx/D_090042E0_3FE790.gfx.inc.c"
-Gfx D_090042E0_3FE790[] = {
-    gsDPPipeSync(),
-    gsSPTexture(0xFFFF, 0xFFFF, 0x0, G_TX_RENDERTILE, G_ON),
-    gsDPSetCycleType(G_CYC_2CYCLE),
-    gsDPSetTexturePersp(G_TP_PERSP),
-    gsDPSetTextureDetail(G_TD_CLAMP),
-    gsDPSetTextureLOD(G_TL_TILE),
-    gsDPSetTextureFilter(G_TF_BILERP),
-    gsDPSetTextureConvert(G_TC_FILT),
-    gsDPSetDepthSource(G_ZS_PIXEL),
-    gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPSetLights1(D_09003F80_3FE430),
-    gsSPClearGeometryMode(G_CULL_BOTH),
-    gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BACK | G_LIGHTING | G_SHADING_SMOOTH),
-    gsSPEndDisplayList(),
-};
-
+#include "effects/gfx/D_090042E0_3FE790.gfx.inc.c"
 #include "effects/gfx/D_09004360_3FE810.gfx.inc.c"
 #include "effects/gfx/D_090043D8_3FE888.vtx.inc.c"
 #include "effects/gfx/D_09004418_3FE8C8.gfx.inc.c"

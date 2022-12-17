@@ -2,7 +2,9 @@
 #include "../partners.h"
 #include "npc.h"
 
-extern struct TweesterPhysics* PlayerTweesterPhysics;
+BSS TweesterPhysics D_802B6370;
+
+TweesterPhysics* PlayerTweesterPhysics = &D_802B6370;
 
 enum {
     SUBSTATE_LAUNCH     = 0,

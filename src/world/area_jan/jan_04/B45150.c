@@ -2,24 +2,27 @@
 
 #define PARTY_IMAGE "party_opuku"
 // #include "world/common/todo/LoadPartyImage.inc.c"
-API_CALLABLE(N(LoadPartyImage)) {
-    static PAL_BIN palette[256];
-    static IMG_BIN raster[0x3DA0]; // similar to LoadPartyImage include but with 0x10 bytes added for padding (look at D_8024A290 - I think this goes in between the two)
-    static MessageImageData image;
 
+BSS PAL_BIN N(palette)[256];
+BSS IMG_BIN N(raster)[0x3D90]; // similar to LoadPartyImage include but with D_8024A290 in the middle randomly
+BSS Evt* D_8024A290;
+BSS char D_8024A294[0xC]; // padding?
+BSS MessageImageData N(image);
+
+API_CALLABLE(N(LoadPartyImage)) {
     u32 decompressedSize;
     void* compressed = load_asset_by_name(PARTY_IMAGE, &decompressedSize);
 
-    decode_yay0(compressed, &palette);
+    decode_yay0(compressed, &N(palette));
     general_heap_free(compressed);
 
-    image.raster = raster;
-    image.palette = palette;
-    image.width = 150;
-    image.height = 105;
-    image.format = G_IM_FMT_CI;
-    image.bitDepth = G_IM_SIZ_8b;
-    set_message_images(&image);
+    N(image).raster = N(raster);
+    N(image).palette = N(palette);
+    N(image).width = 150;
+    N(image).height = 105;
+    N(image).format = G_IM_FMT_CI;
+    N(image).bitDepth = G_IM_SIZ_8b;
+    set_message_images(&N(image));
     return ApiStatus_DONE2;
 }
 

@@ -6,18 +6,19 @@ void stars_shimmer_update(EffectInstance* effect);
 void stars_shimmer_render(EffectInstance* effect);
 void stars_shimmer_appendGfx(void* effect);
 
-extern Gfx D_09000F20[];
-extern Gfx D_09001210[];
-extern Gfx D_09001228[];
-extern Gfx D_09001240[];
-extern Gfx D_09001258[];
-extern Gfx D_09001270[];
-extern Gfx D_090011C8[];
-extern Gfx D_090011E0[];
-extern Gfx D_090011F8[];
+extern Gfx D_09000F20_338EE0[];
+extern Gfx D_090011C8_339188[];
+extern Gfx D_090011E0_3391A0[];
+extern Gfx D_090011F8_3391B8[];
+extern Gfx D_09001210_3391D0[];
+extern Gfx D_09001228_3391E8[];
+extern Gfx D_09001240_339200[];
+extern Gfx D_09001258_339218[];
+extern Gfx D_09001270_339230[];
 
 Gfx* D_E0044DB0[] = {
-    D_09001210, D_09001228, D_09001240, D_09001258, D_09001270, D_090011C8, D_090011E0, D_090011F8
+    D_09001210_3391D0, D_09001228_3391E8, D_09001240_339200, D_09001258_339218,
+    D_09001270_339230, D_090011C8_339188, D_090011E0_3391A0, D_090011F8_3391B8
 };
 
 u8 D_E0044DD0[] = {
@@ -313,7 +314,7 @@ void stars_shimmer_appendGfx(void* effect) {
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000F20);
+    gSPDisplayList(gMasterGfxPos++, D_09000F20_338EE0);
 
     temp_s4 = (data->lifeTime - 1) * 3;
     shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);

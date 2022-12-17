@@ -4793,7 +4793,95 @@ segments:
     vram: 0xE009C000
     subsegments:
     - [0x3981F0, c, quizmo_stage]
-  - [0x398BC0, bin] # quizmo_stage gfx
+  - name: effect_gfx_quizmo_stage
+    dir: effects/gfx
+    type: code
+    start: 0x398BC0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x398BC0, c, quizmo_stage]
+    - start: 0x398BC0
+      type: .data
+      name: quizmo_stage
+      subsegments:
+      - [0x398BC0] # light
+      - [0x398BD8, ia4, D_09000018_398BD8, 64, 16]
+      - [0x398DD8, gfx, D_09000218_398DD8]
+      - [0x398E48, rgba16, D_09000288_398E48, 32, 64]
+      - [0x399E48, gfx, D_09001288_399E48]
+      - [0x399EB8, ci4, D_090012F8_399EB8, 64, 16]
+      - [0x39A0B8, palette, D_090012F8_399EB8]
+      - [0x39A0D8, gfx, D_09001518_39A0D8]
+      - [0x39A178, i4, D_090015B8_39A178, 32, 32]
+      - [0x39A378, gfx, D_090017B8_39A378]
+      - [0x39A3E8, ci4, D_09001828_39A3E8, 32, 64]
+      - [0x39A7E8, palette, D_09001828_39A3E8]
+      - [0x39A808, gfx, D_09001C48_39A808]
+      - [0x39A8A8, rgba16, D_09001CE8_39A8A8, 32, 64]
+      - [0x39B8A8, gfx, D_09002CE8_39B8A8]
+      - [0x39B918, ci4, D_09002D58_39B918, 64, 64]
+      - [0x39C118, palette, D_09002D58_39B918]
+      - [0x39C138, gfx, D_09003578_39C138]
+      - [0x39C1D8, ia4, D_09003618_39C1D8, 128, 32]
+      - [0x39C9D8, gfx, D_09003E18_39C9D8]
+      - [0x39CA48, ci4, D_09003E88_39CA48, 32, 32]
+      - [0x39CC48, palette, D_09003E88_39CA48]
+      - [0x39CC68, gfx, D_090040A8_39CC68]
+      - [0x39CE08, ci4, D_09004248_39CE08, 64, 64]
+      - [0x39D608, palette, D_09004248_39CE08]
+      - [0x39D628, gfx, D_09004A68_39D628]
+      - [0x39D6C8, ia4, D_09004B08_39D6C8, 128, 32]
+      - [0x39DEC8, gfx, D_09005308_39DEC8]
+      - [0x39DF38, rgba16, D_09005378_39DF38, 64, 32]
+      - [0x39EF38, gfx, D_09006378_39EF38]
+      - [0x39EFA8, vtx, D_090063E8_39EFA8]
+      - [0x39EFE8, vtx, D_09006428_39EFE8]
+      - [0x39F028, vtx, D_09006468_39F028]
+      - [0x39F068, vtx, D_090064A8_39F068]
+      - [0x39F0A8, vtx, D_090064E8_39F0A8]
+      - [0x39F128, vtx, D_09006568_39F128]
+      - [0x39F1A8, vtx, D_090065E8_39F1A8]
+      - [0x39F1E8, vtx, D_09006628_39F1E8]
+      - [0x39F3A8, vtx, D_090067E8_39F3A8]
+      - [0x39F3E8, vtx, D_09006828_39F3E8]
+      - [0x39F428, vtx, D_09006868_39F428]
+      - [0x39F468, vtx, D_090068A8_39F468]
+      - [0x39F4A8, vtx, D_090068E8_39F4A8]
+      - [0x39F4E8, vtx, D_09006928_39F4E8]
+      - [0x39F528, vtx, D_09006968_39F528]
+      - [0x39F568, vtx, D_090069A8_39F568]
+      - [0x39F5A8, gfx, D_090069E8_39F5A8]
+      - [0x39F608, gfx, D_09006A48_39F608]
+      - [0x39F668, gfx, D_09006AA8_39F668]
+      - [0x39F6C8, gfx, D_09006B08_39F6C8]
+      - [0x39F728, gfx, D_09006B68_39F728]
+      - [0x39F768, gfx, D_09006BA8_39F768]
+      - [0x39F7C8, gfx, D_09006C08_39F7C8]
+      - [0x39F828, gfx, D_09006C68_39F828]
+      - [0x39F858, gfx, D_09006C98_39F858]
+      - [0x39F8B0, gfx, D_09006CF0_39F8B0]
+      - [0x39F908, gfx, D_09006D48_39F908]
+      - [0x39F938, gfx, D_09006D78_39F938]
+      - [0x39F960, gfx, D_09006DA0_39F960]
+      - [0x39F9E8, gfx, D_09006E28_39F9E8]
+      - [0x39FA48, gfx, D_09006E88_39FA48]
+      - [0x39FA78, gfx, D_09006EB8_39FA78]
+      - [0x39FAE0, gfx, D_09006F20_39FAE0]
+      - [0x39FB08, gfx, D_09006F48_39FB08]
+      - [0x39FB70, gfx, D_09006FB0_39FB70]
+      - [0x39FB98, gfx, D_09006FD8_39FB98]
+      - [0x39FBF0, gfx, D_09007030_39FBF0]
+      - [0x39FC50, gfx, D_09007090_39FC50]
+      - [0x39FCA8, gfx, D_090070E8_39FCA8]
+      - [0x39FD08, gfx, D_09007148_39FD08]
+      - [0x39FD48, gfx, D_09007188_39FD48]
+      - [0x39FD90, gfx, D_090071D0_39FD90]
+      - [0x39FDC0, gfx, D_09007200_39FDC0]
+      - [0x39FDF0, gfx, D_09007230_39FDF0]
+      - [0x39FE58, vtx, D_09007298_39FE58]
+      - [0x39FE98, gfx, D_090072D8_39FE98]
+      - [0x39FF18]
   - name: effect_radiating_energy_orb
     dir: effects
     type: code
@@ -6420,39 +6508,41 @@ segments:
     subsegments:
     - [0x404220, c, partner_buff]
     - [0x404E40]
-  - type: group # partner_buff gfx
+  - name: effect_gfx_partner_buff
+    dir: effects/gfx
+    type: code
     start: 0x404F40
-    align: 16
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
     subsegments:
+    - [0x404F40, c, partner_buff]
     - start: 0x404F40
-      type: ci4
-      name: world/cloud
-      flip_y: true
-      width: 32
-      height: 32
-    - [0x405140, palette, world/cloud]
-    - start: 0x405340
-      type: ci4
-      name: world/waterblock
-      flip_y: true
-      width: 32
-      height: 32
-    - [0x405540, palette, world/waterblock]
-    - start: 0x405740
-      type: ci4
-      name: world/yellow_carpet
-      flip_y: true
-      width: 32
-      height: 32
-    - [0x405940, palette, world/yellow_carpet]
-    - start: 0x405B40
-      type: ci4
-      name: world/numbers
-      flip_y: true
-      width: 32
-      height: 160
-    - [0x406540, palette, world/numbers]
-    - [0x406740, bin]
+      type: .data
+      name: partner_buff
+      subsegments:
+      - [0x404F40, ci4, world/cloud, 32, 32]
+      - [0x405140, palette, world/cloud]
+      - [0x405160] # padding
+      - [0x405340, ci4, world/waterblock, 32, 32]
+      - [0x405540, palette, world/waterblock]
+      - [0x405560] # padding
+      - [0x405740, ci4, world/yellow_carpet, 32, 32]
+      - [0x405940, palette, world/yellow_carpet]
+      - [0x405960] # padding
+      - [0x405B40, ci4, world/numbers, 32, 32, world/numbers] # number0
+      - [0x405D40, ci4, world/number1, 32, 32, world/numbers]
+      - [0x405F40, ci4, world/number2, 32, 32, world/numbers]
+      - [0x406140, ci4, world/number3, 32, 32, world/numbers]
+      - [0x406340, ci4, world/number4, 32, 32, world/numbers]
+      - [0x406540, palette, world/numbers]
+      - [0x406560] # padding
+      - [0x406740, gfx, D_09001800_406740]
+      - [0x4068E0, gfx, D_090019A0_4068E0]
+      - [0x406958, gfx, D_09001A18_406958]
+      - [0x4069D0, gfx, D_09001A90_4069D0]
+      - [0x406A48, gfx, D_09001B08_406A48]
+      - [0x406AC0, gfx, D_09001B80_406AC0]
+      - [0x406B38]
   - name: effect_quizmo_assistant
     dir: effects
     type: code
@@ -14703,8 +14793,7 @@ segments:
     vram: 0x802B6000
     subsegments:
     - [0xE2A340, c, use_tweester]
-    - [0xE2A690, data, use_tweester]
-    - [0xE2A6A0]
+    - [0xE2A690]
   - type: code
     name: world_action_sneaky_parasol
     dir: world/action
@@ -14712,8 +14801,7 @@ segments:
     vram: 0x802B6000
     subsegments:
     - [0xE2A6B0, c, sneaky_parasol]
-    - [0xE2B430, data, sneaky_parasol]
-    - [0xE2B440]
+    - [0xE2B430]
   - type: code
     dir: entity/default
     start: 0xE2B530

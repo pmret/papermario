@@ -8,9 +8,6 @@ extern EvtScript N(EVS_ToadHouse_SetDialogue);
 extern EvtScript N(EVS_ToadHouse_ReturnFromRest);
 extern EvtScript N(EVS_MerlonBargeOut);
 
-extern PopupMenu D_80262C38;
-extern s32 D_80262F68;
-
 #include "world/common/npc/Toad_Wander.inc.c"
 #include "world/common/npc/Toad_Patrol.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
@@ -1309,6 +1306,10 @@ StaticNpc N(NpcData_Ninji) = {
     },
     .tattle = MSG_NpcTattle_MAC_PowerHungryToadKid,
 };
+
+BSS PopupMenu D_80262C38;
+BSS s32 D_80262F68;
+BSS s32 D_80262F6C[13];
 
 #include "npc/rowf_and_rhuff.inc.c"
 #include "npc/post_office.inc.c"

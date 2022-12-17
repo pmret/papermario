@@ -2,6 +2,13 @@
 #include "effects.h"
 #include "model.h"
 
+BSS u8 D_80257F20; // r
+BSS u8 D_80257F21; // g
+BSS u8 D_80257F22; // b
+BSS u8 D_80257F23; // a
+BSS u8 oldPrimR, oldPrimG, oldPrimB;
+BSS u8 oldEnvR, oldEnvG, oldEnvB;
+
 static char* N(exit_str_0) = "kmr_05";
 static char* N(exit_str_1) = "kmr_00";
 static char* N(exit_str_2) = "kmr_09";
@@ -180,11 +187,6 @@ ApiStatus func_8024280C_8B287C(Evt* script, s32 isInitialCall) {
 #include "world/common/todo/SyncStatusMenu.inc.c"
 
 #ifdef NON_EQUIVALENT
-extern u8 D_80257F20;
-extern u8 D_80257F21;
-extern u8 D_80257F22;
-extern u8 D_80257F23;
-
 // control flow + data migration
 ApiStatus func_8024295C_8B29CC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -227,10 +229,6 @@ ApiStatus func_80242BA8_8B2C18(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80242BC0_8B2C30(Evt* script, s32 isInitialCall) {
     Bytecode* args;
-
-    static s32 padding;
-    static u8 oldPrimR, oldPrimG, oldPrimB;
-    static u8 oldEnvR, oldEnvG, oldEnvB;
 
     s32 newEnvR, newEnvB, newEnvG;
     s32 newPrimR, newPrimG, newPrimB;

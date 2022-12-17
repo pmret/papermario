@@ -1,6 +1,17 @@
 #include "kmr_20.h"
 
-extern s32 D_8025B2A8;
+BSS s32 D_80253060[6];
+BSS char D_80253078[0x300];
+BSS s32 D_80253378[3];
+BSS s32 D_80253384[2];
+BSS s32 D_8025338C;
+BSS char D_80253390[0x3D88];
+BSS char D_80257118[0x208];
+BSS char D_80257320[0x3D88];
+BSS char D_8025B0A8[0x200];
+BSS s32 D_8025B2A8;
+BSS s32 D_8025B2AC;
+BSS s32 D_8025B2B0;
 
 #include "world/common/entity/Pipe.inc.c"
 
