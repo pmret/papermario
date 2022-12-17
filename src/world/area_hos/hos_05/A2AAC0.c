@@ -96,19 +96,22 @@ extern f32 D_8024AEC4_A35104;
 extern f32 D_8024AEC8_A35108;
 
 // BSS?
-extern f32 D_8024F2C8;
-extern f32 D_8024F2CC;
-extern f32 D_8024F2D8;
-extern f32 D_8024F2DC;
-extern f32 D_8024F2E0;
-extern f32 D_8024F2E4;
-extern f32 D_8024F2E8;
-extern f32 D_8024F2EC;
-extern f32 D_8024F2F0_C0CB70;
-extern f32 D_8024F2F4;
-extern f32 D_8024F2F8;
-extern f32 D_8024F374;
-extern f32 D_8024F378;
+BSS f32 D_8024F2C8;
+BSS f32 D_8024F2CC;
+BSS f32 D_8024F2D0; // unused?
+BSS f32 D_8024F2D4; // unused?
+BSS f32 D_8024F2D8;
+BSS f32 D_8024F2DC;
+BSS f32 D_8024F2E0;
+BSS f32 D_8024F2E4;
+BSS f32 D_8024F2E8;
+BSS f32 D_8024F2EC;
+BSS f32 D_8024F2F0;
+BSS f32 D_8024F2F4;
+BSS f32 D_8024F2F8;
+BSS char D_8024F2FC[0x78]; // unused?
+BSS f32 D_8024F374;
+BSS f32 D_8024F378;
 
 ApiStatus func_80240880_A2AAC0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -595,13 +598,13 @@ ApiStatus func_802423D4_A2C614(Evt* script, s32 isInitialCall) {
     func_802410E4_A2B324(4, 130.0f, 270.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2E4);
     func_802410E4_A2B324(4, 30.0f, 0.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2E8);
     func_802410E4_A2B324(4, 232.0f, 177.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2EC);
-    func_802410E4_A2B324(4, 0.0f, 0.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2F0_C0CB70);
+    func_802410E4_A2B324(4, 0.0f, 0.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2F0);
     func_80240D54_A2AF94(0, D_8024F2E0);
     camera->panActive = TRUE;
     camera->controlSettings.boomLength = D_8024F2E4;
     camera->movePos.x = D_8024F2E8;
     camera->movePos.y = D_8024F2EC;
-    camera->movePos.z = D_8024F2F0_C0CB70;
+    camera->movePos.z = D_8024F2F0;
 
     D_80249A80_A33CC0++;
     if (D_80249A80_A33CC0 <= 90) {

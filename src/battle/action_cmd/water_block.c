@@ -107,6 +107,8 @@ HudScript* D_802AB184_42C674[] = {
     &HES_WaterBlock1, &HES_WaterBlock2, &HES_WaterBlock3, &HES_WaterBlock4, &HES_WaterBlock4, &HES_WaterBlock4, &HES_WaterBlock4, &HES_WaterBlock4, &HES_WaterBlock4, 0, 0
 };
 
+extern s32 actionCmdTableWaterBlock[];
+
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;

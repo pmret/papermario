@@ -10,14 +10,14 @@
 extern HudScript* N(D_802A2848_732B48)[];
 extern s32 N(D_802A2858_732B58)[];
 
-extern s32 D_802A2DD8[5];
-extern s32 D_802A2DE4;
-extern s32 D_802A2DEC;
-extern s32 D_802A2DF0;
-extern s32 D_802A2DF4;
-extern s32 D_802A2DF8;
-extern s32 D_802A2DFC;
-extern s32 D_802A2E00;
+BSS s32 D_802A2DD4; // unused?
+BSS s32 D_802A2DD8[5];
+BSS s32 D_802A2DEC;
+BSS s32 D_802A2DF0;
+BSS s32 D_802A2DF4;
+BSS s32 D_802A2DF8;
+BSS s32 D_802A2DFC;
+BSS s32 D_802A2E00;
 
 void N(func_802A123C_73153C(void)) {
     s32 var_s3;

@@ -7,6 +7,8 @@ s32 D_802A9860_42F680[8] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 
 BSS s32 D_802A98C0;
 
+extern s32 actionCmdTableSpinySurge[];
+
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;

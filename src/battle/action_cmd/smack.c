@@ -33,6 +33,8 @@ s32 D_802A9A20_42EDC0[] = {
     0x23, 0x3C, 0x50, 0x63, 0xC8, 0x00,
 };
 
+extern s32 actionCmdTableSmack[];
+
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;

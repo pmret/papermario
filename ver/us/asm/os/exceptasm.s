@@ -15,7 +15,7 @@ dlabel jtbl_80099DA0
 
 .section .text, "ax"
 
-glabel func_8006A9F0
+glabel __osExceptionPreamble
 /* 45DF0 8006A9F0 3C1A8007 */  lui       $k0, %hi(osExceptionPreamble)
 /* 45DF4 8006A9F4 275AAA00 */  addiu     $k0, $k0, %lo(osExceptionPreamble)
 /* 45DF8 8006A9F8 03400008 */  jr        $k0

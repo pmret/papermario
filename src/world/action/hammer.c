@@ -17,7 +17,9 @@ typedef struct HammerHitData {
     /* 0x1C */ s32 unk_1C;
 } HammerHitData;
 
-extern HammerHitData* HammerHit;
+BSS HammerHitData D_802B6E90;
+
+HammerHitData* HammerHit = &D_802B6E90;
 
 void func_802B6820_E256F0(void);
 
