@@ -89,13 +89,13 @@ enum {
 API_CALLABLE(N(UpdateChandelier)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
+    Chandelier* chandelier;
+    Model* model;
     Matrix4f tempMtx;
-    f32 nextSwingAngle;
     f32 lastDropDistance;
+    f32 nextSwingAngle;
     s32 motionsDone;
     s32 cabinetPos;
-    Model* model;
-    Chandelier* chandelier;
     s32 i;
 
     if (isInitialCall) {
@@ -252,8 +252,7 @@ API_CALLABLE(N(UpdateChandelier)) {
     guTranslateF(tempMtx, 0.0f, 300.0f, 0.0f);
     guMtxCatF(model->transformMatrix, tempMtx, model->transformMatrix);
     guMtxCatF(chandelier->transformMtx, model->transformMatrix, model->transformMatrix);
-    model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX;
-    model->flags |= MODEL_FLAGS_HAS_TRANSFORM_APPLIED;
+    model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED;
 
     for (i = 1; i < ARRAY_COUNT(chandelier->models); i++) {
         copy_matrix(model->transformMatrix, chandelier->models[i]->transformMatrix);

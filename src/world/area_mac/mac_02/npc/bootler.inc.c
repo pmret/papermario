@@ -8,7 +8,7 @@ EvtScript N(D_8024ACA4_82DF64) = {
     EVT_END_IF
     EVT_LOOP(10)
         EVT_ADDF(LVar0, LVar1)
-        EVT_CALL(func_802CFD30, 9, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, 9, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN

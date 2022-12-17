@@ -89,10 +89,10 @@ EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
     EVT_END_IF
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_F8, 0)
     EVT_CALL(func_802CFE2C, NPC_SELF, 0x00002000)
-    EVT_CALL(func_802CFD30, NPC_SELF, 5, 6, 1, 1, 0)
+    EVT_CALL(func_802CFD30, NPC_SELF, FOLD_TYPE_5, 6, 1, 1, 0)
     EVT_WAIT(15)
     EVT_CALL(func_802CFE2C, NPC_SELF, 0x00002000)
-    EVT_CALL(func_802CFD30, NPC_SELF, 3, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_SELF, FOLD_TYPE_3, 0, 0, 0, 0)
     EVT_THREAD
         EVT_WAIT(2)
         EVT_SETF(LVar0, EVT_FLOAT(0.0))
@@ -107,7 +107,7 @@ EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.6))
     EVT_CALL(NpcJump0, NPC_SELF, -35, 0, 25, 23)
-    EVT_CALL(func_802CFD30, NPC_SELF, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_SELF, FOLD_TYPE_NONE, 0, 0, 0, 0)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_NO_AI, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, FALSE)

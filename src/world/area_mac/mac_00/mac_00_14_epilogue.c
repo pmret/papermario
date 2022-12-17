@@ -29,7 +29,7 @@ EvtScript N(EVS_LuigiExitPipe_Epilogue) = {
     EVT_WAIT(2)
     EVT_CALL(PlaySoundAtNpc, NPC_Luigi_Epilogue, SOUND_ENTER_PIPE, 0)
     EVT_CALL(func_802CFE2C, 25, 0x100)
-    EVT_CALL(func_802CFD30, 25, 5, 2, 1, 1, 0)
+    EVT_CALL(func_802CFD30, 25, FOLD_TYPE_5, 2, 1, 1, 0)
     EVT_CALL(SetNpcPos, NPC_Luigi_Epilogue, -100, -10, -370)
     EVT_CALL(GetNpcPos, NPC_Luigi_Epilogue, LVar0, LVar1, LVar2)
     EVT_LOOP(45)
@@ -37,7 +37,7 @@ EvtScript N(EVS_LuigiExitPipe_Epilogue) = {
         EVT_CALL(SetNpcPos, NPC_Luigi_Epilogue, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(func_802CFD30, 25, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, 25, FOLD_TYPE_NONE, 0, 0, 0, 0)
     EVT_CALL(SetNpcPos, NPC_Luigi_Epilogue, -100, 30, -370)
     EVT_WAIT(3)
     EVT_CALL(EnableNpcShadow, NPC_Luigi_Epilogue, TRUE)
