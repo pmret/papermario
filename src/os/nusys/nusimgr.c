@@ -9,6 +9,8 @@ extern s32 D_800A08C0;
 
 static void nuSiMgrThread(void* arg);
 
+extern u64 siMgrStack[NU_SI_STACK_SIZE/sizeof(u64)];
+
 u8 nuSiMgrInit(void) {
     u8 pattern;
     OSContStatus status[NU_CONT_MAXCONTROLLERS];
@@ -24,7 +26,7 @@ u8 nuSiMgrInit(void) {
         }
     }
 
-    osCreateThread(&siMgrThread, NU_SI_THREAD_ID, nuSiMgrThread, NULL, &D_800A08C0, NU_SI_THREAD_PRI);
+    osCreateThread(&siMgrThread, NU_SI_THREAD_ID, nuSiMgrThread, NULL, (siMgrStack + NU_SI_STACK_SIZE/sizeof(u64)), NU_SI_THREAD_PRI);
     osStartThread(&siMgrThread);
     return pattern;
 }

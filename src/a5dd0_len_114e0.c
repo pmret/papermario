@@ -10,10 +10,10 @@
 #ifdef SHIFT
 #define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
 #else
-#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shift
-#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shift
+#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shiftability fix
+#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shiftability fix
 #define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
-#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shift
+#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shiftability fix
 #endif
 
 typedef struct Fog {

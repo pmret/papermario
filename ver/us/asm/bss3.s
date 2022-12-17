@@ -722,4 +722,7 @@ dlabel CreateEntityVarArgBuffer
 .space 0x00000010
 
 dlabel D_8015C7E0
-.space 4
+.space 0x7820
+
+dlabel D_80164000
+.space 0x32C60

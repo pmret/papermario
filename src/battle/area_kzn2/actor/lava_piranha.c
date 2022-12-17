@@ -278,6 +278,7 @@ enum {
     VINE_4      = 4,
 };
 
+// TODO shiftability fix
 enum {
     VINE_0_BASE = 0x80234000,
     VINE_1_BASE = 0x80231000,

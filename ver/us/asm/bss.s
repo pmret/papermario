@@ -254,7 +254,10 @@ dlabel nuSiMesgBuf
 .space 0x00000020
 
 dlabel siMgrThread
-.space 0x000021b0
+.space 0x1b0
+
+dlabel siMgrStack
+.space 0x2000
 
 dlabel blendedCamSettings
 .space 0x0000001c
