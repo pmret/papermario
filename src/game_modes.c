@@ -25,6 +25,8 @@ s32 D_80077420[] = {
     0x000000D4, 0x000000D5, 0x000000D6, 0x000000D7, 0x000000D8, 0x000000D9, 0x000000DA,
 };
 
+// These StateFunc[] should really be GameMode but they seem to sometimes only take up 0x14 bytes of data rather than 0x18 like they should if they were really a struct.
+
 StateFunc gameModeBlueprints[] = { NULL, state_init_startup, state_step_startup, NULL, state_drawUI_startup };
 
 StateFunc D_800776FC[] = { NULL, state_init_logos, state_step_logos, NULL, state_drawUI_logos };
@@ -67,9 +69,26 @@ StateFunc D_80077828[] = { NULL, state_init_intro, state_step_intro, NULL, state
 
 StateFunc D_8007783C[] = { NULL, state_init_demo, state_step_demo, NULL, state_drawUI_demo };
 
-StateFunc* gameModeMap[] = {
-    gameModeBlueprints, D_800776FC, D_80077710, D_80077724, D_80077774, D_80077738, D_8007774C, D_80077760, D_80077788,
-    D_8007779C, D_800777B0, D_800777C4, D_800777D8, D_800777EC, D_80077800, D_80077814, D_80077828, D_8007783C, NULL,
+GameMode* gameModeMap[] = {
+    (GameMode*) gameModeBlueprints,
+    (GameMode*) D_800776FC,
+    (GameMode*) D_80077710,
+    (GameMode*) D_80077724,
+    (GameMode*) D_80077774,
+    (GameMode*) D_80077738,
+    (GameMode*) D_8007774C,
+    (GameMode*) D_80077760,
+    (GameMode*) D_80077788,
+    (GameMode*) D_8007779C,
+    (GameMode*) D_800777B0,
+    (GameMode*) D_800777C4,
+    (GameMode*) D_800777D8,
+    (GameMode*) D_800777EC,
+    (GameMode*) D_80077800,
+    (GameMode*) D_80077814,
+    (GameMode*) D_80077828,
+    (GameMode*) D_8007783C,
+    NULL,
     NULL,
 };
 

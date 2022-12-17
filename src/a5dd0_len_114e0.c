@@ -2864,7 +2864,7 @@ GameMode* set_game_mode_slot(s32 i, GameMode* mode) {
 
     ASSERT(i < ARRAY_COUNT(gMainGameState));
 
-    gameMode->flags = 1 | 2;
+    gameMode->flags = 2 | 1;
     gameMode->init = mode->init;
     gameMode->step = mode->step;
     gameMode->render = mode->render;
