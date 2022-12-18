@@ -7,7 +7,7 @@ import png
 if __name__ == "__main__":
     infile, outfile = argv[1:3]
 
-    if len(argv) > 3:
+    if len(argv) > 3 and argv[3]:
         cname = argv[3]
     else:
         cname = re.sub(r"[^0-9a-zA-Z_]", "_", infile)
