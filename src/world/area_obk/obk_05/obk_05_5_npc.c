@@ -6,6 +6,18 @@
 #define TRAFFIC_BOO_START_Z -430.0f
 #include "../TrafficBoos.inc.c"
 
+EvtScript N(EVS_NpcInit_TrafficBoo1) = {
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_NpcInit_TrafficBoo2) = {
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
+    EVT_RETURN
+    EVT_END
+};
+
 StaticNpc N(NpcData_Boo_01)[] = {
     {
         .id = NPC_Boo_01,

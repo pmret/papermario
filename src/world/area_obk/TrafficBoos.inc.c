@@ -108,15 +108,3 @@ EvtScript N(EVS_NpcIdle_TrafficBoo) = {
     EVT_RETURN
     EVT_END
 };
-
-EvtScript N(EVS_NpcInit_TrafficBoo1) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcInit_TrafficBoo2) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
-    EVT_RETURN
-    EVT_END
-};

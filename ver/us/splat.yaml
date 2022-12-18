@@ -12512,16 +12512,14 @@ segments:
     start: 0xBCEBF0
     vram: 0x80240000
     subsegments:
-    - [0xBCEBF0, c]
-    - [0xBCEEB0, c]
-    - [0xBCF0F0, c]
-    - [0xBD0780, data]
-    - [0xBD0840, data]
-    - [0xBD0BA0, data]
-    - [0xBD0DB0, data]
-    - [0xBD14F0, data]
-    - [0xBD1C80, data]
-    - [0xBD3860]
+    - [0xBCEBF0, c, obk_07_0_header]
+    - [0xBCEBF0, c, obk_07_1_music]
+    - [0xBCEBF0, c, obk_07_2_main]
+    - [0xBCEBF0, c, obk_07_3_entity]
+    - [0xBCEEB0, c, obk_07_4_fireplace]
+    - [0xBCEEB0, c, obk_07_5_npc]
+    - [0xBCF0F0, c, obk_07_6_phonograph]
+    - [0xBD0780]
   - name: obk_08
     dir: world/area_obk/obk_08
     type: code

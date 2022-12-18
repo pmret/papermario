@@ -6,9 +6,21 @@
 #define TRAFFIC_BOO_START_Z -300.0f
 #include "../TrafficBoos.inc.c"
 
+EvtScript N(EVS_NpcInit_TrafficBoo1) = {
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_NpcInit_TrafficBoo2) = {
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
+    EVT_RETURN
+    EVT_END
+};
+
 StaticNpc N(NpcData_Boos)[] = {
     {
-        .id = NPC_Boo_01,
+        .id = NPC_TrafficBoo1,
         .settings = &N(NpcSettings_Boo),
         .pos = { 523.0f, -139.0f, 193.0f },
         .yaw = 0,
@@ -18,7 +30,7 @@ StaticNpc N(NpcData_Boos)[] = {
         .animations = NORMAL_BOO_ANIMS,
     },
     {
-        .id = NPC_Boo_02,
+        .id = NPC_TrafficBoo2,
         .settings = &N(NpcSettings_Boo),
         .pos = { 473.0f, -122.0f, 247.0f },
         .yaw = 0,

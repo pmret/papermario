@@ -12,13 +12,13 @@
 #include "sprite/npc/Boo.h"
 
 enum {
-    NPC_Boo_01      = 0,
-    NPC_Boo_02      = 1,
+    NPC_TrafficBoo1     = 0,
+    NPC_TrafficBoo2     = 1,
 };
 
 enum {
-    MV_CurrentMapRegion = MapVar(0),
-    MV_Unk_01       = MapVar(1),
+    MV_CurrentMapRegion     = MapVar(0),
+    MV_LastMapRegion        = MapVar(1),
 };
 
 #define NAMESPACE obk_02

@@ -1,6 +1,8 @@
 #include "obk_02.h"
 
 enum {
+    REGION_INIT_LAST    = -2,
+    REGION_INIT         = -1,
     REGION_UPPER_FLOOR  = 0,
     REGION_STAIRS       = 1,
     REGION_LOWER_FLOOR  = 2,
@@ -157,10 +159,10 @@ EvtScript N(EVS_ManageRegionVisibility) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnStep_UpperFloor)), TRIGGER_FLOOR_TOUCH, COLLIDER_o296, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnStep_Stairs)), TRIGGER_FLOOR_TOUCH, COLLIDER_o309, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnStep_LowerFloor)), TRIGGER_FLOOR_TOUCH, COLLIDER_o291, 1, 0)
-    EVT_SET(MV_CurrentMapRegion, -1)
-    EVT_SET(MV_Unk_01, -2)
+    EVT_SET(MV_CurrentMapRegion, REGION_INIT)
+    EVT_SET(MV_LastMapRegion, REGION_INIT_LAST)
     EVT_LOOP(0)
-        EVT_IF_NE(MV_CurrentMapRegion, MV_Unk_01)
+        EVT_IF_NE(MV_CurrentMapRegion, MV_LastMapRegion)
             EVT_SWITCH(MV_CurrentMapRegion)
                 EVT_CASE_EQ(REGION_UPPER_FLOOR)
                     EVT_EXEC_WAIT(N(EVS_DisableModels_LowerFloor))
@@ -173,7 +175,7 @@ EvtScript N(EVS_ManageRegionVisibility) = {
                     EVT_EXEC_WAIT(N(EVS_DisableModels_UpperFloor))
             EVT_END_SWITCH
         EVT_END_IF
-        EVT_SET(MV_Unk_01, MV_CurrentMapRegion)
+        EVT_SET(MV_LastMapRegion, MV_CurrentMapRegion)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
