@@ -554,7 +554,7 @@ AuResult au_load_song_files(u32 songID, BGMHeader* bgmFile, BGMPlayer* player) {
 
         au_read_rom(fileEntry.offset, arg1_copy, fileEntry.data & 0xFFFFFF);
 
-        for (i = 0 ; i < ARRAY_COUNT(songInfo->bkFileIndex); i++) {
+        for (i = 0; i < ARRAY_COUNT(songInfo->bkFileIndex); i++) {
             bkFileIndex = songInfo->bkFileIndex[i];
             if (bkFileIndex != 0) {
                 bkFileEntry = &soundData->sbnFileList[bkFileIndex];
@@ -598,7 +598,7 @@ AuResult func_80053E58(s32 songID, BGMHeader* bgmFile) {
     if (status == AU_RESULT_OK) {
         au_read_rom(sbnEntry.offset, bgmFile, sbnEntry.data & 0xFFFFFF);
 
-        for (i = 0 ; i < ARRAY_COUNT(songInfo->bkFileIndex); i++) {
+        for (i = 0; i < ARRAY_COUNT(songInfo->bkFileIndex); i++) {
             bkFileIndex = songInfo->bkFileIndex[i];
             if (bkFileIndex != 0) {
                 bkFileEntry = &soundData->sbnFileList[bkFileIndex];
@@ -832,7 +832,7 @@ s32 snd_load_BGM(s32 arg0) {
         }
 
         if (song->bgmFileIndex == arg0) {
-            for (i = 0 ; i < ARRAY_COUNT(song->bkFileIndex); i++) {
+            for (i = 0; i < ARRAY_COUNT(song->bkFileIndex); i++) {
                 u16 bkFileIndex = song->bkFileIndex[i];
                 if (bkFileIndex != 0) {
                     SBNFileEntry* bkFileEntry = &globals->sbnFileList[bkFileIndex];

@@ -160,7 +160,7 @@ void func_80242A3C_8EE85C(UnkKmr20* arg0) {
     arg0->equippedBadges = count;
 
     count = 0;
-    for (i = 0; ; i++) {
+    for (i = 0; TRUE; i++) {
         if (D_80252DC0_8FEBE0[i] != 0) {
             if (evt_get_variable(NULL, D_80252DC0_8FEBE0[i]) != 0) {
                 count++;

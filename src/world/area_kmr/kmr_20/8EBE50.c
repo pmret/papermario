@@ -7,11 +7,11 @@ extern HudScript HES_Item_Unused_08B_disabled;
 extern HudScript HES_Item_Unused_08C;
 extern HudScript HES_Item_Unused_08C_disabled;
 
-extern s32 D_80244D24_8F0B44[];
-extern s32 D_80244D54_8F0B74[];
+extern s32 D_80244D24_8F0B44[12]; // TODO remove hard-coded count when migrated
+extern s32 D_80244D54_8F0B74[12];
 extern s32 D_80244D84_8F0BA4[];
 extern s32 D_80244DB4_8F0BD4[];
-extern s32 D_80244FA0_8F0DC0[];
+extern s32 D_80244FA0_8F0DC0[12]; // TODO remove hard-coded count when migrated
 extern s32 D_80244FD0_8F0DF0[];
 
 BSS PopupMenu D_80253060;
@@ -81,7 +81,7 @@ ApiStatus func_802406C8_8EC4E8(Evt* script, s32 isInitialCall) {
         case 0:
             numEntries = 0;
 
-            for (i = 0; i < 12; i++) {
+            for (i = 0; i < ARRAY_COUNT(D_80244D24_8F0B44); i++) {
                 cond = FALSE;
                 temp_s0 = D_80244D24_8F0B44[i];
                 switch (temp_s0) {
@@ -227,7 +227,7 @@ ApiStatus func_80240B54_8EC974(Evt* script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 0:
             numEntries = 0;
-            for (i = 0; i < 12; i++) {
+            for (i = 0; i < ARRAY_COUNT(D_80244FA0_8F0DC0); i++) {
                 if (evt_get_variable(NULL, GameByte(0)) >= D_80244FA0_8F0DC0[i]) {
                     menu->ptrIcon[numEntries] = &HES_Item_Unused_08C;
                     menu->userIndex[numEntries] = i;

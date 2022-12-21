@@ -1,7 +1,6 @@
 #include "jan_04.h"
 
 #define PARTY_IMAGE "party_opuku"
-// #include "world/common/todo/LoadPartyImage.inc.c"
 
 BSS PAL_BIN N(palette)[256];
 BSS IMG_BIN N(raster)[0x3D90]; // similar to LoadPartyImage include but with D_8024A290 in the middle randomly

@@ -6,5 +6,3 @@ BSS char D_8025C0D0;
 
 #define PARTY_IMAGE "party_kurio"
 #include "world/common/todo/LoadPartyImage.inc.c"
-
-// const char padding[0x220] = {0};
