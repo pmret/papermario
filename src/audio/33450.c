@@ -32,7 +32,7 @@ static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* filter, s32 tsam, s32 n
     s32 endAddr;
     s32 endAlign;
     s32 paddedSize;
-    
+
     if (nbytes > 0) {
         endAddr = filter->dc_dmaFunc(filter->dc_memin, nbytes, filter->dc_dmaState, filter->instrument->unk_25); // ALDMAproc has an extra arg added
         endAlign = endAddr & 7;
@@ -42,13 +42,13 @@ static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* filter, s32 tsam, s32 n
     } else {
         endAlign = 0;
     }
-    
+
     if (flags & A_LOOP) {
         aSetLoop(cmdBufPos++, K0_TO_PHYS(filter->dc_lstate));
     }
 
     n_aADPCMdec(cmdBufPos++, filter->dc_state, flags, tsam << 1, endAlign, output);
-    
+
     filter->dc_first = 0;
     return cmdBufPos;
 }
@@ -71,7 +71,7 @@ static s16 _getRate(f64 vol, f64 tgt, s32 count, u16* ratel) {
         }
     }
     inv = (1.0 / count);
-    
+
     if (tgt < 1.0) {
         tgt = 1.0;
     }
@@ -82,11 +82,11 @@ static s16 _getRate(f64 vol, f64 tgt, s32 count, u16* ratel) {
     a = (tgt - vol) * inv * 8.0;
     a_int = a;
     c_int = (a_int - 1);
-    
+
     b = (a - a_int) + 1.0;
     b_int = b;
     c_int += b_int;
-    
+
     *ratel = (b - b_int) * 0xFFFF;
     return c_int;
 }

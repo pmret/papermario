@@ -324,7 +324,7 @@ typedef struct AuLoadFilter {
     /* 0x0C */ ALRawLoop dc_loop;
     /* 0x18 */ struct Instrument* instrument;
     /* 0x1C */ s32 dc_bookSize;
-    /* 0x20 */ s32 (*dc_dmaFunc)(s32 addr, s32 len, void* state, u8 unk); // ALDMAproc with extra arg
+    /* 0x20 */ s32 (*dc_dmaFunc)(void* addr, s32 len, void* state, u8 unk); // ALDMAproc with extra arg
     /* 0x24 */ NUDMAState* dc_dmaState;
     /* 0x28 */ s32 dc_sample;
     /* 0x2C */ s32 dc_lastsam;

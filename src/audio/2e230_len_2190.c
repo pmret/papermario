@@ -554,7 +554,7 @@ AuResult au_load_song_files(u32 songID, BGMHeader* bgmFile, BGMPlayer* player) {
 
         au_read_rom(fileEntry.offset, arg1_copy, fileEntry.data & 0xFFFFFF);
 
-        for (i = 0 ; i < ARRAY_COUNT(songInfo->bkFileIndex); i++) {
+        for (i = 0; i < ARRAY_COUNT(songInfo->bkFileIndex); i++) {
             bkFileIndex = songInfo->bkFileIndex[i];
             if (bkFileIndex != 0) {
                 bkFileEntry = &soundData->sbnFileList[bkFileIndex];
@@ -598,7 +598,7 @@ AuResult func_80053E58(s32 songID, BGMHeader* bgmFile) {
     if (status == AU_RESULT_OK) {
         au_read_rom(sbnEntry.offset, bgmFile, sbnEntry.data & 0xFFFFFF);
 
-        for (i = 0 ; i < ARRAY_COUNT(songInfo->bkFileIndex); i++) {
+        for (i = 0; i < ARRAY_COUNT(songInfo->bkFileIndex); i++) {
             bkFileIndex = songInfo->bkFileIndex[i];
             if (bkFileIndex != 0) {
                 bkFileEntry = &soundData->sbnFileList[bkFileIndex];
@@ -820,7 +820,39 @@ void au_load_PRG(AuGlobals* arg0, s32 romAddr) {
     }
 }
 
-INCLUDE_ASM(s32, "audio/2e230_len_2190", snd_load_BGM);
+s32 snd_load_BGM(s32 arg0) {
+    AuGlobals* globals = gSoundGlobals;
+    InitSongEntry* song = globals->songList;
+    s32 ret = 0;
+    s32 i;
+
+    while (TRUE) {
+        if (song->bgmFileIndex == 0xFFFF) {
+            return ret;
+        }
+
+        if (song->bgmFileIndex == arg0) {
+            for (i = 0; i < ARRAY_COUNT(song->bkFileIndex); i++) {
+                u16 bkFileIndex = song->bkFileIndex[i];
+                if (bkFileIndex != 0) {
+                    SBNFileEntry* bkFileEntry = &globals->sbnFileList[bkFileIndex];
+                    SBNFileEntry fileEntry;
+
+                    fileEntry.offset = (bkFileEntry->offset & 0xFFFFFF) + globals->baseRomOffset;
+                    fileEntry.data = bkFileEntry->data;
+                    if ((fileEntry.data >> 0x18) == 0x30) {
+                        snd_load_BK(fileEntry.offset, i);
+                    } else {
+                        ret = 0x66;
+                    }
+                }
+            }
+
+            return ret;
+        }
+        song++;
+    }
+}
 
 InstrumentGroup* au_get_BK_instruments(s32 bankGroup, u32 bankIndex) {
     InstrumentGroup* ret = NULL;
@@ -912,7 +944,7 @@ SoundBank* au_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, 
                     keepReading = FALSE;
                 }
                 break;
-                      
+
             case BK_READ_PROCESS_CR:
                 size = ALIGN16_(header->instrumetsSize)
                     + ALIGN16_(header->unkSizeA)
@@ -923,11 +955,11 @@ SoundBank* au_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, 
                     bank = alHeapAlloc(heap, 1, size);
                 }
                 au_read_rom(bkFileOffset, bank, size);
-                
+
                 group = au_get_BK_instruments(bankGroup, bankIndex);
                 inst = (*group);
                 instrumentCount = 0;
-                
+
                 for (i = 0; i < ARRAY_COUNT(header->instruments); inst++, i++) {
                     u16 instOffset = header->instruments[i];
                     if (instOffset != 0) {
@@ -937,7 +969,7 @@ SoundBank* au_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, 
                         *inst = NULL;
                     }
                 }
-                
+
                 if (instrumentCount != 0) {
                     readState = BK_READ_SWIZZLE_CR;
                 } else {
