@@ -49,7 +49,7 @@ typedef struct Model {
     /* 0x04 */ Mtx* currentMatrix;
     /* 0x08 */ ModelNode* modelNode;
     /* 0x0C */ ModelGroupData* groupData;
-    /* 0x10 */ s32* currentSpecialMatrix;
+    /* 0x10 */ Mtx* currentSpecialMatrix;
     /* 0x14 */ char unk_14[4];
     /* 0x18 */ Mtx specialMatrix;
     /* 0x58 */ Matrix4f transformMatrix;
@@ -57,7 +57,7 @@ typedef struct Model {
     /* 0xA4 */ u8 texPannerID;
     /* 0xA5 */ u8 customGfxIndex;
     /* 0xA6 */ s8 renderMode;
-    /* 0xA7 */ s8 matrixMode;
+    /* 0xA7 */ u8 matrixMode;
     /* 0xA8 */ u8 textureID;
     /* 0xA9 */ s8 textureVariation;
     /* 0xAA */ char unk_AA[6];
@@ -68,14 +68,14 @@ typedef struct ModelTransformGroup {
     /* 0x02 */ u16 groupModelID;
     /* 0x04 */ Mtx* matrixRDP_N;
     /* 0x08 */ ModelNode* modelNode;
-    /* 0x0C */ Matrix4s* transformMtx;
+    /* 0x0C */ Mtx* transformMtx;
     /* 0x10 */ Mtx matrixA;
     /* 0x50 */ Matrix4f matrixB;
     /* 0x90 */ Vec3f center;
     /* 0x9C */ u8 minChildModelIndex;
     /* 0x9D */ u8 maxChildModelIndex;
     /* 0x9E */ u8 renderMode;
-    /* 0x9F */ s8 matrixMode;
+    /* 0x9F */ u8 matrixMode;
 } ModelTransformGroup; // size = 0xA0
 
 typedef Model* ModelList[MAX_MODELS];

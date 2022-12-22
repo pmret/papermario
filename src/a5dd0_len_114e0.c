@@ -1119,6 +1119,7 @@ void render_transform_group(void* group);
 void func_801180E8(TextureHeader*, Gfx**, IMG_PTR raster, PAL_PTR palette, IMG_PTR auxRaster, PAL_PTR auxPalette, u8, u8, u16, u16);
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth);
 s32 is_identity_fixed_mtx(Mtx* mtx);
+void build_custom_gfx(void);
 
 void update_entities(void) {
     s32 i;
@@ -3280,7 +3281,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     } else {
         model->currentMatrix = NULL;
         guMtxIdent(&model->specialMatrix);
-        model->flags |= 0x2000;
+        model->flags |= MODEL_FLAGS_FLAG_2000;
     }
 
     guMtxIdentF(model->transformMatrix);
@@ -3333,8 +3334,99 @@ void func_80116674(void) {
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80116674);
 #endif
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80116698);
+void func_80116698(void) {
+    Matrix4f sp20;
+    Matrix4f sp60;
+    f32 mX, mY, mZ;
+    f32 mtgX, mtgY, mtgZ;
+    Model* model;
+    Mtx* mtx;
+    ModelBoundingBox* bb;
+    ModelTransformGroup* mtg;
+    s32 i;
 
+    for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
+        model = (*gCurrentModels)[i];
+        if (model != NULL && (model->flags != 0) && !(model->flags & 4)) {
+            if (!(model->flags & MODEL_FLAGS_USES_TRANSFORM_MATRIX)) {
+                if (model->matrixMode != 0) {
+                    model->matrixMode--;
+                    if (model->matrixMode <= 0) {
+                        model->specialMatrix = *model->currentSpecialMatrix;
+                    }
+                    mtx = model->currentSpecialMatrix;
+                    model->currentSpecialMatrix = &gDisplayContext->matrixStack[gMatrixListPos++];
+                    *model->currentSpecialMatrix = *mtx;
+                } else {
+                    model->currentSpecialMatrix = &model->specialMatrix;
+                }
+            } else {
+                model->flags &= ~MODEL_FLAGS_USES_TRANSFORM_MATRIX;
+                model->matrixMode = 2;
+                mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
+                if (model->currentMatrix == NULL || (model->flags & 8)) {
+                    guMtxF2L(model->transformMatrix, mtx);
+                } else {
+                    guMtxL2F(sp20, model->currentMatrix);
+                    guMtxCatF(model->transformMatrix, sp20, sp20);
+                    guMtxF2L(sp20, mtx);
+                }
+                model->flags &= ~MODEL_FLAGS_FLAG_2000;
+                bb = (ModelBoundingBox*) get_model_property(model->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
+                mX = (bb->minX + bb->maxX) * 0.5f;
+                mY = (bb->minY + bb->maxY) * 0.5f;
+                mZ = (bb->minZ + bb->maxZ) * 0.5f;
+                guMtxXFML(mtx, mX, mY, mZ, &mX, &mY, &mZ);
+                model->currentSpecialMatrix = mtx;
+                model->center.x = mX;
+                model->center.y = mY;
+                model->center.z = mZ;
+                model->flags &= 0xFDFF;
+            }
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT((*gCurrentTransformGroups)); i++) {
+        mtg = (*gCurrentTransformGroups)[i];
+        if (mtg != NULL && mtg->flags != 0 && !(mtg->flags & MODEL_TRANSFORM_GROUP_FLAGS_4)) {
+            if (!(mtg->flags & MODEL_TRANSFORM_GROUP_FLAGS_1000)) {
+                if (mtg->matrixMode != 0) {
+                    mtg->matrixMode--;
+                    if (!(mtg->matrixMode & 0xFF)) {
+                        mtg->matrixA = *mtg->transformMtx;
+                    }
+                    mtx = mtg->transformMtx;
+                    mtg->transformMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
+                    *mtg->transformMtx = *mtx;
+                } else {
+                    mtg->transformMtx = &mtg->matrixA;
+                }
+            } else {
+                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAGS_1000;
+                mtg->matrixMode = 2;
+                mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
+                if (mtg->matrixRDP_N == NULL) {
+                    guMtxF2L(mtg->matrixB, mtx);
+                } else {
+                    guMtxL2F(sp60, mtg->matrixRDP_N);
+                    guMtxCatF(mtg->matrixB, sp60, sp60);
+                    guMtxF2L(sp60, mtx);
+                }
+                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAGS_2000;
+                bb = (ModelBoundingBox*) get_model_property(mtg->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
+                mtgX = (bb->minX + bb->maxX) * 0.5f;
+                mtgY = (bb->minY + bb->maxY) * 0.5f;
+                mtgZ = (bb->minZ + bb->maxZ) * 0.5f;
+                guMtxXFML(mtx, mtgX, mtgY, mtgZ, &mtgX, &mtgY, &mtgZ);
+                mtg->transformMtx = mtx;
+                mtg->center.x = mtgX;
+                mtg->center.y = mtgY;
+                mtg->center.z = mtgZ;
+            }
+        }
+    }
+    build_custom_gfx();
+}
 
 void render_models(void) {
     RenderTask rt;

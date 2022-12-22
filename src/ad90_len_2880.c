@@ -1,73 +1,67 @@
 #include "common.h"
 
+void update_camera_mode_6(Camera* camera);
 // types, floats, and other shtuff
 #ifdef NON_EQUIVALENT
 void update_camera_mode_6(Camera* camera) {
-    f32 cosBoom;
-    f32 cosRotation;
-    f32 deltaX;
-    f32 temp_f24_2;
-    f32 deltaZ;
+    f32 xDiff, yDiff, zDiff;
     f32 boomYaw;
-    f32 rotation;
-    f32 sinBoom;
-    f32 sinRotation;
+    f32 sinBoomYaw;
+    f32 cosBoomYaw;
+    f32 trueRotX;
+    f32 sinRotX;
+    f32 cosRotX;
+    f32 temp_f24_2;
     f32 temp_f30;
-    f32 deltaY;
-    s32 temp_lo;
+    s32 var_v1;
 
-    if (camera->unk_06 != 0 || camera->unk_08 != 0) {
+    if (camera->unk_06 != 0 || camera->changingMap) {
         camera->unk_06 = 0;
-        camera->unk_08 = 0;
-        camera->unk_1C = 0;
-        camera->unk_1E = 100;
-        camera->unk_20 = 100;
-        camera->unk_22 = 0;
-        camera->unk_24 = 0;
-        camera->unk_26 = 0;
+        camera->changingMap = 0;
+        camera->auxPitch = 0;
+        camera->auxBoomLength = 100;
+        camera->lookAt_dist = 100;
+        camera->auxBoomPitch = 0;
+        camera->auxBoomYaw = 0;
+        camera->auxBoomZOffset = 0;
         camera->targetPos.x = 0.0f;
         camera->targetPos.y = 0.0f;
         camera->targetPos.z = 0.0f;
-        camera->lookAt_obj.x = camera->unk_54;
-        camera->lookAt_obj.y = camera->unk_58;
-        camera->lookAt_obj.z = camera->unk_5C;
+        camera->lookAt_obj.x = camera->lookAt_obj_target.x;
+        camera->lookAt_obj.y = camera->lookAt_obj_target.y;
+        camera->lookAt_obj.z = camera->lookAt_obj_target.z;
     }
 
-    if (camera->unk_1C == 0) {
-        temp_lo = 10000 / camera->unk_20;
-        camera->trueRotation.x = camera->unk_24;
-        camera->lookAt_obj.x = camera->unk_54 + camera->targetPos.x;
-        camera->currentBoomYaw = camera->unk_22;
-        camera->currentBoomLength = camera->unk_1E;
-        camera->lookAt_obj.z = camera->unk_5C + camera->targetPos.z;
-        camera->lookAt_obj.y = (camera->unk_58 + camera->targetPos.y) + (camera->unk_26 * 0.00390625);
-
-        if (temp_lo < 0) {
-            temp_lo += 3;
+    if (camera->auxPitch == 0) {
+        var_v1 = 10000 / camera->lookAt_dist;
+        camera->trueRotation.x = camera->auxBoomYaw;
+        camera->currentBoomYaw = camera->auxBoomPitch;
+        camera->currentBoomLength = camera->auxBoomLength;
+        camera->lookAt_obj.x = camera->lookAt_obj_target.x + camera->targetPos.x;
+        camera->lookAt_obj.y = (camera->lookAt_obj_target.y + camera->targetPos.y) + (camera->auxBoomZOffset * 0.00390625);
+        camera->lookAt_obj.z = camera->lookAt_obj_target.z + camera->targetPos.z;
+        if (var_v1 < 0) {
+            var_v1 += 3;
         }
-        camera->vfov = (f32) (temp_lo >> 2);
-
+        camera->vfov = (var_v1 >> 2);
         boomYaw = DEG_TO_RAD(camera->currentBoomYaw);
-        sinBoom = sin_rad(boomYaw);
-        cosBoom = cos_rad(boomYaw);
-        temp_f30 = (cosBoom * 0.0f) + (camera->currentBoomLength * sinBoom);
-        temp_f24_2 = (sinBoom * -0.0f) + (camera->currentBoomLength * cosBoom);
-
-        rotation = DEG_TO_RAD(camera->trueRotation.x);
-        sinRotation = sin_rad(rotation);
-        cosRotation = cos_rad(rotation);
-
+        sinBoomYaw = sin_rad(boomYaw);
+        cosBoomYaw = cos_rad(boomYaw);
+        temp_f30 = (cosBoomYaw * 0.0f) + (camera->currentBoomLength * sinBoomYaw);
+        temp_f24_2 = (sinBoomYaw * -0.0f) + (camera->currentBoomLength * cosBoomYaw);
+        trueRotX = DEG_TO_RAD(camera->trueRotation.x);
+        sinRotX = sin_rad(trueRotX);
+        cosRotX = cos_rad(trueRotX);
+        camera->lookAt_eye.x = camera->lookAt_obj.x + ((cosRotX * 0.0f) - (temp_f24_2 * sinRotX));
         camera->lookAt_eye.y = camera->lookAt_obj.y + temp_f30;
-        camera->lookAt_eye.x = camera->lookAt_obj.x + ((cosRotation * 0.0f) - (temp_f24_2 * sinRotation));
-        camera->lookAt_eye.z = camera->lookAt_obj.z + ((sinRotation * 0.0f) + (temp_f24_2 * cosRotation));
+        camera->lookAt_eye.z = camera->lookAt_obj.z + ((sinRotX * 0.0f) + (temp_f24_2 * cosRotX));
     }
-
     camera->currentYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
-    deltaX = camera->lookAt_obj.x - camera->lookAt_eye.x;
-    deltaZ = camera->lookAt_obj.z - camera->lookAt_eye.z;
-    deltaY = camera->lookAt_obj.y - camera->lookAt_eye.y;
-    camera->currentBlendedYawNegated = -atan2(0.0f, 0.0f, deltaX, deltaZ);
-    camera->currentPitch = atan2(0.0f, 0.0f, deltaY, -sqrtf((deltaX * deltaX) + (deltaZ * deltaZ)));
+    xDiff = camera->lookAt_obj.x - camera->lookAt_eye.x;
+    yDiff = camera->lookAt_obj.y - camera->lookAt_eye.y;
+    zDiff = camera->lookAt_obj.z - camera->lookAt_eye.z;
+    camera->currentBlendedYawNegated = -atan2(0.0f, 0.0f, xDiff, zDiff);
+    camera->currentPitch = atan2(0.0f, 0.0f, yDiff, -sqrtf((xDiff * xDiff) + (zDiff * zDiff)));
     gBattleStatus.camLookatObjPos.x = camera->lookAt_obj.x;
     gBattleStatus.camLookatObjPos.y = camera->lookAt_obj.y;
     gBattleStatus.camLookatObjPos.z = camera->lookAt_obj.z;
