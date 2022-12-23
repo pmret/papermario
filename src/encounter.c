@@ -2427,7 +2427,7 @@ void create_encounters(void) {
 
             e = 0;
             totalNpcCount = 0;
-            while(TRUE) {
+            while (TRUE) {
                 if (groupList->npcCount == 0) {
                     break;
                 }

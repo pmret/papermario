@@ -212,7 +212,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     limit /= 32;
     limit += maxStarPower * 8;
 
-    while(TRUE) {
+    while (TRUE) {
 
         if (var_s3_2 >= limit) {
             break;
@@ -336,14 +336,14 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
     maxStarPower = playerData->maxStarPower;
     limit = 8 * maxStarPower;
-    while(TRUE) {
+    while (TRUE) {
         if (var_s3_2 >= limit) {
             break;
         }
 
         if (var_s2_2 == 0) {
             var_s3_2++;
-            hud_element_set_script(icon10, HES_StatusSPEmptyIncrement);
+            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
             hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[0], baseY + 75);
             if (cond) {
                 hud_element_draw_without_clipping(icon10);
@@ -359,7 +359,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
         if (var_s2_2 == 1) {
             var_s3_2++;
-            hud_element_set_script(icon10, HES_StatusSPEmptyIncrement);
+            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
             hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[1], baseY + 75);
             if (cond) {
                 hud_element_draw_without_clipping(icon10);
@@ -376,7 +376,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
         if (var_s2_2 == 2) {
             var_s3_2++;
-            hud_element_set_script(icon10, HES_StatusSPEmptyIncrement);
+            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
             hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[2], baseY + 75);
             if (cond) {
                 hud_element_draw_without_clipping(icon10);
@@ -393,7 +393,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
         if (var_s2_2 == 3) {
             var_s3_2++;
-            hud_element_set_script(icon10, HES_StatusSPEmptyIncrement);
+            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
             hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[3], baseY + 75);
             if (cond) {
                 hud_element_draw_without_clipping(icon10);
@@ -410,7 +410,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
         if (var_s2_2 == 4) {
             var_s3_2++;
-            hud_element_set_script(icon10, HES_StatusSPEmptyIncrement);
+            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
             hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[4], baseY + 75);
             if (cond) {
                 hud_element_draw_without_clipping(icon10);
@@ -427,7 +427,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
         if (var_s2_2 == 5) {
             var_s3_2++;
-            hud_element_set_script(icon10, HES_StatusSPEmptyIncrement);
+            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
             hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[5], baseY + 75);
             if (cond) {
                 hud_element_draw_without_clipping(icon10);
@@ -445,7 +445,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
         if (var_s2_2 == 6) {
             var_s3_2++;
-            hud_element_set_script(icon10, HES_StatusSPEmptyIncrement);
+            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
             hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[6], baseY + 75);
             if (cond) {
                 hud_element_draw_without_clipping(icon10);
@@ -461,7 +461,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
         if (var_s2_2 == 7) {
             var_s3_2++;
-            hud_element_set_script(icon10, HES_StatusStarEmpty);
+            hud_element_set_script(icon10, &HES_StatusStarEmpty);
             hud_element_set_render_pos(icon10, baseX + 152 + (elemIdx * 20), baseY + 0x4D);
             if (cond) {
                 hud_element_draw_without_clipping(icon10);

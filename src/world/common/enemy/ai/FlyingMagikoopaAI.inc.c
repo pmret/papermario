@@ -6,20 +6,20 @@
 void N(FlyingMagikoopaAI_10)(Evt* script, MobileAISettings* arg1, EnemyDetectVolume* arg2) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    
+
     npc->duration = 30;
     script->AI_TEMP_STATE = 11;
 }
 
 void N(FlyingMagikoopaAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);    
+    Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 basePosY = (f32)enemy->varTable[1] / 100.0;
     s32 emoteTemp;
-    
+
     npc->pos.y = basePosY + sin_deg(enemy->varTable[0]) * 6.0;
     enemy->varTable[0] = clamp_angle(enemy->varTable[0] + 10);
-    
+
     if (N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, volume) == 1) {
         fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
         ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
@@ -49,13 +49,13 @@ void N(FlyingMagikoopaAI_15)(Evt* arg0, MobileAISettings* arg1, EnemyDetectVolum
     s32 isCCW;
     f32 moveDist;
     s32 angleAdjust;
-    
+
     Enemy* enemy = arg0->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ;
     s32 result = RESULT_SEARCHING;
     s32 iterations = 0;
-    
+
     npc->duration--;
     if (npc->duration <= 0) {
         randomDist = rand_int(30) + 180.0;
@@ -74,7 +74,7 @@ void N(FlyingMagikoopaAI_15)(Evt* arg0, MobileAISettings* arg1, EnemyDetectVolum
                 baseYaw = (rand_int(10) + 270.0) - 5.0;
             }
             angleAdjust = iterations * 5;
-            while(1) {
+            while (TRUE) {
                 if (isCCW) {
                     npc->yaw = baseYaw + angleAdjust;
                 } else {
@@ -111,7 +111,7 @@ void N(FlyingMagikoopaAI_15)(Evt* arg0, MobileAISettings* arg1, EnemyDetectVolum
 
                 if (iterations >= 7) {
                     result = RESULT_NONE_FOUND;
-                }    
+                }
             }
         }
         posX = npc->pos.x;
@@ -135,10 +135,10 @@ void N(FlyingMagikoopaAI_16)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 basePosY = (f32)enemy->varTable[1] / 100.0;
-    
+
     enemy->varTable[0] = clamp_angle(enemy->varTable[0] + 10);
     npc->pos.y = basePosY + sin_deg(enemy->varTable[0]) * 6.0;
-    
+
     if (npc->turnAroundYawAdjustment == 0) {
         enemy->varTable[5] = npc->pos.y * 100.0;
         script->functionTemp[0] = 17;
@@ -158,7 +158,7 @@ void N(FlyingMagikoopaAI_17)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     npc->pos.x = lerpX;
     npc->pos.z = lerpZ;
     npc->pos.y = basePosY + sin_deg((s32)(npc->duration * (180.0 / (f32)enemy->varTable[3])) + 180) * 25.0;
-    
+
     npc->duration++;
     if (npc->duration == (enemy->varTable[3] - 8)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
@@ -190,7 +190,7 @@ void N(FlyingMagikoopaAI_21)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ;
     s32 emoteTemp;
-    
+
     npc->duration--;
     if (npc->duration == 0) {
         npc->currentAnim = enemy->animList[0];
@@ -228,7 +228,7 @@ void N(FlyingMagikoopaAI_23)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 temp_s1;
     s32 emoteTemp;
-    
+
     npc->duration--;
     if (npc->duration <= 0) {
         temp_s1 = N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, territory);
@@ -253,7 +253,7 @@ void N(FlyingMagikoopaAI_24)(Evt* script, MobileAISettings* aiSettings, EnemyDet
 
     npc->pos.y = basePosY + sin_deg(enemy->varTable[0]) * 6.0;
     enemy->varTable[0] = clamp_angle(enemy->varTable[0] + 10);
-    
+
     npc->duration--;
     if (npc->duration <= 0) {
         npc->currentAnim = enemy->animList[0];
@@ -266,7 +266,7 @@ void N(FlyingMagikoopaAI_50)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 basePosY = (f32)enemy->varTable[1] / 100.0;
-    
+
     npc->pos.y = basePosY + sin_deg(enemy->varTable[0]) * 6.0;
     enemy->varTable[0] = clamp_angle(enemy->varTable[0] + 10);
 
@@ -283,7 +283,7 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
     MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
-    
+
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detectPos.x;
@@ -292,7 +292,7 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 120.0f;
     territory.detectFlags = 0;
-    
+
     if (isInitialCall) {
         npc->flags &= ~NPC_FLAG_GRAVITY;
         npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
@@ -313,7 +313,7 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
         }
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
     }
-    
+
     switch (script->AI_TEMP_STATE) {
         case 10:
             N(FlyingMagikoopaAI_10)(script, aiSettings, territoryPtr);

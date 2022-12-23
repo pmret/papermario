@@ -609,7 +609,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
     s32 i;
 
     if (filemenu_heldButtons & BUTTON_STICK_LEFT) {
-        while(TRUE) {
+        while (TRUE) {
             menu->col--;
             if (menu->col < 0) {
                 menu->col = 0;

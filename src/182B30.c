@@ -1693,7 +1693,7 @@ void appendGfx_player_actor(void* arg0) {
             if (!cond1) {
                 playerParts->currentAnimation = func_80265D44(1);
             }
-        } while(0); // needed to match
+        } while (0); // needed to match
     }
 
     if (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)) {
