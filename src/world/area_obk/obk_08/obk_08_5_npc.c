@@ -1,4 +1,4 @@
-#include "obk_04.h"
+#include "obk_08.h"
 
 enum {
     RING_STATE_0        = 0,
@@ -14,7 +14,7 @@ enum {
 
 #include "world/common/npc/Boo.inc.c"
 
-API_CALLABLE(N(func_80240050_BC7EB0)) {
+API_CALLABLE(N(func_802408A0_BD4110)) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
     s32* ptr = heap_malloc(sizeof(s32)); // todo what is this
 
@@ -30,30 +30,30 @@ API_CALLABLE(N(func_80240050_BC7EB0)) {
     return ApiStatus_DONE2;
 }
 
-void N(func_802400D0_BC7F30)(Npc* npc) {
+void N(func_80240920_BD4190)(Npc* npc) {
     if (npc->yaw > 340.0f || npc->yaw < 20.0f) {
         npc->renderMode = RENDER_MODE_ALPHATEST;
         npc->unk_A2 = 0;
         func_8003D624(npc, FOLD_TYPE_NONE, 0, 0, 0, 0, npc->unk_A2);
     } else {
         npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-        func_8003D624(npc, FOLD_TYPE_7, gPlayerStatusPtr->alpha1, 255, 0, 0, npc->unk_A2);
+        func_8003D624(npc, FOLD_TYPE_7, gPlayerStatusPtr->alpha1, 0, 0, 0, npc->unk_A2);
         npc->unk_9A = 255;
     }
 }
 
-void N(func_80240198_BC7FF8)(void) {
-    N(func_802400D0_BC7F30)(get_npc_unsafe(NPC_KeepAwayBoo1));
-    N(func_802400D0_BC7F30)(get_npc_unsafe(NPC_KeepAwayBoo2));
-    N(func_802400D0_BC7F30)(get_npc_unsafe(NPC_KeepAwayBoo3));
-    N(func_802400D0_BC7F30)(get_npc_unsafe(NPC_KeepAwayBoo4));
-    N(func_802400D0_BC7F30)(get_npc_unsafe(NPC_KeepAwayBoo5));
-    N(func_802400D0_BC7F30)(get_npc_unsafe(NPC_KeepAwayBoo6));
-    N(func_802400D0_BC7F30)(get_npc_unsafe(NPC_KeepAwayBoo7));
-    N(func_802400D0_BC7F30)(get_npc_unsafe(NPC_KeepAwayBoo8));
+void func_802409E8_BD4258(void) {
+    N(func_80240920_BD4190)(get_npc_unsafe(NPC_KeepAwayBoo1));
+    N(func_80240920_BD4190)(get_npc_unsafe(NPC_KeepAwayBoo2));
+    N(func_80240920_BD4190)(get_npc_unsafe(NPC_KeepAwayBoo3));
+    N(func_80240920_BD4190)(get_npc_unsafe(NPC_KeepAwayBoo4));
+    N(func_80240920_BD4190)(get_npc_unsafe(NPC_KeepAwayBoo5));
+    N(func_80240920_BD4190)(get_npc_unsafe(NPC_KeepAwayBoo6));
+    N(func_80240920_BD4190)(get_npc_unsafe(NPC_KeepAwayBoo7));
+    N(func_80240920_BD4190)(get_npc_unsafe(NPC_KeepAwayBoo8));
 }
 
-void N(func_8024022C_BC808C)(void) {
+void func_80240A7C_BD42EC(void) {
     get_npc_unsafe(NPC_KeepAwayBoo1)->unk_A2 = 0;
     get_npc_unsafe(NPC_KeepAwayBoo2)->unk_A2 = 0;
     get_npc_unsafe(NPC_KeepAwayBoo3)->unk_A2 = 0;
@@ -64,94 +64,54 @@ void N(func_8024022C_BC808C)(void) {
     get_npc_unsafe(NPC_KeepAwayBoo8)->unk_A2 = 0;
 }
 
-s32 N(func_802402A0_BC8100)(s32 arg0) {
-    s32 ret = 12;
-
-    switch (arg0) {
-        case 0:
-            ret = 12;
-            break;
-        case 1:
-            ret = 100;
-            break;
-        case 2:
-            ret = 13;
-            break;
-        case 3:
-            ret = 14;
-            break;
-    }
-    return ret;
-}
-
-API_CALLABLE(N(func_802402F4_BC8154)) {
+API_CALLABLE(N(func_80240AF0_BD4360)) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
-    s32* temp_s3 = npc->blur.any;
+    s32* temp_s2 = npc->blur.any;
     s32 temp_v0;
 
     switch (script->functionTemp[1]) {
-        case RING_STATE_0:
-            temp_v0 = evt_get_variable(script, MV_Unk_01);
+        case 0:
+            temp_v0 = evt_get_variable(script, AF_OBK_08);
             if (temp_v0 == 1) {
-                *temp_s3 = temp_v0;
-                script->functionTemp[1] = RING_STATE_10;
+                *temp_s2 = temp_v0;
+                script->functionTemp[1] = 10;
             }
             break;
-        case RING_STATE_1:
-            break;
-        case RING_STATE_10:
+        case 10:
             npc->yaw = clamp_angle(npc->yaw + 2.0f);
             npc->duration--;
             if (npc->duration == 0) {
-                script->functionTemp[1] = RING_STATE_11;
+                script->functionTemp[1] = 11;
             }
             break;
-        case RING_STATE_11:
+        case 11:
             if (npc->pos.y <= -920.0f) {
-                N(func_80240198_BC7FF8)();
+                func_802409E8_BD4258();
             }
             npc->yaw = clamp_angle(npc->yaw + 2.0f);
             npc->pos.y -= 0.5f;
             if (npc->pos.y <= -988.0f) {
-                evt_set_variable(script, MV_Unk_02, 1);
-                N(func_8024022C_BC808C)();
-                script->functionTemp[1] = RING_STATE_12;
+                evt_set_variable(script, MV_Unk_01, 1);
+                func_80240A7C_BD42EC();
+                script->functionTemp[1] = 12;
             }
             break;
-        case RING_STATE_12:
-            script->functionTemp[1] = N(func_802402A0_BC8100)(evt_get_variable(script, MV_Unk_03));
-            npc->yaw = clamp_angle(npc->yaw + 2.0f);
-            break;
-        case RING_STATE_13:
-            script->functionTemp[1] = N(func_802402A0_BC8100)(evt_get_variable(script, MV_Unk_03));
-            npc->yaw = clamp_angle(npc->yaw - 2.0f);
-            break;
-        case RING_STATE_14:
-            evt_set_variable(script, MV_Unk_03, 0);
-            npc->duration++;
-            if (npc->duration == 50) {
-                script->functionTemp[1] = RING_STATE_15;
+        case 12:
+            if (evt_get_variable(script, MV_Unk_02) == 1) {
+                script->functionTemp[1] = 13;
             }
-            npc->planarFlyDist -= 2.0f;
             npc->yaw = clamp_angle(npc->yaw + 2.0f);
             break;
-        case RING_STATE_15:
-            npc->duration--;
-            if (npc->duration == 0) {
-                script->functionTemp[1] = RING_STATE_12;
+        case 13:
+            if (evt_get_variable(script, MV_Unk_02) == 0) {
+                script->functionTemp[1] = 12;
             }
-            npc->planarFlyDist += 2.0f;
-            npc->yaw = clamp_angle(npc->yaw + 2.0f);
-            break;
-        case RING_STATE_100:
-            script->functionTemp[1] = N(func_802402A0_BC8100)(evt_get_variable(script, MV_Unk_03));
             break;
     }
-
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802405B4_BC8414)) {
+API_CALLABLE(N(func_80240CA0_BD4510)) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
 
     npc->blur.any = get_npc_unsafe(NPC_Boo_01); // TODO what is this?
@@ -161,92 +121,14 @@ API_CALLABLE(N(func_802405B4_BC8414)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80240624_BC8484);
-
-// float regalloc
-#ifdef NON_MATCHING
-API_CALLABLE(N(func_80240624_BC8484)) {
-    Npc* npc = get_npc_unsafe(script->owner2.npcID);
-    Npc* npc2 = npc->blur.any;
-    f32 temp_f10;
-    f32 temp_f12;
-    f32 temp_f14;
-    f32 temp_f2;
-    f32 temp_f4;
-    f32 temp_f6;
-    s32* temp_s2;
-    f32 yaw;
-    f32 new_var;
-    f32 f1;
-
-
-    temp_s2 = npc2->blur.any;
-    switch (script->functionTemp[1]) {
-        case 0:
-            npc->yaw = clamp_angle(script->functionTemp[2] + npc2->yaw);
-            if (*temp_s2 == 1) {
-                script->functionTemp[1] = 1;
-                npc->duration = rand_int(20) + 10;
-            }
-            break;
-        case 1:
-            npc->yaw = clamp_angle(script->functionTemp[2] + npc2->yaw);
-            npc->duration--;
-            if (npc->duration == 0) {
-                sfx_play_sound_at_position(0xB000000F, 0, npc->pos.x, npc->pos.y, npc->pos.z);
-                script->functionTemp[1] = 2;
-                npc->duration = 0;
-                npc->moveToPos.x = npc->pos.x;
-                npc->moveToPos.y = npc->pos.y;
-                npc->moveToPos.z = npc->pos.z;
-            }
-            break;
-        case 2:
-            npc->yaw = clamp_angle(script->functionTemp[2] + npc2->yaw);
-            new_var = npc->yaw;
-            npc->pos.x = npc2->pos.x;
-            npc->pos.z = npc2->pos.z;
-            npc_move_heading(npc, npc2->planarFlyDist, new_var);
-            temp_f4 = (40.0f - npc->duration) / 40.0f;
-            temp_f12 = npc->pos.z;
-            f1 = (npc->pos.x - npc->moveToPos.x) * (temp_f4 * temp_f4);
-            temp_f6 = (npc->pos.z - npc->moveToPos.z) * (temp_f4 * temp_f4);
-            temp_f2 = npc2->pos.y + 1000.0f;
-            npc->pos.x -= f1;
-            npc->pos.y = temp_f2;
-            npc->pos.y -= (npc->pos.y - npc->moveToPos.y) * ((temp_f4 * temp_f4) * temp_f4);
-            npc->pos.z = temp_f12 - temp_f6;
-            npc->duration++;
-            if (npc->duration == 40) {
-                script->functionTemp[1] = 12;
-            }
-            break;
-        case 12:
-        case 13:
-        case 14:
-            yaw = clamp_angle(script->functionTemp[2] + npc2->yaw);
-            npc->yaw = yaw;
-            script->functionTemp[1] = N(func_802402A0_BC8100)(evt_get_variable(script, MV_Unk_03));
-            npc->pos.x = npc2->pos.x;
-            npc->pos.z = npc2->pos.z;
-            npc_move_heading(npc, npc2->planarFlyDist, yaw);
-            npc->pos.y = npc2->pos.y + 1000.0f;
-            break;
-        case 100:
-            script->functionTemp[1] = N(func_802402A0_BC8100)(evt_get_variable(script, MV_Unk_03));
-            break;
-    }
-    return ApiStatus_DONE2;
-}
-#else
-INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240624_BC8484);
-#endif
+API_CALLABLE(func_80240D10_BD4580);
+INCLUDE_ASM(s32, "world/area_obk/obk_08/BD4110", func_80240D10_BD4580);
 
 EvtScript N(EVS_NpcIdle_Boo_01) = {
     EVT_WAIT(4)
-    EVT_CALL(N(func_80240050_BC7EB0))
+    EVT_CALL(N(func_802408A0_BD4110))
     EVT_LABEL(10)
-        EVT_CALL(N(func_802402F4_BC8154))
+        EVT_CALL(N(func_80240AF0_BD4360))
         EVT_WAIT(1)
         EVT_GOTO(10)
     EVT_RETURN
@@ -255,9 +137,9 @@ EvtScript N(EVS_NpcIdle_Boo_01) = {
 
 EvtScript N(EVS_NpcIdle_KeepAwayBoo) = {
     EVT_WAIT(5)
-    EVT_CALL(N(func_802405B4_BC8414))
+    EVT_CALL(N(func_80240CA0_BD4510))
     EVT_LABEL(10)
-        EVT_CALL(func_80240624_BC8484)
+        EVT_CALL(func_80240D10_BD4580)
         EVT_WAIT(1)
         EVT_GOTO(10)
     EVT_RETURN
@@ -401,7 +283,7 @@ EvtScript N(EVS_NpcHit_KeepAwayBoo8) = {
 
 EvtScript N(EVS_NpcInit_Boo_01) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Boo_01)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_RECORD)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -411,7 +293,7 @@ EvtScript N(EVS_NpcInit_Boo_01) = {
 EvtScript N(EVS_NpcInit_KeepAwayBoo1) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
     EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo1)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_RECORD)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -421,7 +303,7 @@ EvtScript N(EVS_NpcInit_KeepAwayBoo1) = {
 EvtScript N(EVS_NpcInit_KeepAwayBoo2) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
     EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo2)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_RECORD)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -431,7 +313,7 @@ EvtScript N(EVS_NpcInit_KeepAwayBoo2) = {
 EvtScript N(EVS_NpcInit_KeepAwayBoo3) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
     EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo3)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_RECORD)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -441,7 +323,7 @@ EvtScript N(EVS_NpcInit_KeepAwayBoo3) = {
 EvtScript N(EVS_NpcInit_KeepAwayBoo4) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
     EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo4)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_RECORD)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -451,7 +333,7 @@ EvtScript N(EVS_NpcInit_KeepAwayBoo4) = {
 EvtScript N(EVS_NpcInit_KeepAwayBoo5) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
     EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo5)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_RECORD)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -461,7 +343,7 @@ EvtScript N(EVS_NpcInit_KeepAwayBoo5) = {
 EvtScript N(EVS_NpcInit_KeepAwayBoo6) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
     EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo6)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_RECORD)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -471,7 +353,7 @@ EvtScript N(EVS_NpcInit_KeepAwayBoo6) = {
 EvtScript N(EVS_NpcInit_KeepAwayBoo7) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
     EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo7)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_RECORD)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -481,7 +363,7 @@ EvtScript N(EVS_NpcInit_KeepAwayBoo7) = {
 EvtScript N(EVS_NpcInit_KeepAwayBoo8) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
     EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo8)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_RECORD)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -502,8 +384,8 @@ StaticNpc N(NpcData_Boo_01) = {
 StaticNpc N(NpcData_KeepAwayBoo1) = {
     .id = NPC_KeepAwayBoo1,
     .settings = &N(NpcSettings_Boo),
-    .pos = { 176.0f, 0.0f, -173.0f },
-    .yaw = 270,
+    .pos = { -268.0f, 52.0f, 0.0f },
+    .yaw = 0,
     .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo1),
     .drops = BOO_DROPS,
@@ -513,8 +395,8 @@ StaticNpc N(NpcData_KeepAwayBoo1) = {
 StaticNpc N(NpcData_KeepAwayBoo2) = {
     .id = NPC_KeepAwayBoo2,
     .settings = &N(NpcSettings_Boo),
-    .pos = { 176.0f, 0.0f, -173.0f },
-    .yaw = 270,
+    .pos = { -268.0f, 52.0f, 0.0f },
+    .yaw = 0,
     .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo2),
     .drops = BOO_DROPS,
@@ -524,8 +406,8 @@ StaticNpc N(NpcData_KeepAwayBoo2) = {
 StaticNpc N(NpcData_KeepAwayBoo3) = {
     .id = NPC_KeepAwayBoo3,
     .settings = &N(NpcSettings_Boo),
-    .pos = { 176.0f, 0.0f, -173.0f },
-    .yaw = 270,
+    .pos = { -268.0f, 52.0f, 0.0f },
+    .yaw = 0,
     .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo3),
     .drops = BOO_DROPS,
@@ -535,8 +417,8 @@ StaticNpc N(NpcData_KeepAwayBoo3) = {
 StaticNpc N(NpcData_KeepAwayBoo4) = {
     .id = NPC_KeepAwayBoo4,
     .settings = &N(NpcSettings_Boo),
-    .pos = { 176.0f, 0.0f, -173.0f },
-    .yaw = 270,
+    .pos = { -268.0f, 52.0f, 0.0f },
+    .yaw = 0,
     .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo4),
     .drops = BOO_DROPS,
@@ -546,8 +428,8 @@ StaticNpc N(NpcData_KeepAwayBoo4) = {
 StaticNpc N(NpcData_KeepAwayBoo5) = {
     .id = NPC_KeepAwayBoo5,
     .settings = &N(NpcSettings_Boo),
-    .pos = { 176.0f, 0.0f, -173.0f },
-    .yaw = 270,
+    .pos = { -268.0f, 52.0f, 0.0f },
+    .yaw = 0,
     .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo5),
     .drops = BOO_DROPS,
@@ -557,8 +439,8 @@ StaticNpc N(NpcData_KeepAwayBoo5) = {
 StaticNpc N(NpcData_KeepAwayBoo6) = {
     .id = NPC_KeepAwayBoo6,
     .settings = &N(NpcSettings_Boo),
-    .pos = { 176.0f, 0.0f, -173.0f },
-    .yaw = 270,
+    .pos = { -268.0f, 52.0f, 0.0f },
+    .yaw = 0,
     .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo6),
     .drops = BOO_DROPS,
@@ -568,8 +450,8 @@ StaticNpc N(NpcData_KeepAwayBoo6) = {
 StaticNpc N(NpcData_KeepAwayBoo7) = {
     .id = NPC_KeepAwayBoo7,
     .settings = &N(NpcSettings_Boo),
-    .pos = { 176.0f, 0.0f, -173.0f },
-    .yaw = 270,
+    .pos = { -268.0f, 52.0f, 0.0f },
+    .yaw = 0,
     .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo7),
     .drops = BOO_DROPS,
@@ -579,45 +461,60 @@ StaticNpc N(NpcData_KeepAwayBoo7) = {
 StaticNpc N(NpcData_KeepAwayBoo8) = {
     .id = NPC_KeepAwayBoo8,
     .settings = &N(NpcSettings_Boo),
-    .pos = { 176.0f, 0.0f, -173.0f },
-    .yaw = 270,
+    .pos = { -268.0f, 52.0f, 0.0f },
+    .yaw = 0,
     .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo8),
     .drops = BOO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
-EvtScript N(EVS_NpcInit_Boo_10) = {
+#define TRAFFIC_BOO_START_Y 40.0f
+#define TRAFFIC_BOO_START_Z -430.0f
+#include "../TrafficBoos.inc.c"
+
+EvtScript N(EVS_NpcInit_TrafficBoo1) = {
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Boo_11) = {
+EvtScript N(EVS_NpcInit_TrafficBoo2) = {
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
+    EVT_RETURN
+    EVT_END
+};
+
+StaticNpc N(NpcData_TrafficBoos)[] = {
+    {
+        .id = NPC_TrafficBoo1,
+        .settings = &N(NpcSettings_Boo),
+        .pos = { 523.0f, -139.0f, 193.0f },
+        .yaw = 0,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+        .init = &N(EVS_NpcInit_TrafficBoo1),
+        .drops = BOO_DROPS,
+        .animations = NORMAL_BOO_ANIMS,
+    },
+    {
+        .id = NPC_TrafficBoo2,
+        .settings = &N(NpcSettings_Boo),
+        .pos = { 473.0f, -122.0f, 247.0f },
+        .yaw = 0,
+        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+        .init = &N(EVS_NpcInit_TrafficBoo2),
+        .drops = BOO_DROPS,
+        .animations = NORMAL_BOO_ANIMS,
+    },
+};
+
+EvtScript N(EVS_NpcInit_Boo_12) = {
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_NpcInit_Boo_13) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, TRUE)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcInteract_TutorialBoo) = {
-    EVT_IF_EQ(GF_OBK04_HiddenPanel, FALSE)
-        EVT_CALL(SpeakToPlayer, NPC_TutorialBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_003F)
-    EVT_ELSE
-        EVT_IF_EQ(GF_OBK04_HeardAboutHiddenPanels, FALSE)
-            EVT_CALL(SpeakToPlayer, NPC_TutorialBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0040)
-            EVT_SET(GF_OBK04_HeardAboutHiddenPanels, TRUE)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_TutorialBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0041)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcInit_TutorialBoo) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TutorialBoo)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        EVT_CALL(SetNpcPos, NPC_TutorialBoo, -160, 10, -175)
-    EVT_END_IF
     EVT_RETURN
     EVT_END
 };
@@ -627,9 +524,9 @@ StaticNpc N(NpcData_KeepAwayExtras)[] = {
         .id = NPC_LeaderBoo,
         .settings = &N(NpcSettings_Boo),
         .pos = { NPC_DISPOSE_LOCATION },
-        .yaw = 270,
+        .yaw = 0,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
-        .init = &N(EVS_NpcInit_Boo_10),
+        .init = &N(EVS_NpcInit_Boo_12),
         .drops = BOO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
     },
@@ -639,22 +536,10 @@ StaticNpc N(NpcData_KeepAwayExtras)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_4000,
-        .init = &N(EVS_NpcInit_Boo_11),
+        .init = &N(EVS_NpcInit_Boo_13),
         .drops = BOO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
     },
-};
-
-StaticNpc N(NpcData_TutorialBoo) = {
-    .id = NPC_TutorialBoo,
-    .settings = &N(NpcSettings_Boo),
-    .pos = { NPC_DISPOSE_LOCATION },
-    .yaw = 0,
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
-    .init = &N(EVS_NpcInit_TutorialBoo),
-    .drops = BOO_DROPS,
-    .animations = NORMAL_BOO_ANIMS,
-    .tattle = MSG_NpcTattle_OBK_BootsTutor,
 };
 
 NpcGroupList N(DefaultNPCs) = {
@@ -667,7 +552,7 @@ NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_KeepAwayBoo6)),
     NPC_GROUP(N(NpcData_KeepAwayBoo7)),
     NPC_GROUP(N(NpcData_KeepAwayBoo8)),
+    NPC_GROUP(N(NpcData_TrafficBoos)),
     NPC_GROUP(N(NpcData_KeepAwayExtras)),
-    NPC_GROUP(N(NpcData_TutorialBoo)),
     {}
 };

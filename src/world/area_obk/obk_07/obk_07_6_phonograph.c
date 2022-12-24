@@ -52,9 +52,9 @@ typedef struct PhonographData {
 enum {
     PHONOGRAPH_HUD_STATE_DESTROYED  = -1,
     PHONOGRAPH_HUD_STATE_INIT       = 0,
-    PHONOGRAPH_HUD_STATE_APPEAR     = 1,
-    PHONOGRAPH_STATE_10             = 10,
-    PHONOGRAPH_STATE_11             = 11,
+    PHONOGRAPH_HUD_STATE_APPEAR     = 1,    // hud slides in from left side of screen
+    PHONOGRAPH_HUD_STATE_MASHING    = 10,   // 'A' button icon begins mashing animation
+    PHONOGRAPH_HUD_STATE_FINAL      = 11,   // final state used during minigame
 };
 
 API_CALLABLE(N(CreatePhonographData)) {
@@ -111,11 +111,11 @@ void N(worker_update_phonograph_hud)(void) {
             hud_element_set_render_pos(data->hudElemBlueMeter, data->hudBaseX, data->hudBaseY + 28);
             hud_element_set_render_pos(data->hudElemOK, data->hudBaseX + 2, data->hudBaseY + 14);
             break;
-        case PHONOGRAPH_STATE_10:
+        case PHONOGRAPH_HUD_STATE_MASHING:
             hud_element_set_script(data->hudElemAButton, &HES_SlowlyMashAButton);
-            data->state = PHONOGRAPH_STATE_11;
+            data->state = PHONOGRAPH_HUD_STATE_FINAL;
             // fallthrough
-        case PHONOGRAPH_STATE_11:
+        case PHONOGRAPH_HUD_STATE_FINAL:
             arrCount = ARRAY_COUNT(data->inputBuffer);
             idx = data->inputBufferPos;
             idx -= arrCount;
@@ -150,7 +150,7 @@ void N(worker_update_phonograph_hud)(void) {
                 temp = ((1.0 - sin_rad((((((id - 50) * 90) / 50) + 90) * TAU) / 360.0f)) * 50.0) + 50.0;
             }
             data->timeScale = (((100 - temp) * 0.25) / 100.0) + ((2.0 * temp) / 100.0);
-            func_80055D38(data->songName, data->timeScale);
+            snd_song_set_playback_rate(data->songName, data->timeScale);
             set_script_timescale(get_script_by_id(data->updateScaleScriptID), data->timeScale * 3.0f);
             set_script_timescale(get_script_by_id(data->updateCrankScriptID), data->timeScale * 5.0f);
             set_script_timescale(get_script_by_id(data->updateRecordScriptID), data->timeScale * 5.0f);
@@ -164,7 +164,7 @@ API_CALLABLE(N(func_80240EF8_BCFAE8)) {
 
     temp_f6 = sin_rad(DEG_TO_RAD((temp_f6 * 90) / 50)) * 50.0f;
     data->timeScale = (((100 - temp_f6) * 0.25) / 100.0) + ((2.0 * temp_f6) / 100.0);
-    func_80055D38(data->songName, data->timeScale);
+    snd_song_set_playback_rate(data->songName, data->timeScale);
 
     //@bug? these set the timescale for *this* script, not the three update scripts
     get_script_by_id(data->updateScaleScriptID);
@@ -265,7 +265,7 @@ API_CALLABLE(N(PlayRecordSong)) {
 API_CALLABLE(N(SavePhonographUpdateScriptIDs)) {
     PhonographData* data = N(GetPhonographData)();
 
-    data->state = PHONOGRAPH_STATE_10;
+    data->state = PHONOGRAPH_HUD_STATE_MASHING;
     data->updateScaleScriptID = evt_get_variable(NULL, MV_UpdateScaleScript);
     data->updateCrankScriptID = evt_get_variable(NULL, MV_UpdateCrankScript);
     data->updateRecordScriptID = evt_get_variable(NULL, MV_UpdateRecordScript);

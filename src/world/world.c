@@ -632,7 +632,7 @@ MapConfig obk_maps[] = {
     { MAP(obk_05), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP(obk_06), .songVariation = 1, .sfxReverb = 1 },
     { MAP(obk_07), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(obk_08, 0x802417B0), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(obk_08), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP(obk_09), .songVariation = 1, .sfxReverb = 2 },
 };
 

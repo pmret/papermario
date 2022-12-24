@@ -12526,15 +12526,14 @@ segments:
     start: 0xBD3870
     vram: 0x80240000
     subsegments:
-    - [0xBD3870, c]
-    - [0xBD40B0, c]
-    - [0xBD4110, c]
-    - [0xBD4A90, c]
-    - [0xBD5010, data]
-    - [0xBD50D0, data]
-    - [0xBD64D0, data]
-    - [0xBD6DD0, data]
-    - [0xBDA730]
+    - [0xBD3870, c, obk_08_0_header]
+    - [0xBD3870, c, obk_08_1_music]
+    - [0xBD3870, c, obk_08_2_main]
+    - [0xBD3870, c, obk_08_3_cabinets]
+    - [0xBD40B0, c, obk_08_4_entity]
+    - [0xBD4110, c, obk_08_5_npc]
+    - [0xBD4A90, c, obk_08_6_game]
+    - [0xBD5010]
   - name: obk_09
     dir: world/area_obk/obk_09
     type: code

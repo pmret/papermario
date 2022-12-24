@@ -18,7 +18,7 @@ EvtScript N(EVS_NpcInit_TrafficBoo2) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Boos)[] = {
+StaticNpc N(NpcData_TrafficBoos)[] = {
     {
         .id = NPC_TrafficBoo1,
         .settings = &N(NpcSettings_Boo),
@@ -42,6 +42,6 @@ StaticNpc N(NpcData_Boos)[] = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_Boos)),
+    NPC_GROUP(N(NpcData_TrafficBoos)),
     {}
 };
