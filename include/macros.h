@@ -23,8 +23,13 @@
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
+#if !defined(PERMUTER)
 #define NOP_FIX __asm__(".set nogpopt");
 #define NOP_UNFIX __asm__(".set gpopt");
+#else
+#define NOP_FIX
+#define NOP_UNFIX
+#endif
 
 #define PTR_LIST_END ((void*) -1)
 

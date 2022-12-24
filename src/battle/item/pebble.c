@@ -41,7 +41,7 @@ Gfx N(displayList)[] = {
 };
 
 s32 N(modelCommandList)[] = {
-    0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), &N(displayList), 0x00000002, 0x00000000,
+    0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), (s32) &N(displayList), 0x00000002, 0x00000000,
 };
 
 EvtScript N(main) = {

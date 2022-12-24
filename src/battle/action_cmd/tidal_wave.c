@@ -6,6 +6,8 @@
 HudScript* D_802A97C0_42CEB0[3] = { &HES_PressAButton, &HES_PressBButton, &HES_PressCDownButton };
 HudScript* D_802A97CC_42CEBC[3] = { &HES_AButtonDown, &HES_BButtonHeld, &HES_CDownButtonHeld };
 
+extern s32 actionCmdTableTidalWave[];
+
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;

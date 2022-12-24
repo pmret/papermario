@@ -18,15 +18,18 @@ enum {
     BUFF_STATE_FADE_IN                  = 40
 };
 
-extern Gfx D_09001800[];
-extern Gfx D_090019A0[];
-extern Gfx D_09001A18[];
-extern Gfx D_09001A90[];
-extern Gfx D_09001B08[];
-extern Gfx D_09001B80[];
+extern Gfx D_09001800_406740[];
+extern Gfx D_090019A0_4068E0[];
+extern Gfx D_09001A18_406958[];
+extern Gfx D_09001A90_4069D0[];
+extern Gfx D_09001B08_406A48[];
+extern Gfx D_09001B80_406AC0[];
 
-Gfx* D_E011AC20[] = { D_09001800 };
-Gfx* D_E011AC24[] = { D_090019A0, D_09001A18, D_09001A90, D_09001B08, D_09001B80, NULL, NULL, NULL, NULL, NULL };
+Gfx* D_E011AC20[] = { D_09001800_406740 };
+Gfx* D_E011AC24[] = {
+    D_090019A0_4068E0, D_09001A18_406958, D_09001A90_4069D0, D_09001B08_406A48, D_09001B80_406AC0,
+    NULL, NULL, NULL, NULL, NULL
+};
 
 s8 D_E011AC4C[] = { 15, 15, 15, 15, 15, 35, 75, 100, 100, 100, 100, 0 };
 s8 D_E011AC58[] = { 100, 100, 100, 100, 100, 90, 10, 10, 10, 10, 10, 0 };
@@ -186,7 +189,7 @@ void func_E011A3BC(s16 alpha) {
         gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     } else {
         gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0, 
+        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0,
                           TEXEL0, 0);
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha);
     }
@@ -217,13 +220,13 @@ void func_E011A700(EffectInstance* effect) {
     Gfx* dlist;
     f32 x, y;
     s32 i;
-    
+
     if (data->unk_02 != 0) {
         gDPPipeSync(gMasterGfxPos++);
         gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
         gSPDisplayList(gMasterGfxPos++, D_E011AC20[0]);
-        
+
         numShown = 0;
         for (i = 0; i < ARRAY_COUNT(data->unk_0C); i++) {
             BuffData* buffData = &data->unk_0C[i];
@@ -239,7 +242,7 @@ void func_E011A700(EffectInstance* effect) {
 
         gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
         gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
-        
+
         numShown = 0;
         for (i = 0; i < ARRAY_COUNT(data->unk_0C); i++) {
             BuffData* buffData = &data->unk_0C[i];
@@ -275,7 +278,7 @@ void func_E011A700(EffectInstance* effect) {
                         func_E011A48C(x, y, 0, 1024.0f / scale);
                     }
                 }
-        
+
                 dlist = D_E011AC24[turnsDisplay];
                 if (dlist != NULL) {
                     gSPDisplayList(gMasterGfxPos++, dlist);
@@ -291,9 +294,9 @@ void func_E011A700(EffectInstance* effect) {
         }
 
         gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE,
-            camera->viewportStartX, 
-            camera->viewportStartY, 
-            camera->viewportStartX + camera->viewportW, 
+            camera->viewportStartX,
+            camera->viewportStartY,
+            camera->viewportStartX + camera->viewportW,
             camera->viewportStartY + camera->viewportH
         );
         gDPPipeSync(gMasterGfxPos++);

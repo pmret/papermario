@@ -887,7 +887,7 @@ void render_npcs(void) {
 
                     if ((npc->flags & NPC_FLAG_MOTION_BLUR) != 0) {
                         renderTaskPtr->distance = -phi_f20;
-                        renderTaskPtr->appendGfx = appendGfx_npc_blur;
+                        renderTaskPtr->appendGfx = (void (*))appendGfx_npc_blur;
                         renderTaskPtr->appendGfxArg = npc;
                         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
                         queue_render_task(renderTaskPtr);

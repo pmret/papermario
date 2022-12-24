@@ -278,6 +278,7 @@ enum {
     VINE_4      = 4,
 };
 
+// TODO shiftability fix
 enum {
     VINE_0_BASE = 0x80234000,
     VINE_1_BASE = 0x80231000,
@@ -285,8 +286,8 @@ enum {
     VINE_3_BASE = 0x8022C000,
 };
 
-static LavaPiranhaVine N(VineData)[NUM_VINES];
-static s32 N(VineRenderState);
+BSS LavaPiranhaVine N(VineData)[NUM_VINES];
+BSS s32 N(VineRenderState);
 
 void N(make_vine_interpolation)(LavaPiranhaVine* vine) {
     Evt dummyEvt;

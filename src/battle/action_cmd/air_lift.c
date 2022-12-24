@@ -8,6 +8,8 @@ s32 D_802A9852_4292C0[] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 
 BSS s32 air_lift_bss_0;
 
+extern s32 actionCmdTableAirLift[];
+
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     s32 *args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;

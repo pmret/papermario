@@ -16,8 +16,11 @@ void virtual_entity_delete_by_index(s32);
 extern s32 D_802A3E88_7214D8[];
 extern EntityModelScript* D_802A3F28_721578[10];
 extern f32 D_802A3F00_721550[];
-extern Vec3f D_802A3F88;
-extern s32 D_802A3F58[10];
+
+BSS s32 D_802A3F54; // unused?
+BSS s32 D_802A3F58[10];
+BSS s32 D_802A3F80[2]; // unused?
+BSS Vec3f D_802A3F88;
 
 ApiStatus N(func_802A123C_71E88C)(Evt* script, s32 isInitialCall) {
     Vec3f* posPtr = &D_802A3F88;

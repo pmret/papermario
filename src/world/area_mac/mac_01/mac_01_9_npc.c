@@ -2,8 +2,6 @@
 #include "effects.h"
 #include "hud_element.h"
 
-extern s32 D_80262F68;
-extern PopupMenu D_80262C38;
 extern IconHudScriptPair gItemHudScripts[];
 extern EvtScript N(EVS_ToadHouse_GetInBed);
 extern EvtScript N(EVS_ToadHouse_SetDialogue);
@@ -77,7 +75,7 @@ EvtScript N(EVS_LetterReward_Merlon) = {
 
 s32 N(LetterList_MinhT)[] = {
     ITEM_LETTER_TO_MINHT,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_MinhT) = {
@@ -101,7 +99,7 @@ EvtScript N(EVS_LetterReward_MinhT) = {
 
 s32 N(LetterList_Kolorado)[] = {
     ITEM_LETTER25,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_Kolorado) = {
@@ -125,7 +123,7 @@ EvtScript N(EVS_LetterReward_Kolorado) = {
 
 s32 N(ItemList_Artifact)[] = {
     ITEM_ARTIFACT,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_ArtifactReward_Kolorado) = {
@@ -1308,6 +1306,10 @@ StaticNpc N(NpcData_Ninji) = {
     },
     .tattle = MSG_NpcTattle_MAC_PowerHungryToadKid,
 };
+
+BSS PopupMenu D_80262C38;
+BSS s32 D_80262F68;
+BSS s32 D_80262F6C[13];
 
 #include "npc/rowf_and_rhuff.inc.c"
 #include "npc/post_office.inc.c"

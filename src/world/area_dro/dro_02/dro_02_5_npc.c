@@ -6,11 +6,11 @@
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 
-static f32 N(D_8024EF80);
-static f32 N(D_8024EF84);
-static s32 N(RitualStateTime);
-static s8 N(pad_D_8024EF8C)[0x4];
-static EffectInstance* N(D_8024EF90)[4];
+BSS f32 N(D_8024EF80);
+BSS f32 N(D_8024EF84);
+BSS s32 N(RitualStateTime);
+BSS s8 N(pad_D_8024EF8C)[0x4];
+BSS EffectInstance* N(D_8024EF90)[4];
 
 #include "world/common/complete/Quizmo.inc.c"
 

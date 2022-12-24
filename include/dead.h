@@ -26,7 +26,6 @@
 #define cos_deg dead_cos_deg
 #define sin_cos_deg dead_sin_cos_deg
 #define gPlayerStatus dead_gPlayerStatus
-#define gPlayerActionState dead_gPlayerActionState
 #define is_point_within_region dead_is_point_within_region
 #define npc_raycast_down_sides dead_npc_raycast_down_sides
 #define basic_ai_check_player_dist dead_basic_ai_check_player_dist
@@ -67,7 +66,7 @@
 #define switch_to_partner dead_switch_to_partner
 #define set_npc_yaw dead_set_npc_yaw
 #define disable_npc_shadow dead_disable_npc_shadow
-#define func_800EB2A4 func_800F2E98
+#define func_800EB2A4 dead_func_800EB2A4
 #define partner_clear_player_tracking dead_partner_clear_player_tracking
 #define sfx_play_sound_with_params dead_sfx_play_sound_with_params
 #define sfx_get_spatialized_sound_params dead_sfx_get_spatialized_sound_params

@@ -3,7 +3,7 @@
 #include "world/actions.h"
 #include "sprite.h"
 
-// TODO linker stuff
+ // TODO shiftability fix
 #define E20110_VRAM_DEF (void*)0x802B7000
 #define E20EB0_VRAM_DEF (void*)0x802B7000
 #define E21870_VRAM_DEF (void*)0x802B7000

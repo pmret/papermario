@@ -76,31 +76,7 @@ typedef struct ActionCommandStatus {
     /* 0x80 */ s8 mashMeterIntervals;
 } ActionCommandStatus;
 
-extern ActionCommandStatus gActionCommandStatus; // TODO BSS?
-
-extern s32 actionCmdTableJump[];
-extern s32 actionCmdTableHammer[];
-extern s32 actionCmdTableFlee[];
-extern s32 actionCmdTableBreakFree[];
-extern s32 actionCmdTableWhirlwind[];
-extern s32 actionCmdTableStopLeech[];
-extern s32 actionCmdTable07[];
-extern s32 actionCmdTableDizzyShell[];
-extern s32 actionCmdTableFireShell[];
-extern s32 actionCmdTable0A[];
-extern s32 actionCmdTableBomb[];
-extern s32 actionCmdTableBodySlam[];
-extern s32 actionCmdTableAirLift[];
-extern s32 actionCmdTableAirRaid[];
-extern s32 actionCmdTableSquirt[];
-extern s32 actionCmdTablePowerShock[];
-extern s32 actionCmdTableMegaShock[];
-extern s32 actionCmdTableSmack[];
-extern s32 actionCmdTableSpinySurge[];
-extern s32 actionCmdTableHurricane[];
-extern s32 actionCmdTableSpook[];
-extern s32 actionCmdTableWaterBlock[];
-extern s32 actionCmdTableTidalWave[];
+extern ActionCommandStatus gActionCommandStatus;
 
 extern HudScript HES_100pct;
 extern HudScript HES_AButton;

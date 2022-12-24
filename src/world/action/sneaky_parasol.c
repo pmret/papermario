@@ -37,6 +37,8 @@ enum {
 
 BSS TransformationData ParasolTransformation;
 
+TransformationData* D_802B6D80_E2B430 = &ParasolTransformation;
+
 void parasol_update_spin(void);
 
 Npc* parasol_get_npc(void) {

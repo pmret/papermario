@@ -16,16 +16,16 @@ typedef struct UnkStruct {
     /* 0x0C */ Gfx* unk_0C;
 } UnkStruct; // size = 0x10
 
-extern Gfx D_09000800[];
-extern Gfx D_090008F8[];
-extern Gfx D_09000918[];
-extern Gfx D_090009E0[];
+extern Gfx D_09000800_3543B0[];
+extern Gfx D_090008F8_3544A8[];
+extern Gfx D_09000918_3544C8[];
+extern Gfx D_090009E0_354590[];
 
 UnkStruct D_E0040840[] = {
-    { 255, 109, 255,  92, 102, 191, 255, 75,  50, {}, D_09000800 },
-    { 255, 255, 255,   0, 255,  32,   0, 75, 100, {}, D_09000800 },
-    { 255,   0, 255,  92, 107, 168, 255, 75,  10, {}, D_09000800 },
-    { 255, 255, 255, 244, 247, 175, 175, 22,  30, {}, D_09000800 }
+    { 255, 109, 255,  92, 102, 191, 255, 75,  50, {}, D_09000800_3543B0 },
+    { 255, 255, 255,   0, 255,  32,   0, 75, 100, {}, D_09000800_3543B0 },
+    { 255,   0, 255,  92, 107, 168, 255, 75,  10, {}, D_09000800_3543B0 },
+    { 255, 255, 255, 244, 247, 175, 175, 22,  30, {}, D_09000800_3543B0 }
 };
 
 s32 D_E0040880;
@@ -49,7 +49,7 @@ void flame_main(
     FlameFXData* data;
     s32 numParts = 1;
 
-    if (arg0 >= 4) {
+    if (arg0 > 3) {
         arg0 = 3;
     }
 
@@ -120,7 +120,8 @@ void flame_render(EffectInstance* effect) {
     f32 outZ;
     f32 outS;
 
-    shim_transform_point(gCameras[gCurrentCameraID].perspectiveMatrix, data->pos.x, data->pos.y, data->pos.z, 1.0f, &outX, &outY, &outZ, &outS);
+    shim_transform_point(gCameras[gCurrentCameraID].perspectiveMatrix, data->pos.x, data->pos.y, data->pos.z, 1.0f,
+                         &outX, &outY, &outZ, &outS);
 
     outDist = outZ + 5000;
     if (outDist < 0) {
@@ -157,10 +158,10 @@ void flame_appendGfx(void* effect) {
 
     if (D_E0040880 != gGameStatusPtr->frameCounter) {
         D_E0040880 = gGameStatusPtr->frameCounter;
-        gSPDisplayList(gMasterGfxPos++, D_09000918);
+        gSPDisplayList(gMasterGfxPos++, D_09000918_3544C8);
         gDPSetTileSize(gMasterGfxPos++, 1, uls, ult, uls + 128, ult + 256);
-        gSPDisplayList(gMasterGfxPos++, D_090009E0);
-        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, VIRTUAL_TO_PHYSICAL(nuGfxCfb_ptr));
+        gSPDisplayList(gMasterGfxPos++, D_090009E0_354590);
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, VIRTUAL_TO_PHYSICAL(nuGfxCfb_ptr));
         gDPSetScissorFrac(gMasterGfxPos++, G_SC_NON_INTERLACE,
             camera->viewportStartX * 4.0f,
             camera->viewportStartY * 4.0f,
@@ -183,8 +184,9 @@ void flame_appendGfx(void* effect) {
     shim_guMtxCatF(sp58, sp98, sp98);
     shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_090008F8);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+              G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPDisplayList(gMasterGfxPos++, D_090008F8_3544A8);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMasterGfxPos++);
 }

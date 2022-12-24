@@ -146,8 +146,35 @@ void func_80242A04_8EE824(void) {
     queue_render_task(&rt);
 }
 
-void func_80242A3C_8EE85C(UnkKmr20*);
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EDFC0", func_80242A3C_8EE85C);
+void func_80242A3C_8EE85C(UnkKmr20* arg0) {
+    PlayerData* playerData = &gPlayerData;
+    s32 count;
+    s32 i;
+
+    count = 0;
+    for (i = 0; i < ARRAY_COUNT(playerData->badges); i++) {
+        if (playerData->badges[i] != 0) {
+            count++;
+        }
+    }
+    arg0->equippedBadges = count;
+
+    count = 0;
+    for (i = 0; TRUE; i++) {
+        if (D_80252DC0_8FEBE0[i] != 0) {
+            if (evt_get_variable(NULL, D_80252DC0_8FEBE0[i]) != 0) {
+                count++;
+            }
+        } else {
+            break;
+        }
+    }
+    arg0->unk_28 = i;
+    arg0->unk_26 = count;
+    if (arg0->unk_26 == 0 && evt_get_variable(NULL, GameFlag(328)) != 0) {
+        arg0->unk_26 = -1;
+    }
+}
 
 ApiStatus func_80242B04_8EE924(Evt* script, s32 isInitialCall) {
     UnkKmr20* temp_v0;

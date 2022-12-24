@@ -10,10 +10,10 @@
 #ifdef SHIFT
 #define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
 #else
-#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shift
-#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shift
+#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shiftability fix
+#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shiftability fix
 #define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
-#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shift
+#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shiftability fix
 #endif
 
 typedef struct Fog {
@@ -1090,6 +1090,7 @@ extern s32 mdl_renderTaskQueueIdx;
 extern s32 mdl_renderTaskCount;
 
 extern TextureHandle mdl_textureHandles[128];
+
 extern RenderTask mdl_clearRenderTasks[3][0x100];
 
 extern s32 D_801A7000; // todo ???
@@ -2863,7 +2864,7 @@ GameMode* set_game_mode_slot(s32 i, GameMode* mode) {
 
     ASSERT(i < ARRAY_COUNT(gMainGameState));
 
-    gameMode->flags = 1 | 2;
+    gameMode->flags = 2 | 1;
     gameMode->init = mode->init;
     gameMode->step = mode->step;
     gameMode->render = mode->render;
@@ -4241,9 +4242,124 @@ void clone_model(u16 srcModelID, u16 newModelID) {
     newModel->modelID = newModelID;
 }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", func_8011B7C0, u16 arg0, s32 arg1, s32 arg2);
+void func_8011B7C0(u16 treeIndex, s32 flags, s32 arg2) {
+    s32 maxGroupIndex = -1;
+    s32 i;
+    s32 minGroupIndex;
+    s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[treeIndex].modelIndex;
+    s32 siblingIndex;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B950);
+    if (modelIndex < 255) {
+        minGroupIndex = maxGroupIndex = modelIndex;
+    } else {
+        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[treeIndex].treeDepth;
+        for (i = treeIndex - 1; i >= 0; i--) {
+            if ((*mdl_currentModelTreeNodeInfo)[i].treeDepth <= treeDepth) {
+                break;
+            }
+
+            siblingIndex = (*mdl_currentModelTreeNodeInfo)[i].modelIndex;
+
+            if (siblingIndex < 255) {
+                if (maxGroupIndex == -1) {
+                    maxGroupIndex = siblingIndex;
+                }
+                minGroupIndex = siblingIndex;
+            }
+        }
+    }
+
+    if (arg2 < 2) {
+        for (i = minGroupIndex; i <= maxGroupIndex; i++) {
+            Model* model = (*gCurrentModels)[i];
+            if (arg2 != 0) {
+                model->flags &= ~flags;
+            } else {
+                model->flags |= flags;
+            }
+        }
+    } else {
+        for (i = 0; i < minGroupIndex; i++) {
+            Model* model = (*gCurrentModels)[i];
+            if (arg2 == 3) {
+                model->flags &= ~flags;
+            } else {
+                model->flags |= flags;
+            }
+        }
+        for (i = maxGroupIndex + 1; i < 256; i++) {
+            Model* model = (*gCurrentModels)[i];
+            if (model != NULL) {
+                if (arg2 == 3) {
+                    model->flags &= ~flags;
+                } else {
+                    model->flags |= flags;
+                }
+            }
+        }
+    }
+}
+
+void func_8011B950(u16 treeIndex, s32 arg1, s32 arg2, s32 arg3) {
+    s32 maxGroupIndex = -1;
+    s32 i;
+    s32 minGroupIndex;
+    s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[treeIndex].modelIndex;
+    s32 siblingIndex;
+    s32 maskLow, maskHigh, newIndex;
+
+    if (modelIndex < 255) {
+        minGroupIndex = maxGroupIndex = modelIndex;
+    } else {
+        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[treeIndex].treeDepth;
+        for (i = treeIndex - 1; i >= 0; i--) {
+            if ((*mdl_currentModelTreeNodeInfo)[i].treeDepth <= treeDepth) {
+                break;
+            }
+
+            siblingIndex = (*mdl_currentModelTreeNodeInfo)[i].modelIndex;
+
+            if (siblingIndex < 255) {
+                if (maxGroupIndex == -1) {
+                    maxGroupIndex = siblingIndex;
+                }
+                minGroupIndex = siblingIndex;
+            }
+        }
+    }
+
+    maskLow = maskHigh = 0;
+
+    if (arg1 < 0) {
+        maskLow = 0xF;
+        arg1 = 0;
+    }
+
+    if (arg2 < 0) {
+        maskHigh = 0xF0;
+        arg2 = 0;
+    }
+
+    newIndex = arg1 + (arg2 << 4);
+
+    if (arg3 == 0) {
+        for (i = minGroupIndex; i <= maxGroupIndex; i++) {
+            Model* model = (*gCurrentModels)[i];
+            model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
+        }
+    } else {
+        for (i = 0; i < minGroupIndex; i++) {
+            Model* model = (*gCurrentModels)[i];
+            model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
+        }
+        for (i = maxGroupIndex + 1; i < 256; i++) {
+            Model* model = (*gCurrentModels)[i];
+            if (model != NULL) {
+                model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
+            }
+        }
+    }
+}
 
 void func_8011BAE8(void) {
     s32 i;

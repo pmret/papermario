@@ -3,6 +3,8 @@
 
 #define NAMESPACE action_command_jump
 
+extern s32 actionCmdTableJump[];
+
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     s32 hudElement;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

@@ -3,7 +3,6 @@
 
 extern s32 N(ItemChoice_HasSelectedItem);
 extern s32 N(ItemChoice_SelectedItemID);
-extern s32 kkj_18_D_80244E78[];
 
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
@@ -38,7 +37,8 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-extern s32 kkj_18_D_80244CB0[];
+BSS s32 kkj_18_D_80244CB0[114];
+BSS s32 kkj_18_D_80244E78[92];
 
 ApiStatus func_802405F8_AF3298(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -5,6 +5,8 @@
 
 BSS s32 D_802A9920;
 
+extern s32 actionCmdTableFlee[];
+
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;

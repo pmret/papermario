@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-extern s32 D_802A2C20;
+BSS s32 D_802A2C20;
 
 #define NAMESPACE battle_move_jump_charge_2
 

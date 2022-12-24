@@ -2,6 +2,13 @@
 #include "effects.h"
 #include "model.h"
 
+BSS u8 D_80257F20; // r
+BSS u8 D_80257F21; // g
+BSS u8 D_80257F22; // b
+BSS u8 D_80257F23; // a
+BSS u8 oldPrimR, oldPrimG, oldPrimB;
+BSS u8 oldEnvR, oldEnvG, oldEnvB;
+
 static char* N(exit_str_0) = "kmr_05";
 static char* N(exit_str_1) = "kmr_00";
 static char* N(exit_str_2) = "kmr_09";
@@ -78,7 +85,8 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-extern s32 kmr_02_D_80257F58[];
+BSS s32 kmr_02_D_80257F2C[11]; // unused?
+BSS s32 kmr_02_D_80257F58[114];
 
 ApiStatus func_802422F8_8B2368(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -127,7 +135,8 @@ ApiStatus func_80242710_8B2780(Evt* script, s32 isInitialCall) {
 
 extern u8 D_80257B00_8C7B70;
 extern u16 D_80257D00_8C7D70;
-extern MessageImageData D_80258120;
+
+BSS MessageImageData D_80258120;
 
 ApiStatus func_80242734_8B27A4(void) {
     D_80258120.raster = &D_80257B00_8C7B70; // TODO extract image
@@ -178,11 +187,6 @@ ApiStatus func_8024280C_8B287C(Evt* script, s32 isInitialCall) {
 #include "world/common/todo/SyncStatusMenu.inc.c"
 
 #ifdef NON_EQUIVALENT
-extern u8 D_80257F20;
-extern u8 D_80257F21;
-extern u8 D_80257F22;
-extern u8 D_80257F23;
-
 // control flow + data migration
 ApiStatus func_8024295C_8B29CC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -225,10 +229,6 @@ ApiStatus func_80242BA8_8B2C18(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80242BC0_8B2C30(Evt* script, s32 isInitialCall) {
     Bytecode* args;
-
-    static s32 padding;
-    static u8 oldPrimR, oldPrimG, oldPrimB;
-    static u8 oldEnvR, oldEnvG, oldEnvB;
 
     s32 newEnvR, newEnvB, newEnvG;
     s32 newPrimR, newPrimG, newPrimB;

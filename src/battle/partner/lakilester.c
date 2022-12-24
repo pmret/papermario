@@ -1364,7 +1364,6 @@ ApiStatus N(ProcessHurricane)(Evt* script, s32 isInitialCall) {
     static s32 D_8023D278;
     static HurricaneState* hurricaneState = &sHurricaneState;
 
-
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
