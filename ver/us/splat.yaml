@@ -9731,12 +9731,20 @@ segments:
     start: 0x8FF670
     vram: 0x80240000
     subsegments:
-    - [0x8FF670, c]
-    - [0x8FF680, c]
-    - [0x8FF8B0, c]
-    - [0x900380, data]
-    - [0x900A80, data]
-    - [0x9079D0]
+    - [0x8FF670, c, kmr_22_0_header]
+    - [0x8FF680, c, kmr_22_1_main]
+    - [0x8FF8B0, c, kmr_22_2_npc]
+    - [0x900380, .data, kmr_22_0_header]
+    - [0x900450, .data, kmr_22_1_main]
+    - start: 0x900A80
+      type: .data
+      name: kmr_22_2_npc
+      subsegments:
+      - [0x900A80]
+      - [0x900F70, ci4, lava_piranha_vine, 64, 32]
+      - [0x901370, palette, lava_piranha_vine]
+      - [0x901570, gfx, lava_piranha_vine]
+      - [0x901650]
   - name: kmr_23
     dir: world/area_kmr/kmr_23
     type: code
@@ -13438,9 +13446,9 @@ segments:
       name: kzn_19_4_npc
       subsegments:
       - [0xC90BF0]
-      - [0xC91088, ci4, lava_piranha_vine, 64, 32]
-      - [0xC91488, palette, lava_piranha_vine]
-      - [0xC91688, gfx, lava_piranha_vine]
+      - [0xC91088, ci4, ../../lava_piranha/vine, 64, 32]
+      - [0xC91488, palette, ../../lava_piranha/vine]
+      - [0xC91688, gfx_common, ../../lava_piranha/vine]
       - [0xC91768]
     - [0xC959B0, .data, kzn_19_5_eruption]
     - [0xC95E70, .data, kzn_19_6_entity]

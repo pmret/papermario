@@ -1,30 +1,53 @@
-#include "kmr_22.h"
+#include "ld_addrs.h"
 
-// TODO this entire file should be an include from kzn_19_4_npc.c
-
-enum {
-    VINE_0      = 0,
-    VINE_1      = 1,
-    VINE_2      = 2,
-    VINE_3      = 3,
-    NUM_VINES   = 4
-};
-
-enum {
-    MV_VinesData                = MapVar(0),
-    MV_BossDefeated             = MapVar(10),
-};
-
-enum {
-    VINE_0_BASE  = 0x80200000,
-    VINE_1_BASE  = 0x80204000,
-    VINE_2_BASE  = 0x80207000,
-    VINE_3_BASE  = 0x8020A000,
-}; // TODO shiftability -- hard-coded addresses in gBackgroundImage
-
-extern s32 N(VineAnimationsDmaTable)[];
-extern Gfx N(lava_piranha_vine_gfx)[];
 BSS s32 N(VineRenderState);
+
+MAP_STATIC_PAD(1, unk_static_pad);
+
+#define PIRANHA_DMA_ENTRY(name) \
+    (s32) world_model_anim_kzn_##name##_ROM_START,\
+    (s32) world_model_anim_kzn_##name##_ROM_END,\
+    (s32) world_model_anim_kzn_##name##_VRAM
+
+s32 N(VineAnimationsDmaTable)[] = {
+    PIRANHA_DMA_ENTRY(00),
+    PIRANHA_DMA_ENTRY(01),
+    PIRANHA_DMA_ENTRY(02),
+    PIRANHA_DMA_ENTRY(03),
+    PIRANHA_DMA_ENTRY(04),
+    PIRANHA_DMA_ENTRY(05),
+    PIRANHA_DMA_ENTRY(06),
+    PIRANHA_DMA_ENTRY(07),
+    PIRANHA_DMA_ENTRY(08),
+    PIRANHA_DMA_ENTRY(09),
+    PIRANHA_DMA_ENTRY(0A),
+    PIRANHA_DMA_ENTRY(0B),
+    PIRANHA_DMA_ENTRY(0C),
+    PIRANHA_DMA_ENTRY(0D),
+    PIRANHA_DMA_ENTRY(0E),
+    PIRANHA_DMA_ENTRY(0F),
+    PIRANHA_DMA_ENTRY(10),
+    PIRANHA_DMA_ENTRY(11),
+    PIRANHA_DMA_ENTRY(12),
+    PIRANHA_DMA_ENTRY(13),
+    PIRANHA_DMA_ENTRY(14),
+    PIRANHA_DMA_ENTRY(15),
+    PIRANHA_DMA_ENTRY(16),
+    PIRANHA_DMA_ENTRY(17),
+    PIRANHA_DMA_ENTRY(18),
+    PIRANHA_DMA_ENTRY(19),
+    PIRANHA_DMA_ENTRY(1A),
+    PIRANHA_DMA_ENTRY(1B),
+    PIRANHA_DMA_ENTRY(1C),
+    PIRANHA_DMA_ENTRY(1D),
+    PIRANHA_DMA_ENTRY(1E),
+    PIRANHA_DMA_ENTRY(1F),
+    PIRANHA_DMA_ENTRY(20),
+    PIRANHA_DMA_ENTRY(21),
+    PIRANHA_DMA_ENTRY(22),
+    PIRANHA_DMA_ENTRY(23),
+    PIRANHA_DMA_ENTRY(24),
+};
 
 void N(make_vine_interpolation)(LavaPiranhaVine* vine) {
     Evt dummyEvt;
@@ -58,7 +81,7 @@ API_CALLABLE(N(SetVineBonePos)) {
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
     s32 z = evt_get_variable(script, *args++);
-    LavaPiranhaVine* vines = (LavaPiranhaVine*) evt_get_variable(NULL, MapVar(0));
+    LavaPiranhaVine* vines = (LavaPiranhaVine*) evt_get_variable(NULL, MV_VinesData);
     LavaPiranhaVine* vine = &vines[vineIdx];
 
     vine->bonePos[jointIdx].x = x;
@@ -74,7 +97,7 @@ API_CALLABLE(N(SetVineBoneRot)) {
     s32 rx = evt_get_variable(script, *args++);
     s32 ry = evt_get_variable(script, *args++);
     s32 rz = evt_get_variable(script, *args++);
-    LavaPiranhaVine* vines = (LavaPiranhaVine*) evt_get_variable(NULL, MapVar(0));
+    LavaPiranhaVine* vines = (LavaPiranhaVine*) evt_get_variable(NULL, MV_VinesData);
     LavaPiranhaVine* vine = &vines[vineIdx];
 
     vine->boneRot[jointIdx] = rz;
@@ -88,7 +111,7 @@ API_CALLABLE(N(SetVineBoneScale)) {
     s32 sx = evt_get_variable(script, *args++);
     s32 sy = evt_get_variable(script, *args++);
     s32 sz = evt_get_variable(script, *args++);
-    LavaPiranhaVine* vines = (LavaPiranhaVine*) evt_get_variable(NULL, MapVar(0));
+    LavaPiranhaVine* vines = (LavaPiranhaVine*) evt_get_variable(NULL, MV_VinesData);
     LavaPiranhaVine* vine = &vines[vineIdx];
 
     // do nothing
@@ -269,39 +292,5 @@ API_CALLABLE(N(CreateVineRenderer)) {
     evt_set_variable(script, MV_VinesData, (s32) data);
     N(VineRenderState) = -1;
     create_worker_world(NULL, &N(worker_render_piranha_vines));
-    return ApiStatus_DONE2;
-}
-
-API_CALLABLE(N(LoadAnimationFromTable)) {
-    Bytecode* args = script->ptrReadPos;
-    s32 type = evt_get_variable(script, *args++);
-    s32 index = evt_get_variable(script, *args++);
-
-    switch (type) {
-        case VINE_0:
-            dma_copy(
-                (u8*) N(VineAnimationsDmaTable)[3 * index + 0],
-                (u8*) N(VineAnimationsDmaTable)[3 * index + 1],
-                (void*) VINE_0_BASE);
-            break;
-        case VINE_1:
-            dma_copy(
-                (u8*) N(VineAnimationsDmaTable)[3 * index + 0],
-                (u8*) N(VineAnimationsDmaTable)[3 * index + 1],
-                (void*) VINE_1_BASE);
-            break;
-        case VINE_2:
-            dma_copy(
-                (u8*) N(VineAnimationsDmaTable)[3 * index + 0],
-                (u8*) N(VineAnimationsDmaTable)[3 * index + 1],
-                (void*) VINE_2_BASE);
-            break;
-        case VINE_3:
-            dma_copy(
-                (u8*) N(VineAnimationsDmaTable)[3 * index + 0],
-                (u8*) N(VineAnimationsDmaTable)[3 * index + 1],
-                (void*) VINE_3_BASE);
-            break;
-    }
     return ApiStatus_DONE2;
 }
