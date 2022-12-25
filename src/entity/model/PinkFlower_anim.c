@@ -9,32 +9,32 @@ extern Gfx Entity_PinkFlower_RenderNode5[];
 StaticAnimatorNode Entity_PinkFlower_Node5 = {
     .displayList = Entity_PinkFlower_RenderNode5,
     .pos = { 0.0f, -30.0f, 0.0f },
-    .sibling = ENTITY_ANIN_NULL,
-    .child = ENTITY_ANIN_NULL,
+    .sibling = ENTITY_ANIM_NULL,
+    .child = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode Entity_PinkFlower_Node4 = {
-    .displayList = ENTITY_ANIN_NULL,
+    .displayList = ENTITY_ANIM_NULL,
     .pos = { 0.0f, 30.0f, 0.0f },
-    .sibling = ENTITY_ANIN_NULL,
+    .sibling = ENTITY_ANIM_NULL,
     .child = &Entity_PinkFlower_Node5,
 };
 
 StaticAnimatorNode Entity_PinkFlower_Node3 = {
     .displayList = Entity_PinkFlower_RenderNode3,
     .sibling = &Entity_PinkFlower_Node4,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode Entity_PinkFlower_Node2 = {
     .displayList = Entity_PinkFlower_RenderNode2,
     .sibling = &Entity_PinkFlower_Node3,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode Entity_PinkFlower_Node1 = {
     .displayList = Entity_PinkFlower_RenderNode1,
-    .sibling = ENTITY_ANIN_NULL,
+    .sibling = ENTITY_ANIM_NULL,
     .child = &Entity_PinkFlower_Node2,
 };
 
@@ -44,7 +44,7 @@ StaticAnimatorNode* Entity_PinkFlower_Mesh[] = {
     &Entity_PinkFlower_Node3,
     &Entity_PinkFlower_Node4,
     &Entity_PinkFlower_Node5,
-    ENTITY_ANIN_NULL,
+    ENTITY_ANIM_NULL,
 };
 
 AnimScript Entity_PinkFlower_AnimationLightUp = {

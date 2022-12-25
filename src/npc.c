@@ -1025,7 +1025,8 @@ void update_npc_blur(Npc* npc) {
     motionBlur->index = index;
 }
 
-void appendGfx_npc_blur(Npc* npc) {
+void appendGfx_npc_blur(void* appendData) {
+    Npc* npc = (Npc*) appendData;
     Matrix4f sp20, sp60;
     f32 x, y, z;
     f32 yaw;
@@ -1993,70 +1994,70 @@ s32 npc_get_collider_below(Npc* npc) {
 }
 
 void func_8003D3BC(Npc* npc) {
-    s32 temp_s4 = npc->unk_98;
-    s32 temp_s0 = npc->unk_9A;
-    s32 temp_s5 = npc->unk_9C;
-    s32 temp_s2 = npc->unk_9E;
-    s32 temp_s6 = npc->unk_A0;
-    s32 temp_s3 = npc->unk_A2;
+    s32 foldType = npc->unk_98;
+    s32 foldArg1 = npc->unk_9A;
+    s32 foldArg2 = npc->unk_9C;
+    s32 foldArg3 = npc->unk_9E;
+    s32 foldArg4 = npc->unk_A0;
+    s32 foldArg5 = npc->unk_A2;
 
     func_802DE894(npc->spriteInstanceID, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
 
-    switch (temp_s4) {
+    switch (foldType) {
         case FOLD_TYPE_NONE:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_NONE, 0, 0, 0, 0, temp_s3);
+            npc->renderMode = RENDER_MODE_ALPHATEST;
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_NONE, 0, 0, 0, 0, foldArg5);
             break;
         case FOLD_TYPE_2:
         case FOLD_TYPE_3:
-            npc->renderMode = 13;
+            npc->renderMode = RENDER_MODE_ALPHATEST;
             // fallthrough
         case FOLD_TYPE_1:
-            func_802DE894(npc->spriteInstanceID, temp_s4, 0, 0, 0, 0, temp_s3);
+            func_802DE894(npc->spriteInstanceID, foldType, 0, 0, 0, 0, foldArg5);
             break;
         case FOLD_TYPE_4:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_4, temp_s0, temp_s5, temp_s2, 0, temp_s3);
+            npc->renderMode = RENDER_MODE_ALPHATEST;
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_4, foldArg1, foldArg2, foldArg3, 0, foldArg5);
             break;
         case FOLD_TYPE_6:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_6, temp_s0, temp_s5, temp_s2, 255, temp_s3);
+            npc->renderMode = RENDER_MODE_ALPHATEST;
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_6, foldArg1, foldArg2, foldArg3, 255, foldArg5);
             break;
         case FOLD_TYPE_7:
-            npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_7, 255, 255, 255, temp_s0, temp_s3);
+            npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_7, 255, 255, 255, foldArg1, foldArg5);
             break;
         case FOLD_TYPE_8:
-            npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_8, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
+            npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_8, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
             break;
         case FOLD_TYPE_9:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_9, temp_s0, temp_s5, temp_s2, 255, temp_s3);
+            npc->renderMode = RENDER_MODE_ALPHATEST;
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_9, foldArg1, foldArg2, foldArg3, 255, foldArg5);
             break;
         case FOLD_TYPE_A:
-            npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_A, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
+            npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_A, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
             break;
         case FOLD_TYPE_5:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_5, temp_s0, temp_s5, temp_s2, 0, temp_s3);
+            npc->renderMode = RENDER_MODE_ALPHATEST;
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_5, foldArg1, foldArg2, foldArg3, 0, foldArg5);
             break;
         case FOLD_TYPE_D:
-            npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_D, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
+            npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_D, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
             break;
         case FOLD_TYPE_E:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_E, temp_s0, temp_s5, temp_s2, 255, temp_s3);
+            npc->renderMode = RENDER_MODE_ALPHATEST;
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_E, foldArg1, foldArg2, foldArg3, 255, foldArg5);
             break;
         case FOLD_TYPE_F:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_F, temp_s0, 255, 0, 255, temp_s3);
+            npc->renderMode = RENDER_MODE_ALPHATEST;
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_F, foldArg1, 255, 0, 255, foldArg5);
             break;
         case FOLD_TYPE_10:
-            npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_F, temp_s0, temp_s5, 0, temp_s5, temp_s3);
+            npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_F, foldArg1, foldArg2, 0, foldArg2, foldArg5);
             break;
     }
 }

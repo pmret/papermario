@@ -246,8 +246,8 @@ EvtScript N(EVS_Exit_Beanstalk) = {
         EVT_SET(AF_FLO_RidingBeanstalk, TRUE)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o261, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o351, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_SET_VEC3(LVar9, EVT_FLOAT(-59.0), EVT_FLOAT(22.0), EVT_FLOAT(125.0)) // target player pos
-        EVT_SET_VEC3(LVarC, EVT_FLOAT(-55.0), EVT_FLOAT(24.0), EVT_FLOAT(145.0)) // target partner pos
+        EVT_VEC3I_SET(LVar9, EVT_FLOAT(-59.0), EVT_FLOAT(22.0), EVT_FLOAT(125.0)) // target player pos
+        EVT_VEC3I_SET(LVarC, EVT_FLOAT(-55.0), EVT_FLOAT(24.0), EVT_FLOAT(145.0)) // target partner pos
         EVT_CALL(PlayerMoveTo, LVar9, LVarB, 8)
         EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.0))
         EVT_CALL(NpcJump0, NPC_PARTNER, LVarC, LVarD, LVarE, 5)

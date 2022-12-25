@@ -1,5 +1,7 @@
 #include "trd_06.h"
 
+#include "world/common/npc/KoopaBros.h"
+
 MobileAISettings N(AISettings_KoopaBros) = {
     .moveSpeed = 1.5f,
     .moveTime = 60,
@@ -51,11 +53,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .pos = { 60.0f, 0.0f, -60.0f },
         .yaw = 0,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = KOOPA_BROS_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -68,24 +66,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
                 .detectSize = { 0 },
             }
         },
-        .animations = {
-            .idle   = ANIM_KoopaBros_Red_Anim04,
-            .walk   = ANIM_KoopaBros_Red_Anim02,
-            .run    = ANIM_KoopaBros_Red_Anim03,
-            .chase  = ANIM_KoopaBros_Red_Anim03,
-            .anim_4 = ANIM_KoopaBros_Red_Anim04,
-            .anim_5 = ANIM_KoopaBros_Red_Anim04,
-            .death  = ANIM_KoopaBros_Red_Anim0A,
-            .hit    = ANIM_KoopaBros_Red_Anim0A,
-            .anim_8 = ANIM_KoopaBros_Red_Anim03,
-            .anim_9 = ANIM_KoopaBros_Red_Anim03,
-            .anim_A = ANIM_KoopaBros_Red_Anim03,
-            .anim_B = ANIM_KoopaBros_Red_Anim03,
-            .anim_C = ANIM_KoopaBros_Red_Anim03,
-            .anim_D = ANIM_KoopaBros_Red_Anim03,
-            .anim_E = ANIM_KoopaBros_Red_Anim03,
-            .anim_F = ANIM_KoopaBros_Red_Anim03,
-        },
+        .animations = RED_KOOPA_BROS_ANIMS,
     },
     {
         .id = NPC_KoopaBros_Black,
@@ -93,11 +74,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .pos = { 60.0f, 0.0f, 0.0f },
         .yaw = 0,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = KOOPA_BROS_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -110,24 +87,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
                 .detectSize = { 0 },
             }
         },
-        .animations = {
-            .idle   = ANIM_KoopaBros_Black_Anim04,
-            .walk   = ANIM_KoopaBros_Black_Anim02,
-            .run    = ANIM_KoopaBros_Black_Anim03,
-            .chase  = ANIM_KoopaBros_Black_Anim03,
-            .anim_4 = ANIM_KoopaBros_Black_Anim04,
-            .anim_5 = ANIM_KoopaBros_Black_Anim04,
-            .death  = ANIM_KoopaBros_Black_Anim0A,
-            .hit    = ANIM_KoopaBros_Black_Anim0A,
-            .anim_8 = ANIM_KoopaBros_Black_Anim03,
-            .anim_9 = ANIM_KoopaBros_Black_Anim03,
-            .anim_A = ANIM_KoopaBros_Black_Anim03,
-            .anim_B = ANIM_KoopaBros_Black_Anim03,
-            .anim_C = ANIM_KoopaBros_Black_Anim03,
-            .anim_D = ANIM_KoopaBros_Black_Anim03,
-            .anim_E = ANIM_KoopaBros_Black_Anim03,
-            .anim_F = ANIM_KoopaBros_Black_Anim03,
-        },
+        .animations = BLACK_KOOPA_BROS_ANIMS,
     },
     {
         .id = NPC_KoopaBros_Yellow,
@@ -135,11 +95,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .pos = { -10.0f, 0.0f, -60.0f },
         .yaw = 0,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = KOOPA_BROS_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -152,24 +108,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
                 .detectSize = { 0 },
             }
         },
-        .animations = {
-            .idle   = ANIM_KoopaBros_Yellow_Anim04,
-            .walk   = ANIM_KoopaBros_Yellow_Anim02,
-            .run    = ANIM_KoopaBros_Yellow_Anim03,
-            .chase  = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_4 = ANIM_KoopaBros_Yellow_Anim04,
-            .anim_5 = ANIM_KoopaBros_Yellow_Anim04,
-            .death  = ANIM_KoopaBros_Yellow_Anim0A,
-            .hit    = ANIM_KoopaBros_Yellow_Anim0A,
-            .anim_8 = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_9 = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_A = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_B = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_C = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_D = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_E = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_F = ANIM_KoopaBros_Yellow_Anim03,
-        },
+        .animations = YELLOW_KOOPA_BROS_ANIMS,
     },
     {
         .id = NPC_KoopaBros_Green,
@@ -177,11 +116,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = KOOPA_BROS_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -194,24 +129,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
                 .detectSize = { 0 },
             }
         },
-        .animations = {
-            .idle   = ANIM_KoopaBros_Green_Anim04,
-            .walk   = ANIM_KoopaBros_Green_Anim02,
-            .run    = ANIM_KoopaBros_Green_Anim03,
-            .chase  = ANIM_KoopaBros_Green_Anim03,
-            .anim_4 = ANIM_KoopaBros_Green_Anim04,
-            .anim_5 = ANIM_KoopaBros_Green_Anim04,
-            .death  = ANIM_KoopaBros_Green_Anim0A,
-            .hit    = ANIM_KoopaBros_Green_Anim0A,
-            .anim_8 = ANIM_KoopaBros_Green_Anim03,
-            .anim_9 = ANIM_KoopaBros_Green_Anim03,
-            .anim_A = ANIM_KoopaBros_Green_Anim03,
-            .anim_B = ANIM_KoopaBros_Green_Anim03,
-            .anim_C = ANIM_KoopaBros_Green_Anim03,
-            .anim_D = ANIM_KoopaBros_Green_Anim03,
-            .anim_E = ANIM_KoopaBros_Green_Anim03,
-            .anim_F = ANIM_KoopaBros_Green_Anim03,
-        },
+        .animations = GREEN_KOOPA_BROS_ANIMS,
     },
 };
 

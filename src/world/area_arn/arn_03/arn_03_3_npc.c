@@ -195,7 +195,7 @@ EvtScript N(802428CC) = {
     EVT_END_IF
     EVT_ADD(LVar1, 20)
     EVT_CALL(SetNpcPos, NPC_Boo_05, LVar0, LVar1, LVar2)
-    EVT_CALL(func_802CFD30, NPC_Boo_05, 7, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Boo_05, FOLD_TYPE_7, 0, 0, 0, 0)
     EVT_WAIT(1)
     EVT_RETURN
     EVT_END
@@ -213,7 +213,7 @@ EvtScript N(802429D4) = {
         EVT_CALL(MakeLerp, 0, 255, 40, EASING_LINEAR)
         EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(func_802CFD30, NPC_Boo_05, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Boo_05, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)
@@ -236,7 +236,7 @@ EvtScript N(80242B0C) = {
         EVT_CALL(MakeLerp, 255, 0, 40, EASING_LINEAR)
         EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(func_802CFD30, NPC_Boo_05, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Boo_05, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)

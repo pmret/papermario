@@ -12,61 +12,61 @@ extern Gfx Entity_CymbalPlant_RenderNode1[];
 
 StaticAnimatorNode Entity_CymbalPlant_Node10 = {
     .displayList = Entity_CymbalPlant_RenderNode10,
-    .sibling = ENTITY_ANIN_NULL,
-    .child = ENTITY_ANIN_NULL,
+    .sibling = ENTITY_ANIM_NULL,
+    .child = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode Entity_CymbalPlant_Node9 = {
     .displayList = Entity_CymbalPlant_RenderNode9,
     .pos = { -2.0f, -26.0f, 0.0f },
-    .sibling = ENTITY_ANIN_NULL,
-    .child = ENTITY_ANIN_NULL,
+    .sibling = ENTITY_ANIM_NULL,
+    .child = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode Entity_CymbalPlant_Node8 = {
     .displayList = Entity_CymbalPlant_RenderNode8,
     .pos = { -2.0f, -26.0f, 0.0f },
     .sibling = &Entity_CymbalPlant_Node9,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode Entity_CymbalPlant_Node7 = {
     .displayList = Entity_CymbalPlant_RenderNode7,
     .pos = { -2.0f, -26.0f, 0.0f },
     .sibling = &Entity_CymbalPlant_Node8,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode Entity_CymbalPlant_Node6 = {
-    .displayList = ENTITY_ANIN_NULL,
+    .displayList = ENTITY_ANIM_NULL,
     .pos = { 2.0f, 26.0f, 0.0f },
-    .sibling = ENTITY_ANIN_NULL,
+    .sibling = ENTITY_ANIM_NULL,
     .child = &Entity_CymbalPlant_Node7,
 };
 
 StaticAnimatorNode Entity_CymbalPlant_Node5 = {
     .displayList = Entity_CymbalPlant_RenderNode5,
     .pos = { 3.0f, -26.0f, 0.0f },
-    .sibling = ENTITY_ANIN_NULL,
-    .child = ENTITY_ANIN_NULL,
+    .sibling = ENTITY_ANIM_NULL,
+    .child = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode Entity_CymbalPlant_Node4 = {
     .displayList = Entity_CymbalPlant_RenderNode4,
     .pos = { 3.0f, -26.0f, 0.0f },
     .sibling = &Entity_CymbalPlant_Node5,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode Entity_CymbalPlant_Node3 = {
     .displayList = Entity_CymbalPlant_RenderNode3,
     .pos = { 3.0f, -26.0f, 0.0f },
     .sibling = &Entity_CymbalPlant_Node4,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode Entity_CymbalPlant_Node2 = {
-    .displayList = ENTITY_ANIN_NULL,
+    .displayList = ENTITY_ANIM_NULL,
     .pos = { -3.0f, 26.0f, 0.0f },
     .sibling = &Entity_CymbalPlant_Node6,
     .child = &Entity_CymbalPlant_Node3,
@@ -79,8 +79,8 @@ StaticAnimatorNode Entity_CymbalPlant_Node1 = {
 };
 
 StaticAnimatorNode Entity_CymbalPlant_NodeParent = {
-    .displayList = ENTITY_ANIN_NULL,
-    .sibling = ENTITY_ANIN_NULL,
+    .displayList = ENTITY_ANIM_NULL,
+    .sibling = ENTITY_ANIM_NULL,
     .child = &Entity_CymbalPlant_Node1,
 };
 
@@ -96,7 +96,7 @@ StaticAnimatorNode* Entity_CymbalPlant_Mesh[] = {
     &Entity_CymbalPlant_Node8,
     &Entity_CymbalPlant_Node9,
     &Entity_CymbalPlant_Node10,
-    ENTITY_ANIN_NULL,
+    ENTITY_ANIM_NULL,
 };
 
 AnimScript Entity_CymbalPlant_AnimationGrab = {

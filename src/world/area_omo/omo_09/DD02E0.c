@@ -2,5 +2,5 @@
 
 static char* N(exit_str_0) = "omo_09";
 
-#define UNK_NPC_POS_FUNC_NUM 7
-#include "world/common/todo/UnkNpcPosFunc.inc.c"
+#define KAMMY_NPC 7
+#include "world/common/util/GetKammyBroomEmitterPos.inc.c"

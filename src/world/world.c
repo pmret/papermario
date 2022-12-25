@@ -338,11 +338,11 @@ MapConfig kmr_maps[] = {
     { MAP(kmr_07), .bgName = "kmr_bg" },
     { MAP(kmr_09), .bgName = "kmr_bg" },
     { MAP(kmr_10), .bgName = "kmr_bg" },
-    { MAP_UNSPLIT(kmr_11, 0x80241180), .bgName = "kmr_bg" },
+    { MAP(kmr_11), .bgName = "kmr_bg" },
     { MAP(kmr_12), .bgName = "kmr_bg" },
     { MAP_UNSPLIT(kmr_20, 0x80242C00), .bgName = "kmr_bg" }, // Mario's House
     { MAP_WITH_INIT(kmr_21) },
-    { MAP_UNSPLIT(kmr_22, 0x80240DA0), .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(kmr_22) },
     { MAP_WITH_INIT(kmr_23) },
     { MAP_WITH_INIT(kmr_24) },
     { MAP(kmr_30) },
@@ -623,16 +623,17 @@ MapConfig mim_maps[] = {
 };
 
 /// Boo's Mansion
+#include "area_obk/obk.h"
 MapConfig obk_maps[] = {
-    { MAP_UNSPLIT(obk_01, 0x802411B0), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(obk_02, 0x802402E0), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(obk_03, 0x80241020), .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(obk_04, 0x80240E90), .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(obk_05, 0x802409F0), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(obk_06, 0x80240020), .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(obk_07, 0x80241BA0), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(obk_08, 0x802417B0), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(obk_09, 0x80240460), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(obk_01), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(obk_02), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(obk_03), .songVariation = 1, .sfxReverb = 1 },
+    { MAP(obk_04), .songVariation = 1, .sfxReverb = 1 },
+    { MAP(obk_05), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(obk_06), .songVariation = 1, .sfxReverb = 1 },
+    { MAP(obk_07), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(obk_08), .bgName = "obk_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(obk_09), .songVariation = 1, .sfxReverb = 2 },
 };
 
 /// Gusty Gulch

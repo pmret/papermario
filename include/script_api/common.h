@@ -264,6 +264,7 @@ ApiStatus AddBadge(Evt* script, s32 isInitialCall);
 ApiStatus RemoveBadge(Evt* script, s32 isInitialCall);
 ApiStatus SetItemPos(Evt* script, s32 isInitialCall);
 ApiStatus SetItemFlags(Evt* script, s32 isInitialCall);
+ApiStatus SetItemAlpha(Evt* script, s32 isInitialCall);
 ApiStatus AddCoin(Evt* script, s32 isInitialCall);
 ApiStatus AddStarPoints(Evt* script, s32 isInitialCall);
 ApiStatus AddStarPieces(Evt* script, s32 isInitialCall);

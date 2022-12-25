@@ -27,7 +27,7 @@ EvtScript N(EVS_Scene_Epilogue) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_SET_VEC3(LVar0, 230, 0, 350)
+    EVT_VEC3I_SET(LVar0, 230, 0, 350)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))

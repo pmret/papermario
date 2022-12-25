@@ -133,12 +133,12 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     EVT_IF_NE(LVar6, PARTNER_BOW)
         EVT_SET(LVar5, 8)
         EVT_CALL(SetNpcPos, NPC_Bow, 257, 25, 0)
-        EVT_CALL(func_802CFD30, 8, 7, 0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, 8, FOLD_TYPE_7, 0, 0, 0, 0)
         EVT_CALL(NpcFacePlayer, NPC_Bow, 0)
         EVT_CALL(MakeLerp, 0, 240, 20, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_CALL(func_802CFD30, 8, 7, LVar0, 0, 0, 0)
+            EVT_CALL(func_802CFD30, 8, FOLD_TYPE_7, LVar0, 0, 0, 0)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 0)
                 EVT_BREAK_LOOP
@@ -217,7 +217,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
             EVT_CALL(MakeLerp, 240, 0, 20, EASING_LINEAR)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_CALL(func_802CFD30, 8, 7, LVar0, 0, 0, 0)
+                EVT_CALL(func_802CFD30, 8, FOLD_TYPE_7, LVar0, 0, 0, 0)
                 EVT_WAIT(1)
                 EVT_IF_EQ(LVar1, 0)
                     EVT_BREAK_LOOP

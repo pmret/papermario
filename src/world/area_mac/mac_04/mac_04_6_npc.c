@@ -1,7 +1,5 @@
 #include "mac_04.h"
 
-extern EvtScript ItemShopInteract;
-
 #include "world/common/npc/Toad_Wander.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
 

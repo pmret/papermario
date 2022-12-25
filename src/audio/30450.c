@@ -655,7 +655,7 @@ AuResult snd_song_get_playing_info(s32 songName, BGMHeader** outFile, BGMPlayer*
     return status;
 }
 
-AuResult func_80055D38(s32 songName, f32 arg1) {
+AuResult snd_song_set_playback_rate(s32 songName, f32 rate) {
     BGMPlayer* bgmPlayer;
     BGMHeader* bgmFile;
     AuResult status;
@@ -663,13 +663,13 @@ AuResult func_80055D38(s32 songName, f32 arg1) {
     status = snd_song_get_playing_info(songName, &bgmFile, &bgmPlayer);
 
     if (status == AU_RESULT_OK) {
-        func_80050770(bgmPlayer, arg1);
+        au_bgm_set_playback_rate(bgmPlayer, rate);
     }
 
     return status;
 }
 
-AuResult func_80055D8C(s32 songName, s32 arg1) {
+AuResult snd_song_set_detune(s32 songName, s32 detune) {
     BGMPlayer* bgmPlayer;
     BGMHeader* bgmFile;
     AuResult status;
@@ -677,7 +677,7 @@ AuResult func_80055D8C(s32 songName, s32 arg1) {
     status = snd_song_get_playing_info(songName, &bgmFile, &bgmPlayer);
 
     if (status == AU_RESULT_OK) {
-        func_80050818(bgmPlayer, arg1);
+        au_bgm_player_set_detune(bgmPlayer, detune);
     }
 
     return status;

@@ -8,7 +8,7 @@
     .flowerDrops = NO_DROPS, \
 }
 
-#define SHY_GUY_ANIMS \
+#define RED_SHY_GUY_ANIMS \
 { \
     .idle   = ANIM_ShyGuy_Red_Anim01, \
     .walk   = ANIM_ShyGuy_Red_Anim02, \

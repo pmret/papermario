@@ -101,6 +101,9 @@ kmr_02_Quizmo_StageEffect = 0x80257F48;
 kmr_02_Quizmo_AudienceEffect = 0x80257F4C;
 kmr_02_Quizmo_VannaTEffect = 0x80257F50;
 
+// broken map symbols
+hos_06_D_80246430 = 0x80246430;
+
 // os stuff
 osTvType = 0x80000300;
 osRomBase = 0x80000308;

@@ -329,8 +329,8 @@ EvtScript N(EVS_Scene_UnlockGate) = {
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(20)
         EVT_ADDF(LVar0, EVT_FLOAT(12.0))
-        EVT_CALL(func_802CFD30, NPC_GateBoo_01, 7, LVar0, 0, 0, 0)
-        EVT_CALL(func_802CFD30, NPC_GateBoo_02, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_GateBoo_01, FOLD_TYPE_7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_GateBoo_02, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(10)
@@ -359,8 +359,8 @@ EvtScript N(EVS_Scene_UnlockGate) = {
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20)
         EVT_SUBF(LVar0, EVT_FLOAT(12.0))
-        EVT_CALL(func_802CFD30, NPC_GateBoo_01, 7, LVar0, 0, 0, 0)
-        EVT_CALL(func_802CFD30, NPC_GateBoo_02, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_GateBoo_01, FOLD_TYPE_7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_GateBoo_02, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetNpcPos, NPC_GateBoo_01, 0, -1000, 0)
