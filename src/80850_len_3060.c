@@ -512,23 +512,24 @@ void update_status_menu(void) {
     UiStatus* uiStatus = &gUIStatus;
     PlayerData* playerData = &gPlayerData;
     PlayerStatus* playerStatus = &gPlayerStatus;
+    s8 new_var;
     s32 s0;
     s32 s02;
     s32 fp;
     s32 s5;
     s32 s6;
-    s32 s2;
+    s32 id;
     s32 s4;
     s32 s7;
     s32 s1;
-    s32 s66;
     s32 v0;
     s32 temp;
-
+s32 new_var2;
     s32 sp50;
     s32 sp54;
     s32 sp5C;
     s32 sp60;
+    s32 something;
 
     if (gGameStatusPtr->creditsViewportMode >= 0 ||
         gGameStatusPtr->demoState != 0 ||
@@ -641,6 +642,8 @@ void update_status_menu(void) {
         uiStatus->unk_3B[0] = 0;
     }
 
+    something = 174;
+
     switch (uiStatus->hidden) {
         case 0:
             uiStatus->drawPosY += 10;
@@ -668,6 +671,7 @@ void update_status_menu(void) {
             uiStatus->drawPosY -= 5;
             if (uiStatus->drawPosY < -100) {
                 uiStatus->drawPosY = -100;
+
                 if (!uiStatus->ignoreChanges) {
                     if (playerStatus->actionState != ACTION_STATE_IDLE) {
                         uiStatus->showTimer = 0;
@@ -691,8 +695,8 @@ void update_status_menu(void) {
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 12, 20, SCREEN_WIDTH - 12, SCREEN_HEIGHT - 20);
     fp = uiStatus->drawPosX;
     s5 = uiStatus->drawPosY;
-    draw_box(0, 5, fp,       s5, 0, 174, 35, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
-    draw_box(0, 6, fp + 174, s5, 0, 122, 25, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
+    draw_box(0, 5, fp,       s5, 0, something, 35, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
+    draw_box(0, 6, fp + something, s5, 0, 122, 25, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
 
     if (uiStatus->hpBlinkTimer > 0) {
         uiStatus->hpBlinkTimer--;
@@ -714,13 +718,13 @@ void update_status_menu(void) {
     }
 
     if (s6) {
-        s2 = uiStatus->hpIconIndices[0];
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 22, uiStatus->drawPosY + 13);
-        hud_element_draw_next(s2);
+        id = uiStatus->hpIconIndices[0];
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 22, uiStatus->drawPosY + 13);
+        hud_element_draw_next(id);
 
-        s2 = uiStatus->hpIconIndices[1];
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 37, uiStatus->drawPosY + 13);
-        hud_element_draw_next(s2);
+        id = uiStatus->hpIconIndices[1];
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 37, uiStatus->drawPosY + 13);
+        hud_element_draw_next(id);
 
         status_menu_draw_stat(uiStatus->iconIndex8, uiStatus->drawPosX + 48, uiStatus->drawPosY + 8, uiStatus->displayHP, playerData->curMaxHP);
     }
@@ -745,13 +749,13 @@ void update_status_menu(void) {
     }
 
     if (s6) {
-        s2 = uiStatus->fpIconIndices[0];
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 110, uiStatus->drawPosY + 13);
-        hud_element_draw_next(s2);
+        id = uiStatus->fpIconIndices[0];
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 110, uiStatus->drawPosY + 13);
+        hud_element_draw_next(id);
 
-        s2 = uiStatus->fpIconIndices[1];
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 125, uiStatus->drawPosY + 13);
-        hud_element_draw_next(s2);
+        id = uiStatus->fpIconIndices[1];
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 125, uiStatus->drawPosY + 13);
+        hud_element_draw_next(id);
 
         status_menu_draw_stat(uiStatus->iconIndex9, uiStatus->drawPosX + 136, uiStatus->drawPosY + 8, uiStatus->displayFP, playerData->curMaxFP);
     }
@@ -773,13 +777,13 @@ void update_status_menu(void) {
     }
 
     if (s6) {
-        s2 = uiStatus->starpointsIconIndex;
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 195, uiStatus->drawPosY + 14);
-        hud_element_draw_next(s2);
+        id = uiStatus->starpointsIconIndex;
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 195, uiStatus->drawPosY + 14);
+        hud_element_draw_next(id);
 
-        s2 = uiStatus->starpointsShineIconIndex;
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 195, uiStatus->drawPosY + 9);
-        hud_element_draw_next(s2);
+        id = uiStatus->starpointsShineIconIndex;
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 195, uiStatus->drawPosY + 9);
+        hud_element_draw_next(id);
 
         status_menu_draw_number(uiStatus->iconIndexA, uiStatus->drawPosX + 200, uiStatus->drawPosY + 8, playerData->starPoints, 2);
     }
@@ -804,18 +808,18 @@ void update_status_menu(void) {
     }
 
     if (s6) {
-        s2 = uiStatus->coinIconIndex;
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 244, uiStatus->drawPosY + 14);
-        hud_element_draw_next(s2);
+        id = uiStatus->coinIconIndex;
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 244, uiStatus->drawPosY + 14);
+        hud_element_draw_next(id);
 
-        s2 = uiStatus->coinSparkleIconIndex;
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 244, uiStatus->drawPosY + 14);
-        hud_element_draw_next(s2);
+        id = uiStatus->coinSparkleIconIndex;
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 244, uiStatus->drawPosY + 14);
+        hud_element_draw_next(id);
 
         status_menu_draw_number(uiStatus->iconIndexB, uiStatus->drawPosX + 247, uiStatus->drawPosY + 8, uiStatus->displayCoins, 3);
     }
 
-    s2 = uiStatus->starIconIndex;
+    id = uiStatus->starIconIndex;
     s6 = 1;
 
     if (uiStatus->spBlinking) {
@@ -891,85 +895,87 @@ void update_status_menu(void) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[0], s5 - 2);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[0], s5 - 2);
+        hud_element_draw_next(id);
         s1++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[1], s5 - 2);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[1], s5 - 2);
+        hud_element_draw_next(id);
         s1++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[2], s5 - 2);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[2], s5 - 2);
+        hud_element_draw_next(id);
         s1++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[3], s5 - 2);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[3], s5 - 2);
+        hud_element_draw_next(id);
         s1++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[4], s5 - 2);
-        hud_element_draw_next(s2);
-        s1++;
-
-        if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
-            break;
-        }
-        s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[5], s5 - 2);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[4], s5 - 2);
+        hud_element_draw_next(id);
         s1++;
 
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[6], s5 - 2);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[5], s5 - 2);
+        hud_element_draw_next(id);
         s1++;
 
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPStarHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + 12 + sp50 * 20, s5);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[6], s5 - 2);
+        hud_element_draw_next(id);
+        s1++;
+
+        if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
+            break;
+        }
+        s02++;
+        hud_element_set_script(id, SPStarHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + 12 + sp50 * 20, s5);
+        hud_element_draw_next(id);
         s1 = 0;
         sp50++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
     }
+    new_var2 = s5;
 
-    s4 = playerData->maxStarPower * 8;
+    temp = playerData->maxStarPower;
+    s4 = temp * 8;
     while (TRUE) {
         if (s02 >= s4) {
             break;
         }
         if (s1 == 0) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -977,9 +983,9 @@ void update_status_menu(void) {
         }
         if (s1 == 1) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -987,9 +993,9 @@ void update_status_menu(void) {
         }
         if (s1 == 2) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -997,9 +1003,9 @@ void update_status_menu(void) {
         }
         if (s1 == 3) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -1007,9 +1013,9 @@ void update_status_menu(void) {
         }
         if (s1 == 4) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -1017,9 +1023,9 @@ void update_status_menu(void) {
         }
         if (s1 == 5) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -1027,9 +1033,9 @@ void update_status_menu(void) {
         }
         if (s1 == 6) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -1038,9 +1044,9 @@ void update_status_menu(void) {
 
         if (s1 == 7) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusStarEmpty);
-            hud_element_set_render_pos(s2, fp + 12 + sp50 * 20, s5);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusStarEmpty);
+            hud_element_set_render_pos(id, fp + 12 + sp50 * 20, new_var2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }

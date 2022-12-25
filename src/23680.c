@@ -7,49 +7,41 @@ extern s32 D_8014B7F0;
 // wip
 #ifdef WIP
 void spawn_drops(Enemy* enemy) {
-    EnemyDrops* drops = enemy->drops;
+    PlayerData* playerData = &gPlayerData;
+    EncounterStatus* encounter = &gCurrentEncounter;
+    EnemyDrops* drops = enemy->drops; // sp20
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = &gCameras[gCurrentCameraID];
-    ItemDrop* itemDrop;
-    StatDrop* statDrop;
-
-    s32 pickupDelay;
+    s32 pickupDelay; // sp24
     s32 sp28;
-    s32 numShadowSpaces;
+    s32 numShadowSpaces; // sp2C
     s32 itemToDrop;
     f32 x, y, z;
     f32 temp_f20;
     f32 chance;
-    f32 temp_f20_3;
     f32 attempts;
     f32 temp_f24;
-    f32 temp_f24_2;
-    s32 oldMinCoinBonus;
     s32 maxCoinBonus;
     s32 minCoinBonus;
-    s32 targetWeight;
-    s32 diffCoinBonus;
     s32 maxWeight;
-    s32 var_a0_3;
-    s32 var_fp;
+    s32 var_fp; // s8
     s32 var_s1;
-    s32 numToDrop;
-    s32 var_s1_3;
-    s32 var_s1_5;
-    s32 totalWeight;
-    s32 facingAngleSign;
-    s32 angleMult;
-    s32 i;
+    s32 totalWeight; // s5
+    s32 facingAngleSign; // s6
+    s32 angleMult; // s7
+    s32 i; // s2
     s32 j;
+    s32 temp;
+    s32 flags;
 
     numShadowSpaces = 0;
-    for (i = 0; i < MAX_SHADOWS; i++) {
-        if (get_shadow_by_index(i) == NULL) {
+    for (i = 0; i < 60; i++) {
+        if (get_shadow_by_index(i) == 0) {
             numShadowSpaces++;
         }
-        var_fp = 0;
     }
 
+    var_fp = 0;
     sp28 = 246 - D_8014B7F0;
     facingAngleSign = clamp_angle(camera->currentYaw + 90.0f);
     x = npc->pos.x;
@@ -59,61 +51,67 @@ void spawn_drops(Enemy* enemy) {
     angleMult = 0;
     pickupDelay = 0;
 
-    if (rand_int(100) < drops->itemDropChance) {
+    var_s1 = drops->itemDropChance;
+    if (var_s1 > rand_int(100)) {
         maxWeight = 0;
 
         for (i = 0; i < 8; i++) {
-            itemDrop = &drops->itemDrops[i];
-            if (itemDrop->item == 0) {
-                maxWeight += itemDrop->weight;
+            if (drops->itemDrops[3 * i] != 0) {
+                maxWeight += drops->itemDrops[3 * i + 1];
             } else {
                 break;
             }
         }
 
         totalWeight = 0;
+        var_s1 = rand_int(maxWeight);
         itemToDrop = 0;
-        targetWeight = rand_int(maxWeight);
 
         for (i = 0; i < 8; i++) {
-            itemDrop = &drops->itemDrops[i];
+            if (drops->itemDrops[3 * i] == 0) {
+                break;
+            }
 
-            if (itemDrop->item != 0) {
-                totalWeight += itemDrop->weight;
-                if (itemDrop->unk_04 > 0) {
-                    if (get_global_flag(itemDrop->unk_04 + 0x714) == 0) {
-                        continue;
-                    }
+            totalWeight += drops->itemDrops[3 * i + 1];
+            if (drops->itemDrops[3 * i + 2] > 0) {
+                if (get_global_flag(drops->itemDrops[3 * i + 2] + 0x714) != 0) {
+                    continue;
                 }
+            }
 
-                if (totalWeight >= targetWeight) {
-                    itemToDrop = itemDrop->item;
-                    break;
-                }
-            } else {
+            if (totalWeight >= var_s1) {
+                itemToDrop = drops->itemDrops[3 * i];
+                do { } while (0); // TODO required to match
                 break;
             }
         }
 
+        // TODO this bullshit is required to match
+        flags = enemy->flags;
+        if (flags) {
+            flags = 0;
+        }
+
         if (itemToDrop != 0) {
-            make_item_entity(itemToDrop, x, y, z, 4, pickupDelay, facingAngleSign + (0 * 0x1E * 8), 0);
+            make_item_entity(itemToDrop, x, y, z, 4, pickupDelay, facingAngleSign + angleMult * 360, 0);
             var_fp++;
             pickupDelay += 2;
             facingAngleSign = (facingAngleSign + 30.0);
             if (var_fp >= 12) {
-                angleMult = 1;
-                facingAngleSign = var_fp * 8;
+                angleMult++;
+                facingAngleSign = angleMult * 8;
                 var_fp = 0;
             }
-            if (drops->itemDrops[i].item >= 0) {
-                set_global_flag(drops->itemDrops[i].item + 0x715);
+            maxCoinBonus = drops->itemDrops[(3 * i) + 2]; // TODO required to match
+            if (maxCoinBonus >= 0) {
+                set_global_flag(drops->itemDrops[3 * i + 2] + 0x715);
             }
         }
     }
 
-    if (gCurrentEncounter.dropWhackaBump != 0) {
-        gCurrentEncounter.dropWhackaBump = 0;
-        make_item_entity(0x93, x, y, z, 4, pickupDelay, facingAngleSign + (angleMult * 0x168), 0);
+    if (encounter->dropWhackaBump != 0) {
+        encounter->dropWhackaBump = 0;
+        make_item_entity(0x93, x, y, z, 4, pickupDelay, facingAngleSign + angleMult * 360, 0);
         var_fp++;
         pickupDelay += 2;
         facingAngleSign += 30.0;
@@ -125,20 +123,24 @@ void spawn_drops(Enemy* enemy) {
     }
 
     var_s1 = 0;
+    temp_f24 = playerData->curHP / (f32) playerData->curMaxHP;
     itemToDrop = 0;
-    temp_f24 = gPlayerData.curHP / (f32) gPlayerData.curMaxHP;
 
     for (i = 0; i < 8; i++) {
-        statDrop = &drops->heartDrops[i];
+        attempts = drops->heartDrops[4 * i];
+        temp_f20 = drops->heartDrops[4 * i + 1];
+        attempts /= 32767.0f;
+        temp_f20 /= 32767.0f;
 
-        temp_f20 = statDrop->generalChance / 32767.0f;
-        if ((temp_f24 <= statDrop->cutoff / 32767.0f) &&
-            (rand_int(100) <= (temp_f20 * 100.0f)))
+        if (temp_f24 <= attempts &&
+            rand_int(100) <= temp_f20 * 100.0f)
         {
-            attempts = statDrop->attempts;
-            chance = statDrop->chancePerAttempt / 32767.0f;
+            attempts = drops->heartDrops[4 * i + 2];
+            chance = drops->heartDrops[4 * i + 3];
+            chance /= 32767.0f;
             for (j = 0; j < attempts; j++) {
-                if (rand_int(100) <= chance * 100.0f) {
+                f32 temp_f0 = rand_int(100);
+                if (temp_f0 <= chance * 100.0f) {
                     var_s1++;
                 }
             }
@@ -147,7 +149,8 @@ void spawn_drops(Enemy* enemy) {
     }
 
     if (is_ability_active(0x2B) != 0) {
-        var_s1 = var_s1 + 1 + rand_int(2);
+        s32 temp = var_s1 + 1;
+        var_s1 = temp + rand_int(2);
     }
     if (enemy->flags & 0x800000) {
         var_s1 = 0;
@@ -155,18 +158,17 @@ void spawn_drops(Enemy* enemy) {
     if (var_s1 != 0) {
         itemToDrop = 0x156;
     }
-    numToDrop = sp28 / 2;
     if (var_s1 * 2 > sp28) {
-        numToDrop = sp28;
+        var_s1 = sp28 / 2;
     }
-    sp28 %= 2;
-    if (numToDrop > numShadowSpaces) {
-        numToDrop = numShadowSpaces;
+    sp28 -= 2 * var_s1;
+    if (var_s1 > numShadowSpaces) {
+        var_s1 = numShadowSpaces;
     }
 
-    numShadowSpaces -= numToDrop;
+    numShadowSpaces -= var_s1;
 
-    for (i = 0; i < numToDrop; i++) {
+    for (i = 0; i < var_s1; i++) {
         make_item_entity(itemToDrop, x, y, z, 4, pickupDelay, facingAngleSign + (angleMult * 360), 0);
         var_fp++;
         pickupDelay += 2;
@@ -178,23 +180,26 @@ void spawn_drops(Enemy* enemy) {
         }
     }
 
-    var_s1_3 = 0;
+    var_s1 = 0;
     itemToDrop = 0;
-    temp_f24_2 = gPlayerData.curFP / (f32) gPlayerData.curMaxFP;
+    temp_f24 = playerData->curFP / (f32) playerData->curMaxFP;
 
     for (i = 0; i < 8; i++) {
-        statDrop = &drops->flowerDrops[i];
+        attempts = drops->flowerDrops[4 * i + 0];
+        temp_f20 = drops->flowerDrops[4 * i + 1];
+        attempts /= 32767.0f;
+        temp_f20 /= 32767.0f;
 
-        temp_f20_3 = statDrop->generalChance / 32767.0f;
-        if ((temp_f24_2 <= statDrop->cutoff / 32767.0f) &&
-            (rand_int(100) <= temp_f20_3 * 100.0f))
+        if (temp_f24 <= attempts &&
+            rand_int(100) <= temp_f20 * 100.0f)
         {
-            attempts = statDrop->attempts;
-            chance = statDrop->chancePerAttempt / 32767.0f;
-
+            attempts = drops->flowerDrops[4 * i + 2];
+            chance = drops->flowerDrops[4 * i + 3];
+            chance /= 32767.0f;
             for (j = 0; j < attempts; j++) {
-                if (rand_int(100) <= chance * 100.0f) {
-                    var_s1_3++;
+                f32 temp_f0 = rand_int(100);
+                if (temp_f0 <= chance * 100.0f) {
+                    var_s1++;
                 }
             }
             break;
@@ -202,26 +207,26 @@ void spawn_drops(Enemy* enemy) {
     }
 
     if (is_ability_active(0x2C) != 0) {
-        var_s1_3 = var_s1_3 + 1 + rand_int(2);
+        s32 temp = var_s1 + 1;
+        var_s1 = temp + rand_int(2);
     }
     if (enemy->flags & 0x800000) {
-        var_s1_3 = 0;
+        var_s1 = 0;
     }
-    if (var_s1_3 != 0) {
+    if (var_s1 != 0) {
         itemToDrop = 0x15B;
     }
-    numToDrop = sp28 / 2;
-    if (sp28 < (var_s1_3 * 2)) {
-
+    if (var_s1 * 2 > sp28) {
+        var_s1 = sp28 / 2;
     }
-    sp28 %= 2;
-    if (numShadowSpaces < numToDrop) {
-        numToDrop = numShadowSpaces;
+    sp28 -= 2 * var_s1;
+    if (var_s1 > numShadowSpaces) {
+        var_s1 = numShadowSpaces;
     }
 
-    numShadowSpaces -= numToDrop;
+    numShadowSpaces -= var_s1;
 
-    for (i = 0; i < numToDrop; i++) {
+    for (i = 0; i < var_s1; i++) {
         make_item_entity(itemToDrop, x, y, z, 4, pickupDelay, facingAngleSign + (angleMult * 360), 0);
         var_fp++;
         pickupDelay += 2;
@@ -236,61 +241,59 @@ void spawn_drops(Enemy* enemy) {
     itemToDrop = 0x157;
     minCoinBonus = drops->minCoinBonus;
     maxCoinBonus = drops->maxCoinBonus;
-    oldMinCoinBonus = minCoinBonus;
-    if (maxCoinBonus < minCoinBonus) {
+
+    if (maxCoinBonus < drops->minCoinBonus) {
+        temp = minCoinBonus;
         minCoinBonus = maxCoinBonus;
-        maxCoinBonus = oldMinCoinBonus;
+        maxCoinBonus = temp;
     }
-    diffCoinBonus = maxCoinBonus - minCoinBonus;
+
+    var_s1 = maxCoinBonus - minCoinBonus;
     if (minCoinBonus < 0) {
-        var_a0_3 = maxCoinBonus - minCoinBonus;
-        goto block_85;
+        var_s1 = rand_int(minCoinBonus - -maxCoinBonus) + minCoinBonus;
+    } else if (var_s1 != 0) {
+        var_s1 = rand_int(var_s1) + minCoinBonus;
     } else {
-        var_a0_3 = diffCoinBonus;
+        var_s1 = minCoinBonus;
     }
 
-    if (diffCoinBonus != 0) {
-block_85:
-        var_s1_5 = rand_int(var_a0_3) + minCoinBonus;
-    } else {
-        var_s1_5 = minCoinBonus;
+    if (var_s1 < 0) {
+        var_s1 = 0;
     }
 
-    if (var_s1_5 < 0) {
-        var_s1_5 = 0;
-    }
-    var_s1_5 = var_s1_5 + gCurrentEncounter.coinsEarned;
+    var_s1 = var_s1 + encounter->coinsEarned;
     if (is_ability_active(0x19) != 0) {
-        gCurrentEncounter.damageTaken = 0;
-        var_s1_5 += gCurrentEncounter.damageTaken >> 1;
+        var_s1 += encounter->damageTaken / 2;
+        encounter->damageTaken = 0;
     }
-    if (gCurrentEncounter.merleeCoinBonus != 0) {
-        gCurrentEncounter.merleeCoinBonus = 0;
-        var_s1_5 *= 3;
+    if (encounter->merleeCoinBonus != 0) {
+        encounter->merleeCoinBonus = 0;
+        var_s1 *= 3;
     }
     if (is_ability_active(0x10) != 0) {
-        var_s1_5 *= 2;
+        var_s1 *= 2;
     }
-    if (var_s1_5 > 20) {
-        var_s1_5 = 20;
+    if (var_s1 > 20) {
+        var_s1 = 20;
     }
     if (enemy->flags & 0x800000) {
-        var_s1_5 = 0;
+        var_s1 = 0;
     }
-    numToDrop = sp28 / 2;
-    if (sp28 < (var_s1_5 * 2)) {
+    if (var_s1 * 2 > sp28) {
+        var_s1 = sp28 / 2;
+    }
+    sp28 -= 2 * var_s1;
 
-    }
-    if (numToDrop > numShadowSpaces) {
-        numToDrop = numShadowSpaces;
+    if (var_s1 > numShadowSpaces) {
+        var_s1 = numShadowSpaces;
     }
 
-    for (i = 0; i < numToDrop; i++) {
+    for (i = 0; i < var_s1; i++) {
         make_item_entity(itemToDrop, x, y, z, 4, pickupDelay, facingAngleSign + (angleMult * 360), 0);
         var_fp++;
         pickupDelay += 2;
         facingAngleSign = facingAngleSign + 30.0;
-        if (var_fp >= 0xC) {
+        if (var_fp >= 12) {
             var_fp = 0;
             angleMult++;
             facingAngleSign = angleMult * 8;

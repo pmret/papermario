@@ -172,10 +172,10 @@ typedef struct StatDrop {
 
 typedef struct EnemyDrops {
     /* 0x00 */ u8 dropFlags;
-    /* 0x01 */ s8 itemDropChance; // %
-    /* 0x02 */ ItemDrop itemDrops[8];
-    /* 0x32 */ StatDrop heartDrops[8];
-    /* 0x72 */ StatDrop flowerDrops[8];
+    /* 0x01 */ u8 itemDropChance; // %
+    /* 0x02 */ ItemDrop itemDrops[8]; //s16 itemDrops[24];
+    /* 0x32 */ StatDrop heartDrops[8]; //s16 heartDrops[32];
+    /* 0x72 */ StatDrop flowerDrops[8]; //s16 flowerDrops[32];
     /* 0xB2 */ s16 minCoinBonus;
     /* 0xB4 */ s16 maxCoinBonus;
     /* 0xB6 */ char unk_DE[2];
