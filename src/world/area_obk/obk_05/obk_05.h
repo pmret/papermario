@@ -12,12 +12,12 @@
 #include "sprite/npc/Boo.h"
 
 enum {
-	NPC_Boo_01      = 0,
-	NPC_Boo_02      = 1,
+    NPC_Boo_01      = 0,
+    NPC_Boo_02      = 1,
 };
 
 enum {
-    MF_Unk_0A       = MapFlag(10),
+    MF_IsRetroMario     = MapFlag(10),
 };
 
 #define NAMESPACE obk_05

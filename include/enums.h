@@ -4353,6 +4353,25 @@ enum CopiedVtxUnit {
     VTX_COPY_F      = 0xF,
 };
 
+enum ModelAnimUnit {
+    MDL_ANIMATOR_0  = 0x0,
+    MDL_ANIMATOR_1  = 0x1,
+    MDL_ANIMATOR_2  = 0x2,
+    MDL_ANIMATOR_3  = 0x3,
+    MDL_ANIMATOR_4  = 0x4,
+    MDL_ANIMATOR_5  = 0x5,
+    MDL_ANIMATOR_6  = 0x6,
+    MDL_ANIMATOR_7  = 0x7,
+    MDL_ANIMATOR_8  = 0x8,
+    MDL_ANIMATOR_9  = 0x9,
+    MDL_ANIMATOR_A  = 0xA,
+    MDL_ANIMATOR_B  = 0xB,
+    MDL_ANIMATOR_C  = 0xC,
+    MDL_ANIMATOR_D  = 0xD,
+    MDL_ANIMATOR_E  = 0xE,
+    MDL_ANIMATOR_F  = 0xF,
+};
+
 enum EnemyFlags {
     ENEMY_FLAGS_1                 = 0x00000001,
     ENEMY_FLAGS_2                 = 0x00000002,

@@ -141,8 +141,8 @@ AnimScript Entity_MunchlesiaEnvelop_Animation = {
 
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node8 = {
     .displayList = Entity_MunchlesiaEnvelop_Render,
-    .sibling = ENTITY_ANIN_NULL,
-    .child = ENTITY_ANIN_NULL,
+    .sibling = ENTITY_ANIM_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vertexStartOffset = 399 * 6,
     .vtxList = D_0A000000_E7B0E0,
 };
@@ -150,7 +150,7 @@ StaticAnimatorNode Entity_MunchlesiaEnvelop_Node8 = {
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node7 = {
     .displayList = Entity_MunchlesiaEnvelop_Render,
     .sibling = &Entity_MunchlesiaEnvelop_Node8,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vertexStartOffset = 399 * 5,
     .vtxList = D_0A000000_E7B0E0,
 };
@@ -158,7 +158,7 @@ StaticAnimatorNode Entity_MunchlesiaEnvelop_Node7 = {
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node6 = {
     .displayList = Entity_MunchlesiaEnvelop_Render,
     .sibling = &Entity_MunchlesiaEnvelop_Node7,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vertexStartOffset = 399 * 4,
     .vtxList = D_0A000000_E7B0E0,
 };
@@ -166,7 +166,7 @@ StaticAnimatorNode Entity_MunchlesiaEnvelop_Node6 = {
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node5 = {
     .displayList = Entity_MunchlesiaEnvelop_Render,
     .sibling = &Entity_MunchlesiaEnvelop_Node6,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vertexStartOffset = 399 * 3,
     .vtxList = D_0A000000_E7B0E0,
 };
@@ -174,7 +174,7 @@ StaticAnimatorNode Entity_MunchlesiaEnvelop_Node5 = {
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node4 = {
     .displayList = Entity_MunchlesiaEnvelop_Render,
     .sibling = &Entity_MunchlesiaEnvelop_Node5,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vertexStartOffset = 399 * 2,
     .vtxList = D_0A000000_E7B0E0,
 };
@@ -182,7 +182,7 @@ StaticAnimatorNode Entity_MunchlesiaEnvelop_Node4 = {
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node3 = {
     .displayList = Entity_MunchlesiaEnvelop_Render,
     .sibling = &Entity_MunchlesiaEnvelop_Node4,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vertexStartOffset = 399,
     .vtxList = D_0A000000_E7B0E0,
 };
@@ -190,16 +190,16 @@ StaticAnimatorNode Entity_MunchlesiaEnvelop_Node3 = {
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node2 = {
     .displayList = Entity_MunchlesiaEnvelop_Render,
     .sibling = &Entity_MunchlesiaEnvelop_Node3,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vtxList = D_0A000000_E7B0E0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node1 = {
-    .displayList = ENTITY_ANIN_NULL,
-    .sibling = ENTITY_ANIN_NULL,
+    .displayList = ENTITY_ANIM_NULL,
+    .sibling = ENTITY_ANIM_NULL,
     .child = &Entity_MunchlesiaEnvelop_Node2,
-    .vertexStartOffset = (s32)ENTITY_ANIN_NULL,
-    .vtxList = ENTITY_ANIN_NULL,
+    .vertexStartOffset = (s32)ENTITY_ANIM_NULL,
+    .vtxList = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode* Entity_MunchlesiaEnvelop_Mesh[] = {
@@ -211,5 +211,5 @@ StaticAnimatorNode* Entity_MunchlesiaEnvelop_Mesh[] = {
     &Entity_MunchlesiaEnvelop_Node6,
     &Entity_MunchlesiaEnvelop_Node7,
     &Entity_MunchlesiaEnvelop_Node8,
-    ENTITY_ANIN_NULL,
+    ENTITY_ANIM_NULL,
 };

@@ -21,6 +21,7 @@ enum {
 };
 
 enum {
+    AF_KMR_04       = AreaFlag(4),
     AF_KMR_06       = AreaFlag(6),
     AF_KMR_07       = AreaFlag(7),
     AF_KMR_08       = AreaFlag(8),

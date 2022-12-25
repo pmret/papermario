@@ -9665,17 +9665,19 @@ segments:
     start: 0x8DA100
     vram: 0x80240000
     subsegments:
-    - [0x8DA100, c]
-    - [0x8DA3A0, c]
-    - [0x8DAFC0, c]
-    - [0x8DB020, c]
-    - [0x8DB260, data]
-    - [0x8DB2F0, data]
-    - [0x8DC270, data]
-    - [0x8DE400, data]
-    - [0x8DFBB0, data]
-    - [0x8E0190, data]
-    - [0x8EB190]
+    - [0x8DA100, c, kmr_11_0_header]
+    - [0x8DA100, c, kmr_11_1_music]
+    - [0x8DA100, c, kmr_11_2_main]
+    - [0x8DA3A0, c, kmr_11_3_scenes]
+    - [0x8DA470, c, kmr_11_4_npc]
+    - [0x8DAFC0, c, kmr_11_5_entity]
+    - [0x8DB020, c, kmr_11_6_kammy]
+    - [0x8DB020, c, kmr_11_7_foliage]
+    - [0x8DB260, c, kmr_11_8_fortress_skeleton]
+    - [0x8DB260, c, kmr_11_9_fortress_animation]
+    - [0x8DB260, c, kmr_11_10_bridge_skeleton]
+    - [0x8DB260, c, kmr_11_11_bridge_animation]
+    - [0x8DB260]
   - name: kmr_12
     dir: world/area_kmr/kmr_12
     type: code

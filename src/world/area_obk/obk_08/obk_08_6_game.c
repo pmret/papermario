@@ -314,7 +314,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
             EVT_CALL(GetNpcPos, MV_ItemCarrierNpc, LVar3, LVar4, LVar5)
             EVT_CALL(SetNpcPos, NPC_DummyBoo, LVar3, LVar4, LVar5)
             EVT_SET(LVar0, NPC_DummyBoo)
-            EVT_SET_VEC3(LVar3, 0, 0, -20)
+            EVT_VEC3I_SET(LVar3, 0, 0, -20)
             EVT_EXEC(N(EVS_TetherItemToNpcWithOffset))
             EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, 0)
             EVT_CALL(SetNpcJumpscale, NPC_DummyBoo, EVT_FLOAT(2.0))

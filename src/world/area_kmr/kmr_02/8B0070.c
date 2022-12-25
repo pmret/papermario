@@ -181,8 +181,8 @@ ApiStatus func_8024280C_8B287C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#define UNK_NPC_POS_FUNC_NUM 7
-#include "world/common/todo/UnkNpcPosFunc.inc.c"
+#define KAMMY_NPC 7
+#include "world/common/util/GetKammyBroomEmitterPos.inc.c"
 
 #include "world/common/todo/SyncStatusMenu.inc.c"
 
