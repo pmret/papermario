@@ -141,8 +141,8 @@ AnimScript Entity_MunchlesiaGrab_Animation = {
 
 StaticAnimatorNode Entity_MunchlesiaGrab_Node8 = {
     .displayList = Entity_MunchlesiaGrab_Render,
-    .sibling = ENTITY_ANIN_NULL,
-    .child = ENTITY_ANIN_NULL,
+    .sibling = ENTITY_ANIM_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vertexStartOffset = 399 * 6,
     .vtxList = D_0A000000_E74BD0,
 };
@@ -150,7 +150,7 @@ StaticAnimatorNode Entity_MunchlesiaGrab_Node8 = {
 StaticAnimatorNode Entity_MunchlesiaGrab_Node7 = {
     .displayList = Entity_MunchlesiaGrab_Render,
     .sibling = &Entity_MunchlesiaGrab_Node8,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vertexStartOffset = 399 * 5,
     .vtxList = D_0A000000_E74BD0,
 };
@@ -159,7 +159,7 @@ StaticAnimatorNode Entity_MunchlesiaGrab_Node6 = {
     .displayList = Entity_MunchlesiaGrab_Render,
     .pos = { 0.0f, 1.0f, 0.0f },
     .sibling = &Entity_MunchlesiaGrab_Node7,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vertexStartOffset = 399 * 4,
     .vtxList = D_0A000000_E74BD0,
 };
@@ -168,7 +168,7 @@ StaticAnimatorNode Entity_MunchlesiaGrab_Node5 = {
     .displayList = Entity_MunchlesiaGrab_Render,
     .pos = { 0.0f, 2.0f, 0.0f },
     .sibling = &Entity_MunchlesiaGrab_Node6,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vertexStartOffset = 399 * 3,
     .vtxList = D_0A000000_E74BD0,
 };
@@ -177,7 +177,7 @@ StaticAnimatorNode Entity_MunchlesiaGrab_Node4 = {
     .displayList = Entity_MunchlesiaGrab_Render,
     .pos = { 0.0f, 2.0f, 0.0f },
     .sibling = &Entity_MunchlesiaGrab_Node5,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vertexStartOffset = 399 * 2,
     .vtxList = D_0A000000_E74BD0,
 };
@@ -186,7 +186,7 @@ StaticAnimatorNode Entity_MunchlesiaGrab_Node3 = {
     .displayList = Entity_MunchlesiaGrab_Render,
     .pos = { 0.0f, 3.0f, 0.0f },
     .sibling = &Entity_MunchlesiaGrab_Node4,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vertexStartOffset = 399,
     .vtxList = D_0A000000_E74BD0,
 };
@@ -195,16 +195,16 @@ StaticAnimatorNode Entity_MunchlesiaGrab_Node2 = {
     .displayList = Entity_MunchlesiaGrab_Render,
     .pos = { 0.0f, 4.0f, 0.0f },
     .sibling = &Entity_MunchlesiaGrab_Node3,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
     .vtxList = D_0A000000_E74BD0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaGrab_Node1 = {
-    .displayList = ENTITY_ANIN_NULL,
-    .sibling = ENTITY_ANIN_NULL,
+    .displayList = ENTITY_ANIM_NULL,
+    .sibling = ENTITY_ANIM_NULL,
     .child = &Entity_MunchlesiaGrab_Node2,
-    .vertexStartOffset = (s32)ENTITY_ANIN_NULL,
-    .vtxList = ENTITY_ANIN_NULL,
+    .vertexStartOffset = (s32)ENTITY_ANIM_NULL,
+    .vtxList = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode* Entity_MunchlesiaGrab_Mesh[] = {
@@ -216,5 +216,5 @@ StaticAnimatorNode* Entity_MunchlesiaGrab_Mesh[] = {
     &Entity_MunchlesiaGrab_Node6,
     &Entity_MunchlesiaGrab_Node7,
     &Entity_MunchlesiaGrab_Node8,
-    ENTITY_ANIN_NULL,
+    ENTITY_ANIM_NULL,
 };

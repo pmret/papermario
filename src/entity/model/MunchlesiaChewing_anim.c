@@ -5,13 +5,13 @@ extern Gfx Entity_MunchlesiaChewing_Render[];
 
 StaticAnimatorNode Entity_MunchlesiaChewing_Node1 = {
     .displayList = Entity_MunchlesiaChewing_Render,
-    .sibling = ENTITY_ANIN_NULL,
-    .child = ENTITY_ANIN_NULL,
+    .sibling = ENTITY_ANIM_NULL,
+    .child = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode* Entity_MunchlesiaChewing_Mesh[] = {
     &Entity_MunchlesiaChewing_Node1,
-    ENTITY_ANIN_NULL,
+    ENTITY_ANIM_NULL,
 };
 
 AnimScript Entity_MunchlesiaChewing_Animation = {

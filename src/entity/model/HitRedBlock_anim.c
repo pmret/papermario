@@ -7,19 +7,19 @@ extern Gfx Entity_HitRedBlock_RenderBlock1[];
 StaticAnimatorNode Entity_HitRedBlock_NodeBlock2 = {
     .displayList = Entity_HitRedBlock_RenderBlock2,
     .pos = { 0.0f, 25.0f, 0.0f },
-    .sibling = ENTITY_ANIN_NULL,
-    .child = ENTITY_ANIN_NULL,
+    .sibling = ENTITY_ANIM_NULL,
+    .child = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode Entity_HitRedBlock_NodeBlock1 = {
     .displayList = Entity_HitRedBlock_RenderBlock1,
     .sibling = &Entity_HitRedBlock_NodeBlock2,
-    .child = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIM_NULL,
 };
 
 StaticAnimatorNode Entity_HitRedBlock_NodeMain = {
-    .displayList = ENTITY_ANIN_NULL,
-    .sibling = ENTITY_ANIN_NULL,
+    .displayList = ENTITY_ANIM_NULL,
+    .sibling = ENTITY_ANIM_NULL,
     .child = &Entity_HitRedBlock_NodeBlock1,
 };
 
@@ -27,7 +27,7 @@ StaticAnimatorNode* Entity_HitRedBlock_Mesh[] = {
     &Entity_HitRedBlock_NodeMain,
     &Entity_HitRedBlock_NodeBlock1,
     &Entity_HitRedBlock_NodeBlock2,
-    ENTITY_ANIN_NULL,
+    ENTITY_ANIM_NULL,
 };
 
 AnimScript Entity_HitRedBlock_AnimationHit = {

@@ -15,6 +15,13 @@
     .maxCoinBonus = 3, \
 }
 
+#define LAVA_PIRANHA_NO_DROPS \
+{ \
+    .dropFlags = NPC_DROP_FLAGS_80, \
+    .heartDrops  = NO_DROPS, \
+    .flowerDrops = NO_DROPS, \
+}
+
 #define LAVA_PIRANHA_HEAD_ANIMS \
 { \
     .idle   = ANIM_LavaPiranha_Anim03, \

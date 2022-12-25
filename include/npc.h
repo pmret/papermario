@@ -461,7 +461,7 @@ void disable_npc_shadow(Npc* npc);
 
 void update_npc_blur(Npc* npc);
 
-void appendGfx_npc_blur(Npc* npc);
+void appendGfx_npc_blur(void* appendData);
 
 void npc_enable_collisions(void);
 

@@ -53,8 +53,6 @@ extern ShopSellPriceData N(Shop_PriceList)[];
 extern ShopItemLocation N(Shop_ItemPositions)[];
 extern ShopOwner N(Shop_Owner);
 
-extern EvtScript ItemShopInteract;
-
 extern EvtScript N(80244450);
 
 extern EvtScript N(8024CDA0);

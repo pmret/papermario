@@ -27,7 +27,7 @@ s32 N(LetterList)[] = {
 EvtScript N(EVS_ShopOwner_LetterDelivery) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Mouser_ShopOwner, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle,
-        ITEM_LETTER19, ITEM_LETTER12,
+        ITEM_LETTER19, ITEM_LETTER_TO_FRANKY,
         MSG_CH2_0089, MSG_CH2_008A, MSG_CH2_008B, MSG_CH2_008C,
         EVT_PTR(N(LetterList)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))

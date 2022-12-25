@@ -13,7 +13,6 @@
 #include "sprite/npc/KoopaTroopa.h"
 #include "sprite/npc/Bobomb.h"
 #include "sprite/npc/WorldBobomb.h"
-#include "sprite/npc/KoopaBros.h"
 
 enum {
     NPC_Bombette                = 1,

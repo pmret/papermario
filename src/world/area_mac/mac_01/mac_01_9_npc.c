@@ -2367,7 +2367,7 @@ StaticNpc N(NpcData_ShyGuys)[] = {
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_ShyGuy_01),
         .drops = SHY_GUY_NO_DROPS,
-        .animations = SHY_GUY_ANIMS,
+        .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ToadHouseShyGuy,
@@ -2377,7 +2377,7 @@ StaticNpc N(NpcData_ShyGuys)[] = {
         .flags = ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_400000 | ENEMY_FLAGS_IGNORE_TOUCH,
         .init = &N(EVS_NpcInit_ShyGuy_02),
         .drops = SHY_GUY_NO_DROPS,
-        .animations = SHY_GUY_ANIMS,
+        .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_GardenShyGuy1,
@@ -2387,7 +2387,7 @@ StaticNpc N(NpcData_ShyGuys)[] = {
         .flags = ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_400000 | ENEMY_FLAGS_IGNORE_TOUCH,
         .init = &N(EVS_NpcInit_GardenShyGuy1),
         .drops = SHY_GUY_NO_DROPS,
-        .animations = SHY_GUY_ANIMS,
+        .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_GardenShyGuy2,
@@ -2397,7 +2397,7 @@ StaticNpc N(NpcData_ShyGuys)[] = {
         .flags = ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_400000 | ENEMY_FLAGS_IGNORE_TOUCH,
         .init = &N(EVS_NpcInit_GardenShyGuy2),
         .drops = SHY_GUY_NO_DROPS,
-        .animations = SHY_GUY_ANIMS,
+        .animations = RED_SHY_GUY_ANIMS,
     },
 };
 

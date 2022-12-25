@@ -1668,11 +1668,11 @@ enum ItemIDs {
     ITEM_LETTER_TO_MINHT              = 0x0000003E,
     ITEM_UNUSED_LETTER02              = 0x0000003F,
     ITEM_LETTER10                     = 0x00000040,
-    ITEM_LETTER11                     = 0x00000041,
+    ITEM_LETTER_TO_IGOR               = 0x00000041,
     ITEM_UNUSED_LETTER03              = 0x00000042,
     ITEM_UNUSED_LETTER04              = 0x00000043,
     ITEM_UNUSED_LETTER05              = 0x00000044,
-    ITEM_LETTER12                     = 0x00000045,
+    ITEM_LETTER_TO_FRANKY             = 0x00000045,
     ITEM_LETTER13                     = 0x00000046,
     ITEM_LETTER14                     = 0x00000047,
     ITEM_LETTER15                     = 0x00000048,
@@ -4351,6 +4351,25 @@ enum CopiedVtxUnit {
     VTX_COPY_D      = 0xD,
     VTX_COPY_E      = 0xE,
     VTX_COPY_F      = 0xF,
+};
+
+enum ModelAnimUnit {
+    MDL_ANIMATOR_0  = 0x0,
+    MDL_ANIMATOR_1  = 0x1,
+    MDL_ANIMATOR_2  = 0x2,
+    MDL_ANIMATOR_3  = 0x3,
+    MDL_ANIMATOR_4  = 0x4,
+    MDL_ANIMATOR_5  = 0x5,
+    MDL_ANIMATOR_6  = 0x6,
+    MDL_ANIMATOR_7  = 0x7,
+    MDL_ANIMATOR_8  = 0x8,
+    MDL_ANIMATOR_9  = 0x9,
+    MDL_ANIMATOR_A  = 0xA,
+    MDL_ANIMATOR_B  = 0xB,
+    MDL_ANIMATOR_C  = 0xC,
+    MDL_ANIMATOR_D  = 0xD,
+    MDL_ANIMATOR_E  = 0xE,
+    MDL_ANIMATOR_F  = 0xF,
 };
 
 enum EnemyFlags {

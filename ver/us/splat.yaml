@@ -9665,17 +9665,19 @@ segments:
     start: 0x8DA100
     vram: 0x80240000
     subsegments:
-    - [0x8DA100, c]
-    - [0x8DA3A0, c]
-    - [0x8DAFC0, c]
-    - [0x8DB020, c]
-    - [0x8DB260, data]
-    - [0x8DB2F0, data]
-    - [0x8DC270, data]
-    - [0x8DE400, data]
-    - [0x8DFBB0, data]
-    - [0x8E0190, data]
-    - [0x8EB190]
+    - [0x8DA100, c, kmr_11_0_header]
+    - [0x8DA100, c, kmr_11_1_music]
+    - [0x8DA100, c, kmr_11_2_main]
+    - [0x8DA3A0, c, kmr_11_3_scenes]
+    - [0x8DA470, c, kmr_11_4_npc]
+    - [0x8DAFC0, c, kmr_11_5_entity]
+    - [0x8DB020, c, kmr_11_6_kammy]
+    - [0x8DB020, c, kmr_11_7_foliage]
+    - [0x8DB260, c, kmr_11_8_fortress_skeleton]
+    - [0x8DB260, c, kmr_11_9_fortress_animation]
+    - [0x8DB260, c, kmr_11_10_bridge_skeleton]
+    - [0x8DB260, c, kmr_11_11_bridge_animation]
+    - [0x8DB260]
   - name: kmr_12
     dir: world/area_kmr/kmr_12
     type: code
@@ -9731,12 +9733,20 @@ segments:
     start: 0x8FF670
     vram: 0x80240000
     subsegments:
-    - [0x8FF670, c]
-    - [0x8FF680, c]
-    - [0x8FF8B0, c]
-    - [0x900380, data]
-    - [0x900A80, data]
-    - [0x9079D0]
+    - [0x8FF670, c, kmr_22_0_header]
+    - [0x8FF680, c, kmr_22_1_main]
+    - [0x8FF8B0, c, kmr_22_2_npc]
+    - [0x900380, .data, kmr_22_0_header]
+    - [0x900450, .data, kmr_22_1_main]
+    - start: 0x900A80
+      type: .data
+      name: kmr_22_2_npc
+      subsegments:
+      - [0x900A80]
+      - [0x900F70, ci4, lava_piranha_vine, 64, 32]
+      - [0x901370, palette, lava_piranha_vine]
+      - [0x901570, gfx, lava_piranha_vine]
+      - [0x901650]
   - name: kmr_23
     dir: world/area_kmr/kmr_23
     type: code
@@ -9863,7 +9873,7 @@ segments:
     - [0x91E6D0, c, iwa_10_4_train]
     - [0x91F5A0, c, iwa_10_5_entity]
     - [0x91FA80, c, iwa_10_6_parakarry]
-    - [0x91FA80, c, iwa_10_7_new_party]
+    - [0x91FA80, c, iwa_10_7_new_partner]
     - [0x91FB20, c, iwa_10_8_foliage]
     - [0x91FD60]
   - name: iwa_11
@@ -12538,26 +12548,28 @@ segments:
     start: 0xBBD1A0
     vram: 0x80240000
     subsegments:
-    - [0xBBD1A0, c]
-    - [0xBBD980, c]
-    - [0xBBE2E0, data]
-    - [0xBBE410, data]
-    - [0xBC0100, data]
-    - [0xBC11A0, data]
-    - [0xBC2A30]
+    - [0xBBD1A0, c, obk_01_0_header]
+    - [0xBBD1A0, c, obk_01_1_music]
+    - [0xBBD1A0, c, obk_01_2_main]
+    - [0xBBD1A0, c, obk_01_3_chandelier]
+    - [0xBBD980, c, obk_01_4_portrait]
+    - [0xBBD980, c, obk_01_5_jump_scare]
+    - [0xBBD980, c, obk_01_6_npc]
+    - [0xBBE2E0, c, obk_01_7_entity]
+    - [0xBBE2E0]
   - name: obk_02
     dir: world/area_obk/obk_02
     type: code
     start: 0xBC2A90
     vram: 0x80240000
     subsegments:
-    - [0xBC2A90, c]
-    - [0xBC2CD0, c]
-    - [0xBC2D40, data]
-    - [0xBC2E20, data]
-    - [0xBC3720, data]
-    - [0xBC3DE0, data]
-    - [0xBC3F60, data]
+    - [0xBC2A90, c, obk_02_0_header]
+    - [0xBC2A90, c, obk_02_1_music]
+    - [0xBC2A90, c, obk_02_2_main]
+    - [0xBC2A90, c, obk_02_3_npc]
+    - [0xBC2CD0, c, obk_02_4_bombable]
+    - [0xBC2CD0, c, obk_02_5_clock]
+    - [0xBC4260, c, obk_02_6_entity]
     - [0xBC4260]
   - name: obk_03
     dir: world/area_obk/obk_03
@@ -12565,100 +12577,97 @@ segments:
     start: 0xBC4280
     vram: 0x80240000
     subsegments:
-    - [0xBC4280, c]
-    - [0xBC43F0, c]
-    - [0xBC4B50, c]
-    - [0xBC5270, data]
-    - [0xBC5350, data]
-    - [0xBC5770, data]
-    - [0xBC5A00, data]
-    - [0xBC6250, data]
-    - [0xBC7120, data]
-    - [0xBC7DE0, data]
-    - [0xBC7E40]
+    - [0xBC4280, c, obk_03_0_header]
+    - [0xBC4280, c, obk_03_1_music]
+    - [0xBC4280, c, obk_03_2_main]
+    - [0xBC4280, c, obk_03_3_shop]
+    - [0xBC4280, c, obk_03_4_entity]
+    - [0xBC43F0, c, obk_03_5_stairs]
+    - [0xBC43F0, c, obk_03_6_npc]
+    - [0xBC4B50, c, obk_03_7_rocking_chair]
+    - [0xBC5270]
   - name: obk_04
     dir: world/area_obk/obk_04
     type: code
     start: 0xBC7E60
     vram: 0x80240000
     subsegments:
-    - [0xBC7E60, c]
-    - [0xBC7EB0, c]
-    - [0xBC8CE0, data]
-    - [0xBC8DE0, data]
-    - [0xBC9020, data]
-    - [0xBCB260, data]
-    - [0xBCB870, data]
-    - [0xBCD030]
+    - [0xBC7E60, c, obk_04_0_header]
+    - [0xBC7E60, c, obk_04_1_music]
+    - [0xBC7E60, c, obk_04_2_entity]
+    - [0xBC7EB0, c, obk_04_3_npc]
+    - [0xBC87A0, c, obk_04_4_main]
+    - [0xBC87A0, c, obk_04_5_hole]
+    - [0xBC87A0, c, obk_04_6_game]
+    - [0xBC8CE0]
   - name: obk_05
     dir: world/area_obk/obk_05
     type: code
     start: 0xBCD060
     vram: 0x80240000
     subsegments:
-    - [0xBCD060, c]
-    - [0xBCD7D0, c]
-    - [0xBCDA40, data]
-    - [0xBCDB00, data]
-    - [0xBCDFF0, data]
-    - [0xBCE040, data]
-    - [0xBCE680]
+    - [0xBCD060, c, obk_05_0_header]
+    - [0xBCD060, c, obk_05_1_music]
+    - [0xBCD060, c, obk_05_2_main]
+    - [0xBCD7D0, c, obk_05_3_rocking_chair]
+    - [0xBCD800, c, obk_05_4_hole]
+    - [0xBCD800, c, obk_05_5_npc]
+    - [0xBCDA40, c, obk_05_6_entity]
+    - [0xBCDA40]
   - name: obk_06
     dir: world/area_obk/obk_06
     type: code
     start: 0xBCE690
     vram: 0x80240000
     subsegments:
-    - [0xBCE690, c]
-    - [0xBCE690, data]
-    - [0xBCE760, data]
-    - [0xBCEAD0, data]
-    - [0xBCEBE0]
+    - [0xBCE690, c, obk_06_0_header]
+    - [0xBCE690, c, obk_06_1_music]
+    - [0xBCE690, c, obk_06_2_main]
+    - [0xBCE690, c, obk_06_3_bombable]
+    - [0xBCE690, c, obk_06_4_entity]
+    - [0xBCE690]
   - name: obk_07
     dir: world/area_obk/obk_07
     type: code
     start: 0xBCEBF0
     vram: 0x80240000
     subsegments:
-    - [0xBCEBF0, c]
-    - [0xBCEEB0, c]
-    - [0xBCF0F0, c]
-    - [0xBD0780, data]
-    - [0xBD0840, data]
-    - [0xBD0BA0, data]
-    - [0xBD0DB0, data]
-    - [0xBD14F0, data]
-    - [0xBD1C80, data]
-    - [0xBD3860]
+    - [0xBCEBF0, c, obk_07_0_header]
+    - [0xBCEBF0, c, obk_07_1_music]
+    - [0xBCEBF0, c, obk_07_2_main]
+    - [0xBCEBF0, c, obk_07_3_entity]
+    - [0xBCEEB0, c, obk_07_4_fireplace]
+    - [0xBCEEB0, c, obk_07_5_npc]
+    - [0xBCF0F0, c, obk_07_6_phonograph]
+    - [0xBD0780]
   - name: obk_08
     dir: world/area_obk/obk_08
     type: code
     start: 0xBD3870
     vram: 0x80240000
     subsegments:
-    - [0xBD3870, c]
-    - [0xBD40B0, c]
-    - [0xBD4110, c]
-    - [0xBD4A90, c]
-    - [0xBD5010, data]
-    - [0xBD50D0, data]
-    - [0xBD64D0, data]
-    - [0xBD6DD0, data]
-    - [0xBDA730]
+    - [0xBD3870, c, obk_08_0_header]
+    - [0xBD3870, c, obk_08_1_music]
+    - [0xBD3870, c, obk_08_2_main]
+    - [0xBD3870, c, obk_08_3_cabinets]
+    - [0xBD40B0, c, obk_08_4_entity]
+    - [0xBD4110, c, obk_08_5_npc]
+    - [0xBD4A90, c, obk_08_6_game]
+    - [0xBD5010]
   - name: obk_09
     dir: world/area_obk/obk_09
     type: code
     start: 0xBDA7B0
     vram: 0x80240000
     subsegments:
-    - [0xBDA7B0, c]
-    - [0xBDA940, c]
-    - [0xBDAB00, c]
-    - [0xBDABA0, c]
-    - [0xBDABE0, data]
-    - [0xBDB140, data]
-    - [0xBDCE10, data]
-    - [0xBDD190]
+    - [0xBDA7B0, c, obk_09_0_header]
+    - [0xBDA7B0, c, obk_09_1_music]
+    - [0xBDA7B0, c, obk_09_2_main]
+    - [0xBDA7B0, c, obk_09_3_meet_bow]
+    - [0xBDA940, c, obk_09_4_npc]
+    - [0xBDAB00, c, obk_09_5_new_partner]
+    - [0xBDABA0, c, obk_09_6_epilogue]
+    - [0xBDABE0]
   - name: arn_02
     dir: world/area_arn/arn_02
     type: code
@@ -13439,9 +13448,9 @@ segments:
       name: kzn_19_4_npc
       subsegments:
       - [0xC90BF0]
-      - [0xC91088, ci4, lava_piranha_vine, 64, 32]
-      - [0xC91488, palette, lava_piranha_vine]
-      - [0xC91688, gfx, lava_piranha_vine]
+      - [0xC91088, ci4, ../../lava_piranha/vine, 64, 32]
+      - [0xC91488, palette, ../../lava_piranha/vine]
+      - [0xC91688, gfx_common, ../../lava_piranha/vine]
       - [0xC91768]
     - [0xC959B0, .data, kzn_19_5_eruption]
     - [0xC95E70, .data, kzn_19_6_entity]
@@ -13593,7 +13602,7 @@ segments:
     - [0xCC3810, c, flo_13_2_entity]
     - [0xCC3810, c, flo_13_3_main]
     - [0xCC3850, c, flo_13_4_npc]
-    - [0xCC6DE0, c, flo_13_5_new_party]
+    - [0xCC6DE0, c, flo_13_5_new_partner]
     - [0xCC6E80]
   - name: flo_14
     dir: world/area_flo/flo_14
@@ -16164,7 +16173,7 @@ segments:
     - [0xEDE9C0, c, flo_13_2_entity]
     - [0xEDE9C0, c, flo_13_3_main]
     - [0xEDEA00, c, flo_13_4_npc]
-    - [0xEE2040, c, flo_13_5_new_party]
+    - [0xEE2040, c, flo_13_5_new_partner]
     - [0xEE20E0]
   - name: dead_flo_14
     dir: world/dead/area_flo/flo_14

@@ -263,7 +263,7 @@ EvtScript N(EVS_UpdatePassengerPos) = {
         EVT_ELSE
             EVT_ADD(LVar0, -335)
         EVT_END_IF
-        EVT_SET_VEC3(LVar3, LVar0, LVar1, LVar2)
+        EVT_VEC3I_VSET(LVar3, LVar0)
         EVT_IF_EQ(MF_TrainReverseDir, FALSE)
             EVT_ADD(LVar3, -57)
         EVT_ELSE

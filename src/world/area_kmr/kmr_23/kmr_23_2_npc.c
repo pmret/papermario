@@ -529,7 +529,7 @@ EvtScript N(EVS_NpcInit_Eldstar_01) = {
 
 EvtScript N(EVS_NpcInit_Eldstar_02) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ENEMY_ANIM_8)
-    EVT_CALL(func_802CFD30, NPC_SELF, 8, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_SELF, FOLD_TYPE_8, 0, 0, 0, 0)
     EVT_CALL(SetNpcPos, NPC_SELF, 0, 94, 0)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN

@@ -31,11 +31,11 @@ EvtScript N(EVS_KoopaBros_SetTrap) = {
     EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Anim04)
     EVT_THREAD
         EVT_LOOP(8)
-            EVT_CALL(func_802CFD30, 0, 7, 0, 0, 0, 0)
-            EVT_CALL(func_802CFD30, 1, 7, 255, 0, 0, 0)
+            EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, 0, 0, 0, 0)
+            EVT_CALL(func_802CFD30, 1, FOLD_TYPE_7, 255, 0, 0, 0)
             EVT_WAIT(6)
-            EVT_CALL(func_802CFD30, 0, 7, 255, 0, 0, 0)
-            EVT_CALL(func_802CFD30, 1, 7, 0, 0, 0, 0)
+            EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, 255, 0, 0, 0)
+            EVT_CALL(func_802CFD30, 1, FOLD_TYPE_7, 0, 0, 0, 0)
             EVT_WAIT(6)
         EVT_END_LOOP
     EVT_END_THREAD

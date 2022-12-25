@@ -45,7 +45,7 @@ EvtScript N(EVS_Kolorado_TrompImpact) = {
     EVT_CALL(func_802CDE68, 0, 13)
     EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
     EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
-    EVT_CALL(func_802CFD30, 0, 4, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
+    EVT_CALL(func_802CFD30, 0, FOLD_TYPE_4, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_HIT_PLAYER_NORMAL, 0)
     EVT_THREAD
         EVT_CALL(SetNpcCollisionSize, NPC_Kolorado, 20, 24)
@@ -70,7 +70,7 @@ EvtScript N(EVS_Kolorado_HurtInit) = {
     EVT_CALL(func_802CDE68, 0, 13)
     EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
     EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
-    EVT_CALL(func_802CFD30, 0, 4, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
+    EVT_CALL(func_802CFD30, 0, FOLD_TYPE_4, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
     EVT_RETURN
     EVT_END
 };

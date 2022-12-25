@@ -35,5 +35,6 @@ extern EvtScript EnterSplitDoubleDoor;
 extern EvtScript BaseExitDoor;
 extern EvtScript BaseEnterDoor;
 extern EvtScript EnterPostPipe;
+extern EvtScript ItemShopInteract;
 
 #endif
