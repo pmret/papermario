@@ -338,7 +338,7 @@ MapConfig kmr_maps[] = {
     { MAP(kmr_07), .bgName = "kmr_bg" },
     { MAP(kmr_09), .bgName = "kmr_bg" },
     { MAP(kmr_10), .bgName = "kmr_bg" },
-    { MAP_UNSPLIT(kmr_11, 0x80241180), .bgName = "kmr_bg" },
+    { MAP(kmr_11), .bgName = "kmr_bg" },
     { MAP(kmr_12), .bgName = "kmr_bg" },
     { MAP_UNSPLIT(kmr_20, 0x80242C00), .bgName = "kmr_bg" }, // Mario's House
     { MAP_WITH_INIT(kmr_21) },
