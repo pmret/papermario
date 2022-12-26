@@ -3,7 +3,7 @@
 
 #include "FoliageTransform.inc.c"
 
-EvtScript N(searchBush) = {
+EvtScript N(EVS_SearchBush) = {
     EVT_USE_BUF(LVar0)
     EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)
     EVT_CALL(GetPlayerPos, LVar5, LVarF, LVar7)
@@ -67,7 +67,7 @@ EvtScript N(searchBush) = {
     EVT_END
 };
 
-EvtScript N(shakeTree) = {
+EvtScript N(EVS_ShakeTree) = {
     EVT_SET_TIMESCALE(EVT_FLOAT(2.0))
     EVT_USE_BUF(LVar0)
     EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)
