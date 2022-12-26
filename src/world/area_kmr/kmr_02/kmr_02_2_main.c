@@ -1,0 +1,221 @@
+#include "kmr_02.h"
+
+#include "world/common/entity/Pipe.inc.c"
+#include "world/common/entity/Pipe.data.inc.c"
+
+MobileAISettings N(D_802449D0_8B4A40) = {
+    .moveSpeed = 1.5f,
+    .moveTime = 60,
+    .waitTime = 30,
+    .playerSearchInterval = -1,
+    .unk_AI_2C = 1,
+};
+
+EvtScript N(D_80244A00_8B4A70) = {
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(D_802449D0_8B4A40)))
+    EVT_RETURN
+    EVT_END
+};
+
+s32 N(missing_80244A20_4A20)[] = {
+    0x00000000, 0x00160018, 0x00000000, 0x00000000, 0x80244A00, 0x00000000, 0x00000000, 0x00000000, 
+    0x00000000, 0x00000000, 0x00630010, 
+};
+
+#define NAME_SUFFIX _Main
+#include "unk_territory.inc.c"
+#define NAME_SUFFIX
+
+MobileAISettings N(D_80244B3C_8B4BAC) = {
+    .moveSpeed = 2.0f,
+    .moveTime = 15,
+    .waitTime = 30,
+    .playerSearchInterval = -1,
+    .unk_AI_2C = 1,
+};
+
+EvtScript N(EVS_NpcAI_Unused_Wander) = {
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(D_80244B3C_8B4BAC)))
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_ExitWalk_kmr_05_1) = EVT_EXIT_WALK(60, kmr_02_ENTRY_2, "kmr_05", kmr_05_ENTRY_1);
+EvtScript N(EVS_ExitWalk_kmr_00_0) = EVT_EXIT_WALK(60, kmr_02_ENTRY_1, "kmr_00", kmr_00_ENTRY_0);
+EvtScript N(EVS_ExitWalk_kmr_09_0) = EVT_EXIT_WALK(60, kmr_02_ENTRY_0, "kmr_09", kmr_09_ENTRY_0);
+
+MAP_RODATA_PAD(1, exits);
+
+EvtScript N(D_80244CA0_8B4D10) = {
+    EVT_IF_GE(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
+        EVT_CALL(RotateGroup, MODEL_g197, 120, 0, -1, 0)
+        EVT_CALL(RotateGroup, MODEL_g196, 120, 0, 1, 0)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt2, COLLIDER_FLAGS_UPPER_MASK)
+        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o757, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_BindExitTriggers) = {
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kmr_05_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kmr_00_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kmr_09_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili3, 1, 0)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_EnterMap) = {
+    EVT_CALL(GetLoadType, LVar1)
+    EVT_IF_EQ(LVar1, LOAD_FROM_FILE_SELECT)
+        EVT_EXEC(EnterSavePoint)
+        EVT_EXEC(N(EVS_BindExitTriggers))
+        EVT_EXEC(N(D_80244CA0_8B4D10))
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(GetEntryID, LVar0)
+    EVT_IF_NE(LVar0, kmr_02_ENTRY_0)
+        EVT_EXEC(N(D_80244CA0_8B4D10))
+    EVT_END_IF
+    EVT_SWITCH(LVar0)
+        EVT_CASE_EQ(2)
+            EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
+            EVT_EXEC(EnterWalk)
+            EVT_IF_EQ(GF_KMR02_ReturnedWithGoompa, FALSE)
+                EVT_CALL(DisablePlayerInput, TRUE)
+                EVT_WAIT(20)
+                EVT_CALL(DisablePartnerAI, 0)
+                EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 4, MSG_CH0_001C)
+                EVT_CALL(EnablePartnerAI)
+                EVT_SET(GF_KMR02_ReturnedWithGoompa, TRUE)
+                EVT_CALL(DisablePlayerInput, FALSE)
+            EVT_END_IF
+        EVT_CASE_EQ(3)
+            EVT_IF_EQ(GF_KMR02_WarpPipe, FALSE)
+                EVT_CALL(DisablePlayerInput, TRUE)
+                EVT_CALL(DisablePlayerPhysics, TRUE)
+                EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+                EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+                EVT_CALL(SetPlayerPos, LVar0, NPC_DISPOSE_POS_Y, LVar2)
+                EVT_WAIT(30)
+                EVT_CALL(PlaySound, SOUND_208E)
+                EVT_SET(GF_KMR02_WarpPipe, TRUE)
+                EVT_WAIT(30)
+                EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
+                EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
+                EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+                EVT_CALL(DisablePlayerPhysics, FALSE)
+                EVT_CALL(DisablePlayerInput, FALSE)
+            EVT_END_IF
+            EVT_SET(LVarA, EVT_PTR(N(EVS_BindExitTriggers)))
+            EVT_EXEC_WAIT(N(EVS_Pipe_EnterVertical))
+        EVT_CASE_EQ(5)
+            EVT_EXEC(N(EVS_80255380))
+            EVT_EXEC(N(EVS_BindExitTriggers))
+        EVT_CASE_EQ(10)
+            EVT_EXEC(EnterPostPipe)
+            EVT_EXEC(N(EVS_BindExitTriggers))
+        EVT_CASE_DEFAULT
+            EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
+            EVT_EXEC(EnterWalk)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(D_802450B4_8B5124) = {
+    EVT_CALL(DisablePlayerInput, TRUE)
+    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
+    EVT_CALL(DisablePlayerInput, FALSE)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(D_802450FC_8B516C) = {
+    EVT_CALL(DisablePlayerInput, TRUE)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_tt2, SOUND_1D2, 0)
+    EVT_CALL(MakeLerp, 0, 120, 20, EASING_COS_IN_OUT)
+    EVT_LABEL(0)
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(RotateGroup, MODEL_g197, LVar0, 0, -1, 0)
+        EVT_CALL(RotateGroup, MODEL_g196, LVar0, 0, 1, 0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(0)
+        EVT_END_IF
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt2, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o757, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(DisablePlayerInput, FALSE)
+    EVT_RETURN
+    EVT_END
+};
+
+API_CALLABLE(N(func_80240370_8B03E0)) {
+    set_map_change_fade_rate(1);
+    return ApiStatus_DONE2;
+}
+
+EvtScript N(EVS_Main) = {
+    EVT_SET(GB_WorldLocation, LOCATION_GOOMBA_VILLAGE)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
+    EVT_SETUP_CAMERA_NO_LEAD()
+    EVT_CALL(GetLoadType, LVar0)
+    EVT_IF_EQ(LVar0, 1)
+        EVT_GOTO(10)
+    EVT_END_IF
+    EVT_CALL(GetEntryID, LVar0)
+    EVT_IF_NE(LVar0, kmr_02_ENTRY_4)
+        EVT_GOTO(10)
+    EVT_END_IF
+    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
+    EVT_EXEC(N(EVS_80243B30))
+    EVT_RETURN
+    EVT_LABEL(10)
+    EVT_SWITCH(GB_StoryProgress)
+        EVT_CASE_EQ(STORY_UNUSED_FFFFFF8C)
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup1)))
+        EVT_CASE_LT(STORY_UNUSED_FFFFFF8C)
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup2)))
+        EVT_CASE_DEFAULT
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup3)))
+    EVT_END_SWITCH
+    EVT_LABEL(20)
+    EVT_CALL(ClearDefeatedEnemies)
+    EVT_EXEC_WAIT(N(EVS_80251E84))
+    EVT_EXEC_WAIT(N(EVS_80255588))
+    EVT_EXEC_WAIT(N(EVS_MakeEntities))
+    EVT_EXEC(N(EVS_80243B74))
+    EVT_EXEC_WAIT(N(EVS_SetupFoliage))
+    EVT_SWITCH(GB_StoryProgress)
+        EVT_CASE_LT(STORY_CH0_FELL_OFF_CLIFF)
+            EVT_BIND_TRIGGER(EVT_PTR(N(D_802450B4_8B5124)), TRIGGER_WALL_PRESS_A, COLLIDER_mm1, 1, 0)
+        EVT_CASE_LT(STORY_CH0_TWINK_GAVE_LUCKY_STAR)
+        EVT_CASE_DEFAULT
+            EVT_BIND_TRIGGER(EVT_PTR(N(D_802450FC_8B516C)), TRIGGER_WALL_PRESS_A, COLLIDER_tt2, 1, 0)
+    EVT_END_SWITCH
+    EVT_SWITCH(GB_StoryProgress)
+        EVT_CASE_LT(STORY_CH0_GATE_CRUSHED)
+            EVT_CALL(EnableGroup, MODEL_2, FALSE)
+            EVT_CALL(EnableGroup, MODEL_4, FALSE)
+        EVT_CASE_LT(STORY_CH0_TWINK_GAVE_LUCKY_STAR)
+            EVT_CALL(EnableGroup, MODEL_1, FALSE)
+            EVT_CALL(EnableGroup, MODEL_4, FALSE)
+        EVT_CASE_DEFAULT
+            EVT_CALL(EnableGroup, MODEL_1, FALSE)
+            EVT_CALL(EnableGroup, MODEL_2, FALSE)
+    EVT_END_SWITCH
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o757, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_EXEC(N(EVS_EnterMap))
+    EVT_WAIT(1)
+    EVT_IF_NE(GB_StoryProgress, STORY_CH0_WAKE_UP)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(GetEntryID, LVar0)
+    EVT_IF_EQ(LVar0, kmr_02_ENTRY_5)
+        EVT_WAIT(30)
+        EVT_CALL(N(func_80240370_8B03E0))
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};

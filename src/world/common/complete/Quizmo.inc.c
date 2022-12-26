@@ -39,7 +39,11 @@ extern s16 MessagePlural;
 extern s16 MessageSingular;
 
 BSS s32 N(Quizmo_Worker);
+#ifndef QUIZMO_FIX
 BSS s32 N(pad_D_8024EFA4);
+#endif
+// needed for kmr_02 -- actually indices 0-4 are indexed for this array!
+// TODO: it should be size 5 and Quizmo_AnswerResult is Quizmo_ScriptArray[4]?
 BSS s32 N(Quizmo_ScriptArray)[4];
 BSS s32 N(Quizmo_AnswerResult);
 MAP_STATIC_PAD(1,quizmo_unk)
