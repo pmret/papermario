@@ -1,4 +1,4 @@
-EnemyTerritoryWander N(D_80247FCC_8B803C) = {
+EnemyTerritoryWander N(WanderTerritory0) = {
     .centerPos = { 0, 0, 0 },
     .wanderSize = { 150, 0 },
     .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
@@ -9,7 +9,7 @@ EnemyTerritoryWander N(D_80247FCC_8B803C) = {
     .isFlying = TRUE,
 };
 
-EnemyTerritoryWander N(D_80248004_8B8074) = {
+EnemyTerritoryWander N(WanderTerritory1) = {
     .centerPos = { 0, 0, 0 },
     .wanderSize = { 150, 0 },
     .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
@@ -20,7 +20,7 @@ EnemyTerritoryWander N(D_80248004_8B8074) = {
     .isFlying = TRUE,
 };
 
-EnemyTerritoryWander N(D_8024803C_8B80AC) = {
+EnemyTerritoryWander N(WanderTerritory2) = {
     .centerPos = { 0, 0, 0 },
     .wanderSize = { 150, 0 },
     .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
@@ -31,7 +31,7 @@ EnemyTerritoryWander N(D_8024803C_8B80AC) = {
     .isFlying = TRUE,
 };
 
-EnemyTerritoryWander N(D_80248074_8B80E4) = {
+EnemyTerritoryWander N(WanderTerritory3) = {
     .centerPos = { 0, 0, 0 },
     .wanderSize = { 150, 0 },
     .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
@@ -42,25 +42,25 @@ EnemyTerritoryWander N(D_80248074_8B80E4) = {
     .isFlying = TRUE,
 };
 
-EnemyTerritoryWander* N(D_802480AC_8B811C)[] = {
-    &N(D_80247FCC_8B803C),
-    &N(D_80248004_8B8074),
-    &N(D_8024803C_8B80AC),
-    &N(D_80248074_8B80E4), 
+EnemyTerritoryWander* N(WanderTerritories)[] = {
+    &N(WanderTerritory0),
+    &N(WanderTerritory1),
+    &N(WanderTerritory2),
+    &N(WanderTerritory3), 
 };
 
-API_CALLABLE(N(UnkTerritoryFunc)) {
+API_CALLABLE(N(SetWanderTerritory)) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
     s32 territoryIndex = evt_get_variable(script, *args++);
-    s32* var_s0 = (s32*) N(D_802480AC_8B811C)[territoryIndex];
+    s32* wanderData = (s32*) N(WanderTerritories)[territoryIndex];
     Enemy* enemy = get_enemy(npcID);
     s32 i;
 
     for (i = 0; i < (s32) (sizeof(enemy->territory->wander) / sizeof(i)); i++) {
         s32* wander = (s32*) &enemy->territory->wander;
 
-        wander[i] = var_s0[i];
+        wander[i] = wanderData[i];
     }
     return ApiStatus_DONE2;
 }

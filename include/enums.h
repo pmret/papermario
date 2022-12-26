@@ -2716,6 +2716,8 @@ enum VisibilityGroup {
     VIS_GROUP_3             = 3,
     VIS_GROUP_4             = 4,
     VIS_GROUP_5             = 5,
+    VIS_GROUP_6             = 6,
+    VIS_GROUP_7             = 7,
 };
 
 enum ItemSpawnModes {

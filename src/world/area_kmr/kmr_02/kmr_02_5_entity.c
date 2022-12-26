@@ -2,19 +2,19 @@
 #include "entity.h"
 #include "effects.h"
 
-API_CALLABLE(N(func_80243370_8B33E0)) {
+API_CALLABLE(N(PlayerHasBadgeEquipped)) {
     PlayerData* playerData = &gPlayerData;
-    s32 cond = FALSE;
+    s32 hasBadgeEquipped = FALSE;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
         if (playerData->equippedBadges[i] != 0) {
-            cond = TRUE;
+            hasBadgeEquipped = TRUE;
             break;
         }
     }
 
-    script->varTable[0] = cond;
+    script->varTable[0] = hasBadgeEquipped;
     return ApiStatus_DONE2;
 }
 
@@ -22,7 +22,7 @@ API_CALLABLE(N(func_80243370_8B33E0)) {
 
 #include "world/common/todo/GetEntityPosition.inc.c"
 
-EvtScript N(D_802549D0_8C4A40) = {
+EvtScript N(EVS_GotoMap_tik_01_2) = {
     EVT_CALL(GotoMap, EVT_PTR("tik_01"), tik_01_ENTRY_2)
     EVT_WAIT(100)
     EVT_RETURN
@@ -54,8 +54,8 @@ EvtScript N(D_80254A00_8C4A70) = {
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, MSG_CH0_0066)
     EVT_WAIT(10)
-    EVT_CALL(N(func_80243370_8B33E0))
-    EVT_IF_EQ(LVar0, 0)
+    EVT_CALL(N(PlayerHasBadgeEquipped))
+    EVT_IF_EQ(LVar0, FALSE)
         EVT_CALL(SpeakToPlayer, NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, MSG_CH0_0067)
         EVT_WAIT(10)
     EVT_END_IF
@@ -138,7 +138,7 @@ EvtScript N(EVS_MakeEntities) = {
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_BlueWarpPipe), 0, 0, 355, 0, kmr_02_ENTRY_3, EVT_PTR(N(D_802549D0_8C4A40)), EVT_INDEX_OF_GAME_FLAG(GF_KMR02_WarpPipe), MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_BlueWarpPipe), 0, 0, 355, 0, kmr_02_ENTRY_3, EVT_PTR(N(EVS_GotoMap_tik_01_2)), EVT_INDEX_OF_GAME_FLAG(GF_KMR02_WarpPipe), MAKE_ENTITY_END)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), 250, 60, 75, -15, MAKE_ENTITY_END)
     EVT_IF_GE(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
         EVT_CALL(MakeItemEntity, ITEM_SHOOTING_STAR, 510, 0, -340, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_KMR02_Item_ShootingStar)

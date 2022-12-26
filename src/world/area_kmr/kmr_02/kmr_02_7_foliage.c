@@ -26,7 +26,7 @@ FoliageDropList N(Bush2_Drops) = {
             .pos = { 124, 16, 443 },
             .spawnMode = ITEM_SPAWN_MODE_TOSS,
             .pickupFlag = GF_KMR02_Bush2_Coin,
-            .spawnFlag = MF_Unk_0A,
+            .spawnFlag = MF_SpawnFlag_BushCoin,
         },
     }
 };
@@ -69,7 +69,7 @@ FoliageDropList N(Tree1_Drops) = {
             .pos = { 309, 145, 66 },
             .spawnMode = ITEM_SPAWN_MODE_FALL,
             .pickupFlag = GF_KMR02_Tree1_Goomnut,
-            .spawnFlag = MF_Unk_0B,
+            .spawnFlag = MF_SpawnFlag_Goomnut,
         },
     }
 };

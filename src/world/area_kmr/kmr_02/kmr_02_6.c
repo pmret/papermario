@@ -114,7 +114,7 @@ s32 N(missing_80255680_15680)[] = {
 };
 
 #define NAME_SUFFIX _6
-#include "unk_territory.inc.c"
+#include "wander_territories.inc.c"
 #define NAME_SUFFIX
 
 MobileAISettings N(D_8025579C_8C580C) = {
@@ -341,14 +341,14 @@ EvtScript N(EVS_80255AA0) = {
     EVT_THREAD
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_80012)
         EVT_CALL(func_802D286C, 256)
-        EVT_CALL(func_802D2520, 0x00080012, 5, 0, 1, 1, 0)
+        EVT_CALL(func_802D2520, ANIM_Mario_80012, 5, 0, 1, 1, 0)
         EVT_WAIT(13)
-        EVT_CALL(func_802D2520, 0x00080012, 0, 0, 0, 0, 0)
+        EVT_CALL(func_802D2520, ANIM_Mario_80012, 0, 0, 0, 0, 0)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_80013)
         EVT_CALL(func_802D286C, 256)
-        EVT_CALL(func_802D2520, 0x00080013, 5, 0, 1, 1, 0)
+        EVT_CALL(func_802D2520, ANIM_Mario_80013, 5, 0, 1, 1, 0)
         EVT_WAIT(13)
-        EVT_CALL(func_802D2520, 0x00080013, 0, 0, 0, 0, 0)
+        EVT_CALL(func_802D2520, ANIM_Mario_80013, 0, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.8))
@@ -358,16 +358,16 @@ EvtScript N(EVS_80255AA0) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Goombaria, ANIM_Goombaria_Shock)
-        EVT_CALL(func_802CFE2C, 1, 256)
-        EVT_CALL(func_802CFD30, 1, 5, 0, 1, 1, 0)
+        EVT_CALL(func_802CFE2C, NPC_Goombaria, 0x100)
+        EVT_CALL(func_802CFD30, NPC_Goombaria, FOLD_TYPE_5, 0, 1, 1, 0)
         EVT_CALL(SetNpcJumpscale, NPC_Goombaria, EVT_FLOAT(1.5))
         EVT_CALL(GetNpcPos, NPC_Goombaria, LVar0, LVar1, LVar2)
         EVT_CALL(NpcJump0, NPC_Goombaria, LVar0, LVar1, LVar2, 25)
         EVT_CALL(SetNpcAnimation, NPC_Goombaria, ANIM_Goombaria_LookUp)
         EVT_CALL(func_802CFD30, 1, 0, 0, 0, 0, 0)
     EVT_END_THREAD
-    EVT_CALL(func_802CFE2C, 3, 256)
-    EVT_CALL(func_802CFD30, 3, 5, 0, 1, 1, 0)
+    EVT_CALL(func_802CFE2C, NPC_Goompapa, 0x100)
+    EVT_CALL(func_802CFD30, NPC_Goompapa, FOLD_TYPE_5, 0, 1, 1, 0)
     EVT_CALL(SetNpcAnimation, NPC_Goompapa, ANIM_Goompapa_Shock)
     EVT_CALL(SetNpcJumpscale, NPC_Goompapa, EVT_FLOAT(1.2))
     EVT_CALL(GetNpcPos, NPC_Goompapa, LVar0, LVar1, LVar2)
@@ -407,8 +407,8 @@ EvtScript N(EVS_80255AA0) = {
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim15)
     EVT_EXEC_GET_TID(N(D_8025590C_8C597C), MV_Unk_05)
     EVT_WAIT(40)
-    EVT_CALL(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim16, ANIM_WorldKammy_Anim13, 512, MSG_CH0_005E)
-    EVT_CALL(FadeOutMusic, 0, 0x00000BB8)
+    EVT_CALL(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim16, ANIM_WorldKammy_Anim13, 0x200, MSG_CH0_005E)
+    EVT_CALL(FadeOutMusic, 0, 3000)
     EVT_EXEC_GET_TID(N(D_802558C4_8C5934), MV_Unk_04)
     EVT_CALL(LoadPath, 90, EVT_PTR(N(D_80255894_8C5904)), 4, EASING_QUADRATIC_IN)
     EVT_LABEL(70)
@@ -421,7 +421,7 @@ EvtScript N(EVS_80255AA0) = {
     EVT_KILL_THREAD(MV_Unk_04)
     EVT_KILL_THREAD(MV_Unk_05)
     EVT_WAIT(20)
-    EVT_EXEC(N(EVS_80243B74))
+    EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(SetNpcAnimation, NPC_Goompapa, ANIM_Goompapa_Angry)
     EVT_CALL(SetNpcAnimation, NPC_Goombaria, ANIM_Goombaria_Idle)
     EVT_CALL(SetNpcPos, NPC_Goombaria, 166, 0, 188)
@@ -453,7 +453,7 @@ EvtScript N(EVS_80255AA0) = {
     EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_40, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
-    EVT_CALL(SetNpcPos, NPC_Goompa, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_Goompa, NPC_DISPOSE_LOCATION)
     EVT_CALL(EnableNpcShadow, NPC_Goompa, FALSE)
     EVT_SET(GB_StoryProgress, STORY_CH0_GATE_CRUSHED)
     EVT_THREAD
@@ -462,11 +462,11 @@ EvtScript N(EVS_80255AA0) = {
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_Goompapa, ANIM_Goompapa_Idle)
-    EVT_CALL(N(UnkTerritoryFunc_6), 4, 1)
+    EVT_CALL(N(SetWanderTerritory_6), NPC_Goomama, 1)
     EVT_CALL(BindNpcAI, NPC_Goomama, EVT_PTR(N(EVS_NpcAI_Goomama)))
-    EVT_CALL(N(UnkTerritoryFunc_6), 2, 2)
+    EVT_CALL(N(SetWanderTerritory_6), NPC_Goombario, 2)
     EVT_CALL(BindNpcAI, NPC_Goombario, EVT_PTR(N(EVS_NpcAI_Goomama)))
-    EVT_CALL(N(UnkTerritoryFunc_6), 1, 3)
+    EVT_CALL(N(SetWanderTerritory_6), NPC_Goombaria, 3)
     EVT_CALL(BindNpcAI, NPC_Goombaria, EVT_PTR(N(EVS_NpcAI_Goomama)))
     EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_100, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_Goompapa, NPC_FLAG_100, FALSE)

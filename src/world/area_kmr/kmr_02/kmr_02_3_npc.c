@@ -125,7 +125,7 @@ MAP_STATIC_PAD(1,key_choice);
 #include "world/common/complete/KeyItemChoice.inc.c"
 
 #define NAME_SUFFIX _Npc
-#include "unk_territory.inc.c"
+#include "wander_territories.inc.c"
 #define NAME_SUFFIX
 
 MobileAISettings N(D_802480BC_8B812C) = {
@@ -258,7 +258,7 @@ EvtScript N(EVS_NpcInit_Goombario) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_GATE_CRUSHED)
         EVT_CASE_LT(STORY_CH0_FELL_OFF_CLIFF)
-            EVT_CALL(N(UnkTerritoryFunc_Npc), 2, 2)
+            EVT_CALL(N(SetWanderTerritory_Npc), NPC_Goombario, 2)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Goombaria)))
         EVT_CASE_LT(STORY_CH0_GOOMBARIO_JOINED_PARTY)
             EVT_CALL(SetNpcPos, NPC_SELF, 66, 0, -126)
@@ -406,7 +406,7 @@ EvtScript N(EVS_NpcInit_Goombaria) = {
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Goombaria_NoAI)))
             EVT_CALL(SetNpcPos, NPC_SELF, 215, 0, 215)
         EVT_CASE_LT(STORY_CH0_FELL_OFF_CLIFF)
-            EVT_CALL(N(UnkTerritoryFunc_Npc), 1, 3)
+            EVT_CALL(N(SetWanderTerritory_Npc), NPC_Goombaria, 3)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Goombaria)))
         EVT_CASE_LT(STORY_CH0_GOOMBARIO_JOINED_PARTY)
             EVT_CALL(SetNpcPos, NPC_SELF, 94, 0, -109)
@@ -781,10 +781,10 @@ EvtScript N(D_802497F4_8B9864) = {
     EVT_CALL(NpcJump0, NPC_Goombario, LVar0, LVar1, LVar2, 7)
     EVT_CALL(SpeakToNpc, NPC_Goombario, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, NPC_PARTNER, MSG_CH0_0038)
     EVT_CALL(N(LoadPartyImage))
-    EVT_EXEC(N(EVS_80243C0C))
+    EVT_EXEC(N(EVS_PushNewPartnerSong))
     EVT_WAIT(10)
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0189, 160, 40)
-    EVT_EXEC(N(EVS_80243C30))
+    EVT_EXEC(N(EVS_PopSong))
     EVT_WAIT(10)
     EVT_CALL(SpeakToNpc, NPC_Goombaria, ANIM_Goombaria_Talk, ANIM_Goombaria_Idle, 0, NPC_Goombario, MSG_CH0_0039)
     EVT_WAIT(10)
@@ -1170,7 +1170,7 @@ EvtScript N(EVS_NpcInit_Goompapa) = {
                 EVT_CALL(SetNpcAnimation, NPC_Goompapa, ANIM_Goompapa_Idle)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH0_FELL_OFF_CLIFF)
-            EVT_CALL(N(UnkTerritoryFunc_Npc), 3, 0)
+            EVT_CALL(N(SetWanderTerritory_Npc), NPC_Goompapa, 0)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Goombaria)))
         EVT_CASE_LT(STORY_CH0_SMASHED_GATE_BLOCK)
             EVT_CALL(SetNpcPos, NPC_SELF, 258, 0, 258)
@@ -1264,7 +1264,7 @@ EvtScript N(EVS_NpcInit_Goomama) = {
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Goomama)))
         EVT_CASE_LT(STORY_CH0_GATE_CRUSHED)
         EVT_CASE_LT(STORY_CH0_FELL_OFF_CLIFF)
-            EVT_CALL(N(UnkTerritoryFunc_Npc), 4, 1)
+            EVT_CALL(N(SetWanderTerritory_Npc), NPC_Goomama, 1)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Goombaria)))
         EVT_CASE_LT(STORY_CH0_LEFT_THE_PLAYGROUND)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Goomama)))
@@ -1628,7 +1628,7 @@ EvtScript N(EVS_NpcIdle_Eldstar_A) = {
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 10)
     EVT_CALL(SetNpcPos, NPC_Eldstar_02, NPC_DISPOSE_LOCATION)
     EVT_WAIT(60)
-    EVT_EXEC(N(EVS_80243B30))
+    EVT_EXEC(N(EVS_FadeOutMusic))
     EVT_THREAD
         EVT_CALL(N(func_80242F08_8B2F78))
         EVT_CALL(N(func_80242BC0_8B2C30), 255, 255, 255, 0, 0, 0, 50)

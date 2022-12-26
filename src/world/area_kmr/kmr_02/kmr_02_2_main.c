@@ -23,7 +23,7 @@ s32 N(missing_80244A20_4A20)[] = {
 };
 
 #define NAME_SUFFIX _Main
-#include "unk_territory.inc.c"
+#include "wander_territories.inc.c"
 #define NAME_SUFFIX
 
 MobileAISettings N(D_80244B3C_8B4BAC) = {
@@ -46,7 +46,7 @@ EvtScript N(EVS_ExitWalk_kmr_09_0) = EVT_EXIT_WALK(60, kmr_02_ENTRY_0, "kmr_09",
 
 MAP_RODATA_PAD(1, exits);
 
-EvtScript N(D_80244CA0_8B4D10) = {
+EvtScript N(EVS_SetupGoombaRoadGate) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
         EVT_CALL(RotateGroup, MODEL_g197, 120, 0, -1, 0)
         EVT_CALL(RotateGroup, MODEL_g196, 120, 0, 1, 0)
@@ -70,12 +70,12 @@ EvtScript N(EVS_EnterMap) = {
     EVT_IF_EQ(LVar1, LOAD_FROM_FILE_SELECT)
         EVT_EXEC(EnterSavePoint)
         EVT_EXEC(N(EVS_BindExitTriggers))
-        EVT_EXEC(N(D_80244CA0_8B4D10))
+        EVT_EXEC(N(EVS_SetupGoombaRoadGate))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_NE(LVar0, kmr_02_ENTRY_0)
-        EVT_EXEC(N(D_80244CA0_8B4D10))
+        EVT_EXEC(N(EVS_SetupGoombaRoadGate))
     EVT_END_IF
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(2)
@@ -123,7 +123,7 @@ EvtScript N(EVS_EnterMap) = {
     EVT_END
 };
 
-EvtScript N(D_802450B4_8B5124) = {
+EvtScript N(EVS_ShowMessage_ItsLocked) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -131,7 +131,7 @@ EvtScript N(D_802450B4_8B5124) = {
     EVT_END
 };
 
-EvtScript N(D_802450FC_8B516C) = {
+EvtScript N(EVS_OpenGoombaRoadGate) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_tt2, SOUND_1D2, 0)
     EVT_CALL(MakeLerp, 0, 120, 20, EASING_COS_IN_OUT)
@@ -150,8 +150,8 @@ EvtScript N(D_802450FC_8B516C) = {
     EVT_END
 };
 
-API_CALLABLE(N(func_80240370_8B03E0)) {
-    set_map_change_fade_rate(1);
+API_CALLABLE(N(SetMapChangeFadeSlowest)) {
+    set_map_change_fade_rate(1); //normally 20
     return ApiStatus_DONE2;
 }
 
@@ -168,7 +168,7 @@ EvtScript N(EVS_Main) = {
         EVT_GOTO(10)
     EVT_END_IF
     EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC(N(EVS_80243B30))
+    EVT_EXEC(N(EVS_FadeOutMusic))
     EVT_RETURN
     EVT_LABEL(10)
     EVT_SWITCH(GB_StoryProgress)
@@ -181,17 +181,17 @@ EvtScript N(EVS_Main) = {
     EVT_END_SWITCH
     EVT_LABEL(20)
     EVT_CALL(ClearDefeatedEnemies)
-    EVT_EXEC_WAIT(N(EVS_80251E84))
+    EVT_EXEC_WAIT(N(EVS_SetupRooms))
     EVT_EXEC_WAIT(N(EVS_80255588))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_80243B74))
+    EVT_EXEC(N(EVS_SetupMusic))
     EVT_EXEC_WAIT(N(EVS_SetupFoliage))
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_FELL_OFF_CLIFF)
-            EVT_BIND_TRIGGER(EVT_PTR(N(D_802450B4_8B5124)), TRIGGER_WALL_PRESS_A, COLLIDER_mm1, 1, 0)
+            EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShowMessage_ItsLocked)), TRIGGER_WALL_PRESS_A, COLLIDER_mm1, 1, 0)
         EVT_CASE_LT(STORY_CH0_TWINK_GAVE_LUCKY_STAR)
         EVT_CASE_DEFAULT
-            EVT_BIND_TRIGGER(EVT_PTR(N(D_802450FC_8B516C)), TRIGGER_WALL_PRESS_A, COLLIDER_tt2, 1, 0)
+            EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OpenGoombaRoadGate)), TRIGGER_WALL_PRESS_A, COLLIDER_tt2, 1, 0)
     EVT_END_SWITCH
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_GATE_CRUSHED)
@@ -214,7 +214,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, kmr_02_ENTRY_5)
         EVT_WAIT(30)
-        EVT_CALL(N(func_80240370_8B03E0))
+        EVT_CALL(N(SetMapChangeFadeSlowest))
     EVT_END_IF
     EVT_RETURN
     EVT_END

@@ -43,23 +43,23 @@ enum {
 	MV_Unk_05		= MapVar(5),
 };
 
-enum {
-    MF_Unk_0A       = MapFlag(10),
-    MF_Unk_0B       = MapFlag(11),
+enum {	
+    MF_SpawnFlag_BushCoin	= MapFlag(10),
+    MF_SpawnFlag_Goomnut	= MapFlag(11),
 };
 
 #define NAMESPACE kmr_02
 
 extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_80243B30);
-extern EvtScript N(EVS_80243C6C);
-extern EvtScript N(EVS_80251E84);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_FadeOutMusic);
+extern EvtScript N(EVS_PlayRestingSong);
+extern EvtScript N(EVS_PushNewPartnerSong);
+extern EvtScript N(EVS_PopSong);
+extern EvtScript N(EVS_SetupRooms);
 extern EvtScript N(EVS_80255588);
-extern EvtScript N(EVS_80243B74);
 extern EvtScript N(EVS_80255380);
 extern EvtScript N(EVS_80255AA0);
-extern EvtScript N(EVS_80243C0C);
-extern EvtScript N(EVS_80243C30);
 extern EvtScript N(EVS_NpcAux_Kammy);
 extern EvtScript N(EVS_80254AE0);
 extern EvtScript N(EVS_NpcInteract_ToadHouse);

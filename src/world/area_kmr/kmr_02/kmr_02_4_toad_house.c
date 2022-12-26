@@ -8,7 +8,7 @@ MobileAISettings N(D_802513F0_8C1460) = {
     .unk_AI_2C = 1,
 };
 
-EvtScript N(D_80251420_8C1490) = {
+EvtScript N(EVS_RunBasicAI) = {
     EVT_CALL(BasicAI_Main, EVT_PTR(N(D_802513F0_8C1460)))
     EVT_RETURN
     EVT_END
@@ -19,19 +19,19 @@ s32 N(missing_80251440_11440)[] = {
     0x00000000, 0x00000000, 0x00630010, 
 };
 
-EvtScript N(D_8025146C_8C14DC) = {
+EvtScript N(EVS_OpenDoor_House) = {
     EVT_CALL(RotateModel, MODEL_syoumen_enter, LVar0, 0, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8025149C_8C150C) = {
+EvtScript N(EVS_DropDoor_House) = {
     EVT_CALL(RotateModel, MODEL_syoumen_enter, LVar0, EVT_FLOAT(54.56), 0, EVT_FLOAT(31.5))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802514CC_8C153C) = {
+EvtScript N(EVS_MoveWalls_House) = {
     EVT_CALL(RotateModel, MODEL_door_ki, LVar0, 1, 0, 0)
     EVT_CALL(RotateModel, MODEL_o122, LVar0, 1, 0, 0)
     EVT_CALL(RotateModel, MODEL_o123, LVar0, 1, 0, 0)
@@ -61,12 +61,12 @@ EvtScript N(EVS_NpcAI_Goombario_NoAI) = {
 };
 
 EvtScript N(EVS_NpcAI_Goombario) = {
-    EVT_EXEC_WAIT(N(D_80251420_8C1490))
+    EVT_EXEC_WAIT(N(EVS_RunBasicAI))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802516B0_8C1720) = {
+EvtScript N(EVS_ToggleVis_House) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(SetGroupEnabled, MODEL_of, 1)
@@ -100,18 +100,18 @@ EvtScript N(D_802516B0_8C1720) = {
     EVT_END
 };
 
-EvtScript N(D_80251880_8C18F0) = {
+EvtScript N(EVS_OpenDoor_Verdana) = {
     EVT_CALL(RotateModel, MODEL_ura_exit, LVar0, 0, -1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802518B0_8C1920) = {
+EvtScript N(EVS_MoveWalls_Verdana) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802518C0_8C1930) = {
+EvtScript N(EVS_ToggleVis_Verdana) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
@@ -212,17 +212,37 @@ EvtScript N(D_802518C0_8C1930) = {
 
 MAP_RODATA_PAD(1,unk);
 
-s32 N(D_80251E78_8C1EE8)[] = {
+s32 N(InsideNPCs_House)[] = {
     NPC_Gooma,
     NPC_Goompa,
     -1
 };
 
-EvtScript N(EVS_80251E84) = {
-    EVT_CALL(MakeDoorAdvanced, 5, EVT_PTR(N(D_8025146C_8C14DC)), EVT_PTR(N(D_802514CC_8C153C)), EVT_PTR(N(D_8025149C_8C150C)), EVT_PTR(N(D_802516B0_8C1720)), COLLIDER_deilit5, COLLIDER_deilit6, MODEL_kuribou_house, EVT_PTR(N(D_80251E78_8C1EE8)))
-    EVT_CALL(MakeDoorAdvanced, 7, EVT_PTR(N(D_80251880_8C18F0)), EVT_PTR(N(D_802518B0_8C1920)), 0, EVT_PTR(N(D_802518C0_8C1930)), COLLIDER_deilit4, COLLIDER_deilit4_1, MODEL_kuribou_house, EVT_PTR(N(D_80251E78_8C1EE8)))
+EvtScript N(EVS_SetupRooms) = {
+    // goomba family home, main room
+    EVT_CALL(MakeDoorAdvanced,
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_5),
+        EVT_PTR(N(EVS_OpenDoor_House)),
+        EVT_PTR(N(EVS_MoveWalls_House)),
+        EVT_PTR(N(EVS_DropDoor_House)),
+        EVT_PTR(N(EVS_ToggleVis_House)),
+        COLLIDER_deilit5,
+        COLLIDER_deilit6,
+        MODEL_kuribou_house,
+        EVT_PTR(N(InsideNPCs_House)))
+    // verdana
+    EVT_CALL(MakeDoorAdvanced,
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_7),
+        EVT_PTR(N(EVS_OpenDoor_Verdana)),
+        EVT_PTR(N(EVS_MoveWalls_Verdana)),
+        NULL,
+        EVT_PTR(N(EVS_ToggleVis_Verdana)),
+        COLLIDER_deilit4,
+        COLLIDER_deilit4_1,
+        MODEL_kuribou_house,
+        EVT_PTR(N(InsideNPCs_House)))
     EVT_SET(LVar0, 3)
-    EVT_EXEC(N(D_802516B0_8C1720))
+    EVT_EXEC(N(EVS_ToggleVis_House))
     EVT_CALL(SetGroupEnabled, MODEL_monohoshi, 0)
     EVT_RETURN
     EVT_END
@@ -253,7 +273,7 @@ EvtScript N(EVS_ToadHouse_SetDialogue) = {
 };
 
 EvtScript N(EVS_ToadHouse_GetInBed) = {
-    EVT_EXEC(N(EVS_80243C6C))
+    EVT_EXEC(N(EVS_PlayRestingSong))
     EVT_THREAD
         EVT_WAIT(20)
         EVT_CALL(N(ToadHouse_CamSetFOV), 0, 40)
@@ -291,7 +311,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
 };
 
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
-    EVT_EXEC(N(EVS_80243B74))
+    EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(HidePlayerShadow, FALSE)
     EVT_CALL(func_802D2520, ANIM_Mario_10002, 0, 0, 0, 0, 0)
     EVT_CALL(SetPlayerPos, -183, 19, -341)
