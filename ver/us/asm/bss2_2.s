@@ -40,10 +40,10 @@ dlabel wPartnerCurrentScriptID
 dlabel D_8010CFE0
 .space 4
 
-dlabel D_8010CFE4
+dlabel NextPartnerID
 .space 4
 
-dlabel D_8010CFE8
+dlabel NextPartnerCommand
 .space 4
 
 dlabel wPartner

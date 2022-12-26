@@ -5,10 +5,10 @@
 extern EvtScript N(EVS_NpcAI_Eldstar_02);
 extern EvtScript N(EVS_NpcAI_Eldstar_02_NoAI);
 
-BSS u8 D_80257F20; // r
-BSS u8 D_80257F21; // g
-BSS u8 D_80257F22; // b
-BSS u8 D_80257F23; // a
+BSS u8 N(savedColR); // r
+BSS u8 N(savedColG); // g
+BSS u8 N(savedColB); // b
+BSS u8 N(savedColA); // a
 
 BSS u8 oldPrimR, oldPrimG, oldPrimB;
 BSS u8 oldEnvR, oldEnvG, oldEnvB;
@@ -415,8 +415,8 @@ EvtScript N(EVS_NpcInit_Goombaria) = {
     EVT_END
 };
 
-API_CALLABLE(N(func_80242710_8B2780)) {
-    script->varTable[0] = gPlayerData.curHP == gPlayerData.curMaxHP;
+API_CALLABLE(N(IsPlayerHPFull)) {
+    script->varTable[0] = (gPlayerData.curHP == gPlayerData.curMaxHP);
     return ApiStatus_DONE2;
 }
 
@@ -428,18 +428,18 @@ API_CALLABLE(N(func_80242734_8B27A4)) {
     D_80258120.width = 32; // TOOD image header define
     D_80258120.height = 32; // TOOD image header define
     D_80258120.format = G_IM_FMT_CI;
-    D_80258120.bitDepth = 0;
+    D_80258120.bitDepth = G_IM_SIZ_4b;
     set_message_images(&D_80258120);
     return ApiStatus_DONE1;
 }
 
-API_CALLABLE(N(func_80242788_8B27F8)) {
+API_CALLABLE(N(RemoveGoompaPartner)) {
     gPlayerData.partners[PARTNER_GOOMPA].enabled = FALSE;
-    func_800EB2A4(0);
+    func_800EB2A4(PARTNER_NONE);
     return ApiStatus_DONE1;
 }
 
-API_CALLABLE(N(func_802427B0_8B2820)) {
+API_CALLABLE(N(WaitForStartInput)) {
     if (gGameStatusPtr->pressedButtons[0] & BUTTON_START) {
         return ApiStatus_DONE2;
     } else {
@@ -447,12 +447,12 @@ API_CALLABLE(N(func_802427B0_8B2820)) {
     }
 }
 
-API_CALLABLE(N(func_802427CC_8B283C)) {
+API_CALLABLE(N(OpenPauseMenu)) {
     set_game_mode(GAME_MODE_PAUSE);
     return ApiStatus_DONE1;
 }
 
-API_CALLABLE(N(func_802427EC_8B285C)) {
+API_CALLABLE(N(CloseStatusMenu)) {
     close_status_menu();
     return ApiStatus_DONE2;
 }
@@ -470,12 +470,12 @@ EvtScript N(D_80249694_8B9704) = {
     EVT_END_IF
     EVT_CALL(ContinueSpeech, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_0030)
     EVT_WAIT(10)
-    EVT_CALL(N(func_802427B0_8B2820))
+    EVT_CALL(N(WaitForStartInput))
     EVT_CALL(EndSpeech, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0)
     EVT_WAIT(10)
     EVT_SET(GF_Tutorial_Badges, TRUE)
-    EVT_CALL(N(func_802427CC_8B283C))
-    EVT_CALL(N(func_802427EC_8B285C))
+    EVT_CALL(N(OpenPauseMenu))
+    EVT_CALL(N(CloseStatusMenu))
     EVT_SET(GF_Tutorial_Badges, FALSE)
     EVT_RETURN
     EVT_END
@@ -809,14 +809,14 @@ EvtScript N(D_802497F4_8B9864) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit5, SOUND_BASIC_DOOR_CLOSE, 0)
-    EVT_CALL(N(func_80242788_8B27F8))
-    EVT_CALL(N(func_80242710_8B2780))
+    EVT_CALL(N(RemoveGoompaPartner))
+    EVT_CALL(N(IsPlayerHPFull))
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SpeakToPlayer, NPC_Goombario, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_CH0_003B)
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_Goombario, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_CH0_003C)
     EVT_END_IF
-    EVT_CALL(N(ChangeNpcToPartner), 2, 1)
+    EVT_CALL(N(ChangeNpcToPartner), NPC_Goombario, PARTNER_GOOMBARIO)
     EVT_WAIT(10)
     EVT_CALL(SetNpcPos, NPC_Goombario, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcFlagBits, NPC_Goombario, NPC_FLAG_GRAVITY, FALSE)
@@ -1419,31 +1419,31 @@ EvtScript N(EVS_NpcInteract_Toad) = {
 // control flow + data migration
 ApiStatus func_8024295C_8B29CC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 r = evt_get_variable(script, *args++);
-    s32 g = evt_get_variable(script, *args++);
-    s32 b = evt_get_variable(script, *args++);
-    s32 a = evt_get_variable(script, *args++);
-    s32 temp_s0_5 = evt_get_variable(script, *args++);
+    s32 targetColR = evt_get_variable(script, *args++);
+    s32 targetColG = evt_get_variable(script, *args++);
+    s32 targetColB = evt_get_variable(script, *args++);
+    s32 targetColA = evt_get_variable(script, *args++);
+    s32 duration = evt_get_variable(script, *args++);
 
     if (isInitialCall) {
-        get_background_color_blend(&D_80257F20, &D_80257F21, &D_80257F22, &D_80257F23);
+        get_background_color_blend(&N(savedColR), &N(savedColG), &N(savedColB), &N(savedColA));
         script->functionTemp[0] = 0;
     }
 
-    if (temp_s0_5 > 0) {
+    if (duration > 0) {
         set_background_color_blend(
-            D_80257F20 + (((r - D_80257F20) * script->functionTemp[0]) / temp_s0_5),
-            D_80257F21 + (((g - D_80257F21) * script->functionTemp[0]) / temp_s0_5),
-            D_80257F22 + (((b - D_80257F22) * script->functionTemp[0]) / temp_s0_5),
-            D_80257F23 + (((a - D_80257F23) * script->functionTemp[0]) / temp_s0_5)
+            N(savedColR) + (((targetColR - N(savedColR)) * script->functionTemp[0]) / duration),
+            N(savedColG) + (((targetColG - N(savedColG)) * script->functionTemp[0]) / duration),
+            N(savedColB) + (((targetColB - N(savedColB)) * script->functionTemp[0]) / duration),
+            N(savedColA) + (((targetColA - N(savedColA)) * script->functionTemp[0]) / duration)
         );
 
         script->functionTemp[0]++;
-        if (temp_s0_5 < script->functionTemp[0]) {
+        if (duration < script->functionTemp[0]) {
             return ApiStatus_BLOCK;
         }
     } else {
-        set_background_color_blend(r, g, b, a);
+        set_background_color_blend(targetColR, targetColG, targetColB, targetColA);
     }
     return ApiStatus_DONE2;
 }
@@ -2210,30 +2210,9 @@ StaticNpc N(NpcData_ChuckQuizmo) = {
     .yaw = 90,
     .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_4000 | ENEMY_FLAGS_400000,
     .initVarCount = 1,
-    .initVar = { .value = 256 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_ChuckQuizmo_Idle,
-        .walk   = ANIM_ChuckQuizmo_Walk,
-        .run    = ANIM_ChuckQuizmo_Run,
-        .chase  = ANIM_ChuckQuizmo_Run,
-        .anim_4 = ANIM_ChuckQuizmo_Idle,
-        .anim_5 = ANIM_ChuckQuizmo_Idle,
-        .death  = ANIM_ChuckQuizmo_Still,
-        .hit    = ANIM_ChuckQuizmo_Still,
-        .anim_8 = ANIM_ChuckQuizmo_Run,
-        .anim_9 = ANIM_ChuckQuizmo_Run,
-        .anim_A = ANIM_ChuckQuizmo_Run,
-        .anim_B = ANIM_ChuckQuizmo_Run,
-        .anim_C = ANIM_ChuckQuizmo_Run,
-        .anim_D = ANIM_ChuckQuizmo_Run,
-        .anim_E = ANIM_ChuckQuizmo_Run,
-        .anim_F = ANIM_ChuckQuizmo_Run,
-    },
+    .initVar = { .bytes = { 0, QUIZ_AREA_KMR, QUIZ_COUNT_KMR, QUIZ_MAP_KMR_02 }},
+    .drops = QUIZMO_DROPS,
+    .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,
 };
 

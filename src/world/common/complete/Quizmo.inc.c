@@ -79,6 +79,8 @@ enum {
 };
 
 enum {
+    QUIZ_MAP_KMR_02     = 0,
+    QUIZ_COUNT_KMR      = 1,
     // area_mac
     QUIZ_MAP_MAC_00     = 0,
     QUIZ_MAP_MAC_01     = 1,
