@@ -2,134 +2,10 @@
 
 #include "world/common/todo/CheckPartnerFlags1000.inc.c"
 
-EvtScript N(D_80255160_8C51D0) = {
-    EVT_CALL(RotateModel, MODEL_o275, LVar0, 0, 1, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(D_80255190_8C5200) = {
-    EVT_SET(LVar1, LVar0)
-    EVT_ADD(LVar1, LVar0)
-    EVT_CALL(RotateModel, MODEL_k_k_1, LVar1, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_k_k_2, LVar1, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_k_k_3, LVar1, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o272, LVar1, 0, 1, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(D_80255240_8C52B0) = {
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SetGroupEnabled, MODEL_kino_in, 1)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o767, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(2)
-            EVT_THREAD
-                EVT_WAIT(5)
-            EVT_END_THREAD
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CASE_EQ(3)
-            EVT_CALL(SetGroupEnabled, MODEL_kino_in, 0)
-            EVT_CALL(EnableModel, MODEL_o422, TRUE)
-            EVT_CALL(EnableModel, MODEL_o424, TRUE)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_80255380) = {
-    EVT_CALL(SetGroupEnabled, MODEL_kino_in, 1)
-    EVT_CALL(RotateModel, MODEL_k_k_1, 180, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_k_k_2, 180, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_k_k_3, 180, 0, 1, 0)
-    EVT_CALL(RotateModel, MODEL_o272, 180, 0, 1, 0)
-    EVT_CALL(EnableModel, MODEL_o561, FALSE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o767, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(D_80255450_8C54C0) = {
-    EVT_LABEL(9)
-        EVT_CALL(MakeLerp, 10, -10, 30, EASING_COS_IN_OUT)
-        EVT_LABEL(10)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_kanban, LVar0, EVT_FLOAT(35.498), 0, EVT_FLOAT(-9.511))
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(10)
-            EVT_END_IF
-        EVT_CALL(MakeLerp, -10, 10, 30, EASING_COS_IN_OUT)
-        EVT_LABEL(11)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_kanban, LVar0, EVT_FLOAT(35.498), 0, EVT_FLOAT(-9.511))
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(11)
-            EVT_END_IF
-        EVT_GOTO(9)
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(D_80255580_8C55F0)[] = {
-    NPC_Toad,
-    -1
-};
-
-EvtScript N(EVS_80255588) = {
-    EVT_CALL(RotateModel, MODEL_o320, 180, 0, 1, 0)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_NE(LVar0, kmr_02_ENTRY_5)
-        EVT_CALL(SetGroupEnabled, MODEL_kino_in, 0)
-    EVT_END_IF
-    EVT_CALL(MakeDoorAdvanced, 0, EVT_PTR(N(D_80255160_8C51D0)), EVT_PTR(N(D_80255190_8C5200)), 0, EVT_PTR(N(D_80255240_8C52B0)), COLLIDER_deilit7, COLLIDER_deilit8, MODEL_kinopi, EVT_PTR(N(D_80255580_8C55F0)))
-    EVT_EXEC(N(D_80255450_8C54C0))
-    EVT_RETURN
-    EVT_END
-};
-
-MobileAISettings N(D_80255630_8C56A0) = {
-    .moveSpeed = 1.5f,
-    .moveTime = 60,
-    .waitTime = 30,
-    .playerSearchInterval = -1,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(D_80255660_8C56D0) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(D_80255630_8C56A0)))
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(missing_80255680_15680)[] = {
-    0x00000000, 0x00160018, 0x00000000, 0x00000000, 0x80255660, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00630010, 
-};
-
 #define NAME_SUFFIX _6
+#include "world/common/npc/GoombaFamily_Wander.inc.c"
 #include "wander_territories.inc.c"
 #define NAME_SUFFIX
-
-MobileAISettings N(D_8025579C_8C580C) = {
-    .moveSpeed = 2.0f,
-    .moveTime = 15,
-    .waitTime = 30,
-    .playerSearchInterval = -1,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(EVS_NpcAI_Goomama) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(D_8025579C_8C580C)))
-    EVT_RETURN
-    EVT_END
-};
 
 #include "world/common/todo/UnkFunc42.inc.c"
 
@@ -337,7 +213,7 @@ EvtScript N(EVS_80255AA0) = {
     EVT_WAIT(10)
     EVT_CALL(GetNpcPos, NPC_Kammy, LVar0, LVar1, LVar2)
     EVT_WAIT(10)
-    EVT_EXEC_WAIT(N(EVS_80254AE0))
+    EVT_EXEC_WAIT(N(EVS_SummonGateBlock))
     EVT_THREAD
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_80012)
         EVT_CALL(func_802D286C, 256)
@@ -463,11 +339,11 @@ EvtScript N(EVS_80255AA0) = {
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_Goompapa, ANIM_Goompapa_Idle)
     EVT_CALL(N(SetWanderTerritory_6), NPC_Goomama, 1)
-    EVT_CALL(BindNpcAI, NPC_Goomama, EVT_PTR(N(EVS_NpcAI_Goomama)))
+    EVT_CALL(BindNpcAI, NPC_Goomama, EVT_PTR(N(EVS_NpcIdle_SwitchedWander_6)))
     EVT_CALL(N(SetWanderTerritory_6), NPC_Goombario, 2)
-    EVT_CALL(BindNpcAI, NPC_Goombario, EVT_PTR(N(EVS_NpcAI_Goomama)))
+    EVT_CALL(BindNpcAI, NPC_Goombario, EVT_PTR(N(EVS_NpcIdle_SwitchedWander_6)))
     EVT_CALL(N(SetWanderTerritory_6), NPC_Goombaria, 3)
-    EVT_CALL(BindNpcAI, NPC_Goombaria, EVT_PTR(N(EVS_NpcAI_Goomama)))
+    EVT_CALL(BindNpcAI, NPC_Goombaria, EVT_PTR(N(EVS_NpcIdle_SwitchedWander_6)))
     EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_100, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_Goompapa, NPC_FLAG_100, FALSE)
     EVT_RETURN

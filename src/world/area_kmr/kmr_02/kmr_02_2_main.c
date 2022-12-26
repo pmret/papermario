@@ -3,42 +3,10 @@
 #include "world/common/entity/Pipe.inc.c"
 #include "world/common/entity/Pipe.data.inc.c"
 
-MobileAISettings N(D_802449D0_8B4A40) = {
-    .moveSpeed = 1.5f,
-    .moveTime = 60,
-    .waitTime = 30,
-    .playerSearchInterval = -1,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(D_80244A00_8B4A70) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(D_802449D0_8B4A40)))
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(missing_80244A20_4A20)[] = {
-    0x00000000, 0x00160018, 0x00000000, 0x00000000, 0x80244A00, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00630010, 
-};
-
 #define NAME_SUFFIX _Main
+#include "world/common/npc/GoombaFamily_Wander.inc.c"
 #include "wander_territories.inc.c"
 #define NAME_SUFFIX
-
-MobileAISettings N(D_80244B3C_8B4BAC) = {
-    .moveSpeed = 2.0f,
-    .moveTime = 15,
-    .waitTime = 30,
-    .playerSearchInterval = -1,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(EVS_NpcAI_Unused_Wander) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(D_80244B3C_8B4BAC)))
-    EVT_RETURN
-    EVT_END
-};
 
 EvtScript N(EVS_ExitWalk_kmr_05_1) = EVT_EXIT_WALK(60, kmr_02_ENTRY_2, "kmr_05", kmr_05_ENTRY_1);
 EvtScript N(EVS_ExitWalk_kmr_00_0) = EVT_EXIT_WALK(60, kmr_02_ENTRY_1, "kmr_00", kmr_00_ENTRY_0);
@@ -78,7 +46,7 @@ EvtScript N(EVS_EnterMap) = {
         EVT_EXEC(N(EVS_SetupGoombaRoadGate))
     EVT_END_IF
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(kmr_02_ENTRY_2)
             EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
             EVT_EXEC(EnterWalk)
             EVT_IF_EQ(GF_KMR02_ReturnedWithGoompa, FALSE)
@@ -90,7 +58,7 @@ EvtScript N(EVS_EnterMap) = {
                 EVT_SET(GF_KMR02_ReturnedWithGoompa, TRUE)
                 EVT_CALL(DisablePlayerInput, FALSE)
             EVT_END_IF
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(kmr_02_ENTRY_3)
             EVT_IF_EQ(GF_KMR02_WarpPipe, FALSE)
                 EVT_CALL(DisablePlayerInput, TRUE)
                 EVT_CALL(DisablePlayerPhysics, TRUE)
@@ -109,10 +77,11 @@ EvtScript N(EVS_EnterMap) = {
             EVT_END_IF
             EVT_SET(LVarA, EVT_PTR(N(EVS_BindExitTriggers)))
             EVT_EXEC_WAIT(N(EVS_Pipe_EnterVertical))
-        EVT_CASE_EQ(5)
-            EVT_EXEC(N(EVS_80255380))
+        EVT_CASE_EQ(kmr_02_ENTRY_5)
+            EVT_EXEC(N(EVS_SetWallsDown_ToadHouse))
             EVT_EXEC(N(EVS_BindExitTriggers))
-        EVT_CASE_EQ(10)
+        EVT_CASE_EQ(kmr_02_ENTRY_A)
+            // beta entrance for 'post' pipe
             EVT_EXEC(EnterPostPipe)
             EVT_EXEC(N(EVS_BindExitTriggers))
         EVT_CASE_DEFAULT
@@ -160,14 +129,15 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_NO_LEAD()
     EVT_CALL(GetLoadType, LVar0)
-    EVT_IF_EQ(LVar0, 1)
+    EVT_IF_EQ(LVar0, LOAD_FROM_FILE_SELECT)
         EVT_GOTO(10)
     EVT_END_IF
+    // check for cutscene entry
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_NE(LVar0, kmr_02_ENTRY_4)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
+    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(EpilogueNPCs)))
     EVT_EXEC(N(EVS_FadeOutMusic))
     EVT_RETURN
     EVT_LABEL(10)
@@ -182,7 +152,7 @@ EvtScript N(EVS_Main) = {
     EVT_LABEL(20)
     EVT_CALL(ClearDefeatedEnemies)
     EVT_EXEC_WAIT(N(EVS_SetupRooms))
-    EVT_EXEC_WAIT(N(EVS_80255588))
+    EVT_EXEC_WAIT(N(EVS_SetupToadHouse))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_EXEC_WAIT(N(EVS_SetupFoliage))

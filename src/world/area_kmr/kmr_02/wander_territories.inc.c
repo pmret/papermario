@@ -64,3 +64,17 @@ API_CALLABLE(N(SetWanderTerritory)) {
     }
     return ApiStatus_DONE2;
 }
+
+MobileAISettings N(AISettings_SwitchedWander) = {
+    .moveSpeed = 2.0f,
+    .moveTime = 15,
+    .waitTime = 30,
+    .playerSearchInterval = -1,
+    .unk_AI_2C = 1,
+};
+
+EvtScript N(EVS_NpcIdle_SwitchedWander) = {
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_SwitchedWander)))
+    EVT_RETURN
+    EVT_END
+};

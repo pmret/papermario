@@ -9548,22 +9548,24 @@ segments:
     - [0x8B0070, c, kmr_02_1_music]
     - [0x8B0070, c, kmr_02_2_main]
     - [0x8B30E0, c, kmr_02_3_npc]
-    - [0x8B33E0, c, kmr_02_4_toad_house]
+    - [0x8B33E0, c, kmr_02_4_rooms_1]
     - [0x8B33E0, c, kmr_02_5_entity]
-    - [0x8B36B0, c, kmr_02_6]
-    - [0x8B37D0, c, kmr_02_7_foliage]
-    - [0x8B3A10, c, kmr_02_8_images]
+    - [0x8B36B0, c, kmr_02_6_rooms_2]
+    - [0x8B36B0, c, kmr_02_7_kammy]
+    - [0x8B37D0, c, kmr_02_8_foliage]
+    - [0x8B3A10, c, kmr_02_9_images]
     - [0x8B3AB0, .data, kmr_02_0_header]
     - [0x8B3BA0, .data, kmr_02_1_music]
     - [0x8B3D10, .data, kmr_02_2_main]
     - [0x8B5640, .data, kmr_02_3_npc]
-    - [0x8C1460, .data, kmr_02_4_toad_house]
+    - [0x8C1460, .data, kmr_02_4_rooms_1]
     - [0x8C4A40, .data, kmr_02_5_entity]
-    - [0x8C51D0, .data, kmr_02_6]
-    - [0x8C7010, .data, kmr_02_7_foliage]
+    - [0x8C51D0, .data, kmr_02_6_rooms_2]
+    - [0x8C56A0, .data, kmr_02_7_kammy]
+    - [0x8C7010, .data, kmr_02_8_foliage]
     - start: 0x8C7B70
       type: .data
-      name: kmr_02_8_images
+      name: kmr_02_9_images
       subsegments:
       - [0x8C7B70, ci4, heart_block, 32, 32]
       - [0x8C7D70, palette, heart_block]

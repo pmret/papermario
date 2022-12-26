@@ -14,22 +14,22 @@
 
 #define GOOMPA_ANIMS \
 { \
-    ANIM_Dryite_Green_Idle, \
-    ANIM_Dryite_Green_Walk, \
-    ANIM_Dryite_Green_Run, \
-    ANIM_Dryite_Green_Run, \
-    ANIM_Dryite_Green_Idle, \
-    ANIM_Dryite_Green_Idle, \
-    ANIM_Dryite_Green_Still, \
-    ANIM_Dryite_Green_Still, \
-    ANIM_Dryite_Green_Idle, \
-    ANIM_Dryite_Green_Idle, \
-    ANIM_Dryite_Green_Idle, \
-    ANIM_Dryite_Green_Idle, \
-    ANIM_Dryite_Green_Idle, \
-    ANIM_Dryite_Green_Idle, \
-    ANIM_Dryite_Green_Idle, \
-    ANIM_Dryite_Green_Idle, \
+    .idle   = ANIM_Goompa_Idle, \
+    .walk   = ANIM_Goompa_Walk, \
+    .run    = ANIM_Goompa_Run, \
+    .chase  = ANIM_Goompa_Run, \
+    .anim_4 = ANIM_Goompa_Idle, \
+    .anim_5 = ANIM_Goompa_Idle, \
+    .death  = ANIM_Goompa_Still, \
+    .hit    = ANIM_Goompa_Still, \
+    .anim_8 = ANIM_Goompa_Run, \
+    .anim_9 = ANIM_Goompa_Run, \
+    .anim_A = ANIM_Goompa_Run, \
+    .anim_B = ANIM_Goompa_Run, \
+    .anim_C = ANIM_Goompa_Run, \
+    .anim_D = ANIM_Goompa_Run, \
+    .anim_E = ANIM_Goompa_Run, \
+    .anim_F = ANIM_Goompa_Run, \
 }
 
 #define GOOMA_DROPS \
@@ -111,6 +111,33 @@
     .anim_D = ANIM_Goomama_Run, \
     .anim_E = ANIM_Goomama_Run, \
     .anim_F = ANIM_Goomama_Run, \
+}
+
+#define GOOMBARIO_DROPS \
+{ \
+    .dropFlags = NPC_DROP_FLAGS_80, \
+    .heartDrops  = NO_DROPS, \
+    .flowerDrops = NO_DROPS, \
+}
+
+#define GOOMBARIO_ANIMS \
+{ \
+    .idle   = ANIM_WorldGoombario_Idle, \
+    .walk   = ANIM_WorldGoombario_Walk, \
+    .run    = ANIM_WorldGoombario_Run, \
+    .chase  = ANIM_WorldGoombario_Run, \
+    .anim_4 = ANIM_WorldGoombario_Idle, \
+    .anim_5 = ANIM_WorldGoombario_Idle, \
+    .death  = ANIM_WorldGoombario_Still, \
+    .hit    = ANIM_WorldGoombario_Still, \
+    .anim_8 = ANIM_WorldGoombario_Run, \
+    .anim_9 = ANIM_WorldGoombario_Run, \
+    .anim_A = ANIM_WorldGoombario_Run, \
+    .anim_B = ANIM_WorldGoombario_Run, \
+    .anim_C = ANIM_WorldGoombario_Run, \
+    .anim_D = ANIM_WorldGoombario_Run, \
+    .anim_E = ANIM_WorldGoombario_Run, \
+    .anim_F = ANIM_WorldGoombario_Run, \
 }
 
 #define GOOMBARIA_DROPS \

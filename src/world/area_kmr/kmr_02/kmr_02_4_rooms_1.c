@@ -1,23 +1,8 @@
 #include "kmr_02.h"
 
-MobileAISettings N(D_802513F0_8C1460) = {
-    .moveSpeed = 1.5f,
-    .moveTime = 60,
-    .waitTime = 30,
-    .playerSearchInterval = -1,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(EVS_RunBasicAI) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(D_802513F0_8C1460)))
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(missing_80251440_11440)[] = {
-    0x00000000, 0x00160018, 0x00000000, 0x00000000, 0x80251420, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00630010, 
-};
+#define NAME_SUFFIX _Rooms1
+#include "world/common/npc/GoombaFamily_Wander.inc.c"
+#define NAME_SUFFIX
 
 EvtScript N(EVS_OpenDoor_House) = {
     EVT_CALL(RotateModel, MODEL_syoumen_enter, LVar0, 0, 1, 0)
@@ -61,7 +46,7 @@ EvtScript N(EVS_NpcAI_Goombario_NoAI) = {
 };
 
 EvtScript N(EVS_NpcAI_Goombario) = {
-    EVT_EXEC_WAIT(N(EVS_RunBasicAI))
+    EVT_EXEC_WAIT(N(EVS_NpcAI_GoombaFamily_Wander_Rooms1))
     EVT_RETURN
     EVT_END
 };

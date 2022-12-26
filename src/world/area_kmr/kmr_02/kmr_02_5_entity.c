@@ -19,7 +19,6 @@ API_CALLABLE(N(PlayerHasBadgeEquipped)) {
 }
 
 #include "world/common/todo/SetEntityPositionF.inc.c"
-
 #include "world/common/todo/GetEntityPosition.inc.c"
 
 EvtScript N(EVS_GotoMap_tik_01_2) = {
@@ -29,7 +28,7 @@ EvtScript N(EVS_GotoMap_tik_01_2) = {
     EVT_END
 };
 
-API_CALLABLE(N(func_80243514_8B3584)) {
+API_CALLABLE(N(AnimateBlockScale)) {
     Entity* entity = get_entity_by_index(script->varTable[10]);
 
     if (isInitialCall) {
@@ -49,7 +48,7 @@ API_CALLABLE(N(func_80243514_8B3584)) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript N(D_80254A00_8C4A70) = {
+EvtScript N(EVS_OnSmash_GateBlock) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, MSG_CH0_0066)
@@ -66,7 +65,7 @@ EvtScript N(D_80254A00_8C4A70) = {
     EVT_END
 };
 
-EvtScript N(EVS_80254AE0) = {
+EvtScript N(EVS_SummonGateBlock) = {
     EVT_CALL(PlaySoundAt, SOUND_207A, 0, 373, 88, 255)
     EVT_CALL(GetNpcPos, NPC_Kammy, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, 373, 88, 255, 1, 100)
@@ -83,18 +82,18 @@ EvtScript N(EVS_80254AE0) = {
     EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 1, 326, 150, 261, 1, 60)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer1Block), 326, 120, 261, 148, MAKE_ENTITY_END)
     EVT_SET(LVarA, LVar0)
-    EVT_CALL(AssignScript, EVT_PTR(N(D_80254A00_8C4A70)))
-    EVT_CALL(N(func_80243514_8B3584))
+    EVT_CALL(AssignScript, EVT_PTR(N(EVS_OnSmash_GateBlock)))
+    EVT_CALL(N(AnimateBlockScale))
     EVT_SET(LVar9, LVarA)
     EVT_CALL(N(GetEntityPosition), LVar9, LVar2, LVar3, LVar4)
     EVT_CALL(MakeLerp, LVar3, 300, 20, EASING_QUADRATIC_IN)
     EVT_LABEL(10)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(N(SetEntityPositionF), LVar9, LVar2, LVar0, LVar4)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(10)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(N(SetEntityPositionF), LVar9, LVar2, LVar0, LVar4)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(10)
+        EVT_END_IF
     EVT_CALL(PlaySoundAt, SOUND_207C, 0, LVar2, LVar0, LVar4)
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim0F)
@@ -105,12 +104,12 @@ EvtScript N(EVS_80254AE0) = {
     EVT_CALL(PlaySoundAt, SOUND_207D, 0, LVar2, LVar0, LVar4)
     EVT_CALL(MakeLerp, 300, 0, 20, EASING_CUBIC_IN)
     EVT_LABEL(20)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(N(SetEntityPositionF), LVar9, LVar2, LVar0, LVar4)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(20)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(N(SetEntityPositionF), LVar9, LVar2, LVar0, LVar4)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(20)
+        EVT_END_IF
     EVT_CALL(EnableGroup, MODEL_2, TRUE)
     EVT_CALL(EnableGroup, MODEL_1, FALSE)
     EVT_CALL(PlaySoundAt, SOUND_DD, 0, LVar2, LVar0, LVar4)
@@ -126,7 +125,7 @@ EvtScript N(EVS_MakeEntities) = {
         EVT_CASE_LT(STORY_CH0_GATE_CRUSHED)
         EVT_CASE_LT(STORY_CH0_SMASHED_GATE_BLOCK)
             EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer1Block_WideX), 326, 0, 261, 270, MAKE_ENTITY_END)
-            EVT_CALL(AssignScript, EVT_PTR(N(D_80254A00_8C4A70)))
+            EVT_CALL(AssignScript, EVT_PTR(N(EVS_OnSmash_GateBlock)))
         EVT_CASE_LT(STORY_CH0_TWINK_GAVE_LUCKY_STAR)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt2, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_SWITCH

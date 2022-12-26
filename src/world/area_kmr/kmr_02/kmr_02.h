@@ -57,20 +57,20 @@ extern EvtScript N(EVS_PlayRestingSong);
 extern EvtScript N(EVS_PushNewPartnerSong);
 extern EvtScript N(EVS_PopSong);
 extern EvtScript N(EVS_SetupRooms);
-extern EvtScript N(EVS_80255588);
-extern EvtScript N(EVS_80255380);
+extern EvtScript N(EVS_SetupToadHouse);
+extern EvtScript N(EVS_SetWallsDown_ToadHouse);
 extern EvtScript N(EVS_80255AA0);
 extern EvtScript N(EVS_NpcAux_Kammy);
-extern EvtScript N(EVS_80254AE0);
+extern EvtScript N(EVS_SummonGateBlock);
 extern EvtScript N(EVS_NpcInteract_ToadHouse);
 extern EvtScript N(EVS_SetupFoliage);
 extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(DefaultNPCs);
+extern NpcGroupList N(EpilogueNPCs);
 extern NpcGroupList N(NpcGroup1);
 extern NpcGroupList N(NpcGroup2);
 extern NpcGroupList N(NpcGroup3);
 
-extern IMG_BIN D_80257B00_8C7B70[];
-extern PAL_BIN D_80257D00_8C7D70[];
+extern IMG_BIN N(heart_block_img)[];
+extern PAL_BIN N(heart_block_pal)[];
 
 API_CALLABLE(N(LoadPartyImage));
