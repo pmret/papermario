@@ -39,17 +39,31 @@ extern s16 MessagePlural;
 extern s16 MessageSingular;
 
 BSS s32 N(Quizmo_Worker);
-#ifndef QUIZMO_FIX
-BSS s32 N(pad_D_8024EFA4);
+// needed for kmr_02
+#ifndef QUIZMO_PRE_STATIC_PAD
+MAP_STATIC_PAD(1,quizmo_pre_array)
 #endif
-// needed for kmr_02 -- actually indices 0-4 are indexed for this array!
-// TODO: it should be size 5 and Quizmo_AnswerResult is Quizmo_ScriptArray[4]?
-BSS s32 N(Quizmo_ScriptArray)[4];
-BSS s32 N(Quizmo_AnswerResult);
-MAP_STATIC_PAD(1,quizmo_unk)
+BSS s32 N(Quizmo_ScriptArray)[5];
+MAP_STATIC_PAD(1,quizmo_post_array)
 BSS EffectInstance* N(Quizmo_StageEffect);
 BSS EffectInstance* N(Quizmo_AudienceEffect);
 BSS EffectInstance* N(Quizmo_VannaTEffect);
+
+enum {
+    QUIZ_ARRAY_SAVED_FOV        = ArrayVar(0),
+    QUIZ_ARRAY_ORIGIN_X         = ArrayVar(1),
+    QUIZ_ARRAY_ORIGIN_Y         = ArrayVar(2),
+    QUIZ_ARRAY_ORIGIN_Z         = ArrayVar(3),
+    QUIZ_ARRAY_ANSWER_RESULT    = ArrayVar(4),
+};
+
+enum {
+    QUIZ_ARRAY_INDEX_SAVED_FOV      = 0,
+    QUIZ_ARRAY_INDEX_ORIGIN_X       = 1,
+    QUIZ_ARRAY_INDEX_ORIGIN_Y       = 2,
+    QUIZ_ARRAY_INDEX_ORIGIN_Z       = 3,
+    QUIZ_ARRAY_INDEX_ANSWER_RESULT  = 4,
+};
 
 #include "world/common/complete/GiveReward.inc.c"
 
@@ -302,17 +316,17 @@ API_CALLABLE(N(Quizmo_CreateStage)) {
 
     if (isInitialCall) {
         N(Quizmo_StageEffect) = fx_quizmo_stage(0,
-            evt_get_variable(script, ArrayVar(1)),
-            evt_get_variable(script, ArrayVar(2)),
-            evt_get_variable(script, ArrayVar(3)));
+            evt_get_variable(script, QUIZ_ARRAY_ORIGIN_X),
+            evt_get_variable(script, QUIZ_ARRAY_ORIGIN_Y),
+            evt_get_variable(script, QUIZ_ARRAY_ORIGIN_Z));
         N(Quizmo_AudienceEffect) = fx_quizmo_audience(0,
-            evt_get_variable(script, ArrayVar(1)),
-            evt_get_variable(script, ArrayVar(2)),
-            evt_get_variable(script, ArrayVar(3)));
+            evt_get_variable(script, QUIZ_ARRAY_ORIGIN_X),
+            evt_get_variable(script, QUIZ_ARRAY_ORIGIN_Y),
+            evt_get_variable(script, QUIZ_ARRAY_ORIGIN_Z));
         N(Quizmo_VannaTEffect) = fx_quizmo_assistant(0,
-            evt_get_variable(script, ArrayVar(1)),
-            evt_get_variable(script, ArrayVar(2)),
-            evt_get_variable(script, ArrayVar(3)),
+            evt_get_variable(script, QUIZ_ARRAY_ORIGIN_X),
+            evt_get_variable(script, QUIZ_ARRAY_ORIGIN_Y),
+            evt_get_variable(script, QUIZ_ARRAY_ORIGIN_Z),
             1.0f, 0);
 
         stageData = N(Quizmo_StageEffect)->data.quizmoStage;
@@ -435,8 +449,8 @@ API_CALLABLE(N(Quizmo_AddViewRelativeOffset)) {
     Bytecode outVarZ = *args++;
 
     s32 cameraYaw = gCameras[gCurrentCameraID].currentYaw;
-    s32 outX = evt_get_variable(script, ArrayVar(1)) - (z * cos_deg(cameraYaw));
-    s32 outZ = evt_get_variable(script, ArrayVar(3)) - (z * sin_deg(cameraYaw));
+    s32 outX = evt_get_variable(script, QUIZ_ARRAY_ORIGIN_X) - (z * cos_deg(cameraYaw));
+    s32 outZ = evt_get_variable(script, QUIZ_ARRAY_ORIGIN_Z) - (z * sin_deg(cameraYaw));
 
     outX -= x;
     outZ -= y;
@@ -515,7 +529,7 @@ API_CALLABLE(N(Quizmo_UpdatePartnerPosition)) {
 }
 
 void N(Quizmo_CreateReactionEffect)(void) {
-    s32 result = evt_get_variable(NULL, N(Quizmo_AnswerResult));
+    s32 result = evt_get_variable(NULL, N(Quizmo_ScriptArray[QUIZ_ARRAY_INDEX_ANSWER_RESULT]));
 
     if (result == 1) {
         fx_quizmo_answer(0, 0, 0, 0);
@@ -544,7 +558,7 @@ EvtScript N(EVS_Quizmo_Exit) = {
 };
 
 EvtScript N(EVS_Quizmo_SetQuizCamera) = {
-    EVT_CALL(N(Quizmo_GetCamVfov), 0, ArrayVar(0))
+    EVT_CALL(N(Quizmo_GetCamVfov), 0, QUIZ_ARRAY_SAVED_FOV)
     EVT_CALL(N(Quizmo_SetCamVfov), 0, 25) //TODO
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
@@ -587,7 +601,7 @@ EvtScript N(EVS_Quizmo_OtherCamScript) = {
 };
 
 EvtScript N(EVS_Quizmo_ResetCamera) = {
-    EVT_CALL(N(Quizmo_SetCamVfov), 0, ArrayVar(0))
+    EVT_CALL(N(Quizmo_SetCamVfov), 0, QUIZ_ARRAY_SAVED_FOV)
     EVT_CALL(PanToTarget, 0, 0, 0)
     EVT_RETURN
     EVT_END
@@ -595,7 +609,7 @@ EvtScript N(EVS_Quizmo_ResetCamera) = {
 
 EvtScript N(EVS_Quizmo_MovePlayerToPodium) = {
     EVT_WAIT(20)
-    EVT_CALL(N(Quizmo_AddViewRelativeOffset), ArrayVar(1), ArrayVar(3), 83, LVar0, LVar1)
+    EVT_CALL(N(Quizmo_AddViewRelativeOffset), QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 83, LVar0, LVar1)
     EVT_THREAD
         EVT_SETF(LVar2, 0)
         EVT_LOOP(60)
@@ -605,20 +619,20 @@ EvtScript N(EVS_Quizmo_MovePlayerToPodium) = {
             EVT_MULF(LVar4, LVar2)
             EVT_DIVF(LVar3, 60)
             EVT_DIVF(LVar4, 60)
-            EVT_ADDF(LVar3, ArrayVar(1))
-            EVT_ADDF(LVar4, ArrayVar(3))
-            EVT_CALL(SetPlayerPos, LVar3, ArrayVar(2), LVar4)
+            EVT_ADDF(LVar3, QUIZ_ARRAY_ORIGIN_X)
+            EVT_ADDF(LVar4, QUIZ_ARRAY_ORIGIN_Z)
+            EVT_CALL(SetPlayerPos, LVar3, QUIZ_ARRAY_ORIGIN_Y, LVar4)
             EVT_ADDF(LVar2, 1)
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_SETF(LVar3, LVar0)
         EVT_SETF(LVar4, LVar1)
-        EVT_ADDF(LVar3, ArrayVar(1))
-        EVT_ADDF(LVar4, ArrayVar(3))
-        EVT_CALL(SetPlayerPos, LVar3, ArrayVar(2), LVar4)
+        EVT_ADDF(LVar3, QUIZ_ARRAY_ORIGIN_X)
+        EVT_ADDF(LVar4, QUIZ_ARRAY_ORIGIN_Z)
+        EVT_CALL(SetPlayerPos, LVar3, QUIZ_ARRAY_ORIGIN_Y, LVar4)
     EVT_END_THREAD
     EVT_CALL(N(Quizmo_SpinPlayer))
-    EVT_CALL(func_802D2884, ArrayVar(1), ArrayVar(3), 0)
+    EVT_CALL(func_802D2884, QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_RETURN
     EVT_END
@@ -627,7 +641,7 @@ EvtScript N(EVS_Quizmo_MovePlayerToPodium) = {
 EvtScript N(EVS_Quizmo_MovePartnerToPodium) = {
     EVT_CALL(GetNpcPos, NPC_PARTNER, LVarA, LVarB, LVarC)
     EVT_CALL(N(Quizmo_AddViewRelativeOffset), LVarA, LVarC, 108, LVar0, LVar1)
-    EVT_SETF(LVar5, ArrayVar(2))
+    EVT_SETF(LVar5, QUIZ_ARRAY_ORIGIN_Y)
     EVT_SUBF(LVar5, LVarB)
     EVT_THREAD
         EVT_CALL(N(Quizmo_UpdatePartnerPosition))
@@ -660,7 +674,7 @@ EvtScript N(EVS_Quizmo_MoveQuizmoToMicrophone) = {
             EVT_DIVF(LVar4, 60)
             EVT_ADDF(LVar3, LVarA)
             EVT_ADDF(LVar4, LVarC)
-            EVT_CALL(SetNpcPos, CHUCK_QUIZMO_NPC_ID, LVar3, ArrayVar(2), LVar4)
+            EVT_CALL(SetNpcPos, CHUCK_QUIZMO_NPC_ID, LVar3, QUIZ_ARRAY_ORIGIN_Y, LVar4)
             EVT_ADDF(LVar2, 1)
             EVT_WAIT(1)
         EVT_END_LOOP
@@ -864,7 +878,7 @@ EvtScript N(EVS_Quizmo_PlayerReaction_RightAnswer) = {
         EVT_WAIT(2)
     EVT_END_LOOP
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_CALL(SetPlayerPos, LVar0, ArrayVar(2), LVar2)
+    EVT_CALL(SetPlayerPos, LVar0, QUIZ_ARRAY_ORIGIN_Y, LVar2)
     EVT_WAIT(1)
     EVT_RETURN
     EVT_END
@@ -881,16 +895,16 @@ EvtScript N(EVS_Quizmo_PlayerReaction_WrongAnswer) = {
 
 EvtScript N(EVS_Quizmo_ReturnPlayerToOriginalPos) = {
     EVT_THREAD
-        EVT_CALL(N(Quizmo_AddViewRelativeOffset), ArrayVar(1), ArrayVar(3), 25, LVar0, LVar1)
-        EVT_SETF(LVar2, ArrayVar(1))
+        EVT_CALL(N(Quizmo_AddViewRelativeOffset), QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 25, LVar0, LVar1)
+        EVT_SETF(LVar2, QUIZ_ARRAY_ORIGIN_X)
         EVT_ADDF(LVar2, LVar0)
-        EVT_SETF(LVar3, ArrayVar(3))
+        EVT_SETF(LVar3, QUIZ_ARRAY_ORIGIN_Z)
         EVT_ADDF(LVar3, LVar1)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_JUMP)
         EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar2, LVar3, 40)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
     EVT_END_THREAD
-    EVT_CALL(PlayerMoveTo, ArrayVar(1), ArrayVar(3), 40)
+    EVT_CALL(PlayerMoveTo, QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 40)
     EVT_RETURN
     EVT_END
 };
@@ -932,7 +946,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
         EVT_SET(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetPlayerPos, ArrayVar(1), ArrayVar(2), ArrayVar(3))
+    EVT_CALL(GetPlayerPos, QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Y, QUIZ_ARRAY_ORIGIN_Z)
     EVT_CALL(NpcFacePlayer, NPC_SELF, 16)
     EVT_IF_EQ(GB_CompletedQuizzes, 63)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000A)
@@ -992,18 +1006,18 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
     EVT_WAIT(15)
     EVT_CALL(PlaySound, 141)
     EVT_CALL(N(Quizmo_UnkStageEffectMode), LVar0)
-    EVT_SET(ArrayVar(4), 0)
+    EVT_SET(QUIZ_ARRAY_ANSWER_RESULT, 0)
     EVT_CALL(N(Quizmo_CreateWorker))
     EVT_WAIT(40)
     EVT_CALL(N(Quizmo_UpdateRecords))
     EVT_THREAD
         EVT_WAIT(110)
         EVT_CALL(CloseChoice)
-        EVT_SET(ArrayVar(4), 0)
+        EVT_SET(QUIZ_ARRAY_ANSWER_RESULT, 0)
     EVT_END_THREAD
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_OpenCorrect)
-        EVT_SET(ArrayVar(4), 1)
+        EVT_SET(QUIZ_ARRAY_ANSWER_RESULT, 1)
         EVT_THREAD
             EVT_CALL(N(Quizmo_SetStageLightsDelay), 1)
             EVT_WAIT(6)
@@ -1091,7 +1105,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
         EVT_SET(LVar0, 1)
     EVT_ELSE
         EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_OpenWrong)
-        EVT_SET(ArrayVar(4), 2)
+        EVT_SET(QUIZ_ARRAY_ANSWER_RESULT, 2)
         EVT_CALL(PlaySound, SOUND_MENU_ERROR)
         EVT_CALL(PlaySound, SOUND_8B)
         EVT_EXEC_GET_TID(N(EVS_Quizmo_WrongAnswer), LVar1)
@@ -1174,7 +1188,7 @@ EvtScript N(EVS_Quizmo_Npc_AI) = {
 };
 
 // primary quizmo NpcSettings
-NpcSettings N(Quizmo_NpcSettings) = {
+NpcSettings N(NpcSettings_ChuckQuizmo) = {
     .defaultAnim = ANIM_ChuckQuizmo_Idle,
     .height = 35,
     .radius = 28,

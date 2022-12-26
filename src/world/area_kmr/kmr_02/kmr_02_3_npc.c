@@ -13,13 +13,7 @@ BSS u8 D_80257F23; // a
 BSS u8 oldPrimR, oldPrimG, oldPrimB;
 BSS u8 oldEnvR, oldEnvG, oldEnvB;
 
-// D_80257F48 = Quizmo_StageEffect
-// D_80257F4C = Quizmo_AudienceEffect
-// D_80257F50 = Quizmo_VannaTEffect
-
-
-
-#define QUIZMO_FIX TRUE
+#define QUIZMO_PRE_STATIC_PAD TRUE
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
 
@@ -2211,7 +2205,7 @@ StaticNpc N(NpcData_Kammy) = {
 
 StaticNpc N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
-    .settings = &N(Quizmo_NpcSettings),
+    .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { -300.0f, 0.0f, 175.0f },
     .yaw = 90,
     .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_4000 | ENEMY_FLAGS_400000,
