@@ -3,6 +3,7 @@
 enum {
     RING_STATE_0        = 0,
     RING_STATE_1        = 1,
+    RING_STATE_2        = 2,
     RING_STATE_10       = 10,
     RING_STATE_11       = 11,
     RING_STATE_12       = 12,
@@ -16,10 +17,10 @@ enum {
 
 API_CALLABLE(N(func_802408A0_BD4110)) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
-    s32* ptr = heap_malloc(sizeof(s32)); // todo what is this
+    s32* isGameStarted = heap_malloc(sizeof(s32)); // todo what is this
 
-    npc->blur.any = ptr;
-    *ptr = NULL;
+    npc->blur.keepAwayStarted = isGameStarted;
+    *isGameStarted = NULL;
     npc->planarFlyDist = 125.0f;
     npc->yaw = 0.0f;
     npc->pos.x = 0.0f;
@@ -66,25 +67,25 @@ void func_80240A7C_BD42EC(void) {
 
 API_CALLABLE(N(func_80240AF0_BD4360)) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
-    s32* temp_s2 = npc->blur.any;
+    s32* isGameStarted = npc->blur.keepAwayStarted;
     s32 temp_v0;
 
     switch (script->functionTemp[1]) {
-        case 0:
-            temp_v0 = evt_get_variable(script, AF_OBK_08);
-            if (temp_v0 == 1) {
-                *temp_s2 = temp_v0;
-                script->functionTemp[1] = 10;
+        case RING_STATE_0:
+            temp_v0 = evt_get_variable(script, AF_OBK08_KeepAwayStarted);
+            if (temp_v0 == TRUE) {
+                *isGameStarted = temp_v0;
+                script->functionTemp[1] = RING_STATE_10;
             }
             break;
-        case 10:
+        case RING_STATE_10:
             npc->yaw = clamp_angle(npc->yaw + 2.0f);
             npc->duration--;
             if (npc->duration == 0) {
-                script->functionTemp[1] = 11;
+                script->functionTemp[1] = RING_STATE_11;
             }
             break;
-        case 11:
+        case RING_STATE_11:
             if (npc->pos.y <= -920.0f) {
                 func_802409E8_BD4258();
             }
@@ -93,18 +94,18 @@ API_CALLABLE(N(func_80240AF0_BD4360)) {
             if (npc->pos.y <= -988.0f) {
                 evt_set_variable(script, MV_Unk_01, 1);
                 func_80240A7C_BD42EC();
-                script->functionTemp[1] = 12;
+                script->functionTemp[1] = RING_STATE_12;
             }
             break;
-        case 12:
+        case RING_STATE_12:
             if (evt_get_variable(script, MV_Unk_02) == 1) {
-                script->functionTemp[1] = 13;
+                script->functionTemp[1] = RING_STATE_13;
             }
             npc->yaw = clamp_angle(npc->yaw + 2.0f);
             break;
-        case 13:
+        case RING_STATE_13:
             if (evt_get_variable(script, MV_Unk_02) == 0) {
-                script->functionTemp[1] = 12;
+                script->functionTemp[1] = RING_STATE_12;
             }
             break;
     }
@@ -114,15 +115,90 @@ API_CALLABLE(N(func_80240AF0_BD4360)) {
 API_CALLABLE(N(func_80240CA0_BD4510)) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
 
-    npc->blur.any = get_npc_unsafe(NPC_Boo_01); // TODO what is this?
+    npc->blur.keepAwayNpc = get_npc_unsafe(NPC_Boo_01);
     script->functionTemp[2] = script->owner2.npcID * 45;
     npc->flags |= NPC_FLAG_40000;
     script->functionTemp[1] = RING_STATE_0;
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80240D10_BD4580);
-INCLUDE_ASM(s32, "world/area_obk/obk_08/BD4110", func_80240D10_BD4580);
+API_CALLABLE(func_80240D10_BD4580) {
+    Npc* npc = get_npc_unsafe(script->owner2.npcID);
+    Npc* hiddenBoo = npc->blur.keepAwayNpc;
+    f32 posX, posY, posZ;
+    f32 interpAlpha, alphaSquared;
+    f32 deltaX, deltaZ;
+    s32* isGameStarted;
+    f32 yaw;
+
+    isGameStarted = hiddenBoo->blur.keepAwayStarted;
+    switch (script->functionTemp[1]) {
+        case RING_STATE_0:
+            npc->yaw = clamp_angle(script->functionTemp[2] + hiddenBoo->yaw);
+            if (*isGameStarted == TRUE) {
+                script->functionTemp[1] = RING_STATE_1;
+                npc->duration = rand_int(20) + 10;
+            }
+            break;
+        case RING_STATE_1:
+            yaw = clamp_angle(script->functionTemp[2] + hiddenBoo->yaw);
+            npc->yaw = yaw;
+            npc->duration--;
+            if (npc->duration == 0) {
+                sfx_play_sound_at_position(SOUND_B000000F, 0, npc->pos.x, npc->pos.y, npc->pos.z);
+                script->functionTemp[1] = RING_STATE_2;
+                npc->duration = 0;
+                npc->moveToPos.x = npc->pos.x;
+                npc->moveToPos.y = npc->pos.y;
+                npc->moveToPos.z = npc->pos.z;
+            }
+            break;
+        case RING_STATE_2:
+            // here `moveToPos` is original position
+            yaw = clamp_angle(script->functionTemp[2] + hiddenBoo->yaw);
+            npc->yaw = yaw;
+            npc->pos.x = hiddenBoo->pos.x;
+            npc->pos.z = hiddenBoo->pos.z;
+            npc_move_heading(npc, hiddenBoo->planarFlyDist, yaw);
+
+            interpAlpha = (40.0f - npc->duration) / 40.0f;
+            alphaSquared = interpAlpha * interpAlpha;
+
+            posX = npc->pos.x;
+            posY = hiddenBoo->pos.y + 1000.0f;
+            posZ = npc->pos.z;
+
+            deltaX = (npc->pos.x - npc->moveToPos.x) * alphaSquared;
+            deltaZ = (npc->pos.z - npc->moveToPos.z) * alphaSquared;
+            npc->pos.y = posY;
+
+            npc->pos.x = posX - deltaX;
+            npc->pos.y = (npc->pos.y - npc->moveToPos.y) * npc->duration / 40.0f + npc->moveToPos.y;
+            npc->pos.z = posZ - deltaZ;
+            npc->duration++;
+            if (npc->duration == 40) {
+                script->functionTemp[1] = RING_STATE_10;
+            }
+            break;
+        case RING_STATE_10:
+            yaw = clamp_angle(script->functionTemp[2] + hiddenBoo->yaw);
+            npc->yaw = yaw;
+            if (evt_get_variable(script, MV_Unk_02) == 1) {
+                script->functionTemp[1] = RING_STATE_13;
+            }
+            npc->pos.x = hiddenBoo->pos.x;
+            npc->pos.z = hiddenBoo->pos.z;
+            npc_move_heading(npc, hiddenBoo->planarFlyDist, yaw);
+            npc->pos.y = hiddenBoo->pos.y + 1000.0f;
+            break;
+        case RING_STATE_13:
+            if (evt_get_variable(script, MV_Unk_02) == 0) {
+                script->functionTemp[1] = RING_STATE_10;
+            }
+            break;
+    }
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(EVS_NpcIdle_Boo_01) = {
     EVT_WAIT(4)

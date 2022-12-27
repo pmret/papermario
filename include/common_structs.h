@@ -220,6 +220,8 @@ typedef struct Npc {
                 NpcChompBlur*  chomp;
                 NpcQuizmoBlur* quizmo;
                 Unk2A4Blur*    unk2A4;
+                struct Npc*    keepAwayNpc;
+                s32*           keepAwayStarted;
                 } blur;
     /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ AnimID currentAnim;

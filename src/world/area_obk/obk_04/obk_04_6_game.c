@@ -275,7 +275,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
     EVT_EXEC(N(EVS_TetherItemToDummy))
     EVT_WAIT(1)
     EVT_EXEC(N(EVS_IntroduceAndHideBoots))
-    EVT_SET(MV_Unk_01, 1)
+    EVT_SET(MV_KeepAwayStarted, TRUE)
     EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
     EVT_WAIT(20)
@@ -370,7 +370,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_SET(MV_Unk_03, 3)
+        EVT_SET(MV_KeepAwayMovement, KEEP_AWAY_SPIRAL)
         EVT_CALL(RandInt, 50, LVar0)
         EVT_ADD(LVar0, 100)
         EVT_WAIT(LVar0)
@@ -392,7 +392,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_SET(MV_Unk_03, 1)
+        EVT_SET(MV_KeepAwayMovement, KEEP_AWAY_STOP)
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_IF_EQ(MV_KeepAwayResult, KEEP_AWAY_WRONG)
             // player hit the wrong Boo, begin another round
@@ -420,7 +420,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
             EVT_CALL(NpcJump0, NPC_DummyBoo, 0, 65, 0, 10)
             EVT_CALL(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 5, MSG_CH3_003B)
             EVT_SET(MV_KeepAwayResult, KEEP_AWAY_WAITING)
-            EVT_SET(MV_Unk_03, 0)
+            EVT_SET(MV_KeepAwayMovement, KEEP_AWAY_CLOCKWISE)
             EVT_CALL(N(GetPlayerPosOutsideKeepAwayRing))
             EVT_CALL(SetPlayerSpeed, EVT_FLOAT(4.0))
             EVT_CALL(PlayerMoveTo, LVar0, LVar2, 0)
