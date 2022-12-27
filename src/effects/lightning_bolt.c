@@ -1,11 +1,42 @@
 #include "common.h"
 #include "effects_internal.h"
 
-s32 D_E00BCC30[] = { 0x05050505, 0x05050505, 0x05050505, 0x0A090301, 0x00000000, 0x00000000, 0x05050505, 0x05050505, 0x05050505, 0x08070605, 0x04030201, 0x00000000, 0x23051905, 0x00192305, 0x0F000000, 0x0A0D0F0C, 0x0B0D0A0C, 0x05010000, 0x2D0F230F, 0x00232D37, 0x19050200, 0x0D0A0C0A, 0x0D0A0D0A, 0x0C090501, 0x0F0F0F0F, 0x0F0F000F, 0x0F050200, 0x0E0A0F0A, 0x0D1E201E, 0x1832283C, 0x01050F0F, 0x232D2823, 0x19050200, 0x04060A05, 0x080E060A, 0x0E233232, 0x010F190F, 0x19232D28, 0x230F0500, 0x0202170C, 0x080F0F05, 0x0612263C, 0x1E190F05, 0x0F0F191E, 0x23190500, 0x0303030B, 0x030C0405, 0x020C2A32, 0x2121140C, 0x19110F14, 0x16140500, 0x03030302, 0x0A02020C, 0x02020214, 0x1E1E1919, 0x23140F0A, 0x0F0F0500, 0x02020202, 0x02020602, 0x02020605, 0x1B1B1616, 0x20110C07, 0x0C0C0200, 0x02020202, 0x02020202, 0x02020200 };
+typedef struct UnkStruct {
+    /* 0x00 */ u8 unk_00[0xC];
+    /* 0x0C */ u8 unk_0C[0xC];
+} UnkStruct; // size = 0x18
 
-s32 D_E00BCD38[] = { 0x19191905, 0x19051919, 0x05191919, 0x04030201, 0x00000000, 0x00000000, 0x0F0F0F19, 0x0F0F0519, 0x190F1919, 0x04040404, 0x04030201, 0x00000000, 0x19191905, 0x0F190505, 0x0F050500, 0x04040404, 0x04040604, 0x04040000, 0x19191905, 0x19051919, 0x050F0500, 0x04040404, 0x04040604, 0x04040605, 0x0F0F0F2D, 0x232D2323, 0x19230F00, 0x04040404, 0x04040604, 0x04040605, 0x2D372319, 0x370F2D19, 0x2D230F00, 0x04040404, 0x04040604, 0x04040605, 0x55190F4B, 0x1941232D, 0x4B550F00, 0x04040404, 0x04040604, 0x04040605, 0x550F2337, 0x412D194B, 0x232D2328, 0x04040404, 0x04040604, 0x04040605, 0x550F2337, 0x412D194B, 0x232D2328, 0x04040404, 0x04040604, 0x04040605, 0x550F2337, 0x412D194B, 0x232D2328, 0x04040404, 0x04040604, 0x04040605, 0x1E1E1919, 0x23140F0A, 0x0F0F0500, 0x04040404, 0x04040404, 0x04040200 };
+UnkStruct D_E00BCC30[] = {
+    {{5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5}, {10, 9, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0}},
+    {{5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5}, {8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 0, 0}},
+    {{35, 5, 25, 5, 0, 25, 35, 5, 15, 0, 0, 0}, {10, 13, 15, 12, 11, 13, 10, 12, 5, 1, 0, 0}},
+    {{45, 15, 35, 15, 0, 35, 45, 55, 25, 5, 2, 0}, {13, 10, 12, 10, 13, 10, 13, 10, 12, 9, 5, 1}},
+    {{15, 15, 15, 15, 15, 15, 0, 15, 15, 5, 2, 0}, {14, 10, 15, 10, 13, 30, 32, 30, 24, 50, 40, 60}},
+    {{1, 5, 15, 15, 35, 45, 40, 35, 25, 5, 2, 0}, {4, 6, 10, 5, 8, 14, 6, 10, 14, 35, 50, 50}},
+    {{1, 15, 25, 15, 25, 35, 45, 40, 35, 15, 5, 0}, {2, 2, 23, 12, 8, 15, 15, 5, 6, 18, 38, 60}},
+    {{30, 25, 15, 5, 15, 15, 25, 30, 35, 25, 5, 0}, {3, 3, 3, 11, 3, 12, 4, 5, 2, 12, 42, 50}},
+    {{33, 33, 20, 12, 25, 17, 15, 20, 22, 20, 5, 0}, {3, 3, 3, 2, 10, 2, 2, 12, 2, 2, 2, 20}},
+    {{30, 30, 25, 25, 35, 20, 15, 10, 15, 15, 5, 0}, {2, 2, 2, 2, 2, 2, 6, 2, 2, 2, 6, 5}},
+    {{27, 27, 22, 22, 32, 17, 12, 7, 12, 12, 2, 0}, {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0}},
+};
 
-s32* D_E00BCE40[] = { D_E00BCC30, D_E00BCD38 };
+UnkStruct D_E00BCD38[] = {
+    {{25, 25, 25, 5, 25, 5, 25, 25, 5, 25, 25, 25}, {4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0}},
+    {{15, 15, 15, 25, 15, 15, 5, 25, 25, 15, 25, 25}, {4, 4, 4, 4, 4, 3, 2, 1, 0, 0, 0, 0}},
+    {{25, 25, 25, 5, 15, 25, 5, 5, 15, 5, 5, 0}, {4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 0, 0}},
+    {{25, 25, 25, 5, 25, 5, 25, 25, 5, 15, 5, 0}, {4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 6, 5}},
+    {{15, 15, 15, 45, 35, 45, 35, 35, 25, 35, 15, 0}, {4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 6, 5}},
+    {{45, 55, 35, 25, 55, 15, 45, 25, 45, 35, 15, 0}, {4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 6, 5}},
+    {{85, 25, 15, 75, 25, 65, 35, 45, 75, 85, 15, 0}, {4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 6, 5}},
+    {{85, 15, 35, 55, 65, 45, 25, 75, 35, 45, 35, 40}, {4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 6, 5}},
+    {{85, 15, 35, 55, 65, 45, 25, 75, 35, 45, 35, 40}, {4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 6, 5}},
+    {{85, 15, 35, 55, 65, 45, 25, 75, 35, 45, 35, 40}, {4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 6, 5}},
+    {{30, 30, 25, 25, 35, 20, 15, 10, 15, 15, 5, 0}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 0}},
+};
+
+UnkStruct* D_E00BCE40[] = { D_E00BCC30, D_E00BCD38 };
+
+extern Gfx D_09001000_3BBEA0[];
 
 void lightning_bolt_init(EffectInstance* effect);
 void lightning_bolt_update(EffectInstance* effect);
@@ -138,4 +169,151 @@ void lightning_bolt_render(EffectInstance *effect) {
 void func_E00BC36C(void) {
 }
 
+// float
+#ifdef NON_MATCHING
+void lightning_bolt_appendGfx(void* effect) {
+    Vtx_t* sp90;
+    f32 sp94;
+    f32 temp_f0;
+    f32 temp_f0_2;
+    f32 temp_f20;
+    f32 temp_f20_2;
+    f32 temp_f22;
+    f32 temp_f24;
+    f32 temp_f26;
+    f32 temp_f28;
+    f32 var_f20;
+    f32 var_f22;
+    f32 var_f2;
+    s16 temp_s0_2;
+    s32 temp_a0;
+    s32 temp_s3;
+    s32 temp_s6;
+    s32 temp_s7;
+    s32 temp_t3;
+    UnkStruct* var_s2;
+    Vtx_t* vtx;
+    f32 zero;
+    f32 t1, t2, t3, t4;
+    LightningBoltFXData* data = ((EffectInstance*)effect)->data.lightningBolt;
+    Matrix4f sp10;
+    Matrix4f unused;
+    s32 i;
+    f32 temp_fs2;
+
+    temp_s7 = data->lifetime;
+    temp_s3 = data->outerColor.a;
+    temp_s6 = data->type;
+    sp94 = data->unk_4C;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guScaleF(sp10, 0.1f, 0.1f, 0.1f);
+    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->outerColor.r, data->outerColor.g, data->outerColor.b, temp_s3);
+    gDPSetEnvColor(gMasterGfxPos++, data->innerColor.r, data->innerColor.g, data->innerColor.b, 0x80);
+    gSPDisplayList(gMasterGfxPos++, D_09001000_3BBEA0);
+
+    temp_a0 = temp_s7 - 1;
+    if (temp_s6 != 2) {
+        if (temp_a0 < 0xB) {
+            var_s2 = &D_E00BCE40[temp_s6][temp_a0];
+        } else {
+            var_s2 = &D_E00BCE40[temp_s6][10];
+        }
+    } else if (temp_a0 < 8) {
+        var_s2 = &D_E00BCE40[0][temp_a0];
+    } else if (temp_a0 < 0x24) {
+        var_s2 = &D_E00BCE40[0][temp_a0 % 6 + 2];
+    } else {
+        var_s2 = &D_E00BCE40[0][10];
+    }
+
+    for (i = 0; i < 12; i++) {
+        temp_f24 = (data->endPos.x - data->startPos.x) * (1 / 11.0f);
+        temp_f22 = (data->endPos.y - data->startPos.y) * (1 / 11.0f);
+        temp_f28 = (data->unk_110 + (i - temp_s7) * 0xA) % 120 - 0x3C;
+        temp_f26 = var_s2->unk_00[i];
+
+        temp_f20 = shim_sin_deg(temp_f28) * temp_f26 * 0.04;
+        temp_f0 = shim_cos_deg(temp_f28) * temp_f26 * 0.04;
+
+        t1 = (temp_f24 * temp_f0 - temp_f22 * temp_f20);
+        t2 = (temp_f24 * temp_f20 + temp_f22 * temp_f0);
+        t3 = 0.0f;
+
+        data->unk_50[i] = data->startPos.x + (data->endPos.x - data->startPos.x) * i * (1 / 11.0f) + t1;
+        data->unk_80[i] = data->startPos.y + (data->endPos.y - data->startPos.y) * i * (1 / 11.0f) + t2;
+        data->unk_B0[i] = data->startPos.z + (data->endPos.z - data->startPos.z) * i * (1 / 11.0f) + t3;
+        data->unk_E0[i] = (f32) var_s2->unk_0C[i] * 0.1;
+    }
+
+    sp90 = (Vtx_t*) (gMasterGfxPos + 1);
+    vtx = (Vtx_t*) (gMasterGfxPos + 1);
+    gSPBranchList(gMasterGfxPos, gMasterGfxPos + 0x31);
+    gMasterGfxPos += 0x31;
+
+    for (i = 0; i < 12; i++) { //s2: i
+        if (i == 0) {
+            temp_fs2 = 8.0f;
+            var_f22 = -shim_atan2(data->unk_80[1], -data->unk_50[1], data->unk_80[0], -data->unk_50[0]);
+        } else {
+            temp_fs2 = 8.0f;
+            if (i == 0xB) {
+                var_f22 = -90.0f;
+            } else {
+                var_f20 = -shim_atan2(data->unk_80[i + 1], -data->unk_50[i + 1], data->unk_80[i], -data->unk_50[i]);
+                var_f2 = -shim_atan2(data->unk_80[i], -data->unk_50[i], data->unk_80[i - 1], -data->unk_50[i - 1]);
+                if (var_f2 - var_f20 > 180.0f) {
+                    var_f20 += 360.0f;
+                } else if (var_f2 - var_f20 < -180.0f) {
+                    var_f2 += 360.0f;
+                }
+                var_f22 = (var_f20 + var_f2) * 0.5;
+            }
+        }
+
+        temp_fs2 *= (sp94 * data->unk_E0[i]);
+        temp_s0_2 = (128 - i * 12) * 32;
+        temp_f20_2 = temp_fs2  * shim_sin_deg(var_f22);
+        temp_f0_2 = temp_fs2 * shim_cos_deg(var_f22);
+        zero = 0.0f;
+
+        vtx->ob[0] = (data->unk_50[i] + temp_f20_2) * 10.0f;
+        vtx->ob[1] = (data->unk_80[i] + temp_f0_2) * 10.0f;
+        vtx->ob[2] = (data->unk_B0[i] + zero) * 10.0f; // 0.0f: fs4 (fs5)
+        vtx->tc[0] = temp_s0_2;
+        vtx->tc[1] = 0;
+        vtx->cn[0] = i * 50; //s6
+        vtx->cn[1] = i * 120; //s7
+        vtx->cn[2] = i * 30; //s8
+        vtx++;
+
+        vtx->ob[0] = (data->unk_50[i] - temp_f20_2) * 10.0f;
+        vtx->ob[1] = (data->unk_80[i] - temp_f0_2) * 10.0f;
+        vtx->ob[2] = (data->unk_B0[i] + zero) * 10.0f;
+        vtx->tc[0] = temp_s0_2;
+        vtx->tc[1] = 0x400;
+        vtx->cn[0] = i * 50;
+        vtx->cn[1] = i * 120;
+        vtx->cn[2] = i * 30;
+        vtx++;
+    }
+
+    temp_t3 = i;
+
+    gSPVertex(gMasterGfxPos++, sp90, i * 2, 0);
+    gSPClearGeometryMode(gMasterGfxPos++, G_SHADING_SMOOTH);
+
+    for (i = 0; i < temp_t3 - 1; i++) {
+        gSP2Triangles(gMasterGfxPos++, i * 2 + 1, i * 2, i * 2 + 2, 0, i * 2 + 1, i * 2 + 2, i * 2 + 3, 0);
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}
+#else
 INCLUDE_ASM(s32, "effects/lightning_bolt", lightning_bolt_appendGfx);
+#endif
