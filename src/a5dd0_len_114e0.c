@@ -3381,7 +3381,7 @@ void func_80116698(void) {
                 model->center.x = mX;
                 model->center.y = mY;
                 model->center.z = mZ;
-                model->flags &= 0xFDFF;
+                model->flags &= ~MODEL_FLAGS_FLAG_200;
             }
         }
     }
