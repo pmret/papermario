@@ -2226,8 +2226,8 @@ void draw_number(s32 value, s32 x, s32 y, s32 charset, s32 palette, s32 opacity,
     gDPPipeSync(gMasterGfxPos++);
 }
 
-void drawbox_message_delegate(void* data) {
-    MessagePrintState* printer = data;
+void drawbox_message_delegate(s32 data, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
+    MessagePrintState* printer = (MessagePrintState*)data;
 
     appendGfx_message(printer, 0, 0, 0, 0, 4, 0);
 }

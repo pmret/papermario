@@ -4896,19 +4896,6 @@ enum EncounterStatusFlags {
     ENCOUNTER_STATUS_FLAGS_80000000          = 0x80000000,
 };
 
-enum WindowImageFormat {
-    WINDOW_IMG_RGBA_16      = 0x02,
-    WINDOW_IMG_RGBA_32      = 0x03,
-    WINDOW_IMG_YUV_16       = 0x12,
-    WINDOW_IMG_CI_4         = 0x20,
-    WINDOW_IMG_CI_8         = 0x21,
-    WINDOW_IMG_IA_4         = 0x30,
-    WINDOW_IMG_IA_8         = 0x31,
-    WINDOW_IMG_IA_16        = 0x32,
-    WINDOW_IMG_I_4          = 0x40,
-    WINDOW_IMG_I_8          = 0x41,
-};
-
 enum WindowFlags {
     WINDOW_FLAGS_INITIALIZED       = 0x00000001,
     WINDOW_FLAGS_FPUPDATE_CHANGED  = 0x00000002,
