@@ -21,10 +21,22 @@ typedef struct WindowGroup {
 } WindowGroup; // size = 0x02
 
 WindowStyle gWindowStyles[64] = {
-    { 3 }, { 3 }, { 11 }, { 12 }, { 13 }, { 14 }, { 3 }, { 21 }, { 3 }, { 0 }, { 9 }, { 3 }, { 0 }, { 1 }, { 3 }, { 9 },
-    { 10 }, { 7 }, { 8 }, { 3 }, { 3 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 },
-    { 0 }, { 0 }, { 0 }, { 0 }, { 3 }, { 11 }, { 12 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 },
-    { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 1 }
+    { WINDOW_STYLE_3 }, { WINDOW_STYLE_3 }, { WINDOW_STYLE_11 }, { WINDOW_STYLE_12 },
+    { WINDOW_STYLE_13 }, { WINDOW_STYLE_14 }, { WINDOW_STYLE_3 }, { WINDOW_STYLE_21 },
+    { WINDOW_STYLE_3 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_9 }, { WINDOW_STYLE_3 },
+    { WINDOW_STYLE_0 }, { WINDOW_STYLE_1 }, { WINDOW_STYLE_3 }, { WINDOW_STYLE_9 },
+    { WINDOW_STYLE_10 }, { WINDOW_STYLE_7 }, { WINDOW_STYLE_8 }, { WINDOW_STYLE_3 },
+    { WINDOW_STYLE_3 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 },
+    { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 },
+    { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 },
+    { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 },
+    { WINDOW_STYLE_3 }, { WINDOW_STYLE_11 }, { WINDOW_STYLE_12 }, { WINDOW_STYLE_0 },
+    { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 },
+    { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 },
+    { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 },
+    { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 },
+    { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 },
+    { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_0 }, { WINDOW_STYLE_1 }
 };
 
 SimpleWindowUpdateData gSimpleWindowUpdates[] = {
@@ -320,7 +332,7 @@ void render_windows(s32* windowsArray, s32 parent, s32 flags, s32 baseX, s32 bas
 
         boxFlags = childFlags;
         if (childWindow->flags & WINDOW_FLAGS_40) {
-            boxFlags |= DRAW_FLAGS_2;
+            boxFlags |= DRAW_FLAGS_ANIMATED_BACKGROUND;
         }
 
         if (draw_box(boxFlags, windowStyle, posX, posY, posZ, width, height, childOpacity, childDarkening,

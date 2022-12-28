@@ -2260,7 +2260,7 @@ void draw_message_window(MessagePrintState* printer) {
         case MSG_WINDOW_STATE_E:
             printer->windowBasePos.x = 160 - (printer->windowSize.x / 2);
             printer->windowBasePos.y = 56;
-            draw_box(DRAW_FLAGS_ROTSCALE, 0, printer->windowBasePos.x, 56, 0, printer->windowSize.x, printer->windowSize.y, 255, 0,
+            draw_box(DRAW_FLAGS_ROTSCALE, WINDOW_STYLE_0, printer->windowBasePos.x, 56, 0, printer->windowSize.x, printer->windowSize.y, 255, 0,
                      scale, scale, 0.0f, 0.0f, rotZ, drawbox_message_delegate, printer, NULL, SCREEN_WIDTH,
                      SCREEN_HEIGHT, NULL);
             break;
@@ -2830,7 +2830,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                         } else {
                             printer->windowBasePos.x = 160 - printer->windowSize.x / 2;
                             printer->windowBasePos.y = 56;
-                            draw_box(0, 0, printer->windowBasePos.x, 56, 0, printer->windowSize.x,
+                            draw_box(0, WINDOW_STYLE_0, printer->windowBasePos.x, 56, 0, printer->windowSize.x,
                                      printer->windowSize.y, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
                                      SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
                         }
@@ -3577,7 +3577,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
 
         if (varImgFinalAlpha > 0) {
             if (varImgHasBorder) {
-                draw_box(0, 15, printer->varImageScreenPos.x - 7, printer->varImageScreenPos.y - 7, 0,
+                draw_box(0, WINDOW_STYLE_15, printer->varImageScreenPos.x - 7, printer->varImageScreenPos.y - 7, 0,
                          msgVarImage->width + 15, msgVarImage->height + 14, varImgFinalAlpha, 0, 0.0f, 0.0f, 0.0f, 0.0f,
                          0.0f, NULL, 0, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
             }

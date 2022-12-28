@@ -1531,14 +1531,14 @@ void show_first_strike_message(void) {
                 case 4:
                     width = get_msg_width(MSG_Menus_PlayerFirstStrike, 0) + 24;
                     posX = (xOffset + screenWidthHalf) - (width / 2);
-                    draw_box(0, 0x14, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
+                    draw_box(0, WINDOW_STYLE_20, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
                              SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
                     draw_msg(MSG_Menus_PlayerFirstStrike, posX + 11, 75, 0xFF, MSG_PAL_STANDARD, 0);
                     break;
                 case 6:
                     width = get_msg_width(MSG_Menus_PartnerFirstStrike, 0) + 24;
                     posX = (xOffset + screenWidthHalf) - (width / 2);
-                    draw_box(0, 0x14, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
+                    draw_box(0, WINDOW_STYLE_20, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
                              SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
                     draw_msg(MSG_Menus_PartnerFirstStrike, posX + 11, 75, 0xFF, MSG_PAL_STANDARD, 0);
                     break;
@@ -1548,7 +1548,7 @@ void show_first_strike_message(void) {
             if (!is_ability_active(ABILITY_CHILL_OUT)) {
                 width = get_msg_width(MSG_Menus_EnemyFirstStrike, 0) + 24;
                 posX = (xOffset + screenWidthHalf) - (width / 2);
-                draw_box(0, 4, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
+                draw_box(0, WINDOW_STYLE_4, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
                          SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
                 draw_msg(MSG_Menus_EnemyFirstStrike, posX + 11, 75, 0xFF, MSG_PAL_STANDARD, 0);
             }

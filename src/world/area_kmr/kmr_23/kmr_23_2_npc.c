@@ -58,17 +58,15 @@ WindowStyleCustom D_802417D8_909208 = {
     },
     .corners = {
         .imgData = N(window_ul_img),
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { 8, 8 },
         .size2 = { 8, 8 },
         .size3 = { 8, 8 },
         .size4 = { 8, 8 },
     },
-    // gsDPSetCombineLERP(PRIMITIVE, 0, TEXEL1, 0, 0, 0, 0, TEXEL1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-    .opaqueCombineMode = { .words = { 0xFC317FFF, 0xFFFFF438 }},
-    // gsDPSetCombineLERP(PRIMITIVE, 0, TEXEL1, 0, TEXEL1, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED)
-    .transparentCombineMode = { .words = { 0xFC3127FF, 0xFFFFFE38 }},
+    .opaqueCombineMode = gsDPSetCombineLERP(PRIMITIVE, 0, TEXEL1, 0, 0, 0, 0, TEXEL1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    .transparentCombineMode = gsDPSetCombineLERP(PRIMITIVE, 0, TEXEL1, 0, TEXEL1, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
     .color1 = { 224, 224, 224, 255 },
     .color2 = { 0, 0, 0, 255},
 };
@@ -456,7 +454,7 @@ void func_80240DA4_9087D4(void) {
         f64 lrx = baseX + (fullWidth * 0.5) + (D_802417CC_9091FC * 0.5);
         f64 lry = baseY + (fullHeight * 0.5) + (D_802417D0_909200 * 0.5);
         gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
-        draw_box(DRAW_FLAGS_CLIP, &D_802417D8_909208, ulx, uly, 0, D_802417CC_9091FC, D_802417D0_909200, 180, 0, 1.0f, 1.0f,
+        draw_box(DRAW_FLAGS_NO_CLIP, &D_802417D8_909208, ulx, uly, 0, D_802417CC_9091FC, D_802417D0_909200, 180, 0, 1.0f, 1.0f,
                  0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
     }
 }

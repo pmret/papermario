@@ -10,8 +10,8 @@ extern s8 pause_image_143FF0_png[];
 WindowStyleCustom gPauseWS_0 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_8b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0},
@@ -19,8 +19,8 @@ WindowStyleCustom gPauseWS_0 = {
     },
     .corners = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .size1 = { .x = 0, .y = 0},
         .size2 = { .x = 0, .y = 0},
         .size3 = { .x = 0, .y = 0},
@@ -36,8 +36,8 @@ WindowStyleCustom gPauseWS_0 = {
 WindowStyleCustom gPauseWS_1 = {
     .background = {
         .imgData = ui_box_bg_tile_png,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 16,
         .height = 16,
         .unk_07 = { 0, 0, 0, 0},
@@ -45,8 +45,8 @@ WindowStyleCustom gPauseWS_1 = {
     },
     .corners = {
         .imgData = ui_box_corners4_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 8, .y = 8},
         .size2 = { .x = 8, .y = 8},
         .size3 = { .x = 8, .y = 8},
@@ -62,8 +62,8 @@ WindowStyleCustom gPauseWS_1 = {
 WindowStyleCustom gPauseWS_2 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 16,
         .height = 16,
         .unk_07 = { 0, 0, 0, 0 },
@@ -71,8 +71,8 @@ WindowStyleCustom gPauseWS_2 = {
     },
     .corners = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 8, .y = 8 },
         .size2 = { .x = 8, .y = 8 },
         .size3 = { .x = 8, .y = 8 },
@@ -88,8 +88,8 @@ WindowStyleCustom gPauseWS_2 = {
 WindowStyleCustom gPauseWS_3 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -97,8 +97,8 @@ WindowStyleCustom gPauseWS_3 = {
     },
     .corners = {
         .imgData = pause_image_1439F0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 8 },
         .size2 = { .x = 16, .y = 8 },
         .size3 = { .x = 16, .y = 8 },
@@ -114,8 +114,8 @@ WindowStyleCustom gPauseWS_3 = {
 WindowStyleCustom gPauseWS_4 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -123,8 +123,8 @@ WindowStyleCustom gPauseWS_4 = {
     },
     .corners = {
         .imgData = pause_image_1439F0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 8 },
         .size2 = { .x = 16, .y = 8 },
         .size3 = { .x = 16, .y = 8 },
@@ -140,8 +140,8 @@ WindowStyleCustom gPauseWS_4 = {
 WindowStyleCustom gPauseWS_5 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -149,8 +149,8 @@ WindowStyleCustom gPauseWS_5 = {
     },
     .corners = {
         .imgData = pause_image_1439F0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 8 },
         .size2 = { .x = 16, .y = 8 },
         .size3 = { .x = 16, .y = 8 },
@@ -166,8 +166,8 @@ WindowStyleCustom gPauseWS_5 = {
 WindowStyleCustom gPauseWS_6 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -175,8 +175,8 @@ WindowStyleCustom gPauseWS_6 = {
     },
     .corners = {
         .imgData = pause_image_1439F0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 8 },
         .size2 = { .x = 16, .y = 8 },
         .size3 = { .x = 16, .y = 8 },
@@ -192,8 +192,8 @@ WindowStyleCustom gPauseWS_6 = {
 WindowStyleCustom gPauseWS_7 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -201,8 +201,8 @@ WindowStyleCustom gPauseWS_7 = {
     },
     .corners = {
         .imgData = pause_image_1439F0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 8 },
         .size2 = { .x = 16, .y = 8 },
         .size3 = { .x = 16, .y = 8 },
@@ -218,8 +218,8 @@ WindowStyleCustom gPauseWS_7 = {
 WindowStyleCustom gPauseWS_8 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -227,8 +227,8 @@ WindowStyleCustom gPauseWS_8 = {
     },
     .corners = {
         .imgData = pause_image_1439F0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 8 },
         .size2 = { .x = 16, .y = 8 },
         .size3 = { .x = 16, .y = 8 },
@@ -244,8 +244,8 @@ WindowStyleCustom gPauseWS_8 = {
 WindowStyleCustom gPauseWS_9 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -253,8 +253,8 @@ WindowStyleCustom gPauseWS_9 = {
     },
     .corners = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .size1 = { .x = 0, .y = 0 },
         .size2 = { .x = 0, .y = 0 },
         .size3 = { .x = 0, .y = 0 },
@@ -270,8 +270,8 @@ WindowStyleCustom gPauseWS_9 = {
 WindowStyleCustom gPauseWS_10 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -279,8 +279,8 @@ WindowStyleCustom gPauseWS_10 = {
     },
     .corners = {
         .imgData = pause_image_1439F0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 8 },
         .size2 = { .x = 16, .y = 8 },
         .size3 = { .x = 16, .y = 8 },
@@ -296,8 +296,8 @@ WindowStyleCustom gPauseWS_10 = {
 WindowStyleCustom gPauseWS_11 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -305,8 +305,8 @@ WindowStyleCustom gPauseWS_11 = {
     },
     .corners = {
         .imgData = pause_image_1439F0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 8 },
         .size2 = { .x = 16, .y = 8 },
         .size3 = { .x = 16, .y = 8 },
@@ -322,8 +322,8 @@ WindowStyleCustom gPauseWS_11 = {
 WindowStyleCustom gPauseWS_12 = {
     .background = {
         .imgData = ui_box_bg_tile_png,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 16,
         .height = 16,
         .unk_07 = { 0, 0, 0, 0 },
@@ -331,8 +331,8 @@ WindowStyleCustom gPauseWS_12 = {
     },
     .corners = {
         .imgData = ui_box_corners4_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 8, .y = 8 },
         .size2 = { .x = 8, .y = 8 },
         .size3 = { .x = 8, .y = 8 },
@@ -348,8 +348,8 @@ WindowStyleCustom gPauseWS_12 = {
 WindowStyleCustom gPauseWS_13 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -357,8 +357,8 @@ WindowStyleCustom gPauseWS_13 = {
     },
     .corners = {
         .imgData = pause_image_143BF0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 16 },
         .size2 = { .x = 16, .y = 16 },
         .size3 = { .x = 16, .y = 16 },
@@ -374,8 +374,8 @@ WindowStyleCustom gPauseWS_13 = {
 WindowStyleCustom gPauseWS_14 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -383,8 +383,8 @@ WindowStyleCustom gPauseWS_14 = {
     },
     .corners = {
         .imgData = pause_image_1439F0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 8 },
         .size2 = { .x = 16, .y = 8 },
         .size3 = { .x = 16, .y = 8 },
@@ -400,8 +400,8 @@ WindowStyleCustom gPauseWS_14 = {
 WindowStyleCustom gPauseWS_15 = {
     .background = {
         .imgData = ui_box_bg_tile_png,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 16,
         .height = 16,
         .unk_07 = { 0, 0, 0, 0 },
@@ -409,8 +409,8 @@ WindowStyleCustom gPauseWS_15 = {
     },
     .corners = {
         .imgData = ui_box_corners4_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 8, .y = 8 },
         .size2 = { .x = 8, .y = 8 },
         .size3 = { .x = 8, .y = 8 },
@@ -426,8 +426,8 @@ WindowStyleCustom gPauseWS_15 = {
 WindowStyleCustom gPauseWS_16 = {
     .background = {
         .imgData = ui_box_bg_tile_png,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 16,
         .height = 16,
         .unk_07 = { 0, 0, 0, 0 },
@@ -435,8 +435,8 @@ WindowStyleCustom gPauseWS_16 = {
     },
     .corners = {
         .imgData = ui_box_corners4_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 8, .y = 8 },
         .size2 = { .x = 8, .y = 8 },
         .size3 = { .x = 8, .y = 8 },
@@ -452,8 +452,8 @@ WindowStyleCustom gPauseWS_16 = {
 WindowStyleCustom gPauseWS_17 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -461,8 +461,8 @@ WindowStyleCustom gPauseWS_17 = {
     },
     .corners = {
         .imgData = pause_image_143BF0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 16 },
         .size2 = { .x = 16, .y = 16 },
         .size3 = { .x = 16, .y = 16 },
@@ -478,8 +478,8 @@ WindowStyleCustom gPauseWS_17 = {
 WindowStyleCustom gPauseWS_18 = {
     .background = {
         .imgData = ui_box_bg_tile_png,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 16,
         .height = 16,
         .unk_07 = { 0, 0, 0, 0 },
@@ -487,8 +487,8 @@ WindowStyleCustom gPauseWS_18 = {
     },
     .corners = {
         .imgData = ui_box_corners4_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 8, .y = 8 },
         .size2 = { .x = 8, .y = 8 },
         .size3 = { .x = 8, .y = 8 },
@@ -504,8 +504,8 @@ WindowStyleCustom gPauseWS_18 = {
 WindowStyleCustom gPauseWS_19 = {
     .background = {
         .imgData = ui_box_bg_tile_png,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 16,
         .height = 16,
         .unk_07 = { 0, 0, 0, 0 },
@@ -513,8 +513,8 @@ WindowStyleCustom gPauseWS_19 = {
     },
     .corners = {
         .imgData = ui_box_corners4_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 8, .y = 8 },
         .size2 = { .x = 8, .y = 8 },
         .size3 = { .x = 8, .y = 8 },
@@ -530,8 +530,8 @@ WindowStyleCustom gPauseWS_19 = {
 WindowStyleCustom gPauseWS_20 = {
     .background = {
         .imgData = ui_box_bg_tile_png,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 16,
         .height = 16,
         .unk_07 = { 0, 0, 0, 0 },
@@ -539,8 +539,8 @@ WindowStyleCustom gPauseWS_20 = {
     },
     .corners = {
         .imgData = ui_box_corners4_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 8, .y = 8 },
         .size2 = { .x = 8, .y = 8 },
         .size3 = { .x = 8, .y = 8 },
@@ -556,8 +556,8 @@ WindowStyleCustom gPauseWS_20 = {
 WindowStyleCustom gPauseWS_21 = {
     .background = {
         .imgData = ui_box_bg_tile_png,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 16,
         .height = 16,
         .unk_07 = { 0, 0, 0, 0 },
@@ -565,8 +565,8 @@ WindowStyleCustom gPauseWS_21 = {
     },
     .corners = {
         .imgData = pause_image_143FF0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 16 },
         .size2 = { .x = 16, .y = 16 },
         .size3 = { .x = 16, .y = 16 },
@@ -582,8 +582,8 @@ WindowStyleCustom gPauseWS_21 = {
 WindowStyleCustom gPauseWS_22 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -591,8 +591,8 @@ WindowStyleCustom gPauseWS_22 = {
     },
     .corners = {
         .imgData = pause_image_1439F0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 8 },
         .size2 = { .x = 16, .y = 8 },
         .size3 = { .x = 16, .y = 8 },
@@ -608,8 +608,8 @@ WindowStyleCustom gPauseWS_22 = {
 WindowStyleCustom gPauseWS_23 = {
     .background = {
         .imgData = ui_box_bg_tile_png,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 16,
         .height = 16,
         .unk_07 = { 0, 0, 0, 0 },
@@ -617,8 +617,8 @@ WindowStyleCustom gPauseWS_23 = {
     },
     .corners = {
         .imgData = ui_box_corners4_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 8, .y = 8 },
         .size2 = { .x = 8, .y = 8 },
         .size3 = { .x = 8, .y = 8 },
@@ -634,8 +634,8 @@ WindowStyleCustom gPauseWS_23 = {
 WindowStyleCustom gPauseWS_24 = {
     .background = {
         .imgData = 0x00000000,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -643,8 +643,8 @@ WindowStyleCustom gPauseWS_24 = {
     },
     .corners = {
         .imgData = pause_image_1439F0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 8 },
         .size2 = { .x = 16, .y = 8 },
         .size3 = { .x = 16, .y = 8 },
@@ -660,8 +660,8 @@ WindowStyleCustom gPauseWS_24 = {
 WindowStyleCustom gPauseWS_25 = {
     .background = {
         .imgData = ui_box_bg_tile_png,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 16,
         .height = 16,
         .unk_07 = { 0, 0, 0, 0 },
@@ -669,8 +669,8 @@ WindowStyleCustom gPauseWS_25 = {
     },
     .corners = {
         .imgData = pause_image_143FF0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 16 },
         .size2 = { .x = 16, .y = 16 },
         .size3 = { .x = 16, .y = 16 },
@@ -686,8 +686,8 @@ WindowStyleCustom gPauseWS_25 = {
 WindowStyleCustom gPauseWS_26 = {
     .background = {
         .imgData = ui_box_bg_tile_png,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 16,
         .height = 16,
         .unk_07 = { 0, 0, 0, 0 },
@@ -695,8 +695,8 @@ WindowStyleCustom gPauseWS_26 = {
     },
     .corners = {
         .imgData = ui_box_corners4_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 8, .y = 8 },
         .size2 = { .x = 8, .y = 8 },
         .size3 = { .x = 8, .y = 8 },
@@ -712,8 +712,8 @@ WindowStyleCustom gPauseWS_26 = {
 WindowStyleCustom gPauseWS_27 = {
     .background = {
         .imgData = ui_box_bg_tile_png,
-        .packedTileFormatHigh = 0x4,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_I,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 16,
         .height = 16,
         .unk_07 = { 0, 0, 0, 0 },
@@ -721,8 +721,8 @@ WindowStyleCustom gPauseWS_27 = {
     },
     .corners = {
         .imgData = pause_image_143FF0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 16 },
         .size2 = { .x = 16, .y = 16 },
         .size3 = { .x = 16, .y = 16 },
@@ -738,8 +738,8 @@ WindowStyleCustom gPauseWS_27 = {
 WindowStyleCustom gPauseWS_28 = {
     .background = {
         .imgData = NULL,
-        .packedTileFormatHigh = 0x0,
-        .packedTileFormatLow = 0x0,
+        .fmt = G_IM_FMT_RGBA,
+        .bitDepth = G_IM_SIZ_4b,
         .width = 0,
         .height = 0,
         .unk_07 = { 0, 0, 0, 0 },
@@ -747,8 +747,8 @@ WindowStyleCustom gPauseWS_28 = {
     },
     .corners = {
         .imgData = pause_image_1439F0_png,
-        .packedTileFormatHigh = 0x3,
-        .packedTileFormatLow = 0x1,
+        .fmt = G_IM_FMT_IA,
+        .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 16, .y = 8 },
         .size2 = { .x = 16, .y = 8 },
         .size3 = { .x = 16, .y = 8 },

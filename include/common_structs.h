@@ -2121,8 +2121,8 @@ typedef struct MenuPanel {
 
 typedef struct WindowBackground {
     /* 0x00 */ IMG_PTR imgData;
-    /* 0x04 */ u8 packedTileFormatHigh : 4; // upper = fmt, lower = depth; e.g., 31 = CI-8
-    /* 0x04 */ u8 packedTileFormatLow : 4;
+    /* 0x04 */ u8 fmt : 4;
+    /* 0x04 */ u8 bitDepth : 4;
     /* 0x05 */ u8 width;
     /* 0x06 */ u8 height;
     /* 0x07 */ char unk_07[4];
@@ -2131,8 +2131,8 @@ typedef struct WindowBackground {
 
 typedef struct WindowCorners {
     /* 0x00 */ IMG_PTR imgData;
-    /* 0x04 */ u8 packedTileFormatHigh : 4; // upper = fmt, lower = depth; e.g., 31 = CI-8
-    /* 0x04 */ u8 packedTileFormatLow : 4;
+    /* 0x04 */ u8 fmt : 4;
+    /* 0x04 */ u8 bitDepth : 4;
     /* 0x05 */ Vec2bu size1;
     /* 0x07 */ Vec2bu size2;
     /* 0x09 */ Vec2bu size3;

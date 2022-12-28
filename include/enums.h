@@ -4921,8 +4921,8 @@ enum WindowFlags {
 
 enum DrawFlags {
     DRAW_FLAGS_ROTSCALE                  = 0x00000001,
-    DRAW_FLAGS_2                         = 0x00000002,
-    DRAW_FLAGS_CLIP                      = 0x00000004,
+    DRAW_FLAGS_ANIMATED_BACKGROUND       = 0x00000002,
+    DRAW_FLAGS_NO_CLIP                   = 0x00000004,
     DRAW_FLAGS_CULL_BACK                 = 0x00000008,
 };
 
@@ -5918,6 +5918,33 @@ enum BattleDarknessState {
     BTL_DARKNESS_STATE_DARK         = -1,
     BTL_DARKNESS_STATE_NONE         = 0,
     BTL_DARKNESS_STATE_WATT_BASED   = 1,
+};
+
+enum WindowStyles {
+    WINDOW_STYLE_0      = 0,
+    WINDOW_STYLE_1      = 1,
+    WINDOW_STYLE_2      = 2,
+    WINDOW_STYLE_3      = 3,
+    WINDOW_STYLE_4      = 4,
+    WINDOW_STYLE_5      = 5,
+    WINDOW_STYLE_6      = 6,
+    WINDOW_STYLE_7      = 7,
+    WINDOW_STYLE_8      = 8,
+    WINDOW_STYLE_9      = 9,
+    WINDOW_STYLE_10     = 10,
+    WINDOW_STYLE_11     = 11,
+    WINDOW_STYLE_12     = 12,
+    WINDOW_STYLE_13     = 13,
+    WINDOW_STYLE_14     = 14,
+    WINDOW_STYLE_15     = 15,
+    WINDOW_STYLE_16     = 16,
+    WINDOW_STYLE_17     = 17,
+    WINDOW_STYLE_18     = 18,
+    WINDOW_STYLE_19     = 19,
+    WINDOW_STYLE_20     = 20,
+    WINDOW_STYLE_21     = 21,
+    WINDOW_STYLE_22     = 22,
+    WINDOW_STYLE_MAX    = 22,
 };
 
 #endif

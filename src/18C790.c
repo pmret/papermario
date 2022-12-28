@@ -1207,13 +1207,13 @@ void btl_draw_upgrade_windows(s32 arg0) {
     }
 
     hud_element_get_render_pos(D_8029FA80[0], &x, &y);
-    draw_box(0, 0xF, x - 22, y - 22, 0, 44, 44, 255, d1, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
+    draw_box(0, WINDOW_STYLE_15, x - 22, y - 22, 0, 44, 44, 255, d1, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
              SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
     hud_element_get_render_pos(D_8029FA80[3], &x, &y);
-    draw_box(0, 0xF, x - 22, y - 22, 0, 44, 44, 255, d2, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
+    draw_box(0, WINDOW_STYLE_15, x - 22, y - 22, 0, 44, 44, 255, d2, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
              SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
     hud_element_get_render_pos(D_8029FA80[2], &x, &y);
-    draw_box(0, 0xF, x - 22, y - 22, 0, 44, 44, 255, d3, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
+    draw_box(0, WINDOW_STYLE_15, x - 22, y - 22, 0, 44, 44, 255, d3, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
              SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
 }
 
