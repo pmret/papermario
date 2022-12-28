@@ -194,7 +194,7 @@ EvtScript N(EVS_Interact_MiddleCabinet) = {
         EVT_CALL(DeleteTrigger, MV_Trigger_FarCabinet)
         EVT_EXEC(N(EVS_Scene_BoosUnleashed))
         EVT_EXEC_WAIT(N(EVS_MiddleCabinet_OpenDoors))
-        EVT_SET(AF_OBK_08, TRUE)
+        EVT_SET(AF_OBK08_KeepAwayStarted, TRUE)
         EVT_WAIT(50)
         EVT_EXEC_WAIT(N(EVS_MiddleCabinet_CloseDoors))
     EVT_ELSE
