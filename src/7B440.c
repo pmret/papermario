@@ -22,7 +22,7 @@ void update_player_input(void) {
     playerStatus->heldButtonsBuffer[inputBufPos] = playerStatus->heldButtons;
     playerStatus->inputBufPos = inputBufPos;
 
-    if (playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_1000)) {
+    if (playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_NO_STATIC_COLLISION)) {
         playerStatus->stickAxis[0] = 0;
         playerStatus->stickAxis[1] = 0;
         playerStatus->currentButtons = 0;
@@ -31,7 +31,7 @@ void update_player_input(void) {
     }
 
     if (playerStatus->animFlags & PA_FLAGS_FORCE_USE_PARTNER) {
-        playerStatus->animFlags |= PA_FLAGS_200000;
+        playerStatus->animFlags |= PA_FLAGS_PARTNER_USAGE_FORCED;
         playerStatus->pressedButtons |= 4;
     }
 }

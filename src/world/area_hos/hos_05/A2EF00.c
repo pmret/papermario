@@ -13,42 +13,42 @@ extern u8 D_802D9D73;
 
 #define NAMESPACE hos_05
 
+BSS s32 D_8024F570[4];
+BSS u8 N(oldPrimR), N(oldPrimG), N(oldPrimB);
+BSS u8 N(oldEnvR), N(oldEnvG), N(oldEnvB);
+BSS s32 N(newPrimR), N(newPrimG), N(newPrimB);
+BSS s32 N(newEnvR), N(newEnvG), N(newEnvB);
+BSS s32 N(duration), N(time);
+
 ApiStatus func_802452C4_A2F504(Evt* script, s32 isInitialCall) {
     Bytecode* args;
-    static char N(bss_padding)[0x2B0]; // TODO remove / relocate this
-    static u8 oldPrimR, oldPrimG, oldPrimB;
-    static u8 oldEnvR, oldEnvG, oldEnvB;
-    static s32 newPrimR, newPrimG, newPrimB;
-    static s32 newEnvR, newEnvG, newEnvB;
-    static s32 duration, time;
-
     args = script->ptrReadPos;
     if (isInitialCall) {
-        get_model_env_color_parameters(&oldPrimR, &oldPrimG, &oldPrimB, &oldEnvR, &oldEnvG, &oldEnvB);
-        newPrimR = evt_get_variable(script, *args++);
-        newPrimG = evt_get_variable(script, *args++);
-        newPrimB = evt_get_variable(script, *args++);
-        newEnvR = evt_get_variable(script, *args++);
-        newEnvG = evt_get_variable(script, *args++);
-        newEnvB = evt_get_variable(script, *args++);
-        duration = evt_get_variable(script, *args++);
-        time = 0;
+        get_model_env_color_parameters(&N(oldPrimR), &N(oldPrimG), &N(oldPrimB), &N(oldEnvR), &N(oldEnvG), &N(oldEnvB));
+        N(newPrimR) = evt_get_variable(script, *args++);
+        N(newPrimG) = evt_get_variable(script, *args++);
+        N(newPrimB) = evt_get_variable(script, *args++);
+        N(newEnvR) = evt_get_variable(script, *args++);
+        N(newEnvG) = evt_get_variable(script, *args++);
+        N(newEnvB) = evt_get_variable(script, *args++);
+        N(duration) = evt_get_variable(script, *args++);
+        N(time) = 0;
     }
 
-    if (duration > 0) {
-        time++;
+    if (N(duration) > 0) {
+        N(time)++;
         set_model_env_color_parameters(
-            (oldPrimR + ((newPrimR - oldPrimR) * time) / duration),
-            (oldPrimG + ((newPrimG - oldPrimG) * time) / duration),
-            (oldPrimB + ((newPrimB - oldPrimB) * time) / duration),
-            (oldEnvR  + ( (newEnvR - oldEnvR)  * time) / duration),
-            (oldEnvG  + ( (newEnvG - oldEnvG)  * time) / duration),
-            (oldEnvB  + ( (newEnvB - oldEnvB)  * time) / duration));
-        if (time >= duration) {
+            (N(oldPrimR) + ((N(newPrimR) - N(oldPrimR)) * N(time)) / N(duration)),
+            (N(oldPrimG) + ((N(newPrimG) - N(oldPrimG)) * N(time)) / N(duration)),
+            (N(oldPrimB) + ((N(newPrimB) - N(oldPrimB)) * N(time)) / N(duration)),
+            (N(oldEnvR)  + ( (N(newEnvR) - N(oldEnvR))  * N(time)) / N(duration)),
+            (N(oldEnvG)  + ( (N(newEnvG) - N(oldEnvG))  * N(time)) / N(duration)),
+            (N(oldEnvB)  + ( (N(newEnvB) - N(oldEnvB))  * N(time)) / N(duration)));
+        if (N(time) >= N(duration)) {
             return ApiStatus_DONE2;
         }
     } else {
-        set_model_env_color_parameters(newPrimR, newPrimG, newPrimB, newEnvR, newEnvG, newEnvB);
+        set_model_env_color_parameters(N(newPrimR), N(newPrimG), N(newPrimB), N(newEnvR), N(newEnvG), N(newEnvB));
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;

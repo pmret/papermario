@@ -651,7 +651,7 @@ void update_encounters_neutral(void) {
 
             if (currentEncounter->battleTriggerCooldown != 0 ||
                 gGameStatusPtr->debugEnemyContact == 1 ||
-                (playerStatus->flags & PS_FLAGS_80000) ||
+                (playerStatus->flags & PS_FLAGS_ARMS_RAISED) ||
                 (gOverrideFlags & GLOBAL_OVERRIDES_40) ||
                 gPartnerActionStatus.actingPartner == PARTNER_BOW ||
                 (enemy->flags & ENEMY_FLAGS_1) ||
@@ -715,7 +715,7 @@ void update_encounters_neutral(void) {
                     if (enemy->flags & ENEMY_FLAGS_IGNORE_HAMMER) {
                         break;
                     }
-                    if (!(playerStatus->flags & PS_FLAGS_1000000)) {
+                    if (!(playerStatus->flags & PS_FLAGS_HAMMER_CHECK)) {
                         break;
                     }
                     if (distance >= playerColRadius + colRadius || y > npcY + colHeight || npcY > y + playerColHeight) {
@@ -896,14 +896,14 @@ void update_encounters_neutral(void) {
                 testZ = playerStatus->position.z + ((npc->pos.z - playerStatus->position.z) * 0.5f);
                 fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
                 currentEncounter->hitType = ENCOUNTER_TRIGGER_SPIN;
-                playerStatus->animFlags |= PA_FLAGS_20000;
+                playerStatus->animFlags |= PA_FLAGS_DIZZY_ATTACK_ENCOUNTER;
                 enemy->encountered = ENCOUNTER_TRIGGER_SPIN;
                 currentEncounter->currentEncounter = encounter;
                 currentEncounter->currentEnemy = enemy;
                 currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
             } else {
                 currentEncounter->hitType = ENCOUNTER_TRIGGER_NONE;
-                playerStatus->animFlags &= ~PA_FLAGS_20000;
+                playerStatus->animFlags &= ~PA_FLAGS_DIZZY_ATTACK_ENCOUNTER;
                 enemy->encountered = ENCOUNTER_TRIGGER_NONE;
                 currentEncounter->currentEncounter = encounter;
                 currentEncounter->currentEnemy = enemy;
@@ -976,7 +976,7 @@ START_BATTLE:
                 playerStatus->actionState != ACTION_STATE_TORNADO_POUND &&
                 playerStatus->actionState != ACTION_STATE_SPIN_JUMP &&
                 playerStatus->actionState != ACTION_STATE_SPIN_POUND) {
-                playerStatus->flags |= PS_FLAGS_40000;
+                playerStatus->flags |= PS_FLAGS_ENTERING_BATTLE;
             }
             if (!is_ability_active(ABILITY_CHILL_OUT) && currentEncounter->firstStrikeType == FIRST_STRIKE_ENEMY) {
                 set_action_state(ACTION_STATE_ENEMY_FIRST_STRIKE);
@@ -1032,7 +1032,7 @@ START_BATTLE:
             currentEncounter->unk_94 = 0;
             D_8009A678 = 1;
             gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT;
-            playerStatus->flags |= PS_FLAGS_40000;
+            playerStatus->flags |= PS_FLAGS_ENTERING_BATTLE;
             break;
         case ENCOUNTER_TRIGGER_JUMP:
             currentEnemy = enemy = currentEncounter->currentEnemy;
@@ -1085,7 +1085,7 @@ START_BATTLE:
             }
             disable_player_input();
             partner_disable_input();
-            playerStatus->flags |= PS_FLAGS_40000;
+            playerStatus->flags |= PS_FLAGS_ENTERING_BATTLE;
             if (cond2) {
                 start_bounce_a();
             }
@@ -1146,7 +1146,7 @@ START_BATTLE:
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->unk_94 = 0;
             currentEncounter->scriptedBattle = FALSE;
-            playerStatus->flags |= PS_FLAGS_40000;
+            playerStatus->flags |= PS_FLAGS_ENTERING_BATTLE;
             sfx_play_sound(0);
             gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
             D_8009A678 = 1;
@@ -1228,7 +1228,7 @@ START_BATTLE:
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->unk_94 = 0;
             currentEncounter->scriptedBattle = FALSE;
-            playerStatus->flags |= PS_FLAGS_40000;
+            playerStatus->flags |= PS_FLAGS_ENTERING_BATTLE;
             sfx_play_sound(0);
             gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
             D_8009A678 = 1;
@@ -1592,7 +1592,7 @@ void update_encounters_post_battle(void) {
             currentEncounter->fadeOutAccel = 1;
             currentEncounter->battleStartCountdown = 0;
             D_8009A670 = FALSE;
-            gPlayerStatus.flags &= ~PS_FLAGS_40000;
+            gPlayerStatus.flags &= ~PS_FLAGS_ENTERING_BATTLE;
             if (currentEncounter->hitType == ENCOUNTER_TRIGGER_SPIN) {
                 D_8009A670 = TRUE;
             }

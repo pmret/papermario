@@ -110,7 +110,7 @@ ApiStatus LoadAnimatedMesh(Evt* script, s32 isInitialCall) {
 ApiStatus PlayModelAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
+    s16* var2 = (s16*) evt_get_variable(script, *args++);
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
     model->currentAnimData = var2;
@@ -122,7 +122,7 @@ ApiStatus PlayModelAnimation(Evt* script, s32 isInitialCall) {
 ApiStatus PlayModelAnimationStartingFrom(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
+    s16* var2 = (s16*) evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
@@ -135,7 +135,7 @@ ApiStatus PlayModelAnimationStartingFrom(Evt* script, s32 isInitialCall) {
 ApiStatus ChangeModelAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
+    s16* var2 = (s16*) evt_get_variable(script, *args++);
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
     if (model->currentAnimData == var2) {

@@ -10,9 +10,9 @@
 #include "mapfs/flo_25_hit.h"
 
 enum {
-	NPC_GateFlower              = 0,
-	NPC_TuffPuff                = 1,
-	NPC_Bzzap                   = 2,
+    NPC_GateFlower              = 0,
+    NPC_TuffPuff                = 1,
+    NPC_Bzzap                   = 2,
 };
 
 #define NAMESPACE flo_25

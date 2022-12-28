@@ -27,7 +27,7 @@ EvtScript N(EVS_NpcIdle_Mamar) = {
     EVT_END
 };
 
-API_CALLABLE(N(UpgradeStarPower)) {
+API_CALLABLE(N(UpgradeStarPowerCh2)) {
     set_max_SP(2);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
@@ -99,7 +99,7 @@ EvtScript N(EVS_Scene_RescuedMamar) = {
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Idle)
     EVT_CALL(EnableNpcAI, NPC_Mamar, TRUE)
-    EVT_CALL(N(UpgradeStarPower))
+    EVT_CALL(N(UpgradeStarPowerCh2))
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0192, 160, 40)
     EVT_WAIT(10)
     EVT_CALL(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
@@ -193,7 +193,7 @@ API_CALLABLE(N(CheckTradeEventTime)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(GetItemCount)) {
+API_CALLABLE(N(GetTradeEventItemCount)) {
     script->varTable[0] = get_item_count();
     return ApiStatus_DONE2;
 }
@@ -211,13 +211,13 @@ EvtScript N(EVS_NpcInteract_TradingToad) = {
         EVT_SET(GF_TradingEvent2_Active, FALSE)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(N(GetItemCount))
+    EVT_CALL(N(GetTradeEventItemCount))
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00EF)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F0)
-    EVT_CHOOSE_ANY_CONSUMABLE()
+    EVT_CHOOSE_ANY_CONSUMABLE(2)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(-1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F4)
@@ -241,7 +241,7 @@ EvtScript N(EVS_NpcInteract_TradingToad) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Toad) = {
+EvtScript N(EVS_NpcInit_TradingToad) = {
     EVT_IF_NE(GF_TradingEvent2_Active, FALSE)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TradingToad)))
     EVT_ELSE
@@ -268,7 +268,7 @@ StaticNpc N(NpcData_TradingToad) = {
     .pos = { 0.0f, 2.0f, 150.0f },
     .yaw = 90,
     .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_100000,
-    .init = &N(EVS_NpcInit_Toad),
+    .init = &N(EVS_NpcInit_TradingToad),
     .drops = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops  = NO_DROPS,

@@ -141,17 +141,17 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("img_header",
         description="img_header $in",
-        command=f"$python {BUILD_TOOLS}/img/header.py $in $out $c_name",
+        command=f"$python {BUILD_TOOLS}/img/header.py $in $out \"$c_name\"",
     )
 
     ninja.rule("bin_inc_c",
         description="bin_inc_c $out",
-        command=f"$python {BUILD_TOOLS}/bin_inc_c.py $in $out $c_name",
+        command=f"$python {BUILD_TOOLS}/bin_inc_c.py $in $out \"$c_name\"",
     )
 
     ninja.rule("pal_inc_c",
         description="pal_inc_c $out",
-        command=f"$python {BUILD_TOOLS}/pal_inc_c.py $in $out $c_name",
+        command=f"$python {BUILD_TOOLS}/pal_inc_c.py $in $out \"$c_name\"",
     )
 
     ninja.rule("yay0",
@@ -240,8 +240,9 @@ class Configure:
 
         modes = ["ld"]
         if assets:
-            modes.extend(["bin", "Yay0", "img", "vtx", "gfx", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset",
-                          "pm_charset_palettes", "pm_effect_loads", "pm_effect_shims", "pm_sprite_shading_profiles"])
+            modes.extend(["bin", "yay0", "img", "vtx", "vtx_common", "gfx", "gfx_common", "pm_map_data", "pm_msg",
+                          "pm_npc_sprites", "pm_charset","pm_charset_palettes", "pm_effect_loads", "pm_effect_shims",
+                          "pm_sprite_shading_profiles"])
         if code:
             modes.extend(["code", "c", "data", "rodata"])
 
@@ -309,7 +310,7 @@ class Configure:
     def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str], non_matching: bool, debug: bool):
         import segtypes
         import segtypes.common.data
-        import segtypes.n64.Yay0
+        import segtypes.n64.yay0
 
         assert self.linker_entries is not None
 
@@ -434,7 +435,10 @@ class Configure:
                             c_sym = seg.create_symbol(
                                 addr=seg.vram_start, in_segment=True, type="data", define=True
                             )
-                            vars = {"c_name": c_sym.name}
+                            name = c_sym.name
+                            if "namespaced" in seg.args:
+                                name = f"N({name[7:]})"
+                            vars = {"c_name": name}
                             build(inc_dir / (seg.name + ".png.h"), src_paths, "img_header", vars)
                             build(inc_dir / (seg.name + ".png.inc.c"), [bin_path], "bin_inc_c", vars)
                         elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
@@ -454,7 +458,7 @@ class Configure:
                             build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "pal_inc_c", vars)
             elif isinstance(seg, segtypes.common.bin.CommonSegBin):
                 build(entry.object_path, entry.src_paths, "bin")
-            elif isinstance(seg, segtypes.n64.Yay0.N64SegYay0):
+            elif isinstance(seg, segtypes.n64.yay0.N64SegYay0):
                 compressed_path = entry.object_path.with_suffix("") # remove .o
                 build(compressed_path, entry.src_paths, "yay0")
                 build(entry.object_path, [compressed_path], "bin")

@@ -30,6 +30,8 @@ typedef struct UnkHosStruct {
     /* 0x60 */ char unk_6E[0x2];
 } UnkHosStruct; // size = 0x60
 
+extern s32 D_802495DC_A3381C;
+extern s32 D_802495E0_A33820;
 extern f32 D_8024963C_A3387C[];
 extern f32 D_8024987C_A33ABC;
 extern f32 D_802498A8_A33AE8;
@@ -84,7 +86,7 @@ extern s32 D_8024AAB4_A34CF4; // func_802440D0_A2E310 can be matched once this i
 extern s32 D_8024AAB8_A34CF8;
 extern u32 D_8024AABC_A34CFC;
 extern s32 D_8024AAC0_A34D00[];
-extern s32 D_8024AAD6_A34D14[];
+extern s32 D_8024AAD4_A34D14[];
 extern u8 D_8024AB3C_A34D7C[];
 extern u8 D_8024AC7B_A34EBB;
 extern u16 D_8024AC7C_A34EBC[];
@@ -93,20 +95,38 @@ extern s32 D_8024ACB8_A34EF8;
 extern f32 D_8024AEC4_A35104;
 extern f32 D_8024AEC8_A35108;
 
-// BSS?
-extern f32 D_8024F2C8;
-extern f32 D_8024F2CC;
-extern f32 D_8024F2D8;
-extern f32 D_8024F2DC;
-extern f32 D_8024F2E0;
-extern f32 D_8024F2E4;
-extern f32 D_8024F2E8;
-extern f32 D_8024F2EC;
-extern f32 D_8024F2F0_C0CB70;
-extern f32 D_8024F2F4;
-extern f32 D_8024F2F8;
-extern f32 D_8024F374;
-extern f32 D_8024F378;
+BSS f32 D_8024F2C8;
+BSS f32 D_8024F2CC;
+BSS f32 D_8024F2D0; // unused?
+BSS f32 D_8024F2D4; // unused?
+BSS f32 D_8024F2D8;
+BSS f32 D_8024F2DC;
+BSS f32 D_8024F2E0;
+BSS f32 D_8024F2E4;
+BSS f32 D_8024F2E8;
+BSS f32 D_8024F2EC;
+BSS f32 D_8024F2F0;
+BSS f32 D_8024F2F4;
+BSS f32 D_8024F2F8;
+BSS s32 D_8024F2FC;
+BSS s32 D_8024F300;
+BSS s32 D_8024F304;
+BSS s32 D_8024F308;
+BSS s32 D_8024F30C;
+BSS char B_8024F310[0x8];
+BSS char D_8024F318[0x20];
+BSS char D_8024F338[0x20];
+BSS char D_8024F358[0x1C];
+BSS f32 D_8024F374;
+BSS f32 D_8024F378;
+BSS char D_8024F37C[0x4];
+BSS s32 D_8024F380;
+BSS char D_8024F384[0x74];
+BSS char D_8024F3F8[0x50];
+BSS s32 D_8024F448[10];
+BSS s32 D_8024F470_hos_bss[10];
+BSS s32 D_8024F498[4 * 5];
+BSS s32 D_8024F4E8[34];
 
 ApiStatus func_80240880_A2AAC0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -196,13 +216,47 @@ ApiStatus func_80240E30_A2B070(Evt* script, s32 isInitialCall) {
 }
 
 // adjusts properties of EmitterVolume:GoldShimmer2 effect
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240E50_A2B090);
+ApiStatus func_80240E50_A2B090(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
+    s32 subtype = evt_get_variable(script, *args++);
+    s32 posX = evt_get_float_variable(script, *args++);
+    s32 posY = evt_get_float_variable(script, *args++);
+    s32 posZ = evt_get_float_variable(script, *args++);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240F30_A2B170);
+    effect->data.miscParticles->pos.x = posX;
+    effect->data.miscParticles->pos.y = posY;
+    effect->data.miscParticles->pos.z = posZ;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240F88_A2B1C8);
+ApiStatus func_80240F30_A2B170(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, ArrayVar(0));
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240FE0_A2B220);
+    effect->data.somethingRotating[D_802495DC_A3381C + 1].state = 1;
+    D_802495DC_A3381C++;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80240F88_A2B1C8(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, ArrayVar(0));
+
+    effect->data.somethingRotating[D_802495E0_A33820 + 1].state = 3;
+    D_802495E0_A33820++;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80240FE0_A2B220(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, ArrayVar(16));
+
+    effect->data.lightRays->unk_10 = script->varTable[0];
+    effect->data.lightRays->unk_14 = script->varTable[1];
+    effect->data.lightRays->unk_18 = script->varTable[2];
+    return ApiStatus_DONE2;
+}
 
 void func_80241044_A2B284(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32* arg4) {
     f32 temp_f2 = arg1 - arg2;
@@ -559,13 +613,13 @@ ApiStatus func_802423D4_A2C614(Evt* script, s32 isInitialCall) {
     func_802410E4_A2B324(4, 130.0f, 270.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2E4);
     func_802410E4_A2B324(4, 30.0f, 0.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2E8);
     func_802410E4_A2B324(4, 232.0f, 177.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2EC);
-    func_802410E4_A2B324(4, 0.0f, 0.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2F0_C0CB70);
+    func_802410E4_A2B324(4, 0.0f, 0.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2F0);
     func_80240D54_A2AF94(0, D_8024F2E0);
     camera->panActive = TRUE;
     camera->controlSettings.boomLength = D_8024F2E4;
     camera->movePos.x = D_8024F2E8;
     camera->movePos.y = D_8024F2EC;
-    camera->movePos.z = D_8024F2F0_C0CB70;
+    camera->movePos.z = D_8024F2F0;
 
     D_80249A80_A33CC0++;
     if (D_80249A80_A33CC0 <= 90) {
@@ -823,8 +877,8 @@ void func_80243ED0_A2E110(s32 arg0, s32 idx) {
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80243FC4_A2E204);
 
-// needs D_8024AAB4_A34CF4 to be migrated
-#ifdef NON_MATCHING
+NOP_FIX // TODO remove when D_8024AAB4_A34CF4 is migrated
+
 ApiStatus func_802440D0_A2E310(Evt* script, s32 isInitialCall) {
     switch (D_8024AAB0_A34CF0) {
         case 0:
@@ -844,10 +898,10 @@ ApiStatus func_802440D0_A2E310(Evt* script, s32 isInitialCall) {
             if (D_8024AAB8_A34CF8 != 0) {
                 D_8024AAB8_A34CF8--;
                 if (!D_8024AA20_A34C60->unk_58) {
-                    D_8024AA20_A34C60->unk_3C = D_8024AAD6_A34D14[25 - D_8024AAB8_A34CF8];
+                    D_8024AA20_A34C60->unk_3C = D_8024AAD4_A34D14[25 - D_8024AAB8_A34CF8];
                     D_8024AA20_A34C60->unk_3E = 0;
                 } else {
-                    D_8024AA20_A34C60->unk_40 = D_8024AAD6_A34D14[25 - D_8024AAB8_A34CF8];
+                    D_8024AA20_A34C60->unk_40 = D_8024AAD4_A34D14[25 - D_8024AAB8_A34CF8];
                     D_8024AA20_A34C60->unk_42 = 0;
                 }
             } else {
@@ -906,10 +960,10 @@ ApiStatus func_802440D0_A2E310(Evt* script, s32 isInitialCall) {
             if (D_8024AAB8_A34CF8 != 0) {
                 D_8024AAB8_A34CF8--;
                 if (!D_8024AA20_A34C60->unk_58) {
-                    D_8024AA20_A34C60->unk_40 = D_8024AAD6_A34D14[25 - D_8024AAB8_A34CF8];
+                    D_8024AA20_A34C60->unk_40 = D_8024AAD4_A34D14[25 - D_8024AAB8_A34CF8];
                     D_8024AA20_A34C60->unk_42 = 0;
                 } else {
-                    D_8024AA20_A34C60->unk_3C = D_8024AAD6_A34D14[25 - D_8024AAB8_A34CF8];
+                    D_8024AA20_A34C60->unk_3C = D_8024AAD4_A34D14[25 - D_8024AAB8_A34CF8];
                     D_8024AA20_A34C60->unk_3E = 0;
                 }
             } else {
@@ -922,9 +976,6 @@ ApiStatus func_802440D0_A2E310(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-#else
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802440D0_A2E310);
-#endif
 
 ApiStatus func_80244454_A2E694(Evt* script, s32 isInitialCall) {
     if (D_8024ACB8_A34EF8 != 0) {

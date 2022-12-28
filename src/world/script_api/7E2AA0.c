@@ -47,7 +47,7 @@ ApiStatus func_80281C20(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80281C84(Evt* script, s32 isInitialCall) {
     func_800EF3E4();
-    repartner_set_tether_distance();
+    partner_reset_tether_distance();
     return ApiStatus_DONE2;
 }
 

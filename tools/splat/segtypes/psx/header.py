@@ -51,6 +51,7 @@ class PsxSegHeader(CommonSegHeader):
         header_lines.append(self.get_line("word", rom_bytes[0x40:0x44], "Reserved"))
         header_lines.append(self.get_line("word", rom_bytes[0x44:0x48], "Reserved"))
         header_lines.append(self.get_line("word", rom_bytes[0x48:0x4C], "Reserved"))
+        assert isinstance(self.rom_end, int)
         header_lines.append(
             self.get_line("ascii", rom_bytes[0x4C : self.rom_end], "Sony Inc")
         )

@@ -1,26 +1,26 @@
 #include "kkj_19.h"
 #include "hud_element.h"
+#include "battle/action_cmd.h"
 
 extern s32 kkj_19_ItemChoice_HasSelectedItem;
 extern s32 kkj_19_ItemChoice_SelectedItemID;
-extern s32 kkj_19_D_802461F0[];
-extern s32 D_802463B8_kkj_19[];
-extern s32 D_8024652C;
-extern s32 D_80246530;
-extern s32 D_80246534;
-extern s32 D_80246538_kkj_19[];
-extern s32 D_80246550_kkj_19;
-extern s32 D_80246554;
-extern u32 D_80246558_kkj_19;
-extern s32 D_8024655C;
-extern s32 D_80246560_kkj_19;
-extern s32 D_80246568_C8C018[];
-extern s32 D_80246578[];
-extern s32 D_802465A0;
-extern HudScript HES_AButton;
-extern HudScript HES_BlueMeter;
-extern HudScript HES_MashAButton;
-extern s32 dgb_08_npcGroup_80246528;
+
+BSS s32 kkj_19_D_802461F0[114];
+BSS s32 D_802463B8_kkj_19[92];
+BSS s32 kkj_19_D_80246528;
+BSS s32 D_8024652C;
+BSS s32 D_80246530;
+BSS s32 D_80246534;
+BSS s32 D_80246538_kkj_19[6];
+BSS s32 D_80246550_kkj_19;
+BSS s32 D_80246554;
+BSS u32 D_80246558_kkj_19;
+BSS s32 D_8024655C;
+BSS s32 D_80246560_kkj_19;
+BSS s32 D_80246564_kkj_19; // unused?
+BSS s32 D_80246568_C8C018[4];
+BSS s32 D_80246578[10];
+BSS s32 D_802465A0;
 
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
@@ -113,7 +113,7 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
         case 0:
             D_80246534 = evt_get_variable(script, *args++);
             D_80246554 = create_worker_frontUI(NULL, func_802406A0_AF7FF0);
-            dgb_08_npcGroup_80246528 = 0;
+            kkj_19_D_80246528 = 0;
             D_80246530 = 0;
             for (i = 0; i < 10; i++) {
                 D_80246578[i] = 0;
@@ -167,17 +167,17 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
             break;
         case 10:
             hud_element_set_script(D_80246568_C8C018[0], &HES_MashAButton);
-            dgb_08_npcGroup_80246528 = 0;
+            kkj_19_D_80246528 = 0;
             D_8024652C = 0;
             D_80246558_kkj_19 = 11;
             // fallthrough
         case 11:
             temp = D_80246538_kkj_19[D_80246550_kkj_19];
-            if (gGameStatusPtr->pressedButtons[0] & A_BUTTON) {
-                dgb_08_npcGroup_80246528++;
+            if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
+                kkj_19_D_80246528++;
             }
-            if (dgb_08_npcGroup_80246528 > temp) {
-                dgb_08_npcGroup_80246528 = temp;
+            if (kkj_19_D_80246528 > temp) {
+                kkj_19_D_80246528 = temp;
             }
             if (D_8024652C == 2) {
                 D_8024652C = 3;
@@ -203,14 +203,14 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
                 D_80246534--;
                 break;
             }
-            script->varTable[0] = dgb_08_npcGroup_80246528;
+            script->varTable[0] = kkj_19_D_80246528;
             hud_element_free(D_80246568_C8C018[0]);
             hud_element_free(D_80246568_C8C018[1]);
             free_worker(D_80246554);
             return ApiStatus_DONE2;
     }
 
-    D_80246578[D_802465A0++] = gGameStatusPtr->pressedButtons[0] & A_BUTTON;
+    D_80246578[D_802465A0++] = gGameStatusPtr->pressedButtons[0] & BUTTON_A;
 
     if (D_802465A0 >= 10) {
         D_802465A0 = 0;

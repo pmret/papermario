@@ -1,8 +1,9 @@
 import struct
+from pathlib import Path
+
+from util import options
 
 from segtypes.gc.segment import GCSegment
-from pathlib import Path
-from util import options
 
 
 class GcSegBi2(GCSegment):

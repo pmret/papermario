@@ -13,8 +13,8 @@
 #include "sprite/npc/Paragoomba.h"
 
 enum {
-	NPC_SpikedGoomba            = 0,
-	NPC_Paragoomba              = 1,
+    NPC_SpikedGoomba            = 0,
+    NPC_Paragoomba              = 1,
 };
 
 enum {
@@ -22,9 +22,9 @@ enum {
 };
 
 enum {
-	MV_StickerData		= MapVar(10),
-	MV_StickerImage		= MapVar(11),
-	MV_StickerPalette	= MapVar(12),
+    MV_StickerData      = MapVar(10),
+    MV_StickerImage     = MapVar(11),
+    MV_StickerPalette   = MapVar(12),
 };
 
 #define NAMESPACE kmr_06

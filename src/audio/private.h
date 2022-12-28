@@ -158,8 +158,8 @@ void au_BGMCmd_FC_Jump(BGMPlayer* player, BGMPlayerTrack* track);
 void au_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track);
 void au_BGMCmd_NOP(BGMPlayer* player, BGMPlayerTrack* track);
 void au_bgm_set_proximity_mix(s32 songName, u32 mix);
-void func_80050770(BGMPlayer* player, f32 arg1);
-void func_80050818(BGMPlayer* player, s32 arg1);
+void au_bgm_set_playback_rate(BGMPlayer* player, f32 arg1);
+void au_bgm_player_set_detune(BGMPlayer* player, s32 arg1);
 void au_bgm_change_track_volume(BGMPlayer* player, s32 trackIdx, s16 arg2, u8 arg3);
 void au_bgm_set_track_volumes(BGMPlayer* player, u8* arg1, s32 arg2);
 void func_80050888(BGMPlayer* player, BGMPlayerTrack* track, s32 target, s32 duration);
@@ -216,8 +216,8 @@ AuResult snd_set_song_variation(s32 songName, s32 variation);
 */
 AuResult snd_song_get_playing_info(s32 songName, BGMHeader** outTrackData, BGMPlayer** outPlayer);
 /*
-AuResult func_80055D38(s32 songName, f32 arg1);
-AuResult func_80055D8C(s32 songName, s32 arg1);
+AuResult snd_song_set_playback_rate(s32 songName, f32 arg1);
+AuResult snd_song_set_detune(s32 songName, s32 arg1);
 AuResult func_80055DDC(s32 songName, s32 arg1);
 AuResult snd_song_clear_track_volumes(s32 songName, MusicTrackVols arg1);
 u8* func_80055EB4(MusicTrackVols arg0);
@@ -302,8 +302,8 @@ void sfx_reset_door_sounds(void);
 void sfx_clear_sounds(void);
 void sfx_clear_env_sounds(s16 playSounds);
 void sfx_update_looping_sound_params(void);
-void func_801497FC(s32 arg0);
-s32 func_80149828(void);
+void sfx_set_reverb_mode(s32 arg0);
+s32 sfx_get_reverb_mode(void);
 void sfx_stop_env_sounds(void);
 */
 SoundInstance* sfx_get_env_sound_instance(s32 soundID);

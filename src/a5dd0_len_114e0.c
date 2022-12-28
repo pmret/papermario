@@ -5,14 +5,15 @@
 #include "entity.h"
 #include "hud_element.h"
 #include "effects.h"
+#include "nu/nusys.h"
 
 #ifdef SHIFT
 #define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
 #else
-#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shift
-#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shift
+#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shiftability fix
+#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shiftability fix
 #define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
-#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shift
+#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shiftability fix
 #endif
 
 typedef struct Fog {
@@ -24,6 +25,11 @@ typedef struct Fog {
     /* 0x14 */ s32 startDistance;
     /* 0x18 */ s32 endDistance;
 } Fog; // size = 0x1C
+
+typedef struct Struct_8011CFBC {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+} Struct_8011CFBC; // size = 0x08
 
 extern s32 D_801516FC;
 
@@ -438,7 +444,17 @@ Matrix4s mdl_RDPIdentity = {
     }
 };
 
-s32 D_8014B7A8[] = { 0x00000006, 0x00000000, 0x00000005, 0x00020000, 0x00000004, 0x00030000, 0x00000003, 0x00038000, 0x00000002, 0x0003C000, 0x00000001, 0x0003E000, 0x00000000, 0x0003F000, 0x00000000, 0x0003F800, 0x00000000, 0x00000000, };
+Struct_8011CFBC D_8014B7A8[] = {
+    { 6, 0x00000 },
+    { 5, 0x20000 },
+    { 4, 0x30000 },
+    { 3, 0x38000 },
+    { 2, 0x3C000 },
+    { 1, 0x3E000 },
+    { 0, 0x3F000 },
+    { 0, 0x3F800 },
+    { 0, 0x00000 },
+};
 
 s32 D_8014B7F0 = 0;
 
@@ -1074,9 +1090,12 @@ extern s32 mdl_renderTaskQueueIdx;
 extern s32 mdl_renderTaskCount;
 
 extern TextureHandle mdl_textureHandles[128];
+
 extern RenderTask mdl_clearRenderTasks[3][0x100];
 
 extern s32 D_801A7000; // todo ???
+
+extern u16 D_80153380[16];
 
 void update_shadows(void);
 s32 step_entity_commandlist(Entity* entity);
@@ -1097,7 +1116,7 @@ void func_80117D00(Model* model);
 void appendGfx_model_group(void* model);
 void render_transform_group_node(ModelNode* node);
 void render_transform_group(void* group);
-void func_801180E8(TextureHeader*, void**, u8* raster, u16* palette, u8* auxRaster, u16* auxPalette, s32, s32, s32, s32);
+void func_801180E8(TextureHeader*, Gfx**, IMG_PTR raster, PAL_PTR palette, IMG_PTR auxRaster, PAL_PTR auxPalette, u8, u8, u16, u16);
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth);
 s32 is_identity_fixed_mtx(Mtx* mtx);
 
@@ -1390,10 +1409,18 @@ void render_entities(void) {
                 if (entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
                     if (D_8014AFB0 == 0xFF) {
                         if (entity->renderSetupFunc != NULL) {
-                            set_animator_render_callback(entity->virtualModelIndex, entity->listIndex, entity->renderSetupFunc);
+                            set_animator_render_callback(
+                                entity->virtualModelIndex,
+                                (void*)(u32) entity->listIndex,
+                                (void (*)(void*)) entity->renderSetupFunc
+                            );
                         }
                     } else {
-                        set_animator_render_callback(entity->virtualModelIndex, entity->listIndex, func_8010FE44);
+                        set_animator_render_callback(
+                            entity->virtualModelIndex,
+                            (void*)(u32) entity->listIndex,
+                            func_8010FE44
+                        );
                     }
 
                     if (entity->gfxBaseAddr == NULL) {
@@ -1407,9 +1434,11 @@ void render_entities(void) {
                 } else {
                     if (D_8014AFB0 == 0xFF) {
                         if (entity->renderSetupFunc != NULL) {
-                            bind_entity_model_setupGfx(entity->virtualModelIndex,
-                                                       (void*)(u32)entity->listIndex,
-                                                       entity->renderSetupFunc);
+                            bind_entity_model_setupGfx(
+                                entity->virtualModelIndex,
+                                (void*)(u32) entity->listIndex,
+                                (void (*)(void*)) entity->renderSetupFunc
+                            );
                         } else {
                             get_entity_model(entity->virtualModelIndex)->fpSetupGfxCallback = NULL;
                         }
@@ -1770,9 +1799,9 @@ s32 is_player_action_state(s8 actionState) {
     return actionState == gPlayerStatus.actionState;
 }
 
-void entity_set_render_script(Entity* entity, u32* commandList) {
+void entity_set_render_script(Entity* entity, EntityModelScript* cmdList) {
     if (!(entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
-        set_entity_model_render_command_list(entity->virtualModelIndex, commandList);
+        set_entity_model_render_command_list(entity->virtualModelIndex, cmdList);
     }
 }
 
@@ -2835,7 +2864,7 @@ GameMode* set_game_mode_slot(s32 i, GameMode* mode) {
 
     ASSERT(i < ARRAY_COUNT(gMainGameState));
 
-    gameMode->flags = 1 | 2;
+    gameMode->flags = 2 | 1;
     gameMode->init = mode->init;
     gameMode->step = mode->step;
     gameMode->render = mode->render;
@@ -2987,7 +3016,7 @@ void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, 
 
     handle->gfx = (Gfx*) mdl_nextTextureAddress;
     memcpy(&handle->header, header, sizeof(*header));
-    func_801180E8(header, &mdl_nextTextureAddress, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
+    func_801180E8(header, (Gfx**)&mdl_nextTextureAddress, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
     gSPEndDisplayList(((Gfx*) mdl_nextTextureAddress)++);
 }
 
@@ -3643,7 +3672,260 @@ void render_transform_group(void* data) {
     }
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801180E8);
+void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR palette, IMG_PTR auxRaster, PAL_PTR auxPalette, u8 arg6, u8 arg7, u16 arg8, u16 arg9) {
+    s32 mainWidth, mainHeight;
+    s32 auxWidth, auxHeight;
+    s32 mainFmt;
+    s32 auxFmt;
+    s32 mainWrapW, mainWrapH;
+    s32 auxWrapW, auxWrapH;
+    s32 extraTileType;
+    u32 renderType;
+    s32 lod;
+    s32 lodDivisor;
+    IMG_PTR rasterPtr;
+    s32 filteringMode;
+    s32 auxPaletteIndex;
+    s32 lutMode;
+    s32 lodMode;
+    s32 mainMasks, mainMaskt;
+    s32 auxMasks, auxMaskt;
+    s32 mainBitDepth;
+    s32 auxBitDepth;
+    s32 temp;
+
+    mainWidth = header->mainW;
+    mainHeight = header->mainH;
+
+    lod = 0;
+    auxPaletteIndex = 0;
+
+    mainMasks = INTEGER_LOG2(mainWidth);
+    mainMaskt = INTEGER_LOG2(mainHeight);
+
+    mainWrapW = header->mainWrapW;
+    mainWrapH = header->mainWrapH;
+
+    mainFmt = header->mainFmt;
+    mainBitDepth = header->mainBitDepth;
+
+    extraTileType = header->extraTiles;
+    filteringMode = header->filtering << G_MDSFT_TEXTFILT;
+
+    auxWidth = header->auxW;
+    auxHeight = header->auxH;
+
+    auxMasks = INTEGER_LOG2(auxWidth);
+    auxMaskt = INTEGER_LOG2(auxHeight);
+
+    auxWrapW = header->auxWrapW;
+    auxWrapH = header->auxWrapH;
+    auxFmt = header->auxFmt;
+    auxBitDepth = header->auxBitDepth;
+
+
+    if (extraTileType == 3) {
+        if (palette != NULL) {
+            auxPaletteIndex = 1;
+        } else {
+            auxPaletteIndex = 0;
+        }
+    }
+
+    if (palette != NULL || auxPalette != NULL) {
+        lutMode = G_TT_RGBA16;
+        if (palette != NULL) {
+            if (mainBitDepth == G_IM_SIZ_4b) {
+                gDPLoadTLUT_pal16((*gfxPos)++, 0, palette);
+            } else if (mainBitDepth == G_IM_SIZ_8b) {
+                gDPLoadTLUT_pal256((*gfxPos)++, palette);
+            }
+        }
+        if (auxPalette != NULL) {
+            if (auxBitDepth == G_IM_SIZ_4b) {
+                gDPLoadTLUT_pal16((*gfxPos)++, auxPaletteIndex, auxPalette);
+            } else if (auxBitDepth == G_IM_SIZ_8b) {
+                gDPLoadTLUT_pal256((*gfxPos)++, auxPalette);
+            }
+        }
+    } else {
+        lutMode = G_TT_NONE;
+    }
+
+    renderType = header->colorCombineType;
+    if (renderType >= 3) {
+        renderType += 10;
+    } else {
+        renderType = header->extraTiles * 3 + 1 + header->colorCombineSubType;
+    }
+
+    **gfxPos = D_8014B0B8[renderType][0];
+    (*gfxPos)++;
+
+    switch (extraTileType) {
+        case 0:
+            lodMode = G_TL_TILE;
+            gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
+            switch (mainBitDepth) {
+                case G_IM_SIZ_4b:
+                    gDPLoadTextureBlock_4b((*gfxPos)++, raster, mainFmt,
+                                           mainWidth, mainHeight, 0,
+                                           mainWrapW, mainWrapH, mainMasks, mainMaskt, G_TX_NOLOD, G_TX_NOLOD);
+                    break;
+                case G_IM_SIZ_8b:
+                    gDPLoadTextureBlock((*gfxPos)++, raster, mainFmt, G_IM_SIZ_8b,
+                                        mainWidth, mainHeight, 0,
+                                        mainWrapW, mainWrapH, mainMasks, mainMaskt, G_TX_NOLOD, G_TX_NOLOD);
+                    break;
+                case G_IM_SIZ_16b:
+                    gDPLoadTextureBlock((*gfxPos)++, raster, mainFmt, G_IM_SIZ_16b,
+                                        mainWidth, mainHeight, 0,
+                                        mainWrapW, mainWrapH, mainMasks, mainMaskt, G_TX_NOLOD, G_TX_NOLOD);
+                    break;
+                case 3:
+                    gDPLoadTextureBlock((*gfxPos)++, raster, mainFmt, G_IM_SIZ_32b,
+                                        mainWidth, mainHeight, 0,
+                                        mainWrapW, mainWrapH, mainMasks, mainMaskt, G_TX_NOLOD, G_TX_NOLOD);
+                    break;
+            }
+            break;
+        case 1:
+            lodMode = G_TL_LOD;
+            switch (mainBitDepth) {
+                case G_IM_SIZ_4b:
+                    for (rasterPtr = raster, lod = 0, lodDivisor = 1;
+                         mainWidth / lodDivisor * 4 >= 64 && mainHeight / lodDivisor != 0;
+                         rasterPtr += mainWidth / lodDivisor * mainHeight / lodDivisor / 2, lodDivisor *= 2, lod++)
+                    {
+                        gDPLoadMultiTile_4b((*gfxPos)++, rasterPtr, (u32)(rasterPtr - raster) >> 3, lod, mainFmt,
+                                            mainWidth / lodDivisor, mainHeight / lodDivisor,
+                                            0, 0, mainWidth / lodDivisor - 1, mainHeight / lodDivisor - 1, 0,
+                                            mainWrapW, mainWrapH, mainMasks - lod, mainMaskt - lod, lod, lod);
+                    }
+                    break;
+                case G_IM_SIZ_8b:
+                    for (rasterPtr = raster, lod = 0, lodDivisor = 1;
+                         mainWidth / lodDivisor * 8 >= 64 && mainHeight / lodDivisor != 0;
+                         rasterPtr += mainWidth / lodDivisor * mainHeight / lodDivisor, lodDivisor *= 2, lod++)
+                    {
+                        gDPLoadMultiTile((*gfxPos)++, rasterPtr, ((u32)(rasterPtr - raster)) >> 3, lod, mainFmt, G_IM_SIZ_8b,
+                                         mainWidth / lodDivisor, mainHeight / lodDivisor,
+                                         0, 0, mainWidth / lodDivisor - 1, mainHeight / lodDivisor - 1, 0,
+                                         mainWrapW, mainWrapH, mainMasks - lod, mainMaskt - lod, lod, lod);
+                    }
+                    break;
+                case G_IM_SIZ_16b:
+                    for (rasterPtr = raster, lod = 0, lodDivisor = 1;
+                         mainWidth / lodDivisor * 16 >= 64 && mainHeight / lodDivisor != 0;
+                         rasterPtr += mainWidth / lodDivisor * mainHeight / lodDivisor * 2, lodDivisor *= 2, lod++)
+                    {
+                        gDPLoadMultiTile((*gfxPos)++, rasterPtr, ((u32)(rasterPtr - raster)) >> 3, lod, mainFmt, G_IM_SIZ_16b,
+                                         mainWidth / lodDivisor, mainHeight / lodDivisor,
+                                         0, 0, mainWidth / lodDivisor - 1, mainHeight / lodDivisor - 1, 0,
+                                         mainWrapW, mainWrapH, mainMasks - lod, mainMaskt - lod, lod, lod);
+                    }
+                    break;
+                case G_IM_SIZ_32b:
+                    for (rasterPtr = raster, lod = 0, lodDivisor = 1;
+                         mainWidth / lodDivisor * 32 >= 64 && mainHeight / lodDivisor != 0;
+                         rasterPtr += mainWidth / lodDivisor * mainHeight / lodDivisor * 4, lodDivisor *= 2, lod++)
+                    {
+                        gDPLoadMultiTile((*gfxPos)++, rasterPtr, ((u32)(rasterPtr - raster)) >> 4, lod, mainFmt, G_IM_SIZ_32b,
+                                         mainWidth / lodDivisor, mainHeight / lodDivisor,
+                                         0, 0, mainWidth / lodDivisor - 1, mainHeight / lodDivisor - 1, 0,
+                                         mainWrapW, mainWrapH, mainMasks - lod, mainMaskt - lod, lod, lod);
+                    }
+                    break;
+            }
+            // use tile with lowest quality
+            gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, lod - 1, G_TX_RENDERTILE, G_ON);
+            break;
+        case 2:
+            gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
+            gDPPipeSync((*gfxPos)++);
+            lodMode = G_TL_TILE;
+            switch (mainBitDepth) {
+                case G_IM_SIZ_4b:
+                    gDPScrollTextureBlockHalfHeight_4b((*gfxPos)++, raster, mainFmt, mainWidth, mainHeight, 0,
+                                                       mainWrapW, mainWrapH, mainMasks, mainMaskt, G_TX_NOLOD, G_TX_NOLOD,
+                                                       arg8, arg9, arg6, arg7);
+                    break;
+                case G_IM_SIZ_8b:
+                    gDPScrollTextureBlockHalfHeight((*gfxPos)++, raster, mainFmt, G_IM_SIZ_8b, mainWidth, mainHeight, 0,
+                                                    mainWrapW, mainWrapH, mainMasks, mainMaskt, G_TX_NOLOD, G_TX_NOLOD,
+                                                    arg8, arg9, arg6, arg7);
+                    break;
+                case G_IM_SIZ_16b:
+                    gDPScrollTextureBlockHalfHeight((*gfxPos)++, raster, mainFmt, G_IM_SIZ_16b, mainWidth, mainHeight, 0,
+                                                    mainWrapW, mainWrapH, mainMasks, mainMaskt, G_TX_NOLOD, G_TX_NOLOD,
+                                                    arg8, arg9, arg6, arg7);
+                    break;
+                case G_IM_SIZ_32b:
+                    gDPScrollTextureBlockHalfHeight((*gfxPos)++, raster, mainFmt, G_IM_SIZ_32b, mainWidth, mainHeight, 0,
+                                                    mainWrapW, mainWrapH, mainMasks, mainMaskt, G_TX_NOLOD, G_TX_NOLOD,
+                                                    arg8, arg9, arg6, arg7);
+                    break;
+            }
+            break;
+        case 3:
+            gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
+            lodMode = G_TL_TILE;
+            switch (mainBitDepth) {
+                case G_IM_SIZ_4b:
+                    gDPLoadTextureTile_4b((*gfxPos)++, raster, mainFmt, mainWidth, mainHeight,
+                                          0, 0, mainWidth - 1, mainHeight - 1, 0,
+                                          mainWrapW, mainWrapH, mainMasks, mainMaskt, G_TX_NOLOD, G_TX_NOLOD);
+                    lodDivisor = (((mainWidth * mainHeight) >> 1) + 7)>>3; // required to use lodDivisor here
+                    break;
+                case G_IM_SIZ_8b:
+                    gDPLoadTextureTile((*gfxPos)++, raster, mainFmt, G_IM_SIZ_8b, mainWidth, mainHeight,
+                                       0, 0, mainWidth - 1, mainHeight - 1, 0,
+                                       mainWrapW, mainWrapH, mainMasks, mainMaskt, G_TX_NOLOD, G_TX_NOLOD);
+                    lodDivisor = ((mainWidth * mainHeight) + 7)>>3;
+                    break;
+                case G_IM_SIZ_16b:
+                    gDPLoadTextureTile((*gfxPos)++, raster, mainFmt, G_IM_SIZ_16b, mainWidth, mainHeight,
+                                       0, 0, mainWidth - 1, mainHeight - 1, 0,
+                                       mainWrapW, mainWrapH, mainMasks, mainMaskt, G_TX_NOLOD, G_TX_NOLOD);
+                    lodDivisor = ((mainWidth * mainHeight) * 2 + 7)>>3;
+                    break;
+                case G_IM_SIZ_32b:
+                    gDPLoadTextureTile((*gfxPos)++, raster, mainFmt, G_IM_SIZ_32b, mainWidth, mainHeight,
+                                       0, 0, mainWidth - 1, mainHeight - 1, 0,
+                                       mainWrapW, mainWrapH, mainMasks, mainMaskt, G_TX_NOLOD, G_TX_NOLOD);
+                    lodDivisor = ((mainWidth * mainHeight / 2) * 2 + 7)>>3;
+                    break;
+            }
+
+            switch (auxBitDepth) {
+                case G_IM_SIZ_4b:
+                    gDPScrollMultiTile_4b((*gfxPos)++, auxRaster, lodDivisor, 1, auxFmt, auxWidth, auxHeight,
+                                          0, 0, auxWidth - 1, auxHeight - 1, auxPaletteIndex,
+                                          auxWrapW, auxWrapH, auxMasks, auxMaskt,
+                                          arg6, arg7, arg8, arg9);
+                    break;
+                case G_IM_SIZ_8b:
+                    gDPScrollMultiTile((*gfxPos)++, auxRaster, lodDivisor, 1, auxFmt, G_IM_SIZ_8b, auxWidth, auxHeight,
+                                       0, 0, auxWidth - 1, auxHeight - 1, auxPaletteIndex,
+                                       auxWrapW, auxWrapH, auxMasks, auxMaskt,
+                                       arg6, arg7, arg8, arg9);
+                    break;
+                case G_IM_SIZ_16b:
+                    gDPScrollMultiTile((*gfxPos)++, auxRaster, lodDivisor, 1, auxFmt, G_IM_SIZ_16b, auxWidth, auxHeight,
+                                       0, 0, auxWidth - 1, auxHeight - 1, auxPaletteIndex,
+                                       auxWrapW, auxWrapH, auxMasks, auxMaskt,
+                                       arg6, arg7, arg8, arg9);
+                    break;
+                case G_IM_SIZ_32b:
+                    gDPScrollMultiTile((*gfxPos)++, auxRaster, lodDivisor, 1, auxFmt, G_IM_SIZ_32b, auxWidth, auxHeight,
+                                       0, 0, auxWidth - 1, auxHeight - 1, auxPaletteIndex,
+                                       auxWrapW, auxWrapH, auxMasks, auxMaskt,
+                                       arg6, arg7, arg8, arg9);
+                    break;
+            }
+    }
+    gSPSetOtherMode((*gfxPos)++, G_SETOTHERMODE_H, 4, 16, filteringMode | G_TC_FILT | lutMode | lodMode | G_TP_PERSP );
+}
 
 Model* get_model_from_list_index(s32 listIndex) {
     return (*gCurrentModels)[listIndex];
@@ -3960,9 +4242,124 @@ void clone_model(u16 srcModelID, u16 newModelID) {
     newModel->modelID = newModelID;
 }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", func_8011B7C0, u16 arg0, s32 arg1, s32 arg2);
+void func_8011B7C0(u16 treeIndex, s32 flags, s32 arg2) {
+    s32 maxGroupIndex = -1;
+    s32 i;
+    s32 minGroupIndex;
+    s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[treeIndex].modelIndex;
+    s32 siblingIndex;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B950);
+    if (modelIndex < 255) {
+        minGroupIndex = maxGroupIndex = modelIndex;
+    } else {
+        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[treeIndex].treeDepth;
+        for (i = treeIndex - 1; i >= 0; i--) {
+            if ((*mdl_currentModelTreeNodeInfo)[i].treeDepth <= treeDepth) {
+                break;
+            }
+
+            siblingIndex = (*mdl_currentModelTreeNodeInfo)[i].modelIndex;
+
+            if (siblingIndex < 255) {
+                if (maxGroupIndex == -1) {
+                    maxGroupIndex = siblingIndex;
+                }
+                minGroupIndex = siblingIndex;
+            }
+        }
+    }
+
+    if (arg2 < 2) {
+        for (i = minGroupIndex; i <= maxGroupIndex; i++) {
+            Model* model = (*gCurrentModels)[i];
+            if (arg2 != 0) {
+                model->flags &= ~flags;
+            } else {
+                model->flags |= flags;
+            }
+        }
+    } else {
+        for (i = 0; i < minGroupIndex; i++) {
+            Model* model = (*gCurrentModels)[i];
+            if (arg2 == 3) {
+                model->flags &= ~flags;
+            } else {
+                model->flags |= flags;
+            }
+        }
+        for (i = maxGroupIndex + 1; i < 256; i++) {
+            Model* model = (*gCurrentModels)[i];
+            if (model != NULL) {
+                if (arg2 == 3) {
+                    model->flags &= ~flags;
+                } else {
+                    model->flags |= flags;
+                }
+            }
+        }
+    }
+}
+
+void func_8011B950(u16 treeIndex, s32 arg1, s32 arg2, s32 arg3) {
+    s32 maxGroupIndex = -1;
+    s32 i;
+    s32 minGroupIndex;
+    s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[treeIndex].modelIndex;
+    s32 siblingIndex;
+    s32 maskLow, maskHigh, newIndex;
+
+    if (modelIndex < 255) {
+        minGroupIndex = maxGroupIndex = modelIndex;
+    } else {
+        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[treeIndex].treeDepth;
+        for (i = treeIndex - 1; i >= 0; i--) {
+            if ((*mdl_currentModelTreeNodeInfo)[i].treeDepth <= treeDepth) {
+                break;
+            }
+
+            siblingIndex = (*mdl_currentModelTreeNodeInfo)[i].modelIndex;
+
+            if (siblingIndex < 255) {
+                if (maxGroupIndex == -1) {
+                    maxGroupIndex = siblingIndex;
+                }
+                minGroupIndex = siblingIndex;
+            }
+        }
+    }
+
+    maskLow = maskHigh = 0;
+
+    if (arg1 < 0) {
+        maskLow = 0xF;
+        arg1 = 0;
+    }
+
+    if (arg2 < 0) {
+        maskHigh = 0xF0;
+        arg2 = 0;
+    }
+
+    newIndex = arg1 + (arg2 << 4);
+
+    if (arg3 == 0) {
+        for (i = minGroupIndex; i <= maxGroupIndex; i++) {
+            Model* model = (*gCurrentModels)[i];
+            model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
+        }
+    } else {
+        for (i = 0; i < minGroupIndex; i++) {
+            Model* model = (*gCurrentModels)[i];
+            model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
+        }
+        for (i = maxGroupIndex + 1; i < 256; i++) {
+            Model* model = (*gCurrentModels)[i];
+            if (model != NULL) {
+                model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
+            }
+        }
+    }
+}
 
 void func_8011BAE8(void) {
     s32 i;
@@ -4224,18 +4621,39 @@ void mdl_get_vertex_count(Gfx* gfx, s32* numVertices, Vtx** baseVtx, s32* gfxCou
 }
 
 void mdl_local_gfx_update_vtx_pointers(Gfx* nodeDlist, Vtx* baseVtx, Gfx* arg2, Vtx* arg3);
-INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_local_gfx_update_vtx_pointers);
+#ifdef NON_MATCHING
+void mdl_local_gfx_update_vtx_pointers(Gfx* nodeDlist, Vtx* baseVtx, Gfx* arg2, Vtx* arg3) {
+    u32 w0;
+    u32 temp_v1;
+    u32 w1;
 
-void mdl_local_gfx_copy_vertices(Vtx* from, s32 num, Vtx* to) {
+    do {
+        w0 = (u32) nodeDlist->words.w0 >> 0;
+        w1 = nodeDlist->words.w1;
+        temp_v1 = w0 >> 0x18;
+        nodeDlist++;
+        if (temp_v1 == 1) {
+            w1 = &arg3[(s32) (w1 - (s32)baseVtx) >> 4];
+        }
+        arg2->words.w0 = w0;
+        arg2->words.w1 = w1;
+        arg2++;
+    } while (temp_v1 != G_ENDDL);
+}
+#else
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_local_gfx_update_vtx_pointers);
+#endif
+
+void mdl_local_gfx_copy_vertices(Vtx* src, s32 num, Vtx* dest) {
     u32 i;
 
-    for (i = 0; i < num * sizeof(*from); i++) {
-        ((u8*)to)[i] = ((u8*)from)[i];
+    for (i = 0; i < num * sizeof(*src); i++) {
+        ((u8*)dest)[i] = ((u8*)src)[i];
     }
 }
 
 
-void mdl_make_local_vertex_copy(s32 arg0, u16 treeIdx, s32 arg2) {
+void mdl_make_local_vertex_copy(s32 copyIndex, u16 modelID, s32 isMakingCopy) {
     s32 numVertices;
     Vtx* baseVtx;
     s32 gfxCount;
@@ -4244,13 +4662,13 @@ void mdl_make_local_vertex_copy(s32 arg0, u16 treeIdx, s32 arg2) {
     ModelLocalVertexCopy* copy;
     s32 i;
 
-    model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIdx));
+    model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
     nodeDlist = model->modelNode->displayData->displayList;
     mdl_get_vertex_count(nodeDlist, &numVertices, &baseVtx, &gfxCount, NULL);
 
-    copy = (*gCurrentModelLocalVtxBuffers)[arg0] = heap_malloc(sizeof(*copy));
+    copy = (*gCurrentModelLocalVtxBuffers)[copyIndex] = heap_malloc(sizeof(*copy));
 
-    if (arg2) {
+    if (isMakingCopy) {
         for (i = 0; i < ARRAY_COUNT(copy->gfxCopy); i++) {
             copy->gfxCopy[i] = heap_malloc(gfxCount * sizeof(*copy->gfxCopy[i]));
             copy->vtxCopy[i] = heap_malloc(numVertices * sizeof(*copy->vtxCopy[i]));
@@ -4296,9 +4714,168 @@ Gfx* mdl_get_copied_gfx(s32 copyIndex) {
 void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, Matrix4f destMtx, void* destVertices);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_project_tex_coords);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C80C);
+s32 func_8011C80C(u16 arg0, s32 arg3, f32* arg4, f32* arg5) {
+    Camera* camera = &gCameras[gCurrentCameraID];
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(arg0));
+    f32 outX;
+    f32 outY;
+    f32 outZ;
+    f32 outS;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011CFBC);
+    s32 temp1;
+    s32 temp2;
+    u32 temp3, temp4;
+    u32 temp6;
+    s32 temp5;
+    Struct_8011CFBC* v1;
+
+    if (arg3 >= 16) {
+        return FALSE;
+    }
+    transform_point(camera->perspectiveMatrix, model->center.x, model->center.y, model->center.z, 1.0f, &outX, &outY, &outZ, &outS);
+    if (outS == 0.0f) {
+        *arg4 = 0.0f;
+        *arg5 = 0.0f;
+        return TRUE;
+    }
+    outS = 1.0f / outS;
+    outX *= outS;
+    outY *= -outS;
+    outZ *= outS;
+    outX = (outX * camera->viewportW + camera->viewportW) * 0.5;
+    outX += camera->viewportStartX;
+    outY = (outY * camera->viewportH + camera->viewportH) * 0.5;
+    outY += camera->viewportStartY;
+    outZ = (outZ + 1.0f) * 0.5;
+    *arg4 = (s32)outX;
+    *arg5 = (s32)outY;
+    if (arg3 < 0) {
+        if (outZ > 0.0f) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+    if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]));
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
+        gDPLoadSync(gMasterGfxPos++);
+        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, (s32) outX * 4, 0, ((s32) outX + 3) * 4, 0);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, (s32) outX * 4, 0, ((s32) outX + 3) * 4, 0);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, D_80153380);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+        gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+        gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+        gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+        gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+        gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
+        gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, arg3, 0, arg3 + 1, 1);
+        gSPTextureRectangle(gMasterGfxPos++, arg3 * 4, 0 * 4, 4 * 4, 1 * 4, G_TX_RENDERTILE, (s32) outX * 32, 0, 0x0400, 0x0400);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, camera->viewportStartX, camera->viewportStartY, camera->viewportStartX + camera->viewportW, camera->viewportStartY + camera->viewportH);
+
+        temp1 = D_80153380[arg3] >> 13;
+        temp2 = (D_80153380[arg3] & 0x1FFF) / 4;
+        v1 = &D_8014B7A8[temp1];
+        temp3 = temp2 << v1->unk_00;
+        temp4 = v1->unk_04;
+        temp6 = (temp3 + temp4) / 8;
+        temp5 = outZ * 32704.0f;
+        if (temp6 < temp5) {
+            return FALSE;
+        }
+    }
+    return outZ > 0.0f;
+}
+
+s32 func_8011CFBC(f32 x, f32 y, f32 z, s32 arg3, f32* arg4, f32* arg5) {
+    Camera* camera = &gCameras[gCurrentCameraID];
+    f32 outX;
+    f32 outY;
+    f32 outZ;
+    f32 outS;
+
+    s32 temp1;
+    s32 temp2;
+    u32 temp3, temp4;
+    u32 temp6;
+    s32 temp5;
+    Struct_8011CFBC* v1;
+
+    if (arg3 >= 16) {
+        return FALSE;
+    }
+    transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &outX, &outY, &outZ, &outS);
+    if (outS == 0.0f) {
+        *arg4 = 0.0f;
+        *arg5 = 0.0f;
+        return TRUE;
+    }
+    outS = 1.0f / outS;
+    outX *= outS;
+    outY *= -outS;
+    outZ *= outS;
+    outX = (outX * camera->viewportW + camera->viewportW) * 0.5;
+    outX += camera->viewportStartX;
+    outY = (outY * camera->viewportH + camera->viewportH) * 0.5;
+    outY += camera->viewportStartY;
+    outZ = (outZ + 1.0f) * 0.5;
+    *arg4 = outX;
+    *arg5 = outY;
+    if (arg3 < 0) {
+        return outZ > 0.0f;
+    }
+    if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]));
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
+        gDPLoadSync(gMasterGfxPos++);
+        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, (s32) outX * 4, 0, ((s32) outX + 3) * 4, 0);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, (s32) outX * 4, 0, ((s32) outX + 3) * 4, 0);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, D_80153380);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+        gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+        gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+        gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+        gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+        gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
+        gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, arg3, 0, arg3 + 1, 1);
+        gSPTextureRectangle(gMasterGfxPos++, arg3 * 4, 0 * 4, (arg3 + 1) * 4, 1 * 4, G_TX_RENDERTILE, (s32) outX * 32, 0, 0x0400, 0x0400);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, camera->viewportStartX, camera->viewportStartY, camera->viewportStartX + camera->viewportW, camera->viewportStartY + camera->viewportH);
+
+        temp1 = D_80153380[arg3] >> 13;
+        temp2 = (D_80153380[arg3] & 0x1FFF) / 4;
+        v1 = &D_8014B7A8[temp1];
+        temp3 = temp2 << v1->unk_00;
+        temp4 = v1->unk_04;
+        temp6 = (temp3 + temp4) / 8;
+        temp5 = outZ * 32704.0f;
+        if (temp6 < temp5) {
+            return FALSE;
+        }
+    }
+    return outZ > 0.0f;
+}
 
 void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));

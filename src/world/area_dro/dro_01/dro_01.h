@@ -20,19 +20,19 @@
 #include "sprite/npc/Toadette.h"
 
 enum {
-	NPC_Mouser_01               = 0,
-	NPC_Dryite_01               = 1,
-	NPC_Dryite_02               = 2,
-	NPC_Dryite_03               = 3,
-	NPC_Dryite_04               = 4,
-	NPC_ArtistToad              = 5,
-	NPC_Mouser_ShopOwner		= 6,
-	NPC_ThreeSisters_01         = 7,
-	NPC_ThreeSisters_02         = 8,
-	NPC_ThreeSisters_03         = 9,
-	NPC_ChuckQuizmo             = 10,
-	NPC_Dryite_05               = 11,
-	NPC_Dryite_06               = 12,
+    NPC_Mouser_01               = 0,
+    NPC_Dryite_01               = 1,
+    NPC_Dryite_02               = 2,
+    NPC_Dryite_03               = 3,
+    NPC_Dryite_04               = 4,
+    NPC_ArtistToad              = 5,
+    NPC_Mouser_ShopOwner        = 6,
+    NPC_ThreeSisters_01         = 7,
+    NPC_ThreeSisters_02         = 8,
+    NPC_ThreeSisters_03         = 9,
+    NPC_ChuckQuizmo             = 10,
+    NPC_Dryite_05               = 11,
+    NPC_Dryite_06               = 12,
 };
 
 #define NAMESPACE dro_01
@@ -52,9 +52,6 @@ extern ShopItemData N(Shop_Inventory)[];
 extern ShopSellPriceData N(Shop_PriceList)[];
 extern ShopItemLocation N(Shop_ItemPositions)[];
 extern ShopOwner N(Shop_Owner);
-
-extern EvtScript ItemShopInteract;
-
 
 extern EvtScript N(80244450);
 

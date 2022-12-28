@@ -2,25 +2,25 @@
 
 #include "world/common/todo/CheckPartnerFlags1000.inc.c"
 
-#ifdef NON_MATCHING
+extern s32* D_8025578C_8C57FC[4]; // EnemyTerritoryWander
+
+NOP_FIX // TODO remove when D_8025578C_8C57FC is migrated
 ApiStatus func_8024366C_8B36DC(Evt* script, s32 isInitialCall) {
-    static s32* D_8025578C_8C57FC[4]; // EnemyTerritoryWander
-    
     Bytecode* args = script->ptrReadPos;
-    s32 enemyIndex = evt_get_variable(script, *args++);
+    s32 npcID = evt_get_variable(script, *args++);
     s32 territoryIndex = evt_get_variable(script, *args++);
-    s32* src = D_8025578C_8C57FC[territoryIndex];
-    Enemy* enemy = get_enemy(enemyIndex);   
+    s32* var_s0 = D_8025578C_8C57FC[territoryIndex];
+    Enemy* enemy = get_enemy(npcID);
     s32 i;
-    
-    for (i = 0; i < 0xE; i++) {
-        enemy->territory.raw[i] = src[i];
+
+    for (i = 0; i < (s32) (sizeof(enemy->territory->wander) / sizeof(i)); i++) {
+        s32* wander = (s32*) &enemy->territory->wander;
+
+        wander[i] = var_s0[i];
     }
-    
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B36B0", func_8024366C_8B36DC);
-#endif
+NOP_UNFIX // TODO remove when D_8025578C_8C57FC is migrated
+
 
 #include "world/common/todo/UnkFunc42.inc.c"

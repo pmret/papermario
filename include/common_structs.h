@@ -220,6 +220,8 @@ typedef struct Npc {
                 NpcChompBlur*  chomp;
                 NpcQuizmoBlur* quizmo;
                 Unk2A4Blur*    unk2A4;
+                struct Npc*    keepAwayNpc;
+                s32*           keepAwayStarted;
                 } blur;
     /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ AnimID currentAnim;
@@ -333,7 +335,7 @@ typedef struct PlayerData {
     /* 0x298 */ u16 hitsTaken;
     /* 0x29A */ u16 hitsBlocked;
     /* 0x29C */ u16 playerFirstStrikes;
-    /* 0x29E */ s16 enemyFirstStrikes;
+    /* 0x29E */ u16 enemyFirstStrikes;
     /* 0x2A0 */ u16 powerBounces;
     /* 0x2A2 */ u16 battlesCount;
     /* 0x2A4 */ u16 battlesWon;
@@ -346,13 +348,13 @@ typedef struct PlayerData {
     /* 0x2B8 */ s16 idleFrameCounter; /* frames with no inputs, overflows ever ~36 minutes of idling */
     /* 0x2BA */ char unk_2BA[2];
     /* 0x2BC */ u32 frameCounter; /* increases by 2 per frame */
-    /* 0x2C0 */ s16 quizzesAnswered;
-    /* 0x2C2 */ s16 quizzesCorrect;
+    /* 0x2C0 */ u16 quizzesAnswered;
+    /* 0x2C2 */ u16 quizzesCorrect;
     /* 0x2C4 */ s32 partnerUnlockedTime[12];
     /* 0x2F4 */ s32 partnerUsedTime[12];
     /* 0x324 */ s32 tradeEventStartTime;
     /* 0x328 */ s32 droTreeHintTime;
-    /* 0x32C */ s16 starPiecesCollected;
+    /* 0x32C */ u16 starPiecesCollected;
     /* 0x32E */ u16 jumpGamePlays;
     /* 0x330 */ u32 jumpGameTotal; /* all-time winnings, max = 99999 */
     /* 0x334 */ u16 jumpGameRecord;
@@ -416,7 +418,7 @@ typedef union X32 {
 } X32;
 
 typedef struct Evt {
-    /* 0x000 */ u8 state;
+    /* 0x000 */ u8 stateFlags;
     /* 0x001 */ u8 currentArgc;
     /* 0x002 */ u8 currentOpcode;
     /* 0x003 */ u8 priority;
@@ -691,9 +693,9 @@ typedef struct UiStatus {
     /* 0x54 */ s8 coinsBlinking; /* bool */
     /* 0x55 */ s8 coinsBlinkCounter;
     /* 0x56 */ s8 coinsBlinkTimer; /* until stop */
-    /* 0x57 */ u8 unk_57;
-    /* 0x58 */ u8 unk_58;
-    /* 0x59 */ u8 unk_59;
+    /* 0x57 */ s8 unk_57;
+    /* 0x58 */ s8 unk_58;
+    /* 0x59 */ s8 unk_59;
     /* 0x5A */ s8 spBarsToBlink; /* how many sp bars to blink */
     /* 0x5B */ char unk_5B;
     /* 0x5C */ s32 iconIndex10;
@@ -975,17 +977,22 @@ typedef struct BattleStatus {
 // alternative name: TileDescriptor
 typedef struct TextureHeader {
     /* 0x00 */ s8 name[32];
-    /* 0x20 */ s16 auxW;
-    /* 0x22 */ s16 mainW;
-    /* 0x24 */ s16 auxH;
-    /* 0x26 */ s16 mainH;
+    /* 0x20 */ u16 auxW;
+    /* 0x22 */ u16 mainW;
+    /* 0x24 */ u16 auxH;
+    /* 0x26 */ u16 mainH;
     /* 0x28 */ char unk_28;
-    /* 0x29 */ u8 extraTiles;
-    /* 0x2A */ u8 colorCombine;
-    /* 0x2B */ u8 fmt;
-    /* 0x2C */ u8 bitDepth;
-    /* 0x2D */ u8 wrapH;
-    /* 0x2E */ u8 wrapV;
+    /* 0x29 */ u8 extraTiles; // 0 - none, 1 - mipmap, 2 - ?, 3 - use aux tile
+    /* 0x2A */ u8 colorCombineType : 6;
+    /* 0x2A */ u8 colorCombineSubType : 2;
+    /* 0x2B */ u8 auxFmt : 4;
+    /* 0x2B */ u8 mainFmt : 4;
+    /* 0x2C */ u8 auxBitDepth : 4;
+    /* 0x2C */ u8 mainBitDepth : 4;
+    /* 0x2D */ u8 auxWrapW : 4;
+    /* 0x2D */ u8 mainWrapW : 4;
+    /* 0x2E */ u8 auxWrapH : 4;
+    /* 0x2E */ u8 mainWrapH : 4;
     /* 0x2F */ u8 filtering;
 } TextureHeader; // size = 0x30
 
@@ -1099,7 +1106,7 @@ typedef struct ModelAnimator {
     /* 0x2CC */ s32 treeIndexPos;
     /* 0x2D0 */ s32 savedTreePos;
     /* 0x2D4 */ void (*fpRenderCallback)(void*);
-    /* 0x2D8 */ s32 renderCallbackArg;
+    /* 0x2D8 */ void* renderCallbackArg;
     /* 0x2DC */ char unk_2DC[4];
 } ModelAnimator; // size = 0x2E0
 
@@ -1509,7 +1516,7 @@ typedef struct SelectableTarget {
 } SelectableTarget; // size = 0x14
 
 typedef struct ActorPartMovement {
-    /* 0x00 */ Vec3f unk_00;
+    /* 0x00 */ Vec3f absolutePosition;
     /* 0x0C */ Vec3f goalPos;
     /* 0x18 */ Vec3f unk_18;
     /* 0x24 */ f32 jumpScale;
@@ -1738,7 +1745,7 @@ typedef struct AnimatedModel {
     /* 0x10 */ Vec3f rot;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Mtx mtx;
-    /* 0x68 */ u32 currentAnimData;
+    /* 0x68 */ s16* currentAnimData;
     /* 0x6C */ char unk_6C[4];
 } AnimatedModel; // size = 0x70
 
@@ -2258,28 +2265,6 @@ typedef struct UnkEntityStruct {
     /* 0x38 */ f32 unk_38;
 } UnkEntityStruct; // size = 0x3C
 
-typedef struct EntityModel {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s8 renderMode;
-    /* 0x05 */ u8 unk_05;
-    /* 0x06 */ u8 unk_06;
-    /* 0x07 */ u8 unk_07;
-    /* 0x08 */ f32 nextFrameTime; ///< Set to 1.0 after each update
-    /* 0x0C */ f32 timeScale; ///< Default is 1.0
-    /* 0x10 */ s32* cmdListReadPos;
-    /* 0x14 */ union {
-                    Gfx* displayList;
-                    SpriteRasterInfo* imageData;
-               } gfx;
-    /* 0x18 */ Mtx transform;
-    /* 0x58 */ s32* cmdListSavedPos;
-    /* 0x5C */ Vec3s* vertexArray;
-    /* 0x60 */ void (*fpSetupGfxCallback)(void*);
-    /* 0x64 */ void* setupGfxCallbackArg0;
-} EntityModel; // size = 0x68
-
-typedef EntityModel* EntityModelList[MAX_ENTITY_MODELS];
-
 typedef struct VirtualEntity {
     /* 0x00 */ s32 entityModelIndex;
     /* 0x04 */ Vec3f pos;
@@ -2523,5 +2508,12 @@ typedef struct LavaPiranhaVine {
     /* 0x098 */ Vec3f points[27];
     /* 0x1DC */ s32 numPoints;
 } LavaPiranhaVine;
+
+// TODO look into making options here better. it's really an array of 5 substructs, each having and [8][2] array
+typedef struct PlayerCelebrationAnimOptions {
+    /* 0x00 */ s16 randomChance;
+    /* 0x02 */ s16 hpBasedChance;
+    /* 0x04 */ s32 options[0];
+} PlayerCelebrationAnimOptions; // size = 0x8
 
 #endif

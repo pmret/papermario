@@ -36,7 +36,7 @@ EvtScript N(8024AC8C) = {
 
 EvtScript N(EVS_NpcInteract_ToadHouseKeeper) = {
     EVT_CALL(N(ToadHouse_InitScreenOverlay), 0, 0, 0)
-    EVT_EXEC_WAIT(N(EVS_SetToadHouseDialogue))
+    EVT_EXEC_WAIT(N(EVS_ToadHouse_SetDialogue))
     EVT_IF_EQ(LVar0, 0)
         EVT_RETURN
     EVT_END_IF

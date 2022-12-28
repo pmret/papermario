@@ -102,7 +102,7 @@ EvtScript N(EVS_NpcInteract_Moustafa) = {
                 EVT_CALL(EndSpeech, NPC_DisguisedMoustafa, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0)
             EVT_END_IF
             EVT_LABEL(1)
-            EVT_CHOOSE_ANY_CONSUMABLE()
+            EVT_CHOOSE_ANY_CONSUMABLE(2)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_DisguisedMoustafa, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00B8)

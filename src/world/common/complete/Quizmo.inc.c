@@ -38,21 +38,21 @@
 extern s16 MessagePlural;
 extern s16 MessageSingular;
 
-static s32 N(Quizmo_Worker);
-static s32 N(pad_D_8024EFA4);
-static s32 N(Quizmo_ScriptArray)[4];
-static s32 N(Quizmo_AnswerResult);
+BSS s32 N(Quizmo_Worker);
+BSS s32 N(pad_D_8024EFA4);
+BSS s32 N(Quizmo_ScriptArray)[4];
+BSS s32 N(Quizmo_AnswerResult);
 MAP_STATIC_PAD(1,quizmo_unk)
-static EffectInstance* N(Quizmo_StageEffect);
-static EffectInstance* N(Quizmo_AudienceEffect);
-static EffectInstance* N(Quizmo_VannaTEffect);
+BSS EffectInstance* N(Quizmo_StageEffect);
+BSS EffectInstance* N(Quizmo_AudienceEffect);
+BSS EffectInstance* N(Quizmo_VannaTEffect);
 
 #include "world/common/complete/GiveReward.inc.c"
 
 // values for Quizmo npc init vars
 enum {
-    QUIZ_AREA_MAC       = 0,
-    QUIZ_AREA_KMR       = 1,
+    QUIZ_AREA_KMR       = 0,
+    QUIZ_AREA_MAC       = 1,
     QUIZ_AREA_NOK       = 2,
     QUIZ_AREA_DRO       = 3,
     QUIZ_AREA_JAN       = 4,
@@ -61,6 +61,13 @@ enum {
 };
 
 enum {
+    // area_mac
+    QUIZ_MAP_MAC_00     = 0,
+    QUIZ_MAP_MAC_01     = 1,
+    QUIZ_MAP_MAC_04     = 4,
+    QUIZ_MAP_MAC_05     = 5,
+    QUIZ_COUNT_MAC      = 6,
+    // area_dro
     QUIZ_MAP_DRO_01     = 0,
     QUIZ_MAP_DRO_02     = 1,
     QUIZ_COUNT_DRO      = 2,
@@ -1134,10 +1141,10 @@ EvtScript N(EVS_Quizmo_NPC_Interact) = {
     EVT_USE_ARRAY(EVT_PTR(N(Quizmo_ScriptArray)))
     EVT_SET(GF_Quizmo_ChangedLocation, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_400000, 1)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_MOVEMENT_LOCKED, 1)
     EVT_EXEC_WAIT(N(EVS_Quizmo_QuizMain))
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_400000, 0)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_MOVEMENT_LOCKED, 0)
     EVT_RETURN
     EVT_END
 };

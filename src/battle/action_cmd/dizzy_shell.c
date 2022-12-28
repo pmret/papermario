@@ -6,6 +6,8 @@
 
 s32 D_802A9800_426970[8] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 
+extern s32 actionCmdTableDizzyShell[];
+
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
@@ -118,7 +120,7 @@ void N(update)(void) {
                 }
             }
 
-            if (battleStatus->currentButtonsPressed & A_BUTTON) {
+            if (battleStatus->currentButtonsPressed & BUTTON_A) {
                 s32 a = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];
                 s32 b = actionCommandStatus->targetWeakness * 850;
                 s32 temp_v1_2 = (a * b) / 10000;

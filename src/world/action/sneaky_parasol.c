@@ -37,6 +37,8 @@ enum {
 
 BSS TransformationData ParasolTransformation;
 
+TransformationData* D_802B6D80_E2B430 = &ParasolTransformation;
+
 void parasol_update_spin(void);
 
 Npc* parasol_get_npc(void) {
@@ -96,7 +98,7 @@ void action_update_parasol(void) {
         }
         *tempUnk_1C = phi_f4;
 
-        if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_INVISIBLE)) {
             playerStatus->currentStateTime = 20;
             playerStatus->actionSubstate = SUBSTATE_DISGUISE_INIT;
             transformation->disguiseTime = 15;
@@ -108,7 +110,7 @@ void action_update_parasol(void) {
             transformation->revertTime = 12;
             disguiseNpc = get_npc_by_index(PeachDisguiseNpcIndex);
             disguiseNpc->flags |= NPC_FLAG_40000;
-            playerStatus->flags |= PS_FLAGS_100000;
+            playerStatus->flags |= PS_FLAGS_ROTATION_LOCKED;
             sfx_play_sound_at_player(SOUND_FD, 0);
         }
     }
@@ -141,7 +143,7 @@ void action_update_parasol(void) {
         case SUBSTATE_PUT_AWAY:
             if (playerStatus->animNotifyValue != 0) {
                 playerStatus->currentStateTime = 12;
-                playerStatus->flags |= PS_FLAGS_100000;
+                playerStatus->flags |= PS_FLAGS_ROTATION_LOCKED;
                 playerStatus->actionSubstate++; // SUBSTATE_DISGUISE_BEGIN
                 sfx_play_sound_at_player(SOUND_FD, 0);
             }
@@ -185,7 +187,7 @@ void action_update_parasol(void) {
             break;
         case SUBSTATE_DISGUISE_MAKE_NPC:
             gameStatus = gGameStatusPtr;
-            playerStatus->animFlags |= PA_FLAGS_IN_DISGUISE;
+            playerStatus->animFlags |= PA_FLAGS_INVISIBLE;
             gameStatus->peachFlags |= PEACH_STATUS_FLAG_DISGUISED;
             playerStatus->actionSubstate++; // SUBSTATE_DISGUISE_SPIN_DOWN
         case SUBSTATE_DISGUISE_SPIN_DOWN:
@@ -228,7 +230,7 @@ void action_update_parasol(void) {
                 set_time_freeze_mode(TIME_FREEZE_NORMAL);
                 disguiseNpc = get_npc_by_index(PeachDisguiseNpcIndex);
                 disguiseNpc->flags &= ~NPC_FLAG_40000;
-                playerStatus->flags &= ~PS_FLAGS_100000;
+                playerStatus->flags &= ~PS_FLAGS_ROTATION_LOCKED;
                 set_action_state(ACTION_STATE_IDLE);
                 enable_player_static_collisions();
             }
@@ -261,7 +263,7 @@ void action_update_parasol(void) {
                     playerStatus->currentStateTime = 2;
                     playerStatus->actionSubstate++; // SUBSTATE_SPIN_DOWN
                     gameStatus2 = gGameStatusPtr;
-                    playerStatus->animFlags &= ~PA_FLAGS_IN_DISGUISE;
+                    playerStatus->animFlags &= ~PA_FLAGS_INVISIBLE;
                     gameStatus2->peachFlags &= ~PEACH_STATUS_FLAG_DISGUISED;
                     playerStatus->peachDisguise = 0;
                     free_npc_by_index(PeachDisguiseNpcIndex);
@@ -308,7 +310,7 @@ void action_update_parasol(void) {
         case SUBSTATE_REVERT_DONE:
             if (--playerStatus->currentStateTime == 0) {
                 set_time_freeze_mode(TIME_FREEZE_NORMAL);
-                playerStatus->flags &= ~PS_FLAGS_100000;
+                playerStatus->flags &= ~PS_FLAGS_ROTATION_LOCKED;
                 set_action_state(ACTION_STATE_IDLE);
                 enable_player_static_collisions();
             }

@@ -7,9 +7,8 @@ extern Gfx D_09000DE0_381180[];
 extern Gfx D_09000EB8_381258[];
 extern Gfx D_09000ED8_381278[];
 extern Gfx D_09000EF8_381298[];
-extern s8 D_E007EC2F[];
 
-s32 D_E007EC30[] = { 0x323C4650, 0x5A646964 };
+s8 D_E007EC30[] = { 50, 60, 70, 80, 90, 100, 105, 100 };
 
 void fire_flower_appendGfx(void* effect);
 void fire_flower_init(EffectInstance* effect);
@@ -105,11 +104,11 @@ void fire_flower_update(EffectInstance* effect) {
             part->unk_04++;
             break;
         case 1:
-            if (unk_40X >= 8) {
+            if (unk_40X >= ARRAY_COUNT(D_E007EC30)) {
                 part->unk_40.x = 0;
                 part->unk_04++;
             } else {
-                part->unk_30 = D_E007EC2F[unk_40X] * 0.01;
+                part->unk_30 = D_E007EC30[unk_40X - 1] * 0.01;
                 part->unk_34 = 0;
                 part->unk_38 = 0;
             }

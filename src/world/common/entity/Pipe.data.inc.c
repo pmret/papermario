@@ -154,11 +154,11 @@ EvtScript N(EVS_Pipe_ExitVertical_Impl) = {
     EVT_SET(LVar0, LVarA)
     EVT_CALL(N(Pipe_GetEntryPos))
     EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_200000, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, TRUE)
     EVT_CALL(N(Pipe_GetCameraYaw))
     EVT_CALL(InterpPlayerYaw, LVar0, 0)
     EVT_WAIT(2)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_200000, FALSE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, FALSE)
     EVT_CALL(PlaySound, SOUND_ENTER_PIPE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_THREAD
@@ -250,7 +250,6 @@ EvtScript N(EVS_Pipe_ExitHorizontal) = {
     EVT_END \
 }
 
-
 #define EVT_EXIT_PIPE_VERTICAL(entry, collider, script) \
 { \
     EVT_SET_GROUP(EVT_GROUP_1B) \
@@ -261,3 +260,12 @@ EvtScript N(EVS_Pipe_ExitHorizontal) = {
     EVT_RETURN \
     EVT_END \
 }
+
+#define EVT_ENTER_PIPE_HORIZONTAL(collider, bindExitsScript) \
+    EVT_SET(LVarA, EVT_PTR(bindExitsScript)) \
+    EVT_SET(LVarB, collider) \
+    EVT_EXEC(N(EVS_Pipe_EnterHorizontal))
+
+#define EVT_ENTER_PIPE_VERTICAL(bindExitsScript) \
+    EVT_SET(LVarA, EVT_PTR(bindExitsScript)) \
+    EVT_EXEC(N(EVS_Pipe_EnterVertical))

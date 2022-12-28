@@ -207,7 +207,7 @@ EvtScript N(80243A0C) = {
         EVT_CASE_OR_EQ(4)
         EVT_CASE_OR_EQ(6)
             EVT_CALL(GetSelfAnimationFromTable, 7, LVar0)
-            EVT_EXEC_WAIT(0x800936DC)
+            EVT_EXEC_WAIT(EVS_NpcHitRecoil)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN
@@ -241,11 +241,11 @@ StaticNpc N(npcGroup_80243B28) = {
     .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .yaw = 90,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.territory = { .temp = { 70, -220, 186, 15, 40, -32767, 1, 80, -220, 170, 80, 150, 1 }},
+    .territory = { .temp = { 70, -220, 186, 15, 40, -32767, 1, 80, -220, 170, 80, 150, 1 }},
     .animations = {
         ANIM_Sentinel_Anim01,
         ANIM_Sentinel_Anim02,

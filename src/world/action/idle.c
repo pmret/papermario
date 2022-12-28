@@ -50,7 +50,7 @@ void action_update_idle(void) {
     if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
 
         playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED
-            | PS_FLAGS_80000 | PS_FLAGS_AIRBORNE);
+            | PS_FLAGS_ARMS_RAISED | PS_FLAGS_AIRBORNE);
         wasMoving = TRUE;
         playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
         playerStatus->currentStateTime = 0;
@@ -61,7 +61,7 @@ void action_update_idle(void) {
 
         if (playerStatus->animFlags & PA_FLAGS_8BIT_MARIO) {
             anim = ANIM_Mario_90002;
-        } else if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
+        } else if (!(playerStatus->animFlags & PA_FLAGS_USING_WATT)) {
             anim = ANIM_Mario_10002;
         } else if (playerStatus->prevActionState == ACTION_STATE_IDLE) {
             anim = ANIM_Mario_60005;
@@ -110,7 +110,7 @@ void action_update_idle_peach(void) {
         playerStatus->currentSpeed = 0.0f;
         playerStatus->flags &= ~PS_FLAGS_AIRBORNE;
 
-        if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
+        if (!(playerStatus->animFlags & PA_FLAGS_INVISIBLE)) {
             if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
                 suggest_player_anim_clearUnkFlag(IdlePeachAnims[gGameStatusPtr->peachCookingIngredient]);
             } else {
@@ -121,10 +121,10 @@ void action_update_idle_peach(void) {
         }
     }
 
-    if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
+    if (!(playerStatus->animFlags & PA_FLAGS_INVISIBLE)) {
         switch (playerStatus->actionSubstate) {
             case SUBSTATE_IDLE_DEFAULT:
-                if (!(playerStatus->flags & (PS_FLAGS_1000 | PS_FLAGS_INPUT_DISABLED))
+                if (!(playerStatus->flags & (PS_FLAGS_NO_STATIC_COLLISION | PS_FLAGS_INPUT_DISABLED))
                     && (playerStatus->peachItemHeld == 0)) {
                     if (playerStatus->currentStateTime > 1800) {
                         // begin first yawm
@@ -153,7 +153,7 @@ void action_update_idle_peach(void) {
                 break;
             case SUBSTATE_IDLE_SLEEP:
                 // peach is asleep
-                if (playerStatus->flags & (PS_FLAGS_1000 | PS_FLAGS_INPUT_DISABLED)) {
+                if (playerStatus->flags & (PS_FLAGS_NO_STATIC_COLLISION | PS_FLAGS_INPUT_DISABLED)) {
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_A0001);
                     playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
                 } else if (playerStatus->animNotifyValue != 0) {

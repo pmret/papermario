@@ -5,8 +5,7 @@ extern s32 D_80243CC0_D3E290;
 extern s32 D_80243CC4_D3E294;
 extern s32 D_80243CC8_D3E298;
 
-// needs data migration + some issues with the return values
-#ifdef NON_EQUIVALENT
+NOP_FIX
 ApiStatus func_80240360_D3A930(Evt* script, s32 isInitialCall) {
     u8 r, g, b, a;
     u8 alpha;
@@ -16,11 +15,7 @@ ApiStatus func_80240360_D3A930(Evt* script, s32 isInitialCall) {
         func_8011B950(script->varTable[1], -1, 1, 1);
         script->functionTemp[0] = 0;
         get_background_color_blend(&r, &g, &b, &a);
-        if ((script->varTable[0] != 0) || (a != 255)) {
-            if (script->varTable[0] == 1 && a == 0) {
-                return ApiStatus_DONE2;
-            }
-        } else {
+        if ((script->varTable[0] == 0 && a == 255) || (script->varTable[0] == 1 && a == 0)) {
             return ApiStatus_DONE2;
         }
     }
@@ -52,9 +47,7 @@ ApiStatus func_80240360_D3A930(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-#else
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3A930", func_80240360_D3A930);
-#endif
+NOP_UNFIX
 
 ApiStatus func_8024052C_D3AAFC(Evt* script, s32 isInitialCall) {
     gEntityHideMode = 1;
@@ -109,7 +102,7 @@ ApiStatus func_8024059C_D3AB6C(Evt* script, s32 isInitialCall) {
 ApiStatus func_8024072C_D3ACFC(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_1000)) {
+    if (playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_NO_STATIC_COLLISION)) {
         script->varTable[0] = 1;
     } else {
         script->varTable[0] = 0;

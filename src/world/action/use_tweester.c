@@ -2,7 +2,9 @@
 #include "../partners.h"
 #include "npc.h"
 
-extern struct TweesterPhysics* PlayerTweesterPhysics;
+BSS TweesterPhysics D_802B6370;
+
+TweesterPhysics* PlayerTweesterPhysics = &D_802B6370;
 
 enum {
     SUBSTATE_LAUNCH     = 0,
@@ -19,7 +21,7 @@ void action_update_use_tweester(void) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         disable_player_static_collisions();
         disable_player_input();
-        playerStatus->flags |= (PS_FLAGS_100000 | PS_FLAGS_FLYING);
+        playerStatus->flags |= (PS_FLAGS_ROTATION_LOCKED | PS_FLAGS_FLYING);
         suggest_player_anim_clearUnkFlag(ANIM_Mario_8001F);
         playerStatus->actionSubstate = SUBSTATE_LAUNCH;
         mem_clear(PlayerTweesterPhysics, sizeof(*PlayerTweesterPhysics));
@@ -69,7 +71,7 @@ void action_update_use_tweester(void) {
             playerStatus->blinkTimer = 50;
             enable_player_static_collisions();
             enable_player_input();
-            playerStatus->flags &= ~(PS_FLAGS_100000 | PS_FLAGS_FLYING);
+            playerStatus->flags &= ~(PS_FLAGS_ROTATION_LOCKED | PS_FLAGS_FLYING);
             set_action_state(ACTION_STATE_IDLE);
             break;
     }

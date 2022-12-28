@@ -115,11 +115,11 @@ ApiStatus FadeInMusic(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus func_802D5EE0(Evt* script, s32 isInitialCall) {
+ApiStatus EnableMusicProximityMix(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 playerIndex = evt_get_variable(script, *args++);
 
-    gMusicSettings[playerIndex].flags |= MUSIC_SETTINGS_FLAGS_2;
+    gMusicSettings[playerIndex].flags |= MUSIC_SETTINGS_FLAGS_ENABLE_PROXIMITY_MIX;
     return ApiStatus_DONE2;
 }
 

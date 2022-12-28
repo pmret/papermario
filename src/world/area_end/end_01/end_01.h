@@ -113,7 +113,7 @@ enum {
 
 enum {
     PARADE_START                = -3135,
-    PARADE_PHASE_SKATERS		= -3000,
+    PARADE_PHASE_SKATERS        = -3000,
     PARADE_PHASE_MAYOR          = -2950,
     PARADE_PHASE_OPERA          = -2945,
     PARADE_PHASE_WIZARDS        = -2450,

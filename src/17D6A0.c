@@ -23,47 +23,50 @@ extern ActorBlueprint battle_partner_lakilester;
 extern ActorBlueprint battle_partner_bow;
 extern ActorBlueprint battle_partner_twink;
 
-s16 D_80280FC0[] = {
-    10, 90, 0, 50,
-    3, 11, 0, 50,
-    1, 45, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 50,
-    1, 49, 0, 50,
-    1, 49, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 50,
-    1, 50, 0, 50,
-    1, 50, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 50,
-    3, 10, 0, 50,
-    3, 10, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 80,
-    3, 10, 0, 20,
-    3, 11, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
+PlayerCelebrationAnimOptions D_80280FC0 = {
+    10, 90,
+    {
+        50, 196619,
+        50, ANIM_Mario_1002D,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        50, ANIM_Mario_DustOff,
+        50, ANIM_Mario_DustOff,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        50, ANIM_Mario_ThumbsUp,
+        50, ANIM_Mario_ThumbsUp,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        50, ANIM_Mario_3000A,
+        50, ANIM_Mario_3000A,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        80, ANIM_Mario_3000A,
+        20, ANIM_Mario_3000B,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+        0, 0,
+    }
 };
 
 s32 bActorNames[ACTOR_TYPE_COUNT] = {
@@ -2714,7 +2717,7 @@ void func_8024EFE0(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) {
         for (i = 0; i < numMessages; i++, message++) {
             sp10 = &D_80283744[numMessages];
             message->unk_00 = 1;
-            message->unk_04 = load_entity_model(**sp10);
+            message->unk_04 = load_entity_model(*sp10);
             set_entity_model_flags(message->unk_04, ENTITY_MODEL_FLAGS_HIDDEN);
             bind_entity_model_setupGfx(message->unk_04, message, func_8024F768);
             message->pos.x = x;

@@ -1,22 +1,5 @@
 #include "mac_06.h"
 
-extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_FlyingGull);
-extern EvtScript N(EVS_WhaleMain);
-
-extern NpcGroupList N(DefaultNPCs);
-
-EntryList N(Entrances) = {
-    [mac_06_ENTRY_0]    {    0.0,    0.0,  100.0,   90.0 },
-};
-
-MapSettings N(settings) = {
-    .main = &N(EVS_Main),
-    .entryList = &N(Entrances),
-    .entryCount = ENTRY_COUNT(N(Entrances)),
-    .background = &gBackgroundImage,
-};
-
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
 

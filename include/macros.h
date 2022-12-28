@@ -16,11 +16,20 @@
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 #define ALIGN8(val) (((val) + 0x7) & ~0x7)
 
-#define NAMESUFFIX
-#define A(sym) NS(AREA, sym, NAMESUFFIX)
-#define N(sym) NS(NAMESPACE, sym, NAMESUFFIX)
+#define NAME_SUFFIX
+#define NAME_PREFIX
+#define A(sym) NS(AREA, NAME_PREFIX, sym, NAME_SUFFIX)
+#define N(sym) NS(NAMESPACE, NAME_PREFIX, sym, NAME_SUFFIX)
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
+
+#if !defined(PERMUTER)
+#define NOP_FIX __asm__(".set nogpopt");
+#define NOP_UNFIX __asm__(".set gpopt");
+#else
+#define NOP_FIX
+#define NOP_UNFIX
+#endif
 
 #define PTR_LIST_END ((void*) -1)
 
@@ -75,6 +84,8 @@
 #define MAX_WORKERS 16
 #define MAX_TEX_PANNERS 16
 #define MAX_ITEM_ENTITIES 256
+
+#define MAX_STAR_PIECES 222
 
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
@@ -132,8 +143,8 @@
 /// X.10 fixed-point literal
 #define X10(f) (s32)(f * 1024.0f)
 
-#define _NS(x, y, z) x ## _ ## y ## z
-#define NS(x, y, z) _NS(x, y, z)
+#define _NS(w, x, y, z) w ## _ ## x ## y ## z
+#define NS(w, x, y, z) _NS(w, x, y, z)
 
 #define ASCII_TO_U32(a, b, c, d) ((u32)((a << 24) | (b << 16) | (c << 8) | (d << 0)))
 
@@ -169,5 +180,7 @@
 // projectile hitbox
 #define VAR_PROJECTILE_HITBOX_STATE varTable[0]
 #define AI_PROJECTILE_AMMO_COUNT varTable[3]
+
+#define INTEGER_LOG2(x) ((x) <= 2 ? 1 : (x) <= 4 ? 2 : (x) <= 8 ? 3 : (x) <= 16 ? 4 : (x) <= 32 ? 5 : (x) <= 64 ? 6 : (x) <= 128 ? 7 : (x) <= 256 ? 8 : (x) <= 512 ? 9 : 10)
 
 #endif

@@ -1,6 +1,10 @@
 #include "common.h"
 #include "npc.h"
 
+#ifdef _DEAD_H_
+void func_8004D8E0(DeadEnemy*);
+#endif
+
 s32 N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     #ifdef _DEAD_H_
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
@@ -10,8 +14,13 @@ s32 N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;
+    #ifdef _DEAD_H_
+    MobileAISettings* npcAISettings = (MobileAISettings*)evt_get_variable(script, *args++);
+    EnemyDetectVolume* territoryPtr = &territory;
+    #else
     EnemyDetectVolume* territoryPtr = &territory;
     MobileAISettings* npcAISettings = (MobileAISettings*)evt_get_variable(script, *args++);
+    #endif
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -25,13 +34,14 @@ s32 N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     #ifdef _DEAD_H_
     // Dead Func that doesn't seem to have an alive counterpart, probably because of the
     // difference in the Enemy and DeadEnemy struct.
+
     func_8004D8E0(enemy);
     if (enemy->flags & ENEMY_FLAGS_100000) {
         enemy->unk_114 = 10.0f;
         enemy->unk_118 = 0.7f;
     }
     #endif
-    
+
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->AI_TEMP_STATE = AI_STATE_PIRANHA_PLANT_00;
         npc->duration = 0;

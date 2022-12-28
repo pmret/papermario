@@ -11,7 +11,7 @@ s32 action_update_ride(void) {
 
     if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(
-            PS_FLAGS_ACTION_STATE_CHANGED | PS_FLAGS_80000 | PS_FLAGS_AIRBORNE
+            PS_FLAGS_ACTION_STATE_CHANGED | PS_FLAGS_ARMS_RAISED | PS_FLAGS_AIRBORNE
         );
         playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
@@ -21,7 +21,7 @@ s32 action_update_ride(void) {
         playerStatus->pitch = 0.0f;
     }
 
-    if (playerStatus->animFlags & PA_FLAGS_400000) {
+    if (playerStatus->animFlags & PA_FLAGS_RIDING_PARTNER) {
         if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
             return func_802BD100_317020(oldFlags);
         }
@@ -55,7 +55,7 @@ void action_update_state_23(void) {
 
     if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED
-            | PS_FLAGS_80000 | PS_FLAGS_AIRBORNE);
+            | PS_FLAGS_ARMS_RAISED | PS_FLAGS_AIRBORNE);
         playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
@@ -126,7 +126,7 @@ void action_update_launch(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED | PS_FLAGS_80000 | PS_FLAGS_AIRBORNE);
+        playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED | PS_FLAGS_ARMS_RAISED | PS_FLAGS_AIRBORNE);
         playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
@@ -172,7 +172,7 @@ void action_update_raise_arms(void) {
 
     if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->flags |= PS_FLAGS_80000;
+        playerStatus->flags |= PS_FLAGS_ARMS_RAISED;
         playerStatus->currentStateTime = 0;
         playerStatus->actionSubstate = 0;
         playerStatus->currentSpeed = 0.0f;
@@ -182,7 +182,7 @@ void action_update_raise_arms(void) {
 
     if (!(playerStatus->animFlags & PA_FLAGS_RAISED_ARMS)) {
         set_action_state(ACTION_STATE_IDLE);
-        playerStatus->flags &= ~PS_FLAGS_80000;
+        playerStatus->flags &= ~PS_FLAGS_ARMS_RAISED;
     }
 }
 
@@ -208,7 +208,7 @@ void action_update_pushing_block(void) {
 
     check_input_jump();
 
-    if (playerStatus->animFlags & PA_FLAGS_800000) {
+    if (playerStatus->animFlags & PA_FLAGS_PUSHED_ALBINO_DINO) {
         if (playerStatus->currentStateTime != 0) {
             playerStatus->currentStateTime--;
             if (playerStatus->currentStateTime == 0) {
@@ -229,7 +229,7 @@ void action_update_talk(void) {
         if (!(playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS)) {
             suggest_player_anim_setUnkFlag(ANIM_Mario_80007);
         } else if (playerStatus->peachItemHeld == 0) {
-            if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
+            if (!(playerStatus->animFlags & PA_FLAGS_INVISIBLE)) {
                 suggest_player_anim_setUnkFlag(ANIM_Peach_C0000);
             } else {
                 peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].talk);
@@ -242,7 +242,7 @@ void action_update_talk(void) {
         if (playerStatus->currentStateTime != 0) {
             playerStatus->currentStateTime--;
         } else if (playerStatus->peachItemHeld == 0) {
-            if (!(playerStatus->animFlags & PA_FLAGS_IN_DISGUISE)) {
+            if (!(playerStatus->animFlags & PA_FLAGS_INVISIBLE)) {
                 suggest_player_anim_setUnkFlag(ANIM_Peach_A0001);
             } else {
                 peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].idle);

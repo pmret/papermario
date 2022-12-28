@@ -46,7 +46,7 @@ EvtScript N(EVS_GotHammer) = {
     EVT_ADD(LVar6, 16)
     EVT_PLAY_EFFECT(EFFECT_GOT_ITEM_OUTLINE, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.0), LVar8)
     EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 9, LVar5, LVar6, LVar7, EVT_FLOAT(1.0), 100)
-    EVT_EXEC(N(EVS_PushPopMusic))
+    EVT_EXEC(N(EVS_PlayUpgradeSong))
     EVT_THREAD
         EVT_WAIT(4)
         EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)

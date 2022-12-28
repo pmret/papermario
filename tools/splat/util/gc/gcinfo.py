@@ -1,17 +1,12 @@
 #! /usr/bin/env python3
 
-from dataclasses import dataclass
 
-import sys
-import os
 import argparse
-import itertools
-import struct
-
-from pathlib import Path
 
 import hashlib
-import zlib
+
+from pathlib import Path
+from typing import Optional
 
 parser = argparse.ArgumentParser(
     description="Gives information on GameCube disc images"
@@ -31,7 +26,7 @@ region_codes = {"E": "NTSC-U", "J": "NTSC-J", "P": "PAL"}
 publisher_codes = {"01": "Nintendo", "08": "Capcom", "8P": "Sega", "E9": "Natsume"}
 
 
-def get_info(iso_path: Path, iso_bytes: bytes = None):
+def get_info(iso_path: Path, iso_bytes: Optional[bytes] = None):
     if iso_bytes is None:
         iso_bytes = iso_path.read_bytes()
 

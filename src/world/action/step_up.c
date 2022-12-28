@@ -37,7 +37,7 @@ void action_update_step_up(void) {
         playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
         phys_adjust_cam_on_landing();
         if (!(playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS)) {
-            if (!(playerStatus->animFlags & PA_FLAGS_HOLDING_WATT)) {
+            if (!(playerStatus->animFlags & PA_FLAGS_USING_WATT)) {
                 anim = ANIM_Mario_Walking;
             } else {
                 anim = ANIM_Mario_60000;
@@ -77,7 +77,7 @@ void action_update_step_up(void) {
 }
 
 void func_802B6198_E24768(void) {
-    if (!(gPlayerStatus.animFlags & PA_FLAGS_IN_DISGUISE)) {
+    if (!(gPlayerStatus.animFlags & PA_FLAGS_INVISIBLE)) {
         if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
             suggest_player_anim_clearUnkFlag((StepUpPeachAnims)[gGameStatusPtr->peachCookingIngredient]);
         } else {
@@ -103,7 +103,7 @@ void action_update_step_up_peach(void) {
             try_player_footstep_sounds(1);
         }
     } else {
-        if (!(playerStatus->flags & PS_FLAGS_4000)) {
+        if (!(playerStatus->flags & PS_FLAGS_CUTSCENE_MOVEMENT)) {
             set_action_state(ACTION_STATE_IDLE);
         } else if (playerStatus->currentSpeed >= playerStatus->runSpeed) {
             set_action_state(ACTION_STATE_RUN);

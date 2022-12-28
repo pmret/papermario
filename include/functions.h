@@ -16,7 +16,7 @@ s32 strcmp(const char* str1, const char* str2);
 
 void nuBoot(void);
 void boot_idle(void* data);
-void boot_main(void);
+void boot_main(void* data);
 
 void is_debug_init(void);
 
@@ -78,11 +78,9 @@ f32 func_800E5348(void);
 
 void draw_number(s32 value, s32 x, s32 y, s32 variableWidthChars, s32 palette, s32 opacity, u16 style);
 
-void set_entity_model_render_command_list(s32 idx, u32* commandList);
 void set_entity_model_flags(s32 idx, s32 newFlags);
 void clear_entity_model_flags(s32 idx, s32 newFlags);
 void exec_entity_model_commandlist(s32 idx);
-s32 load_entity_model(s32* cmdList);
 RenderTask* queue_render_task(RenderTask* task);
 
 s32 create_mesh_animator(s16* animPos, s16* animBuffer);
@@ -136,8 +134,8 @@ void func_80258E14(void*);
 
 void func_80254610(Actor*);
 
-void func_800E315C(s32 colliderID);
-f32 func_800E34D8(void);
+void player_handle_floor_collider_type(s32 colliderID);
+f32 player_fall_distance(void);
 void func_800E4AD8(s32 arg0);
 f32 player_check_collision_below(f32, s32* colliderID);
 s32 can_trigger_loading_zone(void);
@@ -270,7 +268,7 @@ f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
 
-s32 func_800E0208(void);
+s32 game_scripts_disabled(void);
 
 s32 battle_heap_create(void);
 
@@ -408,6 +406,7 @@ PlayerData* get_player_data(void);
 s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth);
 s32 npc_raycast_up(s32, f32*, f32*, f32*, f32*);
+s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw, f32 radius);
 s32 player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32);
 s32 player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32* outY, f32* outZ, f32* outLength,
                                       f32* hitRx, f32* hitRz, f32* hitDirX, f32* hitDirZ);
@@ -759,7 +758,7 @@ void func_802B7140(void);
 void func_802B71C8(void);
 void func_802B71D4(void);
 void func_802B72C0_E22870(void);
-s32 func_802BD7DC(void);
+s32 lakilester_raycast_below(void);
 void world_watt_sync_held_position(void);
 void func_802BFB44_323694(f32 arg0);
 
@@ -795,7 +794,6 @@ typedef union {
 s32 create_worker_world(WorldArgs, WorldArgs);
 
 void init_entity_models(void);
-EntityModel* get_entity_model(s32 idx);
 f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z);
 void fold_update(u32, FoldType, s32, s32, s32, s32, s32);
 s32 fold_appendGfx_component(s32, FoldImageRecPart*, u32, Matrix4f);
@@ -823,7 +821,7 @@ void* load_asset_by_name(const char* assetName, u32* decompressedSize);
 Gfx* mdl_get_copied_gfx(s32 copyIndex);
 void mdl_get_copied_vertices(s32 copyIndex, Vtx** firstVertex, Vtx** copiedVertices, s32* numCopied);
 void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
-s32 func_8011CFBC(void);
+s32 func_8011CFBC(f32 arg0, f32 arg1, f32 arg2, s32 arg3, f32* arg4, f32* arg5);
 void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z);
 void* mdl_get_next_texture_address(s32);
 s32 cancel_current_message(void);
@@ -834,7 +832,6 @@ s32 entity_base_block_idle(Entity* entity);
 void add_SP(s32 amt);
 s32 recover_hp(s32 amt);
 s32 recover_fp(s32 amt);
-void entity_set_render_script(Entity* entity, u32* commandList);
 s32 entity_can_collide_with_jumping_player(Entity* entity);
 void entity_base_block_init(Entity* entity);
 s32 entity_start_script(Entity* entity);
@@ -916,7 +913,7 @@ void collision_check_player_overlaps(void);
 void update_player_input(void);
 void phys_update_action_state(void);
 void collision_main_lateral(void);
-void func_800EFD08(void);
+void handle_floor_behavior(void);
 void check_input_open_menus(void);
 void check_input_status_menu(void);
 
@@ -936,14 +933,14 @@ void partner_reset_data(void);
 s32 has_valid_conversation_npc(void);
 s32 func_800E06D8(void);
 void func_800E01DC(void);
-void func_800E4F10(void);
+void collision_lateral_peach(void);
 void func_800E5520(void);
 void func_800E6B68(void);
 void func_800E9810(void);
 void func_800E983C(void);
 void func_800E984C(void);
 s32 func_800E9860(void);
-void func_800E98C4(void);
+void status_menu_respond_to_changes(void);
 void func_800E98EC(void);
 void func_800E9900(void);
 void func_800F0C9C(void);
@@ -985,7 +982,7 @@ void func_8025DA60(ActorPart*, s32);
 void func_8025DBC8(ActorPart*, s32);
 void func_8025DD40(ActorPart*, s32);
 void func_8025DE88(ActorPart*, s32);
-void func_800E9894(void);
+void status_menu_ignore_changes(void);
 void func_8013A854(u32);
 
 void set_script_flags(Evt* script, s32 flags);
@@ -1049,7 +1046,7 @@ void load_tattle_flags(s32);
 s32 use_consumable(s32 invSlot);
 void remove_consumable(void);
 void delete_shadow(s32);
-void repartner_set_tether_distance(void);
+void partner_reset_tether_distance(void);
 void save_tattle_flags(s32);
 void update_merlee_messages(void);
 void draw_merlee_messages(void);

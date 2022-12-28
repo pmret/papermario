@@ -324,7 +324,7 @@ typedef struct AuLoadFilter {
     /* 0x0C */ ALRawLoop dc_loop;
     /* 0x18 */ struct Instrument* instrument;
     /* 0x1C */ s32 dc_bookSize;
-    /* 0x20 */ s32 (*dc_dmaFunc)(s32 addr, s32 len, void* state, u8 unk); // ALDMAproc with extra arg
+    /* 0x20 */ s32 (*dc_dmaFunc)(void* addr, s32 len, void* state, u8 unk); // ALDMAproc with extra arg
     /* 0x24 */ NUDMAState* dc_dmaState;
     /* 0x28 */ s32 dc_sample;
     /* 0x2C */ s32 dc_lastsam;
@@ -917,7 +917,7 @@ typedef struct BGMPlayer {
     /* 0x0C4 */ s32 masterVolumeStep;
     /* 0x0C8 */ s32 masterVolumeTarget;
     /* 0x0CC */ s32 masterVolumeTime;
-    /* 0x0D0 */ f32 unk_D0;
+    /* 0x0D0 */ f32 playbackRate;
     /* 0x0D4 */ SeqArgs seqCmdArgs;
     /* 0x0D8 */ SegData* segLoopStartLabels[32];
     /* 0x158 */ SegData* segActiveLoopEndPos[4];
@@ -931,7 +931,7 @@ typedef struct BGMPlayer {
     /* 0x208 */ u16 masterTempoBPM;
     /* 0x20A */ u16 maxTempo;
     /* 0x20C */ u16 masterPitchShift;
-    /* 0x20E */ s16 unk_20E;
+    /* 0x20E */ s16 detune;
     /* 0x210 */ u8 segLoopDepth;
     /* 0x211 */ u8 unk_211;
     /* 0x212 */ u8 unk_212[8];

@@ -42,7 +42,7 @@ def get_func_info():
     vrams = {}
 
     for line in nm_lines:
-        if " F " in line:
+        if " F " in line and "*ABS*" not in line:
             components = line.split()
             size = int(components[4], 16)
             name = components[5]

@@ -3,7 +3,7 @@
 
 extern EvtScript N(EVS_SetupMusic);
 
-API_CALLABLE(N(UpgradeStarPower)) {
+API_CALLABLE(N(UpgradeStarPowerCh1)) {
     set_max_SP(1);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
@@ -190,7 +190,7 @@ EvtScript N(D_80241DA4_99BA14) = {
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Idle)
     EVT_CALL(EnableNpcAI, NPC_Eldstar, TRUE)
-    EVT_CALL(N(UpgradeStarPower))
+    EVT_CALL(N(UpgradeStarPowerCh1))
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0191, 160, 40)
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_Eldstar, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 512, MSG_CH1_010E)

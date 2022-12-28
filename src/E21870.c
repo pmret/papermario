@@ -41,7 +41,7 @@ s32 func_802B704C(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (!is_starting_conversation()) {
-        if (!(playerStatus->flags & PS_FLAGS_20)) {
+        if (!(playerStatus->flags & PS_FLAGS_PAUSED)) {
             if (playerStatus->animFlags & PA_FLAGS_USING_PULSE_STONE) {
                 if (!has_valid_conversation_npc()) {
                     if (!func_800E06D8()) {

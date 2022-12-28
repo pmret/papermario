@@ -55,8 +55,8 @@ segments:
     - [0x6240, c, fio]
     - [0x6E40, c, curtains]
     - [0x7340, c, crash_screen]
-    - [0x7E40, c, os/nusys/nuGfxTaskMgr, -fforce-addr]
-    - [0x8230, c, os/nusys/nuSiMgr]
+    - [0x7E40, c, os/nusys/nugfxtaskmgr, -fforce-addr]
+    - [0x8230, c, os/nusys/nusimgr]
     - [0x8560, c]
     - [0x8800, c]
     - [0x9D10, c, 9d10_len_1080]
@@ -99,36 +99,36 @@ segments:
     - [0x362A0, c, collision]
     - [0x38F00, c, 38F00]
     - [0x39210, c, 39210_len_aa0]
-    - [0x39CB0, c, os/39cb0_len_100]
-    - [0x39DB0, c, os/nusys/nuSched]
-    - [0x3A650, c, os/nusys/nuGfxFuncSet]
-    - [0x3A690, c, os/nusys/nuGfxPreNMIFuncSet]
-    - [0x3A6D0, c, os/nusys/nuGfxTaskAllEndWait]
-    - [0x3A6F0, c, os/nusys/nuGfxSetCfb]
-    - [0x3A800, c, os/nusys/nuGfxDisplayOff]
-    - [0x3A830, c, os/nusys/nuGfxDisplayOn]
-    - [0x3A850, c, os/nusys/nuPiInit]
-    - [0x3A890, c, os/nusys/nuPiReadRom]
-    - [0x3A960, c, os/nusys/nuGfxInit]
-    - [0x3AA10, c, os/nusys/nuContInit]
-    - [0x3AA50, c, os/nusys/nuContDataGet]
-    - [0x3AAB0, c, os/nusys/nuContPakMgr]
-    - [0x3AD20, c, os/nusys/nuContRmbMgr]
-    - [0x3B290, c, os/nusys/nuContRmbStart]
-    - [0x3B2F0, c, os/nusys/nuContRmbCheck]
-    - [0x3B390, c, os/nusys/nuContRmbModeSet]
-    - [0x3B4A0, c, os/nusys/nuContRmbForceStop]
-    - [0x3B4C0, c, os/nusys/nuContRmbForceStopEnd]
-    - [0x3B4E0, c, os/nusys/nuPiReadRomOverlay]
-    - [0x3B5F0, c, os/nusys/nuGfxThread]
-    - [0x3B710, c, os/nusys/nuGfxSwapCfbFuncSet]
-    - [0x3B750, c, os/nusys/nuGfxSwapCfb]
-    - [0x3B770, c, os/nusys/nuGfxRetraceWait]
-    - [0x3B7F0, c, os/nusys/nuSiCallBackAdd]
-    - [0x3B890, c, os/nusys/nuSiCallBackRemove]
-    - [0x3B910, c, os/nusys/nuContMgr]
-    - [0x3BCC0, c, os/nusys/nuContDataLock]
-    - [0x3BD20, c, os/nusys/nuContQueryRead]
+    - [0x39cB0, c, os/nusys/nuboot]
+    - [0x39DB0, c, os/nusys/nusched]
+    - [0x3A650, c, os/nusys/nugfxfuncset]
+    - [0x3A690, c, os/nusys/nugfxprenmifuncset]
+    - [0x3A6D0, c, os/nusys/nugfxtaskallendwait]
+    - [0x3A6F0, c, os/nusys/nugfxsetcfb]
+    - [0x3A800, c, os/nusys/nugfxdisplayoff]
+    - [0x3A830, c, os/nusys/nugfxdisplayon]
+    - [0x3A850, c, os/nusys/nupiinit]
+    - [0x3A890, c, os/nusys/nupireadrom]
+    - [0x3A960, c, os/nusys/nugfxinit]
+    - [0x3AA10, c, os/nusys/nucontinit]
+    - [0x3AA50, c, os/nusys/nucontdataget]
+    - [0x3AAB0, c, os/nusys/nucontpakmgr]
+    - [0x3AD20, c, os/nusys/nucontrmbmgr]
+    - [0x3B290, c, os/nusys/nucontrmbstart]
+    - [0x3B2F0, c, os/nusys/nucontrmbcheck]
+    - [0x3B390, c, os/nusys/nucontrmbmodeset]
+    - [0x3B4A0, c, os/nusys/nucontrmbforcestop]
+    - [0x3B4C0, c, os/nusys/nucontrmbforcestopend]
+    - [0x3B4E0, c, os/nusys/nupireadromoverlay]
+    - [0x3B5F0, c, os/nusys/nugfxthread]
+    - [0x3B710, c, os/nusys/nugfxswapcfbfuncset]
+    - [0x3B750, c, os/nusys/nugfxswapcfb]
+    - [0x3B770, c, os/nusys/nugfxretracewait]
+    - [0x3B7F0, c, os/nusys/nusicallbackadd]
+    - [0x3B890, c, os/nusys/nusicallbackremove]
+    - [0x3B910, c, os/nusys/nucontmgr]
+    - [0x3BCC0, c, os/nusys/nucontdatalock]
+    - [0x3BD20, c, os/nusys/nucontqueryread]
     - [0x3BD40, hasm, os/osSetIntMask]
     - [0x3BDE0, c, os/pimgr, gcc_272 -O3]
     - [0x3BF70, c, os/epirawdma, gcc_272 -O3]
@@ -314,8 +314,8 @@ segments:
       - [0x51540, ia8, ui/no_controller, 128, 32]
       - [0x52540]
     - [0x52610, .data, crash_screen]
-    - [0x527F0, .data, os/nusys/nuGfxTaskMgr]
-    - [0x52800, .data, os/nusys/nuSiMgr]
+    - [0x527F0, .data, os/nusys/nugfxtaskmgr]
+    - [0x52800, .data, os/nusys/nusimgr]
     - [0x52810, .data, camera]
     - [0x52820, .data, game_modes]
     - [0x52CA0, .data, state_battle]
@@ -338,12 +338,12 @@ segments:
     - [0x5B320, .data, 5B320]
     - [0x6B360, .data, world/world]
     - [0x6EAC0, .data, 38F00]
-    - [0x6EF80, .data, os/nusys/nuSched]
-    - [0x6EFA0, .data, os/nusys/nuGfxInit]
-    - [0x6F0A0, .data, os/nusys/nuContPakMgr]
-    - [0x6F0E0, .data, os/nusys/nuContRmbMgr]
-    - [0x6F110, .data, os/nusys/nuGfxFuncSet]
-    - [0x6F120, .data, os/nusys/nuContMgr]
+    - [0x6EF80, .data, os/nusys/nusched]
+    - [0x6EFA0, .data, os/nusys/nugfxinit]
+    - [0x6F0A0, .data, os/nusys/nucontpakmgr]
+    - [0x6F0E0, .data, os/nusys/nucontrmbmgr]
+    - [0x6F110, .data, os/nusys/nugfxfuncset]
+    - [0x6F120, .data, os/nusys/nucontmgr]
     - [0x6F120, .data, os/pimgr]
     - [0x6F120, .data, os/epirawdma]
     - [0x6F180, .data, os/cartrominit]
@@ -357,7 +357,7 @@ segments:
     - [0x6FA30, .data, os/seteventmesg]
     - [0x6FA40, .data, os/siacs]
     - [0x6FA50, .data, os/setthreadpri]
-    - [0x6FA70, .data, os/timerintr] # libultra data
+    - [0x6FA70, .data, os/timerintr]
     - [auto, .data, os/vimgr]
     - [auto, .data, os/vitbl]
     - [auto, .data, os/guRotate]
@@ -3349,7 +3349,7 @@ segments:
     vram: 0xE0038000
     subsegments:
     - [0x34DD20, c, spiky_white_aura]
-    - [0x34E710, data]
+    - [0x34E710]
   - name: effect_gfx_spiky_white_aura
     dir: effects/gfx
     type: code
@@ -3475,7 +3475,27 @@ segments:
     subsegments:
     - [0x353300, c, flame]
     - [0x353B40]
-  - [0x353BB0, bin] # flame gfx
+  - name: effect_gfx_flame
+    dir: effects/gfx
+    type: code
+    start: 0x353BB0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x353BB0, c, flame]
+    - start: 0x353BB0
+      type: .data
+      name: flame
+      subsegments:
+      - [0x353BB0, i4, D_09000000_353BB0, 32, 32]
+      - [0x353DB0, i4, D_09000200_353DB0, 32, 32]
+      - [0x353FB0, i4, D_09000400_353FB0, 32, 32]
+      - [0x3541B0, i4, D_09000600_3541B0, 32, 32]
+      - [0x3543B0, gfx, D_09000800_3543B0]
+      - [0x354468, vtx, D_090008B8_354468]
+      - [0x3544A8, gfx, D_090008F8_3544A8]
+      - [0x3544C8, gfx, D_09000918_3544C8]
+      - [0x354590, gfx, D_090009E0_354590]
   - name: effect_stars_burst
     dir: effects
     type: code
@@ -3483,7 +3503,7 @@ segments:
     vram: 0xE0042000
     subsegments:
     - [0x3547A0, c, stars_burst]
-    - [0x354F20, data]
+    - [0x354F20]
   - name: effect_stars_shimmer
     dir: effects
     type: code
@@ -3491,7 +3511,7 @@ segments:
     vram: 0xE0044000
     subsegments:
     - [0x354F60, c, stars_shimmer]
-    - [0x355D10, data]
+    - [0x355D10]
   - name: effect_rising_bubble
     dir: effects
     type: code
@@ -3690,7 +3710,7 @@ segments:
     vram: 0xE0056000
     subsegments:
     - [0x35DA00, c, windy_leaves]
-    - [0x35E8A0]
+    - [0x35E8A0, .rodata, windy_leaves]
   - name: effect_falling_leaves
     dir: effects
     type: code
@@ -3873,8 +3893,41 @@ segments:
     vram: 0xE0066000
     subsegments:
     - [0x366030, c, radial_shimmer]
-    - [0x366C80, data]
-  - [0x366D60, bin] # radial_shimmer gfx
+    - [0x366C80]
+  - name: effect_gfx_radial_shimmer
+    dir: effects/gfx
+    type: code
+    start: 0x366D60
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x366D60, c, radial_shimmer]
+    - start: 0x366D60
+      type: .data
+      name: radial_shimmer
+      subsegments:
+      - [0x366D60, i4, D_09000000_366D60, 64, 16]
+      - [0x366F60, i4, D_09000200_366F60, 64, 16]
+      - [0x367160, i4, D_09000400_367160, 64, 64]
+      - [0x367960, i4, D_09000C00_367960, 32, 32]
+      - [0x367B60, i4, D_09000E00_367B60, 64, 64]
+      - [0x368360, i4, D_09001600_368360, 64, 64]
+      - [0x368B60, i4, D_09001E00_368B60, 64, 64]
+      - [0x369360, i4, D_09002600_369360, 64, 64]
+      - [0x369B60, i4, D_09002E00_369B60, 32, 32]
+      - [0x369D60, vtx, D_09003000_369D60]
+      - [0x369F00, vtx, D_090031A0_369F00]
+      - [0x36A0A0, gfx, D_09003340_36A0A0]
+      - [0x36A188, gfx, D_09003428_36A188]
+      - [0x36A268, gfx, D_09003508_36A268]
+      - [0x36A348, gfx, D_090035E8_36A348]
+      - [0x36A428, gfx, D_090036C8_36A428]
+      - [0x36A508, gfx, D_090037A8_36A508]
+      - [0x36A590, gfx, D_09003830_36A590]
+      - [0x36A618, gfx, D_090038B8_36A618]
+      - [0x36A708, gfx, D_090039A8_36A708]
+      - [0x36A7E8, gfx, D_09003A88_36A7E8]
+      - [0x36A8C8] # padding
   - name: effect_ending_decals
     dir: effects
     type: code
@@ -4121,7 +4174,7 @@ segments:
     vram: 0xE0078000
     subsegments:
     - [0x37A3F0, c, bulb_glow]
-    - [0x37ACF0, data]
+    - [0x37ACF0]
   - name: effect_gfx_bulb_glow
     dir: effects/gfx
     type: code
@@ -4457,8 +4510,29 @@ segments:
     vram: 0xE008A000
     subsegments:
     - [0x38C5F0, c, snowfall]
-    - [0x38D040, data]
-  - [0x38D070, bin] # snowfall gfx
+    - [0x38D040]
+  - name: effect_gfx_snowfall
+    dir: effects/gfx
+    type: code
+    start: 0x38D070
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x38D070, c, snowfall]
+    - start: 0x38D070
+      type: .data
+      name: snowfall
+      subsegments:
+      - [0x38D070, i4, D_09000000_38D070, 16, 16]
+      - [0x38D0F0, i4, D_09000080_38D0F0, 64, 64]
+      - [0x38D8F0, vtx, D_09000880_38D8F0]
+      - [0x38DA70, vtx, D_09000A00_38DA70]
+      - [0x38DAF0, vtx, D_09000A80_38DAF0]
+      - [0x38DC70]
+      - [0x38DC80, gfx, D_09000C10_38DC80]
+      - [0x38DDA0, gfx, D_09000D30_38DDA0]
+      - [0x38DDC0, gfx, D_09000D50_38DDC0]
+      - [0x38DDF8] # padding
   - name: effect_effect_46
     dir: effects
     type: code
@@ -4719,7 +4793,95 @@ segments:
     vram: 0xE009C000
     subsegments:
     - [0x3981F0, c, quizmo_stage]
-  - [0x398BC0, bin] # quizmo_stage gfx
+  - name: effect_gfx_quizmo_stage
+    dir: effects/gfx
+    type: code
+    start: 0x398BC0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x398BC0, c, quizmo_stage]
+    - start: 0x398BC0
+      type: .data
+      name: quizmo_stage
+      subsegments:
+      - [0x398BC0] # light
+      - [0x398BD8, ia4, D_09000018_398BD8, 64, 16]
+      - [0x398DD8, gfx, D_09000218_398DD8]
+      - [0x398E48, rgba16, D_09000288_398E48, 32, 64]
+      - [0x399E48, gfx, D_09001288_399E48]
+      - [0x399EB8, ci4, D_090012F8_399EB8, 64, 16]
+      - [0x39A0B8, palette, D_090012F8_399EB8]
+      - [0x39A0D8, gfx, D_09001518_39A0D8]
+      - [0x39A178, i4, D_090015B8_39A178, 32, 32]
+      - [0x39A378, gfx, D_090017B8_39A378]
+      - [0x39A3E8, ci4, D_09001828_39A3E8, 32, 64]
+      - [0x39A7E8, palette, D_09001828_39A3E8]
+      - [0x39A808, gfx, D_09001C48_39A808]
+      - [0x39A8A8, rgba16, D_09001CE8_39A8A8, 32, 64]
+      - [0x39B8A8, gfx, D_09002CE8_39B8A8]
+      - [0x39B918, ci4, D_09002D58_39B918, 64, 64]
+      - [0x39C118, palette, D_09002D58_39B918]
+      - [0x39C138, gfx, D_09003578_39C138]
+      - [0x39C1D8, ia4, D_09003618_39C1D8, 128, 32]
+      - [0x39C9D8, gfx, D_09003E18_39C9D8]
+      - [0x39CA48, ci4, D_09003E88_39CA48, 32, 32]
+      - [0x39CC48, palette, D_09003E88_39CA48]
+      - [0x39CC68, gfx, D_090040A8_39CC68]
+      - [0x39CE08, ci4, D_09004248_39CE08, 64, 64]
+      - [0x39D608, palette, D_09004248_39CE08]
+      - [0x39D628, gfx, D_09004A68_39D628]
+      - [0x39D6C8, ia4, D_09004B08_39D6C8, 128, 32]
+      - [0x39DEC8, gfx, D_09005308_39DEC8]
+      - [0x39DF38, rgba16, D_09005378_39DF38, 64, 32]
+      - [0x39EF38, gfx, D_09006378_39EF38]
+      - [0x39EFA8, vtx, D_090063E8_39EFA8]
+      - [0x39EFE8, vtx, D_09006428_39EFE8]
+      - [0x39F028, vtx, D_09006468_39F028]
+      - [0x39F068, vtx, D_090064A8_39F068]
+      - [0x39F0A8, vtx, D_090064E8_39F0A8]
+      - [0x39F128, vtx, D_09006568_39F128]
+      - [0x39F1A8, vtx, D_090065E8_39F1A8]
+      - [0x39F1E8, vtx, D_09006628_39F1E8]
+      - [0x39F3A8, vtx, D_090067E8_39F3A8]
+      - [0x39F3E8, vtx, D_09006828_39F3E8]
+      - [0x39F428, vtx, D_09006868_39F428]
+      - [0x39F468, vtx, D_090068A8_39F468]
+      - [0x39F4A8, vtx, D_090068E8_39F4A8]
+      - [0x39F4E8, vtx, D_09006928_39F4E8]
+      - [0x39F528, vtx, D_09006968_39F528]
+      - [0x39F568, vtx, D_090069A8_39F568]
+      - [0x39F5A8, gfx, D_090069E8_39F5A8]
+      - [0x39F608, gfx, D_09006A48_39F608]
+      - [0x39F668, gfx, D_09006AA8_39F668]
+      - [0x39F6C8, gfx, D_09006B08_39F6C8]
+      - [0x39F728, gfx, D_09006B68_39F728]
+      - [0x39F768, gfx, D_09006BA8_39F768]
+      - [0x39F7C8, gfx, D_09006C08_39F7C8]
+      - [0x39F828, gfx, D_09006C68_39F828]
+      - [0x39F858, gfx, D_09006C98_39F858]
+      - [0x39F8B0, gfx, D_09006CF0_39F8B0]
+      - [0x39F908, gfx, D_09006D48_39F908]
+      - [0x39F938, gfx, D_09006D78_39F938]
+      - [0x39F960, gfx, D_09006DA0_39F960]
+      - [0x39F9E8, gfx, D_09006E28_39F9E8]
+      - [0x39FA48, gfx, D_09006E88_39FA48]
+      - [0x39FA78, gfx, D_09006EB8_39FA78]
+      - [0x39FAE0, gfx, D_09006F20_39FAE0]
+      - [0x39FB08, gfx, D_09006F48_39FB08]
+      - [0x39FB70, gfx, D_09006FB0_39FB70]
+      - [0x39FB98, gfx, D_09006FD8_39FB98]
+      - [0x39FBF0, gfx, D_09007030_39FBF0]
+      - [0x39FC50, gfx, D_09007090_39FC50]
+      - [0x39FCA8, gfx, D_090070E8_39FCA8]
+      - [0x39FD08, gfx, D_09007148_39FD08]
+      - [0x39FD48, gfx, D_09007188_39FD48]
+      - [0x39FD90, gfx, D_090071D0_39FD90]
+      - [0x39FDC0, gfx, D_09007200_39FDC0]
+      - [0x39FDF0, gfx, D_09007230_39FDF0]
+      - [0x39FE58, vtx, D_09007298_39FE58]
+      - [0x39FE98, gfx, D_090072D8_39FE98]
+      - [0x39FF18]
   - name: effect_radiating_energy_orb
     dir: effects
     type: code
@@ -4853,9 +5015,59 @@ segments:
     subsegments:
     - [0x3A70F0, c, quizmo_audience]
     - [0x3A7710]
-  - start: 0x3A77A0 # quizmo_audience gfx
-    type: bin
-    align: 16
+  - name: effect_gfx_quizmo_audience
+    dir: effects/gfx
+    type: code
+    start: 0x3A77A0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3A77A0, c, quizmo_audience]
+    - start: 0x3A77A0
+      type: .data
+      name: quizmo_audience
+      subsegments:
+      - [0x3A77A0, ia4, D_09000000_3A77A0, 32, 64]
+      - [0x3A7BA0, gfx, D_09000400_3A7BA0]
+      - [0x3A7C10, ia4, D_09000470_3A7C10, 32, 64]
+      - [0x3A8010, gfx, D_09000870_3A8010]
+      - [0x3A8080, ia4, D_090008E0_3A8080, 32, 64]
+      - [0x3A8480, gfx, D_09000CE0_3A8480]
+      - [0x3A84F0, ia4, D_09000D50_3A84F0, 32, 64]
+      - [0x3A88F0, gfx, D_09001150_3A88F0]
+      - [0x3A8960, ia4, D_090011C0_3A8960, 32, 64]
+      - [0x3A8D60, gfx, D_090015C0_3A8D60]
+      - [0x3A8DD0, ia4, D_09001630_3A8DD0, 32, 64]
+      - [0x3A91D0, gfx, D_09001A30_3A91D0]
+      - [0x3A9240, ia4, D_09001AA0_3A9240, 32, 64]
+      - [0x3A9640, gfx, D_09001EA0_3A9640]
+      - [0x3A96B0, ia4, D_09001F10_3A96B0, 32, 64]
+      - [0x3A9AB0, gfx, D_09002310_3A9AB0]
+      - [0x3A9B20, ia4, D_09002380_3A9B20, 32, 64]
+      - [0x3A9F20, gfx, D_09002780_3A9F20]
+      - [0x3A9F90, ia4, D_090027F0_3A9F90, 32, 64]
+      - [0x3AA390, gfx, D_09002BF0_3AA390]
+      - [0x3AA400, vtx, D_09002C60_3AA400]
+      - [0x3AA440, vtx, D_09002CA0_3AA440]
+      - [0x3AA480, vtx, D_09002CE0_3AA480]
+      - [0x3AA4C0, vtx, D_09002D20_3AA4C0]
+      - [0x3AA500, vtx, D_09002D60_3AA500]
+      - [0x3AA540, vtx, D_09002DA0_3AA540]
+      - [0x3AA580, vtx, D_09002DE0_3AA580]
+      - [0x3AA5C0, vtx, D_09002E20_3AA5C0]
+      - [0x3AA600, vtx, D_09002E60_3AA600]
+      - [0x3AA640, vtx, D_09002EA0_3AA640]
+      - [0x3AA680, gfx, D_09002EE0_3AA680]
+      - [0x3AA6B8, gfx, D_09002F18_3AA6B8]
+      - [0x3AA6F0, gfx, D_09002F50_3AA6F0]
+      - [0x3AA728, gfx, D_09002F88_3AA728]
+      - [0x3AA760, gfx, D_09002FC0_3AA760]
+      - [0x3AA798, gfx, D_09002FF8_3AA798]
+      - [0x3AA7D0, gfx, D_09003030_3AA7D0]
+      - [0x3AA808, gfx, D_09003068_3AA808]
+      - [0x3AA840, gfx, D_090030A0_3AA840]
+      - [0x3AA878, gfx, D_090030D8_3AA878]
+      - [0x3AA8B0, gfx, D_09003110_3AA8B0]
   - name: effect_butterflies
     dir: effects
     type: code
@@ -4978,7 +5190,23 @@ segments:
     vram: 0xE00AE000
     subsegments:
     - [0x3B2350, c, snaking_static]
-  - [0x3B2D90, bin] # snaking_static gfx
+  - name: effect_gfx_snaking_static
+    dir: effects/gfx
+    type: code
+    start: 0x3B2D90
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3B2D90, c, snaking_static]
+    - start: 0x3B2D90
+      type: .data
+      name: snaking_static
+      subsegments:
+      - [0x3B2D90, i4, D_09000000_3B2D90, 256, 32]
+      - [0x3B3D90, gfx, D_09001000_3B3D90]
+      - [0x3B3E48, vtx, D_090010B8_3B3E48]
+      - [0x3B3E88, gfx, D_090010F8_3B3E88]
+      - [0x3B3EA8]
   - name: effect_thunderbolt_ring
     dir: effects
     type: code
@@ -5019,7 +5247,28 @@ segments:
     subsegments:
     - [0x3B5CF0, c, water_block]
     - [0x3B69E0]
-  - [0x3B6BF0, bin] # water_block gfx
+  - name: effect_gfx_water_block
+    dir: effects/gfx
+    type: code
+    start: 0x3B6BF0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3B6BF0, c, water_block]
+    - start: 0x3B6BF0
+      type: .data
+      name: water_block
+      subsegments:
+        - [0x3B6BF0, i4, D_09000000_3B6BF0, 16, 32]
+        - [0x3B6CF0, ia4, D_09000100_3B6CF0, 32, 32]
+        - [0x3B6EF0, gfx, D_09000300_3B6EF0]
+        - [0x3B6FA0, gfx, D_090003B0_3B6FA0]
+        - [0x3B7050, vtx, D_09000460_3B7050]
+        - [0x3B7090, gfx, D_090004A0_3B7090]
+        - [0x3B70B0] # unmapped
+        - [0x3B70C8, gfx, D_090004D8_3B70C8]
+        - [0x3B7128, gfx, D_09000538_3B7128]
+        - [0x3B7158] # padding
   - name: effect_waterfall
     dir: effects
     type: code
@@ -5111,7 +5360,8 @@ segments:
     vram: 0xE00BE000
     subsegments:
     - [0x3BBF60, c, water_splash]
-    - [0x3BCA50]
+    - [0x3BCA50, .data, water_splash]
+    - [0x3BCA60, .rodata, water_splash]
   - name: effect_gfx_water_splash
     dir: effects/gfx
     type: code
@@ -5394,7 +5644,7 @@ segments:
     vram: 0xE00CA000
     subsegments:
     - [0x3D0500, c, effect_65]
-    - [0x3D11B0, data]
+    - [0x3D11B0]
   - name: effect_gfx_effect_65
     dir: effects/gfx
     type: code
@@ -5444,8 +5694,23 @@ segments:
     vram: 0xE00CE000
     subsegments:
     - [0x3D2AC0, c, whirlwind]
-    - [0x3D3910]
-  - [0x3D3930, bin] # whirlwind gfx
+    - [0x3D3910, .rodata, whirlwind]
+    - [0x3D3930]
+  - name: effect_gfx_whirlwind
+    dir: effects/gfx
+    type: code
+    start: 0x3D3930
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+      - [0x3D3930, c, whirlwind]
+      - start: 0x3D3930
+        type: .data
+        name: whirlwind
+        subsegments:
+          - [0x3D3930, i4, D_09000000_3D3930, 64, 32]
+          - [0x3D3D30, gfx, D_09000400_3D3D30]
+          - [0x3D3E20]
   - name: effect_red_impact
     dir: effects
     type: code
@@ -5823,7 +6088,7 @@ segments:
     vram: 0xE010A000
     subsegments:
     - [0x3E43A0, c, firework_rocket]
-    - [0x3E5060, data]
+    - [0x3E5060]
   - name: effect_gfx_firework_rocket
     dir: effects/gfx
     type: code
@@ -6004,90 +6269,70 @@ segments:
     vram: 0xE0112000
     subsegments:
     - [0x3F9E50, c, spirit_card]
-    - [0x3FA480, data]
-  - type: group # effect spirit_card, something_rotating gfx
+    - [0x3FA480]
+  - name: effect_gfx_spirit_card # effect spirit_card, something_rotating gfx
+    dir: effects/gfx
+    type: code
     start: 0x3FA4B0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
     subsegments:
+    - [0x3FA4B0, c, spirit_card]
     - start: 0x3FA4B0
-      type: ci4
-      name: star_cards/card_front
-      flip_y: true
-      width: 32
-      height: 32
-    - [0x3FA6B0, palette, star_cards/card_front]
-    - [0x3FA6D0, bin] # PAD
-    - start: 0x3FA8B0
-      type: ci4
-      name: star_cards/card_back
-      flip_y: true
-      width: 32
-      height: 64
-    - [0x3FACB0, palette, star_cards/card_back]
-    - [0x3FACD0, bin] # PAD
-    - start: 0x3FAEB0
-      type: ci4
-      name: star_cards/wave
-      flip_y: true
-      width: 32
-      height: 32
-    - [0x3FB0B0, palette, star_cards/wave]
-    - [0x3FB0D0, bin] # PAD
-    - start: 0x3FB2B0
-      type: ci4
-      name: star_cards/squares
-      flip_y: true
-      width: 16
-      height: 16
-    - [0x3FB330, palette, star_cards/squares]
-    - [0x3FB350, bin] # PAD
-    - start: 0x3FB530
-      type: ci4
-      name: star_cards/eldstar
-      flip_y: true
-      width: 48
-      height: 48
-    - [0x3FB9B0, palette, star_cards/eldstar]
-    - [0x3FB9D0, bin] # PAD
-    - start: 0x3FBBB0
-      type: ci4
-      name: star_cards/mamar
-      flip_y: true
-      width: 48
-      height: 48
-    - [0x3FC030, palette, star_cards/mamar]
-    - [0x3FC050, bin] # PAD
-    - start: 0x3FC230
-      type: ci4
-      name: star_cards/skolar
-      flip_y: true
-      width: 48
-      height: 48
-    - [0x3FC6B0, palette, star_cards/skolar]
-    - [0x3FC6D0, bin] # PAD
-    - start: 0x3FC8B0
-      type: ci4
-      name: star_cards/muskular
-      flip_y: true
-      width: 48
-      height: 48
-    - [0x3FCD30, palette, star_cards/muskular]
-    - [0x3FCD50, bin] # PAD
-    - start: 0x3FCF30
-      type: ci4
-      name: star_cards/misstar
-      flip_y: true
-      width: 48
-      height: 48
-    - [0x3FD3B0, palette, star_cards/misstar]
-    - [0x3FD3D0, bin] # PAD
-    - start: 0x3FDC30
-      type: ci4
-      name: star_cards/klevar
-      flip_y: true
-      width: 48
-      height: 48
-    - [0x3FE0B0, palette, star_cards/klevar]
-    - [0x3FE0D0, bin]
+      type: .data
+      name: spirit_card
+      subsegments:
+      - { start: 0x3FA4B0, type: ci4, name: star_cards/card_front, flip_y: true, width: 32, height: 32 }
+      - [0x3FA6B0, palette, star_cards/card_front]
+      - [0x3FA6D0] # padding
+      - { start: 0x3FA8B0, type: ci4, name: star_cards/card_back, flip_y: true, width: 32, height: 64 }
+      - [0x3FACB0, palette, star_cards/card_back]
+      - [0x3FACD0] # padding
+      - { start: 0x3FAEB0, type: ci4, name: star_cards/wave, flip_y: true, width: 32, height: 32 }
+      - [0x3FB0B0, palette, star_cards/wave]
+      - [0x3FB0D0] # padding
+      - { start: 0x3FB2B0, type: ci4, name: star_cards/squares, flip_y: true, width: 16, height: 16 }
+      - [0x3FB330, palette, star_cards/squares]
+      - [0x3FB350] # padding
+      - { start: 0x3FB530, type: ci4, name: star_cards/eldstar, flip_y: true, width: 48, height: 48 }
+      - [0x3FB9B0, palette, star_cards/eldstar]
+      - [0x3FB9D0] # padding
+      - { start: 0x3FBBB0, type: ci4, name: star_cards/mamar, flip_y: true, width: 48, height: 48 }
+      - [0x3FC030, palette, star_cards/mamar]
+      - [0x3FC050] # padding
+      - { start: 0x3FC230, type: ci4, name: star_cards/skolar, flip_y: true, width: 48, height: 48 }
+      - [0x3FC6B0, palette, star_cards/skolar]
+      - [0x3FC6D0] # padding
+      - { start: 0x3FC8B0, type: ci4, name: star_cards/muskular, flip_y: true, width: 48, height: 48 }
+      - [0x3FCD30, palette, star_cards/muskular]
+      - [0x3FCD50] # padding
+      - { start: 0x3FCF30, type: ci4, name: star_cards/misstar, flip_y: true, width: 48, height: 48 }
+      - [0x3FD3B0, palette, star_cards/misstar]
+      - [0x3FD3D0] # padding
+      - { start: 0x3FD5B0, type: ci4, name: star_cards/klevar, flip_y: true, width: 48, height: 48 }
+      - [0x3FDA30, palette, star_cards/klevar]
+      - [0x3FDA50] # padding
+      - { start: 0x3FDC30, type: ci4, name: star_cards/kalmar, flip_y: true, width: 48, height: 48 }
+      - [0x3FE0B0, palette, star_cards/kalmar]
+      - [0x3FE0D0] # padding
+      - [0x3FE2B0, vtx, D_09003E00_3FE2B0]
+      - [0x3FE430] # light
+      - [0x3FE448, gfx, D_09003F98_3FE448]
+      - [0x3FE4C0, gfx, D_09004010_3FE4C0]
+      - [0x3FE538, gfx, D_09004088_3FE538]
+      - [0x3FE5B0, gfx, D_09004100_3FE5B0]
+      - [0x3FE628, gfx, D_09004178_3FE628]
+      - [0x3FE6A0, gfx, D_090041F0_3FE6A0]
+      - [0x3FE718, gfx, D_09004268_3FE718]
+      - [0x3FE790, gfx, D_090042E0_3FE790] # has bug (see gfx/spirit_card.c)
+      - [0x3FE810, gfx, D_09004360_3FE810]
+      - [0x3FE888, vtx, D_090043D8_3FE888]
+      - [0x3FE8C8, gfx, D_09004418_3FE8C8]
+      - [0x3FE8E8, gfx, D_09004438_3FE8E8]
+      - [0x3FE908, gfx, D_09004458_3FE908]
+      - [0x3FE9B8, gfx, D_09004508_3FE9B8]
+      - [0x3FEAB0, gfx, D_09004600_3FEAB0]
+      - [0x3FEAD8]
   - name: effect_lil_oink
     dir: effects
     type: code
@@ -6262,40 +6507,42 @@ segments:
     vram: 0xE011A000
     subsegments:
     - [0x404220, c, partner_buff]
-    - [0x404E40, data]
-  - type: group # partner_buff gfx
+    - [0x404E40]
+  - name: effect_gfx_partner_buff
+    dir: effects/gfx
+    type: code
     start: 0x404F40
-    align: 16
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
     subsegments:
+    - [0x404F40, c, partner_buff]
     - start: 0x404F40
-      type: ci4
-      name: world/cloud
-      flip_y: true
-      width: 32
-      height: 32
-    - [0x405140, palette, world/cloud]
-    - start: 0x405340
-      type: ci4
-      name: world/waterblock
-      flip_y: true
-      width: 32
-      height: 32
-    - [0x405540, palette, world/waterblock]
-    - start: 0x405740
-      type: ci4
-      name: world/yellow_carpet
-      flip_y: true
-      width: 32
-      height: 32
-    - [0x405940, palette, world/yellow_carpet]
-    - start: 0x405B40
-      type: ci4
-      name: world/numbers
-      flip_y: true
-      width: 32
-      height: 160
-    - [0x406540, palette, world/numbers]
-    - [0x406740, bin]
+      type: .data
+      name: partner_buff
+      subsegments:
+      - [0x404F40, ci4, world/cloud, 32, 32]
+      - [0x405140, palette, world/cloud]
+      - [0x405160] # padding
+      - [0x405340, ci4, world/waterblock, 32, 32]
+      - [0x405540, palette, world/waterblock]
+      - [0x405560] # padding
+      - [0x405740, ci4, world/yellow_carpet, 32, 32]
+      - [0x405940, palette, world/yellow_carpet]
+      - [0x405960] # padding
+      - [0x405B40, ci4, world/numbers, 32, 32, world/numbers] # number0
+      - [0x405D40, ci4, world/number1, 32, 32, world/numbers]
+      - [0x405F40, ci4, world/number2, 32, 32, world/numbers]
+      - [0x406140, ci4, world/number3, 32, 32, world/numbers]
+      - [0x406340, ci4, world/number4, 32, 32, world/numbers]
+      - [0x406540, palette, world/numbers]
+      - [0x406560] # padding
+      - [0x406740, gfx, D_09001800_406740]
+      - [0x4068E0, gfx, D_090019A0_4068E0]
+      - [0x406958, gfx, D_09001A18_406958]
+      - [0x4069D0, gfx, D_09001A90_4069D0]
+      - [0x406A48, gfx, D_09001B08_406A48]
+      - [0x406AC0, gfx, D_09001B80_406AC0]
+      - [0x406B38]
   - name: effect_quizmo_assistant
     dir: effects
     type: code
@@ -6345,8 +6592,34 @@ segments:
     vram: 0xE011E000
     subsegments:
     - [0x409990, c, ice_pillar]
-    - [0x40A180, data]
-  - [0x40A1C0, bin] # ice_pillar gfx
+    - [0x40A180]
+  - name: effect_gfx_ice_pillar
+    dir: effects/gfx
+    type: code
+    start: 0x40A1C0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x40A1C0, c, ice_pillar]
+    - start: 0x40A1C0
+      type: .data
+      name: ice_pillar
+      subsegments:
+      - [0x40A1C0, i4, D_09000000_40A1C0, 32, 64]
+      - [0x40A5C0, i4, D_09000400_40A5C0, 32, 64]
+      - [0x40A9C0, i4, D_09000800_40A9C0, 32, 64]
+      - [0x40ADC0, i4, D_09000C00_40ADC0, 32, 64]
+      - [0x40B1C0, gfx, D_09001000_40B1C0]
+      - [0x40B268, vtx, D_090010A8_40B268]
+      - [0x40B2A8, vtx, D_090010E8_40B2A8]
+      - [0x40B2E8, vtx, D_09001128_40B2E8]
+      - [0x40B328, vtx, D_09001168_40B328]
+      - [0x40B358]
+      - [0x40B368, gfx, D_090011A8_40B368]
+      - [0x40B388, gfx, D_090011C8_40B388]
+      - [0x40B3A8, gfx, D_090011E8_40B3A8]
+      - [0x40B3C8, gfx, D_09001208_40B3C8]
+      - [0x40B3E8]
   - name: effect_sun
     dir: effects
     type: code
@@ -8811,140 +9084,153 @@ segments:
     start: 0x7E73A0
     vram: 0x80240000
     subsegments:
-    - [0x7E73A0, c]
-    - [0x7E7550, c]
-    - [0x7E7850, c]
-    - [0x7E7A30, data]
-    - [0x7E8470, data]
-    - [0x7EA340, data]
-    - [0x7EAA50]
+    - [0x7E73A0, c, machi_0_header]
+    - [0x7E73A0, c, machi_1_tables]
+    - [0x7E73A0, c, machi_2_main]
+    - [0x7E73D0, c, machi_3_entity]
+    - [0x7E7550, c, machi_4_goomba_king]
+    - [0x7E7550, c, machi_5_npc]
+    - [0x7E7850, c, machi_6_misstar]
+    - [0x7E7A30, c, machi_7_partner]
+    - [0x7E7A30]
   - name: mac_00
     dir: world/area_mac/mac_00
     type: code
     start: 0x7EAD10
     vram: 0x80240000
     subsegments:
-    - [0x7EAD10, c]
-    - [0x7EB340, c]
-    - [0x7ECFD0, c]
-    - [0x7ED280, c]
-    - [0x7EE870, data]
-    - [0x7F0A20, data]
-    - [0x7F8F20, data]
-    - [0x7F9100, data]
-    - [0x7F91D0, data]
-    - [0x7F9800, data]
-    - [0x7F9850, data]
-    - [0x7FD1A0, data]
-    - [0x7FDF30, data]
-    - [0x7FE550, data]
-    - [0x8000B0, data]
-    - [0x8006A0]
+    - [0x7EAD10, c, mac_00_0_header]
+    - [0x7EAD10, c, mac_00_1_music]
+    - [0x7EAD10, c, mac_00_2_main]
+    - [0x7EB340, c, mac_00_3_entity]
+    - [0x7EB340, c, mac_00_4_rooms]
+    - [0x7EB340, c, mac_00_5_npc]
+    - [0x7ECFD0, c, mac_00_6_shop]
+    - [0x7ECFD0, c, mac_00_7_music_mix]
+    - [0x7ED100, c, mac_00_8_demo]
+    - [0x7ED100, c, mac_00_9_water_gfx]
+    - [0x7ED280, c, mac_00_10_shared_npc]
+    - [0x7EE870, c, mac_00_11_intro_npc]
+    - [0x7EE870, c, mac_00_12_intro]
+    - [0x7EE870, c, mac_00_13_epilogue_npc]
+    - [0x7EE870, c, mac_00_14_epilogue]
+    - [0x7EE870]
   - name: mac_01
     dir: world/area_mac/mac_01
     type: code
     start: 0x800880
     vram: 0x80240000
     subsegments:
-    - [0x800880, c]
-    - [0x800C40, c]
-    - [0x801700, c]
-    - [0x8017D0, c]
-    - [0x805DD0, c]
-    - [0x806D10, c]
-    - [0x806F50, data]
-    - [0x807C00, data]
-    - [0x808680, data]
-    - [0x808D70, data]
-    - [0x8091F0, data]
-    - [0x8202D0, data]
-    - [0x822100, data]
-    - [0x822460, data]
-    - [0x822F30]
+    - [0x800880, c, mac_01_0_header]
+    - [0x800880, c, mac_01_1_music]
+    - [0x800880, c, mac_01_2_main]
+    - [0x800880, c, mac_01_3_entity]
+    - [0x800880, c, mac_01_4_rooms]
+    - [0x800880, c, mac_01_5_shop]
+    - [0x800C40, c, mac_01_6_crystal_ball_gfx]
+    - [0x801700, c, mac_01_7_bulletin]
+    - [0x8017D0, c, mac_01_8_music_mix]
+    - [0x801900, c, mac_01_9_npc]
+    - [0x805DD0, c, mac_01_10_intro_npc]
+    - [0x806C60, c, mac_01_11_epilogue_npc]
+    - [0x806C60, c, mac_01_12_intro]
+    - [0x806D10, c, mac_01_13_foliage]
+    - [0x806F50, .data, mac_01_0_header]
+    - [0x806FF0, .data, mac_01_1_music]
+    - [0x8071D0, .data, mac_01_2_main]
+    - [0x807C00, .data, mac_01_3_entity]
+    - [0x807CB0, .data, mac_01_4_rooms]
+    - [0x808680, .data, mac_01_5_shop]
+    - [0x808CA0, .data, mac_01_6_crystal_ball_gfx]
+    - [0x808D70, .data, mac_01_7_bulletin]
+    - [0x8090E0, .data, mac_01_8_music_mix]
+    - start: 0x8091F0
+      type: .data
+      name: mac_01_9_npc
+      subsegments:
+      - [0x970C40]
+      - [0x80BE10, vtx_common, ../../toad_house/blanket]
+      - [0x80D3F0, gfx_common, ../../toad_house/blanket]
+      - [0x80D558, rgba16, ../../toad_house/blanket, 16, 32, namespaced]
+      - [0x80D958]
+    - [0x81F9C0]
+    - [0x81F9C0, .data, mac_01_10_intro_npc]
+    - [0x8202D0, .data, mac_01_11_epilogue_npc]
+    - [0x822100, .data, mac_01_12_intro]
+    - [0x822460, .data, mac_01_13_foliage]
   - name: mac_02
     dir: world/area_mac/mac_02
     type: code
     start: 0x8232C0
     vram: 0x80240000
     subsegments:
-    - [0x8232C0, c]
-    - [0x8238B0, c]
-    - [0x823970, c]
-    - [0x823BB0, c]
-    - [0x823BF0, c]
-    - [0x8267E0, data]
-    - [0x8268F0, data]
-    - [0x827E70, data]
-    - [0x8282E0, data]
-    - [0x828F10, data]
-    - [0x8313E0, data]
-    - [0x831490]
+    - [0x8232C0, c, mac_02_0_header]
+    - [0x8232C0, c, mac_02_1_music]
+    - [0x8232C0, c, mac_02_2_main]
+    - [0x8238B0, c, mac_02_3_rooms]
+    - [0x823970, c, mac_02_4_foliage]
+    - [0x823BB0, c, mac_02_5_entity]
+    - [0x823BF0, c, mac_02_6_npc]
+    - [0x8266B0, c, mac_02_7_music_mix]
+    - [0x8267E0]
   - name: mac_03
     dir: world/area_mac/mac_03
     type: code
     start: 0x831800
     vram: 0x80240000
     subsegments:
-    - [0x831800, c]
-    - [0x831B20, c]
-    - [0x833500, c]
-    - [0x833740, c]
-    - [0x834070, data]
-    - [0x834170, data]
-    - [0x835370, data]
-    - [0x837CB0, data]
-    - [0x83F500, data]
-    - [0x83F6C0, data]
-    - [0x8404A0, data]
-    - [0x842BB0]
+    - [0x831800, c, mac_03_0_header]
+    - [0x831800, c, mac_03_1_music]
+    - [0x831800, c, mac_03_2_main]
+    - [0x831B20, c, mac_03_3_train]
+    - [0x831CB0, c, mac_03_4_npc]
+    - [0x833500, c, mac_03_5_entity]
+    - [0x833500, c, mac_03_6_foliage]
+    - [0x833740, c, mac_03_7_oinks]
+    - [0x834070, c, mac_03_8_demo]
+    - [0x834070]
   - name: mac_04
     dir: world/area_mac/mac_04
     type: code
     start: 0x842BD0
     vram: 0x80240000
     subsegments:
-    - [0x842BD0, c]
-    - [0x842C20, c]
-    - [0x842D90, c]
-    - [0x842DF0, c]
-    - [0x843030, c]
-    - [0x844860, c]
-    - [0x844AC0, c]
-    - [0x844BF0, data]
-    - [0x844D50, data]
-    - [0x845280, data]
-    - [0x845CA0, data]
-    - [0x8467E0, data]
-    - [0x8469B0, data]
-    - [0x8508F0, data]
-    - [0x851410, data]
-    - [0x8520A0, data]
-    - [0x852120]
+    - [0x842BD0, c, mac_04_0_header]
+    - [0x842C20, c, mac_04_1_music]
+    - [0x842C20, c, mac_04_2_main]
+    - [0x842D90, c, mac_04_3_rooms]
+    - [0x842DF0, c, mac_04_4_foliage]
+    - [0x843030, c, mac_04_5_shop]
+    - [0x843030, c, mac_04_6_npc]
+    - [0x844860, c, mac_04_7_wish_scene]
+    - [0x844860, c, mac_04_8_entity]
+    - [0x844AC0, c, mac_04_9_music_mix]
+    - [0x844BF0]
   - name: mac_05
     dir: world/area_mac/mac_05
     type: code
     start: 0x852170
     vram: 0x80240000
     subsegments:
-    - [0x852170, c]
-    - [0x855560, c]
-    - [0x855F20, c]
-    - [0x8562D0, data]
-    - [0x8564E0, data]
-    - [0x856650, data]
-    - [0x857070, data]
-    - [0x862BC0, data]
-    - [0x864450, data]
-    - [0x864910]
+    - [0x852170, c, mac_05_0_header]
+    - [0x852170, c, mac_05_1_music]
+    - [0x852170, c, mac_05_2_entity]
+    - [0x852170, c, mac_05_3_main]
+    - [0x852600, c, mac_05_4_npc]
+    - [0x855560, c, mac_05_5_whale]
+    - [0x855F20, c, mac_05_6_rooms]
+    - [0x855F20, c, mac_05_7_club64_sign]
+    - [0x8562D0]
   - name: mac_06
     dir: world/area_mac/mac_06
     type: code
     start: 0x864B40
     vram: 0x80240000
     subsegments:
+    - [0x864B40, c, mac_06_0_header]
     - [0x864B40, c, mac_06_1_main]
-    - [0x865000, c, mac_06_2]
-    - [0x8659C0, c, mac_06_3]
+    - [0x865000, c, mac_06_2_whale]
+    - [0x8659C0, c, mac_06_3_npc]
     - [0x8661D0]
   - name: tik_01
     dir: world/area_tik/tik_01
@@ -8952,71 +9238,66 @@ segments:
     start: 0x8694B0
     vram: 0x80240000
     subsegments:
-    - [0x8694B0, c]
-    - [0x869AA0, c]
-    - [0x869EE0, c]
-    - [0x869F40, data]
-    - [0x86A030, data]
-    - [0x86B350, data]
-    - [0x86BC00, data]
-    - [0x86C710]
+    - [0x8694B0, c, tik_01_0_header]
+    - [0x8694B0, c, tik_01_1_music]
+    - [0x8694B0, c, tik_01_2_main]
+    - [0x869AA0, c, tik_01_3_drips]
+    - [0x869EE0, c, tik_01_4_entity]
+    - [0x869EE0, c, tik_01_5_npc]
+    - [0x869F40]
   - name: tik_02
     dir: world/area_tik/tik_02
     type: code
     start: 0x86C740
     vram: 0x80240000
     subsegments:
-    - [0x86C740, c]
-    - [0x86CA50, c]
-    - [0x86CD10, c]
-    - [0x86D0E0, data]
-    - [0x86D190, data]
-    - [0x86D800, data]
-    - [0x86E2C0, data]
-    - [0x86EAF0]
+    - [0x86C740, c, tik_02_0_header]
+    - [0x86C740, c, tik_02_1_music]
+    - [0x86C740, c, tik_02_2_main]
+    - [0x86CA50, c, tik_02_3_entity]
+    - [0x86CD10, c, tik_02_4_drips]
+    - [0x86D0E0, c, tik_02_5_npc]
+    - [0x86D0E0]
   - name: tik_03
     dir: world/area_tik/tik_03
     type: code
     start: 0x86EB00
     vram: 0x80240000
     subsegments:
-    - [0x86EB00, c]
-    - [0x86F0F0, c]
-    - [0x86F5D0, data]
-    - [0x86F670, data]
-    - [0x870B60, data]
-    - [0x871430, data]
-    - [0x871730, data]
-    - [0x8717F0, data]
-    - [0x871A10]
+    - [0x86EB00, c, tik_03_0_header]
+    - [0x86EB00, c, tik_03_1_music]
+    - [0x86EB00, c, tik_03_2_main]
+    - [0x86F0F0, c, tik_03_3_drips]
+    - [0x86F460, c, tik_03_4_platforms]
+    - [0x86F4C0, c, tik_03_5_entity]
+    - [0x86F4C0, c, tik_03_6_demo]
+    - [0x86F5D0]
   - name: tik_04
     dir: world/area_tik/tik_04
     type: code
     start: 0x871A30
     vram: 0x80240000
     subsegments:
-    - [0x871A30, c]
-    - [0x872020, c]
-    - [0x8726A0, data]
-    - [0x872750, data]
-    - [0x8739F0, data]
-    - [0x8742C0, data]
-    - [0x8746E0, data]
-    - [0x874DA0]
+    - [0x871A30, c, tik_04_0_header]
+    - [0x871A30, c, tik_04_1_music]
+    - [0x871A30, c, tik_04_2_main]
+    - [0x872020, c, tik_04_3_drips]
+    - [0x872390, c, tik_04_4_platforms]
+    - [0x8726A0, c, tik_04_5_npc]
+    - [0x8726A0]
   - name: tik_05
     dir: world/area_tik/tik_05
     type: code
     start: 0x874DC0
     vram: 0x80240000
     subsegments:
-    - [0x874DC0, c]
-    - [0x8750D0, c]
-    - [0x875810, data]
-    - [0x8758C0, data]
-    - [0x875D10, data]
-    - [0x8765C0, data]
-    - [0x876A50, data]
-    - [0x876ED0]
+    - [0x874DC0, c, tik_05_0_header]
+    - [0x874DC0, c, tik_05_1_music]
+    - [0x874DC0, c, tik_05_2_main]
+    - [0x8750D0, c, tik_05_3_drips]
+    - [0x875440, c, tik_05_4_entity]
+    - [0x875810, c, tik_05_5_npc]
+    - [0x875810]
   - name: tik_06
     dir: world/area_tik/tik_06
     type: code
@@ -9035,205 +9316,194 @@ segments:
     start: 0x879BE0
     vram: 0x80240000
     subsegments:
-    - [0x879BE0, c]
-    - [0x87AC00, c]
-    - [0x87C4D0, data]
-    - [0x87C570, data]
-    - [0x87D5D0, data]
-    - [0x87E590, data]
-    - [0x87E890, data]
-    - [0x87ED80]
+    - [0x879BE0, c, tik_07_0_header]
+    - [0x879BE0, c, tik_07_1_music]
+    - [0x879BE0, c, tik_07_2_main]
+    - [0x879EC0, c, tik_07_3_entity]
+    - [0x87AC00, c, tik_07_4_drips]
+    - [0x87AF70, c, tik_07_5_platforms]
+    - [0x87AFD0, c, tik_07_6_npc]
+    - [0x87C4D0]
   - name: tik_08
     dir: world/area_tik/tik_08
     type: code
     start: 0x87EDF0
     vram: 0x80240000
     subsegments:
-    - [0x87EDF0, c]
-    - [0x87F3E0, c]
-    - [0x87F820, c]
-    - [0x87F8B0, data]
-    - [0x87F9A0, data]
-    - [0x881770, data]
-    - [0x8819D0, data]
-    - [0x8821A0]
+    - [0x87EDF0, c, tik_08_0_header]
+    - [0x87EDF0, c, tik_08_1_music]
+    - [0x87EDF0, c, tik_08_2_main]
+    - [0x87F3E0, c, tik_08_3_drips]
+    - [0x87F750, c, tik_08_4_entity]
+    - [0x87F820, c, tik_08_5_npc]
+    - [0x87F8B0]
   - name: tik_09
     dir: world/area_tik/tik_09
     type: code
     start: 0x8821C0
     vram: 0x80240000
     subsegments:
-    - [0x8821C0, c]
-    - [0x8827B0, c]
-    - [0x882BF0, c]
-    - [0x883460, data]
-    - [0x883500, data]
-    - [0x8856E0, data]
-    - [0x885A80, data]
-    - [0x886340]
+    - [0x8821C0, c, tik_09_0_header]
+    - [0x8821C0, c, tik_09_1_music]
+    - [0x8821C0, c, tik_09_2_main]
+    - [0x8827B0, c, tik_09_3_drips]
+    - [0x882B20, c, tik_09_4_entity]
+    - [0x882BF0, c, tik_09_5_npc]
+    - [0x883460]
   - name: tik_10
     dir: world/area_tik/tik_10
     type: code
     start: 0x8863C0
     vram: 0x80240000
     subsegments:
-    - [0x8863C0, c]
-    - [0x8866D0, c]
-    - [0x887780, data]
-    - [0x887800, data]
-    - [0x887B20, data]
-    - [0x8883F0, data]
-    - [0x888BC0]
+    - [0x8863C0, c, tik_10_0_header]
+    - [0x8863C0, c, tik_10_1_music]
+    - [0x8863C0, c, tik_10_2_main]
+    - [0x8866D0, c, tik_10_3_drips]
+    - [0x886A40, c, tik_10_4_entity]
+    - [0x887780]
   - name: tik_12
     dir: world/area_tik/tik_12
     type: code
     start: 0x888BD0
     vram: 0x80240000
     subsegments:
-    - [0x888BD0, c]
-    - [0x8891C0, c]
-    - [0x88A530, c]
-    - [0x88AE20, data]
-    - [0x88AEA0, data]
-    - [0x88BF60, data]
-    - [0x88C810, data]
-    - [0x88D590]
+    - [0x888BD0, c, tik_12_0_header]
+    - [0x888BD0, c, tik_12_1_music]
+    - [0x888BD0, c, tik_12_2_main]
+    - [0x8891C0, c, tik_12_3_drips]
+    - [0x889530, c, tik_12_4_entity]
+    - [0x88A530, c, tik_12_5_npc]
+    - [0x88AE20]
   - name: tik_14
     dir: world/area_tik/tik_14
     type: code
     start: 0x88D600
     vram: 0x80240000
     subsegments:
-    - [0x88D600, c]
-    - [0x88DBF0, c]
-    - [0x88DF60, data]
-    - [0x88DFF0, data]
-    - [0x88F180, data]
-    - [0x88FA30, data]
-    - [0x88FB90]
+    - [0x88D600, c, tik_14_0_header]
+    - [0x88D600, c, tik_14_1_music]
+    - [0x88D600, c, tik_14_2_main]
+    - [0x88DBF0, c, tik_14_3_drips]
+    - [0x88DF60, c, tik_14_4_entity]
+    - [0x88DF60]
   - name: tik_15
     dir: world/area_tik/tik_15
     type: code
     start: 0x88FBA0
     vram: 0x80240000
     subsegments:
-    - [0x88FBA0, c]
-    - [0x890190, c]
-    - [0x8906B0, data]
-    - [0x890740, data]
-    - [0x891890, data]
-    - [0x8922A0, data]
-    - [0x892A10]
+    - [0x88FBA0, c, tik_15_0_header]
+    - [0x88FBA0, c, tik_15_1_music]
+    - [0x88FBA0, c, tik_15_2_main]
+    - [0x890190, c, tik_15_3_entity]
+    - [0x890190, c, tik_15_4_drips]
+    - [0x890500, c, tik_15_5_npc]
+    - [0x8906B0]
   - name: tik_17
     dir: world/area_tik/tik_17
     type: code
     start: 0x892A20
     vram: 0x80240000
     subsegments:
-    - [0x892A20, c]
-    - [0x892A50, c]
-    - [0x893790, c]
-    - [0x893D80, data]
-    - [0x893E40, data]
-    - [0x8944F0, data]
-    - [0x8956C0]
+    - [0x892A20, c, tik_17_0_header]
+    - [0x892A20, c, tik_17_1_music]
+    - [0x892A50, c, tik_17_2_entity]
+    - [0x893790, c, tik_17_3_main]
+    - [0x893D80]
   - name: tik_18
     dir: world/area_tik/tik_18
     type: code
     start: 0x8956E0
     vram: 0x80240000
     subsegments:
-    - [0x8956E0, c]
-    - [0x8959F0, c]
-    - [0x895D90, data]
-    - [0x895E20, data]
-    - [0x896CA0, data]
-    - [0x897450, data]
-    - [0x8975D0]
+    - [0x8956E0, c, tik_18_0_header]
+    - [0x8956E0, c, tik_18_1_music]
+    - [0x8956E0, c, tik_18_2_main]
+    - [0x8959F0, c, tik_18_3_drips]
+    - [0x895D60, c, tik_18_4_npc]
+    - [0x895D60, c, tik_18_5_entity]
+    - [0x895D90]
   - name: tik_19
     dir: world/area_tik/tik_19
     type: code
     start: 0x8975E0
     vram: 0x80240000
     subsegments:
-    - [0x8975E0, c]
-    - [0x897BD0, c]
-    - [0x898910, data]
-    - [0x898990, data]
-    - [0x899C90, data]
-    - [0x89A340]
+    - [0x8975E0, c, tik_19_0_header]
+    - [0x8975E0, c, tik_19_1_music]
+    - [0x8975E0, c, tik_19_2_main]
+    - [0x897BD0, c, tik_19_3_entity]
+    - [0x898910]
   - name: tik_20
     dir: world/area_tik/tik_20
     type: code
     start: 0x89A350
     vram: 0x80240000
     subsegments:
-    - [0x89A350, c]
-    - [0x89ACB0, c]
-    - [0x89B490, data]
-    - [0x89B530, data]
-    - [0x89D200, data]
-    - [0x89D720]
+    - [0x89A350, c, tik_20_0_header]
+    - [0x89A350, c, tik_20_1_music]
+    - [0x89A350, c, tik_20_2_main]
+    - [0x89ACB0, c, tik_20_3_npc]
+    - [0x89B490, c, tik_20_4_entity]
+    - [0x89B490]
   - name: tik_21
     dir: world/area_tik/tik_21
     type: code
     start: 0x89D7A0
     vram: 0x80240000
     subsegments:
-    - [0x89D7A0, c]
-    - [0x89E100, data]
-    - [0x89E1A0, data]
-    - [0x89FD70, data]
-    - [0x89FEA0]
+    - [0x89D7A0, c, tik_21_0_header]
+    - [0x89D7A0, c, tik_21_1_music]
+    - [0x89D7A0, c, tik_21_2_main]
+    - [0x89E100, c, tik_21_3_entity]
+    - [0x89E100]
   - name: tik_22
     dir: world/area_tik/tik_22
     type: code
     start: 0x89FEC0
     vram: 0x80240000
     subsegments:
-    - [0x89FEC0, c]
-    - [0x89FEF0, c]
-    - [0x8A0870, data]
-    - [0x8A0930, data]
-    - [0x8A23C0]
+    - [0x89FEC0, c, tik_22_0_header]
+    - [0x89FEC0, c, tik_22_1_music]
+    - [0x89FEF0, c, tik_22_2_main]
+    - [0x8A0870]
   - name: tik_23
     dir: world/area_tik/tik_23
     type: code
     start: 0x8A23D0
     vram: 0x80240000
     subsegments:
-    - [0x8A23D0, c]
-    - [0x8A2D30, c]
-    - [0x8A3510, data]
-    - [0x8A35A0, data]
-    - [0x8A5340, data]
-    - [0x8A5A10]
+    - [0x8A23D0, c, tik_23_0_header]
+    - [0x8A23D0, c, tik_23_1_music]
+    - [0x8A23D0, c, tik_23_2_main]
+    - [0x8A2D30, c, tik_23_3_entity]
+    - [0x8A2D30, c, tik_23_4_npc]
+    - [0x8A3510]
   - name: tik_24
     dir: world/area_tik/tik_24
     type: code
     start: 0x8A5A80
     vram: 0x80240000
     subsegments:
-    - [0x8A5A80, c]
-    - [0x8A5AD0, c]
-    - [0x8A5DE0, c]
-    - [0x8A6930, data]
-    - [0x8A69C0, data]
-    - [0x8A7810, data]
-    - [0x8A7A20, data]
-    - [0x8A7EF0]
+    - [0x8A5A80, c, tik_24_0_header]
+    - [0x8A5AD0, c, tik_24_1_music]
+    - [0x8A5AD0, c, tik_24_2_main]
+    - [0x8A5DE0, c, tik_24_3_drips]
+    - [0x8A6150, c, tik_24_4_entity]
+    - [0x8A6150, c, tik_24_5_npc]
+    - [0x8A6930]
   - name: tik_25
     dir: world/area_tik/tik_25
     type: code
     start: 0x8A7F80
     vram: 0x80240000
     subsegments:
-    - [0x8A7F80, c]
-    - [0x8A8600, c]
-    - [0x8A8740, data]
-    - [0x8A8800, data]
-    - [0x8A93D0, data]
-    - [0x8A9A00]
+    - [0x8A7F80, c, tik_25_0_header]
+    - [0x8A7F80, c, tik_25_1_music]
+    - [0x8A7F80, c, tik_25_2_main]
+    - [0x8A8600, c, tik_25_3_entity]
+    - [0x8A8740]
   - name: kgr_01
     dir: world/area_kgr/kgr_01
     type: code
@@ -9395,17 +9665,19 @@ segments:
     start: 0x8DA100
     vram: 0x80240000
     subsegments:
-    - [0x8DA100, c]
-    - [0x8DA3A0, c]
-    - [0x8DAFC0, c]
-    - [0x8DB020, c]
-    - [0x8DB260, data]
-    - [0x8DB2F0, data]
-    - [0x8DC270, data]
-    - [0x8DE400, data]
-    - [0x8DFBB0, data]
-    - [0x8E0190, data]
-    - [0x8EB190]
+    - [0x8DA100, c, kmr_11_0_header]
+    - [0x8DA100, c, kmr_11_1_music]
+    - [0x8DA100, c, kmr_11_2_main]
+    - [0x8DA3A0, c, kmr_11_3_scenes]
+    - [0x8DA470, c, kmr_11_4_npc]
+    - [0x8DAFC0, c, kmr_11_5_entity]
+    - [0x8DB020, c, kmr_11_6_kammy]
+    - [0x8DB020, c, kmr_11_7_foliage]
+    - [0x8DB260, c, kmr_11_8_fortress_skeleton]
+    - [0x8DB260, c, kmr_11_9_fortress_animation]
+    - [0x8DB260, c, kmr_11_10_bridge_skeleton]
+    - [0x8DB260, c, kmr_11_11_bridge_animation]
+    - [0x8DB260]
   - name: kmr_12
     dir: world/area_kmr/kmr_12
     type: code
@@ -9461,12 +9733,20 @@ segments:
     start: 0x8FF670
     vram: 0x80240000
     subsegments:
-    - [0x8FF670, c]
-    - [0x8FF680, c]
-    - [0x8FF8B0, c]
-    - [0x900380, data]
-    - [0x900A80, data]
-    - [0x9079D0]
+    - [0x8FF670, c, kmr_22_0_header]
+    - [0x8FF680, c, kmr_22_1_main]
+    - [0x8FF8B0, c, kmr_22_2_npc]
+    - [0x900380, .data, kmr_22_0_header]
+    - [0x900450, .data, kmr_22_1_main]
+    - start: 0x900A80
+      type: .data
+      name: kmr_22_2_npc
+      subsegments:
+      - [0x900A80]
+      - [0x900F70, ci4, lava_piranha_vine, 64, 32]
+      - [0x901370, palette, lava_piranha_vine]
+      - [0x901570, gfx, lava_piranha_vine]
+      - [0x901650]
   - name: kmr_23
     dir: world/area_kmr/kmr_23
     type: code
@@ -9593,7 +9873,7 @@ segments:
     - [0x91E6D0, c, iwa_10_4_train]
     - [0x91F5A0, c, iwa_10_5_entity]
     - [0x91FA80, c, iwa_10_6_parakarry]
-    - [0x91FA80, c, iwa_10_7_new_party]
+    - [0x91FA80, c, iwa_10_7_new_partner]
     - [0x91FB20, c, iwa_10_8_foliage]
     - [0x91FD60]
   - name: iwa_11
@@ -9817,7 +10097,6 @@ segments:
     type: code
     start: 0x93F5B0
     vram: 0x80240000
-    subalign: 16
     subsegments:
     - [0x93F5B0, c, sbk_30_0_header]
     - [0x93F5B0, c, sbk_30_1_music]
@@ -10132,9 +10411,7 @@ segments:
       - [0x970B78, gfx, card_1]
       - [0x970BF8, gfx, card_2]
       - [0x970C40]
-      - [0x971F98, vtx, toad_house_blanket]
-      - [0x973578, gfx, toad_house_blanket]
-      - [0x9736E0, rgba16, toad_house_blanket, 16, 32]
+      - [0x971F98] # unmapped vtx/gfx for toad house blanket
       - [0x973AE0]
     - [0x9780D0]
   - name: isk_01
@@ -10143,51 +10420,50 @@ segments:
     start: 0x978140
     vram: 0x80240000
     subsegments:
-    - [0x978140, c]
-    - [0x978140, data]
-    - [0x978360, data]
-    - [0x9785C0, data]
-    - [0x978700]
+    - [0x978140, c, isk_01_0_header]
+    - [0x978140, c, isk_01_1_music]
+    - [0x978140, c, isk_01_2_main]
+    - [0x978140, c, isk_01_3_haze]
+    - [0x978140, c, isk_01_4_entity]
+    - [0x978140]
   - name: isk_02
     dir: world/area_isk/isk_02
     type: code
     start: 0x978710
     vram: 0x80240000
     subsegments:
-    - [0x978710, c]
-    - [0x978750, c]
-    - [0x978800, c]
-    - [0x978820, data]
-    - [0x978B80, data]
-    - [0x978DE0, data]
-    - [0x979390, data]
-    - [0x9793F0, data]
-    - [0x979E40]
+    - [0x978710, c, isk_02_0_header]
+    - [0x978710, c, isk_02_1_main]
+    - [0x978710, c, isk_02_2_lock]
+    - [0x978750, c, isk_02_3_ambush]
+    - [0x978800, c, isk_02_4_entity]
+    - [0x978800, c, isk_02_5_npc]
+    - [0x978820]
   - name: isk_03
     dir: world/area_isk/isk_03
     type: code
     start: 0x979E50
     vram: 0x80240000
     subsegments:
-    - [0x979E50, c]
-    - [0x979E50, data]
-    - [0x97A210, data]
-    - [0x97B340, data]
-    - [0x97B620]
+    - [0x979E50, c, isk_03_0_header]
+    - [0x979E50, c, isk_03_1_main]
+    - [0x979E50, c, isk_03_2_sand]
+    - [0x979E50, c, isk_03_3_entity]
+    - [0x979E50, c, isk_03_4_switch]
+    - [0x979E50]
   - name: isk_04
     dir: world/area_isk/isk_04
     type: code
     start: 0x97B630
     vram: 0x80240000
     subsegments:
-    - [0x97B630, c]
-    - [0x97B670, c]
-    - [0x97BF60, c]
-    - [0x97C0A0, data]
-    - [0x97C300, data]
-    - [0x97CA70, data]
-    - [0x97CB60, data]
-    - [0x97D2F0, data]
+    - [0x97B630, c, isk_04_0_header]
+    - [0x97B630, c, isk_04_1_music]
+    - [0x97B630, c, isk_04_2_main]
+    - [0x97B630, c, isk_04_3_obstructions]
+    - [0x97B670, c, isk_04_4_entity]
+    - [0x97B670, c, isk_04_5_npc]
+    - [0x97BF60, c, isk_04_6_demo]
     - [0x97DA40]
   - name: isk_05
     dir: world/area_isk/isk_05
@@ -10195,37 +10471,37 @@ segments:
     start: 0x97DAD0
     vram: 0x80240000
     subsegments:
-    - [0x97DAD0, c]
-    - [0x97F990, data]
-    - [0x97FCE0, data]
-    - [0x97FE50, data]
-    - [0x980970]
+    - [0x97DAD0, c, isk_05_0_header]
+    - [0x97DAD0, c, isk_05_1_main]
+    - [0x97DAD0, c, isk_05_2_entity]
+    - [0x97DAD0, c, isk_05_3_npc]
+    - [0x97F990]
   - name: isk_06
     dir: world/area_isk/isk_06
     type: code
     start: 0x980A20
     vram: 0x80240000
     subsegments:
-    - [0x980A20, c]
-    - [0x980A20, data]
-    - [0x980D40, data]
-    - [0x982150, data]
-    - [0x982430]
+    - [0x980A20, c, isk_06_0_header]
+    - [0x980A20, c, isk_06_1_main]
+    - [0x980A20, c, isk_06_2_entity]
+    - [0x980A20, c, isk_06_3_sand]
+    - [0x980A20, c, isk_06_4_switch]
+    - [0x980A20]
   - name: isk_07
     dir: world/area_isk/isk_07
     type: code
     start: 0x982440
     vram: 0x80240000
     subsegments:
-    - [0x982440, c]
-    - [0x9824F0, c]
-    - [0x982530, c]
-    - [0x982550, data]
-    - [0x982860, data]
-    - [0x982CA0, data]
-    - [0x983AD0, data]
-    - [0x984390, data]
-    - [0x9845D0, data]
+    - [0x982440, c, isk_07_0_header]
+    - [0x982440, c, isk_07_1_main]
+    - [0x982440, c, isk_07_2_entity]
+    - [0x982440, c, isk_07_3_npc]
+    - [0x9824F0, c, isk_07_4_stairs]
+    - [0x9824F0, c, isk_07_5_lock]
+    - [0x982530, c, isk_07_6_switch]
+    - [0x984E20, c, isk_07_7_ambush]
     - [0x984E20]
   - name: isk_08
     dir: world/area_isk/isk_08
@@ -10233,24 +10509,23 @@ segments:
     start: 0x984E30
     vram: 0x80240000
     subsegments:
-    - [0x984E30, c]
-    - [0x985720, data]
-    - [0x985B00, data]
-    - [0x986090, data]
-    - [0x986460]
+    - [0x984E30, c, isk_08_0_header]
+    - [0x984E30, c, isk_08_1_main]
+    - [0x984E30, c, isk_08_2_npc]
+    - [0x986090, c, isk_08_3_entity]
+    - [0x986090]
   - name: isk_09
     dir: world/area_isk/isk_09
     type: code
     start: 0x9864E0
     vram: 0x80240000
     subsegments:
-    - [0x9864E0, c]
-    - [0x9867D0, c]
-    - [0x986810, data]
-    - [0x986A60, data]
-    - [0x986BD0, data]
-    - [0x987560, data]
-    - [0x988290, data]
+    - [0x9864E0, c, isk_09_0_header]
+    - [0x9864E0, c, isk_09_1_music]
+    - [0x9864E0, c, isk_09_2_main]
+    - [0x9864E0, c, isk_09_3_entity]
+    - [0x9867D0, c, isk_09_4_stairs]
+    - [0x9867D0, c, isk_09_5_switch]
     - [0x988B50]
   - name: isk_10
     dir: world/area_isk/isk_10
@@ -10258,9 +10533,10 @@ segments:
     start: 0x988B60
     vram: 0x80240000
     subsegments:
-    - [0x988B60, c]
-    - [0x989910, data]
-    - [0x98A580, data]
+    - [0x988B60, c, isk_10_0_header]
+    - [0x988B60, c, isk_10_1_main]
+    - [0x988B60, c, isk_10_2_entity]
+    - [0x98A9E0, c, isk_10_3_bombable]
     - [0x98A9E0]
   - name: isk_11
     dir: world/area_isk/isk_11
@@ -10268,26 +10544,25 @@ segments:
     start: 0x98AA10
     vram: 0x80240000
     subsegments:
-    - [0x98AA10, c]
-    - [0x98AAC0, c]
-    - [0x98AB30, c]
-    - [0x98AB70, data]
-    - [0x98ADB0, data]
-    - [0x98B330, data]
-    - [0x98B620, data]
-    - [0x98D3C0, data]
-    - [0x98D620]
+    - [0x98AA10, c, isk_11_0_header]
+    - [0x98AA10, c, isk_11_1_music]
+    - [0x98AA10, c, isk_11_2_main]
+    - [0x98AA10, c, isk_11_3_entity]
+    - [0x98AA10, c, isk_11_4_scene]
+    - [0x98AAC0, c, isk_11_5_puzzle]
+    - [0x98AB30, c, isk_11_6_lock]
+    - [0x98AB70]
   - name: isk_12
     dir: world/area_isk/isk_12
     type: code
     start: 0x98D640
     vram: 0x80240000
     subsegments:
-    - [0x98D640, c]
-    - [0x98D640, data]
-    - [0x98DA70, data]
-    - [0x98DCB0, data]
-    - [0x98ED40, data]
+    - [0x98D640, c, isk_12_0_header]
+    - [0x98D640, c, isk_12_1_main]
+    - [0x98D640, c, isk_12_2_entity]
+    - [0x98D640, c, isk_12_3_sand]
+    - [0x98D640, c, isk_12_4_switch]
     - [0x98F7C0]
   - name: isk_13
     dir: world/area_isk/isk_13
@@ -10295,9 +10570,10 @@ segments:
     start: 0x98F7E0
     vram: 0x80240000
     subsegments:
-    - [0x98F7E0, c]
-    - [0x991850, data]
-    - [0x991A90, data]
+    - [0x98F7E0, c, isk_13_0_header]
+    - [0x98F7E0, c, isk_13_1_main]
+    - [0x98F7E0, c, isk_13_2_entity]
+    - [0x98F7E0, c, isk_13_3_npc]
     - [0x992680]
   - name: isk_14
     dir: world/area_isk/isk_14
@@ -10305,23 +10581,22 @@ segments:
     start: 0x992730
     vram: 0x80240000
     subsegments:
-    - [0x992730, c]
-    - [0x994490, data]
-    - [0x9946D0, data]
-    - [0x994860, data]
-    - [0x995150]
+    - [0x992730, c, isk_14_0_header]
+    - [0x992730, c, isk_14_1_main]
+    - [0x992730, c, isk_14_2_entity]
+    - [0x992730, c, isk_14_3_npc]
+    - [0x994490]
   - name: isk_16
     dir: world/area_isk/isk_16
     type: code
     start: 0x9951F0
     vram: 0x80240000
     subsegments:
-    - [0x9951F0, c]
-    - [0x9959F0, c]
-    - [0x995CF0, data]
-    - [0x996410, data]
-    - [0x996C40, data]
-    - [0x997E20, data]
+    - [0x9951F0, c, isk_16_0_header]
+    - [0x9951F0, c, isk_16_1_main]
+    - [0x9959F0, c, isk_16_2_npc]
+    - [0x9959F0, c, isk_16_3_boss]
+    - [0x997F40, c, isk_16_4_entity]
     - [0x997F40]
   - name: isk_18
     dir: world/area_isk/isk_18
@@ -10329,10 +10604,10 @@ segments:
     start: 0x997F70
     vram: 0x80240000
     subsegments:
-    - [0x997F70, c]
-    - [0x998860, data]
-    - [0x998B90, data]
-    - [0x999520, data]
+    - [0x997F70, c, isk_18_0_header]
+    - [0x997F70, c, isk_18_1_main]
+    - [0x997F70, c, isk_18_2_npc]
+    - [0x9996D0, c, isk_18_3_entity]
     - [0x9996D0]
   - name: isk_19
     dir: world/area_isk/isk_19
@@ -10340,11 +10615,11 @@ segments:
     start: 0x999740
     vram: 0x80240000
     subsegments:
-    - [0x999740, c]
-    - [0x999740, data]
-    - [0x999960, data]
-    - [0x999BA0, data]
-    - [0x999C60]
+    - [0x999740, c, isk_19_0_header]
+    - [0x999740, c, isk_19_1_music]
+    - [0x999740, c, isk_19_2_main]
+    - [0x999740, c, isk_19_3_entity]
+    - [0x999740]
   - name: trd_00
     dir: world/area_trd/trd_00
     type: code
@@ -10418,7 +10693,6 @@ segments:
     type: code
     start: 0x9B1790
     vram: 0x80240000
-    subalign: 16
     subsegments:
     - [0x9B1790, c, trd_06_0_header]
     - [0x9B1790, c, trd_06_1_main]
@@ -12274,26 +12548,28 @@ segments:
     start: 0xBBD1A0
     vram: 0x80240000
     subsegments:
-    - [0xBBD1A0, c]
-    - [0xBBD980, c]
-    - [0xBBE2E0, data]
-    - [0xBBE410, data]
-    - [0xBC0100, data]
-    - [0xBC11A0, data]
-    - [0xBC2A30]
+    - [0xBBD1A0, c, obk_01_0_header]
+    - [0xBBD1A0, c, obk_01_1_music]
+    - [0xBBD1A0, c, obk_01_2_main]
+    - [0xBBD1A0, c, obk_01_3_chandelier]
+    - [0xBBD980, c, obk_01_4_portrait]
+    - [0xBBD980, c, obk_01_5_jump_scare]
+    - [0xBBD980, c, obk_01_6_npc]
+    - [0xBBE2E0, c, obk_01_7_entity]
+    - [0xBBE2E0]
   - name: obk_02
     dir: world/area_obk/obk_02
     type: code
     start: 0xBC2A90
     vram: 0x80240000
     subsegments:
-    - [0xBC2A90, c]
-    - [0xBC2CD0, c]
-    - [0xBC2D40, data]
-    - [0xBC2E20, data]
-    - [0xBC3720, data]
-    - [0xBC3DE0, data]
-    - [0xBC3F60, data]
+    - [0xBC2A90, c, obk_02_0_header]
+    - [0xBC2A90, c, obk_02_1_music]
+    - [0xBC2A90, c, obk_02_2_main]
+    - [0xBC2A90, c, obk_02_3_npc]
+    - [0xBC2CD0, c, obk_02_4_bombable]
+    - [0xBC2CD0, c, obk_02_5_clock]
+    - [0xBC4260, c, obk_02_6_entity]
     - [0xBC4260]
   - name: obk_03
     dir: world/area_obk/obk_03
@@ -12301,100 +12577,97 @@ segments:
     start: 0xBC4280
     vram: 0x80240000
     subsegments:
-    - [0xBC4280, c]
-    - [0xBC43F0, c]
-    - [0xBC4B50, c]
-    - [0xBC5270, data]
-    - [0xBC5350, data]
-    - [0xBC5770, data]
-    - [0xBC5A00, data]
-    - [0xBC6250, data]
-    - [0xBC7120, data]
-    - [0xBC7DE0, data]
-    - [0xBC7E40]
+    - [0xBC4280, c, obk_03_0_header]
+    - [0xBC4280, c, obk_03_1_music]
+    - [0xBC4280, c, obk_03_2_main]
+    - [0xBC4280, c, obk_03_3_shop]
+    - [0xBC4280, c, obk_03_4_entity]
+    - [0xBC43F0, c, obk_03_5_stairs]
+    - [0xBC43F0, c, obk_03_6_npc]
+    - [0xBC4B50, c, obk_03_7_rocking_chair]
+    - [0xBC5270]
   - name: obk_04
     dir: world/area_obk/obk_04
     type: code
     start: 0xBC7E60
     vram: 0x80240000
     subsegments:
-    - [0xBC7E60, c]
-    - [0xBC7EB0, c]
-    - [0xBC8CE0, data]
-    - [0xBC8DE0, data]
-    - [0xBC9020, data]
-    - [0xBCB260, data]
-    - [0xBCB870, data]
-    - [0xBCD030]
+    - [0xBC7E60, c, obk_04_0_header]
+    - [0xBC7E60, c, obk_04_1_music]
+    - [0xBC7E60, c, obk_04_2_entity]
+    - [0xBC7EB0, c, obk_04_3_npc]
+    - [0xBC87A0, c, obk_04_4_main]
+    - [0xBC87A0, c, obk_04_5_hole]
+    - [0xBC87A0, c, obk_04_6_game]
+    - [0xBC8CE0]
   - name: obk_05
     dir: world/area_obk/obk_05
     type: code
     start: 0xBCD060
     vram: 0x80240000
     subsegments:
-    - [0xBCD060, c]
-    - [0xBCD7D0, c]
-    - [0xBCDA40, data]
-    - [0xBCDB00, data]
-    - [0xBCDFF0, data]
-    - [0xBCE040, data]
-    - [0xBCE680]
+    - [0xBCD060, c, obk_05_0_header]
+    - [0xBCD060, c, obk_05_1_music]
+    - [0xBCD060, c, obk_05_2_main]
+    - [0xBCD7D0, c, obk_05_3_rocking_chair]
+    - [0xBCD800, c, obk_05_4_hole]
+    - [0xBCD800, c, obk_05_5_npc]
+    - [0xBCDA40, c, obk_05_6_entity]
+    - [0xBCDA40]
   - name: obk_06
     dir: world/area_obk/obk_06
     type: code
     start: 0xBCE690
     vram: 0x80240000
     subsegments:
-    - [0xBCE690, c]
-    - [0xBCE690, data]
-    - [0xBCE760, data]
-    - [0xBCEAD0, data]
-    - [0xBCEBE0]
+    - [0xBCE690, c, obk_06_0_header]
+    - [0xBCE690, c, obk_06_1_music]
+    - [0xBCE690, c, obk_06_2_main]
+    - [0xBCE690, c, obk_06_3_bombable]
+    - [0xBCE690, c, obk_06_4_entity]
+    - [0xBCE690]
   - name: obk_07
     dir: world/area_obk/obk_07
     type: code
     start: 0xBCEBF0
     vram: 0x80240000
     subsegments:
-    - [0xBCEBF0, c]
-    - [0xBCEEB0, c]
-    - [0xBCF0F0, c]
-    - [0xBD0780, data]
-    - [0xBD0840, data]
-    - [0xBD0BA0, data]
-    - [0xBD0DB0, data]
-    - [0xBD14F0, data]
-    - [0xBD1C80, data]
-    - [0xBD3860]
+    - [0xBCEBF0, c, obk_07_0_header]
+    - [0xBCEBF0, c, obk_07_1_music]
+    - [0xBCEBF0, c, obk_07_2_main]
+    - [0xBCEBF0, c, obk_07_3_entity]
+    - [0xBCEEB0, c, obk_07_4_fireplace]
+    - [0xBCEEB0, c, obk_07_5_npc]
+    - [0xBCF0F0, c, obk_07_6_phonograph]
+    - [0xBD0780]
   - name: obk_08
     dir: world/area_obk/obk_08
     type: code
     start: 0xBD3870
     vram: 0x80240000
     subsegments:
-    - [0xBD3870, c]
-    - [0xBD40B0, c]
-    - [0xBD4110, c]
-    - [0xBD4A90, c]
-    - [0xBD5010, data]
-    - [0xBD50D0, data]
-    - [0xBD64D0, data]
-    - [0xBD6DD0, data]
-    - [0xBDA730]
+    - [0xBD3870, c, obk_08_0_header]
+    - [0xBD3870, c, obk_08_1_music]
+    - [0xBD3870, c, obk_08_2_main]
+    - [0xBD3870, c, obk_08_3_cabinets]
+    - [0xBD40B0, c, obk_08_4_entity]
+    - [0xBD4110, c, obk_08_5_npc]
+    - [0xBD4A90, c, obk_08_6_game]
+    - [0xBD5010]
   - name: obk_09
     dir: world/area_obk/obk_09
     type: code
     start: 0xBDA7B0
     vram: 0x80240000
     subsegments:
-    - [0xBDA7B0, c]
-    - [0xBDA940, c]
-    - [0xBDAB00, c]
-    - [0xBDABA0, c]
-    - [0xBDABE0, data]
-    - [0xBDB140, data]
-    - [0xBDCE10, data]
-    - [0xBDD190]
+    - [0xBDA7B0, c, obk_09_0_header]
+    - [0xBDA7B0, c, obk_09_1_music]
+    - [0xBDA7B0, c, obk_09_2_main]
+    - [0xBDA7B0, c, obk_09_3_meet_bow]
+    - [0xBDA940, c, obk_09_4_npc]
+    - [0xBDAB00, c, obk_09_5_new_partner]
+    - [0xBDABA0, c, obk_09_6_epilogue]
+    - [0xBDABE0]
   - name: arn_02
     dir: world/area_arn/arn_02
     type: code
@@ -13067,7 +13340,6 @@ segments:
     type: code
     start: 0xC6C920
     vram: 0x80240000
-    subalign: 16
     subsegments:
     - [0xC6C920, c, kzn_06_0_header]
     - [0xC6C920, c, kzn_06_1_main]
@@ -13176,9 +13448,9 @@ segments:
       name: kzn_19_4_npc
       subsegments:
       - [0xC90BF0]
-      - [0xC91088, ci4, lava_piranha_vine, 64, 32]
-      - [0xC91488, palette, lava_piranha_vine]
-      - [0xC91688, gfx, lava_piranha_vine]
+      - [0xC91088, ci4, ../../lava_piranha/vine, 64, 32]
+      - [0xC91488, palette, ../../lava_piranha/vine]
+      - [0xC91688, gfx_common, ../../lava_piranha/vine]
       - [0xC91768]
     - [0xC959B0, .data, kzn_19_5_eruption]
     - [0xC95E70, .data, kzn_19_6_entity]
@@ -13330,7 +13602,7 @@ segments:
     - [0xCC3810, c, flo_13_2_entity]
     - [0xCC3810, c, flo_13_3_main]
     - [0xCC3850, c, flo_13_4_npc]
-    - [0xCC6DE0, c, flo_13_5_new_party]
+    - [0xCC6DE0, c, flo_13_5_new_partner]
     - [0xCC6E80]
   - name: flo_14
     dir: world/area_flo/flo_14
@@ -14444,8 +14716,7 @@ segments:
     vram: 0x802B6000
     subsegments:
     - [0xE24ED0, c, hammer]
-    - [0xE25C80, data, hammer]
-    - [0xE25C90]
+    - [0xE25C80]
   - type: code
     name: world_action_spin
     dir: world/action
@@ -14531,8 +14802,7 @@ segments:
     vram: 0x802B6000
     subsegments:
     - [0xE2A340, c, use_tweester]
-    - [0xE2A690, data, use_tweester]
-    - [0xE2A6A0]
+    - [0xE2A690]
   - type: code
     name: world_action_sneaky_parasol
     dir: world/action
@@ -14540,8 +14810,7 @@ segments:
     vram: 0x802B6000
     subsegments:
     - [0xE2A6B0, c, sneaky_parasol]
-    - [0xE2B430, data, sneaky_parasol]
-    - [0xE2B440]
+    - [0xE2B430]
   - type: code
     dir: entity/default
     start: 0xE2B530
@@ -15703,217 +15972,303 @@ segments:
       - [0xE9DE90, ci4, BombableRock, 64, 64]
       - [0xE9E690, palette, BombableRock]
       - [0xE9E6B0]
-  - [0xE9ECD0, bin] # unk data
 
 #################
 ### Dead maps ###
 #################
+  - [0xE9ECD0, bin] # tail of dead kzn_11
+  #- name: dead_kzn_11
+  #  dir: world/dead/area_kzn/kzn_11
+  #  type: code
+  #  start: 0xE9AFF0
+  #  vram: 0x80240000
+  #  subsegments:
+  #  - [0xE9AFF0, c, kzn_11_0_header]
+  #  - [0xE9AFF0, c, kzn_11_1_main]
+  #  - [0xE9B300, c, kzn_11_2_platforms]
+  #  - [0xE9B450, c, kzn_11_3_npc]
+  #  - [0xE9D650]
   - name: dead_kzn_17
-    dir: world/dead/kzn_17
+    dir: world/dead/area_kzn/kzn_17
     type: code
     start: 0xEA0900
     vram: 0x80240000
     subsegments:
-    - [0xEA0900, c]
-    - [0xEA0C10, c]
-    - [0xEA36E0, c]
-    - [0xEA3A80, data]
-    - [0xEA6D70]
+    - [0xEA0900, c, kzn_17_0_header]
+    - [0xEA0900, c, kzn_17_1_main]
+    - [0xEA0900, c, kzn_17_2_entity]
+    - [0xEA0C10, c, kzn_17_3_npc]
+    - [0xEA36E0, c, kzn_17_4_tromp]
+    - [0xEA3A80]
   - name: dead_kzn_18
-    dir: world/dead/kzn_18
+    dir: world/dead/area_kzn/kzn_18
     type: code
     start: 0xEA6FD0
     vram: 0x80240000
     subsegments:
-    - [0xEA6FD0, c]
-    - [0xEA7010, c]
-    - [0xEA7320, c]
-    - [0xEA7390, data]
+    - [0xEA6FD0, c, kzn_18_0_header]
+    - [0xEA7010, c, kzn_18_1_main]
+    - [0xEA7320, c, kzn_18_2_npc]
+    - [0xEA7390, c, kzn_18_3_entity]
+    - [0xEA7390]
   - name: dead_kzn_19
-    dir: world/dead/kzn_19
+    dir: world/dead/area_kzn/kzn_19
     type: code
     start: 0xEA8AE0
     vram: 0x80240000
     subsegments:
-    - [0xEA8AE0, c]
-    - [0xEAA810, data]
-    - [0xEB0E20]
-  - name: dead_03
-    dir: world/dead/dead_03
+    - [0xEA8AE0, c, kzn_19_0_header]
+    - [0xEA8AE0, c, kzn_19_1_music]
+    - [0xEA8AE0, c, kzn_19_2_main]
+    - [0xEA95E0, c, kzn_19_3_npc_settings]
+    - [0xEA95E0, c, kzn_19_4_npc]
+    - [0xEA95E0, c, kzn_19_5_eruption]
+    - [0xEA95E0, c, kzn_19_6_entity]
+    - [0xEAA810]
+  - name: dead_kzn_20
+    dir: world/dead/area_kzn/kzn_20
     type: code
     start: 0xEB0E60
     vram: 0x80240000
     subsegments:
-    - [0xEB0E60, c]
-    - [0xEB1170, c]
-    - [0xEB1920, data]
-  - name: dead_04
-    dir: world/dead/dead_04
+    - [0xEB0E60, c, kzn_20_0_header]
+    - [0xEB0E60, c, kzn_20_1_music]
+    - [0xEB0E60, c, kzn_20_2_main]
+    - [0xEB1170, c, kzn_20_3_npc]
+    - [0xEB1920]
+  - name: dead_kzn_22
+    dir: world/dead/area_kzn/kzn_22
     type: code
     start: 0xEB5130
     vram: 0x80240000
     subsegments:
-    - [0xEB5130, c]
-    - [0xEB5470, c]
-    - [0xEB54C0, data]
+    - [0xEB5130, c, kzn_22_0_header]
+    - [0xEB5130, c, kzn_22_1_music]
+    - [0xEB5130, c, kzn_22_2_main]
+    - [0xEB5470, c, kzn_22_3_entity]
+    - [0xEB5470, c, kzn_22_4_npc]
+    - [0xEB54C0]
   - name: dead_kzn_23
-    dir: world/dead/kzn_23
+    dir: world/dead/area_kzn/kzn_23
     type: code
     start: 0xEB7230
     vram: 0x80240000
     subsegments:
-    - [0xEB7230, c]
-    - [0xEB7540, c]
-    - [0xEB7850, data]
-    - [0xEB8E40]
+    - [0xEB7230, c, kzn_23_0_header]
+    - [0xEB7230, c, kzn_23_1_music]
+    - [0xEB7230, c, kzn_23_2_main]
+    - [0xEB7540, c, kzn_23_3_npc]
+    - [0xEB7850]
   - name: dead_flo_00
-    dir: world/dead/flo_00
+    dir: world/dead/area_flo/flo_00
     type: code
     start: 0xEB8E50
     vram: 0x80240000
     subsegments:
-    - [0xEB8E50, c]
-    - [0xEB8E90, c]
-    - [0xEB9D90, c]
-    - [0xEBA260, data]
-    - [0xEC2000]
+    - [0xEB8E50, c, flo_00_0_header]
+    - [0xEB8E50, c, flo_00_1_music]
+    - [0xEB8E50, c, flo_00_2_main]
+    - [0xEB8E90, c, flo_00_3_npc]
+    - [0xEB9D90, c, flo_00_4_epilogue]
+    - [0xEB9D90, c, flo_00_5_beanstalk]
+    - [0xEBA260, c, flo_00_6_entity]
+    - [0xEBA260]
   - name: dead_flo_03
-    dir: world/dead/flo_03
+    dir: world/dead/area_flo/flo_03
     type: code
     start: 0xEC2200
     vram: 0x80240000
     subsegments:
-    - [0xEC2200, c]
-    - [0xEC2240, c]
-    - [0xEC2610, c]
-    - [0xEC2850, data]
-    - [0xEC7170]
+    - [0xEC2200, c, flo_03_0_header]
+    - [0xEC2200, c, flo_03_1_music]
+    - [0xEC2200, c, flo_03_2_main]
+    - [0xEC2240, c, flo_03_3_npc]
+    - [0xEC2610, c, flo_03_4_foliage]
+    - [0xEC2850, c, flo_03_5_entity]
+    - [0xEC2850]
   - name: dead_flo_07
-    dir: world/dead/flo_07
+    dir: world/dead/area_flo/flo_07
     type: code
     start: 0xEC71B0
     vram: 0x80240000
     subsegments:
-    - [0xEC71B0, c]
-    - [0xEC7590, c]
-    - [0xEC78F0, data]
+    - [0xEC71B0, c, flo_07_0_header]
+    - [0xEC71B0, c, flo_07_1_music]
+    - [0xEC71B0, c, flo_07_2_main]
+    - [0xEC7590, c, flo_07_3_npc]
+    - [0xEC7590]
   - name: dead_flo_08
-    dir: world/dead/flo_08
+    dir: world/dead/area_flo/flo_08
     type: code
     start: 0xEC9D00
     vram: 0x80240000
     subsegments:
-    - [0xEC9D00, c]
-    - [0xECAA40, c]
-    - [0xECAA80, c]
-    - [0xECB930, c]
-    - [0xECBB70, c]
-    - [0xECBC10, data]
-    - [0xECFE60]
+    - [0xEC9D00, c, flo_08_0_header]
+    - [0xEC9D00, c, flo_08_1_music]
+    - [0xEC9D00, c, flo_08_2_entity]
+    - [0xECAA40, c, flo_08_3_main]
+    - [0xECAA80, c, flo_08_4_npc]
+    - [0xECB930, c, flo_08_5_foliage]
+    - [0xECBB70, c, flo_08_6_vines]
+    - [0xECBC10]
   - name: dead_flo_09
-    dir: world/dead/flo_09
+    dir: world/dead/area_flo/flo_09
     type: code
     start: 0xECFFF0
     vram: 0x80240000
     subsegments:
-    - [0xECFFF0, c]
-    - [0xED0030, c]
-    - [0xED00D0, c]
-    - [0xED0310, c]
-    - [0xED1840, data]
-    - [0xED41C0]
+    - [0xECFFF0, c, flo_09_0_header]
+    - [0xECFFF0, c, flo_09_1_music]
+    - [0xECFFF0, c, flo_09_2_main]
+    - [0xED0030, c, flo_09_3_vines]
+    - [0xED00D0, c, flo_09_4_foliage]
+    - [0xED0310, c, flo_09_5_npc]
+    - [0xED1840]
   - name: dead_flo_10
-    dir: world/dead/flo_10
+    dir: world/dead/area_flo/flo_10
     type: code
     start: 0xED4220
     vram: 0x80240000
     subsegments:
-    - [0xED4220, c]
-    - [0xED4260, c]
-    - [0xED42A0, c]
-    - [0xED46D0, c]
-    - [0xED5540, c]
-    - [0xED5780, data]
+    - [0xED4220, c, flo_10_0_header]
+    - [0xED4260, c, flo_10_1_music]
+    - [0xED4260, c, flo_10_2_entity]
+    - [0xED4260, c, flo_10_3_main]
+    - [0xED42A0, c, flo_10_4_fountain]
+    - [0xED46D0, c, flo_10_5_npc]
+    - [0xED46D0, c, flo_10_6_waterfx]
+    - [0xED5540, c, flo_10_7_foliage]
+    - [0xED5780]
   - name: dead_flo_11
-    dir: world/dead/flo_11
+    dir: world/dead/area_flo/flo_11
     type: code
     start: 0xED8E20
     vram: 0x80240000
     subsegments:
-    - [0xED8E20, c]
-    - [0xED9170, data]
-    - [0xEDBF90]
+    - [0xED8E20, c, flo_11_0_header]
+    - [0xED8E20, c, flo_11_1_music]
+    - [0xED8E20, c, flo_11_2_main]
+    - [0xED9170, c, flo_11_3_npc]
+    - [0xED9170, c, flo_11_4_entity]
+    - [0xED9170]
   - name: dead_flo_12
-    dir: world/dead/flo_12
+    dir: world/dead/area_flo/flo_12
     type: code
     start: 0xEDBFE0
     vram: 0x80240000
     subsegments:
-    - [0xEDBFE0, c]
-    - [0xEDC020, c]
-    - [0xEDC6D0, data]
+    - [0xEDBFE0, c, flo_12_0_header]
+    - [0xEDBFE0, c, flo_12_1_music]
+    - [0xEDBFE0, c, flo_12_2_main]
+    - [0xEDC020, c, flo_12_3_npc]
+    - [0xEDC6D0]
   - name: dead_flo_13
-    dir: world/dead/flo_13
+    dir: world/dead/area_flo/flo_13
     type: code
     start: 0xEDE9C0
     vram: 0x80240000
     subsegments:
-    - [0xEDE9C0, c]
-    - [0xEDEA00, c]
-    - [0xEE2040, c]
-    - [0xEE20E0, data]
-    - [0xEE64B0]
+    - [0xEDE9C0, c, flo_13_0_header]
+    - [0xEDE9C0, c, flo_13_1_music]
+    - [0xEDE9C0, c, flo_13_2_entity]
+    - [0xEDE9C0, c, flo_13_3_main]
+    - [0xEDEA00, c, flo_13_4_npc]
+    - [0xEE2040, c, flo_13_5_new_partner]
+    - [0xEE20E0]
   - name: dead_flo_14
-    dir: world/dead/flo_14
+    dir: world/dead/area_flo/flo_14
     type: code
     start: 0xEE65B0
     vram: 0x80240000
     subsegments:
-    - [0xEE65B0, c]
-    - [0xEE70C0, c]
-    - [0xEE8940, c]
-    - [0xEE8970, data]
-    - [0xEEB900]
+    - [0xEE65B0, c, flo_14_0_header]
+    - [0xEE65B0, c, flo_14_1_music]
+    - [0xEE65B0, c, flo_14_2_main]
+    - [0xEE68F0, c, flo_14_3_bubbles]
+    - [0xEE70C0, c, flo_14_4_npc]
+    - [0xEE8940, c, flo_14_5_entity]
+    - [0xEE8940, c, flo_14_6_logs]
+    - [0xEE8970]
+  - name: dead_flo_15
+    dir: world/dead/area_flo/flo_15
+    type: code
+    start: 0xEEB990
+    vram: 0x80240000
+    subsegments:
+    - [0xEEB990, c, flo_15_0_header]
+    - [0xEEB990, c, flo_15_1_music]
+    - [0xEEB990, c, flo_15_2_main]
+    - [0xEEB990, c, flo_15_3_npc]
+    - [0xEEB990, c, flo_15_4_entity]
+    - [0xEEB990, c, flo_15_5_stairs]
+    - [0xEEB990]
   - name: dead_flo_16
-    dir: world/dead/flo_16
+    dir: world/dead/area_flo/flo_16
     type: code
     start: 0xEED100
     vram: 0x80240000
     subsegments:
-    - [0xEED100, c]
-    - [0xEED140, c]
-    - [0xEED1E0, c]
-    - [0xEEDF50, c]
-    - [0xEEFAA0, c]
-    - [0xEEFAD0, data]
-    - [0xEF2550]
-  - name: dead_11
-    dir: world/dead/dead_11
+    - [0xEED100, c, flo_16_0_header]
+    - [0xEED100, c, flo_16_1_music]
+    - [0xEED100, c, flo_16_2_main]
+    - [0xEED140, c, flo_16_3_vines]
+    - [0xEED1E0, c, flo_16_4_entity]
+    - [0xEEDF50, c, flo_16_5_npc]
+    - [0xEEFAA0, c, flo_16_6_puzzle]
+    - [0xEEFAD0]
+  - name: dead_flo_17
+    dir: world/dead/area_flo/flo_17
     type: code
     start: 0xEF2610
     vram: 0x80240000
     subsegments:
-    - [0xEF2610, c]
-    - [0xEF2650, c]
-    - [0xEF2680, c]
-    - [0xEF58E0, data]
-    - [0xEF79C0]
+    - [0xEF2610, c, flo_17_0_header]
+    - [0xEF2610, c, flo_17_1_music]
+    - [0xEF2610, c, flo_17_2_main]
+    - [0xEF2650, c, flo_17_3_logs]
+    - [0xEF2680, c, flo_17_4_npc]
+    - [0xEF58E0, c, flo_17_5_entity]
+    - [0xEF58E0]
   - name: dead_flo_18
-    dir: world/dead/flo_18
+    dir: world/dead/area_flo/flo_18
     type: code
     start: 0xEF7A80
     vram: 0x80240000
     subsegments:
-    - [0xEF7A80, c]
-    - [0xEF7FB0, c]
-    - [0xEF8010, c]
-    - [0xEF8250, data]
+    - [0xEF7A80, c, flo_18_0_header]
+    - [0xEF7A80, c, flo_18_1_music]
+    - [0xEF7A80, c, flo_18_2_main]
+    - [0xEF7DC0, c, flo_18_3_machine]
+    - [0xEF7FB0, c, flo_18_4_npc]
+    - [0xEF8010, c, flo_18_5_foliage]
+    - [0xEF8250]
+  #- name: dead_flo_19
+  #  dir: world/dead/area_flo/flo_19
+  #  type: code
+  #  start: 0xEFEB00
+  #  vram: 0x80240000
+  #  subsegments:
+  #  - [0xEFEB00, c, flo_19_0_header]
+  #  - [0xEFEB00, c, flo_19_1_music]
+  #  - [0xEFEB00, c, flo_19_2_entity]
+  #  - [0xEFEB00, c, flo_19_3_main]
+  #  - [0xEFEE40, c, flo_19_4_clouds]
+  #  - [0xEFEFD0, c, flo_19_5_beanstalk]
+  #  - [0xEFF440]
+
+  # should end at 0xF01B10
+
   - type: code
     start: 0xEFEB00
     vram: 0x80240000
     subsegments:
     - [0xEFEB00, c]
-    - [0xEFF440, bin] # some of this is audio-related and not part of this overlay
+    - [0xEFF440, bin] # part of overlay
+
+#############
+### Audio ###
+#############
+  - [0xF00000, bin, SBN]
   - [0xF007C0, bin, bgm/Battle_Fanfare_02] # BGM start
   - [0xF02160, bin, bgm/Hey_You_03]
   - [0xF03740, bin, bgm/The_Goomba_King_s_Decree_07]
@@ -16058,52 +16413,34 @@ segments:
   - [0xFAD8F0, bin, bgm/SMW_Remix_2F]
   - [0xFADE70, bin, bgm/New_Partner_82] # BGM end
   - [0xFAE860, bin] # more audio stuff
+  - [0x19425C0, bin] # INIT file
+###############
+### Sprites ###
+###############
+  - [0x1942C40, bin]
+  - [0x1943000, bin] # sprite data build metadata (build date, major file divisions)
 
-  - [0x1943000, bin] # sprite data build metadata
+  # player sprite raster table:
   - [0x1943020, bin] # Player sprite table
-  - [0x1943BA0, bin] # Mario world sprites
-  - [0x199A8C0, bin] # Retro sprites
-  - [0x199BB00, bin] # Princess Peach sprites
-  - [0x19E0970, bin] # Player sprite Yay0 table (following 13 entries)
-  - start: 0x19E09A8
-    type: Yay0
-    align: 8
-  - start: 0x19E1390
-    type: Yay0
-    align: 8
-  - start: 0x19E1888
-    type: Yay0
-    align: 8
-  - start: 0x19E2330
-    type: Yay0
-    align: 8
-  - start: 0x19E2DE0
-    type: Yay0
-    align: 8
-  - start: 0x19E3208
-    type: Yay0
-    align: 8
-  - start: 0x19E3BA8
-    type: Yay0
-    align: 8
-  - start: 0x19E3FD8
-    type: Yay0
-    align: 8
-  - start: 0x19E4828
-    type: Yay0
-    align: 8
-  - start: 0x19E4BE0
-    type: Yay0
-    align: 8
-  - start: 0x19E5758
-    type: Yay0
-    align: 8
-  - start: 0x19E5950
-    type: Yay0
-    align: 8
-  - start: 0x19E62A0
-    type: Yay0
-    align: 8
+  # - [0x1943BA0, bin] # Mario world sprites
+  # - [0x199A8C0, bin] # Retro sprites
+  # - [0x199BB00, bin] # Princess Peach sprites
+
+  - [0x19E0970, bin] # Player sprite Yay0 table (offsets to the following 13 entries)
+  - { start: 0x19E09A8, type: yay0, align: 8 }
+  - { start: 0x19E1390, type: yay0, align: 8 }
+  - { start: 0x19E1888, type: yay0, align: 8 }
+  - { start: 0x19E2330, type: yay0, align: 8 }
+  - { start: 0x19E2DE0, type: yay0, align: 8 }
+  - { start: 0x19E3208, type: yay0, align: 8 }
+  - { start: 0x19E3BA8, type: yay0, align: 8 }
+  - { start: 0x19E3FD8, type: yay0, align: 8 }
+  - { start: 0x19E4828, type: yay0, align: 8 }
+  - { start: 0x19E4BE0, type: yay0, align: 8 }
+  - { start: 0x19E5758, type: yay0, align: 8 }
+  - { start: 0x19E5950, type: yay0, align: 8 }
+  - { start: 0x19E62A0, type: yay0, align: 8 }
+
   - start: 0x19E67B8
     align: 8
     type: pm_npc_sprites
@@ -16343,7 +16680,7 @@ segments:
       - ParadeShyGuy
       - ParadeTwink
       - Leaf
-  - [0x1B82208, bin] # todo: figure out what this is
+  - [0x1B82208, bin] # end of sprite data - todo: figure out what this is
   - start: 0x1B83000
     type: pm_msg
     files:

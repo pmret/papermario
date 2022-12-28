@@ -1,34 +1,38 @@
 #include "common.h"
 #include "effects_internal.h"
 
+void confetti_init(EffectInstance* effect);
+void confetti_update(EffectInstance* effect);
+void confetti_render(EffectInstance* effect);
+void confetti_appendGfx(void* effect);
+
 extern Gfx D_090009E8_38C588[];
 extern Gfx D_09000A00_38C5A0[];
+extern Gfx D_09000940_38C4E0[];
 
 Gfx* D_E0088CC0[] = {
     D_090009E8_38C588, D_090009E8_38C588, D_090009E8_38C588, D_09000A00_38C5A0,
     D_090009E8_38C588, D_090009E8_38C588, D_090009E8_38C588
 };
 
-u8 D_E0088CDC[] = {
-    232, 160, 168,
-    168,  80,  88,
-    160, 168, 232,
-     72,  72, 232,
-    160, 232, 160,
-     96, 176, 120,
-    224, 224,  88,
-    176, 160,  56,
-    232, 160, 232,
-    176,  64, 160,
-    160, 216, 216,
-     88, 168, 168
+Color_RGB8 D_E0088CDC[] = {
+    { 232, 160, 168, },
+    { 168,  80,  88, },
+    { 160, 168, 232, },
+    {  72,  72, 232, },
+    { 160, 232, 160, },
+    {  96, 176, 120, },
+    { 224, 224,  88, },
+    { 176, 160,  56, },
+    { 232, 160, 232, },
+    { 176,  64, 160, },
+    { 160, 216, 216, },
+    {  88, 168, 168, },
 };
 
-s8 D_E0088D00[] = { 0, 1, 2, 3, 2, 1, 0, 0 };
+u8 D_E0088D00[] = { 0, 1, 2, 3, 2, 1, 0, 0 };
 
-s32 D_E0088D08[] = { 0x002D003C, 0x00000000 };
-
-void confetti_appendGfx(void* effect);
+u8 D_E0088D08[] = { 0, 45, 0, 60 };
 
 void func_E0088000(ConfettiFXData* part) {
     part->unk_04 = shim_rand_int(700) * 0.1f - 35.0f;
@@ -40,9 +44,130 @@ void func_E0088000(ConfettiFXData* part) {
     part->unk_20 = 120;
 }
 
-INCLUDE_ASM(s32, "effects/confetti", confetti_main);
+// weirdness abound
+#ifdef NON_EQUIVALENT
+EffectInstance* confetti_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+    EffectBlueprint bp;
+    EffectBlueprint* bpPtr = &bp;
+    f32 sp28;
+    ConfettiFXData* data;
+    EffectInstance* effect;
+    s32 numParts;
+    f32 theta;
+    f32 sinTheta;
+    f32 cosTheta;
+    f32 theta2;
+    f32 sinTheta2;
+    f32 cosTheta2;
+    f32 temp_f28;
+    f32 temp_f30;
+    s32 temp_fp;
+    s32 np;
+    s32 var_v0;
+    s32 i;
 
-void confetti_init(void) {
+    switch (arg0) {
+        case 0:
+        case 4:
+            np = 12;
+            break;
+        case 1:
+        case 5:
+            np = 18;
+            break;
+        case 2:
+        case 6:
+            np = 24;
+            break;
+        default:
+            np = 48;
+            break;
+    }
+
+    switch (arg0) {
+        case 0:
+        case 4:
+            sp28 = 3.0f;
+            break;
+        case 1:
+        case 5:
+            sp28 = 4.0f;
+            break;
+        case 2:
+        case 3:
+        case 6:
+        default:
+            sp28 = 5.0f;
+            break;
+    }
+
+    numParts = np + 1;
+
+    bpPtr->init = confetti_init;
+    bpPtr->update = confetti_update;
+    bpPtr->renderWorld = confetti_render;
+    bpPtr->unk_00 = 0;
+    bpPtr->unk_14 = NULL;
+    bpPtr->effectID = EFFECT_CONFETTI;
+
+    effect = shim_create_effect_instance(bpPtr);
+    effect->numParts = numParts;
+    data = effect->data.fireworkRocket = shim_general_heap_malloc(numParts * sizeof(*data));
+    ASSERT(effect->data.fireworkRocket != NULL);
+
+    data->unk_04 = arg1;
+    data->unk_08 = arg2;
+    data->unk_0C = arg3;
+    data->unk_24 = 0;
+    data->unk_00 = arg0;
+    data->unk_20 = arg5;
+    data->unk_2C = np;
+    data->unk_28 = 255;
+
+    temp_fp = shim_rand_int(360);
+
+    for (i = 0; i < np; i++, data++) {
+        temp_f30 = sp28 * (func_E0200000(100) * 0.01f);
+        if ((u32) arg0 < 7U) {
+
+        }
+        temp_f28 = 2.0 * (sp28 * 0.5);
+        var_v0 = i;
+        if (i < 0) {
+            var_v0 = i + 3;
+        }
+        theta = ((i * 360.0f) / np) + temp_fp;
+        data->unk_30 = arg0;
+        theta2 = D_E0088D08[i - ((var_v0 >> 2) * 4)];
+        sinTheta = shim_sin_deg(theta);
+        cosTheta = shim_cos_deg(theta);
+        sinTheta2 = shim_sin_deg(theta2);
+        cosTheta2 = shim_cos_deg(theta2);
+        if (arg0 == 3) {
+            func_E0088000(data);
+            data->unk_30 = i * 3;
+        } else {
+            data->unk_0C = temp_f30 * sinTheta2;
+            data->unk_18 = temp_f28 * sinTheta2;
+            data->unk_04 = temp_f30 * sinTheta * cosTheta2;
+            data->unk_08 = temp_f30 * cosTheta * cosTheta2;
+            data->unk_10 = temp_f28 * sinTheta * cosTheta2;
+            data->unk_14 = (temp_f28 * cosTheta * cosTheta2) + 1.0f;
+            if (arg0 >= 4) {
+                data->unk_1C = -0.02 - (((i + 1) % 3) * 0.02);
+            } else {
+                data->unk_1C = 0.0f;
+            }
+            data->unk_30 = i & 3;
+        }
+    }
+    return effect;
+}
+#else
+INCLUDE_ASM(s32, "effects/confetti", confetti_main);
+#endif
+
+void confetti_init(EffectInstance* effect) {
 }
 
 void confetti_update(EffectInstance* effect) {
@@ -114,4 +239,76 @@ void confetti_render(EffectInstance* effect) {
     retTask = shim_queue_render_task(&renderTask);
 }
 
-INCLUDE_ASM(s32, "effects/confetti", confetti_appendGfx);
+void confetti_appendGfx(void* effect) {
+    ConfettiFXData* part = ((EffectInstance*)effect)->data.confetti; //s3
+    Matrix4f sp18;
+    Matrix4f sp58;
+    s32 i;
+    s32 uly;
+    s32 width = 0x3C;
+    s32 height = 0x3C;
+    s32 ulx = 0;
+    s32 unk_28;
+    s32 unk_2C;
+    Gfx* spA0;
+    s32 spA4;
+    Gfx* savedGfxPos;
+    s32 unk_24;
+    Color_RGB8* color;
+
+    unk_24 = part->unk_24;
+    unk_2C = part->unk_2C;
+    unk_28 = part->unk_28;
+    spA0 = D_E0088CC0[part->unk_00];
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMasterGfxPos++, D_09000940_38C4E0);
+
+    shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    savedGfxPos = gMasterGfxPos++;
+
+    part++;
+    for (i = 0; i < unk_2C; i++, part++) {
+        color = &D_E0088CDC[i % 12];
+
+        if (part->unk_30 <= 0) {
+            shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, color->r, color->g, color->b, unk_28);
+
+            switch ((unk_24 + i) % 3) {
+                case 0:
+                    gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, PRIMITIVE, ENVIRONMENT, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, ENVIRONMENT, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0);
+                    break;
+                case 1:
+                    gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, PRIMITIVE, ENVIRONMENT, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, ENVIRONMENT, PRIMITIVE, 0, TEXEL0, 0);
+                    break;
+                case 2:
+                    gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, PRIMITIVE, ENVIRONMENT, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0);
+                    break;
+            }
+            uly = ((i + D_E0088D00[unk_24 % 6]) & 0xF) * 16;
+
+            gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, ulx << 2, uly << 2,
+                           (ulx << 2) + ((width >> 1) << 1), (uly << 2) + height);
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, spA0);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        }
+    }
+
+    gSPEndDisplayList(gMasterGfxPos++);
+    gSPBranchList(savedGfxPos, gMasterGfxPos);
+    savedGfxPos++;
+    gSPDisplayList(gMasterGfxPos++, savedGfxPos);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+}
+

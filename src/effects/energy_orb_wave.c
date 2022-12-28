@@ -78,7 +78,129 @@ EffectInstance* energy_orb_wave_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32
 void energy_orb_wave_init(EffectInstance* effect) {
 }
 
-INCLUDE_ASM(s32, "effects/energy_orb_wave", energy_orb_wave_update);
+void energy_orb_wave_update(EffectInstance* effect) {
+    EnergyOrbWaveFXData* data = effect->data.energyOrbWave;
+    f32 var_float;
+    s32 unk_14;
+    s32 var_2;
+    s32 var_1;
+    s32 unk_1C;
+    u16 var_4;
+    s32 var_3;
+
+    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+        data->unk_10 = 30;
+    }
+
+    if (data->unk_10 < 100) {
+        data->unk_10--;
+    }
+    data->unk_14++;
+
+    if (data->unk_10 < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+
+    unk_14 = data->unk_14;
+    unk_1C = data->unk_1C;
+    var_1 = 0xFF;
+    var_2 = 0xFF;
+
+    if (unk_14 < 16) {
+        var_1 = (unk_14 * 16) - 1;
+    }
+    if (data->unk_10 < 16) {
+        var_1 = var_1 * data->unk_10 / 16;
+        var_2 = data->unk_10 * 16;
+    }
+
+    switch (unk_1C) {
+        case 0:
+            data->unk_20 = 70;
+            data->unk_24 = 180;
+            data->unk_28 = 120;
+            var_float = shim_sin_deg(unk_14 * 2) * 10.0f + 190.0f;
+            data->unk_2C = ((s32) var_float * var_1) / 255;
+            break;
+        case 1:
+            var_3 = 255;
+            data->unk_20 = 70;
+            data->unk_24 = 255;
+            data->unk_28 = 230;
+            data->unk_2C = (var_1 * var_3) / 255;
+            break;
+        case 2:
+            data->unk_20 = 170;
+            data->unk_24 = 40;
+            data->unk_28 = 110;
+            var_float = shim_sin_deg(unk_14 * 2) * 10.0f + 190.0f;
+            data->unk_2C = ((s32) var_float * var_1) / 255;
+            break;
+        case 3:
+            var_4 = 255;
+            data->unk_20 = 220;
+            data->unk_24 = 40;
+            data->unk_28 = 170;
+            data->unk_2C = (var_1 * var_4) / 255;
+            break;
+        case 4:
+            data->unk_20 = 235;
+            data->unk_24 = 235;
+            data->unk_28 = 200;
+            var_float = shim_sin_deg(unk_14 * 2) * 15.0f + 215.0f;
+            data->unk_2C = ((s32) var_float * var_1) / 255;
+            break;
+        case 5:
+            var_4 = 255;
+            data->unk_20 = 235;
+            data->unk_24 = 235;
+            data->unk_28 = 200;
+            data->unk_2C = (var_1 * var_4) / 255;
+            break;
+        case 6:
+            var_4 = 127;
+            data->unk_20 = 70;
+            data->unk_24 = 180;
+            data->unk_28 = 120;
+            data->unk_2C = (var_2 * var_4) / 255;
+            data->scale *= 1.1;
+            break;
+        case 7:
+            var_4 = 160;
+            data->unk_20 = 162;
+            data->unk_24 = 189;
+            data->unk_28 = 174;
+            data->unk_2C = (var_2 * var_4) / 255;
+            data->scale *= 1.1;
+            break;
+        case 8:
+            var_4 = 127;
+            data->unk_20 = 170;
+            data->unk_24 = 40;
+            data->unk_28 = 110;
+            data->unk_2C = (var_2 * var_4) / 255;
+            data->scale *= 1.1;
+            break;
+        case 9:
+            var_4 = 160;
+            data->unk_20 = 180;
+            data->unk_24 = 178;
+            data->unk_28 = 174;
+            data->unk_2C = (var_2 * var_4) / 255;
+            data->scale *= 1.1;
+            break;
+        default:
+            var_4 = 160;
+            data->unk_20 = 50;
+            data->unk_24 = 50;
+            data->unk_28 = 255;
+            data->unk_2C = (var_2 * var_4) / 255;
+            data->scale += data->unk_34;
+            break;
+    }
+}
 
 void energy_orb_wave_render(EffectInstance* effect) {
     EnergyOrbWaveFXData* effect82 = effect->data.energyOrbWave;

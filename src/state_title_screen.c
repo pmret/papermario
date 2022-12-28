@@ -80,7 +80,7 @@ void state_init_title_screen(void) {
     D_8014C248[0] = 1;
     general_heap_create();
     clear_printers();
-    func_801497FC(0);
+    sfx_set_reverb_mode(0);
     gGameStatusPtr->introState = INTRO_STATE_0;
     gGameStatusPtr->introCounter = 0;
     gGameStatusPtr->isBattle = FALSE;

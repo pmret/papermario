@@ -22,10 +22,10 @@
 }
 
 #define GENEROUS_HEART_DROPS(attempts) { \
-    { F16(20), F16(80), attempts, F16(50) } \
-    { F16(30), F16(70), attempts, F16(50) } \
-    { F16(50), F16(60), attempts, F16(40) } \
-    { F16(80), F16(50), attempts, F16(40) } \
+    { F16(20), F16(80), attempts, F16(50) }, \
+    { F16(30), F16(70), attempts, F16(50) }, \
+    { F16(50), F16(60), attempts, F16(40) }, \
+    { F16(80), F16(50), attempts, F16(40) }, \
     { F16(100), F16(40), attempts, F16(30) }, \
 }
 
@@ -461,7 +461,7 @@ void disable_npc_shadow(Npc* npc);
 
 void update_npc_blur(Npc* npc);
 
-void appendGfx_npc_blur(void* data);
+void appendGfx_npc_blur(void* appendData);
 
 void npc_enable_collisions(void);
 

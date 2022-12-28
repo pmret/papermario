@@ -146,7 +146,7 @@ void damage_indicator_update(EffectInstance* effect) {
     temp_t0 = part->unk_34;
     duration = part->effectDurationTimer;
 
-    /* if duration is less than 0, remove effect*/
+    /* if duration is less than 0, remove effect */
     if (duration < 0) {
         shim_remove_effect(effect);
         return;

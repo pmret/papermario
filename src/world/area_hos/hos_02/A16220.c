@@ -29,7 +29,7 @@ void func_80240434_A16654(void) {
     s32 i;
     s32 temp3;
 
-    mdl_get_copied_vertices(0, &firstVertex, &copiedVertices, &numVertices);
+    mdl_get_copied_vertices(VTX_COPY_0, &firstVertex, &copiedVertices, &numVertices);
 
     for (i = 0; i < numVertices; i++) {
         u8* colors = copiedVertices[i].v.cn;
@@ -41,7 +41,7 @@ void func_80240434_A16654(void) {
         colors[2] = colors[0] * temp3 / 0x10000;
     }
 
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(0));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_0));
     D_802433AE_A195CE += 0x253;
 }
 
@@ -52,7 +52,7 @@ void func_80240610_A16830(void) {
     s32 i;
     s32 temp3;
 
-    mdl_get_copied_vertices(1, &firstVertex, &copiedVertices, &numVertices);
+    mdl_get_copied_vertices(VTX_COPY_1, &firstVertex, &copiedVertices, &numVertices);
 
     for (i = 0; i < numVertices; i++) {
         u8* colors = copiedVertices[i].v.cn;
@@ -64,7 +64,7 @@ void func_80240610_A16830(void) {
         colors[2] = colors[0] * temp3 / 0x10000 + 99.6078431372549;
     }
 
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(1));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_1));
     D_802433B0_A195D0 += 0x253;
 }
 
@@ -75,7 +75,7 @@ void func_80240904_A16B24(void) {
     s32 i;
     s32 temp3;
 
-    mdl_get_copied_vertices(2, &firstVertex, &copiedVertices, &numVertices);
+    mdl_get_copied_vertices(VTX_COPY_2, &firstVertex, &copiedVertices, &numVertices);
 
     for (i = 0; i < numVertices; i++) {
         u8* colors = copiedVertices[i].v.cn;
@@ -87,7 +87,7 @@ void func_80240904_A16B24(void) {
         colors[2] = colors[0] * temp3 / 0x10000 + 59.21568627450981;
     }
 
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(2));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_2));
     D_802433B2_A195D2 += 0x253;
 }
 
@@ -98,7 +98,7 @@ void func_80240BFC_A16E1C(void) {
     s32 i;
     s32 temp3;
 
-    mdl_get_copied_vertices(3, &firstVertex, &copiedVertices, &numVertices);
+    mdl_get_copied_vertices(VTX_COPY_3, &firstVertex, &copiedVertices, &numVertices);
 
     for (i = 0; i < numVertices; i++) {
         u8* colors = copiedVertices[i].v.cn;
@@ -110,7 +110,7 @@ void func_80240BFC_A16E1C(void) {
         colors[2] = colors[0] * temp3 / 0x10000 + 96.07843137254902;
     }
 
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(3));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_3));
     D_802433B4_A195D4 += 0x253;
 }
 

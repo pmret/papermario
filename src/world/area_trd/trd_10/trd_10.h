@@ -12,10 +12,10 @@
 #include "sprite/npc/KoopaBros.h"
 
 enum {
-	NPC_KoopaBros_01            = 0,
-	NPC_KoopaBros_02            = 1,
-	NPC_KoopaBros_03            = 2,
-	NPC_KoopaBros_04            = 3,
+    NPC_KoopaBros_01            = 0,
+    NPC_KoopaBros_02            = 1,
+    NPC_KoopaBros_03            = 2,
+    NPC_KoopaBros_04            = 3,
 };
 
 #define NAMESPACE trd_10

@@ -12,7 +12,7 @@
 #include "sprite/npc/Goompa.h"
 
 enum {
-	NPC_Goompa				= 0,
+    NPC_Goompa              = 0,
 };
 
 #define NAMESPACE tst_04

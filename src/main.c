@@ -18,6 +18,7 @@ void gfx_init_state(void);
 #ifdef VERSION_US
 extern s32 D_80073E00;
 #else
+void func_8002CA00(void);
 extern s32 D_80073DE0;
 #endif
 extern u16* D_80073E04;
@@ -26,7 +27,7 @@ extern s16 D_80073E0A;
 extern s32 D_80073E10[];
 extern u16* D_8009A680;
 
-void boot_main(void) {
+void boot_main(void* data) {
 #ifdef VERSION_JP
     if (osTvType == OS_TV_NTSC) {
         nuGfxDisplayOff();

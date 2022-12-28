@@ -1,14 +1,5 @@
 #include "iwa_10.h"
 
-API_CALLABLE(N(GetClockHandAngles)) {
-    if (script->varTable[15] > 720) {
-        script->varTable[15] = 0;
-    }
-    script->varTable[0] = script->varTable[15] * 6;
-    script->varTable[1] = script->varTable[15] / 2;
-    return ApiStatus_DONE2;
-}
-
 EvtScript N(EVS_ExitWalk_iwa_00_0) = EVT_EXIT_WALK(60, iwa_10_ENTRY_1, "iwa_00", iwa_00_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
@@ -35,6 +26,15 @@ EvtScript N(EVS_EnterMap) = {
     EVT_RETURN
     EVT_END
 };
+
+API_CALLABLE(N(GetClockHandAngles)) {
+    if (script->varTable[15] > 720) {
+        script->varTable[15] = 0;
+    }
+    script->varTable[0] = script->varTable[15] * 6;
+    script->varTable[1] = script->varTable[15] / 2;
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_MT_RUGGED)

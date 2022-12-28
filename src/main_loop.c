@@ -8,18 +8,30 @@
 s8 gGameStepDelayAmount = 1;
 s8 gGameStepDelayCount = 5;
 
-GameStatus gGameStatus = {0};
+GameStatus gGameStatus = {
+    .currentButtons = {0},
+    .pressedButtons = {0},
+    .heldButtons = {0},
+    .prevButtons = {0},
+    .stickX = {0},
+    .stickY = {0},
+    .unk_48 = {0},
+    .unk_50 = {0},
+};
+
 GameStatus* gGameStatusPtr = &gGameStatus;
 s16 D_800741A0 = 0;
 s16 D_800741A2 = 0;
 s32 D_800741A4 = 0;
-s32 D_800741A8[] = {
-    0x00010000, 0x00000000, 0x00000001, 0x00000000,
-    0x00000000, 0x00010000, 0x00000000, 0x00000001,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000,
+Mtx D_800741A8 = {
+    .m = {
+        { 0x00010000, 0x00000000, 0x00000001, 0x00000000 },
+        { 0x00000000, 0x00010000, 0x00000000, 0x00000001 },
+        { 0x00000000, 0x00000000, 0x00000000, 0x00000000 },
+        { 0x00000000, 0x00000000, 0x00000000, 0x00000000 },
+    }
 };
+s32 D_800741E8[2] = {0, 0}; // padding?
 u16 gMatrixListPos = 0;
 u16 D_800741F2 = 0;
 s32 gCurrentDisplayContextIndex = 0;
@@ -180,7 +192,7 @@ void gfx_draw_frame(void) {
         return;
     }
 
-    gSPMatrix(gMasterGfxPos++, D_800741A8, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, &D_800741A8, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     spr_render_init();
 

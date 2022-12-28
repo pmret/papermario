@@ -34,7 +34,8 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
 }
 #define NAMESPACE nok_02
 
-extern s32 nok_02_D_802549D0[];
+BSS s32 nok_02_D_802549A0[12]; // unused?
+BSS s32 nok_02_D_802549D0[114];
 
 ApiStatus func_80242C5C_9D9C7C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -75,13 +76,11 @@ ApiStatus func_80243010_9DA030(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// float regalloc
-#ifdef NON_MATCHING
 ApiStatus func_802430CC_9DA0EC(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
-    Npc* npc1 = evt_get_variable(script, *args++);
-    Npc* npc2 = evt_get_variable(script, *args++);
+    Npc* npc1 = (Npc*) evt_get_variable(script, *args++);
+    Npc* npc2 = (Npc*) evt_get_variable(script, *args++);
     s32 outVal = FALSE;
     f32 xDiff, zDiff;
 
@@ -94,24 +93,25 @@ ApiStatus func_802430CC_9DA0EC(Evt* script, s32 isInitialCall) {
         script->varTable[2] = 0;
     }
 
-    xDiff = npc1->pos.x - playerStatus->position.x;
-    zDiff = npc1->pos.z - playerStatus->position.z;
-    if ((SQ(xDiff) + SQ(zDiff) < 6400.0f) && (script->varTable[2] >= 2)) {
-        outVal = TRUE;
-    }
+    do {
+        xDiff = npc1->pos.x - playerStatus->position.x;
+        zDiff = npc1->pos.z - playerStatus->position.z;
+        if ((SQ(xDiff) + SQ(zDiff) < 6400.0f) && (script->varTable[2] >= 2)) {
+            do {
+                outVal = TRUE;
+            } while (0); // TODO required to match
+        }
 
-    xDiff = npc1->pos.x - npc2->pos.x;
-    zDiff = npc1->pos.z - npc2->pos.z;
-    if (SQ(xDiff) + SQ(zDiff) < 1600.0f) {
-        outVal = TRUE;
-    }
+        xDiff = npc1->pos.x - npc2->pos.x;
+        zDiff = npc1->pos.z - npc2->pos.z;
+        if (SQ(xDiff) + SQ(zDiff) < 1600.0f) {
+            outVal = TRUE;
+        }
+    } while (0); // TODO required to match
 
     script->varTable[0] = outVal;
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_802430CC_9DA0EC);
-#endif
 
 ApiStatus func_80243214_9DA234(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;

@@ -12,9 +12,9 @@
 #include "sprite/npc/Toad.h"
 
 enum {
-	NPC_RedToad			= 0,
-	NPC_GreenToad		= 1,
-	NPC_BlueToad		= 2,
+    NPC_RedToad         = 0,
+    NPC_GreenToad       = 1,
+    NPC_BlueToad        = 2,
 };
 
 enum {

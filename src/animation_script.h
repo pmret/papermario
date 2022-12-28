@@ -41,6 +41,9 @@ enum {
 #define as_SetScale(node, x, y, z) AS_SET_SCALE, node, AS_F(x), AS_F(y), AS_F(z),
 #define as_DisableMirroring AS_OP_19,
 
+#define AS_MODEL_ID(modelID) ((modelID) + 1)
+#define AS_NULL_MODEL 0
+
 // used in entity models
-#define ENTITY_ANIN_NULL (void*)(0xFFFFFFFF)
+#define ENTITY_ANIM_NULL (void*)(0xFFFFFFFF)
 #endif

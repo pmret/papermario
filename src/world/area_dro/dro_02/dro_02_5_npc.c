@@ -6,11 +6,11 @@
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 
-static f32 N(D_8024EF80);
-static f32 N(D_8024EF84);
-static s32 N(RitualStateTime);
-static s8 N(pad_D_8024EF8C)[0x4];
-static EffectInstance* N(D_8024EF90)[4];
+BSS f32 N(D_8024EF80);
+BSS f32 N(D_8024EF84);
+BSS s32 N(RitualStateTime);
+BSS s8 N(pad_D_8024EF8C)[0x4];
+BSS EffectInstance* N(D_8024EF90)[4];
 
 #include "world/common/complete/Quizmo.inc.c"
 
@@ -55,12 +55,7 @@ NpcSettings N(NpcSettings_Archeologist) = {
 MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
-extern IMG_BIN N(toad_house_blanket_img)[];
-#include "dro_02_toad_house_blanket_skeleton.c"
-#include "world/area_dro/dro_02/toad_house_blanket.vtx.inc.c"
-#include "world/area_dro/dro_02/toad_house_blanket.gfx.inc.c"
-#include "world/area_dro/dro_02/toad_house_blanket.png.inc.c"
-#include "dro_02_toad_house_blanket_anim.c"
+#include "world/common/complete/ToadHouseBlanketAnim.inc.c"
 
 #include "world/common/atomic/ToadHouse.inc.c"
 #include "world/common/atomic/ToadHouse.data.inc.c"
@@ -294,7 +289,7 @@ EvtScript N(EVS_NpcInit_Mouser_03) = {
     EVT_END
 };
 
-EvtScript N(EVS_SetToadHouseDialogue) = {
+EvtScript N(EVS_ToadHouse_SetDialogue) = {
     EVT_SET(LVar0, MSG_CH2_00D1)
     EVT_SET(LVar8, MSG_CH2_00D2)
     EVT_SET(LVar1, MSG_CH2_00D3)
@@ -324,7 +319,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
     EVT_CALL(InterpPlayerYaw, 230, 1)
     EVT_CALL(HidePlayerShadow, TRUE)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_CALL(func_802D286C, 0x00000800)
+    EVT_CALL(func_802D286C, 0x800)
     EVT_CALL(func_802D2520, ANIM_Mario_10002, 5, 7, 1, 1, 0)
     EVT_THREAD
         EVT_WAIT(60)
@@ -369,11 +364,11 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_Archeologist),
         .yaw = 90,
         .drops = {
-		    .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-	    .territory = { .temp = { -303, 0, 22, 146, 38, -32767, 1, 0, 0, 0, 0, 0, 0, 1 }},
+        .territory = { .temp = { -303, 0, 22, 146, 38, -32767, 1, 0, 0, 0, 0, 0, 0, 1 }},
         .animations = {
             ANIM_Archeologist_Idle,
             ANIM_Archeologist_Walk,
@@ -402,7 +397,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_MrE),
         .yaw = 270,
         .drops = DRYITE_DROPS,
-	    .territory = { .temp = { -20, 0, 40, 60, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 }},
+        .territory = { .temp = { -20, 0, 40, 60, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 }},
         .animations = DRYITE_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_DRO_DryiteE,
     },
@@ -414,11 +409,11 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_DisguisedMoustafa),
         .yaw = 90,
         .drops = {
-		    .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-	    .animations = {
+        .animations = {
             ANIM_DisguisedMoustafa_Idle,
             ANIM_DisguisedMoustafa_Idle,
             ANIM_DisguisedMoustafa_Idle,
@@ -446,7 +441,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_ToadHouseKeeper),
         .yaw = 180,
         .drops = TOAD_DROPS,
-	    .animations = TOAD_RED_ANIMS,
+        .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_DRO_ToadHouseToad,
     },
     {
@@ -457,11 +452,11 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcAuxAI_Merlee),
         .yaw = 180,
         .drops = {
-		    .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-	    .animations = {
+        .animations = {
             ANIM_WorldMerlee_Idle,
             ANIM_WorldMerlee_Walk,
             ANIM_WorldMerlee_Run,
@@ -489,11 +484,11 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_Moustafa),
         .yaw = 0,
         .drops = {
-		    .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-	    .animations = {
+        .animations = {
             ANIM_Moustafa_Idle,
             ANIM_Moustafa_Idle,
             ANIM_Moustafa_Run,
@@ -521,7 +516,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_Dryite_02),
         .yaw = 270,
         .drops = DRYITE_DROPS,
-	    .animations = DRYITE_GREEN_ANIMS,
+        .animations = DRYITE_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_DRO_DryiteF,
     },
     {
@@ -532,7 +527,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_Dryite_03),
         .yaw = 270,
         .drops = DRYITE_DROPS,
-	    .animations = DRYITE_GREEN_ANIMS,
+        .animations = DRYITE_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_DRO_VisitedShootingStarSummit,
     },
     {
@@ -543,11 +538,11 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_Mouser_01),
         .yaw = 180,
         .drops = {
-		    .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-	    .animations = MOUSER_BLUE_ANIMS,
+        .animations = MOUSER_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_DRO_CrushingOnMerlee,
     },
     {
@@ -558,11 +553,11 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_Mouser_02),
         .yaw = 270,
         .drops = {
-		    .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-	    .animations = MOUSER_BLUE_ANIMS,
+        .animations = MOUSER_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_DRO_TellsTales,
     },
     {
@@ -573,11 +568,11 @@ StaticNpc N(PassiveNPCs)[] = {
         .init = &N(EVS_NpcInit_Mouser_03),
         .yaw = 90,
         .drops = {
-		    .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-	    .animations = MOUSER_PURPLE_ANIMS,
+        .animations = MOUSER_PURPLE_ANIMS,
     },
     {
         .id = NPC_ChuckQuizmo,
@@ -588,7 +583,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .initVar = { .bytes = { 0, QUIZ_AREA_DRO, QUIZ_COUNT_DRO, QUIZ_MAP_DRO_02 } },
         .yaw = 270,
         .drops = QUIZMO_DROPS,
-	    .animations = QUIZMO_ANIMS,
+        .animations = QUIZMO_ANIMS,
         .tattle = MSG_NpcTattle_ChuckQuizmo,
     },
 };

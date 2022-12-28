@@ -267,7 +267,7 @@ EvtScript N(takeTurn) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
             EVT_EXEC_WAIT(N(executeAction))
-        EVT_CASE_EQ(PHASE_5)
+        EVT_CASE_EQ(PHASE_CELEBRATE)
             EVT_EXEC_WAIT(N(celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
             EVT_EXEC_WAIT(N(runAway))
@@ -1363,7 +1363,6 @@ ApiStatus N(ProcessHurricane)(Evt* script, s32 isInitialCall) {
     static s32 sHuffPuffBreathState;
     static s32 D_8023D278;
     static HurricaneState* hurricaneState = &sHurricaneState;
-
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;

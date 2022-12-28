@@ -4,9 +4,9 @@ typedef struct {
     /* 0x00 */ s32 itemID;
     /* 0x04 */ s32 flagIndex;
     /* 0x08 */ s32 overrideDescMsg;
-} UnkStruct; // size = 0x0C
+} UnkKkj19; // size = 0x0C
 
-extern UnkStruct D_80240E10_AF8760[];
+extern UnkKkj19 D_80240E10_AF8760[];
 extern s32 D_80240E88_AF87D8;
 extern s32 D_80240E8C_AF87DC;
 extern s32 D_80240E90_AF87E0;
@@ -16,8 +16,8 @@ extern MenuWindowBP D_80240EF0_AF8840[2];
 static char* N(exit_str_0) = "kkj_10";
 static char* N(exit_str_1) = "kkj_00";
 
-// Needs data migration, matching otherwise
-#ifdef NON_MATCHING
+NOP_FIX // TODO remove after D_80240E8C_AF87DC is migrated
+
 ApiStatus func_80240000_AF7950(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var;
@@ -34,9 +34,6 @@ ApiStatus func_80240000_AF7950(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7950", func_80240000_AF7950);
-#endif
 
 void func_80240068_AF79B8(void) {
     if (D_80240E88_AF87D8 != 0) {
@@ -54,9 +51,23 @@ void func_80240068_AF79B8(void) {
     }
 }
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7950", func_802400E4_AF7A34);
+void func_802400E4_AF7A34(s32 arg0, s32 x, s32 y) {
+    ItemData* item = &gItemTable[D_80240E10_AF8760[D_80240E90_AF87E0].itemID];
+    s32 width = (get_msg_width(item->nameMsg, 0) >> 1) - 60;
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7950", func_80240178_AF7AC8);
+    draw_msg(item->nameMsg, x - width, y + 6, 255, 0, 0);
+}
+
+void func_80240178_AF7AC8(s32 arg0, s32 x, s32 y) {
+    UnkKkj19* temp_a3 = &D_80240E10_AF8760[D_80240E90_AF87E0];
+    ItemData* item = &gItemTable[temp_a3->itemID];
+
+    if (temp_a3->overrideDescMsg != 0) {
+        draw_msg(temp_a3->overrideDescMsg, x + 8, y, 255, 10, 0);
+    } else {
+        draw_msg(item->shortDescMsg, x + 8, y, 255, 10, 0);
+    }
+}
 
 ApiStatus func_802401FC_AF7B4C(Evt* script, s32 isInitialCall) {
     s32 i;

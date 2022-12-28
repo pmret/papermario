@@ -108,7 +108,7 @@ void hide_popup_menu(void) {
                 break;
             case POPUP_MENU_READ_DIARY_PAGE:
             case POPUP_MENU_READ_POSTCARD:
-            case POPUP_MENU_D:
+            case POPUP_MENU_POST_OFFICE:
                 set_window_update(WINDOW_ID_14, (s32) basic_hidden_window_update);
                 break;
         }
@@ -131,7 +131,7 @@ void hide_popup_menu(void) {
                 break;
             case POPUP_MENU_READ_DIARY_PAGE:
             case POPUP_MENU_READ_POSTCARD:
-            case POPUP_MENU_D:
+            case POPUP_MENU_POST_OFFICE:
                 set_window_update(WINDOW_ID_14, 2);
                 break;
         }
@@ -185,7 +185,7 @@ void destroy_popup_menu(void) {
          gPopupMenu->popupType == POPUP_TYPE_USE_KEY
         ) && !gGameStatusPtr->isBattle) {
         if (D_8010D69A == 0) {
-            func_800E98C4();
+            status_menu_respond_to_changes();
         }
         close_status_menu();
     }
@@ -217,7 +217,7 @@ void func_800F16CC(void) {
                 break;
             case POPUP_MENU_READ_DIARY_PAGE:
             case POPUP_MENU_READ_POSTCARD:
-            case POPUP_MENU_D:
+            case POPUP_MENU_POST_OFFICE:
                 set_window_update(WINDOW_ID_14, (s32) basic_window_update);
                 sfx_play_sound(SOUND_1);
                 break;
@@ -244,7 +244,7 @@ void func_800F16CC(void) {
                 break;
             case POPUP_MENU_READ_DIARY_PAGE:
             case POPUP_MENU_READ_POSTCARD:
-            case POPUP_MENU_D:
+            case POPUP_MENU_POST_OFFICE:
                 set_window_update(WINDOW_ID_14, 1);
                 break;
         }
@@ -442,7 +442,7 @@ s32 popup_menu_update(void) {
                     set_window_update(WINDOW_ID_15, WINDOW_UPDATE_SHOW);
                     set_window_update(WINDOW_ID_17, WINDOW_UPDATE_HIDE);
                     break;
-                case POPUP_MENU_D:
+                case POPUP_MENU_POST_OFFICE:
                     set_window_properties(WINDOW_ID_14, posX, posY, 0x83, (D_8010D656 * 13) + 0x1A, 0x14, popup_menu_draw_menu_contents, NULL, -1);
                     set_window_properties(WINDOW_ID_17, 0xA, -6, 0x72, 0x10, 0x15, popup_menu_draw_title_contents, NULL, 0xE);
                     set_window_update(WINDOW_ID_15, WINDOW_UPDATE_HIDE);
@@ -498,7 +498,7 @@ s32 popup_menu_update(void) {
                     break;
                 case POPUP_MENU_SWITCH_PARTNER:
                 case POPUP_MENU_THROW_AWAY_ITEM:
-                case POPUP_MENU_D:
+                case POPUP_MENU_POST_OFFICE:
                     set_window_properties(WINDOW_ID_21, posX, posY, 0x90, 0x28, 0x14, func_800F4944, NULL, -1);
                     break;
                 case POPUP_MENU_TRADE_FOR_BADGE:
@@ -538,7 +538,7 @@ s32 popup_menu_update(void) {
                         break;
                     case POPUP_MENU_READ_DIARY_PAGE:
                     case POPUP_MENU_READ_POSTCARD:
-                    case POPUP_MENU_D:
+                    case POPUP_MENU_POST_OFFICE:
                         set_window_update(WINDOW_ID_14, WINDOW_UPDATE_SHOW);
                         break;
                 }
@@ -565,7 +565,7 @@ s32 popup_menu_update(void) {
                         break;
                     case POPUP_MENU_READ_DIARY_PAGE:
                     case POPUP_MENU_READ_POSTCARD:
-                    case POPUP_MENU_D:
+                    case POPUP_MENU_POST_OFFICE:
                         set_window_update(WINDOW_ID_14, (s32)basic_window_update);
                         sfx_play_sound(SOUND_1);
                         break;
@@ -650,7 +650,7 @@ s32 popup_menu_update(void) {
                                 D_8010D640 = -2;
                             }
                             break;
-                        case POPUP_MENU_D:
+                        case POPUP_MENU_POST_OFFICE:
                             sfx_play_sound(SOUND_MENU_NEXT);
                             if (!D_8010D68E) {
                                 D_8010D640 = -1;
@@ -705,7 +705,7 @@ s32 popup_menu_update(void) {
                         case POPUP_MENU_TAKE_FROM_CHEST:
                         case POPUP_MENU_READ_DIARY_PAGE:
                         case POPUP_MENU_READ_POSTCARD:
-                        case POPUP_MENU_D:
+                        case POPUP_MENU_POST_OFFICE:
                             buttons = BUTTON_B;
                             break;
                         default:
@@ -800,7 +800,7 @@ s32 popup_menu_update(void) {
                     break;
                 case POPUP_MENU_READ_DIARY_PAGE:
                 case POPUP_MENU_READ_POSTCARD:
-                case POPUP_MENU_D:
+                case POPUP_MENU_POST_OFFICE:
                     set_window_update(WINDOW_ID_14, WINDOW_UPDATE_HIDE);
                     break;
             }
@@ -913,7 +913,7 @@ s32 popup_menu_update(void) {
                     break;
                 case POPUP_MENU_READ_DIARY_PAGE:
                 case POPUP_MENU_READ_POSTCARD:
-                case POPUP_MENU_D:
+                case POPUP_MENU_POST_OFFICE:
                     set_window_update(WINDOW_ID_14, WINDOW_UPDATE_HIDE);
                     break;
             }
@@ -989,7 +989,7 @@ s32 popup_menu_update(void) {
                     break;
                 case POPUP_MENU_READ_DIARY_PAGE:
                 case POPUP_MENU_READ_POSTCARD:
-                case POPUP_MENU_D:
+                case POPUP_MENU_POST_OFFICE:
                     set_window_update(WINDOW_ID_14, WINDOW_UPDATE_SHOW);
                     break;
             }
@@ -1048,7 +1048,7 @@ void popup_menu_draw_title_contents(
             break;
         case POPUP_MENU_SWITCH_PARTNER:
         case POPUP_MENU_UPGRADE_PARTNER:
-        case POPUP_MENU_D:
+        case POPUP_MENU_POST_OFFICE:
             draw_msg(0x1D003D, baseX + 8, baseY + 2, D_8010D650, MSG_PAL_34, DRAW_MSG_STYLE_MENU);
             break;
     }
@@ -1105,7 +1105,7 @@ void func_800F4944(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s
                 baseX += 72 - (msgWidth / 2);
                 draw_msg(0x1D0067, baseX, baseY, 255, MSG_PAL_0F, 0);
                 break;
-            case POPUP_MENU_D:
+            case POPUP_MENU_POST_OFFICE:
                 msgWidth = get_msg_width(0x1D006F, 0);
                 baseX += 72 - (msgWidth / 2);
                 draw_msg(0x1D006F, baseX, baseY - 4, 255, MSG_PAL_0F, 0);
@@ -1213,7 +1213,7 @@ void create_popup_menu(PopupMenu* popup) {
     s32 numEntries;
 
     D_8010D69A = func_800E98D4();
-    func_800E9894();
+    status_menu_ignore_changes();
     open_status_menu_short();
     gPopupMenu = popup;
     popup->result = 0;
@@ -1258,7 +1258,7 @@ void create_popup_menu(PopupMenu* popup) {
     D_8010D650 = 255;
     D_8010D691 = 4;
     D_8010D692 = 6;
-    D_8010D694 = create_worker_frontUI(popup_menu_update, NULL);
+    D_8010D694 = create_worker_frontUI((void (*) (void)) popup_menu_update, NULL);
 }
 
 void func_800F4FC4(PopupMenu* popup) {
@@ -1303,7 +1303,7 @@ void func_800F4FC4(PopupMenu* popup) {
     D_8010D650 = 255;
     D_8010D691 = 4;
     D_8010D692 = 6;
-    D_8010D694 = create_worker_frontUI(popup_menu_update, NULL);
+    D_8010D694 = create_worker_frontUI((void (*) (void)) popup_menu_update, NULL);
 }
 
 void func_800F513C(PopupMenu* popup) {
@@ -1347,7 +1347,7 @@ void func_800F513C(PopupMenu* popup) {
     D_8010D650 = 255;
     D_8010D691 = 9;
     D_8010D692 = 2;
-    D_8010D694 = create_worker_frontUI(popup_menu_update, NULL);
+    D_8010D694 = create_worker_frontUI((void (*) (void)) popup_menu_update, NULL);
 }
 
 void func_800F52BC(void) {

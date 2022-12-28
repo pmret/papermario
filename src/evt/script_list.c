@@ -99,7 +99,7 @@ void sort_scripts(void) {
     for (i = 0; i < MAX_SCRIPTS; i++) {
         curScript = (*gCurrentScriptListPtr)[i];
         if (curScript != NULL) {
-            if (curScript->state != 0) {
+            if (curScript->stateFlags != 0) {
                 scriptIndexList[numValidScripts] = i;
                 scriptIdList[numValidScripts] = curScript->id;
                 numValidScripts++;
@@ -231,7 +231,7 @@ void suspend_frozen_scripts(Evt* script) {
     suspend_all_group(groupFlags);
 }
 
-Evt* start_script(EvtScript* source, s32 priority, s32 initialState) {
+Evt* start_script(EvtScript* source, s32 priority, s32 flags) {
     Evt* newScript;
     s32 curScriptIndex;
     s32 scriptListCount;
@@ -250,7 +250,7 @@ Evt* start_script(EvtScript* source, s32 priority, s32 initialState) {
     gNumScripts++;
     ASSERT(newScript != NULL);
 
-    newScript->state = initialState | EVT_FLAG_ACTIVE;
+    newScript->stateFlags = flags | EVT_FLAG_ACTIVE;
     newScript->currentOpcode = 0;
     newScript->priority = priority;
     newScript->ptrNextLine = (Bytecode*)source;
@@ -283,7 +283,7 @@ Evt* start_script(EvtScript* source, s32 priority, s32 initialState) {
 
     find_script_labels(newScript);
 
-    if (gIsUpdatingScripts && (newScript->state & EVT_FLAG_RUN_IMMEDIATELY)) {
+    if (gIsUpdatingScripts && (newScript->stateFlags & EVT_FLAG_RUN_IMMEDIATELY)) {
         scriptListCount = gScriptListCount++;
         gScriptIndexList[scriptListCount] = curScriptIndex;
         gScriptIdList[scriptListCount] = newScript->id;
@@ -298,7 +298,7 @@ Evt* start_script(EvtScript* source, s32 priority, s32 initialState) {
     return newScript;
 }
 
-Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 groupFlags) {
+Evt* start_script_in_group(EvtScript* source, u8 priority, u8 flags, u8 groupFlags) {
     Evt* newScript;
     s32 scriptListCount;
     s32 i;
@@ -322,7 +322,7 @@ Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 g
 
     // Some of this function is surely macros. I think we'll learn more as we do others in this file. -Ethan
     do {
-        newScript->state = initialState | EVT_FLAG_ACTIVE;
+        newScript->stateFlags = flags | EVT_FLAG_ACTIVE;
         newScript->currentOpcode = 0;
         newScript->priority = priority;
         newScript->id = gStaticScriptCounter++;
@@ -353,7 +353,7 @@ Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 g
 
         find_script_labels(newScript);
 
-        if (gIsUpdatingScripts && (newScript->state & EVT_FLAG_RUN_IMMEDIATELY)) {
+        if (gIsUpdatingScripts && (newScript->stateFlags & EVT_FLAG_RUN_IMMEDIATELY)) {
             scriptListCount = gScriptListCount++;
             gScriptIndexList[scriptListCount] = curScriptIndex;
             gScriptIdList[scriptListCount] = newScript->id;
@@ -370,7 +370,7 @@ Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 g
     return newScript;
 }
 
-Evt* start_child_script(Evt* parentScript, EvtScript* source, s32 initialState) {
+Evt* start_child_script(Evt* parentScript, EvtScript* source, s32 flags) {
     s32 curScriptIndex;
     s32 scriptListCount;
     Evt* child;
@@ -390,8 +390,8 @@ Evt* start_child_script(Evt* parentScript, EvtScript* source, s32 initialState) 
     ASSERT(child != NULL);
 
     parentScript->childScript = child;
-    parentScript->state |= EVT_FLAG_BLOCKED_BY_CHILD;
-    child->state = initialState | EVT_FLAG_ACTIVE;
+    parentScript->stateFlags |= EVT_FLAG_BLOCKED_BY_CHILD;
+    child->stateFlags = flags | EVT_FLAG_ACTIVE;
     child->ptrCurrentLine = child->ptrFirstLine = child->ptrNextLine = (Bytecode*)source;
 
 
@@ -459,7 +459,7 @@ Evt* func_802C39F8(Evt* parentScript, Bytecode* nextLine, s32 newState) {
     gNumScripts++;
     ASSERT(child != NULL);
 
-    child->state = newState | EVT_FLAG_ACTIVE;
+    child->stateFlags = newState | EVT_FLAG_ACTIVE;
     child->ptrNextLine = nextLine;
     child->ptrFirstLine = nextLine;
     child->ptrCurrentLine = nextLine;
@@ -516,7 +516,7 @@ Evt* func_802C3C10(Evt* script, Bytecode* line, s32 arg2) {
     script->ptrCurrentLine = line;
     script->currentOpcode = 0;
     script->frameCounter = 0;
-    script->state |= arg2;
+    script->stateFlags |= arg2;
     script->timeScale = 1.0f;
 
     if (script->userData != NULL) {
@@ -581,7 +581,7 @@ void update_scripts(void) {
         for (i = 0; i < gScriptListCount; i++) {
             Evt* script = (*gCurrentScriptListPtr)[gScriptIndexList[i]];
 
-            if (script != NULL && script->id == gScriptIdList[i] && script->state != 0 && !(script->state & (EVT_FLAG_SUSPENDED | EVT_FLAG_BLOCKED_BY_CHILD | EVT_FLAG_SUSPENDED_IN_GROUP))) {
+            if (script != NULL && script->id == gScriptIdList[i] && script->stateFlags != 0 && !(script->stateFlags & (EVT_FLAG_SUSPENDED | EVT_FLAG_BLOCKED_BY_CHILD | EVT_FLAG_SUSPENDED_IN_GROUP))) {
                 s32 stop = FALSE;
                 s32 status;
 
@@ -646,7 +646,7 @@ void kill_script(Evt* instanceToKill) {
     blockingParent = instanceToKill->blockingParent;
     if (blockingParent != NULL) {
         blockingParent->childScript = NULL;
-        blockingParent->state &= ~EVT_FLAG_BLOCKED_BY_CHILD;
+        blockingParent->stateFlags &= ~EVT_FLAG_BLOCKED_BY_CHILD;
 
         for (j = 0; j < ARRAY_COUNT(blockingParent->varTable); j++) {
             blockingParent->varTable[j] = instanceToKill->varTable[j];
@@ -777,7 +777,7 @@ void suspend_group_script(Evt* script, s32 groupFlags) {
     }
 
     if ((script->groupFlags & groupFlags) != 0) {
-        script->state |= EVT_FLAG_SUSPENDED_IN_GROUP;
+        script->stateFlags |= EVT_FLAG_SUSPENDED_IN_GROUP;
     }
 }
 
@@ -798,7 +798,7 @@ void resume_group_script(Evt* script, s32 groupFlags) {
     }
 
     if ((script->groupFlags & groupFlags) != 0) {
-        script->state &= ~EVT_FLAG_SUSPENDED_IN_GROUP;
+        script->stateFlags &= ~EVT_FLAG_SUSPENDED_IN_GROUP;
     }
 }
 
@@ -921,7 +921,7 @@ void set_script_flags(Evt* script, s32 flags) {
     Evt* childScript = script->childScript;
     s32 i;
 
-    script->state |= flags;
+    script->stateFlags |= flags;
     if (childScript != NULL) {
         set_script_flags(childScript, flags);
     }
@@ -939,7 +939,7 @@ void clear_script_flags(Evt* script, s32 flags) {
     Evt* childScript = script->childScript;
     s32 i;
 
-    script->state &= ~flags;
+    script->stateFlags &= ~flags;
     if (childScript != NULL) {
         clear_script_flags(childScript, flags);
     }

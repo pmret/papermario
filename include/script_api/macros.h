@@ -568,29 +568,75 @@
 /// The given arguments can be accessed from the API function using `thread->ptrReadPos`.
 #define EVT_CALL(FUNC, ARGS...)                     EVT_CMD(EVT_OP_CALL, (Bytecode) FUNC, ##ARGS),
 
+/// Does nothing in release version
+#define EVT_DEBUG_LOG(STRING)                   EVT_CMD(EVT_OP_DEBUG_LOG, STRING),
+
+/// Prints variable name and value
+#define EVT_DEBUG_PRINT_VAR(VAR)                EVT_CMD(EVT_OP_DEBUG_PRINT_VAR, VAR),
+
+/****** VECTOR OPERATIONS *********************************************************************************************/
+
+// expand vector components
+#define EVT_AS_VEC2(baseVar) (baseVar), (baseVar + 1)
+#define EVT_AS_VEC3(baseVar) (baseVar), (baseVar + 1), (baseVar + 2)
+
+// extract components from vector
+#define EVT_VEC_X(baseVar) (baseVar)
+#define EVT_VEC_Y(baseVar) (baseVar + 1)
+#define EVT_VEC_Z(baseVar) (baseVar + 2)
+
+#define EVT_VEC2_OP(OPERATION, MUT_BASE, x, y) \
+    OPERATION(MUT_BASE + 0, x) \
+    OPERATION(MUT_BASE + 1, y)
+
+#define EVT_VEC3_OP(OPERATION, MUT_BASE, x, y, z) \
+    OPERATION(MUT_BASE + 0, x) \
+    OPERATION(MUT_BASE + 1, y) \
+    OPERATION(MUT_BASE + 2, z)
+
+#define EVT_VEC2_VOP(OPERATION, MUT_BASE, AMT_BASE) \
+    OPERATION(MUT_BASE + 0, AMT_BASE + 0) \
+    OPERATION(MUT_BASE + 1, AMT_BASE + 1)
+
+#define EVT_VEC3_VOP(OPERATION, MUT_BASE, AMT_BASE) \
+    OPERATION(MUT_BASE + 0, AMT_BASE + 0) \
+    OPERATION(MUT_BASE + 1, AMT_BASE + 1) \
+    OPERATION(MUT_BASE + 2, AMT_BASE + 2)
+
+#define EVT_VEC2I_SET(baseVar, x, y)    EVT_VEC2_OP(EVT_SET, baseVar, x, y)
+#define EVT_VEC2F_SET(baseVar, x, y)    EVT_VEC2_OP(EVT_SETF, baseVar, x, y)
+#define EVT_VEC3I_SET(baseVar, x, y, z) EVT_VEC3_OP(EVT_SET, baseVar, x, y, z)
+#define EVT_VEC3F_SET(baseVar, x, y, z) EVT_VEC3_OP(EVT_SETF, baseVar, x, y, z)
+
+#define EVT_VEC2I_VSET(baseVar, baseSrc) EVT_VEC2_VOP(EVT_SET, baseVar, baseSrc)
+#define EVT_VEC2F_VSET(baseVar, baseSrc) EVT_VEC2_VOP(EVT_SETF, baseVar, baseSrc)
+#define EVT_VEC3I_VSET(baseVar, baseSrc) EVT_VEC3_VOP(EVT_SET, baseVar, baseSrc)
+#define EVT_VEC3F_VSET(baseVar, baseSrc) EVT_VEC3_VOP(EVT_SETF, baseVar, baseSrc)
+
+#define EVT_VEC2I_ADD(baseVar, x, y)    EVT_VEC2_OP(EVT_ADD, baseVar, x, y)
+#define EVT_VEC2F_ADD(baseVar, x, y)    EVT_VEC2_OP(EVT_ADDF, baseVar, x, y)
+#define EVT_VEC3I_ADD(baseVar, x, y, z) EVT_VEC3_OP(EVT_ADD, baseVar, x, y, z)
+#define EVT_VEC3F_ADD(baseVar, x, y, z) EVT_VEC3_OP(EVT_ADDF, baseVar, x, y, z)
+
+#define EVT_VEC2I_VADD(baseVar, baseAmt) EVT_VEC2_VOP(EVT_ADD, baseVar, baseAmt)
+#define EVT_VEC2F_VADD(baseVar, baseAmt) EVT_VEC2_VOP(EVT_ADDF, baseVar, baseAmt)
+#define EVT_VEC3I_VADD(baseVar, baseAmt) EVT_VEC3_VOP(EVT_ADD, baseVar, baseAmt)
+#define EVT_VEC3F_VADD(baseVar, baseAmt) EVT_VEC3_VOP(EVT_ADDF, baseVar, baseAmt)
+
+#define EVT_VEC2I_SUB(baseVar, x, y)    EVT_VEC2_OP(EVT_SUB, baseVar, x, y)
+#define EVT_VEC2F_SUB(baseVar, x, y)    EVT_VEC2_OP(EVT_SUBF, baseVar, x, y)
+#define EVT_VEC3I_SUB(baseVar, x, y, z) EVT_VEC3_OP(EVT_SUB, baseVar, x, y, z)
+#define EVT_VEC3F_SUB(baseVar, x, y, z) EVT_VEC3_OP(EVT_SUBF, baseVar, x, y, z)
+
+#define EVT_VEC2I_VSUB(baseVar, baseAmt) EVT_VEC2_VOP(EVT_SUB, baseVar, baseAmt)
+#define EVT_VEC2F_VSUB(baseVar, baseAmt) EVT_VEC2_VOP(EVT_SUBF, baseVar, baseAmt)
+#define EVT_VEC3I_VSUB(baseVar, baseAmt) EVT_VEC3_VOP(EVT_SUB, baseVar, baseAmt)
+#define EVT_VEC3F_VSUB(baseVar, baseAmt) EVT_VEC3_VOP(EVT_SUBF, baseVar, baseAmt)
 
 /****** COMMON SCRIPTS ************************************************************************************************/
 
 #define EVT_IF_TRUE(b)  EVT_IF_NE(b, 0)
 #define EVT_IF_FALSE(b) EVT_IF_EQ(b, 0)
-
-#define EVT_SET_VEC2(baseVar, x, y, z) \
-    EVT_SET(baseVar + 0, x) \
-    EVT_SET(baseVar + 1, y)
-
-#define EVT_SETF_VEC2(baseVar, x, y, z) \
-    EVT_SETF(baseVar + 0, x) \
-    EVT_SETF(baseVar + 1, y)
-
-#define EVT_SET_VEC3(baseVar, x, y, z) \
-    EVT_SET(baseVar + 0, x) \
-    EVT_SET(baseVar + 1, y) \
-    EVT_SET(baseVar + 2, z)
-
-#define EVT_SETF_VEC3(baseVar, x, y, z) \
-    EVT_SETF(baseVar + 0, x) \
-    EVT_SETF(baseVar + 1, y) \
-    EVT_SETF(baseVar + 2, z)
 
 #define EVT_EXIT_WALK(walkDistance, exitIdx, map, entryIdx) \
     { \

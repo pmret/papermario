@@ -339,7 +339,7 @@ void func_800522A8(AuAmbienceManager* arg0, AuAmbPlayer* lambda) {
     AlUnkOmega* omega = lambda->unk_1D4;
     u32 copied = 0;
     s32 i;
-    
+
     for (i = lambda->firstVoiceIdx; i < lambda->lastVoiceIdx; i++) {
         AlUnkIota* iota = &arg0->mseqVoiceStates[i - lambda->firstVoiceIdx];
 
@@ -366,7 +366,7 @@ void func_8005232C(AuAmbienceManager* manager, AuAmbPlayer* lambda) {
     AlUnkIota* iota;
     AlUnkXi* xi;
     u32 i, j;
-        
+
     globals = manager->globals;
     if (lambda->playState == MSEQ_PLAYER_PLAYING) {
         for (i = 0; i < ARRAY_COUNT(lambda->unk_1D4); i++) {
@@ -392,7 +392,7 @@ void func_8005232C(AuAmbienceManager* manager, AuAmbPlayer* lambda) {
                         }
                     }
                 }
-                
+
                 if (j < lambda->lastVoiceIdx) {
                     iota = &manager->mseqVoiceStates[j - lambda->firstVoiceIdx];
                     iota->unk_00.s32 = lambda->unk_14.s32 + (omega->unk_00 << 0x10) + (omega->unk_01 << 8);

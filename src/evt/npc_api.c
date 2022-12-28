@@ -968,7 +968,7 @@ ApiStatus PartnerIsFlying(Evt* script, s32 isInitialCall) {
 ApiStatus func_802CFD30(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcId = evt_get_variable(script, *args++);
-    Bytecode var1 = evt_get_variable(script, *args++);
+    Bytecode foldType = evt_get_variable(script, *args++);
     Bytecode var2 = evt_get_variable(script, *args++);
     Bytecode var3 = evt_get_variable(script, *args++);
     Bytecode var4 = evt_get_variable(script, *args++);
@@ -979,7 +979,7 @@ ApiStatus func_802CFD30(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    func_8003D624(npc, var1, var2, var3, var4, var5, npc->unk_A2);
+    func_8003D624(npc, foldType, var2, var3, var4, var5, npc->unk_A2);
     return ApiStatus_DONE2;
 }
 

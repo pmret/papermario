@@ -11,8 +11,7 @@ const char N(exit_str_2)[] = "hos_00";
 const char N(exit_str_3)[] = "osr_03";
 const char N(exit_str_4)[] = "hos_05";
 
-// BSS
-extern s32 D_80243380;
+BSS s32 D_80243380;
 
 void func_80240BD0_A27AA0(s32** arg0) {
     u8 type;

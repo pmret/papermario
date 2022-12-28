@@ -186,7 +186,7 @@ ApiStatus func_802803C8(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    if ((playerStatus->flags & PS_FLAGS_100)) {
+    if ((playerStatus->flags & PS_FLAGS_PAUSE_DISABLED)) {
         return ApiStatus_DONE2;
     }
 
@@ -411,7 +411,7 @@ void shop_open_item_select_popup(s32 mode) {
     menu->numEntries = numEntries;
     menu->initialPos = 0;
     func_800F4FC4(menu);
-    func_800E9894();
+    status_menu_ignore_changes();
     func_800E98EC();
     open_status_menu_short();
 }
@@ -442,7 +442,7 @@ s32 shop_update_item_select_popup(s32* selectedIndex) {
 void shop_close_item_select_popup(void) {
     destroy_popup_menu();
     func_800E9900();
-    func_800E98C4();
+    status_menu_respond_to_changes();
     close_status_menu();
 }
 
@@ -827,7 +827,7 @@ void draw_shop_items(void) {
                     xOffset = 0;
                 }
 
-                if (!(get_item_entity(shopItemEntities->index)->flags & ITEM_ENTITY_FLAGS_40)) {
+                if (!(get_item_entity(shopItemEntities->index)->flags & ITEM_ENTITY_FLAGS_HIDDEN)) {
                     draw_number(itemData->price, xTemp + xOffset, yTemp, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, 0);
                 }
 

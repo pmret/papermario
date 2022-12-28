@@ -8,14 +8,15 @@
 
 extern IconHudScriptPair gItemHudScripts[];
 
-extern s32 D_802A25C8[7];
-extern s32 D_802A25E4;
-extern s32 D_802A25E8;
-extern s32 D_802A25EC;
-extern s32 D_802A25F0;
-extern s32 D_802A25F4;
-extern s32 D_802A25F8;
-extern s32* D_802A25FC;
+BSS s32 D_802A25C4; // unused?
+BSS s32 D_802A25C8[7];
+BSS s32 D_802A25E4;
+BSS s32 D_802A25E8;
+BSS s32 D_802A25EC;
+BSS s32 D_802A25F0;
+BSS s32 D_802A25F4;
+BSS s32 D_802A25F8;
+BSS s32* D_802A25FC;
 
 void N(func_802A123C_72C7EC(void)) {
     s32 var_s3;

@@ -107,7 +107,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_END_THREAD
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcPos, NPC_Bootler, 200, 44, 0)
-    EVT_CALL(func_802CFD30, 0, 7, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, 0, 0, 0, 0)
     EVT_SET(MV_Unk_00, TRUE)
     EVT_CALL(SetMusicTrack, 0, SONG_BOOS_MANSION, 0, 8)
     EVT_WAIT(20)
@@ -125,7 +125,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(20)
         EVT_ADDF(LVar0, EVT_FLOAT(12.0))
-        EVT_CALL(func_802CFD30, 0, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(20)
@@ -150,7 +150,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20)
         EVT_SUBF(LVar0, EVT_FLOAT(12.0))
-        EVT_CALL(func_802CFD30, 0, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(25)
@@ -163,7 +163,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
         EVT_SETF(LVar0, EVT_FLOAT(0.0))
         EVT_LOOP(20)
             EVT_ADDF(LVar0, EVT_FLOAT(12.0))
-            EVT_CALL(func_802CFD30, 0, 7, LVar0, 0, 0, 0)
+            EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, LVar0, 0, 0, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -176,7 +176,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20)
         EVT_SUBF(LVar0, EVT_FLOAT(12.0))
-        EVT_CALL(func_802CFD30, 0, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_SET(GB_StoryProgress, STORY_CH3_INVITED_TO_BOOS_MANSION)

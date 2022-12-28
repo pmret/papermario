@@ -10,10 +10,10 @@ API_CALLABLE(N(AwaitPlayerFallDist)) {
         suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
     }
 
-    fallSpeed = func_800E34D8();
+    fallSpeed = player_fall_distance();
     playerStatus->position.y = player_check_collision_below(fallSpeed, &colliderID);
     script->functionTemp[0] += fabsf(fallSpeed);
-    
+
     if (script->functionTemp[0] > 50) {
         return ApiStatus_DONE2;
     } else {

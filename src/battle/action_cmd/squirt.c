@@ -6,6 +6,8 @@
 s32 D_802A9760_42A480[] = { 300, 300, 265, 220, 175, 175, };
 s32 D_802A9778_42A498[] = { 300, 300, 265, 220, 175, 175, };
 
+extern s32 actionCmdTableSquirt[];
+
 ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;

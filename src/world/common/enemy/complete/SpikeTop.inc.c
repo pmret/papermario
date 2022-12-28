@@ -2,9 +2,7 @@
 
 #include "world/common/enemy/ai/TackleAI.inc.c"
 
-#include "world/common/todo/AwaitPlayerNearNpc.inc.c"
-
-MobileAISettings N(D_80243AA0_C647B0) = {
+MobileAISettings N(AISettings_BuzzyBeetle) = {
     .moveSpeed = 1.0f,
     .moveTime = 60,
     .waitTime = 60,
@@ -17,12 +15,12 @@ MobileAISettings N(D_80243AA0_C647B0) = {
     .unk_AI_2C = 1,
 };
 
-EvtScript N(D_80243AD0_C647E0) = {
+EvtScript N(EVS_NpcAI_BuzzyBeetle) = {
     EVT_CALL(SetSelfVar, 2, 5)
     EVT_CALL(SetSelfVar, 3, 2)
     EVT_CALL(SetSelfVar, 5, 5)
     EVT_CALL(SetSelfVar, 7, 2)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(D_80243AA0_C647B0)))
+    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(AISettings_BuzzyBeetle)))
     EVT_RETURN
     EVT_END
 };
@@ -71,7 +69,9 @@ EvtScript N(D_80243C10_C64920) = {
     EVT_END
 };
 
-EvtScript N(D_80243C80_C64990) = {
+#include "world/common/todo/AwaitPlayerNearNpc.inc.c"
+
+EvtScript N(EVS_NpcAI_BuzzyBeetle_Ceiling) = {
     EVT_CALL(N(func_80240814_97BE44))
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_Anim0F)
     EVT_CALL(N(AwaitPlayerNearNpc))
@@ -84,27 +84,27 @@ EvtScript N(D_80243C80_C64990) = {
     EVT_CALL(SetSelfVar, 3, 2)
     EVT_CALL(SetSelfVar, 5, 5)
     EVT_CALL(SetSelfVar, 7, 2)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(D_80243AA0_C647B0)))
+    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(AISettings_BuzzyBeetle)))
     EVT_RETURN
     EVT_END
 };
 
-// different spike top varieties
+// different buzzy beetle / spike top varieties
 
-NpcSettings N(NpcSettings_Unused1) = {
+NpcSettings N(NpcSettings_BuzzyBeetle) = {
     .height = 20,
     .radius = 22,
     .level = 10,
-    .ai = &N(D_80243AD0_C647E0),
+    .ai = &N(EVS_NpcAI_BuzzyBeetle),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
 
-NpcSettings N(NpcSettings_Unused2) = {
+NpcSettings N(NpcSettings_BuzzyBeetle_Ceiling) = {
     .height = 20,
     .radius = 22,
     .level = 10,
-    .ai = &N(D_80243C80_C64990),
+    .ai = &N(EVS_NpcAI_BuzzyBeetle_Ceiling),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };

@@ -3,7 +3,21 @@
 
 extern Gfx D_090004C0_343500[];
 extern Gfx D_090005E0_343620[];
-extern u8 D_E0042780[];
+
+u8 D_E0042780[] = {
+    254, 172, 172,
+    254, 172, 213,
+    254, 180, 154,
+    213, 180, 254,
+    180, 180, 254,
+    180, 221, 254,
+    180, 254, 254,
+    180, 254, 213,
+    180, 254, 180,
+    213, 254, 180,
+    254, 254, 180,
+    254, 213, 172,
+};
 
 void stars_burst_init(EffectInstance* effect);
 void stars_burst_update(EffectInstance* effect);

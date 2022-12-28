@@ -111,8 +111,6 @@ extern SpriteShadingProfile* D_80151328;
 
 extern Window gWindows[64];
 
-extern s32 D_802A3838;
-
 extern s32 gEncounterState;
 extern s16 gNpcCount;
 extern s32 gOverrideFlags;
@@ -122,13 +120,14 @@ extern s16 D_8009A6A4;
 extern s16 D_8009A6A6;
 
 extern s8 D_800A0920;
-extern s32 D_800A0924;
+extern s32 SavedReverbMode;
 extern s8 D_800A0921;
 extern s16 D_800A0922;
 extern char wMapTexName[];
 extern char wMapHitName[];
 extern char wMapShapeName[];
-extern struct ShapeFile* D_80210000; // shouldnt be a pointer
+extern char wMapBgName[];
+extern struct ShapeFile D_80210000;
 extern u8 D_802D9D70; // player alpha1 copy?
 extern u8 D_802D9D71; // player alpha2 copy?
 
@@ -190,8 +189,8 @@ extern EvtScript ShakeCamX;
 extern MusicSettings gMusicSettings[4];
 
 // OS
-extern OSThread D_800A4270; // idle thread, id 1
-extern OSThread D_800A4420; // id 3
+extern OSThread IdleThread; // idle thread, id 1
+extern OSThread MainThread; // id 3
 extern OSDevMgr __osPiDevMgr;
 
 // gfx

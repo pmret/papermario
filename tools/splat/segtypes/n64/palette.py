@@ -1,10 +1,11 @@
 from itertools import zip_longest
 from pathlib import Path
-from typing import TYPE_CHECKING, Optional
+from typing import List, Optional, Tuple, TYPE_CHECKING
 
-from segtypes.n64.segment import N64Segment
 from util import log, options
 from util.color import unpack_color
+
+from segtypes.n64.segment import N64Segment
 
 if TYPE_CHECKING:
     from segtypes.n64.ci import N64SegCi as Raster
@@ -57,12 +58,16 @@ class N64SegPalette(N64Segment):
             # TODO: output with no raster
             log.error(f"orphaned palette segment: {self.name} lacks ci4/ci8 sibling")
 
-        self.raster.n64img.palette = self.parse_palette(rom_bytes)
+        assert self.raster is not None
+        self.raster.n64img.palette = self.parse_palette(rom_bytes)  # type: ignore
 
         self.raster.n64img.write(self.out_path())
         self.raster.extract = False
 
-    def parse_palette(self, rom_bytes):
+    def parse_palette(self, rom_bytes) -> List[Tuple[int, int, int, int]]:
+        assert isinstance(self.rom_start, int)
+        assert isinstance(self.rom_end, int)
+
         data = rom_bytes[self.rom_start : self.rom_end]
         palette = []
 

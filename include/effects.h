@@ -540,9 +540,7 @@ typedef struct DamageStarsFXData {
 
 typedef struct ExplosionFXData {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ char unk_10[0x10];
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
@@ -680,8 +678,17 @@ typedef struct StarsBurstFXData {
 } StarsBurstFXData; // size = 0x38
 
 typedef struct StarsShimmerFXData {
-    /* 0x00 */ char todo[0];
-} StarsShimmerFXData; // size = unknown
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ s32 lifeTime;
+    /* 0x24 */ s32 timeLeft;
+    /* 0x28 */ s32 unk_28;
+} StarsShimmerFXData; // size = 0x2C
 
 typedef struct RisingBubbleFXData {
     /* 0x00 */ s32 unk_00;
@@ -710,9 +717,7 @@ typedef struct RingBlastFXData {
 typedef struct ShockwaveFXData {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ char unk_02[2]; // likely padding
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ f32 unk_14;
     /* 0x18 */ s32 unk_18;
@@ -723,14 +728,14 @@ typedef struct ShockwaveFXData {
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ f32 unk_34;
-    /* 0x38 */ s32 unk_38;
+    /* 0x38 */ s32 alpha;
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ f32 unk_40;
     /* 0x44 */ f32 unk_44;
     /* 0x48 */ f32 unk_48;
     /* 0x4C */ s32 unk_4C;
-    /* 0x50 */ Color_RGB8 unk_50;
-    /* 0x53 */ Color_RGB8 unk_53;
+    /* 0x50 */ Color_RGB8 prim;
+    /* 0x53 */ Color_RGB8 env;
     /* 0x56 */ char unk_56[2]; // likely padding
 } ShockwaveFXData; // size = 0x58
 
@@ -788,8 +793,20 @@ typedef struct Unk2AFXData {
 } Unk2AFXData; // size = unknown
 
 typedef struct WindyLeavesFXData {
-    /* 0x00 */ char todo[0];
-} WindyLeavesFXData; // size = unknown
+    /* 0x00 */ s32 type;
+    /* 0x04 */ Vec3f unk_04;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ s32 alpha;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+} WindyLeavesFXData; // size = 0x3C
 
 typedef struct FallingLeavesFXData {
     /* 0x00 */ s32 unk_00;
@@ -932,8 +949,8 @@ typedef struct RadialShimmerFXData {
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
+    /* 0x28 */ s32 timeLeft;
+    /* 0x2C */ s32 lifeTime;
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ f32 unk_34;
     /* 0x38 */ f32 unk_38;
@@ -1343,8 +1360,12 @@ typedef struct ConfettiFXData {
 typedef struct SnowfallFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ char unk_0C[0x14];
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
     /* 0x20 */ s32 timeLeft;
     /* 0x24 */ s32 lifeTime;
     /* 0x28 */ s32 unk_28;
@@ -1588,18 +1609,20 @@ typedef struct MerlinHouseStarsFXData {
     /* 0x38 */ f32 unk_38;
 } MerlinHouseStarsFXData; // size = 0x3C
 
+#define MAX_QUIZMO_AUDIENCE 10
+
 typedef struct QuizmoAudienceFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 timeLeft;
     /* 0x08 */ s32 lifeTime;
     /* 0x0C */ Vec3f pos;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C[10];
-    /* 0x44 */ s32 unk_44[10];
-    /* 0x6C */ s32 unk_6C[10];
-    /* 0x94 */ f32 unk_94[10];
-    /* 0xBC */ f32 unk_BC[10];
-    /* 0xE4 */ f32 unk_E4[10];
+    /* 0x18 */ s32 primColor;
+    /* 0x1C */ s32 compState[MAX_QUIZMO_AUDIENCE];
+    /* 0x44 */ s32 compType[MAX_QUIZMO_AUDIENCE];
+    /* 0x6C */ s32 compPosIdx[MAX_QUIZMO_AUDIENCE];
+    /* 0x94 */ f32 compMoveMagnitude[MAX_QUIZMO_AUDIENCE];
+    /* 0xBC */ f32 compX[MAX_QUIZMO_AUDIENCE];
+    /* 0xE4 */ f32 compY[MAX_QUIZMO_AUDIENCE];
 } QuizmoAudienceFXData; // size = 0x10C
 
 typedef struct ButterfliesFXData {
@@ -1642,19 +1665,22 @@ typedef struct StatChangeFXData {
 } StatChangeFXData;
 
 typedef struct SnakingStaticFXData {
-    /* 0x00 */ char unk_00[4];
+    /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ char unk_10[8];
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ char unk_24[4];
+    /* 0x24 */ s32 unk_24;
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ s32 unk_30;
-    /* 0x34 */ char unk_34[4];
+    /* 0x34 */ f32 unk_34;
     /* 0x38 */ f32 unk_38;
-} SnakingStaticFXData; // size = unknown
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ s32 unk_40;
+} SnakingStaticFXData; // size = 0x44
 
 typedef struct ThunderboltRingFXData {
     /* 0x00 */ s32 unk_00;
@@ -1704,11 +1730,28 @@ typedef struct SquirtFXData {
     /* 0x1D8 */ u8 unk_1D8[12];
 } SquirtFXData; // size = 0x1E4
 
+#define NUM_WATER_BLOCK_COMPONENTS 4
+
 typedef struct WaterBlockFXData {
-    /* 0x00 */ char unk_00[4];
+    /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ char todo[0];
-} WaterBlockFXData; // size = unknown
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38[NUM_WATER_BLOCK_COMPONENTS];
+    /* 0x48 */ f32 unk_48[NUM_WATER_BLOCK_COMPONENTS];
+    /* 0x58 */ f32 unk_58[NUM_WATER_BLOCK_COMPONENTS];
+    /* 0x68 */ f32 unk_68[NUM_WATER_BLOCK_COMPONENTS];
+    /* 0x78 */ f32 unk_78[NUM_WATER_BLOCK_COMPONENTS];
+    /* 0x88 */ s32 unk_88[NUM_WATER_BLOCK_COMPONENTS];
+} WaterBlockFXData; // size = 0x98
 
 typedef struct WaterfallFXData {
     /* 0x00 */ s32 unk_00;
@@ -1782,8 +1825,17 @@ typedef struct LightningBoltFXData {
 } LightningBoltFXData; // size = 0x118
 
 typedef struct WaterSplashFXData {
-    /* 0x00 */ char todo[0];
-} WaterSplashFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f unk_04;
+    /* 0x10 */ Vec3f unk_10;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ f32 unk_34;
+} WaterSplashFXData; // size = 0x38
 
 typedef struct SnowmanDollFXData {
     /* 0x00 */ s32 unk_00;
@@ -1973,11 +2025,33 @@ typedef struct TubbaHeartAttackFXData {
     /* 0x734 */ s32 unk_734[25];
 } TubbaHeartAttackFXData; // size = 0x798
 
+#define MAX_WHIRLWIND_SEGMENTS 8
+
 typedef struct WhirlwindFXData {
-    /* 0x00 */ char unk_00[0x4];
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ char todo[0];
-} WhirlwindFXData; // size = unknown
+    /* 0x000 */ s32 unk_00;
+    /* 0x004 */ Vec3f pos;
+    /* 0x010 */ s32 unk_10;
+    /* 0x014 */ s32 unk_14;
+    /* 0x018 */ s32 primR;
+    /* 0x01C */ s32 primG;
+    /* 0x020 */ s32 primB;
+    /* 0x024 */ s32 primAlpha;
+    /* 0x028 */ s32 envR;
+    /* 0x02C */ s32 envG;
+    /* 0x030 */ s32 envB;
+    /* 0x034 */ f32 unk_34;
+    /* 0x038 */ f32 unk_38[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x058 */ f32 unk_58[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x078 */ f32 unk_78[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x098 */ f32 unk_98[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x0B8 */ f32 unk_B8[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x0D8 */ f32 unk_D8[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x0F8 */ f32 unk_F8[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x118 */ f32 unk_118[MAX_WHIRLWIND_SEGMENTS];
+    /* 0x138 */ f32 unk_138;
+    /* 0x13C */ f32 unk_13C;
+    /* 0x140 */ f32 unk_140;
+} WhirlwindFXData; // size = 0x144
 
 // Likely to be the same as GreenImpactFXData and ShockwaveFXData
 typedef struct RedImpactFXData {
@@ -2397,20 +2471,47 @@ typedef struct SpiritCardFXData {
 
 #define MAX_LIL_OINKS 11
 
+enum LilOinkFlags {
+    LIL_OINK_FLAG_VISIBLE = 1,
+    LIL_OINK_FLAG_ANIM_CHANGED = 2,
+};
+
+enum LilOinkTypes {
+    LIL_OINK_TYPE_BLACK     = 0,
+    LIL_OINK_TYPE_WHITE     = 1,
+    LIL_OINK_TYPE_PINK      = 2,
+    LIL_OINK_TYPE_PIKACHU   = 3,
+    LIL_OINK_TYPE_SHROOM    = 4,
+    LIL_OINK_TYPE_FLOWER    = 5,
+    LIL_OINK_TYPE_STAR      = 6,
+    LIL_OINK_TYPE_QUESTION  = 7,
+    LIL_OINK_TYPE_SILVER    = 8,
+    LIL_OINK_TYPE_GOLD      = 9,
+};
+
+enum LilOinkAnims {
+    LIL_OINK_ANIM_0 = 0,
+    LIL_OINK_ANIM_1 = 1,
+    LIL_OINK_ANIM_2 = 2,
+    LIL_OINK_ANIM_3 = 3,
+    LIL_OINK_ANIM_4 = 4,
+    LIL_OINK_ANIM_5 = 5,
+};
+
 typedef struct LilOinkFXData {
-    /* 0x000 */ s32 unk_00;
-    /* 0x004 */ s32 unk_04;
+    /* 0x000 */ s32 timeLeft;
+    /* 0x004 */ s32 lifetime;
     /* 0x008 */ s32 flags[MAX_LIL_OINKS];
     /* 0x034 */ f32 x[MAX_LIL_OINKS];
     /* 0x060 */ f32 y[MAX_LIL_OINKS];
     /* 0x08C */ f32 z[MAX_LIL_OINKS];
     /* 0x0B8 */ f32 rot[MAX_LIL_OINKS];
     /* 0x0E4 */ u8 type[MAX_LIL_OINKS];
-    /* 0x0EF */ s8 unk_EF[MAX_LIL_OINKS];
-    /* 0x0FA */ u8 unk_FA[MAX_LIL_OINKS];
-    /* 0x105 */ u8 unk_105[MAX_LIL_OINKS];
+    /* 0x0EF */ s8 nextAnim[MAX_LIL_OINKS];
+    /* 0x0FA */ u8 anim[MAX_LIL_OINKS];
+    /* 0x105 */ u8 gfxFrame[MAX_LIL_OINKS];
     /* 0x110 */ f32 jumpOffset[MAX_LIL_OINKS];
-    /* 0x13C */ s8 unk_13C[MAX_LIL_OINKS];
+    /* 0x13C */ s8 animTime[MAX_LIL_OINKS];
 } LilOinkFXData; // size = 0x148
 
 typedef struct SomethingRotatingFXData {
@@ -2423,12 +2524,10 @@ typedef struct SomethingRotatingFXData {
     /* 0x18 */ f32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
-    /* 0x24 */ u8 unk_24;
+    /* 0x24 */ u8 primAlpha;
     /* 0x25 */ s8 unk_25;
-    /* 0x26 */ u8 unk_26;
-    /* 0x27 */ u8 unk_27;
-    /* 0x28 */ u8 unk_28;
-    /* 0x29 */ u8 unk_29;
+    /* 0x26 */ Color_RGB8 env;
+    /* 0x29 */ u8 state;
     /* 0x2A */ char unk_2A[2];
     /* 0x2C */ f32 unk_2C;
 } SomethingRotatingFXData; // size = 0x30
@@ -2483,12 +2582,18 @@ typedef struct QuizmoAssistantFXData {
 } QuizmoAssistantFXData; // size = 0x20
 
 typedef struct IcePillarFXData {
-    /* 0x00 */ char unk_00[0x4];
+    /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ char unk_10[0x10];
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ char todo[0];
-} IcePillarFXData; // size = unknown
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
+    /* 0x18 */ Color_RGBA8 prim;
+    /* 0x1C */ Color_RGBA8 env;
+    /* 0x20 */ f32 scale;
+    /* 0x24 */ s8 unk_24;
+    /* 0x25 */ s8 unk_25;
+    /* 0x26 */ char unk_26[0x2];
+    /* 0x28 */ struct EffectInstance* miscParticles;
+} IcePillarFXData; // size = 0x2C
 
 // sun shine directions
 enum {

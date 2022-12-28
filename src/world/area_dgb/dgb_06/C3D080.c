@@ -138,11 +138,11 @@ StaticNpc N(npcGroup_80240954) = {
     .init = &N(init_802408FC),
     .yaw = 270,
     .drops = {
-		.dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
-	.animations = {
+    .animations = {
         ANIM_Boo_Tan_Idle,
         ANIM_Boo_Tan_Walk,
         ANIM_Boo_Tan_Run,
