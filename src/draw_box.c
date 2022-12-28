@@ -1,6 +1,8 @@
 #include "common.h"
 #include "nu/nusys.h"
 
+#define INTEGER_LOG2(x) ((x) <= 1 ? 0 : (x) <= 2 ? 1 : (x) <= 4 ? 2 : (x) <= 8 ? 3 : (x) <= 16 ? 4 : (x) <= 32 ? 5 : (x) <= 64 ? 6 : (x) <= 128 ? 7 : (x) <= 256 ? 8 : (x) <= 512 ? 9 : 10)
+
 typedef struct DefaultWindowStyle {
     /* 0x00 */ u8 bgIndex;
     /* 0x01 */ u8 cornersIndex;
@@ -330,15 +332,13 @@ Mtx gBoxMatrix = {
           0x00000000, 0x00000000 },
         { 0x00000000, 0x00000000,
           0xFFFA0000, 0x00000000 },
-        //fractional portion
+        // fractional portion
         { 0x00000000, 0x00000000,
           0x00000000, 0x00000000 },
         { 0x00000000, 0x00000000,
           0x00000000, 0x00000000 }
     }
 };
-
-#define _INTEGER_LOG2(x) ((x) <= 1 ? 0 : (x) <= 2 ? 1 : (x) <= 4 ? 2 : (x) <= 8 ? 3 : (x) <= 16 ? 4 : (x) <= 32 ? 5 : (x) <= 64 ? 6 : (x) <= 128 ? 7 : (x) <= 256 ? 8 : (x) <= 512 ? 9 : 10)
 
 s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
               u8 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32, s32, s32, s32, s32, s32, s32),
@@ -409,8 +409,8 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
         bgImage = background->imgData;
         bgHeight = background->height;
 
-        bgMasks = _INTEGER_LOG2(bgWidth);
-        bgMaskt = _INTEGER_LOG2(bgHeight);
+        bgMasks = INTEGER_LOG2(bgWidth);
+        bgMaskt = INTEGER_LOG2(bgHeight);
 
         quads = NULL;
         sp154 = NULL;
@@ -538,8 +538,8 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
             for (idx = 0; idx < 4; idx++) {
                 cornerWidth = cornersSizes[idx].x;
                 cornerHeight = cornersSizes[idx].y;
-                masks = _INTEGER_LOG2(cornerWidth);
-                maskt = _INTEGER_LOG2(cornerHeight);
+                masks = INTEGER_LOG2(cornerWidth);
+                maskt = INTEGER_LOG2(cornerHeight);
 
 
                 switch (cornersBitDepth) {
@@ -814,8 +814,7 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
                         gSPMatrix(gMasterGfxPos++, &gBoxMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
                     }
                 }
-            }
-            else {
+            } else {
                 fpDrawContents((s32)drawContentsArg0, posX, posY, width, height, opacity, darkening);
             }
         }
