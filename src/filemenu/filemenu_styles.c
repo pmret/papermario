@@ -7,7 +7,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -15,7 +16,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .size1 = { .x = 0, .y = 0},
             .size2 = { .x = 0, .y = 0},
             .size3 = { .x = 0, .y = 0},
@@ -31,7 +33,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0x40,
+            .fmt = G_IM_FMT_I,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 16,
             .height = 16,
             .unk_07 = { 0, 0, 0, 0},
@@ -39,7 +42,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = NULL,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 8, .y = 8},
             .size2 = { .x = 8, .y = 8},
             .size3 = { .x = 8, .y = 8},
@@ -55,7 +59,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -63,7 +68,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .size1 = { .x = 0, .y = 0},
             .size2 = { .x = 0, .y = 0},
             .size3 = { .x = 0, .y = 0},
@@ -79,7 +85,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -87,7 +94,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024A400,
-            .packedTileFormat = 0x03,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_32b,
             .size1 = { .x = 16, .y = 16},
             .size2 = { .x = 16, .y = 16},
             .size3 = { .x = 16, .y = 16},
@@ -103,7 +111,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -111,7 +120,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -127,7 +137,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -135,7 +146,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -151,7 +163,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -159,7 +172,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -175,7 +189,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -183,7 +198,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -199,7 +215,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -207,7 +224,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -223,7 +241,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -231,7 +250,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -247,7 +267,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -255,7 +276,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -271,7 +293,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -279,7 +302,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -295,7 +319,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -303,7 +328,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -319,7 +345,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -327,7 +354,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -343,7 +371,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -351,7 +380,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -367,7 +397,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -375,7 +406,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -391,7 +423,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -399,7 +432,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -415,7 +449,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -423,7 +458,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -439,7 +475,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -447,7 +484,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
@@ -463,7 +501,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -471,7 +510,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024A400,
-            .packedTileFormat = 0x03,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_32b,
             .size1 = { .x = 16, .y = 16},
             .size2 = { .x = 16, .y = 16},
             .size3 = { .x = 16, .y = 16},
@@ -487,7 +527,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -495,7 +536,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024A400,
-            .packedTileFormat = 0x03,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_32b,
             .size1 = { .x = 16, .y = 16},
             .size2 = { .x = 16, .y = 16},
             .size3 = { .x = 16, .y = 16},
@@ -511,7 +553,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -519,7 +562,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024A400,
-            .packedTileFormat = 0x03,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_32b,
             .size1 = { .x = 16, .y = 16},
             .size2 = { .x = 16, .y = 16},
             .size3 = { .x = 16, .y = 16},
@@ -535,7 +579,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
             .imgData = NULL,
-            .packedTileFormat = 0,
+            .fmt = G_IM_FMT_RGBA,
+            .bitDepth = G_IM_SIZ_4b,
             .width = 0,
             .height = 0,
             .unk_07 = { 0, 0, 0, 0},
@@ -543,7 +588,8 @@ WindowStyleCustom filemenu_windowStyles[] = {
         },
         .corners = {
             .imgData = D_8024B400,
-            .packedTileFormat = 0x31,
+            .fmt = G_IM_FMT_IA,
+            .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 16, .y = 8},
             .size2 = { .x = 16, .y = 8},
             .size3 = { .x = 16, .y = 8},
