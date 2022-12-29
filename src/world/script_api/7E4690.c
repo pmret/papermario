@@ -62,7 +62,7 @@ ApiStatus SetPlayerPositionFromSaveData(Evt* script, s32 isInitialCall) {
         enable_partner_ai();
     }
 
-    camera->changingMap = TRUE;
+    camera->isChangingMap = TRUE;
     return ApiStatus_DONE2;
 }
 

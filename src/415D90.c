@@ -5146,7 +5146,7 @@ void btl_state_draw_select_target(void) {
             }
         }
 
-        draw_box(0, 4, screenX + D_802ACC68, screenY, 0, msgWidth, 20, 255, 0,
+        draw_box(0, WINDOW_STYLE_4, screenX + D_802ACC68, screenY, 0, msgWidth, 20, 255, 0,
                  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
 
         screenX += 4;

@@ -220,6 +220,8 @@ typedef struct Npc {
                 NpcChompBlur*  chomp;
                 NpcQuizmoBlur* quizmo;
                 Unk2A4Blur*    unk2A4;
+                struct Npc*    keepAwayNpc;
+                s32*           keepAwayStarted;
                 } blur;
     /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ AnimID currentAnim;
@@ -741,7 +743,7 @@ typedef struct Camera {
     /* 0x002 */ s16 moveFlags;
     /* 0x004 */ s16 updateMode;
     /* 0x006 */ s16 unk_06;
-    /* 0x008 */ s16 changingMap;
+    /* 0x008 */ s16 isChangingMap;
     /* 0x00A */ s16 viewportW;
     /* 0x00C */ s16 viewportH;
     /* 0x00E */ s16 viewportStartX;
@@ -2119,9 +2121,8 @@ typedef struct MenuPanel {
 
 typedef struct WindowBackground {
     /* 0x00 */ IMG_PTR imgData;
-    /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
-//     /* 0x04 */ u8 packedTileFormatHigh : 4;
-//     /* 0x04 */ u8 packedTileFormatLow : 4;
+    /* 0x04 */ u8 fmt : 4;
+    /* 0x04 */ u8 bitDepth : 4;
     /* 0x05 */ u8 width;
     /* 0x06 */ u8 height;
     /* 0x07 */ char unk_07[4];
@@ -2130,13 +2131,12 @@ typedef struct WindowBackground {
 
 typedef struct WindowCorners {
     /* 0x00 */ IMG_PTR imgData;
-    /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
-//     /* 0x04 */ u8 packedTileFormatHigh : 4;
-//     /* 0x04 */ u8 packedTileFormatLow : 4;
-    /* 0x05 */ Vec2b size1;
-    /* 0x07 */ Vec2b size2;
-    /* 0x09 */ Vec2b size3;
-    /* 0x0B */ Vec2b size4;
+    /* 0x04 */ u8 fmt : 4;
+    /* 0x04 */ u8 bitDepth : 4;
+    /* 0x05 */ Vec2bu size1;
+    /* 0x07 */ Vec2bu size2;
+    /* 0x09 */ Vec2bu size3;
+    /* 0x0B */ Vec2bu size4;
     /* 0x0D */ char unk_0D[3];
 } WindowCorners; // size = 0x10
 

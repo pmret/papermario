@@ -20,9 +20,9 @@ s32 N(SongList)[] = {
 };
 
 typedef struct PhonographData {
-    /* 0x000 */ s32 unk_00;
-    /* 0x004 */ s32 unk_04;
-    /* 0x008 */ s32 unk_08;
+    /* 0x000 */ s32 mashMeterSmoothDivisor;
+    /* 0x004 */ s32 fillValue;
+    /* 0x008 */ s32 barFillWidth;
     /* 0x00C */ s32 songName;
     /* 0x010 */ s32 mashMeterDividers[6];
     /* 0x028 */ s32 mashMeterIntervals;
@@ -66,12 +66,123 @@ PhonographData* N(GetPhonographData)(void) {
     return (PhonographData*) evt_get_variable(NULL, MV_PhonographDataPtr);
 }
 
-void func_80240564_BCF154(s32, s32, s32);
-INCLUDE_ASM(s32, "world/area_obk/obk_07/BCF0F0", func_80240564_BCF154);
+u8 N(mashMeter_bgColors)[] = {
+     33,  33, 117,
+     29,  35, 163,
+     70,  12, 180,
+    107,   0, 120,
+    115,  13,  19,
+};
 
-void N(func_80240A10_BCF600)(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    N(GetPhonographData)()->unk_00 = arg3;
-    func_80240564_BCF154(arg0, arg1, arg2);
+u8 N(mashMeter_fillColors)[] = {
+      0, 228, 134,
+     46, 180, 242,
+    117, 112, 255,
+    243,   4, 188,
+    247,  13,   5,
+};
+
+u8 N(mashMeter_cutOffColors)[] = {
+     45,  56, 210,
+     84,  40, 209,
+    125,  44, 181,
+    161,  27,  85,
+    255, 255, 255,
+};
+
+// similar to draw_mash_meter
+void N(DrawMashMeter)(s32 posX, s32 posY, s32 fillValue) {
+    PhonographData* data = N(GetPhonographData)();
+    s32 maxCutoff;
+    s32 width;
+    s32 i;
+    s32 cutOff;
+    s32 offsetX;
+    s32 s2;
+    s32 filledWidth;
+    s32 r, g, b;
+
+    posX -= 28;
+    posY -= 4;
+
+    maxCutoff = data->mashMeterDividers[data->mashMeterIntervals];
+
+    if (fillValue < 0) {
+        fillValue = 0;
+    }
+
+    width = 0;
+    for (i = 0; i < data->mashMeterIntervals; i++) {
+        cutOff = data->mashMeterDividers[i + 1];
+        if (cutOff > fillValue) {
+            cutOff = fillValue;
+        }
+        width = cutOff * 60 / maxCutoff * 100;
+        if (fillValue == cutOff) {
+            break;
+        }
+    }
+
+    offsetX = 0;
+    data->barFillWidth += (width - data->barFillWidth) / data->mashMeterSmoothDivisor;
+
+    for (i = 0; i < data->mashMeterIntervals; i++) {
+        cutOff = data->mashMeterDividers[i + 1];
+        width = cutOff * 60 / maxCutoff - offsetX;
+        r = N(mashMeter_bgColors)[i * 3 + 0];
+        g = N(mashMeter_bgColors)[i * 3 + 1];
+        b = N(mashMeter_bgColors)[i * 3 + 2];
+        startup_draw_prim_rect_COPY(posX + offsetX, posY, posX + offsetX + width, posY + 5, r, g, b, 255);
+        if (i >= data->mashMeterIntervals - 1) {
+            break;
+        }
+        r = N(mashMeter_cutOffColors)[i * 3 + 0];
+        g = N(mashMeter_cutOffColors)[i * 3 + 1];
+        b = N(mashMeter_cutOffColors)[i * 3 + 2];
+        startup_draw_prim_rect_COPY(posX + offsetX + width, posY, posX + offsetX + width, posY + 5, r, g, b, 255);
+        offsetX += width;
+    }
+    offsetX = 0;
+    for (i = 0; i < data->mashMeterIntervals; i++) {
+        r = N(mashMeter_fillColors)[i * 3 + 0];
+        g = N(mashMeter_fillColors)[i * 3 + 1];
+        b = N(mashMeter_fillColors)[i * 3 + 2];
+
+        cutOff = data->mashMeterDividers[i + 1];
+        if (cutOff > fillValue) {
+            cutOff = fillValue;
+        }
+
+        width = data->barFillWidth / 100 - offsetX;
+        filledWidth = cutOff * 60 / maxCutoff - offsetX;
+        if (width < 0) {
+            break;
+        }
+
+        if (filledWidth == 0) {
+            filledWidth = width;
+        } else if (cutOff == fillValue) {
+            filledWidth = width;
+        } else if (filledWidth < width) {
+            width = filledWidth;
+        }
+
+        startup_draw_prim_rect_COPY(posX + offsetX, posY, posX + offsetX + width, posY + 5, r, g, b, 255);
+        if (i >= data->mashMeterIntervals - 1) {
+            break;
+        }
+
+        r = N(mashMeter_cutOffColors)[i * 3 + 0];
+        g = N(mashMeter_cutOffColors)[i * 3 + 1];
+        b = N(mashMeter_cutOffColors)[i * 3 + 2];
+        startup_draw_prim_rect_COPY(posX + offsetX + width, posY, posX + offsetX + width, posY + 5, r, g, b, 255);
+        offsetX += filledWidth;
+    }
+}
+
+void N(DrawMashMeterWithDivisor)(s32 baseX, s32 baseY, s32 fillValue, s32 smoothDivisor) {
+    N(GetPhonographData)()->mashMeterSmoothDivisor = smoothDivisor;
+    N(DrawMashMeter)(baseX, baseY, fillValue);
 }
 
 void N(worker_update_phonograph_hud)(void) {
@@ -119,7 +230,7 @@ void N(worker_update_phonograph_hud)(void) {
             arrCount = ARRAY_COUNT(data->inputBuffer);
             idx = data->inputBufferPos;
             idx -= arrCount;
-            data->unk_04 = 0;
+            data->fillValue = 0;
             if (idx < 0) {
                 idx += arrCount;
             }
@@ -134,15 +245,15 @@ void N(worker_update_phonograph_hud)(void) {
                 }
             }
             evt_set_variable(NULL, MV_MashInputsAmount, mashInputsCount * 1000);
-            data->unk_04 = (mashInputsCount * 100) / 22;
-            if (data->unk_04 < 0) {
-                data->unk_04 = 0;
+            data->fillValue = (mashInputsCount * 100) / 22;
+            if (data->fillValue < 0) {
+                data->fillValue = 0;
             }
-            if (data->unk_04 > 100) {
-                data->unk_04 = 100;
+            if (data->fillValue > 100) {
+                data->fillValue = 100;
             }
 
-            id = data->unk_08 / 60; // TODO use of id required to match - weird
+            id = data->barFillWidth / 60; // TODO use of id required to match - weird
             if (id <= 50) {
                 temp = 50.0f;
                 temp *= sin_rad((((id * 90) / 50) * TAU) / 360.0f);
@@ -187,7 +298,7 @@ void N(worker_draw_phonograph_hud)(void) {
     hudElemIndex = data->hudElemBlueMeter;
     hud_element_draw_clipped(hudElemIndex);
     hud_element_get_render_pos(hudElemIndex, &x, &y);
-    N(func_80240A10_BCF600)(x, y, data->unk_04, 2);
+    N(DrawMashMeterWithDivisor)(x, y, data->fillValue, 2);
 
     hudElemIndex = data->hudElemOK;
     hud_element_draw_clipped(hudElemIndex);
@@ -218,8 +329,8 @@ API_CALLABLE(N(CreatePhonographHudData)) {
     gOverrideFlags |= GLOBAL_OVERRIDES_10;
     data->hudWorker = create_worker_frontUI(N(worker_update_phonograph_hud), N(worker_draw_phonograph_hud));
     data->state = PHONOGRAPH_HUD_STATE_INIT;
-    data->unk_04 = 0;
-    data->unk_08 = 0;
+    data->fillValue = 0;
+    data->barFillWidth = 0;
     data->mashMeterDividers[0] = 0;
     data->mashMeterDividers[1] = 20;
     data->mashMeterDividers[2] = 40;
@@ -363,62 +474,51 @@ API_CALLABLE(N(GuardBooDoNothing)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80241790_BD0380);
+API_CALLABLE(N(func_80241790_BD0380)) {
+    PhonographData* data = N(GetPhonographData)();
+    s32 distFromCenter = abs(data->fillValue - 50);
+    s32 v1, v0;
 
-#ifdef NON_MATCHING // various issues
-ApiStatus func_80241790_BD0380(Evt* script) {
-    UnkObk07* temp_v0 = N(GetPhonographData)();
-    s32 temp_v0_2 = abs(temp_v0->unk_04 - 50);
-    s32 var_a0;
-    s32 var_v0;
-    s32 var_v1;
-
-    var_v1 = -temp_v0_2;
-    if (temp_v0_2 >= 10) {
-        var_v0 = temp_v0_2 * 4;
-    } else {
-        goto moved;
-    }
-
-after:
-    temp_v0->meterFillAmount += (var_v0 + var_v1) * 2;
-    if (temp_v0->unk_04 != 0) {
-        temp_v0->unk_1DC = 1;
-    }
-    if (temp_v0->unk_1DC == 1) {
-        var_v1 = temp_v0->unk_04;
-        if (var_v1 <= 0) {
-            temp_v0->unk_1D8++;
+    while (TRUE) {
+        if (distFromCenter < 10) {
+            v1 = 10;
+            v1 -= distFromCenter;
+            v0 = v1 * 24;
         } else {
-            temp_v0->unk_1D8 = 0;
+            v1 = -distFromCenter;
+            v0 = v1 * 4;
+        }
+        break;
+    }
+
+    distFromCenter = (v0 + v1) * 2;
+    data->meterFillAmount += distFromCenter;
+
+    if (data->fillValue != 0) {
+        data->unk_1DC = 1;
+    }
+    if (data->unk_1DC == 1) {
+        if (data->fillValue <= 0) {
+            data->unk_1D8++;
+        } else {
+            data->unk_1D8 = 0;
         }
     }
 
-    if (FALSE) {
-moved:
-        var_v1 = 10;
-        var_v1 -= temp_v0_2;
-        var_v0 = var_v1 * 24;
-        goto after;
+    if (data->meterFillAmount > 10000) {
+        data->meterFillAmount = 10000;
     }
-
-    if (temp_v0->meterFillAmount > 10000) {
-        temp_v0->meterFillAmount = 10000;
-    }
-    if (temp_v0->meterFillAmount < 0) {
-        temp_v0->meterFillAmount = 0;
+    if (data->meterFillAmount < 0) {
+        data->meterFillAmount = 0;
     }
 
     script->varTable[0] = 0;
-    if (temp_v0->unk_1D8 >= 46 || (gGameStatusPtr->pressedButtons[0] & BUTTON_B)) {
+    if (data->unk_1D8 >= 46 || (gGameStatusPtr->pressedButtons[0] & BUTTON_B)) {
         script->varTable[0] = 1;
         return ApiStatus_DONE2;
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_obk/obk_07/BCF0F0", func_80241790_BD0380);
-#endif
 
 API_CALLABLE(N(InitPhonographHud)) {
     PhonographData* data = N(GetPhonographData)();
@@ -426,7 +526,7 @@ API_CALLABLE(N(InitPhonographHud)) {
     data->meterFillAmount = 0;
     data->unk_1D8 = 0;
     data->unk_1DC = 0;
-    data->unk_04 = 0;
+    data->fillValue = 0;
     data->state = PHONOGRAPH_HUD_STATE_INIT;
     script->varTable[10] = 0;
     script->varTable[11] = 0;
@@ -508,27 +608,6 @@ API_CALLABLE(N(InitGuardBooAlpha)) {
     npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
     return ApiStatus_DONE2;
 }
-
-u8 N(D_802430A0_BD1C90)[] = {
-    0x21, 0x21, 0x75, 0x1D,
-    0x23, 0xA3, 0x46, 0x0C,
-    0xB4, 0x6B, 0x00, 0x78,
-    0x73, 0x0D, 0x13, 0x00,
-};
-
-u8 N(D_802430B0_BD1CA0)[] = {
-    0x00, 0xE4, 0x86, 0x2E,
-    0xB4, 0xF2, 0x75, 0x70,
-    0xFF, 0xF3, 0x04, 0xBC,
-    0xF7, 0x0D, 0x05, 0x00,
-};
-
-u8 N(D_802430C0_BD1CB0)[] = {
-    0x2D, 0x38, 0xD2, 0x54,
-    0x28, 0xD1, 0x7D, 0x2C,
-    0xB5, 0xA1, 0x1B, 0x55,
-    0xFF, 0xFF, 0xFF, 0x00,
-};
 
 EvtScript N(EVS_UpdatePhonographScale) = {
     EVT_LABEL(30)
@@ -746,7 +825,7 @@ EvtScript N(EVS_PlayPhonograph) = {
     EVT_EXEC_GET_TID(N(EVS_SetRecordRotation),     MV_SetRecordScript)
     EVT_CALL(N(SavePhonographUpdateScriptIDs))
     EVT_LOOP(0)
-        EVT_CALL(func_80241790_BD0380)
+        EVT_CALL(N(func_80241790_BD0380))
         EVT_IF_EQ(LVar0, 1)
             EVT_CALL(N(DestroyPhonographHudData))
             EVT_WAIT(1)
