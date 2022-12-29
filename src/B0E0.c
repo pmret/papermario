@@ -745,7 +745,7 @@ void update_camera_zone_interp(Camera* camera) {
     targetZ = camera->targetPos.z;
     changingZone = FALSE;
 
-    if (camera->changingMap) {
+    if (camera->isChangingMap) {
         camera->currentController = NULL;
         camera->prevController = NULL;
         camera->linearInterp = 0.0f;
@@ -797,7 +797,7 @@ void update_camera_zone_interp(Camera* camera) {
 
     temp2 = targetZ;
     if (camera->panActive || camera->unk_4A4 != targetX || camera->unk_4A8 != targetY ||
-        camera->unk_4AC != targetZ || camera->changingMap) {
+        camera->unk_4AC != targetZ || camera->isChangingMap) {
 
         if (camera->followPlayer) {
             cs = &camera->controlSettings;
@@ -903,11 +903,11 @@ void update_camera_zone_interp(Camera* camera) {
 
     update_camera_from_controller(camera, &camera->oldCameraSettings, &camera->prevController,
                                   &camera->newCameraSettings, &camera->currentController, posX, posY, posZ, tX, tY, tZ,
-                                  camera->changingMap, &camera->interpAlpha, changingZone);
+                                  camera->isChangingMap, &camera->interpAlpha, changingZone);
 
-    if (camera->changingMap) {
+    if (camera->isChangingMap) {
         camera->oldCameraSettings = camera->newCameraSettings;
-        camera->changingMap = FALSE;
+        camera->isChangingMap = FALSE;
         camera->interpAlpha = 1.0f;
     }
 

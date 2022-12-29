@@ -226,7 +226,7 @@ ApiStatus func_802610CC(Evt* script, s32 isInitialCall) {
     set_background_color_blend(0, 0, 0, ((20 - script->functionTemp[0]) * 12) & 0xFC);
 
     script->functionTemp[0] -= 1;
-    do {} while(0); // TODO required to match
+    do {} while (0); // TODO required to match
     return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
 }
 

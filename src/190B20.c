@@ -1994,11 +1994,15 @@ void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage) {
     } while (0); // required to match
 }
 
-// Weird float load issue at the top
-#ifdef NON_MATCHING
+// grossness
 void func_802667F0(s32 arg0, Actor* actor, f32 x, f32 y, f32 z) {
-    Actor* player = gBattleStatus.playerActor;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player;
+    s32 new_var; // TODO required to match
     s32 type;
+
+    actor->attackResultEffect = actor->attackResultEffect; // TODO required to match
+    player = battleStatus->playerActor;
 
     if (actor->attackResultEffect == NULL) {
         type = 0;
@@ -2033,10 +2037,12 @@ void func_802667F0(s32 arg0, Actor* actor, f32 x, f32 y, f32 z) {
         }
         actor->attackResultEffect = fx_attack_result_text(type, x, y, z - 10.0f, 12.0f, 90);
         actor->unk_205 = 80;
+        new_var = 2; // TODO required to match
     } else {
         actor->attackResultEffect->data.attackResultText->unk_18 = 0;
         type = actor->unk_204;
-        switch (arg0) {
+        new_var = arg0; // TODO required to match
+        switch (new_var) { // TODO required to match
             case 0:
                 actor->unk_204++;
                 if (actor->unk_204 > 2) {
@@ -2067,9 +2073,6 @@ void func_802667F0(s32 arg0, Actor* actor, f32 x, f32 y, f32 z) {
         actor->unk_205 = 80;
     }
 }
-#else
-INCLUDE_ASM(void, "190B20", func_802667F0, s32 arg0, Actor* arg1, f32 arg2, f32 arg3, f32 arg4);
-#endif
 
 void func_80266970(Actor* target) {
     target->unk_204 = 0;

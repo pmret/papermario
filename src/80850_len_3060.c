@@ -512,23 +512,24 @@ void update_status_menu(void) {
     UiStatus* uiStatus = &gUIStatus;
     PlayerData* playerData = &gPlayerData;
     PlayerStatus* playerStatus = &gPlayerStatus;
+    s8 new_var;
     s32 s0;
     s32 s02;
     s32 fp;
     s32 s5;
     s32 s6;
-    s32 s2;
+    s32 id;
     s32 s4;
     s32 s7;
     s32 s1;
-    s32 s66;
     s32 v0;
     s32 temp;
-
+s32 new_var2;
     s32 sp50;
     s32 sp54;
     s32 sp5C;
     s32 sp60;
+    s32 something;
 
     if (gGameStatusPtr->creditsViewportMode >= 0 ||
         gGameStatusPtr->demoState != 0 ||
@@ -641,6 +642,8 @@ void update_status_menu(void) {
         uiStatus->unk_3B[0] = 0;
     }
 
+    something = 174;
+
     switch (uiStatus->hidden) {
         case 0:
             uiStatus->drawPosY += 10;
@@ -668,6 +671,7 @@ void update_status_menu(void) {
             uiStatus->drawPosY -= 5;
             if (uiStatus->drawPosY < -100) {
                 uiStatus->drawPosY = -100;
+
                 if (!uiStatus->ignoreChanges) {
                     if (playerStatus->actionState != ACTION_STATE_IDLE) {
                         uiStatus->showTimer = 0;
@@ -691,8 +695,8 @@ void update_status_menu(void) {
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 12, 20, SCREEN_WIDTH - 12, SCREEN_HEIGHT - 20);
     fp = uiStatus->drawPosX;
     s5 = uiStatus->drawPosY;
-    draw_box(0, WINDOW_STYLE_5, fp,       s5, 0, 174, 35, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
-    draw_box(0, WINDOW_STYLE_6, fp + 174, s5, 0, 122, 25, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
+    draw_box(0, WINDOW_STYLE_5, fp,       s5, 0, 174, 35, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+    draw_box(0, WINDOW_STYLE_6, fp + 174, s5, 0, 122, 25, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
 
     if (uiStatus->hpBlinkTimer > 0) {
         uiStatus->hpBlinkTimer--;
@@ -714,13 +718,13 @@ void update_status_menu(void) {
     }
 
     if (s6) {
-        s2 = uiStatus->hpIconIndices[0];
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 22, uiStatus->drawPosY + 13);
-        hud_element_draw_next(s2);
+        id = uiStatus->hpIconIndices[0];
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 22, uiStatus->drawPosY + 13);
+        hud_element_draw_next(id);
 
-        s2 = uiStatus->hpIconIndices[1];
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 37, uiStatus->drawPosY + 13);
-        hud_element_draw_next(s2);
+        id = uiStatus->hpIconIndices[1];
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 37, uiStatus->drawPosY + 13);
+        hud_element_draw_next(id);
 
         status_menu_draw_stat(uiStatus->iconIndex8, uiStatus->drawPosX + 48, uiStatus->drawPosY + 8, uiStatus->displayHP, playerData->curMaxHP);
     }
@@ -745,13 +749,13 @@ void update_status_menu(void) {
     }
 
     if (s6) {
-        s2 = uiStatus->fpIconIndices[0];
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 110, uiStatus->drawPosY + 13);
-        hud_element_draw_next(s2);
+        id = uiStatus->fpIconIndices[0];
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 110, uiStatus->drawPosY + 13);
+        hud_element_draw_next(id);
 
-        s2 = uiStatus->fpIconIndices[1];
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 125, uiStatus->drawPosY + 13);
-        hud_element_draw_next(s2);
+        id = uiStatus->fpIconIndices[1];
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 125, uiStatus->drawPosY + 13);
+        hud_element_draw_next(id);
 
         status_menu_draw_stat(uiStatus->iconIndex9, uiStatus->drawPosX + 136, uiStatus->drawPosY + 8, uiStatus->displayFP, playerData->curMaxFP);
     }
@@ -773,13 +777,13 @@ void update_status_menu(void) {
     }
 
     if (s6) {
-        s2 = uiStatus->starpointsIconIndex;
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 195, uiStatus->drawPosY + 14);
-        hud_element_draw_next(s2);
+        id = uiStatus->starpointsIconIndex;
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 195, uiStatus->drawPosY + 14);
+        hud_element_draw_next(id);
 
-        s2 = uiStatus->starpointsShineIconIndex;
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 195, uiStatus->drawPosY + 9);
-        hud_element_draw_next(s2);
+        id = uiStatus->starpointsShineIconIndex;
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 195, uiStatus->drawPosY + 9);
+        hud_element_draw_next(id);
 
         status_menu_draw_number(uiStatus->iconIndexA, uiStatus->drawPosX + 200, uiStatus->drawPosY + 8, playerData->starPoints, 2);
     }
@@ -804,18 +808,18 @@ void update_status_menu(void) {
     }
 
     if (s6) {
-        s2 = uiStatus->coinIconIndex;
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 244, uiStatus->drawPosY + 14);
-        hud_element_draw_next(s2);
+        id = uiStatus->coinIconIndex;
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 244, uiStatus->drawPosY + 14);
+        hud_element_draw_next(id);
 
-        s2 = uiStatus->coinSparkleIconIndex;
-        hud_element_set_render_pos(s2, uiStatus->drawPosX + 244, uiStatus->drawPosY + 14);
-        hud_element_draw_next(s2);
+        id = uiStatus->coinSparkleIconIndex;
+        hud_element_set_render_pos(id, uiStatus->drawPosX + 244, uiStatus->drawPosY + 14);
+        hud_element_draw_next(id);
 
         status_menu_draw_number(uiStatus->iconIndexB, uiStatus->drawPosX + 247, uiStatus->drawPosY + 8, uiStatus->displayCoins, 3);
     }
 
-    s2 = uiStatus->starIconIndex;
+    id = uiStatus->starIconIndex;
     s6 = 1;
 
     if (uiStatus->spBlinking) {
@@ -891,85 +895,87 @@ void update_status_menu(void) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[0], s5 - 2);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[0], s5 - 2);
+        hud_element_draw_next(id);
         s1++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[1], s5 - 2);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[1], s5 - 2);
+        hud_element_draw_next(id);
         s1++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[2], s5 - 2);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[2], s5 - 2);
+        hud_element_draw_next(id);
         s1++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[3], s5 - 2);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[3], s5 - 2);
+        hud_element_draw_next(id);
         s1++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[4], s5 - 2);
-        hud_element_draw_next(s2);
-        s1++;
-
-        if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
-            break;
-        }
-        s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[5], s5 - 2);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[4], s5 - 2);
+        hud_element_draw_next(id);
         s1++;
 
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[6], s5 - 2);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[5], s5 - 2);
+        hud_element_draw_next(id);
         s1++;
 
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
         s02++;
-        hud_element_set_script(s2, SPStarHudScripts[sp50]);
-        hud_element_set_render_pos(s2, fp + 12 + sp50 * 20, s5);
-        hud_element_draw_next(s2);
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[6], s5 - 2);
+        hud_element_draw_next(id);
+        s1++;
+
+        if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
+            break;
+        }
+        s02++;
+        hud_element_set_script(id, SPStarHudScripts[sp50]);
+        hud_element_set_render_pos(id, fp + 12 + sp50 * 20, s5);
+        hud_element_draw_next(id);
         s1 = 0;
         sp50++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
     }
+    new_var2 = s5;
 
-    s4 = playerData->maxStarPower * 8;
+    temp = playerData->maxStarPower;
+    s4 = temp * 8;
     while (TRUE) {
         if (s02 >= s4) {
             break;
         }
         if (s1 == 0) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -977,9 +983,9 @@ void update_status_menu(void) {
         }
         if (s1 == 1) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -987,9 +993,9 @@ void update_status_menu(void) {
         }
         if (s1 == 2) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -997,9 +1003,9 @@ void update_status_menu(void) {
         }
         if (s1 == 3) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -1007,9 +1013,9 @@ void update_status_menu(void) {
         }
         if (s1 == 4) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -1017,9 +1023,9 @@ void update_status_menu(void) {
         }
         if (s1 == 5) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -1027,9 +1033,9 @@ void update_status_menu(void) {
         }
         if (s1 == 6) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(s2, fp + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -1038,9 +1044,9 @@ void update_status_menu(void) {
 
         if (s1 == 7) {
             s02++;
-            hud_element_set_script(s2, &HES_StatusStarEmpty);
-            hud_element_set_render_pos(s2, fp + 12 + sp50 * 20, s5);
-            hud_element_draw_next(s2);
+            hud_element_set_script(id, &HES_StatusStarEmpty);
+            hud_element_set_render_pos(id, fp + 12 + sp50 * 20, new_var2);
+            hud_element_draw_next(id);
             if (s02 >= s4) {
                 break;
             }
@@ -1469,11 +1475,11 @@ void reset_status_menu(void) {
     uiStatus->displaySP = playerData->specialBarsFilled;
     uiStatus->unk_3B[1] = 0;
 
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < ARRAY_COUNT(uiStatus->hpIconIndices); i++) {
         copy_world_hud_element_ref_to_battle(uiStatus->hpIconIndices[i], uiStatus->hpIconIndices[i]);
     }
 
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < ARRAY_COUNT(uiStatus->fpIconIndices); i++) {
         copy_world_hud_element_ref_to_battle(uiStatus->fpIconIndices[i], uiStatus->fpIconIndices[i]);
     }
 
@@ -1488,17 +1494,14 @@ void reset_status_menu(void) {
     copy_world_hud_element_ref_to_battle(uiStatus->starIconIndex, uiStatus->starIconIndex);
 }
 
-// Weird order of loading stuff
-#ifdef NON_EQUIVALENT
 s32 is_ability_active(s32 ability) {
     PlayerData* playerData = &gPlayerData;
     s32 attackFXArray[6];
-    s32 abilityMoveID;
     s32 ret;
     s32 attackFXIndex;
-    s32 i;
     s32 badgeMoveID;
     u8* moveID;
+    s32 i;
 
     ret = 0;
     attackFXIndex = 0;
@@ -1521,204 +1524,304 @@ s32 is_ability_active(s32 ability) {
 
         switch (ability) {
             case ABILITY_DODGE_MASTER:
-                abilityMoveID = 0x4c;
+                if (badgeMoveID == MOVE_DODGE_MASTER) {
+                    ret++;
+                }
                 break;
             case ABILITY_SPIKE_SHIELD:
-                abilityMoveID = 0x40;
+                if (badgeMoveID == MOVE_SPIKE_SHIELD) {
+                    ret++;
+                }
                 break;
             case ABILITY_FIRST_ATTACK:
-                abilityMoveID = 0x4d;
+                if (badgeMoveID == MOVE_FIRST_ATTACK) {
+                    ret++;
+                }
                 break;
             case ABILITY_HP_PLUS:
-                abilityMoveID = 0x52;
+                if (badgeMoveID == MOVE_HP_PLUS) {
+                    ret++;
+                }
                 break;
             case ABILITY_DOUBLE_DIP:
-                abilityMoveID = 0x35;
+                if (badgeMoveID == MOVE_DOUBLE_DIP) {
+                    ret++;
+                }
                 break;
             case ABILITY_MYSTERY_SCROLL:
-                if (badgeMoveID == 0x53) {
+                if (badgeMoveID == MOVE_MYSTERY_SCROLL) {
                     ret++;
                 }
                 if (playerData->hasActionCommands) {
                     ret++;
                 }
-                continue;
+                break;
             case ABILITY_FIRE_SHIELD:
-                abilityMoveID = 0x41;
+                if (badgeMoveID == MOVE_FIRE_SHIELD) {
+                    ret++;
+                }
                 break;
             case ABILITY_PRETTY_LUCKY:
-                abilityMoveID = 0x42;
+                if (badgeMoveID == MOVE_PRETTY_LUCKY) {
+                    ret++;
+                }
                 break;
             case ABILITY_HP_DRAIN:
-                abilityMoveID = 0x5a;
+                if (badgeMoveID == MOVE_HP_DRAIN) {
+                    ret++;
+                }
                 break;
             case ABILITY_ALL_OR_NOTHING:
-                abilityMoveID = 0x3c;
+                if (badgeMoveID == MOVE_ALLOR_NOTHING) {
+                    ret++;
+                }
                 break;
             case ABILITY_SLOW_GO:
-                abilityMoveID = 0x4e;
+                if (badgeMoveID == MOVE_SLOW_GO) {
+                    ret++;
+                }
                 break;
             case ABILITY_FP_PLUS:
-                abilityMoveID = 0x5b;
+                if (badgeMoveID == MOVE_FP_PLUS) {
+                    ret++;
+                }
                 break;
             case ABILITY_ICE_POWER:
-                abilityMoveID = 0x3d;
+                if (badgeMoveID == MOVE_ICE_POWER) {
+                    ret++;
+                }
                 break;
             case ABILITY_FEELING_FINE:
-                abilityMoveID = 0x43;
+                if (badgeMoveID == MOVE_FEELING_FINE) {
+                    ret++;
+                }
                 break;
             case ABILITY_ATTACK_FX:
-                if (badgeMoveID == 0x54) {
+                if (badgeMoveID == MOVE_ATTACK_FX_A) {
                     attackFXArray[attackFXIndex++] = 1;
                     ret = -1;
                 }
-                if (badgeMoveID == 0x55) {
+                if (badgeMoveID == MOVE_ATTACK_FX_D) {
                     attackFXArray[attackFXIndex++] = 2;
                     ret = -1;
                 }
-                if (badgeMoveID == 0x56) {
+                if (badgeMoveID == MOVE_ATTACK_FX_B) {
                     attackFXArray[attackFXIndex++] = 3;
                     ret = -1;
                 }
-                if (badgeMoveID == 0x57) {
+                if (badgeMoveID == MOVE_ATTACK_FX_E) {
                     attackFXArray[attackFXIndex++] = 4;
                     ret = -1;
                 }
-                if (badgeMoveID == 0x58) {
+                if (badgeMoveID == MOVE_ATTACK_FX_C) {
                     attackFXArray[attackFXIndex++] = 5;
                     ret = -1;
                 }
-                if (badgeMoveID == 0x59) {
+                if (badgeMoveID == MOVE_ATTACK_FX_F) {
                     attackFXArray[attackFXIndex++] = 6;
                     ret = -1;
                 }
-                continue;
+                break;
             case ABILITY_MONEY_MONEY:
-                abilityMoveID = 0x5c;
+                if (badgeMoveID == MOVE_MONEY_MONEY) {
+                    ret++;
+                }
                 break;
             case ABILITY_CHILL_OUT:
-                abilityMoveID = 0x5d;
+                if (badgeMoveID == MOVE_CHILL_OUT_BADGE) {
+                    ret++;
+                }
                 break;
             case ABILITY_HAPPY_HEART:
-                abilityMoveID = 0x5e;
+                if (badgeMoveID == MOVE_HAPPY_HEART) {
+                    ret++;
+                }
                 break;
             case ABILITY_ZAP_TAP:
-                abilityMoveID = 0x44;
+                if (badgeMoveID == MOVE_ZAP_TAP) {
+                    ret++;
+                }
                 break;
             case ABILITY_MEGA_RUSH:
-                abilityMoveID = 0x5f;
+                if (badgeMoveID == MOVE_MEGA_RUSH) {
+                    ret++;
+                }
                 break;
             case ABILITY_BERSERKER:
-                abilityMoveID = 0x60;
+                if (badgeMoveID == MOVE_BERSERKER) {
+                    ret++;
+                }
                 break;
             case ABILITY_RIGHT_ON:
-                abilityMoveID = 0x4f;
+                if (badgeMoveID == MOVE_RIGHT_ON) {
+                    ret++;
+                }
                 break;
             case ABILITY_RUNAWAY_PAY:
-                abilityMoveID = 0x61;
+                if (badgeMoveID == MOVE_RUNAWAY_PAY) {
+                    ret++;
+                }
                 break;
             case ABILITY_FLOWER_SAVER:
-                abilityMoveID = 0x62;
+                if (badgeMoveID == MOVE_FLOWER_SAVER) {
+                    ret++;
+                }
                 break;
             case ABILITY_PAY_OFF:
-                abilityMoveID = 99;
+                if (badgeMoveID == MOVE_PAY_OFF) {
+                    ret++;
+                }
                 break;
             case ABILITY_DEFEND_PLUS:
-                abilityMoveID = 0x45;
+                if (badgeMoveID == MOVE_DEFEND_PLUS) {
+                    ret++;
+                }
                 break;
             case ABILITY_POWER_PLUS:
-                abilityMoveID = 0x3b;
+                if (badgeMoveID == MOVE_POWER_PLUS) {
+                    ret++;
+                }
                 break;
             case ABILITY_REFUND:
-                abilityMoveID = 0x6e;
+                if (badgeMoveID == MOVE_REFUND) {
+                    ret++;
+                }
                 break;
             case ABILITY_POWER_RUSH:
-                abilityMoveID = 100;
+                if (badgeMoveID == MOVE_POWER_RUSH) {
+                    ret++;
+                }
                 break;
             case ABILITY_CRAZY_HEART:
-                abilityMoveID = 0x65;
+                if (badgeMoveID == MOVE_CRAZY_HEART) {
+                    ret++;
+                }
                 break;
             case ABILITY_LAST_STAND:
-                abilityMoveID = 0x46;
+                if (badgeMoveID == MOVE_LAST_STAND) {
+                    ret++;
+                }
                 break;
             case ABILITY_CLOSE_CALL:
-                abilityMoveID = 0x47;
+                if (badgeMoveID == MOVE_CLOSE_CALL) {
+                    ret++;
+                }
                 break;
             case ABILITY_P_UP_D_DOWN:
-                abilityMoveID = 0x3e;
+                if (badgeMoveID == MOVE_P_UP_D_DOWN) {
+                    ret++;
+                }
                 break;
             case ABILITY_LUCKY_DAY:
-                abilityMoveID = 0x48;
+                if (badgeMoveID == MOVE_LUCKY_DAY) {
+                    ret++;
+                }
                 break;
             case ABILITY_MEGA_HP_DRAIN:
-                abilityMoveID = 0x66;
+                if (badgeMoveID == MOVE_MEGA_HP_DRAIN) {
+                    ret++;
+                }
                 break;
             case ABILITY_P_DOWN_D_UP:
-                abilityMoveID = 0x49;
+                if (badgeMoveID == MOVE_P_DOWN_D_UP) {
+                    ret++;
+                }
                 break;
             case ABILITY_FLOWER_FANATIC:
-                abilityMoveID = 0x67;
+                if (badgeMoveID == MOVE_FLOWER_FANATIC) {
+                    ret++;
+                }
                 break;
             case ABILITY_SPEEDY_SPIN:
-                abilityMoveID = 0x6d;
+                if (badgeMoveID == MOVE_SPEEDY_SPIN) {
+                    ret++;
+                }
                 break;
             case ABILITY_SPIN_ATTACK:
-                abilityMoveID = 0x6a;
+                if (badgeMoveID == MOVE_SPIN_ATTACK) {
+                    ret++;
+                }
                 break;
             case ABILITY_I_SPY:
-                abilityMoveID = 0x6c;
+                if (badgeMoveID == MOVE_I_SPY) {
+                    ret++;
+                }
                 break;
             case ABILITY_BUMP_ATTACK:
-                abilityMoveID = 0x50;
+                if (badgeMoveID == MOVE_BUMP_ATTACK) {
+                    ret++;
+                }
                 break;
             case ABILITY_QUICK_CHANGE:
-                abilityMoveID = 0x38;
+                if (badgeMoveID == MOVE_QUICK_CHANGE) {
+                    ret++;
+                }
                 break;
             case ABILITY_HEART_FINDER:
-                abilityMoveID = 0x68;
+                if (badgeMoveID == MOVE_HEART_FINDER) {
+                    ret++;
+                }
                 break;
             case ABILITY_FLOWER_FINDER:
-                abilityMoveID = 0x69;
+                if (badgeMoveID == MOVE_FLOWER_FINDER) {
+                    ret++;
+                }
                 break;
             case ABILITY_DIZZY_ATTACK:
-                abilityMoveID = 0x6b;
+                if (badgeMoveID == MOVE_DIZZY_ATTACK) {
+                    ret++;
+                }
                 break;
             case ABILITY_FINAL_GOOMPA:
-                abilityMoveID = 0x6f;
+                if (badgeMoveID == MOVE_UNUSED_FINAL_GOOMPA) {
+                    ret++;
+                }
                 break;
             case ABILITY_FINAL_BOMBOMB:
-                abilityMoveID = 0x70;
+                if (badgeMoveID == MOVE_UNUSED_FINAL_BOMBOMB) {
+                    ret++;
+                }
                 break;
             case ABILITY_DEEP_FOCUS:
-                abilityMoveID = 0x71;
+                if (badgeMoveID == MOVE_DEEP_FOCUS) {
+                    ret++;
+                }
                 break;
             case ABILITY_SUPER_FOCUS:
-                abilityMoveID = 0x72;
+                if (badgeMoveID == MOVE_SUPER_FOCUS) {
+                    ret++;
+                }
                 break;
             case ABILITY_KAIDEN:
-                abilityMoveID = 0x73;
+                if (badgeMoveID == MOVE_KAIDEN) {
+                    ret++;
+                }
                 break;
             case ABILITY_DAMAGE_DODGE:
-                abilityMoveID = 0x33;
+                if (badgeMoveID == MOVE_DAMAGE_DODGE) {
+                    ret++;
+                }
                 break;
             case ABILITY_HAPPY_FLOWER:
-                abilityMoveID = 0x74;
+                if (badgeMoveID == MOVE_HAPPY_FLOWER) {
+                    ret++;
+                }
                 break;
             case ABILITY_GROUP_FOCUS:
-                abilityMoveID = 0x75;
+                if (badgeMoveID == MOVE_GROUP_FOCUS) {
+                    ret++;
+                }
                 break;
             case ABILITY_PEEKABOO:
-                abilityMoveID = 0x76;
+                if (badgeMoveID == MOVE_PEEKABOO) {
+                    ret++;
+                }
                 break;
             case ABILITY_HEALTHY_HEALTHY:
-                abilityMoveID = 0x4a;
+                if (badgeMoveID == MOVE_HEALTHY_HEALTHY) {
+                    ret++;
+                }
                 break;
-            default:
-                do { } while (0);
-                continue;
-        }
-        if (badgeMoveID == abilityMoveID) {
-            ret++;
         }
     }
 
@@ -1727,9 +1830,6 @@ s32 is_ability_active(s32 ability) {
     }
     return ret;
 }
-#else
-INCLUDE_ASM(s32, "80850_len_3060", is_ability_active);
-#endif
 
 s32 is_partner_ability_active(s32 ability) {
     return 0;

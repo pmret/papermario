@@ -73,7 +73,7 @@ void nuScExecuteAudio(void) {
     OSMesg msg;
     u32	yieldFlag;
 
-    while(1) {
+    while (TRUE) {
         osRecvMesg(&nusched.audioRequestMQ, (OSMesg *) &audioTask, OS_MESG_BLOCK);
         if (nuScPreNMIFlag & NU_SC_BEFORE_RESET) {
             osSendMesg(audioTask->msgQ, audioTask->msg, OS_MESG_BLOCK);
@@ -324,7 +324,7 @@ void nuScWaitTaskReady(NUScTask* task) {
         return;
     }
 
-    while(osViGetCurrentFramebuffer() == fb || osViGetNextFramebuffer() == fb) {
+    while (osViGetCurrentFramebuffer() == fb || osViGetNextFramebuffer() == fb) {
         nuScAddClient_inline(&client, &nusched.waitMQ, NU_SC_RETRACE_MSG);
 	    osRecvMesg(&nusched.waitMQ, NULL, OS_MESG_BLOCK);
         nuScRemoveClient_inline(&client);

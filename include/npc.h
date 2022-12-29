@@ -172,7 +172,7 @@ typedef struct StatDrop {
 
 typedef struct EnemyDrops {
     /* 0x00 */ u8 dropFlags;
-    /* 0x01 */ s8 itemDropChance; // %
+    /* 0x01 */ u8 itemDropChance; // %
     /* 0x02 */ ItemDrop itemDrops[8];
     /* 0x32 */ StatDrop heartDrops[8];
     /* 0x72 */ StatDrop flowerDrops[8];
@@ -180,6 +180,18 @@ typedef struct EnemyDrops {
     /* 0xB4 */ s16 maxCoinBonus;
     /* 0xB6 */ char unk_DE[2];
 } EnemyDrops; // size = 0xB8
+
+// TODO unify this with EnemyDrops (union? requires changing tons of data)
+typedef struct EnemyDropsFlat {
+    /* 0x00 */ u8 dropFlags;
+    /* 0x01 */ u8 itemDropChance;
+    /* 0x02 */ s16 itemDrops[8 * 3];
+    /* 0x32 */ s16 heartDrops[8 * 4];
+    /* 0x72 */ s16 flowerDrops[8 * 4];
+    /* 0xB2 */ s16 minCoinBonus;
+    /* 0xB4 */ s16 maxCoinBonus;
+    /* 0xB6 */ char unk_DE[2];
+} EnemyDropsFlat; // size = 0xB8
 
 enum TerritoryShape { SHAPE_CYLINDER, SHAPE_RECT };
 
@@ -461,7 +473,7 @@ void disable_npc_shadow(Npc* npc);
 
 void update_npc_blur(Npc* npc);
 
-void appendGfx_npc_blur(void* appendData);
+void appendGfx_npc_blur(void* npc);
 
 void npc_enable_collisions(void);
 

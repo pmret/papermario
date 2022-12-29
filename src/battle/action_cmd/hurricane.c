@@ -191,7 +191,7 @@ void N(update)(void) {
             buttonsPushed = 0;
             frameCount = 1;
 
-            while(frameCount >= 0) {
+            while (frameCount >= 0) {
                 if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                     bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                 }
