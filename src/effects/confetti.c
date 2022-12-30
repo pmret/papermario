@@ -44,8 +44,6 @@ void func_E0088000(ConfettiFXData* part) {
     part->unk_20 = 120;
 }
 
-// weirdness abound
-#ifdef NON_EQUIVALENT
 EffectInstance* confetti_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
@@ -65,6 +63,7 @@ EffectInstance* confetti_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
     s32 np;
     s32 var_v0;
     s32 i;
+    f64 tmp;
 
     switch (arg0) {
         case 0:
@@ -112,33 +111,43 @@ EffectInstance* confetti_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    data = effect->data.fireworkRocket = shim_general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.fireworkRocket != NULL);
+    data = effect->data.confetti = (ConfettiFXData*)shim_general_heap_malloc(numParts * sizeof(*data));
+    ASSERT(effect->data.confetti != NULL);
 
     data->unk_04 = arg1;
     data->unk_08 = arg2;
     data->unk_0C = arg3;
     data->unk_24 = 0;
-    data->unk_00 = arg0;
     data->unk_20 = arg5;
+    data->unk_00 = arg0;
     data->unk_2C = np;
     data->unk_28 = 255;
 
+    data++;
     temp_fp = shim_rand_int(360);
 
     for (i = 0; i < np; i++, data++) {
         temp_f30 = sp28 * (func_E0200000(100) * 0.01f);
-        if ((u32) arg0 < 7U) {
-
+        switch (arg0) {
+            case 0:
+            case 4:
+                temp_f28 = sp28 * 0.5 * 2.0;
+                break;
+            case 1:
+            case 5:
+                temp_f28 = sp28 * 0.5 * 2.0;
+                break;
+            case 2:
+            case 6:
+                temp_f28 = sp28 * 0.5 * 2.0;
+                break;
         }
-        temp_f28 = 2.0 * (sp28 * 0.5);
-        var_v0 = i;
-        if (i < 0) {
-            var_v0 = i + 3;
-        }
+        temp_f28 = sp28 * 0.5 * 2.0;
+        theta2 = D_E0088D08[i % 4];
         theta = ((i * 360.0f) / np) + temp_fp;
-        data->unk_30 = arg0;
-        theta2 = D_E0088D08[i - ((var_v0 >> 2) * 4)];
+
+        data->unk_00 = arg0;
+
         sinTheta = shim_sin_deg(theta);
         cosTheta = shim_cos_deg(theta);
         sinTheta2 = shim_sin_deg(theta2);
@@ -147,14 +156,14 @@ EffectInstance* confetti_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
             func_E0088000(data);
             data->unk_30 = i * 3;
         } else {
-            data->unk_0C = temp_f30 * sinTheta2;
-            data->unk_18 = temp_f28 * sinTheta2;
             data->unk_04 = temp_f30 * sinTheta * cosTheta2;
             data->unk_08 = temp_f30 * cosTheta * cosTheta2;
+            data->unk_0C = temp_f30 * sinTheta2;
             data->unk_10 = temp_f28 * sinTheta * cosTheta2;
             data->unk_14 = (temp_f28 * cosTheta * cosTheta2) + 1.0f;
+            data->unk_18 = temp_f28 * sinTheta2;
             if (arg0 >= 4) {
-                data->unk_1C = -0.02 - (((i + 1) % 3) * 0.02);
+                data->unk_1C = -0.02 - ((i + 1) % 3) * 0.02;
             } else {
                 data->unk_1C = 0.0f;
             }
@@ -163,9 +172,6 @@ EffectInstance* confetti_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
     }
     return effect;
 }
-#else
-INCLUDE_ASM(s32, "effects/confetti", confetti_main);
-#endif
 
 void confetti_init(EffectInstance* effect) {
 }
