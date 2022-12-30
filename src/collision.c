@@ -931,6 +931,12 @@ f32 test_ray_collider_horizontal(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, 
     return ret;
 }
 
+enum {
+    ENTITY_TEST_ANY     = 0,
+    ENTITY_TEST_DOWN    = 1,
+    ENTITY_TEST_LATERAL = 2,
+};
+
 s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
                       f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz) {
     f32 hitDepthDown, hitDepthHoriz;
@@ -949,15 +955,15 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
     ColliderTriangle *triangle = &entityTriangle;
 
     entityIndex = -1;
-    type = 0;
+    type = ENTITY_TEST_ANY;
     hitDepthDown = hitDepthHoriz = *hitDepth;
 
     if (dirX == 0 && dirZ == 0 && dirY < 0) {
         hitDepthHoriz = 0;
-        type = 1;
+        type = ENTITY_TEST_DOWN;
     } else if (dirY == 0) {
         hitDepthDown = 0;
-        type = 2;
+        type = ENTITY_TEST_LATERAL;
     }
 
     gCollisionRayLength = -1;
@@ -979,15 +985,15 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
         }
 
         switch (type) {
-            case 0:
-            case 1:
+            case ENTITY_TEST_ANY:
+            case ENTITY_TEST_DOWN:
                 dist = entity->position.y;
                 dist2 = hitDepthDown + entity->effectiveSize * 2;
                 if (dist + dist2 < startY || startY < dist - dist2) {
                     continue;
                 }
                 break;
-            case 2:
+            case ENTITY_TEST_LATERAL:
                 dist = entity->position.y;
                 dist2 = entity->effectiveSize * 2;
                 if (dist + dist2 < startY || startY < dist - dist2) {
@@ -1037,14 +1043,14 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
             *hitDepth = gCollisionRayLength;
 
             switch (type) {
-                case 0:
+                case ENTITY_TEST_ANY:
                     hitDepthDown = gCollisionRayLength;
                     hitDepthHoriz = gCollisionRayLength;
                     break;
-                case 1:
+                case ENTITY_TEST_DOWN:
                     hitDepthDown = gCollisionRayLength;
                     break;
-                case 2:
+                case ENTITY_TEST_LATERAL:
                     hitDepthHoriz = gCollisionRayLength;
                     break;
             }

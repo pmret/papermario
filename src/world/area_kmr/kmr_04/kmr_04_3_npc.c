@@ -290,7 +290,7 @@ StaticNpc N(NpcData_JrTroopa) = {
     },
 };
 
-StaticNpc N(NpcData_Goompa) = {
+StaticNpc N(NpcData_GoombaFamily) = {
     .id = NPC_Goompa,
     .settings = &N(NpcSettings_Goompa),
     .pos = { -58.0f, 0.0f, 130.0f },
@@ -302,6 +302,6 @@ StaticNpc N(NpcData_Goompa) = {
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_JrTroopa), BTL_KMR_PART_3_FORMATION_02),
-    NPC_GROUP(N(NpcData_Goompa)),
+    NPC_GROUP(N(NpcData_GoombaFamily)),
     {}
 };

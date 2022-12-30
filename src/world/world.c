@@ -330,7 +330,7 @@ MapConfig kgr_maps[] = {
 #include "area_kmr/kmr.h"
 MapConfig kmr_maps[] = {
     { MAP(kmr_00), .bgName = "kmr_bg", .sfxReverb = 1 },
-    { MAP_UNSPLIT(kmr_02, 0x80243AF0), .bgName = "kmr_bg" },
+    { MAP(kmr_02), .bgName = "kmr_bg" },
     { MAP(kmr_03), .bgName = "kmr_bg" },
     { MAP(kmr_04), .bgName = "kmr_bg" },
     { MAP(kmr_05), .bgName = "kmr_bg" },

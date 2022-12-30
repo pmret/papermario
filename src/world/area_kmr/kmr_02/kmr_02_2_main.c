@@ -145,9 +145,9 @@ EvtScript N(EVS_Main) = {
         EVT_CASE_EQ(STORY_UNUSED_FFFFFF8C)
             EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup1)))
         EVT_CASE_LT(STORY_UNUSED_FFFFFF8C)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup2)))
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(PrologueNPCs)))
         EVT_CASE_DEFAULT
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup3)))
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
     EVT_END_SWITCH
     EVT_LABEL(20)
     EVT_CALL(ClearDefeatedEnemies)

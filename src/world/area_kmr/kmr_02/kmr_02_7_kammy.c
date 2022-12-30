@@ -9,13 +9,13 @@
 
 #include "world/common/todo/UnkFunc42.inc.c"
 
-Vec3f N(D_802557EC_8C585C)[] = {
+Vec3f N(FlightPath_KammyAppear)[] = {
     {  473.0,   150.0,  301.0 },
     {  234.0,    80.0,  200.0 },
     {   46.0,   150.0,  180.0 },
 };
 
-Vec3f N(D_80255810_8C5880)[] = {
+Vec3f N(FlightPath_ToGate1)[] = {
     {   46.0,   150.0,  180.0 },
     {  -93.0,   262.0,  114.0 },
     {  118.0,   121.0,  141.0 },
@@ -23,26 +23,26 @@ Vec3f N(D_80255810_8C5880)[] = {
     {  550.0,   108.0,  320.0 },
 };
 
-Vec3f N(D_8025584C_8C58BC)[] = {
+Vec3f N(FlightPath_ToGate2)[] = {
     {  465.0,   108.0,  320.0 },
     {  433.0,    78.0,  306.0 },
     {  399.0,    56.0,  288.0 },
 };
 
-Vec3f N(D_80255870_8C58E0)[] = {
+Vec3f N(FlightPath_ToGate3)[] = {
     {  399.0,    56.0,  288.0 },
     {  390.0,    53.0,  284.0 },
     {  380.0,    50.0,  282.0 },
 };
 
-Vec3f N(D_80255894_8C5904)[] = {
+Vec3f N(FlightPath_KammyDepart)[] = {
     {  380.0,    50.0,  282.0 },
     {  290.0,   100.0,  240.0 },
     {  204.0,   142.0,  202.0 },
     { -391.0,   520.0, -212.0 },
 };
 
-EvtScript N(D_802558C4_8C5934) = {
+EvtScript N(EVS_PlayKammyFlightSounds) = {
     EVT_LOOP(0)
         EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_295, 0)
         EVT_WAIT(4)
@@ -51,31 +51,31 @@ EvtScript N(D_802558C4_8C5934) = {
     EVT_END
 };
 
-EvtScript N(D_8025590C_8C597C) = {
+EvtScript N(EVS_MakeNpcsFaceKammy) = {
     EVT_CALL(GetNpcPos, NPC_Kammy, LVar0, LVar1, LVar2)
     EVT_LABEL(0)
-    EVT_CALL(GetNpcPos, NPC_Kammy, LVar3, LVar4, LVar5)
-    EVT_CALL(N(UnkFunc42))
-    EVT_CALL(InterpNpcYaw, NPC_Kammy, LVarA, 0)
-    EVT_SET(LVar0, LVar3)
-    EVT_SET(LVar1, LVar4)
-    EVT_SET(LVar2, LVar5)
-    EVT_CALL(GetAngleBetweenNPCs, NPC_Goombaria, NPC_Kammy, LVarA)
-    EVT_CALL(InterpNpcYaw, NPC_Goombaria, LVarA, 0)
-    EVT_CALL(GetAngleBetweenNPCs, NPC_Goompapa, NPC_Kammy, LVarB)
-    EVT_CALL(InterpNpcYaw, NPC_Goompapa, LVarB, 0)
-    EVT_CALL(GetAngleBetweenNPCs, NPC_Goombario, NPC_Kammy, LVarB)
-    EVT_CALL(InterpNpcYaw, NPC_Goombario, LVarB, 0)
-    EVT_CALL(GetAngleBetweenNPCs, NPC_Goomama, NPC_Kammy, LVarB)
-    EVT_CALL(InterpNpcYaw, NPC_Goomama, LVarB, 0)
-    EVT_CALL(PlayerFaceNpc, NPC_Kammy, FALSE)
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_CALL(GetNpcPos, NPC_Kammy, LVar3, LVar4, LVar5)
+        EVT_CALL(N(UnkFunc42))
+        EVT_CALL(InterpNpcYaw, NPC_Kammy, LVarA, 0)
+        EVT_SET(LVar0, LVar3)
+        EVT_SET(LVar1, LVar4)
+        EVT_SET(LVar2, LVar5)
+        EVT_CALL(GetAngleBetweenNPCs, NPC_Goombaria, NPC_Kammy, LVarA)
+        EVT_CALL(InterpNpcYaw, NPC_Goombaria, LVarA, 0)
+        EVT_CALL(GetAngleBetweenNPCs, NPC_Goompapa, NPC_Kammy, LVarB)
+        EVT_CALL(InterpNpcYaw, NPC_Goompapa, LVarB, 0)
+        EVT_CALL(GetAngleBetweenNPCs, NPC_Goombario, NPC_Kammy, LVarB)
+        EVT_CALL(InterpNpcYaw, NPC_Goombario, LVarB, 0)
+        EVT_CALL(GetAngleBetweenNPCs, NPC_Goomama, NPC_Kammy, LVarB)
+        EVT_CALL(InterpNpcYaw, NPC_Goomama, LVarB, 0)
+        EVT_CALL(PlayerFaceNpc, NPC_Kammy, FALSE)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_80255AA0) = {
+EvtScript N(EVS_Scene_KammyStrikes) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_Goompapa, NPC_FLAG_100, TRUE)
@@ -89,16 +89,16 @@ EvtScript N(EVS_80255AA0) = {
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH0_0059, 160, 40)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim15)
     EVT_THREAD
-        EVT_EXEC_GET_TID(N(D_802558C4_8C5934), MV_Unk_04)
-        EVT_EXEC_GET_TID(N(D_8025590C_8C597C), MV_Unk_05)
-        EVT_CALL(LoadPath, 40, EVT_PTR(N(D_802557EC_8C585C)), 3, EASING_LINEAR)
+        EVT_EXEC_GET_TID(N(EVS_PlayKammyFlightSounds), MV_Unk_04)
+        EVT_EXEC_GET_TID(N(EVS_MakeNpcsFaceKammy), MV_Unk_05)
+        EVT_CALL(LoadPath, 40, EVT_PTR(N(FlightPath_KammyAppear)), ARRAY_COUNT(N(FlightPath_KammyAppear)), EASING_LINEAR)
         EVT_LABEL(10)
-        EVT_CALL(GetNextPathPos)
-        EVT_CALL(SetNpcPos, NPC_Kammy, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(10)
-        EVT_END_IF
+            EVT_CALL(GetNextPathPos)
+            EVT_CALL(SetNpcPos, NPC_Kammy, LVar1, LVar2, LVar3)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVar0, 1)
+                EVT_GOTO(10)
+            EVT_END_IF
     EVT_END_THREAD
     EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000A)
@@ -113,14 +113,14 @@ EvtScript N(EVS_80255AA0) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
-    EVT_CALL(LoadPath, 120, EVT_PTR(N(D_80255810_8C5880)), 5, EASING_LINEAR)
+    EVT_CALL(LoadPath, 120, EVT_PTR(N(FlightPath_ToGate1)), ARRAY_COUNT(N(FlightPath_ToGate1)), EASING_LINEAR)
     EVT_LABEL(20)
-    EVT_CALL(GetNextPathPos)
-    EVT_CALL(SetNpcPos, NPC_Kammy, LVar1, LVar2, LVar3)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(20)
-    EVT_END_IF
+        EVT_CALL(GetNextPathPos)
+        EVT_CALL(SetNpcPos, NPC_Kammy, LVar1, LVar2, LVar3)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar0, 1)
+            EVT_GOTO(20)
+        EVT_END_IF
     EVT_WAIT(10)
     EVT_CALL(SetCamType, CAM_DEFAULT, 4, FALSE)
     EVT_CALL(SetCamPitch, CAM_DEFAULT, 8, -10)
@@ -138,14 +138,14 @@ EvtScript N(EVS_80255AA0) = {
     EVT_CALL(SetPlayerPos, 220, 0, 213)
     EVT_CALL(SetNpcPos, NPC_Goompapa, 255, 0, 232)
     EVT_CALL(SetNpcPos, NPC_Goombaria, 190, 0, 212)
-    EVT_CALL(LoadPath, 10, EVT_PTR(N(D_8025584C_8C58BC)), 3, EASING_LINEAR)
+    EVT_CALL(LoadPath, 10, EVT_PTR(N(FlightPath_ToGate2)), ARRAY_COUNT(N(FlightPath_ToGate2)), EASING_LINEAR)
     EVT_LABEL(30)
-    EVT_CALL(GetNextPathPos)
-    EVT_CALL(SetNpcPos, NPC_Kammy, LVar1, LVar2, LVar3)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(30)
-    EVT_END_IF
+        EVT_CALL(GetNextPathPos)
+        EVT_CALL(SetNpcPos, NPC_Kammy, LVar1, LVar2, LVar3)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar0, 1)
+            EVT_GOTO(30)
+        EVT_END_IF
     EVT_KILL_THREAD(MV_Unk_04)
     EVT_KILL_THREAD(MV_Unk_05)
     EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_32B, 0)
@@ -172,14 +172,14 @@ EvtScript N(EVS_80255AA0) = {
         EVT_WAIT(3)
         EVT_CALL(SetNpcRotation, NPC_Kammy, 0, 0, 0)
     EVT_END_THREAD
-    EVT_CALL(LoadPath, 10, EVT_PTR(N(D_80255870_8C58E0)), 3, EASING_LINEAR)
+    EVT_CALL(LoadPath, 10, EVT_PTR(N(FlightPath_ToGate3)), ARRAY_COUNT(N(FlightPath_ToGate3)), EASING_LINEAR)
     EVT_LABEL(40)
-    EVT_CALL(GetNextPathPos)
-    EVT_CALL(SetNpcPos, NPC_Kammy, LVar1, LVar2, LVar3)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(40)
-    EVT_END_IF
+        EVT_CALL(GetNextPathPos)
+        EVT_CALL(SetNpcPos, NPC_Kammy, LVar1, LVar2, LVar3)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar0, 1)
+            EVT_GOTO(40)
+        EVT_END_IF
     EVT_WAIT(30)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim13)
     EVT_CALL(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim16, ANIM_WorldKammy_Anim13, 512, MSG_CH0_005A)
@@ -281,19 +281,19 @@ EvtScript N(EVS_80255AA0) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim15)
-    EVT_EXEC_GET_TID(N(D_8025590C_8C597C), MV_Unk_05)
+    EVT_EXEC_GET_TID(N(EVS_MakeNpcsFaceKammy), MV_Unk_05)
     EVT_WAIT(40)
     EVT_CALL(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim16, ANIM_WorldKammy_Anim13, 0x200, MSG_CH0_005E)
     EVT_CALL(FadeOutMusic, 0, 3000)
-    EVT_EXEC_GET_TID(N(D_802558C4_8C5934), MV_Unk_04)
-    EVT_CALL(LoadPath, 90, EVT_PTR(N(D_80255894_8C5904)), 4, EASING_QUADRATIC_IN)
+    EVT_EXEC_GET_TID(N(EVS_PlayKammyFlightSounds), MV_Unk_04)
+    EVT_CALL(LoadPath, 90, EVT_PTR(N(FlightPath_KammyDepart)), ARRAY_COUNT(N(FlightPath_KammyDepart)), EASING_QUADRATIC_IN)
     EVT_LABEL(70)
-    EVT_CALL(GetNextPathPos)
-    EVT_CALL(SetNpcPos, NPC_Kammy, LVar1, LVar2, LVar3)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(70)
-    EVT_END_IF
+        EVT_CALL(GetNextPathPos)
+        EVT_CALL(SetNpcPos, NPC_Kammy, LVar1, LVar2, LVar3)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar0, 1)
+            EVT_GOTO(70)
+        EVT_END_IF
     EVT_KILL_THREAD(MV_Unk_04)
     EVT_KILL_THREAD(MV_Unk_05)
     EVT_WAIT(20)

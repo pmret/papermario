@@ -45,7 +45,7 @@ void func_802B70B4_E201C4(void) {
         D_802B7CB8_E20DC8->scale = 0.4f;
         D_802B7CB8_E20DC8->unk_23 = 0;
         D_802B7CB8_E20DC8->unk_0C = -gCameras[gCurrentCameraID].currentYaw;
-        D_8010C958 = func_802B7728_E20838;
+        InteractNotificationCallback = func_802B7728_E20838;
         D_802B7CB8_E20DC8->unk_24 = 0xFF;
         D_802B7CB8_E20DC8->unk_1C = 0xFF;
     }
@@ -226,7 +226,7 @@ void func_802B7728_E20838(void) {
                 D_802B7CB8_E20DC8->unk_1C = 0;
             }
             if ((scale >= 70.0f && scale <= 110.0f) || (scale >= 250.0f && scale <= 290.0f)) {
-                D_8010C958 = func_802B79C8_E20AD8;
+                InteractNotificationCallback = func_802B79C8_E20AD8;
             }
             var_s0 = E20110_UnkAngleFunc1(scale);
             break;
@@ -253,7 +253,7 @@ void func_802B7728_E20838(void) {
 void func_802B79C8_E20AD8(void) {
     func_802B75E8_E206F8();
     gPlayerStatusPtr->interactingWithID = -1;
-    D_8010C958 = 0;
+    InteractNotificationCallback = 0;
     gPlayerStatusPtr->encounteredNPC = NULL;
     gPlayerStatusPtr->animFlags &= ~PA_FLAGS_INTERACT_PROMPT_AVAILABLE;
     func_800EF3D4(0);

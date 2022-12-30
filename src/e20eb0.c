@@ -44,7 +44,7 @@ void func_802B70B4(void) {
     D_802B79A8_E21858->unk_18 = 0;
     D_802B79A8_E21858->unk_2A = 0;
     D_802B79A8_E21858->scale = 0.1f;
-    D_8010C940 = func_802B742C;
+    TalkNotificationCallback = func_802B742C;
     playerStatus->animFlags |= PA_FLAGS_SPEECH_PROMPT_AVAILABLE;
     temp = D_802B79A8_E21858;
     temp->unk_2A = 0;
@@ -135,7 +135,7 @@ void func_802B742C(void) {
             }
             D_802B79A8_E21858->unk_10 = unk10;
             if ((unk10 >= 70.0f && unk10 <= 110.0f) || (unk10 >= 250.0f && unk10 <= 290.0f)) {
-                D_8010C940 = NULL;
+                TalkNotificationCallback = NULL;
                 playerStatus->encounteredNPC = NULL;
                 playerStatus->animFlags &= ~PA_FLAGS_SPEECH_PROMPT_AVAILABLE;
                 return;
