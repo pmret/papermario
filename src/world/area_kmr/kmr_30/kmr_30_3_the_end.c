@@ -13,7 +13,7 @@ API_CALLABLE(N(ChooseFireworkColors)) {
     colG1 = colG2 = rand_int(inv);
     inv = 255 - colG1;
     colB1 = colB2 = rand_int(inv - colR1);
-    
+
     colR1 += rand_int(128);
     colG1 += rand_int(128);
     colB1 += rand_int(128);
@@ -40,9 +40,9 @@ API_CALLABLE(N(ChooseFireworkColors)) {
         colB2 = 255;
     }
 
-    effect->data.fireworkRocket->unk_24 = colR1;
-    effect->data.fireworkRocket->unk_28 = colG1;
-    effect->data.fireworkRocket->unk_2C = colB1;
+    effect->data.fireworkRocket->r = colR1;
+    effect->data.fireworkRocket->g = colG1;
+    effect->data.fireworkRocket->b = colB1;
     effect->data.fireworkRocket->unk_34 = colR2;
     effect->data.fireworkRocket->unk_38 = colG2;
     effect->data.fireworkRocket->unk_3C = colB2;

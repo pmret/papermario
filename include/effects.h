@@ -2349,32 +2349,28 @@ typedef struct Effect76FXData {
 } Effect76FXData; // size = unknown
 
 typedef struct FireworkRocketFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ s32 unk_30;
+    /* 0x00 */ s32 variation;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ Vec3f velocity;
+    /* 0x1C */ s32 timeLeft;
+    /* 0x20 */ s32 lifeTime;
+    /* 0x24 */ s32 r;
+    /* 0x28 */ s32 g;
+    /* 0x2C */ s32 b;
+    /* 0x30 */ s32 min_blur_alpha;
     /* 0x34 */ s32 unk_34;
     /* 0x38 */ s32 unk_38;
     /* 0x3C */ s32 unk_3C;
     /* 0x40 */ s32 unk_40;
-    /* 0x44 */ f32 unk_44;
-    /* 0x48 */ f32 unk_48;
-    /* 0x4C */ s32 unk_4C;
-    /* 0x50 */ f32 unk_50[4];
-    /* 0x60 */ f32 unk_60[4];
-    /* 0x70 */ f32 unk_70[4];
-    /* 0x80 */ f32 unk_80[4];
-    /* 0x90 */ f32 unk_90[4];
-    /* 0xA0 */ f32 unk_A0[4];
+    /* 0x44 */ f32 radius;
+    /* 0x48 */ f32 maxRadius;
+    /* 0x4C */ s32 isExploded;
+    /* 0x50 */ f32 rocketX[4];
+    /* 0x60 */ f32 rocketY[4];
+    /* 0x70 */ f32 rocketZ[4];
+    /* 0x80 */ f32 rocketVelocityX[4];
+    /* 0x90 */ f32 rocketVelocityY[4];
+    /* 0xA0 */ f32 rocketVelocityZ[4];
 } FireworkRocketFXData; // size = 0xB0
 
 typedef struct PeachStarBeamSpirit {
