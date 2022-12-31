@@ -9,7 +9,7 @@ Gfx N(D_80252D50_8FEB70)[] = {
     gsDPSetCombineKey(G_CK_NONE),
     gsDPSetAlphaCompare(G_AC_NONE),
     gsDPNoOp(),
-    gsDPSetPrimColor(0, 0, 0xFF, 0x00, 0x00, 0x00),
+    gsDPSetPrimColor(0, 0, 255, 0, 0, 0),
     gsDPFillRectangle(29, 39, 291, 41),
     gsDPFillRectangle(29, 39, 31, 196),
     gsDPFillRectangle(290, 39, 291, 196),
@@ -20,13 +20,13 @@ Gfx N(D_80252D50_8FEB70)[] = {
 typedef struct GameRecords {
     /* 0x00 */ u16 state;
     /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s32 unk_04;
+    /* 0x04 */ s32 lerpTime;
     /* 0x08 */ s16 unk_08;
     /* 0x0A */ s16 unk_0A;
     /* 0x0C */ char unk_0C[0xC];
     /* 0x18 */ s16 unk_18;
-    /* 0x1A */ s16 unk_1A;
-    /* 0x1C */ s16 unk_1C;
+    /* 0x1A */ s16 alpha;
+    /* 0x1C */ s16 lastAlpha;
     /* 0x1E */ char unk_1E[0x2];
     /* 0x20 */ s32 workerID;
     /* 0x24 */ u16 equippedBadges;
@@ -63,100 +63,98 @@ s32 N(RecipeFoundVars)[] = {
     0 
 };
 
-void N(func_802421A0_8EDFC0)(GameRecords* records, s32 opacity) {
+void N(appendGfx_records_impl)(GameRecords* records, s32 alpha) {
     s32 width;
 
-    if (opacity > 0) {
+    if (alpha > 0) {
         gSPDisplayList(gMasterGfxPos++, N(D_80252D50_8FEB70));
         gDPPipeSync(gMasterGfxPos++);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 16, 120, 24, opacity * 0.65);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 16, 120, 24, alpha * 0.65);
         gDPFillRectangle(gMasterGfxPos++, 33, 43, 287, 192);
         gDPPipeSync(gMasterGfxPos++);
 
-        msg_draw_frame(30, 40, 260, 155, 6, 0, 1, opacity * 0.55, opacity);
-        draw_msg(MSG_CH0_00FC, 206 - get_msg_width(MSG_CH0_00FC, 0), 50, opacity, 0, 1);
-        draw_number(gPlayerData.totalCoinsEarned, 216, 51, 1, 0, opacity, 2);
-        draw_msg(MSG_CH0_00FD, 206 - get_msg_width(MSG_CH0_00FD, 0), 65, opacity, 0, 1);
-        draw_number(records->equippedBadges, 231, 66, 1, 0, opacity, 3);
-        draw_msg(MSG_MenuTip_0034, 232, 63, opacity, 0, 0);
-        draw_number(80, 244, 66, 1, 0, opacity, 2);
+        msg_draw_frame(30, 40, 260, 155, 6, 0, 1, alpha * 0.55, alpha);
+        draw_msg(MSG_CH0_00FC, 206 - get_msg_width(MSG_CH0_00FC, 0), 50, alpha, MSG_PAL_WHITE, 1);
+        draw_number(gPlayerData.totalCoinsEarned, 216, 51, 1, MSG_PAL_WHITE, alpha, 2);
+        draw_msg(MSG_CH0_00FD, 206 - get_msg_width(MSG_CH0_00FD, 0), 65, alpha, MSG_PAL_WHITE, 1);
+        draw_number(records->equippedBadges, 231, 66, 1, MSG_PAL_WHITE, alpha, 3);
+        draw_msg(MSG_MenuTip_0034, 232, 63, alpha, MSG_PAL_WHITE, 0);
+        draw_number(80, 244, 66, 1, MSG_PAL_WHITE, alpha, 2);
         if (gPlayerData.starPiecesCollected == 0) {
-            draw_msg(MSG_CH0_00FA, 109, 80, opacity, 0, 1);
+            draw_msg(MSG_CH0_00FA, 109, 80, alpha, MSG_PAL_WHITE, 1);
         } else {
-            draw_msg(MSG_CH0_00FB, 206 - get_msg_width(MSG_CH0_00FB, 0), 80, opacity, 0, 1);
-            draw_number(gPlayerData.starPiecesCollected, 231, 81, 1, 0, opacity, 3);
-            draw_msg(MSG_MenuTip_0034, 232, 78, opacity, 0, 0);
-            draw_number(160, 244, 80, 1, 0, opacity, 2);
+            draw_msg(MSG_CH0_00FB, 206 - get_msg_width(MSG_CH0_00FB, 0), 80, alpha, MSG_PAL_WHITE, 1);
+            draw_number(gPlayerData.starPiecesCollected, 231, 81, 1, MSG_PAL_WHITE, alpha, 3);
+            draw_msg(MSG_MenuTip_0034, 232, 78, alpha, MSG_PAL_WHITE, 0);
+            draw_number(160, 244, 80, 1, MSG_PAL_WHITE, alpha, 2);
         }
 
         width = get_msg_width(MSG_CH0_00FE, 0);
         if (records->recipeCount == 0) {
-            draw_msg(MSG_CH0_00FA, 110, 95, opacity, 0, 1);
+            draw_msg(MSG_CH0_00FA, 110, 95, alpha, MSG_PAL_WHITE, 1);
         } else {
             if (records->recipeCount == -1) {
-                draw_msg(MSG_CH0_00FE, 206 - width, 95, opacity, 0, 1);
-                draw_number(0, 231, 96, 1, 0, opacity, 3);
+                draw_msg(MSG_CH0_00FE, 206 - width, 95, alpha, MSG_PAL_WHITE, 1);
+                draw_number(0, 231, 96, 1, MSG_PAL_WHITE, alpha, 3);
             } else {
-                draw_msg(MSG_CH0_00FE, 206 - width, 95, opacity, 0, 1);
-                draw_number(records->recipeCount, 231, 96, 1, 0, opacity, 3);
+                draw_msg(MSG_CH0_00FE, 206 - width, 95, alpha, MSG_PAL_WHITE, 1);
+                draw_number(records->recipeCount, 231, 96, 1, MSG_PAL_WHITE, alpha, 3);
             }
-            draw_msg(MSG_MenuTip_0034, 232, 93, opacity, 0, 0);
-            draw_number(records->unk_28, 244, 95, 1, 0, opacity, 2);
+            draw_msg(MSG_MenuTip_0034, 232, 93, alpha, MSG_PAL_WHITE, 0);
+            draw_number(records->unk_28, 244, 95, 1, MSG_PAL_WHITE, alpha, 2);
         }
 
         if (gPlayerData.quizzesAnswered == 0) {
-            draw_msg(MSG_CH0_00FA, 109, 110, opacity, 0, 1);
+            draw_msg(MSG_CH0_00FA, 109, 110, alpha, MSG_PAL_WHITE, 1);
         } else {
-            draw_msg(MSG_CH0_00FF, 206 - get_msg_width(MSG_CH0_00FF, 0), 110, opacity, 0, 1);
-            draw_number(gPlayerData.quizzesCorrect, 231, 111, 1, 0, opacity, 3);
-            draw_msg(MSG_MenuTip_0034, 232, 108, opacity, 0, 0);
-            draw_number(gPlayerData.quizzesAnswered, 244, 111, 1, 0, opacity, 2);
+            draw_msg(MSG_CH0_00FF, 206 - get_msg_width(MSG_CH0_00FF, 0), 110, alpha, MSG_PAL_WHITE, 1);
+            draw_number(gPlayerData.quizzesCorrect, 231, 111, 1, MSG_PAL_WHITE, alpha, 3);
+            draw_msg(MSG_MenuTip_0034, 232, 108, alpha, MSG_PAL_WHITE, 0);
+            draw_number(gPlayerData.quizzesAnswered, 244, 111, 1, MSG_PAL_WHITE, alpha, 2);
         }
 
-        draw_msg(MSG_CH0_00F4, 206 - get_msg_width(MSG_CH0_00F4, 0), 125, opacity, 0, 1);
-        draw_number(gPlayerData.battlesCount, 216, 126, 1, 0, opacity, 2);
+        draw_msg(MSG_CH0_00F4, 206 - get_msg_width(MSG_CH0_00F4, 0), 125, alpha, MSG_PAL_WHITE, 1);
+        draw_number(gPlayerData.battlesCount, 216, 126, 1, MSG_PAL_WHITE, alpha, 2);
         width = get_msg_width(MSG_CH0_00F7, 0);
-        draw_msg(MSG_CH0_00F7, 206 - width, 140, opacity, 0, 1);
-        draw_number(gPlayerData.playerFirstStrikes, 216, 141, 1, 0, opacity, 2);
-        draw_msg(MSG_CH0_00F8, 206 - get_msg_width(MSG_CH0_00F8, 0), 155, opacity, 0, 1);
-        draw_number(gPlayerData.enemyFirstStrikes, 216, 156, 1, 0, opacity, 2);
+        draw_msg(MSG_CH0_00F7, 206 - width, 140, alpha, MSG_PAL_WHITE, 1);
+        draw_number(gPlayerData.playerFirstStrikes, 216, 141, 1, MSG_PAL_WHITE, alpha, 2);
+        draw_msg(MSG_CH0_00F8, 206 - get_msg_width(MSG_CH0_00F8, 0), 155, alpha, MSG_PAL_WHITE, 1);
+        draw_number(gPlayerData.enemyFirstStrikes, 216, 156, 1, MSG_PAL_WHITE, alpha, 2);
 
         if (gPlayerData.powerBounces == 0) {
-            draw_msg(MSG_CH0_00FA, 109, 170, opacity, 0, 1);
+            draw_msg(MSG_CH0_00FA, 109, 170, alpha, MSG_PAL_WHITE, 1);
         } else {
-            draw_msg(MSG_CH0_00F9, 206 - get_msg_width(MSG_CH0_00F9, 0), 170, opacity, 0, 1);
-            draw_number(gPlayerData.powerBounces, 216, 171, 1, 0, opacity, 2);
+            draw_msg(MSG_CH0_00F9, 206 - get_msg_width(MSG_CH0_00F9, 0), 170, alpha, MSG_PAL_WHITE, 1);
+            draw_number(gPlayerData.powerBounces, 216, 171, 1, MSG_PAL_WHITE, alpha, 2);
         }
     }
 }
 
-void N(func_80242870_8EE690)(void* data) {
-    GameRecords* records = (GameRecords*) evt_get_variable(NULL, MapVar(10));
-    s32 temp_f2;
+void N(appendGfx_records)(void* data) {
+    GameRecords* records = (GameRecords*) evt_get_variable(NULL, MV_RecordsDataPtr);
 
     switch (records->state) {
         case 0:
             records->unk_18 = 0;
             records->unk_08 = 0;
             records->unk_0A = 0;
-            records->unk_04 = 0;
+            records->lerpTime = 0;
             records->state = 1;
             snd_start_sound(SOUND_21C, 0, 0);
             // fallthrough
         case 1:
-            records->unk_04++;
-            temp_f2 = update_lerp(0, 32.0f, 255.0f, records->unk_04, 3);
-            records->unk_1A = temp_f2;
-            records->unk_1C = temp_f2;
-            if (records->unk_04 >= 3) {
+            records->lerpTime++;
+            records->alpha = update_lerp(0, 32.0f, 255.0f, records->lerpTime, 3);
+            records->lastAlpha = records->alpha;
+            if (records->lerpTime >= 3) {
                 records->state = 2;
-                records->unk_1A = 255;
-                records->unk_1C = 255;
+                records->alpha = 255;
+                records->lastAlpha = records->alpha;
             }
             break;
         case 2:
-            records->unk_1A = 255;
-            records->unk_1C = 255;
+            records->alpha = 255;
+            records->lastAlpha = records->alpha;
             if (gGameStatusPtr->currentButtons[0] & (BUTTON_A | BUTTON_B)) {
                 records->state = 3;
             }
@@ -164,19 +162,19 @@ void N(func_80242870_8EE690)(void* data) {
                 break;
             }
         case 3:
-            records->unk_04 = 0;
+            records->lerpTime = 0;
             records->state = 4;
             snd_start_sound(SOUND_MENU_BACK, 0, 0);
             // fallthrough
         case 4:
-            records->unk_04++;
-            records->unk_1A = update_lerp(0, records->unk_1C, 0.0f, records->unk_04, 3);
-            if (records->unk_04 >= 3) {
+            records->lerpTime++;
+            records->alpha = update_lerp(0, records->lastAlpha, 0.0f, records->lerpTime, 3);
+            if (records->lerpTime >= 3) {
                 records->state = 5;
             }
             break;
     }
-    N(func_802421A0_8EDFC0)(records, records->unk_1A);
+    N(appendGfx_records_impl)(records, records->alpha);
 }
 
 void N(worker_draw_game_records)(void) {
@@ -184,12 +182,12 @@ void N(worker_draw_game_records)(void) {
 
     rt.renderMode = RENDER_MODE_2D;
     rt.appendGfxArg = NULL;
-    rt.appendGfx = N(func_80242870_8EE690);
+    rt.appendGfx = N(appendGfx_records);
     rt.distance = 0;
     queue_render_task(&rt);
 }
 
-void N(func_80242A3C_8EE85C)(GameRecords* records) {
+void N(calculate_records)(GameRecords* records) {
     PlayerData* playerData = &gPlayerData;
     s32 count;
     s32 i;
@@ -225,10 +223,10 @@ API_CALLABLE(N(ShowGameRecords)) {
     if (isInitialCall) {
         records = script->functionTempPtr[0] = heap_malloc(sizeof(*records));
         records->state = 0;
-        records->unk_1A = 255;
+        records->alpha = 255;
         records->workerID = create_worker_world(0, N(worker_draw_game_records));
-        evt_set_variable(script, MapVar(10), (s32) records);
-        N(func_80242A3C_8EE85C)(records);
+        evt_set_variable(script, MV_RecordsDataPtr, (s32) records);
+        N(calculate_records)(records);
     }
 
     records = script->functionTempPtr[0];
@@ -240,7 +238,7 @@ API_CALLABLE(N(ShowGameRecords)) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript N(EVS_80252E8C) = {
+EvtScript N(EVS_Inspect_Records) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(GetPlayerPos, LVarA, LVarB, LVarC)

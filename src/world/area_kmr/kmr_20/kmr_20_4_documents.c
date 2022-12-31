@@ -2,12 +2,15 @@
 #include "hud_element.h"
 #include "ld_addrs.h"
 
+#define UNPACK_READ_FLAGS(base, i) \
+    get_global_byte((i / 8) + EVT_INDEX_OF_GAME_BYTE(base)) & (1 << (i % 8))
+
 extern HudScript HES_Item_Unused_08B;
 extern HudScript HES_Item_Unused_08B_disabled;
 extern HudScript HES_Item_Unused_08C;
 extern HudScript HES_Item_Unused_08C_disabled;
 
-BSS PopupMenu D_80253060;
+BSS PopupMenu N(ChooseDocumentPopupMenu);
 BSS u8 D_80253390[0x3D86];
 BSS u16 D_80257118[0x100];
 BSS char D_80257318[0x8]; // padding
@@ -35,42 +38,81 @@ void N(func_802405BC_8EC3DC)(void) {
                                 SCREEN_WIDTH, SCREEN_HEIGHT, D_8025B2AC);
 }
 
-API_CALLABLE(N(func_802406BC_8EC4DC)){
+s32 N(LetterStoryRequirements)[] = {
+    STORY_INTRO,
+    STORY_CH4_PULLED_SWITCH_SWITCH,
+    STORY_CH1_STAR_SPIRIT_RESCUED,
+    STORY_CH2_STAR_SPIRIT_RESCUED,
+    STORY_CH3_STAR_SPIRIT_RESCUED,
+    STORY_CH3_STAR_SPIRIT_RESCUED,
+    STORY_CH4_STAR_SPIRIT_RESCUED,
+    STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY, 
+    STORY_CH5_RETURNED_TO_TOAD_TOWN,
+    STORY_CH6_STAR_SPRIT_DEPARTED,
+    STORY_CH4_GOT_TAYCE_TS_CAKE,
+    STORY_CH7_STAR_SPIRIT_RESCUED, 
+};
+
+s32 N(LetterSenderStringIDs)[] = {
+    MSG_Document_Letter_Mario01_From,
+    MSG_Document_Letter_Mario02_From,
+    MSG_Document_Letter_Mario03_From,
+    MSG_Document_Letter_Mario04_From,
+    MSG_Document_Letter_Mario05_From,
+    MSG_Document_Letter_Mario06_From,
+    MSG_Document_Letter_Mario07_From,
+    MSG_Document_Letter_Mario08_From, 
+    MSG_Document_Letter_Mario09_From,
+    MSG_Document_Letter_Mario10_From,
+    MSG_Document_Letter_Mario11_From,
+    MSG_Document_Letter_Mario12_From, 
+};
+
+s32 N(LetterBodyStringIDs)[] = {
+    MSG_Document_Letter_Mario01_Body,
+    MSG_Document_Letter_Mario02_Body,
+    MSG_Document_Letter_Mario03_Body,
+    MSG_Document_Letter_Mario04_Body,
+    MSG_Document_Letter_Mario05_Body,
+    MSG_Document_Letter_Mario06_Body,
+    MSG_Document_Letter_Mario07_Body,
+    MSG_Document_Letter_Mario08_Body, 
+    MSG_Document_Letter_Mario09_Body,
+    MSG_Document_Letter_Mario10_Body,
+    MSG_Document_Letter_Mario11_Body,
+    MSG_Document_Letter_Mario12_Body, 
+};
+
+s32 N(LetterDmaOffsets)[] = {
+    0x0000B290, 0x0000D158,
+    0x0000D178, 0x0000EB78,
+    0x0000ED78, 0x00010778,
+    0x00010978, 0x00012378, 
+    0x00012578, 0x00013F78,
+    0x00014178, 0x00015B78,
+    0x00015D78, 0x00017778,
+    0x00017978, 0x00019378, 
+    0x00019578, 0x0001AF78,
+    0x0001B178, 0x0001CB78,
+    0x0001CD78, 0x0001E778,
+    0x0001E978, 0x00020378, 
+    0x00020578, 0x00021F78, 
+};
+
+API_CALLABLE(N(InitLetters)){
     script->functionTemp[3] = 0;
     return ApiStatus_DONE2;
 }
 
-s32 N(LetterStoryRequirements)[] = {
-    -128, -1, -77, -55, -15, -15, 5, -2, 
-    41, 59, -3, 87, 
-};
-
-s32 N(LetterSenderStringIDs)[] = {
-    0x00200001, 0x00200003, 0x00200005, 0x00200007, 0x00200009, 0x0020000B, 0x0020000D, 0x0020000F, 
-    0x00200011, 0x00200013, 0x00200015, 0x00200017, 
-};
-
-s32 N(LetterBodyStringIDs)[] = {
-    0x00200000, 0x00200002, 0x00200004, 0x00200006, 0x00200008, 0x0020000A, 0x0020000C, 0x0020000E, 
-    0x00200010, 0x00200012, 0x00200014, 0x00200016, 
-};
-
-s32 N(LetterDmaOffsets)[] = {
-    0x0000B290, 0x0000D158, 0x0000D178, 0x0000EB78, 0x0000ED78, 0x00010778, 0x00010978, 0x00012378, 
-    0x00012578, 0x00013F78, 0x00014178, 0x00015B78, 0x00015D78, 0x00017778, 0x00017978, 0x00019378, 
-    0x00019578, 0x0001AF78, 0x0001B178, 0x0001CB78, 0x0001CD78, 0x0001E778, 0x0001E978, 0x00020378, 
-    0x00020578, 0x00021F78, 
-};
-
-API_CALLABLE(N(func_802406C8_8EC4E8)){
-    PopupMenu* menu = &D_80253060;
+API_CALLABLE(N(ReadLetters)){
+    PopupMenu* menu = &N(ChooseDocumentPopupMenu);
     s32 temp;
     s32 userIndex;
     s32 temp_s0;
     s32 temp_s1;
     s32 cond;
     s32 numEntries;
-    s32 gb;
+    s32 hasRead;
     s32 i;
 
     if (isInitialCall) {
@@ -85,27 +127,27 @@ API_CALLABLE(N(func_802406C8_8EC4E8)){
                 cond = FALSE;
                 temp_s0 = N(LetterStoryRequirements)[i];
                 switch (temp_s0) {
-                    case -1:
+                    case STORY_CH4_PULLED_SWITCH_SWITCH:
                         if (gPlayerData.quizzesCorrect != 0) {
                             cond = TRUE;
                         }
                         break;
-                    case -2:
-                        if (evt_get_variable(NULL, GameFlag(282)) != 0) {
+                    case STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY:
+                        if (evt_get_variable(NULL, GF_MAC02_TayceT_HasCookbook) != 0) {
                             cond = TRUE;
                         }
                         break;
-                    case -3:
+                    case STORY_CH4_GOT_TAYCE_TS_CAKE:
                         temp = FALSE;
-                        if (evt_get_variable(NULL, GameByte(0)) >= 6) {
-                            temp = (evt_get_variable(NULL, GameFlag(368)) != 0);
+                        if (evt_get_variable(NULL, GB_StoryProgress) >= STORY_CH4_BEGAN_PEACH_MISSION) {
+                            temp = (evt_get_variable(NULL, GF_MAC01_BoughtBadgeFromRowf) != 0);
                         }
                         if (temp) {
                             cond = TRUE;
                         }
                         break;
                     default:
-                        if (evt_get_variable(NULL, GameByte(0)) >= temp_s0) {
+                        if (evt_get_variable(NULL, GB_StoryProgress) >= temp_s0) {
                             cond = TRUE;
                         }
                         break;
@@ -117,10 +159,10 @@ API_CALLABLE(N(func_802406C8_8EC4E8)){
                     menu->enabled[numEntries] = TRUE;
                     menu->nameMsg[numEntries] = N(LetterSenderStringIDs)[i];
                     menu->descMsg[numEntries] = 0;
-                    temp = get_global_byte((i / 8) + 14) & (1 << (i % 8));
-                    gb = temp;
+                    temp = UNPACK_READ_FLAGS(GB_KMR20_MarioReadLetterFlags_00, i);
+                    hasRead = temp;
                     menu->value[numEntries] = 0;
-                    if (gb) {
+                    if (hasRead) {
                         menu->value[numEntries] = 1;
                         menu->ptrIcon[numEntries] = &HES_Item_Unused_08B_disabled;
                     }
@@ -164,7 +206,7 @@ API_CALLABLE(N(func_802406C8_8EC4E8)){
                 temp_s1 = (userIndex / 8) + 14;
                 set_global_byte(temp_s1, get_global_byte(temp_s1) | (1 << (userIndex % 8)));
                 if (userIndex == 3) {
-                    evt_set_variable(NULL, GameFlag(103), 1);
+                    evt_set_variable(NULL, GF_KMR20_ReadThankYouLetterFromKoopaVillage, 1);
                 }
 
                 dma_copy(charset_ROM_START + N(LetterDmaOffsets)[0],
@@ -202,17 +244,12 @@ API_CALLABLE(N(func_802406C8_8EC4E8)){
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(N(func_80240B20_8EC940)){
+API_CALLABLE(N(CleanupLetters)){
     free_worker(D_8025B2A8);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80240B48_8EC968)){
-    script->functionTemp[3] = 0;
-    return ApiStatus_DONE2;
-}
-
-EvtScript N(D_80244E1C_8F0C3C) = {
+EvtScript N(EVS_Inspect_Letters) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_IF_LT(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
         EVT_SET(GF_KMR20_CheckedDeskForMail, TRUE)
@@ -226,17 +263,17 @@ EvtScript N(D_80244E1C_8F0C3C) = {
             EVT_WAIT(5)
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(N(func_802406BC_8EC4DC))
+    EVT_CALL(N(InitLetters))
     EVT_LABEL(0)
-    EVT_CALL(N(func_802406C8_8EC4E8))
-    EVT_IF_EQ(LVar0, -1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, 0)
-        EVT_GOTO(10)
-    EVT_END_IF
+        EVT_CALL(N(ReadLetters))
+        EVT_IF_EQ(LVar0, -1)
+            EVT_GOTO(10)
+        EVT_END_IF
+        EVT_IF_EQ(LVar0, 0)
+            EVT_GOTO(10)
+        EVT_END_IF
     EVT_CALL(ShowMessageAtScreenPos, LVar0, 160, 40)
-    EVT_CALL(N(func_80240B20_8EC940))
+    EVT_CALL(N(CleanupLetters))
     EVT_GOTO(0)
     EVT_LABEL(10)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -245,17 +282,42 @@ EvtScript N(D_80244E1C_8F0C3C) = {
 };
 
 s32 N(DiaryStoryRequirements)[] = {
-    -40, -40, 7, 7, 40, 40, 60, 60, 
-    89, 89, 96, 96, 
+    STORY_CH3_GOT_SUPER_BOOTS,
+    STORY_CH3_GOT_SUPER_BOOTS,
+    STORY_CH4_STAR_SPRIT_DEPARTED,
+    STORY_CH4_STAR_SPRIT_DEPARTED,
+    STORY_CH5_TRADED_VASE_FOR_SEED,
+    STORY_CH5_TRADED_VASE_FOR_SEED,
+    STORY_CH6_RETURNED_TO_TOAD_TOWN,
+    STORY_CH6_RETURNED_TO_TOAD_TOWN, 
+    STORY_CH7_STAR_SPRIT_DEPARTED,
+    STORY_CH7_STAR_SPRIT_DEPARTED,
+    STORY_EPILOGUE,
+    STORY_EPILOGUE, 
 };
 
 s32 N(DiaryEntryStringIDs)[] = {
-    0x00200051, 0x00200052, 0x00200053, 0x00200054, 0x00200055, 0x00200056, 0x00200057, 0x00200058, 
-    0x00200059, 0x0020005A, 0x0020005B, 0x0020005C, 
+    MSG_Document_LuigisDiary_01,
+    MSG_Document_LuigisDiary_02,
+    MSG_Document_LuigisDiary_03,
+    MSG_Document_LuigisDiary_04,
+    MSG_Document_LuigisDiary_05,
+    MSG_Document_LuigisDiary_06,
+    MSG_Document_LuigisDiary_07,
+    MSG_Document_LuigisDiary_08,
+    MSG_Document_LuigisDiary_09,
+    MSG_Document_LuigisDiary_10,
+    MSG_Document_LuigisDiary_11,
+    MSG_Document_LuigisDiary_12,
 };
 
-API_CALLABLE(N(func_80240B54_8EC974)){
-    PopupMenu* menu = &D_80253060;
+API_CALLABLE(N(InitDiary)){
+    script->functionTemp[3] = 0;
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(ReadDiary)){
+    PopupMenu* menu = &N(ChooseDocumentPopupMenu);
     s32 userIndex;
     s32 numEntries;
     s32 gb;
@@ -270,7 +332,7 @@ API_CALLABLE(N(func_80240B54_8EC974)){
         case 0:
             numEntries = 0;
             for (i = 0; i < ARRAY_COUNT(N(DiaryStoryRequirements)); i++) {
-                if (evt_get_variable(NULL, GameByte(0)) >= N(DiaryStoryRequirements)[i]) {
+                if (evt_get_variable(NULL, GB_StoryProgress) >= N(DiaryStoryRequirements)[i]) {
                     menu->ptrIcon[numEntries] = &HES_Item_Unused_08C;
                     menu->userIndex[numEntries] = i;
                     menu->enabled[numEntries] = TRUE;
@@ -312,7 +374,7 @@ API_CALLABLE(N(func_80240B54_8EC974)){
             script->functionTemp[1]++;
             if (script->functionTemp[1] >= 15) {
                 destroy_popup_menu();
-                if (script->functionTemp[2] == 0xFF) {
+                if (script->functionTemp[2] == 255) {
                     script->varTable[0] = -1;
                     return ApiStatus_DONE2;
                 }
@@ -333,7 +395,7 @@ API_CALLABLE(N(func_80240DA4_8ECBC4)){
     return ApiStatus_DONE2;
 }
 
-EvtScript N(D_80245000_8F0E20) = {
+EvtScript N(EVS_Inspect_LuigisDiary) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_IF_LT(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
         EVT_IF_EQ(AF_KMR_0C, TRUE)
@@ -347,24 +409,24 @@ EvtScript N(D_80245000_8F0E20) = {
         EVT_CALL(ShowMessageAtScreenPos, MSG_CH0_0100, 160, 40)
         EVT_WAIT(5)
     EVT_END_IF
-    EVT_CALL(N(func_80240B48_8EC968))
+    EVT_CALL(N(InitDiary))
     EVT_LABEL(0)
-    EVT_CALL(N(func_80240B54_8EC974))
-    EVT_IF_EQ(LVar0, -1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, 0)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(ShowMessageAtScreenPos, LVar0, 160, 40)
-    EVT_GOTO(0)
+        EVT_CALL(N(ReadDiary))
+        EVT_IF_EQ(LVar0, -1)
+            EVT_GOTO(10)
+        EVT_END_IF
+        EVT_IF_EQ(LVar0, 0)
+            EVT_GOTO(10)
+        EVT_END_IF
+        EVT_CALL(ShowMessageAtScreenPos, LVar0, 160, 40)
+        EVT_GOTO(0)
     EVT_LABEL(10)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80245178_8F0F98) = {
+EvtScript N(EVS_Shake_Mailbox) = {
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o305, SOUND_E0, 0)
     EVT_CALL(TranslateModel, MODEL_o222, 2, 0, 0)
     EVT_CALL(TranslateModel, MODEL_o223, 3, 0, 0)
@@ -392,7 +454,7 @@ EvtScript N(D_80245178_8F0F98) = {
 EvtScript N(D_80245374_8F1194) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o252, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o252, SOUND_20AB, 0)
-    EVT_CALL(MakeLerp, 0, 0x00000870, 60, EASING_QUADRATIC_OUT)
+    EVT_CALL(MakeLerp, 0, 2160, 60, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(RotateGroup, MODEL_g61, LVar0, 1, 0, 0)
@@ -407,7 +469,7 @@ EvtScript N(D_80245374_8F1194) = {
     EVT_END
 };
 
-EvtScript N(D_8024546C_8F128C) = {
+EvtScript N(EVS_Setup_SecretPanel) = {
     EVT_CALL(GetPlayerActionState, LVar0)
     EVT_IF_NE(LVar0, ACTION_STATE_SPIN_POUND)
         EVT_IF_NE(LVar0, ACTION_STATE_TORNADO_POUND)
@@ -441,18 +503,18 @@ EvtScript N(D_8024546C_8F128C) = {
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_IF_EQ(MF_Unk_0D, TRUE)
         EVT_SET(MF_Unk_0D, FALSE)
-        EVT_EXEC(N(EVS_8024BD40))
+        EVT_EXEC(N(EVS_Scene_CaughtLuigiInBasement))
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_80245638) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80244E1C_8F0C3C)), TRIGGER_WALL_PRESS_A, COLLIDER_o251, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80245000_8F0E20)), TRIGGER_WALL_PRESS_A, COLLIDER_o240, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80245178_8F0F98)), TRIGGER_WALL_PRESS_A, COLLIDER_o305, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_8024546C_8F128C)), TRIGGER_FLOOR_TOUCH, COLLIDER_o252, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_80252E8C)), TRIGGER_WALL_PRESS_A, COLLIDER_o355, 1, 0)
+EvtScript N(EVS_Setup_Interactables) = {
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Inspect_Letters)), TRIGGER_WALL_PRESS_A, COLLIDER_o251, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Inspect_LuigisDiary)), TRIGGER_WALL_PRESS_A, COLLIDER_o240, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Shake_Mailbox)), TRIGGER_WALL_PRESS_A, COLLIDER_o305, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Setup_SecretPanel)), TRIGGER_FLOOR_TOUCH, COLLIDER_o252, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Inspect_Records)), TRIGGER_WALL_PRESS_A, COLLIDER_o355, 1, 0)
     EVT_RETURN
     EVT_END
 };

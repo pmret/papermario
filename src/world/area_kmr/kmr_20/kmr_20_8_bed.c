@@ -8,13 +8,13 @@ extern EvtScript N(EVS_ToadHouse_ReturnFromRest);
 #include "world/common/atomic/ToadHouse.inc.c"
 #include "world/common/atomic/ToadHouse.data.inc.c"
 
-API_CALLABLE(N(func_8024159C_8ED3BC)) {
+API_CALLABLE(N(MuteAmbientSoundVolume)) {
     au_ambience_set_volume(0, 1000, 1);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802415C4_8ED3E4)) {
-    au_ambience_set_volume(0, 1000, 0x3F);
+API_CALLABLE(N(RestoreAmbientSoundVolume)) {
+    au_ambience_set_volume(0, 1000, 63);
     return ApiStatus_DONE2;
 }
 
@@ -74,7 +74,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
         EVT_WAIT(60)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001D)
     EVT_END_THREAD
-    EVT_CALL(N(func_8024159C_8ED3BC))
+    EVT_CALL(N(MuteAmbientSoundVolume))
     EVT_WAIT(75)
     EVT_THREAD
         EVT_WAIT(65)
@@ -100,7 +100,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
 };
 
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
-    EVT_CALL(N(func_802415C4_8ED3E4))
+    EVT_CALL(N(RestoreAmbientSoundVolume))
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(HidePlayerShadow, FALSE)
     EVT_CALL(func_802D2520, ANIM_Mario_10002, 0, 0, 0, 0, 0)
@@ -109,13 +109,13 @@ EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
     EVT_CALL(SetNpcPos, NPC_PARTNER, -75, 30, -70)
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
     EVT_WAIT(5)
-    EVT_EXEC(N(EVS_80242C40))
+    EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80249FE4_8F5E04) = {
+EvtScript N(EVS_UseBed) = {
     EVT_CALL(N(WaitForPlayerToLand))
     EVT_IF_EQ(LVar0, 1)
         EVT_RETURN
@@ -188,8 +188,8 @@ EvtScript N(D_80249FE4_8F5E04) = {
     EVT_END
 };
 
-EvtScript N(EVS_8024A3A0) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80249FE4_8F5E04)), TRIGGER_WALL_PRESS_A, COLLIDER_o352, 1, 0)
+EvtScript N(EVS_SetupBed) = {
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_UseBed)), TRIGGER_WALL_PRESS_A, COLLIDER_o352, 1, 0)
     EVT_RETURN
     EVT_END
 };

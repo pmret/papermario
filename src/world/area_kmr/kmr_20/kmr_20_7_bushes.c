@@ -4,12 +4,7 @@
 #include "common/foliage.inc.c"
 #define NAME_SUFFIX
 
-FoliageModelList N(Bush1_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o227,
-    }
-};
+FoliageModelList N(Bush1_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o227);
 
 FoliageVectorList N(Bush1_Effects) = {
     .count = 1,
@@ -23,12 +18,7 @@ SearchBushConfig N(SearchBush_Bush1) = {
     .vectors = &N(Bush1_Effects),
 };
 
-FoliageModelList N(Bush2_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o371,
-    }
-};
+FoliageModelList N(Bush2_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o371);
 
 FoliageVectorList N(Bush2_Effects) = {
     .count = 1,
@@ -42,12 +32,7 @@ SearchBushConfig N(SearchBush_Bush2) = {
     .vectors = &N(Bush2_Effects),
 };
 
-FoliageModelList N(Bush3_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o372,
-    }
-};
+FoliageModelList N(Bush3_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o372);
 
 FoliageVectorList N(Bush3_Effects) = {
     .count = 1,
@@ -61,12 +46,7 @@ SearchBushConfig N(SearchBush_Bush3) = {
     .vectors = &N(Bush3_Effects),
 };
 
-FoliageModelList N(Bush4_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o373,
-    }
-};
+FoliageModelList N(Bush4_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o373);
 
 FoliageVectorList N(Bush4_Effects) = {
     .count = 1,
@@ -80,12 +60,7 @@ SearchBushConfig N(SearchBush_Bush4) = {
     .vectors = &N(Bush4_Effects),
 };
 
-FoliageModelList N(Bush5_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o374,
-    }
-};
+FoliageModelList N(Bush5_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o374);
 
 FoliageVectorList N(Bush5_Effects) = {
     .count = 1,

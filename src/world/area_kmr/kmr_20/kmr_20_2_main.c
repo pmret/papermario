@@ -4,7 +4,7 @@
 #include "world/common/entity/Pipe.data.inc.c"
 
 API_CALLABLE(N(func_80240310_8EC130)){
-    set_map_transition_effect(4);
+    set_map_transition_effect(TRANSITION_4);
     return ApiStatus_DONE2;
 }
 
@@ -26,7 +26,7 @@ EvtScript N(EVS_ExitPipe_mac_00_4) = {
     EVT_END
 };
 
-EvtScript N(D_80243B64_8EF984) = {
+EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitPipe_mac_00_4)), TRIGGER_FLOOR_TOUCH, COLLIDER_o244, 1, 0)
     EVT_RETURN
     EVT_END
@@ -51,36 +51,36 @@ EvtScript N(EVS_Main) = {
     EVT_SET(MF_Unk_0C, FALSE)
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_EXEC(N(EVS_80242C40))
+    EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_LT(LVar0, kmr_20_ENTRY_4)
-        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(IntroNPCs)))
+        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(SceneNPCs)))
     EVT_ELSE
-        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup1)))
+        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_CALL(EnableGroup, MODEL_g100, FALSE)
     EVT_EXEC(N(EVS_SetupTrees))
     EVT_EXEC(N(EVS_SetupBushes))
-    EVT_EXEC(N(EVS_80244228))
-    EVT_EXEC(N(EVS_80245638))
+    EVT_EXEC(N(EVS_SetupRooms))
+    EVT_EXEC(N(EVS_Setup_Interactables))
     EVT_IF_LT(GB_StoryProgress, STORY_EPILOGUE)
-        EVT_EXEC(N(EVS_8024A3A0))
+        EVT_EXEC(N(EVS_SetupBed))
     EVT_END_IF
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(kmr_20_ENTRY_0)
             EVT_CALL(N(func_80240310_8EC130))
-            EVT_EXEC(N(EVS_8024FD70))
+            EVT_EXEC(N(EVS_Scene_BeginGame))
             EVT_WAIT(5)
         EVT_CASE_EQ(kmr_20_ENTRY_1)
-            EVT_EXEC(N(EVS_80250C5C))
+            EVT_EXEC(N(EVS_Scene_SettingOff))
         EVT_CASE_EQ(kmr_20_ENTRY_2)
             EVT_WAIT(60)
-            EVT_EXEC(N(EVS_8025232C))
+            EVT_EXEC(N(EVS_Scene_BeginEpilogue))
         EVT_CASE_EQ(kmr_20_ENTRY_3)
-            EVT_EXEC(N(D_80243B64_8EF984))
-            EVT_EXEC(N(EVS_80252490))
+            EVT_EXEC(N(EVS_BindExitTriggers))
+            EVT_EXEC(N(EVS_Scene_EpilogueGetLetter))
         EVT_CASE_EQ(kmr_20_ENTRY_4)
             EVT_SET(GF_MAP_MariosHouse, TRUE)
             EVT_IF_EQ(MF_Unk_0A, TRUE)
@@ -93,11 +93,11 @@ EvtScript N(EVS_Main) = {
                             EVT_WAIT(1)
                             EVT_GOTO(0)
                         EVT_END_IF
-                    EVT_SET(LVarA, EVT_PTR(N(D_80243B64_8EF984)))
+                    EVT_SET(LVarA, EVT_PTR(N(EVS_BindExitTriggers)))
                     EVT_EXEC(N(EVS_Pipe_EnterVertical))
                 EVT_END_THREAD
             EVT_ELSE
-                EVT_SET(LVarA, EVT_PTR(N(D_80243B64_8EF984)))
+                EVT_SET(LVarA, EVT_PTR(N(EVS_BindExitTriggers)))
                 EVT_EXEC(N(EVS_Pipe_EnterVertical))
             EVT_END_IF
     EVT_END_SWITCH

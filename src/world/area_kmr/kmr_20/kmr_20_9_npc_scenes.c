@@ -1,12 +1,12 @@
 #include "kmr_20.h"
 
-NpcSettings N(NpcSettings_Dummy_Intro) = {
+NpcSettings N(NpcSettings_Scenes) = {
     .height = 24,
     .radius = 24,
     .level = 99,
 };
 
-EvtScript N(EVS_NpcInit_Luigi_Intro) = {
+EvtScript N(EVS_NpcInit_Luigi_Scenes) = {
     EVT_CALL(SetNpcCollisionSize, NPC_SELF, 46, 26)
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
@@ -21,10 +21,10 @@ EvtScript N(EVS_NpcInit_Luigi_Intro) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Parakarry_Intro)[] = {
+StaticNpc N(NpcData_Scenes)[] = {
     {
-        .id = NPC_Parakarry,
-        .settings = &N(NpcSettings_Dummy_Intro),
+        .id = NPC_Scene_Parakarry,
+        .settings = &N(NpcSettings_Scenes),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_400000,
@@ -53,12 +53,12 @@ StaticNpc N(NpcData_Parakarry_Intro)[] = {
         },
     },
     {
-        .id = NPC_Luigi,
-        .settings = &N(NpcSettings_Dummy_Intro),
+        .id = NPC_Scene_Luigi,
+        .settings = &N(NpcSettings_Scenes),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_GRAVITY,
-        .init = &N(EVS_NpcInit_Luigi_Intro),
+        .init = &N(EVS_NpcInit_Luigi_Scenes),
         .drops = {
             .dropFlags = NPC_DROP_FLAGS_80,
             .heartDrops  = NO_DROPS,
@@ -85,7 +85,7 @@ StaticNpc N(NpcData_Parakarry_Intro)[] = {
     },
 };
 
-NpcGroupList N(IntroNPCs) = {
-    NPC_GROUP(N(NpcData_Parakarry_Intro)),
+NpcGroupList N(SceneNPCs) = {
+    NPC_GROUP(N(NpcData_Scenes)),
     {}
 };
