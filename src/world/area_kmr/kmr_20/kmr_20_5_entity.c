@@ -1,7 +1,7 @@
 #include "kmr_20.h"
 #include "entity.h"
 
-API_CALLABLE(N(ResetAmbientSoundsVolume)){
+API_CALLABLE(N(SetAmbienceVolumeHalf_Entity)){
     au_ambience_set_volume(0, 1000, 63);
     return ApiStatus_DONE2;
 }
@@ -11,7 +11,7 @@ API_CALLABLE(N(ResetAmbientSoundsVolume)){
 EvtScript N(EVS_SecretPanel_FlipBack) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o252, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o252, SOUND_20AB, 0)
-    EVT_CALL(N(ResetAmbientSoundsVolume))
+    EVT_CALL(N(SetAmbienceVolumeHalf_Entity))
     EVT_CALL(MakeLerp, 0, -2160, 60, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)

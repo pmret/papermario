@@ -2117,7 +2117,7 @@ void func_8003D788(Npc* npc, s32 arg1) {
     f32 cosTheta;
 
     phi_a2 = 0;
-    if (gGameStatusPtr->areaID == 5) {
+    if (gGameStatusPtr->areaID == AREA_HOS) {
         phi_a2 = gGameStatusPtr->mapID == 2;
     }
     if (arg1 == 2) {

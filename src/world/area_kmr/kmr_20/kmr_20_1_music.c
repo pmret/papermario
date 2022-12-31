@@ -36,7 +36,7 @@ EvtScript N(EVS_PlayRestingSong) = {
     EVT_END
 };
 
-EvtScript N(EVS_80242D78) = {
+EvtScript N(EVS_FadeOutAmbientSounds) = {
     EVT_CALL(N(FadeOutAmbientSounds))
     EVT_RETURN
     EVT_END

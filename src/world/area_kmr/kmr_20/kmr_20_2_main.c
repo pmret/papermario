@@ -9,7 +9,7 @@ API_CALLABLE(N(func_80240310_8EC130)){
 }
 
 EvtScript N(EVS_GotoMap_mac_00_4) = {
-    EVT_EXEC(N(EVS_80242D78))
+    EVT_EXEC(N(EVS_FadeOutAmbientSounds))
     EVT_CALL(GotoMap, EVT_PTR("mac_00"), mac_00_ENTRY_4)
     EVT_WAIT(100)
     EVT_RETURN
@@ -40,11 +40,11 @@ EvtScript N(EVS_Main) = {
     EVT_END_IF
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, kmr_20_ENTRY_4)
-        EVT_SET(MF_Unk_0A, FALSE)
+        EVT_SET(MF_LuigiWaiting, FALSE)
         EVT_IF_EQ(GF_KMR20_ReunitedWithLuigi, FALSE)
             EVT_SET(GF_KMR20_ReunitedWithLuigi, TRUE)
             EVT_IF_LT(GB_StoryProgress, STORY_CH3_INVITED_TO_BOOS_MANSION)
-                EVT_SET(MF_Unk_0A, TRUE)
+                EVT_SET(MF_LuigiWaiting, TRUE)
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
@@ -83,13 +83,13 @@ EvtScript N(EVS_Main) = {
             EVT_EXEC(N(EVS_Scene_EpilogueGetLetter))
         EVT_CASE_EQ(kmr_20_ENTRY_4)
             EVT_SET(GF_MAP_MariosHouse, TRUE)
-            EVT_IF_EQ(MF_Unk_0A, TRUE)
-                EVT_EXEC(N(EVS_8024AC34))
+            EVT_IF_EQ(MF_LuigiWaiting, TRUE)
+                EVT_EXEC(N(EVS_Scene_LuigiWaitingAround))
                 EVT_THREAD
                     EVT_CALL(DisablePlayerPhysics, TRUE)
                     EVT_CALL(SetPlayerPos, NPC_DISPOSE_LOCATION)
                     EVT_LABEL(0)
-                        EVT_IF_EQ(MF_Unk_0B, FALSE)
+                        EVT_IF_EQ(MF_ReadyForPlayerEntry, FALSE)
                             EVT_WAIT(1)
                             EVT_GOTO(0)
                         EVT_END_IF

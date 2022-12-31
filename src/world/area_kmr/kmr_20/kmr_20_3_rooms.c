@@ -1,11 +1,11 @@
 #include "kmr_20.h"
 
-API_CALLABLE(N(SetAmbienceVolumeHalf)){
+API_CALLABLE(N(SetAmbienceVolumeHalf_Rooms)){
     au_ambience_set_volume(0, 1000, 63);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(SetAmbienceVolumeFull)){
+API_CALLABLE(N(SetAmbienceVolumeFull_Rooms)){
     au_ambience_set_volume(0, 1000, 127);
     return ApiStatus_DONE2;
 }
@@ -42,7 +42,7 @@ EvtScript N(EVS_MoveWalls_House) = {
 EvtScript N(EVS_ToggleVis_House) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(N(SetAmbienceVolumeHalf))
+            EVT_CALL(N(SetAmbienceVolumeHalf_Rooms))
             EVT_CALL(EnableGroup, MODEL_g20, TRUE)
             EVT_CALL(EnableGroup, MODEL_g21, TRUE)
             EVT_CALL(EnableGroup, MODEL_g49, TRUE)
@@ -50,7 +50,7 @@ EvtScript N(EVS_ToggleVis_House) = {
         EVT_CASE_EQ(1)
         EVT_CASE_EQ(2)
         EVT_CASE_EQ(3)
-            EVT_CALL(N(SetAmbienceVolumeFull))
+            EVT_CALL(N(SetAmbienceVolumeFull_Rooms))
             EVT_CALL(EnableGroup, MODEL_g20, FALSE)
             EVT_CALL(EnableGroup, MODEL_g21, FALSE)
             EVT_CALL(EnableGroup, MODEL_g49, FALSE)
@@ -91,7 +91,7 @@ EvtScript N(EVS_SetupRooms) = {
             EVT_CALL(RotateGroup, MODEL_g34, 90, -1, 0, 0)
             EVT_CALL(EnableGroup, MODEL_g60, FALSE)
             EVT_CALL(EnableGroup, MODEL_g34, FALSE)
-            EVT_CALL(N(SetAmbienceVolumeHalf))
+            EVT_CALL(N(SetAmbienceVolumeHalf_Rooms))
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_SET(LVar0, 3)

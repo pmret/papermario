@@ -1,7 +1,7 @@
 #include "kmr_20.h"
 #include "model.h"
 
-#define NAME_SUFFIX _12
+#define NAME_SUFFIX _Epilogue
 #include "world/common/entity/Pipe.inc.c"
 #include "world/common/entity/Pipe.data.inc.c"
 #define NAME_SUFFIX
@@ -52,17 +52,17 @@ API_CALLABLE(N(func_802420EC_8EDF0C)) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(N(func_80242144_8EDF64)) {
+API_CALLABLE(N(SetAmbienceVolumeHalf_Epilogue)) {
     au_ambience_set_volume(0, 1000, 63);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_8024216C_8EDF8C)) {
+API_CALLABLE(N(SetAmbienceVolumeFull_Epilogue)) {
     au_ambience_set_volume(0, 1000, 127);
     return ApiStatus_DONE2;
 }
 
-EvtScript N(D_80251CF0_8FDB10) = {
+EvtScript N(EVS_Luigi_PlayWalkSounds_Epilogue) = {
     EVT_CALL(GetNpcAnimation, NPC_Luigi_1, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(ANIM_Luigi_Walk)
@@ -119,7 +119,7 @@ EvtScript N(EVS_CloseFrontDoor) = {
     EVT_END
 };
 
-EvtScript N(EVS_OpenAndCloseDoor) = {
+EvtScript N(EVS_OpenAndCloseDoor_Epilogue) = {
     EVT_CALL(EnableGroup, MODEL_g72, TRUE)
     EVT_EXEC_WAIT(N(EVS_OpenFrontDoor))
     EVT_WAIT(30)
@@ -129,15 +129,15 @@ EvtScript N(EVS_OpenAndCloseDoor) = {
     EVT_END
 };
 
-EvtScript N(D_80251FC4_8FDDE4) = {
+EvtScript N(EVS_Player_EnterPipe_Epilogue) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(HidePlayerShadow, TRUE)
     EVT_SET(LVar0, 4)
-    EVT_CALL(N(Pipe_GetEntryPos_12))
+    EVT_CALL(N(Pipe_GetEntryPos_Epilogue))
     EVT_CALL(PlayerMoveTo, LVar1, LVar3, 3)
     EVT_SET(LVar0, 4)
-    EVT_CALL(N(Pipe_GetEntryPos_12))
+    EVT_CALL(N(Pipe_GetEntryPos_Epilogue))
     EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
     EVT_WAIT(2)
     EVT_CALL(PlaySoundAtPlayer, SOUND_ENTER_PIPE, 0)
@@ -157,15 +157,15 @@ EvtScript N(D_80251FC4_8FDDE4) = {
     EVT_END
 };
 
-EvtScript N(D_80252148_8FDF68) = {
+EvtScript N(EVS_Luigi_EnterPipe_Epilogue) = {
     EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_Luigi_1, FALSE)
     EVT_SET(LVar0, 4)
-    EVT_CALL(N(Pipe_GetEntryPos_12))
+    EVT_CALL(N(Pipe_GetEntryPos_Epilogue))
     EVT_CALL(NpcMoveTo, NPC_Luigi_1, LVar1, LVar3, 3)
     EVT_SET(LVar0, 4)
-    EVT_CALL(N(Pipe_GetEntryPos_12))
+    EVT_CALL(N(Pipe_GetEntryPos_Epilogue))
     EVT_CALL(SetNpcPos, NPC_Luigi_1, LVar1, LVar2, LVar3)
     EVT_WAIT(2)
     EVT_CALL(PlaySoundAtNpc, NPC_Luigi_1, SOUND_ENTER_PIPE, 0)
@@ -189,7 +189,7 @@ EvtScript N(D_80252148_8FDF68) = {
 
 EvtScript N(EVS_Scene_BeginEpilogue) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(func_80242144_8EDF64))
+    EVT_CALL(N(SetAmbienceVolumeHalf_Epilogue))
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_80024)
     EVT_CALL(SetPlayerPos, 95, 44, -40)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 150, 44, -40)
@@ -211,7 +211,7 @@ EvtScript N(EVS_Scene_BeginEpilogue) = {
 
 EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(func_80242144_8EDF64))
+    EVT_CALL(N(SetAmbienceVolumeHalf_Epilogue))
     EVT_CALL(SetPlayerPos, 95, 44, -40)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_80024)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 150, 44, -40)
@@ -242,7 +242,7 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     EVT_CALL(PlaySoundAtNpc, NPC_Luigi_1, SOUND_SOFT_LAND, 0)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Walk)
-    EVT_EXEC_GET_TID(N(D_80251CF0_8FDB10), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_Luigi_PlayWalkSounds_Epilogue), LVarA)
     EVT_CALL(NpcMoveTo, NPC_Luigi_1, 240, -20, 30)
     EVT_CALL(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_WalkBack)
     EVT_CALL(NpcMoveTo, NPC_Luigi_1, 240, -80, 30)
@@ -251,14 +251,14 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     EVT_WAIT(10)
     EVT_EXEC(N(EVS_OpenFrontDoor))
     EVT_CALL(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Walk)
-    EVT_EXEC_GET_TID(N(D_80251CF0_8FDB10), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_Luigi_PlayWalkSounds_Epilogue), LVarA)
     EVT_CALL(NpcMoveTo, NPC_Luigi_1, 300, -80, 30)
     EVT_EXEC_WAIT(N(EVS_CloseFrontDoor))
     EVT_KILL_THREAD(LVarA)
     EVT_WAIT(90)
     EVT_CALL(SetNpcYaw, NPC_Luigi_1, 270)
     EVT_CALL(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_WalkLetter)
-    EVT_EXEC_GET_TID(N(D_80251CF0_8FDB10), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_Luigi_PlayWalkSounds_Epilogue), LVarA)
     EVT_EXEC(N(EVS_OpenFrontDoor))
     EVT_CALL(NpcMoveTo, NPC_Luigi_1, 240, -80, 30)
     EVT_CALL(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_IdleLetter)
@@ -286,15 +286,15 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     EVT_CALL(SetNpcPos, NPC_Luigi_1, 200, 30, -75)
     EVT_WAIT(30)
     EVT_CALL(N(func_802420EC_8EDF0C))
-    EVT_CALL(N(func_8024216C_8EDF8C))
+    EVT_CALL(N(SetAmbienceVolumeFull_Epilogue))
     EVT_WAIT(30)
     EVT_CALL(SetMusicTrack, 0, SONG_PEACHS_CASTLE_PARTY, 0, 8)
-    EVT_EXEC(N(EVS_OpenAndCloseDoor))
+    EVT_EXEC(N(EVS_OpenAndCloseDoor_Epilogue))
     EVT_THREAD
         EVT_WAIT(10)
         EVT_CALL(SetNpcSpeed, NPC_Luigi_1, EVT_FLOAT(3.0))
         EVT_CALL(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Run)
-        EVT_EXEC_GET_TID(N(D_80251CF0_8FDB10), LVarA)
+        EVT_EXEC_GET_TID(N(EVS_Luigi_PlayWalkSounds_Epilogue), LVarA)
         EVT_CALL(NpcMoveTo, NPC_Luigi_1, 320, -70, 0)
         EVT_CALL(NpcMoveTo, NPC_Luigi_1, 460, -70, 0)
         EVT_CALL(NpcMoveTo, NPC_Luigi_1, 570, -170, 0)
@@ -307,7 +307,7 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     EVT_CALL(func_802D1270, 570, -170, EVT_FLOAT(3.0))
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
     EVT_CALL(PlayerJump, 594, 30, -216, 15)
-    EVT_EXEC_WAIT(N(D_80251FC4_8FDDE4))
+    EVT_EXEC_WAIT(N(EVS_Player_EnterPipe_Epilogue))
     EVT_CALL(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_JumpStance)
     EVT_WAIT(10)
     EVT_THREAD
@@ -320,8 +320,8 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_Luigi_1, EVT_FLOAT(1.0))
     EVT_CALL(NpcJump0, NPC_Luigi_1, 594, 30, -216, 15)
-    EVT_EXEC_WAIT(N(D_80252148_8FDF68))
-    EVT_EXEC(N(EVS_80242D78))
+    EVT_EXEC_WAIT(N(EVS_Luigi_EnterPipe_Epilogue))
+    EVT_EXEC(N(EVS_FadeOutAmbientSounds))
     EVT_CALL(GotoMap, EVT_PTR("mac_00"), mac_00_ENTRY_7)
     EVT_WAIT(100)
     EVT_CALL(DisablePlayerInput, FALSE)

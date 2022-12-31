@@ -9719,10 +9719,28 @@ segments:
     - [0x8ED0C0, c, kmr_20_8_bed]
     - [0x8ED440, c, kmr_20_9_npc_scenes]
     - [0x8ED440, c, kmr_20_10_npc]
-    - [0x8ED5A0, c, kmr_20_11]
-    - [0x8EDB70, c, kmr_20_12]
+    - [0x8ED5A0, c, kmr_20_11_npc_intro]
+    - [0x8EDB70, c, kmr_20_12_npc_epilogue]
     - [0x8EDFC0, c, kmr_20_13_records]
-    - [0x8EE9D0]
+    - [0x8EE9D0, .data, kmr_20_0_header]
+    - [0x8EEA60, .data, kmr_20_1_music]
+    - [0x8EEBC0, .data, kmr_20_2_main]
+    - [0x8EFDA0, .data, kmr_20_3_rooms]
+    - [0x8F01E0, .data, kmr_20_4_documents]
+    - [0x8F1500, .data, kmr_20_5_entity]
+    - [0x8F1C00, .data, kmr_20_6_trees]
+    - [0x8F2610, .data, kmr_20_7_bushes]
+    - [0x8F3130, .data, kmr_20_8_bed]
+    - [0x8F61F0, .data, kmr_20_9_npc_scenes]
+    - [0x8F66D0, .data, kmr_20_10_npc]
+    - [0x8F9D30, .data, kmr_20_11_npc_intro]
+    - [0x8FCDE0, .data, kmr_20_12_npc_epilogue]
+    - start: 0x8FEB70
+      type: .data
+      name: kmr_20_13_records
+      subsegments:
+      - [0x8FEB70, gfx, records_screen]
+      - [0x8FEBE0]
   - name: kmr_21
     dir: world/area_kmr/kmr_21
     type: code
