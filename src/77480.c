@@ -1055,7 +1055,7 @@ void func_800E04D0(void) {
 }
 
 void func_800E0514(void) {
-    PulseStoneNotificationCallback = 0;
+    PulseStoneNotificationCallback = NULL;
     gPlayerStatusPtr->animFlags &= ~PA_FLAGS_40;
 }
 
@@ -1105,7 +1105,7 @@ void func_800E0658(void) {
 }
 
 void func_800E069C(void) {
-    TalkNotificationCallback = 0;
+    TalkNotificationCallback = NULL;
     gPlayerStatusPtr->animFlags &= ~PA_FLAGS_SPEECH_PROMPT_AVAILABLE;
 }
 
@@ -1272,7 +1272,7 @@ void func_800E0AD0(void) {
 }
 
 void func_800E0B14(void) {
-    InteractNotificationCallback = 0;
+    InteractNotificationCallback = NULL;
     gPlayerStatusPtr->animFlags &= ~PA_FLAGS_INTERACT_PROMPT_AVAILABLE;
 }
 

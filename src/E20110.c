@@ -253,7 +253,7 @@ void func_802B7728_E20838(void) {
 void func_802B79C8_E20AD8(void) {
     func_802B75E8_E206F8();
     gPlayerStatusPtr->interactingWithID = -1;
-    InteractNotificationCallback = 0;
+    InteractNotificationCallback = NULL;
     gPlayerStatusPtr->encounteredNPC = NULL;
     gPlayerStatusPtr->animFlags &= ~PA_FLAGS_INTERACT_PROMPT_AVAILABLE;
     func_800EF3D4(0);

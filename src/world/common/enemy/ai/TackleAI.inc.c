@@ -1,3 +1,5 @@
+#ifndef _TACKLE_AI_H
+#define _TACKLE_AI_H
 // TackleAI
 // used by Koopas, Koopatrols, Spinys, Buzzy Beetles
 
@@ -155,3 +157,4 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
+#endif

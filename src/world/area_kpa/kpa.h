@@ -21,6 +21,10 @@ enum {
 };
 
 enum {
+    AF_KPA_03                   = AreaFlag(3),
+    AF_KPA_04                   = AreaFlag(4),
+    AF_KPA_05                   = AreaFlag(5),
+    AF_KPA_06                   = AreaFlag(6),
     AF_KPA133_HitWaterSwitch    = AreaFlag(8),
     AF_KPA134_HitWaterSwitch    = AreaFlag(9),
 };

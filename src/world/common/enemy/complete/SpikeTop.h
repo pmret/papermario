@@ -79,6 +79,19 @@
     .anim_F = ANIM_SpikeTop_Anim03, \
 }
 
+#define BONY_BEETLE_DROPS_ALT \
+{ \
+    .dropFlags = NPC_DROP_FLAGS_80, \
+    .itemDropChance = 5, \
+    .itemDrops = { \
+        { ITEM_SUPER_SHROOM, 10, 0 }, \
+    }, \
+    .heartDrops  = STANDARD_HEART_DROPS(5), \
+    .flowerDrops = STANDARD_FLOWER_DROPS(2), \
+    .minCoinBonus = 0, \
+    .maxCoinBonus = 3, \
+}
+
 #define BONY_BEETLE_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAGS_80, \

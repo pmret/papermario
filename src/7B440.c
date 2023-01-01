@@ -44,9 +44,9 @@ void reset_player_status(void) {
 
     PeachDisguiseNpcIndex = -1;
     TweesterTouchingPartner = NULL;
-    PulseStoneNotificationCallback = 0;
-    TalkNotificationCallback = 0;
-    InteractNotificationCallback = 0;
+    PulseStoneNotificationCallback = NULL;
+    TalkNotificationCallback = NULL;
+    InteractNotificationCallback = NULL;
     D_8010C92C = 0;
     PrevPlayerDirection = 0;
     D_8010C980 = 0;
