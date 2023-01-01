@@ -10,7 +10,7 @@ void nuGfxRetraceWait(u32 retrace_num) {
 
     nuScAddClient(&client, &mesgQ , NU_SC_RETRACE_MSG);
 
-    while(retrace_num) {
+    while (retrace_num > 0) {
         osRecvMesg(&mesgQ, NULL, OS_MESG_BLOCK);
         retrace_num--;
     }

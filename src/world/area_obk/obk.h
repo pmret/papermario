@@ -27,7 +27,7 @@ enum {
     AF_OBK03_HitFirstSwitch         = AreaFlag(5),
     AF_OBK03_HitSecondSwitch        = AreaFlag(6),
     AF_OBK03_HitThirdSwitch         = AreaFlag(7),
-    AF_OBK_08                       = AreaFlag(8),
+    AF_OBK08_KeepAwayStarted        = AreaFlag(8),
 };
 
 extern MapSettings obk_01_settings;

@@ -887,7 +887,7 @@ void render_npcs(void) {
 
                     if ((npc->flags & NPC_FLAG_MOTION_BLUR) != 0) {
                         renderTaskPtr->distance = -phi_f20;
-                        renderTaskPtr->appendGfx = (void (*))appendGfx_npc_blur;
+                        renderTaskPtr->appendGfx = appendGfx_npc_blur;
                         renderTaskPtr->appendGfxArg = npc;
                         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
                         queue_render_task(renderTaskPtr);
@@ -1025,8 +1025,8 @@ void update_npc_blur(Npc* npc) {
     motionBlur->index = index;
 }
 
-void appendGfx_npc_blur(void* appendData) {
-    Npc* npc = (Npc*) appendData;
+void appendGfx_npc_blur(void* data) {
+    Npc* npc = (Npc*) data;
     Matrix4f sp20, sp60;
     f32 x, y, z;
     f32 yaw;

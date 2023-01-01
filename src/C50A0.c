@@ -762,6 +762,8 @@ void init_item_entity_list(void) {
     ItemEntityAlternatingSpawn = 0;
 }
 
+extern s32* gItemEntityScripts[];
+
 void item_entity_load(ItemEntity* item);
 INCLUDE_ASM(s32, "C50A0", item_entity_load);
 

@@ -391,7 +391,7 @@ segments:
     - [0x891B0, c, 891b0_len_fb0]
     - [0x8A160, c, 8a160_len_700]
     - [0x8A860, c, 8a860_len_3f30]
-    - [0x8E790, c, 8e790_len_2850]
+    - [0x8E790, c, draw_box]
     - [0x90FE0, .data, npc_collision]
     - [0x913B0, .data, world/actions]
     - [0x914E0, .data, world/partners]
@@ -793,7 +793,7 @@ segments:
     - [0xA2D40, .data, 8a860_len_3f30]
     - start: 0xA2D90
       type: .data
-      name: 8e790_len_2850
+      name: draw_box
       subsegments:
       - [0xA2D90]
       - [0xA2E90, ia8, ui/box/corners9, 16, 64]

@@ -1529,7 +1529,7 @@ void appendGfx_player_actor(void* arg0) {
                     (player->stoneStatus != STATUS_STONE) &&
                     ((battleStatus->outtaSightActive > 0) || (gBattleStatus.flags2 & BS_FLAGS2_2)))
                 {
-                    if (is_ability_active(0x15)) {
+                    if (is_ability_active(ABILITY_BERSERKER)) {
                         playerParts->currentAnimation = func_80265D44(0x13);
                     } else  if (player->debuff == 6) {
                         playerParts->currentAnimation = func_80265D44(0x15);
@@ -1693,7 +1693,7 @@ void appendGfx_player_actor(void* arg0) {
             if (!cond1) {
                 playerParts->currentAnimation = func_80265D44(1);
             }
-        } while(0); // needed to match
+        } while (0); // needed to match
     }
 
     if (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)) {

@@ -53,7 +53,7 @@ ApiStatus SetCamPerspective(Evt* script, s32 isInitialCall) {
     camera->farClip = farClip;
     camera->updateMode = mode;
     camera->unk_06 = TRUE;
-    camera->changingMap = TRUE;
+    camera->isChangingMap = TRUE;
     camera->vfov = vfov;
     camera->nearClip = nearClip;
     return ApiStatus_DONE2;
@@ -194,7 +194,7 @@ ApiStatus InterpCamTargetPos(Evt* script, s32 isInitialCall) {
         /* 0x08 */ Vec3f vel;
         /* 0x14 */ s32 time;
     } CamInterpData; // size = 0x18
-    
+
     Bytecode* args = script->ptrReadPos;
     CamInterpData* data;
     Camera* cam;
@@ -206,14 +206,14 @@ ApiStatus InterpCamTargetPos(Evt* script, s32 isInitialCall) {
         s32 posY = evt_get_variable(script, *args++);
         s32 posZ = evt_get_variable(script, *args++);
         s32 time = evt_get_variable(script, *args++);
-        
+
         data = heap_malloc(sizeof(*data));
         script->userData = data;
         cam = &gCameras[camID];
         data->cam = cam;
         data->useTarget = useTarget;
         data->time = time;
-        
+
         switch (data->useTarget) {
             case 0:
                 data->vel.x = (posX - cam->lookAt_obj_target.x) / data->time;
@@ -227,7 +227,7 @@ ApiStatus InterpCamTargetPos(Evt* script, s32 isInitialCall) {
                 break;
         }
     }
-    
+
     data = script->userData;
     cam = data->cam;
     switch (data->useTarget) {
@@ -242,7 +242,7 @@ ApiStatus InterpCamTargetPos(Evt* script, s32 isInitialCall) {
             cam->targetPos.z += data->vel.z;
             break;
     }
-    
+
     data->time--;
     if (data->time == 0) {
         heap_free(script->userData);

@@ -3,6 +3,7 @@
 enum {
     RING_STATE_0        = 0,
     RING_STATE_1        = 1,
+    RING_STATE_2        = 2,
     RING_STATE_10       = 10,
     RING_STATE_11       = 11,
     RING_STATE_12       = 12,
@@ -14,13 +15,13 @@ enum {
 
 #include "world/common/npc/Boo.inc.c"
 
-API_CALLABLE(N(func_80240050_BC7EB0)) {
+API_CALLABLE(N(InitHiddenBoo)) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
-    s32* ptr = heap_malloc(sizeof(s32)); // todo what is this
+    s32* isGameStarted = heap_malloc(sizeof(s32));
 
-    npc->blur.any = ptr;
-    *ptr = NULL;
-    npc->planarFlyDist = 125.0f;
+    npc->blur.keepAwayStarted = isGameStarted;
+    *isGameStarted = FALSE;
+    npc->planarFlyDist = 125.0f; // default ring radius
     npc->yaw = 0.0f;
     npc->pos.x = 0.0f;
     npc->pos.y = -875.0f;
@@ -64,34 +65,34 @@ void N(func_8024022C_BC808C)(void) {
     get_npc_unsafe(NPC_KeepAwayBoo8)->unk_A2 = 0;
 }
 
-s32 N(func_802402A0_BC8100)(s32 arg0) {
-    s32 ret = 12;
+s32 N(SetRingMovement)(s32 arg0) {
+    s32 ret = RING_STATE_12;
 
     switch (arg0) {
-        case 0:
-            ret = 12;
+        case KEEP_AWAY_CLOCKWISE:
+            ret = RING_STATE_12;
             break;
-        case 1:
-            ret = 100;
+        case KEEP_AWAY_STOP:
+            ret = RING_STATE_100;
             break;
-        case 2:
-            ret = 13;
+        case KEEP_AWAY_COUNTER_CLOCKWISE:
+            ret = RING_STATE_13;
             break;
-        case 3:
-            ret = 14;
+        case KEEP_AWAY_SPIRAL:
+            ret = RING_STATE_14;
             break;
     }
     return ret;
 }
 
-API_CALLABLE(N(func_802402F4_BC8154)) {
+API_CALLABLE(N(UpdateHiddenBoo)) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
     s32* temp_s3 = npc->blur.any;
     s32 temp_v0;
 
     switch (script->functionTemp[1]) {
         case RING_STATE_0:
-            temp_v0 = evt_get_variable(script, MV_Unk_01);
+            temp_v0 = evt_get_variable(script, MV_KeepAwayStarted);
             if (temp_v0 == 1) {
                 *temp_s3 = temp_v0;
                 script->functionTemp[1] = RING_STATE_10;
@@ -119,15 +120,15 @@ API_CALLABLE(N(func_802402F4_BC8154)) {
             }
             break;
         case RING_STATE_12:
-            script->functionTemp[1] = N(func_802402A0_BC8100)(evt_get_variable(script, MV_Unk_03));
+            script->functionTemp[1] = N(SetRingMovement)(evt_get_variable(script, MV_KeepAwayMovement));
             npc->yaw = clamp_angle(npc->yaw + 2.0f);
             break;
         case RING_STATE_13:
-            script->functionTemp[1] = N(func_802402A0_BC8100)(evt_get_variable(script, MV_Unk_03));
+            script->functionTemp[1] = N(SetRingMovement)(evt_get_variable(script, MV_KeepAwayMovement));
             npc->yaw = clamp_angle(npc->yaw - 2.0f);
             break;
         case RING_STATE_14:
-            evt_set_variable(script, MV_Unk_03, 0);
+            evt_set_variable(script, MV_KeepAwayMovement, KEEP_AWAY_CLOCKWISE);
             npc->duration++;
             if (npc->duration == 50) {
                 script->functionTemp[1] = RING_STATE_15;
@@ -144,109 +145,106 @@ API_CALLABLE(N(func_802402F4_BC8154)) {
             npc->yaw = clamp_angle(npc->yaw + 2.0f);
             break;
         case RING_STATE_100:
-            script->functionTemp[1] = N(func_802402A0_BC8100)(evt_get_variable(script, MV_Unk_03));
+            script->functionTemp[1] = N(SetRingMovement)(evt_get_variable(script, MV_KeepAwayMovement));
             break;
     }
 
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802405B4_BC8414)) {
+API_CALLABLE(N(InitKeepAwayBoo)) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
 
-    npc->blur.any = get_npc_unsafe(NPC_Boo_01); // TODO what is this?
-    script->functionTemp[2] = script->owner2.npcID * 45;
+    npc->blur.keepAwayNpc = get_npc_unsafe(NPC_Boo_01);
+    script->functionTemp[2] = script->owner2.npcID * 45; // starting yaw
     npc->flags |= NPC_FLAG_40000;
     script->functionTemp[1] = RING_STATE_0;
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80240624_BC8484);
-
-// float regalloc
-#ifdef NON_MATCHING
-API_CALLABLE(N(func_80240624_BC8484)) {
+API_CALLABLE(N(UpdateKeepAwayBoo)) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
-    Npc* npc2 = npc->blur.any;
-    f32 temp_f10;
-    f32 temp_f12;
-    f32 temp_f14;
-    f32 temp_f2;
-    f32 temp_f4;
-    f32 temp_f6;
-    s32* temp_s2;
+    Npc* hiddenBoo = npc->blur.keepAwayNpc;
+    f32 posX, posY, posZ;
+    f32 interpAlpha, alphaSquared, alphaCubed;
+    f32 deltaX, deltaZ;
+    s32* isGameStarted;
     f32 yaw;
-    f32 new_var;
-    f32 f1;
 
-
-    temp_s2 = npc2->blur.any;
+    isGameStarted = hiddenBoo->blur.keepAwayStarted;
     switch (script->functionTemp[1]) {
-        case 0:
-            npc->yaw = clamp_angle(script->functionTemp[2] + npc2->yaw);
-            if (*temp_s2 == 1) {
-                script->functionTemp[1] = 1;
+        case RING_STATE_0:
+            npc->yaw = clamp_angle(script->functionTemp[2] + hiddenBoo->yaw);
+            if (*isGameStarted == TRUE) {
+                script->functionTemp[1] = RING_STATE_1;
                 npc->duration = rand_int(20) + 10;
             }
             break;
-        case 1:
-            npc->yaw = clamp_angle(script->functionTemp[2] + npc2->yaw);
+        case RING_STATE_1:
+            yaw = clamp_angle(script->functionTemp[2] + hiddenBoo->yaw);
+            npc->yaw = yaw;
             npc->duration--;
             if (npc->duration == 0) {
-                sfx_play_sound_at_position(0xB000000F, 0, npc->pos.x, npc->pos.y, npc->pos.z);
-                script->functionTemp[1] = 2;
+                sfx_play_sound_at_position(SOUND_B000000F, 0, npc->pos.x, npc->pos.y, npc->pos.z);
+                script->functionTemp[1] = RING_STATE_2;
                 npc->duration = 0;
                 npc->moveToPos.x = npc->pos.x;
                 npc->moveToPos.y = npc->pos.y;
                 npc->moveToPos.z = npc->pos.z;
             }
             break;
-        case 2:
-            npc->yaw = clamp_angle(script->functionTemp[2] + npc2->yaw);
-            new_var = npc->yaw;
-            npc->pos.x = npc2->pos.x;
-            npc->pos.z = npc2->pos.z;
-            npc_move_heading(npc, npc2->planarFlyDist, new_var);
-            temp_f4 = (40.0f - npc->duration) / 40.0f;
-            temp_f12 = npc->pos.z;
-            f1 = (npc->pos.x - npc->moveToPos.x) * (temp_f4 * temp_f4);
-            temp_f6 = (npc->pos.z - npc->moveToPos.z) * (temp_f4 * temp_f4);
-            temp_f2 = npc2->pos.y + 1000.0f;
-            npc->pos.x -= f1;
-            npc->pos.y = temp_f2;
-            npc->pos.y -= (npc->pos.y - npc->moveToPos.y) * ((temp_f4 * temp_f4) * temp_f4);
-            npc->pos.z = temp_f12 - temp_f6;
+        case RING_STATE_2:
+            // here `moveToPos` is original position
+            yaw = clamp_angle(script->functionTemp[2] + hiddenBoo->yaw);
+            npc->yaw = yaw;
+            npc->pos.x = hiddenBoo->pos.x;
+            npc->pos.z = hiddenBoo->pos.z;
+            npc_move_heading(npc, hiddenBoo->planarFlyDist, yaw);
+
+            interpAlpha = (40.0f - npc->duration) / 40.0f;
+            alphaSquared = interpAlpha * interpAlpha;
+            alphaCubed = interpAlpha * interpAlpha * interpAlpha;
+
+            posX = npc->pos.x;
+            posZ = npc->pos.z;
+            deltaX = (npc->pos.x - npc->moveToPos.x) * alphaSquared;
+            deltaZ = (npc->pos.z - npc->moveToPos.z) * alphaSquared;
+
+            posY = hiddenBoo->pos.y + 1000.0f;
+            npc->pos.y = posY;
+
+            npc->pos.x = posX - deltaX;
+            npc->pos.y -= (npc->pos.y - npc->moveToPos.y) * alphaCubed;
+            npc->pos.z = posZ - deltaZ;
             npc->duration++;
             if (npc->duration == 40) {
-                script->functionTemp[1] = 12;
+                script->functionTemp[1] = RING_STATE_12;
             }
             break;
-        case 12:
-        case 13:
-        case 14:
-            yaw = clamp_angle(script->functionTemp[2] + npc2->yaw);
+        // at this stage, the movement of the ring is controlled by MV_KeepAwayMovement
+        case RING_STATE_12:
+        case RING_STATE_13:
+        case RING_STATE_14:
+            yaw = clamp_angle(script->functionTemp[2] + hiddenBoo->yaw);
             npc->yaw = yaw;
-            script->functionTemp[1] = N(func_802402A0_BC8100)(evt_get_variable(script, MV_Unk_03));
-            npc->pos.x = npc2->pos.x;
-            npc->pos.z = npc2->pos.z;
-            npc_move_heading(npc, npc2->planarFlyDist, yaw);
-            npc->pos.y = npc2->pos.y + 1000.0f;
+            script->functionTemp[1] = N(SetRingMovement)(evt_get_variable(script, MV_KeepAwayMovement));
+            npc->pos.x = hiddenBoo->pos.x;
+            npc->pos.z = hiddenBoo->pos.z;
+            npc_move_heading(npc, hiddenBoo->planarFlyDist, yaw);
+            npc->pos.y = hiddenBoo->pos.y + 1000.0f;
             break;
-        case 100:
-            script->functionTemp[1] = N(func_802402A0_BC8100)(evt_get_variable(script, MV_Unk_03));
+        case RING_STATE_100:
+            script->functionTemp[1] = N(SetRingMovement)(evt_get_variable(script, MV_KeepAwayMovement));
             break;
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240624_BC8484);
-#endif
 
 EvtScript N(EVS_NpcIdle_Boo_01) = {
     EVT_WAIT(4)
-    EVT_CALL(N(func_80240050_BC7EB0))
+    EVT_CALL(N(InitHiddenBoo))
     EVT_LABEL(10)
-        EVT_CALL(N(func_802402F4_BC8154))
+        EVT_CALL(N(UpdateHiddenBoo))
         EVT_WAIT(1)
         EVT_GOTO(10)
     EVT_RETURN
@@ -255,9 +253,9 @@ EvtScript N(EVS_NpcIdle_Boo_01) = {
 
 EvtScript N(EVS_NpcIdle_KeepAwayBoo) = {
     EVT_WAIT(5)
-    EVT_CALL(N(func_802405B4_BC8414))
+    EVT_CALL(N(InitKeepAwayBoo))
     EVT_LABEL(10)
-        EVT_CALL(func_80240624_BC8484)
+        EVT_CALL(N(UpdateKeepAwayBoo))
         EVT_WAIT(1)
         EVT_GOTO(10)
     EVT_RETURN

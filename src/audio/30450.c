@@ -28,7 +28,7 @@ u8 D_80078DCC[] = {
     2, 95,
     0
 };
-u8 D_80078DD0[] = { 
+u8 D_80078DD0[] = {
     5, 70,
     6, 90,
     7, 90,
@@ -36,7 +36,7 @@ u8 D_80078DD0[] = {
     0
 };
 // used in kpa_60-63
-u8 TrackVols_KPA_Outside[] = { 
+u8 TrackVols_KPA_Outside[] = {
     5, 0,
     6, 0,
     7, 0,
@@ -762,7 +762,7 @@ static AuResult snd_song_change_track_volume(s32 songName, u32 trackIdx, u32 vol
     BGMPlayer* bgmPlayer;
     BGMHeader* bgmFile;
     AuResult status;
-    
+
     status = snd_song_get_playing_info(songName, &bgmFile, &bgmPlayer);
     if (status == AU_RESULT_OK) {
         if (volume > 0x7F) {
@@ -824,10 +824,10 @@ void bgm_clear_music_events(void) {
     AuGlobals* globals = gSoundGlobals;
     s32* buf = globals->musicEventQueue;
     s32 i = 15;
-    
+
     do {
         *buf++ = 0;
-    } while(i-- != 0);
+    } while (i-- != 0);
 
     globals->musicEventQueueCount = 0;
     globals->flushMusicEventQueue = FALSE;

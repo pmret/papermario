@@ -187,7 +187,7 @@ dlabel D_8010D6A4
 dlabel D_8010D6A8
 .space 0x8
 
-dlabel D_8010D6B0
+dlabel gBoxQuadBuffer
 .space 0x1500
 
 dlabel gPartnerActionStatus

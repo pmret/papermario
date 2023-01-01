@@ -1483,6 +1483,7 @@ enum SoundIDs {
     SOUND_B000000C                  = 0xB000000C,
     SOUND_B000000D                  = 0xB000000D,
     SOUND_B000000E                  = 0xB000000E,
+    SOUND_B000000F                  = 0xB000000F,
     SOUND_B0000010                  = 0xB0000010,
     SOUND_B0000011                  = 0xB0000011,
     SOUND_B0000012                  = 0xB0000012,
@@ -4911,19 +4912,6 @@ enum EncounterStatusFlags {
     ENCOUNTER_STATUS_FLAGS_80000000          = 0x80000000,
 };
 
-enum WindowImageFormat {
-    WINDOW_IMG_RGBA_16      = 0x02,
-    WINDOW_IMG_RGBA_32      = 0x03,
-    WINDOW_IMG_YUV_16       = 0x12,
-    WINDOW_IMG_CI_4         = 0x20,
-    WINDOW_IMG_CI_8         = 0x21,
-    WINDOW_IMG_IA_4         = 0x30,
-    WINDOW_IMG_IA_8         = 0x31,
-    WINDOW_IMG_IA_16        = 0x32,
-    WINDOW_IMG_I_4          = 0x40,
-    WINDOW_IMG_I_8          = 0x41,
-};
-
 enum WindowFlags {
     WINDOW_FLAGS_INITIALIZED       = 0x00000001,
     WINDOW_FLAGS_FPUPDATE_CHANGED  = 0x00000002,
@@ -4936,8 +4924,8 @@ enum WindowFlags {
 
 enum DrawFlags {
     DRAW_FLAGS_ROTSCALE                  = 0x00000001,
-    DRAW_FLAGS_2                         = 0x00000002,
-    DRAW_FLAGS_CLIP                      = 0x00000004,
+    DRAW_FLAGS_ANIMATED_BACKGROUND       = 0x00000002,
+    DRAW_FLAGS_NO_CLIP                   = 0x00000004,
     DRAW_FLAGS_CULL_BACK                 = 0x00000008,
 };
 
@@ -5933,6 +5921,33 @@ enum BattleDarknessState {
     BTL_DARKNESS_STATE_DARK         = -1,
     BTL_DARKNESS_STATE_NONE         = 0,
     BTL_DARKNESS_STATE_WATT_BASED   = 1,
+};
+
+enum WindowStyles {
+    WINDOW_STYLE_0      = 0,
+    WINDOW_STYLE_1      = 1,
+    WINDOW_STYLE_2      = 2,
+    WINDOW_STYLE_3      = 3,
+    WINDOW_STYLE_4      = 4,
+    WINDOW_STYLE_5      = 5,
+    WINDOW_STYLE_6      = 6,
+    WINDOW_STYLE_7      = 7,
+    WINDOW_STYLE_8      = 8,
+    WINDOW_STYLE_9      = 9,
+    WINDOW_STYLE_10     = 10,
+    WINDOW_STYLE_11     = 11,
+    WINDOW_STYLE_12     = 12,
+    WINDOW_STYLE_13     = 13,
+    WINDOW_STYLE_14     = 14,
+    WINDOW_STYLE_15     = 15,
+    WINDOW_STYLE_16     = 16,
+    WINDOW_STYLE_17     = 17,
+    WINDOW_STYLE_18     = 18,
+    WINDOW_STYLE_19     = 19,
+    WINDOW_STYLE_20     = 20,
+    WINDOW_STYLE_21     = 21,
+    WINDOW_STYLE_22     = 22,
+    WINDOW_STYLE_MAX    = 22,
 };
 
 #endif

@@ -927,8 +927,8 @@ ApiStatus MakeShop(Evt* script, s32 isInitialCall) {
     get_worker(create_worker_frontUI(NULL, draw_shop_items));
     set_window_properties(WINDOW_ID_10, 100, 66, 120, 28, 0, shop_draw_item_name, NULL, -1);
     set_window_properties(WINDOW_ID_11, 32, 184, 256, 32, 1, shop_draw_item_desc, NULL, -1);
-    gWindowStyles[10].defaultStyleID = 9;
-    gWindowStyles[11].defaultStyleID = 3;
+    gWindowStyles[10].defaultStyleID = WINDOW_STYLE_9;
+    gWindowStyles[11].defaultStyleID = WINDOW_STYLE_3;
     shop->currentItemSlot = 0;
     shop->selectedStoreItemSlot = 0;
     shop->flags = SHOP_FLAGS_0;

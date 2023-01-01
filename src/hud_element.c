@@ -1639,7 +1639,7 @@ void render_hud_elements_world(void) {
                             el1 = sortedElements[i];
                             el2 = sortedElements[j];
                             tempOffsetZ = (*gHudElements)[el1]->worldPosOffset.z;
-                            do {} while(0);
+                            do {} while (0);
                             if (tempOffsetZ < (*gHudElements)[el2]->worldPosOffset.z) {
                                 sortedElements[i] = el2;
                                 sortedElements[j] = el1;
@@ -1687,7 +1687,7 @@ void render_hud_elements_world(void) {
                             el1 = sortedElements[i];
                             el2 = sortedElements[j];
                             tempOffsetZ = (*gHudElements)[el1]->worldPosOffset.z;
-                            do {} while(0);
+                            do {} while (0);
                             if ((*gHudElements)[el1]->worldPosOffset.z < (*gHudElements)[el2]->worldPosOffset.z) {
                                 sortedElements[i] = el2;
                                 sortedElements[j] = el1;

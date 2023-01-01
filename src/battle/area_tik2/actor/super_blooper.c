@@ -247,7 +247,7 @@ ApiStatus N(unused_func)(Evt* script, s32 isInitialCall) {
     f32 var0, var1;
 
     var1 = evt_get_float_variable(script, *args++);
-    do {} while(0);
+    do {} while (0);
     var0 = evt_get_float_variable(script, arg0);
 
     evt_set_float_variable(script, arg0, var1 * sin_rad(DEG_TO_RAD(var0)));

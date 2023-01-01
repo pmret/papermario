@@ -47,7 +47,7 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_NO_LEAD()
     EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_SET(AF_OBK_08, FALSE)
+    EVT_SET(AF_OBK08_KeepAwayStarted, FALSE)
     EVT_EXEC(N(EVS_SetupCabinets))
     EVT_EXEC(N(EVS_ManageWindows))
     EVT_EXEC(N(EVS_TexPan_Fog))

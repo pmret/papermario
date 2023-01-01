@@ -27,10 +27,10 @@ enum {
 };
 
 enum {
-    MV_KeepAwayItem         = MapVar(0),  // item entity ID
-    MV_Unk_01               = MapVar(1),
-    MV_Unk_02               = MapVar(2),
-    MV_Unk_03               = MapVar(3),
+    MV_KeepAwayItem         = MapVar(0), // item entity ID
+    MV_KeepAwayStarted      = MapVar(1), //
+    MV_Unk_02               = MapVar(2), //
+    MV_KeepAwayMovement     = MapVar(3), //
     MV_KeepAwayTarget       = MapVar(4), // npcID to throw item to
     MV_ThrowTargetNpc       = MapVar(5), // npcID the item is thrown to (redundant)
     MV_KeepAwayResult       = MapVar(6), // did the player hit the correct boo?
@@ -47,6 +47,13 @@ enum KeepAwayResult {
     KEEP_AWAY_WAITING   = 0,
     KEEP_AWAY_RIGHT     = 1,
     KEEP_AWAY_WRONG     = 2,
+};
+
+enum KeepAwayMoveState {
+    KEEP_AWAY_CLOCKWISE         = 0,
+    KEEP_AWAY_STOP              = 1,
+    KEEP_AWAY_COUNTER_CLOCKWISE = 2,
+    KEEP_AWAY_SPIRAL            = 3,
 };
 
 #define NAMESPACE obk_04
