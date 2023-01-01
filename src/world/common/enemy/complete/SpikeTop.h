@@ -1,6 +1,7 @@
 #include "common.h"
 #include "sprite/npc/BuzzyBeetle.h"
 #include "sprite/npc/SpikeTop.h"
+#include "sprite/npc/BonyBeetle.h"
 
 #define TIK_BUZZY_BEETLE_DROPS \
 { \
@@ -76,4 +77,37 @@
     .anim_D = ANIM_SpikeTop_Anim03, \
     .anim_E = ANIM_SpikeTop_Anim03, \
     .anim_F = ANIM_SpikeTop_Anim03, \
+}
+
+#define BONY_BEETLE_DROPS \
+{ \
+    .dropFlags = NPC_DROP_FLAGS_80, \
+    .itemDropChance = 5, \
+    .itemDrops = { \
+        { ITEM_SUPER_SHROOM, 10, 0 }, \
+    }, \
+    .heartDrops  = STANDARD_HEART_DROPS(4), \
+    .flowerDrops = STANDARD_FLOWER_DROPS(2), \
+    .minCoinBonus = 0, \
+    .maxCoinBonus = 4, \
+}
+
+#define BONY_BEETLE_ANIMS \
+{ \
+    .idle   = ANIM_BonyBeetle_Anim04, \
+    .walk   = ANIM_BonyBeetle_Anim0C, \
+    .run    = ANIM_BonyBeetle_Anim0E, \
+    .chase  = ANIM_BonyBeetle_Anim0E, \
+    .anim_4 = ANIM_BonyBeetle_Anim04, \
+    .anim_5 = ANIM_BonyBeetle_Anim04, \
+    .death  = ANIM_BonyBeetle_Anim18, \
+    .hit    = ANIM_BonyBeetle_Anim18, \
+    .anim_8 = ANIM_BonyBeetle_Anim10, \
+    .anim_9 = ANIM_BonyBeetle_Anim16, \
+    .anim_A = ANIM_BonyBeetle_Anim12, \
+    .anim_B = ANIM_BonyBeetle_Anim04, \
+    .anim_C = ANIM_BonyBeetle_Anim04, \
+    .anim_D = ANIM_BonyBeetle_Anim04, \
+    .anim_E = ANIM_BonyBeetle_Anim04, \
+    .anim_F = ANIM_BonyBeetle_Anim04, \
 }

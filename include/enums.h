@@ -3240,7 +3240,7 @@ enum PartnerActions {
     PARTNER_ACTION_LAKILESTER_1     = 1,
 };
 
-enum PartnerSTates {
+enum PartnerStates {
     PARTNER_CMD_NONE                = 0,
     PARTNER_CMD_INIT                = 1,
     PARTNER_CMD_INSTA_SWITCH        = 2, // skips put away / take out scripts. assumes valid current partner.

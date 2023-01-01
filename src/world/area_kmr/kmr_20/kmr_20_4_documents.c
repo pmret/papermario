@@ -98,20 +98,21 @@ s32 N(LetterBodyStringIDs)[] = {
     MSG_Document_Letter_Mario12_Body, 
 };
 
+//TODO shiftability -- these are offsets relative to 0x10F1B0
 s32 N(LetterDmaOffsets)[] = {
     0x0000B290, 0x0000D158,
     0x0000D178, 0x0000EB78,
     0x0000ED78, 0x00010778,
-    0x00010978, 0x00012378, 
+    0x00010978, 0x00012378,
     0x00012578, 0x00013F78,
     0x00014178, 0x00015B78,
     0x00015D78, 0x00017778,
-    0x00017978, 0x00019378, 
+    0x00017978, 0x00019378,
     0x00019578, 0x0001AF78,
     0x0001B178, 0x0001CB78,
     0x0001CD78, 0x0001E778,
-    0x0001E978, 0x00020378, 
-    0x00020578, 0x00021F78, 
+    0x0001E978, 0x00020378,
+    0x00020578, 0x00021F78,
 };
 
 API_CALLABLE(N(InitLetters)){
@@ -230,12 +231,13 @@ API_CALLABLE(N(ReadLetters)){
                 dma_copy(charset_ROM_START + N(LetterDmaOffsets)[1],
                          charset_ROM_START + N(LetterDmaOffsets)[1] + sizeof(N(LetterBackgroundPal)),
                          N(LetterBackgroundPal));
-                N(LetterImgData)[0].width = 150;
-                N(LetterImgData)[0].palette = N(LetterBackgroundPal);
-                N(LetterImgData)[0].height = 105;
+        
                 N(LetterImgData)[0].raster = N(LetterBackgroundImg);
+                N(LetterImgData)[0].palette = N(LetterBackgroundPal);
+                N(LetterImgData)[0].width = 150;
+                N(LetterImgData)[0].height = 105;
                 N(LetterImgData)[0].format = G_IM_FMT_CI;
-                N(LetterImgData)[0].bitDepth = 0;
+                N(LetterImgData)[0].bitDepth = G_IM_SIZ_4b;
 
                 dma_copy(charset_ROM_START + N(LetterDmaOffsets)[(userIndex * 2) + 2],
                          charset_ROM_START + N(LetterDmaOffsets)[(userIndex * 2) + 2] + sizeof(N(LetterPhotoImg)),
@@ -243,12 +245,13 @@ API_CALLABLE(N(ReadLetters)){
                 dma_copy(charset_ROM_START + N(LetterDmaOffsets)[(userIndex * 2) + 3],
                          charset_ROM_START + N(LetterDmaOffsets)[(userIndex * 2) + 3] + sizeof(N(N(LetterPhotoPal))),
                          N(N(LetterPhotoPal)));
-                N(LetterImgData)[1].width = 70;
+                         
                 N(LetterImgData)[1].raster = N(LetterPhotoImg);
                 N(LetterImgData)[1].palette = N(N(LetterPhotoPal));
+                N(LetterImgData)[1].width = 70;
                 N(LetterImgData)[1].height = 95;
                 N(LetterImgData)[1].format = G_IM_FMT_CI;
-                N(LetterImgData)[1].bitDepth = 1;
+                N(LetterImgData)[1].bitDepth = G_IM_SIZ_8b;
 
                 N(LetterWorkerID) = create_worker_frontUI(NULL, N(worker_draw_letter));
                 N(LetterAlpha) = 0;
