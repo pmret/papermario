@@ -614,10 +614,10 @@ ApiStatus BindNpcDefeat(Evt* script, s32 isInitialCall) {
 ApiStatus SetSelfVar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->owner1.enemy;
-    s32 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args);
+    s32 index = evt_get_variable(script, *args++);
+    s32 value = evt_get_variable(script, *args++);
 
-    owner->varTable[var1] = var2;
+    owner->varTable[index] = value;
     return ApiStatus_DONE2;
 }
 

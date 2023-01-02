@@ -48,7 +48,7 @@ EvtScript N(EVS_NpcAI_SpikeTop) = {
     EVT_END
 };
 
-MobileAISettings N(D_80243BE0_C648F0) = {
+MobileAISettings N(AISettings_BonyBeetle) = {
     .moveSpeed = 1.0f,
     .moveTime = 20,
     .waitTime = 5,
@@ -59,12 +59,12 @@ MobileAISettings N(D_80243BE0_C648F0) = {
     .unk_AI_2C = 1,
 };
 
-EvtScript N(D_80243C10_C64920) = {
+EvtScript N(EVS_NpcAI_BonyBeetle) = {
     EVT_CALL(SetSelfVar, 2, 3)
     EVT_CALL(SetSelfVar, 3, 8)
     EVT_CALL(SetSelfVar, 5, 6)
     EVT_CALL(SetSelfVar, 7, 6)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(D_80243BE0_C648F0)))
+    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(AISettings_BonyBeetle)))
     EVT_RETURN
     EVT_END
 };
@@ -88,8 +88,6 @@ EvtScript N(EVS_NpcAI_BuzzyBeetle_Ceiling) = {
     EVT_RETURN
     EVT_END
 };
-
-// different buzzy beetle / spike top varieties
 
 NpcSettings N(NpcSettings_BuzzyBeetle) = {
     .height = 20,
@@ -118,11 +116,11 @@ NpcSettings N(NpcSettings_SpikeTop) = {
     .onDefeat = &EnemyNpcDefeat,
 };
 
-NpcSettings N(NpcSettings_Unused3) = {
+NpcSettings N(NpcSettings_BonyBeetle) = {
     .height = 24,
     .radius = 24,
     .level = 25,
-    .ai = &N(D_80243C10_C64920),
+    .ai = &N(EVS_NpcAI_BonyBeetle),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };

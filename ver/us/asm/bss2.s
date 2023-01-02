@@ -7,7 +7,7 @@
 
 .section .bss
 
-dlabel D_8010C920
+dlabel PulseStoneNotificationCallback
 .space 4
 
 dlabel D_8010C924
@@ -28,10 +28,10 @@ dlabel TweesterTouchingPlayer
 dlabel D_8010C938
 .space 4
 
-dlabel D_8010C93C
+dlabel ISpyNotificationCallback
 .space 4
 
-dlabel D_8010C940
+dlabel TalkNotificationCallback
 .space 4
 
 dlabel gSpinHistoryBufferPos
@@ -49,7 +49,7 @@ dlabel D_8010C950
 dlabel TweesterTouchingPartner
 .space 4
 
-dlabel D_8010C958
+dlabel InteractNotificationCallback
 .space 4
 
 dlabel PrevPlayerDirection

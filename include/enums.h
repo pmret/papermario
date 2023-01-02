@@ -2717,6 +2717,8 @@ enum VisibilityGroup {
     VIS_GROUP_3             = 3,
     VIS_GROUP_4             = 4,
     VIS_GROUP_5             = 5,
+    VIS_GROUP_6             = 6,
+    VIS_GROUP_7             = 7,
 };
 
 enum ItemSpawnModes {
@@ -3237,6 +3239,20 @@ enum PartnerActions {
     PARTNER_ACTION_PARAKARRY_HOVER  = 1,
     PARTNER_ACTION_WATT_SHINE       = 1,
     PARTNER_ACTION_LAKILESTER_1     = 1,
+};
+
+enum PartnerStates {
+    PARTNER_CMD_NONE                = 0,
+    PARTNER_CMD_INIT                = 1,
+    PARTNER_CMD_INSTA_SWITCH        = 2, // skips put away / take out scripts. assumes valid current partner.
+    PARTNER_CMD_SWITCH              = 3, // assumes valid current partner.
+    PARTNER_CMD_PUT_AWAY            = 4, // switches to null partner.
+    PARTNER_CMD_INSTA_PUT_AWAY      = 5,
+    PARTNER_CMD_TAKE_OUT            = 6, // assumes no current partner.
+    PARTNER_CMD_INSTA_TAKE_OUT      = 7,
+    PARTNER_CMD_USE_ABILITY         = 8,
+    PARTNER_CMD_RESET               = 9,
+    PARTNER_CMD_ABORT               = 10,
 };
 
 /// @see gAreas

@@ -2154,7 +2154,7 @@ void draw_number(s32 value, s32 x, s32 y, s32 charset, s32 palette, s32 opacity,
     s32 texSize = gMsgNumbers[charset].texSize;
 
     y -= 2;
-    if (y > 240U) {
+    if (y < 0 || y > 240) {
         return;
     }
 
@@ -2162,7 +2162,7 @@ void draw_number(s32 value, s32 x, s32 y, s32 charset, s32 palette, s32 opacity,
 
     for (i = 0; i < 10; i++) {
         u8 digit;
-        if (valueStr[i] == 0) {
+        if (valueStr[i] == '\0') {
             break;
         }
 

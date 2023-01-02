@@ -13,6 +13,13 @@
 
 #define NO_DROPS { { F16(100), F16(0), 0, F16(0) }, }
 
+// rename this to NO_DROPS and the above to NO_STAT_DROPS after all map data done
+#define NPC_NO_DROPS { \
+    .dropFlags = NPC_DROP_FLAGS_80, \
+    .heartDrops  = NO_DROPS, \
+    .flowerDrops = NO_DROPS, \
+}
+
 #define STANDARD_HEART_DROPS(attempts) { \
     { F16(20), F16(70), attempts, F16(50) }, \
     { F16(30), F16(60), attempts, F16(50) }, \

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects.h"
+#include "message_ids.h"
 #include "ld_addrs.h"
 #include "entity.h"
 
@@ -357,9 +358,9 @@ void entity_HeartBlock_change_render_script(Entity* entity) {
 }
 
 void entity_HeartBlock_show_tutorial_message(Entity* entity) {
-    if ((!gPlayerData.partners[PARTNER_GOOMBARIO].enabled) && get_global_flag(GF_Tutorial_HeartBlock) == 0) {
+    if (!gPlayerData.partners[PARTNER_GOOMBARIO].enabled && !get_global_flag(GF_Tutorial_HeartBlock)) {
         HeartBlockPrinterClosed = FALSE;
-        msg_get_printer_for_msg(0x1D0001, &HeartBlockPrinterClosed);
+        msg_get_printer_for_msg(MSG_Menus_Tutorial_HeartBlock, &HeartBlockPrinterClosed);
         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
         disable_player_input();

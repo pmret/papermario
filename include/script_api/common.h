@@ -93,6 +93,7 @@ ApiStatus SetCamEnabled(Evt* script, s32 isInitialCall);
 ApiStatus SetCamFlag80(Evt* script, s32 isInitialCall);
 ApiStatus SetCamPerspective(Evt* script, s32 isInitialCall);
 ApiStatus SetCamViewport(Evt* script, s32 isInitialCall);
+ApiStatus func_802CABE8(Evt* script, s32 isInitialCall);
 ApiStatus SetCamBGColor(Evt* script, s32 isInitialCall);
 ApiStatus SetCamTarget(Evt* script, s32 isInitialCall);
 ApiStatus InterpCamTargetPos(Evt* script, s32 isInitialCall);

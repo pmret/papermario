@@ -9,8 +9,8 @@
 }
 
 GameVarRange N(GameByteTable)[] = {
-    VAR_RANGE_BYTE("GSW EVT",   GB_StoryProgress,                 GB_Unused_KMR_00,                 GB_Unused_EVT_02),
-    VAR_RANGE_BYTE("GSW KMR",   GB_Unused_KMR_00,                 GB_MAC01_Merlon_SpinJumpCount,    GB_Unused_KMR_05),
+    VAR_RANGE_BYTE("GSW EVT",   GB_StoryProgress,                 GB_KMR20_MarioReadDiaryFlags_00,  GB_Unused_EVT_02),
+    VAR_RANGE_BYTE("GSW KMR",   GB_KMR20_MarioReadDiaryFlags_00,  GB_MAC01_Merlon_SpinJumpCount,    GB_Unused_KMR_05),
     VAR_RANGE_BYTE("GSW MAC",   GB_MAC01_Merlon_SpinJumpCount,    GB_TIK15_RipCheato_PurchaseCount, GB_Unused_MAC_13),
     VAR_RANGE_BYTE("GSW TIK",   GB_TIK15_RipCheato_PurchaseCount, GB_Unused_KGR_00,                 GB_Unused_TIK_01),
     VAR_RANGE_BYTE("GSW KGR",   GB_Unused_KGR_00,                 GB_Unused_KKJ_00,                 GB_Unused_KGR_00),
