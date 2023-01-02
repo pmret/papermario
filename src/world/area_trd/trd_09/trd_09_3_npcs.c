@@ -1,6 +1,8 @@
 #include "trd_09.h"
 #include "effects.h"
 
+#include "world/common/enemy/complete/BulletBill.h"
+
 API_CALLABLE(N(func_80240000_9BD660)) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
@@ -130,10 +132,26 @@ EvtScript N(D_80240C2C_9BE28C) = {
     EVT_END
 };
 
-s32 N(missing_80240CE4_CE4)[] = {
-    0x002E0001, 0x001A0020, (s32) trd_09_EVS_NpcAuxAI_BillBlaster, 0x00000000, (s32) trd_09_D_80240844_9BDEA4, (s32) trd_09_EVS_NpcHit_BillBlaster, 0x00000000, (s32) trd_09_D_80240B80_9BE1E0,
-    0x00000000, 0x00000000, 0x000A0000, 0x002D0001, 0x000E001F, (s32) trd_09_EVS_NpcAuxAI_BulletBill, 0x00000000, (s32) trd_09_D_80240C1C_9BE27C,
-    (s32) EnemyNpcHit, 0x00000000, (s32) trd_09_D_80240C2C_9BE28C, 0x00000000, 0x00000000, 0x00050000,
+NpcSettings N(missing_80240CE4) = {
+    .defaultAnim = ANIM_BillBlaster_Anim01,
+    .height = 26,
+    .radius = 32,
+    .level = 10,
+    .otherAI = &N(EVS_NpcAuxAI_BillBlaster),
+    .ai = &N(D_80240844_9BDEA4),
+    .onHit = &N(EVS_NpcHit_BillBlaster),
+    .onDefeat = &N(D_80240B80_9BE1E0),
+};
+
+NpcSettings N(missing_80240D10) = {
+    .defaultAnim = ANIM_BulletBill_Anim01,
+    .height = 14,
+    .radius = 31,
+    .level = 5,
+    .otherAI = &N(EVS_NpcAuxAI_BulletBill),
+    .ai = &N(D_80240C1C_9BE27C),
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &N(D_80240C2C_9BE28C),
 };
 
 EvtScript N(EVS_NpcAuxAI_KoopaBros_Red) = {
@@ -532,11 +550,7 @@ StaticNpc N(NpcData_BillBlasters)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000,
         .init = &N(EVS_NpcInit_BillBlaster),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = BILL_BLASTER_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -549,24 +563,7 @@ StaticNpc N(NpcData_BillBlasters)[] = {
                 .detectSize = { 0 },
             }
         },
-        .animations = {
-            .idle   = ANIM_BillBlaster_Anim01,
-            .walk   = ANIM_BillBlaster_Anim01,
-            .run    = ANIM_BillBlaster_Anim01,
-            .chase  = ANIM_BillBlaster_Anim01,
-            .anim_4 = ANIM_BillBlaster_Anim01,
-            .anim_5 = ANIM_BillBlaster_Anim01,
-            .death  = ANIM_BillBlaster_Anim03,
-            .hit    = ANIM_BillBlaster_Anim03,
-            .anim_8 = ANIM_BillBlaster_Anim01,
-            .anim_9 = ANIM_BillBlaster_Anim01,
-            .anim_A = ANIM_BillBlaster_Anim01,
-            .anim_B = ANIM_BillBlaster_Anim01,
-            .anim_C = ANIM_BillBlaster_Anim01,
-            .anim_D = ANIM_BillBlaster_Anim01,
-            .anim_E = ANIM_BillBlaster_Anim01,
-            .anim_F = ANIM_BillBlaster_Anim01,
-        },
+        .animations = BILL_BLASTER_ANIMS,
     },
     {
         .id = NPC_BillBlaster_03,
@@ -574,13 +571,7 @@ StaticNpc N(NpcData_BillBlasters)[] = {
         .pos = { 1275.0f, 0.0f, 5.0f },
         .yaw = 270,
         .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = STANDARD_HEART_DROPS(2),
-            .flowerDrops = STANDARD_FLOWER_DROPS(2),
-            .minCoinBonus = 1,
-            .maxCoinBonus = 1,
-        },
+        .drops = BILL_BLASTER_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -593,24 +584,7 @@ StaticNpc N(NpcData_BillBlasters)[] = {
                 .detectSize = { 0 },
             }
         },
-        .animations = {
-            .idle   = ANIM_BillBlaster_Anim01,
-            .walk   = ANIM_BillBlaster_Anim01,
-            .run    = ANIM_BillBlaster_Anim01,
-            .chase  = ANIM_BillBlaster_Anim01,
-            .anim_4 = ANIM_BillBlaster_Anim01,
-            .anim_5 = ANIM_BillBlaster_Anim01,
-            .death  = ANIM_BillBlaster_Anim03,
-            .hit    = ANIM_BillBlaster_Anim03,
-            .anim_8 = ANIM_BillBlaster_Anim01,
-            .anim_9 = ANIM_BillBlaster_Anim01,
-            .anim_A = ANIM_BillBlaster_Anim01,
-            .anim_B = ANIM_BillBlaster_Anim01,
-            .anim_C = ANIM_BillBlaster_Anim01,
-            .anim_D = ANIM_BillBlaster_Anim01,
-            .anim_E = ANIM_BillBlaster_Anim01,
-            .anim_F = ANIM_BillBlaster_Anim01,
-        },
+        .animations = BILL_BLASTER_ANIMS,
     },
     {
         .id = NPC_BillBlaster_02,
@@ -618,11 +592,7 @@ StaticNpc N(NpcData_BillBlasters)[] = {
         .pos = { 1290.0f, 0.0f, 50.0f },
         .yaw = 270,
         .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = BILL_BLASTER_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -635,516 +605,20 @@ StaticNpc N(NpcData_BillBlasters)[] = {
                 .detectSize = { 0 },
             }
         },
-        .animations = {
-            .idle   = ANIM_BillBlaster_Anim01,
-            .walk   = ANIM_BillBlaster_Anim01,
-            .run    = ANIM_BillBlaster_Anim01,
-            .chase  = ANIM_BillBlaster_Anim01,
-            .anim_4 = ANIM_BillBlaster_Anim01,
-            .anim_5 = ANIM_BillBlaster_Anim01,
-            .death  = ANIM_BillBlaster_Anim03,
-            .hit    = ANIM_BillBlaster_Anim03,
-            .anim_8 = ANIM_BillBlaster_Anim01,
-            .anim_9 = ANIM_BillBlaster_Anim01,
-            .anim_A = ANIM_BillBlaster_Anim01,
-            .anim_B = ANIM_BillBlaster_Anim01,
-            .anim_C = ANIM_BillBlaster_Anim01,
-            .anim_D = ANIM_BillBlaster_Anim01,
-            .anim_E = ANIM_BillBlaster_Anim01,
-            .anim_F = ANIM_BillBlaster_Anim01,
-        },
+        .animations = BILL_BLASTER_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_BulletBill_01) = {
-    .id = NPC_BulletBill_01,
-    .settings = &N(NpcSettings_BulletBill),
-    .pos = { NPC_DISPOSE_LOCATION },
-    .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
-    .territory = {
-        .wander = {
-            .isFlying = TRUE,
-            .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-            .wanderShape = SHAPE_CYLINDER,
-            .centerPos  = { 0, 0, 0 },
-            .wanderSize = { 0 },
-            .detectShape = SHAPE_CYLINDER,
-            .detectPos  = { 0, 0, 0 },
-            .detectSize = { 0 },
-        }
-    },
-    .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
-    },
-};
-
-StaticNpc N(NpcData_BulletBill_02) = {
-    .id = NPC_BulletBill_02,
-    .settings = &N(NpcSettings_BulletBill),
-    .pos = { NPC_DISPOSE_LOCATION },
-    .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
-    .territory = {
-        .wander = {
-            .isFlying = TRUE,
-            .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-            .wanderShape = SHAPE_CYLINDER,
-            .centerPos  = { 0, 0, 0 },
-            .wanderSize = { 0 },
-            .detectShape = SHAPE_CYLINDER,
-            .detectPos  = { 0, 0, 0 },
-            .detectSize = { 0 },
-        }
-    },
-    .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
-    },
-};
-
-StaticNpc N(NpcData_BulletBill_03) = {
-    .id = NPC_BulletBill_03,
-    .settings = &N(NpcSettings_BulletBill),
-    .pos = { NPC_DISPOSE_LOCATION },
-    .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
-    .territory = {
-        .wander = {
-            .isFlying = TRUE,
-            .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-            .wanderShape = SHAPE_CYLINDER,
-            .centerPos  = { 0, 0, 0 },
-            .wanderSize = { 0 },
-            .detectShape = SHAPE_CYLINDER,
-            .detectPos  = { 0, 0, 0 },
-            .detectSize = { 0 },
-        }
-    },
-    .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
-    },
-};
-
-StaticNpc N(NpcData_BulletBill_04) = {
-    .id = NPC_BulletBill_04,
-    .settings = &N(NpcSettings_BulletBill),
-    .pos = { NPC_DISPOSE_LOCATION },
-    .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
-    .territory = {
-        .wander = {
-            .isFlying = TRUE,
-            .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-            .wanderShape = SHAPE_CYLINDER,
-            .centerPos  = { 0, 0, 0 },
-            .wanderSize = { 0 },
-            .detectShape = SHAPE_CYLINDER,
-            .detectPos  = { 0, 0, 0 },
-            .detectSize = { 0 },
-        }
-    },
-    .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
-    },
-};
-
-StaticNpc N(NpcData_BulletBill_05) = {
-    .id = NPC_BulletBill_05,
-    .settings = &N(NpcSettings_BulletBill),
-    .pos = { NPC_DISPOSE_LOCATION },
-    .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
-    .territory = {
-        .wander = {
-            .isFlying = TRUE,
-            .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-            .wanderShape = SHAPE_CYLINDER,
-            .centerPos  = { 0, 0, 0 },
-            .wanderSize = { 0 },
-            .detectShape = SHAPE_CYLINDER,
-            .detectPos  = { 0, 0, 0 },
-            .detectSize = { 0 },
-        }
-    },
-    .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
-    },
-};
-
-StaticNpc N(NpcData_BulletBill_06) = {
-    .id = NPC_BulletBill_06,
-    .settings = &N(NpcSettings_BulletBill),
-    .pos = { NPC_DISPOSE_LOCATION },
-    .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
-    .territory = {
-        .wander = {
-            .isFlying = TRUE,
-            .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-            .wanderShape = SHAPE_CYLINDER,
-            .centerPos  = { 0, 0, 0 },
-            .wanderSize = { 0 },
-            .detectShape = SHAPE_CYLINDER,
-            .detectPos  = { 0, 0, 0 },
-            .detectSize = { 0 },
-        }
-    },
-    .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
-    },
-};
-
-StaticNpc N(NpcData_BulletBill_07) = {
-    .id = NPC_BulletBill_07,
-    .settings = &N(NpcSettings_BulletBill),
-    .pos = { NPC_DISPOSE_LOCATION },
-    .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
-    .territory = {
-        .wander = {
-            .isFlying = TRUE,
-            .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-            .wanderShape = SHAPE_CYLINDER,
-            .centerPos  = { 0, 0, 0 },
-            .wanderSize = { 0 },
-            .detectShape = SHAPE_CYLINDER,
-            .detectPos  = { 0, 0, 0 },
-            .detectSize = { 0 },
-        }
-    },
-    .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
-    },
-};
-
-StaticNpc N(NpcData_BulletBill_08) = {
-    .id = NPC_BulletBill_08,
-    .settings = &N(NpcSettings_BulletBill),
-    .pos = { NPC_DISPOSE_LOCATION },
-    .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
-    .territory = {
-        .wander = {
-            .isFlying = TRUE,
-            .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-            .wanderShape = SHAPE_CYLINDER,
-            .centerPos  = { 0, 0, 0 },
-            .wanderSize = { 0 },
-            .detectShape = SHAPE_CYLINDER,
-            .detectPos  = { 0, 0, 0 },
-            .detectSize = { 0 },
-        }
-    },
-    .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
-    },
-};
-
-StaticNpc N(NpcData_BulletBill_09) = {
-    .id = NPC_BulletBill_09,
-    .settings = &N(NpcSettings_BulletBill),
-    .pos = { NPC_DISPOSE_LOCATION },
-    .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
-    .territory = {
-        .wander = {
-            .isFlying = TRUE,
-            .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-            .wanderShape = SHAPE_CYLINDER,
-            .centerPos  = { 0, 0, 0 },
-            .wanderSize = { 0 },
-            .detectShape = SHAPE_CYLINDER,
-            .detectPos  = { 0, 0, 0 },
-            .detectSize = { 0 },
-        }
-    },
-    .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
-    },
-};
-
-StaticNpc N(NpcData_BulletBill_10) = {
-    .id = NPC_BulletBill_10,
-    .settings = &N(NpcSettings_BulletBill),
-    .pos = { NPC_DISPOSE_LOCATION },
-    .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
-    .territory = {
-        .wander = {
-            .isFlying = TRUE,
-            .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-            .wanderShape = SHAPE_CYLINDER,
-            .centerPos  = { 0, 0, 0 },
-            .wanderSize = { 0 },
-            .detectShape = SHAPE_CYLINDER,
-            .detectPos  = { 0, 0, 0 },
-            .detectSize = { 0 },
-        }
-    },
-    .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
-    },
-};
+StaticNpc N(NpcData_BulletBill_01) = BULLET_BILL_NPC(NPC_BulletBill_01);
+StaticNpc N(NpcData_BulletBill_02) = BULLET_BILL_NPC(NPC_BulletBill_02);
+StaticNpc N(NpcData_BulletBill_03) = BULLET_BILL_NPC(NPC_BulletBill_03);
+StaticNpc N(NpcData_BulletBill_04) = BULLET_BILL_NPC(NPC_BulletBill_04);
+StaticNpc N(NpcData_BulletBill_05) = BULLET_BILL_NPC(NPC_BulletBill_05);
+StaticNpc N(NpcData_BulletBill_06) = BULLET_BILL_NPC(NPC_BulletBill_06);
+StaticNpc N(NpcData_BulletBill_07) = BULLET_BILL_NPC(NPC_BulletBill_07);
+StaticNpc N(NpcData_BulletBill_08) = BULLET_BILL_NPC(NPC_BulletBill_08);
+StaticNpc N(NpcData_BulletBill_09) = BULLET_BILL_NPC(NPC_BulletBill_09);
+StaticNpc N(NpcData_BulletBill_10) = BULLET_BILL_NPC(NPC_BulletBill_10);
 
 StaticNpc N(NpcData_KoopaBros)[] = {
     {

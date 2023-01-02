@@ -178,7 +178,7 @@ s32 N(ExtraAnims_Gooma_Epilogue)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Goompapa_Epilogue)[] = {
+StaticNpc N(NpcData_GoombaFamilypa_Epilogue)[] = {
     {
         .id = NPC_Goompapa_Epilogue,
         .settings = &N(NpcSettings_GoombaFamily_Epilogue),
@@ -453,7 +453,7 @@ extern StaticNpc N(NpcData_Waterfront_Family)[4];
 NpcGroupList N(EpilogueNPCs) = {
     NPC_GROUP(N(NpcData_Luigi_Epilogue)),
     NPC_GROUP(N(NpcData_DojoMembers_Epilogue)),
-    NPC_GROUP(N(NpcData_Goompapa_Epilogue)),
+    NPC_GROUP(N(NpcData_GoombaFamilypa_Epilogue)),
     NPC_GROUP(N(NpcData_ChuckQuizmo_Epilogue)),
     NPC_GROUP(N(NpcData_Toad_01_Epilogue)),
     NPC_GROUP(N(NpcData_SharedTownsfolk)),

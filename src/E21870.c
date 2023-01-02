@@ -71,7 +71,7 @@ void func_802B7140(void) {
     D_802B7D18_E22588->pos.y = playerStatus->position.y + playerStatus->colliderHeight + 8.0f;
     D_802B7D18_E22588->pos.z = playerStatus->position.z;
     playerStatus->animFlags |= PA_FLAGS_40;
-    D_8010C920 = func_802B74F0;
+    PulseStoneNotificationCallback = func_802B74F0;
 }
 
 void func_802B71D4(void) {
@@ -155,7 +155,7 @@ void func_802B74F0(void) {
     D_802B7D18_E22588->pos.z = playerStatus->position.z;
 
     if (!func_802B704C()) {
-        D_8010C920 = NULL;
+        PulseStoneNotificationCallback = NULL;
         playerStatus->animFlags &= ~PA_FLAGS_40;
         return;
     }

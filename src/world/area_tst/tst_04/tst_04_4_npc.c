@@ -51,7 +51,7 @@ NpcSettings N(NpcSettings_Goompa) = {
     .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4,
 };
 
-StaticNpc N(NpcData_Goompa) = {
+StaticNpc N(NpcData_GoombaFamily) = {
     .id = NPC_Goompa,
     .settings = &N(NpcSettings_Goompa),
     .pos = { 80.0f, 40.0f, -84.0f },
@@ -60,6 +60,6 @@ StaticNpc N(NpcData_Goompa) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_Goompa)),
+    NPC_GROUP(N(NpcData_GoombaFamily)),
     {}
 };

@@ -20,5 +20,5 @@ MapSettings N(settings) = {
     .main = &N(EVS_Main),
     .entryList = &N(Entrances),
     .entryCount = ENTRY_COUNT(N(Entrances)),
-    .tattle = { .get = N(get_tattle) },
+    .tattle = { .get = &N(get_tattle) },
 };

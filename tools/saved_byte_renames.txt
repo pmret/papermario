@@ -10,8 +10,8 @@ GameByte(8) GB_Unused_EVT_08
 GameByte(9) GB_Unused_EVT_09
 GameByte(10) GB_Unused_EVT_0A
 GameByte(11) GB_Unused_EVT_0B
-GameByte(12) GB_Unused_KMR_00
-GameByte(13) GB_Unused_KMR_01
+GameByte(12) GB_KMR20_MarioReadDiaryFlags_00
+GameByte(13) GB_KMR20_MarioReadDiaryFlags_01
 GameByte(14) GB_KMR20_MarioReadLetterFlags_00
 GameByte(15) GB_KMR20_MarioReadLetterFlags_01
 GameByte(16) GB_Unused_KMR_04

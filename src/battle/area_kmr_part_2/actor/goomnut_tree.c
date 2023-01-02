@@ -218,7 +218,7 @@ EvtScript N(takeTurn_80223804) = {
 
 #include "common/FoliageTransform.inc.c"
 
-EvtScript N(shakeTree) = {
+EvtScript N(EVS_ShakeTree) = {
     EVT_SET_TIMESCALE(EVT_FLOAT(2.0))
     EVT_USE_BUF(LVar0)
     EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)
@@ -332,7 +332,7 @@ ShakeTreeConfig N(tree) = {
 
 EvtScript N(shake_goomnut_tree) = {
     EVT_SET(LVar0, EVT_PTR(N(tree)))
-    EVT_EXEC_WAIT(N(shakeTree))
+    EVT_EXEC_WAIT(N(EVS_ShakeTree))
     EVT_RETURN
     EVT_END
 };

@@ -42,7 +42,7 @@
 extern s32 D_8010CD20;
 
 // BSS
-BSS s32 D_8010CD34;
+BSS s32 PartnerCommandState;
 BSS PlayerPathElement gPlayerMoveHistory[40];
 BSS s32 gPlayerMoveHistoryIndex;
 BSS s32 D_8010CFBC;
@@ -57,8 +57,8 @@ extern Evt* wPartnerCurrentScript;
 extern s32 wCurrentPartnerId;
 extern s32 wPartnerCurrentScriptID;
 extern s32 D_8010CFE0;
-extern s32 D_8010CFE4;
-extern s32 D_8010CFE8;
+extern s32 NextPartnerID;
+extern s32 NextPartnerCommand;
 extern WorldPartner* wPartner;
 
 extern HudScript HES_Partner0;
@@ -623,7 +623,7 @@ void partner_free_npc(void) {
 }
 
 void _use_partner_ability(void) {
-    static u32 D_8010CD30; // goes into BSS, needs to be static for the function to match
+    static u32 PartnerCommand; // goes into BSS, needs to be static for the function to match
 
     PlayerData* playerData = &gPlayerData;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
@@ -649,25 +649,25 @@ void _use_partner_ability(void) {
         playerStatus->animFlags |= PA_FLAGS_PARTNER_USAGE_STOPPED;
     }
 
-    if (D_8010CFE8 != 0) {
-        D_8010CD30 = D_8010CFE8;
-        D_8010CD34 = 0;
-        D_8010CFE8 = 0;
+    if (NextPartnerCommand != PARTNER_CMD_NONE) {
+        PartnerCommand = NextPartnerCommand;
+        PartnerCommandState = 0;
+        NextPartnerCommand = PARTNER_CMD_NONE;
     }
 
-    if (D_8010CD30 >= 2) {
-        if (D_8010CD30 != 8) {
+    if (PartnerCommand >= PARTNER_CMD_INSTA_SWITCH) {
+        if (PartnerCommand != PARTNER_CMD_USE_ABILITY) {
             D_8010CFC4 = 0;
         }
     }
 
-    switch (D_8010CD30) {
-        case 0:
+    switch (PartnerCommand) {
+        case PARTNER_CMD_NONE:
             break;
-        case 3:
+        case PARTNER_CMD_SWITCH:
             D_8010CFC4 = 3;
-            switch (D_8010CD34) {
-                case 0:
+            switch (PartnerCommandState) {
+                case 0: // put away current partner
                     disable_player_input();
                     sfx_play_sound(SOUND_D);
                     kill_script_by_ID(wPartnerCurrentScriptID);
@@ -675,29 +675,30 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
-                    D_8010CD34 += 1;
+                    PartnerCommandState += 1;
                     set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                     break;
-                case 1:
+                case 1: // free old partner and create new one
                     if (does_script_exist(wPartnerCurrentScriptID)) {
                         break;
                     }
                     set_time_freeze_mode(TIME_FREEZE_NORMAL);
                     partner_free_npc();
-                    playerData->currentPartner = wCurrentPartnerId = D_8010CFE4;
+                    playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
                     partner_create_npc();
                     sfx_play_sound(SOUND_E);
                     wPartner->init(wPartnerNpc);
-                    D_8010CD34 += 1;
-                case 2:
+                    PartnerCommandState += 1;
+                    // fall through
+                case 2: // take out new partner
                     wPartnerCurrentScript = start_script(wPartner->takeOut, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
-                    D_8010CD34 += 1;
+                    PartnerCommandState += 1;
                     set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                     break;
-                case 3:
+                case 3: // resume normal partner behaviour
                     if (does_script_exist(wPartnerCurrentScriptID)) {
                         break;
                     }
@@ -705,21 +706,21 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
-                    D_8010CD30 = 1;
+                    PartnerCommand = PARTNER_CMD_INIT;
                     enable_player_input();
                     set_time_freeze_mode(TIME_FREEZE_NORMAL);
                     break;
             }
             break;
-        case 2:
+        case PARTNER_CMD_INSTA_SWITCH:
             D_8010CFC4 = 3;
-            switch (D_8010CD34) {
+            switch (PartnerCommandState) {
                 case 0:
                     kill_script_by_ID(wPartnerCurrentScriptID);
-                    D_8010CD34 += 1;
+                    PartnerCommandState += 1;
                 case 1:
                     partner_free_npc();
-                    playerData->currentPartner = wCurrentPartnerId = D_8010CFE4;
+                    playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
                     partner_create_npc();
                     wPartnerNpc->pos.x = wSavedPartnerPosX;
                     wPartnerNpc->pos.y = wSavedPartnerPosY;
@@ -729,22 +730,23 @@ void _use_partner_ability(void) {
                     wPartnerNpc->scale.y = 1.0f;
                     wPartnerNpc->scale.z = 1.0f;
                     wPartner->init(wPartnerNpc);
-                    D_8010CD34 += 1;
+                    PartnerCommandState += 1;
+                    // fall through
                 case 2:
-                    D_8010CD34 += 1;
+                    PartnerCommandState += 1;
                     break;
                 case 3:
                     wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
-                    D_8010CD30 = 1;
+                    PartnerCommand = PARTNER_CMD_INIT;
                     break;
             }
             break;
-        case 4:
-            switch (D_8010CD34) {
-                case 0:
+        case PARTNER_CMD_PUT_AWAY:
+            switch (PartnerCommandState) {
+                case 0: // put away current partner
                     disable_player_input();
                     sfx_play_sound(SOUND_D);
                     kill_script_by_ID(wPartnerCurrentScriptID);
@@ -752,44 +754,45 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
-                    D_8010CD34 += 1;
+                    PartnerCommandState += 1;
                     break;
-                case 1:
+                case 1: // free old partner and resume game
                     if (does_script_exist(wPartnerCurrentScriptID)) {
                         break;
                     }
                     partner_free_npc();
-                    D_8010CD30 = 1;
-                    playerData->currentPartner = wCurrentPartnerId = D_8010CFE4;
+                    PartnerCommand = PARTNER_CMD_INIT;
+                    playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
                     enable_player_input();
                     break;
             }
             break;
-        case 5:
-            if (D_8010CD34 == 0) {
+        case PARTNER_CMD_INSTA_PUT_AWAY:
+            if (PartnerCommandState == 0) {
                 kill_script_by_ID(wPartnerCurrentScriptID);
                 partner_free_npc();
-                D_8010CD30 = 1;
-                playerData->currentPartner = wCurrentPartnerId = D_8010CFE4;
+                PartnerCommand = PARTNER_CMD_INIT;
+                playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
                 break;
             }
             break;
-        case 6:
-            switch (D_8010CD34) {
-                case 0:
+        case PARTNER_CMD_TAKE_OUT:
+            switch (PartnerCommandState) {
+                case 0: // create the new partner
                     disable_player_input();
-                    playerData->currentPartner = wCurrentPartnerId = D_8010CFE4;
+                    playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
                     partner_create_npc();
                     wPartner->init(wPartnerNpc);
-                    D_8010CD34 += 1;
-                case 1:
+                    PartnerCommandState += 1;
+                    // fall through
+                case 1: // take out new partner
                     wPartnerCurrentScript = start_script(wPartner->takeOut, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
-                    D_8010CD34 += 1;
+                    PartnerCommandState += 1;
                     break;
-                case 2:
+                case 2: // resume standard partner behaviour
                     if (does_script_exist(wPartnerCurrentScriptID)) {
                         break;
                     }
@@ -797,17 +800,17 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
-                    D_8010CD30 = 1;
+                    PartnerCommand = PARTNER_CMD_INIT;
                     enable_player_input();
                     break;
             }
             break;
-        case 7:
+        case PARTNER_CMD_INSTA_TAKE_OUT:
             D_8010CFC4 = 2;
-            switch (D_8010CD34) {
+            switch (PartnerCommandState) {
                 case 0:
                     disable_player_input();
-                    playerData->currentPartner = wCurrentPartnerId = D_8010CFE4;
+                    playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
                     partner_create_npc();
                     wPartnerNpc->pos.x = wSavedPartnerPosX;
                     wPartnerNpc->pos.y = wSavedPartnerPosY;
@@ -817,28 +820,28 @@ void _use_partner_ability(void) {
                     wPartnerNpc->scale.y = 1.0f;
                     wPartnerNpc->scale.z = 1.0f;
                     wPartner->init(wPartnerNpc);
-                    D_8010CD34 += 1;
+                    PartnerCommandState += 1;
                     break;
                 case 1:
                     wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
-                    D_8010CD30 = 1;
+                    PartnerCommand = PARTNER_CMD_INIT;
                     wPartnerNpc->currentAnim = gPartnerAnimations[wCurrentPartnerId].fly;
                     enable_player_input();
                     break;
             }
             break;
-        case 8:
-            switch (D_8010CD34) {
+        case PARTNER_CMD_USE_ABILITY:
+            switch (PartnerCommandState) {
                 case 0:
                     kill_script_by_ID(wPartnerCurrentScriptID);
                     wPartnerCurrentScript = start_script(wPartner->useAbility, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
-                    D_8010CD34 += 1;
+                    PartnerCommandState += 1;
                     break;
                 case 1:
                     if (does_script_exist(wPartnerCurrentScriptID)) {
@@ -848,19 +851,20 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
-                    D_8010CD30 = 1;
+                    PartnerCommand = PARTNER_CMD_INIT;
                     break;
             }
             break;
-        case 9:
+        case PARTNER_CMD_RESET:
             D_8010CFC4 = 1;
-            switch (D_8010CD34) {
+            switch (PartnerCommandState) {
                 case 0:
                     disable_player_input();
                     wPartner->init(wPartnerNpc);
-                    D_8010CD34 += 1;
+                    PartnerCommandState += 1;
+                    // fall through
                 case 1:
-                    D_8010CD34 += 1;
+                    PartnerCommandState += 1;
                     break;
                 case 2:
                     if (partnerActionStatus->partnerActionState != 1) {
@@ -873,20 +877,20 @@ void _use_partner_ability(void) {
                         wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     }
                     enable_player_input();
-                    D_8010CD30 = 1;
+                    PartnerCommand = PARTNER_CMD_INIT;
                     break;
             }
             break;
-        case 10:
-            if (D_8010CD34 == 0) {
+        case PARTNER_CMD_ABORT:
+            if (PartnerCommandState == 0) {
                 if (does_script_exist(wPartnerCurrentScriptID)) {
                     kill_script_by_ID(wPartnerCurrentScriptID);
                 }
-                D_8010CD34 += 1;
+                PartnerCommandState += 1;
             }
             break;
-        case 1:
-            D_8010CD30 = 0;
+        case PARTNER_CMD_INIT:
+            PartnerCommand = PARTNER_CMD_NONE;
             D_8010CFE0 = 0;
             if (D_8010CFC4 != 3) {
                 D_8010CFC4 = 0;
@@ -895,19 +899,19 @@ void _use_partner_ability(void) {
     }
 }
 
-void switch_to_partner(s32 arg0) {
+void switch_to_partner(s32 partnerID) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (wCurrentPartnerId != arg0) {
+    if (wCurrentPartnerId != partnerID) {
         D_8010CFE0 = 1;
-        D_8010CFE4 = arg0;
+        NextPartnerID = partnerID;
 
-        if (wCurrentPartnerId != 0 && arg0 != 0) {
-            D_8010CFE8 = 3;
-        } else if (arg0 == 0) {
-            D_8010CFE8 = 4;
+        if (wCurrentPartnerId != PARTNER_NONE && partnerID != PARTNER_NONE) {
+            NextPartnerCommand = PARTNER_CMD_SWITCH;
+        } else if (partnerID == PARTNER_NONE) {
+            NextPartnerCommand = PARTNER_CMD_PUT_AWAY;
         } else {
-            D_8010CFE8 = 6;
+            NextPartnerCommand = PARTNER_CMD_TAKE_OUT;
             wSavedPartnerPosX = playerStatus->position.x;
             wSavedPartnerPosY = playerStatus->position.y;
             wSavedPartnerPosZ = playerStatus->position.z;
@@ -915,22 +919,22 @@ void switch_to_partner(s32 arg0) {
     }
 }
 
-void partner_init_after_battle(s32 arg0) {
+void partner_init_after_battle(s32 partnerID) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
-    if (wCurrentPartnerId != arg0) {
+    if (wCurrentPartnerId != partnerID) {
         D_8010CFE0 = 1;
-        D_8010CFE4 = arg0;
+        NextPartnerID = partnerID;
         actionStatus->partnerActionState = 0;
         actionStatus->partnerAction_unk_1 = 0;
 
-        if (wCurrentPartnerId != 0 && arg0 != 0) {
-            D_8010CFE8 = 2;
-        } else if (arg0 == 0) {
-            D_8010CFE8 = 4;
+        if (wCurrentPartnerId != PARTNER_NONE && partnerID != PARTNER_NONE) {
+            NextPartnerCommand = PARTNER_CMD_INSTA_SWITCH;
+        } else if (partnerID == PARTNER_NONE) {
+            NextPartnerCommand = PARTNER_CMD_PUT_AWAY;
         } else {
-            D_8010CFE8 = 6;
+            NextPartnerCommand = PARTNER_CMD_TAKE_OUT;
             wSavedPartnerPosX = playerStatus->position.x;
             wSavedPartnerPosY = playerStatus->position.y;
             wSavedPartnerPosZ = playerStatus->position.z;
@@ -938,17 +942,17 @@ void partner_init_after_battle(s32 arg0) {
     }
 }
 
-void func_800EB2A4(s32 arg0) {
-    if (wCurrentPartnerId != arg0) {
+void func_800EB2A4(s32 partnerID) {
+    if (wCurrentPartnerId != partnerID) {
         D_8010CFE0 = 1;
-        D_8010CFE4 = arg0;
+        NextPartnerID = partnerID;
 
-        if (wCurrentPartnerId != 0 && arg0 != 0) {
-            D_8010CFE8 = 3;
-        } else if (arg0 == 0) {
-            D_8010CFE8 = 5;
+        if (wCurrentPartnerId != PARTNER_NONE && partnerID != PARTNER_NONE) {
+            NextPartnerCommand = PARTNER_CMD_SWITCH;
+        } else if (partnerID == PARTNER_NONE) {
+            NextPartnerCommand = PARTNER_CMD_INSTA_PUT_AWAY;
         } else {
-            D_8010CFE8 = 7;
+            NextPartnerCommand = PARTNER_CMD_INSTA_TAKE_OUT;
         }
     }
 }
@@ -960,11 +964,11 @@ s32 partner_use_ability(void) {
         wPartner != NULL &&
         (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
     {
-        if ((gGameStatusPtr->multiplayerEnabled != 0) && (actionStatus->currentButtons & BUTTON_B)) {
+        if (gGameStatusPtr->multiplayerEnabled && (actionStatus->currentButtons & BUTTON_B)) {
             sfx_play_sound(SOUND_MENU_ERROR);
-        } else if (wCurrentPartnerId != 0) {
+        } else if (wCurrentPartnerId != PARTNER_NONE) {
             D_8010CFE0 = 1;
-            D_8010CFE8 = 8;
+            NextPartnerCommand = PARTNER_CMD_USE_ABILITY;
             _use_partner_ability();
             return TRUE;
         }
@@ -994,7 +998,7 @@ void partner_reset_data(void) {
     get_worker(create_worker_frontUI(_use_partner_ability, NULL));
 
     D_8010CFE0 = 1;
-    D_8010CFE8 = 9;
+    NextPartnerCommand = PARTNER_CMD_RESET;
     wCurrentPartnerId = currentPartner;
 
     if (gGameStatusPtr->keepUsingPartnerOnMapChange != 0) {
@@ -1007,8 +1011,8 @@ void partner_reset_data(void) {
     wSavedPartnerPosY = playerStatus->position.y;
     wSavedPartnerPosZ = playerStatus->position.z;
 
-    if (wCurrentPartnerId == 0) {
-        D_8010CFE8 = 1;
+    if (wCurrentPartnerId == PARTNER_NONE) {
+        NextPartnerCommand = PARTNER_CMD_INIT;
     } else {
         partner_create_npc();
         wPartnerNpc->scale.x = 1.0f;
@@ -1023,7 +1027,7 @@ void partner_initialize_data(void) {
 
     wCurrentPartnerId = 0;
     D_8010CFE0 = 0;
-    D_8010CFE8 = 0;
+    NextPartnerCommand = PARTNER_CMD_NONE;
     D_8010CFC4 = 0;
     actionStatus->actingPartner = 0;
     actionStatus->inputDisabled = 0;
@@ -1038,7 +1042,7 @@ void partner_initialize_data(void) {
 }
 
 s32 partner_test_enemy_collision(Npc* enemy) {
-    if (wCurrentPartnerId != 0 && wPartner->testFirstStrike != NULL) {
+    if (wCurrentPartnerId != PARTNER_NONE && wPartner->testFirstStrike != NULL) {
         return wPartner->testFirstStrike(wPartnerNpc, enemy);
     }
     return FALSE;
@@ -1054,7 +1058,7 @@ EvtScript* partner_get_ride_script(void) {
 }
 
 void partner_handle_before_battle(void) {
-    if (wCurrentPartnerId != 0) {
+    if (wCurrentPartnerId != PARTNER_NONE) {
         s32* scriptID = &wPartnerCurrentScriptID;
 
         if (does_script_exist(*scriptID)) {
@@ -1071,7 +1075,7 @@ void partner_handle_after_battle(void) {
     PartnerActionStatus* actionStatus = &gPartnerActionStatus;
     PlayerData* playerData = &gPlayerData;
 
-    if (wCurrentPartnerId != 0) {
+    if (wCurrentPartnerId != PARTNER_NONE) {
         if (does_script_exist(wPartnerCurrentScriptID) != 0) {
             kill_script_by_ID(wPartnerCurrentScriptID);
         }
@@ -1081,7 +1085,7 @@ void partner_handle_after_battle(void) {
         wPartnerCurrentScriptID = wPartnerCurrentScript->id;
         wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
 
-        D_8010CFE8 = 1;
+        NextPartnerCommand = PARTNER_CMD_INIT;
 
         if (playerData->currentPartner != PARTNER_WATT && actionStatus->actingPartner == PARTNER_WATT) {
             gPlayerStatusPtr->animFlags &= ~PA_FLAGS_USING_WATT;
@@ -1096,30 +1100,25 @@ void partner_handle_after_battle(void) {
 }
 
 void partner_kill_ability_script(void) {
-    s32* scriptID = &wPartnerCurrentScriptID;
-    D_8010CFE8 = 10;
+    NextPartnerCommand = PARTNER_CMD_ABORT;
 
-    if (does_script_exist(*scriptID)) {
-        kill_script_by_ID(*scriptID);
+    if (does_script_exist(wPartnerCurrentScriptID)) {
+        kill_script_by_ID(wPartnerCurrentScriptID);
     }
 }
 
 void partner_suspend_ability_script(void) {
     if (wCurrentPartnerId != NULL) {
-        s32* scriptID = &wPartnerCurrentScriptID;
-
-        if (does_script_exist(*scriptID)) {
-            suspend_all_script(*scriptID);
+        if (does_script_exist(wPartnerCurrentScriptID)) {
+            suspend_all_script(wPartnerCurrentScriptID);
         }
     }
 }
 
 void partner_resume_ability_script(void) {
     if (wCurrentPartnerId != NULL) {
-        s32* scriptID = &wPartnerCurrentScriptID;
-
-        if (does_script_exist(*scriptID)) {
-            resume_all_script(*scriptID);
+        if (does_script_exist(wPartnerCurrentScriptID)) {
+            resume_all_script(wPartnerCurrentScriptID);
         }
     }
 }

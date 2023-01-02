@@ -175,7 +175,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 use_script_lib=False,
             ).disassemble()
 
-            if "shakeTree" in name or "searchBush" in name:
+            if "EVS_ShakeTree" in name or "EVS_SearchBush" in name:
                 symbol_map[struct["vaddr"]][0][1] = name.split("_",1)[0] + ")"
                 if not treePrint:
                     out += f"=======================================\n"

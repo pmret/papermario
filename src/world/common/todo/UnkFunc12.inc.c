@@ -15,7 +15,9 @@ ApiStatus N(UnkFunc12)(Evt* script, s32 isInitialCall) {
     posY = playerStatus->position.y + 10.0f;
     posZ = playerStatus->position.z;
     hitDepth = 40.0f;
+    
     npc_raycast_down_sides(0, &posX, &posY, &posZ, &hitDepth);
+
     playerStatus->position.x = posX;
     playerStatus->position.y = posY;
     playerStatus->position.z = posZ;

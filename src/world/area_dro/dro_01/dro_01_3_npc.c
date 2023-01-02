@@ -302,7 +302,7 @@ StaticNpc N(PassiveNPCs)[] = {
     },
     {
         .id = NPC_ChuckQuizmo,
-        .settings = &N(Quizmo_NpcSettings),
+        .settings = &N(NpcSettings_ChuckQuizmo),
         .pos = { -400.0f, 0.0f, 100.0f },
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .initVarCount = 1,

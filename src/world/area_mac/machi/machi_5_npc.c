@@ -278,7 +278,7 @@ StaticNpc N(NpcData_05)[] = {
     },
 };
 
-StaticNpc N(NpcData_Goompa) = {
+StaticNpc N(NpcData_GoombaFamily) = {
     .id = NPC_Goompa,
     .settings = &N(NpcSettings_Goompa),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -385,7 +385,7 @@ StaticNpc N(NpcData_GoombaKing) = {
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_05), BTL_KMR_PART_1_FORMATION_08),
-    NPC_GROUP(N(NpcData_Goompa), BTL_KMR_PART_1_FORMATION_08),
+    NPC_GROUP(N(NpcData_GoombaFamily), BTL_KMR_PART_1_FORMATION_08),
     NPC_GROUP(N(NpcData_Misstar)),
     {}
 };

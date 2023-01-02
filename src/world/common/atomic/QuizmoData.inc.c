@@ -690,7 +690,7 @@ EvtScript N(EVS_Quizmo_Npc_AI) = {
 };
 
 // primary quizmo NpcSettings
-NpcSettings N(Quizmo_NpcSettings) = {
+NpcSettings N(NpcSettings_ChuckQuizmo) = {
     .defaultAnim = ANIM_ChuckQuizmo_Idle,
     .height = 35,
     .radius = 28,

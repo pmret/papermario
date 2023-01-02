@@ -2523,7 +2523,7 @@ StaticNpc N(NpcData_Bartender)[] = {
 
 StaticNpc N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
-    .settings = &N(Quizmo_NpcSettings),
+    .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { 472.0f, 0.0f, -230.0f },
     .yaw = 90,
     .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_4000,

@@ -163,7 +163,7 @@ EvtScript N(EVS_NpcInit_Goompa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Goompa) = {
+StaticNpc N(NpcData_GoombaFamily) = {
     .id = NPC_Goompa,
     .settings = &N(NpcSettings_Goompa),
     .pos = { -50.0f, 0.0f, 80.0f },
@@ -197,6 +197,6 @@ StaticNpc N(NpcData_Goompa) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_Goompa), BTL_KMR_PART_1_FORMATION_02),
+    NPC_GROUP(N(NpcData_GoombaFamily), BTL_KMR_PART_1_FORMATION_02),
     {}
 };

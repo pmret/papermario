@@ -23,7 +23,7 @@ BSS struct802B7C78 D_802B7CB0;
 
 struct802B7C78* D_802B7C78_E23228 = &D_802B7CB0;
 
-extern void (*D_8010C93C)(void);
+extern void (*ISpyNotificationCallback)(void);
 
 void func_802B735C_E2290C(void);
 
@@ -95,7 +95,7 @@ void func_802B72C0_E22870(void) {
     D_802B7C78_E23228->unk_28 = 0xFF;
 
     gPlayerStatus.animFlags |= PA_FLAGS_100;
-    D_8010C93C = &func_802B735C_E2290C;
+    ISpyNotificationCallback = &func_802B735C_E2290C;
 }
 
 void func_802B735C_E2290C(void) {
@@ -150,7 +150,7 @@ void func_802B735C_E2290C(void) {
 
             if (D_802B7C78_E23228->unk_18++ > 50) {
                 gCurrentHiddenPanels.activateISpy = FALSE;
-                D_8010C93C = NULL;
+                ISpyNotificationCallback = NULL;
                 playerStatus->animFlags &= ~PA_FLAGS_100;
             }
             break;

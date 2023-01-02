@@ -11,7 +11,7 @@
 
 extern f32 D_800F7B48;
 extern s32 D_800F7B4C;
-extern UNK_FUN_PTR(D_8010C93C);
+extern UNK_FUN_PTR(ISpyNotificationCallback);
 extern s8 D_8015A57A;
 extern s32 GoombarioGetTattleID;
 
@@ -986,27 +986,27 @@ void player_render_interact_prompts(void) {
 void check_for_ispy(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (D_8015A57A != 0 && D_8010C93C == NULL) {
+    if (D_8015A57A != 0 && ISpyNotificationCallback == NULL) {
         if (!(playerStatus->animFlags &
             (PA_FLAGS_SPEECH_PROMPT_AVAILABLE | PA_FLAGS_INTERACT_PROMPT_AVAILABLE))) {
             dma_copy(E225B0_ROM_START, E225B0_ROM_END, E225B0_VRAM_DEF);
-            D_8010C93C = func_802B72C0_E22870;
+            ISpyNotificationCallback = func_802B72C0_E22870;
         }
     }
 
-    if (D_8010C93C != NULL) {
-        D_8010C93C();
+    if (ISpyNotificationCallback != NULL) {
+        ISpyNotificationCallback();
     }
 }
 
 void func_800E0330(void) {
-    if ((gPlayerStatusPtr->animFlags & PA_FLAGS_100) && (D_8010C93C != NULL)) {
+    if ((gPlayerStatusPtr->animFlags & PA_FLAGS_100) && (ISpyNotificationCallback != NULL)) {
         func_802B7000_E225B0();
     }
 }
 
 void func_800E0374(void) {
-    D_8010C93C = NULL;
+    ISpyNotificationCallback = NULL;
     gPlayerStatusPtr->animFlags &= ~PA_FLAGS_100;
 }
 
@@ -1014,7 +1014,7 @@ void check_for_pulse_stone(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 dx, dy;
 
-    if (D_8010C920 == NULL) {
+    if (PulseStoneNotificationCallback == NULL) {
         if (gPlayerStatus.animFlags & PA_FLAGS_100) {
             return;
         }
@@ -1039,23 +1039,23 @@ void check_for_pulse_stone(void) {
 
         if (!(gPlayerStatus.animFlags & (PA_FLAGS_SPEECH_PROMPT_AVAILABLE | PA_FLAGS_INTERACT_PROMPT_AVAILABLE))) {
             dma_copy(E21870_ROM_START, E21870_ROM_END, E21870_VRAM_DEF);
-            D_8010C920 = func_802B7140;
+            PulseStoneNotificationCallback = func_802B7140;
         }
     }
 
-    if (D_8010C920 != NULL) {
-        D_8010C920();
+    if (PulseStoneNotificationCallback != NULL) {
+        PulseStoneNotificationCallback();
     }
 }
 
 void func_800E04D0(void) {
-    if ((gPlayerStatusPtr->animFlags & PA_FLAGS_40) && (D_8010C920 != 0)) {
+    if ((gPlayerStatusPtr->animFlags & PA_FLAGS_40) && (PulseStoneNotificationCallback != 0)) {
         func_802B71D4();
     }
 }
 
 void func_800E0514(void) {
-    D_8010C920 = 0;
+    PulseStoneNotificationCallback = NULL;
     gPlayerStatusPtr->animFlags &= ~PA_FLAGS_40;
 }
 
@@ -1074,38 +1074,38 @@ s32 has_valid_conversation_npc(void) {
 }
 
 void check_for_conversation_prompt(void) {
-    if (gPlayerStatus.animFlags & PA_FLAGS_100 || D_8010C958 || D_8010C920) {
+    if (gPlayerStatus.animFlags & PA_FLAGS_100 || InteractNotificationCallback || PulseStoneNotificationCallback) {
         return;
     }
 
-    if (D_8010C940 == NULL) {
+    if (TalkNotificationCallback == NULL) {
         if (gPlayerStatus.inputEnabledCounter || gPlayerStatus.flags & PS_FLAGS_PAUSED) {
             return;
         }
 
         if (has_valid_conversation_npc()) {
-            D_8010C940 = NULL;
+            TalkNotificationCallback = NULL;
             dma_copy(E20EB0_ROM_START, E20EB0_ROM_END, E20EB0_VRAM_DEF);
-            D_8010C940 = func_802B70B4_E201C4;
+            TalkNotificationCallback = func_802B70B4_E201C4;
         } else {
-            D_8010C940 = NULL;
+            TalkNotificationCallback = NULL;
             return;
         }
     }
 
-    if (D_8010C940 != NULL) {
-        D_8010C940();
+    if (TalkNotificationCallback != NULL) {
+        TalkNotificationCallback();
     }
 }
 
 void func_800E0658(void) {
-    if ((gPlayerStatusPtr->animFlags & PA_FLAGS_SPEECH_PROMPT_AVAILABLE) && (D_8010C940 != 0)) {
+    if ((gPlayerStatusPtr->animFlags & PA_FLAGS_SPEECH_PROMPT_AVAILABLE) && (TalkNotificationCallback != 0)) {
         func_802B71C8();
     }
 }
 
 void func_800E069C(void) {
-    D_8010C940 = 0;
+    TalkNotificationCallback = NULL;
     gPlayerStatusPtr->animFlags &= ~PA_FLAGS_SPEECH_PROMPT_AVAILABLE;
 }
 
@@ -1162,11 +1162,11 @@ void check_for_interactables(void) {
     Npc* npc = gPlayerStatus.encounteredNPC;
     s32 phi_s2;
 
-    if ((playerStatus->animFlags & PA_FLAGS_100) || D_8010C940 || D_8010C920) {
+    if ((playerStatus->animFlags & PA_FLAGS_100) || TalkNotificationCallback || PulseStoneNotificationCallback) {
         return;
     }
 
-    if (D_8010C958 == NULL) {
+    if (InteractNotificationCallback == NULL) {
         s32 curInteraction = gCollisionStatus.currentWall;
 
         if (playerStatus->inputEnabledCounter != 0) {
@@ -1252,27 +1252,27 @@ void check_for_interactables(void) {
         return;
     }
 
-    if (D_8010C958 == NULL) {
+    if (InteractNotificationCallback == NULL) {
         dma_copy(E20110_ROM_START, E20110_ROM_END, E20110_VRAM_DEF);
-        D_8010C958 = func_802B70B4_E201C4;
+        InteractNotificationCallback = func_802B70B4_E201C4;
 
     }
 
-    if (D_8010C958 != NULL) {
-        D_8010C958();
+    if (InteractNotificationCallback != NULL) {
+        InteractNotificationCallback();
     }
 }
 
 void func_802B71E8_E202F8(void);
 
 void func_800E0AD0(void) {
-    if ((gPlayerStatusPtr->animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) && (D_8010C958 != 0)) {
+    if ((gPlayerStatusPtr->animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) && (InteractNotificationCallback != 0)) {
         func_802B71E8_E202F8();
     }
 }
 
 void func_800E0B14(void) {
-    D_8010C958 = 0;
+    InteractNotificationCallback = NULL;
     gPlayerStatusPtr->animFlags &= ~PA_FLAGS_INTERACT_PROMPT_AVAILABLE;
 }
 

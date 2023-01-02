@@ -138,7 +138,7 @@ EvtScript N(EVS_Main) = {
         EVT_WAIT(1)
     EVT_END_IF
     EVT_SET(LVar0, EVT_PTR(N(SearchBush_SwitchBush)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(searchBush_Scripted)), TRIGGER_WALL_PRESS_A, COLLIDER_kusa4, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Scripted)), TRIGGER_WALL_PRESS_A, COLLIDER_kusa4, 1, 0)
     EVT_CALL(SetGroupEnabled, MODEL_event_cam, 0)
     EVT_CALL(TranslateGroup, MODEL_g172, NPC_DISPOSE_LOCATION)
     EVT_CALL(TranslateGroup, MODEL_g173, NPC_DISPOSE_LOCATION)
