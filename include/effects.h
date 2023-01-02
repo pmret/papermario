@@ -2357,7 +2357,7 @@ typedef struct FireworkRocketFXData {
     /* 0x24 */ s32 r;
     /* 0x28 */ s32 g;
     /* 0x2C */ s32 b;
-    /* 0x30 */ s32 min_blur_alpha;
+    /* 0x30 */ s32 minBlurAlpha;
     /* 0x34 */ s32 unk_34;
     /* 0x38 */ s32 unk_38;
     /* 0x3C */ s32 unk_3C;

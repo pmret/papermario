@@ -109,7 +109,7 @@ EffectInstance* firework_rocket_main(s32 variation, f32 centerX, f32 centerY, f3
         data->timeLeft = duration + 32;
     }
     data->isExploded = FALSE;
-    data->min_blur_alpha = 255;
+    data->minBlurAlpha = 255;
     data->pos.x = centerX;
     data->pos.y = centerY;
     data->pos.z = centerZ;
@@ -166,7 +166,7 @@ void firework_rocket_update(EffectInstance* effect) {
     lifeTime = data->lifeTime;
 
     if (data->timeLeft < 32) {
-        data->min_blur_alpha = data->timeLeft * 8;
+        data->minBlurAlpha = data->timeLeft * 8;
     }
 
     if (data->isExploded == TRUE) {
@@ -223,7 +223,7 @@ void firework_rocket_render(EffectInstance* effect) {
 void firework_rocket_appendGfx(void* effect) {
     FireworkRocketFXData* data = ((EffectInstance*)effect)->data.fireworkRocket;
     Camera* camera = &gCameras[gCurrentCameraID];
-    s32 min_blur_alpha = data->min_blur_alpha;
+    s32 minBlurAlpha = data->minBlurAlpha;
     s32 variation = data->variation;
     f32 mtx_0_0, mtx_0_1, mtx_0_2, mtx_0_3;
     f32 mtx_1_0, mtx_1_1, mtx_1_2, mtx_1_3;
@@ -250,8 +250,8 @@ void firework_rocket_appendGfx(void* effect) {
         firework_rocket_frame_counter = gGameStatusPtr->frameCounter;
         firework_rocket_blur_alpha = 0;
     }
-    if (firework_rocket_blur_alpha < min_blur_alpha) {
-        firework_rocket_blur_alpha = min_blur_alpha;
+    if (firework_rocket_blur_alpha < minBlurAlpha) {
+        firework_rocket_blur_alpha = minBlurAlpha;
     }
 
     gDPPipeSync(gMasterGfxPos++);
@@ -279,7 +279,7 @@ void firework_rocket_appendGfx(void* effect) {
     centerY = data->pos.y;
     centerZ = data->pos.z;
     radius = data->radius;
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->r, data->g, data->b, min_blur_alpha);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->r, data->g, data->b, minBlurAlpha);
     gDPSetEnvColor(gMasterGfxPos++, data->r, data->g, data->b, 0);
 
     if (isExploded == TRUE) {
