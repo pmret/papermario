@@ -11,21 +11,19 @@
 
 extern s32 spr_allocateBtlComponentsOnWorldHeap;
 
-BSS s32 D_802DFEB0[2];
+BSS s32 spr_asset_entry[2];
 BSS s32 D_802DFEB8[101];
 BSS s32 PlayerRasterSetsLoaded;
 BSS s32 PlayerRasterBufferSetOffsets[13];
 BSS s32 D_802D0084[3]; // unused?
 BSS s32 D_802E0090[0x2E0]; // correct length?
 
-BSS s32 PlayerRasterHeader;
-BSS s32 D_802E0C14[3];
+BSS s32 PlayerRasterHeader[3];
+BSS s32 D_802E0C1C;
 BSS s32 D_802E0C20[14];
 BSS s32 PlayerRasterCacheSize;
 BSS s32 PlayerRasterMaxSize;
-BSS s32 SpriteDataHeader[1]; // ?
-BSS s32 D_802E0C64;
-BSS s32 D_802E0C68;
+BSS s32 SpriteDataHeader[3];
 BSS s32 D_802E0C6C; // unused?
 BSS PlayerSpriteCacheEntry PlayerRasterCache[18];
 
@@ -64,33 +62,35 @@ void spr_swizzle_anim_offsets(s32 arg0, s32 base, void* spriteData) {
     }
 }
 
-SpriteAnimData* spr_load_sprite(s32 idx, s32 arg1, s32 arg2) {
+SpriteAnimData* spr_load_sprite(s32 idx, s32 isPlayerSprite, s32 useTailAlloc) {
     SpriteAnimData* animData;
     s32 base;
     s32 i;
     s32 compressedSize;
     s32* ptr1;
-    s32* ptr2;
-    s32* ptr3;
+    IMG_PTR image;
     s32 count;
     s32** data;
-    s32** data2;
+    s32** palettes;
 
-    if (arg1) {
-        base = D_802E0C64;
+    if (isPlayerSprite) {
+        base = SpriteDataHeader[1];
     } else {
-        base = D_802E0C68;
+        base = SpriteDataHeader[2];
     }
-    // load sprite header
-    nuPiReadRom(base + (idx * 4), &D_802DFEB0, 8U);
 
-    compressedSize = ALIGN8(D_802DFEB0[1] - D_802DFEB0[0]); // rom start, rom end
+    // read current and next sprite offsets, so we can find the difference
+    nuPiReadRom(base + idx * 4, &spr_asset_entry, sizeof(spr_asset_entry));
+
+    compressedSize = ALIGN8(spr_asset_entry[1] - spr_asset_entry[0]);
     data = general_heap_malloc(compressedSize);
-    nuPiReadRom(base + D_802DFEB0[0], data, compressedSize);
+    nuPiReadRom(base + spr_asset_entry[0], data, compressedSize);
 
-    ptr1 = data;
+    ptr1 = (s32*)data;
+    // skip 4 bytes: 'YAY0' signature
     ptr1++;
-    if (arg2) {
+
+    if (useTailAlloc) {
         animData = _heap_malloc_tail(&gSpriteHeapPtr, *ptr1);
     } else {
         animData = _heap_malloc(&gSpriteHeapPtr, *ptr1);
@@ -98,43 +98,48 @@ SpriteAnimData* spr_load_sprite(s32 idx, s32 arg1, s32 arg2) {
     decode_yay0(data, animData);
     general_heap_free(data);
 
-    data = animData->rastersOffset;
+    // swizzle raster array
+    data = (s32**)animData->rastersOffset;
     data = SPR_SWIZZLE(ALIGN4(animData), data);
-    animData->rastersOffset = data;
+    animData->rastersOffset = (SpriteRasterCacheEntry**)data;
 
-    while (1) {
+    while (TRUE) {
         ptr1 = *data;
         if (ptr1 == PTR_LIST_END) {
             break;
         }
+        // swizzle each raster cache entry
         ptr1 = SPR_SWIZZLE(ALIGN4(animData), ptr1);
         *data++ = ptr1;
-        ptr2 = *ptr1;
+        image = ((SpriteRasterCacheEntry*)ptr1)->image;
 
-        if (!arg1) {
-            ptr2 = SPR_SWIZZLE(ALIGN4(animData), ptr2);
-            *ptr1 = ptr2;
+        if (!isPlayerSprite) {
+            // swizzle image pointer in the cache entry
+            image = SPR_SWIZZLE(ALIGN4(animData), image);
+            *ptr1 = (s32)image;
         }
     }
 
-    if (arg1) {
+    if (isPlayerSprite) {
         PlayerRasterBufferSetOffsets[idx] = PlayerRasterSetsLoaded;
         count = D_802E0C20[idx + 1] - D_802E0C20[idx];
-        nuPiReadRom(SpriteDataHeader[0] + D_802E0C14[0] + sizeof(u32) * D_802E0C20[idx], D_802DFEB8, sizeof(D_802DFEB8));
+        nuPiReadRom(SpriteDataHeader[0] + PlayerRasterHeader[1] + sizeof(u32) * D_802E0C20[idx], D_802DFEB8, sizeof(D_802DFEB8));
         for (i = 0; i < count; i++) {
             D_802E0090[PlayerRasterSetsLoaded++] = D_802DFEB8[i];
         }
     }
 
-    data2 = SPR_SWIZZLE(ALIGN4(animData), animData->palettesOffset);
-    animData->palettesOffset = data2;
-    while (1) {
-        ptr1 = *data2;
+    // swizzle palettes array
+    palettes = SPR_SWIZZLE(ALIGN4(animData), animData->palettesOffset);
+    animData->palettesOffset = (PAL_PTR*)palettes;
+    while (TRUE) {
+        ptr1 = *palettes;
         if (ptr1 == PTR_LIST_END) {
             break;
         }
+        // swizzle each palette pointer
         ptr1 = SPR_SWIZZLE(ALIGN4(animData), ptr1);
-        *data2++ = ptr1;
+        *palettes++ = ptr1;
     }
 
     spr_swizzle_anim_offsets(0, 0, animData);
@@ -145,7 +150,7 @@ void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize) {
     void* raster;
     s32 i;
 
-    nuPiReadRom(SPRITE_ROM_START, &SpriteDataHeader, 0xC);
+    nuPiReadRom(SPRITE_ROM_START, &SpriteDataHeader, sizeof(SpriteDataHeader));
     PlayerRasterCacheSize = cacheSize;
     PlayerRasterMaxSize = maxRasterSize;
     SpriteDataHeader[0] += SPRITE_ROM_START;
@@ -165,8 +170,8 @@ void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize) {
         PlayerRasterBufferSetOffsets[i] = 0;
     }
     PlayerRasterSetsLoaded = 0;
-    nuPiReadRom(SpriteDataHeader[0], &PlayerRasterHeader, 0xC);
-    nuPiReadRom(SpriteDataHeader[0] + PlayerRasterHeader, D_802E0C20, 0x38);
+    nuPiReadRom(SpriteDataHeader[0], &PlayerRasterHeader, sizeof(PlayerRasterHeader));
+    nuPiReadRom(SpriteDataHeader[0] + PlayerRasterHeader[0], D_802E0C20, sizeof(D_802E0C20));
 }
 
 IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID) {
@@ -195,7 +200,7 @@ IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID) {
     temp_s0->spriteIndex = playerSpriteID;
     temp_s0->lazyDeleteTime = 2;
     temp_a2 = D_802E0090[PlayerRasterBufferSetOffsets[playerSpriteID] + rasterIndex];
-    nuPiReadRom(*SpriteDataHeader + (temp_a2 & 0xFFFFF), temp_s0->raster, (temp_a2 >> 0x10) & 0xFFF0);
+    nuPiReadRom(SpriteDataHeader[0] + (temp_a2 & 0xFFFFF), temp_s0->raster, (temp_a2 >> 0x10) & 0xFFF0);
     return temp_s0->raster;
 }
 
@@ -324,8 +329,8 @@ void spr_load_npc_extra_anims(SpriteAnimData* header, u32* extraAnimList) {
     header->palettesOffset = writePos;
 
     for (i = 0; i < ARRAY_COUNT(sawRaster) - 1; i++) {
-        raster = *oldPalList++;
-        *(u16**) writePos = raster;
+        raster = (SpriteRasterCacheEntry*)*oldPalList++; // required to match
+        *(u16**)writePos = (u16*)raster;
         writePos += 4;
         if (raster == PTR_LIST_END) {
             break;

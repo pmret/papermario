@@ -846,16 +846,16 @@ s32 spr_update_player_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
         }
     }
 
-    spriteData = spr_playerSprites[spriteId];
+    spriteData = (u32*)spr_playerSprites[spriteId];
     compList = spr_playerCurrentAnimInfo[i].componentList;
 
     if (spriteData == NULL) {
         return 0;
     }
 
-    rasterList = *spriteData;
+    rasterList = (SpriteRasterCacheEntry**)*spriteData;
     spriteData += 4 + animIndex;
-    animList = *spriteData;
+    animList = (SpriteAnimComponent**)*spriteData;
 
     spr_set_anim_timescale(timeScale);
     if ((spriteInstanceID & DRAW_SPRITE_OVERRIDE_ALPHA) ||
@@ -1084,11 +1084,11 @@ s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
     s32 animIndex = animID & 0xFF;
 
     compList = SpriteInstances[i].componentList;
-    spriteData = SpriteInstances[i].spriteData;
+    spriteData = (u32*)SpriteInstances[i].spriteData;
 
-    rasterList = *spriteData;
+    rasterList = (SpriteRasterCacheEntry**)*spriteData;
     spriteData += 4 + animIndex;
-    animList = *spriteData;
+    animList = (SpriteAnimComponent**)*spriteData;
 
     palID = (animID >> 8) & 0xFF;
     spr_set_anim_timescale(timeScale);

@@ -63,7 +63,6 @@ EffectInstance* confetti_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
     s32 np;
     s32 var_v0;
     s32 i;
-    f64 tmp;
 
     switch (arg0) {
         case 0:
