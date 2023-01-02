@@ -11158,137 +11158,135 @@ segments:
     start: 0xA574B0
     vram: 0x80240000
     subsegments:
-    - [0xA574B0, c]
-    - [0xA574F0, c]
-    - [0xA57830, c]
-    - [0xA57D20, data]
-    - [0xA57E40, data]
-    - [0xA58DB0, data]
-    - [0xA59060, data]
-    - [0xA59370]
+    - [0xA574B0, c, kpa_14_0_header]
+    - [0xA574F0, c, kpa_14_1_music]
+    - [0xA574F0, c, kpa_14_2_main]
+    - [0xA57830, c, kpa_14_3_entity]
+    - [0xA57D20, c, kpa_14_4_platforms]
+    - [0xA57D20]
   - name: kpa_15
     dir: world/area_kpa/kpa_15
     type: code
     start: 0xA59390
     vram: 0x80240000
     subsegments:
-    - [0xA59390, c]
-    - [0xA596A0, c]
-    - [0xA59960, data]
-    - [0xA59E30, data]
-    - [0xA5A020]
+    - [0xA59390, c, kpa_15_0_header]
+    - [0xA59390, c, kpa_15_1_music]
+    - [0xA59390, c, kpa_15_2_main]
+    - [0xA596A0, c, kpa_15_3_entity]
+    - [0xA59960]
   - name: kpa_16
     dir: world/area_kpa/kpa_16
     type: code
     start: 0xA5A030
     vram: 0x80240000
     subsegments:
-    - [0xA5A030, c]
-    - [0xA5A340, c]
-    - [0xA5A3D0, data]
-    - [0xA5B180, data]
-    - [0xA5CA10]
+    - [0xA5A030, c, kpa_16_0_header]
+    - [0xA5A030, c, kpa_16_1_music]
+    - [0xA5A030, c, kpa_16_2_main]
+    - [0xA5A340, c, kpa_16_3_entity]
+    - [0xA5A340, c, kpa_16_4_npc]
+    - [0xA5A3D0]
   - name: kpa_17
     dir: world/area_kpa/kpa_17
     type: code
     start: 0xA5CA20
     vram: 0x80240000
     subsegments:
-    - [0xA5CA20, c]
-    - [0xA5CA20, data]
-    - [0xA5CB00, data]
-    - [0xA5CBD0, data]
-    - [0xA5CE90, data]
-    - [0xA5E0B0]
+    - [0xA5CA20, c, kpa_17_0_header]
+    - [0xA5CA20, c, kpa_17_1_music]
+    - [0xA5CA20, c, kpa_17_2_entity]
+    - [0xA5CA20, c, kpa_17_3_main]
+    - [0xA5CA20, c, kpa_17_4_npc]
+    - [0xA5CA20]
   - name: kpa_32
     dir: world/area_kpa/kpa_32
     type: code
     start: 0xA5E0C0
     vram: 0x80240000
     subsegments:
-    - [0xA5E0C0, c]
-    - [0xA5E3D0, data]
-    - [0xA5E4C0, data]
-    - [0xA5E500, data]
-    - [0xA5F060]
+    - [0xA5E0C0, c, kpa_32_0_header]
+    - [0xA5E0C0, c, kpa_32_1_music]
+    - [0xA5E0C0, c, kpa_32_2_entity]
+    - [0xA5E0C0, c, kpa_32_3_main]
+    - [0xA5E3D0]
   - name: kpa_33
     dir: world/area_kpa/kpa_33
     type: code
     start: 0xA5F080
     vram: 0x80240000
     subsegments:
-    - [0xA5F080, c]
-    - [0xA5F390, data]
-    - [0xA5F480, data]
-    - [0xA5F4C0, data]
-    - [0xA60020]
+    - [0xA5F080, c, kpa_33_0_header]
+    - [0xA5F080, c, kpa_33_1_music]
+    - [0xA5F080, c, kpa_33_2_entity]
+    - [0xA5F080, c, kpa_33_3_main]
+    - [0xA5F390]
   - name: kpa_40
     dir: world/area_kpa/kpa_40
     type: code
     start: 0xA60040
     vram: 0x80240000
     subsegments:
-    - [0xA60040, c]
-    - [0xA60040, data]
-    - [0xA60130, data]
-    - [0xA60450]
+    - [0xA60040, c, kpa_40_0_header]
+    - [0xA60040, c, kpa_40_1_music]
+    - [0xA60040, c, kpa_40_2_main]
+    - [0xA60040]
   - name: kpa_41
     dir: world/area_kpa/kpa_41
     type: code
     start: 0xA60470
     vram: 0x80240000
     subsegments:
-    - [0xA60470, c]
-    - [0xA60470, data]
-    - [0xA60560, data]
-    - [0xA609B0]
+    - [0xA60470, c, kpa_41_0_header]
+    - [0xA60470, c, kpa_41_1_music]
+    - [0xA60470, c, kpa_41_2_main]
+    - [0xA60470]
   - name: kpa_50
     dir: world/area_kpa/kpa_50
     type: code
     start: 0xA609D0
     vram: 0x80240000
     subsegments:
-    - [0xA609D0, c]
-    - [0xA623F0, data]
-    - [0xA624D0, data]
-    - [0xA63E60]
+    - [0xA609D0, c, kpa_50_0_header]
+    - [0xA609D0, c, kpa_50_1_music]
+    - [0xA609D0, c, kpa_50_2_main]
+    - [0xA609D0, c, kpa_50_3_npc]
+    - [0xA623F0]
   - name: kpa_51
     dir: world/area_kpa/kpa_51
     type: code
     start: 0xA64090
     vram: 0x80240000
     subsegments:
-    - [0xA64090, c]
-    - [0xA640E0, c]
-    - [0xA65CB0, data]
-    - [0xA65D80, data]
-    - [0xA660E0, data]
-    - [0xA66FB0]
+    - [0xA64090, c, kpa_51_0_header]
+    - [0xA640E0, c, kpa_51_1_music]
+    - [0xA640E0, c, kpa_51_2_main]
+    - [0xA640E0, c, kpa_51_3_npc]
+    - [0xA65CB0]
   - name: kpa_52
     dir: world/area_kpa/kpa_52
     type: code
     start: 0xA67100
     vram: 0x80240000
     subsegments:
-    - [0xA67100, c]
-    - [0xA671E0, c]
-    - [0xA68430, data]
-    - [0xA68510, data]
-    - [0xA68710, data]
-    - [0xA68B40, data]
-    - [0xA6AAC0]
+    - [0xA67100, c, kpa_52_0_header]
+    - [0xA67100, c, kpa_52_1_music]
+    - [0xA67100, c, kpa_52_2_entity]
+    - [0xA671E0, c, kpa_52_3_main]
+    - [0xA671E0, c, kpa_52_4_npc]
+    - [0xA68430]
   - name: kpa_53
     dir: world/area_kpa/kpa_53
     type: code
     start: 0xA6ACA0
     vram: 0x80240000
     subsegments:
-    - [0xA6ACA0, c]
-    - [0xA6AE10, data]
-    - [0xA6AEE0, data]
-    - [0xA6B270, data]
-    - [0xA6CA80, data]
-    - [0xA6CAC0]
+    - [0xA6ACA0, c, kpa_53_0_header]
+    - [0xA6ACF0, c, kpa_53_1_music]
+    - [0xA6ACF0, c, kpa_53_2_main]
+    - [0xA6ACF0, c, kpa_53_3_npc]
+    - [0xA6AE10, c, kpa_53_4_entity]
+    - [0xA6AE10]
   - name: kpa_60
     dir: world/area_kpa/kpa_60
     type: code

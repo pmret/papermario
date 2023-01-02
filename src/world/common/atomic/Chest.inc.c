@@ -11,7 +11,7 @@ EvtScript N(EVS_Chest_ShowGotItem) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_FULL)
     EVT_WAIT(40)
-    EVT_CALL(ShowGotItem, LVar0, 0, 0)
+    EVT_CALL(ShowGotItem, LVar0, FALSE, 0)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
     EVT_RETURN
     EVT_RETURN
