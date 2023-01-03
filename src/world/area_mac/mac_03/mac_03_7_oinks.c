@@ -154,7 +154,7 @@ API_CALLABLE(N(PopLilOinkList)) {
 }
 
 EvtScript N(EVS_TurnCrank) = {
-    EVT_CALL(GetCurrentPartner, LVar0)
+    EVT_CALL(GetPartnerInUse, LVar0)
     EVT_IF_EQ(LVar0, PARTNER_LAKILESTER)
         EVT_RETURN
     EVT_END_IF
@@ -310,7 +310,7 @@ EvtScript N(EVS_UseMachinePrompt) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_IF_EQ(MF_Unk_08, FALSE)
         EVT_EXEC(N(EVS_LilOinkExplanation))
-        EVT_CALL(GetCurrentPartner, LVar0)
+        EVT_CALL(GetPartnerInUse, LVar0)
         EVT_IF_NE(LVar0, PARTNER_NONE)
             EVT_CALL(InterruptUsePartner)
             EVT_WAIT(10)

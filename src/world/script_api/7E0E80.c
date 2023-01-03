@@ -39,7 +39,7 @@ EvtScript ShopEndSpeech = {
 };
 
 EvtScript D_80283F58_7E4DD8 = {
-    EVT_CALL(GetCurrentPartner, LVar1)
+    EVT_CALL(GetPartnerInUse, LVar1)
     EVT_IF_EQ(LVar1, 0)
         EVT_GOTO(10)
     EVT_END_IF

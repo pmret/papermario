@@ -227,7 +227,7 @@
 #define RemoveItemEntity dead_RemoveItemEntity
 #define IsPlayerWithin dead_IsPlayerWithin
 #define IsPlayerOnValidFloor dead_IsPlayerOnValidFloor
-#define GetCurrentPartner dead_GetCurrentPartner
+#define GetPartnerInUse dead_GetPartnerInUse
 #define MakeEntity dead_MakeEntity
 #define Entity_SavePoint dead_Entity_SavePoint
 #define PopSong dead_PopSong

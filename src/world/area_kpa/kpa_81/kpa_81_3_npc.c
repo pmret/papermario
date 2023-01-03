@@ -7,11 +7,11 @@ MAP_STATIC_PAD(1,choice);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
 EvtScript N(EVS_EnsurePartnerNeutral) = {
-    EVT_CALL(GetCurrentPartner, LVar0)
+    EVT_CALL(GetPartnerInUse, LVar0)
     EVT_IF_NE(LVar0, PARTNER_NONE)
         EVT_IF_EQ(LVar0, PARTNER_BOMBETTE)
             EVT_LOOP(0)
-                EVT_CALL(GetCurrentPartner, LVar0)
+                EVT_CALL(GetPartnerInUse, LVar0)
                 EVT_WAIT(1)
                 EVT_IF_EQ(LVar0, PARTNER_NONE)
                     EVT_BREAK_LOOP

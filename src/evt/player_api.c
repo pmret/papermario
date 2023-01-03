@@ -761,11 +761,12 @@ ApiStatus DisablePulseStone(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetCurrentPartner(Evt* script, s32 isInitialCall) {
+// returns partnerID of current partner if using their ability, otherwise PARTNER_NONE
+ApiStatus GetPartnerInUse(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Bytecode outVar = *args++;
     PlayerData* playerData = &gPlayerData;
-    s32 currentPartner = 0;
+    s32 currentPartner = PARTNER_NONE;
 
     if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
         currentPartner = playerData->currentPartner;

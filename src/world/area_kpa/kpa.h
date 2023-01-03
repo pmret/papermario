@@ -78,6 +78,9 @@ extern MapSettings kpa_134_settings;
 
 s32 kpa_51_map_init(void);
 s32 kpa_53_map_init(void);
+s32 kpa_81_map_init(void);
+s32 kpa_82_map_init(void);
+s32 kpa_83_map_init(void);
 s32 kpa_100_map_init(void);
 s32 kpa_101_map_init(void);
 s32 kpa_114_map_init(void);

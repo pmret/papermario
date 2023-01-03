@@ -69,7 +69,7 @@ EvtScript N(EVS_Zipline_TetherCameraToPlayer) = {
 };
 
 EvtScript N(EVS_RideZipline) = {
-    EVT_CALL(GetCurrentPartner, LVar9)
+    EVT_CALL(GetPartnerInUse, LVar9)
     EVT_IF_EQ(LVar9, PARTNER_KOOPER)
         EVT_RETURN
     EVT_END_IF
