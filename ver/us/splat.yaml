@@ -11364,12 +11364,11 @@ segments:
     start: 0xA7A500
     vram: 0x80240000
     subsegments:
-    - [0xA7A500, c]
-    - [0xA7A550, c]
-    - [0xA7A940, data]
-    - [0xA7AA10, data]
-    - [0xA7AF80, data]
-    - [0xA83460]
+    - [0xA7A500, c, kpa_82_0_header]
+    - [0xA7A500, c, kpa_82_1_music]
+    - [0xA7A500, c, kpa_82_2_main]
+    - [0xA7A550, c, kpa_82_3_npc]
+    - [0xA7A940]
   - name: kpa_83
     dir: world/area_kpa/kpa_83
     type: code

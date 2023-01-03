@@ -27,12 +27,12 @@ s32 N(ShopMessages)[] = {
 };
 
 ShopItemData N(Inventory)[] = {
-    { .itemID = ITEM_MYSTERY,       .price =  5, .descMsg = 0x0024002B },
-    { .itemID = ITEM_DIZZY_DIAL,    .price = 25, .descMsg = 0x00240029 },
-    { .itemID = ITEM_POW_BLOCK,     .price = 15, .descMsg = 0x00240027 },
-    { .itemID = ITEM_THUNDER_RAGE,  .price = 30, .descMsg = 0x00240002 },
-    { .itemID = ITEM_MAPLE_SYRUP,   .price = 30, .descMsg = 0x00240017 },
-    { .itemID = ITEM_SUPER_SHROOM,  .price = 30, .descMsg = 0x0024000A },
+    { .itemID = ITEM_MYSTERY,       .price =  5, .descMsg = MSG_ItemShopDesc_Mystery },
+    { .itemID = ITEM_DIZZY_DIAL,    .price = 25, .descMsg = MSG_ItemShopDesc_DizzyDial },
+    { .itemID = ITEM_POW_BLOCK,     .price = 15, .descMsg = MSG_ItemShopDesc_POWBlock },
+    { .itemID = ITEM_THUNDER_RAGE,  .price = 30, .descMsg = MSG_ItemShopDesc_ThunderRage },
+    { .itemID = ITEM_MAPLE_SYRUP,   .price = 30, .descMsg = MSG_ItemShopDesc_MapleSyrup },
+    { .itemID = ITEM_SUPER_SHROOM,  .price = 30, .descMsg = MSG_ItemShopDesc_SuperShroom },
     {}
 };
 

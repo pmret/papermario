@@ -31,8 +31,8 @@ EvtScript N(EVS_ExitDoors_kpa_50_1) = EVT_EXIT_DOUBLE_DOOR(kpa_81_ENTRY_0, "kpa_
 EvtScript N(EVS_ExitDoors_kpa_32_0) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar0, 2)
-    EVT_SET(LVar1, 16)
+    EVT_SET(LVar0, kpa_81_ENTRY_2)
+    EVT_SET(LVar1, COLLIDER_o166)
     EVT_SET(LVar2, EVT_PTR(N(RightDoorModels)))
     EVT_SET(LVar3, EVT_PTR(N(LeftDoorModels)))
     EVT_EXEC(BaseExitDoor)
@@ -58,7 +58,7 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_END
 };
 
-EvtScript N(EV_EnterMap) = {
+EvtScript N(EVS_EnterMap) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(kpa_81_ENTRY_0)
@@ -146,7 +146,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(EnableModel, MODEL_b5, FALSE)
     EVT_CALL(EnableModel, MODEL_b6, FALSE)
     EVT_CALL(EnableModel, MODEL_b7, FALSE)
-    EVT_EXEC(N(EV_EnterMap))
+    EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_RETURN

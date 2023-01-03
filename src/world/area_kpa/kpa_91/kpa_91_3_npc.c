@@ -84,39 +84,39 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
 };
 
 EvtScript N(EVS_NpcInteract_Toad_02) = {
-    EVT_SWITCH(AB_KPA_5)
+    EVT_SWITCH(AB_KPA91_Toad2_Dialogue)
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_0049)
-            EVT_SET(AB_KPA_5, 1)
+            EVT_SET(AB_KPA91_Toad2_Dialogue, 1)
         EVT_CASE_EQ(1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_004A)
-            EVT_SET(AB_KPA_5, 0)
+            EVT_SET(AB_KPA91_Toad2_Dialogue, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcInteract_ToadGuard) = {
-    EVT_SWITCH(AB_KPA_6)
+    EVT_SWITCH(AB_KPA91_Toad3_Dialogue)
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ToadGuard_Blue_Talk, ANIM_ToadGuard_Blue_Idle, 0, MSG_CH8_004B)
-            EVT_SET(AB_KPA_6, 1)
+            EVT_SET(AB_KPA91_Toad3_Dialogue, 1)
         EVT_CASE_EQ(1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ToadGuard_Blue_Talk, ANIM_ToadGuard_Blue_Idle, 0, MSG_CH8_004C)
-            EVT_SET(AB_KPA_6, 0)
+            EVT_SET(AB_KPA91_Toad3_Dialogue, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcInteract_Dryite) = {
-    EVT_SWITCH(AB_KPA_7)
+    EVT_SWITCH(AB_KPA91_Dryite_Dialogue)
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH8_004D)
-            EVT_SET(AB_KPA_7, 1)
+            EVT_SET(AB_KPA91_Dryite_Dialogue, 1)
         EVT_CASE_EQ(1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH8_004E)
-            EVT_SET(AB_KPA_7, 0)
+            EVT_SET(AB_KPA91_Dryite_Dialogue, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

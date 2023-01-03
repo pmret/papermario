@@ -1,4 +1,4 @@
-#include "kpa_83.h"
+#include "kpa_82.h"
 
 s32 N(map_init)(void) {
     sprintf(wMapShapeName, "kpa_80_shape");
@@ -26,26 +26,39 @@ s32 N(LeftDoorModels)[] = {
     -1
 };
 
-EvtScript N(EVS_ExitDoors_kpa_53_1) = EVT_EXIT_DOUBLE_DOOR(kpa_83_ENTRY_0, "kpa_53", kpa_53_ENTRY_1, COLLIDER_deilittw, MODEL_o174, MODEL_o173);
+EvtScript N(EVS_ExitDoors_kpa_113_1) = EVT_EXIT_DOUBLE_DOOR(kpa_82_ENTRY_0, "kpa_113", kpa_113_ENTRY_1, COLLIDER_deilittw, MODEL_o174, MODEL_o173);
 
-EvtScript N(EVS_ExitDoors_kpa_121_0) = {
+EvtScript N(EVS_ExitDoors_kpa_61_0) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar0, kpa_83_ENTRY_1)
+    EVT_SET(LVar0, kpa_82_ENTRY_1)
     EVT_SET(LVar1, COLLIDER_o166)
     EVT_SET(LVar2, EVT_PTR(N(RightDoorModels)))
     EVT_SET(LVar3, EVT_PTR(N(LeftDoorModels)))
     EVT_EXEC(BaseExitDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("kpa_121"), kpa_121_ENTRY_0)
+    EVT_CALL(GotoMap, EVT_PTR("kpa_61"), kpa_61_ENTRY_0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
 
+EvtScript N(EVS_Inspect_FaceDoor) = {
+    EVT_IF_EQ(GF_KPA82_PassedThroughDoor, TRUE)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_SET(GF_KPA82_PassedThroughDoor, TRUE)
+    EVT_RETURN
+    EVT_END
+};
+
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_kpa_53_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_kpa_121_0)), TRIGGER_WALL_PRESS_A, COLLIDER_o166, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_kpa_113_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittw, 1, 0)
+    EVT_IF_EQ(GB_KPA82_BowserDoorState, 0)
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Inspect_FaceDoor)), TRIGGER_WALL_PRESS_A, COLLIDER_o166, 1, 0)
+    EVT_ELSE
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_kpa_61_0)), TRIGGER_WALL_PRESS_A, COLLIDER_o166, 1, 0)
+    EVT_END_IF
     EVT_RETURN
     EVT_END
 };
@@ -53,14 +66,14 @@ EvtScript N(EVS_BindExitTriggers) = {
 EvtScript N(EVS_EnterMap) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(kpa_83_ENTRY_0)
-            EVT_SET(LVar0, kpa_83_ENTRY_0)
+        EVT_CASE_EQ(kpa_82_ENTRY_0)
+            EVT_SET(LVar0, kpa_82_ENTRY_0)
             EVT_SET(LVar2, MODEL_o174)
             EVT_SET(LVar3, MODEL_o173)
             EVT_EXEC(EnterDoubleDoor)
             EVT_EXEC(N(EVS_BindExitTriggers))
-        EVT_CASE_EQ(kpa_83_ENTRY_1)
-            EVT_SET(LVar0, kpa_83_ENTRY_1)
+        EVT_CASE_EQ(kpa_82_ENTRY_1)
+            EVT_SET(LVar0, kpa_82_ENTRY_1)
             EVT_SET(LVar2, EVT_PTR(N(LeftDoorModels)))
             EVT_SET(LVar3, EVT_PTR(N(RightDoorModels)))
             EVT_EXEC_WAIT(BaseEnterDoor)

@@ -516,7 +516,7 @@ MapConfig kpa_maps[] = {
     { MAP(kpa_63), .songVariation = 1, .sfxReverb = 2 },
     { MAP(kpa_70), .songVariation = 1, .sfxReverb = 3 },
     { MAP_WITH_INIT(kpa_81), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(kpa_82,  0x80240460), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(kpa_82), .songVariation = 1, .sfxReverb = 2 },
     { MAP_WITH_INIT(kpa_83), .songVariation = 1, .sfxReverb = 2 },
     { MAP(kpa_90), .songVariation = 1, .sfxReverb = 2 },
     { MAP(kpa_91), .songVariation = 1, .sfxReverb = 2 },

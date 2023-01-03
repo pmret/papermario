@@ -26,7 +26,7 @@ NpcSettings N(NpcSettings_Dummy) = {
 
 EvtScript N(EVS_Scene_LavaShutoff) = {
     EVT_LABEL(0)
-    EVT_IF_EQ(AF_KPA_07, FALSE)
+    EVT_IF_EQ(AF_KPA16_HitSwitch, FALSE)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_IF
