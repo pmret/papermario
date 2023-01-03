@@ -234,7 +234,7 @@ void spr_load_npc_extra_anims(SpriteAnimData* header, u32* extraAnimList) {
     u16** oldPalList;
     u16* palette;
     // one extra required for 'done' sentinel
-    s32 sawRaster[0x64 + 1];
+    s32 sawRaster[100 + 1];
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(sawRaster) - 1; i++) {
@@ -242,7 +242,7 @@ void spr_load_npc_extra_anims(SpriteAnimData* header, u32* extraAnimList) {
     }
 
     while ((extraAnimID = *extraAnimList++) != -1) {
-        compList = header->animListStart[extraAnimID & 0xFF]; // TODO WROGN
+        compList = header->animListStart[extraAnimID & 0xFF];
         while ((comp = *compList++) != PTR_LIST_END) {
             cmdList = comp->cmdList;
             remaining = (s16) comp->cmdListSize / 2;
