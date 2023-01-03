@@ -10,8 +10,8 @@
 #include "mapfs/kpa_01_hit.h"
 
 enum {
-	NPC_BonyBeetle_01           = 0,
-	NPC_BonyBeetle_02           = 1,
+    NPC_BonyBeetle_01           = 0,
+    NPC_BonyBeetle_02           = 1,
 };
 
 #define NAMESPACE kpa_01

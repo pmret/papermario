@@ -147,11 +147,7 @@ StaticNpc N(NpcData_SpikedGoomba) = {
     .yaw = 90,
     .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_400000,
     .init = &N(EVS_NpcInit_SpikedGoomba),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NPC_NO_DROPS,
     .animations = {
         .idle   = ANIM_SpikedGoomba_Idle,
         .walk   = ANIM_SpikedGoomba_Walk,

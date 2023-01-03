@@ -13,11 +13,11 @@
 #include "sprite/npc/WorldKoopatrol.h"
 
 enum {
-	NPC_Magikoopa_01            = 0,
-	NPC_Magikoopa_01_Spell      = 1,
-	NPC_Magikoopa_02            = 2,
-	NPC_Magikoopa_02_Spell      = 3,
-	NPC_Koopatrol               = 4,
+    NPC_Magikoopa_01            = 0,
+    NPC_Magikoopa_01_Spell      = 1,
+    NPC_Magikoopa_02            = 2,
+    NPC_Magikoopa_02_Spell      = 3,
+    NPC_Koopatrol               = 4,
 };
 
 #define NAMESPACE kpa_51

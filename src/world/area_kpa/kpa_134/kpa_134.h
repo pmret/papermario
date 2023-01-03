@@ -12,7 +12,7 @@
 #include "sprite/npc/Toad.h"
 
 enum {
-	NPC_Dummy   = 0,
+    NPC_Dummy   = 0,
 };
 
 enum {

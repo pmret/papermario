@@ -15,12 +15,12 @@
 #include "sprite/npc/BonyBeetle.h"
 
 enum {
-	NPC_Koopatrol_01            = 0,
-	NPC_Koopatrol_02            = 1,
-	NPC_BonyBeetle_01           = 2,
-	NPC_BonyBeetle_02           = 3,
-	NPC_Magikoopa_01            = 4,
-	NPC_Magikoopa_01_Spell      = 5,
+    NPC_Koopatrol_01            = 0,
+    NPC_Koopatrol_02            = 1,
+    NPC_BonyBeetle_01           = 2,
+    NPC_BonyBeetle_02           = 3,
+    NPC_Magikoopa_01            = 4,
+    NPC_Magikoopa_01_Spell      = 5,
 };
 
 enum {

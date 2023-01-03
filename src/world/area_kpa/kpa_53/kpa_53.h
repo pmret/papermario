@@ -12,9 +12,9 @@
 #include "sprite/npc/Duplighost.h"
 
 enum {
-	NPC_Follower        = 0,
-	NPC_Guardian        = 1,
-	NPC_Duplighost      = 2,
+    NPC_Follower        = 0,
+    NPC_Guardian        = 1,
+    NPC_Duplighost      = 2,
 };
 
 #define NAMESPACE kpa_53

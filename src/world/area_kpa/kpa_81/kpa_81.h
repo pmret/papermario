@@ -12,7 +12,7 @@
 #include "sprite/npc/Toad.h"
 
 enum {
-	NPC_Door	= 0,
+    NPC_Door    = 0,
 };
 
 #define NAMESPACE kpa_81

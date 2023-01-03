@@ -13,15 +13,15 @@
 #include "sprite/npc/WorldKoopatrol.h"
 
 enum {
-	NPC_Koopatrol_01            = 0,
-	NPC_Koopatrol_02            = 1,
-	NPC_HammerBros              = 10,
-	NPC_HammerBros_Hammer1      = 11,
-	NPC_HammerBros_Hammer2      = 12,
-	NPC_HammerBros_Hammer3      = 13,
-	NPC_HammerBros_Hammer4      = 14,
-	NPC_HammerBros_Hammer5      = 15,
-	NPC_HammerBros_Hammer6      = 16,
+    NPC_Koopatrol_01            = 0,
+    NPC_Koopatrol_02            = 1,
+    NPC_HammerBros              = 10,
+    NPC_HammerBros_Hammer1      = 11,
+    NPC_HammerBros_Hammer2      = 12,
+    NPC_HammerBros_Hammer3      = 13,
+    NPC_HammerBros_Hammer4      = 14,
+    NPC_HammerBros_Hammer5      = 15,
+    NPC_HammerBros_Hammer6      = 16,
 };
 
 #define NAMESPACE kpa_50

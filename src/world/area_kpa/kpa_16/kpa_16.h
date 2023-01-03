@@ -21,10 +21,10 @@
 #include "sprite/npc/Magikoopa.h"
 
 enum {
-	NPC_Koopatrol_01            = 0,
-	NPC_Koopatrol_02            = 1,
-	NPC_Koopatrol_03            = 2,
-	NPC_Magikoopa               = 3,
+    NPC_Koopatrol_01            = 0,
+    NPC_Koopatrol_02            = 1,
+    NPC_Koopatrol_03            = 2,
+    NPC_Magikoopa               = 3,
 };
 
 #define NAMESPACE kpa_16

@@ -10,12 +10,12 @@
 #include "mapfs/kpa_61_hit.h"
 
 enum {
-	NPC_Koopatrol_01                = 0,
-	NPC_Koopatrol_02                = 1,
-	NPC_FlyingMagikoopa_01          = 2,
-	NPC_FlyingMagikoopa_01_Spell    = 3,
-	NPC_FlyingMagikoopa_02          = 4,
-	NPC_FlyingMagikoopa_02_Spell    = 5,
+    NPC_Koopatrol_01                = 0,
+    NPC_Koopatrol_02                = 1,
+    NPC_FlyingMagikoopa_01          = 2,
+    NPC_FlyingMagikoopa_01_Spell    = 3,
+    NPC_FlyingMagikoopa_02          = 4,
+    NPC_FlyingMagikoopa_02_Spell    = 5,
 };
 
 #define NAMESPACE kpa_61

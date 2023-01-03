@@ -13,14 +13,14 @@
 #include "sprite/npc/ThrownBone.h"
 
 enum {
-	NPC_DryBones_01             = 0,
-	NPC_DryBones_01_Hitbox1     = 1,
-	NPC_DryBones_01_Hitbox2     = 2,
-	NPC_DryBones_01_Hitbox3     = 3,
-	NPC_DryBones_02             = 4,
-	NPC_DryBones_02_Hitbox1     = 5,
-	NPC_DryBones_02_Hitbox2     = 6,
-	NPC_DryBones_02_Hitbox3     = 7,
+    NPC_DryBones_01             = 0,
+    NPC_DryBones_01_Hitbox1     = 1,
+    NPC_DryBones_01_Hitbox2     = 2,
+    NPC_DryBones_01_Hitbox3     = 3,
+    NPC_DryBones_02             = 4,
+    NPC_DryBones_02_Hitbox1     = 5,
+    NPC_DryBones_02_Hitbox2     = 6,
+    NPC_DryBones_02_Hitbox3     = 7,
 };
 
 #define NAMESPACE kpa_111
