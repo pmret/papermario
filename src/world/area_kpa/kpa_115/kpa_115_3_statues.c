@@ -6,7 +6,7 @@
 EvtScript N(EVS_PushMiddleStatue_Impl) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_LOOP(20)
-        EVT_CALL(GetCurrentPartner, LVarA)
+        EVT_CALL(GetPartnerInUse, LVarA)
         EVT_IF_NE(LVarA, 0)
             EVT_SET(LVar8, -1)
             EVT_RETURN
@@ -20,7 +20,7 @@ EvtScript N(EVS_PushMiddleStatue_Impl) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(GetCurrentPartner, LVarA)
+    EVT_CALL(GetPartnerInUse, LVarA)
     EVT_IF_NE(LVarA, 0)
         EVT_SET(LVar8, -1)
         EVT_RETURN

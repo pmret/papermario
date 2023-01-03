@@ -45,7 +45,7 @@ EvtScript N(EVS_SetupPlatforms) = {
         EVT_CALL(UpdateColliderTransform, COLLIDER_o1070)
         EVT_IF_EQ(GF_KPA13_BlueSwitchA, FALSE)
             EVT_LABEL(11)
-            EVT_IF_EQ(AF_KPA_05, FALSE)
+            EVT_IF_EQ(AF_KPA13_HitSwitchA, FALSE)
                 EVT_WAIT(1)
                 EVT_GOTO(11)
             EVT_END_IF
@@ -115,7 +115,7 @@ EvtScript N(EVS_SetupPlatforms) = {
     EVT_CALL(UpdateColliderTransform, COLLIDER_o1072)
     EVT_IF_EQ(GF_KPA13_BlueSwitchB, FALSE)
         EVT_LABEL(12)
-        EVT_IF_EQ(AF_KPA_06, FALSE)
+        EVT_IF_EQ(AF_KPA13_HitSwitchB, FALSE)
             EVT_WAIT(1)
             EVT_GOTO(12)
         EVT_END_IF

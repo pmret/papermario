@@ -29,7 +29,7 @@ s32 N(KeyList)[] = {
 
 EvtScript N(EVS_OnInteract_WaterStoneSocket) = {
     EVT_IF_EQ(GF_FLO10_ShowedLilyTheWaterStone, TRUE)
-        EVT_CALL(GetCurrentPartner, LVarA)
+        EVT_CALL(GetPartnerInUse, LVarA)
         EVT_IF_NE(LVarA, 0)
             EVT_CALL(AwaitPlayerLeave, 0, 0, 19)
             EVT_RETURN

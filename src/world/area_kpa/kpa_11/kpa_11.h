@@ -14,10 +14,10 @@
 #include "sprite/npc/ToadGuard.h"
 
 enum {
-	NPC_Koopatrol               = 0,
-	NPC_Toad_01                 = 1,
-	NPC_Toad_02                 = 2,
-	NPC_ToadGuard               = 3,
+    NPC_Koopatrol               = 0,
+    NPC_Toad_01                 = 1,
+    NPC_Toad_02                 = 2,
+    NPC_ToadGuard               = 3,
 };
 
 #define NAMESPACE kpa_11

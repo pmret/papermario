@@ -78,7 +78,7 @@ EvtScript N(EVS_NpcAI_Buzzar) = {
     EVT_END_LOOP
     EVT_CALL(SetMusicTrack, 0, SONG_MINIBOSS_BATTLE, 0, 8)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetCurrentPartner, LVar0)
+    EVT_CALL(GetPartnerInUse, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(InterruptUsePartner)
         EVT_WAIT(5)

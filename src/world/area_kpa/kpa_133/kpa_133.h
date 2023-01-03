@@ -10,7 +10,7 @@
 #include "mapfs/kpa_133_hit.h"
 
 enum {
-	NPC_Dummy   = 0,
+    NPC_Dummy   = 0,
 };
 
 enum {

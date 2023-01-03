@@ -6,7 +6,7 @@
 EvtScript N(EVS_SpawnSwitch) = {
     EVT_CALL(AwaitPlayerLeave, -10, 10, 50)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetCurrentPartner, LVar0)
+    EVT_CALL(GetPartnerInUse, LVar0)
     EVT_IF_NE(LVar0, 8)
         EVT_LOOP(0)
             EVT_CALL(GetPlayerActionState, LVar0)

@@ -14,9 +14,16 @@
 #include "sprite/npc/WorldKoopatrol.h"
 
 enum {
-	NPC_Koopatrol               = 0,
-	NPC_FlyingMagikoopa      	= 1, // spell uses ID 2
-	NPC_HammerBros              = 50, // hammers use IDs 51-56
+    NPC_Koopatrol               = 0,
+    NPC_FlyingMagikoopa         = 1,
+    NPC_FlyingMagikoopa_Spell   = 2,
+    NPC_HammerBros              = 50,
+    NPC_HammerBros_Hammer1      = 51,
+    NPC_HammerBros_Hammer2      = 52,
+    NPC_HammerBros_Hammer3      = 53,
+    NPC_HammerBros_Hammer4      = 54,
+    NPC_HammerBros_Hammer5      = 55,
+    NPC_HammerBros_Hammer6      = 56,
 };
 
 #define NAMESPACE kpa_102

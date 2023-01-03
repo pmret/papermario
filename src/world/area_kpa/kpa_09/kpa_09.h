@@ -13,10 +13,10 @@
 #include "sprite/npc/ThrownBone.h"
 
 enum {
-	NPC_DryBones                = 0,
-	NPC_DryBones_Bone1          = 1,
-	NPC_DryBones_Bone2          = 2,
-	NPC_DryBones_Bone3          = 3,
+    NPC_DryBones                = 0,
+    NPC_DryBones_Bone1          = 1,
+    NPC_DryBones_Bone2          = 2,
+    NPC_DryBones_Bone3          = 3,
 };
 
 #define NAMESPACE kpa_09

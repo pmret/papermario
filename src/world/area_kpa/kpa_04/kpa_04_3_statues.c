@@ -5,7 +5,7 @@
 
 EvtScript N(EVS_PushStatue_Impl) = {
     EVT_LOOP(20)
-        EVT_CALL(GetCurrentPartner, LVarA)
+        EVT_CALL(GetPartnerInUse, LVarA)
         EVT_IF_NE(LVarA, 0)
             EVT_SET(LVar9, 0)
             EVT_RETURN
@@ -19,7 +19,7 @@ EvtScript N(EVS_PushStatue_Impl) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(GetCurrentPartner, LVarA)
+    EVT_CALL(GetPartnerInUse, LVarA)
     EVT_IF_NE(LVarA, 0)
         EVT_SET(LVar9, 0)
         EVT_RETURN

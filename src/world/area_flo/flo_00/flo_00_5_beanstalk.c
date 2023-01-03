@@ -598,7 +598,7 @@ EvtScript N(EVS_BeanPatch_TryInteract) = {
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
-        EVT_CALL(GetCurrentPartner, LVar0)
+        EVT_CALL(GetPartnerInUse, LVar0)
         EVT_IF_NE(LVar0, PARTNER_NONE)
             EVT_RETURN
         EVT_END_IF

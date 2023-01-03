@@ -84,39 +84,39 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
 };
 
 EvtScript N(EVS_NpcInteract_Toad_02) = {
-    EVT_SWITCH(AB_KPA_5)
+    EVT_SWITCH(AB_KPA91_Toad2_Dialogue)
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_0049)
-            EVT_SET(AB_KPA_5, 1)
+            EVT_SET(AB_KPA91_Toad2_Dialogue, 1)
         EVT_CASE_EQ(1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_004A)
-            EVT_SET(AB_KPA_5, 0)
+            EVT_SET(AB_KPA91_Toad2_Dialogue, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcInteract_ToadGuard) = {
-    EVT_SWITCH(AB_KPA_6)
+    EVT_SWITCH(AB_KPA91_Toad3_Dialogue)
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ToadGuard_Blue_Talk, ANIM_ToadGuard_Blue_Idle, 0, MSG_CH8_004B)
-            EVT_SET(AB_KPA_6, 1)
+            EVT_SET(AB_KPA91_Toad3_Dialogue, 1)
         EVT_CASE_EQ(1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ToadGuard_Blue_Talk, ANIM_ToadGuard_Blue_Idle, 0, MSG_CH8_004C)
-            EVT_SET(AB_KPA_6, 0)
+            EVT_SET(AB_KPA91_Toad3_Dialogue, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcInteract_Dryite) = {
-    EVT_SWITCH(AB_KPA_7)
+    EVT_SWITCH(AB_KPA91_Dryite_Dialogue)
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH8_004D)
-            EVT_SET(AB_KPA_7, 1)
+            EVT_SET(AB_KPA91_Dryite_Dialogue, 1)
         EVT_CASE_EQ(1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH8_004E)
-            EVT_SET(AB_KPA_7, 0)
+            EVT_SET(AB_KPA91_Dryite_Dialogue, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -186,29 +186,8 @@ StaticNpc N(NpcData_Prisoners)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_ToadGuard),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_ToadGuard_Red_Idle,
-            .walk   = ANIM_ToadGuard_Red_Idle,
-            .run    = ANIM_ToadGuard_Red_Idle,
-            .chase  = ANIM_ToadGuard_Red_Idle,
-            .anim_4 = ANIM_ToadGuard_Red_Idle,
-            .anim_5 = ANIM_ToadGuard_Red_Idle,
-            .death  = ANIM_ToadGuard_Red_Idle,
-            .hit    = ANIM_ToadGuard_Red_Idle,
-            .anim_8 = ANIM_ToadGuard_Red_Idle,
-            .anim_9 = ANIM_ToadGuard_Red_Idle,
-            .anim_A = ANIM_ToadGuard_Red_Idle,
-            .anim_B = ANIM_ToadGuard_Red_Idle,
-            .anim_C = ANIM_ToadGuard_Red_Idle,
-            .anim_D = ANIM_ToadGuard_Red_Idle,
-            .anim_E = ANIM_ToadGuard_Red_Idle,
-            .anim_F = ANIM_ToadGuard_Red_Idle,
-        },
+        .drops = TOAD_DROPS,
+        .animations = TOAD_GUARD_RED_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveSoldierB,
     },
     {

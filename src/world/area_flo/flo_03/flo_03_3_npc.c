@@ -381,7 +381,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
             EVT_CALL(GetNpcPos, NPC_MontyMole_01, LVar0, LVar1, LVar2)
             EVT_CALL(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LV_ShouldBurrow)
         EVT_END_IF
-        EVT_CALL(GetCurrentPartner, LVar9)
+        EVT_CALL(GetPartnerInUse, LVar9)
         EVT_IF_EQ(LVar9, PARTNER_BOW)
             EVT_SET(LVar3, FALSE)
         EVT_END_IF
@@ -460,7 +460,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
             EVT_CALL(GetNpcPos, NPC_MontyMole_02, LVar0, LVar1, LVar2)
             EVT_CALL(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LV_ShouldBurrow)
         EVT_END_IF
-        EVT_CALL(GetCurrentPartner, LVar9)
+        EVT_CALL(GetPartnerInUse, LVar9)
         EVT_IF_EQ(LVar9, PARTNER_BOW)
             EVT_SET(LV_ShouldBurrow, FALSE)
         EVT_END_IF
@@ -539,7 +539,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
             EVT_CALL(GetNpcPos, NPC_MontyMole_03, LVar0, LVar1, LVar2)
             EVT_CALL(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LV_ShouldBurrow)
         EVT_END_IF
-        EVT_CALL(GetCurrentPartner, LVar9)
+        EVT_CALL(GetPartnerInUse, LVar9)
         EVT_IF_EQ(LVar9, PARTNER_BOW)
             EVT_SET(LV_ShouldBurrow, FALSE)
         EVT_END_IF
@@ -618,7 +618,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
             EVT_CALL(GetNpcPos, NPC_MontyMole_04, LVar0, LVar1, LVar2)
             EVT_CALL(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LV_ShouldBurrow)
         EVT_END_IF
-        EVT_CALL(GetCurrentPartner, LVar9)
+        EVT_CALL(GetPartnerInUse, LVar9)
         EVT_IF_EQ(LVar9, PARTNER_BOW)
             EVT_SET(LV_ShouldBurrow, FALSE)
         EVT_END_IF

@@ -12,7 +12,7 @@
 #include "sprite/npc/SpikedGoomba.h"
 
 enum {
-	NPC_SpikedGoomba    = 0,
+    NPC_SpikedGoomba    = 0,
 };
 
 enum {

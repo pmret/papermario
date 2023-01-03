@@ -12,8 +12,8 @@
 #include "sprite/npc/Magikoopa.h"
 
 enum {
-	NPC_Magikoopa			= 0,
-	NPC_Magikoopa_Spell		= 1,
+    NPC_Magikoopa           = 0,
+    NPC_Magikoopa_Spell     = 1,
 };
 
 #define NAMESPACE kpa_08
