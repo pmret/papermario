@@ -825,7 +825,54 @@ s32 func_802DDA84(void) {
     return 0;
 }
 
-INCLUDE_ASM(void, "sprite", spr_update_player_sprite, s32 arg0, s32 arg1, f32 arg2);
+s32 spr_update_player_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
+    u32* spriteData;
+    SpriteComponent** compList;
+    SpriteComponent* component;
+    SpriteAnimComponent** animList;
+    SpriteRasterCacheEntry** rasterList;
+    s32 spriteId = ((animID >> 16) & 0xFF) - 1;
+    s32 i = spriteInstanceID & 0xFF;
+    s32 animIndex = animID & 0xFF;
+    D_802DF57C = spriteId;
+
+    if (spr_playerCurrentAnimInfo[i].componentList == NULL) {
+        compList = spr_allocate_components(spr_playerMaxComponents);
+        spr_playerCurrentAnimInfo[i].componentList = compList;
+        while (*compList != PTR_LIST_END) {
+            component = *compList;
+            component->unk_4C = func_8013A704(1);
+            compList++;
+        }
+    }
+
+    spriteData = (u32*)spr_playerSprites[spriteId];
+    compList = spr_playerCurrentAnimInfo[i].componentList;
+
+    if (spriteData == NULL) {
+        return 0;
+    }
+
+    rasterList = (SpriteRasterCacheEntry**)*spriteData;
+    spriteData += 4 + animIndex;
+    animList = (SpriteAnimComponent**)*spriteData;
+
+    spr_set_anim_timescale(timeScale);
+    if ((spriteInstanceID & DRAW_SPRITE_OVERRIDE_ALPHA) ||
+        (animID & ~0x01000000) != (spr_playerCurrentAnimInfo[i].animID & ~0x01000000))
+    {
+        spr_init_anim_state(compList, animList);
+        spr_playerCurrentAnimInfo[i].notifyValue = 0;
+    }
+
+    spr_playerCurrentAnimInfo[i].animID = animID;
+
+    if (!(spriteInstanceID & DRAW_SPRITE_OVERRIDE_YAW)) {
+        spr_playerCurrentAnimInfo[i].notifyValue = spr_component_update(spr_playerCurrentAnimInfo[i].notifyValue,
+                compList, animList, rasterList, 0);
+    }
+    return spr_playerCurrentAnimInfo[i].notifyValue;
+}
 
 s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, u16** paletteList, Matrix4f mtx) {
     s32 i = spriteInstanceID & 0xFF;
@@ -1026,8 +1073,6 @@ s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList) {
     return listIndex;
 }
 
-// animList being odd
-#ifdef NON_MATCHING
 s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
     u32* spriteData;
     SpriteComponent** compList;
@@ -1039,13 +1084,11 @@ s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
     s32 animIndex = animID & 0xFF;
 
     compList = SpriteInstances[i].componentList;
-    spriteData = SpriteInstances[i].spriteData;
+    spriteData = (u32*)SpriteInstances[i].spriteData;
 
-    rasterList = *spriteData++;
-    spriteData++;
-    spriteData++;
-    spriteData++;
-    animList = spriteData[animIndex];
+    rasterList = (SpriteRasterCacheEntry**)*spriteData;
+    spriteData += 4 + animIndex;
+    animList = (SpriteAnimComponent**)*spriteData;
 
     palID = (animID >> 8) & 0xFF;
     spr_set_anim_timescale(timeScale);
@@ -1060,9 +1103,6 @@ s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
     }
     return SpriteInstances[i].notifyValue;
 }
-#else
-INCLUDE_ASM(s32, "sprite", spr_update_sprite, s32 arg0, s32 arg1, f32 arg2);
-#endif
 
 s32 spr_draw_npc_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* paletteList, Matrix4f mtx) {
     s32 i = spriteInstanceID & 0xFF;
@@ -1216,51 +1256,47 @@ void func_802DE894(s32 spriteIdx, s32 foldType, s32 foldArg0, s32 foldArg1, s32 
     func_802DE780(spriteIdx, -1, foldType, foldArg0, foldArg1, foldArg2, foldArg3, foldArg4);
 }
 
-// animList issue
-#ifdef NON_MATCHING
 s32 func_802DE8DC(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* outZ) {
     SpriteInstance* sprite = &SpriteInstances[spriteIdx];
-    SpriteAnimComponent** animList;
-    SpriteComponent** compList;
+    SpriteAnimComponent** animCompList;
     SpriteAnimComponent* anim;
+    SpriteComponent** compList;
     SpriteComponent* comp;
     u8 animID;
     s32 i;
+    u32* spriteData;
 
     if (sprite->componentList == NULL) {
-        return spriteIdx * 20;
+        return;
     }
 
     animID = sprite->currentAnimID;
-    if (animID == 0xFF) {
-        return 0xFF;
-    }
-
-    animList = sprite->spriteData->animListStart[animID];
-    compList = sprite->componentList;
-    i = 0;
-    while (*compList != PTR_LIST_END) {
-        if (i == compListIdx) {
-            do {
-                anim = *animList;
+    if (animID != 255) {
+        spriteData = (u32*)sprite->spriteData;
+        spriteData += 4 + animID;
+        animCompList = (SpriteAnimComponent**)*spriteData;
+        compList = sprite->componentList;
+        i = 0;
+        while (*compList != PTR_LIST_END) {
+            if (i == compListIdx) {
+                anim = *animCompList;
                 comp = *compList;
-            } while (0); // TODO required to match
-            *outX = comp->compPos.x + anim->compOffset.x;
-            *outY = comp->compPos.y + anim->compOffset.y;
-            *outZ = comp->compPos.z + anim->compOffset.z;
-            return 0;
+                *outX = comp->compPos.x + anim->compOffset.x;
+                *outY = comp->compPos.y + anim->compOffset.y;
+                *outZ = comp->compPos.z + anim->compOffset.z;
+                return 0;
+            }
+            i++;
+            compList++;
+            if (*animCompList != PTR_LIST_END) {
+                animCompList++;
+            }
         }
-        i++;
-        compList++;
-        if (*animList != PTR_LIST_END) {
-            animList++;
-        }
+    } else {
+        return;
     }
     return -1;
 }
-#else
-INCLUDE_ASM(s32, "sprite", func_802DE8DC);
-#endif
 
 s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex) {
     SpriteAnimData* sprite = NpcSpriteData[npcSpriteID];

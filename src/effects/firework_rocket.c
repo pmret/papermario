@@ -1,13 +1,15 @@
 #include "common.h"
 #include "effects_internal.h"
 
+void shim_func_80138D88(s32, s32, s32, s32, f32);
+
 void firework_rocket_init(EffectInstance* effect);
 void firework_rocket_render(EffectInstance* effect);
 void firework_rocket_update(EffectInstance* effect);
 void firework_rocket_appendGfx(void* effect);
 
 typedef struct FireworkRocketUnk {
-    /* 0x00 */ Color_RGB8* unk_00;
+    /* 0x00 */ Vec3b* sparks;
     /* 0x04 */ s32 num;
 } FireworkRocketUnk; // size = 0x8
 
@@ -17,42 +19,58 @@ extern Gfx D_09000158_3E54A8[];
 Gfx* D_E010ACC0[] = { D_09000158_3E54A8, D_09000158_3E54A8, D_09000158_3E54A8 };
 Gfx* D_E010ACCC[] = { D_09000080_3E53D0, D_09000080_3E53D0, D_09000080_3E53D0 };
 
-Color_RGB8 D_E010ACD8[] = {
-    {36, 0, 93}, {54, 216, 74}, {67, 0, 74}, {82, 220, 45}, {89, 0, 45}, {60, 190, 45}, {21, 192, 74}, {28, 171, 45}, 
-    {10, 158, 15}, {49, 170, 15}, {166, 216, 15}, {169, 237, 45}, {157, 0, 15}, {184, 203, 45}, {169, 19, 45}, 
-    {166, 40, 15}, {190, 73, 15}, {184, 53, 45}, {211, 77, 45}, {225, 94, 15}, {247, 89, 45}, {184, 53, 45}, 
-    {11, 222, 93}, {0, 0, 100}, {202, 216, 74}, {184, 203, 45}, {211, 179, 45}, {166, 216, 15}, {190, 183, 15}, 
-    {11, 222, 93}, {235, 192, 74}, {21, 192, 74}, {247, 167, 45}, {28, 171, 45}, {10, 98, 15}, {80, 198, 15}, 
-    {97, 235, 15}, {49, 170, 15}, {10, 158, 15}, {225, 162, 15}, {190, 183, 15}, {49, 86, 15}, {80, 58, 15}, 
-    {97, 21, 15}, {227, 235, 93}, {0, 0, 100}, {11, 34, 93}, {227, 21, 93}, {21, 64, 74}, {235, 64, 74}, {202, 40, 74}, 
-    {28, 85, 45}, {67, 0, 74}, {89, 0, 45}, {36, 0, 93}, {0, 0, 100}, {11, 34, 93}, {54, 40, 74}, {21, 64, 74}, 
-    {202, 40, 74}, {184, 53, 45}, {0, 0, 100}, {227, 235, 93}, {189, 0, 74}, {202, 216, 74}, {227, 21, 93}, {0, 0, 100},
-    {60, 190, 45}, {82, 220, 45}, {89, 0, 45}, {28, 171, 45}, {28, 171, 45}, {247, 167, 45}, {211, 179, 45}, 
-    {184, 203, 45}, {60, 66, 45}, {28, 85, 45}, {82, 36, 45}, {28, 85, 45}, {89, 0, 45}, {247, 89, 45}, {211, 77, 45}, 
-    {184, 53, 45}, {49, 86, 15}, {10, 98, 15}, {82, 36, 45}, {97, 235, 15}, {97, 21, 15}, {60, 66, 45}, {28, 85, 45}, 
-    {169, 19, 45}, {190, 73, 15}, {166, 40, 15}, {169, 237, 45}, {184, 203, 45}
+Vec3b D_E010ACD8[] = {
+    {   36,    0,   93 }, {   54,  -40,   74 }, {   67,    0,   74 }, {   82,  -36,   45 }, {   89,    0,   45 },
+    {   60,  -66,   45 }, {   21,  -64,   74 }, {   28,  -85,   45 }, {   10,  -98,   15 }, {   49,  -86,   15 },
+    {  -90,  -40,   15 }, {  -87,  -19,   45 }, {  -99,    0,   15 }, {  -72,  -53,   45 }, {  -87,   19,   45 },
+    {  -90,   40,   15 }, {  -66,   73,   15 }, {  -72,   53,   45 }, {  -45,   77,   45 }, {  -31,   94,   15 },
+    {   -9,   89,   45 }, {  -72,   53,   45 }, {   11,  -34,   93 }, {    0,    0,  100 }, {  -54,  -40,   74 },
+    {  -72,  -53,   45 }, {  -45,  -77,   45 }, {  -90,  -40,   15 }, {  -66,  -73,   15 }, {   11,  -34,   93 },
+    {  -21,  -64,   74 }, {   21,  -64,   74 }, {   -9,  -89,   45 }, {   28,  -85,   45 }, {   10,   98,   15 },
+    {   80,  -58,   15 }, {   97,  -21,   15 }, {   49,  -86,   15 }, {   10,  -98,   15 }, {  -31,  -94,   15 },
+    {  -66,  -73,   15 }, {   49,   86,   15 }, {   80,   58,   15 }, {   97,   21,   15 }, {  -29,  -21,   93 },
+    {    0,    0,  100 }, {   11,   34,   93 }, {  -29,   21,   93 }, {   21,   64,   74 }, {  -21,   64,   74 },
+    {  -54,   40,   74 }, {   28,   85,   45 }, {   67,    0,   74 }, {   89,    0,   45 }, {   36,    0,   93 },
+    {    0,    0,  100 }, {   11,   34,   93 }, {   54,   40,   74 }, {   21,   64,   74 }, {  -54,   40,   74 },
+    {  -72,   53,   45 }, {    0,    0,  100 }, {  -29,  -21,   93 }, {  -67,    0,   74 }, {  -54,  -40,   74 },
+    {  -29,   21,   93 }, {    0,    0,  100 }, {   60,  -66,   45 }, {   82,  -36,   45 }, {   89,    0,   45 },
+    {   28,  -85,   45 }, {   28,  -85,   45 }, {   -9,  -89,   45 }, {  -45,  -77,   45 }, {  -72,  -53,   45 },
+    {   60,   66,   45 }, {   28,   85,   45 }, {   82,   36,   45 }, {   28,   85,   45 }, {   89,    0,   45 },
+    {   -9,   89,   45 }, {  -45,   77,   45 }, {  -72,   53,   45 }, {   49,   86,   15 }, {   10,   98,   15 },
+    {   82,   36,   45 }, {   97,  -21,   15 }, {   97,   21,   15 }, {   60,   66,   45 }, {   28,   85,   45 },
+    {  -87,   19,   45 }, {  -66,   73,   15 }, {  -90,   40,   15 }, {  -87,  -19,   45 }, {  -72,  -53,   45 },
 };
 
-Color_RGB8 D_E010ADF8[] = {
-    {208, 241, 0}, {220, 230, 22}, {211, 0, 22}, {208, 15, 0}, {220, 26, 22}, {227, 40, 0}, {220, 26, 22}, 
-    {242, 43, 22}, {0, 50, 0}, {14, 43, 22}, {8, 231, 43}, {14, 213, 22}, {36, 230, 22}, {26, 0, 43}, {0, 0, 50}, 
-    {0, 206, 0}, {29, 216, 0}, {45, 0, 22}, {29, 216, 0}, {36, 230, 22}, {14, 213, 22}, {48, 241, 0}, {45, 0, 22}, 
-    {0, 206, 0}, {14, 213, 22}, {242, 213, 22}, {227, 216, 0}, {220, 230, 22}, {29, 40, 0}, {36, 26, 22}, {48, 15, 0}, 
-    {14, 43, 22}, {45, 0, 22}, {0, 0, 50}, {8, 25, 43}, {235, 15, 43}, {14, 43, 22}, {26, 0, 43}, {45, 0, 22}, 
-    {0, 0, 50}, {8, 25, 43}, {235, 241, 43}, {0, 0, 50}, {220, 230, 22}, {8, 231, 43}, {0, 0, 50}, {235, 15, 43}, 
-    {235, 241, 43}, {220, 26, 22}, {242, 43, 22}, {220, 26, 22}, {29, 40, 0}, {0, 50, 0}, {36, 26, 22}, {48, 241, 0}, 
-    {48, 15, 0}, {14, 43, 22}, {242, 213, 22}, {208, 241, 0}, {227, 216, 0}, {14, 213, 22}, {211, 0, 22}, 
-    {220, 230, 22}, {227, 40, 0}, {208, 15, 0}, {0, 0, 0}
+Vec3b D_E010ADF8[] = {
+    {  -48,  -15,    0 }, {  -36,  -26,   22 }, {  -45,    0,   22 }, {  -48,   15,    0 }, {  -36,   26,   22 },
+    {  -29,   40,    0 }, {  -36,   26,   22 }, {  -14,   43,   22 }, {    0,   50,    0 }, {   14,   43,   22 },
+    {    8,  -25,   43 }, {   14,  -43,   22 }, {   36,  -26,   22 }, {   26,    0,   43 }, {    0,    0,   50 },
+    {    0,  -50,    0 }, {   29,  -40,    0 }, {   45,    0,   22 }, {   29,  -40,    0 }, {   36,  -26,   22 },
+    {   14,  -43,   22 }, {   48,  -15,    0 }, {   45,    0,   22 }, {    0,  -50,    0 }, {   14,  -43,   22 },
+    {  -14,  -43,   22 }, {  -29,  -40,    0 }, {  -36,  -26,   22 }, {   29,   40,    0 }, {   36,   26,   22 },
+    {   48,   15,    0 }, {   14,   43,   22 }, {   45,    0,   22 }, {    0,    0,   50 }, {    8,   25,   43 },
+    {  -21,   15,   43 }, {   14,   43,   22 }, {   26,    0,   43 }, {   45,    0,   22 }, {    0,    0,   50 },
+    {    8,   25,   43 }, {  -21,  -15,   43 }, {    0,    0,   50 }, {  -36,  -26,   22 }, {    8,  -25,   43 },
+    {    0,    0,   50 }, {  -21,   15,   43 }, {  -21,  -15,   43 }, {  -36,   26,   22 }, {  -14,   43,   22 },
+    {  -36,   26,   22 }, {   29,   40,    0 }, {    0,   50,    0 }, {   36,   26,   22 }, {   48,  -15,    0 },
+    {   48,   15,    0 }, {   14,   43,   22 }, {  -14,  -43,   22 }, {  -48,  -15,    0 }, {  -29,  -40,    0 },
+    {   14,  -43,   22 }, {  -45,    0,   22 }, {  -36,  -26,   22 }, {  -29,   40,    0 }, {  -48,   15,    0 },
+    {    0,    0,    0 },
 };
 
-Color_RGB8 D_E010AEC0[] = {
-    {247, 105, 0}, {239, 87, 0}, {17, 87, 0}, {9, 105, 0}, {0, 122, 0}, {230, 69, 0}, {26, 69, 0}, {221, 52, 0}, 
-    {35, 52, 0}, {202, 49, 0}, {186, 255, 0}, {200, 241, 0}, {0, 200, 0}, {56, 241, 0}, {70, 255, 0}, {54, 49, 0}, 
-    {196, 222, 0}, {239, 191, 0}, {17, 191, 0}, {60, 222, 0}, {85, 13, 0}, {74, 46, 0}, {99, 27, 0}, {93, 43, 0}, 
-    {12, 33, 0}, {12, 22, 0}, {24, 22, 0}, {24, 33, 0}, {12, 10, 0}, {24, 10, 0}, {24, 45, 0}, {232, 33, 0}, 
-    {232, 22, 0}, {232, 45, 0}, {113, 40, 0}, {193, 203, 0}, {190, 183, 0}, {182, 46, 0}, {163, 43, 0}, {35, 182, 0}, 
-    {52, 173, 0}, {12, 45, 0}, {244, 22, 0}, {244, 33, 0}, {232, 10, 0}, {244, 10, 0}, {244, 45, 0}, {204, 173, 0}, 
-    {221, 182, 0}, {186, 164, 0}, {171, 13, 0}, {157, 27, 0}, {143, 40, 0}, {63, 203, 0}, {66, 183, 0}, {70, 164, 0}
+Vec3b D_E010AEC0[] = {
+    {   -9,  105,    0 }, {  -17,   87,    0 }, {   17,   87,    0 }, {    9,  105,    0 }, {    0,  122,    0 },
+    {  -26,   69,    0 }, {   26,   69,    0 }, {  -35,   52,    0 }, {   35,   52,    0 }, {  -54,   49,    0 },
+    {  -70,   -1,    0 }, {  -56,  -15,    0 }, {    0,  -56,    0 }, {   56,  -15,    0 }, {   70,   -1,    0 },
+    {   54,   49,    0 }, {  -60,  -34,    0 }, {  -17,  -65,    0 }, {   17,  -65,    0 }, {   60,  -34,    0 },
+    {   85,   13,    0 }, {   74,   46,    0 }, {   99,   27,    0 }, {   93,   43,    0 }, {   12,   33,    0 },
+    {   12,   22,    0 }, {   24,   22,    0 }, {   24,   33,    0 }, {   12,   10,    0 }, {   24,   10,    0 },
+    {   24,   45,    0 }, {  -24,   33,    0 }, {  -24,   22,    0 }, {  -24,   45,    0 }, {  113,   40,    0 },
+    {  -63,  -53,    0 }, {  -66,  -73,    0 }, {  -74,   46,    0 }, {  -93,   43,    0 }, {   35,  -74,    0 },
+    {   52,  -83,    0 }, {   12,   45,    0 }, {  -12,   22,    0 }, {  -12,   33,    0 }, {  -24,   10,    0 },
+    {  -12,   10,    0 }, {  -12,   45,    0 }, {  -52,  -83,    0 }, {  -35,  -74,    0 }, {  -70,  -92,    0 },
+    {  -85,   13,    0 }, {  -99,   27,    0 }, { -113,   40,    0 }, {   63,  -53,    0 }, {   66,  -73,    0 },
+    {   70,  -92,    0 },
 };
 
 FireworkRocketUnk D_E010AF68[] = {
@@ -61,10 +79,10 @@ FireworkRocketUnk D_E010AF68[] = {
     {D_E010AEC0, ARRAY_COUNT(D_E010AEC0)}
 };
 
-s32 D_E010AF80 = 0;
-s32 D_E010AF84 = 0;
+s32 firework_rocket_frame_counter = 0;
+s32 firework_rocket_blur_alpha = 0;
 
-EffectInstance* firework_rocket_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 arg8) {
+EffectInstance* firework_rocket_main(s32 variation, f32 centerX, f32 centerY, f32 centerZ, f32 velX, f32 velY, f32 velZ, f32 radius, s32 duration) {
     EffectBlueprint bp;
     EffectInstance* effect;
     FireworkRocketFXData* data;
@@ -83,38 +101,38 @@ EffectInstance* firework_rocket_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32
     data = effect->data.fireworkRocket = shim_general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.fireworkRocket != NULL);
 
-    data->unk_00 = arg0;
-    data->unk_20 = 0;
-    if (arg8 <= 0) {
-        data->unk_1C = 1000;
+    data->variation = variation;
+    data->lifeTime = 0;
+    if (duration <= 0) {
+        data->timeLeft = 1000;
     } else {
-        data->unk_1C = arg8 + 32;
+        data->timeLeft = duration + 32;
     }
-    data->unk_4C = 0;
-    data->unk_30 = 255;
-    data->unk_04 = arg1;
-    data->unk_08 = arg2;
-    data->unk_0C = arg3;
-    data->unk_44 = 0;
-    data->unk_10 = arg4;
-    data->unk_14 = arg5;
-    data->unk_18 = arg6;
-    data->unk_48 = arg7;
-    data->unk_2C = 100;
-    data->unk_38 = 100;
-    data->unk_24 = 255;
-    data->unk_28 = 255;
+    data->isExploded = FALSE;
+    data->minBlurAlpha = 255;
+    data->pos.x = centerX;
+    data->pos.y = centerY;
+    data->pos.z = centerZ;
+    data->radius = 0;
+    data->velocity.x = velX;
+    data->velocity.y = velY;
+    data->velocity.z = velZ;
+    data->maxRadius = radius;
+    data->r = 255;
+    data->g = 255;
+    data->b = 100;
     data->unk_34 = 255;
+    data->unk_38 = 100;
     data->unk_3C = 150;
     data->unk_40 = 255;
 
     for (i = 0; i < 4; i++) {
-        data->unk_50[i] = data->unk_04;
-        data->unk_60[i] = data->unk_08 - 1000.0f;
-        data->unk_70[i] = data->unk_0C;
-        data->unk_80[i] = 0;
-        data->unk_90[i] = 0;
-        data->unk_A0[i] = 0;
+        data->rocketX[i] = data->pos.x;
+        data->rocketY[i] = data->pos.y - 1000.0f;
+        data->rocketZ[i] = data->pos.z;
+        data->rocketVelocityX[i] = 0;
+        data->rocketVelocityY[i] = 0;
+        data->rocketVelocityZ[i] = 0;
     }
 
     return effect;
@@ -126,66 +144,66 @@ void firework_rocket_init(EffectInstance* effect) {
 void firework_rocket_update(EffectInstance* effect) {
     FireworkRocketFXData* data = effect->data.fireworkRocket;
     f32 factor;
-    s32 unk_20;
+    s32 lifeTime;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
-        data->unk_1C = 16;
+    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+        data->timeLeft = 16;
     }
 
-    if (data->unk_1C < 1000) {
-        data->unk_1C--;
+    if (data->timeLeft < 1000) {
+        data->timeLeft--;
     }
 
-    data->unk_20++;
+    data->lifeTime++;
 
-    if (data->unk_1C < 0) {
+    if (data->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
 
-    unk_20 = data->unk_20;
+    lifeTime = data->lifeTime;
 
-    if (data->unk_1C < 32) {
-        data->unk_30 = data->unk_1C * 8;
+    if (data->timeLeft < 32) {
+        data->minBlurAlpha = data->timeLeft * 8;
     }
 
-    if (data->unk_4C == 1) {
+    if (data->isExploded == TRUE) {
         factor = 0.95f;
-        data->unk_04 += data->unk_10;
-        data->unk_08 += data->unk_14;
-        data->unk_0C += data->unk_18;
-        data->unk_10 *= factor;
-        data->unk_14 *= factor;
-        data->unk_18 *= factor;
-        data->unk_44 += (data->unk_48 - data->unk_44) * 0.11;
-        data->unk_14 -= 0.15;
+        data->pos.x += data->velocity.x;
+        data->pos.y += data->velocity.y;
+        data->pos.z += data->velocity.z;
+        data->velocity.x *= factor;
+        data->velocity.y *= factor;
+        data->velocity.z *= factor;
+        data->radius += (data->maxRadius - data->radius) * 0.11;
+        data->velocity.y -= 0.15;
         return;
     }
 
-    i = unk_20 & 3;
-    data->unk_50[i] = data->unk_04 - data->unk_10 * (32 - unk_20);
-    data->unk_60[i] = data->unk_08 - data->unk_14 * (32 - unk_20)
-        - (80.0f - shim_sin_deg((s32) (unk_20 * 90) >> 5) * 80.0f);
-    data->unk_70[i] = data->unk_0C - data->unk_18 * (32 - unk_20);
-    data->unk_80[i] = (shim_rand_int(10) - 5) * 0.1f;
-    data->unk_90[i] = (shim_rand_int(10) - 5) * 0.1f;
-    data->unk_A0[i] = (shim_rand_int(10) - 5) * 0.1f;
+    i = lifeTime & 3;
+    data->rocketX[i] = data->pos.x - data->velocity.x * (32 - lifeTime);
+    data->rocketY[i] = data->pos.y - data->velocity.y * (32 - lifeTime)
+        - (80.0f - shim_sin_deg((s32)(lifeTime * 90) >> 5) * 80.0f);
+    data->rocketZ[i] = data->pos.z - data->velocity.z * (32 - lifeTime);
+    data->rocketVelocityX[i] = (shim_rand_int(10) - 5) * 0.1f;
+    data->rocketVelocityY[i] = (shim_rand_int(10) - 5) * 0.1f;
+    data->rocketVelocityZ[i] = (shim_rand_int(10) - 5) * 0.1f;
 
     for (i = 0; i < 4; i++) {
-        data->unk_50[i] += data->unk_80[i];
-        data->unk_60[i] += data->unk_90[i];
-        data->unk_70[i] += data->unk_A0[i];
-        data->unk_90[i] -= 0.15;
-        if (unk_20 >= 27) {
-            data->unk_60[i] = -1000.0f;
+        data->rocketX[i] += data->rocketVelocityX[i];
+        data->rocketY[i] += data->rocketVelocityY[i];
+        data->rocketZ[i] += data->rocketVelocityZ[i];
+        data->rocketVelocityY[i] -= 0.15;
+        if (lifeTime >= 27) {
+            data->rocketY[i] = -1000.0f;
         }
     }
 
-    if (unk_20 >= 32) {
-        data->unk_4C = 1;
-        data->unk_20 = 1;
+    if (lifeTime >= 32) {
+        data->isExploded = TRUE;
+        data->lifeTime = 1;
     }
 }
 
@@ -202,4 +220,120 @@ void firework_rocket_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-INCLUDE_ASM(s32, "effects/firework_rocket", firework_rocket_appendGfx);
+void firework_rocket_appendGfx(void* effect) {
+    FireworkRocketFXData* data = ((EffectInstance*)effect)->data.fireworkRocket;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    s32 minBlurAlpha = data->minBlurAlpha;
+    s32 variation = data->variation;
+    f32 mtx_0_0, mtx_0_1, mtx_0_2, mtx_0_3;
+    f32 mtx_1_0, mtx_1_1, mtx_1_2, mtx_1_3;
+    f32 mtx_2_0, mtx_2_1, mtx_2_2, mtx_2_3;
+    f32 mtx_3_0, mtx_3_1, mtx_3_2, mtx_3_3;
+    f32 sinTheta, cosTheta;
+    f32 centerX, centerY, centerZ;
+    f32 negYaw;
+    f32 x, y, z;
+    f32 outX, outY, outZ, outS;
+    f32 radius;
+    s32 isExploded;
+    s32 numSparks;
+    Vec3b* sparkDir;
+    s32 i;
+
+    negYaw = -camera->currentYaw;
+    sinTheta = shim_sin_deg(negYaw);
+    cosTheta = shim_cos_deg(negYaw);
+    isExploded = data->isExploded;
+    if (firework_rocket_frame_counter != gGameStatusPtr->frameCounter) {
+        // draw previous frame to create motion blur effect
+        shim_func_80138D88(10, 10, SCREEN_WIDTH - 10, SCREEN_HEIGHT - 10, firework_rocket_blur_alpha * 0.8);
+        firework_rocket_frame_counter = gGameStatusPtr->frameCounter;
+        firework_rocket_blur_alpha = 0;
+    }
+    if (firework_rocket_blur_alpha < minBlurAlpha) {
+        firework_rocket_blur_alpha = minBlurAlpha;
+    }
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    mtx_0_0 = camera->perspectiveMatrix[0][0];
+    mtx_0_1 = camera->perspectiveMatrix[0][1];
+    mtx_0_2 = camera->perspectiveMatrix[0][2];
+    mtx_0_3 = camera->perspectiveMatrix[0][3];
+    mtx_1_0 = camera->perspectiveMatrix[1][0];
+    mtx_1_1 = camera->perspectiveMatrix[1][1];
+    mtx_1_2 = camera->perspectiveMatrix[1][2];
+    mtx_1_3 = camera->perspectiveMatrix[1][3];
+    mtx_2_0 = camera->perspectiveMatrix[2][0];
+    mtx_2_1 = camera->perspectiveMatrix[2][1];
+    mtx_2_2 = camera->perspectiveMatrix[2][2];
+    mtx_2_3 = camera->perspectiveMatrix[2][3];
+    mtx_3_0 = camera->perspectiveMatrix[3][0];
+    mtx_3_1 = camera->perspectiveMatrix[3][1];
+    mtx_3_2 = camera->perspectiveMatrix[3][2];
+    mtx_3_3 = camera->perspectiveMatrix[3][3];
+
+    gSPDisplayList(gMasterGfxPos++, D_E010ACCC[variation]);
+    centerX = data->pos.x;
+    centerY = data->pos.y;
+    centerZ = data->pos.z;
+    radius = data->radius;
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->r, data->g, data->b, minBlurAlpha);
+    gDPSetEnvColor(gMasterGfxPos++, data->r, data->g, data->b, 0);
+
+    if (isExploded == TRUE) {
+        sparkDir = D_E010AF68[variation].sparks;
+        numSparks = D_E010AF68[variation].num;
+    } else {
+        sparkDir = NULL;
+        numSparks = 4;
+    }
+
+    for (i = 0; i < numSparks; i++, sparkDir++) {
+        if (isExploded == TRUE) {
+            // create blinking effect
+            if (shim_rand_int(16) < 6) {
+                continue;
+            }
+            x = (sparkDir->x * cosTheta + sparkDir->z * sinTheta) * radius + centerX;
+            y = sparkDir->y * radius + centerY;
+            z = (-sparkDir->x * sinTheta + sparkDir->z * cosTheta) * radius + centerZ;
+        } else {
+            x = data->rocketX[i];
+            y = data->rocketY[i];
+            z = data->rocketZ[i];
+        }
+
+        // convert world coords to screen coords
+        outX = mtx_0_0 * x + mtx_1_0 * y + mtx_2_0 * z + mtx_3_0;
+        outY = mtx_0_1 * x + mtx_1_1 * y + mtx_2_1 * z + mtx_3_1;
+        outZ = mtx_0_2 * x + mtx_1_2 * y + mtx_2_2 * z + mtx_3_2;
+        outS = mtx_0_3 * x + mtx_1_3 * y + mtx_2_3 * z + mtx_3_3;
+
+        if (outS != 0.0f) {
+            outS = 1.0f / outS;
+            x = outX * outS;
+            y = -outY * outS;
+            z = outZ * outS;
+
+            if (z <= -1.0f || x <= -1.0f || x >= 1.0f || y <= -1.0f || y >= 1.0f) {
+                continue;
+            }
+            z = 4.0f; // required to match
+
+            x = (x + 1.0f) * camera->viewportW * 0.5;
+            x += camera->viewportStartX;
+            x *= 4.0f;
+
+            y = (y + 1.0f) * camera->viewportH * 0.5;
+            y += camera->viewportStartY;
+            y *= 4.0f;
+
+            gSPScisTextureRectangle(gMasterGfxPos++,
+                x, y, x + 8.0f, y + 8.0f,
+                G_TX_RENDERTILE, 4 << 5, 4 << 5, 16 << 10, 16 << 10);
+        }
+    }
+}
+
