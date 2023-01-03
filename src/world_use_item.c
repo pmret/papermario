@@ -149,7 +149,7 @@ EvtScript EVS_WorldItem_PlayDrinkingSounds = {
 EvtScript EVS_World_UseItem = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetCurrentPartner, LVar0)
+    EVT_CALL(GetPartnerInUse, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(InterruptUsePartner)
         EVT_WAIT(20)

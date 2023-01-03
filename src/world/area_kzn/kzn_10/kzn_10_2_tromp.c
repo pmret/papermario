@@ -127,7 +127,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, UNK_FUNC_50_LVar1, LVar2, 0)
     EVT_EXEC(N(D_80241224_C7F3A4))
     EVT_THREAD
-        EVT_CALL(GetCurrentPartner, LVar0)
+        EVT_CALL(GetPartnerInUse, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(PARTNER_PARAKARRY)
             EVT_CASE_EQ(PARTNER_BOW)

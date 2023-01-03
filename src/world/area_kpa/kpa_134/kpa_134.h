@@ -12,12 +12,12 @@
 #include "sprite/npc/Toad.h"
 
 enum {
-	NPC_Dummy   = 0,
+    NPC_Dummy   = 0,
 };
 
 enum {
     MV_SwitchEntityID   = MapVar(0),
-    MV_Unk_01           = MapVar(1),
+    MV_PadlockEntityID  = MapVar(1),
 };
 
 #define NAMESPACE kpa_134

@@ -16,10 +16,10 @@ API_CALLABLE(N(ElevatePlayer)) {
 }
 
 EvtScript N(EVS_ActivateSwitch) = {
-    EVT_IF_NE(AF_KPA_04, FALSE)
+    EVT_IF_NE(AF_KPA09_PlatformRaised, FALSE)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(AF_KPA_04, TRUE)
+    EVT_SET(AF_KPA09_PlatformRaised, TRUE)
     EVT_CALL(N(UnsetCamera0MoveFlag1))
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_EF)
@@ -79,14 +79,14 @@ EvtScript N(EVS_ActivateSwitch) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_SET(AF_KPA_04, FALSE)
+        EVT_SET(AF_KPA09_PlatformRaised, FALSE)
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_SET(AF_KPA_04, FALSE)
+    EVT_SET(AF_KPA09_PlatformRaised, FALSE)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_RedSwitch), -325, 0, -8, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignScript, EVT_PTR(N(EVS_ActivateSwitch)))
     EVT_CALL(ParentColliderToModel, COLLIDER_o19, MODEL_m_yuka)

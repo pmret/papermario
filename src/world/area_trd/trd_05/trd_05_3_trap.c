@@ -269,7 +269,7 @@ EvtScript N(EVS_OnHitTrapTrigger) = {
             EVT_GOTO(10)
         EVT_END_IF
     EVT_LOOP(0)
-        EVT_CALL(GetCurrentPartner, LVar0)
+        EVT_CALL(GetPartnerInUse, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_BREAK_LOOP
         EVT_END_IF

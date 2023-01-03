@@ -21,7 +21,7 @@ API_CALLABLE(N(DamagePlayer1HP)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(EVS_GetCurrentPartnerAnims) = {
+EvtScript N(EVS_GetPartnerInUseAnims) = {
     EVT_CALL(GetCurrentPartnerID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PARTNER_GOOMBARIO)
@@ -58,10 +58,10 @@ EvtScript N(EVS_CrushPlayer) = {
         EVT_CALL(DisablePartnerAI, 0)
         EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, TRUE)
         EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-        EVT_EXEC_WAIT(N(EVS_GetCurrentPartnerAnims))
+        EVT_EXEC_WAIT(N(EVS_GetPartnerInUseAnims))
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, LVarA)
         EVT_CALL(NpcMoveTo, NPC_PARTNER, -93, LVar2, 15)
-        EVT_EXEC_WAIT(N(EVS_GetCurrentPartnerAnims))
+        EVT_EXEC_WAIT(N(EVS_GetPartnerInUseAnims))
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, LVarB)
         EVT_WAIT(15)
         EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, FALSE)

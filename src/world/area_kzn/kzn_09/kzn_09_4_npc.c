@@ -31,7 +31,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(AwaitPlayerLeave, -455, -60, 85)
-    EVT_CALL(GetCurrentPartner, LVar0)
+    EVT_CALL(GetPartnerInUse, LVar0)
     EVT_IF_NE(LVar0, PARTNER_NONE)
         EVT_CALL(InterruptUsePartner)
     EVT_END_IF

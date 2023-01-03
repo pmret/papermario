@@ -15,11 +15,11 @@
 #include "sprite/npc/WorldKoopatrol.h"
 
 enum {
-	NPC_Toad_01                 = 0,
-	NPC_Toad_02                 = 1,
-	NPC_ToadGuard               = 2,
-	NPC_Penguin                 = 3,
-	NPC_Koopatrol               = 4,
+    NPC_Toad_01                 = 0,
+    NPC_Toad_02                 = 1,
+    NPC_ToadGuard               = 2,
+    NPC_Penguin                 = 3,
+    NPC_Koopatrol               = 4,
 };
 
 enum {

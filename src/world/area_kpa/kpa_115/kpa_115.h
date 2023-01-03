@@ -10,7 +10,13 @@
 #include "mapfs/kpa_115_hit.h"
 
 enum {
-	NPC_HammerBros	= 20, // uses 21-26 for hammers
+    NPC_HammerBros          = 20,
+    NPC_HammerBros_Hammer1  = 21,
+    NPC_HammerBros_Hammer2  = 22,
+    NPC_HammerBros_Hammer3  = 23,
+    NPC_HammerBros_Hammer4  = 24,
+    NPC_HammerBros_Hammer5  = 25,
+    NPC_HammerBros_Hammer6  = 26,
 };
 
 #define NAMESPACE kpa_115

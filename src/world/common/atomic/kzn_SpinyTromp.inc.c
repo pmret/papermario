@@ -30,13 +30,13 @@ ApiStatus N(SpinyTromp_GetActingPartner)(Evt* script, s32 isInitialCall) {
 EvtScript N(D_80240D10_C7EE90) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_LABEL(10)
-    EVT_CALL(GetCurrentPartner, LVar0)
+    EVT_CALL(GetPartnerInUse, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(InterruptUsePartner)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_WAIT(1)
-    EVT_CALL(GetCurrentPartner, LVar0)
+    EVT_CALL(GetPartnerInUse, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(GetCurrentPartnerID, LVar0)
         EVT_IF_EQ(LVar0, PARTNER_BOW)

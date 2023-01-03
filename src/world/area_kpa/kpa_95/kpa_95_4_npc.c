@@ -72,7 +72,7 @@ EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, MV_LastPlayerPosX, MV_LastPlayerPosY, MV_LastPlayerPosZ)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(SetPanTarget, CAM_DEFAULT, MV_LastPlayerPosX, MV_LastPlayerPosY, MV_LastPlayerPosZ)
-    EVT_CALL(func_802D2520, 0x00010002, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario_10002, 0, 0, 0, 0, 0)
     EVT_CALL(HidePlayerShadow, FALSE)
     EVT_CALL(SetPlayerPos, -139, 0, -90)
     EVT_CALL(PlayerMoveTo, -102, -130, 20)
@@ -90,39 +90,39 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
 };
 
 EvtScript N(EVS_NpcInteract_Toad_02) = {
-    EVT_SWITCH(AB_KPA_8)
+    EVT_SWITCH(AB_KPA95_Toad2_Dialogue)
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_CH8_0069)
-            EVT_SET(AB_KPA_8, 1)
+            EVT_SET(AB_KPA95_Toad2_Dialogue, 1)
         EVT_CASE_EQ(1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_CH8_006A)
-            EVT_SET(AB_KPA_8, 0)
+            EVT_SET(AB_KPA95_Toad2_Dialogue, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcInteract_ToadGuard) = {
-    EVT_SWITCH(AB_KPA_9)
+    EVT_SWITCH(AB_KPA95_Toad3_Dialogue)
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ToadGuard_Green_Talk, ANIM_ToadGuard_Green_Idle, 0, MSG_CH8_006B)
-            EVT_SET(AB_KPA_9, 1)
+            EVT_SET(AB_KPA95_Toad3_Dialogue, 1)
         EVT_CASE_EQ(1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ToadGuard_Green_Talk, ANIM_ToadGuard_Green_Idle, 0, MSG_CH8_006C)
-            EVT_SET(AB_KPA_9, 0)
+            EVT_SET(AB_KPA95_Toad3_Dialogue, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcInteract_Penguin) = {
-    EVT_SWITCH(AB_KPA_A)
+    EVT_SWITCH(AB_KPA95_Penguin_Dialogue)
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH8_006D)
-            EVT_SET(AB_KPA_A, 1)
+            EVT_SET(AB_KPA95_Penguin_Dialogue, 1)
         EVT_CASE_EQ(1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH8_006E)
-            EVT_SET(AB_KPA_A, 0)
+            EVT_SET(AB_KPA95_Penguin_Dialogue, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -192,29 +192,8 @@ StaticNpc N(NpcData_Prisoners)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_ToadGuard),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_ToadGuard_Red_Idle,
-            .walk   = ANIM_ToadGuard_Red_Idle,
-            .run    = ANIM_ToadGuard_Red_Idle,
-            .chase  = ANIM_ToadGuard_Red_Idle,
-            .anim_4 = ANIM_ToadGuard_Red_Idle,
-            .anim_5 = ANIM_ToadGuard_Red_Idle,
-            .death  = ANIM_ToadGuard_Red_Idle,
-            .hit    = ANIM_ToadGuard_Red_Idle,
-            .anim_8 = ANIM_ToadGuard_Red_Idle,
-            .anim_9 = ANIM_ToadGuard_Red_Idle,
-            .anim_A = ANIM_ToadGuard_Red_Idle,
-            .anim_B = ANIM_ToadGuard_Red_Idle,
-            .anim_C = ANIM_ToadGuard_Red_Idle,
-            .anim_D = ANIM_ToadGuard_Red_Idle,
-            .anim_E = ANIM_ToadGuard_Red_Idle,
-            .anim_F = ANIM_ToadGuard_Red_Idle,
-        },
+        .drops = TOAD_DROPS,
+        .animations = TOAD_GUARD_RED_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveSoldierC,
     },
     {
@@ -224,11 +203,7 @@ StaticNpc N(NpcData_Prisoners)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Penguin),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .animations = {
             .idle   = ANIM_Penguin_Idle,
             .walk   = ANIM_Penguin_Walk,

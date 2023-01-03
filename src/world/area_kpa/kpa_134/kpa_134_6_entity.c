@@ -63,9 +63,9 @@ EvtScript N(EVS_UnlockPrompt_Door) = {
     EVT_END_IF
     EVT_CALL(RemoveKeyItemAt, LVar1)
     EVT_SET(GF_KPA134_UnlockedDoor, TRUE)
-    EVT_CALL(N(GetEntityPosition), MV_Unk_01, LVar0, LVar1, LVar2)
+    EVT_CALL(N(GetEntityPosition), MV_PadlockEntityID, LVar0, LVar1, LVar2)
     EVT_CALL(PlaySoundAt, SOUND_269, 0, LVar0, LVar1, LVar2)
-    EVT_SET(LVar0, MV_Unk_01)
+    EVT_SET(LVar0, MV_PadlockEntityID)
     EVT_CALL(N(RemovePadlock))
     EVT_SET(LVar1, 0)
     EVT_WAIT(5)
@@ -79,7 +79,7 @@ EvtScript N(EVS_UnlockPrompt_Door) = {
 EvtScript N(EVS_MakeEntities) = {
     EVT_IF_EQ(GF_KPA134_UnlockedDoor, FALSE)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), 743, 10, 115, 270, MAKE_ENTITY_END)
-        EVT_SET(MV_Unk_01, LVar0)
+        EVT_SET(MV_PadlockEntityID, LVar0)
         EVT_BIND_PADLOCK(EVT_PTR(N(EVS_UnlockPrompt_Door)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), EVT_PTR(N(KeyList_BowsersCastle)), 0, 1)
     EVT_ELSE
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_kpa_130_0)), TRIGGER_WALL_PRESS_A, COLLIDER_nno, 1, 0)

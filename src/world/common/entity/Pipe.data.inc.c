@@ -126,7 +126,7 @@ EvtScript N(EVS_Pipe_ExitVertical) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetCurrentPartner, LVar0)
+    EVT_CALL(GetPartnerInUse, LVar0)
     EVT_IF_NE(LVar0, PARTNER_NONE)
         EVT_CALL(GetCurrentPartnerID, LVar1)
         EVT_IF_NE(LVar1, PARTNER_WATT)
@@ -186,7 +186,7 @@ EvtScript N(EVS_Pipe_ExitHorizontal) = {
     EVT_IF_EQ(LVar0, ACTION_STATE_SPIN)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetCurrentPartner, LVar0)
+    EVT_CALL(GetPartnerInUse, LVar0)
     EVT_IF_NE(LVar0, PARTNER_NONE)
         EVT_CALL(GetCurrentPartnerID, LVar1)
         EVT_IF_NE(LVar1, PARTNER_WATT)

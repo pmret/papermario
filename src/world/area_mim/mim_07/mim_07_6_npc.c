@@ -66,7 +66,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
         EVT_GOTO(10)
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetCurrentPartner, LVar0)
+    EVT_CALL(GetPartnerInUse, LVar0)
     EVT_IF_NE(LVar0, PARTNER_NONE)
         EVT_CALL(InterruptUsePartner)
         EVT_WAIT(20)
