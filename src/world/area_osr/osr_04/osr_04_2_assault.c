@@ -188,7 +188,7 @@ EvtScript N(EVS_AnimateSwingingChains) = {
         EVT_CALL(MakeLerp, 90, -90, 30, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateGroup, MODEL_ku_ta, 0, MV_Unk_0E, 0)
+            EVT_CALL(TranslateGroup, MODEL_ku_ta, 0, MV_CastleLiftDist, 0)
             EVT_CALL(N(MakeCastleChainAngle), LVar0)
             EVT_CALL(RotateGroup, MODEL_ku_ta, LVar0, 0, 0, 1)
             EVT_WAIT(1)
@@ -197,14 +197,14 @@ EvtScript N(EVS_AnimateSwingingChains) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_LOOP(2)
-            EVT_CALL(TranslateGroup, MODEL_ku_ta, 0, MV_Unk_0E, 0)
+            EVT_CALL(TranslateGroup, MODEL_ku_ta, 0, MV_CastleLiftDist, 0)
             EVT_CALL(RotateGroup, MODEL_ku_ta, -20, 0, 0, 1)
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_CALL(MakeLerp, -90, 90, 30, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateGroup, MODEL_ku_ta, 0, MV_Unk_0E, 0)
+            EVT_CALL(TranslateGroup, MODEL_ku_ta, 0, MV_CastleLiftDist, 0)
             EVT_CALL(N(MakeCastleChainAngle), LVar0)
             EVT_CALL(RotateGroup, MODEL_ku_ta, LVar0, 0, 0, 1)
             EVT_WAIT(1)
@@ -213,7 +213,7 @@ EvtScript N(EVS_AnimateSwingingChains) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_LOOP(2)
-            EVT_CALL(TranslateGroup, MODEL_ku_ta, 0, MV_Unk_0E, 0)
+            EVT_CALL(TranslateGroup, MODEL_ku_ta, 0, MV_CastleLiftDist, 0)
             EVT_CALL(RotateGroup, MODEL_ku_ta, 20, 0, 0, 1)
             EVT_WAIT(1)
         EVT_END_LOOP
@@ -252,13 +252,13 @@ EvtScript N(EVS_LiftCastleUp) = {
         EVT_WAIT(120)
         EVT_CALL(SetMusicTrack, 0, SONG_BOWSER_ATTACKS, 0, 8)
     EVT_END_THREAD
-    EVT_SET(MV_Unk_0E, 0)
+    EVT_SET(MV_CastleLiftDist, 0)
     EVT_THREAD
         EVT_WAIT(20)
         EVT_CALL(MakeLerp, 0, 2500, 450, EASING_QUADRATIC_IN)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_SET(MV_Unk_0E, LVar0)
+            EVT_SET(MV_CastleLiftDist, LVar0)
             EVT_CALL(TranslateGroup, MODEL_g439, 0, LVar0, 0)
             EVT_CALL(TranslateGroup, MODEL_kao, 0, LVar0, 0)
             EVT_CALL(TranslateGroup, MODEL_hiru, 0, LVar0, 0)
@@ -275,8 +275,8 @@ EvtScript N(EVS_LiftCastleUp) = {
             EVT_CALL(MakeLerp, 10, -10, 40, EASING_LINEAR)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_ADD(MV_Unk_0E, LVar0)
-                EVT_CALL(TranslateGroup, MODEL_wa, 0, MV_Unk_0E, 0)
+                EVT_ADD(MV_CastleLiftDist, LVar0)
+                EVT_CALL(TranslateGroup, MODEL_wa, 0, MV_CastleLiftDist, 0)
                 EVT_WAIT(1)
                 EVT_IF_EQ(LVar1, 0)
                     EVT_BREAK_LOOP
@@ -285,8 +285,8 @@ EvtScript N(EVS_LiftCastleUp) = {
             EVT_CALL(MakeLerp, -10, 10, 40, EASING_LINEAR)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_ADD(MV_Unk_0E, LVar0)
-                EVT_CALL(TranslateGroup, MODEL_wa, 0, MV_Unk_0E, 0)
+                EVT_ADD(MV_CastleLiftDist, LVar0)
+                EVT_CALL(TranslateGroup, MODEL_wa, 0, MV_CastleLiftDist, 0)
                 EVT_WAIT(1)
                 EVT_IF_EQ(LVar1, 0)
                     EVT_BREAK_LOOP
@@ -295,18 +295,18 @@ EvtScript N(EVS_LiftCastleUp) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_LABEL(22)
-    EVT_IF_LT(MV_Unk_0E, 1000)
+    EVT_IF_LT(MV_CastleLiftDist, 1000)
         EVT_WAIT(1)
         EVT_GOTO(22)
     EVT_END_IF
     EVT_THREAD
         EVT_LOOP(300)
-            EVT_SUB(MV_Unk_01, 3)
+            EVT_SUB(MV_SmokeVelY, 3)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_LABEL(23)
-    EVT_IF_LT(MV_Unk_0E, 1150)
+    EVT_IF_LT(MV_CastleLiftDist, 1150)
         EVT_WAIT(1)
         EVT_GOTO(23)
     EVT_END_IF
@@ -324,13 +324,13 @@ EvtScript N(EVS_LiftCastleUp) = {
 };
 
 EvtScript N(EVS_RaiseSmokeClouds) = {
-    EVT_SET(MV_Unk_01, 0)
+    EVT_SET(MV_SmokeVelY, 0)
     EVT_THREAD
         EVT_CALL(PlaySound, SOUND_36)
         EVT_CALL(MakeLerp, 0, 650, 40, EASING_CUBIC_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_ADD(LVar0, MV_Unk_01)
+            EVT_ADD(LVar0, MV_SmokeVelY)
             EVT_CALL(TranslateGroup, MODEL_kem1, 0, LVar0, 0)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 0)
@@ -341,7 +341,7 @@ EvtScript N(EVS_RaiseSmokeClouds) = {
             EVT_CALL(MakeLerp, 600, 650, 25, EASING_CUBIC_OUT)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_ADD(LVar0, MV_Unk_01)
+                EVT_ADD(LVar0, MV_SmokeVelY)
                 EVT_CALL(TranslateGroup, MODEL_kem1, 0, LVar0, 0)
                 EVT_WAIT(1)
                 EVT_IF_EQ(LVar1, 0)
@@ -351,7 +351,7 @@ EvtScript N(EVS_RaiseSmokeClouds) = {
             EVT_CALL(MakeLerp, 650, 600, 35, EASING_LINEAR)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_ADD(LVar0, MV_Unk_01)
+                EVT_ADD(LVar0, MV_SmokeVelY)
                 EVT_CALL(TranslateGroup, MODEL_kem1, 0, LVar0, 0)
                 EVT_WAIT(1)
                 EVT_IF_EQ(LVar1, 0)
@@ -376,7 +376,7 @@ EvtScript N(EVS_RaiseSmokeClouds) = {
             EVT_CALL(MakeLerp, 350, 400, 12, EASING_CUBIC_OUT)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_ADD(LVar0, MV_Unk_01)
+                EVT_ADD(LVar0, MV_SmokeVelY)
                 EVT_CALL(TranslateGroup, MODEL_kem2, 0, LVar0, 0)
                 EVT_WAIT(1)
                 EVT_IF_EQ(LVar1, 0)
@@ -386,7 +386,7 @@ EvtScript N(EVS_RaiseSmokeClouds) = {
             EVT_CALL(MakeLerp, 400, 350, 17, EASING_LINEAR)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_ADD(LVar0, MV_Unk_01)
+                EVT_ADD(LVar0, MV_SmokeVelY)
                 EVT_CALL(TranslateGroup, MODEL_kem2, 0, LVar0, 0)
                 EVT_WAIT(1)
                 EVT_IF_EQ(LVar1, 0)
@@ -411,7 +411,7 @@ EvtScript N(EVS_RaiseSmokeClouds) = {
             EVT_CALL(MakeLerp, 150, 200, 25, EASING_CUBIC_OUT)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_ADD(LVar0, MV_Unk_01)
+                EVT_ADD(LVar0, MV_SmokeVelY)
                 EVT_CALL(TranslateGroup, MODEL_kem3, 0, LVar0, 0)
                 EVT_WAIT(1)
                 EVT_IF_EQ(LVar1, 0)
@@ -421,7 +421,7 @@ EvtScript N(EVS_RaiseSmokeClouds) = {
             EVT_CALL(MakeLerp, 200, 150, 35, EASING_LINEAR)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_ADD(LVar0, MV_Unk_01)
+                EVT_ADD(LVar0, MV_SmokeVelY)
                 EVT_CALL(TranslateGroup, MODEL_kem3, 0, LVar0, 0)
                 EVT_WAIT(1)
                 EVT_IF_EQ(LVar1, 0)

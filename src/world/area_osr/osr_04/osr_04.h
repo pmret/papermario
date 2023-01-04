@@ -10,8 +10,8 @@
 #include "mapfs/osr_03_hit.h"
 
 enum {
-    MV_Unk_01       = MapVar(1),
-    MV_Unk_0E       = MapVar(14),
+    MV_SmokeVelY        = MapVar(1),
+    MV_CastleLiftDist   = MapVar(14),
 };
 
 #define NAMESPACE osr_04

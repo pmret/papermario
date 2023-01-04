@@ -11659,14 +11659,14 @@ segments:
     start: 0xAB6290
     vram: 0x80240000
     subsegments:
-    - [0xAB6290, c]
-    - [0xAB62B0, c]
-    - [0xAB6610, data]
-    - [0xAB6DB0, data]
-    - [0xAB7E20, data]
-    - [0xAB8350, data]
-    - [0xAB8B10, data]
-    - [0xAB9270]
+    - [0xAB6290, c, osr_03_0_header]
+    - [0xAB62B0, c, osr_03_1_main]
+    - [0xAB62B0, c, osr_03_2_npc]
+    - [0xAB62B0, c, osr_03_3_intro]
+    - [0xAB6320, c, osr_03_4_starship]
+    - [0xAB6320, c, osr_03_5_interlude]
+    - [0xAB6430, c, osr_03_6_ending]
+    - [0xAB6610]
   - name: osr_04
     dir: world/area_osr/osr_04
     type: code

@@ -547,7 +547,7 @@ MapConfig osr_maps[] = {
     { MAP(osr_00), .bgName = "nok_bg" },
     { MAP_WITH_INIT(osr_01), .bgName = "nok_bg" },
     { MAP_WITH_INIT(osr_02), .bgName = "kpa_bg" },
-    { MAP_UNSPLIT(osr_03, 0x802403F0), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(osr_03), .bgName = "kpa_bg" },
     { MAP_WITH_INIT(osr_04), .bgName = "nok_bg" },
 };
 
