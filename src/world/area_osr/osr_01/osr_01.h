@@ -10,7 +10,7 @@
 #include "mapfs/osr_01_hit.h"
 
 enum {
-	NPC_Toad        = 0,
+    NPC_Toad        = 0,
 };
 
 #define NAMESPACE osr_01
