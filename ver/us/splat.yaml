@@ -11673,10 +11673,10 @@ segments:
     start: 0xAB92B0
     vram: 0x80240000
     subsegments:
-    - [0xAB92B0, c]
-    - [0xAB9370, data]
-    - [0xAB95D0, data]
-    - [0xABB260]
+    - [0xAB92B0, c, osr_04_0_header]
+    - [0xAB9300, c, osr_04_1_main]
+    - [0xAB9300, c, osr_04_2_assault]
+    - [0xAB9370]
   - name: kkj_00
     dir: world/area_kkj/kkj_00
     type: code

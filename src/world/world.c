@@ -548,7 +548,7 @@ MapConfig osr_maps[] = {
     { MAP_WITH_INIT(osr_01), .bgName = "nok_bg" },
     { MAP_WITH_INIT(osr_02), .bgName = "kpa_bg" },
     { MAP_UNSPLIT(osr_03, 0x802403F0), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(osr_04, 0x802400D0), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(osr_04), .bgName = "nok_bg" },
 };
 
 /// Peach's Castle
