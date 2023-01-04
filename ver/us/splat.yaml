@@ -11647,15 +11647,12 @@ segments:
     start: 0xAB2170
     vram: 0x80240000
     subsegments:
-    - [0xAB2170, c]
-    - [0xAB2190, c]
-    - [0xAB21D0, c]
-    - [0xAB2290, c]
-    - [0xAB22C0, data]
-    - [0xAB2B00, data]
-    - [0xAB2BB0, data]
-    - [0xAB5D40, data]
-    - [0xAB6270]
+    - [0xAB2170, c, osr_02_0_header]
+    - [0xAB2190, c, osr_02_1_main]
+    - [0xAB21D0, c, osr_02_2_entity]
+    - [0xAB21D0, c, osr_02_3_npc]
+    - [0xAB2290, c, osr_02_4_npc_peach]
+    - [0xAB22C0]
   - name: osr_03
     dir: world/area_osr/osr_03
     type: code
