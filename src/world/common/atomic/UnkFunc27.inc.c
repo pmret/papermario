@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "model.h"
 
-ApiStatus N(UnkFunc27)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFunc27)) {
     Bytecode* args = script->ptrReadPos;
     s32 mode = evt_get_variable(script, *args++);
     s32 testS0 = evt_get_variable(script, *args++);
@@ -47,7 +47,7 @@ ApiStatus N(UnkFunc27)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkFunc26)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFunc26)) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);

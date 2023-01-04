@@ -1,6 +1,6 @@
 #include "dro_02.h"
 
-EvtScript N(EVS_PartyWatchingMousatafa) = {
+EvtScript N(EVS_PartyWatchingMoustafa) = {
     EVT_LOOP(0)
         EVT_CALL(PlayerFaceNpc, NPC_Moustafa, FALSE)
         EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Moustafa, 0)
@@ -192,7 +192,7 @@ EvtScript N(EVS_NpcInteract_Moustafa) = {
             EVT_CALL(PlayerMoveTo, -391, -260, 0)
             EVT_CALL(InterpPlayerYaw, 90, 3)
             EVT_CALL(SetNpcFlagBits, NPC_DisguisedMoustafa, NPC_FLAG_100, FALSE)
-            EVT_EXEC_GET_TID(N(EVS_PartyWatchingMousatafa), LVarA)
+            EVT_EXEC_GET_TID(N(EVS_PartyWatchingMoustafa), LVarA)
             EVT_CALL(SetNpcFlagBits, NPC_Moustafa, NPC_FLAG_100, TRUE)
             EVT_CALL(FadeOutMusic, 0, 500)
             EVT_IF_EQ(GF_DRO02_Sheek_AskedAboutMoustafa, TRUE)

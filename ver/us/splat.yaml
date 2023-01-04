@@ -11623,24 +11623,24 @@ segments:
     start: 0xAAC830
     vram: 0x80240000
     subsegments:
-    - [0xAAC830, c]
-    - [0xAACBB0, c]
-    - [0xAACFC0, data]
-    - [0xAAD790, data]
-    - [0xAAFFD0]
+    - [0xAAC830, c, osr_00_0_header]
+    - [0xAAC830, c, osr_00_1_music]
+    - [0xAAC830, c, osr_00_2_main]
+    - [0xAACBB0, c, osr_00_3_npc_intro]
+    - [0xAACBB0, c, osr_00_4_npc_epilogue]
+    - [0xAACBB0, c, osr_00_5_scenes]
+    - [0xAACFC0]
   - name: osr_01
     dir: world/area_osr/osr_01
     type: code
     start: 0xAAFFF0
     vram: 0x80240000
     subsegments:
-    - [0xAAFFF0, c]
-    - [0xAB0040, c]
-    - [0xAB0350, c]
-    - [0xAB0AB0, data]
-    - [0xAB0C10, data]
-    - [0xAB1150, data]
-    - [0xAB2150]
+    - [0xAAFFF0, c, osr_01_0_header]
+    - [0xAB0040, c, osr_01_1_music]
+    - [0xAB0040, c, osr_01_2_main]
+    - [0xAB0350, c, osr_01_3_npc]
+    - [0xAB0AB0]
   - name: osr_02
     dir: world/area_osr/osr_02
     type: code

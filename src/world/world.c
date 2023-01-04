@@ -542,9 +542,10 @@ MapConfig kpa_maps[] = {
 };
 
 /// Peach's Castle Grounds
+#include "area_osr/osr.h"
 MapConfig osr_maps[] = {
-    { MAP_UNSPLIT(osr_00, 0x802407E0), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(osr_01, 0x80240B00), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
+    { MAP(osr_00), .bgName = "nok_bg" },
+    { MAP_WITH_INIT(osr_01), .bgName = "nok_bg" },
     { MAP_UNSPLIT(osr_02, 0x80240170), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(osr_03, 0x802403F0), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(osr_04, 0x802400D0), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
