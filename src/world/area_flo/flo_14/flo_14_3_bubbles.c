@@ -86,7 +86,7 @@ Vec3f N(BubbleFlightPath)[] = {
 EvtScript N(EVS_BubbleFollowPath) = {
     EVT_WAIT(20)
     EVT_CALL(PlaySound, SOUND_80000023)
-    EVT_CALL(LoadPath, 165, EVT_PTR(N(BubbleFlightPath)), 13, EASING_COS_IN_OUT)
+    EVT_CALL(LoadPath, 165, EVT_PTR(N(BubbleFlightPath)), ARRAY_COUNT(N(BubbleFlightPath)), EASING_COS_IN_OUT)
     EVT_LABEL(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(TranslateModel, MODEL_o167, LVar1, LVar2, LVar3)

@@ -7,12 +7,7 @@ NpcSettings N(NpcSettings_Peach) = {
     .level = 99,
 };
 
-NpcSettings N(NpcSettings_Twink) = {
-    .height = 20,
-    .radius = 20,
-    .level = 99,
-};
-
+#include "world/common/npc/Twink.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
 
 EvtScript N(EVS_NpcAuxAI_StarRod) = {
@@ -27,13 +22,13 @@ NpcSettings N(NpcSettings_StarRod) = {
     .otherAI = &N(EVS_NpcAuxAI_StarRod),
 };
 
-Vec3f N(D_80240B58_AB2CC8)[] = {
+Vec3f N(FlightPath_TwinkStepForward)[] = {
     {  -10.0,    40.0,   10.0 },
     {   15.0,    33.0,   20.0 },
     {   50.0,    30.0,   30.0 },
 };
 
-Vec3f N(D_80240B7C_AB2CEC)[] = {
+Vec3f N(FlightPath_TwinkDepart)[] = {
     {   50.0,    30.0,   30.0 },
     {   70.0,    45.0,   10.0 },
     {   90.0,    60.0,   30.0 },
@@ -49,7 +44,7 @@ Vec3f N(D_80240B7C_AB2CEC)[] = {
     {   50.0,   210.0,   30.0 },
 };
 
-EvtScript N(D_80240C18_AB2D88) = {
+EvtScript N(EVS_StarSpirit_FlyAway) = {
     EVT_CALL(SetNpcFlagBits, LVar4, NPC_FLAG_40000, TRUE)
     EVT_THREAD
         EVT_LOOP(30)
@@ -92,7 +87,7 @@ EvtScript N(D_80240C18_AB2D88) = {
     EVT_END
 };
 
-EvtScript N(D_80240EC0_AB3030) = {
+EvtScript N(EVS_Twink_FlyAway) = {
     EVT_THREAD
         EVT_LOOP(30)
             EVT_CALL(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
@@ -121,7 +116,7 @@ EvtScript N(D_80240EC0_AB3030) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(PlaySoundAtNpc, NPC_Twink, SOUND_62, 0)
-        EVT_CALL(LoadPath, 120, EVT_PTR(N(D_80240B7C_AB2CEC)), ARRAY_COUNT(N(D_80240B7C_AB2CEC)), EASING_QUADRATIC_IN)
+        EVT_CALL(LoadPath, 120, EVT_PTR(N(FlightPath_TwinkDepart)), ARRAY_COUNT(N(FlightPath_TwinkDepart)), EASING_QUADRATIC_IN)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
@@ -183,7 +178,7 @@ EvtScript N(EVS_Scene_ReturnStarRod) = {
         EVT_CALL(SetNpcPos, NPC_StarRod, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetNpcPos, NPC_StarRod, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_StarRod, NPC_DISPOSE_LOCATION)
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Idle)
     EVT_WAIT(10)
@@ -289,46 +284,46 @@ EvtScript N(EVS_Scene_ReturnStarRod) = {
     EVT_THREAD
         EVT_SET(LVar4, NPC_Eldstar)
         EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2045, 0)
-        EVT_EXEC_WAIT(N(D_80240C18_AB2D88))
+        EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(30)
         EVT_SET(LVar4, NPC_Misstar)
         EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2046, 0)
-        EVT_EXEC_WAIT(N(D_80240C18_AB2D88))
+        EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(60)
         EVT_SET(LVar4, NPC_Skolar)
         EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2045, 0)
-        EVT_EXEC_WAIT(N(D_80240C18_AB2D88))
+        EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(90)
         EVT_SET(LVar4, NPC_Mamar)
         EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2046, 0)
-        EVT_EXEC_WAIT(N(D_80240C18_AB2D88))
+        EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(120)
         EVT_SET(LVar4, NPC_Kalmar)
         EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2045, 0)
-        EVT_EXEC_WAIT(N(D_80240C18_AB2D88))
+        EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(150)
         EVT_SET(LVar4, NPC_Muskular)
         EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2046, 0)
-        EVT_EXEC_WAIT(N(D_80240C18_AB2D88))
+        EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_END_THREAD
     EVT_WAIT(180)
     EVT_SET(LVar4, NPC_Klevar)
     EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2045, 0)
-    EVT_EXEC_WAIT(N(D_80240C18_AB2D88))
+    EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(20)
     EVT_CALL(SetMusicTrack, 0, SONG_TWINK_THEME, 1, 8)
-    EVT_CALL(LoadPath, 30, EVT_PTR(N(D_80240B58_AB2CC8)), ARRAY_COUNT(N(D_80240B58_AB2CC8)), EASING_LINEAR)
+    EVT_CALL(LoadPath, 30, EVT_PTR(N(FlightPath_TwinkStepForward)), ARRAY_COUNT(N(FlightPath_TwinkStepForward)), EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
@@ -363,7 +358,7 @@ EvtScript N(EVS_Scene_ReturnStarRod) = {
     EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Idle)
     EVT_CALL(EndSpeech, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0)
     EVT_WAIT(20)
-    EVT_EXEC(N(D_80240EC0_AB3030))
+    EVT_EXEC(N(EVS_Twink_FlyAway))
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
     EVT_WAIT(250)
     EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach_A0002)
@@ -585,24 +580,7 @@ StaticNpc N(NpcData_Spirits)[] = {
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Twink),
         .drops = NPC_NO_DROPS,
-        .animations = {
-            .idle   = ANIM_Twink_Idle,
-            .walk   = ANIM_Twink_Fly,
-            .run    = ANIM_Twink_Angry,
-            .chase  = ANIM_Twink_Angry,
-            .anim_4 = ANIM_Twink_Idle,
-            .anim_5 = ANIM_Twink_Idle,
-            .death  = ANIM_Twink_Idle,
-            .hit    = ANIM_Twink_Idle,
-            .anim_8 = ANIM_Twink_Idle,
-            .anim_9 = ANIM_Twink_Idle,
-            .anim_A = ANIM_Twink_Idle,
-            .anim_B = ANIM_Twink_Idle,
-            .anim_C = ANIM_Twink_Idle,
-            .anim_D = ANIM_Twink_Idle,
-            .anim_E = ANIM_Twink_Idle,
-            .anim_F = ANIM_Twink_Idle,
-        },
+        .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_Twink),
     },
     {

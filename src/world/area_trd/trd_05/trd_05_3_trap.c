@@ -220,7 +220,7 @@ EvtScript N(EVS_PartnerFalling) = {
     EVT_END_THREAD
     EVT_WAIT(1)
     EVT_CALL(GetNpcPos, NPC_PARTNER, LVar4, LVar5, LVar6)
-    EVT_CALL(LoadPath, 45, EVT_PTR(N(FallPath)), 4, EASING_COS_IN_OUT)
+    EVT_CALL(LoadPath, 45, EVT_PTR(N(FallPath)), ARRAY_COUNT(N(FallPath)), EASING_COS_IN_OUT)
     EVT_LABEL(0)
     EVT_CALL(GetNextPathPos)
     EVT_MULF(LVar1, EVT_FLOAT(-1.0))
