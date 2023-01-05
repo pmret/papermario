@@ -768,6 +768,7 @@ enum {
     arn_13_ENTRY_1   = 1,
     dgb_00_ENTRY_0   = 0,
     dgb_00_ENTRY_1   = 1,
+    dgb_00_ENTRY_2   = 2,
     dgb_01_ENTRY_0   = 0,
     dgb_01_ENTRY_1   = 1,
     dgb_01_ENTRY_2   = 2,

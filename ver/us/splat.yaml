@@ -13161,7 +13161,10 @@ segments:
     start: 0xC2EBA0
     vram: 0x80240000
     subsegments:
-    - [0xC2EBA0,       c, C2EBA0]
+    - [0xC2EBA0, c, dgb_02_0_header]
+    - [0xC2EBA0, c, dgb_02_1_music]
+    - [0xC2EBA0, c, dgb_02_2_main]
+    - [0xC2EBA0, c, dgb_02_3_npc]
     - [0xC2FFD0]
   - name: dgb_03
     dir: world/area_dgb/dgb_03
@@ -13169,8 +13172,12 @@ segments:
     start: 0xC314E0
     vram: 0x80240000
     subsegments:
-    - [0xC314E0,       c, C314E0]
-    - [0xC31730,       c, C31730]
+    - [0xC314E0, c, dgb_03_0_header]
+    - [0xC314E0, c, dgb_03_1_music]
+    - [0xC314E0, c, dgb_03_2_main]
+    - [0xC314E0, c, dgb_03_3_clock]
+    - [0xC314E0, c, dgb_03_4_entity]
+    - [0xC31730, c, dgb_03_5_npc]
     - [0xC33CB0]
   - name: dgb_04
     dir: world/area_dgb/dgb_04
@@ -13178,7 +13185,11 @@ segments:
     start: 0xC36530
     vram: 0x80240000
     subsegments:
-    - [0xC36530,       c, C36530]
+    - [0xC36530, c, dgb_04_0_header]
+    - [0xC36530, c, dgb_04_1_music]
+    - [0xC36530, c, dgb_04_2_main]
+    - [0xC36530, c, dgb_04_3_npc]
+    - [0xC38900, c, dgb_04_4_entity]
     - [0xC39640]
   - name: dgb_05
     dir: world/area_dgb/dgb_05
@@ -13186,7 +13197,12 @@ segments:
     start: 0xC3AA10
     vram: 0x80240000
     subsegments:
-    - [0xC3AA10,       c, C3AA10]
+    - [0xC3AA10, c, dgb_05_0_header]
+    - [0xC3AA10, c, dgb_05_1_music]
+    - [0xC3AA10, c, dgb_05_2_main]
+    - [0xC3AA10, c, dgb_05_3_hole]
+    - [0xC3AA10, c, dgb_05_4_entity]
+    - [0xC3AA70, c, dgb_05_5_npc]
     - [0xC3BEA0]
   - name: dgb_06
     dir: world/area_dgb/dgb_06
@@ -13194,7 +13210,11 @@ segments:
     start: 0xC3D080
     vram: 0x80240000
     subsegments:
-    - [0xC3D080,       c, C3D080]
+    - [0xC3D080, c, dgb_06_0_header]
+    - [0xC3D080, c, dgb_06_1_music]
+    - [0xC3D080, c, dgb_06_2_main]
+    - [0xC3D080, c, dgb_06_3_entity]
+    - [0xC3D080, c, dgb_06_4_npc]
     - [0xC3D340]
   - name: dgb_07
     dir: world/area_dgb/dgb_07
@@ -13202,7 +13222,11 @@ segments:
     start: 0xC3DBF0
     vram: 0x80240000
     subsegments:
-    - [0xC3DBF0,       c, C3DBF0]
+    - [0xC3DBF0, c, dgb_07_0_header]
+    - [0xC3DBF0, c, dgb_07_1_music]
+    - [0xC3DBF0, c, dgb_07_2_main]
+    - [0xC3DBF0, c, dgb_07_3_entity]
+    - [0xC3DBF0, c, dgb_07_4_npc]
     - [0xC3F020]
   - name: dgb_08
     dir: world/area_dgb/dgb_08
@@ -13210,7 +13234,11 @@ segments:
     start: 0xC3FDB0
     vram: 0x80240000
     subsegments:
-    - [0xC3FDB0,       c, C3FDB0]
+    - [0xC3FDB0, c, dgb_08_0_header]
+    - [0xC3FDB0, c, dgb_08_1_music]
+    - [0xC3FDB0, c, dgb_08_2_main]
+    - [0xC3FDB0, c, dgb_08_3_npc]
+    - [0xC43A40, c, dgb_08_4_entity]
     - [0xC43A40]
   - name: dgb_09
     dir: world/area_dgb/dgb_09
@@ -13218,7 +13246,11 @@ segments:
     start: 0xC46BE0
     vram: 0x80240000
     subsegments:
-    - [0xC46BE0,       c, C46BE0]
+    - [0xC46BE0, c, dgb_09_0_header]
+    - [0xC46BE0, c, dgb_09_1_music]
+    - [0xC46BE0, c, dgb_09_2_main]
+    - [0xC46BE0, c, dgb_09_3_breakable]
+    - [0xC46BE0, c, dgb_09_4_npc]
     - [0xC4A3E0]
   - name: dgb_10
     dir: world/area_dgb/dgb_10
@@ -13226,7 +13258,11 @@ segments:
     start: 0xC4C390
     vram: 0x80240000
     subsegments:
-    - [0xC4C390,       c, C4C390]
+    - [0xC4C390, c, dgb_10_0_header]
+    - [0xC4C390, c, dgb_10_1_music]
+    - [0xC4C390, c, dgb_10_2_main]
+    - [0xC4C390, c, dgb_10_3_hole]
+    - [0xC4C580, c, dgb_10_4_entity]
     - [0xC4C580]
   - name: dgb_11
     dir: world/area_dgb/dgb_11
@@ -13234,7 +13270,10 @@ segments:
     start: 0xC4D3E0
     vram: 0x80240000
     subsegments:
-    - [0xC4D3E0,       c, C4D3E0]
+    - [0xC4D3E0, c, dgb_11_0_header]
+    - [0xC4D3E0, c, dgb_11_1_music]
+    - [0xC4D3E0, c, dgb_11_2_main]
+    - [0xC4D3E0, c, dgb_11_3_entity]
     - [0xC4D430]
   - name: dgb_12
     dir: world/area_dgb/dgb_12
@@ -13242,7 +13281,11 @@ segments:
     start: 0xC4DEF0
     vram: 0x80240000
     subsegments:
-    - [0xC4DEF0,       c, C4DEF0]
+    - [0xC4DEF0, c, dgb_12_0_header]
+    - [0xC4DEF0, c, dgb_12_1_music]
+    - [0xC4DEF0, c, dgb_12_2_main]
+    - [0xC4DEF0, c, dgb_12_3_spikes]
+    - [0xC4DEF0, c, dgb_12_4_entity]
     - [0xC4E1B0]
   - name: dgb_13
     dir: world/area_dgb/dgb_13
@@ -13250,7 +13293,11 @@ segments:
     start: 0xC4E960
     vram: 0x80240000
     subsegments:
-    - [0xC4E960, c, C4E960]
+    - [0xC4E960, c, dgb_13_0_header]
+    - [0xC4E960, c, dgb_13_1_music]
+    - [0xC4E960, c, dgb_13_2_main]
+    - [0xC4E960, c, dgb_13_3_entity]
+    - [0xC4E960, c, dgb_13_4_drawer]
     - [0xC4E960]
   - name: dgb_14
     dir: world/area_dgb/dgb_14
@@ -13258,7 +13305,10 @@ segments:
     start: 0xC4F030
     vram: 0x80240000
     subsegments:
-    - [0xC4F030, c, C4F030]
+    - [0xC4F030, c, dgb_14_0_header]
+    - [0xC4F030, c, dgb_14_1_music]
+    - [0xC4F030, c, dgb_14_2_main]
+    - [0xC4F030, c, dgb_14_3_entity]
     - [0xC4F030]
   - name: dgb_15
     dir: world/area_dgb/dgb_15
@@ -13266,8 +13316,11 @@ segments:
     start: 0xC4F510
     vram: 0x80240000
     subsegments:
-    - [0xC4F510,       c, C4F510]
-    - [0xC50CA0,       c, C50CA0]
+    - [0xC4F510, c, dgb_15_0_header]
+    - [0xC4F510, c, dgb_15_1_music]
+    - [0xC4F510, c, dgb_15_2_main]
+    - [0xC4F510, c, dgb_15_3_npc]
+    - [0xC50CA0, c, dgb_15_4_entity]
     - [0xC50D80]
   - name: dgb_16
     dir: world/area_dgb/dgb_16
@@ -13275,7 +13328,11 @@ segments:
     start: 0xC52540
     vram: 0x80240000
     subsegments:
-    - [0xC52540,       c, C52540]
+    - [0xC52540, c, dgb_16_0_header]
+    - [0xC52540, c, dgb_16_1_music]
+    - [0xC52540, c, dgb_16_2_main]
+    - [0xC52540, c, dgb_16_3_entity]
+    - [0xC52540, c, dgb_16_4_npc]
     - [0xC53970]
   - name: dgb_17
     dir: world/area_dgb/dgb_17

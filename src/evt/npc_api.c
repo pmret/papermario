@@ -1069,14 +1069,14 @@ ApiStatus PlaySoundAtNpc(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *ptrReadPos++);
     s32 soundID = evt_get_variable(script, *ptrReadPos++);
-    s32 value2 = evt_get_variable(script, *ptrReadPos++);
+    s32 flags = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
     if (npc == NULL) {
         return ApiStatus_DONE2;
     }
 
-    sfx_play_sound_at_position(soundID, value2, npc->pos.x, npc->pos.y, npc->pos.z);
+    sfx_play_sound_at_position(soundID, flags, npc->pos.x, npc->pos.y, npc->pos.z);
     return ApiStatus_DONE2;
 }
 

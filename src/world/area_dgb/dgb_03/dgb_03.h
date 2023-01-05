@@ -2,23 +2,32 @@
 /// @brief Tubba's Castle - Table/Clock Room (1/2F)
 
 #include "common.h"
-#include "../dgb.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../dgb.h"
+#include "mapfs/dgb_03_shape.h"
+#include "mapfs/dgb_03_hit.h"
+
+enum {
+    NPC_Clubba_Wander           = 0,
+    NPC_Clubba_Wander_Hitbox    = 1,
+    NPC_Clubba_Patrol           = 2,
+    NPC_Clubba_Patrol_Hitbox    = 3,
+    NPC_Clubba_Napping          = 4,
+    NPC_Clubba_Napping_Hitbox   = 5,
+};
+
+enum {
+	MV_PadlockEntityID		= MapVar(0),
+};
+
 #define NAMESPACE dgb_03
 
-ApiStatus N(UnkFunc11)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc12)(Evt* script, s32 isInitialCall);
-ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(WanderMeleeAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(ClubbaPatrolAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(RemovePadlock)(Evt* script, s32 isInitialCall);
-ApiStatus N(GetEntityPosition)(Evt* script, s32 isInitialCall);
-
-extern NpcGroupList N(npcGroupList_80244988);
-extern EvtScript N(80243608);
-extern EvtScript N(80243740);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);
+extern EvtScript N(EVS_ExitDoors_dgb_14_0);
+extern EvtScript N(EVS_UnlockPrompt_UpperDoor);
+extern EvtScript N(EVS_SetupClock);
+extern NpcGroupList N(DefaultNPCs);

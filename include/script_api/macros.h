@@ -726,7 +726,7 @@
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE) \
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
 
-// same as above with calls reordered
+// same as EVT_SETUP_CAMERA_NO_LEAD with calls reordered
 #define EVT_SETUP_CAMERA_ALT_NO_LEAD() \
     EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 25, 16, 4096) \
     EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0) \
