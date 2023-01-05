@@ -115,6 +115,7 @@ NpcSettings N(NpcSettings_Clubba_Patrol) = {
 
 #ifdef INCLUDE_CLUBBA_NAPPING
 #include "world/common/enemy/ai/ClubbaNappingAI.inc.c"
+#include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 
 MobileAISettings N(AISettings_Clubba_Napping) = {
     .moveSpeed = 1.0f,

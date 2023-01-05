@@ -1,44 +1,9 @@
 #include "dgb_08.h"
 
-#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/complete/TubbaBlubba_Patrol.inc.c"
+#include "world/common/enemy/complete/TubbaBlubba.inc.c"
 
-MobileAISettings N(AISettings_Tubba_Patrol) = {
-    .moveSpeed = 4.5f,
-    .alertRadius = 170.0f,
-    .alertOffsetDist = 90.0f,
-    .playerSearchInterval = 1,
-    .chaseSpeed = 3.9f,
-    .chaseTurnRate = 180,
-    .chaseUpdateInterval = 2,
-    .chaseRadius = 170.0f,
-    .chaseOffsetDist = 90.0f,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(EVS_NpcAI_Tubba_Patrol) = {
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(AISettings_Tubba_Patrol)))
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_Tubba_Patrol) = {
-    .height = 90,
-    .radius = 65,
-    .level = 13,
-    .ai = &N(EVS_NpcAI_Tubba_Patrol),
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
-NpcSettings N(NpcSettings_Tubba) = {
-    .height = 90,
-    .radius = 65,
-    .level = 13,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
-NpcSettings N(NpcSettings_Tubba_Hitbox) = {
+NpcSettings N(NpcSettings_Yakkey) = {
     .height = 24,
     .radius = 24,
     .level = 13,
@@ -106,23 +71,23 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
 
 #include "world/common/todo/UnkFunc1.inc.c"
 
-ApiStatus N(func_80243B98_C43948)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetTubbaPatrolTerritory)) {
     if (get_enemy_safe(NPC_Tubba)) {
         Enemy* enemy = get_enemy(NPC_Tubba);
-        enemy->territory->wander.centerPos.x = 2;
-        enemy->territory->wander.centerPos.y = -450;
-        enemy->territory->wander.centerPos.z = 0;
-        enemy->territory->wander.wanderSize.x = 175;
-        enemy->territory->wander.wanderSize.z = 300;
-        enemy->territory->wander.moveSpeedOverride = 0;
-        enemy->territory->wander.wanderShape = 175;
+        enemy->territory->patrol.numPoints = 2;
+        enemy->territory->patrol.points[0].x = -450;
+        enemy->territory->patrol.points[0].y = 0;
+        enemy->territory->patrol.points[0].z = 175;
+        enemy->territory->patrol.points[1].x = 300;
+        enemy->territory->patrol.points[1].y = 0;
+        enemy->territory->patrol.points[1].z = 175;
         return ApiStatus_DONE2;
     }
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80243C10_C439C0)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetTubbaPatrolMode)) {
     if (get_enemy_safe(NPC_Tubba)) {
         Enemy* enemy = get_enemy(NPC_Tubba);
         enemy->aiFlags |= ENEMY_AI_FLAGS_80;
@@ -132,21 +97,21 @@ ApiStatus N(func_80243C10_C439C0)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(80244D08) = {
+EvtScript N(EVS_SetPatrolAfterWaiting) = {
     EVT_LABEL(10)
     EVT_CALL(GetNpcPos, NPC_Tubba, LVar0, LVar1, LVar2)
     EVT_IF_GT(LVar1, 0)
         EVT_WAIT(1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(N(func_80243B98_C43948))
+    EVT_CALL(N(SetTubbaPatrolTerritory))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcAI_Tubba) = {
-    EVT_CALL(N(func_80243C10_C439C0))
-    EVT_EXEC(N(80244D08))
+    EVT_CALL(N(SetTubbaPatrolMode))
+    EVT_EXEC(N(EVS_SetPatrolAfterWaiting))
     EVT_THREAD
         EVT_LOOP(0)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, SOUND_PARAM_QUIET)
@@ -207,7 +172,7 @@ EvtScript N(EVS_NpcInit_Tubba) = {
 
 StaticNpc N(NpcData_Tubba) = {
     .id = NPC_Tubba,
-    .settings = &N(NpcSettings_Tubba),
+    .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_800000,
@@ -235,24 +200,7 @@ StaticNpc N(NpcData_Tubba) = {
             .detectSize = { 1450, 200 },
         }
     },
-    .animations = {
-        .idle   = ANIM_WorldTubba_Anim07,
-        .walk   = ANIM_WorldTubba_Anim0A,
-        .run    = ANIM_WorldTubba_Anim0D,
-        .chase  = ANIM_WorldTubba_Anim0D,
-        .anim_4 = ANIM_WorldTubba_Anim19,
-        .anim_5 = ANIM_WorldTubba_Anim07,
-        .death  = ANIM_WorldTubba_Anim07,
-        .hit    = ANIM_WorldTubba_Anim07,
-        .anim_8 = ANIM_WorldTubba_Anim07,
-        .anim_9 = ANIM_WorldTubba_Anim07,
-        .anim_A = ANIM_WorldTubba_Anim07,
-        .anim_B = ANIM_WorldTubba_Anim07,
-        .anim_C = ANIM_WorldTubba_Anim07,
-        .anim_D = ANIM_WorldTubba_Anim07,
-        .anim_E = ANIM_WorldTubba_Anim07,
-        .anim_F = ANIM_WorldTubba_Anim07,
-    },
+    .animations = TUBBA_ANGRY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 

@@ -1,0 +1,32 @@
+#include "common.h"
+#include "TubbaBlubba.h"
+
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
+
+MobileAISettings N(AISettings_Tubba_Patrol) = {
+    .moveSpeed = 4.5f,
+    .alertRadius = 170.0f,
+    .alertOffsetDist = 90.0f,
+    .playerSearchInterval = 1,
+    .chaseSpeed = 3.9f,
+    .chaseTurnRate = 180,
+    .chaseUpdateInterval = 2,
+    .chaseRadius = 170.0f,
+    .chaseOffsetDist = 90.0f,
+    .unk_AI_2C = 1,
+};
+
+EvtScript N(EVS_NpcAI_Tubba_Patrol) = {
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(AISettings_Tubba_Patrol)))
+    EVT_RETURN
+    EVT_END
+};
+
+NpcSettings N(NpcSettings_TubbaBlubba_Patrol) = {
+    .height = 90,
+    .radius = 65,
+    .level = 13,
+    .ai = &N(EVS_NpcAI_Tubba_Patrol),
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
+};

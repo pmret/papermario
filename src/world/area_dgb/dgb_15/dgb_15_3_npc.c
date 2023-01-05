@@ -3,24 +3,17 @@
 #define INCLUDE_CLUBBA_WANDER
 #include "world/common/enemy/complete/Clubba_Multi.inc.c"
 
-#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
-#include "world/common/todo/UnkFunc1.inc.c"
+#include "world/common/enemy/complete/TubbaBlubba.inc.c"
 
-NpcSettings N(NpcSettings_Tubba) = {
-    .height = 90,
-    .radius = 65,
-    .level = 13,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
-NpcSettings N(NpcSettings_Tubba_Hitbox) = {
+NpcSettings N(NpcSettings_Yakkey) = {
     .height = 24,
     .radius = 24,
     .level = 13,
 };
 
-EvtScript N(80242184) = {
+extern EvtScript N(EVS_NpcAI_Tubba);
+
+EvtScript N(EVS_WaitForCloseCall) = {
     EVT_LOOP(0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(GetNpcPos, NPC_Tubba, LVar1, LVar2, LVar3)
@@ -35,8 +28,6 @@ EvtScript N(80242184) = {
     EVT_RETURN
     EVT_END
 };
-
-extern EvtScript N(EVS_NpcAI_Tubba);
 
 EvtScript N(EVS_NpcIdle_Tubba) = {
     EVT_LOOP(0)
@@ -79,7 +70,7 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
     EVT_END
 };
 
-EvtScript N(802424E8) = {
+EvtScript N(EVS_PlayFootstepFX) = {
     EVT_CALL(GetNpcPos, NPC_SELF, LVar6, LVar7, LVar8)
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -132,15 +123,19 @@ MobileAISettings N(AISettings_Tubba) = {
     .unk_AI_2C = 1,
 };
 
+#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
+
 EvtScript N(EVS_NpcAI_Tubba) = {
-    EVT_EXEC(N(80242184))
+    EVT_EXEC(N(EVS_WaitForCloseCall))
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim0C)
-    EVT_EXEC(N(802424E8))
+    EVT_EXEC(N(EVS_PlayFootstepFX))
     EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(AISettings_Tubba)))
     EVT_RETURN
     EVT_END
 };
+
+#include "world/common/todo/UnkFunc1.inc.c"
 
 EvtScript N(EVS_NpcDefeat_Tubba) = {
     EVT_CALL(N(UnkFunc1))
@@ -169,22 +164,12 @@ EvtScript N(EVS_NpcInit_Tubba) = {
 
 StaticNpc N(NpcData_Tubba) = {
     .id = NPC_Tubba,
-    .settings = &N(NpcSettings_Tubba),
+    .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_800000,
     .init = &N(EVS_NpcInit_Tubba),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_SUPER_SHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-    },
+    .drops = CLUBBA_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -204,24 +189,7 @@ StaticNpc N(NpcData_Tubba) = {
             .detectSize = { 1000, 250 },
         }
     },
-    .animations = {
-        .idle   = ANIM_WorldTubba_Anim06,
-        .walk   = ANIM_WorldTubba_Anim09,
-        .run    = ANIM_WorldTubba_Anim0C,
-        .chase  = ANIM_WorldTubba_Anim0C,
-        .anim_4 = ANIM_WorldTubba_Anim00,
-        .anim_5 = ANIM_WorldTubba_Anim00,
-        .death  = ANIM_WorldTubba_Anim00,
-        .hit    = ANIM_WorldTubba_Anim00,
-        .anim_8 = ANIM_WorldTubba_Anim00,
-        .anim_9 = ANIM_WorldTubba_Anim00,
-        .anim_A = ANIM_WorldTubba_Anim00,
-        .anim_B = ANIM_WorldTubba_Anim00,
-        .anim_C = ANIM_WorldTubba_Anim00,
-        .anim_D = ANIM_WorldTubba_Anim00,
-        .anim_E = ANIM_WorldTubba_Anim00,
-        .anim_F = ANIM_WorldTubba_Anim00,
-    },
+    .animations = TUBBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 

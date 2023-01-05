@@ -672,10 +672,10 @@ MapConfig dgb_maps[] = {
     { MAP(dgb_12), .songVariation = 1, .sfxReverb = 2 },
     { MAP(dgb_13), .songVariation = 1, .sfxReverb = 2 },
     { MAP(dgb_14), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_15, 0x802418A0), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_16, 0x80241440), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_17, 0x80240020), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_18, 0x80241280), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_15), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_16), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_17), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_18), .songVariation = 1, .sfxReverb = 2 },
 };
 
 /// Mt. Lavalava
