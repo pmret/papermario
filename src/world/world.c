@@ -657,8 +657,8 @@ MapConfig arn_maps[] = {
 /// Tubba Blubba's Castle
 #include "area_dgb/dgb.h"
 MapConfig dgb_maps[] = {
-    { MAP_UNSPLIT(dgb_00, 0x802400D0), .bgName = "arn_bg", .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(dgb_01, 0x80243460), .songVariation = 1, .sfxReverb = 2 },
+    { MAP_WITH_INIT(dgb_00), .bgName = "arn_bg" },
+    { MAP(dgb_01), .songVariation = 1, .sfxReverb = 2 },
     { MAP(dgb_02), .songVariation = 1, .sfxReverb = 2 },
     { MAP(dgb_03), .songVariation = 1, .sfxReverb = 2 },
     { MAP(dgb_04), .songVariation = 1, .sfxReverb = 2 },

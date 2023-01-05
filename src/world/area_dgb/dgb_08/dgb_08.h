@@ -14,17 +14,17 @@
 #include "sprite/npc/WorldTubba.h"
 
 enum {
-	NPC_Clubba_Unused		= 0,
-	NPC_Clubba_01			= 1,
-	NPC_Clubba_01_Hitbox	= 2,
-	NPC_Clubba_02			= 3,
-	NPC_Clubba_02_Hitbox	= 4,
-	NPC_Clubba_03			= 5,
-	NPC_Clubba_03_Hitbox	= 6,
-	NPC_Sentinel_01			= 7,
-	NPC_Sentinel_02			= 8,
-	NPC_Tubba				= 9,
-	NPC_Clubba_Last			= 11,
+    NPC_Clubba_Unused       = 0,
+    NPC_Clubba_01           = 1,
+    NPC_Clubba_01_Hitbox    = 2,
+    NPC_Clubba_02           = 3,
+    NPC_Clubba_02_Hitbox    = 4,
+    NPC_Clubba_03           = 5,
+    NPC_Clubba_03_Hitbox    = 6,
+    NPC_Sentinel_01         = 7,
+    NPC_Sentinel_02         = 8,
+    NPC_Tubba               = 9,
+    NPC_Clubba_Last         = 11,
 };
 
 #define NAMESPACE dgb_08

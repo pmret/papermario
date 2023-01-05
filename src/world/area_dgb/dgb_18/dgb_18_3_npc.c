@@ -403,9 +403,9 @@ EvtScript N(EVS_Scene_YakkeyShouts) = {
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 740, LVar1, LVar2)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_THREAD
-        EVT_SET(MF_Unk_00, FALSE)
+        EVT_SET(MF_Sync_YakkeyDialogue, FALSE)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 517, MSG_CH3_00FA)
-        EVT_SET(MF_Unk_00, TRUE)
+        EVT_SET(MF_Sync_YakkeyDialogue, TRUE)
     EVT_END_THREAD
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -418,7 +418,7 @@ EvtScript N(EVS_Scene_YakkeyShouts) = {
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
         EVT_CALL(SetPanTarget, CAM_DEFAULT, 740, LVar1, LVar2)
         EVT_WAIT(1)
-        EVT_IF_EQ(MF_Unk_00, TRUE)
+        EVT_IF_EQ(MF_Sync_YakkeyDialogue, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
