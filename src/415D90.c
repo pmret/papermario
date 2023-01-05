@@ -2396,7 +2396,7 @@ void btl_state_update_player_menu(void) {
 
             if (D_802ACC60 != 0) {
                 D_802ACC60--;
-            } else if (submenuResult != 0){
+            } else if (submenuResult != 0) {
                 set_animation(ACTOR_PLAYER, 0, ANIM_Mario_Walking);
                 battleStatus->unk_4C[0] = battleStatus->currentSubmenu = battle_menu_submenuIDs[submenuResult - 1];
                 for (i = 0; i < ARRAY_COUNT(battleStatus->submenuMoves); i++) {
