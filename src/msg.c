@@ -1356,7 +1356,7 @@ void dma_load_msg(u32 msgID, void* dest) {
     dma_copy(MSG_ROM_START + offset[0], MSG_ROM_START + offset[1], dest);
 }
 #else
-INCLUDE_ASM(void, "msg", dma_load_msg);
+INCLUDE_ASM_SHIFT(void, "msg", dma_load_msg);
 #endif
 
 s8* load_message_to_buffer(s32 msgID) {

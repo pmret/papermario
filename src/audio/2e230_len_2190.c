@@ -139,7 +139,7 @@ void au_engine_init(s32 outputRate) {
     func_80055050(alHeap);
 }
 #else
-INCLUDE_ASM(void, "audio/2e230_len_2190", au_engine_init);
+INCLUDE_ASM_SHIFT(void, "audio/2e230_len_2190", au_engine_init);
 #endif
 
 static void au_reset_instrument(Instrument* instrument) {
