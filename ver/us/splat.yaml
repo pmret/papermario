@@ -12823,8 +12823,11 @@ segments:
     start: 0xBFA0A0
     vram: 0x80240000
     subsegments:
-    - [0xBFA0A0,       c, BFA0A0]
-    - [0xBFA100,       c, BFA100]
+    - [0xBFA0A0, c, dgb_00_0_header]
+    - [0xBFA0A0, c, dgb_00_1_music]
+    - [0xBFA0A0, c, dgb_00_2_main]
+    - [0xBFA100, c, dgb_00_3_npc]
+    - [0xBFA150, c, dgb_00_4_entity]
     - [0xBFA150]
   - name: dgb_01
     dir: world/area_dgb/dgb_01
@@ -12832,27 +12835,76 @@ segments:
     start: 0xBFD880
     vram: 0x80240000
     subsegments:
-    - [0xBFD880,        c, BFD880]
-    - [0xBFD8C0,        c, BFD8C0]
-    - [0xBFD9A0,        c, BFD9A0]
-    - [0xC00C70,    .data, BFD9A0]
-    - [0xC047F0,   rgba16, img0, 64, 32]
-    - [0xC057F0,    .data, data0]
-    - [0xC05870,   rgba16, img1, 64, 32]
-    - [0xC06870,    .data, data1]
-    - [0xC068F0,   rgba16, img2, 32, 32]
-    - [0xC070F0,    .data, data2]
-    - [0xC07170,   rgba16, img3, 16, 32]
-    - [0xC07570,    .data, data3]
-    - [0xC075F0,   rgba16, img4, 16, 32]
-    - [0xC079F0,    .data, data4]
-    - [0xC07A70,   rgba16, img5, 16, 32]
-    - [0xC07E70,    .data, data5]
-    - [0xC07EF0,   rgba16, img6, 32, 32]
-    - [0xC086F0,    .data, data6]
-    - [0xC08770,   rgba16, img7, 32, 32]
-    - [0xC08F70,    .data, data7]
-    - [0xC08FF0,    .data, data]
+    - [0xBFD880, c, dgb_01_0_header]
+    - [0xBFD880, c, dgb_01_1_music]
+    - [0xBFD880, c, dgb_01_2_main]
+    - [0xBFD880, c, dgb_01_3_bridges]
+    - [0xBFD8C0, c, dgb_01_4_entity]
+    - [0xBFD9A0, c, dgb_01_5_npc]
+    - [0xC00C70, c, dgb_01_6_img0]
+    - [0xC00C70, c, dgb_01_6_img1]
+    - [0xC00C70, c, dgb_01_6_img2]
+    - [0xC00C70, c, dgb_01_6_img3]
+    - [0xC00C70, c, dgb_01_6_img4]
+    - [0xC00C70, c, dgb_01_6_img5]
+    - [0xC00C70, c, dgb_01_6_img6]
+    - [0xC00C70, c, dgb_01_6_img7]
+    - [0xC00C70, c, dgb_01_7]
+    - [0xC00C70, .data, dgb_01_0_header]
+    - [0xC00D20, .data, dgb_01_1_music]
+    - [0xC00DD0, .data, dgb_01_2_main]
+    - [0xC01770, .data, dgb_01_3_bridges]
+    - [0xC02350, .data, dgb_01_4_entity]
+    - [0xC02550, .data, dgb_01_5_npc]
+    - start: 0xC047F0
+      type: .data
+      name: dgb_01_6_img0
+      subsegments:
+      - [0xC047F0, rgba16, img0, 64, 32]
+      - [0xC057F0, gfx, img0]
+    - start: 0xC05870
+      type: .data
+      name: dgb_01_6_img1
+      subsegments:
+      - [0xC05870, rgba16, img1, 64, 32]
+      - [0xC06870, gfx, img1]
+    - start: 0xC068F0
+      type: .data
+      name: dgb_01_6_img2
+      subsegments:
+      - [0xC068F0, rgba16, img2, 32, 32]
+      - [0xC070F0, gfx, img2]
+    - start: 0xC07170
+      type: .data
+      name: dgb_01_6_img3
+      subsegments:
+      - [0xC07170, rgba16, img3, 16, 32]
+      - [0xC07570, gfx, img3]
+    - start: 0xC075F0
+      type: .data
+      name: dgb_01_6_img4
+      subsegments:
+      - [0xC075F0, rgba16, img4, 16, 32]
+      - [0xC079F0, gfx, img4]
+    - start: 0xC07A70
+      type: .data
+      name: dgb_01_6_img5
+      subsegments:
+      - [0xC07A70, rgba16, img5, 16, 32]
+      - [0xC07E70, gfx, img5]
+    - start: 0xC07EF0
+      type: .data
+      name: dgb_01_6_img6
+      subsegments:
+      - [0xC07EF0, rgba16, img6, 32, 32]
+      - [0xC086F0, gfx, img6]
+    - start: 0xC08770
+      type: .data
+      name: dgb_01_6_img7
+      subsegments:
+      - [0xC08770, rgba16, img7, 32, 32]
+      - [0xC08F70, gfx, img7]
+    - [0xC08FF0, .data, dgb_01_7]
     - [0xC20C70]
   - name: C20F40 # DMAd at the beginning of tubba blubba's castle (bridge cutscene)
     type: code
