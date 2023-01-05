@@ -5,6 +5,8 @@ extern u16 D_80078530[9];
 extern s32 D_8007854C[2];
 extern f32 AlTuneScaling[];
 
+#define SBN_ROM_OFFSET 0xF00000
+
 void func_80052E30(u8 index) {
     AlUnkVoice* voice = &gSoundGlobals->voices[index];
 
@@ -12,130 +14,133 @@ void func_80052E30(u8 index) {
     voice->priority = AU_PRIORITY_FREE;
 }
 
-INCLUDE_ASM(void, "audio/2e230_len_2190", au_engine_init)
-// void au_engine_init(s32 outputRate) {
-//     AuGlobals* globals;
-//     ALHeap* alHeap;
-//     SBNFileEntry fileEntry;
-//     s32* dummyTrackData;
-//     u8 effects[4];
-//     u32 i;
+#ifndef SHIFT
+void au_engine_init(s32 outputRate) {
+    AuGlobals* globals;
+    ALHeap* alHeap;
+    SBNFileEntry fileEntry;
+    s32* dummyTrackData;
+    u8 effects[4];
+    u32 i;
 
-//     alHeap = gSynDriverPtr->heap;
-//     gSoundGlobals = alHeapAlloc(alHeap, 1, sizeof(*gSoundGlobals));
+    alHeap = gSynDriverPtr->heap;
+    gSoundGlobals = alHeapAlloc(alHeap, 1, sizeof(*gSoundGlobals));
 
-//     gBGMPlayerA = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerA));
-//     gBGMPlayerB = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerB));
-//     gBGMPlayerC = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerC));
-//     gSoundManager = alHeapAlloc(alHeap, 1, sizeof(*gSoundManager));
-//     gAuAmbienceManager = alHeapAlloc(alHeap, 1, sizeof(*gAuAmbienceManager));
-//     gBGMPlayerA->soundManager = gSoundManager;
-//     gAuAmbienceManager->globals = gSoundGlobals;
+    gBGMPlayerA = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerA));
+    gBGMPlayerB = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerB));
+    gBGMPlayerC = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerC));
+    gSoundManager = alHeapAlloc(alHeap, 1, sizeof(*gSoundManager));
+    gAuAmbienceManager = alHeapAlloc(alHeap, 1, sizeof(*gAuAmbienceManager));
+    gBGMPlayerA->soundManager = gSoundManager;
+    gAuAmbienceManager->globals = gSoundGlobals;
 
 
-//     globals = gSoundGlobals;
-//     dummyTrackData = alHeapAlloc(alHeap, 1, 0x8000);
-//     globals->dataBGM[0] = (BGMHeader*) &dummyTrackData[0];
-//     globals->dataBGM[1] = (BGMHeader*) &dummyTrackData[0x1400];
-//     globals->dataMSEQ[0] = (MSEQHeader*) &dummyTrackData[0x1C00];
-//     globals->dataMSEQ[1] = (MSEQHeader*) &dummyTrackData[0x1400];
+    globals = gSoundGlobals;
+    dummyTrackData = alHeapAlloc(alHeap, 1, 0x8000);
+    globals->dataBGM[0] = (BGMHeader*) &dummyTrackData[0];
+    globals->dataBGM[1] = (BGMHeader*) &dummyTrackData[0x1400];
+    globals->dataMSEQ[0] = (MSEQHeader*) &dummyTrackData[0x1C00];
+    globals->dataMSEQ[1] = (MSEQHeader*) &dummyTrackData[0x1400];
 
-//     for (i = 0; i < 1; i++) {
-//         globals->unk_globals_6C[i].bgmPlayer = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
-//     }
+    for (i = 0; i < 1; i++) {
+        globals->unk_globals_6C[i].bgmPlayer = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
+    }
 
-//     globals->dataSEF = alHeapAlloc(alHeap, 1, 0x5200);
-//     globals->defaultInstrument = alHeapAlloc(alHeap, 1, sizeof(Instrument));
-//     globals->dataPER = alHeapAlloc(alHeap, 1, 6 * sizeof(PEREntry));
-//     globals->dataPRG = alHeapAlloc(alHeap, 1, 64 * sizeof(BGMInstrumentInfo));
-//     globals->musicEventQueue = alHeapAlloc(alHeap, 1, 16 * sizeof(MusicEventTrigger));
-//     globals->outputRate = outputRate;
-//     au_reset_instrument(globals->defaultInstrument);
-//     au_reset_drum_entry(&globals->defaultDrumEntry);
-//     au_reset_instrument_entry(&globals->defaultPRGEntry);
-//     bgm_clear_music_events();
+    globals->dataSEF = alHeapAlloc(alHeap, 1, 0x5200);
+    globals->defaultInstrument = alHeapAlloc(alHeap, 1, sizeof(Instrument));
+    globals->dataPER = alHeapAlloc(alHeap, 1, 6 * sizeof(PEREntry));
+    globals->dataPRG = alHeapAlloc(alHeap, 1, 64 * sizeof(BGMInstrumentInfo));
+    globals->musicEventQueue = alHeapAlloc(alHeap, 1, 16 * sizeof(MusicEventTrigger));
+    globals->outputRate = outputRate;
+    au_reset_instrument(globals->defaultInstrument);
+    au_reset_drum_entry(&globals->defaultDrumEntry);
+    au_reset_instrument_entry(&globals->defaultPRGEntry);
+    bgm_clear_music_events();
 
-//     globals->audioThreadCallbacks[0] = NULL;
-//     globals->audioThreadCallbacks[1] = NULL;
+    globals->audioThreadCallbacks[0] = NULL;
+    globals->audioThreadCallbacks[1] = NULL;
 
-//     for (i = 0; i < 1; i++) {
-//         globals->unk_globals_6C[i].unk_4 = 0;
-//         globals->unk_globals_6C[i].unk_5 = 0;
-//     }
+    for (i = 0; i < 1; i++) {
+        globals->unk_globals_6C[i].unk_4 = 0;
+        globals->unk_globals_6C[i].unk_5 = 0;
+    }
 
-//     for (i = 0; i < 4; i++) {
-//         globals->effectChanges[i].type = AU_FX_NONE;
-//         globals->effectChanges[i].changed = FALSE;
-//     }
+    for (i = 0; i < 4; i++) {
+        globals->effectChanges[i].type = AU_FX_NONE;
+        globals->effectChanges[i].changed = FALSE;
+    }
 
-//     for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
-//         AlUnkVoice* voice;
-//         func_80056EC0(i, 0);
-//         au_pvoice_set_filter_wavetable(i, globals->defaultInstrument);
-//         voice = &globals->voices[i];
-//         voice->instrument = NULL;
-//         voice->pitchRatio = 0;
-//         voice->volume = -1;
-//         voice->pan = 0xFF;
-//         voice->reverbAmt = 0xFF;
-//         voice->reverbType = 0;
-//         voice->unk_42 = 0;
-//         voice->unk_flags_43 = 0;
-//         voice->priorityCopy = AU_PRIORITY_FREE;
-//         voice->priority = AU_PRIORITY_FREE;
-//     }
+    for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
+        AlUnkVoice* voice;
+        func_80056EC0(i, 0);
+        au_pvoice_set_filter_wavetable(i, globals->defaultInstrument);
+        voice = &globals->voices[i];
+        voice->instrument = NULL;
+        voice->pitchRatio = 0;
+        voice->volume = -1;
+        voice->pan = 0xFF;
+        voice->reverbAmt = 0xFF;
+        voice->reverbType = 0;
+        voice->unk_42 = 0;
+        voice->unk_flags_43 = 0;
+        voice->priorityCopy = AU_PRIORITY_FREE;
+        voice->priority = AU_PRIORITY_FREE;
+    }
 
-//     au_load_INIT(globals, 0xF00000, alHeap);
+    au_load_INIT(globals, SBN_ROM_OFFSET, alHeap);
 
-//     for (i = 0; i < 3; i++) {
-//         globals->banks[i] = alHeapAlloc(alHeap, 1, 0x840);
-//     }
+    for (i = 0; i < 3; i++) {
+        globals->banks[i] = alHeapAlloc(alHeap, 1, 0x840);
+    }
 
-//     au_bgm_player_init(gBGMPlayerA, AU_PRIORITY_BGM_PLAYER_MAIN, AU_FX_NONE, globals);
-//     effects[0] = 0;
-//     effects[1] = 3;
-//     effects[2] = -1;
-//     effects[3] = -1;
-//     au_bgm_set_effect_indices(gBGMPlayerA, effects);
+    au_bgm_player_init(gBGMPlayerA, AU_PRIORITY_BGM_PLAYER_MAIN, AU_FX_NONE, globals);
+    effects[0] = 0;
+    effects[1] = 3;
+    effects[2] = -1;
+    effects[3] = -1;
+    au_bgm_set_effect_indices(gBGMPlayerA, effects);
 
-//     au_bgm_player_init(gBGMPlayerB, AU_PRIORITY_BGM_PLAYER_AUX, AU_FX_BIGROOM, globals);
-//     effects[0] = 2;
-//     effects[1] = -1;
-//     effects[2] = -1;
-//     effects[3] = -1;
-//     au_bgm_set_effect_indices(gBGMPlayerB, effects);
+    au_bgm_player_init(gBGMPlayerB, AU_PRIORITY_BGM_PLAYER_AUX, AU_FX_BIGROOM, globals);
+    effects[0] = 2;
+    effects[1] = -1;
+    effects[2] = -1;
+    effects[3] = -1;
+    au_bgm_set_effect_indices(gBGMPlayerB, effects);
 
-//     au_sfx_init(gSoundManager, AU_PRIORITY_SFX_MANAGER, AU_FX_SMALLROOM, globals, 16);
-//     au_mseq_manager_init(gAuAmbienceManager, AU_PRIORITY_MSEQ_MANAGER, AU_FX_SMALLROOM, globals);
-//     func_80052614(globals);
-//     au_load_BK_headers(globals, alHeap);
-//     if (au_fetch_SBN_file(globals->mseqFileList[0], AU_FMT_SEF, &fileEntry) == AU_RESULT_OK) {
-//         au_read_rom(fileEntry.offset, globals->dataSEF, fileEntry.data & 0xFFFFFF);
-//     }
-//     au_sfx_load_groups_from_SEF(gSoundManager);
-//     if (au_fetch_SBN_file(globals->mseqFileList[1], AU_FMT_PER, &fileEntry) == AU_RESULT_OK) {
-//         au_load_PER(globals, fileEntry.offset);
-//     }
-//     if (au_fetch_SBN_file(globals->mseqFileList[2], AU_FMT_PRG, &fileEntry) == AU_RESULT_OK) {
-//         au_load_PRG(globals, fileEntry.offset);
-//     }
+    au_sfx_init(gSoundManager, AU_PRIORITY_SFX_MANAGER, AU_FX_SMALLROOM, globals, 16);
+    au_mseq_manager_init(gAuAmbienceManager, AU_PRIORITY_MSEQ_MANAGER, AU_FX_SMALLROOM, globals);
+    func_80052614(globals);
+    au_load_BK_headers(globals, alHeap);
+    if (au_fetch_SBN_file(globals->mseqFileList[0], AU_FMT_SEF, &fileEntry) == AU_RESULT_OK) {
+        au_read_rom(fileEntry.offset, globals->dataSEF, fileEntry.data & 0xFFFFFF);
+    }
+    au_sfx_load_groups_from_SEF(gSoundManager);
+    if (au_fetch_SBN_file(globals->mseqFileList[1], AU_FMT_PER, &fileEntry) == AU_RESULT_OK) {
+        au_load_PER(globals, fileEntry.offset);
+    }
+    if (au_fetch_SBN_file(globals->mseqFileList[2], AU_FMT_PRG, &fileEntry) == AU_RESULT_OK) {
+        au_load_PRG(globals, fileEntry.offset);
+    }
 
-//     globals->instrumentGroups[0] = globals->instrumentGroup1;
-//     globals->instrumentGroups[1] = globals->instrumentGroup2;
-//     globals->instrumentGroups[2] = globals->instrumentGroupX;
-//     globals->instrumentGroups[3] = globals->instrumentGroup3;
-//     globals->instrumentGroups[4] = globals->instrumentGroup4;
-//     globals->instrumentGroups[5] = globals->instrumentGroup5;
-//     globals->instrumentGroups[6] = globals->instrumentGroup6;
-//     globals->instrumentGroups[7] = globals->instrumentGroup1;
-//     globals->unk_53 = 0;
-//     globals->unk_52 = 0;
-//     globals->unk_51 = 0;
-//     globals->unk_50 = 0;
+    globals->instrumentGroups[0] = globals->instrumentGroup1;
+    globals->instrumentGroups[1] = globals->instrumentGroup2;
+    globals->instrumentGroups[2] = globals->instrumentGroupX;
+    globals->instrumentGroups[3] = globals->instrumentGroup3;
+    globals->instrumentGroups[4] = globals->instrumentGroup4;
+    globals->instrumentGroups[5] = globals->instrumentGroup5;
+    globals->instrumentGroups[6] = globals->instrumentGroup6;
+    globals->instrumentGroups[7] = globals->instrumentGroup1;
+    globals->unk_53 = 0;
+    globals->unk_52 = 0;
+    globals->unk_51 = 0;
+    globals->unk_50 = 0;
 
-//     func_80057ED0(0);
-//     func_80055050(alHeap);
-// }
+    func_80057ED0(0);
+    func_80055050(alHeap);
+}
+#else
+INCLUDE_ASM(void, "audio/2e230_len_2190", au_engine_init);
+#endif
 
 static void au_reset_instrument(Instrument* instrument) {
     instrument->base = DummyInstrumentBase;

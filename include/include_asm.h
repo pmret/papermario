@@ -13,7 +13,11 @@
         "\t.globl\t"#NAME"\n" \
         "\t.ent\t"#NAME"\n" \
         #NAME ":\n" \
+#ifdef SHIFT
+        "\t.include \"ver/"STRINGIFY(VERSION)"/asm/shiftable/"FOLDER"/"#NAME".s\"\n" \
+#else
         "\t.include \"ver/"STRINGIFY(VERSION)"/asm/nonmatchings/"FOLDER"/"#NAME".s\"\n" \
+#endif
         "\t.set reorder\n" \
         "\t.set at\n" \
         "\t.end\t"#NAME \

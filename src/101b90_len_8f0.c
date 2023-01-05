@@ -3,11 +3,7 @@
 #include "nu/nusys.h"
 #include "ld_addrs.h"
 
-#ifdef SHIFT
-#define SPRITE_ROM_START _1943000_ROM_START + 0x10
-#else
 #define SPRITE_ROM_START 0x1943000 + 0x10
-#endif
 
 extern s32 spr_allocateBtlComponentsOnWorldHeap;
 
@@ -146,35 +142,37 @@ SpriteAnimData* spr_load_sprite(s32 idx, s32 isPlayerSprite, s32 useTailAlloc) {
     return animData;
 }
 
-// void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize) {
-//     void* raster;
-//     s32 i;
+#ifndef SHIFT
+void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize) {
+    void* raster;
+    s32 i;
 
-//     nuPiReadRom(SPRITE_ROM_START, &SpriteDataHeader, sizeof(SpriteDataHeader));
-//     PlayerRasterCacheSize = cacheSize;
-//     PlayerRasterMaxSize = maxRasterSize;
-//     SpriteDataHeader[0] += SPRITE_ROM_START;
-//     SpriteDataHeader[1] += SPRITE_ROM_START;
-//     SpriteDataHeader[2] += SPRITE_ROM_START;
-//     raster = _heap_malloc(&gSpriteHeapPtr, maxRasterSize * cacheSize);
+    nuPiReadRom(SPRITE_ROM_START, &SpriteDataHeader, sizeof(SpriteDataHeader));
+    PlayerRasterCacheSize = cacheSize;
+    PlayerRasterMaxSize = maxRasterSize;
+    SpriteDataHeader[0] += SPRITE_ROM_START;
+    SpriteDataHeader[1] += SPRITE_ROM_START;
+    SpriteDataHeader[2] += SPRITE_ROM_START;
+    raster = _heap_malloc(&gSpriteHeapPtr, maxRasterSize * cacheSize);
 
-//     for (i = 0; i < ARRAY_COUNT(PlayerRasterCache); i++) {
-//         PlayerRasterCache[i].raster = raster;
-//         raster += PlayerRasterMaxSize;
-//         PlayerRasterCache[i].lazyDeleteTime = 0;
-//         PlayerRasterCache[i].rasterIndex = 0;
-//         PlayerRasterCache[i].spriteIndex = 0xFF;
-//     }
+    for (i = 0; i < ARRAY_COUNT(PlayerRasterCache); i++) {
+        PlayerRasterCache[i].raster = raster;
+        raster += PlayerRasterMaxSize;
+        PlayerRasterCache[i].lazyDeleteTime = 0;
+        PlayerRasterCache[i].rasterIndex = 0;
+        PlayerRasterCache[i].spriteIndex = 0xFF;
+    }
 
-//     for (i = 0; i < ARRAY_COUNT(PlayerRasterBufferSetOffsets); i++)    {
-//         PlayerRasterBufferSetOffsets[i] = 0;
-//     }
-//     PlayerRasterSetsLoaded = 0;
-//     nuPiReadRom(SpriteDataHeader[0], &PlayerRasterHeader, sizeof(PlayerRasterHeader));
-//     nuPiReadRom(SpriteDataHeader[0] + PlayerRasterHeader[0], D_802E0C20, sizeof(D_802E0C20));
-// }
-
+    for (i = 0; i < ARRAY_COUNT(PlayerRasterBufferSetOffsets); i++)    {
+        PlayerRasterBufferSetOffsets[i] = 0;
+    }
+    PlayerRasterSetsLoaded = 0;
+    nuPiReadRom(SpriteDataHeader[0], &PlayerRasterHeader, sizeof(PlayerRasterHeader));
+    nuPiReadRom(SpriteDataHeader[0] + PlayerRasterHeader[0], D_802E0C20, sizeof(D_802E0C20));
+}
+#else
 INCLUDE_ASM(void, "101b90_len_8f0", spr_init_player_raster_cache);
+#endif
 
 IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID) {
     PlayerSpriteCacheEntry* temp_s0;

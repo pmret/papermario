@@ -1342,19 +1342,22 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->sizeScale = 1.0f;
 }
 
+#ifndef SHIFT
+void dma_load_msg(u32 msgID, void* dest) {
+    u8* addr = (u8*) MSG_ROM_START + (msgID >> 14); // (msgID >> 16) * 4
+    u8* offset[2]; // start, end
+
+    dma_copy(addr, addr + 4, &offset[0]); // Load section offset
+
+    addr = MSG_ROM_START + offset[0] + (msgID & 0xFFFF) * 4;
+    dma_copy(addr, addr + 8, &offset); // Load message start and end offsets
+
+    // Load the msg data
+    dma_copy(MSG_ROM_START + offset[0], MSG_ROM_START + offset[1], dest);
+}
+#else
 INCLUDE_ASM(void, "msg", dma_load_msg);
-// void dma_load_msg(u32 msgID, void* dest) {
-//     u8* addr = (u8*) MSG_ROM_START + (msgID >> 14); // (msgID >> 16) * 4
-//     u8* offset[2]; // start, end
-
-//     dma_copy(addr, addr + 4, &offset[0]); // Load section offset
-
-//     addr = MSG_ROM_START + offset[0] + (msgID & 0xFFFF) * 4;
-//     dma_copy(addr, addr + 8, &offset); // Load message start and end offsets
-
-//     // Load the msg data
-//     dma_copy(MSG_ROM_START + offset[0], MSG_ROM_START + offset[1], dest);
-// }
+#endif
 
 s8* load_message_to_buffer(s32 msgID) {
     s8* prevBufferPos;

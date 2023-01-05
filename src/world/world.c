@@ -6,11 +6,7 @@
 #include "sprite.h"
 #include "model.h"
 
-#ifdef SHIFT
-#define ASSET_TABLE_ROM_START mapfs_ROM_START
-#else
 #define ASSET_TABLE_ROM_START 0x1E40000
-#endif
 
 #define ASSET_TABLE_HEADER_SIZE 0x20
 #define ASSET_TABLE_FIRST_ENTRY (ASSET_TABLE_ROM_START + ASSET_TABLE_HEADER_SIZE)
@@ -210,48 +206,53 @@ s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID) {
     return FALSE;
 }
 
-INCLUDE_ASM(void*, "world/world", load_asset_by_name)
-// void* load_asset_by_name(const char* assetName, u32* decompressedSize) {
-//     AssetHeader firstHeader;
-//     AssetHeader* assetTableBuffer;
-//     AssetHeader* curAsset;
-//     void* ret;
+#ifndef SHIFT
+void* load_asset_by_name(const char* assetName, u32* decompressedSize) {
+    AssetHeader firstHeader;
+    AssetHeader* assetTableBuffer;
+    AssetHeader* curAsset;
+    void* ret;
 
-//     dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY, (u8*) ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
-//     assetTableBuffer = heap_malloc(firstHeader.offset);
-//     curAsset = &assetTableBuffer[0];
-//     dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY, (u8*) ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
-//     while (strcmp(curAsset->name, assetName) != 0) {
-//         curAsset++;
-//     }
-//     *decompressedSize = curAsset->decompressedLength;
-//     ret = general_heap_malloc(curAsset->compressedLength);
-//     dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY + curAsset->offset,
-//              (u8*) ASSET_TABLE_FIRST_ENTRY + curAsset->offset + curAsset->compressedLength, ret);
-//     heap_free(assetTableBuffer);
-//     return ret;
-// }
+    dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY, (u8*) ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
+    assetTableBuffer = heap_malloc(firstHeader.offset);
+    curAsset = &assetTableBuffer[0];
+    dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY, (u8*) ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
+    while (strcmp(curAsset->name, assetName) != 0) {
+        curAsset++;
+    }
+    *decompressedSize = curAsset->decompressedLength;
+    ret = general_heap_malloc(curAsset->compressedLength);
+    dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY + curAsset->offset,
+             (u8*) ASSET_TABLE_FIRST_ENTRY + curAsset->offset + curAsset->compressedLength, ret);
+    heap_free(assetTableBuffer);
+    return ret;
+}
+#else
+INCLUDE_ASM(void*, "world/world", load_asset_by_name);
+#endif
 
-INCLUDE_ASM(s32, "world/world", get_asset_offset)
+#ifndef SHIFT
+s32 get_asset_offset(char* assetName, s32* compressedSize) {
+    AssetHeader firstHeader;
+    AssetHeader* assetTableBuffer;
+    AssetHeader* curAsset;
+    s32 ret;
 
-// s32 get_asset_offset(char* assetName, s32* compressedSize) {
-//     AssetHeader firstHeader;
-//     AssetHeader* assetTableBuffer;
-//     AssetHeader* curAsset;
-//     s32 ret;
-
-//     dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY, (u8*) ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
-//     assetTableBuffer = heap_malloc(firstHeader.offset);
-//     curAsset = &assetTableBuffer[0];
-//     dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY, (u8*) ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
-//     while (strcmp(curAsset->name, assetName) != 0) {
-//         curAsset++;
-//     }
-//     *compressedSize = curAsset->compressedLength;
-//     ret = ASSET_TABLE_FIRST_ENTRY + curAsset->offset;
-//     heap_free(assetTableBuffer);
-//     return ret;
-// }
+    dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY, (u8*) ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
+    assetTableBuffer = heap_malloc(firstHeader.offset);
+    curAsset = &assetTableBuffer[0];
+    dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY, (u8*) ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
+    while (strcmp(curAsset->name, assetName) != 0) {
+        curAsset++;
+    }
+    *compressedSize = curAsset->compressedLength;
+    ret = ASSET_TABLE_FIRST_ENTRY + curAsset->offset;
+    heap_free(assetTableBuffer);
+    return ret;
+}
+#else
+INCLUDE_ASM(s32, "world/world", get_asset_offset);
+#endif
 
 #define AREA(area, jp_name) { ARRAY_COUNT(area##_maps), area##_maps, "area_" #area, jp_name }
 
