@@ -1258,6 +1258,7 @@ enum {
     osr_01_ENTRY_3   = 3,
     osr_02_ENTRY_0   = 0,
     osr_02_ENTRY_1   = 1,
+    osr_02_ENTRY_2   = 2,
     osr_03_ENTRY_0   = 0,
     osr_03_ENTRY_1   = 1,
     osr_03_ENTRY_2   = 2,

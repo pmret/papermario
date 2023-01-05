@@ -1,12 +1,7 @@
 #include "kpa_95.h"
 
 #include "world/common/npc/Toad_Stationary.inc.c"
-
-NpcSettings N(NpcSettings_Penguin) = {
-    .height = 24,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/Penguin.inc.c"
 
 #include "world/common/enemy/complete/Koopatrol_Patrol.inc.c"
 
@@ -203,25 +198,8 @@ StaticNpc N(NpcData_Prisoners)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
         .init = &N(EVS_NpcInit_Penguin),
-        .drops = NPC_NO_DROPS,
-        .animations = {
-            .idle   = ANIM_Penguin_Idle,
-            .walk   = ANIM_Penguin_Walk,
-            .run    = ANIM_Penguin_Run,
-            .chase  = ANIM_Penguin_Run,
-            .anim_4 = ANIM_Penguin_Idle,
-            .anim_5 = ANIM_Penguin_Idle,
-            .death  = ANIM_Penguin_Idle,
-            .hit    = ANIM_Penguin_Idle,
-            .anim_8 = ANIM_Penguin_Idle,
-            .anim_9 = ANIM_Penguin_Idle,
-            .anim_A = ANIM_Penguin_Idle,
-            .anim_B = ANIM_Penguin_Idle,
-            .anim_C = ANIM_Penguin_Idle,
-            .anim_D = ANIM_Penguin_Idle,
-            .anim_E = ANIM_Penguin_Idle,
-            .anim_F = ANIM_Penguin_Idle,
-        },
+        .drops = PENGUIN_DROPS,
+        .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptivePenguin,
     },
 };
@@ -263,11 +241,7 @@ StaticNpc N(NpcData_Koopatrol) = {
     .yaw = 270,
     .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_800000,
     .init = &N(EVS_NpcInit_Koopatrol),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NPC_NO_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -282,24 +256,7 @@ StaticNpc N(NpcData_Koopatrol) = {
             .detectSize = { 200 },
         }
     },
-    .animations = {
-        .idle   = ANIM_WorldKoopatrol_Anim01,
-        .walk   = ANIM_WorldKoopatrol_Anim04,
-        .run    = ANIM_WorldKoopatrol_Anim06,
-        .chase  = ANIM_WorldKoopatrol_Anim06,
-        .anim_4 = ANIM_WorldKoopatrol_Anim01,
-        .anim_5 = ANIM_WorldKoopatrol_Anim01,
-        .death  = ANIM_WorldKoopatrol_Anim10,
-        .hit    = ANIM_WorldKoopatrol_Anim10,
-        .anim_8 = ANIM_WorldKoopatrol_Anim0C,
-        .anim_9 = ANIM_WorldKoopatrol_Anim0B,
-        .anim_A = ANIM_WorldKoopatrol_Anim0D,
-        .anim_B = ANIM_WorldKoopatrol_Anim01,
-        .anim_C = ANIM_WorldKoopatrol_Anim01,
-        .anim_D = ANIM_WorldKoopatrol_Anim01,
-        .anim_E = ANIM_WorldKoopatrol_Anim01,
-        .anim_F = ANIM_WorldKoopatrol_Anim01,
-    },
+    .animations = KOOPATROL_ANIMS,
 };
 
 NpcGroupList N(DefaultNPCs) = {
