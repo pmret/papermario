@@ -511,7 +511,7 @@ EvtScript N(EVS_NpcInteract_Kolorado_01) = {
     EVT_END_THREAD
     EVT_IF_EQ(GB_StoryProgress, STORY_CH5_TRADED_VASE_FOR_SEED)
         EVT_CALL(SetNpcAnimation, NPC_Kolorado_02, ANIM_Kolorado_Walk)
-        EVT_CALL(LoadPath, 20, EVT_PTR(N(D_802438E4_B23E24)), 3, EASING_LINEAR)
+        EVT_CALL(LoadPath, 20, EVT_PTR(N(D_802438E4_B23E24)), ARRAY_COUNT(N(D_802438E4_B23E24)), EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, NPC_Kolorado_02, LVar1, LVar2, LVar3)

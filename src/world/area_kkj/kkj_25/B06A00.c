@@ -5,4 +5,4 @@ static char* N(exit_str_1) = "kkj_25";
 static char* N(exit_str_2) = "kkj_25\0";
 static char* N(exit_str_3) = "osr_03";
 
-#include "world/common/todo/SetPlayerSpriteSet2.inc.c"
+#include "world/common/todo/SetPlayerSpriteSet2_MapInit.inc.c"

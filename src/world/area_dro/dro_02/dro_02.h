@@ -18,9 +18,6 @@
 #include "sprite/npc/WorldParakarry.h"
 #include "sprite/npc/Archeologist.h"
 #include "sprite/npc/Dryite.h"
-#include "sprite/npc/Mouser.h"
-#include "sprite/npc/DisguisedMoustafa.h"
-#include "sprite/npc/Moustafa.h"
 
 enum {
     NPC_Archeologist            = 0,

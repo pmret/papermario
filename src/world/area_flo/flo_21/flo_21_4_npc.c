@@ -77,7 +77,7 @@ EvtScript N(EVS_HuffNPuff_JumpOut) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
-        EVT_CALL(LoadPath, 30, EVT_PTR(N(Path_JumpOut)), 3, EASING_LINEAR)
+        EVT_CALL(LoadPath, 30, EVT_PTR(N(Path_JumpOut)), ARRAY_COUNT(N(Path_JumpOut)), EASING_LINEAR)
         EVT_LABEL(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)

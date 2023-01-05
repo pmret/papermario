@@ -2912,6 +2912,12 @@ enum CookingIngredients {
     PEACH_COOKING_CAKE_WITH_BERRIES = 0x12,
 };
 
+enum PeachDisguises {
+    PEACH_DISGUISE_1        = 1,
+    PEACH_DISGUISE_2        = 2,
+    PEACH_DISGUISE_CLUBBA   = 3,
+};
+
 // Requires decimals
 enum NpcIDs {
     NPC_SELF         = -1,

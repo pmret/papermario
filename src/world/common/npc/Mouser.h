@@ -1,5 +1,8 @@
 #include "common.h"
-#include "sprite/npc/Toadette.h"
+
+#include "sprite/npc/Mouser.h"
+#include "sprite/npc/DisguisedMoustafa.h"
+#include "sprite/npc/Moustafa.h"
 
 #define MOUSER_DROPS \
 { \
@@ -46,4 +49,44 @@
     ANIM_Mouser_Purple_Idle, \
     ANIM_Mouser_Purple_Idle, \
     ANIM_Mouser_Purple_Idle, \
+}
+
+#define MOUSTAFA_ANIMS \
+{ \
+    ANIM_Moustafa_Idle, \
+    ANIM_Moustafa_Idle, \
+    ANIM_Moustafa_Run, \
+    ANIM_Moustafa_Run, \
+    ANIM_Moustafa_Idle, \
+    ANIM_Moustafa_Idle, \
+    ANIM_Moustafa_Idle, \
+    ANIM_Moustafa_Idle, \
+    ANIM_Moustafa_Idle, \
+    ANIM_Moustafa_Idle, \
+    ANIM_Moustafa_Idle, \
+    ANIM_Moustafa_Idle, \
+    ANIM_Moustafa_Idle, \
+    ANIM_Moustafa_Idle, \
+    ANIM_Moustafa_Idle, \
+    ANIM_Moustafa_Idle, \
+}
+
+#define DISGUISED_MOUSTAFA_ANIMS \
+{ \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
+    ANIM_DisguisedMoustafa_Idle, \
 }

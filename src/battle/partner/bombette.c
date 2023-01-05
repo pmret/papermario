@@ -23,7 +23,7 @@ extern EvtScript N(bodySlam);
 extern EvtScript N(bomb);
 
 enum {
-	LF_MashEnded    = LocalFlag(0),
+    LF_MashEnded    = LocalFlag(0),
     LF_MashStarted  = LocalFlag(2),
 };
 
