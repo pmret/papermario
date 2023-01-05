@@ -655,26 +655,27 @@ MapConfig arn_maps[] = {
 };
 
 /// Tubba Blubba's Castle
+#include "area_dgb/dgb.h"
 MapConfig dgb_maps[] = {
-    { MAP_UNSPLIT(dgb_00, 0x802400D0), .bgName = "arn_bg", .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(dgb_01, 0x80243460), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_02, 0x80241470), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_03, 0x80242830), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_04, 0x80243130), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_05, 0x802414A0), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_06, 0x802402E0), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_07, 0x80241450), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_08, 0x80243CB0), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_09, 0x80243840), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_10, 0x80240210), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_11, 0x80240090), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_12, 0x802402D0), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_13, 0x80240010), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_14, 0x80240020), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_15, 0x802418A0), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_16, 0x80241440), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_17, 0x80240020), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(dgb_18, 0x80241280), .songVariation = 1, .sfxReverb = 2 },
+    { MAP_WITH_INIT(dgb_00), .bgName = "arn_bg" },
+    { MAP(dgb_01), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_02), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_03), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_04), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_05), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_06), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_07), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_08), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_09), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_10), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_11), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_12), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_13), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_14), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_15), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_16), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_17), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(dgb_18), .songVariation = 1, .sfxReverb = 2 },
 };
 
 /// Mt. Lavalava

@@ -103,6 +103,8 @@ kmr_02_Quizmo_VannaTEffect = 0x80257F50;
 
 // broken map symbols
 hos_06_D_80246430 = 0x80246430;
+jan_03_D_8024FEE0 = 0x8024FEE0;
+hos_05_D_8024F4C0 = 0x8024F4C0;
 
 // os stuff
 osTvType = 0x80000300;

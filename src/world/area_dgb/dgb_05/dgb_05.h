@@ -2,18 +2,24 @@
 /// @brief Tubba's Castle - Stairs Above Basement
 
 #include "common.h"
-#include "../dgb.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../dgb.h"
+#include "mapfs/dgb_05_shape.h"
+#include "mapfs/dgb_05_hit.h"
+
+enum {
+    NPC_Clubba_01           = 0,
+    NPC_Clubba_01_Hitbox    = 1,
+    NPC_Clubba_02           = 3,
+    NPC_Clubba_02_Hitbox    = 4,
+};
+
 #define NAMESPACE dgb_05
 
-ApiStatus N(func_80240000_C3AA10)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240030_C3AA40)(Evt* script, s32 isInitialCall);
-ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall);
-
-extern NpcGroupList N(npcGroupList_8024230C);
-extern EvtScript N(802417F0);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_SetupHole);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(DefaultNPCs);

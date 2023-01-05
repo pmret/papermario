@@ -1,3 +1,6 @@
+#ifndef _WANDER_MELEE_AI_
+#define _WANDER_MELEE_AI_
+
 // Used by:
 // - Clubba + White Clubba
 // - Spear Guy
@@ -120,3 +123,5 @@ ApiStatus N(WanderMeleeAI_Main)(Evt *script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
+
+#endif

@@ -2,20 +2,42 @@
 /// @brief Tubba's Castle - Escape Scene
 
 #include "common.h"
-#include "../dgb.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../dgb.h"
+#include "mapfs/arn_20_shape.h"
+#include "mapfs/arn_20_hit.h"
+
+#include "sprite/npc/WorldGoombario.h"
+#include "sprite/npc/WorldKooper.h"
+#include "sprite/npc/WorldBombette.h"
+#include "sprite/npc/WorldParakarry.h"
+#include "sprite/npc/WorldBow.h"
+
+enum {
+    NPC_Boo_01      = 0,
+    NPC_Boo_02      = 1,
+    NPC_Boo_03      = 2,
+    NPC_Boo_04      = 3,
+    NPC_Boo_05      = 4,
+    NPC_Boo_06      = 5,
+    NPC_Sentinel    = 6,
+};
+
+enum {
+    MV_PreventTaunting  = MapVar(0),
+};
+
 #define NAMESPACE dgb_00
 
-ApiStatus N(func_80240060_BFA100)(Evt* script, s32 isInitialCall);
-
-extern NpcGroupList N(npcGroupList_802436EC);
-extern NpcGroupList N(npcGroupList_80243740);
-extern EvtScript N(80240F50);
-extern EvtScript N(8024103C);
-extern EvtScript N(802413F4);
-extern EvtScript N(80241AA0);
-extern EvtScript N(80242B84);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_Scene_ThrownOutBySentinel);
+extern EvtScript N(EVS_Scene_BoosApproachManor);
+extern EvtScript N(EVS_Scene_EscapeFromTubba);
+extern EvtScript N(EVS_SetBoosBracingDoor);
+extern EvtScript N(EVS_TubbaTaunting);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(DefaultNPCs);
+extern NpcGroupList N(BooNPCs);

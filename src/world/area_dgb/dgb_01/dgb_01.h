@@ -2,52 +2,59 @@
 /// @brief Tubba's Castle - Great Hall
 
 #include "common.h"
-#include "../dgb.h"
 #include "message_ids.h"
 #include "map.h"
+
+#include "../dgb.h"
+#include "mapfs/dgb_01_shape.h"
+#include "mapfs/dgb_01_hit.h"
+
+#include "sprite/npc/WorldTubba.h"
+#include "sprite/npc/Sentinel.h"
 #include "animation_script.h"
+
+enum {
+    NPC_Sentinel_01     = 0,
+    NPC_Sentinel_02     = 1,
+    NPC_Sentinel_03     = 2,
+    NPC_Sentinel_04     = 3,
+    NPC_Tubba           = 4,
+};
+
+enum {
+    MV_PadlockEntityID  = MapVar(0),
+};
 
 #define NAMESPACE dgb_01
 
-enum {
-    NPC_SENTINEL0,
-    NPC_SENTINEL1,
-    NPC_SENTINEL2,
-    NPC_SENTINEL3,
-    NPC_WORLD_TUBBA,
-};
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_ExitDoors_dgb_08_0);
+extern EvtScript N(EVS_ExitDoors_dgb_08_1);
+extern EvtScript N(EVS_SetupBridges);
+extern EvtScript N(EVS_UnlockPrompt_Door);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(DefaultNPCs);
+extern NpcGroupList N(FirstFloorEscapeNPCs);
+extern NpcGroupList N(SecondFloorEscapeNPCs);
+extern NpcGroupList N(ThirdFloorEscapeNPCs);
+
+extern StaticAnimatorNode* N(SmashBridgesSkeleton)[];
+extern AnimScript N(AS_SmashBridges);
 
 ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall);
 ApiStatus SetAnimatedModelRenderMode(Evt* script, s32 isInitialCall);
 ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall);
 
-ApiStatus N(func_80240000_BFD880)(void);
-ApiStatus N(GetEntityPosition)(Evt* script, s32 isInitialCall);
-ApiStatus N(RemovePadlock)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall);
-ApiStatus N(SentinelAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall);
-
-extern EvtScript N(802449C4);
-extern EvtScript N(80244AD0);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
-extern StaticAnimatorNode* N(D_80252F4C_C107CC)[];
-extern AnimScript N(D_802539A0_C11220);
-extern NpcGroupList N(npcGroupList_80246E50);
-extern NpcGroupList N(npcGroupList_80246ED4);
-extern NpcGroupList N(npcGroupList_80246E8C);
-extern NpcGroupList N(npcGroupList_80246F1C);
-
-extern Gfx D_80247F70_C057F0[];
-extern Gfx D_80248FF0_C06870[];
-extern Gfx D_80249870_C070F0[];
-extern Gfx D_80249CF0_C07570[];
-extern Gfx D_8024A170_C079F0[];
-extern Gfx D_8024A5F0_C07E70[];
-extern Gfx D_8024AE70_C086F0[];
-extern Gfx D_8024B6F0_C08F70[];
-extern Gfx D_8024BCF8_C09578[];
+extern Gfx N(img0_gfx)[];
+extern Gfx N(img1_gfx)[];
+extern Gfx N(img2_gfx)[];
+extern Gfx N(img3_gfx)[];
+extern Gfx N(img4_gfx)[];
+extern Gfx N(img5_gfx)[];
+extern Gfx N(img6_gfx)[];
+extern Gfx N(img7_gfx)[];
+extern Gfx N(D_8024BCF8_C09578)[];
 
 extern Mtx N(D_80253160_C109E0);
 extern Mtx N(D_802531A0_C10A20);

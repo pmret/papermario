@@ -2,13 +2,19 @@
 /// @brief Tubba's Castle - Covered Tables Room (1F)
 
 #include "common.h"
-#include "../dgb.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../dgb.h"
+#include "mapfs/dgb_11_shape.h"
+#include "mapfs/dgb_11_hit.h"
+
+enum {
+    MV_SpringEntityID   = MapVar(0),
+};
+
 #define NAMESPACE dgb_11
 
-ApiStatus N(func_80240000_C4D3E0)(Evt* script, s32 isInitialCall);
-
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);

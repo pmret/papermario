@@ -2,22 +2,28 @@
 /// @brief Tubba's Castle - West Hall (3F)
 
 #include "common.h"
-#include "../dgb.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../dgb.h"
+#include "mapfs/dgb_15_shape.h"
+#include "mapfs/dgb_15_hit.h"
+
+#include "sprite/npc/WorldTubba.h"
+
+enum {
+    NPC_Tubba       = 0,
+};
+
+enum {
+    MV_PadlockEntityID  = MapVar(0),
+};
+
 #define NAMESPACE dgb_15
 
-ApiStatus N(GetEntityPosition)(Evt* script, s32 isInitialCall);
-ApiStatus N(RemovePadlock)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall);
-ApiStatus N(WanderMeleeAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall);
-
-extern NpcGroupList N(npcGroupList_80242AB0);
-extern EvtScript N(80242AD0);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
-extern EvtScript N(npcAI_8024274C);
-extern EvtScript N(unk_80241F8C);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_UnlockPrompt_Door);
+extern EvtScript N(EVS_ExitDoors_dgb_17_0);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(DefaultNPCs);

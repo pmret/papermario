@@ -2,14 +2,24 @@
 /// @brief Tubba's Castle - Stairs to Basement
 
 #include "common.h"
-#include "../dgb.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../dgb.h"
+#include "mapfs/dgb_04_shape.h"
+#include "mapfs/dgb_04_hit.h"
+
+enum {
+    NPC_Sentinel    = 0,
+};
+
+enum {
+    MV_SuperBlock   = MapVar(0),
+};
+
 #define NAMESPACE dgb_04
 
-ApiStatus N(SentinelAI_Main)(Evt* script, s32 isInitialCall);
-
-extern NpcGroupList N(npcGroupList_80243D18);
-extern EvtScript N(main);
-extern EvtScript N(makeEntities);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(DefaultNPCs);

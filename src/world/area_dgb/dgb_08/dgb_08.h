@@ -2,25 +2,36 @@
 /// @brief Tubba's Castle - East Hall (1/2F)
 
 #include "common.h"
-#include "../dgb.h"
 #include "message_ids.h"
 #include "map.h"
 
+#include "../dgb.h"
+#include "mapfs/dgb_08_shape.h"
+#include "mapfs/dgb_08_hit.h"
+
+#include "sprite/npc/WorldClubba.h"
+#include "sprite/npc/Sentinel.h"
+#include "sprite/npc/WorldTubba.h"
+
+enum {
+    NPC_Clubba_Unused       = 0,
+    NPC_Clubba_01           = 1,
+    NPC_Clubba_01_Hitbox    = 2,
+    NPC_Clubba_02           = 3,
+    NPC_Clubba_02_Hitbox    = 4,
+    NPC_Clubba_03           = 5,
+    NPC_Clubba_03_Hitbox    = 6,
+    NPC_Sentinel_01         = 7,
+    NPC_Sentinel_02         = 8,
+    NPC_Tubba               = 9,
+    NPC_Clubba_Last         = 11,
+};
+
 #define NAMESPACE dgb_08
 
-ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall);
-ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(WanderMeleeAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(SentinelAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80243B98_C43948)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80243C10_C439C0)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80243C50_C43A00)(Evt* script, s32 isInitialCall);
-
-extern NpcGroupList N(npcGroupList_80246958);
-extern NpcGroupList N(npcGroupList_802469AC);
-extern NpcGroupList N(npcGroupList_802469C4);
-extern EvtScript N(802469E0);
-extern EvtScript N(main);
-extern EvtScript N(npcAI_80244D7C);
-extern EvtScript N(unk_80244100);
+extern EvtScript N(EVS_Main);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_MakeEntities);
+extern NpcGroupList N(BeforeNPCs);
+extern NpcGroupList N(TubbaNPCs);
+extern NpcGroupList N(AfterNPCs);
