@@ -164,7 +164,7 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_NO_LEAD()
     EVT_SET(GF_MAP_TubbasManor, TRUE)
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(802449C4))
+    EVT_EXEC(N(EVS_SetupBridges))
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_dgb_00_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilitts, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_dgb_02_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittsw, 1, 0)
@@ -184,11 +184,11 @@ EvtScript N(EVS_Main) = {
             EVT_CALL(GetEntryID, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(dgb_01_ENTRY_2)
-                    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(NpcGroup1)))
+                    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(FirstFloorEscapeNPCs)))
                 EVT_CASE_EQ(dgb_01_ENTRY_4)
-                    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(NpcGroup2)))
+                    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(SecondFloorEscapeNPCs)))
                 EVT_CASE_EQ(dgb_01_ENTRY_6)
-                    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(NpcGroup3)))
+                    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(ThirdFloorEscapeNPCs)))
             EVT_END_SWITCH
     EVT_END_SWITCH
     EVT_EXEC(N(EVS_EnterMap))

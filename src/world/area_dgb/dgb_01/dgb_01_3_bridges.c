@@ -1,12 +1,12 @@
 #include "dgb_01.h"
 #include "ld_addrs.h"
 
-ApiStatus N(func_80240000_BFD880)(void) {
-    dma_copy(C20F40_ROM_START, C20F40_ROM_END, C20F40_VRAM);
+ApiStatus N(LoadSmashBridgesGraphics)(void) {
+    dma_copy(dgb_01_smash_bridges_ROM_START, dgb_01_smash_bridges_ROM_END, dgb_01_smash_bridges_VRAM);
     return ApiStatus_DONE2;
 }
 
-EvtScript N(80243EF0) = {
+EvtScript N(EVS_Scene_TubbaSmashBridges) = {
     EVT_LOOP(0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_IF_LT(LVar0, 100)
@@ -15,7 +15,7 @@ EvtScript N(80243EF0) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(func_80240000_BFD880))
+    EVT_CALL(N(LoadSmashBridgesGraphics))
     EVT_CALL(InitAnimatedModels)
     EVT_WAIT(1)
     EVT_CALL(InterruptUsePartner)
@@ -70,7 +70,7 @@ EvtScript N(80243EF0) = {
     EVT_WAIT(1)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(1.0))
-    EVT_CALL(LoadAnimatedModel, 0, EVT_PTR(N(D_80252F4C_C107CC)))
+    EVT_CALL(LoadAnimatedModel, 0, EVT_PTR(N(SmashBridgesSkeleton)))
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(N(AS_SmashBridges)))
     EVT_CALL(SetAnimatedModelRootPosition, 0, 0, 0, 0)
     EVT_CALL(SetAnimatedModelRenderMode, 0, RENDER_MODE_SURFACE_OPA)
@@ -176,7 +176,7 @@ EvtScript N(80243EF0) = {
     EVT_END
 };
 
-EvtScript N(802449C4) = {
+EvtScript N(EVS_SetupBridges) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH3_TUBBA_WOKE_UP)
             EVT_CALL(SetGroupEnabled, MODEL_g240, 0)
@@ -184,7 +184,7 @@ EvtScript N(802449C4) = {
         EVT_CASE_EQ(STORY_CH3_TUBBA_WOKE_UP)
             EVT_CALL(SetGroupEnabled, MODEL_g240, 0)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_after, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_EXEC(N(80243EF0))
+            EVT_EXEC(N(EVS_Scene_TubbaSmashBridges))
         EVT_CASE_LT(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
             EVT_CALL(SetGroupEnabled, MODEL_g340, 0)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_before, COLLIDER_FLAGS_UPPER_MASK)

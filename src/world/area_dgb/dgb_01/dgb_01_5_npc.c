@@ -4,13 +4,14 @@
 #define AI_SENTINEL_LAST_NPC  NPC_Tubba
 #include "world/common/enemy/complete/Sentinel.inc.c"
 
+#include "world/common/enemy/complete/Clubba.h"
 #include "world/common/enemy/complete/TubbaBlubba_Patrol.inc.c"
 #include "world/common/enemy/complete/TubbaBlubba.inc.c"
 #include "world/common/npc/Yakkey.inc.c"
 
 #include "world/common/todo/UnkFunc1.inc.c"
 
-EvtScript N(EVS_NpcIdle_Tubba_A) = {
+EvtScript N(EVS_NpcIdle_Tubba_Floor3) = {
     EVT_LOOP(0)
         EVT_CALL(GetSelfVar, 0, LVar0)
         EVT_IF_EQ(LVar0, 1)
@@ -74,15 +75,15 @@ EvtScript N(EVS_NpcIdle_Tubba_A) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Tubba_A) = {
+EvtScript N(EVS_NpcInit_Tubba_Floor3) = {
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(1.25), EVT_FLOAT(1.25), EVT_FLOAT(1.25))
     EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Tubba_A)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Tubba_Floor3)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcDefeat_Tubba_B) = {
+EvtScript N(EVS_NpcDefeat_Tubba_Floor2) = {
     EVT_CALL(N(UnkFunc1))
     EVT_CALL(GotoMap, EVT_PTR("dgb_08"), dgb_08_ENTRY_1)
     EVT_WAIT(100)
@@ -90,7 +91,7 @@ EvtScript N(EVS_NpcDefeat_Tubba_B) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Tubba_B) = {
+EvtScript N(EVS_NpcInit_Tubba_Floor2) = {
     EVT_IF_NE(GB_ARN_Tubba_MapID, 1)
         EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_4, TRUE)
@@ -102,7 +103,7 @@ EvtScript N(EVS_NpcInit_Tubba_B) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetNpcPos, NPC_Tubba, 137, 244, 35)
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Tubba_B)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Tubba_Floor2)))
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(1.25), EVT_FLOAT(1.25), EVT_FLOAT(1.25))
     EVT_THREAD
         EVT_LOOP(0)
@@ -116,7 +117,7 @@ EvtScript N(EVS_NpcInit_Tubba_B) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcIdle_Tubba_C) = {
+EvtScript N(EVS_NpcIdle_Tubba_Floor1) = {
     EVT_CALL(AwaitPlayerApproach, 0, 420, 400)
     EVT_SET(GB_ARN_Tubba_MapID, 1)
     EVT_SET(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
@@ -166,7 +167,7 @@ EvtScript N(EVS_NpcIdle_Tubba_C) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcDefeat_Tubba_C) = {
+EvtScript N(EVS_NpcDefeat_Tubba_Floor1) = {
     EVT_CALL(N(UnkFunc1))
     EVT_CALL(GotoMap, EVT_PTR("dgb_00"), dgb_00_ENTRY_1)
     EVT_WAIT(100)
@@ -174,13 +175,13 @@ EvtScript N(EVS_NpcDefeat_Tubba_C) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Tubba_C) = {
+EvtScript N(EVS_NpcInit_Tubba_Floor1) = {
     EVT_IF_NE(GB_ARN_Tubba_MapID, 1)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Tubba_C)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Tubba_Floor1)))
     EVT_ELSE
         EVT_CALL(SetNpcPos, NPC_SELF, 136, 0, -330)
     EVT_END_IF
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Tubba_C)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Tubba_Floor1)))
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(1.25), EVT_FLOAT(1.25), EVT_FLOAT(1.25))
     EVT_RETURN
     EVT_END
@@ -249,11 +250,7 @@ StaticNpc N(NpcData_Sentinel_01) = {
     .yaw = 90,
     .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(EVS_NpcInit_Sentinel_01),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = SENTINEL_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -266,24 +263,7 @@ StaticNpc N(NpcData_Sentinel_01) = {
             .detectSize = { 450, 1000 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Sentinel_Anim01,
-        .walk   = ANIM_Sentinel_Anim02,
-        .run    = ANIM_Sentinel_Anim03,
-        .chase  = ANIM_Sentinel_Anim03,
-        .anim_4 = ANIM_Sentinel_Anim01,
-        .anim_5 = ANIM_Sentinel_Anim01,
-        .death  = ANIM_Sentinel_Anim01,
-        .hit    = ANIM_Sentinel_Anim01,
-        .anim_8 = ANIM_Sentinel_Anim05,
-        .anim_9 = ANIM_Sentinel_Anim01,
-        .anim_A = ANIM_Sentinel_Anim08,
-        .anim_B = ANIM_Sentinel_Anim01,
-        .anim_C = ANIM_Sentinel_Anim01,
-        .anim_D = ANIM_Sentinel_Anim01,
-        .anim_E = ANIM_Sentinel_Anim01,
-        .anim_F = ANIM_Sentinel_Anim01,
-    },
+    .animations = SENTINEL_ANIMS,
 };
 
 StaticNpc N(NpcData_Sentinel_02) = {
@@ -293,11 +273,7 @@ StaticNpc N(NpcData_Sentinel_02) = {
     .yaw = 270,
     .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(EVS_NpcInit_Sentinel_02),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = SENTINEL_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -310,24 +286,7 @@ StaticNpc N(NpcData_Sentinel_02) = {
             .detectSize = { 450, 1000 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Sentinel_Anim01,
-        .walk   = ANIM_Sentinel_Anim02,
-        .run    = ANIM_Sentinel_Anim03,
-        .chase  = ANIM_Sentinel_Anim03,
-        .anim_4 = ANIM_Sentinel_Anim01,
-        .anim_5 = ANIM_Sentinel_Anim01,
-        .death  = ANIM_Sentinel_Anim01,
-        .hit    = ANIM_Sentinel_Anim01,
-        .anim_8 = ANIM_Sentinel_Anim05,
-        .anim_9 = ANIM_Sentinel_Anim01,
-        .anim_A = ANIM_Sentinel_Anim08,
-        .anim_B = ANIM_Sentinel_Anim01,
-        .anim_C = ANIM_Sentinel_Anim01,
-        .anim_D = ANIM_Sentinel_Anim01,
-        .anim_E = ANIM_Sentinel_Anim01,
-        .anim_F = ANIM_Sentinel_Anim01,
-    },
+    .animations = SENTINEL_ANIMS,
 };
 
 StaticNpc N(NpcData_Sentinel_03) = {
@@ -337,11 +296,7 @@ StaticNpc N(NpcData_Sentinel_03) = {
     .yaw = 90,
     .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(EVS_NpcInit_Sentinel_03),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = SENTINEL_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -354,24 +309,7 @@ StaticNpc N(NpcData_Sentinel_03) = {
             .detectSize = { 450, 1000 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Sentinel_Anim01,
-        .walk   = ANIM_Sentinel_Anim02,
-        .run    = ANIM_Sentinel_Anim03,
-        .chase  = ANIM_Sentinel_Anim03,
-        .anim_4 = ANIM_Sentinel_Anim01,
-        .anim_5 = ANIM_Sentinel_Anim01,
-        .death  = ANIM_Sentinel_Anim01,
-        .hit    = ANIM_Sentinel_Anim01,
-        .anim_8 = ANIM_Sentinel_Anim05,
-        .anim_9 = ANIM_Sentinel_Anim01,
-        .anim_A = ANIM_Sentinel_Anim08,
-        .anim_B = ANIM_Sentinel_Anim01,
-        .anim_C = ANIM_Sentinel_Anim01,
-        .anim_D = ANIM_Sentinel_Anim01,
-        .anim_E = ANIM_Sentinel_Anim01,
-        .anim_F = ANIM_Sentinel_Anim01,
-    },
+    .animations = SENTINEL_ANIMS,
 };
 
 StaticNpc N(NpcData_Sentinel_04) = {
@@ -381,11 +319,7 @@ StaticNpc N(NpcData_Sentinel_04) = {
     .yaw = 270,
     .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
     .init = &N(EVS_NpcInit_Sentinel_04),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = SENTINEL_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -398,27 +332,10 @@ StaticNpc N(NpcData_Sentinel_04) = {
             .detectSize = { 450, 1000 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Sentinel_Anim01,
-        .walk   = ANIM_Sentinel_Anim02,
-        .run    = ANIM_Sentinel_Anim03,
-        .chase  = ANIM_Sentinel_Anim03,
-        .anim_4 = ANIM_Sentinel_Anim01,
-        .anim_5 = ANIM_Sentinel_Anim01,
-        .death  = ANIM_Sentinel_Anim01,
-        .hit    = ANIM_Sentinel_Anim01,
-        .anim_8 = ANIM_Sentinel_Anim05,
-        .anim_9 = ANIM_Sentinel_Anim01,
-        .anim_A = ANIM_Sentinel_Anim08,
-        .anim_B = ANIM_Sentinel_Anim01,
-        .anim_C = ANIM_Sentinel_Anim01,
-        .anim_D = ANIM_Sentinel_Anim01,
-        .anim_E = ANIM_Sentinel_Anim01,
-        .anim_F = ANIM_Sentinel_Anim01,
-    },
+    .animations = SENTINEL_ANIMS,
 };
 
-s32 N(extraAnimationList_80246850)[] = {
+s32 N(ExtraAnims_Tubba)[] = {
     ANIM_WorldTubba_Anim06,
     ANIM_WorldTubba_Anim10,
     ANIM_WorldTubba_Anim09,
@@ -433,57 +350,26 @@ s32 N(extraAnimationList_80246850)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Tubba_A) = {
+StaticNpc N(NpcData_Tubba_Floor3) = {
     .id = NPC_Tubba,
     .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = ENEMY_FLAGS_200000,
-    .init = &N(EVS_NpcInit_Tubba_A),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_WorldTubba_Anim06,
-        .walk   = ANIM_WorldTubba_Anim09,
-        .run    = ANIM_WorldTubba_Anim0C,
-        .chase  = ANIM_WorldTubba_Anim0C,
-        .anim_4 = ANIM_WorldTubba_Anim00,
-        .anim_5 = ANIM_WorldTubba_Anim00,
-        .death  = ANIM_WorldTubba_Anim00,
-        .hit    = ANIM_WorldTubba_Anim00,
-        .anim_8 = ANIM_WorldTubba_Anim00,
-        .anim_9 = ANIM_WorldTubba_Anim00,
-        .anim_A = ANIM_WorldTubba_Anim00,
-        .anim_B = ANIM_WorldTubba_Anim00,
-        .anim_C = ANIM_WorldTubba_Anim00,
-        .anim_D = ANIM_WorldTubba_Anim00,
-        .anim_E = ANIM_WorldTubba_Anim00,
-        .anim_F = ANIM_WorldTubba_Anim00,
-    },
-    .extraAnimations = N(extraAnimationList_80246850),
+    .init = &N(EVS_NpcInit_Tubba_Floor3),
+    .drops = TUBBA_DROPS,
+    .animations = TUBBA_ANIMS,
+    .extraAnimations = N(ExtraAnims_Tubba),
 };
 
-StaticNpc N(NpcData_Tubba_B) = {
+StaticNpc N(NpcData_Tubba_Floor2) = {
     .id = NPC_Tubba,
     .settings = &N(NpcSettings_TubbaBlubba_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = ENEMY_FLAGS_200000,
-    .init = &N(EVS_NpcInit_Tubba_B),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_SUPER_SHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-    },
+    .init = &N(EVS_NpcInit_Tubba_Floor2),
+    .drops = CLUBBA_DROPS,
     .territory = {
         .patrol = {
             .isFlying = FALSE,
@@ -498,46 +384,19 @@ StaticNpc N(NpcData_Tubba_B) = {
             .detectSize = { 1000, 250 },
         }
     },
-    .animations = {
-        .idle   = ANIM_WorldTubba_Anim07,
-        .walk   = ANIM_WorldTubba_Anim0A,
-        .run    = ANIM_WorldTubba_Anim0D,
-        .chase  = ANIM_WorldTubba_Anim0D,
-        .anim_4 = ANIM_WorldTubba_Anim19,
-        .anim_5 = ANIM_WorldTubba_Anim07,
-        .death  = ANIM_WorldTubba_Anim07,
-        .hit    = ANIM_WorldTubba_Anim07,
-        .anim_8 = ANIM_WorldTubba_Anim07,
-        .anim_9 = ANIM_WorldTubba_Anim07,
-        .anim_A = ANIM_WorldTubba_Anim07,
-        .anim_B = ANIM_WorldTubba_Anim07,
-        .anim_C = ANIM_WorldTubba_Anim07,
-        .anim_D = ANIM_WorldTubba_Anim07,
-        .anim_E = ANIM_WorldTubba_Anim07,
-        .anim_F = ANIM_WorldTubba_Anim07,
-    },
-    .extraAnimations = N(extraAnimationList_80246850),
+    .animations = TUBBA_ANGRY_ANIMS,
+    .extraAnimations = N(ExtraAnims_Tubba),
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Tubba_C) = {
+StaticNpc N(NpcData_Tubba_Floor1) = {
     .id = NPC_Tubba,
     .settings = &N(NpcSettings_TubbaBlubba_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = ENEMY_FLAGS_200000,
-    .init = &N(EVS_NpcInit_Tubba_C),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_SUPER_SHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-    },
+    .init = &N(EVS_NpcInit_Tubba_Floor1),
+    .drops = CLUBBA_DROPS,
     .territory = {
         .patrol = {
             .isFlying = FALSE,
@@ -558,25 +417,8 @@ StaticNpc N(NpcData_Tubba_C) = {
             .detectSize = { 1000, 250 },
         }
     },
-    .animations = {
-        .idle   = ANIM_WorldTubba_Anim07,
-        .walk   = ANIM_WorldTubba_Anim0A,
-        .run    = ANIM_WorldTubba_Anim0D,
-        .chase  = ANIM_WorldTubba_Anim0D,
-        .anim_4 = ANIM_WorldTubba_Anim19,
-        .anim_5 = ANIM_WorldTubba_Anim07,
-        .death  = ANIM_WorldTubba_Anim07,
-        .hit    = ANIM_WorldTubba_Anim07,
-        .anim_8 = ANIM_WorldTubba_Anim07,
-        .anim_9 = ANIM_WorldTubba_Anim07,
-        .anim_A = ANIM_WorldTubba_Anim07,
-        .anim_B = ANIM_WorldTubba_Anim07,
-        .anim_C = ANIM_WorldTubba_Anim07,
-        .anim_D = ANIM_WorldTubba_Anim07,
-        .anim_E = ANIM_WorldTubba_Anim07,
-        .anim_F = ANIM_WorldTubba_Anim07,
-    },
-    .extraAnimations = N(extraAnimationList_80246850),
+    .animations = TUBBA_ANGRY_ANIMS,
+    .extraAnimations = N(ExtraAnims_Tubba),
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
@@ -588,29 +430,29 @@ NpcGroupList N(DefaultNPCs) = {
     {}
 };
 
-NpcGroupList N(NpcGroup3) = {
+NpcGroupList N(ThirdFloorEscapeNPCs) = {
     NPC_GROUP(N(NpcData_Sentinel_01)),
     NPC_GROUP(N(NpcData_Sentinel_02)),
     NPC_GROUP(N(NpcData_Sentinel_03)),
     NPC_GROUP(N(NpcData_Sentinel_04)),
-    NPC_GROUP(N(NpcData_Tubba_A), BTL_DGB_FORMATION_04),
+    NPC_GROUP(N(NpcData_Tubba_Floor3), BTL_DGB_FORMATION_04),
     {}
 };
 
-NpcGroupList N(NpcGroup2) = {
+NpcGroupList N(SecondFloorEscapeNPCs) = {
     NPC_GROUP(N(NpcData_Sentinel_01)),
     NPC_GROUP(N(NpcData_Sentinel_02)),
     NPC_GROUP(N(NpcData_Sentinel_03)),
     NPC_GROUP(N(NpcData_Sentinel_04)),
-    NPC_GROUP(N(NpcData_Tubba_B), BTL_DGB_FORMATION_04, BTL_DGB_STAGE_00),
+    NPC_GROUP(N(NpcData_Tubba_Floor2), BTL_DGB_FORMATION_04, BTL_DGB_STAGE_00),
     {}
 };
 
-NpcGroupList N(NpcGroup1) = {
+NpcGroupList N(FirstFloorEscapeNPCs) = {
     NPC_GROUP(N(NpcData_Sentinel_01)),
     NPC_GROUP(N(NpcData_Sentinel_02)),
     NPC_GROUP(N(NpcData_Sentinel_03)),
     NPC_GROUP(N(NpcData_Sentinel_04)),
-    NPC_GROUP(N(NpcData_Tubba_C), BTL_DGB_FORMATION_04, BTL_DGB_STAGE_00),
+    NPC_GROUP(N(NpcData_Tubba_Floor1), BTL_DGB_FORMATION_04, BTL_DGB_STAGE_00),
     {}
 };

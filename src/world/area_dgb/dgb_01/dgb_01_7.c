@@ -1,14 +1,14 @@
 #include "dgb_01.h"
 #include "../dgb_vtx.h"
 
-extern Lights1 dgb_01_D_80253140_C109C0;
+extern Lights1 N(D_80253140_C109C0);
 
-Gfx D_8024B770_C08FF0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024B770_C08FF0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2E620, 32, 0),
@@ -53,12 +53,12 @@ Gfx D_8024B770_C08FF0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024B8F8_C09178[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024B8F8_C09178)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2E020, 30, 0),
@@ -107,12 +107,12 @@ Gfx D_8024B8F8_C09178[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BAA0_C09320[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024BAA0_C09320)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2DA20, 30, 0),
@@ -161,12 +161,12 @@ Gfx D_8024BAA0_C09320[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BC48_C094C8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024BC48_C094C8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2D830, 12, 0),
@@ -184,12 +184,12 @@ Gfx D_8024BC48_C094C8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BCF8_C09578[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024BCF8_C09578)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img6_gfx),
+    gsSPDisplayList(N(img6_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2D6E0, 21, 0),
@@ -202,22 +202,22 @@ Gfx D_8024BCF8_C09578[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BD80_C09600[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024BCF8_C09578),
-    gsSPDisplayList(D_8024BC48_C094C8),
-    gsSPDisplayList(D_8024BAA0_C09320),
-    gsSPDisplayList(D_8024B8F8_C09178),
-    gsSPDisplayList(D_8024B770_C08FF0),
+Gfx N(D_8024BD80_C09600)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024BCF8_C09578)),
+    gsSPDisplayList(N(D_8024BC48_C094C8)),
+    gsSPDisplayList(N(D_8024BAA0_C09320)),
+    gsSPDisplayList(N(D_8024B8F8_C09178)),
+    gsSPDisplayList(N(D_8024B770_C08FF0)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BDC8_C09648[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024BDC8_C09648)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2D6A0, 4, 0),
@@ -225,20 +225,20 @@ Gfx D_8024BDC8_C09648[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BE28_C096A8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024BE28_C096A8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253960_C111E0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024BDC8_C09648),
+    gsSPDisplayList(N(D_8024BDC8_C09648)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BE60_C096E0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024BE60_C096E0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2D660, 4, 0),
@@ -246,20 +246,20 @@ Gfx D_8024BE60_C096E0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BEC0_C09740[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024BEC0_C09740)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253920_C111A0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024BE60_C096E0),
+    gsSPDisplayList(N(D_8024BE60_C096E0)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BEF8_C09778[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024BEF8_C09778)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2D620, 4, 0),
@@ -267,28 +267,28 @@ Gfx D_8024BEF8_C09778[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BF58_C097D8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024BF58_C097D8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802538E0_C11160), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024BEF8_C09778),
+    gsSPDisplayList(N(D_8024BEF8_C09778)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BF90_C09810[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024BF58_C097D8),
-    gsSPDisplayList(D_8024BEC0_C09740),
-    gsSPDisplayList(D_8024BE28_C096A8),
+Gfx N(D_8024BF90_C09810)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024BF58_C097D8)),
+    gsSPDisplayList(N(D_8024BEC0_C09740)),
+    gsSPDisplayList(N(D_8024BE28_C096A8)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BFC8_C09848[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024BFC8_C09848)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img1_gfx),
+    gsSPDisplayList(N(img1_gfx)),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSPVertex(vtx_C2D5C0, 6, 0),
@@ -297,12 +297,12 @@ Gfx D_8024BFC8_C09848[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C030_C098B0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C030_C098B0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img1_gfx),
+    gsSPDisplayList(N(img1_gfx)),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSPVertex(vtx_C2D560, 6, 0),
@@ -311,12 +311,12 @@ Gfx D_8024C030_C098B0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C098_C09918[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C098_C09918)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img1_gfx),
+    gsSPDisplayList(N(img1_gfx)),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSPVertex(vtx_C2D500, 6, 0),
@@ -325,12 +325,12 @@ Gfx D_8024C098_C09918[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C100_C09980[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C100_C09980)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSPVertex(vtx_C2D260, 30, 0),
@@ -356,12 +356,12 @@ Gfx D_8024C100_C09980[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C1F0_C09A70[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C1F0_C09A70)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSPVertex(vtx_C2CFC0, 30, 0),
@@ -387,12 +387,12 @@ Gfx D_8024C1F0_C09A70[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C2E0_C09B60[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C2E0_C09B60)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSPVertex(vtx_C2CD20, 30, 0),
@@ -418,23 +418,23 @@ Gfx D_8024C2E0_C09B60[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C3D0_C09C50[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024C2E0_C09B60),
-    gsSPDisplayList(D_8024C1F0_C09A70),
-    gsSPDisplayList(D_8024C100_C09980),
-    gsSPDisplayList(D_8024C098_C09918),
-    gsSPDisplayList(D_8024C030_C098B0),
-    gsSPDisplayList(D_8024BFC8_C09848),
+Gfx N(D_8024C3D0_C09C50)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024C2E0_C09B60)),
+    gsSPDisplayList(N(D_8024C1F0_C09A70)),
+    gsSPDisplayList(N(D_8024C100_C09980)),
+    gsSPDisplayList(N(D_8024C098_C09918)),
+    gsSPDisplayList(N(D_8024C030_C098B0)),
+    gsSPDisplayList(N(D_8024BFC8_C09848)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C420_C09CA0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C420_C09CA0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSPVertex(vtx_C2CBA0, 24, 0),
@@ -450,12 +450,12 @@ Gfx D_8024C420_C09CA0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C4C0_C09D40[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C4C0_C09D40)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSPVertex(vtx_C2CA20, 24, 0),
@@ -471,12 +471,12 @@ Gfx D_8024C4C0_C09D40[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C560_C09DE0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C560_C09DE0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSPVertex(vtx_C2C8A0, 24, 0),
@@ -492,28 +492,28 @@ Gfx D_8024C560_C09DE0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C600_C09E80[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024C560_C09DE0),
-    gsSPDisplayList(D_8024C4C0_C09D40),
-    gsSPDisplayList(D_8024C420_C09CA0),
+Gfx N(D_8024C600_C09E80)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024C560_C09DE0)),
+    gsSPDisplayList(N(D_8024C4C0_C09D40)),
+    gsSPDisplayList(N(D_8024C420_C09CA0)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C638_C09EB8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024C600_C09E80),
-    gsSPDisplayList(D_8024C3D0_C09C50),
-    gsSPDisplayList(D_8024BF90_C09810),
+Gfx N(D_8024C638_C09EB8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024C600_C09E80)),
+    gsSPDisplayList(N(D_8024C3D0_C09C50)),
+    gsSPDisplayList(N(D_8024BF90_C09810)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C670_C09EF0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C670_C09EF0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2C4E0, 30, 0),
@@ -553,20 +553,20 @@ Gfx D_8024C670_C09EF0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C7D0_C0A050[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C7D0_C0A050)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253720_C10FA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024C670_C09EF0),
+    gsSPDisplayList(N(D_8024C670_C09EF0)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C808_C0A088[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C808_C0A088)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2C300, 30, 0),
@@ -589,20 +589,20 @@ Gfx D_8024C808_C0A088[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C8E0_C0A160[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C8E0_C0A160)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253720_C10FA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024C808_C0A088),
+    gsSPDisplayList(N(D_8024C808_C0A088)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C918_C0A198[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C918_C0A198)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img5_gfx),
+    gsSPDisplayList(N(img5_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2C1C0, 20, 0),
@@ -614,12 +614,12 @@ Gfx D_8024C918_C0A198[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C998_C0A218[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024C998_C0A218)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2BF50, 30, 0),
@@ -649,22 +649,22 @@ Gfx D_8024C998_C0A218[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CAA8_C0A328[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024CAA8_C0A328)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802538A0_C11120), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024C998_C0A218),
-    gsSPDisplayList(D_8024C918_C0A198),
-    gsSPDisplayList(D_8024C8E0_C0A160),
+    gsSPDisplayList(N(D_8024C998_C0A218)),
+    gsSPDisplayList(N(D_8024C918_C0A198)),
+    gsSPDisplayList(N(D_8024C8E0_C0A160)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CAF0_C0A370[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024CAF0_C0A370)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img5_gfx),
+    gsSPDisplayList(N(img5_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2BE50, 16, 0),
@@ -675,12 +675,12 @@ Gfx D_8024CAF0_C0A370[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CB68_C0A3E8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024CB68_C0A3E8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img3_gfx),
+    gsSPDisplayList(N(img3_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2BB50, 32, 0),
@@ -700,12 +700,12 @@ Gfx D_8024CB68_C0A3E8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CC28_C0A4A8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024CC28_C0A4A8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img3_gfx),
+    gsSPDisplayList(N(img3_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2BA50, 16, 0),
@@ -716,12 +716,12 @@ Gfx D_8024CC28_C0A4A8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CCA0_C0A520[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024CCA0_C0A520)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img1_gfx),
+    gsSPDisplayList(N(img1_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2B9B0, 10, 0),
@@ -731,12 +731,12 @@ Gfx D_8024CCA0_C0A520[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CD10_C0A590[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024CD10_C0A590)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2B8E0, 13, 0),
@@ -749,12 +749,12 @@ Gfx D_8024CD10_C0A590[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CD98_C0A618[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024CD98_C0A618)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2B850, 9, 0),
@@ -764,12 +764,12 @@ Gfx D_8024CD98_C0A618[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CE08_C0A688[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024CE08_C0A688)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2B050, 32, 0),
@@ -827,26 +827,26 @@ Gfx D_8024CE08_C0A688[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CFF8_C0A878[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024CE08_C0A688),
-    gsSPDisplayList(D_8024CD98_C0A618),
-    gsSPDisplayList(D_8024CD10_C0A590),
-    gsSPDisplayList(D_8024CCA0_C0A520),
-    gsSPDisplayList(D_8024CC28_C0A4A8),
-    gsSPDisplayList(D_8024CB68_C0A3E8),
-    gsSPDisplayList(D_8024CAF0_C0A370),
-    gsSPDisplayList(D_8024CAA8_C0A328),
-    gsSPDisplayList(D_8024C7D0_C0A050),
+Gfx N(D_8024CFF8_C0A878)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024CE08_C0A688)),
+    gsSPDisplayList(N(D_8024CD98_C0A618)),
+    gsSPDisplayList(N(D_8024CD10_C0A590)),
+    gsSPDisplayList(N(D_8024CCA0_C0A520)),
+    gsSPDisplayList(N(D_8024CC28_C0A4A8)),
+    gsSPDisplayList(N(D_8024CB68_C0A3E8)),
+    gsSPDisplayList(N(D_8024CAF0_C0A370)),
+    gsSPDisplayList(N(D_8024CAA8_C0A328)),
+    gsSPDisplayList(N(D_8024C7D0_C0A050)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D060_C0A8E0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D060_C0A8E0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2AAB0, 30, 0),
@@ -910,20 +910,20 @@ Gfx D_8024D060_C0A8E0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D280_C0AB00[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D280_C0AB00)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253720_C10FA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024D060_C0A8E0),
+    gsSPDisplayList(N(D_8024D060_C0A8E0)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D2B8_C0AB38[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D2B8_C0AB38)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2A8D0, 30, 0),
@@ -946,20 +946,20 @@ Gfx D_8024D2B8_C0AB38[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D390_C0AC10[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D390_C0AC10)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253720_C10FA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024D2B8_C0AB38),
+    gsSPDisplayList(N(D_8024D2B8_C0AB38)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D3C8_C0AC48[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D3C8_C0AC48)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img5_gfx),
+    gsSPDisplayList(N(img5_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2A790, 20, 0),
@@ -971,12 +971,12 @@ Gfx D_8024D3C8_C0AC48[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D448_C0ACC8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D448_C0ACC8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2A540, 32, 0),
@@ -1002,22 +1002,22 @@ Gfx D_8024D448_C0ACC8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D538_C0ADB8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D538_C0ADB8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253860_C110E0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024D448_C0ACC8),
-    gsSPDisplayList(D_8024D3C8_C0AC48),
-    gsSPDisplayList(D_8024D390_C0AC10),
+    gsSPDisplayList(N(D_8024D448_C0ACC8)),
+    gsSPDisplayList(N(D_8024D3C8_C0AC48)),
+    gsSPDisplayList(N(D_8024D390_C0AC10)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D580_C0AE00[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D580_C0AE00)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img5_gfx),
+    gsSPDisplayList(N(img5_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2A3C0, 24, 0),
@@ -1030,12 +1030,12 @@ Gfx D_8024D580_C0AE00[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D608_C0AE88[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D608_C0AE88)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img3_gfx),
+    gsSPDisplayList(N(img3_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2A2C0, 16, 0),
@@ -1046,12 +1046,12 @@ Gfx D_8024D608_C0AE88[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D680_C0AF00[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D680_C0AF00)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img3_gfx),
+    gsSPDisplayList(N(img3_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2A180, 20, 0),
@@ -1063,12 +1063,12 @@ Gfx D_8024D680_C0AF00[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D700_C0AF80[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D700_C0AF80)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img1_gfx),
+    gsSPDisplayList(N(img1_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C2A080, 16, 0),
@@ -1081,12 +1081,12 @@ Gfx D_8024D700_C0AF80[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D788_C0B008[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D788_C0B008)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C29F50, 19, 0),
@@ -1102,12 +1102,12 @@ Gfx D_8024D788_C0B008[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D828_C0B0A8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D828_C0B0A8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C29E00, 21, 0),
@@ -1124,12 +1124,12 @@ Gfx D_8024D828_C0B0A8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D8D0_C0B150[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024D8D0_C0B150)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C29330, 30, 0),
@@ -1217,34 +1217,34 @@ Gfx D_8024D8D0_C0B150[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DBB0_C0B430[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024D8D0_C0B150),
-    gsSPDisplayList(D_8024D828_C0B0A8),
-    gsSPDisplayList(D_8024D788_C0B008),
-    gsSPDisplayList(D_8024D700_C0AF80),
-    gsSPDisplayList(D_8024D680_C0AF00),
-    gsSPDisplayList(D_8024D608_C0AE88),
-    gsSPDisplayList(D_8024D580_C0AE00),
-    gsSPDisplayList(D_8024D538_C0ADB8),
-    gsSPDisplayList(D_8024D280_C0AB00),
+Gfx N(D_8024DBB0_C0B430)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024D8D0_C0B150)),
+    gsSPDisplayList(N(D_8024D828_C0B0A8)),
+    gsSPDisplayList(N(D_8024D788_C0B008)),
+    gsSPDisplayList(N(D_8024D700_C0AF80)),
+    gsSPDisplayList(N(D_8024D680_C0AF00)),
+    gsSPDisplayList(N(D_8024D608_C0AE88)),
+    gsSPDisplayList(N(D_8024D580_C0AE00)),
+    gsSPDisplayList(N(D_8024D538_C0ADB8)),
+    gsSPDisplayList(N(D_8024D280_C0AB00)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DC18_C0B498[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024DC18_C0B498)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253820_C110A0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024DBB0_C0B430),
+    gsSPDisplayList(N(D_8024DBB0_C0B430)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DC50_C0B4D0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024DC50_C0B4D0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C29150, 30, 0),
@@ -1267,20 +1267,20 @@ Gfx D_8024DC50_C0B4D0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DD28_C0B5A8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024DD28_C0B5A8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253720_C10FA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024DC50_C0B4D0),
+    gsSPDisplayList(N(D_8024DC50_C0B4D0)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DD60_C0B5E0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024DD60_C0B5E0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C28D90, 30, 0),
@@ -1320,20 +1320,20 @@ Gfx D_8024DD60_C0B5E0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DEC0_C0B740[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024DEC0_C0B740)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253720_C10FA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024DD60_C0B5E0),
+    gsSPDisplayList(N(D_8024DD60_C0B5E0)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DEF8_dgb_01[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024DEF8_dgb_01)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img4_gfx),
+    gsSPDisplayList(N(img4_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C28BB0, 30, 0),
@@ -1350,12 +1350,12 @@ Gfx D_8024DEF8_dgb_01[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DFA0_C0B820[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024DFA0_C0B820)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img3_gfx),
+    gsSPDisplayList(N(img3_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C28A70, 20, 0),
@@ -1367,12 +1367,12 @@ Gfx D_8024DFA0_C0B820[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E020_C0B8A0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E020_C0B8A0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img1_gfx),
+    gsSPDisplayList(N(img1_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C28970, 16, 0),
@@ -1385,12 +1385,12 @@ Gfx D_8024E020_C0B8A0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E0A8_C0B928[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E0A8_C0B928)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C28890, 14, 0),
@@ -1401,12 +1401,12 @@ Gfx D_8024E0A8_C0B928[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E120_C0B9A0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E120_C0B9A0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C287A0, 15, 0),
@@ -1419,12 +1419,12 @@ Gfx D_8024E120_C0B9A0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E1A8_C0BA28[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E1A8_C0BA28)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C27D60, 31, 0),
@@ -1503,33 +1503,33 @@ Gfx D_8024E1A8_C0BA28[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E440_C0BCC0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024E1A8_C0BA28),
-    gsSPDisplayList(D_8024E120_C0B9A0),
-    gsSPDisplayList(D_8024E0A8_C0B928),
-    gsSPDisplayList(D_8024E020_C0B8A0),
-    gsSPDisplayList(D_8024DFA0_C0B820),
-    gsSPDisplayList(D_8024DEF8_dgb_01),
-    gsSPDisplayList(D_8024DEC0_C0B740),
-    gsSPDisplayList(D_8024DD28_C0B5A8),
+Gfx N(D_8024E440_C0BCC0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024E1A8_C0BA28)),
+    gsSPDisplayList(N(D_8024E120_C0B9A0)),
+    gsSPDisplayList(N(D_8024E0A8_C0B928)),
+    gsSPDisplayList(N(D_8024E020_C0B8A0)),
+    gsSPDisplayList(N(D_8024DFA0_C0B820)),
+    gsSPDisplayList(N(D_8024DEF8_dgb_01)),
+    gsSPDisplayList(N(D_8024DEC0_C0B740)),
+    gsSPDisplayList(N(D_8024DD28_C0B5A8)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E4A0_C0BD20[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E4A0_C0BD20)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802537E0_C11060), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024E440_C0BCC0),
+    gsSPDisplayList(N(D_8024E440_C0BCC0)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E4D8_C0BD58[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E4D8_C0BD58)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C27B80, 30, 0),
@@ -1552,12 +1552,12 @@ Gfx D_8024E4D8_C0BD58[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E5B0_C0BE30[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E5B0_C0BE30)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C27880, 31, 0),
@@ -1583,20 +1583,20 @@ Gfx D_8024E5B0_C0BE30[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E6A0_C0BF20[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E6A0_C0BF20)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802537A0_C11020), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024E5B0_C0BE30),
+    gsSPDisplayList(N(D_8024E5B0_C0BE30)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E6D8_C0BF58[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E6D8_C0BF58)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C27580, 31, 0),
@@ -1622,20 +1622,20 @@ Gfx D_8024E6D8_C0BF58[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E7C8_C0C048[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E7C8_C0C048)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253760_C10FE0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024E6D8_C0BF58),
+    gsSPDisplayList(N(D_8024E6D8_C0BF58)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E800_C0C080[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E800_C0C080)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img4_gfx),
+    gsSPDisplayList(N(img4_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C27460, 18, 0),
@@ -1648,20 +1648,20 @@ Gfx D_8024E800_C0C080[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E888_C0C108[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E888_C0C108)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253720_C10FA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024E800_C0C080),
+    gsSPDisplayList(N(D_8024E800_C0C080)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E8C0_C0C140[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E8C0_C0C140)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img3_gfx),
+    gsSPDisplayList(N(img3_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C273A0, 12, 0),
@@ -1671,20 +1671,20 @@ Gfx D_8024E8C0_C0C140[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E930_C0C1B0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E930_C0C1B0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253720_C10FA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024E8C0_C0C140),
+    gsSPDisplayList(N(D_8024E8C0_C0C140)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E968_C0C1E8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E968_C0C1E8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img1_gfx),
+    gsSPDisplayList(N(img1_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C27300, 10, 0),
@@ -1694,12 +1694,12 @@ Gfx D_8024E968_C0C1E8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E9D8_C0C258[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024E9D8_C0C258)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C27220, 14, 0),
@@ -1712,12 +1712,12 @@ Gfx D_8024E9D8_C0C258[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EA60_C0C2E0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024EA60_C0C2E0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C27180, 10, 0),
@@ -1727,12 +1727,12 @@ Gfx D_8024EA60_C0C2E0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EAD0_C0C350[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024EAD0_C0C350)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26CC0, 31, 0),
@@ -1766,36 +1766,36 @@ Gfx D_8024EAD0_C0C350[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EC00_C0C480[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024EAD0_C0C350),
-    gsSPDisplayList(D_8024EA60_C0C2E0),
-    gsSPDisplayList(D_8024E9D8_C0C258),
-    gsSPDisplayList(D_8024E968_C0C1E8),
-    gsSPDisplayList(D_8024E930_C0C1B0),
-    gsSPDisplayList(D_8024E888_C0C108),
-    gsSPDisplayList(D_8024E7C8_C0C048),
-    gsSPDisplayList(D_8024E6A0_C0BF20),
-    gsSPDisplayList(D_8024E4D8_C0BD58),
+Gfx N(D_8024EC00_C0C480)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024EAD0_C0C350)),
+    gsSPDisplayList(N(D_8024EA60_C0C2E0)),
+    gsSPDisplayList(N(D_8024E9D8_C0C258)),
+    gsSPDisplayList(N(D_8024E968_C0C1E8)),
+    gsSPDisplayList(N(D_8024E930_C0C1B0)),
+    gsSPDisplayList(N(D_8024E888_C0C108)),
+    gsSPDisplayList(N(D_8024E7C8_C0C048)),
+    gsSPDisplayList(N(D_8024E6A0_C0BF20)),
+    gsSPDisplayList(N(D_8024E4D8_C0BD58)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EC68_C0C4E8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024EC00_C0C480),
-    gsSPDisplayList(D_8024E4A0_C0BD20),
-    gsSPDisplayList(D_8024DC18_C0B498),
-    gsSPDisplayList(D_8024CFF8_C0A878),
-    gsSPDisplayList(D_8024C638_C09EB8),
+Gfx N(D_8024EC68_C0C4E8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024EC00_C0C480)),
+    gsSPDisplayList(N(D_8024E4A0_C0BD20)),
+    gsSPDisplayList(N(D_8024DC18_C0B498)),
+    gsSPDisplayList(N(D_8024CFF8_C0A878)),
+    gsSPDisplayList(N(D_8024C638_C09EB8)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024ECB0_C0C530[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024ECB0_C0C530)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26890, 32, 0),
@@ -1836,12 +1836,12 @@ Gfx D_8024ECB0_C0C530[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EE18_C0C698[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024EE18_C0C698)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img5_gfx),
+    gsSPDisplayList(N(img5_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26750, 20, 0),
@@ -1853,27 +1853,27 @@ Gfx D_8024EE18_C0C698[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EE98_C0C718[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024EE18_C0C698),
-    gsSPDisplayList(D_8024ECB0_C0C530),
+Gfx N(D_8024EE98_C0C718)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024EE18_C0C698)),
+    gsSPDisplayList(N(D_8024ECB0_C0C530)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EEC8_C0C748[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024EEC8_C0C748)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802536E0_C10F60), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024EE98_C0C718),
+    gsSPDisplayList(N(D_8024EE98_C0C718)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EF00_C0C780[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024EF00_C0C780)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26710, 4, 0),
@@ -1881,20 +1881,20 @@ Gfx D_8024EF00_C0C780[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EF60_C0C7E0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024EF60_C0C7E0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802536A0_C10F20), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024EF00_C0C780),
+    gsSPDisplayList(N(D_8024EF00_C0C780)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EF98_C0C818[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024EF98_C0C818)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C266D0, 4, 0),
@@ -1902,20 +1902,20 @@ Gfx D_8024EF98_C0C818[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EFF8_C0C878[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024EFF8_C0C878)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253660_C10EE0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024EF98_C0C818),
+    gsSPDisplayList(N(D_8024EF98_C0C818)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F030_C0C8B0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F030_C0C8B0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26690, 4, 0),
@@ -1923,20 +1923,20 @@ Gfx D_8024F030_C0C8B0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F090_C0C910[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F090_C0C910)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253620_C10EA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F030_C0C8B0),
+    gsSPDisplayList(N(D_8024F030_C0C8B0)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F0C8_C0C948[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F0C8_C0C948)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26650, 4, 0),
@@ -1944,20 +1944,20 @@ Gfx D_8024F0C8_C0C948[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F128_C0C9A8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F128_C0C9A8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802535E0_C10E60), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F0C8_C0C948),
+    gsSPDisplayList(N(D_8024F0C8_C0C948)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F160_C0C9E0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F160_C0C9E0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26610, 4, 0),
@@ -1965,20 +1965,20 @@ Gfx D_8024F160_C0C9E0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F1C0_C0CA40[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F1C0_C0CA40)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802535A0_C10E20), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F160_C0C9E0),
+    gsSPDisplayList(N(D_8024F160_C0C9E0)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F1F8_C0CA78[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F1F8_C0CA78)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C265D0, 4, 0),
@@ -1986,20 +1986,20 @@ Gfx D_8024F1F8_C0CA78[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F258_C0CAD8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F258_C0CAD8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253560_C10DE0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F1F8_C0CA78),
+    gsSPDisplayList(N(D_8024F1F8_C0CA78)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F290_C0CB10[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F290_C0CB10)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26590, 4, 0),
@@ -2007,20 +2007,20 @@ Gfx D_8024F290_C0CB10[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F2F0_C0CB70[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F2F0_C0CB70)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253520_C10DA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F290_C0CB10),
+    gsSPDisplayList(N(D_8024F290_C0CB10)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F328_C0CBA8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F328_C0CBA8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26550, 4, 0),
@@ -2028,20 +2028,20 @@ Gfx D_8024F328_C0CBA8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F388_C0CC08[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F388_C0CC08)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802534E0_C10D60), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F328_C0CBA8),
+    gsSPDisplayList(N(D_8024F328_C0CBA8)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F3C0_C0CC40[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F3C0_C0CC40)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26510, 4, 0),
@@ -2049,34 +2049,34 @@ Gfx D_8024F3C0_C0CC40[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F420_C0CCA0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F420_C0CCA0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802534A0_C10D20), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F3C0_C0CC40),
+    gsSPDisplayList(N(D_8024F3C0_C0CC40)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F458_C0CCD8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024F420_C0CCA0),
-    gsSPDisplayList(D_8024F388_C0CC08),
-    gsSPDisplayList(D_8024F2F0_C0CB70),
-    gsSPDisplayList(D_8024F258_C0CAD8),
-    gsSPDisplayList(D_8024F1C0_C0CA40),
-    gsSPDisplayList(D_8024F128_C0C9A8),
-    gsSPDisplayList(D_8024F090_C0C910),
-    gsSPDisplayList(D_8024EFF8_C0C878),
-    gsSPDisplayList(D_8024EF60_C0C7E0),
+Gfx N(D_8024F458_C0CCD8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024F420_C0CCA0)),
+    gsSPDisplayList(N(D_8024F388_C0CC08)),
+    gsSPDisplayList(N(D_8024F2F0_C0CB70)),
+    gsSPDisplayList(N(D_8024F258_C0CAD8)),
+    gsSPDisplayList(N(D_8024F1C0_C0CA40)),
+    gsSPDisplayList(N(D_8024F128_C0C9A8)),
+    gsSPDisplayList(N(D_8024F090_C0C910)),
+    gsSPDisplayList(N(D_8024EFF8_C0C878)),
+    gsSPDisplayList(N(D_8024EF60_C0C7E0)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F4C0_C0CD40[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F4C0_C0CD40)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C264D0, 4, 0),
@@ -2084,20 +2084,20 @@ Gfx D_8024F4C0_C0CD40[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F520_C0CDA0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F520_C0CDA0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253460_C10CE0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F4C0_C0CD40),
+    gsSPDisplayList(N(D_8024F4C0_C0CD40)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F558_C0CDD8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F558_C0CDD8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26490, 4, 0),
@@ -2105,20 +2105,20 @@ Gfx D_8024F558_C0CDD8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F5B8_C0CE38[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F5B8_C0CE38)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253420_C10CA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F558_C0CDD8),
+    gsSPDisplayList(N(D_8024F558_C0CDD8)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F5F0_C0CE70[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F5F0_C0CE70)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26450, 4, 0),
@@ -2126,20 +2126,20 @@ Gfx D_8024F5F0_C0CE70[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F650_C0CED0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F650_C0CED0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802533E0_C10C60), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F5F0_C0CE70),
+    gsSPDisplayList(N(D_8024F5F0_C0CE70)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F688_C0CF08[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F688_C0CF08)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26410, 4, 0),
@@ -2147,20 +2147,20 @@ Gfx D_8024F688_C0CF08[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F6E8_C0CF68[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F6E8_C0CF68)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802533A0_C10C20), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F688_C0CF08),
+    gsSPDisplayList(N(D_8024F688_C0CF08)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F720_C0CFA0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F720_C0CFA0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C263D0, 4, 0),
@@ -2168,20 +2168,20 @@ Gfx D_8024F720_C0CFA0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F780_C0D000[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F780_C0D000)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253360_C10BE0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F720_C0CFA0),
+    gsSPDisplayList(N(D_8024F720_C0CFA0)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F7B8_C0D038[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F7B8_C0D038)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26390, 4, 0),
@@ -2189,20 +2189,20 @@ Gfx D_8024F7B8_C0D038[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F818_C0D098[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F818_C0D098)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253320_C10BA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F7B8_C0D038),
+    gsSPDisplayList(N(D_8024F7B8_C0D038)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F850_C0D0D0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F850_C0D0D0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26350, 4, 0),
@@ -2210,20 +2210,20 @@ Gfx D_8024F850_C0D0D0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F8B0_C0D130[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F8B0_C0D130)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802532E0_C10B60), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F850_C0D0D0),
+    gsSPDisplayList(N(D_8024F850_C0D0D0)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F8E8_C0D168[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F8E8_C0D168)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26310, 4, 0),
@@ -2231,20 +2231,20 @@ Gfx D_8024F8E8_C0D168[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F948_C0D1C8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F948_C0D1C8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802532A0_C10B20), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F8E8_C0D168),
+    gsSPDisplayList(N(D_8024F8E8_C0D168)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F980_C0D200[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F980_C0D200)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C262D0, 4, 0),
@@ -2252,20 +2252,20 @@ Gfx D_8024F980_C0D200[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F9E0_C0D260[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024F9E0_C0D260)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253260_C10AE0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024F980_C0D200),
+    gsSPDisplayList(N(D_8024F980_C0D200)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FA18_C0D298[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024FA18_C0D298)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26290, 4, 0),
@@ -2273,20 +2273,20 @@ Gfx D_8024FA18_C0D298[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FA78_C0D2F8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024FA78_C0D2F8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253220_C10AA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024FA18_C0D298),
+    gsSPDisplayList(N(D_8024FA18_C0D298)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FAB0_C0D330[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024FAB0_C0D330)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C26250, 4, 0),
@@ -2294,36 +2294,36 @@ Gfx D_8024FAB0_C0D330[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FB10_C0D390[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024FB10_C0D390)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802531E0_C10A60), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_8024FAB0_C0D330),
+    gsSPDisplayList(N(D_8024FAB0_C0D330)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FB48_C0D3C8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024FB10_C0D390),
-    gsSPDisplayList(D_8024FA78_C0D2F8),
-    gsSPDisplayList(D_8024F9E0_C0D260),
-    gsSPDisplayList(D_8024F948_C0D1C8),
-    gsSPDisplayList(D_8024F8B0_C0D130),
-    gsSPDisplayList(D_8024F818_C0D098),
-    gsSPDisplayList(D_8024F780_C0D000),
-    gsSPDisplayList(D_8024F6E8_C0CF68),
-    gsSPDisplayList(D_8024F650_C0CED0),
-    gsSPDisplayList(D_8024F5B8_C0CE38),
-    gsSPDisplayList(D_8024F520_C0CDA0),
+Gfx N(D_8024FB48_C0D3C8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024FB10_C0D390)),
+    gsSPDisplayList(N(D_8024FA78_C0D2F8)),
+    gsSPDisplayList(N(D_8024F9E0_C0D260)),
+    gsSPDisplayList(N(D_8024F948_C0D1C8)),
+    gsSPDisplayList(N(D_8024F8B0_C0D130)),
+    gsSPDisplayList(N(D_8024F818_C0D098)),
+    gsSPDisplayList(N(D_8024F780_C0D000)),
+    gsSPDisplayList(N(D_8024F6E8_C0CF68)),
+    gsSPDisplayList(N(D_8024F650_C0CED0)),
+    gsSPDisplayList(N(D_8024F5B8_C0CE38)),
+    gsSPDisplayList(N(D_8024F520_C0CDA0)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FBC0_C0D440[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024FBC0_C0D440)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img1_gfx),
+    gsSPDisplayList(N(img1_gfx)),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSPVertex(vtx_C26130, 18, 0),
@@ -2336,12 +2336,12 @@ Gfx D_8024FBC0_C0D440[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FC48_C0D4C8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024FC48_C0D4C8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSPVertex(vtx_C25950, 30, 0),
@@ -2414,19 +2414,19 @@ Gfx D_8024FC48_C0D4C8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FEB0_C0D730[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024FC48_C0D4C8),
-    gsSPDisplayList(D_8024FBC0_C0D440),
+Gfx N(D_8024FEB0_C0D730)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024FC48_C0D4C8)),
+    gsSPDisplayList(N(D_8024FBC0_C0D440)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FEE0_C0D760[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_8024FEE0_C0D760)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
     gsSPVertex(vtx_C25350, 32, 0),
@@ -2478,27 +2478,27 @@ Gfx D_8024FEE0_C0D760[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_802500A0_C0D920[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_8024FEE0_C0D760),
+Gfx N(D_802500A0_C0D920)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_8024FEE0_C0D760)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_802500C8_C0D948[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_802500A0_C0D920),
-    gsSPDisplayList(D_8024FEB0_C0D730),
-    gsSPDisplayList(D_8024FB48_C0D3C8),
-    gsSPDisplayList(D_8024F458_C0CCD8),
+Gfx N(D_802500C8_C0D948)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_802500A0_C0D920)),
+    gsSPDisplayList(N(D_8024FEB0_C0D730)),
+    gsSPDisplayList(N(D_8024FB48_C0D3C8)),
+    gsSPDisplayList(N(D_8024F458_C0CCD8)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250108_C0D988[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250108_C0D988)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img5_gfx),
+    gsSPDisplayList(N(img5_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C25310, 4, 0),
@@ -2506,12 +2506,12 @@ Gfx D_80250108_C0D988[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250168_C0D9E8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250168_C0D9E8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img3_gfx),
+    gsSPDisplayList(N(img3_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C25050, 32, 0),
@@ -2530,12 +2530,12 @@ Gfx D_80250168_C0D9E8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250220_C0DAA0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250220_C0DAA0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img1_gfx),
+    gsSPDisplayList(N(img1_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C24FB0, 10, 0),
@@ -2545,12 +2545,12 @@ Gfx D_80250220_C0DAA0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250290_C0DB10[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250290_C0DB10)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C24F30, 8, 0),
@@ -2559,12 +2559,12 @@ Gfx D_80250290_C0DB10[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_802502F8_C0DB78[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_802502F8_C0DB78)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C24EB0, 8, 0),
@@ -2573,12 +2573,12 @@ Gfx D_802502F8_C0DB78[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250360_C0DBE0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250360_C0DBE0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C24350, 32, 0),
@@ -2667,23 +2667,23 @@ Gfx D_80250360_C0DBE0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250648_C0DEC8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_80250360_C0DBE0),
-    gsSPDisplayList(D_802502F8_C0DB78),
-    gsSPDisplayList(D_80250290_C0DB10),
-    gsSPDisplayList(D_80250220_C0DAA0),
-    gsSPDisplayList(D_80250168_C0D9E8),
-    gsSPDisplayList(D_80250108_C0D988),
+Gfx N(D_80250648_C0DEC8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_80250360_C0DBE0)),
+    gsSPDisplayList(N(D_802502F8_C0DB78)),
+    gsSPDisplayList(N(D_80250290_C0DB10)),
+    gsSPDisplayList(N(D_80250220_C0DAA0)),
+    gsSPDisplayList(N(D_80250168_C0D9E8)),
+    gsSPDisplayList(N(D_80250108_C0D988)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250698_C0DF18[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250698_C0DF18)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img5_gfx),
+    gsSPDisplayList(N(img5_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C241D0, 24, 0),
@@ -2696,12 +2696,12 @@ Gfx D_80250698_C0DF18[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250720_C0DFA0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250720_C0DFA0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img3_gfx),
+    gsSPDisplayList(N(img3_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C240D0, 16, 0),
@@ -2712,12 +2712,12 @@ Gfx D_80250720_C0DFA0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250798_C0E018[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250798_C0E018)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img1_gfx),
+    gsSPDisplayList(N(img1_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C23FD0, 16, 0),
@@ -2730,12 +2730,12 @@ Gfx D_80250798_C0E018[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250820_C0E0A0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250820_C0E0A0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C23F10, 12, 0),
@@ -2746,12 +2746,12 @@ Gfx D_80250820_C0E0A0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250898_C0E118[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250898_C0E118)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C23E50, 12, 0),
@@ -2762,12 +2762,12 @@ Gfx D_80250898_C0E118[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250910_C0E190[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250910_C0E190)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C230A0, 32, 0),
@@ -2900,31 +2900,31 @@ Gfx D_80250910_C0E190[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250D58_C0E5D8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_80250910_C0E190),
-    gsSPDisplayList(D_80250898_C0E118),
-    gsSPDisplayList(D_80250820_C0E0A0),
-    gsSPDisplayList(D_80250798_C0E018),
-    gsSPDisplayList(D_80250720_C0DFA0),
-    gsSPDisplayList(D_80250698_C0DF18),
+Gfx N(D_80250D58_C0E5D8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_80250910_C0E190)),
+    gsSPDisplayList(N(D_80250898_C0E118)),
+    gsSPDisplayList(N(D_80250820_C0E0A0)),
+    gsSPDisplayList(N(D_80250798_C0E018)),
+    gsSPDisplayList(N(D_80250720_C0DFA0)),
+    gsSPDisplayList(N(D_80250698_C0DF18)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250DA8_C0E628[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250DA8_C0E628)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_802531A0_C10A20), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_80250D58_C0E5D8),
+    gsSPDisplayList(N(D_80250D58_C0E5D8)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250DE0_C0E660[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250DE0_C0E660)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img4_gfx),
+    gsSPDisplayList(N(img4_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C22EC0, 30, 0),
@@ -2941,12 +2941,12 @@ Gfx D_80250DE0_C0E660[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250E88_C0E708[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250E88_C0E708)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img3_gfx),
+    gsSPDisplayList(N(img3_gfx)),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(vtx_C22C00, 32, 0),
@@ -2965,12 +2965,12 @@ Gfx D_80250E88_C0E708[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250F40_C0E7C0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250F40_C0E7C0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img1_gfx),
+    gsSPDisplayList(N(img1_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C22B00, 16, 0),
@@ -2983,12 +2983,12 @@ Gfx D_80250F40_C0E7C0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250FC8_C0E848[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80250FC8_C0E848)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C229F0, 17, 0),
@@ -3001,12 +3001,12 @@ Gfx D_80250FC8_C0E848[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251050_C0E8D0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80251050_C0E8D0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C22950, 10, 0),
@@ -3017,12 +3017,12 @@ Gfx D_80251050_C0E8D0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_802510C8_C0E948[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_802510C8_C0E948)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C21930, 31, 0),
@@ -3158,31 +3158,31 @@ Gfx D_802510C8_C0E948[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251528_C0EDA8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_802510C8_C0E948),
-    gsSPDisplayList(D_80251050_C0E8D0),
-    gsSPDisplayList(D_80250FC8_C0E848),
-    gsSPDisplayList(D_80250F40_C0E7C0),
-    gsSPDisplayList(D_80250E88_C0E708),
-    gsSPDisplayList(D_80250DE0_C0E660),
+Gfx N(D_80251528_C0EDA8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_802510C8_C0E948)),
+    gsSPDisplayList(N(D_80251050_C0E8D0)),
+    gsSPDisplayList(N(D_80250FC8_C0E848)),
+    gsSPDisplayList(N(D_80250F40_C0E7C0)),
+    gsSPDisplayList(N(D_80250E88_C0E708)),
+    gsSPDisplayList(N(D_80250DE0_C0E660)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251578_C0EDF8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80251578_C0EDF8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsSPMatrix(&N(D_80253160_C109E0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
-    gsSPDisplayList(D_80251528_C0EDA8),
+    gsSPDisplayList(N(D_80251528_C0EDA8)),
     gsSPPopMatrix(G_MTX_MODELVIEW),
     gsSPEndDisplayList(),
 };
 
-Gfx D_802515B0_C0EE30[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_802515B0_C0EE30)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
-    gsSPDisplayList(dgb_01_img4_gfx),
+    gsSPDisplayList(N(img4_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C21810, 18, 0),
@@ -3195,12 +3195,12 @@ Gfx D_802515B0_C0EE30[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251638_C0EEB8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80251638_C0EEB8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img1_gfx),
+    gsSPDisplayList(N(img1_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C21770, 10, 0),
@@ -3210,12 +3210,12 @@ Gfx D_80251638_C0EEB8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_802516A8_C0EF28[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_802516A8_C0EF28)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img7_gfx),
+    gsSPDisplayList(N(img7_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C21700, 7, 0),
@@ -3224,12 +3224,12 @@ Gfx D_802516A8_C0EF28[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251710_C0EF90[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80251710_C0EF90)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img2_gfx),
+    gsSPDisplayList(N(img2_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C215A0, 22, 0),
@@ -3242,12 +3242,12 @@ Gfx D_80251710_C0EF90[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251798_C0F018[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
+Gfx N(D_80251798_C0F018)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(dgb_01_img0_gfx),
+    gsSPDisplayList(N(img0_gfx)),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPVertex(vtx_C20F40, 32, 0),
@@ -3299,44 +3299,44 @@ Gfx D_80251798_C0F018[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251958_C0F1D8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_80251798_C0F018),
-    gsSPDisplayList(D_80251710_C0EF90),
-    gsSPDisplayList(D_802516A8_C0EF28),
-    gsSPDisplayList(D_80251638_C0EEB8),
-    gsSPDisplayList(D_802515B0_C0EE30),
+Gfx N(D_80251958_C0F1D8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_80251798_C0F018)),
+    gsSPDisplayList(N(D_80251710_C0EF90)),
+    gsSPDisplayList(N(D_802516A8_C0EF28)),
+    gsSPDisplayList(N(D_80251638_C0EEB8)),
+    gsSPDisplayList(N(D_802515B0_C0EE30)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_802519A0_C0F220[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_80251958_C0F1D8),
-    gsSPDisplayList(D_80251578_C0EDF8),
-    gsSPDisplayList(D_80250DA8_C0E628),
-    gsSPDisplayList(D_80250648_C0DEC8),
-    gsSPDisplayList(D_802500C8_C0D948),
-    gsSPDisplayList(D_8024EEC8_C0C748),
+Gfx N(D_802519A0_C0F220)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_80251958_C0F1D8)),
+    gsSPDisplayList(N(D_80251578_C0EDF8)),
+    gsSPDisplayList(N(D_80250DA8_C0E628)),
+    gsSPDisplayList(N(D_80250648_C0DEC8)),
+    gsSPDisplayList(N(D_802500C8_C0D948)),
+    gsSPDisplayList(N(D_8024EEC8_C0C748)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_802519F0_C0F270[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_802519A0_C0F220),
-    gsSPDisplayList(D_8024EC68_C0C4E8),
-    gsSPDisplayList(D_8024BD80_C09600),
+Gfx N(D_802519F0_C0F270)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_802519A0_C0F220)),
+    gsSPDisplayList(N(D_8024EC68_C0C4E8)),
+    gsSPDisplayList(N(D_8024BD80_C09600)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251A28_C0F2A8[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_802519F0_C0F270),
+Gfx N(D_80251A28_C0F2A8)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_802519F0_C0F270)),
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251A50_C0F2D0[] = {
-    gsSPSetLights1(dgb_01_D_80253140_C109C0),
-    gsSPDisplayList(D_80251A28_C0F2A8),
+Gfx N(D_80251A50_C0F2D0)[] = {
+    gsSPSetLights1(N(D_80253140_C109C0)),
+    gsSPDisplayList(N(D_80251A28_C0F2A8)),
     gsSPEndDisplayList(),
 };
 

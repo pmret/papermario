@@ -12904,18 +12904,18 @@ segments:
       subsegments:
       - [0xC08770, rgba16, img7, 32, 32]
       - [0xC08F70, gfx, img7]
-    - [0xC08FF0, .data, dgb_01_7]
+    - [0xC08FF0, .data, dgb_01_7] # TODO needs additioanl cleanup and gfx splitting
     - [0xC20C70]
-  - name: C20F40 # DMAd at the beginning of tubba blubba's castle (bridge cutscene)
+  - name: dgb_01_smash_bridges # DMAd at the beginning of tubba blubba's castle (bridge cutscene)
     type: code
     dir: world/area_dgb
     start: 0xC20F40
     vram: 0x80200000
     subsegments:
-    - [0xC20F40, c, C20F40]
+    - [0xC20F40, c, dgb_01_smash_bridges]
     - start: 0xC20F40
       type: .data
-      name: C20F40
+      name: dgb_01_smash_bridges
       subsegments:
       - [0xC20F40, vtx, vtx/C20F40]
       - [0xC21100, vtx, vtx/C21100]

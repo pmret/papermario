@@ -31,30 +31,30 @@ extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_SetupMusic);
 extern EvtScript N(EVS_ExitDoors_dgb_08_0);
 extern EvtScript N(EVS_ExitDoors_dgb_08_1);
-extern EvtScript N(802449C4);
+extern EvtScript N(EVS_SetupBridges);
 extern EvtScript N(EVS_UnlockPrompt_Door);
 extern EvtScript N(EVS_MakeEntities);
 extern NpcGroupList N(DefaultNPCs);
-extern NpcGroupList N(NpcGroup1);
-extern NpcGroupList N(NpcGroup2);
-extern NpcGroupList N(NpcGroup3);
+extern NpcGroupList N(FirstFloorEscapeNPCs);
+extern NpcGroupList N(SecondFloorEscapeNPCs);
+extern NpcGroupList N(ThirdFloorEscapeNPCs);
 
-extern StaticAnimatorNode* N(D_80252F4C_C107CC)[];
+extern StaticAnimatorNode* N(SmashBridgesSkeleton)[];
 extern AnimScript N(AS_SmashBridges);
 
 ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall);
 ApiStatus SetAnimatedModelRenderMode(Evt* script, s32 isInitialCall);
 ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall);
 
-extern Gfx dgb_01_img0_gfx[];
-extern Gfx dgb_01_img1_gfx[];
-extern Gfx dgb_01_img2_gfx[];
-extern Gfx dgb_01_img3_gfx[];
-extern Gfx dgb_01_img4_gfx[];
-extern Gfx dgb_01_img5_gfx[];
-extern Gfx dgb_01_img6_gfx[];
-extern Gfx dgb_01_img7_gfx[];
-extern Gfx D_8024BCF8_C09578[];
+extern Gfx N(img0_gfx)[];
+extern Gfx N(img1_gfx)[];
+extern Gfx N(img2_gfx)[];
+extern Gfx N(img3_gfx)[];
+extern Gfx N(img4_gfx)[];
+extern Gfx N(img5_gfx)[];
+extern Gfx N(img6_gfx)[];
+extern Gfx N(img7_gfx)[];
+extern Gfx N(D_8024BCF8_C09578)[];
 
 extern Mtx N(D_80253160_C109E0);
 extern Mtx N(D_802531A0_C10A20);
