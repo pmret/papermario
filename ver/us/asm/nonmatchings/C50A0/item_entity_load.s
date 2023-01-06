@@ -29,8 +29,8 @@ glabel item_entity_load
 /* C786C 8013116C 3C108009 */  lui       $s0, %hi(gItemEntityScripts)
 /* C7870 80131170 02028021 */  addu      $s0, $s0, $v0
 /* C7874 80131174 8E10DDD4 */  lw        $s0, %lo(gItemEntityScripts)($s0)
-/* C7878 80131178 3C16001D */  lui       $s6, 0x1d
-/* C787C 8013117C 26D6C310 */  addiu     $s6, $s6, -0x3cf0
+/* C7878 80131178 3C16001D */  lui       $s6, %hi(icon_present_ROM_START)
+/* C787C 8013117C 26D6C310 */  addiu     $s6, $s6, %lo(icon_present_ROM_START)
 /* C7880 80131180 AFD00024 */  sw        $s0, 0x24($fp)
 /* C7884 80131184 AFD00028 */  sw        $s0, 0x28($fp)
 .L80131188_C7888:

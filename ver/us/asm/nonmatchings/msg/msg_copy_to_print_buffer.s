@@ -664,8 +664,8 @@ glabel msg_copy_to_print_buffer
 /* BB59C 80124E9C 26730001 */  addiu     $s3, $s3, 1
 /* BB5A0 80124EA0 3C068016 */  lui       $a2, %hi(D_80159B50)
 /* BB5A4 80124EA4 24C69B50 */  addiu     $a2, $a2, %lo(D_80159B50)
-/* BB5A8 80124EA8 3C11001D */  lui       $s1, 0x1d
-/* BB5AC 80124EAC 2631C310 */  addiu     $s1, $s1, -0x3cf0
+/* BB5A8 80124EA8 3C11001D */  lui       $s1, %hi(icon_present_ROM_START)
+/* BB5AC 80124EAC 2631C310 */  addiu     $s1, $s1, %lo(icon_present_ROM_START)
 /* BB5B0 80124EB0 3C018015 */  lui       $at, %hi(D_8015131C)
 /* BB5B4 80124EB4 AC26131C */  sw        $a2, %lo(D_8015131C)($at)
 /* BB5B8 80124EB8 00108200 */  sll       $s0, $s0, 8
