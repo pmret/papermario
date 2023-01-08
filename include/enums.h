@@ -4067,8 +4067,8 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_4                               = 0x00000004,
     BS_FLAGS2_8                               = 0x00000008,
     BS_FLAGS2_10                              = 0x00000010,
-    BS_FLAGS2_20                              = 0x00000020,
-    BS_FLAGS2_40                              = 0x00000040,
+    BS_FLAGS2_CANT_FLEE                       = 0x00000020,
+    BS_FLAGS2_PEACH_BATTLE                    = 0x00000040,
     BS_FLAGS2_80                              = 0x00000080,
     BS_FLAGS2_100                             = 0x00000100,
     BS_FLAGS2_200                             = 0x00000200,
@@ -4081,7 +4081,7 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_1000000                         = 0x01000000,
     BS_FLAGS2_2000000                         = 0x02000000,
     BS_FLAGS2_4000000                         = 0x04000000,
-    BS_FLAGS2_8000000                         = 0x08000000,
+    BS_FLAGS2_HAS_RUSH                         = 0x08000000,
     BS_FLAGS2_10000000                        = 0x10000000,
 };
 
@@ -4126,17 +4126,124 @@ enum BattleStates {
 };
 
 enum BattleSubStates {
+    // BATTLE_STATE_NORMAL_START
+    BTL_SUBSTATE_NORMAL_START_UNK_0             = 0,
+    BTL_SUBSTATE_NORMAL_START_UNK_1             = 1,
+    BTL_SUBSTATE_NORMAL_START_UNK_4             = 4,
+    BTL_SUBSTATE_NORMAL_START_UNK_7             = 7,
+    BTL_SUBSTATE_NORMAL_START_UNK_8             = 8,
+
+    // BATTLE_STATE_BEGIN_TURN
+    BTL_SUBSTATE_BEGIN_TURN_UNK_5               = 5,
+    BTL_SUBSTATE_BEGIN_TURN_UNK_A               = 10,
+
+    // BATTLE_STATE_END_TURN
+    BTL_SUBSTATE_END_TURN_INIT                  = 0,
+    BTL_SUBSTATE_END_TURN_CHECK_FOR_SWAP        = 1,
+    BTL_SUBSTATE_END_TURN_AWAIT_SCRIPTS         = 2,
+    BTL_SUBSTATE_END_TURN_BEGIN_NEXT            = 3,
+    BTL_SUBSTATE_END_TURN_UNK_4                 = 4,
+    BTL_SUBSTATE_END_TURN_PERFORM_SWAP          = 11,
+    BTL_SUBSTATE_END_TURN_START_SCRIPTS         = 12,
+
+    // BATTLE_STATE_9
+    BTL_SUBSTATE_9_0                            = 0,
+    BTL_SUBSTATE_9_1                            = 1,
+    BTL_SUBSTATE_9_2                            = 2,
+    BTL_SUBSTATE_9_3                            = 3,
+    BTL_SUBSTATE_9_4                            = 4,
+    BTL_SUBSTATE_9_5                            = 5,
+    BTL_SUBSTATE_9_6                            = 6,
+    BTL_SUBSTATE_9_7                            = 7,
+
+    // BATTLE_STATE_NEXT_ENEMY
+    BTL_SUBSTATE_NEXT_ENEMY_INIT                = 0,
+    BTL_SUBSTATE_NEXT_ENEMY_UNK_1               = 1,
+    BTL_SUBSTATE_NEXT_ENEMY_DONE                = 2, // enemy has been found
+
+    // BATTLE_STATE_ENEMY_MOVE
+    BTL_SUBSTATE_ENEMY_MOVE_EXECUTE                     = 0,
+    BTL_SUBSTATE_ENEMY_MOVE_UNK_1                       = 1,
+    BTL_SUBSTATE_ENEMY_MOVE_AWAIT_SCRIPTS               = 2,
+    BTL_SUBSTATE_ENEMY_MOVE_AWAIT_PLAYER_POPUP_DONE     = 11, // wait for popups regarding player status to finish
+    BTL_SUBSTATE_ENEMY_MOVE_POST_PLAYER_POPUP_DELAY     = 12, // a brief delay after the popup vanishes
+    BTL_SUBSTATE_ENEMY_MOVE_CHECK_PARTNER               = 20,
+    BTL_SUBSTATE_ENEMY_MOVE_AWAIT_PARTNER_POPUP_DONE    = 21, // wait for popups regarding partner status to finish
+    BTL_SUBSTATE_ENEMY_MOVE_POST_PARTNER_POPUP_DELAY    = 22, // a brief delay after the popup vanishes
+    BTL_SUBSTATE_ENEMY_MOVE_DONE                        = 30,
+
+    // BATTLE_STATE_SELECT_TARGET
+    BTL_SUBSTATE_SELECT_TARGET_INIT                     = 0,
+    BTL_SUBSTATE_SELECT_TARGET_CHOOSE                   = 1,
+    BTL_SUBSTATE_SELECT_TARGET_DONE                     = 2,
+    BTL_SUBSTATE_SELECT_TARGET_CANCEL                   = 10,
+
+    // BATTLE_STATE_CELEBRATION
+    BTL_SUBSTATE_CELEBRATE_INIT                         = 0,
+    BTL_SUBSTATE_CELEBRATE_LOAD_STAR_POINTS             = 1,
+    BTL_SUBSTATE_CELEBRATE_TALLY_STAR_POINTS            = 2,
+    BTL_SUBSTATE_CELEBRATE_POST_STAR_POINTS             = 3,
+    BTL_SUBSTATE_CELEBRATE_LEVEL_UP_LOAD                = 4,
+    BTL_SUBSTATE_CELEBRATE_LEVEL_UP_BEGIN               = 5,
+    BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CREATE_HUD          = 6,
+    BTL_SUBSTATE_CELEBRATE_LEVEL_UP_SHOW_HUD            = 7,
+    BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CHOOSE              = 8,
+    BTL_SUBSTATE_CELEBRATE_LEVEL_UP_UPGRADE             = 9,
+    BTL_SUBSTATE_CELEBRATE_LEVEL_UP_FADE_OUT            = 10,
+    BTL_SUBSTATE_CELEBRATE_LEVEL_UP_DESTROY_HUD         = 11,
+    BTL_SUBSTATE_CELEBRATE_LEVEL_UP_INVALID             = 15,
+    BTL_SUBSTATE_CELEBRATE_LEVEL_UP_INVALID_DELAY       = 16,
+    BTL_SUBSTATE_CELEBRATE_SKIPPABLE_END_DELAY          = 20,
+    BTL_SUBSTATE_CELEBRATE_WALK_AWAY                    = 21,
+    BTL_SUBSTATE_CELEBRATE_DONE                         = 22,
+
+    // misc states
+    BTL_END_BATTLE_SUBSTATE_INIT                        = 2,
+};
+
+// used with BATTLE_STATE_PEACH_MENU
+enum PeachMenuBattleSubStates {
+    BTL_SUBSTATE_PEACH_MENU_UNK_0                   = 0x00000000,
+    BTL_SUBSTATE_PEACH_MENU_UNK_1                   = 0x00000001,
+    BTL_SUBSTATE_PEACH_MENU_UNK_2                   = 0x00000002,
+    BTL_SUBSTATE_PEACH_MENU_UNK_3                   = 0x00000003,
+    BTL_SUBSTATE_PEACH_MENU_UNK_4                   = 0x00000004,
+    BTL_SUBSTATE_PEACH_MENU_UNK_5                   = 0x00000005,
+    BTL_SUBSTATE_PEACH_MENU_UNK_6                   = 0x00000006,
+    BTL_SUBSTATE_PEACH_MENU_UNK_7                   = 0x00000007,
+    BTL_SUBSTATE_PEACH_MENU_UNK_8                   = 0x00000008,
+    BTL_SUBSTATE_PEACH_MENU_UNK_9                   = 0x00000009,
+    BTL_SUBSTATE_PEACH_MENU_UNK_A                   = 0x0000000A,
+    BTL_SUBSTATE_PEACH_MENU_UNK_B                   = 0x0000000B,
+};
+
+enum TwinkMenuBattleSubStates {
+    BTL_SUBSTATE_TWINK_MENU_INIT                    = 0x00000000,
+    BTL_SUBSTATE_TWINK_MENU_UNK_1                   = 0x00000001,
+    BTL_SUBSTATE_TWINK_MENU_UNK_2                   = 0x00000002,
+    BTL_SUBSTATE_TWINK_MENU_UNK_3                   = 0x00000003,
+    BTL_SUBSTATE_TWINK_MENU_UNK_4                   = 0x00000004,
+    BTL_SUBSTATE_TWINK_MENU_UNK_5                   = 0x00000005,
+    BTL_SUBSTATE_TWINK_MENU_UNK_6                   = 0x00000006,
+    BTL_SUBSTATE_TWINK_MENU_UNK_7                   = 0x00000007,
+    BTL_SUBSTATE_TWINK_MENU_UNK_8                   = 0x00000008,
+    BTL_SUBSTATE_TWINK_MENU_UNK_9                   = 0x00000009,
+    BTL_SUBSTATE_TWINK_MENU_UNK_A                   = 0x0000000A,
+    BTL_SUBSTATE_TWINK_MENU_UNK_B                   = 0x0000000B,
+};
+
+enum GenericBattleSubStates {
     BATTLE_SUB_STATE_UNK_0                 = 0x00000000,
     BATTLE_SUB_STATE_UNK_1                 = 0x00000001,
     BATTLE_SUB_STATE_UNK_2                 = 0x00000002,
     BATTLE_SUB_STATE_UNK_3                 = 0x00000003,
     BATTLE_SUB_STATE_UNK_4                 = 0x00000004,
-    BATTLE_SUB_STATE_BEGIN_LEVEL_UP        = 0x00000005,
-    BATTLE_SUB_STATE_LEVEL_UP_SHOW_HUD     = 0x00000006,
+    BATTLE_SUB_STATE_UNK_5                 = 0x00000005,
+    BATTLE_SUB_STATE_UNK_6                 = 0x00000006,
     BATTLE_SUB_STATE_UNK_7                 = 0x00000007,
     BATTLE_SUB_STATE_UNK_8                 = 0x00000008,
     BATTLE_SUB_STATE_UNK_9                 = 0x00000009,
-    BATTLE_SUB_STATE_PLAYER_DEFEATED       = 0x0000000A,
+    BATTLE_SUB_STATE_UNK_A                 = 0x0000000A,
     BATTLE_SUB_STATE_UNK_B                 = 0x0000000B,
     BATTLE_SUB_STATE_UNK_C                 = 0x0000000C,
     BATTLE_SUB_STATE_UNK_D                 = 0x0000000D,
@@ -4168,7 +4275,7 @@ enum BattleSubStates {
     BATTLE_SUB_STATE_UNK_40                = 0x00000040,
     BATTLE_SUB_STATE_UNK_41                = 0x00000041,
     BATTLE_SUB_STATE_UNK_46                = 0x00000046,
-    BATTLE_SUB_STATE_UNK_64                = 0x00000064,
+    BATTLE_SUB_STATE_UNK_54                = 0x00000064,
     BATTLE_SUB_STATE_UNK_C8                = 0x000000C8,
     BATTLE_SUB_STATE_UNK_C9                = 0x000000C9,
     BATTLE_SUB_STATE_UNK_CA                = 0x000000CA,
@@ -4180,6 +4287,7 @@ enum BattleSubStates {
     BATTLE_SUB_STATE_UNK_12E               = 0x0000012E,
 };
 
+// used with BATTLE_STATE_PLAYER_MENU
 enum BattleSubStatesPlayer {
     BATTLE_SUB_STATE_PLAYER_NONE = 0,
     // Main menu
@@ -4237,7 +4345,7 @@ enum BattleSubStatesPlayer {
     // Berserker
     BATTLE_SUB_STATE_PLAYER_BERSERKER_1 = 100,
     // Strategies
-    BATTLE_SUB_STATE_PLAYER_STRATEGIES_1 = 200,
+    BATTLE_SUB_STATE_PLAYER_BUILD_STRATEGIES = 200,
     BATTLE_SUB_STATE_PLAYER_STRATEGIES_2 = 201,
     BATTLE_SUB_STATE_PLAYER_STRATEGIES_3 = 202,
     BATTLE_SUB_STATE_PLAYER_STRATEGIES_4 = 203,
@@ -4316,15 +4424,92 @@ enum BattleSubStatesPartner {
     BATTLE_SUB_STATE_PARTNER_INIT_MENU = 302,
 };
 
-enum BattleSubStatesState5 {
-    BATTLE_SUB_STATE_5_0 = 0,
-    BATTLE_SUB_STATE_5_1 = 1,
-    BATTLE_SUB_STATE_5_2 = 2,
-    BATTLE_SUB_STATE_5_3 = 3,
-    BATTLE_SUB_STATE_5_4 = 4,
-    BATTLE_SUB_STATE_5_5 = 5,
-    BATTLE_SUB_STATE_5_6 = 6,
-    BATTLE_SUB_STATE_5_7 = 7,
+enum BattleMessages {
+    BTL_MSG_00      = 0x00,
+    BTL_MSG_01      = 0x01,
+    BTL_MSG_02      = 0x02,
+    BTL_MSG_03      = 0x03,
+    BTL_MSG_04      = 0x04,
+    BTL_MSG_05      = 0x05,
+    BTL_MSG_06      = 0x06,
+    BTL_MSG_07      = 0x07,
+    BTL_MSG_08      = 0x08,
+    BTL_MSG_09      = 0x09,
+    BTL_MSG_0A      = 0x0A,
+    BTL_MSG_0B      = 0x0B,
+    BTL_MSG_0C      = 0x0C,
+    BTL_MSG_0D      = 0x0D,
+    BTL_MSG_0E      = 0x0E,
+    BTL_MSG_0F      = 0x0F,
+    BTL_MSG_10      = 0x10,
+    BTL_MSG_11      = 0x11,
+    BTL_MSG_12      = 0x12,
+    BTL_MSG_13      = 0x13,
+    BTL_MSG_14      = 0x14,
+    BTL_MSG_15      = 0x15,
+    BTL_MSG_16      = 0x16,
+    BTL_MSG_17      = 0x17,
+    BTL_MSG_18      = 0x18,
+    BTL_MSG_19      = 0x19,
+    BTL_MSG_1A      = 0x1A,
+    BTL_MSG_1B      = 0x1B,
+    BTL_MSG_1C      = 0x1C,
+    BTL_MSG_1D      = 0x1D,
+    BTL_MSG_1E      = 0x1E,
+    BTL_MSG_1F      = 0x1F,
+    BTL_MSG_20      = 0x20,
+    BTL_MSG_21      = 0x21,
+    BTL_MSG_22      = 0x22,
+    BTL_MSG_23      = 0x23,
+    BTL_MSG_24      = 0x24,
+    BTL_MSG_25      = 0x25,
+    BTL_MSG_26      = 0x26,
+    BTL_MSG_27      = 0x27,
+    BTL_MSG_28      = 0x28,
+    BTL_MSG_29      = 0x29,
+    BTL_MSG_2A      = 0x2A,
+    BTL_MSG_2B      = 0x2B,
+    BTL_MSG_2C      = 0x2C,
+    BTL_MSG_2D      = 0x2D,
+    BTL_MSG_2E      = 0x2E,
+    BTL_MSG_2F      = 0x2F,
+    BTL_MSG_30      = 0x30,
+    BTL_MSG_31      = 0x31,
+    BTL_MSG_32      = 0x32,
+    BTL_MSG_33      = 0x33,
+    BTL_MSG_34      = 0x34,
+    BTL_MSG_35      = 0x35,
+    BTL_MSG_36      = 0x36,
+    BTL_MSG_37      = 0x37,
+    BTL_MSG_38      = 0x38,
+    BTL_MSG_39      = 0x39,
+    BTL_MSG_3A      = 0x3A,
+    BTL_MSG_3B      = 0x3B,
+    BTL_MSG_3C      = 0x3C,
+    BTL_MSG_3D      = 0x3D,
+    BTL_MSG_3E      = 0x3E,
+    BTL_MSG_3F      = 0x3F,
+    BTL_MSG_40      = 0x40,
+    BTL_MSG_41      = 0x41,
+    BTL_MSG_42      = 0x42,
+    BTL_MSG_43      = 0x43,
+    BTL_MSG_44      = 0x44,
+    BTL_MSG_45      = 0x45,
+    BTL_MSG_46      = 0x46,
+    BTL_MSG_47      = 0x47,
+    BTL_MSG_48      = 0x48,
+    BTL_MSG_49      = 0x49,
+    BTL_MSG_4A      = 0x4A,
+    BTL_MSG_4B      = 0x4B,
+    BTL_MSG_4C      = 0x4C,
+    BTL_MSG_4D      = 0x4D,
+    BTL_MSG_4E      = 0x4E,
+    BTL_MSG_4F      = 0x4F,
+    BTL_MSG_50      = 0x50,
+    BTL_MSG_51      = 0x51,
+    BTL_MSG_52      = 0x52,
+    BTL_MSG_53      = 0x53,
+    BTL_MSG_54      = 0x54,
 };
 
 enum DebuffTypes {
@@ -5871,7 +6056,7 @@ enum MsgStateFlags {
     MSG_STATE_FLAG_20               = 0x000020,
     MSG_STATE_FLAG_40               = 0x000040,
     MSG_STATE_FLAG_80               = 0x000080,
-    MSG_STATE_FLAG_100              = 0x000100,
+    MSG_STATE_FLAG_PRINT_QUICKLY    = 0x000100,
     MSG_STATE_FLAG_400              = 0x000400,
     MSG_STATE_FLAG_4000             = 0x004000,
     MSG_STATE_FLAG_8000             = 0x008000,

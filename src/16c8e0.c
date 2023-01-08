@@ -191,10 +191,10 @@ void initialize_battle(void) {
     }
 
     if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
-        gBattleStatus.flags2 |= BS_FLAGS2_40;
+        gBattleStatus.flags2 |= BS_FLAGS2_PEACH_BATTLE;
         increment_status_menu_disabled();
     } else {
-        gBattleStatus.flags2 &= ~BS_FLAGS2_40;
+        gBattleStatus.flags2 &= ~BS_FLAGS2_PEACH_BATTLE;
     }
 
     create_worker_world(NULL, func_8023ED5C);
@@ -230,7 +230,7 @@ void initialize_battle(void) {
     }
 
     bSavedPartner = playerData->currentPartner;
-    if (gBattleStatus.flags2 & BS_FLAGS2_40) {
+    if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
         playerData->currentPartner = PARTNER_TWINK;
     }
 }
@@ -294,7 +294,7 @@ void btl_update(void) {
             case -1:
             case 0:
                 return;
-            case 1:
+            case BATTLE_STATE_NORMAL_START:
                 btl_state_update_normal_start();
                 cond = FALSE;
                 break;
@@ -307,10 +307,10 @@ void btl_update(void) {
             case 9:
                 func_80242FE0();
                 break;
-            case 5:
+            case BATTLE_STATE_BEGIN_TURN:
                 btl_state_update_begin_turn();
                 break;
-            case 6:
+            case BATTLE_STATE_END_TURN:
                 btl_state_update_end_turn();
                 break;
             case 10:
@@ -322,7 +322,7 @@ void btl_update(void) {
             case 12:
                 btl_state_update_prepare_menu();
                 break;
-            case 13:
+            case BATTLE_STATE_PLAYER_MENU:
                 btl_state_update_player_menu();
                 break;
             case 14:
@@ -331,10 +331,10 @@ void btl_update(void) {
             case 16:
                 btl_state_update_twink_menu();
                 break;
-            case 15:
+            case BATTLE_STATE_PEACH_MENU:
                 btl_state_update_peach_menu();
                 break;
-            case 17:
+            case BATTLE_STATE_SELECT_TARGET:
                 btl_state_update_select_target();
                 break;
             case 18:
@@ -349,13 +349,13 @@ void btl_update(void) {
             case 23:
                 btl_state_update_end_partner_turn();
                 break;
-            case 21:
+            case BATTLE_STATE_ENEMY_MOVE:
                 btl_state_update_enemy_move();
                 break;
             case 3:
                 btl_state_update_partner_striking_first();
                 break;
-            case 20:
+            case BATTLE_STATE_NEXT_ENEMY:
                 btl_state_update_next_enemy();
                 break;
             case 19:
@@ -391,7 +391,7 @@ void btl_update(void) {
             case 34:
                 btl_state_update_22();
                 break;
-            case 33:
+            case BATTLE_STATE_CELEBRATION:
                 btl_state_update_celebration();
                 break;
             case 35:

@@ -819,7 +819,7 @@ void load_player_actor(void) {
     player->actorBlueprint = &bPlayerActorBlueprint;
     player->actorType = bPlayerActorBlueprint.type;
 
-    if ((gBattleStatus.flags2 & BS_FLAGS2_40) || (gGameStatusPtr->demoFlags & 2)) {
+    if ((gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) || (gGameStatusPtr->demoFlags & 2)) {
         player->homePos.x = player->currentPos.x = -130.0f;
         player->homePos.y = player->currentPos.y = 0.0f;
         player->homePos.z = player->currentPos.z = -10.0f;
@@ -932,7 +932,7 @@ void load_player_actor(void) {
     part->absolutePosition.z = 0.0f;
     part->defenseTable = bMarioDefenseTable;
 
-    if (gBattleStatus.flags2 & BS_FLAGS2_40) {
+    if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
         part->idleAnimations = bPeachIdleAnims;
     } else {
         part->idleAnimations = bMarioIdleAnims;
@@ -1040,7 +1040,7 @@ void load_partner_actor(void) {
         ASSERT(ActorBlueprint != NULL);
 
         nuPiReadRom(partnerData->dmaStart, partnerData->dmaDest, partnerData->dmaEnd - partnerData->dmaStart);
-        if ((gBattleStatus.flags2 & BS_FLAGS2_40) || (gGameStatusPtr->demoFlags & 2)) {
+        if ((gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) || (gGameStatusPtr->demoFlags & 2)) {
             x = -95.0f;
             y = partnerData->y;
             z = 0.0f;
@@ -1570,7 +1570,7 @@ s32 func_80265D44(s32 animID) {
     ret = 0;
 
     // TODO use animation id enum once it exists
-    if (!(battleStatus->flags2 & BS_FLAGS2_40)) {
+    if (!(battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE)) {
         if (playerData->curHP < 6) {
             if (animID == 1) {
                 animID = 26;
@@ -2434,7 +2434,7 @@ s32 player_team_is_ability_active(Actor* actor, s32 ability) {
 
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
-            if (!(gBattleStatus.flags2 & BS_FLAGS2_40)) {
+            if (!(gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE)) {
                 hasAbility = is_ability_active(ability);
             }
             break;

@@ -483,7 +483,7 @@ s32 calc_player_damage_enemy(void) {
             }
         }
 
-        if (gBattleStatus.flags2 & BS_FLAGS2_8000000 && (gBattleStatus.flags1 & BS_FLAGS1_10 ||
+        if (gBattleStatus.flags2 & BS_FLAGS2_HAS_RUSH && (gBattleStatus.flags1 & BS_FLAGS1_10 ||
                 battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP)) {
             if (battleStatus->rushFlags & RUSH_FLAG_POWER) {
                 currentAttackDamage += 2;

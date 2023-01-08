@@ -30,7 +30,7 @@ void func_80260A60(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     ActorPart* actorPart = &battleStatus->playerActor->partsTable[0];
 
-    if (battleStatus->flags2 & BS_FLAGS2_40) {
+    if (battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE) {
         actorPart->idleAnimations = bPeachIdleAnims;
         set_animation(0, 0, 0xA0002);
     } else if (!battleStatus->outtaSightActive) {
@@ -154,7 +154,7 @@ ApiStatus func_80260DD8(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80260E38(Evt* script, s32 isInitialCall) {
-    btl_show_battle_message(0x31, 60);
+    btl_show_battle_message(BTL_MSG_31, 60);
     return ApiStatus_DONE2;
 }
 
@@ -270,17 +270,17 @@ ApiStatus RestorePreDefeatState(Evt* script, s32 isInitialCall) {
     gBattleState = D_800DC4E4;
     gBattleSubState = D_800DC4D8;
     battleStatus->flags1 |= BS_FLAGS1_8;
-    battleStatus->flags2 &= ~BS_FLAGS2_8000000;
+    battleStatus->flags2 &= ~BS_FLAGS2_HAS_RUSH;
 
-    if (!(battleStatus->flags2 & BS_FLAGS2_40)) {
+    if (!(battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE)) {
         if (playerData->curHP <= 1 && is_ability_active(ABILITY_MEGA_RUSH)) {
-            gBattleStatus.flags2 |= BS_FLAGS2_8000000;
+            gBattleStatus.flags2 |= BS_FLAGS2_HAS_RUSH;
             battleStatus->rushFlags |= RUSH_FLAG_MEGA;
         }
 
         if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) &&
             !(battleStatus->rushFlags & RUSH_FLAG_MEGA)) {
-            gBattleStatus.flags2 |= BS_FLAGS2_8000000;
+            gBattleStatus.flags2 |= BS_FLAGS2_HAS_RUSH;
             battleStatus->rushFlags |= RUSH_FLAG_POWER;
         }
     }

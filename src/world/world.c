@@ -582,6 +582,7 @@ MapConfig kkj_maps[] = {
 };
 
 /// Jade Jungle
+#include "area_jan/jan.h"
 MapConfig jan_maps[] = {
     { MAP_UNSPLIT(jan_00, 0x80241BD0), .bgName = "yos_bg" },
     { MAP_UNSPLIT(jan_01, 0x802413F0), .bgName = "yos_bg" },
@@ -600,9 +601,9 @@ MapConfig jan_maps[] = {
     { MAP_UNSPLIT(jan_14, 0x80241300), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(jan_15, 0x80240320), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(jan_16, 0x80240590), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(jan_17, 0x80240040), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(jan_18, 0x80240020), .bgName = "yos_bg" },
-    { MAP_UNSPLIT(jan_19, 0x80240040), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(jan_17), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(jan_18), .bgName = "yos_bg" },
+    { MAP(jan_19), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(jan_22, 0x802419A0), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(jan_23, 0x80240010), .bgName = "yos_bg" },
 };
