@@ -482,7 +482,7 @@ void func_8021835C_59EA3C(void* data) {
             vtx->tc[0] = j * 0x140;
             vtx->tc[1] = 0;
             vtx->cn[0] = j * 50;
-            vtx->cn[1] = j * 120;;
+            vtx->cn[1] = j * 120;
             vtx->cn[2] = j * 30;
             vtx++;
 
@@ -492,7 +492,7 @@ void func_8021835C_59EA3C(void* data) {
             vtx->tc[0] = j * 0x140;
             vtx->tc[1] = 0x400;
             vtx->cn[0] = j * 50;
-            vtx->cn[1] = j * 120;;
+            vtx->cn[1] = j * 120;
             vtx->cn[2] = j * 30;
             vtx++;
         }

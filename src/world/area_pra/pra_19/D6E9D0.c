@@ -177,7 +177,7 @@ ApiStatus func_8024175C_D7010C(Evt* script, s32 isInitialCall) {
     if (npc4->pos.x < playerX) {
         return ApiStatus_DONE2;
     }
-    return ApiStatus_BLOCK;;
+    return ApiStatus_BLOCK;
 }
 
 ApiStatus func_80241838_D701E8(Evt* script, s32 isInitialCall) {

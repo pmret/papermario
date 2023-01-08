@@ -2046,7 +2046,7 @@ void btl_state_update_end_battle(void) {
             if (D_800DC064 == NULL) {
                 stage = blah->stage;
             } else {
-                stage = D_800DC064->stage;;
+                stage = D_800DC064->stage;
             }
             if (stage->postBattle == NULL) {
                 gBattleSubState = BATTLE_SUB_STATE_UNK_4;

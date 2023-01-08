@@ -238,7 +238,7 @@ API_CALLABLE(N(FlashScreenWhite)) {
                 script->functionTemp[0] = HOLD_WHITE;
                 script->functionTemp[1] = 15;
             } else {
-                data->screenWhiteness += 50;;
+                data->screenWhiteness += 50;
                 if (data->screenWhiteness > 255) {
                     data->screenWhiteness = 255;
                 }
@@ -256,7 +256,7 @@ API_CALLABLE(N(FlashScreenWhite)) {
                 set_curtain_scale_goal(1.0f);
                 return ApiStatus_DONE1;
             }
-            data->screenWhiteness -= 20;;
+            data->screenWhiteness -= 20;
             if (data->screenWhiteness < 0) {
                 data->screenWhiteness = 0;
             }

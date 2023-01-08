@@ -1342,7 +1342,7 @@ ApiStatus PlayerRunToGoal(Evt* script, s32 isInitialCall) {
         player->currentPos.z = playerState->goalPos.z;
         return ApiStatus_DONE2;
     }
-    return ApiStatus_BLOCK;;
+    return ApiStatus_BLOCK;
 }
 
 ApiStatus CancelablePlayerRunToGoal(Evt* script, s32 isInitialCall) {

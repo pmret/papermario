@@ -63,7 +63,7 @@ typedef struct UnkFoldStruct {
 
 typedef struct PackedVtx {
     /* 0x00 */ s16 ob[3];
-    /* 0x06 */ u8 tc[2];;
+    /* 0x06 */ u8 tc[2];
     /* 0x08 */ s8 cn[3];
     /* 0x0B */ char unk_0B;
 } PackedVtx; // size = 0x0C
