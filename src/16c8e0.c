@@ -291,8 +291,8 @@ void btl_update(void) {
     cond = TRUE;
     if (battleStatus->unk_95 == 0 || battleStatus->unk_95 != gBattleState) {
         switch (gBattleState) {
-            case -1:
-            case 0:
+            case BATTLE_STATE_NEGATIVE_1:
+            case BATTLE_STATE_0:
                 return;
             case BATTLE_STATE_NORMAL_START:
                 btl_state_update_normal_start();
@@ -304,8 +304,8 @@ void btl_update(void) {
             case BATTLE_STATE_BEGIN_PARTNER_TURN:
                 btl_state_update_begin_partner_turn();
                 break;
-            case 9:
-                func_80242FE0();
+            case BATTLE_STATE_9:
+                btl_state_update_9();
                 break;
             case BATTLE_STATE_BEGIN_TURN:
                 btl_state_update_begin_turn();
@@ -313,13 +313,13 @@ void btl_update(void) {
             case BATTLE_STATE_END_TURN:
                 btl_state_update_end_turn();
                 break;
-            case 10:
+            case BATTLE_STATE_SWITCH_TO_PLAYER:
                 btl_state_update_switch_to_player();
                 break;
-            case 11:
+            case BATTLE_STATE_SWITCH_TO_PARTNER:
                 btl_state_update_switch_to_partner();
                 break;
-            case 12:
+            case BATTLE_STATE_PREPARE_MENU:
                 btl_state_update_prepare_menu();
                 break;
             case BATTLE_STATE_PLAYER_MENU:
@@ -328,7 +328,7 @@ void btl_update(void) {
             case 14:
                 btl_state_update_partner_menu();
                 break;
-            case 16:
+            case BATTLE_STATE_TWINK_MENU:
                 btl_state_update_twink_menu();
                 break;
             case BATTLE_STATE_PEACH_MENU:
@@ -1114,11 +1114,11 @@ void btl_delete_actor(Actor* actor) {
     if (actor->idleScript != NULL) {
         kill_script_by_ID(actor->idleScriptID);
     }
-    if (actor->onHitScript != NULL) {
-        kill_script_by_ID(actor->onHitID);
+    if (actor->handleEventScript != NULL) {
+        kill_script_by_ID(actor->handleEventScriptID);
     }
     if (actor->takeTurnScript != NULL) {
-        kill_script_by_ID(actor->takeTurnID);
+        kill_script_by_ID(actor->takeTurnScriptID);
     }
     func_80266EE8(actor, 0);
 
@@ -1179,11 +1179,11 @@ void btl_delete_player_actor(Actor* player) {
     if (player->idleScript != NULL) {
         kill_script_by_ID(player->idleScriptID);
     }
-    if (player->onHitScript != NULL) {
-        kill_script_by_ID(player->onHitID);
+    if (player->handleEventScript != NULL) {
+        kill_script_by_ID(player->handleEventScriptID);
     }
     if (player->takeTurnScript != NULL) {
-        kill_script_by_ID(player->takeTurnID);
+        kill_script_by_ID(player->takeTurnScriptID);
     }
 
     partsTable = player->partsTable;

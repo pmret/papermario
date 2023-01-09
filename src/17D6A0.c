@@ -2399,6 +2399,8 @@ s32 bMessages[] = {
     [BTL_MSG_07]    MSG_Menus_ChargeJumpMore,
     [BTL_MSG_08]    MSG_Menus_ChargeMaxedOut,
     [BTL_MSG_09]    MSG_Menus_EnemyMissed,
+
+    // player status effects
     [BTL_MSG_0A]    MSG_Menus_PlayerDazed,
     [BTL_MSG_0B]    MSG_Menus_PlayerAsleep,
     [BTL_MSG_0C]    MSG_Menus_PlayerFrozen,
@@ -2407,6 +2409,8 @@ s32 bMessages[] = {
     [BTL_MSG_0F]    MSG_Menus_PlayerParalyzed,
     [BTL_MSG_10]    MSG_Menus_PlayerElectricCharge,
     [BTL_MSG_11]    MSG_Menus_PlayerTransparent,
+
+    // enemy status effects
     [BTL_MSG_12]    MSG_Menus_EnemyDazed,
     [BTL_MSG_13]    MSG_Menus_EnemyAsleep,
     [BTL_MSG_14]    MSG_Menus_EnemyFrozen,
@@ -2415,6 +2419,7 @@ s32 bMessages[] = {
     [BTL_MSG_17]    MSG_Menus_EnemyParalyzed,
     [BTL_MSG_18]    MSG_Menus_EnemyElectrified,
     [BTL_MSG_19]    MSG_Menus_EnemyCantMove,
+    
     [BTL_MSG_1A]    MSG_Menus_StarEnergyRecharged,
     [BTL_MSG_1B]    MSG_Menus_StarEnergyMaxedOut,
     [BTL_MSG_1C]    MSG_Menus_StarEnergyFilled,
@@ -2469,9 +2474,9 @@ s32 bMessages[] = {
     [BTL_MSG_4D]    MSG_Menus_00C7,
     [BTL_MSG_4E]    MSG_Menus_00C7,
     [BTL_MSG_4F]    MSG_Menus_00C8,
-    [BTL_MSG_50]    MSG_Menus_00C9,
+    [BTL_MSG_50]    MSG_Menus_CantSwitch,
     [BTL_MSG_51]    MSG_Menus_00CA,
-    [BTL_MSG_52]    MSG_Menus_00C9,
+    [BTL_MSG_52]    MSG_Menus_CantSwitch,
     [BTL_MSG_53]    MSG_Menus_00CA,
     [BTL_MSG_54]    MSG_Menus_00C3,
 };

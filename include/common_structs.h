@@ -1863,18 +1863,18 @@ typedef struct Actor {
     /* 0x1BA */ char unk_1BA[2];
     /* 0x1BC */ s8 hpFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
-    /* 0x1C0 */ EvtScript* idleScriptSource;
-    /* 0x1C4 */ EvtScript* takeTurnScriptSource;
-    /* 0x1C8 */ EvtScript* onHitScriptSource;
-    /* 0x1CC */ EvtScript* onTurnChangeScriptSource;
+    /* 0x1C0 */ EvtScript* idleSource;
+    /* 0x1C4 */ EvtScript* takeTurnSource;
+    /* 0x1C8 */ EvtScript* handleEventSource;
+    /* 0x1CC */ EvtScript* handleBattlePhaseSource;
     /* 0x1D0 */ struct Evt* idleScript;
     /* 0x1D4 */ struct Evt* takeTurnScript;
-    /* 0x1D8 */ struct Evt* onHitScript;
-    /* 0x1DC */ struct Evt* onTurnChangeScript;
+    /* 0x1D8 */ struct Evt* handleEventScript;
+    /* 0x1DC */ struct Evt* handleBattlePhaseScript;
     /* 0x1E0 */ s32 idleScriptID;
-    /* 0x1E4 */ s32 takeTurnID;
-    /* 0x1E8 */ s32 onHitID;
-    /* 0x1EC */ s32 onTurnChangeID;
+    /* 0x1E4 */ s32 takeTurnScriptID;
+    /* 0x1E8 */ s32 handleEventScriptID;
+    /* 0x1EC */ s32 handleBatttlePhaseScriptID;
     /* 0x1F0 */ s8 lastEventType;
     /* 0x1F1 */ s8 turnPriority;
     /* 0x1F2 */ s8 enemyIndex; /* actorID = this | 200 */

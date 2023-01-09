@@ -1343,18 +1343,18 @@ s32 func_802A2C84(void) {
             }
             set_window_update(8, 2);
 
-            msgID = 0x1D00C3;
+            msgID = MSG_Menus_00C3;
             if (D_802AD258 == 0) {
                 if (!battle_menu_hasSpiritsMenu) {
-                    msgID = 0x1D009F;
+                    msgID = MSG_Menus_NotEnoughFP;
                 } else {
-                    msgID = 0x1D00A0;
+                    msgID = MSG_Menus_NotEnoughStarPower;
                 }
             }
 
             msgWidth = get_msg_width(msgID, 0) + 23;
             moveX = (SCREEN_WIDTH / 2) - (msgWidth / 2);
-            set_window_properties(9, moveX, 80, msgWidth, D_802AB340[get_msg_lines(msgID) - 1], 0x14, func_802A4534, NULL, -1);
+            set_window_properties(9, moveX, 80, msgWidth, D_802AB340[get_msg_lines(msgID) - 1], 20, func_802A4534, NULL, -1);
             set_window_update(9, 1);
             D_802AD10B = 60;
             battle_menu_moveState = 42;
@@ -1367,16 +1367,16 @@ s32 func_802A2C84(void) {
                 D_802AD10B--;
                 return -1;
             }
-            set_window_update(9, 2);
+            set_window_update(WINDOW_ID_9, 2);
             set_window_update(1, 1);
             if (!battle_menu_hasSpiritsMenu) {
-                set_window_update(2, 1);
-                set_window_update(3, 1);
+                set_window_update(WINDOW_ID_2, 1);
+                set_window_update(WINDOW_ID_3, 1);
             } else {
-                set_window_update(4, 1);
-                set_window_update(5, 1);
+                set_window_update(WINDOW_ID_4, 1);
+                set_window_update(WINDOW_ID_5, 1);
             }
-            set_window_update(8, 1);
+            set_window_update(WINDOW_ID_8, 1);
             battle_menu_moveState = 1;
             break;
     }
@@ -2741,9 +2741,9 @@ void btl_state_update_player_menu(void) {
             break;
         case BATTLE_SUB_STATE_PLAYER_MAIN_MENU_8:
             if (gBattleStatus.flags2 & BS_FLAGS2_4) {
-                btl_show_variable_battle_message(0x50, 60, 0);
+                btl_show_variable_battle_message(BTL_MSG_50, 60, 0);
             } else {
-                btl_show_variable_battle_message(0x51, 60, playerData->currentPartner);
+                btl_show_variable_battle_message(BTL_MSG_51, 60, playerData->currentPartner);
             }
             D_802AD607 = 1;
             gBattleSubState = 9;
@@ -3772,9 +3772,9 @@ void btl_state_update_partner_menu(void) {
         break;
     case BATTLE_SUB_STATE_PARTNER_MAIN_MENU_7:
         if (can_btl_state_update_switch_to_player() == 0) {
-            btl_show_variable_battle_message(0x51, 60, 0);
+            btl_show_variable_battle_message(BTL_MSG_51, 60, 0);
         } else {
-            btl_show_variable_battle_message(0x50, 60, 0);
+            btl_show_variable_battle_message(BTL_MSG_50, 60, 0);
         }
         D_802AD607 = 1;
         gBattleSubState = BATTLE_SUB_STATE_PARTNER_MAIN_MENU_8;
@@ -4534,7 +4534,7 @@ void btl_state_update_peach_menu(void) {
             func_802A10B8();
             break;
         case BTL_SUBSTATE_PEACH_MENU_UNK_8:
-            btl_show_variable_battle_message(0x50, 60, 0);
+            btl_show_variable_battle_message(BTL_MSG_50, 60, 0);
             D_802AD607 = 1;
             gBattleSubState = BTL_SUBSTATE_PEACH_MENU_UNK_9;
             break;
@@ -4630,14 +4630,14 @@ void btl_state_update_twink_menu(void) {
                 player->state.currentPos.z = player->homePos.z;
                 player->state.goalPos.x = partner->homePos.x;
                 player->state.goalPos.z = partner->homePos.z;
-                gBattleSubState = BTL_SUBSTATE_TWINK_MENU_UNK_A;
+                gBattleSubState = BTL_SUBSTATE_TWINK_MENU_PERFORM_SWAP;
                 player->state.moveTime = 4;
                 player->state.angle = 0.0f;
                 break;
             }
             gBattleSubState = BTL_SUBSTATE_TWINK_MENU_UNK_B;
             break;
-        case BTL_SUBSTATE_TWINK_MENU_UNK_A:
+        case BTL_SUBSTATE_TWINK_MENU_PERFORM_SWAP:
             if (player->state.moveTime != 0) {
                 player->currentPos.x += (player->state.goalPos.x - player->currentPos.x) / player->state.moveTime;
                 player->currentPos.z += (player->state.goalPos.z - player->currentPos.z) / player->state.moveTime;
@@ -4680,7 +4680,7 @@ void btl_state_update_twink_menu(void) {
 
             if (!(battleStatus->menuDisableFlags & 0x100)) {
                 battle_menu_isEnabled[0] = FALSE;
-                battle_menu_isMessageDisabled[0] = 0x48;
+                battle_menu_isMessageDisabled[0] = BTL_MSG_48;
                 main_battle_menu_JumpHudScripts[0] = battle_menu_TwinkStarPowerHudScripts[1];
             }
             z = 0;
@@ -4736,12 +4736,12 @@ void btl_state_update_twink_menu(void) {
         case BTL_SUBSTATE_TWINK_MENU_UNK_5:
             func_802A10B8();
             break;
-        case BTL_SUBSTATE_TWINK_MENU_UNK_8:
-            btl_show_variable_battle_message(0x50, 60, 0);
+        case BTL_SUBSTATE_TWINK_MENU_SHOW_CANT_SWITCH:
+            btl_show_variable_battle_message(BTL_MSG_50, 60, 0);
             D_802AD607 = 1;
-            gBattleSubState = BTL_SUBSTATE_TWINK_MENU_UNK_9;
+            gBattleSubState = BTL_SUBSTATE_TWINK_MENU_AWAIT_CANT_SWITCH_POPUP;
             break;
-        case BTL_SUBSTATE_TWINK_MENU_UNK_9:
+        case BTL_SUBSTATE_TWINK_MENU_AWAIT_CANT_SWITCH_POPUP:
             if (!btl_is_popup_displayed()) {
                 D_802AD607 = 0;
                 D_802ACC60 = 0;
@@ -4770,8 +4770,8 @@ void btl_state_draw_twink_menu(void) {
             break;
         case BTL_SUBSTATE_TWINK_MENU_UNK_6:
         case BTL_SUBSTATE_TWINK_MENU_UNK_7:
-        case BTL_SUBSTATE_TWINK_MENU_UNK_8:
-        case BTL_SUBSTATE_TWINK_MENU_UNK_9:
+        case BTL_SUBSTATE_TWINK_MENU_SHOW_CANT_SWITCH:
+        case BTL_SUBSTATE_TWINK_MENU_AWAIT_CANT_SWITCH_POPUP:
             break;
     }
 }

@@ -861,14 +861,14 @@ void load_player_actor(void) {
     player->unk_195 = 0;
     player->unk_196 = 0;
     player->unk_197 = 0;
-    player->idleScriptSource = NULL;
-    player->takeTurnScriptSource = NULL;
-    player->onHitScriptSource = NULL;
-    player->onTurnChangeScriptSource = NULL;
+    player->idleSource = NULL;
+    player->takeTurnSource = NULL;
+    player->handleEventSource = NULL;
+    player->handleBattlePhaseSource = NULL;
     player->idleScript = NULL;
     player->takeTurnScript = NULL;
-    player->onHitScript = NULL;
-    player->onTurnChangeScript = NULL;
+    player->handleEventScript = NULL;
+    player->handleBattlePhaseScript = NULL;
     player->turnPriority = 0;
     player->statusTable = bPlayerStatusTable;
     player->debuff = 0;
@@ -1070,14 +1070,14 @@ void load_partner_actor(void) {
         partnerActor->headOffset.z = 0;
         partnerActor->currentHP = ActorBlueprint->maxHP;
         partnerActor->numParts = partCount;
-        partnerActor->idleScriptSource = NULL;
-        partnerActor->takeTurnScriptSource = ActorBlueprint->script;
-        partnerActor->onHitScriptSource = NULL;
-        partnerActor->onTurnChangeScriptSource = NULL;
+        partnerActor->idleSource = NULL;
+        partnerActor->takeTurnSource = ActorBlueprint->takeTurnScript;
+        partnerActor->handleEventSource = NULL;
+        partnerActor->handleBattlePhaseSource = NULL;
         partnerActor->idleScript = NULL;
         partnerActor->takeTurnScript = NULL;
-        partnerActor->onHitScript = NULL;
-        partnerActor->onTurnChangeScript = NULL;
+        partnerActor->handleEventScript = NULL;
+        partnerActor->handleBattlePhaseScript = NULL;
         partnerActor->turnPriority = 0;
         partnerActor->enemyIndex = 0;
         partnerActor->yaw = 0.0f;
@@ -1262,8 +1262,8 @@ void load_partner_actor(void) {
         partnerActor->disableEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
         partnerActor->icePillarEffect = NULL;
 
-        takeTurnScript = start_script(partnerActor->takeTurnScriptSource, EVT_PRIORITY_A, 0);
-        partnerActor->takeTurnID = takeTurnScript->id;
+        takeTurnScript = start_script(partnerActor->takeTurnSource, EVT_PRIORITY_A, 0);
+        partnerActor->takeTurnScriptID = takeTurnScript->id;
         takeTurnScript->owner1.actorID = ACTOR_PARTNER;
     }
 }
@@ -1316,13 +1316,13 @@ Actor* create_actor(Formation formation) {
     actor->headOffset.z = 0;
     actor->maxHP = actor->currentHP = formationActor->maxHP;
     actor->numParts = partCount;
-    actor->idleScriptSource = NULL;
-    actor->takeTurnScriptSource = formationActor->script;
-    actor->onHitScriptSource = NULL;
-    actor->onTurnChangeScriptSource = NULL;
+    actor->idleSource = NULL;
+    actor->takeTurnSource = formationActor->takeTurnScript;
+    actor->handleEventSource = NULL;
+    actor->handleBattlePhaseSource = NULL;
     actor->idleScript = NULL;
     actor->takeTurnScript = NULL;
-    actor->onHitScript = NULL;
+    actor->handleEventScript = NULL;
     actor->turnPriority = formation->priority;
     actor->enemyIndex = i;
     actor->yaw = 0.0f;
@@ -1525,8 +1525,8 @@ Actor* create_actor(Formation formation) {
 
     actor->hpFraction = 25;
     actor->actorID = actor->enemyIndex | 0x200;
-    takeTurnScript = start_script(actor->takeTurnScriptSource, EVT_PRIORITY_A, 0);
-    actor->takeTurnID = takeTurnScript->id;
+    takeTurnScript = start_script(actor->takeTurnSource, EVT_PRIORITY_A, 0);
+    actor->takeTurnScriptID = takeTurnScript->id;
     takeTurnScript->owner1.enemyID = actor->enemyIndex | 0x200;
     actor->shadow.id = create_shadow_type(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
     actor->shadowScale = actor->size.x / 24.0;

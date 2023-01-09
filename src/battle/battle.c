@@ -280,7 +280,7 @@ void reset_battle_status(void) {
     gGameStatusPtr->demoFlags = 0;
     gBattleState = BATTLE_STATE_0;
     D_800DC4E0 = 1;
-    gBattleSubState = BATTLE_SUB_STATE_UNK_0;
+    gBattleSubState = BTL_SUBSTATE_INIT;
     D_800DC4D0 = 0;
     D_800DC4F0 = 0;
     D_800DC4D4 = 0;
@@ -379,7 +379,7 @@ void setup_demo_player(void) {
     }
 
     playerData->unk_288 = 0;
-    playerData->merleeSpellType = 0;
+    playerData->merleeSpellType = MERLEE_SPELL_0;
     playerData->merleeCastsLeft = 0;
     playerData->merleeTurnCount = 0;
     playerData->maxStarPower = 0;

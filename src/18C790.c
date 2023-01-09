@@ -536,7 +536,7 @@ void btl_state_update_celebration(void) {
                 EndBattleRewardIncrement = EndBattleRewardTotal / EndBattleRewardStep;
                 player->takeTurnScript = script;
                 CelebrateSubstateTime = 1;
-                player->takeTurnID = script->id;
+                player->takeTurnScriptID = script->id;
                 script->owner1.actorID = ACTOR_PLAYER;
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_TALLY_STAR_POINTS;
             }
@@ -579,12 +579,12 @@ void btl_state_update_celebration(void) {
                         battleStatus->battlePhase = PHASE_CELEBRATE;
                         script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
                         player->takeTurnScript = script;
-                        player->takeTurnID = script->id;
+                        player->takeTurnScriptID = script->id;
                         script->owner1.actorID = ACTOR_PLAYER;
                         if (partner != NULL) {
-                            script = start_script(partner->takeTurnScriptSource, EVT_PRIORITY_A, 0);
+                            script = start_script(partner->takeTurnSource, EVT_PRIORITY_A, 0);
                             partner->takeTurnScript = script;
-                            partner->takeTurnID = script->id;
+                            partner->takeTurnScriptID = script->id;
                             script->owner1.actorID = ACTOR_PARTNER;
                         }
                         CelebrateSubstateTime = 40;
@@ -1053,9 +1053,9 @@ void btl_state_update_celebration(void) {
             set_animation(0, 0, ANIM_Mario_30009);
 
             if (partner != NULL) {
-                script = start_script(partner->takeTurnScriptSource, EVT_PRIORITY_A, 0);
+                script = start_script(partner->takeTurnSource, EVT_PRIORITY_A, 0);
                 partner->takeTurnScript = script;
-                partner->takeTurnID = script->id;
+                partner->takeTurnScriptID = script->id;
                 script->owner1.actorID = ACTOR_PARTNER;
             }
             if (!(gBattleStatus.flags2 & BS_FLAGS2_2000000)) {
@@ -1184,11 +1184,11 @@ void btl_state_update_celebration(void) {
             }
             break;
         case BTL_SUBSTATE_CELEBRATE_DONE:
-            if (does_script_exist(player->takeTurnID)) {
-                kill_script_by_ID(player->takeTurnID);
+            if (does_script_exist(player->takeTurnScriptID)) {
+                kill_script_by_ID(player->takeTurnScriptID);
             }
-            if (partner != NULL && does_script_exist(partner->takeTurnID)) {
-                kill_script_by_ID(partner->takeTurnID);
+            if (partner != NULL && does_script_exist(partner->takeTurnScriptID)) {
+                kill_script_by_ID(partner->takeTurnScriptID);
             }
             btl_set_state(BATTLE_STATE_END_BATTLE);
             gBattleSubState = BTL_END_BATTLE_SUBSTATE_INIT;
