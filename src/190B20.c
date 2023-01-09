@@ -249,8 +249,8 @@ s32 btl_check_player_defeated(void) {
     if (gPlayerData.curHP > 0) {
         return FALSE;
     }
-    D_800DC4E4 = gBattleState;
-    D_800DC4D8 = gBattleSubState;
+    gDefeatedBattleState = gBattleState;
+    gDefeatedBattleSubstate = gBattleSubState;
     btl_set_state(BATTLE_STATE_DEFEAT);
     return TRUE;
 }
@@ -864,7 +864,7 @@ void load_player_actor(void) {
     player->idleScriptSource = NULL;
     player->takeTurnScriptSource = NULL;
     player->onHitScriptSource = NULL;
-    player->onTurnChanceScriptSource = NULL;
+    player->onTurnChangeScriptSource = NULL;
     player->idleScript = NULL;
     player->takeTurnScript = NULL;
     player->onHitScript = NULL;
@@ -1073,7 +1073,7 @@ void load_partner_actor(void) {
         partnerActor->idleScriptSource = NULL;
         partnerActor->takeTurnScriptSource = ActorBlueprint->script;
         partnerActor->onHitScriptSource = NULL;
-        partnerActor->onTurnChanceScriptSource = NULL;
+        partnerActor->onTurnChangeScriptSource = NULL;
         partnerActor->idleScript = NULL;
         partnerActor->takeTurnScript = NULL;
         partnerActor->onHitScript = NULL;
@@ -1319,7 +1319,7 @@ Actor* create_actor(Formation formation) {
     actor->idleScriptSource = NULL;
     actor->takeTurnScriptSource = formationActor->script;
     actor->onHitScriptSource = NULL;
-    actor->onTurnChanceScriptSource = NULL;
+    actor->onTurnChangeScriptSource = NULL;
     actor->idleScript = NULL;
     actor->takeTurnScript = NULL;
     actor->onHitScript = NULL;
@@ -1695,7 +1695,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                     if (target->debuff != statusTypeKey) {
                         target->status = statusTypeKey;
                     }
-                    target->disableEffect->data.disableX->unk_3C = 0;
+                    target->disableEffect->data.disableX->koDuration = 0;
                     target->debuff = statusTypeKey;
                     target->debuffDuration = duration;
                     if ((s8)duration > 9) {
@@ -2475,34 +2475,34 @@ void remove_player_buffs(s32 buffs) {
     Actor* partner = battleStatus->partnerActor;
     ActorPart* playerPartsTable = player->partsTable;
 
-    if (buffs & 1) {
+    if (buffs & PLAYER_BUFF_JUMP_CHARGE) {
         battleStatus->jumpCharge = 0;
-        battleStatus->flags1 &= ~BS_FLAGS1_20000000;
+        battleStatus->flags1 &= ~BS_FLAGS1_JUMP_CHARGED;
     }
-    if (buffs & 2) {
+    if (buffs & PLAYER_BUFF_HAMMER_CHARGE) {
         battleStatus->hammerCharge = 0;
-        battleStatus->flags1 &= ~BS_FLAGS1_10000000;
+        battleStatus->flags1 &= ~BS_FLAGS1_HAMMER_CHARGED;
     }
-    if (buffs & 8) {
+    if (buffs & PLAYER_BUFF_STONE) {
         player->stoneDuration = 0;
         player->stoneStatus = 0;
     }
-    if (buffs & 0x10) {
+    if (buffs & PLAYER_BUFF_HUSTLE) {
         battleStatus->hustleTurns = 0;
-        battleStatus->flags1 &= ~BS_FLAGS1_HUSTLE_DRINK_ON;
+        battleStatus->flags1 &= ~BS_FLAGS1_HUSTLED;
     }
-    if (buffs & 0x20 && (player->staticStatus != 0)) {
+    if (buffs & PLAYER_BUFF_STATIC && (player->staticStatus != 0)) {
         player->staticDuration = 0;
         player->staticStatus = 0;
         remove_status_static(player->hudElementDataIndex);
     }
-    if (buffs & 0x40 && (player->transparentStatus != 0)) {
+    if (buffs & PLAYER_BUFF_TRANSPARENT && (player->transparentStatus != 0)) {
         player->transparentDuration = 0;
         player->transparentStatus = 0;
         playerPartsTable->flags &= ~0x100;
         remove_status_transparent(player->hudElementDataIndex);
     }
-    if (buffs & 0x200 && (battleStatus->waterBlockTurnsLeft != 0)) {
+    if (buffs & PLAYER_BUFF_WATER_BLOCK && (battleStatus->waterBlockTurnsLeft != 0)) {
         battleStatus->waterBlockTurnsLeft = 0;
         battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_WATER_BLOCK].turnsLeft = 0;
         battleStatus->waterBlockEffect->flags |= 0x10;
@@ -2515,18 +2515,18 @@ void remove_player_buffs(s32 buffs) {
         battleStatus->waterBlockEffect = NULL;
         sfx_play_sound(SOUND_299);
     }
-    if (buffs & 0x100 && (battleStatus->turboChargeTurnsLeft != 0)) {
+    if (buffs & PLAYER_BUFF_TURBO_CHARGE && (battleStatus->turboChargeTurnsLeft != 0)) {
         battleStatus->turboChargeTurnsLeft = 0;
         battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_TURBO_CHARGE].turnsLeft = 0;
     }
-    if (buffs & 0x80 && (battleStatus->cloudNineTurnsLeft != 0)) {
+    if (buffs & PLAYER_BUFF_CLOUD_NINE && (battleStatus->cloudNineTurnsLeft != 0)) {
         battleStatus->cloudNineTurnsLeft = 0;
         battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_CLOUD_NINE].turnsLeft = 0;
         remove_effect(battleStatus->cloudNineEffect);
         battleStatus->cloudNineEffect = NULL;
     }
 
-    if (partner != NULL && (buffs & 0x10000)) {
+    if (partner != NULL && (buffs & PLAYER_BUFF_PARTNER_GLOWING)) {
         partner->isGlowing = FALSE;
         gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;
     }
@@ -2542,7 +2542,7 @@ void btl_update_ko_status(void) {
     player->koDuration = player->debuffDuration;
     if (player->koDuration > 0) {
         player->koStatus = STATUS_DAZE;
-        player->disableEffect->data.disableX->unk_3C = player->koDuration;
+        player->disableEffect->data.disableX->koDuration = player->koDuration;
 
         if (koDuration == 0) {
             sfx_play_sound(SOUND_2107);
@@ -2557,7 +2557,7 @@ void btl_update_ko_status(void) {
 
         if (partner->koDuration > 0) {
             partner->koStatus = STATUS_DAZE;
-            partner->disableEffect->data.disableX->unk_3C = partner->koDuration;
+            partner->disableEffect->data.disableX->koDuration = partner->koDuration;
         }
     }
 
@@ -2568,7 +2568,7 @@ void btl_update_ko_status(void) {
             enemy->koDuration = enemy->debuffDuration;
             if (enemy->koDuration > 0) {
                 enemy->koStatus = STATUS_DAZE;
-                enemy->disableEffect->data.disableX->unk_3C = enemy->koDuration;
+                enemy->disableEffect->data.disableX->koDuration = enemy->koDuration;
             }
         }
     }

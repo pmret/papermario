@@ -23,8 +23,8 @@ ApiStatus func_802A1108_74D678(Evt* script, s32 isInitialCall) {
     }
 
     battleStatus->hammerCharge = 0;
-    battleStatus->flags1 |= BS_FLAGS1_20000000;
-    battleStatus->flags1 &= ~BS_FLAGS1_10000000;
+    battleStatus->flags1 |= BS_FLAGS1_JUMP_CHARGED;
+    battleStatus->flags1 &= ~BS_FLAGS1_HAMMER_CHARGED;
 
     return ApiStatus_DONE2;
 }

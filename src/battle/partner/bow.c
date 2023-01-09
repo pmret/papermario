@@ -54,7 +54,7 @@ ApiStatus N(ApplyOuttaSight)(Evt* script, s32 isInitialCall) {
 
     playerActorPartTable->idleAnimations = bMarioHideAnims;
     gBattleStatus.hustleTurns = 0;
-    gBattleStatus.flags1 &= ~BS_FLAGS1_HUSTLE_DRINK_ON;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_HUSTLED;
 
     return ApiStatus_DONE2;
 }

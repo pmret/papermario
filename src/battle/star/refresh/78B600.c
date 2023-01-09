@@ -86,7 +86,7 @@ ApiStatus func_802A17D4_78BDD4(Evt* script, s32 isInitialCall) {
     if (actor->koStatus != 0) {
         actor->koDuration = 0;
         actor->koStatus = 0;
-        actor->disableEffect->data.disableX->unk_3C = 0;
+        actor->disableEffect->data.disableX->koDuration = 0;
     }
 
     btl_update_ko_status();

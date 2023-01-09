@@ -423,12 +423,12 @@ s32 calc_player_damage_enemy(void) {
 
         if (battleStatus->jumpCharge && battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP) {
             currentAttackDamage += battleStatus->jumpCharge;
-            gBattleStatus.flags1 &= ~BS_FLAGS1_20000000;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_JUMP_CHARGED;
         }
 
         if (battleStatus->hammerCharge && battleStatus->currentAttackElement & (DAMAGE_TYPE_QUAKE_HAMMER | DAMAGE_TYPE_THROW | DAMAGE_TYPE_SMASH)) {
             currentAttackDamage += battleStatus->hammerCharge;
-            gBattleStatus.flags1 &= ~BS_FLAGS1_10000000;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_HAMMER_CHARGED;
         }
 
         if (battleStatus->unk_98 != 0) {

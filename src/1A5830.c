@@ -997,7 +997,7 @@ ApiStatus BindNextTurn(Evt* script, s32 isInitialCall) {
     }
 
     var1 = (EvtScript*) evt_get_variable(script, *args++);
-    get_actor(actorID)->onTurnChanceScriptSource = var1;
+    get_actor(actorID)->onTurnChangeScriptSource = var1;
     return ApiStatus_DONE2;
 }
 
@@ -3362,7 +3362,7 @@ ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
 
     actor->koStatus = 0;
     actor->koDuration = 0;
-    actor->disableEffect->data.disableX->unk_3C = 0;
+    actor->disableEffect->data.disableX->koDuration = 0;
     actor->attackBoost = 0;
     actor->defenseBoost = 0;
     actor->isGlowing = 0;

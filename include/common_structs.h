@@ -1866,7 +1866,7 @@ typedef struct Actor {
     /* 0x1C0 */ EvtScript* idleScriptSource;
     /* 0x1C4 */ EvtScript* takeTurnScriptSource;
     /* 0x1C8 */ EvtScript* onHitScriptSource;
-    /* 0x1CC */ EvtScript* onTurnChanceScriptSource;
+    /* 0x1CC */ EvtScript* onTurnChangeScriptSource;
     /* 0x1D0 */ struct Evt* idleScript;
     /* 0x1D4 */ struct Evt* takeTurnScript;
     /* 0x1D8 */ struct Evt* onHitScript;

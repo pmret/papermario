@@ -298,10 +298,10 @@ void btl_update(void) {
                 btl_state_update_normal_start();
                 cond = FALSE;
                 break;
-            case 7:
+            case BATTLE_STATE_BEGIN_PLAYER_TURN:
                 btl_state_update_begin_player_turn();
                 break;
-            case 8:
+            case BATTLE_STATE_BEGIN_PARTNER_TURN:
                 btl_state_update_begin_partner_turn();
                 break;
             case 9:

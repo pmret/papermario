@@ -3343,7 +3343,7 @@ void btl_state_update_player_menu(void) {
                         break;
                     case 9:
                         battleStatus->hustleTurns = 0;
-                        gBattleStatus.flags1 &= ~BS_FLAGS1_HUSTLE_DRINK_ON;
+                        gBattleStatus.flags1 &= ~BS_FLAGS1_HUSTLED;
                         gBattleSubState = battleStatus->unk_6E;
                         btl_state_update_player_menu();
                         btl_set_state(BATTLE_STATE_END_PLAYER_TURN);
