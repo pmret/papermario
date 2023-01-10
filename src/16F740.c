@@ -2599,7 +2599,7 @@ void btl_state_update_player_move(void) {
             }
         }
 
-        if (battleStatus->moveCategory == 0 || battleStatus->moveCategory == 1) {
+        if (battleStatus->moveCategory == BTL_MENU_TYPE_JUMP || battleStatus->moveCategory == BTL_MENU_TYPE_SMASH) {
             if (battleStatus->nextMerleeSpellType == MERLEE_SPELL_1) {
                 battleStatus->merleeAttackBoost = 3;
                 battleStatus->nextMerleeSpellType = MERLEE_SPELL_0;
@@ -2744,7 +2744,7 @@ void btl_state_update_player_move(void) {
                 return;
             }
 
-            if (battleStatus->moveCategory == 1) {
+            if (battleStatus->moveCategory == BTL_MENU_TYPE_SMASH) {
                 if ((battleStatus->selectedMoveID != MOVE_SMASH_CHARGE0) &&
                     (battleStatus->selectedMoveID != MOVE_SMASH_CHARGE) &&
                     (battleStatus->selectedMoveID != MOVE_SUPER_SMASH_CHARGE))
@@ -2752,7 +2752,7 @@ void btl_state_update_player_move(void) {
                     gBattleStatus.flags1 &= ~BS_FLAGS1_HAMMER_CHARGED;
                 }
             }
-            if (battleStatus->moveCategory == 0) {
+            if (battleStatus->moveCategory == BTL_MENU_TYPE_JUMP) {
                 if ((battleStatus->selectedMoveID != MOVE_JUMP_CHARGE0) &&
                     (battleStatus->selectedMoveID != MOVE_JUMP_CHARGE) &&
                     (battleStatus->selectedMoveID != MOVE_SUPER_JUMP_CHARGE))
@@ -2926,7 +2926,7 @@ void btl_state_update_end_player_turn(void) {
     Evt* script;
 
     if (gBattleSubState == BTL_SUBSTATE_END_PLAYER_TURN_UNK_0) {
-        if (battleStatus->moveCategory == 2 && battleStatus->itemUsesLeft >= 2) {
+        if (battleStatus->moveCategory == BTL_MENU_TYPE_ITEM && battleStatus->itemUsesLeft >= 2) {
             gBattleSubState = BTL_SUBSTATE_END_PLAYER_TURN_UNK_5;
         } else if (
             !(gBattleStatus.flags2 & BS_FLAGS2_HAS_DRAINED_HP) &&
@@ -3037,7 +3037,7 @@ void btl_state_update_end_player_turn(void) {
 
     if (gBattleSubState == BTL_SUBSTATE_END_PLAYER_TURN_UNK_A) {
         if(!btl_check_enemies_defeated()) {
-            if (battleStatus->moveCategory == 2 && battleStatus->itemUsesLeft >= 2) {
+            if (battleStatus->moveCategory == BTL_MENU_TYPE_ITEM && battleStatus->itemUsesLeft >= 2) {
                 btl_cam_use_preset(BTL_CAM_PRESET_C);
                 btl_cam_move(10);
                 gBattleStatus.flags2 &= ~BS_FLAGS2_2;
@@ -3214,7 +3214,7 @@ void btl_state_update_partner_move(void) {
                                 break;
                             }
                             decrement_status_menu_disabled();
-                            if (playerData->currentPartner == PARTNER_GOOMBARIO && battleStatus->moveCategory == 5
+                            if (playerData->currentPartner == PARTNER_GOOMBARIO && battleStatus->moveCategory == BTL_MENU_TYPE_5
                                                                 && battleStatus->selectedMoveID != MOVE_CHARGE) {
                                 partner->isGlowing = 0;
                                 gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;
@@ -3772,13 +3772,13 @@ void btl_state_update_first_strike(void) {
 
             switch (encounterStatus->hitType) {
                 case ENCOUNTER_TRIGGER_JUMP:
-                    battleStatus->moveCategory = 0;
+                    battleStatus->moveCategory = BTL_MENU_TYPE_JUMP;
                     battleStatus->selectedMoveID = MOVE_UNUSED_JUMP4;
                     battleStatus->selectedItemID = encounterStatus->hitTier;
                     battleStatus->currentTargetListFlags = gMoveTable[MOVE_UNUSED_JUMP4].flags;
                     break;
                 case ENCOUNTER_TRIGGER_HAMMER:
-                    battleStatus->moveCategory = 1;
+                    battleStatus->moveCategory = BTL_MENU_TYPE_SMASH;
                     battleStatus->selectedMoveID = MOVE_UNUSED_HAMMER4;
                     battleStatus->selectedItemID = encounterStatus->hitTier;
                     battleStatus->currentTargetListFlags = gMoveTable[MOVE_UNUSED_HAMMER4].flags;
@@ -3973,13 +3973,13 @@ void btl_state_update_partner_striking_first(void) {
             level = partner->actorBlueprint->level;
             switch (playerData->currentPartner) {
                 case PARTNER_KOOPER:
-                    battleStatus->moveCategory = 5;
+                    battleStatus->moveCategory = BTL_MENU_TYPE_5;
                     battleStatus->selectedItemID = ITEM_NONE;
                     battleStatus->selectedMoveID = level + MOVE_SHELL_TOSS1;
                     battleStatus->currentTargetListFlags = gMoveTable[battleStatus->selectedMoveID].flags;
                     break;
                 case PARTNER_BOMBETTE:
-                    battleStatus->moveCategory = 5;
+                    battleStatus->moveCategory = BTL_MENU_TYPE_5;
                     battleStatus->selectedItemID = ITEM_NONE;
                     battleStatus->selectedMoveID = level + MOVE_BODY_SLAM1;
                     battleStatus->currentTargetListFlags = gMoveTable[battleStatus->selectedMoveID].flags;
@@ -4140,7 +4140,7 @@ void btl_state_update_enemy_striking_first(void) {
     s32 j;
 
     switch (gBattleSubState) {
-        case BTL_SUBSTATE_ENEMY_FIRST_STRIKE_UNK_0:
+        case BTL_SUBSTATE_ENEMY_FIRST_STRIKE_INIT:
             battleStatus->unk_8C = 0;
             battleStatus->lastAttackDamage = 0;
             battleStatus->unk_19A = 0;
@@ -4212,10 +4212,10 @@ void btl_state_update_enemy_striking_first(void) {
             actor->takeTurnScript = script;
             D_8029F248 = 3;
             actor->takeTurnScriptID = script->id;
-            gBattleSubState = BTL_SUBSTATE_ENEMY_FIRST_STRIKE_UNK_2;
+            gBattleSubState = BTL_SUBSTATE_ENEMY_FIRST_STRIKE_AWAIT_SCRIPTS;
             script->owner1.actorID = battleStatus->activeEnemyActorID;
             break;
-        case BTL_SUBSTATE_ENEMY_FIRST_STRIKE_UNK_2:
+        case BTL_SUBSTATE_ENEMY_FIRST_STRIKE_AWAIT_SCRIPTS:
             if (D_8029F248 != 0) {
                 D_8029F248--;
             } else {

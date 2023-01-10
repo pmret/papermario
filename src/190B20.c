@@ -85,20 +85,20 @@ s32 func_80263064(Actor* actor0, Actor* actor1, s32 unused) {
     part = actor1->partsTable;
 
     for (i = 0; i < numParts; i++) {
-        if (!(part->flags & 0x20000)) {
-            if (!(part->flags & 0x800000)) {
+        if (!(part->flags & ACTOR_PART_FLAG_NO_TARGET)) {
+            if (!(part->flags & ACTOR_PART_FLAG_MULTI_TARGET)) {
                 continue;
             } else {
                 ActorPartBlueprint* bp = part->staticData;
                 f32 x, y, z;
 
-                if (!(part->flags & 0x100000)) {
+                if (!(part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
                     x = actor1->currentPos.x;
                     y = actor1->currentPos.y;
                     z = actor1->currentPos.z;
 
                     x += part->partOffset.x;
-                    if (!(actor1->flags & 0x800)) {
+                    if (!(actor1->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
                         y += part->partOffset.y;
                     } else {
                         y -= part->partOffset.y;
@@ -106,7 +106,7 @@ s32 func_80263064(Actor* actor0, Actor* actor1, s32 unused) {
                     z += part->partOffset.z;
 
                     x += part->targetOffset.x;
-                    if (!(actor1->flags & 0x800)) {
+                    if (!(actor1->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
                         y += part->targetOffset.y;
                     } else {
                         y -= part->targetOffset.y;
@@ -117,7 +117,7 @@ s32 func_80263064(Actor* actor0, Actor* actor1, s32 unused) {
                     z = part->absolutePosition.z;
 
                     x += part->targetOffset.x;
-                    if (!(actor1->flags & 0x800)) {
+                    if (!(actor1->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
                         y += part->targetOffset.y;
                     } else {
                         y -= part->targetOffset.y;
@@ -199,8 +199,8 @@ void func_80263300(void) {
         if (itemID != 0) {
             ItemData* itemData = &gItemTable[itemID];
 
-            if (itemData->typeFlags & 2) {
-                battleStatus->moveCategory = 2;
+            if (itemData->typeFlags & ITEM_TYPE_FLAG_BATTLE_USABLE) {
+                battleStatus->moveCategory = BTL_MENU_TYPE_ITEM;
                 battleStatus->selectedItemID = playerData->invItems[i];
                 battleStatus->currentTargetListFlags = itemData->targetFlags;
                 player_create_target_list(player);
@@ -314,7 +314,7 @@ void btl_init_menu_boots(void) {
         }
 
         // See if there are any targets for this move
-        battleStatus->moveCategory = 0;
+        battleStatus->moveCategory = BTL_MENU_TYPE_JUMP;
         battleStatus->selectedItemID = playerData->bootsLevel;
         battleStatus->currentTargetListFlags = move->flags; // Controls target filters
         player_create_target_list(player);
@@ -408,7 +408,7 @@ void btl_init_menu_hammer(void) {
         }
 
         // See if there are any targets for this move
-        battleStatus->moveCategory = 1;
+        battleStatus->moveCategory = BTL_MENU_TYPE_SMASH;
         battleStatus->selectedItemID = playerData->hammerLevel;
         battleStatus->currentTargetListFlags = move->flags;
         player_create_target_list(player);
@@ -496,7 +496,7 @@ void btl_init_menu_partner(void) {
             }
         }
 
-        battleStatus->moveCategory = 5;
+        battleStatus->moveCategory = BTL_MENU_TYPE_5;
         battleStatus->selectedItemID = partner->actorBlueprint->level;
         battleStatus->currentTargetListFlags = move->flags;
         player_create_target_list(partner);

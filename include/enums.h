@@ -3531,7 +3531,7 @@ enum ActorFlags {
     ACTOR_FLAG_100               = 0x00000100,
     ACTOR_FLAG_FLYING            = 0x00000200, ///< Quake Hammer can't hit.
     ACTOR_FLAG_400               = 0x00000400,
-    ACTOR_FLAG_HP_OFFSET_BELOW   = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down).
+    ACTOR_FLAG_HP_OFFSET_BELOW   = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down). Is this just UPSIDE_DOWN?
     ACTOR_FLAG_1000              = 0x00001000,
     ACTOR_FLAG_2000              = 0x00002000,
     ACTOR_FLAG_TARGET_ONLY       = 0x00004000, ///< Battle ends even if undefeated. No turn.
@@ -4152,8 +4152,8 @@ enum BattleSubStates {
     BTL_SUBSTATE_PARTNER_FIRST_STRIKE_UNK_3                 = 3,
 
     // BATTLE_STATE_ENEMY_FIRST_STRIKE
-    BTL_SUBSTATE_ENEMY_FIRST_STRIKE_UNK_0                   = 0,
-    BTL_SUBSTATE_ENEMY_FIRST_STRIKE_UNK_2                   = 2,
+    BTL_SUBSTATE_ENEMY_FIRST_STRIKE_INIT                    = 0,
+    BTL_SUBSTATE_ENEMY_FIRST_STRIKE_AWAIT_SCRIPTS           = 2,
 
     // BATTLE_STATE_BEGIN_TURN
     BTL_SUBSTATE_BEGIN_TURN_INIT                            = 0,
@@ -4605,6 +4605,22 @@ enum BattleMessages {
     BTL_MSG_54      = 0x54,
 };
 
+enum BattleMenuTypes {
+    BTL_MENU_TYPE_INVALID   = -1,
+    BTL_MENU_TYPE_JUMP      = 0,
+    BTL_MENU_TYPE_SMASH     = 1,
+    BTL_MENU_TYPE_ITEM      = 2,
+    BTL_MENU_TYPE_3         = 3,
+    BTL_MENU_TYPE_4         = 4, // defend?
+    BTL_MENU_TYPE_5         = 5, // partner/ability?
+    BTL_MENU_TYPE_6         = 6,
+    BTL_MENU_TYPE_7         = 7, // strategies?
+    BTL_MENU_TYPE_8         = 8, // spirits?
+    BTL_MENU_TYPE_9         = 9, // do nothing?
+    BTL_MENU_TYPE_A         = 10, // switch to partner?
+    BTL_MENU_TYPE_B         = 11,
+};
+
 enum DebugEnemyContactModes {
     DEBUG_CONTACT_NONE              = 0, // contact with enemies behaves normally
     DEBUG_CONTACT_CANT_TOUCH        = 1, // enemies pass through the player and cannot start battles
@@ -4614,17 +4630,17 @@ enum DebugEnemyContactModes {
 };
 
 enum DebuffTypes {
-    DEBUFF_TYPE_SLEEP                 = 0x00001000,
-    DEBUFF_TYPE_STATIC                = 0x00002000,
-    DEBUFF_TYPE_FROZEN                = 0x00004000,
-    DEBUFF_TYPE_PARALYZED             = 0x00010000,
-    DEBUFF_TYPE_POISON                = 0x00020000,
-    DEBUFF_TYPE_DIZZY                 = 0x00040000,
-    DEBUFF_TYPE_SHRINK                = 0x00080000,
-    DEBUFF_TYPE_STONE                 = 0x00100000,
-    DEBUFF_TYPE_STOP                  = 0x00200000,
-    DEBUFF_TYPE_DAZE                  = 0x01000000,
-    DEBUFF_TYPE_INVISIBLE             = 0x04000000,
+    DEBUFF_TYPE_SLEEP               = 0x00001000,
+    DEBUFF_TYPE_STATIC              = 0x00002000,
+    DEBUFF_TYPE_FROZEN              = 0x00004000,
+    DEBUFF_TYPE_PARALYZED           = 0x00010000,
+    DEBUFF_TYPE_POISON              = 0x00020000,
+    DEBUFF_TYPE_DIZZY               = 0x00040000,
+    DEBUFF_TYPE_SHRINK              = 0x00080000,
+    DEBUFF_TYPE_STONE               = 0x00100000,
+    DEBUFF_TYPE_STOP                = 0x00200000,
+    DEBUFF_TYPE_DAZE                = 0x01000000,
+    DEBUFF_TYPE_INVISIBLE           = 0x04000000,
 };
 
 enum GlobalOverrides {

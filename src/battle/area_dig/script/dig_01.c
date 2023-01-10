@@ -10,7 +10,7 @@ ApiStatus func_80218644_6DE404(Evt* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
     SelectableTarget* selectableTarget;
 
-    battleStatus->moveCategory = 1;
+    battleStatus->moveCategory = BTL_MENU_TYPE_SMASH;
     battleStatus->selectedMoveID = MOVE_HAMMER1;
     battleStatus->selectedItemID = gCurrentEncounter.hitTier;
     battleStatus->currentTargetListFlags = gMoveTable[MOVE_HAMMER1].flags;
