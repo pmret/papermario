@@ -513,7 +513,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 D_802BE924 = 0;
                 sfx_stop_sound(0x80000000);
             }
-            temp_ret = 2;
+            temp_ret = ApiStatus_DONE2;
             return temp_ret;
         case 8:
             if (D_802BE92C != 0) {
@@ -541,17 +541,17 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             }
             npc->jumpVelocity = 0.0f;
             partner_clear_player_tracking(npc);
-            temp_ret = 2;
+            temp_ret = ApiStatus_DONE2;
 
 
             if (D_802BE924 != 0) {
                 D_802BE924 = 0;
                 sfx_stop_sound(0x80000000);
             }
-            temp_ret = 2;
+            temp_ret = ApiStatus_DONE2;
             break;
         default:
-            return 0;
+            return ApiStatus_BLOCK;
 
     }
 
