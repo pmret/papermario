@@ -57,10 +57,10 @@ EffectInstance* disable_x_main(s32 type, f32 x, f32 y, f32 z, s32 arg4) {
     data->scale = 1.0f;
     if (type == 1) {
         data->unk_38 = type;
-        data->unk_3C = 0;
+        data->koDuration = 0;
     } else {
         data->unk_38 = 0;
-        data->unk_3C = arg4;
+        data->koDuration = arg4;
     }
 
     data->pos.x = x;
@@ -135,14 +135,14 @@ void disable_x_update(EffectInstance* effect) {
     unk_2C = data->unk_2C;
     unk_38 = data->unk_38;
     unk_34 = data->scale;
-    unk_3C = data->unk_3C;
+    unk_3C = data->koDuration;
 
     if (type == 0) {
         if (data->unk_44 > 0) {
             data->unk_44--;
         } else {
-            if (data->unk_3C != unk_38) {
-                if (data->unk_3C < 0) {
+            if (data->koDuration != unk_38) {
+                if (data->koDuration < 0) {
                     unk_3C = 0;
                 }
                 if (unk_38 < unk_3C) {

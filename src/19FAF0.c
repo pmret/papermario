@@ -136,16 +136,16 @@ void dispatch_event_player(s32 eventType) {
 
     player->lastEventType = eventType;
 
-    oldOnHitScript = player->onHitScript;
-    oldOnHitID = player->onHitID;
+    oldOnHitScript = player->handleEventScript;
+    oldOnHitID = player->handleEventScriptID;
 
     eventScript = start_script(&HandleEvent_Player, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
-    player->onHitScript = eventScript;
-    player->onHitID = eventScript->id;
+    player->handleEventScript = eventScript;
+    player->handleEventScriptID = eventScript->id;
     eventScript->owner1.actor = NULL;
 
     if (player->takeTurnScript != NULL) {
-        kill_script_by_ID(player->takeTurnID);
+        kill_script_by_ID(player->takeTurnScriptID);
         player->takeTurnScript = NULL;
     }
 
@@ -162,12 +162,12 @@ void dispatch_event_player_continue_turn(s32 eventType) {
 
     player->lastEventType = eventType;
 
-    oldOnHitScript = player->onHitScript;
-    oldOnHitID = player->onHitID;
+    oldOnHitScript = player->handleEventScript;
+    oldOnHitID = player->handleEventScriptID;
 
     eventScript = start_script(&HandleEvent_Player, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
-    player->onHitScript = eventScript;
-    player->onHitID = eventScript->id;
+    player->handleEventScript = eventScript;
+    player->handleEventScriptID = eventScript->id;
     eventScript->owner1.actor = NULL;
 
     if (oldOnHitScript != NULL) {
@@ -423,12 +423,12 @@ s32 calc_player_damage_enemy(void) {
 
         if (battleStatus->jumpCharge && battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP) {
             currentAttackDamage += battleStatus->jumpCharge;
-            gBattleStatus.flags1 &= ~BS_FLAGS1_20000000;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_JUMP_CHARGED;
         }
 
         if (battleStatus->hammerCharge && battleStatus->currentAttackElement & (DAMAGE_TYPE_QUAKE_HAMMER | DAMAGE_TYPE_THROW | DAMAGE_TYPE_SMASH)) {
             currentAttackDamage += battleStatus->hammerCharge;
-            gBattleStatus.flags1 &= ~BS_FLAGS1_10000000;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_HAMMER_CHARGED;
         }
 
         if (battleStatus->unk_98 != 0) {
@@ -483,7 +483,7 @@ s32 calc_player_damage_enemy(void) {
             }
         }
 
-        if (gBattleStatus.flags2 & BS_FLAGS2_8000000 && (gBattleStatus.flags1 & BS_FLAGS1_10 ||
+        if (gBattleStatus.flags2 & BS_FLAGS2_HAS_RUSH && (gBattleStatus.flags1 & BS_FLAGS1_10 ||
                 battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP)) {
             if (battleStatus->rushFlags & RUSH_FLAG_POWER) {
                 currentAttackDamage += 2;

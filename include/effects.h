@@ -1295,7 +1295,7 @@ typedef struct DisableXFXData {
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ f32 scale;
     /* 0x38 */ s32 unk_38;
-    /* 0x3C */ s32 unk_3C;
+    /* 0x3C */ s32 koDuration;
     /* 0x40 */ f32 unk_40;
     /* 0x44 */ s32 unk_44;
 } DisableXFXData; // size = 0x48

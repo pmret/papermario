@@ -280,8 +280,8 @@ void reset_battle_status(void) {
     gGameStatusPtr->demoFlags = 0;
     gBattleState = BATTLE_STATE_0;
     D_800DC4E0 = 1;
-    gBattleSubState = BATTLE_SUB_STATE_UNK_0;
-    D_800DC4D0 = 0;
+    gBattleSubState = BTL_SUBSTATE_INIT;
+    D_800DC4D0 = BATTLE_STATE_0;
     D_800DC4F0 = 0;
     D_800DC4D4 = 0;
     D_800DC4FC = NULL;
@@ -316,15 +316,15 @@ void load_battle_section(void) {
     }
 
     btl_set_state(BATTLE_STATE_NORMAL_START);
-    D_800DC4D0 = 0;
+    D_800DC4D0 = BATTLE_STATE_0;
 }
 
 void load_battle(s32 battleID) {
     gCurrentBattleID = battleID;
     set_game_mode(GAME_MODE_BATTLE);
-    gBattleState = 0;
-    D_800DC4D0 = 0;
-    gBattleSubState = 0;
+    gBattleState = BATTLE_STATE_0;
+    D_800DC4D0 = BATTLE_STATE_0;
+    gBattleSubState = BTL_SUBSTATE_INIT;
 }
 
 void set_battle_stage(s32 arg0) {
@@ -379,7 +379,7 @@ void setup_demo_player(void) {
     }
 
     playerData->unk_288 = 0;
-    playerData->merleeSpellType = 0;
+    playerData->merleeSpellType = MERLEE_SPELL_0;
     playerData->merleeCastsLeft = 0;
     playerData->merleeTurnCount = 0;
     playerData->maxStarPower = 0;
@@ -462,7 +462,7 @@ void load_demo_battle(u32 index) {
             battleID = BTL_DIG_FORMATION_00;
     }
 
-    gGameStatusPtr->debugEnemyContact = 0;
+    gGameStatusPtr->debugEnemyContact = DEBUG_CONTACT_NONE;
     gGameStatusPtr->unk_7C = 1;
 
     switch (mode) {

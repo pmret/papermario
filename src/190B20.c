@@ -225,13 +225,11 @@ s32 btl_are_all_enemies_defeated(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
-        s32 flagEnemyDefeated = ENEMY_FLAGS_400000 | ENEMY_FLAGS_4000;
         enemy = battleStatus->enemyActors[i];
-
-        // If currentEnemyFlags signify that the enemy isn't dead yet...
-        if (enemy != NULL && !(enemy->flags & flagEnemyDefeated)) {
-            // Countinue the battle
-            enemiesStillAlive = TRUE;
+        if (enemy != NULL) {
+            if(!(enemy->flags & (ACTOR_FLAG_NO_DMG_APPLY | ACTOR_FLAG_TARGET_ONLY))) {
+                enemiesStillAlive = TRUE;
+            }
         }
     }
     return !enemiesStillAlive;
@@ -249,8 +247,8 @@ s32 btl_check_player_defeated(void) {
     if (gPlayerData.curHP > 0) {
         return FALSE;
     }
-    D_800DC4E4 = gBattleState;
-    D_800DC4D8 = gBattleSubState;
+    gDefeatedBattleState = gBattleState;
+    gDefeatedBattleSubstate = gBattleSubState;
     btl_set_state(BATTLE_STATE_DEFEAT);
     return TRUE;
 }
@@ -819,7 +817,7 @@ void load_player_actor(void) {
     player->actorBlueprint = &bPlayerActorBlueprint;
     player->actorType = bPlayerActorBlueprint.type;
 
-    if ((gBattleStatus.flags2 & BS_FLAGS2_40) || (gGameStatusPtr->demoFlags & 2)) {
+    if ((gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) || (gGameStatusPtr->demoFlags & 2)) {
         player->homePos.x = player->currentPos.x = -130.0f;
         player->homePos.y = player->currentPos.y = 0.0f;
         player->homePos.z = player->currentPos.z = -10.0f;
@@ -861,14 +859,14 @@ void load_player_actor(void) {
     player->unk_195 = 0;
     player->unk_196 = 0;
     player->unk_197 = 0;
-    player->idleScriptSource = NULL;
-    player->takeTurnScriptSource = NULL;
-    player->onHitScriptSource = NULL;
-    player->onTurnChanceScriptSource = NULL;
+    player->idleSource = NULL;
+    player->takeTurnSource = NULL;
+    player->handleEventSource = NULL;
+    player->handlePhaseSource = NULL;
     player->idleScript = NULL;
     player->takeTurnScript = NULL;
-    player->onHitScript = NULL;
-    player->onTurnChangeScript = NULL;
+    player->handleEventScript = NULL;
+    player->handlePhaseScript = NULL;
     player->turnPriority = 0;
     player->statusTable = bPlayerStatusTable;
     player->debuff = 0;
@@ -932,7 +930,7 @@ void load_player_actor(void) {
     part->absolutePosition.z = 0.0f;
     part->defenseTable = bMarioDefenseTable;
 
-    if (gBattleStatus.flags2 & BS_FLAGS2_40) {
+    if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
         part->idleAnimations = bPeachIdleAnims;
     } else {
         part->idleAnimations = bMarioIdleAnims;
@@ -1040,7 +1038,7 @@ void load_partner_actor(void) {
         ASSERT(ActorBlueprint != NULL);
 
         nuPiReadRom(partnerData->dmaStart, partnerData->dmaDest, partnerData->dmaEnd - partnerData->dmaStart);
-        if ((gBattleStatus.flags2 & BS_FLAGS2_40) || (gGameStatusPtr->demoFlags & 2)) {
+        if ((gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) || (gGameStatusPtr->demoFlags & 2)) {
             x = -95.0f;
             y = partnerData->y;
             z = 0.0f;
@@ -1070,14 +1068,14 @@ void load_partner_actor(void) {
         partnerActor->headOffset.z = 0;
         partnerActor->currentHP = ActorBlueprint->maxHP;
         partnerActor->numParts = partCount;
-        partnerActor->idleScriptSource = NULL;
-        partnerActor->takeTurnScriptSource = ActorBlueprint->script;
-        partnerActor->onHitScriptSource = NULL;
-        partnerActor->onTurnChanceScriptSource = NULL;
+        partnerActor->idleSource = NULL;
+        partnerActor->takeTurnSource = ActorBlueprint->takeTurnScript;
+        partnerActor->handleEventSource = NULL;
+        partnerActor->handlePhaseSource = NULL;
         partnerActor->idleScript = NULL;
         partnerActor->takeTurnScript = NULL;
-        partnerActor->onHitScript = NULL;
-        partnerActor->onTurnChangeScript = NULL;
+        partnerActor->handleEventScript = NULL;
+        partnerActor->handlePhaseScript = NULL;
         partnerActor->turnPriority = 0;
         partnerActor->enemyIndex = 0;
         partnerActor->yaw = 0.0f;
@@ -1262,8 +1260,8 @@ void load_partner_actor(void) {
         partnerActor->disableEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
         partnerActor->icePillarEffect = NULL;
 
-        takeTurnScript = start_script(partnerActor->takeTurnScriptSource, EVT_PRIORITY_A, 0);
-        partnerActor->takeTurnID = takeTurnScript->id;
+        takeTurnScript = start_script(partnerActor->takeTurnSource, EVT_PRIORITY_A, 0);
+        partnerActor->takeTurnScriptID = takeTurnScript->id;
         takeTurnScript->owner1.actorID = ACTOR_PARTNER;
     }
 }
@@ -1316,13 +1314,13 @@ Actor* create_actor(Formation formation) {
     actor->headOffset.z = 0;
     actor->maxHP = actor->currentHP = formationActor->maxHP;
     actor->numParts = partCount;
-    actor->idleScriptSource = NULL;
-    actor->takeTurnScriptSource = formationActor->script;
-    actor->onHitScriptSource = NULL;
-    actor->onTurnChanceScriptSource = NULL;
+    actor->idleSource = NULL;
+    actor->takeTurnSource = formationActor->takeTurnScript;
+    actor->handleEventSource = NULL;
+    actor->handlePhaseSource = NULL;
     actor->idleScript = NULL;
     actor->takeTurnScript = NULL;
-    actor->onHitScript = NULL;
+    actor->handleEventScript = NULL;
     actor->turnPriority = formation->priority;
     actor->enemyIndex = i;
     actor->yaw = 0.0f;
@@ -1525,8 +1523,8 @@ Actor* create_actor(Formation formation) {
 
     actor->hpFraction = 25;
     actor->actorID = actor->enemyIndex | 0x200;
-    takeTurnScript = start_script(actor->takeTurnScriptSource, EVT_PRIORITY_A, 0);
-    actor->takeTurnID = takeTurnScript->id;
+    takeTurnScript = start_script(actor->takeTurnSource, EVT_PRIORITY_A, 0);
+    actor->takeTurnScriptID = takeTurnScript->id;
     takeTurnScript->owner1.enemyID = actor->enemyIndex | 0x200;
     actor->shadow.id = create_shadow_type(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
     actor->shadowScale = actor->size.x / 24.0;
@@ -1570,7 +1568,7 @@ s32 func_80265D44(s32 animID) {
     ret = 0;
 
     // TODO use animation id enum once it exists
-    if (!(battleStatus->flags2 & BS_FLAGS2_40)) {
+    if (!(battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE)) {
         if (playerData->curHP < 6) {
             if (animID == 1) {
                 animID = 26;
@@ -1695,7 +1693,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                     if (target->debuff != statusTypeKey) {
                         target->status = statusTypeKey;
                     }
-                    target->disableEffect->data.disableX->unk_3C = 0;
+                    target->disableEffect->data.disableX->koDuration = 0;
                     target->debuff = statusTypeKey;
                     target->debuffDuration = duration;
                     if ((s8)duration > 9) {
@@ -2160,7 +2158,7 @@ void func_80266B14(void) {
             if (enemy->unk_206 > 0) {
                 enemy->unk_206--;
                 if (enemy->unk_206 == 0) {
-                    enemy->flags &= ~ENEMY_FLAGS_80000;
+                    enemy->flags &= ~ACTOR_FLAG_80000;
                 }
             }
         }
@@ -2434,7 +2432,7 @@ s32 player_team_is_ability_active(Actor* actor, s32 ability) {
 
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
-            if (!(gBattleStatus.flags2 & BS_FLAGS2_40)) {
+            if (!(gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE)) {
                 hasAbility = is_ability_active(ability);
             }
             break;
@@ -2475,34 +2473,34 @@ void remove_player_buffs(s32 buffs) {
     Actor* partner = battleStatus->partnerActor;
     ActorPart* playerPartsTable = player->partsTable;
 
-    if (buffs & 1) {
+    if (buffs & PLAYER_BUFF_JUMP_CHARGE) {
         battleStatus->jumpCharge = 0;
-        battleStatus->flags1 &= ~BS_FLAGS1_20000000;
+        battleStatus->flags1 &= ~BS_FLAGS1_JUMP_CHARGED;
     }
-    if (buffs & 2) {
+    if (buffs & PLAYER_BUFF_HAMMER_CHARGE) {
         battleStatus->hammerCharge = 0;
-        battleStatus->flags1 &= ~BS_FLAGS1_10000000;
+        battleStatus->flags1 &= ~BS_FLAGS1_HAMMER_CHARGED;
     }
-    if (buffs & 8) {
+    if (buffs & PLAYER_BUFF_STONE) {
         player->stoneDuration = 0;
         player->stoneStatus = 0;
     }
-    if (buffs & 0x10) {
+    if (buffs & PLAYER_BUFF_HUSTLE) {
         battleStatus->hustleTurns = 0;
-        battleStatus->flags1 &= ~BS_FLAGS1_HUSTLE_DRINK_ON;
+        battleStatus->flags1 &= ~BS_FLAGS1_HUSTLED;
     }
-    if (buffs & 0x20 && (player->staticStatus != 0)) {
+    if (buffs & PLAYER_BUFF_STATIC && (player->staticStatus != 0)) {
         player->staticDuration = 0;
         player->staticStatus = 0;
         remove_status_static(player->hudElementDataIndex);
     }
-    if (buffs & 0x40 && (player->transparentStatus != 0)) {
+    if (buffs & PLAYER_BUFF_TRANSPARENT && (player->transparentStatus != 0)) {
         player->transparentDuration = 0;
         player->transparentStatus = 0;
         playerPartsTable->flags &= ~0x100;
         remove_status_transparent(player->hudElementDataIndex);
     }
-    if (buffs & 0x200 && (battleStatus->waterBlockTurnsLeft != 0)) {
+    if (buffs & PLAYER_BUFF_WATER_BLOCK && (battleStatus->waterBlockTurnsLeft != 0)) {
         battleStatus->waterBlockTurnsLeft = 0;
         battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_WATER_BLOCK].turnsLeft = 0;
         battleStatus->waterBlockEffect->flags |= 0x10;
@@ -2515,18 +2513,18 @@ void remove_player_buffs(s32 buffs) {
         battleStatus->waterBlockEffect = NULL;
         sfx_play_sound(SOUND_299);
     }
-    if (buffs & 0x100 && (battleStatus->turboChargeTurnsLeft != 0)) {
+    if (buffs & PLAYER_BUFF_TURBO_CHARGE && (battleStatus->turboChargeTurnsLeft != 0)) {
         battleStatus->turboChargeTurnsLeft = 0;
         battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_TURBO_CHARGE].turnsLeft = 0;
     }
-    if (buffs & 0x80 && (battleStatus->cloudNineTurnsLeft != 0)) {
+    if (buffs & PLAYER_BUFF_CLOUD_NINE && (battleStatus->cloudNineTurnsLeft != 0)) {
         battleStatus->cloudNineTurnsLeft = 0;
         battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_CLOUD_NINE].turnsLeft = 0;
         remove_effect(battleStatus->cloudNineEffect);
         battleStatus->cloudNineEffect = NULL;
     }
 
-    if (partner != NULL && (buffs & 0x10000)) {
+    if (partner != NULL && (buffs & PLAYER_BUFF_PARTNER_GLOWING)) {
         partner->isGlowing = FALSE;
         gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;
     }
@@ -2542,7 +2540,7 @@ void btl_update_ko_status(void) {
     player->koDuration = player->debuffDuration;
     if (player->koDuration > 0) {
         player->koStatus = STATUS_DAZE;
-        player->disableEffect->data.disableX->unk_3C = player->koDuration;
+        player->disableEffect->data.disableX->koDuration = player->koDuration;
 
         if (koDuration == 0) {
             sfx_play_sound(SOUND_2107);
@@ -2557,7 +2555,7 @@ void btl_update_ko_status(void) {
 
         if (partner->koDuration > 0) {
             partner->koStatus = STATUS_DAZE;
-            partner->disableEffect->data.disableX->unk_3C = partner->koDuration;
+            partner->disableEffect->data.disableX->koDuration = partner->koDuration;
         }
     }
 
@@ -2568,7 +2566,7 @@ void btl_update_ko_status(void) {
             enemy->koDuration = enemy->debuffDuration;
             if (enemy->koDuration > 0) {
                 enemy->koStatus = STATUS_DAZE;
-                enemy->disableEffect->data.disableX->unk_3C = enemy->koDuration;
+                enemy->disableEffect->data.disableX->koDuration = enemy->koDuration;
             }
         }
     }

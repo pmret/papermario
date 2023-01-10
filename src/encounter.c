@@ -650,7 +650,7 @@ void update_encounters_neutral(void) {
             }
 
             if (currentEncounter->battleTriggerCooldown != 0 ||
-                gGameStatusPtr->debugEnemyContact == 1 ||
+                gGameStatusPtr->debugEnemyContact == DEBUG_CONTACT_CANT_TOUCH ||
                 (playerStatus->flags & PS_FLAGS_ARMS_RAISED) ||
                 (gOverrideFlags & GLOBAL_OVERRIDES_40) ||
                 gPartnerActionStatus.actingPartner == PARTNER_BOW ||
@@ -1285,7 +1285,7 @@ void update_encounters_pre_battle(void) {
                 return;
             }
 
-            if (gGameStatusPtr->debugEnemyContact == 2) {
+            if (gGameStatusPtr->debugEnemyContact == DEBUG_CONTACT_DIE_ON_TOUCH) {
                 currentEncounter->unk_94 = 0;
                 currentEncounter->battleStartCountdown = 10;
                 partner_handle_before_battle();

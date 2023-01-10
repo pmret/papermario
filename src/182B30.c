@@ -1474,7 +1474,7 @@ void appendGfx_player_actor(void* arg0) {
         enable_status_icon_boost_hammer(player->hudElementDataIndex);
     }
 
-    if ((player->flags & ACTOR_FLAG_8000000) && !(gBattleStatus.flags2 & BS_FLAGS2_40)) {
+    if ((player->flags & ACTOR_FLAG_8000000) && !(gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE)) {
         if (playerData->curHP > 1) {
             remove_status_icon_peril(player->hudElementDataIndex);
             do {
@@ -2763,7 +2763,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
                 decorationTable->numSpritePalettes++;
             }
 
-            if (gBattleStatus.flags2 & BS_FLAGS2_40) {
+            if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
                 decorationTable->spriteColorVariations = 4;
             } else {
                 decorationTable->spriteColorVariations = 6;
