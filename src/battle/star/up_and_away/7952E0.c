@@ -314,13 +314,13 @@ EvtScript N(usePower) = {
     EVT_WAIT(20)
     EVT_CALL(SetMotionBlurParams, 0, 0, 0, 320, 240, 128, 10)
     EVT_CALL(func_802A1518_7957F8)
-    EVT_CALL(PlaySound, 0x247)
-    EVT_CALL(PlayEffect, 0x39, 0, 0, 20, 0, EVT_FLOAT(1.0), 90, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlaySound, SOUND_247)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_SHOCKWAVE, 0, 0, 20, 0, EVT_FLOAT(1.0), 90)
     EVT_WAIT(30)
     EVT_THREAD
-        EVT_CALL(PlayEffect, 0x3A, 0, 0, 50, 0, 300, 100, 10, 40, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SHIMMER_WAVE, 0, 0, 50, 0, 300, 100, 10, 40)
     EVT_END_THREAD
-    EVT_CALL(PlayEffect, 0x39, 0, 0, 20, 0, EVT_FLOAT(1.0), 90, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_SHOCKWAVE, 0, 0, 20, 0, EVT_FLOAT(1.0), 90)
     EVT_WAIT(75)
     EVT_CALL(SetMotionBlurParams, 0, 0, 0, 320, 240, 0, 10)
     EVT_CALL(InitTargetIterator)
@@ -395,7 +395,7 @@ EvtScript N(usePower) = {
             EVT_END_THREAD
         EVT_CASE_DEFAULT
             EVT_IF_EQ(LocalFlag(0), 0)
-                EVT_CALL(PlayerDamageEnemy, LVar0, 0, 65535, 0, 0, BS_FLAGS1_800 | BS_FLAGS1_SP_EVT_ACTIVE)
+                EVT_CALL(PlayerDamageEnemy, LVar0, 0, 65535, 0, 0, BS_FLAGS1_FORCE_HIT_IMMUNE | BS_FLAGS1_SP_EVT_ACTIVE)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_WAIT(5)

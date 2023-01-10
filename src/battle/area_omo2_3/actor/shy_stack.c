@@ -813,7 +813,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(onSpinSmashLaunchDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_SPIKE_TAUNT)
             EVT_CALL(GetBattleFlags, LVar2)

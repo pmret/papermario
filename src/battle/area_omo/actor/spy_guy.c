@@ -250,7 +250,7 @@ EvtScript N(handleEvent_80227ABC) = {
             EVT_SET_CONST(LVar1, ANIM_SpyGuy_Anim0C)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar1)
             EVT_IF_EQ(LVar1, 0)

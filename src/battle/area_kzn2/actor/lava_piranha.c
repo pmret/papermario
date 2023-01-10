@@ -976,7 +976,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
             EVT_IF_NOT_FLAG(LVarE, DAMAGE_TYPE_FIRE)
                 EVT_EXEC_WAIT(N(onComboHit))
                 EVT_EXEC_WAIT(N(playHitAnimation))

@@ -648,8 +648,10 @@ enum SoundIDs {
     SOUND_FF                        = 0x000000FF,
     SOUND_100                       = 0x00000100,
     SOUND_108                       = 0x00000108,
+    SOUND_10B                       = 0x0000010B,
     SOUND_IMMUNE                    = 0x0000010C,
     SOUND_HIT_BONES                 = 0x0000010D,
+    SOUND_10E                       = 0x0000010E,
     SOUND_10F                       = 0x0000010F,
     SOUND_110                       = 0x00000110,
     SOUND_131                       = 0x00000131,
@@ -830,6 +832,7 @@ enum SoundIDs {
     SOUND_23D                       = 0x0000023D,
     SOUND_241                       = 0x00000241,
     SOUND_246                       = 0x00000246,
+    SOUND_247                       = 0x00000247,
     SOUND_248                       = 0x00000248,
     SOUND_249                       = 0x00000249,
     SOUND_24A                       = 0x0000024A,
@@ -2609,7 +2612,7 @@ enum Events {
     EVENT_PEACH_BEAM                  = 0x00000014,
     EVENT_POWER_BOUNCE_HIT            = 0x00000015,
     EVENT_BLOW_AWAY                   = 0x00000016,
-    EVENT_UNKNOWN_TRIGGER             = 0x00000017,
+    EVENT_SCRIPTED_IMMUNE             = 0x00000017,
     EVENT_18                          = 0x00000018,
     EVENT_IMMUNE                      = 0x00000019,
     EVENT_BLOCK                       = 0x0000001A,
@@ -4027,7 +4030,7 @@ enum IntroStates {
 
 enum BattleStatusFlags1 {
     BS_FLAGS1_0                     = 0x00000000,
-    BS_FLAGS1_1                     = 0x00000001, // show actors
+    BS_FLAGS1_ACTORS_VISIBLE        = 0x00000001, // show actors
     BS_FLAGS1_2                     = 0x00000002, // menu is open
     BS_FLAGS1_4                     = 0x00000004,
     BS_FLAGS1_8                     = 0x00000008,
@@ -4037,9 +4040,9 @@ enum BattleStatusFlags1 {
     BS_FLAGS1_80                    = 0x00000080,
     BS_FLAGS1_100                   = 0x00000100,
     BS_FLAGS1_200                   = 0x00000200,
-    BS_FLAGS1_400                   = 0x00000400,
-    BS_FLAGS1_800                   = 0x00000800,
-    BS_FLAGS1_1000                  = 0x00001000,
+    BS_FLAGS1_400                   = 0x00000400, // UNUSED
+    BS_FLAGS1_FORCE_HIT_IMMUNE      = 0x00000800,
+    BS_FLAGS1_AUTO_SUCCEED_ACTION   = 0x00001000,
     BS_FLAGS1_2000                  = 0x00002000,
     BS_FLAGS1_4000                  = 0x00004000,
     BS_FLAGS1_8000                  = 0x00008000,
@@ -4070,7 +4073,7 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_CANT_FLEE                       = 0x00000020,
     BS_FLAGS2_PEACH_BATTLE                    = 0x00000040,
     BS_FLAGS2_80                              = 0x00000080,
-    BS_FLAGS2_100                             = 0x00000100,
+    BS_FLAGS2_100                             = 0x00000100, // dont decrement turbo charge on begin player turn
     BS_FLAGS2_200                             = 0x00000200,
     BS_FLAGS2_400                             = 0x00000400,
     BS_FLAGS2_800                             = 0x00000800,
@@ -4078,11 +4081,11 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_4000                            = 0x00004000,
     BS_FLAGS2_10000                           = 0x00010000,
     BS_FLAGS2_100000                          = 0x00100000,
-    BS_FLAGS2_1000000                         = 0x01000000,
-    BS_FLAGS2_2000000                         = 0x02000000,
-    BS_FLAGS2_4000000                         = 0x04000000,
+    BS_FLAGS2_1000000                         = 0x01000000, // possible IS_FIRST_STRIKE
+    BS_FLAGS2_DONT_STOP_MUSIC                 = 0x02000000, // don't stop playing the current song when the battle ends
+    BS_FLAGS2_HAS_DRAINED_HP                  = 0x04000000,
     BS_FLAGS2_HAS_RUSH                        = 0x08000000,
-    BS_FLAGS2_10000000                        = 0x10000000,
+    BS_FLAGS2_DROP_WHACKA_BUMP                = 0x10000000,
 };
 
 enum BattleStates {
@@ -4169,13 +4172,13 @@ enum BattleSubStates {
     // BATTLE_STATE_BEGIN_PLAYER_TURN
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_INIT                     = 0,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_TRY_COMMAND_RECOVER      = 1,
-    BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_OUTTA_SIGHT        = 2,
-    BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_OUTTA_SIGHT        = 10,
+    BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_WATER_BLOCK        = 2,
+    BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_WATER_BLOCK        = 10,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_CLOUD_NINE         = 11,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_CLOUD_NINE         = 12,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_TURBO_CHARGE       = 15,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_TURBO_CHARGE       = 16,
-    BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_PARTNER_SCRIPT     = 20,
+    BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_OUTTA_SIGHT        = 20,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_TRY_STATUS_DAMAGE        = 21,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_TRY_STATUS_RECOVER       = 22,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_END_DELAY                = 30,

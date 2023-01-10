@@ -1494,8 +1494,8 @@ Actor* create_actor(Formation formation) {
             ASSERT(part->movement != NULL);
         }
 
-        if (actor->flags & 0x4000) {
-            part->flags |= 0x4000;
+        if (actor->flags & ACTOR_FLAG_TARGET_ONLY) {
+            part->flags |= ACTOR_PART_FLAG_4000;
         }
 
         part->animationRate = 1.0f;

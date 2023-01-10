@@ -520,7 +520,7 @@ EvtScript N(OnDeath) = {
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_FLY_THREAD_ID), LVarA)
     EVT_IS_THREAD_RUNNING(LVarA, LVar0)
-    EVT_IF_EQ(LVar0, BS_FLAGS1_1)
+    EVT_IF_EQ(LVar0, TRUE)
         EVT_KILL_THREAD(LVarA)
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE1_ID), LVar9)
@@ -635,7 +635,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim19)
             EVT_EXEC_WAIT(N(OnHit))
-        EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim09)

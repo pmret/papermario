@@ -263,7 +263,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Dark_Anim0C)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(GetLastElement, LVar0)
             EVT_IF_FLAG(LVar0, DAMAGE_TYPE_SMASH)

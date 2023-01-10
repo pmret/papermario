@@ -185,7 +185,7 @@ EvtScript N(init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_400 | BS_FLAGS2_2000000, 1)
+    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_400 | BS_FLAGS2_DONT_STOP_MUSIC, 1)
     EVT_RETURN
     EVT_END
 };
@@ -264,7 +264,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_SET(LVar1, ANIM_BattleBowser_Walk)
             EVT_EXEC_WAIT(N(returnHome))
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(func_80269E80, LVar2)
             EVT_SWITCH(LVar2)

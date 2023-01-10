@@ -185,7 +185,7 @@ EvtScript N(lakilester_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Dead)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)

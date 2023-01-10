@@ -101,7 +101,7 @@ extern HudScript HES_Item_SmallStarPoint;
 extern HudScript HES_Item_StarPoint;
 extern HudScript HES_StatusSPShine;
 
-void func_8023ED5C(void);
+void btl_render_actors(void);
 void tattle_cam_pre_render(Camera*);
 void func_8023FF84(Camera*);
 void btl_draw_enemy_health_bars(void);
@@ -197,7 +197,7 @@ void initialize_battle(void) {
         gBattleStatus.flags2 &= ~BS_FLAGS2_PEACH_BATTLE;
     }
 
-    create_worker_world(NULL, func_8023ED5C);
+    create_worker_world(NULL, btl_render_actors);
     btl_popup_messages_init();
     func_80268E88();
     set_windows_visible(WINDOW_GROUP_1);
@@ -239,7 +239,7 @@ void func_8023E3FC(void) {
 }
 
 void update_actor_shadows(void) {
-    if (gBattleStatus.flags1 & BS_FLAGS1_1) {
+    if (gBattleStatus.flags1 & BS_FLAGS1_ACTORS_VISIBLE) {
         update_enemy_shadows();
         update_hero_shadows();
     }
@@ -514,7 +514,7 @@ void btl_draw_ui(void) {
                 btl_state_draw_begin_partner_turn();
                 break;
             case BATTLE_STATE_9:
-                func_80243910();
+                btl_state_draw_9();
                 break;
             case BATTLE_STATE_BEGIN_TURN:
                 btl_state_draw_begin_turn();
@@ -612,7 +612,7 @@ void btl_draw_ui(void) {
     draw_status_ui();
 }
 
-void func_8023ED5C(void) {
+void btl_render_actors(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
@@ -624,7 +624,7 @@ void func_8023ED5C(void) {
         if (battleStatus->initBattleCallback != NULL) {
             battleStatus->initBattleCallback();
         }
-        if (battleStatus->flags1 & BS_FLAGS1_1) {
+        if (battleStatus->flags1 & BS_FLAGS1_ACTORS_VISIBLE) {
             func_80255FD8();
 
             if (gCurrentCamID == CAM_BATTLE || gCurrentCamID == CAM_TATTLE) {
@@ -855,7 +855,7 @@ void btl_draw_enemy_health_bars(void) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (gGameStatusPtr->unk_7C != 0) {
-        if (gBattleStatus.flags1 & BS_FLAGS1_1) {
+        if (gBattleStatus.flags1 & BS_FLAGS1_ACTORS_VISIBLE) {
             s32 i;
 
             for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
@@ -943,7 +943,7 @@ void btl_update_starpoints_display(void) {
     s32 cond;
     s32 i;
 
-    if (gBattleStatus.flags1 & BS_FLAGS1_1) {
+    if (gBattleStatus.flags1 & BS_FLAGS1_ACTORS_VISIBLE) {
         if (!(gBattleStatus.flags2 & BS_FLAGS2_1)) {
             D_8029DA40 = 292;
             D_8029DA44 = 196;
@@ -1035,7 +1035,7 @@ void btl_update_starpoints_display(void) {
 
             posX = D_8029DA40;
             posY = D_8029DA44 + (one * 14.0f);
-            if (gBattleStatus.flags2 & 1) {
+            if (gBattleStatus.flags2 & BS_FLAGS2_1) {
                 if (ones != 0) {
                     draw_box(0, WINDOW_STYLE_4, posX - 100, posY - 5, 0, 110, 12, 120, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL,
                              NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
@@ -1096,7 +1096,7 @@ void btl_restore_world_cameras(void) {
         gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
     }
 
-    if (gBattleStatus.flags2 & 0x40) {
+    if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
         playerData->currentPartner = bSavedPartner;
     }
 }

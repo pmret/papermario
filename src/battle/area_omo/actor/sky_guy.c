@@ -430,7 +430,7 @@ EvtScript N(handleEvent_8022A398) = {
             EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim0A)
             EVT_EXEC_WAIT(N(80229A34))
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
             EVT_CALL(func_8026E914, LVar0, LVar1)
             EVT_IF_GE(LVar1, 3)
                 EVT_EXEC_WAIT(N(80229CB0))
@@ -699,7 +699,7 @@ EvtScript N(handleEvent_8022B310) = {
             EVT_SET_CONST(LVar1, ANIM_ShyGuy_Red_Anim0C)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)

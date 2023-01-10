@@ -4,4 +4,4 @@
 
 #include "world/common/todo/IsBerserkerEquipped.inc.c"
 
-#include "world/common/todo/IsRightOnEquipped.inc.c"
+#include "world/common/todo/ShouldMovesAutoSucceed.inc.c"
