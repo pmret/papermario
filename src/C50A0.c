@@ -2785,7 +2785,6 @@ block_47: // TODO required to match
     }
 }
 
-#ifdef NON_EQUIVALENT
 void func_801363A0(ItemEntity* itemEntity) {
     ItemData* itemData = &gItemTable[itemEntity->itemID];
     s32 itemMsg;
@@ -2827,7 +2826,7 @@ void func_801363A0(ItemEntity* itemEntity) {
                     offsetY = get_msg_width(itemMsg, 0) + 30;
                 }
                 s1 = 160 - offsetY / 2;
-                s3 = 0x4C;
+                s3 = 76;
             } else {
                 if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
                     itemMsg = MSG_Menus_0059;
@@ -2848,46 +2847,44 @@ void func_801363A0(ItemEntity* itemEntity) {
                 set_message_msg(itemData->nameMsg, 0);
                 offsetY = get_msg_width(itemMsg, 0) + 30;
                 s1 = 160 - offsetY / 2;
-                s3 = 0x4C;
+                s3 = 76;
             }
             temp2 = D_8014C6E0[get_msg_lines(itemMsg) - 1];
             if (itemEntity->state != 2) {
-                temp = 0x1C;
+                temp = 28;
             } else {
                 temp = 0;
             }
-
-            // needed to match
-            if (gItemTable[itemEntity->itemID].typeFlags & 2) {
-                set_window_properties(WINDOW_ID_12, s1, s3 - 0x18 + temp, offsetY,
+            if (!(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) &&
+                    itemEntity->itemID != ITEM_STAR_PIECE &&
+                    !(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) &&
+                    !(itemEntity->pickupMsgFlags & 0x30)) {
+                set_window_properties(WINDOW_ID_12, s1, s3 - 24 + temp, offsetY,
                                     temp2, 0, func_8013673C, itemEntity, -1);
             } else if (gItemTable[itemEntity->itemID].typeFlags & 1){
-                set_window_properties(WINDOW_ID_12, s1, s3 - 0x18 + temp, offsetY,
+                set_window_properties(WINDOW_ID_12, s1, s3 - 24 + temp, offsetY,
                                     temp2, 0, func_8013673C, itemEntity, -1);
             } else {
-                set_window_properties(WINDOW_ID_12, s1, s3 - 0x18 + temp, offsetY,
+                set_window_properties(WINDOW_ID_12, s1, s3 - 24 + temp, offsetY,
                                     temp2, 0, func_8013673C, itemEntity, -1);
             }
             if (itemEntity->itemID != ITEM_STAR_PIECE && itemEntity->itemID != ITEM_COIN) {
-                set_window_properties(WINDOW_ID_19, 0x14, 0xBA, 0x118, 0x20, NULL, func_80136A08, itemEntity, -1);
+                set_window_properties(WINDOW_ID_19, 20, 186, 280, 32, NULL, func_80136A08, itemEntity, -1);
             }
             if (itemEntity->state != 2) {
                 offsetY = get_msg_width(MSG_Menus_0060, 0) + 0x18;
                 s1 = 160 - offsetY / 2;
-                set_window_properties(WINDOW_ID_17, 160 - offsetY / 2, 0x24, offsetY, 40, NULL, func_801369D0, itemEntity, -1);
+                set_window_properties(WINDOW_ID_17, 160 - offsetY / 2, 36, offsetY, 40, NULL, func_801369D0, itemEntity, -1);
             }
             break;
         case 12:
             set_message_msg(itemData->nameMsg, 0);
             offsetY = get_msg_width(MSG_Menus_005F, 0) + 0x36;
             s1 = 160 - offsetY / 2;
-            set_window_properties(WINDOW_ID_12, 160 - offsetY / 2, 0x4C, offsetY, 40, NULL, func_8013673C, itemEntity, -1);
+            set_window_properties(WINDOW_ID_12, 160 - offsetY / 2, 76, offsetY, 40, NULL, func_8013673C, itemEntity, -1);
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "C50A0", func_801363A0);
-#endif
 
 void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY) {
     ItemData* itemData = &gItemTable[itemEntity->itemID];
