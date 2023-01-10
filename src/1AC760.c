@@ -9,22 +9,22 @@ s32 dispatch_damage_event_partner_1(s32, s32);
 void dispatch_event_partner(s32 lastEventType) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
-    Evt* onHitScript = partnerActor->onHitScript;
-    s32 onHitID = partnerActor->onHitID;
+    Evt* handleEventScript = partnerActor->handleEventScript;
+    s32 onHitID = partnerActor->handleEventScriptID;
     Evt* script;
 
     partnerActor->lastEventType = lastEventType;
-    script = start_script(partnerActor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
-    partnerActor->onHitScript = script;
-    partnerActor->onHitID = script->id;
+    script = start_script(partnerActor->handleEventSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
+    partnerActor->handleEventScript = script;
+    partnerActor->handleEventScriptID = script->id;
     script->owner1.actorID = ACTOR_PARTNER;
 
     if (partnerActor->takeTurnScript != NULL) {
-        kill_script_by_ID(partnerActor->takeTurnID);
+        kill_script_by_ID(partnerActor->takeTurnScriptID);
         partnerActor->takeTurnScript = NULL;
     }
 
-    if (onHitScript != NULL) {
+    if (handleEventScript != NULL) {
         kill_script_by_ID(onHitID);
     }
 }
@@ -32,17 +32,17 @@ void dispatch_event_partner(s32 lastEventType) {
 void dispatch_event_partner_continue_turn(s8 lastEventType) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
-    Evt* onHitScript = partnerActor->onHitScript;
-    s32 onHitID = partnerActor->onHitID;
+    Evt* handleEventScript = partnerActor->handleEventScript;
+    s32 onHitID = partnerActor->handleEventScriptID;
     Evt* script;
 
     partnerActor->lastEventType = lastEventType;
-    script = start_script(partnerActor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
-    partnerActor->onHitScript = script;
-    partnerActor->onHitID = script->id;
+    script = start_script(partnerActor->handleEventSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
+    partnerActor->handleEventScript = script;
+    partnerActor->handleEventScriptID = script->id;
     script->owner1.actorID = ACTOR_PARTNER;
 
-    if (onHitScript != NULL) {
+    if (handleEventScript != NULL) {
         kill_script_by_ID(onHitID);
     }
 }

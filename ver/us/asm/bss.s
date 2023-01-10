@@ -1063,7 +1063,7 @@ dlabel D_800DC4D0
 dlabel D_800DC4D4
 .space 4
 
-dlabel D_800DC4D8
+dlabel gDefeatedBattleSubstate
 .space 4
 
 dlabel gBattleSubState
@@ -1072,7 +1072,7 @@ dlabel gBattleSubState
 dlabel D_800DC4E0
 .space 4
 
-dlabel D_800DC4E4
+dlabel gDefeatedBattleState
 .space 4
 
 dlabel gCurrentBattleID

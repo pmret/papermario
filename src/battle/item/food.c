@@ -34,11 +34,11 @@ ApiStatus N(func_802A12EC_7333BC)(Evt* script, s32 isInitialCall) {
         partner->koDuration = 0;
     }
     if (partner->koDuration > 0) {
-        partner->disableEffect->data.disableX->unk_3C = partner->koDuration;
+        partner->disableEffect->data.disableX->koDuration = partner->koDuration;
     } else {
         partner->koStatus = 0;
         dispatch_event_partner(EVENT_RECOVER_PARTNER);
-        partner->disableEffect->data.disableX->unk_3C = 0;
+        partner->disableEffect->data.disableX->koDuration = 0;
     }
 
     return ApiStatus_DONE2;

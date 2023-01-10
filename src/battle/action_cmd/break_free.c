@@ -82,7 +82,7 @@ ApiStatus N(start)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->barFillWidth = 0;
 
     battleStatus->actionSuccess = 0;
-    battleStatus->unk_86 = 0x7F;
+    battleStatus->unk_86 = 127;
     battleStatus->unk_82 = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
 
     actionCommandStatus->thresholdLevel = rand_int(actionCommandStatus->unk_5A);

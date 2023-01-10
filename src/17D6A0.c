@@ -2389,25 +2389,115 @@ EntityModelScript* D_80283744[] = {
 };
 
 s32 bMessages[] = {
-    MSG_Menus_Merlee_IncreaseAttack, MSG_Menus_Merlee_DecreaseDamage, MSG_Menus_Merlee_IncreaseStarPoints, MSG_Menus_Merlee_Exhausted,
-    MSG_Menus_ChargeHammer, MSG_Menus_ChargeHammerMore, MSG_Menus_ChargeJump, MSG_Menus_ChargeJumpMore, MSG_Menus_ChargeMaxedOut,
-    MSG_Menus_EnemyMissed,
-    MSG_Menus_PlayerDazed, MSG_Menus_PlayerAsleep, MSG_Menus_PlayerFrozen, MSG_Menus_PlayerPoisoned, MSG_Menus_PlayerShrunk, MSG_Menus_PlayerParalyzed, MSG_Menus_PlayerElectricCharge, MSG_Menus_PlayerTransparent,
-    MSG_Menus_EnemyDazed, MSG_Menus_EnemyAsleep, MSG_Menus_EnemyFrozen, MSG_Menus_EnemyPoisoned, MSG_Menus_EnemyShrunk, MSG_Menus_EnemyParalyzed, MSG_Menus_EnemyElectrified, MSG_Menus_EnemyCantMove,
-    MSG_Menus_StarEnergyRecharged, MSG_Menus_StarEnergyMaxedOut, MSG_Menus_StarEnergyFilled,
-    MSG_Menus_AttackUp, MSG_Menus_DefenseUp, MSG_Menus_0084, MSG_Menus_0085,
-    MSG_Menus_EnemyTransparent, MSG_Menus_EnemyElectricCharge,
-    MSG_Menus_PartnerInjured, MSG_Menus_ChargeGoombario, MSG_Menus_ChargeGoombarioMore, MSG_Menus_WaterBlockBegin, MSG_Menus_WaterBlockEnd, MSG_Menus_CloudNineBegin, MSG_Menus_CloudNineEnd, MSG_Menus_TurboChargeBegin, MSG_Menus_TurboChargeEnd, MSG_Menus_ChillOutBegin, MSG_Menus_CloudNineBegin,
-    MSG_Menus_00AF, MSG_Menus_00B0, MSG_Menus_00B1, MSG_Menus_00B2, MSG_Menus_00B3, MSG_Menus_00B4, MSG_Menus_00AF, MSG_Menus_00AF, MSG_Menus_00B5, MSG_Menus_00B6, MSG_Menus_00B7, MSG_Menus_00B8, MSG_Menus_00B9, MSG_Menus_00AF, MSG_Menus_00BA, MSG_Menus_00BB, MSG_Menus_00BC, MSG_Menus_00AF, MSG_Menus_00BD, MSG_Menus_00BE, MSG_Menus_00BF,
-    MSG_Menus_Battle_NoTarget_Jump, MSG_Menus_Battle_NoTarget_Hammer, MSG_Menus_Battle_NoTarget_Item, 0x00000000, 0x00000000,
-    MSG_Menus_00C3, MSG_Menus_00C6, MSG_Menus_00C6, MSG_Menus_00C6, MSG_Menus_00C7, MSG_Menus_00C7, MSG_Menus_00C7, MSG_Menus_00C8,
-    MSG_Menus_00C9, MSG_Menus_00CA, MSG_Menus_00C9, MSG_Menus_00CA, MSG_Menus_00C3,
+    [BTL_MSG_00]    MSG_Menus_Merlee_IncreaseAttack,
+    [BTL_MSG_01]    MSG_Menus_Merlee_DecreaseDamage,
+    [BTL_MSG_02]    MSG_Menus_Merlee_IncreaseStarPoints,
+    [BTL_MSG_03]    MSG_Menus_Merlee_Exhausted,
+    [BTL_MSG_04]    MSG_Menus_ChargeHammer,
+    [BTL_MSG_05]    MSG_Menus_ChargeHammerMore,
+    [BTL_MSG_06]    MSG_Menus_ChargeJump,
+    [BTL_MSG_07]    MSG_Menus_ChargeJumpMore,
+    [BTL_MSG_08]    MSG_Menus_ChargeMaxedOut,
+    [BTL_MSG_09]    MSG_Menus_EnemyMissed,
+
+    // player status effects
+    [BTL_MSG_0A]    MSG_Menus_PlayerDazed,
+    [BTL_MSG_0B]    MSG_Menus_PlayerAsleep,
+    [BTL_MSG_0C]    MSG_Menus_PlayerFrozen,
+    [BTL_MSG_0D]    MSG_Menus_PlayerPoisoned,
+    [BTL_MSG_0E]    MSG_Menus_PlayerShrunk,
+    [BTL_MSG_0F]    MSG_Menus_PlayerParalyzed,
+    [BTL_MSG_10]    MSG_Menus_PlayerElectricCharge,
+    [BTL_MSG_11]    MSG_Menus_PlayerTransparent,
+
+    // enemy status effects
+    [BTL_MSG_12]    MSG_Menus_EnemyDazed,
+    [BTL_MSG_13]    MSG_Menus_EnemyAsleep,
+    [BTL_MSG_14]    MSG_Menus_EnemyFrozen,
+    [BTL_MSG_15]    MSG_Menus_EnemyPoisoned,
+    [BTL_MSG_16]    MSG_Menus_EnemyShrunk,
+    [BTL_MSG_17]    MSG_Menus_EnemyParalyzed,
+    [BTL_MSG_18]    MSG_Menus_EnemyElectrified,
+    [BTL_MSG_19]    MSG_Menus_EnemyCantMove,
+    
+    [BTL_MSG_1A]    MSG_Menus_StarEnergyRecharged,
+    [BTL_MSG_1B]    MSG_Menus_StarEnergyMaxedOut,
+    [BTL_MSG_1C]    MSG_Menus_StarEnergyFilled,
+    [BTL_MSG_1D]    MSG_Menus_AttackUp,
+    [BTL_MSG_1E]    MSG_Menus_DefenseUp,
+    [BTL_MSG_1F]    MSG_Menus_0084,
+    [BTL_MSG_20]    MSG_Menus_0085,
+    [BTL_MSG_21]    MSG_Menus_EnemyTransparent,
+    [BTL_MSG_22]    MSG_Menus_EnemyElectricCharge,
+    [BTL_MSG_23]    MSG_Menus_PartnerInjured,
+    [BTL_MSG_24]    MSG_Menus_ChargeGoombario,
+    [BTL_MSG_25]    MSG_Menus_ChargeGoombarioMore,
+    [BTL_MSG_26]    MSG_Menus_WaterBlockBegin,
+    [BTL_MSG_27]    MSG_Menus_WaterBlockEnd,
+    [BTL_MSG_28]    MSG_Menus_CloudNineBegin,
+    [BTL_MSG_29]    MSG_Menus_CloudNineEnd,
+    [BTL_MSG_2A]    MSG_Menus_TurboChargeBegin,
+    [BTL_MSG_2B]    MSG_Menus_TurboChargeEnd,
+    [BTL_MSG_2C]    MSG_Menus_ChillOutBegin,
+    [BTL_MSG_2D]    MSG_Menus_CloudNineBegin,
+    [BTL_MSG_2E]    MSG_Menus_00AF,
+    [BTL_MSG_2F]    MSG_Menus_00B0,
+    [BTL_MSG_30]    MSG_Menus_00B1,
+    [BTL_MSG_31]    MSG_Menus_00B2,
+    [BTL_MSG_32]    MSG_Menus_00B3,
+    [BTL_MSG_33]    MSG_Menus_00B4,
+    [BTL_MSG_34]    MSG_Menus_00AF,
+    [BTL_MSG_35]    MSG_Menus_00AF,
+    [BTL_MSG_36]    MSG_Menus_00B5,
+    [BTL_MSG_37]    MSG_Menus_00B6,
+    [BTL_MSG_38]    MSG_Menus_00B7,
+    [BTL_MSG_39]    MSG_Menus_00B8,
+    [BTL_MSG_3A]    MSG_Menus_00B9,
+    [BTL_MSG_3B]    MSG_Menus_00AF,
+    [BTL_MSG_3C]    MSG_Menus_00BA,
+    [BTL_MSG_3D]    MSG_Menus_00BB,
+    [BTL_MSG_3E]    MSG_Menus_00BC,
+    [BTL_MSG_3F]    MSG_Menus_00AF,
+    [BTL_MSG_40]    MSG_Menus_00BD,
+    [BTL_MSG_41]    MSG_Menus_00BE,
+    [BTL_MSG_42]    MSG_Menus_00BF,
+    [BTL_MSG_43]    MSG_Menus_Battle_NoTarget_Jump,
+    [BTL_MSG_44]    MSG_Menus_Battle_NoTarget_Hammer,
+    [BTL_MSG_45]    MSG_Menus_Battle_NoTarget_Item,
+    [BTL_MSG_46]    0,
+    [BTL_MSG_47]    0,
+    [BTL_MSG_48]    MSG_Menus_00C3,
+    [BTL_MSG_49]    MSG_Menus_00C6,
+    [BTL_MSG_4A]    MSG_Menus_00C6,
+    [BTL_MSG_4B]    MSG_Menus_00C6,
+    [BTL_MSG_4C]    MSG_Menus_00C7,
+    [BTL_MSG_4D]    MSG_Menus_00C7,
+    [BTL_MSG_4E]    MSG_Menus_00C7,
+    [BTL_MSG_4F]    MSG_Menus_00C8,
+    [BTL_MSG_50]    MSG_Menus_CantSwitch,
+    [BTL_MSG_51]    MSG_Menus_00CA,
+    [BTL_MSG_52]    MSG_Menus_CantSwitch,
+    [BTL_MSG_53]    MSG_Menus_00CA,
+    [BTL_MSG_54]    MSG_Menus_00C3,
 };
 
 s32 bActorMessages[] = {
-    MSG_Menus_Party_Mario, MSG_Menus_Party_Goombario, MSG_Menus_Party_Kooper, MSG_Menus_Party_Bombette, MSG_Menus_Party_Parakarry, MSG_Menus_Party_Goompa, MSG_Menus_Party_Watt, MSG_Menus_Party_Sushie, MSG_Menus_Party_Lakilester, MSG_Menus_Party_Bow, MSG_Menus_Party_Goombaria, MSG_Menus_Party_Twink, MSG_Menus_Party_Peach
+    MSG_Menus_Party_Mario,
+    MSG_Menus_Party_Goombario,
+    MSG_Menus_Party_Kooper,
+    MSG_Menus_Party_Bombette,
+    MSG_Menus_Party_Parakarry,
+    MSG_Menus_Party_Goompa,
+    MSG_Menus_Party_Watt,
+    MSG_Menus_Party_Sushie,
+    MSG_Menus_Party_Lakilester,
+    MSG_Menus_Party_Bow,
+    MSG_Menus_Party_Goombaria,
+    MSG_Menus_Party_Twink,
+    MSG_Menus_Party_Peach
 };
-PopupMessage* D_802838F8 = NULL;
+
+PopupMessage* bPopupMessage = NULL;
 
 s32 D_802838FC_padding = 0;
 
@@ -2575,7 +2665,7 @@ extern HudScript HES_TimingBlink;
 void func_8024F394(void* data);
 void func_8024F5AC(void* data);
 void func_8024F768(void* data);
-void func_8024FB3C(void* popup);
+void btl_update_message_popup(void* popup);
 void btl_show_message_popup(void* popup);
 
 void btl_popup_messages_init(void) {
@@ -2902,17 +2992,17 @@ void btl_show_battle_message(s32 messageIndex, s32 duration) {
     PopupMessage* popup = btl_create_popup();
 
     if (popup != NULL) {
-        popup->updateFunc = func_8024FB3C;
+        popup->updateFunc = btl_update_message_popup;
         popup->renderUIFunc = btl_show_message_popup;
         popup->unk_00 = 0;
         popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
         popup->unk_16 = 0;
-        popup->unk_17 = 1;
+        popup->unk_17 = TRUE;
         popup->message = NULL;
         D_8029F640 = 0;
-        D_802838F8 = popup;
+        bPopupMessage = popup;
         D_8029F64A = FALSE;
         D_8029F64C = 0;
         D_8029F64E = 0;
@@ -2924,17 +3014,17 @@ void btl_show_variable_battle_message(s32 messageIndex, s32 duration, s32 varVal
     PopupMessage* popup = btl_create_popup();
 
     if (popup != NULL) {
-        popup->updateFunc = func_8024FB3C;
+        popup->updateFunc = btl_update_message_popup;
         popup->renderUIFunc = btl_show_message_popup;
         popup->unk_00 = 0;
         popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
         popup->unk_16 = 0;
-        popup->unk_17 = 1;
+        popup->unk_17 = TRUE;
         popup->message = NULL;
         D_8029F640 = varValue;
-        D_802838F8 = popup;
+        bPopupMessage = popup;
         D_8029F64A = FALSE;
         D_8029F64C = 0;
         D_8029F64E = 0;
@@ -2943,11 +3033,11 @@ void btl_show_variable_battle_message(s32 messageIndex, s32 duration, s32 varVal
 }
 
 s32 btl_is_popup_displayed(void) {
-    return D_802838F8 != NULL;
+    return bPopupMessage != NULL;
 }
 
 void btl_set_popup_duration(s32 duration) {
-    PopupMessage* popup = D_802838F8;
+    PopupMessage* popup = bPopupMessage;
 
     if (D_8029F64A && popup != NULL) {
         popup->duration = duration;
@@ -2963,14 +3053,14 @@ void func_8024FAFC(void) {
 }
 
 void close_action_command_instruction_popup(void) {
-    PopupMessage* popup = D_802838F8;
+    PopupMessage* popup = bPopupMessage;
 
-    if (popup != NULL && popup->messageIndex < 67 && popup->messageIndex >= 46) {
+    if (popup != NULL && popup->messageIndex < BTL_MSG_43 && popup->messageIndex >= BTL_MSG_2E) {
         popup->duration = 0;
     }
 }
 
-void func_8024FB3C(void* data) {
+void btl_update_message_popup(void* data) {
     PopupMessage* popup = data;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 shouldDisposeWindow = FALSE;
@@ -2978,57 +3068,57 @@ void func_8024FB3C(void* data) {
     s32 temp_a0;
 
     switch (popup->messageIndex) {
-        case 0x0:
-        case 0x1:
-        case 0x2:
-        case 0x3:
-        case 0x4:
-        case 0x5:
-        case 0x6:
-        case 0x7:
-        case 0x8:
-        case 0x9:
-        case 0xA:
-        case 0xB:
-        case 0xC:
-        case 0xD:
-        case 0xE:
-        case 0xF:
-        case 0x10:
-        case 0x11:
-        case 0x12:
-        case 0x13:
-        case 0x14:
-        case 0x15:
-        case 0x16:
-        case 0x17:
-        case 0x18:
-        case 0x19:
-        case 0x1A:
-        case 0x1B:
-        case 0x1C:
-        case 0x1D:
-        case 0x1E:
-        case 0x1F:
-        case 0x20:
-        case 0x21:
-        case 0x22:
-        case 0x23:
-        case 0x24:
-        case 0x25:
-        case 0x26:
-        case 0x27:
-        case 0x28:
-        case 0x29:
-        case 0x2A:
-        case 0x2B:
-        case 0x2C:
-        case 0x2D:
-        case 0x50:
-        case 0x51:
-        case 0x52:
-        case 0x53:
-        case 0x54:
+        case BTL_MSG_00:
+        case BTL_MSG_01:
+        case BTL_MSG_02:
+        case BTL_MSG_03:
+        case BTL_MSG_04:
+        case BTL_MSG_05:
+        case BTL_MSG_06:
+        case BTL_MSG_07:
+        case BTL_MSG_08:
+        case BTL_MSG_09:
+        case BTL_MSG_0A:
+        case BTL_MSG_0B:
+        case BTL_MSG_0C:
+        case BTL_MSG_0D:
+        case BTL_MSG_0E:
+        case BTL_MSG_0F:
+        case BTL_MSG_10:
+        case BTL_MSG_11:
+        case BTL_MSG_12:
+        case BTL_MSG_13:
+        case BTL_MSG_14:
+        case BTL_MSG_15:
+        case BTL_MSG_16:
+        case BTL_MSG_17:
+        case BTL_MSG_18:
+        case BTL_MSG_19:
+        case BTL_MSG_1A:
+        case BTL_MSG_1B:
+        case BTL_MSG_1C:
+        case BTL_MSG_1D:
+        case BTL_MSG_1E:
+        case BTL_MSG_1F:
+        case BTL_MSG_20:
+        case BTL_MSG_21:
+        case BTL_MSG_22:
+        case BTL_MSG_23:
+        case BTL_MSG_24:
+        case BTL_MSG_25:
+        case BTL_MSG_26:
+        case BTL_MSG_27:
+        case BTL_MSG_28:
+        case BTL_MSG_29:
+        case BTL_MSG_2A:
+        case BTL_MSG_2B:
+        case BTL_MSG_2C:
+        case BTL_MSG_2D:
+        case BTL_MSG_50:
+        case BTL_MSG_51:
+        case BTL_MSG_52:
+        case BTL_MSG_53:
+        case BTL_MSG_54:
             switch (popup->unk_16) {
                 default:
                     break;
@@ -3057,27 +3147,27 @@ void func_8024FB3C(void* data) {
                     break;
             }
             break;
-        case 0x2E:
-        case 0x2F:
-        case 0x30:
-        case 0x31:
-        case 0x32:
-        case 0x33:
-        case 0x34:
-        case 0x35:
-        case 0x36:
-        case 0x37:
-        case 0x38:
-        case 0x39:
-        case 0x3A:
-        case 0x3B:
-        case 0x3C:
-        case 0x3D:
-        case 0x3E:
-        case 0x3F:
-        case 0x40:
-        case 0x41:
-        case 0x42:
+        case BTL_MSG_2E:
+        case BTL_MSG_2F:
+        case BTL_MSG_30:
+        case BTL_MSG_31:
+        case BTL_MSG_32:
+        case BTL_MSG_33:
+        case BTL_MSG_34:
+        case BTL_MSG_35:
+        case BTL_MSG_36:
+        case BTL_MSG_37:
+        case BTL_MSG_38:
+        case BTL_MSG_39:
+        case BTL_MSG_3A:
+        case BTL_MSG_3B:
+        case BTL_MSG_3C:
+        case BTL_MSG_3D:
+        case BTL_MSG_3E:
+        case BTL_MSG_3F:
+        case BTL_MSG_40:
+        case BTL_MSG_41:
+        case BTL_MSG_42:
             temp_a0 = battleStatus->actionCommandMode;
             D_8029F64A = TRUE;
             if (temp_a0 == ACTION_COMMAND_MODE_NOT_LEARNED) {
@@ -3091,12 +3181,12 @@ void func_8024FB3C(void* data) {
                     gBattleStatus.flags1 |= BS_FLAGS1_4000;
                     gBattleStatus.flags1 &= ~BS_FLAGS1_10000;
                     switch (popup->messageIndex) {
-                        case 50:
+                        case BTL_MSG_32:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
-                        case 47:
+                        case BTL_MSG_2F:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
@@ -3105,7 +3195,7 @@ void func_8024FB3C(void* data) {
                             hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             break;
-                        case 51:
+                        case BTL_MSG_33:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
@@ -3115,7 +3205,7 @@ void func_8024FB3C(void* data) {
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             hud_element_create_transform_B(D_8029F644);
                             break;
-                        case 52:
+                        case BTL_MSG_34:
                             D_8029F642 = hud_element_create(&HES_CUpButton);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
@@ -3132,12 +3222,12 @@ void func_8024FB3C(void* data) {
                             hud_element_set_flags(D_8029F648, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F648, -100, -100);
                             break;
-                        case 53:
+                        case BTL_MSG_35:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
-                        case 54:
+                        case BTL_MSG_36:
                             D_8029F642 = hud_element_create(&HES_AButton);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
@@ -3150,12 +3240,12 @@ void func_8024FB3C(void* data) {
                             hud_element_set_flags(D_8029F646, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F646, -100, -100);
                             break;
-                        case 55:
+                        case BTL_MSG_37:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
-                        case 56:
+                        case BTL_MSG_38:
                             D_8029F642 = hud_element_create(&HES_TimingReady);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
@@ -3164,7 +3254,7 @@ void func_8024FB3C(void* data) {
                             hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             break;
-                        case 57:
+                        case BTL_MSG_39:
                             D_8029F642 = hud_element_create(&HES_AButton);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
@@ -3172,7 +3262,7 @@ void func_8024FB3C(void* data) {
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
-                        case 58:
+                        case BTL_MSG_3A:
                             D_8029F642 = hud_element_create(&HES_AButton);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
@@ -3181,7 +3271,7 @@ void func_8024FB3C(void* data) {
                             hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             break;
-                        case 61:
+                        case BTL_MSG_3D:
                             D_8029F642 = hud_element_create(&HES_TimingReady);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
@@ -3190,7 +3280,7 @@ void func_8024FB3C(void* data) {
                             hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             break;
-                        case 62:
+                        case BTL_MSG_3E:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
@@ -3205,19 +3295,19 @@ void func_8024FB3C(void* data) {
                             hud_element_set_render_pos(D_8029F646, -100, -100);
                             hud_element_create_transform_B(D_8029F646);
                             break;
-                        case 64:
-                        case 65:
+                        case BTL_MSG_40:
+                        case BTL_MSG_41:
                             D_8029F642 = hud_element_create(&HES_AButton);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             // fallthrough
-                        case 46:
-                        case 48:
-                        case 49:
-                        case 59:
-                        case 60:
-                        case 63:
-                        case 66:
+                        case BTL_MSG_2E:
+                        case BTL_MSG_30:
+                        case BTL_MSG_31:
+                        case BTL_MSG_3B:
+                        case BTL_MSG_3C:
+                        case BTL_MSG_3F:
+                        case BTL_MSG_42:
                             D_8029F642 = hud_element_create(&HES_AButton);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
@@ -3234,70 +3324,70 @@ void func_8024FB3C(void* data) {
                     } else if (!(gBattleStatus.flags1 & BS_FLAGS1_4000) && (temp_a0 != 2)) {
                         set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW_TRANSPARENT);
                         switch (popup->messageIndex) {
-                            case 49:
+                            case BTL_MSG_31:
                                 hud_element_set_script(D_8029F642, &HES_MashAButton);
                                 break;
-                            case 50:
+                            case BTL_MSG_32:
                                 hud_element_set_script(D_8029F642, &HES_StickMashLeft);
                                 break;
-                            case 47:
+                            case BTL_MSG_2F:
                                 hud_element_set_script(D_8029F642, &HES_StickTapLeft);
                                 hud_element_set_script(D_8029F644, &HES_TimingBlink);
                                 break;
-                            case 51:
+                            case BTL_MSG_33:
                                 hud_element_set_script(D_8029F642, &HES_StickTapLeft);
                                 hud_element_set_script(D_8029F644, &HES_AimTarget);
                                 break;
-                            case 52:
+                            case BTL_MSG_34:
                                 hud_element_set_script(D_8029F642, &HES_MashCUpButton);
                                 hud_element_set_script(D_8029F644, &HES_MashCDownButton1);
                                 hud_element_set_script(D_8029F646, &HES_MashCLeftButton);
                                 hud_element_set_script(D_8029F648, &HES_MashCRightButton1);
                                 break;
-                            case 53:
+                            case BTL_MSG_35:
                                 hud_element_set_script(D_8029F642, &HES_StickBackAndForth);
                                 break;
-                            case 54:
+                            case BTL_MSG_36:
                                 hud_element_set_script(D_8029F642, &HES_PressAButton);
                                 hud_element_set_script(D_8029F644, &HES_PressBButton);
                                 hud_element_set_script(D_8029F646, &HES_PressCDownButton);
                                 break;
-                            case 55:
+                            case BTL_MSG_37:
                                 hud_element_set_script(D_8029F642, &HES_RotateStickCW);
                                 break;
-                            case 56:
+                            case BTL_MSG_38:
                                 hud_element_set_script(D_8029F642, &HES_TimingBlink);
                                 hud_element_set_script(D_8029F644, &HES_MashAButton);
                                 break;
-                            case 57:
+                            case BTL_MSG_39:
                                 hud_element_set_script(D_8029F642, &HES_MashAButton);
                                 hud_element_set_script(D_8029F644, &HES_MashBButton2);
                                 break;
-                            case 58:
+                            case BTL_MSG_3A:
                                 hud_element_set_script(D_8029F642, &HES_MashAButton);
                                 hud_element_set_script(D_8029F644, &HES_MashBButton1);
                                 break;
-                            case 59:
+                            case BTL_MSG_3B:
                                 hud_element_set_script(D_8029F642, &HES_MashAButton);
                                 break;
-                            case 61:
+                            case BTL_MSG_3D:
                                 hud_element_set_script(D_8029F642, &HES_TimingBlink);
                                 hud_element_set_script(D_8029F644, &HES_PressAButton);
                                 break;
-                            case 62:
+                            case BTL_MSG_3E:
                                 hud_element_set_script(D_8029F642, &HES_StickTapRight);
                                 break;
-                            case 63:
+                            case BTL_MSG_3F:
                                 hud_element_set_script(D_8029F642, &HES_MashAButton);
                                 break;
-                            case 64:
-                            case 65:
+                            case BTL_MSG_40:
+                            case BTL_MSG_41:
                                 hud_element_set_script(D_8029F642, &HES_PressAButton);
                                 /* fallthrough */
-                            case 46:
-                            case 48:
-                            case 60:
-                            case 66:
+                            case BTL_MSG_2E:
+                            case BTL_MSG_30:
+                            case BTL_MSG_3C:
+                            case BTL_MSG_42:
                                 hud_element_set_script(D_8029F642, &HES_PressAButton);
                                 break;
                         }
@@ -3331,36 +3421,36 @@ void func_8024FB3C(void* data) {
                                 popup->duration--;
                             } else {
                                 switch (popup->messageIndex) {
-                                    case 46:
-                                    case 48:
-                                    case 49:
-                                    case 50:
-                                    case 53:
-                                    case 55:
-                                    case 59:
-                                    case 60:
-                                    case 63:
-                                    case 64:
-                                    case 65:
-                                    case 66:
+                                    case BTL_MSG_2E:
+                                    case BTL_MSG_30:
+                                    case BTL_MSG_31:
+                                    case BTL_MSG_32:
+                                    case BTL_MSG_35:
+                                    case BTL_MSG_37:
+                                    case BTL_MSG_3B:
+                                    case BTL_MSG_3C:
+                                    case BTL_MSG_3F:
+                                    case BTL_MSG_40:
+                                    case BTL_MSG_41:
+                                    case BTL_MSG_42:
                                         hud_element_free(D_8029F642);
                                         break;
-                                    case 47:
-                                    case 51:
-                                    case 56:
-                                    case 57:
-                                    case 58:
-                                    case 61:
+                                    case BTL_MSG_2F:
+                                    case BTL_MSG_33:
+                                    case BTL_MSG_38:
+                                    case BTL_MSG_39:
+                                    case BTL_MSG_3A:
+                                    case BTL_MSG_3D:
                                         hud_element_free(D_8029F642);
                                         hud_element_free(D_8029F644);
                                         break;
-                                    case 54:
-                                    case 62:
+                                    case BTL_MSG_36:
+                                    case BTL_MSG_3E:
                                         hud_element_free(D_8029F642);
                                         hud_element_free(D_8029F644);
                                         hud_element_free(D_8029F646);
                                         break;
-                                    case 52:
+                                    case BTL_MSG_34:
                                         hud_element_free(D_8029F642);
                                         hud_element_free(D_8029F644);
                                         hud_element_free(D_8029F646);
@@ -3375,12 +3465,12 @@ void func_8024FB3C(void* data) {
                     break;
             }
             break;
-        case 0x43:
-        case 0x44:
-        case 0x45:
-        case 0x46:
-        case 0x47:
-        case 0x48:
+        case BTL_MSG_43:
+        case BTL_MSG_44:
+        case BTL_MSG_45:
+        case BTL_MSG_46:
+        case BTL_MSG_47:
+        case BTL_MSG_48:
             switch (popup->unk_16) {
                 default:
                     break;
@@ -3409,47 +3499,47 @@ void func_8024FB3C(void* data) {
                     break;
             }
             break;
-        case 0x49:
-        case 0x4A:
-        case 0x4B:
-        case 0x4C:
-        case 0x4D:
-        case 0x4E:
-        case 0x4F:
+        case BTL_MSG_49:
+        case BTL_MSG_4A:
+        case BTL_MSG_4B:
+        case BTL_MSG_4C:
+        case BTL_MSG_4D:
+        case BTL_MSG_4E:
+        case BTL_MSG_4F:
             switch (popup->unk_16) {
                 case 0:
                     switch (popup->messageIndex) {
-                        case 73:
+                        case BTL_MSG_49:
                             D_8029F642 = hud_element_create(&HES_Item_Hammer1);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
-                        case 74:
+                        case BTL_MSG_4A:
                             D_8029F642 = hud_element_create(&HES_Item_Hammer2);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
-                        case 75:
+                        case BTL_MSG_4B:
                             D_8029F642 = hud_element_create(&HES_Item_Hammer3);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
-                        case 76:
+                        case BTL_MSG_4C:
                             D_8029F642 = hud_element_create(&HES_Item_Boots1);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
-                        case 77:
+                        case BTL_MSG_4D:
                             D_8029F642 = hud_element_create(&HES_Item_Boots2);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
-                        case 78:
+                        case BTL_MSG_4E:
                             D_8029F642 = hud_element_create(&HES_Item_Boots3);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
-                        case 79:
+                        case BTL_MSG_4F:
                             D_8029F642 = hud_element_create(&HES_Item_Items);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
@@ -3470,7 +3560,7 @@ void func_8024FB3C(void* data) {
     }
     if (shouldDisposeWindow) {
         set_window_update(WINDOW_ID_9, WINDOW_UPDATE_HIDE);
-        D_802838F8 = NULL;
+        bPopupMessage = NULL;
         free_popup(popup);
     }
 }
@@ -3485,117 +3575,117 @@ void func_80250818(void* data, s32 x, s32 y) {
     y += 6;
 
     switch (popup->messageIndex) {
-        case 0x0:
-        case 0x1:
-        case 0x2:
-        case 0x3:
-        case 0x8:
-        case 0x9:
-        case 0xA:
-        case 0xB:
-        case 0xC:
-        case 0xD:
-        case 0xE:
-        case 0xF:
-        case 0x10:
-        case 0x11:
-        case 0x12:
-        case 0x13:
-        case 0x14:
-        case 0x15:
-        case 0x16:
-        case 0x17:
-        case 0x18:
-        case 0x19:
-        case 0x1A:
-        case 0x1B:
-        case 0x1C:
-        case 0x23:
-        case 0x24:
-        case 0x25:
-        case 0x26:
-        case 0x27:
-        case 0x28:
-        case 0x29:
-        case 0x2A:
-        case 0x2B:
-        case 0x2C:
-        case 0x2D:
-        case 0x43:
-        case 0x44:
-        case 0x45:
-        case 0x46:
-        case 0x47:
-        case 0x48:
-        case 0x50:
-        case 0x52:
-        case 0x53:
-        case 0x54:
+        case BTL_MSG_00:
+        case BTL_MSG_01:
+        case BTL_MSG_02:
+        case BTL_MSG_03:
+        case BTL_MSG_08:
+        case BTL_MSG_09:
+        case BTL_MSG_0A:
+        case BTL_MSG_0B:
+        case BTL_MSG_0C:
+        case BTL_MSG_0D:
+        case BTL_MSG_0E:
+        case BTL_MSG_0F:
+        case BTL_MSG_10:
+        case BTL_MSG_11:
+        case BTL_MSG_12:
+        case BTL_MSG_13:
+        case BTL_MSG_14:
+        case BTL_MSG_15:
+        case BTL_MSG_16:
+        case BTL_MSG_17:
+        case BTL_MSG_18:
+        case BTL_MSG_19:
+        case BTL_MSG_1A:
+        case BTL_MSG_1B:
+        case BTL_MSG_1C:
+        case BTL_MSG_23:
+        case BTL_MSG_24:
+        case BTL_MSG_25:
+        case BTL_MSG_26:
+        case BTL_MSG_27:
+        case BTL_MSG_28:
+        case BTL_MSG_29:
+        case BTL_MSG_2A:
+        case BTL_MSG_2B:
+        case BTL_MSG_2C:
+        case BTL_MSG_2D:
+        case BTL_MSG_43:
+        case BTL_MSG_44:
+        case BTL_MSG_45:
+        case BTL_MSG_46:
+        case BTL_MSG_47:
+        case BTL_MSG_48:
+        case BTL_MSG_50:
+        case BTL_MSG_52:
+        case BTL_MSG_53:
+        case BTL_MSG_54:
             messageID = bMessages[popup->messageIndex];
             msgLinesIdx = get_msg_lines(messageID) - 1;
             draw_msg(messageID, x, y + D_802835D4[msgLinesIdx], 255, MSG_PAL_0F, 0);
             break;
-        case 0x4:
-        case 0x5:
-        case 0x6:
-        case 0x7:
-        case 0x1D:
-        case 0x1E:
-        case 0x1F:
-        case 0x20:
-        case 0x21:
-        case 0x22:
+        case BTL_MSG_04:
+        case BTL_MSG_05:
+        case BTL_MSG_06:
+        case BTL_MSG_07:
+        case BTL_MSG_1D:
+        case BTL_MSG_1E:
+        case BTL_MSG_1F:
+        case BTL_MSG_20:
+        case BTL_MSG_21:
+        case BTL_MSG_22:
             messageID = bMessages[popup->messageIndex];
             msgLinesIdx = get_msg_lines(messageID) - 1;
             y += D_802835D4[msgLinesIdx];
             set_message_value(D_8029F640, 0);
             draw_msg(messageID, x, y, 255, MSG_PAL_0F, 0);
             break;
-        case 0x51:
+        case BTL_MSG_51:
             messageID = bMessages[popup->messageIndex];
             msgLinesIdx = get_msg_lines(messageID) - 1;
             y += D_802835D4[msgLinesIdx];
             set_message_msg(bActorMessages[D_8029F640], 0);
             draw_msg(messageID, x, y, 255, MSG_PAL_0F, 0);
             break;
-        case 0x49:
-        case 0x4A:
-        case 0x4B:
-        case 0x4C:
-        case 0x4D:
-        case 0x4E:
-        case 0x4F:
+        case BTL_MSG_49:
+        case BTL_MSG_4A:
+        case BTL_MSG_4B:
+        case BTL_MSG_4C:
+        case BTL_MSG_4D:
+        case BTL_MSG_4E:
+        case BTL_MSG_4F:
             messageID = bMessages[popup->messageIndex];
             draw_msg(messageID, x + 0x1D, y + 6, 255, MSG_PAL_0F, 0);
             hud_element_set_render_pos(D_8029F642, x + 13, y + 14);
             hud_element_draw_clipped(D_8029F642);
             break;
-        case 0x2E:
-        case 0x2F:
-        case 0x30:
-        case 0x31:
-        case 0x32:
-        case 0x33:
-        case 0x34:
-        case 0x35:
-        case 0x36:
-        case 0x37:
-        case 0x38:
-        case 0x39:
-        case 0x3A:
-        case 0x3B:
-        case 0x3C:
-        case 0x3D:
-        case 0x3E:
-        case 0x3F:
-        case 0x40:
-        case 0x41:
-        case 0x42:
+        case BTL_MSG_2E:
+        case BTL_MSG_2F:
+        case BTL_MSG_30:
+        case BTL_MSG_31:
+        case BTL_MSG_32:
+        case BTL_MSG_33:
+        case BTL_MSG_34:
+        case BTL_MSG_35:
+        case BTL_MSG_36:
+        case BTL_MSG_37:
+        case BTL_MSG_38:
+        case BTL_MSG_39:
+        case BTL_MSG_3A:
+        case BTL_MSG_3B:
+        case BTL_MSG_3C:
+        case BTL_MSG_3D:
+        case BTL_MSG_3E:
+        case BTL_MSG_3F:
+        case BTL_MSG_40:
+        case BTL_MSG_41:
+        case BTL_MSG_42:
             opacity = 255;
             if (popup->unk_16 < 2) {
                 opacity = 160;
             }
-            if (popup->messageIndex == 0x3B) {
+            if (popup->messageIndex == BTL_MSG_3B) {
                 opacity = 255;
             }
 
@@ -3607,13 +3697,13 @@ void func_80250818(void* data, s32 x, s32 y) {
             draw_msg(messageID, x + 11, y + 6, opacity, MSG_PAL_0F, 0);
 
             switch (popup->messageIndex) {
-                case 46:
+                case BTL_MSG_2E:
                     hud_element_set_render_pos(D_8029F642, x + 65, y + 14);
                     hud_element_set_scale(D_8029F642, 0.5f);
                     hud_element_set_alpha(D_8029F642, opacity);
                     hud_element_draw_clipped(D_8029F642);
                     break;
-                case 47:
+                case BTL_MSG_2F:
                     hud_element_set_render_pos(D_8029F642, x + 55, y + 14);
                     hud_element_set_scale(D_8029F642, 0.6f);
                     hud_element_set_alpha(D_8029F642, opacity);
@@ -3623,25 +3713,25 @@ void func_80250818(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(D_8029F644, opacity);
                     hud_element_draw_clipped(D_8029F644);
                     break;
-                case 48:
+                case BTL_MSG_30:
                     hud_element_set_render_pos(D_8029F642, x + 64, y + 14);
                     hud_element_set_scale(D_8029F642, 0.5f);
                     hud_element_set_alpha(D_8029F642, opacity);
                     hud_element_draw_clipped(D_8029F642);
                     break;
-                case 49:
+                case BTL_MSG_31:
                     hud_element_set_render_pos(D_8029F642, x + 67, y + 14);
                     hud_element_set_scale(D_8029F642, 0.5f);
                     hud_element_set_alpha(D_8029F642, opacity);
                     hud_element_draw_clipped(D_8029F642);
                     break;
-                case 50:
+                case BTL_MSG_32:
                     hud_element_set_render_pos(D_8029F642, x + 56, y + 14);
                     hud_element_set_scale(D_8029F642, 0.6f);
                     hud_element_set_alpha(D_8029F642, opacity);
                     hud_element_draw_clipped(D_8029F642);
                     break;
-                case 51:
+                case BTL_MSG_33:
                     hud_element_set_render_pos(D_8029F642, x + 65, y + 13);
                     hud_element_set_scale(D_8029F642, 0.6f);
                     hud_element_set_alpha(D_8029F642, opacity);
@@ -3652,7 +3742,7 @@ void func_80250818(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(D_8029F644, opacity);
                     func_80144218(D_8029F644);
                     break;
-                case 54:
+                case BTL_MSG_36:
                     hud_element_set_render_pos(D_8029F642, x + 86, y + 13);
                     hud_element_set_scale(D_8029F642, 0.5f);
                     hud_element_set_alpha(D_8029F642, opacity);
@@ -3668,7 +3758,7 @@ void func_80250818(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(D_8029F646, opacity);
                     hud_element_draw_clipped(D_8029F646);
                     break;
-                case 56:
+                case BTL_MSG_38:
                     hud_element_set_render_pos(D_8029F642, x + 105, y + 13);
                     hud_element_set_alpha(D_8029F642, opacity);
                     hud_element_draw_clipped(D_8029F642);
@@ -3678,7 +3768,7 @@ void func_80250818(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(D_8029F644, opacity);
                     hud_element_draw_clipped(D_8029F644);
                     break;
-                case 58:
+                case BTL_MSG_3A:
                     hud_element_set_render_pos(D_8029F642, x + 63, y + 14);
                     hud_element_set_scale(D_8029F642, 0.5f);
                     hud_element_set_alpha(D_8029F642, opacity);
@@ -3689,13 +3779,13 @@ void func_80250818(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(D_8029F644, opacity);
                     hud_element_draw_clipped(D_8029F644);
                     break;
-                case 60:
+                case BTL_MSG_3C:
                     hud_element_set_render_pos(D_8029F642, x + 124, y + 14);
                     hud_element_set_scale(D_8029F642, 0.5f);
                     hud_element_set_alpha(D_8029F642, opacity);
                     hud_element_draw_clipped(D_8029F642);
                     break;
-                case 61:
+                case BTL_MSG_3D:
                     hud_element_set_render_pos(D_8029F642, x + 56, y + 31);
                     hud_element_set_alpha(D_8029F642, opacity);
                     hud_element_draw_clipped(D_8029F642);
@@ -3705,7 +3795,7 @@ void func_80250818(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(D_8029F644, opacity);
                     hud_element_draw_clipped(D_8029F644);
                     break;
-                case 62:
+                case BTL_MSG_3E:
                     hud_element_set_render_pos(D_8029F642, x + 107, y + 13);
                     hud_element_set_scale(D_8029F642, 0.6f);
                     hud_element_set_alpha(D_8029F642, opacity);
@@ -3721,8 +3811,8 @@ void func_80250818(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(D_8029F646, opacity);
                     func_80144218(D_8029F646);
                     break;
-                case 64:
-                case 65:
+                case BTL_MSG_40:
+                case BTL_MSG_41:
                     hud_element_set_render_pos(D_8029F642, x + 64, y + 13);
                     hud_element_set_scale(D_8029F642, 0.5f);
                     hud_element_set_alpha(D_8029F642, opacity);
@@ -3743,56 +3833,56 @@ void btl_show_message_popup(void* data) {
     s32 height;
 
     switch (popup->messageIndex) {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-        case 8:
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-        case 14:
-        case 15:
-        case 16:
-        case 17:
-        case 18:
-        case 19:
-        case 20:
-        case 21:
-        case 22:
-        case 23:
-        case 24:
-        case 25:
-        case 26:
-        case 27:
-        case 28:
-        case 35:
-        case 36:
-        case 37:
-        case 38:
-        case 39:
-        case 40:
-        case 41:
-        case 42:
-        case 43:
-        case 44:
-        case 45:
-        case 67:
-        case 68:
-        case 69:
-        case 70:
-        case 71:
-        case 72:
-        case 80:
-        case 82:
-        case 83:
-        case 84:
-            if (popup->unk_17 != 0) {
+        case BTL_MSG_00:
+        case BTL_MSG_01:
+        case BTL_MSG_02:
+        case BTL_MSG_03:
+        case BTL_MSG_08:
+        case BTL_MSG_09:
+        case BTL_MSG_0A:
+        case BTL_MSG_0B:
+        case BTL_MSG_0C:
+        case BTL_MSG_0D:
+        case BTL_MSG_0E:
+        case BTL_MSG_0F:
+        case BTL_MSG_10:
+        case BTL_MSG_11:
+        case BTL_MSG_12:
+        case BTL_MSG_13:
+        case BTL_MSG_14:
+        case BTL_MSG_15:
+        case BTL_MSG_16:
+        case BTL_MSG_17:
+        case BTL_MSG_18:
+        case BTL_MSG_19:
+        case BTL_MSG_1A:
+        case BTL_MSG_1B:
+        case BTL_MSG_1C:
+        case BTL_MSG_23:
+        case BTL_MSG_24:
+        case BTL_MSG_25:
+        case BTL_MSG_26:
+        case BTL_MSG_27:
+        case BTL_MSG_28:
+        case BTL_MSG_29:
+        case BTL_MSG_2A:
+        case BTL_MSG_2B:
+        case BTL_MSG_2C:
+        case BTL_MSG_2D:
+        case BTL_MSG_43:
+        case BTL_MSG_44:
+        case BTL_MSG_45:
+        case BTL_MSG_46:
+        case BTL_MSG_47:
+        case BTL_MSG_48:
+        case BTL_MSG_50:
+        case BTL_MSG_52:
+        case BTL_MSG_53:
+        case BTL_MSG_54:
+            if (popup->unk_17) {
                 s32 messageID;
 
-                popup->unk_17 = 0;
+                popup->unk_17 = FALSE;
                 messageID = bMessages[popup->messageIndex];
                 msgWidth = get_msg_width(messageID, 0) + 30;
                 posX = 160 - (msgWidth / 2);
@@ -3803,15 +3893,15 @@ void btl_show_message_popup(void* data) {
                 set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
             }
             break;
-        case 73:
-        case 74:
-        case 75:
-        case 76:
-        case 77:
-        case 78:
-        case 79:
-            if (popup->unk_17 != 0) {
-                popup->unk_17 = 0;
+        case BTL_MSG_49:
+        case BTL_MSG_4A:
+        case BTL_MSG_4B:
+        case BTL_MSG_4C:
+        case BTL_MSG_4D:
+        case BTL_MSG_4E:
+        case BTL_MSG_4F:
+            if (popup->unk_17) {
+                popup->unk_17 = FALSE;
                 msgWidth = get_msg_width(bMessages[popup->messageIndex], 0) + 55;
                 posX = 160 - (msgWidth / 2);
                 width = msgWidth;
@@ -3820,20 +3910,20 @@ void btl_show_message_popup(void* data) {
                 set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
             }
             break;
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 29:
-        case 30:
-        case 31:
-        case 32:
-        case 33:
-        case 34:
-            if (popup->unk_17 != 0) {
+        case BTL_MSG_04:
+        case BTL_MSG_05:
+        case BTL_MSG_06:
+        case BTL_MSG_07:
+        case BTL_MSG_1D:
+        case BTL_MSG_1E:
+        case BTL_MSG_1F:
+        case BTL_MSG_20:
+        case BTL_MSG_21:
+        case BTL_MSG_22:
+            if (popup->unk_17) {
                 s32 messageID;
 
-                popup->unk_17 = 0;
+                popup->unk_17 = FALSE;
                 messageID = bMessages[popup->messageIndex];
                 set_message_value(D_8029F640, 0);
                 msgWidth = get_msg_width(messageID, 0) + 31;
@@ -3845,11 +3935,11 @@ void btl_show_message_popup(void* data) {
                 set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
             }
             break;
-        case 81:
-            if (popup->unk_17 != 0) {
+        case BTL_MSG_51:
+            if (popup->unk_17) {
                 s32 messageID;
 
-                popup->unk_17 = 0;
+                popup->unk_17 = FALSE;
                 messageID = bMessages[popup->messageIndex];
                 set_message_msg(bActorMessages[D_8029F640], 0);
                 msgWidth = get_msg_width(messageID, 0) + 31;
@@ -3861,31 +3951,31 @@ void btl_show_message_popup(void* data) {
                 set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
             }
             break;
-        case 46:
-        case 47:
-        case 48:
-        case 49:
-        case 50:
-        case 51:
-        case 52:
-        case 53:
-        case 54:
-        case 55:
-        case 56:
-        case 57:
-        case 58:
-        case 59:
-        case 60:
-        case 61:
-        case 62:
-        case 63:
-        case 64:
-        case 65:
-        case 66:
-            if (popup->unk_17 != 0) {
+        case BTL_MSG_2E:
+        case BTL_MSG_2F:
+        case BTL_MSG_30:
+        case BTL_MSG_31:
+        case BTL_MSG_32:
+        case BTL_MSG_33:
+        case BTL_MSG_34:
+        case BTL_MSG_35:
+        case BTL_MSG_36:
+        case BTL_MSG_37:
+        case BTL_MSG_38:
+        case BTL_MSG_39:
+        case BTL_MSG_3A:
+        case BTL_MSG_3B:
+        case BTL_MSG_3C:
+        case BTL_MSG_3D:
+        case BTL_MSG_3E:
+        case BTL_MSG_3F:
+        case BTL_MSG_40:
+        case BTL_MSG_41:
+        case BTL_MSG_42:
+            if (popup->unk_17) {
                 s32 messageID;
 
-                popup->unk_17 = 0;
+                popup->unk_17 = FALSE;
                 messageID = bMessages[popup->messageIndex];
                 msgWidth = get_msg_width(messageID, 0) + 31;
                 posX = 160 - (msgWidth / 2);
@@ -3893,7 +3983,7 @@ void btl_show_message_popup(void* data) {
                 width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
                 height = bMsgHeights[numLines];
-                if (popup->messageIndex == 0x3B) {
+                if (popup->messageIndex == BTL_MSG_3B) {
                     posY = 120;
                     D_8029F64C = 1;
                 }
@@ -3902,7 +3992,7 @@ void btl_show_message_popup(void* data) {
 
                 posY = D_8029F64E + D_8029F650;
                 set_window_properties(WINDOW_ID_9, posX, posY, width, height, 0, func_80250818, popup, -1);
-                if (popup->messageIndex == 0x3B) {
+                if (popup->messageIndex == BTL_MSG_3B) {
                     set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
                 } else {
                     set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW_DARKENED);
@@ -3944,8 +4034,8 @@ ApiStatus WaitForMessageBoxDone(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus ForceCloseMessageBox(Evt* script, s32 isInitialCall) {
-    if (D_802838F8 != NULL) {
-        D_802838F8->duration = 0;
+    if (bPopupMessage != NULL) {
+        bPopupMessage->duration = 0;
     }
     return ApiStatus_DONE2;
 }
