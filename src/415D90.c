@@ -2746,7 +2746,7 @@ void btl_state_update_player_menu(void) {
                 btl_show_variable_battle_message(BTL_MSG_51, 60, playerData->currentPartner);
             }
             D_802AD607 = 1;
-            gBattleSubState = 9;
+            gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_9;
             break;
         case BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_9:
             if (!btl_is_popup_displayed()) {
@@ -4718,8 +4718,8 @@ void btl_state_update_twink_menu(void) {
             break;
         case BTL_SUBSTATE_TWINK_MENU_UNK_2:
             if (func_802A11B0() != 0) {
-                battleStatus->unk_6C = 4;
-                battleStatus->unk_6E = 5;
+                battleStatus->unk_6C = BTL_SUBSTATE_TWINK_MENU_UNK_4;
+                battleStatus->unk_6E = BTL_SUBSTATE_TWINK_MENU_UNK_5;
                 battleStatus->moveCategory = 8;
                 battleStatus->selectedMoveID = MOVE_TWINK_DASH;
                 battleStatus->selectedItemID = ITEM_NONE;

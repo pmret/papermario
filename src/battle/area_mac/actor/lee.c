@@ -138,7 +138,7 @@ EvtScript N(init_8021D4C8) = {
         EVT_CALL(func_8026BF48, 0)
     EVT_END_THREAD
     EVT_CALL(func_802180D0_464560)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_800000, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_NO_GAME_OVER, 1)
     EVT_RETURN
     EVT_END
 };

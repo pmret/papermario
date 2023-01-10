@@ -833,7 +833,7 @@ EvtScript N(init_8021CCDC) = {
     EVT_CALL(SetActorVar, -127, 0, 0)
     EVT_CALL(SetActorVar, -127, 1, 0)
     EVT_CALL(SetActorVar, -127, 2, 0)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_800000, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_NO_GAME_OVER, 1)
     EVT_RETURN
     EVT_END
 };

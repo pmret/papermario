@@ -165,7 +165,7 @@ EvtScript N(init) = {
     EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
     EVT_CALL(ModifyActorDecoration, ACTOR_SELF, 1, 1, 100, 0, 0, 0)
     EVT_EXEC(N(unkDecorationScript))
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_800000, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_NO_GAME_OVER, 1)
     EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_2000000, 1)
     EVT_RETURN
     EVT_END

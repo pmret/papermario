@@ -225,13 +225,12 @@ s32 btl_are_all_enemies_defeated(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
-        s32 flagEnemyDefeated = ENEMY_FLAGS_400000 | ENEMY_FLAGS_4000;
         enemy = battleStatus->enemyActors[i];
-
-        // If currentEnemyFlags signify that the enemy isn't dead yet...
-        if (enemy != NULL && !(enemy->flags & flagEnemyDefeated)) {
-            // Countinue the battle
-            enemiesStillAlive = TRUE;
+        if (enemy != NULL) {
+            if(!(enemy->flags & (ACTOR_FLAG_NO_DMG_APPLY | ACTOR_FLAG_TARGET_ONLY))) {
+                // the enemy isn't dead yet, the battle may continue
+                enemiesStillAlive = TRUE;
+            }
         }
     }
     return !enemiesStillAlive;
@@ -2160,7 +2159,7 @@ void func_80266B14(void) {
             if (enemy->unk_206 > 0) {
                 enemy->unk_206--;
                 if (enemy->unk_206 == 0) {
-                    enemy->flags &= ~ENEMY_FLAGS_80000;
+                    enemy->flags &= ~ACTOR_FLAG_80000;
                 }
             }
         }

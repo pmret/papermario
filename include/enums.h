@@ -4050,7 +4050,7 @@ enum BattleStatusFlags1 {
     BS_FLAGS1_100000                = 0x00100000, // player in back (after pressing z)
     BS_FLAGS1_200000                = 0x00200000, // enemy turn pending
     BS_FLAGS1_PLAYER_DEFENDING      = 0x00400000, // player is defending
-    BS_FLAGS1_800000                = 0x00800000, // don’t game over on loss
+    BS_FLAGS1_NO_GAME_OVER          = 0x00800000, // don’t game over on loss
     BS_FLAGS1_STAR_POINTS_DROPPED   = 0x01000000,
     BS_FLAGS1_2000000               = 0x02000000,
     BS_FLAGS1_HUSTLED               = 0x04000000,
@@ -4332,21 +4332,21 @@ enum BattleSubStates {
     BTL_SUBSTATE_CHANGE_PARTNER_UNK_7                   = 7,
     
     // BATTLE_STATE_END_TRAINING_BATTLE
-    BTL_SUBSTATE_END_TRAINING_UNK_0                 = 0,
-    BTL_SUBSTATE_END_TRAINING_UNK_A                 = 10,
-    BTL_SUBSTATE_END_TRAINING_UNK_B                 = 11,
-    BTL_SUBSTATE_END_TRAINING_UNK_C                 = 12,
-    BTL_SUBSTATE_END_TRAINING_UNK_D                 = 13,
-    BTL_SUBSTATE_END_TRAINING_UNK_E                 = 14,
+    BTL_SUBSTATE_END_TRAINING_UNK_0                     = 0,
+    BTL_SUBSTATE_END_TRAINING_UNK_A                     = 10,
+    BTL_SUBSTATE_END_TRAINING_UNK_B                     = 11,
+    BTL_SUBSTATE_END_TRAINING_UNK_C                     = 12,
+    BTL_SUBSTATE_END_TRAINING_UNK_D                     = 13,
+    BTL_SUBSTATE_END_TRAINING_UNK_E                     = 14,
 
     // BATTLE_STATE_31
 
     // BATTLE_STATE_END_BATTLE (TODO)
     BTL_SUBSTATE_END_BATTLE_UNK_0                       = 0,
     BTL_SUBSTATE_END_BATTLE_UNK_1                       = 1,
-    BTL_SUBSTATE_END_BATTLE_INIT                        = 2,
-    BTL_SUBSTATE_END_BATTLE_UNK_3                       = 3,
-    BTL_SUBSTATE_END_BATTLE_UNK_4                       = 4,
+    BTL_SUBSTATE_END_BATTLE_UNK_2                       = 2,
+    BTL_SUBSTATE_END_BATTLE_AWAIT_STAGE_SCRIPT          = 3,
+    BTL_SUBSTATE_END_BATTLE_CLEANUP                     = 4,
 
     // BATTLE_STATE_CELEBRATION
     BTL_SUBSTATE_CELEBRATE_INIT                         = 0,
@@ -4600,6 +4600,14 @@ enum BattleMessages {
     BTL_MSG_52      = 0x52,
     BTL_MSG_53      = 0x53,
     BTL_MSG_54      = 0x54,
+};
+
+enum DebugEnemyContactModes {
+    DEBUG_CONTACT_NONE              = 0, // contact with enemies behaves normally
+    DEBUG_CONTACT_CANT_TOUCH        = 1, // enemies pass through the player and cannot start battles
+    DEBUG_CONTACT_DIE_ON_TOUCH      = 2, // enemies die on contact in the overworld
+    DEBUG_CONTACT_DIE_IN_BATTLE     = 3, // all enemies wll die during BATTLE_STATE_BEGIN_TURN
+    DEBUG_CONTACT_AUTO_FLEE         = 4, // the player flees during BATTLE_STATE_BEGIN_TURN
 };
 
 enum DebuffTypes {
