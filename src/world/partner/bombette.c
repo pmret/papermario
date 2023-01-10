@@ -237,7 +237,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             D_802BE934 = 0;
             npc->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT);
             partnerActionStatus->partnerActionState = PARTNER_ACTION_USE;
-            partnerActionStatus->actingPartner = 3;
+            partnerActionStatus->actingPartner = PARTNER_BOMBETTE;
             D_802BE920 = func_800EF4E0();
             enable_npc_blur(npc);
             npc->duration = 4;
@@ -250,7 +250,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 evt->functionTemp[0] = 7;
                 break;
             }
-            if (playerStatus->flags & 2) {
+            if (playerStatus->flags & PS_FLAGS_JUMPING) {
                 evt->functionTemp[0] = 7;
                 break;
             }
@@ -303,7 +303,8 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             npc->currentAnim = ANIM_WorldBombette_WalkLit;
             npc->jumpVelocity = 0.0f;
             D_802BE938 = 0;
-            npc->flags = (npc->flags | NPC_FLAG_GRAVITY) & (~NPC_FLAG_100);
+            npc->flags |= NPC_FLAG_GRAVITY;
+            npc->flags &= ~NPC_FLAG_100;
             npc->moveSpeed = 1.0f;
             evt->functionTemp[0] = 2;
             evt->functionTemp[1] = 50;
@@ -325,7 +326,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             z = npc->pos.z;
             hitDepth = 16.0f;
             if ((npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &hitDepth, npc->yaw, npc->collisionRadius) != 0) && (((u32) ((get_collider_flags(D_8010C978) & 0xFF) - 2)) < 2U)) {
-                if (playerStatus->actionState == 0) {
+                if (playerStatus->actionState == ACTION_STATE_IDLE) {
                     suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                 }
                 npc->currentAnim = ANIM_WorldBombette_AboutToExplode;
@@ -402,7 +403,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             collisionStatus->bombetteExplosionPos.z = npc->pos.z;
             func_802BD100_317E50(npc);
             D_802BE928 = 1;
-            partnerActionStatus->partnerActionState = 2;
+            partnerActionStatus->partnerActionState = ACTION_STATE_RUN;
             evt->functionTemp[1] = 3;
             evt->functionTemp[0]++;
             break;
@@ -484,7 +485,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 enable_player_input();
             }
             partnerActionStatus->partnerActionState = ACTION_STATE_IDLE;
-            partnerActionStatus->actingPartner = 0;
+            partnerActionStatus->actingPartner = PARTNER_NONE;
             npc->jumpVelocity = 0.0f;
             D_802BE928 = 0;
             D_802BE934 = 0;
@@ -505,7 +506,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 enable_player_input();
             }
             partnerActionStatus->partnerActionState = ACTION_STATE_IDLE;
-            partnerActionStatus->actingPartner = 0;
+            partnerActionStatus->actingPartner = PARTNER_NONE;
             npc->jumpVelocity = 0.0f;
             npc->pos.y = playerStatus->position.y;
             npc->rotation.x = 0.0f;
