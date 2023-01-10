@@ -103,26 +103,26 @@ void play_hit_sound(Actor* actor, f32 x, f32 y, f32 z, u32 hitSound) {
 }
 
 void dispatch_event_actor(Actor* actor, s32 event) {
-    Evt* onHitScript = actor->onHitScript;
-    s32 onHitID = actor->onHitID;
+    Evt* handleEventScript = actor->handleEventScript;
+    s32 onHitID = actor->handleEventScriptID;
 
-    if (actor->onHitScriptSource != NULL) {
+    if (actor->handleEventSource != NULL) {
         Evt* newScript;
 
         actor->lastEventType = event;
-        newScript = start_script(actor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
-        actor->onHitScript = newScript;
-        actor->onHitID = newScript->id;
+        newScript = start_script(actor->handleEventSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
+        actor->handleEventScript = newScript;
+        actor->handleEventScriptID = newScript->id;
         newScript->owner1.actorID = actor->actorID;
     }
 
     if (actor->takeTurnScript != NULL) {
-        get_script_by_index(actor->takeTurnID);
-        kill_script_by_ID(actor->takeTurnID);
+        get_script_by_index(actor->takeTurnScriptID);
+        kill_script_by_ID(actor->takeTurnScriptID);
         actor->takeTurnScript = NULL;
     }
 
-    if (onHitScript != NULL) {
+    if (handleEventScript != NULL) {
         kill_script_by_ID(onHitID);
     }
 }
@@ -885,7 +885,7 @@ ApiStatus BindTakeTurn(Evt* script, s32 isInitialCall) {
     }
 
     takeTurnScript = (EvtScript*) evt_get_variable(script, *args++);
-    get_actor(actorID)->takeTurnScriptSource = takeTurnScript;
+    get_actor(actorID)->takeTurnSource = takeTurnScript;
     return ApiStatus_DONE2;
 }
 
@@ -898,7 +898,7 @@ ApiStatus PauseTakeTurn(Evt* script, s32 isInitialCall) {
     }
 
     evt_get_variable(script, *args++);
-    suspend_all_script(get_actor(actorID)->takeTurnID);
+    suspend_all_script(get_actor(actorID)->takeTurnScriptID);
     return ApiStatus_DONE2;
 }
 
@@ -911,7 +911,7 @@ ApiStatus ResumeTakeTurn(Evt* script, s32 isInitialCall) {
     }
 
     evt_get_variable(script, *args++);
-    resume_all_script(get_actor(actorID)->takeTurnID);
+    resume_all_script(get_actor(actorID)->takeTurnScriptID);
     return ApiStatus_DONE2;
 }
 
@@ -934,7 +934,7 @@ ApiStatus BindIdle(Evt* script, s32 isInitialCall) {
         actor->idleScript = 0;
     }
 
-    actor->idleScriptSource = idleCode;
+    actor->idleSource = idleCode;
     newScriptContext = start_script(idleCode, EVT_PRIORITY_A, 0);
     actor->idleScript = newScriptContext;
     actor->idleScriptID = newScriptContext->id;
@@ -976,28 +976,28 @@ ApiStatus EnableIdleScript(Evt* script, s32 isInitialCall) {
 ApiStatus BindHandleEvent(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    EvtScript* var1;
+    EvtScript* src;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    var1 = (EvtScript*) evt_get_variable(script, *args++);
-    get_actor(actorID)->onHitScriptSource = var1;
+    src = (EvtScript*) evt_get_variable(script, *args++);
+    get_actor(actorID)->handleEventSource = src;
     return ApiStatus_DONE2;
 }
 
 ApiStatus BindNextTurn(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    EvtScript* var1;
+    EvtScript* src;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    var1 = (EvtScript*) evt_get_variable(script, *args++);
-    get_actor(actorID)->onTurnChanceScriptSource = var1;
+    src = (EvtScript*) evt_get_variable(script, *args++);
+    get_actor(actorID)->handlePhaseSource = src;
     return ApiStatus_DONE2;
 }
 
@@ -3362,7 +3362,7 @@ ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
 
     actor->koStatus = 0;
     actor->koDuration = 0;
-    actor->disableEffect->data.disableX->unk_3C = 0;
+    actor->disableEffect->data.disableX->koDuration = 0;
     actor->attackBoost = 0;
     actor->defenseBoost = 0;
     actor->isGlowing = 0;

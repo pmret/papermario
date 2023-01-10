@@ -54,7 +54,7 @@ ApiStatus N(ApplyOuttaSight)(Evt* script, s32 isInitialCall) {
 
     playerActorPartTable->idleAnimations = bMarioHideAnims;
     gBattleStatus.hustleTurns = 0;
-    gBattleStatus.flags1 &= ~BS_FLAGS1_HUSTLE_DRINK_ON;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_HUSTLED;
 
     return ApiStatus_DONE2;
 }
@@ -208,7 +208,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,

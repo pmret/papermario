@@ -51,7 +51,7 @@ void clear_player_data(void) {
     playerData->starPoints = 0;
     playerData->unk_11 = 0;
     playerData->unk_288 = 0;
-    playerData->merleeSpellType = 0;
+    playerData->merleeSpellType = MERLEE_SPELL_0;
     playerData->merleeCastsLeft = 0;
     playerData->merleeTurnCount = -1;
     playerData->maxStarPower = 0;

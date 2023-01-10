@@ -2038,7 +2038,7 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
             break;
         case 1:
             actor2 = script->functionTempPtr[1];
-            if (does_script_exist(actor2->takeTurnID) == FALSE) {
+            if (does_script_exist(actor2->takeTurnScriptID) == FALSE) {
                 enemyIDs = battleStatus->enemyIDs;
                 if (battleStatus->nextEnemyIndex == 0) {
                     numEnemies = 0;
@@ -3232,7 +3232,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(0x1D, 60, attackBoost);
+                btl_show_variable_battle_message(BTL_MSG_1D, 60, attackBoost);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3251,7 +3251,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+            if ((actor->handleEventScript == NULL) || !does_script_exist(actor->handleEventScriptID)) {
                 D_8029FBD4 = 0;
                 return ApiStatus_DONE2;
             }
@@ -3356,7 +3356,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(0x1E, 60, defenseBoost);
+                btl_show_variable_battle_message(BTL_MSG_1E, 60, defenseBoost);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3375,7 +3375,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+            if ((actor->handleEventScript == NULL) || !does_script_exist(actor->handleEventScriptID)) {
                 D_8029FBD4 = 0;
                 return ApiStatus_DONE2;
             }
@@ -3462,7 +3462,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(0x21, 60, vanished);
+                btl_show_variable_battle_message(BTL_MSG_21, 60, vanished);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3481,7 +3481,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+            if ((actor->handleEventScript == NULL) || !does_script_exist(actor->handleEventScriptID)) {
                 D_8029FBD4 = 0;
                 return ApiStatus_DONE2;
             }
@@ -3568,7 +3568,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(0x22, 60, electrified);
+                btl_show_variable_battle_message(BTL_MSG_22, 60, electrified);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3587,7 +3587,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+            if ((actor->handleEventScript == NULL) || !does_script_exist(actor->handleEventScriptID)) {
                 D_8029FBD4 = 0;
                 return ApiStatus_DONE2;
             }
@@ -3711,7 +3711,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+            if ((actor->handleEventScript == NULL) || !does_script_exist(actor->handleEventScriptID)) {
                 D_8029FBD4 = 0;
                 return ApiStatus_DONE2;
             }

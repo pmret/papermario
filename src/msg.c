@@ -283,7 +283,7 @@ s32 _update_message(MessagePrintState* printer) {
     s32 buttons;
     s16 endPosDist;
     s16 lineIncAmt;
-    s32 phi_a1_3;
+    s32 charsToPrint;
     s32 i;
 
     printer->effectFrameCounter++;
@@ -316,10 +316,10 @@ s32 _update_message(MessagePrintState* printer) {
                         if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_C_DOWN)) {
                             cond = TRUE;
                             sfx_play_sound_with_params(SOUND_MENU_NEXT, 0, 0, 0);
-                        } else if (printer->srcBuffer[printer->srcBufferPos] != 0xFD) {
-                            printer->stateFlags |= MSG_STATE_FLAG_100 | MSG_STATE_FLAG_4;
+                        } else if (printer->srcBuffer[printer->srcBufferPos] != MSG_CHAR_READ_END) {
+                            printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY | MSG_STATE_FLAG_4;
                             if (printer->fontVariant != 0 || printer->srcBuffer[printer->srcBufferPos] != 0xC3) {
-                                printer->stateFlags |= MSG_STATE_FLAG_100 | MSG_STATE_FLAG_80 | MSG_STATE_FLAG_4;
+                                printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY | MSG_STATE_FLAG_80 | MSG_STATE_FLAG_4;
                             }
                             sfx_play_sound_with_params(SOUND_CC, 0, 0, 0);
                         } else if (printer->style == MSG_STYLE_RIGHT ||
@@ -435,39 +435,39 @@ s32 _update_message(MessagePrintState* printer) {
             case MSG_WINDOW_STATE_PRINTING:
                 if ((gGameStatusPtr->pressedButtons[0] & BUTTON_A) | (gGameStatusPtr->currentButtons[0] & BUTTON_B)) {
                     if (!(printer->stateFlags & (MSG_STATE_FLAG_20 | MSG_STATE_FLAG_10)) && !cond) {
-                        printer->stateFlags |= MSG_STATE_FLAG_100;
+                        printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY;
 
                     }
                 }
             // fallthrough
             case MSG_WINDOW_STATE_INIT:
-                phi_a1_3 = printer->charsPerChunk;
+                charsToPrint = printer->charsPerChunk;
                 if (printer->windowState == MSG_WINDOW_STATE_INIT) {
                     printer->windowState = MSG_WINDOW_STATE_PRINTING;
                     printer->currentPrintDelay = 0;
-                } else if (printer->stateFlags & MSG_STATE_FLAG_100) {
-                    phi_a1_3 = 12;
+                } else if (printer->stateFlags & MSG_STATE_FLAG_PRINT_QUICKLY) {
+                    charsToPrint = 12;
                     printer->currentPrintDelay = 0;
                 } else if (!(printer->stateFlags & MSG_STATE_FLAG_4)) {
                     if (!(printer->stateFlags & (MSG_STATE_FLAG_20 | MSG_STATE_FLAG_10)) &&
                         (gGameStatusPtr->currentButtons[0] & BUTTON_A))
                     {
-                        phi_a1_3 = 6;
+                        charsToPrint = 6;
                         printer->currentPrintDelay = 0;
                     }
                 }
                 if ((printer->currentPrintDelay == 0) || --printer->currentPrintDelay == 0) {
-                    msg_copy_to_print_buffer(printer, phi_a1_3, 0);
+                    msg_copy_to_print_buffer(printer, charsToPrint, 0);
                 }
                 break;
             case MSG_WINDOW_STATE_SCROLLING:
                 if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_B)) {
                     if (!(printer->stateFlags & (MSG_STATE_FLAG_20 | MSG_STATE_FLAG_10))) {
-                        printer->stateFlags |= MSG_STATE_FLAG_100;
+                        printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY;
                     }
                 }
                 printer->curLinePos += printer->unk_464;
-                if ((printer->stateFlags & MSG_STATE_FLAG_100) ||
+                if ((printer->stateFlags & MSG_STATE_FLAG_PRINT_QUICKLY) ||
                     (!(printer->stateFlags & (MSG_STATE_FLAG_10 | MSG_STATE_FLAG_4)) &&
                     (gGameStatusPtr->currentButtons[0] & BUTTON_A)))
                 {

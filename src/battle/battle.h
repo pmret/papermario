@@ -292,7 +292,7 @@ typedef struct ActorBlueprint {
     /* 0x08 */ s16 partCount;
     /* 0x0A */ char unk_0A[2];
     /* 0x0C */ struct ActorPartBlueprint* partsData;
-    /* 0x10 */ EvtScript* script;
+    /* 0x10 */ EvtScript* takeTurnScript;
     /* 0x14 */ s32* statusTable;
     /* 0x18 */ u8 escapeChance;
     /* 0x19 */ u8 airLiftChance;
