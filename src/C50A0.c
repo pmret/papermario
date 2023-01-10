@@ -2794,7 +2794,6 @@ void func_801363A0(ItemEntity* itemEntity) {
     s32 s3;
     s32 temp2;
     s32 v1;
-    u32 flags;
 
     switch (itemEntity->state) {
         case 2:

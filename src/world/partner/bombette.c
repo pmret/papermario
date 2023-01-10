@@ -201,20 +201,19 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     Camera* camera = &gCameras[CAM_DEFAULT];
+    Npc* npc = evt->owner2.npc;
+    u16 temp_ret = ApiStatus_BLOCK;
     f32 x;
     f32 y;
     f32 z;
     f32 hitDepth;
-    Npc* npc = evt->owner2.npc;
     f32* zPtr;
     f32* xPtr;
-    u16 temp_ret;
     f32 temp_f0;
     f32 temp_f0_2;
     f32 temp_f0_5;
     s32 var_v0_5;
     f32 temp1;
-    temp_ret = ApiStatus_BLOCK;
 
     if (gCurrentEncounter.unk_08 != 0) {
         return ApiStatus_BLOCK;
@@ -227,7 +226,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
 
     switch (evt->functionTemp[0]) {
         case 20:
-            if ((playerStatus->inputEnabledCounter != 0) || (playerStatus->flags & 2) || !(npc->flags & 0x1000)) {
+            if ((playerStatus->inputEnabledCounter != 0) || (playerStatus->flags & PS_FLAGS_JUMPING) || !(npc->flags & NPC_FLAG_1000)) {
                 return ApiStatus_DONE2;
             }
             disable_player_input();
@@ -236,8 +235,8 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             D_802BE928 = 0;
             D_802BE930 = 0;
             D_802BE934 = 0;
-            npc->flags &= ~0xA48;
-            partnerActionStatus->partnerActionState = 1;
+            npc->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT);
+            partnerActionStatus->partnerActionState = PARTNER_ACTION_USE;
             partnerActionStatus->actingPartner = 3;
             D_802BE920 = func_800EF4E0();
             enable_npc_blur(npc);
@@ -304,18 +303,17 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             npc->currentAnim = ANIM_WorldBombette_WalkLit;
             npc->jumpVelocity = 0.0f;
             D_802BE938 = 0;
-            npc->flags = (npc->flags | 0x200) & (~0x100);
+            npc->flags = (npc->flags | NPC_FLAG_GRAVITY) & (~NPC_FLAG_100);
             npc->moveSpeed = 1.0f;
             evt->functionTemp[0] = 2;
             evt->functionTemp[1] = 50;
         case 2:
-            if ((playerStatus->animFlags & 4) || (playerStatus->actionState == 0x15) || (playerStatus->actionState == 0x16)) {
+            if ((playerStatus->animFlags & PA_FLAGS_INTERRUPT_USE_PARTNER) || (playerStatus->actionState == ACTION_STATE_HIT_FIRE || playerStatus->actionState == ACTION_STATE_KNOCKBACK)) {
                 evt->functionTemp[0] = 7;
                 break;
-
             }
             if (evt->functionTemp[1] < 45) {
-                if (!(npc->flags & 0x2000) && (D_802BE938 == 0)) {
+                if (!(npc->flags & NPC_FLAG_NO_PROJECT_SHADOW) && (D_802BE938 == 0)) {
                     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
                     func_8003D660(npc, 0);
                 } else {
@@ -331,7 +329,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                     suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                 }
                 npc->currentAnim = ANIM_WorldBombette_AboutToExplode;
-                npc->flags &= ~0x200;
+                npc->flags &= ~NPC_FLAG_GRAVITY;
                 evt->functionTemp[1] = 2;
                 evt->functionTemp[0] = 3;
                 if (D_802BE92C != 0) {
@@ -347,14 +345,14 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                     }
                 }
                 if (evt->functionTemp[1] == 40) {
-                    if (playerStatus->actionState == 0) {
+                    if (playerStatus->actionState == ACTION_STATE_IDLE) {
                         suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                     }
                     enable_player_input();
                     D_802BE92C = 0;
                 }
                 npc_do_other_npc_collision(npc);
-                if (npc->flags & 0x02000000) {
+                if (npc->flags & NPC_FLAG_SIMPLIFIED_PHYSICS) {
                     if (D_802BE92C != 0) {
                         D_802BE92C = 0;
                         enable_player_input();
@@ -368,7 +366,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 npc->currentAnim = ANIM_WorldBombette_AboutToExplode;
                 evt->functionTemp[1] = 20;
                 evt->functionTemp[0] = 3;
-                if (playerStatus->actionState == 0) {
+                if (playerStatus->actionState == ACTION_STATE_IDLE) {
                     suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                 }
             }
@@ -389,17 +387,14 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 case 0:
                     sfx_play_sound_at_npc(SOUND_CANNON1, 0, -4);
                     break;
-
                 case 1:
                     sfx_play_sound_at_npc(SOUND_CANNON2, 0, -4);
                     break;
-
                 case 2:
                     sfx_play_sound_at_npc(SOUND_CANNON3, 0, -4);
                     break;
-
             }
-            exec_ShakeCam1(0, 0, 0x14);
+            exec_ShakeCam1(0, 0, 20);
             func_8003D660(npc, 2);
             collisionStatus->bombetteExploded = 0;
             collisionStatus->bombetteExplosionPos.x = npc->pos.x;
@@ -416,7 +411,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 evt->functionTemp[1]--;
                 break;
             }
-            partnerActionStatus->partnerActionState = 3;
+            partnerActionStatus->partnerActionState = ACTION_STATE_JUMP;
             D_802BE928 = 0;
             npc->jumpVelocity = ((playerStatus->position.y - npc->pos.y) / 20.0f) + 30.0;
             npc->moveSpeed = 0.8f;
@@ -455,12 +450,12 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 10.0f, npc->yaw);
             npc->jumpVelocity = 0.0f;
             npc->currentAnim = ANIM_WorldBombette_Aftermath;
-            npc->flags |= 0x800;
+            npc->flags |= NPC_FLAG_JUMPING;
             evt->functionTemp[0] = 6;
             break;
         case 6:
             if (npc->pos.y + 10.0f < playerStatus->position.y + playerStatus->colliderHeight) {
-                npc->flags &= ~0x800;
+                npc->flags &= ~NPC_FLAG_JUMPING;
                 if (fabsf(playerStatus->position.y - npc->pos.y) < 500.0) {
                     evt->functionTemp[0] = 8;
                     break;
@@ -481,14 +476,14 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
 
     switch (evt->functionTemp[0]) {
         case 7:
-            if (playerStatus->actionState == 0) {
+            if (playerStatus->actionState == ACTION_STATE_IDLE) {
                 suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
             }
             if (D_802BE92C != 0) {
                 D_802BE92C = 0;
                 enable_player_input();
             }
-            partnerActionStatus->partnerActionState = 0;
+            partnerActionStatus->partnerActionState = ACTION_STATE_IDLE;
             partnerActionStatus->actingPartner = 0;
             npc->jumpVelocity = 0.0f;
             D_802BE928 = 0;
@@ -509,7 +504,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 D_802BE92C = 0;
                 enable_player_input();
             }
-            partnerActionStatus->partnerActionState = 0;
+            partnerActionStatus->partnerActionState = ACTION_STATE_IDLE;
             partnerActionStatus->actingPartner = 0;
             npc->jumpVelocity = 0.0f;
             npc->pos.y = playerStatus->position.y;
@@ -531,8 +526,6 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             npc->jumpVelocity = 0.0f;
             partner_clear_player_tracking(npc);
             temp_ret = ApiStatus_DONE2;
-
-
             if (D_802BE924 != 0) {
                 D_802BE924 = 0;
                 sfx_stop_sound(SOUND_80000000);
