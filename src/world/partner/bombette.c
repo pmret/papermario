@@ -309,7 +309,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             evt->functionTemp[0] = 2;
             evt->functionTemp[1] = 50;
         case 2:
-            if ((playerStatus->animFlags & 4) || ((playerStatus->actionState == 0x15) || (playerStatus->actionState == 0x16))) {
+            if ((playerStatus->animFlags & 4) || (playerStatus->actionState == 0x15) || (playerStatus->actionState == 0x16)) {
                 evt->functionTemp[0] = 7;
                 break;
 
