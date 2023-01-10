@@ -196,28 +196,27 @@ s32 world_bombette_can_player_pause(Npc* npc) {
 
 ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall);
 
-s32 func_802BD758_3184A8(Evt *evt, s32 isInitialCall)
-{
-    PlayerStatus *playerStatus = &gPlayerStatus;
-    CollisionStatus *collisionStatus = &gCollisionStatus;
-    PartnerActionStatus *partnerActionStatus = &gPartnerActionStatus;
-    Camera *camera = &gCameras[CAM_DEFAULT];
+ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    Camera* camera = &gCameras[CAM_DEFAULT];
     f32 x;
     f32 y;
     f32 z;
     f32 hitDepth;
-    Npc *npc = evt->owner2.npc;
-    f32 *zPtr;
-    f32 *xPtr;
+    Npc* npc = evt->owner2.npc;
+    f32* zPtr;
+    f32* xPtr;
     u16 temp_ret;
     f32 temp_f0;
     f32 temp_f0_2;
     f32 temp_f0_5;
     s32 var_v0_5;
     f32 temp1;
-    temp_ret = 0;
+    temp_ret = ApiStatus_BLOCK;
     if (gCurrentEncounter.unk_08 != 0) {
-        return 0;
+        return ApiStatus_BLOCK;
     }
     if (isInitialCall) {
         func_802BD6DC_31842C(npc);
@@ -225,8 +224,8 @@ s32 func_802BD758_3184A8(Evt *evt, s32 isInitialCall)
     }
     switch (evt->functionTemp[0]) {
         case 20:
-            if (((playerStatus->inputEnabledCounter != 0) || (playerStatus->flags & 2)) || (!(npc->flags & 0x1000))) {
-                return 2;
+            if ((playerStatus->inputEnabledCounter != 0) || (playerStatus->flags & 2) || !(npc->flags & 0x1000)) {
+                return ApiStatus_DONE2;
             }
             disable_player_input();
             evt->functionTemp[3] = playerStatus->inputEnabledCounter;
@@ -241,12 +240,12 @@ s32 func_802BD758_3184A8(Evt *evt, s32 isInitialCall)
             enable_npc_blur(npc);
             npc->duration = 4;
             npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
-            suggest_player_anim_clearUnkFlag(0x10002);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
             evt->functionTemp[0] = 21;
 
         case 21: {
 
-            if ((playerStatus->actionState == 0x15) || (playerStatus->actionState == 0x16)) {
+            if (playerStatus->actionState == ACTION_STATE_HIT_FIRE || playerStatus->actionState == ACTION_STATE_KNOCKBACK) {
                 disable_npc_blur(npc);
                 evt->functionTemp[0] = 7;
                 break;
@@ -260,7 +259,7 @@ s32 func_802BD758_3184A8(Evt *evt, s32 isInitialCall)
         npc->moveToPos.x = playerStatus->position.x;
         npc->moveToPos.y = playerStatus->position.y;
         npc->moveToPos.z = playerStatus->position.z;
-        npc->currentAnim = 0x30007;
+        npc->currentAnim = ANIM_WorldBombette_Run;
         add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, 0.0f, playerStatus->targetYaw);
         temp_f0 = clamp_angle(playerStatus->targetYaw + ((D_802BE920 != 0) ? (-90.0f) : (90.0f)));
         add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, playerStatus->colliderDiameter / 4, temp_f0);
@@ -283,21 +282,21 @@ s32 func_802BD758_3184A8(Evt *evt, s32 isInitialCall)
         npc->pos.y = npc->moveToPos.y;
         npc->pos.z = npc->moveToPos.z;
         disable_npc_blur(npc);
-        suggest_player_anim_clearUnkFlag(0x6000C);
+        suggest_player_anim_clearUnkFlag(ANIM_Mario_6000C);
         npc->yaw = playerStatus->targetYaw;
-        npc->currentAnim = 0x30005;
+        npc->currentAnim = ANIM_WorldBombette_Walk;
         evt->functionTemp[0] = 1;
         evt->functionTemp[1] = 10;
 
         case 1:
-            if ((playerStatus->actionState == 0x15) || (playerStatus->actionState == 0x16)) {
+            if (playerStatus->actionState == ACTION_STATE_HIT_FIRE || playerStatus->actionState == ACTION_STATE_KNOCKBACK) {
                 evt->functionTemp[0] = 7;
                 break;
             }
             npc->pos.y = playerStatus->position.y + playerStatus->colliderHeight;
             npc->yaw = playerStatus->targetYaw;
             if (evt->functionTemp[1] == 1) {
-                suggest_player_anim_clearUnkFlag(0x60006);
+                suggest_player_anim_clearUnkFlag(ANIM_Mario_60006);
             }
             if (evt->functionTemp[1] != 0) {
                 evt->functionTemp[1]--;
@@ -306,7 +305,7 @@ s32 func_802BD758_3184A8(Evt *evt, s32 isInitialCall)
             sfx_play_sound_at_npc(0x80000000, 0, -4);
             D_802BE924 = 1;
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 0.0f, npc->yaw);
-            npc->currentAnim = 0x30006;
+            npc->currentAnim = ANIM_WorldBombette_WalkLit;
             npc->jumpVelocity = 0.0f;
             D_802BE938 = 0;
             npc->flags = (npc->flags | 0x200) & (~0x100);
@@ -317,12 +316,11 @@ s32 func_802BD758_3184A8(Evt *evt, s32 isInitialCall)
         case 2:
             if ((playerStatus->animFlags & 4) || ((playerStatus->actionState == 0x15) || (playerStatus->actionState == 0x16))) {
                 evt->functionTemp[0] = 7;
-jump_438:
                 break;
 
             }
             if (evt->functionTemp[1] < 45) {
-                if ((!(npc->flags & 0x2000)) && (D_802BE938 == 0)) {
+                if (!(npc->flags & 0x2000) && (D_802BE938 == 0)) {
                     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
                     func_8003D660(npc, 0);
                 } else {
@@ -335,9 +333,9 @@ jump_438:
             hitDepth = 16.0f;
             if ((npc_raycast_down_around(0x10000, &x, &y, &z, &hitDepth, npc->yaw, npc->collisionRadius) != 0) && (((u32) ((get_collider_flags(D_8010C978) & 0xFF) - 2)) < 2U)) {
                 if (playerStatus->actionState == 0) {
-                    suggest_player_anim_clearUnkFlag(0x10002);
+                    suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                 }
-                npc->currentAnim = 0x30010;
+                npc->currentAnim = ANIM_WorldBombette_AboutToExplode;
                 npc->flags &= ~0x200;
                 evt->functionTemp[1] = 2;
                 evt->functionTemp[0] = 3;
@@ -355,7 +353,7 @@ jump_438:
                 }
                 if (evt->functionTemp[1] == 40) {
                     if (playerStatus->actionState == 0) {
-                        suggest_player_anim_clearUnkFlag(0x10002);
+                        suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                     }
                     enable_player_input();
                     D_802BE92C = 0;
@@ -372,11 +370,11 @@ jump_438:
                         break;
                     }
                 }
-                npc->currentAnim = 0x30000 | 0x10;
+                npc->currentAnim = ANIM_WorldBombette_Still | 0x10;
                 evt->functionTemp[1] = 0x14;
                 evt->functionTemp[0] = 3;
                 if (playerStatus->actionState == 0) {
-                    suggest_player_anim_clearUnkFlag(0x10002);
+                    suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                 }
             }
 
@@ -452,8 +450,8 @@ jump_438:
         case 5:
             npc->pos.y += npc->jumpVelocity;
             npc->jumpVelocity -= npc->jumpScale;
-            npc->rotation.z -= (evt->functionTemp[2] * 0x4F) / 2;
-            npc->rotation.x -= (evt->functionTemp[2] * 0x43) / 2;
+            npc->rotation.z -= (evt->functionTemp[2] * 79) / 2;
+            npc->rotation.x -= (evt->functionTemp[2] * 67) / 2;
             if (evt->functionTemp[1] != 0) {
                 evt->functionTemp[1]--;
                 break;
@@ -471,7 +469,7 @@ jump_438:
             break;
 
         case 6:
-            if ((npc->pos.y + 10.0f) < (playerStatus->position.y + playerStatus->colliderHeight)) {
+            if (npc->pos.y + 10.0f < playerStatus->position.y + playerStatus->colliderHeight) {
                 npc->flags &= ~0x800;
                 if (fabsf(playerStatus->position.y - npc->pos.y) < 500.0) {
                     evt->functionTemp[0] = 8;
@@ -483,11 +481,11 @@ jump_438:
             }
             npc->pos.y += npc->jumpVelocity;
             npc->jumpVelocity -= npc->jumpScale;
-            if (npc->jumpVelocity < (-8.0)) {
+            if (npc->jumpVelocity < -8.0) {
                 npc->jumpVelocity = -8.0f;
             }
-            npc->rotation.z -= (evt->functionTemp[2] * 0x4F) / 2;
-            npc->rotation.x -= (evt->functionTemp[2] * 0x43) / 2;
+            npc->rotation.z -= (evt->functionTemp[2] * 79) / 2;
+            npc->rotation.x -= (evt->functionTemp[2] * 67) / 2;
             break;
 
     }
@@ -495,7 +493,7 @@ jump_438:
     switch (evt->functionTemp[0]) {
         case 7:
             if (playerStatus->actionState == 0) {
-                suggest_player_anim_clearUnkFlag(0x10002);
+                suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
             }
             if (D_802BE92C != 0) {
                 D_802BE92C = 0;
@@ -517,7 +515,6 @@ jump_438:
             }
             temp_ret = 2;
             return temp_ret;
-
         case 8:
             if (D_802BE92C != 0) {
                 D_802BE92C = 0;
@@ -553,7 +550,6 @@ jump_438:
             }
             temp_ret = 2;
             break;
-
         default:
             return 0;
 
