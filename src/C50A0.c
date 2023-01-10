@@ -2856,8 +2856,6 @@ void func_801363A0(ItemEntity* itemEntity) {
             } else {
                 temp = 0;
             }
-
-
             if (!(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) &&
                     itemEntity->itemID != ITEM_STAR_PIECE &&
                     !(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) &&
@@ -2871,8 +2869,6 @@ void func_801363A0(ItemEntity* itemEntity) {
                 set_window_properties(WINDOW_ID_12, s1, s3 - 0x18 + temp, offsetY,
                                     temp2, 0, func_8013673C, itemEntity, -1);
             }
-
-            
             if (itemEntity->itemID != ITEM_STAR_PIECE && itemEntity->itemID != ITEM_COIN) {
                 set_window_properties(WINDOW_ID_19, 0x14, 0xBA, 0x118, 0x20, NULL, func_80136A08, itemEntity, -1);
             }
@@ -2884,7 +2880,7 @@ void func_801363A0(ItemEntity* itemEntity) {
             break;
         case 12:
             set_message_msg(itemData->nameMsg, 0);
-            offsetY = get_msg_width(MESSAGE_ID(0x1D, 0x05F), 0) + 0x36;
+            offsetY = get_msg_width(MSG_Menus_005F, 0) + 0x36;
             s1 = 160 - offsetY / 2;
             set_window_properties(WINDOW_ID_12, 160 - offsetY / 2, 0x4C, offsetY, 40, NULL, func_8013673C, itemEntity, -1);
             break;
