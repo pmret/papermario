@@ -228,7 +228,6 @@ s32 btl_are_all_enemies_defeated(void) {
         enemy = battleStatus->enemyActors[i];
         if (enemy != NULL) {
             if(!(enemy->flags & (ACTOR_FLAG_NO_DMG_APPLY | ACTOR_FLAG_TARGET_ONLY))) {
-                // the enemy isn't dead yet, the battle may continue
                 enemiesStillAlive = TRUE;
             }
         }
@@ -863,11 +862,11 @@ void load_player_actor(void) {
     player->idleSource = NULL;
     player->takeTurnSource = NULL;
     player->handleEventSource = NULL;
-    player->handleBattlePhaseSource = NULL;
+    player->handlePhaseSource = NULL;
     player->idleScript = NULL;
     player->takeTurnScript = NULL;
     player->handleEventScript = NULL;
-    player->handleBattlePhaseScript = NULL;
+    player->handlePhaseScript = NULL;
     player->turnPriority = 0;
     player->statusTable = bPlayerStatusTable;
     player->debuff = 0;
@@ -1072,11 +1071,11 @@ void load_partner_actor(void) {
         partnerActor->idleSource = NULL;
         partnerActor->takeTurnSource = ActorBlueprint->takeTurnScript;
         partnerActor->handleEventSource = NULL;
-        partnerActor->handleBattlePhaseSource = NULL;
+        partnerActor->handlePhaseSource = NULL;
         partnerActor->idleScript = NULL;
         partnerActor->takeTurnScript = NULL;
         partnerActor->handleEventScript = NULL;
-        partnerActor->handleBattlePhaseScript = NULL;
+        partnerActor->handlePhaseScript = NULL;
         partnerActor->turnPriority = 0;
         partnerActor->enemyIndex = 0;
         partnerActor->yaw = 0.0f;
@@ -1318,7 +1317,7 @@ Actor* create_actor(Formation formation) {
     actor->idleSource = NULL;
     actor->takeTurnSource = formationActor->takeTurnScript;
     actor->handleEventSource = NULL;
-    actor->handleBattlePhaseSource = NULL;
+    actor->handlePhaseSource = NULL;
     actor->idleScript = NULL;
     actor->takeTurnScript = NULL;
     actor->handleEventScript = NULL;

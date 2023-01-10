@@ -997,7 +997,7 @@ ApiStatus BindNextTurn(Evt* script, s32 isInitialCall) {
     }
 
     src = (EvtScript*) evt_get_variable(script, *args++);
-    get_actor(actorID)->handleBattlePhaseSource = src;
+    get_actor(actorID)->handlePhaseSource = src;
     return ApiStatus_DONE2;
 }
 

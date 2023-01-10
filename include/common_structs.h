@@ -1866,11 +1866,11 @@ typedef struct Actor {
     /* 0x1C0 */ EvtScript* idleSource;
     /* 0x1C4 */ EvtScript* takeTurnSource;
     /* 0x1C8 */ EvtScript* handleEventSource;
-    /* 0x1CC */ EvtScript* handleBattlePhaseSource;
+    /* 0x1CC */ EvtScript* handlePhaseSource;
     /* 0x1D0 */ struct Evt* idleScript;
     /* 0x1D4 */ struct Evt* takeTurnScript;
     /* 0x1D8 */ struct Evt* handleEventScript;
-    /* 0x1DC */ struct Evt* handleBattlePhaseScript;
+    /* 0x1DC */ struct Evt* handlePhaseScript;
     /* 0x1E0 */ s32 idleScriptID;
     /* 0x1E4 */ s32 takeTurnScriptID;
     /* 0x1E8 */ s32 handleEventScriptID;
