@@ -364,7 +364,7 @@ void btl_update(void) {
             case 26:
                 btl_state_update_victory();
                 break;
-            case 32:
+            case BATTLE_STATE_END_BATTLE:
                 btl_state_update_end_battle();
                 break;
             case 29:

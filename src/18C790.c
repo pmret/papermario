@@ -1116,7 +1116,7 @@ void btl_state_update_celebration(void) {
             hud_element_free(LevelUpSelectTextHEID);
             set_background_color_blend(0, 0, 0, 0);
             btl_set_state(BATTLE_STATE_END_BATTLE);
-            gBattleSubState = BTL_END_BATTLE_SUBSTATE_INIT;
+            gBattleSubState = BTL_SUBSTATE_END_BATTLE_INIT;
             break;
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_INVALID:
             width = get_msg_width(MSG_Menus_CantIncrease, 0) + 31;
@@ -1191,7 +1191,7 @@ void btl_state_update_celebration(void) {
                 kill_script_by_ID(partner->takeTurnScriptID);
             }
             btl_set_state(BATTLE_STATE_END_BATTLE);
-            gBattleSubState = BTL_END_BATTLE_SUBSTATE_INIT;
+            gBattleSubState = BTL_SUBSTATE_END_BATTLE_INIT;
             break;
     }
     CelebrateStateTime++;
