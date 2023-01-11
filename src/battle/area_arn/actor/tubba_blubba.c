@@ -207,7 +207,7 @@ EvtScript N(handleEvent_802260D0) = {
             EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim14)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_EXEC_WAIT(N(80225FD4))
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)

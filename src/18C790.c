@@ -1058,7 +1058,7 @@ void btl_state_update_celebration(void) {
                 partner->takeTurnScriptID = script->id;
                 script->owner1.actorID = ACTOR_PARTNER;
             }
-            if (!(gBattleStatus.flags2 & BS_FLAGS2_2000000)) {
+            if (!(gBattleStatus.flags2 & BS_FLAGS2_DONT_STOP_MUSIC)) {
                 bgm_set_song(0, -1, 0, 2000, 8);
             }
             bFadeToBlackAmt = 0;
@@ -1143,7 +1143,7 @@ void btl_state_update_celebration(void) {
                 CelebrateStateTime = 99;
             }
             if (CelebrateStateTime >= 99) {
-                if (!(gBattleStatus.flags2 & BS_FLAGS2_2000000)) {
+                if (!(gBattleStatus.flags2 & BS_FLAGS2_DONT_STOP_MUSIC)) {
                     bgm_set_song(0, -1, 0, 1500, 8);
                 }
                 bFadeToBlackAmt = 0;

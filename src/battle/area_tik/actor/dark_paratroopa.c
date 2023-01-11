@@ -365,7 +365,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_HurtStill)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
             EVT_SET_CONST(LVar0, 2)
             EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_ShellEnter)
@@ -1000,7 +1000,7 @@ EvtScript N(handleEvent_koopa) = {
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_SWITCH(LVar0)

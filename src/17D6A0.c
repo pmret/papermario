@@ -2427,6 +2427,7 @@ s32 bMessages[] = {
     [BTL_MSG_1E]    MSG_Menus_DefenseUp,
     [BTL_MSG_1F]    MSG_Menus_0084,
     [BTL_MSG_20]    MSG_Menus_0085,
+    
     [BTL_MSG_21]    MSG_Menus_EnemyTransparent,
     [BTL_MSG_22]    MSG_Menus_EnemyElectricCharge,
     [BTL_MSG_23]    MSG_Menus_PartnerInjured,
@@ -2440,45 +2441,51 @@ s32 bMessages[] = {
     [BTL_MSG_2B]    MSG_Menus_TurboChargeEnd,
     [BTL_MSG_2C]    MSG_Menus_ChillOutBegin,
     [BTL_MSG_2D]    MSG_Menus_CloudNineBegin,
-    [BTL_MSG_2E]    MSG_Menus_00AF,
-    [BTL_MSG_2F]    MSG_Menus_00B0,
-    [BTL_MSG_30]    MSG_Menus_00B1,
-    [BTL_MSG_31]    MSG_Menus_00B2,
-    [BTL_MSG_32]    MSG_Menus_00B3,
-    [BTL_MSG_33]    MSG_Menus_00B4,
-    [BTL_MSG_34]    MSG_Menus_00AF,
-    [BTL_MSG_35]    MSG_Menus_00AF,
-    [BTL_MSG_36]    MSG_Menus_00B5,
-    [BTL_MSG_37]    MSG_Menus_00B6,
-    [BTL_MSG_38]    MSG_Menus_00B7,
-    [BTL_MSG_39]    MSG_Menus_00B8,
-    [BTL_MSG_3A]    MSG_Menus_00B9,
-    [BTL_MSG_3B]    MSG_Menus_00AF,
-    [BTL_MSG_3C]    MSG_Menus_00BA,
-    [BTL_MSG_3D]    MSG_Menus_00BB,
-    [BTL_MSG_3E]    MSG_Menus_00BC,
-    [BTL_MSG_3F]    MSG_Menus_00AF,
-    [BTL_MSG_40]    MSG_Menus_00BD,
-    [BTL_MSG_41]    MSG_Menus_00BE,
-    [BTL_MSG_42]    MSG_Menus_00BF,
+
+    // move action command tips
+    [BTL_MSG_2E]    MSG_Menus_MoveTip_PressBeforeLanding,
+    [BTL_MSG_2F]    MSG_Menus_MoveTip_PushLeftWithTiming,
+    [BTL_MSG_30]    MSG_Menus_MoveTip_PressBeforeStriking,
+    [BTL_MSG_31]    MSG_Menus_MoveTip_PressRepeatedly,
+    [BTL_MSG_32]    MSG_Menus_MoveTip_PushLeftRepeatedly,
+    [BTL_MSG_33]    MSG_Menus_MoveTip_PushLeftToAim,
+    [BTL_MSG_34]    MSG_Menus_MoveTip_PressBeforeLanding,
+    [BTL_MSG_35]    MSG_Menus_MoveTip_PressBeforeLanding,
+    [BTL_MSG_36]    MSG_Menus_MoveTip_PressAsShown,
+    [BTL_MSG_37]    MSG_Menus_MoveTip_NOT_USED_1,
+    [BTL_MSG_38]    MSG_Menus_MoveTip_PressAsLightsUp,
+    [BTL_MSG_39]    MSG_Menus_MoveTip_NOT_USED_2,
+    [BTL_MSG_3A]    MSG_Menus_MoveTip_PressBothRepeatedly,
+    [BTL_MSG_3B]    MSG_Menus_MoveTip_PressBeforeLanding,
+    [BTL_MSG_3C]    MSG_Menus_MoveTip_HoldThenTap,
+    [BTL_MSG_3D]    MSG_Menus_MoveTip_HoldThenRelease,
+    [BTL_MSG_3E]    MSG_Menus_MoveTip_MoveToAim,
+    [BTL_MSG_3F]    MSG_Menus_MoveTip_PressBeforeLanding,
+    [BTL_MSG_40]    MSG_Menus_MoveTip_PressToRunAway,
+    [BTL_MSG_41]    MSG_Menus_MoveTip_PressToReduceDamage,
+    [BTL_MSG_42]    MSG_Menus_MoveTip_NOT_USED_3,
+
+    // no targets available
     [BTL_MSG_43]    MSG_Menus_Battle_NoTarget_Jump,
     [BTL_MSG_44]    MSG_Menus_Battle_NoTarget_Hammer,
     [BTL_MSG_45]    MSG_Menus_Battle_NoTarget_Item,
     [BTL_MSG_46]    0,
     [BTL_MSG_47]    0,
-    [BTL_MSG_48]    MSG_Menus_00C3,
-    [BTL_MSG_49]    MSG_Menus_00C6,
-    [BTL_MSG_4A]    MSG_Menus_00C6,
-    [BTL_MSG_4B]    MSG_Menus_00C6,
-    [BTL_MSG_4C]    MSG_Menus_00C7,
-    [BTL_MSG_4D]    MSG_Menus_00C7,
-    [BTL_MSG_4E]    MSG_Menus_00C7,
-    [BTL_MSG_4F]    MSG_Menus_00C8,
-    [BTL_MSG_50]    MSG_Menus_CantSwitch,
-    [BTL_MSG_51]    MSG_Menus_00CA,
-    [BTL_MSG_52]    MSG_Menus_CantSwitch,
-    [BTL_MSG_53]    MSG_Menus_00CA,
-    [BTL_MSG_54]    MSG_Menus_00C3,
+
+    // errors and warnings
+    [BTL_MSG_48]    MSG_Menus_Battle_CantSelectNow,
+    [BTL_MSG_49]    MSG_Menus_Battle_CantUseHammer,
+    [BTL_MSG_4A]    MSG_Menus_Battle_CantUseHammer,
+    [BTL_MSG_4B]    MSG_Menus_Battle_CantUseHammer,
+    [BTL_MSG_4C]    MSG_Menus_Battle_CantUseJump,
+    [BTL_MSG_4D]    MSG_Menus_Battle_CantUseJump,
+    [BTL_MSG_4E]    MSG_Menus_Battle_CantUseJump,
+    [BTL_MSG_4F]    MSG_Menus_Battle_CantUseItems,
+    [BTL_MSG_50]    MSG_Menus_Battle_CantSwitch,
+    [BTL_MSG_51]    MSG_Menus_Battle_CantMove,
+    [BTL_MSG_52]    MSG_Menus_Battle_CantSwitch,
+    [BTL_MSG_53]    MSG_Menus_Battle_CantMove,
+    [BTL_MSG_54]    MSG_Menus_Battle_CantSelectNow,
 };
 
 s32 bActorMessages[] = {
@@ -3147,6 +3154,7 @@ void btl_update_message_popup(void* data) {
                     break;
             }
             break;
+        // move action command tips
         case BTL_MSG_2E:
         case BTL_MSG_2F:
         case BTL_MSG_30:

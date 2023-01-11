@@ -155,11 +155,11 @@ s32 calc_item_damage_enemy(void) {
         target->hpChangeCounter = 0;
         ret = 2;
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
-            dispatchEvent = EVENT_UNKNOWN_TRIGGER;
+            dispatchEvent = EVENT_SCRIPTED_IMMUNE;
             sfx_play_sound_at_position(SOUND_IMMUNE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             battleStatus->lastAttackDamage = 0;
         } else {
-            dispatchEvent = EVENT_UNKNOWN_TRIGGER;
+            dispatchEvent = EVENT_SCRIPTED_IMMUNE;
             battleStatus->lastAttackDamage = 0;
         }
     } else {
@@ -196,7 +196,7 @@ s32 calc_item_damage_enemy(void) {
         if (dispatchEvent == EVENT_HIT_COMBO) {
             dispatchEvent = EVENT_HIT;
         }
-        if (dispatchEvent == EVENT_UNKNOWN_TRIGGER) {
+        if (dispatchEvent == EVENT_SCRIPTED_IMMUNE) {
             dispatchEvent = EVENT_IMMUNE;
         }
         if (target->currentHP <= 0 && dispatchEvent == EVENT_IMMUNE) {
@@ -354,7 +354,7 @@ s32 calc_item_damage_enemy(void) {
         #undef INFLICT_STATUS
 
         if (wasStatusInflicted) {
-            if (dispatchEvent == EVENT_UNKNOWN_TRIGGER) {
+            if (dispatchEvent == EVENT_SCRIPTED_IMMUNE) {
                 dispatchEvent = EVENT_HIT_COMBO;
             }
             if (dispatchEvent == EVENT_IMMUNE) {
@@ -380,7 +380,7 @@ s32 calc_item_damage_enemy(void) {
             dispatchEvent = EVENT_SCARE_AWAY;
             ret = 0;
             sp1C = TRUE;
-            gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_8 | BS_FLAGS1_1;
+            gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_8 | BS_FLAGS1_ACTORS_VISIBLE;
             sfx_play_sound_at_position(SOUND_231, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             wasStatusInflicted = TRUE;
             gBattleStatus.flags1 |= BS_FLAGS1_40;

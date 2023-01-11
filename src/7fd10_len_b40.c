@@ -303,7 +303,7 @@ block_17:
             }
             create_popup_menu(popup);
             set_time_freeze_mode(TIME_FREEZE_PARTNER_MENU);
-            if (*partnerActionState == 0) {
+            if (*partnerActionState == PARTNER_ACTION_NONE) {
                 set_action_state(ACTION_STATE_IDLE);
             }
             D_8010CD00++;

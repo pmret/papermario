@@ -366,7 +366,7 @@ EvtScript N(handleEvent_802197FC) = {
             EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim04)
@@ -477,7 +477,7 @@ EvtScript N(handleEvent_80219ED4) = {
             EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)

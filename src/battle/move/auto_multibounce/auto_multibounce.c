@@ -369,7 +369,7 @@ EvtScript N(D_802A2384) = {
 
 EvtScript N(main) = {
     EVT_CALL(ShowActionHud, 1)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_1000, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_AUTO_SUCCEED_ACTION, 1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)

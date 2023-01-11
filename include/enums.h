@@ -648,8 +648,10 @@ enum SoundIDs {
     SOUND_FF                        = 0x000000FF,
     SOUND_100                       = 0x00000100,
     SOUND_108                       = 0x00000108,
+    SOUND_10B                       = 0x0000010B,
     SOUND_IMMUNE                    = 0x0000010C,
     SOUND_HIT_BONES                 = 0x0000010D,
+    SOUND_10E                       = 0x0000010E,
     SOUND_10F                       = 0x0000010F,
     SOUND_110                       = 0x00000110,
     SOUND_131                       = 0x00000131,
@@ -830,6 +832,7 @@ enum SoundIDs {
     SOUND_23D                       = 0x0000023D,
     SOUND_241                       = 0x00000241,
     SOUND_246                       = 0x00000246,
+    SOUND_247                       = 0x00000247,
     SOUND_248                       = 0x00000248,
     SOUND_249                       = 0x00000249,
     SOUND_24A                       = 0x0000024A,
@@ -2527,7 +2530,7 @@ enum Phases {
     PHASE_FIRST_STRIKE              = 1,
     PHASE_RUN_AWAY_START            = 3,
     PHASE_RUN_AWAY_RESET            = 4,
-    PHASE_CELEBRATE                         = 5,
+    PHASE_CELEBRATE                 = 5,
     PHASE_USE_DEFEND                = 6,
     PHASE_RUN_AWAY_FAIL             = 7,
     PHASE_USE_LIFE_SHROOM           = 8,
@@ -2609,7 +2612,7 @@ enum Events {
     EVENT_PEACH_BEAM                  = 0x00000014,
     EVENT_POWER_BOUNCE_HIT            = 0x00000015,
     EVENT_BLOW_AWAY                   = 0x00000016,
-    EVENT_UNKNOWN_TRIGGER             = 0x00000017,
+    EVENT_SCRIPTED_IMMUNE             = 0x00000017,
     EVENT_18                          = 0x00000018,
     EVENT_IMMUNE                      = 0x00000019,
     EVENT_BLOCK                       = 0x0000001A,
@@ -3242,6 +3245,7 @@ enum PartnerActions {
     PARTNER_ACTION_KOOPER_2         = 2,
     PARTNER_ACTION_BOMBETTE_1       = 1,
     PARTNER_ACTION_BOMBETTE_2       = 2,
+    PARTNER_ACTION_BOMBETTE_3       = 3,
     PARTNER_ACTION_PARAKARRY_HOVER  = 1,
     PARTNER_ACTION_WATT_SHINE       = 1,
     PARTNER_ACTION_LAKILESTER_1     = 1,
@@ -3528,7 +3532,7 @@ enum ActorFlags {
     ACTOR_FLAG_100               = 0x00000100,
     ACTOR_FLAG_FLYING            = 0x00000200, ///< Quake Hammer can't hit.
     ACTOR_FLAG_400               = 0x00000400,
-    ACTOR_FLAG_HP_OFFSET_BELOW   = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down).
+    ACTOR_FLAG_HP_OFFSET_BELOW   = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down). Is this just UPSIDE_DOWN?
     ACTOR_FLAG_1000              = 0x00001000,
     ACTOR_FLAG_2000              = 0x00002000,
     ACTOR_FLAG_TARGET_ONLY       = 0x00004000, ///< Battle ends even if undefeated. No turn.
@@ -4027,7 +4031,7 @@ enum IntroStates {
 
 enum BattleStatusFlags1 {
     BS_FLAGS1_0                     = 0x00000000,
-    BS_FLAGS1_1                     = 0x00000001, // show actors
+    BS_FLAGS1_ACTORS_VISIBLE        = 0x00000001, // show actors
     BS_FLAGS1_2                     = 0x00000002, // menu is open
     BS_FLAGS1_4                     = 0x00000004,
     BS_FLAGS1_8                     = 0x00000008,
@@ -4037,9 +4041,9 @@ enum BattleStatusFlags1 {
     BS_FLAGS1_80                    = 0x00000080,
     BS_FLAGS1_100                   = 0x00000100,
     BS_FLAGS1_200                   = 0x00000200,
-    BS_FLAGS1_400                   = 0x00000400,
-    BS_FLAGS1_800                   = 0x00000800,
-    BS_FLAGS1_1000                  = 0x00001000,
+    BS_FLAGS1_400                   = 0x00000400, // UNUSED
+    BS_FLAGS1_FORCE_HIT_IMMUNE      = 0x00000800,
+    BS_FLAGS1_AUTO_SUCCEED_ACTION   = 0x00001000,
     BS_FLAGS1_2000                  = 0x00002000,
     BS_FLAGS1_4000                  = 0x00004000,
     BS_FLAGS1_8000                  = 0x00008000,
@@ -4070,7 +4074,7 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_CANT_FLEE                       = 0x00000020,
     BS_FLAGS2_PEACH_BATTLE                    = 0x00000040,
     BS_FLAGS2_80                              = 0x00000080,
-    BS_FLAGS2_100                             = 0x00000100,
+    BS_FLAGS2_100                             = 0x00000100, // dont decrement turbo charge on begin player turn
     BS_FLAGS2_200                             = 0x00000200,
     BS_FLAGS2_400                             = 0x00000400,
     BS_FLAGS2_800                             = 0x00000800,
@@ -4078,11 +4082,11 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_4000                            = 0x00004000,
     BS_FLAGS2_10000                           = 0x00010000,
     BS_FLAGS2_100000                          = 0x00100000,
-    BS_FLAGS2_1000000                         = 0x01000000,
-    BS_FLAGS2_2000000                         = 0x02000000,
-    BS_FLAGS2_4000000                         = 0x04000000,
+    BS_FLAGS2_1000000                         = 0x01000000, // possible IS_FIRST_STRIKE
+    BS_FLAGS2_DONT_STOP_MUSIC                 = 0x02000000, // don't stop playing the current song when the battle ends
+    BS_FLAGS2_HAS_DRAINED_HP                  = 0x04000000,
     BS_FLAGS2_HAS_RUSH                        = 0x08000000,
-    BS_FLAGS2_10000000                        = 0x10000000,
+    BS_FLAGS2_DROP_WHACKA_BUMP                = 0x10000000,
 };
 
 enum BattleStates {
@@ -4137,20 +4141,20 @@ enum BattleSubStates {
     BTL_SUBSTATE_NORMAL_START_UNK_8                         = 8,
 
     // BATTLE_STATE_FIRST_STRIKE
-    BTL_SUBSTATE_FIRST_STRIKE_UNK_0                         = 0,
-    BTL_SUBSTATE_FIRST_STRIKE_UNK_1                         = 1,
-    BTL_SUBSTATE_FIRST_STRIKE_UNK_2                         = 2,
-    BTL_SUBSTATE_FIRST_STRIKE_UNK_3                         = 3,
+    BTL_SUBSTATE_FIRST_STRIKE_INIT                          = 0,
+    BTL_SUBSTATE_FIRST_STRIKE_AWAIT_ENEMY_READY             = 1,
+    BTL_SUBSTATE_FIRST_STRIKE_AWAIT_SCRIPTS                 = 2,
+    BTL_SUBSTATE_FIRST_STRIKE_AWAIT_ENEMY_DONE              = 3,
 
     // BATTLE_STATE_PARTNER_FIRST_STRIKE
-    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_UNK_0                 = 0,
-    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_UNK_1                 = 1,
-    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_UNK_2                 = 2,
-    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_UNK_3                 = 3,
+    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_INIT                  = 0,
+    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_AWAIT_ENEMY_READY     = 1,
+    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_AWAIT_SCRIPTS         = 2,
+    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_AWAIT_ENEMY_DONE      = 3,
 
     // BATTLE_STATE_ENEMY_FIRST_STRIKE
-    BTL_SUBSTATE_ENEMY_FIRST_STRIKE_UNK_0                   = 0,
-    BTL_SUBSTATE_ENEMY_FIRST_STRIKE_UNK_2                   = 2,
+    BTL_SUBSTATE_ENEMY_FIRST_STRIKE_INIT                    = 0,
+    BTL_SUBSTATE_ENEMY_FIRST_STRIKE_AWAIT_SCRIPTS           = 2,
 
     // BATTLE_STATE_BEGIN_TURN
     BTL_SUBSTATE_BEGIN_TURN_INIT                            = 0,
@@ -4169,13 +4173,13 @@ enum BattleSubStates {
     // BATTLE_STATE_BEGIN_PLAYER_TURN
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_INIT                     = 0,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_TRY_COMMAND_RECOVER      = 1,
-    BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_OUTTA_SIGHT        = 2,
-    BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_OUTTA_SIGHT        = 10,
+    BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_WATER_BLOCK        = 2,
+    BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_WATER_BLOCK        = 10,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_CLOUD_NINE         = 11,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_CLOUD_NINE         = 12,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_TURBO_CHARGE       = 15,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_TURBO_CHARGE       = 16,
-    BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_PARTNER_SCRIPT     = 20,
+    BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_OUTTA_SIGHT        = 20,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_TRY_STATUS_DAMAGE        = 21,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_TRY_STATUS_RECOVER       = 22,
     BTL_SUBSTATE_BEGIN_PLAYER_TURN_END_DELAY                = 30,
@@ -4602,6 +4606,22 @@ enum BattleMessages {
     BTL_MSG_54      = 0x54,
 };
 
+enum BattleMenuTypes {
+    BTL_MENU_TYPE_INVALID   = -1,
+    BTL_MENU_TYPE_JUMP      = 0,
+    BTL_MENU_TYPE_SMASH     = 1,
+    BTL_MENU_TYPE_ITEM      = 2,
+    BTL_MENU_TYPE_3         = 3,
+    BTL_MENU_TYPE_4         = 4, // defend?
+    BTL_MENU_TYPE_5         = 5, // partner/ability?
+    BTL_MENU_TYPE_6         = 6,
+    BTL_MENU_TYPE_7         = 7, // strategies?
+    BTL_MENU_TYPE_8         = 8, // spirits?
+    BTL_MENU_TYPE_9         = 9, // do nothing?
+    BTL_MENU_TYPE_A         = 10, // switch to partner?
+    BTL_MENU_TYPE_B         = 11,
+};
+
 enum DebugEnemyContactModes {
     DEBUG_CONTACT_NONE              = 0, // contact with enemies behaves normally
     DEBUG_CONTACT_CANT_TOUCH        = 1, // enemies pass through the player and cannot start battles
@@ -4611,17 +4631,17 @@ enum DebugEnemyContactModes {
 };
 
 enum DebuffTypes {
-    DEBUFF_TYPE_SLEEP                 = 0x00001000,
-    DEBUFF_TYPE_STATIC                = 0x00002000,
-    DEBUFF_TYPE_FROZEN                = 0x00004000,
-    DEBUFF_TYPE_PARALYZED             = 0x00010000,
-    DEBUFF_TYPE_POISON                = 0x00020000,
-    DEBUFF_TYPE_DIZZY                 = 0x00040000,
-    DEBUFF_TYPE_SHRINK                = 0x00080000,
-    DEBUFF_TYPE_STONE                 = 0x00100000,
-    DEBUFF_TYPE_STOP                  = 0x00200000,
-    DEBUFF_TYPE_DAZE                  = 0x01000000,
-    DEBUFF_TYPE_INVISIBLE             = 0x04000000,
+    DEBUFF_TYPE_SLEEP               = 0x00001000,
+    DEBUFF_TYPE_STATIC              = 0x00002000,
+    DEBUFF_TYPE_FROZEN              = 0x00004000,
+    DEBUFF_TYPE_PARALYZED           = 0x00010000,
+    DEBUFF_TYPE_POISON              = 0x00020000,
+    DEBUFF_TYPE_DIZZY               = 0x00040000,
+    DEBUFF_TYPE_SHRINK              = 0x00080000,
+    DEBUFF_TYPE_STONE               = 0x00100000,
+    DEBUFF_TYPE_STOP                = 0x00200000,
+    DEBUFF_TYPE_DAZE                = 0x01000000,
+    DEBUFF_TYPE_INVISIBLE           = 0x04000000,
 };
 
 enum GlobalOverrides {

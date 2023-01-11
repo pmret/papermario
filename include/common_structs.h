@@ -852,8 +852,8 @@ typedef struct BattleStatus {
     /* 0x04B */ s8 unk_4B;
     /* 0x04C */ s8 unk_4C[16];
     /* 0x05C */ s8 unk_5C[16];
-    /* 0x06C */ s16 unk_6C;
-    /* 0x06E */ s16 unk_6E;
+    /* 0x06C */ s16 cancelTargetMenuSubstate; // might be more generally for returning from nested 'inner' state
+    /* 0x06E */ s16 acceptTargetMenuSubstate; // might be more generally for returning from nested 'inner' state
     /* 0x070 */ s16 menuDisableFlags; /* 1 = jump, 2 = hammer, 4 = items */
     /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
