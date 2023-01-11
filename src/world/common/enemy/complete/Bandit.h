@@ -3,7 +3,7 @@
 
 #define BANDIT_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 5, \
     .itemDrops = { \
         { ITEM_HONEY_SYRUP, 10, 0 }, \

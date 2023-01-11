@@ -56,7 +56,7 @@ ActorPartBlueprint N(partsTable_80218EE8)[] = {
         .idleAnimations = N(idleAnimations_80218FC4),
         .defenseTable = N(defenseTable_80218E10),
         .eventFlags = ACTOR_EVENT_FLAG_FIREY,
-        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_2,
+        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAG_2,
         .unk_1C = 0xFD,
         .unk_1D = 0xF6,
     },

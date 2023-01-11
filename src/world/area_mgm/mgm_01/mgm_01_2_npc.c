@@ -632,7 +632,7 @@ API_CALLABLE(N(CreateMinigame)) {
 
     hudElemID = hud_element_create(&HES_StatusCoin);
     data->hudElemID = hudElemID;
-    hud_element_set_flags(data->hudElemID, HUD_ELEMENT_FLAGS_80);
+    hud_element_set_flags(data->hudElemID, HUD_ELEMENT_FLAG_80);
     hud_element_set_tint(data->hudElemID, 255, 255, 255);
 
     data->scoreWindowPosX = SCREEN_WIDTH + 1;
@@ -1018,7 +1018,7 @@ StaticNpc N(NpcData_Toad) = {
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 0.0f, 0.0f, -20.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .init = &N(EVS_NpcInit_Toad),
     .drops = TOAD_DROPS,
     .animations = TOAD_RED_ANIMS,

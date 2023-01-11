@@ -53,9 +53,9 @@ void entity_Padlock_push_player(Entity* entity) {
     f32 deltaX, deltaZ;
 
     if (playerStatus->colliderHeight < fabs(playerStatus->position.y - entity->position.y)) {
-        entity->flags |= ENTITY_FLAGS_DISABLE_COLLISION;
+        entity->flags |= ENTITY_FLAG_DISABLE_COLLISION;
     } else {
-        entity->flags &= ~ENTITY_FLAGS_DISABLE_COLLISION;
+        entity->flags &= ~ENTITY_FLAG_DISABLE_COLLISION;
     }
 
     if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
@@ -85,7 +85,7 @@ void entity_Padlock_idle(Entity* entity) {
     switch (data->state) {
         case 0:
             entity_Padlock_push_player(entity);
-            if (entity->flags & ENTITY_FLAGS_100000) {
+            if (entity->flags & ENTITY_FLAG_100000) {
                 data->state++;
                 sfx_play_sound(SOUND_269);
             }
@@ -113,7 +113,7 @@ void entity_Padlock_idle(Entity* entity) {
                 data->rotationSpeed = 3.0f;
                 data->state++;
                 fx_sparkles(FX_SPARKLES_0, entity->position.x, entity->position.y + 25.0f, entity->position.z, 10.0f);
-                entity->flags |= ENTITY_FLAGS_DISABLE_COLLISION;
+                entity->flags |= ENTITY_FLAG_DISABLE_COLLISION;
             }
             break;
         case 3:
@@ -173,7 +173,7 @@ void entity_Padlock_idle(Entity* entity) {
         case 8:
             if (--data->timer <= 0) {
                 data->state++;
-                entity->flags |= ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_HIDDEN;
+                entity->flags |= ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_HIDDEN;
                 exec_entity_commandlist(entity);
             }
             break;
@@ -182,9 +182,9 @@ void entity_Padlock_idle(Entity* entity) {
     if (data->state == 2 || data->state == 3 || data->state == 4 || data->state == 5 || data->state == 6 || data->state == 7 || data->state == 8) {
         data->blinkCounter++;
         if (data->blinkCounter & 1) {
-            entity->flags |= ENTITY_FLAGS_HIDDEN;
+            entity->flags |= ENTITY_FLAG_HIDDEN;
         } else {
-            entity->flags &= ~ENTITY_FLAGS_HIDDEN;
+            entity->flags &= ~ENTITY_FLAG_HIDDEN;
         }
     }
 }
@@ -227,7 +227,7 @@ void entity_PadlockBlueFace_init(Entity* entity) {
 
 EntityScript Entity_Padlock_Script = {
     es_SetCallback(entity_Padlock_idle, 0)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
@@ -237,7 +237,7 @@ EntityModelScript Entity_PadlockRedFace_RenderScript = STANDARD_ENTITY_MODEL_SCR
 EntityModelScript Entity_PadlockBlueFace_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_PadlockBlueFace_Render, RENDER_MODE_SURFACE_OPA);
 
 EntityBlueprint Entity_Padlock = {
-    .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_400 | ENTITY_FLAGS_HAS_SHADOW,
+    .flags = ENTITY_FLAG_SHOWS_INSPECT_PROMPT | ENTITY_FLAG_400 | ENTITY_FLAG_HAS_SHADOW,
     .typeDataSize = sizeof(PadlockData),
     .renderCommandList = Entity_Padlock_RenderScript,
     .modelAnimationNodes = 0,
@@ -250,7 +250,7 @@ EntityBlueprint Entity_Padlock = {
 };
 
 EntityBlueprint Entity_PadlockRedFrame = {
-    .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_400 | ENTITY_FLAGS_HAS_SHADOW,
+    .flags = ENTITY_FLAG_SHOWS_INSPECT_PROMPT | ENTITY_FLAG_400 | ENTITY_FLAG_HAS_SHADOW,
     .typeDataSize = sizeof(PadlockData),
     .renderCommandList = Entity_PadlockRedFrame_RenderScript,
     .modelAnimationNodes = 0,
@@ -263,7 +263,7 @@ EntityBlueprint Entity_PadlockRedFrame = {
 };
 
 EntityBlueprint Entity_PadlockRedFace = {
-    .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_400 | ENTITY_FLAGS_HAS_SHADOW,
+    .flags = ENTITY_FLAG_SHOWS_INSPECT_PROMPT | ENTITY_FLAG_400 | ENTITY_FLAG_HAS_SHADOW,
     .typeDataSize = sizeof(PadlockData),
     .renderCommandList = Entity_PadlockRedFace_RenderScript,
     .modelAnimationNodes = 0,
@@ -276,7 +276,7 @@ EntityBlueprint Entity_PadlockRedFace = {
  };
 
 EntityBlueprint Entity_PadlockBlueFace = {
-    .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_400 | ENTITY_FLAGS_HAS_SHADOW,
+    .flags = ENTITY_FLAG_SHOWS_INSPECT_PROMPT | ENTITY_FLAG_400 | ENTITY_FLAG_HAS_SHADOW,
     .typeDataSize = sizeof(PadlockData),
     .renderCommandList = Entity_PadlockBlueFace_RenderScript,
     .modelAnimationNodes = 0,

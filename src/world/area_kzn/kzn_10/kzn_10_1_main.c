@@ -13,7 +13,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 API_CALLABLE(N(func_8024030C_C7E48C)) {
-    if (gPlayerStatus.flags & PS_FLAGS_CAMERA_DOESNT_FOLLOW) {
+    if (gPlayerStatus.flags & PS_FLAG_CAMERA_DOESNT_FOLLOW) {
         return ApiStatus_BLOCK;
     } else {
         return ApiStatus_DONE2;

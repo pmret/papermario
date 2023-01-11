@@ -39,7 +39,7 @@ MobileAISettings N(AISettings_MontyMole_WallAmbush) = {
 EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
     EVT_CALL(func_800445D4, LVar0)
     EVT_IF_EQ(LVar0, 100)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_20, 1)
+        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 1)
         EVT_LABEL(10)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar2, 130)
@@ -66,9 +66,9 @@ EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, 0)
         EVT_CALL(NpcJump0, NPC_SELF, LVar1, LVar2, LVar3, 20)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, FALSE)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_20, 0)
+        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 0)
         EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_40000000, 1)
+        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_40000000, 1)
     EVT_END_IF
     EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_MontyMole_WallAmbush)))
     EVT_RETURN

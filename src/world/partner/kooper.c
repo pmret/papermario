@@ -51,7 +51,7 @@ s32 func_802BD17C_31B19C(Npc* kooper) {
     } else {
         D_802BEC6C = 1;
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
-        set_item_entity_flags(D_802BEC68, ITEM_ENTITY_FLAGS_200000);
+        set_item_entity_flags(D_802BEC68, ITEM_ENTITY_FLAG_200000);
         return 1;
     }
 }
@@ -200,7 +200,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
     if (currentEncounter->unk_08 == 0) {
         if (isInitialCall) {
             func_802BD5F4_31B614(kooper);
-            if (playerStatus->animFlags & PA_FLAGS_CHANGING_MAP) {
+            if (playerStatus->animFlags & PA_FLAG_CHANGING_MAP) {
                 return ApiStatus_DONE2;
             }
 
@@ -278,7 +278,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                     }
                     disable_npc_blur(kooper);
                     if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
-                        if (!(playerStatus->animFlags & PA_FLAGS_CHANGING_MAP)) {
+                        if (!(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
                             suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                         } else {
                             suggest_player_anim_clearUnkFlag(ANIM_Mario_Running);
@@ -294,7 +294,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 
                         kooper->moveToPos.y = playerStatus->position.y;
                         kooper->moveToPos.z = playerStatus->position.y + playerStatus->colliderHeight / 3;
-                        playerStatus->flags |= PS_FLAGS_JUMPING;
+                        playerStatus->flags |= PS_FLAG_JUMPING;
                         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
 
                         suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
@@ -405,7 +405,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                             kooper->moveSpeed = 14.0f;
                         }
 
-                        if (!(func_800397E8(kooper, 6.0f) || playerStatus->flags & (PS_FLAGS_JUMPING | PS_FLAGS_FALLING))) {
+                        if (!(func_800397E8(kooper, 6.0f) || playerStatus->flags & (PS_FLAG_JUMPING | PS_FLAG_FALLING))) {
                             kooper->pos.y = (kooper->pos.y + ((playerStatus->position.y - kooper->pos.y) / 10.0f));
                         }
 
@@ -694,7 +694,7 @@ void world_kooper_pre_battle(Npc* kooper) {
         }
 
         D_802BEB40_31CB60 = 0;
-        playerStatus->flags &= ~PS_FLAGS_JUMPING;
+        playerStatus->flags &= ~PS_FLAG_JUMPING;
 
         kooper->jumpVelocity = 0.0f;
         kooper->flags &= ~NPC_FLAG_JUMPING;

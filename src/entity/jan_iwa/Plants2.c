@@ -38,7 +38,7 @@ extern AnimScript Entity_MunchlesiaReset1_Animation;
 extern StaticAnimatorNode* Entity_MunchlesiaReset1_Mesh[];
 
 void entity_BellbellPlant_idle(Entity* entity) {
-    if ((gPlayerStatus.animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
+    if ((gPlayerStatus.animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) &&
         (entity->collisionFlags & (ENTITY_COLLISION_PLAYER_HAMMER | ENTITY_COLLISION_PLAYER_TOUCH_WALL))) {
         exec_entity_commandlist(entity);
         play_model_animation(entity->virtualModelIndex, Entity_BellbellPlant_AnimationUse);
@@ -46,7 +46,7 @@ void entity_BellbellPlant_idle(Entity* entity) {
 }
 
 void entity_TrumpetPlant_idle(Entity* entity) {
-    if ((gPlayerStatus.animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
+    if ((gPlayerStatus.animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) &&
         (entity->collisionFlags & (ENTITY_COLLISION_PLAYER_HAMMER | ENTITY_COLLISION_PLAYER_TOUCH_WALL))) {
         exec_entity_commandlist(entity);
         play_model_animation(entity->virtualModelIndex, Entity_TrumpetPlant_AnimationUse);
@@ -95,7 +95,7 @@ void func_802BC050_E2E980(Entity* entity) {
 
     if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
         Entity* resetMunchlesia;
-        gPlayerStatus.animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
+        gPlayerStatus.animFlags |= PA_FLAG_INTERRUPT_USE_PARTNER;
         func_800EF300();
         resetMunchlesia = get_entity_by_index(entity->dataBuf.munchlesia->unk_00);
         exec_entity_commandlist(entity);
@@ -147,7 +147,7 @@ void func_802BC2B4_E2EBE4(Entity* entity) {
     entity_Munchlesia_create_child(entity, &Entity_MunchlesiaBeginChew);
     gPlayerStatus.prevActionState = 0;
     gPlayerStatus.actionState = 0;
-    gPlayerStatus.flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
+    gPlayerStatus.flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
     suggest_player_anim_setUnkFlag(ANIM_Mario_8001F);
 }
 
@@ -195,17 +195,17 @@ void func_802BC3E4_E2ED14(Entity* entity) {
 
 EntityScript Entity_BellbellPlant_Script = {
     es_SetCallback(entity_BellbellPlant_idle, 0)
-    es_ClearFlags(ENTITY_FLAGS_SHOWS_INSPECT_PROMPT)
+    es_ClearFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
     es_PlaySound(SOUND_F1)
     es_SetCallback(NULL, 60)
-    es_SetFlags(ENTITY_FLAGS_SHOWS_INSPECT_PROMPT)
+    es_SetFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
     es_Restart
     es_End
 };
 
 EntityScript Entity_TrumpetPlant_Script = {
     es_SetCallback(entity_TrumpetPlant_idle, 0)
-    es_ClearFlags(ENTITY_FLAGS_SHOWS_INSPECT_PROMPT)
+    es_ClearFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
     es_PlaySound(SOUND_F3)
     es_SetCallback(NULL, 15)
     es_Call(entity_TrumpetPlant_create_effect)
@@ -220,7 +220,7 @@ EntityScript Entity_TrumpetPlant_Script = {
     es_SetCallback(NULL, 3)
     es_Call(entity_TrumpetPlant_create_effect)
     es_SetCallback(NULL, 32)
-    es_SetFlags(ENTITY_FLAGS_SHOWS_INSPECT_PROMPT)
+    es_SetFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
     es_Restart
     es_End
 };
@@ -240,9 +240,9 @@ EntityScript Entity_MunchlesiaReset_Script = {
     es_SetCallback(NULL, 7)
     es_Call(func_802BC250_E2EB80)
     es_PlaySound(SOUND_209B)
-    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetFlags(ENTITY_FLAG_HIDDEN)
     es_SetCallback(NULL, 3)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
@@ -251,27 +251,27 @@ EntityScript Entity_MunchlesiaGrab_Script = {
     es_Call(func_802BC0F0_E2EA20)
     es_SetCallback(func_802BC17C_E2EAAC, 4)
     es_Call(func_802BC274_E2EBA4)
-    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetFlags(ENTITY_FLAG_HIDDEN)
     es_SetCallback(NULL, 3)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
 EntityScript Entity_MunchlesiaEnvelop_Script = {
     es_SetCallback(NULL, 7)
     es_Call(func_802BC2B4_E2EBE4)
-    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetFlags(ENTITY_FLAG_HIDDEN)
     es_SetCallback(NULL, 3)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
 EntityScript Entity_MunchlesiaBeginChew_Script = {
     es_SetCallback(NULL, 8)
     es_Call(func_802BC308_E2EC38)
-    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetFlags(ENTITY_FLAG_HIDDEN)
     es_SetCallback(NULL, 3)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
@@ -280,9 +280,9 @@ EntityScript Entity_MunchlesiaChewing_Script = {
     es_SetCallback(func_802BC3E4_E2ED14, 44)
     es_SetCallback(NULL, 13)
     es_Call(func_802BC32C_E2EC5C)
-    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetFlags(ENTITY_FLAG_HIDDEN)
     es_SetCallback(NULL, 3)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
@@ -292,27 +292,27 @@ EntityScript Entity_MunchlesiaSpitOut_Script = {
     es_PlaySound(SOUND_393)
     es_SetCallback(NULL, 4)
     es_Call(entity_Munchlesia_create_child_reset1)
-    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetFlags(ENTITY_FLAG_HIDDEN)
     es_SetCallback(NULL, 3)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
 EntityScript Entity_MunchlesiaReset1_Script = {
     es_SetCallback(NULL, 8)
     es_Call(entity_Munchlesia_create_child_reset2)
-    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetFlags(ENTITY_FLAG_HIDDEN)
     es_SetCallback(NULL, 3)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
 EntityScript Entity_MunchlesiaReset2_Script = {
     es_SetCallback(NULL, 9)
     es_Call(func_802BC220_E2EB50)
-    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetFlags(ENTITY_FLAG_HIDDEN)
     es_SetCallback(NULL, 10)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
@@ -327,7 +327,7 @@ DmaEntry Entity_BellbellPlant_dma[] = { ENTITY_ROM(BellbellPlant_gfx), ENTITY_RO
 DmaEntry Entity_TrumpetPlant_dma[] = { ENTITY_ROM(TrumpetPlant_gfx), ENTITY_ROM(TrumpetPlant_anim) };
 
 EntityBlueprint Entity_BellbellPlant = {
-    .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_SHOWS_INSPECT_PROMPT | ENTITY_FLAG_SQUARE_SHADOW | ENTITY_FLAG_400 | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = 0,
     .renderCommandList = Entity_BellbellPlant_AnimationIdle,
     .modelAnimationNodes = Entity_BellbellPlant_Mesh,
@@ -340,7 +340,7 @@ EntityBlueprint Entity_BellbellPlant = {
 };
 
 EntityBlueprint Entity_TrumpetPlant = {
-    .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_SHOWS_INSPECT_PROMPT | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(TrumpetPlantData),
     .renderCommandList = Entity_TrumpetPlant_AnimationIdle,
     .modelAnimationNodes = Entity_TrumpetPlant_Mesh,
@@ -353,7 +353,7 @@ EntityBlueprint Entity_TrumpetPlant = {
 };
 
 EntityBlueprint Entity_Munchlesia = {
-    .flags = ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
+    .flags = ENTITY_FLAG_SQUARE_SHADOW | ENTITY_FLAG_400 | ENTITY_FLAG_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_RenderNone_Script,
     .modelAnimationNodes = 0,
@@ -366,7 +366,7 @@ EntityBlueprint Entity_Munchlesia = {
 };
 
 EntityBlueprint Entity_MunchlesiaReset = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaReset_AnimationIdle,
     .modelAnimationNodes = Entity_MunchlesiaReset_Mesh,
@@ -379,7 +379,7 @@ EntityBlueprint Entity_MunchlesiaReset = {
 };
 
 EntityBlueprint Entity_MunchlesiaGrab = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaGrab_Animation,
     .modelAnimationNodes = Entity_MunchlesiaGrab_Mesh,
@@ -392,7 +392,7 @@ EntityBlueprint Entity_MunchlesiaGrab = {
 };
 
 EntityBlueprint Entity_MunchlesiaEnvelop = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaEnvelop_Animation,
     .modelAnimationNodes = Entity_MunchlesiaEnvelop_Mesh,
@@ -405,7 +405,7 @@ EntityBlueprint Entity_MunchlesiaEnvelop = {
 };
 
 EntityBlueprint Entity_MunchlesiaBeginChew = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaBeginChew_Animation,
     .modelAnimationNodes = Entity_MunchlesiaBeginChew_Mesh,
@@ -418,7 +418,7 @@ EntityBlueprint Entity_MunchlesiaBeginChew = {
 };
 
 EntityBlueprint Entity_MunchlesiaChewing = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaChewing_Animation,
     .modelAnimationNodes = Entity_MunchlesiaChewing_Mesh,
@@ -431,7 +431,7 @@ EntityBlueprint Entity_MunchlesiaChewing = {
 };
 
 EntityBlueprint Entity_MunchlesiaSpitOut = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaSpitOut_Animation,
     .modelAnimationNodes = Entity_MunchlesiaSpitOut_Mesh,
@@ -444,7 +444,7 @@ EntityBlueprint Entity_MunchlesiaSpitOut = {
 };
 
 EntityBlueprint Entity_MunchlesiaReset1 = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaReset1_Animation,
     .modelAnimationNodes = Entity_MunchlesiaReset1_Mesh,
@@ -457,7 +457,7 @@ EntityBlueprint Entity_MunchlesiaReset1 = {
 };
 
 EntityBlueprint Entity_MunchlesiaReset2 = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaReset_AnimationIdle,
     .modelAnimationNodes = Entity_MunchlesiaReset_Mesh,

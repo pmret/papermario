@@ -36,25 +36,25 @@ void action_update_walk(void) {
     s32 stickAxisY;
     AnimID anim;
     s32 changedAnim = FALSE;
-    if (playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) {
+    if (playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS) {
         action_update_walk_peach();
         return;
     }
 
-    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+    if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(
-            PS_FLAGS_ACTION_STATE_CHANGED | PS_FLAGS_SCRIPTED_FALL | PS_FLAGS_ARMS_RAISED);
+            PS_FLAG_ACTION_STATE_CHANGED | PS_FLAG_SCRIPTED_FALL | PS_FLAG_ARMS_RAISED);
         playerStatus->unk_60 = 0;
         changedAnim = TRUE;
 
-        if (!(playerStatus->flags & PS_FLAGS_CUTSCENE_MOVEMENT)) {
+        if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
             playerStatus->currentSpeed = playerStatus->walkSpeed;
         }
 
-        if (playerStatus->animFlags & PA_FLAGS_8BIT_MARIO) {
+        if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
             anim = ANIM_Mario_90003;
         }
-        else if (!(playerStatus->animFlags & PA_FLAGS_USING_WATT)) {
+        else if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
             anim = ANIM_Mario_Walking;
         }
         else {
@@ -63,7 +63,7 @@ void action_update_walk(void) {
         suggest_player_anim_clearUnkFlag(anim);
     }
 
-    if (playerStatus->flags & PS_FLAGS_CUTSCENE_MOVEMENT) {
+    if (playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT) {
         playerStatus->targetYaw = playerStatus->heading;
         try_player_footstep_sounds(8);
         return;
@@ -81,17 +81,17 @@ void action_update_walk(void) {
             }
 
             if (fabsf(PrevPlayerCamRelativeYaw - moveVectorAngle) <= 90.0f && abs(moveVectorMagnitude - D_800F7B44) < 20) {
-                if (!(playerStatus->animFlags & PA_FLAGS_80000000)) {
+                if (!(playerStatus->animFlags & PA_FLAG_80000000)) {
                     if (moveVectorMagnitude >= 20.0f) {
                         playerStatus->targetYaw = moveVectorAngle;
                     }
                 }
-                playerStatus->animFlags &= ~PA_FLAGS_80000000;
+                playerStatus->animFlags &= ~PA_FLAG_80000000;
             } else {
-                if (playerStatus->animFlags & PA_FLAGS_80000000) {
+                if (playerStatus->animFlags & PA_FLAG_80000000) {
                     playerStatus->targetYaw = moveVectorAngle;
                 } else {
-                    playerStatus->animFlags |= PA_FLAGS_80000000;
+                    playerStatus->animFlags |= PA_FLAG_80000000;
                 }
             }
 
@@ -121,25 +121,25 @@ void action_update_run(void) {
     s32 phi_s3;
 
     phi_s3 = 0;
-    if (playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) {
+    if (playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS) {
         action_update_run_peach();
         return;
     }
 
-    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~(PS_FLAGS_ACTION_STATE_CHANGED |
-            PS_FLAGS_SCRIPTED_FALL | PS_FLAGS_ARMS_RAISED);
+    if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~(PS_FLAG_ACTION_STATE_CHANGED |
+            PS_FLAG_SCRIPTED_FALL | PS_FLAG_ARMS_RAISED);
         D_8010C980 = 0;
         playerStatus->unk_60 = 0;
         phi_s3 = 1;
 
-        if (!(playerStatus->flags & PS_FLAGS_CUTSCENE_MOVEMENT)) {
+        if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
             playerStatus->currentSpeed = playerStatus->runSpeed;
         }
-        if (playerStatus->animFlags & PA_FLAGS_8BIT_MARIO) {
+        if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
             anim = ANIM_Mario_90003;
         } else {
-            if (!(playerStatus->animFlags & PA_FLAGS_USING_WATT)) {
+            if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
                 anim = ANIM_Mario_Running;
             } else {
                 anim = ANIM_Mario_60002;
@@ -148,7 +148,7 @@ void action_update_run(void) {
         suggest_player_anim_clearUnkFlag(anim);
     }
 
-    if (playerStatus->flags & PS_FLAGS_CUTSCENE_MOVEMENT) {
+    if (playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT) {
         playerStatus->targetYaw = playerStatus->heading;
         try_player_footstep_sounds(4);
         return;
@@ -157,7 +157,7 @@ void action_update_run(void) {
     D_8010C980++;
     runSpeedModifier = 1.0f;
 
-    if (playerStatus->animFlags & PA_FLAGS_SPINNING) {
+    if (playerStatus->animFlags & PA_FLAG_SPINNING) {
         runSpeedModifier = 1.5f;
     }
 
@@ -178,15 +178,15 @@ void action_update_run(void) {
         }
 
         if (fabsf(PrevPlayerCamRelativeYaw - moveX) <= 90.0f) {
-            if (!(playerStatus->animFlags & PA_FLAGS_80000000)) {
+            if (!(playerStatus->animFlags & PA_FLAG_80000000)) {
                 playerStatus->targetYaw = moveX;
             }
-            playerStatus->animFlags &= ~PA_FLAGS_80000000;
+            playerStatus->animFlags &= ~PA_FLAG_80000000;
         } else {
-            if (playerStatus->animFlags & PA_FLAGS_80000000) {
+            if (playerStatus->animFlags & PA_FLAG_80000000) {
                 playerStatus->targetYaw = moveX;
             } else {
-                playerStatus->animFlags |= PA_FLAGS_80000000;
+                playerStatus->animFlags |= PA_FLAG_80000000;
             }
         }
 
@@ -205,7 +205,7 @@ void action_update_run(void) {
 }
 
 void func_802B6550_E23C30(void) {
-    if (!(gPlayerStatus.animFlags & PA_FLAGS_INVISIBLE)) {
+    if (!(gPlayerStatus.animFlags & PA_FLAG_INVISIBLE)) {
         if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
             suggest_player_anim_clearUnkFlag(WalkPeachAnims[gGameStatusPtr->peachCookingIngredient]);
             return;
@@ -221,16 +221,16 @@ static void action_update_walk_peach(void) {
     f32 magnitude;
     f32 angle;
 
-    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
         playerStatus->unk_60 = 0;
-        if (!(playerStatus->flags & PS_FLAGS_CUTSCENE_MOVEMENT)) {
+        if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
             playerStatus->currentSpeed = playerStatus->walkSpeed;
         }
         func_802B6550_E23C30();
     }
 
-    if (playerStatus->flags & PS_FLAGS_CUTSCENE_MOVEMENT) {
+    if (playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT) {
         playerStatus->targetYaw = playerStatus->heading;
         try_player_footstep_sounds(8);
         return;
@@ -258,14 +258,14 @@ static void action_update_run_peach(void) {
     f32 moveX;
     f32 moveY;
 
-    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
         playerStatus->unk_60 = 0;
-        if (!(playerStatus->flags & PS_FLAGS_CUTSCENE_MOVEMENT)) {
+        if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
             playerStatus->currentSpeed = playerStatus->runSpeed;
         }
 
-        if (!(playerStatus->animFlags & PA_FLAGS_INVISIBLE)) {
+        if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
             gameStatus = gGameStatusPtr;
             if (!(gameStatus->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
                 if (!gameStatus->peachCookingIngredient) {
@@ -281,7 +281,7 @@ static void action_update_run_peach(void) {
         }
     }
 
-    if (playerStatus->flags & PS_FLAGS_CUTSCENE_MOVEMENT) {
+    if (playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT) {
         playerStatus->targetYaw = playerStatus->heading;
         try_player_footstep_sounds(4);
         return;

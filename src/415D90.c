@@ -527,25 +527,25 @@ s32 func_802A11B0(void) {
             for (i = 0; i < main_menu_numOptions; i++) {
                 D_802AD010[i] = id = hud_element_create(main_battle_menu_JumpHudScripts[i]);
                 hud_element_set_render_depth(id, 5);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                 hud_element_set_scale(id, 0.75f);
 
                 D_802AD028[i] = id = hud_element_create(&HES_ProjectorSpot);
                 hud_element_create_transform_B(id);
                 hud_element_set_render_depth(id, 10);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             D_802AD040 = id = hud_element_create(&HES_ProjectorSpot);
             hud_element_create_transform_B(id);
             hud_element_set_render_depth(id, 7);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DISABLED);
 
             D_802AD044 = id = hud_element_create(&HES_ProjectorReel);
             hud_element_create_transform_B(id);
@@ -553,8 +553,8 @@ s32 func_802A11B0(void) {
             hud_element_set_render_pos(id, 40, 212);
             hud_element_set_tint(id, 0, 91, 127);
             hud_element_set_transform_rotation_pivot(id, 0x10, -0x10);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
             hud_element_set_alpha(id, 240);
 
             D_802AD048 = id = hud_element_create(&HES_ProjectorReel);
@@ -563,8 +563,8 @@ s32 func_802A11B0(void) {
             hud_element_set_render_pos(id, 39, 212);
             hud_element_set_tint(id, 0, 91, 127);
             hud_element_set_transform_rotation_pivot(id, 16, -16);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
             hud_element_set_alpha(id, 240);
 
             D_802AD04C = id = hud_element_create(&HES_ProjectorBeam);
@@ -575,34 +575,34 @@ s32 func_802A11B0(void) {
             hud_element_set_transform_rotation_pivot(id, 0, 0);
             hud_element_set_transform_rotation(id, 0.0f, 0.0f, -45.0f);
             hud_element_set_alpha(id, 200);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DISABLED);
 
             D_802AD05C = id = hud_element_create(&HES_SwapBackground);
             hud_element_set_render_depth(id, 0);
             hud_element_set_render_pos(id, 97, 208);
             hud_element_set_tint(id, 255, 255, 255);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
             hud_element_set_alpha(id, 230);
 
             D_802AD050 = id = hud_element_create(&HES_SwapZ);
             hud_element_set_render_depth(id, 5);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
             hud_element_set_render_pos(id, 94, 209);
 
             D_802AD054 = id = hud_element_create(&HES_SwapArrowLeft);
             hud_element_set_render_depth(id, 5);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
             hud_element_set_render_pos(id, 81, 210);
 
             D_802AD058 = id = hud_element_create(&HES_SwapArrowRight);
             hud_element_set_render_depth(id, 5);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
             hud_element_set_render_pos(id, 102, 210);
             D_802AD00A = 100;
             D_802AD001 = 3;
@@ -616,7 +616,7 @@ s32 func_802A11B0(void) {
                 case 1:
                     if (D_802AD001 == 1) {
                         id = D_802AD04C;
-                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                     }
                 default:
                     D_802AD001--;
@@ -634,12 +634,12 @@ s32 func_802A11B0(void) {
                         t = D_802AD064 + y;
                         id = D_802AD010[i];
                         hud_element_set_render_pos(id, l, t);
-                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
 
                         id = D_802AD028[i];
                         hud_element_set_render_pos(id, l, t);
                         hud_element_set_alpha(id, 100);
-                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                     }
 
                     x = 0.0f;
@@ -653,7 +653,7 @@ s32 func_802A11B0(void) {
                     hud_element_set_render_pos(id, l, t);
                     hud_element_set_alpha(id, 180);
                     hud_element_set_scale(id, 0.85f);
-                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                     D_802AD000 = 2;
                     break;
             }
@@ -810,9 +810,9 @@ void btl_draw_menu_wheel(void) {
                     hud_element_set_alpha(id, (opacity * 180) / 255);
                     hud_element_set_scale(id, 1.2f);
                     if (!cond) {
-                        hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_set_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                     } else {
-                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                     }
                     func_80144238(id);
                 }
@@ -1107,33 +1107,33 @@ s32 func_802A2C84(void) {
                 id = hud_element_create(battle_menu_moveOptionIconScripts[battle_menu_moveOptionIndexMap[i]]);
                 battle_menu_moveOptionIconIDs[i] = id;
                 hud_element_set_scale(id, 0.45f);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
             }
 
             id = hud_element_create(&HES_AnimatedHandPointer);
             battle_menu_moveCursorIcon = id;
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
             hud_element_set_render_pos(id, battle_menu_moveX, battle_menu_moveY);
 
             id = hud_element_create(&HES_GreenArrowUp);
             battle_menu_moveUpArrowIcon = id;
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
             hud_element_set_render_pos(id, battle_menu_moveX + 39, battle_menu_moveY - 7);
 
             id = hud_element_create(&HES_GreenArrowDown);
             battle_menu_moveDownArrowIcon = id;
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
             hud_element_set_render_pos(id, battle_menu_moveX + 39, battle_menu_moveY + 78);
 
             if (battle_menu_hasSpiritsMenu == 0) {
                 id = hud_element_create(&HES_StatusFlower);
                 battle_menu_moveTitleIcon = id;
-                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
             } else {
                 id = hud_element_create(&HES_MenuStarPower);
                 battle_menu_moveTitleIcon = id;
                 hud_element_set_scale(id, 0.75f);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
             }
             hud_element_set_render_pos(id, battle_menu_moveX + 56, battle_menu_moveY);
 
@@ -1169,7 +1169,7 @@ s32 func_802A2C84(void) {
                             break;
                     }
                 }
-                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
                 hud_element_set_render_pos(id, battle_menu_moveX + 56, battle_menu_moveY);
             }
 
@@ -1798,19 +1798,19 @@ s32 func_802A4A54(void) {
             for (i = 0; i < D_802AD66C; i++) {
                 D_802AD628[i] = id = hud_element_create(D_802AD640[i]);
                 hud_element_set_scale(id, 0.45f);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
             }
 
             D_802AD618 = id = hud_element_create(&HES_AnimatedHandPointer);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
             hud_element_set_render_pos(id, D_802AD63C, D_802AD63E);
 
             D_802AD61C = id = hud_element_create(&HES_GreenArrowUp);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
             hud_element_set_render_pos(id, D_802AD63C + 39, D_802AD63E - 7);
 
             D_802AD620 = id = hud_element_create(&HES_GreenArrowDown);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
             hud_element_set_render_pos(id, D_802AD63C + 39, D_802AD63E + 78);
 
             D_802AD614 = MSG_PAL_STANDARD;

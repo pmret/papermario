@@ -45,7 +45,7 @@ void func_802B70B4(void) {
     D_802B79A8_E21858->unk_2A = 0;
     D_802B79A8_E21858->scale = 0.1f;
     TalkNotificationCallback = func_802B742C;
-    playerStatus->animFlags |= PA_FLAGS_SPEECH_PROMPT_AVAILABLE;
+    playerStatus->animFlags |= PA_FLAG_SPEECH_PROMPT_AVAILABLE;
     temp = D_802B79A8_E21858;
     temp->unk_2A = 0;
     temp->scale = 0.4f;
@@ -57,7 +57,7 @@ void func_802B71C8(void) {
     FoldImageRecPart sp20;
     Matrix4f sp38, sp78;
 
-    if (gPlayerStatus.animFlags & PA_FLAGS_SPEECH_PROMPT_AVAILABLE) {
+    if (gPlayerStatus.animFlags & PA_FLAG_SPEECH_PROMPT_AVAILABLE) {
         guScaleF(sp38, D_802B79A8_E21858->scale, D_802B79A8_E21858->scale, D_802B79A8_E21858->scale);
         guRotateF(sp78, D_802B79A8_E21858->unk_10 - gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp38, sp78, sp38);
@@ -91,12 +91,12 @@ void func_802B742C(void) {
     f32 unk10;
     Npc* npc;
 
-    if (((playerStatus->flags & (PS_FLAGS_HAS_CONVERSATION_NPC | PS_FLAGS_ENTERING_BATTLE | PS_FLAGS_PAUSED))
-            != PS_FLAGS_HAS_CONVERSATION_NPC) ||
+    if (((playerStatus->flags & (PS_FLAG_HAS_CONVERSATION_NPC | PS_FLAG_ENTERING_BATTLE | PS_FLAG_PAUSED))
+            != PS_FLAG_HAS_CONVERSATION_NPC) ||
         (gEncounterState == ENCOUNTER_STATE_CONVERSATION) ||
-        (playerStatus->animFlags & PA_FLAGS_USING_WATT) ||
+        (playerStatus->animFlags & PA_FLAG_USING_WATT) ||
         (playerStatus->inputEnabledCounter != 0) ||
-        (playerStatus->animFlags & PA_FLAGS_SPINNING))
+        (playerStatus->animFlags & PA_FLAG_SPINNING))
     {
         D_802B79A8_E21858->unk_2A = 3;
     }
@@ -137,7 +137,7 @@ void func_802B742C(void) {
             if ((unk10 >= 70.0f && unk10 <= 110.0f) || (unk10 >= 250.0f && unk10 <= 290.0f)) {
                 TalkNotificationCallback = NULL;
                 playerStatus->encounteredNPC = NULL;
-                playerStatus->animFlags &= ~PA_FLAGS_SPEECH_PROMPT_AVAILABLE;
+                playerStatus->animFlags &= ~PA_FLAG_SPEECH_PROMPT_AVAILABLE;
                 return;
             }
             var_a2 = e20eb0_UnkAngleFunc1(unk10);

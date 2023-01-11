@@ -28,10 +28,10 @@ API_CALLABLE(N(RhuffUnravelUpdate)) {
 
     if (rugRotAngle == 0) {
         npc->currentAnim = ANIM_Rowf_Idle;
-        enemy->flags &= ~ENEMY_FLAGS_8000000;
+        enemy->flags &= ~ENEMY_FLAG_8000000;
     } else {
         npc->currentAnim = ANIM_Rowf_Walk;
-        enemy->flags |= ENEMY_FLAGS_8000000;
+        enemy->flags |= ENEMY_FLAG_8000000;
     }
 
     if (rugRotAngle == -60) {
@@ -83,26 +83,26 @@ void N(gfx_build_rowf_rug_with_ripples)(void) {
 
 API_CALLABLE(N(RevealRowfBadges)) {
     if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableA)) {
-        clear_item_entity_flags(gGameStatusPtr->shopItemEntities[0].index, ITEM_ENTITY_FLAGS_HIDDEN);
+        clear_item_entity_flags(gGameStatusPtr->shopItemEntities[0].index, ITEM_ENTITY_FLAG_HIDDEN);
     }
     if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableB)) {
-        clear_item_entity_flags(gGameStatusPtr->shopItemEntities[1].index, ITEM_ENTITY_FLAGS_HIDDEN);
+        clear_item_entity_flags(gGameStatusPtr->shopItemEntities[1].index, ITEM_ENTITY_FLAG_HIDDEN);
     }
     if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableC)) {
-        clear_item_entity_flags(gGameStatusPtr->shopItemEntities[2].index, ITEM_ENTITY_FLAGS_HIDDEN);
+        clear_item_entity_flags(gGameStatusPtr->shopItemEntities[2].index, ITEM_ENTITY_FLAG_HIDDEN);
     }
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(HideRowfBadges)) {
     if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableA)) {
-        set_item_entity_flags(gGameStatusPtr->shopItemEntities[0].index, ITEM_ENTITY_FLAGS_HIDDEN);
+        set_item_entity_flags(gGameStatusPtr->shopItemEntities[0].index, ITEM_ENTITY_FLAG_HIDDEN);
     }
     if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableB)) {
-        set_item_entity_flags(gGameStatusPtr->shopItemEntities[1].index, ITEM_ENTITY_FLAGS_HIDDEN);
+        set_item_entity_flags(gGameStatusPtr->shopItemEntities[1].index, ITEM_ENTITY_FLAG_HIDDEN);
     }
     if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableC)) {
-        set_item_entity_flags(gGameStatusPtr->shopItemEntities[2].index, ITEM_ENTITY_FLAGS_HIDDEN);
+        set_item_entity_flags(gGameStatusPtr->shopItemEntities[2].index, ITEM_ENTITY_FLAG_HIDDEN);
     }
     return ApiStatus_DONE2;
 }
@@ -621,7 +621,7 @@ EvtScript N(EVS_NpcInit_Rowf) = {
             EVT_END_IF
     EVT_END_SWITCH
     EVT_SET(AF_MAC_41, FALSE)
-    EVT_CALL(SetModelFlags, MODEL_ju_2, MODEL_FLAGS_FLAG_200, FALSE)
+    EVT_CALL(SetModelFlags, MODEL_ju_2, MODEL_FLAG_FLAG_200, FALSE)
     EVT_CALL(EnableGroup, MODEL_jutan1, FALSE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
@@ -640,9 +640,9 @@ EvtScript N(EVS_NpcInit_Rowf) = {
     EVT_END_IF
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(SetModelFlags, MODEL_b1, MODEL_FLAGS_FLAG_4, FALSE)
-        EVT_CALL(SetModelFlags, MODEL_b2, MODEL_FLAGS_FLAG_4, FALSE)
-        EVT_CALL(SetModelFlags, MODEL_b3, MODEL_FLAGS_FLAG_4, FALSE)
+        EVT_CALL(SetModelFlags, MODEL_b1, MODEL_FLAG_FLAG_4, FALSE)
+        EVT_CALL(SetModelFlags, MODEL_b2, MODEL_FLAG_FLAG_4, FALSE)
+        EVT_CALL(SetModelFlags, MODEL_b3, MODEL_FLAG_FLAG_4, FALSE)
         EVT_CALL(N(HideRowfBadges))
         EVT_LABEL(0)
         EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableA, FALSE)
@@ -709,13 +709,13 @@ s32 N(ExtraAnims_Rowf)[] = {
 NpcSettings N(NpcSettings_Rowf) = {
     .height = 36,
     .radius = 24,
-    .flags = ENEMY_FLAGS_1,
+    .flags = ENEMY_FLAG_1,
 };
 
 NpcSettings N(NpcSettings_Rhuff) = {
     .height = 27,
     .radius = 18,
-    .flags = ENEMY_FLAGS_1,
+    .flags = ENEMY_FLAG_1,
 };
 
 StaticNpc N(NpcData_RowfAndRhuff)[] = {
@@ -724,10 +724,10 @@ StaticNpc N(NpcData_RowfAndRhuff)[] = {
         .settings = &N(NpcSettings_Rowf),
         .pos = { -213.0f, -54.0f, 256.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rowf),
         .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
@@ -742,10 +742,10 @@ StaticNpc N(NpcData_RowfAndRhuff)[] = {
         .settings = &N(NpcSettings_Rhuff),
         .pos = { -250.0f, 0.0f, 263.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rhuff),
         .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },

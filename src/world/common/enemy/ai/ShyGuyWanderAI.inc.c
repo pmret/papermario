@@ -78,7 +78,7 @@ ApiStatus N(ShyGuyWanderAI_Main)(Evt* script, s32 isInitialCall) {
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
     
-   if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+   if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAG_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
@@ -92,14 +92,14 @@ ApiStatus N(ShyGuyWanderAI_Main)(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
        
-        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
+        } else if (enemy->flags & ENEMY_FLAG_40000000) {
             script->functionTemp[0] = 12;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
-        enemy->flags &= ~ENEMY_FLAGS_40000000;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        enemy->flags &= ~ENEMY_FLAG_40000000;
 
         hitDepth = 100.0f;
         posX = npc->pos.x;

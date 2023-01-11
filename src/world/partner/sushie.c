@@ -354,7 +354,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 0;
     }
     playerData->partnerUsedTime[PARTNER_SUSHIE]++;
-    playerStatus->animFlags &= ~PA_FLAGS_RIDING_PARTNER;
+    playerStatus->animFlags &= ~PA_FLAG_RIDING_PARTNER;
 
     switch (script->functionTemp[0]) {
         case 0:
@@ -450,7 +450,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             disable_npc_shadow(npc);
             func_8003D624(npc, 4, 2, 0, 0, 0, 0);
             npc->currentAnim = 0x7000A;
-            playerStatus->flags |= PS_FLAGS_MOVEMENT_LOCKED;
+            playerStatus->flags |= PS_FLAG_MOVEMENT_LOCKED;
             dist = dist2D(playerStatus->position.x, playerStatus->position.z, npc->moveToPos.x, npc->moveToPos.z);
             npc->jumpVelocity = 5.0f;
             npc->jumpScale = 0.6f;
@@ -483,7 +483,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             if (npc->duration == 0) {
                 set_action_state(ACTION_STATE_RIDE);
                 disable_player_shadow();
-                playerStatus->flags &= ~PS_FLAGS_MOVEMENT_LOCKED;
+                playerStatus->flags &= ~PS_FLAG_MOVEMENT_LOCKED;
                 suggest_player_anim_setUnkFlag(ANIM_Mario_8000F);
                 sfx_play_sound_at_npc(SOUND_2013, 0, NPC_PARTNER);
                 playerStatus->position.x = npc->pos.x;
@@ -503,7 +503,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             }
             break;
         case 1:
-            playerStatus->animFlags |= PA_FLAGS_RIDING_PARTNER;
+            playerStatus->animFlags |= PA_FLAG_RIDING_PARTNER;
             func_802BD414_31E184(npc);
             if (bss_802BFEE4 == 0) {
                 script->functionTemp[2]++;
@@ -527,7 +527,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             } else {
                 npc->pos.y = npc->moveToPos.y;
             }
-            if (!(playerStatus->animFlags & PA_FLAGS_RIDING_PARTNER)) {
+            if (!(playerStatus->animFlags & PA_FLAG_RIDING_PARTNER)) {
                 func_802BD100_31DE70();
             }
 
@@ -601,7 +601,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                         sfx_play_sound_at_npc(SOUND_JUMP_2081, 0, NPC_PARTNER);
                         suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
                         enable_player_shadow();
-                        playerStatus->flags |= PS_FLAGS_MOVEMENT_LOCKED;
+                        playerStatus->flags |= PS_FLAG_MOVEMENT_LOCKED;
                         script->functionTemp[0] = 3;
                     }
                 }
@@ -636,7 +636,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                 break;
             }
             if (collider >= 0) {
-                playerStatus->flags &= ~PS_FLAGS_MOVEMENT_LOCKED;
+                playerStatus->flags &= ~PS_FLAG_MOVEMENT_LOCKED;
                 suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                 npc->flags |= NPC_FLAG_40;
                 dist = dist2D(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z) +
@@ -814,7 +814,7 @@ s32 SushiePutAway(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         partner_init_put_away(sushie);
-        gPlayerStatusPtr->animFlags &= ~PA_FLAGS_RIDING_PARTNER;
+        gPlayerStatusPtr->animFlags &= ~PA_FLAG_RIDING_PARTNER;
     }
 
     return partner_put_away(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;

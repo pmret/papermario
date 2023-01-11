@@ -2815,7 +2815,7 @@ void func_8024EFE0(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) {
             sp10 = &D_80283744[numMessages];
             message->unk_00 = 1;
             message->unk_04 = load_entity_model(*sp10);
-            set_entity_model_flags(message->unk_04, ENTITY_MODEL_FLAGS_HIDDEN);
+            set_entity_model_flags(message->unk_04, ENTITY_MODEL_FLAG_HIDDEN);
             bind_entity_model_setupGfx(message->unk_04, message, func_8024F768);
             message->pos.x = x;
             message->pos.y = y;
@@ -2866,7 +2866,7 @@ void func_8024F394(void* data) {
             if (message->unk_24 != 0) {
                 message->unk_24--;
                 if (message->unk_24 == 0) {
-                    clear_entity_model_flags(modelIdx, MODEL_FLAGS_FLAG_20);
+                    clear_entity_model_flags(modelIdx, MODEL_FLAG_FLAG_20);
                 }
                 exec_entity_model_commandlist(modelIdx);
                 break;
@@ -3191,122 +3191,122 @@ void btl_update_message_popup(void* data) {
                     switch (popup->messageIndex) {
                         case BTL_MSG_32:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_2F:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_TimingReady);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             break;
                         case BTL_MSG_33:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_AimTarget);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             hud_element_create_transform_B(D_8029F644);
                             break;
                         case BTL_MSG_34:
                             D_8029F642 = hud_element_create(&HES_CUpButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_CDownButton);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
 
                             D_8029F646 = hud_element_create(&HES_CLeftButton);
-                            hud_element_set_flags(D_8029F646, HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F646, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F646, -100, -100);
 
                             D_8029F648 = hud_element_create(&HES_CRightButton);
-                            hud_element_set_flags(D_8029F648, HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F648, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F648, -100, -100);
                             break;
                         case BTL_MSG_35:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_36:
                             D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_BButton);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
 
                             D_8029F646 = hud_element_create(&HES_CDownButton);
-                            hud_element_set_flags(D_8029F646, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F646, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F646, -100, -100);
                             break;
                         case BTL_MSG_37:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_38:
                             D_8029F642 = hud_element_create(&HES_TimingReady);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             break;
                         case BTL_MSG_39:
                             D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             D_8029F644 = hud_element_create(&HES_BButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_3A:
                             D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_BButton);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             break;
                         case BTL_MSG_3D:
                             D_8029F642 = hud_element_create(&HES_TimingReady);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_AButtonDown);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             break;
                         case BTL_MSG_3E:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_AimTarget);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             hud_element_create_transform_B(D_8029F644);
 
                             D_8029F646 = hud_element_create(&HES_AimReticle);
-                            hud_element_set_flags(D_8029F646, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F646, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F646, -100, -100);
                             hud_element_create_transform_B(D_8029F646);
                             break;
                         case BTL_MSG_40:
                         case BTL_MSG_41:
                             D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             // fallthrough
                         case BTL_MSG_2E:
@@ -3317,7 +3317,7 @@ void btl_update_message_popup(void* data) {
                         case BTL_MSG_3F:
                         case BTL_MSG_42:
                             D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                     }
@@ -3519,37 +3519,37 @@ void btl_update_message_popup(void* data) {
                     switch (popup->messageIndex) {
                         case BTL_MSG_49:
                             D_8029F642 = hud_element_create(&HES_Item_Hammer1);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_4A:
                             D_8029F642 = hud_element_create(&HES_Item_Hammer2);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_4B:
                             D_8029F642 = hud_element_create(&HES_Item_Hammer3);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_4C:
                             D_8029F642 = hud_element_create(&HES_Item_Boots1);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_4D:
                             D_8029F642 = hud_element_create(&HES_Item_Boots2);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_4E:
                             D_8029F642 = hud_element_create(&HES_Item_Boots3);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_4F:
                             D_8029F642 = hud_element_create(&HES_Item_Items);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                     }

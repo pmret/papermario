@@ -91,8 +91,8 @@ void throw_spiny_update(EffectInstance* effectInstance) {
     f32 gravity;
     s32 lifeDuration;
 
-    if (effectInstance->flags & EFFECT_INSTANCE_FLAGS_10) {
-        effectInstance->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+    if (effectInstance->flags & EFFECT_INSTANCE_FLAG_10) {
+        effectInstance->flags &= ~EFFECT_INSTANCE_FLAG_10;
         spinyObject->life = 16;
     }
 

@@ -1637,9 +1637,9 @@ typedef struct CollisionStatus {
     /* 0x06 */ s16 floorBelow;
     /* 0x08 */ s16 currentCeiling; /* valid on touching with head */
     /* 0x0A */ s16 currentInspect; /* associated with TRIGGER_WALL_PRESS_A */
-    /* 0x0C */ s16 unk_0C; /* associated with TRIGGER_FLAGS_2000 */
-    /* 0x0E */ s16 unk_0E; /* associated with TRIGGER_FLAGS_4000 */
-    /* 0x10 */ s16 unk_10; /* associated with TRIGGER_FLAGS_8000 */
+    /* 0x0C */ s16 unk_0C; /* associated with TRIGGER_FLAG_2000 */
+    /* 0x0E */ s16 unk_0E; /* associated with TRIGGER_FLAG_4000 */
+    /* 0x10 */ s16 unk_10; /* associated with TRIGGER_FLAG_8000 */
     /* 0x12 */ s16 currentWall;
     /* 0x14 */ s16 lastWallHammered; /* valid when smashing */
     /* 0x16 */ s16 touchingWallTrigger; /* 0/1 */

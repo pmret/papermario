@@ -10,7 +10,7 @@ SlideParams N(SlideData) = {
 
 API_CALLABLE(N(SetPlayerSliding)) {
     gPlayerStatus.slideParams = script->varTablePtr[0];
-    gPlayerStatus.flags |= PS_FLAGS_SLIDING;
+    gPlayerStatus.flags |= PS_FLAG_SLIDING;
     return ApiStatus_DONE2;
 }
 

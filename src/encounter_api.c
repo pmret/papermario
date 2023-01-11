@@ -212,7 +212,7 @@ void start_battle(Evt* script, s32 songID) {
     for (i = 0; i < encounter->count; i++) {
         enemy = encounter->enemy[i];
         if ((enemy != NULL && (
-            !(enemy->flags & ENEMY_FLAGS_8) || enemy == currentEncounter->currentEnemy)
+            !(enemy->flags & ENEMY_FLAG_8) || enemy == currentEncounter->currentEnemy)
             ) && enemy->hitBytecode != NULL) {
             Evt* hitEvtInstance;
             enemy->encountered = TRUE;
@@ -280,7 +280,7 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
     for (i = 0; i < encounter->count; i++) {
         enemy = encounter->enemy[i];
         if ((enemy != NULL && (
-            !(enemy->flags & ENEMY_FLAGS_8) || enemy == currentEncounter->currentEnemy)
+            !(enemy->flags & ENEMY_FLAG_8) || enemy == currentEncounter->currentEnemy)
             ) && enemy->hitBytecode != NULL) {
             enemy->encountered = TRUE;
 
@@ -344,7 +344,7 @@ ApiStatus BindNpcAI(Evt* script, s32 isInitialCall) {
         enemy = get_enemy(id);
     }
 
-    if (enemy->flags & ENEMY_FLAGS_1) {
+    if (enemy->flags & ENEMY_FLAG_1) {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
@@ -394,7 +394,7 @@ ApiStatus RestartNpcAI(Evt* script, s32 isInitialCall) {
 
     enemy = get_enemy(npcID);
 
-    if (enemy->flags & ENEMY_FLAGS_1) {
+    if (enemy->flags & ENEMY_FLAG_1) {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
@@ -512,7 +512,7 @@ ApiStatus RestartNpcAux(Evt* script, s32 isInitialCall) {
 
     enemy = get_enemy(npcID);
 
-    if (enemy->flags & ENEMY_FLAGS_1) {
+    if (enemy->flags & ENEMY_FLAG_1) {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
@@ -806,16 +806,16 @@ ApiStatus OnPlayerFled(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 skipReaction = evt_get_variable(script, *script->ptrReadPos);
 
-    enemy->aiFlags |= ENEMY_AI_FLAGS_4;
+    enemy->aiFlags |= ENEMY_AI_FLAG_4;
 
     if (!skipReaction) {
         s32 unk;
 
-        if (!(enemy->aiFlags & ENEMY_AI_FLAGS_10)) {
+        if (!(enemy->aiFlags & ENEMY_AI_FLAG_10)) {
             npc->currentAnim = *enemy->animList;
         }
 
-        if (!(enemy->aiFlags & ENEMY_AI_FLAGS_8)) {
+        if (!(enemy->aiFlags & ENEMY_AI_FLAG_8)) {
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 0.0f, -20.0f, 40, &unk);
         }
 

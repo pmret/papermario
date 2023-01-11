@@ -27,7 +27,7 @@ void N(func_80241610_97F0E0)(void) {
     Matrix4f transformMtx, tempMtx;
 
     gSPViewport(gMasterGfxPos++, &cam->vp);
-    if (!(cam->flags & CAMERA_FLAGS_ORTHO)) {
+    if (!(cam->flags & CAMERA_FLAG_ORTHO)) {
         gSPPerspNormalize(gMasterGfxPos++, cam->perspNorm);
     }
     guMtxF2L(cam->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCameraID]);
@@ -155,14 +155,14 @@ API_CALLABLE(N(func_80241E24_97F8F4)) {
 }
 
 EvtScript N(EVS_NpcIdle_StoneChomp) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_20, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 1)
     EVT_LABEL(100)
     EVT_IF_EQ(GF_ISK05_Hammer2Block, FALSE)
         EVT_WAIT(1)
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(PlaySound, SOUND_A)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_20, 0)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 0)
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_266, 0)
@@ -272,7 +272,7 @@ StaticNpc N(NpcData_StoneChomp) = {
     .settings = &N(NpcSettings_StoneChomp),
     .pos = { 385.0f, 71.0f, -330.0f },
     .yaw = 320,
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .init = &N(EVS_NpcInit_StoneChomp),
     .initVarCount = 1,
     .initVar = { .value = 0 },

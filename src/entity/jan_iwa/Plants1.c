@@ -56,7 +56,7 @@ void func_802BB000_E2D930(Entity* entity) {
 
     if ((entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) && !is_picking_up_item()) {
         if (playerStatus->actionState == ACTION_STATE_RIDE) {
-            playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
+            playerStatus->animFlags |= PA_FLAG_INTERRUPT_USE_PARTNER;
         } else if (playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER) {
             D_802BCE34 = data->unk_28;
             D_802BCE30 = data->unk_2A;
@@ -99,7 +99,7 @@ void func_802BB0A0_E2D9D0(Entity* entity) {
     data->rotation.y = clamp_angle(data->rotation.y + data->spinSpeed);
 
     if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) &&
-        (playerStatus->animFlags & PA_FLAGS_SPINNING) &&
+        (playerStatus->animFlags & PA_FLAG_SPINNING) &&
         fabs(dist2D(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z)) < 60.0)
         {
         exec_entity_commandlist(entity);
@@ -180,10 +180,10 @@ void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
 void entity_PinkFlower_idle(Entity* entity) {
     PinkFlowerData* data = entity->dataBuf.pinkFlower;
 
-    if (gPlayerStatus.animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE
+    if (gPlayerStatus.animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE
             && entity->collisionFlags & (ENTITY_COLLISION_PLAYER_TOUCH_WALL | ENTITY_COLLISION_PLAYER_HAMMER)) {
-        if (entity->flags & ENTITY_FLAGS_SHOWS_INSPECT_PROMPT) {
-            entity->flags &= ~ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
+        if (entity->flags & ENTITY_FLAG_SHOWS_INSPECT_PROMPT) {
+            entity->flags &= ~ENTITY_FLAG_SHOWS_INSPECT_PROMPT;
             data = get_entity_by_index(data->linkedEntityIndex)->dataBuf.pinkFlower;
             if (data->state == 0) {
                 data->state = 1;
@@ -276,10 +276,10 @@ void entity_CymbalPlant_idle(Entity* entity) {
         case 0:
             if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
                 if (partnerActionStatus->actingPartner != 0) {
-                    playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
+                    playerStatus->animFlags |= PA_FLAG_INTERRUPT_USE_PARTNER;
                 }
                 func_800EF300();
-                playerStatus->animFlags |= PA_FLAGS_INTERRUPT_SPIN;
+                playerStatus->animFlags |= PA_FLAG_INTERRUPT_SPIN;
                 data->timer = 4;
                 data->unk_01++;
                 data->state++;
@@ -293,14 +293,14 @@ void entity_CymbalPlant_idle(Entity* entity) {
             }
             break;
         case 1:
-            playerStatus->animFlags |= PA_FLAGS_INTERRUPT_SPIN;
+            playerStatus->animFlags |= PA_FLAG_INTERRUPT_SPIN;
             if (--data->timer == 0) {
                 start_rumble(128, 10);
                 data->timer = 30;
                 data->state++;
                 yaw = playerStatus->spriteFacingAngle;
                 playerStatus->spriteFacingAngle = 80.0f;
-                playerStatus->flags |= PS_FLAGS_ROTATION_LOCKED;
+                playerStatus->flags |= PS_FLAG_ROTATION_LOCKED;
                 D_802BCE20 = yaw;
             }
             func_802BB98C_E2E2BC(entity);
@@ -330,7 +330,7 @@ void entity_CymbalPlant_idle(Entity* entity) {
                 data->state++;
                 func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
                 enable_player_input();
-                playerStatus->flags &= ~PS_FLAGS_ROTATION_LOCKED;
+                playerStatus->flags &= ~PS_FLAG_ROTATION_LOCKED;
             }
             break;
         case 6:
@@ -356,7 +356,7 @@ EntityScript Entity_PinkFlower_Script = {
     es_SetCallback(entity_PinkFlower_idle, 0)
     es_PlaySound(SOUND_F4)
     es_SetCallback(NULL, 50)
-    es_SetFlags(ENTITY_FLAGS_SHOWS_INSPECT_PROMPT)
+    es_SetFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
     es_Restart
     es_End
 };
@@ -379,7 +379,7 @@ DmaEntry Entity_CymbalPlant_dma[] = { ENTITY_ROM(CymbalPlant_gfx), ENTITY_ROM(Cy
 DmaEntry Entity_PinkFlower_dma[] = { ENTITY_ROM(PinkFlower_gfx), ENTITY_ROM(PinkFlower_anim) };
 
 EntityBlueprint Entity_CymbalPlant = {
-    .flags = ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_SQUARE_SHADOW | ENTITY_FLAG_400 | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(CymbalPlantData),
     .renderCommandList = Entity_CymbalPlant_AnimationIdle,
     .modelAnimationNodes = Entity_CymbalPlant_Mesh,
@@ -392,7 +392,7 @@ EntityBlueprint Entity_CymbalPlant = {
 };
 
 EntityBlueprint Entity_PinkFlower = {
-    .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_SHOWS_INSPECT_PROMPT | ENTITY_FLAG_SQUARE_SHADOW | ENTITY_FLAG_400 | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(PinkFlowerData),
     .renderCommandList = Entity_PinkFlower_AnimationIdle,
     .modelAnimationNodes = Entity_PinkFlower_Mesh,
@@ -405,7 +405,7 @@ EntityBlueprint Entity_PinkFlower = {
 };
 
 EntityBlueprint Entity_PinkFlowerLight = {
-    .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_DISABLE_COLLISION,
+    .flags = ENTITY_FLAG_SHOWS_INSPECT_PROMPT | ENTITY_FLAG_DISABLE_COLLISION,
     .typeDataSize = sizeof(PinkFlowerData),
     .renderCommandList = Entity_PinkFlowerLight_RenderScript,
     .modelAnimationNodes = 0,

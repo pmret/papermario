@@ -36,22 +36,22 @@ s32 N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     // difference in the Enemy and DeadEnemy struct.
 
     func_8004D8E0(enemy);
-    if (enemy->flags & ENEMY_FLAGS_100000) {
+    if (enemy->flags & ENEMY_FLAG_100000) {
         enemy->unk_114 = 10.0f;
         enemy->unk_118 = 0.7f;
     }
     #endif
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_4)) {
         script->AI_TEMP_STATE = AI_STATE_PIRANHA_PLANT_00;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
 
         enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_NONE;
-        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = AI_STATE_PIRANHA_PLANT_00;
-            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
         }
     }
 

@@ -133,21 +133,21 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
             D_80246568_C8C018[0] = hudElemID;
             hud_element_set_render_pos(hudElemID, D_8024655C, D_80246560_kkj_19);
             hud_element_set_render_depth(hudElemID, 0);
-            hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
             hudElemID = hud_element_create(&HES_BlueMeter);
             D_80246568_C8C018[1] = hudElemID;
             hud_element_set_render_pos(hudElemID, D_8024655C, D_80246560_kkj_19 + 28);
             hud_element_set_render_depth(hudElemID, 0);
-            hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
             hudElemID = D_80246568_C8C018[0];
             hud_element_set_alpha(hudElemID, 255);
-            hud_element_clear_flags(hudElemID, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_clear_flags(hudElemID, HUD_ELEMENT_FLAG_DISABLED);
 
             hudElemID = D_80246568_C8C018[1];
             hud_element_set_alpha(hudElemID, 255);
-            hud_element_clear_flags(hudElemID, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_clear_flags(hudElemID, HUD_ELEMENT_FLAG_DISABLED);
 
             D_80246558_kkj_19 = 1;
             script->functionTemp[0] = 10;

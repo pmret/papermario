@@ -41,9 +41,9 @@ ApiStatus N(StoneChompAI_Main)(Evt* script, s32 isInitialCall) {
         npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         script->functionTemp[1] = 0;
         script->AI_TEMP_STATE = AI_STATE_HOP_INIT;
-        if (enemy->flags & ENEMY_FLAGS_40000000) {
+        if (enemy->flags & ENEMY_FLAG_40000000) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
-            enemy->flags &= ~ENEMY_FLAGS_40000000;
+            enemy->flags &= ~ENEMY_FLAG_40000000;
         }
     }
 

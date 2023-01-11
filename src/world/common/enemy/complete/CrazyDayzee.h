@@ -3,7 +3,7 @@
 
 #define CRAZY_DAYZEE_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 15, \
     .itemDrops = { \
         { ITEM_MAPLE_SYRUP, 6, 0 }, \

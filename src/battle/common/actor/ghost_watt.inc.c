@@ -42,7 +42,7 @@ ApiStatus N(UnkWattEffectFunc1)(Evt* script, s32 isInitialCall) {
                     }
 
                     if (wattEffectData->effect2 != NULL) {
-                        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+                        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
                         wattEffectData->effect2 = NULL;
                     }
                     wattEffectData->effect1->data.staticStatus->unk_04 = x;
@@ -51,7 +51,7 @@ ApiStatus N(UnkWattEffectFunc1)(Evt* script, s32 isInitialCall) {
                     break;
                 case 1:
                     if (wattEffectData->effect1 != NULL) {
-                        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+                        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
                         wattEffectData->effect1 = NULL;
                     }
                     if (wattEffectData->effect2 == NULL) {
@@ -65,21 +65,21 @@ ApiStatus N(UnkWattEffectFunc1)(Evt* script, s32 isInitialCall) {
             }
         } else {
             if (wattEffectData->effect1 != NULL) {
-                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
                 wattEffectData->effect1 = NULL;
             }
             if (wattEffectData->effect2 != NULL) {
-                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
                 wattEffectData->effect2 = NULL;
             }
         }
         if (wattEffectData->debuff != actor->debuff && wattEffectData->unk_0C) {
             if (wattEffectData->effect1 != NULL) {
-                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
                 wattEffectData->effect1 = NULL;
             }
             if (wattEffectData->effect2 != NULL) {
-                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
                 wattEffectData->effect2 = NULL;
             }
         }
@@ -97,11 +97,11 @@ ApiStatus N(UnkWattEffectFunc2)(Evt* script, s32 isInitialCall) {
     wattEffectData->flags = FALSE;
 
     if (wattEffectData->effect1 != NULL) {
-        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
     }
 
     if (wattEffectData->effect2 != NULL) {
-        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
     }
 
     return ApiStatus_DONE2;

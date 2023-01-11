@@ -252,9 +252,9 @@ void btl_state_update_normal_start(void) {
             battleStatus->damageTaken = 0;
             battleStatus->nextMerleeSpellType = MERLEE_SPELL_0;
             battleStatus->actionCommandMode = ACTION_COMMAND_MODE_NOT_LEARNED;
-            gCameras[CAM_DEFAULT].flags |= CAMERA_FLAGS_ENABLED;
-            gCameras[CAM_BATTLE].flags |= CAMERA_FLAGS_ENABLED;
-            gCameras[CAM_TATTLE].flags |= CAMERA_FLAGS_ENABLED;
+            gCameras[CAM_DEFAULT].flags |= CAMERA_FLAG_ENABLED;
+            gCameras[CAM_BATTLE].flags |= CAMERA_FLAG_ENABLED;
+            gCameras[CAM_TATTLE].flags |= CAMERA_FLAG_ENABLED;
             if (is_ability_active(ABILITY_MYSTERY_SCROLL)) {
                 battleStatus->actionCommandMode = ACTION_COMMAND_MODE_LEARNED;
             }
@@ -753,7 +753,7 @@ void btl_state_update_begin_player_turn(void) {
                     battleStatus->waterBlockTurnsLeft--;
                     battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_WATER_BLOCK].turnsLeft = battleStatus->waterBlockTurnsLeft;
                     if (battleStatus->waterBlockTurnsLeft <= 0) {
-                        battleStatus->waterBlockEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
+                        battleStatus->waterBlockEffect->flags |= EFFECT_INSTANCE_FLAG_10;
                         fx_water_block(1, player->currentPos.x, player->currentPos.y + 18.0f, player->currentPos.z + 5.0f, 1.5f, 10);
                         fx_water_splash(0, player->currentPos.x - 10.0f, player->currentPos.y + 5.0f, player->currentPos.z + 5.0f, 1.0f, 24);
                         fx_water_splash(0, player->currentPos.x - 15.0f, player->currentPos.y + 32.0f, player->currentPos.z + 5.0f, 1.0f, 24);
@@ -2354,7 +2354,7 @@ void btl_state_update_defeat(void) {
             if (player->debuff != 0) {
                 if (player->debuff == 7) {
                     sfx_play_sound(SOUND_FROZEN_SHATTER);
-                    player->icePillarEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
+                    player->icePillarEffect->flags |= EFFECT_INSTANCE_FLAG_10;
                     player->icePillarEffect = NULL;
                 }
                 player->debuff = 0;

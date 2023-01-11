@@ -71,7 +71,7 @@ EvtScript N(EVS_NpcDefeat_Pokey_01) = {
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
             EVT_CALL(OnPlayerFled, 0)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_FLED, 1)
+            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN
@@ -79,7 +79,7 @@ EvtScript N(EVS_NpcDefeat_Pokey_01) = {
 };
 
 EvtScript N(EVS_NpcIdle_Pokey_01) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_10000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_10000000, 1)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
     EVT_LABEL(1)
     EVT_IF_EQ(AF_ISK07_MummiesReleased, FALSE)
@@ -89,17 +89,17 @@ EvtScript N(EVS_NpcIdle_Pokey_01) = {
     EVT_CALL(SetNpcYaw, NPC_SELF, 105)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, TRUE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_10000000, 0)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_10000000, 0)
     EVT_CALL(NpcMoveTo, NPC_SELF, -140, 528, 10)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, FALSE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_40000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_40000000, 1)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_PokeyMummy)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcIdle_Pokey_02) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_10000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_10000000, 1)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
     EVT_LABEL(1)
     EVT_IF_EQ(AF_ISK07_MummiesReleased, FALSE)
@@ -109,17 +109,17 @@ EvtScript N(EVS_NpcIdle_Pokey_02) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
     EVT_WAIT(15)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, TRUE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_10000000, 0)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_10000000, 0)
     EVT_CALL(NpcMoveTo, NPC_SELF, 47, 543, 10)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, FALSE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_40000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_40000000, 1)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_PokeyMummy)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcIdle_Pokey_03) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_10000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_10000000, 1)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
     EVT_LABEL(1)
     EVT_IF_EQ(AF_ISK07_MummiesReleased, FALSE)
@@ -129,10 +129,10 @@ EvtScript N(EVS_NpcIdle_Pokey_03) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
     EVT_WAIT(15)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, TRUE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_10000000, 0)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_10000000, 0)
     EVT_CALL(NpcMoveTo, NPC_SELF, 227, 489, 10)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, FALSE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_40000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_40000000, 1)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_PokeyMummy)))
     EVT_RETURN
     EVT_END
@@ -140,7 +140,7 @@ EvtScript N(EVS_NpcIdle_Pokey_03) = {
 
 EvtScript N(EVS_NpcInit_Pokey_01) = {
     EVT_IF_EQ(GF_ISK07_Defeated_Mummies, FALSE)
-        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAGS_800000)
+        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_800000)
     EVT_END_IF
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey_01)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey_01)))
@@ -152,7 +152,7 @@ EvtScript N(EVS_NpcInit_Pokey_01) = {
 
 EvtScript N(EVS_NpcInit_Pokey_02) = {
     EVT_IF_EQ(GF_ISK07_Defeated_Mummies, FALSE)
-        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAGS_800000)
+        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_800000)
     EVT_END_IF
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey_02)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey_01)))
@@ -163,7 +163,7 @@ EvtScript N(EVS_NpcInit_Pokey_02) = {
 
 EvtScript N(EVS_NpcInit_Pokey_03) = {
     EVT_IF_EQ(GF_ISK07_Defeated_Mummies, FALSE)
-        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAGS_800000)
+        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_800000)
     EVT_END_IF
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey_03)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey_01)))
@@ -177,7 +177,7 @@ StaticNpc N(NpcData_Pokey_01) = {
     .settings = &N(NpcSettings_PokeyMummy),
     .pos = { -132.0f, -390.0f, 492.0f },
     .yaw = 304,
-    .flags = ENEMY_FLAGS_200 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Pokey_01),
     .drops = POKEY_MUMMY_DROPS,
     .territory = {
@@ -200,7 +200,7 @@ StaticNpc N(NpcData_Pokey_02) = {
     .settings = &N(NpcSettings_PokeyMummy),
     .pos = { 45.0f, -390.0f, 507.0f },
     .yaw = 263,
-    .flags = ENEMY_FLAGS_200 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Pokey_02),
     .drops = POKEY_MUMMY_DROPS,
     .territory = {
@@ -223,7 +223,7 @@ StaticNpc N(NpcData_Pokey_03) = {
     .settings = &N(NpcSettings_PokeyMummy),
     .pos = { 220.0f, -389.0f, 467.0f },
     .yaw = 244,
-    .flags = ENEMY_FLAGS_200 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Pokey_03),
     .drops = POKEY_MUMMY_DROPS,
     .territory = {

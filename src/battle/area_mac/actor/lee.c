@@ -988,7 +988,7 @@ ApiStatus func_80218E2C_4652BC(Evt* script, s32 isInitialCall) {
     EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *script->ptrReadPos);
 
     tattleEffect->data.tattleWindow->pos.y = 144.0f;
-    tattleEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
+    tattleEffect->flags |= EFFECT_INSTANCE_FLAG_10;
     return ApiStatus_DONE2;
 }
 
@@ -2914,7 +2914,7 @@ ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall) {
                     }
 
                     if (wattEffectData->effect2 != NULL) {
-                        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+                        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
                         wattEffectData->effect2 = NULL;
                     }
                     wattEffectData->effect1->data.staticStatus->unk_04 = x;
@@ -2923,7 +2923,7 @@ ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall) {
                     break;
                 case 1:
                     if (wattEffectData->effect1 != NULL) {
-                        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+                        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
                         wattEffectData->effect1 = NULL;
                     }
                     if (wattEffectData->effect2 == NULL) {
@@ -2937,21 +2937,21 @@ ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall) {
             }
         } else {
             if (wattEffectData->effect1 != NULL) {
-                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
                 wattEffectData->effect1 = NULL;
             }
             if (wattEffectData->effect2 != NULL) {
-                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
                 wattEffectData->effect2 = NULL;
             }
         }
         if (wattEffectData->debuff != actor->debuff && wattEffectData->unk_0C) {
             if (wattEffectData->effect1 != NULL) {
-                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
                 wattEffectData->effect1 = NULL;
             }
             if (wattEffectData->effect2 != NULL) {
-                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
                 wattEffectData->effect2 = NULL;
             }
         }
@@ -2967,11 +2967,11 @@ ApiStatus func_80219604_465A94(Evt* script, s32 isInitialCall) {
     wattEffectData->flags = 0;
 
     if (wattEffectData->effect1 != NULL) {
-        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
     }
 
     if (wattEffectData->effect2 != NULL) {
-        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
     }
 
     return ApiStatus_DONE2;

@@ -3,7 +3,7 @@
 
 #define BILL_BLASTER_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = STANDARD_HEART_DROPS(2), \
     .flowerDrops = STANDARD_FLOWER_DROPS(2), \
     .minCoinBonus = 1, \
@@ -12,7 +12,7 @@
 
 #define BILL_BLASTER_NO_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
@@ -39,7 +39,7 @@
 
 #define BULLET_BILL_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 3, \
     .itemDrops = { \
         { ITEM_MUSHROOM, 10, 0 }, \
@@ -74,7 +74,7 @@
     .settings = &N(NpcSettings_BulletBill), \
     .pos = { NPC_DISPOSE_LOCATION }, \
     .yaw = 270, \
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000, \
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000, \
     .initVarCount = 1, \
     .initVar = { .value = 0 }, \
     .drops = BULLET_BILL_DROPS, \

@@ -315,58 +315,58 @@ s32 popup_menu_update(void) {
             D_8010D68C = 0;
             elementID = hud_element_create(&HES_EmptyBar);
             D_8010D65C = elementID;
-            hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80);
+            hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_80);
             hud_element_set_tint(elementID, 255, 255, 255);
             if (gPopupMenu->popupType != POPUP_MENU_THROW_AWAY_ITEM) {
-                hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             one = 1; // required to match (why is 1 loaded so early?)
             elementID = hud_element_create(gPopupMenu->ptrIcon[0]);
             D_8010D678 = elementID;
             hud_element_set_scale(elementID, 0.45f);
-            hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+            hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
 
             elementID = hud_element_create(&HES_AnimatedHandPointer);
             D_8010D66C = elementID;
-            hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+            hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
 
             elementID = hud_element_create(&HES_GreenArrowUp);
             D_8010D670 = elementID;
-            hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+            hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
 
             elementID = hud_element_create(&HES_GreenArrowDown);
             D_8010D674 = elementID;
-            hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+            hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
 
             if (gPopupMenu->popupType == POPUP_MENU_TRADE_FOR_BADGE) {
                 D_8010D660 = hud_element_create(&HES_StatusStarPiece);
                 elementID = D_8010D660;
-                hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_80);
                 hud_element_set_tint(elementID, 255, 255, 255);
             }
             if (gPopupMenu->popupType == POPUP_MENU_UPGRADE_PARTNER) {
                 D_8010D660 = hud_element_create(&HES_StatusStarPiece);
                 elementID = D_8010D660;
-                hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                 hud_element_set_tint(elementID, 255, 255, 255);
             }
             if (gPopupMenu->popupType == POPUP_MENU_SELL_ITEM) {
                 D_8010D660 = hud_element_create(&HES_StatusCoin);
                 elementID = D_8010D660;
-                hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_80);
                 hud_element_set_tint(elementID, 255, 255, 255);
             }
             if (gPopupMenu->popupType == POPUP_MENU_TRADE_FOR_BADGE || gPopupMenu->popupType == POPUP_MENU_UPGRADE_PARTNER) {
                 D_8010D664 = hud_element_create(&HES_MenuTimes);
                 elementID = D_8010D664;
-                hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_80);
                 hud_element_set_tint(elementID, 255, 255, 255);
             }
             if (gPopupMenu->popupType == one || gPopupMenu->popupType == POPUP_MENU_UPGRADE_PARTNER) {
                 D_8010D668 = hud_element_create(D_80109890[0]);
                 elementID = D_8010D668;
-                hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_80);
                 hud_element_set_tint(elementID, 255, 255, 255);
             }
 

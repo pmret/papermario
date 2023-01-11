@@ -113,11 +113,11 @@ EvtScript N(EVS_Fuzzipede_ReactToLight) = {
                 EVT_SET(LVarB, 1)
                 EVT_CALL(DisablePlayerInput, FALSE)
             EVT_END_IF
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP, 0)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, 0)
             EVT_SET(LVarA, 1)
         EVT_ELSE
             EVT_CALL(N(AwaitPartnerNotWatt))
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP, 1)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, 1)
             EVT_SET(LVarA, 0)
         EVT_END_IF
         EVT_WAIT(1)
@@ -166,7 +166,7 @@ EvtScript N(EVS_NpcAI_Fuzzipede) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_100000, 0)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000, 0)
     EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
     EVT_RETURN
     EVT_END
@@ -185,9 +185,9 @@ EvtScript N(EVS_NpcDefeat_Fuzzipede) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
     EVT_CALL(SetPlayerPos, -40, 0, 0)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
     EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, FALSE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, FALSE)
     EVT_CALL(SetNpcPos, NPC_SELF, 30, 0, 0)
     EVT_CALL(SetNpcYaw, NPC_SELF, 270)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -5, 0, 0)
@@ -291,9 +291,9 @@ StaticNpc N(NpcData_Fuzzipede) = {
     .settings = &N(NpcSettings_Fuzzipede),
     .pos = { 333.0f, -10.0f, -130.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_800 | ENEMY_FLAGS_8000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_10000000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_10000000,
     .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAG_80,
         .heartDrops  = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },

@@ -365,7 +365,7 @@ ApiStatus func_802416BC_A2B8FC(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
     if (isInitialCall) {
-        camera->flags |= CAMERA_FLAGS_SHAKING;
+        camera->flags |= CAMERA_FLAG_SHAKING;
     }
     guTranslateF(camera->viewMtxShaking,
         D_80249904_A33B44 * sin_deg(D_80249900_A33B40 * 486),
@@ -376,7 +376,7 @@ ApiStatus func_802416BC_A2B8FC(Evt* script, s32 isInitialCall) {
     D_80249904_A33B44 += (12.0f - D_80249904_A33B44) * 0.2;
     if (D_80249900_A33B40 > 20) {
         guTranslateF(camera->viewMtxShaking, 0.0f, 0.0f, 0.0f);
-        camera->flags &= ~CAMERA_FLAGS_SHAKING;
+        camera->flags &= ~CAMERA_FLAG_SHAKING;
         return ApiStatus_DONE1;
     }
     return ApiStatus_BLOCK;
@@ -388,7 +388,7 @@ ApiStatus func_80241850_A2BA90(Evt* script, s32 isInitialCall) {
     f32 x, y;
 
     if (isInitialCall) {
-        camera->flags |= CAMERA_FLAGS_SHAKING;
+        camera->flags |= CAMERA_FLAG_SHAKING;
     }
     x = D_8024990C_A33B4C * sin_deg(D_80249908_A33B48 * 486);
     y = D_8024990C_A33B4C * cos_deg(D_80249908_A33B48 * 254);
@@ -482,7 +482,7 @@ ApiStatus func_80241D08_A2BF48(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
     if (isInitialCall) {
-        camera->flags &= ~CAMERA_FLAGS_SHAKING;
+        camera->flags &= ~CAMERA_FLAG_SHAKING;
     }
     guTranslateF(camera->viewMtxShaking, 0.0f, 0.0f, 0.0f);
     return ApiStatus_DONE2;
@@ -922,7 +922,7 @@ ApiStatus func_802440D0_A2E310(Evt* script, s32 isInitialCall) {
                         D_8024AA20_A34C60->unk_3C = 0;
                         D_8024AA20_A34C60->unk_3E = 0;
                     }
-                    gCameras[CAM_DEFAULT].flags &= ~CAMERA_FLAGS_ENABLED;
+                    gCameras[CAM_DEFAULT].flags &= ~CAMERA_FLAG_ENABLED;
                     D_8024AAB0_A34CF0++;
                 }
             }

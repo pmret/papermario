@@ -624,22 +624,22 @@ EvtScript N(EVS_NpcIdle_LavaPiranha) = {
     EVT_CALL(N(LoadAnimationFromTable), VINE_0, 0)
     EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
     EVT_CALL(SetAnimatedModelRootPosition, VINE_0, 220, -100, -40)
-    EVT_CALL(SetAnimatorFlags, VINE_0, MODEL_ANIMATOR_FLAGS_HIDDEN, 1)
+    EVT_CALL(SetAnimatorFlags, VINE_0, MODEL_ANIMATOR_FLAG_HIDDEN, 1)
     EVT_CALL(LoadAnimatedModel, VINE_1, EVT_PTR(N(AnimModel_SideHeadVine)))
     EVT_CALL(N(LoadAnimationFromTable), VINE_1, 31)
     EVT_CALL(PlayModelAnimation, VINE_1, VINE_1_BASE)
     EVT_CALL(SetAnimatedModelRootPosition, VINE_1, 220, -100, -40)
-    EVT_CALL(SetAnimatorFlags, VINE_1, MODEL_ANIMATOR_FLAGS_HIDDEN, 1)
+    EVT_CALL(SetAnimatorFlags, VINE_1, MODEL_ANIMATOR_FLAG_HIDDEN, 1)
     EVT_CALL(LoadAnimatedModel, VINE_2, EVT_PTR(N(AnimModel_SideHeadVine)))
     EVT_CALL(N(LoadAnimationFromTable), VINE_2, 31)
     EVT_CALL(PlayModelAnimation, VINE_2, VINE_2_BASE)
     EVT_CALL(SetAnimatedModelRootPosition, VINE_2, 270, -100, -20)
-    EVT_CALL(SetAnimatorFlags, VINE_2, MODEL_ANIMATOR_FLAGS_HIDDEN, 1)
+    EVT_CALL(SetAnimatorFlags, VINE_2, MODEL_ANIMATOR_FLAG_HIDDEN, 1)
     EVT_CALL(LoadAnimatedModel, VINE_3, EVT_PTR(N(AnimModel_ExtraVine)))
     EVT_CALL(N(LoadAnimationFromTable), VINE_3, 34)
     EVT_CALL(PlayModelAnimation, VINE_3, VINE_3_BASE)
     EVT_CALL(SetAnimatedModelRootPosition, VINE_3, 220, -100, -40)
-    EVT_CALL(SetAnimatorFlags, VINE_3, MODEL_ANIMATOR_FLAGS_HIDDEN, 1)
+    EVT_CALL(SetAnimatorFlags, VINE_3, MODEL_ANIMATOR_FLAG_HIDDEN, 1)
     EVT_CALL(N(CreateVineRenderer))
     EVT_CALL(SetSelfVar, 1, 1)
     EVT_CALL(InterpPlayerYaw, 90, 0)
@@ -906,7 +906,7 @@ EvtScript N(EVS_NpcDefeat_LavaPiranha) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_2, TRUE)
+            EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_2, TRUE)
             EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
             EVT_CALL(SetPlayerPos, 125, 25, -35)
             EVT_CALL(SetNpcPos, NPC_PARTNER, 100, 25, -35)
@@ -983,7 +983,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .settings = &N(NpcSettings_Kolorado),
     .pos = { 380.0f, 250.0f, -330.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_400000,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Kolorado),
     .drops = KOLORADO_DROPS,
     .animations = KOLORADO_ANIMS,
@@ -995,7 +995,7 @@ StaticNpc N(NpcData_Misstar) = {
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_400000,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_400000,
     .drops = MISSTAR_DROPS,
     .animations = MISSTAR_ANIMS,
     .tattle = MSG_NpcTattle_Misstar,
@@ -1018,7 +1018,7 @@ StaticNpc N(NpcData_LavaPiranha)[] = {
         .settings = &N(NpcSettings_LavaPiranhaHead),
         .pos = { 400.0f, 25.0f, -30.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_LavaPiranha),
         .drops = LAVA_PIRANHA_DROPS,
         .animations = LAVA_PIRANHA_HEAD_ANIMS,
@@ -1030,7 +1030,7 @@ StaticNpc N(NpcData_LavaPiranha)[] = {
         .settings = &N(NpcSettings_LavaPiranhaHead),
         .pos = { 400.0f, 25.0f, -30.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_40000,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_LavaBud),
         .drops = LAVA_PIRANHA_DROPS,
         .animations = LAVA_PIRANHA_BUD_ANIMS,
@@ -1042,7 +1042,7 @@ StaticNpc N(NpcData_LavaPiranha)[] = {
         .settings = &N(NpcSettings_LavaPiranhaHead),
         .pos = { 400.0f, 25.0f, -30.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_40000,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_LavaBud),
         .drops = LAVA_PIRANHA_DROPS,
         .animations = LAVA_PIRANHA_BUD_ANIMS,

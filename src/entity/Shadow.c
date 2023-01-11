@@ -9,7 +9,7 @@ void entity_Shadow_init(Shadow* shadow) {
 
 s32 entity_can_collide_with_jumping_player(Entity* entity) {
     if ((entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_CEILING) &&
-        (gPlayerStatus.flags & PS_FLAGS_JUMPING)) {
+        (gPlayerStatus.flags & PS_FLAG_JUMPING)) {
         return TRUE;
     }
     return FALSE;
@@ -78,7 +78,7 @@ EntityModelScript Entity_RenderNone_Script = {
 s32 D_802E9844_padding[] = { 0, 0, 0};
 
 EntityModelScript Entity_CircularShadowA_Render = {
-    ems_SetFlags(ENTITY_MODEL_FLAGS_FOG_DISABLED)
+    ems_SetFlags(ENTITY_MODEL_FLAG_FOG_DISABLED)
     ems_SetRenderMode(RENDER_MODE_SHADOW)
     ems_Draw(Entity_RenderCircularShadow, 60)
     ems_Restart
@@ -86,7 +86,7 @@ EntityModelScript Entity_CircularShadowA_Render = {
 };
 
 EntityModelScript Entity_CircularShadowB_Render = {
-    ems_SetFlags(ENTITY_MODEL_FLAGS_FOG_DISABLED)
+    ems_SetFlags(ENTITY_MODEL_FLAG_FOG_DISABLED)
     ems_SetRenderMode(RENDER_MODE_SHADOW)
     ems_Draw(Entity_RenderCircularShadow, 60)
     ems_Restart
@@ -94,7 +94,7 @@ EntityModelScript Entity_CircularShadowB_Render = {
 };
 
 EntityModelScript Entity_SquareShadow_Render = {
-    ems_SetFlags(ENTITY_MODEL_FLAGS_FOG_DISABLED)
+    ems_SetFlags(ENTITY_MODEL_FLAG_FOG_DISABLED)
     ems_SetRenderMode(RENDER_MODE_SHADOW)
     ems_Draw(Entity_RenderSquareShadow, 60)
     ems_Restart
@@ -102,7 +102,7 @@ EntityModelScript Entity_SquareShadow_Render = {
 };
 
 ShadowBlueprint CircularShadowA = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION,
     .renderCommandList = Entity_CircularShadowA_Render,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
@@ -111,7 +111,7 @@ ShadowBlueprint CircularShadowA = {
 };
 
 ShadowBlueprint CircularShadowB = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION,
     .renderCommandList = Entity_CircularShadowB_Render,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
@@ -120,7 +120,7 @@ ShadowBlueprint CircularShadowB = {
 };
 
 ShadowBlueprint SquareShadow = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION,
     .renderCommandList = Entity_SquareShadow_Render,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,

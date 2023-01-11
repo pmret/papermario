@@ -4,7 +4,7 @@
 
 #define YOSHI_KID_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }

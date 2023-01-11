@@ -73,7 +73,7 @@ s32 N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
             for (i = 0; i < ARRAY_COUNT(D_802A25C8); i++) {
                 id = hud_element_create(gItemHudScripts[gItemTable[D_802A25FC[i]].hudElemID].enabled);
                 D_802A25C8[i] = id;
-                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
             }
             D_802A25E4 = 1;
             return ApiStatus_BLOCK;

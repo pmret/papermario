@@ -147,7 +147,7 @@ void spawn_drops(Enemy* enemy) {
         s32 temp = var_s1 + 1;
         var_s1 = temp + rand_int(2);
     }
-    if (enemy->flags & ENEMY_FLAGS_800000) {
+    if (enemy->flags & ENEMY_FLAG_800000) {
         var_s1 = 0;
     }
     if (var_s1 != 0) {
@@ -204,7 +204,7 @@ void spawn_drops(Enemy* enemy) {
         s32 temp = var_s1 + 1;
         var_s1 = temp + rand_int(2);
     }
-    if (enemy->flags & ENEMY_FLAGS_800000) {
+    if (enemy->flags & ENEMY_FLAG_800000) {
         var_s1 = 0;
     }
     if (var_s1 != 0) {
@@ -274,7 +274,7 @@ void spawn_drops(Enemy* enemy) {
     if (var_s1 > 20) {
         var_s1 = 20;
     }
-    if (enemy->flags & ENEMY_FLAGS_800000) {
+    if (enemy->flags & ENEMY_FLAG_800000) {
         var_s1 = 0;
     }
     if (var_s1 * 2 > sp28) {
@@ -334,7 +334,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
 
     amt += currentEncounter->coinsEarned;
 
-    if (enemy->flags & (ENEMY_FLAGS_800000 | ENEMY_FLAGS_40000)) {
+    if (enemy->flags & (ENEMY_FLAG_800000 | ENEMY_FLAG_40000)) {
         amt = 0;
     }
 
@@ -389,7 +389,7 @@ s32 func_80048F0C(void) {
             for (j = 0; j < encounter->count; j++) {
                 Enemy* enemy = encounter->enemy[j];
 
-                if (enemy != NULL && !(enemy->flags & ENEMY_FLAGS_20)) {
+                if (enemy != NULL && !(enemy->flags & ENEMY_FLAG_20)) {
                     get_npc_unsafe(enemy->npcID);
                 }
             }
@@ -424,7 +424,7 @@ s32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 r
     f32 dist;
     s32 skipCheckForPlayer;
 
-    if (enemy->aiFlags & ENEMY_AI_FLAGS_2) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_2) {
         return FALSE;
     }
 
@@ -570,8 +570,8 @@ void basic_ai_wander_init(Evt* script, MobileAISettings* npcAISettings, EnemyDet
         npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
     }
 
-    enemy->aiFlags &= ~ENEMY_AI_FLAGS_40;
-    enemy->aiFlags &= ~ENEMY_AI_FLAGS_20;
+    enemy->aiFlags &= ~ENEMY_AI_FLAG_40;
+    enemy->aiFlags &= ~ENEMY_AI_FLAG_20;
     script->AI_TEMP_STATE = AI_STATE_WANDER;
 }
 
@@ -595,8 +595,8 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
                     npc->yaw = yaw;
                     ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
                     fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp34);
-                    enemy->aiFlags &= ~ENEMY_AI_FLAGS_40;
-                    enemy->aiFlags &= ~ENEMY_AI_FLAGS_20;
+                    enemy->aiFlags &= ~ENEMY_AI_FLAG_40;
+                    enemy->aiFlags &= ~ENEMY_AI_FLAG_20;
 
                     if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
                         script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
@@ -619,13 +619,13 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
                                enemy->territory->wander.wanderSize.x,
                                enemy->territory->wander.wanderSize.z)
         && npc->moveSpeed < dist2D(enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z)) {
-        if (!(enemy->aiFlags & ENEMY_AI_FLAGS_20)) {
-            enemy->aiFlags |= (ENEMY_AI_FLAGS_20 | ENEMY_AI_FLAGS_40);
+        if (!(enemy->aiFlags & ENEMY_AI_FLAG_20)) {
+            enemy->aiFlags |= (ENEMY_AI_FLAG_20 | ENEMY_AI_FLAG_40);
         }
 
-        if (enemy->aiFlags & ENEMY_AI_FLAGS_40) {
+        if (enemy->aiFlags & ENEMY_AI_FLAG_40) {
             npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
-            enemy->aiFlags &= ~ENEMY_AI_FLAGS_40;
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_40;
         }
 
         x = npc->pos.x;
@@ -633,14 +633,14 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
         z = npc->pos.z;
         if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, 2.0 * npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
             yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
-            enemy->aiFlags &= ~ENEMY_AI_FLAGS_40;
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_40;
             ai_check_fwd_collisions(npc, 5.0f, &yaw, NULL, NULL, NULL);
             npc->yaw = yaw;
         }
         stillWithinTerritory = TRUE;
-    } else if (enemy->aiFlags & ENEMY_AI_FLAGS_20) {
-        enemy->aiFlags &= ~ENEMY_AI_FLAGS_20;
-        enemy->aiFlags &= ~ENEMY_AI_FLAGS_40;
+    } else if (enemy->aiFlags & ENEMY_AI_FLAG_20) {
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_20;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_40;
     }
 
     // perform the motion
@@ -858,7 +858,7 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
 
-    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAG_4) {
         script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         npc->duration = 0;
 
@@ -873,15 +873,15 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
 
-        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = AI_STATE_WANDER_INIT;
-        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
+        } else if (enemy->flags & ENEMY_FLAG_40000000) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         }
 
-        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
-        enemy->flags &= ~ENEMY_FLAGS_40000000;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        enemy->flags &= ~ENEMY_FLAG_40000000;
     }
 
     switch (script->AI_TEMP_STATE) {

@@ -614,7 +614,7 @@ EvtScript N(EVS_NpcInit_Luigi_1) = {
         EVT_CASE_LT(STORY_EPILOGUE)
             EVT_CALL(SetNpcPos, NPC_SELF, 306, 30, -145)
             EVT_CALL(InterpNpcYaw, NPC_SELF, 39, 0)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_400000, 1)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_400000, 1)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -625,10 +625,10 @@ StaticNpc N(NpcData_Luigi_0) = {
     .settings = &N(NpcSettings_Luigi),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Luigi_0),
     .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAG_80,
         .heartDrops  = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
@@ -658,10 +658,10 @@ StaticNpc N(NpcData_Luigi_1) = {
     .settings = &N(NpcSettings_Luigi),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Luigi_1),
     .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAG_80,
         .heartDrops  = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },
@@ -756,7 +756,7 @@ EvtScript N(EVS_NpcHit_ShyGuy) = {
     EVT_SET(GF_KMR20_ChasedOffShyGuy, TRUE)
     EVT_CALL(SetNpcVar, NPC_Luigi_1, 0, 1)
     EVT_WAIT(2)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000, 1)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_ShyGuy)))
     EVT_RETURN
     EVT_END
@@ -786,10 +786,10 @@ StaticNpc N(NpcData_ShyGuy) = {
     .settings = &N(NpcSettings_ShyGuy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_400000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_10000000,
+    .flags = ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_ShyGuy),
     .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAG_80,
         .heartDrops  = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },

@@ -202,23 +202,23 @@ void initialize_battle(void) {
     func_80268E88();
     set_windows_visible(WINDOW_GROUP_1);
     D_8029EFBC = hud_element_create(&HES_HPBar);
-    hud_element_set_flags(D_8029EFBC, HUD_ELEMENT_FLAGS_80);
+    hud_element_set_flags(D_8029EFBC, HUD_ELEMENT_FLAG_80);
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFC0); i++) {
         hudElemID = D_8029EFC0[i] = hud_element_create(&HES_Item_StarPoint);
-        hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+        hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
         hud_element_set_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFE8); i++) {
         hudElemID = D_8029EFE8[i] = hud_element_create(&HES_StatusSPShine);
-        hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+        hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
         hud_element_set_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029F010); i++) {
         hudElemID = D_8029F010[i] = hud_element_create(&HES_Item_SmallStarPoint);
-        hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+        hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
         hud_element_set_render_depth(hudElemID, 20);
     }
 
@@ -1029,8 +1029,8 @@ void btl_update_starpoints_display(void) {
             }
 
            for (; i < ARRAY_COUNT(D_8029EFC0); i++) {
-                hud_element_set_flags(D_8029EFC0[i], HUD_ELEMENT_FLAGS_DISABLED);
-                hud_element_set_flags(D_8029EFE8[i], HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_set_flags(D_8029EFC0[i], HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_set_flags(D_8029EFE8[i], HUD_ELEMENT_FLAG_DISABLED);
             }
 
             posX = D_8029DA40;
@@ -1054,7 +1054,7 @@ void btl_update_starpoints_display(void) {
             }
 
             for (; i < ARRAY_COUNT(D_8029F010); i++) {
-                hud_element_set_flags(D_8029F010[i], HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_set_flags(D_8029F010[i], HUD_ELEMENT_FLAG_DISABLED);
             }
         }
     }

@@ -158,7 +158,7 @@ EvtScript N(EVS_NpcInteract_Lily) = {
                 EVT_END_SWITCH
                 EVT_WAIT(10)
                 EVT_SET(GF_FLO10_LilyRequestedWaterStone, TRUE)
-                EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_400000, 0)
+                EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 0)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Lily_TalkPlead, ANIM_Lily_IdlePlead, 5, MSG_CH6_007F)
             EVT_END_IF
@@ -187,7 +187,7 @@ EvtScript N(EVS_NpcInit_Lily) = {
             EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, FALSE)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Lily_IdlePlead)
                 EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
-                EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_400000, 1)
+                EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 1)
             EVT_END_IF
         EVT_CASE_EQ(STORY_CH6_GOT_WATER_STONE)
             EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
@@ -203,7 +203,7 @@ StaticNpc N(NpcData_Lily) = {
     .settings = &N(NpcSettings_Lily),
     .pos = { 80.0f, -60.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Lily),
     .drops = LILY_DROPS,
     .animations = LILY_ANIMS,

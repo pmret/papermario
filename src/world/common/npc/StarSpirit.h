@@ -9,7 +9,7 @@
 
 #define ELDSTAR_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
@@ -36,7 +36,7 @@
 
 #define MAMAR_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
@@ -63,7 +63,7 @@
 
 #define SKOLAR_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
@@ -90,7 +90,7 @@
 
 #define MUSKULAR_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
@@ -117,7 +117,7 @@
 
 #define MISSTAR_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
@@ -144,7 +144,7 @@
 
 #define KLEVAR_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
@@ -171,7 +171,7 @@
 
 #define KALMAR_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }

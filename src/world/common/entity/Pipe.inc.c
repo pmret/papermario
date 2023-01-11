@@ -2,7 +2,7 @@
 #include "npc.h"
 
 API_CALLABLE(N(Pipe_SetAnimFlag)) {
-    gPlayerStatusPtr->animFlags |= PA_FLAGS_CHANGING_MAP;
+    gPlayerStatusPtr->animFlags |= PA_FLAG_CHANGING_MAP;
     return ApiStatus_DONE2;
 }
 
