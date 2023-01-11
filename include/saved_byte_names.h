@@ -2,7 +2,7 @@
 
 enum GameBytes {
     GB_StoryProgress                        = GameByte(0x000), 
-    GB_Unused_EVT_01                        = GameByte(0x001), ///< copied from GameStaus->unk_A9 by Function_80035E54 during save file load
+    GB_Unused_EVT_01                        = GameByte(0x001), ///< copied from GameStatus->unk_A9 by Function_80035E54 during save file load
     GB_Unused_EVT_02                        = GameByte(0x002), 
     GB_Unused_EVT_03                        = GameByte(0x003), 
     GB_Unused_EVT_04                        = GameByte(0x004), 
