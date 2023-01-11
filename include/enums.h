@@ -2530,7 +2530,7 @@ enum Phases {
     PHASE_FIRST_STRIKE              = 1,
     PHASE_RUN_AWAY_START            = 3,
     PHASE_RUN_AWAY_RESET            = 4,
-    PHASE_CELEBRATE                         = 5,
+    PHASE_CELEBRATE                 = 5,
     PHASE_USE_DEFEND                = 6,
     PHASE_RUN_AWAY_FAIL             = 7,
     PHASE_USE_LIFE_SHROOM           = 8,
@@ -3245,6 +3245,7 @@ enum PartnerActions {
     PARTNER_ACTION_KOOPER_2         = 2,
     PARTNER_ACTION_BOMBETTE_1       = 1,
     PARTNER_ACTION_BOMBETTE_2       = 2,
+    PARTNER_ACTION_BOMBETTE_3       = 3,
     PARTNER_ACTION_PARAKARRY_HOVER  = 1,
     PARTNER_ACTION_WATT_SHINE       = 1,
     PARTNER_ACTION_LAKILESTER_1     = 1,
@@ -4140,16 +4141,16 @@ enum BattleSubStates {
     BTL_SUBSTATE_NORMAL_START_UNK_8                         = 8,
 
     // BATTLE_STATE_FIRST_STRIKE
-    BTL_SUBSTATE_FIRST_STRIKE_UNK_0                         = 0,
-    BTL_SUBSTATE_FIRST_STRIKE_UNK_1                         = 1,
-    BTL_SUBSTATE_FIRST_STRIKE_UNK_2                         = 2,
-    BTL_SUBSTATE_FIRST_STRIKE_UNK_3                         = 3,
+    BTL_SUBSTATE_FIRST_STRIKE_INIT                          = 0,
+    BTL_SUBSTATE_FIRST_STRIKE_AWAIT_ENEMY_READY             = 1,
+    BTL_SUBSTATE_FIRST_STRIKE_AWAIT_SCRIPTS                 = 2,
+    BTL_SUBSTATE_FIRST_STRIKE_AWAIT_ENEMY_DONE              = 3,
 
     // BATTLE_STATE_PARTNER_FIRST_STRIKE
-    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_UNK_0                 = 0,
-    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_UNK_1                 = 1,
-    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_UNK_2                 = 2,
-    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_UNK_3                 = 3,
+    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_INIT                  = 0,
+    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_AWAIT_ENEMY_READY     = 1,
+    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_AWAIT_SCRIPTS         = 2,
+    BTL_SUBSTATE_PARTNER_FIRST_STRIKE_AWAIT_ENEMY_DONE      = 3,
 
     // BATTLE_STATE_ENEMY_FIRST_STRIKE
     BTL_SUBSTATE_ENEMY_FIRST_STRIKE_INIT                    = 0,

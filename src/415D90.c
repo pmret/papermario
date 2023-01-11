@@ -178,26 +178,51 @@ IconHudScriptPair battle_menu_DoNothingHudScripts = { &HES_MenuDoNothing, &HES_M
 
 IconHudScriptPair battle_menu_FleeHudScripts = { &HES_MenuFlee, &HES_MenuFleeDisabled };
 
-// Jump, Hammer, Items, RunAway, Defense
-s32 battle_menu_leftJustfiedMessagesA[] = { MSG_Menus_0039, MSG_Menus_0038, MSG_Menus_003F, MSG_Menus_003B, MSG_Menus_0044 };
+s32 battle_menu_leftJustfiedMessagesA[] = {
+    MSG_Menus_Jump,
+    MSG_Menus_Hammer,
+    MSG_Menus_Items,
+    MSG_Menus_RunAway,
+    MSG_Menus_Defense,
+};
 
-// Change Member, Abilities, Strategies, Star Spirits
-s32 battle_menu_leftJustfiedMessagesB[] = { MSG_Menus_003E, MSG_Menus_0045, MSG_Menus_0043, MSG_Menus_003A };
+s32 battle_menu_leftJustfiedMessagesB[] = {
+    MSG_Menus_ChangeMember,
+    MSG_Menus_Abilities,
+    MSG_Menus_Strategies,
+    MSG_Menus_StarSpirits,
+};
 
-// Do Nothing, Act Later, Focus
-s32 battle_menu_leftJustfiedMessagesC[] = { MSG_Menus_003C, MSG_Menus_0046, MSG_Menus_0048 };
+s32 battle_menu_leftJustfiedMessagesC[] = {
+    MSG_Menus_DoNothing,
+    MSG_Menus_ActLater,
+    MSG_Menus_Focus,
+};
 
 // Jump, Hammer
-s32 battle_menu_centeredMessagesA[] = { MSG_Menus_004B, MSG_Menus_004A };
+s32 battle_menu_centeredMessagesA[] = {
+    MSG_Menus_Jump_Centered,
+    MSG_Menus_Hammer_Centered,
+};
 
-// Items, RunAway, Defense, Change Member, Abilities
-s32 battle_menu_centeredMessagesB[] = { MSG_Menus_0050, MSG_Menus_004D, MSG_Menus_0052, MSG_Menus_004F, MSG_Menus_0053 };
+s32 battle_menu_centeredMessagesB[] = {
+    MSG_Menus_Items_Centered,
+    MSG_Menus_RunAway_Centered,
+    MSG_Menus_Defense_Centered,
+    MSG_Menus_ChangeMember_Centered,
+    MSG_Menus_Abilities_Centered,
+};
 
-// Strategies
-s32 battle_menu_centeredMessagesC[] = { MSG_Menus_0051 };
+s32 battle_menu_centeredMessagesC[] = {
+    MSG_Menus_Strategies_Centered,
+};
 
-// Star Spirits, Do Nothing, Act Later, Focus
-s32 battle_menu_centeredMessagesD[] = { MSG_Menus_004C, MSG_Menus_004E, MSG_Menus_0056, MSG_Menus_0055 };
+s32 battle_menu_centeredMessagesD[] = {
+    MSG_Menus_StarSpirits_Centered,
+    MSG_Menus_DoNothing_Centered,
+    MSG_Menus_ActLater_Centered,
+    MSG_Menus_Focus_Centered,
+};
 
 s32 D_802AB4F0[] = {
     [BTL_MENU_TYPE_JUMP]    MOVE_TYPE_JUMP,
@@ -250,30 +275,44 @@ AnimID D_802AB558[] = {
 
 HudScript* battle_menu_PartnerMoveHudScripts[10][10] = {
     { 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, },
-    { &HES_Goombario, &HES_GoombarioDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
-    { &HES_Kooper, &HES_KooperDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
-    { &HES_Bombette, &HES_BombetteDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
-    { &HES_Parakarry, &HES_ParakarryDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
-    { &HES_Partner0, &HES_Partner0Disabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
-    { &HES_Watt, &HES_WattDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
-    { &HES_Sushie, &HES_SushieDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
-    { &HES_Lakilester, &HES_LakilesterDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
-    { &HES_Bow, &HES_BowDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled },
+    [PARTNER_GOOMBARIO]  { &HES_Goombario, &HES_GoombarioDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    [PARTNER_KOOPER]     { &HES_Kooper, &HES_KooperDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    [PARTNER_BOMBETTE]   { &HES_Bombette, &HES_BombetteDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    [PARTNER_PARAKARRY]  { &HES_Parakarry, &HES_ParakarryDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    [PARTNER_GOOMPA]     { &HES_Partner0, &HES_Partner0Disabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    [PARTNER_WATT]       { &HES_Watt, &HES_WattDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    [PARTNER_SUSHIE]     { &HES_Sushie, &HES_SushieDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    [PARTNER_LAKILESTER] { &HES_Lakilester, &HES_LakilesterDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled, },
+    [PARTNER_BOW]        { &HES_Bow, &HES_BowDisabled, &HES_MoveDiamond, &HES_MoveDiamondDisabled, &HES_MoveBlueOrb, &HES_MoveBlueOrbDisabled, &HES_MoveGreenOrb, &HES_MoveGreenOrbDisabled, &HES_MoveRedOrb, &HES_MoveRedOrbDisabled },
 };
 
 IconHudScriptPair battle_menu_PeachStarPowerHudScripts = { &HES_MenuStarPower, &HES_MenuStarPowerDisabled };
 
-// Focus
-s32 D_802AB728[] = { MSG_Menus_0055 };
+s32 D_802AB728[] = {
+    MSG_Menus_Focus_Centered,
+};
 
 HudScript* battle_menu_TwinkStarPowerHudScripts[] = { &HES_MenuStarPower, &HES_MenuStarPowerDisabled };
 
-// Dash
-s32 D_802AB734[] = { MSG_Menus_0057 };
+s32 D_802AB734[] = {
+    MSG_Menus_Dash_Centered,
+};
 
 s32 D_802AB738[] = {
-    0x00000000, MSG_Menus_Party_Goombario, MSG_Menus_Party_Kooper, MSG_Menus_Party_Bombette, MSG_Menus_Party_Parakarry, MSG_Menus_Party_Goompa, MSG_Menus_Party_Watt, MSG_Menus_Party_Sushie, MSG_Menus_Party_Lakilester,
-    MSG_Menus_Party_Bow, MSG_Menus_Party_Goombaria, MSG_Menus_Party_Twink, MSG_Menus_Party_Peach, 0x00000000
+    0x00000000,
+    MSG_Menus_Party_Goombario,
+    MSG_Menus_Party_Kooper,
+    MSG_Menus_Party_Bombette,
+    MSG_Menus_Party_Parakarry,
+    MSG_Menus_Party_Goompa,
+    MSG_Menus_Party_Watt,
+    MSG_Menus_Party_Sushie,
+    MSG_Menus_Party_Lakilester,
+    MSG_Menus_Party_Bow,
+    MSG_Menus_Party_Goombaria,
+    MSG_Menus_Party_Twink,
+    MSG_Menus_Party_Peach,
+    0x00000000
 };
 
 BSS s32 D_802ACC60;
@@ -1356,7 +1395,7 @@ s32 func_802A2C84(void) {
             }
             set_window_update(8, 2);
 
-            msgID = MSG_Menus_00C3;
+            msgID = MSG_Menus_Battle_CantSelectNow;
             if (D_802AD258 == 0) {
                 if (!battle_menu_hasSpiritsMenu) {
                     msgID = MSG_Menus_NotEnoughFP;
@@ -1893,13 +1932,13 @@ s32 func_802A4A54(void) {
             set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
             switch (D_802AD610) {
                 case 0:
-                    msgID = MSG_Menus_00CB;
+                    msgID = MSG_Menus_Battle_CantSwitch2;
                     break;
                 case 1:
-                    msgID = MSG_Menus_00CC;
+                    msgID = MSG_Menus_Battle_CantRunAway;
                     break;
                 default:
-                    msgID = MSG_Menus_00CC;
+                    msgID = MSG_Menus_Battle_CantRunAway;
                     break;
             }
             width = get_msg_width(msgID, 0) + 23;
@@ -2028,7 +2067,7 @@ INCLUDE_ASM(s32, "415D90", func_802A5290);
 #endif
 
 void func_802A56F8(s32 arg0, s32 x, s32 y) {
-    draw_msg(MSG_Menus_0043, x + 15, y + 2, D_802AD624, MSG_PAL_33, DRAW_MSG_STYLE_MENU);
+    draw_msg(MSG_Menus_Strategies, x + 15, y + 2, D_802AD624, MSG_PAL_33, DRAW_MSG_STYLE_MENU);
 }
 
 void func_802A5738(s32 arg0, s32 x, s32 y) {
@@ -2052,13 +2091,13 @@ void func_802A57C8(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s
 
     switch (D_802AD610) {
         case 0:
-            msgID = MSG_Menus_00CB;
+            msgID = MSG_Menus_Battle_CantSwitch2;
             break;
         case 1:
-            msgID = MSG_Menus_00CC;
+            msgID = MSG_Menus_Battle_CantRunAway;
             break;
         default:
-            msgID = MSG_Menus_00CC;
+            msgID = MSG_Menus_Battle_CantRunAway;
             break;
     }
     draw_msg(msgID, x, y, 255, MSG_PAL_0F, 0);
@@ -2257,16 +2296,16 @@ void btl_state_update_player_menu(void) {
             battle_menu_messageIDs[0] = battle_menu_centeredMessagesC[0];
             if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL) {
                 if (gBattleStatus.flags1 & BS_FLAGS1_2000000) {
-                    battle_menu_messageIDs[0] = MSG_Menus_0054;
+                    battle_menu_messageIDs[0] = MSG_Menus_EndTraining_Centered;
                 }
             } else {
-                battle_menu_messageIDs[0] = MSG_Menus_0054;
+                battle_menu_messageIDs[0] = MSG_Menus_EndTraining_Centered;
             }
             battle_menu_isMessageDisabled[entryIdx] = 0;
             if (!(battleStatus->menuDisableFlags & 0x80)) {
                 main_battle_menu_JumpHudScripts[entryIdx] = battle_menu_StrategiesHudScript.disabled;
                 battle_menu_isEnabled[entryIdx] = FALSE;
-                battle_menu_isMessageDisabled[entryIdx] = 0x48;
+                battle_menu_isMessageDisabled[entryIdx] = BTL_MSG_48;
             }
             if (battleStatus->unk_4C[0] == 7) {
                 initialPos = entryIdx;
@@ -2281,19 +2320,19 @@ void btl_state_update_player_menu(void) {
                 if(battleStatus->menuStatus[0] == 0) {
                     main_battle_menu_JumpHudScripts[entryIdx] = battle_menu_ItemHudScripts.disabled;
                     battle_menu_isEnabled[entryIdx] = FALSE;
-                    battle_menu_isMessageDisabled[entryIdx] = 0x45;
+                    battle_menu_isMessageDisabled[entryIdx] = BTL_MSG_45;
                 }
 
                 if (!(battleStatus->menuDisableFlags & 0x4)) {
                     main_battle_menu_JumpHudScripts[entryIdx] = battle_menu_ItemHudScripts.disabled;
                     battle_menu_isEnabled[entryIdx] = FALSE;
-                    battle_menu_isMessageDisabled[entryIdx] = 0x48;
+                    battle_menu_isMessageDisabled[entryIdx] = BTL_MSG_48;
                 }
 
                 if (battleStatus->itemLossTurns >= 0) {
                     main_battle_menu_JumpHudScripts[entryIdx] = battle_menu_ItemHudScripts.disabled;
                     battle_menu_isEnabled[entryIdx] = FALSE;
-                    battle_menu_isMessageDisabled[entryIdx] = 0x48;
+                    battle_menu_isMessageDisabled[entryIdx] = BTL_MSG_48;
                 }
 
                 if (battleStatus->unk_4C[0] == 2) {
@@ -5108,7 +5147,7 @@ void btl_state_draw_select_target(void) {
         if ((battleStatus->currentTargetListFlags & 1) || targetListLength == 1) {
             actorID = target->actorID;
             if (actorID == ACTOR_PLAYER) {
-                msgWidth = get_msg_width(MSG_Menus_00C4, 0) + 10;
+                msgWidth = get_msg_width(MSG_Menus_Battle_TargetMario, 0) + 10;
             } else if (actorID == ACTOR_PARTNER) {
                 msgWidth = get_msg_width(D_802AB738[currentPartner], 0) + 10;
             } else {
@@ -5124,11 +5163,11 @@ void btl_state_draw_select_target(void) {
             target = &actor->targetData[targetIndexList[selectedTargetIndex]];
             actorID = target->actorID;
             if (actorID == ACTOR_PLAYER) {
-                msgWidth = get_msg_width(MSG_Menus_00C4, 0) + 10;
+                msgWidth = get_msg_width(MSG_Menus_Battle_TargetMario, 0) + 10;
             } else if (actorID == ACTOR_PARTNER) {
                 msgWidth = get_msg_width(D_802AB738[currentPartner], 0) + 10;
             } else {
-                msgWidth = get_msg_width(MSG_Menus_00C5, 0) + 10;
+                msgWidth = get_msg_width(MSG_Menus_Battle_TargetAllEnemies, 0) + 10;
             }
         }
 
@@ -5140,7 +5179,7 @@ void btl_state_draw_select_target(void) {
         if ((battleStatus->currentTargetListFlags & 1) || targetListLength == 1) {
             actorID = target->actorID;
             if (actorID == ACTOR_PLAYER) {
-                draw_msg(MSG_Menus_00C4, screenX + D_802ACC68, screenY, 255, MSG_PAL_36, 0);
+                draw_msg(MSG_Menus_Battle_TargetMario, screenX + D_802ACC68, screenY, 255, MSG_PAL_36, 0);
             } else if (actorID == ACTOR_PARTNER) {
                 draw_msg(D_802AB738[currentPartner], screenX + D_802ACC68, screenY, 255, MSG_PAL_36, 0);
             } else {
