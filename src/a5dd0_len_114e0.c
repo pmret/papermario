@@ -2988,8 +2988,637 @@ void state_render_frontUI(void) {
     }
 }
 
-void appendGfx_model(void* data);
-INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
+void appendGfx_model(void* data) {
+    Model* model = data;
+    s32 s7;
+    TextureHandle* s1;
+    TextureHeader* s2;
+    u32 fp;
+    s8 s4;
+    s32 s3;
+    s32 A1;
+    s32 new_var;
+    s32 t8 = model->flags;
+
+    ModelNode* sp28;
+    u16 sp36;
+    s32 sp38;
+    s32 sp44;
+    ModelNodeProperty* mnp;
+    s32 temp;
+
+    s32 fogMin, fogMax;
+    s32 fogR, fogG, fogB, fogA;
+    Gfx** gfx = &gMasterGfxPos;
+
+    s7 = 1;
+    sp38 = 2;
+    sp28 = model->modelNode;
+
+    if (model->textureID != 0) {
+        s1 = &mdl_textureHandles[model->textureID + model->textureVariation];
+        s2 = &s1->header;
+
+        if (s1->gfx != NULL) {
+            fp = s1->header.extraTiles;
+        } else {
+            s2 = NULL;
+        }
+    } else {
+        s1 = NULL;
+        s2 = NULL;
+    }
+
+    s4 = model->renderMode;
+    sp44 = 0;
+    if (s2 != NULL) {
+        switch (fp) {
+            case 0:
+                s3 = 1;
+                break;
+            case 1:
+            case 2:
+            case 3:
+                s3 = 2;
+                break;
+            default:
+                s3 = 1;
+                break;
+        }
+    } else {
+        s3 = 1;
+    }
+    if ((s2 != NULL || s4 <= 16) && gCurrentFogSettings->enabled && !(t8 & 0x40)) {
+        s3 = 3;
+        sp44 = 1;
+    }
+
+    switch ((u32)(model->customGfxIndex >> 4)) {
+        case 1:
+            s3 += 3;
+            sp44 = 2;
+            break;
+        case 2:
+            if (s4 <= 16) {
+                gDPSetPrimColor((*gfx)++, 0, 0, mdl_renderModelFogPrimColorR,
+                                                       mdl_renderModelFogPrimColorG,
+                                                       mdl_renderModelFogPrimColorB,
+                                                       mdl_renderModelFogPrimColorA);
+                gDPSetFogColor((*gfx)++, mdl_renderModelFogColorR,
+                                                mdl_renderModelFogColorG,
+                                                mdl_renderModelFogColorB, 0);
+                gSPFogPosition((*gfx)++, mdl_renderModelFogStart, mdl_renderModelFogEnd);
+                s3 += 9;
+                sp44 = 3;
+            }
+            break;
+        case 3:
+            s3 = 2;
+            sp44 = 4;
+            gDPSetPrimColor((*gfx)++, 0, 0, gRenderModelPrimR,
+                                                   gRenderModelPrimG,
+                                                   gRenderModelPrimB, 255);
+            gDPSetEnvColor((*gfx)++, gRenderModelEnvR,
+                                            gRenderModelEnvG,
+                                            gRenderModelEnvB, 255);
+            break;
+    }
+
+    gDPPipeSync((*gfx)++);
+
+    if (model->groupData != NULL) {
+        Lightsn* t6 = model->groupData->lightingGroup;
+        if (model->groupData->lightingGroup != NULL) {
+            switch (model->groupData->numLights) {
+                case 0:
+                    gSPSetLights0((*gfx)++, t6[0]);
+                    break;
+                case 1:
+                    gSPSetLights1((*gfx)++, t6[0]);
+                    break;
+                case 2:
+                    gSPSetLights2((*gfx)++, t6[0]);
+                    break;
+                case 3:
+                    gSPSetLights3((*gfx)++, t6[0]);
+                    break;
+                case 4:
+                    gSPSetLights4((*gfx)++, t6[0]);
+                    break;
+                case 5:
+                    gSPSetLights5((*gfx)++, t6[0]);
+                    break;
+                case 6:
+                    gSPSetLights6((*gfx)++, t6[0]);
+                    break;
+                case 7:
+                    gSPSetLights7((*gfx)++, t6[0]);
+                    break;
+            }
+        }
+    }
+
+    if (s2 != NULL) {
+        switch (fp) {
+            case 3:
+            case 4:
+                mnp = get_model_property(sp28, MODEL_PROP_KEY_SPECIAL);
+                if (mnp != NULL) {
+                    s32 v1 = mnp->data.s;
+                    u16 a2 = mnp->dataType;
+                    s32 a1 = mnp->dataType;
+                    func_801180E8(s2, gfx, s1->raster, s1->palette, s1->auxRaster, s1->auxPalette,
+                                (v1 >> 12) & 0xF, (v1 >> 16) & 0xF,
+                                a2 & 0xFFF, (a1 >> 12) & 0xFFF);
+
+                } else {
+                    gSPDisplayList((*gfx)++, s1->gfx);
+                }
+                break;
+            default:
+                gSPDisplayList((*gfx)++, s1->gfx);
+                break;
+        }
+    } else {
+        gSPTexture((*gfx)++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+        gDPSetCombineMode((*gfx)++, G_CC_SHADE, G_CC_SHADE);
+        gDPSetColorDither((*gfx)++, G_CD_MAGICSQ);
+        gDPSetAlphaDither((*gfx)++, G_AD_PATTERN);
+    }
+
+    if (sp44 != 0 || s4 == 0xD || s4 == 0xF) {
+        u32 v1 = 0;
+
+        if (s2 != NULL) {
+            u32 a0 = s2->colorCombineType;
+            if (a0 >= 3) {
+                v1 = a0 + 10;
+            } else {
+                v1 = fp * 3 + 1 + s2->colorCombineSubType;
+            }
+        }
+
+        if (s4 != 0xD && s4 != 0xF) {
+            *(*gfx) = D_8014B0B8[v1][sp44];
+        } else {
+            *(*gfx) = D_8014B400[v1][sp44];
+        }
+        (*gfx)++;
+    }
+
+    switch (s3) {
+        case 1:
+            switch (s4) {
+                case 1:
+                    A1 = 0;
+                    break;
+                case 3:
+                    A1 = 1;
+                    break;
+                case 5:
+                    A1 = 2;
+                    break;
+                case 7:
+                    A1 = 3;
+                    break;
+                case 9:
+                    A1 = 4;
+                    break;
+                case 13:
+                    A1 = 6;
+                    break;
+                case 15:
+                    A1 = 7;
+                    break;
+                case 41:
+                    A1 = 9;
+                    break;
+                case 17:
+                case 22:
+                case 34:
+                    A1 = 8;
+                    break;
+                case 19:
+                    A1 = 10;
+                    break;
+                case 21:
+                    A1 = 11;
+                    break;
+                case 26:
+                    A1 = 12;
+                    break;
+                case 28:
+                    A1 = 13;
+                    break;
+                case 38:
+                    A1 = 14;
+                    break;
+                case 4:
+                    A1 = 0x2E;
+                    break;
+                case 16:
+                    A1 = 0x2F;
+                    break;
+                case 20:
+                    A1 = 0x30;
+                    break;
+                case 46:
+                    A1 = 0x37;
+                    break;
+                case 47:
+                    A1 = 0x38;
+                    break;
+                default:
+                    A1 = 0;
+                    break;
+            }
+            gSPDisplayList((*gfx)++, D_8014AFC0[A1]);
+            break;
+        case 2:
+            switch (s4) {
+                case 3:
+                    A1 = 0x11;
+                    break;
+                case 5:
+                    A1 = 0x12;
+                    break;
+                case 7:
+                    A1 = 0x13;
+                    break;
+                case 9:
+                    A1 = 0x14;
+                    break;
+                case 13:
+                    A1 = 0x16;
+                    break;
+                case 15:
+                    A1 = 0x17;
+                    break;
+                case 17:
+                case 22:
+                case 34:
+                    A1 = 0x18;
+                    break;
+                case 41:
+                    A1 = 0x19;
+                    break;
+                case 19:
+                    A1 = 0x1A;
+                    break;
+                case 26:
+                    A1 = 0x1B;
+                    break;
+                case 28:
+                    A1 = 0x1C;
+                    break;
+                case 38:
+                    A1 = 0x1D;
+                    break;
+                case 4:
+                    A1 = 0x31;
+                    break;
+                case 16:
+                    A1 = 0x32;
+                    break;
+                case 20:
+                    A1 = 0x33;
+                    break;
+                case 46:
+                    A1 = 0x39;
+                    break;
+                case 47:
+                    A1 = 0x3A;
+                    break;
+                case 1:
+                    A1 = 0x10;
+                    break;
+                default:
+                    A1 = 0x10;
+                    break;
+            }
+            gSPDisplayList((*gfx)++, D_8014AFC0[A1]);
+            break;
+        case 3:
+            temp = 0x25; // required to match
+            switch (s4) {
+                case 3:
+                    A1 = 0x20;
+                    break;
+                case 5:
+                    A1 = 0x21;
+                    break;
+                case 7:
+                    A1 = 0x22;
+                    break;
+                case 9:
+                    A1 = 0x23;
+                    break;
+                case 13:
+                    A1 = temp;
+                    break;
+                case 15:
+                    A1 = 0x26;
+                    break;
+                case 17:
+                case 22:
+                case 34:
+                    A1 = 0x27;
+                    break;
+                case 41:
+                    A1 = 0x28;
+                    break;
+                case 19:
+                    A1 = 0x29;
+                    break;
+                case 26:
+                    A1 = 0x2A;
+                    break;
+                case 28:
+                    A1 = 0x2B;
+                    break;
+                case 38:
+                    A1 = 0x2C;
+                    break;
+                case 4:
+                    A1 = 0x34;
+                    break;
+                case 16:
+                    A1 = 0x35;
+                    break;
+                case 20:
+                    A1 = 0x36;
+                    break;
+                case 46:
+                    A1 = 0x3B;
+                    break;
+                case 47:
+                    A1 = 0x3C;
+                    break;
+                case 1:
+                    A1 = 0x1F;
+                    break;
+                default:
+                    A1 = 0x1F;
+                    break;
+            }
+            gSPDisplayList((*gfx)++, D_8014AFC0[A1]);
+            gDPSetFogColor((*gfx)++, gCurrentFogSettings->r,
+                                            gCurrentFogSettings->g,
+                                            gCurrentFogSettings->b,
+                                            gCurrentFogSettings->a);
+            gSPFogPosition((*gfx)++, gCurrentFogSettings->startDistance, gCurrentFogSettings->endDistance);
+            break;
+        case 4:
+        case 5:
+            if (mdl_bgMultiplyColorA == 255) {
+                return;
+            }
+            gSPDisplayList((*gfx)++, D_8014AFC0[0x10]);
+            switch (s4) {
+                case 1:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_SURF2);
+                    break;
+                case 3:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_OPA_SURF2);
+                    break;
+                case 5:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_DECAL2);
+                    break;
+                case 7:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_OPA_DECAL2);
+                    break;
+                case 9:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_INTER2);
+                    break;
+                case 13:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_TEX_EDGE2);
+                    break;
+                case 15:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_TEX_EDGE2);
+                    break;
+                case 17:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
+                    break;
+                case 22:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
+                    break;
+                case 34:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
+                    break;
+                case 19:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_XLU_SURF2);
+                    break;
+                case 26:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_DECAL2);
+                    break;
+                case 28:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_DECAL2);
+                    break;
+                case 38:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_INTER2);
+                    break;
+                case 4:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_OPA_SURF2);
+                    break;
+                case 16:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_TEX_EDGE2);
+                    break;
+                case 20:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_XLU_SURF2);
+                    break;
+                case 46:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_CLD_SURF2);
+                    break;
+                case 47:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_CLD_SURF2);
+                    break;
+            }
+            gDPSetFogColor((*gfx)++, gCurrentFogSettings->r,
+                                            gCurrentFogSettings->g,
+                                            gCurrentFogSettings->b,
+                                            mdl_bgMultiplyColorA);
+            gDPSetBlendColor((*gfx)++, mdl_bgMultiplyColorR,
+                                              mdl_bgMultiplyColorG,
+                                              mdl_bgMultiplyColorB,
+                                              255);
+            gSPFogPosition((*gfx)++, 970, 1000);
+            break;
+        case 6:
+            switch (s4) {
+                case 3:
+                    A1 = 0x20;
+                    break;
+                case 5:
+                    A1 = 0x21;
+                    break;
+                case 7:
+                    A1 = 0x22;
+                    break;
+                case 9:
+                    A1 = 0x23;
+                    break;
+                case 13:
+                    A1 = 0x25;
+                    break;
+                case 15:
+                    A1 = 0x26;
+                    break;
+                case 17:
+                case 22:
+                case 34:
+                    A1 = 0x27;
+                    break;
+                case 41:
+                    A1 = 0x28;
+                    break;
+                case 19:
+                    A1 = 0x29;
+                    break;
+                case 26:
+                    A1 = 0x2A;
+                    break;
+                case 28:
+                    A1 = 0x2B;
+                    break;
+                case 38:
+                    A1 = 0x2C;
+                    break;
+                case 4:
+                    A1 = 0x34;
+                    break;
+                case 16:
+                    A1 = 0x35;
+                    break;
+                case 20:
+                    A1 = 0x36;
+                    break;
+                case 46:
+                    A1 = 0x3B;
+                    break;
+                case 47:
+                    A1 = 0x3C;
+                    break;
+                case 1:
+                    A1 = 0x1F;
+                    break;
+                default:
+                    A1 = 0x1F;
+                    break;
+            }
+            gSPDisplayList((*gfx)++, D_8014AFC0[A1]);
+
+            fogR = (gCurrentFogSettings->r * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorR * mdl_bgMultiplyColorA) / 255;
+            fogG = (gCurrentFogSettings->g * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorG * mdl_bgMultiplyColorA) / 255;
+            fogB = (gCurrentFogSettings->b * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorB * mdl_bgMultiplyColorA) / 255;
+
+            fogMin = (gCurrentFogSettings->startDistance * (255 - mdl_bgMultiplyColorA) + 900 * mdl_bgMultiplyColorA) / 255;
+            fogMax = (gCurrentFogSettings->endDistance * (255 - mdl_bgMultiplyColorA) + 1000 * mdl_bgMultiplyColorA) / 255;
+
+            gDPSetFogColor(gMasterGfxPos++,  fogR, fogG, fogB, gCurrentFogSettings->a);
+            gSPFogPosition((*gfx)++, fogMin, fogMax);
+            break;
+        case 10:
+        case 11:
+            switch (s4) {
+                case 5:
+                    A1 = 0x21;
+                    break;
+                case 9:
+                    A1 = 0x23;
+                    break;
+                case 13:
+                    A1 = 0x25;
+                    break;
+                case 46:
+                    A1 = 0x3B;
+                    break;
+                case 47:
+                    A1 = 0x3C;
+                    break;
+                case 1:
+                default:
+                    A1 = 0x1F;
+                    break;
+            }
+            gSPDisplayList((*gfx)++, D_8014AFC0[A1]);
+            break;
+    }
+
+    if (!(t8 & 8)) {
+        if (!(t8 & 0x2000)) {
+            gSPMatrix((*gfx)++, model->currentSpecialMatrix, sp38 | s7 | G_MTX_MODELVIEW);
+            if (s7 != 0) {
+                s7 = 0;
+            }
+            if (sp38 != 0) {
+                sp38 = 0;
+            }
+        }
+    } else {
+        sp38 = 0;
+        if (!(t8 & 0x2000)) {
+            gSPMatrix((*gfx)++, model->currentSpecialMatrix, sp38 | s7 | G_MTX_MODELVIEW);
+            if (s7 != 0) {
+                s7 = 0;
+            }
+        }
+    }
+
+    if (t8 & 0x10) {
+        sp36 = (model->customGfxIndex & 0xF) * 2;
+        if ((*gCurrentCustomModelGfxPtr)[sp36] != NULL) {
+            gSPDisplayList((*gfx)++, (*gCurrentCustomModelGfxPtr)[sp36]);
+        }
+    }
+
+    if (s2 != NULL) {
+        if (t8 & 0x800) {
+            s32 a3 = texPannerMainU[model->texPannerID] >> 8;
+            s32 t0 = texPannerMainV[model->texPannerID] >> 8;
+            s32 t2 = texPannerAuxU[model->texPannerID] >> 8;
+            s32 t1 = texPannerAuxV[model->texPannerID] >> 8;
+
+            switch (fp) {
+                case 2:
+                    gDPSetTileSize((*gfx)++, G_TX_RENDERTILE, a3, t0, (s2->mainW - 1) * 4 + a3, (s2->mainH / 2 - 1) * 4 + t0);
+                    gDPSetTileSize((*gfx)++, G_TX_RENDERTILE + 1, t2, t1, (s2->mainW - 1) * 4 + t2, (s2->mainH / 2 - 1) * 4 + t1);
+                    break;
+                case 3:
+                    gDPSetTileSize((*gfx)++, G_TX_RENDERTILE, a3, t0, (s2->mainW - 1) * 4 + a3, (s2->mainH - 1) * 4 + t0);
+                    gDPSetTileSize((*gfx)++, G_TX_RENDERTILE + 1, t2, t1, (s2->auxW - 1) * 4 + t2, (s2->auxH - 1) * 4 + t1);
+                    break;
+                default:
+                    gDPSetTileSize((*gfx)++, G_TX_RENDERTILE, a3, t0, (s2->mainW - 1) * 4 + a3, (s2->mainH - 1) * 4 + t0);
+                    break;
+            }
+        }
+    }
+    if (t8 & 0x100) {
+        gSPMatrix((*gfx)++, gCameras[gCurrentCamID].unkMatrix, sp38 | s7 | G_MTX_MODELVIEW);
+        if (s7 != 0) {
+            s7 = 0;
+        }
+        if (sp38 != 0) {
+            sp38 = 0;
+        }
+    }
+    if (!(t8 & 0x80)) {
+        gSPDisplayList((*gfx)++, sp28->displayData->displayList);
+    }
+
+    if (t8 & 0x10) {
+        sp36++;
+        if ((*gCurrentCustomModelGfxPtr)[sp36] != NULL) {
+            gSPDisplayList((*gfx)++, (*gCurrentCustomModelGfxPtr)[sp36]);
+        }
+    }
+
+    if (s7 == 0) {
+        gSPPopMatrix((*gfx)++, G_MTX_MODELVIEW);
+    }
+
+    gDPPipeSync((*gfx)++);
+}
 
 void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, s32 mainSize, s32 mainPalSize, s32 auxSize, s32 auxPalSize) {
     handle->raster = (IMG_PTR) mdl_nextTextureAddress;
