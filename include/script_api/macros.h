@@ -419,7 +419,7 @@
 
 /// Loads an s32 array pointer into the current thread for use with `UF(INDEX)`.
 /// Flags are stored in a 'packed' structure where indices refer to bits.
-#define EVT_USE_FLAG_ARRAY(PACKED_FLAG_PTR)    EVT_CMD(EVT_OP_USE_FLAG_ARRAY, (Bytecode) PACKED_FLAG_PTR),
+#define EVT_USE_FLAG_ARRAY(PACKED_FLAGS_PTR)    EVT_CMD(EVT_OP_USE_FLAG_ARRAY, (Bytecode) PACKED_FLAGS_PTR),
 
 /// Allocates a new array of the given size for use with `ArrayVar(INDEX)`.
 /// EVT scripts do not have to worry about freeing this array.
