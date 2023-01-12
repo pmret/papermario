@@ -322,16 +322,16 @@ API_CALLABLE(InitStarPointModelFlags) {
     EntityModel* model;
 
     model = get_entity_model(*virtual_entity_get_by_index(script->varTable[6]));
-    model->flags &= ~MODEL_FLAG_MASK_FFF0 ;
+    model->flags &= ~MODEL_FLAGS_MASK_FFF0 ;
     model->flags |= MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
     model = get_entity_model(*virtual_entity_get_by_index(script->varTable[7]));
-    model->flags &= ~MODEL_FLAG_MASK_FFF0 ;
+    model->flags &= ~MODEL_FLAGS_MASK_FFF0 ;
     model->flags |= MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
     model = get_entity_model(*virtual_entity_get_by_index(script->varTable[8]));
-    model->flags &= ~MODEL_FLAG_MASK_FFF0 ;
+    model->flags &= ~MODEL_FLAGS_MASK_FFF0 ;
     model->flags |= MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
     model = get_entity_model(*virtual_entity_get_by_index(script->varTable[9]));
-    model->flags &= ~MODEL_FLAG_MASK_FFF0 ;
+    model->flags &= ~MODEL_FLAGS_MASK_FFF0 ;
     model->flags |= MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
 
     return ApiStatus_DONE2;
@@ -339,7 +339,7 @@ API_CALLABLE(InitStarPointModelFlags) {
 
 API_CALLABLE(InitLevelUpModelFlags) {
     EntityModel* model = get_entity_model(*virtual_entity_get_by_index(script->varTable[9]));
-    model->flags &= ~MODEL_FLAG_MASK_FFF0;
+    model->flags &= ~MODEL_FLAGS_MASK_FFF0;
     model->flags |= MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
 
     return ApiStatus_DONE2;
