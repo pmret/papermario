@@ -4780,7 +4780,6 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
                     }
                     break;
             }
-            // use tile with lowest quality
             gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, lod - 1, G_TX_RENDERTILE, G_ON);
             break;
         case EXTRA_TILE_2:
