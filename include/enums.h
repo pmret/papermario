@@ -4607,10 +4607,10 @@ enum BattleMessages {
 
 // BtlMainMenuState
 enum BattleMenuStates {
-    BTL_MENU_STATE_NEGATIVE_1           = -1,
+    BTL_MENU_STATE_OPENED_SUBMENU       = -1,
     BTL_MENU_STATE_CREATE               = 0,
     BTL_MENU_STATE_UNK_1                = 1,
-    BTL_MENU_STATE_UNK_2                = 2,
+    BTL_MENU_STATE_ACCEPT_INPUT         = 2,
     BTL_MENU_STATE_UNK_A                = 10,
     BTL_MENU_STATE_UNK_B                = 11,
     BTL_MENU_STATE_UNK_14               = 20,

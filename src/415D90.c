@@ -321,19 +321,19 @@ BSS s32 D_802AD050;
 BSS s32 D_802AD054;
 BSS s32 D_802AD058;
 BSS s32 D_802AD05C;
-BSS s32 D_802AD060;
-BSS s32 D_802AD064;
+BSS s32 BtlMainMenuBasePosX;
+BSS s32 BtlMainMenuBasePosY;
 BSS s8 BtlMainMenuDisableMsg;
 BSS s8 BtlMainMenuMinIdx;
 BSS s8 BtlMainMenuMaxIdx;
-BSS s8 D_802AD06B;
-BSS f32 D_802AD06C;
+BSS s8 BtlMainMenuHomePos;
+BSS f32 BtlMainMenuWheelAngle;
 BSS f32 D_802AD070;
 BSS s32 D_802AD074; // unused?
 BSS HudScript* BattleMenuMain_CategoryHudScripts[6];
 BSS s32 battle_menu_messageIDs[6];
 BSS s32 D_802AD0A8;
-BSS s32 main_menu_numOptions;
+BSS s32 BtlMainMenuNumOptions;
 BSS s32 D_802AD0B0;
 BSS s32 D_802AD0B4; // unused?
 BSS s32 battle_menu_submenuIDs[6];
@@ -450,7 +450,7 @@ void func_802A1030(void) {
 }
 
 void func_802A1050(void) {
-    BtlMainMenuState = BTL_MENU_STATE_UNK_2;
+    BtlMainMenuState = BTL_MENU_STATE_ACCEPT_INPUT;
     D_802AD006 = 255;
     BtlMainMenuAlpha = 255;
 }
@@ -468,7 +468,7 @@ void func_802A1098(void) {
 void btl_main_menu_destroy(void) {
     s32 i;
 
-    for (i = 0; i < main_menu_numOptions; i++) {
+    for (i = 0; i < BtlMainMenuNumOptions; i++) {
         s32* icons1 = D_802AD010;
         s32* icons2 = D_802AD028;
 
@@ -496,16 +496,17 @@ s32 btl_main_menu_update(void) {
 
     switch (BtlMainMenuState) {
         case BTL_MENU_STATE_CREATE:
-            D_802AD060 = 54;
-            D_802AD064 = 173;
+            BtlMainMenuBasePosX = 54;
+            BtlMainMenuBasePosY = 173;
             D_802AD070 = 0.3f;
             D_802AD004 = 0;
-            D_802AD06B = D_802AD0B0;
-            BtlMainMenuMinIdx = -D_802AD0B0;
-            BtlMainMenuMaxIdx = main_menu_numOptions - 1;
+            BtlMainMenuHomePos = D_802AD0B0;
+            BtlMainMenuMinIdx = 0;
+            BtlMainMenuMinIdx -= D_802AD0B0;
+            BtlMainMenuMaxIdx = BtlMainMenuNumOptions - 1;
             BtlMainMenuMaxIdx -= D_802AD0B0;
 
-            for (i = 0; i < main_menu_numOptions; i++) {
+            for (i = 0; i < BtlMainMenuNumOptions; i++) {
                 D_802AD010[i] = id = hud_element_create(BattleMenuMain_CategoryHudScripts[i]);
                 hud_element_set_render_depth(id, 5);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
@@ -588,7 +589,7 @@ s32 btl_main_menu_update(void) {
             D_802AD00A = 100;
             D_802AD001 = 3;
             BtlMainMenuState = BTL_MENU_STATE_UNK_1;
-            D_802AD06C = theta = D_802AD100 * 28;
+            BtlMainMenuWheelAngle = theta = D_802AD100 * 28;
             break;
         case BTL_MENU_STATE_UNK_1:
             D_802AD00A = (D_802AD001 * 100) / 3;
@@ -605,14 +606,14 @@ s32 btl_main_menu_update(void) {
                 case 0:
                     BtlMainMenuPos = 0;
                     BtlMainMenuPrevPos = 0;
-                    D_802AD06C = theta = D_802AD100 * 28;
-                    for (i = 0; i < main_menu_numOptions; i++, theta += 28.0f) {
+                    BtlMainMenuWheelAngle = theta = D_802AD100 * 28;
+                    for (i = 0; i < BtlMainMenuNumOptions; i++, theta += 28.0f) {
                         x = 0.0f;
                         y = 0.0f;
                         add_vec2D_polar(&x, &y, 87.0f, theta);
 
-                        l = D_802AD060 + x;
-                        t = D_802AD064 + y;
+                        l = BtlMainMenuBasePosX + x;
+                        t = BtlMainMenuBasePosY + y;
                         id = D_802AD010[i];
                         hud_element_set_render_pos(id, l, t);
                         hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
@@ -628,25 +629,25 @@ s32 btl_main_menu_update(void) {
                     theta = D_802AD100 * 28;
                     add_vec2D_polar(&x, &y, 87.0f, theta);
 
-                    l = D_802AD060 + x;
-                    t = D_802AD064 + y;
+                    l = BtlMainMenuBasePosX + x;
+                    t = BtlMainMenuBasePosY + y;
                     id = D_802AD040;
                     hud_element_set_render_pos(id, l, t);
                     hud_element_set_alpha(id, 180);
                     hud_element_set_scale(id, 0.85f);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
-                    BtlMainMenuState = BTL_MENU_STATE_UNK_2;
+                    BtlMainMenuState = BTL_MENU_STATE_ACCEPT_INPUT;
                     break;
             }
             break;
-        case BTL_MENU_STATE_UNK_2:
+        case BTL_MENU_STATE_ACCEPT_INPUT:
             if (battleStatus->currentButtonsPressed & BUTTON_A) {
-                if (battle_menu_isEnabled[BtlMainMenuPos + D_802AD06B] == TRUE) {
+                if (battle_menu_isEnabled[BtlMainMenuPos + BtlMainMenuHomePos] == TRUE) {
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    BtlMainMenuState = BTL_MENU_STATE_NEGATIVE_1;
+                    BtlMainMenuState = BTL_MENU_STATE_OPENED_SUBMENU;
                 } else {
                     sfx_play_sound(SOUND_MENU_ERROR);
-                    BtlMainMenuDisableMsg = battle_menu_isMessageDisabled[BtlMainMenuPos + D_802AD06B];
+                    BtlMainMenuDisableMsg = battle_menu_isMessageDisabled[BtlMainMenuPos + BtlMainMenuHomePos];
                     BtlMainMenuState = BTL_MENU_STATE_SHOW_DISABLED_POPUP;
                 }
             } else {
@@ -670,25 +671,25 @@ s32 btl_main_menu_update(void) {
                 }
             }
             break;
-        case BTL_MENU_STATE_NEGATIVE_1:
+        case BTL_MENU_STATE_OPENED_SUBMENU:
             BtlMainMenuAlpha = 100;
-            return BtlMainMenuPos + D_802AD06B + 1;
+            return BtlMainMenuPos + BtlMainMenuHomePos + 1;
         case BTL_MENU_STATE_UNK_A:
             D_802AD001 = 0;
             D_802AD006 = 0;
             BtlMainMenuState = BTL_MENU_STATE_UNK_B;
-            return BtlMainMenuPos + D_802AD06B + 1;
+            return BtlMainMenuPos + BtlMainMenuHomePos + 1;
         case BTL_MENU_STATE_UNK_B:
-            return BtlMainMenuPos + D_802AD06B + 1;
+            return BtlMainMenuPos + BtlMainMenuHomePos + 1;
         case BTL_MENU_STATE_UNK_14:
             D_802AD001 = 3;
             D_802AD006 = 255;
-            BtlMainMenuState = BTL_MENU_STATE_UNK_2;
-            return BtlMainMenuPos + D_802AD06B + 1;
+            BtlMainMenuState = BTL_MENU_STATE_ACCEPT_INPUT;
+            return BtlMainMenuPos + BtlMainMenuHomePos + 1;
         case BTL_MENU_STATE_UNK_1E:
             D_802AD001 = 3;
             D_802AD006 = 255;
-            BtlMainMenuState = BTL_MENU_STATE_NEGATIVE_1;
+            BtlMainMenuState = BTL_MENU_STATE_OPENED_SUBMENU;
             break;
         case BTL_MENU_STATE_SHOW_DISABLED_POPUP:
             btl_show_battle_message(BtlMainMenuDisableMsg, 90);
@@ -699,7 +700,7 @@ s32 btl_main_menu_update(void) {
                 break;
             }
             BtlMainMenuDisableMsg = -1;
-            BtlMainMenuState = BTL_MENU_STATE_UNK_2;
+            BtlMainMenuState = BTL_MENU_STATE_ACCEPT_INPUT;
             break;
     }
     return 0;
@@ -728,8 +729,8 @@ void btl_main_menu_draw(void) {
             hud_element_set_render_pos(id, 40 - D_802AD00A, D_802AD00A + 212);
             func_80144238(id);
             break;
-        case BTL_MENU_STATE_NEGATIVE_1:
-        case BTL_MENU_STATE_UNK_2:
+        case BTL_MENU_STATE_OPENED_SUBMENU:
+        case BTL_MENU_STATE_ACCEPT_INPUT:
         case BTL_MENU_STATE_UNK_A:
         case BTL_MENU_STATE_UNK_14:
         case BTL_MENU_STATE_UNK_1E:
@@ -738,16 +739,16 @@ void btl_main_menu_draw(void) {
             theta = (D_802AD100 - BtlMainMenuPos) * 28;
 
             cond = FALSE;
-            if (D_802AD06C > theta) {
-                D_802AD06C -= D_802AD070;
-                if (D_802AD06C < theta) {
-                    D_802AD06C = theta;
+            if (BtlMainMenuWheelAngle > theta) {
+                BtlMainMenuWheelAngle -= D_802AD070;
+                if (BtlMainMenuWheelAngle < theta) {
+                    BtlMainMenuWheelAngle = theta;
                     cond = TRUE;
                 }
-            } else if (D_802AD06C < theta) {
-                D_802AD06C += D_802AD070;
-                if (D_802AD06C > theta) {
-                    D_802AD06C = theta;
+            } else if (BtlMainMenuWheelAngle < theta) {
+                BtlMainMenuWheelAngle += D_802AD070;
+                if (BtlMainMenuWheelAngle > theta) {
+                    BtlMainMenuWheelAngle = theta;
                     cond = TRUE;
                 }
             } else {
@@ -761,14 +762,14 @@ void btl_main_menu_draw(void) {
                 D_802AD070 = 0.3f;
             }
 
-            theta = D_802AD06C;
-            for (i = 0; i < main_menu_numOptions; i++, theta += 28.0f) {
+            theta = BtlMainMenuWheelAngle;
+            for (i = 0; i < BtlMainMenuNumOptions; i++, theta += 28.0f) {
                 x = 0.0f;
                 y = 0.0f;
                 add_vec2D_polar(&x, &y, 87.0f, theta);
                 id = D_802AD028[i];
-                x = D_802AD060 + x;
-                y = D_802AD064 + y;
+                x = BtlMainMenuBasePosX + x;
+                y = BtlMainMenuBasePosY + y;
                 hud_element_set_transform_pos(id, x, -y, 0.0f);
                 hud_element_set_render_pos(id, 0, 0);
                 hud_element_set_alpha(id, (opacity * 150) / 255);
@@ -780,12 +781,12 @@ void btl_main_menu_draw(void) {
                 }
 
                 func_80144238(id);
-                if (i == D_802AD06B + BtlMainMenuPos) {
+                if (i == BtlMainMenuHomePos + BtlMainMenuPos) {
                     x = 0.0f;
                     y = 0.0f;
                     add_vec2D_polar(&x, &y, 87.0f, 56.0f);
-                    x = D_802AD060 + x;
-                    y = D_802AD064 + y;
+                    x = BtlMainMenuBasePosX + x;
+                    y = BtlMainMenuBasePosY + y;
                     id = D_802AD040;
                     hud_element_set_transform_pos(id, x, -y, 0.0f);
                     hud_element_set_render_pos(id, 0, 0);
@@ -800,7 +801,7 @@ void btl_main_menu_draw(void) {
                 }
             }
             theta = (D_802AD100 - BtlMainMenuPos) * 28;
-            scale = (fabsf(fabsf((D_802AD06C - theta) * (45.0 / 28.0)) - 22.5) / 22.5) + 0.01;
+            scale = (fabsf(fabsf((BtlMainMenuWheelAngle - theta) * (45.0 / 28.0)) - 22.5) / 22.5) + 0.01;
             if (cond) {
                 scale = 1.0f;
             }
@@ -816,7 +817,7 @@ void btl_main_menu_draw(void) {
 
             id = D_802AD048;
             theta = (D_802AD100 - BtlMainMenuPos) * 28;
-            scale = (D_802AD06C - theta) * (45.0 / 28.0);
+            scale = (BtlMainMenuWheelAngle - theta) * (45.0 / 28.0);
             hud_element_set_transform_rotation(id, 0.0f, 0.0f, -scale);
             hud_element_set_transform_rotation_pivot(id, 18, -20);
             hud_element_set_scale(id, 0.95f);
@@ -830,28 +831,28 @@ void btl_main_menu_draw(void) {
             hud_element_set_scale(id, 1.0f);
             func_80144238(id);
 
-            theta = D_802AD06C;
-            for (i = 0; i < main_menu_numOptions; i++, theta += 28.0f) {
+            theta = BtlMainMenuWheelAngle;
+            for (i = 0; i < BtlMainMenuNumOptions; i++, theta += 28.0f) {
                 x = 0.0f;
                 y = 0.0f;
                 add_vec2D_polar(&x, &y, 87.0f, theta);
-                l = x = D_802AD060 + x;
-                t = y = D_802AD064 + y;
+                l = x = BtlMainMenuBasePosX + x;
+                t = y = BtlMainMenuBasePosY + y;
                 btl_draw_prim_quad(0, 0, 0, 0, l - 12, t - 12, 24, 24);
                 id = D_802AD010[i];
                 hud_element_set_render_pos(id, l, t);
                 hud_element_set_alpha(id, (opacity * 180) / 255);
-                if (i == D_802AD06B + BtlMainMenuPos) {
+                if (i == BtlMainMenuHomePos + BtlMainMenuPos) {
                     hud_element_set_alpha(id, opacity);
                 }
                 hud_element_draw_clipped(id);
             }
 
             if (cond) {
-                l = D_802AD060 + 20;
-                t = D_802AD064 - 34;
+                l = BtlMainMenuBasePosX + 20;
+                t = BtlMainMenuBasePosY - 34;
                 btl_draw_prim_quad(0, 0, 0, 0, l + 26, t, 48, 16);
-                draw_msg(battle_menu_messageIDs[BtlMainMenuPos + D_802AD06B], l, t, opacity, MSG_PAL_35, 0);
+                draw_msg(battle_menu_messageIDs[BtlMainMenuPos + BtlMainMenuHomePos], l, t, opacity, MSG_PAL_35, 0);
             }
 
             if ((gBattleStatus.flags1 & BS_FLAGS1_2000000) || (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE)) {
@@ -2399,7 +2400,7 @@ void btl_state_update_player_menu(void) {
                 entryIdx++;
             }
 
-            main_menu_numOptions = entryIdx;
+            BtlMainMenuNumOptions = entryIdx;
             D_802AD0A8 = 0;
             D_802AD0B0 = initialPos;
             D_802AD100 = 2 - initialPos;
@@ -2425,7 +2426,7 @@ void btl_state_update_player_menu(void) {
             } else if (!(gBattleStatus.flags1 & BS_FLAGS1_2000000) && (gGameStatusPtr->pressedButtons[0] & BUTTON_Z)) {
                 if (func_802A58D0() && battleStatus->hustleTurns != 1) {
                     sfx_play_sound(SOUND_F);
-                    battleStatus->unk_4C[0] = battle_menu_submenuIDs[BtlMainMenuPos + D_802AD06B];
+                    battleStatus->unk_4C[0] = battle_menu_submenuIDs[BtlMainMenuPos + BtlMainMenuHomePos];
                     btl_main_menu_destroy();
                     btl_set_state(BATTLE_STATE_SWITCH_TO_PARTNER);
                 } else if (partnerActor != NULL && !(partnerActor->flags & BS_FLAGS1_200000) && battleStatus->hustleTurns != 1) {
@@ -3718,7 +3719,7 @@ void btl_state_update_partner_menu(void) {
                 entryIdx++;
             }
 
-            main_menu_numOptions = entryIdx;
+            BtlMainMenuNumOptions = entryIdx;
             D_802AD0A8 = 1;
             D_802AD0B0 = initialPos;
             D_802AD100 = 2 - initialPos;
@@ -3742,7 +3743,7 @@ void btl_state_update_partner_menu(void) {
             } else if (!(gBattleStatus.flags1 & BS_FLAGS1_2000000) && (gGameStatusPtr->pressedButtons[0] & BUTTON_Z)) {
                 if (can_btl_state_update_switch_to_player()) {
                     sfx_play_sound(SOUND_F);
-                    battleStatus->unk_5C[0] = battle_menu_submenuIDs[BtlMainMenuPos + D_802AD06B];
+                    battleStatus->unk_5C[0] = battle_menu_submenuIDs[BtlMainMenuPos + BtlMainMenuHomePos];
                     btl_main_menu_destroy();
                     btl_set_state(BATTLE_STATE_SWITCH_TO_PLAYER);
                 } else {
@@ -4534,7 +4535,7 @@ void btl_state_update_peach_menu(void) {
             } else {
                 D_802AD104 = FALSE;
             }
-            main_menu_numOptions = entryIdx;
+            BtlMainMenuNumOptions = entryIdx;
             D_802AD0A8 = 0;
             D_802AD0B0 = initialPos;
             D_802AD100 = 2 - initialPos;
@@ -4622,7 +4623,7 @@ void btl_state_draw_peach_menu(void) {
 static const f32 padding2 = 0.0f;
 
 s32 func_802AA0A4(void) {
-    return (gBattleStatus.flags2 & 2) <= 0;
+    return (gBattleStatus.flags2 & BS_FLAGS2_2) <= 0;
 }
 
 void btl_state_update_twink_menu(void) {
@@ -4738,7 +4739,7 @@ void btl_state_update_twink_menu(void) {
             } else {
                 D_802AD104 = FALSE;
             }
-            main_menu_numOptions = entryIdx;
+            BtlMainMenuNumOptions = entryIdx;
             D_802AD0A8 = 0;
             D_802AD0B0 = initialPos;
             D_802AD100 = 2 - initialPos;
