@@ -473,7 +473,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         battleStatus->lastAttackDamage = 0;
         hitResult = HIT_RESULT_HIT;
         if (!(targetPart->flags & ACTOR_PART_FLAG_2000)) {
-            if (!(gBattleStatus.flags1 & BS_FLAGS1_2000000)) {
+            if (!(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
                 if (!(target->flags & ACTOR_FLAG_NO_DMG_APPLY)) {
                     target->currentHP -= damage;
                 }

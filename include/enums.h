@@ -2444,8 +2444,8 @@ enum MerleeSpellType {
     MERLEE_SPELL_0              = 0,
     MERLEE_SPELL_1              = 1,
     MERLEE_SPELL_2              = 2,
-    MERLEE_SPELL_3              = 3,
-    MERLEE_SPELL_4              = 4, // extra coins
+    MERLEE_SPELL_EXP_BOOST      = 3,
+    MERLEE_SPELL_COIN_BOOST     = 4,
 };
 
 enum NpcDecorationIDs {
@@ -2638,7 +2638,7 @@ enum Events {
     EVENT_RECOVER_STATUS              = 0x00000031,
     EVENT_32                          = 0x00000032,
     EVENT_33                          = 0x00000033,
-    EVENT_RECOVER_PARTNER             = 0x00000034,
+    EVENT_RECOVER_FROM_KO             = 0x00000034,
     EVENT_END_FIRST_STRIKE            = 0x00000035,
     EVENT_LUCKY                       = 0x00000037,
     EVENT_BEGIN_FIRST_STRIKE          = 0x00000038,
@@ -4056,7 +4056,7 @@ enum BattleStatusFlags1 {
     BS_FLAGS1_PLAYER_DEFENDING      = 0x00400000, // player is defending
     BS_FLAGS1_NO_GAME_OVER          = 0x00800000, // don’t game over on loss
     BS_FLAGS1_STAR_POINTS_DROPPED   = 0x01000000,
-    BS_FLAGS1_2000000               = 0x02000000,
+    BS_FLAGS1_TUTORIAL_BATTLE       = 0x02000000, // prevent player from swapping to/from partner
     BS_FLAGS1_HUSTLED               = 0x04000000,
     BS_FLAGS1_SORT_ENEMIES_BY_POSX  = 0x08000000, // enemy turn order ignores priority; sorts bases on x position instead
     BS_FLAGS1_HAMMER_CHARGED        = 0x10000000,
@@ -4307,15 +4307,15 @@ enum BattleSubStates {
     BTL_SUBSTATE_DEFEND_AWAIT_SCRIPT                    = 1,
 
     // BATTLE_STATE_VICTORY
-    BTL_SUBSTATE_VICTORY_UNK_0                          = 0,
-    BTL_SUBSTATE_VICTORY_UNK_1                          = 1,
-    BTL_SUBSTATE_VICTORY_UNK_2                          = 2,
-    BTL_SUBSTATE_VICTORY_UNK_3                          = 3,
-    BTL_SUBSTATE_VICTORY_UNK_4                          = 4,
-    BTL_SUBSTATE_VICTORY_UNK_5                          = 5,
-    BTL_SUBSTATE_VICTORY_UNK_A                          = 10,
-    BTL_SUBSTATE_VICTORY_UNK_B                          = 11,
-    BTL_SUBSTATE_VICTORY_UNK_C                          = 12,
+    BTL_SUBSTATE_VICTORY_CHECK_OUTTA_SIGHT              = 0,
+    BTL_SUBSTATE_VICTORY_AWAIT_OUTTA_SIGHT              = 1,
+    BTL_SUBSTATE_VICTORY_CHECK_MERLEE                   = 2,
+    BTL_SUBSTATE_VICTORY_AWAIT_MERLEE                   = 3,
+    BTL_SUBSTATE_VICTORY_DONE                           = 4,
+    BTL_SUBSTATE_VICTORY_RECOVER_STATUS                 = 5,
+    BTL_SUBSTATE_VICTORY_AWAIT_RECOVER_KO               = 10,
+    BTL_SUBSTATE_VICTORY_CHECK_SWAP                     = 11,
+    BTL_SUBSTATE_VICTORY_AWAIT_SWAP                     = 12,
 
     // BATTLE_STATE_DEFEAT
     BTL_SUBSTATE_DEFEAT_INIT                            = 0,
@@ -4335,12 +4335,12 @@ enum BattleSubStates {
     BTL_SUBSTATE_CHANGE_PARTNER_UNK_7                   = 7,
     
     // BATTLE_STATE_END_TRAINING_BATTLE
-    BTL_SUBSTATE_END_TRAINING_UNK_0                     = 0,
-    BTL_SUBSTATE_END_TRAINING_UNK_A                     = 10,
-    BTL_SUBSTATE_END_TRAINING_UNK_B                     = 11,
-    BTL_SUBSTATE_END_TRAINING_UNK_C                     = 12,
-    BTL_SUBSTATE_END_TRAINING_UNK_D                     = 13,
-    BTL_SUBSTATE_END_TRAINING_UNK_E                     = 14,
+    BTL_SUBSTATE_END_TRAINING_INIT                      = 0,
+    BTL_SUBSTATE_END_TRAINING_AWAIT_RECOVERING          = 10,
+    BTL_SUBSTATE_END_TRAINING_CHECK_OUTTA_SIGHT         = 11,
+    BTL_SUBSTATE_END_TRAINING_AWAIT_OUTTA_SIGHT         = 12,
+    BTL_SUBSTATE_END_TRAINING_RESET_CAM                 = 13,
+    BTL_SUBSTATE_END_TRAINING_DONE                      = 14,
 
     // BATTLE_STATE_31
 
@@ -4391,8 +4391,8 @@ enum BattlePlayerMenuSubstates {
     BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_5 = 5,
     BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_6 = 6,
     BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_7 = 7,
-    BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_8 = 8,
-    BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_9 = 9,
+    BTL_SUBSTATE_PLAYER_MENU_MAIN_SHOW_CANT_SWAP = 8,
+    BTL_SUBSTATE_PLAYER_MENU_MAIN_AWAIT_CANT_SWAP = 9,
     BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_10 = 10,
     BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_11 = 11,
     BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_12 = 12,
@@ -4605,7 +4605,7 @@ enum BattleMessages {
     BTL_MSG_54      = 0x54,
 };
 
-// BtlMainMenuState
+// BattleMenuState
 enum BattleMenuStates {
     BTL_MENU_STATE_OPENED_SUBMENU       = -1,
     BTL_MENU_STATE_CREATE               = 0,

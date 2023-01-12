@@ -1021,7 +1021,7 @@ EvtScript HandleEvent_Player = {
             EVT_SET(LVar2, 0)
             EVT_EXEC_WAIT(D_802988F0)
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_RECOVER_PARTNER)
+        EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
             EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.8))
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar7, LVar8, LVar9)
             EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_BeforeJump)

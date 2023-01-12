@@ -96,10 +96,10 @@ API_CALLABLE(N(TryEnchantPlayer)) {
                 playerData->merleeSpellType = MERLEE_SPELL_2;
                 break;
             case 2:
-                playerData->merleeSpellType = MERLEE_SPELL_3;
+                playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
                 break;
             case 3:
-                playerData->merleeSpellType = MERLEE_SPELL_4;
+                playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                 break;
         }
         evt_set_variable(script, outPrevented, FALSE);

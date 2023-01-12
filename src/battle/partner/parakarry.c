@@ -753,7 +753,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_33)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_HurtStill)
             EVT_EXEC_WAIT(DoPartnerHit)
-        EVT_CASE_EQ(EVENT_RECOVER_PARTNER)
+        EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Walk)
             EVT_SET_CONST(LVar2, ANIM_BattleParakarry_Run)
             EVT_SET(LVar3, 30)

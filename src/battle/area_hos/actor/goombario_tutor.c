@@ -283,7 +283,7 @@ ApiStatus func_80218000_47F0B0(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript N(80219C74) = {
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_2000000, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, 1)
     EVT_CALL(func_802535B4, 0)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
     EVT_WAIT(15)

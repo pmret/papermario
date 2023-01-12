@@ -152,7 +152,7 @@ ApiStatus LoadItemScript(Evt* script, s32 isInitialCall) {
     }
 
     if (*itemPtr == ITEM_NONE) {
-        if (item->typeFlags & 0x80) {
+        if (item->typeFlags & ITEM_TYPE_FLAG_FOOD_OR_DRINK) {
             i = 0;
         } else {
             i = 1;
@@ -175,7 +175,7 @@ ApiStatus LoadFreeItemScript(Evt* script, s32 isInitialCall) {
     s32* itemPtr;
     s32 i;
 
-    battleStatus->currentTargetListFlags = item->targetFlags | 0x8000;
+    battleStatus->currentTargetListFlags = item->targetFlags | ITEM_TARGET_FLAG_8000;
     battleStatus->currentAttackElement = 0;
 
     player_create_target_list(actor);
@@ -192,7 +192,7 @@ ApiStatus LoadFreeItemScript(Evt* script, s32 isInitialCall) {
     }
 
     if (*itemPtr == ITEM_NONE) {
-        if (item->typeFlags & 0x80) {
+        if (item->typeFlags & ITEM_TYPE_FLAG_FOOD_OR_DRINK) {
             i = 0;
         } else {
             i = 1;

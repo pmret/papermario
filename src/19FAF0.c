@@ -573,7 +573,7 @@ s32 calc_player_damage_enemy(void) {
             retVal = 0;
             target->hpChangeCounter -= currentAttackDamage;
 
-            if (!(targetPart->flags & ACTOR_PART_FLAG_2000) && !(gBattleStatus.flags1 & BS_FLAGS1_2000000) && !sp1C &&
+            if (!(targetPart->flags & ACTOR_PART_FLAG_2000) && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE) && !sp1C &&
                 !(targetPart->targetFlags & ACTOR_PART_FLAG_4)) {
                 target->currentHP -= currentAttackDamage;
 

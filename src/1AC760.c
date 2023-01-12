@@ -383,7 +383,7 @@ s32 calc_partner_damage_enemy(void) {
             dispatchEvent = EVENT_HIT_COMBO;
             retVal = 0;
 
-            if (!(targetPart->flags & ACTOR_PART_FLAG_2000) && !(gBattleStatus.flags1 & BS_FLAGS1_2000000) && !sp2C && !(targetPart->targetFlags & ACTOR_PART_FLAG_4)) {
+            if (!(targetPart->flags & ACTOR_PART_FLAG_2000) && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE) && !sp2C && !(targetPart->targetFlags & ACTOR_PART_FLAG_4)) {
                 target->currentHP -= damageDealt;
 
                 if (target->currentHP <= 0) {

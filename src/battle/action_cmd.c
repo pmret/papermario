@@ -548,7 +548,7 @@ s32 check_block_input(s32 buttonMask) {
 
     battleStatus->blockResult = 0; // Fail
 
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL_BLOCK && (battleStatus->flags1 & BS_FLAGS1_2000000)) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL_BLOCK && (battleStatus->flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
         battleStatus->blockResult = 1;
         return TRUE;
     }
