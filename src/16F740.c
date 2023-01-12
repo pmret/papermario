@@ -200,7 +200,7 @@ void btl_state_update_normal_start(void) {
 
     s32* types;
 
-    battle = (*gCurrentBattlePtr);
+    battle = gCurrentBattlePtr;
     if (gOverrideBattlePtr != NULL) {
         battle = gOverrideBattlePtr;
     }
@@ -2037,7 +2037,7 @@ void btl_state_draw_end_training_battle(void) {
 void btl_state_update_end_battle(void) {
     EncounterStatus* encounterStatus = &gCurrentEncounter;
     BattleStatus* battleStatus = &gBattleStatus;
-    Battle* battle = (*gCurrentBattlePtr);
+    Battle* battle = gCurrentBattlePtr;
     Stage* stage;
     Evt* script;
     s32 i;
@@ -4332,7 +4332,7 @@ void btl_state_draw_enemy_striking_first(void) {
 
 void btl_state_update_end_demo_battle(void) {
     BattleStatus* battleStatus = &gBattleStatus;
-    Battle* battle = (*gCurrentBattlePtr);
+    Battle* battle = gCurrentBattlePtr;
     Stage* stage;
     s32 i;
 

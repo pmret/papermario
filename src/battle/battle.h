@@ -400,7 +400,7 @@ typedef struct ActorOffsets {
     /* 0x03 */ s8 shadow;
 } ActorOffsets; // size = 0x04
 
-extern BattleList* gCurrentBattlePtr; //TODO type should be Battle*
+extern Battle* gCurrentBattlePtr;
 
 extern ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT];
 
