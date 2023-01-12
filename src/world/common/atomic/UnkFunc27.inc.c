@@ -6,13 +6,13 @@ API_CALLABLE(N(UnkFunc27)) {
     Bytecode* args = script->ptrReadPos;
     s32 mode = evt_get_variable(script, *args++);
     s32 testS0 = evt_get_variable(script, *args++);
-    s32 testS1 = evt_get_variable(script, *args++);
+    s32 fogType = evt_get_variable(script, *args++);
     s32* modelIDList = (s32*) testS0;
     s32 listIndex;
     Model* mdl;
 
     if (modelIDList == PTR_LIST_END) {
-        mdl_set_all_fog_mode(testS1);
+        mdl_set_all_fog_mode(fogType);
         return ApiStatus_DONE2;
     }
 
@@ -24,7 +24,7 @@ API_CALLABLE(N(UnkFunc27)) {
                 }
                 listIndex = get_model_list_index_from_tree_index(*modelIDList);
                 mdl = get_model_from_list_index(listIndex);
-                set_mdl_custom_gfx_set(mdl, -1, testS1);
+                set_mdl_custom_gfx_set(mdl, -1, fogType);
                 modelIDList++;
             };
             break;
@@ -34,13 +34,13 @@ API_CALLABLE(N(UnkFunc27)) {
                 if (*modelIDList == 0xFFFF) {
                     break;
                 }
-                func_8011B950(*modelIDList, -1, testS1, 0);
+                func_8011B950(*modelIDList, -1, fogType, 0);
                 modelIDList++;
             };
             break;
 
         case 2:
-            *gBgRenderTypePtr = testS1;
+            *gBgRenderTypePtr = fogType;
             break;
 
     }

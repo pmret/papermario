@@ -2990,55 +2990,55 @@ void state_render_frontUI(void) {
 
 void appendGfx_model(void* data) {
     Model* model = data;
-    s32 s7;
-    TextureHandle* s1;
-    TextureHeader* s2;
-    u32 fp;
-    s8 s4;
+    s32 mtxPushMode;
+    TextureHandle* textureHandle;
+    TextureHeader* textureHeader;
+    u32 extraTileType;
+    s8 renderMode;
     s32 s3;
     s32 A1;
     s32 new_var;
-    s32 t8 = model->flags;
+    s32 flags = model->flags;
 
-    ModelNode* sp28;
+    ModelNode* modelNode;
     u16 sp36;
-    s32 sp38;
+    s32 mtxLoadMode;
     s32 sp44;
-    ModelNodeProperty* mnp;
+    ModelNodeProperty* prop;
     s32 temp;
 
     s32 fogMin, fogMax;
     s32 fogR, fogG, fogB, fogA;
-    Gfx** gfx = &gMasterGfxPos;
+    Gfx** gfxPos = &gMasterGfxPos;
 
-    s7 = 1;
-    sp38 = 2;
-    sp28 = model->modelNode;
+    mtxPushMode = G_MTX_PUSH;
+    mtxLoadMode = G_MTX_LOAD;
+    modelNode = model->modelNode;
 
     if (model->textureID != 0) {
-        s1 = &mdl_textureHandles[model->textureID + model->textureVariation];
-        s2 = &s1->header;
+        textureHandle = &mdl_textureHandles[model->textureID + model->textureVariation];
+        textureHeader = &textureHandle->header;
 
-        if (s1->gfx != NULL) {
-            fp = s1->header.extraTiles;
+        if (textureHandle->gfx != NULL) {
+            extraTileType = textureHandle->header.extraTiles;
         } else {
-            s2 = NULL;
+            textureHeader = NULL;
         }
     } else {
-        s1 = NULL;
-        s2 = NULL;
+        textureHandle = NULL;
+        textureHeader = NULL;
     }
 
-    s4 = model->renderMode;
+    renderMode = model->renderMode;
     sp44 = 0;
-    if (s2 != NULL) {
-        switch (fp) {
-            case 0:
+    if (textureHeader != NULL) {
+        switch (extraTileType) {
+            case EXTRA_TILE_0:
                 s3 = 1;
                 break;
-            case 1:
-            case 2:
-            case 3:
+            case EXTRA_TILE_1:
+            case EXTRA_TILE_2:
+            case EXTRA_TILE_3:
                 s3 = 2;
                 break;
             default:
@@ -3048,7 +3048,7 @@ void appendGfx_model(void* data) {
     } else {
         s3 = 1;
     }
-    if ((s2 != NULL || s4 <= 16) && gCurrentFogSettings->enabled && !(t8 & 0x40)) {
+    if ((textureHeader != NULL || renderMode <= 16) && gCurrentFogSettings->enabled && !(flags & MODEL_FLAGS_FLAG_40)) {
         s3 = 3;
         sp44 = 1;
     }
@@ -3059,15 +3059,15 @@ void appendGfx_model(void* data) {
             sp44 = 2;
             break;
         case 2:
-            if (s4 <= 16) {
-                gDPSetPrimColor((*gfx)++, 0, 0, mdl_renderModelFogPrimColorR,
+            if (renderMode <= 16) {
+                gDPSetPrimColor((*gfxPos)++, 0, 0, mdl_renderModelFogPrimColorR,
                                                        mdl_renderModelFogPrimColorG,
                                                        mdl_renderModelFogPrimColorB,
                                                        mdl_renderModelFogPrimColorA);
-                gDPSetFogColor((*gfx)++, mdl_renderModelFogColorR,
+                gDPSetFogColor((*gfxPos)++, mdl_renderModelFogColorR,
                                                 mdl_renderModelFogColorG,
                                                 mdl_renderModelFogColorB, 0);
-                gSPFogPosition((*gfx)++, mdl_renderModelFogStart, mdl_renderModelFogEnd);
+                gSPFogPosition((*gfxPos)++, mdl_renderModelFogStart, mdl_renderModelFogEnd);
                 s3 += 9;
                 sp44 = 3;
             }
@@ -3075,100 +3075,100 @@ void appendGfx_model(void* data) {
         case 3:
             s3 = 2;
             sp44 = 4;
-            gDPSetPrimColor((*gfx)++, 0, 0, gRenderModelPrimR,
+            gDPSetPrimColor((*gfxPos)++, 0, 0, gRenderModelPrimR,
                                                    gRenderModelPrimG,
                                                    gRenderModelPrimB, 255);
-            gDPSetEnvColor((*gfx)++, gRenderModelEnvR,
+            gDPSetEnvColor((*gfxPos)++, gRenderModelEnvR,
                                             gRenderModelEnvG,
                                             gRenderModelEnvB, 255);
             break;
     }
 
-    gDPPipeSync((*gfx)++);
+    gDPPipeSync((*gfxPos)++);
 
     if (model->groupData != NULL) {
         Lightsn* t6 = model->groupData->lightingGroup;
         if (model->groupData->lightingGroup != NULL) {
             switch (model->groupData->numLights) {
                 case 0:
-                    gSPSetLights0((*gfx)++, t6[0]);
+                    gSPSetLights0((*gfxPos)++, t6[0]);
                     break;
                 case 1:
-                    gSPSetLights1((*gfx)++, t6[0]);
+                    gSPSetLights1((*gfxPos)++, t6[0]);
                     break;
                 case 2:
-                    gSPSetLights2((*gfx)++, t6[0]);
+                    gSPSetLights2((*gfxPos)++, t6[0]);
                     break;
                 case 3:
-                    gSPSetLights3((*gfx)++, t6[0]);
+                    gSPSetLights3((*gfxPos)++, t6[0]);
                     break;
                 case 4:
-                    gSPSetLights4((*gfx)++, t6[0]);
+                    gSPSetLights4((*gfxPos)++, t6[0]);
                     break;
                 case 5:
-                    gSPSetLights5((*gfx)++, t6[0]);
+                    gSPSetLights5((*gfxPos)++, t6[0]);
                     break;
                 case 6:
-                    gSPSetLights6((*gfx)++, t6[0]);
+                    gSPSetLights6((*gfxPos)++, t6[0]);
                     break;
                 case 7:
-                    gSPSetLights7((*gfx)++, t6[0]);
+                    gSPSetLights7((*gfxPos)++, t6[0]);
                     break;
             }
         }
     }
 
-    if (s2 != NULL) {
-        switch (fp) {
-            case 3:
-            case 4:
-                mnp = get_model_property(sp28, MODEL_PROP_KEY_SPECIAL);
-                if (mnp != NULL) {
-                    s32 v1 = mnp->data.s;
-                    u16 a2 = mnp->dataType;
-                    s32 a1 = mnp->dataType;
-                    func_801180E8(s2, gfx, s1->raster, s1->palette, s1->auxRaster, s1->auxPalette,
+    if (textureHeader != NULL) {
+        switch (extraTileType) {
+            case EXTRA_TILE_3:
+            case EXTRA_TILE_4:
+                prop = get_model_property(modelNode, MODEL_PROP_KEY_SPECIAL);
+                if (prop != NULL) {
+                    s32 v1 = prop->data.s;
+                    u16 a2 = prop->dataType;
+                    s32 a1 = prop->dataType;
+                    func_801180E8(textureHeader, gfxPos, textureHandle->raster, textureHandle->palette, textureHandle->auxRaster, textureHandle->auxPalette,
                                 (v1 >> 12) & 0xF, (v1 >> 16) & 0xF,
                                 a2 & 0xFFF, (a1 >> 12) & 0xFFF);
 
                 } else {
-                    gSPDisplayList((*gfx)++, s1->gfx);
+                    gSPDisplayList((*gfxPos)++, textureHandle->gfx);
                 }
                 break;
             default:
-                gSPDisplayList((*gfx)++, s1->gfx);
+                gSPDisplayList((*gfxPos)++, textureHandle->gfx);
                 break;
         }
     } else {
-        gSPTexture((*gfx)++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
-        gDPSetCombineMode((*gfx)++, G_CC_SHADE, G_CC_SHADE);
-        gDPSetColorDither((*gfx)++, G_CD_MAGICSQ);
-        gDPSetAlphaDither((*gfx)++, G_AD_PATTERN);
+        gSPTexture((*gfxPos)++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+        gDPSetCombineMode((*gfxPos)++, G_CC_SHADE, G_CC_SHADE);
+        gDPSetColorDither((*gfxPos)++, G_CD_MAGICSQ);
+        gDPSetAlphaDither((*gfxPos)++, G_AD_PATTERN);
     }
 
-    if (sp44 != 0 || s4 == 0xD || s4 == 0xF) {
+    if (sp44 != 0 || renderMode == 0xD || renderMode == 0xF) {
         u32 v1 = 0;
 
-        if (s2 != NULL) {
-            u32 a0 = s2->colorCombineType;
+        if (textureHeader != NULL) {
+            u32 a0 = textureHeader->colorCombineType;
             if (a0 >= 3) {
                 v1 = a0 + 10;
             } else {
-                v1 = fp * 3 + 1 + s2->colorCombineSubType;
+                v1 = extraTileType * 3 + 1 + textureHeader->colorCombineSubType;
             }
         }
 
-        if (s4 != 0xD && s4 != 0xF) {
-            *(*gfx) = D_8014B0B8[v1][sp44];
+        if (renderMode != 0xD && renderMode != 0xF) {
+            *(*gfxPos) = D_8014B0B8[v1][sp44];
         } else {
-            *(*gfx) = D_8014B400[v1][sp44];
+            *(*gfxPos) = D_8014B400[v1][sp44];
         }
-        (*gfx)++;
+        (*gfxPos)++;
     }
 
     switch (s3) {
         case 1:
-            switch (s4) {
+            switch (renderMode) {
                 case 1:
                     A1 = 0;
                     break;
@@ -3232,10 +3232,10 @@ void appendGfx_model(void* data) {
                     A1 = 0;
                     break;
             }
-            gSPDisplayList((*gfx)++, D_8014AFC0[A1]);
+            gSPDisplayList((*gfxPos)++, D_8014AFC0[A1]);
             break;
         case 2:
-            switch (s4) {
+            switch (renderMode) {
                 case 3:
                     A1 = 0x11;
                     break;
@@ -3296,11 +3296,11 @@ void appendGfx_model(void* data) {
                     A1 = 0x10;
                     break;
             }
-            gSPDisplayList((*gfx)++, D_8014AFC0[A1]);
+            gSPDisplayList((*gfxPos)++, D_8014AFC0[A1]);
             break;
         case 3:
             temp = 0x25; // required to match
-            switch (s4) {
+            switch (renderMode) {
                 case 3:
                     A1 = 0x20;
                     break;
@@ -3361,20 +3361,20 @@ void appendGfx_model(void* data) {
                     A1 = 0x1F;
                     break;
             }
-            gSPDisplayList((*gfx)++, D_8014AFC0[A1]);
-            gDPSetFogColor((*gfx)++, gCurrentFogSettings->r,
+            gSPDisplayList((*gfxPos)++, D_8014AFC0[A1]);
+            gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->r,
                                             gCurrentFogSettings->g,
                                             gCurrentFogSettings->b,
                                             gCurrentFogSettings->a);
-            gSPFogPosition((*gfx)++, gCurrentFogSettings->startDistance, gCurrentFogSettings->endDistance);
+            gSPFogPosition((*gfxPos)++, gCurrentFogSettings->startDistance, gCurrentFogSettings->endDistance);
             break;
         case 4:
         case 5:
             if (mdl_bgMultiplyColorA == 255) {
                 return;
             }
-            gSPDisplayList((*gfx)++, D_8014AFC0[0x10]);
-            switch (s4) {
+            gSPDisplayList((*gfxPos)++, D_8014AFC0[0x10]);
+            switch (renderMode) {
                 case 1:
                     gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_SURF2);
                     break;
@@ -3433,18 +3433,18 @@ void appendGfx_model(void* data) {
                     gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_CLD_SURF2);
                     break;
             }
-            gDPSetFogColor((*gfx)++, gCurrentFogSettings->r,
+            gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->r,
                                             gCurrentFogSettings->g,
                                             gCurrentFogSettings->b,
                                             mdl_bgMultiplyColorA);
-            gDPSetBlendColor((*gfx)++, mdl_bgMultiplyColorR,
+            gDPSetBlendColor((*gfxPos)++, mdl_bgMultiplyColorR,
                                               mdl_bgMultiplyColorG,
                                               mdl_bgMultiplyColorB,
                                               255);
-            gSPFogPosition((*gfx)++, 970, 1000);
+            gSPFogPosition((*gfxPos)++, 970, 1000);
             break;
         case 6:
-            switch (s4) {
+            switch (renderMode) {
                 case 3:
                     A1 = 0x20;
                     break;
@@ -3505,7 +3505,7 @@ void appendGfx_model(void* data) {
                     A1 = 0x1F;
                     break;
             }
-            gSPDisplayList((*gfx)++, D_8014AFC0[A1]);
+            gSPDisplayList((*gfxPos)++, D_8014AFC0[A1]);
 
             fogR = (gCurrentFogSettings->r * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorR * mdl_bgMultiplyColorA) / 255;
             fogG = (gCurrentFogSettings->g * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorG * mdl_bgMultiplyColorA) / 255;
@@ -3515,11 +3515,11 @@ void appendGfx_model(void* data) {
             fogMax = (gCurrentFogSettings->endDistance * (255 - mdl_bgMultiplyColorA) + 1000 * mdl_bgMultiplyColorA) / 255;
 
             gDPSetFogColor(gMasterGfxPos++,  fogR, fogG, fogB, gCurrentFogSettings->a);
-            gSPFogPosition((*gfx)++, fogMin, fogMax);
+            gSPFogPosition((*gfxPos)++, fogMin, fogMax);
             break;
         case 10:
         case 11:
-            switch (s4) {
+            switch (renderMode) {
                 case 5:
                     A1 = 0x21;
                     break;
@@ -3540,84 +3540,84 @@ void appendGfx_model(void* data) {
                     A1 = 0x1F;
                     break;
             }
-            gSPDisplayList((*gfx)++, D_8014AFC0[A1]);
+            gSPDisplayList((*gfxPos)++, D_8014AFC0[A1]);
             break;
     }
 
-    if (!(t8 & 8)) {
-        if (!(t8 & 0x2000)) {
-            gSPMatrix((*gfx)++, model->currentSpecialMatrix, sp38 | s7 | G_MTX_MODELVIEW);
-            if (s7 != 0) {
-                s7 = 0;
+    if (!(flags & MODEL_FLAGS_TRANSFORM_GROUP_MEMBER)) {
+        if (!(flags & MODEL_FLAGS_FLAG_2000)) {
+            gSPMatrix((*gfxPos)++, model->currentSpecialMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
+            if (mtxPushMode != 0) {
+                mtxPushMode = 0;
             }
-            if (sp38 != 0) {
-                sp38 = 0;
+            if (mtxLoadMode != 0) {
+                mtxLoadMode = 0;
             }
         }
     } else {
-        sp38 = 0;
-        if (!(t8 & 0x2000)) {
-            gSPMatrix((*gfx)++, model->currentSpecialMatrix, sp38 | s7 | G_MTX_MODELVIEW);
-            if (s7 != 0) {
-                s7 = 0;
+        mtxLoadMode = 0;
+        if (!(flags & MODEL_FLAGS_FLAG_2000)) {
+            gSPMatrix((*gfxPos)++, model->currentSpecialMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
+            if (mtxPushMode != 0) {
+                mtxPushMode = 0;
             }
         }
     }
 
-    if (t8 & 0x10) {
+    if (flags & MODEL_FLAGS_USES_CUSTOM_GFX) {
         sp36 = (model->customGfxIndex & 0xF) * 2;
         if ((*gCurrentCustomModelGfxPtr)[sp36] != NULL) {
-            gSPDisplayList((*gfx)++, (*gCurrentCustomModelGfxPtr)[sp36]);
+            gSPDisplayList((*gfxPos)++, (*gCurrentCustomModelGfxPtr)[sp36]);
         }
     }
 
-    if (s2 != NULL) {
-        if (t8 & 0x800) {
+    if (textureHeader != NULL) {
+        if (flags & MODEL_FLAGS_HAS_TEX_PANNER) {
             s32 a3 = texPannerMainU[model->texPannerID] >> 8;
             s32 t0 = texPannerMainV[model->texPannerID] >> 8;
             s32 t2 = texPannerAuxU[model->texPannerID] >> 8;
             s32 t1 = texPannerAuxV[model->texPannerID] >> 8;
 
-            switch (fp) {
+            switch (extraTileType) {
                 case 2:
-                    gDPSetTileSize((*gfx)++, G_TX_RENDERTILE, a3, t0, (s2->mainW - 1) * 4 + a3, (s2->mainH / 2 - 1) * 4 + t0);
-                    gDPSetTileSize((*gfx)++, G_TX_RENDERTILE + 1, t2, t1, (s2->mainW - 1) * 4 + t2, (s2->mainH / 2 - 1) * 4 + t1);
+                    gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE, a3, t0, (textureHeader->mainW - 1) * 4 + a3, (textureHeader->mainH / 2 - 1) * 4 + t0);
+                    gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE + 1, t2, t1, (textureHeader->mainW - 1) * 4 + t2, (textureHeader->mainH / 2 - 1) * 4 + t1);
                     break;
                 case 3:
-                    gDPSetTileSize((*gfx)++, G_TX_RENDERTILE, a3, t0, (s2->mainW - 1) * 4 + a3, (s2->mainH - 1) * 4 + t0);
-                    gDPSetTileSize((*gfx)++, G_TX_RENDERTILE + 1, t2, t1, (s2->auxW - 1) * 4 + t2, (s2->auxH - 1) * 4 + t1);
+                    gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE, a3, t0, (textureHeader->mainW - 1) * 4 + a3, (textureHeader->mainH - 1) * 4 + t0);
+                    gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE + 1, t2, t1, (textureHeader->auxW - 1) * 4 + t2, (textureHeader->auxH - 1) * 4 + t1);
                     break;
                 default:
-                    gDPSetTileSize((*gfx)++, G_TX_RENDERTILE, a3, t0, (s2->mainW - 1) * 4 + a3, (s2->mainH - 1) * 4 + t0);
+                    gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE, a3, t0, (textureHeader->mainW - 1) * 4 + a3, (textureHeader->mainH - 1) * 4 + t0);
                     break;
             }
         }
     }
-    if (t8 & 0x100) {
-        gSPMatrix((*gfx)++, gCameras[gCurrentCamID].unkMatrix, sp38 | s7 | G_MTX_MODELVIEW);
-        if (s7 != 0) {
-            s7 = 0;
+    if (flags & MODEL_FLAGS_USE_CAMERA_UNK_MATRIX) {
+        gSPMatrix((*gfxPos)++, gCameras[gCurrentCamID].unkMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
+        if (mtxPushMode != 0) {
+            mtxPushMode = 0;
         }
-        if (sp38 != 0) {
-            sp38 = 0;
+        if (mtxLoadMode != 0) {
+            mtxLoadMode = 0;
         }
     }
-    if (!(t8 & 0x80)) {
-        gSPDisplayList((*gfx)++, sp28->displayData->displayList);
+    if (!(flags & MODEL_FLAGS_HAS_LOCAL_VERTEX_COPY)) {
+        gSPDisplayList((*gfxPos)++, modelNode->displayData->displayList);
     }
 
-    if (t8 & 0x10) {
+    if (flags & MODEL_FLAGS_USES_CUSTOM_GFX) {
         sp36++;
         if ((*gCurrentCustomModelGfxPtr)[sp36] != NULL) {
-            gSPDisplayList((*gfx)++, (*gCurrentCustomModelGfxPtr)[sp36]);
+            gSPDisplayList((*gfxPos)++, (*gCurrentCustomModelGfxPtr)[sp36]);
         }
     }
 
-    if (s7 == 0) {
-        gSPPopMatrix((*gfx)++, G_MTX_MODELVIEW);
+    if (mtxPushMode == 0) {
+        gSPPopMatrix((*gfxPos)++, G_MTX_MODELVIEW);
     }
 
-    gDPPipeSync((*gfx)++);
+    gDPPipeSync((*gfxPos)++);
 }
 
 void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, s32 mainSize, s32 mainPalSize, s32 auxSize, s32 auxPalSize) {
@@ -3650,10 +3650,231 @@ void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, 
     gSPEndDisplayList(((Gfx*) mdl_nextTextureAddress)++);
 }
 
-void load_tile_header(char* textureName, s32 romOffset, s32 size);
-INCLUDE_ASM(s32, "a5dd0_len_114e0", load_tile_header);
+void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) {
+    char* textureName = propertyName->data.p;
+    u32 baseOffset = romOffset;
+    s32 textureID = 0;
+    u32 paletteSize;
+    u32 rasterSize;
+    u32 auxPaletteSize;
+    u32 auxRasterSize;
+    TextureHeader* header;
+    TextureHandle* textureHandle;
+    s32 mainSize;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80115498);
+    if (textureName == NULL) {
+        (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID = 0;
+        return;
+    }
+
+    while (romOffset < baseOffset + size) {
+        dma_copy(romOffset, romOffset + sizeof(gCurrentTileDescriptor), &gCurrentTileDescriptor);
+        header = &gCurrentTileDescriptor;
+
+        rasterSize = header->mainW * header->mainH;
+
+        if (header->mainBitDepth == G_IM_SIZ_4b) {
+            if (header->extraTiles == EXTRA_TILE_1) {
+                s32 d = 2;
+                while (header->mainW / d >= 16 && header->mainH / d > 0) {
+                    rasterSize += header->mainW / d * header->mainH / d;
+                    d *= 2;
+                }
+            }
+            rasterSize /= 2;
+        } else if (header->mainBitDepth == G_IM_SIZ_8b) {
+            if (header->extraTiles == EXTRA_TILE_1) {
+                s32 d = 2;
+                while (header->mainW / d >= 8 && header->mainH / d > 0) {
+                    rasterSize += header->mainW / d * header->mainH / d;
+                    d *= 2;
+                }
+            }
+        } else {
+            do {} while (0);
+            if (header->mainBitDepth == G_IM_SIZ_16b) {
+                if (header->extraTiles == EXTRA_TILE_1) {
+                    s32 d = 2;
+                    while (header->mainW / d >= 4 && header->mainH / d > 0) {
+                        rasterSize += header->mainW / d * header->mainH / d;
+                        d *= 2;
+                    }
+                }
+                rasterSize *= 2;
+            } else if (header->mainBitDepth == G_IM_SIZ_32b) {
+                if (header->extraTiles == EXTRA_TILE_1) {
+                    s32 d = 2;
+                    while (header->mainW / d >= 2 && header->mainH / d > 0) {
+                        rasterSize += header->mainW / d * header->mainH / d;
+                        d *= 2;
+                    }
+                }
+                rasterSize *= 4;
+            }
+        }
+
+        if (header->mainFmt == G_IM_FMT_CI) {
+            paletteSize = 0x20;
+            if (header->mainBitDepth == G_IM_SIZ_8b) {
+                paletteSize = 0x200;
+            }
+        } else {
+            paletteSize = 0;
+        }
+
+        if (header->extraTiles == EXTRA_TILE_3) {
+            auxRasterSize = header->auxW * header->auxH;
+            if (header->auxBitDepth == G_IM_SIZ_4b) {
+                auxRasterSize /= 2;
+            } else if (header->auxBitDepth == G_IM_SIZ_8b) {
+            } else if (header->auxBitDepth == G_IM_SIZ_16b) {
+                auxRasterSize *= 2;
+            } else {
+                if (header->auxBitDepth == G_IM_SIZ_32b) {
+                    auxRasterSize *= 4;
+                }
+            }
+            if (header->auxFmt == G_IM_FMT_CI) {
+                auxPaletteSize = 0x20;
+                if (header->auxBitDepth == G_IM_SIZ_8b) {
+                    auxPaletteSize = 0x200;
+                }
+            } else {
+                auxPaletteSize = 0;
+            }
+        } else {
+            auxPaletteSize = 0;
+            auxRasterSize = 0;
+        }
+
+        if (strcmp(textureName, header->name) == 0) {
+            break;
+        }
+
+        textureID++;
+        mainSize = rasterSize + paletteSize + sizeof(*header);
+        romOffset += mainSize;
+        romOffset += auxRasterSize + auxPaletteSize;
+    }
+
+    if (romOffset >= baseOffset + 0x40000) {
+        (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID = 0;
+        return;
+    }
+
+    (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID = textureID + 1;
+    textureHandle = &mdl_textureHandles[(*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID];
+    romOffset += sizeof(*header);
+
+    if (textureHandle->gfx == NULL) {
+        func_80114B58(romOffset, textureHandle, header, rasterSize, paletteSize, auxRasterSize, auxPaletteSize);
+        func_80115498(romOffset + rasterSize + paletteSize + auxRasterSize + auxPaletteSize, (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID, baseOffset, size);
+    }
+
+}
+
+void func_80115498(u32 romOffset, s32 arg1, s32 arg2, s32 arg3) {
+    u32 offset;
+    TextureHeader sp20;
+    u32 rasterSize;
+    s32 paletteSize;
+    u32 auxRasterSize;
+    u32 auxPaletteSize;
+    s32 bitDepth;
+    s32 mainSize;
+    TextureHeader* header;
+    s32 textureID = arg1;
+
+
+    for (offset = romOffset; offset < arg2 + arg3;) {
+        dma_copy(offset, offset + sizeof(sp20), &sp20);
+        header = &sp20;
+        if (header->unk_28 == 0) {
+            break;
+        }
+
+        rasterSize = header->mainW * header->mainH;
+
+        if (header->mainBitDepth == G_IM_SIZ_4b) {
+            if (header->extraTiles == EXTRA_TILE_1) {
+                s32 d = 2;
+                while (header->mainW / d >= 16 && header->mainH / d > 0) {
+                    rasterSize += header->mainW / d * header->mainH / d;
+                    d *= 2;
+                }
+            }
+            rasterSize /= 2;
+        } else if (header->mainBitDepth == G_IM_SIZ_8b) {
+            if (header->extraTiles == EXTRA_TILE_1) {
+                s32 d = 2;
+                while (header->mainW / d >= 8 && header->mainH / d > 0) {
+                    rasterSize += header->mainW / d * header->mainH / d;
+                    d *= 2;
+                }
+            }
+        } else {
+            do {} while (0);
+            if (header->mainBitDepth == G_IM_SIZ_16b) {
+                if (header->extraTiles == EXTRA_TILE_1) {
+                    s32 d = 2;
+                    while (header->mainW / d >= 4 && header->mainH / d > 0) {
+                        rasterSize += header->mainW / d * header->mainH / d;
+                        d *= 2;
+                    }
+                }
+                rasterSize *= 2;
+            } else if (header->mainBitDepth == G_IM_SIZ_32b) {
+                if (header->extraTiles == EXTRA_TILE_1) {
+                    s32 d = 2;
+                    while (header->mainW / d >= 2 && header->mainH / d > 0) {
+                        rasterSize += header->mainW / d * header->mainH / d;
+                        d *= 2;
+                    }
+                }
+                rasterSize *= 4;
+            }
+        }
+
+        if (header->mainFmt == G_IM_FMT_CI) {
+            paletteSize = 0x20;
+            if (header->mainBitDepth == G_IM_SIZ_8b) {
+                paletteSize = 0x200;
+            }
+        } else {
+            paletteSize = 0;
+        }
+
+        if (header->extraTiles == EXTRA_TILE_3) {
+            auxRasterSize = header->auxW * header->auxH;
+            if (header->auxBitDepth == G_IM_SIZ_4b) {
+                auxRasterSize /= 2;
+            } else if (header->auxBitDepth == G_IM_SIZ_8b) {
+            } else if (header->auxBitDepth == G_IM_SIZ_16b) {
+                auxRasterSize *= 2;
+            } else {
+                if (header->auxBitDepth == G_IM_SIZ_32b) {
+                    auxRasterSize *= 4;
+                }
+            }
+            if (header->auxFmt == G_IM_FMT_CI) {
+                auxPaletteSize = 0x20;
+                if (header->auxBitDepth == G_IM_SIZ_8b) {
+                    auxPaletteSize = 0x200;
+                }
+            } else {
+                auxPaletteSize = 0;
+            }
+        } else {
+            auxPaletteSize = 0;
+            auxRasterSize = 0;
+        }
+        textureID = ++arg1;
+        func_80114B58(offset + sizeof(*header), &mdl_textureHandles[textureID], header, rasterSize, paletteSize, auxRasterSize, auxPaletteSize);
+        mainSize = rasterSize + paletteSize + sizeof(*header);
+        offset += mainSize;
+        offset += auxRasterSize + auxPaletteSize;
+    }
+}
 
 // Goofy temps needed to match
 ModelNodeProperty* get_model_property(ModelNode* node, ModelPropertyKeys key) {
@@ -3670,7 +3891,7 @@ ModelNodeProperty* get_model_property(ModelNode* node, ModelPropertyKeys key) {
 }
 
 void _load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
-    if (model->type != 2) {
+    if (model->type != SHAPE_TYPE_MODEL) {
         if (model->groupData != NULL) {
             s32 numChildren = model->groupData->numChildren;
 
@@ -3683,9 +3904,9 @@ void _load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
             }
         }
     } else {
-        char* textureName = (char*)get_model_property(model, MODEL_PROP_KEY_TEXTURE_NAME);
-        if (textureName != NULL) {
-            load_tile_header(textureName, romOffset, size);
+        ModelNodeProperty* propTextureName = get_model_property(model, MODEL_PROP_KEY_TEXTURE_NAME);
+        if (propTextureName != NULL) {
+            load_tile_header(propTextureName, romOffset, size);
         }
     }
     mdl_treeIterPos++;
@@ -3713,7 +3934,7 @@ void load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
 s32 mdl_get_child_count(ModelNode* model) {
     s32 ret = 0;
 
-    if (model->type != 2 && model->groupData != NULL) {
+    if (model->type != SHAPE_TYPE_MODEL && model->groupData != NULL) {
         s32 numChildren = model->groupData->numChildren;
 
         if (numChildren != 0) {
@@ -3870,7 +4091,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     }
 
     (*gCurrentModels)[modelIdx] = model = heap_malloc(sizeof(*model));
-    model->flags = bp->flags | 1;
+    model->flags = bp->flags | MODEL_FLAGS_FLAG_1;
     model->modelID = D_80153226;
     model->modelNode = bp->mdlNode;
     model->groupData = bp->groupData;
@@ -3944,7 +4165,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     bb->halfSizeZ = z * 0.5;
 
     if (model->currentMatrix == NULL && x < 100.0f && y < 100.0f && z < 100.0f) {
-        model->flags |= 0x200;
+        model->flags |= MODEL_FLAGS_FLAG_200;
     }
     (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = modelIdx;
 }
@@ -3976,7 +4197,7 @@ void func_80116698(void) {
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         model = (*gCurrentModels)[i];
-        if (model != NULL && (model->flags != 0) && !(model->flags & 4)) {
+        if (model != NULL && (model->flags != 0) && !(model->flags & MODEL_FLAGS_FLAG_4)) {
             if (!(model->flags & MODEL_FLAGS_USES_TRANSFORM_MATRIX)) {
                 if (model->matrixMode != 0) {
                     model->matrixMode--;
@@ -3993,7 +4214,7 @@ void func_80116698(void) {
                 model->flags &= ~MODEL_FLAGS_USES_TRANSFORM_MATRIX;
                 model->matrixMode = 2;
                 mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
-                if (model->currentMatrix == NULL || (model->flags & 8)) {
+                if (model->currentMatrix == NULL || (model->flags & MODEL_FLAGS_TRANSFORM_GROUP_MEMBER)) {
                     guMtxF2L(model->transformMatrix, mtx);
                 } else {
                     guMtxL2F(sp20, model->currentMatrix);
@@ -4119,16 +4340,16 @@ void render_models(void) {
         if (model->flags == 0) {
             continue;
         }
-        if (model->flags & 4) {
+        if (model->flags & MODEL_FLAGS_FLAG_4) {
             continue;
         }
-        if (model->flags & 2) {
+        if (model->flags & MODEL_FLAGS_ENABLED) {
             continue;
         }
-        if (model->flags & 0x20) {
+        if (model->flags & MODEL_FLAGS_FLAG_20) {
             continue;
         }
-        if (model->flags & 8) {
+        if (model->flags & MODEL_FLAGS_TRANSFORM_GROUP_MEMBER) {
             continue;
         }
 
@@ -4136,7 +4357,7 @@ void render_models(void) {
         y = model->center.y;
         z = model->center.z;
 
-        if (model->flags & 0x200) {
+        if (model->flags & MODEL_FLAGS_FLAG_200) {
             cond = FALSE;
             boundingBox = (ModelBoundingBox*) model->modelNode->propertyList;
             bbx = boundingBox->halfSizeX;
@@ -4445,7 +4666,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
     auxBitDepth = header->auxBitDepth;
 
 
-    if (extraTileType == 3) {
+    if (extraTileType == EXTRA_TILE_3) {
         if (palette != NULL) {
             auxPaletteIndex = 1;
         } else {
@@ -4484,7 +4705,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
     (*gfxPos)++;
 
     switch (extraTileType) {
-        case 0:
+        case EXTRA_TILE_0:
             lodMode = G_TL_TILE;
             gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
             switch (mainBitDepth) {
@@ -4510,7 +4731,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
                     break;
             }
             break;
-        case 1:
+        case EXTRA_TILE_1:
             lodMode = G_TL_LOD;
             switch (mainBitDepth) {
                 case G_IM_SIZ_4b:
@@ -4561,7 +4782,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
             // use tile with lowest quality
             gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, lod - 1, G_TX_RENDERTILE, G_ON);
             break;
-        case 2:
+        case EXTRA_TILE_2:
             gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
             gDPPipeSync((*gfxPos)++);
             lodMode = G_TL_TILE;
@@ -4588,7 +4809,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
                     break;
             }
             break;
-        case 3:
+        case EXTRA_TILE_3:
             gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
             lodMode = G_TL_TILE;
             switch (mainBitDepth) {
@@ -4695,7 +4916,7 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMt
             groupType = groupTypeProperty->data.s;
         }
 
-        if (model->type != 5 || groupType == 0) {
+        if (model->type != SHAPE_TYPE_GROUP || groupType == 0) {
             for (i = 0; i < model->groupData->numChildren; i++) {
                 load_model_transforms(model->groupData->childList[i], model,
                                       model->groupData->transformMatrix != NULL ? sp10 : mdlTxMtx, treeDepth + 1);
@@ -4714,7 +4935,7 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMt
     modelBPptr->groupData = parent->groupData;
     modelBPptr->mtx = &sp50;
 
-    if (model->type == 5) {
+    if (model->type == SHAPE_TYPE_GROUP) {
         s32 childCount = mdl_get_child_count(model);
 
         for (i = mdl_treeIterPos; i < mdl_treeIterPos + childCount; i++) {
@@ -4797,12 +5018,12 @@ void func_8011B1D8(ModelNode* node) {
     s32 i;
     u16 childCount;
 
-    if (node->type == 2) {
+    if (node->type == SHAPE_TYPE_MODEL) {
         D_80153376 = D_80153226;
         return;
     }
 
-    if (node->type == 5) {
+    if (node->type == SHAPE_TYPE_GROUP) {
         prop = get_model_property(node, MODEL_PROP_KEY_GROUP_TYPE);
         if (prop != NULL && prop->data.s != 0) {
             mdl_treeIterPos += mdl_get_child_count(node);
@@ -4817,7 +5038,7 @@ void func_8011B1D8(ModelNode* node) {
             for (i = 0; i < numChildren; i++) {
                 childNode = node->groupData->childList[i];
                 childCount = mdl_treeIterPos;
-                if (childNode->type == 5) {
+                if (childNode->type == SHAPE_TYPE_GROUP) {
                     prop = get_model_property(childNode, MODEL_PROP_KEY_GROUP_TYPE);
                     if (prop != NULL && prop->data.s != 0) {
                         childCount += mdl_get_child_count(childNode);
@@ -4963,7 +5184,7 @@ void clone_model(u16 srcModelID, u16 newModelID) {
     newModel->modelID = newModelID;
 }
 
-void func_8011B7C0(u16 treeIndex, s32 flags, s32 arg2) {
+void set_model_flags(u16 treeIndex, s32 flags, s32 mode) {
     s32 maxGroupIndex = -1;
     s32 i;
     s32 minGroupIndex;
@@ -4990,10 +5211,10 @@ void func_8011B7C0(u16 treeIndex, s32 flags, s32 arg2) {
         }
     }
 
-    if (arg2 < 2) {
+    if (mode < 2) {
         for (i = minGroupIndex; i <= maxGroupIndex; i++) {
             Model* model = (*gCurrentModels)[i];
-            if (arg2 != 0) {
+            if (mode != 0) {
                 model->flags &= ~flags;
             } else {
                 model->flags |= flags;
@@ -5002,7 +5223,7 @@ void func_8011B7C0(u16 treeIndex, s32 flags, s32 arg2) {
     } else {
         for (i = 0; i < minGroupIndex; i++) {
             Model* model = (*gCurrentModels)[i];
-            if (arg2 == 3) {
+            if (mode == 3) {
                 model->flags &= ~flags;
             } else {
                 model->flags |= flags;
@@ -5011,7 +5232,7 @@ void func_8011B7C0(u16 treeIndex, s32 flags, s32 arg2) {
         for (i = maxGroupIndex + 1; i < 256; i++) {
             Model* model = (*gCurrentModels)[i];
             if (model != NULL) {
-                if (arg2 == 3) {
+                if (mode == 3) {
                     model->flags &= ~flags;
                 } else {
                     model->flags |= flags;
@@ -5341,29 +5562,21 @@ void mdl_get_vertex_count(Gfx* gfx, s32* numVertices, Vtx** baseVtx, s32* gfxCou
     }
 }
 
-void mdl_local_gfx_update_vtx_pointers(Gfx* nodeDlist, Vtx* baseVtx, Gfx* arg2, Vtx* arg3);
-#ifdef NON_MATCHING
-void mdl_local_gfx_update_vtx_pointers(Gfx* nodeDlist, Vtx* baseVtx, Gfx* arg2, Vtx* arg3) {
+void mdl_local_gfx_update_vtx_pointers(Gfx *nodeDlist, Vtx *baseVtx, Gfx *arg2, Vtx *arg3) {
     u32 w0;
-    u32 temp_v1;
-    u32 w1;
-
+    Vtx* w1;
     do {
-        w0 = (u32) nodeDlist->words.w0 >> 0;
+        w0 = (*((unsigned long long*)nodeDlist)) >> 0x20; // TODO required to match
         w1 = nodeDlist->words.w1;
-        temp_v1 = w0 >> 0x18;
-        nodeDlist++;
-        if (temp_v1 == 1) {
-            w1 = &arg3[(s32) (w1 - (s32)baseVtx) >> 4];
+        if (w0 >> 0x18 == G_VTX) {
+            w1 = arg3 + (w1 - baseVtx);
         }
         arg2->words.w0 = w0;
         arg2->words.w1 = w1;
+        nodeDlist++;
         arg2++;
-    } while (temp_v1 != G_ENDDL);
+    } while (w0 >> 0x18 != G_ENDDL);
 }
-#else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_local_gfx_update_vtx_pointers);
-#endif
 
 void mdl_local_gfx_copy_vertices(Vtx* src, s32 num, Vtx* dest) {
     u32 i;

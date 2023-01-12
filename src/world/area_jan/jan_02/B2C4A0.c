@@ -17,12 +17,12 @@ ApiStatus func_80240360_B2C7D0(Evt* script, s32 isInitialCall) {
 
     if (D_80242BD8_B2F048 != 0) {
         if (currentFloor == COLLIDER_o327 || currentFloor == COLLIDER_o330) {
-            func_8011B7C0(MODEL_g70, 2, 0);
+            set_model_flags(MODEL_g70, MODEL_FLAGS_ENABLED, 0);
             D_80242BD8_B2F048 = 0;
         }
     } else {
         if (currentFloor == COLLIDER_o319 || currentFloor == COLLIDER_o316) {
-            func_8011B7C0(MODEL_g70, 2, 1);
+            set_model_flags(MODEL_g70, MODEL_FLAGS_ENABLED, 1);
             D_80242BD8_B2F048 = 1;
         }
     }

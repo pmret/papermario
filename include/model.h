@@ -99,7 +99,7 @@ typedef ModelLocalVertexCopy* ModelLocalVertexCopyList[16];
 typedef struct ModelTreeInfo {
     /* 0x00 */ u8 modelIndex;
     /* 0x01 */ u8 treeDepth;
-    /* 0x02 */ s8 textureID;
+    /* 0x02 */ u8 textureID;
     /* 0x03 */ char unk_03;
 } ModelTreeInfo; // size = 0x04
 
@@ -141,6 +141,14 @@ typedef enum ShapeTypes {
     SHAPE_TYPE_ROOT = 7,
     SHAPE_TYPE_SPECIAL_GROUP = 10,
 } ShapeTypes;
+
+typedef enum ExtraTileTypes {
+    EXTRA_TILE_0 = 0,
+    EXTRA_TILE_1 = 1,
+    EXTRA_TILE_2 = 2,
+    EXTRA_TILE_3 = 3,
+    EXTRA_TILE_4 = 4,
+} ExtraTileTypes;
 
 typedef struct ShapeFile {
     /* 0x00 */ ModelNode* root;
