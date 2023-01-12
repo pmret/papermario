@@ -41,7 +41,7 @@ EvtScript N(EVS_Kolorado_TrompPanic) = {
 };
 
 EvtScript N(EVS_Kolorado_TrompImpact) = {
-    EVT_CALL(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAGS_400000, 1)
+    EVT_CALL(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_400000, 1)
     EVT_CALL(func_802CDE68, 0, 13)
     EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
     EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
@@ -66,7 +66,7 @@ EvtScript N(EVS_Kolorado_TrompImpact) = {
 EvtScript N(EVS_Kolorado_HurtInit) = {
     EVT_CALL(SetNpcPos, NPC_Kolorado, 447, 0, 70)
     EVT_CALL(SetNpcYaw, NPC_Kolorado, 270)
-    EVT_CALL(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAGS_400000, 1)
+    EVT_CALL(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_400000, 1)
     EVT_CALL(func_802CDE68, 0, 13)
     EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
     EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
@@ -138,7 +138,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .settings = &N(NpcSettings_Kolorado),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_10000 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_400000,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Kolorado),
     .drops = KOLORADO_DROPS,
     .animations = KOLORADO_ANIMS,
@@ -151,7 +151,7 @@ StaticNpc N(NpcData_Piranha)[] = {
         .settings = &N(NpcSettings_PutridPiranha),
         .pos = { -325.0f, 0.0f, 150.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = PUTRID_PIRANHA_DROPS,
         .territory = {
             .wander = {
@@ -176,7 +176,7 @@ StaticNpc N(NpcData_SpikeTop) = {
     .settings = &N(NpcSettings_SpikeTop),
     .pos = { -450.0f, 0.0f, 100.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SPIKE_TOP_DROPS,
     .territory = {
         .wander = {

@@ -198,9 +198,9 @@ void entity_shattering_setupGfx(s32 entityIndex) {
 }
 
 EntityScript Entity_ShatteringBlock_Script = {
-    es_SetFlags(ENTITY_FLAGS_DISABLE_COLLISION)
+    es_SetFlags(ENTITY_FLAG_DISABLE_COLLISION)
     es_SetCallback(entity_shattering_idle, 0)
-    es_SetFlags(ENTITY_FLAGS_HIDDEN)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_HIDDEN)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };

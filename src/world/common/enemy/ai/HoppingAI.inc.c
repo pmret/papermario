@@ -150,7 +150,7 @@ void N(HoppingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     Npc* enemy = get_npc_unsafe(script->owner1.enemy->npcID);
 
     basic_ai_chase_init(script, aiSettings, territory);
-    enemy->flags |= ENEMY_FLAGS_800;
+    enemy->flags |= ENEMY_FLAG_800;
     enemy->jumpVelocity = rand_int(5) + 10.0;
     enemy->jumpScale = 1.5f;
     enemy->yaw = atan2(enemy->pos.x, enemy->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
@@ -245,18 +245,18 @@ ApiStatus N(HoppingAI_Main)(Evt* script, s32 isInitialCall) {
         npc->flags &= ~NPC_FLAG_GRAVITY;
         npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
 
-        enemy->aiFlags |= (ENEMY_AI_FLAGS_8 | ENEMY_AI_FLAGS_10);
-        if (enemy->flags & ENEMY_FLAGS_40000000) {
+        enemy->aiFlags |= (ENEMY_AI_FLAG_8 | ENEMY_AI_FLAG_10);
+        if (enemy->flags & ENEMY_FLAG_40000000) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
-            enemy->flags &= ~ENEMY_FLAGS_40000000;
+            enemy->flags &= ~ENEMY_FLAG_40000000;
         }
     }
 
-    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
         if (enemy->aiPaused != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
     }
 
     switch (script->AI_TEMP_STATE) {

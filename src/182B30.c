@@ -600,7 +600,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
 
     if (actor != NULL) {
         shadow = get_shadow_by_index(actor->shadow.id);
-        shadow->flags |= ENTITY_FLAGS_HIDDEN;
+        shadow->flags |= ENTITY_FLAG_HIDDEN;
         if (!(actor->flags & ACTOR_FLAG_DISABLED)) {
             if (actor->flags & ACTOR_FLAG_BLUR_ENABLED) {
                 if (arg0 == 0) {
@@ -650,7 +650,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
 
                     if (!(actorPart->flags & ACTOR_PART_FLAG_4)) {
                         shadow = get_shadow_by_index(actorPart->shadowIndex);
-                        shadow->flags &= ~ENTITY_FLAGS_HIDDEN;
+                        shadow->flags &= ~ENTITY_FLAG_HIDDEN;
                         x1 = actorPart->currentPos.x;
                         if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
                             y1 = actorPart->currentPos.y + 12.0;
@@ -663,7 +663,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                         npc_raycast_down_sides(0, &x1, &y1, &z1, &dist);
 
                         if (200.0f < dist) {
-                            shadow->flags |= ENTITY_FLAGS_HIDDEN;
+                            shadow->flags |= ENTITY_FLAG_HIDDEN;
                         }
                         shadow->position.x = x1;
                         shadow->position.y = y1;
@@ -681,7 +681,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
 
             shadow = get_shadow_by_index(actor->shadow.id);
             if (!(actor->flags & ACTOR_FLAG_NO_SHADOW)) {
-                shadow->flags &= ~ENTITY_FLAGS_HIDDEN;
+                shadow->flags &= ~ENTITY_FLAG_HIDDEN;
             }
 
             x1 = actor->currentPos.x + actor->headOffset.x;
@@ -696,7 +696,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
             npc_raycast_down_sides(0, &x1, &y1, &z1, &dist);
 
             if (200.0f < dist) {
-                shadow->flags |= ENTITY_FLAGS_HIDDEN;
+                shadow->flags |= ENTITY_FLAG_HIDDEN;
             }
             shadow->position.x = x1;
             shadow->position.y = y1;
@@ -788,7 +788,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
     } else {
         effect = actor->icePillarEffect;
         if (effect != NULL) {
-            effect->flags |= EFFECT_INSTANCE_FLAGS_10;
+            effect->flags |= EFFECT_INSTANCE_FLAG_10;
             actor->icePillarEffect = NULL;
         }
     }
@@ -1308,7 +1308,7 @@ void update_player_actor_shadow(void) {
     }
 
     shadow = get_shadow_by_index(player->shadow.id);
-    shadow->flags &= ~ENTITY_FLAGS_HIDDEN;
+    shadow->flags &= ~ENTITY_FLAG_HIDDEN;
 
     if (!battleStatus->outtaSightActive) {
         shadow->alpha = 128;
@@ -1323,7 +1323,7 @@ void update_player_actor_shadow(void) {
     npc_raycast_down_sides(0, &x, &y, &z, &distance);
 
     if (distance > 200.0f) {
-        shadow->flags |= ENTITY_FLAGS_HIDDEN;
+        shadow->flags |= ENTITY_FLAG_HIDDEN;
     }
     shadow->position.x = x;
     shadow->position.y = y;
@@ -3696,7 +3696,7 @@ void func_8025D830(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025D8EC(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effect[decorationIndex]->flags |= EFFECT_INSTANCE_FLAGS_10;
+    part->decorationTable->effect[decorationIndex]->flags |= EFFECT_INSTANCE_FLAG_10;
 }
 
 void func_8025D90C(ActorPart* part, s32 decorationIndex) {

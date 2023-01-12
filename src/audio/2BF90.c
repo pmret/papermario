@@ -406,7 +406,7 @@ void func_8005232C(AuAmbienceManager* manager, AuAmbPlayer* lambda) {
                     voice->reverbType = manager->defaultReverbType;
                     voice->unk_14.unk_00 = xi->unk_04.unk_00;
                     voice->unk_14.unk_04 = xi->unk_04.unk_04;
-                    voice->unk_flags_43 = AU_VOICE_SYNC_FLAGS_ALL;
+                    voice->unk_flags_43 = AU_VOICE_SYNC_FLAG_ALL;
                     voice->priority = manager->priority;
                     voice->priorityCopy = voice->priority;
                 }

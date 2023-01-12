@@ -246,12 +246,12 @@ ApiStatus N(MontyMoleAI_Main)(Evt* script, s32 isInitialCall) {
         script->AI_TEMP_STATE = AI_STATE_MOLE_INIT;
         npc->duration = 0;
         npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING);
-        enemy->aiFlags |= (ENEMY_AI_FLAGS_8 | ENEMY_AI_FLAGS_10);
+        enemy->aiFlags |= (ENEMY_AI_FLAG_8 | ENEMY_AI_FLAG_10);
     }
     
-    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
         if (enemy->aiPaused == 0) {
-            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
         } else {
             return ApiStatus_BLOCK;
         }

@@ -252,11 +252,11 @@ API_CALLABLE(N(UpdateChandelier)) {
     guTranslateF(tempMtx, 0.0f, 300.0f, 0.0f);
     guMtxCatF(model->transformMatrix, tempMtx, model->transformMatrix);
     guMtxCatF(chandelier->transformMtx, model->transformMatrix, model->transformMatrix);
-    model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED;
+    model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
 
     for (i = 1; i < ARRAY_COUNT(chandelier->models); i++) {
         copy_matrix(model->transformMatrix, chandelier->models[i]->transformMatrix);
-        chandelier->models[i]->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED;
+        chandelier->models[i]->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
     }
 
     if (chandelier->flags & CHANDELIER_FLAG_TETHER_PLAYER) {

@@ -163,7 +163,7 @@ StaticNpc N(NpcData_Prisoners)[] = {
         .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Toad_01),
         .drops = TOAD_DROPS,
         .animations = TOAD_RED_ANIMS,
@@ -174,7 +174,7 @@ StaticNpc N(NpcData_Prisoners)[] = {
         .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Toad_02),
         .drops = TOAD_DROPS,
         .animations = TOAD_RED_ANIMS,
@@ -185,7 +185,7 @@ StaticNpc N(NpcData_Prisoners)[] = {
         .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ToadGuard),
         .drops = TOAD_DROPS,
         .animations = TOAD_GUARD_RED_ANIMS,
@@ -196,7 +196,7 @@ StaticNpc N(NpcData_Prisoners)[] = {
         .settings = &N(NpcSettings_Penguin),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Penguin),
         .drops = PENGUIN_DROPS,
         .animations = PENGUIN_ANIMS,
@@ -217,7 +217,7 @@ EvtScript N(EVS_NpcDefeat_Koopatrol) = {
             EVT_SET(GF_KPA95_Defeated_Guard, TRUE)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(MakeItemEntity, ITEM_PRISON_KEY1, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA95_Item_PrisonKey1)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_FLED, 1)
+            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN
@@ -239,7 +239,7 @@ StaticNpc N(NpcData_Koopatrol) = {
     .settings = &N(NpcSettings_Koopatrol_Patrol),
     .pos = { -70.0f, 0.0f, 55.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_800000,
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_800000,
     .init = &N(EVS_NpcInit_Koopatrol),
     .drops = NPC_NO_DROPS,
     .territory = {

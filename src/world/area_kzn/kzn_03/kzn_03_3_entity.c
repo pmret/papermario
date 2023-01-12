@@ -41,7 +41,7 @@ EvtScript N(EVS_UseSpringA) = {
     EVT_EXEC_GET_TID(N(EVS_TetherCameraToPlayer), LVarA)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
     EVT_CALL(PlayerJump, 335, 290, 360, 40)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_FLYING, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_FLYING, TRUE)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_FALLING)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_KILL_THREAD(LVarA)

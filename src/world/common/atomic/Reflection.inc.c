@@ -77,9 +77,9 @@ void N(worker_reflect_player_wall)(void) {
     RenderTask* renderTaskPtr = &renderTask;
     s32 screenX, screenY, screenZ;
 
-    if (playerStatus->flags & PS_FLAGS_HAS_REFLECTION) {
+    if (playerStatus->flags & PS_FLAG_HAS_REFLECTION) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
-        entityModel->flags |= ENTITY_MODEL_FLAGS_REFLECT;
+        entityModel->flags |= ENTITY_MODEL_FLAG_REFLECT;
 
         get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
                           &screenX, &screenY, &screenZ);
@@ -92,7 +92,7 @@ void N(worker_reflect_player_wall)(void) {
 
         spr_update_player_sprite(2, anim, 1.0f);
 
-        if (!(playerStatus->flags & PS_FLAGS_SPINNING)) {
+        if (!(playerStatus->flags & PS_FLAG_SPINNING)) {
             if (playerStatus->alpha1 != D_802D9D70) {
                 if (playerStatus->alpha1 < 254) {
                     renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
@@ -159,7 +159,7 @@ void N(worker_reflect_player_floor)(void) {
     RenderTask* renderTaskPtr = &renderTask;
     s32 screenX, screenY, screenZ;
 
-    if (playerStatus->flags & PS_FLAGS_HAS_REFLECTION) {
+    if (playerStatus->flags & PS_FLAG_HAS_REFLECTION) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
 
         get_screen_coords(gCurrentCamID, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z,
@@ -167,7 +167,7 @@ void N(worker_reflect_player_floor)(void) {
 
         spr_update_player_sprite(1, playerStatus->trueAnimation, 1.0f);
 
-        if (!(playerStatus->flags & PS_FLAGS_SPINNING)) {
+        if (!(playerStatus->flags & PS_FLAG_SPINNING)) {
             if (playerStatus->alpha1 != D_802D9D71) {
                 if (playerStatus->alpha1 < 254) {
                     renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
@@ -187,7 +187,7 @@ void N(worker_reflect_player_floor)(void) {
         renderTaskPtr->appendGfxArg = playerStatus;
         renderTaskPtr->distance = -screenZ;
         renderTaskPtr->appendGfx = (void (*)(void*)) (
-            !(playerStatus->flags & PS_FLAGS_SPINNING)
+            !(playerStatus->flags & PS_FLAG_SPINNING)
                 ? N(appendGfx_reflect_player_floor_basic)
                 : N(appendGfx_reflect_player_floor_fancy)
         );

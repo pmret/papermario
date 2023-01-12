@@ -3,7 +3,7 @@
 
 #define PIRANHA_SENTINEL_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 5, \
     .itemDrops = { \
         { ITEM_FIRE_FLOWER, 10, 0 } \

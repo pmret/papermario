@@ -62,7 +62,7 @@ MenuWindowBP filemenu_common_windowBPs[3] = {
         .tab = NULL,
         .parentID = -1,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
-        .extraFlags = WINDOW_FLAGS_40,
+        .extraFlags = WINDOW_FLAG_40,
         .style = { .customStyle = &filemenu_windowStyles[0] },
     },
     {
@@ -152,7 +152,7 @@ void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
                 Window* window = &gWindows[i];
                 s8 parent = window->parent;
 
-                if ((parent == -1 || parent == WINDOW_ID_FILEMENU_MAIN) && (window->flags & WINDOW_FLAGS_INITIAL_ANIMATION)) {
+                if ((parent == -1 || parent == WINDOW_ID_FILEMENU_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
                     break;
                 }
             }
@@ -164,8 +164,8 @@ void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
         filemenu_cursor_posX = posX;
         filemenu_cursor_targetY = posY;
         filemenu_cursor_posY = posY;
-    } else if (!(window->flags & WINDOW_FLAGS_INITIAL_ANIMATION) &&
-                (window->parent == -1 || !(gWindows[window->parent].flags & WINDOW_FLAGS_INITIAL_ANIMATION))) {
+    } else if (!(window->flags & WINDOW_FLAG_INITIAL_ANIMATION) &&
+                (window->parent == -1 || !(gWindows[window->parent].flags & WINDOW_FLAG_INITIAL_ANIMATION))) {
         filemenu_cursor_targetX = posX;
         filemenu_cursor_targetY = posY;
     }
@@ -207,7 +207,7 @@ void filemenu_update_cursor(void) {
         Window* window = &gWindows[i];
         s8 parent = window->parent;
 
-        if ((parent == -1 || parent == WINDOW_ID_FILEMENU_MAIN) && (window->flags & WINDOW_FLAGS_INITIAL_ANIMATION)) {
+        if ((parent == -1 || parent == WINDOW_ID_FILEMENU_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
             break;
         }
     }
@@ -245,7 +245,7 @@ void filemenu_update(void) {
 
     for (i = WINDOW_ID_FILEMENU_MAIN; i < ARRAY_COUNT(gWindows); i++) {
         if ((gWindows[i].parent == -1 || gWindows[i].parent == WINDOW_ID_FILEMENU_MAIN) &&
-            (gWindows[i].flags & WINDOW_FLAGS_INITIAL_ANIMATION))
+            (gWindows[i].flags & WINDOW_FLAG_INITIAL_ANIMATION))
         {
             break;
         }
@@ -295,14 +295,14 @@ void func_8024330C(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249BBC)) {
         *posX -= D_80249BBC[updateCounter];
     } else {
         *posX -= D_80249BBC[ARRAY_COUNT(D_80249BBC) - 1];
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
     }
 }
 
@@ -319,14 +319,14 @@ void filemenu_update_show_name_input(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249BDC)) {
         *posX += D_80249BDC[updateCounter];
     } else {
         *posX += D_80249BDC[ARRAY_COUNT(D_80249BDC) - 1];
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
     }
 }
 
@@ -343,14 +343,14 @@ void filemenu_update_show_options_left(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249BFC)) {
         *posX -= D_80249BFC[updateCounter];
     } else {
         *posX -= D_80249BFC[ARRAY_COUNT(D_80249BFC) - 1];
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
     }
 }
 
@@ -367,14 +367,14 @@ void filemenu_update_show_options_right(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249C1C)) {
         *posX += D_80249C1C[updateCounter];
     } else {
         *posX += D_80249C1C[ARRAY_COUNT(D_80249C1C) - 1];
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
     }
 }
 
@@ -391,14 +391,14 @@ void filemenu_update_show_options_bottom(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249C3C)) {
         *posY += D_80249C3C[updateCounter];
     } else {
         *posY += D_80249C3C[ARRAY_COUNT(D_80249C3C) - 1];
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
     }
 }
 
@@ -415,14 +415,14 @@ void filemenu_update_show_title(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249C5C)) {
         *posY -= D_80249C5C[updateCounter];
     } else {
         *posY -= D_80249C5C[ARRAY_COUNT(D_80249C5C) - 1];
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
     }
 }
 
@@ -442,8 +442,8 @@ void func_802435C4(
         *posX += D_80249C7C[updateCounter];
     } else {
         *posX += D_80249C7C[ARRAY_COUNT(D_80249C7C) - 1];
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
-        window->flags |= WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAG_HIDDEN;
     }
 }
 
@@ -463,8 +463,8 @@ void filemenu_update_hidden_name_input(
         *posX -= D_80249C90[updateCounter];
     } else {
         *posX -= D_80249C90[ARRAY_COUNT(D_80249C90) - 1];
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
-        window->flags |= WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAG_HIDDEN;
     }
 }
 
@@ -484,8 +484,8 @@ void filemenu_update_hidden_options_left(
         *posX += D_80249CA4[updateCounter];
     } else {
         *posX += D_80249CA4[ARRAY_COUNT(D_80249CA4) - 1];
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
-        window->flags |= WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAG_HIDDEN;
     }
 }
 
@@ -505,8 +505,8 @@ void filemenu_update_hidden_options_right(
         *posX -= D_80249CB8[updateCounter];
     } else {
         *posX -= D_80249CB8[ARRAY_COUNT(D_80249CB8) - 1];
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
-        window->flags |= WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAG_HIDDEN;
     }
 }
 
@@ -526,8 +526,8 @@ void filemenu_update_hidden_title(
         *posY += D_80249CCC[updateCounter];
     } else {
         *posY += D_80249CCC[ARRAY_COUNT(D_80249CCC) - 1];
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
-        window->flags |= WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAG_HIDDEN;
     }
 }
 
@@ -547,8 +547,8 @@ void filemenu_update_hidden_options_bottom(
         *posY -= D_80249CE0[updateCounter];
     } else {
         *posY -= D_80249CE0[ARRAY_COUNT(D_80249CE0) - 1];
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
-        window->flags |= WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAG_HIDDEN;
     }
 }
 
@@ -565,15 +565,15 @@ void filemenu_update_show_with_rotation(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249CF4)) {
         *rotY += D_80249CF4[updateCounter];
-        *flags = DRAW_FLAGS_CULL_BACK | DRAW_FLAGS_ROTSCALE;
+        *flags = DRAW_FLAG_CULL_BACK | DRAW_FLAG_ROTSCALE;
     } else {
         *flags = 0;
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
     }
 }
 
@@ -591,11 +591,11 @@ void filemenu_update_hidden_with_rotation(
 
     if (updateCounter < 10) { // TODO: array count?
         *rotY += -D_80249D14[updateCounter];
-        *flags = DRAW_FLAGS_CULL_BACK | DRAW_FLAGS_ROTSCALE;
+        *flags = DRAW_FLAG_CULL_BACK | DRAW_FLAG_ROTSCALE;
     } else {
         *flags = 0;
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
-        window->flags |= WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAG_HIDDEN;
     }
 }
 
@@ -621,7 +621,7 @@ void filemenu_update_select_file(
     } else {
         *posX += -window->pos.x + ((f32) (widthDelta - window->pos.x) + window->pos.x);
         *posY += -window->pos.y + ((f32) (heightDelta - window->pos.y) + window->pos.y);
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
     }
 }
 
@@ -644,7 +644,7 @@ void filemenu_update_deselect_file(
     } else {
         *posX += -window->pos.x + ((80 - window->pos.x) * 0.0f + window->pos.x);
         *posY += -window->pos.y + ((36 - window->pos.y) * 0.0f + window->pos.y);
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
     }
 }
 
@@ -680,11 +680,11 @@ void filemenu_update_show_name_confirm(
 
     counter = updateCounter - 10;
     if (counter < 10) {
-        window->flags &= ~WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_HIDDEN;
         *posY -= D_80249D34[counter];
     }
     if (updateCounter >= 20) {
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
     }
 }
 
@@ -709,8 +709,8 @@ void filemenu_update_hidden_name_confirm(
         filemenu_draw_rect(0, 0, 1280, 960, 0, 0, 0, 0, 0);
         *posY -= D_80249D48[updateCounter];
     } else {
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
-        window->flags |= WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAG_HIDDEN;
     }
 }
 
@@ -852,7 +852,7 @@ void filemenu_init(s32 arg0) {
     dma_copy(ui_images_ROM_START, ui_images_ROM_END, ui_images_VRAM);
     for (i = 0; i < ARRAY_COUNT(filemenu_cursorHudElemID); i++) {
         filemenu_cursorHudElemID[i] = hud_element_create(filemenu_cursor_hudElemScripts[i]);
-        hud_element_set_flags(filemenu_cursorHudElemID[i], HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+        hud_element_set_flags(filemenu_cursorHudElemID[i], HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
     }
 
     filemenu_cursorHudElem = filemenu_cursorHudElemID[0];

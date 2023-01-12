@@ -9,13 +9,13 @@ void entity_Signpost_idle(Entity* entity) {
     f32 val = fabsf(clamp_angle(180.0f - entity->rotation.y) - clamp_angle(atan2(entity->position.x, entity->position.z,
                     playerStatus->position.x, playerStatus->position.z)));
 
-    if (!(playerStatus->animFlags & PA_FLAGS_USING_WATT) && !(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) && (val <= 40.0f || val >= 320.0f)) {
-        entity->flags |= ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
-        if ((playerStatus->animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) && (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_WALL)) {
+    if (!(playerStatus->animFlags & PA_FLAG_USING_WATT) && !(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) && (val <= 40.0f || val >= 320.0f)) {
+        entity->flags |= ENTITY_FLAG_SHOWS_INSPECT_PROMPT;
+        if ((playerStatus->animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) && (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_WALL)) {
             entity_start_script(entity);
         }
     } else {
-        entity->flags &= ~ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
+        entity->flags &= ~ENTITY_FLAG_SHOWS_INSPECT_PROMPT;
         playerStatus->interactingWithID = -1;
     }
 }
@@ -28,7 +28,7 @@ EntityScript Entity_Signpost_Script = {
 EntityModelScript Entity_Signpost_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_Signpost_Render, RENDER_MODE_SURFACE_OPA);
 
 EntityBlueprint Entity_Signpost = {
-    .flags = ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
+    .flags = ENTITY_FLAG_SQUARE_SHADOW | ENTITY_FLAG_400 | ENTITY_FLAG_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(SignpostData),
     .renderCommandList = Entity_Signpost_RenderScript,
     .modelAnimationNodes = 0x00000000,

@@ -381,5 +381,5 @@ NpcSettings N(NpcSettings_RussT) = {
     .height = 30,
     .radius = 24,
     .level = 99,
-    .flags = ENEMY_FLAGS_1,
+    .flags = ENEMY_FLAG_1,
 };

@@ -33,7 +33,7 @@ void func_802B7000_E225B0(void) {
     FoldImageRecPart foldImage;
     s32 temp;
 
-    if (gPlayerStatus.animFlags & PA_FLAGS_100) {
+    if (gPlayerStatus.animFlags & PA_FLAG_100) {
         guScaleF(matrix1, D_802B7C78_E23228->scale, D_802B7C78_E23228->scale, D_802B7C78_E23228->scale);
         guRotateF(matrix2, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(matrix1, matrix2, matrix1);
@@ -94,7 +94,7 @@ void func_802B72C0_E22870(void) {
 
     D_802B7C78_E23228->unk_28 = 0xFF;
 
-    gPlayerStatus.animFlags |= PA_FLAGS_100;
+    gPlayerStatus.animFlags |= PA_FLAG_100;
     ISpyNotificationCallback = &func_802B735C_E2290C;
 }
 
@@ -115,7 +115,7 @@ void func_802B735C_E2290C(void) {
             {
                 cond = gGameStatusPtr->keepUsingPartnerOnMapChange;
             } else {
-                cond = playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_NO_STATIC_COLLISION);
+                cond = playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION);
             }
 
             if (!cond) {
@@ -123,7 +123,7 @@ void func_802B735C_E2290C(void) {
             }
             break;
         case 1:
-            if (playerStatus->flags & PS_FLAGS_PAUSED) {
+            if (playerStatus->flags & PS_FLAG_PAUSED) {
                 D_802B7C78_E23228->unk_24 = 3;
                 return;
             }
@@ -140,7 +140,7 @@ void func_802B735C_E2290C(void) {
             break;
         case 3:
             D_802B7C78_E23228->scale = 0.53f;
-            if (D_802B7C78_E23228->unk_18 >= 47 || playerStatus->flags & PS_FLAGS_PAUSED) {
+            if (D_802B7C78_E23228->unk_18 >= 47 || playerStatus->flags & PS_FLAG_PAUSED) {
                 D_802B7C78_E23228->unk_28 -= 64;
                 if (D_802B7C78_E23228->unk_28 < 0) {
                     D_802B7C78_E23228->unk_28 = 0;
@@ -151,7 +151,7 @@ void func_802B735C_E2290C(void) {
             if (D_802B7C78_E23228->unk_18++ > 50) {
                 gCurrentHiddenPanels.activateISpy = FALSE;
                 ISpyNotificationCallback = NULL;
-                playerStatus->animFlags &= ~PA_FLAGS_100;
+                playerStatus->animFlags &= ~PA_FLAG_100;
             }
             break;
     }

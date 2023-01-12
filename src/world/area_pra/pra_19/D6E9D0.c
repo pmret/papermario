@@ -113,7 +113,7 @@ void func_80241530_D6FEE0(void) {
     RenderTask* rtPtr = &rt;
     Npc* npc = get_npc_safe(5);
 
-    if (gPlayerStatusPtr->flags & PS_FLAGS_HAS_REFLECTION) {
+    if (gPlayerStatusPtr->flags & PS_FLAG_HAS_REFLECTION) {
         s32 x, y, z;
 
         get_screen_coords(gCurrentCamID, npc->pos.x, npc->pos.y, -npc->pos.z, &x, &y, &z);

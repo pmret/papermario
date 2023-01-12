@@ -26,7 +26,7 @@ void N(StationaryAI_IdleInit)(Evt* script, StationaryAISettings* aiSettings, Ene
     npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
     script->AI_TEMP_STATE = AI_STATE_STATIONARY_IDLE;
 
-    if (enemy->flags & ENEMY_FLAGS_100000) {
+    if (enemy->flags & ENEMY_FLAG_100000) {
         npc->yaw = enemy->varTable[0];
     }
 
@@ -202,7 +202,7 @@ ApiStatus N(StationaryAI_Main)(Evt* script, s32 isInitialCall) {
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_4)) {
         script->AI_TEMP_STATE = AI_STATE_STATIONARY_IDLE_INIT;
         npc->duration = 0;
         enemy->varTable[0] = npc->yaw;
@@ -217,13 +217,13 @@ ApiStatus N(StationaryAI_Main)(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
 
-        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = 15;
-            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
-        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        } else if (enemy->flags & ENEMY_FLAG_40000000) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
-            enemy->flags &= ~ENEMY_FLAGS_40000000;
+            enemy->flags &= ~ENEMY_FLAG_40000000;
         }
     }
 

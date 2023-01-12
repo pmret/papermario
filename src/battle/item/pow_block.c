@@ -12,10 +12,10 @@ ApiStatus N(func_802A123C_718A8C)(Evt* script, s32 isInitialCall) {
         s32 var = script->varTable[10];
         get_entity_by_index(var);
         collisionStatus->currentCeiling = var | COLLISION_WITH_ENTITY_BIT;
-        playerStatus->flags |= PS_FLAGS_JUMPING;
+        playerStatus->flags |= PS_FLAG_JUMPING;
         update_entities();
         collisionStatus->currentCeiling = -1;
-        playerStatus->flags &= ~PS_FLAGS_JUMPING;
+        playerStatus->flags &= ~PS_FLAG_JUMPING;
         return ApiStatus_DONE2;
     }
 
@@ -25,7 +25,7 @@ ApiStatus N(func_802A123C_718A8C)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_802A12E4_718B34)(Evt* script, s32 isInitialCall) {
     Entity* entity = get_entity_by_index(script->varTable[10]);
 
-    entity->flags |= ENTITY_FLAGS_PENDING_INSTANCE_DELETE;
+    entity->flags |= ENTITY_FLAG_PENDING_INSTANCE_DELETE;
 
     return ApiStatus_DONE2;
 }

@@ -183,7 +183,7 @@ void func_80036430(void) {
     gMapTransitionAlpha = 255;
     gMapTransitionFadeRate = 20;
     gMapTransitionState = 0x01;
-    gPlayerStatus.flags |= PS_FLAGS_NO_STATIC_COLLISION;
+    gPlayerStatus.flags |= PS_FLAG_NO_STATIC_COLLISION;
 }
 
 void func_8003646C(void) {

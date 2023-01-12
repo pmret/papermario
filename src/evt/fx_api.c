@@ -127,7 +127,7 @@ ApiStatus func_802D7B10(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
 
-    effect->flags |= EFFECT_INSTANCE_FLAGS_10;
+    effect->flags |= EFFECT_INSTANCE_FLAG_10;
     return ApiStatus_DONE2;
 }
 

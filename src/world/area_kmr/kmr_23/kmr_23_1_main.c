@@ -31,7 +31,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerPos, -2, 0, 0)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_WAIT(1)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10024)

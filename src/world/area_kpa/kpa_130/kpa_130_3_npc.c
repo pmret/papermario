@@ -60,7 +60,7 @@ EvtScript N(EVS_NpcDefeat_BillBlaster) = {
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
             EVT_CALL(OnPlayerFled, 0)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_FLED, 1)
+            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN
@@ -95,7 +95,7 @@ EvtScript N(EVS_NpcDefeat_BulletBill) = {
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
             EVT_CALL(OnPlayerFled, 0)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_FLED, 1)
+            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN
@@ -157,7 +157,7 @@ StaticNpc N(NpcData_BillBlaster_01)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { -288.0f, 120.0f, 120.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_BillBlaster),
         .drops = BOMBSHELL_BLASTER_NO_DROPS,
         .territory = {
@@ -179,7 +179,7 @@ StaticNpc N(NpcData_BillBlaster_01)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { -288.0f, 120.0f, 78.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_BillBlaster),
         .drops = BOMBSHELL_BLASTER_NO_DROPS,
         .territory = {
@@ -204,7 +204,7 @@ StaticNpc N(NpcData_BillBlaster_03)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { -748.0f, 300.0f, -22.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_BillBlaster_03),
         .drops = BOMBSHELL_BLASTER_DROPS,
         .territory = {
@@ -226,7 +226,7 @@ StaticNpc N(NpcData_BillBlaster_03)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { -748.0f, 300.0f, 22.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_BillBlaster_03),
         .drops = BOMBSHELL_BLASTER_NO_DROPS,
         .territory = {
@@ -251,7 +251,7 @@ StaticNpc N(NpcData_BillBlaster_05)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { 30.0f, 480.0f, -122.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_BillBlaster),
         .drops = BOMBSHELL_BLASTER_DROPS,
         .territory = {
@@ -273,7 +273,7 @@ StaticNpc N(NpcData_BillBlaster_05)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { 30.0f, 480.0f, -78.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_BillBlaster),
         .drops = BOMBSHELL_BLASTER_NO_DROPS,
         .territory = {
@@ -298,7 +298,7 @@ StaticNpc N(NpcData_BillBlaster_07)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { 820.0f, 600.0f, -122.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_BillBlaster),
         .drops = BOMBSHELL_BLASTER_DROPS,
         .territory = {
@@ -320,7 +320,7 @@ StaticNpc N(NpcData_BillBlaster_07)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { 820.0f, 600.0f, -78.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_BillBlaster),
         .drops = BOMBSHELL_BLASTER_NO_DROPS,
         .territory = {

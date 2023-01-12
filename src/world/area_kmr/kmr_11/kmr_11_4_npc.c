@@ -63,7 +63,7 @@ EvtScript N(EVS_NpcIdle_GoombaKing) = {
 };
 
 EvtScript N(EVS_Scene_BossDefeated) = {
-    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_2, TRUE)
+    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_2, TRUE)
     EVT_CALL(N(SetupFog))
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -288,7 +288,7 @@ NpcSettings N(NpcSettings_Kammy) = {
     .otherAI = &N(EVS_NpcAuxAI_Kammy),
     .ai = &N(EVS_NpcAI_Kammy),
     .aux = &N(EVS_NpcAux_Kammy),
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_800 | ENEMY_FLAGS_200000,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
 };
 
 StaticNpc N(NpcData_Enemies)[] = {
@@ -297,10 +297,10 @@ StaticNpc N(NpcData_Enemies)[] = {
         .settings = &N(NpcSettings_GoombaBros_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_800000,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_800000,
         .init = &N(EVS_NpcInit_GoombaBros_01),
         .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
@@ -340,10 +340,10 @@ StaticNpc N(NpcData_Enemies)[] = {
         .settings = &N(NpcSettings_GoombaBros_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_800000,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_800000,
         .init = &N(EVS_NpcInit_GoombaBros_02),
         .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
@@ -383,10 +383,10 @@ StaticNpc N(NpcData_Enemies)[] = {
         .settings = &N(NpcSettings_GoombaBros_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_800000,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_800000,
         .init = &N(EVS_NpcInit_GoombaKing),
         .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
@@ -428,7 +428,7 @@ StaticNpc N(NpcData_Kammy) = {
     .settings = &N(NpcSettings_Kammy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 100,
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_200000,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .animations = {},

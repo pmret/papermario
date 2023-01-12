@@ -1705,7 +1705,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                             if (target->actorID != ACTOR_PARTNER) {
                                 effect = target->icePillarEffect;
                                 if (effect != NULL) {
-                                    effect->flags |= EFFECT_INSTANCE_FLAGS_10;
+                                    effect->flags |= EFFECT_INSTANCE_FLAG_10;
                                 }
                                 target->icePillarEffect = fx_ice_pillar(0, target->currentPos.x, target->currentPos.y,
                                                             target->currentPos.z, 1.0f, 0);
@@ -2633,7 +2633,7 @@ void hide_foreground_models_unchecked(void) {
             s32 id = *idList++;
             if (id >= 0) {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
-                model->flags |= MODEL_FLAGS_ENABLED;
+                model->flags |= MODEL_FLAG_ENABLED;
             }
         }
     }
@@ -2648,7 +2648,7 @@ void show_foreground_models_unchecked(void) {
             s32 id = *idList++;
             if (id >= 0) {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
-                model->flags &= ~MODEL_FLAGS_ENABLED;
+                model->flags &= ~MODEL_FLAG_ENABLED;
             }
         }
     }
@@ -2665,7 +2665,7 @@ void hide_foreground_models(void) {
                 break;
             } else {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
-                model->flags |= MODEL_FLAGS_ENABLED;
+                model->flags |= MODEL_FLAG_ENABLED;
             }
 
         }
@@ -2683,7 +2683,7 @@ void show_foreground_models(void) {
                 break;
             } else {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
-                model->flags &= ~MODEL_FLAGS_ENABLED;
+                model->flags &= ~MODEL_FLAG_ENABLED;
             }
         }
     }

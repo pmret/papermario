@@ -564,7 +564,7 @@ EvtScript N(EVS_DepartForMtRugged) = {
 };
 
 EvtScript N(EVS_InitializeTrainScene) = {
-    EVT_CALL(SetModelFlags, MODEL_km, MODEL_FLAGS_USE_CAMERA_UNK_MATRIX, TRUE)
+    EVT_CALL(SetModelFlags, MODEL_km, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
     EVT_CALL(EnableModel, MODEL_km, FALSE)
     EVT_CALL(CloneModel, MODEL_km, CLONED_MODEL(0))
     EVT_CALL(CloneModel, MODEL_km, CLONED_MODEL(1))

@@ -42,7 +42,7 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         enemy->varTable[6] = npc->collisionHeight;
-        enemy->aiFlags |= ENEMY_AI_FLAGS_8;
+        enemy->aiFlags |= ENEMY_AI_FLAG_8;
     }
 
     if (isInitialCall || (enemy->varTable[10] == 100)) {
@@ -50,7 +50,7 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
         npc->duration = 0;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
-        enemy->flags |= ENEMY_FLAGS_200000;
+        enemy->flags |= ENEMY_FLAG_200000;
         npc->flags &= ~NPC_FLAG_GRAVITY;
         npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         enemy->varTable[10] = 0;
@@ -60,10 +60,10 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
         npc->pos.z = 0.0f;
     }
 
-    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
         npc->duration = 0;
         npc->collisionHeight = enemy->varTable[6];
-        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
         if (npc->flags & NPC_FLAG_JUMPING) {
             npc->currentAnim = ANIM_Spiny_Anim18;
             npc->moveSpeed = 0.0f;

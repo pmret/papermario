@@ -41,8 +41,8 @@ s32 func_802B704C(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (!is_starting_conversation()) {
-        if (!(playerStatus->flags & PS_FLAGS_PAUSED)) {
-            if (playerStatus->animFlags & PA_FLAGS_USING_PULSE_STONE) {
+        if (!(playerStatus->flags & PS_FLAG_PAUSED)) {
+            if (playerStatus->animFlags & PA_FLAG_USING_PULSE_STONE) {
                 if (!has_valid_conversation_npc()) {
                     if (!func_800E06D8()) {
                         s32 dx = abs((gGameStatusPtr->mapID % 7) - 2);
@@ -70,7 +70,7 @@ void func_802B7140(void) {
     D_802B7D18_E22588->pos.x = playerStatus->position.x;
     D_802B7D18_E22588->pos.y = playerStatus->position.y + playerStatus->colliderHeight + 8.0f;
     D_802B7D18_E22588->pos.z = playerStatus->position.z;
-    playerStatus->animFlags |= PA_FLAGS_40;
+    playerStatus->animFlags |= PA_FLAG_40;
     PulseStoneNotificationCallback = func_802B74F0;
 }
 
@@ -81,7 +81,7 @@ void func_802B71D4(void) {
     s32 var_v1;
     s32 dx, dy;
 
-    if (playerStatus->animFlags & PA_FLAGS_40) {
+    if (playerStatus->animFlags & PA_FLAG_40) {
         guScaleF(sp18, D_802B7D18_E22588->scale, D_802B7D18_E22588->scale, D_802B7D18_E22588->scale);
         guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp18, sp58, sp18);
@@ -156,7 +156,7 @@ void func_802B74F0(void) {
 
     if (!func_802B704C()) {
         PulseStoneNotificationCallback = NULL;
-        playerStatus->animFlags &= ~PA_FLAGS_40;
+        playerStatus->animFlags &= ~PA_FLAG_40;
         return;
     }
 

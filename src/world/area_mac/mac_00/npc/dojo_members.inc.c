@@ -61,7 +61,7 @@ EvtScript N(EVS_NpcAI_Chan) = {
 };
 
 EvtScript N(EVS_NpcDefeat_Chan) = {
-    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_4, TRUE)
+    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_4, TRUE)
     EVT_CALL(N(ResetBackgroundPostBattle))
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Chan_Walk)
@@ -129,7 +129,7 @@ EvtScript N(EVS_NpcAI_Lee) = {
 };
 
 EvtScript N(EVS_NpcDefeat_Lee) = {
-    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_4, TRUE)
+    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_4, TRUE)
     EVT_CALL(N(ResetBackgroundPostBattle))
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Lee_Walk)
@@ -243,7 +243,7 @@ EvtScript N(EVS_NpcIdle_TheMaster) = {
 };
 
 EvtScript N(EVS_NpcDefeat_Dojo) = {
-    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_4, TRUE)
+    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_4, TRUE)
     EVT_CALL(N(ResetBackgroundPostBattle))
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_CALL(SetSelfVar, VAR_BATTLE_OUTCOME, LVar0)

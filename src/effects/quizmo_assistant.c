@@ -63,8 +63,8 @@ void quizmo_assistant_init(EffectInstance* effect) {
 void quizmo_assistant_update(EffectInstance* effect) {
     QuizmoAssistantFXData* data = effect->data.quizmoAssistant;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
         data->vanishTimer = 16;
     }
 

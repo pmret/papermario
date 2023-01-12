@@ -186,7 +186,7 @@ ApiStatus func_802803C8(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    if ((playerStatus->flags & PS_FLAGS_PAUSE_DISABLED)) {
+    if ((playerStatus->flags & PS_FLAG_PAUSE_DISABLED)) {
         return ApiStatus_DONE2;
     }
 
@@ -201,9 +201,9 @@ ApiStatus func_80280410(Evt* script, s32 isInitialCall) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 currentItemSlot = evt_get_variable(script, *script->ptrReadPos);
 
-    if (!(shop->flags & SHOP_FLAGS_8)) {
+    if (!(shop->flags & SHOP_FLAG_8)) {
         shop->currentItemSlot = currentItemSlot;
-        shop->flags |= SHOP_FLAGS_1;
+        shop->flags |= SHOP_FLAG_1;
         func_800E98EC();
         shop->unk_358 = 5;
 
@@ -218,7 +218,7 @@ ApiStatus func_80280410(Evt* script, s32 isInitialCall) {
             childScript->varTable[0] = currentItemSlot;
             D_80286520 = childScript;
             D_80286524 = childScript->id;
-            shop->flags |= SHOP_FLAGS_8;
+            shop->flags |= SHOP_FLAG_8;
             return ApiStatus_BLOCK;
         } else {
             return ApiStatus_DONE2;
@@ -227,7 +227,7 @@ ApiStatus func_80280410(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    shop->flags &= ~SHOP_FLAGS_8;
+    shop->flags &= ~SHOP_FLAG_8;
     enable_player_static_collisions();
     enable_player_input();
     return ApiStatus_DONE2;
@@ -251,7 +251,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
     static s32 D_80286530;
     static s32 D_80286534;
 
-    shop->flags &= ~SHOP_FLAGS_1;
+    shop->flags &= ~SHOP_FLAG_1;
     func_800E9900();
     if (isInitialCall) {
         D_80286530 = 0;
@@ -791,7 +791,7 @@ void draw_shop_items(void) {
     f32 inX, inY, inZ;
     ShopItemEntity* shopItemEntities;
 
-    if (shop->flags & SHOP_FLAGS_1) {
+    if (shop->flags & SHOP_FLAG_1) {
         set_window_update(WINDOW_ID_10, (s32) basic_window_update);
         set_window_update(WINDOW_ID_11, (s32) basic_window_update);
     } else {
@@ -799,7 +799,7 @@ void draw_shop_items(void) {
         set_window_update(WINDOW_ID_11, (s32) basic_hidden_window_update);
     }
 
-    if (shop->flags & SHOP_FLAGS_1) {
+    if (shop->flags & SHOP_FLAG_1) {
         camera = &gCameras[gCurrentCameraID];
         itemData = shop->staticInventory;
         shopItemEntities = gGameStatusPtr->shopItemEntities;
@@ -827,7 +827,7 @@ void draw_shop_items(void) {
                     xOffset = 0;
                 }
 
-                if (!(get_item_entity(shopItemEntities->index)->flags & ITEM_ENTITY_FLAGS_HIDDEN)) {
+                if (!(get_item_entity(shopItemEntities->index)->flags & ITEM_ENTITY_FLAG_HIDDEN)) {
                     draw_number(itemData->price, xTemp + xOffset, yTemp, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, 0);
                 }
 
@@ -843,7 +843,7 @@ void draw_shop_items(void) {
     if (shop->unk_358 > 0) {
         shop->unk_358--;
     } else {
-        shop->flags &= ~SHOP_FLAGS_1;
+        shop->flags &= ~SHOP_FLAG_1;
         func_800E9900();
     }
 }
@@ -910,7 +910,7 @@ ApiStatus MakeShop(Evt* script, s32 isInitialCall) {
         gGameStatusPtr->shopItemEntities[numShopItems].pos.y = centerY;
         gGameStatusPtr->shopItemEntities[numShopItems].pos.z = centerZ;
         model = get_model_from_list_index(get_model_list_index_from_tree_index(itemDataPositions->posModelID));
-        model->flags |= MODEL_FLAGS_FLAG_4;
+        model->flags |= MODEL_FLAG_FLAG_4;
         gGameStatusPtr->shopItemEntities[numShopItems].index =
             make_item_entity_nodelay(inventory->itemID | shop->inventoryItemFlags, centerX, centerY, centerZ, 1, 0);
         set_item_entity_flags(gGameStatusPtr->shopItemEntities[numShopItems].index, 0x4000);
@@ -922,8 +922,8 @@ ApiStatus MakeShop(Evt* script, s32 isInitialCall) {
     }
 
     shop->costIconID = hud_element_create(&HES_Item_Coin);
-    hud_element_set_flags(shop->costIconID, HUD_ELEMENT_FLAGS_80);
-    hud_element_clear_flags(shop->costIconID, HUD_ELEMENT_FLAGS_FILTER_TEX);
+    hud_element_set_flags(shop->costIconID, HUD_ELEMENT_FLAG_80);
+    hud_element_clear_flags(shop->costIconID, HUD_ELEMENT_FLAG_FILTER_TEX);
     get_worker(create_worker_frontUI(NULL, draw_shop_items));
     set_window_properties(WINDOW_ID_10, 100, 66, 120, 28, 0, shop_draw_item_name, NULL, -1);
     set_window_properties(WINDOW_ID_11, 32, 184, 256, 32, 1, shop_draw_item_desc, NULL, -1);
@@ -931,7 +931,7 @@ ApiStatus MakeShop(Evt* script, s32 isInitialCall) {
     gWindowStyles[11].defaultStyleID = WINDOW_STYLE_3;
     shop->currentItemSlot = 0;
     shop->selectedStoreItemSlot = 0;
-    shop->flags = SHOP_FLAGS_0;
+    shop->flags = SHOP_FLAG_0;
     shop->owner = NULL;
 
     return ApiStatus_DONE2;

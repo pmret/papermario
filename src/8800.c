@@ -16,7 +16,7 @@ void update_cameras(void) {
     for (i = 0; i < ARRAY_COUNT(gCameras); i++) {
         Camera* cam = &gCameras[i];
 
-        if (cam->flags != 0 && !(cam->flags & CAMERA_FLAGS_ENABLED)) {
+        if (cam->flags != 0 && !(cam->flags & CAMERA_FLAG_ENABLED)) {
             s32 sx;
             s32 sy;
             s32 sz;
@@ -50,18 +50,18 @@ void update_cameras(void) {
 
             guLookAtReflectF(cam->viewMtxPlayer, &gDisplayContext->lookAt, cam->lookAt_eye.x, cam->lookAt_eye.y, cam->lookAt_eye.z, cam->lookAt_obj.x, cam->lookAt_obj.y, cam->lookAt_obj.z, 0, 1.0f, 0);
 
-            if (!(cam->flags & CAMERA_FLAGS_ORTHO)) {
-                if (cam->flags & CAMERA_FLAGS_LEAD_PLAYER) {
+            if (!(cam->flags & CAMERA_FLAG_ORTHO)) {
+                if (cam->flags & CAMERA_FLAG_LEAD_PLAYER) {
                     create_camera_leadplayer_matrix(cam);
                 }
 
                 guPerspectiveF(cam->perspectiveMatrix, &cam->perspNorm, cam->vfov, (f32) cam->viewportW / (f32) cam->viewportH, (f32) cam->nearClip, (f32) cam->farClip, 1.0f);
 
-                if (cam->flags & CAMERA_FLAGS_SHAKING) {
+                if (cam->flags & CAMERA_FLAG_SHAKING) {
                     guMtxCatF(cam->viewMtxShaking, cam->perspectiveMatrix, cam->perspectiveMatrix);
                 }
 
-                if (cam->flags & CAMERA_FLAGS_LEAD_PLAYER) {
+                if (cam->flags & CAMERA_FLAG_LEAD_PLAYER) {
                     guMtxCatF(cam->viewMtxLeading, cam->perspectiveMatrix, cam->perspectiveMatrix);
                 }
 
@@ -102,7 +102,7 @@ void render_frame(s32 flag) {
     for (; camID < ARRAY_COUNT(gCameras) - flag; camID++) {
         Camera* camera = &gCameras[camID];
 
-        if (camera->flags != 0 && !(camera->flags & (CAMERA_FLAGS_80 | CAMERA_FLAGS_ENABLED))) {
+        if (camera->flags != 0 && !(camera->flags & (CAMERA_FLAG_80 | CAMERA_FLAG_ENABLED))) {
             u16 matrixListPos;
 
             gCurrentCamID = camID;
@@ -170,7 +170,7 @@ void render_frame(s32 flag) {
                                  osVirtualToPhysical(nuGfxCfb_ptr));
                 gDPPipeSync(gMasterGfxPos++);
 
-                if (!(camera->flags & CAMERA_FLAGS_ORTHO)) {
+                if (!(camera->flags & CAMERA_FLAG_ORTHO)) {
                     gSPPerspNormalize(gMasterGfxPos++, camera->perspNorm);
                 }
 
@@ -185,12 +185,12 @@ void render_frame(s32 flag) {
             camera->vpAlt.vp.vtrans[0] = camera->vp.vp.vtrans[0] + gGameStatusPtr->unk_82;
             camera->vpAlt.vp.vtrans[1] = camera->vp.vp.vtrans[1] + gGameStatusPtr->unk_83;
 
-            if (!(camera->flags & CAMERA_FLAGS_ORTHO)) {
+            if (!(camera->flags & CAMERA_FLAG_ORTHO)) {
                 if (gCurrentCamID != CAM_3) {
-                    if (!(camera->flags & CAMERA_FLAGS_RENDER_ENTITIES)) {
+                    if (!(camera->flags & CAMERA_FLAG_RENDER_ENTITIES)) {
                         render_entities();
                     }
-                    if (!(camera->flags & CAMERA_FLAGS_RENDER_MODELS)) {
+                    if (!(camera->flags & CAMERA_FLAG_RENDER_MODELS)) {
                         render_models();
                     }
                     render_player();
@@ -236,7 +236,7 @@ void create_cameras_a(void) {
         gCameras[i].flags = 0;
     }
 
-    camDataPtr->flags = CAMERA_FLAGS_ENABLED;
+    camDataPtr->flags = CAMERA_FLAG_ENABLED;
     camDataPtr->type = 0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
@@ -247,7 +247,7 @@ void create_cameras_a(void) {
     camDataPtr->vfov = 50;
     initialize_next_camera(camDataPtr);
 
-    camDataPtr->flags = CAMERA_FLAGS_ENABLED;
+    camDataPtr->flags = CAMERA_FLAG_ENABLED;
     camDataPtr->type = 0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
@@ -258,7 +258,7 @@ void create_cameras_a(void) {
     camDataPtr->vfov = 50;
     initialize_next_camera(camDataPtr);
 
-    camDataPtr->flags = CAMERA_FLAGS_ENABLED;
+    camDataPtr->flags = CAMERA_FLAG_ENABLED;
     camDataPtr->type = 0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
@@ -269,7 +269,7 @@ void create_cameras_a(void) {
     camDataPtr->vfov = 50;
     initialize_next_camera(camDataPtr);
 
-    camDataPtr->flags = CAMERA_FLAGS_ENABLED;
+    camDataPtr->flags = CAMERA_FLAG_ENABLED;
     camDataPtr->type = 0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
@@ -290,7 +290,7 @@ void create_cameras_b(void) {
         gCameras[i].flags = 0;
     }
 
-    camDataPtr->flags = CAMERA_FLAGS_ENABLED;
+    camDataPtr->flags = CAMERA_FLAG_ENABLED;
     camDataPtr->type = 0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
@@ -301,7 +301,7 @@ void create_cameras_b(void) {
     camDataPtr->vfov = 50;
     initialize_next_camera(camDataPtr);
 
-    camDataPtr->flags = CAMERA_FLAGS_ENABLED;
+    camDataPtr->flags = CAMERA_FLAG_ENABLED;
     camDataPtr->type = 0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
@@ -312,7 +312,7 @@ void create_cameras_b(void) {
     camDataPtr->vfov = 50;
     initialize_next_camera(camDataPtr);
 
-    camDataPtr->flags = CAMERA_FLAGS_ENABLED;
+    camDataPtr->flags = CAMERA_FLAG_ENABLED;
     camDataPtr->type = 0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
@@ -323,7 +323,7 @@ void create_cameras_b(void) {
     camDataPtr->vfov = 50;
     initialize_next_camera(camDataPtr);
 
-    camDataPtr->flags = CAMERA_FLAGS_ENABLED;
+    camDataPtr->flags = CAMERA_FLAG_ENABLED;
     camDataPtr->type = 0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
@@ -349,7 +349,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
 
     ASSERT(camID < ARRAY_COUNT(gCameras));
 
-    camera->flags = initData->flags | (CAMERA_FLAGS_1 | CAMERA_FLAGS_LEAD_PLAYER);
+    camera->flags = initData->flags | (CAMERA_FLAG_1 | CAMERA_FLAG_LEAD_PLAYER);
     camera->moveFlags = 0;
     camera->lookAt_eye.x = 0;
     camera->lookAt_eye.y = 0;

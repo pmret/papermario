@@ -57,7 +57,7 @@ EvtScript N(EVS_Main) = {
             EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
             EVT_CALL(SetNpcPos, NPC_PARTNER, NPC_DISPOSE_LOCATION)
         EVT_END_IF
-        EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, TRUE)
+        EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
         EVT_CALL(InterpPlayerYaw, 90, 0)
         EVT_WAIT(2)
         EVT_CALL(RandInt, 4, LVar0)

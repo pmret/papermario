@@ -23,7 +23,7 @@ ApiStatus N(UnkTattleEffectFunc2)(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
 
     effect->data.tattleWindow->pos.y = 144.0f;
-    effect->flags |= EFFECT_INSTANCE_FLAGS_10;
+    effect->flags |= EFFECT_INSTANCE_FLAG_10;
     return ApiStatus_DONE2;
 }
 

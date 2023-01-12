@@ -120,8 +120,8 @@ void lightning_bolt_update(EffectInstance* effect) {
     LightningBoltFXData* data = effect->data.lightningBolt;
     s32 type = data->type;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
         data->timeLeft = 16;
     }
 

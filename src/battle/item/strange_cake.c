@@ -63,7 +63,7 @@ s32 N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
             for (i = 0; i < ARRAY_COUNT(D_802A2DD8); i++) {
                 id = hud_element_create(N(D_802A2848_732B48)[N(D_802A2858_732B58)[i]]);
                 D_802A2DD8[i] = id;
-                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
             }
             D_802A2DEC = 1;
 

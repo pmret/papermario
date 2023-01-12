@@ -119,7 +119,7 @@ ApiStatus EnableMusicProximityMix(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 playerIndex = evt_get_variable(script, *args++);
 
-    gMusicSettings[playerIndex].flags |= MUSIC_SETTINGS_FLAGS_ENABLE_PROXIMITY_MIX;
+    gMusicSettings[playerIndex].flags |= MUSIC_SETTINGS_FLAG_ENABLE_PROXIMITY_MIX;
     return ApiStatus_DONE2;
 }
 
@@ -656,7 +656,7 @@ ApiStatus DropTinyItemEntity(Evt* script, s32 isInitialCall) {
     s32 pickupVar = evt_get_variable_index(script, *args++);
 
     script->varTable[0] = make_item_entity_nodelay(itemID, x, y, z, itemSpawnMode, pickupVar);
-    set_item_entity_flags(script->varTable[0], ITEM_ENTITY_FLAGS_TINY);
+    set_item_entity_flags(script->varTable[0], ITEM_ENTITY_FLAG_TINY);
     return ApiStatus_DONE2;
 }
 

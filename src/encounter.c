@@ -78,7 +78,7 @@ EvtScript D_80077E9C = {
 };
 
 EnemyDrops D_80077EB8 = {
-    .dropFlags = NPC_DROP_FLAGS_80,
+    .dropFlags = NPC_DROP_FLAG_80,
     .itemDropChance = 10,
     .itemDrops = {
         {
@@ -161,7 +161,7 @@ EvtScript EnemyNpcDefeat = {
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
             EVT_CALL(OnPlayerFled, 0)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, -1, ENEMY_FLAGS_FLED, 1)
+            EVT_CALL(SetEnemyFlagBits, -1, ENEMY_FLAG_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN
@@ -332,8 +332,8 @@ ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
     if (D_800A0BB8 == 2) {
         WorldMerleeOrbEffect->data.energyOrbWave->scale = 0.00001f;
         WorldMerleeWaveEffect->data.energyOrbWave->scale = 0.00001f;
-        WorldMerleeOrbEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
-        WorldMerleeWaveEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
+        WorldMerleeOrbEffect->flags |= EFFECT_INSTANCE_FLAG_10;
+        WorldMerleeWaveEffect->flags |= EFFECT_INSTANCE_FLAG_10;
         return ApiStatus_DONE1;
     }
 
@@ -509,9 +509,9 @@ void update_encounters_neutral(void) {
     currentEncounter->hitType = 0;
     currentEncounter->allowFleeing = FALSE;
     currentEncounter->dropWhackaBump = FALSE;
-    currentEncounter->flags &= ~ENCOUNTER_STATUS_FLAGS_1;
-    currentEncounter->flags &= ~ENCOUNTER_STATUS_FLAGS_2;
-    currentEncounter->flags &= ~ENCOUNTER_STATUS_FLAGS_4;
+    currentEncounter->flags &= ~ENCOUNTER_STATUS_FLAG_1;
+    currentEncounter->flags &= ~ENCOUNTER_STATUS_FLAG_2;
+    currentEncounter->flags &= ~ENCOUNTER_STATUS_FLAG_4;
 
     playerX = playerStatus->position.x;
     playerY = playerStatus->position.y;
@@ -529,7 +529,7 @@ void update_encounters_neutral(void) {
             currentEncounter->battleTriggerCooldown--;
         }
         if (playerStatus->blinkTimer != 0) {
-            if (!(playerStatus->flags & PS_FLAGS_INPUT_DISABLED)) {
+            if (!(playerStatus->flags & PS_FLAG_INPUT_DISABLED)) {
                 playerStatus->blinkTimer = currentEncounter->battleTriggerCooldown;
             } else {
                 playerStatus->blinkTimer = 1;
@@ -544,7 +544,7 @@ void update_encounters_neutral(void) {
         }
         for (i = 0; i < encounter->count; i++) {
             enemy = encounter->enemy[i];
-            if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+            if (enemy == NULL || (enemy->flags & ENEMY_FLAG_20)) {
                 continue;
             }
             npc = get_npc_unsafe(enemy->npcID);
@@ -558,10 +558,10 @@ void update_encounters_neutral(void) {
 
                 if (aiPaused & 1) {
                     npc->flags |= NPC_FLAG_80000000;
-                    enemy->flags |= ENEMY_FLAGS_80000000;
+                    enemy->flags |= ENEMY_FLAG_80000000;
                 } else {
                     npc->flags &= ~NPC_FLAG_80000000;
-                    enemy->flags &= ~ENEMY_FLAGS_80000000;
+                    enemy->flags &= ~ENEMY_FLAG_80000000;
                 }
                 script = get_script_by_id(enemy->auxScriptID);
                 if (script != NULL) {
@@ -571,7 +571,7 @@ void update_encounters_neutral(void) {
                 if (script != NULL) {
                     set_script_flags(script, EVT_FLAG_SUSPENDED);
                 }
-                if (enemy->flags & ENEMY_FLAGS_80000) {
+                if (enemy->flags & ENEMY_FLAG_80000) {
                     script = get_script_by_id(enemy->auxScriptID);
                     if (script != NULL) {
                         clear_script_flags(script, EVT_FLAG_SUSPENDED);
@@ -581,11 +581,11 @@ void update_encounters_neutral(void) {
                         clear_script_flags(script, EVT_FLAG_SUSPENDED);
                     }
                 }
-            } else if (!(enemy->flags & ENEMY_FLAGS_200000)) {
+            } else if (!(enemy->flags & ENEMY_FLAG_200000)) {
                 get_screen_coords(gCurrentCameraID, npc->pos.x, npc->pos.y, npc->pos.z, &screenX, &screenY, &screenZ);
-                if ((screenX < -160 || screenX > 480 || screenY < -120 || screenY > 360 || screenZ < 0) && !(enemy->flags & ENEMY_FLAGS_1)) {
+                if ((screenX < -160 || screenX > 480 || screenY < -120 || screenY > 360 || screenZ < 0) && !(enemy->flags & ENEMY_FLAG_1)) {
                     npc->flags |= NPC_FLAG_80000000;
-                    enemy->flags |= ENEMY_FLAGS_80000000;
+                    enemy->flags |= ENEMY_FLAG_80000000;
                     script = get_script_by_id(enemy->auxScriptID);
                     if (script != NULL) {
                         set_script_flags(script, EVT_FLAG_SUSPENDED);
@@ -596,7 +596,7 @@ void update_encounters_neutral(void) {
                     }
                 } else {
                     npc->flags &= ~NPC_FLAG_80000000;
-                    enemy->flags &= ~ENEMY_FLAGS_80000000;
+                    enemy->flags &= ~ENEMY_FLAG_80000000;
                     script = get_script_by_id(enemy->auxScriptID);
                     if (script != NULL) {
                         clear_script_flags(script, EVT_FLAG_SUSPENDED);
@@ -608,7 +608,7 @@ void update_encounters_neutral(void) {
                 }
             } else {
                 npc->flags &= ~NPC_FLAG_80000000;
-                enemy->flags &= ~ENEMY_FLAGS_80000000;
+                enemy->flags &= ~ENEMY_FLAG_80000000;
                 script = get_script_by_id(enemy->auxScriptID);
                 if (script != NULL) {
                     clear_script_flags(script, EVT_FLAG_SUSPENDED);
@@ -619,11 +619,11 @@ void update_encounters_neutral(void) {
                 }
             }
 
-            if (enemy->flags & ENEMY_FLAGS_80000000) {
+            if (enemy->flags & ENEMY_FLAG_80000000) {
                 continue;
             }
-            if (enemy->flags & ENEMY_FLAGS_1) {
-                if (!(enemy->flags & ENEMY_FLAGS_400000)) {
+            if (enemy->flags & ENEMY_FLAG_1) {
+                if (!(enemy->flags & ENEMY_FLAG_400000)) {
                     if (npc == playerStatus->encounteredNPC) {
                         enemy->unk_E0 = npc->yaw;
                         npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
@@ -651,16 +651,16 @@ void update_encounters_neutral(void) {
 
             if (currentEncounter->battleTriggerCooldown != 0 ||
                 gGameStatusPtr->debugEnemyContact == DEBUG_CONTACT_CANT_TOUCH ||
-                (playerStatus->flags & PS_FLAGS_ARMS_RAISED) ||
+                (playerStatus->flags & PS_FLAG_ARMS_RAISED) ||
                 (gOverrideFlags & GLOBAL_OVERRIDES_40) ||
                 gPartnerActionStatus.actingPartner == PARTNER_BOW ||
-                (enemy->flags & ENEMY_FLAGS_1) ||
+                (enemy->flags & ENEMY_FLAG_1) ||
                 (gOverrideFlags & (GLOBAL_OVERRIDES_DISABLE_BATTLES | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800)) ||
                 is_picking_up_item()) {
                 continue;
             }
             do {
-                if (!(enemy->flags & ENEMY_FLAGS_10000000) && partner_test_enemy_collision(npc) != 0) {
+                if (!(enemy->flags & ENEMY_FLAG_10000000) && partner_test_enemy_collision(npc) != 0) {
                     currentEncounter->hitType = ENCOUNTER_TRIGGER_PARTNER;
                     enemy->encountered = ENCOUNTER_TRIGGER_PARTNER;
                     currentEncounter->currentEncounter = encounter;
@@ -712,10 +712,10 @@ void update_encounters_neutral(void) {
                     dx = npcX - x;
                     dz = npcZ - z;
                     distance = sqrtf(SQ(dx) + SQ(dz));
-                    if (enemy->flags & ENEMY_FLAGS_IGNORE_HAMMER) {
+                    if (enemy->flags & ENEMY_FLAG_IGNORE_HAMMER) {
                         break;
                     }
-                    if (!(playerStatus->flags & PS_FLAGS_HAMMER_CHECK)) {
+                    if (!(playerStatus->flags & PS_FLAG_HAMMER_CHECK)) {
                         break;
                     }
                     if (distance >= playerColRadius + colRadius || y > npcY + colHeight || npcY > y + playerColHeight) {
@@ -778,7 +778,7 @@ void update_encounters_neutral(void) {
                 case ACTION_STATE_TORNADO_POUND:
                     x = playerX;
                     z = playerZ;
-                    if (!(enemy->flags & ENEMY_FLAGS_IGNORE_JUMP)) {
+                    if (!(enemy->flags & ENEMY_FLAG_IGNORE_JUMP)) {
                         if (distance >= playerColRadius + colRadius) {
                             continue;
                         }
@@ -853,7 +853,7 @@ void update_encounters_neutral(void) {
                     break;
             }
 
-            if (enemy->flags & ENEMY_FLAGS_IGNORE_TOUCH) {
+            if (enemy->flags & ENEMY_FLAG_IGNORE_TOUCH) {
                 continue;
             }
 
@@ -889,21 +889,21 @@ void update_encounters_neutral(void) {
             if (is_ability_active(ABILITY_DIZZY_ATTACK)) {
                 cond = TRUE;
             }
-            if ((playerStatus->animFlags & PA_FLAGS_SPINNING) && !(enemy->flags & ENEMY_FLAGS_20000000) && cond) {
+            if ((playerStatus->animFlags & PA_FLAG_SPINNING) && !(enemy->flags & ENEMY_FLAG_20000000) && cond) {
                 sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, 0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
                 testX = playerStatus->position.x + ((npc->pos.x - playerStatus->position.x) * 0.5f);
                 testY = playerStatus->position.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->position.y + playerStatus->colliderHeight)) * 0.5f);
                 testZ = playerStatus->position.z + ((npc->pos.z - playerStatus->position.z) * 0.5f);
                 fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
                 currentEncounter->hitType = ENCOUNTER_TRIGGER_SPIN;
-                playerStatus->animFlags |= PA_FLAGS_DIZZY_ATTACK_ENCOUNTER;
+                playerStatus->animFlags |= PA_FLAG_DIZZY_ATTACK_ENCOUNTER;
                 enemy->encountered = ENCOUNTER_TRIGGER_SPIN;
                 currentEncounter->currentEncounter = encounter;
                 currentEncounter->currentEnemy = enemy;
                 currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
             } else {
                 currentEncounter->hitType = ENCOUNTER_TRIGGER_NONE;
-                playerStatus->animFlags &= ~PA_FLAGS_DIZZY_ATTACK_ENCOUNTER;
+                playerStatus->animFlags &= ~PA_FLAG_DIZZY_ATTACK_ENCOUNTER;
                 enemy->encountered = ENCOUNTER_TRIGGER_NONE;
                 currentEncounter->currentEncounter = encounter;
                 currentEncounter->currentEnemy = enemy;
@@ -919,7 +919,7 @@ void update_encounters_neutral(void) {
                         firstStrikeType = FIRST_STRIKE_ENEMY;
                     }
                 }
-                if (!is_ability_active(ABILITY_BUMP_ATTACK) || gPlayerData.level < enemy->npcSettings->level || (enemy->flags & ENEMY_FLAGS_40)) {
+                if (!is_ability_active(ABILITY_BUMP_ATTACK) || gPlayerData.level < enemy->npcSettings->level || (enemy->flags & ENEMY_FLAG_40)) {
                     currentEncounter->firstStrikeType = firstStrikeType;
                 } else {
                     if (!currentEncounter->scriptedBattle) {
@@ -950,13 +950,13 @@ START_BATTLE:
                 if (enemy == NULL) {
                     continue;
                 }
-                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                if ((enemy->flags & ENEMY_FLAG_8) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
-                if (enemy->flags & ENEMY_FLAGS_20) {
+                if (enemy->flags & ENEMY_FLAG_20) {
                     continue;
                 }
-                if ((currentEnemy->flags & ENEMY_FLAGS_40) && enemy != currentEncounter->currentEnemy) {
+                if ((currentEnemy->flags & ENEMY_FLAG_40) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
 
@@ -976,7 +976,7 @@ START_BATTLE:
                 playerStatus->actionState != ACTION_STATE_TORNADO_POUND &&
                 playerStatus->actionState != ACTION_STATE_SPIN_JUMP &&
                 playerStatus->actionState != ACTION_STATE_SPIN_POUND) {
-                playerStatus->flags |= PS_FLAGS_ENTERING_BATTLE;
+                playerStatus->flags |= PS_FLAG_ENTERING_BATTLE;
             }
             if (!is_ability_active(ABILITY_CHILL_OUT) && currentEncounter->firstStrikeType == FIRST_STRIKE_ENEMY) {
                 set_action_state(ACTION_STATE_ENEMY_FIRST_STRIKE);
@@ -1004,13 +1004,13 @@ START_BATTLE:
                 if (enemy == NULL) {
                     continue;
                 }
-                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                if ((enemy->flags & ENEMY_FLAG_8) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
-                if (enemy->flags & ENEMY_FLAGS_20) {
+                if (enemy->flags & ENEMY_FLAG_20) {
                     continue;
                 }
-                if ((currentEnemy->flags & ENEMY_FLAGS_40) && enemy != currentEncounter->currentEnemy) {
+                if ((currentEnemy->flags & ENEMY_FLAG_40) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
 
@@ -1032,7 +1032,7 @@ START_BATTLE:
             currentEncounter->unk_94 = 0;
             D_8009A678 = 1;
             gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT;
-            playerStatus->flags |= PS_FLAGS_ENTERING_BATTLE;
+            playerStatus->flags |= PS_FLAG_ENTERING_BATTLE;
             break;
         case ENCOUNTER_TRIGGER_JUMP:
             currentEnemy = enemy = currentEncounter->currentEnemy;
@@ -1051,13 +1051,13 @@ START_BATTLE:
                 if (enemy == NULL) {
                     continue;
                 }
-                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                if ((enemy->flags & ENEMY_FLAG_8) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
-                if (enemy->flags & ENEMY_FLAGS_20) {
+                if (enemy->flags & ENEMY_FLAG_20) {
                     continue;
                 }
-                if ((currentEnemy->flags & ENEMY_FLAGS_40) && enemy != currentEncounter->currentEnemy) {
+                if ((currentEnemy->flags & ENEMY_FLAG_40) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
                 if (enemy->hitBytecode != NULL) {
@@ -1074,7 +1074,7 @@ START_BATTLE:
                     testY = playerStatus->position.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->position.y + playerStatus->colliderHeight)) * 0.5f);
                     testZ = playerStatus->position.z + ((npc->pos.z - playerStatus->position.z) * 0.5f);
                     fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
-                } else if (!(enemy->flags & ENEMY_FLAGS_1)) {
+                } else if (!(enemy->flags & ENEMY_FLAG_1)) {
                     npc = get_npc_unsafe(enemy->npcID);
                     cond2 = TRUE;
                     testX =  playerStatus->position.x + ((npc->pos.x - playerStatus->position.x) * 0.5f);
@@ -1085,7 +1085,7 @@ START_BATTLE:
             }
             disable_player_input();
             partner_disable_input();
-            playerStatus->flags |= PS_FLAGS_ENTERING_BATTLE;
+            playerStatus->flags |= PS_FLAG_ENTERING_BATTLE;
             if (cond2) {
                 start_bounce_a();
             }
@@ -1111,13 +1111,13 @@ START_BATTLE:
                 if (enemy == NULL) {
                     continue;
                 }
-                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                if ((enemy->flags & ENEMY_FLAG_8) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
-                if (enemy->flags & ENEMY_FLAGS_20) {
+                if (enemy->flags & ENEMY_FLAG_20) {
                     continue;
                 }
-                if ((currentEnemy->flags & ENEMY_FLAGS_40) && enemy != currentEncounter->currentEnemy) {
+                if ((currentEnemy->flags & ENEMY_FLAG_40) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
                 if (enemy->hitBytecode != NULL) {
@@ -1133,7 +1133,7 @@ START_BATTLE:
                     testY = playerStatus->position.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->position.y + playerStatus->colliderHeight)) * 0.5f);
                     testZ = playerStatus->position.z + ((npc->pos.z - playerStatus->position.z) * 0.5f);
                     fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
-                } else if (!(enemy->flags & ENEMY_FLAGS_1)) {
+                } else if (!(enemy->flags & ENEMY_FLAG_1)) {
                     npc = get_npc_unsafe(enemy->npcID);
                     testX =  playerStatus->position.x + ((npc->pos.x - playerStatus->position.x) * 0.5f);
                     testY = playerStatus->position.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->position.y + playerStatus->colliderHeight)) * 0.5f);
@@ -1146,7 +1146,7 @@ START_BATTLE:
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->unk_94 = 0;
             currentEncounter->scriptedBattle = FALSE;
-            playerStatus->flags |= PS_FLAGS_ENTERING_BATTLE;
+            playerStatus->flags |= PS_FLAG_ENTERING_BATTLE;
             sfx_play_sound(0);
             gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
             D_8009A678 = 1;
@@ -1193,13 +1193,13 @@ START_BATTLE:
                 if (enemy == NULL) {
                     continue;
                 }
-                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                if ((enemy->flags & ENEMY_FLAG_8) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
-                if (enemy->flags & ENEMY_FLAGS_20) {
+                if (enemy->flags & ENEMY_FLAG_20) {
                     continue;
                 }
-                if ((currentEnemy->flags & ENEMY_FLAGS_40) && enemy != currentEncounter->currentEnemy) {
+                if ((currentEnemy->flags & ENEMY_FLAG_40) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
                 if (enemy->hitBytecode != NULL) {
@@ -1215,7 +1215,7 @@ START_BATTLE:
                     testY = npc->pos.y + npc->collisionHeight;
                     testZ = npc->pos.z;
                     fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
-                } else if (!(enemy->flags & ENEMY_FLAGS_1)) {
+                } else if (!(enemy->flags & ENEMY_FLAG_1)) {
                     npc = get_npc_unsafe(enemy->npcID);
                     testX = npc->pos.x;
                     testY = npc->pos.y + npc->collisionHeight;
@@ -1228,7 +1228,7 @@ START_BATTLE:
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->unk_94 = 0;
             currentEncounter->scriptedBattle = FALSE;
-            playerStatus->flags |= PS_FLAGS_ENTERING_BATTLE;
+            playerStatus->flags |= PS_FLAG_ENTERING_BATTLE;
             sfx_play_sound(0);
             gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
             D_8009A678 = 1;
@@ -1264,7 +1264,7 @@ void update_encounters_pre_battle(void) {
                 if (encounter != NULL) {
                     for (j = 0; j < encounter->count; j++) {
                         enemy = encounter->enemy[j];
-                        if (enemy != NULL && !(enemy->flags & ENEMY_FLAGS_20)) {
+                        if (enemy != NULL && !(enemy->flags & ENEMY_FLAG_20)) {
                             if (enemy->aiScript != NULL) {
                                 suspend_all_script(enemy->aiScriptID);
                             }
@@ -1277,7 +1277,7 @@ void update_encounters_pre_battle(void) {
             }
 
             enemy = currentEncounter->currentEnemy;
-            if ((enemy->flags & ENEMY_FLAGS_100000) && !currentEncounter->scriptedBattle) {
+            if ((enemy->flags & ENEMY_FLAG_100000) && !currentEncounter->scriptedBattle) {
                 currentEncounter->unk_94 = 0;
                 currentEncounter->battleStartCountdown = 0;
                 partner_handle_before_battle();
@@ -1298,7 +1298,7 @@ void update_encounters_pre_battle(void) {
                 currentEncounter->hitType != ENCOUNTER_TRIGGER_SPIN &&
                 is_ability_active(ABILITY_FIRST_ATTACK) &&
                 (playerData->level >= enemy->npcSettings->level) &&
-                !(enemy->flags & ENEMY_FLAGS_40) &&
+                !(enemy->flags & ENEMY_FLAG_40) &&
                 !currentEncounter->scriptedBattle)
             {
                 currentEncounter->unk_94 = 0;
@@ -1312,14 +1312,14 @@ void update_encounters_pre_battle(void) {
             if ((
                     (is_ability_active(ABILITY_BUMP_ATTACK)) &&
                     (playerData->level >= enemy->npcSettings->level) &&
-                    (!(enemy->flags & ENEMY_FLAGS_40) &&
+                    (!(enemy->flags & ENEMY_FLAG_40) &&
                     !(currentEncounter->scriptedBattle))
                 ) || (
                     (enemy = currentEncounter->currentEnemy,
                     (currentEncounter->hitType == ENCOUNTER_TRIGGER_SPIN)) &&
                     (is_ability_active(ABILITY_SPIN_ATTACK)) &&
                     playerData->level >= enemy->npcSettings->level &&
-                    !(enemy->flags & ENEMY_FLAGS_40) &&
+                    !(enemy->flags & ENEMY_FLAG_40) &&
                     !currentEncounter->scriptedBattle
                 ))
             {
@@ -1360,8 +1360,8 @@ void update_encounters_pre_battle(void) {
                 for (i = 0; i < encounter->count; i++) {
                     enemy = encounter->enemy[i];
                     if (enemy != NULL &&
-                        ((!(enemy->flags & ENEMY_FLAGS_8) || enemy == currentEncounter->currentEnemy)) &&
-                        !(enemy->flags & ENEMY_FLAGS_20) &&
+                        ((!(enemy->flags & ENEMY_FLAG_8) || enemy == currentEncounter->currentEnemy)) &&
+                        !(enemy->flags & ENEMY_FLAG_20) &&
                         enemy->hitScript != NULL)
                     {
                         kill_script_by_ID(enemy->hitScriptID);
@@ -1411,8 +1411,8 @@ void update_encounters_pre_battle(void) {
             for (i = 0; i < encounter->count; i++) {
                 enemy = encounter->enemy[i];
                 if (enemy != NULL &&
-                    (!(enemy->flags & ENEMY_FLAGS_8) || enemy == currentEncounter->currentEnemy) &&
-                    !(enemy->flags & ENEMY_FLAGS_20) &&
+                    (!(enemy->flags & ENEMY_FLAG_8) || enemy == currentEncounter->currentEnemy) &&
+                    !(enemy->flags & ENEMY_FLAG_20) &&
                     (enemy->hitScript != 0))
                 {
                     kill_script_by_ID(enemy->hitScriptID);
@@ -1592,7 +1592,7 @@ void update_encounters_post_battle(void) {
             currentEncounter->fadeOutAccel = 1;
             currentEncounter->battleStartCountdown = 0;
             D_8009A670 = FALSE;
-            gPlayerStatus.flags &= ~PS_FLAGS_ENTERING_BATTLE;
+            gPlayerStatus.flags &= ~PS_FLAG_ENTERING_BATTLE;
             if (currentEncounter->hitType == ENCOUNTER_TRIGGER_SPIN) {
                 D_8009A670 = TRUE;
             }
@@ -1604,7 +1604,7 @@ void update_encounters_post_battle(void) {
             if (partnerActionStatus->partnerAction_unk_1) {
                 D_8009A63C = TRUE;
             } else if (D_8009A670 == 0 &&
-                       !(gPlayerStatus.flags & (PS_FLAGS_JUMPING | PS_FLAGS_FALLING)) &&
+                       !(gPlayerStatus.flags & (PS_FLAG_JUMPING | PS_FLAG_FALLING)) &&
                        gPlayerStatus.actionState != ACTION_STATE_RIDE &&
                        gPlayerStatus.actionState != ACTION_STATE_USE_SPINNING_FLOWER) {
                 set_action_state(ACTION_STATE_IDLE);
@@ -1657,10 +1657,10 @@ void update_encounters_post_battle(void) {
                 if (enemy == NULL) {
                     continue;
                 }
-                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                if ((enemy->flags & ENEMY_FLAG_8) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
-                if (enemy->flags & ENEMY_FLAGS_20) {
+                if (enemy->flags & ENEMY_FLAG_20) {
                     continue;
                 }
                 if (enemy->defeatBytecode != NULL) {
@@ -1680,7 +1680,7 @@ void update_encounters_post_battle(void) {
                     script->groupFlags = 0;
                 }
             }
-            if (!(currentEncounter->flags & ENCOUNTER_STATUS_FLAGS_1) && !D_8009A63C && currentEncounter->battleStartCountdown == 0 && D_8009A670 == 0) {
+            if (!(currentEncounter->flags & ENCOUNTER_STATUS_FLAG_1) && !D_8009A63C && currentEncounter->battleStartCountdown == 0 && D_8009A670 == 0) {
                 suggest_player_anim_clearUnkFlag(0x10032);
             }
             gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_WON_WAIT;
@@ -1704,10 +1704,10 @@ void update_encounters_post_battle(void) {
                 if (enemy == NULL) {
                     continue;
                 }
-                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                if ((enemy->flags & ENEMY_FLAG_8) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
-                if (enemy->flags & ENEMY_FLAGS_20) {
+                if (enemy->flags & ENEMY_FLAG_20) {
                     continue;
                 }
                 if (does_script_exist(enemy->defeatScriptID)) {
@@ -1717,7 +1717,7 @@ void update_encounters_post_battle(void) {
                 }
             }
             if (!cond) {
-                if (!(currentEncounter->flags & ENCOUNTER_STATUS_FLAGS_1) && !D_8009A63C && currentEncounter->battleStartCountdown == 1) {
+                if (!(currentEncounter->flags & ENCOUNTER_STATUS_FLAG_1) && !D_8009A63C && currentEncounter->battleStartCountdown == 1) {
                     suggest_player_anim_clearUnkFlag(ANIM_Mario_ThumbsUp);
                 }
                 encounter = currentEncounter->currentEncounter;
@@ -1727,14 +1727,14 @@ void update_encounters_post_battle(void) {
                     if (enemy == NULL) {
                         continue;
                     }
-                    if (enemy->flags & ENEMY_FLAGS_4) {
+                    if (enemy->flags & ENEMY_FLAG_4) {
                         continue;
                     }
-                    if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                    if ((enemy->flags & ENEMY_FLAG_8) && enemy != currentEncounter->currentEnemy) {
                         continue;
                     }
-                    if (!(enemy->flags & ENEMY_FLAGS_1)) {
-                        if (!(enemy->flags & ENEMY_FLAGS_FLED)) {
+                    if (!(enemy->flags & ENEMY_FLAG_1)) {
+                        if (!(enemy->flags & ENEMY_FLAG_FLED)) {
                             set_defeated(currentEncounter->mapID, encounter->encounterID + i);
                         }
                     }
@@ -1742,14 +1742,14 @@ void update_encounters_post_battle(void) {
                 }
 
                 currentEncounter->unk_94 = 0;
-                if (!(currentEncounter->flags & ENCOUNTER_STATUS_FLAGS_1) && !D_8009A63C && currentEncounter->battleStartCountdown == 1) {
+                if (!(currentEncounter->flags & ENCOUNTER_STATUS_FLAG_1) && !D_8009A63C && currentEncounter->battleStartCountdown == 1) {
                     currentEncounter->unk_94 = 30;
                 }
                 gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_WON_TO_NEUTRAL;
             }
             break;
         case ENCOUNTER_SUBSTATE_POST_BATTLE_WON_TO_NEUTRAL:
-            if (!(currentEncounter->flags & ENCOUNTER_STATUS_FLAGS_2) && (gGameStatusPtr->stickX[0] != 0 || gGameStatusPtr->stickY[0] != 0)) {
+            if (!(currentEncounter->flags & ENCOUNTER_STATUS_FLAG_2) && (gGameStatusPtr->stickX[0] != 0 || gGameStatusPtr->stickY[0] != 0)) {
                 currentEncounter->unk_94 = 0;
             }
             if (currentEncounter->unk_94 != 0) {
@@ -1764,7 +1764,7 @@ void update_encounters_post_battle(void) {
                 }
                 for (j = 0; j < encounter->count; j++) {
                     enemy = encounter->enemy[j];
-                    if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+                    if (enemy == NULL || (enemy->flags & ENEMY_FLAG_20)) {
                         continue;
                     }
                     if (enemy->aiScript != NULL) {
@@ -1795,11 +1795,11 @@ void update_encounters_post_battle(void) {
                 if (enemy == NULL) {
                     continue;
                 }
-                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                if ((enemy->flags & ENEMY_FLAG_8) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
 
-                if (enemy->flags & ENEMY_FLAGS_20) {
+                if (enemy->flags & ENEMY_FLAG_20) {
                     continue;
                 }
 
@@ -1834,7 +1834,7 @@ void update_encounters_post_battle(void) {
                 if (enemy == NULL) {
                     continue;
                 }
-                if (!(enemy->flags & ENEMY_FLAGS_20)) {
+                if (!(enemy->flags & ENEMY_FLAG_20)) {
                     if (does_script_exist(enemy->defeatScriptID)) {
                         cond = TRUE;
                     } else {
@@ -1850,7 +1850,7 @@ void update_encounters_post_battle(void) {
                     }
                     for (j = 0; j < encounter->count; j++) {
                         enemy = encounter->enemy[j];
-                        if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+                        if (enemy == NULL || (enemy->flags & ENEMY_FLAG_20)) {
                             continue;
                         }
                         if (enemy->aiScript != NULL) {
@@ -1864,7 +1864,7 @@ void update_encounters_post_battle(void) {
 
                 enemy = currentEncounter->currentEnemy;
                 encounter = currentEncounter->currentEncounter;;
-                if (!(enemy->flags & ENEMY_FLAGS_40000)) {
+                if (!(enemy->flags & ENEMY_FLAG_40000)) {
                     enemy->aiPaused = 45;
                     playerStatus->blinkTimer = 45;
                     for (j = 0; j < encounter->count; j++) {
@@ -1872,10 +1872,10 @@ void update_encounters_post_battle(void) {
                         if (enemy == NULL) {
                             continue;
                         }
-                        if (enemy->flags & ENEMY_FLAGS_20) {
+                        if (enemy->flags & ENEMY_FLAG_20) {
                             continue;
                         }
-                        if (enemy->flags & ENEMY_FLAGS_8) {
+                        if (enemy->flags & ENEMY_FLAG_8) {
                             continue;
                         }
                         enemy->aiPaused = 45;
@@ -1884,7 +1884,7 @@ void update_encounters_post_battle(void) {
                 }
 
                 enemy = currentEncounter->currentEnemy;
-                if (!(currentEncounter->flags & ENCOUNTER_STATUS_FLAGS_4)) {
+                if (!(currentEncounter->flags & ENCOUNTER_STATUS_FLAG_4)) {
                     script = start_script(&D_80077E9C, EVT_PRIORITY_A, 0);
                     enemy->defeatScript = script;
                     enemy->defeatScriptID = script->id;
@@ -1929,11 +1929,11 @@ void update_encounters_post_battle(void) {
                 if (enemy == NULL) {
                     continue;
                 }
-                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                if ((enemy->flags & ENEMY_FLAG_8) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
 
-                if (enemy->flags & ENEMY_FLAGS_20) {
+                if (enemy->flags & ENEMY_FLAG_20) {
                     continue;
                 }
 
@@ -1967,7 +1967,7 @@ void update_encounters_post_battle(void) {
                 if (enemy == NULL) {
                     continue;
                 }
-                if (!(enemy->flags & ENEMY_FLAGS_20)) {
+                if (!(enemy->flags & ENEMY_FLAG_20)) {
                     if (does_script_exist(enemy->defeatScriptID)) {
                         cond = TRUE;
                     } else {
@@ -1983,7 +1983,7 @@ void update_encounters_post_battle(void) {
                     }
                     for (j = 0; j < encounter->count; j++) {
                         enemy = encounter->enemy[j];
-                        if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+                        if (enemy == NULL || (enemy->flags & ENEMY_FLAG_20)) {
                             continue;
                         }
                         if (enemy->aiScript != NULL) {
@@ -2021,7 +2021,7 @@ void update_encounters_post_battle(void) {
                 }
                 for (j = 0; j < encounter->count; j++) {
                     enemy = encounter->enemy[j];
-                    if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+                    if (enemy == NULL || (enemy->flags & ENEMY_FLAG_20)) {
                         continue;
                     }
                     if (enemy->aiScript != NULL) {
@@ -2047,11 +2047,11 @@ void update_encounters_post_battle(void) {
                 if (enemy == NULL) {
                     continue;
                 }
-                if ((enemy->flags & ENEMY_FLAGS_8) && enemy != currentEncounter->currentEnemy) {
+                if ((enemy->flags & ENEMY_FLAG_8) && enemy != currentEncounter->currentEnemy) {
                     continue;
                 }
 
-                if (enemy->flags & ENEMY_FLAGS_20) {
+                if (enemy->flags & ENEMY_FLAG_20) {
                     continue;
                 }
 
@@ -2085,7 +2085,7 @@ void update_encounters_post_battle(void) {
                 if (enemy == NULL) {
                     continue;
                 }
-                if (!(enemy->flags & ENEMY_FLAGS_20)) {
+                if (!(enemy->flags & ENEMY_FLAG_20)) {
                     if (does_script_exist(enemy->defeatScriptID)) {
                         cond = TRUE;
                     } else {
@@ -2101,7 +2101,7 @@ void update_encounters_post_battle(void) {
                     }
                     for (j = 0; j < encounter->count; j++) {
                         enemy = encounter->enemy[j];
-                        if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+                        if (enemy == NULL || (enemy->flags & ENEMY_FLAG_20)) {
                             continue;
                         }
                         if (enemy->aiScript != NULL) {
@@ -2114,7 +2114,7 @@ void update_encounters_post_battle(void) {
                 }
 
                 enemy = currentEncounter->currentEnemy;
-                if (!(enemy->flags & ENEMY_FLAGS_4)) {
+                if (!(enemy->flags & ENEMY_FLAG_4)) {
                     encounter = currentEncounter->currentEncounter;
                     enemy->aiPaused = 45;
                     playerStatus->blinkTimer = 45;
@@ -2123,10 +2123,10 @@ void update_encounters_post_battle(void) {
                         if (enemy == NULL) {
                             continue;
                         }
-                        if (enemy->flags & ENEMY_FLAGS_20) {
+                        if (enemy->flags & ENEMY_FLAG_20) {
                             continue;
                         }
-                        if (enemy->flags & ENEMY_FLAGS_8) {
+                        if (enemy->flags & ENEMY_FLAG_8) {
                             continue;
                         }
                         enemy->aiPaused = 45;
@@ -2153,7 +2153,7 @@ void update_encounters_post_battle(void) {
         }
         for (j = 0; j < encounter->count; j++) {
             enemy = encounter->enemy[j];
-            if (enemy == NULL || (enemy->flags & ENEMY_FLAGS_20)) {
+            if (enemy == NULL || (enemy->flags & ENEMY_FLAG_20)) {
                 continue;
             }
 
@@ -2161,10 +2161,10 @@ void update_encounters_post_battle(void) {
             if (enemy->aiPaused != 0) {
                 if (enemy->aiPaused & 1) {
                     npc->flags |= NPC_FLAG_80000000;
-                    enemy->flags |= ENEMY_FLAGS_80000000;
+                    enemy->flags |= ENEMY_FLAG_80000000;
                 } else {
                     npc->flags &= ~NPC_FLAG_80000000;
-                    enemy->flags &= ~ENEMY_FLAGS_80000000;
+                    enemy->flags &= ~ENEMY_FLAG_80000000;
                 }
             }
         }
@@ -2264,7 +2264,7 @@ s32 check_conversation_trigger(void) {
     s32 i, j;
 
     playerStatus->encounteredNPC = NULL;
-    playerStatus->flags &= ~PS_FLAGS_HAS_CONVERSATION_NPC;
+    playerStatus->flags &= ~PS_FLAG_HAS_CONVERSATION_NPC;
     playerColliderHeight = playerStatus->colliderHeight;
     playerColliderRadius = playerStatus->colliderDiameter / 2;
     playerX = playerStatus->position.x;
@@ -2294,15 +2294,15 @@ s32 check_conversation_trigger(void) {
                 continue;
             }
 
-            if (encounterEnemy->flags & (ENEMY_FLAGS_80000000 | ENEMY_FLAGS_20)) {
+            if (encounterEnemy->flags & (ENEMY_FLAG_80000000 | ENEMY_FLAG_20)) {
                 continue;
             }
 
-            if (!(encounterEnemy->flags & ENEMY_FLAGS_1)) {
+            if (!(encounterEnemy->flags & ENEMY_FLAG_1)) {
                 continue;
             }
 
-            if ((encounterEnemy->flags & ENEMY_FLAGS_8000000) || encounterEnemy->interactBytecode == NULL) {
+            if ((encounterEnemy->flags & ENEMY_FLAG_8000000) || encounterEnemy->interactBytecode == NULL) {
                 continue;
             }
 
@@ -2339,7 +2339,7 @@ s32 check_conversation_trigger(void) {
                 continue;
             }
 
-            if (!(encounterEnemy->flags & ENEMY_FLAGS_10000) && encounterNpc->flags & NPC_FLAG_20000000) {
+            if (!(encounterEnemy->flags & ENEMY_FLAG_10000) && encounterNpc->flags & NPC_FLAG_20000000) {
                 xTemp = npcX;
                 yTemp = npcY;
                 zTemp = npcZ;
@@ -2361,9 +2361,9 @@ s32 check_conversation_trigger(void) {
         }
     }
 
-    if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO) && npc != NULL && !is_picking_up_item()) {
+    if (!(playerStatus->animFlags & PA_FLAG_8BIT_MARIO) && npc != NULL && !is_picking_up_item()) {
         playerStatus->encounteredNPC = npc;
-        playerStatus->flags |= PS_FLAGS_HAS_CONVERSATION_NPC;
+        playerStatus->flags |= PS_FLAG_HAS_CONVERSATION_NPC;
         if (playerStatus->pressedButtons & BUTTON_A) {
             close_status_menu();
             gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_CONVERSATION;
@@ -2525,7 +2525,7 @@ void create_encounters(void) {
                     }
                     bp->onUpdate = NULL;
                     bp->onRender = NULL;
-                    if (!(enemy->flags & ENEMY_FLAGS_20000)) {
+                    if (!(enemy->flags & ENEMY_FLAG_20000)) {
                         newNpcIndex = _create_npc_standard(bp, (AnimID*) npcData->extraAnimations);
                     } else {
                         newNpcIndex = _create_npc_partner(bp);
@@ -2550,41 +2550,41 @@ void create_encounters(void) {
                     } else {
                         newNpc->shadowScale = 1.0f;
                     }
-                    if (enemy->flags & ENEMY_FLAGS_100) {
+                    if (enemy->flags & ENEMY_FLAG_100) {
                         newNpc->flags |= NPC_FLAG_40;
                     }
-                    if (enemy->flags & ENEMY_FLAGS_200) {
+                    if (enemy->flags & ENEMY_FLAG_200) {
                         newNpc->flags |= NPC_FLAG_100;
                     }
-                    if (enemy->flags & ENEMY_FLAGS_400) {
+                    if (enemy->flags & ENEMY_FLAG_400) {
                         newNpc->flags |= NPC_FLAG_8000;
                     }
-                    if (enemy->flags & ENEMY_FLAGS_800) {
+                    if (enemy->flags & ENEMY_FLAG_800) {
                         newNpc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
                     }
-                    if (enemy->flags & ENEMY_FLAGS_GRAVITY) {
+                    if (enemy->flags & ENEMY_FLAG_GRAVITY) {
                         newNpc->flags |= NPC_FLAG_GRAVITY;
                     }
-                    if (!(enemy->flags & ENEMY_FLAGS_1)) {
+                    if (!(enemy->flags & ENEMY_FLAG_1)) {
                         newNpc->flags |= NPC_FLAG_100;
                     }
-                    if (enemy->flags & ENEMY_FLAGS_4000) {
+                    if (enemy->flags & ENEMY_FLAG_4000) {
                         newNpc->flags |= NPC_FLAG_1000000;
                     }
-                    if (enemy->flags & ENEMY_FLAGS_2000) {
+                    if (enemy->flags & ENEMY_FLAG_2000) {
                         newNpc->flags |= NPC_FLAG_NO_AI;
                     }
-                    if (enemy->flags & ENEMY_FLAGS_8000) {
+                    if (enemy->flags & ENEMY_FLAG_8000) {
                         newNpc->flags |= NPC_FLAG_10000000;
                     }
-                    if (enemy->flags & ENEMY_FLAGS_10000) {
+                    if (enemy->flags & ENEMY_FLAG_10000) {
                         newNpc->flags |= NPC_FLAG_20000000;
                     }
-                    if (enemy->flags & ENEMY_FLAGS_80) {
+                    if (enemy->flags & ENEMY_FLAG_80) {
                         newNpc->flags |= NPC_FLAG_LOCK_ANIMS;
                     }
                     enemy->scriptGroup = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
-                    if (enemy->flags & ENEMY_FLAGS_1) {
+                    if (enemy->flags & ENEMY_FLAG_1) {
                         enemy->scriptGroup = EVT_GROUP_08 | EVT_GROUP_02;
                     }
                     if (npcSettings->otherAI != NULL) {
@@ -2687,7 +2687,7 @@ void create_encounters(void) {
                     if (enemy == NULL) {
                         continue;
                     }
-                    if (!(enemy->flags & ENEMY_FLAGS_20)) {
+                    if (!(enemy->flags & ENEMY_FLAG_20)) {
                         if (enemy->aiBytecode != NULL) {
                             script = start_script(enemy->aiBytecode, EVT_PRIORITY_A, 0);
                             enemy->aiScript = script;
@@ -2711,7 +2711,7 @@ void create_encounters(void) {
                     if (enemy == NULL) {
                         continue;
                     }
-                    if (!(enemy->flags & ENEMY_FLAGS_20)) {
+                    if (!(enemy->flags & ENEMY_FLAG_20)) {
                         if (enemy->auxBytecode != NULL) {
                             script = start_script(enemy->auxBytecode, EVT_PRIORITY_A, 0);
                             enemy->auxScript = script;

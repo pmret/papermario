@@ -21,9 +21,9 @@ void N(test_reflection_worker_render_wall)(void) {
     RenderTask* renderTaskPtr = &renderTask;
     s32 screenX, screenY, screenZ;
 
-    if (playerStatus->flags & PS_FLAGS_HAS_REFLECTION) {
+    if (playerStatus->flags & PS_FLAG_HAS_REFLECTION) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
-        entityModel->flags |= ENTITY_MODEL_FLAGS_REFLECT;
+        entityModel->flags |= ENTITY_MODEL_FLAG_REFLECT;
 
         get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
                           &screenX, &screenY, &screenZ);
@@ -72,9 +72,9 @@ void N(test_reflection_worker_render_floor)(void) {
     RenderTask* renderTaskPtr = &renderTask;
     s32 screenX, screenY, screenZ;
 
-    if (playerStatus->flags & PS_FLAGS_HAS_REFLECTION) {
+    if (playerStatus->flags & PS_FLAG_HAS_REFLECTION) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
-        entityModel->flags |= ENTITY_MODEL_FLAGS_REFLECT;
+        entityModel->flags |= ENTITY_MODEL_FLAG_REFLECT;
 
         get_screen_coords(gCurrentCamID, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z,
                           &screenX, &screenY, &screenZ);

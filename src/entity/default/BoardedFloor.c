@@ -230,14 +230,14 @@ void Entity_BoardedFloor_shatter(Entity* entity) {
 }
 
 EntityScript Entity_BoardedFloor_Script = {
-    es_ClearFlags(ENTITY_FLAGS_DISABLE_COLLISION)
+    es_ClearFlags(ENTITY_FLAG_DISABLE_COLLISION)
     es_SetCallback(Entity_BoardedFloor_idle, 0)
     es_PlaySound(SOUND_2092)
-    es_SetFlags(ENTITY_FLAGS_DISABLE_COLLISION)
+    es_SetFlags(ENTITY_FLAG_DISABLE_COLLISION)
     es_Call(Entity_BoardedFloor_shatter)
     es_SetCallback(Entity_BoardedFloor_update_fragments, 0)
-    es_SetFlags(ENTITY_FLAGS_HIDDEN)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_HIDDEN)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 

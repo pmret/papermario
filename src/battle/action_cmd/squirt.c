@@ -33,7 +33,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
 
     id = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = id;
-    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
 
@@ -41,7 +41,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElements[1] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     return ApiStatus_DONE2;
 }
@@ -86,14 +86,14 @@ void N(update)(void) {
 
             id = actionCommandStatus->hudElements[0];
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(id, 255);
 
             id = actionCommandStatus->hudElements[1];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             actionCommandStatus->state = 1;

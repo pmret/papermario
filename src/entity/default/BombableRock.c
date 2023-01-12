@@ -240,10 +240,10 @@ EntityModelScript Entity_BombableRock_RenderScript = STANDARD_ENTITY_MODEL_SCRIP
 
 EntityScript Entity_BombableRock_Script = {
     es_SetCallback(entity_BombableRock_idle, 0)
-    es_SetFlags(ENTITY_FLAGS_DISABLE_COLLISION)
+    es_SetFlags(ENTITY_FLAG_DISABLE_COLLISION)
     es_SetCallback(entity_BombableRock_update_fragments, 0)
-    es_SetFlags(ENTITY_FLAGS_HIDDEN)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_HIDDEN)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 

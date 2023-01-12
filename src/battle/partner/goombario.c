@@ -347,7 +347,7 @@ ApiStatus N(CloseTattleWindow)(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = N(tattleEffect);
 
     effect->data.tattleWindow->pos.y = 144.0f;
-    effect->flags |= EFFECT_INSTANCE_FLAGS_10;
+    effect->flags |= EFFECT_INSTANCE_FLAG_10;
 
     return ApiStatus_DONE2;
 }

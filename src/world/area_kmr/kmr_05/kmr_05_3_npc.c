@@ -59,7 +59,7 @@ EvtScript N(EVS_NpcIdle_SpikedGoomba) = {
             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
             EVT_CALL(NpcJump0, NPC_SELF, 685, 100, -35, 0)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_40000000, 1)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_40000000, 1)
             EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_SpikedGoomba_Wander)))
         EVT_CASE_OR_EQ(102)
         EVT_CASE_OR_EQ(3)
@@ -76,7 +76,7 @@ StaticNpc N(NpcData_Goomba_01) = {
     .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 305.0f, 50.0f, -13.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAGS_400,
+    .flags = ENEMY_FLAG_400,
     .drops = GOOMBA_DROPS,
     .territory = {
         .wander = {
@@ -99,7 +99,7 @@ StaticNpc N(NpcData_Goomba_02) = {
     .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 700.0f, 210.0f, -165.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAGS_400,
+    .flags = ENEMY_FLAG_400,
     .drops = GOOMBA_DROPS,
     .territory = {
         .wander = {
@@ -129,7 +129,7 @@ StaticNpc N(NpcData_SpikedGoomba) = {
     .settings = &N(NpcSettings_SpikedGoomba_Wander),
     .pos = { 712.0f, 100.0f, -95.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_400,
+    .flags = ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_SpikedGoomba),
     .drops = SPIKED_GOOMBA_DROPS,
     .territory = {
@@ -153,7 +153,7 @@ StaticNpc N(NpcData_Paragoomba) = {
     .settings = &N(NpcSettings_Paragoomba_Wander),
     .pos = { 960.0f, 210.0f, -20.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_400,
+    .flags = ENEMY_FLAG_400,
     .drops = PARAGOOMBA_DROPS,
     .territory = {
         .wander = {

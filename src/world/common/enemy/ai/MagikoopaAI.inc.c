@@ -8,8 +8,8 @@ typedef struct MagikoopaTeleportAnim {
     u8 alpha;
 } MagikoopaTeleportAnim;
 
-#define ENEMY_FLAG_COMBINATION (ENEMY_FLAGS_10000000 | ENEMY_FLAGS_8000000 | \
-    ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_100000)
+#define ENEMY_FLAG_COMBINATION (ENEMY_FLAG_10000000 | ENEMY_FLAG_8000000 | \
+    ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_100000)
 
 extern MagikoopaTeleportAnim N(MagikoopaAI_TeleportAnim)[];
 
@@ -248,14 +248,14 @@ ApiStatus N(MagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     territory.halfHeight = 100.0f;
     territory.detectFlags = 0;
     
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_4)) {
         npc->currentAnim = enemy->animList[0];
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->flags |= NPC_FLAG_200000;
-        enemy->flags |= ENEMY_FLAGS_200000;
+        enemy->flags |= ENEMY_FLAG_200000;
         npc->duration = 0;
-        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
             npc->alpha = 0xFF;
             npc->duration = 20;
             npc->scale.x = 1.0f;

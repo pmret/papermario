@@ -3,7 +3,7 @@
 API_CALLABLE(N(HideRowfBadge)) {
     s32 itemIndex = evt_get_variable(script, *script->ptrReadPos);
 
-    set_item_entity_flags(gGameStatusPtr->shopItemEntities[itemIndex].index, ITEM_ENTITY_FLAGS_HIDDEN);
+    set_item_entity_flags(gGameStatusPtr->shopItemEntities[itemIndex].index, ITEM_ENTITY_FLAG_HIDDEN);
     return ApiStatus_DONE2;
 }
 
@@ -11,7 +11,7 @@ API_CALLABLE(N(SetRowfBadgeBought)) {
     s32 itemIndex = evt_get_variable(script, *script->ptrReadPos);
     s32* buyFlags = (s32*) evt_get_variable(NULL, MV_RowfShopBuyFlags);
 
-    set_item_entity_flags(gGameStatusPtr->shopItemEntities[itemIndex].index, ITEM_ENTITY_FLAGS_HIDDEN);
+    set_item_entity_flags(gGameStatusPtr->shopItemEntities[itemIndex].index, ITEM_ENTITY_FLAG_HIDDEN);
     evt_set_variable(NULL, buyFlags[itemIndex], TRUE);
     return ApiStatus_DONE2;
 }

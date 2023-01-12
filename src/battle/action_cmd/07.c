@@ -31,7 +31,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
 
     hudElement = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX,
         actionCommandStatus->hudPosY);
     hud_element_set_render_depth(hudElement, 0);
@@ -43,14 +43,14 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX,
         actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     hudElement = hud_element_create(&HES_RunAwayOK);
     actionCommandStatus->hudElements[2] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX,
         actionCommandStatus->hudPosY + 28);
     hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     battleStatus->flags1 &= ~BS_FLAGS1_8000;
 

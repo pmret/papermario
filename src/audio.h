@@ -69,17 +69,17 @@ typedef enum AuPriority {
 } AuPriority;
 
 enum AuVoiceFlags3D {
-    AU_VOICE_3D_FLAGS_1                     = 0x01,
-    AU_VOICE_3D_FLAGS_HANDLED_VOL_CHANGE    = 0x02,
-    AU_VOICE_3D_FLAGS_10                    = 0x10,
-    AU_VOICE_3D_FLAGS_VOL_CHANGED           = 0x20,
+    AU_VOICE_3D_FLAG_1                     = 0x01,
+    AU_VOICE_3D_FLAG_HANDLED_VOL_CHANGE    = 0x02,
+    AU_VOICE_3D_FLAG_10                    = 0x10,
+    AU_VOICE_3D_FLAG_VOL_CHANGED           = 0x20,
 };
 
 enum AuVoiceFlags43 {
-    AU_VOICE_SYNC_FLAGS_ALL     = 0x02,
-    AU_VOICE_SYNC_FLAGS_4       = 0x04,
-    AU_VOICE_SYNC_FLAGS_PITCH   = 0x08,
-    AU_VOICE_SYNC_FLAGS_10      = 0x10,
+    AU_VOICE_SYNC_FLAG_ALL     = 0x02,
+    AU_VOICE_SYNC_FLAG_4       = 0x04,
+    AU_VOICE_SYNC_FLAG_PITCH   = 0x08,
+    AU_VOICE_SYNC_FLAG_10      = 0x10,
 };
 
 typedef enum AuEffectType {
