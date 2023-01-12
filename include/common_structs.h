@@ -1889,7 +1889,7 @@ typedef struct Actor {
     /* 0x205 */ s8 unk_205;
     /* 0x206 */ s8 unk_206;
     /* 0x207 */ s8 extraCoinBonus;
-    /* 0x208 */ s8 unk_208;
+    /* 0x208 */ s8 instigatorValue; // from the enemy which initiated the encounter if this actor is first in the formation. allows that enemy to pass information to its actor.
     /* 0x209 */ char unk_209[3];
     /* 0x20C */ s32* statusTable;
     /* 0x210 */ s8 debuff;

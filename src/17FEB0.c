@@ -83,7 +83,7 @@ s32 calc_item_damage_enemy(void) {
 
     target->lastDamageTaken = 0;
     actorClass = currentTargetID & ACTOR_CLASS_MASK;
-    if (!(gBattleStatus.flags1 & BS_FLAGS1_80000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_PARTNER_ACTING)) {
         state = &player->state;
     } else {
         state = &partner->state;

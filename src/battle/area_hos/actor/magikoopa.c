@@ -219,17 +219,17 @@ EvtScript N(idle_8021D774) = {
 
 EvtScript N(8021D784) = {
     EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_80000)
+    EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
         EVT_IF_FLAG(LVar0, BS_FLAGS1_200 | BS_FLAGS1_40)
             EVT_CALL(SetActorVar, -127, 2, 1)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(N(GetSelectedMoveID), LVar0)
         EVT_SWITCH(LVar0)
-            EVT_CASE_OR_EQ(131)
-            EVT_CASE_OR_EQ(132)
-            EVT_CASE_OR_EQ(133)
-            EVT_CASE_OR_EQ(136)
+            EVT_CASE_OR_EQ(MOVE_HEADBONK1)
+            EVT_CASE_OR_EQ(MOVE_HEADBONK2)
+            EVT_CASE_OR_EQ(MOVE_HEADBONK3)
+            EVT_CASE_OR_EQ(MOVE_MULTIBONK)
                 EVT_CALL(GetBattleFlags, LVar0)
                 EVT_IF_FLAG(LVar0, BS_FLAGS1_200 | BS_FLAGS1_40)
                     EVT_CALL(SetActorVar, -127, 2, 1)

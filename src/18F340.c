@@ -646,12 +646,12 @@ ApiStatus func_802620F8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtScript D_80284A20 = {
+EvtScript EVS_Mario_OnActorCreate = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript D_80284A30 = {
+EvtScript EVS_Peach_OnActorCreate = {
     EVT_RETURN
     EVT_END
 };

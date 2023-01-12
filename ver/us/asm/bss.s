@@ -1045,7 +1045,7 @@ dlabel nuContDataMutexQ
 dlabel D_800DC060
 .space 4
 
-dlabel D_800DC064
+dlabel gCurrentStagePtr
 .space 4
 
 dlabel gBattleState
@@ -1057,7 +1057,7 @@ dlabel D_800DC06C
 dlabel gBattleStatus
 .space 0x00000460
 
-dlabel D_800DC4D0
+dlabel gLastDrawBattleState
 .space 4
 
 dlabel D_800DC4D4
@@ -1078,17 +1078,17 @@ dlabel gDefeatedBattleState
 dlabel gCurrentBattleID
 .space 4
 
-dlabel D_800DC4EC
+dlabel gCurrentStageID
 .space 4
 
 dlabel D_800DC4F0
 .space 4
 
-dlabel D_800DC4F4
+dlabel gOverrideBattlePtr
 .space 4
 
 dlabel D_800DC4F8
 .space 4
 
-dlabel D_800DC4FC
+dlabel gCurrentBattlePtr
 .space 4

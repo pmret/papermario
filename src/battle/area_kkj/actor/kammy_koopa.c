@@ -526,7 +526,7 @@ EvtScript N(onDeath) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 60)
     EVT_WAIT(40)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100000, 0)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_PLAYER_IN_BACK, 0)
     EVT_RETURN
     EVT_END
 };

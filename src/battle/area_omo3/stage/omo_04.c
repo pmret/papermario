@@ -42,8 +42,8 @@ Stage NAMESPACE = {
     .preBattle = &N(beforeBattle),
     .postBattle = &N(afterBattle),
     .foregroundModelList = N(foregroundModelList),
-    .specialFormationSize = 4,
-    .specialFormation = &N(fromation_slot_machine),
+    .stageEnemyCount = 4,
+    .stageFormation = &N(fromation_slot_machine),
 };
 
 Vec3i N(slot_machine_pos1) = { -49, 56, -68 };

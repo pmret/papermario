@@ -23,14 +23,22 @@ GameStatus* gGameStatusPtr = &gGameStatus;
 s16 D_800741A0 = 0;
 s16 D_800741A2 = 0;
 s32 D_800741A4 = 0;
-Mtx D_800741A8 = {
-    .m = {
-        { 0x00010000, 0x00000000, 0x00000001, 0x00000000 },
-        { 0x00000000, 0x00010000, 0x00000000, 0x00000001 },
-        { 0x00000000, 0x00000000, 0x00000000, 0x00000000 },
-        { 0x00000000, 0x00000000, 0x00000000, 0x00000000 },
+
+Matrix4s MasterIdentityMtx = {
+    .whole = {
+        {1, 0, 0, 0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1}
+    },
+    .frac = {
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0}
     }
 };
+
 s32 D_800741E8[2] = {0, 0}; // padding?
 u16 gMatrixListPos = 0;
 u16 D_800741F2 = 0;
@@ -192,7 +200,7 @@ void gfx_draw_frame(void) {
         return;
     }
 
-    gSPMatrix(gMasterGfxPos++, &D_800741A8, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, &MasterIdentityMtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     spr_render_init();
 
@@ -334,30 +342,30 @@ void load_engine_data(void) {
 ///  4: NPCs can move, animations don't update, can use exits
 void set_time_freeze_mode(s32 mode) {
     switch (mode) {
-        case 0:
+        case TIME_FREEZE_NORMAL:
             timeFreezeMode = mode;
             gOverrideFlags &= ~(GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES);
             resume_all_group(EVT_GROUP_01 | EVT_GROUP_02);
             break;
-        case 1:
+        case TIME_FREEZE_PARTIAL:
             timeFreezeMode = mode;
             gOverrideFlags &= ~(GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200);
             gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_BATTLES;
             suspend_all_group(EVT_GROUP_01);
             break;
-        case 2:
+        case TIME_FREEZE_FULL:
             timeFreezeMode = mode;
             gOverrideFlags &= ~(GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800);
             gOverrideFlags |= GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES;
             suspend_all_group(EVT_GROUP_02);
             break;
-        case 3:
+        case TIME_FREEZE_PARTNER_MENU:
             timeFreezeMode = mode;
             gOverrideFlags &= ~GLOBAL_OVERRIDES_800;
             gOverrideFlags |= GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES;
             suspend_all_group(EVT_GROUP_02);
             break;
-        case 4:
+        case TIME_FREEZE_EXIT:
             timeFreezeMode = mode;
             gOverrideFlags |= GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES;
             break;

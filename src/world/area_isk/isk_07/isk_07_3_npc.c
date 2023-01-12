@@ -145,7 +145,7 @@ EvtScript N(EVS_NpcInit_Pokey_01) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey_01)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey_01)))
     EVT_CALL(InterpNpcYaw, NPC_SELF, 100, 0)
-    EVT_CALL(func_800457C4, 3)
+    EVT_CALL(SetOwnerInstigatorValue, 3)
     EVT_RETURN
     EVT_END
 };
@@ -156,7 +156,7 @@ EvtScript N(EVS_NpcInit_Pokey_02) = {
     EVT_END_IF
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey_02)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey_01)))
-    EVT_CALL(func_800457C4, 3)
+    EVT_CALL(SetOwnerInstigatorValue, 3)
     EVT_RETURN
     EVT_END
 };
@@ -167,7 +167,7 @@ EvtScript N(EVS_NpcInit_Pokey_03) = {
     EVT_END_IF
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey_03)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey_01)))
-    EVT_CALL(func_800457C4, 3)
+    EVT_CALL(SetOwnerInstigatorValue, 3)
     EVT_RETURN
     EVT_END
 };

@@ -100,7 +100,7 @@ EvtScript N(EVS_NpcHit_HammerBros_Hammer) = {
             EVT_CALL(SetSelfVar, 0, 0)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
-            EVT_CALL(func_800457F8)
+            EVT_CALL(SetBattleAsScripted)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_HammerBros_Hammer)))

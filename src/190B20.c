@@ -200,7 +200,7 @@ void func_80263300(void) {
             ItemData* itemData = &gItemTable[itemID];
 
             if (itemData->typeFlags & ITEM_TYPE_FLAG_BATTLE_USABLE) {
-                battleStatus->moveCategory = BTL_MENU_TYPE_ITEM;
+                battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
                 battleStatus->selectedItemID = playerData->invItems[i];
                 battleStatus->currentTargetListFlags = itemData->targetFlags;
                 player_create_target_list(player);
@@ -1042,7 +1042,7 @@ void load_partner_actor(void) {
             x = -95.0f;
             y = partnerData->y;
             z = 0.0f;
-            gBattleStatus.flags1 |= BS_FLAGS1_100000;
+            gBattleStatus.flags1 |= BS_FLAGS1_PLAYER_IN_BACK;
         } else {
             x = -130.0f;
             y = partnerData->y;
@@ -1396,7 +1396,7 @@ Actor* create_actor(Formation formation) {
     actor->state.varTable[2] = formation->var2;
     actor->state.varTable[3] = formation->var3;
     actor->renderMode = RENDER_MODE_ALPHATEST;
-    actor->unk_208 = 0;
+    actor->instigatorValue = 0;
     part = heap_malloc(sizeof(*part));
     actor->partsTable = part;
     ASSERT(part != NULL);

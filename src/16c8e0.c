@@ -48,7 +48,7 @@ HudScript* bHPDigitHudScripts[] = {
     NULL, NULL, NULL,
 };
 
-s32 D_80280A30 = 0xFF;
+s32 BattleScreenFadeAmt = 0xFF;
 
 EvtScript BtlPutPartnerAway = {
     EVT_CALL(DispatchEvent, 256, 62)
@@ -254,7 +254,7 @@ void btl_update(void) {
     s32 cond;
 
     if (battleStatus->inputBitmask != -1) {
-        if ((battleStatus->flags1 & BS_FLAGS1_80000) && gGameStatusPtr->multiplayerEnabled != 0) {
+        if ((battleStatus->flags1 & BS_FLAGS1_PARTNER_ACTING) && gGameStatusPtr->multiplayerEnabled != 0) {
             s32 inputBitmask = battleStatus->inputBitmask;
 
             battleStatus->currentButtonsDown = gGameStatusPtr->currentButtons[1] & inputBitmask;
@@ -478,31 +478,33 @@ void btl_update(void) {
 }
 
 void btl_draw_ui(void) {
-    s32 cond = FALSE;
+    s32 changed = FALSE;
     s32 state;
 
     do { } while (0); // TODO required to match (probably can be removed with some sort of control flow inversion)
 
+    // do not draw UI during the frame of a state change
     state = gBattleState;
-    if (gBattleState != D_800DC4D0) {
-        state = D_800DC4D0;
-        D_800DC4D0 = gBattleState;
-        cond = TRUE;
+    if (gBattleState != gLastDrawBattleState) {
+        state = gLastDrawBattleState;
+        gLastDrawBattleState = gBattleState;
+        changed = TRUE;
     } else {
-        if (gBattleState == BATTLE_STATE_NEGATIVE_1) {
-            btl_update_starpoints_display();
-            btl_draw_enemy_health_bars();
-            draw_status_ui();
-            return;
-        } else if (gBattleState == BATTLE_STATE_0) {
-            return;
+        switch (state) {
+            case BATTLE_STATE_NEGATIVE_1:
+                btl_update_starpoints_display();
+                btl_draw_enemy_health_bars();
+                draw_status_ui();
+                return;
+            case BATTLE_STATE_0:
+                return;
         }
     }
 
     btl_update_starpoints_display();
     btl_draw_enemy_health_bars();
 
-    if (!cond) {
+    if (!changed) {
         switch (state) {
             case BATTLE_STATE_NORMAL_START:
                 btl_state_draw_normal_start();

@@ -246,7 +246,7 @@ ApiStatus SetTargetOffset(Evt* script, s32 isInitialCall);
 ApiStatus func_8027D4C8(Evt* script, s32 isInitialCall);
 ApiStatus EnableActorBlur(Evt* script, s32 isInitialCall);
 ApiStatus AfflictActor(Evt* script, s32 isInitialCall);
-ApiStatus func_8027D75C(Evt* script, s32 isInitialCall);
+ApiStatus GetInstigatorValue(Evt* script, s32 isInitialCall);
 ApiStatus GetEncounterState(Evt* script, s32 isInitialCall);
 ApiStatus YieldTurn(Evt* script, s32 isInitialCall);
 ApiStatus SetActorSize(Evt* script, s32 isInitialCall);

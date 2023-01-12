@@ -61,6 +61,6 @@ INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_8024043C_D9D90C);
 
 #include "world/common/enemy/ai/RangedAttackAI.inc.c"
 
-#include "world/common/todo/SetNpcB5_3.inc.c"
+#include "world/common/todo/SetInstigatorValue_3.inc.c"
 
 #include "world/common/todo/GetEncounterEnemyIsOwner.inc.c"

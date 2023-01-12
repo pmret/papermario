@@ -1,6 +1,6 @@
 #include "Pokey.h"
 
-#include "world/common/todo/SetNpcB5_3.inc.c"
+#include "world/common/todo/SetInstigatorValue_3.inc.c"
 
 MobileAISettings N(AISettings_Pokey) = {
     .moveSpeed = 1.8f,
@@ -16,7 +16,7 @@ MobileAISettings N(AISettings_Pokey) = {
 };
 
 EvtScript N(EVS_NpcAI_Pokey) = {
-    EVT_CALL(N(SetNpcB5_3))
+    EVT_CALL(N(SetInstigatorValue_3))
     EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_Pokey)))
     EVT_RETURN
     EVT_END

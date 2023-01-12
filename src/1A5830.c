@@ -3117,7 +3117,7 @@ ApiStatus AfflictActor(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8027D75C(Evt* script, s32 isInitialCall) {
+ApiStatus GetInstigatorValue(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 outVar = *args++;
@@ -3126,7 +3126,7 @@ ApiStatus func_8027D75C(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    evt_set_variable(script, outVar, get_actor(actorID)->unk_208);
+    evt_set_variable(script, outVar, get_actor(actorID)->instigatorValue);
     return ApiStatus_DONE2;
 }
 

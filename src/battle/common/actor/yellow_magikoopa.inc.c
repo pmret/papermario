@@ -314,7 +314,7 @@ EvtScript N(handleEvent) = {
 
 EvtScript N(canBeKnockedOff) = {
     EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_80000)
+    EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
         EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
         EVT_END_IF

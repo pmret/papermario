@@ -4050,15 +4050,15 @@ enum BattleStatusFlags1 {
     BS_FLAGS1_10000                 = 0x00010000,
     BS_FLAGS1_DISABLE_CELEBRATION   = 0x00020000,
     BS_FLAGS1_ENEMY_FLED            = 0x00040000,
-    BS_FLAGS1_80000                 = 0x00080000, // partner will act (partner turn?)
-    BS_FLAGS1_100000                = 0x00100000, // player in back (after pressing z)
+    BS_FLAGS1_PARTNER_ACTING        = 0x00080000,
+    BS_FLAGS1_PLAYER_IN_BACK        = 0x00100000,
     BS_FLAGS1_200000                = 0x00200000, // enemy turn pending
     BS_FLAGS1_PLAYER_DEFENDING      = 0x00400000, // player is defending
     BS_FLAGS1_NO_GAME_OVER          = 0x00800000, // don’t game over on loss
     BS_FLAGS1_STAR_POINTS_DROPPED   = 0x01000000,
     BS_FLAGS1_2000000               = 0x02000000,
     BS_FLAGS1_HUSTLED               = 0x04000000,
-    BS_FLAGS1_8000000               = 0x08000000,
+    BS_FLAGS1_SORT_ENEMIES_BY_POSX  = 0x08000000, // enemy turn order ignores priority; sorts bases on x position instead
     BS_FLAGS1_HAMMER_CHARGED        = 0x10000000,
     BS_FLAGS1_JUMP_CHARGED          = 0x20000000,
     BS_FLAGS1_40000000              = 0x40000000,
@@ -4134,11 +4134,11 @@ enum BattleSubStates {
     BTL_SUBSTATE_INIT                                       = 0,
 
     // BATTLE_STATE_NORMAL_START
-    BTL_SUBSTATE_NORMAL_START_UNK_0                         = 0,
-    BTL_SUBSTATE_NORMAL_START_UNK_1                         = 1,
-    BTL_SUBSTATE_NORMAL_START_UNK_4                         = 4,
-    BTL_SUBSTATE_NORMAL_START_UNK_7                         = 7,
-    BTL_SUBSTATE_NORMAL_START_UNK_8                         = 8,
+    BTL_SUBSTATE_NORMAL_START_INIT                          = 0, // loads assets, initializes state, and runs OnBattleInit script
+    BTL_SUBSTATE_NORMAL_START_CREATE_ENEMIES                = 1,
+    BTL_SUBSTATE_NORMAL_START_CHECK_FIRST_STRIKE            = 4, // wait for actor scripts to finish
+    BTL_SUBSTATE_NORMAL_START_FADE_IN                       = 7,
+    BTL_SUBSTATE_NORMAL_START_DONE                          = 8,
 
     // BATTLE_STATE_FIRST_STRIKE
     BTL_SUBSTATE_FIRST_STRIKE_INIT                          = 0,
@@ -4203,7 +4203,6 @@ enum BattleSubStates {
     BTL_SUBSTATE_9_6                                        = 6,
     BTL_SUBSTATE_9_7                                        = 7,
 
-    // BATTLE_STATE_9
     // BATTLE_STATE_SWITCH_TO_PLAYER
     // BATTLE_STATE_SWITCH_TO_PARTNER
 
@@ -4214,7 +4213,7 @@ enum BattleSubStates {
     // BATTLE_STATE_PARTNER_MENU
 
     // BATTLE_STATE_PEACH_MENU
-    BTL_SUBSTATE_PEACH_MENU_UNK_0                       = 0,
+    BTL_SUBSTATE_PEACH_MENU_INIT                        = 0,
     BTL_SUBSTATE_PEACH_MENU_UNK_1                       = 1,
     BTL_SUBSTATE_PEACH_MENU_UNK_2                       = 2,
     BTL_SUBSTATE_PEACH_MENU_UNK_3                       = 3,
@@ -4222,10 +4221,10 @@ enum BattleSubStates {
     BTL_SUBSTATE_PEACH_MENU_UNK_5                       = 5,
     BTL_SUBSTATE_PEACH_MENU_UNK_6                       = 6,
     BTL_SUBSTATE_PEACH_MENU_UNK_7                       = 7,
-    BTL_SUBSTATE_PEACH_MENU_UNK_8                       = 8,
-    BTL_SUBSTATE_PEACH_MENU_UNK_9                       = 9,
-    BTL_SUBSTATE_PEACH_MENU_UNK_A                       = 10,
-    BTL_SUBSTATE_PEACH_MENU_UNK_B                       = 11,
+    BTL_SUBSTATE_PEACH_MENU_SHOW_CANT_SWITCH            = 8,
+    BTL_SUBSTATE_PEACH_MENU_AWAIT_CANT_SWITCH_POPUP     = 9,
+    BTL_SUBSTATE_PEACH_MENU_PERFORM_SWAP                = 10,
+    BTL_SUBSTATE_PEACH_CREATE_HUD                       = 11,
 
     // BATTLE_STATE_TWINK_MENU
     BTL_SUBSTATE_TWINK_MENU_INIT                        = 0,
@@ -4239,7 +4238,7 @@ enum BattleSubStates {
     BTL_SUBSTATE_TWINK_MENU_SHOW_CANT_SWITCH            = 8,
     BTL_SUBSTATE_TWINK_MENU_AWAIT_CANT_SWITCH_POPUP     = 9,
     BTL_SUBSTATE_TWINK_MENU_PERFORM_SWAP                = 10,
-    BTL_SUBSTATE_TWINK_MENU_UNK_B                       = 11,
+    BTL_SUBSTATE_TWINK_MENU_CREATE_HUD                       = 11,
 
     // BATTLE_STATE_SELECT_TARGET
     BTL_SUBSTATE_SELECT_TARGET_INIT                     = 0,
@@ -4319,10 +4318,10 @@ enum BattleSubStates {
     BTL_SUBSTATE_VICTORY_UNK_C                          = 12,
 
     // BATTLE_STATE_DEFEAT
-    BTL_SUBSTATE_DEFEAT_UNK_0                           = 0,
-    BTL_SUBSTATE_DEFEAT_UNK_1                           = 1,
-    BTL_SUBSTATE_DEFEAT_UNK_2                           = 2,
-    BTL_SUBSTATE_DEFEAT_UNK_A                           = 10,
+    BTL_SUBSTATE_DEFEAT_INIT                            = 0,
+    BTL_SUBSTATE_DEFEAT_CHECK_LIFE_SHROOM               = 1,
+    BTL_SUBSTATE_DEFEAT_AWAIT_LIFE_SHROOM               = 2,
+    BTL_SUBSTATE_DEFEAT_DONE                            = 10,
 
     // BATTLE_STATE_28
 
@@ -4345,10 +4344,10 @@ enum BattleSubStates {
 
     // BATTLE_STATE_31
 
-    // BATTLE_STATE_END_BATTLE (TODO)
-    BTL_SUBSTATE_END_BATTLE_UNK_0                       = 0,
-    BTL_SUBSTATE_END_BATTLE_UNK_1                       = 1,
-    BTL_SUBSTATE_END_BATTLE_UNK_2                       = 2,
+    // BATTLE_STATE_END_BATTLE
+    BTL_SUBSTATE_END_BATTLE_INIT                        = 0,
+    BTL_SUBSTATE_END_BATTLE_FADE_OUT                    = 1,
+    BTL_SUBSTATE_END_BATTLE_EXEC_STAGE_SCRIPT           = 2,
     BTL_SUBSTATE_END_BATTLE_AWAIT_STAGE_SCRIPT          = 3,
     BTL_SUBSTATE_END_BATTLE_CLEANUP                     = 4,
 
@@ -4374,11 +4373,11 @@ enum BattleSubStates {
     // BATTLE_STATE_34
 
     // BATTLE_STATE_END_DEMO_BATTLE
-    BTL_SUBSTATE_END_DEMO_BATTLE_UNK_0                 = 0,
-    BTL_SUBSTATE_END_DEMO_BATTLE_UNK_1                 = 1,
-    BTL_SUBSTATE_END_DEMO_BATTLE_UNK_2                 = 2,
-    BTL_SUBSTATE_END_DEMO_BATTLE_UNK_3                 = 3,
-    BTL_SUBSTATE_END_DEMO_BATTLE_UNK_4                 = 4,
+    BTL_SUBSTATE_END_DEMO_BATTLE_INIT                   = 0,
+    BTL_SUBSTATE_END_DEMO_BATTLE_FADE_OUT               = 1,
+    BTL_SUBSTATE_END_DEMO_BATTLE_EXEC_STAGE_SCRIPT      = 2,
+    BTL_SUBSTATE_END_DEMO_BATTLE_AWAIT_STAGE_SCRIPT     = 3,
+    BTL_SUBSTATE_END_DEMO_BATTLE_CLEANUP                = 4,
 };
 
 // used with BATTLE_STATE_PLAYER_MENU
@@ -4606,20 +4605,43 @@ enum BattleMessages {
     BTL_MSG_54      = 0x54,
 };
 
+// BtlMainMenuState
+enum BattleMenuStates {
+    BTL_MENU_STATE_NEGATIVE_1           = -1,
+    BTL_MENU_STATE_CREATE               = 0,
+    BTL_MENU_STATE_UNK_1                = 1,
+    BTL_MENU_STATE_UNK_2                = 2,
+    BTL_MENU_STATE_UNK_A                = 10,
+    BTL_MENU_STATE_UNK_B                = 11,
+    BTL_MENU_STATE_UNK_14               = 20,
+    BTL_MENU_STATE_UNK_1E               = 30,
+    BTL_MENU_STATE_SHOW_DISABLED_POPUP  = 100,
+    BTL_MENU_STATE_AWAIT_DISABLED_POPUP = 101,
+};
+
 enum BattleMenuTypes {
-    BTL_MENU_TYPE_INVALID   = -1,
-    BTL_MENU_TYPE_JUMP      = 0,
-    BTL_MENU_TYPE_SMASH     = 1,
-    BTL_MENU_TYPE_ITEM      = 2,
-    BTL_MENU_TYPE_3         = 3,
-    BTL_MENU_TYPE_4         = 4, // defend?
-    BTL_MENU_TYPE_5         = 5, // partner/ability?
-    BTL_MENU_TYPE_6         = 6,
-    BTL_MENU_TYPE_7         = 7, // strategies?
-    BTL_MENU_TYPE_8         = 8, // spirits?
-    BTL_MENU_TYPE_9         = 9, // do nothing?
-    BTL_MENU_TYPE_A         = 10, // switch to partner?
-    BTL_MENU_TYPE_B         = 11,
+    BTL_MENU_TYPE_INVALID           = -1,
+    BTL_MENU_TYPE_JUMP              = 0,
+    BTL_MENU_TYPE_SMASH             = 1,
+    BTL_MENU_TYPE_ITEMS             = 2,
+    BTL_MENU_TYPE_3                 = 3,
+    BTL_MENU_TYPE_4                 = 4, // defend?
+    BTL_MENU_TYPE_5                 = 5, // partner/ability?
+    BTL_MENU_TYPE_6                 = 6,
+    BTL_MENU_TYPE_STRATEGIES        = 7,
+    BTL_MENU_TYPE_STAR_POWERS       = 8,
+    BTL_MENU_TYPE_9                 = 9, // do nothing?
+    BTL_MENU_TYPE_A                 = 10, // switch to partner?
+    BTL_MENU_TYPE_PARTNER_FOCUS     = 11,
+};
+
+enum BattleMenuDisableFlags {
+    BTL_MENU_DISABLED_JUMP          = 1 << BTL_MENU_TYPE_JUMP,
+    BTL_MENU_DISABLED_SMASH         = 1 << BTL_MENU_TYPE_SMASH,
+    BTL_MENU_DISABLED_ITEMS         = 1 << BTL_MENU_TYPE_ITEMS,
+    BTL_MENU_DISABLED_STRATEGIES    = 1 << BTL_MENU_TYPE_STRATEGIES,
+    BTL_MENU_DISABLED_STAR_POWERS   = 1 << BTL_MENU_TYPE_STAR_POWERS,
+    BTL_MENU_DISABLED_PARTNER_FOCUS = 1 << BTL_MENU_TYPE_PARTNER_FOCUS,
 };
 
 enum DebugEnemyContactModes {
