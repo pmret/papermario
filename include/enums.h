@@ -6218,7 +6218,7 @@ enum BackgroundFlags {
     BACKGROUND_RENDER_STATE_MASK    = 0xF0,
 };
 
-enum BackgroundRenderTypes {
+enum FogModes {
     FOG_MODE_0 = 0,
     FOG_MODE_1 = 1,
     FOG_MODE_2 = 2,
