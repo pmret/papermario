@@ -13,8 +13,8 @@ extern EntityModelScript D_80283EE8;
 
 ApiStatus func_802A1518_7957F8(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
-        mdl_set_all_fog_mode(1);
-        *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
+        mdl_set_all_fog_mode(FOG_MODE_1);
+        *gBackgroundFogModePtr = FOG_MODE_1;
         set_background_color_blend(0, 0, 0, 0);
         script->functionTemp[0] = 200;
     }

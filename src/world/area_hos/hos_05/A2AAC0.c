@@ -211,7 +211,7 @@ ApiStatus func_80240DF8_A2B038(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80240E30_A2B070(Evt* script, s32 isInitialCall) {
-    mdl_set_all_fog_mode(3);
+    mdl_set_all_fog_mode(FOG_MODE_3);
     return ApiStatus_DONE2;
 }
 

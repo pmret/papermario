@@ -1068,8 +1068,8 @@ extern ModelNode* D_80152218;
 extern ModelTreeInfoList D_80152220;
 extern ModelTreeInfoList D_80152A20;
 
-extern s8 wBgRenderType;
-extern s8 bBgRenderType;
+extern s8 wBackgroundFogMode;
+extern s8 bBackgroundFogMode;
 extern s32 mdl_treeIterPos;
 extern Fog wFogSettings;
 extern Fog bFogSettings;
@@ -3053,12 +3053,13 @@ void appendGfx_model(void* data) {
         sp44 = 1;
     }
 
+    // fogType
     switch ((u32)(model->customGfxIndex >> 4)) {
-        case 1:
+        case FOG_MODE_1:
             s3 += 3;
             sp44 = 2;
             break;
-        case 2:
+        case FOG_MODE_2:
             if (renderMode <= 16) {
                 gDPSetPrimColor((*gfxPos)++, 0, 0, mdl_renderModelFogPrimColorR,
                                                        mdl_renderModelFogPrimColorG,
@@ -3072,7 +3073,7 @@ void appendGfx_model(void* data) {
                 sp44 = 3;
             }
             break;
-        case 3:
+        case FOG_MODE_3:
             s3 = 2;
             sp44 = 4;
             gDPSetPrimColor((*gfxPos)++, 0, 0, gRenderModelPrimR,
@@ -3960,7 +3961,7 @@ void clear_model_data(void) {
         gCurrentModelTreeRoot = &D_80152214;
         gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152220;
-        gBgRenderTypePtr = &wBgRenderType;
+        gBackgroundFogModePtr = &wBackgroundFogMode;
         mdl_bgMultiplyColorA = 0;
         mdl_bgMultiplyColorR = 0;
         mdl_bgMultiplyColorG = 0;
@@ -3974,7 +3975,7 @@ void clear_model_data(void) {
         gCurrentModelTreeRoot = &D_80152218;
         gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152A20;
-        gBgRenderTypePtr = &bBgRenderType;
+        gBackgroundFogModePtr = &bBackgroundFogMode;
         gCurrentFogSettings = &bFogSettings;
     }
 
@@ -3999,7 +4000,7 @@ void clear_model_data(void) {
         (*mdl_currentModelTreeNodeInfo)[i].textureID = 0;
     }
 
-    *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_0;
+    *gBackgroundFogModePtr = FOG_MODE_0;
     gCurrentFogSettings->r = 10;
     gCurrentFogSettings->g = 10;
     gCurrentFogSettings->b = 10;
@@ -4025,7 +4026,7 @@ void init_model_data(void) {
         gCurrentModelTreeRoot = &D_80152214;
         gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152220;
-        gBgRenderTypePtr = &wBgRenderType;
+        gBackgroundFogModePtr = &wBackgroundFogMode;
         gCurrentFogSettings = &wFogSettings;
     } else {
         gCurrentModels = &bModelList;
@@ -4035,7 +4036,7 @@ void init_model_data(void) {
         gCurrentModelTreeRoot = &D_80152218;
         gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152A20;
-        gBgRenderTypePtr = &bBgRenderType;
+        gBackgroundFogModePtr = &bBackgroundFogMode;
         gCurrentFogSettings = &bFogSettings;
     }
 }
@@ -5242,7 +5243,7 @@ void set_model_flags(u16 treeIndex, s32 flags, s32 mode) {
     }
 }
 
-void func_8011B950(u16 treeIndex, s32 arg1, s32 arg2, s32 arg3) {
+void func_8011B950(u16 treeIndex, s32 customGfxIndex, s32 fogType, s32 arg3) {
     s32 maxGroupIndex = -1;
     s32 i;
     s32 minGroupIndex;
@@ -5272,17 +5273,17 @@ void func_8011B950(u16 treeIndex, s32 arg1, s32 arg2, s32 arg3) {
 
     maskLow = maskHigh = 0;
 
-    if (arg1 < 0) {
+    if (customGfxIndex < 0) {
         maskLow = 0xF;
-        arg1 = 0;
+        customGfxIndex = 0;
     }
 
-    if (arg2 < 0) {
+    if (fogType < 0) {
         maskHigh = 0xF0;
-        arg2 = 0;
+        fogType = 0;
     }
 
-    newIndex = arg1 + (arg2 << 4);
+    newIndex = customGfxIndex + (fogType << 4);
 
     if (arg3 == 0) {
         for (i = minGroupIndex; i <= maxGroupIndex; i++) {

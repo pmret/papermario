@@ -177,7 +177,7 @@ void snowfall_appendGfx(void* effect) {
         bgAlpha = 255;
         unk_2C = data->unk_2C;
         dlist = D_E008AA50[data->unk_04];
-        if (*gBgRenderTypePtr == 1) {
+        if (*gBackgroundFogModePtr == 1) {
             shim_get_background_color_blend(&bgRGB, &bgRGB, &bgRGB, &bgAlpha);
             unk_28 = 255 - bgAlpha;
         }
@@ -193,14 +193,14 @@ void snowfall_appendGfx(void* effect) {
             shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
-                
+
             data++;
             for (i = 0; i < unk_2C; i++, data++) {
                 if (data->unk_30 <= 0 && data->unk_28 != 0) {
                     shim_guTranslateF(sp18, data->unk_08, data->unk_0C, data->unk_10);
                     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-                    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 
+                    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                     gSPMatrix(gMasterGfxPos++, mtx,
                               G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);

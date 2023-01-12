@@ -5,8 +5,8 @@
 EvtScript N(EVS_Scene_TutankoopaAppears) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(N(UnkFunc27), 0, -1, 1)
-    EVT_CALL(N(UnkFunc27), 2, 0, 1)
+    EVT_CALL(N(UnkFunc27), 0, -1, FOG_MODE_1)
+    EVT_CALL(N(UnkFunc27), 2, 0, FOG_MODE_1)
     EVT_CALL(N(UnkFunc26), 1, 0, 0, 0, 255, 0, 0, 0, 0, 0)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 410, -910, 410)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))

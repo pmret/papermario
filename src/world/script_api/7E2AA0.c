@@ -230,7 +230,7 @@ ApiStatus func_80282414(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         if (script->varTable[0] == 0) {
-            func_8011B950(script->varTable[15], -1, 1, 1);
+            func_8011B950(script->varTable[15], -1, FOG_MODE_1, 1);
         }
         script->functionTemp[1] = 0;
     }
@@ -253,7 +253,7 @@ ApiStatus func_80282414(Evt* script, s32 isInitialCall) {
 
     if (script->functionTemp[1] >= 255) {
         if (script->varTable[0] == 3) {
-            func_8011B950(script->varTable[15], -1, 0, 1);
+            func_8011B950(script->varTable[15], -1, FOG_MODE_0, 1);
         }
         return ApiStatus_DONE2;
     } else {

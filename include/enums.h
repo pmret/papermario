@@ -4330,7 +4330,7 @@ enum BattleSubStates {
     BTL_SUBSTATE_CHANGE_PARTNER_UNK_5                   = 5,
     BTL_SUBSTATE_CHANGE_PARTNER_UNK_6                   = 6,
     BTL_SUBSTATE_CHANGE_PARTNER_UNK_7                   = 7,
-    
+
     // BATTLE_STATE_END_TRAINING_BATTLE
     BTL_SUBSTATE_END_TRAINING_UNK_0                     = 0,
     BTL_SUBSTATE_END_TRAINING_UNK_A                     = 10,
@@ -6199,10 +6199,10 @@ enum BackgroundFlags {
 };
 
 enum BackgroundRenderTypes {
-    BACKGROUND_RENDER_TYPE_0 = 0,
-    BACKGROUND_RENDER_TYPE_1 = 1,
-    BACKGROUND_RENDER_TYPE_2 = 2,
-    BACKGROUND_RENDER_TYPE_3 = 3,
+    FOG_MODE_0 = 0,
+    FOG_MODE_1 = 1,
+    FOG_MODE_2 = 2,
+    FOG_MODE_3 = 3,
 };
 
 enum EncounterStates {

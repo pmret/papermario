@@ -1322,7 +1322,7 @@ EvtScript N(EVS_NpcAux_Kammy) = {
 
 s32 N(KammyHoverOffsets)[] = {
      1,  2,  3,  2,  1,
-    -1, -2, -3, -2, -1, 
+    -1, -2, -3, -2, -1,
 };
 
 EvtScript N(EVS_NpcIdle_Kammy) = {
@@ -1393,7 +1393,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024295C_8B29CC);
 #endif
 
 API_CALLABLE(N(func_80242BA8_8B2C18)) {
-    *gBgRenderTypePtr = 1;
+    *gBackgroundFogModePtr = 1;
     return ApiStatus_DONE2;
 }
 
@@ -1436,7 +1436,7 @@ API_CALLABLE(N(func_80242BC0_8B2C30)) {
 }
 
 API_CALLABLE(N(func_80242F08_8B2F78)) {
-    mdl_set_all_fog_mode(3);
+    mdl_set_all_fog_mode(FOG_MODE_3);
     return ApiStatus_DONE2;
 }
 

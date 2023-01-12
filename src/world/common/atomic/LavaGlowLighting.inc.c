@@ -33,14 +33,14 @@ ApiStatus N(ApplyLavaGlowLighting)(Evt* script, s32 isInitialCall) {
             for (i = 0; i < modelIDs->count; i++, idList++) {
                 s32 treeIndex = get_model_list_index_from_tree_index(*idList);
                 Model* mdl = get_model_from_list_index(treeIndex);
-                set_mdl_custom_gfx_set(mdl, -1, 2);
+                set_mdl_custom_gfx_set(mdl, -1, FOG_MODE_2);
             }
         } else {
             // list is NULL -> apply effect to ALL models
             Model** models = (Model**) gCurrentModels;
             for (i = 0; i < MAX_MODELS; i++, models++) {
                 if (*models != NULL) {
-                    set_mdl_custom_gfx_set(*models, -1, 2);
+                    set_mdl_custom_gfx_set(*models, -1, FOG_MODE_2);
                 }
             }
         }
@@ -98,14 +98,14 @@ ApiStatus N(ClearLavaGlowLighting)(Evt* script, s32 isInitialCall) {
         for (i = 0; i < modelIDs->count; i++, idList++) {
             s32 treeIndex = get_model_list_index_from_tree_index(*idList);
             Model* mdl = get_model_from_list_index(treeIndex);
-            set_mdl_custom_gfx_set(mdl, -1, 0);
+            set_mdl_custom_gfx_set(mdl, -1, FOG_MODE_0);
         }
     } else {
         // list is NULL -> clear effect from ALL models
         Model** models = (Model**) gCurrentModels;
         for (i = 0; i < MAX_MODELS; i++, models++) {
             if (*models != NULL) {
-                set_mdl_custom_gfx_set(*models, -1, 0);
+                set_mdl_custom_gfx_set(*models, -1, FOG_MODE_0);
             }
         }
     }

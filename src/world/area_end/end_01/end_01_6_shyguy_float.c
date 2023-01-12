@@ -32,7 +32,7 @@ EvtScript N(EVS_TexPan_ShyGuyFloat_Top) = {
 
 s32 N(ShyGuyFloat_InteriorModels)[] = {
     MODEL_omo7, MODEL_omo9, MODEL_omo10, MODEL_omo11,
-    MODEL_omo12, MODEL_omo13, MODEL_omo14, 0x0000FFFF 
+    MODEL_omo12, MODEL_omo13, MODEL_omo14, 0x0000FFFF
 };
 
 EvtScript N(EVS_ShyGuyFloat_Open) = {
@@ -58,7 +58,7 @@ EvtScript N(EVS_ShyGuyFloat_Open) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(ShyGuyFloat_InteriorModels)), 3)
+    EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(ShyGuyFloat_InteriorModels)), FOG_MODE_3)
     EVT_CALL(N(UnkFunc26), 3, 255, 255, 255, 120, 120, 80, 0, 0, 0)
     EVT_WAIT(30)
     EVT_CALL(N(UnkFunc26), 3, 255, 255, 255, 0, 0, 0, 0, 0, 0)

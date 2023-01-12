@@ -40,7 +40,7 @@ API_CALLABLE(N(UnkFunc27)) {
             break;
 
         case 2:
-            *gBgRenderTypePtr = fogType;
+            *gBackgroundFogModePtr = fogType;
             break;
 
     }

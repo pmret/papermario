@@ -18,7 +18,7 @@ API_CALLABLE(N(SetNightFogParams)) {
 }
 
 API_CALLABLE(N(SetNightFogMode)) {
-    mdl_set_all_fog_mode(3);
+    mdl_set_all_fog_mode(FOG_MODE_3);
     return ApiStatus_DONE2;
 }
 
