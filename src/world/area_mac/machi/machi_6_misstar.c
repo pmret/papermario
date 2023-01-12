@@ -102,7 +102,7 @@ NpcSettings N(NpcSettings_Misstar) = {
     .otherAI = &N(EVS_NpcAuxAI_Misstar),
     .ai = &N(EVS_NpcAI_Misstar),
     .aux = &N(EVS_NpcAux_Misstar),
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
 StaticNpc N(NpcData_Misstar) = {
@@ -110,6 +110,6 @@ StaticNpc N(NpcData_Misstar) = {
     .settings = &N(NpcSettings_Misstar),
     .pos = { 320.0f, 30.0f, -290.0f },
     .yaw = 100,
-    .flags = ENEMY_FLAGS_1,
+    .flags = ENEMY_FLAG_1,
     .animations = {},
 };

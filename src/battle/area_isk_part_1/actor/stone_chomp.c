@@ -631,7 +631,7 @@ EvtScript N(handleEvent_80222364) = {
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetPartPos, ACTOR_SELF, 2, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_StoneChomp_Anim01)

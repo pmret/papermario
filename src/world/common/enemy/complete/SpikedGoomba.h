@@ -3,7 +3,7 @@
 
 #define SPIKED_GOOMBA_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 5, \
     .itemDrops = { \
         { ITEM_MUSHROOM, 10, 0 }, \

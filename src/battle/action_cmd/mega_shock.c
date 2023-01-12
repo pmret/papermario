@@ -33,13 +33,13 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
 
     elementID = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = elementID;
-    hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(elementID, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(elementID, 0);
 
     elementID = hud_element_create(&HES_BButton);
     actionCommandStatus->hudElements[2] = elementID;
-    hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(elementID, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(elementID, 0);
 
@@ -47,13 +47,13 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElements[1] = elementID;
     hud_element_set_render_pos(elementID, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 0x1C);
     hud_element_set_render_depth(elementID, 0);
-    hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     elementID = hud_element_create(&HES_100pct);
     actionCommandStatus->hudElements[4] = elementID;
     hud_element_set_render_pos(elementID, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 0x1C);
     hud_element_set_render_depth(elementID, 0);
-    hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     return ApiStatus_DONE2;
 }
@@ -114,20 +114,20 @@ void N(update)(void) {
 
             hudElement = actionCommandStatus->hudElements[0];
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(hudElement, 255);
 
             hudElement = actionCommandStatus->hudElements[2];
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(hudElement, 255);
 
             hudElement = actionCommandStatus->hudElements[1];
             hud_element_set_alpha(hudElement, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             actionCommandStatus->state = 1;
@@ -251,7 +251,7 @@ void N(update)(void) {
                 actionCommandStatus->isBarFilled = TRUE;
                 hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX + 50,
                     actionCommandStatus->hudPosY + 28);
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             adjustedFillLevel = actionCommandStatus->barFillLevel / 100;

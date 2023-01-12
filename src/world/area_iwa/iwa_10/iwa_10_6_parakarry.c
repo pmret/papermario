@@ -114,7 +114,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_SUB(LVar0, 15)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
     EVT_CALL(InterpPlayerYaw, 270, 0)
     EVT_WAIT(1)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_DeadStill)
@@ -131,7 +131,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_CALL(GetNpcPos, NPC_Parakarry, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_CALL(NpcJump1, NPC_Parakarry, LVar0, LVar1, LVar2, 8)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, FALSE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, FALSE)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(30)
@@ -315,10 +315,10 @@ StaticNpc N(NpcData_Parakarry) = {
     .settings = &N(NpcSettings_Parakarry),
     .pos = { -610.0f, 230.0f, -485.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_200000,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_Parakarry),
     .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAG_80,
         .heartDrops  = NO_DROPS,
         .flowerDrops = NO_DROPS,
     },

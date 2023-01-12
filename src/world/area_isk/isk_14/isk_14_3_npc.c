@@ -26,7 +26,7 @@ void N(func_80241610_993D40)(void) {
     Matrix4f transformMtx, tempMtx;
 
     gSPViewport(gMasterGfxPos++, &cam->vp);
-    if (!(cam->flags & CAMERA_FLAGS_ORTHO)) {
+    if (!(cam->flags & CAMERA_FLAG_ORTHO)) {
         gSPPerspNormalize(gMasterGfxPos++, cam->perspNorm);
     }
     guMtxF2L(cam->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCameraID]);
@@ -166,7 +166,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
     EVT_WAIT(1)
     EVT_CALL(N(DestroyAmbushWorker))
     EVT_CALL(func_802CFD30, -1, 0, 0, 0, 0, 0)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_4 | ENEMY_FLAGS_100000, 0)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_4 | ENEMY_FLAG_100000, 0)
     EVT_WAIT(3)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, 1)
@@ -220,7 +220,7 @@ StaticNpc N(NpcData_StoneChomp) = {
     .settings = &N(NpcSettings_StoneChomp),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 218,
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .init = &N(EVS_NpcInit_StoneChomp),
     .initVarCount = 1,
     .initVar = { .value = -780 },

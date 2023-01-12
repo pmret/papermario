@@ -149,18 +149,18 @@ ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
                 npc->verticalRenderOffset = npc->collisionHeight / 2;
             }
 
-            if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
+            if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_4)) {
                 script->functionTemp[0] = 0;
                 npc->duration = 0;
                 npc->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_2;
                 disable_npc_shadow(npc);
                 npc->flags &= ~NPC_FLAG_JUMPING;
                 enemy->varTable[0] = 0;
-                enemy->flags |= ENEMY_FLAGS_10000000 | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_IGNORE_HAMMER |
-                                ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_200000 |
-                                ENEMY_FLAGS_100000 | ENEMY_FLAGS_40;
-                if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-                    enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+                enemy->flags |= ENEMY_FLAG_10000000 | ENEMY_FLAG_8000000 | ENEMY_FLAG_IGNORE_HAMMER |
+                                ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_200000 |
+                                ENEMY_FLAG_100000 | ENEMY_FLAG_40;
+                if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
+                    enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
                 }
             }
 
@@ -198,8 +198,8 @@ ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
                         npc->flags &= ~NPC_FLAG_2;
                         enable_npc_shadow(npc);
                         npc->flags |= NPC_FLAG_JUMPING;
-                        enemy->flags &= ~(ENEMY_FLAGS_10000000 | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_IGNORE_HAMMER |
-                                          ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_TOUCH);
+                        enemy->flags &= ~(ENEMY_FLAG_10000000 | ENEMY_FLAG_8000000 | ENEMY_FLAG_IGNORE_HAMMER |
+                                          ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH);
                         npc->duration = 90;
                         script->functionTemp[0] = 2;
                         break;
@@ -256,8 +256,8 @@ ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
                 npc->flags |= NPC_FLAG_2;
                 disable_npc_shadow(npc);
                 npc->flags &= ~NPC_FLAG_JUMPING;
-                enemy->flags |= ENEMY_FLAGS_10000000 | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_IGNORE_HAMMER |
-                                ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_TOUCH;
+                enemy->flags |= ENEMY_FLAG_10000000 | ENEMY_FLAG_8000000 | ENEMY_FLAG_IGNORE_HAMMER |
+                                ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH;
                 script->functionTemp[0] = 0;
             }
         }
@@ -360,8 +360,8 @@ ApiStatus N(ProjectileAI_Reflect)(Evt* script, s32 isInitialCall) {
                 npc->flags |= NPC_FLAG_2;
                 disable_npc_shadow(npc);
                 npc->flags &= ~NPC_FLAG_JUMPING;
-                enemy->flags |= ENEMY_FLAGS_10000000 | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_IGNORE_HAMMER |
-                                ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_TOUCH;
+                enemy->flags |= ENEMY_FLAG_10000000 | ENEMY_FLAG_8000000 | ENEMY_FLAG_IGNORE_HAMMER |
+                                ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH;
                 script->functionTemp[0] = 0;
                 evt_set_variable(script, LVar0, 1);
                 return ApiStatus_DONE2;

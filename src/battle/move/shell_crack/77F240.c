@@ -7,7 +7,7 @@
 
 #include "world/common/todo/IsBerserkerEquipped.inc.c"
 
-#include "world/common/todo/IsRightOnEquipped.inc.c"
+#include "world/common/todo/ShouldMovesAutoSucceed.inc.c"
 
 ApiStatus func_802A10A4_77F2E4(Evt* script, s32 isInitialCall) {
     ActorState* playerActorState = &gBattleStatus.playerActor->state;

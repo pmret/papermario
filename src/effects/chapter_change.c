@@ -182,8 +182,8 @@ void chapter_change_init(EffectInstance* effect) {
 void chapter_change_update(EffectInstance* effect) {
     ChapterChangeFXData* data = effect->data.chapterChange;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
         data->timeLeft = 16;
     }
 

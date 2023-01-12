@@ -149,7 +149,7 @@ void update_triggers(void) {
 
         if (listTrigger->flags.flags & TRIGGER_FLOOR_PRESS_A) {
             if ((listTrigger->location.colliderID != collisionStatus->currentFloor) ||
-                !(gGameStatusPtr->pressedButtons[0] & BUTTON_A) || (gPlayerStatus.flags & PS_FLAGS_INPUT_DISABLED)) {
+                !(gGameStatusPtr->pressedButtons[0] & BUTTON_A) || (gPlayerStatus.flags & PS_FLAG_INPUT_DISABLED)) {
                 continue;
             }
         }
@@ -166,19 +166,19 @@ void update_triggers(void) {
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_FLAGS_2000) {
+        if (listTrigger->flags.flags & TRIGGER_FLAG_2000) {
             if (listTrigger->location.colliderID != collisionStatus->unk_0C) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_FLAGS_4000) {
+        if (listTrigger->flags.flags & TRIGGER_FLAG_4000) {
             if (listTrigger->location.colliderID != collisionStatus->unk_0E) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_FLAGS_8000) {
+        if (listTrigger->flags.flags & TRIGGER_FLAG_8000) {
             if (listTrigger->location.colliderID != collisionStatus->unk_10) {
                 continue;
             }

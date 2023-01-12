@@ -1134,33 +1134,33 @@ void update_entities(void) {
         if (entity != NULL) {
             entity_numEntities++;
 
-            if (!(entity->flags & ENTITY_FLAGS_SKIP_UPDATE)) {
-                if (entity->flags & ENTITY_FLAGS_BOUND_SCRIPT_DIRTY) {
-                    entity->flags &= ~ENTITY_FLAGS_BOUND_SCRIPT_DIRTY;
-                    if (!(entity->flags & ENTITY_FLAGS_8000)) {
-                        entity->flags |= ENTITY_FLAGS_2000000;
+            if (!(entity->flags & ENTITY_FLAG_SKIP_UPDATE)) {
+                if (entity->flags & ENTITY_FLAG_BOUND_SCRIPT_DIRTY) {
+                    entity->flags &= ~ENTITY_FLAG_BOUND_SCRIPT_DIRTY;
+                    if (!(entity->flags & ENTITY_FLAG_8000)) {
+                        entity->flags |= ENTITY_FLAG_2000000;
                     }
                     entity->boundScript = start_script(entity->boundScriptBytecode, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
                 }
 
-                if (entity->flags & ENTITY_FLAGS_2000000) {
+                if (entity->flags & ENTITY_FLAG_2000000) {
                     if (does_script_exist(entity->boundScript->id)) {
-                        if (entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                        if (entity->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                             update_model_animator(entity->virtualModelIndex);
                         } else {
                             exec_entity_model_commandlist(entity->virtualModelIndex);
                         }
 
-                        if (entity->flags & ENTITY_FLAGS_ALWAYS_FACE_CAMERA) {
+                        if (entity->flags & ENTITY_FLAG_ALWAYS_FACE_CAMERA) {
                             entity->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
                         }
 
-                        if (!(entity->flags & ENTITY_FLAGS_SKIP_UPDATE_TRANSFORM_MATRIX)) {
+                        if (!(entity->flags & ENTITY_FLAG_SKIP_UPDATE_TRANSFORM_MATRIX)) {
                             update_entity_transform_matrix(entity);
                         }
                         continue;
                     } else {
-                        entity->flags &= ~ENTITY_FLAGS_2000000;
+                        entity->flags &= ~ENTITY_FLAG_2000000;
                     }
                 }
 
@@ -1172,25 +1172,25 @@ void update_entities(void) {
 
                         if (handleCollision != NULL && handleCollision(entity) != 0) {
                             entity->collisionTimer = 10;
-                            entity->flags |= ENTITY_FLAGS_DETECTED_COLLISION;
+                            entity->flags |= ENTITY_FLAG_DETECTED_COLLISION;
                         }
                     }
                 } else {
                     entity->collisionTimer--;
-                    if (entity->flags & ENTITY_FLAGS_CONTINUOUS_COLLISION) {
+                    if (entity->flags & ENTITY_FLAG_CONTINUOUS_COLLISION) {
                         if (entity->collisionTimer == 0) {
-                            entity->flags &= ~(ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_CONTINUOUS_COLLISION);
+                            entity->flags &= ~(ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_CONTINUOUS_COLLISION);
                         } else {
-                            entity->flags |= ENTITY_FLAGS_DISABLE_COLLISION;
+                            entity->flags |= ENTITY_FLAG_DISABLE_COLLISION;
                         }
                     } else if (entity->collisionTimer == 0) {
-                        entity->flags &= ~ENTITY_FLAGS_DETECTED_COLLISION;
-                        entity->flags &= ~ENTITY_FLAGS_PARTNER_COLLISION;
+                        entity->flags &= ~ENTITY_FLAG_DETECTED_COLLISION;
+                        entity->flags &= ~ENTITY_FLAG_PARTNER_COLLISION;
                         entity->collisionFlags = 0;
                     }
                 }
 
-                if (entity->flags & ENTITY_FLAGS_ALWAYS_FACE_CAMERA) {
+                if (entity->flags & ENTITY_FLAG_ALWAYS_FACE_CAMERA) {
                     entity->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
                 }
 
@@ -1209,15 +1209,15 @@ void update_entities(void) {
                     }
                 }
 
-                if (!(entity->flags & ENTITY_FLAGS_SKIP_UPDATE_TRANSFORM_MATRIX)) {
+                if (!(entity->flags & ENTITY_FLAG_SKIP_UPDATE_TRANSFORM_MATRIX)) {
                     update_entity_transform_matrix(entity);
                 }
 
-                if (!(entity->flags & ENTITY_FLAGS_DISABLE_COLLISION)) {
+                if (!(entity->flags & ENTITY_FLAG_DISABLE_COLLISION)) {
                     update_entity_inverse_rotation_matrix(entity);
                 }
 
-                if (entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                if (entity->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                     update_model_animator(entity->virtualModelIndex);
                 } else {
                     exec_entity_model_commandlist(entity->virtualModelIndex);
@@ -1227,11 +1227,11 @@ void update_entities(void) {
                     update_entity_shadow_position(entity);
                 }
 
-                if (entity->flags & ENTITY_FLAGS_PENDING_INSTANCE_DELETE) {
+                if (entity->flags & ENTITY_FLAG_PENDING_INSTANCE_DELETE) {
                     delete_entity(entity->listIndex);
                 }
 
-                if (entity->flags & ENTITY_FLAGS_PENDING_FULL_DELETE) {
+                if (entity->flags & ENTITY_FLAG_PENDING_FULL_DELETE) {
                     delete_entity_and_unload_data(entity->listIndex);
                 }
             }
@@ -1253,20 +1253,20 @@ void update_shadows(void) {
         if (shadow != NULL) {
             entity_numShadows++;
 
-            if (!(shadow->flags & ENTITY_FLAGS_SKIP_UPDATE)) {
-                if (shadow->flags & ENTITY_FLAGS_ALWAYS_FACE_CAMERA) {
+            if (!(shadow->flags & ENTITY_FLAG_SKIP_UPDATE)) {
+                if (shadow->flags & ENTITY_FLAG_ALWAYS_FACE_CAMERA) {
                     shadow->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
                 }
 
                 update_shadow_transform_matrix(shadow);
 
-                if (shadow->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                if (shadow->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                     update_model_animator(shadow->entityModelID);
                 } else {
                     exec_entity_model_commandlist(shadow->entityModelID);
                 }
 
-                if (shadow->flags & ENTITY_FLAGS_PENDING_INSTANCE_DELETE) {
+                if (shadow->flags & ENTITY_FLAG_PENDING_INSTANCE_DELETE) {
                     _delete_shadow(shadow->listIndex);
                 }
             }
@@ -1323,7 +1323,7 @@ s32 step_entity_commandlist(Entity* entity) {
             break;
         case ENTITY_SCRIPT_OP_RestartBoundScript:
             if (entity->boundScriptBytecode != NULL) {
-                entity->flags |= ENTITY_FLAGS_BOUND_SCRIPT_DIRTY;
+                entity->flags |= ENTITY_FLAG_BOUND_SCRIPT_DIRTY;
             }
             entity->scriptReadPos = args++;
             ret = TRUE;
@@ -1386,7 +1386,7 @@ void render_entities(void) {
         if (entity != NULL) {
             if (!gGameStatusPtr->isBattle) {
                 if (gEntityHideMode != 0 &&
-                    !(entity->flags & ENTITY_FLAGS_IGNORE_DISTANCE_CULLING) &&
+                    !(entity->flags & ENTITY_FLAG_IGNORE_DISTANCE_CULLING) &&
                     dist2D(gPlayerStatusPtr->position.x,
                            gPlayerStatusPtr->position.z,
                            entity->position.x,
@@ -1396,18 +1396,18 @@ void render_entities(void) {
                 }
 
                 if (gEntityHideMode == 1) {
-                    if (!(entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1)) {
+                    if (!(entity->flags & ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE1)) {
                         continue;
                     }
                 } else if (gEntityHideMode == 2) {
-                    if (!(entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2)) {
+                    if (!(entity->flags & ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE2)) {
                         continue;
                     }
                 }
             }
 
-            if (!(entity->flags & ENTITY_FLAGS_HIDDEN)) {
-                if (entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+            if (!(entity->flags & ENTITY_FLAG_HIDDEN)) {
+                if (entity->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                     if (D_8014AFB0 == 0xFF) {
                         if (entity->renderSetupFunc != NULL) {
                             set_animator_render_callback(
@@ -1470,14 +1470,14 @@ void render_shadows(void) {
         Shadow* shadow = get_shadow_by_index(i);
 
         if (shadow != NULL) {
-            if (shadow->flags & ENTITY_FLAGS_HIDDEN) {
-                if (shadow->flags & ENTITY_FLAGS_FADING_AWAY) {
+            if (shadow->flags & ENTITY_FLAG_HIDDEN) {
+                if (shadow->flags & ENTITY_FLAG_FADING_AWAY) {
                     shadow->alpha -= 20;
                     if (shadow->alpha <= 20) {
-                        shadow->flags |= ENTITY_FLAGS_PENDING_INSTANCE_DELETE;
+                        shadow->flags |= ENTITY_FLAG_PENDING_INSTANCE_DELETE;
                     }
                 }
-            } else if (shadow->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+            } else if (shadow->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                 if (shadow->vertexArray == NULL) {
                     render_animated_model(shadow->entityModelID, &shadow->transformMatrix);
                 } else {
@@ -1487,10 +1487,10 @@ void render_shadows(void) {
                                   shadow->vertexArray);
                 }
             } else {
-                if (shadow->flags & ENTITY_FLAGS_FADING_AWAY) {
+                if (shadow->flags & ENTITY_FLAG_FADING_AWAY) {
                     shadow->alpha -= 20;
                     if (shadow->alpha <= 20) {
-                        shadow->flags |=  ENTITY_FLAGS_PENDING_INSTANCE_DELETE;
+                        shadow->flags |=  ENTITY_FLAG_PENDING_INSTANCE_DELETE;
                     }
                 }
 
@@ -1601,7 +1601,7 @@ ShadowList* get_shadow_list(void) {
 
 s32 entity_start_script(Entity* entity) {
     if (entity->boundScriptBytecode != NULL) {
-        entity->flags |= ENTITY_FLAGS_BOUND_SCRIPT_DIRTY;
+        entity->flags |= ENTITY_FLAG_BOUND_SCRIPT_DIRTY;
         return 1;
     }
     return 0;
@@ -1624,7 +1624,7 @@ void delete_entity(s32 entityIndex) {
         heap_free(entity->dataBuf.any);
     }
 
-    if (!(entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
+    if (!(entity->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL)) {
         free_entity_model_by_index(entity->virtualModelIndex);
     } else {
         delete_model_animator(get_animator_by_index(entity->virtualModelIndex));
@@ -1633,7 +1633,7 @@ void delete_entity(s32 entityIndex) {
     if (entity->shadowIndex >= 0) {
         Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
 
-        shadow->flags |= ENTITY_FLAGS_FADING_AWAY;
+        shadow->flags |= ENTITY_FLAG_FADING_AWAY;
     }
 
     heap_free((*gCurrentEntityListPtr)[entityIndex]);
@@ -1647,7 +1647,7 @@ void delete_entity_and_unload_data(s32 entityIndex) {
         heap_free(entity->dataBuf.any);
     }
 
-    if (!(entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
+    if (!(entity->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL)) {
         free_entity_model_by_index(entity->virtualModelIndex);
     } else {
         delete_model_animator(get_animator_by_index(entity->virtualModelIndex));
@@ -1658,7 +1658,7 @@ void delete_entity_and_unload_data(s32 entityIndex) {
     if (entity->shadowIndex >= 0) {
         Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
 
-        shadow->flags |= ENTITY_FLAGS_FADING_AWAY;
+        shadow->flags |= ENTITY_FLAG_FADING_AWAY;
     }
 
     heap_free((*gCurrentEntityListPtr)[entityIndex]);
@@ -1678,9 +1678,9 @@ s32 entity_get_collision_flags(Entity* entity) {
     s32 entityFlags = 0;
     u32 flag;
 
-    if (entity->flags & ENTITY_FLAGS_PARTNER_COLLISION) {
+    if (entity->flags & ENTITY_FLAG_PARTNER_COLLISION) {
         entityFlags = ENTITY_COLLISION_PARTNER;
-        entity->flags &= ~ENTITY_FLAGS_PARTNER_COLLISION;
+        entity->flags &= ~ENTITY_FLAG_PARTNER_COLLISION;
     }
 
     flag = gCollisionStatus.currentFloor;
@@ -1742,7 +1742,7 @@ s32 entity_interacts_with_current_partner(s32 entityIdx) {
                 case ENTITY_TYPE_SUPER_BLOCK:
                 case ENTITY_TYPE_BOMBABLE_ROCK:
                     entity = get_entity_by_index(entityIdx);
-                    entity->flags |= ENTITY_FLAGS_PARTNER_COLLISION;
+                    entity->flags |= ENTITY_FLAG_PARTNER_COLLISION;
                     ret = TRUE;
             }
             break;
@@ -1765,7 +1765,7 @@ s32 entity_interacts_with_current_partner(s32 entityIdx) {
                 case ENTITY_TYPE_SAVE_POINT:
                 case ENTITY_TYPE_SUPER_BLOCK:
                     entity = get_entity_by_index(entityIdx);
-                    entity->flags |= ENTITY_FLAGS_PARTNER_COLLISION;
+                    entity->flags |= ENTITY_FLAG_PARTNER_COLLISION;
                     ret = TRUE;
             }
             break;
@@ -1801,14 +1801,14 @@ s32 is_player_action_state(s8 actionState) {
 }
 
 void entity_set_render_script(Entity* entity, EntityModelScript* cmdList) {
-    if (!(entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
+    if (!(entity->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL)) {
         set_entity_model_render_command_list(entity->virtualModelIndex, cmdList);
     }
 }
 
 void entity_reset_collision(Entity* entity) {
     entity->collisionTimer = 0;
-    entity->flags &= ~ENTITY_FLAGS_DETECTED_COLLISION;
+    entity->flags &= ~ENTITY_FLAG_DETECTED_COLLISION;
 }
 
 void load_area_specific_entity_data(void) {
@@ -1912,7 +1912,7 @@ void reload_world_entity_data(void) {
             break;
         }
 
-        if (!(bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
+        if (!(bp->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL)) {
             void* gfxData;
 
             dataLength = ((bp->dma.end - bp->dma.start) >> 2);
@@ -2008,7 +2008,7 @@ s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* blueprint, s32* loade
             blueprints[0] = blueprint;
             blueprints[1] = NULL;
             ret = TRUE;
-            if (blueprint->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+            if (blueprint->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                 s32 size;
                 entDmaList = blueprint->dmaList;
                 size = (entDmaList[0].end - entDmaList[0].start) >> 2;
@@ -2020,19 +2020,19 @@ s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* blueprint, s32* loade
             do {} while (0); // TODO find better match
             entDmaList = blueprint->dmaList;
             if (bpDmaList == entDmaList) {
-                if (blueprint->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                if (blueprint->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                     s32 size = (bpDmaList[0].end - bpDmaList[0].start) >> 2;
                     *loadedEnd = *loadedStart + size;
                 }
                 break;
             } else if (bp == blueprint) {
-                if (bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                if (bp->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                     s32 size = (entDmaList[0].end - entDmaList[0].start) >> 2;
                     *loadedEnd = *loadedStart + size;
                 }
                 break;
             } else {
-                if (bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                if (bp->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                     s32 size = (bpDmaList[0].end - bpDmaList[0].start) >> 2;
                     *loadedEnd = *loadedStart = *loadedStart + size;
                     size = (bpDmaList[1].end - bpDmaList[1].start) >> 2;;
@@ -2096,7 +2096,7 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
     s32 dma2size_2;
     s32 totalLoaded;
 
-    if (entityData->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+    if (entityData->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
         DmaEntry* dmaList = entityData->dmaList;
         entity->vertexSegment = 0xA;
 
@@ -2182,7 +2182,7 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
     entity->virtualModelIndex = create_mesh_animator(animationScript, animBaseAddr);
     load_mesh_animator_tree(entity->virtualModelIndex, animationNodes);
     update_model_animator(entity->virtualModelIndex);
-    entity->flags |= ENTITY_FLAGS_HAS_ANIMATED_MODEL;
+    entity->flags |= ENTITY_FLAG_HAS_ANIMATED_MODEL;
 }
 
 s32 func_80111790(EntityBlueprint* data) {
@@ -2215,7 +2215,7 @@ void entity_free_static_data(EntityBlueprint* data) {
     if (freeSlot < MAX_ENTITIES) {
         bp = wEntityBlueprint[freeSlot - 1];
         if (bp == data) {
-            if (bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+            if (bp->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                 DmaEntry* dmaList = bp->dmaList;
                 size = ((dmaList[0].end - dmaList[0].start) >> 2);
                 size += ((dmaList[1].end - dmaList[1].start) >> 2);
@@ -2298,7 +2298,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     entity->scriptDelay = entity->scriptReadPos != NULL ? 1 : 0;
     entity->savedReadPos[0] = bp->updateEntityScript;
     entity->updateScriptCallback = NULL;
-    entity->flags = bp->flags | ENTITY_FLAGS_CREATED;
+    entity->flags = bp->flags | ENTITY_FLAG_CREATED;
     entity->collisionFlags = 0;
     entity->collisionTimer = 0;
     entity->renderSetupFunc = NULL;
@@ -2321,7 +2321,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     entity->shadowIndex = -1;
     entity->gfxBaseAddr = NULL;
 
-    if (!(bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
+    if (!(bp->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL)) {
         if (bp->dma.start != 0) {
             load_simple_entity_data(entity, bp, listIndex);
         }
@@ -2333,7 +2333,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
         load_split_entity_data(entity, bp, listIndex);
     }
 
-    if (bp->entityType != ENTITY_TYPE_SHADOW && (entity->flags & (ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_SHADOW))) {
+    if (bp->entityType != ENTITY_TYPE_SHADOW && (entity->flags & (ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_HAS_SHADOW))) {
         create_entity_shadow(entity, x, y, z);
     }
 
@@ -2343,7 +2343,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
         case ENTITY_TYPE_SIMPLE_SPRING:
         case ENTITY_TYPE_SCRIPT_SPRING:
         case ENTITY_TYPE_STAR_BOX_LAUCHER:
-            entity->flags |= ENTITY_FLAGS_4000;
+            entity->flags |= ENTITY_FLAG_4000;
             break;
     }
 
@@ -2371,7 +2371,7 @@ s32 create_shadow_from_data(ShadowBlueprint* bp, f32 x, f32 y, f32 z) {
     (*gCurrentShadowListPtr)[i] = shadow;
     mem_clear(shadow, sizeof(*shadow));
     shadow->listIndex = i;
-    shadow->flags = bp->flags | ENTITY_FLAGS_CREATED;
+    shadow->flags = bp->flags | ENTITY_FLAG_CREATED;
     shadow->alpha = 128;
     shadow->unk_06 = 0x80;
     shadow->position.x = x;
@@ -2382,7 +2382,7 @@ s32 create_shadow_from_data(ShadowBlueprint* bp, f32 x, f32 y, f32 z) {
     shadow->scale.z = 1.0f;
 
     if (bp->animModelNode != NULL) {
-        shadow->flags |= ENTITY_FLAGS_HAS_ANIMATED_MODEL;
+        shadow->flags |= ENTITY_FLAG_HAS_ANIMATED_MODEL;
         shadow->entityModelID = create_model_animator(bp->renderCommandList);
         load_model_animator_tree(shadow->entityModelID, bp->animModelNode);
     } else {
@@ -2442,14 +2442,14 @@ ApiStatus SetEntityCullMode(Evt* script, s32 isInitialCall) {
     s32 mode = evt_get_variable(script, *args++);
 
     if (mode == 0) {
-        entity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
+        entity->flags |= ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE1;
     } else if (mode == 1) {
-        entity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
+        entity->flags |= ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE2;
     } else if (mode == 2) {
-        entity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2 | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
+        entity->flags |= ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE2 | ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE1;
     } else {
-        entity->flags |= ENTITY_FLAGS_IGNORE_DISTANCE_CULLING | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2 |
-                         ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
+        entity->flags |= ENTITY_FLAG_IGNORE_DISTANCE_CULLING | ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE2 |
+                         ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE1;
     }
     return ApiStatus_DONE2;
 }
@@ -2461,11 +2461,11 @@ ApiStatus UseDynamicShadow(Evt* script, s32 isInitialCall) {
     if (evt_get_variable(script, *args++)) {
         Shadow* shadow;
 
-        entity->flags |= ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
+        entity->flags |= ENTITY_FLAG_HAS_DYNAMIC_SHADOW;
         shadow = get_shadow_by_index(entity->shadowIndex);
-        shadow->flags |= ENTITY_FLAGS_SHADOW_POS_DIRTY;
+        shadow->flags |= ENTITY_FLAG_SHADOW_POS_DIRTY;
     } else {
-        entity->flags &= ~ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
+        entity->flags &= ~ENTITY_FLAG_HAS_DYNAMIC_SHADOW;
     }
 
     return ApiStatus_DONE2;
@@ -2494,7 +2494,7 @@ ApiStatus AssignSwitchFlag(Evt* script, s32 isInitialCall) {
 
         data->areaFlagIndex = areaFlag;
         if (get_area_flag(areaFlag) != 0) {
-            entity->flags |= ENTITY_FLAGS_PENDING_INSTANCE_DELETE;
+            entity->flags |= ENTITY_FLAG_PENDING_INSTANCE_DELETE;
         }
         return ApiStatus_DONE2;
     }
@@ -2561,8 +2561,8 @@ s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
     s32 type;
     s16 shadowIndex;
 
-    if (staticFlags & ENTITY_FLAGS_FIXED_SHADOW_SIZE) {
-        if (staticFlags & ENTITY_FLAGS_SQUARE_SHADOW) {
+    if (staticFlags & ENTITY_FLAG_FIXED_SHADOW_SIZE) {
+        if (staticFlags & ENTITY_FLAG_SQUARE_SHADOW) {
             type = 2;
         } else {
             type = 3;
@@ -2574,7 +2574,7 @@ s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
     shadowIndex = create_shadow_type(type, x, y, z);
     entity->shadowIndex = shadowIndex;
 
-    get_shadow_by_index(shadowIndex)->flags |= ENTITY_FLAGS_DARK_SHADOW | ENTITY_FLAGS_SHADOW_POS_DIRTY;
+    get_shadow_by_index(shadowIndex)->flags |= ENTITY_FLAG_DARK_SHADOW | ENTITY_FLAG_SHADOW_POS_DIRTY;
 
     return entity->shadowIndex;
 }
@@ -2605,7 +2605,7 @@ s32 create_shadow_type(s32 type, f32 x, f32 y, f32 z) {
     shadowIndex = create_shadow_from_data(bp, x, y, z);
 
     if (isFixedSize) {
-        get_shadow_by_index(shadowIndex)->flags |= ENTITY_FLAGS_FIXED_SHADOW_SIZE;
+        get_shadow_by_index(shadowIndex)->flags |= ENTITY_FLAG_FIXED_SHADOW_SIZE;
     }
 
     return shadowIndex;
@@ -2632,7 +2632,7 @@ void update_entity_shadow_position(Entity* entity) {
         } else {
             u8 alphaTemp;
 
-            if (shadow->flags & ENTITY_FLAGS_DARK_SHADOW) {
+            if (shadow->flags & ENTITY_FLAG_DARK_SHADOW) {
                 alphaTemp = 160;
             } else {
                 alphaTemp = 128;
@@ -2640,9 +2640,9 @@ void update_entity_shadow_position(Entity* entity) {
             shadow->alpha = alphaTemp;
         }
 
-        if (!(entity->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW)) {
-            if (shadow->flags & ENTITY_FLAGS_SHADOW_POS_DIRTY) {
-                shadow->flags &= ~ENTITY_FLAGS_SHADOW_POS_DIRTY;
+        if (!(entity->flags & ENTITY_FLAG_HAS_DYNAMIC_SHADOW)) {
+            if (shadow->flags & ENTITY_FLAG_SHADOW_POS_DIRTY) {
+                shadow->flags &= ~ENTITY_FLAG_SHADOW_POS_DIRTY;
             } else {
                 return;
             }
@@ -2658,7 +2658,7 @@ void update_entity_shadow_position(Entity* entity) {
 
         origHitLength = hitLength;
 
-        if (shadow->flags & ENTITY_FLAGS_FIXED_SHADOW_SIZE) {
+        if (shadow->flags & ENTITY_FLAG_FIXED_SHADOW_SIZE) {
             hitLength = 212.5f;
             shadow->scale.x = entity->aabb.x / hitLength;
             shadow->scale.z = entity->aabb.z / hitLength;
@@ -2677,15 +2677,15 @@ void update_entity_shadow_position(Entity* entity) {
         shadow->rotation.y = entity->rotation.y;
 
         if (entity->position.y < rayY) {
-            shadow->flags |= ENTITY_FLAGS_SKIP_UPDATE;
+            shadow->flags |= ENTITY_FLAG_SKIP_UPDATE;
             entity->position.y = rayY + 10.0f;
         } else {
-            shadow->flags &= ~ENTITY_FLAGS_SKIP_UPDATE;
+            shadow->flags &= ~ENTITY_FLAG_SKIP_UPDATE;
         }
 
-        shadow->flags = (shadow->flags & ~ENTITY_FLAGS_HIDDEN) | ((u16)entity->flags & ENTITY_FLAGS_HIDDEN);
-        if (!(entity->flags & ENTITY_FLAGS_400) && origHitLength == 0.0f) {
-            shadow->flags |= ENTITY_FLAGS_HIDDEN;
+        shadow->flags = (shadow->flags & ~ENTITY_FLAG_HIDDEN) | ((u16)entity->flags & ENTITY_FLAG_HIDDEN);
+        if (!(entity->flags & ENTITY_FLAG_400) && origHitLength == 0.0f) {
+            shadow->flags |= ENTITY_FLAG_HIDDEN;
         }
     } else {
         entity->shadowPosY = 0.0f;
@@ -3048,7 +3048,7 @@ void appendGfx_model(void* data) {
     } else {
         s3 = 1;
     }
-    if ((textureHeader != NULL || renderMode <= RENDER_MODE_ALPHATEST_NO_ZB) && gCurrentFogSettings->enabled && !(flags & MODEL_FLAGS_FLAG_40)) {
+    if ((textureHeader != NULL || renderMode <= RENDER_MODE_ALPHATEST_NO_ZB) && gCurrentFogSettings->enabled && !(flags & MODEL_FLAG_FLAG_40)) {
         s3 = 3;
         combineSubType = 1;
     }
@@ -3545,8 +3545,8 @@ void appendGfx_model(void* data) {
             break;
     }
 
-    if (!(flags & MODEL_FLAGS_TRANSFORM_GROUP_MEMBER)) {
-        if (!(flags & MODEL_FLAGS_FLAG_2000)) {
+    if (!(flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER)) {
+        if (!(flags & MODEL_FLAG_FLAG_2000)) {
             gSPMatrix((*gfxPos)++, model->currentSpecialMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
             if (mtxPushMode != G_MTX_NOPUSH) {
                 mtxPushMode = G_MTX_NOPUSH;
@@ -3557,7 +3557,7 @@ void appendGfx_model(void* data) {
         }
     } else {
         mtxLoadMode = G_MTX_MUL;
-        if (!(flags & MODEL_FLAGS_FLAG_2000)) {
+        if (!(flags & MODEL_FLAG_FLAG_2000)) {
             gSPMatrix((*gfxPos)++, model->currentSpecialMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
             if (mtxPushMode != G_MTX_NOPUSH) {
                 mtxPushMode = G_MTX_NOPUSH;
@@ -3565,7 +3565,7 @@ void appendGfx_model(void* data) {
         }
     }
 
-    if (flags & MODEL_FLAGS_USES_CUSTOM_GFX) {
+    if (flags & MODEL_FLAG_USES_CUSTOM_GFX) {
         customGfxIndex = (model->customGfxIndex & 0xF) * 2;
         if ((*gCurrentCustomModelGfxPtr)[customGfxIndex] != NULL) {
             gSPDisplayList((*gfxPos)++, (*gCurrentCustomModelGfxPtr)[customGfxIndex]);
@@ -3573,7 +3573,7 @@ void appendGfx_model(void* data) {
     }
 
     if (textureHeader != NULL) {
-        if (flags & MODEL_FLAGS_HAS_TEX_PANNER) {
+        if (flags & MODEL_FLAG_HAS_TEX_PANNER) {
             s32 panMainU = texPannerMainU[model->texPannerID] >> 8;
             s32 panMainV = texPannerMainV[model->texPannerID] >> 8;
             s32 panAuxU = texPannerAuxU[model->texPannerID] >> 8;
@@ -3594,7 +3594,7 @@ void appendGfx_model(void* data) {
             }
         }
     }
-    if (flags & MODEL_FLAGS_USE_CAMERA_UNK_MATRIX) {
+    if (flags & MODEL_FLAG_USE_CAMERA_UNK_MATRIX) {
         gSPMatrix((*gfxPos)++, gCameras[gCurrentCamID].unkMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
         if (mtxPushMode != G_MTX_NOPUSH) {
             mtxPushMode = G_MTX_NOPUSH;
@@ -3603,11 +3603,11 @@ void appendGfx_model(void* data) {
             mtxLoadMode = G_MTX_MUL;
         }
     }
-    if (!(flags & MODEL_FLAGS_HAS_LOCAL_VERTEX_COPY)) {
+    if (!(flags & MODEL_FLAG_HAS_LOCAL_VERTEX_COPY)) {
         gSPDisplayList((*gfxPos)++, modelNode->displayData->displayList);
     }
 
-    if (flags & MODEL_FLAGS_USES_CUSTOM_GFX) {
+    if (flags & MODEL_FLAG_USES_CUSTOM_GFX) {
         customGfxIndex++;
         if ((*gCurrentCustomModelGfxPtr)[customGfxIndex] != NULL) {
             gSPDisplayList((*gfxPos)++, (*gCurrentCustomModelGfxPtr)[customGfxIndex]);
@@ -4053,7 +4053,7 @@ void calculate_model_sizes(void) {
             bb->halfSizeX = (bb->maxX - bb->minX) * 0.5;
             bb->halfSizeY = (bb->maxY - bb->minY) * 0.5;
             bb->halfSizeZ = (bb->maxZ - bb->minZ) * 0.5;
-            model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX;
+            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
         }
     }
 }
@@ -4092,7 +4092,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     }
 
     (*gCurrentModels)[modelIdx] = model = heap_malloc(sizeof(*model));
-    model->flags = bp->flags | MODEL_FLAGS_FLAG_1;
+    model->flags = bp->flags | MODEL_FLAG_FLAG_1;
     model->modelID = D_80153226;
     model->modelNode = bp->mdlNode;
     model->groupData = bp->groupData;
@@ -4132,7 +4132,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     } else {
         model->currentMatrix = NULL;
         guMtxIdent(&model->specialMatrix);
-        model->flags |= MODEL_FLAGS_FLAG_2000;
+        model->flags |= MODEL_FLAG_FLAG_2000;
     }
 
     guMtxIdentF(model->transformMatrix);
@@ -4166,7 +4166,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     bb->halfSizeZ = z * 0.5;
 
     if (model->currentMatrix == NULL && x < 100.0f && y < 100.0f && z < 100.0f) {
-        model->flags |= MODEL_FLAGS_FLAG_200;
+        model->flags |= MODEL_FLAG_FLAG_200;
     }
     (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = modelIdx;
 }
@@ -4198,8 +4198,8 @@ void func_80116698(void) {
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         model = (*gCurrentModels)[i];
-        if (model != NULL && (model->flags != 0) && !(model->flags & MODEL_FLAGS_FLAG_4)) {
-            if (!(model->flags & MODEL_FLAGS_USES_TRANSFORM_MATRIX)) {
+        if (model != NULL && (model->flags != 0) && !(model->flags & MODEL_FLAG_FLAG_4)) {
+            if (!(model->flags & MODEL_FLAG_USES_TRANSFORM_MATRIX)) {
                 if (model->matrixMode != 0) {
                     model->matrixMode--;
                     if (model->matrixMode <= 0) {
@@ -4212,17 +4212,17 @@ void func_80116698(void) {
                     model->currentSpecialMatrix = &model->specialMatrix;
                 }
             } else {
-                model->flags &= ~MODEL_FLAGS_USES_TRANSFORM_MATRIX;
+                model->flags &= ~MODEL_FLAG_USES_TRANSFORM_MATRIX;
                 model->matrixMode = 2;
                 mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
-                if (model->currentMatrix == NULL || (model->flags & MODEL_FLAGS_TRANSFORM_GROUP_MEMBER)) {
+                if (model->currentMatrix == NULL || (model->flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER)) {
                     guMtxF2L(model->transformMatrix, mtx);
                 } else {
                     guMtxL2F(sp20, model->currentMatrix);
                     guMtxCatF(model->transformMatrix, sp20, sp20);
                     guMtxF2L(sp20, mtx);
                 }
-                model->flags &= ~MODEL_FLAGS_FLAG_2000;
+                model->flags &= ~MODEL_FLAG_FLAG_2000;
                 bb = (ModelBoundingBox*) get_model_property(model->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
                 mX = (bb->minX + bb->maxX) * 0.5f;
                 mY = (bb->minY + bb->maxY) * 0.5f;
@@ -4232,15 +4232,15 @@ void func_80116698(void) {
                 model->center.x = mX;
                 model->center.y = mY;
                 model->center.z = mZ;
-                model->flags &= ~MODEL_FLAGS_FLAG_200;
+                model->flags &= ~MODEL_FLAG_FLAG_200;
             }
         }
     }
 
     for (i = 0; i < ARRAY_COUNT((*gCurrentTransformGroups)); i++) {
         mtg = (*gCurrentTransformGroups)[i];
-        if (mtg != NULL && mtg->flags != 0 && !(mtg->flags & MODEL_TRANSFORM_GROUP_FLAGS_4)) {
-            if (!(mtg->flags & MODEL_TRANSFORM_GROUP_FLAGS_1000)) {
+        if (mtg != NULL && mtg->flags != 0 && !(mtg->flags & MODEL_TRANSFORM_GROUP_FLAG_4)) {
+            if (!(mtg->flags & MODEL_TRANSFORM_GROUP_FLAG_1000)) {
                 if (mtg->matrixMode != 0) {
                     mtg->matrixMode--;
                     if (!(mtg->matrixMode & 0xFF)) {
@@ -4253,7 +4253,7 @@ void func_80116698(void) {
                     mtg->transformMtx = &mtg->matrixA;
                 }
             } else {
-                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAGS_1000;
+                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAG_1000;
                 mtg->matrixMode = 2;
                 mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
                 if (mtg->matrixRDP_N == NULL) {
@@ -4263,7 +4263,7 @@ void func_80116698(void) {
                     guMtxCatF(mtg->matrixB, sp60, sp60);
                     guMtxF2L(sp60, mtx);
                 }
-                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAGS_2000;
+                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAG_2000;
                 bb = (ModelBoundingBox*) get_model_property(mtg->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
                 mtgX = (bb->minX + bb->maxX) * 0.5f;
                 mtgY = (bb->minY + bb->maxY) * 0.5f;
@@ -4341,16 +4341,16 @@ void render_models(void) {
         if (model->flags == 0) {
             continue;
         }
-        if (model->flags & MODEL_FLAGS_FLAG_4) {
+        if (model->flags & MODEL_FLAG_FLAG_4) {
             continue;
         }
-        if (model->flags & MODEL_FLAGS_ENABLED) {
+        if (model->flags & MODEL_FLAG_ENABLED) {
             continue;
         }
-        if (model->flags & MODEL_FLAGS_FLAG_20) {
+        if (model->flags & MODEL_FLAG_FLAG_20) {
             continue;
         }
-        if (model->flags & MODEL_FLAGS_TRANSFORM_GROUP_MEMBER) {
+        if (model->flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER) {
             continue;
         }
 
@@ -4358,7 +4358,7 @@ void render_models(void) {
         y = model->center.y;
         z = model->center.z;
 
-        if (model->flags & MODEL_FLAGS_FLAG_200) {
+        if (model->flags & MODEL_FLAG_FLAG_200) {
             cond = FALSE;
             boundingBox = (ModelBoundingBox*) model->modelNode->propertyList;
             bbx = boundingBox->halfSizeX;
@@ -4556,7 +4556,7 @@ void render_transform_group_node(ModelNode* node) {
 
             if (groupTypeProp != NULL && groupTypeProp->data.s != 0) {
                 model = get_model_from_list_index(mdl_currentTransformGroupChildIndex);
-                if (!(model->flags & MODEL_FLAGS_ENABLED)) {
+                if (!(model->flags & MODEL_FLAG_ENABLED)) {
                     appendGfx_model_group(model);
                 }
                 mdl_currentTransformGroupChildIndex++;
@@ -4588,7 +4588,7 @@ void render_transform_group_node(ModelNode* node) {
         }
 
         model = get_model_from_list_index(mdl_currentTransformGroupChildIndex);
-        if (!(model->flags & MODEL_FLAGS_ENABLED)) {
+        if (!(model->flags & MODEL_FLAG_ENABLED)) {
             appendGfx_model(model);
         }
         mdl_currentTransformGroupChildIndex++;
@@ -4601,14 +4601,14 @@ void render_transform_group(void* data) {
     ModelTransformGroup* group = data;
     Gfx** gfx = &gMasterGfxPos;
 
-    if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAGS_4)) {
+    if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAG_4)) {
         mdl_currentTransformGroupChildIndex = group->minChildModelIndex;
-        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAGS_2000)) {
+        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAG_2000)) {
             gSPMatrix((*gfx)++, group->transformMtx, (G_MTX_PUSH | G_MTX_LOAD) | G_MTX_MODELVIEW);
         }
 
         render_transform_group_node(group->modelNode);
-        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAGS_2000)) {
+        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAG_2000)) {
             gSPPopMatrix((*gfx)++, G_MTX_MODELVIEW);
         }
         gDPPipeSync((*gfx)++);
@@ -5086,7 +5086,7 @@ void make_transform_group(u16 modelID) {
         }
 
         (*gCurrentTransformGroups)[i] = newMtg = heap_malloc(sizeof(*newMtg));
-        newMtg->flags = MODEL_TRANSFORM_GROUP_FLAGS_1;
+        newMtg->flags = MODEL_TRANSFORM_GROUP_FLAG_1;
         newMtg->groupModelID = modelID;
         newMtg->minChildModelIndex = get_model_list_index_from_tree_index(D_80153374);
         newMtg->maxChildModelIndex = get_model_list_index_from_tree_index(D_80153376);
@@ -5144,10 +5144,10 @@ void enable_transform_group(u16 modelID) {
     for (i = group->minChildModelIndex; i <= group->maxChildModelIndex; i++) {
         Model* model = get_model_from_list_index(i);
 
-        model->flags |= MODEL_FLAGS_TRANSFORM_GROUP_MEMBER;
+        model->flags |= MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
 
         if (model->currentMatrix != NULL) {
-            model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX;
+            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
         }
     }
 }
@@ -5156,15 +5156,15 @@ void disable_transform_group(u16 modelID) {
     ModelTransformGroup* group = get_transform_group(get_transform_group_index(modelID));
     s32 i;
 
-    group->flags |= MODEL_TRANSFORM_GROUP_FLAGS_4;
+    group->flags |= MODEL_TRANSFORM_GROUP_FLAG_4;
 
     for (i = group->minChildModelIndex; i <= group->maxChildModelIndex; i++) {
         Model* model = get_model_from_list_index(i);
 
-        model->flags &= ~MODEL_FLAGS_TRANSFORM_GROUP_MEMBER;
+        model->flags &= ~MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
 
         if (model->currentMatrix != NULL) {
-            model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX;
+            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
         }
     }
 }
@@ -5311,7 +5311,7 @@ void func_8011BAE8(void) {
         Model* model = (*gCurrentModels)[i];
 
         if (model != NULL) {
-            model->flags &= ~MODEL_FLAGS_HAS_TRANSFORM_APPLIED;
+            model->flags &= ~MODEL_FLAG_HAS_TRANSFORM_APPLIED;
         }
     }
 
@@ -5319,7 +5319,7 @@ void func_8011BAE8(void) {
         ModelTransformGroup* transformGroup = (*gCurrentTransformGroups)[i];
 
         if (transformGroup != NULL) {
-            transformGroup->flags &= ~MODEL_TRANSFORM_GROUP_FLAGS_400;
+            transformGroup->flags &= ~MODEL_TRANSFORM_GROUP_FLAG_400;
         }
     }
 }
@@ -5610,13 +5610,13 @@ void mdl_make_local_vertex_copy(s32 copyIndex, u16 modelID, s32 isMakingCopy) {
             mdl_local_gfx_update_vtx_pointers(nodeDlist, baseVtx, copy->gfxCopy[i], copy->vtxCopy[i]);
             mdl_local_gfx_copy_vertices(baseVtx, numVertices, copy->vtxCopy[i]);
         }
-        model->flags |= MODEL_FLAGS_HAS_LOCAL_VERTEX_COPY;
+        model->flags |= MODEL_FLAG_HAS_LOCAL_VERTEX_COPY;
     } else {
         for (i = 0; i < ARRAY_COUNT(copy->gfxCopy); i++) {
             copy->gfxCopy[i] = NULL;
             copy->vtxCopy[i] = NULL;
         }
-        model->flags |= MODEL_FLAGS_ENABLED;
+        model->flags |= MODEL_FLAG_ENABLED;
     }
 
     copy->selector = 0;
@@ -5825,7 +5825,7 @@ void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
     oldGfxPos = gMasterGfxPos;
     gMasterGfxPos = *arg0;
 
-    copied.flags = MODEL_FLAGS_HAS_LOCAL_VERTEX_COPY | MODEL_FLAGS_FLAG_1;
+    copied.flags = MODEL_FLAG_HAS_LOCAL_VERTEX_COPY | MODEL_FLAG_FLAG_1;
     appendGfx_model(&copied);
 
     *arg0 = gMasterGfxPos;

@@ -87,8 +87,8 @@ void partner_buff_update(EffectInstance* effect) {
     s32 time;
     s32 i;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
         data->timeLeft = 16;
     }
     if (data->timeLeft < 1000) {

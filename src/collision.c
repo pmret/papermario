@@ -133,7 +133,7 @@ void restore_map_collision_data(void) {
         collider->flags = backupEntry->flags;
         collider->parentModelIndex = backupEntry->parentModelIndex;
 
-        if (collider->flags != -1 && collider->flags & COLLIDER_FLAGS_HAS_MODEL_PARENT) {
+        if (collider->flags != -1 && collider->flags & COLLIDER_FLAG_HAS_MODEL_PARENT) {
             parent_collider_to_model(i, collider->parentModelIndex);
             update_collider_transform(i);
         }
@@ -316,7 +316,7 @@ void parent_collider_to_model(s16 colliderID, s16 modelIndex) {
 
     collider = &gCollisionData.colliderList[colliderID];
     collider->parentModelIndex = modelIndex;
-    collider->flags |= COLLIDER_FLAGS_HAS_MODEL_PARENT;
+    collider->flags |= COLLIDER_FLAG_HAS_MODEL_PARENT;
 
     vertexBuffer = collision_heap_malloc(collider->numTriangles * sizeof(Vec3f));
     vertexBufferSize = 0;
@@ -871,7 +871,7 @@ s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 d
     for (i = 0; i < collisionData->numColliders; i++) {
         collider = &collisionData->colliderList[i];
 
-        if (collider->flags & COLLIDER_FLAGS_IGNORE_PLAYER)
+        if (collider->flags & COLLIDER_FLAG_IGNORE_PLAYER)
             continue;
 
         if (collider->numTriangles == 0 || collider->aabb == NULL)
@@ -971,7 +971,7 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
     for (i = 0; i < MAX_ENTITIES; i++) {
         entity = get_entity_by_index(i);
 
-        if (entity == NULL || (entity->flags & (ENTITY_FLAGS_SKIP_UPDATE | ENTITY_FLAGS_DISABLE_COLLISION))) {
+        if (entity == NULL || (entity->flags & (ENTITY_FLAG_SKIP_UPDATE | ENTITY_FLAG_DISABLE_COLLISION))) {
             continue;
         }
 

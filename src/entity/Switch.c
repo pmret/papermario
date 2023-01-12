@@ -438,7 +438,7 @@ void entity_base_switch_init(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     SwitchData* data = entity->dataBuf.swtch;
 
-    playerStatus->animFlags |= PA_FLAGS_MAP_HAS_SWITCH;
+    playerStatus->animFlags |= PA_FLAG_MAP_HAS_SWITCH;
     data->baseScale.x = 1.0f;
     data->baseScale.y = 1.0f;
     data->baseScale.z = 1.0f;
@@ -456,7 +456,7 @@ void entity_BlueSwitch_init(Entity* entity) {
     if (CreateEntityVarArgBuffer[0] == REFLECTED_SWITCH_HIDDEN) {
         if (SwitchToLink != NULL) {
             data->linkedSwitch = SwitchToLink;
-            entity->flags |= ENTITY_FLAGS_HIDDEN;
+            entity->flags |= ENTITY_FLAG_HIDDEN;
             return;
         }
     } else {
@@ -494,7 +494,7 @@ EntityScript Entity_HugeBlueSwitch_Script = {
     es_Call(entity_base_switch_start_bound_script)
     es_Call(entity_base_switch_anim_init)
     es_SetCallback(entity_base_switch_animate_scale, 0)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
@@ -504,7 +504,7 @@ EntityScript Entity_BlueSwitch_Script = {
     es_Call(entity_base_switch_start_bound_script)
     es_Call(entity_base_switch_anim_init)
     es_SetCallback(entity_base_switch_animate_scale, 0)
-    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
@@ -526,7 +526,7 @@ EntityModelScript Entity_RedSwitch_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(E
 EntityModelScript Entity_GreenStompSwitch_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_GreenStompSwitch_Render, RENDER_MODE_SURFACE_OPA);
 
 EntityBlueprint Entity_RedSwitch = {
-    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA,
+    .flags = ENTITY_FLAG_8000 | ENTITY_FLAG_ALWAYS_FACE_CAMERA,
     .typeDataSize = sizeof(SwitchData),
     .renderCommandList = Entity_RedSwitch_RenderScript,
     .modelAnimationNodes = 0,
@@ -539,7 +539,7 @@ EntityBlueprint Entity_RedSwitch = {
 };
 
 EntityBlueprint Entity_BlueSwitch = {
-    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
+    .flags = ENTITY_FLAG_8000 | ENTITY_FLAG_ALWAYS_FACE_CAMERA | ENTITY_FLAG_SQUARE_SHADOW | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_HAS_DYNAMIC_SHADOW,
     .typeDataSize = sizeof(SwitchData),
     .renderCommandList = Entity_BlueSwitch_RenderScript,
     .modelAnimationNodes = 0,
@@ -552,7 +552,7 @@ EntityBlueprint Entity_BlueSwitch = {
 };
 
 EntityBlueprint Entity_HugeBlueSwitch = {
-    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
+    .flags = ENTITY_FLAG_8000 | ENTITY_FLAG_ALWAYS_FACE_CAMERA | ENTITY_FLAG_SQUARE_SHADOW | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_HAS_DYNAMIC_SHADOW,
     .typeDataSize = sizeof(SwitchData),
     .renderCommandList = Entity_HugeBlueSwitch_RenderScript,
     .modelAnimationNodes = 0,
@@ -565,7 +565,7 @@ EntityBlueprint Entity_HugeBlueSwitch = {
 };
 
 EntityBlueprint Entity_GreenStompSwitch = {
-    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_4000,
+    .flags = ENTITY_FLAG_8000 | ENTITY_FLAG_4000,
     .typeDataSize = sizeof(SwitchData),
     .renderCommandList = Entity_GreenStompSwitch_RenderScript,
     .modelAnimationNodes = 0,

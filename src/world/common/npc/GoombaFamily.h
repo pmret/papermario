@@ -7,7 +7,7 @@
 
 #define GOOMPA_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
@@ -34,7 +34,7 @@
 
 #define GOOMA_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
@@ -61,7 +61,7 @@
 
 #define GOOMPAPA_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
@@ -88,7 +88,7 @@
 
 #define GOOMAMA_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
@@ -115,7 +115,7 @@
 
 #define GOOMBARIO_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
@@ -142,7 +142,7 @@
 
 #define GOOMBARIA_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }

@@ -93,7 +93,7 @@ ApiStatus func_80240774_AF3414(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[CAM_DEFAULT];
 
     if (isInitialCall) {
-        camera->flags |= CAMERA_FLAGS_SHAKING;
+        camera->flags |= CAMERA_FLAG_SHAKING;
         script->functionTempF[0] = 0.0f;
     }
 

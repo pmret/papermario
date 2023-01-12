@@ -16,7 +16,7 @@ EvtScript N(EVS_NpcDefeat_MontyMole_Stone) = {
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             EVT_CALL(OnPlayerFled, 1)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_FLED, 1)
+            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN
@@ -125,9 +125,9 @@ NpcSettings N(NpcSettings_MontyMole_Stone) = {
     .settings = &N(NpcSettings_MontyMole_Stone), \
     .pos = { NPC_DISPOSE_LOCATION }, \
     .yaw = 90, \
-    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_800000, \
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_800000, \
     .drops = { \
-        .dropFlags = NPC_DROP_FLAGS_80, \
+        .dropFlags = NPC_DROP_FLAG_80, \
         .heartDrops  = NO_DROPS, \
         .flowerDrops = NO_DROPS, \
     }, \

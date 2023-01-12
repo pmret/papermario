@@ -5,7 +5,7 @@
 
 #define TIK_BUZZY_BEETLE_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 5, \
     .itemDrops = { \
         { ITEM_SUPER_SODA, 10, 0 }, \
@@ -18,7 +18,7 @@
 
 #define ISK_BUZZY_BEETLE_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = GENEROUS_HEART_DROPS(2), \
     .flowerDrops = STANDARD_FLOWER_DROPS(2), \
     .minCoinBonus = 1, \
@@ -48,7 +48,7 @@
 
 #define SPIKE_TOP_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 5, \
     .itemDrops = { \
         { ITEM_SUPER_SODA, 10, 0 }, \
@@ -81,7 +81,7 @@
 
 #define BONY_BEETLE_DROPS_ALT \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 5, \
     .itemDrops = { \
         { ITEM_SUPER_SHROOM, 10, 0 }, \
@@ -94,7 +94,7 @@
 
 #define BONY_BEETLE_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 5, \
     .itemDrops = { \
         { ITEM_SUPER_SHROOM, 10, 0 }, \

@@ -47,7 +47,7 @@ void handle_floor_behavior(void) {
         colliderType = D_80109480;
     }
 
-    if (playerStatus->actionState == ACTION_STATE_LAND && playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+    if (playerStatus->actionState == ACTION_STATE_LAND && playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
         D_8010CFF4 = D_8010CFF0;
     }
 
@@ -87,7 +87,7 @@ void surface_standard_behavior(void) {
     }
 
     if (playerStatus->actionState == ACTION_STATE_LAND &&
-        (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) &&
+        (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) &&
         D_8010CFF4 >= 10)
     {
         x = playerStatus->position.x;
@@ -100,7 +100,7 @@ void surface_standard_behavior(void) {
 
         }
     } else if (
-        (playerStatus->actionState == ACTION_STATE_SPIN_POUND || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) && (playerStatus->flags & PS_FLAGS_SPECIAL_LAND))
+        (playerStatus->actionState == ACTION_STATE_SPIN_POUND || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) && (playerStatus->flags & PS_FLAG_SPECIAL_LAND))
     {
         x = playerStatus->position.x;
         y = playerStatus->position.y + 0.0f;
@@ -220,8 +220,8 @@ void surface_cloud_behavior(void) {
 
     D_801094A0 += 0.1f;
 
-    if (((playerStatus->actionState == ACTION_STATE_LAND && (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED)) ||
-        ((playerStatus->actionState == ACTION_STATE_SPIN_POUND || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) && (playerStatus->flags & PS_FLAGS_SPECIAL_LAND))) &&
+    if (((playerStatus->actionState == ACTION_STATE_LAND && (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED)) ||
+        ((playerStatus->actionState == ACTION_STATE_SPIN_POUND || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) && (playerStatus->flags & PS_FLAG_SPECIAL_LAND))) &&
         D_8010CFF4 >= 10)
     {
         fx_cloud_puff(
@@ -273,7 +273,7 @@ void surface_snow_behavior(void) {
           playerStatus->actionState == ACTION_STATE_RUN ||
          (playerStatus->actionState == ACTION_STATE_SPIN && playerStatus->actionSubstate == 0) ||
         ((playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_IDLE)
-            && playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED))
+            && playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED))
     ) {
         D_801094A4 = 4;
         return;
@@ -301,7 +301,7 @@ void surface_hedges_behavior(void) {
           playerStatus->actionState == ACTION_STATE_RUN ||
          (playerStatus->actionState == ACTION_STATE_SPIN && playerStatus->actionSubstate == 0) ||
         ((playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_IDLE)
-            && playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED))
+            && playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED))
     ) {
         D_801094AC = 4;
         return;
@@ -327,7 +327,7 @@ void surface_water_behavior(void) {
           playerStatus->actionState == ACTION_STATE_RUN ||
          (playerStatus->actionState == ACTION_STATE_SPIN && playerStatus->actionSubstate == 0) ||
         ((playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_IDLE)
-            && playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED))
+            && playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED))
     ) {
         D_801094AE = 4;
         return;

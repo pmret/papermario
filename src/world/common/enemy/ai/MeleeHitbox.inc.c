@@ -120,16 +120,16 @@ ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
     hitboxEnemy->unk_118 = 0.0001f;
     #endif
 
-    if (isInitialCall || (hitboxEnemy->aiFlags & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (hitboxEnemy->aiFlags & ENEMY_AI_FLAG_4)) {
         script->functionTemp[0] = 0;
         hitboxNpc->duration = 0;
         hitboxNpc->flags |= (NPC_FLAG_2 | NPC_FLAG_100);
-        hitboxEnemy->flags |= ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000;
+        hitboxEnemy->flags |= ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000;
         hitboxNpc->pos.x = NPC_DISPOSE_POS_X;
         hitboxNpc->pos.y = NPC_DISPOSE_POS_Y;
         hitboxNpc->pos.z = NPC_DISPOSE_POS_Z;
-        if (hitboxEnemy->aiFlags & ENEMY_AI_FLAGS_4) {
-            hitboxEnemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+        if (hitboxEnemy->aiFlags & ENEMY_AI_FLAG_4) {
+            hitboxEnemy->aiFlags &= ~ENEMY_AI_FLAG_4;
         }
     }
 
@@ -156,7 +156,7 @@ ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
                 hitboxEnemy->unk_10.z = hitboxNpc->pos.z;
 
                 hitboxNpc->yaw = atan2(hitboxNpc->pos.x, hitboxNpc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-                hitboxEnemy->flags &= ~(ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000);
+                hitboxEnemy->flags &= ~(ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000);
                 hitboxNpc->duration = 0;
                 script->functionTemp[0] = 1;
             }
@@ -169,7 +169,7 @@ ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
                 hitboxEnemy->unk_07 = 0;
             }
             if (baseEnemy->AI_VAR_ATTACK_STATE == MELEE_HITBOX_STATE_POST) {
-                hitboxEnemy->flags |= ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000;
+                hitboxEnemy->flags |= ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000;
                 hitboxNpc->pos.x = 0.0f;
                 hitboxNpc->pos.y = -1000.0f;
                 hitboxNpc->pos.z = 0.0f;

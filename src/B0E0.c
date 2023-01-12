@@ -40,7 +40,7 @@ void update_camera_mode_unused(Camera* camera) {
         camera->lookAt_obj.z = camera->lookAt_obj_target.z;
     }
 
-    if (!(playerStatus->flags & (PS_FLAGS_FALLING | PS_FLAGS_JUMPING))) {
+    if (!(playerStatus->flags & (PS_FLAG_FALLING | PS_FLAG_JUMPING))) {
         camera->lookAt_obj_target.y = playerStatus->position.y + 60.0f;
     }
 
@@ -784,14 +784,14 @@ void update_camera_zone_interp(Camera* camera) {
         camera->unk_498 = 1.0f;
     }
 
-    if (camera->moveFlags & CAMERA_MOVE_FLAGS_4) {
+    if (camera->moveFlags & CAMERA_MOVE_FLAG_4) {
         camera->unk_498 += 0.3;
         if (camera->unk_498 >= 1.0) {
             camera->unk_498 = 1.0f;
         }
     }
 
-    if (!(camera->moveFlags & CAMERA_MOVE_FLAGS_2)) {
+    if (!(camera->moveFlags & CAMERA_MOVE_FLAG_2)) {
         camera->savedTargetY += (camera->unk_494 - camera->savedTargetY) * camera->unk_498;
     }
 
@@ -1024,7 +1024,7 @@ void update_camera_zone_interp(Camera* camera) {
     cosViewPitch = cos_deg(blendedCamSettings.boomPitch + D_800A08DC);
     sinViewPitch = sin_deg(blendedCamSettings.boomPitch + D_800A08DC);
 
-    if (!(camera->moveFlags & CAMERA_MOVE_FLAGS_2)) {
+    if (!(camera->moveFlags & CAMERA_MOVE_FLAG_2)) {
         camera->lookAt_eye.y = blendedCamSettings.pos.y + (blendedCamSettings.boomLength * sinViewPitch);
     }
 
@@ -1040,7 +1040,7 @@ void update_camera_zone_interp(Camera* camera) {
     }
 
     temp_f8_2 = blendedCamSettings.pos.y - camera->lookAt_eye.y;
-    if (!(camera->moveFlags & CAMERA_MOVE_FLAGS_2)) {
+    if (!(camera->moveFlags & CAMERA_MOVE_FLAG_2)) {
         camera->lookAt_obj.y = camera->lookAt_eye.y + ((dist * sinViewPitch) + (temp_f8_2 * cosViewPitch));
     }
     temp_f4_4 = (dist * cosViewPitch) - (temp_f8_2 * sinViewPitch);

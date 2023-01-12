@@ -26,7 +26,7 @@ API_CALLABLE(N(AdjustFog)) {
             Model* mdl = get_model_from_list_index(treeIndex);
             set_mdl_custom_gfx_set(mdl, -1, FOG_MODE_3);
             if (mode) {
-                mdl->flags &= ~MODEL_FLAGS_ENABLED;
+                mdl->flags &= ~MODEL_FLAG_ENABLED;
             }
         }
         script->functionTemp[0] = duration;
@@ -47,7 +47,7 @@ API_CALLABLE(N(AdjustFog)) {
             Model* mdl = get_model_from_list_index(treeIndex);
             set_mdl_custom_gfx_set(mdl, -1, FOG_MODE_0);
             if (!mode) {
-                mdl->flags |= MODEL_FLAGS_ENABLED;
+                mdl->flags |= MODEL_FLAG_ENABLED;
             }
         }
         return ApiStatus_DONE1;

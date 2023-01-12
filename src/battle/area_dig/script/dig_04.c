@@ -10,7 +10,7 @@ ApiStatus func_802187F0_6DE5B0(Evt* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
     SelectableTarget* selectableTarget;
 
-    battleStatus->moveCategory = 2;
+    battleStatus->moveCategory = BTL_MENU_TYPE_ITEM;
     battleStatus->selectedItemID = ITEM_THUNDER_RAGE;
     selectedItemID = battleStatus->selectedItemID;
     battleStatus->selectedMoveID = 0;

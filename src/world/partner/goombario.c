@@ -235,11 +235,11 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
         D_802BDF64 = 0;
         D_802BDF30 = 0;
         D_802BDF34 = 0;
-        if (playerStatus->animFlags & PA_FLAGS_SPEECH_PROMPT_AVAILABLE) {
+        if (playerStatus->animFlags & PA_FLAG_SPEECH_PROMPT_AVAILABLE) {
             D_802BDF30 = 1;
             D_802BDF38 = D_802B79A8_E21858->unk_00;
         }
-        if (playerStatus->animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) {
+        if (playerStatus->animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) {
             D_802BDF34 = 1;
         }
         script->functionTemp[0] = 40;
@@ -272,7 +272,7 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
             break;
         case 0:
             set_time_freeze_mode(1);
-            playerStatus->flags &= ~PS_FLAGS_HAS_CONVERSATION_NPC;
+            playerStatus->flags &= ~PS_FLAG_HAS_CONVERSATION_NPC;
             goombario->currentAnim = 0x010001;
             goombario->yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + playerStatus->spriteFacingAngle - 90.0f);
             gPartnerActionStatus.partnerActionState = 1;

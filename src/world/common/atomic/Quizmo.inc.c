@@ -151,8 +151,8 @@ ApiStatus N(Quizmo_HideWorld)(Evt* script, s32 isInitialCall) {
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* itemEntity = get_item_entity(i);
 
-            if (itemEntity != NULL && itemEntity->flags & ITEM_ENTITY_FLAGS_10) {
-                itemEntity->flags |= ITEM_ENTITY_FLAGS_8000000;
+            if (itemEntity != NULL && itemEntity->flags & ITEM_ENTITY_FLAG_10) {
+                itemEntity->flags |= ITEM_ENTITY_FLAG_8000000;
             }
         }
 
@@ -205,8 +205,8 @@ ApiStatus N(Quizmo_FadeInWorld)(Evt* script, s32 isInitialCall) {
 
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* entity = get_item_entity(i);
-            if (entity != NULL && entity->flags & ITEM_ENTITY_FLAGS_10) {
-                entity->flags &= ~ITEM_ENTITY_FLAGS_8000000;
+            if (entity != NULL && entity->flags & ITEM_ENTITY_FLAG_10) {
+                entity->flags &= ~ITEM_ENTITY_FLAG_8000000;
             }
         }
 
@@ -278,8 +278,8 @@ ApiStatus N(Quizmo_DestroyEffects)(Evt* script, s32 isInitialCall) {
     QuizmoStageFXData* stageData;
 
     if (isInitialCall) {
-        N(Quizmo_AudienceEffect)->flags |= EFFECT_INSTANCE_FLAGS_10;
-        N(Quizmo_VannaTEffect)->flags |= EFFECT_INSTANCE_FLAGS_10;
+        N(Quizmo_AudienceEffect)->flags |= EFFECT_INSTANCE_FLAG_10;
+        N(Quizmo_VannaTEffect)->flags |= EFFECT_INSTANCE_FLAG_10;
     }
 
     stageData = N(Quizmo_StageEffect)->data.quizmoStage;

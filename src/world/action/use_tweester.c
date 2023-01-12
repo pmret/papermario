@@ -17,11 +17,11 @@ void action_update_use_tweester(void) {
     Entity* entity;
 
     entity = TweesterTouchingPlayer;
-    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
         disable_player_static_collisions();
         disable_player_input();
-        playerStatus->flags |= (PS_FLAGS_ROTATION_LOCKED | PS_FLAGS_FLYING);
+        playerStatus->flags |= (PS_FLAG_ROTATION_LOCKED | PS_FLAG_FLYING);
         suggest_player_anim_clearUnkFlag(ANIM_Mario_8001F);
         playerStatus->actionSubstate = SUBSTATE_LAUNCH;
         mem_clear(PlayerTweesterPhysics, sizeof(*PlayerTweesterPhysics));
@@ -71,7 +71,7 @@ void action_update_use_tweester(void) {
             playerStatus->blinkTimer = 50;
             enable_player_static_collisions();
             enable_player_input();
-            playerStatus->flags &= ~(PS_FLAGS_ROTATION_LOCKED | PS_FLAGS_FLYING);
+            playerStatus->flags &= ~(PS_FLAG_ROTATION_LOCKED | PS_FLAG_FLYING);
             set_action_state(ACTION_STATE_IDLE);
             break;
     }

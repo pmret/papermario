@@ -25,7 +25,7 @@ API_CALLABLE(N(func_80240000_9BD660)) {
 }
 
 EvtScript N(EVS_NpcAuxAI_BillBlaster) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_200000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_200000, 1)
     EVT_RETURN
     EVT_END
 };
@@ -100,7 +100,7 @@ EvtScript N(D_80240B80_9BE1E0) = {
             EVT_CALL(DoNpcDefeat)
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_FLED, 1)
+            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN
@@ -389,7 +389,7 @@ EvtScript N(EVS_NpcAI_BillBlaster) = {
 };
 
 EvtScript N(EVS_NpcAI_BulletBill) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_200000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_200000, 1)
     EVT_LABEL(1)
         EVT_CALL(SetSelfVar, 0, 0)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
@@ -470,7 +470,7 @@ NpcSettings N(NpcSettings_KoopaBros_Red) = {
     .level = 99,
     .otherAI = &N(EVS_NpcAuxAI_KoopaBros_Red),
     .ai = &N(EVS_NpcAI_KoopaBros_Red),
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
 };
 
 NpcSettings N(NpcSettings_KoopaBros_Black) = {
@@ -480,7 +480,7 @@ NpcSettings N(NpcSettings_KoopaBros_Black) = {
     .level = 99,
     .otherAI = &N(EVS_NpcAuxAI_KoopaBros_Black),
     .ai = &N(EVS_NpcAI_KoopaBros_Black),
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
 };
 
 NpcSettings N(NpcSettings_KoopaBros_Yellow) = {
@@ -490,7 +490,7 @@ NpcSettings N(NpcSettings_KoopaBros_Yellow) = {
     .level = 99,
     .otherAI = &N(EVS_NpcAuxAI_KoopaBros_Yellow),
     .ai = &N(EVS_NpcAI_KoopaBros_Yellow),
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
 };
 
 NpcSettings N(NpcSettings_KoopaBros_Green) = {
@@ -500,7 +500,7 @@ NpcSettings N(NpcSettings_KoopaBros_Green) = {
     .level = 99,
     .otherAI = &N(EVS_NpcAuxAI_KoopaBros_Green),
     .ai = &N(EVS_NpcAI_KoopaBros_Green),
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
 };
 
 NpcSettings N(NpcSettings_BillBlaster) = {
@@ -548,7 +548,7 @@ StaticNpc N(NpcData_BillBlasters)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { 1260.0f, 0.0f, -40.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000,
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_BillBlaster),
         .drops = BILL_BLASTER_NO_DROPS,
         .territory = {
@@ -570,7 +570,7 @@ StaticNpc N(NpcData_BillBlasters)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { 1275.0f, 0.0f, 5.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000,
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
         .drops = BILL_BLASTER_DROPS,
         .territory = {
             .wander = {
@@ -591,7 +591,7 @@ StaticNpc N(NpcData_BillBlasters)[] = {
         .settings = &N(NpcSettings_BillBlaster),
         .pos = { 1290.0f, 0.0f, 50.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000,
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
         .drops = BILL_BLASTER_NO_DROPS,
         .territory = {
             .wander = {
@@ -626,7 +626,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .settings = &N(NpcSettings_KoopaBros_Red),
         .pos = { 1590.0f, 60.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_1,
+        .flags = ENEMY_FLAG_1,
         .initVarCount = 1,
         .initVar = { .value = 0 },
     },
@@ -635,7 +635,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .settings = &N(NpcSettings_KoopaBros_Green),
         .pos = { 1590.0f, 60.0f, -10.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_1,
+        .flags = ENEMY_FLAG_1,
         .initVarCount = 1,
         .initVar = { .value = 0 },
     },
@@ -644,7 +644,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .settings = &N(NpcSettings_KoopaBros_Yellow),
         .pos = { 1605.0f, 60.0f, 5.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_1,
+        .flags = ENEMY_FLAG_1,
         .initVarCount = 1,
         .initVar = { .value = 0 },
     },
@@ -653,7 +653,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .settings = &N(NpcSettings_KoopaBros_Black),
         .pos = { 1620.0f, 60.0f, 20.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_1,
+        .flags = ENEMY_FLAG_1,
         .initVarCount = 1,
         .initVar = { .value = 0 },
     },
@@ -695,12 +695,12 @@ StaticNpc N(NpcData_BulletBill_Demo1) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { -100.0f, 11.0f, 50.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
     .init = &N(EVS_NpcInit_BulletBill_Demo),
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
         .itemDrops = {
             { ITEM_MUSHROOM, 10, 0 },
@@ -745,12 +745,12 @@ StaticNpc N(NpcData_BulletBill_Demo2) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { -150.0f, 11.0f, 5.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
     .init = &N(EVS_NpcInit_BulletBill_Demo),
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
         .itemDrops = {
             { ITEM_MUSHROOM, 10, 0 },
@@ -795,12 +795,12 @@ StaticNpc N(NpcData_BulletBill_Demo3) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { 120.0f, 11.0f, 50.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
     .init = &N(EVS_NpcInit_BulletBill_Demo),
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
         .itemDrops = {
             { ITEM_MUSHROOM, 10, 0 },
@@ -845,12 +845,12 @@ StaticNpc N(NpcData_BulletBill_Demo4) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { 330.0f, 11.0f, 5.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
     .init = &N(EVS_NpcInit_BulletBill_Demo),
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
         .itemDrops = {
             { ITEM_MUSHROOM, 10, 0 },
@@ -895,12 +895,12 @@ StaticNpc N(NpcData_BulletBill_Demo5) = {
     .settings = &N(NpcSettings_BulletBill),
     .pos = { 380.0f, 11.0f, -40.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
     .init = &N(EVS_NpcInit_BulletBill_Demo),
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .drops = {
-        .dropFlags = NPC_DROP_FLAGS_80,
+        .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
         .itemDrops = {
             { ITEM_MUSHROOM, 10, 0 },

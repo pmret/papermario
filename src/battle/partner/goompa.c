@@ -99,7 +99,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySound, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)

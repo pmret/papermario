@@ -278,7 +278,7 @@ void action_command_init_status(void) {
         actionCommandStatus->autoSucceed = TRUE;
     }
 
-    if (gBattleStatus.flags1 & BS_FLAGS1_1000) {
+    if (gBattleStatus.flags1 & BS_FLAGS1_AUTO_SUCCEED_ACTION) {
         actionCommandStatus->autoSucceed = TRUE;
         actionCommandStatus->showHud = FALSE;
     }

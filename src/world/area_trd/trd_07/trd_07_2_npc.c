@@ -20,7 +20,7 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
             EVT_CALL(OnPlayerFled, 0)
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAGS_FLED, 1)
+            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
     EVT_RETURN
@@ -28,7 +28,7 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
 };
 
 EvtScript N(EVS_NpcInit_KoopaTroopa) = {
-    EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAGS_800000)
+    EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_800000)
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_KoopaTroopa)))
     EVT_IF_EQ(GF_TRD07_Defeated_DungeonAmbush, TRUE)
         EVT_CALL(RemoveNpc, NPC_SELF)
@@ -42,7 +42,7 @@ StaticNpc N(NpcData_KoopaTroopa) = {
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { -75.0f, 0.0f, -30.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000,
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .init = &N(EVS_NpcInit_KoopaTroopa),
     .drops = KOOPA_TROOPA_DROPS,
     .territory = {
@@ -65,7 +65,7 @@ StaticNpc N(NpcData_ParaTroopa_01) = {
     .settings = &N(NpcSettings_ParaTroopa),
     .pos = { 0.0f, 50.0f, 30.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000,
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .init = &N(EVS_NpcInit_KoopaTroopa),
     .drops = PARATROOPA_DROPS,
     .territory = {
@@ -88,7 +88,7 @@ StaticNpc N(NpcData_ParaTroopa_02) = {
     .settings = &N(NpcSettings_ParaTroopa),
     .pos = { 75.0f, 50.0f, -30.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000,
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .init = &N(EVS_NpcInit_KoopaTroopa),
     .drops = PARATROOPA_DROPS,
     .territory = {

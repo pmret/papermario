@@ -3,7 +3,7 @@
 
 #define DARK_TROOPA_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 20, \
     .itemDrops = { \
         { ITEM_POW_BLOCK, 10, 0 }, \

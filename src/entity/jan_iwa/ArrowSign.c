@@ -39,7 +39,7 @@ void entity_ArrowSign_init(Entity* entity) {
 }
 
 s32 entity_ArrowSign_handle_collision(Entity* entity) {
-    if (!(gPlayerStatus.animFlags & PA_FLAGS_USING_WATT) &&
+    if (!(gPlayerStatus.animFlags & PA_FLAG_USING_WATT) &&
         (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_WALL)) {
         entity_start_script(entity);
     }
@@ -53,7 +53,7 @@ EntityScript Entity_ArrowSign_Script = {
 EntityModelScript Entity_ArrowSign_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_ArrowSign_Render, RENDER_MODE_SURFACE_OPA);
 
 EntityBlueprint Entity_ArrowSign = {
-    .flags = ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
+    .flags = ENTITY_FLAG_SQUARE_SHADOW | ENTITY_FLAG_400 | ENTITY_FLAG_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(ArrowSignData),
     .renderCommandList = Entity_ArrowSign_RenderScript,
     .modelAnimationNodes = 0,

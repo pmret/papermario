@@ -8,7 +8,7 @@ void N(appendGfx_shrunk_player)(void*);
 MAP_RODATA_PAD(2,unk);
 
 API_CALLABLE(N(CreateShrinkingWorker)) {
-    gPlayerStatus.animFlags |= PA_FLAGS_INVISIBLE;
+    gPlayerStatus.animFlags |= PA_FLAG_INVISIBLE;
     evt_set_variable(script, MV_DrawShinkingPlayerWorker, create_worker_world(NULL, N(render_shrunk_player)));
 
     return ApiStatus_DONE2;
@@ -16,7 +16,7 @@ API_CALLABLE(N(CreateShrinkingWorker)) {
 
 API_CALLABLE(N(DestroyShrinkingWorker)) {
     s32 index = evt_get_variable(script, MV_DrawShinkingPlayerWorker);
-    gPlayerStatus.animFlags &= ~PA_FLAGS_INVISIBLE;
+    gPlayerStatus.animFlags &= ~PA_FLAG_INVISIBLE;
     free_worker(index);
 
     return ApiStatus_DONE2;
@@ -55,7 +55,7 @@ void N(appendGfx_shrunk_player)(void* data) {
 
 EvtScript N(EVS_ShrinkPlayer) = {
     EVT_SETF(MV_PlayerShrinkScale, EVT_FLOAT(1.0))
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_TIME_STOPPED, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, TRUE)
     EVT_CALL(N(CreateShrinkingWorker))
     EVT_THREAD
         EVT_WAIT(8)
@@ -76,7 +76,7 @@ EvtScript N(EVS_ShrinkPlayer) = {
 
 EvtScript N(EVS_UnshrinkPlayer) = {
     EVT_SETF(MV_PlayerShrinkScale, EVT_FLOAT(0.2))
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_TIME_STOPPED, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, TRUE)
     EVT_CALL(N(CreateShrinkingWorker))
     EVT_THREAD
         EVT_CALL(MakeLerp, 20, 100, 40, EASING_QUADRATIC_OUT)
@@ -95,7 +95,7 @@ EvtScript N(EVS_UnshrinkPlayer) = {
 };
 
 EvtScript N(EVS_FinishUnshrinking) = {
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_TIME_STOPPED, FALSE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, FALSE)
     EVT_CALL(N(DestroyShrinkingWorker))
     EVT_RETURN
     EVT_END

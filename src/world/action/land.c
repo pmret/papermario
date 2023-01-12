@@ -17,17 +17,17 @@ void action_update_land(void) {
     s32 jumpInputCheck;
     AnimID anim;
 
-    if (playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) {
+    if (playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS) {
         action_update_peach_land();
         return;
     }
 
-    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+    if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(
-            PS_FLAGS_ACTION_STATE_CHANGED |
-            PS_FLAGS_SCRIPTED_FALL |
-            PS_FLAGS_ARMS_RAISED |
-            PS_FLAGS_AIRBORNE
+            PS_FLAG_ACTION_STATE_CHANGED |
+            PS_FLAG_SCRIPTED_FALL |
+            PS_FLAG_ARMS_RAISED |
+            PS_FLAG_AIRBORNE
         );
         playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
@@ -35,9 +35,9 @@ void action_update_land(void) {
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
 
-        if (playerStatus->animFlags & PA_FLAGS_8BIT_MARIO) {
+        if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
             anim = ANIM_Mario_90002;
-        } else if (!(playerStatus->animFlags & PA_FLAGS_USING_WATT)) {
+        } else if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
             anim = ANIM_Mario_10009;
         } else {
             anim = ANIM_Mario_6000B;
@@ -52,8 +52,8 @@ void action_update_land(void) {
         }
 
         collisionStatus->lastTouchedFloor = -1;
-        playerStatus->animFlags &= ~PA_FLAGS_INTERRUPT_SPIN;
-        camera->moveFlags &= ~CAMERA_MOVE_FLAGS_4;
+        playerStatus->animFlags &= ~PA_FLAG_INTERRUPT_SPIN;
+        camera->moveFlags &= ~CAMERA_MOVE_FLAG_4;
     }
     playerStatus->actionSubstate++; // SUBSTATE_DONE
     playerStatus->currentSpeed *= 0.6f;
@@ -79,17 +79,17 @@ void action_update_step_down_land(void) {
     f32 inputMoveMagnitude;
     f32 inputMoveAngle;
 
-    if (playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS) {
+    if (playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS) {
         action_update_peach_step_down_land();
         return;
     }
 
-    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
+    if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
          playerStatus->flags &= ~(
-            PS_FLAGS_ACTION_STATE_CHANGED |
-            PS_FLAGS_SCRIPTED_FALL |
-            PS_FLAGS_ARMS_RAISED |
-            PS_FLAGS_AIRBORNE
+            PS_FLAG_ACTION_STATE_CHANGED |
+            PS_FLAG_SCRIPTED_FALL |
+            PS_FLAG_ARMS_RAISED |
+            PS_FLAG_AIRBORNE
         );
         playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
@@ -123,12 +123,12 @@ void action_update_peach_land(void) {
     f32 inputMoveMagnitude;
     f32 inputMoveAngle;
 
-    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
         playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
         playerStatus->peakJumpTime = 0;
-        playerStatus->flags &= ~PS_FLAGS_AIRBORNE;
+        playerStatus->flags &= ~PS_FLAG_AIRBORNE;
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
 
@@ -167,12 +167,12 @@ void action_update_peach_step_down_land(void) {
     f32 inputMoveMagnitude;
     f32 inputMoveAngle;
 
-    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
         playerStatus->actionSubstate = SUBSTATE_INIT;
         playerStatus->timeInAir = 0;
         playerStatus->peakJumpTime = 0;
-        playerStatus->flags &= ~PS_FLAGS_AIRBORNE;
+        playerStatus->flags &= ~PS_FLAG_AIRBORNE;
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
 

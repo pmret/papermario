@@ -285,10 +285,10 @@ EvtScript N(MV_Scene_PlayerTossedOut) = {
 EvtScript N(EVS_Scene_UnusedTossOut) = {
     EVT_CALL(FadeOutMusic, 0, 500)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_FallBack)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, FALSE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, FALSE)
     EVT_CALL(EnableGroup, MODEL_hiru, FALSE)
     EVT_CALL(EnableGroup, MODEL_niwa, FALSE)
     EVT_CALL(EnableGroup, MODEL_jimidori, FALSE)

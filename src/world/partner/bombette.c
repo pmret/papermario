@@ -226,7 +226,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
 
     switch (evt->functionTemp[0]) {
         case 20:
-            if ((playerStatus->inputEnabledCounter != 0) || (playerStatus->flags & PS_FLAGS_JUMPING) || !(npc->flags & NPC_FLAG_1000)) {
+            if ((playerStatus->inputEnabledCounter != 0) || (playerStatus->flags & PS_FLAG_JUMPING) || !(npc->flags & NPC_FLAG_1000)) {
                 return ApiStatus_DONE2;
             }
             disable_player_input();
@@ -250,7 +250,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 evt->functionTemp[0] = 7;
                 break;
             }
-            if (playerStatus->flags & PS_FLAGS_JUMPING) {
+            if (playerStatus->flags & PS_FLAG_JUMPING) {
                 evt->functionTemp[0] = 7;
                 break;
             }
@@ -309,7 +309,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             evt->functionTemp[0] = 2;
             evt->functionTemp[1] = 50;
         case 2:
-            if ((playerStatus->animFlags & PA_FLAGS_INTERRUPT_USE_PARTNER) || (playerStatus->actionState == ACTION_STATE_HIT_FIRE || playerStatus->actionState == ACTION_STATE_KNOCKBACK)) {
+            if ((playerStatus->animFlags & PA_FLAG_INTERRUPT_USE_PARTNER) || (playerStatus->actionState == ACTION_STATE_HIT_FIRE || playerStatus->actionState == ACTION_STATE_KNOCKBACK)) {
                 evt->functionTemp[0] = 7;
                 break;
             }
@@ -403,7 +403,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             collisionStatus->bombetteExplosionPos.z = npc->pos.z;
             func_802BD100_317E50(npc);
             D_802BE928 = 1;
-            partnerActionStatus->partnerActionState = ACTION_STATE_RUN;
+            partnerActionStatus->partnerActionState = PARTNER_ACTION_BOMBETTE_2;
             evt->functionTemp[1] = 3;
             evt->functionTemp[0]++;
             break;
@@ -412,7 +412,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 evt->functionTemp[1]--;
                 break;
             }
-            partnerActionStatus->partnerActionState = ACTION_STATE_JUMP;
+            partnerActionStatus->partnerActionState = PARTNER_ACTION_BOMBETTE_3;
             D_802BE928 = 0;
             npc->jumpVelocity = ((playerStatus->position.y - npc->pos.y) / 20.0f) + 30.0;
             npc->moveSpeed = 0.8f;
@@ -505,7 +505,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 D_802BE92C = 0;
                 enable_player_input();
             }
-            partnerActionStatus->partnerActionState = ACTION_STATE_IDLE;
+            partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
             partnerActionStatus->actingPartner = PARTNER_NONE;
             npc->jumpVelocity = 0.0f;
             npc->pos.y = playerStatus->position.y;
@@ -621,14 +621,14 @@ void world_bombette_pre_battle(Npc* bombette) {
         }
 
         D_802BE928 = 0;
-        playerStatus->flags &= ~PS_FLAGS_JUMPING;
+        playerStatus->flags &= ~PS_FLAG_JUMPING;
         bombette->jumpVelocity = 0.0f;
         bombette->flags &= ~NPC_FLAG_JUMPING;
 
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(bombette);
 
-        bombetteActionStatus->partnerActionState = 0;
+        bombetteActionStatus->partnerActionState = PARTNER_ACTION_NONE;
         bombetteActionStatus->actingPartner = 0;
 
         bombette->pos.x = playerStatus->position.x;

@@ -1574,12 +1574,12 @@ ApiStatus GetBattleFlags(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetBattleFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode a0 = *args++;
+    Bytecode flagBits = *args++;
 
     if (evt_get_variable(script, *args)) {
-        gBattleStatus.flags1 |= a0;
+        gBattleStatus.flags1 |= flagBits;
     } else {
-        gBattleStatus.flags1 &= ~a0;
+        gBattleStatus.flags1 &= ~flagBits;
     }
 
     return ApiStatus_DONE2;
@@ -1592,14 +1592,14 @@ ApiStatus GetBattleFlags2(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetBattleFlagBits2(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode a0 = *args++;
+    Bytecode flagBits = *args++;
 
     if (evt_get_variable(script, *args)) {
         BattleStatus* battleStatus = &gBattleStatus;
-        battleStatus->flags2 |= a0;
+        battleStatus->flags2 |= flagBits;
     } else {
         BattleStatus* battleStatus = &gBattleStatus;
-        battleStatus->flags2 &= ~a0;
+        battleStatus->flags2 &= ~flagBits;
     }
 
     return ApiStatus_DONE2;
@@ -1608,14 +1608,14 @@ ApiStatus SetBattleFlagBits2(Evt* script, s32 isInitialCall) {
 ApiStatus SetActorFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 a1;
+    s32 flagBits;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    a1 = *args++;
-    get_actor(actorID)->flags = a1;
+    flagBits = *args++;
+    get_actor(actorID)->flags = flagBits;
 
     return ApiStatus_DONE2;
 }
@@ -1623,22 +1623,22 @@ ApiStatus SetActorFlags(Evt* script, s32 isInitialCall) {
 ApiStatus SetActorFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 a1;
-    s32 var1;
+    s32 flagBits;
+    s32 mode;
     Actor* actor;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    a1 = *args++;
-    var1 = evt_get_variable(script, *args++);
+    flagBits = *args++;
+    mode = evt_get_variable(script, *args++);
     actor = get_actor(actorID);
 
-    if (var1 != 0) {
-        actor->flags |= a1;
+    if (mode != 0) {
+        actor->flags |= flagBits;
     } else {
-        actor->flags &= ~a1;
+        actor->flags &= ~flagBits;
     }
 
     return ApiStatus_DONE2;
@@ -1647,15 +1647,15 @@ ApiStatus SetActorFlagBits(Evt* script, s32 isInitialCall) {
 ApiStatus GetActorFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 a1;
+    s32 outVar;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    a1 = *args++;
+    outVar = *args++;
 
-    evt_set_variable(script, a1, get_actor(actorID)->flags);
+    evt_set_variable(script, outVar, get_actor(actorID)->flags);
 
     return ApiStatus_DONE2;
 }
@@ -1663,7 +1663,7 @@ ApiStatus GetActorFlags(Evt* script, s32 isInitialCall) {
 ApiStatus SetPartFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 a1;
+    s32 flagBits;
     s32 partIndex;
 
     if (actorID == ACTOR_SELF) {
@@ -1671,9 +1671,9 @@ ApiStatus SetPartFlags(Evt* script, s32 isInitialCall) {
     }
 
     partIndex = evt_get_variable(script, *args++);
-    a1 = *args++;
+    flagBits = *args++;
 
-    get_actor_part(get_actor(actorID), partIndex)->flags = a1;
+    get_actor_part(get_actor(actorID), partIndex)->flags = flagBits;
 
     return ApiStatus_DONE2;
 }
@@ -1682,24 +1682,24 @@ ApiStatus SetPartFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
-    s32 bits;
+    s32 flagBits;
     s32 partIndex;
-    s32 cond;
+    s32 mode;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     partIndex = evt_get_variable(script, *args++);
-    bits = *args++;
-    cond = evt_get_variable(script, *args++);
+    flagBits = *args++;
+    mode = evt_get_variable(script, *args++);
 
     actorPart = get_actor_part(get_actor(actorID), partIndex);
 
-    if (cond != 0) {
-        actorPart->flags |= bits;
+    if (mode != 0) {
+        actorPart->flags |= flagBits;
     } else {
-        actorPart->flags &= ~bits;
+        actorPart->flags &= ~flagBits;
     }
 
     return ApiStatus_DONE2;
@@ -1709,18 +1709,17 @@ ApiStatus SetPartTargetFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
-    s32 flags;
+    s32 flagBits;
     s32 partIndex;
-    s32 cond;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     partIndex = evt_get_variable(script, *args++);
-    flags = *args++;
+    flagBits = *args++;
 
-    get_actor_part(get_actor(actorID), partIndex)->targetFlags = flags;
+    get_actor_part(get_actor(actorID), partIndex)->targetFlags = flagBits;
 
     return ApiStatus_DONE2;
 }
@@ -1730,23 +1729,23 @@ ApiStatus SetPartTargetFlagBits(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 partIndex;
-    s32 bits;
-    s32 cond;
+    s32 flagBits;
+    s32 mode;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     partIndex = evt_get_variable(script, *args++);
-    bits = *args++;
-    cond = evt_get_variable(script, *args++);
+    flagBits = *args++;
+    mode = evt_get_variable(script, *args++);
 
     actorPart = get_actor_part(get_actor(actorID), partIndex);
 
-    if (cond != 0) {
-        actorPart->targetFlags |= bits;
+    if (mode != 0) {
+        actorPart->targetFlags |= flagBits;
     } else {
-        actorPart->targetFlags &= ~bits;
+        actorPart->targetFlags &= ~flagBits;
     }
 
     return ApiStatus_DONE2;
@@ -1757,16 +1756,16 @@ ApiStatus GetPartFlags(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     ActorPart* actorPart;
-    s32 a2;
+    s32 outVar;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     partIndex = evt_get_variable(script, *args++);
-    a2 = *args++;
+    outVar = *args++;
 
-    evt_set_variable(script, a2, get_actor_part(get_actor(actorID), partIndex)->flags);
+    evt_set_variable(script, outVar, get_actor_part(get_actor(actorID), partIndex)->flags);
 
     return ApiStatus_DONE2;
 }
@@ -1776,16 +1775,16 @@ ApiStatus GetPartTargetFlags(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     ActorPart* actorPart;
-    s32 a2;
+    s32 outVar;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     partIndex = evt_get_variable(script, *args++);
-    a2 = *args++;
+    outVar = *args++;
 
-    evt_set_variable(script, a2, get_actor_part(get_actor(actorID), partIndex)->targetFlags);
+    evt_set_variable(script, outVar, get_actor_part(get_actor(actorID), partIndex)->targetFlags);
 
     return ApiStatus_DONE2;
 }
@@ -1794,18 +1793,17 @@ ApiStatus SetPartEventFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
-    s32 flags;
+    s32 flagBits;
     s32 partIndex;
-    s32 cond;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     partIndex = evt_get_variable(script, *args++);
-    flags = *args++;
+    flagBits = *args++;
 
-    get_actor_part(get_actor(actorID), partIndex)->eventFlags = flags;
+    get_actor_part(get_actor(actorID), partIndex)->eventFlags = flagBits;
 
     return ApiStatus_DONE2;
 }
@@ -1815,23 +1813,23 @@ ApiStatus SetPartEventBits(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 partIndex;
-    s32 bits;
-    s32 cond;
+    s32 flagBits;
+    s32 mode;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     partIndex = evt_get_variable(script, *args++);
-    bits = *args++;
-    cond = evt_get_variable(script, *args++);
+    flagBits = *args++;
+    mode = evt_get_variable(script, *args++);
 
     actorPart = get_actor_part(get_actor(actorID), partIndex);
 
-    if (cond != 0) {
-        actorPart->eventFlags |= bits;
+    if (mode != 0) {
+        actorPart->eventFlags |= flagBits;
     } else {
-        actorPart->eventFlags &= ~bits;
+        actorPart->eventFlags &= ~flagBits;
     }
 
     return ApiStatus_DONE2;
@@ -1842,16 +1840,16 @@ ApiStatus GetPartEventFlags(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     ActorPart* actorPart;
-    s32 a2;
+    s32 outVar;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     partIndex = evt_get_variable(script, *args++);
-    a2 = *args++;
+    outVar = *args++;
 
-    evt_set_variable(script, a2, get_actor_part(get_actor(actorID), partIndex)->eventFlags);
+    evt_set_variable(script, outVar, get_actor_part(get_actor(actorID), partIndex)->eventFlags);
 
     return ApiStatus_DONE2;
 }
@@ -1860,18 +1858,17 @@ ApiStatus func_8026D51C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
-    s32 flags;
+    s32 flagBits;
     s32 partIndex;
-    s32 cond;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     partIndex = evt_get_variable(script, *args++);
-    flags = *args++;
+    flagBits = *args++;
 
-    get_actor_part(get_actor(actorID), partIndex)->partFlags3 = flags;
+    get_actor_part(get_actor(actorID), partIndex)->partFlags3 = flagBits;
 
     return ApiStatus_DONE2;
 }
@@ -1881,23 +1878,23 @@ ApiStatus func_8026D5A4(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 partIndex;
-    s32 bits;
-    s32 cond;
+    s32 flagBits;
+    s32 mode;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     partIndex = evt_get_variable(script, *args++);
-    bits = *args++;
-    cond = evt_get_variable(script, *args++);
+    flagBits = *args++;
+    mode = evt_get_variable(script, *args++);
 
     actorPart = get_actor_part(get_actor(actorID), partIndex);
 
-    if (cond != 0) {
-        actorPart->partFlags3 |= bits;
+    if (mode != 0) {
+        actorPart->partFlags3 |= flagBits;
     } else {
-        actorPart->partFlags3 &= ~bits;
+        actorPart->partFlags3 &= ~flagBits;
     }
 
     return ApiStatus_DONE2;

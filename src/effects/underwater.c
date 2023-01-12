@@ -68,8 +68,8 @@ void underwater_update(EffectInstance* effect) {
     s32 i;
     s32 j;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
         data->unk_10 = 32;
     }
 

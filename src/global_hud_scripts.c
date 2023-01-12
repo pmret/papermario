@@ -1697,9 +1697,9 @@ HudScript HES_GreenArrowDown = {
     hs_SetVisible
     hs_SetCustomSize(16, 8)
     hs_Loop
-        hs_ClearFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_ClearFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(9, ui_green_arrow_down)
-        hs_SetFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_SetFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(6, ui_green_arrow_down)
     hs_Restart
     hs_End
@@ -1709,9 +1709,9 @@ HudScript HES_GreenArrowUp = {
     hs_SetVisible
     hs_SetCustomSize(16, 8)
     hs_Loop
-        hs_ClearFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_ClearFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(9, ui_green_arrow_up)
-        hs_SetFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_SetFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(6, ui_green_arrow_up)
     hs_Restart
     hs_End
@@ -1975,9 +1975,9 @@ HudScript HES_Peril = {
     hs_SetTileSize(HUD_ELEMENT_SIZE_40x16)
     hs_Loop
         hs_PlaySound(SOUND_PERIL)
-        hs_ClearFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_ClearFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(15, ui_battle_status_peril)
-        hs_SetFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_SetFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(10, ui_battle_status_peril)
     hs_Restart
     hs_End
@@ -1988,9 +1988,9 @@ HudScript HES_Danger = {
     hs_SetTileSize(HUD_ELEMENT_SIZE_40x16)
     hs_Loop
         hs_PlaySound(SOUND_DANGER)
-        hs_ClearFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_ClearFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(15, ui_battle_status_danger)
-        hs_SetFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_SetFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(10, ui_battle_status_danger)
     hs_Restart
     hs_End
@@ -2000,9 +2000,9 @@ HudScript HES_Refund = {
     hs_SetVisible
     hs_SetTileSize(HUD_ELEMENT_SIZE_40x24)
     hs_Loop
-        hs_ClearFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_ClearFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(8, ui_battle_status_refund)
-        hs_SetFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_SetFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(4, ui_battle_status_refund)
     hs_Restart
     hs_End

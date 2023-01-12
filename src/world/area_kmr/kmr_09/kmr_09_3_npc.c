@@ -9,7 +9,7 @@ StaticNpc N(NpcData_Goomba_01) = {
     .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 200.0f, 0.0f, 24.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = GOOMBA_DROPS,
     .territory = {
         .wander = {
@@ -31,7 +31,7 @@ StaticNpc N(NpcData_Goomba_02) = {
     .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 250.0f, 0.0f, 35.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_2000,
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = GOOMBA_DROPS,
     .territory = {
         .wander = {
@@ -80,7 +80,7 @@ EvtScript N(EVS_OnReadBillboard) = {
 EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goomba_Still)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_20, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 1)
     EVT_LABEL(0)
     EVT_CALL(GetSelfVar, 0, LVar0)
     EVT_IF_EQ(LVar0, 0)
@@ -112,8 +112,8 @@ EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_NO_AI, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_20, 0)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_40000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 0)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_40000000, 1)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnReadBillboard)), TRIGGER_WALL_PRESS_A, COLLIDER_kan, 1, 0)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Goomba_Wander)))
     EVT_RETURN
@@ -132,7 +132,7 @@ StaticNpc N(NpcData_Goomba_Ambush) = {
     .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { -34.0f, 29.0f, -32.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Goomba_Ambush),
     .drops = GOOMBA_DROPS,
     .territory = {
@@ -155,7 +155,7 @@ StaticNpc N(NpcData_Paragoomba) = {
     .settings = &N(NpcSettings_Paragoomba_Wander),
     .pos = { 670.0f, 60.0f, 20.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = PARAGOOMBA_DROPS,
     .territory = {
         .wander = {

@@ -122,7 +122,7 @@ EvtScript N(EVS_NpcInteract_KoopaBros_01) = {
 };
 
 EvtScript N(EVS_NpcDefeat_KoopaBros_01) = {
-    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_2, TRUE)
+    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_2, TRUE)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcPos, NPC_KoopaBros_01, 0, -1000, 0)
     EVT_CALL(SetNpcFlagBits, NPC_KoopaBros_01, NPC_FLAG_2, FALSE)
@@ -293,7 +293,7 @@ NpcSettings N(NpcSettings_KoopaBros_01) = {
     .onHit = &N(EVS_NpcHit_KoopaBros_01),
     .aux = &N(EVS_NpcAux_KoopaBros_01),
     .onDefeat = &N(EVS_NpcDefeat_KoopaBros_01),
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
 NpcSettings N(NpcSettings_KoopaBros_02) = {
@@ -306,7 +306,7 @@ NpcSettings N(NpcSettings_KoopaBros_02) = {
     .onHit = &N(EVS_NpcHit_KoopaBros_02),
     .aux = &N(EVS_NpcAux_KoopaBros_02),
     .onDefeat = &N(EVS_NpcDefeat_KoopaBros_02),
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
 NpcSettings N(NpcSettings_KoopaBros_03) = {
@@ -319,7 +319,7 @@ NpcSettings N(NpcSettings_KoopaBros_03) = {
     .onHit = &N(EVS_NpcHit_KoopaBros_03),
     .aux = &N(EVS_NpcAux_KoopaBros_03),
     .onDefeat = &N(EVS_NpcDefeat_KoopaBros_03),
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
 NpcSettings N(NpcSettings_KoopaBros_04) = {
@@ -332,7 +332,7 @@ NpcSettings N(NpcSettings_KoopaBros_04) = {
     .onHit = &N(EVS_NpcHit_KoopaBros_04),
     .aux = &N(EVS_NpcAux_KoopaBros_04),
     .onDefeat = &N(EVS_NpcDefeat_KoopaBros_04),
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
 StaticNpc N(NpcData_KoopaBros_01)[] = {
@@ -341,9 +341,9 @@ StaticNpc N(NpcData_KoopaBros_01)[] = {
         .settings = &N(NpcSettings_KoopaBros_01),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_800000,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_800000,
         .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
@@ -371,9 +371,9 @@ StaticNpc N(NpcData_KoopaBros_01)[] = {
         .settings = &N(NpcSettings_KoopaBros_02),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_800000,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_800000,
         .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
@@ -401,9 +401,9 @@ StaticNpc N(NpcData_KoopaBros_01)[] = {
         .settings = &N(NpcSettings_KoopaBros_03),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_800000,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_800000,
         .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
@@ -431,9 +431,9 @@ StaticNpc N(NpcData_KoopaBros_01)[] = {
         .settings = &N(NpcSettings_KoopaBros_04),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_800000,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_800000,
         .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },

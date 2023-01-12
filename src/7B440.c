@@ -22,7 +22,7 @@ void update_player_input(void) {
     playerStatus->heldButtonsBuffer[inputBufPos] = playerStatus->heldButtons;
     playerStatus->inputBufPos = inputBufPos;
 
-    if (playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_NO_STATIC_COLLISION)) {
+    if (playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)) {
         playerStatus->stickAxis[0] = 0;
         playerStatus->stickAxis[1] = 0;
         playerStatus->currentButtons = 0;
@@ -30,8 +30,8 @@ void update_player_input(void) {
         playerStatus->heldButtons = 0;
     }
 
-    if (playerStatus->animFlags & PA_FLAGS_FORCE_USE_PARTNER) {
-        playerStatus->animFlags |= PA_FLAGS_PARTNER_USAGE_FORCED;
+    if (playerStatus->animFlags & PA_FLAG_FORCE_USE_PARTNER) {
+        playerStatus->animFlags |= PA_FLAG_PARTNER_USAGE_FORCED;
         playerStatus->pressedButtons |= 4;
     }
 }
@@ -67,7 +67,7 @@ void reset_player_status(void) {
     if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
         playerStatus->colliderHeight = 55;
         playerStatus->colliderDiameter = 38;
-        playerStatus->animFlags |= PA_FLAGS_USING_PEACH_PHYSICS;
+        playerStatus->animFlags |= PA_FLAG_USING_PEACH_PHYSICS;
 
         if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DISGUISED) {
             D_8010C92C = 2;

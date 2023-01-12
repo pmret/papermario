@@ -125,8 +125,8 @@ void snowman_doll_update(EffectInstance* effect) {
     s32 unk_14;
     s32 unk_58;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
         data->unk_10 = 16;
     }
 

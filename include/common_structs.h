@@ -852,8 +852,8 @@ typedef struct BattleStatus {
     /* 0x04B */ s8 unk_4B;
     /* 0x04C */ s8 unk_4C[16];
     /* 0x05C */ s8 unk_5C[16];
-    /* 0x06C */ s16 unk_6C;
-    /* 0x06E */ s16 unk_6E;
+    /* 0x06C */ s16 cancelTargetMenuSubstate; // might be more generally for returning from nested 'inner' state
+    /* 0x06E */ s16 acceptTargetMenuSubstate; // might be more generally for returning from nested 'inner' state
     /* 0x070 */ s16 menuDisableFlags; /* 1 = jump, 2 = hammer, 4 = items */
     /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
@@ -1637,9 +1637,9 @@ typedef struct CollisionStatus {
     /* 0x06 */ s16 floorBelow;
     /* 0x08 */ s16 currentCeiling; /* valid on touching with head */
     /* 0x0A */ s16 currentInspect; /* associated with TRIGGER_WALL_PRESS_A */
-    /* 0x0C */ s16 unk_0C; /* associated with TRIGGER_FLAGS_2000 */
-    /* 0x0E */ s16 unk_0E; /* associated with TRIGGER_FLAGS_4000 */
-    /* 0x10 */ s16 unk_10; /* associated with TRIGGER_FLAGS_8000 */
+    /* 0x0C */ s16 unk_0C; /* associated with TRIGGER_FLAG_2000 */
+    /* 0x0E */ s16 unk_0E; /* associated with TRIGGER_FLAG_4000 */
+    /* 0x10 */ s16 unk_10; /* associated with TRIGGER_FLAG_8000 */
     /* 0x12 */ s16 currentWall;
     /* 0x14 */ s16 lastWallHammered; /* valid when smashing */
     /* 0x16 */ s16 touchingWallTrigger; /* 0/1 */

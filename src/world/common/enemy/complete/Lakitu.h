@@ -3,7 +3,7 @@
 
 #define LAKITU_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 25, \
     .itemDrops = { \
         { ITEM_SUPER_SHROOM, 2, 0 }, \

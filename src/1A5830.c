@@ -458,10 +458,10 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         target->hpChangeCounter = 0;
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
             hitResult = HIT_RESULT_QUAKE_IMMUNE;
-            event = EVENT_UNKNOWN_TRIGGER;
+            event = EVENT_SCRIPTED_IMMUNE;
         } else {
             hitResult = HIT_RESULT_QUAKE_IMMUNE;
-            event = EVENT_UNKNOWN_TRIGGER;
+            event = EVENT_SCRIPTED_IMMUNE;
             if (target->currentHP <= 0) {
                 event = EVENT_DEATH;
             }
@@ -498,7 +498,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         if (event == EVENT_HIT_COMBO) {
             event = EVENT_HIT;
         }
-        if (event == EVENT_UNKNOWN_TRIGGER) {
+        if (event == EVENT_SCRIPTED_IMMUNE) {
             event = EVENT_IMMUNE;
         }
         if (target->currentHP <= 0 && event == EVENT_IMMUNE) {
@@ -531,7 +531,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                 if (event == EVENT_HIT_COMBO) {
                     event = EVENT_FLIP_TRIGGER;
                 }
-                if (event == EVENT_UNKNOWN_TRIGGER) {
+                if (event == EVENT_SCRIPTED_IMMUNE) {
                     event = EVENT_FLIP_TRIGGER;
                 }
             }
@@ -557,7 +557,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         if (event == EVENT_HIT) {
             event = EVENT_BLOCK;
         }
-        if (event == EVENT_UNKNOWN_TRIGGER) {
+        if (event == EVENT_SCRIPTED_IMMUNE) {
             event = EVENT_18;
         }
         if (event == EVENT_IMMUNE) {
@@ -627,7 +627,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                             }
 
                             if (statusInflicted) {
-                                if (event == EVENT_UNKNOWN_TRIGGER) {
+                                if (event == EVENT_SCRIPTED_IMMUNE) {
                                     event = EVENT_HIT_COMBO;
                                 }
                                 if (event == EVENT_IMMUNE) {
@@ -827,7 +827,7 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
         if (dispatchEvent == EVENT_HIT_COMBO) {
             dispatchEvent = EVENT_HIT;
         }
-        if (dispatchEvent == EVENT_UNKNOWN_TRIGGER) {
+        if (dispatchEvent == EVENT_SCRIPTED_IMMUNE) {
             dispatchEvent = EVENT_IMMUNE;
         }
     }

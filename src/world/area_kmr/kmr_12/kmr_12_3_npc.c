@@ -37,7 +37,7 @@ EvtScript N(EVS_NpcIdle_Goomba) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goomba_FakeMushroom)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_20, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 1)
     EVT_LABEL(0)
         EVT_CALL(GetSelfVar, 0, LVar0)
         EVT_WAIT(1)
@@ -73,8 +73,8 @@ EvtScript N(EVS_NpcIdle_Goomba) = {
     EVT_CALL(func_802CFD30, NPC_SELF, FOLD_TYPE_NONE, 0, 0, 0, 0)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40000 | NPC_FLAG_200000, FALSE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_20, 0)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_40000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 0)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_40000000, 1)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnReadBillboard)), TRIGGER_WALL_PRESS_A, COLLIDER_o78, 1, 0)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Goomba_Wander)))
     EVT_RETURN
@@ -92,7 +92,7 @@ StaticNpc N(NpcData_Goomba) = {
     .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { -33.0f, 30.0f, -25.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Goomba),
     .drops = GOOMBA_DROPS,
     .territory = {

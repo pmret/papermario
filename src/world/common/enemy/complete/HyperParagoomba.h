@@ -3,7 +3,7 @@
 
 #define HYPER_PARAGOOMBA_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 20, \
     .itemDrops = { \
         { ITEM_DRIED_SHROOM, 10, 0 }, \

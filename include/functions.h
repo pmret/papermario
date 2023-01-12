@@ -316,7 +316,7 @@ void btl_state_draw_begin_partner_turn(void);
 void btl_state_update_switch_to_partner(void);
 void btl_state_draw_switch_to_partner(void);
 void btl_state_update_9(void);
-void func_80243910(void);
+void btl_state_draw_9(void);
 void btl_state_update_prepare_menu(void);
 void btl_state_draw_prepare_menu(void);
 void btl_state_update_end_turn(void);

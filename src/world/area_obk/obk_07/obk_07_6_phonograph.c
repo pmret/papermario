@@ -204,13 +204,13 @@ void N(worker_update_phonograph_hud)(void) {
         case PHONOGRAPH_HUD_STATE_INIT:
             id = data->hudElemAButton;
             hud_element_set_alpha(id, 255);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             id = data->hudElemBlueMeter;
             hud_element_set_alpha(id, 255);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             id = data->hudElemOK;
             hud_element_set_alpha(id, 255);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             data->state = PHONOGRAPH_HUD_STATE_APPEAR;
             break;
         case PHONOGRAPH_HUD_STATE_APPEAR:
@@ -354,17 +354,17 @@ API_CALLABLE(N(CreatePhonographHudData)) {
     data->hudElemAButton = id = hud_element_create(&HES_AButton);
     hud_element_set_render_pos(id, data->hudBaseX, data->hudBaseY);
     hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     data->hudElemBlueMeter = id = hud_element_create(&HES_BlueMeter);
     hud_element_set_render_pos(id, data->hudBaseX, data->hudBaseY + 28);
     hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     data->hudElemOK = id = hud_element_create(&HES_RunAwayOK);
     hud_element_set_render_pos(id, data->hudBaseX, data->hudBaseY + 28);
     hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     return ApiStatus_DONE2;
 }
 

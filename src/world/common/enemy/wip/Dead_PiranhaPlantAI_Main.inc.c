@@ -25,21 +25,21 @@ ApiStatus N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     // Dead Func that doesn't seem to have an alive counterpart, probably because of the
     // difference in the Enemy and DeadEnemy struct.
     func_8004D8E0(enemy);
-    if (enemy->flags & ENEMY_FLAGS_100000) {
+    if (enemy->flags & ENEMY_FLAG_100000) {
         enemy->unk_114 = 10.0f;
         enemy->unk_118 = 0.7f;
     }
 
-    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAG_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         enemy->varTable[0] = 0;
 
-        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
         }
     }
 

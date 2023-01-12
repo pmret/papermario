@@ -430,7 +430,7 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
             return TRUE;
         }
 
-        if (flags & DRAW_FLAGS_ROTSCALE) {
+        if (flags & DRAW_FLAG_ROTSCALE) {
             quads = gBoxQuadBuffer[gBoxQuadIndex++];
             if (gBoxQuadIndex > 20) {
                 gBoxQuadIndex  = 0;
@@ -442,7 +442,7 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
         gDPSetBlendColor(gMasterGfxPos++, 0, 0, 0, 0);
         gDPSetFogColor(gMasterGfxPos++, 0, 0, 0, darkening);
         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_XLU_SURF2);
-        if (!(flags & DRAW_FLAGS_NO_CLIP)) {
+        if (!(flags & DRAW_FLAG_NO_CLIP)) {
             gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         }
 
@@ -487,7 +487,7 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
             guTranslateF(mtx2, -160.0f, -120.0f, -320.0f);
             guMtxCatF(mtx1, mtx2, mtx1);
             gSPClearGeometryMode(gMasterGfxPos++, G_CULL_BOTH | G_LIGHTING);
-            if (flags & DRAW_FLAGS_CULL_BACK) {
+            if (flags & DRAW_FLAG_CULL_BACK) {
                 gSPSetGeometryMode(gMasterGfxPos++, G_CULL_BACK);
             }
             guMtxF2L(mtx1, &gDisplayContext->matrixStack[gMatrixListPos]);
@@ -520,7 +520,7 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
                     break;
             }
 
-            if (flags & DRAW_FLAGS_ANIMATED_BACKGROUND) {
+            if (flags & DRAW_FLAG_ANIMATED_BACKGROUND) {
                 bgScrollOffsetY = (gGameStatusPtr->frameCounter * 4) & 0x1FF;
                 bgScrollOffsetX = 511 - bgScrollOffsetY;
                 gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE,

@@ -401,7 +401,7 @@ EvtScript N(usePower) = {
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(func_802A16F4_7907C4)
     EVT_ELSE
-        EVT_CALL(PlayerDamageEnemy, LVar0, 0, 65535, 0, 0, BS_FLAGS1_800 | BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(PlayerDamageEnemy, LVar0, 0, 65535, 0, 0, BS_FLAGS1_FORCE_HIT_IMMUNE | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_IF
     EVT_LABEL(1)
     EVT_WAIT(5)

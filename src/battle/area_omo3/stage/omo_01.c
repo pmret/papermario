@@ -51,7 +51,7 @@ ApiStatus N(update_model_uma)(Evt* script, s32 isInitialCall) {
         offsetY = SQ(rotZ) / 90.0f;
 
         model = get_model_from_list_index(get_model_list_index_from_tree_index(ptr->modelID));
-        model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED;
+        model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
         guTranslateF(mtx1, -ptr->offsetX, 0.0f, -ptr->offsetZ);
         guRotateF(mtx2, rotZ, 0.0f, 0.0f, 1.0f);
         guMtxCatF(mtx1, mtx2, model->transformMatrix);

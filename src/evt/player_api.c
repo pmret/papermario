@@ -44,7 +44,7 @@ ApiStatus DisablePlayerInput(Evt* script, s32 isInitialCall) {
         close_status_menu();
         func_800E984C();
         if (playerStatus->actionState == ACTION_STATE_SPIN) {
-            playerStatus->animFlags |= PA_FLAGS_INTERRUPT_SPIN;
+            playerStatus->animFlags |= PA_FLAG_INTERRUPT_SPIN;
         }
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
     } else {
@@ -252,12 +252,12 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
         }
 
         playerNpc->jumpVelocity = (playerNpc->jumpScale * (playerNpc->duration - 1) / 2) + (yTemp / playerNpc->duration);
-        playerStatus->flags |= PS_FLAGS_FLYING;
-        playerStatus->animFlags |= PA_FLAGS_NO_OOB_RESPAWN;
+        playerStatus->flags |= PS_FLAG_FLYING;
+        playerStatus->animFlags |= PA_FLAG_NO_OOB_RESPAWN;
 
         if (mode == 0) {
-            if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
-                if (!(playerStatus->animFlags & PA_FLAGS_USING_WATT)) {
+            if (!(playerStatus->animFlags & PA_FLAG_8BIT_MARIO)) {
+                if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
                     anim = ANIM_Mario_AnimMidairStill;
                 } else {
                     anim = ANIM_Mario_60009;
@@ -277,8 +277,8 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
     playerNpc->jumpVelocity -= playerNpc->jumpScale;
 
     if (mode == 0 && jumpVelocity > 0.0f && playerNpc->jumpVelocity <= 0.0f) {
-        if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
-            if (!(playerStatus->animFlags & PA_FLAGS_USING_WATT)) {
+        if (!(playerStatus->animFlags & PA_FLAG_8BIT_MARIO)) {
+            if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
                 anim = ANIM_Mario_AnimMidair;
             } else {
                 anim = ANIM_Mario_6000A;
@@ -299,12 +299,12 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
 
     playerNpc->duration--;
     if (playerNpc->duration == 0) {
-        playerStatus->flags &= ~PS_FLAGS_FLYING;
-        playerStatus->animFlags &= ~PA_FLAGS_NO_OOB_RESPAWN;
+        playerStatus->flags &= ~PS_FLAG_FLYING;
+        playerStatus->animFlags &= ~PA_FLAG_NO_OOB_RESPAWN;
 
         if (mode == 0) {
-            if (!(playerStatus->animFlags & PA_FLAGS_8BIT_MARIO)) {
-                if (!(playerStatus->animFlags & PA_FLAGS_USING_WATT)) {
+            if (!(playerStatus->animFlags & PA_FLAG_8BIT_MARIO)) {
+                if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
                     anim = ANIM_Mario_10009;
                 } else {
                     anim = ANIM_Mario_6000B;
@@ -527,13 +527,13 @@ ApiStatus UseEntryHeading(Evt *script, s32 isInitialCall) {
     gPlayerStatus.position.z = (entryZ - (var1 * cosTheta)) - (exitTangentFrac * sinTheta);
 
     script->varTableF[5] = dist2D(gPlayerStatus.position.x, gPlayerStatus.position.z, entryX, entryZ) / var2;
-    gPlayerStatus.flags |= PS_FLAGS_CAMERA_DOESNT_FOLLOW;
+    gPlayerStatus.flags |= PS_FLAG_CAMERA_DOESNT_FOLLOW;
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D2148(Evt* script, s32 isInitialCall) {
-    gPlayerStatus.flags &= ~PS_FLAGS_CAMERA_DOESNT_FOLLOW;
+    gPlayerStatus.flags &= ~PS_FLAG_CAMERA_DOESNT_FOLLOW;
     return ApiStatus_DONE2;
 }
 
@@ -568,8 +568,8 @@ ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
         script->varTable[3] = (playerStatus->position.z - (var1 * cosTheta)) - (exitTangentFrac * sinTheta);
         script->varTable[2] = (*mapSettings->entryList)[entryID].y;
         *varTableVar5 = var1 / 15;
-        playerStatus->animFlags |= PA_FLAGS_CHANGING_MAP;
-        playerStatus->flags |= PS_FLAGS_CAMERA_DOESNT_FOLLOW;
+        playerStatus->animFlags |= PA_FLAG_CHANGING_MAP;
+        playerStatus->flags |= PS_FLAG_CAMERA_DOESNT_FOLLOW;
         return ApiStatus_DONE2;
     }
 
@@ -623,7 +623,7 @@ ApiStatus WaitForPlayerMoveToComplete(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus WaitForPlayerInputEnabled(Evt* script, s32 isInitialCall) {
-    if (gPlayerStatus.flags & PS_FLAGS_INPUT_DISABLED) {
+    if (gPlayerStatus.flags & PS_FLAG_INPUT_DISABLED) {
         return ApiStatus_BLOCK;
     } else {
         return ApiStatus_DONE2;
@@ -753,9 +753,9 @@ ApiStatus DisablePulseStone(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (evt_get_variable(script, *script->ptrReadPos)) {
-        playerStatus->animFlags &= ~PA_FLAGS_USING_PULSE_STONE;
+        playerStatus->animFlags &= ~PA_FLAG_USING_PULSE_STONE;
     } else {
-        playerStatus->animFlags |= PA_FLAGS_USING_PULSE_STONE;
+        playerStatus->animFlags |= PA_FLAG_USING_PULSE_STONE;
     }
 
     return ApiStatus_DONE2;
@@ -779,14 +779,14 @@ ApiStatus GetPartnerInUse(Evt* script, s32 isInitialCall) {
 ApiStatus ForceUsePartner(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->animFlags |= PA_FLAGS_FORCE_USE_PARTNER;
+    playerStatus->animFlags |= PA_FLAG_FORCE_USE_PARTNER;
     return ApiStatus_DONE2;
 }
 
 ApiStatus InterruptUsePartner(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
+    playerStatus->animFlags |= PA_FLAG_INTERRUPT_USE_PARTNER;
     return ApiStatus_DONE2;
 }
 
@@ -797,13 +797,13 @@ ApiStatus Disable8bitMario(Evt* script, s32 isInitialCall) {
     if (evt_get_variable(script, *args)) {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
-        playerStatus->animFlags &= ~PA_FLAGS_8BIT_MARIO;
+        playerStatus->animFlags &= ~PA_FLAG_8BIT_MARIO;
     } else {
         playerStatus->colliderHeight = 19;
         playerStatus->colliderDiameter = 26;
-        playerStatus->animFlags |= PA_FLAGS_8BIT_MARIO
-            | PA_FLAGS_INTERRUPT_SPIN
-            | PA_FLAGS_INTERRUPT_USE_PARTNER;
+        playerStatus->animFlags |= PA_FLAG_8BIT_MARIO
+            | PA_FLAG_INTERRUPT_SPIN
+            | PA_FLAG_INTERRUPT_USE_PARTNER;
     }
 
     return ApiStatus_DONE2;

@@ -168,8 +168,8 @@ void star_spirits_energy_update(EffectInstance* effect) {
     u8 var_int_2;
     u8 var_int_3;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
         data->unk_14 = 16;
     }
 

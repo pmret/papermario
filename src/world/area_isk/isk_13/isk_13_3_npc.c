@@ -26,7 +26,7 @@ void N(func_80241610_990DF0)(void) {
     Matrix4f transformMtx, tempMtx;
     
     gSPViewport(gMasterGfxPos++, &cam->vp);
-    if (!(cam->flags & CAMERA_FLAGS_ORTHO)) {
+    if (!(cam->flags & CAMERA_FLAG_ORTHO)) {
         gSPPerspNormalize(gMasterGfxPos++, cam->perspNorm);
     }
     guMtxF2L(cam->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCameraID]);
@@ -300,7 +300,7 @@ StaticNpc N(NpcData_StoneChomp) = {
     .settings = &N(NpcSettings_StoneChomp),
     .pos = { 440.0f, -470.0f, -300.0f },
     .yaw = 320,
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_100000,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000,
     .init = &N(EVS_NpcInit_StoneChomp),
     .initVarCount = 1,
     .initVar = { .value = -650 },

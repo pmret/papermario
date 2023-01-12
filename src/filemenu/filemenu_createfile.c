@@ -71,7 +71,7 @@ void filemenu_update_change_layout(
     Window* window = &gWindows[windowIdx];
 
     if (window->updateCounter == 8) {
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
         set_window_update(windowIdx, WINDOW_UPDATE_SHOW);
     }
 }
@@ -130,7 +130,7 @@ void filemenu_draw_contents_choose_name(
     s32 color;
     Window* window = &gWindows[WINDOW_ID_FILEMENU_KEYBOARD];
 
-    if ((window->flags & WINDOW_FLAGS_INITIAL_ANIMATION) && window->fpUpdate.func == filemenu_update_change_layout) {
+    if ((window->flags & WINDOW_FLAG_INITIAL_ANIMATION) && window->fpUpdate.func == filemenu_update_change_layout) {
         changeLayoutOffset = window->updateCounter * 2;
         currentPage = menu->page;
         previousPage = menu->page != 1;
@@ -249,7 +249,7 @@ void filemenu_choose_name_init(MenuPanel* menu) {
 
     for (i = 0; i < ARRAY_COUNT(filemenu_createfile_hudElemScripts); i++) {
         filemenu_createfile_hudElems[i] = hud_element_create(filemenu_createfile_hudElemScripts[i]);
-        hud_element_set_flags(filemenu_createfile_hudElems[i], HUD_ELEMENT_FLAGS_80);
+        hud_element_set_flags(filemenu_createfile_hudElems[i], HUD_ELEMENT_FLAG_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(filemenu_createfile_windowBPs); i++) {

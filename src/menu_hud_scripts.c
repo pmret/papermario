@@ -46,9 +46,9 @@ HudScript HES_FilenameCaret = {
     hs_SetVisible
     hs_SetCustomSize(16, 16)
     hs_Loop
-        hs_ClearFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_ClearFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(9, ui_files_filename_caret)
-        hs_SetFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_SetFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(6, ui_files_filename_caret)
     hs_Restart
     hs_End
@@ -160,9 +160,9 @@ HudScript HES_DescMsgPrev = {
     hs_SetVisible
     hs_SetCustomSize(16, 16)
     hs_Loop
-        hs_ClearFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_ClearFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(9, ui_pause_desc_msg_prev)
-        hs_SetFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_SetFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(6, ui_pause_desc_msg_prev)
     hs_Restart
     hs_End
@@ -172,9 +172,9 @@ HudScript HES_DescMsgNext = {
     hs_SetVisible
     hs_SetCustomSize(16, 16)
     hs_Loop
-        hs_ClearFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_ClearFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(9, ui_pause_desc_msg_next)
-        hs_SetFlags(HUD_ELEMENT_FLAGS_200000)
+        hs_SetFlags(HUD_ELEMENT_FLAG_200000)
         hs_SetCI(6, ui_pause_desc_msg_next)
     hs_Restart
     hs_End

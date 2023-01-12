@@ -21,9 +21,9 @@ ApiStatus SetCamEnabled(Evt* script, s32 isInitialCall) {
     s32 enabled = evt_get_variable(script, *args++);
 
     if (!enabled) {
-        gCameras[id].flags |= CAMERA_FLAGS_ENABLED;
+        gCameras[id].flags |= CAMERA_FLAG_ENABLED;
     } else {
-        gCameras[id].flags &= ~CAMERA_FLAGS_ENABLED;
+        gCameras[id].flags &= ~CAMERA_FLAG_ENABLED;
     }
     return ApiStatus_DONE2;
 }
@@ -34,9 +34,9 @@ ApiStatus SetCamFlag80(Evt* script, s32 isInitialCall) {
     s32 enabled = evt_get_variable(script, *args++);
 
     if (!enabled) {
-        gCameras[id].flags |= CAMERA_FLAGS_80;
+        gCameras[id].flags |= CAMERA_FLAG_80;
     } else {
-        gCameras[id].flags &= ~CAMERA_FLAGS_80;
+        gCameras[id].flags &= ~CAMERA_FLAG_80;
     }
     return ApiStatus_DONE2;
 }
@@ -296,7 +296,7 @@ ApiStatus ShakeCam(Evt* script, s32 isInitialCall) {
         }
     }
 
-    camera->flags |= CAMERA_FLAGS_SHAKING;
+    camera->flags |= CAMERA_FLAG_SHAKING;
     scale = script->functionTempF[3];
     switch (shakeMode) {
         case CAM_SHAKE_CONSTANT_VERTICAL:
@@ -318,7 +318,7 @@ ApiStatus ShakeCam(Evt* script, s32 isInitialCall) {
     }
 
     if (script->functionTemp[1] == 0) {
-        camera->flags &= ~CAMERA_FLAGS_SHAKING;
+        camera->flags &= ~CAMERA_FLAG_SHAKING;
         return ApiStatus_DONE2;
     }
     script->functionTemp[1]--;
@@ -351,9 +351,9 @@ ApiStatus SetCamLeadPlayer(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[id];
 
     if (enabled) {
-        camera->flags |= CAMERA_FLAGS_LEAD_PLAYER;
+        camera->flags |= CAMERA_FLAG_LEAD_PLAYER;
     } else {
-        camera->flags &= ~CAMERA_FLAGS_LEAD_PLAYER;
+        camera->flags &= ~CAMERA_FLAG_LEAD_PLAYER;
     }
     return ApiStatus_DONE2;
 }

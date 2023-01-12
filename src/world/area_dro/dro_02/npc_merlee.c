@@ -551,7 +551,7 @@ void N(card_worker_update)(void) {
                 sfx_play_sound(SOUND_206);
 
                 for (j = 0; j < ARRAY_COUNT(N(D_8024EF90)); j++) {
-                    N(D_8024EF90)[j]->flags |= EFFECT_INSTANCE_FLAGS_10;
+                    N(D_8024EF90)[j]->flags |= EFFECT_INSTANCE_FLAG_10;
                 }
             }
             break;
