@@ -3090,7 +3090,6 @@ void btl_state_update_end_player_turn(void) {
                 }
 
                 if (battleStatus->hustleTurns != 0 && (gBattleStatus.flags1 & BS_FLAGS1_HUSTLED)) {
-
                     gBattleStatus.flags2 &= ~BS_FLAGS2_2;
                     btl_set_state(BATTLE_STATE_PREPARE_MENU);
                     return;
@@ -3110,15 +3109,12 @@ void btl_state_update_end_player_turn(void) {
             if (battleStatus->hustleTurns != 0 && (gBattleStatus.flags1 & BS_FLAGS1_HUSTLED)) {
                 gBattleStatus.flags2 &= ~BS_FLAGS2_2;
                 btl_set_state(BATTLE_STATE_PREPARE_MENU);
-                return;
             } else {
                 gBattleStatus.flags1 &= ~BS_FLAGS2_HAS_DRAINED_HP;
                 if (!(gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE)) {
                     btl_set_state(BATTLE_STATE_BEGIN_PARTNER_TURN);
-                    return;
                 } else {
                     btl_set_state(BATTLE_STATE_9);
-                    return;
                 }
             }
         }
