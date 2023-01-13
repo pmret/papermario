@@ -496,7 +496,7 @@ void btl_init_menu_partner(void) {
             }
         }
 
-        battleStatus->moveCategory = BTL_MENU_TYPE_5;
+        battleStatus->moveCategory = BTL_MENU_TYPE_CHANGE_PARTNER;
         battleStatus->moveArgument = partner->actorBlueprint->level;
         battleStatus->currentTargetListFlags = move->flags;
         player_create_target_list(partner);

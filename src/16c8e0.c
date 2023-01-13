@@ -181,9 +181,9 @@ void initialize_battle(void) {
     battleStatus->playerActor = NULL;
     battleStatus->partnerActor = NULL;
 
-    for (i = 0; i < ARRAY_COUNT(battleStatus->unk_4C); i++) {
-        battleStatus->unk_4C[i] = -1;
-        battleStatus->unk_5C[i] = -1;
+    for (i = 0; i < ARRAY_COUNT(battleStatus->lastPlayerMenuSelection); i++) {
+        battleStatus->lastPlayerMenuSelection[i] = -1;
+        battleStatus->lastPartnerMenuSelection[i] = -1;
     }
 
     for (i = 0; i < ARRAY_COUNT(battleStatus->tattleFlags); i++) {

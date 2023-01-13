@@ -262,7 +262,7 @@ void btl_state_update_normal_start(void) {
             battleStatus->actionSuccess = 0;
             battleStatus->unk_82 = 0;
             battleStatus->menuDisableFlags = -1;
-            battleStatus->unk_74 = -1;
+            battleStatus->enabledStarPowersMask = -1;
             battleStatus->itemUsesLeft = 0;
             battleStatus->hammerCharge = 0;
             battleStatus->jumpCharge = 0;
@@ -1512,17 +1512,16 @@ void btl_state_draw_9(void) {
 void btl_state_update_prepare_menu(void) {
     BattleStatus* battleStatus = &gBattleStatus;
 
-    battleStatus->unk_4C[1] = -1;
-    battleStatus->unk_4C[2] = -1;
-    battleStatus->unk_4C[3] = -1;
-    battleStatus->unk_4C[4] = -1;
-    battleStatus->unk_4C[5] = -1;
-    battleStatus->unk_4C[5] = -1;
-    battleStatus->unk_4C[6] = -1;
-    battleStatus->unk_4C[7] = -1;
-    battleStatus->unk_5C[1] = -1;
-    battleStatus->unk_5C[6] = -1;
-    battleStatus->unk_5C[7] = -1;
+    battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_JUMP] = -1;
+    battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_SMASH] = -1;
+    battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_ITEMS] = -1;
+    battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_DIP] = -1;
+    battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_PARTNER] = -1;
+    battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_STAR_POWER] = -1;
+    battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_STRATEGY] = -1;
+    battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_ABILITY] = -1;
+    battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_STAR_POWER] = -1;
+    battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_STRATEGY] = -1;
 
     dma_copy(_415D90_ROM_START, _415D90_ROM_END, _415D90_VRAM);
 
@@ -2468,7 +2467,7 @@ void btl_state_update_change_partner(void) {
                 }
             }
 
-            battleStatus->unk_5C[0] = -1;
+            battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_MAIN] = -1;
             D_8029F248 = 10;
             gBattleSubState = BTL_SUBSTATE_CHANGE_PARTNER_EXEC_PUT_AWAY;
 
@@ -3257,7 +3256,7 @@ void btl_state_update_partner_move(void) {
             }
             decrement_status_menu_disabled();
             if (playerData->currentPartner == PARTNER_GOOMBARIO
-                    && battleStatus->moveCategory == BTL_MENU_TYPE_5
+                    && battleStatus->moveCategory == BTL_MENU_TYPE_CHANGE_PARTNER
                     && battleStatus->selectedMoveID != MOVE_CHARGE) {
                 partner->isGlowing = 0;
                 gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;
@@ -4026,13 +4025,13 @@ void btl_state_update_partner_striking_first(void) {
             level = partner->actorBlueprint->level;
             switch (playerData->currentPartner) {
                 case PARTNER_KOOPER:
-                    battleStatus->moveCategory = BTL_MENU_TYPE_5;
+                    battleStatus->moveCategory = BTL_MENU_TYPE_CHANGE_PARTNER;
                     battleStatus->moveArgument = 0;
                     battleStatus->selectedMoveID = level + MOVE_SHELL_TOSS1;
                     battleStatus->currentTargetListFlags = gMoveTable[battleStatus->selectedMoveID].flags;
                     break;
                 case PARTNER_BOMBETTE:
-                    battleStatus->moveCategory = BTL_MENU_TYPE_5;
+                    battleStatus->moveCategory = BTL_MENU_TYPE_CHANGE_PARTNER;
                     battleStatus->moveArgument = 0;
                     battleStatus->selectedMoveID = level + MOVE_BODY_SLAM1;
                     battleStatus->currentTargetListFlags = gMoveTable[battleStatus->selectedMoveID].flags;

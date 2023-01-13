@@ -338,7 +338,7 @@ void load_engine_data(void) {
 ///  0: normal
 ///  1: NPCs move, can't be interacted with
 ///  2: NPCs don't move, no partner ability, can't interact, can't use exits
-///  3: NPCs don't more or animate (partner switch menu)
+///  3: NPCs don't more or animate
 ///  4: NPCs can move, animations don't update, can use exits
 void set_time_freeze_mode(s32 mode) {
     switch (mode) {
@@ -359,7 +359,7 @@ void set_time_freeze_mode(s32 mode) {
             gOverrideFlags |= GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES;
             suspend_all_group(EVT_GROUP_02);
             break;
-        case TIME_FREEZE_PARTNER_MENU:
+        case TIME_FREEZE_POPUP_MENU:
             timeFreezeMode = mode;
             gOverrideFlags &= ~GLOBAL_OVERRIDES_800;
             gOverrideFlags |= GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES;

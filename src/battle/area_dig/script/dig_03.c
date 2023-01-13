@@ -8,7 +8,7 @@ ApiStatus func_80218770_6DE530(Evt* script, s32 isInitialCall) {
     Actor* partner = battleStatus->partnerActor;
     SelectableTarget* selectableTarget;
 
-    battleStatus->moveCategory = BTL_MENU_TYPE_6;
+    battleStatus->moveCategory = BTL_MENU_TYPE_ABILITY;
     battleStatus->moveArgument = 0;
     battleStatus->selectedMoveID = MOVE_SHELL_SHOT;
     battleStatus->currentTargetListFlags = gMoveTable[MOVE_SHELL_SHOT].flags;
