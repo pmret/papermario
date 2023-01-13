@@ -297,7 +297,7 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
         npc->flags &= ~NPC_FLAG_GRAVITY;
         npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         npc->flags |= NPC_FLAG_200000;
-        enemy->flags |= ENEMY_FLAGS_200000;
+        enemy->flags |= ENEMY_FLAG_200000;
         enemy->varTable[1] = npc->pos.y * 100.0;
         enemy->varTable[0] = 0;
         enemy->varTable[2] = 0;
@@ -307,11 +307,11 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
 
     npc->verticalRenderOffset = -5;
 
-    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
         if (enemy->aiPaused != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
     }
 
     switch (script->AI_TEMP_STATE) {

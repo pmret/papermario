@@ -68,7 +68,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 4,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 70,
     .airLiftChance = 90,
@@ -334,7 +334,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)

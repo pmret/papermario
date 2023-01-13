@@ -145,7 +145,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 30,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -255,7 +255,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, 1, ACTOR_PART_FLAG_INVISIBLE, 1)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
             EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, SOUND_206B)
-        EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
             EVT_CALL(func_8026E914, LVar0, LVar1)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
             EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, SOUND_206B)

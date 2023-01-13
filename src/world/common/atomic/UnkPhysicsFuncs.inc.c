@@ -62,7 +62,7 @@ void N(UnkModelMatrixFunc)(s32 treeIndex, f32 x, f32 y, f32 z, f32 scale) {
     guTranslateF(model->transformMatrix, x, y, z);
     guScaleF(sp10, scale, 1.0f, scale);
     guMtxCatF(sp10, model->transformMatrix, model->transformMatrix);
-    model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED;
+    model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
 }
 
 ApiStatus N(UnkModelMatrixFunc2)(Evt* script, s32 isInitialCall) {

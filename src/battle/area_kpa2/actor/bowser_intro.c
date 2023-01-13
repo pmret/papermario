@@ -125,7 +125,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 10,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -165,8 +165,8 @@ EvtScript N(init) = {
     EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
     EVT_CALL(ModifyActorDecoration, ACTOR_SELF, 1, 1, 100, 0, 0, 0)
     EVT_EXEC(N(unkDecorationScript))
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_800000, 1)
-    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_2000000, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_NO_GAME_OVER, 1)
+    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_DONT_STOP_MUSIC, 1)
     EVT_RETURN
     EVT_END
 };
@@ -252,7 +252,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET(LVar1, ANIM_BattleBowser_Idle)

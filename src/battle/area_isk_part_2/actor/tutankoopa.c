@@ -204,7 +204,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 30,
     .partCount = ARRAY_COUNT(N(partsTable_8021BAD4)),
     .partsData = N(partsTable_8021BAD4),
-    .script = &N(init_8021BC1C),
+    .takeTurnScript = &N(init_8021BC1C),
     .statusTable = N(statusTable_8021BA28),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -338,7 +338,7 @@ EvtScript N(handleEvent_8021BFD0) = {
             EVT_EXEC_WAIT(DoReturnHome)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)

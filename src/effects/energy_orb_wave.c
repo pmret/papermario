@@ -88,8 +88,8 @@ void energy_orb_wave_update(EffectInstance* effect) {
     u16 var_4;
     s32 var_3;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
         data->unk_10 = 30;
     }
 

@@ -3,14 +3,14 @@
 
 #define BZZAP_NO_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
 
 #define BZZAP_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 15, \
     .itemDrops = { \
         { ITEM_MAPLE_SYRUP, 6, 0 }, \

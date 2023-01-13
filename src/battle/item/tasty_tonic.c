@@ -24,7 +24,7 @@ ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall) {
             case ACTOR_CLASS_PARTNER:
                 dispatch_event_partner(EVENT_RECOVER_STATUS);
         }
-        actor->disableEffect->data.disableX->unk_3C = 0;
+        actor->disableEffect->data.disableX->koDuration = 0;
     }
 
     return ApiStatus_DONE2;

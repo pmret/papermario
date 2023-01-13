@@ -232,7 +232,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 4,
     .partCount = ARRAY_COUNT(N(partsTable_80218D34)),
     .partsData = N(partsTable_80218D34),
-    .script = &N(init_80218EC4),
+    .takeTurnScript = &N(init_80218EC4),
     .statusTable = N(statusTable_80218C88),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -630,7 +630,7 @@ EvtScript N(handleEvent_802197C4) = {
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim01)
             EVT_EXEC_WAIT(DoImmune)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim01)

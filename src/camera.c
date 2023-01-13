@@ -63,7 +63,7 @@ s32 func_800328A4(CameraControlSettings* camSettings, f32 x, f32 z) {
 void func_80032970(Camera* camera, f32 arg1) {
     f32 stickX;
     f32 deltaLeadAmount;
-    s32 flags = camera->flags & CAMERA_FLAGS_1000;
+    s32 flags = camera->flags & CAMERA_FLAG_1000;
     s32 a2 = flags != 0;
 
     if (camera->currentController != NULL && camera->currentController->type == CAMERA_SETTINGS_TYPE_4) {
@@ -76,7 +76,7 @@ void func_80032970(Camera* camera, f32 arg1) {
         camera->unk_514 = 1.0f;
         camera->unk_510 = 0.0f;
     } else {
-        if (gPlayerStatusPtr->animFlags & PA_FLAGS_RIDING_PARTNER) {
+        if (gPlayerStatusPtr->animFlags & PA_FLAG_RIDING_PARTNER) {
             stickX = gPartnerActionStatus.stickX;
         } else {
             stickX = gPlayerStatusPtr->stickAxis[0];

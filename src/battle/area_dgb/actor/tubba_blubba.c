@@ -82,7 +82,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 10,
     .partCount = ARRAY_COUNT(N(partsTable_80218D24)),
     .partsData = N(partsTable_80218D24),
-    .script = &N(init_80218D70),
+    .takeTurnScript = &N(init_80218D70),
     .statusTable = N(statusTable_80218C78),
     .escapeChance = 15,
     .airLiftChance = 0,
@@ -249,7 +249,7 @@ EvtScript N(handleEvent_80219338) = {
             EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim14)
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_EXEC_WAIT(N(80219238))
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_EXEC_WAIT(N(802192E0))

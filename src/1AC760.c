@@ -9,22 +9,22 @@ s32 dispatch_damage_event_partner_1(s32, s32);
 void dispatch_event_partner(s32 lastEventType) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
-    Evt* onHitScript = partnerActor->onHitScript;
-    s32 onHitID = partnerActor->onHitID;
+    Evt* handleEventScript = partnerActor->handleEventScript;
+    s32 onHitID = partnerActor->handleEventScriptID;
     Evt* script;
 
     partnerActor->lastEventType = lastEventType;
-    script = start_script(partnerActor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
-    partnerActor->onHitScript = script;
-    partnerActor->onHitID = script->id;
+    script = start_script(partnerActor->handleEventSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
+    partnerActor->handleEventScript = script;
+    partnerActor->handleEventScriptID = script->id;
     script->owner1.actorID = ACTOR_PARTNER;
 
     if (partnerActor->takeTurnScript != NULL) {
-        kill_script_by_ID(partnerActor->takeTurnID);
+        kill_script_by_ID(partnerActor->takeTurnScriptID);
         partnerActor->takeTurnScript = NULL;
     }
 
-    if (onHitScript != NULL) {
+    if (handleEventScript != NULL) {
         kill_script_by_ID(onHitID);
     }
 }
@@ -32,17 +32,17 @@ void dispatch_event_partner(s32 lastEventType) {
 void dispatch_event_partner_continue_turn(s8 lastEventType) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
-    Evt* onHitScript = partnerActor->onHitScript;
-    s32 onHitID = partnerActor->onHitID;
+    Evt* handleEventScript = partnerActor->handleEventScript;
+    s32 onHitID = partnerActor->handleEventScriptID;
     Evt* script;
 
     partnerActor->lastEventType = lastEventType;
-    script = start_script(partnerActor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
-    partnerActor->onHitScript = script;
-    partnerActor->onHitID = script->id;
+    script = start_script(partnerActor->handleEventSource, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
+    partnerActor->handleEventScript = script;
+    partnerActor->handleEventScriptID = script->id;
     script->owner1.actorID = ACTOR_PARTNER;
 
-    if (onHitScript != NULL) {
+    if (handleEventScript != NULL) {
         kill_script_by_ID(onHitID);
     }
 }
@@ -190,9 +190,9 @@ s32 calc_partner_damage_enemy(void) {
 
     target->lastDamageTaken = 0;
 
-    if (gBattleStatus.flags1 & BS_FLAGS1_800) {
+    if (gBattleStatus.flags1 & BS_FLAGS1_FORCE_HIT_IMMUNE) {
         retVal = 2;
-        dispatchEvent = EVENT_UNKNOWN_TRIGGER;
+        dispatchEvent = EVENT_SCRIPTED_IMMUNE;
         sfx_play_sound_at_position(SOUND_IMMUNE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     } else {
         if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || target->transparentStatus == STATUS_TRANSPARENT ||
@@ -368,11 +368,11 @@ s32 calc_partner_damage_enemy(void) {
 
             if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
                 retVal = 2;
-                dispatchEvent = EVENT_UNKNOWN_TRIGGER;
+                dispatchEvent = EVENT_SCRIPTED_IMMUNE;
                 sfx_play_sound_at_position(SOUND_IMMUNE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             } else {
                 retVal = 2;
-                dispatchEvent = (target->currentHP <= 0) ? EVENT_DEATH : EVENT_UNKNOWN_TRIGGER;
+                dispatchEvent = (target->currentHP <= 0) ? EVENT_DEATH : EVENT_SCRIPTED_IMMUNE;
             }
 
             battleStatus->lastAttackDamage = 0;
@@ -401,7 +401,7 @@ s32 calc_partner_damage_enemy(void) {
             if (partner->staticStatus == STATUS_STATIC || (target->staticStatus != STATUS_STATIC &&
                     !(targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED)) || battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT ||
                 battleStatus->currentAttackEventSuppression & ATTACK_EVENT_FLAG_8) {
-                dispatchEvent = (!(gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) ? EVENT_UNKNOWN_TRIGGER : EVENT_IMMUNE;
+                dispatchEvent = (!(gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) ? EVENT_SCRIPTED_IMMUNE : EVENT_IMMUNE;
                 sfx_play_sound_at_position(SOUND_IMMUNE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 dispatch_event_actor(target, dispatchEvent);
                 func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
@@ -420,7 +420,7 @@ s32 calc_partner_damage_enemy(void) {
             dispatchEvent = EVENT_HIT;
         }
 
-        if (dispatchEvent == EVENT_UNKNOWN_TRIGGER) {
+        if (dispatchEvent == EVENT_SCRIPTED_IMMUNE) {
             dispatchEvent = EVENT_IMMUNE;
         }
 
@@ -457,7 +457,7 @@ s32 calc_partner_damage_enemy(void) {
                     dispatchEvent = EVENT_POWER_BOUNCE_HIT;
                 }
 
-                if (dispatchEvent == EVENT_UNKNOWN_TRIGGER) {
+                if (dispatchEvent == EVENT_SCRIPTED_IMMUNE) {
                     dispatchEvent = EVENT_POWER_BOUNCE_HIT;
                 }
 
@@ -508,7 +508,7 @@ s32 calc_partner_damage_enemy(void) {
             dispatchEvent = EVENT_FLIP_TRIGGER;
         }
 
-        if (dispatchEvent == EVENT_UNKNOWN_TRIGGER) {
+        if (dispatchEvent == EVENT_SCRIPTED_IMMUNE) {
             dispatchEvent = EVENT_FLIP_TRIGGER;
         }
 
@@ -591,7 +591,7 @@ s32 calc_partner_damage_enemy(void) {
                                 wasStatusInflicted = TRUE;
                                 retVal = 0;
                                 tempBinary = TRUE;
-                                gBattleStatus.flags1 |= (BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_8 | BS_FLAGS1_1);
+                                gBattleStatus.flags1 |= (BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_8 | BS_FLAGS1_ACTORS_VISIBLE);
                                 sfx_play_sound_at_position(SOUND_231, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                             } else {
                                 dispatchEvent = EVENT_IMMUNE;
@@ -604,7 +604,7 @@ s32 calc_partner_damage_enemy(void) {
                     }
 
                     if (wasStatusInflicted) {
-                        if (dispatchEvent == EVENT_UNKNOWN_TRIGGER) {
+                        if (dispatchEvent == EVENT_SCRIPTED_IMMUNE) {
                             dispatchEvent = EVENT_HIT_COMBO;
                         }
 
@@ -633,7 +633,7 @@ s32 calc_partner_damage_enemy(void) {
                     wasStatusInflicted = TRUE;
                     retVal = 0;
                     tempBinary = TRUE;
-                    gBattleStatus.flags1 |= (BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_8 | BS_FLAGS1_1);
+                    gBattleStatus.flags1 |= (BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_8 | BS_FLAGS1_ACTORS_VISIBLE);
                     sfx_play_sound_at_position(SOUND_231, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 } else {
                     dispatchEvent = EVENT_IMMUNE;
@@ -987,10 +987,10 @@ ApiStatus PartnerDamageEnemy(Evt* script, s32 isInitialCall) {
         gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
-    if (flags & BS_FLAGS1_800) {
-        gBattleStatus.flags1 |= BS_FLAGS1_800;
+    if (flags & BS_FLAGS1_FORCE_HIT_IMMUNE) {
+        gBattleStatus.flags1 |= BS_FLAGS1_FORCE_HIT_IMMUNE;
     } else {
-        gBattleStatus.flags1 &= ~BS_FLAGS1_800;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_FORCE_HIT_IMMUNE;
     }
 
     statusChance = battleStatus->currentAttackStatus;
@@ -1064,10 +1064,10 @@ ApiStatus PartnerAfflictEnemy(Evt* script, s32 isInitialCall) {
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
-    if (flags & BS_FLAGS1_800) {
-        gBattleStatus.flags1 |= BS_FLAGS1_800;
+    if (flags & BS_FLAGS1_FORCE_HIT_IMMUNE) {
+        gBattleStatus.flags1 |= BS_FLAGS1_FORCE_HIT_IMMUNE;
     } else {
-        gBattleStatus.flags1 &= ~BS_FLAGS1_800;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_FORCE_HIT_IMMUNE;
     }
 
     statusChance = battleStatus->currentAttackStatus;
@@ -1140,10 +1140,10 @@ ApiStatus PartnerPowerBounceEnemy(Evt* script, s32 isInitialCall) {
     } else {
         gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
-    if (flags & BS_FLAGS1_800) {
-        gBattleStatus.flags1 |= BS_FLAGS1_800;
+    if (flags & BS_FLAGS1_FORCE_HIT_IMMUNE) {
+        gBattleStatus.flags1 |= BS_FLAGS1_FORCE_HIT_IMMUNE;
     } else {
-        gBattleStatus.flags1 &= ~BS_FLAGS1_800;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_FORCE_HIT_IMMUNE;
     }
 
     statusChance = battleStatus->currentAttackStatus;
@@ -1221,10 +1221,10 @@ ApiStatus PartnerTestEnemy(Evt* script, s32 isInitialCall) {
         gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
-    if (flags & BS_FLAGS1_800) {
-        gBattleStatus.flags1 |= BS_FLAGS1_800;
+    if (flags & BS_FLAGS1_FORCE_HIT_IMMUNE) {
+        gBattleStatus.flags1 |= BS_FLAGS1_FORCE_HIT_IMMUNE;
     } else {
-        gBattleStatus.flags1 &= ~BS_FLAGS1_800;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_FORCE_HIT_IMMUNE;
     }
 
     statusChance = battleStatus->currentAttackStatus;

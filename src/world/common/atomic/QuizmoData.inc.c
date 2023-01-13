@@ -661,10 +661,10 @@ EvtScript N(EVS_Quizmo_NPC_Interact) = {
     EVT_USE_ARRAY(EVT_PTR(N(Quizmo_ScriptArray)))
     EVT_SET(GF_Quizmo_ChangedLocation, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_MOVEMENT_LOCKED, 1)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_MOVEMENT_LOCKED, 1)
     EVT_EXEC_WAIT(N(EVS_Quizmo_QuizMain))
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_MOVEMENT_LOCKED, 0)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_MOVEMENT_LOCKED, 0)
     EVT_RETURN
     EVT_END
 };
@@ -697,11 +697,11 @@ NpcSettings N(NpcSettings_ChuckQuizmo) = {
     .otherAI = &N(EVS_Quizmo_NPC_OtherAI),
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .aux = &N(EVS_Quizmo_NPC_Aux),
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .level = 99,
 };
 
-// alternate (unused?) variant of quizmo with AI and ENEMY_FLAGS_100 unset
+// alternate (unused?) variant of quizmo with AI and ENEMY_FLAG_100 unset
 NpcSettings N(Quizmo_AltNpcSettings) = {
     .defaultAnim = ANIM_ChuckQuizmo_Idle,
     .height = 35,
@@ -710,7 +710,7 @@ NpcSettings N(Quizmo_AltNpcSettings) = {
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .ai = &N(EVS_Quizmo_Npc_AI),
     .aux = &N(EVS_Quizmo_NPC_Aux),
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .level = 99,
     .actionFlags = 16,
 };

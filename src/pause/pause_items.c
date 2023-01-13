@@ -129,7 +129,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     palette = MSG_PAL_STANDARD;
     currentItemColumn = gPauseItemsSelectedIndex / gPauseItemsPages[gPauseItemsCurrentPage].numCols;
     currentItemRow = gPauseItemsSelectedIndex % gPauseItemsPages[gPauseItemsCurrentPage].numCols;
-    draw_box(DRAW_FLAGS_NO_CLIP, &gPauseWS_18, baseX + 68, baseY, 0, width - 68, height, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+    draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_18, baseX + 68, baseY, 0, width - 68, height, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
     x1 = baseX + 1;
     y1 = baseY + 7;
@@ -226,13 +226,13 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
                 if (i == 1) {
                     itemIcon = iconIDs[totalItemIndex];
-                    hud_element_clear_flags(itemIcon, HUD_ELEMENT_FLAGS_DROP_SHADOW);
-                    hud_element_set_flags(itemIcon, HUD_ELEMENT_FLAGS_FILTER_TEX);
+                    hud_element_clear_flags(itemIcon, HUD_ELEMENT_FLAG_DROP_SHADOW);
+                    hud_element_set_flags(itemIcon, HUD_ELEMENT_FLAG_FILTER_TEX);
                     if (isNone) {
                         itemIcon = gPauseItemsIconIDs[19];
                     } else {
                         if (isSelected) {
-                            hud_element_set_flags(itemIcon, HUD_ELEMENT_FLAGS_DROP_SHADOW);
+                            hud_element_set_flags(itemIcon, HUD_ELEMENT_FLAG_DROP_SHADOW);
                             gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[itemID].hudElemID].enabled;
                         }
 
@@ -292,7 +292,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         }
     }
 
-    draw_box(DRAW_FLAGS_NO_CLIP, &gPauseWS_17, gPauseItemsCurrentTab == 0 ? baseX + 9 : baseX, baseY + 7, 0,
+    draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_17, gPauseItemsCurrentTab == 0 ? baseX + 9 : baseX, baseY + 7, 0,
          91, 34, 255, gPauseItemsCurrentTab == 1 ? 128 : 0, 0, 0,
          0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
@@ -308,7 +308,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     }
     draw_msg(msg, msgX, msgY, opacity1, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
 
-    draw_box(DRAW_FLAGS_NO_CLIP, &gPauseWS_17, gPauseItemsCurrentTab == 1 ? baseX + 9 : baseX, baseY + 39, 0,
+    draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_17, gPauseItemsCurrentTab == 1 ? baseX + 9 : baseX, baseY + 39, 0,
          91, 34, 255, gPauseItemsCurrentTab == 0 ? 128 : 0, 0, 0,
          0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
@@ -431,7 +431,7 @@ void pause_items_init(MenuPanel* panel) {
 
     for (i = 0; i < ARRAY_COUNT(gPauseItemsIconIDs); i++) {
         gPauseItemsIconIDs[i] = hud_element_create(gPauseItemsElements[i]);
-        hud_element_set_flags(gPauseItemsIconIDs[i], HUD_ELEMENT_FLAGS_80);
+        hud_element_set_flags(gPauseItemsIconIDs[i], HUD_ELEMENT_FLAG_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseItemsWindowBPs); i++) {

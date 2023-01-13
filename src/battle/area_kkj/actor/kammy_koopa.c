@@ -93,7 +93,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 10,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -114,7 +114,7 @@ EvtScript N(init) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
-    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_2000000, 1)
+    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_DONT_STOP_MUSIC, 1)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_RETURN
@@ -154,7 +154,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_EXEC_WAIT(N(speakOnHit))
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleKammy_Anim05)
@@ -243,12 +243,12 @@ ApiStatus N(DropBlock)(Evt* script, s32 isInitialCall) {
 
     entity->collisionTimer = 0;
     collisionStatus->lastWallHammered = entityIndex | COLLISION_WITH_ENTITY_BIT;
-    playerStatus->flags |= PS_FLAGS_HAMMER_CHECK;
+    playerStatus->flags |= PS_FLAG_HAMMER_CHECK;
     entity->collisionFlags = ENTITY_COLLISION_PLAYER_HAMMER;
     playerStatus->actionState = ACTION_STATE_HAMMER;
     entity->blueprint->fpHandleCollision(entity);
     entity->collisionTimer = 10;
-    entity->flags |= ENTITY_FLAGS_DETECTED_COLLISION;
+    entity->flags |= ENTITY_FLAG_DETECTED_COLLISION;
     collisionStatus->lastWallHammered = -1;
 
     return ApiStatus_DONE2;

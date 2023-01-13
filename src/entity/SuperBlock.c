@@ -239,7 +239,7 @@ EntityModelScript Entity_UltraBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(
 EntityModelScript Entity_UltraBlockContent_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RenderNone, RENDER_MODE_SURFACE_XLU_LAYER2);
 
 EntityBlueprint Entity_SuperBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
+    .flags = ENTITY_FLAG_4000 | ENTITY_FLAG_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_SuperBlock_RenderScript,
     .modelAnimationNodes = 0,
@@ -252,7 +252,7 @@ EntityBlueprint Entity_SuperBlock = {
 };
 
 EntityBlueprint Entity_SuperBlockContent = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION,
     .typeDataSize = sizeof(SuperBlockContentData),
     .renderCommandList = Entity_SuperBlockContent_RenderScript,
     .modelAnimationNodes = 0,
@@ -265,7 +265,7 @@ EntityBlueprint Entity_SuperBlockContent = {
 };
 
 EntityBlueprint Entity_UltraBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
+    .flags = ENTITY_FLAG_4000 | ENTITY_FLAG_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_UltraBlock_RenderScript,
     .modelAnimationNodes = 0,
@@ -278,7 +278,7 @@ EntityBlueprint Entity_UltraBlock = {
 };
 
 EntityBlueprint Entity_UltraBlockContent = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION,
     .typeDataSize = sizeof(SuperBlockContentData),
     .renderCommandList = Entity_UltraBlockContent_RenderScript,
     .modelAnimationNodes = 0,

@@ -118,7 +118,7 @@ EvtScript N(EVS_NpcHit_GardenShyGuy1) = {
     EVT_END_IF
     EVT_SET(GF_MAC01_ChasedShyGuysFromGardenA, TRUE)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_GardenShyGuy_RunAway)))
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000, 1)
     EVT_RETURN
     EVT_END
 };
@@ -130,7 +130,7 @@ EvtScript N(EVS_NpcHit_GardenShyGuy2) = {
     EVT_END_IF
     EVT_SET(GF_MAC01_ChasedShyGuysFromGardenB, TRUE)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_GardenShyGuy_RunAway)))
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000, 1)
     EVT_RETURN
     EVT_END
 };
@@ -569,7 +569,7 @@ EvtScript N(EVS_NpcIdle_MinhT) = {
             EVT_ADD(LVar0, GF_MAC01_ChasedShyGuysFromGardenB)
             EVT_IF_EQ(LVar0, 2)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)
-                EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_400000, 0)
+                EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_400000, 0)
                 EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_MinhT)))
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -605,7 +605,7 @@ EvtScript N(EVS_NpcInit_MinhT) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_RANGE(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
             EVT_SET(GF_MAC01_ShyGuysTramplingGarden, TRUE)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_400000, 1)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_400000, 1)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_MinhT)))
     EVT_END_SWITCH
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)

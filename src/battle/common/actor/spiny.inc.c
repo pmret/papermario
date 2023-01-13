@@ -112,7 +112,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 5,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 60,
     .airLiftChance = 75,
@@ -255,7 +255,7 @@ EvtScript N(handleEvent) = {
                 EVT_WAIT(1)
             EVT_END_LOOP
             EVT_WAIT(20)
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)

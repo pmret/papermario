@@ -65,7 +65,7 @@ ActorBlueprint N(slot_machine_stop) = {
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -88,7 +88,7 @@ ActorBlueprint N(slot_machine_start) = {
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -447,7 +447,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_SPIKE_CONTACT)
         EVT_CASE_OR_EQ(EVENT_BURN_CONTACT)
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH

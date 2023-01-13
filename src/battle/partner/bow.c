@@ -54,7 +54,7 @@ ApiStatus N(ApplyOuttaSight)(Evt* script, s32 isInitialCall) {
 
     playerActorPartTable->idleAnimations = bMarioHideAnims;
     gBattleStatus.hustleTurns = 0;
-    gBattleStatus.flags1 &= ~BS_FLAGS1_HUSTLE_DRINK_ON;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_HUSTLED;
 
     return ApiStatus_DONE2;
 }
@@ -208,7 +208,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -251,7 +251,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(DoPartnerHit)
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)

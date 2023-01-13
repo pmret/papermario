@@ -237,7 +237,7 @@ EvtScript N(EVS_NpcHit_Guardian) = {
                         EVT_CALL(SpeakToPlayer, NPC_Follower, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_CH8_002B)
                     EVT_ELSE
                         EVT_CALL(SpeakToPlayer, NPC_Follower, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_CH8_002C)
-                        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAGS_8000000, 1)
+                        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 1)
                         EVT_CALL(BindNpcAI, NPC_Duplighost, EVT_PTR(N(EVS_NpcAI_Duplighost_Caught)))
                     EVT_END_IF
             EVT_END_SWITCH
@@ -349,7 +349,7 @@ StaticNpc N(NpcData_Imposter)[] = {
         .settings = &N(NpcSettings_Peach),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_4 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_20000 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_800000,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_20000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_800000,
         .init = &N(EVS_NpcInit_Follower),
         .drops = NPC_NO_DROPS,
         .animations = {
@@ -377,7 +377,7 @@ StaticNpc N(NpcData_Imposter)[] = {
         .settings = &N(NpcSettings_Peach),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_4 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_800000 | ENEMY_FLAGS_IGNORE_TOUCH,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_800000 | ENEMY_FLAG_IGNORE_TOUCH,
         .init = &N(EVS_NpcInit_Guardian),
         .drops = NPC_NO_DROPS,
         .animations = {
@@ -405,10 +405,10 @@ StaticNpc N(NpcData_Imposter)[] = {
         .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_8 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_40000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_400000 | ENEMY_FLAGS_800000,
+        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_800000,
         .init = &N(EVS_NpcInit_Duplighost),
         .drops = {
-            .dropFlags = NPC_DROP_FLAGS_80,
+            .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
             .itemDrops = {
                 { ITEM_SUPER_SHROOM, 5, 0 },

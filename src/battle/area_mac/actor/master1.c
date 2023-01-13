@@ -73,7 +73,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 50,
     .partCount = ARRAY_COUNT(N(partsTable_8022A364)),
     .partsData = N(partsTable_8022A364),
-    .script = &N(init_8022A3B0),
+    .takeTurnScript = &N(init_8022A3B0),
     .statusTable = N(statusTable_8022A2B8),
     .escapeChance = 100,
     .airLiftChance = 0,
@@ -104,7 +104,7 @@ EvtScript N(init_8022A3B0) = {
     EVT_CALL(SetActorVar, -127, 2, 0)
     EVT_CALL(SetActorVar, -127, 3, 2)
     EVT_SET(GF_FoughtTheMaster, 1)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_800000, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_NO_GAME_OVER, 1)
     EVT_RETURN
     EVT_END
 };

@@ -55,7 +55,7 @@ void func_802B71E8_E202F8(void) {
     FoldImageRecPart sp20;
     Matrix4f sp38, sp78;
 
-    if (gPlayerStatus.animFlags & PA_FLAGS_INTERACT_PROMPT_AVAILABLE) {
+    if (gPlayerStatus.animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) {
         guScaleF(sp38, D_802B7CB8_E20DC8->scale, D_802B7CB8_E20DC8->scale, D_802B7CB8_E20DC8->scale);
         guRotateF(sp78, D_802B7CB8_E20DC8->unk_0C - gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp38, sp78, sp38);
@@ -106,7 +106,7 @@ s32 func_802B7450_E20560(void) {
                     curInteraction = -1;
                     break;
             }
-        } else if (((playerStatus->flags & (PS_FLAGS_HAS_CONVERSATION_NPC | PS_FLAGS_INPUT_DISABLED)) == PS_FLAGS_HAS_CONVERSATION_NPC)
+        } else if (((playerStatus->flags & (PS_FLAG_HAS_CONVERSATION_NPC | PS_FLAG_INPUT_DISABLED)) == PS_FLAG_HAS_CONVERSATION_NPC)
                         && (npc != NULL) && (npc->flags & NPC_FLAG_10000000)) {
             curInteraction = npc->npcID | COLLISION_WITH_NPC_BIT;
             if (playerStatus->interactingWithID == curInteraction) {
@@ -114,7 +114,7 @@ s32 func_802B7450_E20560(void) {
             }
         } else {
             playerStatus->interactingWithID = -1;
-            playerStatus->flags &= ~PS_FLAGS_INTERACTED;
+            playerStatus->flags &= ~PS_FLAG_INTERACTED;
             return FALSE;
         }
     } else {
@@ -122,24 +122,24 @@ s32 func_802B7450_E20560(void) {
             if (!(curInteraction & COLLISION_WITH_NPC_BIT)) {
                 if (!should_collider_allow_interact(curInteraction)) {
                     playerStatus->interactingWithID = -1;
-                    playerStatus->flags &= ~PS_FLAGS_INTERACTED;
+                    playerStatus->flags &= ~PS_FLAG_INTERACTED;
                     return FALSE;
                 }
             }
         } else {
             if (!phys_can_player_interact()) {
                 playerStatus->interactingWithID = -1;
-                playerStatus->flags &= ~PS_FLAGS_INTERACTED;
+                playerStatus->flags &= ~PS_FLAG_INTERACTED;
                 return FALSE;
             }
         }
     }
     if (playerStatus->interactingWithID == curInteraction) {
-        if ((playerStatus->flags & PS_FLAGS_INTERACTED)) {
+        if ((playerStatus->flags & PS_FLAG_INTERACTED)) {
             return FALSE;
         }
     } else {
-        playerStatus->flags &= ~PS_FLAGS_INTERACTED;
+        playerStatus->flags &= ~PS_FLAG_INTERACTED;
     }
 
     playerStatus->interactingWithID = curInteraction;
@@ -172,7 +172,7 @@ void func_802B75E8_E206F8(void) {
     yTemp = playerStatus->position.y + playerStatus->colliderHeight;
     unk_21 = D_802B7CB8_E20DC8->unk_21;
     y = D_802B7CB8_E20DC8->pos.y;
-    if (!(playerStatus->animFlags & PA_FLAGS_USING_PEACH_PHYSICS)) {
+    if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
         delta = (yTemp + 8.0f + unk_21 - y) * 0.25f;
     } else {
         delta = (yTemp + 2.0f + unk_21 - y) * 0.25f;
@@ -236,7 +236,7 @@ void func_802B7728_E20838(void) {
     actionState = playerStatus->actionState;
     if (!func_802B7450_E20560() ||
         (playerStatus->inputEnabledCounter != 0) ||
-        (playerStatus->flags & PS_FLAGS_PAUSED) ||
+        (playerStatus->flags & PS_FLAG_PAUSED) ||
         !(actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK || actionState == ACTION_STATE_RUN))
     {
         D_802B7CB8_E20DC8->unk_23 = 3;
@@ -244,7 +244,7 @@ void func_802B7728_E20838(void) {
 
     if ((playerStatus->interactingWithID >= 0) &&
         (playerStatus->interactingWithID & 0x4000) &&
-        !(get_entity_by_index(playerStatus->interactingWithID)->flags & ENTITY_FLAGS_SHOWS_INSPECT_PROMPT))
+        !(get_entity_by_index(playerStatus->interactingWithID)->flags & ENTITY_FLAG_SHOWS_INSPECT_PROMPT))
     {
         D_802B7CB8_E20DC8->unk_23 = 3;
     }
@@ -255,7 +255,7 @@ void func_802B79C8_E20AD8(void) {
     gPlayerStatusPtr->interactingWithID = -1;
     InteractNotificationCallback = NULL;
     gPlayerStatusPtr->encounteredNPC = NULL;
-    gPlayerStatusPtr->animFlags &= ~PA_FLAGS_INTERACT_PROMPT_AVAILABLE;
+    gPlayerStatusPtr->animFlags &= ~PA_FLAG_INTERACT_PROMPT_AVAILABLE;
     func_800EF3D4(0);
     partner_reset_tether_distance();
 }

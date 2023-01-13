@@ -123,7 +123,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 5,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 40,
     .airLiftChance = 90,
@@ -146,7 +146,7 @@ ActorBlueprint N(coin) = {
     .maxHP = 5,
     .partCount = ARRAY_COUNT(N(parts_coin)),
     .partsData = N(parts_coin),
-    .script = &N(init_coin),
+    .takeTurnScript = &N(init_coin),
     .statusTable = N(statusTable),
     .escapeChance = 40,
     .airLiftChance = 90,
@@ -405,7 +405,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)

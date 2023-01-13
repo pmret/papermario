@@ -6,7 +6,7 @@
 #include "effects.h"
 
 enum N(ActorVars) {
-    N(VAR_FLAGS_HIT_COMBO) = 0,
+    N(VAR_FLAG_HIT_COMBO) = 0,
     N(VAR_HAS_CLONE) = 1,
     N(VAR_CAN_FALL) = 2,
     N(VAR_HEAL_ALL_COUNTER) = 3,
@@ -168,7 +168,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 11,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 40,
     .airLiftChance = 80,
@@ -191,7 +191,7 @@ ActorBlueprint N(flying) = {
     .maxHP = 11,
     .partCount = ARRAY_COUNT(N(parts_flying)),
     .partsData = N(parts_flying),
-    .script = &N(init_flying),
+    .takeTurnScript = &N(init_flying),
     .statusTable = N(statusTable_flying),
     .escapeChance = 40,
     .airLiftChance = 85,
@@ -412,9 +412,9 @@ EvtScript N(flee) = {
 };
 
 EvtScript N(nextTurn) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_FLAGS_HIT_COMBO), LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_FLAG_HIT_COMBO), LVar0)
     EVT_BITWISE_AND_CONST(LVar0, ~0x1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAGS_HIT_COMBO), LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAG_HIT_COMBO), LVar0)
     EVT_RETURN
     EVT_END
 };
@@ -428,7 +428,7 @@ EvtScript N(init) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetBattleVar, 2, -1)
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAGS_HIT_COMBO), 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAG_HIT_COMBO), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_HAS_CLONE), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_CAN_FALL), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_HEAL_ALL_COUNTER), 0)
@@ -452,7 +452,7 @@ EvtScript N(init_flying) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetBattleVar, 2, -1)
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAGS_HIT_COMBO), 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAG_HIT_COMBO), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_HAS_CLONE), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_CAN_FALL), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_HEAL_ALL_COUNTER), 0)
@@ -516,9 +516,9 @@ EvtScript N(handleEvent) = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_FLAGS_HIT_COMBO), LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_FLAG_HIT_COMBO), LVar0)
             EVT_BITWISE_OR_CONST(LVar0, 0x1)
-            EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAGS_HIT_COMBO), LVar0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAG_HIT_COMBO), LVar0)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim04)
             EVT_EXEC_WAIT(DoNormalHit)
@@ -559,7 +559,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim04)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim01)
             EVT_EXEC_WAIT(DoImmune)
@@ -567,7 +567,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim01)
             EVT_EXEC_WAIT(DoImmune)
-            EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_FLAGS_HIT_COMBO), LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_FLAG_HIT_COMBO), LVar0)
             EVT_IF_FLAG(LVar0, 1)
                 EVT_EXEC_WAIT(N(removeClone))
                 EVT_RETURN
@@ -643,9 +643,9 @@ EvtScript N(handleEvent_flying) = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_FLAGS_HIT_COMBO), LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_FLAG_HIT_COMBO), LVar0)
             EVT_BITWISE_OR_CONST(LVar0, 1)
-            EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAGS_HIT_COMBO), LVar0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAG_HIT_COMBO), LVar0)
             EVT_EXEC_WAIT(N(canBeKnockedOff))
             EVT_SET_CONST(LVar0, 2)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim04)
@@ -698,7 +698,7 @@ EvtScript N(handleEvent_flying) = {
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim04)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
             EVT_SET_CONST(LVar0, 2)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim01)
             EVT_EXEC_WAIT(DoImmune)
@@ -706,7 +706,7 @@ EvtScript N(handleEvent_flying) = {
             EVT_SET_CONST(LVar0, 2)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim01)
             EVT_EXEC_WAIT(DoImmune)
-            EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_FLAGS_HIT_COMBO), LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_FLAG_HIT_COMBO), LVar0)
             EVT_IF_FLAG(LVar0, 1)
                 EVT_EXEC_WAIT(N(removeClone))
                 EVT_RETURN
@@ -1355,7 +1355,7 @@ ActorBlueprint N(clone) = {
     .maxHP = 11,
     .partCount = ARRAY_COUNT(N(parts_clone)),
     .partsData = N(parts_clone),
-    .script = &N(init_clone),
+    .takeTurnScript = &N(init_clone),
     .statusTable = N(statusTable_clone),
     .escapeChance = 40,
     .airLiftChance = 0,
@@ -1378,7 +1378,7 @@ ActorBlueprint N(clone_flying) = {
     .maxHP = 11,
     .partCount = ARRAY_COUNT(N(parts_clone_flying)),
     .partsData = N(parts_clone_flying),
-    .script = &N(init_clone_flying),
+    .takeTurnScript = &N(init_clone_flying),
     .statusTable = N(statusTable_clone_flying),
     .escapeChance = 40,
     .airLiftChance = 0,

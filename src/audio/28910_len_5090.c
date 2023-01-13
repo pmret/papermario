@@ -1308,7 +1308,7 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                     note->tremoloTime = track->trackTremoloTime;
                                     note->unk_13 = 0;
                                     note->tremoloAmount = track->trackTremoloAmount;
-                                    voice->unk_flags_43 = AU_VOICE_SYNC_FLAGS_ALL;
+                                    voice->unk_flags_43 = AU_VOICE_SYNC_FLAG_ALL;
                                     voice->priority = player->priority;
                                     voice->priorityCopy = voice->priority;
                                 }
@@ -1355,7 +1355,7 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                             if (note->noteLength > 0) {
                                 note->noteLength--;
                                 if (note->noteLength == 0) {
-                                    voice->unk_flags_3D |= AU_VOICE_3D_FLAGS_10;
+                                    voice->unk_flags_3D |= AU_VOICE_3D_FLAG_10;
                                 }
                             }
                             if (track->isDrumTrack) {
@@ -1363,7 +1363,7 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                     note->pitchRatio = au_compute_pitch_ratio(((note->adjustedPitch + note->unk_14) + track->segTrackTune) + player->detune) * note->ins->pitchRatio;
                                     if (voice->pitchRatio != note->pitchRatio) {
                                         voice->pitchRatio = note->pitchRatio;
-                                        voice->unk_flags_43 |= AU_VOICE_SYNC_FLAGS_PITCH;
+                                        voice->unk_flags_43 |= AU_VOICE_SYNC_FLAG_PITCH;
                                     }
                                 }
                                 if (track->changed.volume) {
@@ -1372,7 +1372,7 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                         * (track->subTrackVolume >> 0x15))
                                         * (track->unkVolume >> 0x15)) >> 0x14)
                                         * (track->segTrackVolume * note->volume)) >> 0x10;
-                                    voice->unk_flags_3D |= AU_VOICE_3D_FLAGS_VOL_CHANGED;
+                                    voice->unk_flags_3D |= AU_VOICE_3D_FLAG_VOL_CHANGED;
                                 }
                             } else {
                                 if (note->tremoloTime != 0) {
@@ -1401,7 +1401,7 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                         note->pitchRatio = au_compute_pitch_ratio(var_a1_5 + ((note->adjustedPitch + track->segTrackTune) + player->detune)) * note->ins->pitchRatio;
                                         if (voice->pitchRatio != note->pitchRatio) {
                                             voice->pitchRatio = note->pitchRatio;
-                                            voice->unk_flags_43 |= AU_VOICE_SYNC_FLAGS_PITCH;
+                                            voice->unk_flags_43 |= AU_VOICE_SYNC_FLAG_PITCH;
                                         }
                                     }
                                 } else if (track->changed.tune || (player->detune != 0)) {
@@ -1409,20 +1409,20 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                     note->pitchRatio = au_compute_pitch_ratio((note->adjustedPitch + track->segTrackTune) + player->detune) * note->ins->pitchRatio;
                                     if (voice->pitchRatio != note->pitchRatio) {
                                         voice->pitchRatio = note->pitchRatio;
-                                        voice->unk_flags_43 |= AU_VOICE_SYNC_FLAGS_PITCH;
+                                        voice->unk_flags_43 |= AU_VOICE_SYNC_FLAG_PITCH;
                                     }
                                 }
                                 if (track->changed.volume) {
                                     s32 tempVolume = ((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unkVolume >> 0x15)) >> 0x14;
                                     note->volume = (tempVolume * (track->segTrackVolume * note->noteVelocity)) >> 9;
                                     voice->adjustedVolume = note->volume;
-                                    voice->unk_flags_3D |= AU_VOICE_3D_FLAGS_VOL_CHANGED;
+                                    voice->unk_flags_3D |= AU_VOICE_3D_FLAG_VOL_CHANGED;
                                     voice->pan = track->subTrackPan;
                                     voice->reverbAmt = track->subTrackReverb;
                                 } else if (track->changed.pan || track->changed.reverb) {
                                     voice->pan = track->subTrackPan;
                                     voice->reverbAmt = track->subTrackReverb;
-                                    voice->unk_flags_43 |= AU_VOICE_SYNC_FLAGS_10;
+                                    voice->unk_flags_43 |= AU_VOICE_SYNC_FLAG_10;
                                 }
                             }
                         }
@@ -2026,7 +2026,7 @@ AuResult func_80050970(SongUpdateEvent* update) {
                                     voice = &player->globals->voices[j];
                                     if (voice->priority == player->priority) {
                                         voice->unk_14.unk_04 = &D_80078554;
-                                        voice->unk_flags_3D |= AU_VOICE_3D_FLAGS_10;
+                                        voice->unk_flags_3D |= AU_VOICE_3D_FLAG_10;
                                     }
                                 }
                                 oldVolume = track->subTrackVolume >> 24;
@@ -2044,7 +2044,7 @@ AuResult func_80050970(SongUpdateEvent* update) {
                                     voice = &player->globals->voices[j];
                                     if (voice->priority == player->priority) {
                                         voice->unk_14.unk_04 = &D_80078554;
-                                        voice->unk_flags_3D |= AU_VOICE_3D_FLAGS_10;
+                                        voice->unk_flags_3D |= AU_VOICE_3D_FLAG_10;
                                     }
                                 }
                                 oldVolume = parentTrack->subTrackVolume >> 24;

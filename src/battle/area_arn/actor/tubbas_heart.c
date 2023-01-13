@@ -111,7 +111,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 50,
     .partCount = ARRAY_COUNT(N(partsTable_80223D30)),
     .partsData = N(partsTable_80223D30),
-    .script = &N(init_80223DA0),
+    .takeTurnScript = &N(init_80223DA0),
     .statusTable = N(statusTable_80223C84),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -227,7 +227,7 @@ EvtScript N(handleEvent_80224038) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim03)
             EVT_EXEC_WAIT(N(802244DC))
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET(LVar1, 7077889)

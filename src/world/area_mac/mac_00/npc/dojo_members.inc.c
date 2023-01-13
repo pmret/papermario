@@ -3,7 +3,7 @@ s32 N(DojoBattleIDs)[] = {
     BTL_MAC_FORMATION_01,
     BTL_MAC_FORMATION_02,
     BTL_MAC_FORMATION_03,
-    BTL_MAC_FORMATION_04 
+    BTL_MAC_FORMATION_04
 };
 
 ApiStatus N(SetDojoBattle)(Evt* script, s32 isInitialCall) {
@@ -15,7 +15,7 @@ ApiStatus N(SetDojoBattle)(Evt* script, s32 isInitialCall) {
 }
 
 API_CALLABLE(N(ResetBackgroundPostBattle)) {
-    func_8011B950(MODEL_minka_1, -1, 1, 1);
+    func_8011B950(MODEL_minka_1, -1, FOG_MODE_1, 1);
     set_background_color_blend(0, 0, 0, 255);
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
@@ -61,7 +61,7 @@ EvtScript N(EVS_NpcAI_Chan) = {
 };
 
 EvtScript N(EVS_NpcDefeat_Chan) = {
-    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_4, TRUE)
+    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_4, TRUE)
     EVT_CALL(N(ResetBackgroundPostBattle))
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Chan_Walk)
@@ -129,7 +129,7 @@ EvtScript N(EVS_NpcAI_Lee) = {
 };
 
 EvtScript N(EVS_NpcDefeat_Lee) = {
-    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_4, TRUE)
+    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_4, TRUE)
     EVT_CALL(N(ResetBackgroundPostBattle))
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Lee_Walk)
@@ -243,7 +243,7 @@ EvtScript N(EVS_NpcIdle_TheMaster) = {
 };
 
 EvtScript N(EVS_NpcDefeat_Dojo) = {
-    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAGS_4, TRUE)
+    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_4, TRUE)
     EVT_CALL(N(ResetBackgroundPostBattle))
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_CALL(SetSelfVar, VAR_BATTLE_OUTCOME, LVar0)

@@ -49,18 +49,18 @@ ApiStatus N(BulletBillAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || enemy->VAR_PROJECTILE_HITBOX_STATE == PROJECTILE_HITBOX_STATE_DONE) {
         script->AI_TEMP_STATE = AI_STATE_BULLET_INIT;
         npc->duration = 0;
-        enemy->aiFlags |= ENEMY_AI_FLAGS_8;
-        enemy->flags |= ENEMY_FLAGS_200000;
+        enemy->aiFlags |= ENEMY_AI_FLAG_8;
+        enemy->flags |= ENEMY_FLAG_200000;
         npc->flags |= NPC_FLAG_40000;
         enemy->VAR_PROJECTILE_HITBOX_STATE = PROJECTILE_HITBOX_STATE_NONE;
         enemy->AI_VAR_BULLET_BLASTER = -1;
     }
     
-    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
         if (enemy->aiPaused != 0) {
             return 0;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
     }
 
     switch (script->AI_TEMP_STATE) {
@@ -163,7 +163,7 @@ ApiStatus N(BillBlasterAI_Main)(Evt* script, s32 isInitialCall) {
         script->AI_TEMP_STATE = AI_STATE_BLASTER_INIT;
         npc->duration = 30;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
-        enemy->flags |= ENEMY_FLAGS_200000;
+        enemy->flags |= ENEMY_FLAG_200000;
         disable_npc_shadow(npc);
     }
     
@@ -172,12 +172,12 @@ ApiStatus N(BillBlasterAI_Main)(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
     
-    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         if (enemy->aiPaused != 0) {
             return ApiStatus_BLOCK;
         } 
-        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
     }
     
     switch (script->AI_TEMP_STATE) {

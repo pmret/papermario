@@ -93,7 +93,7 @@ void entity_HeartBlockContent__reset(Entity* entity) {
     entity->renderSetupFunc = entity_HeartBlockContent_setupGfx;
     entity->alpha = 255;
     data = entity->dataBuf.heartBlockContent;
-    entity->flags |= ENTITY_FLAGS_ALWAYS_FACE_CAMERA;
+    entity->flags |= ENTITY_FLAG_ALWAYS_FACE_CAMERA;
     blockEntity = get_entity_by_index(data->parentEntityIndex);
 
     if (data->unk_09 == 0) {
@@ -158,7 +158,7 @@ void entity_HeartBlockContent_anim_idle(Entity* entity, s32 arg1) {
         exec_entity_commandlist(entity);
         disable_player_input();
         gPlayerStatus.currentSpeed = 0;
-        gPlayerStatus.animFlags |= PA_FLAGS_RAISED_ARMS;
+        gPlayerStatus.animFlags |= PA_FLAG_RAISED_ARMS;
         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
     }
@@ -191,7 +191,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             data->riseVelocity -= 1.0f;
             if (data->riseVelocity <= 2.0f) {
                 data->state++;
-                entity->flags &= ~ENTITY_FLAGS_ALWAYS_FACE_CAMERA;
+                entity->flags &= ~ENTITY_FLAG_ALWAYS_FACE_CAMERA;
                 data->rotationRate = -10.0f;
                 entity_set_render_script(entity, &Entity_HeartBlockContent_RenderScriptHit);
                 entity->renderSetupFunc = entity_HeartBlockContent_setupGfx;
@@ -276,7 +276,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             }
             break;
         case 5:
-            playerStatus->animFlags &= ~PA_FLAGS_RAISED_ARMS;
+            playerStatus->animFlags &= ~PA_FLAG_RAISED_ARMS;
             enable_player_input();
             set_time_freeze_mode(TIME_FREEZE_NORMAL);
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
@@ -430,7 +430,7 @@ EntityModelScript Entity_HeartBlockContent_RenderScriptAfterHit = STANDARD_ENTIT
 EntityModelScript Entity_HeartBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_HeartBlock_Render, RENDER_MODE_SURFACE_XLU_LAYER3);
 
 EntityBlueprint Entity_HeartBlockFrame = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
+    .flags = ENTITY_FLAG_4000 | ENTITY_FLAG_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_HeartBlock_RenderScript,
     .modelAnimationNodes = 0,
@@ -443,7 +443,7 @@ EntityBlueprint Entity_HeartBlockFrame = {
 };
 
 EntityBlueprint Entity_HeartBlockContent = {
-    .flags = ENTITY_FLAGS_DISABLE_COLLISION,
+    .flags = ENTITY_FLAG_DISABLE_COLLISION,
     .typeDataSize = sizeof(HeartBlockContentData),
     .renderCommandList = Entity_HeartBlockContent_RenderScriptIdle,
     .modelAnimationNodes = 0,
@@ -456,7 +456,7 @@ EntityBlueprint Entity_HeartBlockContent = {
 };
 
 EntityBlueprint Entity_HeartBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
+    .flags = ENTITY_FLAG_4000 | ENTITY_FLAG_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_HeartBlock_RenderScript,
     .modelAnimationNodes = 0,

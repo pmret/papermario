@@ -4,7 +4,7 @@
 API_CALLABLE(N(SetItemAlpha)) {
     ItemEntity* item = get_item_entity(script->varTable[0]);
 
-    set_item_entity_flags(script->varTable[0], ITEM_ENTITY_FLAGS_TRANSPARENT);
+    set_item_entity_flags(script->varTable[0], ITEM_ENTITY_FLAG_TRANSPARENT);
     item->alpha = 255;
     return ApiStatus_DONE2;
 }

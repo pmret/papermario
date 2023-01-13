@@ -75,7 +75,7 @@ ShopOwner N(Owner) = {
 };
 
 EvtScript N(EVS_SetupShop) = {
-    EVT_CALL(MakeShop, EVT_PTR(N(ItemPositions)), EVT_PTR(N(Inventory)), EVT_PTR(N(PriceList)), ITEM_ENTITY_FLAGS_10000)
+    EVT_CALL(MakeShop, EVT_PTR(N(ItemPositions)), EVT_PTR(N(Inventory)), EVT_PTR(N(PriceList)), ITEM_ENTITY_FLAG_10000)
     EVT_CALL(MakeShopOwner, EVT_PTR(N(Owner)))
     EVT_RETURN
     EVT_END

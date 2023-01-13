@@ -3,7 +3,7 @@
 
 #define SPINY_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = STANDARD_HEART_DROPS(3), \
     .flowerDrops = STANDARD_FLOWER_DROPS(2), \
     .minCoinBonus = 0, \

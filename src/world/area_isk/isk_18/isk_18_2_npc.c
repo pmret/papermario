@@ -7,7 +7,7 @@ StaticNpc N(NpcData_BuzzyBeetle_01) = {
     .settings = &N(NpcSettings_BuzzyBeetle_Ceiling),
     .pos = { -372.0f, -700.0f, 439.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAGS_400,
+    .flags = ENEMY_FLAG_400,
     .initVarCount = 1,
     .initVar = { .value = BTL_ISK_PART_1_FORMATION_0E },
     .drops = ISK_BUZZY_BEETLE_DROPS,
@@ -31,7 +31,7 @@ StaticNpc N(NpcData_BuzzyBeetle_02) = {
     .settings = &N(NpcSettings_BuzzyBeetle_Ceiling),
     .pos = { -58.0f, -700.0f, 591.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAGS_400,
+    .flags = ENEMY_FLAG_400,
     .initVarCount = 1,
     .initVar = { .value = BTL_ISK_PART_1_FORMATION_0B },
     .drops = ISK_BUZZY_BEETLE_DROPS,
@@ -55,7 +55,7 @@ StaticNpc N(NpcData_BuzzyBeetle_03) = {
     .settings = &N(NpcSettings_BuzzyBeetle),
     .pos = { 292.0f, -780.0f, 488.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAGS_400,
+    .flags = ENEMY_FLAG_400,
     .drops = ISK_BUZZY_BEETLE_DROPS,
     .territory = {
         .wander = {

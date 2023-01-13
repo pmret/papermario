@@ -132,7 +132,7 @@ EvtScript N(EVS_RideZipline) = {
         EVT_END_IF
     EVT_CALL(PlaySound, SOUND_2087)
     EVT_LABEL(10)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_SCRIPTED_FALL, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_SCRIPTED_FALL, TRUE)
     EVT_SET(MF_Zipline_GoingDown, FALSE)
     EVT_CALL(StopSound, SOUND_80000019)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, FALSE)

@@ -531,7 +531,7 @@ void update_npcs(void) {
     f32 x, y, z;
     f32 hitYaw, hitPitch, hitLength;
 
-    playerStatus->animFlags &= ~PA_FLAGS_NPC_COLLIDED;
+    playerStatus->animFlags &= ~PA_FLAG_NPC_COLLIDED;
     if (!(gOverrideFlags & (GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400))) {
         s32 i;
 
@@ -590,9 +590,9 @@ void update_npcs(void) {
                         Shadow* shadow = get_shadow_by_index(npc->shadowIndex);
                         EntityModel* entityModel = get_entity_model(shadow->entityModelID);
 
-                        entityModel->flags &= ~ENTITY_MODEL_FLAGS_REFLECT;
+                        entityModel->flags &= ~ENTITY_MODEL_FLAG_REFLECT;
                         if (npc->flags & NPC_FLAG_REFLECT_WALL) {
-                            entityModel->flags |= ENTITY_MODEL_FLAGS_REFLECT;
+                            entityModel->flags |= ENTITY_MODEL_FLAG_REFLECT;
                         }
 
                         x = npc->pos.x;
@@ -944,7 +944,7 @@ void enable_npc_shadow(Npc* npc) {
 
     if (!(npc->flags & NPC_FLAG_HAS_SHADOW)) {
         shadow = get_shadow_by_index(npc->shadowIndex);
-        shadow->flags &= ~ENTITY_FLAGS_HIDDEN;
+        shadow->flags &= ~ENTITY_FLAG_HIDDEN;
         npc->flags = npc->flags | (NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW);
     }
 }
@@ -954,7 +954,7 @@ void disable_npc_shadow(Npc* npc) {
 
     if (npc->flags & NPC_FLAG_HAS_SHADOW) {
         shadow = get_shadow_by_index(npc->shadowIndex);
-        shadow->flags |= ENTITY_FLAGS_HIDDEN;
+        shadow->flags |= ENTITY_FLAG_HIDDEN;
         npc->flags &= ~NPC_FLAG_HAS_SHADOW;
         npc->flags &= ~NPC_FLAG_DIRTY_SHADOW;
     }
@@ -2310,7 +2310,7 @@ void init_encounter_status(void) {
         currentEncounter->encounterList[i] = 0;
     }
 
-    currentEncounter->flags = ENCOUNTER_STATUS_FLAGS_0;
+    currentEncounter->flags = ENCOUNTER_STATUS_FLAG_0;
     currentEncounter->numEncounters = 0;
     currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
     currentEncounter->hitType = 0;
@@ -2535,10 +2535,10 @@ void kill_enemy(Enemy* enemy) {
     }
 
     do {
-        if (!(enemy->flags & ENEMY_FLAGS_4)) {
-            if (!(enemy->flags & ENEMY_FLAGS_8) || (enemy == encounterStatus->currentEnemy)) {
-                if (!(enemy->flags & ENEMY_FLAGS_1)) {
-                    if (!(enemy->flags & ENEMY_FLAGS_FLED)) {
+        if (!(enemy->flags & ENEMY_FLAG_4)) {
+            if (!(enemy->flags & ENEMY_FLAG_8) || (enemy == encounterStatus->currentEnemy)) {
+                if (!(enemy->flags & ENEMY_FLAG_1)) {
+                    if (!(enemy->flags & ENEMY_FLAG_FLED)) {
                         COPY_set_defeated(encounterStatus->mapID, encounter->encounterID + i);
                     }
                 }

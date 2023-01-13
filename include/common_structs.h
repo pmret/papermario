@@ -852,8 +852,8 @@ typedef struct BattleStatus {
     /* 0x04B */ s8 unk_4B;
     /* 0x04C */ s8 unk_4C[16];
     /* 0x05C */ s8 unk_5C[16];
-    /* 0x06C */ s16 unk_6C;
-    /* 0x06E */ s16 unk_6E;
+    /* 0x06C */ s16 cancelTargetMenuSubstate; // might be more generally for returning from nested 'inner' state
+    /* 0x06E */ s16 acceptTargetMenuSubstate; // might be more generally for returning from nested 'inner' state
     /* 0x070 */ s16 menuDisableFlags; /* 1 = jump, 2 = hammer, 4 = items */
     /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
@@ -981,7 +981,7 @@ typedef struct TextureHeader {
     /* 0x22 */ u16 mainW;
     /* 0x24 */ u16 auxH;
     /* 0x26 */ u16 mainH;
-    /* 0x28 */ char unk_28;
+    /* 0x28 */ u8 unk_28;
     /* 0x29 */ u8 extraTiles; // 0 - none, 1 - mipmap, 2 - ?, 3 - use aux tile
     /* 0x2A */ u8 colorCombineType : 6;
     /* 0x2A */ u8 colorCombineSubType : 2;
@@ -1637,9 +1637,9 @@ typedef struct CollisionStatus {
     /* 0x06 */ s16 floorBelow;
     /* 0x08 */ s16 currentCeiling; /* valid on touching with head */
     /* 0x0A */ s16 currentInspect; /* associated with TRIGGER_WALL_PRESS_A */
-    /* 0x0C */ s16 unk_0C; /* associated with TRIGGER_FLAGS_2000 */
-    /* 0x0E */ s16 unk_0E; /* associated with TRIGGER_FLAGS_4000 */
-    /* 0x10 */ s16 unk_10; /* associated with TRIGGER_FLAGS_8000 */
+    /* 0x0C */ s16 unk_0C; /* associated with TRIGGER_FLAG_2000 */
+    /* 0x0E */ s16 unk_0E; /* associated with TRIGGER_FLAG_4000 */
+    /* 0x10 */ s16 unk_10; /* associated with TRIGGER_FLAG_8000 */
     /* 0x12 */ s16 currentWall;
     /* 0x14 */ s16 lastWallHammered; /* valid when smashing */
     /* 0x16 */ s16 touchingWallTrigger; /* 0/1 */
@@ -1863,18 +1863,18 @@ typedef struct Actor {
     /* 0x1BA */ char unk_1BA[2];
     /* 0x1BC */ s8 hpFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
-    /* 0x1C0 */ EvtScript* idleScriptSource;
-    /* 0x1C4 */ EvtScript* takeTurnScriptSource;
-    /* 0x1C8 */ EvtScript* onHitScriptSource;
-    /* 0x1CC */ EvtScript* onTurnChanceScriptSource;
+    /* 0x1C0 */ EvtScript* idleSource;
+    /* 0x1C4 */ EvtScript* takeTurnSource;
+    /* 0x1C8 */ EvtScript* handleEventSource;
+    /* 0x1CC */ EvtScript* handlePhaseSource;
     /* 0x1D0 */ struct Evt* idleScript;
     /* 0x1D4 */ struct Evt* takeTurnScript;
-    /* 0x1D8 */ struct Evt* onHitScript;
-    /* 0x1DC */ struct Evt* onTurnChangeScript;
+    /* 0x1D8 */ struct Evt* handleEventScript;
+    /* 0x1DC */ struct Evt* handlePhaseScript;
     /* 0x1E0 */ s32 idleScriptID;
-    /* 0x1E4 */ s32 takeTurnID;
-    /* 0x1E8 */ s32 onHitID;
-    /* 0x1EC */ s32 onTurnChangeID;
+    /* 0x1E4 */ s32 takeTurnScriptID;
+    /* 0x1E8 */ s32 handleEventScriptID;
+    /* 0x1EC */ s32 handleBatttlePhaseScriptID;
     /* 0x1F0 */ s8 lastEventType;
     /* 0x1F1 */ s8 turnPriority;
     /* 0x1F2 */ s8 enemyIndex; /* actorID = this | 200 */

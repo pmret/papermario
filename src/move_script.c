@@ -116,7 +116,7 @@ ApiStatus LoadMoveScript(Evt* script, s32 isInitialCall) {
 
     deduct_current_move_fp();
 
-    if (gBattleStatus.flags2 & BS_FLAGS2_8000000) {
+    if (gBattleStatus.flags2 & BS_FLAGS2_HAS_RUSH) {
         enable_player_blur();
     }
 

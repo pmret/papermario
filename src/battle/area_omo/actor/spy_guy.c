@@ -109,7 +109,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 7,
     .partCount = ARRAY_COUNT(N(partsTable_80227564)),
     .partsData = N(partsTable_80227564),
-    .script = &N(init_802275D4),
+    .takeTurnScript = &N(init_802275D4),
     .statusTable = N(statusTable_802274B8),
     .escapeChance = 50,
     .airLiftChance = 85,
@@ -250,7 +250,7 @@ EvtScript N(handleEvent_80227ABC) = {
             EVT_SET_CONST(LVar1, ANIM_SpyGuy_Anim0C)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar1)
             EVT_IF_EQ(LVar1, 0)

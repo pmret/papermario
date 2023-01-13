@@ -56,7 +56,7 @@ ActorPartBlueprint N(partsTable_80218EE8)[] = {
         .idleAnimations = N(idleAnimations_80218FC4),
         .defenseTable = N(defenseTable_80218E10),
         .eventFlags = ACTOR_EVENT_FLAG_FIREY,
-        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_2,
+        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAG_2,
         .unk_1C = 0xFD,
         .unk_1D = 0xF6,
     },
@@ -121,7 +121,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 9,
     .partCount = ARRAY_COUNT(N(partsTable_80218EE8)),
     .partsData = N(partsTable_80218EE8),
-    .script = &N(init_8021901C),
+    .takeTurnScript = &N(init_8021901C),
     .statusTable = N(statusTable_80218E3C),
     .escapeChance = 50,
     .airLiftChance = 90,
@@ -295,7 +295,7 @@ EvtScript N(handleEvent_80219500) = {
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim07)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
         EVT_CASE_OR_EQ(EVENT_BURN_TAUNT)

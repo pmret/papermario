@@ -28,9 +28,9 @@ void action_update_tornado_jump(void) {
     s32 colliderBelow;
     u32 entityType;
 
-    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->flags |= (PS_FLAGS_SPINNING | PS_FLAGS_FLYING | PS_FLAGS_JUMPING);
+    if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
+        playerStatus->flags |= (PS_FLAG_SPINNING | PS_FLAG_FLYING | PS_FLAG_JUMPING);
         phys_clear_spin_history();
         playerStatus->actionSubstate = SUBSTATE_ASCEND;
         playerStatus->currentSpeed = 0.0f;
@@ -40,7 +40,7 @@ void action_update_tornado_jump(void) {
         playerStatus->gravityIntegrator[3] = -0.75f;
         suggest_player_anim_setUnkFlag(ANIM_Mario_80000);
         disable_player_input();
-        playerStatus->flags |= PS_FLAGS_SPECIAL_JUMP;
+        playerStatus->flags |= PS_FLAG_SPECIAL_JUMP;
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
         cameraRelativeYaw = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw);
         if (cameraRelativeYaw <= 180.0f) {
@@ -89,12 +89,12 @@ void action_update_tornado_jump(void) {
             if (fallVelocity <= 0.0f) {
                 record_jump_apex();
                 playerStatus->currentStateTime = 3;
-                playerStatus->flags |= PS_FLAGS_FALLING;
+                playerStatus->flags |= PS_FLAG_FALLING;
                 playerStatus->actionSubstate++;
                 sfx_play_sound_at_player(SOUND_TORNADO_JUMP, 0);
             }
             if (colliderBelow >= 0) {
-                playerStatus->flags &= ~(PS_FLAGS_SPINNING | PS_FLAGS_FLYING);
+                playerStatus->flags &= ~(PS_FLAG_SPINNING | PS_FLAG_FLYING);
                 set_action_state(ACTION_STATE_LAND);
             }
             break;
@@ -116,11 +116,11 @@ void action_update_tornado_jump(void) {
                 if (collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT) {
                     entityType = get_entity_type(collisionStatus->currentFloor);
                     if (entityType == ENTITY_TYPE_SIMPLE_SPRING || entityType == ENTITY_TYPE_SCRIPT_SPRING) {
-                        playerStatus->flags &= ~(PS_FLAGS_SPINNING | PS_FLAGS_FLYING);
+                        playerStatus->flags &= ~(PS_FLAG_SPINNING | PS_FLAG_FLYING);
                         set_action_state(ACTION_STATE_LAND);
                         return;
                     } else if (entityType == ENTITY_TYPE_BLUE_SWITCH || entityType == ENTITY_TYPE_RED_SWITCH) {
-                        playerStatus->flags &= ~(PS_FLAGS_SPINNING | PS_FLAGS_FLYING);
+                        playerStatus->flags &= ~(PS_FLAG_SPINNING | PS_FLAG_FLYING);
                         phys_player_land();
                         exec_ShakeCam1(0, 0, 4);
                         sfx_play_sound_at_player(SOUND_14A, 0);
@@ -128,7 +128,7 @@ void action_update_tornado_jump(void) {
 
                         gCurrentHiddenPanels.tryFlipTrigger = TRUE;
                         gCurrentHiddenPanels.flipTriggerPosY = playerStatus->position.y;
-                        playerStatus->flags |= PS_FLAGS_SPECIAL_LAND;
+                        playerStatus->flags |= PS_FLAG_SPECIAL_LAND;
                         return;
                     }
                 }
@@ -136,13 +136,13 @@ void action_update_tornado_jump(void) {
                 surfaceType = get_collider_flags(colliderBelow) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                 if (surfaceType == SURFACE_TYPE_LAVA) {
                     playerStatus->hazardType = HAZARD_TYPE_LAVA;
-                    playerStatus->flags &= ~(PS_FLAGS_SPINNING | PS_FLAGS_FLYING);
+                    playerStatus->flags &= ~(PS_FLAG_SPINNING | PS_FLAG_FLYING);
                     set_action_state(ACTION_STATE_HIT_LAVA);
-                    playerStatus->flags |= PS_FLAGS_HIT_FIRE;
+                    playerStatus->flags |= PS_FLAG_HIT_FIRE;
                     return;
                 } else if (surfaceType == SURFACE_TYPE_SPIKES) {
                     set_action_state(ACTION_STATE_HIT_LAVA);
-                    playerStatus->flags &= ~(PS_FLAGS_SPINNING | PS_FLAGS_FLYING);
+                    playerStatus->flags &= ~(PS_FLAG_SPINNING | PS_FLAG_FLYING);
                     return;
                 }
                 playerStatus->currentStateTime = 8;
@@ -155,13 +155,13 @@ void action_update_tornado_jump(void) {
 
                 gCurrentHiddenPanels.tryFlipTrigger = TRUE;
                 gCurrentHiddenPanels.flipTriggerPosY = playerStatus->position.y;
-                playerStatus->flags |= PS_FLAGS_SPECIAL_LAND;
+                playerStatus->flags |= PS_FLAG_SPECIAL_LAND;
             }
             break;
         case SUBSTATE_IMPACT:
             if (--playerStatus->currentStateTime == 0) {
                 playerStatus->actionSubstate++;
-                playerStatus->flags &= ~(PS_FLAGS_SPINNING | PS_FLAGS_FLYING);
+                playerStatus->flags &= ~(PS_FLAG_SPINNING | PS_FLAG_FLYING);
                 set_action_state(ACTION_STATE_LAND);
             }
             break;

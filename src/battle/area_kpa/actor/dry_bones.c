@@ -134,7 +134,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 8,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 50,
     .airLiftChance = 75,
@@ -322,7 +322,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_DryBones_Anim07)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_EXEC_WAIT(N(reassemble))
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)

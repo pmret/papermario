@@ -144,7 +144,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 7,
     .partCount = ARRAY_COUNT(N(partsTable_8021B460)),
     .partsData = N(partsTable_8021B460),
-    .script = &N(init_8021B564),
+    .takeTurnScript = &N(init_8021B564),
     .statusTable = N(statusTable_8021B3B4),
     .escapeChance = 50,
     .airLiftChance = 95,
@@ -598,7 +598,7 @@ EvtScript N(handleEvent_8021C9C4) = {
             EVT_SET_CONST(LVar0, 2)
             EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hyper_Idle)
             EVT_EXEC_WAIT(DoImmune)
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 2)
@@ -1264,7 +1264,7 @@ EvtScript N(handleEvent_8021F41C) = {
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_Idle)
             EVT_EXEC_WAIT(DoImmune)
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)

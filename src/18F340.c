@@ -30,7 +30,7 @@ void func_80260A60(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     ActorPart* actorPart = &battleStatus->playerActor->partsTable[0];
 
-    if (battleStatus->flags2 & BS_FLAGS2_40) {
+    if (battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE) {
         actorPart->idleAnimations = bPeachIdleAnims;
         set_animation(0, 0, 0xA0002);
     } else if (!battleStatus->outtaSightActive) {
@@ -154,7 +154,7 @@ ApiStatus func_80260DD8(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80260E38(Evt* script, s32 isInitialCall) {
-    btl_show_battle_message(0x31, 60);
+    btl_show_battle_message(BTL_MSG_31, 60);
     return ApiStatus_DONE2;
 }
 
@@ -217,8 +217,8 @@ ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802610CC(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
-        mdl_set_all_fog_mode(1);
-        *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
+        mdl_set_all_fog_mode(FOG_MODE_1);
+        *gBackgroundFogModePtr = FOG_MODE_1;
         set_background_color_blend(0, 0, 0, 0);
         script->functionTemp[0] = 20;
     }
@@ -267,20 +267,20 @@ ApiStatus RestorePreDefeatState(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->rushFlags = RUSH_FLAG_NONE;
-    gBattleState = D_800DC4E4;
-    gBattleSubState = D_800DC4D8;
+    gBattleState = gDefeatedBattleState;
+    gBattleSubState = gDefeatedBattleSubstate;
     battleStatus->flags1 |= BS_FLAGS1_8;
-    battleStatus->flags2 &= ~BS_FLAGS2_8000000;
+    battleStatus->flags2 &= ~BS_FLAGS2_HAS_RUSH;
 
-    if (!(battleStatus->flags2 & BS_FLAGS2_40)) {
+    if (!(battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE)) {
         if (playerData->curHP <= 1 && is_ability_active(ABILITY_MEGA_RUSH)) {
-            gBattleStatus.flags2 |= BS_FLAGS2_8000000;
+            gBattleStatus.flags2 |= BS_FLAGS2_HAS_RUSH;
             battleStatus->rushFlags |= RUSH_FLAG_MEGA;
         }
 
         if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) &&
             !(battleStatus->rushFlags & RUSH_FLAG_MEGA)) {
-            gBattleStatus.flags2 |= BS_FLAGS2_8000000;
+            gBattleStatus.flags2 |= BS_FLAGS2_HAS_RUSH;
             battleStatus->rushFlags |= RUSH_FLAG_POWER;
         }
     }
@@ -324,8 +324,8 @@ ApiStatus PlayBattleMerleeOrbFX(Evt* script, s32 isInitialCall) {
 
 ApiStatus BattleMerleeFadeStageToBlack(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
-        mdl_set_all_fog_mode(1);
-        *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
+        mdl_set_all_fog_mode(FOG_MODE_1);
+        *gBackgroundFogModePtr = FOG_MODE_1;
         set_background_color_blend(0, 0, 0, 0);
         script->functionTemp[0] = 25;
     }
@@ -991,7 +991,7 @@ EvtScript HandleEvent_Player = {
             EVT_EXEC_WAIT(D_80298724)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208C)
             EVT_SET_CONST(LVar1, ANIM_Mario_10002)

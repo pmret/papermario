@@ -12344,31 +12344,33 @@ segments:
     start: 0xB837C0
     vram: 0x80240000
     subsegments:
-    - [0xB837C0, c]
-    - [0xB837E0, data]
-    - [0xB838C0, data]
-    - [0xB83B20, data]
-    - [0xB83B80]
+    - [0xB837C0, c, jan_17_0_header]
+    - [0xB837C0, c, jan_17_1_music]
+    - [0xB837C0, c, jan_17_2_main]
+    - [0xB837E0, c, jan_17_3_entity]
+    - [0xB837E0]
   - name: jan_18
     dir: world/area_jan/jan_18
     type: code
     start: 0xB83B90
     vram: 0x80240000
     subsegments:
-    - [0xB83B90, c]
-    - [0xB83B90, data]
-    - [0xB83E10, data]
-    - [0xB83E50]
+    - [0xB83B90, c, jan_18_0_header]
+    - [0xB83B90, c, jan_18_1_music]
+    - [0xB83B90, c, jan_18_2_main]
+    - [0xB83B90, c, jan_18_3_entity]
+    - [0xB83B90]
   - name: jan_19
     dir: world/area_jan/jan_19
     type: code
     start: 0xB83E60
     vram: 0x80240000
     subsegments:
-    - [0xB83E60, c]
-    - [0xB83E80, data]
-    - [0xB84110, data]
-    - [0xB84170]
+    - [0xB83E60, c, jan_19_0_header]
+    - [0xB83E60, c, jan_19_1_music]
+    - [0xB83E60, c, jan_19_2_main]
+    - [0xB83E80, c, jan_19_3_entity]
+    - [0xB83E80]
   - name: jan_22
     dir: world/area_jan/jan_22
     type: code

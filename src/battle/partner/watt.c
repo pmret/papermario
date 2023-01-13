@@ -77,7 +77,7 @@ ApiStatus N(WattFXUpdate)(Evt* script, s32 isInitialCall) {
                     sWattEffectData_effect1 = fx_static_status(0, x, y, z, 1.0f, 5, 0);
                 }
                 if (sWattEffectData_effect2 != NULL) {
-                    sWattEffectData_effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+                    sWattEffectData_effect2->flags |= EFFECT_INSTANCE_FLAG_10;
                     sWattEffectData_effect2 = NULL;
                 }
                 sWattEffectData_effect1->data.staticStatus->unk_04 = x;
@@ -86,7 +86,7 @@ ApiStatus N(WattFXUpdate)(Evt* script, s32 isInitialCall) {
                 break;
             case 1:
                 if (sWattEffectData_effect1 != NULL) {
-                    sWattEffectData_effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+                    sWattEffectData_effect1->flags |= EFFECT_INSTANCE_FLAG_10;
                     sWattEffectData_effect1 = NULL;
                 }
                 if (sWattEffectData_effect2 == NULL) {
@@ -99,11 +99,11 @@ ApiStatus N(WattFXUpdate)(Evt* script, s32 isInitialCall) {
         }
     } else {
         if (sWattEffectData_effect1 != NULL) {
-            sWattEffectData_effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+            sWattEffectData_effect1->flags |= EFFECT_INSTANCE_FLAG_10;
             sWattEffectData_effect1 = NULL;
         }
         if (sWattEffectData_effect2 != NULL) {
-            sWattEffectData_effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+            sWattEffectData_effect2->flags |= EFFECT_INSTANCE_FLAG_10;
             sWattEffectData_effect2 = NULL;
         }
     }
@@ -167,7 +167,7 @@ ApiStatus N(ElectroDashFXDisable)(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = N(radialShimmer);
 
     if (effect != NULL) {
-        effect->flags |= EFFECT_INSTANCE_FLAGS_10;
+        effect->flags |= EFFECT_INSTANCE_FLAG_10;
     }
     N(radialShimmer) = NULL;
 
@@ -392,7 +392,7 @@ ApiStatus N(MegaShockFX)(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
             }
             if (script->functionTemp[2] == 0) {
-                N(thunderboltRing)->flags |= EFFECT_INSTANCE_FLAGS_10;
+                N(thunderboltRing)->flags |= EFFECT_INSTANCE_FLAG_10;
                 return ApiStatus_DONE2;
             }
             script->functionTemp[2]--;
@@ -504,7 +504,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -552,7 +552,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1,  ANIM_BattleWatt_Hurt)
             EVT_EXEC_WAIT(DoPartnerHit)
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)

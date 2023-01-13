@@ -557,7 +557,7 @@ void filemenu_main_init(MenuPanel* menu) {
 
     for (i = 0; i < ARRAY_COUNT(filemenu_hudElemIDs); i++) {
         filemenu_hudElemIDs[i] = hud_element_create(filemenu_main_hudElemScripts[i]);
-        hud_element_set_flags(filemenu_hudElemIDs[i], HUD_ELEMENT_FLAGS_80);
+        hud_element_set_flags(filemenu_hudElemIDs[i], HUD_ELEMENT_FLAG_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(filemenu_main_windowBPs); i++) {

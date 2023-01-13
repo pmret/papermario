@@ -225,7 +225,7 @@ void entity_StarBoxLauncher_launch(Entity* entity) {
 }
 
 void func_802BC99C_E312EC(Entity* entity) {
-    if (!(entity->flags & ENTITY_FLAGS_2000000)) {
+    if (!(entity->flags & ENTITY_FLAG_2000000)) {
         exec_entity_commandlist(entity);
     }
 }
@@ -261,7 +261,7 @@ EntityScript Entity_StarBoxLauncher_Script = {
 EntityModelScript Entity_StarBoxLauncher_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_StarBoxLauncher_RenderTop, RENDER_MODE_SURFACE_OPA);
 
 EntityBlueprint Entity_StarBoxLauncher = {
-    .flags = ENTITY_FLAGS_8000,
+    .flags = ENTITY_FLAG_8000,
     .typeDataSize = sizeof(StarBoxLauncherData),
     .renderCommandList = Entity_StarBoxLauncher_RenderScript,
     .modelAnimationNodes = 0,

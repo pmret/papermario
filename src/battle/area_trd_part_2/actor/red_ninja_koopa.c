@@ -70,7 +70,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 5,
     .partCount = ARRAY_COUNT(N(partsTable_802285C4)),
     .partsData = N(partsTable_802285C4),
-    .script = &N(init_8022AC8C),
+    .takeTurnScript = &N(init_8022AC8C),
     .statusTable = N(statusTable_80228518),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -767,7 +767,7 @@ EvtScript N(handleEvent_8022ADE8) = {
             EVT_END_LOOP
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
             EVT_IF_EQ(LVar0, 0)

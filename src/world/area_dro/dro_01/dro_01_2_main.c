@@ -31,8 +31,8 @@ EvtScript N(EVS_Scene_RuinsRising) = {
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 175, 0, -201)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(N(UnkFunc27), 2, 0, 3)
-    EVT_CALL(N(UnkFunc27), 1, -1, 3)
+    EVT_CALL(N(UnkFunc27), 2, 0, FOG_MODE_3)
+    EVT_CALL(N(UnkFunc27), 1, -1, FOG_MODE_3)
     EVT_CALL(N(UnkFunc26), 3, 44, 32, 177, 0, 0, 0, 0, 0, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_THREAD

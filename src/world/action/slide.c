@@ -44,11 +44,11 @@ void action_update_sliding(void) {
     f32 hitRx, hitRy, hitDirX, hitDirZ;
     s32 hitID;
 
-    if (playerStatus->flags & PS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~PS_FLAGS_ACTION_STATE_CHANGED;
+    if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
         playerStatus->actionSubstate = SUBSTATE_SLIDING;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->animFlags |= PA_FLAGS_INTERRUPT_USE_PARTNER;
+        playerStatus->animFlags |= PA_FLAG_INTERRUPT_USE_PARTNER;
         func_802B6000_E27510();
         SlideAcceleration = 0.0f;
         D_802B6790 = 0.0f;

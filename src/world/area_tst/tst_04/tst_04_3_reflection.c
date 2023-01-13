@@ -23,9 +23,9 @@ void N(worker_render_player_reflection)(void) {
     s32 screenY;
     s32 screenZ;
 
-    if (playerStatus->flags & PS_FLAGS_HAS_REFLECTION) {
+    if (playerStatus->flags & PS_FLAG_HAS_REFLECTION) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
-        entityModel->flags |= MODEL_FLAGS_FLAG_200;
+        entityModel->flags |= MODEL_FLAG_FLAG_200;
 
         get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
                           &screenX, &screenY, &screenZ);

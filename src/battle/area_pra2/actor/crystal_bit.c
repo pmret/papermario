@@ -153,7 +153,7 @@ ActorBlueprint N(1) = {
     .maxHP = 1,
     .partCount = ARRAY_COUNT(N(parts_1)),
     .partsData = N(parts_1),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -176,7 +176,7 @@ ActorBlueprint N(2) = {
     .maxHP = 1,
     .partCount = ARRAY_COUNT(N(parts_2)),
     .partsData = N(parts_2),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -199,7 +199,7 @@ ActorBlueprint N(3) = {
     .maxHP = 1,
     .partCount = ARRAY_COUNT(N(parts_3)),
     .partsData = N(parts_3),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -289,7 +289,7 @@ EvtScript N(handleEvent) = {
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
             EVT_EXEC_WAIT(DoBurnHit)
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)

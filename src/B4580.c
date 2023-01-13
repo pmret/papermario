@@ -288,7 +288,7 @@ s32 create_model_animator(s16* animPos) {
 
     ASSERT(animator != NULL);
 
-    animator->flags = MODEL_ANIMATOR_FLAGS_UPDATE_PENDING | MODEL_ANIMATOR_FLAGS_ENABLED | MODEL_ANIMATOR_FLAGS_CAM_2 | MODEL_ANIMATOR_FLAGS_CAM_1 | MODEL_ANIMATOR_FLAGS_CAM_0;
+    animator->flags = MODEL_ANIMATOR_FLAG_UPDATE_PENDING | MODEL_ANIMATOR_FLAG_ENABLED | MODEL_ANIMATOR_FLAG_CAM_2 | MODEL_ANIMATOR_FLAG_CAM_1 | MODEL_ANIMATOR_FLAG_CAM_0;
     animator->renderMode = RENDER_MODE_ALPHATEST;
     animator->nextUpdateTime = 1.0f;
     animator->timeScale = 1.0f;
@@ -332,7 +332,7 @@ s32 create_mesh_animator(s16* animPos, s16* animBuffer) {
 
     ASSERT(animator != NULL);
 
-    animator->flags = MODEL_ANIMATOR_FLAGS_UPDATE_PENDING | MODEL_ANIMATOR_FLAGS_ENABLED | MODEL_ANIMATOR_FLAGS_CAM_2 | MODEL_ANIMATOR_FLAGS_CAM_1 | MODEL_ANIMATOR_FLAGS_CAM_0;
+    animator->flags = MODEL_ANIMATOR_FLAG_UPDATE_PENDING | MODEL_ANIMATOR_FLAG_ENABLED | MODEL_ANIMATOR_FLAG_CAM_2 | MODEL_ANIMATOR_FLAG_CAM_1 | MODEL_ANIMATOR_FLAG_CAM_0;
     animator->renderMode = RENDER_MODE_ALPHATEST;
     animator->baseAddr = NULL;
     animator->fpRenderCallback = NULL;
@@ -365,7 +365,7 @@ AnimatorNode* add_anim_node(ModelAnimator* animator, s32 parentNodeID, AnimatorN
     ret = heap_malloc(sizeof(*ret));
     ASSERT(ret != NULL);
 
-    ret->flags = MODEL_ANIMATOR_FLAGS_ENABLED;
+    ret->flags = MODEL_ANIMATOR_FLAG_ENABLED;
     ret->displayList = nodeBP->displayList;
     ret->basePos.x = nodeBP->basePos.x;
     ret->basePos.y = nodeBP->basePos.y;
@@ -437,11 +437,11 @@ void update_model_animator(s32 animatorID) {
         if (animator != NULL && animator->flags != 0) {
             s32 temp = 0;
 
-            if (!(animator->flags & MODEL_ANIMATOR_FLAGS_FREEZE_ANIMATION)) {
-                animator->flags &= ~MODEL_ANIMATOR_FLAGS_UPDATE_PENDING;
+            if (!(animator->flags & MODEL_ANIMATOR_FLAG_FREEZE_ANIMATION)) {
+                animator->flags &= ~MODEL_ANIMATOR_FLAG_UPDATE_PENDING;
                 animator->nextUpdateTime -= animator->timeScale;
                 if (animator->nextUpdateTime <= 0.0f) {
-                    if (!(animator->flags & MODEL_ANIMATOR_FLAGS_MESH)) {
+                    if (!(animator->flags & MODEL_ANIMATOR_FLAG_MESH)) {
                         do {
                             temp = step_model_animator(animator);
                         } while (temp > 0);
@@ -494,11 +494,11 @@ void update_model_animator_with_transform(s32 animatorID, Mtx* mtx) {
         if (animator != NULL && animator->flags != 0) {
             s32 temp = 0;
 
-            if (!(animator->flags & MODEL_ANIMATOR_FLAGS_FREEZE_ANIMATION)) {
-                animator->flags &= ~MODEL_ANIMATOR_FLAGS_UPDATE_PENDING;
+            if (!(animator->flags & MODEL_ANIMATOR_FLAG_FREEZE_ANIMATION)) {
+                animator->flags &= ~MODEL_ANIMATOR_FLAG_UPDATE_PENDING;
                 animator->nextUpdateTime -= animator->timeScale;
                 if (animator->nextUpdateTime <= 0.0f) {
-                    if (!(animator->flags & MODEL_ANIMATOR_FLAGS_MESH)) {
+                    if (!(animator->flags & MODEL_ANIMATOR_FLAG_MESH)) {
                         do {
                             temp = step_model_animator(animator);
                         } while (temp > 0);
@@ -583,7 +583,7 @@ s32 step_model_animator(ModelAnimator* animator) {
             animator->animReadPos = args;
             return 1;
         case AS_OP_19:
-            animator->flags |= MODEL_ANIMATOR_FLAGS_NO_FLIP;
+            animator->flags |= MODEL_ANIMATOR_FLAG_NO_FLIP;
             animator->animReadPos = args;
             return 1;
         case AS_SET_ROTATION:
@@ -645,14 +645,14 @@ void animator_update_model_transforms(ModelAnimator* animator, Mtx* rootTransfor
     Matrix4f flipMtx;
 
     if (animator->rootNode != NULL) {
-        switch (animator->flags & (MODEL_ANIMATOR_FLAGS_FLIP_Z | MODEL_ANIMATOR_FLAGS_FLIP_Y | MODEL_ANIMATOR_FLAGS_FLIP_X)) {
-            case MODEL_ANIMATOR_FLAGS_FLIP_Z:
+        switch (animator->flags & (MODEL_ANIMATOR_FLAG_FLIP_Z | MODEL_ANIMATOR_FLAG_FLIP_Y | MODEL_ANIMATOR_FLAG_FLIP_X)) {
+            case MODEL_ANIMATOR_FLAG_FLIP_Z:
                 animator_make_mirrorZ(flipMtx);
                 break;
-            case MODEL_ANIMATOR_FLAGS_FLIP_Y:
+            case MODEL_ANIMATOR_FLAG_FLIP_Y:
                 animator_make_mirrorY(flipMtx);
                 break;
-            case MODEL_ANIMATOR_FLAGS_FLIP_X:
+            case MODEL_ANIMATOR_FLAG_FLIP_X:
                 animator_make_mirrorX(flipMtx);
                 break;
             default:
@@ -674,19 +674,19 @@ void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx
     guMtxCatF(gAnimScaleMtx, gAnimRotMtx, gAnimRotScaleMtx);
     guMtxCatF(gAnimRotScaleMtx, gAnimTranslateMtx, sp10);
 
-    if (!(animator->flags & MODEL_ANIMATOR_FLAGS_NO_FLIP)) {
+    if (!(animator->flags & MODEL_ANIMATOR_FLAG_NO_FLIP)) {
         guMtxCatF(sp10, flipMtx, sp10);
     }
 
     copy_matrix(sp10, node->mtx);
 
-    if (node->flags & MODEL_ANIMATOR_FLAGS_HAS_MODEL) {
+    if (node->flags & MODEL_ANIMATOR_FLAG_HAS_MODEL) {
         Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(node->fcData.modelID));
 
         copy_matrix(sp10, model->transformMatrix);
         guMtxL2F(sp10, rootTransform);
         guMtxCatF(model->transformMatrix, sp10, model->transformMatrix);
-        model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX;
+        model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
     }
 
     for (i = 0; i < ARRAY_COUNT(node->children); i++) {
@@ -705,8 +705,8 @@ void render_animated_model(s32 animatorID, Mtx* rootTransform) {
 
         animatorID &= ~0x800;
         animator = (*gCurrentAnimMeshListPtr)[animatorID];
-        if (animator != NULL && animator->flags != 0 && !(animator->flags & MODEL_ANIMATOR_FLAGS_UPDATE_PENDING) &&
-            animator->flags & (1 << gCurrentCamID) && !(animator->flags & MODEL_ANIMATOR_FLAGS_HIDDEN))
+        if (animator != NULL && animator->flags != 0 && !(animator->flags & MODEL_ANIMATOR_FLAG_UPDATE_PENDING) &&
+            animator->flags & (1 << gCurrentCamID) && !(animator->flags & MODEL_ANIMATOR_FLAG_HIDDEN))
         {
             animator->mtx = *rootTransform;
             animator->baseAddr = NULL;
@@ -728,8 +728,8 @@ void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32
 
         animatorID &= ~0x800;
         animator = (*gCurrentAnimMeshListPtr)[animatorID];
-        if (animator != NULL && animator->flags != 0 && !(animator->flags & MODEL_ANIMATOR_FLAGS_UPDATE_PENDING) &&
-            animator->flags & (1 << gCurrentCamID) && !(animator->flags & MODEL_ANIMATOR_FLAGS_HIDDEN))
+        if (animator != NULL && animator->flags != 0 && !(animator->flags & MODEL_ANIMATOR_FLAG_UPDATE_PENDING) &&
+            animator->flags & (1 << gCurrentCamID) && !(animator->flags & MODEL_ANIMATOR_FLAG_HIDDEN))
         {
             animator->mtx = *rootTransform;
             gAnimVtxSegment = segment;
@@ -825,7 +825,7 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
     s32 totalVtxCount;
     s32 cmd;
 
-    if (node->flags & MODEL_ANIMATOR_FLAGS_HIDDEN) {
+    if (node->flags & MODEL_ANIMATOR_FLAG_HIDDEN) {
         for (i = 0; i < ARRAY_COUNT(node->children); i++) {
             if (node->children[i] != NULL) {
                 guMtxCatF(node->mtx, mtx, node->mtx);
@@ -844,7 +844,7 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
     gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
     gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
     gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
-    if (animator->flags & MODEL_ANIMATOR_FLAGS_CULL_BACK) {
+    if (animator->flags & MODEL_ANIMATOR_FLAG_CULL_BACK) {
         gSPSetGeometryMode(gMasterGfxPos++, G_CULL_BACK);
     }
     if (!gAnimModelFogEnabled) {
@@ -1059,7 +1059,7 @@ void load_model_animator_node(StaticAnimatorNode* node, ModelAnimator* animator,
 
         if (node->modelID != 0) {
             newNode->fcData.modelID = node->modelID - 1;
-            newNode->flags |= MODEL_ANIMATOR_FLAGS_HAS_MODEL;
+            newNode->flags |= MODEL_ANIMATOR_FLAG_HAS_MODEL;
         }
 
         i = 0;
@@ -1126,7 +1126,7 @@ void load_mesh_animator_tree(s32 index, StaticAnimatorNode** tree) {
         }
 
         load_mesh_animator_node(*gAnimTreeRoot, animator, 0, nodeIDs);
-        animator->flags |= MODEL_ANIMATOR_FLAGS_MESH;
+        animator->flags |= MODEL_ANIMATOR_FLAG_MESH;
     }
 }
 
@@ -1228,7 +1228,7 @@ s32 step_mesh_animator(ModelAnimator* animator) {
             animator->animReadPos = args;
             return 1;
         case AS_OP_19:
-            animator->flags |= MODEL_ANIMATOR_FLAGS_NO_FLIP;
+            animator->flags |= MODEL_ANIMATOR_FLAG_NO_FLIP;
             animator->animReadPos = args;
             return 1;
         case AS_SET_ROTATION:

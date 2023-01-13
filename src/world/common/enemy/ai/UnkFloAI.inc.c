@@ -188,7 +188,7 @@ ApiStatus N(UnkFloAI_Main)(Evt* script, s32 isInitialCall) {
     enemy->unk_118 = 0.01f;
     #endif
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_4)) {
         script->functionTemp[0] = AI_STATE_WANDER_INIT;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
@@ -200,10 +200,10 @@ ApiStatus N(UnkFloAI_Main)(Evt* script, s32 isInitialCall) {
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
-        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
             script->functionTemp[0] = AI_STATE_SUSPEND;
             script->functionTemp[1] = AI_STATE_WANDER_INIT;
-            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
         }
     }
 

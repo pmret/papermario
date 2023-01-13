@@ -9,7 +9,7 @@ API_CALLABLE(N(ShutterCrashRumble)) {
 }
 
 API_CALLABLE(N(EnableItemTransparency)) {
-    set_item_entity_flags(script->varTable[0], ITEM_ENTITY_FLAGS_TRANSPARENT);
+    set_item_entity_flags(script->varTable[0], ITEM_ENTITY_FLAG_TRANSPARENT);
     return ApiStatus_DONE2;
 }
 

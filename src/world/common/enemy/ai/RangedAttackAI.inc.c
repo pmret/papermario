@@ -29,7 +29,7 @@ ApiStatus N(RangedAttackAI_Main)(Evt* script, s32 isInitialCall) {
     territory.halfHeight = 40.0f;
     territory.detectFlags = 0;
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_4)) {
         script->AI_TEMP_STATE = 0;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
@@ -43,15 +43,15 @@ ApiStatus N(RangedAttackAI_Main)(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
 
-        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = 0;
-            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
-        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        } else if (enemy->flags & ENEMY_FLAG_40000000) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
-        enemy->flags &= ~ENEMY_FLAGS_40000000;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        enemy->flags &= ~ENEMY_FLAG_40000000;
     }
 
     switch (script->AI_TEMP_STATE) {

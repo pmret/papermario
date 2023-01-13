@@ -10,7 +10,7 @@
 
 #define QUIZMO_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }
@@ -216,8 +216,8 @@ API_CALLABLE(N(Quizmo_HideWorld)) {
     if (isInitialCall) {
         s32 i;
 
-        mdl_set_all_fog_mode(1);
-        *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
+        mdl_set_all_fog_mode(FOG_MODE_1);
+        *gBackgroundFogModePtr = FOG_MODE_1;
         set_background_color_blend(0, 0, 0, 0);
 
         for (i = 0; i < MAX_NPCS; i++) {
@@ -231,8 +231,8 @@ API_CALLABLE(N(Quizmo_HideWorld)) {
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* itemEntity = get_item_entity(i);
 
-            if (itemEntity != NULL && itemEntity->flags & ITEM_ENTITY_FLAGS_10) {
-                itemEntity->flags |= ITEM_ENTITY_FLAGS_8000000;
+            if (itemEntity != NULL && itemEntity->flags & ITEM_ENTITY_FLAG_10) {
+                itemEntity->flags |= ITEM_ENTITY_FLAG_8000000;
             }
         }
 
@@ -271,8 +271,8 @@ API_CALLABLE(N(Quizmo_FadeInWorld)) {
     if (script->functionTemp[0] == 0 && script->functionTemp[1] == 0) {
         script->functionTemp[1] = 1;
     } else if (script->functionTemp[1] == 1) {
-        mdl_set_all_fog_mode(0);
-        *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_0;
+        mdl_set_all_fog_mode(FOG_MODE_0);
+        *gBackgroundFogModePtr = FOG_MODE_0;
 
         for (i = 0; i < MAX_NPCS; i++) {
             Npc* npc = get_npc_by_index(i);
@@ -285,8 +285,8 @@ API_CALLABLE(N(Quizmo_FadeInWorld)) {
 
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* entity = get_item_entity(i);
-            if (entity != NULL && entity->flags & ITEM_ENTITY_FLAGS_10) {
-                entity->flags &= ~ITEM_ENTITY_FLAGS_8000000;
+            if (entity != NULL && entity->flags & ITEM_ENTITY_FLAG_10) {
+                entity->flags &= ~ITEM_ENTITY_FLAG_8000000;
             }
         }
 
@@ -358,8 +358,8 @@ API_CALLABLE(N(Quizmo_DestroyEffects)) {
     QuizmoStageFXData* stageData;
 
     if (isInitialCall) {
-        N(Quizmo_AudienceEffect)->flags |= EFFECT_INSTANCE_FLAGS_10;
-        N(Quizmo_VannaTEffect)->flags |= EFFECT_INSTANCE_FLAGS_10;
+        N(Quizmo_AudienceEffect)->flags |= EFFECT_INSTANCE_FLAG_10;
+        N(Quizmo_VannaTEffect)->flags |= EFFECT_INSTANCE_FLAG_10;
     }
 
     stageData = N(Quizmo_StageEffect)->data.quizmoStage;
@@ -1161,10 +1161,10 @@ EvtScript N(EVS_Quizmo_NPC_Interact) = {
     EVT_USE_ARRAY(EVT_PTR(N(Quizmo_ScriptArray)))
     EVT_SET(GF_Quizmo_ChangedLocation, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_MOVEMENT_LOCKED, 1)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_MOVEMENT_LOCKED, 1)
     EVT_EXEC_WAIT(N(EVS_Quizmo_QuizMain))
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_MOVEMENT_LOCKED, 0)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_MOVEMENT_LOCKED, 0)
     EVT_RETURN
     EVT_END
 };
@@ -1197,11 +1197,11 @@ NpcSettings N(NpcSettings_ChuckQuizmo) = {
     .otherAI = &N(EVS_Quizmo_NPC_OtherAI),
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .aux = &N(EVS_Quizmo_NPC_Aux),
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .level = 99,
 };
 
-// alternate (unused?) variant of quizmo with AI and ENEMY_FLAGS_100 unset
+// alternate (unused?) variant of quizmo with AI and ENEMY_FLAG_100 unset
 NpcSettings N(Quizmo_AltNpcSettings) = {
     .defaultAnim = ANIM_ChuckQuizmo_Idle,
     .height = 35,
@@ -1210,7 +1210,7 @@ NpcSettings N(Quizmo_AltNpcSettings) = {
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .ai = &N(EVS_Quizmo_Npc_AI),
     .aux = &N(EVS_Quizmo_NPC_Aux),
-    .flags = ENEMY_FLAGS_1 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800,
+    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .level = 99,
     .actionFlags = 16,
 };

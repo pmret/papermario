@@ -41,7 +41,7 @@ ApiStatus func_80240000_D9AEF0(Evt* script, s32 isInitialCall) {
             it->unk_08 = temp_f20;
         }
         model = get_model_from_list_index(get_model_list_index_from_tree_index(it->treeIndex));
-        model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED;
+        model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
         guTranslateF(sp18, -it->unk_00, 0.0f, -it->unk_04);
         guRotateF(sp58, temp_f20, 0.0f, 0.0f, 1.0f);
         guMtxCatF(sp18, sp58, model->transformMatrix);

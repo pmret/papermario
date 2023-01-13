@@ -1068,8 +1068,8 @@ extern ModelNode* D_80152218;
 extern ModelTreeInfoList D_80152220;
 extern ModelTreeInfoList D_80152A20;
 
-extern s8 wBgRenderType;
-extern s8 bBgRenderType;
+extern s8 wBackgroundFogMode;
+extern s8 bBackgroundFogMode;
 extern s32 mdl_treeIterPos;
 extern Fog wFogSettings;
 extern Fog bFogSettings;
@@ -1134,33 +1134,33 @@ void update_entities(void) {
         if (entity != NULL) {
             entity_numEntities++;
 
-            if (!(entity->flags & ENTITY_FLAGS_SKIP_UPDATE)) {
-                if (entity->flags & ENTITY_FLAGS_BOUND_SCRIPT_DIRTY) {
-                    entity->flags &= ~ENTITY_FLAGS_BOUND_SCRIPT_DIRTY;
-                    if (!(entity->flags & ENTITY_FLAGS_8000)) {
-                        entity->flags |= ENTITY_FLAGS_2000000;
+            if (!(entity->flags & ENTITY_FLAG_SKIP_UPDATE)) {
+                if (entity->flags & ENTITY_FLAG_BOUND_SCRIPT_DIRTY) {
+                    entity->flags &= ~ENTITY_FLAG_BOUND_SCRIPT_DIRTY;
+                    if (!(entity->flags & ENTITY_FLAG_8000)) {
+                        entity->flags |= ENTITY_FLAG_2000000;
                     }
                     entity->boundScript = start_script(entity->boundScriptBytecode, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
                 }
 
-                if (entity->flags & ENTITY_FLAGS_2000000) {
+                if (entity->flags & ENTITY_FLAG_2000000) {
                     if (does_script_exist(entity->boundScript->id)) {
-                        if (entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                        if (entity->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                             update_model_animator(entity->virtualModelIndex);
                         } else {
                             exec_entity_model_commandlist(entity->virtualModelIndex);
                         }
 
-                        if (entity->flags & ENTITY_FLAGS_ALWAYS_FACE_CAMERA) {
+                        if (entity->flags & ENTITY_FLAG_ALWAYS_FACE_CAMERA) {
                             entity->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
                         }
 
-                        if (!(entity->flags & ENTITY_FLAGS_SKIP_UPDATE_TRANSFORM_MATRIX)) {
+                        if (!(entity->flags & ENTITY_FLAG_SKIP_UPDATE_TRANSFORM_MATRIX)) {
                             update_entity_transform_matrix(entity);
                         }
                         continue;
                     } else {
-                        entity->flags &= ~ENTITY_FLAGS_2000000;
+                        entity->flags &= ~ENTITY_FLAG_2000000;
                     }
                 }
 
@@ -1172,25 +1172,25 @@ void update_entities(void) {
 
                         if (handleCollision != NULL && handleCollision(entity) != 0) {
                             entity->collisionTimer = 10;
-                            entity->flags |= ENTITY_FLAGS_DETECTED_COLLISION;
+                            entity->flags |= ENTITY_FLAG_DETECTED_COLLISION;
                         }
                     }
                 } else {
                     entity->collisionTimer--;
-                    if (entity->flags & ENTITY_FLAGS_CONTINUOUS_COLLISION) {
+                    if (entity->flags & ENTITY_FLAG_CONTINUOUS_COLLISION) {
                         if (entity->collisionTimer == 0) {
-                            entity->flags &= ~(ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_CONTINUOUS_COLLISION);
+                            entity->flags &= ~(ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_CONTINUOUS_COLLISION);
                         } else {
-                            entity->flags |= ENTITY_FLAGS_DISABLE_COLLISION;
+                            entity->flags |= ENTITY_FLAG_DISABLE_COLLISION;
                         }
                     } else if (entity->collisionTimer == 0) {
-                        entity->flags &= ~ENTITY_FLAGS_DETECTED_COLLISION;
-                        entity->flags &= ~ENTITY_FLAGS_PARTNER_COLLISION;
+                        entity->flags &= ~ENTITY_FLAG_DETECTED_COLLISION;
+                        entity->flags &= ~ENTITY_FLAG_PARTNER_COLLISION;
                         entity->collisionFlags = 0;
                     }
                 }
 
-                if (entity->flags & ENTITY_FLAGS_ALWAYS_FACE_CAMERA) {
+                if (entity->flags & ENTITY_FLAG_ALWAYS_FACE_CAMERA) {
                     entity->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
                 }
 
@@ -1209,15 +1209,15 @@ void update_entities(void) {
                     }
                 }
 
-                if (!(entity->flags & ENTITY_FLAGS_SKIP_UPDATE_TRANSFORM_MATRIX)) {
+                if (!(entity->flags & ENTITY_FLAG_SKIP_UPDATE_TRANSFORM_MATRIX)) {
                     update_entity_transform_matrix(entity);
                 }
 
-                if (!(entity->flags & ENTITY_FLAGS_DISABLE_COLLISION)) {
+                if (!(entity->flags & ENTITY_FLAG_DISABLE_COLLISION)) {
                     update_entity_inverse_rotation_matrix(entity);
                 }
 
-                if (entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                if (entity->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                     update_model_animator(entity->virtualModelIndex);
                 } else {
                     exec_entity_model_commandlist(entity->virtualModelIndex);
@@ -1227,11 +1227,11 @@ void update_entities(void) {
                     update_entity_shadow_position(entity);
                 }
 
-                if (entity->flags & ENTITY_FLAGS_PENDING_INSTANCE_DELETE) {
+                if (entity->flags & ENTITY_FLAG_PENDING_INSTANCE_DELETE) {
                     delete_entity(entity->listIndex);
                 }
 
-                if (entity->flags & ENTITY_FLAGS_PENDING_FULL_DELETE) {
+                if (entity->flags & ENTITY_FLAG_PENDING_FULL_DELETE) {
                     delete_entity_and_unload_data(entity->listIndex);
                 }
             }
@@ -1253,20 +1253,20 @@ void update_shadows(void) {
         if (shadow != NULL) {
             entity_numShadows++;
 
-            if (!(shadow->flags & ENTITY_FLAGS_SKIP_UPDATE)) {
-                if (shadow->flags & ENTITY_FLAGS_ALWAYS_FACE_CAMERA) {
+            if (!(shadow->flags & ENTITY_FLAG_SKIP_UPDATE)) {
+                if (shadow->flags & ENTITY_FLAG_ALWAYS_FACE_CAMERA) {
                     shadow->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
                 }
 
                 update_shadow_transform_matrix(shadow);
 
-                if (shadow->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                if (shadow->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                     update_model_animator(shadow->entityModelID);
                 } else {
                     exec_entity_model_commandlist(shadow->entityModelID);
                 }
 
-                if (shadow->flags & ENTITY_FLAGS_PENDING_INSTANCE_DELETE) {
+                if (shadow->flags & ENTITY_FLAG_PENDING_INSTANCE_DELETE) {
                     _delete_shadow(shadow->listIndex);
                 }
             }
@@ -1323,7 +1323,7 @@ s32 step_entity_commandlist(Entity* entity) {
             break;
         case ENTITY_SCRIPT_OP_RestartBoundScript:
             if (entity->boundScriptBytecode != NULL) {
-                entity->flags |= ENTITY_FLAGS_BOUND_SCRIPT_DIRTY;
+                entity->flags |= ENTITY_FLAG_BOUND_SCRIPT_DIRTY;
             }
             entity->scriptReadPos = args++;
             ret = TRUE;
@@ -1386,7 +1386,7 @@ void render_entities(void) {
         if (entity != NULL) {
             if (!gGameStatusPtr->isBattle) {
                 if (gEntityHideMode != 0 &&
-                    !(entity->flags & ENTITY_FLAGS_IGNORE_DISTANCE_CULLING) &&
+                    !(entity->flags & ENTITY_FLAG_IGNORE_DISTANCE_CULLING) &&
                     dist2D(gPlayerStatusPtr->position.x,
                            gPlayerStatusPtr->position.z,
                            entity->position.x,
@@ -1396,18 +1396,18 @@ void render_entities(void) {
                 }
 
                 if (gEntityHideMode == 1) {
-                    if (!(entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1)) {
+                    if (!(entity->flags & ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE1)) {
                         continue;
                     }
                 } else if (gEntityHideMode == 2) {
-                    if (!(entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2)) {
+                    if (!(entity->flags & ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE2)) {
                         continue;
                     }
                 }
             }
 
-            if (!(entity->flags & ENTITY_FLAGS_HIDDEN)) {
-                if (entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+            if (!(entity->flags & ENTITY_FLAG_HIDDEN)) {
+                if (entity->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                     if (D_8014AFB0 == 0xFF) {
                         if (entity->renderSetupFunc != NULL) {
                             set_animator_render_callback(
@@ -1470,14 +1470,14 @@ void render_shadows(void) {
         Shadow* shadow = get_shadow_by_index(i);
 
         if (shadow != NULL) {
-            if (shadow->flags & ENTITY_FLAGS_HIDDEN) {
-                if (shadow->flags & ENTITY_FLAGS_FADING_AWAY) {
+            if (shadow->flags & ENTITY_FLAG_HIDDEN) {
+                if (shadow->flags & ENTITY_FLAG_FADING_AWAY) {
                     shadow->alpha -= 20;
                     if (shadow->alpha <= 20) {
-                        shadow->flags |= ENTITY_FLAGS_PENDING_INSTANCE_DELETE;
+                        shadow->flags |= ENTITY_FLAG_PENDING_INSTANCE_DELETE;
                     }
                 }
-            } else if (shadow->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+            } else if (shadow->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                 if (shadow->vertexArray == NULL) {
                     render_animated_model(shadow->entityModelID, &shadow->transformMatrix);
                 } else {
@@ -1487,10 +1487,10 @@ void render_shadows(void) {
                                   shadow->vertexArray);
                 }
             } else {
-                if (shadow->flags & ENTITY_FLAGS_FADING_AWAY) {
+                if (shadow->flags & ENTITY_FLAG_FADING_AWAY) {
                     shadow->alpha -= 20;
                     if (shadow->alpha <= 20) {
-                        shadow->flags |=  ENTITY_FLAGS_PENDING_INSTANCE_DELETE;
+                        shadow->flags |=  ENTITY_FLAG_PENDING_INSTANCE_DELETE;
                     }
                 }
 
@@ -1601,7 +1601,7 @@ ShadowList* get_shadow_list(void) {
 
 s32 entity_start_script(Entity* entity) {
     if (entity->boundScriptBytecode != NULL) {
-        entity->flags |= ENTITY_FLAGS_BOUND_SCRIPT_DIRTY;
+        entity->flags |= ENTITY_FLAG_BOUND_SCRIPT_DIRTY;
         return 1;
     }
     return 0;
@@ -1624,7 +1624,7 @@ void delete_entity(s32 entityIndex) {
         heap_free(entity->dataBuf.any);
     }
 
-    if (!(entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
+    if (!(entity->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL)) {
         free_entity_model_by_index(entity->virtualModelIndex);
     } else {
         delete_model_animator(get_animator_by_index(entity->virtualModelIndex));
@@ -1633,7 +1633,7 @@ void delete_entity(s32 entityIndex) {
     if (entity->shadowIndex >= 0) {
         Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
 
-        shadow->flags |= ENTITY_FLAGS_FADING_AWAY;
+        shadow->flags |= ENTITY_FLAG_FADING_AWAY;
     }
 
     heap_free((*gCurrentEntityListPtr)[entityIndex]);
@@ -1647,7 +1647,7 @@ void delete_entity_and_unload_data(s32 entityIndex) {
         heap_free(entity->dataBuf.any);
     }
 
-    if (!(entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
+    if (!(entity->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL)) {
         free_entity_model_by_index(entity->virtualModelIndex);
     } else {
         delete_model_animator(get_animator_by_index(entity->virtualModelIndex));
@@ -1658,7 +1658,7 @@ void delete_entity_and_unload_data(s32 entityIndex) {
     if (entity->shadowIndex >= 0) {
         Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
 
-        shadow->flags |= ENTITY_FLAGS_FADING_AWAY;
+        shadow->flags |= ENTITY_FLAG_FADING_AWAY;
     }
 
     heap_free((*gCurrentEntityListPtr)[entityIndex]);
@@ -1678,9 +1678,9 @@ s32 entity_get_collision_flags(Entity* entity) {
     s32 entityFlags = 0;
     u32 flag;
 
-    if (entity->flags & ENTITY_FLAGS_PARTNER_COLLISION) {
+    if (entity->flags & ENTITY_FLAG_PARTNER_COLLISION) {
         entityFlags = ENTITY_COLLISION_PARTNER;
-        entity->flags &= ~ENTITY_FLAGS_PARTNER_COLLISION;
+        entity->flags &= ~ENTITY_FLAG_PARTNER_COLLISION;
     }
 
     flag = gCollisionStatus.currentFloor;
@@ -1742,7 +1742,7 @@ s32 entity_interacts_with_current_partner(s32 entityIdx) {
                 case ENTITY_TYPE_SUPER_BLOCK:
                 case ENTITY_TYPE_BOMBABLE_ROCK:
                     entity = get_entity_by_index(entityIdx);
-                    entity->flags |= ENTITY_FLAGS_PARTNER_COLLISION;
+                    entity->flags |= ENTITY_FLAG_PARTNER_COLLISION;
                     ret = TRUE;
             }
             break;
@@ -1765,7 +1765,7 @@ s32 entity_interacts_with_current_partner(s32 entityIdx) {
                 case ENTITY_TYPE_SAVE_POINT:
                 case ENTITY_TYPE_SUPER_BLOCK:
                     entity = get_entity_by_index(entityIdx);
-                    entity->flags |= ENTITY_FLAGS_PARTNER_COLLISION;
+                    entity->flags |= ENTITY_FLAG_PARTNER_COLLISION;
                     ret = TRUE;
             }
             break;
@@ -1801,14 +1801,14 @@ s32 is_player_action_state(s8 actionState) {
 }
 
 void entity_set_render_script(Entity* entity, EntityModelScript* cmdList) {
-    if (!(entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
+    if (!(entity->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL)) {
         set_entity_model_render_command_list(entity->virtualModelIndex, cmdList);
     }
 }
 
 void entity_reset_collision(Entity* entity) {
     entity->collisionTimer = 0;
-    entity->flags &= ~ENTITY_FLAGS_DETECTED_COLLISION;
+    entity->flags &= ~ENTITY_FLAG_DETECTED_COLLISION;
 }
 
 void load_area_specific_entity_data(void) {
@@ -1912,7 +1912,7 @@ void reload_world_entity_data(void) {
             break;
         }
 
-        if (!(bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
+        if (!(bp->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL)) {
             void* gfxData;
 
             dataLength = ((bp->dma.end - bp->dma.start) >> 2);
@@ -2008,7 +2008,7 @@ s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* blueprint, s32* loade
             blueprints[0] = blueprint;
             blueprints[1] = NULL;
             ret = TRUE;
-            if (blueprint->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+            if (blueprint->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                 s32 size;
                 entDmaList = blueprint->dmaList;
                 size = (entDmaList[0].end - entDmaList[0].start) >> 2;
@@ -2020,19 +2020,19 @@ s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* blueprint, s32* loade
             do {} while (0); // TODO find better match
             entDmaList = blueprint->dmaList;
             if (bpDmaList == entDmaList) {
-                if (blueprint->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                if (blueprint->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                     s32 size = (bpDmaList[0].end - bpDmaList[0].start) >> 2;
                     *loadedEnd = *loadedStart + size;
                 }
                 break;
             } else if (bp == blueprint) {
-                if (bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                if (bp->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                     s32 size = (entDmaList[0].end - entDmaList[0].start) >> 2;
                     *loadedEnd = *loadedStart + size;
                 }
                 break;
             } else {
-                if (bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                if (bp->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                     s32 size = (bpDmaList[0].end - bpDmaList[0].start) >> 2;
                     *loadedEnd = *loadedStart = *loadedStart + size;
                     size = (bpDmaList[1].end - bpDmaList[1].start) >> 2;
@@ -2096,7 +2096,7 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
     s32 dma2size_2;
     s32 totalLoaded;
 
-    if (entityData->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+    if (entityData->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
         DmaEntry* dmaList = entityData->dmaList;
         entity->vertexSegment = 0xA;
 
@@ -2182,7 +2182,7 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
     entity->virtualModelIndex = create_mesh_animator(animationScript, animBaseAddr);
     load_mesh_animator_tree(entity->virtualModelIndex, animationNodes);
     update_model_animator(entity->virtualModelIndex);
-    entity->flags |= ENTITY_FLAGS_HAS_ANIMATED_MODEL;
+    entity->flags |= ENTITY_FLAG_HAS_ANIMATED_MODEL;
 }
 
 s32 func_80111790(EntityBlueprint* data) {
@@ -2215,7 +2215,7 @@ void entity_free_static_data(EntityBlueprint* data) {
     if (freeSlot < MAX_ENTITIES) {
         bp = wEntityBlueprint[freeSlot - 1];
         if (bp == data) {
-            if (bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+            if (bp->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                 DmaEntry* dmaList = bp->dmaList;
                 size = ((dmaList[0].end - dmaList[0].start) >> 2);
                 size += ((dmaList[1].end - dmaList[1].start) >> 2);
@@ -2298,7 +2298,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     entity->scriptDelay = entity->scriptReadPos != NULL ? 1 : 0;
     entity->savedReadPos[0] = bp->updateEntityScript;
     entity->updateScriptCallback = NULL;
-    entity->flags = bp->flags | ENTITY_FLAGS_CREATED;
+    entity->flags = bp->flags | ENTITY_FLAG_CREATED;
     entity->collisionFlags = 0;
     entity->collisionTimer = 0;
     entity->renderSetupFunc = NULL;
@@ -2321,7 +2321,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     entity->shadowIndex = -1;
     entity->gfxBaseAddr = NULL;
 
-    if (!(bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
+    if (!(bp->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL)) {
         if (bp->dma.start != 0) {
             load_simple_entity_data(entity, bp, listIndex);
         }
@@ -2333,7 +2333,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
         load_split_entity_data(entity, bp, listIndex);
     }
 
-    if (bp->entityType != ENTITY_TYPE_SHADOW && (entity->flags & (ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_SHADOW))) {
+    if (bp->entityType != ENTITY_TYPE_SHADOW && (entity->flags & (ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_HAS_SHADOW))) {
         create_entity_shadow(entity, x, y, z);
     }
 
@@ -2343,7 +2343,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
         case ENTITY_TYPE_SIMPLE_SPRING:
         case ENTITY_TYPE_SCRIPT_SPRING:
         case ENTITY_TYPE_STAR_BOX_LAUCHER:
-            entity->flags |= ENTITY_FLAGS_4000;
+            entity->flags |= ENTITY_FLAG_4000;
             break;
     }
 
@@ -2371,7 +2371,7 @@ s32 create_shadow_from_data(ShadowBlueprint* bp, f32 x, f32 y, f32 z) {
     (*gCurrentShadowListPtr)[i] = shadow;
     mem_clear(shadow, sizeof(*shadow));
     shadow->listIndex = i;
-    shadow->flags = bp->flags | ENTITY_FLAGS_CREATED;
+    shadow->flags = bp->flags | ENTITY_FLAG_CREATED;
     shadow->alpha = 128;
     shadow->unk_06 = 0x80;
     shadow->position.x = x;
@@ -2382,7 +2382,7 @@ s32 create_shadow_from_data(ShadowBlueprint* bp, f32 x, f32 y, f32 z) {
     shadow->scale.z = 1.0f;
 
     if (bp->animModelNode != NULL) {
-        shadow->flags |= ENTITY_FLAGS_HAS_ANIMATED_MODEL;
+        shadow->flags |= ENTITY_FLAG_HAS_ANIMATED_MODEL;
         shadow->entityModelID = create_model_animator(bp->renderCommandList);
         load_model_animator_tree(shadow->entityModelID, bp->animModelNode);
     } else {
@@ -2442,14 +2442,14 @@ ApiStatus SetEntityCullMode(Evt* script, s32 isInitialCall) {
     s32 mode = evt_get_variable(script, *args++);
 
     if (mode == 0) {
-        entity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
+        entity->flags |= ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE1;
     } else if (mode == 1) {
-        entity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
+        entity->flags |= ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE2;
     } else if (mode == 2) {
-        entity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2 | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
+        entity->flags |= ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE2 | ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE1;
     } else {
-        entity->flags |= ENTITY_FLAGS_IGNORE_DISTANCE_CULLING | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2 |
-                         ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
+        entity->flags |= ENTITY_FLAG_IGNORE_DISTANCE_CULLING | ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE2 |
+                         ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE1;
     }
     return ApiStatus_DONE2;
 }
@@ -2461,11 +2461,11 @@ ApiStatus UseDynamicShadow(Evt* script, s32 isInitialCall) {
     if (evt_get_variable(script, *args++)) {
         Shadow* shadow;
 
-        entity->flags |= ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
+        entity->flags |= ENTITY_FLAG_HAS_DYNAMIC_SHADOW;
         shadow = get_shadow_by_index(entity->shadowIndex);
-        shadow->flags |= ENTITY_FLAGS_SHADOW_POS_DIRTY;
+        shadow->flags |= ENTITY_FLAG_SHADOW_POS_DIRTY;
     } else {
-        entity->flags &= ~ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
+        entity->flags &= ~ENTITY_FLAG_HAS_DYNAMIC_SHADOW;
     }
 
     return ApiStatus_DONE2;
@@ -2494,7 +2494,7 @@ ApiStatus AssignSwitchFlag(Evt* script, s32 isInitialCall) {
 
         data->areaFlagIndex = areaFlag;
         if (get_area_flag(areaFlag) != 0) {
-            entity->flags |= ENTITY_FLAGS_PENDING_INSTANCE_DELETE;
+            entity->flags |= ENTITY_FLAG_PENDING_INSTANCE_DELETE;
         }
         return ApiStatus_DONE2;
     }
@@ -2561,8 +2561,8 @@ s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
     s32 type;
     s16 shadowIndex;
 
-    if (staticFlags & ENTITY_FLAGS_FIXED_SHADOW_SIZE) {
-        if (staticFlags & ENTITY_FLAGS_SQUARE_SHADOW) {
+    if (staticFlags & ENTITY_FLAG_FIXED_SHADOW_SIZE) {
+        if (staticFlags & ENTITY_FLAG_SQUARE_SHADOW) {
             type = 2;
         } else {
             type = 3;
@@ -2574,7 +2574,7 @@ s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
     shadowIndex = create_shadow_type(type, x, y, z);
     entity->shadowIndex = shadowIndex;
 
-    get_shadow_by_index(shadowIndex)->flags |= ENTITY_FLAGS_DARK_SHADOW | ENTITY_FLAGS_SHADOW_POS_DIRTY;
+    get_shadow_by_index(shadowIndex)->flags |= ENTITY_FLAG_DARK_SHADOW | ENTITY_FLAG_SHADOW_POS_DIRTY;
 
     return entity->shadowIndex;
 }
@@ -2605,7 +2605,7 @@ s32 create_shadow_type(s32 type, f32 x, f32 y, f32 z) {
     shadowIndex = create_shadow_from_data(bp, x, y, z);
 
     if (isFixedSize) {
-        get_shadow_by_index(shadowIndex)->flags |= ENTITY_FLAGS_FIXED_SHADOW_SIZE;
+        get_shadow_by_index(shadowIndex)->flags |= ENTITY_FLAG_FIXED_SHADOW_SIZE;
     }
 
     return shadowIndex;
@@ -2632,7 +2632,7 @@ void update_entity_shadow_position(Entity* entity) {
         } else {
             u8 alphaTemp;
 
-            if (shadow->flags & ENTITY_FLAGS_DARK_SHADOW) {
+            if (shadow->flags & ENTITY_FLAG_DARK_SHADOW) {
                 alphaTemp = 160;
             } else {
                 alphaTemp = 128;
@@ -2640,9 +2640,9 @@ void update_entity_shadow_position(Entity* entity) {
             shadow->alpha = alphaTemp;
         }
 
-        if (!(entity->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW)) {
-            if (shadow->flags & ENTITY_FLAGS_SHADOW_POS_DIRTY) {
-                shadow->flags &= ~ENTITY_FLAGS_SHADOW_POS_DIRTY;
+        if (!(entity->flags & ENTITY_FLAG_HAS_DYNAMIC_SHADOW)) {
+            if (shadow->flags & ENTITY_FLAG_SHADOW_POS_DIRTY) {
+                shadow->flags &= ~ENTITY_FLAG_SHADOW_POS_DIRTY;
             } else {
                 return;
             }
@@ -2658,7 +2658,7 @@ void update_entity_shadow_position(Entity* entity) {
 
         origHitLength = hitLength;
 
-        if (shadow->flags & ENTITY_FLAGS_FIXED_SHADOW_SIZE) {
+        if (shadow->flags & ENTITY_FLAG_FIXED_SHADOW_SIZE) {
             hitLength = 212.5f;
             shadow->scale.x = entity->aabb.x / hitLength;
             shadow->scale.z = entity->aabb.z / hitLength;
@@ -2677,15 +2677,15 @@ void update_entity_shadow_position(Entity* entity) {
         shadow->rotation.y = entity->rotation.y;
 
         if (entity->position.y < rayY) {
-            shadow->flags |= ENTITY_FLAGS_SKIP_UPDATE;
+            shadow->flags |= ENTITY_FLAG_SKIP_UPDATE;
             entity->position.y = rayY + 10.0f;
         } else {
-            shadow->flags &= ~ENTITY_FLAGS_SKIP_UPDATE;
+            shadow->flags &= ~ENTITY_FLAG_SKIP_UPDATE;
         }
 
-        shadow->flags = (shadow->flags & ~ENTITY_FLAGS_HIDDEN) | ((u16)entity->flags & ENTITY_FLAGS_HIDDEN);
-        if (!(entity->flags & ENTITY_FLAGS_400) && origHitLength == 0.0f) {
-            shadow->flags |= ENTITY_FLAGS_HIDDEN;
+        shadow->flags = (shadow->flags & ~ENTITY_FLAG_HIDDEN) | ((u16)entity->flags & ENTITY_FLAG_HIDDEN);
+        if (!(entity->flags & ENTITY_FLAG_400) && origHitLength == 0.0f) {
+            shadow->flags |= ENTITY_FLAG_HIDDEN;
         }
     } else {
         entity->shadowPosY = 0.0f;
@@ -2988,8 +2988,638 @@ void state_render_frontUI(void) {
     }
 }
 
-void appendGfx_model(void* data);
-INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
+void appendGfx_model(void* data) {
+    Model* model = data;
+    s32 mtxPushMode;
+    TextureHandle* textureHandle;
+    TextureHeader* textureHeader;
+    u32 extraTileType;
+    s8 renderMode;
+    s32 texturingMode;
+    s32 renderModeIdx;
+    s32 new_var;
+    s32 flags = model->flags;
+
+    ModelNode* modelNode;
+    u16 customGfxIndex;
+    s32 mtxLoadMode;
+    s32 combineSubType;
+    ModelNodeProperty* prop;
+    s32 temp;
+
+    s32 fogMin, fogMax;
+    s32 fogR, fogG, fogB, fogA;
+    Gfx** gfxPos = &gMasterGfxPos;
+
+    mtxPushMode = G_MTX_PUSH;
+    mtxLoadMode = G_MTX_LOAD;
+    modelNode = model->modelNode;
+
+    if (model->textureID != 0) {
+        textureHandle = &mdl_textureHandles[model->textureID + model->textureVariation];
+        textureHeader = &textureHandle->header;
+
+        if (textureHandle->gfx != NULL) {
+            extraTileType = textureHandle->header.extraTiles;
+        } else {
+            textureHeader = NULL;
+        }
+    } else {
+        textureHandle = NULL;
+        textureHeader = NULL;
+    }
+
+    renderMode = model->renderMode;
+    combineSubType = 0;
+    if (textureHeader != NULL) {
+        switch (extraTileType) {
+            case EXTRA_TILE_NONE:
+                texturingMode = 1;
+                break;
+            case EXTRA_TILE_MIPMAPS:
+            case EXTRA_TILE_AUX_SAME_AS_MAIN:
+            case EXTRA_TILE_AUX_INDEPENDENT:
+                texturingMode = 2;
+                break;
+            default:
+                texturingMode = 1;
+                break;
+        }
+    } else {
+        texturingMode = 1;
+    }
+    if ((textureHeader != NULL || renderMode <= RENDER_MODE_ALPHATEST_NO_ZB) && gCurrentFogSettings->enabled && !(flags & MODEL_FLAG_FLAG_40)) {
+        texturingMode = 3;
+        combineSubType = 1;
+    }
+
+    // fog mode
+    switch ((u32)(model->customGfxIndex >> 4)) {
+        case FOG_MODE_1:
+            texturingMode += 3;
+            combineSubType = 2;
+            break;
+        case FOG_MODE_2:
+            if (renderMode <= RENDER_MODE_ALPHATEST_NO_ZB) {
+                gDPSetPrimColor((*gfxPos)++, 0, 0, mdl_renderModelFogPrimColorR,
+                                                   mdl_renderModelFogPrimColorG,
+                                                   mdl_renderModelFogPrimColorB,
+                                                   mdl_renderModelFogPrimColorA);
+                gDPSetFogColor((*gfxPos)++, mdl_renderModelFogColorR,
+                                            mdl_renderModelFogColorG,
+                                            mdl_renderModelFogColorB, 0);
+                gSPFogPosition((*gfxPos)++, mdl_renderModelFogStart, mdl_renderModelFogEnd);
+                texturingMode += 9;
+                combineSubType = 3;
+            }
+            break;
+        case FOG_MODE_3:
+            texturingMode = 2;
+            combineSubType = 4;
+            gDPSetPrimColor((*gfxPos)++, 0, 0, gRenderModelPrimR,
+                                               gRenderModelPrimG,
+                                               gRenderModelPrimB, 255);
+            gDPSetEnvColor((*gfxPos)++, gRenderModelEnvR,
+                                        gRenderModelEnvG,
+                                        gRenderModelEnvB, 255);
+            break;
+    }
+
+    gDPPipeSync((*gfxPos)++);
+
+    if (model->groupData != NULL) {
+        Lightsn* lightningGroup = model->groupData->lightingGroup;
+        if (model->groupData->lightingGroup != NULL) {
+            switch (model->groupData->numLights) {
+                case 0:
+                    gSPSetLights0((*gfxPos)++, lightningGroup[0]);
+                    break;
+                case 1:
+                    gSPSetLights1((*gfxPos)++, lightningGroup[0]);
+                    break;
+                case 2:
+                    gSPSetLights2((*gfxPos)++, lightningGroup[0]);
+                    break;
+                case 3:
+                    gSPSetLights3((*gfxPos)++, lightningGroup[0]);
+                    break;
+                case 4:
+                    gSPSetLights4((*gfxPos)++, lightningGroup[0]);
+                    break;
+                case 5:
+                    gSPSetLights5((*gfxPos)++, lightningGroup[0]);
+                    break;
+                case 6:
+                    gSPSetLights6((*gfxPos)++, lightningGroup[0]);
+                    break;
+                case 7:
+                    gSPSetLights7((*gfxPos)++, lightningGroup[0]);
+                    break;
+            }
+        }
+    }
+
+    if (textureHeader != NULL) {
+        switch (extraTileType) {
+            case EXTRA_TILE_AUX_INDEPENDENT:
+            case EXTRA_TILE_4:
+                prop = get_model_property(modelNode, MODEL_PROP_KEY_SPECIAL);
+                if (prop != NULL) {
+                    s32 v1 = prop->data.s;
+                    u16 a2 = prop->dataType;
+                    s32 a1 = prop->dataType;
+                    func_801180E8(textureHeader, gfxPos, textureHandle->raster, textureHandle->palette, textureHandle->auxRaster, textureHandle->auxPalette,
+                                (v1 >> 12) & 0xF, (v1 >> 16) & 0xF,
+                                a2 & 0xFFF, (a1 >> 12) & 0xFFF);
+
+                } else {
+                    gSPDisplayList((*gfxPos)++, textureHandle->gfx);
+                }
+                break;
+            default:
+                gSPDisplayList((*gfxPos)++, textureHandle->gfx);
+                break;
+        }
+    } else {
+        gSPTexture((*gfxPos)++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+        gDPSetCombineMode((*gfxPos)++, G_CC_SHADE, G_CC_SHADE);
+        gDPSetColorDither((*gfxPos)++, G_CD_MAGICSQ);
+        gDPSetAlphaDither((*gfxPos)++, G_AD_PATTERN);
+    }
+
+    if (combineSubType != 0 || renderMode == RENDER_MODE_ALPHATEST || renderMode == RENDER_MODE_ALPHATEST_ONESIDED) {
+        u32 v1 = 0;
+
+        if (textureHeader != NULL) {
+            u32 colorCombineType = textureHeader->colorCombineType;
+            if (colorCombineType >= 3) {
+                v1 = colorCombineType + 10;
+            } else {
+                v1 = extraTileType * 3 + 1 + textureHeader->colorCombineSubType;
+            }
+        }
+
+        if (renderMode != RENDER_MODE_ALPHATEST && renderMode != RENDER_MODE_ALPHATEST_ONESIDED) {
+            *(*gfxPos) = D_8014B0B8[v1][combineSubType];
+        } else {
+            *(*gfxPos) = D_8014B400[v1][combineSubType];
+        }
+        (*gfxPos)++;
+    }
+
+    switch (texturingMode) {
+        case 1:
+            switch (renderMode) {
+                case RENDER_MODE_SURFACE_OPA:
+                    renderModeIdx = 0;
+                    break;
+                case RENDER_MODE_SURFACE_OPA_NO_AA:
+                    renderModeIdx = 1;
+                    break;
+                case RENDER_MODE_DECAL_OPA:
+                    renderModeIdx = 2;
+                    break;
+                case RENDER_MODE_DECAL_OPA_NO_AA:
+                    renderModeIdx = 3;
+                    break;
+                case RENDER_MODE_INTERSECTING_OPA:
+                    renderModeIdx = 4;
+                    break;
+                case RENDER_MODE_ALPHATEST:
+                    renderModeIdx = 6;
+                    break;
+                case RENDER_MODE_ALPHATEST_ONESIDED:
+                    renderModeIdx = 7;
+                    break;
+                case RENDER_MODE_SURFXLU_AA_ZB_ZUPD:
+                    renderModeIdx = 9;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_LAYER1:
+                case RENDER_MODE_SURFACE_XLU_LAYER2:
+                case RENDER_MODE_SURFACE_XLU_LAYER3:
+                    renderModeIdx = 8;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_AA:
+                    renderModeIdx = 10;
+                    break;
+                case RENDER_MODE_SURFXLU_ZB_ZUPD:
+                    renderModeIdx = 11;
+                    break;
+                case RENDER_MODE_DECAL_XLU:
+                    renderModeIdx = 12;
+                    break;
+                case RENDER_MODE_DECAL_XLU_NOAA:
+                    renderModeIdx = 13;
+                    break;
+                case RENDER_MODE_INTERSECTING_XLU:
+                    renderModeIdx = 14;
+                    break;
+                case RENDER_MODE_SURFACE_OPA_NO_ZB:
+                    renderModeIdx = 0x2E;
+                    break;
+                case RENDER_MODE_ALPHATEST_NO_ZB:
+                    renderModeIdx = 0x2F;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_ZB:
+                    renderModeIdx = 0x30;
+                    break;
+                case RENDER_MODE_CLOUD:
+                    renderModeIdx = 0x37;
+                    break;
+                case RENDER_MODE_CLOUD_NO_ZB:
+                    renderModeIdx = 0x38;
+                    break;
+                default:
+                    renderModeIdx = 0;
+                    break;
+            }
+            gSPDisplayList((*gfxPos)++, D_8014AFC0[renderModeIdx]);
+            break;
+        case 2:
+            switch (renderMode) {
+                case RENDER_MODE_SURFACE_OPA_NO_AA:
+                    renderModeIdx = 0x11;
+                    break;
+                case RENDER_MODE_DECAL_OPA:
+                    renderModeIdx = 0x12;
+                    break;
+                case RENDER_MODE_DECAL_OPA_NO_AA:
+                    renderModeIdx = 0x13;
+                    break;
+                case RENDER_MODE_INTERSECTING_OPA:
+                    renderModeIdx = 0x14;
+                    break;
+                case RENDER_MODE_ALPHATEST:
+                    renderModeIdx = 0x16;
+                    break;
+                case RENDER_MODE_ALPHATEST_ONESIDED:
+                    renderModeIdx = 0x17;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_LAYER1:
+                case RENDER_MODE_SURFACE_XLU_LAYER2:
+                case RENDER_MODE_SURFACE_XLU_LAYER3:
+                    renderModeIdx = 0x18;
+                    break;
+                case RENDER_MODE_SURFXLU_AA_ZB_ZUPD:
+                    renderModeIdx = 0x19;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_AA:
+                    renderModeIdx = 0x1A;
+                    break;
+                case RENDER_MODE_DECAL_XLU:
+                    renderModeIdx = 0x1B;
+                    break;
+                case RENDER_MODE_DECAL_XLU_NOAA:
+                    renderModeIdx = 0x1C;
+                    break;
+                case RENDER_MODE_INTERSECTING_XLU:
+                    renderModeIdx = 0x1D;
+                    break;
+                case RENDER_MODE_SURFACE_OPA_NO_ZB:
+                    renderModeIdx = 0x31;
+                    break;
+                case RENDER_MODE_ALPHATEST_NO_ZB:
+                    renderModeIdx = 0x32;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_ZB:
+                    renderModeIdx = 0x33;
+                    break;
+                case RENDER_MODE_CLOUD:
+                    renderModeIdx = 0x39;
+                    break;
+                case RENDER_MODE_CLOUD_NO_ZB:
+                    renderModeIdx = 0x3A;
+                    break;
+                case RENDER_MODE_SURFACE_OPA:
+                    renderModeIdx = 0x10;
+                    break;
+                default:
+                    renderModeIdx = 0x10;
+                    break;
+            }
+            gSPDisplayList((*gfxPos)++, D_8014AFC0[renderModeIdx]);
+            break;
+        case 3:
+            temp = 0x25; // required to match
+            switch (renderMode) {
+                case RENDER_MODE_SURFACE_OPA_NO_AA:
+                    renderModeIdx = 0x20;
+                    break;
+                case RENDER_MODE_DECAL_OPA:
+                    renderModeIdx = 0x21;
+                    break;
+                case RENDER_MODE_DECAL_OPA_NO_AA:
+                    renderModeIdx = 0x22;
+                    break;
+                case RENDER_MODE_INTERSECTING_OPA:
+                    renderModeIdx = 0x23;
+                    break;
+                case RENDER_MODE_ALPHATEST:
+                    renderModeIdx = temp;
+                    break;
+                case RENDER_MODE_ALPHATEST_ONESIDED:
+                    renderModeIdx = 0x26;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_LAYER1:
+                case RENDER_MODE_SURFACE_XLU_LAYER2:
+                case RENDER_MODE_SURFACE_XLU_LAYER3:
+                    renderModeIdx = 0x27;
+                    break;
+                case RENDER_MODE_SURFXLU_AA_ZB_ZUPD:
+                    renderModeIdx = 0x28;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_AA:
+                    renderModeIdx = 0x29;
+                    break;
+                case RENDER_MODE_DECAL_XLU:
+                    renderModeIdx = 0x2A;
+                    break;
+                case RENDER_MODE_DECAL_XLU_NOAA:
+                    renderModeIdx = 0x2B;
+                    break;
+                case RENDER_MODE_INTERSECTING_XLU:
+                    renderModeIdx = 0x2C;
+                    break;
+                case RENDER_MODE_SURFACE_OPA_NO_ZB:
+                    renderModeIdx = 0x34;
+                    break;
+                case RENDER_MODE_ALPHATEST_NO_ZB:
+                    renderModeIdx = 0x35;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_ZB:
+                    renderModeIdx = 0x36;
+                    break;
+                case RENDER_MODE_CLOUD:
+                    renderModeIdx = 0x3B;
+                    break;
+                case RENDER_MODE_CLOUD_NO_ZB:
+                    renderModeIdx = 0x3C;
+                    break;
+                case RENDER_MODE_SURFACE_OPA:
+                    renderModeIdx = 0x1F;
+                    break;
+                default:
+                    renderModeIdx = 0x1F;
+                    break;
+            }
+            gSPDisplayList((*gfxPos)++, D_8014AFC0[renderModeIdx]);
+            gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->r,
+                                            gCurrentFogSettings->g,
+                                            gCurrentFogSettings->b,
+                                            gCurrentFogSettings->a);
+            gSPFogPosition((*gfxPos)++, gCurrentFogSettings->startDistance, gCurrentFogSettings->endDistance);
+            break;
+        case 4:
+        case 5:
+            if (mdl_bgMultiplyColorA == 255) {
+                return;
+            }
+            gSPDisplayList((*gfxPos)++, D_8014AFC0[0x10]);
+            switch (renderMode) {
+                case RENDER_MODE_SURFACE_OPA:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_SURF2);
+                    break;
+                case RENDER_MODE_SURFACE_OPA_NO_AA:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_OPA_SURF2);
+                    break;
+                case RENDER_MODE_DECAL_OPA:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_DECAL2);
+                    break;
+                case RENDER_MODE_DECAL_OPA_NO_AA:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_OPA_DECAL2);
+                    break;
+                case RENDER_MODE_INTERSECTING_OPA:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_INTER2);
+                    break;
+                case RENDER_MODE_ALPHATEST:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_TEX_EDGE2);
+                    break;
+                case RENDER_MODE_ALPHATEST_ONESIDED:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_TEX_EDGE2);
+                    break;
+                case RENDER_MODE_SURFACE_XLU_LAYER1:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
+                    break;
+                case RENDER_MODE_SURFACE_XLU_LAYER2:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
+                    break;
+                case RENDER_MODE_SURFACE_XLU_LAYER3:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_AA:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_XLU_SURF2);
+                    break;
+                case RENDER_MODE_DECAL_XLU:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_DECAL2);
+                    break;
+                case RENDER_MODE_DECAL_XLU_NOAA:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_DECAL2);
+                    break;
+                case RENDER_MODE_INTERSECTING_XLU:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_INTER2);
+                    break;
+                case RENDER_MODE_SURFACE_OPA_NO_ZB:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_OPA_SURF2);
+                    break;
+                case RENDER_MODE_ALPHATEST_NO_ZB:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_TEX_EDGE2);
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_ZB:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_XLU_SURF2);
+                    break;
+                case RENDER_MODE_CLOUD:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_CLD_SURF2);
+                    break;
+                case RENDER_MODE_CLOUD_NO_ZB:
+                    gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_CLD_SURF2);
+                    break;
+            }
+            gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->r,
+                                            gCurrentFogSettings->g,
+                                            gCurrentFogSettings->b,
+                                            mdl_bgMultiplyColorA);
+            gDPSetBlendColor((*gfxPos)++, mdl_bgMultiplyColorR,
+                                              mdl_bgMultiplyColorG,
+                                              mdl_bgMultiplyColorB,
+                                              255);
+            gSPFogPosition((*gfxPos)++, 970, 1000);
+            break;
+        case 6:
+            switch (renderMode) {
+                case RENDER_MODE_SURFACE_OPA_NO_AA:
+                    renderModeIdx = 0x20;
+                    break;
+                case RENDER_MODE_DECAL_OPA:
+                    renderModeIdx = 0x21;
+                    break;
+                case RENDER_MODE_DECAL_OPA_NO_AA:
+                    renderModeIdx = 0x22;
+                    break;
+                case RENDER_MODE_INTERSECTING_OPA:
+                    renderModeIdx = 0x23;
+                    break;
+                case RENDER_MODE_ALPHATEST:
+                    renderModeIdx = 0x25;
+                    break;
+                case RENDER_MODE_ALPHATEST_ONESIDED:
+                    renderModeIdx = 0x26;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_LAYER1:
+                case RENDER_MODE_SURFACE_XLU_LAYER2:
+                case RENDER_MODE_SURFACE_XLU_LAYER3:
+                    renderModeIdx = 0x27;
+                    break;
+                case RENDER_MODE_SURFXLU_AA_ZB_ZUPD:
+                    renderModeIdx = 0x28;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_AA:
+                    renderModeIdx = 0x29;
+                    break;
+                case RENDER_MODE_DECAL_XLU:
+                    renderModeIdx = 0x2A;
+                    break;
+                case RENDER_MODE_DECAL_XLU_NOAA:
+                    renderModeIdx = 0x2B;
+                    break;
+                case RENDER_MODE_INTERSECTING_XLU:
+                    renderModeIdx = 0x2C;
+                    break;
+                case RENDER_MODE_SURFACE_OPA_NO_ZB:
+                    renderModeIdx = 0x34;
+                    break;
+                case RENDER_MODE_ALPHATEST_NO_ZB:
+                    renderModeIdx = 0x35;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_ZB:
+                    renderModeIdx = 0x36;
+                    break;
+                case RENDER_MODE_CLOUD:
+                    renderModeIdx = 0x3B;
+                    break;
+                case RENDER_MODE_CLOUD_NO_ZB:
+                    renderModeIdx = 0x3C;
+                    break;
+                case RENDER_MODE_SURFACE_OPA:
+                    renderModeIdx = 0x1F;
+                    break;
+                default:
+                    renderModeIdx = 0x1F;
+                    break;
+            }
+            gSPDisplayList((*gfxPos)++, D_8014AFC0[renderModeIdx]);
+
+            fogR = (gCurrentFogSettings->r * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorR * mdl_bgMultiplyColorA) / 255;
+            fogG = (gCurrentFogSettings->g * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorG * mdl_bgMultiplyColorA) / 255;
+            fogB = (gCurrentFogSettings->b * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorB * mdl_bgMultiplyColorA) / 255;
+
+            fogMin = (gCurrentFogSettings->startDistance * (255 - mdl_bgMultiplyColorA) + 900 * mdl_bgMultiplyColorA) / 255;
+            fogMax = (gCurrentFogSettings->endDistance * (255 - mdl_bgMultiplyColorA) + 1000 * mdl_bgMultiplyColorA) / 255;
+
+            gDPSetFogColor(gMasterGfxPos++,  fogR, fogG, fogB, gCurrentFogSettings->a);
+            gSPFogPosition((*gfxPos)++, fogMin, fogMax);
+            break;
+        case 10:
+        case 11:
+            switch (renderMode) {
+                case RENDER_MODE_DECAL_OPA:
+                    renderModeIdx = 0x21;
+                    break;
+                case RENDER_MODE_INTERSECTING_OPA:
+                    renderModeIdx = 0x23;
+                    break;
+                case RENDER_MODE_ALPHATEST:
+                    renderModeIdx = 0x25;
+                    break;
+                case RENDER_MODE_CLOUD:
+                    renderModeIdx = 0x3B;
+                    break;
+                case RENDER_MODE_CLOUD_NO_ZB:
+                    renderModeIdx = 0x3C;
+                    break;
+                case RENDER_MODE_SURFACE_OPA:
+                default:
+                    renderModeIdx = 0x1F;
+                    break;
+            }
+            gSPDisplayList((*gfxPos)++, D_8014AFC0[renderModeIdx]);
+            break;
+    }
+
+    if (!(flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER)) {
+        if (!(flags & MODEL_FLAG_FLAG_2000)) {
+            gSPMatrix((*gfxPos)++, model->currentSpecialMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
+            if (mtxPushMode != G_MTX_NOPUSH) {
+                mtxPushMode = G_MTX_NOPUSH;
+            }
+            if (mtxLoadMode != G_MTX_MUL) {
+                mtxLoadMode = G_MTX_MUL;
+            }
+        }
+    } else {
+        mtxLoadMode = G_MTX_MUL;
+        if (!(flags & MODEL_FLAG_FLAG_2000)) {
+            gSPMatrix((*gfxPos)++, model->currentSpecialMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
+            if (mtxPushMode != G_MTX_NOPUSH) {
+                mtxPushMode = G_MTX_NOPUSH;
+            }
+        }
+    }
+
+    if (flags & MODEL_FLAG_USES_CUSTOM_GFX) {
+        customGfxIndex = (model->customGfxIndex & 0xF) * 2;
+        if ((*gCurrentCustomModelGfxPtr)[customGfxIndex] != NULL) {
+            gSPDisplayList((*gfxPos)++, (*gCurrentCustomModelGfxPtr)[customGfxIndex]);
+        }
+    }
+
+    if (textureHeader != NULL) {
+        if (flags & MODEL_FLAG_HAS_TEX_PANNER) {
+            s32 panMainU = texPannerMainU[model->texPannerID] >> 8;
+            s32 panMainV = texPannerMainV[model->texPannerID] >> 8;
+            s32 panAuxU = texPannerAuxU[model->texPannerID] >> 8;
+            s32 panAuxV = texPannerAuxV[model->texPannerID] >> 8;
+
+            switch (extraTileType) {
+                case EXTRA_TILE_AUX_SAME_AS_MAIN:
+                    gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE, panMainU, panMainV, (textureHeader->mainW - 1) * 4 + panMainU, (textureHeader->mainH / 2 - 1) * 4 + panMainV);
+                    gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE + 1, panAuxU, panAuxV, (textureHeader->mainW - 1) * 4 + panAuxU, (textureHeader->mainH / 2 - 1) * 4 + panAuxV);
+                    break;
+                case EXTRA_TILE_AUX_INDEPENDENT:
+                    gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE, panMainU, panMainV, (textureHeader->mainW - 1) * 4 + panMainU, (textureHeader->mainH - 1) * 4 + panMainV);
+                    gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE + 1, panAuxU, panAuxV, (textureHeader->auxW - 1) * 4 + panAuxU, (textureHeader->auxH - 1) * 4 + panAuxV);
+                    break;
+                default:
+                    gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE, panMainU, panMainV, (textureHeader->mainW - 1) * 4 + panMainU, (textureHeader->mainH - 1) * 4 + panMainV);
+                    break;
+            }
+        }
+    }
+    if (flags & MODEL_FLAG_USE_CAMERA_UNK_MATRIX) {
+        gSPMatrix((*gfxPos)++, gCameras[gCurrentCamID].unkMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
+        if (mtxPushMode != G_MTX_NOPUSH) {
+            mtxPushMode = G_MTX_NOPUSH;
+        }
+        if (mtxLoadMode != G_MTX_MUL) {
+            mtxLoadMode = G_MTX_MUL;
+        }
+    }
+    if (!(flags & MODEL_FLAG_HAS_LOCAL_VERTEX_COPY)) {
+        gSPDisplayList((*gfxPos)++, modelNode->displayData->displayList);
+    }
+
+    if (flags & MODEL_FLAG_USES_CUSTOM_GFX) {
+        customGfxIndex++;
+        if ((*gCurrentCustomModelGfxPtr)[customGfxIndex] != NULL) {
+            gSPDisplayList((*gfxPos)++, (*gCurrentCustomModelGfxPtr)[customGfxIndex]);
+        }
+    }
+
+    if (mtxPushMode == G_MTX_NOPUSH) {
+        gSPPopMatrix((*gfxPos)++, G_MTX_MODELVIEW);
+    }
+
+    gDPPipeSync((*gfxPos)++);
+}
 
 void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, s32 mainSize, s32 mainPalSize, s32 auxSize, s32 auxPalSize) {
     handle->raster = (IMG_PTR) mdl_nextTextureAddress;
@@ -3021,10 +3651,231 @@ void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, 
     gSPEndDisplayList(((Gfx*) mdl_nextTextureAddress)++);
 }
 
-void load_tile_header(char* textureName, s32 romOffset, s32 size);
-INCLUDE_ASM(s32, "a5dd0_len_114e0", load_tile_header);
+void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) {
+    char* textureName = (char*)propertyName->data.p;
+    u32 baseOffset = romOffset;
+    s32 textureID = 0;
+    u32 paletteSize;
+    u32 rasterSize;
+    u32 auxPaletteSize;
+    u32 auxRasterSize;
+    TextureHeader* header;
+    TextureHandle* textureHandle;
+    s32 mainSize;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80115498);
+    if (textureName == NULL) {
+        (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID = 0;
+        return;
+    }
+
+    while (romOffset < baseOffset + size) {
+        dma_copy((u8*)romOffset, (u8*)romOffset + sizeof(gCurrentTileDescriptor), &gCurrentTileDescriptor);
+        header = &gCurrentTileDescriptor;
+
+        rasterSize = header->mainW * header->mainH;
+
+        if (header->mainBitDepth == G_IM_SIZ_4b) {
+            if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
+                s32 d = 2;
+                while (header->mainW / d >= 16 && header->mainH / d > 0) {
+                    rasterSize += header->mainW / d * header->mainH / d;
+                    d *= 2;
+                }
+            }
+            rasterSize /= 2;
+        } else if (header->mainBitDepth == G_IM_SIZ_8b) {
+            if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
+                s32 d = 2;
+                while (header->mainW / d >= 8 && header->mainH / d > 0) {
+                    rasterSize += header->mainW / d * header->mainH / d;
+                    d *= 2;
+                }
+            }
+        } else {
+            do {} while (0);
+            if (header->mainBitDepth == G_IM_SIZ_16b) {
+                if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
+                    s32 d = 2;
+                    while (header->mainW / d >= 4 && header->mainH / d > 0) {
+                        rasterSize += header->mainW / d * header->mainH / d;
+                        d *= 2;
+                    }
+                }
+                rasterSize *= 2;
+            } else if (header->mainBitDepth == G_IM_SIZ_32b) {
+                if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
+                    s32 d = 2;
+                    while (header->mainW / d >= 2 && header->mainH / d > 0) {
+                        rasterSize += header->mainW / d * header->mainH / d;
+                        d *= 2;
+                    }
+                }
+                rasterSize *= 4;
+            }
+        }
+
+        if (header->mainFmt == G_IM_FMT_CI) {
+            paletteSize = 0x20;
+            if (header->mainBitDepth == G_IM_SIZ_8b) {
+                paletteSize = 0x200;
+            }
+        } else {
+            paletteSize = 0;
+        }
+
+        if (header->extraTiles == EXTRA_TILE_AUX_INDEPENDENT) {
+            auxRasterSize = header->auxW * header->auxH;
+            if (header->auxBitDepth == G_IM_SIZ_4b) {
+                auxRasterSize /= 2;
+            } else if (header->auxBitDepth == G_IM_SIZ_8b) {
+            } else if (header->auxBitDepth == G_IM_SIZ_16b) {
+                auxRasterSize *= 2;
+            } else {
+                if (header->auxBitDepth == G_IM_SIZ_32b) {
+                    auxRasterSize *= 4;
+                }
+            }
+            if (header->auxFmt == G_IM_FMT_CI) {
+                auxPaletteSize = 0x20;
+                if (header->auxBitDepth == G_IM_SIZ_8b) {
+                    auxPaletteSize = 0x200;
+                }
+            } else {
+                auxPaletteSize = 0;
+            }
+        } else {
+            auxPaletteSize = 0;
+            auxRasterSize = 0;
+        }
+
+        if (strcmp(textureName, header->name) == 0) {
+            break;
+        }
+
+        textureID++;
+        mainSize = rasterSize + paletteSize + sizeof(*header);
+        romOffset += mainSize;
+        romOffset += auxRasterSize + auxPaletteSize;
+    }
+
+    if (romOffset >= baseOffset + 0x40000) {
+        (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID = 0;
+        return;
+    }
+
+    (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID = textureID + 1;
+    textureHandle = &mdl_textureHandles[(*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID];
+    romOffset += sizeof(*header);
+
+    if (textureHandle->gfx == NULL) {
+        func_80114B58(romOffset, textureHandle, header, rasterSize, paletteSize, auxRasterSize, auxPaletteSize);
+        func_80115498(romOffset + rasterSize + paletteSize + auxRasterSize + auxPaletteSize, (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID, baseOffset, size);
+    }
+
+}
+
+void func_80115498(u32 romOffset, s32 textureID, s32 baseOffset, s32 size) {
+    u32 offset;
+    TextureHeader sp20;
+    u32 rasterSize;
+    s32 paletteSize;
+    u32 auxRasterSize;
+    u32 auxPaletteSize;
+    s32 bitDepth;
+    s32 mainSize;
+    TextureHeader* header;
+    s32 currentTextureID = textureID;
+
+
+    for (offset = romOffset; offset < baseOffset + size;) {
+        dma_copy((u8*)offset, (u8*)offset + sizeof(sp20), &sp20);
+        header = &sp20;
+        if (header->unk_28 == 0) {
+            break;
+        }
+
+        rasterSize = header->mainW * header->mainH;
+
+        if (header->mainBitDepth == G_IM_SIZ_4b) {
+            if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
+                s32 d = 2;
+                while (header->mainW / d >= 16 && header->mainH / d > 0) {
+                    rasterSize += header->mainW / d * header->mainH / d;
+                    d *= 2;
+                }
+            }
+            rasterSize /= 2;
+        } else if (header->mainBitDepth == G_IM_SIZ_8b) {
+            if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
+                s32 d = 2;
+                while (header->mainW / d >= 8 && header->mainH / d > 0) {
+                    rasterSize += header->mainW / d * header->mainH / d;
+                    d *= 2;
+                }
+            }
+        } else {
+            do {} while (0);
+            if (header->mainBitDepth == G_IM_SIZ_16b) {
+                if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
+                    s32 d = 2;
+                    while (header->mainW / d >= 4 && header->mainH / d > 0) {
+                        rasterSize += header->mainW / d * header->mainH / d;
+                        d *= 2;
+                    }
+                }
+                rasterSize *= 2;
+            } else if (header->mainBitDepth == G_IM_SIZ_32b) {
+                if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
+                    s32 d = 2;
+                    while (header->mainW / d >= 2 && header->mainH / d > 0) {
+                        rasterSize += header->mainW / d * header->mainH / d;
+                        d *= 2;
+                    }
+                }
+                rasterSize *= 4;
+            }
+        }
+
+        if (header->mainFmt == G_IM_FMT_CI) {
+            paletteSize = 0x20;
+            if (header->mainBitDepth == G_IM_SIZ_8b) {
+                paletteSize = 0x200;
+            }
+        } else {
+            paletteSize = 0;
+        }
+
+        if (header->extraTiles == EXTRA_TILE_AUX_INDEPENDENT) {
+            auxRasterSize = header->auxW * header->auxH;
+            if (header->auxBitDepth == G_IM_SIZ_4b) {
+                auxRasterSize /= 2;
+            } else if (header->auxBitDepth == G_IM_SIZ_8b) {
+            } else if (header->auxBitDepth == G_IM_SIZ_16b) {
+                auxRasterSize *= 2;
+            } else {
+                if (header->auxBitDepth == G_IM_SIZ_32b) {
+                    auxRasterSize *= 4;
+                }
+            }
+            if (header->auxFmt == G_IM_FMT_CI) {
+                auxPaletteSize = 0x20;
+                if (header->auxBitDepth == G_IM_SIZ_8b) {
+                    auxPaletteSize = 0x200;
+                }
+            } else {
+                auxPaletteSize = 0;
+            }
+        } else {
+            auxPaletteSize = 0;
+            auxRasterSize = 0;
+        }
+        currentTextureID = ++textureID;
+        func_80114B58(offset + sizeof(*header), &mdl_textureHandles[currentTextureID], header, rasterSize, paletteSize, auxRasterSize, auxPaletteSize);
+        mainSize = rasterSize + paletteSize + sizeof(*header);
+        offset += mainSize;
+        offset += auxRasterSize + auxPaletteSize;
+    }
+}
 
 // Goofy temps needed to match
 ModelNodeProperty* get_model_property(ModelNode* node, ModelPropertyKeys key) {
@@ -3041,7 +3892,7 @@ ModelNodeProperty* get_model_property(ModelNode* node, ModelPropertyKeys key) {
 }
 
 void _load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
-    if (model->type != 2) {
+    if (model->type != SHAPE_TYPE_MODEL) {
         if (model->groupData != NULL) {
             s32 numChildren = model->groupData->numChildren;
 
@@ -3054,9 +3905,9 @@ void _load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
             }
         }
     } else {
-        char* textureName = (char*)get_model_property(model, MODEL_PROP_KEY_TEXTURE_NAME);
-        if (textureName != NULL) {
-            load_tile_header(textureName, romOffset, size);
+        ModelNodeProperty* propTextureName = get_model_property(model, MODEL_PROP_KEY_TEXTURE_NAME);
+        if (propTextureName != NULL) {
+            load_tile_header(propTextureName, romOffset, size);
         }
     }
     mdl_treeIterPos++;
@@ -3084,7 +3935,7 @@ void load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
 s32 mdl_get_child_count(ModelNode* model) {
     s32 ret = 0;
 
-    if (model->type != 2 && model->groupData != NULL) {
+    if (model->type != SHAPE_TYPE_MODEL && model->groupData != NULL) {
         s32 numChildren = model->groupData->numChildren;
 
         if (numChildren != 0) {
@@ -3110,7 +3961,7 @@ void clear_model_data(void) {
         gCurrentModelTreeRoot = &D_80152214;
         gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152220;
-        gBgRenderTypePtr = &wBgRenderType;
+        gBackgroundFogModePtr = &wBackgroundFogMode;
         mdl_bgMultiplyColorA = 0;
         mdl_bgMultiplyColorR = 0;
         mdl_bgMultiplyColorG = 0;
@@ -3124,7 +3975,7 @@ void clear_model_data(void) {
         gCurrentModelTreeRoot = &D_80152218;
         gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152A20;
-        gBgRenderTypePtr = &bBgRenderType;
+        gBackgroundFogModePtr = &bBackgroundFogMode;
         gCurrentFogSettings = &bFogSettings;
     }
 
@@ -3149,7 +4000,7 @@ void clear_model_data(void) {
         (*mdl_currentModelTreeNodeInfo)[i].textureID = 0;
     }
 
-    *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_0;
+    *gBackgroundFogModePtr = FOG_MODE_0;
     gCurrentFogSettings->r = 10;
     gCurrentFogSettings->g = 10;
     gCurrentFogSettings->b = 10;
@@ -3175,7 +4026,7 @@ void init_model_data(void) {
         gCurrentModelTreeRoot = &D_80152214;
         gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152220;
-        gBgRenderTypePtr = &wBgRenderType;
+        gBackgroundFogModePtr = &wBackgroundFogMode;
         gCurrentFogSettings = &wFogSettings;
     } else {
         gCurrentModels = &bModelList;
@@ -3185,7 +4036,7 @@ void init_model_data(void) {
         gCurrentModelTreeRoot = &D_80152218;
         gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152A20;
-        gBgRenderTypePtr = &bBgRenderType;
+        gBackgroundFogModePtr = &bBackgroundFogMode;
         gCurrentFogSettings = &bFogSettings;
     }
 }
@@ -3202,7 +4053,7 @@ void calculate_model_sizes(void) {
             bb->halfSizeX = (bb->maxX - bb->minX) * 0.5;
             bb->halfSizeY = (bb->maxY - bb->minY) * 0.5;
             bb->halfSizeZ = (bb->maxZ - bb->minZ) * 0.5;
-            model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX;
+            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
         }
     }
 }
@@ -3241,7 +4092,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     }
 
     (*gCurrentModels)[modelIdx] = model = heap_malloc(sizeof(*model));
-    model->flags = bp->flags | 1;
+    model->flags = bp->flags | MODEL_FLAG_FLAG_1;
     model->modelID = D_80153226;
     model->modelNode = bp->mdlNode;
     model->groupData = bp->groupData;
@@ -3268,7 +4119,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     if (prop != NULL) {
         model->renderMode = prop->data.s;
     } else {
-        model->renderMode = 1;
+        model->renderMode = RENDER_MODE_SURFACE_OPA;
     }
 
     model->textureID = (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID;
@@ -3281,7 +4132,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     } else {
         model->currentMatrix = NULL;
         guMtxIdent(&model->specialMatrix);
-        model->flags |= MODEL_FLAGS_FLAG_2000;
+        model->flags |= MODEL_FLAG_FLAG_2000;
     }
 
     guMtxIdentF(model->transformMatrix);
@@ -3315,7 +4166,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     bb->halfSizeZ = z * 0.5;
 
     if (model->currentMatrix == NULL && x < 100.0f && y < 100.0f && z < 100.0f) {
-        model->flags |= 0x200;
+        model->flags |= MODEL_FLAG_FLAG_200;
     }
     (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = modelIdx;
 }
@@ -3347,8 +4198,8 @@ void func_80116698(void) {
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         model = (*gCurrentModels)[i];
-        if (model != NULL && (model->flags != 0) && !(model->flags & 4)) {
-            if (!(model->flags & MODEL_FLAGS_USES_TRANSFORM_MATRIX)) {
+        if (model != NULL && (model->flags != 0) && !(model->flags & MODEL_FLAG_FLAG_4)) {
+            if (!(model->flags & MODEL_FLAG_USES_TRANSFORM_MATRIX)) {
                 if (model->matrixMode != 0) {
                     model->matrixMode--;
                     if (model->matrixMode <= 0) {
@@ -3361,17 +4212,17 @@ void func_80116698(void) {
                     model->currentSpecialMatrix = &model->specialMatrix;
                 }
             } else {
-                model->flags &= ~MODEL_FLAGS_USES_TRANSFORM_MATRIX;
+                model->flags &= ~MODEL_FLAG_USES_TRANSFORM_MATRIX;
                 model->matrixMode = 2;
                 mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
-                if (model->currentMatrix == NULL || (model->flags & 8)) {
+                if (model->currentMatrix == NULL || (model->flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER)) {
                     guMtxF2L(model->transformMatrix, mtx);
                 } else {
                     guMtxL2F(sp20, model->currentMatrix);
                     guMtxCatF(model->transformMatrix, sp20, sp20);
                     guMtxF2L(sp20, mtx);
                 }
-                model->flags &= ~MODEL_FLAGS_FLAG_2000;
+                model->flags &= ~MODEL_FLAG_FLAG_2000;
                 bb = (ModelBoundingBox*) get_model_property(model->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
                 mX = (bb->minX + bb->maxX) * 0.5f;
                 mY = (bb->minY + bb->maxY) * 0.5f;
@@ -3381,15 +4232,15 @@ void func_80116698(void) {
                 model->center.x = mX;
                 model->center.y = mY;
                 model->center.z = mZ;
-                model->flags &= ~MODEL_FLAGS_FLAG_200;
+                model->flags &= ~MODEL_FLAG_FLAG_200;
             }
         }
     }
 
     for (i = 0; i < ARRAY_COUNT((*gCurrentTransformGroups)); i++) {
         mtg = (*gCurrentTransformGroups)[i];
-        if (mtg != NULL && mtg->flags != 0 && !(mtg->flags & MODEL_TRANSFORM_GROUP_FLAGS_4)) {
-            if (!(mtg->flags & MODEL_TRANSFORM_GROUP_FLAGS_1000)) {
+        if (mtg != NULL && mtg->flags != 0 && !(mtg->flags & MODEL_TRANSFORM_GROUP_FLAG_4)) {
+            if (!(mtg->flags & MODEL_TRANSFORM_GROUP_FLAG_1000)) {
                 if (mtg->matrixMode != 0) {
                     mtg->matrixMode--;
                     if (!(mtg->matrixMode & 0xFF)) {
@@ -3402,7 +4253,7 @@ void func_80116698(void) {
                     mtg->transformMtx = &mtg->matrixA;
                 }
             } else {
-                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAGS_1000;
+                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAG_1000;
                 mtg->matrixMode = 2;
                 mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
                 if (mtg->matrixRDP_N == NULL) {
@@ -3412,7 +4263,7 @@ void func_80116698(void) {
                     guMtxCatF(mtg->matrixB, sp60, sp60);
                     guMtxF2L(sp60, mtx);
                 }
-                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAGS_2000;
+                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAG_2000;
                 bb = (ModelBoundingBox*) get_model_property(mtg->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
                 mtgX = (bb->minX + bb->maxX) * 0.5f;
                 mtgY = (bb->minY + bb->maxY) * 0.5f;
@@ -3490,16 +4341,16 @@ void render_models(void) {
         if (model->flags == 0) {
             continue;
         }
-        if (model->flags & 4) {
+        if (model->flags & MODEL_FLAG_FLAG_4) {
             continue;
         }
-        if (model->flags & 2) {
+        if (model->flags & MODEL_FLAG_ENABLED) {
             continue;
         }
-        if (model->flags & 0x20) {
+        if (model->flags & MODEL_FLAG_FLAG_20) {
             continue;
         }
-        if (model->flags & 8) {
+        if (model->flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER) {
             continue;
         }
 
@@ -3507,7 +4358,7 @@ void render_models(void) {
         y = model->center.y;
         z = model->center.z;
 
-        if (model->flags & 0x200) {
+        if (model->flags & MODEL_FLAG_FLAG_200) {
             cond = FALSE;
             boundingBox = (ModelBoundingBox*) model->modelNode->propertyList;
             bbx = boundingBox->halfSizeX;
@@ -3705,7 +4556,7 @@ void render_transform_group_node(ModelNode* node) {
 
             if (groupTypeProp != NULL && groupTypeProp->data.s != 0) {
                 model = get_model_from_list_index(mdl_currentTransformGroupChildIndex);
-                if (!(model->flags & MODEL_FLAGS_ENABLED)) {
+                if (!(model->flags & MODEL_FLAG_ENABLED)) {
                     appendGfx_model_group(model);
                 }
                 mdl_currentTransformGroupChildIndex++;
@@ -3737,7 +4588,7 @@ void render_transform_group_node(ModelNode* node) {
         }
 
         model = get_model_from_list_index(mdl_currentTransformGroupChildIndex);
-        if (!(model->flags & MODEL_FLAGS_ENABLED)) {
+        if (!(model->flags & MODEL_FLAG_ENABLED)) {
             appendGfx_model(model);
         }
         mdl_currentTransformGroupChildIndex++;
@@ -3750,14 +4601,14 @@ void render_transform_group(void* data) {
     ModelTransformGroup* group = data;
     Gfx** gfx = &gMasterGfxPos;
 
-    if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAGS_4)) {
+    if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAG_4)) {
         mdl_currentTransformGroupChildIndex = group->minChildModelIndex;
-        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAGS_2000)) {
+        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAG_2000)) {
             gSPMatrix((*gfx)++, group->transformMtx, (G_MTX_PUSH | G_MTX_LOAD) | G_MTX_MODELVIEW);
         }
 
         render_transform_group_node(group->modelNode);
-        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAGS_2000)) {
+        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAG_2000)) {
             gSPPopMatrix((*gfx)++, G_MTX_MODELVIEW);
         }
         gDPPipeSync((*gfx)++);
@@ -3816,7 +4667,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
     auxBitDepth = header->auxBitDepth;
 
 
-    if (extraTileType == 3) {
+    if (extraTileType == EXTRA_TILE_AUX_INDEPENDENT) {
         if (palette != NULL) {
             auxPaletteIndex = 1;
         } else {
@@ -3855,7 +4706,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
     (*gfxPos)++;
 
     switch (extraTileType) {
-        case 0:
+        case EXTRA_TILE_NONE:
             lodMode = G_TL_TILE;
             gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
             switch (mainBitDepth) {
@@ -3881,7 +4732,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
                     break;
             }
             break;
-        case 1:
+        case EXTRA_TILE_MIPMAPS:
             lodMode = G_TL_LOD;
             switch (mainBitDepth) {
                 case G_IM_SIZ_4b:
@@ -3929,10 +4780,9 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
                     }
                     break;
             }
-            // use tile with lowest quality
             gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, lod - 1, G_TX_RENDERTILE, G_ON);
             break;
-        case 2:
+        case EXTRA_TILE_AUX_SAME_AS_MAIN:
             gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
             gDPPipeSync((*gfxPos)++);
             lodMode = G_TL_TILE;
@@ -3959,7 +4809,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
                     break;
             }
             break;
-        case 3:
+        case EXTRA_TILE_AUX_INDEPENDENT:
             gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
             lodMode = G_TL_TILE;
             switch (mainBitDepth) {
@@ -4066,7 +4916,7 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMt
             groupType = groupTypeProperty->data.s;
         }
 
-        if (model->type != 5 || groupType == 0) {
+        if (model->type != SHAPE_TYPE_GROUP || groupType == 0) {
             for (i = 0; i < model->groupData->numChildren; i++) {
                 load_model_transforms(model->groupData->childList[i], model,
                                       model->groupData->transformMatrix != NULL ? sp10 : mdlTxMtx, treeDepth + 1);
@@ -4085,7 +4935,7 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMt
     modelBPptr->groupData = parent->groupData;
     modelBPptr->mtx = &sp50;
 
-    if (model->type == 5) {
+    if (model->type == SHAPE_TYPE_GROUP) {
         s32 childCount = mdl_get_child_count(model);
 
         for (i = mdl_treeIterPos; i < mdl_treeIterPos + childCount; i++) {
@@ -4168,12 +5018,12 @@ void func_8011B1D8(ModelNode* node) {
     s32 i;
     u16 childCount;
 
-    if (node->type == 2) {
+    if (node->type == SHAPE_TYPE_MODEL) {
         D_80153376 = D_80153226;
         return;
     }
 
-    if (node->type == 5) {
+    if (node->type == SHAPE_TYPE_GROUP) {
         prop = get_model_property(node, MODEL_PROP_KEY_GROUP_TYPE);
         if (prop != NULL && prop->data.s != 0) {
             mdl_treeIterPos += mdl_get_child_count(node);
@@ -4188,7 +5038,7 @@ void func_8011B1D8(ModelNode* node) {
             for (i = 0; i < numChildren; i++) {
                 childNode = node->groupData->childList[i];
                 childCount = mdl_treeIterPos;
-                if (childNode->type == 5) {
+                if (childNode->type == SHAPE_TYPE_GROUP) {
                     prop = get_model_property(childNode, MODEL_PROP_KEY_GROUP_TYPE);
                     if (prop != NULL && prop->data.s != 0) {
                         childCount += mdl_get_child_count(childNode);
@@ -4235,7 +5085,7 @@ void make_transform_group(u16 modelID) {
         }
 
         (*gCurrentTransformGroups)[i] = newMtg = heap_malloc(sizeof(*newMtg));
-        newMtg->flags = MODEL_TRANSFORM_GROUP_FLAGS_1;
+        newMtg->flags = MODEL_TRANSFORM_GROUP_FLAG_1;
         newMtg->groupModelID = modelID;
         newMtg->minChildModelIndex = get_model_list_index_from_tree_index(D_80153374);
         newMtg->maxChildModelIndex = get_model_list_index_from_tree_index(D_80153376);
@@ -4293,10 +5143,10 @@ void enable_transform_group(u16 modelID) {
     for (i = group->minChildModelIndex; i <= group->maxChildModelIndex; i++) {
         Model* model = get_model_from_list_index(i);
 
-        model->flags |= MODEL_FLAGS_TRANSFORM_GROUP_MEMBER;
+        model->flags |= MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
 
         if (model->currentMatrix != NULL) {
-            model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX;
+            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
         }
     }
 }
@@ -4305,15 +5155,15 @@ void disable_transform_group(u16 modelID) {
     ModelTransformGroup* group = get_transform_group(get_transform_group_index(modelID));
     s32 i;
 
-    group->flags |= MODEL_TRANSFORM_GROUP_FLAGS_4;
+    group->flags |= MODEL_TRANSFORM_GROUP_FLAG_4;
 
     for (i = group->minChildModelIndex; i <= group->maxChildModelIndex; i++) {
         Model* model = get_model_from_list_index(i);
 
-        model->flags &= ~MODEL_FLAGS_TRANSFORM_GROUP_MEMBER;
+        model->flags &= ~MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
 
         if (model->currentMatrix != NULL) {
-            model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX;
+            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
         }
     }
 }
@@ -4334,7 +5184,7 @@ void clone_model(u16 srcModelID, u16 newModelID) {
     newModel->modelID = newModelID;
 }
 
-void func_8011B7C0(u16 treeIndex, s32 flags, s32 arg2) {
+void set_model_flags(u16 treeIndex, s32 flags, s32 mode) {
     s32 maxGroupIndex = -1;
     s32 i;
     s32 minGroupIndex;
@@ -4361,10 +5211,10 @@ void func_8011B7C0(u16 treeIndex, s32 flags, s32 arg2) {
         }
     }
 
-    if (arg2 < 2) {
+    if (mode < 2) {
         for (i = minGroupIndex; i <= maxGroupIndex; i++) {
             Model* model = (*gCurrentModels)[i];
-            if (arg2 != 0) {
+            if (mode != 0) {
                 model->flags &= ~flags;
             } else {
                 model->flags |= flags;
@@ -4373,7 +5223,7 @@ void func_8011B7C0(u16 treeIndex, s32 flags, s32 arg2) {
     } else {
         for (i = 0; i < minGroupIndex; i++) {
             Model* model = (*gCurrentModels)[i];
-            if (arg2 == 3) {
+            if (mode == 3) {
                 model->flags &= ~flags;
             } else {
                 model->flags |= flags;
@@ -4382,7 +5232,7 @@ void func_8011B7C0(u16 treeIndex, s32 flags, s32 arg2) {
         for (i = maxGroupIndex + 1; i < 256; i++) {
             Model* model = (*gCurrentModels)[i];
             if (model != NULL) {
-                if (arg2 == 3) {
+                if (mode == 3) {
                     model->flags &= ~flags;
                 } else {
                     model->flags |= flags;
@@ -4392,7 +5242,7 @@ void func_8011B7C0(u16 treeIndex, s32 flags, s32 arg2) {
     }
 }
 
-void func_8011B950(u16 treeIndex, s32 arg1, s32 arg2, s32 arg3) {
+void func_8011B950(u16 treeIndex, s32 customGfxIndex, s32 fogType, s32 arg3) {
     s32 maxGroupIndex = -1;
     s32 i;
     s32 minGroupIndex;
@@ -4422,17 +5272,17 @@ void func_8011B950(u16 treeIndex, s32 arg1, s32 arg2, s32 arg3) {
 
     maskLow = maskHigh = 0;
 
-    if (arg1 < 0) {
+    if (customGfxIndex < 0) {
         maskLow = 0xF;
-        arg1 = 0;
+        customGfxIndex = 0;
     }
 
-    if (arg2 < 0) {
+    if (fogType < 0) {
         maskHigh = 0xF0;
-        arg2 = 0;
+        fogType = 0;
     }
 
-    newIndex = arg1 + (arg2 << 4);
+    newIndex = customGfxIndex + (fogType << 4);
 
     if (arg3 == 0) {
         for (i = minGroupIndex; i <= maxGroupIndex; i++) {
@@ -4460,7 +5310,7 @@ void func_8011BAE8(void) {
         Model* model = (*gCurrentModels)[i];
 
         if (model != NULL) {
-            model->flags &= ~MODEL_FLAGS_HAS_TRANSFORM_APPLIED;
+            model->flags &= ~MODEL_FLAG_HAS_TRANSFORM_APPLIED;
         }
     }
 
@@ -4468,7 +5318,7 @@ void func_8011BAE8(void) {
         ModelTransformGroup* transformGroup = (*gCurrentTransformGroups)[i];
 
         if (transformGroup != NULL) {
-            transformGroup->flags &= ~MODEL_TRANSFORM_GROUP_FLAGS_400;
+            transformGroup->flags &= ~MODEL_TRANSFORM_GROUP_FLAG_400;
         }
     }
 }
@@ -4712,29 +5562,21 @@ void mdl_get_vertex_count(Gfx* gfx, s32* numVertices, Vtx** baseVtx, s32* gfxCou
     }
 }
 
-void mdl_local_gfx_update_vtx_pointers(Gfx* nodeDlist, Vtx* baseVtx, Gfx* arg2, Vtx* arg3);
-#ifdef NON_MATCHING
-void mdl_local_gfx_update_vtx_pointers(Gfx* nodeDlist, Vtx* baseVtx, Gfx* arg2, Vtx* arg3) {
+void mdl_local_gfx_update_vtx_pointers(Gfx *nodeDlist, Vtx *baseVtx, Gfx *arg2, Vtx *arg3) {
     u32 w0;
-    u32 temp_v1;
-    u32 w1;
-
+    Vtx* w1;
     do {
-        w0 = (u32) nodeDlist->words.w0 >> 0;
-        w1 = nodeDlist->words.w1;
-        temp_v1 = w0 >> 0x18;
-        nodeDlist++;
-        if (temp_v1 == 1) {
-            w1 = &arg3[(s32) (w1 - (s32)baseVtx) >> 4];
+        w0 = (*((unsigned long long*)nodeDlist)) >> 0x20; // TODO required to match
+        w1 = (Vtx*)nodeDlist->words.w1;
+        if (w0 >> 0x18 == G_VTX) {
+            w1 = arg3 + (w1 - baseVtx);
         }
         arg2->words.w0 = w0;
-        arg2->words.w1 = w1;
+        arg2->words.w1 = (u32)w1;
+        nodeDlist++;
         arg2++;
-    } while (temp_v1 != G_ENDDL);
+    } while (w0 >> 0x18 != G_ENDDL);
 }
-#else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_local_gfx_update_vtx_pointers);
-#endif
 
 void mdl_local_gfx_copy_vertices(Vtx* src, s32 num, Vtx* dest) {
     u32 i;
@@ -4767,13 +5609,13 @@ void mdl_make_local_vertex_copy(s32 copyIndex, u16 modelID, s32 isMakingCopy) {
             mdl_local_gfx_update_vtx_pointers(nodeDlist, baseVtx, copy->gfxCopy[i], copy->vtxCopy[i]);
             mdl_local_gfx_copy_vertices(baseVtx, numVertices, copy->vtxCopy[i]);
         }
-        model->flags |= MODEL_FLAGS_HAS_LOCAL_VERTEX_COPY;
+        model->flags |= MODEL_FLAG_HAS_LOCAL_VERTEX_COPY;
     } else {
         for (i = 0; i < ARRAY_COUNT(copy->gfxCopy); i++) {
             copy->gfxCopy[i] = NULL;
             copy->vtxCopy[i] = NULL;
         }
-        model->flags |= MODEL_FLAGS_ENABLED;
+        model->flags |= MODEL_FLAG_ENABLED;
     }
 
     copy->selector = 0;
@@ -4982,7 +5824,7 @@ void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
     oldGfxPos = gMasterGfxPos;
     gMasterGfxPos = *arg0;
 
-    copied.flags = MODEL_FLAGS_HAS_LOCAL_VERTEX_COPY | MODEL_FLAGS_FLAG_1;
+    copied.flags = MODEL_FLAG_HAS_LOCAL_VERTEX_COPY | MODEL_FLAG_FLAG_1;
     appendGfx_model(&copied);
 
     *arg0 = gMasterGfxPos;

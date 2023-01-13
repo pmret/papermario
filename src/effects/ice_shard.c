@@ -76,8 +76,8 @@ void ice_shard_update(EffectInstance* effect) {
     IceShardFXData* data = effect->data.iceShard;
     s32 unk_00 = data->unk_00;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
+    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
         data->unk_10 = 16;
     }
 

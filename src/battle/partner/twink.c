@@ -18,7 +18,7 @@ extern EvtScript N(runAwayFail);
 ApiStatus func_80238000_714CF0(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
-    if (battleStatus->flags2 & BS_FLAGS2_40) {
+    if (battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE) {
         script->varTable[0] = 1;
     } else {
         script->varTable[0] = 0;
@@ -86,7 +86,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -153,7 +153,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach_A0002)
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach_C0005)
             EVT_SET_CONST(LVar0, 1)

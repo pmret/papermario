@@ -84,7 +84,7 @@ ActorBlueprint N(bow) = {
     .maxHP = 15,
     .partCount = ARRAY_COUNT(N(bow_parts)),
     .partsData = N(bow_parts),
-    .script = &N(bow_init),
+    .takeTurnScript = &N(bow_init),
     .statusTable = N(bow_statusTable),
     .escapeChance = 50,
     .airLiftChance = 80,
@@ -178,7 +178,7 @@ EvtScript N(bow_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)

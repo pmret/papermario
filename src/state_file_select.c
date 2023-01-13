@@ -45,11 +45,11 @@ void state_init_file_select(void) {
     gCameras[CAM_DEFAULT].unk_06 = 1;
     gCameras[CAM_DEFAULT].nearClip = 16;
     gCameras[CAM_DEFAULT].farClip = 4096;
-    gCameras[CAM_DEFAULT].flags |= CAMERA_FLAGS_ENABLED;
+    gCameras[CAM_DEFAULT].flags |= CAMERA_FLAG_ENABLED;
     gCurrentCameraID = CAM_DEFAULT;
-    gCameras[CAM_BATTLE].flags |= CAMERA_FLAGS_ENABLED;
-    gCameras[CAM_TATTLE].flags |= CAMERA_FLAGS_ENABLED;
-    gCameras[CAM_3].flags |= CAMERA_FLAGS_ENABLED;
+    gCameras[CAM_BATTLE].flags |= CAMERA_FLAG_ENABLED;
+    gCameras[CAM_TATTLE].flags |= CAMERA_FLAG_ENABLED;
+    gCameras[CAM_3].flags |= CAMERA_FLAG_ENABLED;
     gCameras[CAM_DEFAULT].vfov = 25.0f;
     set_cam_viewport(0, 12, 28, 296, 184);
     gCameras[CAM_DEFAULT].auxBoomLength = 40;
@@ -367,7 +367,7 @@ void state_step_exit_file_select(void) {
                 Window* window = &gWindows[i];
 
                 if (window->parent == 44 || window->parent == -1) {
-                    flagSum += window->flags & WINDOW_FLAGS_INITIAL_ANIMATION;
+                    flagSum += window->flags & WINDOW_FLAG_INITIAL_ANIMATION;
                 }
             }
 

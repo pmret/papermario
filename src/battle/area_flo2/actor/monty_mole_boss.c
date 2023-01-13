@@ -94,7 +94,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 12,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 50,
     .airLiftChance = 55,
@@ -170,7 +170,7 @@ ActorBlueprint N(hole) = {
     .maxHP = 5,
     .partCount = ARRAY_COUNT(N(parts_hole)),
     .partsData = N(parts_hole),
-    .script = &N(init_hole),
+    .takeTurnScript = &N(init_hole),
     .statusTable = NULL,
     .escapeChance = 80,
     .airLiftChance = 0,
@@ -263,7 +263,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Dark_Anim0C)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(GetLastElement, LVar0)
             EVT_IF_FLAG(LVar0, DAMAGE_TYPE_SMASH)

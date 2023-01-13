@@ -15,7 +15,7 @@
 
 // rename this to NO_DROPS and the above to NO_STAT_DROPS after all map data done
 #define NPC_NO_DROPS { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .heartDrops  = NO_DROPS, \
     .flowerDrops = NO_DROPS, \
 }

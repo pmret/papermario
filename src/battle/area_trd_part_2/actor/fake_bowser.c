@@ -214,7 +214,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 10,
     .partCount = ARRAY_COUNT(N(partsTable_8021A748)),
     .partsData = N(partsTable_8021A748),
-    .script = &N(init_8021A968),
+    .takeTurnScript = &N(init_8021A968),
     .statusTable = N(statusTable_8021A690),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -1341,7 +1341,7 @@ EvtScript N(handleEvent_8021E6F0) = {
             EVT_SET(ArrayVar(0), 2)
             EVT_WAIT(20)
             EVT_SET(ArrayVar(0), 0)
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET(ArrayVar(0), 2)
             EVT_WAIT(20)
@@ -1351,13 +1351,13 @@ EvtScript N(handleEvent_8021E6F0) = {
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
             EVT_CALL(func_8027D32C, ACTOR_SELF)
             EVT_IF_EQ(LVar0, EVENT_BURN_DEATH)
-                EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_8021A8FC_48BAEC)), 3)
+                EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_8021A8FC_48BAEC)), FOG_MODE_3)
                 EVT_CALL(N(UnkFunc26), 3, 35, 35, 35, 0, 0, 0, 0, 0, 0)
             EVT_END_IF
             EVT_SET(ArrayVar(0), 2)
             EVT_WAIT(20)
             EVT_IF_EQ(LVar0, EVENT_BURN_DEATH)
-                EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_8021A8FC_48BAEC)), 0)
+                EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_8021A8FC_48BAEC)), FOG_MODE_0)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
                 EVT_DIVF(LVar3, EVT_FLOAT(2.0))
@@ -1385,12 +1385,12 @@ EvtScript N(handleEvent_8021E6F0) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_BURN_CONTACT)
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
-            EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_8021A8FC_48BAEC)), 3)
+            EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_8021A8FC_48BAEC)), FOG_MODE_3)
             EVT_CALL(N(UnkFunc26), 3, 35, 35, 35, 0, 0, 0, 0, 0, 0)
             EVT_SET(ArrayVar(0), 2)
             EVT_WAIT(20)
             EVT_SET(ArrayVar(0), 0)
-            EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_8021A8FC_48BAEC)), 0)
+            EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_8021A8FC_48BAEC)), FOG_MODE_0)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
             EVT_DIVF(LVar3, EVT_FLOAT(2.0))
@@ -2844,7 +2844,7 @@ EvtScript N(handleEvent_802242FC) = {
                     EVT_WAIT(20)
                 EVT_END_IF
             EVT_END_IF
-        EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
             EVT_SET(LVarA, 4)
             EVT_EXEC_WAIT(N(80223870))
         EVT_CASE_EQ(EVENT_IMMUNE)

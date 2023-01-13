@@ -307,7 +307,7 @@ Gfx D_802A7A88_7A59C8[] = {
 #include "level_up/select_one_to_upgrade.png.inc.c"
 #include "level_up/select_one_to_upgrade.pal.inc.c"
 
-EntityModelScript level_up_model_script = STANDARD_ENTITY_MODEL_SCRIPT(D_802A7A88_7A59C8, RENDER_MODE_2D);
+EntityModelScript EMS_level_up = STANDARD_ENTITY_MODEL_SCRIPT(D_802A7A88_7A59C8, RENDER_MODE_2D);
 
 HudScript HES_level_up_heart = HES_TEMPLATE_CI_ENUM_SIZE(level_up_heart, 40, 40);
 HudScript HES_level_up_heart_copy = HES_TEMPLATE_CI_ENUM_SIZE(level_up_heart, 40, 40);

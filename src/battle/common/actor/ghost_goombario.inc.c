@@ -23,7 +23,7 @@ ApiStatus N(UnkTattleEffectFunc2)(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
 
     effect->data.tattleWindow->pos.y = 144.0f;
-    effect->flags |= EFFECT_INSTANCE_FLAGS_10;
+    effect->flags |= EFFECT_INSTANCE_FLAG_10;
     return ApiStatus_DONE2;
 }
 
@@ -93,7 +93,7 @@ ActorBlueprint N(goombario) = {
     .maxHP = 15,
     .partCount = ARRAY_COUNT(N(goombario_parts)),
     .partsData = N(goombario_parts),
-    .script = &N(goombario_init),
+    .takeTurnScript = &N(goombario_init),
     .statusTable = N(goombario_statusTable),
     .escapeChance = 50,
     .airLiftChance = 80,
@@ -185,7 +185,7 @@ EvtScript N(goombario_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)

@@ -89,7 +89,7 @@ ActorBlueprint N(lakilester) = {
     .maxHP = 15,
     .partCount = ARRAY_COUNT(N(lakilester_parts)),
     .partsData = N(lakilester_parts),
-    .script = &N(lakilester_init),
+    .takeTurnScript = &N(lakilester_init),
     .statusTable = N(lakilester_statusTable),
     .escapeChance = 50,
     .airLiftChance = 80,
@@ -185,7 +185,7 @@ EvtScript N(lakilester_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Dead)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)

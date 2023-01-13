@@ -429,7 +429,7 @@ void N(FlyingAI_Init)(Npc* npc, Enemy* enemy, Evt* script, MobileAISettings* aiS
     enemy->varTable[3] = (depth * 100.0) + 0.5;
     enemy->varTable[7] = (posY * 100.0) + 0.5;
     script->functionTemp[1] = aiSettings->playerSearchInterval;
-    enemy->aiFlags |= ENEMY_AI_FLAGS_10;
+    enemy->aiFlags |= ENEMY_AI_FLAG_10;
 }
 
 ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
@@ -471,11 +471,11 @@ ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
 
     npc->verticalRenderOffset = -2;
 
-    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
         if (enemy->aiPaused != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
     }
 
     switch (script->AI_TEMP_STATE) {

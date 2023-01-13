@@ -326,18 +326,18 @@ void func_80053654(AuGlobals* globals) {
             voice->priority = AU_PRIORITY_FREE;
         }
 
-        if (voiceUpdateFlags & AU_VOICE_SYNC_FLAGS_ALL) {
+        if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_ALL) {
             func_80052BF8(voice, &voice->unk_14);
             au_pvoice_set_filter(i, voice->reverbType, voice->instrument, voice->pitchRatio, voice->volume, voice->pan, voice->reverbAmt, voice->unk_08);
             voice->priority = voice->priorityCopy;
         } else {
-            if (voiceUpdateFlags & AU_VOICE_SYNC_FLAGS_PITCH) {
+            if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_PITCH) {
                 au_pvoice_set_pitch_ratio(i, voice->pitchRatio);
             }
 
-            if (voiceUpdateFlags & AU_VOICE_SYNC_FLAGS_4) {
+            if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_4) {
                 func_8005736C(i, voice->volume, voice->unk_08, voice->pan, voice->reverbAmt);
-            } else if (voiceUpdateFlags & AU_VOICE_SYNC_FLAGS_10) {
+            } else if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_10) {
                 func_80057548(i, voice->pan, voice->reverbAmt);
             }
         }

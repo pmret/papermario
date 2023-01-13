@@ -106,9 +106,9 @@ EvtScript N(EVS_Scene_ReachedMansion) = {
     EVT_CALL(SetPlayerPos, -701, 0, -34)
     EVT_CALL(SetNpcPos, NPC_PARTNER, -701, 0, -34)
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, TRUE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
     EVT_CALL(PlayerMoveTo, -407, 103, 120)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAGS_NO_FLIPPING, FALSE)
+    EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, FALSE)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_WAIT(15)

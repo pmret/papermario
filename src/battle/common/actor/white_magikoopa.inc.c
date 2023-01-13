@@ -135,7 +135,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 11,
     .partCount = ARRAY_COUNT(N(partsTable_80223C90)),
     .partsData = N(partsTable_80223C90),
-    .script = &N(init_80225F58),
+    .takeTurnScript = &N(init_80225F58),
     .statusTable = N(statusTable_80223B38),
     .escapeChance = 40,
     .airLiftChance = 80,
@@ -158,7 +158,7 @@ ActorBlueprint N(flying) = {
     .maxHP = 11,
     .partCount = ARRAY_COUNT(N(partsTable_80223CB4)),
     .partsData = N(partsTable_80223CB4),
-    .script = &N(init_80225FBC),
+    .takeTurnScript = &N(init_80225FBC),
     .statusTable = N(statusTable_80223BE4),
     .escapeChance = 40,
     .airLiftChance = 95,
@@ -261,7 +261,7 @@ EvtScript N(handleEvent_80223E24) = {
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_White_Anim04)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
@@ -464,7 +464,7 @@ EvtScript N(handleEvent_80224A44) = {
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_White_Anim04)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 2)

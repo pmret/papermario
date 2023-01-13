@@ -544,7 +544,7 @@ s32 func_800EA52C(s32 partnerID) {
     u32 playerActionState = playerStatus->actionState;
     s32 ret = FALSE;
 
-    if (playerStatus->flags & PS_FLAGS_HIT_FIRE) {
+    if (playerStatus->flags & PS_FLAG_HIT_FIRE) {
         return FALSE;
     }
 
@@ -643,10 +643,10 @@ void _use_partner_ability(void) {
         partnerActionStatus->heldButtons = 0;
     }
 
-    if (playerStatus->animFlags & PA_FLAGS_INTERRUPT_USE_PARTNER) {
-        playerStatus->animFlags &= ~PA_FLAGS_INTERRUPT_USE_PARTNER;
+    if (playerStatus->animFlags & PA_FLAG_INTERRUPT_USE_PARTNER) {
+        playerStatus->animFlags &= ~PA_FLAG_INTERRUPT_USE_PARTNER;
         partnerActionStatus->pressedButtons |= BUTTON_B | BUTTON_C_DOWN;
-        playerStatus->animFlags |= PA_FLAGS_PARTNER_USAGE_STOPPED;
+        playerStatus->animFlags |= PA_FLAG_PARTNER_USAGE_STOPPED;
     }
 
     if (NextPartnerCommand != PARTNER_CMD_NONE) {
@@ -1088,8 +1088,8 @@ void partner_handle_after_battle(void) {
         NextPartnerCommand = PARTNER_CMD_INIT;
 
         if (playerData->currentPartner != PARTNER_WATT && actionStatus->actingPartner == PARTNER_WATT) {
-            gPlayerStatusPtr->animFlags &= ~PA_FLAGS_USING_WATT;
-            gPlayerStatusPtr->animFlags &= ~PA_FLAGS_WATT_IN_HANDS;
+            gPlayerStatusPtr->animFlags &= ~PA_FLAG_USING_WATT;
+            gPlayerStatusPtr->animFlags &= ~PA_FLAG_WATT_IN_HANDS;
             actionStatus->actingPartner = PARTNER_NONE;
         }
 
@@ -1170,7 +1170,7 @@ void partner_walking_update_player_tracking(Npc* partner) {
     s32 isPlayerJumping;
     PlayerPathElement* currentSnapshot;
 
-    if (playerStatus->flags & (PS_FLAGS_FALLING | PS_FLAGS_JUMPING)) {
+    if (playerStatus->flags & (PS_FLAG_FALLING | PS_FLAG_JUMPING)) {
         isPlayerJumping = (playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_STEP_DOWN) ^ 1;
     } else {
         isPlayerJumping = FALSE;
@@ -1196,9 +1196,9 @@ void partner_walking_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
-    if (gGameStatusPtr->multiplayerEnabled == 0 || playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_NO_STATIC_COLLISION)
+    if (gGameStatusPtr->multiplayerEnabled == 0 || playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)
         || actionStatus->inputDisabled != 0 || actionStatus->partnerAction_unk_2 != 0) {
-        if (!(playerStatus->animFlags & PA_FLAGS_OPENED_HIDDEN_PANEL)) {
+        if (!(playerStatus->animFlags & PA_FLAG_OPENED_HIDDEN_PANEL)) {
             partner_walking_follow_player(partner);
         }
         if (actionStatus->pressedButtons & (BUTTON_Z | BUTTON_B | BUTTON_C_LEFT | BUTTON_C_DOWN)) {
@@ -1212,7 +1212,7 @@ void partner_walking_update_motion(Npc* partner) {
         partner->pos.z = playerStatus->position.z;
         partner->jumpVelocity = 0.0f;
         partner->jumpScale = 0.0f;
-        partner->flags = partner->flags & ~PA_FLAGS_OPENED_HIDDEN_PANEL;
+        partner->flags = partner->flags & ~PA_FLAG_OPENED_HIDDEN_PANEL;
     }
 
     partner_do_player_collision(partner);
@@ -1246,7 +1246,7 @@ void partner_walking_follow_player(Npc* partner) {
 
             distance = dist2D(partner->pos.x, partner->pos.z, playerStatus->position.x, playerStatus->position.z);
             if (distance >= 50.0) {
-                partner->moveSpeed = !(playerStatus->animFlags & PA_FLAGS_SPINNING) ? 5.0f : 7.0f;
+                partner->moveSpeed = !(playerStatus->animFlags & PA_FLAG_SPINNING) ? 5.0f : 7.0f;
             }
             if (wPartnerTetherDistance < 20.0) {
                 partner->moveSpeed = 4.0f;
@@ -1789,11 +1789,11 @@ void partner_flying_update_motion(Npc* partner) {
     f32 var_f2;
 
     if (gGameStatusPtr->multiplayerEnabled == 0 ||
-        (playerStatus->flags & (PS_FLAGS_INPUT_DISABLED | PS_FLAGS_NO_STATIC_COLLISION)) ||
+        (playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)) ||
         partnerActionStatus->inputDisabled ||
         partnerActionStatus->partnerAction_unk_2 != 0)
     {
-        if (!(playerStatus->animFlags & PA_FLAGS_OPENED_HIDDEN_PANEL) || D_800F8020 == 0) {
+        if (!(playerStatus->animFlags & PA_FLAG_OPENED_HIDDEN_PANEL) || D_800F8020 == 0) {
             partner_flying_follow_player(partner);
         }
         if (partnerActionStatus->pressedButtons & (BUTTON_B | BUTTON_Z | BUTTON_C_DOWN | BUTTON_C_LEFT)) {
@@ -2118,7 +2118,7 @@ void partner_flying_follow_player(Npc* partner) {
             }
             break;
         case 15:
-            if (!(playerStatus->animFlags & PA_FLAGS_CHANGING_MAP)) {
+            if (!(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
                 switch (D_8010CFCE) {
                     case 0:
                         temp_f0_15 = clamp_angle(func_800E5348() + 180.0f);
@@ -2297,7 +2297,7 @@ s32 partner_get_out(Npc* partner) {
                 add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
                 hitDepth = 1000.0f;
                 if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionRadius)) {
-                    // @bug? collider flags not properly masked with COLLIDER_FLAGS_SURFACE_TYPE
+                    // @bug? collider flags not properly masked with COLLIDER_FLAG_SURFACE_TYPE
                     s32 surfaceType = get_collider_flags(D_8010C978);
 
                     if ((surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) || (hitDepth > 100.0f)) {

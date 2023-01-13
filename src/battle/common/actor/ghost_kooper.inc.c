@@ -89,7 +89,7 @@ ActorBlueprint N(kooper) = {
     .maxHP = 15,
     .partCount = ARRAY_COUNT(N(kooper_parts)),
     .partsData = N(kooper_parts),
-    .script = &N(kooper_init),
+    .takeTurnScript = &N(kooper_init),
     .statusTable = N(kooper_statusTable),
     .escapeChance = 50,
     .airLiftChance = 80,
@@ -248,7 +248,7 @@ EvtScript N(kooper_handleEvent) = {
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Toppled)
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)

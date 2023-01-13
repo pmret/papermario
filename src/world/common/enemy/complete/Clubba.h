@@ -3,7 +3,7 @@
 
 #define CLUBBA_DROPS \
 { \
-    .dropFlags = NPC_DROP_FLAGS_80, \
+    .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 5, \
     .itemDrops = { \
         { ITEM_SUPER_SHROOM, 10, 0 }, \
@@ -40,7 +40,7 @@
     .settings = &N(NpcSettings_Clubba_Hitbox), \
     .pos = { NPC_DISPOSE_LOCATION }, \
     .yaw = 0, \
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_800000, \
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_800000, \
     .drops = NPC_NO_DROPS, \
     .animations = CLUBBA_ANIMS, \
     .extraAnimations = N(ExtraAnims_Clubba_Hitbox), \

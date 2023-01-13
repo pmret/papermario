@@ -90,7 +90,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 20,
     .partCount = ARRAY_COUNT(N(partsTable_8021D47C)),
     .partsData = N(partsTable_8021D47C),
-    .script = &N(init_8021D4C8),
+    .takeTurnScript = &N(init_8021D4C8),
     .statusTable = N(statusTable_8021D3D0),
     .escapeChance = 100,
     .airLiftChance = 0,
@@ -138,7 +138,7 @@ EvtScript N(init_8021D4C8) = {
         EVT_CALL(func_8026BF48, 0)
     EVT_END_THREAD
     EVT_CALL(func_802180D0_464560)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_800000, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_NO_GAME_OVER, 1)
     EVT_RETURN
     EVT_END
 };
@@ -518,7 +518,7 @@ ActorBlueprint N(goombario) = {
     .maxHP = 20,
     .partCount = ARRAY_COUNT(N(partsTable_8021EA50)),
     .partsData = N(partsTable_8021EA50),
-    .script = &N(init_Goombario),
+    .takeTurnScript = &N(init_Goombario),
     .statusTable = N(statusTable_8021E9A4),
     .escapeChance = 100,
     .airLiftChance = 0,
@@ -988,7 +988,7 @@ ApiStatus func_80218E2C_4652BC(Evt* script, s32 isInitialCall) {
     EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *script->ptrReadPos);
 
     tattleEffect->data.tattleWindow->pos.y = 144.0f;
-    tattleEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
+    tattleEffect->flags |= EFFECT_INSTANCE_FLAG_10;
     return ApiStatus_DONE2;
 }
 
@@ -1153,7 +1153,7 @@ ActorBlueprint N(kooper) = {
     .maxHP = 20,
     .partCount = ARRAY_COUNT(N(partsTable_8022069C)),
     .partsData = N(partsTable_8022069C),
-    .script = &N(init_Kooper),
+    .takeTurnScript = &N(init_Kooper),
     .statusTable = N(statusTable_802205F0),
     .escapeChance = 100,
     .airLiftChance = 0,
@@ -1665,7 +1665,7 @@ ActorBlueprint N(bombette) = {
     .maxHP = 20,
     .partCount = ARRAY_COUNT(N(partsTable_80222394)),
     .partsData = N(partsTable_80222394),
-    .script = &N(init_LeeBombette),
+    .takeTurnScript = &N(init_LeeBombette),
     .statusTable = N(statusTable_802222E8),
     .escapeChance = 100,
     .airLiftChance = 0,
@@ -2031,7 +2031,7 @@ ActorBlueprint N(parakarry) = {
     .maxHP = 20,
     .partCount = ARRAY_COUNT(N(partsTable_8022348C)),
     .partsData = N(partsTable_8022348C),
-    .script = &N(init_Parakarry),
+    .takeTurnScript = &N(init_Parakarry),
     .statusTable = N(statusTable_802233E0),
     .escapeChance = 100,
     .airLiftChance = 0,
@@ -2393,7 +2393,7 @@ ActorBlueprint N(bow) = {
     .maxHP = 20,
     .partCount = ARRAY_COUNT(N(partsTable_80224514)),
     .partsData = N(partsTable_80224514),
-    .script = &N(init_Bow),
+    .takeTurnScript = &N(init_Bow),
     .statusTable = N(statusTable_80224468),
     .escapeChance = 100,
     .airLiftChance = 0,
@@ -2845,7 +2845,7 @@ ActorBlueprint N(watt) = {
     .maxHP = 20,
     .partCount = ARRAY_COUNT(N(partsTable_80225A80)),
     .partsData = N(partsTable_80225A80),
-    .script = &N(init_Watt),
+    .takeTurnScript = &N(init_Watt),
     .statusTable = N(statusTable_802259D4),
     .escapeChance = 100,
     .airLiftChance = 0,
@@ -2914,7 +2914,7 @@ ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall) {
                     }
 
                     if (wattEffectData->effect2 != NULL) {
-                        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+                        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
                         wattEffectData->effect2 = NULL;
                     }
                     wattEffectData->effect1->data.staticStatus->unk_04 = x;
@@ -2923,7 +2923,7 @@ ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall) {
                     break;
                 case 1:
                     if (wattEffectData->effect1 != NULL) {
-                        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+                        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
                         wattEffectData->effect1 = NULL;
                     }
                     if (wattEffectData->effect2 == NULL) {
@@ -2937,21 +2937,21 @@ ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall) {
             }
         } else {
             if (wattEffectData->effect1 != NULL) {
-                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
                 wattEffectData->effect1 = NULL;
             }
             if (wattEffectData->effect2 != NULL) {
-                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
                 wattEffectData->effect2 = NULL;
             }
         }
         if (wattEffectData->debuff != actor->debuff && wattEffectData->unk_0C) {
             if (wattEffectData->effect1 != NULL) {
-                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
                 wattEffectData->effect1 = NULL;
             }
             if (wattEffectData->effect2 != NULL) {
-                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
                 wattEffectData->effect2 = NULL;
             }
         }
@@ -2967,11 +2967,11 @@ ApiStatus func_80219604_465A94(Evt* script, s32 isInitialCall) {
     wattEffectData->flags = 0;
 
     if (wattEffectData->effect1 != NULL) {
-        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
+        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
     }
 
     if (wattEffectData->effect2 != NULL) {
-        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
+        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
     }
 
     return ApiStatus_DONE2;
@@ -3311,7 +3311,7 @@ ActorBlueprint N(sushie) = {
     .maxHP = 20,
     .partCount = ARRAY_COUNT(N(partsTable_80226A80)),
     .partsData = N(partsTable_80226A80),
-    .script = &N(init_Sushie),
+    .takeTurnScript = &N(init_Sushie),
     .statusTable = N(statusTable_802269D4),
     .escapeChance = 100,
     .airLiftChance = 0,
@@ -3803,7 +3803,7 @@ ActorBlueprint N(lakilester) = {
     .maxHP = 20,
     .partCount = ARRAY_COUNT(N(partsTable_8022851C)),
     .partsData = N(partsTable_8022851C),
-    .script = &N(init_Lakilester),
+    .takeTurnScript = &N(init_Lakilester),
     .statusTable = N(statusTable_80228470),
     .escapeChance = 100,
     .airLiftChance = 0,

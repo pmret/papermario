@@ -71,7 +71,7 @@ ActorBlueprint N(bombette) = {
     .maxHP = 15,
     .partCount = ARRAY_COUNT(N(bombette_parts)),
     .partsData = N(bombette_parts),
-    .script = &N(bombette_init),
+    .takeTurnScript = &N(bombette_init),
     .statusTable = N(bombette_statusTable),
     .escapeChance = 50,
     .airLiftChance = 80,
@@ -195,7 +195,7 @@ EvtScript N(bombette_handleEvent) = {
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)

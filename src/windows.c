@@ -43,70 +43,70 @@ SimpleWindowUpdateData gSimpleWindowUpdates[] = {
     {
         .flags = 0,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
+        .windowFlagsUnset = WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
     {
         .flags = 0,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_HIDDEN | WINDOW_FLAGS_INITIAL_ANIMATION,
+        .windowFlagsUnset = WINDOW_FLAG_HIDDEN | WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
     {
         .flags = 0,
-        .windowFlagsSet = WINDOW_FLAGS_HIDDEN,
-        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
+        .windowFlagsSet = WINDOW_FLAG_HIDDEN,
+        .windowFlagsUnset = WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_1,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
+        .windowFlagsUnset = WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_DARKENING,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
+        .windowFlagsUnset = WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 100,
         .opacity = 0
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_DARKENING,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
+        .windowFlagsUnset = WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_OPACITY,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
+        .windowFlagsUnset = WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 184
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_OPACITY,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
+        .windowFlagsUnset = WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 255
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_OPACITY,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_HIDDEN | WINDOW_FLAGS_INITIAL_ANIMATION,
+        .windowFlagsUnset = WINDOW_FLAG_HIDDEN | WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 184
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_DARKENING,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_HIDDEN | WINDOW_FLAGS_INITIAL_ANIMATION,
+        .windowFlagsUnset = WINDOW_FLAG_HIDDEN | WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 100,
         .opacity = 0
     },
@@ -117,11 +117,11 @@ SimpleWindowUpdateData gSimpleWindowUpdates[] = {
 };
 
 u8 gWindowAppearScales[] = { 50, 80, 100, 105, 100 };
-u8 gWindowAppearFlags[] = { DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, 0};
+u8 gWindowAppearFlags[] = { DRAW_FLAG_ROTSCALE, DRAW_FLAG_ROTSCALE, DRAW_FLAG_ROTSCALE, DRAW_FLAG_ROTSCALE, 0};
 u8 gWindowDisappearScales[] = { 105, 100, 77, 57, 40, 27, 16, 8, 3, 0 };
-u8 gWindowDisappearFlags[] = { DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE,
-                               DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE,
-                               DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, 0 };
+u8 gWindowDisappearFlags[] = { DRAW_FLAG_ROTSCALE, DRAW_FLAG_ROTSCALE, DRAW_FLAG_ROTSCALE, DRAW_FLAG_ROTSCALE,
+                               DRAW_FLAG_ROTSCALE, DRAW_FLAG_ROTSCALE, DRAW_FLAG_ROTSCALE,
+                               DRAW_FLAG_ROTSCALE, DRAW_FLAG_ROTSCALE, 0 };
 
 WindowGroup gWindowGroups[] = {
     { WINDOW_ID_0, WINDOW_ID_FILEMENU_FILE3_TITLE }, // all windows
@@ -147,12 +147,12 @@ void update_windows(void) {
     for (i = 0, window = gWindows; i < ARRAY_COUNT(gWindows); i++, window++) {
         flags = window->flags;
 
-        if (!flags || (flags & WINDOW_FLAGS_DISABLED)) {
+        if (!flags || (flags & WINDOW_FLAG_DISABLED)) {
             continue;
         }
 
-        if (flags & WINDOW_FLAGS_FPUPDATE_CHANGED) {
-            window->flags = flags & ~WINDOW_FLAGS_FPUPDATE_CHANGED;
+        if (flags & WINDOW_FLAG_FPUPDATE_CHANGED) {
+            window->flags = flags & ~WINDOW_FLAG_FPUPDATE_CHANGED;
             window->fpUpdate = window->fpPending;
             window->updateCounter = 0;
         }
@@ -165,7 +165,7 @@ void basic_window_update(s32 windowID, s32* flags, s32* posX, s32* posY, s32* po
     s32 counter = window->updateCounter;
 
     if (counter == 0) {
-        window->flags &= ~WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_HIDDEN;
     }
 
     if (counter < 5) {
@@ -178,7 +178,7 @@ void basic_window_update(s32 windowID, s32* flags, s32* posX, s32* posY, s32* po
         *scaleX = 1.0f;
         *scaleY = 1.0f;
         *rotZ = 0.0f;
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
     }
 }
 
@@ -197,8 +197,8 @@ void basic_hidden_window_update(s32 windowID, s32* flags, s32* posX, s32* posY, 
         *scaleX = 0.0f;
         *scaleY = 0.0f;
         *rotZ = 0.0f;
-        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
-        window->flags |= WINDOW_FLAGS_HIDDEN;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAG_HIDDEN;
     }
 }
 
@@ -211,7 +211,7 @@ void main_menu_window_update(s32 windowID, s32* flags, s32* posX, s32* posY, s32
         *darkening = (counter + 1) * 16;
     } else {
         *darkening = 160;
-        window->flags &= ~(WINDOW_FLAGS_INITIAL_ANIMATION | WINDOW_FLAGS_HIDDEN);
+        window->flags &= ~(WINDOW_FLAG_INITIAL_ANIMATION | WINDOW_FLAG_HIDDEN);
     }
 }
 
@@ -249,7 +249,7 @@ void render_windows(s32* windowsArray, s32 parent, s32 flags, s32 baseX, s32 bas
         }
 
         childWindow = &gWindows[childWindowID];
-        if (childWindow->flags == 0 || (childWindow->flags & WINDOW_FLAGS_DISABLED)) {
+        if (childWindow->flags == 0 || (childWindow->flags & WINDOW_FLAG_DISABLED)) {
             continue;
         }
 
@@ -297,7 +297,7 @@ void render_windows(s32* windowsArray, s32 parent, s32 flags, s32 baseX, s32 bas
             }
         }
 
-        if (scaleX == 0 || scaleY == 0 || (childWindow->flags & WINDOW_FLAGS_HIDDEN)) {
+        if (scaleX == 0 || scaleY == 0 || (childWindow->flags & WINDOW_FLAG_HIDDEN)) {
             continue;
         }
 
@@ -314,7 +314,7 @@ void render_windows(s32* windowsArray, s32 parent, s32 flags, s32 baseX, s32 bas
             childDarkening = 255;
         }
         childFlags |= flags;
-        if (!(flags & DRAW_FLAGS_ROTSCALE)) {
+        if (!(flags & DRAW_FLAG_ROTSCALE)) {
             posX += baseX;
             posY += baseY;
         }
@@ -331,8 +331,8 @@ void render_windows(s32* windowsArray, s32 parent, s32 flags, s32 baseX, s32 bas
         }
 
         boxFlags = childFlags;
-        if (childWindow->flags & WINDOW_FLAGS_40) {
-            boxFlags |= DRAW_FLAGS_ANIMATED_BACKGROUND;
+        if (childWindow->flags & WINDOW_FLAG_40) {
+            boxFlags |= DRAW_FLAG_ANIMATED_BACKGROUND;
         }
 
         if (draw_box(boxFlags, windowStyle, posX, posY, posZ, width, height, childOpacity, childDarkening,
@@ -342,7 +342,7 @@ void render_windows(s32* windowsArray, s32 parent, s32 flags, s32 baseX, s32 bas
                 outMtx = NULL;
             }
 
-            if (childWindow->flags & WINDOW_FLAGS_HAS_CHILDREN) {
+            if (childWindow->flags & WINDOW_FLAG_HAS_CHILDREN) {
                 render_windows(windowsArray, childWindowIdCopy, childFlags, posX, posY, childOpacity, childDarkening, outMtx);
             }
         }
@@ -380,7 +380,7 @@ void set_window_properties(s32 windowID, s32 posX, s32 posY, s32 width, s32 heig
     Window* window = &gWindows[windowID];
     u8 priorityCopy = priority;
 
-    window->flags = WINDOW_FLAGS_INITIALIZED | WINDOW_FLAGS_HIDDEN;
+    window->flags = WINDOW_FLAG_INITIALIZED | WINDOW_FLAG_HIDDEN;
     window->pos.x = posX;
     window->pos.y = posY;
     window->width = width;
@@ -390,7 +390,7 @@ void set_window_properties(s32 windowID, s32 posX, s32 posY, s32 width, s32 heig
     window->fpDrawContents = fpDrawContents;
     window->drawContentsArg0 = drawContentsArg0;
     if (parent >= 0) {
-        gWindows[parent].flags |= WINDOW_FLAGS_HAS_CHILDREN;
+        gWindows[parent].flags |= WINDOW_FLAG_HAS_CHILDREN;
     }
     update_window_hierarchy(windowID, priorityCopy);
     window->originalPriority = priority;
@@ -432,19 +432,19 @@ void update_window_hierarchy(s32 windowID, u8 priority) {
 }
 
 void replace_window_update(s32 windowID, s8 priority, WindowUpdateFunc pendingFunc) {
-    if (gWindows[windowID].flags & WINDOW_FLAGS_INITIALIZED) {
-        gWindows[windowID].flags |= WINDOW_FLAGS_FPUPDATE_CHANGED | WINDOW_FLAGS_INITIAL_ANIMATION;
+    if (gWindows[windowID].flags & WINDOW_FLAG_INITIALIZED) {
+        gWindows[windowID].flags |= WINDOW_FLAG_FPUPDATE_CHANGED | WINDOW_FLAG_INITIAL_ANIMATION;
         gWindows[windowID].fpPending = pendingFunc;
         gWindows[windowID].originalPriority = priority;
     }
 }
 
 void set_window_update(s32 windowID, s32 func) {
-    if (gWindows[windowID].flags & WINDOW_FLAGS_INITIALIZED) {
+    if (gWindows[windowID].flags & WINDOW_FLAG_INITIALIZED) {
         if (func == gWindows[windowID].fpUpdate.i) {
-            gWindows[windowID].flags &= ~WINDOW_FLAGS_FPUPDATE_CHANGED;
+            gWindows[windowID].flags &= ~WINDOW_FLAG_FPUPDATE_CHANGED;
         } else {
-            gWindows[windowID].flags |= WINDOW_FLAGS_FPUPDATE_CHANGED | WINDOW_FLAGS_INITIAL_ANIMATION;
+            gWindows[windowID].flags |= WINDOW_FLAG_FPUPDATE_CHANGED | WINDOW_FLAG_INITIAL_ANIMATION;
             gWindows[windowID].fpPending.i = func;
         }
     }
@@ -457,11 +457,11 @@ void set_windows_visible(s32 groupIdx) {
     u8 max = gWindowGroups[groupIdx].max;
 
     for (i = 0; i < ARRAY_COUNT(gWindows); i++, window++) {
-        if (window->flags & WINDOW_FLAGS_INITIALIZED) {
+        if (window->flags & WINDOW_FLAG_INITIALIZED) {
             if (i < min || i > max) {
-                window->flags |= WINDOW_FLAGS_DISABLED;
+                window->flags |= WINDOW_FLAG_DISABLED;
             } else {
-                window->flags &= ~WINDOW_FLAGS_DISABLED;
+                window->flags &= ~WINDOW_FLAG_DISABLED;
             }
         }
     }

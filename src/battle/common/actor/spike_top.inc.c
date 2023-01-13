@@ -71,7 +71,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 4,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 60,
     .airLiftChance = 70,
@@ -263,7 +263,7 @@ EvtScript N(spikeTop_HandleEvent_Ceiling) = {
             EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim13)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim0D)
             EVT_EXEC_WAIT(DoImmune)
@@ -420,7 +420,7 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
             EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim13)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET_CONST(LVar0, 1)

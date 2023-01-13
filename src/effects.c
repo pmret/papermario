@@ -211,8 +211,8 @@ void update_effects(void) {
 
         for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
             if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
-                if (!(effectGraphics->flags & FX_GRAPHICS_FLAGS_2)) {
-                    effectGraphics->flags |= FX_GRAPHICS_FLAGS_2;
+                if (!(effectGraphics->flags & FX_GRAPHICS_FLAG_2)) {
+                    effectGraphics->flags |= FX_GRAPHICS_FLAG_2;
                     effectGraphics->freeDelay = 3;
                 }
             }
@@ -221,18 +221,18 @@ void update_effects(void) {
         for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
             EffectInstance* effectInstance = gEffectInstances[i];
 
-            if (effectInstance != NULL && (effectInstance->flags & EFFECT_INSTANCE_FLAGS_1)) {
-                effectInstance->graphics->flags &= ~FX_GRAPHICS_FLAGS_2;
+            if (effectInstance != NULL && (effectInstance->flags & EFFECT_INSTANCE_FLAG_1)) {
+                effectInstance->graphics->flags &= ~FX_GRAPHICS_FLAG_2;
 
                 if (gGameStatusPtr->isBattle) {
-                    if (effectInstance->flags & EFFECT_INSTANCE_FLAGS_4) {
+                    if (effectInstance->flags & EFFECT_INSTANCE_FLAG_4) {
                         effectInstance->graphics->update(effectInstance);
-                        effectInstance->flags |= EFFECT_INSTANCE_FLAGS_8;
+                        effectInstance->flags |= EFFECT_INSTANCE_FLAG_8;
                     }
                 } else {
-                    if (!(effectInstance->flags & EFFECT_INSTANCE_FLAGS_4)) {
+                    if (!(effectInstance->flags & EFFECT_INSTANCE_FLAG_4)) {
                         effectInstance->graphics->update(effectInstance);
-                        effectInstance->flags |= EFFECT_INSTANCE_FLAGS_8;
+                        effectInstance->flags |= EFFECT_INSTANCE_FLAG_8;
                     }
                 }
             }
@@ -240,7 +240,7 @@ void update_effects(void) {
 
         for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
             if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
-                if (effectGraphics->flags & FX_GRAPHICS_FLAGS_2) {
+                if (effectGraphics->flags & FX_GRAPHICS_FLAG_2) {
                     if (effectGraphics->freeDelay != 0) {
                         effectGraphics->freeDelay--;
                     } else {
@@ -283,15 +283,15 @@ void render_effects_UI(void) {
         EffectInstance* effectInstance = gEffectInstances[i];
 
         if (effectInstance != NULL) {
-            if (effectInstance->flags & EFFECT_INSTANCE_FLAGS_1) {
-                if (effectInstance->flags & EFFECT_INSTANCE_FLAGS_8) {
+            if (effectInstance->flags & EFFECT_INSTANCE_FLAG_1) {
+                if (effectInstance->flags & EFFECT_INSTANCE_FLAG_8) {
                     void (*renderUI)(EffectInstance* effect);
 
-                    if (gGameStatusPtr->isBattle && !(effectInstance->flags & EFFECT_INSTANCE_FLAGS_4)) {
+                    if (gGameStatusPtr->isBattle && !(effectInstance->flags & EFFECT_INSTANCE_FLAG_4)) {
                         continue;
                     }
 
-                    if (!gGameStatusPtr->isBattle && effectInstance->flags & EFFECT_INSTANCE_FLAGS_4) {
+                    if (!gGameStatusPtr->isBattle && effectInstance->flags & EFFECT_INSTANCE_FLAG_4) {
                         continue;
                     }
 
@@ -314,7 +314,7 @@ void render_effects_UI(void) {
                             gSPClipRatio(gMasterGfxPos++, FRUSTRATIO_2);
 
                             cond = FALSE;
-                            if (!(camera->flags & CAMERA_FLAGS_ORTHO)) {
+                            if (!(camera->flags & CAMERA_FLAG_ORTHO)) {
                                 gSPPerspNormalize(gMasterGfxPos++, camera->perspNorm);
                                 gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],
                                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);

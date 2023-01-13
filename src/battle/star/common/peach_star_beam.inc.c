@@ -668,7 +668,7 @@ ApiStatus N(ProcessPeachStarBeam)(Evt* script, s32 isInitialCall) {
 
             if (!cond) {
                 N(starBeamStage) = 2;
-                N(effect)->flags |= EFFECT_INSTANCE_FLAGS_10;
+                N(effect)->flags |= EFFECT_INSTANCE_FLAG_10;
                 return ApiStatus_DONE2;
             }
             break;
@@ -738,7 +738,7 @@ ApiStatus N(ProcessPeachStarBeam)(Evt* script, s32 isInitialCall) {
 
             if (!cond) {
                 N(starBeamStage) = 2;
-                N(effect)->flags |= EFFECT_INSTANCE_FLAGS_10;
+                N(effect)->flags |= EFFECT_INSTANCE_FLAG_10;
                 return ApiStatus_DONE2;
             }
             break;

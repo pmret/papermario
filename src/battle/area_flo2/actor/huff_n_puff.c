@@ -404,7 +404,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 60,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .script = &N(init),
+    .takeTurnScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -994,7 +994,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(OnBurn))
             EVT_EXEC_WAIT(N(OnBurnDeath))
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
+        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
             EVT_EXEC_WAIT(N(OnImmune))
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_EXEC_WAIT(N(OnImmune))

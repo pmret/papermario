@@ -217,7 +217,7 @@ NpcSettings N(NpcSettings_StarRod) = {
     .otherAI = &N(EVS_NpcAuxAI_StarRod),
     .onInteract = &N(EVS_NpcInteract_StarRod),
     .ai = &N(EVS_NpcAI_StarRod),
-    .flags = ENEMY_FLAGS_1,
+    .flags = ENEMY_FLAG_1,
 };
 
 NpcSettings N(NpcSettings_Koopa) = {
@@ -226,7 +226,7 @@ NpcSettings N(NpcSettings_Koopa) = {
     .radius = 24,
     .onInteract = &N(EVS_NpcInteract_Koopa),
     .ai = &N(EVS_NpcAI_Koopa),
-    .flags = ENEMY_FLAGS_1,
+    .flags = ENEMY_FLAG_1,
 };
 
 NpcSettings N(NpcSettings_Kolorado) = {
@@ -235,7 +235,7 @@ NpcSettings N(NpcSettings_Kolorado) = {
     .radius = 24,
     .onInteract = &N(EVS_NpcInteract_Kolorado),
     .ai = &N(EVS_NpcAI_Kolorado),
-    .flags = ENEMY_FLAGS_1,
+    .flags = ENEMY_FLAG_1,
 };
 
 NpcSettings N(NpcSettings_Goompa) = {
@@ -245,7 +245,7 @@ NpcSettings N(NpcSettings_Goompa) = {
     .otherAI = &N(EVS_NpcAuxAI_Goompa),
     .onInteract = &N(EVS_NpcInteract_Goompa),
     .onHit = &N(EVS_NpcHit_Goompa),
-    .flags = ENEMY_FLAGS_100 | ENEMY_FLAGS_200 | ENEMY_FLAGS_400 | ENEMY_FLAGS_800 | ENEMY_FLAGS_100000,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000,
 };
 
 StaticNpc N(NpcData_05)[] = {
@@ -283,7 +283,7 @@ StaticNpc N(NpcData_GoombaFamily) = {
     .settings = &N(NpcSettings_Goompa),
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAGS_8,
+    .flags = ENEMY_FLAG_8,
     .init = (void*) 0x1F64,
     .animations = {
     },
@@ -295,7 +295,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_8,
+        .flags = ENEMY_FLAG_8,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -304,7 +304,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_8,
+        .flags = ENEMY_FLAG_8,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -313,7 +313,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_8,
+        .flags = ENEMY_FLAG_8,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -322,7 +322,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_8,
+        .flags = ENEMY_FLAG_8,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -331,7 +331,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_8,
+        .flags = ENEMY_FLAG_8,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -340,7 +340,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_8,
+        .flags = ENEMY_FLAG_8,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -349,7 +349,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_8,
+        .flags = ENEMY_FLAG_8,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -358,7 +358,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_8,
+        .flags = ENEMY_FLAG_8,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -367,7 +367,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAGS_8,
+        .flags = ENEMY_FLAG_8,
         .init = (void*) 0x1F64,
         .animations = {},
     },

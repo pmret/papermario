@@ -9,7 +9,7 @@ extern EvtScript D_802A3168_0073D038;
 
 #include "world/common/todo/IsBerserkerEquipped.inc.c"
 
-#include "world/common/todo/IsRightOnEquipped.inc.c"
+#include "world/common/todo/ShouldMovesAutoSucceed.inc.c"
 
 EvtScript D_802A10B0_73AF80 = {
     EVT_CALL(InitTargetIterator)
@@ -238,7 +238,7 @@ EvtScript D_802A1B40 = {
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x03000F)
         EVT_CALL(GetActionCommandMode, LVar0)
         EVT_IF_LT(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
-            EVT_CALL(N(IsRightOnEquipped))
+            EVT_CALL(N(ShouldMovesAutoSucceed))
             EVT_IF_EQ(LVar0, 0)
                 EVT_LOOP(45)
                     EVT_WAIT(1)
@@ -322,7 +322,7 @@ EvtScript D_802A2000_0073BED0 = {
     EVT_CALL(N(IsBerserkerEquipped))
     EVT_IF_EQ(LVar0, ACTION_COMMAND_MODE_LEARNED)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x030016)
-        EVT_CALL(N(IsRightOnEquipped))
+        EVT_CALL(N(ShouldMovesAutoSucceed))
         EVT_IF_EQ(LVar0, 0)
             EVT_LOOP(45)
                 EVT_WAIT(1)
@@ -391,7 +391,7 @@ EvtScript D_802A23E8 = {
     EVT_CALL(N(IsBerserkerEquipped))
     EVT_IF_EQ(LVar0, ACTION_COMMAND_MODE_LEARNED)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x03001D)
-        EVT_CALL(N(IsRightOnEquipped))
+        EVT_CALL(N(ShouldMovesAutoSucceed))
         EVT_IF_EQ(LVar0, 0)
             EVT_LOOP(45)
                 EVT_WAIT(1)
@@ -458,7 +458,7 @@ EvtScript D_802A27D0 = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x03000E)
     EVT_WAIT(8)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x03000F)
-    EVT_CALL(N(IsRightOnEquipped))
+    EVT_CALL(N(ShouldMovesAutoSucceed))
     EVT_IF_EQ(LVar0, 0)
         EVT_LOOP(45)
             EVT_WAIT(1)
@@ -516,7 +516,7 @@ EvtScript D_802A2AFC_0073C9CC = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x030015)
     EVT_WAIT(8)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x030016)
-    EVT_CALL(N(IsRightOnEquipped))
+    EVT_CALL(N(ShouldMovesAutoSucceed))
     EVT_IF_EQ(LVar0, 0)
         EVT_LOOP(45)
             EVT_WAIT(1)
@@ -565,7 +565,7 @@ EvtScript D_802A2DA0_0073CC70 = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x03001C)
     EVT_WAIT(8)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x03001D)
-    EVT_CALL(N(IsRightOnEquipped))
+    EVT_CALL(N(ShouldMovesAutoSucceed))
     EVT_IF_EQ(LVar0, 0)
         EVT_LOOP(45)
             EVT_WAIT(1)
