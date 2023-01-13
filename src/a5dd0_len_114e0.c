@@ -2995,7 +2995,7 @@ void appendGfx_model(void* data) {
     TextureHeader* textureHeader;
     u32 extraTileType;
     s8 renderMode;
-    s32 s3;
+    s32 texturingMode;
     s32 renderModeIdx;
     s32 new_var;
     s32 flags = model->flags;
@@ -3033,30 +3033,30 @@ void appendGfx_model(void* data) {
     combineSubType = 0;
     if (textureHeader != NULL) {
         switch (extraTileType) {
-            case EXTRA_TILE_0:
-                s3 = 1;
+            case EXTRA_TILE_NONE:
+                texturingMode = 1;
                 break;
-            case EXTRA_TILE_1:
-            case EXTRA_TILE_2:
-            case EXTRA_TILE_3:
-                s3 = 2;
+            case EXTRA_TILE_MIPMAPS:
+            case EXTRA_TILE_AUX_SAME_AS_MAIN:
+            case EXTRA_TILE_AUX_INDEPENDENT:
+                texturingMode = 2;
                 break;
             default:
-                s3 = 1;
+                texturingMode = 1;
                 break;
         }
     } else {
-        s3 = 1;
+        texturingMode = 1;
     }
     if ((textureHeader != NULL || renderMode <= RENDER_MODE_ALPHATEST_NO_ZB) && gCurrentFogSettings->enabled && !(flags & MODEL_FLAG_FLAG_40)) {
-        s3 = 3;
+        texturingMode = 3;
         combineSubType = 1;
     }
 
     // fog mode
     switch ((u32)(model->customGfxIndex >> 4)) {
         case FOG_MODE_1:
-            s3 += 3;
+            texturingMode += 3;
             combineSubType = 2;
             break;
         case FOG_MODE_2:
@@ -3069,12 +3069,12 @@ void appendGfx_model(void* data) {
                                             mdl_renderModelFogColorG,
                                             mdl_renderModelFogColorB, 0);
                 gSPFogPosition((*gfxPos)++, mdl_renderModelFogStart, mdl_renderModelFogEnd);
-                s3 += 9;
+                texturingMode += 9;
                 combineSubType = 3;
             }
             break;
         case FOG_MODE_3:
-            s3 = 2;
+            texturingMode = 2;
             combineSubType = 4;
             gDPSetPrimColor((*gfxPos)++, 0, 0, gRenderModelPrimR,
                                                gRenderModelPrimG,
@@ -3121,7 +3121,7 @@ void appendGfx_model(void* data) {
 
     if (textureHeader != NULL) {
         switch (extraTileType) {
-            case EXTRA_TILE_3:
+            case EXTRA_TILE_AUX_INDEPENDENT:
             case EXTRA_TILE_4:
                 prop = get_model_property(modelNode, MODEL_PROP_KEY_SPECIAL);
                 if (prop != NULL) {
@@ -3167,7 +3167,7 @@ void appendGfx_model(void* data) {
         (*gfxPos)++;
     }
 
-    switch (s3) {
+    switch (texturingMode) {
         case 1:
             switch (renderMode) {
                 case RENDER_MODE_SURFACE_OPA:
@@ -3580,11 +3580,11 @@ void appendGfx_model(void* data) {
             s32 panAuxV = texPannerAuxV[model->texPannerID] >> 8;
 
             switch (extraTileType) {
-                case EXTRA_TILE_2:
+                case EXTRA_TILE_AUX_SAME_AS_MAIN:
                     gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE, panMainU, panMainV, (textureHeader->mainW - 1) * 4 + panMainU, (textureHeader->mainH / 2 - 1) * 4 + panMainV);
                     gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE + 1, panAuxU, panAuxV, (textureHeader->mainW - 1) * 4 + panAuxU, (textureHeader->mainH / 2 - 1) * 4 + panAuxV);
                     break;
-                case EXTRA_TILE_3:
+                case EXTRA_TILE_AUX_INDEPENDENT:
                     gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE, panMainU, panMainV, (textureHeader->mainW - 1) * 4 + panMainU, (textureHeader->mainH - 1) * 4 + panMainV);
                     gDPSetTileSize((*gfxPos)++, G_TX_RENDERTILE + 1, panAuxU, panAuxV, (textureHeader->auxW - 1) * 4 + panAuxU, (textureHeader->auxH - 1) * 4 + panAuxV);
                     break;
@@ -3675,7 +3675,7 @@ void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) 
         rasterSize = header->mainW * header->mainH;
 
         if (header->mainBitDepth == G_IM_SIZ_4b) {
-            if (header->extraTiles == EXTRA_TILE_1) {
+            if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
                 s32 d = 2;
                 while (header->mainW / d >= 16 && header->mainH / d > 0) {
                     rasterSize += header->mainW / d * header->mainH / d;
@@ -3684,7 +3684,7 @@ void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) 
             }
             rasterSize /= 2;
         } else if (header->mainBitDepth == G_IM_SIZ_8b) {
-            if (header->extraTiles == EXTRA_TILE_1) {
+            if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
                 s32 d = 2;
                 while (header->mainW / d >= 8 && header->mainH / d > 0) {
                     rasterSize += header->mainW / d * header->mainH / d;
@@ -3694,7 +3694,7 @@ void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) 
         } else {
             do {} while (0);
             if (header->mainBitDepth == G_IM_SIZ_16b) {
-                if (header->extraTiles == EXTRA_TILE_1) {
+                if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
                     s32 d = 2;
                     while (header->mainW / d >= 4 && header->mainH / d > 0) {
                         rasterSize += header->mainW / d * header->mainH / d;
@@ -3703,7 +3703,7 @@ void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) 
                 }
                 rasterSize *= 2;
             } else if (header->mainBitDepth == G_IM_SIZ_32b) {
-                if (header->extraTiles == EXTRA_TILE_1) {
+                if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
                     s32 d = 2;
                     while (header->mainW / d >= 2 && header->mainH / d > 0) {
                         rasterSize += header->mainW / d * header->mainH / d;
@@ -3723,7 +3723,7 @@ void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) 
             paletteSize = 0;
         }
 
-        if (header->extraTiles == EXTRA_TILE_3) {
+        if (header->extraTiles == EXTRA_TILE_AUX_INDEPENDENT) {
             auxRasterSize = header->auxW * header->auxH;
             if (header->auxBitDepth == G_IM_SIZ_4b) {
                 auxRasterSize /= 2;
@@ -3797,7 +3797,7 @@ void func_80115498(u32 romOffset, s32 textureID, s32 baseOffset, s32 size) {
         rasterSize = header->mainW * header->mainH;
 
         if (header->mainBitDepth == G_IM_SIZ_4b) {
-            if (header->extraTiles == EXTRA_TILE_1) {
+            if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
                 s32 d = 2;
                 while (header->mainW / d >= 16 && header->mainH / d > 0) {
                     rasterSize += header->mainW / d * header->mainH / d;
@@ -3806,7 +3806,7 @@ void func_80115498(u32 romOffset, s32 textureID, s32 baseOffset, s32 size) {
             }
             rasterSize /= 2;
         } else if (header->mainBitDepth == G_IM_SIZ_8b) {
-            if (header->extraTiles == EXTRA_TILE_1) {
+            if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
                 s32 d = 2;
                 while (header->mainW / d >= 8 && header->mainH / d > 0) {
                     rasterSize += header->mainW / d * header->mainH / d;
@@ -3816,7 +3816,7 @@ void func_80115498(u32 romOffset, s32 textureID, s32 baseOffset, s32 size) {
         } else {
             do {} while (0);
             if (header->mainBitDepth == G_IM_SIZ_16b) {
-                if (header->extraTiles == EXTRA_TILE_1) {
+                if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
                     s32 d = 2;
                     while (header->mainW / d >= 4 && header->mainH / d > 0) {
                         rasterSize += header->mainW / d * header->mainH / d;
@@ -3825,7 +3825,7 @@ void func_80115498(u32 romOffset, s32 textureID, s32 baseOffset, s32 size) {
                 }
                 rasterSize *= 2;
             } else if (header->mainBitDepth == G_IM_SIZ_32b) {
-                if (header->extraTiles == EXTRA_TILE_1) {
+                if (header->extraTiles == EXTRA_TILE_MIPMAPS) {
                     s32 d = 2;
                     while (header->mainW / d >= 2 && header->mainH / d > 0) {
                         rasterSize += header->mainW / d * header->mainH / d;
@@ -3845,7 +3845,7 @@ void func_80115498(u32 romOffset, s32 textureID, s32 baseOffset, s32 size) {
             paletteSize = 0;
         }
 
-        if (header->extraTiles == EXTRA_TILE_3) {
+        if (header->extraTiles == EXTRA_TILE_AUX_INDEPENDENT) {
             auxRasterSize = header->auxW * header->auxH;
             if (header->auxBitDepth == G_IM_SIZ_4b) {
                 auxRasterSize /= 2;
@@ -4667,7 +4667,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
     auxBitDepth = header->auxBitDepth;
 
 
-    if (extraTileType == EXTRA_TILE_3) {
+    if (extraTileType == EXTRA_TILE_AUX_INDEPENDENT) {
         if (palette != NULL) {
             auxPaletteIndex = 1;
         } else {
@@ -4706,7 +4706,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
     (*gfxPos)++;
 
     switch (extraTileType) {
-        case EXTRA_TILE_0:
+        case EXTRA_TILE_NONE:
             lodMode = G_TL_TILE;
             gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
             switch (mainBitDepth) {
@@ -4732,7 +4732,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
                     break;
             }
             break;
-        case EXTRA_TILE_1:
+        case EXTRA_TILE_MIPMAPS:
             lodMode = G_TL_LOD;
             switch (mainBitDepth) {
                 case G_IM_SIZ_4b:
@@ -4782,7 +4782,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
             }
             gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, lod - 1, G_TX_RENDERTILE, G_ON);
             break;
-        case EXTRA_TILE_2:
+        case EXTRA_TILE_AUX_SAME_AS_MAIN:
             gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
             gDPPipeSync((*gfxPos)++);
             lodMode = G_TL_TILE;
@@ -4809,7 +4809,7 @@ void func_801180E8(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_PTR 
                     break;
             }
             break;
-        case EXTRA_TILE_3:
+        case EXTRA_TILE_AUX_INDEPENDENT:
             gSPTexture((*gfxPos)++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
             lodMode = G_TL_TILE;
             switch (mainBitDepth) {

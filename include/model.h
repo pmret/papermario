@@ -143,10 +143,10 @@ typedef enum ShapeTypes {
 } ShapeTypes;
 
 typedef enum ExtraTileTypes {
-    EXTRA_TILE_0 = 0,
-    EXTRA_TILE_1 = 1,
-    EXTRA_TILE_2 = 2,
-    EXTRA_TILE_3 = 3,
+    EXTRA_TILE_NONE = 0,
+    EXTRA_TILE_MIPMAPS = 1,
+    EXTRA_TILE_AUX_SAME_AS_MAIN = 2,
+    EXTRA_TILE_AUX_INDEPENDENT = 3,
     EXTRA_TILE_4 = 4,
 } ExtraTileTypes;
 
