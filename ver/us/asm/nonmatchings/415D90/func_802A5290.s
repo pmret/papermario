@@ -261,8 +261,8 @@ glabel func_802A5290
 /* 41A3DC 802A564C 1840000C */  blez      $v0, .L802A5680
 /* 41A3E0 802A5650 26E50043 */   addiu    $a1, $s7, 0x43
 /* 41A3E4 802A5654 8FA90048 */  lw        $t1, 0x48($sp)
-/* 41A3E8 802A5658 3C10802B */  lui       $s0, %hi(GreenArrowUpHEID)
-/* 41A3EC 802A565C 8E10D61C */  lw        $s0, %lo(GreenArrowUpHEID)($s0)
+/* 41A3E8 802A5658 3C10802B */  lui       $s0, %hi(GreenArrowUpID)
+/* 41A3EC 802A565C 8E10D61C */  lw        $s0, %lo(GreenArrowUpID)($s0)
 /* 41A3F0 802A5660 25260010 */  addiu     $a2, $t1, 0x10
 /* 41A3F4 802A5664 0C051261 */  jal       hud_element_set_render_pos
 /* 41A3F8 802A5668 0200202D */   daddu    $a0, $s0, $zero
@@ -280,8 +280,8 @@ glabel func_802A5290
 /* 41A424 802A5694 1040000C */  beqz      $v0, .L802A56C8_41A458
 /* 41A428 802A5698 26E50043 */   addiu    $a1, $s7, 0x43
 /* 41A42C 802A569C 8FA90048 */  lw        $t1, 0x48($sp)
-/* 41A430 802A56A0 3C10802B */  lui       $s0, %hi(GreenArrowDownHEID)
-/* 41A434 802A56A4 8E10D620 */  lw        $s0, %lo(GreenArrowDownHEID)($s0)
+/* 41A430 802A56A0 3C10802B */  lui       $s0, %hi(GreenArrowDownID)
+/* 41A434 802A56A4 8E10D620 */  lw        $s0, %lo(GreenArrowDownID)($s0)
 /* 41A438 802A56A8 25260064 */  addiu     $a2, $t1, 0x64
 /* 41A43C 802A56AC 0C051261 */  jal       hud_element_set_render_pos
 /* 41A440 802A56B0 0200202D */   daddu    $a0, $s0, $zero

@@ -8,6 +8,8 @@
 
 typedef s32 HudScript[0];
 
+typedef s32 HudElemID;
+
 enum {
     HUD_ELEMENT_OP_End,
     HUD_ELEMENT_OP_SetRGBA,

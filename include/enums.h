@@ -5597,7 +5597,7 @@ enum MoveType {
     MOVE_TYPE_JUMP          = 2,
     MOVE_TYPE_3             = 3,
     MOVE_TYPE_ITEMS         = 4,
-    MOVE_TYPE_TACTICS       = 5,
+    MOVE_TYPE_SWITCH        = 5,
     MOVE_TYPE_6             = 6,
     MOVE_TYPE_ATTACK_UP     = 7,
     MOVE_TYPE_DEFENSE_UP    = 8,

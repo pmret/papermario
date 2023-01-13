@@ -143,6 +143,7 @@ IconHudScriptPair battle_menu_ItemHudScripts = { &HES_MenuItem, &HES_MenuItemDis
 
 IconHudScriptPair battle_menu_StarPowerHudScripts = { &HES_MenuStarPower, &HES_MenuStarPowerDisabled };
 
+//TODO retype to IconHudScriptPair[]
 HudScript* battle_menu_StarPowerMovesHudScripts[] = {
     &HES_MenuStarPower, &HES_MenuStarPowerDisabled,
     &HES_Eldstar, &HES_EldstarDisabled,
@@ -214,7 +215,7 @@ s32 D_802AB4F0[] = {
     [BTL_MENU_TYPE_ITEMS]           MOVE_TYPE_ITEMS,
     [BTL_MENU_TYPE_RUN_AWAY]        MOVE_TYPE_6,
     [BTL_MENU_TYPE_DEFEND]          MOVE_TYPE_3,
-    [BTL_MENU_TYPE_CHANGE_PARTNER]  MOVE_TYPE_TACTICS,
+    [BTL_MENU_TYPE_CHANGE_PARTNER]  MOVE_TYPE_SWITCH,
     [BTL_MENU_TYPE_ABILITY]         0x1A,
     [BTL_MENU_TYPE_STRATEGIES]      MOVE_TYPE_3,
     [BTL_MENU_TYPE_STAR_POWERS]     0x34,
@@ -351,20 +352,20 @@ BSS s8 D_802AD10E;
 BSS s8 D_802AD10F;
 BSS s16 battle_menu_moveScrollOffset;
 BSS s16 D_802AD112;
-BSS s16 battle_menu_moveTextColor;
-BSS s16 battle_menu_moveTextOpacity;
-BSS s32 battle_menu_moveCursorIcon;
-BSS s32 battle_menu_moveUpArrowIcon;
-BSS s32 battle_menu_moveDownArrowIcon;
+BSS s16 BattleMenu_Moves_TextColor;
+BSS s16 BattleMenu_Moves_TextAlpha;
+BSS HudElemID BattleMenu_Moves_CursorID;
+BSS HudElemID BattleMenu_Moves_UpArrowID;
+BSS HudElemID BattleMenu_Moves_DownArrowID;
 BSS s32 D_802AD124; // unused?
-BSS s32 battle_menu_moveOptionIconIDs[24];
-BSS s32 battle_menu_moveTitleIcon;
+BSS HudElemID BattleMenu_Moves_OptionIDs[24];
+BSS HudElemID BattleMenu_Moves_TitleID;
 BSS s32 D_802AD18C; // unused?
-BSS s32 battle_menu_moveOptionCostUnitIconIDs[24];
-BSS s16 battle_menu_moveX;
-BSS s16 battle_menu_moveY;
+BSS HudElemID BattleMenu_Moves_OptionCostUnitIDs[24];
+BSS s16 BattleMenu_Moves_PosX;
+BSS s16 BattleMenu_Moves_PosY;
 BSS s32 D_802AD1F4; // unused?
-BSS s32 battle_menu_moveOptionIndexMap[24];
+BSS s32 BattleMenu_Moves_OptionIndexMap[24];
 BSS s32 D_802AD258;
 BSS s32 D_802AD25C; // unused?
 BSS HudScript* battle_menu_moveOptionIconScripts[24];
@@ -373,15 +374,15 @@ BSS s32 battle_menu_moveOptionDisplayCosts[24];
 BSS s32 battle_menu_moveOptionDisplayCostReductions[24];
 BSS s32 battle_menu_moveOptionDisplayCostReductionColors[24];
 BSS s32 battle_menu_moveOptionBPCosts[24];
-BSS s32 battle_menu_hasSpiritsMenu;
-BSS s32 battle_menu_moveOptionCount;
+BSS s32 BattleMenu_UsingSpiritsSubmenu;
+BSS s32 BattleMenu_Moves_OptionCount;
 BSS s32 D_802AD4A8;
 BSS s32 D_802AD4AC; // unused?
-BSS s32 battle_menu_moveIndices[24];
-BSS s32 battle_menu_moveOptionsEnabled[24];
-BSS s32 battle_menu_moveOptionDescriptions[24];
-BSS s8 battle_menu_moveOptionSortPriorities[24];
-BSS s8 battle_menu_moveOptionCantUseTypes[24];
+BSS s32 BattleMenu_Moves_OptionIndices[24];
+BSS s32 BattleMenu_Moves_OptionEnabled[24];
+BSS s32 BattleMenu_Moves_OptionDescMessages[24];
+BSS s8 BattleMenu_Moves_OptionSortPriority[24];
+BSS s8 BattleMenu_Moves_OptionCantUseMessages[24];
 BSS s32 battle_menu_moveOptionActive;
 BSS s8 BattleSubmenuStratsState;
 BSS s8 D_802AD605;
@@ -397,8 +398,8 @@ BSS s16 D_802AD610;
 BSS s16 D_802AD612;
 BSS s8 D_802AD614;
 BSS s32 D_802AD618;
-BSS s32 GreenArrowUpHEID;
-BSS s32 GreenArrowDownHEID;
+BSS HudElemID GreenArrowUpID;
+BSS HudElemID GreenArrowDownID;
 BSS s32 D_802AD624;
 BSS s32 D_802AD628[5];
 BSS s16 D_802AD63C;
@@ -883,26 +884,26 @@ void btl_main_menu_draw(void) {
 
 // Very similar to func_802A45D8 - maybe can be used to reduce fake matches there
 void func_802A2684(void) {
-    if (D_802AD4A8 >= battle_menu_moveOptionCount) {
-        D_802AD4A8 = battle_menu_moveOptionCount - 1;
+    if (D_802AD4A8 >= BattleMenu_Moves_OptionCount) {
+        D_802AD4A8 = BattleMenu_Moves_OptionCount - 1;
     }
 
     battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_0;
     battle_menu_moveScrollLine = 0;
     battle_menu_moveCursorPos = D_802AD4A8;
     D_802AD10A = D_802AD4A8;
-    D_802AD10E = battle_menu_moveOptionCount;
+    D_802AD10E = BattleMenu_Moves_OptionCount;
 
     if (D_802AD10E > 6) {
         D_802AD10E = 6;
     }
 
     D_802AD10D = 6;
-    if (battle_menu_moveOptionCount < 6) {
-        D_802AD10D = battle_menu_moveOptionCount;
+    if (BattleMenu_Moves_OptionCount < 6) {
+        D_802AD10D = BattleMenu_Moves_OptionCount;
     }
 
-    battle_menu_moveTextOpacity = 255;
+    BattleMenu_Moves_TextAlpha = 255;
     D_802AD10F = 1;
 
     if (D_802AD10A < 0) {
@@ -913,8 +914,8 @@ void func_802A2684(void) {
     }
 
     D_802AD10D = battle_menu_moveScrollLine + 6;
-    if (D_802AD10D > battle_menu_moveOptionCount) {
-        D_802AD10D = battle_menu_moveOptionCount;
+    if (D_802AD10D > BattleMenu_Moves_OptionCount) {
+        D_802AD10D = BattleMenu_Moves_OptionCount;
     }
 
     battle_menu_moveScrollOffset = -battle_menu_moveScrollLine * 13;
@@ -931,7 +932,7 @@ void func_802A27E4(void) {
 
     set_window_update(WINDOW_ID_1, WINDOW_UPDATE_HIDE);
 
-    if (!battle_menu_hasSpiritsMenu) {
+    if (!BattleMenu_UsingSpiritsSubmenu) {
         set_window_update(WINDOW_ID_2, WINDOW_UPDATE_HIDE);
         set_window_update(WINDOW_ID_3, WINDOW_UPDATE_HIDE);
     } else {
@@ -941,17 +942,17 @@ void func_802A27E4(void) {
 
     set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
 
-    for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        hud_element_free(battle_menu_moveOptionIconIDs[i]);
+    for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
+        hud_element_free(BattleMenu_Moves_OptionIDs[i]);
     }
 
-    hud_element_free(battle_menu_moveCursorIcon);
-    hud_element_free(battle_menu_moveUpArrowIcon);
-    hud_element_free(battle_menu_moveDownArrowIcon);
-    hud_element_free(battle_menu_moveTitleIcon);
+    hud_element_free(BattleMenu_Moves_CursorID);
+    hud_element_free(BattleMenu_Moves_UpArrowID);
+    hud_element_free(BattleMenu_Moves_DownArrowID);
+    hud_element_free(BattleMenu_Moves_TitleID);
 
-    for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        hud_element_free(battle_menu_moveOptionCostUnitIconIDs[i]);
+    for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
+        hud_element_free(BattleMenu_Moves_OptionCostUnitIDs[i]);
     }
 }
 
@@ -960,27 +961,27 @@ void func_802A2910(void) {
     s32* moveOptionCostUnitIconIDs;
     s32 i;
 
-    moveOptionIconIDs = battle_menu_moveOptionIconIDs;
+    moveOptionIconIDs = BattleMenu_Moves_OptionIDs;
 
-    for (i = 0; i < battle_menu_moveOptionCount; i++) {
+    for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
         hud_element_set_tint(moveOptionIconIDs[i], 255, 255, 255);
     }
 
-    hud_element_set_tint(battle_menu_moveCursorIcon, 255, 255, 255);
-    hud_element_set_tint(battle_menu_moveUpArrowIcon, 255, 255, 255);
-    hud_element_set_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
-    hud_element_set_tint(battle_menu_moveTitleIcon, 255, 255, 255);
+    hud_element_set_tint(BattleMenu_Moves_CursorID, 255, 255, 255);
+    hud_element_set_tint(BattleMenu_Moves_UpArrowID, 255, 255, 255);
+    hud_element_set_tint(BattleMenu_Moves_DownArrowID, 255, 255, 255);
+    hud_element_set_tint(BattleMenu_Moves_TitleID, 255, 255, 255);
 
-    moveOptionCostUnitIconIDs = battle_menu_moveOptionCostUnitIconIDs;
+    moveOptionCostUnitIconIDs = BattleMenu_Moves_OptionCostUnitIDs;
 
-    for (i = 0; i < battle_menu_moveOptionCount; i++) {
+    for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
         hud_element_set_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    hud_element_set_script(battle_menu_moveCursorIcon, &HES_AnimatedHandPointer);
+    hud_element_set_script(BattleMenu_Moves_CursorID, &HES_AnimatedHandPointer);
     set_window_update(WINDOW_ID_1, WINDOW_UPDATE_TRANSPARENT);
 
-    if (!battle_menu_hasSpiritsMenu) {
+    if (!BattleMenu_UsingSpiritsSubmenu) {
         set_window_update(WINDOW_ID_2, WINDOW_UPDATE_TRANSPARENT);
         set_window_update(WINDOW_ID_3, WINDOW_UPDATE_TRANSPARENT);
     } else {
@@ -989,9 +990,9 @@ void func_802A2910(void) {
     }
 
     set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
-    battle_menu_moveTextColor = MSG_PAL_STANDARD;
+    BattleMenu_Moves_TextColor = MSG_PAL_STANDARD;
     D_802AD10F = 1;
-    battle_menu_moveTextOpacity = 255;
+    BattleMenu_Moves_TextAlpha = 255;
     battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_1;
 }
 
@@ -1002,7 +1003,7 @@ void func_802A2AB8(void) {
 
     set_window_update(WINDOW_ID_1, WINDOW_UPDATE_TRANSPARENT);
 
-    if (!battle_menu_hasSpiritsMenu) {
+    if (!BattleMenu_UsingSpiritsSubmenu) {
         set_window_update(WINDOW_ID_2, WINDOW_UPDATE_TRANSPARENT);
         set_window_update(WINDOW_ID_3, WINDOW_UPDATE_TRANSPARENT);
     } else {
@@ -1011,25 +1012,25 @@ void func_802A2AB8(void) {
     }
     set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
 
-    moveOptionIconIDs = battle_menu_moveOptionIconIDs;
+    moveOptionIconIDs = BattleMenu_Moves_OptionIDs;
 
-    for (i = 0; i < battle_menu_moveOptionCount; i++) {
+    for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
         hud_element_set_tint(moveOptionIconIDs[i], 255, 255, 255);
     }
 
-    hud_element_set_tint(battle_menu_moveCursorIcon, 255, 255, 255);
-    hud_element_set_tint(battle_menu_moveUpArrowIcon, 255, 255, 255);
-    hud_element_set_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
-    hud_element_set_tint(battle_menu_moveTitleIcon, 255, 255, 255);
+    hud_element_set_tint(BattleMenu_Moves_CursorID, 255, 255, 255);
+    hud_element_set_tint(BattleMenu_Moves_UpArrowID, 255, 255, 255);
+    hud_element_set_tint(BattleMenu_Moves_DownArrowID, 255, 255, 255);
+    hud_element_set_tint(BattleMenu_Moves_TitleID, 255, 255, 255);
 
-    moveOptionCostUnitIconIDs = battle_menu_moveOptionCostUnitIconIDs;
+    moveOptionCostUnitIconIDs = BattleMenu_Moves_OptionCostUnitIDs;
 
-    for (i = 0; i < battle_menu_moveOptionCount; i++) {
+    for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
         hud_element_set_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    hud_element_set_script(battle_menu_moveCursorIcon, &HES_AnimatedHandPointer);
-    battle_menu_moveTextColor = MSG_PAL_STANDARD;
+    hud_element_set_script(BattleMenu_Moves_CursorID, &HES_AnimatedHandPointer);
+    BattleMenu_Moves_TextColor = MSG_PAL_STANDARD;
     D_802AD10F = 1;
     battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_14;
 }
@@ -1056,115 +1057,115 @@ s32 btl_submenu_moves_update(void) {
         case BTL_SUBMENU_MOVES_STATE_UNK_0:
             battle_menu_moveScrollOffset = -battle_menu_moveScrollLine * 13;
             D_802AD112 = (battle_menu_moveCursorPos - battle_menu_moveScrollLine) * 13;
-            battle_menu_moveX = 20;
-            battle_menu_moveY = 68;
+            BattleMenu_Moves_PosX = 20;
+            BattleMenu_Moves_PosY = 68;
 
-            for (i = 0; i < battle_menu_moveOptionCount; i++) {
-                battle_menu_moveOptionIndexMap[i] = i;
+            for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
+                BattleMenu_Moves_OptionIndexMap[i] = i;
             }
 
-            if (!battle_menu_hasSpiritsMenu) {
-                for (i = 0; i < (battle_menu_moveOptionCount - 1); i++) {
-                    for (j = i + 1; j < battle_menu_moveOptionCount; j++) {
+            if (!BattleMenu_UsingSpiritsSubmenu) {
+                for (i = 0; i < (BattleMenu_Moves_OptionCount - 1); i++) {
+                    for (j = i + 1; j < BattleMenu_Moves_OptionCount; j++) {
                         do {
-                            s32 temp1 = battle_menu_moveOptionIndexMap[i];
-                            s32 temp2 = battle_menu_moveOptionIndexMap[j];
+                            s32 temp1 = BattleMenu_Moves_OptionIndexMap[i];
+                            s32 temp2 = BattleMenu_Moves_OptionIndexMap[j];
 
-                            if (battle_menu_moveOptionSortPriorities[temp1] < battle_menu_moveOptionSortPriorities[temp2]) {
+                            if (BattleMenu_Moves_OptionSortPriority[temp1] < BattleMenu_Moves_OptionSortPriority[temp2]) {
                                 continue;
                             }
 
                             if (
-                                battle_menu_moveOptionSortPriorities[temp1] != battle_menu_moveOptionSortPriorities[temp2] ||
+                                BattleMenu_Moves_OptionSortPriority[temp1] != BattleMenu_Moves_OptionSortPriority[temp2] ||
                                 (battle_menu_moveOptionDisplayCosts[temp1] >= battle_menu_moveOptionDisplayCosts[temp2]) &&
                                 (battle_menu_moveOptionDisplayCosts[temp1] != battle_menu_moveOptionDisplayCosts[temp2] ||
                                     battle_menu_moveOptionBPCosts[temp1] >= battle_menu_moveOptionBPCosts[temp2])
                             )
                             {
-                                s32 swapTmp = battle_menu_moveOptionIndexMap[i];
-                                battle_menu_moveOptionIndexMap[i] = battle_menu_moveOptionIndexMap[j];
-                                battle_menu_moveOptionIndexMap[j] = swapTmp;
+                                s32 swapTmp = BattleMenu_Moves_OptionIndexMap[i];
+                                BattleMenu_Moves_OptionIndexMap[i] = BattleMenu_Moves_OptionIndexMap[j];
+                                BattleMenu_Moves_OptionIndexMap[j] = swapTmp;
                             }
                         } while (0);
                     }
                 }
             }
 
-            for (i = 0; i < battle_menu_moveOptionCount; i++) {
-                id = hud_element_create(battle_menu_moveOptionIconScripts[battle_menu_moveOptionIndexMap[i]]);
-                battle_menu_moveOptionIconIDs[i] = id;
+            for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
+                id = hud_element_create(battle_menu_moveOptionIconScripts[BattleMenu_Moves_OptionIndexMap[i]]);
+                BattleMenu_Moves_OptionIDs[i] = id;
                 hud_element_set_scale(id, 0.45f);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
             }
 
             id = hud_element_create(&HES_AnimatedHandPointer);
-            battle_menu_moveCursorIcon = id;
+            BattleMenu_Moves_CursorID = id;
             hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(id, battle_menu_moveX, battle_menu_moveY);
+            hud_element_set_render_pos(id, BattleMenu_Moves_PosX, BattleMenu_Moves_PosY);
 
             id = hud_element_create(&HES_GreenArrowUp);
-            battle_menu_moveUpArrowIcon = id;
+            BattleMenu_Moves_UpArrowID = id;
             hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(id, battle_menu_moveX + 39, battle_menu_moveY - 7);
+            hud_element_set_render_pos(id, BattleMenu_Moves_PosX + 39, BattleMenu_Moves_PosY - 7);
 
             id = hud_element_create(&HES_GreenArrowDown);
-            battle_menu_moveDownArrowIcon = id;
+            BattleMenu_Moves_DownArrowID = id;
             hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(id, battle_menu_moveX + 39, battle_menu_moveY + 78);
+            hud_element_set_render_pos(id, BattleMenu_Moves_PosX + 39, BattleMenu_Moves_PosY + 78);
 
-            if (battle_menu_hasSpiritsMenu == 0) {
+            if (!BattleMenu_UsingSpiritsSubmenu) {
                 id = hud_element_create(&HES_StatusFlower);
-                battle_menu_moveTitleIcon = id;
+                BattleMenu_Moves_TitleID = id;
                 hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
             } else {
                 id = hud_element_create(&HES_MenuStarPower);
-                battle_menu_moveTitleIcon = id;
+                BattleMenu_Moves_TitleID = id;
                 hud_element_set_scale(id, 0.75f);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
             }
-            hud_element_set_render_pos(id, battle_menu_moveX + 56, battle_menu_moveY);
+            hud_element_set_render_pos(id, BattleMenu_Moves_PosX + 56, BattleMenu_Moves_PosY);
 
-            for (i = 0; i < battle_menu_moveOptionCount; i++) {
-                if (!battle_menu_hasSpiritsMenu) {
+            for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
+                if (!BattleMenu_UsingSpiritsSubmenu) {
                     switch (battle_menu_moveOptionDisplayCostReductionColors[i]) {
                         case 0:
                             id = hud_element_create(&HES_FPCost);
-                            battle_menu_moveOptionCostUnitIconIDs[i] = id;
+                            BattleMenu_Moves_OptionCostUnitIDs[i] = id;
                             break;
                         case 1:
                             id = hud_element_create(&HES_FPCostReduced);
-                            battle_menu_moveOptionCostUnitIconIDs[i] = id;
+                            BattleMenu_Moves_OptionCostUnitIDs[i] = id;
                             break;
                         default:
                             id = hud_element_create(&HES_FPCostReducedTwice);
-                            battle_menu_moveOptionCostUnitIconIDs[i] = id;
+                            BattleMenu_Moves_OptionCostUnitIDs[i] = id;
                             break;
                     }
                 } else {
                     switch (battle_menu_moveOptionDisplayCostReductionColors[i]) {
                         case 0:
                             id = hud_element_create(&HES_POWCost);
-                            battle_menu_moveOptionCostUnitIconIDs[i] = id;
+                            BattleMenu_Moves_OptionCostUnitIDs[i] = id;
                             break;
                         case 1:
                             id = hud_element_create(&HES_POWCostReduced);
-                            battle_menu_moveOptionCostUnitIconIDs[i] = id;
+                            BattleMenu_Moves_OptionCostUnitIDs[i] = id;
                             break;
                         default:
                             id = hud_element_create(&HES_POWCostReducedTwice);
-                            battle_menu_moveOptionCostUnitIconIDs[i] = id;
+                            BattleMenu_Moves_OptionCostUnitIDs[i] = id;
                             break;
                     }
                 }
                 hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
-                hud_element_set_render_pos(id, battle_menu_moveX + 56, battle_menu_moveY);
+                hud_element_set_render_pos(id, BattleMenu_Moves_PosX + 56, BattleMenu_Moves_PosY);
             }
 
-            battle_menu_moveTextColor = MSG_PAL_STANDARD;
+            BattleMenu_Moves_TextColor = MSG_PAL_STANDARD;
 
-            moveX = battle_menu_moveX;
-            moveY = battle_menu_moveY;
-            if (!battle_menu_hasSpiritsMenu) {
+            moveX = BattleMenu_Moves_PosX;
+            moveY = BattleMenu_Moves_PosY;
+            if (!BattleMenu_UsingSpiritsSubmenu) {
                 set_window_properties(1, moveX, moveY, 150, (D_802AD10E * 13) + 28, 0, func_802A3C98, NULL, -1);
                 set_window_properties(2, moveX + 16, moveY - 6, 90, 16, 1, func_802A43DC, NULL, -1);
                 set_window_properties(3, moveX + 114, moveY - 12, 32, 32, 1, func_802A4448, NULL, -1);
@@ -1178,10 +1179,10 @@ s32 btl_submenu_moves_update(void) {
             }
 
             moveX = 20;
-            moveY = battle_menu_moveY;
+            moveY = BattleMenu_Moves_PosY;
             set_window_properties(8, moveX, 186, 280, 32, 20, func_802A4494, NULL, -1);
             set_window_update(WINDOW_ID_1, 1);
-            if (!battle_menu_hasSpiritsMenu) {
+            if (!BattleMenu_UsingSpiritsSubmenu) {
                 set_window_update(WINDOW_ID_2, 1);
                 set_window_update(WINDOW_ID_3, 1);
             } else {
@@ -1194,8 +1195,8 @@ s32 btl_submenu_moves_update(void) {
                 cond = FALSE;
                 if (battle_menu_moveCursorPos >= (battle_menu_moveScrollLine + D_802AD10D) - 1) {
                     battle_menu_moveScrollLine++;
-                    if (battle_menu_moveScrollLine > battle_menu_moveOptionCount - 6) {
-                        battle_menu_moveScrollLine = battle_menu_moveOptionCount - 6;
+                    if (battle_menu_moveScrollLine > BattleMenu_Moves_OptionCount - 6) {
+                        battle_menu_moveScrollLine = BattleMenu_Moves_OptionCount - 6;
                         if (battle_menu_moveScrollLine < 0) {
                             battle_menu_moveScrollLine = 0;
                         }
@@ -1221,7 +1222,7 @@ s32 btl_submenu_moves_update(void) {
             }
 
             if (battleStatus->currentButtonsHeld & (BUTTON_STICK_DOWN | BUTTON_R)) {
-                if (battle_menu_moveCursorPos < battle_menu_moveOptionCount - 1) {
+                if (battle_menu_moveCursorPos < BattleMenu_Moves_OptionCount - 1) {
                     battle_menu_moveCursorPos++;
                 } else if (battleStatus->currentButtonsPressed & (BUTTON_STICK_DOWN | BUTTON_R)) {
                     battle_menu_moveCursorPos++;
@@ -1229,15 +1230,15 @@ s32 btl_submenu_moves_update(void) {
             }
 
             if (battle_menu_moveCursorPos < 0) {
-                battle_menu_moveCursorPos = battle_menu_moveOptionCount - 1;
+                battle_menu_moveCursorPos = BattleMenu_Moves_OptionCount - 1;
             }
 
-            if (battle_menu_moveOptionCount - 1 < battle_menu_moveCursorPos) {
+            if (BattleMenu_Moves_OptionCount - 1 < battle_menu_moveCursorPos) {
                 battle_menu_moveCursorPos = 0;
             }
 
             if (D_802AD10A != battle_menu_moveCursorPos) {
-                hud_element_set_scale(battle_menu_moveOptionIconIDs[D_802AD10A], 0.45f);
+                hud_element_set_scale(BattleMenu_Moves_OptionIDs[D_802AD10A], 0.45f);
                 sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
             }
 
@@ -1250,8 +1251,8 @@ s32 btl_submenu_moves_update(void) {
 
             if (battle_menu_moveCursorPos >= (D_802AD10D - 1)) {
                 battle_menu_moveScrollLine++;
-                if (battle_menu_moveScrollLine > battle_menu_moveOptionCount - 6) {
-                    battle_menu_moveScrollLine = battle_menu_moveOptionCount - 6;
+                if (battle_menu_moveScrollLine > BattleMenu_Moves_OptionCount - 6) {
+                    battle_menu_moveScrollLine = BattleMenu_Moves_OptionCount - 6;
                     if (battle_menu_moveScrollLine < 0) {
                         battle_menu_moveScrollLine = 0;
                     }
@@ -1260,13 +1261,13 @@ s32 btl_submenu_moves_update(void) {
 
             D_802AD10D = battle_menu_moveScrollLine + 6;
             if (battleStatus->currentButtonsPressed & BUTTON_A) {
-                if (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos]] == 1) {
+                if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[battle_menu_moveCursorPos]] == 1) {
                     sfx_play_sound(SOUND_MENU_NEXT);
                     battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_NEGATIVE_ONE;
                 } else {
                     sfx_play_sound(SOUND_MENU_ERROR);
                     D_802AD258 = 0;
-                    temp_v0_14 = battle_menu_moveOptionCantUseTypes[battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos]];
+                    temp_v0_14 = BattleMenu_Moves_OptionCantUseMessages[BattleMenu_Moves_OptionIndexMap[battle_menu_moveCursorPos]];
                     if (temp_v0_14 != 0) {
                         D_802AD258 = temp_v0_14;
                     }
@@ -1282,24 +1283,24 @@ s32 btl_submenu_moves_update(void) {
             }
             break;
         case BTL_SUBMENU_MOVES_STATE_UNK_NEGATIVE_ONE:
-            for (i = 0; i < battle_menu_moveOptionCount; i++) {
-                id = battle_menu_moveOptionIconIDs[i];
+            for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
+                id = BattleMenu_Moves_OptionIDs[i];
                 hud_element_set_tint(id, 160, 160, 160);
             }
-            hud_element_set_tint(battle_menu_moveCursorIcon, 160, 160, 160);
-            hud_element_set_tint(battle_menu_moveUpArrowIcon, 160, 160, 160);
-            hud_element_set_tint(battle_menu_moveDownArrowIcon, 160, 160, 160);
-            hud_element_set_tint(battle_menu_moveTitleIcon, 160, 160, 160);
+            hud_element_set_tint(BattleMenu_Moves_CursorID, 160, 160, 160);
+            hud_element_set_tint(BattleMenu_Moves_UpArrowID, 160, 160, 160);
+            hud_element_set_tint(BattleMenu_Moves_DownArrowID, 160, 160, 160);
+            hud_element_set_tint(BattleMenu_Moves_TitleID, 160, 160, 160);
 
-            for (i = 0; i < battle_menu_moveOptionCount; i++) {
-                id = battle_menu_moveOptionCostUnitIconIDs[i];
+            for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
+                id = BattleMenu_Moves_OptionCostUnitIDs[i];
                 hud_element_set_tint(id, 160, 160, 160);
             }
 
-            hud_element_set_script(battle_menu_moveCursorIcon, &HES_HandPointer);
-            battle_menu_moveTextColor = MSG_PAL_0D;
+            hud_element_set_script(BattleMenu_Moves_CursorID, &HES_HandPointer);
+            BattleMenu_Moves_TextColor = MSG_PAL_0D;
             set_window_update(WINDOW_ID_1, 4);
-            if (!battle_menu_hasSpiritsMenu) {
+            if (!BattleMenu_UsingSpiritsSubmenu) {
                 set_window_update(WINDOW_ID_2, 4);
                 set_window_update(WINDOW_ID_3, 4);
             } else {
@@ -1307,15 +1308,15 @@ s32 btl_submenu_moves_update(void) {
                 set_window_update(WINDOW_ID_5, 4);
             }
             set_window_update(WINDOW_ID_8, 2);
-            if (!battle_menu_hasSpiritsMenu) {
+            if (!BattleMenu_UsingSpiritsSubmenu) {
                 status_menu_stop_blinking_fp();
             } else {
                 status_menu_stop_blinking_sp();
             }
             battle_menu_moveOptionActive = battle_menu_moveCursorPos;
-            return battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos] + 1;
+            return BattleMenu_Moves_OptionIndexMap[battle_menu_moveCursorPos] + 1;
         case BTL_SUBMENU_MOVES_STATE_UNK_NEGATIVE_TWO:
-            if (!battle_menu_hasSpiritsMenu) {
+            if (!BattleMenu_UsingSpiritsSubmenu) {
                 status_menu_stop_blinking_fp();
             } else {
                 status_menu_stop_blinking_sp();
@@ -1323,7 +1324,7 @@ s32 btl_submenu_moves_update(void) {
             return 255;
         case BTL_SUBMENU_MOVES_STATE_UNK_A:
             set_window_update(WINDOW_ID_1, 2);
-            if (!battle_menu_hasSpiritsMenu) {
+            if (!BattleMenu_UsingSpiritsSubmenu) {
                 set_window_update(WINDOW_ID_2, 2);
                 set_window_update(WINDOW_ID_3, 2);
             } else {
@@ -1331,20 +1332,20 @@ s32 btl_submenu_moves_update(void) {
                 set_window_update(WINDOW_ID_5, 2);
             }
             set_window_update(WINDOW_ID_8, 2);
-            if (!battle_menu_hasSpiritsMenu) {
+            if (!BattleMenu_UsingSpiritsSubmenu) {
                 status_menu_stop_blinking_fp();
             } else {
                 status_menu_stop_blinking_sp();
             }
             battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_B;
             battle_menu_moveOptionActive = battle_menu_moveCursorPos;
-            return battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos] + 1;
+            return BattleMenu_Moves_OptionIndexMap[battle_menu_moveCursorPos] + 1;
         case BTL_SUBMENU_MOVES_STATE_UNK_B:
             battle_menu_moveOptionActive = battle_menu_moveCursorPos;
-            return battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos] + 1;
+            return BattleMenu_Moves_OptionIndexMap[battle_menu_moveCursorPos] + 1;
         case BTL_SUBMENU_MOVES_STATE_UNK_14:
             set_window_update(WINDOW_ID_1, 1);
-            if (!battle_menu_hasSpiritsMenu) {
+            if (!BattleMenu_UsingSpiritsSubmenu) {
                 set_window_update(WINDOW_ID_2, 1);
                 set_window_update(WINDOW_ID_3, 1);
             } else {
@@ -1354,10 +1355,10 @@ s32 btl_submenu_moves_update(void) {
             set_window_update(WINDOW_ID_8, 1);
             battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_1;
             battle_menu_moveOptionActive = battle_menu_moveCursorPos;
-            return battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos] + 1;
+            return BattleMenu_Moves_OptionIndexMap[battle_menu_moveCursorPos] + 1;
         case BTL_SUBMENU_MOVES_STATE_UNK_1E:
             set_window_update(WINDOW_ID_1, 9);
-            if (!battle_menu_hasSpiritsMenu) {
+            if (!BattleMenu_UsingSpiritsSubmenu) {
                 set_window_update(WINDOW_ID_2, 9);
                 set_window_update(WINDOW_ID_3, 9);
             } else {
@@ -1373,7 +1374,7 @@ s32 btl_submenu_moves_update(void) {
             return -1;
         case BTL_SUBMENU_MOVES_STATE_UNK_29:
             set_window_update(WINDOW_ID_1, 2);
-            if (!battle_menu_hasSpiritsMenu) {
+            if (!BattleMenu_UsingSpiritsSubmenu) {
                 set_window_update(WINDOW_ID_2, 2);
                 set_window_update(WINDOW_ID_3, 2);
             } else {
@@ -1384,7 +1385,7 @@ s32 btl_submenu_moves_update(void) {
 
             msgID = MSG_Menus_Battle_CantSelectNow;
             if (D_802AD258 == 0) {
-                if (!battle_menu_hasSpiritsMenu) {
+                if (!BattleMenu_UsingSpiritsSubmenu) {
                     msgID = MSG_Menus_NotEnoughFP;
                 } else {
                     msgID = MSG_Menus_NotEnoughStarPower;
@@ -1408,7 +1409,7 @@ s32 btl_submenu_moves_update(void) {
             }
             set_window_update(WINDOW_ID_9, 2);
             set_window_update(WINDOW_ID_1, 1);
-            if (!battle_menu_hasSpiritsMenu) {
+            if (!BattleMenu_UsingSpiritsSubmenu) {
                 set_window_update(WINDOW_ID_2, 1);
                 set_window_update(WINDOW_ID_3, 1);
             } else {
@@ -1469,25 +1470,25 @@ void func_802A3C98(s32 x, s32 y) {
                 temp1
             );
 
-            for (i = 0; i < battle_menu_moveOptionCount; i++) {
+            for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
                 if ((i >= battle_menu_moveScrollLine - 1) && (i <= battle_menu_moveScrollLine + D_802AD10E)) {
-                    palette = battle_menu_moveTextColor;
-                    if (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[i]] <= 0) {
+                    palette = BattleMenu_Moves_TextColor;
+                    if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[i]] <= 0) {
                         palette = MSG_PAL_0B;
                     }
 
-                    if (battle_menu_moveOptionNames[battle_menu_moveOptionIndexMap[i]] >= 0) {
-                        draw_msg(battle_menu_moveOptionNames[battle_menu_moveOptionIndexMap[i]], moveOptX, moveOptY, battle_menu_moveTextOpacity, palette, DRAW_MSG_STYLE_MENU);
+                    if (battle_menu_moveOptionNames[BattleMenu_Moves_OptionIndexMap[i]] >= 0) {
+                        draw_msg(battle_menu_moveOptionNames[BattleMenu_Moves_OptionIndexMap[i]], moveOptX, moveOptY, BattleMenu_Moves_TextAlpha, palette, DRAW_MSG_STYLE_MENU);
                     }
 
-                    num = battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[i]] - battle_menu_moveOptionDisplayCostReductions[battle_menu_moveOptionIndexMap[i]];
-                    if ((battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[i]] != 0) && (num <= 0)) {
+                    num = battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[i]] - battle_menu_moveOptionDisplayCostReductions[BattleMenu_Moves_OptionIndexMap[i]];
+                    if ((battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[i]] != 0) && (num <= 0)) {
                         num = 1;
                     }
 
-                    if (!battle_menu_hasSpiritsMenu) {
+                    if (!BattleMenu_UsingSpiritsSubmenu) {
                         if (i == battle_menu_moveCursorPos) {
-                            if (num == 0 || (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[i]] <= 0)) {
+                            if (num == 0 || (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[i]] <= 0)) {
                                 status_menu_stop_blinking_fp();
                             } else {
                                 status_menu_start_blinking_fp();
@@ -1495,10 +1496,10 @@ void func_802A3C98(s32 x, s32 y) {
                         }
                     } else {
                         if (i == battle_menu_moveCursorPos) {
-                            if (num == 0 || (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[i]] <= 0)) {
+                            if (num == 0 || (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[i]] <= 0)) {
                                 status_menu_stop_blinking_sp();
                             } else {
-                                status_menu_start_blinking_sp_bars(battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[i]]);
+                                status_menu_start_blinking_sp_bars(battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[i]]);
                             }
                         }
                     }
@@ -1515,27 +1516,27 @@ void func_802A3C98(s32 x, s32 y) {
                             break;
                     }
 
-                    if (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[i]] <= 0) {
+                    if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[i]] <= 0) {
                         palette = MSG_PAL_0B;
                     }
 
-                    if (battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[i]] != 0) {
-                        id = battle_menu_moveOptionCostUnitIconIDs[i];
-                        if (!battle_menu_hasSpiritsMenu) {
-                            draw_number(num, moveOptX + 108, moveOptY, DRAW_NUMBER_CHARSET_THIN, palette, battle_menu_moveTextOpacity, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
-                            if (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[i]] <= 0) {
+                    if (battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[i]] != 0) {
+                        id = BattleMenu_Moves_OptionCostUnitIDs[i];
+                        if (!BattleMenu_UsingSpiritsSubmenu) {
+                            draw_number(num, moveOptX + 108, moveOptY, DRAW_NUMBER_CHARSET_THIN, palette, BattleMenu_Moves_TextAlpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+                            if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[i]] <= 0) {
                                 hud_element_set_script(id, &HES_NotEnoughFP);
                             }
                             moveOptX += 116;
                         } else {
-                            draw_number(num, moveOptX + 93, moveOptY, DRAW_NUMBER_CHARSET_THIN, palette, battle_menu_moveTextOpacity, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
-                            if (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[i]] <= 0) {
+                            draw_number(num, moveOptX + 93, moveOptY, DRAW_NUMBER_CHARSET_THIN, palette, BattleMenu_Moves_TextAlpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+                            if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[i]] <= 0) {
                                 hud_element_set_script(id, &HES_NotEnoughPOW);
                             }
                             moveOptX += 102;
                         }
                         hud_element_set_render_pos(id, moveOptX, moveOptY + 7);
-                        hud_element_set_alpha(id, battle_menu_moveTextOpacity);
+                        hud_element_set_alpha(id, BattleMenu_Moves_TextAlpha);
                         hud_element_draw_without_clipping(id);
                     }
                     moveOptY += 13;
@@ -1544,11 +1545,11 @@ void func_802A3C98(s32 x, s32 y) {
 
             moveOptX = x + 24;
             moveOptY = battle_menu_moveScrollOffset + y + 24;
-            for (i = 0; i < battle_menu_moveOptionCount; i++) {
+            for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
                 if (i >= (battle_menu_moveScrollLine - 1) && i <= (battle_menu_moveScrollLine + D_802AD10E)) {
-                    id = battle_menu_moveOptionIconIDs[i];
+                    id = BattleMenu_Moves_OptionIDs[i];
                     hud_element_set_render_pos(id, moveOptX, moveOptY);
-                    hud_element_set_alpha(id, battle_menu_moveTextOpacity);
+                    hud_element_set_alpha(id, BattleMenu_Moves_TextAlpha);
                     hud_element_draw_without_clipping(id);
                 }
                 moveOptY += 13;
@@ -1561,27 +1562,27 @@ void func_802A3C98(s32 x, s32 y) {
             }
             D_802AD112 = var_t0_4;
 
-            id = battle_menu_moveCursorIcon;
+            id = BattleMenu_Moves_CursorID;
             hud_element_set_render_pos(id, x + 10, y + (var_t0_4 + 26));
-            hud_element_set_alpha(id, battle_menu_moveTextOpacity);
+            hud_element_set_alpha(id, BattleMenu_Moves_TextAlpha);
             hud_element_draw_without_clipping(id);
 
             if (battle_menu_moveScrollLine > 0) {
-                id = battle_menu_moveUpArrowIcon;
+                id = BattleMenu_Moves_UpArrowID;
                 hud_element_set_render_pos(id, x + 72, y + 15);
-                hud_element_set_alpha(id, battle_menu_moveTextOpacity);
+                hud_element_set_alpha(id, BattleMenu_Moves_TextAlpha);
                 hud_element_draw_clipped(id);
             }
 
-            if (D_802AD10D < battle_menu_moveOptionCount) {
-                id = battle_menu_moveDownArrowIcon;
+            if (D_802AD10D < BattleMenu_Moves_OptionCount) {
+                id = BattleMenu_Moves_DownArrowID;
                 hud_element_set_render_pos(id, x + 72, y + 100);
-                hud_element_set_alpha(id, battle_menu_moveTextOpacity);
+                hud_element_set_alpha(id, BattleMenu_Moves_TextAlpha);
                 hud_element_draw_clipped(id);
             }
 
             if (battle_menu_moveState == -1) {
-                if (!battle_menu_hasSpiritsMenu) {
+                if (!BattleMenu_UsingSpiritsSubmenu) {
                     status_menu_stop_blinking_fp();
                 } else {
                     status_menu_stop_blinking_sp();
@@ -1601,27 +1602,27 @@ void func_802A43DC(void* data, s32 x, s32 y) {
     s32 opacity;
     s32 palette;
 
-    if (!battle_menu_hasSpiritsMenu) {
+    if (!BattleMenu_UsingSpiritsSubmenu) {
         msgID = MSG_Menus_Abilities;
         posX = x + 16;
         posY = y + 2;
-        opacity = battle_menu_moveTextOpacity;
+        opacity = BattleMenu_Moves_TextAlpha;
         palette = MSG_PAL_30;
     } else {
         msgID = MSG_Menus_StarSpirits;
         posX = x + 6;
         posY = y + 2;
-        opacity = battle_menu_moveTextOpacity;
+        opacity = BattleMenu_Moves_TextAlpha;
         palette = MSG_PAL_31;
     }
     draw_msg(msgID, posX, posY, opacity, palette, DRAW_MSG_STYLE_MENU);
 }
 
 void func_802A4448(void* data, s32 x, s32 y) {
-    s32 icon = battle_menu_moveTitleIcon;
+    s32 icon = BattleMenu_Moves_TitleID;
 
     hud_element_set_render_pos(icon, x + 16, y + 15);
-    hud_element_set_alpha(icon, battle_menu_moveTextOpacity);
+    hud_element_set_alpha(icon, BattleMenu_Moves_TextAlpha);
     hud_element_draw_clipped(icon);
 }
 
@@ -1633,8 +1634,8 @@ void func_802A4494(void* data, s32 x, s32 y) {
         case BTL_SUBMENU_MOVES_STATE_UNK_14:
         case BTL_SUBMENU_MOVES_STATE_UNK_1E:
             if (D_802AD10F != 0) {
-                draw_msg(battle_menu_moveOptionDescriptions[battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos]],
-                            x + 8, y, battle_menu_moveTextOpacity, battle_menu_moveTextColor, 0);
+                draw_msg(BattleMenu_Moves_OptionDescMessages[BattleMenu_Moves_OptionIndexMap[battle_menu_moveCursorPos]],
+                            x + 8, y, BattleMenu_Moves_TextAlpha, BattleMenu_Moves_TextColor, 0);
             }
             break;
     }
@@ -1650,7 +1651,7 @@ void func_802A4534(void* data, s32 x, s32 y) {
 
     if (D_802AD258 != 0) {
         msgID = MSG_Menus_Battle_CantSelectNow;
-    } else if (!battle_menu_hasSpiritsMenu) {
+    } else if (!BattleMenu_UsingSpiritsSubmenu) {
         msgID = MSG_Menus_NotEnoughFP;
     } else {
         msgID = MSG_Menus_NotEnoughStarPower;
@@ -1716,8 +1717,8 @@ void func_802A472C(void) {
     }
 
     hud_element_free(D_802AD618);
-    hud_element_free(GreenArrowUpHEID);
-    hud_element_free(GreenArrowDownHEID);
+    hud_element_free(GreenArrowUpID);
+    hud_element_free(GreenArrowDownID);
 }
 
 void func_802A47E0(void) {
@@ -1728,8 +1729,8 @@ void func_802A47E0(void) {
     }
 
     hud_element_set_tint(D_802AD618, 255, 255, 255);
-    hud_element_set_tint(GreenArrowUpHEID, 255, 255, 255);
-    hud_element_set_tint(GreenArrowDownHEID, 255, 255, 255);
+    hud_element_set_tint(GreenArrowUpID, 255, 255, 255);
+    hud_element_set_tint(GreenArrowDownID, 255, 255, 255);
     hud_element_set_script(D_802AD618, &HES_AnimatedHandPointer);
     set_window_update(WINDOW_ID_6, WINDOW_UPDATE_TRANSPARENT);
     set_window_update(WINDOW_ID_7, WINDOW_UPDATE_TRANSPARENT);
@@ -1752,8 +1753,8 @@ void func_802A48FC(void) {
     }
 
     hud_element_set_tint(D_802AD618, 255, 255, 255);
-    hud_element_set_tint(GreenArrowUpHEID, 255, 255, 255);
-    hud_element_set_tint(GreenArrowDownHEID, 255, 255, 255);
+    hud_element_set_tint(GreenArrowUpID, 255, 255, 255);
+    hud_element_set_tint(GreenArrowDownID, 255, 255, 255);
     hud_element_set_script(D_802AD618, &HES_AnimatedHandPointer);
     D_802AD614 = MSG_PAL_STANDARD;
     D_802AD60B = 1;
@@ -1792,11 +1793,11 @@ s32 func_802A4A54(void) {
             hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
             hud_element_set_render_pos(id, D_802AD63C, D_802AD63E);
 
-            GreenArrowUpHEID = id = hud_element_create(&HES_GreenArrowUp);
+            GreenArrowUpID = id = hud_element_create(&HES_GreenArrowUp);
             hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
             hud_element_set_render_pos(id, D_802AD63C + 39, D_802AD63E - 7);
 
-            GreenArrowDownHEID = id = hud_element_create(&HES_GreenArrowDown);
+            GreenArrowDownID = id = hud_element_create(&HES_GreenArrowDown);
             hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
             hud_element_set_render_pos(id, D_802AD63C + 39, D_802AD63E + 78);
 
@@ -1879,8 +1880,8 @@ s32 func_802A4A54(void) {
                 hud_element_set_tint(D_802AD628[i], 160, 160, 160);
             }
             hud_element_set_tint(D_802AD618, 160, 160, 160);
-            hud_element_set_tint(GreenArrowUpHEID, 160, 160, 160);
-            hud_element_set_tint(GreenArrowDownHEID, 160, 160, 160);
+            hud_element_set_tint(GreenArrowUpID, 160, 160, 160);
+            hud_element_set_tint(GreenArrowDownID, 160, 160, 160);
             hud_element_set_script(D_802AD618, &HES_HandPointer);
             D_802AD614 = MSG_PAL_0D;
             set_window_update(WINDOW_ID_6, WINDOW_UPDATE_DARKENED);
@@ -2033,14 +2034,14 @@ void func_802A5290(void* data, s32 x, s32 y) {
             hud_element_draw_clipped(id);
 
             if (D_802AD608 > 0) {
-                id = GreenArrowUpHEID;
+                id = GreenArrowUpID;
                 hud_element_set_render_pos(id, x + 67, y + 16);
                 hud_element_set_alpha(id, D_802AD624);
                 hud_element_draw_clipped(id);
             }
 
             if (D_802AD609 < D_802AD66C) {
-                id = GreenArrowDownHEID;
+                id = GreenArrowDownID;
                 hud_element_set_render_pos(id, x + 67, y + 100);
                 hud_element_set_alpha(id, D_802AD624);
                 hud_element_draw_clipped(id);
@@ -2640,21 +2641,21 @@ void btl_state_update_player_menu(void) {
                         itemData = &gItemTable[battleStatus->submenuIcons[i]];
                         hudScriptPair = &gItemHudScripts[itemData->hudElemID];
 
-                        battle_menu_moveOptionCantUseTypes[i] = 0;
+                        BattleMenu_Moves_OptionCantUseMessages[i] = 0;
                         if (battleStatus->submenuStatus[i] == 0) {
-                            battle_menu_moveOptionCantUseTypes[i] = 0;
+                            BattleMenu_Moves_OptionCantUseMessages[i] = 0;
                         }
                         if (battleStatus->submenuStatus[i] == -1) {
                             battleStatus->submenuStatus[i] = 0;
-                            battle_menu_moveOptionCantUseTypes[i] = BTL_MSG_48;
+                            BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_48;
                         }
                         if (battleStatus->submenuStatus[i] == -2) {
                             battleStatus->submenuStatus[i] = 0;
-                            battle_menu_moveOptionCantUseTypes[i] = BTL_MSG_48;
+                            BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_48;
                         }
                         if (battleStatus->submenuStatus[i] == -3) {
                             battleStatus->submenuStatus[i] = 0;
-                            battle_menu_moveOptionCantUseTypes[i] = BTL_MSG_54;
+                            BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_54;
                         }
                         battle_menu_moveOptionIconScripts[i] = hudScriptPair->enabled;
                         if (battleStatus->submenuStatus[i] == 0) {
@@ -2663,7 +2664,7 @@ void btl_state_update_player_menu(void) {
 
                         battle_menu_moveOptionDisplayCosts[i] = moveData->costFP;
                         battle_menu_moveOptionBPCosts[i] = moveData->costBP;
-                        battle_menu_moveOptionSortPriorities[i] = 0;
+                        BattleMenu_Moves_OptionSortPriority[i] = 0;
                         battle_menu_moveOptionDisplayCostReductions[i] = 0;
                         battle_menu_moveOptionDisplayCostReductionColors[i] = 0;
 
@@ -2676,15 +2677,15 @@ void btl_state_update_player_menu(void) {
                             battle_menu_moveOptionDisplayCostReductionColors[i] = 2;
                         }
 
-                        battle_menu_moveIndices[i] = i;
-                        battle_menu_moveOptionsEnabled[i] = battleStatus->submenuStatus[i];
+                        BattleMenu_Moves_OptionIndices[i] = i;
+                        BattleMenu_Moves_OptionEnabled[i] = battleStatus->submenuStatus[i];
                         battle_menu_moveOptionNames[i] = moveData->nameMsg;
-                        battle_menu_moveOptionDescriptions[i] = moveData->shortDescMsg;
+                        BattleMenu_Moves_OptionDescMessages[i] = moveData->shortDescMsg;
 
                     }
-                    battle_menu_hasSpiritsMenu = 0;
+                    BattleMenu_UsingSpiritsSubmenu = FALSE;
                     D_802AD4A8 = initialPos;
-                    battle_menu_moveOptionCount = battleStatus->submenuMoveCount;
+                    BattleMenu_Moves_OptionCount = battleStatus->submenuMoveCount;
                     func_802A2684();
                     gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_2;
                     break;
@@ -2704,7 +2705,7 @@ void btl_state_update_player_menu(void) {
                 btl_state_update_player_menu();
                 btl_state_update_player_menu();
             } else {
-                battleStatus->unk_49 = battle_menu_moveIndices[submenuResult - 1];
+                battleStatus->unk_49 = BattleMenu_Moves_OptionIndices[submenuResult - 1];
                 battleStatus->selectedMoveID = battleStatus->submenuMoves[battleStatus->unk_49];
                 if (battleStatus->currentSubmenu == BTL_MENU_TYPE_JUMP) {
                     battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_JUMP] = battle_menu_moveOptionActive;
@@ -3052,36 +3053,36 @@ void btl_state_update_player_menu(void) {
         case BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_1:
             for (i = 0; i < battleStatus->submenuMoveCount; i++) {
                 moveData = &gMoveTable[battleStatus->submenuMoves[i]];
-                battle_menu_moveOptionCantUseTypes[i] = 0;
+                BattleMenu_Moves_OptionCantUseMessages[i] = 0;
 
                 if (battleStatus->submenuStatus[i] == 0) {
-                    battle_menu_moveOptionCantUseTypes[i] = 0;
+                    BattleMenu_Moves_OptionCantUseMessages[i] = 0;
                 }
 
                 if (battleStatus->submenuStatus[i] == -1) {
                     battleStatus->submenuStatus[i] = 0;
-                    battle_menu_moveOptionCantUseTypes[i] = BTL_MSG_48;
+                    BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_48;
                 }
                 if (battleStatus->submenuStatus[i] == -2) {
                     battleStatus->submenuStatus[i] = 0;
-                    battle_menu_moveOptionCantUseTypes[i] = BTL_MSG_48;
+                    BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_48;
                 }
                 if (!(battleStatus->enabledStarPowersMask & (1 << i))) {
                     battleStatus->submenuStatus[i] = 0;
-                    battle_menu_moveOptionCantUseTypes[i] = BTL_MSG_48;
+                    BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_48;
                 }
 
-                battle_menu_moveOptionIconScripts[i] = battle_menu_StarPowerMovesHudScripts[2 * (battleStatus->submenuMoves[i] - MOVE_FOCUS) + 0];
+                battle_menu_moveOptionIconScripts[i] = battle_menu_StarPowerMovesHudScripts[2 * STAR_POWER_INDEX(battleStatus->submenuMoves[i]) + 0];
                 if (battleStatus->submenuStatus[i] == 0) {
-                    battle_menu_moveOptionIconScripts[i] = battle_menu_StarPowerMovesHudScripts[2 * (battleStatus->submenuMoves[i] - MOVE_FOCUS) + 1];
+                    battle_menu_moveOptionIconScripts[i] = battle_menu_StarPowerMovesHudScripts[2 * STAR_POWER_INDEX(battleStatus->submenuMoves[i]) + 1];
                 }
                 battle_menu_moveOptionDisplayCosts[i] = moveData->costFP;
                 battle_menu_moveOptionBPCosts[i] = moveData->costBP;
-                battle_menu_moveOptionSortPriorities[i] = 0;
-                battle_menu_moveIndices[i] = i;
-                battle_menu_moveOptionsEnabled[i] = battleStatus->submenuStatus[i];
+                BattleMenu_Moves_OptionSortPriority[i] = 0;
+                BattleMenu_Moves_OptionIndices[i] = i;
+                BattleMenu_Moves_OptionEnabled[i] = battleStatus->submenuStatus[i];
                 battle_menu_moveOptionNames[i] = moveData->nameMsg;
-                battle_menu_moveOptionDescriptions[i] = moveData->shortDescMsg;
+                BattleMenu_Moves_OptionDescMessages[i] = moveData->shortDescMsg;
                 battle_menu_moveOptionDisplayCostReductions[i] = 0;
                 battle_menu_moveOptionDisplayCostReductionColors[i] = 0;
             }
@@ -3089,9 +3090,9 @@ void btl_state_update_player_menu(void) {
                 battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_STAR_POWER] = 0;
             }
             initialPos = battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_STAR_POWER];
-            battle_menu_moveOptionCount = battleStatus->submenuMoveCount;
+            BattleMenu_Moves_OptionCount = battleStatus->submenuMoveCount;
             D_802AD4A8 = initialPos;
-            battle_menu_hasSpiritsMenu = 1;
+            BattleMenu_UsingSpiritsSubmenu = TRUE;
             func_802A2684();
             gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_2;
             break;
@@ -3108,7 +3109,7 @@ void btl_state_update_player_menu(void) {
                 btl_state_update_player_menu();
                 btl_state_update_player_menu();
             } else {
-                battleStatus->unk_49 = battle_menu_moveIndices[submenuResult - 1];
+                battleStatus->unk_49 = BattleMenu_Moves_OptionIndices[submenuResult - 1];
                 battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_STAR_POWER] = battle_menu_moveOptionActive;
                 func_802A27D0();
                 func_802A1030();
@@ -3840,29 +3841,29 @@ void btl_state_update_partner_menu(void) {
         for (i = 0; i < battleStatus->submenuMoveCount; i++) {
             moveData = &gMoveTable[battleStatus->submenuMoves[i]];
 
-            battle_menu_moveOptionCantUseTypes[i] = 0;
+            BattleMenu_Moves_OptionCantUseMessages[i] = 0;
             if (battleStatus->submenuStatus[i] == 0) {
-                battle_menu_moveOptionCantUseTypes[i] = 0;
+                BattleMenu_Moves_OptionCantUseMessages[i] = 0;
             }
             if (battleStatus->submenuStatus[i] == -1) {
                 battleStatus->submenuStatus[i] = 0;
-                battle_menu_moveOptionCantUseTypes[i] = BTL_MSG_48;
+                BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_48;
             }
             if (battleStatus->submenuStatus[i] == -2) {
                 battleStatus->submenuStatus[i] = 0;
-                battle_menu_moveOptionCantUseTypes[i] = BTL_MSG_48;
+                BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_48;
             }
             battle_menu_moveOptionIconScripts[i] = battle_menu_PartnerMoveHudScripts[playerData->currentPartner][2 * i + 2];
             if (battleStatus->submenuStatus[i] == 0) {
                 battle_menu_moveOptionIconScripts[i] = battle_menu_PartnerMoveHudScripts[playerData->currentPartner][2 * i + 3];
             }
-            battle_menu_moveIndices[i] = battleStatus->submenuMoves[i];
-            battle_menu_moveOptionsEnabled[i] = battleStatus->submenuStatus[i];
+            BattleMenu_Moves_OptionIndices[i] = battleStatus->submenuMoves[i];
+            BattleMenu_Moves_OptionEnabled[i] = battleStatus->submenuStatus[i];
             battle_menu_moveOptionNames[i] = moveData->nameMsg;
-            battle_menu_moveOptionDescriptions[i] = moveData->shortDescMsg;
+            BattleMenu_Moves_OptionDescMessages[i] = moveData->shortDescMsg;
             battle_menu_moveOptionDisplayCosts[i] = moveData->costFP;
             battle_menu_moveOptionBPCosts[i] = moveData->costBP;
-            battle_menu_moveOptionSortPriorities[i] = i;
+            BattleMenu_Moves_OptionSortPriority[i] = i;
 
             battle_menu_moveOptionDisplayCostReductions[i] = 0;
             battle_menu_moveOptionDisplayCostReductionColors[i] = 0;
@@ -3878,8 +3879,8 @@ void btl_state_update_partner_menu(void) {
         if (battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_ABILITY] < 0) {
             battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_ABILITY] = 0;
         }
-        battle_menu_hasSpiritsMenu = 0;
-        battle_menu_moveOptionCount = battleStatus->submenuMoveCount;
+        BattleMenu_UsingSpiritsSubmenu = FALSE;
+        BattleMenu_Moves_OptionCount = battleStatus->submenuMoveCount;
         initialPos = battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_ABILITY];
         D_802AD4A8 = initialPos;
         func_802A2684();
@@ -3913,7 +3914,7 @@ void btl_state_update_partner_menu(void) {
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_ABILITIES_4;
         } else if (btl_main_menu_update() != 0) {
             battleStatus->moveCategory = BTL_MENU_TYPE_ABILITY;
-            battleStatus->selectedMoveID = battle_menu_moveIndices[battleStatus->unk_4B];
+            battleStatus->selectedMoveID = BattleMenu_Moves_OptionIndices[battleStatus->unk_4B];
             battleStatus->currentTargetListFlags = gMoveTable[battleStatus->selectedMoveID].flags;
             battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_ABILITY] = battle_menu_moveOptionActive;
             battleStatus->cancelTargetMenuSubstate = BTL_SUBSTATE_PARTNER_MENU_ABILITIES_5;
@@ -4117,25 +4118,25 @@ void btl_state_update_partner_menu(void) {
         battleStatus->submenuStatus[0] = 1;
         for (i = 0; i < battleStatus->submenuMoveCount; i++) {
             moveData = &gMoveTable[battleStatus->submenuMoves[i]];
-            battle_menu_moveOptionIconScripts[i] = battle_menu_StarPowerMovesHudScripts[(battleStatus->submenuMoves[i] - MOVE_FOCUS) * 2 + 0];
+            battle_menu_moveOptionIconScripts[i] = battle_menu_StarPowerMovesHudScripts[2 * STAR_POWER_INDEX(battleStatus->submenuMoves[i]) + 0];
             if (battleStatus->submenuStatus[i] == 0) {
-                battle_menu_moveOptionIconScripts[i] = battle_menu_StarPowerMovesHudScripts[(battleStatus->submenuMoves[i] - MOVE_FOCUS) * 2 + 1];
+                battle_menu_moveOptionIconScripts[i] = battle_menu_StarPowerMovesHudScripts[2 * STAR_POWER_INDEX(battleStatus->submenuMoves[i]) + 1];
             }
             battle_menu_moveOptionDisplayCosts[i] = moveData->costFP;
             battle_menu_moveOptionBPCosts[i] = moveData->costBP;
-            battle_menu_moveIndices[i] = i;
-            battle_menu_moveOptionSortPriorities[i] = i;
-            battle_menu_moveOptionsEnabled[i] = battleStatus->submenuStatus[i];
+            BattleMenu_Moves_OptionIndices[i] = i;
+            BattleMenu_Moves_OptionSortPriority[i] = i;
+            BattleMenu_Moves_OptionEnabled[i] = battleStatus->submenuStatus[i];
             battle_menu_moveOptionNames[i] = moveData->nameMsg;
-            battle_menu_moveOptionDescriptions[i] = moveData->shortDescMsg;
+            BattleMenu_Moves_OptionDescMessages[i] = moveData->shortDescMsg;
             battle_menu_moveOptionDisplayCostReductions[i] = 0;
             battle_menu_moveOptionDisplayCostReductionColors[i] = 0;
         }
         if (battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_STAR_POWER] < 0) {
             battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_STAR_POWER] = 0;
         }
-        battle_menu_hasSpiritsMenu = 1;
-        battle_menu_moveOptionCount = battleStatus->submenuMoveCount;
+        BattleMenu_UsingSpiritsSubmenu = TRUE;
+        BattleMenu_Moves_OptionCount = battleStatus->submenuMoveCount;
         initialPos = battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_STAR_POWER];
         D_802AD4A8 = initialPos;
         func_802A2684();
@@ -4152,7 +4153,7 @@ void btl_state_update_partner_menu(void) {
                 btl_state_update_partner_menu();
                 btl_state_update_partner_menu();
             } else {
-                battleStatus->unk_4B = battle_menu_moveIndices[entryIdx - 1];
+                battleStatus->unk_4B = BattleMenu_Moves_OptionIndices[entryIdx - 1];
                 func_802A27D0();
                 func_802A1030();
                 gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_FOCUS_3;
@@ -4574,7 +4575,7 @@ void btl_state_update_peach_menu(void) {
                 battleStatus->currentTargetListFlags = gMoveTable[MOVE_PEACH_FOCUS].flags;
                 battleStatus->moveCategory = BTL_MENU_TYPE_STAR_POWERS;
                 battleStatus->selectedMoveID = MOVE_PEACH_FOCUS;
-                battleStatus->moveArgument = MOVE_PEACH_FOCUS - MOVE_FOCUS;
+                battleStatus->moveArgument = STAR_POWER_INDEX(MOVE_PEACH_FOCUS);
                 btl_set_state(BATTLE_STATE_SELECT_TARGET);
             }
             break;
