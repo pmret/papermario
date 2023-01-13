@@ -352,7 +352,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(MoveBattleCamOver, 30)
             EVT_CALL(GetActorHP, ACTOR_SELF, GB_FinalBowserHP)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, 1)
-            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_ENEMY_FLED, 1)
+            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, 1)
             EVT_CALL(func_8026F60C, 20)
             EVT_RETURN
         EVT_CASE_EQ(20)

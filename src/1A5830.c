@@ -3319,8 +3319,8 @@ ApiStatus CopyStatusEffects(Evt* script, s32 isInitialCall) {
     inflict_status(actorTo, actorFrom->koStatus, actorFrom->koDuration);
     inflict_status(actorTo, actorFrom->transparentStatus, actorFrom->transparentDuration);
 
-    actorFrom->status = 0;
-    actorTo->status = 0;
+    actorFrom->statusAfflicted = 0;
+    actorTo->statusAfflicted = 0;
 
     return ApiStatus_DONE2;
 }

@@ -201,7 +201,7 @@ void func_80263300(void) {
 
             if (itemData->typeFlags & ITEM_TYPE_FLAG_BATTLE_USABLE) {
                 battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
-                battleStatus->selectedItemID = playerData->invItems[i];
+                battleStatus->moveArgument = playerData->invItems[i];
                 battleStatus->currentTargetListFlags = itemData->targetFlags;
                 player_create_target_list(player);
 
@@ -315,7 +315,7 @@ void btl_init_menu_boots(void) {
 
         // See if there are any targets for this move
         battleStatus->moveCategory = BTL_MENU_TYPE_JUMP;
-        battleStatus->selectedItemID = playerData->bootsLevel;
+        battleStatus->moveArgument = playerData->bootsLevel;
         battleStatus->currentTargetListFlags = move->flags; // Controls target filters
         player_create_target_list(player);
 
@@ -409,7 +409,7 @@ void btl_init_menu_hammer(void) {
 
         // See if there are any targets for this move
         battleStatus->moveCategory = BTL_MENU_TYPE_SMASH;
-        battleStatus->selectedItemID = playerData->hammerLevel;
+        battleStatus->moveArgument = playerData->hammerLevel;
         battleStatus->currentTargetListFlags = move->flags;
         player_create_target_list(player);
 
@@ -497,7 +497,7 @@ void btl_init_menu_partner(void) {
         }
 
         battleStatus->moveCategory = BTL_MENU_TYPE_5;
-        battleStatus->selectedItemID = partner->actorBlueprint->level;
+        battleStatus->moveArgument = partner->actorBlueprint->level;
         battleStatus->currentTargetListFlags = move->flags;
         player_create_target_list(partner);
 
@@ -886,7 +886,7 @@ void load_player_actor(void) {
     player->defenseBoost = 0;
     player->chillOutAmount = 0;
     player->chillOutTurns = 0;
-    player->status = 0;
+    player->statusAfflicted = 0;
     player->actorTypeData1[0] = bActorSoundTable[player->actorType].walk[0];
     player->actorTypeData1[1] = bActorSoundTable[player->actorType].walk[1];
     player->actorTypeData1[2] = bActorSoundTable[player->actorType].fly[0];
@@ -1125,7 +1125,7 @@ void load_partner_actor(void) {
         partnerActor->defenseBoost = 0;
         partnerActor->chillOutAmount = 0;
         partnerActor->chillOutTurns = 0;
-        partnerActor->status = 0;
+        partnerActor->statusAfflicted = 0;
         partnerActor->actorTypeData1[0] = bActorSoundTable[partnerActor->actorType].walk[0];
         partnerActor->actorTypeData1[1] = bActorSoundTable[partnerActor->actorType].walk[1];
         partnerActor->actorTypeData1[2] = bActorSoundTable[partnerActor->actorType].fly[0];
@@ -1377,7 +1377,7 @@ Actor* create_actor(Formation formation) {
     actor->defenseBoost = 0;
     actor->chillOutAmount = 0;
     actor->chillOutTurns = 0;
-    actor->status = 0;
+    actor->statusAfflicted = 0;
     actor->actorTypeData1[0] = bActorSoundTable[actor->actorType].walk[0];
     actor->actorTypeData1[1] = bActorSoundTable[actor->actorType].walk[1];
     actor->actorTypeData1[2] = bActorSoundTable[actor->actorType].fly[0];
@@ -1691,7 +1691,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
 
                 if (target->actorID != ACTOR_PARTNER) {
                     if (target->debuff != statusTypeKey) {
-                        target->status = statusTypeKey;
+                        target->statusAfflicted = statusTypeKey;
                     }
                     target->disableEffect->data.disableX->koDuration = 0;
                     target->debuff = statusTypeKey;
@@ -1748,7 +1748,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 if ((s8)duration > 9) {
                     target->staticDuration = 9;
                 }
-                target->status = STATUS_STATIC;
+                target->statusAfflicted = STATUS_STATIC;
                 func_80266DAC(target, 4);
                 create_status_static(target->hudElementDataIndex, STATUS_STATIC);
             }
@@ -1760,7 +1760,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 if ((s8)duration > 9) {
                     target->stoneDuration = 9;
                 }
-                target->status = STATUS_STONE;
+                target->statusAfflicted = STATUS_STONE;
             }
             return TRUE;
         case STATUS_DAZE:
@@ -1770,7 +1770,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 if ((s8)duration > 9) {
                     target->koDuration = 9;
                 }
-                target->status = STATUS_DAZE;
+                target->statusAfflicted = STATUS_DAZE;
             }
             return TRUE;
         case STATUS_TRANSPARENT:
@@ -1780,7 +1780,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 if ((s8)duration > 9) {
                     target->transparentDuration = 9;
                 }
-                target->status = STATUS_TRANSPARENT;
+                target->statusAfflicted = STATUS_TRANSPARENT;
                 create_status_transparent(target->hudElementDataIndex, STATUS_TRANSPARENT);
             }
             return TRUE;

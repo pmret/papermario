@@ -886,7 +886,7 @@ void btl_draw_enemy_health_bars(void) {
                     }
 
                     if (!(enemy->flags & (ACTOR_FLAG_40000 | ACTOR_FLAG_TARGET_ONLY)) &&
-                        ((gBattleStatus.flags1 & BS_FLAGS1_2) || (enemy->flags & ACTOR_FLAG_80000)) &&
+                        ((gBattleStatus.flags1 & BS_FLAGS1_MENU_OPEN) || (enemy->flags & ACTOR_FLAG_80000)) &&
                         is_actor_hp_bar_visible(enemy))
                     {
                         f32 x = enemy->healthBarPosition.x;

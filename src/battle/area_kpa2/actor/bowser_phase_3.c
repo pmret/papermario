@@ -441,7 +441,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(onImmune))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Idle)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, 1)
-            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_ENEMY_FLED, 1)
+            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, 1)
             EVT_CALL(func_8026F60C, 10)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_PEACH_BEAM)
@@ -639,7 +639,7 @@ EvtScript N(onDeath) = {
     EVT_END_IF
     EVT_CALL(ActorSpeak, MSG_CH8_00A9, ACTOR_SELF, 1, ANIM_BattleBowser_DefeatedTalk, ANIM_BattleBowser_DefeatedIdle)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, 1)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_ENEMY_FLED, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, 1)
     EVT_CALL(func_8026F60C, 20)
     EVT_RETURN
     EVT_END

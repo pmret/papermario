@@ -921,7 +921,7 @@ typedef struct BattleStatus {
     /* 0x174 */ struct Actor* currentTurnEnemy;
     /* 0x178 */ s8 moveCategory; ///< 0 = jump, 1 = hammer, 5 = partner, ...
     /* 0x179 */ char unk_179;
-    /* 0x17A */ s16 selectedItemID;
+    /* 0x17A */ s16 moveArgument; // argument provided for move; can be hammer/boots level, itemID, etc
     /* 0x17C */ s16 selectedMoveID;
     /* 0x17E */ s16 currentAttackDamage;
     /* 0x180 */ s16 lastAttackDamage;
@@ -1903,7 +1903,7 @@ typedef struct Actor {
     /* 0x218 */ s8 transparentStatus; /* 0E = yes */
     /* 0x219 */ s8 transparentDuration;
     /* 0x21A */ char unk_21A[2];
-    /* 0x21C */ s8 status;
+    /* 0x21C */ s8 statusAfflicted;
     /* 0x21D */ s8 disableDismissTimer;
     /* 0x21E */ s16 unk_21E;
     /* 0x220 */ s8 isGlowing; // charge amount for goombario

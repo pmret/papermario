@@ -8,7 +8,7 @@ ApiStatus N(func_802A123C_7307DC)(Evt* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
 
     inflict_status(player, STATUS_STATIC, script->varTable[0]);
-    player->status = 0;
+    player->statusAfflicted = 0;
     return ApiStatus_DONE2;
 }
 

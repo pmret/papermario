@@ -1051,7 +1051,7 @@ ApiStatus GetMenuSelection(Evt* script, s32 isInitialCall) {
     s32 outVar3 = *args++;
 
     evt_set_variable(script, outVar1, battleStatus->moveCategory);
-    evt_set_variable(script, outVar2, battleStatus->selectedItemID);
+    evt_set_variable(script, outVar2, battleStatus->moveArgument);
     evt_set_variable(script, outVar3, battleStatus->selectedMoveID);
 
     return ApiStatus_DONE2;

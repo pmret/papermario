@@ -9,8 +9,8 @@ dlabel jtbl_802ABAA8
 .section .text
 
 glabel func_802A5290
-/* 41A020 802A5290 3C02802B */  lui       $v0, %hi(D_802AD604)
-/* 41A024 802A5294 9042D604 */  lbu       $v0, %lo(D_802AD604)($v0)
+/* 41A020 802A5290 3C02802B */  lui       $v0, %hi(BattleSubmenuStratsState)
+/* 41A024 802A5294 9042D604 */  lbu       $v0, %lo(BattleSubmenuStratsState)($v0)
 /* 41A028 802A5298 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* 41A02C 802A529C AFB70034 */  sw        $s7, 0x34($sp)
 /* 41A030 802A52A0 00A0B82D */  daddu     $s7, $a1, $zero

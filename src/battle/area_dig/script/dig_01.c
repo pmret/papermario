@@ -12,7 +12,7 @@ ApiStatus func_80218644_6DE404(Evt* script, s32 isInitialCall) {
 
     battleStatus->moveCategory = BTL_MENU_TYPE_SMASH;
     battleStatus->selectedMoveID = MOVE_HAMMER1;
-    battleStatus->selectedItemID = gCurrentEncounter.hitTier;
+    battleStatus->moveArgument = gCurrentEncounter.hitTier;
     battleStatus->currentTargetListFlags = gMoveTable[MOVE_HAMMER1].flags;
 
     player_create_target_list(player);

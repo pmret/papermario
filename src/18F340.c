@@ -131,8 +131,8 @@ ApiStatus ChoosePlayerCelebrationAnim(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80260DB8(Evt* script, s32 isInitialCall) {
-    gBattleStatus.flags1 |= BS_FLAGS1_ENEMY_FLED;
+ApiStatus SetFledBattleFlag(Evt* script, s32 isInitialCall) {
+    gBattleStatus.flags1 |= BS_FLAGS1_BATTLE_FLED;
     return ApiStatus_DONE2;
 }
 
@@ -169,7 +169,7 @@ ApiStatus func_80260E5C(Evt* script, s32 isInitialCall) {
 ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
-    s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
+    s32 sellValue = gItemTable[battleStatus->moveArgument].sellValue;
     f32 facingAngleSign = 0.0f;
     s32 sleepTime = 0;
     f32 posX, posY, posZ;
@@ -206,7 +206,7 @@ ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
-    s32 sellValue = gItemTable[gBattleStatus.selectedItemID].sellValue;
+    s32 sellValue = gItemTable[gBattleStatus.moveArgument].sellValue;
 
     if (player_team_is_ability_active(gBattleStatus.playerActor, ABILITY_REFUND) && sellValue > 0) {
         hud_element_free(D_8029FBA0);
@@ -297,8 +297,8 @@ ApiStatus func_80261388(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802613A8(Evt* script, s32 isInitialCall) {
-    gBattleStatus.selectedItemID = ITEM_LIFE_SHROOM;
+ApiStatus SetItemAsLifeShroom(Evt* script, s32 isInitialCall) {
+    gBattleStatus.moveArgument = ITEM_LIFE_SHROOM;
     return ApiStatus_DONE2;
 }
 
@@ -1087,7 +1087,7 @@ EvtScript D_80286228 = {
     EVT_CALL(func_80273444, 8, 0, 0)
     EVT_CALL(func_80260DD8)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(func_80260DB8)
+        EVT_CALL(SetFledBattleFlag)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_15E)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, -240, 0, 10)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(16.0))
@@ -1201,7 +1201,7 @@ EvtScript RunAwayStart = {
     EVT_CALL(GetActionSuccess, LVar0)
     EVT_CALL(func_80260DD8)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(func_80260DB8)
+        EVT_CALL(SetFledBattleFlag)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_15E)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, -240, 0, 10)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(16.0))
@@ -1458,7 +1458,7 @@ EvtScript UseLifeShroom = {
     EVT_SET(LVar3, LVar0)
     EVT_SET(LVar4, LVar1)
     EVT_SET(LVar5, LVar2)
-    EVT_CALL(func_802613A8)
+    EVT_CALL(SetItemAsLifeShroom)
     EVT_CALL(base_GiveRefund)
     EVT_IF_GT(LVar0, 0)
         EVT_WAIT(LVar0)

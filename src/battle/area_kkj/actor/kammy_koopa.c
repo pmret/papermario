@@ -519,7 +519,7 @@ EvtScript N(onDeath) = {
     EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 3)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKammy_Anim03)
     EVT_WAIT(50)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_ENEMY_FLED, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, 1)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, 1)
     EVT_CALL(ActorSpeak, MSG_CH8_009B, ACTOR_SELF, 1, ANIM_BattleKammy_Anim03, ANIM_BattleKammy_Anim03)
     EVT_WAIT(10)

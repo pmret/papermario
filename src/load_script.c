@@ -118,7 +118,7 @@ u16 D_80293E04[] = {
 ApiStatus LoadItemScript(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
-    s16 itemID = battleStatus->selectedItemID;
+    s16 itemID = battleStatus->moveArgument;
     ItemData* item = &gItemTable[itemID];
     s32 i = 0;
     s32* itemPtr;
@@ -146,7 +146,7 @@ ApiStatus LoadItemScript(Evt* script, s32 isInitialCall) {
 
     itemPtr = &D_80293B80[0];
     for (i = 0; *itemPtr != ITEM_NONE; i++, itemPtr++) {
-        if (*itemPtr == battleStatus->selectedItemID) {
+        if (*itemPtr == battleStatus->moveArgument) {
             break;
         }
     }
@@ -170,7 +170,7 @@ ApiStatus LoadItemScript(Evt* script, s32 isInitialCall) {
 ApiStatus LoadFreeItemScript(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* actor = battleStatus->playerActor;
-    ItemData* item = &gItemTable[battleStatus->selectedItemID];
+    ItemData* item = &gItemTable[battleStatus->moveArgument];
     SelectableTarget* target;
     s32* itemPtr;
     s32 i;
@@ -186,7 +186,7 @@ ApiStatus LoadFreeItemScript(Evt* script, s32 isInitialCall) {
 
     itemPtr = &D_80293B80[0];
     for (i = 0; *itemPtr != ITEM_NONE; i++, itemPtr++) {
-        if (*itemPtr == battleStatus->selectedItemID){
+        if (*itemPtr == battleStatus->moveArgument){
             break;
         }
     }

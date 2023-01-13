@@ -140,8 +140,8 @@ s32 N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
             }
 
             var_v0_3 = i = D_802A2DF0 / 26; // use of i required to match
-            battleStatus->selectedItemID = N(D_802A2858_732B58)[var_v0_3];
-            script->varTable[0] = battleStatus->selectedItemID;
+            battleStatus->moveArgument = N(D_802A2858_732B58)[var_v0_3];
+            script->varTable[0] = battleStatus->moveArgument;
             free_worker(D_802A2E00);
             for (i = 0; i < ARRAY_COUNT(D_802A2DD8); i++) {
                 hud_element_free(D_802A2DD8[i]);
@@ -210,7 +210,7 @@ ApiStatus N(func_802A1AD8_731DD8)(Evt* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
 
     inflict_status(player, STATUS_STATIC, 3);
-    player->status = 0;
+    player->statusAfflicted = 0;
 
     return ApiStatus_DONE2;
 }
@@ -221,7 +221,7 @@ ApiStatus N(func_802A1B14_731E14)(Evt* script, s32 isInitialCall) {
     ActorPart* part = player->partsTable;
 
     inflict_status(player, STATUS_TRANSPARENT, 3);
-    player->status = 0;
+    player->statusAfflicted = 0;
     part->flags |= ACTOR_PART_FLAG_100;
 
     return ApiStatus_DONE2;
@@ -232,7 +232,7 @@ ApiStatus N(func_802A1B68_731E68)(Evt* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
 
     inflict_status(player, STATUS_SLEEP, 3);
-    player->status = 0;
+    player->statusAfflicted = 0;
 
     return ApiStatus_DONE2;
 }

@@ -1657,11 +1657,11 @@ void create_popup_menu(PopupMenu* popup) {
     popup->titleNumber = 0;
     D_8010D699 = 0;
     D_8010D698 = 1;
-    if (popup->popupType >= 100) {
-        popup->popupType -= 100;
+    if (popup->popupType >= POPUP_MENU_DOUBLE_DIP) {
+        popup->popupType -= POPUP_MENU_DOUBLE_DIP;
         D_8010D699 = 1;
-        if (popup->popupType >= 100) {
-            popup->popupType -= 100;
+        if (popup->popupType >= POPUP_MENU_DOUBLE_DIP) {
+            popup->popupType -= POPUP_MENU_DOUBLE_DIP;
             D_8010D699 = 2;
         }
         D_8010D698 = 0;
@@ -1706,11 +1706,11 @@ void func_800F4FC4(PopupMenu* popup) {
     D_8010D69A = func_800E98D4();
     D_8010D699 = 0;
     D_8010D698 = 1;
-    if (gPopupMenu->popupType >= 100) {
-        gPopupMenu->popupType -= 100;
+    if (gPopupMenu->popupType >= POPUP_MENU_DOUBLE_DIP) {
+        gPopupMenu->popupType -= POPUP_MENU_DOUBLE_DIP;
         D_8010D699 = 1;
-        if (gPopupMenu->popupType >= 100) {
-            gPopupMenu->popupType -= 100;
+        if (gPopupMenu->popupType >= POPUP_MENU_DOUBLE_DIP) {
+            gPopupMenu->popupType -= POPUP_MENU_DOUBLE_DIP;
             D_8010D699 = 2;
         }
         D_8010D698 = 0;
@@ -1750,11 +1750,11 @@ void func_800F513C(PopupMenu* popup) {
     D_8010D69A = func_800E98D4();
     D_8010D699 = 0;
     D_8010D698 = 1;
-    if (gPopupMenu->popupType >= 100) {
-        gPopupMenu->popupType -= 100;
+    if (gPopupMenu->popupType >= POPUP_MENU_DOUBLE_DIP) {
+        gPopupMenu->popupType -= POPUP_MENU_DOUBLE_DIP;
         D_8010D699 = 1;
-        if (gPopupMenu->popupType >= 100) {
-            gPopupMenu->popupType -= 100;
+        if (gPopupMenu->popupType >= POPUP_MENU_DOUBLE_DIP) {
+            gPopupMenu->popupType -= POPUP_MENU_DOUBLE_DIP;
             D_8010D699 = 2;
         }
         D_8010D698 = 0;

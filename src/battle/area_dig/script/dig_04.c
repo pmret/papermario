@@ -11,8 +11,8 @@ ApiStatus func_802187F0_6DE5B0(Evt* script, s32 isInitialCall) {
     SelectableTarget* selectableTarget;
 
     battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
-    battleStatus->selectedItemID = ITEM_THUNDER_RAGE;
-    selectedItemID = battleStatus->selectedItemID;
+    battleStatus->moveArgument = ITEM_THUNDER_RAGE;
+    selectedItemID = battleStatus->moveArgument;
     battleStatus->selectedMoveID = 0;
     battleStatus->currentAttackElement = 0;
     playerData->invItems[0] = selectedItemID;

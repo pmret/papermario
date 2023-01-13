@@ -126,7 +126,7 @@ typedef struct PopupMenu {
     /* 0x290 */ char unk_290[0x4];
     /* 0x294 */ s32 descMsg[32];
     /* 0x314 */ char unk_314[0x4];
-    /* 0x318 */ s32 popupType; // C = keys
+    /* 0x318 */ s32 popupType;
     /* 0x31C */ s32 dipMode;
     /* 0x320 */ s32 titleNumber; // used to display 2/3 with double/triple dip
     /* 0x324 */ s32 numEntries;
