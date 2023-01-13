@@ -58,7 +58,7 @@ dlabel gCurrentCustomModelGfxPtr
 dlabel gLastCreatedEntityIndex
 .space 4
 
-dlabel gBgRenderTypePtr
+dlabel gBackgroundFogModePtr
 .space 4
 
 dlabel gMsgVarImages
@@ -229,10 +229,10 @@ dlabel D_80152220
 dlabel D_80152A20
 .space 0x00000800
 
-dlabel wBgRenderType
+dlabel wBackgroundFogMode
 .space 1
 
-dlabel bBgRenderType
+dlabel bBackgroundFogMode
 .space 1
 
 dlabel D_80153222

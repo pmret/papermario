@@ -11,7 +11,7 @@ API_CALLABLE(N(AdjustFog)) {
     s32 duration;
     s32 mode;
     s32 i;
-    
+
     modelIDs = (ModelIDList*) evt_get_variable(script, *args++);
     colR = evt_get_variable(script, *args++);
     colG = evt_get_variable(script, *args++);
@@ -19,19 +19,19 @@ API_CALLABLE(N(AdjustFog)) {
     duration = evt_get_variable(script, *args++);
     mode = evt_get_variable(script, *args++);
     iterList = modelIDs;
-    
+
     if (isInitialCall) {
         for (i = 0; i < iterList->count; i++) {
             s32 treeIndex = get_model_list_index_from_tree_index(iterList->list[i]);
             Model* mdl = get_model_from_list_index(treeIndex);
-            set_mdl_custom_gfx_set(mdl, -1, 3);
+            set_mdl_custom_gfx_set(mdl, -1, FOG_MODE_3);
             if (mode) {
                 mdl->flags &= ~MODEL_FLAG_ENABLED;
             }
         }
         script->functionTemp[0] = duration;
     }
-    
+
     if (mode) {
         set_background_color_blend(colR, colG, colB,
             (script->functionTemp[0] * 255) / duration);
@@ -39,13 +39,13 @@ API_CALLABLE(N(AdjustFog)) {
         set_background_color_blend(colR, colG, colB,
             255 - ((script->functionTemp[0] * 255) / duration));
     }
-    
+
     script->functionTemp[0]--;
     if (script->functionTemp[0] < 0) {
         for (i = 0; i < iterList->count; i++) {
             s32 treeIndex = get_model_list_index_from_tree_index(iterList->list[i]);
             Model* mdl = get_model_from_list_index(treeIndex);
-            set_mdl_custom_gfx_set(mdl, -1, 0);
+            set_mdl_custom_gfx_set(mdl, -1, FOG_MODE_0);
             if (!mode) {
                 mdl->flags |= MODEL_FLAG_ENABLED;
             }

@@ -624,8 +624,8 @@ void btl_state_update_celebration(void) {
             LevelUpScriptID = LevelUpScriptPtr->id;
             CelebrateSubstateTime = 25;
             gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CREATE_HUD;
-            mdl_set_all_fog_mode(1);
-            *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
+            mdl_set_all_fog_mode(FOG_MODE_1);
+            *gBackgroundFogModePtr = FOG_MODE_1;
             set_background_color_blend(0, 0, 0, 0);
             break;
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CREATE_HUD:

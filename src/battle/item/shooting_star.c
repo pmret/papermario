@@ -35,8 +35,8 @@ ApiStatus N(func_802A1444_71DBB4)(Evt* script, s32 isInitialCall) {
     s32 ret;
 
     if (isInitialCall) {
-        mdl_set_all_fog_mode(1);
-        *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
+        mdl_set_all_fog_mode(FOG_MODE_1);
+        *gBackgroundFogModePtr = FOG_MODE_1;
         set_background_color_blend(0, 0, 0, 0);
         script->functionTemp[0] = 10;
     }

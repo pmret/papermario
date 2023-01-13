@@ -981,7 +981,7 @@ typedef struct TextureHeader {
     /* 0x22 */ u16 mainW;
     /* 0x24 */ u16 auxH;
     /* 0x26 */ u16 mainH;
-    /* 0x28 */ char unk_28;
+    /* 0x28 */ u8 unk_28;
     /* 0x29 */ u8 extraTiles; // 0 - none, 1 - mipmap, 2 - ?, 3 - use aux tile
     /* 0x2A */ u8 colorCombineType : 6;
     /* 0x2A */ u8 colorCombineSubType : 2;

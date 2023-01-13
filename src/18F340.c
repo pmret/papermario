@@ -217,8 +217,8 @@ ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802610CC(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
-        mdl_set_all_fog_mode(1);
-        *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
+        mdl_set_all_fog_mode(FOG_MODE_1);
+        *gBackgroundFogModePtr = FOG_MODE_1;
         set_background_color_blend(0, 0, 0, 0);
         script->functionTemp[0] = 20;
     }
@@ -324,8 +324,8 @@ ApiStatus PlayBattleMerleeOrbFX(Evt* script, s32 isInitialCall) {
 
 ApiStatus BattleMerleeFadeStageToBlack(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
-        mdl_set_all_fog_mode(1);
-        *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
+        mdl_set_all_fog_mode(FOG_MODE_1);
+        *gBackgroundFogModePtr = FOG_MODE_1;
         set_background_color_blend(0, 0, 0, 0);
         script->functionTemp[0] = 25;
     }

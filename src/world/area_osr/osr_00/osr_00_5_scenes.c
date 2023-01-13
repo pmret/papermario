@@ -31,7 +31,7 @@ API_CALLABLE(N(func_802406E0_AACF10)) {
 
     dma_copy(romStart + (s32)rasterOffset, romStart + (s32)rasterOffset + sizeof(N(PeachLetterImg)), &N(PeachLetterImg));
     dma_copy(romStart + (s32)paletteOffset, romStart + (s32)paletteOffset + sizeof(N(PeachLetterPal)), &N(PeachLetterPal));
-    
+
     N(MsgImage).raster   = N(PeachLetterImg);
     N(MsgImage).palette  = N(PeachLetterPal);
     N(MsgImage).width    = charset_peach_letter_png_width;
@@ -50,8 +50,8 @@ EvtScript N(EVS_Scene_ShowInvitation) = {
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 775)
     EVT_CALL(SetCamPitch, CAM_DEFAULT, 20, -19)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(N(UnkFunc27), 2, 0, 3)
-    EVT_CALL(N(UnkFunc27), 1, -1, 3)
+    EVT_CALL(N(UnkFunc27), 2, 0, FOG_MODE_3)
+    EVT_CALL(N(UnkFunc27), 1, -1, FOG_MODE_3)
     EVT_CALL(N(func_80240678_AACEA8), 200, 200, 200, 40, 40, 40)
     EVT_CALL(N(func_802406E0_AACF10))
     EVT_WAIT(15)

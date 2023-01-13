@@ -6272,11 +6272,11 @@ enum BackgroundFlags {
     BACKGROUND_RENDER_STATE_MASK    = 0xF0,
 };
 
-enum BackgroundRenderTypes {
-    BACKGROUND_RENDER_TYPE_0 = 0,
-    BACKGROUND_RENDER_TYPE_1 = 1,
-    BACKGROUND_RENDER_TYPE_2 = 2,
-    BACKGROUND_RENDER_TYPE_3 = 3,
+enum FogModes {
+    FOG_MODE_0 = 0,
+    FOG_MODE_1 = 1,
+    FOG_MODE_2 = 2,
+    FOG_MODE_3 = 3,
 };
 
 enum EncounterStates {

@@ -216,8 +216,8 @@ API_CALLABLE(N(Quizmo_HideWorld)) {
     if (isInitialCall) {
         s32 i;
 
-        mdl_set_all_fog_mode(1);
-        *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_1;
+        mdl_set_all_fog_mode(FOG_MODE_1);
+        *gBackgroundFogModePtr = FOG_MODE_1;
         set_background_color_blend(0, 0, 0, 0);
 
         for (i = 0; i < MAX_NPCS; i++) {
@@ -271,8 +271,8 @@ API_CALLABLE(N(Quizmo_FadeInWorld)) {
     if (script->functionTemp[0] == 0 && script->functionTemp[1] == 0) {
         script->functionTemp[1] = 1;
     } else if (script->functionTemp[1] == 1) {
-        mdl_set_all_fog_mode(0);
-        *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_0;
+        mdl_set_all_fog_mode(FOG_MODE_0);
+        *gBackgroundFogModePtr = FOG_MODE_0;
 
         for (i = 0; i < MAX_NPCS; i++) {
             Npc* npc = get_npc_by_index(i);
