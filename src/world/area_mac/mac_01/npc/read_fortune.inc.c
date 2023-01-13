@@ -1,8 +1,8 @@
 API_CALLABLE(N(func_802440FC_80497C)) {
     if (isInitialCall) {
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o283)), -1, 3);
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o279)), -1, 3);
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_dr_yuka)), -1, 3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o283)), -1, FOG_MODE_3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o279)), -1, FOG_MODE_3);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_dr_yuka)), -1, FOG_MODE_3);
         set_model_env_color_parameters(255, 255, 255, 0, 0, 0);
         script->functionTemp[0] = 255;
     }
@@ -65,9 +65,9 @@ API_CALLABLE(N(func_80244308_804B88)) {
     }
     set_model_env_color_parameters(script->functionTemp[0], script->functionTemp[0], script->functionTemp[0], 0, 0, 0);
     if (script->functionTemp[0] == 255) {
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o283)), -1, 0);
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o279)), -1, 0);
-        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_dr_yuka)), -1, 0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o283)), -1, FOG_MODE_0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_o279)), -1, FOG_MODE_0);
+        set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_dr_yuka)), -1, FOG_MODE_0);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;

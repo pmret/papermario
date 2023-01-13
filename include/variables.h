@@ -56,7 +56,7 @@ extern CollisionData gCollisionData;
 extern s8 D_800A0900;
 extern f32 GravityParamsStartFall[];
 extern s16 FootstepSoundSelector;
-extern u8* gBgRenderTypePtr;
+extern u8* gBackgroundFogModePtr;
 extern u16 D_80151308;
 extern s32 gEntityHideMode;
 

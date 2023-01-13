@@ -99,7 +99,7 @@ typedef ModelLocalVertexCopy* ModelLocalVertexCopyList[16];
 typedef struct ModelTreeInfo {
     /* 0x00 */ u8 modelIndex;
     /* 0x01 */ u8 treeDepth;
-    /* 0x02 */ s8 textureID;
+    /* 0x02 */ u8 textureID;
     /* 0x03 */ char unk_03;
 } ModelTreeInfo; // size = 0x04
 
@@ -142,6 +142,14 @@ typedef enum ShapeTypes {
     SHAPE_TYPE_SPECIAL_GROUP = 10,
 } ShapeTypes;
 
+typedef enum ExtraTileTypes {
+    EXTRA_TILE_NONE = 0,
+    EXTRA_TILE_MIPMAPS = 1,
+    EXTRA_TILE_AUX_SAME_AS_MAIN = 2,
+    EXTRA_TILE_AUX_INDEPENDENT = 3,
+    EXTRA_TILE_4 = 4,
+} ExtraTileTypes;
+
 typedef struct ShapeFile {
     /* 0x00 */ ModelNode* root;
     /* 0x04 */ Vtx_t* vertexTable;
@@ -165,6 +173,8 @@ void init_model_data(void);
 void update_model_animator(s32);
 void update_model_animator_with_transform(s32 animatorID, Mtx* mtx);
 void set_mdl_custom_gfx_set(Model*, s32, u32);
+ModelNodeProperty* get_model_property(ModelNode* node, ModelPropertyKeys key);
+void func_80115498(u32 romOffset, s32 textureID, s32 baseOffset, s32 size);
 s32 step_model_animator(ModelAnimator* animator);
 AnimatorNode* get_animator_node_for_tree_index(ModelAnimator* animator, s32 treeIndex);
 AnimatorNode* get_animator_node_with_id(ModelAnimator* animator, s32 id);

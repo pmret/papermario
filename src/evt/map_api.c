@@ -210,7 +210,7 @@ ApiStatus SetGroupEnabled(Evt* script, s32 isInitialCall) {
     Bytecode var1 = evt_get_variable(script, *args++);
     Bytecode var2 = evt_get_variable(script, *args++);
 
-    func_8011B7C0(var1, 2, var2);
+    set_model_flags(var1, MODEL_FLAG_ENABLED, var2);
     return ApiStatus_DONE2;
 }
 

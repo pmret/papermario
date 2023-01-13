@@ -43,8 +43,8 @@ API_CALLABLE(N(func_80240000_8ABF90)) {
 }
 
 API_CALLABLE(N(func_80240388_8AC318)) {
-    mdl_set_all_fog_mode(3);
-    *gBgRenderTypePtr = BACKGROUND_RENDER_TYPE_3;
+    mdl_set_all_fog_mode(FOG_MODE_3);
+    *gBackgroundFogModePtr = FOG_MODE_3;
     return ApiStatus_DONE2;
 }
 
