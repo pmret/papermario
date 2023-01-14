@@ -34,6 +34,26 @@
     .anim_F = ANIM_WorldClubba_Anim02, \
 }
 
+// used in omo_04, anim_C is different
+#define CLUBBA_ANIMS_ALT \
+{ \
+    .idle   = ANIM_WorldClubba_Anim02, \
+    .walk   = ANIM_WorldClubba_Anim03, \
+    .run    = ANIM_WorldClubba_Anim04, \
+    .chase  = ANIM_WorldClubba_Anim04, \
+    .anim_4 = ANIM_WorldClubba_Anim02, \
+    .anim_5 = ANIM_WorldClubba_Anim02, \
+    .death  = ANIM_WorldClubba_Anim0C, \
+    .hit    = ANIM_WorldClubba_Anim0C, \
+    .anim_8 = ANIM_WorldClubba_Anim11, \
+    .anim_9 = ANIM_WorldClubba_Anim12, \
+    .anim_A = ANIM_WorldClubba_Anim07, \
+    .anim_B = ANIM_WorldClubba_Anim08, \
+    .anim_C = ANIM_WorldClubba_Anim02, \
+    .anim_D = ANIM_WorldClubba_Anim02, \
+    .anim_E = ANIM_WorldClubba_Anim02, \
+    .anim_F = ANIM_WorldClubba_Anim02, \
+}
 #define CLUBBA_MACE_HITBOX(npcID) \
 { \
     .id = npcID, \
