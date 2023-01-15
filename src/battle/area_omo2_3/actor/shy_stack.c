@@ -817,9 +817,9 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_SPIKE_TAUNT)
             EVT_CALL(GetBattleFlags, LVar2)
-            EVT_IF_FLAG(LVar2, BS_FLAGS1_80000)
+            EVT_IF_FLAG(LVar2, BS_FLAGS1_PARTNER_ACTING)
                 EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-                EVT_IF_EQ(LVar2, 183)
+                EVT_IF_EQ(LVar2, MOVE_SPOOK)
                     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
                     EVT_RETURN
                 EVT_END_IF

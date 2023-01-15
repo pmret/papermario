@@ -15,7 +15,7 @@ ApiStatus N(func_802A123C_7217DC)(Evt* script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 0:
             inflict_status(player, STATUS_STONE, script->varTable[0]);
-            player->status = 0;
+            player->statusAfflicted = 0;
             script->functionTemp[1] = 3;
             script->functionTemp[0] = 1;
             break;

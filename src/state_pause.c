@@ -24,7 +24,7 @@ void state_init_pause(void) {
     D_800A0921 = 0;
     D_800A0922 = 0;
     disable_player_input();
-    set_time_freeze_mode(TIME_FREEZE_PARTNER_MENU);
+    set_time_freeze_mode(TIME_FREEZE_POPUP_MENU);
     set_windows_visible(WINDOW_GROUP_PAUSE_MENU);
 }
 

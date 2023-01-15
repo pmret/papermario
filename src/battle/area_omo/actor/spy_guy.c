@@ -131,7 +131,7 @@ EvtScript N(init_802275D4) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80227ABC)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
     EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
-    EVT_CALL(func_8027D75C, ACTOR_SELF, LVar0)
+    EVT_CALL(GetInstigatorValue, ACTOR_SELF, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
         EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022744C)))

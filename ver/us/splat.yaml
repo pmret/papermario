@@ -14456,22 +14456,27 @@ segments:
     start: 0xDAD400
     vram: 0x80240000
     subsegments:
-    - [0xDAD400, c]
-    - [0xDAF240, c]
-    - [0xDAF320, data]
-    - [0xDAF3E0, data]
-    - [0xDB20A0]
+    - [0xDAD400, c, omo_04_0_header]
+    - [0xDAD400, c, omo_04_1_music]
+    - [0xDAD400, c, omo_04_2_main]
+    - [0xDAD400, c, omo_04_3_gizmos]
+    - [0xDAD400, c, omo_04_4_entity]
+    - [0xDAD7A0, c, omo_04_5_npc]
+    - [0xDAF240, c, omo_04_6_scenes]
+    - [0xDAF320]
   - name: omo_05
     dir: world/area_omo/omo_05
     type: code
     start: 0xDB22C0
     vram: 0x80240000
     subsegments:
-    - [0xDB22C0, c]
-    - [0xDB46C0, data]
-    - [0xDB4770, data]
-    - [0xDB7410, data]
-    - [0xDB7560]
+    - [0xDB22C0, c, omo_05_0_header]
+    - [0xDB22C0, c, omo_05_1_music]
+    - [0xDB22C0, c, omo_05_2_main]
+    - [0xDB22C0, c, omo_05_3_gizmos]
+    - [0xDB22C0, c, omo_05_4_npc]
+    - [0xDB46C0, c, omo_05_5_entity]
+    - [0xDB46C0]
   - name: omo_06
     dir: world/area_omo/omo_06
     type: code
@@ -14491,16 +14496,14 @@ segments:
     start: 0xDBD2B0
     vram: 0x80240000
     subsegments:
-    - [0xDBD2B0, c]
-    - [0xDC01D0, c]
-    - [0xDC04D0, c]
-    - [0xDC05B0, data]
-    - [0xDC0670, data]
-    - [0xDC0910, data]
-    - [0xDC0B80, data]
-    - [0xDC30B0, data]
-    - [0xDC3730, data]
-    - [0xDC3E70]
+    - [0xDBD2B0, c, omo_07_0_header]
+    - [0xDBD2B0, c, omo_07_1_music]
+    - [0xDBD2B0, c, omo_07_2_main]
+    - [0xDBD2B0, c, omo_07_3_gizmos]
+    - [0xDBD2B0, c, omo_07_4_npc]
+    - [0xDC01D0, c, omo_07_5_entity]
+    - [0xDC04D0, c, omo_07_6_scenes]
+    - [0xDC05B0]
   - name: omo_08
     dir: world/area_omo/omo_08
     type: code

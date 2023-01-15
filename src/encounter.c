@@ -843,7 +843,7 @@ void update_encounters_neutral(void) {
                                     break;
                             }
                             sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, 0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
-                            enemy->encountered = 2;
+                            enemy->encountered = ENCOUNTER_STATE_NEUTRAL;
                             currentEncounter->currentEncounter = encounter;
                             currentEncounter->currentEnemy = enemy;
                             currentEncounter->firstStrikeType = FIRST_STRIKE_PLAYER;
@@ -1160,7 +1160,7 @@ START_BATTLE:
             }
             enemy = currentEncounter->currentEnemy;
             if (enemy->interactBytecode != NULL) {
-                enemy->encountered = 5;
+                enemy->encountered = ENCOUNTER_TRIGGER_CONVERSATION;
                 script = start_script(enemy->interactBytecode, EVT_PRIORITY_A, 0);
                 enemy->interactScript = script;
                 enemy->interactScriptID = script->id;
@@ -1374,7 +1374,7 @@ void update_encounters_pre_battle(void) {
                 currentEncounter->dizzyAttackDuration = 0;
 
                 enemy = currentEncounter->currentEnemy;
-                currentEncounter->unk_10 = enemy->unk_B5;
+                currentEncounter->instigatorValue = enemy->instigatorValue;
 
                 if (is_ability_active(ABILITY_DIZZY_ATTACK) && currentEncounter->hitType == ENCOUNTER_TRIGGER_SPIN) {
                     currentEncounter->dizzyAttackStatus = 4;
@@ -1938,7 +1938,7 @@ void update_encounters_post_battle(void) {
                 }
 
                 if (enemy->defeatBytecode != NULL) {
-                    script = start_script(enemy->defeatBytecode, 0xA, 0);
+                    script = start_script(enemy->defeatBytecode, EVT_PRIORITY_A, 0);
                     enemy->defeatScript = script;
                     enemy->defeatScriptID = script->id;
                     script->owner1.enemy = enemy;
@@ -2056,7 +2056,7 @@ void update_encounters_post_battle(void) {
                 }
 
                 if (enemy->defeatBytecode != NULL) {
-                    script = start_script(enemy->defeatBytecode, 0xA, 0);
+                    script = start_script(enemy->defeatBytecode, EVT_PRIORITY_A, 0);
                     enemy->defeatScript = script;
                     enemy->defeatScriptID = script->id;
                     script->owner1.enemy = enemy;
@@ -2486,7 +2486,7 @@ void create_encounters(void) {
                     enemy->auxScriptID = 0;
                     enemy->defeatScriptID = 0;
                     enemy->unk_07 = 0;
-                    enemy->unk_B5 = 0;
+                    enemy->instigatorValue = 0;
                     enemy->aiDetectFlags = npcData->aiDetectFlags;
 
 

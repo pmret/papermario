@@ -764,14 +764,14 @@ ApiStatus func_80045798(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_800457C4(Evt* script, s32 isInitialCall) {
-    Enemy* ownerActor = script->owner1.enemy;
+ApiStatus SetOwnerInstigatorValue(Evt* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
 
-    ownerActor->unk_B5 = evt_get_variable(script, *script->ptrReadPos);
+    enemy->instigatorValue = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_800457F8(Evt* script, s32 isInitialCall) {
+ApiStatus SetBattleAsScripted(Evt* script, s32 isInitialCall) {
     gCurrentEncounter.scriptedBattle = TRUE;
     return ApiStatus_DONE2;
 }
@@ -783,16 +783,16 @@ ApiStatus GetEncounterTriggerHitTier(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80045838(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
-    s32 var3 = evt_get_variable(script, *args);
-    Npc* npc = resolve_npc(script, var1);
+    s32 npcID = evt_get_variable(script, *args++);
+    s32 soundID = evt_get_variable(script, *args++);
+    s32 upperSoundFLags = evt_get_variable(script, *args++);
+    Npc* npc = resolve_npc(script, npcID);
 
     if (npc == NULL) {
         return ApiStatus_DONE2;
     }
 
-    ai_enemy_play_sound(npc, var2, var3);
+    ai_enemy_play_sound(npc, soundID, upperSoundFLags);
     return ApiStatus_DONE2;
 }
 

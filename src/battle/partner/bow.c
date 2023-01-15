@@ -284,7 +284,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_33)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(DoPartnerHit)
-        EVT_CASE_EQ(EVENT_RECOVER_PARTNER)
+        EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Idle)
             EVT_SET_CONST(LVar2, ANIM_BattleBow_Run)

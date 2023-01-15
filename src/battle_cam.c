@@ -121,7 +121,7 @@ EvtScript CamPreset_A = {
     EVT_END
 };
 
-EvtScript D_80280EB8 = {
+EvtScript EVS_OnBattleInit = {
     EVT_CALL(SetCamPerspective, 1, 6, 25, 16, 1024)
     EVT_CALL(SetCamViewport, 1, 12, 20, 296, 200)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)

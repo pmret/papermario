@@ -405,7 +405,7 @@ EvtScript N(handleEvent_80219050) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_TAUNT)
             EVT_CALL(GetBattleFlags, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_80000)
+            EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
                 EVT_CALL(AfflictActor, 0, 9, 3)
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)

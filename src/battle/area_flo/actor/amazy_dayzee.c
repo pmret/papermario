@@ -352,7 +352,7 @@ EvtScript N(flee) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_ENEMY_FLED, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_BATTLE_FLED, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN

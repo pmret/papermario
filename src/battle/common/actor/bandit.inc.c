@@ -230,7 +230,7 @@ EvtScript N(dropCoin) = {
             EVT_CALL(PlaySoundAtActor, LVarA, SOUND_212)
             EVT_LOOP(0)
                 EVT_CALL(GetBattleFlags, LVar1)
-                EVT_IF_FLAG(LVar1, BS_FLAGS1_80000)
+                EVT_IF_FLAG(LVar1, BS_FLAGS1_PARTNER_ACTING)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_IF_NOT_FLAG(LVar1, BS_FLAGS1_100)
@@ -494,7 +494,7 @@ EvtScript N(takeTurn) = {
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
         EVT_CALL(SetGoalPos, ACTOR_SELF, 300, 0, 0)
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-        EVT_CALL(SetBattleFlagBits, BS_FLAGS1_ENEMY_FLED, 1)
+        EVT_CALL(SetBattleFlagBits, BS_FLAGS1_BATTLE_FLED, 1)
         EVT_CALL(func_8027D32C, ACTOR_SELF)
         EVT_CALL(RemoveActor, ACTOR_SELF)
         EVT_RETURN

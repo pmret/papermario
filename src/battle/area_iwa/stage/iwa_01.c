@@ -33,9 +33,9 @@ Stage NAMESPACE = {
     .preBattle = &N(beforeBattle_80220860),
     .postBattle = &N(afterBattle_80220894),
     .foregroundModelList = N(foregroundModelList_802208A4),
-    .specialFormationSize = 1,
-    .specialFormation = &N(specialFormation_802208E4),
-    .unk_24 = 0x200,
+    .stageEnemyCount = 1,
+    .stageFormation = &N(specialFormation_802208E4),
+    .stageEnemyChance = 512,
 };
 
 Vec3i N(vector3D_802208D8) = { 116, 0, -30 };

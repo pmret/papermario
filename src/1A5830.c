@@ -473,7 +473,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         battleStatus->lastAttackDamage = 0;
         hitResult = HIT_RESULT_HIT;
         if (!(targetPart->flags & ACTOR_PART_FLAG_2000)) {
-            if (!(gBattleStatus.flags1 & BS_FLAGS1_2000000)) {
+            if (!(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
                 if (!(target->flags & ACTOR_FLAG_NO_DMG_APPLY)) {
                     target->currentHP -= damage;
                 }
@@ -3117,7 +3117,7 @@ ApiStatus AfflictActor(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8027D75C(Evt* script, s32 isInitialCall) {
+ApiStatus GetInstigatorValue(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 outVar = *args++;
@@ -3126,7 +3126,7 @@ ApiStatus func_8027D75C(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    evt_set_variable(script, outVar, get_actor(actorID)->unk_208);
+    evt_set_variable(script, outVar, get_actor(actorID)->instigatorValue);
     return ApiStatus_DONE2;
 }
 
@@ -3319,8 +3319,8 @@ ApiStatus CopyStatusEffects(Evt* script, s32 isInitialCall) {
     inflict_status(actorTo, actorFrom->koStatus, actorFrom->koDuration);
     inflict_status(actorTo, actorFrom->transparentStatus, actorFrom->transparentDuration);
 
-    actorFrom->status = 0;
-    actorTo->status = 0;
+    actorFrom->statusAfflicted = 0;
+    actorTo->statusAfflicted = 0;
 
     return ApiStatus_DONE2;
 }

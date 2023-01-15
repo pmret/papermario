@@ -46,7 +46,7 @@ ApiStatus PollMusicEvents(Evt* script, s32 isInitialCall) {
                 kill_script_by_ID(RunningMusicEventIDs[musicEventID]);
             }
             if (newSource != NULL) {
-                Evt* newEvt = start_script(newSource, 1, 0);
+                Evt* newEvt = start_script(newSource, EVT_PRIORITY_1, 0);
                 RunningMusicEvents[musicEventID] = newEvt;
                 RunningMusicEventIDs[musicEventID] = newEvt->id;
             }

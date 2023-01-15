@@ -405,7 +405,7 @@ replace_funcs = {
     "func_8027D32C"             :{0:"ActorIDs"},
     "func_8027D434"             :{0:"ActorIDs"},
     "func_8027D4C8"             :{0:"ActorIDs"},
-    "func_8027D75C"             :{0:"ActorIDs"},
+    "GetInstigatorValue"             :{0:"ActorIDs"},
     "func_802CFD30"             :{0:"NpcIDs"},
     "func_802CFE2C"             :{0:"NpcIDs"},
     "func_802D2520"             :{0:"PlayerAnims"},

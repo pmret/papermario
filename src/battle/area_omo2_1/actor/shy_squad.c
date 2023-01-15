@@ -901,7 +901,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_SPIKE_TAUNT)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_CALL(GetBattleFlags, LVar2)
-            EVT_IF_FLAG(LVar2, BS_FLAGS1_80000)
+            EVT_IF_FLAG(LVar2, BS_FLAGS1_PARTNER_ACTING)
                 EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
                 EVT_IF_EQ(LVar2, MOVE_SPOOK)
                     EVT_SET(LVar1, ANIM_ShySquadGuy_Anim01)

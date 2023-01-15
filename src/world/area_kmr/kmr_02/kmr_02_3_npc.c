@@ -32,6 +32,8 @@ API_CALLABLE(N(func_80242014_8B2084)) {
 #include "world/common/npc/GoombaFamily_Wander.inc.c"
 #include "world/common/npc/GoombaFamily.inc.c"
 
+#include "world/common/enemy/complete/Kammy.h"
+
 StationaryAISettings N(AISettings_Kammy) = {
     .playerSearchInterval = -1,
     .chaseRadius = 300.0f,
@@ -1958,11 +1960,7 @@ StaticNpc N(NpcData_Kammy) = {
     .yaw = 90,
     .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Kammy),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NPC_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -1975,24 +1973,7 @@ StaticNpc N(NpcData_Kammy) = {
             .detectSize = { 100 },
         }
     },
-    .animations = {
-        .idle   = ANIM_WorldKammy_Anim01,
-        .walk   = ANIM_WorldKammy_Anim02,
-        .run    = ANIM_WorldKammy_Anim03,
-        .chase  = ANIM_WorldKammy_Anim03,
-        .anim_4 = ANIM_WorldKammy_Anim01,
-        .anim_5 = ANIM_WorldKammy_Anim01,
-        .death  = ANIM_WorldKammy_Anim00,
-        .hit    = ANIM_WorldKammy_Anim00,
-        .anim_8 = ANIM_WorldKammy_Anim03,
-        .anim_9 = ANIM_WorldKammy_Anim03,
-        .anim_A = ANIM_WorldKammy_Anim03,
-        .anim_B = ANIM_WorldKammy_Anim03,
-        .anim_C = ANIM_WorldKammy_Anim03,
-        .anim_D = ANIM_WorldKammy_Anim03,
-        .anim_E = ANIM_WorldKammy_Anim03,
-        .anim_F = ANIM_WorldKammy_Anim03,
-    },
+    .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),
 };
 

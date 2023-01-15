@@ -302,7 +302,7 @@ block_17:
                 return;
             }
             create_popup_menu(popup);
-            set_time_freeze_mode(TIME_FREEZE_PARTNER_MENU);
+            set_time_freeze_mode(TIME_FREEZE_POPUP_MENU);
             if (*partnerActionState == PARTNER_ACTION_NONE) {
                 set_action_state(ACTION_STATE_IDLE);
             }

@@ -8,6 +8,6 @@
 
 #include "world/common/enemy/ai/RangedAttackAI.inc.c"
 
-#include "world/common/todo/SetNpcB5_3.inc.c"
+#include "world/common/todo/SetInstigatorValue_3.inc.c"
 
 #include "world/common/todo/GetEncounterEnemyIsOwner.inc.c"

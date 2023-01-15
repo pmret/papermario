@@ -10,7 +10,7 @@ ApiStatus func_802186E0_6DE4A0(Evt* script, s32 isInitialCall) {
 
     battleStatus->moveCategory = BTL_MENU_TYPE_JUMP;
     battleStatus->selectedMoveID = MOVE_POWER_BOUNCE;
-    battleStatus->selectedItemID = gCurrentEncounter.hitTier;
+    battleStatus->moveArgument = gCurrentEncounter.hitTier;
     battleStatus->currentTargetListFlags = gMoveTable[MOVE_POWER_BOUNCE].flags;
 
     player_create_target_list(player);

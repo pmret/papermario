@@ -161,7 +161,7 @@ ActorBlueprint NAMESPACE = {
 
 EvtScript N(init) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
-    EVT_CALL(func_8027D75C, ACTOR_SELF, LVar1)
+    EVT_CALL(GetInstigatorValue, ACTOR_SELF, LVar1)
     EVT_IF_EQ(LVar0, 1)
         EVT_IF_EQ(LVar1, 1)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_SPIKY))

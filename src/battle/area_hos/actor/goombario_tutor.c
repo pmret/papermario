@@ -4,6 +4,7 @@
 #include "battle/action_cmd/jump.h"
 #include "battle/action_cmd.h"
 #include "sprite/npc/BattleGoombario.h"
+#include "sprite/npc/Twink.h"
 
 #define NAMESPACE b_area_hos_goombario_tutor
 
@@ -99,7 +100,7 @@ EvtScript N(init_80219160) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80219444)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802191D0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802191E0)))
-    EVT_CALL(SetActorVar, -127, 0, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
     EVT_EXEC(N(80219C74))
     EVT_RETURN
     EVT_END
@@ -283,7 +284,7 @@ ApiStatus func_80218000_47F0B0(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript N(80219C74) = {
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_2000000, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, 1)
     EVT_CALL(func_802535B4, 0)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
     EVT_WAIT(15)
@@ -294,9 +295,9 @@ EvtScript N(80219C74) = {
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 10, FALSE, FALSE, FALSE)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_0019, 256, 1, 2097161, 2097157)
+    EVT_CALL(ActorSpeak, MSG_HOS_0019, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(func_8026E020, 1)
+    EVT_CALL(SetBattleMenuDisableFlags, BTL_MENU_DISABLED_JUMP)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -304,7 +305,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, -73, 40, 202)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 20, 10)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_001A, 256, 1, 2097161, 2097157)
+    EVT_CALL(ActorSpeak, MSG_HOS_001A, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
@@ -320,7 +321,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 20, 10)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
     EVT_CALL(WaitForState, BATTLE_STATE_0)
-    EVT_CALL(SetBattleFlagBits2, 512, 1)
+    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_200, 1)
     EVT_LOOP(0)
         EVT_CALL(GetActionCommandMode, LVar0)
         EVT_IF_NE(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
@@ -329,22 +330,22 @@ EvtScript N(80219C74) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_001B, 256, 1, 2097161, 2097157)
+    EVT_CALL(ActorSpeak, MSG_HOS_001B, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_LOOP(0)
-        EVT_CALL(CheckButtonDown, 32768, LVar0)
+        EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_LOOP(0)
-        EVT_CALL(CheckButtonPress, 32768, LVar0)
+        EVT_CALL(CheckButtonPress, BUTTON_A, LVar0)
         EVT_IF_EQ(LVar0, 1)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(EndActorSpeech, 256, 1, 2097161, 2097157)
+    EVT_CALL(EndActorSpeech, 256, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(SetActionSuccess, 1)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
@@ -352,13 +353,13 @@ EvtScript N(80219C74) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_WAIT(15)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_001D, 256, 1, 2097161, 2097157)
+    EVT_CALL(ActorSpeak, MSG_HOS_001D, 256, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(WaitForState, BATTLE_STATE_9)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_WAIT(15)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_001E, 512, 1, 589839, 589825)
+    EVT_CALL(ActorSpeak, MSG_HOS_001E, BS_FLAGS2_200, 1, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
     EVT_CALL(WaitForState, BATTLE_STATE_0)
@@ -370,22 +371,22 @@ EvtScript N(80219C74) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_001F, 256, 1, 2097161, 2097157)
+    EVT_CALL(ActorSpeak, MSG_HOS_001F, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_LOOP(0)
-        EVT_CALL(CheckButtonDown, 32768, LVar0)
+        EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_LOOP(0)
-        EVT_CALL(CheckButtonPress, 32768, LVar0)
+        EVT_CALL(CheckButtonPress, BUTTON_A, LVar0)
         EVT_IF_EQ(LVar0, 1)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(EndActorSpeech, 256, 1, 2097161, 2097157)
+    EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(SetActionSuccess, 1)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_BLOCK)
@@ -394,14 +395,14 @@ EvtScript N(80219C74) = {
     EVT_WAIT(15)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_0020, 256, 1, 2097161, 2097157)
+    EVT_CALL(ActorSpeak, MSG_HOS_0020, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
-    EVT_CALL(func_8026E020, 2)
+    EVT_CALL(SetBattleMenuDisableFlags, BTL_MENU_DISABLED_SMASH)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_0022, 256, 1, 2097161, 2097157)
+    EVT_CALL(ActorSpeak, MSG_HOS_0022, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_LOOP(0)
         EVT_CALL(CheckButtonDown, 262144, LVar0)
         EVT_IF_EQ(LVar0, 0)
@@ -416,7 +417,7 @@ EvtScript N(80219C74) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(EndActorSpeech, 256, 1, 2097161, 2097157)
+    EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
     EVT_CALL(WaitForState, BATTLE_STATE_0)
@@ -432,7 +433,7 @@ EvtScript N(80219C74) = {
             EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_BLOCK)
             EVT_CALL(PauseTakeTurn, 0)
             EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-            EVT_CALL(ActorSpeak, MSG_HOS_0023, 256, 1, 2097161, 2097157)
+            EVT_CALL(ActorSpeak, MSG_HOS_0023, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
             EVT_LOOP(0)
                 EVT_CALL(CheckButtonPress, 262144, LVar0)
                 EVT_IF_EQ(LVar0, 1)
@@ -440,7 +441,7 @@ EvtScript N(80219C74) = {
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(EndActorSpeech, 256, 1, 2097161, 2097157)
+            EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
             EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
             EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
             EVT_CALL(ResumeTakeTurn, 0)
@@ -455,7 +456,7 @@ EvtScript N(80219C74) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_0024, 256, 1, 2097161, 2097157)
+    EVT_CALL(ActorSpeak, MSG_HOS_0024, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_LOOP(0)
         EVT_CALL(CheckButtonDown, 262144, LVar0)
         EVT_IF_EQ(LVar0, 0)
@@ -463,7 +464,7 @@ EvtScript N(80219C74) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(EndActorSpeech, 256, 1, 2097161, 2097157)
+    EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(SetActionSuccess, 1)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
@@ -471,24 +472,24 @@ EvtScript N(80219C74) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_WAIT(15)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_0025, 256, 1, 2097161, 2097157)
+    EVT_CALL(ActorSpeak, MSG_HOS_0025, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_NO_ATTACK, 1)
     EVT_CALL(WaitForState, BATTLE_STATE_0)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
-    EVT_CALL(ShowBattleChoice, 1966109)
-    EVT_CALL(EndActorSpeech, 256, 1, 2097161, 2097157)
+    EVT_CALL(ShowBattleChoice, MSG_Choice_001D)
+    EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ActorSpeak, MSG_HOS_0027, 256, 1, 2097161, 2097157)
+        EVT_CALL(ActorSpeak, MSG_HOS_0027, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_0028, 256, 1, 2097161, 2097157)
+    EVT_CALL(ActorSpeak, MSG_HOS_0028, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetActorVar, -127, 0, 0)
-    EVT_CALL(SetBattleFlagBits2, 512, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_200, 0)
     EVT_LABEL(10)
-    EVT_CALL(func_8026E020, 131)
+    EVT_CALL(SetBattleMenuDisableFlags, BTL_MENU_DISABLED_JUMP | BTL_MENU_DISABLED_SMASH | BTL_MENU_DISABLED_STRATEGIES)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -501,14 +502,14 @@ EvtScript N(80219C74) = {
     EVT_CALL(func_80269524, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(-1)
-            EVT_CALL(ActorSpeak, MSG_HOS_002A, 256, 1, 2097161, 2097157)
+            EVT_CALL(ActorSpeak, MSG_HOS_002A, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
         EVT_CASE_EQ(0)
-            EVT_CALL(ActorSpeak, MSG_HOS_002B, 256, 1, 2097161, 2097157)
+            EVT_CALL(ActorSpeak, MSG_HOS_002B, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
         EVT_CASE_EQ(1)
-            EVT_CALL(ActorSpeak, MSG_HOS_0029, 256, 1, 2097161, 2097157)
+            EVT_CALL(ActorSpeak, MSG_HOS_0029, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetEnemyHP, 512, 99)
+    EVT_CALL(SetEnemyHP, ACTOR_ENEMY0, 99)
     EVT_CALL(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_NO_ATTACK, 0)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
     EVT_CALL(WaitForState, BATTLE_STATE_END_TURN)
@@ -516,18 +517,18 @@ EvtScript N(80219C74) = {
     EVT_CALL(GetBlockResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(-1)
-            EVT_CALL(ActorSpeak, MSG_HOS_002A, 256, 1, 2097161, 2097157)
+            EVT_CALL(ActorSpeak, MSG_HOS_002A, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
         EVT_CASE_EQ(0)
-            EVT_CALL(ActorSpeak, MSG_HOS_002B, 256, 1, 2097161, 2097157)
+            EVT_CALL(ActorSpeak, MSG_HOS_002B, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
         EVT_CASE_EQ(1)
-            EVT_CALL(ActorSpeak, MSG_HOS_0029, 256, 1, 2097161, 2097157)
+            EVT_CALL(ActorSpeak, MSG_HOS_0029, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
     EVT_GOTO(10)
     EVT_LABEL(99)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_002C, 256, 1, 2097161, 2097157)
+    EVT_CALL(ActorSpeak, MSG_HOS_002C, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_LABEL(100)
     EVT_CALL(WaitForState, BATTLE_STATE_0)
     EVT_CALL(SetBattleState, 30)
