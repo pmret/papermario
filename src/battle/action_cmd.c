@@ -99,7 +99,7 @@ ApiStatus LoadActionCommand(Evt* script, s32 isInitialCall) {
 }
 
 s32 adjust_action_command_difficulty(s32 arg0) {
-    if (!(gBattleStatus.flags1 & BS_FLAGS1_80000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_PARTNER_ACTING)) {
         arg0 -= is_ability_active(ABILITY_DODGE_MASTER) * 3;
     }
 
@@ -259,12 +259,12 @@ void action_command_init_status(void) {
     actionCommandStatus->autoSucceed = FALSE;
     actionCommandStatus->berserkerEnabled = FALSE;
 
-    if (!(gBattleStatus.flags1 & BS_FLAGS1_80000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_PARTNER_ACTING)) {
         if (is_ability_active(ABILITY_RIGHT_ON)) {
             actionCommandStatus->autoSucceed = TRUE;
         }
 
-        if (!(gBattleStatus.flags1 & BS_FLAGS1_80000) && is_ability_active(ABILITY_BERSERKER)) {
+        if (!(gBattleStatus.flags1 & BS_FLAGS1_PARTNER_ACTING) && is_ability_active(ABILITY_BERSERKER)) {
             actionCommandStatus->showHud = FALSE;
             actionCommandStatus->berserkerEnabled = TRUE;
 
@@ -548,7 +548,7 @@ s32 check_block_input(s32 buttonMask) {
 
     battleStatus->blockResult = 0; // Fail
 
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL_BLOCK && (battleStatus->flags1 & BS_FLAGS1_2000000)) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL_BLOCK && (battleStatus->flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
         battleStatus->blockResult = 1;
         return TRUE;
     }
@@ -568,7 +568,7 @@ s32 check_block_input(s32 buttonMask) {
     blockWindow = 3;
     mashWindow = 10;
 
-    if (!(gBattleStatus.flags1 & BS_FLAGS1_80000) && is_ability_active(ABILITY_DODGE_MASTER)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_PARTNER_ACTING) && is_ability_active(ABILITY_DODGE_MASTER)) {
         blockWindow = 5;
     }
 

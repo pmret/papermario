@@ -149,8 +149,8 @@ s32 N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
             }
 
             var_v0_3 = i = D_802A25E8 / 26; // use of i required to match
-            battleStatus->selectedItemID = D_802A25FC[D_802A25E8 / 26];
-            script->varTable[0] = battleStatus->selectedItemID;
+            battleStatus->moveArgument = D_802A25FC[D_802A25E8 / 26];
+            script->varTable[0] = battleStatus->moveArgument;
             free_worker(D_802A25F8);
             for (i = 0; i < ARRAY_COUNT(D_802A25C8); i++) {
                 hud_element_free(D_802A25C8[i]);

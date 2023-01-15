@@ -338,7 +338,7 @@ typedef struct Enemy {
     /* 0xAD */ char unk_AD[3];
     /* 0xB0 */ u32 aiFlags;
     /* 0xB4 */ s8 aiPaused;
-    /* 0xB5 */ s8 unk_B5;
+    /* 0xB5 */ s8 instigatorValue; // value is passed to first actor in formation if a battle is triggered with this enemy
     /* 0xB6 */ char unk_B6[2];
     /* 0xB8 */ EvtScript* unk_B8; // some bytecode
     /* 0xBC */ struct Evt* unk_BC; // some script
@@ -376,7 +376,7 @@ typedef struct EncounterStatus {
     /* 0x00C */ u8 damageTaken; /* valid after battle */
     /* 0x00D */ char unk_0D;
     /* 0x00E */ s16 coinsEarned; /* valid after battle */
-    /* 0x010 */ char unk_10;
+    /* 0x010 */ s8 instigatorValue;
     /* 0x011 */ s8 allowFleeing;
     /* 0x012 */ s8 scriptedBattle; ///< battle started by StartBattle but not by encounter
     /* 0x013 */ s8 dropWhackaBump;

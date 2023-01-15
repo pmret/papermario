@@ -18,16 +18,16 @@ extern MoveData gMoveTable[185];
 
 extern s32 gBattleState;
 extern BattleStatus gBattleStatus;
-extern s32 D_800DC4D0;
+extern s32 gLastDrawBattleState;
 extern s32 D_800DC4D4;
 extern s32 gDefeatedBattleSubstate;
 extern s32 gBattleSubState;
 extern s32 gDefeatedBattleState;
 extern s32 gCurrentBattleID;
 extern s32 D_800DC4E0;
-extern s32 D_800DC4EC;
+extern s32 gCurrentStageID;
 extern s32 D_800DC4F0;
-extern struct Battle* D_800DC4F4;
+extern struct Battle* gOverrideBattlePtr;
 extern s32 D_800DC4F8;
 
 extern s32 D_802DAC98;

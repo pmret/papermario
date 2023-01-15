@@ -123,7 +123,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(EVENT_33)
-        EVT_CASE_EQ(EVENT_RECOVER_PARTNER)
+        EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Idle)
             EVT_SET_CONST(LVar2, ANIM_Goompa_Run)

@@ -340,7 +340,7 @@ EvtScript N(802250E4) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(GetLastDamage, -127, LVar1)
         EVT_CALL(GetBattleFlags, LVar2)
-        EVT_IF_NOT_FLAG(LVar2, BS_FLAGS1_80000)
+        EVT_IF_NOT_FLAG(LVar2, BS_FLAGS1_PARTNER_ACTING)
             EVT_IF_NE(LVar1, 0)
                 EVT_CALL(SetActorVar, -127, 1, 1)
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)

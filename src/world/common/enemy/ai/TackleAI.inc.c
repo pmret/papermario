@@ -43,7 +43,7 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         enemy->varTable[6] = npc->collisionHeight;
         enemy->varTable[8] = 0;
-        enemy->unk_B5 = 0;
+        enemy->instigatorValue = 0;
         enemy->aiFlags |= ENEMY_AI_FLAG_8;
     }
 
@@ -103,11 +103,11 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
                 if (rand_int(100) < 33) {
                     if (enemy->varTable[8] != 0) {
                         enemy->varTable[8] = 0;
-                        enemy->unk_B5 = 0;
+                        enemy->instigatorValue = 0;
                         npc->currentAnim = ANIM_BonyBeetle_Anim2F;
                     } else {
                         enemy->varTable[8] = 1;
-                        enemy->unk_B5 = 1;
+                        enemy->instigatorValue = 1;
                         npc->currentAnim = ANIM_BonyBeetle_Anim2E;
                     }
                     enemy->varTable[9] = 7;
@@ -135,9 +135,9 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
 
     if (enemy->varTable[7] == 6) {
         if (enemy->varTable[8] != 0) {
-            enemy->unk_B5 = 1;
+            enemy->instigatorValue = 1;
         } else {
-            enemy->unk_B5 = 0;
+            enemy->instigatorValue = 0;
         }
         if (enemy->varTable[8] != 0) {
             switch (npc->currentAnim) {

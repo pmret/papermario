@@ -6,7 +6,7 @@
 #include "sprite.h"
 
 extern s32 D_800DC060;
-extern StageListRow* D_800DC064;
+extern StageListRow* gCurrentStagePtr;
 
 BattleArea gBattleAreas[] = {
     [BTL_AREA_KMR_PART_1] = {
@@ -281,16 +281,16 @@ void reset_battle_status(void) {
     gBattleState = BATTLE_STATE_0;
     D_800DC4E0 = 1;
     gBattleSubState = BTL_SUBSTATE_INIT;
-    D_800DC4D0 = BATTLE_STATE_0;
+    gLastDrawBattleState = BATTLE_STATE_0;
     D_800DC4F0 = 0;
     D_800DC4D4 = 0;
-    D_800DC4FC = NULL;
+    gCurrentBattlePtr = NULL;
     D_800DC4F8 = 0;
     gCurrentBattleID = 0;
-    D_800DC064 = NULL;
+    gCurrentStagePtr = NULL;
     D_800DC060 = 0;
-    D_800DC4EC = 0;
-    D_800DC4F4 = NULL;
+    gCurrentStageID = 0;
+    gOverrideBattlePtr = NULL;
 }
 
 void ALT_reset_battle_status(void) {
@@ -307,32 +307,32 @@ void load_battle_section(void) {
 
     dma_copy(battleArea->dmaStart, battleArea->dmaEnd, battleArea->dmaDest);
 
-    D_800DC4FC = &(*battleArea->battles)[battleIdx];
+    gCurrentBattlePtr = &(*battleArea->battles)[battleIdx];
 
-    if (D_800DC4EC < 0) {
-        D_800DC064 = NULL;
+    if (gCurrentStageID < 0) {
+        gCurrentStagePtr = NULL;
     } else {
-        D_800DC064 = &(*battleArea->stages)[D_800DC4EC];
+        gCurrentStagePtr = &(*battleArea->stages)[gCurrentStageID];
     }
 
     btl_set_state(BATTLE_STATE_NORMAL_START);
-    D_800DC4D0 = BATTLE_STATE_0;
+    gLastDrawBattleState = BATTLE_STATE_0;
 }
 
 void load_battle(s32 battleID) {
     gCurrentBattleID = battleID;
     set_game_mode(GAME_MODE_BATTLE);
     gBattleState = BATTLE_STATE_0;
-    D_800DC4D0 = BATTLE_STATE_0;
+    gLastDrawBattleState = BATTLE_STATE_0;
     gBattleSubState = BTL_SUBSTATE_INIT;
 }
 
-void set_battle_stage(s32 arg0) {
-    D_800DC4EC = arg0;
+void set_battle_stage(s32 stageID) {
+    gCurrentStageID = stageID;
 }
 
 void set_battle_formation(Battle* battle) {
-    D_800DC4F4 = battle;
+    gOverrideBattlePtr = battle;
 }
 
 void func_80072CEC(f32 arg0, f32 arg1, f32 arg2) {
@@ -501,8 +501,8 @@ void load_demo_battle(u32 index) {
 
     evt_set_variable(NULL, GF_Tutorial_SwapTurnOrder, 1);
     gCurrentEncounter.unk_07 = 0;
-    gCurrentEncounter.unk_10 = 0;
-    set_battle_stage(-1);
+    gCurrentEncounter.instigatorValue = 0;
+    set_battle_stage(BTL_STAGE_DEFAULT);
     gGameStatusPtr->demoFlags |= 1;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
     load_battle(battleID);

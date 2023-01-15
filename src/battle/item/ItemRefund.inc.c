@@ -7,7 +7,7 @@ static s32 itemIcon;
 ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = gBattleStatus.playerActor;
-    s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
+    s32 sellValue = gItemTable[battleStatus->moveArgument].sellValue;
     f32 posX;
     f32 posY = player->currentPos.y + player->size.y;
     f32 posZ;
@@ -51,7 +51,7 @@ ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
+    s32 sellValue = gItemTable[battleStatus->moveArgument].sellValue;
 
     if (player_team_is_ability_active(battleStatus->playerActor, ABILITY_REFUND) && sellValue > 0) {
         hud_element_free(itemIcon);

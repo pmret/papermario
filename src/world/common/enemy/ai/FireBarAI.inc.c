@@ -150,7 +150,7 @@ void N(FireBarAI_Callback)(FireBarData* data, s32 mode) {
         case FIRE_BAR_SPEED_UP:
             data->rotationRate *= 1.12f;
             if (data->soundIndex == 10) {
-                Evt* script = start_script(&N(EVS_FireBar_Defeated), 1, 0);
+                Evt* script = start_script(&N(EVS_FireBar_Defeated), EVT_PRIORITY_1, 0);
                 script->varTable[0] = data->firstNpc;
                 script->varTable[1] = data->npcCount;
                 data->flags |= 2;

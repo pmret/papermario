@@ -779,14 +779,15 @@ MapConfig pra_maps[] = {
 };
 
 /// Shy Guy's Toy Box
+#include "area_omo/omo.h"
 MapConfig omo_maps[] = {
     { MAP_UNSPLIT(omo_01, 0x80240C40), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(omo_02, 0x80242BD0), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(omo_03, 0x80240900), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_04, 0x80241F30), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_05, 0x80242440), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_04), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_05), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(omo_06, 0x80240B80), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_07, 0x80243310), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_07), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(omo_08, 0x80240E10), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(omo_09, 0x80243700), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(omo_10, 0x802408B0), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },

@@ -488,11 +488,11 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_SPIN_SMASH_HIT)
         EVT_CASE_OR_EQ(EVENT_SPIN_SMASH_LAUNCH_HIT)
             EVT_CALL(GetBattleFlags, LVar2)
-            EVT_IF_FLAG(LVar2, BS_FLAGS1_80000)
+            EVT_IF_FLAG(LVar2, BS_FLAGS1_PARTNER_ACTING)
                 EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-                EVT_IF_EQ(LVar2, 183)
+                EVT_IF_EQ(LVar2, MOVE_SPOOK)
                     EVT_SET(LVar0, 2)
-                    EVT_SET(LVar1, 7340033)
+                    EVT_SET(LVar1, ANIM_StiltGuy_Anim01)
                     EVT_EXEC_WAIT(DoImmune)
                     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
                     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
@@ -599,7 +599,7 @@ EvtScript N(handleEvent) = {
 
 EvtScript N(check_fall_off) = {
     EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_80000)
+    EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
         EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
             EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
         EVT_END_IF
@@ -623,7 +623,7 @@ EvtScript N(check_fall_off) = {
 
 EvtScript N(check_fall_off_2) = {
     EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_80000)
+    EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
         EVT_IF_FLAG(LVarF, DAMAGE_TYPE_JUMP)
             EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)

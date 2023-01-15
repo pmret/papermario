@@ -35,7 +35,7 @@ ApiStatus N(KoopaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->collisionHeight = enemy->varTable[6];
-        enemy->unk_B5 = 0;
+        enemy->instigatorValue = 0;
         enemy->varTable[8] = 0;
 
         if (!enemy->territory->patrol.isFlying) {

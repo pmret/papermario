@@ -850,13 +850,13 @@ typedef struct BattleStatus {
     /* 0x049 */ s8 unk_49;
     /* 0x04A */ s8 unk_4A;
     /* 0x04B */ s8 unk_4B;
-    /* 0x04C */ s8 unk_4C[16];
-    /* 0x05C */ s8 unk_5C[16];
+    /* 0x04C */ s8 lastPlayerMenuSelection[16];
+    /* 0x05C */ s8 lastPartnerMenuSelection[16];
     /* 0x06C */ s16 cancelTargetMenuSubstate; // might be more generally for returning from nested 'inner' state
     /* 0x06E */ s16 acceptTargetMenuSubstate; // might be more generally for returning from nested 'inner' state
     /* 0x070 */ s16 menuDisableFlags; /* 1 = jump, 2 = hammer, 4 = items */
     /* 0x072 */ char unk_72[2];
-    /* 0x074 */ s32 unk_74;
+    /* 0x074 */ s32 enabledStarPowersMask; // zero'd bits will be unavailable, used only for tutorial battles
     /* 0x078 */ s8 totalStarPoints;
     /* 0x079 */ s8 pendingStarPoints; /* how many to add */
     /* 0x07A */ s8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
@@ -921,7 +921,7 @@ typedef struct BattleStatus {
     /* 0x174 */ struct Actor* currentTurnEnemy;
     /* 0x178 */ s8 moveCategory; ///< 0 = jump, 1 = hammer, 5 = partner, ...
     /* 0x179 */ char unk_179;
-    /* 0x17A */ s16 selectedItemID;
+    /* 0x17A */ s16 moveArgument; // argument provided for move; can be hammer/boots level, itemID, etc
     /* 0x17C */ s16 selectedMoveID;
     /* 0x17E */ s16 currentAttackDamage;
     /* 0x180 */ s16 lastAttackDamage;
@@ -1889,7 +1889,7 @@ typedef struct Actor {
     /* 0x205 */ s8 unk_205;
     /* 0x206 */ s8 unk_206;
     /* 0x207 */ s8 extraCoinBonus;
-    /* 0x208 */ s8 unk_208;
+    /* 0x208 */ s8 instigatorValue; // from the enemy which initiated the encounter if this actor is first in the formation. allows that enemy to pass information to its actor.
     /* 0x209 */ char unk_209[3];
     /* 0x20C */ s32* statusTable;
     /* 0x210 */ s8 debuff;
@@ -1903,7 +1903,7 @@ typedef struct Actor {
     /* 0x218 */ s8 transparentStatus; /* 0E = yes */
     /* 0x219 */ s8 transparentDuration;
     /* 0x21A */ char unk_21A[2];
-    /* 0x21C */ s8 status;
+    /* 0x21C */ s8 statusAfflicted;
     /* 0x21D */ s8 disableDismissTimer;
     /* 0x21E */ s16 unk_21E;
     /* 0x220 */ s8 isGlowing; // charge amount for goombario

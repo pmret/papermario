@@ -8,6 +8,8 @@
 
 typedef s32 HudScript[0];
 
+typedef s32 HudElemID;
+
 enum {
     HUD_ELEMENT_OP_End,
     HUD_ELEMENT_OP_SetRGBA,
@@ -126,9 +128,9 @@ typedef struct PopupMenu {
     /* 0x290 */ char unk_290[0x4];
     /* 0x294 */ s32 descMsg[32];
     /* 0x314 */ char unk_314[0x4];
-    /* 0x318 */ s32 popupType; // C = keys
-    /* 0x31C */ s32 unk_31C;
-    /* 0x320 */ s32 unk_320;
+    /* 0x318 */ s32 popupType;
+    /* 0x31C */ s32 dipMode;
+    /* 0x320 */ s32 titleNumber; // used to display 2/3 with double/triple dip
     /* 0x324 */ s32 numEntries;
     /* 0x328 */ s32 initialPos;
     /* 0x32C */ s16 result;

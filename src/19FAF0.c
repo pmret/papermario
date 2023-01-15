@@ -573,7 +573,7 @@ s32 calc_player_damage_enemy(void) {
             retVal = 0;
             target->hpChangeCounter -= currentAttackDamage;
 
-            if (!(targetPart->flags & ACTOR_PART_FLAG_2000) && !(gBattleStatus.flags1 & BS_FLAGS1_2000000) && !sp1C &&
+            if (!(targetPart->flags & ACTOR_PART_FLAG_2000) && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE) && !sp1C &&
                 !(targetPart->targetFlags & ACTOR_PART_FLAG_4)) {
                 target->currentHP -= currentAttackDamage;
 
@@ -1051,7 +1051,7 @@ ApiStatus GetMenuSelection(Evt* script, s32 isInitialCall) {
     s32 outVar3 = *args++;
 
     evt_set_variable(script, outVar1, battleStatus->moveCategory);
-    evt_set_variable(script, outVar2, battleStatus->selectedItemID);
+    evt_set_variable(script, outVar2, battleStatus->moveArgument);
     evt_set_variable(script, outVar3, battleStatus->selectedMoveID);
 
     return ApiStatus_DONE2;

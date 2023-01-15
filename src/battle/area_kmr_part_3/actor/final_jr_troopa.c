@@ -206,9 +206,9 @@ EvtScript N(8022C6D4) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar2)
-    EVT_IF_FLAG(LVar2, BS_FLAGS1_80000)
+    EVT_IF_FLAG(LVar2, BS_FLAGS1_PARTNER_ACTING)
         EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-        EVT_IF_EQ(LVar2, 183)
+        EVT_IF_EQ(LVar2, MOVE_SPOOK)
             EVT_CALL(SetActorVar, -127, 1, 1)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_263)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

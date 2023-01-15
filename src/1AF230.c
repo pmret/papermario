@@ -117,12 +117,12 @@ s32 D_8029C890[][5] = {
 ApiStatus LoadStarPowerScript(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
-    s16 selectedItemID;
+    s16 starPowerIdx;
 
     playerData->specialBarsFilled -= gMoveTable[battleStatus->selectedMoveID].costFP * 256;
-    selectedItemID = battleStatus->selectedItemID;
-    dma_copy((&D_8029C7D0[selectedItemID])->dmaStart, (&D_8029C7D0[selectedItemID])->dmaEnd,
-             (&D_8029C7D0[selectedItemID])->dmaDest);
-    script->varTable[0] = (s32) (&D_8029C7D0[selectedItemID])->init;
+    starPowerIdx = battleStatus->moveArgument;
+    dma_copy((&D_8029C7D0[starPowerIdx])->dmaStart, (&D_8029C7D0[starPowerIdx])->dmaEnd,
+             (&D_8029C7D0[starPowerIdx])->dmaDest);
+    script->varTable[0] = (s32) (&D_8029C7D0[starPowerIdx])->init;
     return ApiStatus_DONE2;
 }
