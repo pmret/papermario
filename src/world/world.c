@@ -6,7 +6,11 @@
 #include "sprite.h"
 #include "model.h"
 
+#ifdef SHIFT
+#define ASSET_TABLE_ROM_START mapfs_ROM_START
+#else
 #define ASSET_TABLE_ROM_START 0x1E40000
+#endif
 
 #define ASSET_TABLE_HEADER_SIZE 0x20
 #define ASSET_TABLE_FIRST_ENTRY (ASSET_TABLE_ROM_START + ASSET_TABLE_HEADER_SIZE)

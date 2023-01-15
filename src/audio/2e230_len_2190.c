@@ -1,11 +1,17 @@
 #include "audio.h"
+#include "ld_addrs.h"
 
 // data
 extern u16 D_80078530[9];
 extern s32 D_8007854C[2];
 extern f32 AlTuneScaling[];
 
+
+#ifdef SHIFT
+#define SBN_ROM_OFFSET SBN_ROM_START
+#else
 #define SBN_ROM_OFFSET 0xF00000
+#endif
 
 void func_80052E30(u8 index) {
     AlUnkVoice* voice = &gSoundGlobals->voices[index];
