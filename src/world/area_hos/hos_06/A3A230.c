@@ -9,11 +9,9 @@
 extern u8 D_802447D0_A3DCB0[];
 
 #define NAMESPACE dup_hos_06
-
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80240F7C_A3A45C);
-
 extern s32 N(ItemChoice_HasSelectedItem);
 extern s32 N(ItemChoice_SelectedItemID);
+#include "world/common/todo/ItemChoice_WaitForSelection.inc.c"
 
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -22,7 +20,6 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     N(ItemChoice_HasSelectedItem) = TRUE;
     return ApiStatus_DONE2;
 }
-
 #define NAMESPACE hos_06
 
 extern s32 hos_06_D_80246430[];

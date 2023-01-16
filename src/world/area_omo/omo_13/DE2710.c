@@ -9,29 +9,9 @@
 
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
-// matches, needs data migration
-#ifdef NON_MATCHING
-ApiStatus func_80240F00_DE3390(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        omo_13_ItemChoice_HasSelectedItem = FALSE;
-    }
-
-    if (omo_13_ItemChoice_HasSelectedItem) {
-        omo_13_ItemChoice_HasSelectedItem = FALSE;
-        evt_set_variable(script, *args++, omo_13_ItemChoice_SelectedItemID);
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-#else
-INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F00_DE3390);
-#endif
-
 extern s32 N(ItemChoice_HasSelectedItem);
 extern s32 N(ItemChoice_SelectedItemID);
+#include "world/common/todo/ItemChoice_WaitForSelection.inc.c"
 
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

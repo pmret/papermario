@@ -19,11 +19,10 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242BD0_9D9BF0);
-
 #define NAMESPACE dup_nok_02
 extern s32 N(ItemChoice_HasSelectedItem);
 extern s32 N(ItemChoice_SelectedItemID);
+#include "world/common/todo/ItemChoice_WaitForSelection.inc.c"
 
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
