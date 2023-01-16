@@ -67,7 +67,45 @@ ApiStatus func_8024046C_AD633C(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_13/AD6200", func_802404E0_AD63B0);
+typedef struct UnkKKJ13 {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ s16 unk_02;
+} UnkKKJ13; // size = 0x4
+
+extern UnkKKJ13 D_80243614_AD94E4[28]; // TODO remove hard-coded size once data is migrated
+
+ApiStatus func_802404E0_AD63B0(Evt* script, s32 isInitialCall) {
+    EffectInstance* effect;
+    f32 temp_f20;
+    f32 temp_f24;
+    f32 temp_f26;
+    s32 a0;
+    f32 a1;
+    f32 a2;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(D_80243614_AD94E4); i++) {
+        a0 = (i & 1) + 2;
+        temp_f20 = D_80243614_AD94E4[i].unk_00;
+        temp_f24 = (temp_f20 * cos_deg(D_80243614_AD94E4[i].unk_02)) * 1.3;
+        temp_f26 = (temp_f20 * sin_deg(D_80243614_AD94E4[i].unk_02)) * 1.5;
+        a1 = temp_f24 + 600.0f;
+        a2 = temp_f26 + 100.0f;
+        temp_f24 *= 0.1;
+        temp_f26 *= 0.1;
+        temp_f24 += cos_deg(temp_f20 * 15.0f) * 5.0f;
+        effect = fx_ice_shard(a0, a1, a2, -150.0f, ((i & 3) * 0.4) + 1.0, ((i & 3) * 4) + 30);
+        effect->data.iceShard->unk_44 = 0;
+        effect->data.iceShard->unk_48 = (rand_int(10) * 0.2) + 0.1;
+        effect->data.iceShard->unk_3C = 35 * i;
+        effect->data.iceShard->unk_40 = rand_int(10) - 5;
+        effect->data.iceShard->unk_4C = temp_f24;
+        effect->data.iceShard->unk_50 = temp_f26;
+        effect->data.iceShard->unk_54 = 2.0f;
+        effect->data.iceShard->unk_58 = -0.1f;
+    }
+    return ApiStatus_DONE2;
+}
 
 const char* N(exit_str_0) = "osr_03";
 const char* N(exit_str_1) = "hos_10";

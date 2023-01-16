@@ -1357,8 +1357,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
 
 #include "world/common/todo/SyncStatusMenu.inc.c"
 
-#ifdef NON_EQUIVALENT
-// control flow + data migration
+NOP_FIX // TODO figure out BSS nop issue
 ApiStatus func_8024295C_8B29CC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 targetColR = evt_get_variable(script, *args++);
@@ -1382,17 +1381,15 @@ ApiStatus func_8024295C_8B29CC(Evt* script, s32 isInitialCall) {
 
         script->functionTemp[0]++;
         if (duration < script->functionTemp[0]) {
-            return ApiStatus_BLOCK;
+            return ApiStatus_DONE2;
         }
     } else {
         set_background_color_blend(targetColR, targetColG, targetColB, targetColA);
+        return ApiStatus_DONE2;
     }
-    return ApiStatus_DONE2;
+    return ApiStatus_BLOCK;
 }
-#else
-API_CALLABLE(func_8024295C_8B29CC);
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024295C_8B29CC);
-#endif
+NOP_UNFIX
 
 API_CALLABLE(N(func_80242BA8_8B2C18)) {
     *gBackgroundFogModePtr = 1;
