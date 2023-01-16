@@ -1002,107 +1002,65 @@ s32 popup_menu_update(void) {
     return 0;
 }
 
-#ifdef WIP
+#ifdef NON_MATCHING
 void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
-    s32 x;
-    s32 xOffset;
-    s32 sp28;
-    Gfx* temp_a3;
-    Gfx* var_a1;
-    Gfx* var_a1_6;
-    f32 temp_f2;
-    s16 temp_s1;
-    s16 var_t0;
-
-    s32 temp_a0;
-    s32 temp_a0_3;
-
-    s32 temp_s1_2;
-    s32 temp_s3;
-    s32 temp_s3_2;
-    s32 temp_s3_3;
-    s32 temp_t1;
-
-    s32 temp_v1;
-    s32 temp_v1_5;
-
+    s32 x, y; // sp20, s1
+    s32 y1;
+    s32 xOffset; // sp24
+    s32 sp28; // sp28
     s32 var_a0;
-    s32 var_a1_3;
-    s32 var_a1_5;
-
-    s32 var_s1;
-    s32 var_s1_2;
-    s32 var_s1_3;
-    s32 var_s1_4;
-    s32 var_s1_5;
-
     s32 i;
-
     s32 j;
-    s32 var_s6;
-    s32 var_s7;
-
-    s32 var_t0_2;
-
     s32 id;
-
     s32 s0;
+    s32 a0;
+    s32 v0;
 
-    s32 tmp;
-    s32 tmp2;
-
-    if (D_8010D640 != 0xA) {
-        if (D_8010D640 < 0xB) {
-            if (D_8010D640 < 0) {
-                if (D_8010D640 < -2) {
-                    if (D_8010D640 < -5) {
-                        if (D_8010D640 >= -8) {
-                            goto block_14;
-                        }
-                    }
-                } else {
-                    goto block_14;
-                }
-            } else {
-                if (D_8010D640 != 1) {
-                    return;
-                }
-                goto block_14;
-            }
-        } else {
-            if (D_8010D640 < 0x20) {
-                if ((D_8010D640 < 0x1E) && (D_8010D640 != 0x14)) {
-                    return;
-                }
-                goto block_14;
-            }
-            if (D_8010D640 < 0x6A) {
-                if (D_8010D640 >= 0x64) {
-                    goto block_14;
-                }
-            }
-        }
+    switch (D_8010D640) {
+        case 10:
+        case -1:
+        case -2:
+        case -6:
+        case -7:
+        case -8:
+        case 1:
+        case 30:
+        case 31:
+        case 20:
+        case 100:
+        case 101:
+        case 102:
+        case 103:
+        case 104:
+        case 105:
+            break;
+        default:
+            return;
     }
-    return;
 
-block_14:
-    temp_s1 = D_8010D654 * -0xD;
-    var_a0 = temp_s1 - D_8010D658;
     baseX += 2;
     baseY += 0xF;
+    y = -D_8010D654 * 13;
+    y1 = D_8010D658;
+    var_a0 = y - y1;
+
     if (var_a0 < 130) {
-        var_a0 = (s32) (var_a0 * 0.5);
+        var_a0 *= 0.5;
     } else {
-        var_a0 = (var_a0 * 100) / 150;
+        var_a0 = var_a0 * 100 / 150;
     }
-    var_t0 = D_8010D658 + var_a0;
-    if (var_a0 == 0) {
-        var_t0 = temp_s1;
+    if (var_a0 != 0) {
+        y1 += var_a0;
+    } else {
+        y1 = y;
     }
-    D_8010D658 = var_t0;
-    sp28 = -var_t0 / 13;
+    D_8010D658 = y1;
+    sp28 = -D_8010D658 / 13;
+
+
     x = baseX;
-    tmp2 = (D_8010D656 * 0xD) + 4;
+    y = baseY;
+    y1 = y + D_8010D656 * 13 + 4;
     switch (gPopupMenu->popupType) {
         case 0:
         case 3:
@@ -1115,53 +1073,48 @@ block_14:
         case 11:
         case 12:
         case 13:
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, baseY, x + 0x70, baseY + tmp2);
+            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, y, x + 0x70, y1);
             break;
         case 1:
         case 4:
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, baseY, x + 0x5A, baseY + tmp2);
+            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, y, x + 0x5A, y1);
             break;
         case 2:
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, baseY, x + 0xA0, baseY + tmp2);
+            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, y, x + 0xA0, y1);
             break;
     }
-    temp_v1 = baseY + D_8010D658;
-    var_s1 = temp_v1 + 8;
+
+    y = baseY + D_8010D658 + 8;
     if (gPopupMenu->popupType == 2) {
-        var_s1 = temp_v1 + 0x15;
+        y = baseY + D_8010D658 + 0x15;
     }
     id = D_8010D65C;
-    hud_element_set_render_pos(id, baseX + 0x49, var_s1 - 3);
+    hud_element_set_render_pos(id, baseX + 0x49, y - 3);
     hud_element_set_alpha(id, D_8010D650);
     if (D_8010D68F < gPopupMenu->numEntries) {
         hud_element_draw_without_clipping(id);
     }
-    var_s1_2 = baseY + 2;
     x = baseX;
-    var_t0_2 = var_s1_2 + (D_8010D656 * 0xD);
+    y = baseY + 2;
+    y1 = y + D_8010D656 * 13;
     if ((gPopupMenu->popupType == 2) && (D_8010D654 < 2)) {
-        var_s1_2 = baseY;
-        var_t0_2 += 1;
+        y = baseY;
+        y1++;
     }
-    temp_a3 = gMasterGfxPos;
-    temp_a3->words.w0 = (((s32) ((f32) x * 4.0f) & 0xFFF) << 0xC) | (((s32) ((f32) var_s1_2 * 4.0f) & 0xFFF) | 0xED000000);
+    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, y, x + D_801098BC[gPopupMenu->popupType], y1);
     xOffset = 0;
-    temp_f2 = (f32) (x + D_801098BC[gPopupMenu->popupType]) * 4.0f;
-    gMasterGfxPos += 8;
-    temp_t1 = baseY + D_8010D658;
     x = baseX + 0x20;
-    temp_a3->words.w1 = (((s32) temp_f2 & 0xFFF) << 0xC) | ((s32) ((f32) var_t0_2 * 4.0f) & 0xFFF);
-    var_s1_3 = temp_t1 + 2;
+    y = baseY + D_8010D658 + 2;
     if (gPopupMenu->popupType == 2) {
-        var_s1_3 = temp_t1;
+        y = baseY + D_8010D658;
         xOffset = 2;
     }
 
     for (i = 0; i < gPopupMenu->numEntries; i++) {
-        if ((i < (sp28 - 1)) || ((sp28 + D_8010D656) < i)) {
-            var_s1_3 += 0xD;
+        if (sp28 - 1 > i || sp28 + D_8010D656 < i) {
+            y += 0xD;
             if (i == 0) {
-                var_s1_3 += xOffset;
+                y += xOffset;
             }
         } else {
             s0 = D_8010D690;
@@ -1181,38 +1134,45 @@ block_14:
                 case 9:
                 case 12:
                 case 13:
-                    draw_msg(gPopupMenu->nameMsg[i], x, var_s1_3, D_8010D650, s0, 1);
+                    draw_msg(gPopupMenu->nameMsg[i], x, y, D_8010D650, s0, 1);
                     break;
                 case 1:
                 case 4:
-                    draw_msg(gPopupMenu->nameMsg[i], x, var_s1_3, D_8010D650, s0, 1);
+                    draw_msg(gPopupMenu->nameMsg[i], x, y, D_8010D650, s0, 1);
                     break;
                 case 8:
                     if (gPopupMenu->enabled[i] == 2) {
-
+                        s0 = 34;
                     }
-                    draw_msg(gPopupMenu->nameMsg[i], x, var_s1_3, D_8010D650, s0, 1);
+                    draw_msg(gPopupMenu->nameMsg[i], x, y, D_8010D650, s0, 1);
                     break;
                 case 10:
                     if (gPopupMenu->value[i] != 0) {
-
+                        s0 = 11;
+                    } else {
+                        s0 = 10;
                     }
                     set_message_value(gPopupMenu->userIndex[i] + 1, 0);
+<<<<<<< Updated upstream
                     draw_msg(MSG_Menus_00CD, x + 8, var_s1_3, D_8010D650, s0, 1);
+=======
+                    draw_msg(0x1D00CD, x + 8, y, D_8010D650, s0, 1);
+>>>>>>> Stashed changes
                     break;
                 case 11:
                     if (gPopupMenu->value[i] != 0) {
-
+                        s0 = 11;
+                    } else {
+                        s0 = 10;
                     }
-                    draw_msg(gPopupMenu->nameMsg[i], x, var_s1_3, D_8010D650, s0, 1);
+                    a0 = gPopupMenu->nameMsg[i];
+                    draw_msg(a0, x, y, D_8010D650, s0, 1);
                     break;
             }
 
             switch (gPopupMenu->popupType) {
                 case 1:
                 case 4:
-                    var_s7 = 0x5B;
-                    var_s6 = 0x55;
                     for (j = 0; j < 2; j++) {
                         id = D_8010D668;
                         if (gPopupMenu->enabled[i]) {
@@ -1221,43 +1181,34 @@ block_14:
                             hud_element_set_script(id, D_80109898[j]);
                         }
                         if (gPopupMenu->popupType == 1) {
-                            hud_element_set_render_pos(id, x + var_s6, var_s1_3 + 0xA);
+                            hud_element_set_render_pos(id, x + 0x55 + j * 13, y + 0xA);
                         } else {
-                            hud_element_set_render_pos(id, x + var_s7, var_s1_3 + 0xA);
+                            hud_element_set_render_pos(id, x + 0x5B + j * 13, y + 0xA);
                         }
                         if (j < gPopupMenu->value[i]) {
                             hud_element_draw_next(id);
                         }
-                        var_s7 += 0xD;
-                        var_s6 += 0xD;
                     }
-                    var_s1_3 += 0xD;
                     break;
                 case 3:
-                    var_a1_3 = x + 0x73;
-        block_79:
-                    draw_number(gPopupMenu->value[i], var_a1_3, var_s1_3, 1, 0, D_8010D650, 0); // two zeros at the end
-                    var_s1_3 += 0xD;
+                    draw_number(gPopupMenu->value[i], x + 0x73, y, 1, s0, D_8010D650, 3);
                     break;
                 case 5:
-                    var_a1_3 = x + 0x79;
-                    goto block_79;
-                default:
-                    var_s1_3 += 0xD;
+                    draw_number(gPopupMenu->value[i], x + 0x79, y, 1, s0, D_8010D650, 3);
+                    break;
             }
-
+            y += 0xD;
             if (i == 0) {
-                var_s1_3 += xOffset;
+                y += xOffset;
             }
         }
     }
 
-    xOffset = 0;
-    temp_a0_3 = baseY + D_8010D658;
     x = baseX + 0x18;
-    var_s1_4 = temp_a0_3 + 8;
+    y = baseY + D_8010D658 + 8;
+    xOffset = 0;
     if (gPopupMenu->popupType == 2) {
-        var_s1_4 = temp_a0_3 + 6;
+        y = baseY + D_8010D658 + 6;
         xOffset = 2;
     }
 
@@ -1274,96 +1225,85 @@ block_14:
         case 9:
         case 12:
         case 13:
-            i = 0;
-            if (gPopupMenu->numEntries > 0) {
-                temp_s3 = sp28 - 1;
-                do {
-                    if ((temp_s3 > i) || ((sp28 + D_8010D656) < i)) {
-                        var_s1_4 += 0xD;
-                        if (i == 0) {
-                            var_s1_4 += xOffset;
-                        }
-                    } else {
-                        id = D_8010D678;
-                        hud_element_set_script(id, gPopupMenu->ptrIcon[i]);
-                        hud_element_set_render_pos(id, x, var_s1_4);
-                        var_s1_4 += 0xD;
-                        hud_element_set_alpha(id, D_8010D650);
-                        hud_element_set_scale(id, 0.45f);
-                        hud_element_draw_without_clipping(id);
-                        if (i == 0) {
-                            var_s1_4 += xOffset;
-                        }
+            for (i = 0; i < gPopupMenu->numEntries; i++) {
+                if (sp28 - 1 > i || sp28 + D_8010D656 < i) {
+                    y += 0xD;
+                    if (i == 0) {
+                        y += xOffset;
                     }
-                    i += 1;
-                } while (i < gPopupMenu->numEntries);
+                } else {
+                    id = D_8010D678;
+                    hud_element_set_script(id, gPopupMenu->ptrIcon[i]);
+                    hud_element_set_render_pos(id, x, y);
+                    hud_element_set_alpha(id, D_8010D650);
+                    hud_element_set_scale(id, 0.45f);
+                    hud_element_draw_without_clipping(id);
+                    y += 0xD;
+                    if (i == 0) {
+                        y += xOffset;
+                    }
+                }
             }
             break;
         case 10:
-            i = 0;
-            if (gPopupMenu->numEntries > 0) {
-                temp_s3_2 = sp28 - 1;
-                do {
-                    if ((temp_s3_2 > i) || ((sp28 + D_8010D656) < i)) {
-                        var_s1_4 += 0xD;
-                        if (i == 0) {
-                            var_s1_4 += xOffset;
-                        }
-                    } else {
-                        id = D_8010D678;
-                        hud_element_set_script(id, gPopupMenu->ptrIcon[i]);
-                        hud_element_set_render_pos(id, x, var_s1_4);
-                        var_s1_4 += 0xD;
-                        hud_element_set_alpha(id, D_8010D650);
-                        hud_element_set_scale(id, 0.45f);
-                        hud_element_draw_without_clipping(id);
-                        if (i == 0) {
-                            var_s1_4 += xOffset;
-                        }
+            for (i = 0; i < gPopupMenu->numEntries; i++) {
+                if (sp28 - 1 > i || sp28 + D_8010D656 < i) {
+                    y += 0xD;
+                    if (i == 0) {
+                        y += xOffset;
                     }
-                    i += 1;
-                } while (i < gPopupMenu->numEntries);
+                } else {
+                    id = D_8010D678;
+                    hud_element_set_script(id, gPopupMenu->ptrIcon[i]);
+                    hud_element_set_render_pos(id, x, y);
+                    hud_element_set_alpha(id, D_8010D650);
+                    hud_element_set_scale(id, 0.45f);
+                    hud_element_draw_without_clipping(id);
+                    y += 0xD;
+                    if (i == 0) {
+                        y += xOffset;
+                    }
+                }
             }
             break;
         case 11:
-            i = 0;
-            if (gPopupMenu->numEntries > 0) {
-                temp_s3_3 = sp28 - 1;
-                do {
-                    if ((temp_s3_3 > i) || ((sp28 + D_8010D656) < i)) {
-                        var_s1_4 += 0xD;
-                        if (i == 0) {
-                            var_s1_4 += xOffset;
-                        }
-                    } else {
-                        id = D_8010D678;
-                        hud_element_set_script(id, gPopupMenu->ptrIcon[i]);
-                        hud_element_set_render_pos(id, x, var_s1_4);
-                        var_s1_4 += 0xD;
-                        hud_element_set_alpha(id, D_8010D650);
-                        hud_element_set_scale(id, 0.45f);
-                        hud_element_draw_without_clipping(id);
-                        if (i == 0) {
-                            var_s1_4 += xOffset;
-                        }
+            for (i = 0; i < gPopupMenu->numEntries; i++) {
+                if (sp28 - 1 > i || sp28 + D_8010D656 < i) {
+                    y += 0xD;
+                    if (i == 0) {
+                        y += xOffset;
                     }
-                    i += 1;
-                } while (i < gPopupMenu->numEntries);
+                } else {
+                    id = D_8010D678;
+                    hud_element_set_script(id, gPopupMenu->ptrIcon[i]);
+                    hud_element_set_render_pos(id, x, y);
+                    hud_element_set_alpha(id, D_8010D650);
+                    hud_element_set_scale(id, 0.45f);
+                    hud_element_draw_without_clipping(id);
+                    y += 0xD;
+                    if (i == 0) {
+                        y += xOffset;
+                    }
+                }
             }
             break;
     }
+
     id = D_8010D66C;
-    var_s1_5 = baseY + (((D_8010D648 - D_8010D654) * 0xD) + 9);
     x = baseX + 8;
-    if ((gPopupMenu->popupType == 2) && (D_8010D648 == 0)) {
-        var_s1_5 -= 2;
+    v0 = (D_8010D648 - D_8010D654) * 0xD + 9;
+    y = baseY + v0;
+
+    if (gPopupMenu->popupType == 2 && D_8010D648 == 0) {
+        y -= 2;
     }
-    hud_element_set_render_pos(id, x, var_s1_5);
+    hud_element_set_render_pos(id, x, y);
     hud_element_set_alpha(id, D_8010D650);
     hud_element_draw_without_clipping(id);
-    tmp = (D_8010D656 * 13) + 0x10;
-    temp_s1_2 = baseY - 6;
+
     x = baseX;
+    y = baseY - 6;
+    y1 = y + (D_8010D656 * 13) + 0x10;
     switch (gPopupMenu->popupType) {
         case 0:
         case 2:
@@ -1377,11 +1317,11 @@ block_14:
         case 11:
         case 12:
         case 13:
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, temp_s1_2, x + 0x70, temp_s1_2 + tmp);
+            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, y, x + 0x70, y1);
             break;
         case 1:
         case 4:
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, temp_s1_2, x + 0x64, temp_s1_2 + tmp);
+            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, y, x + 0x64, y1);
             break;
     }
 
@@ -1422,7 +1362,8 @@ block_14:
     if (D_8010D654 > 0) {
         id = D_8010D670;
         x = baseX + xOffset;
-        hud_element_set_render_pos(id, x + 35, baseY - 1);
+        y = baseY;
+        hud_element_set_render_pos(id, x + 35, y - 1);
         hud_element_set_alpha(id, D_8010D650);
         hud_element_draw_without_clipping(id);
     }
@@ -1430,11 +1371,12 @@ block_14:
     if (D_8010D655 < gPopupMenu->numEntries) {
         id = D_8010D674;
         x = baseX + xOffset;
-        hud_element_set_render_pos(id, x + 35, baseY + (D_8010D68F * 0xD) + 5);
+        y = baseY + D_8010D68F * 0xD;
+        hud_element_set_render_pos(id, x + 35, y + 5);
         hud_element_set_alpha(id, D_8010D650);
         hud_element_draw_without_clipping(id);
     }
-}
+
 #else
 INCLUDE_ASM(s32, "8a860_len_3f30", popup_menu_draw_menu_contents);
 #endif
