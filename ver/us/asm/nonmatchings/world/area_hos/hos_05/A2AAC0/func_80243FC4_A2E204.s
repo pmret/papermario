@@ -50,8 +50,8 @@ glabel func_80243FC4_A2E204
 /* A2E2B8 80244078 0080282D */   daddu    $a1, $a0, $zero
 /* A2E2BC 8024407C 3C030002 */  lui       $v1, 2
 /* A2E2C0 80244080 3463A440 */  ori       $v1, $v1, 0xa440
-/* A2E2C4 80244084 3C050022 */  lui       $a1, 0x22
-/* A2E2C8 80244088 24A591B0 */  addiu     $a1, $a1, -0x6e50
+/* A2E2C4 80244084 3C050022 */  lui       $a1, %hi(title_bg_1_ROM_START)
+/* A2E2C8 80244088 24A591B0 */  addiu     $a1, $a1, %lo(title_bg_1_ROM_START)
 /* A2E2CC 8024408C 00A32021 */  addu      $a0, $a1, $v1
 /* A2E2D0 80244090 24A54000 */  addiu     $a1, $a1, 0x4000
 /* A2E2D4 80244094 8E020000 */  lw        $v0, ($s0)

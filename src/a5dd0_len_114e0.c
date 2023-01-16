@@ -7,7 +7,7 @@
 #include "effects.h"
 #include "nu/nusys.h"
 
-#ifdef SHIFT
+#ifdef SHIFT_VRAM
 #define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
 #else
 #define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shiftability fix

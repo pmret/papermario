@@ -1,9 +1,17 @@
 #include "audio.h"
+#include "ld_addrs.h"
 
 // data
 extern u16 D_80078530[9];
 extern s32 D_8007854C[2];
 extern f32 AlTuneScaling[];
+
+
+#ifdef SHIFT
+#define SBN_ROM_OFFSET SBN_ROM_START
+#else
+#define SBN_ROM_OFFSET 0xF00000
+#endif
 
 void func_80052E30(u8 index) {
     AlUnkVoice* voice = &gSoundGlobals->voices[index];
@@ -12,6 +20,7 @@ void func_80052E30(u8 index) {
     voice->priority = AU_PRIORITY_FREE;
 }
 
+#ifndef SHIFT
 void au_engine_init(s32 outputRate) {
     AuGlobals* globals;
     ALHeap* alHeap;
@@ -84,7 +93,7 @@ void au_engine_init(s32 outputRate) {
         voice->priority = AU_PRIORITY_FREE;
     }
 
-    au_load_INIT(globals, 0xF00000, alHeap);
+    au_load_INIT(globals, SBN_ROM_OFFSET, alHeap);
 
     for (i = 0; i < 3; i++) {
         globals->banks[i] = alHeapAlloc(alHeap, 1, 0x840);
@@ -135,6 +144,9 @@ void au_engine_init(s32 outputRate) {
     func_80057ED0(0);
     func_80055050(alHeap);
 }
+#else
+INCLUDE_ASM_SHIFT(void, "audio/2e230_len_2190", au_engine_init);
+#endif
 
 static void au_reset_instrument(Instrument* instrument) {
     instrument->base = DummyInstrumentBase;

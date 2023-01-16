@@ -23,8 +23,8 @@ glabel SetSpriteShading
 /* FE0F8 802D9748 2403FFFF */  addiu     $v1, $zero, -1
 /* FE0FC 802D974C 104300AF */  beq       $v0, $v1, .L802D9A0C
 /* FE100 802D9750 24020002 */   addiu    $v0, $zero, 2
-/* FE104 802D9754 3C100031 */  lui       $s0, 0x31
-/* FE108 802D9758 26105B80 */  addiu     $s0, $s0, 0x5b80
+/* FE104 802D9754 3C100031 */  lui       $s0, %hi(sprite_shading_profiles_ROM_START)
+/* FE108 802D9758 26105B80 */  addiu     $s0, $s0, %lo(sprite_shading_profiles_ROM_START)
 /* FE10C 802D975C 00D02021 */  addu      $a0, $a2, $s0
 /* FE110 802D9760 26050008 */  addiu     $a1, $s0, 8
 /* FE114 802D9764 00C52821 */  addu      $a1, $a2, $a1
@@ -43,8 +43,8 @@ glabel SetSpriteShading
 /* FE148 802D9798 2652BB68 */  addiu     $s2, $s2, %lo(D_802DBB68)
 /* FE14C 802D979C 0240302D */  daddu     $a2, $s2, $zero
 /* FE150 802D97A0 8E220000 */  lw        $v0, ($s1)
-/* FE154 802D97A4 3C030031 */  lui       $v1, 0x31
-/* FE158 802D97A8 24635D50 */  addiu     $v1, $v1, 0x5d50
+/* FE154 802D97A4 3C030031 */  lui       $v1, %hi(sprite_shading_profiles_ROM_START + 0x1D0)
+/* FE158 802D97A8 24635D50 */  addiu     $v1, $v1, %lo(sprite_shading_profiles_ROM_START + 0x1D0)
 /* FE15C 802D97AC 00431021 */  addu      $v0, $v0, $v1
 /* FE160 802D97B0 02028021 */  addu      $s0, $s0, $v0
 /* FE164 802D97B4 0200202D */  daddu     $a0, $s0, $zero

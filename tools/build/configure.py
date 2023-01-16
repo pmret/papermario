@@ -722,6 +722,7 @@ if __name__ == "__main__":
     parser.add_argument("--no-split-assets", action="store_true", help="Don't split assets from the baserom(s)")
     parser.add_argument("-d", "--debug", action="store_true", help="Generate debugging information")
     parser.add_argument("-n", "--non-matching", action="store_true", help="Compile nonmatching code. Combine with --debug for more detailed debug info")
+    parser.add_argument("--shift", action="store_true", help="Build a shiftable ROM")
     parser.add_argument("-w", "--no-warn", action="store_true", help="Inhibit compiler warnings")
     parser.add_argument("--ccache", action="store_true", help="Use ccache")
     args = parser.parse_args()
@@ -782,6 +783,9 @@ if __name__ == "__main__":
     elif args.debug:
         # g1 doesn't affect codegen
         cflags += " -ggdb3"
+
+    if args.shift:
+        cppflags += " -DSHIFT"
 
     if not args.no_warn:
         cflags += " -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
