@@ -2,6 +2,8 @@
 #include "model.h"
 
 extern s32 D_802434F8_DA09C8[];
+extern s32 D_80243580_DA0A50[];
+extern s32 D_802435B0_DA0A80[];
 
 ApiStatus func_80240040_D9D510(Evt* script, s32 isInitialCall) {
     Matrix4f sp18, sp58;
@@ -89,20 +91,17 @@ void func_802402C0_D9D790(Gfx* displayList, s32* outDist) {
     } while (cmd != G_ENDDL);
 }
 
-extern s32 D_80243580_DA0A50[];
-extern s32 D_802435B0_DA0A80[];
-
 typedef struct UnkOmoThing {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f center;
     /* 0x10 */ Vec3f unk_10;
-    /* 0x1C */ Vec3f unk_1C;
+    /* 0x1C */ Vec3f rot;
     /* 0x28 */ Vec3f unk_28;
     /* 0x34 */ f32 unk_34;
     /* 0x38 */ f32 unk_38;
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ s32 treeIndex;
-    /* 0x44 */ s32 unk_44;
+    /* 0x44 */ s32 colliderID;
     /* 0x48 */ Matrix4f transformMatrix;
     /* 0x88 */ s32 unk_88;
 } UnkOmoThing; // size = 0x8C
@@ -122,15 +121,15 @@ ApiStatus func_8024043C_D9D90C(Evt* script, s32 isInitialCall) {
         it = (UnkOmoThing*) script->functionTempPtr[0];
         for (i = 0; i < 12; i++, it++) {
             it->treeIndex = D_80243580_DA0A50[i];
-            it->unk_44 = D_802435B0_DA0A80[i];
+            it->colliderID = D_802435B0_DA0A80[i];
             model = get_model_from_list_index(get_model_list_index_from_tree_index(it->treeIndex));
             it->unk_00 = 0;
             it->center.x = model->center.x;
             it->center.y = model->center.y;
             it->center.z = model->center.z;
-            it->unk_1C.x = 0.0f;
-            it->unk_1C.y = 0.0f;
-            it->unk_1C.z = 0.0f;
+            it->rot.x = 0.0f;
+            it->rot.y = 0.0f;
+            it->rot.z = 0.0f;
             it->unk_10.x = it->center.x;
             it->unk_10.y = it->center.y;
             it->unk_10.z = it->center.z;
@@ -175,7 +174,7 @@ ApiStatus func_8024043C_D9D90C(Evt* script, s32 isInitialCall) {
                 }
             }
         } else {
-            update_collider_transform(it->unk_44);
+            update_collider_transform(it->colliderID);
             script->functionTemp[1]++;
             it->unk_00 = 101;
         }
@@ -186,17 +185,17 @@ ApiStatus func_8024043C_D9D90C(Evt* script, s32 isInitialCall) {
             }
         }
 
-        model->flags |= 0x1000 | 0x400;
+        model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
         guTranslateF(sp18, it->center.x - it->unk_10.x, it->center.y - it->unk_10.y, it->center.z - it->unk_10.z);
-        it->unk_1C.x += it->unk_28.x;
-        it->unk_1C.y += it->unk_28.y;
-        it->unk_1C.z += it->unk_28.z;
-        it->unk_1C.x = clamp_angle(it->unk_1C.x);
-        it->unk_1C.y = clamp_angle(it->unk_1C.y);
-        it->unk_1C.z = clamp_angle(it->unk_1C.z);
-        guRotateF(sp58, it->unk_1C.x, 1.0f, 0.0f, 0.0f);
-        guRotateF(sp98, it->unk_1C.y, 0.0f, 1.0f, 0.0f);
-        guRotateF(spD8, it->unk_1C.z, 0.0f, 0.0f, 1.0f);
+        it->rot.x += it->unk_28.x;
+        it->rot.y += it->unk_28.y;
+        it->rot.z += it->unk_28.z;
+        it->rot.x = clamp_angle(it->rot.x);
+        it->rot.y = clamp_angle(it->rot.y);
+        it->rot.z = clamp_angle(it->rot.z);
+        guRotateF(sp58, it->rot.x, 1.0f, 0.0f, 0.0f);
+        guRotateF(sp98, it->rot.y, 0.0f, 1.0f, 0.0f);
+        guRotateF(spD8, it->rot.z, 0.0f, 0.0f, 1.0f);
         guMtxCatF(spD8, sp58, sp58);
         guMtxCatF(sp58, sp98, sp98);
         guMtxCatF(sp98, sp18, sp18);
