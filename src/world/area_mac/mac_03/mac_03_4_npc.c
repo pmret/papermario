@@ -99,9 +99,9 @@ EvtScript N(EVS_ToadKid1_LetterRewardB) = {
     EVT_IF_EQ(LVarC, 2)
         EVT_CALL(SpeakToPlayer, NPC_ToadKid_02, ANIM_ToadKid_Yellow_Talk, ANIM_ToadKid_Yellow_Idle, 0, MSG_MAC_Station_0052)
         EVT_SET(LVar1, 1)
-        EVT_SET(LVar0, ITEM_LETTER23)
+        EVT_SET(LVar0, ITEM_LETTER_TO_FROSTT)
         EVT_EXEC_WAIT(N(GiveKeyReward))
-        EVT_CALL(AddKeyItem, ITEM_LETTER23)
+        EVT_CALL(AddKeyItem, ITEM_LETTER_TO_FROSTT)
     EVT_END_IF
     EVT_RETURN
     EVT_END

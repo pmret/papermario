@@ -735,13 +735,14 @@ MapConfig flo_maps[] = {
 };
 
 /// Shiver Region
+#include "area_sam/sam.h"
 MapConfig sam_maps[] = {
     { MAP_UNSPLIT(sam_01, 0x80241F70), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_02, 0x80241C00), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_03, 0x80240940), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_04, 0x80240740), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_05, 0x80241D60), .bgName = "sam_bg" },
-    { MAP_UNSPLIT(sam_06, 0x80242630), .bgName = "sam_bg" },
+    { MAP(sam_06), .bgName = "sam_bg" },
     { MAP_UNSPLIT(sam_07, 0x80242020), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(sam_08, 0x802417D0), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(sam_09, 0x80240420), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },

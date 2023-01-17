@@ -1,5 +1,10 @@
 #include "common.h"
 
+// to use this include, you must also define these
+extern EvtScript N(EVS_ToadHouse_SetDialogue);
+extern EvtScript N(EVS_ToadHouse_ReturnFromRest);
+extern EvtScript N(EVS_ToadHouse_GetInBed);
+
 EvtScript N(8024AC14) = {
     EVT_CALL(EnableModel, LVar4, FALSE)
     EVT_CALL(EnableModel, LVar5, TRUE)

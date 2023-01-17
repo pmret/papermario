@@ -1688,7 +1688,7 @@ enum ItemIDs {
     ITEM_LETTER20                     = 0x0000004E,
     ITEM_LETTER21                     = 0x0000004F,
     ITEM_LETTER22                     = 0x00000050,
-    ITEM_LETTER23                     = 0x00000051,
+    ITEM_LETTER_TO_FROSTT             = 0x00000051,
     ITEM_LETTER24                     = 0x00000052,
     ITEM_ARTIFACT                     = 0x00000053,
     ITEM_LETTER25                     = 0x00000054,
