@@ -203,4 +203,180 @@ void fx_65_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
+// floats and more
+#ifdef NON_MATCHING
+void fx_65_appendGfx(void* effect) {
+    Effect65FXData* data = ((EffectInstance*)effect)->data.unk_65;
+    Matrix4f sp10;
+    s32 sp50;
+    s32 sp54;
+    f32 sp58;
+    Gfx* vtxBuffer;
+    s32 sp60;
+    s32 sp64;
+    s32 sp68;
+    s32 idx;
+    s32 idx2;
+    f32 posX, posY, posZ;
+    f32 deltaX, deltaY;
+    Vtx_t* vtx;
+    s32 i;
+
+    f32 temp_f22;
+    f32 temp_f2;
+    f32 var_f12;
+    f32 var_f20;
+    f32 var_f30;
+    s32 temp_fp;
+    s32 temp_s1;
+    s32 temp_s5;
+    s32 temp_s5_2;
+    s32 temp_v0;
+    s32 temp_v1_2;
+    s32 var_fp;
+    s32 vtxG;
+    s32 var_s1;
+    s32 vtxB;
+    s32 vtxR;
+    s32 vtxA;
+
+    sp50 = data->unk_14;
+    temp_s5 = data->unk_24;
+    sp54 = data->unk_00;
+    sp58 = data->unk_34;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guTranslateF(sp10, 0.0f, 0.0f, 0.0f);
+    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMasterGfxPos++, D_E00CACB0[sp54]);
+
+    if (sp54 >= 2) {
+        gDPSetCombineLERP(gMasterGfxPos++, SHADE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, COMBINED, COMBINED, 0, PRIMITIVE, 0);
+    }
+    var_fp = 0;
+    sp60 = -1;
+    sp64 = (sp50 & 0x3F) << 5;
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, temp_s5);
+    gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, 0);
+    gSPBranchList(gMasterGfxPos, &gMasterGfxPos[121]);
+
+    vtxBuffer = (Vtx_t*) (gMasterGfxPos + 1);
+    gMasterGfxPos = &gMasterGfxPos[121];
+
+    for (i = 1; i < 30; i++) {
+        if (data->unk_230[(data->unk_2A8 + i) % 30] != 0) {
+            var_fp += 1;
+        }
+    }
+
+    temp_fp = var_fp - 1;
+    i = 0;
+    if (temp_fp > 0) {
+        sp68 = 0;
+
+        for (; i < 30; i++) {
+            Vtx_t* vtx = &vtxBuffer[i * 2];
+
+            idx2 = (data->unk_2A8 + (i + 1)) % 30;
+            vtxA = shim_sin_deg((f32) (sp68 / temp_fp)) * 255.0f;
+            if (vtxA > 200) {
+                vtxA = 200;
+            }
+            if (data->unk_230[idx2] != 0) {
+                if (sp60 == -1) {
+                    idx = idx2 + 1;
+                    if (idx >= 30) {
+                        idx = 0;
+                    }
+                    sp60 = i;
+                    var_f30 = -shim_atan2(data->unk_C8[idx], -data->unk_50[idx], data->unk_C8[idx2], -data->unk_50[idx2]);
+                } else {
+                    idx = idx2 + 1;
+                    if (i != 0x1D) {
+                        var_s1 = idx2 - 1;
+                        if (idx >= 30) {
+                            idx = 0;
+                        }
+                        if (var_s1 < 0) {
+                            var_s1 = 29;
+                        }
+                        var_f20 = -shim_atan2(data->unk_C8[idx], -data->unk_50[idx], data->unk_C8[idx2], -data->unk_50[idx2]);
+                        var_f12 = -shim_atan2(data->unk_C8[idx2], -data->unk_50[idx2], data->unk_C8[var_s1], -data->unk_50[var_s1]);
+                        temp_f2 = var_f12 - var_f20;
+                        if (temp_f2 > 180.0f) {
+                            var_f20 += 360.0f;
+                        } else if (temp_f2 < -180.0f) {
+                            var_f12 += 360.0f;
+                        }
+                        var_f30 = (f64) (var_f20 + var_f12) * 0.5;
+                    }
+                }
+                temp_v1_2 = data->unk_1B8[idx2];
+                posX = data->unk_50[idx2];
+                posY = data->unk_C8[idx2];
+                posZ = data->unk_140[idx2];
+                temp_s1 = sp50 - temp_v1_2;
+                //temp_f22 = ((shim_sin_deg(((sp50 - (temp_v1_2 * 80)) * 4)) * 3.0f) + 16.0f + temp_s1) * sp58;
+                temp_f22 = ((shim_sin_deg((sp50 - (temp_v1_2 * 80)) * 4) * 3.0f) + 16.0f) + temp_s1;
+                temp_f22 = temp_f22 * sp58;
+                temp_s5_2 = (data->unk_2AC[idx2] * 24.0f) + sp64;
+
+                do {
+                    vtxR = 0xFF;
+                    vtxG = 0xFF;
+                    vtxB = 0xFF - (temp_s1 * 100);
+                    if (vtxB < 0) {
+                        vtxG = ((f32) vtxB * 0.8) + 255.0;
+                        vtxB = 0;
+                        if (vtxG < 0) {
+                            vtxR = ((f32) vtxG * 0.4) + 255.0;
+                            vtxG = 0;
+                            if (vtxR < 0) {
+                                vtxR = 0;
+                            }
+                        }
+                    }
+                } while (0);
+
+                deltaX = temp_f22 * shim_sin_deg(var_f30);
+                deltaY = temp_f22 * shim_cos_deg(var_f30);
+                sp68 += 180;
+
+                vtx->ob[0] = posX + deltaX;
+                vtx->ob[1] = posY + deltaY;
+                vtx->ob[2] = posZ + 0.0f;
+                vtx->tc[0] = temp_s5_2;
+                vtx->tc[1] = 0x400;
+                vtx->cn[0] = vtxR;
+                vtx->cn[1] = vtxG;
+                vtx->cn[2] = vtxB;
+                vtx->cn[3] = vtxA;
+                vtx++;
+
+                vtx->ob[0] = posX - deltaX;
+                vtx->ob[1] = posY - deltaY;
+                vtx->ob[2] = posZ + 0.0f;
+                vtx->tc[0] = temp_s5_2;
+                vtx->tc[1] = 0;
+                vtx->cn[0] = vtxR;
+                vtx->cn[1] = vtxG;
+                vtx->cn[2] = vtxB;
+                vtx->cn[3] = vtxA;
+                vtx++;
+            }
+        }
+
+        for (i = sp60; i < 29; i++) {
+            gSPVertex(gMasterGfxPos++, &vtxBuffer[i * 4], 4, 0);
+            gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+        }
+    }
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}
+#else
 INCLUDE_ASM(s32, "effects/effect_65", fx_65_appendGfx);
+#endif

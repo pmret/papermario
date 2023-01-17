@@ -126,7 +126,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
 s32 gPauseTabsCurrentTab = 0;
 s32 gPauseTabsMessages[] = { 27, 28, 29, 30, 31, 32 };
 u8 gPauseTabsInterpTable[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8 };
-s32 D_8024F310 = 1;
+s32 gPauseDoBasicWindowUpdate = TRUE; // TODO rename (eth name)
 MenuPanel gPausePanelTabs = {
     .initialized = FALSE,
     .col = 0,
@@ -385,9 +385,9 @@ void pause_tabs_update(MenuPanel* tab) {
             if (gWindows[gPauseTabsPageWindowIDs[tab->col]].fpUpdate.func == pause_update_page_inactive_1 ||
                 gWindows[gPauseTabsPageWindowIDs[tab->col]].fpUpdate.func == pause_update_page_inactive_2 ||
                 gWindows[gPauseTabsPageWindowIDs[tab->col]].fpUpdate.i == 2) {
-                if (D_8024F310 != 0) {
+                if (gPauseDoBasicWindowUpdate) {
                     fpUpdateActive = &basic_window_update;
-                    D_8024F310 = 0;
+                    gPauseDoBasicWindowUpdate = FALSE;
                 }
 
                 set_window_update(gPauseTabsPageWindowIDs[tab->col], (s32)fpUpdateActive);

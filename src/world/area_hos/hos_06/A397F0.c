@@ -16,10 +16,9 @@ extern IconHudScriptPair gItemHudScripts[];
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 #define NAMESPACE hos_06
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_80240654_A39B34);
-
 extern s32 N(ItemChoice_HasSelectedItem);
 extern s32 N(ItemChoice_SelectedItemID);
+#include "world/common/todo/ItemChoice_WaitForSelection.inc.c"
 
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

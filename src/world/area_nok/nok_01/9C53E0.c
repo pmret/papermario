@@ -1,9 +1,6 @@
 #include "nok_01.h"
 #include "effects.h"
 
-extern s32 N(ItemChoice_HasSelectedItem);
-extern s32 N(ItemChoice_SelectedItemID);
-
 static char* N(exit_str_0) = "nok_13";
 static char* N(exit_str_1) = "nok_02";
 
@@ -25,25 +22,9 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
-// Requires data migration
-#ifdef NON_MATCHING
-ApiStatus func_80242028_9C7408(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        nok_01_ItemChoice_HasSelectedItem = FALSE;
-    }
-
-    if (nok_01_ItemChoice_HasSelectedItem) {
-        nok_01_ItemChoice_HasSelectedItem = FALSE;
-        evt_set_variable(script, *args++, nok_01_ItemChoice_SelectedItemID);
-        return ApiStatus_DONE2;
-    }
-    return ApiStatus_BLOCK;
-}
-#else
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80242028_9C7408);
-#endif
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+#include "world/common/todo/ItemChoice_WaitForSelection.inc.c"
 
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

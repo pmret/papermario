@@ -13,10 +13,9 @@ ApiStatus func_80240F60_D4DFA0(Evt* script, s32 isInitialCall) {
 
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802411AC_D4E1EC);
-
 extern s32 N(ItemChoice_HasSelectedItem);
 extern s32 N(ItemChoice_SelectedItemID);
+#include "world/common/todo/ItemChoice_WaitForSelection.inc.c"
 
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -2035,7 +2035,7 @@ s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* blueprint, s32* loade
                 if (bp->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                     s32 size = (bpDmaList[0].end - bpDmaList[0].start) >> 2;
                     *loadedEnd = *loadedStart = *loadedStart + size;
-                    size = (bpDmaList[1].end - bpDmaList[1].start) >> 2;;
+                    size = (bpDmaList[1].end - bpDmaList[1].start) >> 2;
                     *loadedStart = *loadedStart + size;
                 } else {
                     *loadedStart += (bp->dma.end - bp->dma.start) >> 2;

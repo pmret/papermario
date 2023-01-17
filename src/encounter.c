@@ -1863,7 +1863,7 @@ void update_encounters_post_battle(void) {
                 }
 
                 enemy = currentEncounter->currentEnemy;
-                encounter = currentEncounter->currentEncounter;;
+                encounter = currentEncounter->currentEncounter;
                 if (!(enemy->flags & ENEMY_FLAG_40000)) {
                     enemy->aiPaused = 45;
                     playerStatus->blinkTimer = 45;

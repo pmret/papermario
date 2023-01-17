@@ -108,15 +108,18 @@ BSS f32 D_8024F2EC;
 BSS f32 D_8024F2F0;
 BSS f32 D_8024F2F4;
 BSS f32 D_8024F2F8;
-BSS s32 D_8024F2FC;
-BSS s32 D_8024F300;
-BSS s32 D_8024F304;
-BSS s32 D_8024F308;
-BSS s32 D_8024F30C;
-BSS char B_8024F310[0x8];
-BSS char D_8024F318[0x20];
-BSS char D_8024F338[0x20];
-BSS char D_8024F358[0x1C];
+BSS f32 D_8024F2FC;
+BSS f32 D_8024F300;
+BSS f32 D_8024F304;
+BSS f32 D_8024F308;
+BSS f32 D_8024F30C;
+BSS f32 D_8024F310;
+BSS char B_8024F314[0x4];
+BSS f32 D_8024F318[7];
+BSS char D_8024F334[0x4];
+BSS f32 D_8024F338[7];
+BSS char D_8024F354[0x4];
+BSS f32 D_8024F358[7];
 BSS f32 D_8024F374;
 BSS f32 D_8024F378;
 BSS char D_8024F37C[0x4];
@@ -875,7 +878,52 @@ void func_80243ED0_A2E110(s32 arg0, s32 idx) {
     }
 }
 
+// close-ish
+#ifdef NON_MATCHING
+ApiStatus func_80243FC4_A2E204(Evt* script, s32 isInitialCall) {
+    s32 dmaEnd;
+    s32 dmaStart;
+    s32 someLength;
+    void* textureAddress;
+
+    D_8024AA20_A34C60->unk_00 = create_worker_frontUI(NULL, func_80243CC0_A2DF00);
+    textureAddress = mdl_get_next_texture_address(0x1D420);
+    D_8024AA20_A34C60->unk_08 = textureAddress + 0xA710;
+    D_8024AA20_A34C60->unk_0C = (u8*)D_8024AA20_A34C60->unk_08 + 0x200;
+    D_8024AA20_A34C60->unk_10 = (u8*)D_8024AA20_A34C60->unk_0C + 0xA710;
+    D_8024AA20_A34C60->unk_18 = (u8*)D_8024AA20_A34C60->unk_10 + 0x200;
+    D_8024AA20_A34C60->unk_1C = (u8*)D_8024AA20_A34C60->unk_18 + 0x4000;
+    D_8024AA20_A34C60->unk_20 = (u8*)D_8024AA20_A34C60->unk_1C + 0x4000;
+    D_8024AA20_A34C60->unk_04 = textureAddress;
+    D_8024AA20_A34C60->unk_46 = 240;
+    D_8024AA20_A34C60->unk_48 = 111;
+    D_8024AA20_A34C60->unk_3C = 0;
+    D_8024AA20_A34C60->unk_3E = 0;
+    D_8024AA20_A34C60->unk_40 = 0;
+    D_8024AA20_A34C60->unk_42 = 0;
+    D_8024AA20_A34C60->unk_44 = 0;
+    D_8024AA20_A34C60->unk_4A = 54;
+    func_80243ED0_A2E110(0, 0);
+    func_80243ED0_A2E110(1, 1);
+
+    someLength = 0x2A440;
+
+    dmaStart = title_bg_1_ROM_START;
+    dmaEnd = dmaStart + someLength;
+
+    dmaEnd += 0x4000;
+    dmaEnd += someLength;
+    dmaEnd += 0x4200;
+
+    dma_copy(dmaStart, dmaEnd, D_8024AA20_A34C60->unk_18);
+    D_8024AA20_A34C60->unk_58 = 0;
+    D_8024AA20_A34C60->unk_5A = 255;
+    D_8024AA20_A34C60->unk_5C = 0;
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80243FC4_A2E204);
+#endif
 
 NOP_FIX // TODO remove when D_8024AAB4_A34CF4 is migrated
 
@@ -997,7 +1045,52 @@ ApiStatus func_802444E8_A2E728(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
+#ifdef NON_MATCHING
+ApiStatus func_80244550_A2E790(Evt* script, s32 isInitialCall) {
+    Npc* npc = resolve_npc(script, 9);
+    EffectInstance* effect = evt_get_variable(script, ArrayVar(0));
+    f32 x, y, z;
+    s32 i;
+
+    if (isInitialCall) {
+        D_8024F2FC = npc->pos.x;
+        D_8024F300 = npc->pos.y;
+        D_8024F304 = npc->pos.z;
+
+        for (i = 0; i < ARRAY_COUNT(D_8024F318); i++) {
+            Npc* npc2 = resolve_npc(script, i);
+
+            D_8024F318[i] = npc2->pos.x;
+            D_8024F338[i] = npc2->pos.y;
+            D_8024F358[i] = npc2->pos.z;
+        }
+        D_8024F308 = effect->data.somethingRotating->unk_04;
+        D_8024F30C = effect->data.somethingRotating->unk_08;
+        D_8024F310 = effect->data.somethingRotating->unk_0C;
+    }
+
+    x = npc->pos.x - D_8024F2FC;
+    y = npc->pos.y - D_8024F300;
+    z = npc->pos.z - D_8024F304;
+
+    for (i = 0; i < ARRAY_COUNT(D_8024F318); i++) {
+        Npc* npc2 = resolve_npc(script, i);
+
+        npc2->pos.x = D_8024F318[i] + x;
+        npc2->pos.y = D_8024F338[i] + y;
+        npc2->pos.z = D_8024F358[i] + z;
+        npc2->colliderPos.x = npc2->pos.x;
+        npc2->colliderPos.y = npc2->pos.y;
+        npc2->colliderPos.z = npc2->pos.z;
+    }
+    effect->data.somethingRotating->unk_04 = D_8024F308 + x;
+    effect->data.somethingRotating->unk_08 = D_8024F30C + y;
+    effect->data.somethingRotating->unk_0C = D_8024F310 + z;
+    return ApiStatus_BLOCK;
+}
+#else
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80244550_A2E790);
+#endif
 
 ApiStatus func_80244774_A2E9B4(Evt* script, s32 isInitialCall) {
     Npc* npc7 = resolve_npc(script, 7);

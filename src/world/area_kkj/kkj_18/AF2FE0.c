@@ -1,33 +1,13 @@
 #include "kkj_18.h"
 #include "camera.h"
 
-extern s32 N(ItemChoice_HasSelectedItem);
-extern s32 N(ItemChoice_SelectedItemID);
-
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
-// Needs data migration, matching otherwise
-#ifdef NON_MATCHING
-ApiStatus func_8024056C_AF320C(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        kkj_18_ItemChoice_HasSelectedItem = 0;
-    }
-
-    if (kkj_18_ItemChoice_HasSelectedItem != 0) {
-        kkj_18_ItemChoice_HasSelectedItem = 0;
-        evt_set_variable(script, *args++, kkj_18_ItemChoice_SelectedItemID);
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-#else
-INCLUDE_ASM(s32, "world/area_kkj/kkj_18/AF2FE0", func_8024056C_AF320C);
-#endif
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+#include "world/common/todo/ItemChoice_WaitForSelection.inc.c"
 
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

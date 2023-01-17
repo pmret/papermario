@@ -8,10 +8,9 @@
 
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_802414EC_B2D95C);
-
 extern s32 N(ItemChoice_HasSelectedItem);
 extern s32 N(ItemChoice_SelectedItemID);
+#include "world/common/todo/ItemChoice_WaitForSelection.inc.c"
 
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

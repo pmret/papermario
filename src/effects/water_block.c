@@ -157,8 +157,8 @@ void water_block_update(EffectInstance* effect) {
     temp_s0 = data->unk_14;
     if (temp_a0 == 0) {
         if (temp_v1_3 < 16) {
-            data->unk_24 = temp_v1_3 * 16;;
-            data->unk_28 = temp_v1_3 * 16;;
+            data->unk_24 = temp_v1_3 * 16;
+            data->unk_28 = temp_v1_3 * 16;
         }
         if (temp_s0 < 16) {
             data->unk_24 = (temp_s0 * 16) + 15;
