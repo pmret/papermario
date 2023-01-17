@@ -1397,6 +1397,7 @@ enum SoundIDs {
     SOUND_80000010                  = 0x80000010,
     SOUND_80000011                  = 0x80000011,
     SOUND_80000015                  = 0x80000015,
+    SOUND_80000016                  = 0x80000016,
     SOUND_80000017                  = 0x80000017,
     SOUND_80000018                  = 0x80000018,
     SOUND_80000019                  = 0x80000019,
@@ -4337,7 +4338,7 @@ enum BattleSubStates {
     BTL_SUBSTATE_CHANGE_PARTNER_EXEC_PHASE                  = 5,
     BTL_SUBSTATE_CHANGE_PARTNER_AWAIT_PHASE                 = 6,
     BTL_SUBSTATE_CHANGE_PARTNER_DONE                        = 7,
-    
+
     // BATTLE_STATE_END_TRAINING_BATTLE
     BTL_SUBSTATE_END_TRAINING_INIT                          = 0,
     BTL_SUBSTATE_END_TRAINING_AWAIT_RECOVERING              = 10,
