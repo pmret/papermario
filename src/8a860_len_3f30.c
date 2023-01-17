@@ -1153,11 +1153,7 @@ void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 widt
                         s0 = 10;
                     }
                     set_message_value(gPopupMenu->userIndex[i] + 1, 0);
-<<<<<<< Updated upstream
-                    draw_msg(MSG_Menus_00CD, x + 8, var_s1_3, D_8010D650, s0, 1);
-=======
-                    draw_msg(0x1D00CD, x + 8, y, D_8010D650, s0, 1);
->>>>>>> Stashed changes
+                    draw_msg(MSG_Menus_00CD, x + 8, y, D_8010D650, s0, 1);
                     break;
                 case 11:
                     if (gPopupMenu->value[i] != 0) {

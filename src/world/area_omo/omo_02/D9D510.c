@@ -1,8 +1,8 @@
 #include "omo_02.h"
 #include "model.h"
 
-extern s32 D_802434F8_DA09C8[];
-extern s32 D_80243580_DA0A50[];
+extern s32 D_802434F8_DA09C8[2]; // TODO: remove hard-coded size once the data is migrated
+extern s32 D_80243580_DA0A50[12]; // TODO: remove hard-coded size once the data is migrated
 extern s32 D_802435B0_DA0A80[];
 
 ApiStatus func_80240040_D9D510(Evt* script, s32 isInitialCall) {
@@ -17,7 +17,7 @@ ApiStatus func_80240040_D9D510(Evt* script, s32 isInitialCall) {
         it = heap_malloc(sizeof(*it) * 2);
         script->functionTempPtr[0] = it;
 
-        for (i = 0; i < 2; i++, it++) {
+        for (i = 0; i < ARRAY_COUNT(D_802434F8_DA09C8); i++, it++) {
             s32 treeIndex = D_802434F8_DA09C8[i];
 
             it->treeIndex = treeIndex;
@@ -31,7 +31,7 @@ ApiStatus func_80240040_D9D510(Evt* script, s32 isInitialCall) {
     }
 
     it = script->functionTempPtr[0];
-    for (i = 0; i < 2; i++, it++) {
+    for (i = 0; i < ARRAY_COUNT(D_802434F8_DA09C8); i++, it++) {
         it->unk_10 += it->unk_0C;
         it->unk_10 = clamp_angle(it->unk_10);
         temp_f20 = sin_rad((it->unk_10 * 3.14f) / 180.0f) * 20.0f;
@@ -119,7 +119,7 @@ ApiStatus func_8024043C_D9D90C(Evt* script, s32 isInitialCall) {
         script->functionTemp[1] = 0;
 
         it = (UnkOmoThing*) script->functionTempPtr[0];
-        for (i = 0; i < 12; i++, it++) {
+        for (i = 0; i < ARRAY_COUNT(D_80243580_DA0A50); i++, it++) {
             it->treeIndex = D_80243580_DA0A50[i];
             it->colliderID = D_802435B0_DA0A80[i];
             model = get_model_from_list_index(get_model_list_index_from_tree_index(it->treeIndex));
@@ -150,7 +150,7 @@ ApiStatus func_8024043C_D9D90C(Evt* script, s32 isInitialCall) {
     }
 
     it = script->functionTempPtr[0];
-    for (i = 0; i < 12; i++, it++) {
+    for (i = 0; i < ARRAY_COUNT(D_80243580_DA0A50); i++, it++) {
         model = get_model_from_list_index(get_model_list_index_from_tree_index(it->treeIndex));
         if (it->unk_00 != 100) {
             if (it->unk_00 < 101) {
@@ -202,7 +202,7 @@ ApiStatus func_8024043C_D9D90C(Evt* script, s32 isInitialCall) {
         guMtxCatF(model->transformMatrix, sp18, model->transformMatrix);
     }
 
-    if ((u32) script->functionTemp[1] >= 12) {
+    if ((u32) script->functionTemp[1] >= ARRAY_COUNT(D_80243580_DA0A50)) {
         heap_free(script->functionTempPtr[0]);
         return ApiStatus_DONE2;
     }

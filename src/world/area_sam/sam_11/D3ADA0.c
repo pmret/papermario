@@ -75,12 +75,11 @@ ApiStatus func_80241A6C_D3C03C(Evt* script, s32 isInitialCall) {
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-// zero float issue
-#ifdef NON_MATCHING
 ApiStatus func_80241DAC_D3C37C(Evt* script, s32 isInitialCall) {
     EffectInstance* effect;
-    f32 a1;
+    f32 a5;
     f32 a3;
+    f32 a1;
     f32 delta;
 
     f32 t1;
@@ -88,31 +87,29 @@ ApiStatus func_80241DAC_D3C37C(Evt* script, s32 isInitialCall) {
     s32 i;
 
     for (i = 0; i < 24; i++) {
-        t1 = ((i % 6) * 40) - 100;
-        t2 = ((i / 6) * 40) - 100;
-        a1 = t1 + 0.0f;
-        a3 = t2 + 250.0f;
+        a1 = t1 = ((i % 6) * 40) - 100;
+        a3 = t2 = ((i / 6) * 40) - 100;
+
+        a1 += a5 = 0.0f; // TODO required to match;
+        a3 += 250.0f;
 
         t1 *= 0.1;
         t2 *= 0.1;
 
         effect = fx_ice_shard(i & 1, a1, -10.0f, a3, 2.0 * ((i & 3) + 1.0), ((i & 3) * 4) + 30);
 
-        a1 = 4.0f;
+        a5 = 4.0f;
         effect->data.iceShard->unk_44 = 0.0f;
         effect->data.iceShard->unk_48 = (rand_int(10) * 0.2) + 0.1;
         effect->data.iceShard->unk_3C = i * 35;
         effect->data.iceShard->unk_40 = rand_int(10) - 5;
         effect->data.iceShard->unk_4C = t1;
-        effect->data.iceShard->unk_50 = a1;
+        effect->data.iceShard->unk_50 = a5;
         effect->data.iceShard->unk_54 = t2;
         effect->data.iceShard->unk_58 = -0.1f;
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80241DAC_D3C37C);
-#endif
 
 static char* N(exit_str_0) = "sam_02";
 
