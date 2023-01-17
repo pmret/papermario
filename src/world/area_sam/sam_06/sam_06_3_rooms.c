@@ -1,12 +1,12 @@
 #include "sam_06.h"
 
-EvtScript N(D_80243970_D23800) = {
+EvtScript N(EVS_SetDoorRot_ToadHouse) = {
     EVT_CALL(RotateModel, MODEL_khm_doa, LVar0, 0, -1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802439A0_D23830) = {
+EvtScript N(EVS_MoveWalls_ToadHouse) = {
     EVT_CALL(RotateGroup, MODEL_khm_yane, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_khm_sita, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
@@ -19,26 +19,26 @@ EvtScript N(D_802439A0_D23830) = {
     EVT_END
 };
 
-EvtScript N(D_80243A48_D238D8) = {
+EvtScript N(EVS_ToggleVis_ToadHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_SET(AF_SAM_01, FALSE)
+            EVT_SET(AF_SAM06_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_kh_naiso, 1)
         EVT_CASE_EQ(3)
-            EVT_SET(AF_SAM_01, TRUE)
+            EVT_SET(AF_SAM06_Snowing, TRUE)
             EVT_CALL(SetGroupEnabled, MODEL_kh_naiso, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243ACC_D2395C) = {
+EvtScript N(EVS_SetDoorRot_MerleHouse) = {
     EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243AFC_D2398C) = {
+EvtScript N(EVS_MoveWalls_MerleHouse) = {
     EVT_CALL(RotateGroup, MODEL_km_yane, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_km_sita, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
@@ -51,10 +51,10 @@ EvtScript N(D_80243AFC_D2398C) = {
     EVT_END
 };
 
-EvtScript N(D_80243BA4_D23A34) = {
+EvtScript N(EVS_ToggleVis_MerleHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_SET(AF_SAM_01, FALSE)
+            EVT_SET(AF_SAM06_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 1)
             EVT_CALL(EnableModel, MODEL_k_naiso, TRUE)
         EVT_CASE_EQ(2)
@@ -62,23 +62,23 @@ EvtScript N(D_80243BA4_D23A34) = {
                 EVT_CALL(DisablePlayerInput, TRUE)
             EVT_END_IF
         EVT_CASE_EQ(3)
-            EVT_SET(AF_SAM_01, TRUE)
+            EVT_SET(AF_SAM06_Snowing, TRUE)
             EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 0)
             EVT_IF_LT(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_SCARF)
-                EVT_EXEC_WAIT(N(EVS_80248CE4))
+                EVT_EXEC_WAIT(N(EVS_Scene_Merle_OneLastThing))
             EVT_END_IF
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243C94_D23B24) = {
+EvtScript N(EVS_SetDoorRot_CookHouse) = {
     EVT_CALL(RotateModel, MODEL_o122, LVar0, 0, -1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243CC4_D23B54) = {
+EvtScript N(EVS_MoveWalls_CookHouse) = {
     EVT_CALL(RotateGroup, MODEL_hm_yane, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_hm_sita, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
@@ -101,44 +101,74 @@ EvtScript N(D_80243CC4_D23B54) = {
     EVT_END
 };
 
-EvtScript N(D_80243E34_D23CC4) = {
+EvtScript N(EVS_ToggleVis_CookHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_SET(AF_SAM_01, FALSE)
+            EVT_SET(AF_SAM06_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_h_naiso, 1)
         EVT_CASE_EQ(3)
-            EVT_SET(AF_SAM_01, TRUE)
+            EVT_SET(AF_SAM06_Snowing, TRUE)
             EVT_CALL(SetGroupEnabled, MODEL_h_naiso, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-s32 N(D_80243EB8_D23D48)[] = {
+s32 N(InteriorNPCs_ToadHouse)[] = {
     NPC_ShiverToad_04,
     -1
 };
 
-s32 N(D_80243EC0_D23D50)[] = {
+s32 N(InteriorNPCs_MerleHouse)[] = {
     NPC_Merle,
     -1
 };
 
-s32 N(D_80243EC8_D23D58)[] = {
+s32 N(InteriorNPCs_CookHouse)[] = {
     NPC_Ninji_04,
-    NPC_Twink_04,
-    NPC_Twink_05,
-    NPC_Twink_06,
+    NPC_StarKid_04,
+    NPC_StarKid_05,
+    NPC_StarKid_06,
     -1
 };
 
 EvtScript N(EVS_SetupRooms) = {
+    // toad house
     EVT_CALL(SetGroupEnabled, MODEL_kh_naiso, 0)
-    EVT_CALL(MakeDoorAdvanced, 2, EVT_PTR(N(D_80243970_D23800)), EVT_PTR(N(D_802439A0_D23830)), 0, EVT_PTR(N(D_80243A48_D238D8)), COLLIDER_kh_d1, COLLIDER_kh_d2, MODEL_kinohuse, EVT_PTR(N(D_80243EB8_D23D48)))
+    EVT_CALL(MakeDoorAdvanced,
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+        EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
+        EVT_PTR(N(EVS_MoveWalls_ToadHouse)),
+        NULL,
+        EVT_PTR(N(EVS_ToggleVis_ToadHouse)),
+        COLLIDER_kh_d1,
+        COLLIDER_kh_d2,
+        MODEL_kinohuse,
+        EVT_PTR(N(InteriorNPCs_ToadHouse)))
+    // merle's house
     EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 0)
-    EVT_CALL(MakeDoorAdvanced, 2, EVT_PTR(N(D_80243ACC_D2395C)), EVT_PTR(N(D_80243AFC_D2398C)), 0, EVT_PTR(N(D_80243BA4_D23A34)), COLLIDER_k_d1, COLLIDER_k_d2, MODEL_k, EVT_PTR(N(D_80243EC0_D23D50)))
+    EVT_CALL(MakeDoorAdvanced,
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+        EVT_PTR(N(EVS_SetDoorRot_MerleHouse)),
+        EVT_PTR(N(EVS_MoveWalls_MerleHouse)),
+        NULL,
+        EVT_PTR(N(EVS_ToggleVis_MerleHouse)),
+        COLLIDER_k_d1,
+        COLLIDER_k_d2,
+        MODEL_k,
+        EVT_PTR(N(InteriorNPCs_MerleHouse)))
+    // cooking house
     EVT_CALL(SetGroupEnabled, MODEL_h_naiso, 0)
-    EVT_CALL(MakeDoorAdvanced, 2, EVT_PTR(N(D_80243C94_D23B24)), EVT_PTR(N(D_80243CC4_D23B54)), 0, EVT_PTR(N(D_80243E34_D23CC4)), COLLIDER_h_doa1, COLLIDER_h_doa2, MODEL_hakun, EVT_PTR(N(D_80243EC8_D23D58)))
+    EVT_CALL(MakeDoorAdvanced,
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+        EVT_PTR(N(EVS_SetDoorRot_CookHouse)),
+        EVT_PTR(N(EVS_MoveWalls_CookHouse)),
+        NULL,
+        EVT_PTR(N(EVS_ToggleVis_CookHouse)),
+        COLLIDER_h_doa1,
+        COLLIDER_h_doa2,
+        MODEL_hakun,
+        EVT_PTR(N(InteriorNPCs_CookHouse)))
     EVT_RETURN
     EVT_END
 };

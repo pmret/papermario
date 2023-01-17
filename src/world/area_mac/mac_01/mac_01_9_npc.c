@@ -3,9 +3,6 @@
 #include "hud_element.h"
 
 extern IconHudScriptPair gItemHudScripts[];
-extern EvtScript N(EVS_ToadHouse_GetInBed);
-extern EvtScript N(EVS_ToadHouse_SetDialogue);
-extern EvtScript N(EVS_ToadHouse_ReturnFromRest);
 extern EvtScript N(EVS_MerlonBargeOut);
 
 #include "world/common/npc/Toad_Wander.inc.c"

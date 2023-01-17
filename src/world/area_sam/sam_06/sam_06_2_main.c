@@ -136,17 +136,17 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_END
 };
 
-EvtScript N(D_8024325C_D230EC) = {
-    EVT_SET(AF_SAM_01, TRUE)
-    EVT_SET(AF_SAM_02, FALSE)
+EvtScript N(EVS_ManageSnowfall) = {
+    EVT_SET(AF_SAM06_Snowing, TRUE)
+    EVT_SET(AF_SAM06_LastSnowing, FALSE)
     EVT_LABEL(10)
-        EVT_IF_NE(AF_SAM_01, AF_SAM_02)
-            EVT_IF_EQ(AF_SAM_01, FALSE)
+        EVT_IF_NE(AF_SAM06_Snowing, AF_SAM06_LastSnowing)
+            EVT_IF_EQ(AF_SAM06_Snowing, FALSE)
                 EVT_CALL(RemoveEffect, LVarF)
             EVT_ELSE
                 EVT_PLAY_EFFECT(EFFECT_SNOWFALL, 0, 10)
             EVT_END_IF
-            EVT_SET(AF_SAM_02, AF_SAM_01)
+            EVT_SET(AF_SAM06_LastSnowing, AF_SAM06_Snowing)
         EVT_END_IF
         EVT_WAIT(1)
         EVT_GOTO(10)
@@ -154,7 +154,7 @@ EvtScript N(D_8024325C_D230EC) = {
     EVT_END
 };
 
-EvtScript N(D_8024334C_D231DC) = {
+EvtScript N(EVS_TexPan_Fire) = {
     EVT_CALL(EnableTexPanning, MODEL_hi1, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_hi2, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_hi3, TRUE)
@@ -178,8 +178,8 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(ClearDefeatedEnemies)
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC_WAIT(N(EVS_SetupMusic))
-    EVT_EXEC(N(D_8024325C_D230EC))
-    EVT_EXEC(N(D_8024334C_D231DC))
+    EVT_EXEC(N(EVS_ManageSnowfall))
+    EVT_EXEC(N(EVS_TexPan_Fire))
     EVT_EXEC_WAIT(N(EVS_SetupRooms))
     EVT_CALL(SetRenderMode, MODEL_h_yuki2, RENDER_MODE_SURFXLU_ZB_ZUPD)
     EVT_CALL(SetRenderMode, MODEL_khm_y2, RENDER_MODE_SURFXLU_ZB_ZUPD)

@@ -26,21 +26,21 @@ enum {
     NPC_Ninji_02                = 5,
     NPC_Ninji_03                = 6,
     NPC_Ninji_04                = 7,
-    NPC_Twink_01                = 8,
-    NPC_Twink_02                = 9,
-    NPC_Twink_03                = 10,
-    NPC_Twink_04                = 11,
-    NPC_Twink_05                = 12,
-    NPC_Twink_06                = 13,
+    NPC_StarKid_01              = 8,
+    NPC_StarKid_02              = 9,
+    NPC_StarKid_03              = 10,
+    NPC_StarKid_04              = 11,
+    NPC_StarKid_05              = 12,
+    NPC_StarKid_06              = 13,
     NPC_ShiverToad_04           = 14,
 };
 
 enum {
-    MV_Unk_00       = MapVar(0),
+    MV_ScarfItemID  = MapVar(0),
 };
 
 enum {
-    MF_Unk_00       = MapFlag(0),
+    MF_MerleReady   = MapFlag(0),
 };
 
 #define NAMESPACE sam_06
@@ -51,5 +51,5 @@ extern EvtScript N(EVS_PlayRestingSong);
 extern EvtScript N(EVS_SetupRooms);
 extern EvtScript N(EVS_MakeEntities);
 extern EvtScript N(D_802443D4_D24264);
-extern EvtScript N(EVS_80248CE4);
+extern EvtScript N(EVS_Scene_Merle_OneLastThing);
 extern NpcGroupList N(DefaultNPCs);

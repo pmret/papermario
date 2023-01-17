@@ -21,8 +21,8 @@ enum {
 };
 
 enum {
-    AF_SAM_01       = AreaFlag(1),
-    AF_SAM_02       = AreaFlag(2),
+    AF_SAM06_Snowing       = AreaFlag(1),
+    AF_SAM06_LastSnowing       = AreaFlag(2),
     AF_SAM_05       = AreaFlag(5),
 };
 

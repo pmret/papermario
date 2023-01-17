@@ -1,7 +1,9 @@
 #include "sam_06.h"
 #include "model.h"
 
-MobileAISettings N(D_80243FC0_D23E50) = {
+#include "world/common/npc/Toad_Wander.inc.c"
+
+MobileAISettings N(AISettings_Ninji_Wander) = {
     .moveSpeed = 1.5f,
     .moveTime = 60,
     .waitTime = 30,
@@ -9,29 +11,20 @@ MobileAISettings N(D_80243FC0_D23E50) = {
     .unk_AI_2C = 1,
 };
 
-EvtScript N(D_80243FF0_D23E80) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(D_80243FC0_D23E50)))
+EvtScript N(EVS_NpcAI_Ninji_Wander) = {
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_Ninji_Wander)))
     EVT_RETURN
     EVT_END
 };
 
-NpcSettings N(NpcSettings_unused_80244010_1) = {
-    .height = 30,
+NpcSettings N(NpcSettings_Ninji_Wander) = {
+    .height = 24,
     .radius = 24,
     .level = 99,
-    .ai = &N(D_80243FF0_D23E80),
-    .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
+    .ai = &N(EVS_NpcAI_Ninji_Wander),
 };
 
-NpcSettings N(NpcSettings_unused_80244010_2) = {
-    .height = 23,
-    .radius = 19,
-    .level = 99,
-    .ai = &N(D_80243FF0_D23E80),
-    .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
-};
-
-MobileAISettings N(D_80244068_D23EF8) = {
+MobileAISettings N(AISettings_ShiverToad_Wander) = {
     .moveSpeed = 1.5f,
     .moveTime = 60,
     .waitTime = 30,
@@ -39,119 +32,31 @@ MobileAISettings N(D_80244068_D23EF8) = {
     .unk_AI_2C = 1,
 };
 
-EvtScript N(EVS_NpcAI_Ninji_01) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(D_80244068_D23EF8)))
+EvtScript N(EVS_NpcAI_ShiverToad_Wander) = {
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_ShiverToad_Wander)))
     EVT_RETURN
     EVT_END
 };
 
-NpcSettings N(NpcSettings_Ninji_01) = {
+NpcSettings N(NpcSettings_ShiverToad_Wander) = {
     .height = 24,
     .radius = 24,
     .level = 99,
-    .ai = &N(EVS_NpcAI_Ninji_01),
+    .ai = &N(EVS_NpcAI_ShiverToad_Wander),
 };
 
-MobileAISettings N(D_802440E4_D23F74) = {
-    .moveSpeed = 1.5f,
-    .moveTime = 60,
-    .waitTime = 30,
-    .playerSearchInterval = -1,
-    .unk_AI_2C = 1,
-};
+#include "world/common/npc/Toad_Stationary.inc.c"
 
-EvtScript N(EVS_NpcAI_ShiverToad_02) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(D_802440E4_D23F74)))
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/npc/StarSpirit_Wander.inc.c"
+#include "world/common/npc/StarSpirit.inc.c"
 
-NpcSettings N(NpcSettings_ShiverToad_02) = {
-    .height = 24,
-    .radius = 24,
-    .level = 99,
-    .ai = &N(EVS_NpcAI_ShiverToad_02),
-};
-
-NpcSettings N(NpcSettings_Merle) = {
-    .height = 30,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused_8024418C_418C) = {
-    .height = 23,
-    .radius = 19,
-    .level = 99,
-};
-
-#include "world/common/enemy/ai/FlyingAI.inc.c"
-#include "world/common/enemy/ai/FlyingAI.data.inc.c"
-
-MobileAISettings N(AISettings_Twink_01) = {
-    .moveSpeed = 1.2f,
-    .moveTime = 60,
-    .waitTime = 30,
-    .playerSearchInterval = -1,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(EVS_NpcAI_Twink_01) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 5, 0)
-    EVT_CALL(SetSelfVar, 6, 0)
-    EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(AISettings_Twink_01)))
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_Unused_80244270_4270) = {
-    .height = 26,
-    .radius = 24,
-    .level = 99,
-    .ai = &N(EVS_NpcAI_Twink_01),
-};
-
-NpcSettings N(NpcSettings_Twink_01) = {
-    .height = 20,
-    .radius = 20,
-    .level = 99,
-    .ai = &N(EVS_NpcAI_Twink_01),
-};
-
-NpcSettings N(NpcSettings_Unused_802442C8_42C8_1) = {
-    .height = 22,
-    .radius = 24,
-    .level = 99,
-    .ai = &N(EVS_NpcAI_Twink_01),
-};
-
-NpcSettings N(NpcSettings_Unused_802442C8_42C8_2) = {
-    .height = 26,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Twink_02) = {
-    .height = 20,
-    .radius = 20,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused_8024434C_434C) = {
-    .height = 22,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Ninji_03) = {
+NpcSettings N(NpcSettings_Ninji_Stationary) = {
     .height = 24,
     .radius = 24,
     .level = 99,
 };
 
-NpcSettings N(NpcSettings_ShiverToad_01) = {
+NpcSettings N(NpcSettings_ShiverToad_Stationary) = {
     .height = 24,
     .radius = 24,
     .level = 99,
@@ -204,7 +109,7 @@ EvtScript N(EVS_NpcInteract_Merle) = {
     EVT_END
 };
 
-EvtScript N(D_80247698_D27528) = {
+EvtScript N(EVS_Merle_CarryScarf) = {
     EVT_LABEL(0)
         EVT_CALL(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 5)
@@ -219,14 +124,14 @@ EvtScript N(D_80247698_D27528) = {
         EVT_ELSE
             EVT_ADD(LVar2, -10)
         EVT_END_IF
-        EVT_CALL(SetItemPos, MV_Unk_00, LVar0, LVar1, LVar2)
+        EVT_CALL(SetItemPos, MV_ScarfItemID, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_802477A8_D27638) = {
+EvtScript N(EVS_Merle_HandOverScarf) = {
     EVT_SET(LVar4, 10)
     EVT_LOOP(10)
         EVT_CALL(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
@@ -242,7 +147,7 @@ EvtScript N(D_802477A8_D27638) = {
         EVT_ELSE
             EVT_SUB(LVar2, LVar4)
         EVT_END_IF
-        EVT_CALL(SetItemPos, MV_Unk_00, LVar0, LVar1, LVar2)
+        EVT_CALL(SetItemPos, MV_ScarfItemID, LVar0, LVar1, LVar2)
         EVT_ADD(LVar4, 1)
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -250,11 +155,11 @@ EvtScript N(D_802477A8_D27638) = {
     EVT_END
 };
 
-EvtScript N(D_802478D4_D27764) = {
+EvtScript N(EVS_Scene_Merle_Greeting) = {
     EVT_CALL(WaitForPlayerInputEnabled)
     EVT_WAIT(1)
     EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_EQ(LVar0, 8)
+    EVT_IF_EQ(LVar0, PARTNER_LAKILESTER)
         EVT_CALL(InterruptUsePartner)
         EVT_CALL(WaitForPlayerTouchingFloor)
     EVT_END_IF
@@ -289,7 +194,7 @@ EvtScript N(D_802478D4_D27764) = {
     EVT_SET(AF_SAM_05, TRUE)
     EVT_SET(GB_StoryProgress, STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_SET(MF_Unk_00, FALSE)
+    EVT_SET(MF_MerleReady, FALSE)
     EVT_THREAD
         EVT_CALL(BindNpcInteract, NPC_Merle, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Merle, NPC_FLAG_100, TRUE)
@@ -307,13 +212,13 @@ EvtScript N(D_802478D4_D27764) = {
         EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
         EVT_CALL(NpcMoveTo, NPC_Merle, -90, 190, 0)
         EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-        EVT_SET(MF_Unk_00, TRUE)
+        EVT_SET(MF_MerleReady, TRUE)
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80247D8C_D27C1C) = {
+EvtScript N(EVS_Scene_Merle_WaitingOnHill) = {
     EVT_LABEL(60)
     EVT_CALL(GetPlayerActionState, LVar0)
     EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
@@ -334,14 +239,14 @@ EvtScript N(D_80247D8C_D27C1C) = {
         EVT_GOTO(60)
     EVT_END_IF
     EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_EQ(LVar0, 8)
+    EVT_IF_EQ(LVar0, PARTNER_LAKILESTER)
         EVT_CALL(InterruptUsePartner)
         EVT_CALL(WaitForPlayerTouchingFloor)
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_IF_EQ(MF_Unk_00, TRUE)
+        EVT_IF_EQ(MF_MerleReady, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -349,7 +254,7 @@ EvtScript N(D_80247D8C_D27C1C) = {
     EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EC)
     EVT_SET(GB_StoryProgress, STORY_CH7_MERLE_APOLOGIZED)
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_SET(MF_Unk_00, FALSE)
+    EVT_SET(MF_MerleReady, FALSE)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
         EVT_CALL(NpcMoveTo, NPC_Merle, -110, 145, 0)
@@ -364,7 +269,7 @@ EvtScript N(D_80247D8C_D27C1C) = {
         EVT_CALL(NpcMoveTo, NPC_Merle, 0, -143, 0)
         EVT_CALL(InterpNpcYaw, NPC_Merle, 270, 0)
         EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-        EVT_SET(MF_Unk_00, TRUE)
+        EVT_SET(MF_MerleReady, TRUE)
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
@@ -405,10 +310,10 @@ API_CALLABLE(N(func_80242538_D223C8)) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript N(D_802480C4_D27F54) = {
+EvtScript N(EVS_Scene_Merle_EnterHouse) = {
     EVT_CALL(AwaitPlayerApproach, 0, -140, 60)
     EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_EQ(LVar0, 8)
+    EVT_IF_EQ(LVar0, PARTNER_LAKILESTER)
         EVT_CALL(InterruptUsePartner)
         EVT_CALL(WaitForPlayerTouchingFloor)
     EVT_END_IF
@@ -416,11 +321,11 @@ EvtScript N(D_802480C4_D27F54) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_IF_EQ(MF_Unk_00, TRUE)
+        EVT_IF_EQ(MF_MerleReady, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_SET(MF_Unk_00, FALSE)
+    EVT_SET(MF_MerleReady, FALSE)
     EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00ED)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
@@ -433,13 +338,13 @@ EvtScript N(D_802480C4_D27F54) = {
     EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, 0)
     EVT_CALL(MakeLerp, 0, 90, 10, EASING_QUADRATIC_OUT)
     EVT_LABEL(70)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(70)
-    EVT_END_IF
-    EVT_SET(AF_SAM_01, FALSE)
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(70)
+        EVT_END_IF
+    EVT_SET(AF_SAM06_Snowing, FALSE)
     EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 1)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
@@ -453,24 +358,24 @@ EvtScript N(D_802480C4_D27F54) = {
     EVT_CALL(PlayerMoveTo, 0, -200, 0)
     EVT_THREAD
         EVT_SET(LVar0, 0)
-        EVT_SET(LVarF, 94)
+        EVT_SET(LVarF, MODEL_k)
         EVT_CALL(SetNpcFlagBits, NPC_Merle, NPC_FLAG_NO_DROPS, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_Twink_03, NPC_FLAG_NO_DROPS, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_StarKid_03, NPC_FLAG_NO_DROPS, TRUE)
         EVT_CALL(N(func_80242538_D223C8))
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 90, 10, EASING_QUADRATIC_IN)
         EVT_LABEL(71)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_km_yane, LVar0, 0, 0, 1)
-        EVT_CALL(RotateGroup, MODEL_km_sita, LVar0, 0, 0, -1)
-        EVT_SET(LVar2, 90)
-        EVT_SUB(LVar2, LVar0)
-        EVT_CALL(RotateModel, MODEL_km_doa, LVar2, 0, -1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(71)
-        EVT_END_IF
+            EVT_CALL(UpdateLerp)
+            EVT_CALL(RotateGroup, MODEL_km_yane, LVar0, 0, 0, 1)
+            EVT_CALL(RotateGroup, MODEL_km_sita, LVar0, 0, 0, -1)
+            EVT_SET(LVar2, 90)
+            EVT_SUB(LVar2, LVar0)
+            EVT_CALL(RotateModel, MODEL_km_doa, LVar2, 0, -1, 0)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVar1, 1)
+                EVT_GOTO(71)
+            EVT_END_IF
         EVT_CALL(SetGroupEnabled, MODEL_km_sita, 0)
         EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, 0)
     EVT_END_THREAD
@@ -509,19 +414,16 @@ EvtScript N(D_802480C4_D27F54) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(SetNpcSpeed, NPC_Merle, EVT_FLOAT(2.0))
     EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-    EVT_EXEC_GET_TID(N(D_80247698_D27528), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_Merle_CarryScarf), LVarA)
     EVT_CALL(NpcMoveTo, NPC_Merle, 0, -275, 0)
     EVT_KILL_THREAD(LVarA)
-    EVT_EXEC_GET_TID(N(D_802477A8_D27638), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_Merle_HandOverScarf), LVarA)
     EVT_WAIT(20)
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetItemPos, MV_Unk_00, NPC_DISPOSE_LOCATION)
+    EVT_CALL(SetItemPos, MV_ScarfItemID, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_SET(LVar0, 50)
-    EVT_SET(LVar1, 1)
-    EVT_EXEC_WAIT(N(GiveKeyReward))
-    EVT_CALL(AddKeyItem, ITEM_SNOWMAN_SCARF)
+    EVT_GIVE_KEY_REWARD(ITEM_SNOWMAN_SCARF)
     EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F1)
     EVT_WAIT(10)
     EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(200.7), EVT_FLOAT(-321.0))
@@ -554,31 +456,31 @@ EvtScript N(D_802480C4_D27F54) = {
 EvtScript N(EVS_NpcIdle_Merle) = {
     EVT_WAIT(3)
     EVT_IF_LT(GB_StoryProgress, STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
-        EVT_EXEC_WAIT(N(D_802478D4_D27764))
-        EVT_EXEC_WAIT(N(D_80247D8C_D27C1C))
-        EVT_EXEC_WAIT(N(D_802480C4_D27F54))
+        EVT_EXEC_WAIT(N(EVS_Scene_Merle_Greeting))
+        EVT_EXEC_WAIT(N(EVS_Scene_Merle_WaitingOnHill))
+        EVT_EXEC_WAIT(N(EVS_Scene_Merle_EnterHouse))
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(GB_StoryProgress, STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
         EVT_CALL(SetNpcPos, NPC_Merle, -90, 45, 190)
         EVT_CALL(InterpNpcYaw, NPC_Merle, 270, 0)
-        EVT_SET(MF_Unk_00, TRUE)
-        EVT_EXEC_WAIT(N(D_80247D8C_D27C1C))
-        EVT_EXEC_WAIT(N(D_802480C4_D27F54))
+        EVT_SET(MF_MerleReady, TRUE)
+        EVT_EXEC_WAIT(N(EVS_Scene_Merle_WaitingOnHill))
+        EVT_EXEC_WAIT(N(EVS_Scene_Merle_EnterHouse))
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(GB_StoryProgress, STORY_CH7_MERLE_APOLOGIZED)
         EVT_CALL(SetNpcPos, NPC_Merle, 0, 90, -143)
         EVT_CALL(InterpNpcYaw, NPC_Merle, 270, 0)
-        EVT_SET(MF_Unk_00, TRUE)
-        EVT_EXEC_WAIT(N(D_802480C4_D27F54))
+        EVT_SET(MF_MerleReady, TRUE)
+        EVT_EXEC_WAIT(N(EVS_Scene_Merle_EnterHouse))
         EVT_RETURN
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_80248CE4) = {
+EvtScript N(EVS_Scene_Merle_OneLastThing) = {
     EVT_THREAD
         EVT_CALL(DisablePartnerAI, 0)
         EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(3.0))
@@ -593,24 +495,24 @@ EvtScript N(EVS_80248CE4) = {
     EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, 0)
     EVT_CALL(MakeLerp, 0, 90, 10, EASING_QUADRATIC_IN)
     EVT_LABEL(0)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_CALL(SetNpcSpeed, NPC_Merle, EVT_FLOAT(3.0))
     EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
     EVT_CALL(NpcMoveTo, NPC_Merle, 40, -140, 0)
     EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
     EVT_CALL(MakeLerp, 90, 0, 10, EASING_QUADRATIC_IN)
     EVT_LABEL(1)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(1)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(1)
+        EVT_END_IF
     EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, 0)
     EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 0)
     EVT_CALL(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
@@ -629,12 +531,12 @@ EvtScript N(EVS_80248CE4) = {
     EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, 0)
     EVT_CALL(MakeLerp, 0, 90, 10, EASING_QUADRATIC_IN)
     EVT_LABEL(2)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(2)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(2)
+        EVT_END_IF
     EVT_CALL(SetNpcSpeed, NPC_Merle, EVT_FLOAT(3.0))
     EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
     EVT_CALL(NpcMoveTo, NPC_Merle, 0, -180, 0)
@@ -644,12 +546,12 @@ EvtScript N(EVS_80248CE4) = {
     EVT_END_THREAD
     EVT_CALL(MakeLerp, 90, 0, 10, EASING_QUADRATIC_IN)
     EVT_LABEL(3)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(3)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(3)
+        EVT_END_IF
     EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, 0)
     EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -747,7 +649,7 @@ EvtScript N(EVS_NpcInteract_Ninji_04) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Twink_01) = {
+EvtScript N(EVS_NpcInteract_StarKid_01) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_0108)
@@ -758,7 +660,7 @@ EvtScript N(EVS_NpcInteract_Twink_01) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Twink_02) = {
+EvtScript N(EVS_NpcInteract_StarKid_02) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_010A)
@@ -769,7 +671,7 @@ EvtScript N(EVS_NpcInteract_Twink_02) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Twink_03) = {
+EvtScript N(EVS_NpcInteract_StarKid_03) = {
     EVT_IF_EQ(GF_SAM06_FoundSidewaysStarKid, FALSE)
         EVT_SET(GF_SAM06_FoundSidewaysStarKid, TRUE)
         EVT_CALL(MakeLerp, 90, 360, 20, EASING_LINEAR)
@@ -792,7 +694,7 @@ EvtScript N(EVS_NpcInteract_Twink_03) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Twink_04) = {
+EvtScript N(EVS_NpcInteract_StarKid_04) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_010E)
@@ -803,7 +705,7 @@ EvtScript N(EVS_NpcInteract_Twink_04) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Twink_05) = {
+EvtScript N(EVS_NpcInteract_StarKid_05) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_0110)
@@ -814,7 +716,7 @@ EvtScript N(EVS_NpcInteract_Twink_05) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Twink_06) = {
+EvtScript N(EVS_NpcInteract_StarKid_06) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_0112)
@@ -941,20 +843,20 @@ EvtScript N(EVS_NpcInit_Ninji_04) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Twink_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Twink_01)))
+EvtScript N(EVS_NpcInit_StarKid_01) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_01)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Twink_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Twink_02)))
+EvtScript N(EVS_NpcInit_StarKid_02) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_02)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Twink_03) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Twink_03)))
+EvtScript N(EVS_NpcInit_StarKid_03) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_03)))
     EVT_IF_EQ(GF_SAM06_FoundSidewaysStarKid, FALSE)
         EVT_CALL(SetNpcRotation, NPC_SELF, 0, 90, 0)
     EVT_END_IF
@@ -962,20 +864,20 @@ EvtScript N(EVS_NpcInit_Twink_03) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Twink_04) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Twink_04)))
+EvtScript N(EVS_NpcInit_StarKid_04) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_04)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Twink_05) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Twink_05)))
+EvtScript N(EVS_NpcInit_StarKid_05) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_05)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Twink_06) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Twink_06)))
+EvtScript N(EVS_NpcInit_StarKid_06) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_06)))
     EVT_RETURN
     EVT_END
 };
@@ -989,7 +891,7 @@ EvtScript N(EVS_NpcInit_ShiverToad_04) = {
 StaticNpc N(NpcData_Merle)[] = {
     {
         .id = NPC_Merle,
-        .settings = &N(NpcSettings_Merle),
+        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 0.0f, 90.0f, -300.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
@@ -1021,7 +923,7 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_ShiverToad_01,
-        .settings = &N(NpcSettings_ShiverToad_01),
+        .settings = &N(NpcSettings_ShiverToad_Stationary),
         .pos = { -376.0f, 60.0f, 112.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
@@ -1053,7 +955,7 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_ShiverToad_02,
-        .settings = &N(NpcSettings_ShiverToad_02),
+        .settings = &N(NpcSettings_ShiverToad_Wander),
         .pos = { 208.0f, 80.0f, 150.0f },
         .yaw = 180,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
@@ -1097,7 +999,7 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_ShiverToad_03,
-        .settings = &N(NpcSettings_ShiverToad_01),
+        .settings = &N(NpcSettings_ShiverToad_Stationary),
         .pos = { 127.0f, 0.0f, 445.0f },
         .yaw = 180,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
@@ -1129,7 +1031,7 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_Ninji_01,
-        .settings = &N(NpcSettings_Ninji_01),
+        .settings = &N(NpcSettings_Ninji_Wander),
         .pos = { -99.0f, 90.0f, -90.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
@@ -1173,7 +1075,7 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_Ninji_02,
-        .settings = &N(NpcSettings_Ninji_01),
+        .settings = &N(NpcSettings_Ninji_Wander),
         .pos = { -48.0f, 0.0f, 400.0f },
         .yaw = 180,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
@@ -1217,7 +1119,7 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_Ninji_03,
-        .settings = &N(NpcSettings_Ninji_03),
+        .settings = &N(NpcSettings_Ninji_Stationary),
         .pos = { 239.0f, 50.0f, 315.0f },
         .yaw = 180,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
@@ -1249,7 +1151,7 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_Ninji_04,
-        .settings = &N(NpcSettings_Ninji_03),
+        .settings = &N(NpcSettings_Ninji_Stationary),
         .pos = { 390.0f, 80.0f, 50.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
@@ -1280,12 +1182,12 @@ StaticNpc N(NpcData_Merle)[] = {
         .tattle = MSG_NpcTattle_SAM_NinjiD,
     },
     {
-        .id = NPC_Twink_01,
-        .settings = &N(NpcSettings_Twink_01),
+        .id = NPC_StarKid_01,
+        .settings = &N(NpcSettings_StarKid_Wander),
         .pos = { -166.0f, 10.0f, 390.0f },
         .yaw = 180,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Twink_01),
+        .init = &N(EVS_NpcInit_StarKid_01),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
@@ -1324,12 +1226,12 @@ StaticNpc N(NpcData_Merle)[] = {
         .tattle = MSG_NpcTattle_SAM_StarKidA,
     },
     {
-        .id = NPC_Twink_02,
-        .settings = &N(NpcSettings_Twink_02),
+        .id = NPC_StarKid_02,
+        .settings = &N(NpcSettings_StarKid),
         .pos = { 3.0f, 60.0f, 137.0f },
         .yaw = 180,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Twink_02),
+        .init = &N(EVS_NpcInit_StarKid_02),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
@@ -1356,12 +1258,12 @@ StaticNpc N(NpcData_Merle)[] = {
         .tattle = MSG_NpcTattle_SAM_StarKidB,
     },
     {
-        .id = NPC_Twink_03,
-        .settings = &N(NpcSettings_Twink_02),
+        .id = NPC_StarKid_03,
+        .settings = &N(NpcSettings_StarKid),
         .pos = { 120.0f, 100.0f, -210.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Twink_03),
+        .init = &N(EVS_NpcInit_StarKid_03),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
@@ -1388,12 +1290,12 @@ StaticNpc N(NpcData_Merle)[] = {
         .tattle = MSG_NpcTattle_SAM_PranksterStarKid,
     },
     {
-        .id = NPC_Twink_04,
-        .settings = &N(NpcSettings_Twink_02),
+        .id = NPC_StarKid_04,
+        .settings = &N(NpcSettings_StarKid),
         .pos = { 369.0f, 90.0f, 9.0f },
         .yaw = 180,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Twink_04),
+        .init = &N(EVS_NpcInit_StarKid_04),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
@@ -1420,12 +1322,12 @@ StaticNpc N(NpcData_Merle)[] = {
         .tattle = MSG_NpcTattle_SAM_BabyStarKid,
     },
     {
-        .id = NPC_Twink_05,
-        .settings = &N(NpcSettings_Twink_02),
+        .id = NPC_StarKid_05,
+        .settings = &N(NpcSettings_StarKid),
         .pos = { 405.0f, 90.0f, -19.0f },
         .yaw = 180,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Twink_05),
+        .init = &N(EVS_NpcInit_StarKid_05),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
@@ -1452,12 +1354,12 @@ StaticNpc N(NpcData_Merle)[] = {
         .tattle = MSG_NpcTattle_SAM_StarKidC,
     },
     {
-        .id = NPC_Twink_06,
-        .settings = &N(NpcSettings_Twink_02),
+        .id = NPC_StarKid_06,
+        .settings = &N(NpcSettings_StarKid),
         .pos = { 364.0f, 90.0f, -47.0f },
         .yaw = 180,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Twink_06),
+        .init = &N(EVS_NpcInit_StarKid_06),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .heartDrops  = NO_DROPS,
@@ -1485,7 +1387,7 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_ShiverToad_04,
-        .settings = &N(NpcSettings_ShiverToad_01),
+        .settings = &N(NpcSettings_ShiverToad_Stationary),
         .pos = { -274.0f, 60.0f, -28.0f },
         .yaw = 180,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
