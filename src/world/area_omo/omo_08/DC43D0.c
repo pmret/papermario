@@ -13,7 +13,7 @@ static char* N(exit_str_5) = "omo_16";
 
 #include "common/CompareFloats.inc.c"
 
-#include "common/UnkBufferFunc.inc.c"
+#include "common/AdvanceBuffer.inc.c"
 
 #include "common/SetPlayerStatusPosYaw.inc.c"
 

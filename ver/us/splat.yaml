@@ -14626,15 +14626,13 @@ segments:
     start: 0xDEEEA0
     vram: 0x80240000
     subsegments:
-    - [0xDEEEA0, c]
-    - [0xDEF400, c]
-    - [0xDF25B0, data]
-    - [0xDF29A0, data]
-    - [0xDF2C90, data]
-    - [0xDF4EB0, data]
-    - [0xDF57A0, data]
-    - [0xDF6380, data]
-    - [0xDF6470]
+    - [0xDEEEA0, c, omo_17_0_header]
+    - [0xDEEEA0, c, omo_17_1_main]
+    - [0xDEEEA0, c, omo_17_2_gizmos]
+    - [0xDEEEA0, c, omo_17_3_train]
+    - [0xDEF400, c, omo_17_4_npc]
+    - [0xDF25B0, c, omo_17_5_entity]
+    - [0xDF25B0]
   - name: end_00
     dir: world/area_end/end_00
     type: code

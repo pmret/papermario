@@ -1,7 +1,7 @@
 #include "common.h"
 #include "sprite/npc/GrooveGuy.h"
 
-#define GROOVE_GUY_DROPS \
+#define GROOVE_GUY_DROPS_A \
 { \
     .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 5, \
@@ -14,6 +14,20 @@
     }, \
     .heartDrops  = STANDARD_HEART_DROPS(3), \
     .flowerDrops = STANDARD_FLOWER_DROPS(2), \
+    .minCoinBonus = 0, \
+    .maxCoinBonus = 3, \
+}
+
+#define GROOVE_GUY_DROPS_B \
+{ \
+    .dropFlags = NPC_DROP_FLAG_80, \
+    .itemDropChance = 5, \
+    .itemDrops = { \
+        { ITEM_MYSTERY, 5, 0 }, \
+        { ITEM_FRIGHT_JAR, 5, 0 }, \
+    }, \
+    .heartDrops  = STANDARD_HEART_DROPS(2), \
+    .flowerDrops = STANDARD_FLOWER_DROPS(4), \
     .minCoinBonus = 0, \
     .maxCoinBonus = 3, \
 }

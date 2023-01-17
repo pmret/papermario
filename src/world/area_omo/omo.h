@@ -21,6 +21,8 @@ enum {
 };
 
 enum {
+    AF_OMO_02               = AreaFlag(2),
+    AF_OMO_03               = AreaFlag(3),
     AF_OMO07_NpcPool0       = AreaFlag(7),
     AF_OMO07_NpcPool1       = AreaFlag(8),
     AF_OMO07_NpcPool2       = AreaFlag(9),
