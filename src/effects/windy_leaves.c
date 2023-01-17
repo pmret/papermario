@@ -20,7 +20,7 @@ void windy_leaves_main(s32 type, f32 arg1, f32 arg2, f32 arg3) {
     bp.unk_00 = 0;
     bp.unk_14 = NULL;
     bp.effectID = EFFECT_WINDY_LEAVES;
-    
+
     numParts = 5;
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
@@ -52,7 +52,7 @@ void windy_leaves_main(s32 type, f32 arg1, f32 arg2, f32 arg3) {
                 part->unk_10 = 0.0f;
                 part->unk_14 = 0.0f;
                 part->unk_34 = 0;
-                part->unk_30 = -3.0f;;
+                part->unk_30 = -3.0f;
                 part->unk_38 = 3.0f;
                 part->unk_1C = (f32)temp_v0_2 * 0.1;
                 break;

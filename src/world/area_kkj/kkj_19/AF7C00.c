@@ -2,9 +2,6 @@
 #include "hud_element.h"
 #include "battle/action_cmd.h"
 
-extern s32 kkj_19_ItemChoice_HasSelectedItem;
-extern s32 kkj_19_ItemChoice_SelectedItemID;
-
 BSS s32 kkj_19_D_802461F0[114];
 BSS s32 D_802463B8_kkj_19[92];
 BSS s32 kkj_19_D_80246528;
@@ -26,26 +23,9 @@ BSS s32 D_802465A0;
 
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
-// Needs data migration, matching otherwise
-#ifdef NON_MATCHING
-ApiStatus func_802404DC_AF7E2C(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        kkj_19_ItemChoice_HasSelectedItem = 0;
-    }
-
-    if (kkj_19_ItemChoice_HasSelectedItem != 0) {
-        kkj_19_ItemChoice_HasSelectedItem = 0;
-        evt_set_variable(script, *args++, kkj_19_ItemChoice_SelectedItemID);
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-#else
-INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_802404DC_AF7E2C);
-#endif
+extern s32 N(ItemChoice_HasSelectedItem);
+extern s32 N(ItemChoice_SelectedItemID);
+#include "world/common/todo/ItemChoice_WaitForSelection.inc.c"
 
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

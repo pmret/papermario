@@ -6,10 +6,9 @@
 
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_8024114C_D6FAFC);
-
 extern s32 N(ItemChoice_HasSelectedItem);
 extern s32 N(ItemChoice_SelectedItemID);
+#include "world/common/todo/ItemChoice_WaitForSelection.inc.c"
 
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -177,7 +176,7 @@ ApiStatus func_8024175C_D7010C(Evt* script, s32 isInitialCall) {
     if (npc4->pos.x < playerX) {
         return ApiStatus_DONE2;
     }
-    return ApiStatus_BLOCK;;
+    return ApiStatus_BLOCK;
 }
 
 ApiStatus func_80241838_D701E8(Evt* script, s32 isInitialCall) {

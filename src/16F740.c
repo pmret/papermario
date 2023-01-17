@@ -2209,7 +2209,7 @@ void btl_state_update_run_away(void) {
                         if (!(enemy->flags & ACTOR_FLAG_NO_DMG_APPLY)) {
                             f32 escapeChance = enemy->actorBlueprint->escapeChance;
 
-                            
+
                             if (enemy->debuff == STATUS_FEAR ||
                                 enemy->debuff == STATUS_DIZZY ||
                                 enemy->debuff == STATUS_PARALYZE ||
@@ -2749,7 +2749,7 @@ void btl_state_update_player_move(void) {
             if (battleStatus->unk_8C != 0) {
                 break;
             }
-            
+
             if (gGameStatusPtr->demoFlags & 1) {
                 btl_set_state(BATTLE_STATE_END_DEMO_BATTLE);
                 break;
@@ -2904,7 +2904,7 @@ void btl_state_update_player_move(void) {
                 player->disableDismissTimer = 0;
                 player->flags |= ACTOR_FLAG_8000000;
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MOVE_AWAIT_PLAYER_STATUS_POPUP;
-                
+
             } else {
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MOVE_AWAIT_DONE;
             }
@@ -3013,7 +3013,7 @@ void btl_state_update_end_player_turn(void) {
                 break;
             }
             player->takeTurnScript = NULL;
-            
+
             if (!(gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) || (gBattleStatus.flags1 & BS_FLAGS1_PLAYER_IN_BACK)) {
                 gBattleSubState = BTL_SUBSTATE_END_PLAYER_TURN_DONE;
             } else {
@@ -3204,7 +3204,7 @@ void btl_state_update_partner_move(void) {
                 break;
             }
             player->handleEventScript = NULL;
-        
+
             enemyFound = FALSE;
             for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
                 enemyActor = battleStatus->enemyActors[i];
@@ -3234,7 +3234,7 @@ void btl_state_update_partner_move(void) {
             if (enemyFound) {
                 break;
             }
-        
+
             for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
                 enemyActor = battleStatus->enemyActors[i];
                 if (enemyActor != NULL) {
@@ -3461,7 +3461,7 @@ void btl_state_update_next_enemy(void) {
             battleStatus->nextEnemyIndex = i;
 
             skipEnemy = FALSE;
-            
+
             if (enemy->debuff == STATUS_SLEEP) {
                 skipEnemy = TRUE;
             }
@@ -3641,7 +3641,7 @@ void btl_state_update_enemy_move(void) {
             if (waitingForEnemyScript) {
                 break;
             }
-            
+
             if (btl_check_player_defeated()) {
                 return;
             }

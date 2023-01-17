@@ -357,13 +357,17 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
+void func_800F4FC4(PopupMenu* popup);
+
 // almost
 #ifdef NON_EQUIVALENT
 void shop_open_item_select_popup(s32 mode) {
     PopupMenu* menu = &gGameStatusPtr->mapShop->itemSelectMenu;
     s32 numItemSlots;
     s32 popupType;
+    s32 enabled;
     s32 numEntries;
+    s32 itemID;
     s32 i;
 
     switch (mode) {
@@ -381,30 +385,31 @@ void shop_open_item_select_popup(s32 mode) {
             break;
     }
 
+    enabled = TRUE;
     numEntries = 0;
 
     for (i = 0; i < numItemSlots; i++) {
-        s32 itemID;
+        do {
+            switch (mode) {
+                case 0:
+                case 1:
+                    itemID = gPlayerData.invItems[i];
+                    break;
+                default:
+                    itemID = gPlayerData.storedItems[i];
+                    break;
+            }
 
-        switch (mode) {
-            case 0:
-            case 1:
-                itemID = gPlayerData.invItems[i];
-                break;
-            default:
-                itemID = gPlayerData.storedItems[i];
-                break;
-        }
-
-        if (itemID != ITEM_NONE) {
-            menu->ptrIcon[numEntries] = gItemHudScripts[gItemTable[itemID].hudElemID].enabled;
-            menu->userIndex[numEntries] = i;
-            menu->enabled[numEntries] = TRUE;
-            menu->nameMsg[numEntries] = gItemTable[itemID].nameMsg;
-            menu->descMsg[numEntries] = gItemTable[itemID].shortDescMsg;
-            menu->value[numEntries] = shop_get_sell_price(itemID);
-            numEntries++;
-        }
+            if (itemID != ITEM_NONE) {
+                menu->ptrIcon[numEntries] = gItemHudScripts[gItemTable[itemID].hudElemID].enabled;
+                menu->userIndex[numEntries] = i;
+                menu->enabled[numEntries] = enabled;
+                menu->nameMsg[numEntries] = gItemTable[itemID].nameMsg;
+                menu->descMsg[numEntries] = gItemTable[itemID].shortDescMsg;
+                menu->value[numEntries] = shop_get_sell_price(itemID);
+                numEntries++;
+            }
+        } while (0); // TODO required to match
     }
 
     menu->popupType = popupType;

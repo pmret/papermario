@@ -14,10 +14,9 @@ static char* N(exit_str_3) = "";
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 #define NAMESPACE nok_02
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240624_9D7644);
-
 extern s32 N(ItemChoice_HasSelectedItem);
 extern s32 N(ItemChoice_SelectedItemID);
+#include "world/common/todo/ItemChoice_WaitForSelection.inc.c"
 
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

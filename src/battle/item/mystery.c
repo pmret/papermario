@@ -207,7 +207,7 @@ Gfx N(displayList)[] = {
     gsSPEndDisplayList(),
 };
 
-EntityModelScript N(modelCommandList) = STANDARD_ENTITY_MODEL_SCRIPT(N(displayList), RENDER_MODE_ALPHATEST);;
+EntityModelScript N(modelCommandList) = STANDARD_ENTITY_MODEL_SCRIPT(N(displayList), RENDER_MODE_ALPHATEST);
 
 s32 N(D_802A227C_72D82C)[8] = {
     ITEM_MUSHROOM,
