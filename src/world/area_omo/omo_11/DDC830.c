@@ -62,11 +62,11 @@ extern s32 D_80241778_DDDFA8[6]; // TODO remove hard-coded size once data is mig
 
 NOP_FIX
 ApiStatus func_802401A0_DDC9D0(Evt* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Matrix4f sp20, sp60, spA0, spE0;
     Npc* partner = get_npc_unsafe(NPC_PARTNER);
     Model* model1 = get_model_from_list_index(get_model_list_index_from_tree_index(0x4A));
     Model* model2 = get_model_from_list_index(get_model_list_index_from_tree_index(0x3F));
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    Matrix4f sp20, sp60, spA0, spE0;
     f32 ox, oy, oz;
     Model* loopModel;
     f32 x, y, z;
@@ -76,41 +76,39 @@ ApiStatus func_802401A0_DDC9D0(Evt* script, s32 isInitialCall) {
     s32 j, k;
 
     if (isInitialCall) {
-        do {
-            sfx_play_sound_at_position(SOUND_80000016, 0, 315.0f, 125.0f, -100.0f);
-            script->functionTempPtr[0] = it = heap_malloc(sizeof(*it) * ARRAY_COUNT(D_80241760_DDDF90));
-            script->functionTemp[1] = 0;
+        sfx_play_sound_at_position(SOUND_80000016, 0, 315.0f, 125.0f, -100.0f);
+        script->functionTempPtr[0] = it = heap_malloc(sizeof(*it) * ARRAY_COUNT(D_80241760_DDDF90));
+        script->functionTemp[1] = 0;
 
-            for (i = 0; i < ARRAY_COUNT(D_80241760_DDDF90); it++, i += 2) {
-                loopModel = get_model_from_list_index(get_model_list_index_from_tree_index(D_80241760_DDDF90[i]));
-                it->unk_00.x = x = loopModel->center.x - model1->center.x;
-                it->unk_00.y = y = loopModel->center.y - model1->center.y;
-                it->unk_00.z = z = loopModel->center.z - model1->center.z;
+        for (i = 0; i < ARRAY_COUNT(D_80241760_DDDF90); it++, i += 2) {
+            loopModel = get_model_from_list_index(get_model_list_index_from_tree_index(D_80241760_DDDF90[i]));
+            it->unk_00.x = x = loopModel->center.x - model1->center.x;
+            it->unk_00.y = y = loopModel->center.y - model1->center.y;
+            it->unk_00.z = z = loopModel->center.z - model1->center.z;
 
-                ox = x;
-                oy = y;
-                oz = z;
+            ox = x;
+            oy = y;
+            oz = z;
 
-                for (j = 0; j < 4; j++) {
-                    for (k = 0; k < 4; k++) {
-                        it->transformMatrix[j][k] = loopModel->transformMatrix[j][k];
-                    }
-                }
-
-                loopModel = get_model_from_list_index(get_model_list_index_from_tree_index(D_80241760_DDDF90[i + 1]));
-
-                it = it + 1;
-                it->unk_00.x = ox;
-                it->unk_00.y = oy;
-                it->unk_00.z = oz;
-
-                for (j = 0; j < 4; j++) {
-                    for (k = 0; k < 4; k++) {
-                        it->transformMatrix[j][k] = loopModel->transformMatrix[j][k];
-                    }
+            for (j = 0; j < 4; j++) {
+                for (k = 0; k < 4; k++) {
+                    it->transformMatrix[j][k] = loopModel->transformMatrix[j][k];
                 }
             }
-        } while (0); // TODO required to match
+
+            loopModel = get_model_from_list_index(get_model_list_index_from_tree_index(D_80241760_DDDF90[i + 1]));
+
+            it = it + 1;
+            it->unk_00.x = ox;
+            it->unk_00.y = oy;
+            it->unk_00.z = oz;
+
+            for (j = 0; j < 4; j++) {
+                for (k = 0; k < 4; k++) {
+                    it->transformMatrix[j][k] = loopModel->transformMatrix[j][k];
+                }
+            }
+        }
     }
 
     it = script->functionTempPtr[0];
@@ -137,11 +135,9 @@ ApiStatus func_802401A0_DDC9D0(Evt* script, s32 isInitialCall) {
         if (gCollisionStatus.currentFloor == D_80241778_DDDFA8[i] ||
             gCollisionStatus.lastTouchedFloor == D_80241778_DDDFA8[i])
         {
-            do {
-                playerStatus->pushVelocity.x = ox - it->unk_0C.x;
-                playerStatus->pushVelocity.y = oy - it->unk_0C.y;
-                playerStatus->pushVelocity.z = oz - it->unk_0C.z;
-            } while (0); // TODO required to match
+            playerStatus->pushVelocity.x = ox - it->unk_0C.x;
+            playerStatus->pushVelocity.y = oy - it->unk_0C.y;
+            playerStatus->pushVelocity.z = oz - it->unk_0C.z;
         }
         if (partner->currentFloor == D_80241778_DDDFA8[i]) {
             partner->pos.x += ox - it->unk_0C.x;
