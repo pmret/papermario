@@ -6,20 +6,20 @@ s32 N(GoombariaAnims)[] = {
     ANIM_Goombaria_Fall,
     ANIM_Goombaria_Idle,
     ANIM_Goombaria_Idle,
-    ANIM_Goombaria_Run, 
+    ANIM_Goombaria_Run,
 };
 
 API_CALLABLE(N(func_802401B0_7E7550)) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     if (rand_int(1000) < 500) {
-        func_8005DECC(npc, -1, N(GoombariaAnims),
+        npc_follow_init(npc, NPC_SELF, N(GoombariaAnims),
             rand_int(4) + 1,
             rand_int(3) + 5,
             rand_int(50) + 50,
             rand_int(100) + 100);
     } else {
-        func_8005DECC(npc, rand_int(3) + 10, N(GoombariaAnims),
+        npc_follow_init(npc, rand_int(3) + NPC_Goompa, N(GoombariaAnims),
             rand_int(4) + 1,
             rand_int(3) + 5,
             rand_int(50) + 50,
@@ -31,14 +31,14 @@ API_CALLABLE(N(func_802401B0_7E7550)) {
 API_CALLABLE(N(func_802402EC_7E768C)) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
-    func_8005DFD4(npc);
+    npc_update_npc_tracking(npc);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(func_80240318_7E76B8)) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
-    func_8005E12C(npc);
+    npc_follow_npc(npc);
     return ApiStatus_DONE2;
 }
 
