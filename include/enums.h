@@ -6273,6 +6273,7 @@ enum BackgroundFlags {
 };
 
 enum FogModes {
+    FOG_MODE_UNCHANGED = -1,
     FOG_MODE_0 = 0,
     FOG_MODE_1 = 1,
     FOG_MODE_2 = 2,

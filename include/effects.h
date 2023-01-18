@@ -2310,22 +2310,16 @@ typedef struct MovingCloudFXData {
 } MovingCloudFXData; // size = 0x48
 
 typedef struct Effect75FXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
+    /* 0x00 */ s32 type;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
+    /* 0x18 */ Color3i primCol;
     /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ s32 unk_30;
+    /* 0x28 */ Color3i envCol;
     /* 0x34 */ s32 unk_34;
-    /* 0x38 */ s32 unk_38;
-    /* 0x3C */ f32 unk_3C;
+    /* 0x38 */ s32 masterAlpha;
+    /* 0x3C */ f32 scale;
     /* 0x40 */ f32 unk_40;
     /* 0x44 */ f32 unk_44;
     /* 0x48 */ f32 unk_48;

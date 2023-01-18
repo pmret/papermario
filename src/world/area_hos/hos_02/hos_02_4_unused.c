@@ -1,6 +1,11 @@
 #include "hos_02.h"
 
-ApiStatus func_80240FD0_A171F0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(FetchEntryID)) {
     script->varTable[0] = gGameStatusPtr->entryID;
     return ApiStatus_DONE2;
 }
+
+EvtScript N(EVS_SetupUnused) = {
+    EVT_RETURN
+    EVT_END
+};

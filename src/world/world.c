@@ -482,10 +482,11 @@ MapConfig nok_maps[] = {
 };
 
 /// Star Region
+#include "area_hos/hos.h"
 MapConfig hos_maps[] = {
     { MAP_UNSPLIT(hos_00, 0x80240D50), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(hos_01, 0x80240E40), .bgName = "hos_bg" },
-    { MAP_UNSPLIT(hos_02, 0x80242B90), .bgName = "hos_bg" },
+    { MAP(hos_02), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_03, 0x802435F0), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_04, 0x80240EE0), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_05, 0x80245910), .bgName = "hos_bg", .songVariation = 1, .sfxReverb = 2 },
