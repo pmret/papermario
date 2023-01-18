@@ -391,7 +391,7 @@ typedef struct AuSynDriver {
 
 typedef struct SoundSFXEntry {
     /* 0x0 */ u16 soundID;
-    /* 0x2 */ s16 upperSoundID;
+    /* 0x2 */ u16 upperSoundID;
     /* 0x4 */ s16 volume;
     /* 0x6 */ s16 pitchShift;
     /* 0x8 */ s8 pan;
@@ -533,7 +533,7 @@ typedef struct SoundManagerA0 {
 typedef struct SoundManager {
     /* 0x000 */ struct AuGlobals* globals;
     /* 0x004 */ struct AlUnkVoice* currentVoice;
-    /* 0x008 */ struct SEFHeader* sefData;
+    /* 0x008 */ u8* sefData;
     /* 0x00C */ s32* normalSounds[8];
     /* 0x02C */ s32* soundsWithBit2000;
     /* 0x030 */ s32 playCounter; //?

@@ -638,7 +638,243 @@ void func_8004BA54(SoundManager* manager, s32 arg1) {
     }
 }
 
-INCLUDE_ASM(s32, "audio/sfx_player", func_8004BA74);
+void func_8004BA74(SoundManager* manager, SoundSFXEntry* entry, SoundManagerA0* arg2) {
+    SoundPlayer* player;
+    s32 playerIndex;
+    u16* cmdList;
+    s32 s1;
+    s32 cond = FALSE;
+    u32 s6;
+    s32 sectionIndex;
+    u16 soundInfo;
+    u32 s5, s0, s3;
+    s32 v1;
+    s32* normalSounds;
+
+    #define NEXT_CMD s1--; if (s1 <= 0 ) { break; } cmdList += 2;
+
+    u32 soundIndex = (entry->soundID - 1) & 0xFF;
+    u16 soundIDMasked = entry->soundID & 0x23FF;
+    u16 soundID = entry->soundID;
+
+    if (soundID & 0x2000) {
+        soundIndex = (entry->soundID - 1) & 0x1FF;
+        if (soundIndex < 0x140) {
+            cmdList = &manager->soundsWithBit2000[soundIndex];
+            if (*cmdList != 0) {
+                // check if any player is playing this sound
+                for (playerIndex = 7; playerIndex >= 0; playerIndex--) {
+                    player = &manager->players[playerIndex];
+                    if (player->currentSoundID == soundIDMasked) {
+                        cond = TRUE;
+                        break;
+                    }
+                }
+
+                if (!cond) {
+                    //find free player
+                    for (playerIndex = 7; playerIndex >= 0; playerIndex--) {
+                        player = &manager->players[playerIndex];
+                        if (player->sefDataReadPos == NULL) {
+                            cond = TRUE;
+                            break;
+                        }
+                    }
+                }
+
+                if (cond) {
+                    func_8004C0E4(manager, player, cmdList, entry, 0, 0);
+                }
+            }
+        }
+    } else {
+        if (soundIndex >= 0xC0) {
+            if (arg2 != NULL) {
+                cmdList = arg2;
+            } else {
+                sectionIndex = ((soundIDMasked - 1) >> 8) + 4;
+                normalSounds = manager->normalSounds[sectionIndex];
+                v1 = soundIndex - 0xC0;
+                cmdList = &manager->normalSounds[sectionIndex][v1];
+            }
+
+            if (*cmdList != 0) {
+                // check if any player is playing this sound
+                for (playerIndex = 7; playerIndex >= 0; playerIndex--) {
+                    player = &manager->players[playerIndex];
+                    if (player->currentSoundID == soundIDMasked) {
+                        cond = TRUE;
+                        break;
+                    }
+                }
+
+                if (!cond) {
+                    //find free player
+                    for (playerIndex = 7; playerIndex >= 0; playerIndex--) {
+                        player = &manager->players[playerIndex];
+                        if (player->sefDataReadPos == NULL) {
+                            cond = TRUE;
+                            break;
+                        }
+                    }
+                }
+
+                if (cond) {
+                    func_8004C0E4(manager, player, cmdList, entry, 0, 0);
+                }
+            }
+        } else {
+            if (arg2 != NULL) {
+                cmdList = arg2;
+            } else {
+                sectionIndex = ((soundID) >> 8) & 3;
+                cmdList = &manager->normalSounds[sectionIndex][soundIndex];
+            }
+
+            if (*cmdList != 0) {
+                soundInfo = cmdList[1];
+
+                s5 = (soundInfo & 0x300) >> 8; // bits 8, 9
+                s0 = (soundInfo & 0x60) >> 5; // bits 5, 6
+                s3 = soundInfo;
+                s3 = (s3 & 0x80) >> 7; // bit 7
+
+                if (s0 == 0) {
+                    if (entry->upperSoundID != 0) {
+                        for (playerIndex = 0; playerIndex < 8; playerIndex++) {
+                            player = &manager->players[playerIndex];
+                            if (player->currentSoundID == entry->upperSoundID) {
+                                cond = TRUE;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (s3 == 0) {
+                        if (!cond) {
+                            playerIndex = soundInfo & 0x7;
+                            player = &manager->players[playerIndex];
+                            if (player->sefDataReadPos == NULL || s5 >= player->unk_98) {
+                                func_8004C0E4(manager, player, *cmdList + (s32)manager->sefData, entry, s5, 0);
+                            }
+                            return;
+                        }
+                    }
+
+                    if (!cond) {
+                        for (playerIndex = soundInfo & 0x7; playerIndex >= 0; playerIndex--) {
+                            player = &manager->players[playerIndex];
+                            if (player->currentSoundID == soundIDMasked) {
+                                cond = TRUE;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!cond) {
+                        for (playerIndex = soundInfo & 0x7; playerIndex >= 0; playerIndex--) {
+                            player = &manager->players[playerIndex];
+                            if (player->sefDataReadPos == NULL) {
+                                cond = TRUE;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!cond) {
+                        for (playerIndex = soundInfo & 0x7; playerIndex >= 0; playerIndex--) {
+                            player = &manager->players[playerIndex];
+                            if (player->unk_98 < s5) {
+                                cond = TRUE;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!cond) {
+                        playerIndex = soundInfo & 0x7;
+                        player = &manager->players[playerIndex];
+                        if (player->unk_98 <= s5) {
+                            cond = TRUE;
+                        }
+                    }
+
+                    if (cond) {
+                        func_8004C0E4(manager, player, *cmdList + (s32)manager->sefData, entry, s5, 0);
+                    }
+                } else {
+                    cmdList = *cmdList + (s32)(manager->sefData);
+                    s6 = (soundInfo & 0x1800) >> 11; // bits 11, 12, 13
+                    if (s6 != 0) {
+                        func_8004C300(manager, s6);
+                    } else {
+                        au_sfx_stop_by_id(manager, entry->soundID);
+                    }
+
+                    s1 = 2 << (s0 - 1); // 2 or 4 or 8
+
+                    if (s3 != 0) {
+                        for (playerIndex = 7; playerIndex >= 0; playerIndex--) {
+                            if (*cmdList != 0) {
+                                player = &manager->players[playerIndex];
+                                if (player->sefDataReadPos == BlankSEFData) {
+                                    func_8004C0E4(manager, player, *cmdList + (s32)manager->sefData, entry, s5, s6);
+                                    NEXT_CMD;
+                                }
+                            } else {
+                                NEXT_CMD;
+                            }
+
+                        }
+
+                        if (s1 != 0) {
+                            for (playerIndex = 7; playerIndex >= 0;){
+                                if (*cmdList != 0) {
+                                    player = &manager->players[playerIndex];
+                                    if (player->sefDataReadPos == NULL) {
+                                        func_8004C0E4(manager, player, *cmdList + (s32)manager->sefData, entry, s5, s6);
+                                        NEXT_CMD;
+                                    }
+                                    playerIndex--;
+                                } else {
+                                    NEXT_CMD;
+                                }
+                            }
+                        }
+
+                        if (s1 != 0) {
+                            for (playerIndex = 7; playerIndex >= 0; playerIndex--) {
+                                if (*cmdList) {
+                                    player = &manager->players[playerIndex];
+                                    if (s6 > player->unk_99 && s5 >= player->unk_98) {
+                                        func_8004C0E4(manager, player, *cmdList + (s32)manager->sefData, entry, s5, s6);
+                                        NEXT_CMD;
+                                    }
+                                } else {
+                                    NEXT_CMD;
+                                }
+                            }
+                        }
+                    } else {
+                        s32 i;
+                        for (i = 0; i < s1; i++) {
+                            if (*cmdList != 0) {
+                                soundInfo = cmdList[1];
+                                playerIndex = soundInfo & 7;
+                                player = &manager->players[playerIndex];
+                                s5 = (soundInfo & 0x300) >> 8;
+                                if (player->sefDataReadPos == NULL || s5 >= player->unk_98) {
+                                    func_8004C0E4(manager, player, *cmdList + (s32)manager->sefData, entry, s5, s6);
+                                }
+                                cmdList += 2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 static void func_8004C0E4(SoundManager* manager, SoundPlayer* player, s8* readPos, SoundSFXEntry* sfxEntry, s32 arg4, s32 arg5) {
     if (manager->unk_C0 == 0) {

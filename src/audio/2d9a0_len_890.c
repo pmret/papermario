@@ -196,7 +196,48 @@ void func_80052BF8(AlUnkVoice* voice, AlUnkInstrumentData* arg1) {
     voice->unk_3F = 0x80;
 }
 
-INCLUDE_ASM(u8, "audio/2d9a0_len_890", func_80052CFC, AlUnkVoice* arg0);
+u8 func_80052CFC(AlUnkVoice* voice) {
+    u32 op;
+    u8 arg;
+
+    while(TRUE) {
+        if(((s8)(op = *voice->unk_1C++)) >= 0) {
+            break;
+        }
+        switch ((u8)op) {
+            case 0xFE:
+                arg = *voice->unk_1C++;
+                if (arg > 0x80) {
+                    arg = 0x80;
+                }
+                voice->unk_30 = arg;
+                break;
+            case 0xFD:
+                voice->unk_30 += (s8) *voice->unk_1C++;
+                if (voice->unk_30 > 0x80) {
+                    voice->unk_30 = 0x80;
+                } else if (voice->unk_30 < 0) {
+                    voice->unk_30 = 0;
+                }
+                break;
+            case 0xFC:
+                voice->unk_38 = *voice->unk_1C++;
+                voice->unk_34 = voice->unk_1C;
+                break;
+            case 0xFB:
+                voice->unk_1C++;
+                if (voice->unk_38 == 0 || --voice->unk_38 != 0) {
+                    voice->unk_1C = voice->unk_34;
+                }
+                break;
+            default:
+                voice->unk_1C++;
+                break;
+        }
+    }
+    return op;
+}
+
 
 void func_80052E18(AlUnkVoice* arg0) {
     arg0->unk_flags_3D |= AU_VOICE_3D_FLAG_VOL_CHANGED;
