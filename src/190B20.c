@@ -428,6 +428,7 @@ END:
     } while (0); // TODO required to match
 }
 #else
+void create_target_list(Actor* actor, s32 arg1);
 INCLUDE_ASM(s32, "190B20", create_target_list);
 #endif
 
