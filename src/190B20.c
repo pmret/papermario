@@ -57,8 +57,379 @@ extern PartnerDMAData bPartnerDmaTable[];
 
 s32 func_80265CE8(AnimID*, s32);
 
-void create_target_list(Actor* actor, s32 arg1);
+// WIP work from Unnunu + a permuter do-while I added
+#ifdef NON_MATCHING
+// TOOD remove gotos
+void create_target_list(Actor* actor, s32 arg1) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* playerActor = battleStatus->playerActor;
+    Actor* partnerActor = battleStatus->partnerActor;
+    s32 s5 = 0;
+    SelectableTarget* targetData = actor->targetData;
+    SelectableTarget* s0;
+    SelectableTarget* target;
+    Actor* targetActor;
+    ActorPart* targetPart;
+    s8* targetIndexList;
+    s32 numParts;
+    s32 i, j;
+    f32 f6, f8, f10;
+    f32 f2, f12, f14;
+    f32 f61;
+    u8 sp10;
+    f32 sp14;
+    s32 sp18 = FALSE;
+    s32 sp1C;
+    s32 fp;
+
+    s32 a02;
+
+    if (battleStatus->currentTargetListFlags & 0x80000000) {
+        actor->targetListLength = -1;
+        return;
+    }
+    if (battleStatus->currentTargetListFlags & 0x8) {
+        targetData->actorID = ACTOR_PLAYER;
+        targetData->partID = 1;
+        if (!arg1) {
+            targetData->pos.x = playerActor->currentPos.x + playerActor->size.x * 0.3 * playerActor->scalingFactor;
+            targetData->pos.y = playerActor->currentPos.y + playerActor->size.y * 0.9 * playerActor->scalingFactor;
+            targetData->pos.z = playerActor->currentPos.z;
+        } else {
+            targetData->pos.x = playerActor->homePos.x + playerActor->size.x * 0.3 * playerActor->scalingFactor;
+            targetData->pos.y = playerActor->homePos.y + playerActor->size.y * 0.9 * playerActor->scalingFactor;
+            targetData->pos.z = playerActor->homePos.z;
+        }
+        targetData->unk_10 = -100;
+        s5 += 1;
+        targetData++;
+    }
+
+    if ((battleStatus->currentTargetListFlags & 0x100) && partnerActor != NULL) {
+        targetData->actorID = ACTOR_PARTNER;
+        targetData->partID = 1;
+        if (!arg1) {
+            targetData->pos.x = partnerActor->currentPos.x + partnerActor->size.x * 0.1 * partnerActor->scalingFactor;
+            targetData->pos.y = partnerActor->currentPos.y + partnerActor->size.y * 0.8 * partnerActor->scalingFactor;
+            targetData->pos.z = partnerActor->currentPos.z;
+        } else {
+            targetData->pos.x = partnerActor->homePos.x + partnerActor->size.x * 0.1 * partnerActor->scalingFactor;
+            targetData->pos.y = partnerActor->homePos.y + partnerActor->size.y * 0.8 * partnerActor->scalingFactor;
+            targetData->pos.z = partnerActor->homePos.z;
+        }
+        targetData->unk_10 = -50;
+        s5 += 1;
+        targetData++;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        targetActor = battleStatus->enemyActors[i];
+        if (targetActor == NULL) {
+            continue;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x100) || (battleStatus->currentTargetListFlags & 0x8)) {
+            break;
+        }
+        targetPart = targetActor->partsTable;
+        numParts = targetActor->numParts;
+        for (j = 0; j < numParts; targetPart = targetPart->nextPart, j++) {
+            if (!(targetPart->flags & 0x20000)) {
+                ActorPartBlueprint* partBlueprint = targetPart->staticData;
+                s8 partIndex;
+                if (!(targetPart->flags & 0x100000)) {
+                    fp = !arg1; // TODO ??????
+                    if (fp) {
+                        f6 = targetActor->currentPos.x;
+                        f8 = targetActor->currentPos.y;
+                        f10 = targetActor->currentPos.z;
+                    } else {
+                        f6 = targetActor->homePos.x;
+                        f8 = targetActor->homePos.y;
+                        f10 = targetActor->homePos.z;
+                    }
+                    f6 += targetPart->partOffset.x * targetActor->scalingFactor;
+                    if (!(targetActor->flags & 0x800)) {
+                        f8 += targetPart->partOffset.y * targetActor->scalingFactor;
+                    }
+                    f10 += targetPart->partOffset.z * targetActor->scalingFactor;
+                    f12 = f6;
+                    f6 = targetActor->scalingFactor;
+                    f6 = f12 + targetPart->targetOffset.x * f6;
+                    f2 = f8;
+                    f14 = f10 + 5.0f;
+                    if (!(targetActor->flags & 0x800)) {
+                        f8 = f2 + targetPart->targetOffset.y * targetActor->scalingFactor;
+                    }
+                } else {
+                    f8 = targetPart->absolutePosition.y;
+                    f10 = targetPart->absolutePosition.z;
+                    f12 = targetPart->absolutePosition.x;
+                    f2 = f8;
+                    f14 = f10 + 5.0f;
+                    f6 = f12 + targetPart->targetOffset.x;
+                    if (!(targetActor->flags & 0x800)) {
+                        f8 = f2 + targetPart->targetOffset.y;
+                    }
+                }
+
+                targetData->actorID = ACTOR_CLASS_ENEMY | i;
+                partIndex = partBlueprint->index;
+                targetData->pos.x = f6;
+                targetData->pos.y = f8;
+                targetData->pos.z = f10;
+                targetData->unk_10 = 0;
+                targetData->partID = partIndex;
+
+                if ((targetActor->flags & 0x4000) && !(targetActor->flags & 0x10)) {
+                    targetData->unk_10 = 100;
+                }
+                targetData->unk_10 += targetPart->unk_70;
+                targetData->unk_0A = f12 + targetData->unk_10 * 100;
+                targetData->unk_0C = f2;
+                targetData->unk_0E = f14;
+
+                if (targetData->unk_0C < 40) {
+                    targetData->homeRow = 0;
+                } else if (targetData->unk_0C < 85) {
+                    targetData->homeRow = 1;
+                } else if (targetData->unk_0C < 100) {
+                    targetData->homeRow = 2;
+                } else {
+                    targetData->homeRow = 3;
+                }
+
+                if (targetData->unk_0A < 25) {
+                    targetData->homeCol = 0;
+                } else if (targetData->unk_0A < 65) {
+                    targetData->homeCol = 1;
+                } else if (targetData->unk_0A < 105) {
+                    targetData->homeCol = 2;
+                } else {
+                    targetData->homeCol = 3;
+                }
+
+                if (targetData->unk_0E < -30) {
+                    targetData->layer = 0;
+                } else {
+                    targetData->layer = 1;
+                }
+                s5++;
+                targetData++;
+            }
+        }
+    }
+
+    actor->selectedTargetIndex = 0;
+    actor->targetListLength = s5;
+
+    do {
+
+    // @bug this should be % 4
+    sp1C = battleStatus->targetHomeIndex & 4;
+    fp = battleStatus->targetHomeIndex / 4;
+
+    targetData = actor->targetData;
+    s5 = actor->targetListLength;
+
+    for (i = 0; i < s5; i++) {
+        s0 = &targetData[i];
+        targetActor = get_actor(s0->actorID);
+        targetPart = get_actor_part(targetActor, s0->partID);
+        if (s0->actorID == ACTOR_PLAYER || s0->actorID == ACTOR_PARTNER) {
+            continue;
+        }
+        if (battleStatus->currentTargetListFlags & 0x80000000) {
+            a02 = 1;
+            goto END2;
+        }
+        if (!(gBattleStatus.flags2 & 0x4000) && battleStatus->darknessMode > 0) {
+            get_screen_overlay_params(1, &sp10, &sp14);
+            if (sp14 >= 215.0f) {
+                a02 = 1;
+                sp18 = 1;
+                goto END2;
+            }
+        }
+        if (battleStatus->currentTargetListFlags & 0x8000) {
+            if (!(targetPart->flags & 0x800000) || (targetActor->flags & 0x40) || (targetPart->flags & 0x40)) {
+                a02 = 1;
+                goto END2;
+            }
+        }
+        a02 = 0;
+END2:
+        if (a02) {
+            for (j = i; j < s5 - 1; j++) {
+                actor->targetData[j] = actor->targetData[j + 1];
+            }
+            s5--;
+            i--;
+        }
+    }
+
+    for (i = 0; i < s5; i++) {
+        s0 = &targetData[i];
+        targetActor = get_actor(s0->actorID);
+        targetPart = get_actor_part(targetActor, s0->partID);
+        if (s0->actorID == ACTOR_PLAYER || s0->actorID == ACTOR_PARTNER) {
+            continue;
+        }
+
+        if ((battleStatus->currentTargetListFlags & 0x800) && (targetPart->targetFlags & 0x1)) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x1000) && (targetPart->targetFlags & 0x2)) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x20000) && ((targetActor->flags & 0x80) || (targetPart->flags & 0x80))) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x400) && (targetActor->flags & 0x800)) {
+            a02 = 1;
+            goto END;
+        }
+        if (!(battleStatus->currentTargetListFlags & 0x10000) && (targetActor->flags & 0x4000)) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x40000) && (targetActor->flags & 0x800)) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x4) && s0->homeRow != 0) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x10) && s0->homeRow >= 2) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x40) && s0->homeRow <= 0) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x4000) && !(targetPart->flags & 0x20)) {
+            s32 a22 = 0;
+
+            for (j = 0; j < s5; j++) {
+                target = &targetData[j];
+                if (s0 != target) {
+                    if (s0->layer == target->layer &&
+                        s0->homeCol == target->homeCol &&
+                        s0->homeRow < target->homeRow) {
+                        a22 = 1;
+                        break;
+                    }
+                }
+            }
+
+            if (a22) {
+                a02 = 1;
+                goto END;
+            }
+        }
+        if (battleStatus->currentTargetListFlags & 0x2000) {
+            s32 a22 = 0;
+
+            for (j = 0; j < s5; j++) {
+                target = &targetData[j];
+                if (s0 != target) {
+                    if (s0->layer == target->layer &&
+                        s0->homeRow == target->homeRow &&
+                        s0->homeCol > target->homeCol) {
+                        a22 = 1;
+                        break;
+                    }
+                }
+            }
+
+            if (a22) {
+                a02 = 1;
+                goto END;
+            }
+        }
+        if ((battleStatus->currentTargetListFlags & 0x20) && (targetActor->flags & 0x200)) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x100000) && s0->homeRow == fp + 1) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x200000) && s0->homeRow == fp - 1) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x400000) && s0->homeCol == sp1C - 1) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x800000) && s0->homeCol == sp1C + 1) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x100000) && s0->homeRow < fp) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x200000) && s0->homeRow > fp) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x400000) && s0->homeCol > sp1C) {
+            a02 = 1;
+            goto END;
+        }
+        if ((battleStatus->currentTargetListFlags & 0x800000) && s0->homeCol < sp1C) {
+            a02 = 1;
+            goto END;
+        }
+        a02 = 0;
+END:
+        if (a02) {
+            for (j = i; j < s5 - 1; j++) {
+                actor->targetData[j] = actor->targetData[j + 1];
+            }
+            s5--;
+            i--;
+        }
+    }
+
+    actor->targetListLength = s5;
+    if (s5 == 0 && sp18) {
+        gBattleStatus.flags2 |= 0x1000;
+    } else {
+        gBattleStatus.flags2 &= ~0x1000;
+    }
+
+    targetData = actor->targetData;
+
+    s5 = actor->targetListLength;
+    targetIndexList = actor->targetIndexList;
+    for (i = 0; i < s5; i++) {
+        targetIndexList[i] = i;
+    }
+    for (i = 0; i < s5 - 1; i++) {
+        for (j = i + 1; j < s5; j++) {
+            s32 index1 = targetIndexList[i];
+            s32 index2 = targetIndexList[j];
+            s0 = &targetData[index1];
+            target = &targetData[index2];
+            if (s0->pos.x + s0->unk_10 * 10 > target->pos.x + target->unk_10 * 10) {
+                targetIndexList[i] = targetIndexList[j];
+                targetIndexList[j] = index1;
+            }
+        }
+    }
+
+    } while (0); // TODO required to match
+}
+#else
 INCLUDE_ASM(s32, "190B20", create_target_list);
+#endif
 
 void func_80266DAC(Actor* actor, s32 arg1);
 
