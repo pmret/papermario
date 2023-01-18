@@ -7,7 +7,7 @@ extern f32 JumpedOnSwitchX;
 extern f32 JumpedOnSwitchZ;
 extern f32 D_8010C984;
 
-s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 arg2);
+s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 yaw);
 s32 phys_check_interactable_collision(void);
 void phys_save_ground_pos(void);
 
@@ -754,9 +754,7 @@ void collision_main_lateral(void) {
     }
 }
 
-//something weird with hitID
-#ifdef NON_EQUIVALENT
-s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 arg2) {
+s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 yaw) {
     f32 angle = 0.0f;
     s32 ret = -1;
     s32 i;
@@ -765,11 +763,23 @@ s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 arg2) {
         f32 x = gPlayerStatusPtr->position.x;
         f32 y = gPlayerStatusPtr->position.y + arg1;
         f32 z = gPlayerStatusPtr->position.z;
-        s32 hitID = player_test_lateral_overlap(mode, gPlayerStatusPtr, &x, &y, &z, 0, angle);
+        s32 hitID, hitID2;
 
-        if (hitID >= 0) {
-            ret = hitID;
+        hitID = player_test_lateral_overlap(mode, gPlayerStatusPtr, &x, &y, &z, 0.0f, angle);
+
+        // required to match
+        if (hitID > 0 || hitID == 0) {
+            hitID2 = hitID;
+        } else if (hitID == -1) {
+            hitID2 = hitID;
+        } else {
+            hitID2 = hitID;
         }
+
+        if (hitID2 >= 0) {
+            ret = hitID2;
+        }
+        gPlayerStatusPtr = gPlayerStatusPtr;
 
         gPlayerStatusPtr->position.x = x;
         gPlayerStatusPtr->position.z = z;
@@ -778,9 +788,6 @@ s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 arg2) {
 
     return ret;
 }
-#else
-INCLUDE_ASM(s32, "7bb60_len_41b0", collision_check_player_intersecting_world, s32 mode, s32 arg1, f32 arg2);
-#endif
 
 s32 func_800E4404(s32 mode, s32 arg1, f32 arg2, f32* outX, f32* outY, f32* outZ) {
     f32 angle = 0.0f;
