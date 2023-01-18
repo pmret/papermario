@@ -106,8 +106,8 @@ glabel func_802428C8_A2CB08
 /* A2CC24 802429E4 08090B41 */  j         .L80242D04
 /* A2CC28 802429E8 4600A521 */   cvt.d.s  $f20, $f20
 .L802429EC_A2CC2C:
-/* A2CC2C 802429EC 3C108025 */  lui       $s0, %hi(dgb_01_D_8024F420_C0CCA0)
-/* A2CC30 802429F0 2610F420 */  addiu     $s0, $s0, %lo(dgb_01_D_8024F420_C0CCA0)
+/* A2CC2C 802429EC 3C108025 */  lui       $s0, %hi(hos_05_8024F420)
+/* A2CC30 802429F0 2610F420 */  addiu     $s0, $s0, %lo(hos_05_8024F420)
 /* A2CC34 802429F4 0200902D */  daddu     $s2, $s0, $zero
 /* A2CC38 802429F8 2415001E */  addiu     $s5, $zero, 0x1e
 /* A2CC3C 802429FC 8E22000C */  lw        $v0, 0xc($s1)
