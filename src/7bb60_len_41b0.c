@@ -770,7 +770,7 @@ s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 yaw) {
         // required to match
         if (hitID > 0 || hitID == 0) {
             hitID2 = hitID;
-        } else if (hitID == -1){
+        } else if (hitID == -1) {
             hitID2 = hitID;
         } else {
             hitID2 = hitID;
