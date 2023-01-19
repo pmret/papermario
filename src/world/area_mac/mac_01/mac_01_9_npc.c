@@ -29,14 +29,12 @@ NpcSettings N(NpcSettings_Parakarry) = {
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
 
-#include "world/common/complete/ToadHouseBlanketAnim.inc.c"
-
 #define KNOCK_DOWN_MAP_VAR MV_KnockdownWorker
 #include "world/common/complete/KnockDownPlayer.inc.c"
 
+#include "world/common/complete/ToadHouseBlanketAnim.inc.c"
 #include "world/common/atomic/ToadHouse.inc.c"
 #include "world/common/atomic/ToadHouse.data.inc.c"
-
 
 MAP_STATIC_PAD(1,key_choice);
 #include "world/common/complete/KeyItemChoice.inc.c"

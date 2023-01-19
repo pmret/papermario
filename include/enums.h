@@ -686,7 +686,7 @@ enum SoundIDs {
     SOUND_162                       = 0x00000162,
     SOUND_ENTER_PIPE                = 0x00000163,
     SOUND_SMASH_GOOMNUT_TREE        = 0x00000165,
-    SOUND_166                       = 0x00000166,
+    SOUND_SHAKE_TREE                = 0x00000166,
     SOUND_167                       = 0x00000167,
     SOUND_168                       = 0x00000168,
     SOUND_DUST_OFF                  = 0x00000172,

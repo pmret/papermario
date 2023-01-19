@@ -195,3 +195,30 @@
     .anim_E = ANIM_WorldKalmar_Idle, \
     .anim_F = ANIM_WorldKalmar_Idle, \
 }
+
+#define STAR_MAN_DROPS \
+{ \
+    .dropFlags = NPC_DROP_FLAG_80, \
+    .heartDrops  = NO_DROPS, \
+    .flowerDrops = NO_DROPS, \
+}
+
+#define STAR_MAN_ANIMS \
+{ \
+    .idle   = ANIM_StarKid_Idle, \
+    .walk   = ANIM_StarKid_Idle, \
+    .run    = ANIM_StarKid_Idle, \
+    .chase  = ANIM_StarKid_Idle, \
+    .anim_4 = ANIM_StarKid_Idle, \
+    .anim_5 = ANIM_StarKid_Idle, \
+    .death  = ANIM_StarKid_Idle, \
+    .hit    = ANIM_StarKid_Idle, \
+    .anim_8 = ANIM_StarKid_Idle, \
+    .anim_9 = ANIM_StarKid_Idle, \
+    .anim_A = ANIM_StarKid_Idle, \
+    .anim_B = ANIM_StarKid_Idle, \
+    .anim_C = ANIM_StarKid_Idle, \
+    .anim_D = ANIM_StarKid_Idle, \
+    .anim_E = ANIM_StarKid_Idle, \
+    .anim_F = ANIM_StarKid_Idle, \
+}

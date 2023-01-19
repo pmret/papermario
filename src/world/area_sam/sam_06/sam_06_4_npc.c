@@ -69,7 +69,6 @@ MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
 #include "world/common/complete/ToadHouseBlanketAnim.inc.c"
-
 #include "world/common/atomic/ToadHouse.inc.c"
 #include "world/common/atomic/ToadHouse.data.inc.c"
 

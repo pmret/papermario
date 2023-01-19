@@ -35,7 +35,7 @@ NpcSettings N(NpcSettings_StarKid_Wander) = {
     .ai = &N(EVS_NpcAI_StarSpirit_Wander),
 };
 
-NpcSettings N(NpcSettings_StarSpirit_Unused_Wander) = {
+NpcSettings N(NpcSettings_StarMan_Wander) = {
     .height = 22,
     .radius = 24,
     .level = 99,
