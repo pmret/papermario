@@ -1,5 +1,6 @@
 #include "omo_11.h"
 #include "model.h"
+#include "mapfs/omo_11_shape.h"
 
 static char* N(exit_str_0) = "omo_12";
 static char* N(exit_str_1) = "omo_10";
@@ -65,8 +66,8 @@ ApiStatus func_802401A0_DDC9D0(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Matrix4f sp20, sp60, spA0, spE0;
     Npc* partner = get_npc_unsafe(NPC_PARTNER);
-    Model* model1 = get_model_from_list_index(get_model_list_index_from_tree_index(0x4A));
-    Model* model2 = get_model_from_list_index(get_model_list_index_from_tree_index(0x3F));
+    Model* model1 = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_fl));
+    Model* model2 = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_1_0));
     f32 ox, oy, oz;
     Model* loopModel;
     f32 x, y, z;

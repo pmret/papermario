@@ -23,7 +23,7 @@ u8 ActorTypesGhost[] = {
     ACTOR_TYPE_GHOST_WATT,
     ACTOR_TYPE_GHOST_SUSHIE,
     ACTOR_TYPE_GHOST_LAKILESTER,
-    -1
+    0xFF
 };
 
 u8 ActorTypesLee[] = {
@@ -36,25 +36,25 @@ u8 ActorTypesLee[] = {
     ACTOR_TYPE_LEE_WATT,
     ACTOR_TYPE_LEE_SUSHIE,
     ACTOR_TYPE_LEE_LAKILESTER,
-    -1
+    0xFF
 };
 
 u8 ActorTypesCrystalKing[] = {
     ACTOR_TYPE_CRYSTAL_KING,
     ACTOR_TYPE_CRYSTAL_CLONE,
-    -1
+    0xFF
 };
 
 u8 ActorTypesShyGuyBoss[] = {
     ACTOR_TYPE_TOY_TANK,
     ACTOR_TYPE_LIGHT_BULB,
-    -1
+    0xFF
 };
 
 u8 ActorTypesBowser[] = {
     ACTOR_TYPE_BOWSER_PHASE_2,
     ACTOR_TYPE_BOWSER_PHASE_3,
-    -1
+    0xFF
 };
 
 u8 ActorTypesMagikoopa[] = {
@@ -62,37 +62,37 @@ u8 ActorTypesMagikoopa[] = {
     ACTOR_TYPE_MAGICLONE,
     ACTOR_TYPE_FLYING_MAGIKOOPA,
     ACTOR_TYPE_FLYING_MAGICLONE,
-    -1
+    0xFF
 };
 
 u8 ActorTypesRedMagikoopa[] = {
     ACTOR_TYPE_RED_MAGIKOOPA,
     ACTOR_TYPE_FLYING_RED_MAGIKOOPA,
-    -1
+    0xFF
 };
 
 u8 ActorTypesGreenMagikoopa[] = {
     ACTOR_TYPE_GREEN_MAGIKOOPA,
     ACTOR_TYPE_FLYING_GREEN_MAGIKOOPA,
-    -1
+    0xFF
 };
 
 u8 ActorTypesGrayMagikoopa[] = {
     ACTOR_TYPE_GRAY_MAGIKOOPA,
     ACTOR_TYPE_FLYING_GRAY_MAGIKOOPA,
-    -1
+    0xFF
 };
 
 u8 ActorTypesYellowMagikoopa[] = {
     ACTOR_TYPE_YELLOW_MAGIKOOPA,
     ACTOR_TYPE_FLYING_YELLOW_MAGIKOOPA,
-    -1
+    0xFF
 };
 
 u8 ActorTypesWhiteMagikoopa[] = {
     ACTOR_TYPE_WHITE_MAGIKOOPA,
     ACTOR_TYPE_FLYING_WHITE_MAGIKOOPA,
-    -1
+    0xFF
 };
 
 u8* ActorTypesLists[] = {
@@ -543,7 +543,7 @@ void save_tattle_flags(s32 actorType) {
                 for (k = 0; list[k] != 0xFF; k++) {
                     actorType = list[k];
 
-                    gb = get_global_byte((actorType / 8) + 0x16D);
+                    gb = get_global_byte((actorType / 8) + 0x16D); // GameByte(0x16D) is GB_Tattles_00 (first tattle)
                     gb |= 1 << (actorType % 8);
                     set_global_byte((actorType / 8) + 0x16D, gb);
                     battleStatus->tattleFlags[actorType / 8] |= gb;
@@ -579,7 +579,7 @@ void load_tattle_flags(s32 actorType) {
                 for (k = 0; list[k] != 0xFF; k++) {
                     actorType = list[k];
 
-                    gb = get_global_byte((actorType / 8) + 0x16D);
+                    gb = get_global_byte((actorType / 8) + 0x16D); // GameByte(0x16D) is GB_Tattles_00 (first tattle)
                     gb |= 1 << (actorType % 8);
                     battleStatus->tattleFlags[actorType / 8] |= gb;
                 }
