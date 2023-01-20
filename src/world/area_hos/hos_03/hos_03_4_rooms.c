@@ -47,7 +47,7 @@ EvtScript N(EVS_MoveWalls_Shop) = {
 };
 
 s32 N(InteriorNPCs_Shop)[] = {
-    NPC_StarKid_ShopOwner,
+    NPC_StarMan_ShopOwner,
     -1
 };
 
@@ -78,7 +78,7 @@ EvtScript N(EVS_MoveWalls_ToadHouse) = {
 };
 
 s32 N(InteriorNPCs_ToadHouse)[] = {
-    NPC_StarKid_ToadHouse,
+    NPC_StarMan_ToadHouse,
     -1
 };
 

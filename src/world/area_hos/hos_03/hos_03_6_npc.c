@@ -145,7 +145,7 @@ EvtScript N(EVS_NpcInit_ShopOwner) = {
 
 StaticNpc N(NpcData_StarKid_01)[] = {
     {
-        .id = NPC_StarKid_01,
+        .id = NPC_StarMan_01,
         .settings = &N(NpcSettings_StarMan),
         .pos = { -463.0f, 10.0f, 400.0f },
         .yaw = 270,
@@ -156,7 +156,7 @@ StaticNpc N(NpcData_StarKid_01)[] = {
         .tattle = MSG_NpcTattle_HOS_StarKidA,
     },
     {
-        .id = NPC_StarKid_02,
+        .id = NPC_StarMan_02,
         .settings = &N(NpcSettings_StarMan),
         .pos = { -325.0f, 10.0f, 600.0f },
         .yaw = 270,
@@ -167,7 +167,7 @@ StaticNpc N(NpcData_StarKid_01)[] = {
         .tattle = MSG_NpcTattle_HOS_StarKidB,
     },
     {
-        .id = NPC_StarKid_03,
+        .id = NPC_StarMan_03,
         .settings = &N(NpcSettings_StarMan_Wander),
         .pos = { 0.0f, 10.0f, 300.0f },
         .yaw = 270,
@@ -190,7 +190,7 @@ StaticNpc N(NpcData_StarKid_01)[] = {
         .tattle = MSG_NpcTattle_HOS_StarKidC,
     },
     {
-        .id = NPC_StarKid_04,
+        .id = NPC_StarMan_04,
         .settings = &N(NpcSettings_StarMan_Wander),
         .pos = { 250.0f, 10.0f, 500.0f },
         .yaw = 270,
@@ -213,7 +213,7 @@ StaticNpc N(NpcData_StarKid_01)[] = {
         .tattle = MSG_NpcTattle_HOS_StarKidD,
     },
     {
-        .id = NPC_StarKid_05,
+        .id = NPC_StarMan_05,
         .settings = &N(NpcSettings_StarMan),
         .pos = { -485.0f, 335.0f, -100.0f },
         .yaw = 270,
@@ -224,7 +224,7 @@ StaticNpc N(NpcData_StarKid_01)[] = {
         .tattle = MSG_NpcTattle_HOS_StarKidE,
     },
     {
-        .id = NPC_StarKid_ToadHouse,
+        .id = NPC_StarMan_ToadHouse,
         .settings = &N(NpcSettings_StarMan),
         .pos = { 458.0f, 35.0f, 233.0f },
         .yaw = 270,
@@ -235,7 +235,7 @@ StaticNpc N(NpcData_StarKid_01)[] = {
         .tattle = MSG_NpcTattle_HOS_ToadHouseStarKid,
     },
     {
-        .id = NPC_StarKid_ShopOwner,
+        .id = NPC_StarMan_ShopOwner,
         .settings = &N(NpcSettings_StarMan),
         .pos = { 140.0f, 285.0f, -315.0f },
         .yaw = 270,

@@ -13,13 +13,13 @@
 #include "sprite/npc/ChuckQuizmo.h"
 
 enum {
-	NPC_StarKid_01              = 0,
-	NPC_StarKid_02              = 1,
-	NPC_StarKid_03              = 2,
-	NPC_StarKid_04              = 3,
-	NPC_StarKid_05              = 4,
-	NPC_StarKid_ToadHouse       = 5,
-	NPC_StarKid_ShopOwner       = 6,
+	NPC_StarMan_01              = 0,
+	NPC_StarMan_02              = 1,
+	NPC_StarMan_03              = 2,
+	NPC_StarMan_04              = 3,
+	NPC_StarMan_05              = 4,
+	NPC_StarMan_ToadHouse       = 5,
+	NPC_StarMan_ShopOwner       = 6,
 	NPC_ChuckQuizmo             = 7,
 };
 
