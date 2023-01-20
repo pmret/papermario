@@ -6,6 +6,8 @@
 #include "sprite/npc/WorldMisstar.h"
 #include "sprite/npc/WorldKlevar.h"
 #include "sprite/npc/WorldKalmar.h"
+#include "sprite/npc/StarMan.h"
+#include "sprite/npc/Twink.h"
 
 #define ELDSTAR_DROPS \
 { \
@@ -205,20 +207,20 @@
 
 #define STAR_MAN_ANIMS \
 { \
-    .idle   = ANIM_StarKid_Idle, \
-    .walk   = ANIM_StarKid_Idle, \
-    .run    = ANIM_StarKid_Idle, \
-    .chase  = ANIM_StarKid_Idle, \
-    .anim_4 = ANIM_StarKid_Idle, \
-    .anim_5 = ANIM_StarKid_Idle, \
-    .death  = ANIM_StarKid_Idle, \
-    .hit    = ANIM_StarKid_Idle, \
-    .anim_8 = ANIM_StarKid_Idle, \
-    .anim_9 = ANIM_StarKid_Idle, \
-    .anim_A = ANIM_StarKid_Idle, \
-    .anim_B = ANIM_StarKid_Idle, \
-    .anim_C = ANIM_StarKid_Idle, \
-    .anim_D = ANIM_StarKid_Idle, \
-    .anim_E = ANIM_StarKid_Idle, \
-    .anim_F = ANIM_StarKid_Idle, \
+    .idle   = ANIM_StarMan_Idle, \
+    .walk   = ANIM_StarMan_Idle, \
+    .run    = ANIM_StarMan_Idle, \
+    .chase  = ANIM_StarMan_Idle, \
+    .anim_4 = ANIM_StarMan_Idle, \
+    .anim_5 = ANIM_StarMan_Idle, \
+    .death  = ANIM_StarMan_Idle, \
+    .hit    = ANIM_StarMan_Idle, \
+    .anim_8 = ANIM_StarMan_Idle, \
+    .anim_9 = ANIM_StarMan_Idle, \
+    .anim_A = ANIM_StarMan_Idle, \
+    .anim_B = ANIM_StarMan_Idle, \
+    .anim_C = ANIM_StarMan_Idle, \
+    .anim_D = ANIM_StarMan_Idle, \
+    .anim_E = ANIM_StarMan_Idle, \
+    .anim_F = ANIM_StarMan_Idle, \
 }

@@ -72,8 +72,8 @@ ShopItemLocation N(ItemPositions)[] = {
 
 ShopOwner N(Owner) = {
     .npcID = NPC_StarKid_ShopOwner,
-    .idleAnim = ANIM_StarKid_Idle,
-    .talkAnim = ANIM_StarKid_Talk,
+    .idleAnim = ANIM_StarMan_Idle,
+    .talkAnim = ANIM_StarMan_Talk,
     .onBuyEvt = &N(EVS_OnBuy),
     .shopMsgIDs = N(ShopMessages),
 };

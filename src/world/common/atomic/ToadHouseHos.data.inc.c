@@ -1,5 +1,5 @@
 #include "common.h"
-#include "sprite/npc/StarKid.h"
+#include "sprite/npc/StarMan.h"
 
 // to use this include, you must also define these
 extern EvtScript N(EVS_ToadHouse_SetDialogue);
@@ -53,14 +53,14 @@ EvtScript N(EVS_NpcInteract_ToadHouseKeeper) = {
     EVT_IF_EQ(LVar1, 0)
         EVT_SET(LVar8, LVar0)
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, LVar8)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVar8)
     EVT_CALL(ShowChoice, MSG_Choice_0006)
     EVT_WAIT(3)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, LVar9)
+        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVar9)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, LVarA)
+    EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVarA)
     EVT_CALL(SetPlayerJumpscale, 1)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
@@ -100,7 +100,7 @@ EvtScript N(EVS_NpcInteract_ToadHouseKeeper) = {
     EVT_EXEC_WAIT(N(EVS_ToadHouse_ReturnFromRest))
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, LVarB)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVarB)
     EVT_CALL(N(ToadHouse_ShowStatusMenu))
     EVT_RETURN
     EVT_END

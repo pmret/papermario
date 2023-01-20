@@ -651,9 +651,9 @@ EvtScript N(EVS_NpcInteract_Ninji_04) = {
 EvtScript N(EVS_NpcInteract_StarKid_01) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_0108)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0108)
         EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_0109)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0109)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -662,9 +662,9 @@ EvtScript N(EVS_NpcInteract_StarKid_01) = {
 EvtScript N(EVS_NpcInteract_StarKid_02) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_010A)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010A)
         EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_010B)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010B)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -685,9 +685,9 @@ EvtScript N(EVS_NpcInteract_StarKid_03) = {
     EVT_END_IF
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_010C)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010C)
         EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_010D)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010D)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -696,9 +696,9 @@ EvtScript N(EVS_NpcInteract_StarKid_03) = {
 EvtScript N(EVS_NpcInteract_StarKid_04) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_010E)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010E)
         EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_010F)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010F)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -707,9 +707,9 @@ EvtScript N(EVS_NpcInteract_StarKid_04) = {
 EvtScript N(EVS_NpcInteract_StarKid_05) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_0110)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0110)
         EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_0111)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0111)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -718,9 +718,9 @@ EvtScript N(EVS_NpcInteract_StarKid_05) = {
 EvtScript N(EVS_NpcInteract_StarKid_06) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_0112)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0112)
         EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_CH7_0113)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0113)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

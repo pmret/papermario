@@ -14,8 +14,6 @@
 #include "sprite/npc/Merle.h"
 #include "sprite/npc/ShiverToad.h"
 #include "sprite/npc/Ninji.h"
-#include "sprite/npc/StarKid.h"
-#include "sprite/npc/Twink.h"
 
 enum {
     NPC_Merle                   = 0,

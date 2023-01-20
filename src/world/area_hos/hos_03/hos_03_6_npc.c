@@ -11,7 +11,7 @@
 #include "world/common/complete/Quizmo.inc.c"
 
 EvtScript N(EVS_NpcInteract_StarKid_01) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_HOS_005F)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_005F)
     EVT_RETURN
     EVT_END
 };
@@ -23,7 +23,7 @@ EvtScript N(EVS_NpcInit_StarKid_01) = {
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_02) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_HOS_0060)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_0060)
     EVT_RETURN
     EVT_END
 };
@@ -35,7 +35,7 @@ EvtScript N(EVS_NpcInit_StarKid_02) = {
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_03) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_HOS_0061)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_0061)
     EVT_RETURN
     EVT_END
 };
@@ -47,7 +47,7 @@ EvtScript N(EVS_NpcInit_StarKid_03) = {
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_04) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_HOS_0062)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_0062)
     EVT_RETURN
     EVT_END
 };
@@ -59,7 +59,7 @@ EvtScript N(EVS_NpcInit_StarKid_04) = {
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_05) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarKid_Talk, ANIM_StarKid_Idle, 0, MSG_HOS_0063)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_0063)
     EVT_RETURN
     EVT_END
 };
