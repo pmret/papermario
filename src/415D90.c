@@ -1427,7 +1427,7 @@ const f32 padding3 = 0.0f;
 
 // needs a lot of work -- args should be (void* data, s32 x, s32 y)
 #ifdef NON_MATCHING
-void func_802A3C98(s32 x, s32 y) {
+void func_802A3C98(void* data, s32 x, s32 y) {
     s32 palette;
     s32 num;
     s32 id;
@@ -4456,7 +4456,7 @@ void btl_state_draw_partner_menu(void) {
 
 s32 btl_menu_show_switch_to_twink(void) {
     if (gBattleStatus.flags2 & BS_FLAGS2_4) {
-        return FALSE;   
+        return FALSE;
     }
     return TRUE;
 }
@@ -4632,7 +4632,7 @@ static const f32 padding2 = 0.0f;
 
 s32 btl_menu_show_switch_to_peach(void) {
     if (gBattleStatus.flags2 & BS_FLAGS2_2) {
-        return FALSE;   
+        return FALSE;
     }
     return TRUE;
 }
