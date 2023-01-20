@@ -1920,54 +1920,53 @@ Npc* npc_find_closest_simple(f32 x, f32 y, f32 z, f32 radius) {
     return closestNpc;
 }
 
-// Needs work
-#ifdef NON_EQUIVALENT
-s32 npc_find_standing_on_entity(s32 arg0) {
+s32 npc_find_standing_on_entity(s32 entityIndex) {
+    s32 idx = entityIndex | 0x4000;
+    s32 y = get_entity_by_index(idx)->position.y - 10.0f;
     Npc* npc;
-    s32 y;
     s32 i;
     s32 var_v1;
 
-    var_v1 = arg0 | 0x4000;
-    y = get_entity_by_index(var_v1)->position.y - 10.0f;
+    npc->pos = npc->pos; // TODO required to match
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
         npc = (*gCurrentNpcListPtr)[i];
 
-        if (npc == NULL) {
+        if (npc == 0) {
             continue;
         }
         if (npc->flags == 0) {
             continue;
         }
-        if (npc->flags & (0x80000000 | 0x4)) {
+        if (npc->flags & (NPC_FLAG_80000000 | NPC_FLAG_4)) {
             continue;
+        }
+        if (npc->flags & NPC_FLAG_PARTICLE) {
+            var_v1 = i; // TODO required to match (dummy if statement to load NPC_FLAG_PARTICLE into s5)
         }
         if (npc->pos.y < y) {
             continue;
         }
-        if (npc->flags & (0x8000 | 0x8)) {
+        if (npc->flags & (NPC_FLAG_8000 | NPC_FLAG_ENABLE_HIT_SCRIPT)) {
             var_v1 = npc_get_collider_below(npc);
             if (var_v1 != 0) {
-                if ((arg0 | 0x4000) == var_v1) {
+                if (idx == var_v1) {
                     return i;
                 }
             }
         } else {
             var_v1 = npc->currentFloor;
-            if (npc->currentFloor & 0x4000) {
-                if ((arg0 | 0x4000) == var_v1) {
+            if (npc->currentFloor & 0x4000) { // TODO required to match (can't use var_v1)
+                if (idx == var_v1) {
+                    npc->pos = npc->pos; // TODO required to match
                     return i;
                 }
             }
-
         }
     }
+
     return -1;
 }
-#else
-INCLUDE_ASM(s32, "npc", npc_find_standing_on_entity);
-#endif
 
 s32 npc_get_collider_below(Npc* npc) {
     f32 x;

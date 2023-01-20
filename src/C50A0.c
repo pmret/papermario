@@ -7,6 +7,7 @@
 #include "item_entity.h"
 #include "message_ids.h"
 #include "nu/nusys.h"
+#include "ld_addrs.h"
 
 #define MAX_ITEM_ENTITIES 256
 
@@ -765,7 +766,120 @@ void init_item_entity_list(void) {
 extern s32* gItemEntityScripts[];
 
 void item_entity_load(ItemEntity* item);
+// WIP
+#ifdef WIP
+void item_entity_load(ItemEntity* item) {
+    HudCacheEntry* entry;
+    s32 otherID;
+    s32 otherID2;
+    s32 count;
+    s32 var_s1_2;
+    s32 var_s2_2;
+    s32 var_s3;
+    s32* script;
+    u32 size;
+    u8** var_a1;
+    u8** var_a1_2;
+
+    script = gItemEntityScripts[item->itemID];
+    item->readPos = script;
+    item->savedReadPos =script;
+
+    while (TRUE) {
+        switch (*script++) {
+            case 2:
+            case 3:
+            default:
+                break;
+            case 4:
+                script++;
+                script++;
+                break;
+            case 1:
+                otherID = *script++;
+                otherID2 = *script++;
+                if (item->flags & ITEM_ENTITY_FLAG_40000) {
+                    size = 0x200;
+                } else {
+                    size = 0x120;
+                }
+
+                entry = gHudElementCacheTableRaster;
+                count = 0;
+                var_s3 = 0;
+                var_a1 = &entry->data;
+
+                while (TRUE) {
+                    if (entry->id == -1) {
+                        entry->id = otherID;
+                        *var_a1 = &gHudElementCacheBuffer[*gHudElementCacheSize];
+                        ASSERT((*gHudElementCacheSize + size) < 0x11000);
+                        nuPiReadRom(otherID + icon_present_ROM_START, *var_a1, size);
+                        *gHudElementCacheSize += size;
+                        if (gGameStatusPtr->isBattle == 0) {
+                            *script++ = count;
+                        } else {
+                            *script++ = *script | var_s3;
+                        }
+                        break;
+                    } else if (entry->id != otherID) {
+                        var_a1 += 8;
+                        entry += 8;
+                        var_s3 += 0x10000;
+                        count++;
+                    } else {
+                        if (gGameStatusPtr->isBattle == 0) {
+                            *script++ = count;
+                        } else {
+                            *script++ = *script | var_s3;
+                        }
+                        break;
+                    }
+                }
+
+                var_s1_2 = 0;
+                ASSERT(count < 0x100);
+                entry = gHudElementCacheTablePalette;
+                var_s2_2 = 0;
+                var_a1_2 = &entry->data;
+
+                while (TRUE) {
+                    if (entry->id == -1) {
+                        entry->id = otherID2;
+                        *var_a1_2 = &gHudElementCacheBuffer[*gHudElementCacheSize];
+                        ASSERT((*gHudElementCacheSize + 0x20) < 0x11000);
+                        nuPiReadRom(otherID2 + icon_present_ROM_START, *var_a1_2, 0x20);
+                        *gHudElementCacheSize += 0x20;
+                        if (gGameStatusPtr->isBattle == 0) {
+                            *script++ = var_s1_2;
+                        } else {
+                            *script++ = *script | var_s2_2;
+                        }
+                        break;
+                    } else if (entry->id != otherID2) {
+                        var_a1_2 += 8;
+                        entry += 8;
+                        var_s2_2 += 0x10000;
+                        var_s1_2++;
+                    } else {
+                        if (gGameStatusPtr->isBattle == 0) {
+                            *script++ = var_s1_2;
+                        } else {
+                            *script++ = *script | var_s2_2;
+                        }
+                        break;
+                    }
+                }
+                break;
+            case 0:
+                item_entity_update(item);
+                return;
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "C50A0", item_entity_load);
+#endif
 
 s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupFlagIndex) {
     s32 i;
