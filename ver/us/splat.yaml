@@ -10838,11 +10838,12 @@ segments:
     start: 0x9F4A40
     vram: 0x80240000
     subsegments:
-    - [0x9F4A40, c]
-    - [0x9F6990, data]
-    - [0x9F6A50, data]
-    - [0x9F7180, data]
-    - [0x9FA720]
+    - [0x9F4A40, c, nok_11_0_header]
+    - [0x9F4A40, c, nok_11_1_music]
+    - [0x9F4A40, c, nok_11_2_main]
+    - [0x9F4A40, c, nok_11_3_entity]
+    - [0x9F4A40, c, nok_11_4_npc]
+    - [0x9F6990]
   - name: nok_12
     dir: world/area_nok/nok_12
     type: code
