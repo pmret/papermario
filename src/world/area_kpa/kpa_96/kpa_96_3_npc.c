@@ -1,29 +1,29 @@
 #include "kpa_96.h"
 
 s32 N(ShopMessages)[] = {
-    MSG_Shop_00_KPA96,
-    MSG_Shop_01_KPA96,
-    MSG_Shop_02_KPA96,
-    MSG_Shop_03_KPA96,
-    MSG_Shop_04_KPA96,
-    MSG_Shop_05_KPA96,
-    MSG_Shop_06_KPA96,
-    MSG_Shop_07_KPA96, 
-    MSG_Shop_08_KPA96,
-    MSG_Shop_09_KPA96,
-    MSG_Shop_0A_KPA96,
-    MSG_Shop_0B_KPA96,
-    MSG_Shop_0C_KPA96,
-    MSG_Shop_0D_KPA96,
-    MSG_Shop_0E_KPA96,
-    MSG_Shop_0F_KPA96, 
-    MSG_Shop_10_KPA96,
-    MSG_Shop_11_KPA96,
-    MSG_Shop_12_KPA96,
-    MSG_Shop_13_KPA96,
-    MSG_Shop_14_KPA96,
-    MSG_Shop_15_KPA96,
-    MSG_Shop_16_KPA96, 
+    [SHOP_MSG_00] MSG_Shop_00_KPA96,
+    [SHOP_MSG_01] MSG_Shop_01_KPA96,
+    [SHOP_MSG_02] MSG_Shop_02_KPA96,
+    [SHOP_MSG_03] MSG_Shop_03_KPA96,
+    [SHOP_MSG_04] MSG_Shop_04_KPA96,
+    [SHOP_MSG_05] MSG_Shop_05_KPA96,
+    [SHOP_MSG_06] MSG_Shop_06_KPA96,
+    [SHOP_MSG_07] MSG_Shop_07_KPA96, 
+    [SHOP_MSG_08] MSG_Shop_08_KPA96,
+    [SHOP_MSG_09] MSG_Shop_09_KPA96,
+    [SHOP_MSG_0A] MSG_Shop_0A_KPA96,
+    [SHOP_MSG_0B] MSG_Shop_0B_KPA96,
+    [SHOP_MSG_0C] MSG_Shop_0C_KPA96,
+    [SHOP_MSG_0D] MSG_Shop_0D_KPA96,
+    [SHOP_MSG_0E] MSG_Shop_0E_KPA96,
+    [SHOP_MSG_0F] MSG_Shop_0F_KPA96, 
+    [SHOP_MSG_10] MSG_Shop_10_KPA96,
+    [SHOP_MSG_11] MSG_Shop_11_KPA96,
+    [SHOP_MSG_12] MSG_Shop_12_KPA96,
+    [SHOP_MSG_13] MSG_Shop_13_KPA96,
+    [SHOP_MSG_14] MSG_Shop_14_KPA96,
+    [SHOP_MSG_15] MSG_Shop_15_KPA96,
+    [SHOP_MSG_16] MSG_Shop_16_KPA96, 
 };
 
 ShopItemData N(Inventory)[] = {
@@ -50,10 +50,10 @@ ShopSellPriceData N(PriceList)[] = {
 
 EvtScript N(EVS_OnBuy) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(3)
-        EVT_CASE_EQ(4)
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(SHOP_BUY_RESULT_CANCEL)
+        EVT_CASE_EQ(SHOP_BUY_RESULT_4)
+        EVT_CASE_EQ(SHOP_BUY_RESULT_OK)
+        EVT_CASE_EQ(SHOP_BUY_RESULT_OK) //@bug duplicate case
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

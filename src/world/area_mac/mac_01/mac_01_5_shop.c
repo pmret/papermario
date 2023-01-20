@@ -92,29 +92,29 @@ API_CALLABLE(N(CreateShopInventory)) {
 }
 
 s32 N(ShopMessages)[] = {
-    MSG_Shop_00_MAC01,
-    MSG_Shop_01_MAC01,
-    MSG_Shop_02_MAC00,
-    MSG_Shop_03_MAC01,
-    MSG_Shop_04_MAC00,
-    MSG_Shop_05_MAC00,
-    MSG_Shop_06_MAC00,
-    MSG_Shop_07_MAC00, 
-    MSG_Shop_08_MAC00,
-    MSG_Shop_09_MAC00,
-    MSG_Shop_0A_MAC00,
-    MSG_Shop_0B_MAC00,
-    MSG_Shop_0C_MAC00,
-    MSG_Shop_0D_MAC00,
-    MSG_Shop_0E_MAC00,
-    MSG_Shop_0F_MAC00, 
-    MSG_Shop_10_MAC00,
-    MSG_Shop_11_MAC00,
-    MSG_Shop_12_MAC00,
-    MSG_Shop_13_MAC00,
-    MSG_Shop_14_MAC00,
-    MSG_Shop_15_MAC00,
-    MSG_Shop_16_MAC01, 
+    [SHOP_MSG_00] MSG_Shop_00_MAC01,
+    [SHOP_MSG_01] MSG_Shop_01_MAC01,
+    [SHOP_MSG_02] MSG_Shop_02_MAC00,
+    [SHOP_MSG_03] MSG_Shop_03_MAC01,
+    [SHOP_MSG_04] MSG_Shop_04_MAC00,
+    [SHOP_MSG_05] MSG_Shop_05_MAC00,
+    [SHOP_MSG_06] MSG_Shop_06_MAC00,
+    [SHOP_MSG_07] MSG_Shop_07_MAC00, 
+    [SHOP_MSG_08] MSG_Shop_08_MAC00,
+    [SHOP_MSG_09] MSG_Shop_09_MAC00,
+    [SHOP_MSG_0A] MSG_Shop_0A_MAC00,
+    [SHOP_MSG_0B] MSG_Shop_0B_MAC00,
+    [SHOP_MSG_0C] MSG_Shop_0C_MAC00,
+    [SHOP_MSG_0D] MSG_Shop_0D_MAC00,
+    [SHOP_MSG_0E] MSG_Shop_0E_MAC00,
+    [SHOP_MSG_0F] MSG_Shop_0F_MAC00, 
+    [SHOP_MSG_10] MSG_Shop_10_MAC00,
+    [SHOP_MSG_11] MSG_Shop_11_MAC00,
+    [SHOP_MSG_12] MSG_Shop_12_MAC00,
+    [SHOP_MSG_13] MSG_Shop_13_MAC00,
+    [SHOP_MSG_14] MSG_Shop_14_MAC00,
+    [SHOP_MSG_15] MSG_Shop_15_MAC00,
+    [SHOP_MSG_16] MSG_Shop_16_MAC01, 
 };
 
 ShopSellPriceData N(RowfDummyPriceList)[] = {
@@ -124,22 +124,22 @@ ShopSellPriceData N(RowfDummyPriceList)[] = {
 
 EvtScript N(EVS_OnBuy) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(3)
-        EVT_CASE_EQ(4)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(SHOP_BUY_RESULT_CANCEL)
+        EVT_CASE_EQ(SHOP_BUY_RESULT_4)
+        EVT_CASE_EQ(SHOP_BUY_RESULT_OK)
             EVT_SWITCH(LVar2)
-                EVT_CASE_EQ(0)
+                EVT_CASE_EQ(0) // left badge shop slot
                     EVT_SET(GF_MAC01_RowfBadgeAvailableA, TRUE)
                     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b3, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CASE_EQ(1)
+                EVT_CASE_EQ(1) // middle badge shop slot
                     EVT_SET(GF_MAC01_RowfBadgeAvailableB, TRUE)
                     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CASE_EQ(2)
+                EVT_CASE_EQ(2) // right badge shop slot
                     EVT_SET(GF_MAC01_RowfBadgeAvailableC, TRUE)
                     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
             EVT_END_SWITCH
             EVT_CALL(N(SetRowfBadgeBought), LVar2)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(SHOP_BUY_RESULT_2)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

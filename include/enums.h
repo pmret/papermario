@@ -5308,6 +5308,41 @@ enum ShopFlags {
     SHOP_FLAG_80000000          = 0x80000000,
 };
 
+enum {
+    SHOP_MSG_00     = 0x00, // buy choice
+    SHOP_MSG_01     = 0x01, // not enough coins
+    SHOP_MSG_02     = 0x02, // not enough room
+    SHOP_MSG_03     = 0x03, // buy thank you
+    SHOP_MSG_04     = 0x04, // greeting / welcome
+    SHOP_MSG_05     = 0x05, // instruction
+    SHOP_MSG_06     = 0x06, // nothing to sell
+    SHOP_MSG_07     = 0x07, // sell which
+    SHOP_MSG_08     = 0x08, // sell choice
+    SHOP_MSG_09     = 0x09, // sell cancel
+    SHOP_MSG_0A     = 0x0A, // sell continue
+    SHOP_MSG_0B     = 0x0B, // sell thank you
+    SHOP_MSG_0C     = 0x0C, // nothing to check
+    SHOP_MSG_0D     = 0x0D, // check full
+    SHOP_MSG_0E     = 0x0E, // check which
+    SHOP_MSG_0F     = 0x0F, // check accepted
+    SHOP_MSG_10     = 0x10, // check continue
+    SHOP_MSG_11     = 0x11, // nothing to claim
+    SHOP_MSG_12     = 0x12, // no claim room
+    SHOP_MSG_13     = 0x13, // claim which
+    SHOP_MSG_14     = 0x14, // claim accepted
+    SHOP_MSG_15     = 0x15, // claim continue
+    SHOP_MSG_16     = 0x16, // farewell
+};
+
+enum {
+    SHOP_BUY_RESULT_NOT_ENOUGH_COINS    = 0,
+    SHOP_BUY_RESULT_OK                  = 1,
+    SHOP_BUY_RESULT_2                   = 2,
+    SHOP_BUY_RESULT_CANCEL              = 3,
+    SHOP_BUY_RESULT_4                   = 4,
+    SHOP_BUY_RESULT_NOT_ENOUGH_ROOM     = 5,
+};
+
 enum EncounterStatusFlags {
     ENCOUNTER_STATUS_FLAG_0                 = 0x00000000,
     ENCOUNTER_STATUS_FLAG_1                 = 0x00000001,
