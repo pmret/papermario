@@ -219,9 +219,10 @@ extern HeapNode gSpriteHeapPtr;
 
 extern s32 D_8029C890[10][5];
 
-// Heap?
+// frame buffers
 extern u16 D_8038F800[];
 extern u16 D_803B5000[];
+extern u16 D_803DA800[];
 
 extern HeapNode heap_collisionHead;
 extern HeapNode heap_generalHead;

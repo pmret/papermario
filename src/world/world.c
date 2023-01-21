@@ -469,24 +469,26 @@ MapConfig trd_maps[] = {
 };
 
 /// Koopa Region
+#include "area_nok/nok.h"
 MapConfig nok_maps[] = {
     { MAP_UNSPLIT(nok_01, 0x80242B90), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_02, 0x802445F0), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_03, 0x80240E40), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_04, 0x80240F40), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(nok_11, 0x80241F70), .bgName = "nok_bg" },
+    { MAP(nok_11), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_12, 0x80242100), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_13, 0x802414C0), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(nok_14, 0x80242440), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(nok_15, 0x802427D0), .bgName = "nok_bg" },
+    { MAP(nok_14), .bgName = "nok_bg" },
+    { MAP(nok_15), .bgName = "nok_bg" },
 };
 
 /// Star Region
+#include "area_hos/hos.h"
 MapConfig hos_maps[] = {
     { MAP_UNSPLIT(hos_00, 0x80240D50), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(hos_01, 0x80240E40), .bgName = "hos_bg" },
-    { MAP_UNSPLIT(hos_02, 0x80242B90), .bgName = "hos_bg" },
-    { MAP_UNSPLIT(hos_03, 0x802435F0), .bgName = "hos_bg" },
+    { MAP(hos_02), .bgName = "hos_bg" },
+    { MAP(hos_03), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_04, 0x80240EE0), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_05, 0x80245910), .bgName = "hos_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(hos_06, 0x80242570), .bgName = "hos_bg" },
@@ -735,13 +737,14 @@ MapConfig flo_maps[] = {
 };
 
 /// Shiver Region
+#include "area_sam/sam.h"
 MapConfig sam_maps[] = {
     { MAP_UNSPLIT(sam_01, 0x80241F70), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_02, 0x80241C00), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_03, 0x80240940), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_04, 0x80240740), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_05, 0x80241D60), .bgName = "sam_bg" },
-    { MAP_UNSPLIT(sam_06, 0x80242630), .bgName = "sam_bg" },
+    { MAP(sam_06), .bgName = "sam_bg" },
     { MAP_UNSPLIT(sam_07, 0x80242020), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(sam_08, 0x802417D0), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(sam_09, 0x80240420), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
@@ -805,7 +808,7 @@ MapConfig omo_maps[] = {
     { MAP_UNSPLIT(omo_14, 0x802405E0), .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(omo_15, 0x80240810), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(omo_16, 0x80240620), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_17, 0x80243770), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_17), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
 };
 
 /// Debug

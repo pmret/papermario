@@ -54,6 +54,7 @@
     .anim_E = ANIM_WorldClubba_Anim02, \
     .anim_F = ANIM_WorldClubba_Anim02, \
 }
+
 #define CLUBBA_MACE_HITBOX(npcID) \
 { \
     .id = npcID, \

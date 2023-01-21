@@ -3,9 +3,6 @@
 #include "hud_element.h"
 
 extern IconHudScriptPair gItemHudScripts[];
-extern EvtScript N(EVS_ToadHouse_GetInBed);
-extern EvtScript N(EVS_ToadHouse_SetDialogue);
-extern EvtScript N(EVS_ToadHouse_ReturnFromRest);
 extern EvtScript N(EVS_MerlonBargeOut);
 
 #include "world/common/npc/Toad_Wander.inc.c"
@@ -32,14 +29,12 @@ NpcSettings N(NpcSettings_Parakarry) = {
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
 
-#include "world/common/complete/ToadHouseBlanketAnim.inc.c"
-
 #define KNOCK_DOWN_MAP_VAR MV_KnockdownWorker
 #include "world/common/complete/KnockDownPlayer.inc.c"
 
+#include "world/common/complete/ToadHouseBlanketAnim.inc.c"
 #include "world/common/atomic/ToadHouse.inc.c"
 #include "world/common/atomic/ToadHouse.data.inc.c"
-
 
 MAP_STATIC_PAD(1,key_choice);
 #include "world/common/complete/KeyItemChoice.inc.c"

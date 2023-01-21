@@ -29,6 +29,7 @@ heap_generalHead = 0x802FB800;
 gSpriteHeapPtr = 0x8034F800;
 D_8038F800 = 0x8038F800;
 D_803B5000 = 0x803B5000;
+D_803DA800 = 0x803DA800;
 heap_battleHead = 0x803DA800;
 
 // Letter delivery BSS
