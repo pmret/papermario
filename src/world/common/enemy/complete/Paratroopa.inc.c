@@ -2,10 +2,6 @@
 
 #include "world/common/enemy/ai/ParatroopaAI.inc.c"
 
-f32 N(FlyingAI_JumpVels)[] = {
-    4.5, 3.5, 2.6, 2.0, 1.5, 20.0, 
-};
-
 MobileAISettings N(AISettings_ParaTroopa) = {
     .moveSpeed = 2.0f,
     .moveTime = 30,

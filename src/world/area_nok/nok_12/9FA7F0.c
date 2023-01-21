@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "nok_11";
 static char* N(exit_str_1) = "nok_13";
 
-// copy of func_80240000_A02840
+// copy of UpdateEnounterStages
 ApiStatus func_80240000_9FA7F0(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     EncounterStatus* encounterStatus = &gCurrentEncounter;

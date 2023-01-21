@@ -478,8 +478,8 @@ MapConfig nok_maps[] = {
     { MAP(nok_11), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_12, 0x80242100), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_13, 0x802414C0), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(nok_14, 0x80242440), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(nok_15, 0x802427D0), .bgName = "nok_bg" },
+    { MAP(nok_14), .bgName = "nok_bg" },
+    { MAP(nok_15), .bgName = "nok_bg" },
 };
 
 /// Star Region

@@ -1,7 +1,6 @@
 #include "Ember.h"
 
 #include "world/common/enemy/ai/FlyingAI.inc.c"
-#include "world/common/enemy/ai/FlyingAI.data.inc.c"
 #include "world/common/enemy/ai/FlyingNoAttackAI.inc.c"
 
 MobileAISettings N(AISettings_Ember) = {

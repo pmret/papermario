@@ -1,7 +1,6 @@
 #include "StarSpirit.h"
 
 #include "world/common/enemy/ai/FlyingAI.inc.c"
-#include "world/common/enemy/ai/FlyingAI.data.inc.c"
 
 MobileAISettings N(AISettings_StarSpirit_Wander) = {
     .moveSpeed = 1.2f,

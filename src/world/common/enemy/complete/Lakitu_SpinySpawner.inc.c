@@ -3,10 +3,6 @@
 
 #include "world/common/enemy/ai/LakituAI.inc.c"
 
-f32 N(FlyingAI_JumpVels)[] = {
-    4.5, 3.5, 2.6, 2.0, 1.5, 20.0,
-};
-
 MobileAISettings N(AISettings_Lakitu_SpinySpawner) = {
     .moveSpeed = 1.5f,
     .moveTime = 60,

@@ -20,6 +20,10 @@ enum {
     AB_NOK_F        = AreaByte(15),
 };
 
+enum {
+    AF_NOK_02       = AreaFlag(2),
+};
+
 extern MapSettings nok_01_settings;
 extern MapSettings nok_02_settings;
 extern MapSettings nok_03_settings;

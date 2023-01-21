@@ -1,7 +1,6 @@
 #include "Bzzap.h"
 
 #include "world/common/enemy/ai/FlyingAI.inc.c"
-#include "world/common/enemy/ai/FlyingAI.data.inc.c"
 
 MobileAISettings N(AISettings_Bzzap) = {
     .moveSpeed = 1.0f,

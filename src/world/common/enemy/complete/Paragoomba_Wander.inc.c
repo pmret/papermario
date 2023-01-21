@@ -1,7 +1,6 @@
 #include "Paragoomba.h"
 
 #include "world/common/enemy/ai/FlyingAI.inc.c"
-#include "world/common/enemy/ai/FlyingAI.data.inc.c"
 
 MobileAISettings N(AISettings_Paragoomba_Wander) = {
     .moveSpeed = 1.6f,

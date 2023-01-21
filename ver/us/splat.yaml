@@ -10882,28 +10882,26 @@ segments:
     start: 0xA02840
     vram: 0x80240000
     subsegments:
-    - [0xA02840, c]
-    - [0xA029C0, c]
-    - [0xA02A00, c]
-    - [0xA04C60, data]
-    - [0xA04D00, data]
-    - [0xA052F0, data]
-    - [0xA057B0, data]
-    - [0xA06110, data]
-    - [0xA06DF0]
+    - [0xA02840, c, nok_14_0_header]
+    - [0xA02840, c, nok_14_1_music]
+    - [0xA02840, c, nok_14_2_main]
+    - [0xA029C0, c, nok_14_3_entity]
+    - [0xA029C0, c, nok_14_4_bridge]
+    - [0xA02A00, c, nok_14_5_npc]
+    - [0xA04C60]
   - name: nok_15
     dir: world/area_nok/nok_15
     type: code
     start: 0xA06F00
     vram: 0x80240000
     subsegments:
-    - [0xA06F00, c]
-    - [0xA09440, c]
-    - [0xA09680, data]
-    - [0xA09750, data]
-    - [0xA0AB50, data]
-    - [0xA0AB90, data]
-    - [0xA0BBD0]
+    - [0xA06F00, c, nok_15_0_header]
+    - [0xA06F00, c, nok_15_1_music]
+    - [0xA06F00, c, nok_15_2_main]
+    - [0xA071E0, c, nok_15_3_entity]
+    - [0xA071E0, c, nok_15_4_npc]
+    - [0xA09440, c, nok_15_5_foliage]
+    - [0xA09680]
   - name: hos_00
     dir: world/area_hos/hos_00
     type: code

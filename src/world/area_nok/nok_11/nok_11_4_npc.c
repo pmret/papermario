@@ -4,24 +4,12 @@
 #include "world/common/enemy/complete/KoopaTroopa_Wander.inc.c"
 #include "world/common/enemy/complete/Paragoomba_Wander.inc.c"
 #include "world/common/enemy/complete/SpikedGoomba_Wander.inc.c"
-
-NpcSettings N(NpcSettings_JrTroopa_01) = {
-    .height = 32,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_KentCKoopa_01) = {
-    .height = 68,
-    .radius = 80,
-    .level = 99,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
+#include "world/common/npc/JrTroopa.inc.c"
+#include "world/common/enemy/complete/KentCKoopa.inc.c"
 
 #include "common/foliage.inc.c"
 
-EvtScript N(D_802433A4_9F7DE4) = {
+EvtScript N(EVS_JrTroopa_RunFX) = {
     EVT_LOOP(0)
         EVT_CALL(GetNpcPos, NPC_JrTroopa_01, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0)
@@ -48,10 +36,10 @@ EvtScript N(EVS_NpcIdle_JrTroopa_01) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CHILD_THREAD
         EVT_LABEL(10)
-        EVT_WAIT(3)
-        EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
-        EVT_WAIT(1)
-        EVT_GOTO(10)
+            EVT_WAIT(3)
+            EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
+            EVT_WAIT(1)
+            EVT_GOTO(10)
     EVT_END_CHILD_THREAD
     EVT_EXEC(N(EVS_PlayJrTroopaSong))
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 5, MSG_CH1_011E)
@@ -89,7 +77,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa_01) = {
     EVT_CALL(NpcMoveTo, NPC_SELF, -201, -67, 10)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
     EVT_CALL(NpcJump1, NPC_SELF, -191, 0, -32, 5)
-    EVT_EXEC_GET_TID(N(D_802433A4_9F7DE4), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_JrTroopa_RunFX), LVarA)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_167, 0)
     EVT_CALL(NpcMoveTo, NPC_SELF, -165, 50, 15)
     EVT_KILL_THREAD(LVarA)
@@ -246,23 +234,23 @@ API_CALLABLE(N(KentTakeCoins)) {
 
 EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
     EVT_LABEL(1)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_EQ(AB_NOK_2, 0)
-        EVT_IF_GE(LVar0, -260)
-            EVT_GOTO(10)
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_IF_EQ(AB_NOK_2, 0)
+            EVT_IF_GE(LVar0, -260)
+                EVT_GOTO(10)
+            EVT_ELSE
+                EVT_GOTO(2)
+            EVT_END_IF
         EVT_ELSE
-            EVT_GOTO(2)
+            EVT_IF_LE(LVar0, -55)
+                EVT_GOTO(10)
+            EVT_ELSE
+                EVT_GOTO(2)
+            EVT_END_IF
         EVT_END_IF
-    EVT_ELSE
-        EVT_IF_LE(LVar0, -55)
-            EVT_GOTO(10)
-        EVT_ELSE
-            EVT_GOTO(2)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_LABEL(2)
-    EVT_WAIT(1)
-    EVT_GOTO(1)
+        EVT_LABEL(2)
+        EVT_WAIT(1)
+        EVT_GOTO(1)
     EVT_LABEL(10)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(InterruptUsePartner)
@@ -370,25 +358,25 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
     EVT_WAIT(30)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_LABEL(41)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_EQ(AB_NOK_2, 0)
-        EVT_IF_GE(LVar0, -255)
-            EVT_SET(LVar3, -256)
-            EVT_GOTO(43)
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_IF_EQ(AB_NOK_2, 0)
+            EVT_IF_GE(LVar0, -255)
+                EVT_SET(LVar3, -256)
+                EVT_GOTO(43)
+            EVT_ELSE
+                EVT_GOTO(42)
+            EVT_END_IF
         EVT_ELSE
-            EVT_GOTO(42)
+            EVT_IF_LE(LVar0, -60)
+                EVT_SET(LVar3, -59)
+                EVT_GOTO(43)
+            EVT_ELSE
+                EVT_GOTO(42)
+            EVT_END_IF
         EVT_END_IF
-    EVT_ELSE
-        EVT_IF_LE(LVar0, -60)
-            EVT_SET(LVar3, -59)
-            EVT_GOTO(43)
-        EVT_ELSE
-            EVT_GOTO(42)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_LABEL(42)
-    EVT_WAIT(1)
-    EVT_GOTO(41)
+        EVT_LABEL(42)
+        EVT_WAIT(1)
+        EVT_GOTO(41)
     EVT_LABEL(43)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(InterruptUsePartner)
@@ -406,25 +394,25 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
     EVT_WAIT(30)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_LABEL(51)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_EQ(AB_NOK_2, 0)
-        EVT_IF_GE(LVar0, -255)
-            EVT_SET(LVar3, -256)
-            EVT_GOTO(53)
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_IF_EQ(AB_NOK_2, 0)
+            EVT_IF_GE(LVar0, -255)
+                EVT_SET(LVar3, -256)
+                EVT_GOTO(53)
+            EVT_ELSE
+                EVT_GOTO(52)
+            EVT_END_IF
         EVT_ELSE
-            EVT_GOTO(52)
+            EVT_IF_LE(LVar0, -60)
+                EVT_SET(LVar3, -59)
+                EVT_GOTO(53)
+            EVT_ELSE
+                EVT_GOTO(52)
+            EVT_END_IF
         EVT_END_IF
-    EVT_ELSE
-        EVT_IF_LE(LVar0, -60)
-            EVT_SET(LVar3, -59)
-            EVT_GOTO(53)
-        EVT_ELSE
-            EVT_GOTO(52)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_LABEL(52)
-    EVT_WAIT(1)
-    EVT_GOTO(51)
+        EVT_LABEL(52)
+        EVT_WAIT(1)
+        EVT_GOTO(51)
     EVT_LABEL(53)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(InterruptUsePartner)
@@ -467,18 +455,7 @@ StaticNpc N(NpcData_KoopaTroopa) = {
     .pos = { -350.0f, 0.0f, -30.0f },
     .yaw = 90,
     .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 3, 0 },
-            { ITEM_KOOPA_LEAF, 7, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 1,
-        .maxCoinBonus = 1,
-    },
+    .drops = KOOPA_TROOPA_DROPS_B,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -491,24 +468,7 @@ StaticNpc N(NpcData_KoopaTroopa) = {
             .detectSize = { 250 },
         }
     },
-    .animations = {
-        .idle   = ANIM_KoopaTroopa_Idle,
-        .walk   = ANIM_KoopaTroopa_Walk,
-        .run    = ANIM_KoopaTroopa_Run,
-        .chase  = ANIM_KoopaTroopa_Run,
-        .anim_4 = ANIM_KoopaTroopa_Idle,
-        .anim_5 = ANIM_KoopaTroopa_Idle,
-        .death  = ANIM_KoopaTroopa_Hurt,
-        .hit    = ANIM_KoopaTroopa_Hurt,
-        .anim_8 = ANIM_KoopaTroopa_ShellEnter,
-        .anim_9 = ANIM_KoopaTroopa_ShellSpin,
-        .anim_A = ANIM_KoopaTroopa_ShellExit,
-        .anim_B = ANIM_KoopaTroopa_Run,
-        .anim_C = ANIM_KoopaTroopa_Run,
-        .anim_D = ANIM_KoopaTroopa_Run,
-        .anim_E = ANIM_KoopaTroopa_Run,
-        .anim_F = ANIM_KoopaTroopa_Run,
-    },
+    .animations = KOOPA_TROOPA_ANIMS,
 };
 
 StaticNpc N(NpcData_Paragoomba) = {
@@ -517,17 +477,7 @@ StaticNpc N(NpcData_Paragoomba) = {
     .pos = { 0.0f, 60.0f, -30.0f },
     .yaw = 0,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 0,
-        .maxCoinBonus = 1,
-    },
+    .drops = PARAGOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -540,24 +490,7 @@ StaticNpc N(NpcData_Paragoomba) = {
             .detectSize = { 250 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Paragoomba_Idle,
-        .walk   = ANIM_Paragoomba_Walk,
-        .run    = ANIM_Paragoomba_Run,
-        .chase  = ANIM_Paragoomba_Run,
-        .anim_4 = ANIM_Paragoomba_Idle,
-        .anim_5 = ANIM_Paragoomba_Idle,
-        .death  = ANIM_Paragoomba_Hurt,
-        .hit    = ANIM_Paragoomba_Hurt,
-        .anim_8 = ANIM_Paragoomba_Run,
-        .anim_9 = ANIM_Paragoomba_Run,
-        .anim_A = ANIM_Paragoomba_Run,
-        .anim_B = ANIM_Paragoomba_Run,
-        .anim_C = ANIM_Paragoomba_Run,
-        .anim_D = ANIM_Paragoomba_Run,
-        .anim_E = ANIM_Paragoomba_Run,
-        .anim_F = ANIM_Paragoomba_Run,
-    },
+    .animations = PARAGOOMBA_ANIMS,
 };
 
 StaticNpc N(NpcData_SpikedGoomba) = {
@@ -566,17 +499,7 @@ StaticNpc N(NpcData_SpikedGoomba) = {
     .pos = { 430.0f, 0.0f, -27.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .itemDropChance = 5,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 0,
-        .maxCoinBonus = 1,
-    },
+    .drops = SPIKED_GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -589,24 +512,7 @@ StaticNpc N(NpcData_SpikedGoomba) = {
             .detectSize = { 250 },
         }
     },
-    .animations = {
-        .idle   = ANIM_SpikedGoomba_Idle,
-        .walk   = ANIM_SpikedGoomba_Walk,
-        .run    = ANIM_SpikedGoomba_Run,
-        .chase  = ANIM_SpikedGoomba_Run,
-        .anim_4 = ANIM_SpikedGoomba_Idle,
-        .anim_5 = ANIM_SpikedGoomba_Idle,
-        .death  = ANIM_SpikedGoomba_HurtStill,
-        .hit    = ANIM_SpikedGoomba_HurtStill,
-        .anim_8 = ANIM_SpikedGoomba_Run,
-        .anim_9 = ANIM_SpikedGoomba_Run,
-        .anim_A = ANIM_SpikedGoomba_Run,
-        .anim_B = ANIM_SpikedGoomba_Run,
-        .anim_C = ANIM_SpikedGoomba_Run,
-        .anim_D = ANIM_SpikedGoomba_Run,
-        .anim_E = ANIM_SpikedGoomba_Run,
-        .anim_F = ANIM_SpikedGoomba_Run,
-    },
+    .animations = SPIKED_GOOMBA_ANIMS,
 };
 
 EvtScript N(EVS_NpcInit_JrTroopa_01) = {
@@ -626,69 +532,27 @@ EvtScript N(EVS_NpcInit_JrTroopa_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_JrTroopa_01)[] = {
+StaticNpc N(NpcData_JrTroopa)[] = {
     {
         .id = NPC_JrTroopa_01,
-        .settings = &N(NpcSettings_JrTroopa_01),
+        .settings = &N(NpcSettings_JrTroopa),
         .pos = { -170.0f, 0.0f, -155.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_JrTroopa_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_JrTroopa_Idle,
-            .walk   = ANIM_JrTroopa_Walk,
-            .run    = ANIM_JrTroopa_Walk,
-            .chase  = ANIM_JrTroopa_Walk,
-            .anim_4 = ANIM_JrTroopa_Idle,
-            .anim_5 = ANIM_JrTroopa_Idle,
-            .death  = ANIM_JrTroopa_Idle,
-            .hit    = ANIM_JrTroopa_Idle,
-            .anim_8 = ANIM_JrTroopa_Idle,
-            .anim_9 = ANIM_JrTroopa_Idle,
-            .anim_A = ANIM_JrTroopa_Idle,
-            .anim_B = ANIM_JrTroopa_Idle,
-            .anim_C = ANIM_JrTroopa_Idle,
-            .anim_D = ANIM_JrTroopa_Idle,
-            .anim_E = ANIM_JrTroopa_Idle,
-            .anim_F = ANIM_JrTroopa_Idle,
-        },
+        .drops = JR_TROOPA_DROPS,
+        .animations = JR_TROOPA_ANIMS,
         .tattle = MSG_NpcTattle_JrTroopa,
     },
     {
         .id = NPC_JrTroopa_02,
-        .settings = &N(NpcSettings_JrTroopa_01),
+        .settings = &N(NpcSettings_JrTroopa),
         .pos = { -170.0f, 0.0f, -155.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_4 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_800000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_JrTroopa_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_JrTroopa_Idle,
-            .walk   = ANIM_JrTroopa_Walk,
-            .run    = ANIM_JrTroopa_Walk,
-            .chase  = ANIM_JrTroopa_Walk,
-            .anim_4 = ANIM_JrTroopa_Idle,
-            .anim_5 = ANIM_JrTroopa_Idle,
-            .death  = ANIM_JrTroopa_Idle,
-            .hit    = ANIM_JrTroopa_Idle,
-            .anim_8 = ANIM_JrTroopa_Idle,
-            .anim_9 = ANIM_JrTroopa_Idle,
-            .anim_A = ANIM_JrTroopa_Idle,
-            .anim_B = ANIM_JrTroopa_Idle,
-            .anim_C = ANIM_JrTroopa_Idle,
-            .anim_D = ANIM_JrTroopa_Idle,
-            .anim_E = ANIM_JrTroopa_Idle,
-            .anim_F = ANIM_JrTroopa_Idle,
-        },
+        .drops = JR_TROOPA_DROPS,
+        .animations = JR_TROOPA_ANIMS,
         .tattle = MSG_NpcTattle_JrTroopa,
     },
 };
@@ -716,85 +580,43 @@ EvtScript N(EVS_NpcInit_KentCKoopa_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KentCKoopa_01)[] = {
+StaticNpc N(NpcData_KentCKoopa)[] = {
     {
         .id = NPC_KentCKoopa_01,
-        .settings = &N(NpcSettings_KentCKoopa_01),
+        .settings = &N(NpcSettings_KentCKoopa),
         .pos = { -164.0f, 0.0f, -37.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_800000,
         .init = &N(EVS_NpcInit_KentCKoopa_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_KentCKoopa_Anim01,
-            .walk   = ANIM_KentCKoopa_Anim01,
-            .run    = ANIM_KentCKoopa_Anim01,
-            .chase  = ANIM_KentCKoopa_Anim01,
-            .anim_4 = ANIM_KentCKoopa_Anim01,
-            .anim_5 = ANIM_KentCKoopa_Anim01,
-            .death  = ANIM_KentCKoopa_Anim01,
-            .hit    = ANIM_KentCKoopa_Anim01,
-            .anim_8 = ANIM_KentCKoopa_Anim01,
-            .anim_9 = ANIM_KentCKoopa_Anim01,
-            .anim_A = ANIM_KentCKoopa_Anim01,
-            .anim_B = ANIM_KentCKoopa_Anim01,
-            .anim_C = ANIM_KentCKoopa_Anim01,
-            .anim_D = ANIM_KentCKoopa_Anim01,
-            .anim_E = ANIM_KentCKoopa_Anim01,
-            .anim_F = ANIM_KentCKoopa_Anim01,
-        },
+        .drops = KENT_C_KOOPA_DROPS,
+        .animations = KENT_C_KOOPA_ANIMS,
     },
     {
         .id = NPC_KentCKoopa_02,
-        .settings = &N(NpcSettings_KentCKoopa_01),
+        .settings = &N(NpcSettings_KentCKoopa),
         .pos = { -164.0f, 0.0f, -37.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_800000,
         .init = &N(EVS_NpcInit_KentCKoopa_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_KentCKoopa_Anim01,
-            .walk   = ANIM_KentCKoopa_Anim01,
-            .run    = ANIM_KentCKoopa_Anim01,
-            .chase  = ANIM_KentCKoopa_Anim01,
-            .anim_4 = ANIM_KentCKoopa_Anim01,
-            .anim_5 = ANIM_KentCKoopa_Anim01,
-            .death  = ANIM_KentCKoopa_Anim01,
-            .hit    = ANIM_KentCKoopa_Anim01,
-            .anim_8 = ANIM_KentCKoopa_Anim01,
-            .anim_9 = ANIM_KentCKoopa_Anim01,
-            .anim_A = ANIM_KentCKoopa_Anim01,
-            .anim_B = ANIM_KentCKoopa_Anim01,
-            .anim_C = ANIM_KentCKoopa_Anim01,
-            .anim_D = ANIM_KentCKoopa_Anim01,
-            .anim_E = ANIM_KentCKoopa_Anim01,
-            .anim_F = ANIM_KentCKoopa_Anim01,
-        },
+        .drops = KENT_C_KOOPA_DROPS,
+        .animations = KENT_C_KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_KentCKoopa,
     },
 };
 
-NpcGroupList N(NpcGroup3) = {
+NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_KoopaTroopa), BTL_NOK_FORMATION_08, BTL_NOK_STAGE_00),
     NPC_GROUP(N(NpcData_Paragoomba), BTL_NOK_FORMATION_02, BTL_NOK_STAGE_00),
     NPC_GROUP(N(NpcData_SpikedGoomba), BTL_NOK_FORMATION_03, BTL_NOK_STAGE_01),
     {}
 };
 
-NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_JrTroopa_01), BTL_KMR_PART_3_FORMATION_03),
+NpcGroupList N(JrTroopaNPCs) = {
+    NPC_GROUP(N(NpcData_JrTroopa), BTL_KMR_PART_3_FORMATION_03),
     {}
 };
 
-NpcGroupList N(NpcGroup1) = {
-    NPC_GROUP(N(NpcData_KentCKoopa_01), BTL_NOK_FORMATION_18, BTL_NOK_STAGE_00),
+NpcGroupList N(KentCKoopaNPCs) = {
+    NPC_GROUP(N(NpcData_KentCKoopa), BTL_NOK_FORMATION_18, BTL_NOK_STAGE_00),
     {}
 };
