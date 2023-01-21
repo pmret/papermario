@@ -7,7 +7,7 @@
 #include "model.h"
 
 u16* D_800778A0[] = {
-    D_8038F800, D_803B5000, &heap_battleHead,
+    D_8038F800, D_803B5000, D_803DA800
 };
 
 s32 D_800778AC[] = {

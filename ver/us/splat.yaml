@@ -10838,11 +10838,12 @@ segments:
     start: 0x9F4A40
     vram: 0x80240000
     subsegments:
-    - [0x9F4A40, c]
-    - [0x9F6990, data]
-    - [0x9F6A50, data]
-    - [0x9F7180, data]
-    - [0x9FA720]
+    - [0x9F4A40, c, nok_11_0_header]
+    - [0x9F4A40, c, nok_11_1_music]
+    - [0x9F4A40, c, nok_11_2_main]
+    - [0x9F4A40, c, nok_11_3_entity]
+    - [0x9F4A40, c, nok_11_4_npc]
+    - [0x9F6990]
   - name: nok_12
     dir: world/area_nok/nok_12
     type: code
@@ -10881,28 +10882,26 @@ segments:
     start: 0xA02840
     vram: 0x80240000
     subsegments:
-    - [0xA02840, c]
-    - [0xA029C0, c]
-    - [0xA02A00, c]
-    - [0xA04C60, data]
-    - [0xA04D00, data]
-    - [0xA052F0, data]
-    - [0xA057B0, data]
-    - [0xA06110, data]
-    - [0xA06DF0]
+    - [0xA02840, c, nok_14_0_header]
+    - [0xA02840, c, nok_14_1_music]
+    - [0xA02840, c, nok_14_2_main]
+    - [0xA029C0, c, nok_14_3_entity]
+    - [0xA029C0, c, nok_14_4_bridge]
+    - [0xA02A00, c, nok_14_5_npc]
+    - [0xA04C60]
   - name: nok_15
     dir: world/area_nok/nok_15
     type: code
     start: 0xA06F00
     vram: 0x80240000
     subsegments:
-    - [0xA06F00, c]
-    - [0xA09440, c]
-    - [0xA09680, data]
-    - [0xA09750, data]
-    - [0xA0AB50, data]
-    - [0xA0AB90, data]
-    - [0xA0BBD0]
+    - [0xA06F00, c, nok_15_0_header]
+    - [0xA06F00, c, nok_15_1_music]
+    - [0xA06F00, c, nok_15_2_main]
+    - [0xA071E0, c, nok_15_3_entity]
+    - [0xA071E0, c, nok_15_4_npc]
+    - [0xA09440, c, nok_15_5_foliage]
+    - [0xA09680]
   - name: hos_00
     dir: world/area_hos/hos_00
     type: code
@@ -10941,33 +10940,30 @@ segments:
     start: 0xA16220
     vram: 0x80240000
     subsegments:
-    - [0xA16220, c]
-    - [0xA171F0, c]
-    - [0xA17210, c]
-    - [0xA18D00, data]
-    - [0xA18E50, data]
-    - [0xA19530, data]
-    - [0xA1A6A0, data]
-    - [0xA1ADA0, data]
-    - [0xA1AFF0]
+    - [0xA16220, c, hos_02_0_header]
+    - [0xA16220, c, hos_02_1_music]
+    - [0xA16220, c, hos_02_2_main]
+    - [0xA16220, c, hos_02_3_model_fx]
+    - [0xA171F0, c, hos_02_4_unused]
+    - [0xA17210, c, hos_02_5_npc]
+    - [0xA18D00, c, hos_02_6_descent]
+    - [0xA18D00]
   - name: hos_03
     dir: world/area_hos/hos_03
     type: code
     start: 0xA1B100
     vram: 0x80240000
     subsegments:
-    - [0xA1B100, c]
-    - [0xA1B130, c]
-    - [0xA1BB70, c]
-    - [0xA1BDB0, c]
-    - [0xA1E640, data]
-    - [0xA1E790, data]
-    - [0xA1EC30, data]
-    - [0xA1F3C0, data]
-    - [0xA23120, data]
-    - [0xA26C00, data]
-    - [0xA26E00, data]
-    - [0xA26E50]
+    - [0xA1B100, c, hos_03_0_header]
+    - [0xA1B100, c, hos_03_1_music]
+    - [0xA1B100, c, hos_03_2_main]
+    - [0xA1B130, c, hos_03_3_model_fx]
+    - [0xA1BB70, c, hos_03_4_rooms]
+    - [0xA1BB70, c, hos_03_5_foliage]
+    - [0xA1BDB0, c, hos_03_6_npc]
+    - [0xA1E640, c, hos_03_7_shop]
+    - [0xA1E640, c, hos_03_8_entity]
+    - [0xA1E640]
   - name: hos_04
     dir: world/area_hos/hos_04
     type: code
@@ -13950,13 +13946,13 @@ segments:
     start: 0xD1FE90
     vram: 0x80240000
     subsegments:
-    - [0xD1FE90, c]
-    - [0xD203E0, c]
-    - [0xD224B0, data]
-    - [0xD22560, data]
-    - [0xD23E50, data]
-    - [0xD2BC50, data]
-    - [0xD2BCC0]
+    - [0xD1FE90, c, sam_06_0_header]
+    - [0xD1FE90, c, sam_06_1_music]
+    - [0xD1FE90, c, sam_06_2_main]
+    - [0xD203E0, c, sam_06_3_rooms]
+    - [0xD203E0, c, sam_06_4_npc]
+    - [0xD224B0, c, sam_06_5_entity]
+    - [0xD224B0]
   - name: sam_07
     dir: world/area_sam/sam_07
     type: code
@@ -14626,15 +14622,13 @@ segments:
     start: 0xDEEEA0
     vram: 0x80240000
     subsegments:
-    - [0xDEEEA0, c]
-    - [0xDEF400, c]
-    - [0xDF25B0, data]
-    - [0xDF29A0, data]
-    - [0xDF2C90, data]
-    - [0xDF4EB0, data]
-    - [0xDF57A0, data]
-    - [0xDF6380, data]
-    - [0xDF6470]
+    - [0xDEEEA0, c, omo_17_0_header]
+    - [0xDEEEA0, c, omo_17_1_main]
+    - [0xDEEEA0, c, omo_17_2_gizmos]
+    - [0xDEEEA0, c, omo_17_3_train]
+    - [0xDEF400, c, omo_17_4_npc]
+    - [0xDF25B0, c, omo_17_5_entity]
+    - [0xDF25B0]
   - name: end_00
     dir: world/area_end/end_00
     type: code
@@ -16758,7 +16752,7 @@ segments:
       - Merluvlee
       - Merlar
       - Merlow
-      - StarKid
+      - StarMan
       - KoloradoWife
       - KoopaKoot
       - Kolorado

@@ -1084,7 +1084,7 @@ FoldGfxDescriptor* fold_load_gfx(FoldState* state) {
         }
         if (state->gfxBufs[1] != NULL) {
             // fold_add_to_gfx_cache(state->gfxBufs[1], 1);
-            romEnd = state->gfxBufs[1]; // required to match
+            romEnd = (u8*) state->gfxBufs[1]; // required to match
             fold_add_to_gfx_cache(state->gfxBufs[1], 1);
             state->gfxBufs[1] = NULL;
         }

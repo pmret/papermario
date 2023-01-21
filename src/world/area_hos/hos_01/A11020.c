@@ -30,7 +30,7 @@ ApiStatus func_80240B64_A113E4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 
-    effect->data.unk_75->unk_38 = evt_get_variable(script, *args++);
+    effect->data.unk_75->masterAlpha = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 

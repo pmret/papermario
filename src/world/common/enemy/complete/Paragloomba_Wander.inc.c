@@ -2,10 +2,6 @@
 
 #include "world/common/enemy/ai/FlyingAI.inc.c"
 
-f32 N(FlyingAI_JumpVels)[] = {
-    4.5, 3.5, 2.6, 2.0, 1.5, 20.0, 
-};
-
 MobileAISettings N(AISettings_Paragloomba_Wander) = {
     .moveSpeed = 2.0f,
     .alertRadius = 80.0f,

@@ -6,13 +6,13 @@ NpcSettings N(NpcSettings_StarSpirit) = {
     .level = 99,
 };
 
-NpcSettings N(NpcSettings_StarSpirit_Unused1) = {
+NpcSettings N(NpcSettings_StarKid) = {
     .height = 20,
     .radius = 20,
     .level = 99,
 };
 
-NpcSettings N(NpcSettings_StarSpirit_Unused2) = {
+NpcSettings N(NpcSettings_StarMan) = {
     .height = 22,
     .radius = 24,
     .level = 99,
