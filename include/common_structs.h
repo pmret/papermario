@@ -186,24 +186,24 @@ typedef struct NpcQuizmoBlur {
     /* 0x04 */ char unk_04[0x4];
 } NpcQuizmoBlur; // size = 0x8;
 
-typedef struct Unk2A4Part {
-    /* 0x00 */ s8 unk_00;
+typedef struct NpcHistoryPoint {
+    /* 0x00 */ s8 isAirborne;
     /* 0x01 */ char unk_01[0x3];
     /* 0x04 */ Vec3f pos;
-} Unk2A4Part; // size = 0x10
+} NpcHistoryPoint; // size = 0x10
 
-typedef struct Unk2A4Blur {
-    /* 0x000 */ Unk2A4Part unk_00[40];
-    /* 0x280 */ s32 partIdx;
-    /* 0x284 */ s32 unk_284;
-    /* 0x288 */ s32 unk_288;
-    /* 0x28C */ s32 npcID;
+typedef struct NpcFollowData {
+    /* 0x000 */ NpcHistoryPoint moveHistory[40];
+    /* 0x280 */ s32 lastPointIdx;
+    /* 0x284 */ s32 targetPointIdx;
+    /* 0x288 */ s32 followState;
+    /* 0x28C */ s32 targetNpcID;
     /* 0x290 */ s32* animIDs;
-    /* 0x294 */ f32 unk_294;
-    /* 0x298 */ f32 unk_298;
-    /* 0x29C */ f32 unk_29C;
-    /* 0x2A0 */ f32 unk_2A0;
-} Unk2A4Blur; // size = 0x2A4
+    /* 0x294 */ f32 walkSpeed;
+    /* 0x298 */ f32 runSpeed;
+    /* 0x29C */ f32 idleRadius;
+    /* 0x2A0 */ f32 walkRadius;
+} NpcFollowData; // size = 0x2A4
 
 typedef struct Npc {
     /* 0x000 */ s32 flags;
@@ -219,7 +219,7 @@ typedef struct Npc {
                 NpcMotionBlur* motion; ///< Null unless flag 0x100000 is set.
                 NpcChompBlur*  chomp;
                 NpcQuizmoBlur* quizmo;
-                Unk2A4Blur*    unk2A4;
+                NpcFollowData* followData;
                 struct Npc*    keepAwayNpc;
                 s32*           keepAwayStarted;
                 } blur;
@@ -933,7 +933,7 @@ typedef struct BattleStatus {
     /* 0x194 */ u8 statusChance;
     /* 0x195 */ s8 statusDuration;
     /* 0x196 */ char unk_196;
-    /* 0x197 */ u8 targetHomeIndex; /* some sort of home idnex used for target list construction */
+    /* 0x197 */ s8 targetHomeIndex; /* some sort of home index used for target list construction */
     /* 0x198 */ s8 powerBounceCounter;
     /* 0x199 */ s8 wasStatusInflicted; /* during last attack */
     /* 0x19A */ u8 unk_19A;
