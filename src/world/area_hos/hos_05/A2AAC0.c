@@ -1060,23 +1060,32 @@ void func_80243ED0_A2E110(s32 arg0, s32 idx) {
     }
 }
 
-// close-ish
-#ifdef NON_MATCHING
+#ifdef SHIFT
+#define TAPE_OFFSET title_tape_ROM_START - title_bg_1_ROM_START
+#else
+#define TAPE_OFFSET 0x2A440
+#endif
+
 ApiStatus func_80243FC4_A2E204(Evt* script, s32 isInitialCall) {
     s32 dmaEnd;
     s32 dmaStart;
-    s32 someLength;
-    void* textureAddress;
+    s32 tapeOffset;
+    u8* it;
 
     D_8024AA20_A34C60->unk_00 = create_worker_frontUI(NULL, func_80243CC0_A2DF00);
-    textureAddress = mdl_get_next_texture_address(0x1D420);
-    D_8024AA20_A34C60->unk_08 = textureAddress + 0xA710;
-    D_8024AA20_A34C60->unk_0C = (u8*)D_8024AA20_A34C60->unk_08 + 0x200;
-    D_8024AA20_A34C60->unk_10 = (u8*)D_8024AA20_A34C60->unk_0C + 0xA710;
-    D_8024AA20_A34C60->unk_18 = (u8*)D_8024AA20_A34C60->unk_10 + 0x200;
-    D_8024AA20_A34C60->unk_1C = (u8*)D_8024AA20_A34C60->unk_18 + 0x4000;
-    D_8024AA20_A34C60->unk_20 = (u8*)D_8024AA20_A34C60->unk_1C + 0x4000;
-    D_8024AA20_A34C60->unk_04 = textureAddress;
+    D_8024AA20_A34C60->unk_04 = it = mdl_get_next_texture_address(0x1D420);
+    it += 0xA710;
+    D_8024AA20_A34C60->unk_08 = it;
+    it += 0x200;
+    D_8024AA20_A34C60->unk_0C = it;
+    it += 0xA710;
+    D_8024AA20_A34C60->unk_10 = it;
+    it += 0x200;
+    D_8024AA20_A34C60->unk_18 = it;
+    it += 0x4000;
+    D_8024AA20_A34C60->unk_1C = it;
+    it += 0x4000;
+    D_8024AA20_A34C60->unk_20 = it;
     D_8024AA20_A34C60->unk_46 = 240;
     D_8024AA20_A34C60->unk_48 = 111;
     D_8024AA20_A34C60->unk_3C = 0;
@@ -1085,27 +1094,21 @@ ApiStatus func_80243FC4_A2E204(Evt* script, s32 isInitialCall) {
     D_8024AA20_A34C60->unk_42 = 0;
     D_8024AA20_A34C60->unk_44 = 0;
     D_8024AA20_A34C60->unk_4A = 54;
+
     func_80243ED0_A2E110(0, 0);
     func_80243ED0_A2E110(1, 1);
 
-    someLength = 0x2A440;
+    tapeOffset = TAPE_OFFSET;
+    dmaStart = title_bg_1_ROM_START + tapeOffset;
+    dmaEnd = title_bg_1_ROM_START + tapeOffset + 0x4000;
 
-    dmaStart = title_bg_1_ROM_START;
-    dmaEnd = dmaStart + someLength;
-
-    dmaEnd += 0x4000;
-    dmaEnd += someLength;
-    dmaEnd += 0x4200;
-
-    dma_copy(dmaStart, dmaEnd, D_8024AA20_A34C60->unk_18);
+    // load the tape and bowser silhouette images
+    dma_copy(dmaStart, dmaEnd + 0x4200, D_8024AA20_A34C60->unk_18);
     D_8024AA20_A34C60->unk_58 = 0;
     D_8024AA20_A34C60->unk_5A = 255;
     D_8024AA20_A34C60->unk_5C = 0;
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80243FC4_A2E204);
-#endif
 
 NOP_FIX // TODO remove when D_8024AAB4_A34CF4 is migrated
 
