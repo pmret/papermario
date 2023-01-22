@@ -4171,19 +4171,20 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = modelIdx;
 }
 
-// The global here is getting optimized out because nothing is happening to it. Very weird
-#ifdef NON_EQUIVALENT
-void func_80116674(void) {
+// Mysterious no-op
+void iterate_models(void) {
+    Model* nonNull;
+    Model* ret;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
-        Model* m = (*gCurrentModels)[i];
-        do {} while (0);
+        ret = (*gCurrentModels)[i];
+        if (ret != NULL) {
+            nonNull = ret;
+        }
     }
+    ret = nonNull;
 }
-#else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80116674);
-#endif
 
 void func_80116698(void) {
     Matrix4f sp20;
