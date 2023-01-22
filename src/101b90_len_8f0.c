@@ -361,10 +361,10 @@ SpriteComponent** spr_allocate_components(s32 count) {
 
     if (spr_allocateBtlComponentsOnWorldHeap) {
         listStart = _heap_malloc(&heap_generalHead, totalSize);
-        component = listPos = listStart;
+        component = (SpriteComponent*) listPos = listStart;
     } else {
         listStart = _heap_malloc(&gSpriteHeapPtr, totalSize);
-        component = listPos = listStart;
+        component = (SpriteComponent*) listPos = listStart;
     }
 
     component = (SpriteComponent*)((s32)(component) + (listSize / 4) * 4);
