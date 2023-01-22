@@ -874,6 +874,7 @@ void func_8004BA74(SoundManager* manager, SoundSFXEntry* entry, SoundManagerA0* 
             }
         }
     }
+    #undef NEXT_CMD
 }
 
 static void func_8004C0E4(SoundManager* manager, SoundPlayer* player, s8* readPos, SoundSFXEntry* sfxEntry, s32 arg4, s32 arg5) {

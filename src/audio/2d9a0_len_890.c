@@ -200,8 +200,8 @@ u8 func_80052CFC(AlUnkVoice* voice) {
     u32 op;
     u8 arg;
 
-    while(TRUE) {
-        if(((s8)(op = *voice->unk_1C++)) >= 0) {
+    while (TRUE) {
+        if (((s8)(op = *voice->unk_1C++)) >= 0) {
             break;
         }
         switch ((u8)op) {
