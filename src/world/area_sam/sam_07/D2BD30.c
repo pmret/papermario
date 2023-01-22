@@ -29,7 +29,7 @@ ApiStatus func_80240000_D2BD30(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
 
-        script->functionTemp[0] = heap_malloc(sizeof(*it) * ARRAY_COUNT(D_802424C0_D2E1F0));
+        script->functionTempPtr[0] = heap_malloc(sizeof(*it) * ARRAY_COUNT(D_802424C0_D2E1F0));
         script->functionTemp[1] = 0;
 
         it = script->functionTempPtr[0];
@@ -40,6 +40,7 @@ ApiStatus func_80240000_D2BD30(Evt* script, s32 isInitialCall) {
             it->unk_04.y = model->center.y;
             it->unk_04.z = model->center.z;
             it->rot.x = 0.0f;
+
             it->rot.y = 0.0f;
             it->rot.z = 0.0f;
             it->unk_10.x = it->unk_04.x;
