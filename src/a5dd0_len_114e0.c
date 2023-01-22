@@ -5645,8 +5645,6 @@ Gfx* mdl_get_copied_gfx(s32 copyIndex) {
     return gfxCopy;
 }
 
-// void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, Matrix4f destMtx, void* destVertices);
-// wip
 #ifdef WIP
 void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, f32 (*destMtx)[4], void* destVertices) {
     s32 numVertices;

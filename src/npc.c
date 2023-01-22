@@ -1932,7 +1932,7 @@ s32 npc_find_standing_on_entity(s32 entityIndex) {
     for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
         npc = (*gCurrentNpcListPtr)[i];
 
-        if (npc == 0) {
+        if (npc == NULL) {
             continue;
         }
         if (npc->flags == 0) {
