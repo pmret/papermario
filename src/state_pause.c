@@ -6,7 +6,7 @@
 #include "sprite.h"
 #include "model.h"
 
-u16* D_80077950[] = { D_8038F800, D_803B5000, (u16*) &heap_battleHead };
+u16* D_80077950[] = { D_8038F800, D_803B5000, D_803DA800 };
 
 NUPiOverlaySegment D_8007795C = {
     .romStart = pause_ROM_START,

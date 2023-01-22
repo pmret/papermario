@@ -15,6 +15,21 @@
     .maxCoinBonus = 1, \
 }
 
+// used on nok_14 and nok_15
+#define KOOPA_TROOPA_DROPS_B \
+{ \
+    .dropFlags = NPC_DROP_FLAG_80, \
+    .itemDropChance = 5, \
+    .itemDrops = { \
+        { ITEM_MUSHROOM, 3, 0 }, \
+        { ITEM_KOOPA_LEAF, 7, 0 }, \
+    }, \
+    .heartDrops  = STANDARD_HEART_DROPS(2), \
+    .flowerDrops = STANDARD_FLOWER_DROPS(2), \
+    .minCoinBonus = 1, \
+    .maxCoinBonus = 1, \
+}
+
 #define KOOPA_TROOPA_ANIMS \
 { \
     .idle   = ANIM_KoopaTroopa_Idle, \

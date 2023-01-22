@@ -5,10 +5,6 @@
 
 #include "world/common/enemy/complete/Koopatrol_Patrol.inc.c"
 
-extern EvtScript N(EVS_ToadHouse_SetDialogue);
-extern EvtScript N(EVS_ToadHouse_GetInBed);
-extern EvtScript N(EVS_ToadHouse_ReturnFromRest);
-
 #include "world/common/complete/ToadHouseBlanketAnim.inc.c"
 #include "world/common/atomic/ToadHouse.inc.c"
 #include "world/common/atomic/ToadHouse.data.inc.c"

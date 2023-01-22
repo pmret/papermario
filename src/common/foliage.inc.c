@@ -18,7 +18,7 @@ EvtScript N(EVS_SearchBush) = {
                     EVT_CALL(N(TransformFoliage), LVar3, EVT_FLOAT(0.1), 1, LVarF, 0)
                     EVT_IF_EQ(LocalFlag(0), 0)
                         EVT_SET(LocalFlag(0), 1)
-                        EVT_CALL(PlaySoundAtModel, LVar3, 339, 0)
+                        EVT_CALL(PlaySoundAtModel, LVar3, SOUND_SEARCH_BUSH, 0)
                     EVT_END_IF
                 EVT_END_LOOP
                 EVT_WAIT(1)
@@ -74,7 +74,7 @@ EvtScript N(EVS_ShakeTree) = {
     EVT_BUF_READ1(LVar5)
     EVT_CALL(GetPlayerPos, LVar6, LVarF, LVar8)
     EVT_CALL(PlaySound, SOUND_SMASH_GOOMNUT_TREE)
-    EVT_CALL(PlaySound, 358)
+    EVT_CALL(PlaySound, SOUND_SHAKE_TREE)
     EVT_THREAD
         EVT_SET(LocalFlag(0), 0)
         EVT_IF_NE(LVar1, 0)
@@ -87,7 +87,7 @@ EvtScript N(EVS_ShakeTree) = {
                     EVT_CALL(N(TransformFoliage), LVar3, EVT_FLOAT(0.1), EVT_FLOAT(0.2), LVarF, 0)
                     EVT_IF_EQ(LocalFlag(0), 0)
                         EVT_SET(LocalFlag(0), 1)
-                        EVT_CALL(PlaySoundAtModel, LVar3, 358, 0)
+                        EVT_CALL(PlaySoundAtModel, LVar3, SOUND_SHAKE_TREE, 0)
                     EVT_END_IF
                 EVT_END_LOOP
                 EVT_WAIT(1)
@@ -119,7 +119,7 @@ EvtScript N(EVS_ShakeTree) = {
                     EVT_CALL(N(TransformFoliage), LVar4, EVT_FLOAT(0.1), EVT_FLOAT(0.2), LVarF, 0)
                     EVT_IF_EQ(LocalFlag(0), 0)
                         EVT_SET(LocalFlag(0), 1)
-                        EVT_CALL(PlaySoundAtModel, LVar4, 357, 0)
+                        EVT_CALL(PlaySoundAtModel, LVar4, SOUND_SMASH_GOOMNUT_TREE, 0)
                     EVT_END_IF
                 EVT_END_LOOP
                 EVT_WAIT(1)

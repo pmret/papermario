@@ -686,7 +686,7 @@ enum SoundIDs {
     SOUND_162                       = 0x00000162,
     SOUND_ENTER_PIPE                = 0x00000163,
     SOUND_SMASH_GOOMNUT_TREE        = 0x00000165,
-    SOUND_166                       = 0x00000166,
+    SOUND_SHAKE_TREE                = 0x00000166,
     SOUND_167                       = 0x00000167,
     SOUND_168                       = 0x00000168,
     SOUND_DUST_OFF                  = 0x00000172,
@@ -1397,6 +1397,7 @@ enum SoundIDs {
     SOUND_80000010                  = 0x80000010,
     SOUND_80000011                  = 0x80000011,
     SOUND_80000015                  = 0x80000015,
+    SOUND_80000016                  = 0x80000016,
     SOUND_80000017                  = 0x80000017,
     SOUND_80000018                  = 0x80000018,
     SOUND_80000019                  = 0x80000019,
@@ -1688,7 +1689,7 @@ enum ItemIDs {
     ITEM_LETTER20                     = 0x0000004E,
     ITEM_LETTER21                     = 0x0000004F,
     ITEM_LETTER22                     = 0x00000050,
-    ITEM_LETTER23                     = 0x00000051,
+    ITEM_LETTER_TO_FROSTT             = 0x00000051,
     ITEM_LETTER24                     = 0x00000052,
     ITEM_ARTIFACT                     = 0x00000053,
     ITEM_LETTER25                     = 0x00000054,
@@ -4337,7 +4338,7 @@ enum BattleSubStates {
     BTL_SUBSTATE_CHANGE_PARTNER_EXEC_PHASE                  = 5,
     BTL_SUBSTATE_CHANGE_PARTNER_AWAIT_PHASE                 = 6,
     BTL_SUBSTATE_CHANGE_PARTNER_DONE                        = 7,
-    
+
     // BATTLE_STATE_END_TRAINING_BATTLE
     BTL_SUBSTATE_END_TRAINING_INIT                          = 0,
     BTL_SUBSTATE_END_TRAINING_AWAIT_RECOVERING              = 10,
@@ -5308,6 +5309,41 @@ enum ShopFlags {
     SHOP_FLAG_80000000          = 0x80000000,
 };
 
+enum {
+    SHOP_MSG_BUY_CONFIRM        = 0x00,
+    SHOP_MSG_NOT_ENOUGH_COINS   = 0x01,
+    SHOP_MSG_NOT_ENOUGH_ROOM    = 0x02,
+    SHOP_MSG_BUY_THANK_YOU      = 0x03,
+    SHOP_MSG_GREETING           = 0x04,
+    SHOP_MSG_INSTRUCTIONS       = 0x05,
+    SHOP_MSG_NOTHING_TO_SELL    = 0x06,
+    SHOP_MSG_SELL_WHICH         = 0x07,
+    SHOP_MSG_SELL_CONFIRM       = 0x08,
+    SHOP_MSG_SELL_CANCEL        = 0x09,
+    SHOP_MSG_SELL_MORE          = 0x0A,
+    SHOP_MSG_SELL_THANKS        = 0x0B,
+    SHOP_MSG_NOTHING_TO_CHECK   = 0x0C,
+    SHOP_MSG_NO_CHECK_ROOM      = 0x0D,
+    SHOP_MSG_CHECK_WHICH        = 0x0E,
+    SHOP_MSG_CHECK_ACCEPTED     = 0x0F,
+    SHOP_MSG_CHECK_MORE         = 0x10,
+    SHOP_MSG_NOTHING_TO_CLAIM   = 0x11,
+    SHOP_MSG_NO_CLAIM_ROOM      = 0x12,
+    SHOP_MSG_CLAIM_WHICH        = 0x13,
+    SHOP_MSG_CLAIM_ACCEPTED     = 0x14,
+    SHOP_MSG_CLAIM_MORE         = 0x15,
+    SHOP_MSG_FAREWELL           = 0x16,
+};
+
+enum {
+    SHOP_BUY_RESULT_NOT_ENOUGH_COINS    = 0,
+    SHOP_BUY_RESULT_OK                  = 1,
+    SHOP_BUY_RESULT_2                   = 2,
+    SHOP_BUY_RESULT_CANCEL              = 3,
+    SHOP_BUY_RESULT_4                   = 4,
+    SHOP_BUY_RESULT_NOT_ENOUGH_ROOM     = 5,
+};
+
 enum EncounterStatusFlags {
     ENCOUNTER_STATUS_FLAG_0                 = 0x00000000,
     ENCOUNTER_STATUS_FLAG_1                 = 0x00000001,
@@ -6273,6 +6309,7 @@ enum BackgroundFlags {
 };
 
 enum FogModes {
+    FOG_MODE_UNCHANGED = -1,
     FOG_MODE_0 = 0,
     FOG_MODE_1 = 1,
     FOG_MODE_2 = 2,

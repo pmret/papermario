@@ -1,29 +1,29 @@
 #include "obk_03.h"
 
 s32 N(ShopMessages)[] = {
-    MSG_Shop_0060,
-    MSG_Shop_0061,
-    MSG_Shop_0062,
-    MSG_Shop_0063,
-    MSG_Shop_0064,
-    MSG_Shop_0065,
-    MSG_Shop_0066,
-    MSG_Shop_0067, 
-    MSG_Shop_0068,
-    MSG_Shop_0069,
-    MSG_Shop_006A,
-    MSG_Shop_006B,
-    MSG_Shop_006C,
-    MSG_Shop_006D,
-    MSG_Shop_006E,
-    MSG_Shop_006F, 
-    MSG_Shop_0070,
-    MSG_Shop_0071,
-    MSG_Shop_0072,
-    MSG_Shop_0073,
-    MSG_Shop_0074,
-    MSG_Shop_0075,
-    MSG_Shop_0076, 
+    [SHOP_MSG_BUY_CONFIRM      ] MSG_Shop_00_OBK03,
+    [SHOP_MSG_NOT_ENOUGH_COINS ] MSG_Shop_01_OBK03,
+    [SHOP_MSG_NOT_ENOUGH_ROOM  ] MSG_Shop_02_OBK03,
+    [SHOP_MSG_BUY_THANK_YOU    ] MSG_Shop_03_OBK03,
+    [SHOP_MSG_GREETING         ] MSG_Shop_04_OBK03,
+    [SHOP_MSG_INSTRUCTIONS     ] MSG_Shop_05_OBK03,
+    [SHOP_MSG_NOTHING_TO_SELL  ] MSG_Shop_06_OBK03,
+    [SHOP_MSG_SELL_WHICH       ] MSG_Shop_07_OBK03, 
+    [SHOP_MSG_SELL_CONFIRM     ] MSG_Shop_08_OBK03,
+    [SHOP_MSG_SELL_CANCEL      ] MSG_Shop_09_OBK03,
+    [SHOP_MSG_SELL_MORE        ] MSG_Shop_0A_OBK03,
+    [SHOP_MSG_SELL_THANKS      ] MSG_Shop_0B_OBK03,
+    [SHOP_MSG_NOTHING_TO_CHECK ] MSG_Shop_0C_OBK03,
+    [SHOP_MSG_NO_CHECK_ROOM    ] MSG_Shop_0D_OBK03,
+    [SHOP_MSG_CHECK_WHICH      ] MSG_Shop_0E_OBK03,
+    [SHOP_MSG_CHECK_ACCEPTED   ] MSG_Shop_0F_OBK03, 
+    [SHOP_MSG_CHECK_MORE       ] MSG_Shop_10_OBK03,
+    [SHOP_MSG_NOTHING_TO_CLAIM ] MSG_Shop_11_OBK03,
+    [SHOP_MSG_NO_CLAIM_ROOM    ] MSG_Shop_12_OBK03,
+    [SHOP_MSG_CLAIM_WHICH      ] MSG_Shop_13_OBK03,
+    [SHOP_MSG_CLAIM_ACCEPTED   ] MSG_Shop_14_OBK03,
+    [SHOP_MSG_CLAIM_MORE       ] MSG_Shop_15_OBK03,
+    [SHOP_MSG_FAREWELL         ] MSG_Shop_16_OBK03, 
 };
 
 ShopItemData N(Inventory)[] = {
@@ -56,10 +56,10 @@ ShopItemLocation N(ItemPositions)[] = {
 
 EvtScript N(EVS_OnBuy) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(3)
-        EVT_CASE_EQ(4)
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(SHOP_BUY_RESULT_CANCEL)
+        EVT_CASE_EQ(SHOP_BUY_RESULT_4)
+        EVT_CASE_EQ(SHOP_BUY_RESULT_OK)
+        EVT_CASE_EQ(SHOP_BUY_RESULT_2)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

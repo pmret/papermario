@@ -14,7 +14,9 @@
 #include "dead_structs.h"
 #endif
 
-extern f32 N(FlyingAI_JumpVels)[];
+f32 N(FlyingAI_JumpVels)[] = {
+    4.5, 3.5, 2.6, 2.0, 1.5, 20.0,
+};
 
 void N(FlyingAI_WanderInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;

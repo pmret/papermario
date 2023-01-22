@@ -125,10 +125,12 @@ BSS f32 D_8024F378;
 BSS char D_8024F37C[0x4];
 BSS s32 D_8024F380;
 BSS char D_8024F384[0x74];
-BSS char D_8024F3F8[0x50];
+BSS s32 D_8024F3F8[10];
+BSS s32 hos_05_8024F420[10];
 BSS s32 D_8024F448[10];
 BSS s32 D_8024F470_hos_bss[10];
-BSS s32 D_8024F498[4 * 5];
+BSS s32 D_8024F498[10];
+BSS s32 hos_05_D_8024F4C0[10];
 BSS s32 D_8024F4E8[34];
 
 ApiStatus func_80240880_A2AAC0(Evt* script, s32 isInitialCall) {
@@ -342,7 +344,7 @@ ApiStatus func_8024146C_A2B6AC(Evt* script, s32 isInitialCall) {
     }
     D_802498D4_A33B14 = nuGfxCfb_ptr;
     func_80241044_A2B284(250.0f, 0.0f, D_802498D0_A33B10, 0.5f, &D_802498D0_A33B10);
-    func_802410E4_A2B324(2, 130.4f, D_8024963C_A3387C[1], (f32) D_802498FC_A33B3C, 470.0f, &D_802498E8_A33B28);
+    func_802410E4_A2B324(2, 130.4f, D_8024963C_A3387C[1], D_802498FC_A33B3C, 470.0f, &D_802498E8_A33B28);
     func_80241044_A2B284(12.4f, D_8024963C_A3387C[2], D_802498EC_A33B2C, 0.05f, &D_802498EC_A33B2C);
     func_80241044_A2B284(-16.8f, D_8024963C_A3387C[9], D_802498F0_A33B30, 0.05f, &D_802498F0_A33B30);
     func_80241044_A2B284(62.0f, 49.0f, D_802498F4_A33B34, 0.1f, &D_802498F4_A33B34);
@@ -670,7 +672,187 @@ ApiStatus func_80242704_A2C944(void) {
     return ApiStatus_DONE1;
 }
 
+// lotta work to do
+#ifdef WIP
+ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 temp_s6 = evt_get_variable(script, *args++);
+    f32 sp10 = evt_get_float_variable(script, *args++);
+    f32 temp_f28 = evt_get_float_variable(script, *args++);
+    EffectInstance* effect = evt_get_variable(script, ArrayVar(0));
+    f32 temp_f20;
+    f32 temp_f20_2;
+    f32 temp_f20_3;
+    f32 temp_f20_4;
+    f32 temp_f24;
+    f32 temp_f24_2;
+    f32 var_f0_2;
+    f32 var_f0_3;
+    f32 var_f20_2;
+    f32 var_f26;
+    f32 var_f2_2;
+    f64 var_f20;
+    f64 var_f2;
+    f64 var_f2_3;
+    f64 var_f2_4;
+    f64 var_f2_5;
+    f64 var_f2_6;
+    f64 var_f2_7;
+    f64 var_f2_8;
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 temp_v0_3;
+    s32 temp_v0_4;
+    s32 temp_v0_5;
+    s32 temp_v0_6;
+    s32 temp_v0_7;
+
+    f32* temp_s1_2;
+    f32* temp_s2;
+    f32* var_s0;
+    f32* var_s2;
+
+    switch (temp_s6) {
+        case 1:
+            var_s0 = D_8024F3F8;
+            var_s2 = D_8024F3F8;
+            temp_v0 = effect->data.somethingRotating->unk_14 + 30;
+            var_f2 = temp_v0;
+            if (temp_v0 < 0) {
+                var_f2 += 4294967296.0;
+            }
+            var_f20 = var_f2 * 4.0f;
+            temp_f20 = var_f20 + 51.43;
+            temp_f24 = sin_deg(temp_f20);
+            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24);
+            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20) * 50.0f);
+            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24;
+            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            break;
+        case 2:
+            var_s0 = hos_05_8024F420;
+            var_s2 = hos_05_8024F420;
+            temp_v0_2 = effect->data.somethingRotating->unk_14 + 30;
+            var_f2_3 = temp_v0_2;
+            if (temp_v0_2 < 0) {
+                var_f2_3 += 4294967296.0;
+            }
+            var_f20 = (var_f2_3 * 4.0f);
+            temp_f20 = var_f20 + 360.01;
+            temp_f24 = sin_deg(temp_f20);
+            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24);
+            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20) * 50.0f);
+            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24;
+            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            break;
+        case 3:
+            var_s0 = D_8024F448;
+            var_s2 = D_8024F448;
+            temp_v0_3 = effect->data.somethingRotating->unk_14 + 30;
+            var_f2_4 = temp_v0_3;
+            if (temp_v0_3 < 0) {
+                var_f2_4 += 4294967296.0;
+            }
+            var_f20 = var_f2_4 * 4.0f;
+            temp_f20 = var_f20 + 154.29;
+            temp_f24 = sin_deg(temp_f20);
+            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24);
+            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20) * 50.0f);
+            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24;
+            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            break;
+        case 4:
+            var_s0 = D_8024F470_hos_bss;
+            temp_v0_4 = effect->data.somethingRotating->unk_14 + 30;
+            var_f2_5 = temp_v0_4;
+            var_s2 = D_8024F470_hos_bss;
+            if (temp_v0_4 < 0) {
+                var_f2_5 += 4294967296.0;
+            }
+            temp_f20_2 = (var_f2_5 * 4.0f) + 205.72;
+            temp_f24_2 = sin_deg(temp_f20_2);
+            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24_2);
+            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20_2) * 50.0f);
+            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24_2;
+            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            break;
+        case 5:
+            var_s0 = D_8024F498;
+            var_s2 = D_8024F498;
+            temp_v0_5 = effect->data.somethingRotating->unk_14 + 30;
+            var_f2_6 = temp_v0_5;
+            if (temp_v0_5 < 0) {
+                var_f2_6 += 4294967296.0;
+            }
+            var_f20 = var_f2_6 * 4.0f;
+            temp_f20 = var_f20 + 308.58;
+            temp_f24 = sin_deg(temp_f20);
+            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24);
+            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20) * 50.0f);
+            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24;
+            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            break;
+        case 6:
+            var_s0 = hos_05_D_8024F4C0;
+            var_s2 = hos_05_D_8024F4C0;
+            temp_v0_6 = effect->data.somethingRotating->unk_14 + 30;
+            var_f2_7 = temp_v0_6;
+            if (temp_v0_6 < 0) {
+                var_f2_7 += 4294967296.0;
+            }
+            var_f20 = var_f2_7 * 4.0f;
+            temp_f20 = var_f20 + 102.86;
+            temp_f24 = sin_deg(temp_f20);
+            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24);
+            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20) * 50.0f);
+            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24;
+            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            break;
+        default:
+            var_s0 = D_8024F4E8;
+            var_s2 = D_8024F4E8;
+            temp_v0_7 = effect->data.somethingRotating->unk_14 + 30;
+            var_f2_8 = temp_v0_7;
+            if (temp_v0_7 < 0) {
+                var_f2_8 += 4294967296.0;
+            }
+            var_f20 = (var_f2_8 * 4.0f);
+            temp_f20 = var_f20 + 257.15;
+            temp_f24 = sin_deg(temp_f20);
+            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24);
+            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20) * 50.0f);
+            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24;
+            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            break;
+    }
+    var_s0[6] = var_f26;
+    var_s0[7] = var_f20_2;
+    var_s0[8] = var_f2_2 + var_f0_2;
+    var_s2[0] = evt_get_float_variable(script, LocalVar(0));
+    var_s2[1] = evt_get_float_variable(script, LocalVar(1));
+    temp_s1_2 = var_s2 + 0x18;
+    var_s2[4] = evt_get_float_variable(script, LocalVar(2));
+    temp_s2 = var_s2 + 0xC;
+    if (temp_s6 != 2) {
+        temp_f20_3 = 1.0f - temp_f28;
+        temp_s2[0] =  (evt_get_float_variable(script, LocalVar(0)) * temp_f28) + (temp_s1_2[0] * temp_f20_3);
+        temp_s2[1] = (evt_get_float_variable(script, LocalVar(1)) * temp_f28) + (temp_s1_2[1] * temp_f20_3) + sp10;
+        var_f0_3 = (evt_get_float_variable(script, LocalVar(2)) * temp_f28) + (temp_s1_2[2] * temp_f20_3);
+    } else {
+        temp_f20_4 = 1.0f - temp_f28;
+        temp_s2[0] = ((evt_get_float_variable(script, LocalVar(0)) * temp_f28) + (temp_s1_2[0] * temp_f20_4)) - 50.0f;
+        temp_s2[1] = (evt_get_float_variable(script, LocalVar(1)) * temp_f28) + (temp_s1_2[1] * temp_f20_4) + sp10;
+        var_f0_3 = ((evt_get_float_variable(script, LocalVar(2)) * temp_f28) + (temp_s1_2[2] * temp_f20_4)) - 50.0f;
+    }
+    temp_s2[2] = var_f0_3;
+    script->varTable[0] = 30;
+    script->varTable[1] = var_s0;
+    script->varTable[2] = 3;
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802428C8_A2CB08);
+#endif
 
 ApiStatus func_80242F74_A2D1B4(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[gCurrentCameraID];

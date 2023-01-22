@@ -13,21 +13,101 @@ BSS ActorPart* gSpeakingActorPart;
 
 u8* gBattleDmaDest = NULL;
 
-u8 D_80284004[] = { 59, 60, 61, 62, 63, 64, 65, 66, 67, 255 };
-u8 D_80284010[] = { 126, 127, 128, 129, 130, 131, 132, 133, 134, 255 };
-u8 D_8028401C[] = { 189, 190, 255 };
-u8 D_80284020[] = { 170, 171, 255 };
-u8 D_80284024[] = { 195, 197, 255 };
-u8 D_80284028[] = { 77, 79, 78, 80, 255 };
-u8 D_80284030[] = { 81, 82, 255};
-u8 D_80284034[] = { 83, 84, 255 };
-u8 D_80284038[] = { 87, 88, 255 };
-u8 D_8028403C[] = { 85, 86, 255 };
-u8 D_80284040[] = { 89, 90, 255 };
+u8 ActorTypesGhost[] = {
+    ACTOR_TYPE_DUPLIGHOST,
+    ACTOR_TYPE_GHOST_GOOMBARIO,
+    ACTOR_TYPE_GHOST_KOOPER,
+    ACTOR_TYPE_GHOST_BOMBETTE,
+    ACTOR_TYPE_GHOST_PARAKARRY,
+    ACTOR_TYPE_GHOST_BOW,
+    ACTOR_TYPE_GHOST_WATT,
+    ACTOR_TYPE_GHOST_SUSHIE,
+    ACTOR_TYPE_GHOST_LAKILESTER,
+    0xFF
+};
 
-u8* D_80284044[] = {
-    D_80284004, D_80284010, D_8028401C, D_80284020, D_80284024, D_80284028, D_80284030, D_80284034, D_80284038,
-    D_8028403C, D_80284040, NULL,
+u8 ActorTypesLee[] = {
+    ACTOR_TYPE_LEE,
+    ACTOR_TYPE_LEE_GOOMBARIO,
+    ACTOR_TYPE_LEE_KOOPER,
+    ACTOR_TYPE_LEE_BOMBETTE,
+    ACTOR_TYPE_LEE_PARAKARRY,
+    ACTOR_TYPE_LEE_BOW,
+    ACTOR_TYPE_LEE_WATT,
+    ACTOR_TYPE_LEE_SUSHIE,
+    ACTOR_TYPE_LEE_LAKILESTER,
+    0xFF
+};
+
+u8 ActorTypesCrystalKing[] = {
+    ACTOR_TYPE_CRYSTAL_KING,
+    ACTOR_TYPE_CRYSTAL_CLONE,
+    0xFF
+};
+
+u8 ActorTypesShyGuyBoss[] = {
+    ACTOR_TYPE_TOY_TANK,
+    ACTOR_TYPE_LIGHT_BULB,
+    0xFF
+};
+
+u8 ActorTypesBowser[] = {
+    ACTOR_TYPE_BOWSER_PHASE_2,
+    ACTOR_TYPE_BOWSER_PHASE_3,
+    0xFF
+};
+
+u8 ActorTypesMagikoopa[] = {
+    ACTOR_TYPE_MAGIKOOPA,
+    ACTOR_TYPE_MAGICLONE,
+    ACTOR_TYPE_FLYING_MAGIKOOPA,
+    ACTOR_TYPE_FLYING_MAGICLONE,
+    0xFF
+};
+
+u8 ActorTypesRedMagikoopa[] = {
+    ACTOR_TYPE_RED_MAGIKOOPA,
+    ACTOR_TYPE_FLYING_RED_MAGIKOOPA,
+    0xFF
+};
+
+u8 ActorTypesGreenMagikoopa[] = {
+    ACTOR_TYPE_GREEN_MAGIKOOPA,
+    ACTOR_TYPE_FLYING_GREEN_MAGIKOOPA,
+    0xFF
+};
+
+u8 ActorTypesGrayMagikoopa[] = {
+    ACTOR_TYPE_GRAY_MAGIKOOPA,
+    ACTOR_TYPE_FLYING_GRAY_MAGIKOOPA,
+    0xFF
+};
+
+u8 ActorTypesYellowMagikoopa[] = {
+    ACTOR_TYPE_YELLOW_MAGIKOOPA,
+    ACTOR_TYPE_FLYING_YELLOW_MAGIKOOPA,
+    0xFF
+};
+
+u8 ActorTypesWhiteMagikoopa[] = {
+    ACTOR_TYPE_WHITE_MAGIKOOPA,
+    ACTOR_TYPE_FLYING_WHITE_MAGIKOOPA,
+    0xFF
+};
+
+u8* ActorTypesLists[] = {
+    ActorTypesGhost,
+    ActorTypesLee,
+    ActorTypesCrystalKing,
+    ActorTypesShyGuyBoss,
+    ActorTypesBowser,
+    ActorTypesMagikoopa,
+    ActorTypesRedMagikoopa,
+    ActorTypesGreenMagikoopa,
+    ActorTypesGrayMagikoopa,
+    ActorTypesYellowMagikoopa,
+    ActorTypesWhiteMagikoopa,
+    NULL,
 };
 
 ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
@@ -246,8 +326,9 @@ ApiStatus LoadBattleDmaData(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802536A8(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
 
-    if (evt_get_variable(script, *script->ptrReadPos) != 0) {
+    if (evt_get_variable(script, *args++) != 0) {
         battleStatus->unk_92 |= 1;
         gOverrideFlags |= GLOBAL_OVERRIDES_80;
     } else {
@@ -261,7 +342,8 @@ ApiStatus func_802536A8(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80253734(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 val = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 val = evt_get_variable(script, *args++);
 
     switch (val) {
         case BTL_DARKNESS_MODE_0:
@@ -442,9 +524,75 @@ s32 is_actortype_hpbar_visible(s32 actorType) {
     return ((get_global_byte(idx + 365) | battleStatus->tattleFlags[idx]) >> (actorType - (idx * 8))) & 1;
 }
 
-INCLUDE_ASM(s32, "181810", save_tattle_flags);
+void save_tattle_flags(s32 actorType) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    u8* list;
+    s32 gb;
+    s32 i = 0;
+    s32 j;
+    s32 k;
 
-INCLUDE_ASM(s32, "181810", load_tattle_flags);
+    while (TRUE) {
+        list = ActorTypesLists[i];
+        if (list == NULL) {
+            break;
+        }
+
+        for (j = 0; list[j] != 0xFF; j++) {
+            if (actorType == list[j]) {
+                for (k = 0; list[k] != 0xFF; k++) {
+                    actorType = list[k];
+
+                    gb = get_global_byte((actorType / 8) + 0x16D); // GameByte(0x16D) is GB_Tattles_00 (first tattle)
+                    gb |= 1 << (actorType % 8);
+                    set_global_byte((actorType / 8) + 0x16D, gb);
+                    battleStatus->tattleFlags[actorType / 8] |= gb;
+                }
+                return;
+            }
+        }
+        i++;
+    }
+
+    gb = get_global_byte((actorType / 8) + 0x16D);
+    gb |= 1 << (actorType % 8);
+    set_global_byte((actorType / 8) + 0x16D, gb);
+    battleStatus->tattleFlags[actorType / 8] |= gb;
+}
+
+void load_tattle_flags(s32 actorType) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    u8* list;
+    s32 gb;
+    s32 i = 0;
+    s32 j;
+    s32 k;
+
+    while (TRUE) {
+        list = ActorTypesLists[i];
+        if (list == NULL) {
+            break;
+        }
+
+        for (j = 0; list[j] != 0xFF; j++) {
+            if (actorType == list[j]) {
+                for (k = 0; list[k] != 0xFF; k++) {
+                    actorType = list[k];
+
+                    gb = get_global_byte((actorType / 8) + 0x16D); // GameByte(0x16D) is GB_Tattles_00 (first tattle)
+                    gb |= 1 << (actorType % 8);
+                    battleStatus->tattleFlags[actorType / 8] |= gb;
+                }
+                return;
+            }
+        }
+        i++;
+    }
+
+    gb = get_global_byte((actorType / 8) + 0x16D);
+    gb |= 1 << (actorType % 8);
+    battleStatus->tattleFlags[actorType / 8] |= gb;
+}
 
 ApiStatus func_80253FB0(Evt* script, s32 isInitialCall) {
     gCurrentEncounter.battleOutcome = OUTCOME_ENEMY_FLED;

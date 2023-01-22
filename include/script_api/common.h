@@ -287,6 +287,7 @@ ApiStatus DemoJoystickRadial(Evt* script, s32 isInitialCall);
 ApiStatus DemoJoystickXY(Evt* script, s32 isInitialCall);
 ApiStatus WaitForPlayerInputEnabled(Evt* script, s32 isInitialCall);
 ApiStatus func_802D2484(Evt* script, s32 isInitialCall);
+ApiStatus WaitForPlayerTouchingFloor(Evt* script, s32 isInitialCall);
 ApiStatus IsPlayerOnValidFloor(Evt* script, s32 isInitialCall);
 ApiStatus WaitForPlayerMoveToComplete(Evt* script, s32 isInitialCall);
 ApiStatus func_802CFE2C(Evt* script, s32 isInitialCall);
