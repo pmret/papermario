@@ -1067,25 +1067,25 @@ void func_80243ED0_A2E110(s32 arg0, s32 idx) {
 #endif
 
 ApiStatus func_80243FC4_A2E204(Evt* script, s32 isInitialCall) {
-    s32 dmaEnd;
-    s32 dmaStart;
+    u8* dmaEnd;
+    u8* dmaStart;
     s32 tapeOffset;
     u8* it;
 
     D_8024AA20_A34C60->unk_00 = create_worker_frontUI(NULL, func_80243CC0_A2DF00);
     D_8024AA20_A34C60->unk_04 = it = mdl_get_next_texture_address(0x1D420);
     it += 0xA710;
-    D_8024AA20_A34C60->unk_08 = it;
+    D_8024AA20_A34C60->unk_08 = (u16*) it;
     it += 0x200;
     D_8024AA20_A34C60->unk_0C = it;
     it += 0xA710;
-    D_8024AA20_A34C60->unk_10 = it;
+    D_8024AA20_A34C60->unk_10 = (u16*) it;
     it += 0x200;
     D_8024AA20_A34C60->unk_18 = it;
     it += 0x4000;
     D_8024AA20_A34C60->unk_1C = it;
     it += 0x4000;
-    D_8024AA20_A34C60->unk_20 = it;
+    D_8024AA20_A34C60->unk_20 = (u16*) it;
     D_8024AA20_A34C60->unk_46 = 240;
     D_8024AA20_A34C60->unk_48 = 111;
     D_8024AA20_A34C60->unk_3C = 0;
@@ -1111,7 +1111,6 @@ ApiStatus func_80243FC4_A2E204(Evt* script, s32 isInitialCall) {
 }
 
 NOP_FIX // TODO remove when D_8024AAB4_A34CF4 is migrated
-
 ApiStatus func_802440D0_A2E310(Evt* script, s32 isInitialCall) {
     switch (D_8024AAB0_A34CF0) {
         case 0:
