@@ -1,18 +1,16 @@
 #include "common.h"
 
 void update_camera_mode_6(Camera* camera);
-// types, floats, and other shtuff
 void update_camera_mode_6(Camera* camera) {
-    f32 sinBoom, cosBoom;
-    f32 sinBoom2, cosBoom2;
-    f32 deltaX, deltaY, deltaZ; // 20, 30, 24
-    f32 deltaX2, deltaY2, deltaZ2;
-    f32 temp_f24_2;
-    f32 boomYaw; // 26
-    f32 temp_f30;
-    f32 zero;
-    f32 f10;
-    f32 temp;
+    f32 sinBoom;
+    f32 cosBoom;
+    f32 deltaX;
+    f32 deltaY;
+    f32 deltaZ;
+    f32 deltaX2;
+    f32 deltaY2;
+    f32 deltaZ2;
+    f32 boomYaw;
     f32 new_var;
 
     if (camera->unk_06 != 0 || camera->isChangingMap != 0) {

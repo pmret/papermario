@@ -4,24 +4,17 @@
 void update_camera_mode_4(Camera* camera) {
     f32 sinBoom;
     f32 cosBoom;
-    f32 sinBoom2;
-    f32 cosBoom2;
     f32 deltaX;
     f32 deltaY;
     f32 deltaZ;
     f32 deltaX2;
     f32 deltaY2;
     f32 deltaZ2;
-    f32 temp_f24_2;
     f32 boomYaw;
-    f32 temp_f30;
-    f32 zero;
-    f32 f10;
     f32 boomLength;
-    f32 new_var;
     f32 f0;
     f32 f4;
-    f32 temp;
+    f32 new_var;
 
     f0 = camera->targetPos.x;
     deltaX = camera->auxPitch;
