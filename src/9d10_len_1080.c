@@ -49,16 +49,16 @@ void update_camera_mode_4(Camera* camera) {
         boomYaw = DEG_TO_RAD(camera->currentBoomYaw);
         sinBoom = sin_rad(boomYaw);
         cosBoom = cos_rad(boomYaw);
-        deltaY = (deltaX = 0.0f);
+        deltaY = deltaX = 0.0f;
         deltaZ = camera->currentBoomLength;
         deltaX2 = deltaX;
         deltaY2 = deltaY;
-        boomYaw = (deltaX = -deltaY2);
+        boomYaw = deltaX = -deltaY2;
         deltaZ2 = deltaZ;
         new_var = boomYaw;
         deltaX = deltaX2;
         deltaY = cosBoom * deltaY2 + deltaZ2 * sinBoom;
-        deltaZ = (sinBoom * new_var) + (deltaZ2 * cosBoom);
+        deltaZ = sinBoom * new_var + deltaZ2 * cosBoom;
         boomYaw = DEG_TO_RAD(camera->unk_70);
         sinBoom = sin_rad(boomYaw);
         cosBoom = cos_rad(boomYaw);
@@ -75,16 +75,16 @@ void update_camera_mode_4(Camera* camera) {
     boomYaw = DEG_TO_RAD(camera->currentBoomYaw);
     sinBoom = sin_rad(boomYaw);
     cosBoom = cos_rad(boomYaw);
-    deltaY = (deltaX = 0.0f);
+    deltaY = deltaX = 0.0f;
     deltaZ = camera->currentBoomLength;
     deltaX2 = deltaX;
     deltaY2 = deltaY;
-    boomYaw = (deltaX = -deltaY2);
+    boomYaw = deltaX = -deltaY2;
     deltaZ2 = deltaZ;
     new_var = boomYaw;
     deltaX = deltaX2;
     deltaY = cosBoom * deltaY2 + deltaZ2 * sinBoom;
-    deltaZ = (sinBoom * new_var) + (deltaZ2 * cosBoom);
+    deltaZ = sinBoom * new_var + deltaZ2 * cosBoom;
     boomYaw = DEG_TO_RAD(camera->unk_70);
     sinBoom = sin_rad(boomYaw);
     cosBoom = cos_rad(boomYaw);
@@ -99,7 +99,7 @@ void update_camera_mode_4(Camera* camera) {
     deltaY = camera->lookAt_obj.y - camera->lookAt_eye.y;
     deltaZ = camera->lookAt_obj.z - camera->lookAt_eye.z;
     camera->currentBlendedYawNegated = -atan2(0.0f, 0.0f, deltaX, deltaZ);
-    camera->currentPitch = atan2(0.0f, 0.0f, deltaY, -sqrtf((deltaX * deltaX) + (deltaZ * deltaZ)));
+    camera->currentPitch = atan2(0.0f, 0.0f, deltaY, -sqrtf(SQ(deltaX) + SQ(deltaZ)));
 }
 
 INCLUDE_ASM(void, "9d10_len_1080", update_camera_mode_2, Camera* camera);
