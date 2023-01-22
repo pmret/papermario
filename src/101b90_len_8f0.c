@@ -344,8 +344,6 @@ void spr_load_npc_extra_anims(SpriteAnimData* header, u32* extraAnimList) {
     _heap_realloc(&gSpriteHeapPtr, header, (s32)writePos - (s32)header);
 }
 
-
-#ifdef NON_MATCHING
 SpriteComponent** spr_allocate_components(s32 count) {
     s32 listSize;
     void** heap;
@@ -363,11 +361,11 @@ SpriteComponent** spr_allocate_components(s32 count) {
 
     if (spr_allocateBtlComponentsOnWorldHeap) {
         listStart = _heap_malloc(&heap_generalHead, totalSize);
+        component = listPos = listStart;
     } else {
         listStart = _heap_malloc(&gSpriteHeapPtr, totalSize);
+        component = listPos = listStart;
     }
-
-    component = listPos = listStart;
 
     component = (SpriteComponent*)((s32)(component) + (listSize / 4) * 4);
 
@@ -380,6 +378,3 @@ SpriteComponent** spr_allocate_components(s32 count) {
 
     return listStart;
 }
-#else
-INCLUDE_ASM(s32, "101b90_len_8f0", spr_allocate_components);
-#endif
