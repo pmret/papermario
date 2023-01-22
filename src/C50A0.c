@@ -766,112 +766,106 @@ void init_item_entity_list(void) {
 extern s32* gItemEntityScripts[];
 
 void item_entity_load(ItemEntity* item);
-// WIP
-#ifdef WIP
-void item_entity_load(ItemEntity* item) {
-    HudCacheEntry* entry;
-    s32 otherID;
-    s32 otherID2;
-    s32 count;
-    s32 var_s1_2;
-    s32 var_s2_2;
-    s32 var_s3;
-    s32* script;
-    u32 size;
-    u8** var_a1;
-    u8** var_a1_2;
 
-    script = gItemEntityScripts[item->itemID];
-    item->readPos = script;
-    item->savedReadPos =script;
+// WIP
+#ifdef NON_MATCHING
+void item_entity_load(ItemEntity* item) {
+    s32* pos;
+    HudCacheEntry* entry;
+    s32 cond;
+    s32 raster;
+    s32 palette;
+    s32 capacity;
+    s32 i;
+
+    pos = gItemEntityScripts[item->itemID];
+    item->readPos = pos;
+    item->savedReadPos = pos;
 
     while (TRUE) {
-        switch (*script++) {
-            case 2:
-            case 3:
-            default:
+        switch (*pos++) {
+            case ITEM_SCRIPT_OP_Restart:
+            case ITEM_SCRIPT_OP_Loop:
                 break;
-            case 4:
-                script++;
-                script++;
+            case ITEM_SCRIPT_OP_RandomRestart:
+                pos += 2;
                 break;
-            case 1:
-                otherID = *script++;
-                otherID2 = *script++;
+            case ITEM_SCRIPT_OP_SetImage:
+                pos++;
+                raster = *pos++;
+                palette = *pos++;
                 if (item->flags & ITEM_ENTITY_FLAG_40000) {
-                    size = 0x200;
+                    capacity = 0x200;
                 } else {
-                    size = 0x120;
+                    capacity = 0x120;
                 }
 
                 entry = gHudElementCacheTableRaster;
-                count = 0;
-                var_s3 = 0;
-                var_a1 = &entry->data;
-
+                i = 0;
                 while (TRUE) {
                     if (entry->id == -1) {
-                        entry->id = otherID;
-                        *var_a1 = &gHudElementCacheBuffer[*gHudElementCacheSize];
-                        ASSERT((*gHudElementCacheSize + size) < 0x11000);
-                        nuPiReadRom(otherID + icon_present_ROM_START, *var_a1, size);
-                        *gHudElementCacheSize += size;
-                        if (gGameStatusPtr->isBattle == 0) {
-                            *script++ = count;
+                        entry->id = raster;
+                        entry->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
+
+                        ASSERT(*gHudElementCacheSize + capacity < 0x11000);
+                        do {
+                            nuPiReadRom((s32)icon_present_ROM_START + raster, entry->data, capacity);
+                        } while (0); // TODO required to match
+                            *gHudElementCacheSize += capacity;
+                        if (!gGameStatusPtr->isBattle) {
+                            *pos = i;
                         } else {
-                            *script++ = *script | var_s3;
+                            *pos = (u16)(*pos) | (i << 16);
                         }
+                        pos++;
                         break;
-                    } else if (entry->id != otherID) {
-                        var_a1 += 8;
-                        entry += 8;
-                        var_s3 += 0x10000;
-                        count++;
                     } else {
-                        if (gGameStatusPtr->isBattle == 0) {
-                            *script++ = count;
-                        } else {
-                            *script++ = *script | var_s3;
-                        }
-                        break;
+                        cond = entry->id == raster;
+                        if (cond) { // TODO required to match
+                            if (!gGameStatusPtr->isBattle) {
+                                *pos = i;
+                            } else {
+                                *pos = (u16)(*pos) | (i << 16);
+                            }
+                            pos++;
+                            break;
+                       }
                     }
+                    entry++;
+                    i++;
                 }
+                ASSERT(i < MAX_ITEM_ENTITIES);
 
-                var_s1_2 = 0;
-                ASSERT(count < 0x100);
                 entry = gHudElementCacheTablePalette;
-                var_s2_2 = 0;
-                var_a1_2 = &entry->data;
-
+                i = 0;
                 while (TRUE) {
                     if (entry->id == -1) {
-                        entry->id = otherID2;
-                        *var_a1_2 = &gHudElementCacheBuffer[*gHudElementCacheSize];
-                        ASSERT((*gHudElementCacheSize + 0x20) < 0x11000);
-                        nuPiReadRom(otherID2 + icon_present_ROM_START, *var_a1_2, 0x20);
+                        entry->id = palette;
+                        entry->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
+                        ASSERT(*gHudElementCacheSize + 0x20 < 0x11000);
+                        nuPiReadRom((s32)icon_present_ROM_START + palette, entry->data, 0x20);
                         *gHudElementCacheSize += 0x20;
-                        if (gGameStatusPtr->isBattle == 0) {
-                            *script++ = var_s1_2;
+                        if (!gGameStatusPtr->isBattle) {
+                            *pos = i;
                         } else {
-                            *script++ = *script | var_s2_2;
+                            *pos = (u16)(*pos) | (i << 16);
                         }
+                        pos++;
                         break;
-                    } else if (entry->id != otherID2) {
-                        var_a1_2 += 8;
-                        entry += 8;
-                        var_s2_2 += 0x10000;
-                        var_s1_2++;
-                    } else {
-                        if (gGameStatusPtr->isBattle == 0) {
-                            *script++ = var_s1_2;
+                    } else if (entry->id == palette) {
+                        if (!gGameStatusPtr->isBattle) {
+                            *pos = i;
                         } else {
-                            *script++ = *script | var_s2_2;
+                            *pos = (u16)(*pos) | (i << 16);
                         }
+                        pos++;
                         break;
                     }
+                    entry++;
+                    i++;
                 }
                 break;
-            case 0:
+            case ITEM_SCRIPT_OP_End:
                 item_entity_update(item);
                 return;
         }
