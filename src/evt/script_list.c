@@ -610,8 +610,22 @@ void update_scripts(void) {
     }
 }
 
-// this function is evil.
+// this function is evil
+#ifdef NON_MATCHING
+void func_802C3EE4(void) {
+    s32 i;
+
+    for (i = 0; i < gScriptListCount; i++) {
+        do {
+            if ((*gCurrentScriptListPtr)[gScriptIndexList[i]] == gScriptIdList[i]) {
+                (*gCurrentScriptListPtr)[gScriptIndexList[i]] = gScriptIdList[i];
+            }
+        } while (0);
+    }
+}
+#else
 INCLUDE_ASM(s32, "evt/script_list", func_802C3EE4);
+#endif
 
 void kill_script(Evt* instanceToKill) {
     Evt* childScript;

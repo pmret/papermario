@@ -1512,9 +1512,9 @@ void render_hud_element(HudElement* hudElement) {
                 }
             } else {
                 if (hudElement->flags & HUD_ELEMENT_FLAG_TRANSPARENT) {
-                    fold_update(transform->unk_00, 7, 255, 255, 255, hudElement->opacity, 0);
+                    fold_update(transform->foldIdx, 7, 255, 255, 255, hudElement->opacity, 0);
                 } else {
-                    fold_update(transform->unk_00, 0, 0, 0, 0, 0, 0);
+                    fold_update(transform->foldIdx, 0, 0, 0, 0, 0, 0);
                 }
             }
 
@@ -1523,7 +1523,7 @@ void render_hud_element(HudElement* hudElement) {
             sp2A0.xOffset = -width / 2;
             sp2A0.yOffset = height / 2;
             sp2A0.width = width;
-            sp2A0.unk_10 = 255;
+            sp2A0.opacity = 255;
             sp2A0.height = height;
             sp2A0.palette = palette;
 
@@ -1534,7 +1534,7 @@ void render_hud_element(HudElement* hudElement) {
                     fold_appendGfx_component(0, &sp2A0, 0x40, sp60);
                 }
             } else {
-                fold_appendGfx_component(transform->unk_00, &sp2A0, 0x40, sp60);
+                fold_appendGfx_component(transform->foldIdx, &sp2A0, 0x40, sp60);
             }
             break;
         case 2:
@@ -1543,6 +1543,11 @@ void render_hud_element(HudElement* hudElement) {
             memcpy(&transform->unk_30[D_80159180].vtx[1], &D_8014F0C8[1], sizeof(Vtx));
             memcpy(&transform->unk_30[D_80159180].vtx[2], &D_8014F0C8[2], sizeof(Vtx));
             memcpy(&transform->unk_30[D_80159180].vtx[3], &D_8014F0C8[3], sizeof(Vtx));
+
+            // D_8014F0C8[0] = transform->unk_30[D_80159180].vtx[0];
+            // D_8014F0C8[1] = transform->unk_30[D_80159180].vtx[1];
+            // D_8014F0C8[2] = transform->unk_30[D_80159180].vtx[2];
+            // D_8014F0C8[3] = transform->unk_30[D_80159180].vtx[3];
 
             vtx[0].v.ob[0] = -width / 2;
             vtx[0].v.ob[1] = -height / 2;
@@ -1586,7 +1591,7 @@ void render_hud_element(HudElement* hudElement) {
                 }
             }
 
-            gDPLoadTextureBlock(gMasterGfxPos++, hudElement->imageAddr, G_IM_FMT_IA, G_IM_SIZ_8b , width, height, 0,
+            gDPLoadTextureBlock(gMasterGfxPos++, hudElement->imageAddr, G_IM_FMT_IA, G_IM_SIZ_8b, width, height, 0,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
             gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);

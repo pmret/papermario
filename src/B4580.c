@@ -911,9 +911,9 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
                     }
                     totalVtxCount += vtxCount;
                 } else {
-                    Gfx* temp = gfxPos++;
-                    temp->words.w0 = w0;
-                    temp->words.w1 = w1;
+                    gfxPos++;
+                    gfxPos->words.w0 = w0;
+                    gfxPos->words.w1 = w1;
                 }
             } while (TRUE);
             gSPEndDisplayList(gfxPos++);

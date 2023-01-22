@@ -32,10 +32,10 @@
 
 /*
  * the SHIFT macros are used to build display list commands, inserting
- * bit-fields into a 32-bit word. They take a value, a shift amount, 
+ * bit-fields into a 32-bit word. They take a value, a shift amount,
  * and a width.
  *
- * For the left shift, the lower bits of the value are masked, 
+ * For the left shift, the lower bits of the value are masked,
  * then shifted left.
  *
  * For the right shift, the value is shifted right, then the lower bits
@@ -48,8 +48,6 @@
     ((unsigned int) (((unsigned int)(v) & ((0x01 << (w)) - 1)) << (s)))
 #define _SHIFTR(v, s, w)	\
     ((unsigned int)(((unsigned int)(v) >> (s)) & ((0x01 << (w)) - 1)))
-
-#define _SHIFT _SHIFTL	/* old, for compatibility only */
 
 #define G_ON	(1)
 #define G_OFF	(0)
