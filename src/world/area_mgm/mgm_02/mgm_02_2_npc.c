@@ -679,7 +679,7 @@ API_CALLABLE(N(RunMinigame)) {
                         model->flags &= -(MODEL_FLAG_FLAG_1 | MODEL_FLAG_ENABLED);
                         if (!(model->flags & MODEL_FLAG_HAS_TRANSFORM_APPLIED)) {
                             guTranslateF(model->transformMatrix, npc->pos.x, npc->pos.y, npc->pos.z);
-                            model->flags |= (MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED);
+                            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
                         }
                         else {
                             guTranslateF(mtx, npc->pos.x, npc->pos.y, npc->pos.z);
@@ -694,7 +694,7 @@ API_CALLABLE(N(RunMinigame)) {
                     model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
                     if (!(model->flags & MODEL_FLAG_HAS_TRANSFORM_APPLIED)) {
                         guTranslateF(model->transformMatrix, npc->pos.x, npc->pos.y, npc->pos.z);
-                        model->flags |= (MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED);
+                        model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
                     } else {
                         guTranslateF(mtx, npc->pos.x, npc->pos.y, npc->pos.z);
                         guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
@@ -725,7 +725,7 @@ API_CALLABLE(N(RunMinigame)) {
                     centerY = update_lerp(EASING_QUADRATIC_OUT, npc->moveToPos.y, npc->moveToPos.y + 30.0, npc->duration, 30);
                     if (!(model->flags & MODEL_FLAG_HAS_TRANSFORM_APPLIED)) {
                         guTranslateF(model->transformMatrix, npc->pos.x, centerY, npc->pos.z);
-                        model->flags |= (MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED);
+                        model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
                     } else {
                         guTranslateF(mtx, npc->pos.x, centerY, npc->pos.z);
                         guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);

@@ -7,6 +7,7 @@
 #include "item_entity.h"
 #include "message_ids.h"
 #include "nu/nusys.h"
+#include "ld_addrs.h"
 
 #define MAX_ITEM_ENTITIES 256
 
@@ -765,7 +766,114 @@ void init_item_entity_list(void) {
 extern s32* gItemEntityScripts[];
 
 void item_entity_load(ItemEntity* item);
+
+// WIP
+#ifdef NON_MATCHING
+void item_entity_load(ItemEntity* item) {
+    s32* pos;
+    HudCacheEntry* entry;
+    s32 cond;
+    s32 raster;
+    s32 palette;
+    s32 capacity;
+    s32 i;
+
+    pos = gItemEntityScripts[item->itemID];
+    item->readPos = pos;
+    item->savedReadPos = pos;
+
+    while (TRUE) {
+        switch (*pos++) {
+            case ITEM_SCRIPT_OP_Restart:
+            case ITEM_SCRIPT_OP_Loop:
+                break;
+            case ITEM_SCRIPT_OP_RandomRestart:
+                pos += 2;
+                break;
+            case ITEM_SCRIPT_OP_SetImage:
+                pos++;
+                raster = *pos++;
+                palette = *pos++;
+                if (item->flags & ITEM_ENTITY_FLAG_40000) {
+                    capacity = 0x200;
+                } else {
+                    capacity = 0x120;
+                }
+
+                entry = gHudElementCacheTableRaster;
+                i = 0;
+                while (TRUE) {
+                    if (entry->id == -1) {
+                        entry->id = raster;
+                        entry->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
+
+                        ASSERT(*gHudElementCacheSize + capacity < 0x11000);
+                        do {
+                            nuPiReadRom((s32)icon_present_ROM_START + raster, entry->data, capacity);
+                        } while (0); // TODO required to match
+                            *gHudElementCacheSize += capacity;
+                        if (!gGameStatusPtr->isBattle) {
+                            *pos = i;
+                        } else {
+                            *pos = (u16)(*pos) | (i << 16);
+                        }
+                        pos++;
+                        break;
+                    } else {
+                        cond = entry->id == raster;
+                        if (cond) { // TODO required to match
+                            if (!gGameStatusPtr->isBattle) {
+                                *pos = i;
+                            } else {
+                                *pos = (u16)(*pos) | (i << 16);
+                            }
+                            pos++;
+                            break;
+                       }
+                    }
+                    entry++;
+                    i++;
+                }
+                ASSERT(i < MAX_ITEM_ENTITIES);
+
+                entry = gHudElementCacheTablePalette;
+                i = 0;
+                while (TRUE) {
+                    if (entry->id == -1) {
+                        entry->id = palette;
+                        entry->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
+                        ASSERT(*gHudElementCacheSize + 0x20 < 0x11000);
+                        nuPiReadRom((s32)icon_present_ROM_START + palette, entry->data, 0x20);
+                        *gHudElementCacheSize += 0x20;
+                        if (!gGameStatusPtr->isBattle) {
+                            *pos = i;
+                        } else {
+                            *pos = (u16)(*pos) | (i << 16);
+                        }
+                        pos++;
+                        break;
+                    } else if (entry->id == palette) {
+                        if (!gGameStatusPtr->isBattle) {
+                            *pos = i;
+                        } else {
+                            *pos = (u16)(*pos) | (i << 16);
+                        }
+                        pos++;
+                        break;
+                    }
+                    entry++;
+                    i++;
+                }
+                break;
+            case ITEM_SCRIPT_OP_End:
+                item_entity_update(item);
+                return;
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "C50A0", item_entity_load);
+#endif
 
 s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupFlagIndex) {
     s32 i;

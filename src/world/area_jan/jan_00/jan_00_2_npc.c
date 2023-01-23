@@ -98,24 +98,24 @@ EvtScript N(EVS_Kolorado_LetterReward) = {
     EVT_END
 };
 
-// float regalloc
-API_CALLABLE(func_80240B4C_B2108C);
-#ifdef NON_EQUIVALENT
 API_CALLABLE(func_80240B4C_B2108C) {
     Bytecode* args = script->ptrReadPos;
+    s32 temp_s1 = evt_get_variable(script, *args++);
     Npc* npc;
     f32 temp_f20;
     f32 var_f22;
     f32 x, y, z;
-    s32 temp_s1;
     s32 outX, outY, outZ;
 
-    temp_s1 = evt_get_variable(script, *args++);
-    x = y = z = 0.0f;
+    x = 0.0f;
+    y = 0.0f;
+    z = 0.0f;
+
     outX = *args++;
     outY = *args++;
     outZ = *args++;
     npc = get_npc_safe(0);
+
     switch (temp_s1) {
         case 0:
             var_f22 = 130.0f;
@@ -141,9 +141,6 @@ API_CALLABLE(func_80240B4C_B2108C) {
     evt_set_float_variable(script, outZ, z);
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240B4C_B2108C);
-#endif
 
 ApiStatus func_80240CF8_B21238(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -4171,19 +4171,20 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = modelIdx;
 }
 
-// The global here is getting optimized out because nothing is happening to it. Very weird
-#ifdef NON_EQUIVALENT
-void func_80116674(void) {
+// Mysterious no-op
+void iterate_models(void) {
+    Model* nonNull;
+    Model* ret;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
-        Model* m = (*gCurrentModels)[i];
-        do {} while (0);
+        ret = (*gCurrentModels)[i];
+        if (ret != NULL) {
+            nonNull = ret;
+        }
     }
+    ret = nonNull;
 }
-#else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80116674);
-#endif
 
 void func_80116698(void) {
     Matrix4f sp20;
@@ -4953,7 +4954,7 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMt
 s32 get_model_list_index_from_tree_index(s32 treeIndex) {
     s32 i;
 
-    if (treeIndex < 0x100) {
+    if (treeIndex < MAX_MODELS) {
         u8 modelIndex = (*mdl_currentModelTreeNodeInfo)[treeIndex].modelIndex;
 
         if (modelIndex != (u8)-1) {
@@ -4961,7 +4962,7 @@ s32 get_model_list_index_from_tree_index(s32 treeIndex) {
         }
     }
 
-    for (i = 0; i < 0x100; i++) {
+    for (i = 0; i < MAX_MODELS; i++) {
         Model* model = get_model_from_list_index(i);
 
         if (model != NULL && model->modelID == treeIndex) {
@@ -5186,10 +5187,10 @@ void clone_model(u16 srcModelID, u16 newModelID) {
 
 void set_model_flags(u16 treeIndex, s32 flags, s32 mode) {
     s32 maxGroupIndex = -1;
-    s32 i;
     s32 minGroupIndex;
     s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[treeIndex].modelIndex;
     s32 siblingIndex;
+    s32 i;
 
     if (modelIndex < 255) {
         minGroupIndex = maxGroupIndex = modelIndex;
@@ -5645,8 +5646,174 @@ Gfx* mdl_get_copied_gfx(s32 copyIndex) {
     return gfxCopy;
 }
 
-void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, Matrix4f destMtx, void* destVertices);
+#ifdef WIP
+void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, f32 (*destMtx)[4], void* destVertices) {
+    s32 numVertices;
+    Vtx* baseVtx;
+    s32 gfxCount;
+    f32 sp2C;
+    f32 sp40;
+    Vtx* temp_a0;
+    f32 temp_f10;
+    f32 temp_f12;
+    f32 temp_f12_2;
+    f32 temp_f14;
+    f32 temp_f14_2;
+    f32 temp_f2;
+    f32 temp_f2_2;
+    f32 temp_f4_2;
+    f32 temp_f4_3;
+    f32 temp_f8;
+    f32 temp_f8_3;
+    f32 var_f0;
+    f32 var_f10;
+    f32 var_f24;
+    f32 var_f26;
+    f32 var_f2;
+    f32 var_f30;
+    f32 var_f6;
+    f32 var_f6_2;
+
+    f32 v0ob0;
+    f32 v0ob2;
+    f32 v0tc0;
+    f32 v0tc1;
+
+    f32 v1ob0;
+    f32 v1ob2;
+    f32 v2ob0;
+    f32 v1tc0;
+    f32 v1tc1;
+    f32 v2ob2;
+    f32 v2tc0;
+    f32 v2tc1;
+
+    f32 ob0;
+    f32 ob1;
+    f32 ob2;
+
+    f32 tc0;
+    f32 tc1;
+
+    s32 cn0;
+    s32 cn1;
+    s32 cn2;
+    s32 cmd;
+    s32 i;
+
+    s32 listIndex;
+    Model* model;
+    Gfx* dlist;
+
+    listIndex = get_model_list_index_from_tree_index(modelID & 0xFFFF);
+    model = get_model_from_list_index(listIndex);
+    dlist = model->modelNode->displayData->displayList;
+
+    while (TRUE) {
+        cmd = dlist->words.w0 >> 0x18;
+        //temp_a0 = var_v0->words.w1;
+        if (cmd == G_ENDDL) {
+            break;
+        }
+
+        if (cmd == G_VTX) {
+            baseVtx = dlist->words.w1;
+            break;
+        }
+        dlist++;
+    }
+
+    v0ob0 = baseVtx[0].v.ob[0];
+    v0ob2 = baseVtx[0].v.ob[2];
+    v0tc0 = baseVtx[0].v.tc[0];
+    v0tc1 = baseVtx[0].v.tc[1];
+
+    v1ob0 = baseVtx[1].v.ob[0];
+    v1ob2 = baseVtx[1].v.ob[2];
+    v1tc0 = baseVtx[1].v.tc[0];
+    v1tc1 = baseVtx[1].v.tc[1];
+
+    v2ob0 = baseVtx[2].v.ob[0];
+    v2ob2 = baseVtx[2].v.ob[2];
+    v2tc0 = baseVtx[2].v.tc[0];
+    v2tc1 = baseVtx[2].v.tc[1];
+
+    cn0 = baseVtx[0].v.cn[0];
+    cn1 = baseVtx[0].v.cn[1];
+    cn2 = baseVtx[0].v.cn[2];
+
+    if (v0ob0 != v1ob0) {
+        temp_f14_2 = v0ob0 - v1ob0;
+        temp_f8_3 = v0tc0 - v1tc0;
+        temp_f2_2 = (v0ob0 - v2ob0) / temp_f14_2;
+        temp_f12_2 = v0ob2 - v1ob2;
+        temp_f10 = (temp_f2_2 * temp_f12_2) - (v0ob2 - v2ob2);
+        sp40 = ((temp_f2_2 * temp_f8_3) - (v0tc0 - v2tc0)) / temp_f10;
+        temp_f4_3 = v0tc1 - v1tc1;
+        var_f30 = (temp_f8_3 - (temp_f12_2 * sp40)) / temp_f14_2;
+        var_f26 = ((temp_f2_2 * temp_f4_3) - (v0tc1 - v2tc1)) / temp_f10;
+        var_f2 = var_f26 * v0ob2;
+        var_f24 = (temp_f4_3 - (temp_f12_2 * var_f26)) / temp_f14_2;
+        var_f6 = (v0tc0 - (var_f30 * v0ob0)) - (sp40 * v0ob2);
+        var_f0 = v0tc1 - (var_f24 * v0ob0);
+    } else {
+        temp_f14 = (v0ob2 - v1ob2);
+        temp_f8 = v0tc0 - v1tc0;
+        temp_f2 = (v0ob2 - v2ob2) / temp_f14;
+        temp_f12 = v0ob0 - v1ob0;
+        temp_f10 = (temp_f2 * temp_f12) - (v0ob0 - v2ob0);
+        var_f30 = ((temp_f2 * temp_f8) - (v0tc0 - v2tc0)) / temp_f10;
+        temp_f4_2 = v0tc1 - v1tc1;
+        sp40 = (temp_f8 - (temp_f12 * var_f30)) / temp_f14;
+        var_f24 = ((temp_f2 * temp_f4_2) - (v0tc1 - v2tc1)) / temp_f10;
+        var_f26 = (temp_f4_2 - (temp_f12 * var_f24)) / temp_f14;
+        var_f2 = var_f26 * v0ob2;
+        var_f6 = (v0tc0 - (var_f30 * v0ob0)) - (sp40 * v0ob2);
+        var_f0 = v0tc1 - (var_f24 * v0ob0);
+    }
+    sp2C = var_f6;
+
+    mdl_get_vertex_count(destGfx, &numVertices, &baseVtx, &gfxCount, destVertices);
+
+    for (i = 0; i < numVertices; i++) {
+        ob0 = baseVtx->v.ob[0];
+        ob1 = baseVtx->v.ob[1];
+        ob2 = baseVtx->v.ob[2];
+
+        if (destMtx != NULL) {
+            var_f10 = (destMtx[0][0] * ob0) + (destMtx[1][0] * ob1) + (destMtx[2][0] * ob2) + destMtx[3][0];
+            var_f6_2 = (destMtx[0][2] * ob0) + (destMtx[1][2] * ob1) + (destMtx[2][2] * ob2) + destMtx[3][2];
+        } else {
+            var_f10 = ob0;
+            var_f6_2 = ob2;
+        }
+
+        tc0 = (var_f30 * var_f10) + (sp40 * var_f6_2) + sp2C;
+        tc1 = (var_f24 * var_f10) + (var_f26 * var_f6_2) + (var_f0 - var_f2);
+
+        if (tc0 < 0.0f) {
+            tc0 -= 0.5;
+        } else if (tc0 > 0.0f) {
+            tc0 += 0.5;
+        }
+
+        if (tc1 < 0.0f) {
+            tc1 -= 0.5;
+        } else if (tc1 > 0.0f) {
+            tc1 += 0.5;
+        }
+
+        baseVtx->v.tc[0] = tc0;
+        baseVtx->v.tc[1] = tc1;
+        baseVtx->v.cn[0] = cn0;
+        baseVtx->v.cn[1] = cn1;
+        baseVtx->v.cn[2] = cn2;
+        baseVtx++;
+    }
+}
+#else
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_project_tex_coords);
+#endif
 
 s32 func_8011C80C(u16 arg0, s32 arg3, f32* arg4, f32* arg5) {
     Camera* camera = &gCameras[gCurrentCameraID];

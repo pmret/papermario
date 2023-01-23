@@ -1044,11 +1044,11 @@ typedef struct ModelGroupData {
 
 typedef struct ModelDisplayData {
     /* 0x0 */ Gfx* displayList;
-    /* 0x4 */ char unk_00[0x4];
+    /* 0x4 */ char unk_04[0x4];
 } ModelDisplayData; // size = 0x8
 
 typedef struct AnimatorNode {
-    /* 0x00 */ void* displayList;
+    /* 0x00 */ Gfx* displayList;
     /* 0x04 */ struct AnimatorNode* children[32];
     /* 0x84 */ Vec3f basePos; // ?
     /* 0x90 */ Vec3f pos;
