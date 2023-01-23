@@ -44,26 +44,23 @@ u8 D_E0044E04[] = {
     30, 60, 90, 100, 104, 106, 108, 110, 112, 113, 113, 110, 107, 103, 0x00, 0x00
 };
 
-// ordering crap
-#ifdef NON_EQUIVALENT
-void stars_shimmer_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, f32 arg5, s32 arg6, s32 arg7) {
+void stars_shimmer_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, f32 arg5, s32 numParts, s32 arg7) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
     StarsShimmerFXData* part;
-    s32 numParts = arg6;
-    f32 theta;
     f32 cosTheta;
     f32 sinTheta;
     f32 temp_f22;
     f32 temp_f8;
     f32 temp_ft;
-    f32 sinT3;
+    f32 theta;
     f32 temp5;
     f32 t3;
+    f32 new_var;
     s32 i;
 
-    numParts = arg6 + 1;
+    numParts++;
 
     bpPtr->init = stars_shimmer_init;
     bpPtr->update = stars_shimmer_update;
@@ -74,8 +71,8 @@ void stars_shimmer_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, f32 arg5, s32 a
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data.starsBurst = shim_general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.starsBurst != NULL);
+    part = effect->data.starsShimmer = shim_general_heap_malloc(numParts * sizeof(*part));
+    ASSERT(effect->data.starsShimmer != NULL);
 
     if (type == 6) {
         part->unk_00 = 1;
@@ -87,7 +84,7 @@ void stars_shimmer_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, f32 arg5, s32 a
     part->pos.y = y;
     part->pos.z = z;
     part->lifeTime = 0;
-    part->unk_02 = type;
+    part->state = type;
     part->timeLeft = arg7;
 
     part++;
@@ -101,14 +98,15 @@ void stars_shimmer_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, f32 arg5, s32 a
         t3 = (temp_f22 * 10.0f) - 90.0f;
         sinTheta = shim_sin_deg(theta);
         cosTheta = shim_cos_deg(theta);
-        sinT3 = shim_sin_deg(t3);
-        temp_f8 = (arg4 * 0.4) - (arg4 * 0.1 * sinT3);
-        temp_ft = (arg5 * 0.4) - (arg5 * 0.1 * sinT3);
+        temp_f22 = shim_sin_deg(t3);
+        temp_f8 = (arg4 * 0.4) - (arg4 * 0.1 * temp_f22);
+        temp_ft = (arg5 * 0.4) - (arg5 * 0.1 * temp_f22);
+        new_var = 1.0f; // TODO dumb temp and cast later required to match
         temp5 = (arg5 / (numParts - 1)) * (i - 1);
 
-        part->timeLeft = i + 30;
+        part->unk_1C = (u8) new_var;
         part->lifeTime = 0;
-        part->unk_1C = 1.0f;
+        part->timeLeft = i + 30;
 
         switch (type) {
             case 0:
@@ -140,84 +138,70 @@ void stars_shimmer_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, f32 arg5, s32 a
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "effects/stars_shimmer", stars_shimmer_main);
-#endif
 
 void stars_shimmer_init(EffectInstance* effect) {
 }
 
-// tons of issues
-#ifdef NON_EQUIVALENT
 void stars_shimmer_update(EffectInstance* effect) {
     StarsShimmerFXData* data = effect->data.starsShimmer;
-    u8** new_var = &D_E0044E04;
-    s32 count = 0;
-    f32 temp_f0;
-    f32 temp_f8;
-    f32 var_f20;
-    s32 temp_s3;
-    s32 temp_v1;
-    s32 temp_v1_2;
-    s32 new_var2;
-    s32 temp_v1_4;
-    s32 var_s2;
-    s32 var_v0;
+    StarsShimmerFXData* it = data;
+    s32 deadParts = 0;
+    s32 state = it->state;
+    s32 lifeTime;
     s32 i;
 
-    temp_s3 = data->unk_02;
-    data->timeLeft--;
-    data->lifeTime++;
-    var_s2 = data->lifeTime;
-    new_var2 = var_s2;
-    if (!(temp_s3 != 0 && temp_s3 != 1) || temp_s3 == 3 || temp_s3 >= 10) {
-        if (data->timeLeft < 0) {
+    it->timeLeft--;
+    it->lifeTime++;
+    lifeTime = it->lifeTime;
+    if (state == 0 || state == 1 || state == 3 || state >= 10) {
+        if (it->timeLeft < 0) {
             shim_remove_effect(effect);
             return;
         }
     }
 
-    for (i = 0; i < effect->numParts - 1; i++, data++) {
-        var_v0 = var_s2 + i;
-        switch (temp_s3) {
+    it++;
+    for (i = 0; i < effect->numParts - 1; i++, it++) {
+        switch (state) {
             case 0:
             case 1:
-                temp_v1 = var_s2 - 1;
-                data->unk_28 = (var_s2 + i) & 7;
-                data->unk_18 += -0.02;
-                if (temp_v1 < 14) {
-                    temp_f0 = (f32) D_E0044DF4[temp_v1] * 0.01;
-                    data->pos.x = data->unk_10 * temp_f0;
-                    data->pos.y = (data->unk_14 * temp_f0) + data->unk_18;
-                    data->unk_1C = (f32) (*new_var)[var_s2 - 1] * 0.01;
+                it->unk_28 = (lifeTime + i) & 7;
+                it->unk_18 += -0.02;
+                if (lifeTime - 1 < 14) {
+                    f32 temp_f0 = (f32) D_E0044DF4[lifeTime - 1] * 0.01;
+
+                    it->pos.x = it->unk_10 * temp_f0;
+                    it->pos.y = (it->unk_14 * temp_f0) + it->unk_18;
+                    it->unk_1C = (f32) D_E0044E04[lifeTime - 1] * 0.01;
                 } else {
-                    var_f20 = ((360.0f / (effect->numParts - 1)) * i) + 60.0f;
-                    if (i % 2) {
+                    f32 var_f20 = ((360.0f / (effect->numParts - 1)) * i) + 60.0f;
+
+                    if (i % 2 != 0) {
                         var_f20 -= 120.0f;
                     }
-                    data->unk_02 = 10;
-                    data->unk_10 = shim_sin_deg(var_f20);
-                    data->unk_14 = shim_cos_deg(var_f20);
-                    data->unk_18 = -0.05f;
+                    data->state = 10;
+                    it->unk_10 = shim_sin_deg(var_f20);
+                    it->unk_14 = shim_cos_deg(var_f20);
+                    it->unk_18 = -0.05f;
                 }
                 break;
             case 10:
             case 30:
-                data->unk_10 *= 0.96;
-                data->unk_14 *= 0.96;
-                data->unk_14 += data->unk_18;
-                data->unk_28 = (var_s2 + i) & 7;
-                data->unk_1C += (0.1 - data->unk_1C) * 0.1;
-                data->pos.x += data->unk_10;
-                data->pos.y += data->unk_14;
+                it->unk_28 = (lifeTime + i) & 7;
+                it->unk_10 *= 0.96;
+                it->unk_14 *= 0.96;
+                it->unk_14 += it->unk_18;
+                it->unk_1C += (0.1 - it->unk_1C) * 0.1;
+                it->pos.x += it->unk_10;
+                it->pos.y += it->unk_14;
                 break;
             case 3:
-                data->unk_28 = (var_s2 + i + i) & 7;
-                if (var_s2 - 1 < 14) {
-                    data->unk_1C = (f32) D_E0044E04[new_var2 - 1] * 0.01;
+                it->unk_28 = (lifeTime + i + i) & 7;
+                if (lifeTime - 1 < 14) {
+                    it->unk_1C = (f32) D_E0044E04[lifeTime - 1] * 0.01;
                     break;
                 }
-                data->unk_02 = 30;
+                data->state = 30;
                 break;
             case 2:
             case 4:
@@ -245,48 +229,43 @@ void stars_shimmer_update(EffectInstance* effect) {
             case 27:
             case 28:
             case 29:
-                var_v0 = var_s2 + i;
-                /* fallthrough */
             default:
-                data->unk_28 = (var_v0 + i) & 7;
-                if (data->timeLeft < 0) {
-                    count++;
+                it->unk_28 = (lifeTime + i + i) & 7;
+                if (it->timeLeft < 0) {
+                    deadParts++;
                 }
-                data->timeLeft--;
-                if (data->timeLeft >= 0x1FU) {
-                    data->unk_28 = -1;
+                it->timeLeft--;
+                if ((u32) it->timeLeft > 30) {
+                    it->unk_28 = -1;
                 } else {
-                    var_s2 = data->lifeTime + 1;
-                    data->lifeTime++;
-                    if (data->lifeTime < 14) {
-                        data->unk_1C = (f32) D_E0044E04[data->lifeTime] * 0.01;
-                        if (temp_s3 == 5) {
-                            data->unk_14 += data->unk_18;
-                            data->pos.y += data->unk_14;
+                    it->lifeTime++;
+                    lifeTime = it->lifeTime;
+                    if (lifeTime - 1 < 14) {
+                        it->unk_1C = (f32) D_E0044E04[lifeTime - 1] * 0.01;
+                        if (state == 5) {
+                            it->unk_14 += it->unk_18;
+                            it->pos.y += it->unk_14;
                         }
                     } else {
-                        data->unk_14 += data->unk_18;
-                        data->pos.y += data->unk_14;
-                        data->unk_1C += (0.1 - data->unk_1C) * 0.1;
+                        it->unk_14 += it->unk_18;
+                        it->pos.y += it->unk_14;
+                        it->unk_1C += (0.1 - it->unk_1C) * 0.1;
                     }
-                    if (temp_s3 == 4) {
-                        data->pos.x = data->unk_10 * shim_sin_deg(var_s2 * 12);
-                        data->pos.z = data->unk_10 * shim_cos_deg(var_s2 * 12);
+                    if (state == 4) {
+                        it->pos.x = (it->unk_10 * shim_sin_deg(lifeTime * 12));
+                        it->pos.z = (it->unk_10 * shim_cos_deg(lifeTime * 12));
                     } else {
-                        data->pos.x = data->unk_10;
+                        it->pos.x = it->unk_10;
                     }
-                    data->unk_14 *= 0.96;
+                    it->unk_14 = (it->unk_14 * 0.96);
                 }
-                break;
         }
     }
-    if (!(temp_s3 == 0 || temp_s3 == 1) && temp_s3 != 3 && temp_s3 < 10 && (count >= effect->numParts - 1)) {
+
+    if (state != 0 && state != 1 && state != 3 && state < 10 && deadParts >= effect->numParts - 1) {
         shim_remove_effect(effect);
     }
 }
-#else
-INCLUDE_ASM(s32, "effects/stars_shimmer", stars_shimmer_update);
-#endif
 
 void stars_shimmer_render(EffectInstance* effect) {
     RenderTask renderTask;
@@ -310,7 +289,7 @@ void stars_shimmer_appendGfx(void* effect) {
     s32 r, g, b;
     s32 i;
 
-    type = data->unk_02;
+    type = data->state;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));

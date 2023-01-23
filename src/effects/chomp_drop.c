@@ -177,7 +177,7 @@ void chomp_drop_appendGfx(void* effect) {
         savedGfxPos = gMasterGfxPos + 1;
         gSPBranchList(gMasterGfxPos, gMasterGfxPos + 0x41);
         gMasterGfxPos = savedGfxPos;
-        vtxTemp = savedGfxPos;
+        vtxTemp = (Vtx_t*) savedGfxPos;
 
         for (i = 0; i < 16; i++) {
             Vtx_t* vtx = &vtxTemp[i * 2];
