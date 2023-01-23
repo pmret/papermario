@@ -257,7 +257,7 @@ void stars_shimmer_update(EffectInstance* effect) {
                     } else {
                         it->pos.x = it->unk_10;
                     }
-                    it->unk_14 = (it->unk_14 * 0.96);
+                    it->unk_14 *= 0.96;
                 }
         }
     }
