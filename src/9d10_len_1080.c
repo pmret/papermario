@@ -49,7 +49,8 @@ void update_camera_mode_4(Camera* camera) {
         boomYaw = DEG_TO_RAD(camera->currentBoomYaw);
         sinBoom = sin_rad(boomYaw);
         cosBoom = cos_rad(boomYaw);
-        deltaY = deltaX = 0.0f;
+        deltaX = 0.0f;
+        deltaY = 0.0f;
         deltaZ = camera->currentBoomLength;
         deltaX2 = deltaX;
         deltaY2 = deltaY;
@@ -75,7 +76,8 @@ void update_camera_mode_4(Camera* camera) {
     boomYaw = DEG_TO_RAD(camera->currentBoomYaw);
     sinBoom = sin_rad(boomYaw);
     cosBoom = cos_rad(boomYaw);
-    deltaY = deltaX = 0.0f;
+    deltaX = 0.0f;
+    deltaY = 0.0f;
     deltaZ = camera->currentBoomLength;
     deltaX2 = deltaX;
     deltaY2 = deltaY;

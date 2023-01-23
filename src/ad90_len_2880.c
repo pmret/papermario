@@ -13,9 +13,9 @@ void update_camera_mode_6(Camera* camera) {
     f32 boomYaw;
     f32 new_var;
 
-    if (camera->unk_06 != 0 || camera->isChangingMap != 0) {
+    if (camera->unk_06 != 0 || camera->isChangingMap) {
         camera->unk_06 = 0;
-        camera->isChangingMap = 0;
+        camera->isChangingMap = FALSE;
         camera->auxPitch = 0;
         camera->auxBoomLength = 100;
         camera->lookAt_dist = 100;
@@ -40,7 +40,8 @@ void update_camera_mode_6(Camera* camera) {
         boomYaw = DEG_TO_RAD(camera->currentBoomYaw);
         sinBoom = sin_rad(boomYaw);
         cosBoom = cos_rad(boomYaw);
-        deltaY = deltaX = 0.0f;
+        deltaX = 0.0f;
+        deltaY = 0.0f;
         deltaZ = camera->currentBoomLength;
         deltaX2 = deltaX;
         deltaY2 = deltaY;
