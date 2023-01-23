@@ -5,8 +5,8 @@ enum {
     AB_OMO_0        = AreaByte(0),
     AB_OMO_1        = AreaByte(1),
     AB_OMO_2        = AreaByte(2),
-    AB_OMO_3        = AreaByte(3),
-    AB_OMO_4        = AreaByte(4),
+    AB_OMO09_IsPlayerNearSlotMachine    = AreaByte(3),
+    AB_OMO_CurrentPeachChoice           = AreaByte(4),
     AB_OMO_5        = AreaByte(5),
     AB_OMO_6        = AreaByte(6),
     AB_OMO_7        = AreaByte(7),
@@ -27,6 +27,10 @@ enum {
     AF_OMO07_NpcPool1       = AreaFlag(8),
     AF_OMO07_NpcPool2       = AreaFlag(9),
     AF_OMO07_NpcPool3       = AreaFlag(10),
+    AF_OMO09_StartBlock_DontBlink   = AreaFlag(11),
+    AF_OMO09_Block1_DontBlink       = AreaFlag(12),
+    AF_OMO09_Block2_DontBlink       = AreaFlag(13),
+    AF_OMO09_Block3_DontBlink       = AreaFlag(14),
     AF_OMO07_DoorOpening    = AreaFlag(15),
 };
 

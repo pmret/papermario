@@ -10755,7 +10755,7 @@ segments:
     - [0x9BD660, c, trd_09_0_header]
     - [0x9BD660, c, trd_09_1_main]
     - [0x9BD660, c, trd_09_2_entity]
-    - [0x9BD660, c, trd_09_3_npcs]
+    - [0x9BD660, c, trd_09_3_npc]
     - [0x9BD720, c, trd_09_4_demo]
     - [0x9BD830]
   - name: trd_10
@@ -14519,20 +14519,16 @@ segments:
     start: 0xDCCCD0
     vram: 0x80240000
     subsegments:
-    - [0xDCCCD0, c]
-    - [0xDCCFA0, c]
-    - [0xDCD3B0, c]
-    - [0xDCD3F0, c]
-    - [0xDCD6B0, c]
-    - [0xDD02E0, c]
-    - [0xDD03C0, data]
-    - [0xDD0480, data]
-    - [0xDD0750, data]
-    - [0xDD0900, data]
-    - [0xDD3520, data]
-    - [0xDD4150, data]
-    - [0xDD6BB0, data]
-    - [0xDD72F0]
+    - [0xDCCCD0, c, omo_09_0_header]
+    - [0xDCCCD0, c, omo_09_1_music]
+    - [0xDCCCD0, c, omo_09_2_main]
+    - [0xDCCCD0, c, omo_09_3_conveyors]
+    - [0xDCCFA0, c, omo_09_4_slot_machine]
+    - [0xDCD3B0, c, omo_09_5_gizmos]
+    - [0xDCD3F0, c, omo_09_6_entity]
+    - [0xDCD6B0, c, omo_09_7_npc]
+    - [0xDD02E0, c, omo_09_8_scenes]
+    - [0xDD03C0]
   - name: omo_10
     dir: world/area_omo/omo_10
     type: code

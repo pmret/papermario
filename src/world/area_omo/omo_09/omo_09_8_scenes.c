@@ -1,4 +1,4 @@
-#include "omo_07.h"
+#include "omo_09.h"
 #include "effects.h"
 
 s32 N(HoverOffsets)[] = {
@@ -58,24 +58,24 @@ EvtScript N(EVS_NpcAux_Kammy) = {
 
 EvtScript N(EVS_Scene_KammySetAmbush) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(GF_OMO07_SpawnedPeachChoice2, TRUE)
-    EVT_SET(AB_OMO_CurrentPeachChoice, GB_OMO_PeachChoice2)
+    EVT_SET(GF_OMO09_SpawnedPeachChoice3, TRUE)
+    EVT_SET(AB_OMO_CurrentPeachChoice, GB_OMO_PeachChoice3)
     EVT_SWITCH(AB_OMO_CurrentPeachChoice)
         EVT_CASE_EQ(0)
-            EVT_SET(MV_AmbushID, NPC_Fuzzy)
+            EVT_SET(MV_AmbushID, NPC_Pokey)
         EVT_CASE_EQ(1)
-            EVT_SET(MV_AmbushID, NPC_HammerBros)
+            EVT_SET(MV_AmbushID, NPC_Koopatrol)
         EVT_CASE_EQ(2)
-            EVT_SET(MV_AmbushID, ITEM_THUNDER_RAGE)
+            EVT_SET(MV_AmbushID, ITEM_SUPER_SODA)
     EVT_END_SWITCH
-    EVT_CALL(SetNpcPos, NPC_Kammy, 1000, 15, 0)
+    EVT_CALL(SetNpcPos, NPC_Kammy, 1820, 165, 0)
     EVT_CALL(SetNpcYaw, NPC_Kammy, 90)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim13)
     EVT_IF_NE(AB_OMO_CurrentPeachChoice, 2)
         EVT_CALL(SetNpcPos, MV_AmbushID, NPC_DISPOSE_LOCATION)
     EVT_END_IF
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 1060, 0, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 1060, 0, 0)
+    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 1900, 150, 0)
+    EVT_CALL(SetPanTarget, CAM_DEFAULT, 1900, 150, 0)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(350.0))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-7.5))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
@@ -95,12 +95,12 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim0F)
     EVT_ADD(LVar0, 55)
     EVT_CALL(PlaySoundAt, SOUND_2098, 0, LVar0, LVar1, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, 0, 0, 1, 15, 3, 8)
+    EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, 150, 0, 1, 15, 3, 8)
     EVT_WAIT(5)
     EVT_IF_NE(AB_OMO_CurrentPeachChoice, 2)
-        EVT_CALL(SetNpcPos, MV_AmbushID, LVar0, 0, 0)
+        EVT_CALL(SetNpcPos, MV_AmbushID, LVar0, 150, 0)
     EVT_ELSE
-        EVT_CALL(MakeItemEntity, MV_AmbushID, LVar0, 0, 0, ITEM_SPAWN_MODE_DECORATION, 0)
+        EVT_CALL(MakeItemEntity, MV_AmbushID, LVar0, 150, 0, ITEM_SPAWN_MODE_DECORATION, 0)
     EVT_END_IF
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim13)
@@ -111,7 +111,7 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
         EVT_CALL(ShowEmote, MV_AmbushID, EMOTE_QUESTION, 0, 20, TRUE, 0, 0, 0, 0)
         EVT_WAIT(5)
     EVT_END_IF
-    EVT_CALL(GotoMap, EVT_PTR("omo_07"), omo_07_ENTRY_0)
+    EVT_CALL(GotoMap, EVT_PTR("omo_09"), omo_09_ENTRY_0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
