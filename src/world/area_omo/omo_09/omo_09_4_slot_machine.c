@@ -772,12 +772,8 @@ s32 N(SlotMachineBlocks)[] = {
     MODEL_h3, 
 };
 
-typedef struct SlotMachineBlockData {
-    /* 0x00 */ s32 shadowIndexes[4];
-} SlotMachineBlockData; // size = 0x10
-
 API_CALLABLE(N(UpdateSlotMachineBlockShadows)) {
-    SlotMachineBlockData* blocks;
+    s32 (*shadowIDs)[4];
     Shadow* shadow;
     Model* model;
     f32 x, y, z;
@@ -787,16 +783,16 @@ API_CALLABLE(N(UpdateSlotMachineBlockShadows)) {
 
     if (isInitialCall) {
 
-        script->functionTempPtr[0] = blocks = heap_malloc(sizeof(*blocks));
+        script->functionTempPtr[0] = shadowIDs = heap_malloc(sizeof(*shadowIDs));
         for (i = 0; i < ARRAY_COUNT(N(SlotMachineBlocks)); i++) {
             model = get_model_from_list_index(get_model_list_index_from_tree_index(N(SlotMachineBlocks)[i]));
-            blocks->shadowIndexes[i] = create_shadow_type(1, model->center.x, model->center.y - 100.0f, model->center.z);
+            (*shadowIDs)[i] = create_shadow_type(1, model->center.x, model->center.y - 100.0f, model->center.z);
         }
     }
 
-    blocks = script->functionTempPtr[0];
+    shadowIDs = script->functionTempPtr[0];
     for (i = 0; i < ARRAY_COUNT(N(SlotMachineBlocks)); i++) {
-        shadow = get_shadow_by_index(blocks->shadowIndexes[i]);
+        shadow = get_shadow_by_index((*shadowIDs)[i]);
         model = get_model_from_list_index(get_model_list_index_from_tree_index(N(SlotMachineBlocks)[i]));
         x = model->center.x;
         y = model->center.y;

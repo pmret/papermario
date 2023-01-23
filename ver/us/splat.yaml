@@ -14547,12 +14547,13 @@ segments:
     start: 0xDDC830
     vram: 0x80240000
     subsegments:
-    - [0xDDC830, c]
-    - [0xDDCFC0, c]
-    - [0xDDDD00, data]
-    - [0xDDDD90, data]
-    - [0xDDEE80, data]
-    - [0xDDF300]
+    - [0xDDC830, c, omo_11_0_header]
+    - [0xDDC830, c, omo_11_1_music]
+    - [0xDDC830, c, omo_11_2_main]
+    - [0xDDC830, c, omo_11_3_gizmos]
+    - [0xDDCFC0, c, omo_11_4_entity]
+    - [0xDDDD00, c, omo_11_5_npc]
+    - [0xDDDD00]
   - name: omo_12
     dir: world/area_omo/omo_12
     type: code
