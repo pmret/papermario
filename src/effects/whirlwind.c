@@ -140,7 +140,7 @@ void whirlwind_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     queuedTask = shim_queue_render_task(&renderTask);
-    queuedTask->renderMode |= RENDER_TASK_FLAG_2;
+    queuedTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
 void func_E00CE470(void) {

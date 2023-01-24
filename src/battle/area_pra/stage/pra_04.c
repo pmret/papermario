@@ -70,7 +70,7 @@ EvtScript N(beforeBattle) = {
     EVT_SET(LVar2, 3000)
     EVT_SET(LVar3, 0)
     EVT_EXEC(N(802320D0))
-    EVT_CALL(func_802536A8, 1)
+    EVT_CALL(EnableBattleFloorReflections, TRUE)
     EVT_RETURN
     EVT_END
 };

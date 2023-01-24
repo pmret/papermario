@@ -879,7 +879,7 @@ typedef struct BattleStatus {
     /* 0x08E */ s8 initialEnemyCount; /* used for SP award bonus */
     /* 0x08F */ char unk_8F[1];
     /* 0x090 */ s16 unk_90;
-    /* 0x092 */ s8 unk_92;
+    /* 0x092 */ s8 reflectFlags;
     /* 0x093 */ s8 unk_93;
     /* 0x094 */ s8 unk_94;
     /* 0x095 */ s8 unk_95;

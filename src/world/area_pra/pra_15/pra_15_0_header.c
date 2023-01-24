@@ -1,6 +1,6 @@
 #include "pra_15.h"
 
-#include "world/common/todo/SetGameStatusUnk84_1.inc.c"
+#include "../common/MapInit_EnableFloorReflection.inc.c"
 
 EntryList N(Entrances) = {
     [pra_15_ENTRY_0]    {  487.0,  -60.0,  106.0,  270.0 },

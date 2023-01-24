@@ -148,7 +148,7 @@ void gather_magic_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_TASK_FLAG_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
 void gather_magic_appendGfx(void* effect) {

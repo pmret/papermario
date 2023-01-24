@@ -44,7 +44,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     sfx_stop_env_sounds();
     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-    gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
 
     gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_MARIO_WORLD;
     func_8002D160();

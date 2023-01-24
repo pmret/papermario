@@ -126,7 +126,7 @@ void ending_decals_render(EffectInstance* effect) {
     }
 
     retTask = shim_queue_render_task(renderTaskPtr);
-    retTask->renderMode |= RENDER_TASK_FLAG_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
 void ending_decals_appendGfx(void* effect) {

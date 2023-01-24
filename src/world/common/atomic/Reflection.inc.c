@@ -142,7 +142,7 @@ API_CALLABLE(N(EnableFloorReflection)){
         case REFLECTION_FLOOR_WALL:
         case REFLECTION_FLOOR:
             script->array[0] = create_worker_world(NULL, N(worker_reflect_player_floor));
-            gOverrideFlags |= GLOBAL_OVERRIDES_80;
+            gOverrideFlags |= GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
             break;
         case REFLECTION_WALL:
             break;

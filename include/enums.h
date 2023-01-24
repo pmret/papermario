@@ -3520,9 +3520,9 @@ enum RenderMode {
 };
 
 enum RenderTaskFlags {
-    RENDER_TASK_FLAG_ENABLED    = 0x01,
-    RENDER_TASK_FLAG_2          = 0x02,
-    RENDER_TASK_FLAG_20         = 0x20,
+    RENDER_TASK_FLAG_ENABLED        = 0x01,
+    RENDER_TASK_FLAG_REFLECT_FLOOR  = 0x02,
+    RENDER_TASK_FLAG_20             = 0x20,
 };
 
 enum ActorFlags {
@@ -4095,6 +4095,10 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_HAS_RUSH                      = 0x08000000,
     BS_FLAGS2_DROP_WHACKA_BUMP              = 0x10000000,
 };
+
+enum BattleStatusReflectionFlags {
+    BS_REFLECT_FLOOR    = 1,
+};;
 
 enum BattleStates {
     BATTLE_STATE_NEGATIVE_1                 = -1,
@@ -4707,7 +4711,7 @@ enum GlobalOverrides {
     GLOBAL_OVERRIDES_10                                         = 0x00000010,
     GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL                  = 0x00000020,
     GLOBAL_OVERRIDES_40                                         = 0x00000040,
-    GLOBAL_OVERRIDES_80                                         = 0x00000080,
+    GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION                    = 0x00000080,
     GLOBAL_OVERRIDES_DISABLE_BATTLES                            = 0x00000100,
     GLOBAL_OVERRIDES_200                                        = 0x00000200,
     GLOBAL_OVERRIDES_400                                        = 0x00000400,

@@ -1,7 +1,7 @@
 #include "pra_15.h"
 
-API_CALLABLE(N(func_80240020_D69830)) {
-    gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
+API_CALLABLE(N(DisableTotalFloorReflections)) {
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
     return ApiStatus_DONE2;
 }
 
@@ -31,7 +31,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1298, SURFACE_TYPE_SNOW)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deilie, SURFACE_TYPE_SNOW)
-    EVT_CALL(N(func_80240020_D69830))
+    EVT_CALL(N(DisableTotalFloorReflections))
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
     EVT_EXEC(N(EVS_SetupMusic))

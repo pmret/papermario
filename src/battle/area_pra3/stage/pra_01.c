@@ -8,7 +8,7 @@
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_CALL(func_802536A8, 1)
+    EVT_CALL(EnableBattleFloorReflections, TRUE)
     EVT_RETURN
     EVT_END
 };
