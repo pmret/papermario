@@ -563,6 +563,7 @@ MapConfig osr_maps[] = {
 
 /// Peach's Castle
 /// @bug There are two entries for kkj_26; the latter is unreachable.
+#include "area_kkj/kkj.h"
 MapConfig kkj_maps[] = {
     { MAP_UNSPLIT(kkj_00, 0x80241030), .bgName = "nok_bg", .init = (MapInit)0x80240000, .songVariation = 1, .sfxReverb = 3 },
     { MAP_UNSPLIT(kkj_01, 0x80240F10), .bgName = "nok_bg", .songVariation = 1, .sfxReverb = 3 },
@@ -754,6 +755,7 @@ MapConfig sam_maps[] = {
 };
 
 /// Crystal Palace
+#include "area_pra/pra.h"
 MapConfig pra_maps[] = {
     { MAP_UNSPLIT(pra_01, 0x80241400), .bgName = "yki_bg", .sfxReverb = 1, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_02, 0x802416C0), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
@@ -767,7 +769,7 @@ MapConfig pra_maps[] = {
     { MAP_UNSPLIT(pra_12, 0x80241220), .songVariation = 1, .sfxReverb = 1, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_13, 0x80241620), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_14, 0x80241200), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(pra_15, 0x80240050), .bgName = "yki_bg", .init = (MapInit)0x80240000, .songVariation = 1, .sfxReverb = 1 },
+    { MAP_WITH_INIT(pra_15), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(pra_16, 0x80240F60), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_18, 0x80240F50), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_19, 0x802419D0), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },

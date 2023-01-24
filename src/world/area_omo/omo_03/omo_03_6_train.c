@@ -113,7 +113,7 @@ EvtScript N(D_80246538_DAB778) = {
     EVT_CALL(FadeOutMusic, 0, 3000)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000106)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_WAIT(10)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o939, COLLIDER_FLAGS_UPPER_MASK)
@@ -147,10 +147,10 @@ s32 N(D_802466C0_DAB900)[] = {
 };
 
 EvtScript N(D_802466F8_DAB938) = {
-    EVT_CALL(FadeOutMusic, 0, 0x00000BB8)
+    EVT_CALL(FadeOutMusic, 0, 3000)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000106)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_WAIT(10)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o939, COLLIDER_FLAGS_UPPER_MASK)
