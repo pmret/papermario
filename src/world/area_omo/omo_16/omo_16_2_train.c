@@ -1,6 +1,6 @@
 #include "omo_16.h"
 
-#include "../train.inc.c"
+#include "../common/train.inc.c"
 
 EvtScript N(D_8024262C_DEE4FC) = {
     EVT_CALL(GetEntryID, LVar0)

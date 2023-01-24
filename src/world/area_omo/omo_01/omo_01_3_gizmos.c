@@ -1,29 +1,36 @@
-#include "omo_13.h"
+#include "omo_01.h"
 #include "model.h"
 
 EvtScript N(EVS_Gizmos_Wheels) = {
-    EVT_LABEL(0)
+    EVT_LOOP(0)
         EVT_CALL(MakeLerp, 0, -360, 100, EASING_LINEAR)
-        EVT_LABEL(1)
+        EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_ha1, LVar0, 0, 0, 1)
-            EVT_CALL(RotateModel, MODEL_ha2, LVar0, 0, 0, 1)
+            EVT_CALL(RotateModel, MODEL_ha1, LVar0, 1, 0, 1)
+            EVT_CALL(RotateModel, MODEL_ha2, LVar0, 1, 0, 1)
+            EVT_CALL(RotateModel, MODEL_ha3, LVar0, 1, 0, 1)
+            EVT_CALL(RotateModel, MODEL_ha4, LVar0, 1, 0, 1)
             EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(1)
+            EVT_IF_EQ(LVar1, 0)
+                EVT_BREAK_LOOP
             EVT_END_IF
-        EVT_GOTO(0)
+        EVT_END_LOOP
+    EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_Gizmos_Shutters) = {
-    EVT_LABEL(0)
+    EVT_LOOP(0)
         EVT_CALL(MakeLerp, 0, 160, 60, EASING_COS_IN_OUT)
         EVT_LABEL(1)
             EVT_CALL(UpdateLerp)
             EVT_CALL(RotateModel, MODEL_m1_1, LVar0, 0, -1, 0)
             EVT_CALL(RotateModel, MODEL_m1_2, LVar0, 0, 1, 0)
+            EVT_CALL(RotateModel, MODEL_m2_1, LVar0, 0, -1, 0)
+            EVT_CALL(RotateModel, MODEL_m2_2, LVar0, 0, 1, 0)
+            EVT_CALL(RotateModel, MODEL_m4_1, LVar0, 0, -1, 0)
+            EVT_CALL(RotateModel, MODEL_m4_2, LVar0, 0, 1, 0)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 1)
                 EVT_GOTO(1)
@@ -33,32 +40,38 @@ EvtScript N(EVS_Gizmos_Shutters) = {
             EVT_CALL(UpdateLerp)
             EVT_CALL(RotateModel, MODEL_m1_1, LVar0, 0, -1, 0)
             EVT_CALL(RotateModel, MODEL_m1_2, LVar0, 0, 1, 0)
+            EVT_CALL(RotateModel, MODEL_m2_1, LVar0, 0, -1, 0)
+            EVT_CALL(RotateModel, MODEL_m2_2, LVar0, 0, 1, 0)
+            EVT_CALL(RotateModel, MODEL_m4_1, LVar0, 0, -1, 0)
+            EVT_CALL(RotateModel, MODEL_m4_2, LVar0, 0, 1, 0)
             EVT_WAIT(2)
             EVT_IF_EQ(LVar1, 1)
                 EVT_GOTO(2)
             EVT_END_IF
-        EVT_GOTO(0)
+    EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_Gizmos_Clocks) = {
-    EVT_LABEL(0)
+    EVT_LOOP(0)
         EVT_CALL(MakeLerp, 0, -360, 100, EASING_LINEAR)
         EVT_LABEL(1)
             EVT_CALL(UpdateLerp)
             EVT_CALL(RotateModel, MODEL_hari1, LVar0, 0, 0, 1)
+            EVT_CALL(RotateModel, MODEL_hari2, LVar0, 1, 0, 1)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 1)
                 EVT_GOTO(1)
             EVT_END_IF
-        EVT_GOTO(0)
+    EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
 s32 N(RockingHorseModels)[] = {
-    MODEL_o829
+    MODEL_o353,
+    MODEL_o355,
 };
 
 API_CALLABLE(N(UpdateRockingHorses)) {
@@ -90,11 +103,12 @@ API_CALLABLE(N(UpdateRockingHorses)) {
     for (i = 0; i < ARRAY_COUNT(N(RockingHorseModels)); i++, horse++) {
         horse->rockPhase += horse->rockPhaseAngularVel;
         horse->rockPhase = clamp_angle(horse->rockPhase);
-        rockAngle = sin_rad((horse->rockPhase * 3.14f) / 180.0f) * 20.0f;
+        rockAngle = sin_deg(horse->rockPhase) * 20.0f;
         offsetY = SQ(rockAngle) / 90.0f;
         if (i == 0) {
             if ((horse->lastRockAngle >= 0.0f && rockAngle < 0.0f) || (horse->lastRockAngle < 0.0f && rockAngle >= 0.0f)) {
-                sfx_play_sound_at_position(SOUND_CREAKY_ROCKING_CHAIR, 0, -320.0f, 0.0f, 95.0f);
+                // different among UpdateRockingHorses functions
+                sfx_play_sound_at_position(SOUND_CREAKY_ROCKING_CHAIR, 0, -185.0f, 0.0f, 160.0f);
             }
             horse->lastRockAngle = rockAngle;
         }

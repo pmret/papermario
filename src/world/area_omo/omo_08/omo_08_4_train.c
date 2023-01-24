@@ -1,7 +1,7 @@
 #include "omo_08.h"
 
-#include "../train.inc.c"
-#include "../station_switches.inc.c"
+#include "../common/train.inc.c"
+#include "../common/station_switches.inc.c"
 
 Vec2i N(D_80246740_DCAB10) = {
     -145, -110 

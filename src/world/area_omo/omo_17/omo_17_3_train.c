@@ -1,6 +1,6 @@
 #include "omo_17.h"
 
-#include "../train.inc.c"
+#include "../common/train.inc.c"
 
 EvtScript N(D_80245CEC_DF4B8C) = {
     EVT_LABEL(0)

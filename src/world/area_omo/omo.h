@@ -32,6 +32,7 @@ enum {
     AF_OMO09_Block2_DontBlink       = AreaFlag(13),
     AF_OMO09_Block3_DontBlink       = AreaFlag(14),
     AF_OMO07_DoorOpening            = AreaFlag(15),
+    AF_OMO_11                       = AreaFlag(17),
 };
 
 extern MapSettings omo_01_settings;

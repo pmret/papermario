@@ -5,7 +5,7 @@
 #include "dead_structs.h"
 #endif
 
-void N(UnkFloAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
+void N(AvoidPlayerAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -122,7 +122,7 @@ void N(UnkFloAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, EnemyDe
     script->AI_TEMP_STATE = AI_STATE_CHASE;
 }
 
-void N(UnkFloAI_Chase)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
+void N(AvoidPlayerAI_Chase)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
@@ -149,7 +149,7 @@ void N(UnkFloAI_Chase)(Evt* script, MobileAISettings* npcAISettings, EnemyDetect
     }
 }
 
-void N(UnkFloAI_LosePlayer)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
+void N(AvoidPlayerAI_LosePlayer)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -159,7 +159,7 @@ void N(UnkFloAI_LosePlayer)(Evt* script, MobileAISettings* npcAISettings, EnemyD
     }
 }
 
-ApiStatus N(UnkFloAI_Main)(Evt* script, s32 isInitialCall) {
+ApiStatus N(AvoidPlayerAI_Main)(Evt* script, s32 isInitialCall) {
     #ifdef _DEAD_H_
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     #else
@@ -224,12 +224,12 @@ ApiStatus N(UnkFloAI_Main)(Evt* script, s32 isInitialCall) {
             basic_ai_found_player_jump(script, npcAISettings, territoryPtr);
             break;
         case AI_STATE_CHASE_INIT:
-            N(UnkFloAI_ChaseInit)(script, npcAISettings, territoryPtr);
+            N(AvoidPlayerAI_ChaseInit)(script, npcAISettings, territoryPtr);
         case AI_STATE_CHASE:
-            N(UnkFloAI_Chase)(script, npcAISettings, territoryPtr);
+            N(AvoidPlayerAI_Chase)(script, npcAISettings, territoryPtr);
             break;
         case AI_STATE_LOSE_PLAYER:
-            N(UnkFloAI_LosePlayer)(script, npcAISettings, territoryPtr);
+            N(AvoidPlayerAI_LosePlayer)(script, npcAISettings, territoryPtr);
             break;
         case AI_STATE_SUSPEND:
             basic_ai_suspend(script);

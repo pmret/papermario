@@ -1,6 +1,6 @@
 #include "ShyGuy.h"
 
-NpcSettings N(NpcSettings_ShyGuy_NoAI) = {
+NpcSettings N(NpcSettings_ShyGuy_Stationary) = {
     .height = 23,
     .radius = 22,
     .level = 14,

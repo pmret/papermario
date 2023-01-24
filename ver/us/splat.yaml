@@ -14411,14 +14411,13 @@ segments:
     start: 0xD9AEF0
     vram: 0x80240000
     subsegments:
-    - [0xD9AEF0, c]
-    - [0xD9B150, c]
-    - [0xD9BB20, data]
-    - [0xD9BBA0, data]
-    - [0xD9BD50, data]
-    - [0xD9C200, data]
-    - [0xD9D250, data]
-    - [0xD9D330]
+    - [0xD9AEF0, c, omo_01_0_header]
+    - [0xD9AEF0, c, omo_01_1_music]
+    - [0xD9AEF0, c, omo_01_2_main]
+    - [0xD9AEF0, c, omo_01_3_gizmos]
+    - [0xD9B150, c, omo_01_4_npc]
+    - [0xD9BB20, c, omo_01_5_entity]
+    - [0xD9BB20]
   - name: omo_02
     dir: world/area_omo/omo_02
     type: code
@@ -14589,12 +14588,11 @@ segments:
     start: 0xDE56B0
     vram: 0x80240000
     subsegments:
-    - [0xDE56B0, c]
-    - [0xDE5810, c]
-    - [0xDE5C70, data]
-    - [0xDE5D00, data]
-    - [0xDE5FA0, data]
-    - [0xDE8760]
+    - [0xDE56B0, c, omo_14_0_header]
+    - [0xDE56B0, c, omo_14_1_music]
+    - [0xDE56B0, c, omo_14_2_main]
+    - [0xDE5810, c, omo_14_3_npc]
+    - [0xDE5C70]
   - name: omo_15
     dir: world/area_omo/omo_15
     type: code

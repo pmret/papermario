@@ -75,6 +75,7 @@ EvtScript N(EVS_ShyGuy_CarryItem) = {
     EVT_END
 };
 
+
 EvtScript N(EVS_NpcDefeat_ShyGuy_Thief) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)

@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(DarkRoomUpdate)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(DarkRoomUpdate)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
 
