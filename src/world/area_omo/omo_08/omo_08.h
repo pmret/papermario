@@ -43,7 +43,7 @@ enum {
 
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_SetupMusic);
-extern EvtScript N(EVS_TryTrainEntry);
+extern EvtScript N(EVS_SetupTrain);
 extern EvtScript N(EVS_80247100);
 extern EvtScript N(EVS_SetupBoxes);
 extern EvtScript N(EVS_MakeEntities);

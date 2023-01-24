@@ -7,7 +7,7 @@ extern s32 D_802435B0_DA0A80[];
 
 ApiStatus func_80240040_D9D510(Evt* script, s32 isInitialCall) {
     Matrix4f sp18, sp58;
-    UnkOmo* it;
+    RockingHorse* it;
     Model* model;
     f32 temp_f20;
     f32 temp_f24;
@@ -20,34 +20,34 @@ ApiStatus func_80240040_D9D510(Evt* script, s32 isInitialCall) {
         for (i = 0; i < ARRAY_COUNT(D_802434F8_DA09C8); i++, it++) {
             s32 treeIndex = D_802434F8_DA09C8[i];
 
-            it->treeIndex = treeIndex;
+            it->modelID = treeIndex;
             model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
-            it->unk_00 = model->center.x;
-            it->unk_04 = model->center.z;
-            it->unk_0C = 3.5f;
-            it->unk_10 = 0;
-            it->unk_08 = 0;
+            it->posX = model->center.x;
+            it->posZ = model->center.z;
+            it->rockPhaseAngularVel = 3.5f;
+            it->rockPhase = 0;
+            it->lastRockAngle = 0;
         }
     }
 
     it = script->functionTempPtr[0];
     for (i = 0; i < ARRAY_COUNT(D_802434F8_DA09C8); i++, it++) {
-        it->unk_10 += it->unk_0C;
-        it->unk_10 = clamp_angle(it->unk_10);
-        temp_f20 = sin_rad((it->unk_10 * 3.14f) / 180.0f) * 20.0f;
+        it->rockPhase += it->rockPhaseAngularVel;
+        it->rockPhase = clamp_angle(it->rockPhase);
+        temp_f20 = sin_rad((it->rockPhase * 3.14f) / 180.0f) * 20.0f;
         temp_f24 = SQ(temp_f20) / 90.0f;
         if (i == 0) {
-            if ((it->unk_08 >= 0.0f && temp_f20 < 0.0f) || (it->unk_08 < 0.0f && temp_f20 >= 0.0f)) {
+            if ((it->lastRockAngle >= 0.0f && temp_f20 < 0.0f) || (it->lastRockAngle < 0.0f && temp_f20 >= 0.0f)) {
                 sfx_play_sound_at_position(SOUND_CREAKY_ROCKING_CHAIR, 0, -706.0f, 0.0f, 102.0f);
             }
-            it->unk_08 = temp_f20;
+            it->lastRockAngle = temp_f20;
         }
-        model = get_model_from_list_index(get_model_list_index_from_tree_index(it->treeIndex));
+        model = get_model_from_list_index(get_model_list_index_from_tree_index(it->modelID));
         model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
-        guTranslateF(sp18, -it->unk_00, 0.0f, -it->unk_04);
+        guTranslateF(sp18, -it->posX, 0.0f, -it->posZ);
         guRotateF(sp58, temp_f20, 0.0f, 0.0f, 1.0f);
         guMtxCatF(sp18, sp58, model->transformMatrix);
-        guTranslateF(sp18, it->unk_00, temp_f24, it->unk_04);
+        guTranslateF(sp18, it->posX, temp_f24, it->posZ);
         guMtxCatF(model->transformMatrix, sp18, model->transformMatrix);
     }
     return ApiStatus_BLOCK;
@@ -91,7 +91,7 @@ void func_802402C0_D9D790(Gfx* displayList, s32* outDist) {
     } while (cmd != G_ENDDL);
 }
 
-typedef struct UnkOmoThing {
+typedef struct OmoUnkThing {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f center;
     /* 0x10 */ Vec3f unk_10;
@@ -104,13 +104,13 @@ typedef struct UnkOmoThing {
     /* 0x44 */ s32 colliderID;
     /* 0x48 */ Matrix4f transformMatrix;
     /* 0x88 */ s32 unk_88;
-} UnkOmoThing; // size = 0x8C
+} OmoUnkThing; // size = 0x8C
 
 ApiStatus func_8024043C_D9D90C(Evt* script, s32 isInitialCall) {
     Matrix4f sp18, sp58, sp98, spD8;
     Model* model;
-    UnkOmoThing* data;
-    UnkOmoThing* it;
+    OmoUnkThing* data;
+    OmoUnkThing* it;
     u32 i;
     s32 j, k;
 
@@ -118,7 +118,7 @@ ApiStatus func_8024043C_D9D90C(Evt* script, s32 isInitialCall) {
         script->functionTempPtr[0] = heap_malloc(sizeof(*data) * 12);
         script->functionTemp[1] = 0;
 
-        it = (UnkOmoThing*) script->functionTempPtr[0];
+        it = (OmoUnkThing*) script->functionTempPtr[0];
         for (i = 0; i < ARRAY_COUNT(D_80243580_DA0A50); i++, it++) {
             it->treeIndex = D_80243580_DA0A50[i];
             it->colliderID = D_802435B0_DA0A80[i];

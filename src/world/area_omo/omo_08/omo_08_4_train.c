@@ -288,7 +288,7 @@ s32 N(D_80247438_DCB808)[] = {
     -1, -1, -1 
 };
 
-EvtScript N(EVS_TryTrainEntry) = {
+EvtScript N(EVS_SetupTrain) = {
     EVT_EXEC_WAIT(N(EVS_SetupSwitches))
     EVT_CALL(GetLoadType, LVar1)
     EVT_IF_EQ(LVar1, LOAD_FROM_FILE_SELECT)

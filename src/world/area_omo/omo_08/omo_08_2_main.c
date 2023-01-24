@@ -35,7 +35,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC_WAIT(N(EVS_SetupMusic))
-    EVT_EXEC_WAIT(N(EVS_TryTrainEntry))
+    EVT_EXEC_WAIT(N(EVS_SetupTrain))
     EVT_EXEC_WAIT(N(EVS_SetupBoxes))
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)

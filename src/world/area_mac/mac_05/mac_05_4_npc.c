@@ -275,7 +275,7 @@ API_CALLABLE(N(func_80242E84_854FF4)) {
             }
             break;
         case 1:
-            if (evt_get_variable(NULL, MapFlag(1)) != 0) {
+            if (evt_get_variable(NULL, MF_Unk_01)) {
                 npc->pos.x += 3.0f;
                 script->functionTemp[1]--;
                 if (script->functionTemp[1] <= 0) {

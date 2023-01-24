@@ -2478,14 +2478,14 @@ typedef struct PartnerDMAData {
     /* 0x10 */ s32 y;
 } PartnerDMAData; // size = 0x14
 
-typedef struct UnkOmo {
-    /* 0x00 */ f32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ s32 treeIndex;
-} UnkOmo; // size = 0x18
+typedef struct RockingHorse {
+    /* 0x00 */ f32 posX;
+    /* 0x04 */ f32 posZ;
+    /* 0x08 */ f32 lastRockAngle;
+    /* 0x0C */ f32 rockPhaseAngularVel;
+    /* 0x10 */ f32 rockPhase;
+    /* 0x14 */ s32 modelID;
+} RockingHorse; // size = 0x18
 
 typedef struct struct_D_802EB620 {
     /* 0x00 */ s32 unk_00;
