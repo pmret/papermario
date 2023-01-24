@@ -317,6 +317,10 @@ typedef struct AlUnkGamma {
     /* 0x14 */ struct AuPVoice* pvoice_14;
 } AlUnkGamma; // size = 0x18
 
+ // ALDMAproc in PM supposedly has an extra arg added, so that's why we have ALDMAproc2 and ALDMANew2
+typedef s32 (*ALDMAproc2)(s32 addr, s32 len, void *state, u8 arg3);
+typedef ALDMAproc2 (*ALDMANew2)(void *state);
+
 // based on ALLoadFilter
 typedef struct AuLoadFilter {
     /* 0x04 */ ADPCM_STATE* dc_state;
@@ -324,7 +328,7 @@ typedef struct AuLoadFilter {
     /* 0x0C */ ALRawLoop dc_loop;
     /* 0x18 */ struct Instrument* instrument;
     /* 0x1C */ s32 dc_bookSize;
-    /* 0x20 */ s32 (*dc_dmaFunc)(void* addr, s32 len, void* state, u8 unk); // ALDMAproc with extra arg
+    /* 0x20 */ ALDMAproc2 dc_dmaFunc;
     /* 0x24 */ NUDMAState* dc_dmaState;
     /* 0x28 */ s32 dc_sample;
     /* 0x2C */ s32 dc_lastsam;
@@ -381,7 +385,7 @@ typedef struct AuSynDriver {
     /* 0x08 */ s32 outputRate;
     /* 0x0C */ s32 num_pvoice;
     /* 0x10 */ s32 unk_num_gamma;
-    /* 0x14 */ ALDMANew* dmaNew; // pointer to nuAuDmaNew
+    /* 0x14 */ ALDMANew2 dmaNew; // pointer to nuAuDmaNew
     /* 0x18 */ ALHeap* heap;
     /* 0x1C */ AuPVoice* pvoices;
     /* 0x20 */ AlUnkGamma* al_unk_gamma;

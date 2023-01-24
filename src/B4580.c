@@ -1013,7 +1013,7 @@ void play_model_animation(s32 index, s16* animPos) {
     ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~0x800];
 
     if (animator->animationBuffer != NULL) {
-        animPos = ((s32)animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // TODO: array access?
+        animPos = (s16*) (((s32)animPos & 0xFFFFFF) + (s32)animator->animationBuffer); // TODO: array access? / cleanup
     }
     animator->animReadPos = animPos;
     animator->savedReadPos = animPos;
@@ -1027,7 +1027,7 @@ void play_model_animation_starting_from(s32 index, s16* animPos, s32 framesToSki
     s32 i;
 
     if (animator->animationBuffer != NULL) {
-        animPos = ((s32)animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // TODO: array access?
+        animPos = (s16*) (((s32)animPos & 0xFFFFFF) + (s32)animator->animationBuffer); // TODO: array access? / cleanup
     }
 
     animator->animReadPos = animPos;

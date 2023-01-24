@@ -172,7 +172,7 @@ void func_80052BF8(AlUnkVoice* voice, AlUnkInstrumentData* arg1) {
     s32 x;
 
     voice->unk_14.unk_00 = arg1->unk_00;
-    voice->unk_1C = voice->unk_14.unk_00;
+    voice->unk_1C = (u8*) voice->unk_14.unk_00;
     voice->unk_14.unk_04 = arg1->unk_04;
     voice->unk_30 = 0x80;
     voice->unk_34 = 0;
