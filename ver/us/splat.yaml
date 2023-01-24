@@ -14562,12 +14562,12 @@ segments:
     start: 0xDDF310
     vram: 0x80240000
     subsegments:
-    - [0xDDF310, c]
-    - [0xDDF730, c]
-    - [0xDDF7D0, data]
-    - [0xDDF960, data]
-    - [0xDDFB60, data]
-    - [0xDE2470]
+    - [0xDDF310, c, omo_12_0_header]
+    - [0xDDF310, c, omo_12_1_music]
+    - [0xDDF310, c, omo_12_2_main]
+    - [0xDDF310, c, omo_12_3_npc]
+    - [0xDDF730, c, omo_12_4_partner]
+    - [0xDDF7D0]
   - name: omo_13
     dir: world/area_omo/omo_13
     type: code

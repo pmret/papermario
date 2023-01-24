@@ -46,6 +46,7 @@ ApiStatus ClearDefeatedEnemies(Evt* script, s32 isInitialCall);
 ApiStatus SetEnemyFlagBits(Evt* script, s32 isInitialCall);
 ApiStatus GetSelfAnimationFromTable(Evt* script, s32 isInitialCall);
 ApiStatus SetBattleAsScripted(Evt* script, s32 isInitialCall);
+ApiStatus GetEncounterTriggerHitTier(Evt* script, s32 isInitialCall);
 ApiStatus SetOwnerInstigatorValue(Evt* script, s32 isInitialCall);
 ApiStatus ShowCoinCounter(Evt* script, s32 isInitialCall);
 ApiStatus MakeEntity(Evt* script, s32 isInitialCall);
