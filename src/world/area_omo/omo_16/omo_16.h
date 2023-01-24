@@ -9,7 +9,7 @@
 #include "mapfs/omo_16_shape.h"
 #include "mapfs/omo_16_hit.h"
 
-#include "sprite/npc/TrainStationToad.h"
+#include "sprite/npc/TrainToad.h"
 
 enum {
 	NPC_Conductor       = 0,

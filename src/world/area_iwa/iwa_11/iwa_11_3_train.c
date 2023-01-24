@@ -279,7 +279,7 @@ EvtScript N(EVS_UpdatePassengerPos) = {
         EVT_END_IF
         EVT_ADD(LVar1, -6)
         EVT_ADD(LVar2, -40)
-        EVT_CALL(SetNpcPos, NPC_TrainConductorToad, LVar0, LVar1, LVar2)
+        EVT_CALL(SetNpcPos, NPC_TrainToad, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_RETURN

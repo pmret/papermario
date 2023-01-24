@@ -9,7 +9,7 @@
 #include "mapfs/omo_17_shape.h"
 #include "mapfs/omo_17_hit.h"
 
-#include "sprite/npc/TrainStationToad.h"
+#include "sprite/npc/TrainToad.h"
 #include "sprite/npc/SpyGuy.h"
 #include "sprite/npc/PyroGuy.h"
 #include "sprite/npc/GrooveGuy.h"

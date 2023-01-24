@@ -9,19 +9,19 @@ EvtScript N(D_8024262C_DEE4FC) = {
         EVT_SWITCH(GB_OMO_TrainDestination)
             EVT_CASE_EQ(0)
                 EVT_IF_EQ(AB_OMO_6, 1)
-                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainStationToad_Talk, ANIM_TrainStationToad_Idle, 5, MSG_CH4_000B)
+                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 5, MSG_CH4_000B)
                 EVT_END_IF
             EVT_CASE_EQ(1)
                 EVT_IF_EQ(AB_OMO_6, 2)
-                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainStationToad_Talk, ANIM_TrainStationToad_Idle, 5, MSG_CH4_000C)
+                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 5, MSG_CH4_000C)
                 EVT_END_IF
             EVT_CASE_EQ(2)
                 EVT_IF_EQ(AB_OMO_6, 3)
-                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainStationToad_Talk, ANIM_TrainStationToad_Idle, 5, MSG_CH4_000D)
+                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 5, MSG_CH4_000D)
                 EVT_END_IF
             EVT_CASE_EQ(3)
                 EVT_IF_EQ(AB_OMO_6, 0)
-                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainStationToad_Talk, ANIM_TrainStationToad_Idle, 5, MSG_CH4_000A)
+                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 5, MSG_CH4_000A)
                 EVT_END_IF
         EVT_END_SWITCH
     EVT_ELSE
@@ -29,19 +29,19 @@ EvtScript N(D_8024262C_DEE4FC) = {
         EVT_SWITCH(GB_OMO_TrainDestination)
             EVT_CASE_EQ(0)
                 EVT_IF_EQ(AB_OMO_6, 0)
-                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainStationToad_Talk, ANIM_TrainStationToad_Idle, 5, MSG_CH4_000A)
+                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 5, MSG_CH4_000A)
                 EVT_END_IF
             EVT_CASE_EQ(1)
                 EVT_IF_EQ(AB_OMO_6, 1)
-                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainStationToad_Talk, ANIM_TrainStationToad_Idle, 5, MSG_CH4_000B)
+                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 5, MSG_CH4_000B)
                 EVT_END_IF
             EVT_CASE_EQ(2)
                 EVT_IF_EQ(AB_OMO_6, 2)
-                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainStationToad_Talk, ANIM_TrainStationToad_Idle, 5, MSG_CH4_000C)
+                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 5, MSG_CH4_000C)
                 EVT_END_IF
             EVT_CASE_EQ(3)
                 EVT_IF_EQ(AB_OMO_6, 3)
-                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainStationToad_Talk, ANIM_TrainStationToad_Idle, 5, MSG_CH4_000D)
+                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 5, MSG_CH4_000D)
                 EVT_END_IF
         EVT_END_SWITCH
     EVT_END_IF

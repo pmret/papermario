@@ -9,11 +9,11 @@
 #include "mapfs/omo_10_shape.h"
 #include "mapfs/omo_10_hit.h"
 
-#include "sprite/npc/TrainStationToad.h"
+#include "sprite/npc/TrainToad.h"
 
 enum {
     NPC_Conductor           = 0,
-    NPC_TrainStationToad    = 1,
+    NPC_TrainToad    = 1,
 };
 
 enum {

@@ -333,7 +333,7 @@ EvtScript N(EVS_UpdatePassengerPos) = {
         EVT_END_IF
         EVT_ADD(LVar1, -6)
         EVT_ADD(LVar2, -40)
-        EVT_CALL(SetNpcPos, NPC_TrainStationToad_02, LVar0, LVar1, LVar2)
+        EVT_CALL(SetNpcPos, NPC_TrainToad_02, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_RETURN
@@ -453,7 +453,7 @@ EvtScript N(EVS_ArriveFromMtRugged) = {
     EVT_CALL(EnablePartnerAI)
     EVT_SET(MF_TrainArrivePlayerDisembark, TRUE)
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, NPC_TrainStationToad_01, ANIM_TrainStationToad_White_Talk, ANIM_TrainStationToad_White_Idle, 0, MSG_MAC_Station_0005)
+    EVT_CALL(SpeakToPlayer, NPC_TrainToad_01, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, MSG_MAC_Station_0005)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, FALSE)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -484,7 +484,7 @@ EvtScript N(EVS_DepartForMtRugged) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_kisya3, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_humikiri, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_fumikiri, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(SetNpcFlagBits, NPC_TrainStationToad_01, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_TrainToad_01, NPC_FLAG_100, TRUE)
     EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
     EVT_CALL(PlayerMoveTo, -425, 70, 0)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
@@ -542,7 +542,7 @@ EvtScript N(EVS_DepartForMtRugged) = {
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_TrainStationToad_02, ANIM_TrainStationToad_Talk, ANIM_TrainStationToad_Still, 5, MSG_MAC_Station_0009)
+    EVT_CALL(SpeakToPlayer, NPC_TrainToad_02, ANIM_TrainToad_Talk, ANIM_TrainToad_Still, 5, MSG_MAC_Station_0009)
     EVT_CALL(PlaySound, SOUND_82)
     EVT_THREAD
         EVT_LOOP(1000)

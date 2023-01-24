@@ -9,12 +9,12 @@
 #include "mapfs/iwa_10_shape.h"
 #include "mapfs/iwa_10_hit.h"
 
-#include "sprite/npc/TrainStationToad.h"
+#include "sprite/npc/TrainToad.h"
 #include "sprite/npc/WorldParakarry.h"
 
 enum {
-    NPC_TrainStationToad_01     = 0,
-    NPC_TrainStationToad_02     = 1,
+    NPC_TrainToad_01     = 0,
+    NPC_TrainToad_02     = 1,
     NPC_Dryite                  = 2,
     NPC_ThreeSisters_01         = 3,
     NPC_Parakarry               = 4,

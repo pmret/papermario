@@ -1,19 +1,19 @@
 #include "iwa_10.h"
 
-#include "world/common/npc/TrainConductorToad.inc.c"
+#include "world/common/npc/TrainToad.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/npc/Dryite_Stationary.inc.c"
 
 #include "world/common/complete/GiveReward.inc.c"
 
-EvtScript N(EVS_NpcInteract_TrainStationToad_01) = {
+EvtScript N(EVS_NpcInteract_TrainToad_01) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, iwa_10_ENTRY_0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainStationToad_White_Talk, ANIM_TrainStationToad_White_Idle, 0, MSG_CH2_0001)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, MSG_CH2_0001)
     EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainStationToad_White_Talk, ANIM_TrainStationToad_White_Idle, 0, MSG_CH2_0002)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, MSG_CH2_0002)
         EVT_CALL(ShowChoice, MSG_Choice_000C)
-        EVT_CALL(EndSpeech, NPC_SELF, ANIM_TrainStationToad_White_Talk, ANIM_TrainStationToad_White_Idle, 0)
+        EVT_CALL(EndSpeech, NPC_SELF, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0)
         EVT_IF_EQ(LVar0, 0)
             EVT_EXEC(N(EVS_DepartForToadTown))
         EVT_ELSE
@@ -23,13 +23,13 @@ EvtScript N(EVS_NpcInteract_TrainStationToad_01) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_TrainStationToad_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TrainStationToad_01)))
+EvtScript N(EVS_NpcInit_TrainToad_01) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TrainToad_01)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_TrainStationToad_02) = {
+EvtScript N(EVS_NpcInit_TrainToad_02) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, iwa_10_ENTRY_0)
@@ -122,25 +122,25 @@ EvtScript N(EVS_NpcInit_ThreeSisters_01) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TrainConductorToad)[] = {
+StaticNpc N(NpcData_TrainToad)[] = {
     {
-        .id = NPC_TrainStationToad_01,
-        .settings = &N(NpcSettings_TrainConductorToad),
+        .id = NPC_TrainToad_01,
+        .settings = &N(NpcSettings_TrainToad),
         .pos = { -440.0f, 20.0f, 110.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_TrainStationToad_01),
+        .init = &N(EVS_NpcInit_TrainToad_01),
         .drops = TRAIN_CONDUCTOR_DROPS,
         .animations = TRAIN_CONDUCTOR_WHITE_ANIMS,
         .tattle = MSG_NpcTattle_IWA_StationMaster,
     },
     {
-        .id = NPC_TrainStationToad_02,
-        .settings = &N(NpcSettings_TrainConductorToad),
+        .id = NPC_TrainToad_02,
+        .settings = &N(NpcSettings_TrainToad),
         .pos = { -425.0f, 70.0f, -20.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_TrainStationToad_02),
+        .init = &N(EVS_NpcInit_TrainToad_02),
         .drops = TRAIN_CONDUCTOR_DROPS,
         .animations = TRAIN_CONDUCTOR_ANIMS,
     },
@@ -224,7 +224,7 @@ StaticNpc N(NpcData_Dryite)[] = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_TrainConductorToad)),
+    NPC_GROUP(N(NpcData_TrainToad)),
     NPC_GROUP(N(NpcData_Toad)),
     NPC_GROUP(N(NpcData_ThreeSisters)),
     NPC_GROUP(N(NpcData_Dryite)),
