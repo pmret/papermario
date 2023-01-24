@@ -8,23 +8,23 @@
 // - omo_02 (unused)
 
 // custom states for this AI
-enum AiStateStationary {
-    AI_STATE_STATIONARY_IDLE_INIT           = 0,
-    AI_STATE_STATIONARY_IDLE                = 1,
-    AI_STATE_STATIONARY_RETURN_HOME_INIT    = 15,
-    AI_STATE_STATIONARY_RETURN_HOME         = 16
+enum AiStateGuard {
+    AI_STATE_GUARD_IDLE_INIT           = 0,
+    AI_STATE_GUARD_IDLE                = 1,
+    AI_STATE_GUARD_RETURN_HOME_INIT    = 15,
+    AI_STATE_GUARD_RETURN_HOME         = 16
 };
 
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
 
-void N(StationaryAI_IdleInit)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(GuardAI_IdleInit)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
-    script->AI_TEMP_STATE = AI_STATE_STATIONARY_IDLE;
+    script->AI_TEMP_STATE = AI_STATE_GUARD_IDLE;
 
     if (enemy->flags & ENEMY_FLAG_100000) {
         npc->yaw = enemy->varTable[0];
@@ -37,7 +37,7 @@ void N(StationaryAI_IdleInit)(Evt* script, StationaryAISettings* aiSettings, Ene
     }
 }
 
-void N(StationaryAI_Idle)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(GuardAI_Idle)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
@@ -55,7 +55,7 @@ void N(StationaryAI_Idle)(Evt* script, StationaryAISettings* aiSettings, EnemyDe
     }
 }
 
-void N(StationaryAI_AlertInit)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(GuardAI_AlertInit)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->jumpVelocity = 10.0f;
@@ -65,7 +65,7 @@ void N(StationaryAI_AlertInit)(Evt* script, StationaryAISettings* aiSettings, En
     script->AI_TEMP_STATE = AI_STATE_ALERT;
 }
 
-void N(StationaryAI_Alert)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(GuardAI_Alert)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->pos.y += npc->jumpVelocity;
@@ -79,7 +79,7 @@ void N(StationaryAI_Alert)(Evt* script, StationaryAISettings* aiSettings, EnemyD
     }
 }
 
-void N(StationaryAI_ChaseInit)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(GuardAI_ChaseInit)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 tempAngle;
@@ -106,7 +106,7 @@ void N(StationaryAI_ChaseInit)(Evt* script, StationaryAISettings* aiSettings, En
     script->AI_TEMP_STATE = AI_STATE_CHASE;
 }
 
-void N(StationaryAI_Chase)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* arg2) {
+void N(GuardAI_Chase)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVolume* arg2) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
@@ -126,16 +126,16 @@ void N(StationaryAI_Chase)(Evt* script, StationaryAISettings* aiSettings, EnemyD
     }
 }
 
-void N(StationaryAI_LosePlayer)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(GuardAI_LosePlayer)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;
     if (npc->duration == 0) {
-        script->AI_TEMP_STATE = AI_STATE_STATIONARY_RETURN_HOME_INIT;
+        script->AI_TEMP_STATE = AI_STATE_GUARD_RETURN_HOME_INIT;
     }
 }
 
-void N(StationaryAI_ReturnHomeInit)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(GuardAI_ReturnHomeInit)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -146,10 +146,10 @@ void N(StationaryAI_ReturnHomeInit)(Evt* script, StationaryAISettings* aiSetting
         npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
     }
     script->functionTemp[1] = 0;
-    script->AI_TEMP_STATE = AI_STATE_STATIONARY_RETURN_HOME;
+    script->AI_TEMP_STATE = AI_STATE_GUARD_RETURN_HOME;
 }
 
-void N(StationaryAI_ReturnHome)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(GuardAI_ReturnHome)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
@@ -176,7 +176,7 @@ void N(StationaryAI_ReturnHome)(Evt* script, StationaryAISettings* aiSettings, E
         npc->pos.x = enemy->territory->wander.centerPos.x;
         npc->pos.z = enemy->territory->wander.centerPos.z;
         npc->yaw = enemy->territory->wander.wanderSize.x;
-        script->AI_TEMP_STATE = AI_STATE_STATIONARY_IDLE_INIT;
+        script->AI_TEMP_STATE = AI_STATE_GUARD_IDLE_INIT;
     }
 
     if (npc->turnAroundYawAdjustment == 0) {
@@ -185,13 +185,13 @@ void N(StationaryAI_ReturnHome)(Evt* script, StationaryAISettings* aiSettings, E
     }
 }
 
-ApiStatus N(StationaryAI_Main)(Evt* script, s32 isInitialCall) {
+ApiStatus N(GuardAI_Main)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    StationaryAISettings* aiSettings = (StationaryAISettings*)evt_get_variable(script, *args++);
+    GuardAISettings* aiSettings = (GuardAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -203,7 +203,7 @@ ApiStatus N(StationaryAI_Main)(Evt* script, s32 isInitialCall) {
     territory.detectFlags = 0;
 
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_4)) {
-        script->AI_TEMP_STATE = AI_STATE_STATIONARY_IDLE_INIT;
+        script->AI_TEMP_STATE = AI_STATE_GUARD_IDLE_INIT;
         npc->duration = 0;
         enemy->varTable[0] = npc->yaw;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
@@ -228,32 +228,32 @@ ApiStatus N(StationaryAI_Main)(Evt* script, s32 isInitialCall) {
     }
 
     switch (script->AI_TEMP_STATE) {
-        case AI_STATE_STATIONARY_IDLE_INIT:
-            N(StationaryAI_IdleInit)(script, aiSettings, territoryPtr);
-        case AI_STATE_STATIONARY_IDLE:
-            N(StationaryAI_Idle)(script, aiSettings, territoryPtr);
+        case AI_STATE_GUARD_IDLE_INIT:
+            N(GuardAI_IdleInit)(script, aiSettings, territoryPtr);
+        case AI_STATE_GUARD_IDLE:
+            N(GuardAI_Idle)(script, aiSettings, territoryPtr);
             break;
 
         case AI_STATE_ALERT_INIT:
-            N(StationaryAI_AlertInit)(script, aiSettings, territoryPtr);
+            N(GuardAI_AlertInit)(script, aiSettings, territoryPtr);
         case AI_STATE_ALERT:
-            N(StationaryAI_Alert)(script, aiSettings, territoryPtr);
+            N(GuardAI_Alert)(script, aiSettings, territoryPtr);
             break;
 
         case AI_STATE_CHASE_INIT:
-            N(StationaryAI_ChaseInit)(script, aiSettings, territoryPtr);
+            N(GuardAI_ChaseInit)(script, aiSettings, territoryPtr);
         case AI_STATE_CHASE:
-            N(StationaryAI_Chase)(script, aiSettings, territoryPtr);
+            N(GuardAI_Chase)(script, aiSettings, territoryPtr);
             break;
 
         case AI_STATE_LOSE_PLAYER:
-            N(StationaryAI_LosePlayer)(script, aiSettings, territoryPtr);
+            N(GuardAI_LosePlayer)(script, aiSettings, territoryPtr);
             break;
 
-        case AI_STATE_STATIONARY_RETURN_HOME_INIT:
-            N(StationaryAI_ReturnHomeInit)(script, aiSettings, territoryPtr);
-        case AI_STATE_STATIONARY_RETURN_HOME:
-            N(StationaryAI_ReturnHome)(script, aiSettings, territoryPtr);
+        case AI_STATE_GUARD_RETURN_HOME_INIT:
+            N(GuardAI_ReturnHomeInit)(script, aiSettings, territoryPtr);
+        case AI_STATE_GUARD_RETURN_HOME:
+            N(GuardAI_ReturnHome)(script, aiSettings, territoryPtr);
             break;
 
         case AI_STATE_SUSPEND:

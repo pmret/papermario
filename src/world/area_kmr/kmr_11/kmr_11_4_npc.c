@@ -1,6 +1,6 @@
 #include "kmr_11.h"
 
-#include "world/common/enemy/complete/GoombaBros_Stationary.inc.c"
+#include "world/common/enemy/complete/GoombaBros_Guard.inc.c"
 
 EvtScript N(EVS_NpcIdle_GoombaBros_01) = {
     EVT_RETURN
@@ -294,7 +294,7 @@ NpcSettings N(NpcSettings_Kammy) = {
 StaticNpc N(NpcData_Enemies)[] = {
     {
         .id = NPC_BlueGoombaBro,
-        .settings = &N(NpcSettings_GoombaBros_Stationary),
+        .settings = &N(NpcSettings_GoombaBros_Guard),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_800000,
@@ -337,7 +337,7 @@ StaticNpc N(NpcData_Enemies)[] = {
     },
     {
         .id = NPC_RedGoombaBro,
-        .settings = &N(NpcSettings_GoombaBros_Stationary),
+        .settings = &N(NpcSettings_GoombaBros_Guard),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_800000,
@@ -380,7 +380,7 @@ StaticNpc N(NpcData_Enemies)[] = {
     },
     {
         .id = NPC_GoombaKing,
-        .settings = &N(NpcSettings_GoombaBros_Stationary),
+        .settings = &N(NpcSettings_GoombaBros_Guard),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_800000,

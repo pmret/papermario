@@ -792,8 +792,8 @@ MapConfig pra_maps[] = {
 /// Shy Guy's Toy Box
 #include "area_omo/omo.h"
 MapConfig omo_maps[] = {
-    { MAP_UNSPLIT(omo_01, 0x80240C40), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_02, 0x80242BD0), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_01), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_02), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(omo_03, 0x80240900), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_04), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_05), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },

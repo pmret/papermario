@@ -1,39 +1,21 @@
 #include "omo_02.h"
 
 #include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
-
-#include "world/common/enemy/ai/StationaryAI.inc.c"
-
-s32 N(D_8024487C_DA1D4C)[] = {
-    0x42C80000, 0x41F00000, 4, 0x40800000, 6, 1, 0x43200000, 0x42480000, 1 
-};
-
-EvtScript N(D_802448A0_DA1D70) = {
-    EVT_CALL(N(StationaryAI_Main), EVT_PTR(N(D_8024487C_DA1D4C)))
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(missing_802448C0_48C0)[] = {
-    0x00000000, 0x00170016, 0x00000000, 0x00000000, 0x802448A0, 0x80077F70, 0x00000000, 0x8007809C, 
-    0x00000000, 0x00000000, 0x000E0001, 
-};
-
+#include "world/common/enemy/complete/ShyGuy_Guard.inc.c"
 #include "world/common/enemy/complete/ShyGuy_Stationary.inc.c"
-
 #include "world/common/enemy/complete/SpyGuy.inc.c"
 
 EvtScript N(D_80244D64_DA2234) = {
     EVT_LABEL(0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, 0, LVar2)
-    EVT_CALL(GetCamPosB, CAM_DEFAULT, LVar0, LVar1)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(-600.0), LVar1)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, 0, LVar2)
+        EVT_CALL(GetCamPosB, CAM_DEFAULT, LVar0, LVar1)
+        EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(-600.0), LVar1)
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
+        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
