@@ -14424,15 +14424,14 @@ segments:
     start: 0xD9D4D0
     vram: 0x80240000
     subsegments:
-    - [0xD9D4D0, c]
-    - [0xD9D510, c]
-    - [0xDA0080, data]
-    - [0xDA0110, data]
-    - [0xDA0300, data]
-    - [0xDA05B0, data]
-    - [0xDA0A50, data]
-    - [0xDA1CD0, data]
-    - [0xDA4D30]
+    - [0xD9D4D0, c, omo_02_0_header]
+    - [0xD9D4D0, c, omo_02_1_music]
+    - [0xD9D4D0, c, omo_02_2_main]
+    - [0xD9D4D0, c, omo_02_3_entity]
+    - [0xD9D510, c, omo_02_4_gizmos]
+    - [0xD9D790, c, omo_02_5]
+    - [0xD9DE40, c, omo_02_6_npc]
+    - [0xDA0080]
   - name: omo_03
     dir: world/area_omo/omo_03
     type: code
