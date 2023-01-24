@@ -1,14 +1,14 @@
 #include "omo_14.h"
 #include "effects.h"
 
-API_CALLABLE(N(func_80240160_DE5810)) {
+API_CALLABLE(N(SurroundPlayer)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
-    f32 x = playerStatus->position.x +
+    f32 goalPosX = playerStatus->position.x +
         ((playerStatus->colliderDiameter + npc->collisionRadius) * 0.5f * sin_deg((npc->npcID * 360.0f) / 10.0f));
-    f32 z = playerStatus->position.z -
+    f32 goalPosZ = playerStatus->position.z -
         ((playerStatus->colliderDiameter + npc->collisionRadius) * 0.5f * cos_deg((npc->npcID * 360.0f) / 10.0f));
-    f32 dist = dist2D(npc->pos.x, npc->pos.z, x, z);
+    f32 dist = dist2D(npc->pos.x, npc->pos.z, goalPosX, goalPosZ);
 
     if (npc->moveSpeed < dist) {
         if (npc->flags & NPC_FLAG_NO_PROJECT_SHADOW) {
@@ -18,7 +18,7 @@ API_CALLABLE(N(func_80240160_DE5810)) {
                 npc->yaw = npc->pos.z > 0.0f ? 315.0f : 225.0f;
             }
         } else {
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
+            npc->yaw = atan2(npc->pos.x, npc->pos.z, goalPosX, goalPosZ);
         }
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     } else {
@@ -79,7 +79,7 @@ API_CALLABLE(N(IsPartnerWatt)) {
 
 #include "world/common/enemy/complete/ShyGuy_Stationary.inc.c"
 
-Vec2i N(D_8024091C_DE5FCC)[] = {
+Vec2i N(CrowdChaseGoalPositions)[] = {
     { 200,   0 },
     { 210, -10 },
     { 210,  10 },
@@ -108,7 +108,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                 EVT_SWITCH(LVar9)
                     EVT_CASE_EQ(-1)
                         EVT_CALL(SetNpcSpeed, NPC_SELF, LVarA)
-                        EVT_CALL(N(func_80240160_DE5810))
+                        EVT_CALL(N(SurroundPlayer))
                         EVT_IF_GT(LVarE, 30)
                             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
                             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -131,7 +131,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                             EVT_SET(LVarE, 0)
                         EVT_END_IF
                     EVT_CASE_EQ(PARTNER_WATT)
-                        EVT_USE_BUF(EVT_PTR(N(D_8024091C_DE5FCC)))
+                        EVT_USE_BUF(EVT_PTR(N(CrowdChaseGoalPositions)))
                         EVT_BUF_READ2(LVar3, LVar4)
                         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
                         EVT_IF_LT(LVar0, 180)
@@ -144,7 +144,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                             EVT_IF_EQ(AF_OMO_11, FALSE)
                                 EVT_SET(AF_OMO_11, TRUE)
                             EVT_END_IF
-                            EVT_USE_BUF(EVT_PTR(N(D_8024091C_DE5FCC)))
+                            EVT_USE_BUF(EVT_PTR(N(CrowdChaseGoalPositions)))
                             EVT_BUF_READ2(LVar1, LVar2)
                             EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
                             EVT_CALL(N(SimpleMoveNPC), LVar3, LVar4)
@@ -248,7 +248,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Crowd) = {
                 EVT_SWITCH(LVar9)
                     EVT_CASE_EQ(-1)
                         EVT_CALL(SetNpcSpeed, NPC_SELF, LVarA)
-                        EVT_CALL(N(func_80240160_DE5810))
+                        EVT_CALL(N(SurroundPlayer))
                         EVT_IF_GT(LVarE, 30)
                             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
                             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -268,7 +268,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Crowd) = {
                             EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15)
                         EVT_END_IF
                         EVT_CALL(GetSelfNpcID, LVar5)
-                        EVT_USE_BUF(EVT_PTR(N(D_8024091C_DE5FCC)))
+                        EVT_USE_BUF(EVT_PTR(N(CrowdChaseGoalPositions)))
                         EVT_LOOP(LVar5)
                             EVT_BUF_READ2(LVar3, LVar4)
                         EVT_END_LOOP
@@ -350,7 +350,7 @@ EvtScript N(EVS_NpcInit_ShyGuy_Loner) = {
     EVT_END
 };
 
-Vec3i N(D_802419E0_DE7090)[] = {
+Vec3i N(CrowdInitialPositions)[] = {
     { 150, 0, -100 },
     { 150, 0,  -50 },
     { 150, 0,    0 },
@@ -368,7 +368,7 @@ EvtScript N(EVS_NpcInit_ShyGuy_Crowd) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
         EVT_CALL(GetSelfNpcID, LVar0)
         EVT_SUB(LVar0, 0)
-        EVT_USE_BUF(EVT_PTR(N(D_802419E0_DE7090)))
+        EVT_USE_BUF(EVT_PTR(N(CrowdInitialPositions)))
         EVT_LOOP(LVar0)
             EVT_BUF_READ3(LVar1, LVar2, LVar3)
         EVT_END_LOOP

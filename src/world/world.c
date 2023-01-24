@@ -806,7 +806,7 @@ MapConfig omo_maps[] = {
     { MAP_UNSPLIT(omo_12, 0x802404D0), .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_13), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_14), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_15, 0x80240810), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_15), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_16), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_17), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
 };

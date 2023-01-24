@@ -14598,10 +14598,11 @@ segments:
     start: 0xDE8770
     vram: 0x80240000
     subsegments:
-    - [0xDE8770, c]
-    - [0xDE8F70, data]
-    - [0xDE9670, data]
-    - [0xDEBEA0]
+    - [0xDE8770, c, omo_15_0_header]
+    - [0xDE8770, c, omo_15_1_music]
+    - [0xDE8770, c, omo_15_2_main]
+    - [0xDE8F70, c, omo_15_3_npc]
+    - [0xDE8F70]
   - name: omo_16
     dir: world/area_omo/omo_16
     type: code

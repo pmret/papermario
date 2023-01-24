@@ -133,7 +133,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
     EVT_SET(LVarE, EVT_FLOAT(10.0))
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
         EVT_SWITCH(AF_FLO_BeanstalkFacingRight)
             EVT_CASE_EQ(0)
@@ -229,7 +229,7 @@ EvtScript N(EVS_Exit_Beanstalk) = {
         EVT_CALL(NpcJump0, NPC_PARTNER, LVarC, LVarD, LVarE, 5)
         EVT_CALL(PlaySound, SOUND_19D)
         EVT_CALL(SetMusicTrack, 0, SONG_MAGIC_BEANSTALK, 1, 8)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
         EVT_CALL(N(GetPlayerAngles), LVar3, LVar4)
         EVT_SWITCH(LVar4)

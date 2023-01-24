@@ -1000,6 +1000,7 @@ enum SoundIDs {
     SOUND_368                       = 0x00000368,
     SOUND_369                       = 0x00000369,
     SOUND_36B                       = 0x0000036B,
+    SOUND_36D                       = 0x0000036D,
     SOUND_36E                       = 0x0000036E,
     SOUND_36F                       = 0x0000036F,
     SOUND_370                       = 0x00000370,
@@ -3643,15 +3644,15 @@ enum PartnerAnimIndices {
 };
 
 enum AnyPartnerAnims {
-    PARTNER_ANIM_WALK       = 0x101,
-    PARTNER_ANIM_JUMP       = 0x102,
-    PARTNER_ANIM_FALL       = 0x103,
-    PARTNER_ANIM_FLY        = 0x104,
-    PARTNER_ANIM_IDLE       = 0x105,
-    PARTNER_ANIM_RUN        = 0x106,
-    PARTNER_ANIM_TALK       = 0x107,
-    PARTNER_ANIM_HURT       = 0x108,
-    PARTNER_ANIM_9          = 0x109,
+    PARTNER_ANIM_STILL      = 0x101,
+    PARTNER_ANIM_WALK       = 0x102,
+    PARTNER_ANIM_JUMP       = 0x103,
+    PARTNER_ANIM_FALL       = 0x104,
+    PARTNER_ANIM_FLY        = 0x105,
+    PARTNER_ANIM_IDLE       = 0x106,
+    PARTNER_ANIM_RUN        = 0x107,
+    PARTNER_ANIM_TALK       = 0x108,
+    PARTNER_ANIM_HURT       = 0x109,
 };
 
 enum EnemyAnimIndices {

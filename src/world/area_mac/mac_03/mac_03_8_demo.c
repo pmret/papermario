@@ -65,7 +65,7 @@ EvtScript N(EVS_DemoDepartForMtRugged) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_SET(MV_TrainMoveDist, 0)
     EVT_SET(MV_TrainMoveSpeed, 0)
     EVT_SET(MF_TrainReverseDir, FALSE)
