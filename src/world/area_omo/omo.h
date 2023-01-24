@@ -21,17 +21,17 @@ enum {
 };
 
 enum {
-    AF_OMO_02               = AreaFlag(2),
-    AF_OMO_03               = AreaFlag(3),
-    AF_OMO07_NpcPool0       = AreaFlag(7),
-    AF_OMO07_NpcPool1       = AreaFlag(8),
-    AF_OMO07_NpcPool2       = AreaFlag(9),
-    AF_OMO07_NpcPool3       = AreaFlag(10),
+    AF_OMO_UsingRightSwitch         = AreaFlag(2),
+    AF_OMO_03                       = AreaFlag(3),
+    AF_OMO07_NpcPool0               = AreaFlag(7),
+    AF_OMO07_NpcPool1               = AreaFlag(8),
+    AF_OMO07_NpcPool2               = AreaFlag(9),
+    AF_OMO07_NpcPool3               = AreaFlag(10),
     AF_OMO09_StartBlock_DontBlink   = AreaFlag(11),
     AF_OMO09_Block1_DontBlink       = AreaFlag(12),
     AF_OMO09_Block2_DontBlink       = AreaFlag(13),
     AF_OMO09_Block3_DontBlink       = AreaFlag(14),
-    AF_OMO07_DoorOpening    = AreaFlag(15),
+    AF_OMO07_DoorOpening            = AreaFlag(15),
 };
 
 extern MapSettings omo_01_settings;
