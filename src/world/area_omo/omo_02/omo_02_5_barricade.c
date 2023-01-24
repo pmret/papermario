@@ -374,7 +374,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     EVT_CALL(NpcMoveTo, NPC_ShyGuy_01, -135, 23, 0)
     EVT_CALL(NpcMoveTo, NPC_ShyGuy_01, -110, -13, 0)
     EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_01, EVT_FLOAT(1.0))
-    EVT_CALL(func_802CDE68, 0, 10)
+    EVT_CALL(SetNpcRotationPivot, NPC_ShyGuy_01, 10)
     EVT_THREAD
         EVT_SET(LVar0, 0)
         EVT_LOOP(10)
@@ -396,7 +396,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
         EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_3E4, 0)
         EVT_WAIT(7)
     EVT_END_LOOP
-    EVT_CALL(func_802CDE68, 0, 0)
+    EVT_CALL(SetNpcRotationPivot, NPC_ShyGuy_01, 0)
     EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim01)
     EVT_CALL(NpcJump0, NPC_ShyGuy_01, -50, 0, -8, 10)
     EVT_CALL(InterpNpcYaw, NPC_ShyGuy_01, 270, 0)

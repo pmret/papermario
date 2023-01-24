@@ -10,7 +10,6 @@
 #include "mapfs/omo_15_hit.h"
 
 #include "sprite/npc/GeneralGuy.h"
-#include "sprite/npc/ShyGuy.h"
 
 enum {
     NPC_GeneralGuy      = 0,

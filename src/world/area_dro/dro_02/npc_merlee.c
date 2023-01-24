@@ -774,7 +774,7 @@ EvtScript N(EVS_NpcInteract_Merlee) = {
     EVT_END_IF
     EVT_IF_EQ(LVar0, 3)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DC)
-        EVT_SET(LVar0, 39)
+        EVT_SET(LVar0, ITEM_CRYSTAL_BALL)
         EVT_SET(LVar1, 1)
         EVT_EXEC_WAIT(N(GiveKeyReward))
         EVT_CALL(AddKeyItem, ITEM_CRYSTAL_BALL)

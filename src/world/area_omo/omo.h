@@ -1,6 +1,19 @@
 #ifndef _WORLD_AREA_OMO_OMO_H_
 #define _WORLD_AREA_OMO_OMO_H_
 
+// "CrowdScript" used in omo_02 and omo_15
+enum {
+    op_CS_MOVE      = 0,
+    op_CS_JUMP      = 1,
+    op_CS_FALL      = 2,
+    op_CS_END       = -1,
+};
+
+#define CS_MOVE(x, y)       op_CS_MOVE, x, y,
+#define CS_JUMP(x, y, z)    op_CS_JUMP, x, y, z,
+#define CS_FALL()           op_CS_FALL,
+#define CS_END              op_CS_END,
+
 enum {
     AB_OMO_0        = AreaByte(0),
     AB_OMO_1        = AreaByte(1),

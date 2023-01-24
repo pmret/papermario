@@ -191,40 +191,40 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
             EVT_CALL(DisablePartnerAI, 0)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GourmetGuy_Surprise)
             EVT_THREAD
-                EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_03, NPC_FLAG_2, FALSE)
-                EVT_CALL(GetNpcPos, NPC_GourmetGuy_03, LVar0, LVar1, LVar2)
-                EVT_CALL(SetNpcJumpscale, NPC_GourmetGuy_03, EVT_FLOAT(0.05))
-                EVT_CALL(NpcJump0, NPC_GourmetGuy_03, LVar0, 2, LVar2, 8)
-                EVT_CALL(func_802CDE68, 2, 15)
+                EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_2, FALSE)
+                EVT_CALL(GetNpcPos, NPC_GourmetGuy_Fork, LVar0, LVar1, LVar2)
+                EVT_CALL(SetNpcJumpscale, NPC_GourmetGuy_Fork, EVT_FLOAT(0.05))
+                EVT_CALL(NpcJump0, NPC_GourmetGuy_Fork, LVar0, 2, LVar2, 8)
+                EVT_CALL(SetNpcRotationPivot, NPC_GourmetGuy_Fork, 15)
                 EVT_SET(LVar3, 0)
                 EVT_LOOP(5)
                     EVT_ADD(LVar3, 50)
-                    EVT_CALL(SetNpcRotation, NPC_GourmetGuy_03, 0, 0, LVar3)
+                    EVT_CALL(SetNpcRotation, NPC_GourmetGuy_Fork, 0, 0, LVar3)
                     EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_ADD(LVar2, 20)
-                EVT_CALL(SetNpcJumpscale, NPC_GourmetGuy_03, EVT_FLOAT(0.2))
-                EVT_CALL(NpcJump0, NPC_GourmetGuy_03, LVar0, -10, LVar2, 8)
+                EVT_CALL(SetNpcJumpscale, NPC_GourmetGuy_Fork, EVT_FLOAT(0.2))
+                EVT_CALL(NpcJump0, NPC_GourmetGuy_Fork, LVar0, -10, LVar2, 8)
                 EVT_WAIT(10)
-                EVT_CALL(RemoveNpc, NPC_GourmetGuy_03)
+                EVT_CALL(RemoveNpc, NPC_GourmetGuy_Fork)
             EVT_END_THREAD
             EVT_THREAD
-                EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_02, NPC_FLAG_2, FALSE)
-                EVT_CALL(GetNpcPos, NPC_GourmetGuy_02, LVar0, LVar1, LVar2)
-                EVT_CALL(SetNpcJumpscale, NPC_GourmetGuy_02, EVT_FLOAT(0.05))
-                EVT_CALL(NpcJump0, NPC_GourmetGuy_02, LVar0, 2, LVar2, 8)
-                EVT_CALL(func_802CDE68, 1, 15)
+                EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_2, FALSE)
+                EVT_CALL(GetNpcPos, NPC_GourmetGuy_Knife, LVar0, LVar1, LVar2)
+                EVT_CALL(SetNpcJumpscale, NPC_GourmetGuy_Knife, EVT_FLOAT(0.05))
+                EVT_CALL(NpcJump0, NPC_GourmetGuy_Knife, LVar0, 2, LVar2, 8)
+                EVT_CALL(SetNpcRotationPivot, NPC_GourmetGuy_Knife, 15)
                 EVT_SET(LVar3, 0)
                 EVT_LOOP(5)
                     EVT_SUB(LVar3, 50)
-                    EVT_CALL(SetNpcRotation, NPC_GourmetGuy_02, 0, 0, LVar3)
+                    EVT_CALL(SetNpcRotation, NPC_GourmetGuy_Knife, 0, 0, LVar3)
                     EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_ADD(LVar2, 20)
-                EVT_CALL(SetNpcJumpscale, NPC_GourmetGuy_02, EVT_FLOAT(0.2))
-                EVT_CALL(NpcJump0, NPC_GourmetGuy_02, LVar0, -10, LVar2, 8)
+                EVT_CALL(SetNpcJumpscale, NPC_GourmetGuy_Knife, EVT_FLOAT(0.2))
+                EVT_CALL(NpcJump0, NPC_GourmetGuy_Knife, LVar0, -10, LVar2, 8)
                 EVT_WAIT(10)
-                EVT_CALL(RemoveNpc, NPC_GourmetGuy_02)
+                EVT_CALL(RemoveNpc, NPC_GourmetGuy_Knife)
             EVT_END_THREAD
             EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -250, 25, -100)
             EVT_CALL(SetPanTarget, CAM_DEFAULT, -250, 25, -100)
@@ -375,17 +375,17 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
 
 EvtScript N(EVS_NpcInit_GourmetGuy) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY)
-        EVT_CALL(RemoveNpc, NPC_GourmetGuy_03)
-        EVT_CALL(RemoveNpc, NPC_GourmetGuy_02)
+        EVT_CALL(RemoveNpc, NPC_GourmetGuy_Fork)
+        EVT_CALL(RemoveNpc, NPC_GourmetGuy_Knife)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_ELSE
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GourmetGuy_SitIdle)
-        EVT_CALL(SetNpcAnimation, NPC_GourmetGuy_03, ANIM_GourmetGuy_Fork)
-        EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_03, NPC_FLAG_2, TRUE)
-        EVT_CALL(SetNpcPos, NPC_GourmetGuy_03, -285, 50, 90)
-        EVT_CALL(SetNpcAnimation, NPC_GourmetGuy_02, ANIM_GourmetGuy_Knife)
-        EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_02, NPC_FLAG_2, TRUE)
-        EVT_CALL(SetNpcPos, NPC_GourmetGuy_02, -210, 50, 90)
+        EVT_CALL(SetNpcAnimation, NPC_GourmetGuy_Fork, ANIM_GourmetGuy_Fork)
+        EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcPos, NPC_GourmetGuy_Fork, -285, 50, 90)
+        EVT_CALL(SetNpcAnimation, NPC_GourmetGuy_Knife, ANIM_GourmetGuy_Knife)
+        EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcPos, NPC_GourmetGuy_Knife, -210, 50, 90)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_GourmetGuy)))
     EVT_END_IF
     EVT_RETURN
@@ -394,7 +394,7 @@ EvtScript N(EVS_NpcInit_GourmetGuy) = {
 
 StaticNpc N(NpcData_GourmetGuy)[] = {
     {
-        .id = NPC_GourmetGuy_01,
+        .id = NPC_GourmetGuy,
         .settings = &N(NpcSettings_GourmetGuy),
         .pos = { -250.0f, 10.0f, 85.0f },
         .yaw = 90,
@@ -426,7 +426,7 @@ StaticNpc N(NpcData_GourmetGuy)[] = {
         .tattle = MSG_NpcTattle_GourmetGuy,
     },
     {
-        .id = NPC_GourmetGuy_02,
+        .id = NPC_GourmetGuy_Knife,
         .settings = &N(NpcSettings_GourmetGuy),
         .pos = { -250.0f, 10.0f, 85.0f },
         .yaw = 90,
@@ -457,7 +457,7 @@ StaticNpc N(NpcData_GourmetGuy)[] = {
         .tattle = MSG_NpcTattle_GourmetGuy,
     },
     {
-        .id = NPC_GourmetGuy_03,
+        .id = NPC_GourmetGuy_Fork,
         .settings = &N(NpcSettings_GourmetGuy),
         .pos = { -250.0f, 10.0f, 85.0f },
         .yaw = 90,

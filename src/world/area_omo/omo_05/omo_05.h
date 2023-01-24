@@ -13,10 +13,10 @@
 #include "sprite/npc/GrooveGuy.h"
 
 enum {
-    NPC_GourmetGuy_01           = 0,
-    NPC_GourmetGuy_02           = 1,
-    NPC_GourmetGuy_03           = 2,
-    NPC_GrooveGuy               = 3,
+    NPC_GourmetGuy          = 0,
+    NPC_GourmetGuy_Knife    = 1,
+    NPC_GourmetGuy_Fork     = 2,
+    NPC_GrooveGuy           = 3,
 };
 
 #define NAMESPACE omo_05

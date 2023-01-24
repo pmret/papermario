@@ -80,81 +80,74 @@ EvtScript N(EVS_NpcInit_ShyGuy_Loner) = {
     EVT_END
 };
 
-// "CrowdScript"
-enum {
-    CS_MOVE     = 0,
-    CS_JUMP     = 1,
-    CS_END      = -1,
-};
-
 s32 N(CrowdScriptA)[] = {
-    CS_MOVE, -320,  30,
-    CS_MOVE, -234,  23,
-    CS_JUMP, -172,   0,  25,
-    CS_MOVE, -120,  43,
-    CS_MOVE,  -63, -16,
-    CS_JUMP,  -24,   0, -11,
-    CS_MOVE,   17,  46,
-    CS_JUMP,   65,   0,  87,
-    CS_MOVE,  115,  72,
-    CS_JUMP,  154,   0,  33,
-    CS_MOVE,  194,   0,
-    CS_MOVE,  240,  -2,
-    CS_END,
+    CS_MOVE(-320,  30)
+    CS_MOVE(-234,  23)
+    CS_JUMP(-172,   0,  25)
+    CS_MOVE(-120,  43)
+    CS_MOVE( -63, -16)
+    CS_JUMP( -24,   0, -11)
+    CS_MOVE(  17,  46)
+    CS_JUMP(  65,   0,  87)
+    CS_MOVE( 115,  72)
+    CS_JUMP( 154,   0,  33)
+    CS_MOVE( 194,   0)
+    CS_MOVE( 240,  -2)
+    CS_END
 };
 
 s32 N(CrowdScriptB)[] = {
-    CS_MOVE, -279,   20,
-    CS_MOVE, -168,   30,
-    CS_MOVE, -106,  -11,
-    CS_MOVE,  -60,  -67,
-    CS_MOVE,  -19, -104,
-    CS_MOVE,   29,  -72,
-    CS_MOVE,   76,    8,
-    CS_MOVE,  128,   99,
-    CS_MOVE,  196,   79,
-    CS_MOVE,  259,   14,
-    CS_MOVE,  309,  -20,
-    CS_MOVE,  371,   30,
-    CS_END,
+    CS_MOVE(-279,   20)
+    CS_MOVE(-168,   30)
+    CS_MOVE(-106,  -11)
+    CS_MOVE( -60,  -67)
+    CS_MOVE( -19, -104)
+    CS_MOVE(  29,  -72)
+    CS_MOVE(  76,    8)
+    CS_MOVE( 128,   99)
+    CS_MOVE( 196,   79)
+    CS_MOVE( 259,   14)
+    CS_MOVE( 309,  -20)
+    CS_MOVE( 371,   30)
+    CS_END
 };
 
 s32 N(CrowdScriptC)[] = {
-    CS_MOVE, -326,  42,
-    CS_MOVE, -288,  69,
-    CS_MOVE, -256,  84,
-    CS_MOVE, -229,  68,
-    CS_MOVE, -208,  43,
-    CS_MOVE, -181,  21,
-    CS_MOVE, -155,  21,
-    CS_MOVE, -121,  50,
-    CS_MOVE, -120, 103,
-    CS_MOVE, -145, 111,
-    CS_MOVE, -168,  73,
-    CS_MOVE, -164,  22,
-    CS_MOVE, -123, -13,
-    CS_MOVE,  -77,   0,
-    CS_JUMP,  -30,   0,  27,
-    CS_MOVE,    5,  45,
-    CS_MOVE,   40,  41,
-    CS_MOVE,   87,   0,
-    CS_MOVE,  120,  -7,
-    CS_MOVE,  177,  18,
-    CS_MOVE,  219,  46,
-    CS_MOVE,  260,  54,
-    CS_END, 
+    CS_MOVE(-326,  42)
+    CS_MOVE(-288,  69)
+    CS_MOVE(-256,  84)
+    CS_MOVE(-229,  68)
+    CS_MOVE(-208,  43)
+    CS_MOVE(-181,  21)
+    CS_MOVE(-155,  21)
+    CS_MOVE(-121,  50)
+    CS_MOVE(-120, 103)
+    CS_MOVE(-145, 111)
+    CS_MOVE(-168,  73)
+    CS_MOVE(-164,  22)
+    CS_MOVE(-123, -13)
+    CS_MOVE( -77,   0)
+    CS_JUMP( -30,   0,  27)
+    CS_MOVE(   5,  45)
+    CS_MOVE(  40,  41)
+    CS_MOVE(  87,   0)
+    CS_MOVE( 120,  -7)
+    CS_MOVE( 177,  18)
+    CS_MOVE( 219,  46)
+    CS_MOVE( 260,  54)
+    CS_END
 };
 
 s32 N(CrowdScriptD)[] = {
-    CS_MOVE, -309,   9,
-    CS_MOVE, -230,  27,
-    CS_MOVE, -150,  16,
-    CS_MOVE,  -97, -24,
-    CS_MOVE,  -31, -13,
-    CS_MOVE,   25,  30,
-    CS_MOVE,   84,  27,
-    CS_MOVE,  133,  -3,
-    CS_END,
+    CS_MOVE(-309,   9)
+    CS_MOVE(-230,  27)
+    CS_MOVE(-150,  16)
+    CS_MOVE( -97, -24)
+    CS_MOVE( -31, -13)
+    CS_MOVE(  25,  30)
+    CS_MOVE(  84,  27)
+    CS_MOVE( 133,  -3)
+    CS_END
 };
 
 s32* N(CrowdFleeScripts)[] = {
@@ -237,17 +230,17 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Crowd) = {
                 EVT_LABEL(10)
                     EVT_BUF_READ1(LVar2) // get cmd
                     EVT_SWITCH(LVar2)
-                        EVT_CASE_EQ(CS_MOVE)
+                        EVT_CASE_EQ(op_CS_MOVE)
                             EVT_BUF_READ2(LVar3, LVar4)
                             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim04)
                             EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(10.0))
                             EVT_CALL(NpcMoveTo, NPC_SELF, LVar3, LVar4, 0)
-                        EVT_CASE_EQ(CS_JUMP)
+                        EVT_CASE_EQ(op_CS_JUMP)
                             EVT_BUF_READ3(LVar3, LVar4, LVar5)
                             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
                             EVT_CALL(NpcJump0, NPC_SELF, LVar3, LVar4, LVar5, 10)
                     EVT_END_SWITCH
-                    EVT_IF_NE(LVar2, CS_END)
+                    EVT_IF_NE(LVar2, op_CS_END)
                         EVT_GOTO(10)
                     EVT_END_IF
                 EVT_CALL(SetSelfVar, 0, CROWD_STATE_DISPOSE)
@@ -260,17 +253,17 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Crowd) = {
     EVT_END
 };
 
-s32 N(InitialCrowdPositions)[] = {
-    -462, 0, -80,
-    -447, 0, -40,
-    -432, 0,   0,
-    -437, 0,  80,
-    -402, 0,  80,
-    -438, 0, -80,
-    -423, 0, -40,
-    -408, 0,   0,
-    -474, 0, -59,
-    -378, 0,  80,
+Vec3i N(InitialCrowdPositions)[] = {
+    { -462, 0, -80 },
+    { -447, 0, -40 },
+    { -432, 0,   0 },
+    { -437, 0,  80 },
+    { -402, 0,  80 },
+    { -438, 0, -80 },
+    { -423, 0, -40 },
+    { -408, 0,   0 },
+    { -474, 0, -59 },
+    { -378, 0,  80 },
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy_Crowd) = {

@@ -298,7 +298,7 @@
 #define SetModelCustomGfx dead_SetModelCustomGfx
 #define SetCustomGfxBuilders dead_SetCustomGfxBuilders
 #define FindItem dead_FindItem
-#define func_802CDE68 dead_func_802CDE68
+#define SetNpcRotationPivot dead_SetNpcRotationPivot
 #define SetNpcPaletteSwapMode dead_SetNpcPaletteSwapMode
 #define SetNpcPaletteSwapping dead_SetNpcPaletteSwapping
 #define BindNpcAux dead_BindNpcAux

@@ -107,7 +107,7 @@ ApiStatus SetNpcRotation(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CDE68(Evt* script, s32 isInitialCall) {
+ApiStatus SetNpcRotationPivot(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcId = evt_get_variable(script, *args++);
     f32 value = evt_get_float_variable(script, *args++);
