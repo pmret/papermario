@@ -476,7 +476,7 @@ enum Emoters {
     EMOTER_NPC      = 1
 };
 
-enum Easings {
+enum EasingType {
     EASING_LINEAR                   = 0,
     EASING_QUADRATIC_IN             = 1,
     EASING_CUBIC_IN                 = 2,

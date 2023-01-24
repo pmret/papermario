@@ -10,11 +10,11 @@
 #include "mapfs/omo_01_hit.h"
 
 enum {
-	NPC_ShyGuy_01	= 0,
-	NPC_ShyGuy_02	= 1,
-	NPC_ShyGuy_03	= 2,
-	NPC_ShyGuy_04	= 3,
-	NPC_ShyGuy_05	= 4,
+    NPC_ShyGuy_01   = 0,
+    NPC_ShyGuy_02   = 1,
+    NPC_ShyGuy_03   = 2,
+    NPC_ShyGuy_04   = 3,
+    NPC_ShyGuy_05   = 4,
 };
 
 #define NAMESPACE omo_01

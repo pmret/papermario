@@ -36,6 +36,9 @@ enum {
 enum {
     AF_OMO_UsingRightSwitch         = AreaFlag(2),
     AF_OMO_03                       = AreaFlag(3),
+    AF_OMO_04                       = AreaFlag(4),
+    AF_OMO_05                       = AreaFlag(5),
+    AF_OMO_06                       = AreaFlag(6),
     AF_OMO07_NpcPool0               = AreaFlag(7),
     AF_OMO07_NpcPool1               = AreaFlag(8),
     AF_OMO07_NpcPool2               = AreaFlag(9),

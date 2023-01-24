@@ -65,7 +65,7 @@ StaticNpc N(NpcSettings_Toads)[] = {
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_TrainToad),
         .drops = TRAIN_CONDUCTOR_DROPS,
-        .animations = TRAIN_CONDUCTOR_PINK_ANIMS,
+        .animations = TRAIN_TOAD_PINK_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,
     },
 };

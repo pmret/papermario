@@ -794,7 +794,7 @@ MapConfig pra_maps[] = {
 MapConfig omo_maps[] = {
     { MAP(omo_01), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_02), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_03, 0x80240900), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_03), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_04), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_05), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_06), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
@@ -803,7 +803,7 @@ MapConfig omo_maps[] = {
     { MAP(omo_09), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_10), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_11), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_12, 0x802404D0), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_12), .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_13), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_14), .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_15), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },

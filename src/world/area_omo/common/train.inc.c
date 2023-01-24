@@ -383,6 +383,71 @@ EvtScript N(EVS_TrainUnk_D) = {
     EVT_END
 };
 
+#ifdef INCLUDE_ALTERNATES
+EvtScript N(EVS_TrainUnk_AltD) = {
+    EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_40 | NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40 | NPC_FLAG_100, TRUE)
+    EVT_SET(AF_OMO_06, FALSE)
+    EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
+    EVT_IF_LT(LVar2, 50)
+        EVT_USE_BUF(LVar9)
+        EVT_BUF_READ4(LVar3, LVar4, LVar5, LVar6)
+        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(2.5))
+        EVT_CALL(PlayerMoveTo, LVar3, LVar4, 0)
+        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
+        EVT_CALL(PlayerJump, LVar5, 50, LVar6, 15)
+    EVT_END_IF
+    EVT_THREAD
+        EVT_USE_BUF(LVar0)
+        EVT_BUF_READ3(LVar1, LVar2, LVar3)
+        EVT_CALL(AddVectorPolar, LVar1, LVar2, EVT_FLOAT(15.0), LVar3)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
+        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(4.0))
+        EVT_CALL(PlayerMoveTo, LVar1, LVar2, 0)
+        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(0.7))
+        EVT_CALL(PlayerMoveTo, LVar1, LVar2, 0)
+        EVT_CALL(SetPlayerPos, LVar1, 50, LVar2)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(InterpPlayerYaw, LVar3, 0)
+    EVT_END_THREAD
+    EVT_WAIT(5)
+    EVT_USE_BUF(LVar0)
+    EVT_BUF_READ3(LVar1, LVar2, LVar3)
+    EVT_SETF(LVarA, LVar3)
+    EVT_ADDF(LVar3, EVT_FLOAT(180.0))
+    EVT_CALL(AddVectorPolar, LVar1, LVar2, EVT_FLOAT(15.0), LVar3)
+    EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.7))
+    EVT_CALL(NpcJump0, NPC_PARTNER, LVar1, 50, LVar2, 10)
+    EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(0.1))
+    EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar1, LVar2, 0)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
+    EVT_CALL(InterpNpcYaw, NPC_PARTNER, LVarA, 0)
+    EVT_WAIT(5)
+    EVT_USE_BUF(LVar0)
+    EVT_BUF_READ3(LVar1, LVar2, LVar3)
+    EVT_SETF(LVarA, LVar3)
+    EVT_ADDF(LVar3, EVT_FLOAT(90.0))
+    EVT_SETF(LVar4, LVar1)
+    EVT_SETF(LVar5, LVar2)
+    EVT_SETF(LVar6, LVar3)
+    EVT_CALL(AddVectorPolar, LVar1, LVar2, EVT_FLOAT(60.0), LVar3)
+    EVT_CALL(SetNpcSpeed, NPC_Conductor, EVT_FLOAT(3.0))
+    EVT_CALL(SetNpcAnimation, NPC_Conductor, ANIM_TrainToad_Walk)
+    EVT_CALL(NpcMoveTo, NPC_Conductor, LVar1, LVar2, 0)
+    EVT_CALL(SetNpcAnimation, NPC_Conductor, ANIM_TrainToad_Idle)
+    EVT_CALL(AddVectorPolar, LVar4, LVar5, EVT_FLOAT(20.0), LVar6)
+    EVT_CALL(SetNpcJumpscale, NPC_Conductor, EVT_FLOAT(0.7))
+    EVT_CALL(NpcJump0, NPC_Conductor, LVar4, 50, LVar5, 10)
+    EVT_CALL(InterpNpcYaw, NPC_Conductor, LVarA, 0)
+    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 5, MSG_CH4_0009)
+    EVT_CALL(PlaySound, SOUND_83)
+    EVT_CALL(SetMusicTrack, 0, SONG_TOYBOX_TRAIN, 0, 8)
+    EVT_WAIT(10)
+    EVT_RETURN
+    EVT_END
+};
+#endif
+
 EvtScript N(EVS_TrainUnk_E) = {
     EVT_CALL(StopSound, SOUND_83)
     EVT_CALL(SetMusicTrack, 0, SONG_SHY_GUY_TOYBOX, 0, 8)
@@ -428,6 +493,48 @@ EvtScript N(EVS_TrainUnk_E) = {
     EVT_RETURN
     EVT_END
 };
+
+#ifdef INCLUDE_ALTERNATES
+EvtScript N(EVS_TrainUnk_AltE) = {
+    EVT_CALL(StopSound, SOUND_83)
+    EVT_CALL(SetMusicTrack, 0, SONG_SHY_GUY_TOYBOX, 0, 8)
+    EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_40 | NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40 | NPC_FLAG_100, TRUE)
+    EVT_SET(AF_OMO_06, TRUE)
+    EVT_SETF(LVar0, MV_TrainPos)
+    EVT_SETF(LVar1, MV_TrainUnk_0C)
+    EVT_SETF(LVar2, MV_TrainUnk_0D)
+    EVT_THREAD
+        EVT_CALL(SetNpcAnimation, NPC_Conductor, ANIM_TrainToad_Walk)
+        EVT_CALL(SetNpcSpeed, NPC_Conductor, EVT_FLOAT(3.5))
+        EVT_USE_BUF(LVar9)
+        EVT_BUF_READ2(LVar3, LVar4)
+        EVT_CALL(NpcMoveTo, NPC_Conductor, LVar3, LVar4, 0)
+        EVT_CALL(SetNpcAnimation, NPC_Conductor, ANIM_TrainToad_SadIdle)
+        EVT_CALL(InterpNpcYaw, NPC_Conductor, 90, 0)
+        EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_40 | NPC_FLAG_100, FALSE)
+    EVT_END_THREAD
+    EVT_WAIT(10)
+    EVT_THREAD
+        EVT_ADDF(LVar2, EVT_FLOAT(85.0))
+        EVT_CALL(AddVectorPolar, LVar0, LVar1, EVT_FLOAT(80.0), LVar2)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
+        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
+        EVT_CALL(PlayerMoveTo, LVar0, LVar1, 0)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_END_THREAD
+    EVT_WAIT(10)
+    EVT_ADDF(LVar2, EVT_FLOAT(50.0))
+    EVT_CALL(AddVectorPolar, LVar0, LVar1, EVT_FLOAT(85.0), LVar2)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000102)
+    EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(2.5))
+    EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar0, LVar1, 0)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000106)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40 | NPC_FLAG_100, FALSE)
+    EVT_RETURN
+    EVT_END
+};
+#endif
 
 EvtScript N(EVS_TrainUnk_F) = {
     EVT_SWITCH(AB_OMO_6)

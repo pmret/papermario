@@ -28,8 +28,7 @@
     .anim_F = ANIM_TrainToad_Idle, \
 }
 
-// walk is different from the anims above -- maybe this NPC palette should have a distinct name
-#define TRAIN_CONDUCTOR_PINK_ANIMS \
+#define TRAIN_TOAD_PINK_ANIMS \
 { \
     .idle   = ANIM_TrainToad_Pink_Idle, \
     .walk   = ANIM_TrainToad_Pink_Idle, \
@@ -49,7 +48,7 @@
     .anim_F = ANIM_TrainToad_Pink_Idle, \
 }
 
-#define TRAIN_CONDUCTOR_BLUE_ANIMS \
+#define TRAIN_TOAD_BLUE_ANIMS \
 { \
     .idle   = ANIM_TrainToad_Blue_Idle, \
     .walk   = ANIM_TrainToad_Blue_Idle, \
@@ -69,7 +68,7 @@
     .anim_F = ANIM_TrainToad_Blue_Idle, \
 }
 
-#define TRAIN_CONDUCTOR_GREEN_ANIMS \
+#define TRAIN_TOAD_GREEN_ANIMS \
 { \
     .idle   = ANIM_TrainToad_Green_Idle, \
     .walk   = ANIM_TrainToad_Green_Idle, \
@@ -89,7 +88,7 @@
     .anim_F = ANIM_TrainToad_Green_Idle, \
 }
 
-#define TRAIN_CONDUCTOR_RED_ANIMS \
+#define TRAIN_TOAD_RED_ANIMS \
 { \
     .idle   = ANIM_TrainToad_Red_Idle, \
     .walk   = ANIM_TrainToad_Red_Idle, \
@@ -109,7 +108,7 @@
     .anim_F = ANIM_TrainToad_Red_Idle, \
 }
 
-#define TRAIN_CONDUCTOR_WHITE_ANIMS \
+#define TRAIN_TOAD_WHITE_ANIMS \
 { \
     .idle   = ANIM_TrainToad_White_Idle, \
     .walk   = ANIM_TrainToad_White_Idle, \

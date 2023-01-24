@@ -12,8 +12,8 @@
 #include "sprite/npc/PyroGuy.h"
 
 enum {
-	NPC_PyroGuy_01      = 0,
-	NPC_PyroGuy_02      = 1,
+    NPC_PyroGuy_01      = 0,
+    NPC_PyroGuy_02      = 1,
 };
 
 enum {

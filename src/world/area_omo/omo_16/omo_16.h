@@ -12,7 +12,7 @@
 #include "sprite/npc/TrainToad.h"
 
 enum {
-	NPC_Conductor       = 0,
+    NPC_Conductor       = 0,
 };
 
 enum {

@@ -1,5 +1,6 @@
 #include "common.h"
 
+// args: start, end, duration, EasingType
 ApiStatus MakeLerp(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 

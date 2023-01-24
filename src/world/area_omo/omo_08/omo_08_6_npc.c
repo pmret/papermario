@@ -125,7 +125,7 @@ StaticNpc N(NpcData_Toads)[] = {
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-        .animations = TRAIN_CONDUCTOR_GREEN_ANIMS,
+        .animations = TRAIN_TOAD_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,
     },
 };

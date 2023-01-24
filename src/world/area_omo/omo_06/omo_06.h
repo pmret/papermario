@@ -12,8 +12,8 @@
 #include "sprite/npc/TrainToad.h"
 
 enum {
-	NPC_Conductor           = 0,
-	NPC_TrainToad    = 1,
+    NPC_Conductor           = 0,
+    NPC_TrainToad    = 1,
 };
 
 enum {
@@ -29,7 +29,7 @@ enum {
 enum {
     MF_TrainUnk_00          = MapFlag(0),
     MF_EitherSwitchPressed  = MapFlag(1),
-	MF_Unk_0A		        = MapFlag(10),
+    MF_Unk_0A               = MapFlag(10),
 };
 
 #define NAMESPACE omo_06

@@ -13,9 +13,9 @@
 #include "sprite/npc/GrooveGuy.h"
 
 enum {
-	NPC_AntiGuy		= 0,
-	NPC_ShyGuy		= 1,
-	NPC_GrooveGuy	= 2,
+    NPC_AntiGuy     = 0,
+    NPC_ShyGuy      = 1,
+    NPC_GrooveGuy   = 2,
 };
 
 #define NAMESPACE omo_13

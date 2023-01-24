@@ -616,7 +616,7 @@ StaticNpc N(NpcData_Toads)[] = {
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_TrainToad_01),
         .drops = TRAIN_CONDUCTOR_DROPS,
-        .animations = TRAIN_CONDUCTOR_WHITE_ANIMS,
+        .animations = TRAIN_TOAD_WHITE_ANIMS,
         .tattle = MSG_NpcTattle_MAC_StationMaster,
     },
     {

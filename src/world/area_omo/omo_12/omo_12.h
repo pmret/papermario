@@ -13,14 +13,14 @@
 #include "sprite/npc/WorldWatt.h"
 
 enum {
-	NPC_BigLanternGhost		= 0,
-	NPC_Watt				= 1,
-	NPC_LaternTop      		= 2,
-	NPC_LaternBottom		= 3,
+    NPC_BigLanternGhost     = 0,
+    NPC_Watt                = 1,
+    NPC_LaternTop           = 2,
+    NPC_LaternBottom        = 3,
 };
 
 enum {
-    MF_LanternGhost_DoneSpeaking	= MapFlag(0),
+    MF_LanternGhost_DoneSpeaking    = MapFlag(0),
 };
 
 #define NAMESPACE omo_12
