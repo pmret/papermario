@@ -18,7 +18,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC_WAIT(N(EVS_SetupGizmos))
     EVT_EXEC_WAIT(N(EVS_SetupMusic))
-    EVT_EXEC_WAIT(N(EVS_8024455C))
+    EVT_EXEC_WAIT(N(EVS_SetupBarricade))
     EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)

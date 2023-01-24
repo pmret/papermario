@@ -2,22 +2,57 @@
 #include "model.h"
 #include "effects.h"
 
-void N(func_802402C0_D9D790)(Gfx* displayList, s32* outDist) {
+s32 N(BarricadeModels)[] = {
+    MODEL_t2, MODEL_t3, MODEL_t4, MODEL_t5,
+    MODEL_t2_2, MODEL_t2_3, MODEL_t2_4, MODEL_t2_5, 
+    MODEL_t3_1, MODEL_t3_3, MODEL_t3_4, MODEL_t3_5, 
+};
+
+s32 N(BarricadeColliders)[] = {
+    COLLIDER_t2, COLLIDER_t3, COLLIDER_t4, COLLIDER_t5,
+    COLLIDER_t2_2, COLLIDER_t2_3, COLLIDER_t2_4, COLLIDER_t2_5, 
+    COLLIDER_t3_1, COLLIDER_t3_3, COLLIDER_t3_4, COLLIDER_t3_5, 
+};
+
+typedef struct BarricadePart {
+    /* 0x00 */ s32 state;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ Vec3f origin;
+    /* 0x1C */ Vec3f rot;
+    /* 0x28 */ Vec3f angularVelocity;
+    /* 0x34 */ f32 verticalVelocity;
+    /* 0x38 */ f32 planarVelocity;
+    /* 0x3C */ f32 velocityAngle;
+    /* 0x40 */ s32 modelID;
+    /* 0x44 */ s32 colliderID;
+    /* 0x48 */ Matrix4f transformMatrix;
+    /* 0x88 */ s32 radius;
+} BarricadePart; // size = 0x8C
+
+enum {
+    BARRICADE_STATE_FLYING      = 0,
+    BARRICADE_STATE_CLEANUP     = 100,
+    BARRICADE_STATE_DONE        = 101,
+};
+
+// iterate through the display list, checking each vertex's distance from (0,0,0) and return the minimum distance
+// this creates a spherical collision volume for the flying debris
+void N(DetermineSphericalSize)(Gfx* displayList, s32* outDist) {
     char pad[0x8];
     Gfx* dlist = displayList;
     u8 cmd;
 
     do {
-        u32 temp_s2 = dlist->words.w0;
-        u32 temp_s3 = dlist->words.w1;
+        u32 w0 = dlist->words.w0;
+        u32 w1 = dlist->words.w1;
 
-        cmd = temp_s2 >> 0x18;
+        cmd = w0 >> 0x18;
         if (cmd == G_DL) {
-            N(func_802402C0_D9D790)((Gfx*) temp_s3, outDist);
+            N(DetermineSphericalSize)((Gfx*) w1, outDist);
         }
         if (cmd == G_VTX) {
-            s32 numVertices = (temp_s2 >> 0xC) & 0xFF;
-            Vtx* vtx = (Vtx*) temp_s3;
+            s32 numVertices = (w0 >> 0xC) & 0xFF;
+            Vtx* vtx = (Vtx*) w1;
             f32 subX, subY, subZ;
             s32 i;
 
@@ -26,10 +61,10 @@ void N(func_802402C0_D9D790)(Gfx* displayList, s32* outDist) {
             *outDist = -1;
 
             for (i = 0; i < numVertices; i++) {
-                f32 x = vtx[i].v.ob[0] - subX;
-                f32 y = vtx[i].v.ob[1] - subY;
-                f32 z = vtx[i].v.ob[2] - subZ;
-                f32 dist = sqrtf(SQ(x) + SQ(y) + SQ(z));
+                f32 dx = vtx[i].v.ob[0] - subX;
+                f32 dy = vtx[i].v.ob[1] - subY;
+                f32 dz = vtx[i].v.ob[2] - subZ;
+                f32 dist = sqrtf(SQ(dx) + SQ(dy) + SQ(dz));
 
                 if (*outDist < dist) {
                     *outDist = dist;
@@ -40,169 +75,142 @@ void N(func_802402C0_D9D790)(Gfx* displayList, s32* outDist) {
     } while (cmd != G_ENDDL);
 }
 
-s32 N(D_80243580_DA0A50)[] = {
-    84, 86, 88, 90,
-    95, 97, 99, 101, 
-    104, 108, 110, 112, 
-};
-
-s32 N(D_802435B0_DA0A80)[] = {
-    44, 46, 48, 50,
-    55, 57, 59, 61, 
-    64, 68, 70, 72, 
-};
-
-typedef struct OmoUnkThing {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ Vec3f center;
-    /* 0x10 */ Vec3f unk_10;
-    /* 0x1C */ Vec3f rot;
-    /* 0x28 */ Vec3f unk_28;
-    /* 0x34 */ f32 unk_34;
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ f32 unk_3C;
-    /* 0x40 */ s32 treeIndex;
-    /* 0x44 */ s32 colliderID;
-    /* 0x48 */ Matrix4f transformMatrix;
-    /* 0x88 */ s32 unk_88;
-} OmoUnkThing; // size = 0x8C
-
-API_CALLABLE(N(func_8024043C_D9D90C)) {
-    Matrix4f sp18, sp58, sp98, spD8;
+API_CALLABLE(N(AnimateBarricadeParts)) {
+    Matrix4f mtxTransform, mtxRotX, mtxRotY, mtxRotZ;
+    BarricadePart* part;
     Model* model;
-    OmoUnkThing* data;
-    OmoUnkThing* it;
     u32 i;
     s32 j, k;
 
     if (isInitialCall) {
-        script->functionTempPtr[0] = heap_malloc(sizeof(*data) * 12);
+        script->functionTempPtr[0] = heap_malloc(sizeof(*part) * ARRAY_COUNT(N(BarricadeModels)));
         script->functionTemp[1] = 0;
 
-        it = (OmoUnkThing*) script->functionTempPtr[0];
-        for (i = 0; i < ARRAY_COUNT(N(D_80243580_DA0A50)); i++, it++) {
-            it->treeIndex = N(D_80243580_DA0A50)[i];
-            it->colliderID = N(D_802435B0_DA0A80)[i];
-            model = get_model_from_list_index(get_model_list_index_from_tree_index(it->treeIndex));
-            it->unk_00 = 0;
-            it->center.x = model->center.x;
-            it->center.y = model->center.y;
-            it->center.z = model->center.z;
-            it->rot.x = 0.0f;
-            it->rot.y = 0.0f;
-            it->rot.z = 0.0f;
-            it->unk_10.x = it->center.x;
-            it->unk_10.y = it->center.y;
-            it->unk_10.z = it->center.z;
-            it->unk_28.x = rand_int(20) - 10;
-            it->unk_28.y = rand_int(20) - 10;
-            it->unk_28.z = rand_int(20) - 10;
-            it->unk_34 = (rand_int(40) + 100.0f) / 10.0f;
-            it->unk_38 = (rand_int(30) + 60.0f) / 10.0f;
-            it->unk_3C = ((rand_int(100) % 2) * 180.0f) + 90.0f;
-            N(func_802402C0_D9D790)(model->modelNode->displayData->displayList, &it->unk_88);
+        part = (BarricadePart*) script->functionTempPtr[0];
+        for (i = 0; i < ARRAY_COUNT(N(BarricadeModels)); i++, part++) {
+            part->modelID = N(BarricadeModels)[i];
+            part->colliderID = N(BarricadeColliders)[i];
+            model = get_model_from_list_index(get_model_list_index_from_tree_index(part->modelID));
+            part->state = BARRICADE_STATE_FLYING;
+            part->pos.x = model->center.x;
+            part->pos.y = model->center.y;
+            part->pos.z = model->center.z;
+            part->rot.x = 0.0f;
+            part->rot.y = 0.0f;
+            part->rot.z = 0.0f;
+            part->origin.x = part->pos.x;
+            part->origin.y = part->pos.y;
+            part->origin.z = part->pos.z;
+            part->angularVelocity.x = rand_int(20) - 10;
+            part->angularVelocity.y = rand_int(20) - 10;
+            part->angularVelocity.z = rand_int(20) - 10;
+            part->verticalVelocity = (rand_int(40) + 100.0f) / 10.0f;
+            part->planarVelocity = (rand_int(30) + 60.0f) / 10.0f;
+            part->velocityAngle = ((rand_int(100) % 2) * 180.0f) + 90.0f;
+            N(DetermineSphericalSize)(model->modelNode->displayData->displayList, &part->radius);
 
             for (j = 0; j < 4; j++) {
                 for (k = 0; k < 4; k++) {
-                    it->transformMatrix[j][k] = model->transformMatrix[j][k];
+                    part->transformMatrix[j][k] = model->transformMatrix[j][k];
                 }
             }
         }
     }
 
-    it = script->functionTempPtr[0];
-    for (i = 0; i < ARRAY_COUNT(N(D_80243580_DA0A50)); i++, it++) {
-        model = get_model_from_list_index(get_model_list_index_from_tree_index(it->treeIndex));
-        if (it->unk_00 != 100) {
-            if (it->unk_00 < 101) {
-                if (it->unk_00 == 0) {
-                    add_vec2D_polar(&it->center.x, &it->center.z, it->unk_38, it->unk_3C);
-                    it->unk_34 -= 0.8f;
-                    it->center.y += it->unk_34;
-                    if (it->unk_34 <= 0.0f && it->center.y < it->unk_88) {
-                        it->center.y = it->unk_88;
-                        it->unk_34 *= -0.7f;
-                        if (it->unk_34 < 1.0f) {
-                            it->unk_00 = 100;
-                            it->unk_28.x = 0.0f;
-                            it->unk_28.y = 0.0f;
-                            it->unk_28.z = 0.0f;
+    part = script->functionTempPtr[0];
+    for (i = 0; i < ARRAY_COUNT(N(BarricadeModels)); i++, part++) {
+        model = get_model_from_list_index(get_model_list_index_from_tree_index(part->modelID));
+        switch (part->state) {
+            case BARRICADE_STATE_FLYING:
+                    add_vec2D_polar(&part->pos.x, &part->pos.z, part->planarVelocity, part->velocityAngle);
+                    part->verticalVelocity -= 0.8f;
+                    part->pos.y += part->verticalVelocity;
+                    if (part->verticalVelocity <= 0.0f && part->pos.y < part->radius) {
+                        part->pos.y = part->radius;
+                        part->verticalVelocity *= -0.7f;
+                        if (part->verticalVelocity < 1.0f) {
+                            part->state = BARRICADE_STATE_CLEANUP;
+                            part->angularVelocity.x = 0.0f;
+                            part->angularVelocity.y = 0.0f;
+                            part->angularVelocity.z = 0.0f;
                         }
                         if (i & 1) {
                             exec_ShakeCam1(0, 0, 1);
                         }
                     }
-                }
-            }
-        } else {
-            update_collider_transform(it->colliderID);
-            script->functionTemp[1]++;
-            it->unk_00 = 101;
+                break;
+            case BARRICADE_STATE_CLEANUP:
+                update_collider_transform(part->colliderID);
+                script->functionTemp[1]++;
+                part->state = BARRICADE_STATE_DONE;
+                break;
+            case BARRICADE_STATE_DONE:
+                break;
         }
 
         for (j = 0; j < 4; j++) {
             for (k = 0; k < 4; k++) {
-                model->transformMatrix[j][k] = it->transformMatrix[j][k];
+                model->transformMatrix[j][k] = part->transformMatrix[j][k];
             }
         }
 
         model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
-        guTranslateF(sp18, it->center.x - it->unk_10.x, it->center.y - it->unk_10.y, it->center.z - it->unk_10.z);
-        it->rot.x += it->unk_28.x;
-        it->rot.y += it->unk_28.y;
-        it->rot.z += it->unk_28.z;
-        it->rot.x = clamp_angle(it->rot.x);
-        it->rot.y = clamp_angle(it->rot.y);
-        it->rot.z = clamp_angle(it->rot.z);
-        guRotateF(sp58, it->rot.x, 1.0f, 0.0f, 0.0f);
-        guRotateF(sp98, it->rot.y, 0.0f, 1.0f, 0.0f);
-        guRotateF(spD8, it->rot.z, 0.0f, 0.0f, 1.0f);
-        guMtxCatF(spD8, sp58, sp58);
-        guMtxCatF(sp58, sp98, sp98);
-        guMtxCatF(sp98, sp18, sp18);
-        guMtxCatF(model->transformMatrix, sp18, model->transformMatrix);
+        guTranslateF(mtxTransform, part->pos.x - part->origin.x, part->pos.y - part->origin.y, part->pos.z - part->origin.z);
+        part->rot.x += part->angularVelocity.x;
+        part->rot.y += part->angularVelocity.y;
+        part->rot.z += part->angularVelocity.z;
+        part->rot.x = clamp_angle(part->rot.x);
+        part->rot.y = clamp_angle(part->rot.y);
+        part->rot.z = clamp_angle(part->rot.z);
+        guRotateF(mtxRotX, part->rot.x, 1.0f, 0.0f, 0.0f);
+        guRotateF(mtxRotY, part->rot.y, 0.0f, 1.0f, 0.0f);
+        guRotateF(mtxRotZ, part->rot.z, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(mtxRotZ, mtxRotX, mtxRotX);
+        guMtxCatF(mtxRotX, mtxRotY, mtxRotY);
+        guMtxCatF(mtxRotY, mtxTransform, mtxTransform);
+        guMtxCatF(model->transformMatrix, mtxTransform, model->transformMatrix);
     }
 
-    if ((u32) script->functionTemp[1] >= ARRAY_COUNT(N(D_80243580_DA0A50))) {
+    if ((u32) script->functionTemp[1] >= ARRAY_COUNT(N(BarricadeModels))) {
         heap_free(script->functionTempPtr[0]);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
 }
 
-BombTrigger N(D_802435E0_DA0AB0) = {
+BombTrigger N(BombPos_Barricade) = {
     .pos = { -520.0f, 0.0f, 0.0f },
     .radius = 0.0f
 };
 
-EvtScript N(D_802435F0_DA0AC0) = {
+EvtScript N(EVS_Scene_BreakBarricade) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(EnableGroup, MODEL_hibi, FALSE)
     EVT_THREAD
-        EVT_CALL(N(func_8024043C_D9D90C))
+        EVT_CALL(N(AnimateBarricadeParts))
         EVT_LOOP(10)
-            EVT_USE_BUF(EVT_PTR(N(D_80243580_DA0A50)))
-            EVT_LOOP(12)
+            EVT_USE_BUF(EVT_PTR(N(BarricadeModels)))
+            EVT_LOOP(ARRAY_COUNT(N(BarricadeModels)))
                 EVT_BUF_READ1(LVar0)
                 EVT_CALL(EnableModel, LVar0, TRUE)
             EVT_END_LOOP
             EVT_WAIT(2)
-            EVT_USE_BUF(EVT_PTR(N(D_80243580_DA0A50)))
-            EVT_LOOP(12)
+            EVT_USE_BUF(EVT_PTR(N(BarricadeModels)))
+            EVT_LOOP(ARRAY_COUNT(N(BarricadeModels)))
                 EVT_BUF_READ1(LVar0)
                 EVT_CALL(EnableModel, LVar0, FALSE)
             EVT_END_LOOP
             EVT_WAIT(2)
         EVT_END_LOOP
-        EVT_USE_BUF(EVT_PTR(N(D_802435B0_DA0A80)))
-        EVT_LOOP(12)
+        EVT_USE_BUF(EVT_PTR(N(BarricadeColliders)))
+        EVT_LOOP(ARRAY_COUNT(N(BarricadeColliders)))
             EVT_BUF_READ1(LVar0)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar0, COLLIDER_FLAGS_UPPER_MASK)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(30)
-        EVT_KILL_THREAD(MV_Unk_0A)
+        EVT_KILL_THREAD(MV_RestrictCamScript)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
         EVT_WAIT(1)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -380, 0, 0)
@@ -345,9 +353,9 @@ EvtScript N(D_802435F0_DA0AC0) = {
             EVT_IF_EQ(LVar2, 0)
                 EVT_CALL(NpcJump0, LVar0, LVar1, 0, LVar3, LVar4)
             EVT_END_IF
-            EVT_CALL(SetNpcVar, LVar0, 0, 11)
+            EVT_CALL(SetNpcVar, LVar0, 0, CROWD_STATE_TURN_AROUND)
             EVT_WAIT(LVar5)
-            EVT_CALL(SetNpcVar, LVar0, 0, 20)
+            EVT_CALL(SetNpcVar, LVar0, 0, CROWD_STATE_RUN_AWAY)
         EVT_END_THREAD
         EVT_ADD(LVar0, 1)
         EVT_ADD(LVar5, 12)
@@ -413,7 +421,7 @@ EvtScript N(D_802435F0_DA0AC0) = {
     EVT_END
 };
 
-EvtScript N(EVS_8024455C) = {
+EvtScript N(EVS_SetupBarricade) = {
     EVT_CALL(ParentColliderToModel, COLLIDER_t1, MODEL_t1)
     EVT_CALL(ParentColliderToModel, COLLIDER_t2, MODEL_t2)
     EVT_CALL(ParentColliderToModel, COLLIDER_t3, MODEL_t3)
@@ -430,16 +438,16 @@ EvtScript N(EVS_8024455C) = {
     EVT_CALL(ParentColliderToModel, COLLIDER_t3_4, MODEL_t3_4)
     EVT_CALL(ParentColliderToModel, COLLIDER_t3_5, MODEL_t3_5)
     EVT_IF_EQ(GF_OMO02_BombedWall, FALSE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(D_802435F0_DA0AC0)), TRIGGER_POINT_BOMB, EVT_PTR(N(D_802435E0_DA0AB0)), 1, 0)
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_BreakBarricade)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Barricade)), 1, 0)
     EVT_ELSE
         EVT_CALL(EnableGroup, MODEL_hibi, FALSE)
-        EVT_USE_BUF(EVT_PTR(N(D_80243580_DA0A50)))
-        EVT_LOOP(12)
+        EVT_USE_BUF(EVT_PTR(N(BarricadeModels)))
+        EVT_LOOP(ARRAY_COUNT(N(BarricadeModels)))
             EVT_BUF_READ1(LVar0)
             EVT_CALL(EnableModel, LVar0, FALSE)
         EVT_END_LOOP
-        EVT_USE_BUF(EVT_PTR(N(D_802435B0_DA0A80)))
-        EVT_LOOP(12)
+        EVT_USE_BUF(EVT_PTR(N(BarricadeColliders)))
+        EVT_LOOP(ARRAY_COUNT(N(BarricadeColliders)))
             EVT_BUF_READ1(LVar0)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar0, COLLIDER_FLAGS_UPPER_MASK)
         EVT_END_LOOP

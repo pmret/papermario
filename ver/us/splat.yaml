@@ -14429,7 +14429,7 @@ segments:
     - [0xD9D4D0, c, omo_02_2_main]
     - [0xD9D4D0, c, omo_02_3_entity]
     - [0xD9D510, c, omo_02_4_gizmos]
-    - [0xD9D790, c, omo_02_5]
+    - [0xD9D790, c, omo_02_5_barricade]
     - [0xD9DE40, c, omo_02_6_npc]
     - [0xDA0080]
   - name: omo_03

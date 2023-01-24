@@ -5,7 +5,7 @@
 #include "world/common/enemy/complete/ShyGuy_Stationary.inc.c"
 #include "world/common/enemy/complete/SpyGuy.inc.c"
 
-EvtScript N(D_80244D64_DA2234) = {
+EvtScript N(EVS_RestrictCamFromBarricade) = {
     EVT_LABEL(0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -20,7 +20,7 @@ EvtScript N(D_80244D64_DA2234) = {
     EVT_END
 };
 
-EvtScript N(D_80244E44_DA2314) = {
+EvtScript N(EVS_PlayShyGuyRunSounds) = {
     EVT_LOOP(0)
         EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_B0000021, 0)
         EVT_WAIT(8)
@@ -40,7 +40,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
         EVT_CALL(SetPanTarget, CAM_DEFAULT, -570, 0, 0)
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_EXEC_GET_TID(N(D_80244E44_DA2314), LVarA)
+        EVT_EXEC_GET_TID(N(EVS_PlayShyGuyRunSounds), LVarA)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(6.0))
         EVT_CALL(NpcMoveTo, NPC_SELF, -575, 0, 0)
@@ -49,11 +49,11 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
         EVT_CALL(NpcJump0, NPC_SELF, -460, 0, -20, 40)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_EXEC_GET_TID(N(D_80244D64_DA2234), MV_Unk_0A)
+        EVT_EXEC_GET_TID(N(EVS_RestrictCamFromBarricade), MV_RestrictCamScript)
         EVT_SET(GF_OMO02_ShyGuyFledBehindWall, TRUE)
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_ELSE
-        EVT_EXEC_GET_TID(N(D_80244D64_DA2234), MV_Unk_0A)
+        EVT_EXEC_GET_TID(N(EVS_RestrictCamFromBarricade), MV_RestrictCamScript)
         EVT_CALL(SetNpcPos, NPC_SELF, -575, 0, -20)
         EVT_LABEL(10)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -80,192 +80,205 @@ EvtScript N(EVS_NpcInit_ShyGuy_Loner) = {
     EVT_END
 };
 
-s32 N(D_802451B4_DA2684)[] = {
-    0, -320,  30,
-    0, -234,  23,
-    1, -172,   0,  25,
-    0, -120,  43,
-    0,  -63, -16,
-    1,  -24,   0, -11,
-    0,   17,  46,
-    1,   65,   0,  87,
-    0,  115,  72,
-    1,  154,   0,  33,
-    0,  194,   0,
-    0,  240,  -2,
-    -1,
+// "CrowdScript"
+enum {
+    CS_MOVE     = 0,
+    CS_JUMP     = 1,
+    CS_END      = -1,
 };
 
-s32 N(D_80245258_DA2728)[] = {
-    0, -279,   20,
-    0, -168,   30,
-    0, -106,  -11,
-    0,  -60,  -67,
-    0,  -19, -104,
-    0,   29,  -72,
-    0,   76,    8,
-    0,  128,   99,
-    0,  196,   79,
-    0,  259,   14,
-    0,  309,  -20,
-    0,  371,   30,
-    -1,
+s32 N(CrowdScriptA)[] = {
+    CS_MOVE, -320,  30,
+    CS_MOVE, -234,  23,
+    CS_JUMP, -172,   0,  25,
+    CS_MOVE, -120,  43,
+    CS_MOVE,  -63, -16,
+    CS_JUMP,  -24,   0, -11,
+    CS_MOVE,   17,  46,
+    CS_JUMP,   65,   0,  87,
+    CS_MOVE,  115,  72,
+    CS_JUMP,  154,   0,  33,
+    CS_MOVE,  194,   0,
+    CS_MOVE,  240,  -2,
+    CS_END,
 };
 
-s32 N(D_802452EC_DA27BC)[] = {
-    0, -326,  42,
-    0, -288,  69,
-    0, -256,  84,
-    0, -229,  68,
-    0, -208,  43,
-    0, -181,  21,
-    0, -155,  21,
-    0, -121,  50,
-    0, -120, 103,
-    0, -145, 111,
-    0, -168,  73,
-    0, -164,  22,
-    0, -123, -13,
-    0,  -77,   0,
-    1,  -30,   0,  27,
-    0,    5,  45,
-    0,   40,  41,
-    0,   87,   0,
-    0,  120,  -7,
-    0,  177,  18,
-    0,  219,  46,
-    0,  260,  54,
-    -1, 
+s32 N(CrowdScriptB)[] = {
+    CS_MOVE, -279,   20,
+    CS_MOVE, -168,   30,
+    CS_MOVE, -106,  -11,
+    CS_MOVE,  -60,  -67,
+    CS_MOVE,  -19, -104,
+    CS_MOVE,   29,  -72,
+    CS_MOVE,   76,    8,
+    CS_MOVE,  128,   99,
+    CS_MOVE,  196,   79,
+    CS_MOVE,  259,   14,
+    CS_MOVE,  309,  -20,
+    CS_MOVE,  371,   30,
+    CS_END,
 };
 
-s32 N(D_802453FC_DA28CC)[] = {
-    0, -309,   9,
-    0, -230,  27,
-    0, -150,  16,
-    0,  -97, -24,
-    0,  -31, -13,
-    0,   25,  30,
-    0,   84,  27,
-    0,  133,  -3,
-    -1,
+s32 N(CrowdScriptC)[] = {
+    CS_MOVE, -326,  42,
+    CS_MOVE, -288,  69,
+    CS_MOVE, -256,  84,
+    CS_MOVE, -229,  68,
+    CS_MOVE, -208,  43,
+    CS_MOVE, -181,  21,
+    CS_MOVE, -155,  21,
+    CS_MOVE, -121,  50,
+    CS_MOVE, -120, 103,
+    CS_MOVE, -145, 111,
+    CS_MOVE, -168,  73,
+    CS_MOVE, -164,  22,
+    CS_MOVE, -123, -13,
+    CS_MOVE,  -77,   0,
+    CS_JUMP,  -30,   0,  27,
+    CS_MOVE,    5,  45,
+    CS_MOVE,   40,  41,
+    CS_MOVE,   87,   0,
+    CS_MOVE,  120,  -7,
+    CS_MOVE,  177,  18,
+    CS_MOVE,  219,  46,
+    CS_MOVE,  260,  54,
+    CS_END, 
 };
 
-s32* N(D_80245460_DA2930)[] = {
-    N(D_802451B4_DA2684),
-    N(D_80245258_DA2728),
-    N(D_802452EC_DA27BC),
-    N(D_802453FC_DA28CC),
-    N(D_802451B4_DA2684),
-    N(D_80245258_DA2728),
-    N(D_802451B4_DA2684),
-    N(D_802453FC_DA28CC), 
-    N(D_802451B4_DA2684),
-    N(D_80245258_DA2728), 
+s32 N(CrowdScriptD)[] = {
+    CS_MOVE, -309,   9,
+    CS_MOVE, -230,  27,
+    CS_MOVE, -150,  16,
+    CS_MOVE,  -97, -24,
+    CS_MOVE,  -31, -13,
+    CS_MOVE,   25,  30,
+    CS_MOVE,   84,  27,
+    CS_MOVE,  133,  -3,
+    CS_END,
+};
+
+s32* N(CrowdFleeScripts)[] = {
+    N(CrowdScriptA),
+    N(CrowdScriptB),
+    N(CrowdScriptC),
+    N(CrowdScriptD),
+    N(CrowdScriptA),
+    N(CrowdScriptB),
+    N(CrowdScriptA),
+    N(CrowdScriptD),
+    N(CrowdScriptA),
+    N(CrowdScriptB), 
 };
 
 EvtScript N(EVS_NpcIdle_ShyGuy_Crowd) = {
     EVT_CALL(GetNpcPos, NPC_SELF, LVarA, LVarB, LVarC)
     EVT_LABEL(0)
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(RandInt, 2, LVar0)
-            EVT_ADD(LVar0, 1)
-            EVT_CALL(SetSelfVar, 0, LVar0)
-        EVT_CASE_EQ(1)
-            EVT_LOOP(3)
+        EVT_CALL(GetSelfVar, 0, LVar0)
+        EVT_SWITCH(LVar0)
+            EVT_CASE_EQ(CROWD_STATE_INIT)
+                EVT_CALL(RandInt, 2, LVar0)
+                EVT_ADD(LVar0, 1)
+                EVT_CALL(SetSelfVar, 0, LVar0)
+            EVT_CASE_EQ(CROWD_STATE_RANDOM_LOOK)
+                EVT_LOOP(3)
+                    EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
+                    EVT_WAIT(2)
+                    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
+                    EVT_WAIT(2)
+                    EVT_CALL(RandInt, 1, LVar0)
+                    EVT_IF_EQ(LVar0, 1)
+                        EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
+                        EVT_WAIT(2)
+                    EVT_END_IF
+                    EVT_CALL(RandInt, 10, LVar0)
+                    EVT_ADD(LVar0, 5)
+                    EVT_WAIT(LVar0)
+                EVT_END_LOOP
+                EVT_CALL(GetSelfVar, 0, LVar0)
+                EVT_IF_EQ(LVar0, CROWD_STATE_RANDOM_LOOK)
+                    EVT_CALL(SetSelfVar, 0, CROWD_STATE_RANDOM_DELAY)
+                EVT_END_IF
+            EVT_CASE_EQ(CROWD_STATE_RANDOM_JUMP)
+                EVT_CALL(RandInt, 1, LVar0)
+                EVT_IF_EQ(LVar0, 1)
+                    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
+                    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                    EVT_IF_EQ(LVar1, 0)
+                        EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 15)
+                    EVT_END_IF
+                EVT_END_IF
+                EVT_CALL(GetSelfVar, 0, LVar0)
+                EVT_IF_EQ(LVar0, CROWD_STATE_RANDOM_JUMP)
+                    EVT_CALL(SetSelfVar, 0, CROWD_STATE_RANDOM_DELAY)
+                EVT_END_IF
+            EVT_CASE_EQ(CROWD_STATE_RANDOM_DELAY)
+                EVT_CALL(RandInt, 30, LVar0)
+                EVT_ADD(LVar0, 10)
+                EVT_WAIT(LVar0)
+                EVT_CALL(RandInt, 1, LVar0)
+                EVT_ADD(LVar0, 1)
+                EVT_CALL(GetSelfVar, 0, LVar1)
+                EVT_IF_EQ(LVar1, CROWD_STATE_RANDOM_DELAY)
+                    EVT_CALL(SetSelfVar, 0, LVar0)
+                EVT_END_IF
+            EVT_CASE_EQ(CROWD_STATE_TURN_AROUND)
                 EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
                 EVT_WAIT(2)
                 EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
                 EVT_WAIT(2)
-                EVT_CALL(RandInt, 1, LVar0)
-                EVT_IF_EQ(LVar0, 1)
-                    EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-                    EVT_WAIT(2)
-                EVT_END_IF
-                EVT_CALL(RandInt, 10, LVar0)
-                EVT_ADD(LVar0, 5)
-                EVT_WAIT(LVar0)
-            EVT_END_LOOP
-            EVT_CALL(GetSelfVar, 0, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_CALL(SetSelfVar, 0, 10)
-            EVT_END_IF
-        EVT_CASE_EQ(2)
-            EVT_CALL(RandInt, 1, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-                EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 15)
-                EVT_END_IF
-            EVT_END_IF
-            EVT_CALL(GetSelfVar, 0, LVar0)
-            EVT_IF_EQ(LVar0, 2)
-                EVT_CALL(SetSelfVar, 0, 10)
-            EVT_END_IF
-        EVT_CASE_EQ(10)
-            EVT_CALL(RandInt, 30, LVar0)
-            EVT_ADD(LVar0, 10)
-            EVT_WAIT(LVar0)
-            EVT_CALL(RandInt, 1, LVar0)
-            EVT_ADD(LVar0, 1)
-            EVT_CALL(GetSelfVar, 0, LVar1)
-            EVT_IF_EQ(LVar1, 10)
-                EVT_CALL(SetSelfVar, 0, LVar0)
-            EVT_END_IF
-        EVT_CASE_EQ(11)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-            EVT_WAIT(2)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-            EVT_WAIT(2)
-        EVT_CASE_EQ(20)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100, 1)
-            EVT_CALL(GetSelfNpcID, LVar0)
-            EVT_USE_BUF(EVT_PTR(N(D_80245460_DA2930)))
-            EVT_LOOP(LVar0)
-                EVT_BUF_READ1(LVar1)
-            EVT_END_LOOP
-            EVT_USE_BUF(LVar1)
-            EVT_LABEL(10)
-            EVT_BUF_READ1(LVar2)
-            EVT_SWITCH(LVar2)
-                EVT_CASE_EQ(0)
-                    EVT_BUF_READ2(LVar3, LVar4)
-                    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim04)
-                    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(10.0))
-                    EVT_CALL(NpcMoveTo, NPC_SELF, LVar3, LVar4, 0)
-                EVT_CASE_EQ(1)
-                    EVT_BUF_READ3(LVar3, LVar4, LVar5)
-                    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-                    EVT_CALL(NpcJump0, NPC_SELF, LVar3, LVar4, LVar5, 10)
-            EVT_END_SWITCH
-            EVT_IF_NE(LVar2, -1)
-                EVT_GOTO(10)
-            EVT_END_IF
-            EVT_CALL(SetSelfVar, 0, 21)
-        EVT_CASE_EQ(21)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+            EVT_CASE_EQ(CROWD_STATE_RUN_AWAY)
+                EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100, 1)
+                EVT_CALL(GetSelfNpcID, LVar0)
+                EVT_USE_BUF(EVT_PTR(N(CrowdFleeScripts)))
+                EVT_LOOP(LVar0)
+                    EVT_BUF_READ1(LVar1)
+                EVT_END_LOOP
+                EVT_USE_BUF(LVar1)
+                EVT_LABEL(10)
+                    EVT_BUF_READ1(LVar2) // get cmd
+                    EVT_SWITCH(LVar2)
+                        EVT_CASE_EQ(CS_MOVE)
+                            EVT_BUF_READ2(LVar3, LVar4)
+                            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim04)
+                            EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(10.0))
+                            EVT_CALL(NpcMoveTo, NPC_SELF, LVar3, LVar4, 0)
+                        EVT_CASE_EQ(CS_JUMP)
+                            EVT_BUF_READ3(LVar3, LVar4, LVar5)
+                            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
+                            EVT_CALL(NpcJump0, NPC_SELF, LVar3, LVar4, LVar5, 10)
+                    EVT_END_SWITCH
+                    EVT_IF_NE(LVar2, CS_END)
+                        EVT_GOTO(10)
+                    EVT_END_IF
+                EVT_CALL(SetSelfVar, 0, CROWD_STATE_DISPOSE)
+            EVT_CASE_EQ(CROWD_STATE_DISPOSE)
+                EVT_CALL(RemoveNpc, NPC_SELF)
+        EVT_END_SWITCH
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-s32 N(D_802459DC_DA2EAC)[] = {
-    -462, 0, -80, -447, 0, -40, -432, 0, 
-    0, -437, 0, 80, -402, 0, 80, -438, 
-    0, -80, -423, 0, -40, -408, 0, 0, 
-    -474, 0, -59, -378, 0, 80, 
+s32 N(InitialCrowdPositions)[] = {
+    -462, 0, -80,
+    -447, 0, -40,
+    -432, 0,   0,
+    -437, 0,  80,
+    -402, 0,  80,
+    -438, 0, -80,
+    -423, 0, -40,
+    -408, 0,   0,
+    -474, 0, -59,
+    -378, 0,  80,
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy_Crowd) = {
     EVT_IF_EQ(GF_OMO02_BombedWall, FALSE)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_ShyGuy_Crowd)))
         EVT_CALL(GetSelfNpcID, LVar0)
-        EVT_SUB(LVar0, 0)
-        EVT_USE_BUF(EVT_PTR(N(D_802459DC_DA2EAC)))
+        EVT_SUB(LVar0, NPC_ShyGuy_01)
+        EVT_USE_BUF(EVT_PTR(N(InitialCrowdPositions)))
         EVT_LOOP(LVar0)
             EVT_BUF_READ3(LVar1, LVar2, LVar3)
         EVT_END_LOOP
@@ -284,11 +297,7 @@ StaticNpc N(NpcData_ShyGuy_Loner) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_ShyGuy_Loner),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NPC_NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 

@@ -32,7 +32,17 @@ enum {
 };
 
 enum {
-    MV_Unk_0A           = MapVar(10),
+    MV_RestrictCamScript        = MapVar(10),
+};
+
+enum {
+    CROWD_STATE_INIT            = 0,
+    CROWD_STATE_RANDOM_LOOK     = 1,
+    CROWD_STATE_RANDOM_JUMP     = 2,
+    CROWD_STATE_RANDOM_DELAY    = 10,
+    CROWD_STATE_TURN_AROUND     = 11,
+    CROWD_STATE_RUN_AWAY        = 20,
+    CROWD_STATE_DISPOSE         = 21,
 };
 
 #define NAMESPACE omo_02
@@ -40,6 +50,6 @@ enum {
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_SetupMusic);
 extern EvtScript N(EVS_SetupGizmos);
-extern EvtScript N(EVS_8024455C);
+extern EvtScript N(EVS_SetupBarricade);
 extern EvtScript N(EVS_MakeEntities);
 extern NpcGroupList N(DefaultNPCs);
