@@ -777,8 +777,8 @@ typedef struct Camera {
     /* 0x084 */ Vec3f trueRotation;
     /* 0x090 */ f32 currentBlendedYawNegated;
     /* 0x094 */ f32 currentPitch;
-    /* 0x098 */ s32 unk_98;
-    /* 0x09C */ s32 unk_9C;
+    /* 0x098 */ f32 unk_98;
+    /* 0x09C */ f32 unk_9C;
     /* 0x0A0 */ Vp vp;
     /* 0x0B0 */ Vp vpAlt;
     /* 0x0C0 */ s32 unk_C0;
