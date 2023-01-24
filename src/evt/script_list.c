@@ -81,7 +81,7 @@ BSS u32 gBattleMapVars[MAX_MAPVARS];
 BSS s32 DoorModelsSwingCCW[3];
 BSS u32 gBattleMapFlags[MAX_MAPFLAGS];
 
-//s32 evt_execute_next_command(Evt* script);
+s32 evt_execute_next_command(Evt* script);
 
 void sort_scripts(void) {
     s32 temp_a0;
@@ -581,7 +581,11 @@ void update_scripts(void) {
         for (i = 0; i < gScriptListCount; i++) {
             Evt* script = (*gCurrentScriptListPtr)[gScriptIndexList[i]];
 
-            if (script != NULL && script->id == gScriptIdList[i] && script->stateFlags != 0 && !(script->stateFlags & (EVT_FLAG_SUSPENDED | EVT_FLAG_BLOCKED_BY_CHILD | EVT_FLAG_SUSPENDED_IN_GROUP))) {
+            if (script != NULL &&
+                script->id == gScriptIdList[i] &&
+                script->stateFlags != 0 &&
+                !(script->stateFlags & (EVT_FLAG_SUSPENDED | EVT_FLAG_BLOCKED_BY_CHILD | EVT_FLAG_SUSPENDED_IN_GROUP)))
+            {
                 s32 stop = FALSE;
                 s32 status;
 
@@ -590,6 +594,7 @@ void update_scripts(void) {
                 do {
                     if (script->frameCounter < 1.0) {
                         // Continue to next script
+                        do {} while (0); // TODO required to match
                         break;
                     };
 
@@ -609,6 +614,8 @@ void update_scripts(void) {
         gIsUpdatingScripts = FALSE;
     }
 }
+
+// INCLUDE_ASM(s32, "evt/script_list", update_scripts);
 
 // this function is evil
 #ifdef NON_MATCHING
