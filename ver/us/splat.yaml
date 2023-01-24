@@ -14102,10 +14102,11 @@ segments:
     start: 0xD57430
     vram: 0x80240000
     subsegments:
-    - [0xD57430, c]
-    - [0xD58380, data]
-    - [0xD58410, data]
-    - [0xD58860]
+    - [0xD57430, c, pra_06_0_header]
+    - [0xD57430, c, pra_06_1_music]
+    - [0xD57430, c, pra_06_2_main]
+    - [0xD58380, c, pra_06_3_entity]
+    - [0xD58380]
   - name: pra_09
     dir: world/area_pra/pra_09
     type: code
@@ -14398,12 +14399,11 @@ segments:
     start: 0xD999B0
     vram: 0x80240000
     subsegments:
-    - [0xD999B0, c]
-    - [0xD999D0, c]
-    - [0xD9A8D0, data]
-    - [0xD9A970, data]
-    - [0xD9AE80, data]
-    - [0xD9AEE0]
+    - [0xD999B0, c, pra_40_0_header]
+    - [0xD999D0, c, pra_40_1_music]
+    - [0xD999D0, c, pra_40_2_main]
+    - [0xD9A8D0, c, pra_40_3_entity]
+    - [0xD9A8D0]
   - name: omo_01
     dir: world/area_omo/omo_01
     type: code

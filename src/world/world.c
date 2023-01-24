@@ -762,7 +762,7 @@ MapConfig pra_maps[] = {
     { MAP_UNSPLIT(pra_03, 0x802401E0), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_04, 0x80240970), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_05, 0x802411F0), .songVariation = 1, .sfxReverb = 1, .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(pra_06, 0x80240F60), .songVariation = 1, .sfxReverb = 1, .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(pra_06), .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(pra_09, 0x80241670), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_10, 0x802416D0), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_11, 0x802411F0), .songVariation = 1, .sfxReverb = 1, .init = (MapInit)0x80240000 },
@@ -788,7 +788,7 @@ MapConfig pra_maps[] = {
     { MAP_UNSPLIT(pra_37, 0x80241840), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_38, 0x80241700), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_39, 0x80241700), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(pra_40, 0x80240F40), .songVariation = 1, .sfxReverb = 1, .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(pra_40), .songVariation = 1, .sfxReverb = 1 },
 };
 
 /// Shy Guy's Toy Box
