@@ -203,7 +203,7 @@ EvtScript N(EVS_SandRingClone_Vanish) = {
     EVT_CALL(EnableModel, CLONED_MODEL(0), TRUE)
     EVT_SET(LVar0, 0)
     EVT_SET(LVar2, 100)
-    EVT_SETF(LVar3, EVT_FLOAT(0.9091))
+    EVT_SETF(LVar3, EVT_FLOAT(0.909))
     EVT_LOOP(20)
         EVT_CALL(ScaleModel, CLONED_MODEL(0), LVar3, EVT_FLOAT(1.0), LVar3)
         EVT_WAIT(1)

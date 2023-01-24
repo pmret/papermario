@@ -338,7 +338,7 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
                 EVT_WAIT(15)
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_385, 0)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GourmetGuy_Leap)
-                EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.001953125))
+                EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.002))
                 EVT_CALL(NpcJump0, NPC_SELF, -250, 500, 110, 40)
                 EVT_CALL(SetSelfVar, 0, 2)
             EVT_END_THREAD

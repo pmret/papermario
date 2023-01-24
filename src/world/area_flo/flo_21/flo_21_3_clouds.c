@@ -51,8 +51,8 @@ EvtScript N(EVS_SetupCloudPuffs) = {
     EVT_THREAD
         EVT_SET(LVarF, 0)
         EVT_LABEL(0)
-            EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.96875), EVT_FLOAT(1.03125), 15, 0, 0)
-            EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(1.03125), EVT_FLOAT(0.96875), 15, 0, 0)
+            EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.968), EVT_FLOAT(1.031), 15, 0, 0)
+            EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(1.031), EVT_FLOAT(0.968), 15, 0, 0)
             EVT_CALL(ScaleModel, MODEL_o1, LVar1, LVar0, 1)
             EVT_CALL(ScaleModel, MODEL_o2, LVar1, LVar0, 1)
             EVT_CALL(ScaleModel, MODEL_o3, LVar0, LVar1, 1)

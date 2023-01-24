@@ -315,7 +315,7 @@ EvtScript N(EVS_MarioPeachExit) = {
     EVT_SETF(LVar1, EVT_FLOAT(0.0))
     EVT_LOOP(0)
         EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_ADDF(LVar1, EVT_FLOAT(0.333333))
+        EVT_ADDF(LVar1, EVT_FLOAT(0.334))
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN

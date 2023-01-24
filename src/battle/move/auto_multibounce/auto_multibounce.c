@@ -63,7 +63,7 @@ EvtScript N(D_802A1320) = {
         EVT_SET(LVar6, LVar7)
     EVT_END_IF
     EVT_SUB(LVar6, 20)
-    EVT_DIVF(LVar6, EVT_FLOAT(10.5888671875))
+    EVT_DIVF(LVar6, EVT_FLOAT(10.588))
     EVT_ADDF(LVar6, 15)
     EVT_SET(LVarA, LVar6)
     EVT_RETURN

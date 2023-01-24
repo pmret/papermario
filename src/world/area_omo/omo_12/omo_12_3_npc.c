@@ -466,7 +466,7 @@ EvtScript N(EVS_NpcDefeat_BigLanternGhost) = {
             EVT_DIVF(LVar3, EVT_FLOAT(60.0))
             EVT_DIVF(LVar4, EVT_FLOAT(60.0))
             EVT_DIVF(LVar5, EVT_FLOAT(60.0))
-            EVT_SETF(LVar6, EVT_FLOAT(2.1669922))
+            EVT_SETF(LVar6, EVT_FLOAT(2.167))
             EVT_SETF(LVar7, EVT_FLOAT(100.0))
             EVT_LOOP(60)
                 EVT_ADDF(LVar0, LVar3)

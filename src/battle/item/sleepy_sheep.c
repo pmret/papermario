@@ -363,7 +363,7 @@ EvtScript N(main) = {
     EVT_SET(LVar8, 0)
     EVT_SET(LVar9, 0)
     EVT_CALL(SetVirtualEntityPosition, LVarA, LVar7, LVar8, LVar9)
-    EVT_CALL(SetVirtualEntityScale, LVarA, EVT_FLOAT(0.7101), EVT_FLOAT(0.7101), EVT_FLOAT(0.7101))
+    EVT_CALL(SetVirtualEntityScale, LVarA, EVT_FLOAT(0.711), EVT_FLOAT(0.711), EVT_FLOAT(0.711))
     EVT_CALL(SetVirtualEntityMoveSpeed, LVarA, EVT_FLOAT(7.0))
     EVT_CALL(SetVirtualEntityJumpGravity, LVarA, EVT_FLOAT(1.4))
     EVT_CALL(SetOwnerTarget, 0, 0)

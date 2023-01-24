@@ -34,8 +34,8 @@ EvtScript N(EVS_SpawnSmoke) = {
         EVT_CALL(TranslateModel, LVarB, LVar0, LVar1, LVar2)
         EVT_CALL(ScaleModel, LVarB, LVar3, LVar3, 1)
         EVT_ADDF(LVar1, LVar4)
-        EVT_ADDF(LVar3, EVT_FLOAT(0.046875))
-        EVT_MULF(LVar4, EVT_FLOAT(0.90625))
+        EVT_ADDF(LVar3, EVT_FLOAT(0.046))
+        EVT_MULF(LVar4, EVT_FLOAT(0.906))
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(EnableModel, LVarB, FALSE)
@@ -151,17 +151,17 @@ EvtScript N(EVS_AnimateTrain) = {
             EVT_END_IF
         EVT_END_IF
         EVT_IF_LE(LVarD, 20)
-            EVT_CALL(N(CosInterpMinMax), LVarD, LVar0, EVT_FLOAT(0.703125), EVT_FLOAT(1.0), 10, 0, 180)
-            EVT_CALL(N(CosInterpMinMax), LVarD, LVar2, EVT_FLOAT(0.0), EVT_FLOAT(0.296875), 10, 0, 180)
-            EVT_SETF(LVar1, EVT_FLOAT(0.296875))
+            EVT_CALL(N(CosInterpMinMax), LVarD, LVar0, EVT_FLOAT(0.703), EVT_FLOAT(1.0), 10, 0, 180)
+            EVT_CALL(N(CosInterpMinMax), LVarD, LVar2, EVT_FLOAT(0.0), EVT_FLOAT(0.296), 10, 0, 180)
+            EVT_SETF(LVar1, EVT_FLOAT(0.296))
             EVT_SUBF(LVar1, LVar2)
             EVT_ADDF(LVar1, EVT_FLOAT(1.0))
             EVT_CALL(ScaleModel, MODEL_07, LVar1, LVar0, LVar1)
             EVT_CALL(ScaleModel, MODEL_08, LVar1, LVar0, LVar1)
         EVT_ELSE
             EVT_SETF(LVar0, EVT_FLOAT(1.0))
-            EVT_SETF(LVar2, EVT_FLOAT(0.296875))
-            EVT_SETF(LVar1, EVT_FLOAT(0.296875))
+            EVT_SETF(LVar2, EVT_FLOAT(0.296))
+            EVT_SETF(LVar1, EVT_FLOAT(0.296))
             EVT_SUBF(LVar1, LVar2)
             EVT_ADDF(LVar1, EVT_FLOAT(1.0))
             EVT_CALL(ScaleModel, MODEL_07, LVar1, LVar0, LVar1)

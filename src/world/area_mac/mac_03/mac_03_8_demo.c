@@ -103,7 +103,7 @@ EvtScript N(EVS_DemoDepartForMtRugged) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_THREAD
         EVT_LOOP(1000)
-            EVT_ADDF(MV_TrainMoveSpeed, EVT_FLOAT(0.03125))
+            EVT_ADDF(MV_TrainMoveSpeed, EVT_FLOAT(0.031))
             EVT_IF_GT(MV_TrainMoveSpeed, 10)
                 EVT_SETF(MV_TrainMoveSpeed, EVT_FLOAT(10.0))
             EVT_END_IF

@@ -2489,8 +2489,8 @@ EvtScript N(attackDirectLightning) = {
             EVT_ADD(LVar5, 1)
             EVT_THREAD
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_SCALE_X), LVar6)
-                EVT_SETF(LVar7, EVT_FLOAT(0.7255859375))
-                EVT_SETF(LVar8, EVT_FLOAT(0.2421875))
+                EVT_SETF(LVar7, EVT_FLOAT(0.725))
+                EVT_SETF(LVar8, EVT_FLOAT(0.242))
                 EVT_MULF(LVar7, LVar6)
                 EVT_MULF(LVar8, LVar6)
                 EVT_SUBF(LVar0, LVar7)
@@ -2539,8 +2539,8 @@ EvtScript N(attackDirectLightning) = {
     EVT_ADD(LVar5, 1)
     EVT_THREAD
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_SCALE_X), LVar6)
-        EVT_SETF(LVar7, EVT_FLOAT(0.7255859375))
-        EVT_SETF(LVar8, EVT_FLOAT(0.2421875))
+        EVT_SETF(LVar7, EVT_FLOAT(0.725))
+        EVT_SETF(LVar8, EVT_FLOAT(0.242))
         EVT_MULF(LVar7, LVar6)
         EVT_MULF(LVar8, LVar6)
         EVT_SUBF(LVar0, LVar7)

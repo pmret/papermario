@@ -169,7 +169,7 @@ EvtScript N(EVS_Scene_RideTrain) = {
                 EVT_CALL(GetDist2D, LVar3, LVar0, LVar1, ArrayVar(11), ArrayVar(12))
                 EVT_ADDF(ArrayVar(13), LVar3)
                 EVT_SETF(ArrayVar(14), ArrayVar(13))
-                EVT_MULF(ArrayVar(14), EVT_FLOAT(1.4326172))
+                EVT_MULF(ArrayVar(14), EVT_FLOAT(1.432))
                 EVT_IF_EQ(LocalFlag(0), FALSE)
                     EVT_SETF(LVar0, ArrayVar(10))
                     EVT_IF_LT(LVar0, 1)

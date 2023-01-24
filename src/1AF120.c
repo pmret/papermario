@@ -693,7 +693,7 @@ EvtScript D_802975C8 = {
     EVT_END_LOOP
     EVT_WAIT(45)
     EVT_LOOP(5)
-        EVT_SUBF(LVar0, EVT_FLOAT(0.220703125))
+        EVT_SUBF(LVar0, EVT_FLOAT(0.22))
         EVT_ADDF(LVar1, EVT_FLOAT(0.2))
         EVT_CALL(SetActorScale, ACTOR_PARTNER, LVar0, LVar1, EVT_FLOAT(1.0))
         EVT_WAIT(1)
@@ -912,7 +912,7 @@ EvtScript D_80298374 = {
     EVT_END_LOOP
     EVT_WAIT(45)
     EVT_LOOP(5)
-        EVT_SUBF(LVar0, EVT_FLOAT(0.220703125))
+        EVT_SUBF(LVar0, EVT_FLOAT(0.22))
         EVT_ADDF(LVar1, EVT_FLOAT(0.2))
         EVT_CALL(SetActorScale, ACTOR_PLAYER, LVar0, LVar1, EVT_FLOAT(1.0))
         EVT_WAIT(1)
