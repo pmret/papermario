@@ -2,12 +2,7 @@
 
 #include "common/foliage.inc.c"
 
-FoliageModelList N(Tree2_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_ki_ha,
-    }
-};
+FoliageModelList N(Tree2_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_ki_ha);
 
 FoliageModelList N(Tree2_TrunkModels) = {
     .count = 1,
