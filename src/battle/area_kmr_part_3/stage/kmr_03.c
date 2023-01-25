@@ -6,7 +6,7 @@
 #include "world/common/todo/clouds.inc.c"
 
 EvtScript N(beforeBattle_802326B8) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SET(LVar0, 1)
     EVT_SET(LVar2, 0)
     EVT_EXEC(N(clouds1))

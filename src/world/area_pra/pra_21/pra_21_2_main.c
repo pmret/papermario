@@ -1,16 +1,16 @@
 #include "pra_21.h"
 
-s32 N(D_802401C0_D780E0)[] = {
+s32 N(DoorModelsL)[] = {
     MODEL_o977,
-    -1 
+    GENERIC_LIST_END
 };
 
-s32 N(D_802401C8_D780E8)[] = {
+s32 N(DoorModelsR)[] = {
     MODEL_o976,
-    -1 
+    GENERIC_LIST_END
 };
 
-EvtScript N(D_802401D0_D780F0) = {
+EvtScript N(EVS_ExitDoor_pra_20_1) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(LVar0, pra_21_ENTRY_0)
@@ -25,13 +25,13 @@ EvtScript N(D_802401D0_D780F0) = {
     EVT_END
 };
 
-EvtScript N(D_80240274_D78194) = {
+EvtScript N(EVS_ExitDoors_pra_36_0) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar0, 1)
-    EVT_SET(LVar1, 32)
-    EVT_SET(LVar2, EVT_PTR(N(D_802401C0_D780E0)))
-    EVT_SET(LVar3, EVT_PTR(N(D_802401C8_D780E8)))
+    EVT_SET(LVar0, pra_21_ENTRY_1)
+    EVT_SET(LVar1, COLLIDER_deilittnne)
+    EVT_SET(LVar2, EVT_PTR(N(DoorModelsL)))
+    EVT_SET(LVar3, EVT_PTR(N(DoorModelsR)))
     EVT_EXEC(BaseExitDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("pra_36"), pra_36_ENTRY_0)
@@ -40,14 +40,14 @@ EvtScript N(D_80240274_D78194) = {
     EVT_END
 };
 
-EvtScript N(D_80240318_D78238) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_802401D0_D780F0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittnnw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80240274_D78194)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittnne, 1, 0)
+EvtScript N(EVS_BindExitTriggers) = {
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoor_pra_20_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittnnw, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_pra_36_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittnne, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80240360_D78280) = {
+EvtScript N(EVS_EnterMap) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(pra_21_ENTRY_0)
@@ -55,11 +55,11 @@ EvtScript N(D_80240360_D78280) = {
             EVT_SET(LVar3, DOOR_SWING_IN)
             EVT_EXEC_WAIT(EnterSingleDoor)
         EVT_CASE_EQ(pra_21_ENTRY_1)
-            EVT_SET(LVar2, EVT_PTR(N(D_802401C0_D780E0)))
-            EVT_SET(LVar3, EVT_PTR(N(D_802401C8_D780E8)))
+            EVT_SET(LVar2, EVT_PTR(N(DoorModelsL)))
+            EVT_SET(LVar3, EVT_PTR(N(DoorModelsR)))
             EVT_EXEC_WAIT(BaseEnterDoor)
     EVT_END_SWITCH
-    EVT_EXEC(N(D_80240318_D78238))
+    EVT_EXEC(N(EVS_BindExitTriggers))
     EVT_RETURN
     EVT_END
 };
@@ -92,7 +92,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(TranslateModel, MODEL_o983, LVar0, 0, 0)
     EVT_CALL(TranslateModel, MODEL_o984, LVar0, 0, 0)
     EVT_CALL(UpdateColliderTransform, COLLIDER_o1063)
-    EVT_EXEC(N(D_80240360_D78280))
+    EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
     EVT_RETURN
     EVT_END

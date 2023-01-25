@@ -4,7 +4,7 @@
 #define NAMESPACE b_area_nok_nok_04
 
 EvtScript N(beforeBattle_8022BB90) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_RETURN
     EVT_END
 };

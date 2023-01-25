@@ -12,7 +12,7 @@ void func_8021AE70_626A10(void) {
 }
 
 EvtScript N(beforeBattle) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_THREAD
         EVT_SET(LVar0, 16)
         EVT_SET(LVar1, 0)

@@ -5,7 +5,7 @@
 #define NAMESPACE b_area_kpa4_kpa_11
 
 EvtScript N(beforeBattle) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_RETURN
     EVT_END

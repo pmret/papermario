@@ -6,7 +6,7 @@
 #include "common/UnkFogFunc2.inc.c"
 
 EvtScript N(beforeBattle_8021E450) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(N(UnkFogFunc2))
     EVT_RETURN
     EVT_END

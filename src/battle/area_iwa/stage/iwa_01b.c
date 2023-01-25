@@ -6,7 +6,7 @@
 #define NAMESPACE b_area_iwa_iwa_01b
 
 EvtScript N(beforeBattle_80221510) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetGroupEnabled, MODEL_a, FALSE)
     EVT_RETURN
     EVT_END

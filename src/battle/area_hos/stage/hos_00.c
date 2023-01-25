@@ -25,7 +25,7 @@ EvtScript N(802255E0) = {
 };
 
 EvtScript N(beforeBattle_802256E8) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_THREAD
         EVT_SET(LVar0, MODEL_h1)
         EVT_EXEC(N(802255E0))

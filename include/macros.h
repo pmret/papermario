@@ -32,6 +32,8 @@
 #endif
 
 #define PTR_LIST_END ((void*) -1)
+#define GENERIC_LIST_END    -1 // for lists where 0 is a valid option
+#define NONZERO_LIST_END    0
 
 #define API_CALLABLE(name) ApiStatus name(Evt* script, s32 isInitialCall)
 

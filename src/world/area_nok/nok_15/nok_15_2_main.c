@@ -39,7 +39,7 @@ BombTrigger N(BombPos_Wall) = {
     .radius = 0.0f
 };
 
-EvtScript N(EVS_Blast_Wall) = {
+EvtScript N(EVS_BlastWall) = {
     EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 60, 61, 1, 10, 30)
     EVT_SET(GF_NOK15_BombedWall, TRUE)
     EVT_CALL(EnableModel, MODEL_bomb_ato, TRUE)
@@ -132,7 +132,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(N(EVS_TexPan_Water))
     EVT_IF_EQ(GF_NOK15_BombedWall, FALSE)
         EVT_CALL(EnableModel, MODEL_bomb_ato, FALSE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Blast_Wall)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Wall)), 1, 0)
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_BlastWall)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Wall)), 1, 0)
     EVT_ELSE
         EVT_CALL(EnableModel, MODEL_bomb_1, FALSE)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)

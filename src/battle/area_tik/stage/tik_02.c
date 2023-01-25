@@ -200,7 +200,7 @@ s32 N(802318EC)[] = {
 };
 
 EvtScript N(beforeBattle) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_SET(LVar0, N(802318EC))
     EVT_EXEC(N(80231730))

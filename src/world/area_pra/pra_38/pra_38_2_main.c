@@ -81,9 +81,9 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_SET(LVar0, 1)
+    EVT_SET(LVar0, REFLECTION_FLOOR_ONLY)
     EVT_SET(LVar1, GF_PRA_BrokeIllusion)
-    EVT_EXEC(N(EVS_Reflection_UnkB))
+    EVT_EXEC(N(EVS_SetupReflections))
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
     EVT_RETURN

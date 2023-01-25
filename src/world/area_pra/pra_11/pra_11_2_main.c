@@ -30,9 +30,9 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(EnableModel, MODEL_g271, FALSE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittsw, COLLIDER_FLAGS_UPPER_MASK)
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_SET(LVar0, 1)
+    EVT_SET(LVar0, REFLECTION_FLOOR_ONLY)
     EVT_SET(LVar1, GF_PRA_BrokeIllusion)
-    EVT_EXEC(N(EVS_Reflection_UnkB))
+    EVT_EXEC(N(EVS_SetupReflections))
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
     EVT_RETURN

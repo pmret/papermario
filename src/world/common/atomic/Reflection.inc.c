@@ -8,10 +8,10 @@
 #include "npc.h"
 #include "sprite.h"
 
-enum Reflection {
-    REFLECTION_FLOOR_WALL,
-    REFLECTION_FLOOR,
-    REFLECTION_WALL,
+enum ReflectMode {
+    REFLECTION_FLOOR_WALL   = 0,
+    REFLECTION_FLOOR_ONLY   = 1,
+    REFLECTION_WALL_ONLY    = 2,
 };
 
 void N(worker_reflect_player_wall)(void);
@@ -140,11 +140,11 @@ void N(appendGfx_reflect_player_wall)(PlayerStatus* playerStatus) {
 API_CALLABLE(N(EnableFloorReflection)){
     switch (script->varTable[0]) {
         case REFLECTION_FLOOR_WALL:
-        case REFLECTION_FLOOR:
+        case REFLECTION_FLOOR_ONLY:
             script->array[0] = create_worker_world(NULL, N(worker_reflect_player_floor));
             gOverrideFlags |= GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
             break;
-        case REFLECTION_WALL:
+        case REFLECTION_WALL_ONLY:
             break;
     }
 
@@ -323,20 +323,20 @@ API_CALLABLE(N(EnablePartnerReflection)){
             case REFLECTION_FLOOR_WALL:
                 script->array[1] = create_worker_world(N(worker_reflect_partner_all), NULL);
                 break;
-            case REFLECTION_FLOOR:
+            case REFLECTION_FLOOR_ONLY:
                 script->array[1] = create_worker_world(N(worker_reflect_partner_floor), NULL);
                 break;
-            case REFLECTION_WALL:
+            case REFLECTION_WALL_ONLY:
                 script->array[1] = create_worker_world(N(worker_reflect_partner_wall), NULL);
                 break;
         }
     } else {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
-            case REFLECTION_FLOOR:
+            case REFLECTION_FLOOR_ONLY:
                 script->array[1] = create_worker_world(N(worker_reflect_partner_floor), NULL);
                 break;
-            case REFLECTION_WALL:
+            case REFLECTION_WALL_ONLY:
                 break;
         }
     }
@@ -352,20 +352,20 @@ API_CALLABLE(N(EnablePartnerReflection)){
             case REFLECTION_FLOOR_WALL:
                 partner->flags |= NPC_FLAG_REFLECT_WALL | NPC_FLAG_REFLECT_FLOOR;
                 break;
-            case REFLECTION_FLOOR:
+            case REFLECTION_FLOOR_ONLY:
                 partner->flags |= NPC_FLAG_REFLECT_FLOOR;
                 break;
-            case REFLECTION_WALL:
+            case REFLECTION_WALL_ONLY:
                 partner->flags |= NPC_FLAG_REFLECT_WALL;
                 break;
         }
     } else {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
-            case REFLECTION_FLOOR:
+            case REFLECTION_FLOOR_ONLY:
                 partner->flags |= NPC_FLAG_REFLECT_FLOOR;
                 break;
-            case REFLECTION_WALL:
+            case REFLECTION_WALL_ONLY:
                 break;
         }
     }

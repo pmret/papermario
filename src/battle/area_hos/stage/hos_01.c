@@ -104,7 +104,7 @@ void func_80218CEC_47FD9C(s32 arg0) {
 }
 
 EvtScript N(beforeBattle_80224BD0) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
 
     EVT_CALL(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o345, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(func_802184C0_47F570), 0)

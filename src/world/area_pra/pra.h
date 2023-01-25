@@ -20,6 +20,10 @@ enum {
     AB_PRA_Unused_F     = AreaByte(15),
 };
 
+enum {
+    AF_PRA33_FlippingWall           = AreaFlag(3),
+};
+
 extern MapSettings pra_01_settings;
 extern MapSettings pra_02_settings;
 extern MapSettings pra_03_settings;

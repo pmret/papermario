@@ -13,13 +13,13 @@ s32 N(map_init)(void) {
 s32 N(DoorModelsL)[] = {
     MODEL_o772,
     MODEL_o844,
-    -1 
+    GENERIC_LIST_END 
 };
 
 s32 N(DoorModelsR)[] = {
     MODEL_o768,
     MODEL_o846,
-    -1 
+    GENERIC_LIST_END 
 };
 
 EvtScript N(EVS_ExitDoors_pra_37_1) = {
@@ -62,9 +62,9 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_SET(LVar0, 1)
+    EVT_SET(LVar0, REFLECTION_FLOOR_ONLY)
     EVT_SET(LVar1, GF_PRA_BrokeIllusion)
-    EVT_EXEC(N(EVS_Reflection_UnkB))
+    EVT_EXEC(N(EVS_SetupReflections))
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
     EVT_RETURN

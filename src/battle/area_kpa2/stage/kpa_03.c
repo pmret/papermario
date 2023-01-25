@@ -52,7 +52,7 @@ EvtScript N(createLightnings2) = {
 };
 
 EvtScript N(beforeBattle) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_EXEC(N(createLightnings1))
     EVT_EXEC(N(createLightnings2))
     EVT_RETURN

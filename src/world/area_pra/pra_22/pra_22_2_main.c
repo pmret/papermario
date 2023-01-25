@@ -29,12 +29,12 @@ API_CALLABLE(N(PreventFalling)) {
 
 s32 N(DoorModelsL)[] = {
     MODEL_o1001,
-    -1 
+    GENERIC_LIST_END 
 };
 
 s32 N(DoorModelsR)[] = {
     MODEL_o1002,
-    -1 
+    GENERIC_LIST_END 
 };
 
 EvtScript N(EVS_ExitDoors_pra_20_4) = {
