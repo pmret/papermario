@@ -1,6 +1,5 @@
 #include "common.h"
 
-void update_camera_mode_6(Camera* camera);
 void update_camera_mode_6(Camera* camera) {
     f32 sinBoom;
     f32 cosBoom;
@@ -29,7 +28,7 @@ void update_camera_mode_6(Camera* camera) {
         camera->lookAt_obj.y = camera->lookAt_obj_target.y;
         camera->lookAt_obj.z = camera->lookAt_obj_target.z;
     }
-    if (camera->auxPitch == 0) {        
+    if (camera->auxPitch == 0) {
         camera->lookAt_obj.x = camera->lookAt_obj_target.x + camera->targetPos.x;
         camera->lookAt_obj.y = camera->lookAt_obj_target.y + camera->targetPos.y + camera->auxBoomZOffset * 0.00390625;
         camera->lookAt_obj.z = camera->lookAt_obj_target.z + camera->targetPos.z;

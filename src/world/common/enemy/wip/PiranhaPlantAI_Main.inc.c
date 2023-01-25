@@ -32,9 +32,7 @@ s32 N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     territory.detectFlags = 0;
 
     #ifdef _DEAD_H_
-    // Dead Func that doesn't seem to have an alive counterpart, probably because of the
-    // difference in the Enemy and DeadEnemy struct.
-
+    // this function doesn't seem to have a known counterpart, perhaps related to the difference in the Enemy struct
     func_8004D8E0(enemy);
     if (enemy->flags & ENEMY_FLAG_100000) {
         enemy->unk_114 = 10.0f;
