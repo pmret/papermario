@@ -615,8 +615,6 @@ void update_scripts(void) {
     }
 }
 
-// INCLUDE_ASM(s32, "evt/script_list", update_scripts);
-
 // this function is evil
 #ifdef NON_MATCHING
 void func_802C3EE4(void) {
