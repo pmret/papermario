@@ -15,7 +15,7 @@ FoliageDropList N(Tree1_Drops) = {
     }
 };
 
-FoliageModelList N(Tree1_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o362);
+FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o362);
 FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o365);
 
 FoliageVectorList N(Tree1_Effects) = {
@@ -38,7 +38,7 @@ BombTrigger N(BombPos_Tree1) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree2_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o115);
+FoliageModelList N(Tree2_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o115);
 FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o116);
 
 FoliageVectorList N(Tree2_Effects) = {

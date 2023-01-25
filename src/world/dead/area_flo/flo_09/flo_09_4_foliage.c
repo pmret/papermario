@@ -54,7 +54,7 @@ EvtScript N(Tree3_CallbackScript) = {
     EVT_END
 };
 
-FoliageModelList N(Tree1_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o11, MODEL_o12);
+FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o11, MODEL_o12);
 FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o10);
 
 ShakeTreeConfig N(ShakeTree_Tree1) = {
@@ -68,7 +68,7 @@ BombTrigger N(BombPos_Tree1) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree2_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o4, MODEL_o5);
+FoliageModelList N(Tree2_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o4, MODEL_o5);
 FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o3);
 
 ShakeTreeConfig N(ShakeTree_Tree2) = {
@@ -82,7 +82,7 @@ BombTrigger N(BombPos_Tree2) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree3_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o14, MODEL_o15);
+FoliageModelList N(Tree3_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o14, MODEL_o15);
 FoliageModelList N(Tree3_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o13);
 
 ShakeTreeConfig N(ShakeTree_Tree3) = {

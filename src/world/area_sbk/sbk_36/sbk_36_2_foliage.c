@@ -2,7 +2,7 @@
 
 #include "common/foliage.inc.c"
 
-FoliageModelList N(Tree1_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o73);
+FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o73);
 FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o72);
 
 FoliageDropList N(Tree1_Drops) = {
@@ -28,7 +28,7 @@ BombTrigger N(BombPos_Tree1) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree2_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o71);
+FoliageModelList N(Tree2_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o71);
 FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o70);
 
 FoliageDropList N(Tree2_Drops) = {
@@ -54,7 +54,7 @@ BombTrigger N(BombPos_Tree2) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree3_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o75);
+FoliageModelList N(Tree3_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o75);
 FoliageModelList N(Tree3_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o74);
 
 ShakeTreeConfig N(ShakeTree_Tree3) = {
@@ -67,7 +67,7 @@ BombTrigger N(BombPos_Tree3) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree4_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o69);
+FoliageModelList N(Tree4_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o69);
 FoliageModelList N(Tree4_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o68);
 
 ShakeTreeConfig N(ShakeTree_Tree4) = {
@@ -80,7 +80,7 @@ BombTrigger N(BombPos_Tree4) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree5_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o57);
+FoliageModelList N(Tree5_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o57);
 FoliageModelList N(Tree5_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o56);
 
 ShakeTreeConfig N(ShakeTree_Tree5) = {
@@ -93,7 +93,7 @@ BombTrigger N(BombPos_Tree5) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree6_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o59);
+FoliageModelList N(Tree6_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o59);
 FoliageModelList N(Tree6_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o58);
 
 FoliageDropList N(Tree6_Drops) = {
@@ -119,7 +119,7 @@ BombTrigger N(BombPos_Tree6) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree7_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o67);
+FoliageModelList N(Tree7_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o67);
 FoliageModelList N(Tree7_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o66);
 
 ShakeTreeConfig N(ShakeTree_Tree7) = {
@@ -132,7 +132,7 @@ BombTrigger N(BombPos_Tree7) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree8_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o63);
+FoliageModelList N(Tree8_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o63);
 FoliageModelList N(Tree8_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o62);
 
 ShakeTreeConfig N(ShakeTree_Tree8) = {
@@ -145,7 +145,7 @@ BombTrigger N(BombPos_Tree8) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree9_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o65);
+FoliageModelList N(Tree9_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o65);
 FoliageModelList N(Tree9_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o64);
 
 FoliageDropList N(Tree9_Drops) = {

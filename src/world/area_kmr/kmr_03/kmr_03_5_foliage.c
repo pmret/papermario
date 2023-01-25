@@ -16,7 +16,7 @@ SearchBushConfig N(SearchBush_Bush1) = {
     .vectors = &N(Bush1_Effects),
 };
 
-FoliageModelList N(Tree1_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_ue);
+FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_ue);
 FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_sita);
 
 FoliageVectorList N(Tree1_Effects) = {

@@ -2,7 +2,7 @@
 
 #include "common/foliage.inc.c"
 
-FoliageModelList N(Tree1_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o62);
+FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o62);
 FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o61);
 
 ShakeTreeConfig N(ShakeTree_Tree1) = {
@@ -15,7 +15,7 @@ BombTrigger N(BombPos_Tree1) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree2_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o64);
+FoliageModelList N(Tree2_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o64);
 FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o63);
 
 FoliageDropList N(Tree2_Drops) = {
@@ -41,7 +41,7 @@ BombTrigger N(BombPos_Tree2) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree3_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o60);
+FoliageModelList N(Tree3_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o60);
 FoliageModelList N(Tree3_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o59);
 
 ShakeTreeConfig N(ShakeTree_Tree3) = {

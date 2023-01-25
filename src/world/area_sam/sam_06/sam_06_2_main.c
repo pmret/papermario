@@ -6,7 +6,7 @@
 
 #include "common/foliage.inc.c"
 
-FoliageModelList N(Tree1_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_ki2);
+FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_ki2);
 FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_miki2);
 
 ShakeTreeConfig N(ShakeTree_Tree1) = {
@@ -19,7 +19,7 @@ BombTrigger N(BombPos_Tree1) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree2_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_ki3);
+FoliageModelList N(Tree2_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_ki3);
 FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_miki3);
 
 ShakeTreeConfig N(ShakeTree_Tree2) = {
@@ -32,7 +32,7 @@ BombTrigger N(BombPos_Tree2) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree3_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_ki5b);
+FoliageModelList N(Tree3_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_ki5b);
 FoliageModelList N(Tree3_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_muki5);
 
 ShakeTreeConfig N(ShakeTree_Tree3) = {
@@ -45,7 +45,7 @@ BombTrigger N(BombPos_Tree3) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree4_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_ki6b);
+FoliageModelList N(Tree4_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_ki6b);
 FoliageModelList N(Tree4_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_miki6);
 
 ShakeTreeConfig N(ShakeTree_Tree4) = {
@@ -58,7 +58,7 @@ BombTrigger N(BombPos_Tree4) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree5_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_ki10);
+FoliageModelList N(Tree5_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_ki10);
 FoliageModelList N(Tree5_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_miki10);
 
 ShakeTreeConfig N(ShakeTree_Tree5) = {
