@@ -1,8 +1,8 @@
 #include "omo_03.h"
 
 #define INCLUDE_ALTERNATES 1
-#include "../common/train.inc.c"
-#include "../common/station_switches.inc.c"
+#include "../common/ToyTrain.inc.c"
+#include "../common/TrainStationSwitches.inc.c"
 
 Vec2i N(D_80246080_DAB2C0) = {
     170, -115 

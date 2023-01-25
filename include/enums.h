@@ -4098,7 +4098,7 @@ enum BattleStatusFlags2 {
 
 enum BattleStatusReflectionFlags {
     BS_REFLECT_FLOOR    = 1,
-};;
+};
 
 enum BattleStates {
     BATTLE_STATE_NEGATIVE_1                 = -1,
