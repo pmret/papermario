@@ -290,4 +290,4 @@ EvtScript N(EVS_UseGate_West) = {
     EVT_END
 };
 
-#include "../gates/setup.inc.c"
+#include "../common/SetupGates.inc.c"

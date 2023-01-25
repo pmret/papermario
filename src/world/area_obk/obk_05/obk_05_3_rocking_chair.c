@@ -4,7 +4,7 @@
 extern EvtScript N(EVS_SetupRockingChair);
 
 #define ROCKING_CHAIR_CENTER_X 0.0
-#include "../RockingChair.inc.c"
+#include "../common/RockingChair.inc.c"
 
 EvtScript N(EVS_SetupRockingChairs) = {
     EVT_EXEC(N(EVS_SetupRockingChair))
