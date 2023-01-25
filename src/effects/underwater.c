@@ -156,8 +156,6 @@ void underwater_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
     UnderwaterFXData* data;
     Matrix4f sp20;
-    s32 spA0;
-    s32 spA8;
     s32 temp_a0_3;
     s32 temp_a1_5;
     s32 temp_a1_6;
@@ -240,10 +238,8 @@ void underwater_appendGfx(void* effect) {
             var_s2 = 1;
         }
         temp_t8 = (var_t9 + var_a0) * 4;
-        spA0 = (temp_t8 & 0xFFF) | 0xF4000000;
         temp_v1_2 = var_t9 + var_v1;
         temp_s3 = (temp_v1_2 + 0x10) * 4;
-        spA8 = -var_s2;
 
         for (j = 0; j < 12; j++) {
             cond = FALSE;
@@ -269,8 +265,8 @@ void underwater_appendGfx(void* effect) {
 
             temp_a1_4->words.w0 = E600000000000000
 
+            temp_a1_4->unk8 = (s32) ((((temp_a0_3 * 4) & 0xFFF) << 0xC) | (temp_t8 & 0xFFF) | 0xF4000000);
             temp_a1_4->unkC = (s32) (((((temp_a2_2 + 0x10) * 4) & 0xFFF) << 0xC) | ((temp_s3 & 0xFFF) | 0x07000000));
-            temp_a1_4->unk8 = (s32) ((((temp_a0_3 * 4) & 0xFFF) << 0xC) | spA0);
 
             temp_a1_4->unk10 = E700000000000000
 
@@ -282,7 +278,7 @@ void underwater_appendGfx(void* effect) {
             if (!cond || (var_t4 = 0xC, (var_s2 == 0))) {
                 var_t4 = 4;
                 if (!cond) {
-                    var_t4 = spA8 & 8;
+                    var_t4 = (-var_s2) & 8;
                 }
             }
             temp_a1_5 = j * 0xD;

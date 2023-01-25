@@ -6,6 +6,10 @@ void windy_leaves_update(EffectInstance* effect);
 void windy_leaves_render(EffectInstance* effect);
 void windy_leaves_appendGfx(void* effect);
 
+extern Gfx D_09001180_33E790[];
+extern Gfx D_09001258_33E868[];
+extern Gfx D_09001280_33E890[];
+
 void windy_leaves_main(s32 type, f32 arg1, f32 arg2, f32 arg3) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
@@ -226,22 +230,15 @@ void windy_leaves_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
-extern Gfx D_09001180_33E790[];
-extern Gfx D_09001258_33E868[];
-extern Gfx D_09001280_33E890[];
-
 void windy_leaves_appendGfx(void* effect) {
-    WindyLeavesFXData* part;
-    Gfx* phi_s7;
+    WindyLeavesFXData* part = ((EffectInstance*)effect)->data.windyLeaves;
+    Matrix4f sp18, sp58, sp98;
+    Gfx* dlist;
     s32 i;
-    Matrix4f sp18;
-    Matrix4f sp58;
-    Matrix4f sp98;
 
-    part = ((EffectInstance*)effect)->data.windyLeaves;
-    phi_s7 = D_09001280_33E890;
+    dlist = D_09001280_33E890;
     if (part->type == 0) {
-        phi_s7 = D_09001258_33E868;
+        dlist = D_09001258_33E868;
     }
 
     gSPSegment(gMasterGfxPos++, 0x09, OS_K0_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
@@ -261,7 +258,7 @@ void windy_leaves_appendGfx(void* effect) {
         shim_guMtxCatF(sp58, sp18, sp18);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, phi_s7);
+        gSPDisplayList(gMasterGfxPos++, dlist);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
 }

@@ -33,11 +33,6 @@ D_803DA800 = 0x803DA800;
 heap_battleHead = 0x803DA800;
 
 // Letter delivery BSS
-mac_05_LetterDelivery_SavedNpcAnim = 0x80252D38;
-mac_00_LetterDelivery_SavedNpcAnim = 0x80255ED8;
-dup_mac_00_LetterDelivery_SavedNpcAnim = 0x802560A4;
-kmr_02_LetterDelivery_SavedNpcAnim = 0x8025811C;
-osr_01_LetterDelivery_SavedNpcAnim = 0x80242344;
 hos_06_LetterDelivery_SavedNpcAnim = 0x80246424;
 nok_01_LetterDelivery_SavedNpcAnim = 0x80251E34;
 nok_02_LetterDelivery_SavedNpcAnim = 0x80254B94;
@@ -47,35 +42,28 @@ sam_01_LetterDelivery_SavedNpcAnim = 0x8024DF24;
 sam_06_LetterDelivery_SavedNpcAnim = 0x8024C1D8;
 sbk_30_LetterDelivery_SavedNpcAnim = 0x80244D88;
 sbk_34_LetterDelivery_SavedNpcAnim = 0x802429A4;
-obk_01_LetterDelivery_SavedNpcAnim = 0x80245AB4;
-obk_03_LetterDelivery_SavedNpcAnim = 0x80243DA4;
 
 // Quizmo BSS
-sam_02_Quizmo_AnswerResult = 0x8024B9A8;
-sam_02_Quizmo_StageEffect = 0x8024B9B0;
 jan_02_Quizmo_Worker = 0x80248924;
 jan_02_Quizmo_AnswerResult = 0x80248938;
 jan_02_Quizmo_StageEffect = 0x80248940;
 jan_02_Quizmo_AudienceEffect = 0x80248944;
 jan_02_Quizmo_VannaTEffect = 0x80248948;
-sam_01_Quizmo_Worker = 0x8024DEF8;
-sam_02_Quizmo_Worker = 0x8024B990;
-sam_02_Quizmo_AudienceEffect = 0x8024B9B4;
-sam_02_Quizmo_VannaTEffect = 0x8024B9B8;
-hos_03_Quizmo_Worker = 0x8024BDD0;
-hos_03_Quizmo_AnswerResult = 0x8024BDE8;
-hos_03_Quizmo_StageEffect = 0x8024BDF0;
-hos_03_Quizmo_AudienceEffect = 0x8024BDF4;
-hos_03_Quizmo_VannaTEffect = 0x8024BDF8;
-sam_01_Quizmo_AnswerResult = 0x8024DF10;
-sam_01_Quizmo_StageEffect = 0x8024DF18;
-sam_01_Quizmo_AudienceEffect = 0x8024DF1C;
-sam_01_Quizmo_VannaTEffect = 0x8024DF20;
 jan_03_Quizmo_Worker = 0x8024FED8;
 jan_03_Quizmo_AnswerResult = 0x8024FEF0;
 jan_03_Quizmo_StageEffect = 0x8024FEF8;
 jan_03_Quizmo_AudienceEffect = 0x8024FEFC;
 jan_03_Quizmo_VannaTEffect = 0x8024FF00;
+sam_02_Quizmo_AnswerResult = 0x8024B9A8;
+sam_02_Quizmo_StageEffect = 0x8024B9B0;
+sam_01_Quizmo_Worker = 0x8024DEF8;
+sam_02_Quizmo_Worker = 0x8024B990;
+sam_02_Quizmo_AudienceEffect = 0x8024B9B4;
+sam_02_Quizmo_VannaTEffect = 0x8024B9B8;
+sam_01_Quizmo_AnswerResult = 0x8024DF10;
+sam_01_Quizmo_StageEffect = 0x8024DF18;
+sam_01_Quizmo_AudienceEffect = 0x8024DF1C;
+sam_01_Quizmo_VannaTEffect = 0x8024DF20;
 sam_11_Quizmo_Worker = 0x80251450;
 sam_11_Quizmo_AnswerResult = 0x80251468;
 sam_11_Quizmo_StageEffect = 0x80251470;
@@ -86,26 +74,11 @@ nok_01_Quizmo_AnswerResult = 0x80251C58;
 nok_01_Quizmo_StageEffect = 0x80251C60;
 nok_01_Quizmo_AudienceEffect = 0x80251C64;
 nok_01_Quizmo_VannaTEffect = 0x80251C68;
-mac_05_Quizmo_Worker = 0x802529D0;
-mac_05_Quizmo_AnswerResult = 0x802529E8;
-mac_05_Quizmo_StageEffect = 0x802529F0;
-mac_05_Quizmo_AudienceEffect = 0x802529F4;
-mac_05_Quizmo_VannaTEffect = 0x802529F8;
 nok_02_Quizmo_AnswerResult = 0x802549B8;
 nok_02_Quizmo_Worker = 0x802549A0;
 nok_02_Quizmo_StageEffect = 0x802549C0;
 nok_02_Quizmo_AudienceEffect = 0x802549C4;
 nok_02_Quizmo_VannaTEffect = 0x802549C8;
-kmr_02_Quizmo_Worker = 0x80257F2C;
-kmr_02_Quizmo_AnswerResult = 0x80257F40;
-kmr_02_Quizmo_StageEffect = 0x80257F48;
-kmr_02_Quizmo_AudienceEffect = 0x80257F4C;
-kmr_02_Quizmo_VannaTEffect = 0x80257F50;
-
-// broken map symbols
-hos_06_D_80246430 = 0x80246430;
-jan_03_D_8024FEE0 = 0x8024FEE0;
-hos_05_D_8024F4C0 = 0x8024F4C0;
 
 // os stuff
 osTvType = 0x80000300;

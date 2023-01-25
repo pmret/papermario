@@ -1,12 +1,15 @@
 #include "common.h"
 #include "effects_internal.h"
 
-s32 D_E00B2BA0[] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFC88020, 0x00000000 };
+u8 D_E00B2BA0[] = { 255, 255, 255, 255, 255, 255, 255, 255, 255, 200, 128, 32, 0, 0, 0, 0 };
 
 void squirt_init(EffectInstance* effect);
 void squirt_update(EffectInstance* effect);
 void squirt_render(EffectInstance* effect);
 void squirt_appendGfx(void* effect);
+
+extern Gfx D_09000800_3B5B40[];
+extern Gfx D_090008A8_3B5BE8[];
 
 EffectInstance* squirt_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 arg8) {
     EffectBlueprint bp;
@@ -153,4 +156,110 @@ void squirt_render(EffectInstance* effect) {
 void func_E00B24A8(void) {
 }
 
-INCLUDE_ASM(s32, "effects/squirt", squirt_appendGfx);
+void squirt_appendGfx(void* effect) {
+    SquirtFXData* data = ((EffectInstance*)effect)->data.squirt;
+    s32 zero = 0;
+    s32 unk_00 = data->unk_00;
+    Gfx* savedGfxPos;
+    f32 unk_50 = data->unk_50;
+    Matrix4f sp10, sp50;
+    Vtx_t* vtx;
+    s32 savedIdx;
+    s32 i;
+
+    f32 cosComp;
+    f32 sinComp;
+    f32 var_f22;
+    f32 theta;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guTranslateF(sp10, 0.0f, 0.0f, 0.0f);
+    shim_guScaleF(sp50, 0.05f, 0.05f, 0.05f);
+    shim_guMtxCatF(sp50, sp10, sp10);
+    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_34, data->unk_38, data->unk_3C, data->unk_40);
+    gDPSetEnvColor(gMasterGfxPos++, data->unk_44, data->unk_48, data->unk_4C, 200);
+
+    gSPBranchList(gMasterGfxPos, &gMasterGfxPos[49]);
+    savedGfxPos = gMasterGfxPos + 1;
+
+    gMasterGfxPos = &gMasterGfxPos[49];
+
+    vtx = (Vtx_t*) savedGfxPos;
+    for (i = 0; i < 12; i++) {
+        s32 inc = i + 1;
+        s32 tc0;
+        s32 cnA;
+
+        if (i == 0 || zero == i || (i != 11 && data->unk_178[i] == 0)) {
+            theta = data->unk_118[inc];
+            theta = -shim_atan2(theta, -data->unk_E8[i + 1], data->unk_118[i], -data->unk_E8[i]);
+        }
+
+        if (data->unk_00 == 0) {
+            var_f22 = ((f32) data->unk_1A8[i] * 0.5) + 2.0;
+            if (var_f22 > 6.0f) {
+                var_f22 = 6.0f;
+            }
+            cnA = D_E00B2BA0[i];
+        } else {
+            var_f22 = ((f32) data->unk_1A8[i] * 0.5) + 1.0;
+            if (var_f22 > 30.0f) {
+                do { } while (0); // TODO required to match
+                var_f22 = 30.0f;
+            }
+            cnA = (D_E00B2BA0[i] * data->unk_1D8[i]) / 255;
+        }
+        tc0 = i * 5;
+        tc0 *= 64;
+
+        var_f22 *= unk_50;
+        sinComp = var_f22 * shim_sin_deg(theta);
+        cosComp = var_f22 * shim_cos_deg(theta);
+
+        vtx->ob[0] = (data->unk_E8[i] + sinComp) * 20.0f;
+        vtx->ob[1] = (data->unk_118[i] + cosComp) * 20.0f;
+        vtx->ob[2] = (data->unk_148[i] + 0.0f) * 20.0f;
+        vtx->tc[0] = tc0;
+        vtx->tc[1] = 0;
+        vtx->cn[0] = (i & 1) * 255;
+        vtx->cn[1] = ((i >> 1) & 1) * 255;
+        vtx->cn[2] = ((i >> 2) & 1) * 255;
+        vtx->cn[3] = cnA;
+        vtx++;
+
+        vtx->ob[0] = (data->unk_E8[i] - sinComp) * 20.0f;
+        vtx->ob[1] = (data->unk_118[i] - cosComp) * 20.0f;
+        vtx->ob[2] = (data->unk_148[i] + 0.0f) * 20.0f;
+        vtx->tc[0] = tc0;
+        vtx->tc[1] = 1024;
+        vtx->cn[0] = (i & 1) * 255;
+        vtx->cn[1] = ((i >> 1) & 1) * 255;
+        vtx->cn[2] = ((i >> 2) & 1) * 255;
+        vtx->cn[3] = cnA;
+        vtx++;
+    }
+
+    gSPVertex(gMasterGfxPos++, savedGfxPos, i * 2, 0);
+
+    savedIdx = i;
+    gSPDisplayList(gMasterGfxPos++, unk_00 == 0 ? D_09000800_3B5B40 : D_090008A8_3B5BE8);
+
+    for (i = 0; i < savedIdx - 1; i++) {
+        s32 i2 = i * 2;
+
+        if (i < zero) {
+            continue;
+        }
+        gSP2Triangles(gMasterGfxPos++,
+            i2,     i2 + 2, i2 + 1, i2,
+            i2 + 1, i2 + 2, i2 + 3, i2);
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+}

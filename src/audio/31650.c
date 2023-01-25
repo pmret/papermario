@@ -16,8 +16,8 @@ extern s16 AuEqPower[128];
 #define AU_EQPOW_MAX_IDX 127
 
 void au_driver_init(AuSynDriver* driver, ALConfig* config) {
-    s32 i;
     ALHeap* heap = config->heap;
+    s32 i;
 
     if (gActiveSynDriverPtr != NULL) {
         return;
@@ -43,8 +43,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         AuPVoice* voice = &gSynDriverPtr->pvoices[i];
         voice->loadFilter.dc_state = alHeapAlloc(heap, 1, sizeof(*voice->loadFilter.dc_state));
         voice->loadFilter.dc_lstate = alHeapAlloc(heap, 1, sizeof(*voice->loadFilter.dc_lstate));
-        // note: dmaNew has type ALDMANew (nuAuDmaNew), which returns a ALDMAproc (nuAuDmaCallBack)
-        voice->loadFilter.dc_dmaFunc = ((ALDMAproc (*)(NUDMAState**))(gSynDriverPtr->dmaNew))(&voice->loadFilter.dc_dmaState);
+        voice->loadFilter.dc_dmaFunc = gSynDriverPtr->dmaNew(&voice->loadFilter.dc_dmaState);
         voice->loadFilter.dc_lastsam = 0;
         voice->loadFilter.dc_first = 1;
         voice->loadFilter.dc_memin = NULL;

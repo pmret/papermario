@@ -930,7 +930,7 @@ void au_bgm_load_subsegment(BGMPlayer* player, u32 cmd) {
     for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
         track = &player->tracks[i];
         trackInfo = *trackList++;
-        track->bgmReadPos = trackInfo >> 0x10;
+        track->bgmReadPos = (AuFilePos) (trackInfo >> 0x10);
         if (track->bgmReadPos != NULL) {
             if ((trackInfo & 0x100) == 0) {
                 track->polyphonicIdx = (trackInfo & (0x7 << 0xD)) >> 0xD;
@@ -1294,7 +1294,7 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                     voice->reverbAmt = track->subTrackReverb;
 
                                     if (track->unk_4C != 0) {
-                                        voice->unk_14.unk_00 = (s32*)player->unk_174[track->unk_4C - 1]; //TODO ???
+                                        voice->unk_14.unk_00 = (s32*) player->unk_174[track->unk_4C - 1]; //TODO ???
                                     } else {
                                         voice->unk_14.unk_00 = track->unk_10.unk_00;
                                     }
