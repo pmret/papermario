@@ -2,24 +2,8 @@
 
 #include "common/foliage.inc.c"
 
-FoliageModelList N(Tree1_LeafModels) = {
-    .count = 6,
-    .models = {
-        MODEL_o125,
-        MODEL_o126,
-        MODEL_o127,
-        MODEL_o128,
-        MODEL_o129,
-        MODEL_o130,
-    }
-};
-
-FoliageModelList N(Tree1_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o124,
-    }
-};
+FoliageModelList N(Tree1_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o125, MODEL_o126, MODEL_o127, MODEL_o128, MODEL_o129, MODEL_o130);
+FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o124);
 
 FoliageDropList N(Tree1_Drops) = {
     .count = 2, 

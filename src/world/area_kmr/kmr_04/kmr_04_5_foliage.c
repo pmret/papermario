@@ -131,12 +131,7 @@ EvtScript N(Bush8_CallbackScript) = {
     EVT_END
 };
 
-FoliageModelList N(Bush1_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o181,
-    }
-};
+FoliageModelList N(Bush1_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o181);
 
 FoliageDropList N(Bush1_Drops) = {
     .count = 1, 
@@ -164,12 +159,7 @@ SearchBushConfig N(SearchBush_Bush1) = {
     .vectors = &N(Bush1_Effects),
 };
 
-FoliageModelList N(Bush2_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o212,
-    }
-};
+FoliageModelList N(Bush2_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o212);
 
 FoliageDropList N(Bush2_Drops) = {
     .count = 1, 
@@ -197,12 +187,7 @@ SearchBushConfig N(SearchBush_Bush2) = {
     .vectors = &N(Bush2_Effects),
 };
 
-FoliageModelList N(Bush3_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o235,
-    }
-};
+FoliageModelList N(Bush3_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o235);
 
 FoliageDropList N(Bush3_Drops) = {
     .count = 2, 
@@ -237,12 +222,7 @@ SearchBushConfig N(SearchBush_Bush3) = {
     .vectors = &N(Bush3_Effects),
 };
 
-FoliageModelList N(Bush4_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o182,
-    }
-};
+FoliageModelList N(Bush4_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o182);
 
 FoliageDropList N(Bush4_Drops) = {
     .count = 1, 
@@ -270,12 +250,7 @@ SearchBushConfig N(SearchBush_Bush4) = {
     .vectors = &N(Bush4_Effects),
 };
 
-FoliageModelList N(Bush5_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o205,
-    }
-};
+FoliageModelList N(Bush5_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o205);
 
 FoliageDropList N(Bush5_Drops) = {
     .count = 1, 
@@ -303,12 +278,7 @@ SearchBushConfig N(SearchBush_Bush5) = {
     .vectors = &N(Bush5_Effects),
 };
 
-FoliageModelList N(Bush8_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o213,
-    }
-};
+FoliageModelList N(Bush8_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o213);
 
 FoliageVectorList N(Bush8_Effects) = {
     .count = 1,
@@ -329,12 +299,7 @@ SearchBushConfig N(SearchBush_Bush8) = {
     .callback = &N(Bush8_CallbackScript),
 };
 
-FoliageModelList N(Bush6_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o213,
-    }
-};
+FoliageModelList N(Bush6_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o213);
 
 FoliageVectorList N(Bush6_Effects) = {
     .count = 1,
@@ -348,12 +313,7 @@ SearchBushConfig N(SearchBush_Bush6) = {
     .vectors = &N(Bush6_Effects),
 };
 
-FoliageModelList N(Bush9_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o239,
-    }
-};
+FoliageModelList N(Bush9_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o239);
 
 FoliageVectorList N(Bush9_Effects) = {
     .count = 1,
@@ -367,19 +327,8 @@ SearchBushConfig N(SearchBush_Bush9) = {
     .vectors = &N(Bush9_Effects),
 };
 
-FoliageModelList N(Tree1_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o237,
-    }
-};
-
-FoliageModelList N(Tree1_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o236,
-    }
-};
+FoliageModelList N(Tree1_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o237);
+FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o236);
 
 FoliageDropList N(Tree1_Drops) = {
     .count = 1, 
@@ -413,19 +362,8 @@ BombTrigger N(BombPos_Tree1) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree2_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o194,
-    }
-};
-
-FoliageModelList N(Tree2_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o193,
-    }
-};
+FoliageModelList N(Tree2_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o194);
+FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o193);
 
 FoliageDropList N(Tree2_Drops) = {
     .count = 1, 
@@ -490,19 +428,8 @@ EvtScript N(Tree3_CallbackScript) = {
     EVT_END
 };
 
-FoliageModelList N(Tree3_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o192,
-    }
-};
-
-FoliageModelList N(Tree3_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o191,
-    }
-};
+FoliageModelList N(Tree3_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o192);
+FoliageModelList N(Tree3_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o191);
 
 FoliageVectorList N(Tree3_Effects) = {
     .count = 2,
