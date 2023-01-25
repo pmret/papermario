@@ -1,6 +1,6 @@
 #include "AmazyDayzee.h"
 
-#include "world/common/enemy/ai/UnkFloAI.inc.c"
+#include "world/common/enemy/ai/AvoidPlayerAI.inc.c"
 
 MobileAISettings N(AISettings_AmazyDayzee) = {
     .moveSpeed = 1.5f,
@@ -18,7 +18,7 @@ MobileAISettings N(AISettings_AmazyDayzee) = {
 };
 
 EvtScript N(EVS_NpcAI_AmazyDayzee) = {
-    EVT_CALL(N(UnkFloAI_Main), EVT_PTR(N(AISettings_AmazyDayzee)))
+    EVT_CALL(N(AvoidPlayerAI_Main), EVT_PTR(N(AISettings_AmazyDayzee)))
     EVT_RETURN
     EVT_END
 };

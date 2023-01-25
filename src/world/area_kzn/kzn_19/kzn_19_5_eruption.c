@@ -7,7 +7,7 @@ EvtScript N(EVS_CrackFloor) = {
     EVT_SETF(LVar0, 0)
     EVT_THREAD
         EVT_LOOP(60)
-            EVT_ADDF(LVar0, EVT_FLOAT(0.33398438))
+            EVT_ADDF(LVar0, EVT_FLOAT(0.334))
             EVT_CALL(RotateModel, MODEL_o2, LVar0, 0, 0, -1)
             EVT_WAIT(1)
         EVT_END_LOOP

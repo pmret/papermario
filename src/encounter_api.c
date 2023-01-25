@@ -6,12 +6,12 @@
 ApiStatus SetEncounterStatusFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EncounterStatus* currentEncounter = &gCurrentEncounter;
-    s32 a0 = *args++;
+    s32 flagBits = *args++;
 
     if (evt_get_variable(script, *args)) {
-        currentEncounter->flags |= a0;
+        currentEncounter->flags |= flagBits;
     } else {
-        currentEncounter->flags &= ~a0;
+        currentEncounter->flags &= ~flagBits;
     }
 
     return ApiStatus_DONE2;

@@ -92,7 +92,7 @@ EvtScript N(EVS_Main) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.3339844))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.334))
     EVT_RETURN
     EVT_END
 };

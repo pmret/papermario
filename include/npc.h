@@ -98,17 +98,17 @@ typedef struct MobileAISettings {
     /* 0x2C */ s32 unk_AI_2C;               // probably a boolean for enable loitering after a wander movement
 } MobileAISettings; // size = 0x30
 
-typedef struct StationaryAISettings {
-    /* 0x00 */ f32 unk_00;                  // probably equivalent to alertRadius in MobileAISettings
-    /* 0x04 */ f32 unk_04;                  // probably equivalent to alertOffsetDist in MobileAISettings
+typedef struct GuardAISettings {
+    /* 0x00 */ f32 alertRadius;
+    /* 0x04 */ f32 alertOffsetDist;         // offset along npc->yaw of the test point for alert volume overlap, creates directionality to enemy 'sight'
     /* 0x08 */ s32 playerSearchInterval;    // how often to search for player (frames)
     /* 0x0C */ f32 chaseSpeed;
     /* 0x10 */ s32 chaseTurnRate;           // how many degrees this NPC can turn per frame while chasing
     /* 0x14 */ s32 chaseUpdateInterval;     // how often to re-run chase init and re-acquire player position (frames)
     /* 0x18 */ f32 chaseRadius;
     /* 0x1C */ f32 chaseOffsetDist;         // offset along npc->yaw of the test point for alert volume overlap, creates directionality to enemy 'sight'
-    /* 0x20 */ s32 unk_20;                  // probably equivalent to unk_AI_2C in MobileAISettings
-} StationaryAISettings; // size = 0x24
+    /* 0x20 */ s32 unk_AI_20;               // probably equivalent to unk_AI_2C in MobileAISettings
+} GuardAISettings; // size = 0x24
 
 struct FireBarData;
 typedef void (*FireBarCallback)(struct FireBarData*, s32);

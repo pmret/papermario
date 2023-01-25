@@ -101,14 +101,14 @@ EvtScript N(EVS_NpcAI_Goompa) = {
                 EVT_WAIT(10)
                 EVT_THREAD
                     EVT_SET(LVar0, 0)
-                    EVT_CALL(func_802CDE68, -4, 10)
+                    EVT_CALL(SetNpcRotationPivot, NPC_PARTNER, 10)
                     EVT_LOOP(60)
                         EVT_ADD(LVar0, 53)
                         EVT_CALL(SetNpcRotation, NPC_PARTNER, 0, 0, LVar0)
                         EVT_CALL(PlayerFaceNpc, NPC_PARTNER, FALSE)
                         EVT_WAIT(1)
                     EVT_END_LOOP
-                    EVT_CALL(func_802CDE68, -4, 0)
+                    EVT_CALL(SetNpcRotationPivot, NPC_PARTNER, 0)
                     EVT_CALL(SetNpcRotation, NPC_PARTNER, 0, 0, 0)
                 EVT_END_THREAD
                 EVT_THREAD

@@ -87,7 +87,7 @@ EvtScript N(EVS_SetDoorRot_Storeroom) = {
 
 EvtScript N(EVS_MoveWalls_Storeroom) = {
     EVT_SET(LVar1, LVar0)
-    EVT_MULF(LVar1, EVT_FLOAT(2.78125))
+    EVT_MULF(LVar1, EVT_FLOAT(2.781))
     EVT_CALL(TranslateModel, MODEL_skk1, 0, 0, LVar1)
     EVT_CALL(TranslateModel, MODEL_skk2, 0, 0, LVar1)
     EVT_CALL(TranslateModel, MODEL_skk3, 0, 0, LVar1)

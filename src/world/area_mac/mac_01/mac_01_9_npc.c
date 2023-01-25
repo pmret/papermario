@@ -8,7 +8,7 @@ extern EvtScript N(EVS_MerlonBargeOut);
 #include "world/common/npc/Toad_Wander.inc.c"
 #include "world/common/npc/Toad_Patrol.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
-#include "world/common/enemy/complete/ShyGuy_NoAI.inc.c"
+#include "world/common/enemy/complete/ShyGuy_Stationary.inc.c"
 
 NpcSettings N(NpcSettings_Ninji) = {
     .height = 24,
@@ -2356,7 +2356,7 @@ StaticNpc N(NpcData_Twink) = {
 StaticNpc N(NpcData_ShyGuys)[] = {
     {
         .id = NPC_PostOfficeShyGuy,
-        .settings = &N(NpcSettings_ShyGuy_NoAI),
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
@@ -2366,7 +2366,7 @@ StaticNpc N(NpcData_ShyGuys)[] = {
     },
     {
         .id = NPC_ToadHouseShyGuy,
-        .settings = &N(NpcSettings_ShyGuy_NoAI),
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
@@ -2376,7 +2376,7 @@ StaticNpc N(NpcData_ShyGuys)[] = {
     },
     {
         .id = NPC_GardenShyGuy1,
-        .settings = &N(NpcSettings_ShyGuy_NoAI),
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
@@ -2386,7 +2386,7 @@ StaticNpc N(NpcData_ShyGuys)[] = {
     },
     {
         .id = NPC_GardenShyGuy2,
-        .settings = &N(NpcSettings_ShyGuy_NoAI),
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,

@@ -45,7 +45,7 @@ EvtScript N(D_80242560_BB95D0) = {
     EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_VANISH, 0)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(90)
-        EVT_ADDF(LVar0, EVT_FLOAT(2.6669922))
+        EVT_ADDF(LVar0, EVT_FLOAT(2.667))
         EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -68,7 +68,7 @@ EvtScript N(D_80242560_BB95D0) = {
     EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_APPEAR, 0)
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(90)
-        EVT_SUBF(LVar0, EVT_FLOAT(2.6669922))
+        EVT_SUBF(LVar0, EVT_FLOAT(2.667))
         EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP

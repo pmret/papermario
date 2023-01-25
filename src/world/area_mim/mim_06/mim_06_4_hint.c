@@ -71,7 +71,7 @@ EvtScript N(EVS_FlowersWither) = {
         EVT_CALL(N(GetFlowerNormal), LVarA, LVar7, LVar8, LVar9)
         EVT_CALL(RotateModel, LVarB, LVar0, LVar7, LVar8, LVar9)
         EVT_CALL(ScaleModel, LVarB, LVar3, LVar3, LVar3)
-        EVT_MULF(LVar3, EVT_FLOAT(0.9658203))
+        EVT_MULF(LVar3, EVT_FLOAT(0.965))
         EVT_WAIT(2)
     EVT_END_LOOP
     EVT_CALL(EnableModel, LVarA, FALSE)

@@ -675,7 +675,7 @@ EvtScript D_802A3168_0073D038 = {
                 EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(0.35))
                 EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(0.2))
                 EVT_CALL(ShakeCam, 1, 0, 6, EVT_FLOAT(0.05))
-                EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(0.025390625))
+                EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(0.025))
             EVT_END_CHILD_THREAD
     EVT_END_SWITCH
     EVT_CALL(DidActionSucceed, LVar0)

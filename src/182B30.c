@@ -1283,13 +1283,13 @@ void appendGfx_partner_actor(void* data) {
     appendGfx_npc_actor(TRUE, (s32) data);
 }
 
-void appendGfx_enemy_actor_decorations(void* data) {
+void appendGfx_enemy_actor_reflection(void* data) {
     Actor* actor = data;
 
     func_802571F0(0, actor);
 }
 
-void func_80257B88(void* data) {
+void appendGfx_partner_actor_reflection(void* data) {
     func_802571F0(1, gBattleStatus.partnerActor);
 }
 
@@ -1791,7 +1791,7 @@ end:
     _add_part_decoration(playerParts);
 }
 
-void func_80258E14(void* arg0) {
+void appendGfx_player_actor_reflection(void* arg0) {
     Matrix4f mtxRotX, mtxRotY, mtxRotZ, mtxRotation, mtxScale;
     Matrix4f mtxPivotOn, mtxPivotOff, mtxTranslate;
     Matrix4f mtxTemp, mtxTransform, mtxMirror;

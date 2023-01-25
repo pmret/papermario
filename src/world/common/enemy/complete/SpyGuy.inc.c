@@ -1,7 +1,12 @@
 #include "SpyGuy.h"
 
 #include "world/common/enemy/ai/RangedAttackAI.inc.c"
-#include "world/common/todo/SetInstigatorValue_3.inc.c"
+
+API_CALLABLE(N(SetSpyGuyInstigatorValue)) {
+    script->owner1.enemy->instigatorValue = 3;
+    return ApiStatus_DONE2;
+}
+
 #include "world/common/todo/GetEncounterEnemyIsOwner.inc.c"
 
 EvtScript N(EVS_NpcDefeat_SpyGuyRock) = {
@@ -37,7 +42,7 @@ MobileAISettings N(AISettings_SpyGuy) = {
 };
 
 EvtScript N(EVS_NpcAI_SpyGuy) = {
-    EVT_CALL(N(SetInstigatorValue_3))
+    EVT_CALL(N(SetSpyGuyInstigatorValue))
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 1, 12)
     EVT_CALL(SetSelfVar, 2, 5)

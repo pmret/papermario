@@ -25,7 +25,7 @@ EvtScript N(EVS_Gizmos_Shutters) = {
     EVT_END
 };
 
-EvtScript N(EVS_Gizmos_Wheels) = {
+EvtScript N(EVS_Gizmos_Clocks) = {
     EVT_LABEL(0)
         EVT_CALL(MakeLerp, 0, -360, 100, EASING_LINEAR)
         EVT_LABEL(1)
@@ -43,7 +43,7 @@ EvtScript N(EVS_Gizmos_Wheels) = {
 
 EvtScript N(EVS_SetupGizmos) = {
     EVT_EXEC(N(EVS_Gizmos_Shutters))
-    EVT_EXEC(N(EVS_Gizmos_Wheels))
+    EVT_EXEC(N(EVS_Gizmos_Clocks))
     EVT_RETURN
     EVT_END
 };

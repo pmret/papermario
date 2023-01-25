@@ -191,7 +191,7 @@ EvtScript N(EVS_NpcIdle_Misstar) = {
             EVT_GOTO(10)
         EVT_END_IF
     EVT_SET(AF_KZN23_GrabbedKolorado, TRUE)
-    EVT_CALL(func_802CDE68, 0, 10)
+    EVT_CALL(SetNpcRotationPivot, NPC_Kolorado, 10)
     EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 180)
     EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Panic)
     EVT_THREAD

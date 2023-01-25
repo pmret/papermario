@@ -9,7 +9,7 @@
 #include "mapfs/omo_17_shape.h"
 #include "mapfs/omo_17_hit.h"
 
-#include "sprite/npc/TrainStationToad.h"
+#include "sprite/npc/TrainToad.h"
 #include "sprite/npc/SpyGuy.h"
 #include "sprite/npc/PyroGuy.h"
 #include "sprite/npc/GrooveGuy.h"
@@ -25,16 +25,16 @@ enum {
 };
 
 enum {
-    MV_Unk_00       = MapVar(0),
-    MV_Unk_01       = MapVar(1),
-    MV_Unk_02       = MapVar(2),
-    MV_TrainPos     = MapVar(11),
-    MV_Unk_0C       = MapVar(12),
-    MV_Unk_0D       = MapVar(13),
+    MV_TrainUnk_00      = MapVar(0),
+    MV_TrainUnk_01      = MapVar(1),
+    MV_TrainUnk_02      = MapVar(2),
+    MV_TrainPos         = MapVar(11),
+    MV_TrainUnk_0C      = MapVar(12),
+    MV_TrainUnk_0D      = MapVar(13),
 };
 
 enum {
-    MF_Unk_00       = MapFlag(0),
+    MF_TrainUnk_00      = MapFlag(0),
 };
 
 #define NAMESPACE omo_17

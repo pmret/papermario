@@ -10,7 +10,7 @@
 #include "mapfs/iwa_11_hit.h"
 
 enum {
-    NPC_TrainConductorToad        = 0,
+    NPC_TrainToad        = 0,
 };
 
 enum {

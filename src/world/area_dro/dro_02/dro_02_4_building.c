@@ -81,7 +81,7 @@ EvtScript N(EVS_SetupCamSpeed) = {
         EVT_CASE_EQ(0)
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
         EVT_CASE_EQ(3)
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.3339844))
+            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.334))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -94,7 +94,7 @@ EvtScript N(EVS_ToggleVis_ToadHouse) = {
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
         EVT_CASE_EQ(3)
             EVT_CALL(SetGroupEnabled, MODEL_ie4_naka, 0)
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.3339844))
+            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.334))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -122,7 +122,7 @@ EvtScript N(EVS_ToggleVis_Hideout) = {
         EVT_CASE_EQ(3)
             EVT_CALL(SetGroupEnabled, MODEL_ie5_naka, 0)
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.3339844))
+            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.334))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

@@ -36,7 +36,7 @@ static s32 N(BillBlasterAI_GetIdleBulletNpcID)(void) {
     return -1;
 }
 
-ApiStatus N(BulletBillAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(BulletBillAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *script->ptrReadPos);
@@ -150,7 +150,7 @@ ApiStatus N(BulletBillAI_Main)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(BillBlasterAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(BillBlasterAI_Main)) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -211,7 +211,7 @@ ApiStatus N(BillBlasterAI_Main)(Evt* script, s32 isInitialCall) {
             npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
             bulletEnemy = get_enemy(enemy->AI_VAR_BLASTER_BULLET);
             bulletEnemy->VAR_PROJECTILE_HITBOX_STATE = PROJECTILE_HITBOX_STATE_PRE;            
-            ai_enemy_play_sound(npc, SOUND_328, 0x200000);
+            ai_enemy_play_sound(npc, SOUND_328, SOUND_PARAM_MORE_QUIET);
             npc->duration = 5;
             script->AI_TEMP_STATE = AI_STATE_BLASTER_COOLDOWN;
             // fallthrough

@@ -16,16 +16,7 @@ NpcSettings N(NpcSettings_Goomba) = {
 };
 
 #include "world/common/enemy/complete/Clubba.inc.c"
-
-#include "world/common/enemy/complete/Kammy.h"
-
-NpcSettings N(NpcSettings_Kammy) = {
-    .height = 34,
-    .radius = 24,
-    .level = 26,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
+#include "world/common/enemy/complete/Kammy.inc.c"
 
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 #include "world/common/todo/UnsetCamera0Flag1000.inc.c"

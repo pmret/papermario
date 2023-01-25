@@ -743,7 +743,7 @@ EvtScript N(8021F5F8) = {
         EVT_SET(LVarB, LVarC)
     EVT_END_IF
     EVT_SUB(LVarB, 20)
-    EVT_DIVF(LVarB, EVT_FLOAT(10.5888671875))
+    EVT_DIVF(LVarB, EVT_FLOAT(10.588))
     EVT_ADDF(LVarB, 15)
     EVT_SET(LVarA, LVarB)
     EVT_RETURN
@@ -3162,7 +3162,7 @@ EvtScript N(takeTurn_80226004) = {
     EVT_IF_FLAG(LVar0, 0x80000)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 4)
-        EVT_CALL(PlayEffect, 0x33, 8, LVar0, LVar1, LVar2, EVT_FLOAT(0.5205), LVarA, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, 0x33, 8, LVar0, LVar1, LVar2, EVT_FLOAT(0.52), LVarA, 0, 0, 0, 0, 0, 0, 0)
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 12)
@@ -3613,7 +3613,7 @@ EvtScript N(takeTurn_802270BC) = {
                 EVT_WAIT(1)
                 EVT_CALL(SetPartScale, -127, 1, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.4))
                 EVT_WAIT(1)
-                EVT_CALL(SetPartScale, -127, 1, EVT_FLOAT(1.55078125), EVT_FLOAT(1.55078125), EVT_FLOAT(1.55078125))
+                EVT_CALL(SetPartScale, -127, 1, EVT_FLOAT(1.55), EVT_FLOAT(1.55), EVT_FLOAT(1.55))
             EVT_CASE_EQ(2)
                 EVT_WAIT(13)
                 EVT_CALL(SetPartScale, -127, 1, EVT_FLOAT(1.2), EVT_FLOAT(1.2), EVT_FLOAT(1.2))

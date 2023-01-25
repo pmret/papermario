@@ -109,9 +109,9 @@ API_CALLABLE(N(CreateSticker)) {
     
     sticker->folderID = func_8013A704(1);
     sticker->workerID = create_worker_world(NULL, N(worker_render_sticker));
-    evt_set_variable(script, MapVar(10), (s32) sticker);
-    evt_set_variable(script, MapVar(11), (s32) iconImg);
-    evt_set_variable(script, MapVar(12), (s32) iconPal);
+    evt_set_variable(script, MV_StickerData, (s32) sticker);
+    evt_set_variable(script, MV_StickerImage, (s32) iconImg);
+    evt_set_variable(script, MV_StickerPalette, (s32) iconPal);
     return ApiStatus_DONE2;
 }
 

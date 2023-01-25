@@ -4,7 +4,7 @@
 
 #include "world/common/enemy/ai/BulletBillAI.inc.c"
 
-StationaryAISettings N(D_80240B50_AA3870) = {
+GuardAISettings N(D_80240B50_AA3870) = {
     .playerSearchInterval = 30,
 };
 
@@ -28,7 +28,7 @@ EvtScript N(D_80240BC4_AA38E4) = {
     EVT_END
 };
 
-StationaryAISettings N(AISettings_BillBlaster) = {
+GuardAISettings N(AISettings_BillBlaster) = {
     .playerSearchInterval = 10,
 };
 
