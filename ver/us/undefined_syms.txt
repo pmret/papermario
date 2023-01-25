@@ -36,12 +36,9 @@ heap_battleHead = 0x803DA800;
 hos_06_LetterDelivery_SavedNpcAnim = 0x80246424;
 nok_01_LetterDelivery_SavedNpcAnim = 0x80251E34;
 nok_02_LetterDelivery_SavedNpcAnim = 0x80254B94;
-jan_00_LetterDelivery_SavedNpcAnim = 0x80247CB4;
 jan_03_LetterDelivery_SavedNpcAnim = 0x8024FF04;
 sam_01_LetterDelivery_SavedNpcAnim = 0x8024DF24;
 sam_06_LetterDelivery_SavedNpcAnim = 0x8024C1D8;
-sbk_30_LetterDelivery_SavedNpcAnim = 0x80244D88;
-sbk_34_LetterDelivery_SavedNpcAnim = 0x802429A4;
 
 // Quizmo BSS
 jan_02_Quizmo_Worker = 0x80248924;

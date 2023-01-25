@@ -48,8 +48,8 @@ enum {
     RITUAL_STATE_D              = 13,
 };
 
-static RitualCard N(RitualCards)[3];
-MAP_STATIC_PAD(1,merlee)
+BSS RitualCard N(RitualCards)[3];
+MAP_STATIC_PAD(1,merlee);
 
 s8 N(MerleeSpellCasts)[] = {
     20, 10, 5, 0,

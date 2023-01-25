@@ -71,4 +71,4 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_END
 };
 
-MAP_RODATA_PAD(1,entity)
+MAP_RODATA_PAD(1,entity);

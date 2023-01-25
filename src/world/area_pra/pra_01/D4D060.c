@@ -1,6 +1,6 @@
 #include "pra_01.h"
 
-#include "world/common/atomic/Reflection.inc.c"
+#include "../common/Reflection.inc.c"
 
 #include "common/UnkFogFunc.inc.c"
 

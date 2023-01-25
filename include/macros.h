@@ -39,7 +39,7 @@
 
 // standardized padding macros for map overlays
 #define MAP_RODATA_PAD(n,name) const s32 N(rodata_pad_##name)[n] = {};
-#define MAP_STATIC_PAD(n,name) static s32 N(static_pad_##name)[n];
+#define MAP_STATIC_PAD(n,name) BSS s32 N(static_pad_##name)[n];
 
 // standardized macro for reseting data section after a INCLUDE_ASM
 //TODO these should all be removed after map decomp is done

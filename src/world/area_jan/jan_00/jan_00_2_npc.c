@@ -69,7 +69,7 @@ NpcSettings N(NpcSettings_HeartPlant_01) = {
     .onInteract = &N(EVS_NpcInteract_HeartPlant_01),
 };
 
-#include "world/common/atomic/LetterChoice.inc.c"
+#include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER25,

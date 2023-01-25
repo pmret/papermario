@@ -1,7 +1,7 @@
 #include "pra_11.h"
 
-#include "world/common/atomic/Reflection.inc.c"
-#include "world/common/atomic/Reflection.data.inc.c"
+#include "../common/Reflection.inc.c"
+#include "../common/Reflection.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_pra_09_1) = EVT_EXIT_WALK(60, pra_11_ENTRY_0, "pra_09", pra_09_ENTRY_1);
 

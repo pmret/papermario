@@ -1,7 +1,7 @@
 #include "pra_05.h"
 
-#include "world/common/atomic/Reflection.inc.c"
-#include "world/common/atomic/Reflection.data.inc.c"
+#include "../common/Reflection.inc.c"
+#include "../common/Reflection.data.inc.c"
 
 EvtScript N(EVS_ExitDoors_pra_38_1) = {
     EVT_SET_GROUP(EVT_GROUP_1B)

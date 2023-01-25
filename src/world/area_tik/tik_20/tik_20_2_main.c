@@ -63,7 +63,7 @@ EvtScript N(EVS_SetupDrips) = {
     EVT_END
 };
 
-MAP_RODATA_PAD(1,unk)
+MAP_RODATA_PAD(1,unk);
 
 #include "world/common/atomic/tik_Flotsam.inc.c"
 

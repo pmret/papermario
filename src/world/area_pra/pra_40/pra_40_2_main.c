@@ -1,7 +1,7 @@
 #include "pra_40.h"
 
-#include "world/common/atomic/Reflection.inc.c"
-#include "world/common/atomic/Reflection.data.inc.c"
+#include "../common/Reflection.inc.c"
+#include "../common/Reflection.data.inc.c"
 
 EvtScript N(EVS_ExitDoors_pra_31_1) = EVT_EXIT_DOUBLE_DOOR(pra_40_ENTRY_0, "pra_31", pra_31_ENTRY_1, COLLIDER_deilitt1, MODEL_o1055, MODEL_o1053);
 EvtScript N(EVS_ExitDoors_pra_32_0) = EVT_EXIT_DOUBLE_DOOR(pra_40_ENTRY_1, "pra_32", pra_32_ENTRY_0, COLLIDER_deilitt2, MODEL_o880, MODEL_o878);

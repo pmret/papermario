@@ -1,8 +1,8 @@
 #include "pra_33.h"
 #include "effects.h"
 
-#include "world/common/atomic/Reflection.inc.c"
-#include "world/common/atomic/Reflection.data.inc.c"
+#include "../common/Reflection.inc.c"
+#include "../common/Reflection.data.inc.c"
 #include "../common/GlassShimmer.inc.c"
 
 s32 N(RightDoorModelsL)[] = {

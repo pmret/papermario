@@ -7,8 +7,8 @@ s32 N(map_init)(void) {
     return FALSE;
 }
 
-#include "world/common/atomic/Reflection.inc.c"
-#include "world/common/atomic/Reflection.data.inc.c"
+#include "../common/Reflection.inc.c"
+#include "../common/Reflection.data.inc.c"
 
 EvtScript N(EVS_ExitDoors_pra_21_1) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
