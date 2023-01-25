@@ -41,6 +41,8 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
 
 BSS s32 D_8024FBA0[114];
 BSS s32 D_8024FD68[92];
+BSS s32 D_8024FED8[2]; // Unused or padding
+BSS s32 D_8024FEE0;
 
 ApiStatus func_80241A64_B36634(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
