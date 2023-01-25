@@ -1,6 +1,6 @@
 #include "flo_13.h"
 
-#include "world/common/atomic/flo_FlowerSpawnRegion.inc.c"
+#include "../common/FlowerSpawnRegion.inc.c"
 
 API_CALLABLE(N(SpawnSunEffect)) {
     fx_sun_undeclared(FX_SUN_FROM_LEFT, 0, 0, 0, 0, 0);

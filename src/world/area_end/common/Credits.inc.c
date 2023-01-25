@@ -5,11 +5,11 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgS
 void msg_get_glyph(s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out);
 void dma_load_msg(u32 msgID, void* dest);
 
-static CreditsData N(CreditsData);
-static CreditsData* N(CreditsDataPtr);
-static s32 N(BSS_PAD_1)[2];
-static u8 N(CreditsMessageBuffers)[23][256];
-static Mtx N(CreditsProjMatrices)[2];
+BSS CreditsData N(CreditsData);
+BSS CreditsData* N(CreditsDataPtr);
+BSS s32 N(BSS_PAD_1)[2];
+BSS u8 N(CreditsMessageBuffers)[23][256];
+BSS Mtx N(CreditsProjMatrices)[2];
 
 enum {
     CREDITS_LINE_FLAG_1          = 1,

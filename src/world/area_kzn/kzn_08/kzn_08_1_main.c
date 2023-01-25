@@ -1,7 +1,7 @@
 #include "kzn_08.h"
 #include "model.h"
 
-#include "world/common/atomic/LavaGlowLighting.inc.c"
+#include "../common/LavaGlowLighting.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"

@@ -1,7 +1,7 @@
 #include "kzn_06.h"
 #include "model.h"
 
-#include "world/common/atomic/LavaGlowLighting.inc.c"
+#include "../common/LavaGlowLighting.inc.c"
 
 API_CALLABLE(N(AdjustFog)) {
     Bytecode* args = script->ptrReadPos;

@@ -1,4 +1,4 @@
-#include "world/common/atomic/Credits.h"
+#include "../common/Credits.h"
 
 CreditsEntry N(Credits_Names)[] = {
     {

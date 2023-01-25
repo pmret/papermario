@@ -12,11 +12,11 @@ typedef struct RitualCard {
     /* 0x20 */ s32 xoffset;
 } RitualCard; // size = 0x24
 
-static Evt* N(CreatorScript);
+BSS Evt* N(CreatorScript);
 
 // this buffer is used as an array in scripts managaing the ritual scene
 // values are enumerated below
-static s32 N(RitualBuffer)[16];
+BSS s32 N(RitualBuffer)[16];
 
 enum {
     RITUAL_VAR_FOLDER_1     = ArrayVar(0),

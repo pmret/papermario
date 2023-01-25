@@ -1,6 +1,6 @@
 #include "kzn_23.h"
 
-#include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
+#include "world/area_kzn/common/SmokeTexPanners.inc.c"
 
 // should add to zero over a full cycle
 s32 N(LavaFluctuationOffsets)[] = {
