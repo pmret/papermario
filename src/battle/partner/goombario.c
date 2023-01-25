@@ -916,7 +916,7 @@ EvtScript N(calcJumpTime) = {
         EVT_SET(LVarB, LVar7)
     EVT_END_IF
     EVT_SUB(LVarB, 20)
-    EVT_DIVF(LVarB, EVT_FLOAT(10.5888671875))
+    EVT_DIVF(LVarB, EVT_FLOAT(10.588))
     EVT_ADDF(LVarB, 15)
     EVT_SET(LVarA, LVarB)
     EVT_RETURN

@@ -324,16 +324,16 @@ ApiStatus LoadBattleDmaData(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802536A8(Evt* script, s32 isInitialCall) {
+ApiStatus EnableBattleFloorReflections(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    if (evt_get_variable(script, *args++) != 0) {
-        battleStatus->unk_92 |= 1;
-        gOverrideFlags |= GLOBAL_OVERRIDES_80;
+    if (evt_get_variable(script, *args++)) {
+        battleStatus->reflectFlags |= BS_REFLECT_FLOOR;
+        gOverrideFlags |= GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
     } else {
-        battleStatus->unk_92 &= ~1;
-        gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
+        battleStatus->reflectFlags &= ~BS_REFLECT_FLOOR;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
     }
 
     return ApiStatus_DONE2;

@@ -9,13 +9,13 @@
 #include "mapfs/mac_03_shape.h"
 #include "mapfs/mac_03_hit.h"
 
-#include "sprite/npc/TrainStationToad.h"
+#include "sprite/npc/TrainToad.h"
 #include "sprite/npc/Toad.h"
 #include "sprite/npc/ShyGuy.h"
 
 enum {
-    NPC_TrainStationToad_01     = 0,
-    NPC_TrainStationToad_02     = 1,
+    NPC_TrainToad_01     = 0,
+    NPC_TrainToad_02     = 1,
     NPC_Toad_01                 = 2,
     NPC_ThreeSisters_01         = 3,
     NPC_Toad_02                 = 4,

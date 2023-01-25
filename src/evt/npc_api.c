@@ -18,9 +18,9 @@ Npc* resolve_npc(Evt* script, s32 npcIdOrPtr) {
 void set_npc_animation(Npc* npc, u32 animID) {
     PlayerData* playerData = &gPlayerData;
 
-    if (animID - PARTNER_ANIM_WALK < 9) {
-        npc->currentAnim = gPartnerAnimations[playerData->currentPartner].anims[animID - PARTNER_ANIM_WALK];
-    } else if ((animID - ENEMY_ANIM_IDLE) < 0x10) {
+    if (PARTNER_ANIM_STILL <= animID && animID <= PARTNER_ANIM_HURT) {
+        npc->currentAnim = gPartnerAnimations[playerData->currentPartner].anims[animID - PARTNER_ANIM_STILL];
+    } else if (ENEMY_ANIM_IDLE <= animID && animID <= ENEMY_ANIM_F) {
         npc->currentAnim = get_enemy(npc->npcID)->animList[animID - ENEMY_ANIM_IDLE];
     } else {
         npc->currentAnim = animID;
@@ -107,7 +107,7 @@ ApiStatus SetNpcRotation(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CDE68(Evt* script, s32 isInitialCall) {
+ApiStatus SetNpcRotationPivot(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcId = evt_get_variable(script, *args++);
     f32 value = evt_get_float_variable(script, *args++);

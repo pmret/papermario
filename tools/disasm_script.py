@@ -151,7 +151,7 @@ def get_constants():
         "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags", "Statuses", "Elements",
         "DamageTypes", "ElementImmunityFlags", "HitResults", "ActorFlags", "ActorPartFlags",
         "ActorEventFlags", "ElementFlags", "EncounterTriggers", "Abilities",
-        "Easings", "DecorationIDs", "HitResults", "Phases", "ItemSpawnModes",
+        "EasingType", "DecorationIDs", "HitResults", "Phases", "ItemSpawnModes",
         "ActionStates", "Triggers", "Buttons", "ActionCommand", "MoveIDs", "BattleStatusFlags1",
         "BattleStatusFlags2", "BtlCameraPreset", "EffectID", "StatusFlags" }
     for enum in valid_enums:

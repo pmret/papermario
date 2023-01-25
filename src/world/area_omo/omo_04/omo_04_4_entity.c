@@ -64,49 +64,49 @@ EvtScript N(EVS_StarBoxLaunch_Impl) = {
 };
 
 EvtScript N(EVS_StarBoxLaunch1) = {
-    EVT_SET(LVar0, 1)
+    EVT_SET(LVar0, 1) // entityID
     EVT_EXEC_WAIT(N(EVS_StarBoxLaunch_Impl))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_StarBoxLaunch2) = {
-    EVT_SET(LVar0, 2)
+    EVT_SET(LVar0, 2) // entityID
     EVT_EXEC_WAIT(N(EVS_StarBoxLaunch_Impl))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_StarBoxLaunch3) = {
-    EVT_SET(LVar0, 3)
+    EVT_SET(LVar0, 3) // entityID
     EVT_EXEC_WAIT(N(EVS_StarBoxLaunch_Impl))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_StarBoxLaunch4) = {
-    EVT_SET(LVar0, 4)
+    EVT_SET(LVar0, 4) // entityID
     EVT_EXEC_WAIT(N(EVS_StarBoxLaunch_Impl))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_StarBoxLaunch5) = {
-    EVT_SET(LVar0, 5)
+    EVT_SET(LVar0, 5) // entityID
     EVT_EXEC_WAIT(N(EVS_StarBoxLaunch_Impl))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_StarBoxLaunch6) = {
-    EVT_SET(LVar0, 6)
+    EVT_SET(LVar0, 6) // entityID
     EVT_EXEC_WAIT(N(EVS_StarBoxLaunch_Impl))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_StarBoxLaunch7) = {
-    EVT_SET(LVar0, 7)
+    EVT_SET(LVar0, 7) // entityID
     EVT_EXEC_WAIT(N(EVS_StarBoxLaunch_Impl))
     EVT_RETURN
     EVT_END

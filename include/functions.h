@@ -124,13 +124,13 @@ void update_hero_shadows(void);
 void appendGfx_background_texture(void);
 void appendGfx_enemy_actor(void*);
 void appendGfx_enemy_actor_blur(void*);
-void appendGfx_enemy_actor_decorations(void*);
+void appendGfx_enemy_actor_reflection(void*);
 void appendGfx_partner_actor(void*);
 void appendGfx_partner_actor_blur(void*);
-void func_80257B88(void*);
+void appendGfx_partner_actor_reflection(void*);
 void appendGfx_player_actor(void*);
 void appendGfx_player_actor_blur(Actor*);
-void func_80258E14(void*);
+void appendGfx_player_actor_reflection(void*);
 
 void func_80254610(Actor*);
 

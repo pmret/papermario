@@ -8323,7 +8323,7 @@ ConductorToad:
     - Run
     - Talk
     - BlowWhistle
-TrainStationToad:
+TrainToad:
   variations:
     - Variant00
     - Variant01

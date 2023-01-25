@@ -284,7 +284,7 @@ void btl_state_update_normal_start(void) {
             battleStatus->cloudNineTurnsLeft = 0;
             battleStatus->cloudNineDodgeChance = 0;
             battleStatus->cloudNineEffect = NULL;
-            battleStatus->unk_92 = 0;
+            battleStatus->reflectFlags = 0;
             battleStatus->turboChargeTurnsLeft = 0;
             battleStatus->turboChargeAmount = 0;
             battleStatus->unk_8C = 0;

@@ -53,7 +53,7 @@ EvtScript N(EVS_DemoUpdatePassengerPos) = {
     EVT_END_IF
     EVT_ADD(LVar1, -6)
     EVT_ADD(LVar2, -40)
-    EVT_CALL(SetNpcPos, NPC_TrainStationToad_02, LVar0, LVar1, LVar2)
+    EVT_CALL(SetNpcPos, NPC_TrainToad_02, LVar0, LVar1, LVar2)
     EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
@@ -65,7 +65,7 @@ EvtScript N(EVS_DemoDepartForMtRugged) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_SET(MV_TrainMoveDist, 0)
     EVT_SET(MV_TrainMoveSpeed, 0)
     EVT_SET(MF_TrainReverseDir, FALSE)
@@ -103,7 +103,7 @@ EvtScript N(EVS_DemoDepartForMtRugged) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_THREAD
         EVT_LOOP(1000)
-            EVT_ADDF(MV_TrainMoveSpeed, EVT_FLOAT(0.03125))
+            EVT_ADDF(MV_TrainMoveSpeed, EVT_FLOAT(0.031))
             EVT_IF_GT(MV_TrainMoveSpeed, 10)
                 EVT_SETF(MV_TrainMoveSpeed, EVT_FLOAT(10.0))
             EVT_END_IF

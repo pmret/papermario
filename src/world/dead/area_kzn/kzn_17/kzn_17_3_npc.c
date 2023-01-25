@@ -42,7 +42,7 @@ EvtScript N(EVS_Kolorado_TrompPanic) = {
 
 EvtScript N(EVS_Kolorado_TrompImpact) = {
     EVT_CALL(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_400000, 1)
-    EVT_CALL(func_802CDE68, 0, 13)
+    EVT_CALL(SetNpcRotationPivot, NPC_Kolorado, 13)
     EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
     EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
     EVT_CALL(func_802CFD30, 0, FOLD_TYPE_4, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
@@ -67,7 +67,7 @@ EvtScript N(EVS_Kolorado_HurtInit) = {
     EVT_CALL(SetNpcPos, NPC_Kolorado, 447, 0, 70)
     EVT_CALL(SetNpcYaw, NPC_Kolorado, 270)
     EVT_CALL(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_400000, 1)
-    EVT_CALL(func_802CDE68, 0, 13)
+    EVT_CALL(SetNpcRotationPivot, NPC_Kolorado, 13)
     EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
     EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
     EVT_CALL(func_802CFD30, 0, FOLD_TYPE_4, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)

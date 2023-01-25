@@ -116,7 +116,7 @@ EvtScript N(EVS_Starship_Depart) = {
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40 | NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcJumpscale, NPC_PARTNER, 1)
     EVT_CALL(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 15)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_SET(MV_PartnerOnBoard, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_PARTNER, FALSE)

@@ -5,7 +5,7 @@ MAP_RODATA_PAD(1, pad);
 extern EvtScript N(EVS_FocusCamOnLock);
 
 #include "world/common/enemy/complete/KoopaTroopa_Wander.inc.c"
-#include "world/common/enemy/complete/Bobomb_Stationary.inc.c"
+#include "world/common/enemy/complete/Bobomb_Guard.inc.c"
 
 API_CALLABLE(N(SetNewWanderCenterPos)) {
     Enemy* owner1 = script->owner1.enemy;
@@ -222,7 +222,7 @@ StaticNpc N(NpcData_KoopaTroopa_03) = {
 
 StaticNpc N(NpcData_Bobomb) = {
     .id = NPC_Bobomb,
-    .settings = &N(NpcSettings_Bobomb_Stationary),
+    .settings = &N(NpcSettings_Bobomb_Guard),
     .pos = { -255.0f, 640.0f, 35.0f },
     .yaw = 180,
     .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,

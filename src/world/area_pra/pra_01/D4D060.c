@@ -5,7 +5,7 @@
 #include "common/UnkFogFunc.inc.c"
 
 ApiStatus func_80240F60_D4DFA0(Evt* script, s32 isInitialCall) {
-    gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
     return ApiStatus_DONE2;
 }
 

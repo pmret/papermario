@@ -280,12 +280,12 @@ EvtScript N(EVS_OnHitTrapTrigger) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_JUMP)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, -10)
         EVT_ADD(LVar2, -5)
         EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 10)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_CALL(EnableModel, MODEL_o101, FALSE)
@@ -316,7 +316,7 @@ EvtScript N(EVS_OnHitTrapTrigger) = {
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
     EVT_WAIT(5)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_9)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_HURT)
     EVT_WAIT(15)
     EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
     EVT_WAIT(5)

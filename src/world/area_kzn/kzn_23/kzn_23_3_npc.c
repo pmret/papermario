@@ -81,7 +81,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
 EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
     EVT_WAIT(1)
-    EVT_CALL(func_802CDE68, -1, 10)
+    EVT_CALL(SetNpcRotationPivot, NPC_SELF, 10)
     EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 180)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado)))

@@ -6144,7 +6144,7 @@ void execute_render_tasks(void) {
 
     D_8014B7F0 = taskCount;
     taskList = mdl_renderTaskLists[mdl_renderTaskQueueIdx];
-    if (gOverrideFlags & GLOBAL_OVERRIDES_80) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION) {
         Mtx* dispMtx;
         Gfx* savedGfxPos = NULL;
 
@@ -6155,13 +6155,13 @@ void execute_render_tasks(void) {
             task = &taskList[sorted[i]];
             appendGfx = task->appendGfx;
 
-            if (task->renderMode & RENDER_TASK_FLAG_2) {
+            if (task->renderMode & RENDER_TASK_FLAG_REFLECT_FLOOR) {
                 savedGfxPos = gMasterGfxPos++;
             }
 
             appendGfx(task->appendGfxArg);
 
-            if (task->renderMode & RENDER_TASK_FLAG_2) {
+            if (task->renderMode & RENDER_TASK_FLAG_REFLECT_FLOOR) {
                 gSPEndDisplayList(gMasterGfxPos++);
                 gSPBranchList(savedGfxPos, gMasterGfxPos);
                 gSPDisplayList(gMasterGfxPos++, savedGfxPos + 1);

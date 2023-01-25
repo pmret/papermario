@@ -93,7 +93,7 @@ EvtScript N(EVS_RideZipline) = {
         EVT_ADD(LVar1, -5)
         EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.5))
         EVT_CALL(NpcJump0, NPC_PARTNER, ArrayVar(3), LVar0, LVar1, 8)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_END_THREAD
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.2))
     EVT_CALL(PlayerJump, ArrayVar(3), ArrayVar(4), ArrayVar(5), 5)

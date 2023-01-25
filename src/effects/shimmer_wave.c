@@ -181,7 +181,7 @@ void shimmer_wave_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_TASK_FLAG_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
 void shimmer_wave_appendGfx(void* effect) {

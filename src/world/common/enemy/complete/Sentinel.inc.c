@@ -67,7 +67,7 @@ EvtScript N(EVS_NpcAI_Sentinel) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_HURT)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_TALK)
         EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
         EVT_CALL(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 10)
         EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)

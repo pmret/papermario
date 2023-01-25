@@ -706,7 +706,7 @@ EvtScript N(useStarRod) = {
         EVT_THREAD
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2123)
             EVT_ADD(LVar2, 10)
-            EVT_CALL(N(StarRodAppearEffect), LVar0, LVar1, LVar2, EVT_FLOAT(2.5), EVT_FLOAT(0.0751953125))
+            EVT_CALL(N(StarRodAppearEffect), LVar0, LVar1, LVar2, EVT_FLOAT(2.5), EVT_FLOAT(0.075))
         EVT_END_THREAD
     EVT_ELSE
         EVT_ADD(LVar0, 9)

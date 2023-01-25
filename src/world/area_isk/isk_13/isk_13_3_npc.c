@@ -205,14 +205,14 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
     EVT_THREAD
         EVT_SETF(LVar0, 0)
         EVT_LOOP(10)
-            EVT_ADDF(LVar0, EVT_FLOAT(12.796875))
+            EVT_ADDF(LVar0, EVT_FLOAT(12.796))
             EVT_CALL(N(func_80241EF8_9916D8), 255, 128, 255, LVar0)
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_CALL(N(func_80241EF8_9916D8), 255, 128, 255, 128)
         EVT_SETF(LVar0, 128)
         EVT_LOOP(20)
-            EVT_ADDF(LVar0, EVT_FLOAT(6.34375))
+            EVT_ADDF(LVar0, EVT_FLOAT(6.343))
             EVT_CALL(N(func_80241EF8_9916D8), 255, LVar0, 255, LVar0)
             EVT_WAIT(1)
         EVT_END_LOOP

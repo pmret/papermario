@@ -24,7 +24,7 @@ EvtScript N(EVS_MoveWalls_RussHouse) = {
     EVT_CALL(RotateModel, MODEL_o460, LVar1, 0, 1, 0)
     EVT_CALL(RotateModel, MODEL_o461, LVar1, 0, 1, 0)
     EVT_SET(LVar1, LVar0)
-    EVT_MULF(LVar1, EVT_FLOAT(2.21875))
+    EVT_MULF(LVar1, EVT_FLOAT(2.218))
     EVT_CALL(RotateModel, MODEL_o213, LVar1, 0, 1, 0)
     EVT_CALL(RotateModel, MODEL_o215, LVar1, 0, 1, 0)
     EVT_RETURN

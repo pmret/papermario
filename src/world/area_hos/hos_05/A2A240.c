@@ -31,9 +31,9 @@ ApiStatus func_80240690_A2A8D0(Evt* script, s32 isInitialCall) {
     f32 temp_f20;
     f32 temp_f26;
 
-    script->varTable[2] = EVT_FLOAT(0);
-    script->varTable[3] = EVT_FLOAT(100);
-    script->varTable[4] = EVT_FLOAT(0);
+    script->varTable[2] = EVT_FLOAT(0.0);
+    script->varTable[3] = EVT_FLOAT(100.0);
+    script->varTable[4] = EVT_FLOAT(0.0);
 
     temp_f26 = (script->varTable[1] * 180.0f) / PI;
     temp_f20 = (rand_int(10) / vt2) + 3.0f;

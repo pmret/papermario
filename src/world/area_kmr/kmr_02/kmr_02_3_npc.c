@@ -34,14 +34,14 @@ API_CALLABLE(N(func_80242014_8B2084)) {
 
 #include "world/common/enemy/complete/Kammy.h"
 
-StationaryAISettings N(AISettings_Kammy) = {
+GuardAISettings N(AISettings_Kammy) = {
     .playerSearchInterval = -1,
     .chaseRadius = 300.0f,
-    .unk_20 = 30,
+    .unk_AI_20 = 30,
 };
 
 EvtScript N(EVS_NpcAI_Kammy) = {
-    EVT_CALL(N(StationaryAI_Main), EVT_PTR(N(AISettings_Kammy)))
+    EVT_CALL(N(GuardAI_Main), EVT_PTR(N(AISettings_Kammy)))
     EVT_RETURN
     EVT_END
 };

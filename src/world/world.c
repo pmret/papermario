@@ -44,7 +44,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     sfx_stop_env_sounds();
     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-    gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
 
     gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_MARIO_WORLD;
     func_8002D160();
@@ -563,6 +563,7 @@ MapConfig osr_maps[] = {
 
 /// Peach's Castle
 /// @bug There are two entries for kkj_26; the latter is unreachable.
+#include "area_kkj/kkj.h"
 MapConfig kkj_maps[] = {
     { MAP_UNSPLIT(kkj_00, 0x80241030), .bgName = "nok_bg", .init = (MapInit)0x80240000, .songVariation = 1, .sfxReverb = 3 },
     { MAP_UNSPLIT(kkj_01, 0x80240F10), .bgName = "nok_bg", .songVariation = 1, .sfxReverb = 3 },
@@ -754,20 +755,21 @@ MapConfig sam_maps[] = {
 };
 
 /// Crystal Palace
+#include "area_pra/pra.h"
 MapConfig pra_maps[] = {
     { MAP_UNSPLIT(pra_01, 0x80241400), .bgName = "yki_bg", .sfxReverb = 1, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_02, 0x802416C0), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_03, 0x802401E0), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_04, 0x80240970), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_05, 0x802411F0), .songVariation = 1, .sfxReverb = 1, .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(pra_06, 0x80240F60), .songVariation = 1, .sfxReverb = 1, .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(pra_06), .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(pra_09, 0x80241670), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_10, 0x802416D0), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_11, 0x802411F0), .songVariation = 1, .sfxReverb = 1, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_12, 0x80241220), .songVariation = 1, .sfxReverb = 1, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_13, 0x80241620), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_14, 0x80241200), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(pra_15, 0x80240050), .bgName = "yki_bg", .init = (MapInit)0x80240000, .songVariation = 1, .sfxReverb = 1 },
+    { MAP_WITH_INIT(pra_15), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(pra_16, 0x80240F60), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_18, 0x80240F50), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_19, 0x802419D0), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
@@ -786,28 +788,28 @@ MapConfig pra_maps[] = {
     { MAP_UNSPLIT(pra_37, 0x80241840), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_38, 0x80241700), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_39, 0x80241700), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(pra_40, 0x80240F40), .songVariation = 1, .sfxReverb = 1, .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(pra_40), .songVariation = 1, .sfxReverb = 1 },
 };
 
 /// Shy Guy's Toy Box
 #include "area_omo/omo.h"
 MapConfig omo_maps[] = {
-    { MAP_UNSPLIT(omo_01, 0x80240C40), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_02, 0x80242BD0), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_03, 0x80240900), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_01), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_02), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_03), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_04), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_05), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_06, 0x80240B80), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_06), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_07), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_08, 0x80240E10), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_09, 0x80243700), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_10, 0x802408B0), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_11, 0x802414F0), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_12, 0x802404D0), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_13, 0x80241510), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_14, 0x802405E0), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_15, 0x80240810), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(omo_16, 0x80240620), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_08), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_09), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_10), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_11), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_12), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_13), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_14), .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_15), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(omo_16), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(omo_17), .bgName = "omo_bg", .songVariation = 1, .sfxReverb = 2 },
 };
 
