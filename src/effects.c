@@ -116,7 +116,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x56 */ FX_ENTRY(stat_change, effect_gfx_stat_change),
     /* 0x57 */ FX_ENTRY(snaking_static, effect_gfx_snaking_static),
     /* 0x58 */ FX_ENTRY(thunderbolt_ring, effect_gfx_thunderbolt_ring),
-    /* 0x59 */ FX_ENTRY(squirt, _3B5340),
+    /* 0x59 */ FX_ENTRY(squirt, effect_gfx_squirt),
     /* 0x5A */ FX_ENTRY(water_block, effect_gfx_water_block),
     /* 0x5B */ FX_ENTRY(waterfall, effect_gfx_waterfall),
     /* 0x5C */ FX_ENTRY(water_fountain, effect_gfx_water_fountain),

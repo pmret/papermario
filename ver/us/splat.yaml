@@ -5238,7 +5238,24 @@ segments:
     subsegments:
     - [0x3B4790, c, squirt]
     - [0x3B5330]
-  - [0x3B5340, bin] # squirt gfx
+  - name: effect_gfx_squirt
+    dir: effects/gfx
+    type: code
+    start: 0x3B5340
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3B5340, c, squirt]
+    - start: 0x3B5340
+      type: .data
+      name: squirt
+      subsegments:
+      - [0x3B5340, ia4, D_09000000_3B5340, 64, 32]
+      - [0x3B5740, ia8, D_09000400_3B5740, 32, 32]
+      - [0x3B5B40, gfx, D_09000800_3B5B40]
+      - [0x3B5BE8, gfx, D_090008A8_3B5BE8]
+      - [0x3B5C90, vtx, D_09000950_3B5C90]
+      - [0x3B5CD0, gfx, D_09000990_3B5CD0]
   - name: effect_water_block
     dir: effects
     type: code
