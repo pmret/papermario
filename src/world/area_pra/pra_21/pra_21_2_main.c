@@ -1,14 +1,7 @@
 #include "pra_21.h"
 
-s32 N(DoorModelsL)[] = {
-    MODEL_o977,
-    GENERIC_LIST_END
-};
-
-s32 N(DoorModelsR)[] = {
-    MODEL_o976,
-    GENERIC_LIST_END
-};
+s32 N(DoorModelsL)[] = { MODEL_o977, -1 };
+s32 N(DoorModelsR)[] = { MODEL_o976, -1 };
 
 EvtScript N(EVS_ExitDoor_pra_20_1) = {
     EVT_SET_GROUP(EVT_GROUP_1B)

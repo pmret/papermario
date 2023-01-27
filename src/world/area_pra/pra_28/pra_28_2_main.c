@@ -10,17 +10,8 @@ s32 N(map_init)(void) {
 #include "../common/Reflection.inc.c"
 #include "../common/Reflection.data.inc.c"
 
-s32 N(DoorModelsL)[] = {
-    MODEL_o772,
-    MODEL_o844,
-    GENERIC_LIST_END 
-};
-
-s32 N(DoorModelsR)[] = {
-    MODEL_o768,
-    MODEL_o846,
-    GENERIC_LIST_END 
-};
+s32 N(DoorModelsL)[] = { MODEL_o772, MODEL_o844, -1 };
+s32 N(DoorModelsR)[] = { MODEL_o768, MODEL_o846, -1 };
 
 EvtScript N(EVS_ExitDoors_pra_37_1) = {
     EVT_SET_GROUP(EVT_GROUP_1B)

@@ -27,15 +27,8 @@ API_CALLABLE(N(PreventFalling)) {
     return ApiStatus_DONE2;
 }
 
-s32 N(DoorModelsL)[] = {
-    MODEL_o1001,
-    GENERIC_LIST_END 
-};
-
-s32 N(DoorModelsR)[] = {
-    MODEL_o1002,
-    GENERIC_LIST_END 
-};
+s32 N(DoorModelsL)[] = { MODEL_o1001, -1 };
+s32 N(DoorModelsR)[] = { MODEL_o1002, -1 };
 
 EvtScript N(EVS_ExitDoors_pra_20_4) = {
     EVT_SET_GROUP(EVT_GROUP_1B)

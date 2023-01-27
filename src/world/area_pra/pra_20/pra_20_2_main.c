@@ -4,61 +4,19 @@
 #include "../common/Reflection.data.inc.c"
 #include "../common/GlassShimmer.inc.c"
 
-s32 N(NearSingleDoorModels)[] = {
-    MODEL_o999,
-    MODEL_o1000,
-    GENERIC_LIST_END 
-};
+s32 N(NearSingleDoorModels)[] = { MODEL_o999, MODEL_o1000, -1 };
+s32 N(FarSingleDoorModels)[]  = { MODEL_o997, MODEL_o998, -1 };
 
-s32 N(FarSingleDoorModels)[] = {
-    MODEL_o997,
-    MODEL_o998,
-    GENERIC_LIST_END 
-};
+s32 N(NearRightDoorModelsL)[] = { MODEL_o874, MODEL_o875, -1 };
+s32 N(NearRightDoorModelsR)[] = { MODEL_o876, MODEL_o877, -1 };
 
-s32 N(NearRightDoorModelsL)[] = {
-    MODEL_o874,
-    MODEL_o875,
-    GENERIC_LIST_END 
-};
+s32 N(BackRightDoorModelsL)[] = { MODEL_o880, MODEL_o881, -1 };
+s32 N(BackRightDoorModelsR)[] = { MODEL_o878, MODEL_o879, -1 };
 
-s32 N(NearRightDoorModelsR)[] = {
-    MODEL_o876,
-    MODEL_o877,
-    GENERIC_LIST_END 
-};
+s32 N(BothRightDoorModelsL)[] = { MODEL_o874, MODEL_o875, MODEL_o880, MODEL_o881, -1 };
+s32 N(BothRightDoorModelsR)[] = { MODEL_o876, MODEL_o877, MODEL_o878, MODEL_o879, -1 };
 
-s32 N(BackRightDoorModelsL)[] = {
-    MODEL_o880,
-    MODEL_o881,
-    GENERIC_LIST_END 
-};
-
-s32 N(BackRightDoorModelsR)[] = {
-    MODEL_o878,
-    MODEL_o879,
-    GENERIC_LIST_END 
-};
-
-s32 N(BothRightDoorModelsL)[] = {
-    MODEL_o874,
-    MODEL_o875,
-    MODEL_o880,
-    MODEL_o881,
-    GENERIC_LIST_END 
-};
-
-s32 N(BothRightDoorModelsR)[] = {
-    MODEL_o876,
-    MODEL_o877,
-    MODEL_o878,
-    MODEL_o879,
-    GENERIC_LIST_END 
-};
-
-s32 N(ModelListNone)[] = {
-    GENERIC_LIST_END 
-};
+s32 N(ModelListNone)[] = { -1 };
 
 EvtScript N(EVS_ExitWalk_pra_19_1) = EVT_EXIT_WALK(60, pra_20_ENTRY_0, "pra_19", pra_19_ENTRY_1);
 

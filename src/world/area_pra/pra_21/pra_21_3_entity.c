@@ -1,7 +1,7 @@
 #include "pra_21.h"
 #include "entity.h"
 
-API_CALLABLE(N(GetTargetYawForSpring)) {
+API_CALLABLE(N(GetTargetPosXForSpring)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->targetYaw >= 0.0f && playerStatus->targetYaw < 180.0f) {
@@ -46,7 +46,7 @@ EvtScript N(EVS_UseSpring) = {
     EVT_IF_EQ(MV_PlayerFloor, 0)
         EVT_SET(LVar3, -175)
         EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayer), LVarA)
-        EVT_CALL(N(GetTargetYawForSpring))
+        EVT_CALL(N(GetTargetPosXForSpring))
         EVT_SET(LVar1, -200)
         EVT_SET(LVar2, 15)
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(2.0))

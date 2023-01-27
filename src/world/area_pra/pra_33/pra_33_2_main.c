@@ -5,25 +5,11 @@
 #include "../common/Reflection.data.inc.c"
 #include "../common/GlassShimmer.inc.c"
 
-s32 N(RightDoorModelsL)[] = {
-    MODEL_o874,
-    GENERIC_LIST_END
-};
+s32 N(RightDoorModelsL)[] = { MODEL_o874, -1 };
+s32 N(RightDoorModelsR)[] = { MODEL_o876, -1 };
 
-s32 N(RightDoorModelsR)[] = {
-    MODEL_o876,
-    GENERIC_LIST_END
-};
-
-s32 N(LeftDoorModelsL)[] = {
-    MODEL_o859,
-    GENERIC_LIST_END
-};
-
-s32 N(LeftDoorModelsR)[] = {
-    MODEL_o861,
-    GENERIC_LIST_END
-};
+s32 N(LeftDoorModelsL)[] = { MODEL_o859, -1 };
+s32 N(LeftDoorModelsR)[] = { MODEL_o861, -1 };
 
 EvtScript N(EVS_ExitDoors_pra_35_0) = {
     EVT_SET_GROUP(EVT_GROUP_1B)

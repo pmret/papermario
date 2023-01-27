@@ -757,14 +757,14 @@ MapConfig sam_maps[] = {
 /// Crystal Palace
 #include "area_pra/pra.h"
 MapConfig pra_maps[] = {
-    { MAP_UNSPLIT(pra_01, 0x80241400), .bgName = "yki_bg", .sfxReverb = 1, .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(pra_02, 0x802416C0), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(pra_03, 0x802401E0), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(pra_04, 0x80240970), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(pra_01), .bgName = "yki_bg", .sfxReverb = 1 },
+    { MAP_WITH_INIT(pra_02), .songVariation = 1, .sfxReverb = 2 },
+    { MAP_WITH_INIT(pra_03), .songVariation = 1, .sfxReverb = 2 },
+    { MAP_WITH_INIT(pra_04), .songVariation = 1, .sfxReverb = 2 },
     { MAP_WITH_INIT(pra_05), .songVariation = 1, .sfxReverb = 1 },
     { MAP_WITH_INIT(pra_06), .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(pra_09, 0x80241670), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(pra_10, 0x802416D0), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(pra_10), .songVariation = 1, .sfxReverb = 2 },
     { MAP_WITH_INIT(pra_11), .songVariation = 1, .sfxReverb = 1 },
     { MAP_WITH_INIT(pra_12), .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(pra_13, 0x80241620), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },

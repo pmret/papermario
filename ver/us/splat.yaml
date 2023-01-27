@@ -14056,52 +14056,47 @@ segments:
     start: 0xD4D040
     vram: 0x80240000
     subsegments:
-    - [0xD4D040, c]
-    - [0xD4D060, c]
-    - [0xD4E3F0, data]
-    - [0xD4E500, data]
-    - [0xD4EF50, data]
-    - [0xD4FFC0, data]
-    - [0xD4FFD0]
+    - [0xD4D040, c, pra_01_0_header]
+    - [0xD4D060, c, pra_01_1_music]
+    - [0xD4D060, c, pra_01_2_main]
+    - [0xD4DFC0, c, pra_01_3_npc]
+    - [0xD4E3F0, c, pra_01_4_entity]
+    - [0xD4E3F0]
   - name: pra_02
     dir: world/area_pra/pra_02
     type: code
     start: 0xD4FFF0
     vram: 0x80240000
     subsegments:
-    - [0xD4FFF0, c]
-    - [0xD50010, c]
-    - [0xD51650, data]
-    - [0xD51720, data]
-    - [0xD52A80, data]
-    - [0xD52DE0, data]
-    - [0xD53C80]
+    - [0xD4FFF0, c, pra_02_0_header]
+    - [0xD50010, c, pra_02_1_music]
+    - [0xD50010, c, pra_02_2_main]
+    - [0xD50F10, c, pra_02_3_npc]
+    - [0xD51300, c, pra_02_4_entity]
+    - [0xD51650]
   - name: pra_03
     dir: world/area_pra/pra_03
     type: code
     start: 0xD53CB0
     vram: 0x80240000
     subsegments:
-    - [0xD53CB0, c]
-    - [0xD53CD0, c]
-    - [0xD53E60, data]
-    - [0xD53F10, data]
-    - [0xD543C0, data]
-    - [0xD54670]
+    - [0xD53CB0, c, pra_03_0_header]
+    - [0xD53CD0, c, pra_03_1_music]
+    - [0xD53CD0, c, pra_03_2_main]
+    - [0xD53CD0, c, pra_03_3_entity]
+    - [0xD53E60]
   - name: pra_04
     dir: world/area_pra/pra_04
     type: code
     start: 0xD54690
     vram: 0x80240000
     subsegments:
-    - [0xD54690, c]
-    - [0xD546B0, c]
-    - [0xD54840, c]
-    - [0xD54FD0, data]
-    - [0xD55080, data]
-    - [0xD554E0, data]
-    - [0xD55840, data]
-    - [0xD55B40]
+    - [0xD54690, c, pra_04_0_header]
+    - [0xD546B0, c, pra_04_1_music]
+    - [0xD546B0, c, pra_04_2_main]
+    - [0xD546B0, c, pra_04_3_entity]
+    - [0xD54840, c, pra_04_4_npc]
+    - [0xD54FD0]
   - name: pra_05
     dir: world/area_pra/pra_05
     type: code
@@ -14141,11 +14136,11 @@ segments:
     start: 0xD5F2B0
     vram: 0x80240000
     subsegments:
-    - [0xD5F2B0, c]
-    - [0xD5F2D0, c]
-    - [0xD60960, data]
-    - [0xD60A00, data]
-    - [0xD614A0]
+    - [0xD5F2B0, c, pra_10_0_header]
+    - [0xD5F2D0, c, pra_10_1_music]
+    - [0xD5F2D0, c, pra_10_2_main]
+    - [0xD601D0, c, pra_10_3_npc]
+    - [0xD60960]
   - name: pra_11
     dir: world/area_pra/pra_11
     type: code
