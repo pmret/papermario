@@ -49,8 +49,8 @@ void N(appendGfx_shrunk_player)(void* data) {
     guMtxCatF(transformMtx, tempMtx, transformMtx);
     guTranslateF(tempMtx, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
     guMtxCatF(transformMtx, tempMtx, transformMtx);
-    playerStatus->animNotifyValue = spr_update_player_sprite(0, playerStatus->trueAnimation, 1.0f);
-    spr_draw_player_sprite(0, 0, 0, NULL, transformMtx);
+    playerStatus->animNotifyValue = spr_update_player_sprite(PLAYER_SPRITE_INSTANCE_0, playerStatus->trueAnimation, 1.0f);
+    spr_draw_player_sprite(PLAYER_SPRITE_INSTANCE_0, 0, 0, NULL, transformMtx);
 }
 
 EvtScript N(EVS_ShrinkPlayer) = {

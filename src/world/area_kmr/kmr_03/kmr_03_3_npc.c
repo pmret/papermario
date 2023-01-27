@@ -5,7 +5,7 @@
 #include "world/common/todo/CheckPartnerFlags1000.inc.c"
 
 API_CALLABLE(N(func_802401B0_8C8140)) {
-    Npc* npc = get_npc_unsafe(0);
+    Npc* npc = get_npc_unsafe(NPC_Goompa);
 
     script->varTable[1] = get_xz_dist_to_player(npc->pos.x, npc->pos.z) / npc->moveSpeed * 0.8f;
     return ApiStatus_DONE2;

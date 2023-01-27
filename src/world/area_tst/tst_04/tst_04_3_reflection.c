@@ -57,8 +57,8 @@ void N(appendGfx_test_player_reflection)(void* data) {
     guMtxCatF(main, scale, main);
     guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z);
     guMtxCatF(main, translation, main);
-    spr_update_player_sprite(1, playerStatus->trueAnimation, 1.0f);
-    spr_draw_player_sprite(1, 0, 0, NULL, main);
+    spr_update_player_sprite(PLAYER_SPRITE_INSTANCE_1, playerStatus->trueAnimation, 1.0f);
+    spr_draw_player_sprite(PLAYER_SPRITE_INSTANCE_1, 0, 0, NULL, main);
 }
 
 API_CALLABLE(N(EnablePartnerReflection)) {

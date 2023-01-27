@@ -114,7 +114,7 @@ API_CALLABLE(func_80240B4C_B2108C) {
     outX = *args++;
     outY = *args++;
     outZ = *args++;
-    npc = get_npc_safe(0);
+    npc = get_npc_safe(NPC_Whale);
 
     switch (temp_s1) {
         case 0:
@@ -144,7 +144,7 @@ API_CALLABLE(func_80240B4C_B2108C) {
 
 ApiStatus func_80240CF8_B21238(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Npc* npc0 = get_npc_safe(0);
+    Npc* npc0 = get_npc_safe(NPC_Whale);
     Npc* npc1;
     Npc* partner;
     f32 theta;
@@ -196,7 +196,7 @@ ApiStatus func_80240CF8_B21238(Evt* script, s32 isInitialCall) {
             partner->flags |= NPC_FLAG_DIRTY_SHADOW;
             break;
         case 2:
-            npc1 = get_npc_safe(1);
+            npc1 = get_npc_safe(NPC_Kolorado_02);
             npc1->pos.x = x;
             npc1->pos.y = y;
             npc1->pos.z = z;
@@ -211,7 +211,7 @@ ApiStatus func_80240CF8_B21238(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80240F14_B21454(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Npc* npc = get_npc_safe(0);
+    Npc* npc = get_npc_safe(NPC_Whale);
 
     if (isInitialCall) {
         script->functionTemp[0] = evt_get_variable(script, *args++);
@@ -273,7 +273,7 @@ ApiStatus func_80240F14_B21454(Evt* script, s32 isInitialCall) {
 }
 
 API_CALLABLE(func_80241134_B21674) {
-    Npc* npc = get_npc_safe(2);
+    Npc* npc = get_npc_safe(NPC_JrTroopa);
     f32 x = npc->pos.x;
     f32 y = npc->pos.y;
     f32 z = npc->pos.z - 20.0f;
@@ -291,7 +291,7 @@ EvtScript N(D_80242D90_B232D0) = {
 };
 
 EvtScript N(D_80242DB0_B232F0) = {
-    EVT_CALL(GetNpcPos, NPC_Kolorado_01, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPos, NPC_Whale, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
@@ -306,12 +306,12 @@ EvtScript N(D_80242DB0_B232F0) = {
     EVT_LABEL(0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_IF_GT(LVar0, -300)
-        EVT_CALL(GetNpcPos, NPC_Kolorado_01, LVar0, LVar1, LVar2)
+        EVT_CALL(GetNpcPos, NPC_Whale, LVar0, LVar1, LVar2)
         EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_ELSE
         EVT_SET(LVar3, LVar0)
         EVT_SUB(LVar3, -300)
-        EVT_CALL(GetNpcPos, NPC_Kolorado_01, LVar0, LVar1, LVar2)
+        EVT_CALL(GetNpcPos, NPC_Whale, LVar0, LVar1, LVar2)
         EVT_SUB(LVar0, LVar3)
         EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_END_IF
@@ -388,11 +388,11 @@ EvtScript N(D_80242FA8_B234E8) = {
     EVT_END_IF
     EVT_CALL(NpcMoveTo, NPC_PARTNER, 230, 20, 10)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000106)
-    EVT_CALL(SetNpcAnimation, NPC_Kolorado_01, ANIM_Kolorado_TalkSad)
-    EVT_CALL(SetNpcJumpscale, NPC_Kolorado_01, 0)
-    EVT_CALL(NpcJump0, NPC_Kolorado_01, 158, -10, -38, 20)
+    EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_TalkSad)
+    EVT_CALL(SetNpcJumpscale, NPC_Whale, 0)
+    EVT_CALL(NpcJump0, NPC_Whale, 158, -10, -38, 20)
     EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_CALL(SpeakToPlayer, NPC_Kolorado_01, ANIM_Kolorado_Walk, ANIM_Kolorado_Still, 5, MSG_CH5_0000)
+    EVT_CALL(SpeakToPlayer, NPC_Whale, ANIM_Kolorado_Walk, ANIM_Kolorado_Still, 5, MSG_CH5_0000)
     EVT_CALL(SetMusicTrack, 0, SONG_YOSHIS_VILLAGE, 0, 8)
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
         EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(5.0), 0, 300, 15, EVT_FLOAT(-6.0))
@@ -412,7 +412,7 @@ EvtScript N(D_80242FA8_B234E8) = {
             EVT_CALL(NpcFacePlayer, NPC_Kolorado_02, 4)
         EVT_END_THREAD
         EVT_CALL(SpeakToPlayer, NPC_Kolorado_02, ANIM_Kolorado_Panic, ANIM_Kolorado_Yell, 5, MSG_CH5_0002)
-        EVT_CALL(SetNpcAnimation, NPC_Kolorado_01, ANIM_Kolorado_Idle)
+        EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_Idle)
         EVT_CALL(SetNpcSpeed, NPC_Kolorado_02, EVT_FLOAT(6.0))
         EVT_CALL(SetNpcAnimation, NPC_Kolorado_02, ANIM_Kolorado_Walk)
         EVT_CALL(NpcMoveTo, NPC_Kolorado_02, 330, 190, 0)
@@ -433,7 +433,7 @@ EvtScript N(D_80242FA8_B234E8) = {
 
 EvtScript N(D_802437C4_B23D04) = {
     EVT_LABEL(0)
-    EVT_CALL(GetNpcYaw, NPC_Kolorado_01, LVar0)
+    EVT_CALL(GetNpcYaw, NPC_Whale, LVar0)
     EVT_CALL(InterpPlayerYaw, LVar0, 0)
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, LVar0, 0)
     EVT_WAIT(1)
@@ -463,10 +463,10 @@ Vec3f N(D_802438E4_B23E24)[] = {
 EvtScript N(EVS_NpcInteract_Kolorado_01) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_CALL(SpeakToPlayer, NPC_Kolorado_01, ANIM_Kolorado_Walk, ANIM_Kolorado_Still, 5, MSG_CH5_0003)
+    EVT_CALL(SpeakToPlayer, NPC_Whale, ANIM_Kolorado_Walk, ANIM_Kolorado_Still, 5, MSG_CH5_0003)
     EVT_CALL(ShowChoice, MSG_Choice_0010)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ContinueSpeech, NPC_Kolorado_01, ANIM_Kolorado_Walk, ANIM_Kolorado_Still, 5, MSG_CH5_0005)
+        EVT_CALL(ContinueSpeech, NPC_Whale, ANIM_Kolorado_Walk, ANIM_Kolorado_Still, 5, MSG_CH5_0005)
         EVT_CALL(DisablePlayerPhysics, FALSE)
         EVT_RETURN
     EVT_END_IF
@@ -700,7 +700,7 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
 
 StaticNpc N(D_8024488C_B24DCC)[] = {
     {
-        .id = NPC_Kolorado_01,
+        .id = NPC_Whale,
         .settings = &N(NpcSettings_Kolorado_01),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,

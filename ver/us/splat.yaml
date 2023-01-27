@@ -14181,12 +14181,11 @@ segments:
     start: 0xD67D00
     vram: 0x80240000
     subsegments:
-    - [0xD67D00, c]
-    - [0xD67D20, c]
-    - [0xD68EE0, data]
-    - [0xD68F80, data]
-    - [0xD69630, data]
-    - [0xD69800]
+    - [0xD67D00, c, pra_14_0_header]
+    - [0xD67D20, c, pra_14_1_music]
+    - [0xD67D20, c, pra_14_2_main]
+    - [0xD68C20, c, pra_14_3_entity]
+    - [0xD68EE0]
   - name: pra_15
     dir: world/area_pra/pra_15
     type: code
@@ -14226,12 +14225,11 @@ segments:
     start: 0xD6E9B0
     vram: 0x80240000
     subsegments:
-    - [0xD6E9B0, c]
-    - [0xD6E9D0, c]
-    - [0xD70360, data]
-    - [0xD70400, data]
-    - [0xD70A70, data]
-    - [0xD76390]
+    - [0xD6E9B0, c, pra_19_0_header]
+    - [0xD6E9D0, c, pra_19_1_music]
+    - [0xD6E9D0, c, pra_19_2_main]
+    - [0xD6F8D0, c, pra_19_3_npc]
+    - [0xD70360]
   - name: pra_20
     dir: world/area_pra/pra_20
     type: code

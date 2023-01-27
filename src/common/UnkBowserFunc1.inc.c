@@ -30,7 +30,7 @@ ApiStatus N(UnkBowserFunc1)(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 0;
 
         for (i = 0; i < 10; i++) {
-            func_802DE780(part->unk_84, i, 17, 20, 0, 0, 255, 0);
+            func_802DE780(part->spriteInstanceID, i, 17, 20, 0, 0, 255, 0);
         }
     }
 
@@ -50,7 +50,7 @@ ApiStatus N(UnkBowserFunc1)(Evt* script, s32 isInitialCall) {
         for (j = 0; j < 20; j++) {
             colorRGBA = sp20[j] << 0x18 | sp38[j] << 0x10 | sp50[j] << 8 | 0xFF;
             for (i = 0; i < 10; i++) {
-                func_802DE780(part->unk_84, i, 12, j, colorRGBA, 0, 255, 0);
+                func_802DE780(part->spriteInstanceID, i, 12, j, colorRGBA, 0, 255, 0);
             }
         }
         return ApiStatus_BLOCK;
@@ -60,7 +60,7 @@ ApiStatus N(UnkBowserFunc1)(Evt* script, s32 isInitialCall) {
             colorRGBA = 255;
             for (i = 0; i < 10; i++) {
                 // TODO find better match for opacity
-                func_802DE780(part->unk_84, i, 12, j, colorRGBA, 0, opacity & 0xFFFF, 0);
+                func_802DE780(part->spriteInstanceID, i, 12, j, colorRGBA, 0, opacity & 0xFFFF, 0);
             }
         }
         script->functionTemp[1] = 0;

@@ -14,10 +14,23 @@ enum SpriteIDFields {
 };
 
 enum DrawSpriteOptions {
+    DRAW_SPRITE_USE_PLAYER_RASTERS  = 0x08000000,
     DRAW_SPRITE_UPSIDE_DOWN         = 0x10000000,
     DRAW_SPRITE_OVERRIDE_PALETTES   = 0x20000000,
     DRAW_SPRITE_OVERRIDE_YAW        = 0x40000000,
     DRAW_SPRITE_OVERRIDE_ALPHA      = 0x80000000,
+};
+
+enum {
+    PLAYER_SPRITE_INSTANCE_0        = 0,
+    PLAYER_SPRITE_INSTANCE_1        = 1,
+    PLAYER_SPRITE_INSTANCE_2        = 2,
+};
+
+//TODO this is just a boolean isNpcSprite, using a temp enum for documenting
+enum {
+    SPRITE_MODE_PLAYER  = 0,
+    SPRITE_MODE_NPC     = 1,
 };
 
 typedef struct SpriteComponent {

@@ -201,9 +201,9 @@ ApiStatus N(update_effect)(Evt* script, s32 isInitialCall) {
 
     actorPart = get_actor_part(actor, 1);
     if (actorPart->currentAnimation == ANIM_BigLanternGhost_Anim0C) {
-        func_802DE8DC(actor->partsTable->unk_84, 0, &partX, &partY, &partZ);
+        func_802DE8DC(actor->partsTable->spriteInstanceID, 0, &partX, &partY, &partZ);
     } else {
-        func_802DE8DC(actor->partsTable->unk_84, 1, &partX, &partY, &partZ);
+        func_802DE8DC(actor->partsTable->spriteInstanceID, 1, &partX, &partY, &partZ);
     }
 
 

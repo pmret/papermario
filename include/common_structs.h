@@ -1579,7 +1579,7 @@ typedef struct ActorPart {
     /* 0x78 */ u32* defenseTable;
     /* 0x7C */ s32 eventFlags;
     /* 0x80 */ s32 partFlags3;
-    /* 0x84 */ s32 unk_84;
+    /* 0x84 */ s32 spriteInstanceID;
     /* 0x88 */ u32 currentAnimation;
     /* 0x8C */ s32 animNotifyValue;
     /* 0x90 */ f32 animationRate;

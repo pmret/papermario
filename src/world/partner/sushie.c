@@ -188,7 +188,7 @@ void func_802BD414_31E184(Npc* npc) {
                                                npc->collisionRadius) != 0)
         {
             collisionStatus->pushingAgainstWall = D_8010C978;
-            if ((get_collider_flags(D_8010C978) & 0xFF) == 4) {
+            if ((get_collider_flags(D_8010C978) & COLLIDER_FLAGS_SURFACE_TYPE_MASK) == SURFACE_TYPE_DOCK_WALL) {
                 bss_802BFEF0++;
             } else {
                 bss_802BFEF0 = 0;
@@ -260,16 +260,16 @@ void func_802BD414_31E184(Npc* npc) {
         }
         if (bss_802BFEE8 == 1) {
             suggest_player_anim_setUnkFlag(ANIM_Mario_80010);
-            npc->currentAnim = 0x7000A;
+            npc->currentAnim = ANIM_WorldSushie_Ride;
         }
         if (bss_802BFEF4 == 0 && (playerStatus->position.y + (playerStatus->colliderHeight * 0.5f) < OriginalPlayerY)) {
             bss_802BFEF4 = 1;
-            playerStatus->renderMode = 0xD;
+            playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             func_802DDFF8(playerStatus->trueAnimation, 4, 2, 0, 0, 0, 0);
             func_8003D624(npc, 4, 2, 0, 0, 0, 0);
         }
         if (bss_802BFEE8 >= 10 && (!(partnerActionStatus->currentButtons & BUTTON_C_DOWN) || bss_802BFEE8 >= 30)) {
-            npc->currentAnim = 0x7000C;
+            npc->currentAnim = ANIM_WorldSushie_Rise;
             sfx_play_sound_at_npc(SOUND_694, 0, NPC_PARTNER);
             bss_802BFEE4 = 3;
         }
@@ -298,11 +298,11 @@ void func_802BD414_31E184(Npc* npc) {
         if ((OriginalPlayerY - npc->moveToPos.y) - (npc->collisionHeight * 0.5f) <= 0.0f) {
             if (bss_802BFEF4 != 0) {
                 bss_802BFEF4 = 0;
-                func_802DDFF8(0x10002, 0, 0, 0, 0, 0, 0);
+                func_802DDFF8(ANIM_Mario_10002, 0, 0, 0, 0, 0, 0);
                 func_8003D624(npc, 0, 0, 0, 0, 0, 0);
             }
             bss_802BFEE4 = 0;
-            npc->currentAnim = 0x7000A;
+            npc->currentAnim = ANIM_WorldSushie_Ride;
             npc->moveToPos.y = OriginalPlayerY - (npc->collisionHeight * 0.5f);
             suggest_player_anim_setUnkFlag(ANIM_Mario_8000F);
         }
@@ -316,7 +316,7 @@ s32 func_802BE280_31EFF0(s32 arg0, f32* x, f32* y, f32* z, f32 length, f32 radiu
     sin_cos_rad(DEG_TO_RAD(*yaw), &sinAngle, &cosAngle);
     cosAngle = -cosAngle;
     totalLength = radius + length;
-    hitResult = test_ray_colliders(0x10000, *x, *y, *z, sinAngle, 0.0f, cosAngle, &hitX, &hitY, &hitZ, &totalLength, &hitNx, &hitNy, &hitNz);
+    hitResult = test_ray_colliders(COLLISION_CHANNEL_10000, *x, *y, *z, sinAngle, 0.0f, cosAngle, &hitX, &hitY, &hitZ, &totalLength, &hitNx, &hitNy, &hitNz);
 
     if (hitResult >= 0) {
         *yaw = atan2(0.0f, 0.0f, hitNx, hitNz);
@@ -360,8 +360,8 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
         case 0:
             if (!gGameStatusPtr->keepUsingPartnerOnMapChange) {
                 collider = collisionStatus->currentWall;
-                if (collider >= 0 && !(collider & 0x4000)) {
-                    collider = get_collider_flags(collider) & 0xFF;
+                if (collider >= 0 && (collider & COLLISION_WITH_ENTITY_BIT) == 0) {
+                    collider = get_collider_flags(collider) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                     if (collider != SURFACE_TYPE_DOCK_WALL) {
                         return ApiStatus_DONE1;
                     }
@@ -380,7 +380,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             disable_player_shadow();
             disable_npc_shadow(npc);
             func_8003D624(npc, 4, 2, 0, 0, 0, 0);
-            npc->currentAnim = 0x7000A;
+            npc->currentAnim = ANIM_WorldSushie_Ride;
             npc->moveSpeed = playerStatus->runSpeed;
             npc->jumpScale = 0.0f;
             partnerActionStatus->partnerActionState = PARTNER_ACTION_USE;
@@ -402,7 +402,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                                                 2.0f * playerStatus->colliderDiameter, &angle);
                 colliderFlags = -1;
                 if (collider >= 0) {
-                    colliderFlags = get_collider_flags(collider) & 0xFF;
+                    colliderFlags = get_collider_flags(collider) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                 }
                 if (colliderFlags == SURFACE_TYPE_DOCK_WALL) {
                     bss_802BFEEC = 1;
@@ -423,7 +423,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                     dist = 100.0f;
                     collider = npc_raycast_down_around(npc->collisionChannel, &x, &y, &z, &dist,
                                                        npc->yaw, npc->collisionRadius);
-                    npc->currentAnim = 0x70003;
+                    npc->currentAnim = ANIM_WorldSushie_Run;
                     npc->duration = 12;
                     npc->moveToPos.y = y - (npc->collisionHeight * 0.5f);
                     suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
@@ -449,7 +449,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             npc->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_40);
             disable_npc_shadow(npc);
             func_8003D624(npc, 4, 2, 0, 0, 0, 0);
-            npc->currentAnim = 0x7000A;
+            npc->currentAnim = ANIM_WorldSushie_Ride;
             playerStatus->flags |= PS_FLAG_MOVEMENT_LOCKED;
             dist = dist2D(playerStatus->position.x, playerStatus->position.z, npc->moveToPos.x, npc->moveToPos.z);
             npc->jumpVelocity = 5.0f;
@@ -561,10 +561,14 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                         collisionStatus->pushingAgainstWall = -1;
                     }
 
-                    if (npc->currentWall < 0 ||
-                        (npc->currentWall & 0x4000) ||
-                        (collider = get_collider_flags(npc->currentWall) & 0xFF, (collider != SURFACE_TYPE_DOCK_WALL)))
-                    {
+                    if (npc->currentWall < 0 || npc->currentWall & COLLISION_WITH_ENTITY_BIT) {
+                        if (bss_802BFEE4 == 2 && bss_802BFEE8 == 1) {
+                            sfx_play_sound_at_npc(SOUND_294, 0, NPC_PARTNER);
+                        }
+                        break;
+                    }
+                    collider = get_collider_flags(npc->currentWall) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+                    if (collider != SURFACE_TYPE_DOCK_WALL) {
                         if (bss_802BFEE4 == 2 && bss_802BFEE8 == 1) {
                             sfx_play_sound_at_npc(SOUND_294, 0, NPC_PARTNER);
                         }
@@ -668,7 +672,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
                 partnerActionStatus->actingPartner = 0;
-                func_802DDFF8(0x10002, 0, 0, 0, 0, 0, 0);
+                func_802DDFF8(ANIM_Mario_10002, 0, 0, 0, 0, 0, 0);
                 func_8003D624(npc, 0, 0, 0, 0, 0, 0);
                 return ApiStatus_DONE1;
             }

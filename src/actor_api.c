@@ -2137,7 +2137,7 @@ ApiStatus func_8026DEF0(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    evt_set_variable(script, a2, get_actor_part(get_actor(actorID), partIndex)->unk_84);
+    evt_set_variable(script, a2, get_actor_part(get_actor(actorID), partIndex)->spriteInstanceID);
 
     return ApiStatus_DONE2;
 }
