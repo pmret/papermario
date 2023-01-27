@@ -91,16 +91,16 @@ void N(worker_reflect_player_wall)(void) {
             anim = N(reflection_unk_change_anim_facing)(anim);
         }
 
-        spr_update_player_sprite(PLAYER_SPRITE_INSTANCE_2, anim, 1.0f);
+        spr_update_player_sprite(PLAYER_SPRITE_AUX2, anim, 1.0f);
 
         if (!(playerStatus->flags & PS_FLAG_SPINNING)) {
             if (playerStatus->alpha1 != D_802D9D70) {
                 if (playerStatus->alpha1 < 254) {
                     renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-                    func_802DDEE4(PLAYER_SPRITE_INSTANCE_2, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
+                    func_802DDEE4(PLAYER_SPRITE_AUX2, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
                 } else {
                     renderMode = RENDER_MODE_ALPHATEST;
-                    func_802DDEE4(PLAYER_SPRITE_INSTANCE_2, -1, 0, 0, 0, 0, 0, 0);
+                    func_802DDEE4(PLAYER_SPRITE_AUX2, -1, 0, 0, 0, 0, 0, 0);
                 }
             }
             D_802D9D70 = playerStatus->alpha1;
@@ -135,7 +135,7 @@ void N(appendGfx_reflect_player_wall)(PlayerStatus* playerStatus) {
     guMtxCatF(main, scale, main);
     guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z - 3.0f);
     guMtxCatF(main, translation, main);
-    spr_draw_player_sprite(PLAYER_SPRITE_INSTANCE_2, 0, 0, NULL, main);
+    spr_draw_player_sprite(PLAYER_SPRITE_AUX2, 0, 0, NULL, main);
 }
 
 API_CALLABLE(N(EnableFloorReflection)){
@@ -166,16 +166,16 @@ void N(worker_reflect_player_floor)(void) {
         get_screen_coords(gCurrentCamID, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z,
                           &screenX, &screenY, &screenZ);
 
-        spr_update_player_sprite(PLAYER_SPRITE_INSTANCE_1, playerStatus->trueAnimation, 1.0f);
+        spr_update_player_sprite(PLAYER_SPRITE_AUX1, playerStatus->trueAnimation, 1.0f);
 
         if (!(playerStatus->flags & PS_FLAG_SPINNING)) {
             if (playerStatus->alpha1 != D_802D9D71) {
                 if (playerStatus->alpha1 < 254) {
                     renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-                    func_802DDEE4(PLAYER_SPRITE_INSTANCE_1, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
+                    func_802DDEE4(PLAYER_SPRITE_AUX1, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
                 } else {
                     renderMode = RENDER_MODE_ALPHATEST;
-                    func_802DDEE4(PLAYER_SPRITE_INSTANCE_1, -1, 0, 0, 0, 0, 0, 0);
+                    func_802DDEE4(PLAYER_SPRITE_AUX1, -1, 0, 0, 0, 0, 0, 0);
                 }
             }
             D_802D9D71 = playerStatus->alpha1;
@@ -217,9 +217,9 @@ void N(appendGfx_reflect_player_floor_basic)(PlayerStatus* playerStatus) {
     guMtxCatF(main, translation, main);
 
     if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
-        spriteIdx = PLAYER_SPRITE_INSTANCE_1 | DRAW_SPRITE_UPSIDE_DOWN;
+        spriteIdx = PLAYER_SPRITE_AUX1 | DRAW_SPRITE_UPSIDE_DOWN;
     } else {
-        spriteIdx = PLAYER_SPRITE_INSTANCE_1;
+        spriteIdx = PLAYER_SPRITE_AUX1;
     }
 
     spr_draw_player_sprite(spriteIdx, 0, 0, NULL, main);
@@ -264,7 +264,7 @@ void N(appendGfx_reflect_player_floor_fancy)(PlayerStatus* playerStatus) {
                 tint = 100;
             }
 
-            func_802DDEE4(PLAYER_SPRITE_INSTANCE_1, -1, 6, tint, tint, tint, 255, 0);
+            func_802DDEE4(PLAYER_SPRITE_AUX1, -1, 6, tint, tint, tint, 255, 0);
 
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(mtx, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
@@ -284,7 +284,7 @@ void N(appendGfx_reflect_player_floor_fancy)(PlayerStatus* playerStatus) {
 
             px = playerStatus->position.x;
             pz = playerStatus->position.z;
-            func_802DDEE4(PLAYER_SPRITE_INSTANCE_1, -1, 7, 0, 0, 0, 64, 0);
+            func_802DDEE4(PLAYER_SPRITE_AUX1, -1, 7, 0, 0, 0, 64, 0);
             guRotateF(mtx, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(mtx, blurAngle, 0.0f, 1.0f, 0.0f);
@@ -305,9 +305,9 @@ void N(appendGfx_reflect_player_floor_fancy)(PlayerStatus* playerStatus) {
         guMtxCatF(mtx, translation, mtx);
 
         if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
-            spriteIdx = PLAYER_SPRITE_INSTANCE_1 | DRAW_SPRITE_UPSIDE_DOWN;
+            spriteIdx = PLAYER_SPRITE_AUX1 | DRAW_SPRITE_UPSIDE_DOWN;
         } else {
-            spriteIdx = PLAYER_SPRITE_INSTANCE_1;
+            spriteIdx = PLAYER_SPRITE_AUX1;
         }
 
         spr_draw_player_sprite(spriteIdx, 0, 0, NULL, mtx);

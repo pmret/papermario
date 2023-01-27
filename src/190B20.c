@@ -977,7 +977,7 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
                 part = &actor->partsTable[0];
                 if (part->currentAnimation != animationIndex) {
                     part->currentAnimation = animationIndex;
-                    spr_update_player_sprite(PLAYER_SPRITE_INSTANCE_0, animationIndex, part->animationRate);
+                    spr_update_player_sprite(PLAYER_SPRITE_MAIN, animationIndex, part->animationRate);
                 }
                 break;
             case ACTOR_CLASS_PARTNER:
@@ -1015,7 +1015,7 @@ void func_80263E08(Actor* actor, ActorPart* part, s32 anim) {
             case ACTOR_CLASS_PLAYER:
                 if (part->currentAnimation != anim) {
                     part->currentAnimation = anim;
-                    spr_update_player_sprite(PLAYER_SPRITE_INSTANCE_0, anim, part->animationRate);
+                    spr_update_player_sprite(PLAYER_SPRITE_MAIN, anim, part->animationRate);
                 }
                 break;
             case ACTOR_CLASS_PARTNER:

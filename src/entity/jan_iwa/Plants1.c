@@ -308,7 +308,7 @@ void entity_CymbalPlant_idle(Entity* entity) {
         case 2:
             if (--data->timer == 0) {
                 data->state++;
-                func_802DDEE4(PLAYER_SPRITE_INSTANCE_0, -1, 0, 0, 0, 0, 0, 0);
+                func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 0, 0, 0, 0, 0, 0);
                 func_802DDFF8(ANIM_Mario_10002, 5, 19, 1, 1, 0, 0);
             }
             break;
@@ -328,7 +328,7 @@ void entity_CymbalPlant_idle(Entity* entity) {
         case 5:
             if (--data->timer == 0) {
                 data->state++;
-                func_802DDEE4(PLAYER_SPRITE_INSTANCE_0, -1, 0, 0, 0, 0, 0, 0);
+                func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 0, 0, 0, 0, 0, 0);
                 enable_player_input();
                 playerStatus->flags &= ~PS_FLAG_ROTATION_LOCKED;
             }

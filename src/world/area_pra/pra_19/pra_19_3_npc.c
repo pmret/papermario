@@ -114,8 +114,8 @@ void N(appendGfx_example_player)(void* data) {
     guMtxCatF(mtxTransform, mtxScale, mtxTransform);
     guTranslateF(mtxTranslate, npc->pos.x, npc->pos.y, npc->pos.z);
     guMtxCatF(mtxTransform, mtxTranslate, mtxTransform);
-    spr_update_player_sprite(PLAYER_SPRITE_INSTANCE_2, npc->currentAnim, 1.0f);
-    spr_draw_player_sprite(PLAYER_SPRITE_INSTANCE_2, 0, 0, 0, mtxTransform);
+    spr_update_player_sprite(PLAYER_SPRITE_AUX2, npc->currentAnim, 1.0f);
+    spr_draw_player_sprite(PLAYER_SPRITE_AUX2, 0, 0, 0, mtxTransform);
 }
 
 API_CALLABLE(N(SetPlayerFacingAngle)) {

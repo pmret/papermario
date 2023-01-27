@@ -22,9 +22,9 @@ enum DrawSpriteOptions {
 };
 
 enum {
-    PLAYER_SPRITE_INSTANCE_0        = 0,
-    PLAYER_SPRITE_INSTANCE_1        = 1,
-    PLAYER_SPRITE_INSTANCE_2        = 2,
+    PLAYER_SPRITE_MAIN      = 0,
+    PLAYER_SPRITE_AUX1      = 1,
+    PLAYER_SPRITE_AUX2      = 2,
 };
 
 //TODO this is just a boolean isNpcSprite, using a temp enum for documenting

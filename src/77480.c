@@ -1386,7 +1386,7 @@ void player_sprite_behaviour(void) {
     if (playerStatus->flags & PS_FLAG_TIME_STOPPED) {
         timescale = 0.0f;
     }
-    playerStatus->animNotifyValue = spr_update_player_sprite(PLAYER_SPRITE_INSTANCE_0, playerStatus->trueAnimation, timescale);
+    playerStatus->animNotifyValue = spr_update_player_sprite(PLAYER_SPRITE_MAIN, playerStatus->trueAnimation, timescale);
     playerStatus->flags |= PS_FLAG_SPRITE_REDRAW;
 }
 
@@ -1465,11 +1465,11 @@ void render_player_model(void) {
                     }
 
                     playerStatus->renderMode = renderModeTemp;
-                    func_802DDEE4(PLAYER_SPRITE_INSTANCE_0, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
+                    func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
 
                 } else {
                     playerStatus->renderMode = RENDER_MODE_ALPHATEST;
-                    func_802DDEE4(PLAYER_SPRITE_INSTANCE_0, -1, 0, 0, 0, 0, 0, 0);
+                    func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 0, 0, 0, 0, 0, 0);
                 }
             }
 
@@ -1514,7 +1514,7 @@ void appendGfx_player(void* data) {
         guMtxCatF(sp20, spA0, sp20);
         guTranslateF(sp60, playerStatus->position.x, playerStatus->position.y - 1.0f, playerStatus->position.z);
         guMtxCatF(sp20, sp60, sp20);
-        spr_draw_player_sprite(PLAYER_SPRITE_INSTANCE_0, 0, 0, 0, sp20);
+        spr_draw_player_sprite(PLAYER_SPRITE_MAIN, 0, 0, 0, sp20);
     } else {
         guRotateF(spA0, temp_f0, 0.0f, -1.0f, 0.0f);
         guRotateF(sp20, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
@@ -1535,21 +1535,21 @@ void appendGfx_player(void* data) {
         if (playerStatus->animFlags & PA_FLAG_SHIVERING) {
             playerStatus->animFlags = playerStatus->animFlags & ~PA_FLAG_SHIVERING;
             playerStatus->shiverTime = 22;
-            func_802DDEE4(PLAYER_SPRITE_INSTANCE_0, -1, 0, 0, 0, 0, 0, 0);
+            func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 0, 0, 0, 0, 0, 0);
             func_802DDFF8(playerStatus->anim, 5, 1, 1, 1, 0, 0);
         }
 
         if (playerStatus->shiverTime != 0) {
             playerStatus->shiverTime--;
             if (playerStatus->shiverTime == 0) {
-                func_802DDEE4(PLAYER_SPRITE_INSTANCE_0, -1, 0, 0, 0, 0, 0, 0);
+                func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 0, 0, 0, 0, 0, 0);
             }
         }
 
         if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
-            spriteIdx = PLAYER_SPRITE_INSTANCE_0 | DRAW_SPRITE_UPSIDE_DOWN;
+            spriteIdx = PLAYER_SPRITE_MAIN | DRAW_SPRITE_UPSIDE_DOWN;
         } else {
-            spriteIdx = PLAYER_SPRITE_INSTANCE_0;
+            spriteIdx = PLAYER_SPRITE_MAIN;
         }
 
         spr_draw_player_sprite(spriteIdx, 0, 0, 0, sp20);
@@ -1618,7 +1618,7 @@ void appendGfx_player_spin(void* data) {
 
             px = playerStatus->position.x;
             pz = playerStatus->position.z;
-            func_802DDEE4(PLAYER_SPRITE_INSTANCE_0, -1, 7, 0, 0, 0, 64, 0);
+            func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 7, 0, 0, 0, 64, 0);
             guRotateF(mtx, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(mtx, blurAngle, 0.0f, 1.0f, 0.0f);
@@ -1639,9 +1639,9 @@ void appendGfx_player_spin(void* data) {
         guMtxCatF(mtx, translation, mtx);
 
         if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
-            spriteIdx = PLAYER_SPRITE_INSTANCE_0 | DRAW_SPRITE_UPSIDE_DOWN;
+            spriteIdx = PLAYER_SPRITE_MAIN | DRAW_SPRITE_UPSIDE_DOWN;
         } else {
-            spriteIdx = PLAYER_SPRITE_INSTANCE_0;
+            spriteIdx = PLAYER_SPRITE_MAIN;
         }
 
         spr_draw_player_sprite(spriteIdx, 0, 0, 0, mtx);

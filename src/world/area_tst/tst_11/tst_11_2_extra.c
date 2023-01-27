@@ -56,8 +56,8 @@ void N(appendGfx_test_reflection_wall)(void* data) {
     guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z);
     guMtxCatF(main, translation, main);
     // draw sprite is handled differently in final version
-    spr_update_player_sprite(PLAYER_SPRITE_INSTANCE_1, playerStatus->trueAnimation ^ SPRITE_ID_BACK_FACING, 1.0f);
-    spr_draw_player_sprite(PLAYER_SPRITE_INSTANCE_1, 0, 0, NULL, main);
+    spr_update_player_sprite(PLAYER_SPRITE_AUX1, playerStatus->trueAnimation ^ SPRITE_ID_BACK_FACING, 1.0f);
+    spr_draw_player_sprite(PLAYER_SPRITE_AUX1, 0, 0, NULL, main);
 }
 
 API_CALLABLE(N(EnableFloorReflectionTest)) {
@@ -107,7 +107,7 @@ void N(appendGfx_test_reflection_floor)(void* data) {
     guMtxCatF(sp20, spE0, sp20);
     guTranslateF(sp60, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z);
     guMtxCatF(sp20, sp60, sp20);
-    spr_draw_player_sprite(PLAYER_SPRITE_INSTANCE_1, 0, 0, 0, sp20);
+    spr_draw_player_sprite(PLAYER_SPRITE_AUX1, 0, 0, 0, sp20);
     guRotateF(spA0, yaw, 0.0f, -1.0f, 0.0f);
     guRotateF(sp20, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
     guMtxCatF(spA0, sp20, sp20);
@@ -121,7 +121,7 @@ void N(appendGfx_test_reflection_floor)(void* data) {
     guMtxCatF(sp20, sp60, sp20);
     trueAnimation = playerStatus->trueAnimation;
     func_802DDFF8(trueAnimation, 7, 255, 255, 255, 20, 0);
-    spr_draw_player_sprite(PLAYER_SPRITE_INSTANCE_1, 0, 0, 0, sp20);
+    spr_draw_player_sprite(PLAYER_SPRITE_AUX1, 0, 0, 0, sp20);
     func_802DDFF8(trueAnimation, 0, 0, 0, 0, 0, 0);
 }
 

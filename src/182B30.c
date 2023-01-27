@@ -1301,7 +1301,7 @@ void update_player_actor_shadow(void) {
     Shadow* shadow;
     f32 x, y, z, distance;
 
-    parts->animNotifyValue = spr_update_player_sprite(PLAYER_SPRITE_INSTANCE_0, parts->currentAnimation, parts->animationRate);
+    parts->animNotifyValue = spr_update_player_sprite(PLAYER_SPRITE_MAIN, parts->currentAnimation, parts->animationRate);
 
     if (player->flags & ACTOR_FLAG_BLUR_ENABLED) {
         func_802549F4(player);
@@ -1538,7 +1538,7 @@ void appendGfx_player_actor(void* arg0) {
                     } else {
                         playerParts->currentAnimation = func_80265D44(0x12);
                     }
-                    spr_update_player_sprite(PLAYER_SPRITE_INSTANCE_0, playerParts->currentAnimation, playerParts->animationRate);
+                    spr_update_player_sprite(PLAYER_SPRITE_MAIN, playerParts->currentAnimation, playerParts->animationRate);
                     cond1 = TRUE;
                 }
             }
@@ -1557,7 +1557,7 @@ void appendGfx_player_actor(void* arg0) {
 
     if (player->stoneStatus == STATUS_STONE) {
         playerParts->currentAnimation = func_80265D44(0xC);
-        spr_update_player_sprite(PLAYER_SPRITE_INSTANCE_0, playerParts->currentAnimation, playerParts->animationRate);
+        spr_update_player_sprite(PLAYER_SPRITE_MAIN, playerParts->currentAnimation, playerParts->animationRate);
         cond1 = TRUE;
 
         if (!cond2) {
@@ -1783,7 +1783,7 @@ end:
     guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
 
     if (lastAnim != playerParts->currentAnimation) {
-        spr_update_player_sprite(PLAYER_SPRITE_INSTANCE_0, playerParts->currentAnimation, playerParts->animationRate);
+        spr_update_player_sprite(PLAYER_SPRITE_MAIN, playerParts->currentAnimation, playerParts->animationRate);
     }
     func_8025C840(0, playerParts, clamp_angle(playerYaw + 180.0f), 0);
     func_8025CCC8(0, playerParts, clamp_angle(playerYaw + 180.0f), 0);
@@ -1857,9 +1857,9 @@ s32 func_802591EC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         }
         if (arg0 == 0) {
             if (opacity == 255) {
-                spr_draw_player_sprite(PLAYER_SPRITE_INSTANCE_0, yaw, 0, NULL, mtx);
+                spr_draw_player_sprite(PLAYER_SPRITE_MAIN, yaw, 0, NULL, mtx);
             } else {
-                spr_draw_player_sprite(PLAYER_SPRITE_INSTANCE_0 | sprDrawOpts, yaw, opacity, NULL, mtx);
+                spr_draw_player_sprite(PLAYER_SPRITE_MAIN | sprDrawOpts, yaw, opacity, NULL, mtx);
             }
         } else {
             if (opacity == 255) {
@@ -2052,7 +2052,7 @@ void func_802597B0(ActorPart* part, s32 yaw, Matrix4f mtx) {
         }
         func_8025995C(part, yaw, mtx);
     } else {
-        spr_draw_player_sprite(PLAYER_SPRITE_INSTANCE_0 | idMask, yaw, opacity, NULL, mtx);
+        spr_draw_player_sprite(PLAYER_SPRITE_MAIN | idMask, yaw, opacity, NULL, mtx);
     }
 }
 
@@ -2073,10 +2073,10 @@ void func_8025995C(ActorPart* part, s32 yaw, Matrix4f mtx) {
     if (decorationTable->unk_768 != 0) {
         func_80259494(part);
         idMask |= DRAW_SPRITE_OVERRIDE_PALETTES;
-        spr_draw_player_sprite(PLAYER_SPRITE_INSTANCE_0 | idMask, yaw, opacity, decorationTable->unk_76C, mtx);
+        spr_draw_player_sprite(PLAYER_SPRITE_MAIN | idMask, yaw, opacity, decorationTable->unk_76C, mtx);
     } else {
         idMask |= DRAW_SPRITE_OVERRIDE_PALETTES;
-        spr_draw_player_sprite(PLAYER_SPRITE_INSTANCE_0 | idMask, yaw, opacity, decorationTable->unk_6D4, mtx);
+        spr_draw_player_sprite(PLAYER_SPRITE_MAIN | idMask, yaw, opacity, decorationTable->unk_6D4, mtx);
     }
 }
 
@@ -3223,7 +3223,7 @@ void func_8025C8A0(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
     if (part->decorationTable->unk_751 != 0) {
         part->decorationTable->unk_751 = 0;
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            func_802DDFF8(PLAYER_SPRITE_INSTANCE_0, 0, 0, 0, 0, 0, 0);
+            func_802DDFF8(PLAYER_SPRITE_MAIN, 0, 0, 0, 0, 0, 0);
         } else {
             func_802DE894(part->spriteInstanceID, 0, 0, 0, 0, 0, 0);
         }
@@ -3276,7 +3276,7 @@ void func_8025C918(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
     for (i = 0; i < ARRAY_COUNT(rbuf); i++) {
         color = (rbuf[i] << 0x18) | (gbuf[i] << 0x10) | (bbuf[i] << 8) | alpha;
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            func_802DDFF8(PLAYER_SPRITE_INSTANCE_0, 0xC, i, color, 0, 0xFF, 0);
+            func_802DDFF8(PLAYER_SPRITE_MAIN, 0xC, i, color, 0, 0xFF, 0);
         } else {
             func_802DE894(part->spriteInstanceID, 0xC, i, color, 0, 0xFF, 0);
         }

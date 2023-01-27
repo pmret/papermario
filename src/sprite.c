@@ -997,7 +997,7 @@ void func_802DDEE4(s32 spriteIdx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
 }
 
 void func_802DDFF8(s32 animID, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
-    func_802DDEE4(PLAYER_SPRITE_INSTANCE_0, -1, arg1, arg2, arg3, arg4, arg5, arg6);
+    func_802DDEE4(PLAYER_SPRITE_MAIN, -1, arg1, arg2, arg3, arg4, arg5, arg6);
 }
 
 void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 rasterIndex) {
