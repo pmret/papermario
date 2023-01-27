@@ -797,27 +797,31 @@ s32 calc_partner_damage_enemy(void) {
     return retVal;
 }
 
-//Some slight stack / ordering issues at the beginning
-#ifdef NON_EQUIVALENT
 s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
-    ActorState* state;
+    ActorState* state = &partner->state;
     s32 hpChange;
     s32 flagCheck;
+    s32 oldHP;
 
     battleStatus->currentAttackDamage = damageAmount;
-    partner->currentHP = 127;
-    partner->hpChangeCounter += damageAmount;
+
+    hpChange = (s16)damageAmount;
+    partner->hpChangeCounter += hpChange;
+
     hpChange = partner->hpChangeCounter;
-    partner->hpChangeCounter -= hpChange;
+    partner->currentHP = 127;
     partner->damageCounter += hpChange;
+    partner->hpChangeCounter -= hpChange;
     battleStatus->lastAttackDamage = 0;
     partner->currentHP -= hpChange;
-    state = &partner->state;
+    oldHP = partner->currentHP;
+
+
     if (partner->currentHP <= 0) {
         event = EVENT_DEATH;
-        battleStatus->lastAttackDamage += partner->currentHP;
+        battleStatus->lastAttackDamage += oldHP;
         partner->currentHP = 0;
     }
     battleStatus->lastAttackDamage += hpChange;
@@ -857,9 +861,6 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
     dispatch_event_partner(event);
     return flagCheck;
 }
-#else
-INCLUDE_ASM(s32, "1AC760", dispatch_damage_event_partner);
-#endif
 
 s32 dispatch_damage_event_partner_0(s32 damageAmount, s32 event, s32 stopMotion) {
     return dispatch_damage_event_partner(damageAmount, event, FALSE);
