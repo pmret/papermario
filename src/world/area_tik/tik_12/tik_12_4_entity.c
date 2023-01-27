@@ -22,7 +22,7 @@ EvtScript N(EVS_Chest_ShowGotItem) = {
     EVT_END
 };
 
-MAP_RODATA_PAD(1,unk)
+MAP_RODATA_PAD(1,unk);
 
 // end incomplete Chest include
 

@@ -5,7 +5,7 @@
 #define NAMESPACE b_area_arn_arn_05
 
 EvtScript N(beforeBattle_80227B80) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_RETURN
     EVT_END

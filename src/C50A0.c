@@ -922,7 +922,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     ItemEntitiesCreated++;
     ASSERT(itemEntity != NULL);
 
-    itemEntity->renderGroup = ((u32)itemID >> 0x10) & 0xF;
+    itemEntity->renderGroup = (itemID & 0xF0000) >> 16;
     if (itemEntity->renderGroup == VIS_GROUP_5) {
         itemEntity->renderGroup = -1;
     }

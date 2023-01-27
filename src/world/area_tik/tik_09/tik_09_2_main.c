@@ -60,7 +60,7 @@ EvtScript N(EVS_EnterMap) = {
     EVT_END
 };
 
-#include "world/common/atomic/tik_Flotsam.inc.c"
+#include "../common/Flotsam.inc.c"
 
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_TOAD_TOWN_TUNNELS)

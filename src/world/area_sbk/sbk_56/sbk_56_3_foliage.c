@@ -2,19 +2,8 @@
 
 #include "common/foliage.inc.c"
 
-FoliageModelList N(Tree1_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_ki,
-    }
-};
-
-FoliageModelList N(Tree1_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_miki,
-    }
-};
+FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_ki);
+FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_miki);
 
 FoliageDropList N(Tree1_Drops) = {
     .count = 1,
@@ -40,19 +29,8 @@ BombTrigger N(BombPos_Tree1) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree2_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_ki,
-    }
-};
-
-FoliageModelList N(Tree2_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_miki,
-    }
-};
+FoliageModelList N(Tree2_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_ki);
+FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_miki);
 
 FoliageDropList N(Tree2_Drops) = {
     .count = 1,
@@ -78,19 +56,8 @@ BombTrigger N(BombPos_Tree2) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree3_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o52,
-    }
-};
-
-FoliageModelList N(Tree3_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_y_miki,
-    }
-};
+FoliageModelList N(Tree3_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o52);
+FoliageModelList N(Tree3_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_y_miki);
 
 FoliageDropList N(Tree3_Drops) = {
     .count = 1,
@@ -115,19 +82,8 @@ BombTrigger N(BombPos_Tree3) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree4_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_y_ha,
-    }
-};
-
-FoliageModelList N(Tree4_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o51,
-    }
-};
+FoliageModelList N(Tree4_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_y_ha);
+FoliageModelList N(Tree4_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o51);
 
 ShakeTreeConfig N(ShakeTree_Tree4) = {
     .leaves = &N(Tree4_LeafModels),
@@ -139,19 +95,8 @@ BombTrigger N(BombPos_Tree4) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree5_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o54,
-    }
-};
-
-FoliageModelList N(Tree5_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o53,
-    }
-};
+FoliageModelList N(Tree5_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o54);
+FoliageModelList N(Tree5_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o53);
 
 ShakeTreeConfig N(ShakeTree_Tree5) = {
     .leaves = &N(Tree5_LeafModels),
@@ -163,19 +108,8 @@ BombTrigger N(BombPos_Tree5) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree6_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o56,
-    }
-};
-
-FoliageModelList N(Tree6_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o55,
-    }
-};
+FoliageModelList N(Tree6_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o56);
+FoliageModelList N(Tree6_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o55);
 
 ShakeTreeConfig N(ShakeTree_Tree6) = {
     .leaves = &N(Tree6_LeafModels),
@@ -187,19 +121,8 @@ BombTrigger N(BombPos_Tree6) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree7_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o58,
-    }
-};
-
-FoliageModelList N(Tree7_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o57,
-    }
-};
+FoliageModelList N(Tree7_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o58);
+FoliageModelList N(Tree7_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o57);
 
 ShakeTreeConfig N(ShakeTree_Tree7) = {
     .leaves = &N(Tree7_LeafModels),
@@ -211,19 +134,8 @@ BombTrigger N(BombPos_Tree7) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree8_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o60,
-    }
-};
-
-FoliageModelList N(Tree8_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o59,
-    }
-};
+FoliageModelList N(Tree8_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o60);
+FoliageModelList N(Tree8_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o59);
 
 ShakeTreeConfig N(ShakeTree_Tree8) = {
     .leaves = &N(Tree8_LeafModels),
@@ -235,19 +147,8 @@ BombTrigger N(BombPos_Tree8) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree9_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o62,
-    }
-};
-
-FoliageModelList N(Tree9_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o61,
-    }
-};
+FoliageModelList N(Tree9_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o62);
+FoliageModelList N(Tree9_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o61);
 
 FoliageDropList N(Tree9_Drops) = {
     .count = 1,
@@ -272,19 +173,8 @@ BombTrigger N(BombPos_Tree9) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree10_LeafModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o64,
-    }
-};
-
-FoliageModelList N(Tree10_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o63,
-    }
-};
+FoliageModelList N(Tree10_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o64);
+FoliageModelList N(Tree10_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o63);
 
 ShakeTreeConfig N(ShakeTree_Tree10) = {
     .leaves = &N(Tree10_LeafModels),

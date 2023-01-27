@@ -1,7 +1,7 @@
 #include "obk_03.h"
 
 #define ROCKING_CHAIR_CENTER_X -170.0
-#include "../RockingChair.inc.c"
+#include "../common/RockingChair.inc.c"
 
 EvtScript N(EVS_SetupRockingChair) = {
     EVT_CALL(ParentColliderToModel, COLLIDER_i1, MODEL_i1)

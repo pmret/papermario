@@ -2,8 +2,8 @@
 #include "effects.h"
 #include "model.h"
 
-#include "world/common/atomic/flo_FlowerSpawnRegion.inc.c"
-#include "world/common/atomic/flo_DroppingVine.inc.c"
+#include "world/area_flo/common/FlowerSpawnRegion.inc.c"
+#include "world/area_flo/common/DroppingVine.inc.c"
 
 s32 N(BlowingBubbles) = FALSE;
 

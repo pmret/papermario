@@ -1,7 +1,7 @@
 #include "flo_00.h"
 #include "effects.h"
 
-#include "world/common/atomic/flo_FlowerSpawnRegion.inc.c"
+#include "world/area_flo/common/FlowerSpawnRegion.inc.c"
 
 API_CALLABLE(N(SpawnSunEffect)) {
     fx_sun_undeclared(FX_SUN_FROM_LEFT, 0, 0, 0, 0, 0);
@@ -85,7 +85,7 @@ EvtScript N(EVS_ExitWalk_flo_16_0) = EVT_EXIT_WALK(60, flo_00_ENTRY_4, "flo_16",
 EvtScript N(EVS_ExitWalk_flo_09_0) = EVT_EXIT_WALK(60, flo_00_ENTRY_5, "flo_09", flo_09_ENTRY_0);
 EvtScript N(EVS_ExitWalk_flo_08_0) = EVT_EXIT_WALK(60, flo_00_ENTRY_6, "flo_08", flo_08_ENTRY_0);
 
-MAP_RODATA_PAD(1, exits)
+MAP_RODATA_PAD(1, exits);
 
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_flo_14_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilinw, 1, 0)

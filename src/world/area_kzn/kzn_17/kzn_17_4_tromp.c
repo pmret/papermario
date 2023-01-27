@@ -4,7 +4,7 @@
 #define UNK_FUNC_50_LVar1 -583.0
 #define UNK_FUNC_50_LVar2 165.0
 
-#include "world/common/atomic/kzn_SpinyTromp.inc.c"
+#include "../common/SpinyTromp.inc.c"
 
 EvtScript N(EVS_SpinyTromp_ManageCamera) = {
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)

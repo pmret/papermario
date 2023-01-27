@@ -24,7 +24,7 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_END
 };
 
-#include "world/common/atomic/tik_DripVolumes.inc.c"
+#include "../common/DripVolumes.inc.c"
 
 DripVolumeList N(DripVolumes) = {
     .count = 2,
@@ -55,7 +55,7 @@ EvtScript N(EVS_SetupDrips) = {
     EVT_END
 };
 
-#include "world/common/atomic/tik_Flotsam.inc.c"
+#include "../common/Flotsam.inc.c"
 
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_TOAD_TOWN_TUNNELS)

@@ -1,6 +1,6 @@
 #include "pra_29.h"
 
-#include "world/common/atomic/Reflection.inc.c"
+#include "../common/Reflection.inc.c"
 
 void func_80240F20_D7DA70(Vtx* arg0, Vtx* arg1, Vtx* arg2, s32 numVerticies, s32 arg4) {
     s32 temp_t3;

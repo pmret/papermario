@@ -2,12 +2,7 @@
 
 #include "common/foliage.inc.c"
 
-FoliageModelList N(Bush1_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_k4,
-    }
-};
+FoliageModelList N(Bush1_BushModels) = FOLIAGE_MODEL_LIST(MODEL_k4);
 
 FoliageDropList N(Bush1_Drops) = {
     .count = 1, 
@@ -35,12 +30,7 @@ SearchBushConfig N(SearchBush_Bush1) = {
     .vectors = &N(Bush1_Effects),
 };
 
-FoliageModelList N(Bush2_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_k5,
-    }
-};
+FoliageModelList N(Bush2_BushModels) = FOLIAGE_MODEL_LIST(MODEL_k5);
 
 FoliageDropList N(Bush2_Drops) = {
     .count = 1, 
@@ -68,12 +58,7 @@ SearchBushConfig N(SearchBush_Bush2) = {
     .vectors = &N(Bush2_Effects),
 };
 
-FoliageModelList N(Bush3_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_k6,
-    }
-};
+FoliageModelList N(Bush3_BushModels) = FOLIAGE_MODEL_LIST(MODEL_k6);
 
 FoliageDropList N(Bush3_Drops) = {
     .count = 1, 
@@ -101,12 +86,7 @@ SearchBushConfig N(SearchBush_Bush3) = {
     .vectors = &N(Bush3_Effects),
 };
 
-FoliageModelList N(Bush4_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_k7,
-    }
-};
+FoliageModelList N(Bush4_BushModels) = FOLIAGE_MODEL_LIST(MODEL_k7);
 
 FoliageDropList N(Bush4_Drops) = {
     .count = 1, 

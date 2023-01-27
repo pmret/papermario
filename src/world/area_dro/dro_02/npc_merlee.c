@@ -12,11 +12,11 @@ typedef struct RitualCard {
     /* 0x20 */ s32 xoffset;
 } RitualCard; // size = 0x24
 
-static Evt* N(CreatorScript);
+BSS Evt* N(CreatorScript);
 
 // this buffer is used as an array in scripts managaing the ritual scene
 // values are enumerated below
-static s32 N(RitualBuffer)[16];
+BSS s32 N(RitualBuffer)[16];
 
 enum {
     RITUAL_VAR_FOLDER_1     = ArrayVar(0),
@@ -48,8 +48,8 @@ enum {
     RITUAL_STATE_D              = 13,
 };
 
-static RitualCard N(RitualCards)[3];
-MAP_STATIC_PAD(1,merlee)
+BSS RitualCard N(RitualCards)[3];
+MAP_STATIC_PAD(1,merlee);
 
 s8 N(MerleeSpellCasts)[] = {
     20, 10, 5, 0,

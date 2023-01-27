@@ -10,7 +10,7 @@ extern ActorBlueprint N(whacka);
 extern Formation N(specialFormation_802208E4);
 
 EvtScript N(beforeBattle_80220860) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetGroupEnabled, MODEL_b, FALSE)
     EVT_RETURN
     EVT_END

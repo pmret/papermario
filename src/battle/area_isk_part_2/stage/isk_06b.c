@@ -18,7 +18,7 @@ ApiStatus func_80218AA8_4EFF48(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript N(beforeBattle_802202F0) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(func_80218A60_4EFF00)
     EVT_CALL(EnableModel, MODEL_kesu, FALSE)

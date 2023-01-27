@@ -1,6 +1,6 @@
 #include "pra_13.h"
 
-#include "world/common/atomic/Reflection.inc.c"
+#include "../common/Reflection.inc.c"
 
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
 
@@ -103,6 +103,6 @@ void func_802414BC_D65A9C(void* data) {
     guMtxCatF(sp18, spD8, sp18);
     guTranslateF(sp58, npc->pos.x, npc->pos.y, npc->pos.z);
     guMtxCatF(sp18, sp58, sp18);
-    spr_update_player_sprite(2, npc->currentAnim, 1.0f);
-    spr_draw_player_sprite(2, 0, 0, 0, sp18);
+    spr_update_player_sprite(PLAYER_SPRITE_AUX2, npc->currentAnim, 1.0f);
+    spr_draw_player_sprite(PLAYER_SPRITE_AUX2, 0, 0, 0, sp18);
 }

@@ -2,14 +2,7 @@
 
 #include "common/foliage.inc.c"
 
-FoliageModelList N(Tree1_TrunkModels) = {
-    .count = 3,
-    .models = {
-        MODEL_o45,
-        MODEL_o46,
-        MODEL_o48,
-    }
-};
+FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o45, MODEL_o46, MODEL_o48);
 
 ShakeTreeConfig N(ShakeTree_Tree1) = {
     .trunk = &N(Tree1_TrunkModels),
@@ -20,14 +13,7 @@ BombTrigger N(BombPos_Tree1) = {
     .radius = 0.0f
 };
 
-FoliageModelList N(Tree2_TrunkModels) = {
-    .count = 3,
-    .models = {
-        MODEL_o52,
-        MODEL_o53,
-        MODEL_o55,
-    }
-};
+FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o52, MODEL_o53, MODEL_o55);
 
 ShakeTreeConfig N(ShakeTree_Tree2) = {
     .trunk = &N(Tree2_TrunkModels),

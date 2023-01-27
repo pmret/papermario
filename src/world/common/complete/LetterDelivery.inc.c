@@ -2,10 +2,9 @@
 #include "sprite/npc/WorldParakarry.h"
 
 #include "world/common/complete/GiveReward.inc.c"
-
 #include "world/common/complete/KeyItemChoice.inc.c"
 
-static s32 N(LetterDelivery_SavedNpcAnim);
+BSS s32 N(LetterDelivery_SavedNpcAnim);
 
 API_CALLABLE(N(LetterDelivery_Init)) {
     Bytecode* args = script->ptrReadPos;
@@ -59,7 +58,7 @@ API_CALLABLE(N(LetterDelivery_RestoreNpcAnim)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(D_80245450_C7C130) = {
+EvtScript N(EVS_LetterDelivery_CarryLetter) = {
     EVT_LOOP(0)
         EVT_CALL(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
         EVT_CALL(N(LetterDelivery_CalcLetterPos), LVar3, LVar4, LVar5)
@@ -70,7 +69,7 @@ EvtScript N(D_80245450_C7C130) = {
     EVT_END
 };
 
-EvtScript N(D_802454D0_C7C1B0) = {
+EvtScript N(EVS_LetterDelivery_ItemPrompt) = {
     EVT_SET(LVar9, LVar1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_SET(LVarA, LVar0)
@@ -82,9 +81,9 @@ EvtScript N(D_802454D0_C7C1B0) = {
             EVT_CALL(DisablePartnerAI, 0)
             EVT_CALL(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
             EVT_CALL(N(LetterDelivery_CalcLetterPos), LVar3, LVar4, LVar5)
-            EVT_BITWISE_OR_CONST(LVar0, 0x00050000)
+            EVT_BITWISE_OR_CONST(LVar0, VIS_GROUP_5 << 16)
             EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, ITEM_SPAWN_MODE_DECORATION, 0)
-            EVT_EXEC_GET_TID(N(D_80245450_C7C130), LVarA)
+            EVT_EXEC_GET_TID(N(EVS_LetterDelivery_CarryLetter), LVarA)
             EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldParakarry_Walk)
             EVT_CALL(GetAngleBetweenNPCs, LVar9, NPC_PARTNER, LVarB)
             EVT_CALL(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
@@ -124,7 +123,7 @@ EvtScript N(EVS_ShowLetterChoice) = {
     EVT_SET(LVar0, LVarB)
     EVT_SET(LVar1, LVar2)
     EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
-    EVT_BIND_PADLOCK(N(D_802454D0_C7C1B0), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
+    EVT_BIND_PADLOCK(N(EVS_LetterDelivery_ItemPrompt), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
     EVT_CALL(N(ItemChoice_WaitForSelection), LVar0)
     EVT_RETURN
     EVT_END

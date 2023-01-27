@@ -1,6 +1,6 @@
 #include "kzn_17.h"
 
-#include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
+#include "world/area_kzn/common/SmokeTexPanners.inc.c"
 
 EvtScript N(EVS_ExitWalk_kzn_11_1) = EVT_EXIT_WALK(60, kzn_17_ENTRY_0, "kzn_11", kzn_11_ENTRY_1);
 EvtScript N(EVS_ExitWalk_kzn_18_0) = EVT_EXIT_WALK(60, kzn_17_ENTRY_1, "kzn_18", kzn_18_ENTRY_0);

@@ -209,21 +209,8 @@ EvtScript N(EVS_OnHit_CrystalTree) = {
     EVT_END
 };
 
-FoliageModelList N(CrystalTree_LeafModels) = {
-    .count = 3,
-    .models = {
-        MODEL_o6,
-        MODEL_o7,
-        MODEL_o8,
-    }
-};
-
-FoliageModelList N(CrystalTree_TrunkModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o5,
-    }
-};
+FoliageModelList N(CrystalTree_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o6, MODEL_o7, MODEL_o8);
+FoliageModelList N(CrystalTree_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o5);
 
 ShakeTreeConfig N(ShakeTree_CrystalTree) = {
     .leaves = &N(CrystalTree_LeafModels),

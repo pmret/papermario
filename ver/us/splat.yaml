@@ -14056,63 +14056,58 @@ segments:
     start: 0xD4D040
     vram: 0x80240000
     subsegments:
-    - [0xD4D040, c]
-    - [0xD4D060, c]
-    - [0xD4E3F0, data]
-    - [0xD4E500, data]
-    - [0xD4EF50, data]
-    - [0xD4FFC0, data]
-    - [0xD4FFD0]
+    - [0xD4D040, c, pra_01_0_header]
+    - [0xD4D060, c, pra_01_1_music]
+    - [0xD4D060, c, pra_01_2_main]
+    - [0xD4DFC0, c, pra_01_3_npc]
+    - [0xD4E3F0, c, pra_01_4_entity]
+    - [0xD4E3F0]
   - name: pra_02
     dir: world/area_pra/pra_02
     type: code
     start: 0xD4FFF0
     vram: 0x80240000
     subsegments:
-    - [0xD4FFF0, c]
-    - [0xD50010, c]
-    - [0xD51650, data]
-    - [0xD51720, data]
-    - [0xD52A80, data]
-    - [0xD52DE0, data]
-    - [0xD53C80]
+    - [0xD4FFF0, c, pra_02_0_header]
+    - [0xD50010, c, pra_02_1_music]
+    - [0xD50010, c, pra_02_2_main]
+    - [0xD50F10, c, pra_02_3_npc]
+    - [0xD51300, c, pra_02_4_entity]
+    - [0xD51650]
   - name: pra_03
     dir: world/area_pra/pra_03
     type: code
     start: 0xD53CB0
     vram: 0x80240000
     subsegments:
-    - [0xD53CB0, c]
-    - [0xD53CD0, c]
-    - [0xD53E60, data]
-    - [0xD53F10, data]
-    - [0xD543C0, data]
-    - [0xD54670]
+    - [0xD53CB0, c, pra_03_0_header]
+    - [0xD53CD0, c, pra_03_1_music]
+    - [0xD53CD0, c, pra_03_2_main]
+    - [0xD53CD0, c, pra_03_3_entity]
+    - [0xD53E60]
   - name: pra_04
     dir: world/area_pra/pra_04
     type: code
     start: 0xD54690
     vram: 0x80240000
     subsegments:
-    - [0xD54690, c]
-    - [0xD546B0, c]
-    - [0xD54840, c]
-    - [0xD54FD0, data]
-    - [0xD55080, data]
-    - [0xD554E0, data]
-    - [0xD55840, data]
-    - [0xD55B40]
+    - [0xD54690, c, pra_04_0_header]
+    - [0xD546B0, c, pra_04_1_music]
+    - [0xD546B0, c, pra_04_2_main]
+    - [0xD546B0, c, pra_04_3_entity]
+    - [0xD54840, c, pra_04_4_npc]
+    - [0xD54FD0]
   - name: pra_05
     dir: world/area_pra/pra_05
     type: code
     start: 0xD55BB0
     vram: 0x80240000
     subsegments:
-    - [0xD55BB0, c]
-    - [0xD55BD0, c]
-    - [0xD56D90, data]
-    - [0xD56E20, data]
-    - [0xD57420]
+    - [0xD55BB0, c, pra_05_0_header]
+    - [0xD55BD0, c, pra_05_1_music]
+    - [0xD55BD0, c, pra_05_2_main]
+    - [0xD56AD0, c, pra_05_3_entity]
+    - [0xD56D90]
   - name: pra_06
     dir: world/area_pra/pra_06
     type: code
@@ -14141,33 +14136,33 @@ segments:
     start: 0xD5F2B0
     vram: 0x80240000
     subsegments:
-    - [0xD5F2B0, c]
-    - [0xD5F2D0, c]
-    - [0xD60960, data]
-    - [0xD60A00, data]
-    - [0xD614A0]
+    - [0xD5F2B0, c, pra_10_0_header]
+    - [0xD5F2D0, c, pra_10_1_music]
+    - [0xD5F2D0, c, pra_10_2_main]
+    - [0xD601D0, c, pra_10_3_npc]
+    - [0xD60960]
   - name: pra_11
     dir: world/area_pra/pra_11
     type: code
     start: 0xD61500
     vram: 0x80240000
     subsegments:
-    - [0xD61500, c]
-    - [0xD61520, c]
-    - [0xD626E0, data]
-    - [0xD62770, data]
-    - [0xD62B10, data]
-    - [0xD62D00]
+    - [0xD61500, c, pra_11_0_header]
+    - [0xD61520, c, pra_11_1_music]
+    - [0xD61520, c, pra_11_2_main]
+    - [0xD62420, c, pra_11_3_entity]
+    - [0xD626E0]
   - name: pra_12
     dir: world/area_pra/pra_12
     type: code
     start: 0xD62D10
     vram: 0x80240000
     subsegments:
-    - [0xD62D10, c]
-    - [0xD63F20, data]
-    - [0xD63FB0, data]
-    - [0xD645B0]
+    - [0xD62D10, c, pra_12_0_header]
+    - [0xD62D10, c, pra_12_1_music]
+    - [0xD62D10, c, pra_12_2_main]
+    - [0xD63C60, c, pra_12_3_entity]
+    - [0xD63F20]
   - name: pra_13
     dir: world/area_pra/pra_13
     type: code
@@ -14186,12 +14181,11 @@ segments:
     start: 0xD67D00
     vram: 0x80240000
     subsegments:
-    - [0xD67D00, c]
-    - [0xD67D20, c]
-    - [0xD68EE0, data]
-    - [0xD68F80, data]
-    - [0xD69630, data]
-    - [0xD69800]
+    - [0xD67D00, c, pra_14_0_header]
+    - [0xD67D20, c, pra_14_1_music]
+    - [0xD67D20, c, pra_14_2_main]
+    - [0xD68C20, c, pra_14_3_entity]
+    - [0xD68EE0]
   - name: pra_15
     dir: world/area_pra/pra_15
     type: code
@@ -14209,11 +14203,10 @@ segments:
     start: 0xD69B20
     vram: 0x80240000
     subsegments:
-    - [0xD69B20, c]
-    - [0xD69B40, c]
-    - [0xD6AA40, data]
-    - [0xD6AAF0, data]
-    - [0xD6B610]
+    - [0xD69B20, c, pra_16_0_header]
+    - [0xD69B40, c, pra_16_1_music]
+    - [0xD69B40, c, pra_16_2_main]
+    - [0xD6AA40]
   - name: pra_18
     dir: world/area_pra/pra_18
     type: code
@@ -14232,69 +14225,65 @@ segments:
     start: 0xD6E9B0
     vram: 0x80240000
     subsegments:
-    - [0xD6E9B0, c]
-    - [0xD6E9D0, c]
-    - [0xD70360, data]
-    - [0xD70400, data]
-    - [0xD70A70, data]
-    - [0xD76390]
+    - [0xD6E9B0, c, pra_19_0_header]
+    - [0xD6E9D0, c, pra_19_1_music]
+    - [0xD6E9D0, c, pra_19_2_main]
+    - [0xD6F8D0, c, pra_19_3_npc]
+    - [0xD70360]
   - name: pra_20
     dir: world/area_pra/pra_20
     type: code
     start: 0xD763A0
     vram: 0x80240000
     subsegments:
-    - [0xD763A0, c]
-    - [0xD763C0, c]
-    - [0xD772C0, data]
-    - [0xD77390, data]
-    - [0xD77F00]
+    - [0xD763A0, c, pra_20_0_header]
+    - [0xD763C0, c, pra_20_1_music]
+    - [0xD763C0, c, pra_20_2_main]
+    - [0xD772C0]
   - name: pra_21
     dir: world/area_pra/pra_21
     type: code
     start: 0xD77F20
     vram: 0x80240000
     subsegments:
-    - [0xD77F20, c]
-    - [0xD77F40, c]
-    - [0xD78040, data]
-    - [0xD780E0, data]
-    - [0xD78540, data]
-    - [0xD78870]
+    - [0xD77F20, c, pra_21_0_header]
+    - [0xD77F40, c, pra_21_1_music]
+    - [0xD77F40, c, pra_21_2_main]
+    - [0xD77F40, c, pra_21_3_entity]
+    - [0xD78040]
   - name: pra_22
     dir: world/area_pra/pra_22
     type: code
     start: 0xD78880
     vram: 0x80240000
     subsegments:
-    - [0xD78880, c]
-    - [0xD788A0, c]
-    - [0xD78B50, data]
-    - [0xD78BF0, data]
-    - [0xD796B0, data]
-    - [0xD799E0]
+    - [0xD78880, c, pra_22_0_header]
+    - [0xD788A0, c, pra_22_1_music]
+    - [0xD788A0, c, pra_22_2_main]
+    - [0xD78A50, c, pra_22_3_entity]
+    - [0xD78B50]
   - name: pra_27
     dir: world/area_pra/pra_27
     type: code
     start: 0xD799F0
     vram: 0x80240000
     subsegments:
-    - [0xD799F0, c]
-    - [0xD7AC00, data]
-    - [0xD7AC90, data]
-    - [0xD7B080, data]
-    - [0xD7B270]
+    - [0xD799F0, c, pra_27_0_header]
+    - [0xD799F0, c, pra_27_1_music]
+    - [0xD799F0, c, pra_27_2_main]
+    - [0xD7A940, c, pra_27_3_entity]
+    - [0xD7AC00]
   - name: pra_28
     dir: world/area_pra/pra_28
     type: code
     start: 0xD7B2A0
     vram: 0x80240000
     subsegments:
-    - [0xD7B2A0, c]
-    - [0xD7C4B0, data]
-    - [0xD7C540, data]
-    - [0xD7C930, data]
-    - [0xD7CB20]
+    - [0xD7B2A0, c, pra_28_0_header]
+    - [0xD7B2A0, c, pra_28_1_music]
+    - [0xD7B2A0, c, pra_28_2_main]
+    - [0xD7C1F0, c, pra_28_3_entity]
+    - [0xD7C4B0]
   - name: pra_29
     dir: world/area_pra/pra_29
     type: code
@@ -14338,12 +14327,11 @@ segments:
     start: 0xD896E0
     vram: 0x80240000
     subsegments:
-    - [0xD896E0, c]
-    - [0xD89700, c]
-    - [0xD8A770, data]
-    - [0xD8A820, data]
-    - [0xD8B060, data]
-    - [0xD8B3A0]
+    - [0xD896E0, c, pra_33_0_header]
+    - [0xD89700, c, pra_33_1_music]
+    - [0xD89700, c, pra_33_2_main]
+    - [0xD8A600, c, pra_33_3_entity]
+    - [0xD8A770]
   - name: pra_34
     dir: world/area_pra/pra_34
     type: code
@@ -14376,40 +14364,44 @@ segments:
     start: 0xD91700
     vram: 0x80240000
     subsegments:
-    - [0xD91700, c]
-    - [0xD92650, data]
-    - [0xD926F0, data]
-    - [0xD92F10]
+    - [0xD91700, c, pra_36_0_header]
+    - [0xD91700, c, pra_36_1_music]
+    - [0xD91700, c, pra_36_2_main]
+    - [0xD92650, c, pra_36_3_npc]
+    - [0xD92650]
   - name: pra_37
     dir: world/area_pra/pra_37
     type: code
     start: 0xD92F40
     vram: 0x80240000
     subsegments:
-    - [0xD92F40, c]
-    - [0xD94760, data]
-    - [0xD94800, data]
-    - [0xD95420]
+    - [0xD92F40, c, pra_37_0_header]
+    - [0xD92F40, c, pra_37_1_music]
+    - [0xD92F40, c, pra_37_2_main]
+    - [0xD93E90, c, pra_37_3_npc]
+    - [0xD94760]
   - name: pra_38
     dir: world/area_pra/pra_38
     type: code
     start: 0xD955F0
     vram: 0x80240000
     subsegments:
-    - [0xD955F0, c]
-    - [0xD96CD0, data]
-    - [0xD96D70, data]
-    - [0xD97810]
+    - [0xD955F0, c, pra_38_0_header]
+    - [0xD955F0, c, pra_38_1_music]
+    - [0xD955F0, c, pra_38_2_main]
+    - [0xD96540, c, pra_38_3_npc]
+    - [0xD96CD0]
   - name: pra_39
     dir: world/area_pra/pra_39
     type: code
     start: 0xD97890
     vram: 0x80240000
     subsegments:
-    - [0xD97890, c]
-    - [0xD98F70, data]
-    - [0xD99010, data]
-    - [0xD99930]
+    - [0xD97890, c, pra_39_0_header]
+    - [0xD97890, c, pra_39_1_music]
+    - [0xD97890, c, pra_39_2_main]
+    - [0xD987E0, c, pra_39_3_npc]
+    - [0xD98F70]
   - name: pra_40
     dir: world/area_pra/pra_40
     type: code

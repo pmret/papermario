@@ -1,7 +1,7 @@
 #include "pra_09.h"
 #include "effects.h"
 
-#include "world/common/atomic/Reflection.inc.c"
+#include "../common/Reflection.inc.c"
 
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
 

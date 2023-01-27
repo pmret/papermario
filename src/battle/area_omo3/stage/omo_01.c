@@ -68,7 +68,7 @@ EvtScript N(updateModels) = {
 };
 
 EvtScript N(beforeBattle) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_THREAD
         EVT_SETF(LVar0, EVT_FLOAT(0.0))

@@ -11,7 +11,7 @@ void func_802189E0_661130(void) {
 
 
 EvtScript N(beforeBattle) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_EXEC(N(UnkModelStuffScript1))
     EVT_RETURN
     EVT_END

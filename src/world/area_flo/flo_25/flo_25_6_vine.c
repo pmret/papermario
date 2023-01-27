@@ -2,10 +2,10 @@
 
 // unused extra import for flower-spawning regions
 #define NAMESPACE flo_25_vines
-#include "world/common/atomic/flo_FlowerSpawnRegion.inc.c"
+#include "../common/FlowerSpawnRegion.inc.c"
 #define NAMESPACE flo_25
 
-#include "world/common/atomic/flo_DroppingVine.inc.c"
+#include "../common/DroppingVine.inc.c"
 
 EvtScript N(EVS_SetupVines) = {
     EVT_DROPPING_VINE(ITEM_NONE, MODEL_o111, MODEL_o112, MODEL_o113, MODEL_o114)

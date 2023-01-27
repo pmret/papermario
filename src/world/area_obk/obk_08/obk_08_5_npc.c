@@ -547,7 +547,7 @@ StaticNpc N(NpcData_KeepAwayBoo8) = {
 
 #define TRAFFIC_BOO_START_Y 40.0f
 #define TRAFFIC_BOO_START_Z -430.0f
-#include "../TrafficBoos.inc.c"
+#include "../common/TrafficBoos.inc.c"
 
 EvtScript N(EVS_NpcInit_TrafficBoo1) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))

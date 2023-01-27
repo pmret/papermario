@@ -54,7 +54,7 @@ void N(unkVtxFunc001)(Vtx* firstVertex, Vtx* copiedVertices, s32 numVertices, s3
     s32 offset;
     
     wagPhase = *wagPhasePtr;
-    switch (get_npc_safe(0)->currentAnim) {
+    switch (get_npc_safe(NPC_Whale)->currentAnim) {
         case ANIM_Kolorado_Still:
         case ANIM_Kolorado_Yell:
         case ANIM_Kolorado_IdleSad:

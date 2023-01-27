@@ -977,7 +977,7 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
                 part = &actor->partsTable[0];
                 if (part->currentAnimation != animationIndex) {
                     part->currentAnimation = animationIndex;
-                    spr_update_player_sprite(0, animationIndex, part->animationRate);
+                    spr_update_player_sprite(PLAYER_SPRITE_MAIN, animationIndex, part->animationRate);
                 }
                 break;
             case ACTOR_CLASS_PARTNER:
@@ -993,16 +993,16 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
 
                 if (part->currentAnimation != animationIndex) {
                     part->currentAnimation = animationIndex;
-                    spr_update_sprite(part->unk_84, animationIndex, part->animationRate);
-                    part->animNotifyValue = spr_get_notify_value(part->unk_84);
+                    spr_update_sprite(part->spriteInstanceID, animationIndex, part->animationRate);
+                    part->animNotifyValue = spr_get_notify_value(part->spriteInstanceID);
                 }
                 break;
             case ACTOR_CLASS_ENEMY:
                 part = get_actor_part(actor, partIdx);
                 if (part->currentAnimation != animationIndex) {
                     part->currentAnimation = animationIndex;
-                    spr_update_sprite(part->unk_84, animationIndex, part->animationRate);
-                    part->animNotifyValue = spr_get_notify_value(part->unk_84);
+                    spr_update_sprite(part->spriteInstanceID, animationIndex, part->animationRate);
+                    part->animNotifyValue = spr_get_notify_value(part->spriteInstanceID);
                 }
                 break;
         }
@@ -1015,15 +1015,15 @@ void func_80263E08(Actor* actor, ActorPart* part, s32 anim) {
             case ACTOR_CLASS_PLAYER:
                 if (part->currentAnimation != anim) {
                     part->currentAnimation = anim;
-                    spr_update_player_sprite(0, anim, part->animationRate);
+                    spr_update_player_sprite(PLAYER_SPRITE_MAIN, anim, part->animationRate);
                 }
                 break;
             case ACTOR_CLASS_PARTNER:
             case ACTOR_CLASS_ENEMY:
                 if (part->currentAnimation != anim) {
                     part->currentAnimation = anim;
-                    spr_update_sprite(part->unk_84, anim, part->animationRate);
-                    part->animNotifyValue = spr_get_notify_value(part->unk_84);
+                    spr_update_sprite(part->spriteInstanceID, anim, part->animationRate);
+                    part->animNotifyValue = spr_get_notify_value(part->spriteInstanceID);
                 }
                 break;
         }
@@ -1605,11 +1605,11 @@ void load_partner_actor(void) {
 
             part->animationRate = 1.0f;
             part->currentAnimation = 0;
-            part->unk_84 = -1;
+            part->spriteInstanceID = -1;
 
             if (part->idleAnimations != NULL) {
                 part->currentAnimation = func_80265CE8(part->idleAnimations, 1);
-                part->unk_84 = spr_load_npc_sprite(part->currentAnimation | SPRITE_ID_TAIL_ALLOCATE, NULL);
+                part->spriteInstanceID = spr_load_npc_sprite(part->currentAnimation | SPRITE_ID_TAIL_ALLOCATE, NULL);
             }
 
             if (i + 1 >= partCount) {
@@ -1872,11 +1872,11 @@ Actor* create_actor(Formation formation) {
 
         part->animationRate = 1.0f;
         part->currentAnimation = 0;
-        part->unk_84 = -1;
+        part->spriteInstanceID = -1;
 
         if (part->idleAnimations != NULL) {
             part->currentAnimation = func_80265CE8(part->idleAnimations, 1) & ~SPRITE_ID_TAIL_ALLOCATE;
-            part->unk_84 = spr_load_npc_sprite(part->currentAnimation, NULL);
+            part->spriteInstanceID = spr_load_npc_sprite(part->currentAnimation, NULL);
         }
 
         if (j + 1 >= partCount) {

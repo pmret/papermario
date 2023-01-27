@@ -6,8 +6,8 @@
 
 #include "world/common/complete/NormalItemChoice.inc.c"
 
-static s32 N(FlowerGuard_ItemChoiceList)[ITEM_NUM_CONSUMABLES + 1];
-#include "world/common/atomic/ItemChoice_FlowerGuard.inc.c"
+BSS s32 N(FlowerGuard_ItemChoiceList)[ITEM_NUM_CONSUMABLES + 1];
+#include "../common/ItemChoice_FlowerGuard.inc.c"
 
 EvtScript N(EVS_NpcInteract_GateFlower) = {
     EVT_CALL(DisablePlayerInput, TRUE)

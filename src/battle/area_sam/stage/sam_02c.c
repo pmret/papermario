@@ -8,7 +8,7 @@
 #include "common/UnkModelStuff.inc.c"
 
 EvtScript N(beforeBattle) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetGroupEnabled, 3, 0)
     EVT_CALL(SetGroupEnabled, 10, 0)
     EVT_CALL(SetGroupEnabled, 26, 0)

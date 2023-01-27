@@ -1,6 +1,6 @@
 #include "kzn_19.h"
 
-#include "world/common/atomic/kzn_SmokeTexPanners.inc.c"
+#include "world/area_kzn/common/SmokeTexPanners.inc.c"
 
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"
 

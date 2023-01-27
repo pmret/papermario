@@ -2,12 +2,7 @@
 
 #include "common/foliage.inc.c"
 
-FoliageModelList N(Bush1_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o1056,
-    }
-};
+FoliageModelList N(Bush1_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o1056);
 
 FoliageVectorList N(Bush1_Effects) = {
     .count = 1,
@@ -21,23 +16,8 @@ SearchBushConfig N(SearchBush_Bush1) = {
     .vectors = &N(Bush1_Effects),
 };
 
-FoliageModelList N(Tree1_LeafModels) = {
-    .count = 3,
-    .models = {
-        MODEL_ha1_1,
-        MODEL_ha1_2,
-        MODEL_ha1_3,
-    }
-};
-
-FoliageModelList N(Tree1_TrunkModels) = {
-    .count = 3,
-    .models = {
-        MODEL_o1066,
-        MODEL_miki1_1,
-        MODEL_miki1_2,
-    }
-};
+FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_ha1_1, MODEL_ha1_2, MODEL_ha1_3);
+FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o1066, MODEL_miki1_1, MODEL_miki1_2);
 
 FoliageVectorList N(Tree1_Effects) = {
     .count = 2,

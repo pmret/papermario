@@ -32,7 +32,7 @@ EvtScript N(EVS_UseSpring) = {
     EVT_END
 };
 
-API_CALLABLE(N(UnkFunc44)) {
+API_CALLABLE(N(IsPlayerPounding)) {
     script->varTable[0] = FALSE;
     if (gPlayerStatus.actionState == ACTION_STATE_SPIN_POUND || gPlayerStatus.actionState == ACTION_STATE_TORNADO_POUND) {
         script->varTable[0] = TRUE;
@@ -42,7 +42,7 @@ API_CALLABLE(N(UnkFunc44)) {
 
 EvtScript N(EVS_MonitorCeilingPound) = {
     EVT_IF_EQ(AF_FLO16_FoundHiddenStarPiece, FALSE)
-        EVT_CALL(N(UnkFunc44))
+        EVT_CALL(N(IsPlayerPounding))
         EVT_IF_EQ(LVar0, 0)
             EVT_RETURN
         EVT_END_IF
