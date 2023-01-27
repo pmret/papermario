@@ -1599,7 +1599,7 @@ void appendGfx_player_spin(void* data) {
                 tint = 100;
             }
 
-            func_802DDFF8(0, 6, tint, tint, tint, 255, 0);
+            func_802DDFF8(0, FOLD_TYPE_6, tint, tint, tint, 255, 0);
 
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(mtx, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);

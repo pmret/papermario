@@ -3246,9 +3246,9 @@ void func_8025C918(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
         decor->unk_751 = 0;
         decor->unk758 = 0;
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            func_802DDFF8(0, 0x11, 0x14, 0, 0, 0xFF, 0);
+            func_802DDFF8(0, FOLD_TYPE_11, 0x14, 0, 0, 0xFF, 0);
         } else {
-            func_802DE894(part->spriteInstanceID, 0x11, 0x14, 0, 0, 0xFF, 0);
+            func_802DE894(part->spriteInstanceID, FOLD_TYPE_11, 0x14, 0, 0, 0xFF, 0);
         }
     }
 

@@ -971,7 +971,7 @@ s32 func_802DDEC4(s32 arg0) {
     return spr_playerCurrentAnimInfo[arg0].notifyValue;
 }
 
-void func_802DDEE4(s32 spriteIdx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+void func_802DDEE4(s32 spriteIdx, s32 compIdx, FoldType foldType, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
     SpriteComponent* component;
     SpriteComponent** componentListIt;
     s32 i;
@@ -982,9 +982,9 @@ void func_802DDEE4(s32 spriteIdx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
 
         while (*componentListIt != PTR_LIST_END) {
             component = *componentListIt;
-            if (arg1 == -1 || i == arg1) {
-                fold_update(component->unk_4C & 0xFF, arg2, arg3, arg4, arg5, arg6, arg7);
-                if (arg2 != 0) {
+            if (compIdx == -1 || i == compIdx) {
+                fold_update(component->unk_4C & 0xFF, foldType, arg3, arg4, arg5, arg6, arg7);
+                if (foldType != 0) {
                     component->unk_4C |= 0x10000000;
                 } else {
                     component->unk_4C &= ~0xF0000000;
@@ -996,8 +996,8 @@ void func_802DDEE4(s32 spriteIdx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     }
 }
 
-void func_802DDFF8(s32 animID, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
-    func_802DDEE4(PLAYER_SPRITE_MAIN, -1, arg1, arg2, arg3, arg4, arg5, arg6);
+void func_802DDFF8(s32 animID, FoldType foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    func_802DDEE4(PLAYER_SPRITE_MAIN, -1, foldType, arg2, arg3, arg4, arg5, arg6);
 }
 
 void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 rasterIndex) {
@@ -1226,7 +1226,7 @@ s32 func_802DE748(s32 spriteIdx, s32 compIdx) {
     }
 }
 
-void func_802DE780(s32 spriteIdx, s32 compIdx, s32 foldType, s32 foldArg0, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4) {
+void func_802DE780(s32 spriteIdx, s32 compIdx, FoldType foldType, s32 foldArg0, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4) {
     SpriteInstance* sprite = &SpriteInstances[spriteIdx];
     SpriteComponent** componentList;
     s32 i;
@@ -1252,7 +1252,7 @@ void func_802DE780(s32 spriteIdx, s32 compIdx, s32 foldType, s32 foldArg0, s32 f
     }
 }
 
-void func_802DE894(s32 spriteIdx, s32 foldType, s32 foldArg0, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4) {
+void func_802DE894(s32 spriteIdx, FoldType foldType, s32 foldArg0, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4) {
     func_802DE780(spriteIdx, -1, foldType, foldArg0, foldArg1, foldArg2, foldArg3, foldArg4);
 }
 

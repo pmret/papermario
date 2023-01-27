@@ -115,7 +115,7 @@ void entity_BlueWarpPipe_enter_pipe_init(Entity* bluePipe) {
     pipeData->timer = 25;
     playerStatus->renderMode = RENDER_MODE_ALPHATEST;
 
-    func_802DDFF8(ANIM_Mario_10002, 5, 2, 1, 1, 0, 0);
+    func_802DDFF8(ANIM_Mario_10002, FOLD_TYPE_5, 2, 1, 1, 0, 0);
     sfx_play_sound(SOUND_ENTER_PIPE);
     disable_player_shadow();
 }
