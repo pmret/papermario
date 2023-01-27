@@ -1921,7 +1921,7 @@ Npc* npc_find_closest_simple(f32 x, f32 y, f32 z, f32 radius) {
 }
 
 s32 npc_find_standing_on_entity(s32 entityIndex) {
-    s32 idx = entityIndex | 0x4000;
+    s32 idx = entityIndex | COLLISION_WITH_ENTITY_BIT;
     s32 y = get_entity_by_index(idx)->position.y - 10.0f;
     Npc* npc;
     s32 i;
@@ -1956,7 +1956,7 @@ s32 npc_find_standing_on_entity(s32 entityIndex) {
             }
         } else {
             var_v1 = npc->currentFloor;
-            if (npc->currentFloor & 0x4000) { // TODO required to match (can't use var_v1)
+            if (npc->currentFloor & COLLISION_WITH_ENTITY_BIT) { // TODO required to match (can't use var_v1)
                 if (idx == var_v1) {
                     npc->pos = npc->pos; // TODO required to match
                     return i;

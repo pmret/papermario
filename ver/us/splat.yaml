@@ -5238,7 +5238,24 @@ segments:
     subsegments:
     - [0x3B4790, c, squirt]
     - [0x3B5330]
-  - [0x3B5340, bin] # squirt gfx
+  - name: effect_gfx_squirt
+    dir: effects/gfx
+    type: code
+    start: 0x3B5340
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3B5340, c, squirt]
+    - start: 0x3B5340
+      type: .data
+      name: squirt
+      subsegments:
+      - [0x3B5340, ia4, D_09000000_3B5340, 64, 32]
+      - [0x3B5740, ia8, D_09000400_3B5740, 32, 32]
+      - [0x3B5B40, gfx, D_09000800_3B5B40]
+      - [0x3B5BE8, gfx, D_090008A8_3B5BE8]
+      - [0x3B5C90, vtx, D_09000950_3B5C90]
+      - [0x3B5CD0, gfx, D_09000990_3B5CD0]
   - name: effect_water_block
     dir: effects
     type: code
@@ -10755,7 +10772,7 @@ segments:
     - [0x9BD660, c, trd_09_0_header]
     - [0x9BD660, c, trd_09_1_main]
     - [0x9BD660, c, trd_09_2_entity]
-    - [0x9BD660, c, trd_09_3_npcs]
+    - [0x9BD660, c, trd_09_3_npc]
     - [0x9BD720, c, trd_09_4_demo]
     - [0x9BD830]
   - name: trd_10
@@ -14102,10 +14119,11 @@ segments:
     start: 0xD57430
     vram: 0x80240000
     subsegments:
-    - [0xD57430, c]
-    - [0xD58380, data]
-    - [0xD58410, data]
-    - [0xD58860]
+    - [0xD57430, c, pra_06_0_header]
+    - [0xD57430, c, pra_06_1_music]
+    - [0xD57430, c, pra_06_2_main]
+    - [0xD58380, c, pra_06_3_entity]
+    - [0xD58380]
   - name: pra_09
     dir: world/area_pra/pra_09
     type: code
@@ -14180,12 +14198,11 @@ segments:
     start: 0xD69810
     vram: 0x80240000
     subsegments:
-    - [0xD69810, c]
-    - [0xD69830, c]
-    - [0xD69850, data]
-    - [0xD698E0, data]
-    - [0xD69AD0, data]
-    - [0xD69B10]
+    - [0xD69810, c, pra_15_0_header]
+    - [0xD69830, c, pra_15_1_music]
+    - [0xD69830, c, pra_15_2_main]
+    - [0xD69850, c, pra_15_3_entity]
+    - [0xD69850]
   - name: pra_16
     dir: world/area_pra/pra_16
     type: code
@@ -14399,53 +14416,54 @@ segments:
     start: 0xD999B0
     vram: 0x80240000
     subsegments:
-    - [0xD999B0, c]
-    - [0xD999D0, c]
-    - [0xD9A8D0, data]
-    - [0xD9A970, data]
-    - [0xD9AE80, data]
-    - [0xD9AEE0]
+    - [0xD999B0, c, pra_40_0_header]
+    - [0xD999D0, c, pra_40_1_music]
+    - [0xD999D0, c, pra_40_2_main]
+    - [0xD9A8D0, c, pra_40_3_entity]
+    - [0xD9A8D0]
   - name: omo_01
     dir: world/area_omo/omo_01
     type: code
     start: 0xD9AEF0
     vram: 0x80240000
     subsegments:
-    - [0xD9AEF0, c]
-    - [0xD9B150, c]
-    - [0xD9BB20, data]
-    - [0xD9BBA0, data]
-    - [0xD9BD50, data]
-    - [0xD9C200, data]
-    - [0xD9D250, data]
-    - [0xD9D330]
+    - [0xD9AEF0, c, omo_01_0_header]
+    - [0xD9AEF0, c, omo_01_1_music]
+    - [0xD9AEF0, c, omo_01_2_main]
+    - [0xD9AEF0, c, omo_01_3_gizmos]
+    - [0xD9B150, c, omo_01_4_npc]
+    - [0xD9BB20, c, omo_01_5_entity]
+    - [0xD9BB20]
   - name: omo_02
     dir: world/area_omo/omo_02
     type: code
     start: 0xD9D4D0
     vram: 0x80240000
     subsegments:
-    - [0xD9D4D0, c]
-    - [0xD9D510, c]
-    - [0xDA0080, data]
-    - [0xDA0110, data]
-    - [0xDA0300, data]
-    - [0xDA05B0, data]
-    - [0xDA0A50, data]
-    - [0xDA1CD0, data]
-    - [0xDA4D30]
+    - [0xD9D4D0, c, omo_02_0_header]
+    - [0xD9D4D0, c, omo_02_1_music]
+    - [0xD9D4D0, c, omo_02_2_main]
+    - [0xD9D4D0, c, omo_02_3_entity]
+    - [0xD9D510, c, omo_02_4_gizmos]
+    - [0xD9D790, c, omo_02_5_barricade]
+    - [0xD9DE40, c, omo_02_6_npc]
+    - [0xDA0080]
   - name: omo_03
     dir: world/area_omo/omo_03
     type: code
     start: 0xDA5240
     vram: 0x80240000
     subsegments:
-    - [0xDA5240, c]
-    - [0xDA5260, c]
-    - [0xDA5AD0, data]
-    - [0xDA6050, data]
-    - [0xDA8190, data]
-    - [0xDAD3B0]
+    - [0xDA5240, c, omo_03_0_header]
+    - [0xDA5240, c, omo_03_1_music]
+    - [0xDA5240, c, omo_03_2_main]
+    - [0xDA5240, c, omo_03_3_gizmos]
+    - [0xDA5240, c, omo_03_4_entity]
+    - [0xDA5260, c, omo_03_5_npc]
+    - [0xDA5260, c, omo_03_6_train]
+    - [0xDA5AD0, c, omo_03_7_train_drop]
+    - [0xDA5AD0, c, omo_03_8_epilogue]
+    - [0xDA5AD0]
   - name: omo_04
     dir: world/area_omo/omo_04
     type: code
@@ -14479,13 +14497,14 @@ segments:
     start: 0xDB7910
     vram: 0x80240000
     subsegments:
-    - [0xDB7910, c]
-    - [0xDB8180, c]
-    - [0xDB8440, data]
-    - [0xDB88E0, data]
-    - [0xDB9060, data]
-    - [0xDBCFD0, data]
-    - [0xDBD270]
+    - [0xDB7910, c, omo_06_0_header]
+    - [0xDB7910, c, omo_06_1_music]
+    - [0xDB7910, c, omo_06_2_main]
+    - [0xDB7910, c, omo_06_3_gizmos]
+    - [0xDB7910, c, omo_06_4_train]
+    - [0xDB8180, c, omo_06_5_npc]
+    - [0xDB8180, c, omo_06_6_entity]
+    - [0xDB8440]
   - name: omo_07
     dir: world/area_omo/omo_07
     type: code
@@ -14506,116 +14525,115 @@ segments:
     start: 0xDC43D0
     vram: 0x80240000
     subsegments:
-    - [0xDC43D0, c]
-    - [0xDC4C40, c]
-    - [0xDC51B0, data]
-    - [0xDC52F0, data]
-    - [0xDC8100, data]
-    - [0xDCBA10, data]
-    - [0xDCCB00]
+    - [0xDC43D0, c, omo_08_0_header]
+    - [0xDC43D0, c, omo_08_1_music]
+    - [0xDC43D0, c, omo_08_2_main]
+    - [0xDC43D0, c, omo_08_3_boxes]
+    - [0xDC43D0, c, omo_08_4_train]
+    - [0xDC4C40, c, omo_08_5_entity]
+    - [0xDC4C40, c, omo_08_6_npc]
+    - [0xDC51B0]
   - name: omo_09
     dir: world/area_omo/omo_09
     type: code
     start: 0xDCCCD0
     vram: 0x80240000
     subsegments:
-    - [0xDCCCD0, c]
-    - [0xDCCFA0, c]
-    - [0xDCD3B0, c]
-    - [0xDCD3F0, c]
-    - [0xDCD6B0, c]
-    - [0xDD02E0, c]
-    - [0xDD03C0, data]
-    - [0xDD0480, data]
-    - [0xDD0750, data]
-    - [0xDD0900, data]
-    - [0xDD3520, data]
-    - [0xDD4150, data]
-    - [0xDD6BB0, data]
-    - [0xDD72F0]
+    - [0xDCCCD0, c, omo_09_0_header]
+    - [0xDCCCD0, c, omo_09_1_music]
+    - [0xDCCCD0, c, omo_09_2_main]
+    - [0xDCCCD0, c, omo_09_3_conveyors]
+    - [0xDCCFA0, c, omo_09_4_slot_machine]
+    - [0xDCD3B0, c, omo_09_5_gizmos]
+    - [0xDCD3F0, c, omo_09_6_entity]
+    - [0xDCD6B0, c, omo_09_7_npc]
+    - [0xDD02E0, c, omo_09_8_scenes]
+    - [0xDD03C0]
   - name: omo_10
     dir: world/area_omo/omo_10
     type: code
     start: 0xDD79B0
     vram: 0x80240000
     subsegments:
-    - [0xDD79B0, c]
-    - [0xDD8220, data]
-    - [0xDD8640, data]
-    - [0xDD8A60, data]
-    - [0xDDC720, data]
-    - [0xDDC7F0]
+    - [0xDD79B0, c, omo_10_0_header]
+    - [0xDD79B0, c, omo_10_1_music]
+    - [0xDD79B0, c, omo_10_2_main]
+    - [0xDD79B0, c, omo_10_3_gizmos]
+    - [0xDD79B0, c, omo_10_4_train]
+    - [0xDD8220, c, omo_10_5_npc]
+    - [0xDD8220, c, omo_10_6_entity]
+    - [0xDD8220]
   - name: omo_11
     dir: world/area_omo/omo_11
     type: code
     start: 0xDDC830
     vram: 0x80240000
     subsegments:
-    - [0xDDC830, c]
-    - [0xDDCFC0, c]
-    - [0xDDDD00, data]
-    - [0xDDDD90, data]
-    - [0xDDEE80, data]
-    - [0xDDF300]
+    - [0xDDC830, c, omo_11_0_header]
+    - [0xDDC830, c, omo_11_1_music]
+    - [0xDDC830, c, omo_11_2_main]
+    - [0xDDC830, c, omo_11_3_gizmos]
+    - [0xDDCFC0, c, omo_11_4_entity]
+    - [0xDDDD00, c, omo_11_5_npc]
+    - [0xDDDD00]
   - name: omo_12
     dir: world/area_omo/omo_12
     type: code
     start: 0xDDF310
     vram: 0x80240000
     subsegments:
-    - [0xDDF310, c]
-    - [0xDDF730, c]
-    - [0xDDF7D0, data]
-    - [0xDDF960, data]
-    - [0xDDFB60, data]
-    - [0xDE2470]
+    - [0xDDF310, c, omo_12_0_header]
+    - [0xDDF310, c, omo_12_1_music]
+    - [0xDDF310, c, omo_12_2_main]
+    - [0xDDF310, c, omo_12_3_npc]
+    - [0xDDF730, c, omo_12_4_partner]
+    - [0xDDF7D0]
   - name: omo_13
     dir: world/area_omo/omo_13
     type: code
     start: 0xDE2490
     vram: 0x80240000
     subsegments:
-    - [0xDE2490, c]
-    - [0xDE2710, c]
-    - [0xDE36C0, c]
-    - [0xDE3980, data]
-    - [0xDE3A10, data]
-    - [0xDE3F70, data]
-    - [0xDE5100, data]
-    - [0xDE5360]
+    - [0xDE2490, c, omo_13_0_header]
+    - [0xDE2490, c, omo_13_1_music]
+    - [0xDE2490, c, omo_13_2_main]
+    - [0xDE2490, c, omo_13_3_gizmos]
+    - [0xDE2710, c, omo_13_4_npc]
+    - [0xDE36C0, c, omo_13_5_entity]
+    - [0xDE3980]
   - name: omo_14
     dir: world/area_omo/omo_14
     type: code
     start: 0xDE56B0
     vram: 0x80240000
     subsegments:
-    - [0xDE56B0, c]
-    - [0xDE5810, c]
-    - [0xDE5C70, data]
-    - [0xDE5D00, data]
-    - [0xDE5FA0, data]
-    - [0xDE8760]
+    - [0xDE56B0, c, omo_14_0_header]
+    - [0xDE56B0, c, omo_14_1_music]
+    - [0xDE56B0, c, omo_14_2_main]
+    - [0xDE5810, c, omo_14_3_npc]
+    - [0xDE5C70]
   - name: omo_15
     dir: world/area_omo/omo_15
     type: code
     start: 0xDE8770
     vram: 0x80240000
     subsegments:
-    - [0xDE8770, c]
-    - [0xDE8F70, data]
-    - [0xDE9670, data]
-    - [0xDEBEA0]
+    - [0xDE8770, c, omo_15_0_header]
+    - [0xDE8770, c, omo_15_1_music]
+    - [0xDE8770, c, omo_15_2_main]
+    - [0xDE8F70, c, omo_15_3_npc]
+    - [0xDE8F70]
   - name: omo_16
     dir: world/area_omo/omo_16
     type: code
     start: 0xDEBED0
     vram: 0x80240000
     subsegments:
-    - [0xDEBED0, c]
-    - [0xDEC4D0, data]
-    - [0xDEC600, data]
-    - [0xDEEC30, data]
-    - [0xDEEE80]
+    - [0xDEBED0, c, omo_16_0_header]
+    - [0xDEBED0, c, omo_16_1_main]
+    - [0xDEBED0, c, omo_16_2_train]
+    - [0xDEC4D0, c, omo_16_3_npc]
+    - [0xDEC4D0]
   - name: omo_17
     dir: world/area_omo/omo_17
     type: code
@@ -16713,7 +16731,7 @@ segments:
       - ToadMinister
       - Postmaster
       - ConductorToad
-      - TrainStationToad
+      - TrainToad
       - Fishmael
       - Musician
       - Koopa

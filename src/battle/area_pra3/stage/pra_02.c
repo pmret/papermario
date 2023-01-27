@@ -61,7 +61,7 @@ EvtScript N(80231CFC) = {
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_CALL(func_802536A8, 1)
+    EVT_CALL(EnableBattleFloorReflections, TRUE)
     EVT_SET(LVar0, 17)
     EVT_SET(LVar1, 0)
     EVT_SET(LVar2, 3000)

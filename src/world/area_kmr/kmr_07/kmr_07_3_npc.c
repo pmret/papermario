@@ -1,7 +1,7 @@
 #include "kmr_07.h"
 #include "animation_script.h"
 
-#include "world/common/enemy/complete/GoombaBros_Stationary.inc.c"
+#include "world/common/enemy/complete/GoombaBros_Guard.inc.c"
 
 extern AnimScript Entity_SimpleSpring_AnimLaunch;
 
@@ -209,7 +209,7 @@ EvtScript N(EVS_NpcInit_GoombaBros_Blue) = {
 StaticNpc N(NpcData_GoombaBros_Red)[] = {
     {
         .id = NPC_GoombaBros_Red,
-        .settings = &N(NpcSettings_GoombaBros_Stationary),
+        .settings = &N(NpcSettings_GoombaBros_Guard),
         .pos = { 526.0f, 80.0f, 0.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_800000,
@@ -231,7 +231,7 @@ StaticNpc N(NpcData_GoombaBros_Red)[] = {
     },
     {
         .id = NPC_GoombaBros_Blue,
-        .settings = &N(NpcSettings_GoombaBros_Stationary),
+        .settings = &N(NpcSettings_GoombaBros_Guard),
         .pos = { 498.0f, 80.0f, -10.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_800000,

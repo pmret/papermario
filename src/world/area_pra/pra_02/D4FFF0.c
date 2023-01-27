@@ -7,4 +7,4 @@ static char* N(exit_str_3) = "pra_13";
 static char* N(exit_str_4) = "pra_04";
 static char* N(exit_str_5) = "";
 
-#include "world/common/todo/SetGameStatusUnk84_1.inc.c"
+#include "../common/MapInit_EnableFloorReflection.inc.c"

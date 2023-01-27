@@ -1,6 +1,6 @@
 #include "PyroGuy.h"
 
-MobileAISettings N(D_8024608C_DF4F2C) = {
+MobileAISettings N(AISettings_PyroGuy) = {
     .moveSpeed = 3.0f,
     .moveTime = 30,
     .waitTime = 60,
@@ -16,7 +16,7 @@ MobileAISettings N(D_8024608C_DF4F2C) = {
 };
 
 EvtScript N(EVS_NpcAI_PyroGuy) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(D_8024608C_DF4F2C)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_PyroGuy)))
     EVT_RETURN
     EVT_END
 };

@@ -198,7 +198,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
         EVT_CALL(MakeLerp, 0, 50, 18, EASING_QUADRATIC_IN)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_CALL(func_802CDE68, -1, LVar0)
+            EVT_CALL(SetNpcRotationPivot, NPC_SELF, LVar0)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 0)
                 EVT_BREAK_LOOP
@@ -221,7 +221,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
     EVT_CALL(FadeOutMusic, 0, 1000)
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(1.25), EVT_FLOAT(1.25), EVT_FLOAT(1.25))
     EVT_CALL(SetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
-    EVT_CALL(func_802CDE68, -1, 0)
+    EVT_CALL(SetNpcRotationPivot, NPC_SELF, 0)
     EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim02)
     EVT_WAIT(15)
@@ -264,7 +264,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
 EvtScript N(EVS_NpcIdle_Tubba_Asleep) = {
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(1.25), EVT_FLOAT(1.25), EVT_FLOAT(1.25))
     EVT_CALL(SetNpcPos, NPC_SELF, 600, 50, 115)
-    EVT_CALL(func_802CDE68, -1, 0)
+    EVT_CALL(SetNpcRotationPivot, NPC_SELF, 0)
     EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim02)
     EVT_WAIT(15)

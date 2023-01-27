@@ -143,7 +143,7 @@ EvtScript N(EVS_Scene_ReturnStarRod) = {
     EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_PARTNER, -70, LVar1, 15)
     EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)

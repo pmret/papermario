@@ -295,7 +295,7 @@ EvtScript N(usePower) = {
     EVT_ADD(LVar1, 15)
     EVT_ADD(LVar2, -5)
     EVT_CALL(NpcFlyTo, 100, LVar0, LVar1, LVar2, 10, 0, 10)
-    EVT_CALL(PlaySound, 0x245)
+    EVT_CALL(PlaySound, SOUND_245)
     EVT_THREAD
         EVT_CALL(PlayEffect, 0x40, 2, LVar0, LVar1, LVar2, 1, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_WAIT(2)

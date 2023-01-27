@@ -5,15 +5,15 @@
 #define NAMESPACE b_area_mac_mac_02
 
 EvtScript N(beforeBattle_80232930) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_CALL(func_802536A8, 1)
+    EVT_CALL(EnableBattleFloorReflections, TRUE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(afterBattle_8023297C) = {
-    EVT_CALL(func_802536A8, 0)
+    EVT_CALL(EnableBattleFloorReflections, FALSE)
     EVT_RETURN
     EVT_END
 };

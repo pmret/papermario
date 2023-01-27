@@ -777,8 +777,8 @@ typedef struct Camera {
     /* 0x084 */ Vec3f trueRotation;
     /* 0x090 */ f32 currentBlendedYawNegated;
     /* 0x094 */ f32 currentPitch;
-    /* 0x098 */ s32 unk_98;
-    /* 0x09C */ s32 unk_9C;
+    /* 0x098 */ f32 unk_98;
+    /* 0x09C */ f32 unk_9C;
     /* 0x0A0 */ Vp vp;
     /* 0x0B0 */ Vp vpAlt;
     /* 0x0C0 */ s32 unk_C0;
@@ -879,7 +879,7 @@ typedef struct BattleStatus {
     /* 0x08E */ s8 initialEnemyCount; /* used for SP award bonus */
     /* 0x08F */ char unk_8F[1];
     /* 0x090 */ s16 unk_90;
-    /* 0x092 */ s8 unk_92;
+    /* 0x092 */ s8 reflectFlags;
     /* 0x093 */ s8 unk_93;
     /* 0x094 */ s8 unk_94;
     /* 0x095 */ s8 unk_95;
@@ -2477,15 +2477,6 @@ typedef struct PartnerDMAData {
     /* 0x0C */ struct ActorBlueprint* ActorBlueprint;
     /* 0x10 */ s32 y;
 } PartnerDMAData; // size = 0x14
-
-typedef struct UnkOmo {
-    /* 0x00 */ f32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ s32 treeIndex;
-} UnkOmo; // size = 0x18
 
 typedef struct struct_D_802EB620 {
     /* 0x00 */ s32 unk_00;

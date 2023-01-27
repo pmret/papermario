@@ -315,7 +315,7 @@ EvtScript N(goombario_8021C7FC) = {
         EVT_SET(LVarB, LVarC)
     EVT_END_IF
     EVT_SUB(LVarB, 20)
-    EVT_DIVF(LVarB, EVT_FLOAT(10.5888671875))
+    EVT_DIVF(LVarB, EVT_FLOAT(10.588))
     EVT_ADDF(LVarB, 15)
     EVT_SET(LVarA, LVarB)
     EVT_RETURN

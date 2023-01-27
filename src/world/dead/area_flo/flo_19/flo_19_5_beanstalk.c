@@ -133,7 +133,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
     EVT_SET(LVarE, EVT_FLOAT(10.0))
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
         EVT_SWITCH(AF_FLO_BeanstalkFacingRight)
             EVT_CASE_EQ(0)
@@ -144,7 +144,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
                 EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
         EVT_END_SWITCH
     EVT_END_THREAD
-    EVT_CALL(TranslateModel, MODEL_o142, EVT_FLOAT(1.3134766), EVT_FLOAT(3.0), EVT_FLOAT(-0.56640625))
+    EVT_CALL(TranslateModel, MODEL_o142, EVT_FLOAT(1.313), EVT_FLOAT(3.0), EVT_FLOAT(-0.56640625))
     EVT_CALL(UpdateColliderTransform, COLLIDER_o117)
     EVT_THREAD
         EVT_SET(AF_FLO_BeanstalkFadedOut, FALSE)
@@ -177,7 +177,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
         EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, -210, 0, 344, 0, 0)
         EVT_SETF(LVar1, LVar0)
         EVT_MULF(LVar1, EVT_FLOAT(-3.0))
-        EVT_CALL(TranslateModel, MODEL_o142, EVT_FLOAT(1.3134766), LVar0, EVT_FLOAT(-0.56640625))
+        EVT_CALL(TranslateModel, MODEL_o142, EVT_FLOAT(1.313), LVar0, EVT_FLOAT(-0.56640625))
         EVT_CALL(RotateModel, MODEL_o142, LVar1, 0, 1, 0)
         EVT_CALL(UpdateColliderTransform, COLLIDER_o117)
         EVT_SETF(LVar2, LVar0)
@@ -229,7 +229,7 @@ EvtScript N(EVS_Exit_Beanstalk) = {
         EVT_CALL(NpcJump0, NPC_PARTNER, LVarC, LVarD, LVarE, 5)
         EVT_CALL(PlaySound, SOUND_19D)
         EVT_CALL(SetMusicTrack, 0, SONG_MAGIC_BEANSTALK, 1, 8)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
         EVT_CALL(N(GetPlayerAngles), LVar3, LVar4)
         EVT_SWITCH(LVar4)
@@ -242,7 +242,7 @@ EvtScript N(EVS_Exit_Beanstalk) = {
                 EVT_CALL(InterpPlayerYaw, 270, 0)
                 EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
         EVT_END_SWITCH
-        EVT_CALL(TranslateModel, MODEL_o142, EVT_FLOAT(1.3134766), EVT_FLOAT(3.0), EVT_FLOAT(-0.56640625))
+        EVT_CALL(TranslateModel, MODEL_o142, EVT_FLOAT(1.313), EVT_FLOAT(3.0), EVT_FLOAT(-0.56640625))
         EVT_CALL(UpdateColliderTransform, COLLIDER_o117)
         EVT_SET(MV_BeanstalkSceneSync, FALSE)
         EVT_THREAD
@@ -277,7 +277,7 @@ EvtScript N(EVS_Exit_Beanstalk) = {
                 EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, 0, -210, 344, 0, 0)
                 EVT_SETF(LVar1, LVar0)
                 EVT_MULF(LVar1, EVT_FLOAT(-3.0))
-                EVT_CALL(TranslateModel, MODEL_o142, EVT_FLOAT(1.3134766), LVar0, EVT_FLOAT(-0.56640625))
+                EVT_CALL(TranslateModel, MODEL_o142, EVT_FLOAT(1.313), LVar0, EVT_FLOAT(-0.56640625))
                 EVT_CALL(RotateModel, MODEL_o142, LVar1, 0, 1, 0)
                 EVT_CALL(UpdateColliderTransform, COLLIDER_o117)
                 EVT_SETF(LVar2, LVar0)

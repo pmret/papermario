@@ -71,7 +71,7 @@ EvtScript N(EVS_Scene_SunReturns) = {
 };
 
 EvtScript N(EVS_NpcAux_Sun_02) = {
-    EVT_CALL(func_802CDE68, 11, 48)
+    EVT_CALL(SetNpcRotationPivot, NPC_Sun_02, 48)
     EVT_LOOP(0)
         EVT_CALL(MakeLerp, -30, 30, 20, EASING_SIN_OUT)
         EVT_LOOP(0)

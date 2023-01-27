@@ -22,7 +22,7 @@ EvtScript N(EVS_NpcAI_Conductor) = {
 };
 
 NpcSettings N(NpcSettings_Conductor) = {
-    .defaultAnim = ANIM_TrainStationToad_Blue_Idle,
+    .defaultAnim = ANIM_TrainToad_Blue_Idle,
     .height = 24,
     .radius = 24,
     .otherAI = &N(EVS_NpcAuxAI_Conductor),

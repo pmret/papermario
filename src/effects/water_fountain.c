@@ -199,7 +199,7 @@ void water_fountain_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_TASK_FLAG_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
 void func_E00B8200(void) {

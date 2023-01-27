@@ -660,7 +660,7 @@ EvtScript N(EVS_Quizmo_MovePartnerToPodium) = {
     EVT_END_THREAD
     EVT_CALL(N(Quizmo_SpinPartner))
     EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_RETURN
     EVT_END
 };
@@ -905,9 +905,9 @@ EvtScript N(EVS_Quizmo_ReturnPlayerToOriginalPos) = {
         EVT_ADDF(LVar2, LVar0)
         EVT_SETF(LVar3, QUIZ_ARRAY_ORIGIN_Z)
         EVT_ADDF(LVar3, LVar1)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_JUMP)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
         EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar2, LVar3, 40)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_END_THREAD
     EVT_CALL(PlayerMoveTo, QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 40)
     EVT_RETURN
@@ -979,7 +979,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
     EVT_CALL(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_EXEC_GET_TID(N(EVS_Quizmo_SetCharacterPositons), LVar1)
     EVT_CALL(ContinueSpeech, -1, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000B)
     EVT_CALL(PlaySound, 137)

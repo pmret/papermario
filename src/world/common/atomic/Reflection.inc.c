@@ -142,7 +142,7 @@ API_CALLABLE(N(EnableFloorReflection)){
         case REFLECTION_FLOOR_WALL:
         case REFLECTION_FLOOR:
             script->array[0] = create_worker_world(NULL, N(worker_reflect_player_floor));
-            gOverrideFlags |= GLOBAL_OVERRIDES_80;
+            gOverrideFlags |= GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
             break;
         case REFLECTION_WALL:
             break;
@@ -396,26 +396,3 @@ void N(worker_reflect_partner_wall)(void) {
         partner->flags |= NPC_FLAG_REFLECT_WALL;
     }
 }
-
-// TODO: scripts in this include, e.g. the following.
-// Requires most of area_pra to have its data decomped.
-
-/*
-#new:EvtScript $Script_802415D0
-{
-    0:  NewArray  00000010 *VarA
-   10:  If  *Var1  ==  00000000
-   20:      Switch  *Var0
-   2C:          Case  ==  00000000
-   38:              Call  $Function_802400EC ( )    // EnableWallReflection
-   44:          Case  ==  00000001
-   50:          Case  ==  00000002
-   5C:              Call  $Function_802400EC ( )    // EnableWallReflection
-   68:      EndSwitch
-   70:  EndIf
-   78:  Call  $Function_8024049C    ( *Var0 )       // EnableFloorReflection
-   88:  Call  $Function_80240D3C    ( *Var0 )       // EnablePartnerReflection
-   98:  Return
-   A0:  End
-}
-*/

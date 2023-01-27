@@ -1,7 +1,7 @@
 
 #include "sbk_30.h"
 
-#include "world/common/enemy/ai/StationaryAI.inc.c"
+#include "world/common/enemy/ai/GuardAI.inc.c"
 
 NpcSettings N(NpcSettings_Kolorado) = {
     .height = 40,

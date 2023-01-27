@@ -162,9 +162,9 @@ void initialize_battle(void) {
     gBattleStatus.flags2 = 0;
     gBattleStatus.flags1 = 0;
     bSavedOverrideFlags = gOverrideFlags;
-    gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
     gBattleStatus.inputBitmask = -1;
-    gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
 
     for (i = 0; i < 16; i++) {
         battleStatus->pushInputBuffer[i] = 0; // @bug? why just 16
@@ -648,9 +648,9 @@ void btl_render_actors(void) {
                             queue_render_task(renderTaskPtr);
                         }
 
-                        if (battleStatus->unk_92 & 1) {
+                        if (battleStatus->reflectFlags & BS_REFLECT_FLOOR) {
                             renderTaskPtr->appendGfxArg = actor;
-                            renderTaskPtr->appendGfx = appendGfx_enemy_actor_decorations;
+                            renderTaskPtr->appendGfx = appendGfx_enemy_actor_reflection;
                             renderTaskPtr->distance = actor->currentPos.z;
                             renderTaskPtr->renderMode = actor->renderMode;
                             queue_render_task(renderTaskPtr);
@@ -674,9 +674,9 @@ void btl_render_actors(void) {
                         queue_render_task(renderTaskPtr);
                     }
 
-                    if (battleStatus->unk_92 & 1) {
+                    if (battleStatus->reflectFlags & BS_REFLECT_FLOOR) {
                         renderTaskPtr->appendGfxArg = NULL;
-                        renderTaskPtr->appendGfx = func_80257B88;
+                        renderTaskPtr->appendGfx = appendGfx_partner_actor_reflection;
                         renderTaskPtr->distance = actor->currentPos.z;
                         renderTaskPtr->renderMode = actor->renderMode;
                         queue_render_task(renderTaskPtr);
@@ -699,9 +699,9 @@ void btl_render_actors(void) {
                         queue_render_task(renderTaskPtr);
                     }
 
-                    if (battleStatus->unk_92 & 1) {
+                    if (battleStatus->reflectFlags & BS_REFLECT_FLOOR) {
                         renderTaskPtr->appendGfxArg = NULL;
-                        renderTaskPtr->appendGfx = func_80258E14;
+                        renderTaskPtr->appendGfx = appendGfx_player_actor_reflection;
                         renderTaskPtr->distance = actor->currentPos.z;
                         renderTaskPtr->renderMode = actor->renderMode;
                         queue_render_task(renderTaskPtr);
@@ -1092,10 +1092,10 @@ void btl_restore_world_cameras(void) {
     playerStatus->position.y = D_8029EFB4;
     playerStatus->position.z = D_8029EFB8;
 
-    if (bSavedOverrideFlags & GLOBAL_OVERRIDES_80) {
-        gOverrideFlags |= GLOBAL_OVERRIDES_80;
+    if (bSavedOverrideFlags & GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION) {
+        gOverrideFlags |= GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
     } else {
-        gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
     }
 
     if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {

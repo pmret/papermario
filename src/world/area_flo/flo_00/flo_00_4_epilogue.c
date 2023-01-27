@@ -6,12 +6,7 @@ NpcSettings N(NpcSettings_Lakilester_Epilogue) = {
     .level = 99,
 };
 
-NpcSettings N(NpcSettings_Parakarry_Epilogue) = {
-    .height = 35,
-    .radius = 24,
-    .level = 99,
-    .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
-};
+#include "world/common/npc/Parakarry.inc.c"
 
 Vec3f N(D_80245E88_CA3DA8)[] = {
     { 266.0f,  20.0f, 322.0f },
@@ -145,7 +140,7 @@ StaticNpc N(NpcData_Lakilester_Epilogue)[] = {
     },
     {
         .id = NPC_Parakarry_Epilogue,
-        .settings = &N(NpcSettings_Parakarry_Epilogue),
+        .settings = &N(NpcSettings_Parakarry),
         .pos = { 266.0f, 0.0f, 322.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_800,
@@ -155,24 +150,7 @@ StaticNpc N(NpcData_Lakilester_Epilogue)[] = {
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-        .animations = {
-            .idle   = ANIM_WorldParakarry_Idle,
-            .walk   = ANIM_WorldParakarry_Walk,
-            .run    = ANIM_WorldParakarry_Run,
-            .chase  = ANIM_WorldParakarry_Run,
-            .anim_4 = ANIM_WorldParakarry_Idle,
-            .anim_5 = ANIM_WorldParakarry_Idle,
-            .death  = ANIM_WorldParakarry_Still,
-            .hit    = ANIM_WorldParakarry_Still,
-            .anim_8 = ANIM_WorldParakarry_Idle,
-            .anim_9 = ANIM_WorldParakarry_Idle,
-            .anim_A = ANIM_WorldParakarry_Idle,
-            .anim_B = ANIM_WorldParakarry_Idle,
-            .anim_C = ANIM_WorldParakarry_Idle,
-            .anim_D = ANIM_WorldParakarry_Idle,
-            .anim_E = ANIM_WorldParakarry_Idle,
-            .anim_F = ANIM_WorldParakarry_Idle,
-        },
+        .animations = PARAKARRY_ANIMS,
     },
 };
 

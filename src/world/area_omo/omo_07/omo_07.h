@@ -28,8 +28,8 @@ enum {
 };
 
 enum {
-    MV_SecretDoorAngle	= MapVar(0),
-    MV_AmbushID			= MapVar(10), // npcID or itemID depending on GB_OMO_PeachChoice1
+    MV_SecretDoorAngle  = MapVar(0),
+    MV_AmbushID         = MapVar(10), // npcID or itemID depending on GB_OMO_PeachChoice1
 };
 
 #define NAMESPACE omo_07

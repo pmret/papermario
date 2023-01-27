@@ -774,7 +774,7 @@ EvtScript N(EVS_NpcInteract_Merlee) = {
     EVT_END_IF
     EVT_IF_EQ(LVar0, 3)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DC)
-        EVT_SET(LVar0, 39)
+        EVT_SET(LVar0, ITEM_CRYSTAL_BALL)
         EVT_SET(LVar1, 1)
         EVT_EXEC_WAIT(N(GiveKeyReward))
         EVT_CALL(AddKeyItem, ITEM_CRYSTAL_BALL)
@@ -812,7 +812,7 @@ EvtScript N(EVS_NpcInteract_Merlee) = {
     EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DA)
     EVT_CALL(SetMusicTrack, 0, SONG_MERLEE_SPELL, 0, 8)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_EXEC_GET_TID(N(EVS_PerformRitual), LVar9)
     EVT_LOOP(0)
         EVT_IS_THREAD_RUNNING(LVar9, LVar1)

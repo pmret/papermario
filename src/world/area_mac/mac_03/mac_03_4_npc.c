@@ -1,7 +1,7 @@
 #include "mac_03.h"
 #include "effects.h"
 
-#include "world/common/npc/TrainConductorToad.inc.c"
+#include "world/common/npc/TrainToad.inc.c"
 #include "world/common/npc/Toad_Wander.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
 
@@ -107,21 +107,21 @@ EvtScript N(EVS_ToadKid1_LetterRewardB) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_TrainStationToad_01) = {
+EvtScript N(EVS_NpcInteract_TrainToad_01) = {
     EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-        EVT_CALL(SpeakToPlayer, NPC_TrainStationToad_01, ANIM_TrainStationToad_White_SadTalk, ANIM_TrainStationToad_White_SadIdle, 0, MSG_MAC_Station_0000)
+        EVT_CALL(SpeakToPlayer, NPC_TrainToad_01, ANIM_TrainToad_White_SadTalk, ANIM_TrainToad_White_SadIdle, 0, MSG_MAC_Station_0000)
         EVT_RETURN
     EVT_END_IF
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_RANGE(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
             EVT_IF_EQ(GF_MAC03_ShyGuyChasedOff, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_TrainStationToad_01, ANIM_TrainStationToad_White_SadTalk, ANIM_TrainStationToad_White_SadIdle, 0, MSG_MAC_Station_0007)
+                EVT_CALL(SpeakToPlayer, NPC_TrainToad_01, ANIM_TrainToad_White_SadTalk, ANIM_TrainToad_White_SadIdle, 0, MSG_MAC_Station_0007)
                 EVT_RETURN
             EVT_END_IF
     EVT_END_SWITCH
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, mac_03_ENTRY_1)
-        EVT_CALL(SpeakToPlayer, NPC_TrainStationToad_01, ANIM_TrainStationToad_White_Talk, ANIM_TrainStationToad_White_Idle, 0, MSG_MAC_Station_0006)
+        EVT_CALL(SpeakToPlayer, NPC_TrainToad_01, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, MSG_MAC_Station_0006)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(GF_MAC03_ShyGuyChasedOff, FALSE)
@@ -139,20 +139,20 @@ EvtScript N(EVS_NpcInteract_TrainStationToad_01) = {
             EVT_SET(LVar0, MSG_MAC_Station_0002)
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_TrainStationToad_01, ANIM_TrainStationToad_White_Talk, ANIM_TrainStationToad_White_Idle, 0, LVar0)
+    EVT_CALL(SpeakToPlayer, NPC_TrainToad_01, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, LVar0)
     EVT_CALL(ShowChoice, MSG_Choice_000C)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ContinueSpeech, NPC_TrainStationToad_01, ANIM_TrainStationToad_White_Talk, ANIM_TrainStationToad_White_Idle, 0, MSG_MAC_Station_0003)
+        EVT_CALL(ContinueSpeech, NPC_TrainToad_01, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, MSG_MAC_Station_0003)
         EVT_EXEC(N(EVS_DepartForMtRugged))
     EVT_ELSE
-        EVT_CALL(ContinueSpeech, NPC_TrainStationToad_01, ANIM_TrainStationToad_White_Talk, ANIM_TrainStationToad_White_Idle, 0, MSG_MAC_Station_0004)
+        EVT_CALL(ContinueSpeech, NPC_TrainToad_01, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, MSG_MAC_Station_0004)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_TrainStationToad_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TrainStationToad_01)))
+EvtScript N(EVS_NpcInit_TrainToad_01) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TrainToad_01)))
     EVT_RETURN
     EVT_END
 };
@@ -609,19 +609,19 @@ EvtScript N(EVS_NpcInit_Toad_04) = {
 
 StaticNpc N(NpcData_Toads)[] = {
     {
-        .id = NPC_TrainStationToad_01,
-        .settings = &N(NpcSettings_TrainConductorToad),
+        .id = NPC_TrainToad_01,
+        .settings = &N(NpcSettings_TrainToad),
         .pos = { -370.0f, 20.0f, 90.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_TrainStationToad_01),
+        .init = &N(EVS_NpcInit_TrainToad_01),
         .drops = TRAIN_CONDUCTOR_DROPS,
-        .animations = TRAIN_CONDUCTOR_WHITE_ANIMS,
+        .animations = TRAIN_TOAD_WHITE_ANIMS,
         .tattle = MSG_NpcTattle_MAC_StationMaster,
     },
     {
-        .id = NPC_TrainStationToad_02,
-        .settings = &N(NpcSettings_TrainConductorToad),
+        .id = NPC_TrainToad_02,
+        .settings = &N(NpcSettings_TrainToad),
         .pos = { -424.0f, 74.0f, 2.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,

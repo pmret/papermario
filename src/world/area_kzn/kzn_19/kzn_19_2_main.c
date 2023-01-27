@@ -22,7 +22,7 @@ EvtScript N(EVS_TrySpawningStarCard) = {
         EVT_CASE_DEFAULT
             EVT_RETURN
     EVT_END_SWITCH
-    EVT_IF_EQ(LVar0, 0)
+    EVT_IF_EQ(LVar0, FALSE)
         // card appearing scene
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 185, 110, -30)

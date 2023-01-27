@@ -213,7 +213,7 @@ EvtScript N(EVS_HuffNPuff_AnimateBodyScale) = {
             EVT_CALL(SetNpcScale, NPC_HuffNPuff_01, LVar0, LVar1, 1)
             EVT_CALL(SetNpcScale, NPC_HuffNPuff_02, LVar0, LVar1, 1)
             EVT_CALL(SetNpcScale, NPC_HuffNPuff_03, LVar0, LVar1, 1)
-            EVT_ADDF(LVar0, EVT_FLOAT(0.015625))
+            EVT_ADDF(LVar0, EVT_FLOAT(0.015))
             EVT_SUBF(LVar1, EVT_FLOAT(0.01))
             EVT_WAIT(LVar2)
         EVT_END_LOOP
@@ -222,7 +222,7 @@ EvtScript N(EVS_HuffNPuff_AnimateBodyScale) = {
             EVT_CALL(SetNpcScale, NPC_HuffNPuff_01, LVar0, LVar1, 1)
             EVT_CALL(SetNpcScale, NPC_HuffNPuff_02, LVar0, LVar1, 1)
             EVT_CALL(SetNpcScale, NPC_HuffNPuff_03, LVar0, LVar1, 1)
-            EVT_SUBF(LVar0, EVT_FLOAT(0.015625))
+            EVT_SUBF(LVar0, EVT_FLOAT(0.015))
             EVT_ADDF(LVar1, EVT_FLOAT(0.01))
             EVT_WAIT(LVar2)
         EVT_END_LOOP

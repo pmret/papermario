@@ -348,7 +348,7 @@ EvtScript N(EVS_ParadePhase_ShyGuyFormation) = {
     EVT_CALL(GetNpcPos, NPC_Pratfaller, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -180)
     EVT_CALL(NpcMoveTo, NPC_Pratfaller, LVar0, LVar2, 45)
-    EVT_CALL(func_802CDE68, NPC_Pratfaller, 10)
+    EVT_CALL(SetNpcRotationPivot, NPC_Pratfaller, 10)
     EVT_THREAD
         EVT_SET(LVar0, 0)
         EVT_LOOP(10)
@@ -366,7 +366,7 @@ EvtScript N(EVS_ParadePhase_ShyGuyFormation) = {
     EVT_SET(LVar0, NPC_Pratfaller)
     EVT_EXEC_GET_TID(N(EVS_OffsetNpcScroll), LVarA)
     EVT_WAIT(80)
-    EVT_CALL(func_802CDE68, NPC_Pratfaller, 0)
+    EVT_CALL(SetNpcRotationPivot, NPC_Pratfaller, 0)
     EVT_KILL_THREAD(LVarA)
     EVT_CALL(SetNpcAnimation, NPC_Pratfaller, ANIM_ShyGuy_Red_Anim01)
     EVT_CALL(GetNpcPos, NPC_Pratfaller, LVar0, LVar1, LVar2)

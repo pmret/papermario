@@ -37,7 +37,7 @@ ApiStatus N(func_802A12C4_726224)(Evt* script, s32 isInitialCall) {
 #include "UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x00000091)
+    EVT_SET_CONST(LVarA, ITEM_HUSTLE_DRINK)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(DrinkItem))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Squish)

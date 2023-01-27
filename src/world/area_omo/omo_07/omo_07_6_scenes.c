@@ -59,8 +59,8 @@ EvtScript N(EVS_NpcAux_Kammy) = {
 EvtScript N(EVS_Scene_KammySetAmbush) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(GF_OMO07_SpawnedPeachChoice2, TRUE)
-    EVT_SET(AB_OMO_4, GB_OMO_PeachChoice2)
-    EVT_SWITCH(AB_OMO_4)
+    EVT_SET(AB_OMO_CurrentPeachChoice, GB_OMO_PeachChoice2)
+    EVT_SWITCH(AB_OMO_CurrentPeachChoice)
         EVT_CASE_EQ(0)
             EVT_SET(MV_AmbushID, NPC_Fuzzy)
         EVT_CASE_EQ(1)
@@ -71,7 +71,7 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     EVT_CALL(SetNpcPos, NPC_Kammy, 1000, 15, 0)
     EVT_CALL(SetNpcYaw, NPC_Kammy, 90)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim13)
-    EVT_IF_NE(AB_OMO_4, 2)
+    EVT_IF_NE(AB_OMO_CurrentPeachChoice, 2)
         EVT_CALL(SetNpcPos, MV_AmbushID, NPC_DISPOSE_LOCATION)
     EVT_END_IF
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 1060, 0, 0)
@@ -97,7 +97,7 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     EVT_CALL(PlaySoundAt, SOUND_2098, 0, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, 0, 0, 1, 15, 3, 8)
     EVT_WAIT(5)
-    EVT_IF_NE(AB_OMO_4, 2)
+    EVT_IF_NE(AB_OMO_CurrentPeachChoice, 2)
         EVT_CALL(SetNpcPos, MV_AmbushID, LVar0, 0, 0)
     EVT_ELSE
         EVT_CALL(MakeItemEntity, MV_AmbushID, LVar0, 0, 0, ITEM_SPAWN_MODE_DECORATION, 0)
@@ -106,7 +106,7 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim13)
     EVT_CALL(SetNpcVar, NPC_Kammy, 0, 0)
     EVT_WAIT(5)
-    EVT_IF_NE(AB_OMO_4, 2)
+    EVT_IF_NE(AB_OMO_CurrentPeachChoice, 2)
         EVT_CALL(PlaySoundAtNpc, MV_AmbushID, SOUND_263, 0)
         EVT_CALL(ShowEmote, MV_AmbushID, EMOTE_QUESTION, 0, 20, TRUE, 0, 0, 0, 0)
         EVT_WAIT(5)

@@ -1,15 +1,15 @@
 #include "Toad.h"
 
-#include "world/common/enemy/ai/StationaryAI.inc.c"
+#include "world/common/enemy/ai/GuardAI.inc.c"
 
-StationaryAISettings N(AISettings_Toad_Guard) = {
+GuardAISettings N(AISettings_Toad_Guard) = {
     .playerSearchInterval = -1,
     .chaseRadius = 300.0f,
-    .unk_20 = 30,
+    .unk_AI_20 = 30,
 };
 
 EvtScript N(EVS_NpcAI_Toad_Guard) = {
-    EVT_CALL(N(StationaryAI_Main), EVT_PTR(N(AISettings_Toad_Guard)))
+    EVT_CALL(N(GuardAI_Main), EVT_PTR(N(AISettings_Toad_Guard)))
     EVT_RETURN
     EVT_END
 };

@@ -762,7 +762,7 @@ EvtScript N(healOne) = {
             EVT_SUB(LVar0, 6)
             EVT_ADD(LVar1, 12)
             EVT_SUB(LVar2, 2)
-            EVT_CALL(PlayEffect, 0x33, 7, LVar0, LVar1, LVar2, EVT_FLOAT(0.1201171875), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 7, LVar0, LVar1, LVar2, EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LVar0, 16)
             EVT_ADD(LVar1, 31)
@@ -776,7 +776,7 @@ EvtScript N(healOne) = {
             EVT_SUB(LVar0, 12)
             EVT_ADD(LVar1, 14)
             EVT_SUB(LVar2, 2)
-            EVT_CALL(PlayEffect, 0x33, 7, LVar0, LVar1, LVar2, EVT_FLOAT(0.1201171875), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 7, LVar0, LVar1, LVar2, EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LVar0, 30)
             EVT_ADD(LVar1, 36)
@@ -842,7 +842,7 @@ EvtScript N(healAll) = {
             EVT_SUB(LVar0, 6)
             EVT_ADD(LVar1, 12)
             EVT_SUB(LVar2, 2)
-            EVT_CALL(PlayEffect, 0x33, 7, LVar0, LVar1, LVar2, EVT_FLOAT(0.1201171875), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 7, LVar0, LVar1, LVar2, EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LVar0, 16)
             EVT_ADD(LVar1, 31)
@@ -856,7 +856,7 @@ EvtScript N(healAll) = {
             EVT_SUB(LVar0, 12)
             EVT_ADD(LVar1, 14)
             EVT_SUB(LVar2, 2)
-            EVT_CALL(PlayEffect, 0x33, 7, LVar0, LVar1, LVar2, EVT_FLOAT(0.1201171875), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 7, LVar0, LVar1, LVar2, EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LVar0, 30)
             EVT_ADD(LVar1, 36)
@@ -1513,7 +1513,7 @@ EvtScript N(boostAttack) = {
             EVT_SUB(LVar0, 6)
             EVT_ADD(LVar1, 12)
             EVT_SUB(LVar2, 2)
-            EVT_CALL(PlayEffect, 0x33, 5, LVar0, LVar1, LVar2, EVT_FLOAT(0.1201171875), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 5, LVar0, LVar1, LVar2, EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LVar0, 16)
             EVT_ADD(LVar1, 31)
@@ -1527,7 +1527,7 @@ EvtScript N(boostAttack) = {
             EVT_SUB(LVar0, 12)
             EVT_ADD(LVar1, 14)
             EVT_SUB(LVar2, 2)
-            EVT_CALL(PlayEffect, 0x33, 5, LVar0, LVar1, LVar2, EVT_FLOAT(0.1201171875), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 5, LVar0, LVar1, LVar2, EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LVar0, 30)
             EVT_ADD(LVar1, 36)
@@ -1625,7 +1625,7 @@ EvtScript N(boostDefense) = {
             EVT_SUB(LVar0, 6)
             EVT_ADD(LVar1, 12)
             EVT_SUB(LVar2, 2)
-            EVT_CALL(PlayEffect, 0x33, 5, LVar0, LVar1, LVar2, EVT_FLOAT(0.1201171875), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 5, LVar0, LVar1, LVar2, EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LVar0, 16)
             EVT_ADD(LVar1, 31)
@@ -1639,7 +1639,7 @@ EvtScript N(boostDefense) = {
             EVT_SUB(LVar0, 12)
             EVT_ADD(LVar1, 14)
             EVT_SUB(LVar2, 2)
-            EVT_CALL(PlayEffect, 0x33, 5, LVar0, LVar1, LVar2, EVT_FLOAT(0.1201171875), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 5, LVar0, LVar1, LVar2, EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LVar0, 30)
             EVT_ADD(LVar1, 36)
@@ -1737,7 +1737,7 @@ EvtScript N(electrify) = {
             EVT_SUB(LVar0, 6)
             EVT_ADD(LVar1, 12)
             EVT_SUB(LVar2, 2)
-            EVT_CALL(PlayEffect, 0x57, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.1201171875), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x57, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LVar0, 16)
             EVT_ADD(LVar1, 31)
@@ -1751,7 +1751,7 @@ EvtScript N(electrify) = {
             EVT_SUB(LVar0, 12)
             EVT_ADD(LVar1, 14)
             EVT_SUB(LVar2, 2)
-            EVT_CALL(PlayEffect, 0x57, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.1201171875), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x57, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LVar0, 30)
             EVT_ADD(LVar1, 36)
@@ -1854,7 +1854,7 @@ EvtScript N(vanish) = {
             EVT_SUB(LVar0, 6)
             EVT_ADD(LVar1, 12)
             EVT_SUB(LVar2, 2)
-            EVT_CALL(PlayEffect, 0x33, 6, LVar0, LVar1, LVar2, EVT_FLOAT(0.1201171875), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 6, LVar0, LVar1, LVar2, EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LVar0, 16)
             EVT_ADD(LVar1, 31)
@@ -1868,7 +1868,7 @@ EvtScript N(vanish) = {
             EVT_SUB(LVar0, 12)
             EVT_ADD(LVar1, 14)
             EVT_SUB(LVar2, 2)
-            EVT_CALL(PlayEffect, 0x33, 6, LVar0, LVar1, LVar2, EVT_FLOAT(0.1201171875), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 6, LVar0, LVar1, LVar2, EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LVar0, 30)
             EVT_ADD(LVar1, 36)

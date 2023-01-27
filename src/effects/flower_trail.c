@@ -151,7 +151,7 @@ void flower_trail_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_28;
 
     queuedTaskPtr = shim_queue_render_task(&renderTask);
-    queuedTaskPtr->renderMode |= RENDER_TASK_FLAG_2;
+    queuedTaskPtr->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
 void flower_trail_dispose(EffectInstance* effect) {

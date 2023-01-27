@@ -679,7 +679,7 @@ typedef struct StarsBurstFXData {
 
 typedef struct StarsShimmerFXData {
     /* 0x00 */ s16 unk_00;
-    /* 0x02 */ s16 unk_02;
+    /* 0x02 */ s16 state;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ f32 unk_14;
