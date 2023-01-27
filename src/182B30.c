@@ -2252,7 +2252,7 @@ void func_80259D9C(s32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 
         decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[0][i];
     }
 
-    if (isNpcSprite == 0) {
+    if (isNpcSprite == SPRITE_MODE_PLAYER) {
         func_8025995C(part, yaw, mtx);
     } else {
         func_802596C0(part, yaw, mtx);
@@ -2319,7 +2319,7 @@ void func_8025A2C4(s32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 
         decorationTable->unk_6C8--;
     }
 
-    if (isNpcSprite == 0) {
+    if (isNpcSprite == SPRITE_MODE_PLAYER) {
         func_8025995C(part, yaw, mtx);
     } else {
         func_802596C0(part, yaw, mtx);
@@ -3245,7 +3245,7 @@ void func_8025C918(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
         decor->unk75A = 0;
         decor->unk_751 = 0;
         decor->unk758 = 0;
-        if (isNpcSprite == 0) {
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
             func_802DDFF8(0, 0x11, 0x14, 0, 0, 0xFF, 0);
         } else {
             func_802DE894(part->spriteInstanceID, 0x11, 0x14, 0, 0, 0xFF, 0);
