@@ -1702,7 +1702,7 @@ typedef struct DecorationTable {
     /* 0x7D9 */ s8 unk_7D9;
     /* 0x7DA */ char unk_7DA;
     /* 0x7DB */ s8 unk_7DB;
-    /* 0x7DC */ s16 scale[16];
+    /* 0x7DC */ s16 yaw[16];
     /* 0x7FC */ s16 posX[16];
     /* 0x81C */ s16 posY[16];
     /* 0x83C */ s16 posZ[16];
