@@ -860,7 +860,13 @@ dlabel nuContData
 .space 0x00000018
 
 dlabel gCameras
-.space 0x00002560
+.space 0x00001560
+
+dlabel D_800B32E0
+.space 0x800
+
+dlabel D_800B3AE0
+.space 0x800
 
 dlabel gCollisionData
 .space 4

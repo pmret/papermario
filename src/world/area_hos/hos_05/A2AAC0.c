@@ -1062,6 +1062,7 @@ void func_80243ED0_A2E110(s32 arg0, s32 idx) {
 
 #ifdef SHIFT
 #define TAPE_OFFSET title_tape_ROM_START - title_bg_1_ROM_START
+#define TAPE_OFFSET 0x2A440 // TODO remove this line once the map is split
 #else
 #define TAPE_OFFSET 0x2A440
 #endif
