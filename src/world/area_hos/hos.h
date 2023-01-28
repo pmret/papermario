@@ -20,6 +20,10 @@ enum {
     AB_HOS_Unused_F     = AreaByte(15),
 };
 
+enum {
+    AF_HOS_B6           = AreaFlag(0xB6),
+};
+
 extern MapSettings hos_00_settings;
 extern MapSettings hos_01_settings;
 extern MapSettings hos_02_settings;

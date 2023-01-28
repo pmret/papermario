@@ -76,10 +76,10 @@ s32 N(LetterList)[] = {
     ITEM_NONE
 };
 
-EvtScript N(EVS_Kolorado_LetterDelivery) = {
+EvtScript N(EVS_LetterPrompt_Kolorado) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Kolorado_02, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
-        ITEM_LETTER25, 0,
+        ITEM_LETTER25, ITEM_NONE,
         MSG_CH5_001D, MSG_CH5_001E, MSG_CH5_001F, MSG_CH5_0020,
         EVT_PTR(N(LetterList)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
@@ -87,12 +87,9 @@ EvtScript N(EVS_Kolorado_LetterDelivery) = {
     EVT_END
 };
 
-EvtScript N(EVS_Kolorado_LetterReward) = {
-    EVT_IF_EQ(LVarC, 2)
-        EVT_SET(LVar0, ITEM_STAR_PIECE)
-        EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(GiveKeyReward))
-        EVT_CALL(AddStarPieces, 1)
+EvtScript N(EVS_LetterReward_Kolorado) = {
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+        EVT_GIVE_STAR_PIECE()
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -583,8 +580,8 @@ EvtScript N(EVS_NpcInit_Kolorado_01) = {
 EvtScript N(EVS_NpcInteract_Kolorado_02) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0006)
-    EVT_EXEC_WAIT(N(EVS_Kolorado_LetterDelivery))
-    EVT_EXEC_WAIT(N(EVS_Kolorado_LetterReward))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado))
+    EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
     EVT_RETURN
     EVT_END
 };

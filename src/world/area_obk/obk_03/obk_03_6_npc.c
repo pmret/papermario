@@ -9,7 +9,7 @@ s32 N(LetterList_Igor)[] = {
     ITEM_NONE
 };
 
-EvtScript N(EVS_LetterCheck_Igor) = {
+EvtScript N(EVS_LetterPrompt_Igor) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Igor, ANIM_Boo_Talk, ANIM_Boo_Idle,
         ITEM_LETTER_TO_IGOR, ITEM_NONE,
@@ -21,7 +21,7 @@ EvtScript N(EVS_LetterCheck_Igor) = {
 };
 
 EvtScript N(EVS_LetterReward_Igor) = {
-    EVT_IF_EQ(LVarC, 2)
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
     EVT_END_IF
     EVT_RETURN
@@ -34,7 +34,7 @@ EvtScript N(EVS_NpcInteract_Igor) = {
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_005C)
     EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_LetterCheck_Igor))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Igor))
     EVT_EXEC_WAIT(N(EVS_LetterReward_Igor))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN

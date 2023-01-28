@@ -1670,7 +1670,7 @@ enum ItemIDs {
     ITEM_LETTER03                     = 0x00000038,
     ITEM_LETTER04                     = 0x00000039,
     ITEM_LETTER05                     = 0x0000003A,
-    ITEM_LETTER06                     = 0x0000003B,
+    ITEM_LETTER_TO_MERLOW             = 0x0000003B,
     ITEM_LETTER07                     = 0x0000003C,
     ITEM_LETTER08                     = 0x0000003D,
     ITEM_LETTER_TO_MINHT              = 0x0000003E,

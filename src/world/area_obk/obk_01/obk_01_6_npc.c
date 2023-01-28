@@ -19,7 +19,7 @@ s32 N(LetterList_Franky)[] = {
     ITEM_NONE 
 };
 
-EvtScript N(EVS_LetterCheck_Franky) = {
+EvtScript N(EVS_LetterPrompt_Franky) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Franky, ANIM_Boo_Talk, ANIM_Boo_Idle,
         ITEM_LETTER_TO_FRANKY, ITEM_LETTER20,
@@ -161,7 +161,7 @@ EvtScript N(EVS_NpcInteract_Franky) = {
         EVT_CASE_GE(STORY_CH5_STAR_SPRIT_DEPARTED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0066)
     EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_LetterCheck_Franky))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Franky))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF

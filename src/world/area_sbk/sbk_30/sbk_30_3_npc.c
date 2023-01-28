@@ -45,7 +45,7 @@ EvtScript N(EVS_DeliveryPrompt) = {
 };
 
 EvtScript N(EVS_DeliveryReward) = {
-    EVT_IF_EQ(LVarC, 2)
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
     EVT_END_IF
     EVT_RETURN

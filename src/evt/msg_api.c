@@ -332,7 +332,7 @@ ApiStatus func_802D0C94(Evt* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetMessageMsg(Evt* script, s32 isInitialCall) {
+ApiStatus SetMessageText(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 msg = evt_get_variable(script, *args++);
     s32 index = evt_get_variable(script, *args++);

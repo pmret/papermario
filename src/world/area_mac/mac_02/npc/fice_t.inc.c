@@ -3,7 +3,7 @@ s32 N(LetterList_FiceT)[] = {
     ITEM_NONE
 };
 
-EvtScript N(D_8024A8C8_82DB88) = {
+EvtScript N(EVS_LetterPrompt_FiceT) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_FiceT, ANIM_FiceT_Talk, ANIM_FiceT_Idle,
         ITEM_LETTER07, ITEM_NONE,
@@ -14,8 +14,8 @@ EvtScript N(D_8024A8C8_82DB88) = {
     EVT_END
 };
 
-EvtScript N(D_8024A918_82DBD8) = {
-    EVT_IF_EQ(LVarC, 2)
+EvtScript N(EVS_LetterReward_FiceT) = {
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
         EVT_CALL(SpeakToPlayer, NPC_FiceT, ANIM_FiceT_Talk, ANIM_FiceT_Idle, 0, MSG_MAC_Bridge_0039)
         EVT_CALL(SetNpcAnimation, NPC_FiceT, ANIM_FiceT_Afraid)
         EVT_CALL(EndSpeech, NPC_FiceT, ANIM_FiceT_Afraid, ANIM_FiceT_Afraid, 0)
@@ -61,9 +61,9 @@ EvtScript N(EVS_NpcInteract_FiceT) = {
             EVT_CALL(SpeakToPlayer, NPC_FiceT, ANIM_FiceT_Afraid, ANIM_FiceT_Afraid, 0, LVar0)
         EVT_END_IF
     EVT_END_IF
-    EVT_EXEC_WAIT(N(D_8024A8C8_82DB88))
-    EVT_EXEC_WAIT(N(D_8024A918_82DBD8))
-    EVT_IF_NE(LVarC, 0)
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_FiceT))
+    EVT_EXEC_WAIT(N(EVS_LetterReward_FiceT))
+    EVT_IF_NE(LVarC, DELIVERY_NOT_POSSIBLE)
         EVT_RETURN
     EVT_END_IF
     EVT_RETURN

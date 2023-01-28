@@ -60,7 +60,7 @@ EvtScript N(EVS_LetterPrompt_Merlon) = {
 };
 
 EvtScript N(EVS_LetterReward_Merlon) = {
-    EVT_IF_EQ(LVarC, 2)
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
         EVT_CALL(InterpNpcYaw, NPC_Merlon, 135, 0)
     EVT_END_IF
@@ -85,7 +85,7 @@ EvtScript N(EVS_LetterPrompt_MinhT) = {
 };
 
 EvtScript N(EVS_LetterReward_MinhT) = {
-    EVT_IF_EQ(LVarC, 2)
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
     EVT_END_IF
     EVT_RETURN
@@ -109,7 +109,7 @@ EvtScript N(EVS_LetterPrompt_Kolorado) = {
 };
 
 EvtScript N(EVS_LetterReward_Kolorado) = {
-    EVT_IF_EQ(LVarC, 2)
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
     EVT_END_IF
     EVT_RETURN

@@ -66,7 +66,7 @@ s32 N(LetterList)[] = {
     ITEM_NONE
 };
 
-EvtScript N(EVS_MrE_LetterPrompt) = {
+EvtScript N(EVS_LetterPrompt_MrE) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Dryite_01, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle,
         ITEM_LETTER17, ITEM_LETTER18,
@@ -124,7 +124,7 @@ EvtScript N(EVS_NpcInteract_MrE) = {
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0094)
     EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_MrE_LetterPrompt))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_MrE))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF

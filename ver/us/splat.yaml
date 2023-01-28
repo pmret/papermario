@@ -11023,16 +11023,14 @@ segments:
     start: 0xA394E0
     vram: 0x80240000
     subsegments:
-    - [0xA394E0, c]
-    - [0xA397F0, c]
-    - [0xA3A210, c]
-    - [0xA3A230, c]
-    - [0xA3B4B0, c]
-    - [0xA3BA40, data]
-    - [0xA3BAE0, data]
-    - [0xA3C090, data]
-    - [0xA3DAB0, data]
-    - [0xA3F730]
+    - [0xA394E0, c, hos_06_0_header]
+    - [0xA394E0, c, hos_06_1_entity]
+    - [0xA394E0, c, hos_06_2_main]
+    - [0xA397F0, c, hos_06_3_merlow]
+    - [0xA3A210, c, hos_06_4_rooms]
+    - [0xA3A230, c, hos_06_5_merluvlee]
+    - [0xA3B4B0, c, hos_06_6_chest]
+    - [0xA3BA40]
   - name: hos_10
     dir: world/area_hos/hos_10
     type: code

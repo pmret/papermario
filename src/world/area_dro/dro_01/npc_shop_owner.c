@@ -96,16 +96,16 @@ EvtScript N(EVS_NpcInteract_ShopOwner) = {
     EVT_IF_EQ(AB_DRO_SHOP_PREV1, 4)
         EVT_IF_EQ(AB_DRO_SHOP_PREV2, 1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle, 0, MSG_CH2_0088)
-            EVT_EXEC_WAIT(N(EVS_ShopOwner_LetterDelivery))
-            EVT_IF_NE(LVarC, 0)
+            EVT_EXEC_WAIT(N(EVS_LetterPrompt_ShopOwner))
+            EVT_IF_NE(LVarC, DELIVERY_NOT_POSSIBLE)
                 EVT_RETURN
             EVT_END_IF
             EVT_RETURN
         EVT_END_IF
     EVT_END_IF
     EVT_EXEC_WAIT(ItemShopInteract)
-    EVT_EXEC_WAIT(N(EVS_ShopOwner_LetterDelivery))
-    EVT_IF_NE(LVarC, 0)
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_ShopOwner))
+    EVT_IF_NE(LVarC, DELIVERY_NOT_POSSIBLE)
         EVT_RETURN
     EVT_END_IF
     EVT_RETURN
