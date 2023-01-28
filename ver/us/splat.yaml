@@ -234,7 +234,7 @@ segments:
     - [0x44B40, c, os/contpfs, gcc_272 -O3]
     - [0x455D0, c, os/contramread, gcc_272 -O3]
     - [0x457C0, c, os/contramwrite, gcc_272 -O3]
-    - [0x459D0, hasm, os/parameters] # Needs actual symbols added
+    - [0x459D0, hasm, os/parameters]
     - [0x45A30, c, os/afterprenmi, gcc_272 -O3]
     - [0x45A50, c, os/initialize, gcc_272 -O3]
     - [0x45DF0, hasm, os/exceptasm]
@@ -3495,7 +3495,7 @@ segments:
       - [0x354468, vtx, D_090008B8_354468]
       - [0x3544A8, gfx, D_090008F8_3544A8]
       - [0x3544C8, gfx, D_09000918_3544C8]
-      - [0x354590, gfx, D_090009E0_354590]
+      - [0x354590]
   - name: effect_stars_burst
     dir: effects
     type: code

@@ -5,6 +5,11 @@
 
 extern s32 obfuscated_battle_heap_create[];
 
+#ifdef SHIFT
+void func_802AE000(void) {
+    battle_heap_create();
+}
+#else
 void func_802AE000(void) {
     s32(*readFunc)(OSPiHandle*, u32, u32*) = osEPiReadIo;
     s32 seed = 0x33F50000;
@@ -41,8 +46,9 @@ void func_802AE000(void) {
 
     // If the function's address is 0x8XXXXXXX
     if (((u32)battle_heap_create >> 0x1C) == 8) {
-        (battle_heap_create)();
+        battle_heap_create();
     } else {
         _heap_create(&heap_battleHead, 0x10000);
     }
 }
+#endif

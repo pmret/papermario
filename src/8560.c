@@ -3,14 +3,19 @@
 #include "ld_addrs.h"
 #include "mips.h"
 
-extern s8 D_F79DDD0F[];
-extern s8 D_7599F6D8[];
+extern s8 obfuscated__316F30_ROM_START[];
+extern s8 obfuscated__316F30_VRAM[];
 
+#ifdef SHIFT
+void func_8002D160(void) {
+    dma_copy(_316F30_ROM_START, _316F30_ROM_END, _316F30_VRAM);
+}
+#else
 void func_8002D160(void) {
     s32 (*readFunc)(OSPiHandle*, u32, u32*);
     s32 (*readFunc2)(OSPiHandle*, u32, u32*);
-    s8* vramDest = D_7599F6D8;
-    s8* romStart = D_F79DDD0F;
+    s8* vramDest = obfuscated__316F30_VRAM;
+    s8* romStart = obfuscated__316F30_ROM_START;
     s32 seed;
     u32 hash;
     u32 thisInsn;
@@ -73,3 +78,4 @@ void func_8002D160(void) {
 
     dma_copy(romStart, _316F30_ROM_END, vramDest);
 }
+#endif

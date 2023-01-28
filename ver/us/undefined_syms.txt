@@ -3,12 +3,8 @@ obfuscated_battle_heap_create = battle_heap_create - 0xFEFFFFF;
 obfuscated_general_heap_create = general_heap_create - 0xFEFEFEF;
 obfuscated_load_engine_data = load_engine_data - 0x315;
 obfuscated_create_audio_system = create_audio_system - 0x7B;
-D_7599F6D8 = _316F30_VRAM - 0xA912928;
-D_F79DDD0F = _316F30_ROM_START - 0x8939221;
-
-// effect_flame
-D_000B32E0 = 0x000B32E0; // todo look into
-D_000B3AE0 = 0x000B3AE0; // todo look into
+obfuscated__316F30_VRAM = _316F30_VRAM - 0xA912928;
+obfuscated__316F30_ROM_START = _316F30_ROM_START - 0x8939221;
 
 // hacks for various things
 fx_sun_undeclared = fx_sun;
@@ -79,13 +75,6 @@ nok_02_Quizmo_Worker = 0x802549A0;
 nok_02_Quizmo_StageEffect = 0x802549C0;
 nok_02_Quizmo_AudienceEffect = 0x802549C4;
 nok_02_Quizmo_VannaTEffect = 0x802549C8;
-
-// os stuff
-osTvType = 0x80000300;
-osRomBase = 0x80000308;
-osMemSize = 0x80000318;
-osResetType = 0x8000030C;
-osAppNMIBuffer = 0x8000031C;
 
 // boot
 D_A0000000 = 0xA0000000;
