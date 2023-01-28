@@ -68,7 +68,7 @@ EvtScript N(EVS_ExitWalk_kmr_10_0) = {
     EVT_END
 };
 
-MAP_RODATA_PAD(1,exits)
+MAP_RODATA_PAD(1,exits);
 
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kmr_12_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)

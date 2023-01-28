@@ -2,12 +2,7 @@
 
 #include "common/foliage.inc.c"
 
-FoliageModelList N(Bush1_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o182,
-    }
-};
+FoliageModelList N(Bush1_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o182);
 
 FoliageDropList N(Bush1_Drops) = {
     .count = 1, 
@@ -26,34 +21,19 @@ SearchBushConfig N(SearchBush_Bush1) = {
     .drops = &N(Bush1_Drops),
 };
 
-FoliageModelList N(Bush2_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o183,
-    }
-};
+FoliageModelList N(Bush2_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o183);
 
 SearchBushConfig N(SearchBush_Bush2) = {
     .bush = &N(Bush2_BushModels),
 };
 
-FoliageModelList N(Bush3_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o184,
-    }
-};
+FoliageModelList N(Bush3_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o184);
 
 SearchBushConfig N(SearchBush_Bush3) = {
     .bush = &N(Bush3_BushModels),
 };
 
-FoliageModelList N(Bush4_BushModels) = {
-    .count = 1,
-    .models = {
-        MODEL_o185,
-    }
-};
+FoliageModelList N(Bush4_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o185);
 
 SearchBushConfig N(SearchBush_Bush4) = {
     .bush = &N(Bush4_BushModels),

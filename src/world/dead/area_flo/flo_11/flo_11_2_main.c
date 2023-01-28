@@ -1,7 +1,7 @@
 #include "flo_11.h"
 #include "effects.h"
 
-#include "world/common/atomic/flo_FlowerSpawnRegion.inc.c"
+#include "world/area_flo/common/FlowerSpawnRegion.inc.c"
 
 #include "world/common/entity/Pipe.inc.c"
 #include "world/common/entity/Pipe.data.inc.c"

@@ -6,7 +6,7 @@
 #include "world/common/todo/clouds.inc.c"
 
 EvtScript N(beforeBattle_80220A28) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(EnableModel, 27, 0)
     EVT_RETURN
     EVT_END

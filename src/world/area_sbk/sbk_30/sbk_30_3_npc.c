@@ -26,7 +26,7 @@ NpcSettings N(NpcSettings_Archeologist_01) = {
 MAP_STATIC_PAD(1,normal_item);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
-#include "world/common/atomic/LetterChoice.inc.c"
+#include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER25,

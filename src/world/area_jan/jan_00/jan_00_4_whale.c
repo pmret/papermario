@@ -239,7 +239,7 @@ EvtScript N(EVS_802467AC) = {
         EVT_CALL(TranslateModel, MODEL_o167, LVar0, LVar1, LVar2)
         EVT_CALL(TranslateModel, MODEL_o168, LVar0, LVar1, LVar2)
         EVT_CALL(TranslateGroup, MODEL_dou, LVar0, LVar1, LVar2)
-        EVT_CALL(GetNpcYaw, NPC_Kolorado_01, LVar0)
+        EVT_CALL(GetNpcYaw, NPC_Whale, LVar0)
         EVT_MULF(LVar0, -1)
         EVT_ADDF(LVar0, -90)
         EVT_CALL(TranslateModel, MODEL_bero, -100, 0, 0)
@@ -275,7 +275,7 @@ EvtScript N(EVS_802467AC) = {
         EVT_CALL(TranslateModel, MODEL_o167, 100, 0, 0)
         EVT_CALL(TranslateModel, MODEL_o168, 100, 0, 0)
         EVT_CALL(TranslateGroup, MODEL_dou, 100, 0, 0)
-        EVT_CALL(GetNpcAnimation, NPC_Kolorado_01, LVar0)
+        EVT_CALL(GetNpcAnimation, NPC_Whale, LVar0)
         EVT_IF_NE(LVar0, LVarB)
             EVT_SET(LVarB, LVar0)
             EVT_SET(LVarC, 0)
@@ -326,7 +326,7 @@ EvtScript N(EVS_802467AC) = {
 };
 
 EvtScript N(EVS_80247040) = {
-    EVT_CALL(SetNpcAnimation, NPC_Kolorado_01, ANIM_Kolorado_IdleSad)
+    EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_IdleSad)
     EVT_RETURN
     EVT_END
 };

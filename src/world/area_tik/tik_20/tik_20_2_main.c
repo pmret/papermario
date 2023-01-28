@@ -32,7 +32,7 @@ LavaReset N(SafeFloorColliders)[] = {
     { .colliderID = -1 }
 };
 
-#include "world/common/atomic/tik_DripVolumes.inc.c"
+#include "../common/DripVolumes.inc.c"
 
 DripVolumeList N(DripVolumes) = {
     .count = 2,
@@ -63,9 +63,9 @@ EvtScript N(EVS_SetupDrips) = {
     EVT_END
 };
 
-MAP_RODATA_PAD(1,unk)
+MAP_RODATA_PAD(1,unk);
 
-#include "world/common/atomic/tik_Flotsam.inc.c"
+#include "../common/Flotsam.inc.c"
 
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_TOAD_TOWN_TUNNELS)

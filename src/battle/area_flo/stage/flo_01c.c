@@ -62,7 +62,7 @@ EvtScript N(802319F0) = {
 #include "common/MakeSun.inc.c"
 
 EvtScript N(beforeBattle) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_CALL(SetGroupEnabled, 37, 0)
     EVT_CALL(SetGroupEnabled, 28, 0)

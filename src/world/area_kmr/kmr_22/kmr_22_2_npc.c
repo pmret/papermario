@@ -4,7 +4,7 @@
 #include "world/common/npc/KoopaBros.h"
 #include "world/common/enemy/complete/ShyGuy.h"
 
-MAP_RODATA_PAD(1,npc)
+MAP_RODATA_PAD(1,npc);
 
 NpcSettings N(NpcSettings_Dummy) = {
     .height = 24,

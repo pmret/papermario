@@ -306,15 +306,8 @@ EvtScript N(EVS_ShakeTree) = {
     EVT_END
 };
 
-FoliageModelList N(tree_leaves) = {
-    .count = 2,
-    .models = { 33, 36 }
-};
-
-FoliageModelList N(tree_trunk) = {
-    .count = 3,
-    .models = { 38, 39, 40 }
-};
+FoliageModelList N(tree_leaves) = FOLIAGE_MODEL_LIST(33, 36 );
+FoliageModelList N(tree_trunk) = FOLIAGE_MODEL_LIST(38, 39, 40 );
 
 FoliageVectorList N(D_80223D60_41D7F0) = {
     .count = 2,

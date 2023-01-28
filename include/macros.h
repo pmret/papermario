@@ -37,7 +37,7 @@
 
 // standardized padding macros for map overlays
 #define MAP_RODATA_PAD(n,name) const s32 N(rodata_pad_##name)[n] = {};
-#define MAP_STATIC_PAD(n,name) static s32 N(static_pad_##name)[n];
+#define MAP_STATIC_PAD(n,name) BSS s32 N(static_pad_##name)[n];
 
 // standardized macro for reseting data section after a INCLUDE_ASM
 //TODO these should all be removed after map decomp is done
@@ -182,5 +182,11 @@
 #define AI_PROJECTILE_AMMO_COUNT varTable[3]
 
 #define INTEGER_LOG2(x) ((x) <= 2 ? 1 : (x) <= 4 ? 2 : (x) <= 8 ? 3 : (x) <= 16 ? 4 : (x) <= 32 ? 5 : (x) <= 64 ? 6 : (x) <= 128 ? 7 : (x) <= 256 ? 8 : (x) <= 512 ? 9 : 10)
+
+#define FOLIAGE_MODEL_LIST(names...) \
+{ \
+    .count = __NARG__(names), \
+    .models = {  names } \
+}
 
 #endif

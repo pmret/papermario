@@ -6,7 +6,7 @@
 #define NAMESPACE b_area_dig_dig_02
 
 EvtScript N(beforeBattle) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetGroupEnabled, MODEL_a, FALSE)
     EVT_RETURN
     EVT_END

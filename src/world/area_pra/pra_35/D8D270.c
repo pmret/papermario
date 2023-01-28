@@ -1,6 +1,6 @@
 #include "pra_35.h"
 
-#include "world/common/atomic/Reflection.inc.c"
+#include "../common/Reflection.inc.c"
 
 #include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
 

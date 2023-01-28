@@ -1,8 +1,8 @@
 #include "mim_02.h"
 
-#include "../gates/support.inc.c"
+#include "../common/SupportGates.inc.c"
 
-#include "../gates/animate.inc.c"
+#include "../common/AnimateGates.inc.c"
 
 EvtScript N(EVS_UseGate_North) = {
     EVT_CALL(DisablePlayerInput, TRUE)

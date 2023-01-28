@@ -231,7 +231,7 @@ API_CALLABLE(N(func_80242C78_854DE8)) {
             partner->flags |= NPC_FLAG_DIRTY_SHADOW;
             break;
         case 2:
-            npc1 = get_npc_safe(1);
+            npc1 = get_npc_safe(NPC_Kolorado);
             npc1->pos.x = x;
             npc1->pos.y = y;
             npc1->pos.z = z;
@@ -247,7 +247,7 @@ API_CALLABLE(N(func_80242C78_854DE8)) {
 
 API_CALLABLE(N(func_80242E84_854FF4)) {
     Bytecode* args = script->ptrReadPos;
-    Npc* npc = get_npc_safe(0);
+    Npc* npc = get_npc_safe(NPC_Whale);
 
     if (isInitialCall) {
         script->functionTemp[0] = evt_get_variable(script, *args++);
@@ -1181,7 +1181,7 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
 };
 
 API_CALLABLE(N(func_802431B0_855320)) {
-    Npc* npc = get_npc_safe(4);
+    Npc* npc = get_npc_safe(NPC_JrTroopa_01);
     f32 x = npc->pos.x + 20.0f;
     f32 y = npc->pos.y;
     f32 z = npc->pos.z - 15.0f;

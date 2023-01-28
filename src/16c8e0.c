@@ -1132,9 +1132,9 @@ void btl_delete_actor(Actor* actor) {
         }
 
         if (partsTable->idleAnimations != NULL) {
-            func_802DE894(partsTable->unk_84, 0, 0, 0, 0, 0, 0);
+            func_802DE894(partsTable->spriteInstanceID, 0, 0, 0, 0, 0, 0);
 
-            ASSERT(spr_free_sprite(partsTable->unk_84) == 0);
+            ASSERT(spr_free_sprite(partsTable->spriteInstanceID) == 0);
 
             if (!(partsTable->flags & 0x80000000)) {
                 heap_free(partsTable->movement);

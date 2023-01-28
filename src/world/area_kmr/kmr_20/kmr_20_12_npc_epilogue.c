@@ -329,4 +329,4 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     EVT_END
 };
 
-MAP_RODATA_PAD(1,unk)
+MAP_RODATA_PAD(1,unk);

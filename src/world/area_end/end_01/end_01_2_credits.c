@@ -1,6 +1,6 @@
 #include "end_01.h"
 
-#include "world/common/atomic/Credits.inc.c"
+#include "../common/Credits.inc.c"
 
 #include "credits_jobs.inc.c"
 #include "credits_names.inc.c"

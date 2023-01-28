@@ -58,7 +58,7 @@ SearchBushConfig N(SearchBush_Bush3) = {
     .vectors = &N(Bush3_Effects),
 };
 
-FoliageModelList N(Tree1_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_midori);
+FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_midori);
 FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_kiki);
 
 FoliageDropList N(Tree1_Drops) = {

@@ -1,6 +1,6 @@
 #include "tik_05.h"
 
-#include "world/common/atomic/tik_DripVolumes.inc.c"
+#include "../common/DripVolumes.inc.c"
 
 DripVolumeList N(DripVolumes) = {
     .count = 1,

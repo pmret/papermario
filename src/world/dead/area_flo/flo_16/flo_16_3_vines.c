@@ -1,8 +1,8 @@
 #include "flo_16.h"
 #include "entity.h"
 
-#include "world/common/atomic/flo_FlowerSpawnRegion.inc.c"
-#include "world/common/atomic/flo_DroppingVine.inc.c"
+#include "world/area_flo/common/FlowerSpawnRegion.inc.c"
+#include "world/area_flo/common/DroppingVine.inc.c"
 
 EvtScript N(EVS_SetupVines) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o214, SURFACE_TYPE_FLOWERS)

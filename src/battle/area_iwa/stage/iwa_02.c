@@ -9,7 +9,7 @@
 extern ActorBlueprint N(whacka);
 
 EvtScript N(beforeBattle_80221590) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_RETURN
     EVT_END
 };

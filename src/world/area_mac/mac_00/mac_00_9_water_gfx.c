@@ -1,7 +1,7 @@
 #include "mac_00.h"
 #include "model.h"
 
-MAP_RODATA_PAD(1,unk)
+MAP_RODATA_PAD(1,unk);
 
 void N(gfx_build_water)(void) {
     Model* model;

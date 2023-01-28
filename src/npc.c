@@ -583,7 +583,7 @@ void update_npcs(void) {
                             }
                         }
                     } else {
-                        spr_update_player_sprite(1, npc->currentAnim, npc->animationSpeed);
+                        spr_update_player_sprite(PLAYER_SPRITE_AUX1, npc->currentAnim, npc->animationSpeed);
                     }
 
                     if (npc->flags & NPC_FLAG_HAS_SHADOW) {
@@ -805,7 +805,7 @@ void appendGfx_npc(void* data) {
                 spr_draw_npc_sprite(npc->spriteInstanceID, renderYaw, 0, 0, mtx1);
             }
         } else {
-            spr_draw_player_sprite(1 | DRAW_SPRITE_OVERRIDE_YAW, renderYaw, 0, 0, mtx1);
+            spr_draw_player_sprite(PLAYER_SPRITE_AUX1 | DRAW_SPRITE_OVERRIDE_YAW, renderYaw, 0, 0, mtx1);
         }
     }
 
@@ -835,7 +835,7 @@ void appendGfx_npc(void* data) {
                 spr_draw_npc_sprite(npc->spriteInstanceID, renderYaw, 0, 0, mtx1);
             }
         } else {
-            spr_draw_player_sprite(1 | DRAW_SPRITE_OVERRIDE_YAW, renderYaw, 0, 0, mtx1);
+            spr_draw_player_sprite(PLAYER_SPRITE_AUX1 | DRAW_SPRITE_OVERRIDE_YAW, renderYaw, 0, 0, mtx1);
         }
     }
     npc->onRender(npc);
@@ -1096,7 +1096,7 @@ void appendGfx_npc_blur(void* data) {
                     spr_draw_npc_sprite(npc->spriteInstanceID, (s32) yaw, 0, 0, sp20);
                 }
             } else {
-                spr_draw_player_sprite(1 | DRAW_SPRITE_OVERRIDE_YAW, (s32) yaw, 0, 0, sp20);
+                spr_draw_player_sprite(PLAYER_SPRITE_AUX1 | DRAW_SPRITE_OVERRIDE_YAW, (s32) yaw, 0, 0, sp20);
             }
         }
     }
@@ -1245,7 +1245,7 @@ void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, Matrix4f mtx) {
         }
         spr_draw_npc_sprite(npc->spriteInstanceID | mask, arg1, alpha, NULL, mtx);
     } else {
-        spr_draw_player_sprite(1 | DRAW_SPRITE_OVERRIDE_YAW, arg1, 0, 0, mtx);
+        spr_draw_player_sprite(PLAYER_SPRITE_AUX1 | DRAW_SPRITE_OVERRIDE_YAW, arg1, 0, 0, mtx);
     }
 }
 

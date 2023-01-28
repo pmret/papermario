@@ -1,6 +1,6 @@
 #include "mim_09.h"
 
-#include "../gates/support.inc.c"
-#include "../gates/animate.inc.c"
-#include "../gates/use.inc.c"
-#include "../gates/setup.inc.c"
+#include "../common/SupportGates.inc.c"
+#include "../common/AnimateGates.inc.c"
+#include "../common/UseGates.inc.c"
+#include "../common/SetupGates.inc.c"

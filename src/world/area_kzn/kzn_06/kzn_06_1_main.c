@@ -15,7 +15,7 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_END
 };
 
-MAP_RODATA_PAD(1, unk) // can be fixed with subalign 16 for this map
+MAP_RODATA_PAD(1, unk); // can be fixed with subalign 16 for this map
 
 EvtScript N(EVS_StartTexPanners) = {
     EVT_SET_GROUP(EVT_GROUP_00)

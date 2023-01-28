@@ -29,7 +29,7 @@ EvtScript N(updateModels) = {
 };
 
 EvtScript N(beforeBattle) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SET(LVar0, MODEL_g60)
     EVT_SET(LVar1, 0)
     EVT_EXEC(N(updateModels))

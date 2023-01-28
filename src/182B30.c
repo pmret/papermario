@@ -115,7 +115,7 @@ void enable_actor_blur(Actor* actor) {
                 decorationTable->posX[j] = partsTable->currentPos.x;
                 decorationTable->posY[j] = partsTable->currentPos.y;
                 decorationTable->posZ[j] = partsTable->currentPos.z;
-                decorationTable->scale[j] = actor->yaw;
+                decorationTable->yaw[j] = actor->yaw;
                 decorationTable->rotationPivotOffsetX[j] = (s32)(actor->rotationPivotOffset.x * actor->scalingFactor);
                 decorationTable->rotationPivotOffsetY[j] = (s32)(actor->rotationPivotOffset.y * actor->scalingFactor);
 
@@ -202,7 +202,7 @@ void enable_player_blur(void) {
         decorationTable->posX[i] = partsTable->currentPos.x;
         decorationTable->posY[i] = partsTable->currentPos.y;
         decorationTable->posZ[i] = partsTable->currentPos.z;
-        decorationTable->scale[i] = playerActor->yaw;
+        decorationTable->yaw[i] = playerActor->yaw;
         decorationTable->rotationPivotOffsetX[i] = playerActor->rotationPivotOffset.x * playerActor->scalingFactor;
         decorationTable->rotationPivotOffsetY[i] = playerActor->rotationPivotOffset.y * playerActor->scalingFactor;
 
@@ -262,10 +262,10 @@ void func_802549F4(Actor* actor) {
         decorationTable->posX[i] = partsTable->currentPos.x;
         decorationTable->posY[i] = partsTable->currentPos.y;
         decorationTable->posZ[i] = partsTable->currentPos.z;
-        decorationTable->scale[i] = actor->yaw;
+        decorationTable->yaw[i] = actor->yaw;
 
-        decorationTable->rotationPivotOffsetX[i] = (s32)(actor->rotationPivotOffset.x * actor->scalingFactor);
-        decorationTable->rotationPivotOffsetY[i] = (s32)(actor->rotationPivotOffset.y * actor->scalingFactor);
+        decorationTable->rotationPivotOffsetX[i] = actor->rotationPivotOffset.x * actor->scalingFactor;
+        decorationTable->rotationPivotOffsetY[i] = actor->rotationPivotOffset.y * actor->scalingFactor;
 
         decorationTable->rotX[i] = clamp_angle(actor->rotation.x) * 0.5f;
         decorationTable->rotY[i] = clamp_angle(actor->rotation.y) * 0.5f;
@@ -286,7 +286,7 @@ void appendGfx_player_actor_blur(Actor* actor) {
     Matrix4f mtxTransform, mtxTemp;
     s32 delay;
     s32 num;
-    s32 scale;
+    s32 yaw;
     ActorPart* partTable;
     DecorationTable* decorationTable;
     f32 rotX, rotY, rotZ;
@@ -336,7 +336,7 @@ void appendGfx_player_actor_blur(Actor* actor) {
                 y = decorationTable->posY[bufPos];
                 z = decorationTable->posZ[bufPos];
 
-                scale = decorationTable->scale[bufPos];
+                yaw = decorationTable->yaw[bufPos];
 
                 pivotOffsetX = decorationTable->rotationPivotOffsetX[bufPos];
                 pivotOffsetY = decorationTable->rotationPivotOffsetY[bufPos];
@@ -375,7 +375,7 @@ void appendGfx_player_actor_blur(Actor* actor) {
                 guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
                 prevOpacity = partTable->opacity;
                 partTable->opacity = newOpacityBase - (num * newOpacityModulus);
-                func_802591EC(0, partTable, clamp_angle(scale + 180), mtxTransform, 1);
+                func_802591EC(0, partTable, clamp_angle(yaw + 180), mtxTransform, 1);
                 partTable->opacity = prevOpacity;
             }
         }
@@ -398,7 +398,7 @@ void func_802550BC(s32 arg0, Actor* actor) {
             decorationTable->posX[j] = partsTable->currentPos.x;
             decorationTable->posY[j] = partsTable->currentPos.y;
             decorationTable->posZ[j] = partsTable->currentPos.z;
-            decorationTable->scale[j] = actor->yaw;
+            decorationTable->yaw[j] = actor->yaw;
 
             decorationTable->rotationPivotOffsetX[j] = actor->rotationPivotOffset.x;
             decorationTable->rotationPivotOffsetY[j] = actor->rotationPivotOffset.y;
@@ -428,7 +428,7 @@ void func_802552EC(s32 arg0, Actor* actor) {
     s32 i, j, k, l;
     f32 x, y, z;
     f32 rotX, rotY, rotZ;
-    s32 scale;
+    s32 yaw;
     s32 opacity;
     s32 pivotX;
     s32 pivotY;
@@ -507,7 +507,7 @@ void func_802552EC(s32 arg0, Actor* actor) {
             y = decorationTable->posY[j];
             z = decorationTable->posZ[j];
 
-            scale = decorationTable->scale[j];
+            yaw = decorationTable->yaw[j];
 
             pivotX = decorationTable->rotationPivotOffsetX[j];
             pivotY = decorationTable->rotationPivotOffsetY[j];
@@ -558,9 +558,9 @@ void func_802552EC(s32 arg0, Actor* actor) {
             flags = ACTOR_PART_FLAG_80000000;
             temp = phi_fp - l * phi_s6;
             if (arg0 == 0) {
-                spr_draw_npc_sprite(partTable->unk_84 | flags, scale, temp, 0, mtxTransform);
+                spr_draw_npc_sprite(partTable->spriteInstanceID | flags, yaw, temp, 0, mtxTransform);
             } else {
-                spr_draw_npc_sprite(partTable->unk_84 | flags, clamp_angle(scale + 0xB4), temp, 0, mtxTransform);
+                spr_draw_npc_sprite(partTable->spriteInstanceID | flags, clamp_angle(yaw + 180), temp, 0, mtxTransform);
             }
         }
     }
@@ -623,10 +623,10 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
 
             for (i = 0; i < numParts; i++) {
                 if (!(actorPart->flags & ACTOR_PART_FLAG_INVISIBLE) && actorPart->idleAnimations != NULL) {
-                    spriteID = actorPart->unk_84;
+                    spriteID = actorPart->spriteInstanceID;
                     if (spriteID >= 0) {
                         spr_update_sprite(spriteID, actorPart->currentAnimation, actorPart->animationRate);
-                        actorPart->animNotifyValue = spr_get_notify_value(actorPart->unk_84);
+                        actorPart->animNotifyValue = spr_get_notify_value(actorPart->spriteInstanceID);
                     }
 
                     if (!(actorPart->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
@@ -903,7 +903,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
                 do {
                     if (actor->koStatus == 0) {
                         part->currentAnimation = func_80265CE8(part->idleAnimations, STATUS_TURN_DONE);
-                        spr_update_sprite(part->unk_84, part->currentAnimation, part->animationRate);
+                        spr_update_sprite(part->spriteInstanceID, part->currentAnimation, part->animationRate);
                         animChanged = TRUE;
                     }
                 } while (0); // required to match
@@ -1062,10 +1062,10 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
             enable_status_transparent(actor->hudElementDataIndex);
             enable_status_chill_out(actor->hudElementDataIndex);
         }
-        if (part->unk_84 >= 0) {
+        if (part->spriteInstanceID >= 0) {
             if (lastAnim != part->currentAnimation) {
-                spr_update_sprite(part->unk_84, part->currentAnimation, part->animationRate);
-                part->animNotifyValue = spr_get_notify_value(part->unk_84);
+                spr_update_sprite(part->spriteInstanceID, part->currentAnimation, part->animationRate);
+                part->animNotifyValue = spr_get_notify_value(part->spriteInstanceID);
             }
         }
         if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
@@ -1112,7 +1112,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         part->currentPos.y = partPosY + part->unkOffset[1];
         part->currentPos.z = partPosZ;
 
-        if (part->unk_84 >= 0) {
+        if (part->spriteInstanceID >= 0) {
             if (!isPartner) {
                 func_8025C840(1, part, partYaw, 0);
                 func_8025CCC8(1, part, partYaw, 0);
@@ -1301,7 +1301,7 @@ void update_player_actor_shadow(void) {
     Shadow* shadow;
     f32 x, y, z, distance;
 
-    parts->animNotifyValue = spr_update_player_sprite(0, parts->currentAnimation, parts->animationRate);
+    parts->animNotifyValue = spr_update_player_sprite(PLAYER_SPRITE_MAIN, parts->currentAnimation, parts->animationRate);
 
     if (player->flags & ACTOR_FLAG_BLUR_ENABLED) {
         func_802549F4(player);
@@ -1538,7 +1538,7 @@ void appendGfx_player_actor(void* arg0) {
                     } else {
                         playerParts->currentAnimation = func_80265D44(0x12);
                     }
-                    spr_update_player_sprite(0, playerParts->currentAnimation, playerParts->animationRate);
+                    spr_update_player_sprite(PLAYER_SPRITE_MAIN, playerParts->currentAnimation, playerParts->animationRate);
                     cond1 = TRUE;
                 }
             }
@@ -1557,7 +1557,7 @@ void appendGfx_player_actor(void* arg0) {
 
     if (player->stoneStatus == STATUS_STONE) {
         playerParts->currentAnimation = func_80265D44(0xC);
-        spr_update_player_sprite(0, playerParts->currentAnimation, playerParts->animationRate);
+        spr_update_player_sprite(PLAYER_SPRITE_MAIN, playerParts->currentAnimation, playerParts->animationRate);
         cond1 = TRUE;
 
         if (!cond2) {
@@ -1783,7 +1783,7 @@ end:
     guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
 
     if (lastAnim != playerParts->currentAnimation) {
-        spr_update_player_sprite(0, playerParts->currentAnimation, playerParts->animationRate);
+        spr_update_player_sprite(PLAYER_SPRITE_MAIN, playerParts->currentAnimation, playerParts->animationRate);
     }
     func_8025C840(0, playerParts, clamp_angle(playerYaw + 180.0f), 0);
     func_8025CCC8(0, playerParts, clamp_angle(playerYaw + 180.0f), 0);
@@ -1842,30 +1842,30 @@ void appendGfx_player_actor_reflection(void* arg0) {
 
 s32 func_802591EC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     s32 opacity;
-    s32 sprMask;
+    s32 sprDrawOpts;
 
     if (part->flags & ACTOR_PART_FLAG_2) {
         opacity = 255;
-        sprMask = 0;
+        sprDrawOpts = 0;
         if (part->opacity < 255) {
-            sprMask = 0x80000000;
+            sprDrawOpts = DRAW_SPRITE_OVERRIDE_ALPHA;
             opacity = part->opacity;
         }
         if (part->flags & ACTOR_PART_FLAG_100) {
             opacity = opacity * 120 / 255;
-            sprMask = 0x80000000;
+            sprDrawOpts = DRAW_SPRITE_OVERRIDE_ALPHA;
         }
         if (arg0 == 0) {
             if (opacity == 255) {
-                spr_draw_player_sprite(0, yaw, 0, NULL, mtx);
+                spr_draw_player_sprite(PLAYER_SPRITE_MAIN, yaw, 0, NULL, mtx);
             } else {
-                spr_draw_player_sprite(sprMask, yaw, opacity, NULL, mtx);
+                spr_draw_player_sprite(PLAYER_SPRITE_MAIN | sprDrawOpts, yaw, opacity, NULL, mtx);
             }
         } else {
             if (opacity == 255) {
-                spr_draw_npc_sprite(part->unk_84, yaw, 0, NULL, mtx);
+                spr_draw_npc_sprite(part->spriteInstanceID, yaw, 0, NULL, mtx);
             } else {
-                spr_draw_npc_sprite(part->unk_84 | sprMask, yaw, opacity, NULL, mtx);
+                spr_draw_npc_sprite(part->spriteInstanceID | sprDrawOpts, yaw, opacity, NULL, mtx);
             }
         }
         return 0;
@@ -1922,8 +1922,8 @@ s32 func_802591EC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
 void func_80259494(ActorPart* part) {
     DecorationTable* decor = part->decorationTable;
-    u16* src;
-    u16* dest;
+    PAL_PTR src;
+    PAL_PTR dest;
     s32 i, j;
 
     for (i = 0; i < decor->numSpritePalettes; i++) {
@@ -1931,7 +1931,7 @@ void func_80259494(ActorPart* part) {
             src = decor->unk_6D4[i];
             dest = decor->copiedPalettes[1][i];
 
-            for (j = 0; j < 0x10; j++) {
+            for (j = 0; j < ARRAY_COUNT(decor->copiedPalettes[1][i]); j++) {
                 *dest = *src | 0xFFFE;
                 src++;
                 dest++;
@@ -1946,16 +1946,16 @@ void func_8025950C(ActorPart* part, s32 yaw, Matrix4f mtx) {
     DecorationTable* decor = part->decorationTable;
     s32 opacity = 255;
     s32 idMask = 0;
-    s32 ii, jj;
-    u16* dest;
-    u16* src;
+    PAL_PTR dest;
+    PAL_PTR src;
+    s32 i, j;
 
-    if (part->opacity < 0xFF) {
-        idMask = 0x80000000;
+    if (part->opacity < 255) {
+        idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = part->opacity;
     }
-    if (part->flags & 0x100) {
-        idMask = 0x80000000;
+    if (part->flags & ACTOR_PART_FLAG_100) {
+        idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = (opacity * 120) / 255;
     }
 
@@ -1966,11 +1966,11 @@ void func_8025950C(ActorPart* part, s32 yaw, Matrix4f mtx) {
             decor->numSpritePalettes++;
         }
 
-        for (ii = 0; ii < decor->numSpritePalettes; ii++) {
-            src = decor->spritePalettes[ii];
-            dest = decor->copiedPalettes[0][ii];
+        for (i = 0; i < decor->numSpritePalettes; i++) {
+            src = decor->spritePalettes[i];
+            dest = decor->copiedPalettes[0][i];
             if (src != NULL) {
-                for (jj = 0; jj < 16; jj++) {
+                for (j = 0; j < ARRAY_COUNT(decor->copiedPalettes[0][i]); j++) {
                     *dest = *src;
                     src++;
                     dest++;
@@ -1978,13 +1978,13 @@ void func_8025950C(ActorPart* part, s32 yaw, Matrix4f mtx) {
             }
         }
 
-        for (ii = 0; ii < decor->numSpritePalettes; ii++) {
-            decor->unk_6D4[ii] = decor->copiedPalettes[0][ii];
+        for (i = 0; i < decor->numSpritePalettes; i++) {
+            decor->unk_6D4[i] = decor->copiedPalettes[0][i];
         }
 
         func_802596C0(part, yaw, mtx);
     } else {
-        spr_draw_npc_sprite(part->unk_84 | idMask, yaw, opacity, NULL, mtx);
+        spr_draw_npc_sprite(part->spriteInstanceID | idMask, yaw, opacity, NULL, mtx);
     }
 }
 
@@ -1994,20 +1994,20 @@ void func_802596C0(ActorPart* part, s32 yaw, Matrix4f mtx) {
     s32 idMask = 0;
 
     if (part->opacity < 255) {
-        idMask = 0x80000000;
+        idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = part->opacity;
     }
 
     if (part->flags & ACTOR_PART_FLAG_100) {
-        idMask = 0x80000000;
+        idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = (opacity * 120) / 255;
     }
 
     if (decorationTable->unk_768 != 0) {
         func_80259494(part);
-        spr_draw_npc_sprite(part->unk_84 | 0x20000000 | idMask, yaw, opacity, decorationTable->unk_76C, mtx);
+        spr_draw_npc_sprite(part->spriteInstanceID | DRAW_SPRITE_OVERRIDE_PALETTES | idMask, yaw, opacity, decorationTable->unk_76C, mtx);
     } else {
-        spr_draw_npc_sprite(part->unk_84 | 0x20000000 | idMask, yaw, opacity, decorationTable->unk_6D4, mtx);
+        spr_draw_npc_sprite(part->spriteInstanceID | DRAW_SPRITE_OVERRIDE_PALETTES | idMask, yaw, opacity, decorationTable->unk_6D4, mtx);
     }
 }
 
@@ -2015,16 +2015,16 @@ void func_802597B0(ActorPart* part, s32 yaw, Matrix4f mtx) {
     DecorationTable* decor = part->decorationTable;
     s32 opacity = 255;
     s32 idMask = 0;
-    s32 i, j;
     PAL_PTR src;
     PAL_PTR dest;
+    s32 i, j;
 
     if (part->opacity < 255) {
-        idMask = 0x80000000;
+        idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = part->opacity;
     }
-    if (part->flags & 0x100) {
-        idMask = 0x80000000;
+    if (part->flags & ACTOR_PART_FLAG_100) {
+        idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = (opacity * 120) / 255;
     }
 
@@ -2040,7 +2040,7 @@ void func_802597B0(ActorPart* part, s32 yaw, Matrix4f mtx) {
             src = decor->spritePalettes[i];
             dest = decor->copiedPalettes[0][i];
             if (decor->spritePalettes[i] != NULL) {
-                for (j = 0; j < 16; j++) {
+                for (j = 0; j < ARRAY_COUNT(decor->copiedPalettes[0][i]); j++) {
                     *dest = *src;
                     dest++;
                     src++;
@@ -2052,7 +2052,7 @@ void func_802597B0(ActorPart* part, s32 yaw, Matrix4f mtx) {
         }
         func_8025995C(part, yaw, mtx);
     } else {
-        spr_draw_player_sprite(idMask, yaw, opacity, NULL, mtx);
+        spr_draw_player_sprite(PLAYER_SPRITE_MAIN | idMask, yaw, opacity, NULL, mtx);
     }
 }
 
@@ -2062,25 +2062,25 @@ void func_8025995C(ActorPart* part, s32 yaw, Matrix4f mtx) {
     s32 idMask = 0;
 
     if (part->opacity < 255) {
-        idMask = 0x80000000;
+        idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = part->opacity;
     }
-    if (part->flags & 0x100) {
-        idMask = 0x80000000;
+    if (part->flags & ACTOR_PART_FLAG_100) {
+        idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = (opacity * 120) / 255;
     }
 
     if (decorationTable->unk_768 != 0) {
         func_80259494(part);
-        idMask |= 0x20000000;
-        spr_draw_player_sprite(idMask, yaw, opacity, decorationTable->unk_76C, mtx);
+        idMask |= DRAW_SPRITE_OVERRIDE_PALETTES;
+        spr_draw_player_sprite(PLAYER_SPRITE_MAIN | idMask, yaw, opacity, decorationTable->unk_76C, mtx);
     } else {
-        idMask |= 0x20000000;
-        spr_draw_player_sprite(idMask, yaw, opacity, decorationTable->unk_6D4, mtx);
+        idMask |= DRAW_SPRITE_OVERRIDE_PALETTES;
+        spr_draw_player_sprite(PLAYER_SPRITE_MAIN | idMask, yaw, opacity, decorationTable->unk_6D4, mtx);
     }
 }
 
-void func_80259A48(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
+void func_80259A48(s32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     DecorationTable* decorationTable = part->decorationTable;
 
     if (decorationTable->unk_6C1 != 0) {
@@ -2089,19 +2089,19 @@ void func_80259A48(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         part->unkOffset[1] = 0;
         decorationTable->unk_6C1 = 0;
     }
-    if (arg0 == 0) {
+    if (isNpcSprite == SPRITE_MODE_PLAYER) {
         func_802597B0(part, yaw, mtx);
     } else {
         func_8025950C(part, yaw, mtx);
     }
 }
 
-void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
+void func_80259AAC(s32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     DecorationTable* decorationTable = part->decorationTable;
     s32 i, j;
 
     if (decorationTable->unk_6C1 != 0) {
-        if (arg0 == 0) {
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
             decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numSpritePalettes = 0;
             while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
@@ -2141,7 +2141,7 @@ void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     switch (decorationTable->unk_6C2) {
         case 0:
         case 1:
-            if (arg0 == 0) {
+            if (isNpcSprite == SPRITE_MODE_PLAYER) {
                 func_8025995C(part, yaw, mtx);
             } else {
                 func_802596C0(part, yaw, mtx);
@@ -2150,7 +2150,7 @@ void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
 }
 
-void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
+void func_80259D9C(s32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     DecorationTable* decorationTable = part->decorationTable;
     u16* palIn;
     u16* palOut;
@@ -2158,7 +2158,7 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     s32 temp;
 
     if (decorationTable->unk_6C1 != 0) {
-        if (arg0 == 0) {
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
             decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numSpritePalettes = 0;
             while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
@@ -2252,7 +2252,7 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[0][i];
     }
 
-    if (arg0 == 0) {
+    if (isNpcSprite == SPRITE_MODE_PLAYER) {
         func_8025995C(part, yaw, mtx);
     } else {
         func_802596C0(part, yaw, mtx);
@@ -2263,7 +2263,7 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
 }
 
-void func_8025A2C4(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
+void func_8025A2C4(s32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     DecorationTable* decorationTable = part->decorationTable;
     u16* palIn;
     u16* palOut;
@@ -2271,7 +2271,7 @@ void func_8025A2C4(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     s32 temp;
 
     if (decorationTable->unk_6C1 != 0) {
-        if (arg0 == 0) {
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
             decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numSpritePalettes = 2;
             while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
@@ -2319,21 +2319,21 @@ void func_8025A2C4(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         decorationTable->unk_6C8--;
     }
 
-    if (arg0 == 0) {
+    if (isNpcSprite == SPRITE_MODE_PLAYER) {
         func_8025995C(part, yaw, mtx);
     } else {
         func_802596C0(part, yaw, mtx);
     }
 }
 
-void func_8025A50C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
+void func_8025A50C(s32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     DecorationTable* decorationTable = part->decorationTable;
     u16* palIn;
     u16* palOut;
     s32 i, j;
 
     if (decorationTable->unk_6C1 != 0) {
-        if (arg0 == 0) {
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
             decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numSpritePalettes = 0;
             while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
@@ -2377,21 +2377,21 @@ void func_8025A50C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[0][i];
     }
 
-    if (arg0 == 0) {
+    if (isNpcSprite == SPRITE_MODE_PLAYER) {
         func_8025995C(part, yaw, mtx);
     } else {
         func_802596C0(part, yaw, mtx);
     }
 }
 
-void func_8025A74C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
+void func_8025A74C(s32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     DecorationTable* decorationTable = part->decorationTable;
     u16* palIn;
     u16* palOut;
     s32 i, j;
 
     if (decorationTable->unk_6C1 != 0) {
-        if (arg0 == 0) {
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
             decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numSpritePalettes = 0;
             while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
@@ -2460,7 +2460,7 @@ void func_8025A74C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             switch (decorationTable->unk_6CA) {
                 case 10:
                 case 12:
-                    if (arg0 == 0) {
+                    if (isNpcSprite == SPRITE_MODE_PLAYER) {
                         func_8025995C(part, yaw, mtx);
                     } else {
                         func_802596C0(part, yaw, mtx);
@@ -2470,7 +2470,7 @@ void func_8025A74C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                     decorationTable->unk_6CA = 0;
                     // fallthrough
                 default:
-                    if (arg0 == 0) {
+                    if (isNpcSprite == SPRITE_MODE_PLAYER) {
                         func_802597B0(part, yaw, mtx);
                     } else {
                         func_8025950C(part, yaw, mtx);
@@ -2485,12 +2485,12 @@ void func_8025A74C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
 }
 
-void func_8025AA80(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
+void func_8025AA80(s32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     DecorationTable* decorationTable = part->decorationTable;
     s32 i, j;
 
     if (decorationTable->unk_6C1 != 0) {
-        if (arg0 == 0) {
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
             decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numSpritePalettes = 0;
             while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
@@ -2534,14 +2534,14 @@ void func_8025AA80(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[0][i];
     }
 
-    if (arg0 == 0) {
+    if (isNpcSprite == SPRITE_MODE_PLAYER) {
         func_8025995C(part, yaw, mtx);
     } else {
         func_802596C0(part, yaw, mtx);
     }
 }
 
-void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
+void func_8025AD90(s32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     DecorationTable* decorationTable = part->decorationTable;
     PAL_PTR palIn;
     PAL_PTR palOut;
@@ -2549,7 +2549,7 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     s32 temp;
 
     if (decorationTable->unk_6C1 != 0) {
-        if (arg0 == 0) {
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
             decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numSpritePalettes = 0;
             while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
@@ -2633,7 +2633,7 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[0][i];
     }
 
-    if (arg0 == 0) {
+    if (isNpcSprite == SPRITE_MODE_PLAYER) {
         func_8025995C(part, yaw, mtx);
     } else {
         func_802596C0(part, yaw, mtx);
@@ -2644,7 +2644,7 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
 }
 
-void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
+void func_8025B1A8(s32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     DecorationTable* decorationTable = part->decorationTable;
     u16* palIn;
     u16* palOut;
@@ -2652,7 +2652,7 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     s32 temp;
 
     if (decorationTable->unk_6C1 != 0) {
-        if (arg0 == 0) {
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
             decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numSpritePalettes = 0;
             while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
@@ -2736,7 +2736,7 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[0][i];
     }
 
-    if (arg0 == 0) {
+    if (isNpcSprite == SPRITE_MODE_PLAYER) {
         func_8025995C(part, yaw, mtx);
     } else {
         func_802596C0(part, yaw, mtx);
@@ -2747,7 +2747,7 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
 }
 
-void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s32 arg5) {
+void func_8025B5C0(s32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s32 arg5) {
     DecorationTable* decorationTable = part->decorationTable;
     PAL_PTR color2;
     PAL_PTR color1;
@@ -2756,7 +2756,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
     u8 alpha;
 
     if (decorationTable->unk_6C1 != 0) {
-        if (arg0 == 0) {
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
             decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numSpritePalettes = 0;
             while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
@@ -2863,7 +2863,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
     switch (decorationTable->unk_6C2) {
         case 0:
         case 1:
-            if (arg0 == 0) {
+            if (isNpcSprite == SPRITE_MODE_PLAYER) {
                 func_8025995C(part, yaw, mtx);
             } else {
                 func_802596C0(part, yaw, mtx);
@@ -2872,7 +2872,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
     }
 }
 
-void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 arg5) {
+void func_8025BAA0(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 arg5) {
     DecorationTable* decor = part->decorationTable;
     PAL_PTR color1;
     PAL_PTR color2;
@@ -2883,7 +2883,7 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
     u8 r1, g1, b1;
 
     if (decor->unk_6C1 != 0) {
-        if (arg0 == 0) {
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
             decor->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decor->numSpritePalettes = 0;
             while ((s32)decor->spritePalettes[decor->numSpritePalettes] != -1) {
@@ -3030,7 +3030,7 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
         case 1:
         case 2:
         case 3:
-            if (arg0 == 0) {
+            if (isNpcSprite == SPRITE_MODE_PLAYER) {
                 func_8025995C(part, yaw, mtx);
             } else {
                 func_802596C0(part, yaw, mtx);
@@ -3039,7 +3039,7 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
     }
 }
 
-void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
+void func_8025C120(s32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     DecorationTable* decor = part->decorationTable;
     PAL_PTR color1;
     PAL_PTR color2;
@@ -3050,7 +3050,7 @@ void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     u8 r1, g1, b1;
 
     if (decor->unk_6C1 != 0) {
-        if (arg0 == 0) {
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
             decor->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decor->numSpritePalettes = 0;
             while (decor->spritePalettes[decor->numSpritePalettes] != (PAL_PTR) -1) {
@@ -3196,7 +3196,7 @@ void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         case 1:
         case 2:
         case 3:
-            if (arg0 == 0) {
+            if (isNpcSprite == SPRITE_MODE_PLAYER) {
                 func_8025995C(part, yaw, mtx);
             } else {
                 func_802596C0(part, yaw, mtx);
@@ -3206,7 +3206,7 @@ void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 }
 
 s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
-    if (!(part->flags & 2)) {
+    if (!(part->flags & ACTOR_PART_FLAG_2)) {
         switch (part->decorationTable->unk_750) {
             case 0:
                 func_8025C8A0(arg0, part, yaw, arg3);
@@ -3219,18 +3219,18 @@ s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
     return 0;
 }
 
-void func_8025C8A0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
+void func_8025C8A0(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
     if (part->decorationTable->unk_751 != 0) {
         part->decorationTable->unk_751 = 0;
-        if (arg0 == 0) {
-            func_802DDFF8(0, 0, 0, 0, 0, 0, 0);
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
+            func_802DDFF8(PLAYER_SPRITE_MAIN, 0, 0, 0, 0, 0, 0);
         } else {
-            func_802DE894(part->unk_84, 0, 0, 0, 0, 0, 0);
+            func_802DE894(part->spriteInstanceID, 0, 0, 0, 0, 0, 0);
         }
     }
 }
 
-void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
+void func_8025C918(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
     DecorationTable* decor = part->decorationTable;
     u8 rbuf[20];
     u8 gbuf[20];
@@ -3245,10 +3245,10 @@ void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
         decor->unk75A = 0;
         decor->unk_751 = 0;
         decor->unk758 = 0;
-        if (arg0 == 0) {
-            func_802DDFF8(0, 0x11, 0x14, 0, 0, 0xFF, 0);
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
+            func_802DDFF8(0, FOLD_TYPE_11, 0x14, 0, 0, 0xFF, 0);
         } else {
-            func_802DE894(part->unk_84, 0x11, 0x14, 0, 0, 0xFF, 0);
+            func_802DE894(part->spriteInstanceID, FOLD_TYPE_11, 0x14, 0, 0, 0xFF, 0);
         }
     }
 
@@ -3275,10 +3275,10 @@ void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
 
     for (i = 0; i < ARRAY_COUNT(rbuf); i++) {
         color = (rbuf[i] << 0x18) | (gbuf[i] << 0x10) | (bbuf[i] << 8) | alpha;
-        if (arg0 == 0) {
-            func_802DDFF8(0, 0xC, i, color, 0, 0xFF, 0);
+        if (isNpcSprite == SPRITE_MODE_PLAYER) {
+            func_802DDFF8(PLAYER_SPRITE_MAIN, 0xC, i, color, 0, 0xFF, 0);
         } else {
-            func_802DE894(part->unk_84, 0xC, i, color, 0, 0xFF, 0);
+            func_802DE894(part->spriteInstanceID, 0xC, i, color, 0, 0xFF, 0);
         }
     }
 

@@ -4,7 +4,7 @@
 #define NAMESPACE b_area_dgb_dgb_02
 
 EvtScript N(beforeBattle_8021B0B0) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_RETURN
     EVT_END
 };

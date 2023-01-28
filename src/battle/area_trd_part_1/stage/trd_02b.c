@@ -101,7 +101,7 @@ EvtScript N(80223478) = {
 };
 
 EvtScript N(beforeBattle_80223A24) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_CALL(EnableModel, 22, 0)
     EVT_CALL(EnableModel, 9, 0)

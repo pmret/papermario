@@ -4,7 +4,7 @@
 #define NAMESPACE b_area_kmr_part_1_kmr_02
 
 EvtScript N(beforeBattle_8021FDA0) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_RETURN
     EVT_END
 };

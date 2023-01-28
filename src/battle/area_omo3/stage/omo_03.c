@@ -4,7 +4,7 @@
 #define NAMESPACE b_area_omo3_omo_03
 
 EvtScript N(beforeBattle) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_CALL(SetGroupEnabled, 18, 0)
     EVT_RETURN

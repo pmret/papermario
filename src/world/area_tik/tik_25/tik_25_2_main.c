@@ -11,7 +11,7 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_END
 };
 
-#include "world/common/atomic/tik_DripVolumes.inc.c"
+#include "../common/DripVolumes.inc.c"
 
 DripVolumeList N(DripVolumes) = {
     .count = 2,

@@ -6,7 +6,7 @@ NpcSettings N(NpcSettings_Nomadimouse) = {
     .level = 99,
 };
 
-#include "world/common/atomic/LetterChoice.inc.c"
+#include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(D_802416A8_947578)[] = {
     ITEM_LETTER08,

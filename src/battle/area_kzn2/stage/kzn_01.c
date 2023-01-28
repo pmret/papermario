@@ -4,7 +4,7 @@
 #define NAMESPACE b_area_kzn2_kzn_01
 
 EvtScript N(beforeBattle_80227780) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_CALL(SetGroupEnabled, 17, 0)
     EVT_RETURN

@@ -4,7 +4,7 @@
 #include "common/foliage.inc.c"
 #define NAME_SUFFIX
 
-FoliageModelList N(Tree1_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o325);
+FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o325);
 FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o326);
 
 FoliageVectorList N(Tree1_Effects) = {

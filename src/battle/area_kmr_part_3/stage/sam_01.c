@@ -6,7 +6,7 @@
 #include "common/UnkModelStuff.inc.c"
 
 EvtScript N(beforeBattle_80233998) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_EXEC(N(UnkModelStuffScript1))
     EVT_THREAD
         EVT_SET(LVar0, 22)

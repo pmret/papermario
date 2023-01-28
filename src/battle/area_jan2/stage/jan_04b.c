@@ -4,7 +4,7 @@
 #define NAMESPACE b_area_jan2_jan_04b
 
 EvtScript N(beforeBattle_8021F520) = {
-    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_CALL(SetGroupEnabled, 33, 0)
     EVT_RETURN
