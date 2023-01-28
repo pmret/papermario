@@ -797,49 +797,53 @@ s32 calc_partner_damage_enemy(void) {
     return retVal;
 }
 
-//Some slight stack / ordering issues at the beginning
-#ifdef NON_EQUIVALENT
 s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
-    ActorState* state;
+    ActorState* state = &partner->state;
     s32 hpChange;
     s32 flagCheck;
+    s32 oldHP;
 
     battleStatus->currentAttackDamage = damageAmount;
-    partner->currentHP = 127;
-    partner->hpChangeCounter += damageAmount;
+
+    hpChange = (s16)damageAmount;
+    partner->hpChangeCounter += hpChange;
+
     hpChange = partner->hpChangeCounter;
-    partner->hpChangeCounter -= hpChange;
+    partner->currentHP = 127;
     partner->damageCounter += hpChange;
+    partner->hpChangeCounter -= hpChange;
     battleStatus->lastAttackDamage = 0;
     partner->currentHP -= hpChange;
-    state = &partner->state;
+    oldHP = partner->currentHP;
+
+
     if (partner->currentHP <= 0) {
         event = EVENT_DEATH;
-        battleStatus->lastAttackDamage += partner->currentHP;
+        battleStatus->lastAttackDamage += oldHP;
         partner->currentHP = 0;
     }
     battleStatus->lastAttackDamage += hpChange;
     partner->lastDamageTaken = battleStatus->lastAttackDamage;
     battleStatus->unk_19A = 0;
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-        if (event == 0x9) {
-            event = 0xA;
+        if (event == EVENT_HIT_COMBO) {
+            event = EVENT_HIT;
         }
-        if (event == 0x17) {
-            event = 0x19;
+        if (event == EVENT_SCRIPTED_IMMUNE) {
+            event = EVENT_IMMUNE;
         }
     }
 
     if (battleStatus->lastAttackDamage > 0) {
         gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
 
-        inflict_status(partner, 0xD, battleStatus->lastAttackDamage);
+        inflict_status(partner, STATUS_DAZE, battleStatus->lastAttackDamage);
     }
 
-    if (stopMotion == 0) {
-        set_goal_pos_to_part(state, 0x100, 0);
+    if (!stopMotion) {
+        set_goal_pos_to_part(state, ACTOR_PARTNER, 0);
     }
 
     show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z,
@@ -851,15 +855,12 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
         func_80267018(partner, 1);
     }
 
-    partner->flags |= 0x80000;
+    partner->flags |= ACTOR_FLAG_80000;
 
     flagCheck = (gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)) != 0;
     dispatch_event_partner(event);
     return flagCheck;
 }
-#else
-INCLUDE_ASM(s32, "1AC760", dispatch_damage_event_partner);
-#endif
 
 s32 dispatch_damage_event_partner_0(s32 damageAmount, s32 event, s32 stopMotion) {
     return dispatch_damage_event_partner(damageAmount, event, FALSE);
