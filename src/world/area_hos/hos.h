@@ -2,13 +2,13 @@
 #define _WORLD_AREA_HOS_HOS_H_
 
 enum {
-    AB_HOS_Unused_0     = AreaByte(0),
-    AB_HOS_Unused_1     = AreaByte(1),
-    AB_HOS_Unused_2     = AreaByte(2),
-    AB_HOS_Unused_3     = AreaByte(3),
-    AB_HOS_Unused_4     = AreaByte(4),
-    AB_HOS_Unused_5     = AreaByte(5),
-    AB_HOS_Unused_6     = AreaByte(6),
+    AB_HOS_StatcAmt_Eldstar     = AreaByte(0),
+    AB_HOS_StatcAmt_Mamar       = AreaByte(1),
+    AB_HOS_StatcAmt_Skolar      = AreaByte(2),
+    AB_HOS_StatcAmt_Muskular    = AreaByte(3),
+    AB_HOS_StatcAmt_Misstar     = AreaByte(4),
+    AB_HOS_StatcAmt_Klevar      = AreaByte(5),
+    AB_HOS_StatcAmt_Kalmar      = AreaByte(6),
     AB_HOS_Unused_7     = AreaByte(7),
     AB_HOS_Unused_8     = AreaByte(8),
     AB_HOS_Unused_9     = AreaByte(9),

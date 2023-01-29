@@ -486,7 +486,7 @@ MapConfig nok_maps[] = {
 #include "area_hos/hos.h"
 MapConfig hos_maps[] = {
     { MAP_WITH_INIT(hos_00), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(hos_01, 0x80240E40), .bgName = "hos_bg" },
+    { MAP(hos_01), .bgName = "hos_bg" },
     { MAP(hos_02), .bgName = "hos_bg" },
     { MAP(hos_03), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_04, 0x80240EE0), .bgName = "hos_bg" },

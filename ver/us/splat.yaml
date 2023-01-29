@@ -10940,15 +10940,14 @@ segments:
     start: 0xA10880
     vram: 0x80240000
     subsegments:
-    - [0xA10880, c]
-    - [0xA11020, c]
-    - [0xA11650, c]
-    - [0xA116A0, data]
-    - [0xA11760, data]
-    - [0xA12E00, data]
-    - [0xA15860, data]
-    - [0xA158D0, data]
-    - [0xA161F0]
+    - [0xA10880, c, hos_01_0_header]
+    - [0xA10880, c, hos_01_1_music]
+    - [0xA10880, c, hos_01_2_main]
+    - [0xA11020, c, hos_01_3_model_fx]
+    - [0xA11530, c, hos_01_4_npc]
+    - [0xA11650, c, hos_01_5_entity]
+    - [0xA11650, c, hos_01_6_star_way]
+    - [0xA116A0]
   - name: hos_02
     dir: world/area_hos/hos_02
     type: code

@@ -1272,6 +1272,8 @@ s32 func_802DE8DC(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* out
 
     animID = sprite->currentAnimID;
     if (animID != 255) {
+        // following 3 lines equivalent to:
+        // animCompList = sprite->spriteData->animListStart[animID];
         spriteData = (u32*)sprite->spriteData;
         spriteData += 4 + animID;
         animCompList = (SpriteAnimComponent**)*spriteData;

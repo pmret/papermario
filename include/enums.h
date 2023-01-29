@@ -5627,7 +5627,7 @@ typedef enum FoldType {
     FOLD_TYPE_A                       = 0xA,
     FOLD_TYPE_B                       = 0xB,
     FOLD_TYPE_C                       = 0xC,
-    FOLD_TYPE_D                       = 0xD,
+    FOLD_TYPE_D                       = 0xD,    // noisy star spirit
     FOLD_TYPE_E                       = 0xE,
     FOLD_TYPE_F                       = 0xF,
     FOLD_TYPE_10                      = 0x10,
