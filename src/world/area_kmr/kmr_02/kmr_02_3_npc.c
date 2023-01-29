@@ -1358,7 +1358,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
 #include "world/common/todo/SyncStatusMenu.inc.c"
 
 NOP_FIX // TODO figure out BSS nop issue
-ApiStatus func_8024295C_8B29CC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_8024295C_8B29CC)) {
     Bytecode* args = script->ptrReadPos;
     s32 targetColR = evt_get_variable(script, *args++);
     s32 targetColG = evt_get_variable(script, *args++);
@@ -1464,7 +1464,7 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(N(func_80242BA8_8B2C18))
-    EVT_CALL(func_8024295C_8B29CC, 0, 0, 0, 255, 0)
+    EVT_CALL(N(func_8024295C_8B29CC), 0, 0, 0, 255, 0)
     EVT_CALL(N(func_80242F08_8B2F78))
     EVT_CALL(N(func_80242BC0_8B2C30), 30, 30, 30, 0, 0, 0, 0)
     EVT_CALL(SetGroupEnabled, MODEL_Root, 0)

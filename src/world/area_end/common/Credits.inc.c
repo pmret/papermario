@@ -798,13 +798,13 @@ void N(init_credits)(void) {
     }
 }
 
-ApiStatus N(InitCredits)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(InitCredits)) {
     N(init_credits)();
     load_font(1);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ShowCreditList)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ShowCreditList)) {
     CreditsEntry* creditList = (CreditsEntry*) evt_get_variable(script, *script->ptrReadPos);
 
     if (isInitialCall) {

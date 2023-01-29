@@ -963,7 +963,7 @@ ApiStatus evt_handle_exec_wait(Evt* script) {
     Bytecode* args = script->ptrReadPos;
 
     start_child_script(script, (EvtScript*) evt_get_variable(script, *args++), 0);
-    script->currentOpcode = 0;
+    script->currentOpcode = EVT_OP_INTERNAL_FETCH;
     return ApiStatus_FINISH;
 }
 
@@ -1660,21 +1660,21 @@ s32 evt_execute_next_command(Evt* script) {
         }
 
         if (status == ApiStatus_FINISH) {
-            return -1;
+            return EVT_CMD_RESULT_YIELD;
         }
 
         if (status < 0) {
-            return 1;
+            return EVT_CMD_RESULT_ERROR;
         }
 
         // TODO: this may be able to be a switch but I couldn't get it
         if (status == ApiStatus_BLOCK) {
             // return 0
         } else if (status == ApiStatus_DONE1) {
-            script->currentOpcode = 0;
+            script->currentOpcode = EVT_OP_INTERNAL_FETCH;
             // return 0
         } else if (status == ApiStatus_DONE2) {
-            script->currentOpcode = 0;
+            script->currentOpcode = EVT_OP_INTERNAL_FETCH;
             if (gGameStatusPtr->disableScripts != status) {
                 continue;
             }
@@ -1682,7 +1682,7 @@ s32 evt_execute_next_command(Evt* script) {
         } else {
             continue;
         }
-        return 0;
+        return EVT_CMD_RESULT_CONTINUE;
     }
 }
 
@@ -2027,14 +2027,14 @@ Bytecode* evt_find_label(Evt* script, s32 arg1) {
         return (Bytecode*) arg1;
     }
 
-    for (i = 0; i < 0x10; i++) {
+    for (i = 0; i < 16; i++) {
         if (script->labelIndices[i] == arg1) {
             ret = script->labelPositions[i];
             break;
         }
     }
 
-    ASSERT(i < 0x10);
+    ASSERT(i < 16);
     return ret;
 }
 

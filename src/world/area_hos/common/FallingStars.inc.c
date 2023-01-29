@@ -1,4 +1,4 @@
-#include "battle/battle.h"
+#include "common.h"
 #include "effects.h"
 
 ApiStatus N(UnkEffect0FFunc2)(Evt* script, s32 isInitialCall) {

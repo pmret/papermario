@@ -24,6 +24,7 @@ enum {
     AF_HOS06_BadgeHints         = AreaFlag(3),
     AF_HOS06_SuperBlocksHints   = AreaFlag(100),
     AF_HOS06_StarPieceHints     = AreaFlag(116),
+    AF_HOS_B4                   = AreaFlag(180),
     AF_HOS06_SpokeWithMerluvlee = AreaFlag(182),
 };
 
@@ -36,5 +37,8 @@ extern MapSettings hos_05_settings;
 extern MapSettings hos_06_settings;
 extern MapSettings hos_10_settings;
 extern MapSettings hos_20_settings;
+
+s32 hos_00_map_init(void);
+s32 hos_10_map_init(void);
 
 #endif

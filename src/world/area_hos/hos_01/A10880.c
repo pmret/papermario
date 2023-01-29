@@ -1,6 +1,6 @@
 #include "hos_01.h"
 
-#include "common/UnkEffect0FFuncs.inc.c"
+#include "../common/FallingStars.inc.c"
 
 #include "world/common/todo/GetFloorCollider.inc.c"
 

@@ -7,7 +7,7 @@ s32 N(unkAngle3) = -1;
 
 #include "world/common/atomic/WhaleAnim.inc.c"
 
-ApiStatus jan_00_UnkPlayerPosFunc(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkPlayerPosFunc)) {
     Npc* player = get_npc_safe(ACTOR_PLAYER);
     f32 yaw = -player->yaw;
     f32 x = player->pos.x + 30.0f + (sin_deg(yaw) * 170.0f);

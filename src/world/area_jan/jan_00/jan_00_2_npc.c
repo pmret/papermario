@@ -139,7 +139,7 @@ API_CALLABLE(func_80240B4C_B2108C) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80240CF8_B21238(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240CF8_B21238)) {
     Bytecode* args = script->ptrReadPos;
     Npc* npc0 = get_npc_safe(NPC_Whale);
     Npc* npc1;
@@ -206,7 +206,7 @@ ApiStatus func_80240CF8_B21238(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80240F14_B21454(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240F14_B21454)) {
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_safe(NPC_Whale);
 
@@ -282,7 +282,7 @@ API_CALLABLE(func_80241134_B21674) {
 }
 
 EvtScript N(D_80242D90_B232D0) = {
-    EVT_CALL(func_80240CF8_B21238, LVar0)
+    EVT_CALL(N(func_80240CF8_B21238), LVar0)
     EVT_RETURN
     EVT_END
 };
@@ -343,7 +343,7 @@ EvtScript N(D_80242FA8_B234E8) = {
         EVT_SET(LVar0, 2)
         EVT_EXEC_GET_TID(N(D_80242D90_B232D0), LVar5)
     EVT_END_IF
-    EVT_CALL(func_80240F14_B21454, 1)
+    EVT_CALL(N(func_80240F14_B21454), 1)
     EVT_KILL_THREAD(LVar3)
     EVT_KILL_THREAD(LVar4)
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
@@ -373,7 +373,7 @@ EvtScript N(D_80242FA8_B234E8) = {
     EVT_CALL(PlayerMoveTo, 260, 20, 15)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(func_80240B4C_B2108C, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000102)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
     EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 20)
     EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(1.0))
     EVT_CALL(NpcJump0, NPC_PARTNER, 224, 0, 20, 20)
@@ -384,7 +384,7 @@ EvtScript N(D_80242FA8_B234E8) = {
         EVT_CALL(DisablePartnerAI, 0)
     EVT_END_IF
     EVT_CALL(NpcMoveTo, NPC_PARTNER, 230, 20, 10)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000106)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_TalkSad)
     EVT_CALL(SetNpcJumpscale, NPC_Whale, 0)
     EVT_CALL(NpcJump0, NPC_Whale, 158, -10, -38, 20)
@@ -479,7 +479,7 @@ EvtScript N(EVS_NpcInteract_Kolorado_01) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000106)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
     EVT_CALL(func_80240B4C_B2108C, 3, LVar0, LVar1, LVar2)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.5))
@@ -489,19 +489,19 @@ EvtScript N(EVS_NpcInteract_Kolorado_01) = {
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_THREAD
-        EVT_CALL(func_80240CF8_B21238, 0)
+        EVT_CALL(N(func_80240CF8_B21238), 0)
     EVT_END_THREAD
     EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar3, LVar5, 20)
     EVT_CALL(func_80240B4C_B2108C, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000102)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
     EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.5))
     EVT_CALL(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 18)
     EVT_CALL(func_80240B4C_B2108C, 1, LVar0, LVar1, LVar2)
     EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 18)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000106)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
     EVT_THREAD
-        EVT_CALL(func_80240CF8_B21238, 1)
+        EVT_CALL(N(func_80240CF8_B21238), 1)
     EVT_END_THREAD
     EVT_IF_EQ(GB_StoryProgress, STORY_CH5_TRADED_VASE_FOR_SEED)
         EVT_CALL(SetNpcAnimation, NPC_Kolorado_02, ANIM_Kolorado_Walk)
@@ -522,7 +522,7 @@ EvtScript N(EVS_NpcInteract_Kolorado_01) = {
         EVT_CALL(SetNpcAnimation, NPC_Kolorado_02, ANIM_Kolorado_Idle)
         EVT_CALL(InterpNpcYaw, NPC_Kolorado_02, 90, 0)
         EVT_THREAD
-            EVT_CALL(func_80240CF8_B21238, 2)
+            EVT_CALL(N(func_80240CF8_B21238), 2)
         EVT_END_THREAD
         EVT_CALL(SpeakToPlayer, NPC_Kolorado_02, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0007)
     EVT_END_IF
@@ -539,12 +539,12 @@ EvtScript N(EVS_NpcInteract_Kolorado_01) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_EXEC(N(D_802437C4_B23D04))
-        EVT_CALL(func_80240F14_B21454, 0)
+        EVT_CALL(N(func_80240F14_B21454), 0)
         EVT_CALL(EnableGroup, MODEL_kujira, FALSE)
     EVT_ELSE
         EVT_LABEL(90)
         EVT_EXEC(N(D_802437C4_B23D04))
-        EVT_CALL(func_80240F14_B21454, 0)
+        EVT_CALL(N(func_80240F14_B21454), 0)
         EVT_CALL(EnableGroup, MODEL_kujira, FALSE)
         EVT_CALL(GotoMap, EVT_PTR("mac_06"), mac_06_ENTRY_1)
         EVT_WAIT(100)
@@ -566,7 +566,7 @@ EvtScript N(EVS_NpcInit_Kolorado_01) = {
         EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
         EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
         EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000106)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado_01)))
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado_01)))
     EVT_ELSE

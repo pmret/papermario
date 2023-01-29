@@ -129,7 +129,7 @@ EvtScript N(EVS_Main) = {
     EVT_END
 };
 
-ApiStatus N(FadeToTitleScreen)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(FadeToTitleScreen)) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
         set_curtain_scale_goal(1.0);
@@ -147,7 +147,7 @@ ApiStatus N(FadeToTitleScreen)(Evt* script, s32 isInitialCall) {
     return script->functionTemp[0] == 255;
 }
 
-ApiStatus N(ChangeStateToTitleScreen)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ChangeStateToTitleScreen)) {
     gGameStatusPtr->isBattle = FALSE;
     gGameStatusPtr->unk_76 = 0;
     gGameStatusPtr->disableScripts = 0;

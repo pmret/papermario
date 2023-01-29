@@ -485,13 +485,13 @@ MapConfig nok_maps[] = {
 /// Star Region
 #include "area_hos/hos.h"
 MapConfig hos_maps[] = {
-    { MAP_UNSPLIT(hos_00, 0x80240D50), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(hos_00), .bgName = "nok_bg" },
     { MAP_UNSPLIT(hos_01, 0x80240E40), .bgName = "hos_bg" },
     { MAP(hos_02), .bgName = "hos_bg" },
     { MAP(hos_03), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_04, 0x80240EE0), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_05, 0x80245910), .bgName = "hos_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(hos_06, 0x80242570), .bgName = "hos_bg" },
+    { MAP(hos_06), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_10, 0x80240CE0), .bgName = "hos_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(hos_20, 0x80240390), .bgName = "hos_bg" },
 };

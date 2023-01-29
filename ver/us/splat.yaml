@@ -10925,17 +10925,15 @@ segments:
     start: 0xA0BCF0
     vram: 0x80240000
     subsegments:
-    - [0xA0BCF0, c]
-    - [0xA0BD40, c]
-    - [0xA0C4B0, c]
-    - [0xA0C4E0, c]
-    - [0xA0C930, c]
-    - [0xA0CA00, data]
-    - [0xA0D720, data]
-    - [0xA0D7A0, data]
-    - [0xA0E520, data]
-    - [0xA107E0, data]
-    - [0xA10820]
+    - [0xA0BCF0, c, hos_00_0_header]
+    - [0xA0BD40, c, hos_00_1_music]
+    - [0xA0BD40, c, hos_00_2_main]
+    - [0xA0C4B0, c, hos_00_3_unused]
+    - [0xA0C4B0, c, hos_00_4_npc]
+    - [0xA0C4E0, c, hos_00_5_entity]
+    - [0xA0C4E0, c, hos_00_6_scenes]
+    - [0xA0C930, c, hos_00_7_shade_gfx]
+    - [0xA0CA00]
   - name: hos_01
     dir: world/area_hos/hos_01
     type: code
