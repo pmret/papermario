@@ -20,8 +20,11 @@ enum {
     AB_HOS_Unused_F     = AreaByte(15),
 };
 
-enum {
-    AF_HOS_B6           = AreaFlag(0xB6),
+enum {  
+    AF_HOS06_BadgeHints         = AreaFlag(3),
+    AF_HOS06_SuperBlocksHints   = AreaFlag(100),
+    AF_HOS06_StarPieceHints     = AreaFlag(116),
+    AF_HOS06_SpokeWithMerluvlee = AreaFlag(182),
 };
 
 extern MapSettings hos_00_settings;

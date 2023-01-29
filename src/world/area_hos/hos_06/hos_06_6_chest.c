@@ -3,20 +3,20 @@
 
 extern IconHudScriptPair gItemHudScripts[];
 
-#define NAME_SUFFIX _MagicChest
-
 // ------------------------------------------------------
 // begin modified Chest.inc.c
 // differences are:
 // - inclusion of N(ChestItems)
 // - removal of N(EVS_Chest_GetItem)
 
+#define NAME_SUFFIX _MagicChest
 #include "world/common/todo/StashVars.inc.c"
 #include "world/common/todo/GetItemName.inc.c"
 #include "world/common/todo/SomeItemEntityFunc.inc.c"
 #include "world/common/todo/IsItemBadge.inc.c"
 
 s32** N(varStash) = NULL;
+#define NAME_SUFFIX
 
 EvtScript N(EVS_Chest_ShowGotItem) = {
     EVT_SET_GROUP(EVT_GROUP_00)
@@ -40,13 +40,14 @@ s32 N(ChestItems)[] = {
 // end modified Chest.inc.c
 // ------------------------------------------------------
 
-API_CALLABLE(N(func_8024228C_A3B76C)) {
+//TODO this whole file is probably an include shared with kkj_17, but the temp required in this function prevents deduplication
+API_CALLABLE(N(ChestItemPrompt)) {
     PopupMenu *menu;
-    s32 numEntries;
-    s32 index;
+    s32 menuIdx;
+    s32 selectIdx;
     s32 temp;
-    s32 var1;
-    s32 var2;
+    s32 canUseItem;
+    s32 itemUsedBefore;
     s32 i;
 
     if (isInitialCall) {
@@ -56,37 +57,40 @@ API_CALLABLE(N(func_8024228C_A3B76C)) {
         script->varTable[10] = script->varTable[0];
 
         if (temp == 0) {
+            // storing items
             script->varTable[1] = GF_KKJ16_Item_PowerRush;
             script->varTable[2] = GF_KKJ_Stored_PowerRush;
             menu->popupType = POPUP_MENU_USEKEY;
         } else {
+            // retrieving items
             script->varTable[1] = GF_KKJ_Stored_PowerRush;
             script->varTable[2] = GF_KKJ_Retrieved_PowerRush;
             menu->popupType = POPUP_MENU_TAKE_FROM_CHEST;
         }
 
-        numEntries = 0;
+        menuIdx = 0;
         for (i = 0; i < ARRAY_COUNT(N(ChestItems)); i++) {
-            var1 = evt_get_variable(NULL, script->varTable[1] + i);
-            var2 = evt_get_variable(NULL, script->varTable[2] + i);
-            if (var1 != 0 && var2 == 0) {
+            // meaning of 'can use' and 'used before' depends on type of chest interaction
+            canUseItem = evt_get_variable(NULL, script->varTable[1] + i);
+            itemUsedBefore = evt_get_variable(NULL, script->varTable[2] + i);
+            if (canUseItem && !itemUsedBefore) {
                 ItemData* item = &gItemTable[N(ChestItems)[i]];
                 IconHudScriptPair* itemHudScripts = &gItemHudScripts[item->hudElemID];
-                menu->ptrIcon[numEntries] = itemHudScripts->enabled;
-                menu->userIndex[numEntries] = i;
-                menu->enabled[numEntries] = TRUE;
-                menu->nameMsg[numEntries] = item->nameMsg;
-                menu->descMsg[numEntries] = item->shortDescMsg;
-                numEntries++;
+                menu->ptrIcon[menuIdx] = itemHudScripts->enabled;
+                menu->userIndex[menuIdx] = i;
+                menu->enabled[menuIdx] = TRUE;
+                menu->nameMsg[menuIdx] = item->nameMsg;
+                menu->descMsg[menuIdx] = item->shortDescMsg;
+                menuIdx++;
             }
         }
 
-        if (numEntries == 0) {
+        if (menuIdx == 0) {
             script->varTable[0] = 0;
             return ApiStatus_DONE1;
         }
 
-        menu->numEntries = numEntries;
+        menu->numEntries = menuIdx;
         menu->initialPos = 0;
         create_popup_menu(menu);
         script->functionTemp[0] = 0;
@@ -108,14 +112,13 @@ API_CALLABLE(N(func_8024228C_A3B76C)) {
 
     destroy_popup_menu();
 
-    temp = script->functionTemp[1];
-    if (temp == 255) {
+    if (script->functionTemp[1] == 255) {
         script->varTable[0] = -1;
     } else {
-        index = menu->userIndex[temp - 1];
-        script->varTable[0] = N(ChestItems)[index];
+        selectIdx = menu->userIndex[script->functionTemp[1] - 1];
+        script->varTable[0] = N(ChestItems)[selectIdx];
         if (script->varTable[10] == 0) {
-            evt_set_variable(NULL, script->varTable[2] + index, 1);
+            evt_set_variable(NULL, script->varTable[2] + selectIdx, 1);
         }
         heap_free(script->functionTempPtr[2]);
     }
@@ -123,15 +126,15 @@ API_CALLABLE(N(func_8024228C_A3B76C)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802424CC_A3B9AC)) {
-    s32* ptr = N(ChestItems);
+// assumes itemID on LVar0, sets GF_KKJ_Retrieved_* based on item list position
+API_CALLABLE(N(SetItemRetrieved)) {
     s32 found = FALSE;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(N(ChestItems)); i++) {
-        s32 var = ptr[i];
+        s32 listItemID = N(ChestItems)[i];
 
-        if (script->varTable[0] == var) {
+        if (script->varTable[0] == listItemID) {
             found = TRUE;
             break;
         }
@@ -176,11 +179,11 @@ EvtScript N(EVS_CloseChest) = {
     EVT_END
 };
 
-EvtScript N(EVS_Interact) = {
+EvtScript N(EVS_Interact_MagicChest) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_EXEC_WAIT(N(EVS_OpenChest))
     EVT_SET(LVar0, 1)
-    EVT_CALL(N(func_8024228C_A3B76C))
+    EVT_CALL(N(ChestItemPrompt))
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(-1)
         EVT_CASE_EQ(0)
@@ -193,7 +196,7 @@ EvtScript N(EVS_Interact) = {
             EVT_CALL(ShowGotItem, LVar0, FALSE, 0)
             EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
             EVT_CALL(AddBadge, LVar0, LVar1)
-            EVT_CALL(N(func_802424CC_A3B9AC))
+            EVT_CALL(N(SetItemRetrieved))
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_CALL(N(GetItemEmptyCount))
@@ -202,7 +205,7 @@ EvtScript N(EVS_Interact) = {
             EVT_ELSE
                 EVT_CALL(ShowGotItem, LVar0, FALSE, 2)
                 EVT_CALL(AddItem, LVar0, LVar1)
-                EVT_CALL(N(func_802424CC_A3B9AC))
+                EVT_CALL(N(SetItemRetrieved))
             EVT_END_IF
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(EVS_CloseChest))
@@ -210,8 +213,6 @@ EvtScript N(EVS_Interact) = {
     EVT_RETURN
     EVT_END
 };
-
-#define NAME_SUFFIX
 
 EvtScript N(EVS_SetupMagicChest) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Interact_MagicChest)), TRIGGER_WALL_PRESS_A, COLLIDER_o207, 1, 0)

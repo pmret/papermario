@@ -15,6 +15,7 @@ NpcSettings N(NpcSettings_Merlow) = {
     .level = 99,
 };
 
+#define NAME_SUFFIX _Merlow
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
@@ -22,7 +23,7 @@ s32 N(LetterList)[] = {
     ITEM_NONE
 };
 
-EvtScript N(EVS_LetterPrompt_Merlow) = {
+EvtScript N(EVS_LetterPrompt) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle,
         ITEM_LETTER_TO_MERLOW, ITEM_NONE,
@@ -33,13 +34,14 @@ EvtScript N(EVS_LetterPrompt_Merlow) = {
     EVT_END
 };
 
-EvtScript N(EVS_LetterReward_Merlow) = {
+EvtScript N(EVS_LetterReward) = {
     EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
+#define NAME_SUFFIX
 
 EvtScript N(EVS_NpcInteract_Merluvlee_Passthrough) = {
     EVT_EXEC_WAIT(N(EVS_NpcInteract_Merluvlee))
@@ -47,7 +49,7 @@ EvtScript N(EVS_NpcInteract_Merluvlee_Passthrough) = {
     EVT_END
 };
 
-ShopItemData N(MerlowBadgeInventory)[] = {
+ShopItemData N(MerlowBadgeInventory)[MERLOW_BADGE_COUNT] = {
     { .itemID = ITEM_ATTACK_FX_A,    .price =  1, .descMsg = MSG_ItemShopDesc_AttackFXA },
     { .itemID = ITEM_PAY_OFF,        .price =  1, .descMsg = MSG_ItemShopDesc_PayOff },
     { .itemID = ITEM_CHILL_OUT,      .price =  3, .descMsg = MSG_ItemShopDesc_ChillOut },
@@ -91,7 +93,7 @@ API_CALLABLE(N(Merlow_ShopBadgesPopup)) {
         script->functionTempPtr[2] = heap_malloc(sizeof(*menu));
         menu = script->functionTempPtr[2];
         menuPos = 0;
-        for (i = 0; i < ARRAY_COUNT(N(MerlowBadgeInventory)); i++) {
+        for (i = 0; i < MERLOW_BADGE_COUNT; i++) {
             if (!evt_get_variable(NULL, GF_HOS06_MerlowBadge_00 + i)) {
                 ItemData* item = &gItemTable[N(MerlowBadgeInventory)[i].itemID];
                 IconHudScriptPair* itemHudScripts = &gItemHudScripts[item->hudElemID];
@@ -154,11 +156,11 @@ EvtScript N(EVS_NpcInteract_Merlow) = {
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_GE(GB_HOS06_Merlow_PurchaseCount, 15)
+    EVT_IF_GE(GB_HOS06_Merlow_PurchaseCount, MERLOW_BADGE_COUNT)
         EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004C)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(MF_Unk_00, TRUE)
+    EVT_IF_EQ(MF_PurchasedBadge, TRUE)
         EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004D)
     EVT_ELSE
         EVT_IF_EQ(GF_HOS06_Met_Merlow, FALSE)
@@ -209,10 +211,13 @@ EvtScript N(EVS_NpcInteract_Merlow) = {
     EVT_MUL(LVar1, -1)
     EVT_CALL(AddStarPieces, LVar1)
     EVT_ADD(GB_HOS06_Merlow_PurchaseCount, 1)
-    EVT_SET(MF_Unk_00, TRUE)
+    EVT_SET(MF_PurchasedBadge, TRUE)
     EVT_CALL(N(Merlow_SetBadgePurchased), LVar2)
+    // awkward
+    #define NAME_SUFFIX _Merlow
     EVT_GIVE_BADGE_REWARD_ALT(LVar3, LVar1)
-    EVT_IF_GE(GB_HOS06_Merlow_PurchaseCount, 15)
+    #define NAME_SUFFIX
+    EVT_IF_GE(GB_HOS06_Merlow_PurchaseCount, MERLOW_BADGE_COUNT)
         EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0055)
         EVT_RETURN
     EVT_END_IF
@@ -241,7 +246,7 @@ EvtScript N(EVS_NpcInit_Merluvlee_Passthrough) = {
 };
 
 EvtScript N(EVS_NpcInit_Merlow) = {
-    EVT_SET(MF_Unk_00, FALSE)
+    EVT_SET(MF_PurchasedBadge, FALSE)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Merlow)))
     EVT_RETURN
     EVT_END

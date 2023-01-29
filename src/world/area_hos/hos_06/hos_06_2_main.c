@@ -3,20 +3,20 @@
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
 
-EvtScript N(D_8024269C_A3BB7C) = {
+EvtScript N(EVS_TexPan_MysticPyramid) = {
     EVT_CALL(EnableTexPanning, MODEL_o185, TRUE)
     EVT_SET(LVar0, 0)
     EVT_LOOP(0)
-        EVT_ADD(LVar0, 0x00004000)
-        EVT_CALL(SetTexPanOffset, 12, 0, LVar0, 0)
+        EVT_ADD(LVar0, 0x4000)
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_C, TEX_PANNER_MAIN, LVar0, 0)
         EVT_WAIT(3)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024271C_A3BBFC) = {
-    EVT_EXEC(N(D_8024269C_A3BB7C))
+EvtScript N(EVS_Animate_MysticPyramid) = {
+    EVT_EXEC(N(EVS_TexPan_MysticPyramid))
     EVT_SET(LVar0, 0)
     EVT_LOOP(0)
         EVT_CALL(RotateGroup, MODEL_g87, LVar0, 0, 1, 0)
@@ -36,7 +36,7 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_END
 };
 
-EvtScript N(D_80242840_A3BD20) = {
+EvtScript N(EVS_TexPan_Stars) = {
     EVT_THREAD
         TEX_PAN_PARAMS_ID(TEX_PANNER_3)
         TEX_PAN_PARAMS_STEP( -100,    0,   40,    0)
@@ -44,7 +44,7 @@ EvtScript N(D_80242840_A3BD20) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
-    EVT_CALL(SetTexPanner, MODEL_o103, 3)
+    EVT_CALL(SetTexPanner, MODEL_o103, TEX_PANNER_3)
     EVT_THREAD
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP( -200,    0,  100,    0)
@@ -52,7 +52,7 @@ EvtScript N(D_80242840_A3BD20) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
-    EVT_CALL(SetTexPanner, MODEL_o105, 1)
+    EVT_CALL(SetTexPanner, MODEL_o105, TEX_PANNER_1)
     EVT_RETURN
     EVT_END
 };
@@ -61,18 +61,18 @@ EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_SHOOTING_STAR_SUMMIT)
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_ALT_NO_LEAD()
-    EVT_SET(AF_HOS_B6, FALSE)
+    EVT_SET(AF_HOS06_SpokeWithMerluvlee, FALSE)
     EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupMagicChest))
-    EVT_EXEC(N(D_8024271C_A3BBFC))
+    EVT_EXEC(N(EVS_Animate_MysticPyramid))
     EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_CALL(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, 8)
-    EVT_EXEC(N(EVS_802444B8))
-    EVT_EXEC(N(D_80242840_A3BD20))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_80245878_Merluvlee)), TRIGGER_WALL_PRESS_A, COLLIDER_o224, 1, 0)
+    EVT_EXEC(N(EVS_SetupRooms))
+    EVT_EXEC(N(EVS_TexPan_Stars))
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_AskForHint)), TRIGGER_WALL_PRESS_A, COLLIDER_o224, 1, 0)
     EVT_RETURN
     EVT_END
 };

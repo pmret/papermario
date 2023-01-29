@@ -9,9 +9,10 @@
 #include "mapfs/hos_06_shape.h"
 #include "mapfs/hos_06_hit.h"
 
-#include "sprite/npc/WorldParakarry.h"
 #include "sprite/npc/Merlow.h"
 #include "sprite/npc/Merluvlee.h"
+
+#define MERLOW_BADGE_COUNT 15
 
 enum {
 	NPC_Merluvlee   = 0,
@@ -19,11 +20,11 @@ enum {
 };
 
 enum {
-	MV_Unk_0A		= MapVar(10),
+	MV_RitualFXArrayPtr	= MapVar(10),
 };
 
 enum {
-    MF_Unk_00       = MapFlag(0),
+    MF_PurchasedBadge	= MapFlag(0),
 };
 
 #define NAMESPACE hos_06
@@ -31,8 +32,8 @@ enum {
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_SetupMagicChest);
 extern EvtScript N(EVS_Interact_MagicChest);
-extern EvtScript N(EVS_802444B8);
-extern EvtScript N(EVS_80245878_Merluvlee);
+extern EvtScript N(EVS_SetupRooms);
+extern EvtScript N(EVS_AskForHint);
 
 extern EvtScript N(EVS_NpcInteract_Merluvlee);
 extern EvtScript N(EVS_NpcInit_Merluvlee);
