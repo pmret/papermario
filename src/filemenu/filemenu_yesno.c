@@ -281,6 +281,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                     case 2:
                         clear_player_data();
                         clear_saved_variables();
+                        //TODO hardcoded area/map IDs
                         gGameStatusPtr->areaID = 0;
                         gGameStatusPtr->mapID = 0xB;
                         gGameStatusPtr->entryID = 0;

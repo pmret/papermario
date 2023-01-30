@@ -25,6 +25,7 @@ enum {
     AF_HOS06_SuperBlocksHints   = AreaFlag(100),
     AF_HOS06_StarPieceHints     = AreaFlag(116),
     AF_HOS_B4                   = AreaFlag(180),
+    AF_HOS_B5                   = AreaFlag(181),
     AF_HOS06_SpokeWithMerluvlee = AreaFlag(182),
 };
 
