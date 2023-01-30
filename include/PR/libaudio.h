@@ -35,10 +35,10 @@ extern "C" {
 
 #include <PR/ultratypes.h>
 #include <PR/mbi.h>
-    
+
 /***********************************************************************
  * misc defines
- ***********************************************************************/    
+ ***********************************************************************/
 #ifndef _EMULATOR
 #	ifdef AUD_PROFILE
 
@@ -65,8 +65,8 @@ extern "C" {
 #define AL_FRAME_INIT           -1
 #define AL_USEC_PER_FRAME       16000
 #define AL_MAX_PRIORITY         127
-#define AL_GAIN_CHANGE_TIME     1000    
-    
+#define AL_GAIN_CHANGE_TIME     1000
+
 typedef s32     ALMicroTime;
 typedef u8      ALPan;
 
@@ -337,9 +337,9 @@ typedef struct {
     s32         curSamples;     /* samples from start of game           */
     ALDMANew    dma;
     ALHeap      *heap;
-    
+
     struct ALParam_s    *paramList;
-    
+
     struct ALMainBus_s  *mainBus;
     struct ALAuxBus_s   *auxBus;        /* ptr to array of aux bus structs */
     struct ALFilter_s   *outputFilter;  /* last filter in the filter chain */
@@ -527,7 +527,7 @@ typedef struct {
 typedef struct {
     s32         ticks;    /* MIDI, Tempo and End events must start with ticks */
     u8          status;
-    u8          byte1; 
+    u8          byte1;
     u8          byte2;
     u32         duration;
 } ALMIDIEvent;
@@ -800,7 +800,7 @@ f32     alCSeqTicksToSec(ALCSeq *seq, s32 ticks, u32 tempo);
 u32     alCSeqSecToTicks(ALCSeq *seq, f32 sec, u32 tempo);
 void    alCSeqNewMarker(ALCSeq *seq, ALCSeqMarker *m, u32 ticks);
 void    alCSeqSetLoc(ALCSeq *seq, ALCSeqMarker *marker);
-void    alCSeqGetLoc(ALCSeq *seq, ALCSeqMarker *marker); 
+void    alCSeqGetLoc(ALCSeq *seq, ALCSeqMarker *marker);
 
 /*
  * Sequence Player routines
@@ -912,7 +912,7 @@ typedef struct {
 } ALSndPlayer;
 
 typedef s16   ALSndId;
-    
+
 void            alSndpNew(ALSndPlayer *sndp, ALSndpConfig *c);
 void            alSndpDelete(ALSndPlayer *sndp);
 

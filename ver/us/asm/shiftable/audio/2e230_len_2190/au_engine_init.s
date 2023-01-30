@@ -108,7 +108,7 @@ glabel au_engine_init
 /* 2E3F4 80052FF4 0000982D */  daddu     $s3, $zero, $zero
 /* 2E3F8 80052FF8 8E840004 */  lw        $a0, 4($s4)
 /* 2E3FC 80052FFC 44960000 */  mtc1      $s6, $f0
-/* 2E400 80053000 00000000 */  nop       
+/* 2E400 80053000 00000000 */  nop
 /* 2E404 80053004 46800020 */  cvt.s.w   $f0, $f0
 /* 2E408 80053008 AE820094 */  sw        $v0, 0x94($s4)
 /* 2E40C 8005300C 0C014CBD */  jal       au_reset_instrument
@@ -118,7 +118,7 @@ glabel au_engine_init
 /* 2E41C 8005301C 0C014CEA */  jal       au_reset_instrument_entry
 /* 2E420 80053020 26840014 */   addiu    $a0, $s4, 0x14
 /* 2E424 80053024 0C015843 */  jal       bgm_clear_music_events
-/* 2E428 80053028 00000000 */   nop      
+/* 2E428 80053028 00000000 */   nop
 /* 2E42C 8005302C 0280102D */  daddu     $v0, $s4, $zero
 /* 2E430 80053030 AE8000A4 */  sw        $zero, 0xa4($s4)
 /* 2E434 80053034 AE8000A8 */  sw        $zero, 0xa8($s4)
@@ -144,7 +144,7 @@ glabel au_engine_init
 .L8005307C:
 /* 2E47C 8005307C 327000FF */  andi      $s0, $s3, 0xff
 /* 2E480 80053080 0200202D */  daddu     $a0, $s0, $zero
-/* 2E484 80053084 0C015BB0 */  jal       func_80056EC0
+/* 2E484 80053084 0C015BB0 */  jal       au_pvoice_set_group
 /* 2E488 80053088 0000282D */   daddu    $a1, $zero, $zero
 /* 2E48C 8005308C 0200202D */  daddu     $a0, $s0, $zero
 /* 2E490 80053090 8E850004 */  lw        $a1, 4($s4)
@@ -248,14 +248,14 @@ glabel au_engine_init
 .L80053214:
 /* 2E614 80053214 8E040000 */  lw        $a0, ($s0)
 /* 2E618 80053218 0C012D8B */  jal       au_sfx_load_groups_from_SEF
-/* 2E61C 8005321C 00000000 */   nop      
+/* 2E61C 8005321C 00000000 */   nop
 /* 2E620 80053220 8E82003C */  lw        $v0, 0x3c($s4)
 /* 2E624 80053224 24050040 */  addiu     $a1, $zero, 0x40
 /* 2E628 80053228 94440002 */  lhu       $a0, 2($v0)
 /* 2E62C 8005322C 0C01511F */  jal       au_fetch_SBN_file
 /* 2E630 80053230 27A60018 */   addiu    $a2, $sp, 0x18
 /* 2E634 80053234 14400004 */  bnez      $v0, .L80053248
-/* 2E638 80053238 00000000 */   nop      
+/* 2E638 80053238 00000000 */   nop
 /* 2E63C 8005323C 8FA50018 */  lw        $a1, 0x18($sp)
 /* 2E640 80053240 0C01513E */  jal       au_load_PER
 /* 2E644 80053244 0280202D */   daddu    $a0, $s4, $zero
@@ -290,7 +290,7 @@ glabel au_engine_init
 /* 2E6B0 800532B0 A2800053 */  sb        $zero, 0x53($s4)
 /* 2E6B4 800532B4 A2800052 */  sb        $zero, 0x52($s4)
 /* 2E6B8 800532B8 A2800051 */  sb        $zero, 0x51($s4)
-/* 2E6BC 800532BC 0C015FB4 */  jal       func_80057ED0
+/* 2E6BC 800532BC 0C015FB4 */  jal       au_delay_channel
 /* 2E6C0 800532C0 A2800050 */   sb       $zero, 0x50($s4)
 /* 2E6C4 800532C4 0C015414 */  jal       func_80055050
 /* 2E6C8 800532C8 02A0202D */   daddu    $a0, $s5, $zero
