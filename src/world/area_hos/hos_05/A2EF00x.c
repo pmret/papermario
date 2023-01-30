@@ -20,7 +20,7 @@ BSS s32 N(newPrimR), N(newPrimG), N(newPrimB);
 BSS s32 N(newEnvR), N(newEnvG), N(newEnvB);
 BSS s32 N(duration), N(time);
 
-ApiStatus func_802452C4_A2F504(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802452C4_A2F504)) {
     Bytecode* args;
     args = script->ptrReadPos;
     if (isInitialCall) {
@@ -60,7 +60,7 @@ void func_8024564C_A2F88C(void) {
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_802D9D73);
 }
 
-ApiStatus func_8024569C_A2F8DC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_8024569C_A2F8DC)) {
     Bytecode* args = script->ptrReadPos;
 
     D_802D9D72 = evt_get_variable(script, *args++);
@@ -73,7 +73,7 @@ void func_802456C8_A2F908(void) {
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_8024DCCC_A37F0C);
 }
 
-ApiStatus func_80245718_A2F958(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80245718_A2F958)) {
     Bytecode* args = script->ptrReadPos;
 
     D_8024DCCC_A37F0C = evt_get_variable(script, *args++);
@@ -86,14 +86,14 @@ void func_80245744_A2F984(void) {
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_8024DCD0_A37F10);
 }
 
-ApiStatus func_80245794_A2F9D4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80245794_A2F9D4)) {
     Bytecode* args = script->ptrReadPos;
 
     D_8024DCD0_A37F10 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802457C0_A2FA00(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802457C0_A2FA00)) {
     Camera* camera = &gCameras[CAM_DEFAULT];
 
     if (isInitialCall) {

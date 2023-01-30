@@ -7,7 +7,7 @@ static char* N(exit_str_1) = "";
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-ApiStatus N(AwaitScriptComplete)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AwaitScriptComplete)) {
     Bytecode* args = script->ptrReadPos;
     s32 waitingScriptID = evt_get_variable(script, *args++);
 
@@ -18,7 +18,7 @@ ApiStatus N(AwaitScriptComplete)(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus func_80240634_A2A874(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240634_A2A874)) {
     Bytecode* args = script->ptrReadPos;
     s32 idx = evt_get_variable(script, *args++);
 
@@ -26,7 +26,7 @@ ApiStatus func_80240634_A2A874(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80240690_A2A8D0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240690_A2A8D0)) {
     f32 vt2 = script->varTable[2];
     f32 temp_f20;
     f32 temp_f26;

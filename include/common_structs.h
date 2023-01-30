@@ -139,15 +139,6 @@ typedef struct CamPosSettings {
     /* 0x10 */ Vec3f pos;
 } CamPosSettings; // size = 0x1C
 
-typedef struct CamSettings {
-    /* 0x00 */ s32 type;
-    /* 0x04 */ f32 boomLength;
-    /* 0x08 */ f32 boomPitch;
-    /* 0x0C */ f32 posBuf[6];
-    /* 0x24 */ f32 viewPitch;
-    /* 0x28 */ s32 flag;
-} CamSettings; // size = 0x2C
-
 typedef struct DmaTable {
     /* 0x00 */ u8* start;
     /* 0x04 */ u8* end;
@@ -738,12 +729,12 @@ typedef struct CameraUnk {
 } CameraUnk; // size = 0x8C
 
 typedef struct CameraControlSettings {
-    /* 0x00 */ s32 type;
-    /* 0x04 */ f32 boomLength;
-    /* 0x08 */ f32 boomPitch;
-    /* 0x0C */ Vec3f posA;
-    /* 0x18 */ Vec3f posB;
-    /* 0x24 */ f32 viewPitch;
+    /* 0x00 */ s32 type;        // 0
+    /* 0x04 */ f32 boomLength;  // 1
+    /* 0x08 */ f32 boomPitch;   // 2
+    /* 0x0C */ Vec3f posA;      // 3/4/5
+    /* 0x18 */ Vec3f posB;      // 6/7/8
+    /* 0x24 */ f32 viewPitch;   // 9
     /* 0x28 */ s32 flag;
 } CameraControlSettings; // size = 0x2C
 

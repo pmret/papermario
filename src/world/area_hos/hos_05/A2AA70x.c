@@ -1,6 +1,6 @@
 #include "hos_05.h"
 
-ApiStatus func_80240830_A2AA70(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240830_A2AA70)) {
     gPlayerData.starBeamLevel = 1;
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;

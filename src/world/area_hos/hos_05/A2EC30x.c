@@ -102,7 +102,7 @@ void func_802449F0_A2EC30(s32** arg0) {
     }
 }
 
-ApiStatus func_80244C60_A2EEA0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80244C60_A2EEA0)) {
     Bytecode* args = script->ptrReadPos;
 
     void (*callback)(void) = (void (*)(void))evt_get_variable(script, *args++);

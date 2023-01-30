@@ -30,110 +30,110 @@ typedef struct UnkHosStruct {
     /* 0x60 */ char unk_6E[0x2];
 } UnkHosStruct; // size = 0x60
 
-extern s32 D_802495DC_A3381C;
-extern s32 D_802495E0_A33820;
-extern f32 D_8024963C_A3387C[];
-extern f32 D_8024987C_A33ABC;
-extern f32 D_802498A8_A33AE8;
-extern f32 D_802498D0_A33B10;
-extern u16* D_802498D4_A33B14;
-extern f32 D_802498D8_A33B18;
-extern f32 D_802498DC_A33B1C;
-extern f32 D_802498E0_A33B20;
-extern f32 D_802498E4_A33B24;
-extern f32 D_802498E8_A33B28;
-extern f32 D_802498EC_A33B2C;
-extern f32 D_802498F0_A33B30;
-extern f32 D_802498F4_A33B34;
-extern s32 D_802498F8_A33B38;
-extern s32 D_802498FC_A33B3C;
-extern s32 D_80249900_A33B40;
-extern f32 D_80249904_A33B44;
-extern s32 D_80249908_A33B48;
-extern f32 D_8024990C_A33B4C;
-extern s32 D_80249910_A33B50;
-extern s16 D_80249914_A33B54[];
-extern s16 D_80249934_A33B74[];
-extern s32 D_8024995C_A33B9C;
-extern s16 D_80249960_A33BA0[];
-extern f32 D_80249980_A33BC0;
-extern s32 D_80249984_A33BC4;
-extern s16 D_80249988_A33BC8[];
-extern s16 D_802499A8_A33BE8[][2];
-extern s32 D_80249A48_A33C88;
-extern s16 D_80249A4C_A33C8C[];
-extern f32 D_80249A6C_A33CAC;
-extern s32 D_80249A70_A33CB0;
-extern f32 D_80249A74_A33CB4;
-extern s32 D_80249A78_A33CB8;
-extern s32 D_80249A7C_A33CBC;
-extern s32 D_80249A80_A33CC0;
-extern f32 D_80249A84_A33CC4;
-extern f32 D_80249A88_A33CC8;
-extern f32 D_80249A8C_A33CCC;
-extern s32 D_80249A90_A33CD0;
-extern f32 D_80249A94_A33CD4;
-extern f32 D_80249A98_A33CD8;
-extern f32 D_80249A9C_A33CDC;
-extern f32 D_80249AA0_A33CE0;
-extern s32 D_80249AA4_A33CE4;
-extern f32 D_8024A9C8_A34C08;
-extern s32 D_8024A9CC_A34C0C;
-extern UnkHosStruct* D_8024AA20_A34C60;
-extern Gfx D_8024AA28_A34C68[];
-extern u32 D_8024AAB0_A34CF0;
-extern s32 D_8024AAB4_A34CF4; // func_802440D0_A2E310 can be matched once this is migrated
-extern s32 D_8024AAB8_A34CF8;
-extern u32 D_8024AABC_A34CFC;
-extern s32 D_8024AAC0_A34D00[];
-extern s32 D_8024AAD4_A34D14[];
-extern u8 D_8024AB3C_A34D7C[];
-extern u8 D_8024AC7B_A34EBB;
-extern u16 D_8024AC7C_A34EBC[];
-extern u16 D_8024AC9C_A34EDC[];
-extern s32 D_8024ACB8_A34EF8;
-extern f32 D_8024AEC4_A35104;
-extern f32 D_8024AEC8_A35108;
+extern s32 N(D_802495DC_A3381C);
+extern s32 N(D_802495E0_A33820);
+extern f32 N(D_8024963C_A3387C)[];
+extern f32 N(D_8024987C_A33ABC);
+extern f32 N(D_802498A8_A33AE8);
+extern f32 N(D_802498D0_A33B10);
+extern u16* N(D_802498D4_A33B14);
+extern f32 N(D_802498D8_A33B18);
+extern f32 N(D_802498DC_A33B1C);
+extern f32 N(D_802498E0_A33B20);
+extern f32 N(D_802498E4_A33B24);
+extern f32 N(D_802498E8_A33B28);
+extern f32 N(D_802498EC_A33B2C);
+extern f32 N(D_802498F0_A33B30);
+extern f32 N(D_802498F4_A33B34);
+extern s32 N(D_802498F8_A33B38);
+extern s32 N(D_802498FC_A33B3C);
+extern s32 N(D_80249900_A33B40);
+extern f32 N(D_80249904_A33B44);
+extern s32 N(D_80249908_A33B48);
+extern f32 N(D_8024990C_A33B4C);
+extern s32 N(D_80249910_A33B50);
+extern s16 N(D_80249914_A33B54)[];
+extern s16 N(D_80249934_A33B74)[];
+extern s32 N(D_8024995C_A33B9C);
+extern s16 N(D_80249960_A33BA0)[];
+extern f32 N(D_80249980_A33BC0);
+extern s32 N(D_80249984_A33BC4);
+extern s16 N(D_80249988_A33BC8)[];
+extern s16 N(D_802499A8_A33BE8)[][2];
+extern s32 N(D_80249A48_A33C88);
+extern s16 N(D_80249A4C_A33C8C)[];
+extern f32 N(D_80249A6C_A33CAC);
+extern s32 N(D_80249A70_A33CB0);
+extern f32 N(D_80249A74_A33CB4);
+extern s32 N(D_80249A78_A33CB8);
+extern s32 N(D_80249A7C_A33CBC);
+extern s32 N(D_80249A80_A33CC0);
+extern f32 N(D_80249A84_A33CC4);
+extern f32 N(D_80249A88_A33CC8);
+extern f32 N(D_80249A8C_A33CCC);
+extern s32 N(D_80249A90_A33CD0);
+extern f32 N(D_80249A94_A33CD4);
+extern f32 N(D_80249A98_A33CD8);
+extern f32 N(D_80249A9C_A33CDC);
+extern f32 N(D_80249AA0_A33CE0);
+extern s32 N(D_80249AA4_A33CE4);
+extern f32 N(D_8024A9C8_A34C08);
+extern s32 N(D_8024A9CC_A34C0C);
+extern UnkHosStruct* N(D_8024AA20_A34C60);
+extern Gfx N(D_8024AA28_A34C68)[];
+extern u32 N(D_8024AAB0_A34CF0);
+extern s32 N(D_8024AAB4_A34CF4); // func_802440D0_A2E310 can be matched once this is migrated
+extern s32 N(D_8024AAB8_A34CF8);
+extern u32 N(D_8024AABC_A34CFC);
+extern s32 N(D_8024AAC0_A34D00)[];
+extern s32 N(D_8024AAD4_A34D14)[];
+extern u8 N(D_8024AB3C_A34D7C)[];
+extern u8 N(D_8024AC7B_A34EBB);
+extern u16 N(D_8024AC7C_A34EBC)[];
+extern u16 N(D_8024AC9C_A34EDC)[];
+extern s32 N(D_8024ACB8_A34EF8);
+extern f32 N(D_8024AEC4_A35104);
+extern f32 N(D_8024AEC8_A35108);
 
-BSS f32 D_8024F2C8;
-BSS f32 D_8024F2CC;
-BSS f32 D_8024F2D0; // unused?
-BSS f32 D_8024F2D4; // unused?
-BSS f32 D_8024F2D8;
-BSS f32 D_8024F2DC;
-BSS f32 D_8024F2E0;
-BSS f32 D_8024F2E4;
-BSS f32 D_8024F2E8;
-BSS f32 D_8024F2EC;
-BSS f32 D_8024F2F0;
-BSS f32 D_8024F2F4;
-BSS f32 D_8024F2F8;
-BSS f32 D_8024F2FC;
-BSS f32 D_8024F300;
-BSS f32 D_8024F304;
-BSS f32 D_8024F308;
-BSS f32 D_8024F30C;
-BSS f32 D_8024F310;
+BSS f32 N(D_8024F2C8);
+BSS f32 N(D_8024F2CC);
+BSS f32 N(D_8024F2D0); // unused?
+BSS f32 N(D_8024F2D4); // unused?
+BSS f32 N(D_8024F2D8);
+BSS f32 N(D_8024F2DC);
+BSS f32 N(D_8024F2E0);
+BSS f32 N(D_8024F2E4);
+BSS f32 N(D_8024F2E8);
+BSS f32 N(D_8024F2EC);
+BSS f32 N(D_8024F2F0);
+BSS f32 N(D_8024F2F4);
+BSS f32 N(D_8024F2F8);
+BSS f32 N(D_8024F2FC);
+BSS f32 N(D_8024F300);
+BSS f32 N(D_8024F304);
+BSS f32 N(D_8024F308);
+BSS f32 N(D_8024F30C);
+BSS f32 N(D_8024F310);
 BSS char B_8024F314[0x4];
-BSS f32 D_8024F318[7];
-BSS char D_8024F334[0x4];
-BSS f32 D_8024F338[7];
-BSS char D_8024F354[0x4];
-BSS f32 D_8024F358[7];
-BSS f32 D_8024F374;
-BSS f32 D_8024F378;
-BSS char D_8024F37C[0x4];
-BSS s32 D_8024F380;
-BSS char D_8024F384[0x74];
-BSS s32 D_8024F3F8[10];
+BSS f32 N(D_8024F318)[7];
+BSS char N(D_8024F334)[0x4];
+BSS f32 N(D_8024F338)[7];
+BSS char N(D_8024F354)[0x4];
+BSS f32 N(D_8024F358)[7];
+BSS f32 N(D_8024F374);
+BSS f32 N(D_8024F378);
+BSS char N(D_8024F37C)[0x4];
+BSS s32 N(D_8024F380);
+BSS char N(D_8024F384)[0x74];
+BSS s32 N(D_8024F3F8)[10];
 BSS s32 hos_05_8024F420[10];
-BSS s32 D_8024F448[10];
-BSS s32 D_8024F470_hos_bss[10];
-BSS s32 D_8024F498[10];
-BSS s32 hos_05_D_8024F4C0[10];
-BSS s32 D_8024F4E8[34];
+BSS s32 N(D_8024F448)[10];
+BSS s32 N(D_8024F470_hos_bss)[10];
+BSS s32 N(D_8024F498)[10];
+BSS s32 hos_05_N(D_8024F4C0)[10];
+BSS s32 N(D_8024F4E8)[34];
 
-ApiStatus func_80240880_A2AAC0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240880_A2AAC0)) {
     Bytecode* args = script->ptrReadPos;
     s32 primR = evt_get_variable(script, *args++);
     s32 primG = evt_get_variable(script, *args++);
@@ -149,7 +149,7 @@ ApiStatus func_80240880_A2AAC0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802409C4_A2AC04(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802409C4_A2AC04)) {
     Bytecode* args;
     static u8 oldPrimR, oldPrimG, oldPrimB;
     static u8 oldEnvR, oldEnvG, oldEnvB;
@@ -197,7 +197,7 @@ void func_80240D54_A2AF94(s32 camID, f32 fov) {
     camera->vfov = fov * 1.1;
 }
 
-ApiStatus func_80240DA0_A2AFE0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240DA0_A2AFE0)) {
     Bytecode* args = script->ptrReadPos;
     s32 camID = evt_get_variable(script, *args++);
     f32 fov = evt_get_float_variable(script, *args++);
@@ -206,7 +206,7 @@ ApiStatus func_80240DA0_A2AFE0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80240DF8_A2B038(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240DF8_A2B038)) {
     GameStatus* gameStatus = gGameStatusPtr;
     if (gameStatus->creditsViewportMode < 5U) {
         gameStatus->creditsViewportMode++;
@@ -215,13 +215,13 @@ ApiStatus func_80240DF8_A2B038(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-ApiStatus func_80240E30_A2B070(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240E30_A2B070)) {
     mdl_set_all_fog_mode(FOG_MODE_3);
     return ApiStatus_DONE2;
 }
 
 // adjusts properties of EmitterVolume:GoldShimmer2 effect
-ApiStatus func_80240E50_A2B090(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240E50_A2B090)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
     s32 subtype = evt_get_variable(script, *args++);
@@ -235,25 +235,25 @@ ApiStatus func_80240E50_A2B090(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80240F30_A2B170(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240F30_A2B170)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, ArrayVar(0));
 
-    effect->data.somethingRotating[D_802495DC_A3381C + 1].state = 1;
-    D_802495DC_A3381C++;
+    effect->data.somethingRotating[N(D_802495DC_A3381C) + 1].state = 1;
+    N(D_802495DC_A3381C)++;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80240F88_A2B1C8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240F88_A2B1C8)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, ArrayVar(0));
 
-    effect->data.somethingRotating[D_802495E0_A33820 + 1].state = 3;
-    D_802495E0_A33820++;
+    effect->data.somethingRotating[N(D_802495E0_A33820) + 1].state = 3;
+    N(D_802495E0_A33820)++;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80240FE0_A2B220(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80240FE0_A2B220)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, ArrayVar(16));
 
@@ -314,72 +314,72 @@ void func_802410E4_A2B324(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32*
     *arg5 = arg1 + ((arg2 - arg1) * var_f12_2);
 }
 
-ApiStatus func_80241274_A2B4B4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80241274_A2B4B4)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    if (nuGfxCfb_ptr == D_802498D4_A33B14) {
+    if (nuGfxCfb_ptr == N(D_802498D4_A33B14)) {
         return ApiStatus_BLOCK;
     }
-    D_802498D4_A33B14 = nuGfxCfb_ptr;
-    func_80241044_A2B284(250.0f, 0.0f, D_802498D0_A33B10, 0.5f, &D_802498D0_A33B10);
-    func_802410E4_A2B324(2, 130.4f, D_8024963C_A3387C[1], 0.0f, 470.0f, &D_802498D8_A33B18);
-    func_80241044_A2B284(12.4f, D_8024963C_A3387C[2], D_802498DC_A33B1C, 0.05f, &D_802498DC_A33B1C);
-    func_80241044_A2B284(-16.8f, D_8024963C_A3387C[9], D_802498E0_A33B20, 0.05f, &D_802498E0_A33B20);
-    func_80241044_A2B284(62.0f, 49.0f, D_802498E4_A33B24, 0.1f, &D_802498E4_A33B24);
-    func_80240D54_A2AF94(0, D_802498E4_A33B24);
-    camera->controlSettings.boomLength = D_802498D8_A33B18;
-    camera->controlSettings.boomPitch = D_802498DC_A33B1C;
-    camera->controlSettings.viewPitch = D_802498E0_A33B20;
-    camera->controlSettings.posB.x = sin_deg(D_802498D0_A33B10) * 500.0f;
-    camera->controlSettings.posB.z = cos_deg(D_802498D0_A33B10) * -500.0f;
+    N(D_802498D4_A33B14) = nuGfxCfb_ptr;
+    func_80241044_A2B284(250.0f, 0.0f, N(D_802498D0_A33B10), 0.5f, &N(D_802498D0_A33B10));
+    func_802410E4_A2B324(2, 130.4f, N(D_8024963C_A3387C)[1], 0.0f, 470.0f, &N(D_802498D8_A33B18));
+    func_80241044_A2B284(12.4f, N(D_8024963C_A3387C)[2], N(D_802498DC_A33B1C), 0.05f, &N(D_802498DC_A33B1C));
+    func_80241044_A2B284(-16.8f, N(D_8024963C_A3387C)[9], N(D_802498E0_A33B20), 0.05f, &N(D_802498E0_A33B20));
+    func_80241044_A2B284(62.0f, 49.0f, N(D_802498E4_A33B24), 0.1f, &N(D_802498E4_A33B24));
+    func_80240D54_A2AF94(0, N(D_802498E4_A33B24));
+    camera->controlSettings.boomLength = N(D_802498D8_A33B18);
+    camera->controlSettings.boomPitch = N(D_802498DC_A33B1C);
+    camera->controlSettings.viewPitch = N(D_802498E0_A33B20);
+    camera->controlSettings.posB.x = sin_deg(N(D_802498D0_A33B10)) * 500.0f;
+    camera->controlSettings.posB.z = cos_deg(N(D_802498D0_A33B10)) * -500.0f;
     camera->panActive = TRUE;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024146C_A2B6AC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_8024146C_A2B6AC)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    if (nuGfxCfb_ptr == D_802498D4_A33B14) {
+    if (nuGfxCfb_ptr == N(D_802498D4_A33B14)) {
         return ApiStatus_BLOCK;
     }
-    D_802498D4_A33B14 = nuGfxCfb_ptr;
-    func_80241044_A2B284(250.0f, 0.0f, D_802498D0_A33B10, 0.5f, &D_802498D0_A33B10);
-    func_802410E4_A2B324(2, 130.4f, D_8024963C_A3387C[1], D_802498FC_A33B3C, 470.0f, &D_802498E8_A33B28);
-    func_80241044_A2B284(12.4f, D_8024963C_A3387C[2], D_802498EC_A33B2C, 0.05f, &D_802498EC_A33B2C);
-    func_80241044_A2B284(-16.8f, D_8024963C_A3387C[9], D_802498F0_A33B30, 0.05f, &D_802498F0_A33B30);
-    func_80241044_A2B284(62.0f, 49.0f, D_802498F4_A33B34, 0.1f, &D_802498F4_A33B34);
-    func_80240D54_A2AF94(0, D_802498F4_A33B34);
-    camera->controlSettings.boomLength = D_802498E8_A33B28;
-    camera->controlSettings.boomPitch = D_802498EC_A33B2C;
-    camera->controlSettings.viewPitch = D_802498F0_A33B30;
-    camera->controlSettings.posB.x = sin_deg(D_802498D0_A33B10) * 500.0f;
-    camera->controlSettings.posB.z = cos_deg(D_802498D0_A33B10) * -500.0f;
+    N(D_802498D4_A33B14) = nuGfxCfb_ptr;
+    func_80241044_A2B284(250.0f, 0.0f, N(D_802498D0_A33B10), 0.5f, &N(D_802498D0_A33B10));
+    func_802410E4_A2B324(2, 130.4f, N(D_8024963C_A3387C)[1], N(D_802498FC_A33B3C), 470.0f, &N(D_802498E8_A33B28));
+    func_80241044_A2B284(12.4f, N(D_8024963C_A3387C)[2], N(D_802498EC_A33B2C), 0.05f, &N(D_802498EC_A33B2C));
+    func_80241044_A2B284(-16.8f, N(D_8024963C_A3387C)[9], N(D_802498F0_A33B30), 0.05f, &N(D_802498F0_A33B30));
+    func_80241044_A2B284(62.0f, 49.0f, N(D_802498F4_A33B34), 0.1f, &N(D_802498F4_A33B34));
+    func_80240D54_A2AF94(0, N(D_802498F4_A33B34));
+    camera->controlSettings.boomLength = N(D_802498E8_A33B28);
+    camera->controlSettings.boomPitch = N(D_802498EC_A33B2C);
+    camera->controlSettings.viewPitch = N(D_802498F0_A33B30);
+    camera->controlSettings.posB.x = sin_deg(N(D_802498D0_A33B10)) * 500.0f;
+    camera->controlSettings.posB.z = cos_deg(N(D_802498D0_A33B10)) * -500.0f;
     camera->panActive = TRUE;
-    D_802498FC_A33B3C++;
-    if (D_802498D0_A33B10 == 0.0f) {
-        D_802498F8_A33B38++;
+    N(D_802498FC_A33B3C)++;
+    if (N(D_802498D0_A33B10) == 0.0f) {
+        N(D_802498F8_A33B38)++;
     }
 
-    if (D_802498F8_A33B38 <= 30) {
+    if (N(D_802498F8_A33B38) <= 30) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE1;
 }
 
-ApiStatus func_802416BC_A2B8FC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802416BC_A2B8FC)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
     if (isInitialCall) {
         camera->flags |= CAMERA_FLAG_SHAKING;
     }
     guTranslateF(camera->viewMtxShaking,
-        D_80249904_A33B44 * sin_deg(D_80249900_A33B40 * 486),
-        D_80249904_A33B44 * cos_deg(D_80249900_A33B40 * 254),
+        N(D_80249904_A33B44) * sin_deg(N(D_80249900_A33B40) * 486),
+        N(D_80249904_A33B44) * cos_deg(N(D_80249900_A33B40) * 254),
         0.0f
     );
-    D_80249900_A33B40++;
-    D_80249904_A33B44 += (12.0f - D_80249904_A33B44) * 0.2;
-    if (D_80249900_A33B40 > 20) {
+    N(D_80249900_A33B40)++;
+    N(D_80249904_A33B44) += (12.0f - N(D_80249904_A33B44)) * 0.2;
+    if (N(D_80249900_A33B40) > 20) {
         guTranslateF(camera->viewMtxShaking, 0.0f, 0.0f, 0.0f);
         camera->flags &= ~CAMERA_FLAG_SHAKING;
         return ApiStatus_DONE1;
@@ -387,7 +387,7 @@ ApiStatus func_802416BC_A2B8FC(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80241850_A2BA90(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80241850_A2BA90)) {
     Camera* camera = &gCameras[gCurrentCameraID];
     Matrix4f sp18;
     f32 x, y;
@@ -395,22 +395,22 @@ ApiStatus func_80241850_A2BA90(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         camera->flags |= CAMERA_FLAG_SHAKING;
     }
-    x = D_8024990C_A33B4C * sin_deg(D_80249908_A33B48 * 486);
-    y = D_8024990C_A33B4C * cos_deg(D_80249908_A33B48 * 254);
+    x = N(D_8024990C_A33B4C) * sin_deg(N(D_80249908_A33B48) * 486);
+    y = N(D_8024990C_A33B4C) * cos_deg(N(D_80249908_A33B48) * 254);
     guTranslateF(camera->viewMtxShaking, x, y, 0.0f);
     guTranslateF(camera->viewMtxShaking, x, y, 0.0f);
     guRotateF(sp18, 20.0f, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp18, camera->viewMtxShaking, camera->viewMtxShaking);
     camera->panActive = TRUE;
-    if (D_80249908_A33B48 >= 10) {
+    if (N(D_80249908_A33B48) >= 10) {
         guRotateF(camera->viewMtxShaking, 20.0f, 0.0f, 0.0f, 1.0f);
         return ApiStatus_DONE1;
     }
-    D_80249908_A33B48++;
+    N(D_80249908_A33B48)++;
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802419F4_A2BC34(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802419F4_A2BC34)) {
     Npc* npc7 = resolve_npc(script, 7);
     Npc* npc8 = resolve_npc(script, 8);
 
@@ -425,25 +425,25 @@ ApiStatus func_802419F4_A2BC34(Evt* script, s32 isInitialCall) {
         npc8->colliderPos.x = npc8->pos.x;
         npc7->colliderPos.z = npc7->pos.z;
         npc8->colliderPos.z = npc8->pos.z;
-        D_8024F2C8 = 400.0f;
+        N(D_8024F2C8) = 400.0f;
     }
-    if (D_80249910_A33B50 < 20) {
-        npc7->pos.y = D_80249934_A33B74[D_80249910_A33B50];
+    if (N(D_80249910_A33B50) < 20) {
+        npc7->pos.y = N(D_80249934_A33B74)[N(D_80249910_A33B50)];
     } else {
-        npc7->pos.y += D_80249914_A33B54[((D_80249910_A33B50 - 20) & 30) / 2] * 0.1f;
+        npc7->pos.y += N(D_80249914_A33B54)[((N(D_80249910_A33B50) - 20) & 30) / 2] * 0.1f;
     }
     npc8->pos.y = npc7->pos.y;
     npc7->colliderPos.y = npc7->pos.y;
     npc8->colliderPos.y = npc8->pos.y;
 
-    D_80249910_A33B50++;
-    if (D_80249910_A33B50 < 2000) {
+    N(D_80249910_A33B50)++;
+    if (N(D_80249910_A33B50) < 2000) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE1;
 }
 
-ApiStatus func_80241B40_A2BD80(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80241B40_A2BD80)) {
     Npc* npc7 = resolve_npc(script, 7);
     Npc* npc8 = resolve_npc(script, 8);
 
@@ -458,32 +458,32 @@ ApiStatus func_80241B40_A2BD80(Evt* script, s32 isInitialCall) {
         npc8->colliderPos.x = npc8->pos.x;
         npc7->colliderPos.z = npc7->pos.z;
         npc8->colliderPos.z = npc8->pos.z;
-        D_8024F2CC = 135.0f;
+        N(D_8024F2CC) = 135.0f;
     }
-    npc7->pos.y += D_80249960_A33BA0[((u32) (D_8024995C_A33B9C - 20) & 30) / 2] * 0.1f;
+    npc7->pos.y += N(D_80249960_A33BA0)[((u32) (N(D_8024995C_A33B9C) - 20) & 30) / 2] * 0.1f;
     npc8->pos.y = npc7->pos.y;
     npc7->colliderPos.y = npc7->pos.y;
     npc8->colliderPos.y = npc8->pos.y;
-    D_8024995C_A33B9C++;
-    if (D_8024995C_A33B9C < 2000) {
+    N(D_8024995C_A33B9C)++;
+    if (N(D_8024995C_A33B9C) < 2000) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE1;
 }
 
-ApiStatus func_80241C54_A2BE94(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80241C54_A2BE94)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    func_80241044_A2B284(30.0f, 15.0f, D_80249980_A33BC0, 1.0f, &D_80249980_A33BC0);
-    func_80240D54_A2AF94(0, D_80249980_A33BC0);
+    func_80241044_A2B284(30.0f, 15.0f, N(D_80249980_A33BC0), 1.0f, &N(D_80249980_A33BC0));
+    func_80240D54_A2AF94(0, N(D_80249980_A33BC0));
     camera->panActive = TRUE;
-    if (D_80249980_A33BC0 == 15.0f) {
+    if (N(D_80249980_A33BC0) == 15.0f) {
         return ApiStatus_DONE1;
     }
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80241D08_A2BF48(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80241D08_A2BF48)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
     if (isInitialCall) {
@@ -493,7 +493,7 @@ ApiStatus func_80241D08_A2BF48(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80241D7C_A2BFBC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80241D7C_A2BFBC)) {
     Npc* npc = resolve_npc(script, 9);
 
     if (isInitialCall) {
@@ -503,31 +503,31 @@ ApiStatus func_80241D7C_A2BFBC(Evt* script, s32 isInitialCall) {
         npc->colliderPos.x = npc->pos.x;
         npc->colliderPos.z = npc->pos.z;
     }
-    if (D_80249984_A33BC4 == 30) {
+    if (N(D_80249984_A33BC4) == 30) {
         npc->yaw = 90.0f;
     }
-    if (D_80249984_A33BC4 < 40) {
-        npc->pos.x = D_802499A8_A33BE8[D_80249984_A33BC4][0] - 145;
-        npc->pos.y = (((D_802499A8_A33BE8[D_80249984_A33BC4][1] - 135) * 200) / 225) + 147;
-        if (D_80249984_A33BC4 < 20) {
-            npc->pos.z = 114.0f - (D_80249984_A33BC4 * 30.0f) / 20.0f;
+    if (N(D_80249984_A33BC4) < 40) {
+        npc->pos.x = N(D_802499A8_A33BE8)[N(D_80249984_A33BC4)][0] - 145;
+        npc->pos.y = (((N(D_802499A8_A33BE8)[N(D_80249984_A33BC4)][1] - 135) * 200) / 225) + 147;
+        if (N(D_80249984_A33BC4) < 20) {
+            npc->pos.z = 114.0f - (N(D_80249984_A33BC4) * 30.0f) / 20.0f;
         } else {
             npc->pos.z = 84.0f;
         }
         npc->colliderPos.x = npc->pos.x;
         npc->colliderPos.z = npc->pos.z;
     } else {
-        npc->pos.y += D_80249988_A33BC8[((D_80249984_A33BC4 - 40) & 30) / 2] * 0.1f;
+        npc->pos.y += N(D_80249988_A33BC8)[((N(D_80249984_A33BC4) - 40) & 30) / 2] * 0.1f;
     }
     npc->colliderPos.y = npc->pos.y;
-    D_80249984_A33BC4++;
-    if (D_80249984_A33BC4 < 2000) {
+    N(D_80249984_A33BC4)++;
+    if (N(D_80249984_A33BC4) < 2000) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE1;
 }
 
-ApiStatus func_80241F54_A2C194(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80241F54_A2C194)) {
     Npc* npc = resolve_npc(script, 9);
 
     if (isInitialCall) {
@@ -538,23 +538,23 @@ ApiStatus func_80241F54_A2C194(Evt* script, s32 isInitialCall) {
         npc->yaw = 90.0f;
         npc->pos.y = 147.0f;
     }
-    npc->pos.y += D_80249A4C_A33C8C[((D_80249A48_A33C88 - 40) & 30) / 2] * 0.1f;
+    npc->pos.y += N(D_80249A4C_A33C8C)[((N(D_80249A48_A33C88) - 40) & 30) / 2] * 0.1f;
     npc->colliderPos.y = npc->pos.y;
 
-    D_80249A48_A33C88++;
-    if (D_80249A48_A33C88 < 2000) {
+    N(D_80249A48_A33C88)++;
+    if (N(D_80249A48_A33C88) < 2000) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE1;
 }
 
-ApiStatus func_80242024_A2C264(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80242024_A2C264)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    func_802410E4_A2B324(0, 121.6f, 90.0f, D_80249A70_A33CB0, 40.0f, &D_80249A6C_A33CAC);
+    func_802410E4_A2B324(0, 121.6f, 90.0f, N(D_80249A70_A33CB0), 40.0f, &N(D_80249A6C_A33CAC));
     camera->panActive = TRUE;
-    camera->controlSettings.boomLength = D_80249A6C_A33CAC;
-    if ((D_80249A70_A33CB0 == ((D_80249A70_A33CB0 / 5) * 5)) && (D_80249A6C_A33CAC != 90.0f)) {
+    camera->controlSettings.boomLength = N(D_80249A6C_A33CAC);
+    if ((N(D_80249A70_A33CB0) == ((N(D_80249A70_A33CB0) / 5) * 5)) && (N(D_80249A6C_A33CAC) != 90.0f)) {
         f32 temp_f4 = resolve_npc(script, 7)->pos.y - 150.0f;
 
         fx_fire_breath(
@@ -567,36 +567,36 @@ ApiStatus func_80242024_A2C264(Evt* script, s32 isInitialCall) {
         );
     }
 
-    D_80249A70_A33CB0++;
-    if (D_80249A70_A33CB0 <= 40) {
+    N(D_80249A70_A33CB0)++;
+    if (N(D_80249A70_A33CB0) <= 40) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE1;
 }
 
-ApiStatus func_802421E0_A2C420(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802421E0_A2C420)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    func_802410E4_A2B324(4, 90.0f, 474.7f, D_80249A78_A33CB8, 20.0f, &D_80249A74_A33CB4);
+    func_802410E4_A2B324(4, 90.0f, 474.7f, N(D_80249A78_A33CB8), 20.0f, &N(D_80249A74_A33CB4));
     camera->panActive = TRUE;
-    camera->controlSettings.boomLength = D_80249A74_A33CB4;
-    D_80249A78_A33CB8++;
-    if (D_80249A78_A33CB8 < 21) {
+    camera->controlSettings.boomLength = N(D_80249A74_A33CB4);
+    N(D_80249A78_A33CB8)++;
+    if (N(D_80249A78_A33CB8) < 21) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE1;
 }
 
-ApiStatus func_802422A0_A2C4E0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802422A0_A2C4E0)) {
     Npc* npc7 = resolve_npc(script, 7);
     Npc* npc8 = resolve_npc(script, 8);
 
     if (isInitialCall) {
-        D_8024F2D8 = npc7->pos.x;
-        D_8024F2DC = npc7->pos.z;
+        N(D_8024F2D8) = npc7->pos.x;
+        N(D_8024F2DC) = npc7->pos.z;
     }
-    func_802410E4_A2B324(3, D_8024F2D8, 0.0f, D_80249A7C_A33CBC, 40.0f, &npc7->pos.x);
-    func_802410E4_A2B324(3, D_8024F2DC, 0.0f, D_80249A7C_A33CBC, 40.0f, &npc7->pos.z);
+    func_802410E4_A2B324(3, N(D_8024F2D8), 0.0f, N(D_80249A7C_A33CBC), 40.0f, &npc7->pos.x);
+    func_802410E4_A2B324(3, N(D_8024F2DC), 0.0f, N(D_80249A7C_A33CBC), 40.0f, &npc7->pos.z);
     npc8->pos.x = npc7->pos.x;
     npc8->pos.z = npc7->pos.z;
     npc7->colliderPos.x = npc7->pos.x;
@@ -604,49 +604,49 @@ ApiStatus func_802422A0_A2C4E0(Evt* script, s32 isInitialCall) {
     npc8->colliderPos.x = npc8->pos.x;
     npc8->colliderPos.z = npc8->pos.z;
 
-    D_80249A7C_A33CBC++;
-    if (D_80249A7C_A33CBC <= 40) {
+    N(D_80249A7C_A33CBC)++;
+    if (N(D_80249A7C_A33CBC) <= 40) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE1;
 }
 
-ApiStatus func_802423D4_A2C614(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802423D4_A2C614)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    func_802410E4_A2B324(4, 35.0f, 35.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2E0);
-    func_802410E4_A2B324(4, 130.0f, 270.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2E4);
-    func_802410E4_A2B324(4, 30.0f, 0.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2E8);
-    func_802410E4_A2B324(4, 232.0f, 177.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2EC);
-    func_802410E4_A2B324(4, 0.0f, 0.0f, D_80249A80_A33CC0, 80.0f, &D_8024F2F0);
-    func_80240D54_A2AF94(0, D_8024F2E0);
+    func_802410E4_A2B324(4, 35.0f, 35.0f, N(D_80249A80_A33CC0), 80.0f, &N(D_8024F2E0));
+    func_802410E4_A2B324(4, 130.0f, 270.0f, N(D_80249A80_A33CC0), 80.0f, &N(D_8024F2E4));
+    func_802410E4_A2B324(4, 30.0f, 0.0f, N(D_80249A80_A33CC0), 80.0f, &N(D_8024F2E8));
+    func_802410E4_A2B324(4, 232.0f, 177.0f, N(D_80249A80_A33CC0), 80.0f, &N(D_8024F2EC));
+    func_802410E4_A2B324(4, 0.0f, 0.0f, N(D_80249A80_A33CC0), 80.0f, &N(D_8024F2F0));
+    func_80240D54_A2AF94(0, N(D_8024F2E0));
     camera->panActive = TRUE;
-    camera->controlSettings.boomLength = D_8024F2E4;
-    camera->movePos.x = D_8024F2E8;
-    camera->movePos.y = D_8024F2EC;
-    camera->movePos.z = D_8024F2F0;
+    camera->controlSettings.boomLength = N(D_8024F2E4);
+    camera->movePos.x = N(D_8024F2E8);
+    camera->movePos.y = N(D_8024F2EC);
+    camera->movePos.z = N(D_8024F2F0);
 
-    D_80249A80_A33CC0++;
-    if (D_80249A80_A33CC0 <= 90) {
+    N(D_80249A80_A33CC0)++;
+    if (N(D_80249A80_A33CC0) <= 90) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE1;
 }
 
-ApiStatus func_802425A0_A2C7E0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802425A0_A2C7E0)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    func_802410E4_A2B324(0, 40.0f, -130.0f, D_80249A90_A33CD0, 170.0f, &D_80249A84_A33CC4);
-    func_802410E4_A2B324(0, -40.0f, 130.0f, D_80249A90_A33CD0, 170.0f, &D_80249A88_A33CC8);
-    func_802410E4_A2B324(3, 45.0f, 25.0f, D_80249A90_A33CD0, 170.0f, &D_80249A8C_A33CCC);
+    func_802410E4_A2B324(0, 40.0f, -130.0f, N(D_80249A90_A33CD0), 170.0f, &N(D_80249A84_A33CC4));
+    func_802410E4_A2B324(0, -40.0f, 130.0f, N(D_80249A90_A33CD0), 170.0f, &N(D_80249A88_A33CC8));
+    func_802410E4_A2B324(3, 45.0f, 25.0f, N(D_80249A90_A33CD0), 170.0f, &N(D_80249A8C_A33CCC));
     camera->panActive = TRUE;
-    camera->movePos.x = D_80249A84_A33CC4;
-    camera->movePos.z = D_80249A88_A33CC8;
-    camera->controlSettings.posB.x = sin_deg(D_80249A8C_A33CCC) * 500.0f;
-    camera->controlSettings.posB.z = cos_deg(D_80249A8C_A33CCC) * 500.0f;
+    camera->movePos.x = N(D_80249A84_A33CC4);
+    camera->movePos.z = N(D_80249A88_A33CC8);
+    camera->controlSettings.posB.x = sin_deg(N(D_80249A8C_A33CCC)) * 500.0f;
+    camera->controlSettings.posB.z = cos_deg(N(D_80249A8C_A33CCC)) * 500.0f;
 
-    D_80249A90_A33CD0++;
-    if (D_80249A90_A33CD0 == 170) {
+    N(D_80249A90_A33CD0)++;
+    if (N(D_80249A90_A33CD0) == 170) {
         return ApiStatus_DONE1;
     }
     return ApiStatus_BLOCK;
@@ -655,18 +655,18 @@ ApiStatus func_802425A0_A2C7E0(Evt* script, s32 isInitialCall) {
 ApiStatus func_80242704_A2C944(void) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    func_802410E4_A2B324(3, 25.0f, 200.0f, D_80249AA4_A33CE4, 120.0f, &D_80249AA0_A33CE0);
-    func_802410E4_A2B324(3, 50.0f, 35.0f, D_80249AA4_A33CE4, 30.0f, &D_80249A94_A33CD4);
-    func_802410E4_A2B324(3, 246.1f, 180.0f, D_80249AA4_A33CE4, 30.0f, &D_80249A98_A33CD8);
-    func_802410E4_A2B324(3, 200.0f, 220.0f, D_80249AA4_A33CE4, 30.0f, &D_80249A9C_A33CDC);
-    camera->controlSettings.posB.x = sin_deg(D_80249AA0_A33CE0) * 500.0f;
-    camera->controlSettings.posB.z = cos_deg(D_80249AA0_A33CE0) * 500.0f;
-    func_80240D54_A2AF94(0, D_80249A94_A33CD4);
+    func_802410E4_A2B324(3, 25.0f, 200.0f, N(D_80249AA4_A33CE4), 120.0f, &N(D_80249AA0_A33CE0));
+    func_802410E4_A2B324(3, 50.0f, 35.0f, N(D_80249AA4_A33CE4), 30.0f, &N(D_80249A94_A33CD4));
+    func_802410E4_A2B324(3, 246.1f, 180.0f, N(D_80249AA4_A33CE4), 30.0f, &N(D_80249A98_A33CD8));
+    func_802410E4_A2B324(3, 200.0f, 220.0f, N(D_80249AA4_A33CE4), 30.0f, &N(D_80249A9C_A33CDC));
+    camera->controlSettings.posB.x = sin_deg(N(D_80249AA0_A33CE0)) * 500.0f;
+    camera->controlSettings.posB.z = cos_deg(N(D_80249AA0_A33CE0)) * 500.0f;
+    func_80240D54_A2AF94(0, N(D_80249A94_A33CD4));
     camera->panActive = TRUE;
-    camera->controlSettings.boomLength = D_80249A98_A33CD8;
-    camera->movePos.y = D_80249A9C_A33CDC;
-    D_80249AA4_A33CE4++;
-    if (D_80249AA4_A33CE4 <= 120) {
+    camera->controlSettings.boomLength = N(D_80249A98_A33CD8);
+    camera->movePos.y = N(D_80249A9C_A33CDC);
+    N(D_80249AA4_A33CE4)++;
+    if (N(D_80249AA4_A33CE4) <= 120) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE1;
@@ -674,7 +674,7 @@ ApiStatus func_80242704_A2C944(void) {
 
 // lotta work to do
 #ifdef WIP
-ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802428C8_A2CB08)) {
     Bytecode* args = script->ptrReadPos;
     s32 temp_s6 = evt_get_variable(script, *args++);
     f32 sp10 = evt_get_float_variable(script, *args++);
@@ -714,8 +714,8 @@ ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
 
     switch (temp_s6) {
         case 1:
-            var_s0 = D_8024F3F8;
-            var_s2 = D_8024F3F8;
+            var_s0 = N(D_8024F3F8);
+            var_s2 = N(D_8024F3F8);
             temp_v0 = effect->data.somethingRotating->unk_14 + 30;
             var_f2 = temp_v0;
             if (temp_v0 < 0) {
@@ -746,8 +746,8 @@ ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
             var_f2_2 = effect->data.somethingRotating->unk_0C;
             break;
         case 3:
-            var_s0 = D_8024F448;
-            var_s2 = D_8024F448;
+            var_s0 = N(D_8024F448);
+            var_s2 = N(D_8024F448);
             temp_v0_3 = effect->data.somethingRotating->unk_14 + 30;
             var_f2_4 = temp_v0_3;
             if (temp_v0_3 < 0) {
@@ -762,10 +762,10 @@ ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
             var_f2_2 = effect->data.somethingRotating->unk_0C;
             break;
         case 4:
-            var_s0 = D_8024F470_hos_bss;
+            var_s0 = N(D_8024F470_hos_bss);
             temp_v0_4 = effect->data.somethingRotating->unk_14 + 30;
             var_f2_5 = temp_v0_4;
-            var_s2 = D_8024F470_hos_bss;
+            var_s2 = N(D_8024F470_hos_bss);
             if (temp_v0_4 < 0) {
                 var_f2_5 += 4294967296.0;
             }
@@ -777,8 +777,8 @@ ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
             var_f2_2 = effect->data.somethingRotating->unk_0C;
             break;
         case 5:
-            var_s0 = D_8024F498;
-            var_s2 = D_8024F498;
+            var_s0 = N(D_8024F498);
+            var_s2 = N(D_8024F498);
             temp_v0_5 = effect->data.somethingRotating->unk_14 + 30;
             var_f2_6 = temp_v0_5;
             if (temp_v0_5 < 0) {
@@ -793,8 +793,8 @@ ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
             var_f2_2 = effect->data.somethingRotating->unk_0C;
             break;
         case 6:
-            var_s0 = hos_05_D_8024F4C0;
-            var_s2 = hos_05_D_8024F4C0;
+            var_s0 = hos_05_N(D_8024F4C0);
+            var_s2 = hos_05_N(D_8024F4C0);
             temp_v0_6 = effect->data.somethingRotating->unk_14 + 30;
             var_f2_7 = temp_v0_6;
             if (temp_v0_6 < 0) {
@@ -809,8 +809,8 @@ ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
             var_f2_2 = effect->data.somethingRotating->unk_0C;
             break;
         default:
-            var_s0 = D_8024F4E8;
-            var_s2 = D_8024F4E8;
+            var_s0 = N(D_8024F4E8);
+            var_s2 = N(D_8024F4E8);
             temp_v0_7 = effect->data.somethingRotating->unk_14 + 30;
             var_f2_8 = temp_v0_7;
             if (temp_v0_7 < 0) {
@@ -854,33 +854,33 @@ ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802428C8_A2CB08);
 #endif
 
-ApiStatus func_80242F74_A2D1B4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80242F74_A2D1B4)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    func_80241044_A2B284(D_8024987C_A33ABC, D_802498A8_A33AE8, D_8024A9C8_A34C08, 1.0f, &D_8024A9C8_A34C08);
+    func_80241044_A2B284(N(D_8024987C_A33ABC), N(D_802498A8_A33AE8), N(D_8024A9C8_A34C08), 1.0f, &N(D_8024A9C8_A34C08));
     camera->panActive = TRUE;
-    camera->controlSettings.boomLength = D_8024A9C8_A34C08;
-    if (D_8024A9C8_A34C08 == 700.0f) {
+    camera->controlSettings.boomLength = N(D_8024A9C8_A34C08);
+    if (N(D_8024A9C8_A34C08) == 700.0f) {
         return ApiStatus_DONE1;
     }
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_8024301C_A2D25C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_8024301C_A2D25C)) {
     Npc* npc = resolve_npc(script, 9);
 
     if (isInitialCall) {
-        D_8024F2F4 = npc->pos.x;
-        D_8024F2F8 = npc->pos.z;
+        N(D_8024F2F4) = npc->pos.x;
+        N(D_8024F2F8) = npc->pos.z;
     }
 
-    func_802410E4_A2B324(3, D_8024F2F4, -95.0f, D_8024A9CC_A34C0C, 40.0f, &npc->pos.x);
-    func_802410E4_A2B324(3, D_8024F2F8, 20.0f, D_8024A9CC_A34C0C, 40.0f, &npc->pos.z);
+    func_802410E4_A2B324(3, N(D_8024F2F4), -95.0f, N(D_8024A9CC_A34C0C), 40.0f, &npc->pos.x);
+    func_802410E4_A2B324(3, N(D_8024F2F8), 20.0f, N(D_8024A9CC_A34C0C), 40.0f, &npc->pos.z);
     npc->colliderPos.x = npc->pos.x;
     npc->colliderPos.z = npc->pos.z;
 
-    D_8024A9CC_A34C0C++;
-    if (D_8024A9CC_A34C0C <= 40) {
+    N(D_8024A9CC_A34C0C)++;
+    if (N(D_8024A9CC_A34C0C) <= 40) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE1;
@@ -893,13 +893,13 @@ void func_80243164_A2D3A4(
 );
 
 void func_80243100_A2D340(void) {
-    s32 x = D_8024AA20_A34C60->unk_44 << 0x10;
-    s32 y = D_8024AA20_A34C60->unk_46 << 0x10;
+    s32 x = N(D_8024AA20_A34C60)->unk_44 << 0x10;
+    s32 y = N(D_8024AA20_A34C60)->unk_46 << 0x10;
 
-    if (D_8024AA20_A34C60->unk_00 != 0) {
+    if (N(D_8024AA20_A34C60)->unk_00 != 0) {
         func_80243164_A2D3A4(
             x >> 0x10, y >> 0x10,
-            D_8024AA20_A34C60->unk_1C, D_8024AA20_A34C60->unk_20,
+            N(D_8024AA20_A34C60)->unk_1C, N(D_8024AA20_A34C60)->unk_20,
             255, 128, 128, 16
         );
     }
@@ -916,7 +916,7 @@ void func_80243164_A2D3A4(s32 baseX, s32 baseY, IMG_PTR img, PAL_PTR pal, s32 al
     }
 
     gDPPipeSync(gMasterGfxPos++);
-    gSPDisplayList(gMasterGfxPos++, D_8024AA28_A34C68);
+    gSPDisplayList(gMasterGfxPos++, N(D_8024AA28_A34C68));
 
     if (pal != NULL) {
         gDPLoadTLUT_pal256(gMasterGfxPos++, pal);
@@ -951,9 +951,9 @@ void func_80243164_A2D3A4(s32 baseX, s32 baseY, IMG_PTR img, PAL_PTR pal, s32 al
 
 void func_8024370C_A2D94C(void) {
     func_80243164_A2D3A4(
-        D_8024AA20_A34C60->unk_48, D_8024AA20_A34C60->unk_4A,
-        D_8024AA20_A34C60->unk_18, NULL,
-        D_8024AA20_A34C60->unk_5C, 128, 128, 32
+        N(D_8024AA20_A34C60)->unk_48, N(D_8024AA20_A34C60)->unk_4A,
+        N(D_8024AA20_A34C60)->unk_18, NULL,
+        N(D_8024AA20_A34C60)->unk_5C, 128, 128, 32
     );
 }
 
@@ -989,12 +989,12 @@ void func_80243CC0_A2DF00(void) {
 
     func_8024370C_A2D94C();
 
-    gSPDisplayList(gMasterGfxPos++, D_8024AA28_A34C68);
+    gSPDisplayList(gMasterGfxPos++, N(D_8024AA28_A34C68));
     gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb_ptr);
 
-    if (D_8024AA20_A34C60->unk_5A < 255) {
+    if (N(D_8024AA20_A34C60)->unk_5A < 255) {
         gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, D_8024AA20_A34C60->unk_5A);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, N(D_8024AA20_A34C60)->unk_5A);
     }
     get_screen_overlay_params(1, &sp10, &sp14);
     if (sp14 != 0.0f) {
@@ -1003,31 +1003,31 @@ void func_80243CC0_A2DF00(void) {
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 208, 208, 208, (s32) sp14);
     }
 
-    if (!D_8024AA20_A34C60->unk_58) {
+    if (!N(D_8024AA20_A34C60)->unk_58) {
         func_80243758_A2D998(
-            vpX + D_8024AA20_A34C60->unk_40,
-            vpY + D_8024AA20_A34C60->unk_42,
-            D_8024AA20_A34C60->unk_0C,
-            D_8024AA20_A34C60->unk_10
+            vpX + N(D_8024AA20_A34C60)->unk_40,
+            vpY + N(D_8024AA20_A34C60)->unk_42,
+            N(D_8024AA20_A34C60)->unk_0C,
+            N(D_8024AA20_A34C60)->unk_10
         );
         func_80243758_A2D998(
-            vpX + D_8024AA20_A34C60->unk_3C,
-            vpY + D_8024AA20_A34C60->unk_3E,
-            D_8024AA20_A34C60->unk_04,
-            D_8024AA20_A34C60->unk_08
+            vpX + N(D_8024AA20_A34C60)->unk_3C,
+            vpY + N(D_8024AA20_A34C60)->unk_3E,
+            N(D_8024AA20_A34C60)->unk_04,
+            N(D_8024AA20_A34C60)->unk_08
         );
     } else {
         func_80243758_A2D998(
-            vpX + D_8024AA20_A34C60->unk_3C,
-            vpY + D_8024AA20_A34C60->unk_3E,
-            D_8024AA20_A34C60->unk_04,
-            D_8024AA20_A34C60->unk_08
+            vpX + N(D_8024AA20_A34C60)->unk_3C,
+            vpY + N(D_8024AA20_A34C60)->unk_3E,
+            N(D_8024AA20_A34C60)->unk_04,
+            N(D_8024AA20_A34C60)->unk_08
         );
         func_80243758_A2D998(
-            vpX + D_8024AA20_A34C60->unk_40,
-            vpY + D_8024AA20_A34C60->unk_42,
-            D_8024AA20_A34C60->unk_0C,
-            D_8024AA20_A34C60->unk_10
+            vpX + N(D_8024AA20_A34C60)->unk_40,
+            vpY + N(D_8024AA20_A34C60)->unk_42,
+            N(D_8024AA20_A34C60)->unk_0C,
+            N(D_8024AA20_A34C60)->unk_10
         );
     }
 }
@@ -1037,7 +1037,7 @@ void func_80243ED0_A2E110(s32 arg0, s32 idx) {
 
     idx--;
     if (idx < 0) {
-        u16* pal = D_8024AA20_A34C60->unk_08;
+        u16* pal = N(D_8024AA20_A34C60)->unk_08;
 
         for (i = 0; i < 256; i++) {
             *pal++ = 0xD6B5;
@@ -1049,13 +1049,13 @@ void func_80243ED0_A2E110(s32 arg0, s32 idx) {
         dma_copy(
             title_bg_1_ROM_START + idx * 0xA910,
             title_bg_1_ROM_START + (idx + 1) * 0xA910 ,
-            D_8024AA20_A34C60->unk_04
+            N(D_8024AA20_A34C60)->unk_04
         );
     } else {
         dma_copy(
             title_bg_1_ROM_START + idx * 0xA910,
             title_bg_1_ROM_START + (idx + 1) * 0xA910 ,
-            D_8024AA20_A34C60->unk_0C
+            N(D_8024AA20_A34C60)->unk_0C
         );
     }
 }
@@ -1066,34 +1066,34 @@ void func_80243ED0_A2E110(s32 arg0, s32 idx) {
 #define TAPE_OFFSET 0x2A440
 #endif
 
-ApiStatus func_80243FC4_A2E204(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80243FC4_A2E204)) {
     u8* dmaEnd;
     u8* dmaStart;
     s32 tapeOffset;
     u8* it;
 
-    D_8024AA20_A34C60->unk_00 = create_worker_frontUI(NULL, func_80243CC0_A2DF00);
-    D_8024AA20_A34C60->unk_04 = it = mdl_get_next_texture_address(0x1D420);
+    N(D_8024AA20_A34C60)->unk_00 = create_worker_frontUI(NULL, func_80243CC0_A2DF00);
+    N(D_8024AA20_A34C60)->unk_04 = it = mdl_get_next_texture_address(0x1D420);
     it += 0xA710;
-    D_8024AA20_A34C60->unk_08 = (u16*) it;
+    N(D_8024AA20_A34C60)->unk_08 = (u16*) it;
     it += 0x200;
-    D_8024AA20_A34C60->unk_0C = it;
+    N(D_8024AA20_A34C60)->unk_0C = it;
     it += 0xA710;
-    D_8024AA20_A34C60->unk_10 = (u16*) it;
+    N(D_8024AA20_A34C60)->unk_10 = (u16*) it;
     it += 0x200;
-    D_8024AA20_A34C60->unk_18 = it;
+    N(D_8024AA20_A34C60)->unk_18 = it;
     it += 0x4000;
-    D_8024AA20_A34C60->unk_1C = it;
+    N(D_8024AA20_A34C60)->unk_1C = it;
     it += 0x4000;
-    D_8024AA20_A34C60->unk_20 = (u16*) it;
-    D_8024AA20_A34C60->unk_46 = 240;
-    D_8024AA20_A34C60->unk_48 = 111;
-    D_8024AA20_A34C60->unk_3C = 0;
-    D_8024AA20_A34C60->unk_3E = 0;
-    D_8024AA20_A34C60->unk_40 = 0;
-    D_8024AA20_A34C60->unk_42 = 0;
-    D_8024AA20_A34C60->unk_44 = 0;
-    D_8024AA20_A34C60->unk_4A = 54;
+    N(D_8024AA20_A34C60)->unk_20 = (u16*) it;
+    N(D_8024AA20_A34C60)->unk_46 = 240;
+    N(D_8024AA20_A34C60)->unk_48 = 111;
+    N(D_8024AA20_A34C60)->unk_3C = 0;
+    N(D_8024AA20_A34C60)->unk_3E = 0;
+    N(D_8024AA20_A34C60)->unk_40 = 0;
+    N(D_8024AA20_A34C60)->unk_42 = 0;
+    N(D_8024AA20_A34C60)->unk_44 = 0;
+    N(D_8024AA20_A34C60)->unk_4A = 54;
 
     func_80243ED0_A2E110(0, 0);
     func_80243ED0_A2E110(1, 1);
@@ -1103,103 +1103,103 @@ ApiStatus func_80243FC4_A2E204(Evt* script, s32 isInitialCall) {
     dmaEnd = title_bg_1_ROM_START + tapeOffset + 0x4000;
 
     // load the tape and bowser silhouette images
-    dma_copy(dmaStart, dmaEnd + 0x4200, D_8024AA20_A34C60->unk_18);
-    D_8024AA20_A34C60->unk_58 = 0;
-    D_8024AA20_A34C60->unk_5A = 255;
-    D_8024AA20_A34C60->unk_5C = 0;
+    dma_copy(dmaStart, dmaEnd + 0x4200, N(D_8024AA20_A34C60)->unk_18);
+    N(D_8024AA20_A34C60)->unk_58 = 0;
+    N(D_8024AA20_A34C60)->unk_5A = 255;
+    N(D_8024AA20_A34C60)->unk_5C = 0;
     return ApiStatus_DONE2;
 }
 
-NOP_FIX // TODO remove when D_8024AAB4_A34CF4 is migrated
-ApiStatus func_802440D0_A2E310(Evt* script, s32 isInitialCall) {
-    switch (D_8024AAB0_A34CF0) {
+NOP_FIX // TODO remove when N(D_8024AAB4_A34CF4) is migrated
+API_CALLABLE(N(func_802440D0_A2E310)) {
+    switch (N(D_8024AAB0_A34CF0)) {
         case 0:
-            D_8024AAB0_A34CF0++;
-            D_8024AAB8_A34CF8 = D_8024AAC0_A34D00[D_8024AAB4_A34CF4];
+            N(D_8024AAB0_A34CF0)++;
+            N(D_8024AAB8_A34CF8) = N(D_8024AAC0_A34D00)[N(D_8024AAB4_A34CF4)];
             break;
         case 1:
-            if (D_8024AAB8_A34CF8 != 0) {
-                D_8024AAB8_A34CF8--;
+            if (N(D_8024AAB8_A34CF8) != 0) {
+                N(D_8024AAB8_A34CF8)--;
             } else {
-                D_8024AAB8_A34CF8 = 26;
-                D_8024AAB0_A34CF0++;
+                N(D_8024AAB8_A34CF8) = 26;
+                N(D_8024AAB0_A34CF0)++;
                 sfx_play_sound(SOUND_B0);
             }
             break;
         case 2:
-            if (D_8024AAB8_A34CF8 != 0) {
-                D_8024AAB8_A34CF8--;
-                if (!D_8024AA20_A34C60->unk_58) {
-                    D_8024AA20_A34C60->unk_3C = D_8024AAD4_A34D14[25 - D_8024AAB8_A34CF8];
-                    D_8024AA20_A34C60->unk_3E = 0;
+            if (N(D_8024AAB8_A34CF8) != 0) {
+                N(D_8024AAB8_A34CF8)--;
+                if (!N(D_8024AA20_A34C60)->unk_58) {
+                    N(D_8024AA20_A34C60)->unk_3C = N(D_8024AAD4_A34D14)[25 - N(D_8024AAB8_A34CF8)];
+                    N(D_8024AA20_A34C60)->unk_3E = 0;
                 } else {
-                    D_8024AA20_A34C60->unk_40 = D_8024AAD4_A34D14[25 - D_8024AAB8_A34CF8];
-                    D_8024AA20_A34C60->unk_42 = 0;
+                    N(D_8024AA20_A34C60)->unk_40 = N(D_8024AAD4_A34D14)[25 - N(D_8024AAB8_A34CF8)];
+                    N(D_8024AA20_A34C60)->unk_42 = 0;
                 }
             } else {
-                D_8024AAB4_A34CF4++;
-                if (D_8024AAB4_A34CF4 + 1 < 5) {
-                    func_80243ED0_A2E110(D_8024AA20_A34C60->unk_58, D_8024AAB4_A34CF4 + 1);
-                    D_8024AAB0_A34CF0 = 0;
-                    D_8024AA20_A34C60->unk_3C = 0;
-                    D_8024AA20_A34C60->unk_3E = 0;
-                    D_8024AA20_A34C60->unk_40 = 0;
-                    D_8024AA20_A34C60->unk_42 = 0;
-                    D_8024AA20_A34C60->unk_58 = D_8024AA20_A34C60->unk_58 ^ 1;
+                N(D_8024AAB4_A34CF4)++;
+                if (N(D_8024AAB4_A34CF4) + 1 < 5) {
+                    func_80243ED0_A2E110(N(D_8024AA20_A34C60)->unk_58, N(D_8024AAB4_A34CF4) + 1);
+                    N(D_8024AAB0_A34CF0) = 0;
+                    N(D_8024AA20_A34C60)->unk_3C = 0;
+                    N(D_8024AA20_A34C60)->unk_3E = 0;
+                    N(D_8024AA20_A34C60)->unk_40 = 0;
+                    N(D_8024AA20_A34C60)->unk_42 = 0;
+                    N(D_8024AA20_A34C60)->unk_58 = N(D_8024AA20_A34C60)->unk_58 ^ 1;
                 } else {
-                    if (!D_8024AA20_A34C60->unk_58) {
-                        D_8024AA20_A34C60->unk_40 = 0;
-                        D_8024AA20_A34C60->unk_42 = 0;
+                    if (!N(D_8024AA20_A34C60)->unk_58) {
+                        N(D_8024AA20_A34C60)->unk_40 = 0;
+                        N(D_8024AA20_A34C60)->unk_42 = 0;
                     } else {
-                        D_8024AA20_A34C60->unk_3C = 0;
-                        D_8024AA20_A34C60->unk_3E = 0;
+                        N(D_8024AA20_A34C60)->unk_3C = 0;
+                        N(D_8024AA20_A34C60)->unk_3E = 0;
                     }
                     gCameras[CAM_DEFAULT].flags &= ~CAMERA_FLAG_ENABLED;
-                    D_8024AAB0_A34CF0++;
+                    N(D_8024AAB0_A34CF0)++;
                 }
             }
             break;
         case 3:
-            D_8024AABC_A34CFC = 0;
-            D_8024AAB0_A34CF0++;
-            D_8024AAB8_A34CF8 = D_8024AAC0_A34D00[D_8024AAB4_A34CF4];
+            N(D_8024AABC_A34CFC) = 0;
+            N(D_8024AAB0_A34CF0)++;
+            N(D_8024AAB8_A34CF8) = N(D_8024AAC0_A34D00)[N(D_8024AAB4_A34CF4)];
             break;
         case 4:
-            if (D_8024AAB8_A34CF8 != 0) {
-                if (D_8024AAB8_A34CF8 < D_8024AAC0_A34D00[D_8024AAB4_A34CF4] - 268) {
-                    u32 temp_v1 = D_8024AABC_A34CFC - 320;
+            if (N(D_8024AAB8_A34CF8) != 0) {
+                if (N(D_8024AAB8_A34CF8) < N(D_8024AAC0_A34D00)[N(D_8024AAB4_A34CF4)] - 268) {
+                    u32 temp_v1 = N(D_8024AABC_A34CFC) - 320;
 
-                    if (D_8024AABC_A34CFC < 320) {
-                        D_8024AA20_A34C60->unk_44 = D_8024AC7C_A34EBC[0];
-                        D_8024AA20_A34C60->unk_46 = D_8024AB3C_A34D7C[D_8024AABC_A34CFC];
+                    if (N(D_8024AABC_A34CFC) < 320) {
+                        N(D_8024AA20_A34C60)->unk_44 = N(D_8024AC7C_A34EBC)[0];
+                        N(D_8024AA20_A34C60)->unk_46 = N(D_8024AB3C_A34D7C)[N(D_8024AABC_A34CFC)];
                     } else if (temp_v1 < 15) {
-                        D_8024AA20_A34C60->unk_44 = D_8024AC7C_A34EBC[temp_v1];
+                        N(D_8024AA20_A34C60)->unk_44 = N(D_8024AC7C_A34EBC)[temp_v1];
                         if (temp_v1 < 13) {
-                            D_8024AA20_A34C60->unk_46 = D_8024AC7B_A34EBB + D_8024AC9C_A34EDC[temp_v1];
+                            N(D_8024AA20_A34C60)->unk_46 = N(D_8024AC7B_A34EBB) + N(D_8024AC9C_A34EDC)[temp_v1];
                         }
                     }
-                    D_8024AABC_A34CFC++;
+                    N(D_8024AABC_A34CFC)++;
                 }
-                D_8024AAB8_A34CF8--;
+                N(D_8024AAB8_A34CF8)--;
             } else {
-                D_8024AAB8_A34CF8 = 26;
-                D_8024AAB0_A34CF0++;
-                D_8024AA20_A34C60->unk_5C = 255;
+                N(D_8024AAB8_A34CF8) = 26;
+                N(D_8024AAB0_A34CF0)++;
+                N(D_8024AA20_A34C60)->unk_5C = 255;
                 sfx_play_sound(SOUND_B0);
             }
             break;
         case 5:
-            if (D_8024AAB8_A34CF8 != 0) {
-                D_8024AAB8_A34CF8--;
-                if (!D_8024AA20_A34C60->unk_58) {
-                    D_8024AA20_A34C60->unk_40 = D_8024AAD4_A34D14[25 - D_8024AAB8_A34CF8];
-                    D_8024AA20_A34C60->unk_42 = 0;
+            if (N(D_8024AAB8_A34CF8) != 0) {
+                N(D_8024AAB8_A34CF8)--;
+                if (!N(D_8024AA20_A34C60)->unk_58) {
+                    N(D_8024AA20_A34C60)->unk_40 = N(D_8024AAD4_A34D14)[25 - N(D_8024AAB8_A34CF8)];
+                    N(D_8024AA20_A34C60)->unk_42 = 0;
                 } else {
-                    D_8024AA20_A34C60->unk_3C = D_8024AAD4_A34D14[25 - D_8024AAB8_A34CF8];
-                    D_8024AA20_A34C60->unk_3E = 0;
+                    N(D_8024AA20_A34C60)->unk_3C = N(D_8024AAD4_A34D14)[25 - N(D_8024AAB8_A34CF8)];
+                    N(D_8024AA20_A34C60)->unk_3E = 0;
                 }
             } else {
-                D_8024AAB0_A34CF0++;
+                N(D_8024AAB0_A34CF0)++;
             }
             break;
         case 6:
@@ -1209,20 +1209,20 @@ ApiStatus func_802440D0_A2E310(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80244454_A2E694(Evt* script, s32 isInitialCall) {
-    if (D_8024ACB8_A34EF8 != 0) {
-        D_8024ACB8_A34EF8--;
-        D_8024AA20_A34C60->unk_5C = (D_8024ACB8_A34EF8 * 255) / 30;
+API_CALLABLE(N(func_80244454_A2E694)) {
+    if (N(D_8024ACB8_A34EF8) != 0) {
+        N(D_8024ACB8_A34EF8)--;
+        N(D_8024AA20_A34C60)->unk_5C = (N(D_8024ACB8_A34EF8) * 255) / 30;
         return ApiStatus_BLOCK;
     } else {
-        D_8024AA20_A34C60->unk_5C = 0;
-        free_worker(D_8024AA20_A34C60->unk_00);
-        D_8024AA20_A34C60->unk_00 = 0;
+        N(D_8024AA20_A34C60)->unk_5C = 0;
+        free_worker(N(D_8024AA20_A34C60)->unk_00);
+        N(D_8024AA20_A34C60)->unk_00 = 0;
         return ApiStatus_DONE1;
     }
 }
 
-ApiStatus func_802444E8_A2E728(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802444E8_A2E728)) {
     Npc* npc = resolve_npc(script, 10);
 
     npc->yaw = npc->renderYaw = 180.0f - gCameras[gCurrentCameraID].currentYaw;
@@ -1230,86 +1230,86 @@ ApiStatus func_802444E8_A2E728(Evt* script, s32 isInitialCall) {
 }
 
 #ifdef NON_MATCHING
-ApiStatus func_80244550_A2E790(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80244550_A2E790)) {
     Npc* npc = resolve_npc(script, 9);
     EffectInstance* effect = evt_get_variable(script, ArrayVar(0));
     f32 x, y, z;
     s32 i;
 
     if (isInitialCall) {
-        D_8024F2FC = npc->pos.x;
-        D_8024F300 = npc->pos.y;
-        D_8024F304 = npc->pos.z;
+        N(D_8024F2FC) = npc->pos.x;
+        N(D_8024F300) = npc->pos.y;
+        N(D_8024F304) = npc->pos.z;
 
-        for (i = 0; i < ARRAY_COUNT(D_8024F318); i++) {
+        for (i = 0; i < ARRAY_COUNT(N(D_8024F318)); i++) {
             Npc* npc2 = resolve_npc(script, i);
 
-            D_8024F318[i] = npc2->pos.x;
-            D_8024F338[i] = npc2->pos.y;
-            D_8024F358[i] = npc2->pos.z;
+            N(D_8024F318)[i] = npc2->pos.x;
+            N(D_8024F338)[i] = npc2->pos.y;
+            N(D_8024F358)[i] = npc2->pos.z;
         }
-        D_8024F308 = effect->data.somethingRotating->unk_04;
-        D_8024F30C = effect->data.somethingRotating->unk_08;
-        D_8024F310 = effect->data.somethingRotating->unk_0C;
+        N(D_8024F308) = effect->data.somethingRotating->unk_04;
+        N(D_8024F30C) = effect->data.somethingRotating->unk_08;
+        N(D_8024F310) = effect->data.somethingRotating->unk_0C;
     }
 
-    x = npc->pos.x - D_8024F2FC;
-    y = npc->pos.y - D_8024F300;
-    z = npc->pos.z - D_8024F304;
+    x = npc->pos.x - N(D_8024F2FC);
+    y = npc->pos.y - N(D_8024F300);
+    z = npc->pos.z - N(D_8024F304);
 
-    for (i = 0; i < ARRAY_COUNT(D_8024F318); i++) {
+    for (i = 0; i < ARRAY_COUNT(N(D_8024F318)); i++) {
         Npc* npc2 = resolve_npc(script, i);
 
-        npc2->pos.x = D_8024F318[i] + x;
-        npc2->pos.y = D_8024F338[i] + y;
-        npc2->pos.z = D_8024F358[i] + z;
+        npc2->pos.x = N(D_8024F318)[i] + x;
+        npc2->pos.y = N(D_8024F338)[i] + y;
+        npc2->pos.z = N(D_8024F358)[i] + z;
         npc2->colliderPos.x = npc2->pos.x;
         npc2->colliderPos.y = npc2->pos.y;
         npc2->colliderPos.z = npc2->pos.z;
     }
-    effect->data.somethingRotating->unk_04 = D_8024F308 + x;
-    effect->data.somethingRotating->unk_08 = D_8024F30C + y;
-    effect->data.somethingRotating->unk_0C = D_8024F310 + z;
+    effect->data.somethingRotating->unk_04 = N(D_8024F308) + x;
+    effect->data.somethingRotating->unk_08 = N(D_8024F30C) + y;
+    effect->data.somethingRotating->unk_0C = N(D_8024F310) + z;
     return ApiStatus_BLOCK;
 }
 #else
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80244550_A2E790);
 #endif
 
-ApiStatus func_80244774_A2E9B4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80244774_A2E9B4)) {
     Npc* npc7 = resolve_npc(script, 7);
     Npc* npc8 = resolve_npc(script, 8);
 
     if (isInitialCall) {
-        D_8024F374 = npc7->pos.y;
+        N(D_8024F374) = npc7->pos.y;
     }
-    func_802410E4_A2B324(3, D_8024F374, D_8024F374 + 500.0f, D_8024AEC4_A35104, 40.0f, &npc7->pos.y);
+    func_802410E4_A2B324(3, N(D_8024F374), N(D_8024F374) + 500.0f, N(D_8024AEC4_A35104), 40.0f, &npc7->pos.y);
     npc8->pos.y = npc7->pos.y;
     npc7->colliderPos.y = npc7->pos.y;
     npc8->colliderPos.y = npc8->pos.y;
-    D_8024AEC4_A35104++;
-    if (D_8024AEC4_A35104 > 40.0f) {
+    N(D_8024AEC4_A35104)++;
+    if (N(D_8024AEC4_A35104) > 40.0f) {
         return ApiStatus_DONE1;
     }
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_8024486C_A2EAAC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_8024486C_A2EAAC)) {
     Npc* npc = resolve_npc(script, 9);
 
     if (isInitialCall) {
-        D_8024F378 = npc->pos.y;
+        N(D_8024F378) = npc->pos.y;
     }
-    func_802410E4_A2B324(3, D_8024F378, D_8024F378 + 500.0f, D_8024AEC8_A35108, 40.0f, &npc->pos.y);
+    func_802410E4_A2B324(3, N(D_8024F378), N(D_8024F378) + 500.0f, N(D_8024AEC8_A35108), 40.0f, &npc->pos.y);
     npc->colliderPos.y = npc->pos.y;
-    D_8024AEC8_A35108++;
-    if (D_8024AEC8_A35108 > 40.0f) {
+    N(D_8024AEC8_A35108)++;
+    if (N(D_8024AEC8_A35108) > 40.0f) {
         return ApiStatus_DONE1;
     }
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80244934_A2EB74(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80244934_A2EB74)) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
         set_screen_overlay_params_back(1, 255.0f);

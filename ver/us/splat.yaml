@@ -10999,17 +10999,15 @@ segments:
     start: 0xA2A240
     vram: 0x80240000
     subsegments:
-    - [0xA2A240, c]
-    - [0xA2AA70, c]
-    - [0xA2AAC0, c]
-    - [0xA2EC30, c]
-    - [0xA2EF00, c]
-    - [0xA2FAA0, data]
-    - [0xA2FCD0, data]
-    - [0xA30810, data]
-    - [0xA37CD0, .data, A2EC30]
-    - [0xA37E70, data]
-    - [0xA39400]
+    - [0xA2A240, c, hos_05_0_header]
+    - [0xA2A240, c, hos_05_1_music]
+    - [0xA2A240, c, hos_05_2_main]
+    - [0xA2A240, c, hos_05_3]
+    - [0xA2AA70, c, hos_05_4_npc]
+    - [0xA2AAC0, c, hos_05_5]
+    - [0xA2EC30, c, hos_05_6_narrator]
+    - [0xA2EF00, c, hos_05_7]
+    - [0xA2FAA0]
   - name: hos_06
     dir: world/area_hos/hos_06
     type: code
