@@ -22,7 +22,7 @@
 #include "effects/gfx/D_09001648_37F018.gfx.inc.c"
 #include "effects/gfx/D_090016C0_37F090.gfx.inc.c"
 #include "effects/gfx/D_09001738_37F108.gfx.inc.c"
-#include "effects/gfx/D_090017A0_37F180.gfx.inc.c"
+#include "effects/gfx/D_090017B0_37F180.gfx.inc.c"
 #include "effects/gfx/D_090017D0_37F1A0.gfx.inc.c"
 #include "effects/gfx/D_090018C0_37F290.gfx.inc.c"
 
