@@ -469,7 +469,7 @@ dlabel D_800A0F44
 dlabel D_800A0F48
 .space 8
 
-dlabel D_800A0F50
+dlabel AuInitialGlobalVolume
 .space 4
 
 dlabel D_800A0F54
@@ -535,22 +535,22 @@ dlabel CurrentSeqCmdHandler
 dlabel D_800A3FD4
 .space 0x0000000c
 
-dlabel D_800A3FE0
+dlabel AuDelayBufferMain
 .space 4
 
-dlabel D_800A3FE4
+dlabel AuDelayBufferAux
 .space 4
 
-dlabel D_800A3FE8
+dlabel AuDelayCounter
 .space 4
 
-dlabel D_800A3FEC
+dlabel AuDelayedVoiceGroup
 .space 2
 
-dlabel D_800A3FEE
+dlabel AuDelayedChannel
 .space 2
 
-dlabel D_800A3FF0
+dlabel AuDelayCount
 .space 4
 
 dlabel D_800A3FF4

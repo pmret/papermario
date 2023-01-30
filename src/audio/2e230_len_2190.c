@@ -78,8 +78,8 @@ void au_engine_init(s32 outputRate) {
 
     for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
         AlUnkVoice* voice;
-        func_80056EC0(i, 0);
-        au_pvoice_set_filter_wavetable(i, globals->defaultInstrument);
+        au_pvoice_set_group(i, 0);
+        au_syn_set_wavetable(i, globals->defaultInstrument);
         voice = &globals->voices[i];
         voice->instrument = NULL;
         voice->pitchRatio = 0;
@@ -136,12 +136,12 @@ void au_engine_init(s32 outputRate) {
     globals->instrumentGroups[5] = globals->instrumentGroup5;
     globals->instrumentGroups[6] = globals->instrumentGroup6;
     globals->instrumentGroups[7] = globals->instrumentGroup1;
-    globals->unk_53 = 0;
-    globals->unk_52 = 0;
-    globals->unk_51 = 0;
-    globals->unk_50 = 0;
+    globals->channelDelaySide = 0;
+    globals->channelDelayTime = 0;
+    globals->channelDelayGroupIdx = 0;
+    globals->channelDelayPending = 0;
 
-    func_80057ED0(0);
+    au_delay_channel(0);
     func_80055050(alHeap);
 }
 #else
@@ -288,42 +288,42 @@ void func_80053654(AuGlobals* globals) {
 
     if (globals->unk_130C == 2) {
         globals->unk_130C = 1;
-        func_80057EB0();
+        au_disable_channel_delay();
     }
 
-    if ((globals->unk_50 != 0) && (globals->unk_130C == 0)) {
-        switch (globals->unk_53) {
+    if (globals->channelDelayPending && (globals->unk_130C == 0)) {
+        switch (globals->channelDelaySide) {
             case 1:
-                func_80057DC8(globals->unk_52);
-                func_80057E08(globals->unk_51);
-                globals->unk_50 = 0;
+                au_set_delay_time(globals->channelDelayTime);
+                au_delay_left_channel(globals->channelDelayGroupIdx);
+                globals->channelDelayPending = FALSE;
                 break;
             case 2:
-                func_80057DC8(globals->unk_52);
-                func_80057E5C(globals->unk_51);
-                globals->unk_50 = 0;
+                au_set_delay_time(globals->channelDelayTime);
+                au_delay_right_channel(globals->channelDelayGroupIdx);
+                globals->channelDelayPending = FALSE;
                 break;
             default:
-                func_80057EB0();
-                globals->unk_50 = 0;
+                au_disable_channel_delay();
+                globals->channelDelayPending = FALSE;
                 break;
         }
     }
 
     if (globals->effectChanges[0].changed) {
-        func_80056DCC(0, globals->effectChanges[0].type);
+        au_voice_group_set_effect(0, globals->effectChanges[0].type);
         globals->effectChanges[0].changed = FALSE;
     }
     if (globals->effectChanges[1].changed) {
-        func_80056DCC(1, globals->effectChanges[1].type);
+        au_voice_group_set_effect(1, globals->effectChanges[1].type);
         globals->effectChanges[1].changed = FALSE;
 
     } if (globals->effectChanges[2].changed) {
-        func_80056DCC(2, globals->effectChanges[2].type);
+        au_voice_group_set_effect(2, globals->effectChanges[2].type);
         globals->effectChanges[2].changed = FALSE;
     }
     if (globals->effectChanges[3].changed) {
-        func_80056DCC(3, globals->effectChanges[3].type);
+        au_voice_group_set_effect(3, globals->effectChanges[3].type);
         globals->effectChanges[3].changed = FALSE;
     }
 
@@ -332,7 +332,7 @@ void func_80053654(AuGlobals* globals) {
         u8 voiceUpdateFlags = voice->unk_flags_43;
 
         if (voice->unk_42 != 0) {
-            au_pvoice_reset_filter(i);
+            au_syn_stop_voice(i);
             voice->unk_42 = 0;
             voice->unk_1C = NULL;
             voice->priority = AU_PRIORITY_FREE;
@@ -340,15 +340,15 @@ void func_80053654(AuGlobals* globals) {
 
         if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_ALL) {
             func_80052BF8(voice, &voice->unk_14);
-            au_pvoice_set_filter(i, voice->reverbType, voice->instrument, voice->pitchRatio, voice->volume, voice->pan, voice->reverbAmt, voice->unk_08);
+            au_syn_start_voice_params(i, voice->reverbType, voice->instrument, voice->pitchRatio, voice->volume, voice->pan, voice->reverbAmt, voice->unk_08);
             voice->priority = voice->priorityCopy;
         } else {
             if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_PITCH) {
-                au_pvoice_set_pitch_ratio(i, voice->pitchRatio);
+                au_syn_set_pitch(i, voice->pitchRatio);
             }
 
             if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_4) {
-                func_8005736C(i, voice->volume, voice->unk_08, voice->pan, voice->reverbAmt);
+                au_syn_set_mixer_params(i, voice->volume, voice->unk_08, voice->pan, voice->reverbAmt);
             } else if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_10) {
                 func_80057548(i, voice->pan, voice->reverbAmt);
             }
@@ -427,8 +427,8 @@ void au_fade_update(Fade* fade) {
     }
 }
 
-void func_80053A98(u8 arg0, u16 arg1, s32 arg2) {
-    func_80056D78(arg0, (u32)(arg1 * arg2) >> 15);
+void func_80053A98(u8 groupIdx, u16 arg1, s32 arg2) {
+    au_voice_group_set_gain(groupIdx, (u32)(arg1 * arg2) >> 15);
 }
 
 void func_80053AC8(Fade* fade) {
@@ -1162,7 +1162,7 @@ void func_80054DA8(u32 bMonoSound) {
     } else {
         // stereo sound
         if (gSoundGlobals->unk_130C != 0) {
-            gSoundGlobals->unk_50 = 1;
+            gSoundGlobals->channelDelayPending = 1;
             gSoundGlobals->unk_130C = 0;
         }
     }
