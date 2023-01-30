@@ -490,7 +490,7 @@ MapConfig hos_maps[] = {
     { MAP(hos_02), .bgName = "hos_bg" },
     { MAP(hos_03), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_04, 0x80240EE0), .bgName = "hos_bg" },
-    { MAP_UNSPLIT(hos_05, 0x80245910), .bgName = "hos_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(hos_05), .bgName = "hos_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(hos_06, 0x80242570), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_10, 0x80240CE0), .bgName = "hos_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(hos_20, 0x80240390), .bgName = "hos_bg" },
