@@ -11030,26 +11030,25 @@ segments:
     start: 0xA3F740
     vram: 0x80240000
     subsegments:
-    - [0xA3F740, c]
-    - [0xA3F760, c]
-    - [0xA3FBA0, c]
-    - [0xA3FEB0, c]
-    - [0xA403C0, data]
-    - [0xA40540, data]
-    - [0xA42DA0, data]
-    - [0xA43920, data]
-    - [0xA45910]
+    - [0xA3F740, c, hos_10_0_header]
+    - [0xA3F760, c, hos_10_1_music]
+    - [0xA3F760, c, hos_10_2_npc1]
+    - [0xA3F760, c, hos_10_3_npc2]
+    - [0xA3F760, c, hos_10_4_main]
+    - [0xA3F760, c, hos_10_5_intro]
+    - [0xA3FBA0, c, hos_10_6_pre_title]
+    - [0xA3FEB0, c, hos_10_7_ending]
+    - [0xA403C0]
   - name: hos_20
     dir: world/area_hos/hos_20
     type: code
     start: 0xA45930
     vram: 0x80240000
     subsegments:
-    - [0xA45930, c]
-    - [0xA45C40, c]
-    - [0xA45C90, data]
-    - [0xA46350, data]
-    - [0xA46F40]
+    - [0xA45930, c, hos_20_0_header]
+    - [0xA45930, c, hos_20_1_main]
+    - [0xA45C40, c, hos_20_2_starship]
+    - [0xA45C90]
   - name: kpa_01
     dir: world/area_kpa/kpa_01
     type: code

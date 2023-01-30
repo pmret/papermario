@@ -28,7 +28,7 @@ void ending_decals_update(EffectInstance* effect);
 void ending_decals_render(EffectInstance* effect);
 void ending_decals_appendGfx(void* effect);
 
-void ending_decals_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance** outEffect) {
+void ending_decals_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 arg4, EffectInstance** outEffect) {
     EffectBlueprint bp;
     EffectInstance* effect;
     EndingDecalsFXData* data;
@@ -46,17 +46,17 @@ void ending_decals_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, Effect
     data = effect->data.endingDecals = shim_general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.endingDecals != NULL);
 
-    data->unk_00 = arg0;
-    data->pos.x = arg1;
-    data->pos.y = arg2;
-    data->pos.z = arg3;
-    data->unk_18 = 255;
+    data->type = type;
+    data->pos.x = posX;
+    data->pos.y = posY;
+    data->pos.z = posZ;
+    data->haloAlpha = 255;
     data->unk_14 = arg4;
-    data->unk_10 = arg4;
+    data->scale = arg4;
     data->unk_1C = 100;
     data->unk_20 = 0;
 
-    switch (arg0) {
+    switch (type) {
         case 0:
         case 1:
             data->unk_24 = 0;
@@ -103,9 +103,9 @@ void ending_decals_update(EffectInstance* effect) {
     }
 
     if (data->unk_1C < 10) {
-        data->unk_18 -= 25;
-        if (data->unk_18 < 0) {
-            data->unk_18 = 0;
+        data->haloAlpha -= 25;
+        if (data->haloAlpha < 0) {
+            data->haloAlpha = 0;
         }
     }
 }
@@ -119,7 +119,7 @@ void ending_decals_render(EffectInstance* effect) {
     renderTask.appendGfxArg = effect;
     renderTask.appendGfx = ending_decals_appendGfx;
     renderTask.distance = 10;
-    if (data->unk_00 == 0) {
+    if (data->type == 0) {
         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_OPA;
     } else {
         renderTaskPtr->renderMode = RENDER_MODE_2D;
@@ -139,18 +139,18 @@ void ending_decals_appendGfx(void* effect) {
     Matrix4f sp20;
 
     unk_20 = data->unk_20;
-    dlist1 = D_E00685F4[data->unk_00];
-    dlist2 = D_E00685B0[data->unk_00];
+    dlist1 = D_E00685F4[data->type];
+    dlist2 = D_E00685B0[data->type];
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);
+    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->scale, data->pos.x, data->pos.y, data->pos.z);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    temp_f64 = data->unk_18;
+    temp_f64 = data->haloAlpha;
     if (unk_20 % 2 == 0) {
         alpha = temp_f64 * 0.97;
     } else {

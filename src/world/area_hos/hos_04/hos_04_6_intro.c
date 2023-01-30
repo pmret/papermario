@@ -43,7 +43,13 @@ API_CALLABLE(N(SetCamVfov)) {
 }
 
 API_CALLABLE(N(ResumeIntroState)) {
-    if (gGameStatusPtr->creditsViewportMode >= 0 && gGameStatusPtr->creditsViewportMode < 5) {
+    if (
+        gGameStatusPtr->creditsViewportMode == 0 ||
+        gGameStatusPtr->creditsViewportMode == 1 ||
+        gGameStatusPtr->creditsViewportMode == 2 ||
+        gGameStatusPtr->creditsViewportMode == 3 ||
+        gGameStatusPtr->creditsViewportMode == 4)
+    {
         gGameStatusPtr->creditsViewportMode++;
         state_init_intro();
     }
@@ -54,7 +60,7 @@ API_CALLABLE(N(BlockForever)) {
     return ApiStatus_BLOCK;
 }
 
-void N(LerpValueWithMaxStep)(f32 start, f32 end, f32 current, f32 maximum, f32* out) {
+void N(lerp_value_with_max_step)(f32 start, f32 end, f32 current, f32 maximum, f32* out) {
     f32 remaining = end - current;
 
     if (end - start > 0.0f) {
@@ -74,7 +80,7 @@ void N(LerpValueWithMaxStep)(f32 start, f32 end, f32 current, f32 maximum, f32* 
     }
 }
 
-void N(InterpValueWithEasing)(s32 easingMode, f32 start, f32 end, f32 curent, f32 max, f32* out) {
+void N(interp_value_with_easing)(s32 easingMode, f32 start, f32 end, f32 curent, f32 max, f32* out) {
     f32 alpha;
 
     if (curent > max) {
@@ -108,7 +114,6 @@ void N(InterpValueWithEasing)(s32 easingMode, f32 start, f32 end, f32 curent, f3
     *out = start + ((end - start) * alpha);
 }
 
-// boom length
 f32 N(TargetBoomLengthPre) = 700;
 u16* N(ColorBufferPtr) = NULL;
 
@@ -120,7 +125,7 @@ API_CALLABLE(N(AnimateBoomLengthPreHeist)) {
     }
 
     N(ColorBufferPtr) = nuGfxCfb_ptr;
-    N(LerpValueWithMaxStep)(700.0f, 300.0f, N(TargetBoomLengthPre), 1.2f, &N(TargetBoomLengthPre));
+    N(lerp_value_with_max_step)(700.0f, 300.0f, N(TargetBoomLengthPre), 1.2f, &N(TargetBoomLengthPre));
     camera->panActive = TRUE;
     camera->controlSettings.boomLength = N(TargetBoomLengthPre);
     return ApiStatus_BLOCK;
@@ -135,7 +140,7 @@ API_CALLABLE(N(AnimateBoomLengthPostHeist)) {
     if (isInitialCall) {
         N(CurrentBoomLengthPost) = N(CamSettings_PostHeist).boomLength;
     }
-    N(InterpValueWithEasing)(1, N(CamSettings_PostHeist).boomLength, 700.0f, N(TargetBoomLengthPost), 70.0f, &N(CurrentBoomLengthPost));
+    N(interp_value_with_easing)(1, N(CamSettings_PostHeist).boomLength, 700.0f, N(TargetBoomLengthPost), 70.0f, &N(CurrentBoomLengthPost));
     camera->panActive = TRUE;
     camera->controlSettings.boomLength = N(CurrentBoomLengthPost);
     N(TargetBoomLengthPost)++;
@@ -154,7 +159,7 @@ API_CALLABLE(N(AnimateViewPitchPostHeist)) {
     if (isInitialCall) {
         N(CurrentViewPitch) = N(CamSettings_PostHeist).viewPitch;
     }
-    N(InterpValueWithEasing)(5, N(CamSettings_PostHeist).viewPitch, -80.0f, N(TargetViewPitch), 200.0f, &N(CurrentViewPitch));
+    N(interp_value_with_easing)(5, N(CamSettings_PostHeist).viewPitch, -80.0f, N(TargetViewPitch), 200.0f, &N(CurrentViewPitch));
     camera->panActive = TRUE;
     camera->controlSettings.viewPitch = N(CurrentViewPitch);
     N(TargetViewPitch)++;

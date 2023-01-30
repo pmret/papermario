@@ -695,7 +695,7 @@ ApiStatus N(CloudNineFX)(Evt* script, s32 isInitialCall) {
             if (sCounter >= 1.0) {
                 return ApiStatus_DONE2;
             }
-            battleStatus->cloudNineEffect->data.endingDecals->unk_10 += 0.2;
+            battleStatus->cloudNineEffect->data.endingDecals->scale += 0.2;
             sCounter += 0.2;
             break;
     }

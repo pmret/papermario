@@ -104,7 +104,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
             EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
             EVT_IF_GT(LVar2, -210)
                 EVT_CALL(N(GetActingPartner))
-                EVT_SET(MV_Unk_0A, LVar9)
+                EVT_SET(MV_ActingPartner, LVar9)
                 EVT_SWITCH(LVar9)
                     EVT_CASE_EQ(-1)
                         EVT_CALL(SetNpcSpeed, NPC_SELF, LVarA)
@@ -171,7 +171,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                             EVT_CALL(N(SimpleMoveNPC), -150, 0)
                         EVT_END_IF
                 EVT_END_SWITCH
-                EVT_SET(LVar9, MV_Unk_0A)
+                EVT_SET(LVar9, MV_ActingPartner)
                 EVT_CALL(SetSelfVar, 1, LVar9)
             EVT_ELSE
                 EVT_CALL(N(SimpleMoveNPC), 200, 0)
@@ -244,7 +244,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Crowd) = {
             EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
             EVT_IF_GT(LVar2, -210)
                 EVT_CALL(N(GetActingPartner))
-                EVT_SET(MV_Unk_0A, LVar9)
+                EVT_SET(MV_ActingPartner, LVar9)
                 EVT_SWITCH(LVar9)
                     EVT_CASE_EQ(-1)
                         EVT_CALL(SetNpcSpeed, NPC_SELF, LVarA)
@@ -292,7 +292,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Crowd) = {
                             EVT_CALL(N(SimpleMoveNPC), -150, 0)
                         EVT_END_IF
                 EVT_END_SWITCH
-                EVT_SET(LVar9, MV_Unk_0A)
+                EVT_SET(LVar9, MV_ActingPartner)
                 EVT_CALL(SetSelfVar, 1, LVar9)
             EVT_ELSE
                 EVT_CALL(N(SimpleMoveNPC), 200, 0)

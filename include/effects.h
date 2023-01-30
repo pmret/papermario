@@ -975,11 +975,11 @@ typedef struct RadialShimmerFXData {
 } RadialShimmerFXData; // size = 0x70
 
 typedef struct EndingDecalsFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ f32 unk_10;
+    /* 0x10 */ f32 scale;
     /* 0x14 */ f32 unk_14;
-    /* 0x18 */ s32 unk_18;
+    /* 0x18 */ s32 haloAlpha;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ u8 unk_24;
