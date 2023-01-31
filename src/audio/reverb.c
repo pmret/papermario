@@ -145,7 +145,7 @@ void func_80058E84(AuFX* fx, u8 effectType, ALHeap* heap) {
     for (i = 0; i < AU_FX_DELAY_COUNT; i++) {
         delay = &fx->delays[i];
         delay->resampler_2C = alHeapAlloc(heap, 1, sizeof(AuResampler));
-        delay->resampler_2C->rs_state = alHeapAlloc(heap, 1, sizeof(RESAMPLE_STATE));
+        delay->resampler_2C->state = alHeapAlloc(heap, 1, sizeof(RESAMPLE_STATE));
         delay->lowpass_24 = alHeapAlloc(heap, 1, sizeof(AuLowPass));
         delay->lowpass_24->fstate = alHeapAlloc(heap, 1, sizeof(POLEF_STATE));
     }
@@ -264,7 +264,7 @@ void func_8005904C(AuFX* fx, u8 effectType) {
 // au_pull_fx -- based on alFxPull
 // AuFX from gSynDriverPtr
 
-Acmd* func_80059310(AuFX* fx, Acmd* ptr, s16 outputBuf, s16 arg3) {
+Acmd* au_pull_fx(AuFX* fx, Acmd* ptr, s16 outputBuf, s16 arg3) {
     Acmd* cmdBufPos = ptr;
     s16 delayIdx;
 
@@ -328,7 +328,7 @@ Acmd* func_80059310(AuFX* fx, Acmd* ptr, s16 outputBuf, s16 arg3) {
             ratio = fratio * fUnityPitch;
 
             tmp = buff2 >> 8;
-            n_aResample(cmdBufPos++, osVirtualToPhysical(delay->resampler_28->rs_state),
+            n_aResample(cmdBufPos++, osVirtualToPhysical(delay->resampler_28->state),
                 delay->resampler_28->first, ratio, rbuff + (ramAlign<<1), tmp);
 
             delay->resampler_28->first = 0;

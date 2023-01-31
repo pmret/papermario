@@ -40,7 +40,7 @@ void create_audio_system(void) {
     nuAuPreNMI = 0;
     alHeapInit(&nuAuHeap, AuHeapBase, AUDIO_HEAP_SIZE);
     config.num_pvoice = 24;
-    config.unk_num_gamma = 4;
+    config.num_bus = 4;
     outputRate = osAiSetFrequency(32000);
     frameSize = (AlNumFields * outputRate + 59) / 60;
     config.outputRate = outputRate;
@@ -83,7 +83,7 @@ void create_audio_system(void) {
     nuAuDmaBufList[i].ptr = alHeapAlloc(config.heap, 1, 0x500);
 
     osCreateMesgQueue(&nuAuDmaMesgQ, nuAuDmaMesgBuf, 50);
-    nuAuPreNMIFunc = func_8004B328;
+    nuAuPreNMIFunc = nuAuPreNMIProc;
     au_driver_init(&auSynDriver, &config);
     au_engine_init(config.outputRate);
     osCreateThread(&nuAuMgrThread, NU_MAIN_THREAD_ID, nuAuMgr, NULL, &AlCmdListBuffers, NU_AU_MGR_THREAD_PRI); //why main thread?
@@ -295,28 +295,27 @@ void nuAuCleanDMABuffers(void) {
     } while (0);
 }
 
-// rename: default_nuAuPreNMIFunc
-void func_8004B328(NUScMsg mesg_type, u32 frameCounter) {
-    s16 temp;
-    s32 temp2;
+void nuAuPreNMIProc(NUScMsg mesg_type, u32 frameCounter) {
+    s16 maxVol;
+    s32 vol;
 
     switch (mesg_type) {
-        case 2:
-            D_800A0F50 = func_80056D50();
-            func_80056D34();
+        case NU_SC_PRENMI_MSG:
+            AuInitialGlobalVolume = au_get_global_volume();
+            au_use_global_volume();
             break;
-        case 1:
-            temp = D_800A0F50;
-            temp2 = temp - (temp / 20) * frameCounter;
+        case NU_SC_RETRACE_MSG:
+            maxVol = AuInitialGlobalVolume;
+            vol = maxVol - (maxVol / 20) * frameCounter;
 
-            if (temp2 < 0) {
-                temp2 = 0;
+            if (vol < 0) {
+                vol = 0;
             }
 
-            temp2 = (temp2 * temp2) >> 15;
-            func_80056D44(temp2);
+            vol = SQ(vol) >> 15;
+            au_set_global_volume(vol);
 
-            if (temp2 == 0) {
+            if (vol == 0) {
                 nuAuTaskStop = NU_AU_TASK_STOP;
             }
             break;

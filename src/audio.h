@@ -44,6 +44,8 @@ typedef u8* WaveData;
 #define	AUDIO_SAMPLES	184
 #define AUDIO_COMMAND_LIST_BUFFER_SIZE 0x4000
 
+#define ADPCMFBYTES     9
+
 #define SND_MAX_VOLUME_8  0x7F // 127
 #define SND_MAX_VOLUME_16 0x7FFF
 
@@ -113,6 +115,13 @@ typedef enum SegmentControlCommands {
     BGM_SEGMENT_6                   = 6,
     BGM_SEGMENT_7                   = 7
 } SegmentControlCommands;
+
+typedef enum FxBus {
+    FX_BUS_0 = 0,
+    FX_BUS_1 = 1,
+    FX_BUS_2 = 2,
+    FX_BUS_3 = 3,
+} FxBus;
 
 typedef union Q32 {
     u8 u8[4];
@@ -306,16 +315,16 @@ typedef struct AlUnkKappa {
     /* 0x10 */ AuLowPass* lowpass_10;
 } AlUnkKappa; // size unk
 
-typedef struct AlUnkGamma {
-    /* 0x00 */ u16 unk_00;
+typedef struct AuFxBus {
+    /* 0x00 */ u16 gain;
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ AuFX* fxL;
     /* 0x08 */ AuFX* fxR;
     /* 0x0C */ u8 currentEffectType;
     /* 0x0D */ char unk_0D[0x3];
-    /* 0x10 */ struct AuPVoice* pvoice_10;
-    /* 0x14 */ struct AuPVoice* pvoice_14;
-} AlUnkGamma; // size = 0x18
+    /* 0x10 */ struct AuPVoice* head;
+    /* 0x14 */ struct AuPVoice* tail;
+} AuFxBus; // size = 0x18
 
  // ALDMAproc in PM supposedly has an extra arg added, so that's why we have ALDMAproc2 and ALDMANew2
 typedef s32 (*ALDMAproc2)(s32 addr, s32 len, void *state, u8 arg3);
@@ -323,57 +332,57 @@ typedef ALDMAproc2 (*ALDMANew2)(void *state);
 
 // based on ALLoadFilter
 typedef struct AuLoadFilter {
-    /* 0x04 */ ADPCM_STATE* dc_state;
-    /* 0x08 */ ADPCM_STATE* dc_lstate;
-    /* 0x0C */ ALRawLoop dc_loop;
-    /* 0x18 */ struct Instrument* instrument;
-    /* 0x1C */ s32 dc_bookSize;
-    /* 0x20 */ ALDMAproc2 dc_dmaFunc;
-    /* 0x24 */ NUDMAState* dc_dmaState;
-    /* 0x28 */ s32 dc_sample;
-    /* 0x2C */ s32 dc_lastsam;
-    /* 0x30 */ s32 dc_first;
-    /* 0x34 */ u8* dc_memin;
+    /* 0x00 */ ADPCM_STATE* state;
+    /* 0x04 */ ADPCM_STATE* lstate;
+    /* 0x08 */ ALRawLoop loop;
+    /* 0x14 */ struct Instrument* instrument;
+    /* 0x18 */ s32 bookSize;
+    /* 0x1C */ ALDMAproc2 dmaFunc;
+    /* 0x20 */ NUDMAState* dmaState;
+    /* 0x24 */ s32 sample;
+    /* 0x28 */ s32 lastsam;
+    /* 0x2C */ s32 first;
+    /* 0x30 */ s32 memin;
 } AuLoadFilter; // size = 0x34
 
 // based on ALResampler
 typedef struct AuResampler {
-    /* 0x38 */ RESAMPLE_STATE* rs_state;
-    /* 0x3C */ f32 rs_ratio;
-    /* 0x40 */ f32 delta;
-    /* 0x44 */ s32 first;
+    /* 0x00 */ RESAMPLE_STATE* state;
+    /* 0x04 */ f32 ratio;
+    /* 0x08 */ f32 delta;
+    /* 0x0C */ s32 first;
 } AuResampler; // size = 0x10
 
 // envelope mixer -- based on ALEnvMixer
 typedef struct AuEnvMixer {
-    /* 0x48 */ ENVMIX_STATE* em_state;
-    /* 0x4C */ s16 em_pan;
-    /* 0x4E */ s16 em_volume;
-    /* 0x50 */ s16 em_cvolL;
-    /* 0x52 */ s16 em_cvolR;
-    /* 0x54 */ s16 em_dryamt;
-    /* 0x56 */ s16 em_wetamt;
-    /* 0x58 */ s16 em_lratl;
-    /* 0x5A */ s16 em_lratm;
-    /* 0x5C */ s16 em_ltgt;
-    /* 0x5E */ s16 em_rratl;
-    /* 0x60 */ s16 em_rratm;
-    /* 0x62 */ s16 em_rtgt;
-    /* 0x64 */ s32 em_delta;
-    /* 0x68 */ s32 em_segEnd;
-    /* 0x6C */ s32 em_first;
-    /* 0x70 */ s32 em_motion;
-} AuEnvMixer; // size = 0x74
+    /* 0x00 */ ENVMIX_STATE* state;
+    /* 0x04 */ s16 pan;
+    /* 0x06 */ s16 volume;
+    /* 0x08 */ s16 cvolL;
+    /* 0x0A */ s16 cvolR;
+    /* 0x0C */ s16 dryamt;
+    /* 0x0E */ s16 wetamt;
+    /* 0x10 */ s16 lratl;
+    /* 0x12 */ s16 lratm;
+    /* 0x14 */ s16 ltgt;
+    /* 0x16 */ s16 rratl;
+    /* 0x18 */ s16 rratm;
+    /* 0x1A */ s16 rtgt;
+    /* 0x1C */ s32 delta;
+    /* 0x20 */ s32 segEnd;
+    /* 0x24 */ s32 first;
+    /* 0x28 */ s32 motion;
+} AuEnvMixer; // size = 0x2C
 
 // based on N_PVoice
 typedef struct AuPVoice {
     /* 0x00 */ struct AuPVoice* next;
-    /* 0x04 */ AuLoadFilter loadFilter;
+    /* 0x04 */ AuLoadFilter decoder;
     /* 0x38 */ AuResampler resampler;
     /* 0x48 */ AuEnvMixer envMixer;
     /* 0x74 */ s16 unk_74;
     /* 0x76 */ s16 unk_76;
-    /* 0x78 */ u8 gammaID; //?
+    /* 0x78 */ u8 groupID; //?
     /* 0x79 */ u8 index;
     /* 0x7A */ u8 unk_7A[2];
 } AuPVoice;
@@ -384,13 +393,13 @@ typedef struct AuSynDriver {
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 outputRate;
     /* 0x0C */ s32 num_pvoice;
-    /* 0x10 */ s32 unk_num_gamma;
+    /* 0x10 */ s32 num_bus;
     /* 0x14 */ ALDMANew2 dmaNew; // pointer to nuAuDmaNew
     /* 0x18 */ ALHeap* heap;
     /* 0x1C */ AuPVoice* pvoices;
-    /* 0x20 */ AlUnkGamma* al_unk_gamma;
-    /* 0x24 */ s32* unk_drvr_24; // struct size = 0x170
-    /* 0x28 */ s32* unk_drvr_28; // struct size = 0x170
+    /* 0x20 */ AuFxBus* fxBus;
+    /* 0x24 */ s32* savedMainOut; // struct size = 0x170
+    /* 0x28 */ s32* savedAuxOut; // struct size = 0x170
 } AuSynDriver;
 
 typedef struct SoundSFXEntry {
@@ -785,10 +794,10 @@ typedef struct AuGlobals {
     /* 0x0038 */ s32 bkListLength;
     /* 0x003C */ u16* mseqFileList;
     /* 0x0040 */ AuEffectChange effectChanges[4];
-    /* 0x0050 */ u8 unk_50;
-    /* 0x0051 */ u8 unk_51;
-    /* 0x0052 */ u8 unk_52;
-    /* 0x0053 */ u8 unk_53;
+    /* 0x0050 */ u8 channelDelayPending;
+    /* 0x0051 */ u8 channelDelayGroupIdx;
+    /* 0x0052 */ u8 channelDelayTime;
+    /* 0x0053 */ u8 channelDelaySide;
     /* 0x0054 */ PEREntry* dataPER;
     /* 0x0058 */ BGMInstrumentInfo* dataPRG;
     /* 0x005C */ struct BGMHeader* dataBGM[2];
@@ -1070,7 +1079,7 @@ typedef struct AlUnkGemini {
 
 typedef struct ALConfig {
     /* 0x00 */ s32 num_pvoice;
-    /* 0x04 */ s32 unk_num_gamma;
+    /* 0x04 */ s32 num_bus;
     /* 0x08 */ s32 outputRate;
     /* 0x0C */ u8 unk_0C;
     /* 0x0D */ char unk_0D[3];
@@ -1093,9 +1102,9 @@ extern u16 D_80078DB6;
 
 extern AuSynDriver* gActiveSynDriverPtr;
 extern AuSynDriver* gSynDriverPtr;
-extern u8 D_80078E58;
-extern u16 D_80078E5A;
-extern u8 D_80078E5C;
+extern u8 AuUseGlobalVolume;
+extern u16 AuGlobalVolume;
+extern u8 AuSynStereoDirty;
 
 extern AuGlobals* gSoundGlobals;
 extern BGMPlayer* gBGMPlayerC;
@@ -1105,32 +1114,15 @@ extern AuAmbienceManager* gAuAmbienceManager;
 extern SoundManager* gSoundManager;
 extern BGMPlayer* gBGMPlayerA;
 
-extern u16 D_800A0F50;
+extern u16 AuInitialGlobalVolume;
 
-extern s16* D_800A3FE0;
-extern s16* D_800A3FE4;
-extern s32 D_800A3FE8;
-extern u8 D_800A3FEC;
-extern s16 D_800A3FEE;
-extern s32 D_800A3FF0;
+extern s16* AuDelayBufferMain;
+extern s16* AuDelayBufferAux;
+extern s32 AuDelayCounter;
+extern u8 AuDelayedVoiceGroup;
+extern s16 AuDelayedChannel;
+extern s32 AuDelayCount;
 
 #include "audio/private.h"
-
-#define aLoadBufferSize(pkt,s,u,b) { \
-    Acmd *_a = (Acmd *)pkt; \
-    _a->words.w0 = _SHIFTL(A_LOADBUFF, 24, 8) | _SHIFTL(s, 12, 12) | _SHIFTL(u, 0, 12); \
-    _a->words.w1 = (unsigned int)(b); \
-}
-
-#define aSaveBufferSize(pkt,s,u,b) { \
-    Acmd *_a = (Acmd *)pkt; \
-    _a->words.w0 = _SHIFTL(A_SAVEBUFF, 24, 8) | _SHIFTL(s, 12, 12) | _SHIFTL(u, 0, 12); \
-    _a->words.w1 = (unsigned int)(b); \
-}
-
-#define aInterleavePart(pkt) { \
-    Acmd *_a = (Acmd *)pkt; \
-    _a->words.w0 = _SHIFTL(A_INTERLEAVE, 24, 8); \
-}
 
 #endif
