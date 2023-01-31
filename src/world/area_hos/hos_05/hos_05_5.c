@@ -44,160 +44,174 @@ s32 N(D_802495DC_A3381C) = 0;
 
 s32 N(D_802495E0_A33820) = 0;
 
-CameraControlSettings N(IntroCamSettings)[] = {
-	{ // [0] 802495E4
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 130.4,
-		.boomPitch = 12.4,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 0.0, -1.0, -500.0 },
-		.viewPitch = -16.8,
-		.flag = FALSE,
-	},
-	{ // [1] 80249610
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 130.4,
-		.boomPitch = 12.4,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { -433.0127, -1.0, -250.0 },
-		.viewPitch = -16.8,
-		.flag = FALSE,
-	},
-	{ // [2] 8024963C
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 400.0,
-		.boomPitch = 2.7,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 0.0, -1.0, -500.0 },
-		.viewPitch = -7.4,
-		.flag = FALSE,
-	},
-	{ // [3] 80249668
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 274.4,
-		.boomPitch = -9.3,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 114.3, -1.0, 500.0 },
-		.viewPitch = 0.7,
-		.flag = FALSE,
-	},
-	{ // [4] 80249694
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 274.4,
-		.boomPitch = -9.3,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 114.3, -1.0, 500.0 },
-		.viewPitch = 0.7,
-		.flag = FALSE,
-	},
-	{ // [5] 802496C0
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 243.3,
-		.boomPitch = 16.0,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 56.1, -1.0, -1.1 },
-		.viewPitch = -3.0,
-		.flag = FALSE,
-	},
-	{ // [6] 802496EC
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 192.5,
-		.boomPitch = 12.4,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 0.0, -1.0, 500.0 },
-		.viewPitch = -10.7,
-		.flag = FALSE,
-	},
-	{ // [7] 80249718
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 467.0,
-		.boomPitch = 21.0,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 71.3, -1.0, 154.3 },
-		.viewPitch = -3.0,
-		.flag = FALSE,
-	},
-	{ // [8] 80249744
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 121.6,
-		.boomPitch = 0.0,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 24.4, -1.0, 154.3 },
-		.viewPitch = 0.0,
-		.flag = FALSE,
-	},
-	{ // [9] 80249770
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 474.7,
-		.boomPitch = 0.0,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 24.4, -1.0, 154.3 },
-		.viewPitch = 0.0,
-		.flag = FALSE,
-	},
-	{ // [10] 8024979C
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 225.7,
-		.boomPitch = 9.7,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 6.9, -1.0, 168.8 },
-		.viewPitch = -3.0,
-		.flag = FALSE,
-	},
-	{ // [11] 802497C8
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 130.0,
-		.boomPitch = 9.8,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 40.0, -1.0, 168.8 },
-		.viewPitch = -9.3,
-		.flag = FALSE,
-	},
-	{ // [12] 802497F4
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 270.0,
-		.boomPitch = 9.8,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 40.0, -1.0, 168.8 },
-		.viewPitch = -9.3,
-		.flag = FALSE,
-	},
-	{ // [13] 80249820
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 246.1,
-		.boomPitch = -1.3,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 500.0, -1.0, 500.0 },
-		.viewPitch = 0.5,
-		.flag = FALSE,
-	},
-	{ // [14] 8024984C
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 180.0,
-		.boomPitch = -1.3,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 0.0, -1.0, -500.0 },
-		.viewPitch = 0.5,
-		.flag = FALSE,
-	},
-	{ // [15] 80249878
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 90.0,
-		.boomPitch = 5.4,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 0.0, -1.0, 500.0 },
-		.viewPitch = -6.9,
-		.flag = FALSE,
-	},
-	{ // [16] 802498A4
-		.type = CAMERA_SETTINGS_TYPE_0,
-		.boomLength = 445.8,
-		.boomPitch = 5.4,
-		.posA = { 0.0, -1.0, 0.0 },
-		.posB = { 0.0, -1.0, 500.0 },
-		.viewPitch = -6.9,
-		.flag = FALSE,
-	}, // 802498D0
+CameraControlSettings N(IntroCamSettings0) = { // [0] 802495E4
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 130.4,
+	.boomPitch = 12.4,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 0.0, -1.0, -500.0 },
+	.viewPitch = -16.8,
+	.flag = FALSE,
+};
+	
+CameraControlSettings N(IntroCamSettings1) = { // [1] 80249610
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 130.4,
+	.boomPitch = 12.4,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { -433.0127, -1.0, -250.0 },
+	.viewPitch = -16.8,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings2) = { // [2] 8024963C
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 400.0,
+	.boomPitch = 2.7,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 0.0, -1.0, -500.0 },
+	.viewPitch = -7.4,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings3) = { // [3] 80249668
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 274.4,
+	.boomPitch = -9.3,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 114.3, -1.0, 500.0 },
+	.viewPitch = 0.7,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings4) = { // [4] 80249694
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 274.4,
+	.boomPitch = -9.3,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 114.3, -1.0, 500.0 },
+	.viewPitch = 0.7,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings5) = { // [5] 802496C0
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 243.3,
+	.boomPitch = 16.0,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 56.1, -1.0, -1.1 },
+	.viewPitch = -3.0,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings6) = { // [6] 802496EC
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 192.5,
+	.boomPitch = 12.4,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 0.0, -1.0, 500.0 },
+	.viewPitch = -10.7,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings7) = { // [7] 80249718
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 467.0,
+	.boomPitch = 21.0,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 71.3, -1.0, 154.3 },
+	.viewPitch = -3.0,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings8) = { // [8] 80249744
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 121.6,
+	.boomPitch = 0.0,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 24.4, -1.0, 154.3 },
+	.viewPitch = 0.0,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings9) = { // [9] 80249770
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 474.7,
+	.boomPitch = 0.0,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 24.4, -1.0, 154.3 },
+	.viewPitch = 0.0,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings10) = { // [10] 8024979C
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 225.7,
+	.boomPitch = 9.7,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 6.9, -1.0, 168.8 },
+	.viewPitch = -3.0,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings11) = { // [11] 802497C8
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 130.0,
+	.boomPitch = 9.8,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 40.0, -1.0, 168.8 },
+	.viewPitch = -9.3,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings12) = { // [12] 802497F4
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 270.0,
+	.boomPitch = 9.8,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 40.0, -1.0, 168.8 },
+	.viewPitch = -9.3,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings13) = { // [13] 80249820
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 246.1,
+	.boomPitch = -1.3,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 500.0, -1.0, 500.0 },
+	.viewPitch = 0.5,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings14) = { // [14] 8024984C
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 180.0,
+	.boomPitch = -1.3,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 0.0, -1.0, -500.0 },
+	.viewPitch = 0.5,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings15) = { // [15] 80249878
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 90.0,
+	.boomPitch = 5.4,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 0.0, -1.0, 500.0 },
+	.viewPitch = -6.9,
+	.flag = FALSE,
+};
+
+CameraControlSettings N(IntroCamSettings16) = { // [16] 802498A4
+	.type = CAMERA_SETTINGS_TYPE_0,
+	.boomLength = 445.8,
+	.boomPitch = 5.4,
+	.posA = { 0.0, -1.0, 0.0 },
+	.posB = { 0.0, -1.0, 500.0 },
+	.viewPitch = -6.9,
+	.flag = FALSE,
 };
 
 f32 N(D_802498D0_A33B10) = 240.0;
@@ -244,7 +258,7 @@ s16 N(D_80249960_A33BA0)[] = {
     -3, -2, -1, 0, 1, 2, 3, 4, 3, 2, 1, 0, -1, -2, -3, -4
 };
 
-f32 N(D_80249980_A33BC0) = 12.0;
+f32 N(D_80249980_A33BC0) = 30.0;
 
 s32 N(D_80249984_A33BC4) = 0;
 
@@ -355,7 +369,8 @@ BSS s32 N(D_8024F448)[10];
 BSS s32 N(D_8024F470)[10];
 BSS s32 N(D_8024F498)[10];
 BSS s32 N(D_8024F4C0)[10];
-BSS s32 N(D_8024F4E8)[34];
+BSS s32 N(D_8024F4E8)[10]; // size was 34, trimmed to keep unkHos at 8024F510
+BSS UnkHosStruct N(UnkHosData); 
 
 API_CALLABLE(N(func_80240880_A2AAC0)) {
     Bytecode* args = script->ptrReadPos;
@@ -546,9 +561,9 @@ API_CALLABLE(N(func_80241274_A2B4B4)) {
     }
     N(ColorBufPtr) = nuGfxCfb_ptr;
     N(lerp_value_with_max_step)(250.0f, 0.0f, N(D_802498D0_A33B10), 0.5f, &N(D_802498D0_A33B10));
-    N(interp_value_with_easing)(2, 130.4f, N(IntroCamSettings)[2].boomLength, 0.0f, 470.0f, &IntroCamStateA_BoomLength);
-    N(lerp_value_with_max_step)(12.4f, N(IntroCamSettings)[2].boomPitch, IntroCamStateA_BoomPitch, 0.05f, &IntroCamStateA_BoomPitch);
-    N(lerp_value_with_max_step)(-16.8f, N(IntroCamSettings)[2].viewPitch, IntroCamStateA_ViewPitch, 0.05f, &IntroCamStateA_ViewPitch);
+    N(interp_value_with_easing)(2, 130.4f, N(IntroCamSettings2).boomLength, 0.0f, 470.0f, &IntroCamStateA_BoomLength);
+    N(lerp_value_with_max_step)(12.4f, N(IntroCamSettings2).boomPitch, IntroCamStateA_BoomPitch, 0.05f, &IntroCamStateA_BoomPitch);
+    N(lerp_value_with_max_step)(-16.8f, N(IntroCamSettings2).viewPitch, IntroCamStateA_ViewPitch, 0.05f, &IntroCamStateA_ViewPitch);
     N(lerp_value_with_max_step)(62.0f, 49.0f, IntroCamStateA_Vfov, 0.1f, &IntroCamStateA_Vfov);
     N(adjust_cam_vfov)(CAM_DEFAULT, IntroCamStateA_Vfov);
     camera->controlSettings.boomLength = IntroCamStateA_BoomLength;
@@ -568,9 +583,9 @@ API_CALLABLE(N(func_8024146C_A2B6AC)) {
     }
     N(ColorBufPtr) = nuGfxCfb_ptr;
     N(lerp_value_with_max_step)(250.0f, 0.0f, N(D_802498D0_A33B10), 0.5f, &N(D_802498D0_A33B10));
-    N(interp_value_with_easing)(2, 130.4f, N(IntroCamSettings)[2].boomLength, N(D_802498FC_A33B3C), 470.0f, &IntroCamStateB_BoomLength);
-    N(lerp_value_with_max_step)(12.4f, N(IntroCamSettings)[2].boomPitch, IntroCamStateB_BoomPitch, 0.05f, &IntroCamStateB_BoomPitch);
-    N(lerp_value_with_max_step)(-16.8f, N(IntroCamSettings)[2].viewPitch, IntroCamStateB_ViewPitch, 0.05f, &IntroCamStateB_ViewPitch);
+    N(interp_value_with_easing)(2, 130.4f, N(IntroCamSettings2).boomLength, N(D_802498FC_A33B3C), 470.0f, &IntroCamStateB_BoomLength);
+    N(lerp_value_with_max_step)(12.4f, N(IntroCamSettings2).boomPitch, IntroCamStateB_BoomPitch, 0.05f, &IntroCamStateB_BoomPitch);
+    N(lerp_value_with_max_step)(-16.8f, N(IntroCamSettings2).viewPitch, IntroCamStateB_ViewPitch, 0.05f, &IntroCamStateB_ViewPitch);
     N(lerp_value_with_max_step)(62.0f, 49.0f, IntroCamStateB_Vfov, 0.1f, &IntroCamStateB_Vfov);
     N(adjust_cam_vfov)(CAM_DEFAULT, IntroCamStateB_Vfov);
     camera->controlSettings.boomLength = IntroCamStateB_BoomLength;
@@ -1270,7 +1285,7 @@ f32 N(D_8024A9C8_A34C08) = 130.0;
 API_CALLABLE(N(func_80242F74_A2D1B4)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    N(lerp_value_with_max_step)(N(IntroCamSettings)[15].boomLength, N(IntroCamSettings)[16].boomLength,
+    N(lerp_value_with_max_step)(N(IntroCamSettings15).boomLength, N(IntroCamSettings16).boomLength,
         N(D_8024A9C8_A34C08), 1.0f, &N(D_8024A9C8_A34C08));
     camera->panActive = TRUE;
     camera->controlSettings.boomLength = N(D_8024A9C8_A34C08);
@@ -1283,7 +1298,7 @@ API_CALLABLE(N(func_80242F74_A2D1B4)) {
 s32 N(D_8024A9CC_A34C0C) = 0;
 
 API_CALLABLE(N(func_8024301C_A2D25C)) {
-    Npc* npc = resolve_npc(script, 9);
+    Npc* npc = resolve_npc(script, NPC_Kammy);
 
     if (isInitialCall) {
         N(D_8024F2F4) = npc->pos.x;
@@ -1303,12 +1318,14 @@ API_CALLABLE(N(func_8024301C_A2D25C)) {
 }
 
 s32 N(D_8024A9D0_A34C10)[] = {
-    EVT_FLOAT(0.93), EVT_FLOAT(0.9), EVT_FLOAT(0.93847656), EVT_FLOAT(0.91), EVT_FLOAT(0.9550781), EVT_FLOAT(0.93), EVT_FLOAT(0.96875), EVT_FLOAT(0.95), 
-    EVT_FLOAT(0.98), EVT_FLOAT(0.97), EVT_FLOAT(0.98535156), EVT_FLOAT(0.98535156), EVT_FLOAT(0.9951172), EVT_FLOAT(0.9951172), EVT_FLOAT(0.9980469), EVT_FLOAT(0.9980469), 
-    EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0), 
+    EVT_FLOAT(0.93),  EVT_FLOAT(0.9),   EVT_FLOAT(0.938), EVT_FLOAT(0.91),
+    EVT_FLOAT(0.955), EVT_FLOAT(0.93),  EVT_FLOAT(0.968), EVT_FLOAT(0.95),
+    EVT_FLOAT(0.979), EVT_FLOAT(0.97),  EVT_FLOAT(0.985), EVT_FLOAT(0.985), 
+    EVT_FLOAT(0.995), EVT_FLOAT(0.995), EVT_FLOAT(0.998), EVT_FLOAT(0.998),
+    EVT_FLOAT(0.999), EVT_FLOAT(0.999), EVT_FLOAT(1.0),   EVT_FLOAT(1.0),
 };
 
-UnkHosStruct* N(D_8024AA20_A34C60) = 0x8024F510; //TODO
+UnkHosStruct* N(D_8024AA20_A34C60) = &N(UnkHosData); //TODO
 
 Gfx N(D_8024AA28_A34C68)[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
@@ -1758,7 +1775,7 @@ API_CALLABLE(N(func_80244454_A2E694)) {
 }
 
 API_CALLABLE(N(func_802444E8_A2E728)) {
-    Npc* npc = resolve_npc(script, 10);
+    Npc* npc = resolve_npc(script, NPC_StarRod);
 
     npc->yaw = npc->renderYaw = 180.0f - gCameras[gCurrentCameraID].currentYaw;
     return ApiStatus_BLOCK;
@@ -1824,7 +1841,7 @@ EvtScript N(EVS_8024ACC0) = {
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
     EVT_CALL(N(AdjustCamVfov), 0, 62)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 157, 0)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings[1])))
+    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings1)))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(N(func_80243FC4_A2E204))
@@ -1946,7 +1963,7 @@ EvtScript N(D_8024AECC_A3510C) = {
     EVT_CALL(N(func_802409C4_A2AC04), 130, 130, 130, 0, 0, 0, 15)
     EVT_CALL(N(AdjustCamVfov), 0, 35)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -145, 147, 84)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings[6])))
+    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings6)))
     EVT_CALL(N(func_802440D0_A2E310))
     EVT_WAIT(50)
     EVT_CALL(func_802CFD30, 7, 8, 0, 0, 0, 0)
@@ -2039,7 +2056,7 @@ EvtScript N(D_8024AECC_A3510C) = {
     EVT_WAIT(50)
     EVT_CALL(N(AdjustCamVfov), 0, 40)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 157, 0)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings[7])))
+    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings7)))
     EVT_CALL(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_IdleSad)
     EVT_CALL(SetNpcAnimation, NPC_Muskular, ANIM_WorldMuskular_Panic)
     EVT_CALL(SetNpcAnimation, NPC_Misstar, ANIM_WorldMisstar_Panic)
@@ -2129,7 +2146,7 @@ EvtScript N(D_8024AECC_A3510C) = {
     EVT_CALL(N(func_80240880_A2AAC0), 0, 0, 0, 0, 0, 0, 0, 995, 1000)
     EVT_CALL(N(AdjustCamVfov), 0, 25)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -38, 210, 85)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings[8])))
+    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings8)))
     EVT_CALL(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_ClownCarCloseMouth)
     EVT_CALL(SetNpcPos, NPC_Bowser_01, -30, 150, 162)
     EVT_CALL(SetNpcPos, NPC_Bowser_02, -30, 150, 162)
@@ -2177,7 +2194,7 @@ EvtScript N(D_8024AECC_A3510C) = {
     EVT_WAIT(20)
     EVT_CALL(N(AdjustCamVfov), 0, 25)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -38, 210, 85)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings[9])))
+    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings9)))
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_ClownCarOpenMouth)
     EVT_THREAD
@@ -2186,7 +2203,7 @@ EvtScript N(D_8024AECC_A3510C) = {
     EVT_WAIT(25)
     EVT_CALL(N(AdjustCamVfov), 0, 35)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -240, 200, 113)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings[10])))
+    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings10)))
     EVT_CALL(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_IdleSad)
     EVT_CALL(SetNpcAnimation, NPC_Misstar, ANIM_WorldMisstar_Panic)
     EVT_CALL(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)
@@ -2234,7 +2251,7 @@ EvtScript N(D_8024AECC_A3510C) = {
     EVT_WAIT(35)
     EVT_CALL(N(AdjustCamVfov), 0, 35)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 30, 232, 0)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings[11])))
+    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings11)))
     EVT_CALL(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_ClownCarBrandish)
     EVT_CALL(SetNpcPos, NPC_Bowser_01, 0, 170, 0)
     EVT_CALL(SetNpcPos, NPC_Bowser_02, 0, 170, 0)
@@ -2266,7 +2283,7 @@ EvtScript N(D_8024AECC_A3510C) = {
     EVT_CALL(N(func_802423D4_A2C614))
     EVT_CALL(N(AdjustCamVfov), 0, 35)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 177, 0)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings[12])))
+    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings12)))
     EVT_CALL(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_ClownCarStarRod)
     EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, 20, 265, -21, EVT_FLOAT(1.0), ArrayVar(18))
     EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, 20, 265, -21, EVT_FLOAT(1.0), ArrayVar(19))
@@ -2281,7 +2298,7 @@ EvtScript N(D_8024AECC_A3510C) = {
     EVT_WAIT(5)
     EVT_CALL(N(AdjustCamVfov), 0, 40)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 157, 0)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings[7])))
+    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings7)))
     EVT_CALL(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Panic)
     EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Panic)
     EVT_CALL(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_IdleSad)
@@ -2305,7 +2322,7 @@ EvtScript N(D_8024AECC_A3510C) = {
     EVT_END_LOOP
     EVT_CALL(N(AdjustCamVfov), 0, 35)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 70, 200, -239)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings[5])))
+    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings5)))
     EVT_CALL(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Hurt)
     EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Hurt)
     EVT_CALL(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Hurt)
@@ -2385,7 +2402,7 @@ EvtScript N(D_8024AECC_A3510C) = {
     EVT_WAIT(15)
     EVT_CALL(N(AdjustCamVfov), 0, 50)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 40, 200, -40)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings[13])))
+    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings13)))
     EVT_CALL(RemoveEffect, ArrayVar(16))
     EVT_CALL(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_ClownCarIdle)
     EVT_THREAD
@@ -2408,7 +2425,7 @@ EvtScript N(D_8024AECC_A3510C) = {
     EVT_CALL(N(func_80242704_A2C944))
     EVT_CALL(N(AdjustCamVfov), 0, 50)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 200, 0)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings[15])))
+    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings15)))
     EVT_CALL(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_ClownCarLaugh)
     EVT_THREAD
         EVT_CALL(N(func_80242F74_A2D1B4))

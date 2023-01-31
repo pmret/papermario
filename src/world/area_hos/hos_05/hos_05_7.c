@@ -11,6 +11,8 @@ extern u8 D_802D9D73;
 #include "world/common/atomic/TexturePan.data.inc.c"
 #define NAME_SUFFIX
 
+MAP_RODATA_PAD(1,unk);
+
 BSS s32 D_8024F570[4];
 BSS u8 N(oldPrimR), N(oldPrimG), N(oldPrimB);
 BSS u8 N(oldEnvR), N(oldEnvG), N(oldEnvB);
