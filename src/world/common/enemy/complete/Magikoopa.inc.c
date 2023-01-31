@@ -43,7 +43,7 @@ EvtScript N(EVS_NpcHit_Magikoopa) = {
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
             EVT_CALL(GetSelfAnimationFromTable, 7, LVar0)
-            EVT_EXEC_WAIT(0x800936DC)
+            EVT_EXEC_WAIT(EVS_NpcHitRecoil)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN

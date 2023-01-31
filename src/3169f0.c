@@ -3,6 +3,7 @@
 extern u8 obfuscated_create_audio_system[];
 
 #ifdef SHIFT
+void create_audio_system(void);
 void func_80200000(void) {
     create_audio_system();
 }
