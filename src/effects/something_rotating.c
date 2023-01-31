@@ -144,8 +144,8 @@ void something_rotating_update(EffectInstance* effect) {
     f32 angle1;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
         part->unk_10 = 32;
     }
 

@@ -21,24 +21,24 @@
 #include "sprite/npc/StarRod.h"
 
 enum {
-	NPC_Eldstar    		= 0,
-	NPC_Mamar      		= 1,
-	NPC_Skolar     		= 2,
-	NPC_Muskular   		= 3,
-	NPC_Misstar    		= 4,
-	NPC_Klevar     		= 5,
-	NPC_Kalmar     		= 6,
-	NPC_Bowser_Main		= 7,
-	NPC_Bowser_Prop		= 8,
-	NPC_Kammy      		= 9,
-	NPC_StarRod    		= 10,
+    NPC_Eldstar         = 0,
+    NPC_Mamar           = 1,
+    NPC_Skolar          = 2,
+    NPC_Muskular        = 3,
+    NPC_Misstar         = 4,
+    NPC_Klevar          = 5,
+    NPC_Kalmar          = 6,
+    NPC_Bowser_Main     = 7,
+    NPC_Bowser_Prop     = 8,
+    NPC_Kammy           = 9,
+    NPC_StarRod         = 10,
 };
 
 enum {
-	MV_Starship_Yaw		= MapVar(10),
-	MV_Starship_PosY	= MapVar(11),
-	MV_PlayerOnBoard	= MapVar(12),
-	MV_PartnerOnBoard	= MapVar(13),
+    MV_Starship_Yaw     = MapVar(10),
+    MV_Starship_PosY    = MapVar(11),
+    MV_PlayerOnBoard    = MapVar(12),
+    MV_PartnerOnBoard   = MapVar(13),
 };
 
 #define NAMESPACE hos_05

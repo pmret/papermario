@@ -992,16 +992,14 @@ typedef struct EndingDecalsFXData {
 } EndingDecalsFXData; // size = 0x2C
 
 typedef struct LightRaysFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ char unk_04[0xC];
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
+    /* 0x10 */ Vec3f pos;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
+    /* 0x24 */ s32 alpha;
+    /* 0x28 */ s32 timeLeft;
+    /* 0x2C */ s32 lifetime;
     /* 0x30 */ char unk_30[4];
     /* 0x34 */ f32 unk_34;
     /* 0x38 */ f32 unk_38;
@@ -1013,14 +1011,10 @@ typedef struct LightRaysFXData {
     /* 0x50 */ f32 unk_50;
     /* 0x54 */ f32 unk_54;
     /* 0x58 */ f32 unk_58;
-    /* 0x5C */ f32 unk_5C;
-    /* 0x60 */ f32 unk_60;
-    /* 0x64 */ f32 unk_64;
+    /* 0x5C */ Vec3f rotation;
     /* 0x68 */ f32 unk_68;
     /* 0x6C */ f32 unk_6C;
-    /* 0x70 */ f32 unk_70;
-    /* 0x74 */ f32 unk_74;
-    /* 0x78 */ f32 unk_78;
+    /* 0x70 */ Vec3f initialRot;
     /* 0x7C */ s32 unk_7C;
     /* 0x80 */ f32 unk_80;
     /* 0x84 */ f32 unk_84;
