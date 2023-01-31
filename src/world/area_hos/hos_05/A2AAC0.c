@@ -131,7 +131,8 @@ BSS s32 D_8024F448[10];
 BSS s32 D_8024F470_hos_bss[10];
 BSS s32 D_8024F498[10];
 BSS s32 hos_05_D_8024F4C0[10];
-BSS s32 D_8024F4E8[34];
+BSS s32 D_8024F4E8[10];
+BSS s32 D_8024F510[24];
 
 ApiStatus func_80240880_A2AAC0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

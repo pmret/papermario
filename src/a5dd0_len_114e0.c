@@ -3648,7 +3648,7 @@ void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, 
     handle->gfx = (Gfx*) mdl_nextTextureAddress;
     memcpy(&handle->header, header, sizeof(*header));
     func_801180E8(header, (Gfx**)&mdl_nextTextureAddress, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
-    gSPEndDisplayList(((Gfx*) mdl_nextTextureAddress)++);
+    gSPEndDisplayList(((Gfx*)mdl_nextTextureAddress)++);
 }
 
 void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) {

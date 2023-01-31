@@ -5,6 +5,7 @@
 extern u8 obfuscated_load_engine_data[];
 
 #ifdef SHIFT
+void load_engine_data(void);
 void func_80200080(void) {
     load_engine_data();
 }

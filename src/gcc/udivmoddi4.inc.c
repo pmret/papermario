@@ -23,12 +23,21 @@ typedef union {
 #define __ll_lowpart(t) ((USItype) (t) % __ll_B)
 #define __ll_highpart(t) ((USItype) (t) / __ll_B)
 
+#ifdef SHIFT
+#define umul_ppmm(w1, w0, u, v)						\
+  do {									\
+    UDItype __x = (UDItype) (USItype) (u) * (USItype) (v);		\
+    (w1) = (USItype) (__x >> 32);					\
+    (w0) = (USItype) (__x);						\
+  } while (0)
+#else
 #define umul_ppmm(w1, w0, u, v)     \
     __asm__ ("multu %2,%3"          \
         : "=l" ((USItype) (w0)),    \
           "=h" ((USItype) (w1))     \
         : "d" ((USItype) (u)),      \
           "d" ((USItype) (v)))
+#endif
 
 #define sub_ddmmss(sh, sl, ah, al, bh, bl)  \
     do {									\

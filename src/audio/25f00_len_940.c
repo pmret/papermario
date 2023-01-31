@@ -25,7 +25,6 @@ extern NUDMABuffer* D_800A3BD4;
 extern NUDMABuffer nuAuDmaBufList[50];
 extern AuSynDriver auSynDriver;
 extern u64 rspbootUcodeBuffer[];
-extern OSMesgQueue D_800DA444;
 extern s32 AlNumFields;
 extern u64 n_aspMain_text_bin[];
 extern u64 n_aspMain_data_bin[];
@@ -132,7 +131,7 @@ void nuAuMgr(void* arg) {
                     D_800A3520[cmdListIndex].msgQ = &auRtnMesgQ;
                     D_800A3520[cmdListIndex].list.t.data_ptr = (u64*)cmdListBuf;
                     D_800A3520[cmdListIndex].list.t.data_size = (cmdListAfter_ptr - cmdListBuf) * sizeof(Acmd);
-                    osSendMesg(&D_800DA444, &D_800A3520[cmdListIndex], OS_MESG_BLOCK);
+                    osSendMesg(&nusched.audioRequestMQ, &D_800A3520[cmdListIndex], OS_MESG_BLOCK);
                     nuAuCleanDMABuffers();
                     osRecvMesg(&auRtnMesgQ, NULL, 1);
                     if (++bufferIndex == 3) {
