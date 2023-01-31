@@ -263,8 +263,8 @@ void au_syn_start_voice_params(u8 index, u8 reverbType, Instrument* table, f32 p
 void au_syn_set_wavetable(u8 voiceIdx, Instrument* table);
 void au_syn_set_pitch(u8 voiceIdx, f32 pitchRatio);
 void au_syn_set_mixer_params(u8 voiceIdx, s16 volume, s32 arg2, u8 arg3, u8 arg4);
-void func_80057548(u8 voiceIdx, u8 arg1, u8 arg2);
-void func_800576EC(u8 voiceIdx, s16 arg1, s32 arg2);
+void au_syn_set_pan_fxmix(u8 voiceIdx, u8 arg1, u8 arg2);
+void au_syn_set_volume_delta(u8 voiceIdx, s16 arg1, s32 arg2);
 void au_syn_set_pan(u8 voiceIdx, u8 pan);
 void au_syn_set_fxmix(u8 voiceIdx, u8 dryAmt);
 s32 au_syn_get_playing(u8 voiceIdx);

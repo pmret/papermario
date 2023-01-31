@@ -350,7 +350,7 @@ void func_80053654(AuGlobals* globals) {
             if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_4) {
                 au_syn_set_mixer_params(i, voice->volume, voice->unk_08, voice->pan, voice->reverbAmt);
             } else if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_10) {
-                func_80057548(i, voice->pan, voice->reverbAmt);
+                au_syn_set_pan_fxmix(i, voice->pan, voice->reverbAmt);
             }
         }
         voice->unk_flags_43 = 0;
@@ -362,7 +362,7 @@ void func_80053888(AlUnkVoice* voice, u8 index) {
         voice->unk_1C = NULL;
         voice->unk_42 = 1;
         voice->unk_flags_43 = 0;
-        func_800576EC(index, 0, AUDIO_SAMPLES);
+        au_syn_set_volume_delta(index, 0, AUDIO_SAMPLES);
     }
 }
 
@@ -371,7 +371,7 @@ void au_reset_voice(AlUnkVoice* voice, u8 index) {
     voice->unk_1C = NULL;
     voice->unk_42 = 1;
     voice->unk_flags_43 = 0;
-    func_800576EC(index, 0, AUDIO_SAMPLES);
+    au_syn_set_volume_delta(index, 0, AUDIO_SAMPLES);
 }
 
 // array offsets into AlTuneScaling

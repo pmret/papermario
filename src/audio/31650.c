@@ -465,7 +465,7 @@ void au_syn_set_mixer_params(u8 voiceIdx, s16 volume, s32 delta, u8 pan, u8 fxMi
     envMixer->first = 1;
 }
 
-void func_80057548(u8 voiceIdx, u8 pan, u8 fxMix) {
+void au_syn_set_pan_fxmix(u8 voiceIdx, u8 pan, u8 fxMix) {
     AuPVoice* pvoice = &gSynDriverPtr->pvoices[voiceIdx];
     AuEnvMixer* envMixer = &pvoice->envMixer;
 
@@ -495,7 +495,7 @@ void func_80057548(u8 voiceIdx, u8 pan, u8 fxMix) {
     envMixer->first = 1;
 }
 
-void func_800576EC(u8 voiceIdx, s16 vol, s32 delta) {
+void au_syn_set_volume_delta(u8 voiceIdx, s16 vol, s32 delta) {
     AuPVoice* pvoice = &gSynDriverPtr->pvoices[voiceIdx];
     AuEnvMixer* envMixer = &pvoice->envMixer;
 
