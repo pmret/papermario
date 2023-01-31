@@ -41,8 +41,8 @@ glabel blast_appendGfx
 /* 37D714 E007C284 3C06DE00 */  lui       $a2, 0xde00
 /* 37D718 E007C288 AE820000 */  sw        $v0, ($s4)
 /* 37D71C E007C28C 8CA5001C */  lw        $a1, 0x1c($a1)
-/* 37D720 E007C290 3C020900 */  lui       $v0, 0x900
-/* 37D724 E007C294 24421300 */  addiu     $v0, $v0, 0x1300
+/* 37D720 E007C290 3C020900 */  lui       $v0, %hi(D_09001300_37ECD0)
+/* 37D724 E007C294 24421300 */  addiu     $v0, $v0, %lo(D_09001300_37ECD0)
 /* 37D728 E007C298 AC62000C */  sw        $v0, 0xc($v1)
 /* 37D72C E007C29C 3C028000 */  lui       $v0, 0x8000
 /* 37D730 E007C2A0 AC660008 */  sw        $a2, 8($v1)
@@ -180,8 +180,8 @@ glabel blast_appendGfx
 /* 37D938 E007C4A8 ACA20000 */  sw        $v0, ($a1)
 /* 37D93C E007C4AC 3C02DE00 */  lui       $v0, 0xde00
 /* 37D940 E007C4B0 AC820000 */  sw        $v0, ($a0)
-/* 37D944 E007C4B4 3C020900 */  lui       $v0, 0x900
-/* 37D948 E007C4B8 244217B0 */  addiu     $v0, $v0, 0x17b0
+/* 37D944 E007C4B4 3C020900 */  lui       $v0, %hi(D_090017B0_37F180)
+/* 37D948 E007C4B8 244217B0 */  addiu     $v0, $v0, %lo(D_090017B0_37F180)
 /* 37D94C E007C4BC AC820004 */  sw        $v0, 4($a0)
 /* 37D950 E007C4C0 24820010 */  addiu     $v0, $a0, 0x10
 /* 37D954 E007C4C4 ACA20000 */  sw        $v0, ($a1)

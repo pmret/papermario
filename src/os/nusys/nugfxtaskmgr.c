@@ -16,7 +16,6 @@ extern NUScTask nuGfxTask[NU_GFX_TASK_NUM];
 extern s32 D_800DA040;
 extern s32 D_800B91D0;
 extern u8 rspbootUcodeBuffer[];
-extern OSMesgQueue D_800DA47C;
 
 void nuGfxTaskMgr(void* data) {
     NUScTask* task;
@@ -116,6 +115,6 @@ void nuGfxTaskStart(Gfx* gfxList_ptr, u32 gfxListSize, u32 ucode, u32 flag) {
     nuGfxTaskSpool++;
     osSetIntMask(mask);
     osWritebackDCacheAll();
-    osSendMesg(&D_800DA47C, (void*) nuGfxTask_ptr, OS_MESG_BLOCK);
+    osSendMesg(&nusched.graphicsRequestMQ, (void*) nuGfxTask_ptr, OS_MESG_BLOCK);
     nuGfxTask_ptr = nuGfxTask_ptr->next;
 }

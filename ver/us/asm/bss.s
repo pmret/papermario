@@ -469,7 +469,7 @@ dlabel D_800A0F44
 dlabel D_800A0F48
 .space 8
 
-dlabel D_800A0F50
+dlabel AuInitialGlobalVolume
 .space 4
 
 dlabel D_800A0F54
@@ -535,22 +535,22 @@ dlabel CurrentSeqCmdHandler
 dlabel D_800A3FD4
 .space 0x0000000c
 
-dlabel D_800A3FE0
+dlabel AuDelayBufferMain
 .space 4
 
-dlabel D_800A3FE4
+dlabel AuDelayBufferAux
 .space 4
 
-dlabel D_800A3FE8
+dlabel AuDelayCounter
 .space 4
 
-dlabel D_800A3FEC
+dlabel AuDelayedVoiceGroup
 .space 2
 
-dlabel D_800A3FEE
+dlabel AuDelayedChannel
 .space 2
 
-dlabel D_800A3FF0
+dlabel AuDelayCount
 .space 4
 
 dlabel D_800A3FF4
@@ -860,7 +860,13 @@ dlabel nuContData
 .space 0x00000018
 
 dlabel gCameras
-.space 0x00002560
+.space 0x00001560
+
+dlabel D_800B32E0
+.space 0x800
+
+dlabel D_800B3AE0
+.space 0x800
 
 dlabel gCollisionData
 .space 4
@@ -995,31 +1001,13 @@ dlabel D_800DA040
 .space 0x00000400
 
 dlabel nusched
-.space 4
-
-dlabel D_800DA444
-.space 0x00000038
-
-dlabel D_800DA47C
-.space 0x00000038
-
-dlabel D_800DA4B4
-.space 0x000000a8
-
-dlabel D_800DA55C
-.space 0x0000054c
-
-dlabel D_800DAAA8
-.space 0x00000010
+.space 0x678
 
 dlabel AlNumFields
 .space 4
 
 dlabel D_800DAABC
-.space 1
-
-dlabel D_800DAABD
-.space 3
+.space 4
 
 dlabel __osEepromTimerQ
 .space 0x00000018

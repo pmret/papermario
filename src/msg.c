@@ -1363,6 +1363,7 @@ void dma_load_msg(u32 msgID, void* dest) {
     dma_copy(MSG_ROM_START + offset[0], MSG_ROM_START + offset[1], dest);
 }
 #else
+void dma_load_msg(u32 msgID, void* dest);
 INCLUDE_ASM_SHIFT(void, "msg", dma_load_msg);
 #endif
 

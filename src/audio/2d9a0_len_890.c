@@ -8,7 +8,7 @@ void func_800525A0(AuGlobals* globals) {
         AlUnkVoice* voice = &globals->voices[i];
 
         if (voice->unk_42 != 0) {
-            au_pvoice_reset_filter(i);
+            au_syn_stop_voice(i);
             voice->unk_42 = 0;
             voice->unk_1C = NULL;
             voice->priority = AU_PRIORITY_FREE;

@@ -1736,19 +1736,19 @@ void au_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
     switch (arg0) {
         case 1:
             if ((arg1 < ARRAY_COUNT(player->effectIndices)) && ((s8)player->effectIndices[arg1] >= 0)) {
-                player->globals->unk_51 = player->effectIndices[arg1];
+                player->globals->channelDelayGroupIdx = player->effectIndices[arg1];
                 if (arg2 != 0) {
                     temp_a3 = arg2 & 0xF;
                     temp_a1 = ((arg2 >> 4) & 1) + 1;
-                    if ((player->globals->unk_52 != temp_a3) || (player->globals->unk_53 != temp_a1)) {
-                        player->globals->unk_52 = temp_a3;
-                        player->globals->unk_53 = temp_a1;
-                        player->globals->unk_50 = 1;
+                    if ((player->globals->channelDelayTime != temp_a3) || (player->globals->channelDelaySide != temp_a1)) {
+                        player->globals->channelDelayTime = temp_a3;
+                        player->globals->channelDelaySide = temp_a1;
+                        player->globals->channelDelayPending = 1;
                     }
                 } else {
-                    if (player->globals->unk_53 != 0) {
-                        player->globals->unk_53 = 0;
-                        player->globals->unk_50 = 1;
+                    if (player->globals->channelDelaySide != 0) {
+                        player->globals->channelDelaySide = 0;
+                        player->globals->channelDelayPending = 1;
                     }
                 }
             }

@@ -53,6 +53,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     cross = "mips-linux-gnu-"
     cc = f"{BUILD_TOOLS}/cc/gcc/gcc"
+    cc_modern = f"mips-linux-gnu-gcc"
     cc_ido = f"{BUILD_TOOLS}/cc/ido5.3/cc"
     cc_272_dir = f"{BUILD_TOOLS}/cc/gcc2.7.2/"
     cc_272 = f"{cc_272_dir}/gcc"
@@ -67,6 +68,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
     cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
+    cflags_modern = f"-c -G0 -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mabi=32 -mgp32 -mfp32 -mno-gpopt -mabi=32 -mfix4300 -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -O2 -march=vr4300 -w -gdwarf-2 -x c {extra_cflags}"
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3","-g1")
 
@@ -98,6 +100,13 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     ninja.rule("cc",
         description="gcc $in",
         command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cc} {cflags} $cflags - -o $out'",
+        depfile="$out.d",
+        deps="gcc",
+    )
+
+    ninja.rule("cc_modern",
+        description="gcc $in",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cc_modern} {cflags_modern} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -342,7 +351,7 @@ class Configure:
 
                 if task == "yay0":
                     implicit.append(YAY0_COMPRESS_TOOL)
-                elif task in ["cc", "cxx"]:
+                elif task in ["cc", "cxx", "cc_modern"]:
                     order_only.append("generated_headers_" + self.version)
 
                 ninja.build(
@@ -383,6 +392,10 @@ class Configure:
                 task = "cc"
                 if entry.src_paths[0].suffixes[-1] == ".cpp":
                     task = "cxx"
+
+                top_lev_name = seg.get_most_parent().name
+                # if "evt" in top_lev_name:
+                #     task = "cc_modern"
 
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"

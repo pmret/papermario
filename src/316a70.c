@@ -4,10 +4,16 @@
 
 extern u8 obfuscated_load_engine_data[];
 
+#ifdef SHIFT
+void load_engine_data(void);
+void func_80200080(void) {
+    load_engine_data();
+}
+#else
 void func_80200080(void) {
     s32 seed = 0x3C01A775;
     u32 thisInsn = 0xB0018FFC;
-    HeapNode*(*load_engine_data)(s32) = (HeapNode* (*)(s32)) obfuscated_load_engine_data; // load_engine_data - ????????
+    HeapNode*(*load_engine_data)(void) = (HeapNode* (*)(void)) obfuscated_load_engine_data; // load_engine_data - ????????
     s32 hash = 0;
     u32 prevInsn;
     u32* it;
@@ -40,5 +46,6 @@ void func_80200080(void) {
     }
 
     load_engine_data += seed + 0xDDD20 - hash;
-    load_engine_data(thisInsn);
+    load_engine_data();
 }
+#endif
