@@ -582,43 +582,43 @@ void au_syn_set_fxmix(u8 voiceIdx, u8 fxMix) {
     envMixer->first = 1;
 }
 
-s32 func_80057B64(u8 voiceIdx) {
+s32 au_syn_get_playing(u8 voiceIdx) {
     AuPVoice* pvoice = &gSynDriverPtr->pvoices[voiceIdx];
 
     return pvoice->envMixer.motion;
 }
 
-s32 func_80057B8C(u8 voiceIdx) {
+s32 au_syn_get_voice_group(u8 voiceIdx) {
     AuPVoice* pvoice =  &gSynDriverPtr->pvoices[voiceIdx];
 
     return pvoice->groupID;
 }
 
-f32 func_80057BB4(u8 voiceIdx) {
+f32 au_syn_get_pitch(u8 voiceIdx) {
     AuPVoice* pvoice =  &gSynDriverPtr->pvoices[voiceIdx];
 
     return pvoice->resampler.ratio;
 }
 
-u8 func_80057BDC(u8 voiceIdx) {
+u8 au_syn_get_pan(u8 voiceIdx) {
     AuPVoice* pvoice =  &gSynDriverPtr->pvoices[voiceIdx];
 
     return pvoice->envMixer.pan;
 }
 
-s16 func_80057C04(u8 voiceIdx) {
+s16 au_syn_get_dryamt(u8 voiceIdx) {
     AuPVoice* pvoice =  &gSynDriverPtr->pvoices[voiceIdx];
 
     return pvoice->envMixer.dryamt;
 }
 
-s16 func_80057C2C(u8 voiceIdx) {
+s16 au_syn_get_wetamt(u8 voiceIdx) {
     AuPVoice* pvoice =  &gSynDriverPtr->pvoices[voiceIdx];
 
     return pvoice->envMixer.wetamt;
 }
 
-s32 func_80057C54(u8 voiceIdx) {
+s32 au_syn_get_volume_left(u8 voiceIdx) {
     AuPVoice* pvoice = &gSynDriverPtr->pvoices[voiceIdx];
     AuEnvMixer* envmixer = &pvoice->envMixer;
     u32 retVal;
@@ -635,7 +635,7 @@ s32 func_80057C54(u8 voiceIdx) {
     return retVal;
 }
 
-s32 func_80057D0C(u8 voiceIdx) {
+s32 au_syn_get_volume_right(u8 voiceIdx) {
     AuPVoice* pvoice = &gSynDriverPtr->pvoices[voiceIdx];
     AuEnvMixer* envmixer = &pvoice->envMixer;
     u32 retVal;
