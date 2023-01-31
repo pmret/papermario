@@ -6,7 +6,6 @@
 extern s32 obfuscated_battle_heap_create[];
 
 #ifdef SHIFT
-void battle_heap_create(void);
 void func_802AE000(void) {
     battle_heap_create();
 }

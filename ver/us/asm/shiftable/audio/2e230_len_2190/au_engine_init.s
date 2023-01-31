@@ -148,7 +148,7 @@ glabel au_engine_init
 /* 2E488 80053088 0000282D */   daddu    $a1, $zero, $zero
 /* 2E48C 8005308C 0200202D */  daddu     $a0, $s0, $zero
 /* 2E490 80053090 8E850004 */  lw        $a1, 4($s4)
-/* 2E494 80053094 0C015C89 */  jal       au_pvoice_set_filter_wavetable
+/* 2E494 80053094 0C015C89 */  jal       au_syn_set_wavetable
 /* 2E498 80053098 26730001 */   addiu    $s3, $s3, 1
 /* 2E49C 8005309C 02911021 */  addu      $v0, $s4, $s1
 /* 2E4A0 800530A0 AC400000 */  sw        $zero, ($v0)

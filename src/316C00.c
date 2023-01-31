@@ -6,7 +6,6 @@
 extern u8 obfuscated_general_heap_create[];
 
 #ifdef SHIFT
-void general_heap_create(void);
 void func_802AE000_316C00(void) {
     general_heap_create();
 }
