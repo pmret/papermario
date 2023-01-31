@@ -24,7 +24,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
     }
 
     driver->num_pvoice = config->num_pvoice;
-    driver->num_voice_groups = config->num_voice_groups;
+    driver->num_bus = config->num_bus;
     driver->curSamples = 0;
     driver->unk_04 = 0;
     driver->outputRate = config->outputRate;
@@ -74,18 +74,18 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         voice->index = i;
     }
 
-    gSynDriverPtr->voiceGroups = alHeapAlloc(heap, config->num_voice_groups, sizeof(*gSynDriverPtr->voiceGroups));
+    gSynDriverPtr->fxBus = alHeapAlloc(heap, config->num_bus, sizeof(*gSynDriverPtr->fxBus));
 
-    for (i = 0; i < config->num_voice_groups; i++) {
-        AuPVoiceGroup* voiceGroup = &gSynDriverPtr->voiceGroups[i];
-        voiceGroup->head = NULL;
-        voiceGroup->tail = NULL;
-        voiceGroup->gain = 0x7FFF;
-        voiceGroup->currentEffectType = AU_FX_NONE;
-        voiceGroup->fxL = alHeapAlloc(heap, 1, sizeof(*voiceGroup->fxL));
-        voiceGroup->fxR = alHeapAlloc(heap, 1, sizeof(*voiceGroup->fxR));
-        func_80058E84(voiceGroup->fxL, voiceGroup->currentEffectType, heap);
-        func_80058E84(voiceGroup->fxR, voiceGroup->currentEffectType, heap);
+    for (i = 0; i < config->num_bus; i++) {
+        AuFxBus* fxBus = &gSynDriverPtr->fxBus[i];
+        fxBus->head = NULL;
+        fxBus->tail = NULL;
+        fxBus->gain = 0x7FFF;
+        fxBus->currentEffectType = AU_FX_NONE;
+        fxBus->fxL = alHeapAlloc(heap, 1, sizeof(*fxBus->fxL));
+        fxBus->fxR = alHeapAlloc(heap, 1, sizeof(*fxBus->fxR));
+        func_80058E84(fxBus->fxL, fxBus->currentEffectType, heap);
+        func_80058E84(fxBus->fxR, fxBus->currentEffectType, heap);
     }
 
     gSynDriverPtr->savedMainOut = alHeapAlloc(heap, 2 * AUDIO_SAMPLES, 2);
@@ -112,7 +112,7 @@ void au_driver_release(void) {
 Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
     Acmd* cmdListPos;
     AuPVoice* pvoice;
-    AuPVoiceGroup* voiceGroup;
+    AuFxBus* fxBus;
 
     s16* bufPos;
     s16 auxOut;
@@ -141,35 +141,35 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
             for (i = 0; i < gSynDriverPtr->num_pvoice; i++) {
                 pvoice = &gSynDriverPtr->pvoices[i];
 
-                if ((pvoice->groupID != 0xFF) && (pvoice->groupID < gSynDriverPtr->num_voice_groups)) {
-                    voiceGroup = &gSynDriverPtr->voiceGroups[pvoice->groupID];
-                    if (voiceGroup->tail != NULL) {
-                        voiceGroup->tail->next = pvoice;
+                if ((pvoice->groupID != 0xFF) && (pvoice->groupID < gSynDriverPtr->num_bus)) {
+                    fxBus = &gSynDriverPtr->fxBus[pvoice->groupID];
+                    if (fxBus->tail != NULL) {
+                        fxBus->tail->next = pvoice;
                     } else {
-                        voiceGroup->head = pvoice;
+                        fxBus->head = pvoice;
                     }
-                    voiceGroup->tail = pvoice;
+                    fxBus->tail = pvoice;
                 }
             }
             first = TRUE;
-            for (i = 0; i < gSynDriverPtr->num_voice_groups; i++) {
-                voiceGroup = &gSynDriverPtr->voiceGroups[i];
-                if (voiceGroup->head != NULL) {
+            for (i = 0; i < gSynDriverPtr->num_bus; i++) {
+                fxBus = &gSynDriverPtr->fxBus[i];
+                if (fxBus->head != NULL) {
                     // clear all main and aux outputs
                     aClearBuffer(cmdListPos++, N_AL_MAIN_L_OUT, 8 * AUDIO_SAMPLES);
-                    if (voiceGroup->head != NULL) {
+                    if (fxBus->head != NULL) {
                         AuPVoice* next;
                         do {
-                            cmdListPos = au_pull_voice(voiceGroup->head, cmdListPos);
-                            next = voiceGroup->head->next;
-                            voiceGroup->head->next = NULL;
-                            voiceGroup->head = next;
+                            cmdListPos = au_pull_voice(fxBus->head, cmdListPos);
+                            next = fxBus->head->next;
+                            fxBus->head->next = NULL;
+                            fxBus->head = next;
                         } while (next != NULL);
-                        voiceGroup->tail = NULL;
+                        fxBus->tail = NULL;
                     }
-                    if (voiceGroup->currentEffectType != AU_FX_NONE) {
-                        cmdListPos = au_pull_fx(voiceGroup->fxL, cmdListPos, N_AL_AUX_L_OUT, 0);
-                        cmdListPos = au_pull_fx(voiceGroup->fxR, cmdListPos, N_AL_AUX_R_OUT, 0);
+                    if (fxBus->currentEffectType != AU_FX_NONE) {
+                        cmdListPos = au_pull_fx(fxBus->fxL, cmdListPos, N_AL_AUX_L_OUT, 0);
+                        cmdListPos = au_pull_fx(fxBus->fxR, cmdListPos, N_AL_AUX_R_OUT, 0);
                     }
 
                     // apply channel delay
@@ -199,8 +199,8 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
                     } else {
                         n_aLoadBuffer(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(gSynDriverPtr->savedAuxOut));
                     }
-                    aMix(cmdListPos++, 0, voiceGroup->gain, N_AL_AUX_L_OUT, 0);
-                    aMix(cmdListPos++, 0, voiceGroup->gain, N_AL_AUX_R_OUT, 2 * AUDIO_SAMPLES);
+                    aMix(cmdListPos++, 0, fxBus->gain, N_AL_AUX_L_OUT, 0);
+                    aMix(cmdListPos++, 0, fxBus->gain, N_AL_AUX_R_OUT, 2 * AUDIO_SAMPLES);
                     n_aSaveBuffer(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(gSynDriverPtr->savedAuxOut));
                     if (first) {
                         aClearBuffer(cmdListPos++, 0, 4 * AUDIO_SAMPLES);
@@ -208,8 +208,8 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
                     } else {
                         n_aLoadBuffer(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(gSynDriverPtr->savedMainOut));
                     }
-                    aMix(cmdListPos++, 0, voiceGroup->gain, N_AL_MAIN_L_OUT, 0);
-                    aMix(cmdListPos++, 0, voiceGroup->gain, N_AL_MAIN_R_OUT, 2 * AUDIO_SAMPLES);
+                    aMix(cmdListPos++, 0, fxBus->gain, N_AL_MAIN_L_OUT, 0);
+                    aMix(cmdListPos++, 0, fxBus->gain, N_AL_MAIN_R_OUT, 2 * AUDIO_SAMPLES);
                     n_aSaveBuffer(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(gSynDriverPtr->savedMainOut));
                 }
             }
@@ -257,31 +257,31 @@ void func_80056D5C(u8 bStereoSound) {
     AuSynStereoDirty = TRUE;
 }
 
-void au_voice_group_set_gain(u8 index, u16 arg1) {
-    AuPVoiceGroup* voiceGroup = &gSynDriverPtr->voiceGroups[index];
+void au_bus_set_volume(u8 index, u16 arg1) {
+    AuFxBus* fxBus = &gSynDriverPtr->fxBus[index];
 
-    voiceGroup->gain = arg1 & 0x7FFF;
+    fxBus->gain = arg1 & 0x7FFF;
 }
 
-u16 au_voice_group_get_gain(u8 index, u16 arg1) {
-    AuPVoiceGroup* voiceGroup = &gSynDriverPtr->voiceGroups[index];
+u16 au_bus_get_volume(u8 index, u16 arg1) {
+    AuFxBus* fxBus = &gSynDriverPtr->fxBus[index];
 
-    return voiceGroup->gain;
+    return fxBus->gain;
 }
 
-void au_voice_group_set_effect(u8 index, u8 effectType) {
-    AuPVoiceGroup* voiceGroup = &gSynDriverPtr->voiceGroups[index];
+void au_bus_set_effect(u8 index, u8 effectType) {
+    AuFxBus* fxBus = &gSynDriverPtr->fxBus[index];
 
-    voiceGroup->currentEffectType = effectType;
-    func_8005904C(voiceGroup->fxL, effectType);
-    func_8005904C(voiceGroup->fxR, effectType);
+    fxBus->currentEffectType = effectType;
+    func_8005904C(fxBus->fxL, effectType);
+    func_8005904C(fxBus->fxR, effectType);
 }
 
-void au_voice_group_set_fx_params(u8 index, s16 delayIndex, s16 paramID, s32 value) {
-    AuPVoiceGroup* voiceGroup = &gSynDriverPtr->voiceGroups[index];
+void au_bus_set_fx_params(u8 index, s16 delayIndex, s16 paramID, s32 value) {
+    AuFxBus* fxBus = &gSynDriverPtr->fxBus[index];
 
-    au_fx_param_hdl(voiceGroup->fxL, delayIndex, paramID, value);
-    au_fx_param_hdl(voiceGroup->fxR, delayIndex, paramID, value);
+    au_fx_param_hdl(fxBus->fxL, delayIndex, paramID, value);
+    au_fx_param_hdl(fxBus->fxR, delayIndex, paramID, value);
 }
 
 void au_pvoice_set_group(u8 index, s8 groupID) {
@@ -588,7 +588,7 @@ s32 au_syn_get_playing(u8 voiceIdx) {
     return pvoice->envMixer.motion;
 }
 
-s32 au_syn_get_voice_group(u8 voiceIdx) {
+s32 au_syn_get_bus(u8 voiceIdx) {
     AuPVoice* pvoice =  &gSynDriverPtr->pvoices[voiceIdx];
 
     return pvoice->groupID;

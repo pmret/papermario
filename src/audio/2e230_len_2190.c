@@ -310,21 +310,21 @@ void func_80053654(AuGlobals* globals) {
         }
     }
 
-    if (globals->effectChanges[0].changed) {
-        au_voice_group_set_effect(0, globals->effectChanges[0].type);
-        globals->effectChanges[0].changed = FALSE;
+    if (globals->effectChanges[FX_BUS_0].changed) {
+        au_bus_set_effect(FX_BUS_0, globals->effectChanges[FX_BUS_0].type);
+        globals->effectChanges[FX_BUS_0].changed = FALSE;
     }
-    if (globals->effectChanges[1].changed) {
-        au_voice_group_set_effect(1, globals->effectChanges[1].type);
-        globals->effectChanges[1].changed = FALSE;
+    if (globals->effectChanges[FX_BUS_1].changed) {
+        au_bus_set_effect(FX_BUS_1, globals->effectChanges[FX_BUS_1].type);
+        globals->effectChanges[FX_BUS_1].changed = FALSE;
 
-    } if (globals->effectChanges[2].changed) {
-        au_voice_group_set_effect(2, globals->effectChanges[2].type);
-        globals->effectChanges[2].changed = FALSE;
+    } if (globals->effectChanges[FX_BUS_2].changed) {
+        au_bus_set_effect(FX_BUS_2, globals->effectChanges[FX_BUS_2].type);
+        globals->effectChanges[FX_BUS_2].changed = FALSE;
     }
-    if (globals->effectChanges[3].changed) {
-        au_voice_group_set_effect(3, globals->effectChanges[3].type);
-        globals->effectChanges[3].changed = FALSE;
+    if (globals->effectChanges[FX_BUS_3].changed) {
+        au_bus_set_effect(FX_BUS_3, globals->effectChanges[FX_BUS_3].type);
+        globals->effectChanges[FX_BUS_3].changed = FALSE;
     }
 
     for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
@@ -427,8 +427,8 @@ void au_fade_update(Fade* fade) {
     }
 }
 
-void func_80053A98(u8 groupIdx, u16 arg1, s32 arg2) {
-    au_voice_group_set_gain(groupIdx, (u32)(arg1 * arg2) >> 15);
+void func_80053A98(u8 busId, u16 arg1, s32 arg2) {
+    au_bus_set_volume(busId, (u32)(arg1 * arg2) >> 15);
 }
 
 void func_80053AC8(Fade* fade) {

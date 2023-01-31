@@ -40,7 +40,7 @@ void create_audio_system(void) {
     nuAuPreNMI = 0;
     alHeapInit(&nuAuHeap, AuHeapBase, AUDIO_HEAP_SIZE);
     config.num_pvoice = 24;
-    config.num_voice_groups = 4;
+    config.num_bus = 4;
     outputRate = osAiSetFrequency(32000);
     frameSize = (AlNumFields * outputRate + 59) / 60;
     config.outputRate = outputRate;

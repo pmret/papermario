@@ -116,6 +116,13 @@ typedef enum SegmentControlCommands {
     BGM_SEGMENT_7                   = 7
 } SegmentControlCommands;
 
+typedef enum FxBus {
+    FX_BUS_0 = 0,
+    FX_BUS_1 = 1,
+    FX_BUS_2 = 2,
+    FX_BUS_3 = 3,
+} FxBus;
+
 typedef union Q32 {
     u8 u8[4];
     u16 u16[2];
@@ -308,7 +315,7 @@ typedef struct AlUnkKappa {
     /* 0x10 */ AuLowPass* lowpass_10;
 } AlUnkKappa; // size unk
 
-typedef struct AuPVoiceGroup {
+typedef struct AuFxBus {
     /* 0x00 */ u16 gain;
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ AuFX* fxL;
@@ -317,7 +324,7 @@ typedef struct AuPVoiceGroup {
     /* 0x0D */ char unk_0D[0x3];
     /* 0x10 */ struct AuPVoice* head;
     /* 0x14 */ struct AuPVoice* tail;
-} AuPVoiceGroup; // size = 0x18
+} AuFxBus; // size = 0x18
 
  // ALDMAproc in PM supposedly has an extra arg added, so that's why we have ALDMAproc2 and ALDMANew2
 typedef s32 (*ALDMAproc2)(s32 addr, s32 len, void *state, u8 arg3);
@@ -386,11 +393,11 @@ typedef struct AuSynDriver {
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 outputRate;
     /* 0x0C */ s32 num_pvoice;
-    /* 0x10 */ s32 num_voice_groups;
+    /* 0x10 */ s32 num_bus;
     /* 0x14 */ ALDMANew2 dmaNew; // pointer to nuAuDmaNew
     /* 0x18 */ ALHeap* heap;
     /* 0x1C */ AuPVoice* pvoices;
-    /* 0x20 */ AuPVoiceGroup* voiceGroups;
+    /* 0x20 */ AuFxBus* fxBus;
     /* 0x24 */ s32* savedMainOut; // struct size = 0x170
     /* 0x28 */ s32* savedAuxOut; // struct size = 0x170
 } AuSynDriver;
@@ -1072,7 +1079,7 @@ typedef struct AlUnkGemini {
 
 typedef struct ALConfig {
     /* 0x00 */ s32 num_pvoice;
-    /* 0x04 */ s32 num_voice_groups;
+    /* 0x04 */ s32 num_bus;
     /* 0x08 */ s32 outputRate;
     /* 0x0C */ u8 unk_0C;
     /* 0x0D */ char unk_0D[3];
