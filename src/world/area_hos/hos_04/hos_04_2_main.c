@@ -66,7 +66,7 @@ EvtScript N(EVS_EnterMap) = {
             EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
             EVT_EXEC(EnterWalk)
         EVT_CASE_EQ(hos_04_ENTRY_2)
-            EVT_EXEC(N(EVS_StarShip_FlyingAway))
+            EVT_EXEC(N(EVS_Starship_FlyingAway))
         EVT_CASE_EQ(hos_04_ENTRY_3)
             EVT_EXEC_WAIT(N(EVS_Intro_PreHeist_Unused))
         EVT_CASE_EQ(hos_04_ENTRY_4)

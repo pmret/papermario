@@ -60,59 +60,8 @@ API_CALLABLE(N(BlockForever)) {
     return ApiStatus_BLOCK;
 }
 
-void N(lerp_value_with_max_step)(f32 start, f32 end, f32 current, f32 maximum, f32* out) {
-    f32 remaining = end - current;
-
-    if (end - start > 0.0f) {
-        if (remaining < 0.0f) {
-            *out = end;
-        } else if (maximum < remaining) {
-            *out += maximum;
-        } else {
-            *out += remaining;
-        }
-    } else if (remaining > 0.0f) {
-        *out = end;
-    } else if (remaining < -maximum) {
-        *out -= maximum;
-    } else {
-        *out += remaining;
-    }
-}
-
-void N(interp_value_with_easing)(s32 easingMode, f32 start, f32 end, f32 curent, f32 max, f32* out) {
-    f32 alpha;
-
-    if (curent > max) {
-        curent = max;
-    }
-
-    switch (easingMode) {
-        case 1:
-            alpha = sin_deg((curent / max) * 90.0f);
-            break;
-        case 2:
-            if (curent < 30.0f) {
-                alpha = 0.0f;
-            } else {
-                alpha = sin_deg((((curent - 30.0f) / (max - 30.0f)) * 90.0f) + -90.0f) + 1.0f;
-            }
-            break;
-        case 3:
-            alpha = (sin_deg(((curent / max) * 180.0f) - 90.0f) + 1.0f) * 0.5;
-            break;
-        case 4:
-            alpha = sin_deg(((curent / max) * 90.0f) - 90.0f) + 1.0f;
-            break;
-        case 5:
-            alpha = (2.0 * (sin_deg(((curent / max) * 60.0f) - 60.0f) + 0.8660254f)) / 1.7320507764816284;
-            break;
-        default:
-            alpha = curent / max;
-            break;
-    }
-    *out = start + ((end - start) * alpha);
-}
+#define INTRO_MATH_EXTENDED
+#include "../common/IntroMathUtil.inc.c"
 
 f32 N(TargetBoomLengthPre) = 700;
 u16* N(ColorBufferPtr) = NULL;
@@ -140,7 +89,8 @@ API_CALLABLE(N(AnimateBoomLengthPostHeist)) {
     if (isInitialCall) {
         N(CurrentBoomLengthPost) = N(CamSettings_PostHeist).boomLength;
     }
-    N(interp_value_with_easing)(1, N(CamSettings_PostHeist).boomLength, 700.0f, N(TargetBoomLengthPost), 70.0f, &N(CurrentBoomLengthPost));
+    N(interp_value_with_easing)(INTRO_MATH_EASING_SIN_OUT, N(CamSettings_PostHeist).boomLength, 700.0f,
+        N(TargetBoomLengthPost), 70.0f, &N(CurrentBoomLengthPost));
     camera->panActive = TRUE;
     camera->controlSettings.boomLength = N(CurrentBoomLengthPost);
     N(TargetBoomLengthPost)++;
@@ -159,7 +109,8 @@ API_CALLABLE(N(AnimateViewPitchPostHeist)) {
     if (isInitialCall) {
         N(CurrentViewPitch) = N(CamSettings_PostHeist).viewPitch;
     }
-    N(interp_value_with_easing)(5, N(CamSettings_PostHeist).viewPitch, -80.0f, N(TargetViewPitch), 200.0f, &N(CurrentViewPitch));
+    N(interp_value_with_easing)(INTRO_MATH_EASING_5, N(CamSettings_PostHeist).viewPitch, -80.0f,
+        N(TargetViewPitch), 200.0f, &N(CurrentViewPitch));
     camera->panActive = TRUE;
     camera->controlSettings.viewPitch = N(CurrentViewPitch);
     N(TargetViewPitch)++;

@@ -1,6 +1,6 @@
 #include "hos_05.h"
 
-EvtScript N(D_80245950_A2FB90) = {
+EvtScript N(EVS_PlayIntroStoryMusic) = {
     EVT_WAIT(40)
     EVT_CALL(SetMusicTrack, 0, SONG_INTRO_STORY, 0, 8)
     EVT_WAIT(2030)
@@ -16,7 +16,7 @@ EvtScript N(EVS_SetupMusic) = {
             EVT_CALL(SetMusicTrack, 0, SONG_STARSHIP_THEME, 1, 8)
             EVT_CALL(PlaySound, SOUND_80000065)
         EVT_CASE_EQ(hos_05_ENTRY_3)
-            EVT_EXEC(N(D_80245950_A2FB90))
+            EVT_EXEC(N(EVS_PlayIntroStoryMusic))
         EVT_CASE_EQ(hos_05_ENTRY_4)
         EVT_CASE_DEFAULT
             EVT_IF_EQ(AF_HOS_B5, FALSE)

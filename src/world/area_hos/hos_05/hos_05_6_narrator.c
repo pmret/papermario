@@ -1,115 +1,65 @@
 #include "hos_05.h"
 
-u32 D_8024DA90_A37CD0 = 0; // mode
-s32 D_8024DA94_A37CD4 = 0; // alpha related
-s32* D_8024DA98_A37CD8 = NULL;
-s32 D_8024DA9C_A37CDC[] = {
-    -1, 30, 1, 50, 2, 50, -1, 50, 3, 50, 4, 50, 5, 50, -1, 50, 6, 50, 7, 50, 8, 50, -1, 50, 9, 50, 10, 50, 11, 50,
-    -1, 50, 12, 30, 13, 30, 14, 50, 15, 30, 16, 30, 17, 30, 18, 50, 19, 30, -1, 40, 20, 56, -1, 50, 21, 30,
-    -1, 30, 22, 50, -1, 30, 23, 50, 24, 50, -1, 60, 25, 50, -1, 24, 26, 30, 0, 0
+#include "../common/Narrator.inc.c"
+
+IntroMessage N(HeistMessageList)[] = {
+    { INTRO_MSG_BLANK, 30 },
+    { MSG_Intro_0001, 50 },
+    { MSG_Intro_0002, 50 },
+    { INTRO_MSG_BLANK, 50 },
+    { MSG_Intro_0003, 50 },
+    { MSG_Intro_0004, 50 },
+    { MSG_Intro_0005, 50 },
+    { INTRO_MSG_BLANK, 50 },
+    { MSG_Intro_0006, 50 },
+    { MSG_Intro_0007, 50 },
+    { MSG_Intro_0008, 50 },
+    { INTRO_MSG_BLANK, 50 },
+    { MSG_Intro_0009, 50 },
+    { MSG_Intro_000A, 50 },
+    { MSG_Intro_000B, 50 },
+    { INTRO_MSG_BLANK, 50 },
+    { MSG_Intro_000C, 30 },
+    { MSG_Intro_000D, 30 },
+    { MSG_Intro_000E, 50 },
+    { MSG_Intro_000F, 30 },
+    { MSG_Intro_0010, 30 },
+    { MSG_Intro_0011, 30 },
+    { MSG_Intro_0012, 50 },
+    { MSG_Intro_0013, 30 },
+    { INTRO_MSG_BLANK, 40 },
+    { MSG_Intro_0014, 56 },
+    { INTRO_MSG_BLANK, 50 },
+    { MSG_Intro_0015, 30 },
+    { INTRO_MSG_BLANK, 30 },
+    { MSG_Intro_0016, 50 },
+    { INTRO_MSG_BLANK, 30 },
+    { MSG_Intro_0017, 50 },
+    { MSG_Intro_0018, 50 },
+    { INTRO_MSG_BLANK, 60 },
+    { MSG_Intro_0019, 50 },
+    { INTRO_MSG_BLANK, 24 },
+    { MSG_Intro_001A, 30 },
+    {}, // end of list
 };
-s32* D_8024DBCC_A37E0C[4] = { D_8024DA9C_A37CDC, D_8024DA9C_A37CDC, D_8024DA9C_A37CDC, D_8024DA9C_A37CDC };
 
-// BSS
-extern s32 D_8024F570;
+IntroMessage* N(IntroMessages)[] = {
+    N(HeistMessageList),
+    N(HeistMessageList),
+    N(HeistMessageList),
+    N(HeistMessageList),
+};
 
-void N(func_802449F0_A2EC30)(s32** arg0) {
-    u8 type;
-    f32 zoom1;
-    f32 zoom2;
-    s32 messageID;
-    s32 opacity;
-    s32 yOffset;
-    s32 t;
-    s32 t2;
-
-    if (D_8024DA98_A37CD8 == NULL) {
-        D_8024DA98_A37CD8 = arg0[D_800779B0];
-    }
-
-    switch (D_8024DA90_A37CD0) {
-        case 0:
-            if (D_8024DA98_A37CD8[0] == -1) {
-                D_8024DA90_A37CD0 = 4;
-                D_8024F570 = D_8024DA98_A37CD8[1];
-            } else {
-                D_8024DA94_A37CD4 += 10;
-                if (D_8024DA94_A37CD4 > 255) {
-                    D_8024DA94_A37CD4 = 255;
-                    D_8024DA90_A37CD0 = 1;
-                    D_8024F570 = D_8024DA98_A37CD8[1];
-                }
-            }
-            break;
-        case 1:
-            if (D_8024F570 == 0) {
-                D_8024DA90_A37CD0 = 2;
-            } else {
-                D_8024F570--;
-            }
-            break;
-        case 2:
-            D_8024DA94_A37CD4 -= 10;
-            if (D_8024DA94_A37CD4 < 0) {
-                D_8024DA94_A37CD4 = 0;
-                t = D_8024DA98_A37CD8[2];
-                D_8024DA98_A37CD8 += 2;
-                if (t == 0) {
-                    D_8024DA90_A37CD0 = 3;
-                } else {
-                    D_8024DA90_A37CD0 = 0;
-                }
-            }
-            break;
-        case 3:
-            break;
-        case 4:
-            if (D_8024F570 != 0) {
-                D_8024F570--;
-                break;
-            }
-            t2 = D_8024DA98_A37CD8[2];
-            D_8024DA98_A37CD8 += 2;
-            if (t2 == 0) {
-                D_8024DA90_A37CD0 = 3;
-            } else {
-                D_8024DA90_A37CD0 = 0;
-            }
-            break;
-    }
-    get_screen_overlay_params(1, &type, &zoom1);
-    get_screen_overlay_params(0, &type, &zoom2);
-    opacity = ((D_8024DA94_A37CD4 * (255.0f - zoom1) * (255.0f - zoom2)) / 255.0f) / 255.0f;
-    if (opacity > 0) {
-        messageID = D_8024DA98_A37CD8[0];
-        if (messageID != 0) {
-            yOffset = 0;
-            if (get_msg_lines(messageID) >= 2) {
-                yOffset = -7;
-            }
-            draw_msg(D_8024DA98_A37CD8[0], 0, yOffset + 196, opacity, -1, 0);
-        }
-    }
+void N(curtain_callback_narration)(void) {
+    N(draw_foreground_bowser_silhouette)();
+    N(UpdateIntroMessages)(N(IntroMessages));
 }
 
-API_CALLABLE(N(func_80244C60_A2EEA0)) {
-    Bytecode* args = script->ptrReadPos;
-
-    void (*callback)(void) = (void (*)(void))evt_get_variable(script, *args++);
-    set_curtain_draw_callback(callback);
-    return ApiStatus_DONE2;
-}
-
-void N(func_80244C8C_A2EECC)(void) {
-    N(func_80243100_A2D340)();
-    N(func_802449F0_A2EC30)(D_8024DBCC_A37E0C);
-}
-
-EvtScript N(D_8024DBDC_A37E1C) = {
+EvtScript N(EVS_SetupNarrator) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(hos_05_ENTRY_3)
-            EVT_CALL(N(func_80244C60_A2EEA0), EVT_PTR(N(func_80244C8C_A2EECC)))
+            EVT_CALL(N(SetCurtainCallback), EVT_PTR(N(curtain_callback_narration)))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

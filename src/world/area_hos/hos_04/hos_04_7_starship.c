@@ -20,7 +20,7 @@ API_CALLABLE(N(ScreenOverlayFadeIn)) {
     }
 }
 
-EvtScript N(EVS_StarShip_FlyingAway) = {
+EvtScript N(EVS_Starship_FlyingAway) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)

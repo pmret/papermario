@@ -1,4 +1,5 @@
 #include "ld_addrs.h"
+#include "message_ids.h"
 #include "sprite.h"
 #include "pause_common.h"
 #include "sprite/npc/Goombaria.h"
@@ -456,8 +457,9 @@ void pause_main_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, 
 void pause_textbox_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 msgID = gPauseShownDescMsg;
 
-    if (msgID == 0)
+    if (msgID == MSG_NONE) {
         return;
+    }
 
     if (gPauseDescTextPos != 0) {
         hud_element_set_render_pos(gPauseCommonIconIDs[1], baseX + width - 4, baseY + 4);

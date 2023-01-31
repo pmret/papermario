@@ -26,7 +26,7 @@ enum {
 
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_SetupMusic);
-extern EvtScript N(EVS_StarShip_FlyingAway);
+extern EvtScript N(EVS_Starship_FlyingAway);
 extern EvtScript N(EVS_SetupNarrator);
 extern EvtScript N(EVS_Intro_PreHeist_Unused);
 extern EvtScript N(EVS_Intro_PostHeist);

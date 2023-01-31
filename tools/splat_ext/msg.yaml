@@ -1,6 +1,6 @@
 # This file describes what to name messages when splitting.
 
-- [0x00, 0x0000, Intro_0000]
+- [0x00, 0x0000, NONE]
 - [0x00, 0x0001, Intro_0001]
 - [0x00, 0x0002, Intro_0002]
 - [0x00, 0x0003, Intro_0003]

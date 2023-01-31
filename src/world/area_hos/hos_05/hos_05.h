@@ -21,43 +21,39 @@
 #include "sprite/npc/StarRod.h"
 
 enum {
-	NPC_Eldstar                 = 0,
-	NPC_Mamar                   = 1,
-	NPC_Skolar                  = 2,
-	NPC_Muskular                = 3,
-	NPC_Misstar                 = 4,
-	NPC_Klevar                  = 5,
-	NPC_Kalmar                  = 6,
-	NPC_Bowser_01               = 7,
-	NPC_Bowser_02               = 8,
-	NPC_Kammy                   = 9,
-	NPC_StarRod                 = 10,
+	NPC_Eldstar    		= 0,
+	NPC_Mamar      		= 1,
+	NPC_Skolar     		= 2,
+	NPC_Muskular   		= 3,
+	NPC_Misstar    		= 4,
+	NPC_Klevar     		= 5,
+	NPC_Kalmar     		= 6,
+	NPC_Bowser_Main		= 7,
+	NPC_Bowser_Prop		= 8,
+	NPC_Kammy      		= 9,
+	NPC_StarRod    		= 10,
 };
 
 enum {
-	MV_Unk_0A		= MapVar(10),
-	MV_Unk_0B		= MapVar(11),
-	MV_Unk_0C		= MapVar(12),
-	MV_Unk_0D		= MapVar(13),
+	MV_Starship_Yaw		= MapVar(10),
+	MV_Starship_PosY	= MapVar(11),
+	MV_PlayerOnBoard	= MapVar(12),
+	MV_PartnerOnBoard	= MapVar(13),
 };
 
 #define NAMESPACE hos_05
 
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_SetupMusic);
-extern EvtScript N(EVS_8024DF28);
-extern EvtScript N(EVS_8024E148);
-extern EvtScript N(EVS_8024E828);
-extern EvtScript N(D_80245E0C_A3004C);
-extern EvtScript N(EVS_8024ED24);
-extern EvtScript N(EVS_8024ACC0);
-extern EvtScript N(D_8024DBDC_A37E1C);
-extern EvtScript N(EVS_8024E00C);
+extern EvtScript N(EVS_SetupStarship);
+extern EvtScript N(EVS_Starship_Summon);
+extern EvtScript N(EVS_Starship_Depart);
+extern EvtScript N(EVS_SetupStarshipAndWater);
+extern EvtScript N(EVS_EnterStarship);
+extern EvtScript N(EVS_Intro_Main);
+extern EvtScript N(EVS_SetupNarrator);
+extern EvtScript N(EVS_SetupLightBeam);
+extern NpcGroupList N(IntroNPCs);
 extern NpcGroupList N(DefaultNPCs);
-extern NpcGroupList N(NpcGroup1);
 
-
-
-void N(func_80243100_A2D340)(void);
-void N(func_80244C8C_A2EECC)(void);
-API_CALLABLE(N(func_80244C60_A2EEA0));
+void N(draw_foreground_bowser_silhouette)(void);

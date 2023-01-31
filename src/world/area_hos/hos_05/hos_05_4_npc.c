@@ -1,7 +1,7 @@
 #include "hos_05.h"
 #include "effects.h"
 
-API_CALLABLE(N(func_80240830_A2AA70)) {
+API_CALLABLE(N(UnlockStarBeam)) {
     gPlayerData.starBeamLevel = 1;
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
@@ -10,19 +10,9 @@ API_CALLABLE(N(func_80240830_A2AA70)) {
     return ApiStatus_DONE2;
 }
 
-NpcSettings N(NpcSettings_Mamar) = {
-    .height = 26,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/StarSpirit.inc.c"
 
-s32 N(missing_802465FC_65FC)[] = {
-    0x00000000, 0x00140014, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00630000, 0x00000000, 0x00160018, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00630000, 
-};
-
-NpcSettings N(NpcSettings_Bowser_01) = {
+NpcSettings N(NpcSettings_Bowser) = {
     .height = 75,
     .radius = 72,
     .level = 99,
@@ -48,7 +38,7 @@ NpcSettings N(NpcSettings_StarRod) = {
     .otherAI = &N(EVS_NpcAuxAI_StarRod),
 };
 
-EvtScript N(D_802466E8_A30928) = {
+EvtScript N(EVS_StarSpirit_HoverBobbing) = {
     EVT_CALL(SetNpcVar, NPC_Eldstar, 0, 0)
     EVT_CALL(GetNpcPos, NPC_Eldstar, LVar2, LVar3, LVar4)
     EVT_LOOP(0)
@@ -115,7 +105,7 @@ EvtScript N(D_802466E8_A30928) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcIdle_Mamar) = {
+EvtScript N(EVS_Scene_RecieveStarBeam) = {
     EVT_LOOP(0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_IF_LT(LVar2, 85)
@@ -269,7 +259,7 @@ EvtScript N(EVS_NpcIdle_Mamar) = {
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, 10, 154, 88, 30)
         EVT_WAIT(6)
     EVT_END_LOOP
-    EVT_CALL(N(func_80240830_A2AA70))
+    EVT_CALL(N(UnlockStarBeam))
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_WAIT(30)
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0198, 160, 40)
@@ -294,7 +284,7 @@ EvtScript N(EVS_NpcIdle_Mamar) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(30)
     EVT_SET(GB_StoryProgress, STORY_CH8_STAR_SHIP_ACTIVATED)
-    EVT_EXEC_WAIT(N(EVS_8024E148))
+    EVT_EXEC_WAIT(N(EVS_Starship_Summon))
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 220, -275)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(-4.5), EVT_FLOAT(-3.0))
@@ -321,7 +311,7 @@ EvtScript N(EVS_NpcIdle_Mamar) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Mamar) = {
+EvtScript N(EVS_NpcInit_StarSpirit) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_RANGE(hos_05_ENTRY_0, hos_05_ENTRY_1)
@@ -330,13 +320,13 @@ EvtScript N(EVS_NpcInit_Mamar) = {
             EVT_CALL(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Back)
             EVT_SWITCH(GB_StoryProgress)
                 EVT_CASE_EQ(STORY_CH8_REACHED_STAR_HAVEN)
-                    EVT_EXEC(N(D_802466E8_A30928))
+                    EVT_EXEC(N(EVS_StarSpirit_HoverBobbing))
                     EVT_CALL(GetSelfNpcID, LVar0)
-                    EVT_IF_EQ(LVar0, 0)
-                        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Mamar)))
+                    EVT_IF_EQ(LVar0, NPC_Eldstar)
+                        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_Scene_RecieveStarBeam)))
                     EVT_END_IF
                 EVT_CASE_GE(STORY_CH8_STAR_SHIP_ACTIVATED)
-                    EVT_EXEC(N(D_802466E8_A30928))
+                    EVT_EXEC(N(EVS_StarSpirit_HoverBobbing))
                 EVT_CASE_DEFAULT
                     EVT_CALL(RemoveNpc, NPC_SELF)
             EVT_END_SWITCH
@@ -345,7 +335,7 @@ EvtScript N(EVS_NpcInit_Mamar) = {
     EVT_END
 };
 
-s32 N(D_80247E6C_A320AC)[] = {
+s32 N(ExtraAnims_Eldstar)[] = {
     ANIM_WorldEldstar_Idle,
     ANIM_WorldEldstar_Panic,
     ANIM_WorldEldstar_Wave,
@@ -355,7 +345,7 @@ s32 N(D_80247E6C_A320AC)[] = {
     -1
 };
 
-s32 N(D_80247E88_A320C8)[] = {
+s32 N(ExtraAnims_Mamar)[] = {
     ANIM_WorldMamar_Idle,
     ANIM_WorldMamar_Panic,
     ANIM_WorldMamar_Angry,
@@ -365,7 +355,7 @@ s32 N(D_80247E88_A320C8)[] = {
     -1
 };
 
-s32 N(D_80247EA4_A320E4)[] = {
+s32 N(ExtraAnims_Skolar)[] = {
     ANIM_WorldSkolar_Idle,
     ANIM_WorldSkolar_IdleSad,
     ANIM_WorldSkolar_Panic,
@@ -375,7 +365,7 @@ s32 N(D_80247EA4_A320E4)[] = {
     -1
 };
 
-s32 N(D_80247EC0_A32100)[] = {
+s32 N(ExtraAnims_Muskular)[] = {
     ANIM_WorldMuskular_Idle,
     ANIM_WorldMuskular_Panic,
     ANIM_WorldMuskular_Hurt,
@@ -384,7 +374,7 @@ s32 N(D_80247EC0_A32100)[] = {
     -1
 };
 
-s32 N(D_80247ED8_A32118)[] = {
+s32 N(ExtraAnims_Misstar)[] = {
     ANIM_WorldMisstar_Still,
     ANIM_WorldMisstar_Idle,
     ANIM_WorldMisstar_Panic,
@@ -394,7 +384,7 @@ s32 N(D_80247ED8_A32118)[] = {
     -1
 };
 
-s32 N(D_80247EF4_A32134)[] = {
+s32 N(ExtraAnims_Klevar)[] = {
     ANIM_WorldKlevar_Idle,
     ANIM_WorldKlevar_Panic,
     ANIM_WorldKlevar_Hurt,
@@ -403,7 +393,7 @@ s32 N(D_80247EF4_A32134)[] = {
     -1
 };
 
-s32 N(D_80247F0C_A3214C)[] = {
+s32 N(ExtraAnims_Kalmar)[] = {
     ANIM_WorldKalmar_Idle,
     ANIM_WorldKalmar_Panic,
     ANIM_WorldKalmar_Hurt,
@@ -412,234 +402,87 @@ s32 N(D_80247F0C_A3214C)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Mamar)[] = {
+StaticNpc N(NpcData_StarSpirits)[] = {
     {
         .id = NPC_Mamar,
-        .settings = &N(NpcSettings_Mamar),
+        .settings = &N(NpcSettings_StarSpirit),
         .pos = { 220.0f, 220.0f, -170.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_Mamar),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldMamar_Idle,
-            .walk   = ANIM_WorldMamar_Idle,
-            .run    = ANIM_WorldMamar_Idle,
-            .chase  = ANIM_WorldMamar_Idle,
-            .anim_4 = ANIM_WorldMamar_Idle,
-            .anim_5 = ANIM_WorldMamar_Idle,
-            .death  = ANIM_WorldMamar_Idle,
-            .hit    = ANIM_WorldMamar_Idle,
-            .anim_8 = ANIM_WorldMamar_Still,
-            .anim_9 = ANIM_WorldMamar_Idle,
-            .anim_A = ANIM_WorldMamar_Idle,
-            .anim_B = ANIM_WorldMamar_Idle,
-            .anim_C = ANIM_WorldMamar_Idle,
-            .anim_D = ANIM_WorldMamar_Idle,
-            .anim_E = ANIM_WorldMamar_Idle,
-            .anim_F = ANIM_WorldMamar_Idle,
-        },
-        .extraAnimations = N(D_80247E88_A320C8),
+        .init = &N(EVS_NpcInit_StarSpirit),
+        .drops = NPC_NO_DROPS,
+        .animations = MAMAR_ANIMS,
+        .extraAnimations = N(ExtraAnims_Mamar),
     },
     {
         .id = NPC_Skolar,
-        .settings = &N(NpcSettings_Mamar),
+        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -275.0f, 220.0f, 60.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_Mamar),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldSkolar_Idle,
-            .walk   = ANIM_WorldSkolar_Idle,
-            .run    = ANIM_WorldSkolar_Idle,
-            .chase  = ANIM_WorldSkolar_Idle,
-            .anim_4 = ANIM_WorldSkolar_Idle,
-            .anim_5 = ANIM_WorldSkolar_Idle,
-            .death  = ANIM_WorldSkolar_Idle,
-            .hit    = ANIM_WorldSkolar_Idle,
-            .anim_8 = ANIM_WorldSkolar_Still,
-            .anim_9 = ANIM_WorldSkolar_Idle,
-            .anim_A = ANIM_WorldSkolar_Idle,
-            .anim_B = ANIM_WorldSkolar_Idle,
-            .anim_C = ANIM_WorldSkolar_Idle,
-            .anim_D = ANIM_WorldSkolar_Idle,
-            .anim_E = ANIM_WorldSkolar_Idle,
-            .anim_F = ANIM_WorldSkolar_Idle,
-        },
-        .extraAnimations = N(D_80247EA4_A320E4),
+        .init = &N(EVS_NpcInit_StarSpirit),
+        .drops = NPC_NO_DROPS,
+        .animations = SKOLAR_ANIMS,
+        .extraAnimations = N(ExtraAnims_Skolar),
     },
     {
         .id = NPC_Muskular,
-        .settings = &N(NpcSettings_Mamar),
+        .settings = &N(NpcSettings_StarSpirit),
         .pos = { 125.0f, 220.0f, 250.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_Mamar),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldMuskular_Idle,
-            .walk   = ANIM_WorldMuskular_Idle,
-            .run    = ANIM_WorldMuskular_Idle,
-            .chase  = ANIM_WorldMuskular_Idle,
-            .anim_4 = ANIM_WorldMuskular_Idle,
-            .anim_5 = ANIM_WorldMuskular_Idle,
-            .death  = ANIM_WorldMuskular_Idle,
-            .hit    = ANIM_WorldMuskular_Idle,
-            .anim_8 = ANIM_WorldMuskular_Still,
-            .anim_9 = ANIM_WorldMuskular_Idle,
-            .anim_A = ANIM_WorldMuskular_Idle,
-            .anim_B = ANIM_WorldMuskular_Idle,
-            .anim_C = ANIM_WorldMuskular_Idle,
-            .anim_D = ANIM_WorldMuskular_Idle,
-            .anim_E = ANIM_WorldMuskular_Idle,
-            .anim_F = ANIM_WorldMuskular_Idle,
-        },
-        .extraAnimations = N(D_80247EC0_A32100),
+        .init = &N(EVS_NpcInit_StarSpirit),
+        .drops = NPC_NO_DROPS,
+        .animations = MUSKULAR_ANIMS,
+        .extraAnimations = N(ExtraAnims_Muskular),
     },
     {
         .id = NPC_Misstar,
-        .settings = &N(NpcSettings_Mamar),
+        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -125.0f, 220.0f, 250.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_Mamar),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldMisstar_Idle,
-            .walk   = ANIM_WorldMisstar_Idle,
-            .run    = ANIM_WorldMisstar_Idle,
-            .chase  = ANIM_WorldMisstar_Idle,
-            .anim_4 = ANIM_WorldMisstar_Idle,
-            .anim_5 = ANIM_WorldMisstar_Idle,
-            .death  = ANIM_WorldMisstar_Idle,
-            .hit    = ANIM_WorldMisstar_Idle,
-            .anim_8 = ANIM_WorldMisstar_Still,
-            .anim_9 = ANIM_WorldMisstar_Idle,
-            .anim_A = ANIM_WorldMisstar_Idle,
-            .anim_B = ANIM_WorldMisstar_Idle,
-            .anim_C = ANIM_WorldMisstar_Idle,
-            .anim_D = ANIM_WorldMisstar_Idle,
-            .anim_E = ANIM_WorldMisstar_Idle,
-            .anim_F = ANIM_WorldMisstar_Idle,
-        },
-        .extraAnimations = N(D_80247ED8_A32118),
+        .init = &N(EVS_NpcInit_StarSpirit),
+        .drops = NPC_NO_DROPS,
+        .animations = MISSTAR_ANIMS,
+        .extraAnimations = N(ExtraAnims_Misstar),
     },
     {
         .id = NPC_Klevar,
-        .settings = &N(NpcSettings_Mamar),
+        .settings = &N(NpcSettings_StarSpirit),
         .pos = { 275.0f, 220.0f, 60.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_Mamar),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldKlevar_Idle,
-            .walk   = ANIM_WorldKlevar_Idle,
-            .run    = ANIM_WorldKlevar_Idle,
-            .chase  = ANIM_WorldKlevar_Idle,
-            .anim_4 = ANIM_WorldKlevar_Idle,
-            .anim_5 = ANIM_WorldKlevar_Idle,
-            .death  = ANIM_WorldKlevar_Idle,
-            .hit    = ANIM_WorldKlevar_Idle,
-            .anim_8 = ANIM_WorldKlevar_Still,
-            .anim_9 = ANIM_WorldKlevar_Idle,
-            .anim_A = ANIM_WorldKlevar_Idle,
-            .anim_B = ANIM_WorldKlevar_Idle,
-            .anim_C = ANIM_WorldKlevar_Idle,
-            .anim_D = ANIM_WorldKlevar_Idle,
-            .anim_E = ANIM_WorldKlevar_Idle,
-            .anim_F = ANIM_WorldKlevar_Idle,
-        },
-        .extraAnimations = N(D_80247EF4_A32134),
+        .init = &N(EVS_NpcInit_StarSpirit),
+        .drops = NPC_NO_DROPS,
+        .animations = KLEVAR_ANIMS,
+        .extraAnimations = N(ExtraAnims_Klevar),
     },
     {
         .id = NPC_Kalmar,
-        .settings = &N(NpcSettings_Mamar),
+        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -220.0f, 220.0f, -170.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_Mamar),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldKalmar_Idle,
-            .walk   = ANIM_WorldKalmar_Idle,
-            .run    = ANIM_WorldKalmar_Idle,
-            .chase  = ANIM_WorldKalmar_Idle,
-            .anim_4 = ANIM_WorldKalmar_Idle,
-            .anim_5 = ANIM_WorldKalmar_Idle,
-            .death  = ANIM_WorldKalmar_Idle,
-            .hit    = ANIM_WorldKalmar_Idle,
-            .anim_8 = ANIM_WorldKalmar_Still,
-            .anim_9 = ANIM_WorldKalmar_Idle,
-            .anim_A = ANIM_WorldKalmar_Idle,
-            .anim_B = ANIM_WorldKalmar_Idle,
-            .anim_C = ANIM_WorldKalmar_Idle,
-            .anim_D = ANIM_WorldKalmar_Idle,
-            .anim_E = ANIM_WorldKalmar_Idle,
-            .anim_F = ANIM_WorldKalmar_Idle,
-        },
-        .extraAnimations = N(D_80247F0C_A3214C),
+        .init = &N(EVS_NpcInit_StarSpirit),
+        .drops = NPC_NO_DROPS,
+        .animations = KALMAR_ANIMS,
+        .extraAnimations = N(ExtraAnims_Kalmar),
     },
     {
         .id = NPC_Eldstar,
-        .settings = &N(NpcSettings_Mamar),
+        .settings = &N(NpcSettings_StarSpirit),
         .pos = { 0.0f, 220.0f, -275.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_Mamar),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldEldstar_Idle,
-            .walk   = ANIM_WorldEldstar_Idle,
-            .run    = ANIM_WorldEldstar_Idle,
-            .chase  = ANIM_WorldEldstar_Idle,
-            .anim_4 = ANIM_WorldEldstar_Idle,
-            .anim_5 = ANIM_WorldEldstar_Idle,
-            .death  = ANIM_WorldEldstar_Idle,
-            .hit    = ANIM_WorldEldstar_Idle,
-            .anim_8 = ANIM_WorldEldstar_Still,
-            .anim_9 = ANIM_WorldEldstar_Idle,
-            .anim_A = ANIM_WorldEldstar_Idle,
-            .anim_B = ANIM_WorldEldstar_Idle,
-            .anim_C = ANIM_WorldEldstar_Idle,
-            .anim_D = ANIM_WorldEldstar_Idle,
-            .anim_E = ANIM_WorldEldstar_Idle,
-            .anim_F = ANIM_WorldEldstar_Idle,
-        },
-        .extraAnimations = N(D_80247E6C_A320AC),
+        .init = &N(EVS_NpcInit_StarSpirit),
+        .drops = NPC_NO_DROPS,
+        .animations = ELDSTAR_ANIMS,
+        .extraAnimations = N(ExtraAnims_Eldstar),
     },
 };
 
-s32 N(D_80248CB4_A32EF4)[] = {
+s32 N(NpcData_ClownCar)[] = {
     ANIM_WorldBowser_ClownCarStill,
     ANIM_WorldBowser_ClownCarIdle,
     ANIM_WorldBowser_ClownCarOpenMouth,
@@ -653,7 +496,7 @@ s32 N(D_80248CB4_A32EF4)[] = {
     -1
 };
 
-s32 N(D_80248CE0_A32F20)[] = {
+s32 N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim09,
     ANIM_WorldKammy_Anim0B,
     ANIM_WorldKammy_Anim0D,
@@ -664,10 +507,10 @@ s32 N(D_80248CE0_A32F20)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Bowser_01)[] = {
+StaticNpc N(NpcData_Thieves)[] = {
     {
-        .id = NPC_Bowser_01,
-        .settings = &N(NpcSettings_Bowser_01),
+        .id = NPC_Bowser_Main,
+        .settings = &N(NpcSettings_Bowser),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
@@ -694,11 +537,11 @@ StaticNpc N(NpcData_Bowser_01)[] = {
             .anim_E = ANIM_WorldBowser_Idle,
             .anim_F = ANIM_WorldBowser_Idle,
         },
-        .extraAnimations = N(D_80248CB4_A32EF4),
+        .extraAnimations = N(NpcData_ClownCar),
     },
     {
-        .id = NPC_Bowser_02,
-        .settings = &N(NpcSettings_Bowser_01),
+        .id = NPC_Bowser_Prop,
+        .settings = &N(NpcSettings_Bowser),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
@@ -725,7 +568,7 @@ StaticNpc N(NpcData_Bowser_01)[] = {
             .anim_E = ANIM_WorldBowser_Idle,
             .anim_F = ANIM_WorldBowser_Idle,
         },
-        .extraAnimations = N(D_80248CB4_A32EF4),
+        .extraAnimations = N(NpcData_ClownCar),
     },
     {
         .id = NPC_Kammy,
@@ -756,7 +599,7 @@ StaticNpc N(NpcData_Bowser_01)[] = {
             .anim_E = ANIM_WorldKammy_Anim03,
             .anim_F = ANIM_WorldKammy_Anim03,
         },
-        .extraAnimations = N(D_80248CE0_A32F20),
+        .extraAnimations = N(ExtraAnims_Kammy),
     },
     {
         .id = NPC_StarRod,
@@ -790,13 +633,13 @@ StaticNpc N(NpcData_Bowser_01)[] = {
     },
 };
 
-NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_Bowser_01)),
-    NPC_GROUP(N(NpcData_Mamar)),
+NpcGroupList N(IntroNPCs) = {
+    NPC_GROUP(N(NpcData_Thieves)),
+    NPC_GROUP(N(NpcData_StarSpirits)),
     {}
 };
 
-NpcGroupList N(NpcGroup1) = {
-    NPC_GROUP(N(NpcData_Mamar)),
+NpcGroupList N(DefaultNPCs) = {
+    NPC_GROUP(N(NpcData_StarSpirits)),
     {}
 };

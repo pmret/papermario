@@ -11002,11 +11002,12 @@ segments:
     - [0xA2A240, c, hos_05_0_header]
     - [0xA2A240, c, hos_05_1_music]
     - [0xA2A240, c, hos_05_2_main]
-    - [0xA2A240, c, hos_05_3]
+    - [0xA2A240, c, hos_05_3_misc]
     - [0xA2AA70, c, hos_05_4_npc]
-    - [0xA2AAC0, c, hos_05_5]
+    - [0xA2AAC0, c, hos_05_5_intro]
     - [0xA2EC30, c, hos_05_6_narrator]
-    - [0xA2EF00, c, hos_05_7]
+    - [0xA2EF00, c, hos_05_7_model_fx]
+    - [0xA2FA00, c, hos_05_8_star_ship]
     - [0xA2FAA0]
   - name: hos_06
     dir: world/area_hos/hos_06
