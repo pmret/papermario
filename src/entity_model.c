@@ -168,7 +168,6 @@ s32 ALT_load_entity_model(EntityModelScript* cmdList) {
 
 void exec_entity_model_commandlist(s32 idx) {
     EntityModel* entityModel;
-    void* temp_v0_2;
 
     if (!gGameStatusPtr->isBattle || (idx & BATTLE_ENTITY_ID_MASK)) {
         idx &= ~BATTLE_ENTITY_ID_MASK;

@@ -394,7 +394,7 @@ typedef struct	st_SCClient {		/* Client list structure */
     NUScMsg		msgType;	/* Type of message */
 					/* NU_SC_RETRACE_MSG or*/
     					/* NU_SC_PRENMI_MSG */
-} NUScClient;
+} NUScClient; // size = 0xA
 
 typedef struct st_SCTask {		/* Task structure */
     struct st_SCTask	*next;
@@ -409,46 +409,46 @@ typedef struct st_SCTask {		/* Task structure */
 typedef struct st_Sched { /* Define the Scheduler structure. */
 
     /*  message */
-    NUScMsg	retraceMsg;
-    NUScMsg	prenmiMsg;
+    /* 0x000 */ NUScMsg	retraceMsg;
+    /* 0x002 */ NUScMsg	prenmiMsg;
 
     /* Define the Task request queue. */
-    OSMesgQueue	audioRequestMQ;
-    OSMesg	audioRequestBuf[NU_SC_MAX_MESGS];
-    OSMesgQueue graphicsRequestMQ;
-    OSMesg	graphicsRequestBuf[NU_SC_MAX_MESGS];
+    /* 0x004 */ OSMesgQueue	audioRequestMQ;
+    /* 0x01C */ OSMesg	audioRequestBuf[NU_SC_MAX_MESGS];
+    /* 0x03C */ OSMesgQueue graphicsRequestMQ;
+    /* 0x054 */ OSMesg	graphicsRequestBuf[NU_SC_MAX_MESGS];
 
     /* Define the message queue. */
-    OSMesgQueue	retraceMQ;
-    OSMesg	retraceMsgBuf[NU_SC_MAX_MESGS];
-    OSMesgQueue	rspMQ;
-    OSMesg      rspMsgBuf[NU_SC_MAX_MESGS];
-    OSMesgQueue rdpMQ;
-    OSMesg	rdpMsgBuf[NU_SC_MAX_MESGS];
+    /* 0x074 */ OSMesgQueue	retraceMQ;
+    /* 0x08C */ OSMesg	retraceMsgBuf[NU_SC_MAX_MESGS];
+    /* 0x0AC */ OSMesgQueue	rspMQ;
+    /* 0x0C4 */ OSMesg      rspMsgBuf[NU_SC_MAX_MESGS];
+    /* 0x0E4 */ OSMesgQueue rdpMQ;
+    /* 0x0FC */ OSMesg	rdpMsgBuf[NU_SC_MAX_MESGS];
 
     /* Implement wait for next retrace. */
-    OSMesgQueue	waitMQ;
-    OSMesg	waitMsgBuf[NU_SC_MAX_MESGS];
+    /* 0x11C */ OSMesgQueue	waitMQ;
+    /* 0x134 */ OSMesg	waitMsgBuf[NU_SC_MAX_MESGS];
 
     /* Define threads.*/
-    OSThread	schedulerThread;	/* Main thread */
-    OSThread	audioThread;		/* Audio */
-    OSThread	graphicsThread;		/* Graphics */
+    /* 0x154 */ OSThread	schedulerThread;	/* Main thread */
+    /* 0x304 */ OSThread	audioThread;		/* Audio */
+    /* 0x4B4 */ OSThread	graphicsThread;		/* Graphics */
 
     /*  client list  */
-    NUScClient	*clientList;
+    /* 0x664 */ NUScClient	*clientList;
 
     /* The graphics task being executed. */
-    NUScTask	*curGraphicsTask;
-    NUScTask 	*curAudioTask;
-    NUScTask	*graphicsTaskSuspended;
+    /* 0x668 */ NUScTask	*curGraphicsTask;
+    /* 0x66C */ NUScTask 	*curAudioTask;
+    /* 0x670 */ NUScTask	*graphicsTaskSuspended;
 
-    u32		retraceCount;
-    u8		frameRate;
-    u8		frameBufferNum;		/* Number of frame buffers */
+    /* 0x674 */ u32		retraceCount;
+    /* 0x678 */ u8		frameRate;
+    /* 0x679 */ u8		frameBufferNum;		/* Number of frame buffers */
 
 
-} NUSched;
+} NUSched; // size = 0x67A
 
 
 /*--------------------------------------*/

@@ -21,7 +21,7 @@
 
 /*---------------------------------------------------------------------*
         Copyright (C) 1998 Nintendo. (Originated by SGI)
-        
+
         $RCSfile: os_message.h,v $
         $Revision: 1.1 $
         $Date: 1998/10/09 08:01:15 $
@@ -63,7 +63,7 @@ typedef struct OSMesgQueue_s {
 	s32		first;		/* Points to first valid message */
 	s32		msgCount;	/* Contains total # of messages */
 	OSMesg		*msg;		/* Points to message buffer array */
-} OSMesgQueue;
+} OSMesgQueue; // size = 0x18
 
 
 #endif /* defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS) */
