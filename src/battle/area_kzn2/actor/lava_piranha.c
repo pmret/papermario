@@ -115,7 +115,7 @@ extern StaticAnimatorNode* N(anim1)[];
 extern StaticAnimatorNode* N(AnimModel_MainHeadVine)[];
 extern StaticAnimatorNode* N(AnimModel_SideHeadVine)[];
 extern StaticAnimatorNode* N(AnimModel_ExtraVine)[];
-extern AnimScript N(anim1_8021A364)[];
+extern AnimScript N(anim1_8021A364);
 
 extern s32 b_area_kzn2_lava_bud_idleAnimations_fiery[];
 extern s32 N(defenseTable_fiery)[];
