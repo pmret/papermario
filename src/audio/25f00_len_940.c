@@ -295,7 +295,6 @@ void nuAuCleanDMABuffers(void) {
     } while (0);
 }
 
-// rename: default_nuAuPreNMIFunc
 void nuAuPreNMIProc(NUScMsg mesg_type, u32 frameCounter) {
     s16 maxVol;
     s32 vol;
