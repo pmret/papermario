@@ -204,28 +204,17 @@ f32 N(D_802498D0_A33B10) = 240.0;
 
 u16* N(ColorBufPtr) = NULL;
 
-typedef struct HosCamState {
-    /* 0x00 */ f32 boomLength;
-    /* 0x04 */ f32 boomPitch;
-    /* 0x08 */ f32 viewPitch;
-    /* 0x0C */ f32 vfov;
-} HosCamState; // size = 0x10
-
 // 802498D8
-HosCamState N(IntroCamStateA) = {
-    .boomLength = 130.4,
-    .boomPitch = 12.4,
-    .viewPitch = -16.8,
-    .vfov = 62.0,
-};
+f32 IntroCamStateA_BoomLength = 130.4;
+f32 IntroCamStateA_BoomPitch = 12.4;
+f32 IntroCamStateA_ViewPitch = -16.8;
+f32 IntroCamStateA_Vfov = 62.0;
 
 // 802498E8
-HosCamState N(IntroCamStateB) = {
-    .boomLength = 130.4,
-    .boomPitch = 12.4,
-    .viewPitch = -16.8,
-    .vfov = 62.0,
-};
+f32 IntroCamStateB_BoomLength = 130.4;
+f32 IntroCamStateB_BoomPitch = 12.4;
+f32 IntroCamStateB_ViewPitch = -16.8;
+f32 IntroCamStateB_Vfov = 62.0;
 
 s32 N(D_802498F8_A33B38) = 0;
 s32 N(D_802498FC_A33B3C) = 0;
@@ -241,18 +230,18 @@ f32 N(D_8024990C_A33B4C) = 12.0;
 s32 N(D_80249910_A33B50) = 0;
 
 s16 N(D_80249914_A33B54)[] = {
-    -3, -2, -1, 0, 1, 2, 3, 4, 
+    -3, -2, -1, 0, 1, 2, 3, 4, 3, 2, 1, 0, -1, -2, -3, -4
 };
 
 s16 N(D_80249934_A33B74)[] = {
     360, 345, 330, 315, 300, 285, 270, 255, 
-    240, 225, 
+    240, 225, 215, 203, 191, 180, 170, 161, 153, 146, 140, 135
 };
 
 s32 N(D_8024995C_A33B9C) = 0;
 
 s16 N(D_80249960_A33BA0)[] = {
-    -3, -2, -1, 0, 1, 2, 3, 4, 
+    -3, -2, -1, 0, 1, 2, 3, 4, 3, 2, 1, 0, -1, -2, -3, -4
 };
 
 f32 N(D_80249980_A33BC0) = 12.0;
@@ -260,7 +249,7 @@ f32 N(D_80249980_A33BC0) = 12.0;
 s32 N(D_80249984_A33BC4) = 0;
 
 s16 N(D_80249988_A33BC8)[] = {
-    -3, -2, -1, 0, 1, 2, 3, 4, 
+    -3, -2, -1, 0, 1, 2, 3, 4, 3, 2, 1, 0, -1, -2, -3, -4
 };
 
 s16 N(D_802499A8_A33BE8)[][2] = {
@@ -309,7 +298,7 @@ s16 N(D_802499A8_A33BE8)[][2] = {
 s32 N(D_80249A48_A33C88) = 0;
 
 s16 N(D_80249A4C_A33C8C)[] = {
-    -3, -2, -1, 0, 1, 2, 3, 4, 
+    -3, -2, -1, 0, 1, 2, 3, 4, 3, 2, 1, 0, -1, -2, -3, -4 
 };
 
 f32 N(D_80249A6C_A33CAC) = 121.6;
@@ -557,14 +546,14 @@ API_CALLABLE(N(func_80241274_A2B4B4)) {
     }
     N(ColorBufPtr) = nuGfxCfb_ptr;
     N(lerp_value_with_max_step)(250.0f, 0.0f, N(D_802498D0_A33B10), 0.5f, &N(D_802498D0_A33B10));
-    N(interp_value_with_easing)(2, 130.4f, N(IntroCamSettings)[2].boomLength, 0.0f, 470.0f, &N(IntroCamStateA).boomLength);
-    N(lerp_value_with_max_step)(12.4f, N(IntroCamSettings)[2].boomPitch, N(IntroCamStateA).boomPitch, 0.05f, &N(IntroCamStateA).boomPitch);
-    N(lerp_value_with_max_step)(-16.8f, N(IntroCamSettings)[2].viewPitch, N(IntroCamStateA).viewPitch, 0.05f, &N(IntroCamStateA).viewPitch);
-    N(lerp_value_with_max_step)(62.0f, 49.0f, N(IntroCamStateA).vfov, 0.1f, &N(IntroCamStateA).vfov);
-    N(adjust_cam_vfov)(CAM_DEFAULT, N(IntroCamStateA).vfov);
-    camera->controlSettings.boomLength = N(IntroCamStateA).boomLength;
-    camera->controlSettings.boomPitch = N(IntroCamStateA).boomPitch;
-    camera->controlSettings.viewPitch = N(IntroCamStateA).viewPitch;
+    N(interp_value_with_easing)(2, 130.4f, N(IntroCamSettings)[2].boomLength, 0.0f, 470.0f, &IntroCamStateA_BoomLength);
+    N(lerp_value_with_max_step)(12.4f, N(IntroCamSettings)[2].boomPitch, IntroCamStateA_BoomPitch, 0.05f, &IntroCamStateA_BoomPitch);
+    N(lerp_value_with_max_step)(-16.8f, N(IntroCamSettings)[2].viewPitch, IntroCamStateA_ViewPitch, 0.05f, &IntroCamStateA_ViewPitch);
+    N(lerp_value_with_max_step)(62.0f, 49.0f, IntroCamStateA_Vfov, 0.1f, &IntroCamStateA_Vfov);
+    N(adjust_cam_vfov)(CAM_DEFAULT, IntroCamStateA_Vfov);
+    camera->controlSettings.boomLength = IntroCamStateA_BoomLength;
+    camera->controlSettings.boomPitch = IntroCamStateA_BoomPitch;
+    camera->controlSettings.viewPitch = IntroCamStateA_ViewPitch;
     camera->controlSettings.posB.x = sin_deg(N(D_802498D0_A33B10)) * 500.0f;
     camera->controlSettings.posB.z = cos_deg(N(D_802498D0_A33B10)) * -500.0f;
     camera->panActive = TRUE;
@@ -579,14 +568,14 @@ API_CALLABLE(N(func_8024146C_A2B6AC)) {
     }
     N(ColorBufPtr) = nuGfxCfb_ptr;
     N(lerp_value_with_max_step)(250.0f, 0.0f, N(D_802498D0_A33B10), 0.5f, &N(D_802498D0_A33B10));
-    N(interp_value_with_easing)(2, 130.4f, N(IntroCamSettings)[2].boomLength, N(D_802498FC_A33B3C), 470.0f, &N(IntroCamStateB).boomLength);
-    N(lerp_value_with_max_step)(12.4f, N(IntroCamSettings)[2].boomPitch, N(IntroCamStateB).boomPitch, 0.05f, &N(IntroCamStateB).boomPitch);
-    N(lerp_value_with_max_step)(-16.8f, N(IntroCamSettings)[2].viewPitch, N(IntroCamStateB).viewPitch, 0.05f, &N(IntroCamStateB).viewPitch);
-    N(lerp_value_with_max_step)(62.0f, 49.0f, N(IntroCamStateB).vfov, 0.1f, &N(IntroCamStateB).vfov);
-    N(adjust_cam_vfov)(CAM_DEFAULT, N(IntroCamStateB).vfov);
-    camera->controlSettings.boomLength = N(IntroCamStateB).boomLength;
-    camera->controlSettings.boomPitch = N(IntroCamStateB).boomPitch;
-    camera->controlSettings.viewPitch = N(IntroCamStateB).viewPitch;
+    N(interp_value_with_easing)(2, 130.4f, N(IntroCamSettings)[2].boomLength, N(D_802498FC_A33B3C), 470.0f, &IntroCamStateB_BoomLength);
+    N(lerp_value_with_max_step)(12.4f, N(IntroCamSettings)[2].boomPitch, IntroCamStateB_BoomPitch, 0.05f, &IntroCamStateB_BoomPitch);
+    N(lerp_value_with_max_step)(-16.8f, N(IntroCamSettings)[2].viewPitch, IntroCamStateB_ViewPitch, 0.05f, &IntroCamStateB_ViewPitch);
+    N(lerp_value_with_max_step)(62.0f, 49.0f, IntroCamStateB_Vfov, 0.1f, &IntroCamStateB_Vfov);
+    N(adjust_cam_vfov)(CAM_DEFAULT, IntroCamStateB_Vfov);
+    camera->controlSettings.boomLength = IntroCamStateB_BoomLength;
+    camera->controlSettings.boomPitch = IntroCamStateB_BoomPitch;
+    camera->controlSettings.viewPitch = IntroCamStateB_ViewPitch;
     camera->controlSettings.posB.x = sin_deg(N(D_802498D0_A33B10)) * 500.0f;
     camera->controlSettings.posB.z = cos_deg(N(D_802498D0_A33B10)) * -500.0f;
     camera->panActive = TRUE;
@@ -1418,26 +1407,67 @@ s32 N(D_8024AAC0_A34D00)[] = {
 
 //TODO s16?
 s32 N(D_8024AAD4_A34D14)[] = {
-    0, 0, 0, 0, 0, 0, -1, -1, 
-    -1, -2, -1, -3, -1, -4, -1, -9, 
-    -1, -15, -1, -22, -1, -30, -1, -39, 
-    -1, -49, 
+    0, 0, 0, -1, 
+    -2, -3, -4, -9, 
+    -15, -22, -30, -39, 
+    -49, 
+    -60,
+    -72,
+    -85,
+    -99,
+    -114,
+    -130,
+    -147,
+    -165,
+    -184,
+    -204,
+    -225,
+    -247,
+    -270,
 };
 
 u8 N(D_8024AB3C_A34D7C)[] = {
-    -16, -16, -16, -16, -46, -59, -71, -82, 
-    -88, -86, -86, -86, -86, -86, -86, -89, 
-    -91, -92, -93, -94, -94, -95, -95, -94, 
-    -94, -93, -92, -91, -89, -86, -83, -81, 
-    -80, -80, -81, -84, -85, -86, -86, -89, 
-    -91, -92, -92, -91, -89, -86, -83, -81, 
-    -80, -80, -81, -83, -86, -89, -91, -92, 
-    -92, -91, -89, -86, -83, -81, -80, -80, 
-    -81, -83, -86, -89, -91, -92, -91, -92, 
-    -91, -92, -91, -92, -91, -92, -91, 
+    240, 240, 240, 240, 210, 197, 185, 174, 
+    168, 170, 170, 170, 170, 170, 170, 167, 
+    165, 164, 163, 162, 162, 161, 161, 162, 
+    162, 163, 164, 165, 167, 170, 173, 175, 
+    176, 176, 175, 172, 171, 170, 170, 167, 
+    165, 164, 164, 165, 167, 170, 173, 175, 
+    176, 176, 175, 173, 170, 167, 165, 164, 
+    164, 165, 167, 170, 173, 175, 176, 176, 
+    175, 173, 170, 167, 165, 164, 165, 164, 
+    165, 164, 165, 164, 165, 164, 165, 164, 
+    165, 164, 165, 164, 165, 164, 164, 165, 
+    167, 170, 173, 175, 176, 176, 176, 176, 
+    176, 176, 174, 170, 167, 165, 164, 164, 
+    165, 167, 170, 170, 167, 165, 164, 164, 
+    165, 167, 170, 170, 167, 165, 164, 164, 
+    165, 167, 170, 170, 167, 165, 164, 164, 
+    165, 167, 170, 170, 167, 165, 164, 164, 
+    165, 167, 170, 170, 167, 165, 164, 164, 
+    165, 167, 170, 170, 167, 165, 164, 165, 
+    166, 167, 166, 165, 166, 167, 166, 165, 
+    166, 167, 166, 165, 166, 167, 166, 167, 
+    168, 169, 170, 170, 170, 170, 170, 170, 
+    170, 170, 170, 170, 170, 170, 173, 175, 
+    176, 176, 175, 173, 170, 167, 165, 164, 
+    164, 165, 167, 170, 173, 175, 176, 176, 
+    175, 173, 170, 167, 165, 164, 164, 165, 
+    167, 170, 173, 174, 175, 174, 173, 170, 
+    167, 165, 164, 164, 165, 167, 170, 173, 
+    175, 176, 176, 175, 173, 170, 167, 165, 
+    164, 164, 165, 167, 170, 173, 175, 176, 
+    176, 175, 173, 170, 167, 165, 164, 164, 
+    165, 167, 169, 170, 170, 170, 170, 170, 
+    170, 170, 170, 170, 170, 170, 170, 167, 
+    165, 164, 164, 165, 167, 170, 170, 167, 
+    165, 164, 164, 165, 167, 170, 173, 175, 
+    176, 176, 175, 173, 170, 167, 165, 164, 
+    164, 165, 167, 170, 173, 175, 176, 176, 
+    175, 173, 170, 167, 165, 164, 164, 165, 
+    167, 170, 173, 175, 176, 176, 175, 173, 
+    170, 167, 165, 164, 164, 165, 167, 170, 
 };
-
-u8 N(D_8024AC7B_A34EBB) = 0; //TODO
 
 u16 N(D_8024AC7C_A34EBC)[] = {
     100, 110, 121, 136, 155, 175, 195, 214, 232, 249, 265, 280, 294, 307,
@@ -1680,7 +1710,7 @@ API_CALLABLE(N(func_802440D0_A2E310)) {
                     } else if (temp_v1 < 15) {
                         N(D_8024AA20_A34C60)->unk_44 = N(D_8024AC7C_A34EBC)[temp_v1];
                         if (temp_v1 < 13) {
-                            N(D_8024AA20_A34C60)->unk_46 = N(D_8024AC7B_A34EBB) + N(D_8024AC9C_A34EDC)[temp_v1];
+                            N(D_8024AA20_A34C60)->unk_46 = N(D_8024AB3C_A34D7C)[319] + N(D_8024AC9C_A34EDC)[temp_v1];
                         }
                     }
                     N(D_8024AABC_A34CFC)++;
@@ -1817,7 +1847,7 @@ EvtScript N(EVS_8024ACC0) = {
 
 f32 N(D_8024AEC4_A35104) = 0.0;
 
-s32 N(D_8024AEC8_A35108) = 0;
+f32 N(D_8024AEC8_A35108) = 0.0;
 
 API_CALLABLE(N(func_80244774_A2E9B4)) {
     Npc* npc7 = resolve_npc(script, 7);
@@ -1935,7 +1965,6 @@ EvtScript N(D_8024AECC_A3510C) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    /*
     EVT_THREAD
         EVT_CALL(InterpNpcYaw, NPC_Bowser_02, 90, 0)
         EVT_SET(LVar0, 0)
@@ -2101,7 +2130,6 @@ EvtScript N(D_8024AECC_A3510C) = {
     EVT_CALL(N(AdjustCamVfov), 0, 25)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -38, 210, 85)
     EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings[8])))
-    */
     EVT_CALL(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_ClownCarCloseMouth)
     EVT_CALL(SetNpcPos, NPC_Bowser_01, -30, 150, 162)
     EVT_CALL(SetNpcPos, NPC_Bowser_02, -30, 150, 162)

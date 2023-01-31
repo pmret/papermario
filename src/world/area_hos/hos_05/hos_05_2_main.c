@@ -2,6 +2,8 @@
 
 EvtScript N(EVS_ExitWalk_hos_04_1) = EVT_EXIT_WALK(60, hos_05_ENTRY_0, "hos_04", hos_04_ENTRY_1);
 
+MAP_RODATA_PAD(1, exits);
+
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_hos_04_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_8024E828)), TRIGGER_FLOOR_TOUCH, COLLIDER_o630, 1, 0)
