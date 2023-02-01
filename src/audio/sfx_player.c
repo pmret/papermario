@@ -8,10 +8,10 @@ static void func_8004C300(SoundManager* manager, u32 soundID);
 static void au_sfx_set_modifiers(SoundManager* manager, SoundSFXEntry* sfxEntry);
 static void au_sfx_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxEntry);
 
-static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2, u8 arg3);
+static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AuVoice* arg2, u8 arg3);
 static s16 au_sfx_get_scaled_volume(SoundManager* manager, SoundPlayer* player);
-static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2, u8 arg3);
-static void snd_set_voice_volume(AlUnkVoice* voice, SoundManager* manager, SoundPlayer* player);
+static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AuVoice* arg2, u8 arg3);
+static void snd_set_voice_volume(AuVoice* voice, SoundManager* manager, SoundPlayer* player);
 static u8 au_sfx_get_random_pan(s32 arg0, s32 arg1, s32 arg2);
 static void au_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player);
 static void au_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player);
@@ -289,21 +289,24 @@ u8 AmbientSoundIDtoMSEQFileIndex[] = {
 // --------------------------------------------
 // the following are only referenced in audio/2d9a0_len_890
 
-s32 D_800785A0[] = {
-    0x0393756C, 0x034736DE, 0x02FAE1DA, 0x02AEA34C, 0x02624E48, 0x0215F944, 0x01C9BAB6, 0x01A39034,
-    0x017D65B2, 0x015751A6, 0x01312724, 0x0121E2F0, 0x01129EBC, 0x01035A88, 0x00F41654, 0x00E4D220,
-    0x00D58DEC, 0x00C649B8, 0x00B70584, 0x00A7D7C6, 0x00989392, 0x00894F5E, 0x007A0B2A, 0x006AC6F6,
-    0x005B82C2, 0x004C3E8E, 0x00449C74, 0x003CFA5A, 0x00355840, 0x002DB626, 0x0029F054, 0x0026140C,
-    0x00224E3A, 0x001E71F2, 0x001CF41C, 0x001B7646, 0x0019E1FA, 0x00186424, 0x0016CFD8, 0x00155202,
-    0x0013D42C, 0x00123FE0, 0x0010C20A, 0x000F2DBE, 0x000E7A0E, 0x000DAFE8, 0x000CE5C2, 0x000C3212,
-    0x000B67EC, 0x000A9DC6, 0x0009EA16, 0x00091FF0, 0x000855CA, 0x00078BA4, 0x0006D7F4, 0x00060DCE,
-    0x0005B3F6, 0x000543A8, 0x0004E9D0, 0x00048FF8, 0x0004630C, 0x00043620, 0x00040934, 0x0003F2BE,
-    0x0003C5D2, 0x000398E6, 0x00038270, 0x00035584, 0x00032898, 0x0002FBAC, 0x0002E536, 0x0002B84A,
-    0x00028B5E, 0x00025E72, 0x000247FC, 0x00021B10, 0x0001EE24, 0x0001C138, 0x0001AAC2, 0x00017DD6,
-    0x00016760, 0x00013A74, 0x00010D88, 0x0000F712, 0x0000E09C, 0x0000CA26, 0x0000B3B0, 0x00009D3A,
-    0x000086C4, 0x0000704E, 0x000059D8, 0x00004362, 0x00002CEC, 0x00001676, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000
+// convert seconds to microseconds and round to number multiple to 5750
+#define SEC(x) ((s32)(x * 1000000) / AU_5750 * AU_5750)
+
+s32 AuEnvelopeIntervals[] = {
+    SEC(60),   SEC(55),   SEC(50),   SEC(45),   SEC(40),   SEC(35),   SEC(30),    SEC(27.5), SEC(25),    SEC(22.5),
+    SEC(20),   SEC(19),   SEC(18),   SEC(17),   SEC(16),   SEC(15),   SEC(14),    SEC(13),   SEC(12),    SEC(11),
+    SEC(10),   SEC(9),    SEC(8),    SEC(7),    SEC(6),    SEC(5),    SEC(4.5),   SEC(4),    SEC(3.5),   SEC(3),
+    SEC(2.75), SEC(2.5),  SEC(2.25), SEC(2),    SEC(1.9),  SEC(1.8),  SEC(1.7),   SEC(1.6),  SEC(1.5),   SEC(1.4),
+    SEC(1.3),  SEC(1.2),  SEC(1.1),  SEC(1),    SEC(0.95), SEC(0.9),  SEC(0.85),  SEC(0.8),  SEC(0.75),  SEC(0.7),
+    SEC(0.65), SEC(0.6),  SEC(0.55), SEC(0.5),  SEC(0.45), SEC(0.4),  SEC(0.375), SEC(0.35), SEC(0.325), SEC(0.3),
+    SEC(0.29), SEC(0.28), SEC(0.27), SEC(0.26), SEC(0.25), SEC(0.24), SEC(0.23),  SEC(0.22), SEC(0.21),  SEC(0.2),
+    SEC(0.19), SEC(0.18), SEC(0.17), SEC(0.16), SEC(0.15), SEC(0.14), SEC(0.13),  SEC(0.12), SEC(0.11),  SEC(0.1),
+    16 * AU_5750, 14 * AU_5750, 12 * AU_5750, 11 * AU_5750, 10 * AU_5750,
+     9 * AU_5750,  8 * AU_5750,  7 * AU_5750,  6 * AU_5750, 5 * AU_5750,
+     4 * AU_5750,  3 * AU_5750,  2 * AU_5750,  1 * AU_5750, 0, 0, 0, 0, 0, 0,
 };
+
+#undef SEC
 
 // --------------------------------------------
 // the following are only referenced in audio/2e230_len_2190
@@ -372,7 +375,7 @@ extern s32* AU_FX_CUSTOM_PARAMS[0]; // points to 80078290
 extern void (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
 extern void (*CurrentSefCmdHandler)(SoundManager*, SoundPlayer*);
 
-void au_sfx_init(SoundManager* manager, u8 priority, u8 reverbType, AuGlobals* globals, u8 arg4) {
+void au_sfx_init(SoundManager* manager, u8 priority, u8 busId, AuGlobals* globals, u8 arg4) {
     u32 i;
     s32 c = 0x6A25E;
 
@@ -381,7 +384,7 @@ void au_sfx_init(SoundManager* manager, u8 priority, u8 reverbType, AuGlobals* g
     manager->nextUpdateCounter = c;
     manager->nextUpdateInterval = c;
     manager->priority = priority;
-    manager->defaultReverbType = reverbType;
+    manager->busId = busId;
 
     if (arg4 > 16) {
         manager->sfxPlayerSelector = 16;
@@ -431,7 +434,7 @@ void au_sfx_init(SoundManager* manager, u8 priority, u8 reverbType, AuGlobals* g
     func_8004BA54(manager, 0);
     au_sfx_clear_queue(manager);
     au_fade_init(&manager->fadeInfo, 0, 0x7FFF, 0x7FFF);
-    func_80053A98(manager->defaultReverbType, manager->fadeInfo.currentVolume.u16, manager->unk_5C);
+    func_80053A98(manager->busId, manager->fadeInfo.currentVolume.u16, manager->unk_5C);
     manager->lastCustomEffectIdx = 0xFF;
 
     manager->customReverbParams[0] = CUSTOM_SMALL_ROOM_PARAMS;
@@ -617,8 +620,8 @@ s32 func_8004B9E4(SoundManager* manager, s32 arg1) {
         if (customIdx < ARRAY_COUNT(manager->customReverbParams)) {
             if (manager->lastCustomEffectIdx != customIdx) {
                 manager->lastCustomEffectIdx = customIdx;
-                manager->globals->effectChanges[1].type = AU_FX_CUSTOM_0;
-                manager->globals->effectChanges[1].changed = TRUE;
+                manager->globals->effectChanges[FX_BUS_SOUND].type = AU_FX_CUSTOM_0;
+                manager->globals->effectChanges[FX_BUS_SOUND].changed = TRUE;
                 AU_FX_CUSTOM_PARAMS[0] = manager->customReverbParams[customIdx];
             }
             manager->defaultReverbAmt = manager->customReverbAmounts[customIdx];
@@ -1018,7 +1021,7 @@ static void au_sfx_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxE
 
 s16 au_sfx_manager_update(SoundManager* manager) {
     SoundPlayer* sndPlayer;
-    AlUnkVoice* voice;
+    AuVoice* voice;
     u32 start;
     u8 end;
     u8 i;
@@ -1054,7 +1057,7 @@ s16 au_sfx_manager_update(SoundManager* manager) {
     return 0;
 }
 
-static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlUnkVoice* voice, u8 index) {
+static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AuVoice* voice, u8 index) {
     s16 volume;
     s32 tune;
     s32 pan;
@@ -1072,7 +1075,7 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlU
                     player->pitchRatio = au_compute_pitch_ratio(
                         ((player->tuneLerp.current >> 0x10) - player->sfxInstrumentRef->keyBase) + player->masterPitchShift) * player->sfxInstrumentRef->pitchRatio;
                     if (voice->pitchRatio != player->pitchRatio) {
-                        voice->unk_flags_43 |= AU_VOICE_SYNC_FLAG_PITCH;
+                        voice->syncFlags |= AU_VOICE_SYNC_FLAG_PITCH;
                         voice->pitchRatio = player->pitchRatio;
                     }
                 }
@@ -1084,13 +1087,13 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlU
                 }
                 if (voice->pan != pan) {
                     voice->pan = pan;
-                    voice->unk_flags_43 |= AU_VOICE_SYNC_FLAG_10;
+                    voice->syncFlags |= AU_VOICE_SYNC_FLAG_PAN_FXMIX;
                  }
 
                 volume = au_sfx_get_scaled_volume(manager, player);
-                if (voice->adjustedVolume != volume) {
-                    voice->adjustedVolume = volume;
-                    voice->unk_flags_3D |= AU_VOICE_3D_FLAG_VOL_CHANGED;
+                if (voice->clientVolume != volume) {
+                    voice->clientVolume = volume;
+                    voice->envelopeFlags |= AU_VOICE_ENV_FLAG_VOL_CHANGED;
                 }
             }
             break;
@@ -1122,16 +1125,16 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlU
                     voice->pan = player->sfxPan;
                 }
 
-                voice->reverbAmt = player->reverb;
-                voice->adjustedVolume = au_sfx_get_scaled_volume(manager, player);
-                voice->unk_14.unk_00 = player->unk_10.unk_00;
-                voice->unk_14.unk_04 = player->unk_10.unk_04;
+                voice->fxmix = player->reverb;
+                voice->clientVolume = au_sfx_get_scaled_volume(manager, player);
+                voice->envelopeData.cmdListPress = player->unk_10.cmdListPress;
+                voice->envelopeData.cmdListRelease = player->unk_10.cmdListRelease;
                 voice->instrument = player->sfxInstrumentRef;
                 voice->pitchRatio = player->pitchRatio;
-                voice->unk_flags_43 = AU_VOICE_SYNC_FLAG_ALL;
+                voice->syncFlags = AU_VOICE_SYNC_FLAG_ALL;
                 voice->priority = manager->priority;
                 voice->priorityCopy = voice->priority;
-                voice->reverbType = manager->defaultReverbType;
+                voice->busId = manager->busId;
             }
             player->unk_A9 = 0;
             break;
@@ -1153,7 +1156,7 @@ static s16 au_sfx_get_scaled_volume(SoundManager* manager, SoundPlayer* player) 
     return outVolume;
 }
 
-static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlUnkVoice* voice, u8 arg3) {
+static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AuVoice* voice, u8 arg3) {
     s32* var_v0_3;
     s32 pitchShift;
     s32 temp_a0;
@@ -1236,21 +1239,21 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
                     voice->pan = player->masterPan;
                 }
 
-                voice->reverbAmt = player->reverb;
+                voice->fxmix = player->reverb;
                 snd_set_voice_volume(voice, manager, player);
                 if (player->unk_18 == 0) {
-                    voice->unk_14.unk_00 = player->unk_10.unk_00;
-                    voice->unk_14.unk_04 = player->unk_10.unk_04;
+                    voice->envelopeData.cmdListPress = player->unk_10.cmdListPress;
+                    voice->envelopeData.cmdListRelease = player->unk_10.cmdListRelease;
                 } else {
-                    voice->unk_14.unk_00 = player->unk_18;
-                    voice->unk_14.unk_04 = player->unk_10.unk_04;
+                    voice->envelopeData.cmdListPress = player->unk_18;
+                    voice->envelopeData.cmdListRelease = player->unk_10.cmdListRelease;
                 }
 
                 voice->instrument = player->sfxInstrumentRef;
-                voice->reverbType = manager->defaultReverbType;
+                voice->busId = manager->busId;
 
                 voice->priority = manager->priority;
-                voice->unk_flags_43 = AU_VOICE_SYNC_FLAG_ALL;
+                voice->syncFlags = AU_VOICE_SYNC_FLAG_ALL;
                 var_s3 = TRUE;
                 voice->priorityCopy = manager->priority;
                 player->changed.tune = 1;
@@ -1276,7 +1279,7 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
         if (player->playLength != 0) {
             player->playLength--;
             if ((player->playLength == 0) && (voice->priority == manager->priority)) {
-                voice->unk_flags_3D |= AU_VOICE_3D_FLAG_10;
+                voice->envelopeFlags |= AU_VOICE_ENV_FLAG_KEY_RELEASED;
             }
         }
         if (player->tuneLerp.time != 0) {
@@ -1294,13 +1297,13 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
             } else {
                 voice->pan = player->masterPan;
             }
-            voice->unk_flags_43 |= AU_VOICE_SYNC_FLAG_10;
-            voice->reverbAmt = player->reverb;
+            voice->syncFlags |= AU_VOICE_SYNC_FLAG_PAN_FXMIX;
+            voice->fxmix = player->reverb;
         }
     }
     if (player->changed.volume && (voice->priority == manager->priority)) {
         snd_set_voice_volume(voice, manager, player);
-        voice->unk_flags_3D |= AU_VOICE_3D_FLAG_VOL_CHANGED;
+        voice->envelopeFlags |= AU_VOICE_ENV_FLAG_VOL_CHANGED;
     }
     if (player->changed.tune) {
         f32 adjustedSampleRate;
@@ -1314,23 +1317,23 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
             player->pitchRatio = adjustedSampleRate;
         }
         if ((voice->priority == manager->priority) && (voice->pitchRatio != adjustedSampleRate)) {
-            voice->unk_flags_43 |= AU_VOICE_SYNC_FLAG_PITCH;
+            voice->syncFlags |= AU_VOICE_SYNC_FLAG_PITCH;
             voice->pitchRatio = player->pitchRatio;
         }
     }
     player->changed.all = 0;
 }
 
-static void snd_set_voice_volume(AlUnkVoice* voice, SoundManager* manager, SoundPlayer* player) {
+static void snd_set_voice_volume(AuVoice* voice, SoundManager* manager, SoundPlayer* player) {
     s32 x = ((((manager->unk_B8
         * player->sfxVolume) >> 0xF)
         * player->playVelocity) >> 7)
         * (player->volumeLerp.current >> 0x10) >> 0xF;
 
     if (player->sfxParamsFlags & SFX_PARAM_FLAG_VOLUME || player->masterVolume == 0) {
-        voice->adjustedVolume = x;
+        voice->clientVolume = x;
     } else {
-        voice->adjustedVolume = (x * player->masterVolume) >> 0xF;
+        voice->clientVolume = (x * player->masterVolume) >> 0xF;
     }
 }
 
@@ -1434,8 +1437,8 @@ static void au_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
 
     temp_v0_2 = player->sfxInstrument.unkOffset;
     if (temp_v0_2 != NULL && temp_v0_2->count != 0) {
-        player->unk_10.unk_00 = (s32*)(temp_v0_2->unk_04[0].unkOffset1 + (s32)temp_v0_2);
-        player->unk_10.unk_04 = (s32*)(temp_v0_2->unk_04[0].unkOffset2 + (s32)temp_v0_2);
+        player->unk_10.cmdListPress = (s32*)(temp_v0_2->unk_04[0].unkOffset1 + (s32)temp_v0_2);
+        player->unk_10.cmdListRelease = (s32*)(temp_v0_2->unk_04[0].unkOffset2 + (s32)temp_v0_2);
     }
 }
 
@@ -1554,7 +1557,7 @@ static void au_SEFCmd_0E(SoundManager* manager, SoundPlayer* player) {
 }
 
 static void au_SEFCmd_0F(SoundManager* manager, SoundPlayer* player) {
-    AlUnkVoice* voice = manager->currentVoice;
+    AuVoice* voice = manager->currentVoice;
     if (voice->priority == manager->priority) {
         au_reset_voice(voice, manager->unk_BF);
     }

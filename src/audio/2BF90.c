@@ -15,7 +15,7 @@ enum MseqPlayState {
     MSEQ_PLAYER_STOPPING    = 2
 };
 
-void au_mseq_manager_init(AuAmbienceManager* manager, s8 priority, s8 reverbType, AuGlobals* globals) {
+void au_mseq_manager_init(AuAmbienceManager* manager, s8 priority, s8 busId, AuGlobals* globals) {
     AuAmbPlayer* lambda;
     s32 i;
 
@@ -33,7 +33,7 @@ void au_mseq_manager_init(AuAmbienceManager* manager, s8 priority, s8 reverbType
     manager->nextUpdateCounter = 2;
     manager->nextUpdateInterval = 2;
     manager->priority = priority;
-    manager->defaultReverbType = reverbType;
+    manager->busId = busId;
 }
 
 AuResult func_80050C30(u32 arg0) {
@@ -319,7 +319,7 @@ s32 au_mseq_read_next(AuAmbPlayer* state) {
 }
 
 void au_mseq_player_stop(AuAmbienceManager* manager, AuAmbPlayer* lambda) {
-    AlUnkVoice* voice;
+    AuVoice* voice;
     Q32* temp_s1;
     s32 i;
 
@@ -361,7 +361,7 @@ void func_800522A8(AuAmbienceManager* arg0, AuAmbPlayer* lambda) {
 
 void func_8005232C(AuAmbienceManager* manager, AuAmbPlayer* lambda) {
     AuGlobals* globals;
-    AlUnkVoice* voice;
+    AuVoice* voice;
     AlUnkOmega* omega;
     AlUnkIota* iota;
     AlUnkXi* xi;
@@ -398,15 +398,15 @@ void func_8005232C(AuAmbienceManager* manager, AuAmbPlayer* lambda) {
                     iota->unk_00.s32 = lambda->unk_14.s32 + (omega->unk_00 << 0x10) + (omega->unk_01 << 8);
                     iota->pitch = ((omega->unk_01 & 0x7F) * 100) - xi->instrument->keyBase;
                     iota->volume = omega->unk_02 & 0x7F;
-                    voice->adjustedVolume = ((lambda->unk_38 >> 0x18) * xi->unk_18.half * iota->volume) >> 0xE;
+                    voice->clientVolume = ((lambda->unk_38 >> 0x18) * xi->unk_18.half * iota->volume) >> 0xE;
                     voice->pitchRatio = au_compute_pitch_ratio(iota->pitch + xi->pitch) * xi->instrument->pitchRatio;
                     voice->pan = xi->pan;
-                    voice->reverbAmt = xi->reverb;
+                    voice->fxmix = xi->reverb;
                     voice->instrument = xi->instrument;
-                    voice->reverbType = manager->defaultReverbType;
-                    voice->unk_14.unk_00 = xi->unk_04.unk_00;
-                    voice->unk_14.unk_04 = xi->unk_04.unk_04;
-                    voice->unk_flags_43 = AU_VOICE_SYNC_FLAG_ALL;
+                    voice->busId = manager->busId;
+                    voice->envelopeData.cmdListPress = xi->unk_04.cmdListPress;
+                    voice->envelopeData.cmdListRelease = xi->unk_04.cmdListRelease;
+                    voice->syncFlags = AU_VOICE_SYNC_FLAG_ALL;
                     voice->priority = manager->priority;
                     voice->priorityCopy = voice->priority;
                 }
