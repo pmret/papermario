@@ -6,7 +6,7 @@ TweesterPath N(D_802403C0_93AB20)[] = {
     { -262, 0, -64 },
     { 57, 0, -286 },
     { 327, 0, 8 },
-    { TWEETSER_PATH_LOOP }
+    { TWEESTER_PATH_LOOP }
 };
 
 TweesterPath* N(D_802403F4_93AB54)[] = {

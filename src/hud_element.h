@@ -6,7 +6,7 @@
 
 #define HUD_ELEMENT_BATTLE_ID_MASK 0x800
 
-typedef s32 HudScript[0];
+typedef s32 HudScript[];
 
 typedef s32 HudElemID;
 

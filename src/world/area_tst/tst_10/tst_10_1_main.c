@@ -108,9 +108,9 @@ TweesterPath N(DefaultTweesterPath)[] = {
     { -262,  0,  -64 },
     {   57,  0, -286 },
     {  327,  0,    8 },
-    { TWEETSER_PATH_LOOP }
+    { TWEESTER_PATH_LOOP }
  };
- 
+
  TweesterPath* N(UnusedTweesterPaths)[] = {
     N(DefaultTweesterPath),
     N(DefaultTweesterPath),

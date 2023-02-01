@@ -160,9 +160,9 @@ void entity_Tweester_select_target_point(Entity* entity) {
         data->currentPath = paths[j];
     }
     pathPtr = &data->currentPath[pathOffset];
-    if (*pathPtr != TWEETSER_PATH_STOP) {
+    if (*pathPtr != TWEESTER_PATH_STOP) {
         pathOffset += 3;
-        if (*pathPtr == TWEETSER_PATH_LOOP){
+        if (*pathPtr == TWEESTER_PATH_LOOP){
             pathOffset = 0;
             pathPtr = data->currentPath;
             data->targetX = *pathPtr++;
