@@ -19,7 +19,7 @@ API_CALLABLE(N(SetSpringPosition)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(EVS_EVS_OnShakeTree1) = {
+EvtScript N(EVS_OnShakeTree1) = {
     EVT_WAIT(15)
     EVT_IF_EQ(GF_KMR10_KnockedSpringOutOfTree, FALSE)
         EVT_SET(GF_KMR10_KnockedSpringOutOfTree, TRUE)
