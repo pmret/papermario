@@ -11,10 +11,10 @@ extern StageListRow* gCurrentStagePtr;
 extern s16 D_802809F6;
 extern s16 D_802809F8;
 extern s32 BattleScreenFadeAmt;
-extern EvtScript EVS_OnBattleInit[];
+extern EvtScript EVS_OnBattleInit;
 extern s32 D_80281454[];
-extern EvtScript EVS_Mario_OnActorCreate[];
-extern EvtScript EVS_Peach_OnActorCreate[];
+extern EvtScript EVS_Mario_OnActorCreate;
+extern EvtScript EVS_Peach_OnActorCreate;
 
 BSS s32 BattleEnemiesCreated;
 BSS u8 D_8029F244;
