@@ -4920,6 +4920,7 @@ enum EnemyActionFlags {
 enum EnemyDetectFlags {
     AI_DETECT_SIGHT                 = 0x01,
     AI_DETECT_SENSITIVE_MOTION      = 0x02,
+    AI_DETECT_FLAG_8                = 0x08,
 };
 
 enum EnemyTerritoryFlags {

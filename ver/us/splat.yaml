@@ -13896,14 +13896,14 @@ segments:
     start: 0xD05730
     vram: 0x80240000
     subsegments:
-    - [0xD05730, c]
-    - [0xD05F60, c]
-    - [0xD072F0, data]
-    - [0xD07440, data]
-    - [0xD09570, data]
-    - [0xD09AD0, data]
-    - [0xD10DA0, data]
-    - [0xD110A0]
+    - [0xD05730, c, sam_02_0_header]
+    - [0xD05730, c, sam_02_1_music]
+    - [0xD05730, c, sam_02_2_main]
+    - [0xD05F60, c, sam_02_3_rooms]
+    - [0xD05F60, c, sam_02_4_npc]
+    - [0xD072F0, c, sam_02_5_entity]
+    - [0xD072F0, c, sam_02_6_shop]
+    - [0xD072F0]
   - name: sam_03
     dir: world/area_sam/sam_03
     type: code

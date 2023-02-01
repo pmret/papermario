@@ -96,6 +96,7 @@ enum {
     // area_jan
     // area_sam
     QUIZ_MAP_SAM_01     = 0,
+    QUIZ_MAP_SAM_02     = 1,
     QUIZ_COUNT_SAM      = 3,
     // area_hos
     QUIZ_MAP_HOS_03     = 0,

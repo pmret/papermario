@@ -741,7 +741,7 @@ MapConfig flo_maps[] = {
 #include "area_sam/sam.h"
 MapConfig sam_maps[] = {
     { MAP(sam_01), .bgName = "yki_bg" },
-    { MAP_UNSPLIT(sam_02, 0x80241C00), .bgName = "yki_bg" },
+    { MAP(sam_02), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_03, 0x80240940), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_04, 0x80240740), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_05, 0x80241D60), .bgName = "sam_bg" },
