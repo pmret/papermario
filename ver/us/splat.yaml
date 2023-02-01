@@ -14011,17 +14011,16 @@ segments:
     start: 0xD3A5D0
     vram: 0x80240000
     subsegments:
-    - [0xD3A5D0, c]
-    - [0xD3A610, c]
-    - [0xD3A850, c]
-    - [0xD3A930, c]
-    - [0xD3ADA0, c]
-    - [0xD3C740, data]
-    - [0xD3C850, data]
-    - [0xD3D900, data]
-    - [0xD46980, data]
-    - [0xD48C40, data]
-    - [0xD4B9E0]
+    - [0xD3A5D0, c, sam_11_0_header]
+    - [0xD3A610, c, sam_11_1_music]
+    - [0xD3A610, c, sam_11_2_main]
+    - [0xD3A850, c, sam_11_3_rooms]
+    - [0xD3A850, c, sam_11_4_entity]
+    - [0xD3A930, c, sam_11_5_npc]
+    - [0xD3ADA0, c, sam_11_6_pond]
+    - [0xD3C740, c, sam_11_7_pond_anim]
+    - [0xD3C740, c, sam_11_8_pond_skele]
+    - [0xD3C740]
   - name: sam_12
     dir: world/area_sam/sam_12
     type: code

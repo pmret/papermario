@@ -750,7 +750,7 @@ MapConfig sam_maps[] = {
     { MAP_UNSPLIT(sam_08, 0x802417D0), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(sam_09, 0x80240420), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_UNSPLIT(sam_10, 0x80240CE0), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(sam_11, 0x802421A0), .bgName = "yki_bg" },
+    { MAP(sam_11), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_12, 0x802403B0), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
 };
 

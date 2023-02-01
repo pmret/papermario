@@ -2100,7 +2100,7 @@ EvtScript N(EVS_Goombaria_RunAround) = {
     EVT_END
 };
 
-API_CALLABLE(N(ShrinkItemEntity)) {
+API_CALLABLE(N(SetInvitationLetterScale)) {
     get_item_entity(script->varTable[0])->scale = 0.6f;
     return ApiStatus_DONE2;
 }
@@ -2141,8 +2141,8 @@ EvtScript N(EVS_NpcIdle_Eldstar_Epilogue) = {
     EVT_CALL(SpeakToPlayer, NPC_Goombario, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 5, MSG_Outro_0010)
     EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, MSG_Outro_0011)
     EVT_THREAD
-        EVT_CALL(DropTinyItemEntity, ITEM_LETTER25, NPC_DISPOSE_LOCATION, ITEM_SPAWN_MODE_DECORATION, 0)
-        EVT_CALL(N(ShrinkItemEntity))
+        EVT_CALL(DropResizableItemEntity, ITEM_LETTER25, NPC_DISPOSE_LOCATION, ITEM_SPAWN_MODE_DECORATION, 0)
+        EVT_CALL(N(SetInvitationLetterScale))
         EVT_LOOP(20)
             EVT_CALL(GetNpcPos, NPC_Parakarry, LVar1, LVar2, LVar3)
             EVT_ADD(LVar1, -12)
