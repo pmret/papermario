@@ -1,12 +1,12 @@
 #include "sam_11.h"
 
-EvtScript N(D_80243330_D3D900) = {
+EvtScript N(EVS_SetDoorRot_LeftHouse) = {
     EVT_CALL(RotateModel, MODEL_o541, LVar0, 0, -1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243360_D3D930) = {
+EvtScript N(EVS_MoveWalls_LeftHouse) = {
     EVT_CALL(RotateGroup, MODEL_g_ue, LVar0, 1, 0, 0)
     EVT_CALL(RotateGroup, MODEL_g_sita, LVar0, 1, 0, 0)
     EVT_IF_GT(LVar0, 89)
@@ -21,7 +21,7 @@ EvtScript N(D_80243360_D3D930) = {
     EVT_END
 };
 
-EvtScript N(D_80243430_D3DA00) = {
+EvtScript N(EVS_DropDoor_LeftHouse) = {
     EVT_CALL(RotateModel, MODEL_o541, LVar0, 1, 0, 0)
     EVT_IF_GT(LVar0, 89)
     EVT_END_IF
@@ -31,7 +31,7 @@ EvtScript N(D_80243430_D3DA00) = {
     EVT_END
 };
 
-EvtScript N(D_80243490_D3DA60) = {
+EvtScript N(EVS_ToggleVis_LeftHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_SET(AF_SAM_Snowing, FALSE)
@@ -59,7 +59,7 @@ EvtScript N(D_80243490_D3DA60) = {
                         EVT_CALL(PlayerFaceNpc, NPC_Herringway, FALSE)
                         EVT_CALL(NpcMoveTo, NPC_Herringway, -500, 0, 50)
                         EVT_CALL(SetNpcFlagBits, NPC_Herringway, NPC_FLAG_GRAVITY, FALSE)
-                        EVT_CALL(SetNpcPos, NPC_Herringway, 0, -1000, 0)
+                        EVT_CALL(SetNpcPos, NPC_Herringway, NPC_DISPOSE_LOCATION)
                     EVT_END_THREAD
                 EVT_END_IF
             EVT_END_IF
@@ -79,13 +79,13 @@ EvtScript N(D_80243490_D3DA60) = {
     EVT_END
 };
 
-EvtScript N(D_80243714_D3DCE4) = {
+EvtScript N(EVS_SetDoorRot_RightHouse) = {
     EVT_CALL(RotateModel, MODEL_o540, LVar0, 0, -1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243744_D3DD14) = {
+EvtScript N(EVS_MoveWalls_RightHouse) = {
     EVT_CALL(RotateGroup, MODEL_s_ue, LVar0, 1, 0, 0)
     EVT_CALL(RotateGroup, MODEL_s_sita, LVar0, 1, 0, 0)
     EVT_IF_GT(LVar0, 89)
@@ -100,21 +100,22 @@ EvtScript N(D_80243744_D3DD14) = {
     EVT_END
 };
 
-EvtScript N(D_80243814_D3DDE4) = {
+EvtScript N(EVS_DropDoor_RightHouse) = {
     EVT_CALL(RotateModel, MODEL_o540, LVar0, 1, 0, 0)
     EVT_RETURN
     EVT_END
 };
 
-#include "world/common/todo/RemovePadlock.inc.c"
-#include "world/common/todo/GetEntityPosition.inc.c"
 
-s32 N(D_80243844_D3DE14)[] = {
+s32 N(KeyList)[] = {
     ITEM_WAREHOUSE_KEY,
     ITEM_NONE
 };
 
-EvtScript N(D_8024384C_D3DE1C) = {
+#include "world/common/todo/RemovePadlock.inc.c"
+#include "world/common/todo/GetEntityPosition.inc.c"
+
+EvtScript N(EVS_UnlockPrompt_LeftHouse) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_CALL(ShowKeyChoicePopup)
@@ -132,9 +133,9 @@ EvtScript N(D_8024384C_D3DE1C) = {
     EVT_CALL(RemoveKeyItemAt, LVar1)
     EVT_CALL(CloseChoicePopup)
     EVT_SET(GF_SAM11_UnlockedDoor, TRUE)
-    EVT_CALL(N(GetEntityPosition), MV_Unk_06, LVar0, LVar1, LVar2)
+    EVT_CALL(N(GetEntityPosition), MV_PadlockEntityID, LVar0, LVar1, LVar2)
     EVT_CALL(PlaySoundAt, SOUND_269, 0, LVar0, LVar1, LVar2)
-    EVT_SET(LVar0, MV_Unk_06)
+    EVT_SET(LVar0, MV_PadlockEntityID)
     EVT_CALL(N(RemovePadlock))
     EVT_RESUME_GROUP(EVT_GROUP_01)
     EVT_UNBIND
@@ -142,7 +143,7 @@ EvtScript N(D_8024384C_D3DE1C) = {
     EVT_END
 };
 
-EvtScript N(D_802439A0_D3DF70) = {
+EvtScript N(EVS_ToggleVis_RightHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_SET(AF_SAM_Snowing, FALSE)
@@ -155,72 +156,93 @@ EvtScript N(D_802439A0_D3DF70) = {
     EVT_END
 };
 
-s32 N(D_80243A24_D3DFF4)[] = {
+s32 N(InteriorNPCs_LeftHouse)[] = {
     NPC_Herringway,
     NPC_0B,
     -1
 };
 
-s32 N(D_80243A30_D3E000)[] = {
+s32 N(InteriorNPCs_RightHouse)[] = {
     NPC_Herringway,
     -1
 };
 
-EvtScript N(D_80243A38_D3E008) = {
-    EVT_CALL(MakeDoorAdvanced, 2, EVT_PTR(N(D_80243714_D3DCE4)), EVT_PTR(N(D_80243744_D3DD14)), EVT_PTR(N(D_80243814_D3DDE4)), EVT_PTR(N(D_802439A0_D3DF70)), COLLIDER_o540, COLLIDER_o591, MODEL_sou, EVT_PTR(N(D_80243A30_D3E000)))
+EvtScript N(EVS_SetupLockedHouse) = {
+    // lower right house
+    EVT_CALL(MakeDoorAdvanced,
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+        EVT_PTR(N(EVS_SetDoorRot_RightHouse)),
+        EVT_PTR(N(EVS_MoveWalls_RightHouse)),
+        EVT_PTR(N(EVS_DropDoor_RightHouse)),
+        EVT_PTR(N(EVS_ToggleVis_RightHouse)),
+        COLLIDER_o540,
+        COLLIDER_o591,
+        MODEL_sou,
+        EVT_PTR(N(InteriorNPCs_RightHouse)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_80243A78) = {
+EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(SetGroupEnabled, MODEL_g_naiso, 0)
     EVT_CALL(EnableModel, MODEL_gn_dan1, TRUE)
-    EVT_CALL(MakeDoorAdvanced, 2, EVT_PTR(N(D_80243330_D3D900)), EVT_PTR(N(D_80243360_D3D930)), EVT_PTR(N(D_80243430_D3DA00)), EVT_PTR(N(D_80243490_D3DA60)), COLLIDER_o541, COLLIDER_o590, MODEL_gon, EVT_PTR(N(D_80243A24_D3DFF4)))
+    // lower left house
+    EVT_CALL(MakeDoorAdvanced,
+        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+        EVT_PTR(N(EVS_SetDoorRot_LeftHouse)),
+        EVT_PTR(N(EVS_MoveWalls_LeftHouse)),
+        EVT_PTR(N(EVS_DropDoor_LeftHouse)),
+        EVT_PTR(N(EVS_ToggleVis_LeftHouse)),
+        COLLIDER_o541,
+        COLLIDER_o590,
+        MODEL_gon,
+        EVT_PTR(N(InteriorNPCs_LeftHouse)))
     EVT_CALL(SetGroupEnabled, MODEL_s_naiso, 0)
     EVT_IF_EQ(GF_SAM11_UnlockedDoor, TRUE)
-        EVT_EXEC_WAIT(N(D_80243A38_D3E008))
+        EVT_EXEC_WAIT(N(EVS_SetupLockedHouse))
     EVT_ELSE
-        EVT_BIND_PADLOCK(EVT_PTR(N(D_8024384C_D3DE1C)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), EVT_PTR(N(D_80243844_D3DE14)), 0, 1)
+        EVT_BIND_PADLOCK(EVT_PTR(N(EVS_UnlockPrompt_LeftHouse)), TRIGGER_WALL_PRESS_A,
+            EVT_ENTITY_INDEX(0), EVT_PTR(N(KeyList)), 0, 1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243B40_D3E110) = {
+EvtScript N(EVS_HideRightHouse) = {
     EVT_SET(LVar0, 0)
-    EVT_EXEC_WAIT(N(D_80243814_D3DDE4))
+    EVT_EXEC_WAIT(N(EVS_DropDoor_RightHouse))
     EVT_SET(LVar0, 0)
-    EVT_EXEC_WAIT(N(D_80243744_D3DD14))
+    EVT_EXEC_WAIT(N(EVS_MoveWalls_RightHouse))
     EVT_SET(LVar0, 0)
-    EVT_EXEC_WAIT(N(D_80243714_D3DCE4))
+    EVT_EXEC_WAIT(N(EVS_SetDoorRot_RightHouse))
     EVT_SET(LVar0, 3)
-    EVT_EXEC_WAIT(N(D_802439A0_D3DF70))
+    EVT_EXEC_WAIT(N(EVS_ToggleVis_RightHouse))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243BC0_D3E190) = {
+EvtScript N(EVS_RevealRightHouse) = {
     EVT_SET(LVar0, 0)
-    EVT_EXEC_WAIT(N(D_802439A0_D3DF70))
+    EVT_EXEC_WAIT(N(EVS_ToggleVis_RightHouse))
     EVT_SET(LVar0, 0)
-    EVT_EXEC_WAIT(N(D_80243714_D3DCE4))
+    EVT_EXEC_WAIT(N(EVS_SetDoorRot_RightHouse))
     EVT_SET(LVar0, 90)
-    EVT_EXEC_WAIT(N(D_80243744_D3DD14))
+    EVT_EXEC_WAIT(N(EVS_MoveWalls_RightHouse))
     EVT_SET(LVar0, 90)
-    EVT_EXEC_WAIT(N(D_80243814_D3DDE4))
+    EVT_EXEC_WAIT(N(EVS_DropDoor_RightHouse))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243C40_D3E210) = {
+EvtScript N(EVS_RevealLeftHouse) = {
     EVT_SET(LVar0, 0)
-    EVT_EXEC_WAIT(N(D_80243490_D3DA60))
+    EVT_EXEC_WAIT(N(EVS_ToggleVis_LeftHouse))
     EVT_SET(LVar0, 0)
-    EVT_EXEC_WAIT(N(D_80243330_D3D900))
+    EVT_EXEC_WAIT(N(EVS_SetDoorRot_LeftHouse))
     EVT_SET(LVar0, 90)
-    EVT_EXEC_WAIT(N(D_80243360_D3D930))
+    EVT_EXEC_WAIT(N(EVS_MoveWalls_LeftHouse))
     EVT_SET(LVar0, 90)
-    EVT_EXEC_WAIT(N(D_80243430_D3DA00))
+    EVT_EXEC_WAIT(N(EVS_DropDoor_LeftHouse))
     EVT_RETURN
     EVT_END
 };

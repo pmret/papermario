@@ -4773,6 +4773,7 @@ enum TexPanner {
 };
 
 enum CustomGfxUnit {
+    CUSTOM_GFX_NONE = -1,
     CUSTOM_GFX_0    = 0x00,
     CUSTOM_GFX_1    = 0x01,
     CUSTOM_GFX_2    = 0x02,

@@ -16,19 +16,19 @@ NpcSettings N(NpcSettings_Kooper) = {
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
 
-API_CALLABLE(N(func_80241864_D3BE34)) {
-    Npc* npc = get_npc_safe(NPC_Penguin_01);
+API_CALLABLE(N(SetInitialSentryPosition)) {
+    Npc* npc = get_npc_safe(NPC_PenguinSentry);
 
-    npc->pos.y = 0.0f;
     npc->pos.x = 470.0f;
+    npc->pos.y = 0.0f;
     npc->pos.z = 5.0f;
     script->varTableF[10] = npc->pos.z;
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802418B4_D3BE84)) {
+API_CALLABLE(N(UpdateSentryPosition)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Npc* npc = get_npc_safe(NPC_Penguin_01);
+    Npc* npc = get_npc_safe(NPC_PenguinSentry);
     f32* posZ = &script->varTableF[10];
     f32 playerX;
     f32 var_f2;
@@ -82,13 +82,13 @@ API_CALLABLE(N(SetInvitationLetterScale)) {
 EvtScript N(EVS_NpcInteract_PenguinPatrol) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_Unk_05)
+            EVT_SWITCH(MV_DialogueState_Patrol)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00B9)
-                    EVT_SET(MV_Unk_05, 1)
+                    EVT_SET(MV_DialogueState_Patrol, 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00BA)
-                    EVT_SET(MV_Unk_05, 0)
+                    EVT_SET(MV_DialogueState_Patrol, 0)
             EVT_END_SWITCH
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
         EVT_CASE_LT(STORY_CH7_DEFEATED_JR_TROOPA)
@@ -107,7 +107,7 @@ EvtScript N(EVS_NpcIdle_PenguinPatrol) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Penguin_01) = {
+EvtScript N(EVS_NpcInteract_PenguinSentry) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00C7)
@@ -126,12 +126,12 @@ EvtScript N(EVS_NpcInteract_Penguin_01) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcIdle_Penguin_01) = {
+EvtScript N(EVS_NpcIdle_PenguinSentry) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(N(func_80241864_D3BE34))
+            EVT_CALL(N(SetInitialSentryPosition))
             EVT_LOOP(0)
-                EVT_CALL(N(func_802418B4_D3BE84))
+                EVT_CALL(N(UpdateSentryPosition))
                 EVT_WAIT(1)
             EVT_END_LOOP
     EVT_END_SWITCH
@@ -196,7 +196,7 @@ EvtScript N(EVS_NpcInteract_Herringway) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D1)
             EVT_WAIT(15)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(0.5))
-            EVT_EXEC_WAIT(N(EVS_8024E090))
+            EVT_EXEC_WAIT(N(EVS_LowerStaircase))
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D2)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Walk)
@@ -229,23 +229,23 @@ EvtScript N(EVS_NpcIdle_Herringway) = {
 EvtScript N(EVS_NpcInteract_Penguin_02) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_Unk_00)
+            EVT_SWITCH(MV_DialogueState_Penguin2)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0096)
-                    EVT_SET(MV_Unk_00, 1)
+                    EVT_SET(MV_DialogueState_Penguin2, 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0097)
-                    EVT_SET(MV_Unk_00, 0)
+                    EVT_SET(MV_DialogueState_Penguin2, 0)
             EVT_END_SWITCH
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_Unk_00)
+            EVT_SWITCH(MV_DialogueState_Penguin2)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0098)
-                    EVT_SET(MV_Unk_00, 1)
+                    EVT_SET(MV_DialogueState_Penguin2, 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0099)
-                    EVT_SET(MV_Unk_00, 0)
+                    EVT_SET(MV_DialogueState_Penguin2, 0)
             EVT_END_SWITCH
         EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009A)
@@ -257,23 +257,23 @@ EvtScript N(EVS_NpcInteract_Penguin_02) = {
 EvtScript N(EVS_NpcInteract_Penguin_03) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_Unk_01)
+            EVT_SWITCH(MV_DialogueState_Penguin3)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009B)
-                    EVT_SET(MV_Unk_01, 1)
+                    EVT_SET(MV_DialogueState_Penguin3, 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009C)
-                    EVT_SET(MV_Unk_01, 0)
+                    EVT_SET(MV_DialogueState_Penguin3, 0)
             EVT_END_SWITCH
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_Unk_01)
+            EVT_SWITCH(MV_DialogueState_Penguin3)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009D)
-                    EVT_SET(MV_Unk_01, 1)
+                    EVT_SET(MV_DialogueState_Penguin3, 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Celebrate, ANIM_Penguin_Idle, 0, MSG_CH7_009E)
-                    EVT_SET(MV_Unk_01, 0)
+                    EVT_SET(MV_DialogueState_Penguin3, 0)
             EVT_END_SWITCH
         EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009F)
@@ -285,13 +285,13 @@ EvtScript N(EVS_NpcInteract_Penguin_03) = {
 EvtScript N(EVS_NpcInteract_Penguin_04) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_Unk_02)
+            EVT_SWITCH(MV_DialogueState_Penguin4)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A0)
-                    EVT_SET(MV_Unk_02, 1)
+                    EVT_SET(MV_DialogueState_Penguin4, 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A1)
-                    EVT_SET(MV_Unk_02, 0)
+                    EVT_SET(MV_DialogueState_Penguin4, 0)
             EVT_END_SWITCH
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
             EVT_IF_EQ(GF_SAM11_UnlockedDoor, FALSE)
@@ -300,13 +300,13 @@ EvtScript N(EVS_NpcInteract_Penguin_04) = {
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A3)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_Unk_02)
+            EVT_SWITCH(MV_DialogueState_Penguin4)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A4)
-                    EVT_SET(MV_Unk_02, 1)
+                    EVT_SET(MV_DialogueState_Penguin4, 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A5)
-                    EVT_SET(MV_Unk_02, 0)
+                    EVT_SET(MV_DialogueState_Penguin4, 0)
             EVT_END_SWITCH
         EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A6)
@@ -318,33 +318,33 @@ EvtScript N(EVS_NpcInteract_Penguin_04) = {
 EvtScript N(EVS_NpcInteract_Penguin_05) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_Unk_03)
+            EVT_SWITCH(MV_DialogueState_Penguin5)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A7)
-                    EVT_SET(MV_Unk_03, 1)
+                    EVT_SET(MV_DialogueState_Penguin5, 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A8)
-                    EVT_SET(MV_Unk_03, 0)
+                    EVT_SET(MV_DialogueState_Penguin5, 0)
             EVT_END_SWITCH
         EVT_CASE_LT(STORY_CH7_SPOKE_WITH_HERRINGWAY)
-            EVT_SWITCH(MV_Unk_03)
+            EVT_SWITCH(MV_DialogueState_Penguin5)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A9)
-                    EVT_SET(MV_Unk_03, 1)
+                    EVT_SET(MV_DialogueState_Penguin5, 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AA)
-                    EVT_SET(MV_Unk_03, 0)
+                    EVT_SET(MV_DialogueState_Penguin5, 0)
             EVT_END_SWITCH
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AB)
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_Unk_03)
+            EVT_SWITCH(MV_DialogueState_Penguin5)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AC)
-                    EVT_SET(MV_Unk_03, 1)
+                    EVT_SET(MV_DialogueState_Penguin5, 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AD)
-                    EVT_SET(MV_Unk_03, 0)
+                    EVT_SET(MV_DialogueState_Penguin5, 0)
             EVT_END_SWITCH
         EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AE)
@@ -356,31 +356,31 @@ EvtScript N(EVS_NpcInteract_Penguin_05) = {
 EvtScript N(EVS_NpcInteract_Penguin_06) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_Unk_04)
+            EVT_SWITCH(MV_DialogueState_Penguin6)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AF)
-                    EVT_SET(MV_Unk_04, 1)
+                    EVT_SET(MV_DialogueState_Penguin6, 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B0)
-                    EVT_SET(MV_Unk_04, 0)
+                    EVT_SET(MV_DialogueState_Penguin6, 0)
             EVT_END_SWITCH
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_SWITCH(MV_Unk_04)
+            EVT_SWITCH(MV_DialogueState_Penguin6)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B1)
-                    EVT_SET(MV_Unk_04, 1)
+                    EVT_SET(MV_DialogueState_Penguin6, 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B2)
-                    EVT_SET(MV_Unk_04, 0)
+                    EVT_SET(MV_DialogueState_Penguin6, 0)
             EVT_END_SWITCH
         EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_Unk_04)
+            EVT_SWITCH(MV_DialogueState_Penguin6)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B3)
-                    EVT_SET(MV_Unk_04, 1)
+                    EVT_SET(MV_DialogueState_Penguin6, 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B4)
-                    EVT_SET(MV_Unk_04, 0)
+                    EVT_SET(MV_DialogueState_Penguin6, 0)
             EVT_END_SWITCH
         EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B5)
@@ -389,39 +389,39 @@ EvtScript N(EVS_NpcInteract_Penguin_06) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_ThreeSisters_01) = {
+EvtScript N(EVS_NpcInteract_Toadette_01) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_SHATTERED_FROZEN_POND)
-            EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00BE)
+            EVT_CALL(SpeakToPlayer, NPC_Toadette_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00BE)
             EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00BF)
+            EVT_CALL(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00BF)
             EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C0)
+            EVT_CALL(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C0)
         EVT_CASE_LT(STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
-            EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C1)
+            EVT_CALL(SpeakToPlayer, NPC_Toadette_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C1)
             EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C2)
+            EVT_CALL(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C2)
             EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C3)
+            EVT_CALL(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C3)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C4)
+            EVT_CALL(SpeakToPlayer, NPC_Toadette_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C4)
             EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C5)
+            EVT_CALL(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C5)
             EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C6)
+            EVT_CALL(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C6)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_ThreeSisters_03) = {
-    EVT_EXEC_WAIT(N(EVS_NpcInteract_ThreeSisters_01))
+EvtScript N(EVS_NpcInteract_Toadette_03) = {
+    EVT_EXEC_WAIT(N(EVS_NpcInteract_Toadette_01))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_ThreeSisters_02) = {
-    EVT_EXEC_WAIT(N(EVS_NpcInteract_ThreeSisters_01))
+EvtScript N(EVS_NpcInteract_Toadette_02) = {
+    EVT_EXEC_WAIT(N(EVS_NpcInteract_Toadette_01))
     EVT_RETURN
     EVT_END
 };
@@ -439,9 +439,9 @@ EvtScript N(EVS_NpcInit_PenguinPatrol) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Penguin_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Penguin_01)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Penguin_01)))
+EvtScript N(EVS_NpcInit_PenguinSentry) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_PenguinSentry)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_PenguinSentry)))
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
         EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
@@ -511,9 +511,9 @@ EvtScript N(EVS_NpcInit_Penguin_06) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_ThreeSisters_01) = {
+EvtScript N(EVS_NpcInit_Toadette_01) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters_01)))
+        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette_01)))
     EVT_ELSE
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -521,9 +521,9 @@ EvtScript N(EVS_NpcInit_ThreeSisters_01) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_ThreeSisters_02) = {
+EvtScript N(EVS_NpcInit_Toadette_02) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters_02)))
+        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette_02)))
     EVT_ELSE
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -531,9 +531,9 @@ EvtScript N(EVS_NpcInit_ThreeSisters_02) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_ThreeSisters_03) = {
+EvtScript N(EVS_NpcInit_Toadette_03) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters_03)))
+        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette_03)))
     EVT_ELSE
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -541,7 +541,7 @@ EvtScript N(EVS_NpcInit_ThreeSisters_03) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_PenguinPatrol)[] = {
+StaticNpc N(NpcData_Townsfolk)[] = {
     {
         .id = NPC_PenguinPatrol,
         .settings = &N(NpcSettings_Penguin),
@@ -554,12 +554,12 @@ StaticNpc N(NpcData_PenguinPatrol)[] = {
         .tattle = MSG_NpcTattle_SAM_Patrol,
     },
     {
-        .id = NPC_Penguin_01,
+        .id = NPC_PenguinSentry,
         .settings = &N(NpcSettings_Penguin),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 180,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Penguin_01),
+        .init = &N(EVS_NpcInit_PenguinSentry),
         .drops = NPC_NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_Gatekeeper,
@@ -622,7 +622,7 @@ StaticNpc N(NpcData_PenguinPatrol)[] = {
     },
 };
 
-StaticNpc N(NpcData_Penguin_02A)[] = {
+StaticNpc N(NpcData_PondPenginsBefore)[] = {
     {
         .id = NPC_Penguin_02,
         .settings = &N(NpcSettings_Penguin_Wander),
@@ -671,7 +671,7 @@ StaticNpc N(NpcData_Penguin_02A)[] = {
     },
 };
 
-StaticNpc N(NpcData_Penguin_02B)[] = {
+StaticNpc N(NpcData_PondPenginsAfter)[] = {
     {
         .id = NPC_Penguin_02,
         .settings = &N(NpcSettings_Penguin_Wander),
@@ -722,41 +722,41 @@ StaticNpc N(NpcData_Penguin_02B)[] = {
 
 StaticNpc N(NpcData_Tourists)[] = {
     {
-        .id = NPC_ThreeSisters_01,
+        .id = NPC_Toadette_01,
         .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -400.0f, 0.0f, 230.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_ThreeSisters_01),
+        .init = &N(EVS_NpcInit_Toadette_01),
         .drops = NPC_NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidA,
     },
     {
-        .id = NPC_ThreeSisters_02,
+        .id = NPC_Toadette_02,
         .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -350.0f, 0.0f, 230.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_ThreeSisters_02),
+        .init = &N(EVS_NpcInit_Toadette_02),
         .drops = NPC_NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidB,
     },
     {
-        .id = NPC_ThreeSisters_03,
+        .id = NPC_Toadette_03,
         .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -375.0f, 0.0f, 220.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_ThreeSisters_03),
+        .init = &N(EVS_NpcInit_Toadette_03),
         .drops = NPC_NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidC,
     },
 };
 
-EvtScript N(EVS_NpcIdle_Kolorado) = {
+EvtScript N(EVS_Scene_EpilogueDelivery) = {
     EVT_CALL(SetNpcPos, NPC_Kolorado, 140, 0, -48)
     EVT_CALL(SetNpcPos, NPC_Kooper, 75, 0, -48)
     EVT_CALL(SetNpcPos, NPC_Archeologist_01, 103, 0, -87)
@@ -971,7 +971,7 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerPos, NPC_DISPOSE_LOCATION)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_Scene_EpilogueDelivery)))
     EVT_RETURN
     EVT_END
 };
@@ -1000,24 +1000,7 @@ StaticNpc N(NpcData_Epilogue)[] = {
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Archeologist_01),
         .drops = NPC_NO_DROPS,
-        .animations = {
-            .idle   = ANIM_Archeologist_Idle,
-            .walk   = ANIM_Archeologist_Walk,
-            .run    = ANIM_Archeologist_Run,
-            .chase  = ANIM_Archeologist_Run,
-            .anim_4 = ANIM_Archeologist_Idle,
-            .anim_5 = ANIM_Archeologist_Idle,
-            .death  = ANIM_Archeologist_Idle,
-            .hit    = ANIM_Archeologist_Idle,
-            .anim_8 = ANIM_Archeologist_Idle,
-            .anim_9 = ANIM_Archeologist_Idle,
-            .anim_A = ANIM_Archeologist_Idle,
-            .anim_B = ANIM_Archeologist_Idle,
-            .anim_C = ANIM_Archeologist_Idle,
-            .anim_D = ANIM_Archeologist_Idle,
-            .anim_E = ANIM_Archeologist_Idle,
-            .anim_F = ANIM_Archeologist_Idle,
-        },
+        .animations = ARCHEOLOGIST_ANIMS,
     },
     {
         .id = NPC_Archeologist_02,
@@ -1027,24 +1010,7 @@ StaticNpc N(NpcData_Epilogue)[] = {
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Archeologist_01),
         .drops = NPC_NO_DROPS,
-        .animations = {
-            .idle   = ANIM_Archeologist_Idle,
-            .walk   = ANIM_Archeologist_Walk,
-            .run    = ANIM_Archeologist_Run,
-            .chase  = ANIM_Archeologist_Run,
-            .anim_4 = ANIM_Archeologist_Idle,
-            .anim_5 = ANIM_Archeologist_Idle,
-            .death  = ANIM_Archeologist_Idle,
-            .hit    = ANIM_Archeologist_Idle,
-            .anim_8 = ANIM_Archeologist_Idle,
-            .anim_9 = ANIM_Archeologist_Idle,
-            .anim_A = ANIM_Archeologist_Idle,
-            .anim_B = ANIM_Archeologist_Idle,
-            .anim_C = ANIM_Archeologist_Idle,
-            .anim_D = ANIM_Archeologist_Idle,
-            .anim_E = ANIM_Archeologist_Idle,
-            .anim_F = ANIM_Archeologist_Idle,
-        },
+        .animations = ARCHEOLOGIST_ANIMS,
     },
     {
         .id = NPC_Kooper,
@@ -1115,25 +1081,25 @@ StaticNpc N(NpcData_ChuckQuizmo) = {
     .tattle = MSG_NpcTattle_ChuckQuizmo,
 };
 
-NpcGroupList N(NpcGroup1) = {
-    NPC_GROUP(N(NpcData_PenguinPatrol), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
-    NPC_GROUP(N(NpcData_Penguin_02A), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
+NpcGroupList N(BeforeNPCs) = {
+    NPC_GROUP(N(NpcData_Townsfolk), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
+    NPC_GROUP(N(NpcData_PondPenginsBefore), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
     NPC_GROUP(N(NpcData_Tourists), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
     NPC_GROUP(N(NpcData_ChuckQuizmo)),
     {}
 };
 
-NpcGroupList N(NpcGroup2) = {
+NpcGroupList N(MysteryNPCs) = {
     //@bug loads 7 NPCs when the group only has 6
-    { .npcCount = 7, .npcs = &N(NpcData_PenguinPatrol)[0], .battle = BTL_KMR_PART_1_FORMATION_00, .stage = BTL_KMR_PART_1_STAGE_01 },
+    NPC_GROUP_EXPLICIT_SIZE(N(NpcData_Townsfolk), NPC_PenguinPatrol, 7, BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
     NPC_GROUP(N(NpcData_Tourists), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
     NPC_GROUP(N(NpcData_ChuckQuizmo)),
     {}
 };
 
-NpcGroupList N(NpcGroup3) = {
-    NPC_GROUP(N(NpcData_PenguinPatrol), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
-    NPC_GROUP(N(NpcData_Penguin_02B), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
+NpcGroupList N(AfterNPCs) = {
+    NPC_GROUP(N(NpcData_Townsfolk), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
+    NPC_GROUP(N(NpcData_PondPenginsAfter), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
     NPC_GROUP(N(NpcData_Tourists), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
     NPC_GROUP(N(NpcData_ChuckQuizmo)),
     {}

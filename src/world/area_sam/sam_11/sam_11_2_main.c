@@ -1,6 +1,6 @@
 #include "sam_11.h"
 
-EvtScript N(D_80242280_D3C850) = {
+EvtScript N(EVS_LoadPondAnimation) = {
     EVT_CALL(LoadAnimatedModel, 0, EVT_PTR(N(ShatterPondSkeleton)))
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(N(AS_ShatterPond)))
     EVT_CALL(SetAnimatedModelRootPosition, 0, 0, 0, 0)
@@ -50,8 +50,8 @@ BombTrigger N(BombPos_Tree3) = {
     .radius = 0.0f
 };
 
-EvtScript N(D_80242CE8_D3D2B8) = {
-    EVT_IF_EQ(MV_Unk_09, 1)
+EvtScript N(EVS_ExitWalk_sam_02_1) = {
+    EVT_IF_EQ(MV_ThrownOut, 1)
         EVT_RETURN
     EVT_END_IF
     EVT_SET_GROUP(EVT_GROUP_1B)
@@ -63,7 +63,7 @@ EvtScript N(D_80242CE8_D3D2B8) = {
     EVT_END
 };
 
-EvtScript N(D_80242D64_D3D334) = {
+EvtScript N(EVS_ExitWalk_sam_03_0) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_IF_LT(GB_StoryProgress, STORY_CH7_MAYOR_MURDER_SOLVED)
         EVT_RETURN
@@ -78,8 +78,8 @@ EvtScript N(D_80242D64_D3D334) = {
 };
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80242CE8_D3D2B8)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80242D64_D3D334)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_sam_02_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_sam_03_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
     EVT_RETURN
     EVT_END
 };
@@ -94,26 +94,26 @@ EvtScript N(EVS_Main) = {
     EVT_IF_NE(LVar0, sam_11_ENTRY_2)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(EpilogueNPCs)))
-    EVT_CALL(FadeInMusic, 0, SONG_SHIVER_CITY, 0, 3000, 0, 127)
-    EVT_RETURN
+        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(EpilogueNPCs)))
+        EVT_CALL(FadeInMusic, 0, SONG_SHIVER_CITY, 0, 3000, 0, 127)
+        EVT_RETURN
     EVT_LABEL(10)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup1)))
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(BeforeNPCs)))
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup2)))
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(MysteryNPCs)))
         EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup3)))
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(AfterNPCs)))
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o621, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_CALL(SetRenderMode, MODEL_o583, RENDER_MODE_SURFACE_XLU_LAYER2)
     EVT_EXEC_WAIT(N(EVS_SetupMusic))
     EVT_EXEC(N(EVS_ManageSnowfall))
-    EVT_EXEC_WAIT(N(EVS_80243A78))
-    EVT_EXEC_WAIT(N(EVS_8024D994))
-    EVT_EXEC_WAIT(N(EVS_8024E544))
+    EVT_EXEC_WAIT(N(EVS_SetupRooms))
+    EVT_EXEC_WAIT(N(EVS_SetupPond))
+    EVT_EXEC_WAIT(N(EVS_SetupStaircase))
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o595, SURFACE_TYPE_SNOW)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o653, SURFACE_TYPE_SNOW)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o664, SURFACE_TYPE_SNOW)

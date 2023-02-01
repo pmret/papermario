@@ -14018,8 +14018,9 @@ segments:
     - [0xD3A850, c, sam_11_4_entity]
     - [0xD3A930, c, sam_11_5_npc]
     - [0xD3ADA0, c, sam_11_6_pond]
-    - [0xD3C740, c, sam_11_7_pond_anim]
-    - [0xD3C740, c, sam_11_8_pond_skele]
+    - [0xD3C740, c, sam_11_7_staircase]
+    - [0xD3C740, c, sam_11_8_pond_anim]
+    - [0xD3C740, c, sam_11_9_pond_skele]
     - [0xD3C740]
   - name: sam_12
     dir: world/area_sam/sam_12
