@@ -11,7 +11,7 @@ struct Evt;
 
 typedef ApiStatus(*ApiFunc)(struct Evt*, s32);
 
-typedef Bytecode EvtScript[0];
+typedef Bytecode EvtScript[];
 
 typedef void NoArgCallback(void*);
 

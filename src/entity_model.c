@@ -1,7 +1,10 @@
 #include "common.h"
 #include "entity.h"
 
-EntityModelScript D_8014C260[] = { {ems_End}, {ems_End }};
+EntityModelScript D_8014C260 = {
+    ems_End
+    ems_End
+};
 Lights1 D_8014C268 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
 
 extern EntityModelList gWorldEntityModelList;
@@ -112,7 +115,7 @@ s32 load_entity_model(EntityModelScript* cmdList) {
     newEntityModel->nextFrameTime = 1.0f;
     newEntityModel->timeScale = 1.0f;
     if (cmdList == NULL) {
-        newEntityModel->cmdListReadPos = D_8014C260;
+        newEntityModel->cmdListReadPos = &D_8014C260;
     }
     newEntityModel->vertexArray = NULL;
     newEntityModel->fpSetupGfxCallback = NULL;
@@ -154,7 +157,7 @@ s32 ALT_load_entity_model(EntityModelScript* cmdList) {
     newEntityModel->nextFrameTime = 1.0f;
     newEntityModel->timeScale = 1.0f;
     if (cmdList == NULL) {
-        newEntityModel->cmdListReadPos = D_8014C260;
+        newEntityModel->cmdListReadPos = &D_8014C260;
     }
     newEntityModel->vertexArray = NULL;
     newEntityModel->fpSetupGfxCallback = NULL;
@@ -189,7 +192,7 @@ void exec_entity_model_commandlist(s32 idx) {
 s32 step_entity_model_commandlist(EntityModel* entityModel) {
     SpriteRasterInfo* imageData;
 
-    u32* curPos = entityModel->cmdListReadPos[0];
+    u32* curPos = *entityModel->cmdListReadPos;
     switch (*curPos++) {
         case 0: // kill model
             free_entity_model_by_ref(entityModel);
@@ -719,7 +722,7 @@ void set_entity_model_render_command_list(s32 idx, EntityModelScript* cmdList) {
 
     if (entityModel != NULL && entityModel->flags) {
         if (cmdList == NULL) {
-            cmdList = D_8014C260;
+            cmdList = &D_8014C260;
         }
         entityModel->cmdListReadPos = cmdList;
         entityModel->cmdListSavedPos = cmdList;
