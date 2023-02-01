@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(SetForeverForestFog)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetForeverForestFog)) {
     enable_world_fog();
     set_world_fog_dist(990, 1000);
     set_world_fog_color(0, 0, 0, 255);

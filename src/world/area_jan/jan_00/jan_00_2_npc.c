@@ -413,7 +413,7 @@ EvtScript N(D_80242FA8_B234E8) = {
         EVT_CALL(SetNpcSpeed, NPC_Kolorado_02, EVT_FLOAT(6.0))
         EVT_CALL(SetNpcAnimation, NPC_Kolorado_02, ANIM_Kolorado_Walk)
         EVT_CALL(NpcMoveTo, NPC_Kolorado_02, 330, 190, 0)
-        EVT_CALL(SetNpcPos, NPC_Kolorado_02, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_Kolorado_02, NPC_DISPOSE_LOCATION)
         EVT_SET(GB_StoryProgress, STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
         EVT_SETF(LVar9, EVT_FLOAT(4.0))
     EVT_ELSE

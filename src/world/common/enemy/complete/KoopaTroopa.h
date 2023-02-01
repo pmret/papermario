@@ -1,13 +1,13 @@
 #include "common.h"
 #include "sprite/npc/KoopaTroopa.h"
 
-#define KOOPA_TROOPA_DROPS \
+#define KOOPA_TROOPA_NOK_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 5, \
     .itemDrops = { \
-        { ITEM_MUSHROOM, 5, 0 }, \
-        { ITEM_POW_BLOCK, 5, 0 }, \
+        { ITEM_MUSHROOM, 3, 0 }, \
+        { ITEM_KOOPA_LEAF, 7, 0 }, \
     }, \
     .heartDrops  = STANDARD_HEART_DROPS(2), \
     .flowerDrops = STANDARD_FLOWER_DROPS(2), \
@@ -15,14 +15,13 @@
     .maxCoinBonus = 1, \
 }
 
-// used on nok_14 and nok_15
-#define KOOPA_TROOPA_DROPS_B \
+#define KOOPA_TROOPA_TRD_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 5, \
     .itemDrops = { \
-        { ITEM_MUSHROOM, 3, 0 }, \
-        { ITEM_KOOPA_LEAF, 7, 0 }, \
+        { ITEM_MUSHROOM, 5, 0 }, \
+        { ITEM_POW_BLOCK, 5, 0 }, \
     }, \
     .heartDrops  = STANDARD_HEART_DROPS(2), \
     .flowerDrops = STANDARD_FLOWER_DROPS(2), \

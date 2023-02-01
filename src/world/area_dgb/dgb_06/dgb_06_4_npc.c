@@ -16,7 +16,7 @@ EvtScript N(EVS_NpcInteract_Boo) = {
 
 EvtScript N(EVS_NpcInit_Boo) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
-        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_IF
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Boo)))
     EVT_RETURN

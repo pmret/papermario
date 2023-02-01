@@ -343,7 +343,7 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(70)
         EVT_END_IF
-    EVT_SET(AF_SAM06_Snowing, FALSE)
+    EVT_SET(AF_SAM_Snowing, FALSE)
     EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 1)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)

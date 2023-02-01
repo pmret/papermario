@@ -476,8 +476,8 @@ MapConfig nok_maps[] = {
     { MAP_UNSPLIT(nok_03, 0x80240E40), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_04, 0x80240F40), .bgName = "nok_bg" },
     { MAP(nok_11), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(nok_12, 0x80242100), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(nok_13, 0x802414C0), .bgName = "nok_bg" },
+    { MAP(nok_12), .bgName = "nok_bg" },
+    { MAP(nok_13), .bgName = "nok_bg" },
     { MAP(nok_14), .bgName = "nok_bg" },
     { MAP(nok_15), .bgName = "nok_bg" },
 };
@@ -740,7 +740,7 @@ MapConfig flo_maps[] = {
 /// Shiver Region
 #include "area_sam/sam.h"
 MapConfig sam_maps[] = {
-    { MAP_UNSPLIT(sam_01, 0x80241F70), .bgName = "yki_bg" },
+    { MAP(sam_01), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_02, 0x80241C00), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_03, 0x80240940), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_04, 0x80240740), .bgName = "yki_bg" },

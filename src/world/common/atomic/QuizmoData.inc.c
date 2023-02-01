@@ -53,7 +53,7 @@ EvtScript N(EVS_Quizmo_Exit) = {
         EVT_CALL(SetNpcJumpscale, NPC_SELF, 1)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ChuckQuizmo_Vanish)
         EVT_WAIT(40)
-        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_IF
     EVT_RETURN
     EVT_END

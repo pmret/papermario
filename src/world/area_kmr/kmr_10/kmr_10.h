@@ -25,5 +25,5 @@ extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_SetupMusic);
 extern EvtScript N(EVS_SetupFoliage);
 extern EvtScript N(EVS_MakeEntities);
-extern EvtScript N(EVS_Tree1_CallbackScript);
+extern EvtScript N(EVS_EVS_OnShakeTree1);
 extern NpcGroupList N(DefaultNPCs);

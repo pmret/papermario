@@ -25,7 +25,7 @@ EvtScript N(EVS_NpcIdle_TubbasHeart) = {
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20C8, 0)
     EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 12)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_SET(GB_StoryProgress, STORY_CH3_HEART_FLED_SECOND_TUNNEL)
     EVT_RETURN
     EVT_END

@@ -22,10 +22,10 @@ EvtScript N(EVS_MoveWalls_ToadHouse) = {
 EvtScript N(EVS_ToggleVis_ToadHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_SET(AF_SAM06_Snowing, FALSE)
+            EVT_SET(AF_SAM_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_kh_naiso, 1)
         EVT_CASE_EQ(3)
-            EVT_SET(AF_SAM06_Snowing, TRUE)
+            EVT_SET(AF_SAM_Snowing, TRUE)
             EVT_CALL(SetGroupEnabled, MODEL_kh_naiso, 0)
     EVT_END_SWITCH
     EVT_RETURN
@@ -54,7 +54,7 @@ EvtScript N(EVS_MoveWalls_MerleHouse) = {
 EvtScript N(EVS_ToggleVis_MerleHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_SET(AF_SAM06_Snowing, FALSE)
+            EVT_SET(AF_SAM_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 1)
             EVT_CALL(EnableModel, MODEL_k_naiso, TRUE)
         EVT_CASE_EQ(2)
@@ -62,7 +62,7 @@ EvtScript N(EVS_ToggleVis_MerleHouse) = {
                 EVT_CALL(DisablePlayerInput, TRUE)
             EVT_END_IF
         EVT_CASE_EQ(3)
-            EVT_SET(AF_SAM06_Snowing, TRUE)
+            EVT_SET(AF_SAM_Snowing, TRUE)
             EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 0)
             EVT_IF_LT(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_SCARF)
                 EVT_EXEC_WAIT(N(EVS_Scene_Merle_OneLastThing))
@@ -104,10 +104,10 @@ EvtScript N(EVS_MoveWalls_CookHouse) = {
 EvtScript N(EVS_ToggleVis_CookHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_SET(AF_SAM06_Snowing, FALSE)
+            EVT_SET(AF_SAM_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_h_naiso, 1)
         EVT_CASE_EQ(3)
-            EVT_SET(AF_SAM06_Snowing, TRUE)
+            EVT_SET(AF_SAM_Snowing, TRUE)
             EVT_CALL(SetGroupEnabled, MODEL_h_naiso, 0)
     EVT_END_SWITCH
     EVT_RETURN

@@ -65,7 +65,7 @@ EvtScript N(EVS_NpcInit_Goomba) = {
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Goomba)))
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Goomba)))
     EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -76,7 +76,7 @@ EvtScript N(EVS_NpcInit_Clubba) = {
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Goomba)))
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Goomba)))
     EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_IF
     EVT_RETURN
     EVT_END

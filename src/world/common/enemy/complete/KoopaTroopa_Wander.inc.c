@@ -1,4 +1,3 @@
-#include "common.h"
 #include "KoopaTroopa.h"
 
 #include "world/common/enemy/ai/TackleAI.inc.c"

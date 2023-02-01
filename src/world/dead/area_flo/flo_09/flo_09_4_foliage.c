@@ -13,7 +13,7 @@ EvtScript N(EVS_SpawnBzzap) = {
     EVT_END
 };
 
-EvtScript N(Tree1_CallbackScript) = {
+EvtScript N(EVS_OnShakeTree1) = {
     EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, FALSE)
         EVT_IF_EQ(AB_FLO_TreePuzzle_SecondCorrect, 1)
             EVT_CALL(MakeItemEntity, ITEM_HAPPY_FLOWER_B, -250, 100, 0, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_FLO09_Item_HappyFlowerB)
@@ -28,7 +28,7 @@ EvtScript N(Tree1_CallbackScript) = {
     EVT_END
 };
 
-EvtScript N(Tree2_CallbackScript) = {
+EvtScript N(EVS_OnShakeTree2) = {
     EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, FALSE)
         EVT_SET(AB_FLO_TreePuzzle_FirstCorrect, 1)
         EVT_SET(AB_FLO_TreePuzzle_SecondCorrect, 0)
@@ -37,7 +37,7 @@ EvtScript N(Tree2_CallbackScript) = {
     EVT_END
 };
 
-EvtScript N(Tree3_CallbackScript) = {
+EvtScript N(EVS_OnShakeTree3) = {
     EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, FALSE)
         EVT_IF_EQ(AB_FLO_TreePuzzle_FirstCorrect, 1)
             EVT_IF_EQ(AB_FLO_TreePuzzle_SecondCorrect, 0)
@@ -60,7 +60,7 @@ FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o10);
 ShakeTreeConfig N(ShakeTree_Tree1) = {
     .leaves = &N(Tree1_LeafModels),
     .trunk = &N(Tree1_TrunkModels),
-    .callback = &N(Tree1_CallbackScript),
+    .callback = &N(EVS_OnShakeTree1),
 };
 
 BombTrigger N(BombPos_Tree1) = {
@@ -74,7 +74,7 @@ FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o3);
 ShakeTreeConfig N(ShakeTree_Tree2) = {
     .leaves = &N(Tree2_LeafModels),
     .trunk = &N(Tree2_TrunkModels),
-    .callback = &N(Tree2_CallbackScript),
+    .callback = &N(EVS_OnShakeTree2),
 };
 
 BombTrigger N(BombPos_Tree2) = {
@@ -88,7 +88,7 @@ FoliageModelList N(Tree3_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o13);
 ShakeTreeConfig N(ShakeTree_Tree3) = {
     .leaves = &N(Tree3_LeafModels),
     .trunk = &N(Tree3_TrunkModels),
-    .callback = &N(Tree3_CallbackScript),
+    .callback = &N(EVS_OnShakeTree3),
 };
 
 BombTrigger N(BombPos_Tree3) = {

@@ -522,7 +522,7 @@ EvtScript N(EVS_NpcAI_ShyGuy) = {
     EVT_CALL(ShowSweat, -1, 1, -45, 1, 0, 0, 0, 0, 20)
     EVT_CALL(NpcMoveTo, NPC_SELF, 0, -650, 0)
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_WAIT(200)
     EVT_RETURN
     EVT_END

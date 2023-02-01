@@ -181,7 +181,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_END_LOOP
     EVT_SET(GB_StoryProgress, STORY_CH3_INVITED_TO_BOOS_MANSION)
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(SetNpcPos, NPC_Bootler, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_Bootler, NPC_DISPOSE_LOCATION)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END

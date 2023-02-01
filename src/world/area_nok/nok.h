@@ -21,6 +21,7 @@ enum {
 };
 
 enum {
+    AF_NOK_01       = AreaFlag(1),
     AF_NOK_02       = AreaFlag(2),
 };
 

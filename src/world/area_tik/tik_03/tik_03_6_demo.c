@@ -48,20 +48,20 @@ EvtScript N(EVS_MonitorDemoState) = {
     EVT_END
 };
 
-s32 N(DemoSceneState) = {
+s32 N(DemoInitState) = {
     0
 };
 
 API_CALLABLE(N(SetupDemoScene)) {
     PlayerStatus* player = &gPlayerStatus;
 
-    switch (N(DemoSceneState)) {
+    switch (N(DemoInitState)) {
         case 0:
-            N(DemoSceneState) = 1;
+            N(DemoInitState) = 1;
             break;
         case 1:
         case 2:
-            N(DemoSceneState)++;
+            N(DemoInitState)++;
             break;
         case 3:
             partner_clear_player_tracking(wPartnerNpc);

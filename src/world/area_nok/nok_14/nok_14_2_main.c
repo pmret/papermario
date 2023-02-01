@@ -3,7 +3,7 @@
 API_CALLABLE(N(UpdateEnounterStages)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     EncounterStatus* encounterStatus = &gCurrentEncounter;
-    Bytecode *args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     s32 xMin = evt_get_variable(script, *args++);
     s32 xMax = evt_get_variable(script, *args++);
     s32 zMin = evt_get_variable(script, *args++);
@@ -25,25 +25,8 @@ API_CALLABLE(N(UpdateEnounterStages)) {
     return ApiStatus_DONE2;
 }
 
-// EVT_EXIT_WALK without EVT_SET_GROUP
-EvtScript N(EVS_ExitWalk_nok_13_2) = {
-    EVT_CALL(UseExitHeading, 60, nok_14_ENTRY_0)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, EVT_PTR("nok_13"), nok_13_ENTRY_2)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
-};
-
-// EVT_EXIT_WALK without EVT_SET_GROUP
-EvtScript N(EVS_ExitWalk_nok_15_0) = {
-    EVT_CALL(UseExitHeading, 60, nok_14_ENTRY_1)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, EVT_PTR("nok_15"), nok_15_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
-};
+EvtScript N(EVS_ExitWalk_nok_13_2) = EVT_EXIT_WALK_NOK(60, nok_14_ENTRY_0, "nok_13", nok_13_ENTRY_2);
+EvtScript N(EVS_ExitWalk_nok_15_0) = EVT_EXIT_WALK_NOK(60, nok_14_ENTRY_1, "nok_15", nok_15_ENTRY_0);
 
 EvtScript N(EVS_TexPan_Flowers) = {
     EVT_SET_GROUP(EVT_GROUP_00)
@@ -74,7 +57,7 @@ EvtScript N(EVS_TexPan_Water) = {
         EVT_SET(LVar2, 0)
         EVT_LABEL(10)
             EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_AUX, LVar1, LVar2)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_AUX,  LVar1, LVar2)
             EVT_SUB(LVar0, 100)
             EVT_SUB(LVar1, 400)
             EVT_ADD(LVar1, 1000)
@@ -89,7 +72,7 @@ EvtScript N(EVS_TexPan_Water) = {
         EVT_SET(LVar2, 0)
         EVT_LABEL(20)
             EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, LVar0, 0)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_AUX, LVar1, LVar2)
+            EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_AUX,  LVar1, LVar2)
             EVT_SUB(LVar0, 100)
             EVT_ADD(LVar1, 800)
             EVT_SUB(LVar2, 400)

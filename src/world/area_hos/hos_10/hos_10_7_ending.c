@@ -388,7 +388,7 @@ EvtScript N(EVS_Scene_SpiritsFlyingAway) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetPlayerPos, 0, -1000, 0)
+    EVT_CALL(SetPlayerPos, NPC_DISPOSE_LOCATION)
     EVT_CALL(EnableModel, MODEL_o2, FALSE)
     EVT_CALL(EnableModel, MODEL_nagare, FALSE)
     EVT_CALL(TranslateGroup, MODEL_castle, 0, -2500, 0)

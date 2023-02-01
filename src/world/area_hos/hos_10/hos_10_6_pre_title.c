@@ -10,7 +10,7 @@ EvtScript N(EVS_Scene_PreTitle) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_FallBack)
-    EVT_CALL(SetPlayerPos, 0, -1000, 0)
+    EVT_CALL(SetPlayerPos, NPC_DISPOSE_LOCATION)
     EVT_CALL(EnableModel, MODEL_o2, FALSE)
     EVT_CALL(EnableModel, MODEL_nagare, FALSE)
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)

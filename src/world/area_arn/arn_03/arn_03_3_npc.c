@@ -243,7 +243,7 @@ EvtScript N(80242B0C) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(NpcMoveTo, NPC_Boo_05, LVar0, LVar2, 40)
-    EVT_CALL(SetNpcPos, NPC_Boo_05, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_Boo_05, NPC_DISPOSE_LOCATION)
     EVT_RETURN
     EVT_END
 };
@@ -370,7 +370,7 @@ EvtScript N(EVS_NpcInit_Boo_04) = {
 };
 
 EvtScript N(EVS_NpcInit_Boo_05) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_RETURN
     EVT_END
 };

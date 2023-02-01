@@ -10867,32 +10867,28 @@ segments:
     start: 0x9FA7F0
     vram: 0x80240000
     subsegments:
-    - [0x9FA7F0, c]
-    - [0x9FA970, c]
-    - [0x9FAAE0, c]
-    - [0x9FAB20, c]
-    - [0x9FAD60, c]
-    - [0x9FC6D0, c]
-    - [0x9FC8B0, data]
-    - [0x9FC970, data]
-    - [0x9FD410, data]
-    - [0x9FE000, data]
-    - [0x9FFB70, data]
-    - [0xA00250]
+    - [0x9FA7F0, c, nok_12_0_header]
+    - [0x9FA7F0, c, nok_12_1_music]
+    - [0x9FA7F0, c, nok_12_2_main]
+    - [0x9FA970, c, nok_12_3_entity]
+    - [0x9FAAE0, c, nok_12_4_bridge]
+    - [0x9FAB20, c, nok_12_5_foliage]
+    - [0x9FAD60, c, nok_12_6_npc]
+    - [0x9FC6D0, c, nok_12_7_demo]
+    - [0x9FC8B0]
   - name: nok_13
     dir: world/area_nok/nok_13
     type: code
     start: 0xA00600
     vram: 0x80240000
     subsegments:
-    - [0xA00600, c]
-    - [0xA01420, c]
-    - [0xA01A90, data]
-    - [0xA01B40, data]
-    - [0xA02040, data]
-    - [0xA02420, data]
-    - [0xA026C0, data]
-    - [0xA027B0]
+    - [0xA00600, c, nok_13_0_header]
+    - [0xA00600, c, nok_13_1_music]
+    - [0xA00600, c, nok_13_2_main]
+    - [0xA00600, c, nok_13_3_entity]
+    - [0xA00600, c, nok_13_4_npc]
+    - [0xA01420, c, nok_13_5]
+    - [0xA01A90]
   - name: nok_14
     dir: world/area_nok/nok_14
     type: code
@@ -13886,13 +13882,14 @@ segments:
     start: 0xCF7B70
     vram: 0x80240000
     subsegments:
-    - [0xCF7B70, c]
-    - [0xCF7E80, c]
-    - [0xCF9AC0, data]
-    - [0xCF9BC0, data]
-    - [0xD01D90, data]
-    - [0xD05460, data]
-    - [0xD05720]
+    - [0xCF7B70, c, sam_01_0_header]
+    - [0xCF7B70, c, sam_01_1_music]
+    - [0xCF7B70, c, sam_01_2_main]
+    - [0xCF7E80, c, sam_01_3_rooms]
+    - [0xCF7E80, c, sam_01_4_npc]
+    - [0xCF95F0, c, sam_01_5_scenes]
+    - [0xCF9800, c, sam_01_6_entity]
+    - [0xCF9AC0]
   - name: sam_02
     dir: world/area_sam/sam_02
     type: code
