@@ -37,7 +37,7 @@ s32 N(Fishmael_LetterList)[] = {
     ITEM_LETTER15, ITEM_NONE
 };
 
-EvtScript N(EVS_Fishmael_LetterPrompt) = {
+EvtScript N(EVS_LetterPrompt_Fishmael) = {
     EVT_CALL(N(LetterDelivery_Init), NPC_Fishmael,
         ANIM_Fishmael_Talk, ANIM_Fishmael_Idle,
         ITEM_LETTER15, ITEM_LETTER16,
@@ -53,7 +53,7 @@ s32 N(Kolorado_LetterList)[] = {
     ITEM_LETTER25, ITEM_NONE 
 };
 
-EvtScript N(EVS_Kolorado_LetterPrompt) = {
+EvtScript N(EVS_LetterPrompt_Kolorado) = {
     EVT_CALL(N(LetterDelivery_Init), NPC_Kolorado,
         ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
         ITEM_LETTER25, ITEM_NONE,
@@ -65,8 +65,8 @@ EvtScript N(EVS_Kolorado_LetterPrompt) = {
     EVT_END
 };
 
-EvtScript N(EVS_Kolorado_LetterReward) = {
-    EVT_IF_EQ(LVarC, 2)
+EvtScript N(EVS_LetterReward_Kolorado) = {
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
     EVT_END_IF
     EVT_RETURN
@@ -1154,8 +1154,8 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
             EVT_CALL(SpeakToPlayer, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Port_00AC)
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(EVS_Kolorado_TryArtifactTrade))
-    EVT_EXEC_WAIT(N(EVS_Kolorado_LetterPrompt))
-    EVT_EXEC_WAIT(N(EVS_Kolorado_LetterReward))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado))
+    EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF
@@ -1383,7 +1383,7 @@ EvtScript N(EVS_NpcInteract_Fuzzipede1) = {
     EVT_END_SWITCH
     EVT_CALL(SpeakToNpc, NPC_Fishmael, ANIM_Fishmael_Talk, ANIM_Fishmael_Idle, 0, NPC_Fuzzipede, LVar0)
     EVT_CALL(SpeakToNpc, NPC_Fuzzipede, ANIM_Fuzzipede_Anim24, ANIM_Fuzzipede_Anim04, 0, NPC_Fishmael, LVar1)
-    EVT_EXEC_WAIT(N(EVS_Fishmael_LetterPrompt))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Fishmael))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF
@@ -1417,7 +1417,7 @@ EvtScript N(EVS_NpcInteract_Fishmael) = {
             EVT_SET(LVar0, MSG_MAC_Port_005A)
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Fishmael_Talk, ANIM_Fishmael_Idle, 0, LVar0)
-    EVT_EXEC_WAIT(N(EVS_Fishmael_LetterPrompt))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Fishmael))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF

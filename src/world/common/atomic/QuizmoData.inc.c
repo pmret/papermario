@@ -53,7 +53,7 @@ EvtScript N(EVS_Quizmo_Exit) = {
         EVT_CALL(SetNpcJumpscale, NPC_SELF, 1)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ChuckQuizmo_Vanish)
         EVT_WAIT(40)
-        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -598,9 +598,9 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             EVT_CALL(N(Quizmo_SetVannaAnim_Idle))
             EVT_CALL(SetMessageValue, GB_CompletedQuizzes, 0)
             EVT_IF_EQ(GB_CompletedQuizzes, 1)
-                EVT_CALL(SetMessageMsg, EVT_PTR(MessageSingular), 1)
+                EVT_CALL(SetMessageText, EVT_PTR(MessageSingular), 1)
             EVT_ELSE
-                EVT_CALL(SetMessageMsg, EVT_PTR(MessagePlural), 1)
+                EVT_CALL(SetMessageText, EVT_PTR(MessagePlural), 1)
             EVT_END_IF
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000F)
         EVT_END_IF

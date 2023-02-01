@@ -4,6 +4,12 @@
 #include "world/common/complete/GiveReward.inc.c"
 #include "world/common/complete/KeyItemChoice.inc.c"
 
+enum DeliveryResult {
+    DELIVERY_NOT_POSSIBLE   = 0,
+    DELIVERY_REJECTED       = 1,
+    DELIVERY_ACCEPTED       = 2,
+};
+
 BSS s32 N(LetterDelivery_SavedNpcAnim);
 
 API_CALLABLE(N(LetterDelivery_Init)) {
@@ -129,8 +135,9 @@ EvtScript N(EVS_ShowLetterChoice) = {
     EVT_END
 };
 
+// returns DeliveryResult on LVarC
 EvtScript N(EVS_DoLetterDelivery) = {
-    EVT_SET(LVarC, 0)
+    EVT_SET(LVarC, DELIVERY_NOT_POSSIBLE)
     EVT_IF_LT(GB_StoryProgress, STORY_CH2_PARAKARRY_JOINED_PARTY)
         EVT_RETURN
     EVT_END_IF
@@ -156,7 +163,7 @@ EvtScript N(EVS_DoLetterDelivery) = {
                     EVT_WAIT(1)
                     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, LVar8)
                     EVT_CALL(EnablePartnerAI)
-                    EVT_SET(LVarC, 1)
+                    EVT_SET(LVarC, DELIVERY_REJECTED)
                 EVT_CASE_DEFAULT
                     EVT_CALL(DisablePartnerAI, 0)
                     EVT_WAIT(1)
@@ -165,13 +172,10 @@ EvtScript N(EVS_DoLetterDelivery) = {
                         EVT_CALL(SpeakToPlayer, LVar2, LVar3, LVar4, 0, LVarA)
                     EVT_END_IF
                     EVT_CALL(EnablePartnerAI)
-                    EVT_IF_NE(LVar6, 0)
-                        EVT_SET(LVar0, LVar6)
-                        EVT_SET(LVar1, ITEM_TYPE_KEY)
-                        EVT_EXEC_WAIT(N(GiveKeyReward))
-                        EVT_CALL(AddKeyItem, LVar6)
+                    EVT_IF_NE(LVar6, ITEM_NONE)
+                        EVT_GIVE_KEY_REWARD(LVar6)
                     EVT_END_IF
-                    EVT_SET(LVarC, 2)
+                    EVT_SET(LVarC, DELIVERY_ACCEPTED)
             EVT_END_SWITCH
         EVT_END_IF
     EVT_END_IF
@@ -181,7 +185,7 @@ EvtScript N(EVS_DoLetterDelivery) = {
 };
 
 #define EVT_LETTER_PROMPT(npcName, npcID, animTalk, animIdle, msg1, msg2, ms3, msg4, itemID, itemList) \
-    EvtScript N(EVS_##npcName##_LetterPrompt) = { \
+    EvtScript N(EVS_LetterPrompt_##npcName) = { \
         EVT_CALL(N(LetterDelivery_Init), \
             npcID, animTalk, animIdle, \
             itemID, ITEM_NONE, \
@@ -193,17 +197,14 @@ EvtScript N(EVS_DoLetterDelivery) = {
     }
 
 #define EVT_LETTER_REWARD(npcName) \
-    EvtScript N(EVS_##npcName##_LetterReward) = { \
-        EVT_IF_EQ(LVarC, 2) \
-            EVT_SET(LVar0, ITEM_STAR_PIECE) \
-            EVT_SET(LVar1, ITEM_TYPE_STAR_PIECE) \
-            EVT_EXEC_WAIT(N(GiveKeyReward)) \
-            EVT_CALL(AddStarPieces, 1) \
+    EvtScript N(EVS_LetterReward_##npcName) = { \
+        EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED) \
+            EVT_GIVE_STAR_PIECE() \
         EVT_END_IF \
         EVT_RETURN \
         EVT_END \
     }
 
 #define EVT_LETTER_CHECK(npcName) \
-    EVT_EXEC_WAIT(N(EVS_##npcName##_LetterPrompt)) \
-    EVT_EXEC_WAIT(N(EVS_##npcName##_LetterReward))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_##npcName)) \
+    EVT_EXEC_WAIT(N(EVS_LetterReward_##npcName))

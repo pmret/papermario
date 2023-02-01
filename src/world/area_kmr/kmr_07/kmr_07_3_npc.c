@@ -134,7 +134,7 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Red) = {
                 EVT_CALL(NpcMoveTo, NPC_GoombaBros_Blue, 616, -47, 0)
                 EVT_KILL_THREAD(LVarA)
                 EVT_CALL(SetNpcFlagBits, NPC_GoombaBros_Blue, NPC_FLAG_GRAVITY, FALSE)
-                EVT_CALL(SetNpcPos, NPC_GoombaBros_Blue, 0, -1000, 0)
+                EVT_CALL(SetNpcPos, NPC_GoombaBros_Blue, NPC_DISPOSE_LOCATION)
                 EVT_WAIT(1)
             EVT_END_THREAD
             EVT_WAIT(30)
@@ -152,7 +152,7 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Red) = {
             EVT_CALL(NpcMoveTo, NPC_GoombaBros_Red, 616, -47, 0)
             EVT_KILL_THREAD(LVarA)
             EVT_CALL(SetNpcFlagBits, NPC_GoombaBros_Red, NPC_FLAG_GRAVITY, FALSE)
-            EVT_CALL(SetNpcPos, NPC_GoombaBros_Red, 0, -1000, 0)
+            EVT_CALL(SetNpcPos, NPC_GoombaBros_Red, NPC_DISPOSE_LOCATION)
             EVT_WAIT(1)
             EVT_EXEC(N(EVS_SetupMusic))
             EVT_SET(MV_GoombaBrosDefeated, TRUE)

@@ -15,11 +15,22 @@ Gfx* D_E006AE00[] = {
 };
 
 s32 D_E006AE10[] = {
-    0, -20, 0, 1, 18, -10, -60, 45, -1, 4, -20, -20, 90, 1, 1, -10,
-    -60, 135, 1, -4, 0, -20, 180, -8, 1, -10, -60, 225, -1, -1, -20, -20,
-    270, 1, -9, -10, -60, 315, 4, 4, 0, 10, 22, 4, 1, -10, 20, 67,
-    1, -1, -20, 10, 112, -1, -1, -10, 20, 157, -8, 1, 0, 10, 202, 1,
-    -4, -10, 20, 247, 1, -18, -20, 10, 292, -1, 9, -10, 20, 337, 1, 1
+      0,  -20,    0,   1,  18,
+    -10,  -60,   45,  -1,   4,
+    -20,  -20,   90,   1,   1,
+    -10,  -60,  135,   1,  -4,
+      0,  -20,  180,  -8,   1,
+    -10,  -60,  225,  -1,  -1,
+    -20,  -20,  270,   1,  -9,
+    -10,  -60,  315,   4,   4,
+      0,   10,   22,   4,   1,
+    -10,   20,   67,   1,  -1,
+    -20,   10,  112,  -1,  -1,
+    -10,   20,  157,  -8,   1,
+      0,   10,  202,   1,  -4,
+    -10,   20,  247,   1, -18,
+    -20,   10,  292,  -1,   9,
+    -10,   20,  337,   1,   1
 };
 
 void light_rays_init(EffectInstance* effect);
@@ -27,32 +38,32 @@ void light_rays_update(EffectInstance* effect);
 void light_rays_render(EffectInstance* effect);
 void light_rays_appendGfx(void* effect);
 
-void func_E006A000(LightRaysFXData* part, s32 arg1) {
-    s32 temp = arg1 * 3;
+void func_E006A000(LightRaysFXData* part, s32 beamIdx) {
+    s32 temp = beamIdx * 3;
 
-    part->unk_70 = func_E0200044(180, temp);
-    part->unk_74 = func_E0200044(180, temp + 1);
-    part->unk_78 = func_E0200044(180, temp + 2);
-    part->unk_24 = 0;
-    part->unk_2C = 0;
+    part->initialRot.x = func_E0200044(180, temp);
+    part->initialRot.y = func_E0200044(180, temp + 1);
+    part->initialRot.z = func_E0200044(180, temp + 2);
+    part->alpha = 0;
+    part->lifetime = 0;
     part->unk_58 = part->unk_68;
-    part->unk_28 = part->unk_7C;
+    part->timeLeft = part->unk_7C;
     part->unk_8C = part->unk_6C;
-    part->unk_5C = part->unk_70;
-    part->unk_60 = part->unk_74;
-    part->unk_64 = part->unk_78;
+    part->rotation.x = part->initialRot.x;
+    part->rotation.y = part->initialRot.y;
+    part->rotation.z = part->initialRot.z;
 }
 
-void func_E006A0BC(LightRaysFXData* part, s32 arg1) {
-    s32 idx = (arg1 - 1) * 5;
+void func_E006A0BC(LightRaysFXData* part, s32 beamIdx) {
+    s32 idx = (beamIdx - 1) * 5;
 
     part->unk_58 = 0;
-    part->unk_28 = arg1 * 2 + 30;
-    part->unk_5C = D_E006AE10[idx++];
-    part->unk_60 = D_E006AE10[idx++];
-    part->unk_64 = D_E006AE10[idx++];
-    part->unk_24 = 0;
-    part->unk_2C = 0;
+    part->timeLeft = beamIdx * 2 + 30;
+    part->rotation.x = D_E006AE10[idx++];
+    part->rotation.y = D_E006AE10[idx++];
+    part->rotation.z = D_E006AE10[idx++];
+    part->alpha = 0;
+    part->lifetime = 0;
     part->unk_34 = part->unk_38 = 0.0f;
     part->unk_48 = 0.0f;
     part->unk_4C = -0.6f;
@@ -67,11 +78,11 @@ void func_E006A0BC(LightRaysFXData* part, s32 arg1) {
 }
 
 void light_rays_main(
-    s32 arg0,
-    f32 arg1,
-    f32 arg2,
-    f32 arg3,
-    f32 arg4,
+    s32 type,
+    f32 posX,
+    f32 posY,
+    f32 posZ,
+    f32 scale,
     EffectInstance** outEffect
 ) {
     EffectBlueprint bp;
@@ -83,7 +94,7 @@ void light_rays_main(
     s32 temp1;
     s32 i;
 
-    if (arg0 < 2) {
+    if (type < 2) {
         numParts = 9;
     } else {
         numParts = 17;
@@ -101,16 +112,15 @@ void light_rays_main(
     part = effect->data.lightRays = shim_general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.lightRays != NULL);
 
-    part->unk_00 = arg0;
-    part->unk_28 = 100;
-    part->unk_2C = 0;
-    part->unk_10 = arg1;
-    part->unk_14 = arg2;
-    part->unk_18 = arg3;
-    part->unk_20 = arg4;
-    part->unk_1C = arg4;
+    part->type = type;
+    part->timeLeft = 100;
+    part->lifetime = 0;
+    part->pos.x = posX;
+    part->pos.y = posY;
+    part->pos.z = posZ;
+    part->unk_1C = part->unk_20 = scale;
 
-    switch (arg0) {
+    switch (type) {
         case 0:
         case 1:
             part++;
@@ -174,46 +184,46 @@ void func_E006A464(LightRaysFXData* part) {
 
 void light_rays_update(EffectInstance* effect) {
     LightRaysFXData* part = effect->data.lightRays;
-    s32 unk_00 = part->unk_00;
-    s32 unk_28;
-    s32 unk_2C;
+    s32 type = part->type;
+    s32 timeLeft;
+    s32 lifetime;
     s32 i;
 
-    if (part->unk_28 < 11) {
-        part->unk_28--;
+    if (part->timeLeft < 11) {
+        part->timeLeft--;
     }
 
-    part->unk_2C++;
+    part->lifetime++;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
-        part->unk_28 = 10;
+    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+        part->timeLeft = 10;
     }
 
-    if (part->unk_28 < 0) {
+    if (part->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
 
-    unk_28 = part->unk_28;
-    unk_2C = part->unk_2C;
+    timeLeft = part->timeLeft;
+    lifetime = part->lifetime;
 
-    switch (unk_00) {
+    switch (type) {
         case 0:
         case 1:
             part++;
             for (i = 1; i < effect->numParts; i++, part++) {
-                part->unk_28--;
-                part->unk_2C++;
-                if (part->unk_2C < 10) {
-                    part->unk_24 = part->unk_2C * 12;
+                part->timeLeft--;
+                part->lifetime++;
+                if (part->lifetime < 10) {
+                    part->alpha = part->lifetime * 12;
                 }
-                if (part->unk_28 < 5) {
-                    part->unk_24 = part->unk_28 * 25;
+                if (part->timeLeft < 5) {
+                    part->alpha = part->timeLeft * 25;
                 }
                 part->unk_58 += part->unk_8C;
-                if (part->unk_28 <= 0) {
-                    func_E006A000(part, unk_2C * 10 + 1);
+                if (part->timeLeft <= 0) {
+                    func_E006A000(part, lifetime * 10 + 1);
                 }
             }
             break;
@@ -221,24 +231,24 @@ void light_rays_update(EffectInstance* effect) {
             part++;
             for (i = 1; i < effect->numParts; i++, part++) {
                 func_E006A464(part);
-                part->unk_28--;
-                part->unk_2C++;
-                if (part->unk_2C < 5) {
-                    part->unk_24 = part->unk_2C * 50;
+                part->timeLeft--;
+                part->lifetime++;
+                if (part->lifetime < 5) {
+                    part->alpha = part->lifetime * 50;
                 }
-                if (part->unk_28 < 5) {
-                    part->unk_24 = part->unk_28 * 50;
+                if (part->timeLeft < 5) {
+                    part->alpha = part->timeLeft * 50;
                 }
-                if (unk_28 < 10) {
-                    part->unk_24 = (part->unk_24 * unk_28) / 10;
+                if (timeLeft < 10) {
+                    part->alpha = (part->alpha * timeLeft) / 10;
                 }
-                if (part->unk_28 <= 0) {
+                if (part->timeLeft <= 0) {
                     func_E006A0BC(part, i);
                 }
                 if (part->unk_90 <= 0 || --part->unk_90 <= 0) {
-                    part->unk_5C += part->unk_80;
-                    part->unk_60 += part->unk_84;
-                    part->unk_64 += part->unk_88;
+                    part->rotation.x += part->unk_80;
+                    part->rotation.y += part->unk_84;
+                    part->rotation.z += part->unk_88;
                 }
             }
     }
@@ -269,50 +279,50 @@ void func_E006A85C(LightRaysFXData* part) {
 
 void light_rays_appendGfx(void* effect) {
     LightRaysFXData* part = ((EffectInstance*)effect)->data.lightRays;
-    s32 unk_00 = part->unk_00;
-    Gfx* dlist = D_E006ADF0[unk_00];
-    Gfx* dlist2 = D_E006AE00[unk_00];
-    Matrix4f sp18;
-    Matrix4f sp58;
-    Matrix4f sp98;
+    s32 type = part->type;
+    Gfx* dlist = D_E006ADF0[type];
+    Gfx* dlist2 = D_E006AE00[type];
+    Matrix4f mtxTransform;
+    Matrix4f mtxTemp;
+    Matrix4f mtxTranslate;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMasterGfxPos++, dlist2);
 
-    shim_guTranslateF(sp98, part->unk_10, part->unk_14, part->unk_18);
+    shim_guTranslateF(mtxTranslate, part->pos.x, part->pos.y, part->pos.z);
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
-        f32 temp = part->unk_24 / 255.0f;
-        f32 rotateA;
+        f32 temp = part->alpha / 255.0f;
+        f32 angleZ;
         f32 scaleX;
         f32 scaleY;
         f32 scaleZ;
         f32 unk_64;
 
-        if (unk_00 >= 2) {
+        if (type >= 2) {
             func_E006A85C(part);
         }
 
-        shim_guRotateF(sp58, part->unk_5C, 1.0f, 0.0f, 0.0f);
-        shim_guMtxCatF(sp58, sp98, sp18);
+        shim_guRotateF(mtxTemp, part->rotation.x, 1.0f, 0.0f, 0.0f);
+        shim_guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
 
-        if (unk_00 >= 2) {
-            unk_64 = part->unk_64;
-            if (unk_00 == 3) {
-                rotateA = unk_64 + 45.0f;
+        if (type >= 2) {
+            unk_64 = part->rotation.z;
+            if (type == 3) {
+                angleZ = unk_64 + 45.0f;
             } else {
-                rotateA = unk_64 + 0.0f;
+                angleZ = unk_64 + 0.0f;
             }
 
-            shim_guRotateF(sp58, rotateA, 0.0f, 0.0f, 1.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guRotateF(sp58, part->unk_60, 0.0f, 1.0f, 0.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guTranslateF(sp58, part->unk_58, 0.0f, 0.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
+            shim_guRotateF(mtxTemp, angleZ, 0.0f, 0.0f, 1.0f);
+            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+            shim_guRotateF(mtxTemp, part->rotation.y, 0.0f, 1.0f, 0.0f);
+            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+            shim_guTranslateF(mtxTemp, part->unk_58, 0.0f, 0.0f);
+            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
 
             scaleX = scaleZ = (temp + 3.0f) * 0.25;
             switch (i & 3) {
@@ -331,22 +341,22 @@ void light_rays_appendGfx(void* effect) {
                     break;
             }
 
-            shim_guScaleF(sp58, scaleX, scaleY, scaleZ);
-            shim_guMtxCatF(sp58, sp18, sp18);
+            shim_guScaleF(mtxTemp, scaleX, scaleY, scaleZ);
+            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
 
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 240, part->unk_24);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 240, part->alpha);
         } else {
-            shim_guRotateF(sp58, part->unk_60, 0.0f, 1.0f, 0.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guRotateF(sp58, part->unk_64, 0.0f, 0.0f, 1.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guTranslateF(sp58, part->unk_58, 0.0f, 0.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
+            shim_guRotateF(mtxTemp, part->rotation.y, 0.0f, 1.0f, 0.0f);
+            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+            shim_guRotateF(mtxTemp, part->rotation.z, 0.0f, 0.0f, 1.0f);
+            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+            shim_guTranslateF(mtxTemp, part->unk_58, 0.0f, 0.0f);
+            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
 
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 181, part->unk_24);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 181, part->alpha);
         }
 
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(gMasterGfxPos++, dlist);

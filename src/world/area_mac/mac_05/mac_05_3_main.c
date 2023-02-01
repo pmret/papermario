@@ -7,7 +7,7 @@
 #include "world/common/todo/UnkFloatFunc001.inc.c"
 #define NAMESPACE mac_05
 
-ApiStatus func_8024047C_8525EC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_8024047C_8525EC)) {
     gGameStatusPtr->exitTangent = 0.0f;
     return ApiStatus_BLOCK;
 }

@@ -29,12 +29,9 @@ D_803DA800 = 0x803DA800;
 heap_battleHead = 0x803DA800;
 
 // Letter delivery BSS
-hos_06_LetterDelivery_SavedNpcAnim = 0x80246424;
 nok_01_LetterDelivery_SavedNpcAnim = 0x80251E34;
 nok_02_LetterDelivery_SavedNpcAnim = 0x80254B94;
 jan_03_LetterDelivery_SavedNpcAnim = 0x8024FF04;
-sam_01_LetterDelivery_SavedNpcAnim = 0x8024DF24;
-sam_06_LetterDelivery_SavedNpcAnim = 0x8024C1D8;
 
 // Quizmo BSS
 jan_02_Quizmo_Worker = 0x80248924;
@@ -49,14 +46,9 @@ jan_03_Quizmo_AudienceEffect = 0x8024FEFC;
 jan_03_Quizmo_VannaTEffect = 0x8024FF00;
 sam_02_Quizmo_AnswerResult = 0x8024B9A8;
 sam_02_Quizmo_StageEffect = 0x8024B9B0;
-sam_01_Quizmo_Worker = 0x8024DEF8;
 sam_02_Quizmo_Worker = 0x8024B990;
 sam_02_Quizmo_AudienceEffect = 0x8024B9B4;
 sam_02_Quizmo_VannaTEffect = 0x8024B9B8;
-sam_01_Quizmo_AnswerResult = 0x8024DF10;
-sam_01_Quizmo_StageEffect = 0x8024DF18;
-sam_01_Quizmo_AudienceEffect = 0x8024DF1C;
-sam_01_Quizmo_VannaTEffect = 0x8024DF20;
 sam_11_Quizmo_Worker = 0x80251450;
 sam_11_Quizmo_AnswerResult = 0x80251468;
 sam_11_Quizmo_StageEffect = 0x80251470;

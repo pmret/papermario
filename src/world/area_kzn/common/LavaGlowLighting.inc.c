@@ -13,7 +13,7 @@ enum {
 
 f32 N(LavaGlowLightTime) = 0.0f;
 
-ApiStatus N(ApplyLavaGlowLighting)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ApplyLavaGlowLighting)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 glowMode = evt_get_variable(script, *args++);
@@ -87,7 +87,7 @@ ApiStatus N(ApplyLavaGlowLighting)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(ClearLavaGlowLighting)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ClearLavaGlowLighting)) {
     Bytecode* args = script->ptrReadPos;
     ModelIDList* modelIDs = (ModelIDList*) evt_get_variable(script, *args++);
     s32 i;

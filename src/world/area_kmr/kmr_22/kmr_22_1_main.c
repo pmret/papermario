@@ -140,7 +140,7 @@ EvtScript N(EVS_Main) = {
     EVT_IF_NE(LVar0, PARTNER_NONE)
         EVT_CALL(DisablePartnerAI, 0)
         EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-        EVT_CALL(SetNpcPos, NPC_PARTNER, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_PARTNER, NPC_DISPOSE_LOCATION)
     EVT_END_IF
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 25, 16, 4096)

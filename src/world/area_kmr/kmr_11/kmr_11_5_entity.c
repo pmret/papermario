@@ -55,7 +55,7 @@ EvtScript N(EVS_Interact_SwitchBush) = {
     EVT_CALL(SetNpcJumpscale, NPC_BlueGoombaBro, EVT_FLOAT(2.0))
     EVT_CALL(NpcJump0, NPC_BlueGoombaBro, -469, 0, 92, 7)
     EVT_KILL_THREAD(LVarB)
-    EVT_CALL(SetNpcPos, NPC_BlueGoombaBro, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_BlueGoombaBro, NPC_DISPOSE_LOCATION)
     EVT_SET(GB_StoryProgress, STORY_CH0_FOUND_GATEHOUSE_SWITCH)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN

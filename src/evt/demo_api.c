@@ -1,10 +1,9 @@
 #include "common.h"
 
 // TODO: not sure where these go
-u8 D_802D9D70 = 0xFE;
-u8 D_802D9D71 = 0xFE;
-u8 D_802D9D72 = 0x00;
-u8 D_802D9D73 = 0xFF;
+u8 D_802D9D70 = 254;
+u8 D_802D9D71 = 254;
+u16 StarShrineLightBeamAlpha = 255;
 
 extern s32 D_802DBB60;
 extern s32 D_802DBB64; // unused?

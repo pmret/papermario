@@ -363,8 +363,8 @@ EvtScript N(EVS_Scene_UnlockGate) = {
         EVT_CALL(func_802CFD30, NPC_GateBoo_02, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetNpcPos, NPC_GateBoo_01, 0, -1000, 0)
-    EVT_CALL(SetNpcPos, NPC_GateBoo_02, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_GateBoo_01, NPC_DISPOSE_LOCATION)
+    EVT_CALL(SetNpcPos, NPC_GateBoo_02, NPC_DISPOSE_LOCATION)
     EVT_WAIT(10)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_006D)

@@ -5161,7 +5161,7 @@ void btl_state_draw_select_target(void) {
                 target = &actor->targetData[targetIndexList[selectedTargetIndex]];
                 anotherActor = get_actor(target->actorID);
                 msgID = get_actor_part(anotherActor, target->partID)->staticData->unk_20;
-                if (msgID == 0) {
+                if (msgID == MSG_NONE) {
                     msgID = bActorNames[anotherActor->actorType];
                 }
                 msgWidth = get_msg_width(msgID, 0) + 10;
@@ -5193,7 +5193,7 @@ void btl_state_draw_select_target(void) {
                 target = &actor->targetData[targetIndexList[selectedTargetIndex]];
                 anotherActor = get_actor(target->actorID);
                 msgID = get_actor_part(anotherActor, target->partID)->staticData->unk_20;
-                if (msgID == 0) {
+                if (msgID == MSG_NONE) {
                     msgID = bActorNames[anotherActor->actorType];
                 }
                 draw_msg(msgID, screenX + *tmpPtr, screenY, 255, MSG_PAL_36, 0); // TODO required to match

@@ -8,7 +8,7 @@ NpcSettings N(NpcSettings_Nomadimouse) = {
 
 #include "world/common/complete/LetterDelivery.inc.c"
 
-s32 N(D_802416A8_947578)[] = {
+s32 N(LetterList_Nomadimouse)[] = {
     ITEM_LETTER08,
     ITEM_NONE
 };
@@ -18,18 +18,15 @@ EvtScript N(EVS_Nomadimouse_LetterDelivery) = {
         NPC_Nomadimouse, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle,
         ITEM_LETTER08, ITEM_NONE,
         MSG_CH2_005B, MSG_CH2_005C, MSG_CH2_005D, MSG_CH2_005E,
-        EVT_PTR(N(D_802416A8_947578)))
+        EVT_PTR(N(LetterList_Nomadimouse)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_Nomadimouse_LetterReward) = {
-    EVT_IF_EQ(LVarC, 2)
-        EVT_SET(LVar0, ITEM_STAR_PIECE)
-        EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(GiveKeyReward))
-        EVT_CALL(AddStarPieces, 1)
+EvtScript N(EVS_LetterReward_Nomadimouse) = {
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+        EVT_GIVE_STAR_PIECE()
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -59,7 +56,7 @@ EvtScript N(EVS_NpcInteract_Nomadimouse) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_005A)
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(EVS_Nomadimouse_LetterDelivery))
-    EVT_EXEC_WAIT(N(EVS_Nomadimouse_LetterReward))
+    EVT_EXEC_WAIT(N(EVS_LetterReward_Nomadimouse))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF

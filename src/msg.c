@@ -1,5 +1,6 @@
 #include "common.h"
 #include "ld_addrs.h"
+#include "message_ids.h"
 #include "sprite.h"
 
 enum RewindArrowStates {
@@ -25,7 +26,13 @@ u8 MessageSingular[] = { MSG_CHAR_READ_ENDL, MSG_CHAR_READ_END };
 
 s16 gNextMessageBuffer = 0;
 
-s32 gRewindArrowQuad[] = { 0xFFF00009, 0x00000000, 0x00000000, 0xFFFFFFFF, 0x00100009, 0x00000000, 0x04000000, 0xFFFFFFFF, 0xFFF0FFF7, 0x00000000, 0x00000240, 0xFFFFFFFF, 0x0010FFF7, 0x00000000, 0x04000240, 0xFFFFFFFF, };
+//TODO Vtx
+s32 gRewindArrowQuad[] = {
+    0xFFF00009, 0x00000000, 0x00000000, 0xFFFFFFFF,
+    0x00100009, 0x00000000, 0x04000000, 0xFFFFFFFF,
+    0xFFF0FFF7, 0x00000000, 0x00000240, 0xFFFFFFFF,
+    0x0010FFF7, 0x00000000, 0x04000240, 0xFFFFFFFF,
+};
 
 Gfx D_8014C2D8[] = {
     gsDPSetCycleType(G_CYC_2CYCLE),
@@ -1388,7 +1395,7 @@ MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWritebac
     s32 maxLinesPerPage;
     s32 i;
 
-    if (msgID == 0) {
+    if (msgID == MSG_NONE) {
         return NULL;
     }
 
@@ -1647,7 +1654,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
     maxLinesOnPage = 0;
     spaceCount = 0;
 
-    if (msgID == 0) {
+    if (msgID == MSG_NONE) {
         return;
     }
 

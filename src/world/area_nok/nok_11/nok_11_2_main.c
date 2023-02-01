@@ -12,15 +12,7 @@ EvtScript N(EVS_ExitWalk_mac_01_1) = {
     EVT_END
 };
 
-// EVT_EXIT_WALK without EVT_SET_GROUP
-EvtScript N(EVS_ExitWalk_nok_12_0) = {
-    EVT_CALL(UseExitHeading, 60, nok_11_ENTRY_1)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, EVT_PTR("nok_12"), nok_12_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
-};
+EvtScript N(EVS_ExitWalk_nok_12_0) = EVT_EXIT_WALK_NOK(60, nok_11_ENTRY_1, "nok_12", nok_12_ENTRY_0);
 
 EvtScript N(EVS_TexPan_Flowers) = {
     EVT_CALL(SetTexPanner, MODEL_hana2, TEX_PANNER_0)

@@ -476,8 +476,8 @@ MapConfig nok_maps[] = {
     { MAP_UNSPLIT(nok_03, 0x80240E40), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_04, 0x80240F40), .bgName = "nok_bg" },
     { MAP(nok_11), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(nok_12, 0x80242100), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(nok_13, 0x802414C0), .bgName = "nok_bg" },
+    { MAP(nok_12), .bgName = "nok_bg" },
+    { MAP(nok_13), .bgName = "nok_bg" },
     { MAP(nok_14), .bgName = "nok_bg" },
     { MAP(nok_15), .bgName = "nok_bg" },
 };
@@ -485,15 +485,15 @@ MapConfig nok_maps[] = {
 /// Star Region
 #include "area_hos/hos.h"
 MapConfig hos_maps[] = {
-    { MAP_UNSPLIT(hos_00, 0x80240D50), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(hos_01, 0x80240E40), .bgName = "hos_bg" },
+    { MAP_WITH_INIT(hos_00), .bgName = "nok_bg" },
+    { MAP(hos_01), .bgName = "hos_bg" },
     { MAP(hos_02), .bgName = "hos_bg" },
     { MAP(hos_03), .bgName = "hos_bg" },
-    { MAP_UNSPLIT(hos_04, 0x80240EE0), .bgName = "hos_bg" },
+    { MAP(hos_04), .bgName = "hos_bg" },
     { MAP(hos_05), .bgName = "hos_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(hos_06, 0x80242570), .bgName = "hos_bg" },
-    { MAP_UNSPLIT(hos_10, 0x80240CE0), .bgName = "hos_bg", .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(hos_20, 0x80240390), .bgName = "hos_bg" },
+    { MAP(hos_06), .bgName = "hos_bg" },
+    { MAP_WITH_INIT(hos_10), .bgName = "hos_bg" },
+    { MAP(hos_20), .bgName = "hos_bg" },
 };
 
 /// Bowser's Castle
@@ -740,7 +740,7 @@ MapConfig flo_maps[] = {
 /// Shiver Region
 #include "area_sam/sam.h"
 MapConfig sam_maps[] = {
-    { MAP_UNSPLIT(sam_01, 0x80241F70), .bgName = "yki_bg" },
+    { MAP(sam_01), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_02, 0x80241C00), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_03, 0x80240940), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_04, 0x80240740), .bgName = "yki_bg" },

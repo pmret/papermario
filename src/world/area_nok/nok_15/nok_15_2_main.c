@@ -4,35 +4,9 @@
 #include "world/common/entity/Pipe.inc.c"
 #include "world/common/entity/Pipe.data.inc.c"
 
-// EVT_EXIT_WALK without EVT_SET_GROUP
-EvtScript N(EVS_ExitWalk_nok_14_1) = {
-    EVT_CALL(UseExitHeading, 60, nok_15_ENTRY_0)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, EVT_PTR("nok_14"), nok_14_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
-};
-
-// EVT_EXIT_WALK without EVT_SET_GROUP
-EvtScript N(EVS_ExitWalk_trd_00_0) = {
-    EVT_CALL(UseExitHeading, 60, nok_15_ENTRY_1)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, EVT_PTR("trd_00"), trd_00_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
-};
-
-// EVT_EXIT_WALK without EVT_SET_GROUP
-EvtScript N(EVS_ExitWalk_trd_00_4) = {
-    EVT_CALL(UseExitHeading, 60, nok_15_ENTRY_2)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, EVT_PTR("trd_00"), trd_00_ENTRY_4)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
-};
+EvtScript N(EVS_ExitWalk_nok_14_1) = EVT_EXIT_WALK_NOK(60, nok_15_ENTRY_0, "nok_14", nok_14_ENTRY_1);
+EvtScript N(EVS_ExitWalk_trd_00_0) = EVT_EXIT_WALK_NOK(60, nok_15_ENTRY_1, "trd_00", trd_00_ENTRY_0);
+EvtScript N(EVS_ExitWalk_trd_00_4) = EVT_EXIT_WALK_NOK(60, nok_15_ENTRY_2, "trd_00", trd_00_ENTRY_4);
 
 BombTrigger N(BombPos_Wall) = {
     .pos = { -26.0f, 0.0f, -531.0f },

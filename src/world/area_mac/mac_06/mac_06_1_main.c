@@ -3,7 +3,7 @@
 #include "world/common/atomic/TexturePan.inc.c"
 #include "world/common/atomic/TexturePan.data.inc.c"
 
-ApiStatus N(GetWaveAmplitude)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetWaveAmplitude)) {
     Bytecode* args = script->ptrReadPos;
     s32 timeVar = *args++;
     s32 time = evt_get_variable(script, timeVar);

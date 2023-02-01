@@ -54,7 +54,7 @@ s32 N(LetterList_A)[] = {
     ITEM_NONE 
 };
 
-EvtScript N(EVS_ToadKid1_LetterPromptA) = {
+EvtScript N(EVS_LetterPrompt_ToadKid1A) = {
     EVT_CALL(N(LetterDelivery_Init), NPC_ToadKid_01,
         ANIM_ToadKid_Red_Talk, ANIM_ToadKid_Red_Idle,
         ITEM_LETTER20, ITEM_NONE,
@@ -66,13 +66,10 @@ EvtScript N(EVS_ToadKid1_LetterPromptA) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToadKid1_LetterRewardA) = {
-    EVT_IF_EQ(LVarC, 2)
+EvtScript N(EVS_LetterReward_ToadKid1A) = {
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
         EVT_CALL(SpeakToPlayer, NPC_ToadKid_02, ANIM_ToadKid_Yellow_Talk, ANIM_ToadKid_Yellow_Idle, 0, MSG_MAC_Station_004D)
-        EVT_SET(LVar0, ITEM_LETTER21)
-        EVT_SET(LVar1, 1)
-        EVT_EXEC_WAIT(N(GiveKeyReward))
-        EVT_CALL(AddKeyItem, ITEM_LETTER21)
+        EVT_GIVE_KEY_REWARD(ITEM_LETTER21)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -83,7 +80,7 @@ s32 N(LetterList_B)[] = {
     ITEM_NONE 
 };
 
-EvtScript N(EVS_ToadKid1_LetterPromptB) = {
+EvtScript N(EVS_LetterPrompt_ToadKid1B) = {
     EVT_CALL(N(LetterDelivery_Init), NPC_ToadKid_01,
         ANIM_ToadKid_Red_Talk, ANIM_ToadKid_Red_Idle,
         ITEM_LETTER22, ITEM_NONE,
@@ -95,9 +92,10 @@ EvtScript N(EVS_ToadKid1_LetterPromptB) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToadKid1_LetterRewardB) = {
-    EVT_IF_EQ(LVarC, 2)
+EvtScript N(EVS_LetterReward_ToadKid1B) = {
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
         EVT_CALL(SpeakToPlayer, NPC_ToadKid_02, ANIM_ToadKid_Yellow_Talk, ANIM_ToadKid_Yellow_Idle, 0, MSG_MAC_Station_0052)
+        // EVT_GIVE_KEY_REWARD(ITEM_LETTER_TO_FROSTT), but LVar1/LVar0 are set in wrong order
         EVT_SET(LVar1, 1)
         EVT_SET(LVar0, ITEM_LETTER_TO_FROSTT)
         EVT_EXEC_WAIT(N(GiveKeyReward))
@@ -363,13 +361,13 @@ EvtScript N(EVS_NpcInteract_ToadKid_02) = {
 
 EvtScript N(EVS_NpcInteract_ToadKid_01) = {
     EVT_EXEC_WAIT(N(EVS_NpcInteract_ToadKid_02))
-    EVT_EXEC_WAIT(N(EVS_ToadKid1_LetterPromptA))
-    EVT_EXEC_WAIT(N(EVS_ToadKid1_LetterRewardA))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_ToadKid1A))
+    EVT_EXEC_WAIT(N(EVS_LetterReward_ToadKid1A))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_ToadKid1_LetterPromptB))
-    EVT_EXEC_WAIT(N(EVS_ToadKid1_LetterRewardB))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_ToadKid1B))
+    EVT_EXEC_WAIT(N(EVS_LetterReward_ToadKid1B))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF
@@ -524,7 +522,7 @@ EvtScript N(EVS_NpcAI_ShyGuy) = {
     EVT_CALL(ShowSweat, -1, 1, -45, 1, 0, 0, 0, 0, 20)
     EVT_CALL(NpcMoveTo, NPC_SELF, 0, -650, 0)
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_WAIT(200)
     EVT_RETURN
     EVT_END

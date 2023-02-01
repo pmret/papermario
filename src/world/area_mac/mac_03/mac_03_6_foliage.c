@@ -2,7 +2,7 @@
 
 #include "common/foliage.inc.c"
 
-EvtScript N(Tree3_CallbackScript) = {
+EvtScript N(EVS_OnShakeTree3) = {
     EVT_IF_EQ(GF_MAC03_UnlockedPlayroom, TRUE)
         EVT_RETURN
     EVT_END_IF
@@ -100,7 +100,7 @@ ShakeTreeConfig N(ShakeTree_Tree3) = {
     .leaves = &N(Tree3_LeafModels),
     .trunk = &N(Tree3_TrunkModels),
     .vectors = &N(Tree3_Effects),
-    .callback = &N(Tree3_CallbackScript),
+    .callback = &N(EVS_OnShakeTree3),
 };
 
 //@bug x-position should be -265

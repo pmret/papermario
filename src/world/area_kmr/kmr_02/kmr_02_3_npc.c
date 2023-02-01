@@ -96,7 +96,7 @@ s32 N(LetterList_Goompapa)[] = {
     ITEM_NONE
 };
 
-EvtScript N(EVS_LetterCheck_Goompapa) = {
+EvtScript N(EVS_LetterPrompt_Goompapa) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle,
         ITEM_LETTER24, ITEM_NONE,
@@ -108,7 +108,7 @@ EvtScript N(EVS_LetterCheck_Goompapa) = {
 };
 
 EvtScript N(EVS_LetterReward_Goompapa) = {
-    EVT_IF_EQ(LVarC, 2)
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_BADGE_REWARD(ITEM_LUCKY_DAY)
     EVT_END_IF
     EVT_RETURN
@@ -120,7 +120,7 @@ s32 N(LetterList_Goompa)[] = {
     ITEM_NONE
 };
 
-EvtScript N(EVS_LetterCheck_Goompa) = {
+EvtScript N(EVS_LetterPrompt_Goompa) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle,
         ITEM_LETTER02, ITEM_NONE,
@@ -132,7 +132,7 @@ EvtScript N(EVS_LetterCheck_Goompa) = {
 };
 
 EvtScript N(EVS_LetterReward_Goompa) = {
-    EVT_IF_EQ(LVarC, 2)
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
     EVT_END_IF
     EVT_RETURN
@@ -933,9 +933,9 @@ EvtScript N(EVS_NpcInteract_Goompa) = {
                 EVT_CALL(EnablePartnerAI)
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_LetterCheck_Goompa))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Goompa))
     EVT_EXEC_WAIT(N(EVS_LetterReward_Goompa))
-    EVT_IF_NE(LVarC, 0)
+    EVT_IF_NE(LVarC, DELIVERY_NOT_POSSIBLE)
         EVT_RETURN
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_KootFavorCheck_Goompa))
@@ -1085,7 +1085,7 @@ EvtScript N(EVS_NpcInteract_Goompapa) = {
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_LetterCheck_Goompapa))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Goompapa))
     EVT_EXEC_WAIT(N(EVS_LetterReward_Goompapa))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
@@ -1358,7 +1358,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
 #include "world/common/todo/SyncStatusMenu.inc.c"
 
 NOP_FIX // TODO figure out BSS nop issue
-ApiStatus func_8024295C_8B29CC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_8024295C_8B29CC)) {
     Bytecode* args = script->ptrReadPos;
     s32 targetColR = evt_get_variable(script, *args++);
     s32 targetColG = evt_get_variable(script, *args++);
@@ -1464,7 +1464,7 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(N(func_80242BA8_8B2C18))
-    EVT_CALL(func_8024295C_8B29CC, 0, 0, 0, 255, 0)
+    EVT_CALL(N(func_8024295C_8B29CC), 0, 0, 0, 255, 0)
     EVT_CALL(N(func_80242F08_8B2F78))
     EVT_CALL(N(func_80242BC0_8B2C30), 30, 30, 30, 0, 0, 0, 0)
     EVT_CALL(SetGroupEnabled, MODEL_Root, 0)

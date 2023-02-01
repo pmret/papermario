@@ -108,19 +108,19 @@ EvtScript N(EVS_MonitorDemoState) = {
     EVT_END
 };
 
-s32 N(DemoSceneState) = 0;
+s32 N(DemoInitState) = 0;
 
 // duplicate of SetupDemoScene from trd_09
 API_CALLABLE(N(SetupDemoScene)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    switch (N(DemoSceneState)) {
+    switch (N(DemoInitState)) {
         case 0:
-            N(DemoSceneState) = 1;
+            N(DemoInitState) = 1;
             return ApiStatus_BLOCK;
         case 1:
         case 2:
-            N(DemoSceneState)++;
+            N(DemoInitState)++;
             return ApiStatus_BLOCK;
         case 3:
             wPartnerNpc->pos.x = playerStatus->position.x - 30.0f;

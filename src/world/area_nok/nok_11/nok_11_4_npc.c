@@ -311,8 +311,8 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
         EVT_SET(LVar0, -430)
     EVT_END_IF
     EVT_CALL(NpcMoveTo, NPC_KentCKoopa_02, LVar0, -37, 40)
-    EVT_CALL(SetNpcPos, NPC_KentCKoopa_02, 0, -1000, 0)
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_KentCKoopa_02, NPC_DISPOSE_LOCATION)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
     EVT_GOTO(100)
     EVT_LABEL(30)
@@ -338,7 +338,7 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
     EVT_CALL(NpcMoveTo, NPC_KentCKoopa_02, -167, -100, 20)
     EVT_CALL(SetNpcFlagBits, NPC_KentCKoopa_02, NPC_FLAG_100, FALSE)
     EVT_CALL(BindNpcInteract, NPC_KentCKoopa_02, EVT_PTR(N(EVS_NpcInteract_KentCKoopa_02)))
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim01)
     EVT_IF_EQ(AB_NOK_2, 0)
         EVT_SET(LVar0, 270)
@@ -455,7 +455,7 @@ StaticNpc N(NpcData_KoopaTroopa) = {
     .pos = { -350.0f, 0.0f, -30.0f },
     .yaw = 90,
     .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = KOOPA_TROOPA_DROPS_B,
+    .drops = KOOPA_TROOPA_NOK_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,

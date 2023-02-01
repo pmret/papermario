@@ -3,7 +3,7 @@ s32 N(LetterList_RussT)[] = {
     ITEM_NONE 
 };
 
-EvtScript N(EVS_RussT_LetterPrompt) = {
+EvtScript N(EVS_LetterPrompt_RussT) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_RussT, ANIM_RussT_Talk, ANIM_RussT_Idle,
         ITEM_LETTER04, ITEM_NONE,
@@ -14,12 +14,9 @@ EvtScript N(EVS_RussT_LetterPrompt) = {
     EVT_END
 };
 
-EvtScript N(EVS_RussT_LetterReward) = {
-    EVT_IF_EQ(LVarC, 2)
-        EVT_SET(LVar0, ITEM_STAR_PIECE)
-        EVT_SET(LVar1, ITEM_TYPE_STAR_PIECE)
-        EVT_EXEC_WAIT(N(GiveKeyReward))
-        EVT_CALL(AddStarPieces, 1)
+EvtScript N(EVS_LetterReward_RussT) = {
+    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+        EVT_GIVE_STAR_PIECE()
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -347,8 +344,8 @@ EvtScript N(EVS_NpcInteract_RussT) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
         EVT_IF_EQ(GF_MAC00_DictionaryReturned, FALSE)
             EVT_EXEC_WAIT(N(EVS_ItemPrompt_Dictionary))
-            EVT_EXEC_WAIT(N(EVS_RussT_LetterPrompt))
-            EVT_EXEC_WAIT(N(EVS_RussT_LetterReward))
+            EVT_EXEC_WAIT(N(EVS_LetterPrompt_RussT))
+            EVT_EXEC_WAIT(N(EVS_LetterReward_RussT))
             EVT_IF_NE(LVarC, 0)
                 EVT_RETURN
             EVT_END_IF
@@ -360,8 +357,8 @@ EvtScript N(EVS_NpcInteract_RussT) = {
         EVT_END_IF
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_RussT_GetHint))
-    EVT_EXEC_WAIT(N(EVS_RussT_LetterPrompt))
-    EVT_EXEC_WAIT(N(EVS_RussT_LetterReward))
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_RussT))
+    EVT_EXEC_WAIT(N(EVS_LetterReward_RussT))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF

@@ -27,8 +27,6 @@ enum {
     AF_TIK_05       = AreaFlag(5),
 };
 
-#define AF_TIK(index) AreaFlag(index)
-
 extern MapSettings tik_01_settings;
 extern MapSettings tik_02_settings;
 extern MapSettings tik_03_settings;
