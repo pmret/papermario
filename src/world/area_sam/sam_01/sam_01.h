@@ -25,35 +25,35 @@
 #include "sprite/npc/WorldLakilester.h"
 
 enum {
-	NPC_MayorPenguin_01         = 0,
-	NPC_MayorPenguin_02         = 1,
-	NPC_MayorPenguinWife        = 2,
-	NPC_PenguinPatrol           = 3,
-	NPC_Herringway              = 4,
-	NPC_Penguin_01              = 5,
-	NPC_Penguin_02              = 6,
-	NPC_Penguin_03              = 7,
-	NPC_Penguin_04              = 8,
-	NPC_Penguin_05              = 9,
-	NPC_Penguin_06              = 10,
-	NPC_Penguin_07              = 11,
-	NPC_Penguin_08              = 12,
-	NPC_Penguin_09              = 13,
-	NPC_ChuckQuizmo             = 14,
+    NPC_MayorPenguin            = 0,
+    NPC_MayorDummy              = 1,
+    NPC_MayorPenguinWife        = 2,
+    NPC_PenguinPatrol           = 3,
+    NPC_Herringway              = 4,
+    NPC_Penguin_01              = 5,
+    NPC_Penguin_02              = 6,
+    NPC_Penguin_03              = 7,
+    NPC_Penguin_04              = 8,
+    NPC_Penguin_05              = 9,
+    NPC_Penguin_06              = 10,
+    NPC_Penguin_07              = 11,
+    NPC_Penguin_08              = 12,
+    NPC_Penguin_09              = 13,
+    NPC_ChuckQuizmo             = 14,
 };
 
 enum {
-	MV_Unk_00			= MapVar(0),
-	MV_Unk_01			= MapVar(1),
-	MV_Unk_02			= MapVar(2),
-	MV_Unk_03			= MapVar(3),
-	MV_PresentItemID	= MapVar(4),
-	MV_BucketItemID		= MapVar(5),
-	MV_Unk_06			= MapVar(6),
+    MV_DialogueState_Penguin1   = MapVar(0),
+    MV_DialogueState_Penguin2   = MapVar(1),
+    MV_DialogueState_Penguin3   = MapVar(2),
+    MV_DialogueState_Penguin4   = MapVar(3),
+    MV_PresentItemID            = MapVar(4),
+    MV_BucketItemID             = MapVar(5),
+    MV_PlayerLeftOfMayor        = MapVar(6),
 };
 
 enum {
-	MF_Unk_00		= MapFlag(0),
+    MF_ContinueScene            = MapFlag(0),
 };
 
 #define NAMESPACE sam_01
@@ -66,6 +66,6 @@ extern EvtScript N(EVS_SetupRooms);
 extern EvtScript N(EVS_Scene_MysteryBegins);
 extern EvtScript N(EVS_Scene_MysterySolved);
 extern EvtScript N(EVS_MakeEntities);
-extern NpcGroupList N(DefaultNPCs);
-extern NpcGroupList N(NpcGroup1);
-extern NpcGroupList N(NpcGroup2);
+extern NpcGroupList N(BeforeNPCs);
+extern NpcGroupList N(MysteryNPCs);
+extern NpcGroupList N(AfterNPCs);

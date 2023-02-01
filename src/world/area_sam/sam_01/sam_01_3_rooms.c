@@ -32,8 +32,8 @@ EvtScript N(EVS_ToggleVis_MayorFoyer) = {
             EVT_SET(AF_SAM_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_s_naisou, 1)
             EVT_IF_GE(GB_StoryProgress, STORY_CH7_MAYOR_MURDER_SOLVED)
-                EVT_CALL(SetNpcPos, NPC_MayorPenguin_01, -275, 0, -200)
-                EVT_CALL(InterpNpcYaw, NPC_MayorPenguin_01, 180, 0)
+                EVT_CALL(SetNpcPos, NPC_MayorPenguin, -275, 0, -200)
+                EVT_CALL(InterpNpcYaw, NPC_MayorPenguin, 180, 0)
                 EVT_CALL(SetNpcPos, NPC_MayorPenguinWife, -300, 0, -50)
                 EVT_CALL(InterpNpcYaw, NPC_MayorPenguinWife, 0, 0)
             EVT_END_IF
@@ -192,20 +192,20 @@ EvtScript N(EVS_ToggleVis_LowerRightHouse) = {
 };
 
 s32 N(InteriorNPCs_MayorBefore)[] = {
-    NPC_MayorPenguin_01,
-	NPC_MayorPenguin_02,
-	NPC_MayorPenguinWife,
-	NPC_PenguinPatrol,
-	NPC_Herringway,
+    NPC_MayorPenguin,
+    NPC_MayorDummy,
+    NPC_MayorPenguinWife,
+    NPC_PenguinPatrol,
+    NPC_Herringway,
     NPC_Penguin_09,
     -1
 };
 
 s32 N(InteriorNPCs_MayorAfter)[] = {
-    NPC_MayorPenguin_01,
-	NPC_MayorPenguinWife,
-	NPC_PenguinPatrol,
-	NPC_Herringway,
+    NPC_MayorPenguin,
+    NPC_MayorPenguinWife,
+    NPC_PenguinPatrol,
+    NPC_Herringway,
     -1 
 };
 
