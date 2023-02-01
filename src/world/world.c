@@ -18,8 +18,8 @@
 s32 WorldReverbModeMapping[] = { 0, 1, 2, 3 };
 
 // bss
-MapSettings gMapSettings;
-MapConfig* gMapConfig;
+extern MapSettings gMapSettings;
+extern MapConfig* gMapConfig;
 
 typedef struct {
     /* 0x00 */ char name[16];

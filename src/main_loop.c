@@ -68,7 +68,7 @@ Gfx D_80074230[] = {
     gsSPEndDisplayList(),
 };
 
-s32 timeFreezeMode;
+extern s32 timeFreezeMode;
 
 extern s16 D_8009A690;
 
