@@ -50,13 +50,13 @@ EvtScript N(EVS_LetterPrompt_Fishmael) = {
 };
 
 s32 N(Kolorado_LetterList)[] = {
-    ITEM_LETTER25, ITEM_NONE 
+    ITEM_LETTER_TO_KOLORADO, ITEM_NONE 
 };
 
 EvtScript N(EVS_LetterPrompt_Kolorado) = {
     EVT_CALL(N(LetterDelivery_Init), NPC_Kolorado,
         ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
-        ITEM_LETTER25, ITEM_NONE,
+        ITEM_LETTER_TO_KOLORADO, ITEM_NONE,
         MSG_MAC_Port_0085, MSG_MAC_Port_0086,
         MSG_MAC_Port_0087, MSG_MAC_Port_0088,
         EVT_PTR(N(Kolorado_LetterList)))

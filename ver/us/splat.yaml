@@ -12103,7 +12103,7 @@ segments:
     - [0xB28370, c, jan_01_3_npc]
     - [0xB291C0, c, jan_01_4_entity]
     - [0xB291C0, c, jan_01_5_foliage]
-    - [0xB29400]  
+    - [0xB29400]
   - name: jan_02
     dir: world/area_jan/jan_02
     type: code
@@ -12116,22 +12116,22 @@ segments:
     - [0xB2C8A0, c, jan_02_3_npc]
     - [0xB2EB50, c, jan_02_4_entity]
     - [0xB2EB50, c, jan_02_5_foliage]
-    - [0xB2ED90]  
+    - [0xB2ED90]
   - name: jan_03
     dir: world/area_jan/jan_03
     type: code
     start: 0xB34BD0
     vram: 0x80240000
     subsegments:
-    - [0xB34BD0, c]
-    - [0xB37B70, c]
-    - [0xB37C20, c]
-    - [0xB37E60, data]
-    - [0xB39530, data]
-    - [0xB435D0, data]
-    - [0xB438B0, data]
-    - [0xB43B60, data]
-    - [0xB445A0]
+    - [0xB34BD0, c, jan_03_0_header]
+    - [0xB34BD0, c, jan_03_1_music]
+    - [0xB34BD0, c, jan_03_2_main]
+    - [0xB351F0, c, jan_03_3_shop]
+    - [0xB351F0, c, jan_03_4_npc]
+    - [0xB37B70, c, jan_03_5_entity]
+    - [0xB37C20, c, jan_03_6_rooms]
+    - [0xB37C20, c, jan_03_7_foliage]
+    - [0xB37E60]  
   - name: jan_04
     dir: world/area_jan/jan_04
     type: code

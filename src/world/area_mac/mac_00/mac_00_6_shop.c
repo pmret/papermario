@@ -37,13 +37,13 @@ ShopItemData N(Inventory)[] = {
 };
 
 ShopSellPriceData N(PriceList)[] = {
-    { .itemID = ITEM_DRIED_SHROOM,  .sellPrice = 3 },
-    { .itemID = ITEM_DRIED_PASTA,   .sellPrice = 5 },
-    { .itemID = ITEM_DUSTY_HAMMER,  .sellPrice = 3 },
+    { .itemID = ITEM_DRIED_SHROOM,  .sellPrice =  3 },
+    { .itemID = ITEM_DRIED_PASTA,   .sellPrice =  5 },
+    { .itemID = ITEM_DUSTY_HAMMER,  .sellPrice =  3 },
     { .itemID = ITEM_WHACKAS_BUMP,  .sellPrice = 64 },
     { .itemID = ITEM_DRIED_FRUIT,   .sellPrice = 20 },
-    { .itemID = ITEM_LIME,          .sellPrice = 4 },
-    { .itemID = ITEM_LEMON,         .sellPrice = 4 },
+    { .itemID = ITEM_LIME,          .sellPrice =  4 },
+    { .itemID = ITEM_LEMON,         .sellPrice =  4 },
     {}
 };
 

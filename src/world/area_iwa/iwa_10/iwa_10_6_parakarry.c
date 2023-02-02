@@ -158,7 +158,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
 
 s32 N(LetterList)[] = {
     ITEM_LETTER01,
-    ITEM_LETTER25,
+    ITEM_LETTER_TO_KOLORADO,
     ITEM_LETTER10,
     ITEM_NONE
 };
@@ -170,7 +170,7 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
         EVT_IF_EQ(GF_IWA01_Item_Letter01, TRUE)
             EVT_ADD(LVar0, 1)
         EVT_END_IF
-        EVT_IF_EQ(GF_IWA03_Item_Letter25, TRUE)
+        EVT_IF_EQ(GF_IWA03_ITEM_LETTER_TO_KOLORADO, TRUE)
             EVT_ADD(LVar0, 1)
         EVT_END_IF
         EVT_IF_EQ(GF_IWA04_Item_Letter10, TRUE)
@@ -255,7 +255,7 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
         EVT_WAIT(10)
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH2_001E)
         EVT_CALL(AddKeyItem, ITEM_LETTER01)
-        EVT_CALL(AddKeyItem, ITEM_LETTER25)
+        EVT_CALL(AddKeyItem, ITEM_LETTER_TO_KOLORADO)
         EVT_CALL(AddKeyItem, ITEM_LETTER10)
     EVT_END_IF
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))

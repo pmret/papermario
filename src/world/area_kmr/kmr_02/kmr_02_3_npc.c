@@ -2141,7 +2141,7 @@ EvtScript N(EVS_NpcIdle_Eldstar_Epilogue) = {
     EVT_CALL(SpeakToPlayer, NPC_Goombario, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 5, MSG_Outro_0010)
     EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, MSG_Outro_0011)
     EVT_THREAD
-        EVT_CALL(DropResizableItemEntity, ITEM_LETTER25, NPC_DISPOSE_LOCATION, ITEM_SPAWN_MODE_DECORATION, 0)
+        EVT_CALL(DropResizableItemEntity, ITEM_LETTER_TO_KOLORADO, NPC_DISPOSE_LOCATION, ITEM_SPAWN_MODE_DECORATION, 0)
         EVT_CALL(N(SetInvitationLetterScale))
         EVT_LOOP(20)
             EVT_CALL(GetNpcPos, NPC_Parakarry, LVar1, LVar2, LVar3)

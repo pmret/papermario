@@ -831,7 +831,7 @@ EvtScript N(EVS_Scene_EpilogueDelivery) = {
     EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_Outro_001A)
     EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, MSG_Outro_001B)
     EVT_THREAD
-        EVT_CALL(DropResizableItemEntity, ITEM_LETTER25, NPC_DISPOSE_LOCATION, ITEM_SPAWN_MODE_DECORATION, 0)
+        EVT_CALL(DropResizableItemEntity, ITEM_LETTER_TO_KOLORADO, NPC_DISPOSE_LOCATION, ITEM_SPAWN_MODE_DECORATION, 0)
         EVT_CALL(N(SetInvitationLetterScale))
         EVT_LOOP(20)
             EVT_CALL(GetNpcPos, NPC_Parakarry, LVar1, LVar2, LVar3)

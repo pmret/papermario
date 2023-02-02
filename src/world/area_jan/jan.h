@@ -24,6 +24,8 @@ enum {
     AF_JAN_03                   = AreaFlag(3),
     AF_JAN02_RaphaelComment     = AreaFlag(4),
     AF_JAN02_MetCouncillor      = AreaFlag(5),
+    AF_JAN_06                   = AreaFlag(6),
+    AF_JAN_07                   = AreaFlag(7),
     AF_JAN01_KoloradoShouting   = AreaFlag(9),
     AF_JAN00_TreeDrop1          = AreaFlag(13),
 
@@ -36,6 +38,8 @@ enum {
 
     AF_JAN02_TreeDrop2          = AreaFlag(20),
     AF_JAN02_TreeDrop3          = AreaFlag(21),
+    AF_JAN_16                   = AreaFlag(22),
+    AF_JAN03_TreeDrop1          = AreaFlag(23),
 };
 
 extern MapSettings jan_00_settings;

@@ -25,14 +25,14 @@ MAP_STATIC_PAD(1,normal_item);
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
-    ITEM_LETTER25,
+    ITEM_LETTER_TO_KOLORADO,
     ITEM_NONE
 };
 
 EvtScript N(EVS_DeliveryPrompt) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
-        ITEM_LETTER25, ITEM_NONE,
+        ITEM_LETTER_TO_KOLORADO, ITEM_NONE,
         MSG_CH2_004A, MSG_CH2_004B, MSG_CH2_004C, MSG_CH2_004D,
         EVT_PTR(N(LetterList)))
         EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))

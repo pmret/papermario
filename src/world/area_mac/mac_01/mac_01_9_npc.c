@@ -93,14 +93,14 @@ EvtScript N(EVS_LetterReward_MinhT) = {
 };
 
 s32 N(LetterList_Kolorado)[] = {
-    ITEM_LETTER25,
+    ITEM_LETTER_TO_KOLORADO,
     ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_Kolorado) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
-        ITEM_LETTER25, ITEM_NONE,
+        ITEM_LETTER_TO_KOLORADO, ITEM_NONE,
         MSG_MAC_Plaza_00E0, MSG_MAC_Plaza_00E1, MSG_MAC_Plaza_00E2, MSG_MAC_Plaza_00E3,
         EVT_PTR(N(LetterList_Kolorado)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))

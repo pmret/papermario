@@ -11,7 +11,7 @@
 
 #include "world/common/todo/SwitchToPartner.inc.c"
 
-EvtScript N(EVS_GetSavedYoshiCount) = {
+EvtScript N(EVS_GetRescuedYoshiCount) = {
     EVT_SET(LVar0, 0)
     EVT_ADD(LVar0, GF_JAN05_SavedYoshi)
     EVT_ADD(LVar0, GF_JAN07_SavedYoshi)
@@ -208,11 +208,11 @@ EvtScript N(EVS_NpcInit_Councillor) = {
         EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_LeadersFriend_BowSit)
         EVT_END_IF
-EVT_END_SWITCH
-EVT_CALL(BindNpcIdle, NPC_SELF, 0)
-EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Councillor)))
-EVT_RETURN
-EVT_END
+    EVT_END_SWITCH
+    EVT_CALL(BindNpcIdle, NPC_SELF, 0)
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Councillor)))
+    EVT_RETURN
+    EVT_END
 };
 
 EvtScript N(EVS_NpcInteract_Yoshi_01) = {
@@ -220,7 +220,7 @@ EvtScript N(EVS_NpcInteract_Yoshi_01) = {
         EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Red_Talk, ANIM_Yoshi_Red_Idle, 0, MSG_CH5_003D)
         EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_EXEC_WAIT(N(EVS_GetSavedYoshiCount))
+            EVT_EXEC_WAIT(N(EVS_GetRescuedYoshiCount))
             EVT_IF_EQ(LVar0, 0)
                 EVT_IF_EQ(GF_JAN03_AgreedToRescueChildren, FALSE)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Red_CryTalk, ANIM_Yoshi_Red_Cry, 0, MSG_CH5_003E)
@@ -275,7 +275,7 @@ EvtScript N(EVS_NpcInteract_Yoshi_02) = {
         EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Blue_Talk, ANIM_Yoshi_Blue_Idle, 0, MSG_CH5_0046)
         EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_EXEC_WAIT(N(EVS_GetSavedYoshiCount))
+            EVT_EXEC_WAIT(N(EVS_GetRescuedYoshiCount))
             EVT_IF_EQ(LVar0, 0)
                 EVT_IF_EQ(GF_JAN03_AgreedToRescueChildren, FALSE)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Blue_CryTalk, ANIM_Yoshi_Blue_Cry, 0, MSG_CH5_0047)
@@ -330,7 +330,7 @@ EvtScript N(EVS_NpcInteract_Yoshi_03) = {
         EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Purple_Talk, ANIM_Yoshi_Purple_Idle, 0, MSG_CH5_004F)
         EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_EXEC_WAIT(N(EVS_GetSavedYoshiCount))
+            EVT_EXEC_WAIT(N(EVS_GetRescuedYoshiCount))
             EVT_IF_EQ(LVar0, 0)
                 EVT_IF_EQ(GF_JAN03_AgreedToRescueChildren, FALSE)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Purple_CryTalk, ANIM_Yoshi_Purple_Cry, 0, MSG_CH5_0050)
