@@ -10,7 +10,7 @@ TweesterPath N(DefaultTweesterPath) = {
 };
 
 TweesterPath* N(TweesterPaths)[] = {
-    N(DefaultTweesterPath),
+    &N(DefaultTweesterPath),
     PTR_LIST_END
 };
 

@@ -10,7 +10,7 @@ TweesterPath N(D_802403C0_93AB20) = {
 };
 
 TweesterPath* N(D_802403F4_93AB54)[] = {
-    N(D_802403C0_93AB20),
+    &N(D_802403C0_93AB20),
     PTR_LIST_END
 };
 
