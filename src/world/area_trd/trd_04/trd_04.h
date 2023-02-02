@@ -18,7 +18,7 @@ enum {
 };
 
 enum {
-    MV_LetterItemID           = MapVar(0),
+    MV_Unk_00           = MapVar(0),
     MV_Unk_01           = MapVar(1),
     MV_Unk_02           = MapVar(2),
 };

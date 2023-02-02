@@ -7,7 +7,7 @@
 EvtScript N(EVS_NpcIdle_Bzzap) = {
     EVT_LABEL(100)
     EVT_WAIT(1)
-    EVT_IF_EQ(MV_LetterItemID, 0)
+    EVT_IF_EQ(MV_Unk_00, 0)
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(SetNpcPos, NPC_SELF, -280, 108, 0)

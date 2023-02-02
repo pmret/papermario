@@ -394,9 +394,9 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     EVT_IF_NE(LVar0, PARTNER_BOW)
         EVT_CALL(N(SwitchToPartner), PARTNER_BOW)
         EVT_THREAD
-            EVT_SET(MV_LetterItemID, 0)
+            EVT_SET(MV_Unk_00, 0)
             EVT_CALL(ShowMessageAtScreenPos, MSG_CH3_00A2, 160, 40)
-            EVT_SET(MV_LetterItemID, 1)
+            EVT_SET(MV_Unk_00, 1)
         EVT_END_THREAD
         EVT_WAIT(50)
         EVT_CALL(DisablePartnerAI, 0)
@@ -404,7 +404,7 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
         EVT_CALL(EnablePartnerAI)
         EVT_LOOP(0)
             EVT_WAIT(1)
-            EVT_IF_EQ(MV_LetterItemID, 1)
+            EVT_IF_EQ(MV_Unk_00, 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP

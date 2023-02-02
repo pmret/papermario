@@ -5,7 +5,7 @@
 #include "world/common/atomic/UnkFunc27.inc.c"
 
 API_CALLABLE(N(HideSun)) {
-    EffectInstance* effect = (EffectInstance*)evt_get_variable(script, MV_LetterItemID);
+    EffectInstance* effect = (EffectInstance*)evt_get_variable(script, MV_Unk_00);
 
     effect->data.sun->targetAlpha = 0;
     return ApiStatus_DONE2;

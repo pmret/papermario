@@ -18,7 +18,7 @@ enum {
 };
 
 enum {
-    MV_LetterItemID           = MapVar(0),
+    MV_Unk_00           = MapVar(0),
 };
 
 #define NAMESPACE sbk_02

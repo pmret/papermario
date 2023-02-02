@@ -36,7 +36,7 @@ EvtScript N(D_802431F0_BB0B30) = {
     EVT_CALL(TranslateModel, MODEL_o507, LVar0, 0, LVar0)
     EVT_CALL(TranslateModel, MODEL_o508, LVar0, 0, LVar0)
     EVT_WAIT(1)
-    EVT_SET(MV_LetterItemID, 1)
+    EVT_SET(MV_Unk_00, 1)
     EVT_RETURN
     EVT_END
 };

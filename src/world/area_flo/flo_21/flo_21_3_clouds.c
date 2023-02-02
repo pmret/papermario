@@ -16,7 +16,7 @@ s32 N(UnusedScaleVectors)[] = {
 };
 
 EvtScript N(EVS_UnkInit_00) = {
-    EVT_ADDF(MV_LetterItemID, EVT_FLOAT(-1.5))
+    EVT_ADDF(MV_Unk_00, EVT_FLOAT(-1.5))
     EVT_RETURN
     EVT_END
 };

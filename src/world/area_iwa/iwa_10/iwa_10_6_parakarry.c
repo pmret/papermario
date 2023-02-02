@@ -170,7 +170,7 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
         EVT_IF_EQ(GF_IWA01_Item_Letter01, TRUE)
             EVT_ADD(LVar0, 1)
         EVT_END_IF
-        EVT_IF_EQ(GF_IWA03_ITEM_LETTER_TO_KOLORADO, TRUE)
+        EVT_IF_EQ(GF_IWA03_Item_LettertoKolorado, TRUE)
             EVT_ADD(LVar0, 1)
         EVT_END_IF
         EVT_IF_EQ(GF_IWA04_Item_Letter10, TRUE)

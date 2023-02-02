@@ -23,7 +23,7 @@ EvtScript N(EVS_SpawnSwitch) = {
     EVT_CALL(MakeLerp, 200, -10, 25, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetEntityPosition), MV_LetterItemID, -10, LVar0, 10)
+        EVT_CALL(N(SetEntityPosition), MV_Unk_00, -10, LVar0, 10)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
@@ -60,10 +60,10 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_IF_EQ(GF_TIK09_WarpPipe, FALSE)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_BlueSwitch), NPC_DISPOSE_LOCATION, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_TIK_05))
-        EVT_SET(MV_LetterItemID, LVar0)
+        EVT_SET(MV_Unk_00, LVar0)
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_PlayRisingPipeSound)), TRIGGER_AREA_FLAG_SET, AF_TIK_05, 1, 0)
         EVT_IF_EQ(GF_TIK09_Defeated_Ambush, TRUE)
-            EVT_CALL(N(SetEntityPosition), MV_LetterItemID, -10, -10, 10)
+            EVT_CALL(N(SetEntityPosition), MV_Unk_00, -10, -10, 10)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(MakeEntity, EVT_PTR(Entity_BlueWarpPipe), -30, -10, -40, 0, tik_09_ENTRY_2, EVT_PTR(N(EVS_GotoMap_mim_11_3)), EVT_INDEX_OF_GAME_FLAG(GF_TIK09_WarpPipe), MAKE_ENTITY_END)
