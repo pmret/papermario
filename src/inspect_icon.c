@@ -1,8 +1,8 @@
 #include "common.h"
 
-#define NAMESPACE E20110
+#define NAMESPACE inspect_icon
 
-typedef struct TempE20110 {
+typedef struct InspectIconData {
     /* 0x00 */ Vec3f pos;
     /* 0x0C */ f32 unk_0C;
     /* 0x10 */ f32 scale;
@@ -15,16 +15,16 @@ typedef struct TempE20110 {
     /* 0x23 */ u8 unk_23;
     /* 0x24 */ u8 unk_24;
     /* 0x25 */ char unk_25[0x3];
-} TempE20110; // size = 0x28
+} InspectIconData; // size = 0x28
 
-BSS TempE20110 D_802B7DA0;
+BSS InspectIconData D_802B7DA0;
 
 #include "inspect_icon.png.h"
 #include "inspect_icon.png.inc.c"
 #include "inspect_icon.pal.inc.c"
 #include "inspect_icon_dlist.gfx.inc.c"
 
-TempE20110* D_802B7CB8_E20DC8 = &D_802B7DA0;
+InspectIconData* D_802B7CB8_E20DC8 = &D_802B7DA0;
 
 #include "common/UnkAngleFunc1.inc.c"
 
@@ -212,7 +212,7 @@ void func_802B7728_E20838(void) {
                 scale -= 360.0f;
             }
             D_802B7CB8_E20DC8->unk_0C = scale;
-            var_s0 = E20110_UnkAngleFunc1(scale);
+            var_s0 = N(UnkAngleFunc1)(scale);
             break;
         case 3:
             scale = D_802B7CB8_E20DC8->unk_0C;
@@ -228,7 +228,7 @@ void func_802B7728_E20838(void) {
             if ((scale >= 70.0f && scale <= 110.0f) || (scale >= 250.0f && scale <= 290.0f)) {
                 InteractNotificationCallback = func_802B79C8_E20AD8;
             }
-            var_s0 = E20110_UnkAngleFunc1(scale);
+            var_s0 = N(UnkAngleFunc1)(scale);
             break;
     }
     D_802B7CB8_E20DC8->unk_24 = var_s0;

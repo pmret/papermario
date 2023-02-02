@@ -5,7 +5,7 @@
 #include "message_ids.h"
 #include "entity.h"
 
-typedef struct UnkE20EB0 {
+typedef struct SpeechBubbleData {
     /* 0x00 */ Npc* unk_00;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
@@ -16,9 +16,9 @@ typedef struct UnkE20EB0 {
     /* 0x24 */ char unk_24[6];
     /* 0x2A */ u8 unk_2A;
     /* 0x2B */ u8 unk_2B;
-} UnkE20EB0; /* size = 0x2C */
+} SpeechBubbleData; /* size = 0x2C */
 
-extern UnkE20EB0* D_802B79A8_E21858;
+extern SpeechBubbleData* D_802B79A8_E21858;
 
 BSS s32 D_802BDF30;
 BSS s32 D_802BDF34;

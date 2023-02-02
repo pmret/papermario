@@ -23,7 +23,7 @@ void is_debug_init(void);
 f32 signF(f32 val);
 
 s32 func_8002ACDC(void);
-void func_8002D160(void);
+void load_obfuscation_shims(void);
 
 void* heap_malloc(s32 size);
 void* _heap_malloc(HeapNode* head, u32 size);
@@ -748,10 +748,10 @@ void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void));
 
 void func_80260A60(void);
 
-void func_802B2000(void);
-void func_802B203C(void);
-void func_802B2078(void);
-void func_802B20B4(void);
+void shim_create_audio_system_obfuscated(void);
+void shim_load_engine_data_obfuscated(void);
+void shim_general_heap_create_obfuscated(void);
+void shim_battle_heap_create_obfuscated(void);
 void func_802B7000_E225B0(void);
 void func_802B70B4_E201C4(void);
 void func_802B7140(void);

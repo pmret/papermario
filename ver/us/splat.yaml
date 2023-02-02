@@ -57,7 +57,7 @@ segments:
     - [0x7340, c, crash_screen]
     - [0x7E40, c, os/nusys/nugfxtaskmgr, -fforce-addr]
     - [0x8230, c, os/nusys/nusimgr]
-    - [0x8560, c]
+    - [0x8560, c, load_obfuscation_shims]
     - [0x8800, c]
     - [0x9D10, c, 9d10_len_1080]
     - [0xAD90, c, ad90_len_2880]
@@ -2548,30 +2548,35 @@ segments:
   - [0x315B80, pm_sprite_shading_profiles, sprite_shading_profiles]
   - type: code
     start: 0x3169F0
+    name: create_audio_system_obfuscated
     vram: 0x80200000
     subsegments:
-    - [0x3169F0, c, 3169f0]
+    - [0x3169F0, c, create_audio_system_obfuscated]
   - type: code
     start: 0x316A70
     vram: 0x80200080
-    follows_vram: 3169F0
+    name: load_engine_data_obfuscated
+    follows_vram: create_audio_system_obfuscated
     subsegments:
-    - [0x316A70, c, 316a70]
+    - [0x316A70, c, load_engine_data_obfuscated]
   - type: code
     start: 0x316C00
+    name: general_heap_create_obfuscated
     vram: 0x802AE000
     subsegments:
-    - [0x316C00, c]
+    - [0x316C00, c, general_heap_create_obfuscated]
   - type: code
     start: 0x316D90
+    name: battle_heap_create_obfuscated
     vram: 0x802AE000
     subsegments:
-    - [0x316D90, c, 316d90]
+    - [0x316D90, c, battle_heap_create_obfuscated]
   - type: code
     start: 0x316F30
+    name: obfuscation_shims
     vram: 0x802B2000
     subsegments:
-    - [0x316F30, c, 316f30]
+    - [0x316F30, c, obfuscation_shims]
   - type: code
     dir: world/partner
     name: world_partner_goombario
@@ -2662,6 +2667,7 @@ segments:
     - [0x325160]
   - type: code
     start: 0x3251D0
+    name: world_use_item
     vram: 0x802C0000
     subsegments:
     - [0x3251D0, c, world_use_item]
@@ -14737,12 +14743,13 @@ segments:
     - [0xE1EC20]
   - type: code
     start: 0xE20110
+    name: inspect_icon
     vram: 0x802B7000
     subsegments:
-    - [0xE20110, c, E20110]
+    - [0xE20110, c, inspect_icon]
     - start: 0xE20B30
       type: .data
-      name: E20110
+      name: inspect_icon
       subsegments:
       - [0xE20B30, ci4, inspect_icon, 32, 32]
       - [0xE20D30, palette, inspect_icon]
@@ -14751,12 +14758,13 @@ segments:
     - [0xE20DD0]
   - type: code
     start: 0xE20EB0
+    name: speech_bubble
     vram: 0x802B7000
     subsegments:
-    - [0xE20EB0, c, e20eb0]
+    - [0xE20EB0, c, speech_bubble]
     - start: 0xE215C0
       type: .data
-      name: e20eb0
+      name: speech_bubble
       subsegments:
       - [0xE215C0, ci4, speech_bubble, 32, 32]
       - [0xE217C0, palette, speech_bubble]
@@ -14765,12 +14773,13 @@ segments:
     - [0xE21860]
   - type: code
     start: 0xE21870
+    name: pulse_stone
     vram: 0x802B7000
     subsegments:
-    - [0xE21870, c, E21870]
+    - [0xE21870, c, pulse_stone]
     - start: 0xE21EB0
       type: .data
-      name: E21870
+      name: pulse_stone
       subsegments:
       - [0xE21EB0, ci4, pulse_stone, 56, 56]
       - [0xE224D0, palette, pulse_stone]
@@ -14780,12 +14789,13 @@ segments:
     - [0xE22590]
   - type: code
     start: 0xE225B0
+    name: i_spy
     vram: 0x802B7000
     subsegments:
-    - [0xE225B0, c, E225B0]
+    - [0xE225B0, c, i_spy]
     - start: 0xE22B30
       type: .data
-      name: E225B0
+      name: i_spy
       subsegments:
       - [0xE22B30, ci4, i_spy, 56, 56]
       - [0xE23150, palette, i_spy]

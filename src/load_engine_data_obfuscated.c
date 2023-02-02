@@ -6,11 +6,11 @@ extern u8 obfuscated_load_engine_data[];
 
 #ifdef SHIFT
 void load_engine_data(void);
-void func_80200080(void) {
+void load_engine_data_obfuscated(void) {
     load_engine_data();
 }
 #else
-void func_80200080(void) {
+void load_engine_data_obfuscated(void) {
     s32 seed = 0x3C01A775;
     u32 thisInsn = 0xB0018FFC;
     HeapNode*(*load_engine_data)(void) = (HeapNode* (*)(void)) obfuscated_load_engine_data; // load_engine_data - ????????
@@ -23,7 +23,7 @@ void func_80200080(void) {
 
     prevInsn = 0;
 
-    for (it = (u32*) _3169F0_ROM_START; it < (u32*) _3169F0_ROM_END; it++) {
+    for (it = (u32*) create_audio_system_obfuscated_ROM_START; it < (u32*) create_audio_system_obfuscated_ROM_END; it++) {
         while (IO_READ(PI_STATUS_REG) & (PI_STATUS_DMA_BUSY | PI_STATUS_IO_BUSY));
         thisInsn = IO_READ(it + 0x4000000); // ???
 

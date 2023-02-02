@@ -1,6 +1,6 @@
 #include "common.h"
 
-typedef struct TempE21870 {
+typedef struct PulseStoneData {
     /* 0x00 */ Vec3f pos;
     /* 0x0C */ f32 scale;
     /* 0x10 */ char unk_10[0x8];
@@ -8,9 +8,9 @@ typedef struct TempE21870 {
     /* 0x1C */ char unk_1C[0x4];
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
-} TempE21870; // size = 0x28
+} PulseStoneData; // size = 0x28
 
-BSS TempE21870 D_802B7D40;
+BSS PulseStoneData D_802B7D40;
 
 #include "pulse_stone.png.h"
 #include "pulse_stone.png.inc.c"
@@ -18,7 +18,7 @@ BSS TempE21870 D_802B7D40;
 #include "pulse_stone.flash.pal.inc.c"
 #include "pulse_stone_dlist.gfx.inc.c"
 
-TempE21870* D_802B7D18_E22588 = &D_802B7D40;
+PulseStoneData* D_802B7D18_E22588 = &D_802B7D40;
 
 void func_802B74F0(void);
 

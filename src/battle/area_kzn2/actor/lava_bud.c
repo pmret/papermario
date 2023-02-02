@@ -35,10 +35,9 @@ enum {
     VINE_2      = 2,
 };
 
-// TODO shiftability fix
 enum {
-    VINE_1_BASE = 0x80231000,
-    VINE_2_BASE = 0x8022E000,
+    VINE_1_BASE = AUX_DATA_ADDR_1,
+    VINE_2_BASE = AUX_DATA_ADDR_2,
 };
 
 s32 N(idleAnimations)[] = {

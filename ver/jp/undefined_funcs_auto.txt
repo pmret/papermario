@@ -1,5 +1,5 @@
-func_802B2000 = 0x802B2000;
-func_802B203C = 0x802B203C;
+shim_create_audio_system_obfuscated = 0x802B2000;
+shim_load_engine_data_obfuscated = 0x802B203C;
 func_80120CF8 = 0x80120CF8;
 func_80128614 = 0x80128614;
 func_8014A910 = 0x8014A910;

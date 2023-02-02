@@ -278,12 +278,11 @@ enum {
     VINE_4      = 4,
 };
 
-// TODO shiftability fix
 enum {
-    VINE_0_BASE = 0x80234000,
-    VINE_1_BASE = 0x80231000,
-    VINE_2_BASE = 0x8022E000,
-    VINE_3_BASE = 0x8022C000,
+    VINE_0_BASE = AUX_DATA_ADDR_0,
+    VINE_1_BASE = AUX_DATA_ADDR_1,
+    VINE_2_BASE = AUX_DATA_ADDR_2,
+    VINE_3_BASE = AUX_DATA_ADDR_3,
 };
 
 BSS LavaPiranhaVine N(VineData)[NUM_VINES];
