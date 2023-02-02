@@ -941,6 +941,7 @@ segments:
     - [0x10C880]
   - type: code
     name: font_width
+    follows_vram: entity
     start: 0x10CC10
     vram: 0x802EB3D0
     subsegments:

@@ -8,6 +8,7 @@
 #include "effects.h"
 #include "animation_script.h"
 #include "entity.h"
+#include "ld_addrs.h"
 
 #define NAMESPACE b_area_kzn2_lava_piranha
 
@@ -278,12 +279,10 @@ enum {
     VINE_4      = 4,
 };
 
-enum {
-    VINE_0_BASE = AUX_DATA_ADDR_0,
-    VINE_1_BASE = AUX_DATA_ADDR_1,
-    VINE_2_BASE = AUX_DATA_ADDR_2,
-    VINE_3_BASE = AUX_DATA_ADDR_3,
-};
+#define VINE_0_BASE AUX_DATA_ADDR_0
+#define VINE_1_BASE AUX_DATA_ADDR_1
+#define VINE_2_BASE AUX_DATA_ADDR_2
+#define VINE_3_BASE AUX_DATA_ADDR_3
 
 BSS LavaPiranhaVine N(VineData)[NUM_VINES];
 BSS s32 N(VineRenderState);

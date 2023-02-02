@@ -4,6 +4,7 @@
 #include "sprite/npc/LavaBud.h"
 #include "sprite/npc/PetitPiranha.h"
 #include "effects.h"
+#include "ld_addrs.h"
 
 #define NAMESPACE b_area_kzn2_lava_bud
 
@@ -35,10 +36,8 @@ enum {
     VINE_2      = 2,
 };
 
-enum {
-    VINE_1_BASE = AUX_DATA_ADDR_1,
-    VINE_2_BASE = AUX_DATA_ADDR_2,
-};
+#define VINE_1_BASE AUX_DATA_ADDR_1
+#define VINE_2_BASE AUX_DATA_ADDR_2
 
 s32 N(idleAnimations)[] = {
     STATUS_NORMAL, ANIM_LavaBud_Anim03,
