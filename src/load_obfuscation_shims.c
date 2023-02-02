@@ -3,19 +3,19 @@
 #include "ld_addrs.h"
 #include "mips.h"
 
-extern s8 obfuscated__316F30_ROM_START[];
-extern s8 obfuscated__316F30_VRAM[];
+extern s8 obfuscated_obfuscation_shims_ROM_START[];
+extern s8 obfuscated_obfuscation_shims_VRAM[];
 
 #ifdef SHIFT
-void func_8002D160(void) {
-    dma_copy(_316F30_ROM_START, _316F30_ROM_END, _316F30_VRAM);
+void load_obfuscation_shims(void) {
+    dma_copy(obfuscation_shims_ROM_START, obfuscation_shims_ROM_END, obfuscation_shims_VRAM);
 }
 #else
-void func_8002D160(void) {
+void load_obfuscation_shims(void) {
     s32 (*readFunc)(OSPiHandle*, u32, u32*);
     s32 (*readFunc2)(OSPiHandle*, u32, u32*);
-    s8* vramDest = obfuscated__316F30_VRAM;
-    s8* romStart = obfuscated__316F30_ROM_START;
+    s8* vramDest = obfuscated_obfuscation_shims_VRAM;
+    s8* romStart = obfuscated_obfuscation_shims_ROM_START;
     s32 seed;
     u32 hash;
     u32 thisInsn;
@@ -31,7 +31,7 @@ void func_8002D160(void) {
     seed -= thisInsn;
     prevInsn = 0;
 
-    for (it = _316D90_ROM_START; it < _316D90_ROM_END; it += 4) {
+    for (it = battle_heap_create_obfuscated_ROM_START; it < battle_heap_create_obfuscated_ROM_END; it += 4) {
         readFunc(nuPiCartHandle, (u32)it, &thisInsn);
         hash += LOWER(thisInsn) + UPPER(thisInsn);
 
@@ -58,7 +58,7 @@ void func_8002D160(void) {
     seed -= thisInsn2;
     prevInsn = 0;
 
-    for (it = _316F30_ROM_START; it < _316F30_ROM_END; it += 4) {
+    for (it = obfuscation_shims_ROM_START; it < obfuscation_shims_ROM_END; it += 4) {
         readFunc2(nuPiCartHandle, (u32)it, &thisInsn2);
         hash += LOWER(thisInsn2) + UPPER(thisInsn2);
 
@@ -76,6 +76,6 @@ void func_8002D160(void) {
     }
     romStart += seed + 0xED41C - hash;
 
-    dma_copy(romStart, _316F30_ROM_END, vramDest);
+    dma_copy(romStart, obfuscation_shims_ROM_END, vramDest);
 }
 #endif

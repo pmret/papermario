@@ -4,11 +4,11 @@ extern u8 obfuscated_create_audio_system[];
 
 #ifdef SHIFT
 void create_audio_system(void);
-void func_80200000(void) {
+void create_audio_system_obfuscated(void) {
     create_audio_system();
 }
 #else
-void func_80200000(void) {
+void create_audio_system_obfuscated(void) {
     u32 t0 = 0xAC29007B;
     u32 t1 = 0xB00006A8;
     void (*create_audio_system)(void) = (void (*)(void)) obfuscated_create_audio_system;

@@ -28,6 +28,8 @@ void state_init_pause(void) {
     set_windows_visible(WINDOW_GROUP_PAUSE_MENU);
 }
 
+extern Addr D_80200000;
+
 void state_step_pause(void) {
     s32 oldIsBattle = D_800A0921;
 
@@ -70,7 +72,7 @@ void state_step_pause(void) {
                     clear_entity_models();
                     clear_animator_list();
                     clear_worker_list();
-                    hud_element_set_aux_cache(_3169F0_VRAM, 0x38000);
+                    hud_element_set_aux_cache(D_80200000, 0x38000); // TODO shiftability (what should this symbol be?)
                     hud_element_clear_cache();
                     reset_status_menu();
                     clear_item_entity_data();

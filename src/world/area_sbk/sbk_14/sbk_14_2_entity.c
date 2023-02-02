@@ -1,16 +1,16 @@
 #include "sbk_14.h"
 #include "entity.h"
 
-TweesterPath N(D_80240440_936B20)[] = {
-    { -65, 0, 217 },
-    { -262, 0, -64 },
-    { 57, 0, -286 },
-    { 327, 0, 8 },
-    { TWEESTER_PATH_LOOP }
+TweesterPath N(D_80240440_936B20) = {
+    -65, 0, 217,
+    -262, 0, -64,
+    57, 0, -286,
+    327, 0, 8,
+    TWEESTER_PATH_LOOP
 };
 
 TweesterPath* N(D_80240474_936B54)[] = {
-    N(D_80240440_936B20),
+    &N(D_80240440_936B20),
     PTR_LIST_END
 };
 
