@@ -9,7 +9,7 @@
 #include "world/common/npc/YoshiKid_Patrol.inc.c"
 
 #define NAME_SUFFIX _Unused
-// included again later on in the file, this copy is not used
+// included again later in this file; this copy is not used
 #include "world/common/npc/Raven.inc.c"
 #define NAME_SUFFIX
 
