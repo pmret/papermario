@@ -76,7 +76,7 @@ void state_step_battle(void) {
             clear_npcs();
             clear_entity_data(1);
             clear_trigger_data();
-            dma_copy(_16C8E0_ROM_START, _16C8E0_ROM_END, _16C8E0_VRAM);
+            dma_copy(battle_code_ROM_START, battle_code_ROM_END, battle_code_VRAM);
             initialize_battle();
             btl_save_world_cameras();
             load_battle_section();
