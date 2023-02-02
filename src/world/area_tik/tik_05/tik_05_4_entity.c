@@ -29,7 +29,7 @@ EvtScript N(EVS_BreakBlock_DropSpring) = {
     EVT_CALL(MakeLerp, 75, 105, 8, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetEntityPosition), MV_Unk_00, LVar5, LVar0, 0)
+        EVT_CALL(N(SetEntityPosition), MV_LetterItemID, LVar5, LVar0, 0)
         EVT_WAIT(1)
         EVT_SUB(LVar5, 2)
         EVT_IF_EQ(LVar1, 0)
@@ -39,7 +39,7 @@ EvtScript N(EVS_BreakBlock_DropSpring) = {
     EVT_CALL(MakeLerp, LVar0, -10, 22, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetEntityPosition), MV_Unk_00, LVar5, LVar0, 0)
+        EVT_CALL(N(SetEntityPosition), MV_LetterItemID, LVar5, LVar0, 0)
         EVT_WAIT(1)
         EVT_SUB(LVar5, 2)
         EVT_IF_EQ(LVar1, 0)
@@ -48,7 +48,7 @@ EvtScript N(EVS_BreakBlock_DropSpring) = {
     EVT_END_LOOP
     EVT_CALL(PlaySoundAt, SOUND_48, 0, LVar5, LVar0, 0)
     EVT_CALL(PlaySoundAt, SOUND_2086, 0, LVar5, LVar0, 0)
-    EVT_CALL(N(PlaySpringAnimation), MV_Unk_00)
+    EVT_CALL(N(PlaySpringAnimation), MV_LetterItemID)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -64,7 +64,7 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_CALL(AssignScript, EVT_PTR(N(EVS_BreakBlock_DropSpring)))
     EVT_IF_EQ(GF_TIK05_SpringBrick, FALSE)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_SimpleSpring), 25, 75, 0, 0, 100, MAKE_ENTITY_END)
-        EVT_SET(MV_Unk_00, LVar0)
+        EVT_SET(MV_LetterItemID, LVar0)
     EVT_ELSE
         EVT_CALL(MakeEntity, EVT_PTR(Entity_SimpleSpring), -35, -10, 0, 0, 100, MAKE_ENTITY_END)
     EVT_END_IF

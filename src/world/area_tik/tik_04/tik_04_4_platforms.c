@@ -90,7 +90,7 @@ EvtScript N(EVS_UpdatePlatforms) = {
         EVT_IF_LT(LVar0, EVT_FLOAT(-120.0))
             EVT_ADDF(LVar0, EVT_FLOAT(0.5))
         EVT_END_IF
-        EVT_USE_ARRAY(MV_Unk_00)
+        EVT_USE_ARRAY(MV_LetterItemID)
         EVT_CALL(N(UpdatePlatformShadows))
         EVT_WAIT(1)
         EVT_CALL(N(GetFloorCollider), LVarB)
@@ -110,7 +110,7 @@ EvtScript N(EVS_UpdatePlatforms) = {
         EVT_ADDF(LVar5, EVT_FLOAT(30.0))
         EVT_CALL(TranslateModel, LVar2, -10, LVar5, 0)
         EVT_CALL(UpdateColliderTransform, LVar4)
-        EVT_USE_ARRAY(MV_Unk_00)
+        EVT_USE_ARRAY(MV_LetterItemID)
         EVT_CALL(N(UpdatePlatformShadows))
         EVT_WAIT(1)
         EVT_CALL(N(GetFloorCollider), LVarB)
@@ -145,8 +145,8 @@ EvtScript N(EVS_SetupPlatforms) = {
     EVT_CALL(UpdateColliderTransform, COLLIDER_erb1)
     EVT_CALL(UpdateColliderTransform, COLLIDER_erb2)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnTouchPlatform)), TRIGGER_FLOOR_TOUCH, COLLIDER_erb1, 1, 0)
-    EVT_MALLOC_ARRAY(2, MV_Unk_00)
-    EVT_USE_ARRAY(MV_Unk_00)
+    EVT_MALLOC_ARRAY(2, MV_LetterItemID)
+    EVT_USE_ARRAY(MV_LetterItemID)
     EVT_CALL(N(CreatePlatformShadows))
     EVT_CALL(N(UpdatePlatformShadows))
     EVT_RETURN

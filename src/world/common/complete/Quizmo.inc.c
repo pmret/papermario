@@ -94,6 +94,8 @@ enum {
     QUIZ_MAP_DRO_02     = 1,
     QUIZ_COUNT_DRO      = 2,
     // area_jan
+    QUIZ_MAP_JAN_02     = 0,
+    QUIZ_COUNT_JAN      = 2,
     // area_sam
     QUIZ_MAP_SAM_01     = 0,
     QUIZ_MAP_SAM_02     = 1,

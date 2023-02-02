@@ -5629,12 +5629,40 @@ typedef enum FoldType {
     FOLD_TYPE_A                       = 0xA,
     FOLD_TYPE_B                       = 0xB,
     FOLD_TYPE_C                       = 0xC,
-    FOLD_TYPE_D                       = 0xD,    // noisy star spirit
+    FOLD_TYPE_D                       = 0xD,    // noisy hologram -- used for ghostly star spirits and merlar
     FOLD_TYPE_E                       = 0xE,
     FOLD_TYPE_F                       = 0xF,
     FOLD_TYPE_10                      = 0x10,
     FOLD_TYPE_11                      = 0x11,
 } FoldType;
+
+typedef enum FoldRenderType {
+    FOLD_RENDER_TYPE_0                  = 0x0,
+    FOLD_RENDER_TYPE_1                  = 0x1,
+    FOLD_RENDER_TYPE_2                  = 0x2,
+    FOLD_RENDER_TYPE_3                  = 0x3,
+    FOLD_RENDER_TYPE_4                  = 0x4,
+    FOLD_RENDER_TYPE_5                  = 0x5,
+    FOLD_RENDER_TYPE_6                  = 0x6,
+    FOLD_RENDER_TYPE_7                  = 0x7,
+    FOLD_RENDER_TYPE_8                  = 0x8,
+    FOLD_RENDER_TYPE_9                  = 0x9,
+    FOLD_RENDER_TYPE_A                  = 0xA,
+    FOLD_RENDER_TYPE_B                  = 0xB,
+    FOLD_RENDER_TYPE_C                  = 0xC,
+    FOLD_RENDER_TYPE_D                  = 0xD,
+    FOLD_RENDER_TYPE_E                  = 0xE,
+    FOLD_RENDER_TYPE_F                  = 0xF,
+    FOLD_RENDER_TYPE_10                 = 0x10,
+} FoldRenderType;
+
+typedef enum FoldMeshType {
+    FOLD_MESH_TYPE_0                  = 0x0,
+    FOLD_MESH_TYPE_1                  = 0x1,
+    FOLD_MESH_TYPE_2                  = 0x2,
+    FOLD_MESH_TYPE_3                  = 0x3,
+    FOLD_MESH_TYPE_4                  = 0x4,
+} FoldMeshType;
 
 enum MoveType {
     MOVE_TYPE_NONE          = 0,

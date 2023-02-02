@@ -120,14 +120,14 @@ EvtScript N(EVS_NpcInit_Boo_01) = {
 };
 
 EvtScript N(EVS_NpcInteract_Boo_02) = {
-    EVT_IF_NE(MV_Unk_00, 0)
-        EVT_IF_GE(MV_Unk_00, MV_Unk_01)
+    EVT_IF_NE(MV_LetterItemID, 0)
+        EVT_IF_GE(MV_LetterItemID, MV_Unk_01)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0081)
             EVT_SET(LVar0, 118)
             EVT_SET(LVar1, 1)
             EVT_EXEC_WAIT(N(GiveKeyReward))
             EVT_CALL(AddKeyItem, ITEM_KOOT_PACKAGE)
-            EVT_SET(MV_Unk_00, 0)
+            EVT_SET(MV_LetterItemID, 0)
             EVT_SET(GF_ARN03_RecievedPackage, TRUE)
             EVT_SET(GF_ARN03_WaitingForPackage, FALSE)
             EVT_RETURN
@@ -159,14 +159,14 @@ EvtScript N(EVS_NpcInteract_Boo_02) = {
             EVT_EXEC_WAIT(N(EVS_PlayerReact))
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007F)
             EVT_CALL(EndSpeech, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0)
-            EVT_SET(MV_Unk_00, 0)
+            EVT_SET(MV_LetterItemID, 0)
             EVT_SET(MV_Unk_01, 450)
             EVT_SET(GF_ARN03_WaitingForPackage, TRUE)
             EVT_THREAD
                 EVT_LOOP(0)
-                    EVT_ADD(MV_Unk_00, 1)
+                    EVT_ADD(MV_LetterItemID, 1)
                     EVT_WAIT(1)
-                    EVT_IF_GE(MV_Unk_00, MV_Unk_01)
+                    EVT_IF_GE(MV_LetterItemID, MV_Unk_01)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                 EVT_END_LOOP

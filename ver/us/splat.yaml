@@ -12097,30 +12097,26 @@ segments:
     start: 0xB28030
     vram: 0x80240000
     subsegments:
-    - [0xB28030, c]
-    - [0xB291C0, c]
-    - [0xB29400, data]
-    - [0xB294A0, data]
-    - [0xB299B0, data]
-    - [0xB2B430, data]
-    - [0xB2B590, data]
-    - [0xB2C410]
+    - [0xB28030, c, jan_01_0_header]
+    - [0xB28030, c, jan_01_1_music]
+    - [0xB28030, c, jan_01_2_main]
+    - [0xB28370, c, jan_01_3_npc]
+    - [0xB291C0, c, jan_01_4_entity]
+    - [0xB291C0, c, jan_01_5_foliage]
+    - [0xB29400]  
   - name: jan_02
     dir: world/area_jan/jan_02
     type: code
     start: 0xB2C470
     vram: 0x80240000
     subsegments:
-    - [0xB2C470, c]
-    - [0xB2C4A0, c]
-    - [0xB2C8A0, c]
-    - [0xB2EB50, c]
-    - [0xB2ED90, data]
-    - [0xB2EEA0, data]
-    - [0xB2F410, data]
-    - [0xB33E00, data]
-    - [0xB33E50, data]
-    - [0xB34A20]
+    - [0xB2C470, c, jan_02_0_header]
+    - [0xB2C470, c, jan_02_1_music]
+    - [0xB2C4A0, c, jan_02_2_main]
+    - [0xB2C8A0, c, jan_02_3_npc]
+    - [0xB2EB50, c, jan_02_4_entity]
+    - [0xB2EB50, c, jan_02_5_foliage]
+    - [0xB2ED90]  
   - name: jan_03
     dir: world/area_jan/jan_03
     type: code
@@ -13910,38 +13906,65 @@ segments:
     start: 0xD110C0
     vram: 0x80240000
     subsegments:
-    - [0xD110C0, c]
-    - [0xD119E0, data]
-    - [0xD11A70, data]
-    - [0xD11D40, data]
-    - [0xD13420]
+    - [0xD110C0, c, sam_03_0_header]
+    - [0xD110C0, c, sam_03_1_music]
+    - [0xD110C0, c, sam_03_2_main]
+    - [0xD110C0, c, sam_03_3_npc1]
+    - [0xD11110, c, sam_03_4_npc2]
+    - [0xD119E0]
   - name: sam_04
     dir: world/area_sam/sam_04
     type: code
     start: 0xD135D0
     vram: 0x80240000
     subsegments:
-    - [0xD135D0, c]
-    - [0xD13810, c]
-    - [0xD138E0, c]
-    - [0xD13CD0, data]
-    - [0xD13D80, data]
-    - [0xD15010, data]
-    - [0xD16E20, data]
-    - [0xD18720, data]
-    - [0xD187C0]
+    - [0xD135D0, c, sam_04_0_header]
+    - [0xD135D0, c, sam_04_1_music]
+    - [0xD135D0, c, sam_04_2_main]
+    - [0xD13810, c, sam_04_3_snowmen]
+    - [0xD138E0, c, sam_04_4_npc]
+    - [0xD13CD0, c, sam_04_5_entity]
+    - [0xD13CD0]
   - name: sam_05
     dir: world/area_sam/sam_05
     type: code
     start: 0xD187E0
     vram: 0x80240000
     subsegments:
-    - [0xD187E0, c]
-    - [0xD1A520, data]
-    - [0xD1A5B0, data]
-    - [0xD1A890, data]
-    - [0xD1A900, data]
-    - [0xD1F780, data]
+    - [0xD187E0, c, sam_05_0_header]
+    - [0xD187E0, c, sam_05_1_music]
+    - [0xD187E0, c, sam_05_2_main]
+    - [0xD187E0, c, sam_05_3_entity]
+    - [0xD187E0, c, sam_05_4_npc]
+    - [0xD1A520, c, sam_05_5_scenes]
+    - [0xD1A520, c, sam_05_6_monstar_gfx]
+    - [0xD1A520, c, sam_05_7_monstar_vtx]
+    - [0xD1A520, .data, sam_05_0_header]
+    - [0xD1A580, .data, sam_05_1_music]
+    - [0xD1A5B0, .data, sam_05_2_main]
+    - [0xD1A890, .data, sam_05_3_entity]
+    - start: 0xD1A900
+      type: .data
+      name: sam_05_4_npc
+      subsegments:
+      - [0xD1A900]
+      - [0xD1AF50, ci4, monstar, 32, 32]
+      - [0xD1B150, ia4, monstar_blank1, 32, 32]
+      - [0xD1B350, ia4, monstar_blank2, 32, 32]
+      - [0xD1B550, ia4, monstar_blank3, 32, 32]
+      - [0xD1B750, palette, monstar]
+      - [0xD1B770]
+    - [0xD1E5E0, .data, sam_05_5_scenes]
+    - start: 0xD1F780
+      type: .data
+      name: sam_05_6_monstar_gfx
+      subsegments:
+      - [0xD1F780, gfx, monstar]
+    - start: 0xD1F890
+      type: .data
+      name: sam_05_7_monstar_vtx
+      subsegments:
+      - [0xD1F890, vtx, monstar]
     - [0xD1FCB0]
   - name: sam_06
     dir: world/area_sam/sam_06
@@ -13962,49 +13985,51 @@ segments:
     start: 0xD2BD30
     vram: 0x80240000
     subsegments:
-    - [0xD2BD30, c]
-    - [0xD2DD30, data]
-    - [0xD2DDC0, data]
-    - [0xD2E0B0, data]
-    - [0xD2E1F0, data]
-    - [0xD2E9C0, data]
-    - [0xD2FAA0]
+    - [0xD2BD30, c, sam_07_0_header]
+    - [0xD2BD30, c, sam_07_1_music]
+    - [0xD2BD30, c, sam_07_2_main]
+    - [0xD2BD30, c, sam_07_3_entity]
+    - [0xD2BD30, c, sam_07_4_frozen_pit]
+    - [0xD2C380, c, sam_07_5_npc]
+    - [0xD2DD30]
   - name: sam_08
     dir: world/area_sam/sam_08
     type: code
     start: 0xD2FC80
     vram: 0x80240000
     subsegments:
-    - [0xD2FC80, c]
-    - [0xD309C0, c]
-    - [0xD31430, data]
-    - [0xD314C0, data]
-    - [0xD31E80, data]
-    - [0xD335E0, data]
-    - [0xD36140]
+    - [0xD2FC80, c, sam_08_0_header]
+    - [0xD2FC80, c, sam_08_1_music]
+    - [0xD2FC80, c, sam_08_2_main]
+    - [0xD2FC80, c, sam_08_3_entity]
+    - [0xD309C0, c, sam_08_4_npc]
+    - [0xD31290, c, sam_08_5_scenes]
+    - [0xD31430]    
   - name: sam_09
     dir: world/area_sam/sam_09
     type: code
     start: 0xD362F0
     vram: 0x80240000
     subsegments:
-    - [0xD362F0, c]
-    - [0xD366F0, data]
-    - [0xD36780, data]
-    - [0xD369A0, data]
-    - [0xD377F0]
+    - [0xD362F0, c, sam_09_0_header]
+    - [0xD362F0, c, sam_09_1_music]
+    - [0xD362F0, c, sam_09_2_main]
+    - [0xD362F0, c, sam_09_3_entity]
+    - [0xD362F0, c, sam_09_4_sockets]
+    - [0xD366F0]
   - name: sam_10
     dir: world/area_sam/sam_10
     type: code
     start: 0xD37800
     vram: 0x80240000
     subsegments:
-    - [0xD37800, c]
-    - [0xD37BD0, c]
-    - [0xD384A0, data]
-    - [0xD38550, data]
-    - [0xD38840, data]
-    - [0xD3A410]
+    - [0xD37800, c, sam_10_0_header]
+    - [0xD37800, c, sam_10_1_music]
+    - [0xD37800, c, sam_10_2_main]
+    - [0xD37800, c, sam_10_3_entity]
+    - [0xD37AF0, c, sam_10_4_stairs]
+    - [0xD37BD0, c, sam_10_5_npc]
+    - [0xD384A0]
   - name: sam_11
     dir: world/area_sam/sam_11
     type: code
@@ -14028,14 +14053,13 @@ segments:
     start: 0xD4BA20
     vram: 0x80240000
     subsegments:
-    - [0xD4BA20, c]
-    - [0xD4BAB0, c]
-    - [0xD4BDC0, data]
-    - [0xD4BE40, data]
-    - [0xD4BFE0, data]
-    - [0xD4C2A0, data]
-    - [0xD4CF90, data]
-    - [0xD4D030]
+    - [0xD4BA20, c, sam_12_0_header]
+    - [0xD4BA20, c, sam_12_1_music]
+    - [0xD4BA20, c, sam_12_2_main]
+    - [0xD4BA20, c, sam_12_3_npc]
+    - [0xD4BAB0, c, sam_12_4_scenes]
+    - [0xD4BDC0, c, sam_12_5_entity]
+    - [0xD4BDC0]
   - name: pra_01
     dir: world/area_pra/pra_01
     type: code

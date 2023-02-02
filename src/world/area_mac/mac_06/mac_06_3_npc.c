@@ -411,8 +411,8 @@ EvtScript N(EVS_UnusedGull) = {
     EVT_ELSE
         EVT_ADD(LVarE, -1)
     EVT_END_IF
-    EVT_CALL(N(func_802412AC_865DEC), LVarE, MV_Unk_00, MV_Unk_01, MV_Unk_02)
-    EVT_SETF(LVar0, MV_Unk_00)
+    EVT_CALL(N(func_802412AC_865DEC), LVarE, MV_LetterItemID, MV_Unk_01, MV_Unk_02)
+    EVT_SETF(LVar0, MV_LetterItemID)
     EVT_SUBF(LVar0, LVar1)
     EVT_IF_LT(LVar0, 0)
         EVT_ADDF(LVar8, -1)

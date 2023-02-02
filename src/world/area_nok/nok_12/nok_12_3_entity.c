@@ -38,7 +38,7 @@ EvtScript N(EVS_OnShakeTree_DropSwitch) = {
         EVT_CALL(MakeLerp, 95, 0, 12, EASING_QUADRATIC_IN)
         EVT_LABEL(0)
             EVT_CALL(UpdateLerp)
-            EVT_CALL(N(SetEntityPosition), MV_Unk_00, -470, LVar0, -150)
+            EVT_CALL(N(SetEntityPosition), MV_LetterItemID, -470, LVar0, -150)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 1)
                 EVT_GOTO(0)
@@ -63,7 +63,7 @@ EvtScript N(EVS_MakeEntities) = {
         EVT_ELSE
             EVT_CALL(MakeEntity, EVT_PTR(Entity_BlueSwitch), NPC_DISPOSE_LOCATION, 0, MAKE_ENTITY_END)
             EVT_CALL(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_NOK_01))
-            EVT_SET(MV_Unk_00, LVar0)
+            EVT_SET(MV_LetterItemID, LVar0)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -560, 60, -120, 0, ITEM_POW_BLOCK, MAKE_ENTITY_END)

@@ -46,7 +46,7 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(AfterNPCs)))
     EVT_END_IF
     EVT_IF_EQ(GF_ARN03_WaitingForPackage, TRUE)
-        EVT_SET(MV_Unk_00, 450)
+        EVT_SET(MV_LetterItemID, 450)
         EVT_SET(MV_Unk_01, 450)
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_MakeEntities))

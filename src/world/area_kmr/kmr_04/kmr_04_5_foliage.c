@@ -141,7 +141,7 @@ FoliageDropList N(Bush1_Drops) = {
             .pos = { 248, 17, 97 },
             .spawnMode = ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE,
             .pickupFlag = GF_KMR04_Bush1_Coin,
-            .spawnFlag = MF_Unk_0A,
+            .spawnFlag = AF_JAN01_TreeDrop_StarPiece,
         },
     }
 };

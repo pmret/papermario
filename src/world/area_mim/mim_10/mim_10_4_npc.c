@@ -108,7 +108,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcPos, NPC_Bootler, 200, 44, 0)
     EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, 0, 0, 0, 0)
-    EVT_SET(MV_Unk_00, TRUE)
+    EVT_SET(MV_LetterItemID, TRUE)
     EVT_CALL(SetMusicTrack, 0, SONG_BOOS_MANSION, 0, 8)
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
@@ -215,7 +215,7 @@ EvtScript N(EVS_NpcInit_Bootler) = {
 EvtScript N(EVS_NpcIdle_JrTroopa) = {
     EVT_CALL(WaitForPlayerInputEnabled)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(MV_Unk_00, TRUE)
+    EVT_SET(MV_LetterItemID, TRUE)
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(3.0), LVar0, LVar1, LVar2, 300, 15, -7)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 5, MSG_CH3_0023)
@@ -225,7 +225,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
     EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar2, 25)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_SET(GF_MIM10_JrTroopaEscaped, TRUE)
-    EVT_SET(MV_Unk_00, FALSE)
+    EVT_SET(MV_LetterItemID, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_RETURN

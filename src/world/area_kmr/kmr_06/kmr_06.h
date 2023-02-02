@@ -18,7 +18,7 @@ enum {
 };
 
 enum {
-    MF_Unk_0A           = MapFlag(10),
+    AF_JAN01_TreeDrop_StarPiece           = MapFlag(10),
 };
 
 enum {

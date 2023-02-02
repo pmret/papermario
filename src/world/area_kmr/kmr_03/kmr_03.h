@@ -16,11 +16,11 @@ enum {
 };
 
 enum {
-    MV_Unk_00               = MapVar(0),
+    MV_LetterItemID               = MapVar(0),
 };
 
 enum {
-    MF_Unk_0A               = MapFlag(10),
+    AF_JAN01_TreeDrop_StarPiece               = MapFlag(10),
 };
 
 #define NAMESPACE kmr_03

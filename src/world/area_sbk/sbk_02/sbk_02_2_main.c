@@ -43,7 +43,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_IF_LT(GB_StoryProgress, STORY_CH2_UNCOVERED_DRY_DRY_RUINS)
         EVT_PLAY_EFFECT(EFFECT_SUN)
-        EVT_SET(MV_Unk_00, LVarF)
+        EVT_SET(MV_LetterItemID, LVarF)
     EVT_END_IF
     EVT_IF_EQ(GB_StoryProgress, STORY_CH2_BEGAN_PEACH_MISSION)
         EVT_CALL(SetMusicTrack, 0, SONG_STAR_SPIRIT_THEME, 1, 8)
