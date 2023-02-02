@@ -332,6 +332,14 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
     # Initialize segments
     all_segments = initialize_segments(config["segments"])
 
+    # addr_set = set()
+    # for seg in all_segments:
+    #     if isinstance(seg.vram_start, int):
+    #         if not (seg.follows_vram_segment or seg.follows_vram_symbol):
+    #             if seg.vram_start not in addr_set:
+    #                 addr_set.add(seg.vram_start)
+    #                 print(f"VRAM: {seg.vram_start:08X} {seg.name}")
+
     # Load and process symbols
     symbols.initialize(all_segments)
 

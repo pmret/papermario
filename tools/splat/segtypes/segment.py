@@ -198,6 +198,7 @@ class Segment:
         self.given_section_order: List[str] = options.opts.section_order
         self.follows_vram: Optional[str] = None
         self.follows_vram_symbol: Optional[str] = None
+        self.follows_vram_segment: Optional[Segment] = None
 
         self.given_symbol_name_format: str = options.opts.symbol_name_format
         self.given_symbol_name_format_no_rom: str = (
@@ -206,7 +207,6 @@ class Segment:
 
         self.parent: Optional[Segment] = None
         self.sibling: Optional[Segment] = None
-        self.follows_vram_segment: Optional[Segment] = None
         self.file_path: Optional[Path] = None
 
         self.args: List[str] = args

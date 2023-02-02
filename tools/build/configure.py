@@ -410,6 +410,9 @@ class Configure:
                 if isinstance(seg.rom_start, int) and seg.rom_start > 0x135EE0 and seg.rom_start < 0x197F41: # 0x3169F0:
                     task = "cc_modern"
 
+                if top_lev_name == "evt" and seg.name in ["script_list"]:
+                    task = "cc_modern"
+
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
                 elif "gcc_272" in cflags:
