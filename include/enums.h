@@ -1695,7 +1695,7 @@ enum ItemIDs {
     ITEM_LETTER_TO_FROST_T            = 0x00000051,
     ITEM_LETTER24                     = 0x00000052,
     ITEM_ARTIFACT                     = 0x00000053,
-    ITEM_LETTER_TO_KOLORADO                     = 0x00000054,
+    ITEM_LETTER_TO_KOLORADO           = 0x00000054,
     ITEM_UNUSED_LETTER07              = 0x00000055,
     ITEM_DOLLY                        = 0x00000056,
     ITEM_WATER_STONE                  = 0x00000057,
