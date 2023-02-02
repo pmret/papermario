@@ -393,8 +393,8 @@ class Configure:
                 if entry.src_paths[0].suffixes[-1] == ".cpp":
                     task = "cxx"
 
-                full_segments = ["main", "engine1", "engine2", "engine4"] #  "evt"
-                bad_list = ["a5dd0_len_114e0"]
+                full_segments = ["main", "engine1", "engine2", "engine4", "evt"]
+                bad_list = ["a5dd0_len_114e0", "evt"]
                 top_lev_name = seg.get_most_parent().name
                 seg_dir = str(seg.dir)
 
@@ -407,10 +407,7 @@ class Configure:
                 if "entity" in seg_dir or ("world" in seg_dir and "world/area" not in seg_dir):
                     task = "cc_modern"
 
-                if isinstance(seg.rom_start, int) and seg.rom_start > 0x135EE0 and seg.rom_start < 0x197F41: # 0x3169F0:
-                    task = "cc_modern"
-
-                if top_lev_name == "evt" and seg.name in ["script_list"]:
+                if isinstance(seg.rom_start, int) and seg.rom_start > 0x135EE0 and seg.rom_start < 0x3169F0:
                     task = "cc_modern"
 
                 if seg.name.endswith("osFlash"):
