@@ -57,7 +57,7 @@ segments:
     - [0x7340, c, crash_screen]
     - [0x7E40, c, os/nusys/nugfxtaskmgr, -fforce-addr]
     - [0x8230, c, os/nusys/nusimgr]
-    - [0x8560, c]
+    - [0x8560, c, load_obfuscation_shims]
     - [0x8800, c]
     - [0x9D10, c, 9d10_len_1080]
     - [0xAD90, c, ad90_len_2880]
@@ -941,6 +941,7 @@ segments:
     - [0x10C880]
   - type: code
     name: font_width
+    follows_vram: entity
     start: 0x10CC10
     vram: 0x802EB3D0
     subsegments:
@@ -1314,6 +1315,7 @@ segments:
     - [0x16C7D0]
   - type: code
     start: 0x16C8E0
+    name: battle_code
     vram: 0x8023E000
     subsegments:
     - [0x16C8E0, c, 16c8e0]
@@ -2548,30 +2550,35 @@ segments:
   - [0x315B80, pm_sprite_shading_profiles, sprite_shading_profiles]
   - type: code
     start: 0x3169F0
+    name: create_audio_system_obfuscated
     vram: 0x80200000
     subsegments:
-    - [0x3169F0, c, 3169f0]
+    - [0x3169F0, c, create_audio_system_obfuscated]
   - type: code
     start: 0x316A70
     vram: 0x80200080
-    follows_vram: 3169F0
+    name: load_engine_data_obfuscated
+    follows_vram: create_audio_system_obfuscated
     subsegments:
-    - [0x316A70, c, 316a70]
+    - [0x316A70, c, load_engine_data_obfuscated]
   - type: code
     start: 0x316C00
+    name: general_heap_create_obfuscated
     vram: 0x802AE000
     subsegments:
-    - [0x316C00, c]
+    - [0x316C00, c, general_heap_create_obfuscated]
   - type: code
     start: 0x316D90
+    name: battle_heap_create_obfuscated
     vram: 0x802AE000
     subsegments:
-    - [0x316D90, c, 316d90]
+    - [0x316D90, c, battle_heap_create_obfuscated]
   - type: code
     start: 0x316F30
+    name: obfuscation_shims
     vram: 0x802B2000
     subsegments:
-    - [0x316F30, c, 316f30]
+    - [0x316F30, c, obfuscation_shims]
   - type: code
     dir: world/partner
     name: world_partner_goombario
@@ -2662,6 +2669,7 @@ segments:
     - [0x325160]
   - type: code
     start: 0x3251D0
+    name: world_use_item
     vram: 0x802C0000
     subsegments:
     - [0x3251D0, c, world_use_item]
@@ -6813,6 +6821,7 @@ segments:
   - type: code
     start: 0x415D90
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x415D90, c, 415D90]
     - [0x4200D0]
@@ -7975,6 +7984,7 @@ segments:
     type: code
     start: 0x715850
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x715850, c, mushroom]
     - [0x715E50]
@@ -7983,6 +7993,7 @@ segments:
     type: code
     start: 0x716C60
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x716C60, c, fire_flower]
     - [0x717060]
@@ -7991,6 +8002,7 @@ segments:
     type: code
     start: 0x7179D0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x7179D0, c, dusty_hammer]
     - start: 0x717C10
@@ -8005,6 +8017,7 @@ segments:
     type: code
     start: 0x718850
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x718850, c, pow_block]
     - [0x718BF0]
@@ -8013,6 +8026,7 @@ segments:
     type: code
     start: 0x719970
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x719970, c, pebble]
     - start: 0x719BB0
@@ -8027,6 +8041,7 @@ segments:
     type: code
     start: 0x71A7F0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x71A7F0, c, volt_shroom]
     - [0x71AA70]
@@ -8035,6 +8050,7 @@ segments:
     type: code
     start: 0x71B1A0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x71B1A0, c, thunder_rage]
     - [0x71B640]
@@ -8043,6 +8059,7 @@ segments:
     type: code
     start: 0x71BE30
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x71BE30, c, snowman_doll]
     - [0x71C270]
@@ -8051,6 +8068,7 @@ segments:
     type: code
     start: 0x71CCE0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x71CCE0, c, dried_shroom]
     - [0x71D010]
@@ -8059,6 +8077,7 @@ segments:
     type: code
     start: 0x71D770
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x71D770, c, shooting_star]
     - [0x71DCC0]
@@ -8067,6 +8086,7 @@ segments:
     type: code
     start: 0x71E650
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x71E650, c, sleepy_sheep]
     - start: 0x71EFC0
@@ -8086,6 +8106,7 @@ segments:
     type: code
     start: 0x7215A0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x7215A0, c, stone_cap]
     - [0x721970]
@@ -8094,6 +8115,7 @@ segments:
     type: code
     start: 0x722000
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x722000, c, tasty_tonic]
     - [0x7222D0]
@@ -8102,6 +8124,7 @@ segments:
     type: code
     start: 0x722B40
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x722B40, c, thunder_bolt]
     - [0x722FE0]
@@ -8110,6 +8133,7 @@ segments:
     type: code
     start: 0x723780
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x723780, c, ultra_shroom]
     - [0x723AB0]
@@ -8118,6 +8142,7 @@ segments:
     type: code
     start: 0x724240
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x724240, c, unknown_item]
     - [0x724570]
@@ -8126,6 +8151,7 @@ segments:
     type: code
     start: 0x724CE0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x724CE0, c, super_soda]
     - [0x725210]
@@ -8134,6 +8160,7 @@ segments:
     type: code
     start: 0x725F60
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x725F60, c, hustle_drink]
     - [0x726240]
@@ -8142,6 +8169,7 @@ segments:
     type: code
     start: 0x726DD0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x726DD0, c, stop_watch]
     - [0x727120]
@@ -8150,6 +8178,7 @@ segments:
     type: code
     start: 0x727910
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x727910, c, dizzy_dial]
     - [0x727CE0]
@@ -8158,6 +8187,7 @@ segments:
     type: code
     start: 0x7285E0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x7285E0, c, please_come_back]
     - [0x728820]
@@ -8166,6 +8196,7 @@ segments:
     type: code
     start: 0x728EC0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x728EC0, c, egg_missile]
     - start: 0x7291D0
@@ -8187,6 +8218,7 @@ segments:
     type: code
     start: 0x72A750
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x72A750, c, insecticide_herb]
     - start: 0x72AB70
@@ -8202,6 +8234,7 @@ segments:
     type: code
     start: 0x72B910
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x72B910, c, fright_jar]
     - [0x72BC60]
@@ -8210,6 +8243,7 @@ segments:
     type: code
     start: 0x72C5B0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x72C5B0, c, mystery]
     - start: 0x72CF00
@@ -8225,6 +8259,7 @@ segments:
     type: code
     start: 0x72DB70
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x72DB70, c, repel_gel]
     - [0x72DE00]
@@ -8233,6 +8268,7 @@ segments:
     type: code
     start: 0x72E530
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x72E530, c, life_shroom]
     - [0x72EA20]
@@ -8241,6 +8277,7 @@ segments:
     type: code
     start: 0x72F720
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x72F720, c, coconut]
     - start: 0x72F960
@@ -8256,6 +8293,7 @@ segments:
     type: code
     start: 0x7305A0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x7305A0, c, electro_pop]
     - [0x730AE0]
@@ -8264,6 +8302,7 @@ segments:
     type: code
     start: 0x731300
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x731300, c, strange_cake]
     - start: 0x731EA0
@@ -8283,6 +8322,7 @@ segments:
     type: code
     start: 0x7330D0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x7330D0, c, food]
     - [0x733700]
@@ -8294,6 +8334,7 @@ segments:
     type: code
     start: 0x7345A0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x7345A0, c, hammer]
     - [0x734650]
@@ -8301,6 +8342,7 @@ segments:
     type: code
     start: 0x737890
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x737890, c, spin_smash]
     - [0x737A20]
@@ -8308,6 +8350,7 @@ segments:
     type: code
     start: 0x73AED0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x73AED0, c, quake_hammer]
     - [0x73AF80]
@@ -8315,6 +8358,7 @@ segments:
     type: code
     start: 0x73D860
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x73D860, c, jump]
     - [0x73D9A0]
@@ -8322,6 +8366,7 @@ segments:
     type: code
     start: 0x740CC0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x740CC0, c]
     - [0x740DB0, data]
@@ -8329,6 +8374,7 @@ segments:
     type: code
     start: 0x743DF0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x743DF0, c]
     - [0x743FF0, data]
@@ -8336,6 +8382,7 @@ segments:
     type: code
     start: 0x746E10
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x746E10, c]
     - [0x746F00, data]
@@ -8343,6 +8390,7 @@ segments:
     type: code
     start: 0x748DD0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x748DD0, c]
     - [0x748EC0, data]
@@ -8350,6 +8398,7 @@ segments:
     type: code
     start: 0x74AD90
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x74AD90, c]
     - [0x74AF40, data]
@@ -8357,6 +8406,7 @@ segments:
     type: code
     start: 0x74D570
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x74D570, c]
     - [0x74D850, data]
@@ -8364,6 +8414,7 @@ segments:
     type: code
     start: 0x74F130
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x74F130, c]
     - [0x74F3D0, data]
@@ -8371,6 +8422,7 @@ segments:
     type: code
     start: 0x752450
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x752450, c]
     - [0x752500, data]
@@ -8378,6 +8430,7 @@ segments:
     type: code
     start: 0x756780
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x756780, c]
     - [0x756900, data]
@@ -8385,6 +8438,7 @@ segments:
     type: code
     start: 0x7595B0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x7595B0, c]
     - [0x7598D0, data]
@@ -8392,6 +8446,7 @@ segments:
     type: code
     start: 0x75C980
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x75C980, c]
     - [0x75CCE0, data]
@@ -8399,6 +8454,7 @@ segments:
     type: code
     start: 0x75E5D0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x75E5D0, c]
     - [0x75E8F0, data]
@@ -8406,6 +8462,7 @@ segments:
     type: code
     start: 0x761920
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x761920, c]
     - [0x761C80, data]
@@ -8413,6 +8470,7 @@ segments:
     type: code
     start: 0x763540
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x763540, c]
     - [0x7635F0, data]
@@ -8420,6 +8478,7 @@ segments:
     type: code
     start: 0x765C20
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x765C20, c, auto_jump]
     - [0x765D10]
@@ -8427,6 +8486,7 @@ segments:
     type: code
     start: 0x767C90
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x767C90, c]
     - [0x767D40, data]
@@ -8434,6 +8494,7 @@ segments:
     type: code
     start: 0x76A830
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x76A830, c, auto_multibounce]
     - [0x76A920]
@@ -8441,6 +8502,7 @@ segments:
     type: code
     start: 0x76D760
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x76D760, c]
     - [0x76D850, data]
@@ -8448,6 +8510,7 @@ segments:
     type: code
     start: 0x76F330
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x76F330, c]
     - [0x76F420, data]
@@ -8455,6 +8518,7 @@ segments:
     type: code
     start: 0x770F30
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x770F30, c]
     - [0x771020, data]
@@ -8462,6 +8526,7 @@ segments:
     type: code
     start: 0x772BA0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x772BA0, c]
     - [0x772C50, data]
@@ -8469,6 +8534,7 @@ segments:
     type: code
     start: 0x775100
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x775100, c]
     - [0x7751B0, data]
@@ -8476,6 +8542,7 @@ segments:
     type: code
     start: 0x777690
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x777690, c]
     - [0x777740, data]
@@ -8483,6 +8550,7 @@ segments:
     type: code
     start: 0x779C90
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x779C90, c]
     - [0x779E30, data]
@@ -8490,6 +8558,7 @@ segments:
     type: code
     start: 0x77CB80
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x77CB80, c]
     - [0x77CC30, data]
@@ -8497,6 +8566,7 @@ segments:
     type: code
     start: 0x77F240
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x77F240, c]
     - [0x77F3D0, data]
@@ -8504,6 +8574,7 @@ segments:
     type: code
     start: 0x781920
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x781920, c]
     - [0x781AF0, data]
@@ -8511,6 +8582,7 @@ segments:
     type: code
     start: 0x783BA0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x783BA0, c]
     - [0x783C90, data]
@@ -8518,6 +8590,7 @@ segments:
     type: code
     start: 0x785B20
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x785B20, c]
     - [0x785C20, data]
@@ -8525,6 +8598,7 @@ segments:
     type: code
     start: 0x789E60
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x789E60, c]
     - [0x78A490]
@@ -8532,6 +8606,7 @@ segments:
     type: code
     start: 0x78B600
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x78B600, c]
     - [0x78C070]
@@ -8539,6 +8614,7 @@ segments:
     type: code
     start: 0x78D150
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x78D150, c]
     - [0x78D770]
@@ -8546,6 +8622,7 @@ segments:
     type: code
     start: 0x78E7D0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x78E7D0, c]
     - [0x78EEC0]
@@ -8553,6 +8630,7 @@ segments:
     type: code
     start: 0x7900D0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x7900D0, c]
     - [0x7909C0]
@@ -8560,6 +8638,7 @@ segments:
     type: code
     start: 0x791D90
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x791D90, c]
     - [0x7923C0]
@@ -8567,6 +8646,7 @@ segments:
     type: code
     start: 0x793D20
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x793D20, c]
     - [0x794240]
@@ -8574,6 +8654,7 @@ segments:
     type: code
     start: 0x7952E0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x7952E0, c]
     - [0x7959B0]
@@ -8581,6 +8662,7 @@ segments:
     type: code
     start: 0x796FC0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x796FC0, c]
     - [0x7984B0]
@@ -8588,6 +8670,7 @@ segments:
     type: code
     start: 0x7997B0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x7997B0, c]
     - [0x79ACA0]
@@ -8595,6 +8678,7 @@ segments:
     type: code
     start: 0x79BFA0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x79BFA0, c]
     - [0x79C4D0]
@@ -8602,6 +8686,7 @@ segments:
     type: code
     start: 0x79D8A0
     vram: 0x802A1000
+    follows_vram: battle_code
     subsegments:
     - [0x79D8A0, c]
     - [0x79DE50]
@@ -8609,6 +8694,7 @@ segments:
     name: level_up
     start: 0x79EF40
     vram: 0x802A1000
+    follows_vram: battle_code
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [0x79EF40, c, level_up]
@@ -14761,12 +14847,13 @@ segments:
     - [0xE1EC20]
   - type: code
     start: 0xE20110
+    name: inspect_icon
     vram: 0x802B7000
     subsegments:
-    - [0xE20110, c, E20110]
+    - [0xE20110, c, inspect_icon]
     - start: 0xE20B30
       type: .data
-      name: E20110
+      name: inspect_icon
       subsegments:
       - [0xE20B30, ci4, inspect_icon, 32, 32]
       - [0xE20D30, palette, inspect_icon]
@@ -14775,12 +14862,13 @@ segments:
     - [0xE20DD0]
   - type: code
     start: 0xE20EB0
+    name: speech_bubble
     vram: 0x802B7000
     subsegments:
-    - [0xE20EB0, c, e20eb0]
+    - [0xE20EB0, c, speech_bubble]
     - start: 0xE215C0
       type: .data
-      name: e20eb0
+      name: speech_bubble
       subsegments:
       - [0xE215C0, ci4, speech_bubble, 32, 32]
       - [0xE217C0, palette, speech_bubble]
@@ -14789,12 +14877,13 @@ segments:
     - [0xE21860]
   - type: code
     start: 0xE21870
+    name: pulse_stone
     vram: 0x802B7000
     subsegments:
-    - [0xE21870, c, E21870]
+    - [0xE21870, c, pulse_stone]
     - start: 0xE21EB0
       type: .data
-      name: E21870
+      name: pulse_stone
       subsegments:
       - [0xE21EB0, ci4, pulse_stone, 56, 56]
       - [0xE224D0, palette, pulse_stone]
@@ -14804,12 +14893,13 @@ segments:
     - [0xE22590]
   - type: code
     start: 0xE225B0
+    name: i_spy
     vram: 0x802B7000
     subsegments:
-    - [0xE225B0, c, E225B0]
+    - [0xE225B0, c, i_spy]
     - start: 0xE22B30
       type: .data
-      name: E225B0
+      name: i_spy
       subsegments:
       - [0xE22B30, ci4, i_spy, 56, 56]
       - [0xE23150, palette, i_spy]

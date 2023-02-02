@@ -1,16 +1,16 @@
 #include "sbk_41.h"
 #include "entity.h"
 
-TweesterPath N(DefaultTweesterPath)[] = {
-    { -65, 0, 217 },
-    { -262, 0, -64 },
-    { 57, 0, -286 },
-    { 327, 0, 8 },
-    { TWEETSER_PATH_LOOP }
+TweesterPath N(DefaultTweesterPath) = {
+    -65, 0, 217,
+    -262, 0, -64,
+    57, 0, -286,
+    327, 0, 8,
+    TWEESTER_PATH_LOOP
 };
 
 TweesterPath* N(TweesterPaths)[] = {
-    N(DefaultTweesterPath),
+    &N(DefaultTweesterPath),
     PTR_LIST_END
 };
 

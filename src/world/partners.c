@@ -155,8 +155,8 @@ s32 D_800F7FF8 = 5;
 s32 D_800F7FFC = 7;
 s32 D_800F8000[] = { 8, 0, 0, 0 };
 UseItemStruct UseItemDmaArgs = {
-    _3251D0_ROM_START,
-    _3251D0_ROM_END,
+    world_use_item_ROM_START,
+    world_use_item_ROM_END,
     &EVS_World_UseItem,
     0
 };
@@ -488,7 +488,7 @@ s32 use_consumable(s32 invSlot) {
 
     D_8010CD20 = invSlot;
     invSlot = gPlayerData.invItems[invSlot];
-    dma_copy(UseItemDmaArgs.dmaStart, UseItemDmaArgs.dmaEnd, _3251D0_VRAM);
+    dma_copy(UseItemDmaArgs.dmaStart, UseItemDmaArgs.dmaEnd, world_use_item_VRAM);
     script = start_script(UseItemDmaArgs.script, EVT_PRIORITY_1, 0);
     script->varTable[10] = invSlot;
     return script->id;

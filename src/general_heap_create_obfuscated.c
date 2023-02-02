@@ -6,11 +6,11 @@
 extern u8 obfuscated_general_heap_create[];
 
 #ifdef SHIFT
-void func_802AE000_316C00(void) {
+void general_heap_create_obfuscated(void) {
     general_heap_create();
 }
 #else
-void func_802AE000_316C00(void) {
+void general_heap_create_obfuscated(void) {
     s32(*readFunc)(OSPiHandle*, u32, u32*) = osEPiReadIo;
     s32 seed = 0x3C016C07 + 0xFEFEFEF;
     HeapNode*(*general_heap_create)(void) = (HeapNode* (*)(void)) obfuscated_general_heap_create; // general_heap_create - 0xFEFEFEF
@@ -24,7 +24,7 @@ void func_802AE000_316C00(void) {
 
     prevInsn = 0;
 
-    for (it = (u32*) _316A70_ROM_START; it < (u32*) _316A70_ROM_END; it++) {
+    for (it = (u32*) load_engine_data_obfuscated_ROM_START; it < (u32*) load_engine_data_obfuscated_ROM_END; it++) {
         readFunc(nuPiCartHandle, (u32) it, &thisInsn);
         hash += LOWER(thisInsn) + UPPER(thisInsn);
 

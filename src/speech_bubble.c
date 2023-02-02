@@ -1,12 +1,12 @@
 #include "common.h"
 
-#define NAMESPACE e20eb0
+#define NAMESPACE speech_bubble
 
 #include "common/UnkAngleFunc1.inc.c"
 
 #include "speech_bubble.png.h"
 
-typedef struct UnkE20EB0 {
+typedef struct SpeechBubbleData {
     /* 0x00 */ Npc* unk_00;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
@@ -17,21 +17,21 @@ typedef struct UnkE20EB0 {
     /* 0x24 */ char unk_24[6];
     /* 0x2A */ u8 unk_2A;
     /* 0x2B */ u8 unk_2B;
-} UnkE20EB0; /* size = 0x2C */
+} SpeechBubbleData; /* size = 0x2C */
 
-BSS UnkE20EB0 D_802B79C0_E21870;
+BSS SpeechBubbleData D_802B79C0_E21870;
 
 #include "speech_bubble.png.inc.c"
 #include "speech_bubble.pal.inc.c"
 #include "speech_bubble_dlist.gfx.inc.c"
 
-UnkE20EB0* D_802B79A8_E21858 = &D_802B79C0_E21870;
+SpeechBubbleData* D_802B79A8_E21858 = &D_802B79C0_E21870;
 
 void func_802B742C(void);
 
 void func_802B70B4(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    UnkE20EB0* temp;
+    SpeechBubbleData* temp;
     Npc* npc;
 
     mem_clear(D_802B79A8_E21858, sizeof(*D_802B79A8_E21858));
@@ -125,7 +125,7 @@ void func_802B742C(void) {
                 unk10 -= 360.0f;
             }
             D_802B79A8_E21858->unk_10 = unk10;
-            var_a2 = e20eb0_UnkAngleFunc1(unk10);
+            var_a2 = N(UnkAngleFunc1)(unk10);
             break;
         case 3:
             unk10 = D_802B79A8_E21858->unk_10;
@@ -140,7 +140,7 @@ void func_802B742C(void) {
                 playerStatus->animFlags &= ~PA_FLAG_SPEECH_PROMPT_AVAILABLE;
                 return;
             }
-            var_a2 = e20eb0_UnkAngleFunc1(unk10);
+            var_a2 = N(UnkAngleFunc1)(unk10);
             break;
     }
 

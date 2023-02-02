@@ -47,8 +47,8 @@ void state_step_battle(void) {
             func_8003B1A8();
             gGameStatusPtr->isBattle = TRUE;
             backup_map_collision_data();
-            func_8002D160();
-            func_802B20B4();
+            load_obfuscation_shims();
+            shim_battle_heap_create_obfuscated();
             sfx_clear_env_sounds(0);
 
             currentBattleSelection = UNPACK_BTL_AREA(gCurrentBattleID);
@@ -76,7 +76,7 @@ void state_step_battle(void) {
             clear_npcs();
             clear_entity_data(1);
             clear_trigger_data();
-            dma_copy(_16C8E0_ROM_START, _16C8E0_ROM_END, _16C8E0_VRAM);
+            dma_copy(battle_code_ROM_START, battle_code_ROM_END, battle_code_VRAM);
             initialize_battle();
             btl_save_world_cameras();
             load_battle_section();

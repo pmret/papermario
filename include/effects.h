@@ -142,10 +142,6 @@ enum EffectID {
     EFFECT_86                       = 0x86,
 };
 
-typedef struct Effect00FXData {
-    /* 0x00 */ char todo[0];
-} Effect00FXData; // size = unknown
-
 typedef struct BigSmokePuffFXData {
     /* 0x00 */ s16 unk_00;
     /* 0x02 */ s16 unk_02;
@@ -161,22 +157,6 @@ typedef struct BigSmokePuffFXData {
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ char unk_28[0x4];
 } BigSmokePuffFXData; // size = 0x2C
-
-typedef struct Effect02FXData {
-    /* 0x00 */ char todo[0];
-} Effect02FXData; // size = unknown
-
-typedef struct Effect03FXData {
-    /* 0x00 */ char todo[0];
-} Effect03FXData; // size = unknown
-
-typedef struct Effect04FXData {
-    /* 0x00 */ char todo[0];
-} Effect04FXData; // size = unknown
-
-typedef struct Effect05FXData {
-    /* 0x00 */ char todo[0];
-} Effect05FXData; // size = unknown
 
 typedef struct LandingDustFXData {
     /* 0x00 */ u16 type;
@@ -787,10 +767,6 @@ typedef struct SleepBubbleFXData {
     /* 0xC4 */ f32 unk_C4;
     /* 0xC8 */ f32 unk_C8;
 } SleepBubbleFXData; // size = 0xCC
-
-typedef struct Unk2AFXData {
-    /* 0x00 */ char todo[0];
-} Unk2AFXData; // size = unknown
 
 typedef struct WindyLeavesFXData {
     /* 0x00 */ s32 type;
@@ -2093,10 +2069,6 @@ typedef struct FloatingCloudPuffFXData {
     /* 0x38 */ f32 unk_38;
 } FloatingCloudPuffFXData; // size = 0x3C
 
-typedef struct Effect6AFXData {
-    /* 0x00 */ char todo[0];
-} Effect6AFXData; // size = unknown
-
 typedef struct EnergyInOutFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f pos;
@@ -2331,10 +2303,6 @@ typedef struct Effect75FXData {
     /* 0x78 */ f32 unk_78;
     /* 0x7C */ f32 unk_7C;
 } Effect75FXData; // size = 0x80
-
-typedef struct Effect76FXData {
-    /* 0x00 */ char todo[0];
-} Effect76FXData; // size = unknown
 
 typedef struct FireworkRocketFXData {
     /* 0x00 */ s32 variation;

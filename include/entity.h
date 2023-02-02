@@ -3,8 +3,8 @@
 
 #include "common.h"
 
-typedef s32 EntityScript[0];
-typedef s32 EntityModelScript[0];
+typedef s32 EntityScript[];
+typedef s32 EntityModelScript[];
 
 enum {
     ENTITY_SCRIPT_OP_End,
@@ -64,8 +64,8 @@ enum {
 
 #define BLOCK_GRID_SIZE 25
 
-#define TWEETSER_PATH_STOP 0x80000000
-#define TWEETSER_PATH_LOOP 0x80000001
+#define TWEESTER_PATH_STOP 0x80000000
+#define TWEESTER_PATH_LOOP 0x80000001
 
 typedef struct SaveBlockData {
     /* 0x000 */ char unk_0[4];
@@ -291,7 +291,7 @@ typedef struct BombableRockData {
     /* 0x88 */ f32 fragmentFallSpeed[6];
 } BombableRockData; // size = 0xA0
 
-typedef s32 TweesterPath[0];
+typedef s32 TweesterPath[];
 
 typedef struct TweesterData {
     /* 0x00 */ s8 unk_00;

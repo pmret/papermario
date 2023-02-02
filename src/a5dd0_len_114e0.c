@@ -7,13 +7,16 @@
 #include "effects.h"
 #include "nu/nusys.h"
 
-#ifdef SHIFT_VRAM
+#ifdef SHIFT
+#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shiftability
+#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shiftability
 #define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
+#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shiftability
 #else
-#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shiftability fix
-#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shiftability fix
+#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000
+#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0
 #define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
-#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shiftability fix
+#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000
 #endif
 
 typedef struct Fog {
