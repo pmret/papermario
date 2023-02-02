@@ -17,14 +17,13 @@
     ],
     "git.ignoreLimitWarning": true,
     "search.exclude": {
-        "**/build/src": true,
-        "docs/doxygen": true,
-        "ctx.c": true,
-        "ver/current": true,
-        "ver/us/build": true,
-        "ver/jp/build": true,
-        "expected": true,
         "**/*.i": true,
+        "**/build/src": true,
+        "ctx.c": true,
+        "docs/doxygen": true,
+        "expected": true,
+        "ver/jp/expected": true,
+        "ver/us/expected": true
     },
     "python.autoComplete.extraPaths": [
         "./tools"
