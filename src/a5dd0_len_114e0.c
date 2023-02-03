@@ -3672,7 +3672,8 @@ void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, 
     handle->gfx = (Gfx*) mdl_nextTextureAddress;
     memcpy(&handle->header, header, sizeof(*header));
     func_801180E8(header, (Gfx**)&mdl_nextTextureAddress, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
-    gSPEndDisplayList(((Gfx*)mdl_nextTextureAddress)++);
+    gSPEndDisplayList(mdl_nextTextureAddress);
+    mdl_nextTextureAddress += 8;
 }
 
 void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) {
@@ -5899,8 +5900,8 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
     }
     if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
         gDPPipeSync(gMasterGfxPos++);
-        // Load a 4x1 pixel tile of the depth buffer 
-        gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1, 
+        // Load a 4x1 pixel tile of the depth buffer
+        gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1,
             (s32) outX, 0, (s32) outX + 3, 0,
             0,
             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
@@ -6005,8 +6006,8 @@ s32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* s
     }
     if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
         gDPPipeSync(gMasterGfxPos++);
-        // Load a 4x1 pixel tile of the depth buffer 
-        gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1, 
+        // Load a 4x1 pixel tile of the depth buffer
+        gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1,
             (s32) outX, 0, (s32) outX + 3, 0,
             0,
             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,

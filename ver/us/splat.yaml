@@ -6824,6 +6824,7 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [0x415D90, c, 415D90]
+    - [auto, c, 415D902]
     - [0x4200D0]
   - type: code
     start: 0x4219F0
@@ -12217,7 +12218,7 @@ segments:
     - [0xB37B70, c, jan_03_5_entity]
     - [0xB37C20, c, jan_03_6_rooms]
     - [0xB37C20, c, jan_03_7_foliage]
-    - [0xB37E60]  
+    - [0xB37E60]
   - name: jan_04
     dir: world/area_jan/jan_04
     type: code
@@ -14090,7 +14091,7 @@ segments:
     - [0xD2FC80, c, sam_08_3_entity]
     - [0xD309C0, c, sam_08_4_npc]
     - [0xD31290, c, sam_08_5_scenes]
-    - [0xD31430]    
+    - [0xD31430]
   - name: sam_09
     dir: world/area_sam/sam_09
     type: code

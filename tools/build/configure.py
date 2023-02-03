@@ -393,7 +393,7 @@ class Configure:
                 if entry.src_paths[0].suffixes[-1] == ".cpp":
                     task = "cxx"
 
-                bad_list = ["a5dd0_len_114e0", "415D90"]
+                bad_list = ["415D90"]
                 seg_dir = str(seg.dir)
 
                 # if isinstance(seg.rom_start, int) and seg.rom_start < 0x10000: # 20000
