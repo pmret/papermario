@@ -3,11 +3,7 @@
 
 #include "world/common/enemy/ai/GuardAI.inc.c"
 
-NpcSettings N(NpcSettings_Kolorado) = {
-    .height = 40,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/Kolorado.inc.c"
 
 NpcSettings N(NpcSettings_Unused) = {
     .height = 35,
@@ -29,14 +25,14 @@ MAP_STATIC_PAD(1,normal_item);
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
-    ITEM_LETTER25,
+    ITEM_LETTER_TO_KOLORADO,
     ITEM_NONE
 };
 
 EvtScript N(EVS_DeliveryPrompt) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
-        ITEM_LETTER25, ITEM_NONE,
+        ITEM_LETTER_TO_KOLORADO, ITEM_NONE,
         MSG_CH2_004A, MSG_CH2_004B, MSG_CH2_004C, MSG_CH2_004D,
         EVT_PTR(N(LetterList)))
         EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
@@ -231,17 +227,17 @@ EvtScript N(EVS_NpcInteract_Archeologist_01) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH2_GOT_PULSE_STONE)
             EVT_IF_EQ(AF_SBK_02, FALSE)
-                EVT_SET(LVar0, 0x000D004E)
+                EVT_SET(LVar0, MSG_CH2_004E)
                 EVT_SET(AF_SBK_02, TRUE)
             EVT_ELSE
-                EVT_SET(LVar0, 0x000D004F)
+                EVT_SET(LVar0, MSG_CH2_004F)
                 EVT_SET(AF_SBK_02, FALSE)
             EVT_END_IF
         EVT_CASE_DEFAULT
             EVT_IF_EQ(GF_SBK_GaveArtifactToKolorado, FALSE)
-                EVT_SET(LVar0, 0x000D0050)
+                EVT_SET(LVar0, MSG_CH2_0050)
             EVT_ELSE
-                EVT_SET(LVar0, 0x000D0051)
+                EVT_SET(LVar0, MSG_CH2_0051)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, LVar0)
@@ -266,17 +262,17 @@ EvtScript N(EVS_NpcInteract_Archeologist_02) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH2_GOT_PULSE_STONE)
             EVT_IF_EQ(AF_SBK_03, FALSE)
-                EVT_SET(LVar0, 0x000D0052)
+                EVT_SET(LVar0, MSG_CH2_0052)
                 EVT_SET(AF_SBK_03, TRUE)
             EVT_ELSE
-                EVT_SET(LVar0, 0x000D0053)
+                EVT_SET(LVar0, MSG_CH2_0053)
                 EVT_SET(AF_SBK_03, FALSE)
             EVT_END_IF
         EVT_CASE_DEFAULT
             EVT_IF_EQ(GF_SBK_GaveArtifactToKolorado, FALSE)
-                EVT_SET(LVar0, 0x000D0054)
+                EVT_SET(LVar0, MSG_CH2_0054)
             EVT_ELSE
-                EVT_SET(LVar0, 0x000D0055)
+                EVT_SET(LVar0, MSG_CH2_0055)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, LVar0)
@@ -305,29 +301,8 @@ StaticNpc N(NpcData_Archeologist_02)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Kolorado),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Kolorado_Idle,
-            .walk   = ANIM_Kolorado_Walk,
-            .run    = ANIM_Kolorado_Run,
-            .chase  = ANIM_Kolorado_Run,
-            .anim_4 = ANIM_Kolorado_Idle,
-            .anim_5 = ANIM_Kolorado_Idle,
-            .death  = ANIM_Kolorado_Idle,
-            .hit    = ANIM_Kolorado_Idle,
-            .anim_8 = ANIM_Kolorado_Idle,
-            .anim_9 = ANIM_Kolorado_Idle,
-            .anim_A = ANIM_Kolorado_Idle,
-            .anim_B = ANIM_Kolorado_Idle,
-            .anim_C = ANIM_Kolorado_Idle,
-            .anim_D = ANIM_Kolorado_Idle,
-            .anim_E = ANIM_Kolorado_Idle,
-            .anim_F = ANIM_Kolorado_Idle,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_SBK_Kolorado,
     },
     {
@@ -337,11 +312,7 @@ StaticNpc N(NpcData_Archeologist_02)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Archeologist_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -354,24 +325,7 @@ StaticNpc N(NpcData_Archeologist_02)[] = {
                 .detectSize = { 0 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Archeologist_Idle,
-            .walk   = ANIM_Archeologist_Walk,
-            .run    = ANIM_Archeologist_Run,
-            .chase  = ANIM_Archeologist_Run,
-            .anim_4 = ANIM_Archeologist_Idle,
-            .anim_5 = ANIM_Archeologist_Idle,
-            .death  = ANIM_Archeologist_Idle,
-            .hit    = ANIM_Archeologist_Idle,
-            .anim_8 = ANIM_Archeologist_Idle,
-            .anim_9 = ANIM_Archeologist_Idle,
-            .anim_A = ANIM_Archeologist_Idle,
-            .anim_B = ANIM_Archeologist_Idle,
-            .anim_C = ANIM_Archeologist_Idle,
-            .anim_D = ANIM_Archeologist_Idle,
-            .anim_E = ANIM_Archeologist_Idle,
-            .anim_F = ANIM_Archeologist_Idle,
-        },
+        .animations = ARCHEOLOGIST_ANIMS,
         .tattle = MSG_NpcTattle_SBK_ExcavatorA,
     },
     {
@@ -381,11 +335,7 @@ StaticNpc N(NpcData_Archeologist_02)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Archeologist_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -398,24 +348,7 @@ StaticNpc N(NpcData_Archeologist_02)[] = {
                 .detectSize = { 0 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Archeologist_Idle,
-            .walk   = ANIM_Archeologist_Walk,
-            .run    = ANIM_Archeologist_Run,
-            .chase  = ANIM_Archeologist_Run,
-            .anim_4 = ANIM_Archeologist_Idle,
-            .anim_5 = ANIM_Archeologist_Idle,
-            .death  = ANIM_Archeologist_Idle,
-            .hit    = ANIM_Archeologist_Idle,
-            .anim_8 = ANIM_Archeologist_Idle,
-            .anim_9 = ANIM_Archeologist_Idle,
-            .anim_A = ANIM_Archeologist_Idle,
-            .anim_B = ANIM_Archeologist_Idle,
-            .anim_C = ANIM_Archeologist_Idle,
-            .anim_D = ANIM_Archeologist_Idle,
-            .anim_E = ANIM_Archeologist_Idle,
-            .anim_F = ANIM_Archeologist_Idle,
-        },
+        .animations = ARCHEOLOGIST_ANIMS,
         .tattle = MSG_NpcTattle_SBK_ExcavatorB,
     },
 };

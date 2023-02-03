@@ -217,7 +217,7 @@ EvtScript N(EVS_Scene_TubbaReunion) = {
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtNpc, NPC_TubbasHeart, SOUND_20C8, 0)
     EVT_CALL(NpcJump0, NPC_TubbasHeart, 298, 56, 31, 18)
-    EVT_CALL(SetNpcPos, NPC_TubbasHeart, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_TubbasHeart, NPC_DISPOSE_LOCATION)
     EVT_CALL(EnableNpcShadow, NPC_TubbasHeart, FALSE)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim23)

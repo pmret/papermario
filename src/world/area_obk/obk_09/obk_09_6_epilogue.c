@@ -26,7 +26,7 @@ EvtScript N(EVS_Scene_Epilogue) = {
     EVT_CALL(SetNpcAnimation, NPC_Bootler, ANIM_Bootler_Idle)
     EVT_WAIT(15)
     EVT_THREAD
-        EVT_CALL(DropTinyItemEntity, ITEM_LETTER25, NPC_DISPOSE_LOCATION, ITEM_SPAWN_MODE_DECORATION, 0)
+        EVT_CALL(DropResizableItemEntity, ITEM_LETTER_TO_KOLORADO, NPC_DISPOSE_LOCATION, ITEM_SPAWN_MODE_DECORATION, 0)
         EVT_CALL(N(SetInvitationLetterScale))
         EVT_LOOP(35)
             EVT_CALL(GetNpcPos, NPC_Bootler, LVar1, LVar2, LVar3)

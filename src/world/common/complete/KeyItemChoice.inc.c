@@ -76,7 +76,7 @@ EvtScript N(EVS_ChooseKeyItem) = {
 };
 
 #define EVT_CHOOSE_ANY_KEY_ITEM() \
-    EVT_SET(LVar0, 0) \
+    EVT_SET(LVar0, NULL) \
     EVT_SET(LVar1, 0) \
     EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
 

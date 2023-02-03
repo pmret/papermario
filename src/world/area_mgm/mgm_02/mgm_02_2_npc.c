@@ -1012,13 +1012,7 @@ NpcSettings N(NpcSettings_Luigi) = {
     .level = 99,
 };
 
-NpcSettings N(NpcSettings_Fuzzy) = {
-    .height = 20,
-    .radius = 22,
-    .level = 6,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
+#include "world/common/enemy/complete/Fuzzy.inc.c"
 
 NpcSettings N(NpcSettings_Bobomb) = {
     .height = 23,

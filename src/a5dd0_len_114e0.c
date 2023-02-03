@@ -29,11 +29,6 @@ typedef struct Fog {
     /* 0x18 */ s32 endDistance;
 } Fog; // size = 0x1C
 
-typedef struct Struct_8011CFBC {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-} Struct_8011CFBC; // size = 0x08
-
 extern s32 D_801516FC;
 
 extern Gfx D_8014B7F8[];
@@ -447,7 +442,28 @@ Matrix4s mdl_RDPIdentity = {
     }
 };
 
-Struct_8011CFBC D_8014B7A8[] = {
+// The depth buffer contains values encoded in a custom 18-bit floating-point format.
+// There are 3 bits of exponent, 11 bits of mantissa, and 4 bits of "dz".
+// However, two of the "dz" bits are inaccessible to the CPU because it can only access 8 of the 9
+//   bits of each RDRAM byte (the N64 has 9-bit RAM).
+// Therefore, the CPU sees it as a 16-bit value.
+
+// Fields in floating point depth buffer format
+#define DEPTH_EXPONENT_MASK 0xE000
+#define DEPTH_MANTISSA_MASK 0x1FFC
+#define DEPTH_DZ_MASK       0x0003
+
+#define DEPTH_EXPONENT_SHIFT 13
+#define DEPTH_MANTISSA_SHIFT 2
+#define DEPTH_DZ_SHIFT       0
+
+// Lookup table for converting depth buffer values to a 15.3 fixed-point format.
+typedef struct DepthFloatFactors {
+    /* 0x00 */ s32 shift;
+    /* 0x04 */ s32 bias;
+} DepthFloatFactors;
+
+DepthFloatFactors depthFloatLookupTable[] = {
     { 6, 0x00000 },
     { 5, 0x20000 },
     { 4, 0x30000 },
@@ -458,6 +474,11 @@ Struct_8011CFBC D_8014B7A8[] = {
     { 0, 0x3F800 },
     { 0, 0x00000 },
 };
+
+// Maximum depth value after the viewport transform.
+// The multiplication by 2 comes from transforming depth from (-0.5, 0.5) to (0.0, 1.0).
+// The multiplication by 32 comes from scaling the RSP does to increase depth precision.
+#define MAX_VIEWPORT_DEPTH (2 * 32 * ((G_MAXZ / 2)))
 
 s32 D_8014B7F0 = 0;
 
@@ -1098,7 +1119,7 @@ extern RenderTask mdl_clearRenderTasks[3][0x100];
 
 extern s32 D_801A7000; // todo ???
 
-extern u16 D_80153380[16];
+extern u16 depthCopyBuffer[16];
 
 void update_shadows(void);
 s32 step_entity_commandlist(Entity* entity);
@@ -4286,7 +4307,7 @@ void func_80116698(void) {
 void render_models(void) {
     RenderTask rt;
     RenderTask* rtPtr = &rt;
-    f32 outX, outY, outZ, outS;
+    f32 outX, outY, outZ, outW;
     f32 m00, m01, m02, m03;
     f32 m10, m11, m12, m13;
     f32 m20, m21, m22, m23;
@@ -4308,14 +4329,15 @@ void render_models(void) {
     outX = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30; \
     outY = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31; \
     outZ = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32; \
-    outS = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33; \
-    if (outS == 0.0f) { \
+    outW = (m03 * xComp) + (m13 * yComp) + (m23 * zComp) + m33; \
+    if (outW == 0.0f) { \
         break; \
     } \
-    outS = 1.0f / outS; \
-    xComp = outX * outS; \
-    yComp = outY * outS; \
-    zComp = outZ * outS; \
+    /* Perspective divide */ \
+    outW = 1.0f / outW; \
+    xComp = outX * outW; \
+    yComp = outY * outW; \
+    zComp = outZ * outW; \
     if (zComp > -1.0f && xComp >= -1.0f && xComp <= 1.0f && yComp >= -1.0f && yComp <= 1.0f) { \
         break; \
     }
@@ -4433,7 +4455,7 @@ void render_models(void) {
             }
         }
 
-        transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &outX, &outY, &outZ, &outS);
+        transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &outX, &outY, &outZ, &outW);
         distance = outZ + 5000.0f;
         if (distance < 0) {
             distance = 0;
@@ -4472,13 +4494,13 @@ void render_models(void) {
         transform_point(
             camera->perspectiveMatrix,
             xComp, yComp, zComp, 1.0f,
-            &outX, &outY, &outZ, &outS
+            &outX, &outY, &outZ, &outW
         );
-        if (outS == 0.0f) {
-            outS = 1.0f;
+        if (outW == 0.0f) {
+            outW = 1.0f;
         }
 
-        distance = ((outZ / outS) * 10000.0f);
+        distance = ((outZ / outW) * 10000.0f);
 
         if (!(transformGroup->flags & 2)) {
             rtPtr->appendGfx = render_transform_group;
@@ -5818,42 +5840,57 @@ void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, f32 (*destMtx)[4], void* 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_project_tex_coords);
 #endif
 
-s32 func_8011C80C(u16 arg0, s32 arg3, f32* arg4, f32* arg5) {
+// Checks if the center of a model is visible.
+// If `depthQueryID` is nonnegative, the depth buffer is checked to see if the model's center is occluded by geometry.
+//   Otherwise, the occlusion check is skipped.
+// `depthQueryID` must be between 0 and the size of `depthCopyBuffer` minus 1.
+// Every nonnegative value of `depthQueryID` must be unique within a frame, otherwise the result will corrupt the data
+//   of the previous query that shared the same ID.
+// Occlusion visibility checks are always one frame out of date, as they reference the previous frame's depth buffer.
+s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* screenY) {
     Camera* camera = &gCameras[gCurrentCameraID];
-    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(arg0));
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
     f32 outX;
     f32 outY;
     f32 outZ;
-    f32 outS;
+    f32 outW;
 
-    s32 temp1;
-    s32 temp2;
-    u32 temp3, temp4;
-    u32 temp6;
-    s32 temp5;
-    Struct_8011CFBC* v1;
+    s32 depthExponent;
+    s32 depthMantissa;
+    u32 shiftedMantissa, mantissaBias;
+    u32 decodedDepth;
+    s32 scaledDepth;
 
-    if (arg3 >= 16) {
+    // If an invalid depth query id was provided, return false.
+    if (depthQueryID >= ARRAY_COUNT(depthCopyBuffer)) {
         return FALSE;
     }
-    transform_point(camera->perspectiveMatrix, model->center.x, model->center.y, model->center.z, 1.0f, &outX, &outY, &outZ, &outS);
-    if (outS == 0.0f) {
-        *arg4 = 0.0f;
-        *arg5 = 0.0f;
+    // Transform the model's center into clip space.
+    transform_point(camera->perspectiveMatrix, model->center.x, model->center.y, model->center.z, 1.0f, &outX, &outY, &outZ, &outW);
+    if (outW == 0.0f) {
+        *screenX = 0.0f;
+        *screenY = 0.0f;
         return TRUE;
     }
-    outS = 1.0f / outS;
-    outX *= outS;
-    outY *= -outS;
-    outZ *= outS;
+    // Perform the perspective divide (divide xyz by w) to convert to normalized device coords.
+    // Normalized device coords have a range of (-1, 1) on each axis.
+    outW = 1.0f / outW;
+    outX *= outW;
+    outY *= -outW;
+    outZ *= outW;
+    // Perform the viewport transform for x and y (convert normalized device coords to viewport coords).
+    // Viewport coords have a range of (0, Width) for x and (0, Height) for y.
     outX = (outX * camera->viewportW + camera->viewportW) * 0.5;
     outX += camera->viewportStartX;
     outY = (outY * camera->viewportH + camera->viewportH) * 0.5;
     outY += camera->viewportStartY;
+    // Convert depth from (-1, 1) to (0, 1).
     outZ = (outZ + 1.0f) * 0.5;
-    *arg4 = (s32)outX;
-    *arg5 = (s32)outY;
-    if (arg3 < 0) {
+    // Write out the calculated x and y values.
+    *screenX = (s32)outX;
+    *screenY = (s32)outY;
+    // If a depth query wasn't requested, simply check if the point is within the view frustum.
+    if (depthQueryID < 0) {
         if (outZ > 0.0f) {
             return FALSE;
         } else {
@@ -5862,119 +5899,158 @@ s32 func_8011C80C(u16 arg0, s32 arg3, f32* arg4, f32* arg5) {
     }
     if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
         gDPPipeSync(gMasterGfxPos++);
-        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]));
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
-        gDPLoadSync(gMasterGfxPos++);
-        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, (s32) outX * 4, 0, ((s32) outX + 3) * 4, 0);
+        // Load a 4x1 pixel tile of the depth buffer 
+        gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1, 
+            (s32) outX, 0, (s32) outX + 3, 0,
+            0,
+            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+            9, G_TX_NOMASK,
+            G_TX_NOLOD, G_TX_NOLOD);
         gDPPipeSync(gMasterGfxPos++);
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
-        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, (s32) outX * 4, 0, ((s32) outX + 3) * 4, 0);
+        // Set the current color image to the buffer where copied depth values are stored.
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, depthCopyBuffer);
         gDPPipeSync(gMasterGfxPos++);
-        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, D_80153380);
-        gDPPipeSync(gMasterGfxPos++);
+        // Set up 1 cycle mode and all other relevant othermode params.
+        // One cycle mode must be used here because only one pixel is copied, and copy mode only supports multiples of 4 pixels.
         gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
         gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
         gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
         gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
         gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
-        gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+        gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
         gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
         gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
         gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
-        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, arg3, 0, arg3 + 1, 1);
-        gSPTextureRectangle(gMasterGfxPos++, arg3 * 4, 0 * 4, 4 * 4, 1 * 4, G_TX_RENDERTILE, (s32) outX * 32, 0, 0x0400, 0x0400);
+        // Adjust the scissor to only draw to the specified pixel.
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, depthQueryID, 0, depthQueryID + 1, 1);
+        // Draw a texrect to copy one pixel of the loaded depth tile to the output buffer.
+        gSPTextureRectangle(gMasterGfxPos++, depthQueryID << 2, 0 << 2, 4 << 2, 1 << 2, G_TX_RENDERTILE, (s32) outX << 5, 0, 1 << 10, 1 << 10);
+        // Sync and swap the color image back to the current framebuffer.
         gDPPipeSync(gMasterGfxPos++);
         gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
         gDPPipeSync(gMasterGfxPos++);
+        // Reconfigure the frame's normal scissor.
         gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, camera->viewportStartX, camera->viewportStartY, camera->viewportStartX + camera->viewportW, camera->viewportStartY + camera->viewportH);
 
-        temp1 = D_80153380[arg3] >> 13;
-        temp2 = (D_80153380[arg3] & 0x1FFF) / 4;
-        v1 = &D_8014B7A8[temp1];
-        temp3 = temp2 << v1->unk_00;
-        temp4 = v1->unk_04;
-        temp6 = (temp3 + temp4) / 8;
-        temp5 = outZ * 32704.0f;
-        if (temp6 < temp5) {
+        // The following code will use last frame's depth value, since the copy that was just written won't be executed until the current frame is drawn.
+
+        // Extract the exponent and mantissa from the depth buffer value.
+        depthExponent = depthCopyBuffer[depthQueryID] >> DEPTH_EXPONENT_SHIFT;
+        depthMantissa = (depthCopyBuffer[depthQueryID] & (DEPTH_MANTISSA_MASK | DEPTH_DZ_MASK)) >> DEPTH_MANTISSA_SHIFT;
+        // Convert the exponent and mantissa into a fixed-point value.
+        shiftedMantissa = depthMantissa << depthFloatLookupTable[depthExponent].shift;
+        mantissaBias = depthFloatLookupTable[depthExponent].bias;
+        // Remove the 3 fractional bits of precision.
+        decodedDepth = (shiftedMantissa + mantissaBias) >> 3;
+        // Convert the calculated screen depth into viewport depth.
+        scaledDepth = outZ * MAX_VIEWPORT_DEPTH;
+        if (decodedDepth < scaledDepth) {
             return FALSE;
         }
     }
     return outZ > 0.0f;
 }
 
-s32 func_8011CFBC(f32 x, f32 y, f32 z, s32 arg3, f32* arg4, f32* arg5) {
+// Checks if a point is visible on screen.
+// If `depthQueryID` is nonnegative, the depth buffer is checked to see if the point is occluded by geometry.
+//   Otherwise, the occlusion check is skipped.
+// `depthQueryID` must be between 0 and the size of `depthCopyBuffer` minus 1.
+// Every nonnegative value of `depthQueryID` must be unique within a frame, otherwise the result will corrupt the data
+//   of the previous query that shared the same ID.
+// Occlusion visibility checks are always one frame out of date, as they reference the previous frame's depth buffer.
+s32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* screenY) {
     Camera* camera = &gCameras[gCurrentCameraID];
     f32 outX;
     f32 outY;
     f32 outZ;
-    f32 outS;
+    f32 outW;
 
-    s32 temp1;
-    s32 temp2;
-    u32 temp3, temp4;
-    u32 temp6;
-    s32 temp5;
-    Struct_8011CFBC* v1;
+    s32 depthExponent;
+    s32 depthMantissa;
+    u32 shiftedMantissa, mantissaBias;
+    u32 decodedDepth;
+    s32 scaledDepth;
 
-    if (arg3 >= 16) {
+    // If an invalid depth query id was provided, return false.
+    if (depthQueryID >= ARRAY_COUNT(depthCopyBuffer)) {
         return FALSE;
     }
-    transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &outX, &outY, &outZ, &outS);
-    if (outS == 0.0f) {
-        *arg4 = 0.0f;
-        *arg5 = 0.0f;
+    // Transform the point into clip space.
+    transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &outX, &outY, &outZ, &outW);
+    if (outW == 0.0f) {
+        *screenX = 0.0f;
+        *screenY = 0.0f;
         return TRUE;
     }
-    outS = 1.0f / outS;
-    outX *= outS;
-    outY *= -outS;
-    outZ *= outS;
+    // Perform the perspective divide (divide xyz by w) to convert to normalized device coords.
+    // Normalized device coords have a range of (-1, 1) on each axis.
+    outW = 1.0f / outW;
+    outX *= outW;
+    outY *= -outW;
+    outZ *= outW;
+    // Perform the viewport transform for x and y (convert normalized device coords to viewport coords).
+    // Viewport coords have a range of (0, Width) for x and (0, Height) for y.
     outX = (outX * camera->viewportW + camera->viewportW) * 0.5;
     outX += camera->viewportStartX;
     outY = (outY * camera->viewportH + camera->viewportH) * 0.5;
     outY += camera->viewportStartY;
+    // Convert depth from (-1, 1) to (0, 1).
     outZ = (outZ + 1.0f) * 0.5;
-    *arg4 = outX;
-    *arg5 = outY;
-    if (arg3 < 0) {
+    // Write out the calculated x and y values.
+    *screenX = outX;
+    *screenY = outY;
+    // If a depth query wasn't requested, simply check if the point is within the view frustum.
+    if (depthQueryID < 0) {
         return outZ > 0.0f;
     }
     if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
         gDPPipeSync(gMasterGfxPos++);
-        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]));
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
-        gDPLoadSync(gMasterGfxPos++);
-        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, (s32) outX * 4, 0, ((s32) outX + 3) * 4, 0);
+        // Load a 4x1 pixel tile of the depth buffer 
+        gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1, 
+            (s32) outX, 0, (s32) outX + 3, 0,
+            0,
+            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+            9, G_TX_NOMASK,
+            G_TX_NOLOD, G_TX_NOLOD);
         gDPPipeSync(gMasterGfxPos++);
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
-        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, (s32) outX * 4, 0, ((s32) outX + 3) * 4, 0);
+        // Set the current color image to the buffer where copied depth values are stored.
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, depthCopyBuffer);
         gDPPipeSync(gMasterGfxPos++);
-        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, D_80153380);
-        gDPPipeSync(gMasterGfxPos++);
+        // Set up 1 cycle mode and all other relevant othermode params.
+        // One cycle mode must be used here because only one pixel is copied, and copy mode only supports multiples of 4 pixels.
         gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
         gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
         gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
         gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
         gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
-        gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+        gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
         gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
         gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
         gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
-        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, arg3, 0, arg3 + 1, 1);
-        gSPTextureRectangle(gMasterGfxPos++, arg3 * 4, 0 * 4, (arg3 + 1) * 4, 1 * 4, G_TX_RENDERTILE, (s32) outX * 32, 0, 0x0400, 0x0400);
+        // Adjust the scissor to only draw to the specified pixel.
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, depthQueryID, 0, depthQueryID + 1, 1);
+        // Draw a texrect to copy one pixel of the loaded depth tile to the output buffer.
+        gSPTextureRectangle(gMasterGfxPos++, depthQueryID << 2, 0 << 2, (depthQueryID + 1) << 2, 1 << 2, G_TX_RENDERTILE, (s32) outX << 5, 0, 1 << 10, 1 << 10);
+        // Sync and swap the color image back to the current framebuffer.
         gDPPipeSync(gMasterGfxPos++);
         gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
         gDPPipeSync(gMasterGfxPos++);
+        // Reconfigure the frame's normal scissor.
         gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, camera->viewportStartX, camera->viewportStartY, camera->viewportStartX + camera->viewportW, camera->viewportStartY + camera->viewportH);
 
-        temp1 = D_80153380[arg3] >> 13;
-        temp2 = (D_80153380[arg3] & 0x1FFF) / 4;
-        v1 = &D_8014B7A8[temp1];
-        temp3 = temp2 << v1->unk_00;
-        temp4 = v1->unk_04;
-        temp6 = (temp3 + temp4) / 8;
-        temp5 = outZ * 32704.0f;
-        if (temp6 < temp5) {
+        // The following code will use last frame's depth value, since the copy that was just written won't be executed until the current frame is drawn.
+
+        // Extract the exponent and mantissa from the depth buffer value.
+        depthExponent = depthCopyBuffer[depthQueryID] >> DEPTH_EXPONENT_SHIFT;
+        depthMantissa = (depthCopyBuffer[depthQueryID] & (DEPTH_MANTISSA_MASK | DEPTH_DZ_MASK)) >> DEPTH_MANTISSA_SHIFT;
+        // Convert the exponent and mantissa into a fixed-point value.
+        shiftedMantissa = depthMantissa << depthFloatLookupTable[depthExponent].shift;
+        mantissaBias = depthFloatLookupTable[depthExponent].bias;
+        // Remove the 3 fractional bits of precision.
+        decodedDepth = (shiftedMantissa + mantissaBias) >> 3;
+        // Convert the calculated screen depth into viewport depth.
+        scaledDepth = outZ * MAX_VIEWPORT_DEPTH;
+        if (decodedDepth < scaledDepth) {
             return FALSE;
         }
     }

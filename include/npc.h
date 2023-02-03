@@ -7,9 +7,15 @@
 
 // battle and stage are optional in overloaded NPC_GROUP macros
 #define NPC_GROUP(args...) VFUNC(NPC_GROUP, args)
-#define NPC_GROUP1(npcs) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, 0, 0 }
-#define NPC_GROUP2(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, 0 }
+#define NPC_GROUP1(npcs)                { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, 0, 0 }
+#define NPC_GROUP2(npcs, battle)        { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, 0 }
 #define NPC_GROUP3(npcs, battle, stage) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, stage + 1 }
+
+#define NPC_GROUP_EXPLICIT_SIZE(args...) VFUNC(NPC_GROUP_EXPLICIT_SIZE, args)
+#define NPC_GROUP_EXPLICIT_SIZE3(npcs, start, count)                { count, (StaticNpc*) &npcs[start], 0, 0 }
+#define NPC_GROUP_EXPLICIT_SIZE4(npcs, start, count, battle)        { count, (StaticNpc*) &npcs[start], battle, 0 }
+#define NPC_GROUP_EXPLICIT_SIZE5(npcs, start, count, battle, stage) { count, (StaticNpc*) &npcs[start], battle, stage + 1 }
+
 
 #define NO_DROPS { { F16(100), F16(0), 0, F16(0) }, }
 

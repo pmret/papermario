@@ -415,7 +415,7 @@ void draw_entity_model_A(s32 modelIdx, Mtx* transformMtx) {
     RenderTask* rtPtr = &rt;
     Camera* camera = &gCameras[gCurrentCamID];
     Matrix4f mtx;
-    f32 x, y, z, s;
+    f32 x, y, z, w;
     f32 inX, inY, inZ;
 
     if ((gGameStatusPtr->isBattle == 0) || (modelIdx & 0x800)) {
@@ -433,7 +433,7 @@ void draw_entity_model_A(s32 modelIdx, Mtx* transformMtx) {
                             inX = mtx[3][0];
                             inY = mtx[3][1];
                             inZ = mtx[3][2];
-                            transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &s);
+                            transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &w);
                             rtPtr->renderMode = model->renderMode;
                             rtPtr->appendGfxArg = model;
                             rtPtr->appendGfx = (void(*)(void*))appendGfx_entity_model;
@@ -453,7 +453,7 @@ void draw_entity_model_B(s32 modelIdx, Mtx* transformMtx, s32 vertexSegment, Vec
     RenderTask* rtPtr = &rt;
     Camera* camera = &gCameras[gCurrentCamID];
     Matrix4f mtx;
-    f32 x, y, z, s;
+    f32 x, y, z, w;
     f32 inX, inY, inZ;
 
     if ((gGameStatusPtr->isBattle == 0) || (modelIdx & 0x800)) {
@@ -472,7 +472,7 @@ void draw_entity_model_B(s32 modelIdx, Mtx* transformMtx, s32 vertexSegment, Vec
                             inX = mtx[3][0];
                             inY = mtx[3][1];
                             inZ = mtx[3][2];
-                            transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &s);
+                            transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &w);
                             rtPtr->renderMode = model->renderMode;
                             rtPtr->appendGfxArg = model;
                             rtPtr->appendGfx = (void(*)(void*))appendGfx_entity_model;
