@@ -393,22 +393,23 @@ class Configure:
                 if entry.src_paths[0].suffixes[-1] == ".cpp":
                     task = "cxx"
 
-                full_segments = ["main", "engine1", "engine2", "engine4", "evt"]
-                bad_list = ["a5dd0_len_114e0", "evt"]
-                top_lev_name = seg.get_most_parent().name
+                bad_list = ["a5dd0_len_114e0", "415D90"]
                 seg_dir = str(seg.dir)
 
-                if top_lev_name in full_segments and seg.name not in bad_list:
-                    task = "cc_modern"
+                # if isinstance(seg.rom_start, int) and seg.rom_start < 0x10000: # 20000
+                #     task = "cc_modern"
+                # else:
+                #     task = "cc"
 
-                if "entity" in seg_dir or "entity/" in seg.name or "world/action" == seg_dir:
-                    task = "cc_modern"
+                task = "cc_modern"
 
-                if "entity" in seg_dir or ("world" in seg_dir and "world/area" not in seg_dir):
-                    task = "cc_modern"
-
-                if isinstance(seg.rom_start, int) and seg.rom_start > 0x135EE0 and seg.rom_start < 0x3169F0:
-                    task = "cc_modern"
+                if ("world/area" in seg_dir and (
+                    "nok" in seg_dir or
+                    "kkj" in seg_dir or
+                    "jan" in seg_dir or
+                    "pra" in seg_dir
+                )) or seg.name in bad_list:
+                    task = "cc"
 
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
@@ -418,7 +419,7 @@ class Configure:
                 cflags = cflags.replace("gcc_272", "")
 
                 # Dead cod
-                if isinstance(seg, segtypes.common.c.CommonSegC) and seg.rom_start >= 0xEA0900:
+                if isinstance(seg, segtypes.common.c.CommonSegC) and isinstance(seg.rom_start, int) and seg.rom_start >= 0xEA0900:
                     obj_path = str(entry.object_path)
                     init_obj_path = Path(obj_path + ".dead")
                     build(init_obj_path, entry.src_paths, task, variables={
