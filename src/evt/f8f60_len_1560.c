@@ -298,7 +298,7 @@ void load_path_data(s32 num, f32* normalizedLengths, Vec3f* pathPositions, Vec3f
     outVectors[num-1].x = 0.0f;
     outVectors[num-1].y = 0.0f;
     outVectors[num-1].z = 0.0f;
-    
+
     for (i = 0; i < num - 1; i++) {
         lenBuf[i] = normalizedLengths[i+1] - normalizedLengths[i];
         vecBuf[i+1].x = (pathPositions[i+1].x - pathPositions[i].x) / lenBuf[i];
@@ -337,7 +337,7 @@ void load_path_data(s32 num, f32* normalizedLengths, Vec3f* pathPositions, Vec3f
         outVectors[i].y = (outVectors[i].y - (lenBuf[i] * outVectors[i+1].y)) / vecBuf[i].y;
         outVectors[i].z = (outVectors[i].z - (lenBuf[i] * outVectors[i+1].z)) / vecBuf[i].z;
     }
-    
+
     heap_free(lenBuf);
     heap_free(vecBuf);
 }
@@ -348,7 +348,7 @@ void get_path_position(f32 alpha, Vec3f* outPos, s32 numVectors, f32* normalized
     f32 curProgress;
     f32 ax, ay, az, bx, by, bz, dx, dy, dz;
     s32 i;
-    
+
     for (i = 0; i < limit;) {
         s32 temp_v1 = (i + limit) / 2;
 
@@ -362,7 +362,7 @@ void get_path_position(f32 alpha, Vec3f* outPos, s32 numVectors, f32* normalized
     if (i > 0) {
         i--;
     }
-    
+
     curLength = normalizedLengths[i+1] - normalizedLengths[i];
     curProgress = alpha - normalizedLengths[i];
 
@@ -450,13 +450,12 @@ ApiStatus GetNextPathPos(Evt* script, s32 isInitialCall) {
 ApiStatus GetDist2D(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Bytecode outVar = *args++;
+    f32 ax = evt_get_float_variable(script, *args++);
+    f32 ay = evt_get_float_variable(script, *args++);
+    f32 bx = evt_get_float_variable(script, *args++);
+    f32 by = evt_get_float_variable(script, *args++);
 
-    evt_set_float_variable(script, outVar, dist2D(
-                           evt_get_float_variable(script, *args++),
-                           evt_get_float_variable(script, *args++),
-                           evt_get_float_variable(script, *args++),
-                           evt_get_float_variable(script, *args++)
-                       ));
+    evt_set_float_variable(script, outVar, dist2D(ax, ay, bx, by));
 
     return ApiStatus_DONE2;
 }
@@ -537,16 +536,18 @@ ApiStatus SetGameMode(Evt* script, s32 isInitialCall) {
 
 ApiStatus ClampAngleInt(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 angle = evt_get_variable(script, *args);
 
-    evt_set_variable(script, *args++, clamp_angle(evt_get_variable(script, *args)));
+    evt_set_variable(script, *args++, clamp_angle(angle));
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus ClampAngleFloat(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    f32 angle = evt_get_float_variable(script, *args);
 
-    evt_set_float_variable(script, *args++, clamp_angle(evt_get_float_variable(script, *args)));
+    evt_set_float_variable(script, *args++, clamp_angle(angle));
 
     return ApiStatus_DONE2;
 }
