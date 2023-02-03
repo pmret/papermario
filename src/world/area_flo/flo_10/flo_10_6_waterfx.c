@@ -101,7 +101,7 @@ void N(UnkModelFunc001)(void) {
     ModelBoundingBox* bb = (ModelBoundingBox*) model->modelNode->propertyList;
     f32 bbHalfX = bb->halfSizeX;
     f32 bbHalfZ = bb->halfSizeZ;
-    f32 outX, outY, outZ, outS;
+    f32 outX, outY, outZ, outW;
     f32 temp_f24;
     f32 temp_f26;
     f32 temp_f20;
@@ -109,14 +109,14 @@ void N(UnkModelFunc001)(void) {
 
     transform_point(camera->perspectiveMatrix,
                     model->center.x - bbHalfX, model->center.y, model->center.z - bbHalfZ, 1.0f,
-                    &outX, &outY, &outZ, &outS);
+                    &outX, &outY, &outZ, &outW);
 
-    outX *= 1.0f / outS;
-    outY *= -(1.0f / outS);
-    outZ *= 1.0f / outS;
-    outS = 1.0f / outS;
+    outX *= 1.0f / outW;
+    outY *= -(1.0f / outW);
+    outZ *= 1.0f / outW;
+    outW = 1.0f / outW;
 
-    if (outS < 0.0f) {
+    if (outW < 0.0f) {
         outX = 0.0f;
         outY = 1.0f;
     }
@@ -125,16 +125,16 @@ void N(UnkModelFunc001)(void) {
 
     transform_point(camera->perspectiveMatrix,
                     model->center.x - bbHalfX, model->center.y, model->center.z + bbHalfZ, 1.0f,
-                    &outX, &outY, &outZ, &outS);
+                    &outX, &outY, &outZ, &outW);
 
-    outX *= 1.0f / outS;
-    outY *= -(1.0f / outS);
-    outZ *= 1.0f / outS;
-    outS = 1.0f / outS;
+    outX *= 1.0f / outW;
+    outY *= -(1.0f / outW);
+    outZ *= 1.0f / outW;
+    outW = 1.0f / outW;
 
     temp_f24 = temp_f20;
     temp_f26 = temp_f22;
-    if (outS < 0.0f) {
+    if (outW < 0.0f) {
         outX = 0.0f;
         outY = 1.0f;
     }
@@ -157,14 +157,14 @@ void N(UnkModelFunc001)(void) {
 
     transform_point(camera->perspectiveMatrix,
                     model->center.x + bbHalfX, model->center.y, model->center.z + bbHalfZ, 1.0f,
-                    &outX, &outY, &outZ, &outS);
+                    &outX, &outY, &outZ, &outW);
 
-    outX *= 1.0f / outS;
-    outY *= -(1.0f / outS);
-    outZ *= 1.0f / outS;
-    outS = 1.0f / outS;
+    outX *= 1.0f / outW;
+    outY *= -(1.0f / outW);
+    outZ *= 1.0f / outW;
+    outW = 1.0f / outW;
 
-    if (outS < 0.0f) {
+    if (outW < 0.0f) {
         outX = 1.0f;
         outY = 1.0f;
     }
@@ -187,14 +187,14 @@ void N(UnkModelFunc001)(void) {
 
     transform_point(camera->perspectiveMatrix,
                     model->center.x + bbHalfX, model->center.y, model->center.z - bbHalfZ, 1.0f,
-                    &outX, &outY, &outZ, &outS);
+                    &outX, &outY, &outZ, &outW);
 
-    outX *= 1.0f / outS;
-    outY *= -(1.0f / outS);
-    outZ *= 1.0f / outS;
-    outS = 1.0f / outS;
+    outX *= 1.0f / outW;
+    outY *= -(1.0f / outW);
+    outZ *= 1.0f / outW;
+    outW = 1.0f / outW;
 
-    if (outS < 0.0f) {
+    if (outW < 0.0f) {
         outX = 1.0f;
         outY = 1.0f;
     }
