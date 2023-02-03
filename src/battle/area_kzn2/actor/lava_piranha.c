@@ -1375,7 +1375,7 @@ EvtScript N(onDeath) = {
         EVT_THREAD
             EVT_CALL(PlaySound, SOUND_3BC)
             EVT_CALL(ShakeCam, 1, 0, 119, EVT_FLOAT(0.3))
-            EVT_CALL(PlaySound, SOUND_7BC)
+            EVT_CALL(PlaySound, SOUND_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 234)
         EVT_CALL(func_8027D32C, ACTOR_SELF)
@@ -1473,7 +1473,7 @@ EvtScript N(onDeath) = {
         EVT_THREAD
             EVT_CALL(PlaySound, SOUND_3BC)
             EVT_CALL(ShakeCam, 1, 0, 165, EVT_FLOAT(1.2))
-            EVT_CALL(PlaySound, SOUND_7BC)
+            EVT_CALL(PlaySound, SOUND_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 300)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
@@ -1646,7 +1646,7 @@ EvtScript N(onDeath) = {
             EVT_CALL(PlaySound, SOUND_3BC)
             EVT_CALL(ShakeCam, 1, 0, 100, EVT_FLOAT(0.5))
             EVT_CALL(ShakeCam, 1, 0, 8, EVT_FLOAT(0.2))
-            EVT_CALL(PlaySound, SOUND_7BC)
+            EVT_CALL(PlaySound, SOUND_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 216)
         EVT_THREAD

@@ -404,11 +404,11 @@ void func_8005232C(AuAmbienceManager* manager, AuAmbPlayer* lambda) {
                     voice->fxmix = xi->reverb;
                     voice->instrument = xi->instrument;
                     voice->busId = manager->busId;
-                    voice->envelopeData.cmdListPress = xi->unk_04.cmdListPress;
-                    voice->envelopeData.cmdListRelease = xi->unk_04.cmdListRelease;
+                    voice->envelope.cmdListPress = xi->unk_04.cmdListPress;
+                    voice->envelope.cmdListRelease = xi->unk_04.cmdListRelease;
                     voice->syncFlags = AU_VOICE_SYNC_FLAG_ALL;
                     voice->priority = manager->priority;
-                    voice->priorityCopy = voice->priority;
+                    voice->clientPriority = voice->priority;
                 }
             }
             omega->unk_00 = 0;

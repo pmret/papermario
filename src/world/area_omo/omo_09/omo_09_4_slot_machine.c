@@ -11,7 +11,7 @@ enum SlotSymbol {
     SYM_SHYGUY          = 1,
     SYM_COIN            = 2,
     SYM_STAR            = 3,
-};  
+};
 
 enum SlotMachineProgress {
     SLOT_PROGRESS_HIT_ONE       = 2,
@@ -45,8 +45,8 @@ EvtScript N(EVS_SetCam_ViewPayout) = {
 
 s32 N(HitBlockRecoilOffsets)[] = {
     3, 0, -3, 0,
-    2, 0, -2, 0, 
-    1, 0, -1, 0, 
+    2, 0, -2, 0,
+    1, 0, -1, 0,
 };
 
 EvtScript N(EVS_HitBlockRecoil) = {
@@ -604,7 +604,7 @@ EvtScript N(EVS_SlotMachine_MainUpdate) = {
             EVT_IF_NE(LVarA, SLOT_MATCH_NONE)
                 // partial match after two blocks hit
                 EVT_SET(MF_AnimateSlotLights, TRUE)
-                EVT_CALL(PlaySoundAtCollider, COLLIDER_o881, SOUND_B88, 0)
+                EVT_CALL(PlaySoundAtCollider, COLLIDER_o881, SOUND_388 | SOUND_ID_TRIGGER_CHANGE_VOLUME, 0)
             EVT_END_IF
         EVT_END_IF
         EVT_WAIT(1)
@@ -769,7 +769,7 @@ s32 N(SlotMachineBlocks)[] = {
     MODEL_s1,
     MODEL_h1,
     MODEL_h2,
-    MODEL_h3, 
+    MODEL_h3,
 };
 
 API_CALLABLE(N(UpdateSlotMachineBlockShadows)) {

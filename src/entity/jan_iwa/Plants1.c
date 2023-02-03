@@ -142,7 +142,7 @@ void func_802BB314_E2DC44(Entity* entity) {
 }
 
 void func_802BB34C_E2DC7C(void) {
-    sfx_play_sound(SOUND_791);
+    sfx_play_sound(SOUND_391 | SOUND_ID_TRIGGER_CHANGE_SOUND);
     func_80149A6C(0x391, 1);
 }
 

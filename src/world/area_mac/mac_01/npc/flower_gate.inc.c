@@ -317,7 +317,7 @@ EvtScript N(EVS_Scene_FlowerGateAppears) = {
 
 s32 N(LetterList_MinhT_Unused)[] = {
     ITEM_LETTER_TO_MINHT,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 s32 N(ItemList_MagicalSeeds)[] = {
@@ -325,7 +325,7 @@ s32 N(ItemList_MagicalSeeds)[] = {
     ITEM_MAGICAL_SEED2,
     ITEM_MAGICAL_SEED3,
     ITEM_MAGICAL_SEED4,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_MinhT_PlantSeed) = {
@@ -680,7 +680,7 @@ EvtScript N(EVS_ExitFlowerGate) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_6A2, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_2A2 | SOUND_ID_TRIGGER_CHANGE_SOUND, 0)
     EVT_EXEC_WAIT(N(EVS_FadeOutFlowerGateGlowAlpha))
     EVT_CALL(EnableGroup, MODEL_to_flo, FALSE)
     EVT_CALL(EnableGroup, MODEL_r_door, TRUE)
@@ -750,7 +750,7 @@ EvtScript N(EVS_EnterFlowerGate) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_stopper, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(N(ResetPartnerTetherDist))
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_6A2, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_2A2 | SOUND_ID_TRIGGER_CHANGE_SOUND, 0)
     EVT_EXEC_WAIT(N(EVS_FadeOutFlowerGateGlowAlpha))
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_stopper, COLLIDER_FLAGS_UPPER_MASK)
     EVT_RETURN

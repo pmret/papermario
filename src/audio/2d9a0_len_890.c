@@ -54,7 +54,7 @@ void au_update_voices(AuGlobals* globals) {
             // client released the key
             voice->envelopeFlags &= ~AU_VOICE_ENV_FLAG_KEY_RELEASED;
             voice->envelopeFlags |= AU_VOICE_ENV_FLAG_STOP;
-            voice->cmdPtr = (u8*)voice->envelopeData.cmdListRelease;
+            voice->cmdPtr = (u8*)voice->envelope.cmdListRelease;
 
             // the key can be released before press cmdlist processed completely, we must handle this case properly
             if (voice->timeLeft > AU_5750) {
@@ -112,7 +112,7 @@ void au_update_voices(AuGlobals* globals) {
                             // we reached the end of press cmdlist, keep the last volume until the key is released
                             voice->timeLeft = -1;
                             voice->volChangeTime = -1;
-                            voice->timeIntervalIndex = 59; // 0.3s, although doesn't seem to affect anything
+                            voice->timeIntervalIndex = ENV_TIME_300MS; // doesn't seem to affect anything
                             voice->delta = AUDIO_SAMPLES;
                             voice->rate = 0.0f;
                             voice->initialAmp = voice->targetAmp;
@@ -179,20 +179,20 @@ s32 au_voice_get_delta(s32 msecs) {
 }
 
 void au_voice_start(AuVoice* voice, EnvelopeData* envData) {
-    s32 x;
+    s32 intervalIndex;
 
-    voice->envelopeData.cmdListPress = envData->cmdListPress;
-    voice->cmdPtr = (u8*) voice->envelopeData.cmdListPress;
-    voice->envelopeData.cmdListRelease = envData->cmdListRelease;
+    voice->envelope.cmdListPress = envData->cmdListPress;
+    voice->cmdPtr = voice->envelope.cmdListPress;
+    voice->envelope.cmdListRelease = envData->cmdListRelease;
     voice->volMult = 0x80;
     voice->loopStart = NULL;
 
-    x = au_voice_step(voice);
+    intervalIndex = au_voice_step(voice);
     voice->envelopeFlags = 0;
     voice->initialAmp = 0;
     voice->targetAmp = *voice->cmdPtr++;
-    voice->timeIntervalIndex = x;
-    voice->volChangeTime = AuEnvelopeIntervals[x];
+    voice->timeIntervalIndex = intervalIndex;
+    voice->volChangeTime = AuEnvelopeIntervals[intervalIndex];
     voice->timeLeft = voice->volChangeTime;
 
     voice->p_volume = (voice->targetAmp * voice->clientVolume * voice->volMult) >> 14;

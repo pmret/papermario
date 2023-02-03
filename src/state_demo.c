@@ -48,7 +48,7 @@ void state_init_demo(void) {
     gGameStatusPtr->demoStickX = 0;
     gGameStatusPtr->demoStickY = 0;
 
-    func_80056228();
+    disable_sounds();
     set_map_transition_effect(2);
     set_screen_overlay_params_front(0, 255.0f);
     clear_saved_variables();
@@ -87,7 +87,7 @@ void state_step_demo(void) {
                 gGameStatusPtr->nextDemoScene = 0;
                 gGameStatusPtr->demoState = 0;
                 gGameStatusPtr->peachFlags = 0;
-                func_80056204();
+                enable_sounds();
                 gGameStatusPtr->isBattle = FALSE;
                 gGameStatusPtr->unk_76 = 0;
                 gGameStatusPtr->disableScripts = FALSE;

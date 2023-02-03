@@ -4,14 +4,14 @@
 
 s32 N(BarricadeModels)[] = {
     MODEL_t2, MODEL_t3, MODEL_t4, MODEL_t5,
-    MODEL_t2_2, MODEL_t2_3, MODEL_t2_4, MODEL_t2_5, 
-    MODEL_t3_1, MODEL_t3_3, MODEL_t3_4, MODEL_t3_5, 
+    MODEL_t2_2, MODEL_t2_3, MODEL_t2_4, MODEL_t2_5,
+    MODEL_t3_1, MODEL_t3_3, MODEL_t3_4, MODEL_t3_5,
 };
 
 s32 N(BarricadeColliders)[] = {
     COLLIDER_t2, COLLIDER_t3, COLLIDER_t4, COLLIDER_t5,
-    COLLIDER_t2_2, COLLIDER_t2_3, COLLIDER_t2_4, COLLIDER_t2_5, 
-    COLLIDER_t3_1, COLLIDER_t3_3, COLLIDER_t3_4, COLLIDER_t3_5, 
+    COLLIDER_t2_2, COLLIDER_t2_3, COLLIDER_t2_4, COLLIDER_t2_5,
+    COLLIDER_t3_1, COLLIDER_t3_3, COLLIDER_t3_4, COLLIDER_t3_5,
 };
 
 typedef struct BarricadePart {
@@ -366,7 +366,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(165)
-    EVT_CALL(PlaySound, SOUND_76D)
+    EVT_CALL(PlaySound, SOUND_36D | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_CALL(func_802D62E4, 877)
     EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim04)
     EVT_CALL(SetNpcPos, NPC_ShyGuy_01, -285, 0, 35)

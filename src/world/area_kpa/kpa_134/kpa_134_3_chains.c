@@ -44,7 +44,7 @@ s32 N(ChainAnimOffsets)[] = {
     -2, -3, -2, -1,  0,
      1,  1,  1,  1,  1,
      0,  0,  0, -1, -1,
-    -1, -2, -2, -2, -1, 
+    -1, -2, -2, -2, -1,
 };
 
 API_CALLABLE(N(CreateLowerChainShadow)) {
@@ -158,7 +158,7 @@ EvtScript N(EVS_LowerWaterLevel0) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(30)
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_62B)
+    EVT_CALL(PlaySound, SOUND_22B | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_CALL(func_802D62E4, 555)
     EVT_CALL(SetGroupEnabled, MODEL_sui1, 0)
     EVT_CALL(EnableModel, MODEL_s_sui, FALSE)
@@ -265,7 +265,7 @@ EvtScript N(EVS_RaiseWaterLevel1) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(40)
         EVT_END_IF
-        EVT_CALL(PlaySound, SOUND_62A)
+        EVT_CALL(PlaySound, SOUND_22A | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_CALL(func_802D62E4, 554)
         EVT_CALL(EnableModel, MODEL_o389, FALSE)
         EVT_CALL(EnableModel, MODEL_o388, FALSE)
@@ -406,7 +406,7 @@ EvtScript N(EVS_LowerWaterLevel1) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(30)
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_62B)
+    EVT_CALL(PlaySound, SOUND_22B | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_CALL(func_802D62E4, 555)
     EVT_WAIT(10)
     EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 25, 16, 4096)
@@ -508,7 +508,7 @@ EvtScript N(EVS_RaiseWaterLevel2) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(40)
         EVT_END_IF
-        EVT_CALL(PlaySound, SOUND_62A)
+        EVT_CALL(PlaySound, SOUND_22A | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_CALL(func_802D62E4, 554)
         EVT_CALL(EnableModel, MODEL_o389, FALSE)
         EVT_CALL(EnableModel, MODEL_o388, FALSE)

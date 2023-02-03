@@ -229,7 +229,7 @@ void snd_adjust_sound(s32 soundID, u8 volume, u8 pan) {
         pan = 0x7F;
     }
 
-    au_sfx_enqueue_event(soundManager, soundID | 0x1000, vol, 0, pan);
+    au_sfx_enqueue_event(soundManager, soundID | SOUND_ID_ADJUST, vol, 0, pan);
 }
 
 void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
@@ -250,17 +250,17 @@ void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift)
         pitchShift = -2400;
     }
 
-    au_sfx_enqueue_event(soundManager, soundID | 0x1000, vol, pitchShift, pan);
+    au_sfx_enqueue_event(soundManager, soundID | SOUND_ID_ADJUST, vol, pitchShift, pan);
 }
 
 void snd_stop_sound(s32 soundID) {
     SoundManager* soundManager = gSoundManager;
 
-    au_sfx_enqueue_event(soundManager, soundID | 0x8000, 0, 0, 0);
+    au_sfx_enqueue_event(soundManager, soundID | SOUND_ID_STOP, 0, 0, 0);
 }
 
-void func_800553F4(void) {
-    gSoundManager->unk_168 = 1;
+void snd_reset(void) {
+    gSoundManager->resetPending = 1;
 }
 
 void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan) {
@@ -860,10 +860,10 @@ void func_800561E4(s32 arg0) {
     func_80054D74(0x10, arg0);
 }
 
-void func_80056204(void) {
-    func_8004BA54(gSoundManager, 0);
+void enable_sounds(void) {
+    au_sfx_set_state(gSoundManager, SND_MANAGER_STATE_ENABLED);
 }
 
-void func_80056228(void) {
-    func_8004BA54(gSoundManager, 1);
+void disable_sounds(void) {
+    au_sfx_set_state(gSoundManager, SND_MANAGER_STATE_DISABLED);
 }

@@ -39,13 +39,13 @@ static void au_reset_instrument_entry(BGMInstrumentInfo* arg0);
 void au_update_clients_2(void);
 void au_update_players_main(void);
 void au_syn_update(AuGlobals* globals);
-void func_80053888(AuVoice* arg0, u8 arg1);
+void au_reset_nonfree_voice(AuVoice* arg0, u8 arg1);
 void au_reset_voice(AuVoice* arg0, u8 arg1);
 f32 au_compute_pitch_ratio(s32 arg0);
 void au_fade_init(Fade* fade, s32 time, s32 startValue, s32 endValue);
 void au_fade_clear(Fade* fade);
 void au_fade_update(Fade* fade);
-void func_80053A98(u8 arg0, u16 arg1, s32 arg2);
+void au_fade_set_volume(u8 arg0, u16 arg1, s32 arg2);
 void func_80053AC8(Fade* fade);
 void au_fade_set_vol_scale(Fade* fade, s16 value);
 void func_80053B04(Fade* fade, u32 arg1, s32 target);
@@ -97,9 +97,9 @@ void au_sfx_load_groups_from_SEF(SoundManager* sndMgr);
 void au_sfx_clear_queue(SoundManager* manager);
 void au_sfx_enqueue_event(SoundManager* manager, u32 soundID, s16 volume, s16 pitchShift, u8 pan);
 void au_sfx_update_main(SoundManager* manager);
-s32 func_8004B9E4(SoundManager* manager, s32 arg1);
-void func_8004BA54(SoundManager* manager, s32 arg1);
-void func_8004BA74(SoundManager* manager, SoundSFXEntry* entry, SoundManagerA0*);
+s32 au_sfx_set_reverb_type(SoundManager* manager, s32 arg1);
+void au_sfx_set_state(SoundManager* manager, s32 arg1);
+void au_sfx_load_sound(SoundManager* manager, SoundSFXEntry* entry, SoundManagerCustomCmdList*);
 s16 au_sfx_manager_update(SoundManager* manager);
 
 // 28910_len_5090.c
@@ -179,7 +179,7 @@ void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
 void snd_adjust_sound(s32 soundID, u8 volume, u8 pan);
 void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
 void snd_stop_sound(s32 soundID);
-void func_800553F4(void);
+void snd_reset(void);
 void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan);
 AuResult snd_ambient_80055448(s32 arg0);
 AuResult snd_ambient_80055464(s32 arg0, s32 arg1);
@@ -240,8 +240,8 @@ void audio_set_mono(void);
 void func_800561A4(s32 arg0);
 void func_800561C4(s32 arg0);
 void func_800561E4(s32 arg0);
-void func_80056204(void);
-void func_80056228(void);
+void enable_sounds(void);
+void disable_sounds(void);
 */
 
 // 31650.c

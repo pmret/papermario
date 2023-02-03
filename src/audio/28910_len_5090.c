@@ -1,6 +1,6 @@
 #include "audio.h"
 
-extern s32 D_80078554;
+extern u8 EnvelopeReleaseDefaultFast[];
 extern u8 BgmDivisors[8];
 extern u8 D_80078558[40];
 
@@ -518,7 +518,7 @@ void au_bgm_player_init(BGMPlayer* player, s32 priority, s32 busId, AuGlobals* g
 
     player->globals = globals;
     func_8004E880(player, BGM_SAMPLE_RATE, 48);
-    player->unk_48 = 0x8000;
+    player->busVolume = 0x8000;
     player->masterTempo = BGM_DEFAULT_TEMPO;
     player->masterVolume = 0x7F000000;
     player->updateCounter = 0;
@@ -643,7 +643,7 @@ void func_8004E444(BGMPlayer* arg0) {
         if (busId < 0) {
             return;
         }
-        func_80053A98(busId, mult, arg0->unk_48);
+        au_fade_set_volume(busId, mult, arg0->busVolume);
     }
 }
 
@@ -1238,7 +1238,7 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                     } else {
                                         drumInfo = player->drums[notePitch - 72]; // = 6 * 12
                                     }
-                                    note->ins = au_get_instrument(player->globals, (u16)drumInfo->bankPatch >> 8, (u16)drumInfo->bankPatch & 0xFF, &voice->envelopeData);
+                                    note->ins = au_get_instrument(player->globals, (u16)drumInfo->bankPatch >> 8, (u16)drumInfo->bankPatch & 0xFF, &voice->envelope);
                                     if (drumInfo->randVolume != 0) {
                                         note->volume = note->noteVelocity * au_bgm_get_random_vol(player->randomValue1, drumInfo->volume, drumInfo->randVolume);
                                     } else {
@@ -1294,11 +1294,11 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                     voice->fxmix = track->subTrackReverb;
 
                                     if (track->unk_4C != 0) {
-                                        voice->envelopeData.cmdListPress = (s32*) player->unk_174[track->unk_4C - 1]; //TODO ???
+                                        voice->envelope.cmdListPress = (u8*) player->unk_174[track->unk_4C - 1]; //TODO ???
                                     } else {
-                                        voice->envelopeData.cmdListPress = track->unk_10.cmdListPress;
+                                        voice->envelope.cmdListPress = track->envelope.cmdListPress;
                                     }
-                                    voice->envelopeData.cmdListRelease = track->unk_10.cmdListRelease;
+                                    voice->envelope.cmdListRelease = track->envelope.cmdListRelease;
                                 }
                                 voice->instrument = note->ins;
                                 voice->pitchRatio = note->pitchRatio;
@@ -1310,7 +1310,7 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                     note->tremoloAmount = track->trackTremoloAmount;
                                     voice->syncFlags = AU_VOICE_SYNC_FLAG_ALL;
                                     voice->priority = player->priority;
-                                    voice->priorityCopy = voice->priority;
+                                    voice->clientPriority = voice->priority;
                                 }
                             }
                         } else {
@@ -1537,7 +1537,7 @@ void au_BGMCmd_E5_MasterVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
 
 void au_BGMCmd_E8_TrackOverridePatch(BGMPlayer* player, BGMPlayerTrack* track) {
     track->patch = player->seqCmdArgs.TrackOverridePatch.patch;
-    track->instrument = au_get_instrument(player->globals, player->seqCmdArgs.TrackOverridePatch.effectType, track->patch, &track->unk_10);
+    track->instrument = au_get_instrument(player->globals, player->seqCmdArgs.TrackOverridePatch.effectType, track->patch, &track->envelope);
 }
 
 void au_BGMCmd_E9_SubTrackVolume(BGMPlayer* arg0, BGMPlayerTrack* track) {
@@ -1648,7 +1648,7 @@ void au_BGMCmd_F5_TrackVoice(BGMPlayer* player, BGMPlayerTrack* track) {
     patch = (u8)instrument->bankPatch;
     volume = instrument->volume & 0x7F;
     track->patch = patch;
-    track->instrument = au_get_instrument(player->globals, bank, patch, &track->unk_10);
+    track->instrument = au_get_instrument(player->globals, bank, patch, &track->envelope);
     if (volume != 0) {
         volume <<= 0x18;
     }
@@ -1785,10 +1785,10 @@ void au_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
             break;
         case 5:
             if (player->soundManager != NULL) {
-                for (i = 0; i < ARRAY_COUNT(player->soundManager->unk_90); i++) {
-                    if ((player->soundManager->unk_90[i].unk_0) == 0) {
-                        player->soundManager->unk_90[i].unk_0 = arg1;
-                        player->soundManager->unk_90[i].volume = ((player->fadeInfo.currentVolume.u16 * player->fadeInfo.volScale.u16) + 0x7FFF) >> 0x17;
+                for (i = 0; i < ARRAY_COUNT(player->soundManager->bgmSounds); i++) {
+                    if ((player->soundManager->bgmSounds[i].unk_0) == 0) {
+                        player->soundManager->bgmSounds[i].unk_0 = arg1;
+                        player->soundManager->bgmSounds[i].volume = ((player->fadeInfo.currentVolume.u16 * player->fadeInfo.volScale.u16) + 0x7FFF) >> 0x17;
                         break;
                     }
                 }
@@ -2025,7 +2025,7 @@ AuResult func_80050970(SongUpdateEvent* update) {
                                 for (j = parentTrack->unk_52; j < parentTrack->unk_53; j++) {
                                     voice = &player->globals->voices[j];
                                     if (voice->priority == player->priority) {
-                                        voice->envelopeData.cmdListRelease = &D_80078554;
+                                        voice->envelope.cmdListRelease = EnvelopeReleaseDefaultFast;
                                         voice->envelopeFlags |= AU_VOICE_ENV_FLAG_KEY_RELEASED;
                                     }
                                 }
@@ -2043,7 +2043,7 @@ AuResult func_80050970(SongUpdateEvent* update) {
                                 for (j = track->unk_52; j < track->unk_53; j++) {
                                     voice = &player->globals->voices[j];
                                     if (voice->priority == player->priority) {
-                                        voice->envelopeData.cmdListRelease = &D_80078554;
+                                        voice->envelope.cmdListRelease = EnvelopeReleaseDefaultFast;
                                         voice->envelopeFlags |= AU_VOICE_ENV_FLAG_KEY_RELEASED;
                                     }
                                 }

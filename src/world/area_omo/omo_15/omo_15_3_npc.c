@@ -16,8 +16,8 @@ s32 N(BeginSurroundCrowdPositions)[] = {
     6,  25,   60,
     6,  10,  120,
     7,  -5,  180,
-    8, -35,  240, 
-    6,  30,    0, 
+    8, -35,  240,
+    6,  30,    0,
 };
 
 EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
@@ -215,12 +215,12 @@ s32* N(CrowdFleeScripts)[] = {
     N(CrowdFleeScriptE),
     N(CrowdFleeScriptB),
     N(CrowdFleeScriptA),
-    N(CrowdFleeScriptD), 
-    N(CrowdPratfallScript), 
+    N(CrowdFleeScriptD),
+    N(CrowdPratfallScript),
 };
 
 s32* N(GeneralGuyFleeScripts)[] = {
-    N(GeneralGuyFleeScript), 
+    N(GeneralGuyFleeScript),
 };
 
 Vec3i N(FinalSurroundCrowdPositions)[] = {
@@ -236,7 +236,7 @@ Vec3i N(FinalSurroundCrowdPositions)[] = {
 };
 
 Vec3i N(PostBattleGeneralPosition) = {
-    -182, 0, 0, 
+    -182, 0, 0,
 };
 
 EvtScript N(EVS_NpcIdle_ShyGuy) = {
@@ -296,7 +296,7 @@ EvtScript N(EVS_BossDefeated_RunAway) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySound, SOUND_76D)
+        EVT_CALL(PlaySound, SOUND_36D | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_CALL(func_802D62E4, SOUND_36D)
     EVT_ELSE
         EVT_SET(LVar0, LVar9)

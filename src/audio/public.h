@@ -11,7 +11,7 @@ void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
 void snd_adjust_sound(s32 soundID, u8 volume, u8 pan);
 void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
 void snd_stop_sound(s32 soundID);
-void func_800553F4(void);
+void snd_reset(void);
 void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan);
 AuResult snd_ambient_80055448(s32 arg0);
 AuResult snd_ambient_80055464(s32 arg0, s32 arg1);
@@ -66,8 +66,8 @@ void audio_set_mono(void);
 void func_800561A4(s32 arg0);
 void func_800561C4(s32 arg0);
 void func_800561E4(s32 arg0);
-void func_80056204(void);
-void func_80056228(void);
+void enable_sounds(void);
+void disable_sounds(void);
 
 // sfx.h
 void sfx_reset_door_sounds(void);

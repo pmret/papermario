@@ -91,8 +91,6 @@ void func_802BD368_31E0D8(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
     }
 }
 
-// void func_802BD414_31E184(Npc*);
-// INCLUDE_ASM(s32, "world/partner/sushie", func_802BD414_31E184);
 void func_802BD414_31E184(Npc* npc) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
@@ -270,7 +268,7 @@ void func_802BD414_31E184(Npc* npc) {
         }
         if (bss_802BFEE8 >= 10 && (!(partnerActionStatus->currentButtons & BUTTON_C_DOWN) || bss_802BFEE8 >= 30)) {
             npc->currentAnim = ANIM_WorldSushie_Rise;
-            sfx_play_sound_at_npc(SOUND_694, 0, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_294 | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, NPC_PARTNER);
             bss_802BFEE4 = 3;
         }
     }

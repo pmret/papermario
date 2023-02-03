@@ -124,12 +124,120 @@ typedef enum FxBus {
 } FxBus;
 
 typedef enum EnvelopeCommand {
-    ENV_CMD_END_LOOP = 0xFB,
-    ENV_CMD_START_LOOP = 0xFC,
-    ENV_CMD_ADD_MULTIPLIER = 0xFD,
-    ENV_CMD_SET_MULTIPLIER = 0xFE,
-    ENV_CMD_END = 0xFF,
-}
+    ENV_CMD_END_LOOP        = 0xFB,
+    ENV_CMD_START_LOOP      = 0xFC,
+    ENV_CMD_ADD_MULTIPLIER  = 0xFD,
+    ENV_CMD_SET_MULTIPLIER  = 0xFE,
+    ENV_CMD_END             = 0xFF,
+} EnvelopeCommand;
+
+enum EnvelopeTimeIntervals {
+    ENV_TIME_60S        = 0,
+    ENV_TIME_55S        = 1,
+    ENV_TIME_50S        = 2,
+    ENV_TIME_45S        = 3,
+    ENV_TIME_40S        = 4,
+    ENV_TIME_35S        = 5,
+    ENV_TIME_30S        = 6,
+    ENV_TIME_27_5S      = 7,
+    ENV_TIME_25S        = 8,
+    ENV_TIME_22_5S      = 9,
+    ENV_TIME_20S        = 10,
+    ENV_TIME_19S        = 11,
+    ENV_TIME_18S        = 12,
+    ENV_TIME_17S        = 13,
+    ENV_TIME_16S        = 14,
+    ENV_TIME_15S        = 15,
+    ENV_TIME_14S        = 16,
+    ENV_TIME_13S        = 17,
+    ENV_TIME_12S        = 18,
+    ENV_TIME_11S        = 19,
+    ENV_TIME_10S        = 20,
+    ENV_TIME_9S         = 21,
+    ENV_TIME_8S         = 22,
+    ENV_TIME_7S         = 23,
+    ENV_TIME_6S         = 24,
+    ENV_TIME_5S         = 25,
+    ENV_TIME_4_5S       = 26,
+    ENV_TIME_4S         = 27,
+    ENV_TIME_3_5S       = 28,
+    ENV_TIME_3S         = 29,
+    ENV_TIME_2750MS     = 30,
+    ENV_TIME_2500MS     = 31,
+    ENV_TIME_2250MS     = 32,
+    ENV_TIME_2S         = 33,
+    ENV_TIME_1900MS     = 34,
+    ENV_TIME_1800MS     = 35,
+    ENV_TIME_1700MS     = 36,
+    ENV_TIME_1600MS     = 37,
+    ENV_TIME_1500MS     = 38,
+    ENV_TIME_1400MS     = 39,
+    ENV_TIME_1300MS     = 40,
+    ENV_TIME_1200MS     = 41,
+    ENV_TIME_1100MS     = 42,
+    ENV_TIME_1S         = 43,
+    ENV_TIME_950MS      = 44,
+    ENV_TIME_900MS      = 45,
+    ENV_TIME_850MS      = 46,
+    ENV_TIME_800MS      = 47,
+    ENV_TIME_750MS      = 48,
+    ENV_TIME_700MS      = 49,
+    ENV_TIME_650MS      = 50,
+    ENV_TIME_600MS      = 51,
+    ENV_TIME_550MS      = 52,
+    ENV_TIME_500MS      = 53,
+    ENV_TIME_450MS      = 54,
+    ENV_TIME_400MS      = 55,
+    ENV_TIME_375MS      = 56,
+    ENV_TIME_350MS      = 57,
+    ENV_TIME_325MS      = 58,
+    ENV_TIME_300MS      = 59,
+    ENV_TIME_290MS      = 60,
+    ENV_TIME_280MS      = 61,
+    ENV_TIME_270MS      = 62,
+    ENV_TIME_260MS      = 63,
+    ENV_TIME_250MS      = 64,
+    ENV_TIME_240MS      = 65,
+    ENV_TIME_230MS      = 66,
+    ENV_TIME_220MS      = 67,
+    ENV_TIME_210MS      = 68,
+    ENV_TIME_200MS      = 69,
+    ENV_TIME_190MS      = 70,
+    ENV_TIME_180MS      = 71,
+    ENV_TIME_170MS      = 72,
+    ENV_TIME_160MS      = 73,
+    ENV_TIME_150MS      = 74,
+    ENV_TIME_140MS      = 75,
+    ENV_TIME_130MS      = 76,
+    ENV_TIME_120MS      = 77,
+    ENV_TIME_110MS      = 78,
+    ENV_TIME_100MS      = 79,
+    ENV_TIME_16UNITS    = 80,
+    ENV_TIME_14UNITS    = 81,
+    ENV_TIME_12UNITS    = 81,
+    ENV_TIME_11UNITS    = 83,
+    ENV_TIME_10UNITS    = 84,
+    ENV_TIME_9UNITS     = 85,
+    ENV_TIME_8UNITS     = 86,
+    ENV_TIME_7UNITS     = 87,
+    ENV_TIME_6UNITS     = 88,
+    ENV_TIME_5UNITS     = 89,
+    ENV_TIME_4UNITS     = 90,
+    ENV_TIME_3UNITS     = 91,
+    ENV_TIME_2UNITS     = 92,
+    ENV_TIME_1UNITS     = 93,
+    ENV_TIME_0          = 94,
+};
+
+enum SoundPlayerState {
+    SND_PLAYER_STATE_CONTINUE   = 0,
+    SND_PLAYER_STATE_INIT       = 1,
+};
+
+enum SoundManagerState {
+    SND_MANAGER_STATE_ENABLED   = 0,
+    SND_MANAGER_STATE_DISABLED  = 1,
+};
 
 typedef union Q32 {
     u8 u8[4];
@@ -420,20 +528,20 @@ typedef struct SoundSFXEntry {
 } SoundSFXEntry; // size = 0xA
 
 typedef struct EnvelopeData {
-    /* 0x00 */ s32* cmdListPress;
-    /* 0x04 */ s32* cmdListRelease;
+    /* 0x00 */ u8* cmdListPress;
+    /* 0x04 */ u8* cmdListRelease;
 } EnvelopeData; // size = 0x8
 
-typedef struct InstrumentEffectSub {
-    /* 0x00 */ u16 unkOffset1;
-    /* 0x02 */ u16 unkOffset2;
-} InstrumentEffectSub; // size = 0x4;
+typedef struct EnvelopeOffset {
+    /* 0x00 */ u16 offsetPress;
+    /* 0x02 */ u16 offsetRelease;
+} EnvelopeOffset; // size = 0x4;
 
-typedef struct InstrumentEffect {
+typedef struct EnvelopePreset {
     /* 0x00 */ u8 count;
     /* 0x01 */ char unk_01[3];
-    /* 0x04 */ InstrumentEffectSub unk_04[1]; // variable size
-} InstrumentEffect;
+    /* 0x04 */ EnvelopeOffset offsets[1]; // variable size
+} EnvelopePreset;
 
 // partially ALWaveTable?
 typedef struct Instrument {
@@ -446,7 +554,10 @@ typedef struct Instrument {
     /* 0x18 */ u16* predictor;
     /* 0x1C */ u16 dc_bookSize;
     /* 0x1E */ u16 keyBase;
-    /* 0x20 */ f32 pitchRatio;
+    /* 0x20 */ union {
+                    f32 pitchRatio;
+                    s32 outputRate;
+               };
     /* 0x24 */ u8 type;
     /* 0x25 */ u8 unk_25;
     /* 0x26 */ s8 unk_26;
@@ -455,7 +566,7 @@ typedef struct Instrument {
     /* 0x29 */ s8 unk_29;
     /* 0x2A */ s8 unk_2A;
     /* 0x2B */ s8 unk_2B;
-    /* 0x2C */ InstrumentEffect* unkOffset;
+    /* 0x2C */ EnvelopePreset* envelopes;
 } Instrument; // size = 0x30;
 
 typedef Instrument* InstrumentGroup[16];
@@ -482,45 +593,38 @@ typedef struct SoundPlayChange {
 typedef struct SoundPlayer {
     /* 0x00 */ AuFilePos sefDataReadPos;
     /* 0x04 */ char pad4[0xC];
-    /* 0x10 */ EnvelopeData unk_10;
-    /* 0x18 */ s32* unk_18;
+    /* 0x10 */ EnvelopeData envelope;
+    /* 0x18 */ u8* envelopCustomPressProfile;
     /* 0x1C */ Instrument* sfxInstrumentRef;
     /* 0x20 */ Instrument sfxInstrument;
     /* 0x50 */ AuFilePos sefReadStart;
     /* 0x54 */ SoundPlayChange changed;
     /* 0x58 */ f32 pitchRatio;
     /* 0x5C */ s16 sfxVolume;
-    /* 0x5E */ s16 unk_5E;
+    /* 0x5E */ s16 alternativeVolume;
     /* 0x60 */ SoundLerp tuneLerp;
     /* 0x6C */ SoundLerp volumeLerp;
-    /* 0x78 */ u8 locatorB;
-    /* 0x79 */ u8 locatorC;
-    /* 0x7A */ u8 locatorD;
-    /* 0x7B */ u8 unk_7B;
-    /* 0x7C */ u8 unk_7C;
-    /* 0x7D */ u8 unk_7D;
-    /* 0x7E */ u8 unk_7E;
-    /* 0x7F */ u8 unk_7F;
-    /* 0x80 */ AuFilePos unk_80;
-    /* 0x84 */ s8 unk_84;
-    /* 0x85 */ u8 soundC00;
+    /* 0x78 */ u8 cmdList_mode2[8];
+    /* 0x80 */ AuFilePos alternativeDataPos;
+    /* 0x84 */ s8 alternativeType;
+    /* 0x85 */ u8 triggers;
     /* 0x86 */ char unk_86[0x2];
     /* 0x88 */ s8* loopStartPos;
     /* 0x8C */ u8 loopIterCount;
     /* 0x8D */ char unk_8D;
     /* 0x8E */ u16 delay;
     /* 0x90 */ u16 playLength;
-    /* 0x92 */ s16 unk_92;
-    /* 0x94 */ s8 unk_94;
+    /* 0x92 */ s16 coarseTune;
+    /* 0x94 */ s8 fineTune;
     /* 0x95 */ char unk_05;
     /* 0x96 */ u16 currentSoundID;
-    /* 0x98 */ u8 unk_98;
-    /* 0x99 */ u8 unk_99;
+    /* 0x98 */ u8 priority;
+    /* 0x99 */ u8 exclusiveID;
     /* 0x9A */ u8 sfxParamsFlags;
     /* 0x9B */ u8 sfxPan;
     /* 0x9C */ u8 reverb;
     /* 0x9D */ u8 instrumentIndex; // ?
-    /* 0x9E */ u8 unk_9E;
+    /* 0x9E */ u8 envelopePreset;
     /* 0x9F */ u8 playVelocity;
     /* 0xA0 */ u8 unk_A0;
     /* 0xA1 */ u8 randomPitch;
@@ -529,7 +633,7 @@ typedef struct SoundPlayer {
     /* 0xA4 */ s16 masterPitchShift;
     /* 0xA6 */ s16 masterVolume;
     /* 0xA8 */ u8 masterPan;
-    /* 0xA8 */ u8 unk_A9;
+    /* 0xA8 */ u8 state;
     /* 0xA9 */ char unk_AA[0x2];
 } SoundPlayer; // size = 0xAC
 
@@ -545,39 +649,37 @@ typedef struct SoundManager90 {
     };
 } SoundManager90; // size = 4
 
-typedef struct SoundManagerA0 {
-    /* 0x0 */ u16 unk_00;
-    /* 0x2 */ u16 unk_02;
-    /* 0x4 */ u16 unk_04;
-} SoundManagerA0; // size = 6
+typedef struct SoundManagerCustomCmdList {
+    /* 0x0 */ u16 data[3];
+} SoundManagerCustomCmdList; // size = 6
 
 typedef struct SoundManager {
     /* 0x000 */ struct AuGlobals* globals;
     /* 0x004 */ struct AuVoice* currentVoice;
     /* 0x008 */ u8* sefData;
     /* 0x00C */ s32* normalSounds[8];
-    /* 0x02C */ s32* soundsWithBit2000;
+    /* 0x02C */ s32* extraSounds;
     /* 0x030 */ s32 playCounter; //?
     /* 0x034 */ s32 nextUpdateStep;
     /* 0x038 */ s32 nextUpdateInterval;
     /* 0x03C */ s32 nextUpdateCounter;
     /* 0x040 */ struct Fade fadeInfo;
-    /* 0x05C */ s32 unk_5C;
+    /* 0x05C */ s32 busVolume;
     /* 0x060 */ s32 randomValue;
     /* 0x064 */ s32* customReverbParams[8];
     /* 0x084 */ s8 customReverbAmounts[8];
     /* 0x08C */ u8 lastCustomEffectIdx;
     /* 0x08D */ s8 defaultReverbAmt;
     /* 0x08E */ char unk_8E[0x2];
-    /* 0x090 */ SoundManager90 unk_90[4];
-    /* 0x0A0 */ SoundManagerA0 unk_A0[4];
-    /* 0x0B8 */ u16 unk_B8;
+    /* 0x090 */ SoundManager90 bgmSounds[4];
+    /* 0x0A0 */ SoundManagerCustomCmdList customCmdList[4];
+    /* 0x0B8 */ u16 baseVolume;
     /* 0x0BA */ s16 unk_BA;
     /* 0x0BC */ u8 priority;
     /* 0x0BD */ u8 sfxPlayerSelector;
     /* 0x0BE */ u8 busId;
-    /* 0x0BF */ u8 unk_BF;
-    /* 0x0C0 */ u8 unk_C0;
+    /* 0x0BF */ u8 currentVoiceIndex;
+    /* 0x0C0 */ u8 state;
     /* 0x0C1 */ char unk_C1[0x1];
     /* 0x0C2 */ SoundSFXEntry soundQueue[16];
     /* 0x162 */ s8 unk_162;
@@ -585,7 +687,7 @@ typedef struct SoundManager {
     /* 0x164 */ u8 sfxQueueNextPos;
     /* 0x165 */ s8 unk_165;
     /* 0x166 */ char unk_166[0x2];
-    /* 0x168 */ s32 unk_168;
+    /* 0x168 */ s32 resetPending;
     /* 0x16C */ SoundPlayer players[8];
 } SoundManager; // size = 0x6CC
 
@@ -614,7 +716,7 @@ typedef struct AuVoice {
     /* 0x0F */ u8 fxmix;
     /* 0x10 */ u8 busId;
     /* 0x11 */ char unk_11[0x3];
-    /* 0x14 */ EnvelopeData envelopeData;
+    /* 0x14 */ EnvelopeData envelope;
     /* 0x1C */ u8* cmdPtr;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 volChangeTime;
@@ -633,7 +735,7 @@ typedef struct AuVoice {
     /* 0x40 */ s16 clientVolume;
     /* 0x42 */ u8 stopPending;
     /* 0x43 */ u8 syncFlags;
-    /* 0x44 */ s8 priorityCopy;
+    /* 0x44 */ s8 clientPriority;
     /* 0x45 */ u8 priority;
     /* 0x46 */ char unk_46[2];
 } AuVoice; // size = 0x48
@@ -707,8 +809,8 @@ typedef struct SEFHeader {
     /* 0x0E */ u8 hasExtraSection; // 1
     /* 0x0F */ s8 unkF; // 0
     /* 0x10 */ u16 sections[8];
-    /* 0x14 */ u16 section2000;
-} SEFHeader; // size = 0x16
+    /* 0x20 */ u16 section2000;
+} SEFHeader; // size = 0x22
 
 typedef struct INITHeader {
     /* 0x00 */ s32 signature; // 'INIT'
@@ -844,7 +946,7 @@ typedef struct BGMPlayerTrack {
     /* 0x04 */ AuFilePos savedPos;
     /* 0x08 */ AuFilePos prevReadPos;
     /* 0x0C */ Instrument* instrument;
-    /* 0x10 */ EnvelopeData unk_10;
+    /* 0x10 */ EnvelopeData envelope;
     /* 0x18 */ s32 subTrackVolume;
     /* 0x1C */ s32 subTrackVolumeStep;
     /* 0x20 */ s32 subTrackVolumeTarget;
@@ -913,7 +1015,7 @@ typedef struct BGMPlayer {
     /* 0x024 */ s32 bgmFileIndex;
     /* 0x028 */ s32 songID;
     /* 0x02C */ Fade fadeInfo;
-    /* 0x048 */ s32 unk_48;
+    /* 0x048 */ s32 busVolume;
     /* 0x04C */ u8 effectIndices[4];
     /* 0x050 */ s32 randomValue1;
     /* 0x054 */ s32 randomValue2;
@@ -1102,7 +1204,7 @@ extern s32 CUSTOM_SMALL_ROOM_PARAMS[];
 extern s32 CUSTOM_ECHO_PARAMS_1[];
 extern s32 CUSTOM_ECHO_PARAMS_3[];
 extern s32 CUSTOM_ECHO_PARAMS_2[];
-extern s32 D_80078544[];
+extern EnvelopePreset DummyInstrumentEnvelope;
 extern u8 AmbientSoundIDtoMSEQFileIndex[];
 extern s32 AuEnvelopeIntervals[];
 extern s32 PreventBGMPlayerUpdate;

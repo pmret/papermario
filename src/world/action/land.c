@@ -44,7 +44,7 @@ void action_update_land(void) {
         }
 
         suggest_player_anim_clearUnkFlag(anim);
-        sfx_play_sound_at_player(SOUND_8161, 0);
+        sfx_play_sound_at_player(SOUND_161 | SOUND_ID_STOP, 0);
         sfx_play_sound_at_player(SOUND_SOFT_LAND, 0);
 
         if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {

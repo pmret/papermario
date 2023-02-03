@@ -3,7 +3,8 @@
 
 // data
 extern u16 D_80078530[9];
-extern s32 D_8007854C[2];
+extern u8 EnvelopePressDefault[];
+extern u8 EnvelopeReleaseDefault[];
 extern f32 AlTuneScaling[];
 
 
@@ -89,7 +90,7 @@ void au_engine_init(s32 outputRate) {
         voice->busId = 0;
         voice->stopPending = FALSE;
         voice->syncFlags = 0;
-        voice->priorityCopy = AU_PRIORITY_FREE;
+        voice->clientPriority = AU_PRIORITY_FREE;
         voice->priority = AU_PRIORITY_FREE;
     }
 
@@ -160,7 +161,7 @@ static void au_reset_instrument(Instrument* instrument) {
     instrument->loopCount = 0;
     instrument->type = 0;
     instrument->unk_25 = 0;
-    instrument->unkOffset = (InstrumentEffect*) &D_80078544; //TODO: fix type of data
+    instrument->envelopes = &DummyInstrumentEnvelope;
     instrument->unk_26 = 0;
     instrument->unk_27 = 0;
     instrument->unk_28 = 0;
@@ -171,7 +172,7 @@ static void au_reset_instrument(Instrument* instrument) {
 }
 
 static void au_reset_drum_entry(BGMDrumInfo* arg0) {
-    arg0->bankPatch = 8208;
+    arg0->bankPatch = 0x2010;
     arg0->keyBase = 4800; // middle C?
     arg0->volume = 0x7F;
     arg0->pan = 64;
@@ -207,7 +208,7 @@ void au_update_clients_2(void) {
 
     if (sfxManager->fadeInfo.fadeTime != 0) {
         au_fade_update(&sfxManager->fadeInfo);
-        func_80053A98(sfxManager->busId, sfxManager->fadeInfo.currentVolume.u16, sfxManager->unk_5C);
+        au_fade_set_volume(sfxManager->busId, sfxManager->fadeInfo.currentVolume.u16, sfxManager->busVolume);
     }
 
     sfxManager->nextUpdateCounter -= sfxManager->nextUpdateStep;
@@ -339,9 +340,10 @@ void au_syn_update(AuGlobals* globals) {
         }
 
         if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_ALL) {
-            au_voice_start(voice, &voice->envelopeData);
+            au_voice_start(voice, &voice->envelope);
             au_syn_start_voice_params(i, voice->busId, voice->instrument, voice->pitchRatio, voice->p_volume, voice->pan, voice->fxmix, voice->delta);
-            voice->priority = voice->priorityCopy;
+            // priority may be AU_PRIORITY_FREE if this voice was stolen and reset
+            voice->priority = voice->clientPriority;
         } else {
             if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_PITCH) {
                 au_syn_set_pitch(i, voice->pitchRatio);
@@ -357,8 +359,8 @@ void au_syn_update(AuGlobals* globals) {
     }
 }
 
-void func_80053888(AuVoice* voice, u8 index) {
-    if (voice->priority != 0) {
+void au_reset_nonfree_voice(AuVoice* voice, u8 index) {
+    if (voice->priority != AU_PRIORITY_FREE) {
         voice->cmdPtr = NULL;
         voice->stopPending = TRUE;
         voice->syncFlags = 0;
@@ -367,11 +369,11 @@ void func_80053888(AuVoice* voice, u8 index) {
 }
 
 // uncertain name
-void au_reset_voice(AuVoice* voice, u8 index) {
+void au_reset_voice(AuVoice* voice, u8 voiceIdx) {
     voice->cmdPtr = NULL;
     voice->stopPending = TRUE;
     voice->syncFlags = 0;
-    au_syn_set_volume_delta(index, 0, AUDIO_SAMPLES);
+    au_syn_set_volume_delta(voiceIdx, 0, AUDIO_SAMPLES);
 }
 
 // array offsets into AlTuneScaling
@@ -427,8 +429,8 @@ void au_fade_update(Fade* fade) {
     }
 }
 
-void func_80053A98(u8 busId, u16 arg1, s32 arg2) {
-    au_bus_set_volume(busId, (u32)(arg1 * arg2) >> 15);
+void au_fade_set_volume(u8 busId, u16 volume, s32 busVolume) {
+    au_bus_set_volume(busId, (u32)(volume * busVolume) >> 15);
 }
 
 void func_80053AC8(Fade* fade) {
@@ -475,17 +477,17 @@ void func_80053BA8(Fade* fade) {
 }
 
 //TODO cleanup and documentation
-Instrument* au_get_instrument(AuGlobals* globals, u32 bank, u32 patch, EnvelopeData* arg3) {
+Instrument* au_get_instrument(AuGlobals* globals, u32 bank, u32 patch, EnvelopeData* envData) {
     Instrument* instrument = (*globals->instrumentGroups[(bank & 0x70) >> 4])[patch];
-    InstrumentEffect* temp_a0 = instrument->unkOffset;
-    u32 sampleIdx = bank & 3;
+    EnvelopePreset* preset = instrument->envelopes;
+    u32 envelopeIdx = bank & 3;
 
-    if (sampleIdx < temp_a0->count) {
-        arg3->cmdListPress = AU_FILE_RELATIVE(temp_a0, temp_a0->unk_04[sampleIdx].unkOffset1);
-        arg3->cmdListRelease = AU_FILE_RELATIVE(temp_a0, temp_a0->unk_04[sampleIdx].unkOffset2);
+    if (envelopeIdx < preset->count) {
+        envData->cmdListPress = AU_FILE_RELATIVE(preset, preset->offsets[envelopeIdx].offsetPress);
+        envData->cmdListRelease = AU_FILE_RELATIVE(preset, preset->offsets[envelopeIdx].offsetRelease);
     } else {
-        arg3->cmdListPress = &D_8007854C[0];
-        arg3->cmdListRelease = &D_8007854C[1];
+        envData->cmdListPress = EnvelopePressDefault;
+        envData->cmdListRelease = &EnvelopePressDefault[4]; //EnvelopeReleaseDefault;
     }
     return instrument;
 }
@@ -1027,11 +1029,11 @@ void au_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGrou
                 if (instrument->predictor != NULL) {
                     instrument->predictor = AU_FILE_RELATIVE(bank, instrument->predictor);
                 }
-                if (instrument->unkOffset != NULL) {
-                    instrument->unkOffset = AU_FILE_RELATIVE(bank, instrument->unkOffset);
+                if (instrument->envelopes != NULL) {
+                    instrument->envelopes = AU_FILE_RELATIVE(bank, instrument->envelopes);
                 }
                 instrument->unk_25 = arg4;
-                instrument->pitchRatio = *((s32*)(&instrument->pitchRatio)) / outputRate; // what is happening here?
+                instrument->pitchRatio = instrument->outputRate / outputRate;
             } else {
                 instruments[i] = defaultInstrument;
             }
@@ -1134,13 +1136,13 @@ void func_80054CE0(s32 arg0, u32 idx) {
     if (idx < ARRAY_COUNT(D_80078530)) {
         s32 temp_s0 = D_80078530[idx];
         if (arg0 & 1) {
-            gBGMPlayerA->unk_48 = temp_s0;
+            gBGMPlayerA->busVolume = temp_s0;
             func_80053AC8(&gBGMPlayerA->fadeInfo);
-            gBGMPlayerB->unk_48 = temp_s0;
+            gBGMPlayerB->busVolume = temp_s0;
             func_80053AC8(&gBGMPlayerB->fadeInfo);
         }
         if (arg0 & 0x10) {
-            gSoundManager->unk_5C = temp_s0;
+            gSoundManager->busVolume = temp_s0;
             func_80053AC8(&gSoundManager->fadeInfo);
         }
     }
@@ -1148,7 +1150,7 @@ void func_80054CE0(s32 arg0, u32 idx) {
 
 s32 func_80054D74(s32 arg0, s32 arg1) {
     if (arg0 & 0x10) {
-        return func_8004B9E4(gSoundManager, arg1);
+        return au_sfx_set_reverb_type(gSoundManager, arg1);
     }
     return 0;
 }

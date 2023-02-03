@@ -18,6 +18,6 @@ ApiStatus N(UnkSfxFunc)(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    sfx_play_sound_at_position(SOUND_759, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+    sfx_play_sound_at_position(SOUND_359 | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
     return ApiStatus_DONE2;
 }

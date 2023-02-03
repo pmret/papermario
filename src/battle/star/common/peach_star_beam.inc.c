@@ -458,9 +458,9 @@ ApiStatus N(ProcessPeachStarBeam)(Evt* script, s32 isInitialCall) {
                 }
 
                 if (script->functionTemp[2] == 0) {
-                    sfx_play_sound(SOUND_648);
+                    sfx_play_sound(SOUND_248 | SOUND_ID_TRIGGER_CHANGE_SOUND);
                 } else {
-                    sfx_play_sound(SOUND_649);
+                    sfx_play_sound(SOUND_249 | SOUND_ID_TRIGGER_CHANGE_SOUND);
                 }
                 script->functionTemp[0] = PEACH_STAR_BEAM_FLY_TO_TARGET;
             } else {
@@ -638,10 +638,10 @@ ApiStatus N(ProcessPeachStarBeam)(Evt* script, s32 isInitialCall) {
                 if (script->functionTemp[1] == 0) {
                     if (script->functionTemp[2] == 0) {
                         func_80149A6C(SOUND_248, TRUE);
-                        sfx_play_sound(SOUND_648);
+                        sfx_play_sound(SOUND_248 | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     } else {
                         func_80149A6C(SOUND_249, TRUE);
-                        sfx_play_sound(SOUND_649);
+                        sfx_play_sound(SOUND_249 | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     }
                 }
             }
