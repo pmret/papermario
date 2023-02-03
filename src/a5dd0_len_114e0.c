@@ -450,7 +450,7 @@ Matrix4s mdl_RDPIdentity = {
 
 // Fields in floating point depth buffer format
 #define DEPTH_EXPONENT_MASK 0xE000
-#define DEPTH_MANITSSA_MASK 0x1FFC
+#define DEPTH_MANTISSA_MASK 0x1FFC
 #define DEPTH_DZ_MASK       0x0003
 
 #define DEPTH_EXPONENT_SHIFT 13
@@ -5936,7 +5936,7 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
 
         // Extract the exponent and mantissa from the depth buffer value.
         depthExponent = depthCopyBuffer[depthQueryID] >> DEPTH_EXPONENT_SHIFT;
-        depthMantissa = (depthCopyBuffer[depthQueryID] & (DEPTH_MANITSSA_MASK | DEPTH_DZ_MASK)) >> DEPTH_MANTISSA_SHIFT;
+        depthMantissa = (depthCopyBuffer[depthQueryID] & (DEPTH_MANTISSA_MASK | DEPTH_DZ_MASK)) >> DEPTH_MANTISSA_SHIFT;
         // Convert the exponent and mantissa into a fixed-point value.
         shiftedMantissa = depthMantissa << depthFloatLookupTable[depthExponent].shift;
         mantissaBias = depthFloatLookupTable[depthExponent].bias;
@@ -6042,7 +6042,7 @@ s32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* s
 
         // Extract the exponent and mantissa from the depth buffer value.
         depthExponent = depthCopyBuffer[depthQueryID] >> DEPTH_EXPONENT_SHIFT;
-        depthMantissa = (depthCopyBuffer[depthQueryID] & (DEPTH_MANITSSA_MASK | DEPTH_DZ_MASK)) >> DEPTH_MANTISSA_SHIFT;
+        depthMantissa = (depthCopyBuffer[depthQueryID] & (DEPTH_MANTISSA_MASK | DEPTH_DZ_MASK)) >> DEPTH_MANTISSA_SHIFT;
         // Convert the exponent and mantissa into a fixed-point value.
         shiftedMantissa = depthMantissa << depthFloatLookupTable[depthExponent].shift;
         mantissaBias = depthFloatLookupTable[depthExponent].bias;
