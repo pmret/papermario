@@ -1777,8 +1777,8 @@ s32 is_ability_active(s32 ability) {
                     ret++;
                 }
                 break;
-            case ABILITY_FINAL_BOMBOMB:
-                if (badgeMoveID == MOVE_UNUSED_FINAL_BOMBOMB) {
+            case ABILITY_FINAL_BOBOMB:
+                if (badgeMoveID == MOVE_UNUSED_FINAL_BOBOMB) {
                     ret++;
                 }
                 break;

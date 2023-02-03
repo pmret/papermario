@@ -93,7 +93,7 @@ EvtScript N(EVS_OnSearch_HammerBush) = {
     EVT_END
 };
 
-EvtScript N(Bush7_CallbackScript) = {
+EvtScript N(EVS_OnSearchBush7) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
         EVT_RETURN
     EVT_END_IF
@@ -104,7 +104,7 @@ EvtScript N(Bush7_CallbackScript) = {
     EVT_END
 };
 
-EvtScript N(Bush8_CallbackScript) = {
+EvtScript N(EVS_OnSearchBush8) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
         EVT_RETURN
     EVT_END_IF
@@ -290,13 +290,13 @@ FoliageVectorList N(Bush8_Effects) = {
 SearchBushConfig N(SearchBush_Bush7) = {
     .bush = &N(Bush8_BushModels),
     .vectors = &N(Bush8_Effects),
-    .callback = &N(Bush7_CallbackScript),
+    .callback = &N(EVS_OnSearchBush7),
 };
 
 SearchBushConfig N(SearchBush_Bush8) = {
     .bush = &N(Bush8_BushModels),
     .vectors = &N(Bush8_Effects),
-    .callback = &N(Bush8_CallbackScript),
+    .callback = &N(EVS_OnSearchBush8),
 };
 
 FoliageModelList N(Bush6_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o213);

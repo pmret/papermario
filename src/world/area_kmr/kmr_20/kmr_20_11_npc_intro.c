@@ -26,7 +26,7 @@ API_CALLABLE(N(func_80241CF0_8EDB10)) {
 }
 
 API_CALLABLE(N(SetAmbienceVolumeHalf_Intro)) {
-    au_ambience_set_volume(0, 1000, 63);
+    snd_ambient_set_volume(0, 1000, 63);
     return ApiStatus_DONE2;
 }
 

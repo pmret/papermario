@@ -34,13 +34,13 @@ MAP_STATIC_PAD(1,item_choice);
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(Fishmael_LetterList)[] = {
-    ITEM_LETTER15, ITEM_NONE
+    ITEM_LETTER_CHAIN_FISHMAEL, ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_Fishmael) = {
     EVT_CALL(N(LetterDelivery_Init), NPC_Fishmael,
         ANIM_Fishmael_Talk, ANIM_Fishmael_Idle,
-        ITEM_LETTER15, ITEM_LETTER16,
+        ITEM_LETTER_CHAIN_FISHMAEL, ITEM_LETTER_CHAIN_KOOVER_2,
         MSG_MAC_Port_0064, MSG_MAC_Port_0065,
         MSG_MAC_Port_0066, MSG_MAC_Port_0067,
         EVT_PTR(N(Fishmael_LetterList)))

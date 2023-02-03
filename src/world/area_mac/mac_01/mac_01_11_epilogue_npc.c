@@ -248,7 +248,7 @@ StaticNpc N(NpcData_Koopas)[] = {
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bobomb),
         .drops = BOBOMB_DROPS,
-        .animations = BOBOMB_ANIMS,
+        .animations = BOBOMB_BLUE_ANIMS,
         .extraAnimations = N(ExtraAnims_Bobomb),
     },
 };

@@ -8,14 +8,14 @@
 #define NAME_SUFFIX
 
 s32 N(LetterList_MissT)[] = {
-    ITEM_LETTER18,
+    ITEM_LETTER_CHAIN_MISS_T,
     ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_MissT) = {
     EVT_CALL(N(LetterDelivery_Init_Shared),
         NPC_MissT, ANIM_Toadette_Orange_Talk, ANIM_Toadette_Orange_Idle,
-        ITEM_LETTER18, ITEM_LETTER19,
+        ITEM_LETTER_CHAIN_MISS_T, ITEM_LETTER_CHAIN_LITTLE_MOUSER,
         MSG_MAC_Gate_00FF, MSG_MAC_Gate_0100, MSG_MAC_Gate_0101, MSG_MAC_Gate_0102,
         EVT_PTR(N(LetterList_MissT)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery_Shared))

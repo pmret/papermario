@@ -58,7 +58,7 @@ EvtScript N(EVS_EnterMap) = {
     EVT_END
 };
 
-EvtScript N(D_802431CC_9C85AC) = {
+EvtScript N(EVS_TexPan_Flowers) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTexPanner, MODEL_o298, TEX_PANNER_0)
     EVT_CALL(SetTexPanner, MODEL_o320, TEX_PANNER_0)
@@ -95,8 +95,8 @@ EvtScript N(EVS_Main) = {
     EVT_SET(GF_NOK01_Bush4_KoopaLeaf, FALSE)
     EVT_IF_GE(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
         EVT_SET(GF_NOK01_RecoveredShellA, TRUE)
-        EVT_SET(GF_NOK01_RecoveredShellB, TRUE)
-        EVT_SET(GF_NOK01_RecoveredShellC, TRUE)
+        EVT_SET(GF_NOK01_RecoveredBlockShell, TRUE)
+        EVT_SET(GF_NOK01_RecoveredTreeShell, TRUE)
     EVT_END_IF
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
         EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
@@ -105,10 +105,10 @@ EvtScript N(EVS_Main) = {
     EVT_END_IF
     EVT_CALL(ClearDefeatedEnemies)
     EVT_EXEC(N(EVS_SetupShop))
-    EVT_EXEC(N(EVS_80250B70))
-    EVT_EXEC(N(D_802431CC_9C85AC))
+    EVT_EXEC(N(EVS_SetupRadio))
+    EVT_EXEC(N(EVS_TexPan_Flowers))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_802506C0))
+    EVT_EXEC(N(EVS_MakeRooms))
     EVT_WAIT(1)
     EVT_EXEC_WAIT(N(EVS_SetupFoliage))
     EVT_EXEC(N(EVS_SetupMusic))

@@ -1,4 +1,4 @@
-EvtScript N(EVS_NpcInteract_Koopa_01_Normal) = {
+EvtScript N(EVS_NpcInteract_Koover_Normal) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH1_KOOPER_JOINED_PARTY)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0003)
@@ -17,19 +17,19 @@ EvtScript N(EVS_NpcInteract_Koopa_01_Normal) = {
         EVT_CASE_GE(STORY_CH7_STAR_SPRIT_DEPARTED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0008)
     EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(D_80248E1C_9CE1FC))
-    EVT_IF_NE(LVarC, 0)
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Koover1))
+    EVT_IF_NE(LVarC, DELIVERY_NOT_POSSIBLE)
         EVT_RETURN
     EVT_END_IF
-    EVT_EXEC_WAIT(N(D_80248E74_9CE254))
-    EVT_IF_NE(LVarC, 0)
+    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Koover2))
+    EVT_IF_NE(LVarC, DELIVERY_NOT_POSSIBLE)
         EVT_RETURN
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_KoopaWithoutShell_01_Normal) = {
+EvtScript N(EVS_NpcInteract_Koopa_02_Normal) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0014)
@@ -50,12 +50,12 @@ EvtScript N(EVS_NpcInteract_KoopaWithoutShell_01_Normal) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcIdle_KoopaWithoutShell_02_Normal) = {
+EvtScript N(EVS_NpcIdle_Koopa_03_Normal) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_KoopaWithoutShell_02_Normal) = {
+EvtScript N(EVS_NpcInteract_Koopa_03_Normal) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_001C)
@@ -76,7 +76,7 @@ EvtScript N(EVS_NpcInteract_KoopaWithoutShell_02_Normal) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Bombomb_01_Normal) = {
+EvtScript N(EVS_NpcInteract_Bobomb_01_Normal) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(AF_NOK_0B, FALSE)
@@ -100,13 +100,13 @@ EvtScript N(EVS_NpcInteract_Bombomb_01_Normal) = {
             EVT_WAIT(3)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_CANNON1, 0)
-            EVT_CALL(N(func_802426A4_9C7A84), LVar0, LVar1, LVar2)
+            EVT_CALL(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Bombomb_02_Normal) = {
+EvtScript N(EVS_NpcInteract_Bobomb_02_Normal) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(AF_NOK_0C, FALSE)
@@ -134,7 +134,7 @@ EvtScript N(EVS_NpcInteract_Bombomb_02_Normal) = {
                 EVT_WAIT(3)
                 EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_CANNON1, 0)
-                EVT_CALL(N(func_802426A4_9C7A84), LVar0, LVar1, LVar2)
+                EVT_CALL(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
                 EVT_WAIT(30)
                 EVT_CALL(PutPartnerAway)
             EVT_ELSE
@@ -146,7 +146,7 @@ EvtScript N(EVS_NpcInteract_Bombomb_02_Normal) = {
                 EVT_WAIT(3)
                 EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_CANNON1, 0)
-                EVT_CALL(N(func_802426A4_9C7A84), LVar0, LVar1, LVar2)
+                EVT_CALL(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
             EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
@@ -157,7 +157,7 @@ EvtScript N(EVS_NpcInteract_Bombomb_02_Normal) = {
             EVT_WAIT(3)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_CANNON1, 0)
-            EVT_CALL(N(func_802426A4_9C7A84), LVar0, LVar1, LVar2)
+            EVT_CALL(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
         EVT_CASE_GE(STORY_CH7_STAR_SPRIT_DEPARTED)
             EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, MSG_CH1_004D)
@@ -167,44 +167,44 @@ EvtScript N(EVS_NpcInteract_Bombomb_02_Normal) = {
             EVT_WAIT(3)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_CANNON1, 0)
-            EVT_CALL(N(func_802426A4_9C7A84), LVar0, LVar1, LVar2)
+            EVT_CALL(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_Bombomb_03_Normal) = {
+EvtScript N(EVS_NpcInteract_Bobomb_03_Normal) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(AF_NOK_0E, FALSE)
                 EVT_SET(AF_NOK_0E, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-                EVT_CALL(NpcFacePlayer, NPC_Bombomb_01, 0)
-                EVT_CALL(NpcFacePlayer, NPC_Bombomb_02, 0)
+                EVT_CALL(NpcFacePlayer, NPC_Bobomb_01, 0)
+                EVT_CALL(NpcFacePlayer, NPC_Bobomb_02, 0)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, MSG_CH1_004E)
-                EVT_CALL(PlayerFaceNpc, NPC_Bombomb_01, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_Bombomb_01, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, MSG_CH1_004F)
-                EVT_CALL(PlayerFaceNpc, NPC_Bombomb_02, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_Bombomb_02, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, MSG_CH1_0050)
+                EVT_CALL(PlayerFaceNpc, NPC_Bobomb_01, FALSE)
+                EVT_CALL(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, MSG_CH1_004F)
+                EVT_CALL(PlayerFaceNpc, NPC_Bobomb_02, FALSE)
+                EVT_CALL(SpeakToPlayer, NPC_Bobomb_02, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, MSG_CH1_0050)
                 EVT_THREAD
-                    EVT_CALL(SetNpcAnimation, NPC_Bombomb_02, ANIM_WorldBobomb_Red_Run)
+                    EVT_CALL(SetNpcAnimation, NPC_Bobomb_02, ANIM_WorldBobomb_Red_Run)
                     EVT_WAIT(10)
-                    EVT_CALL(SetNpcAnimation, NPC_Bombomb_02, ANIM_WorldBobomb_Red_Idle)
+                    EVT_CALL(SetNpcAnimation, NPC_Bobomb_02, ANIM_WorldBobomb_Red_Idle)
                     EVT_WAIT(3)
-                    EVT_CALL(GetNpcPos, NPC_Bombomb_02, LVar0, LVar1, LVar2)
-                    EVT_CALL(PlaySoundAtNpc, NPC_Bombomb_02, SOUND_CANNON1, 0)
-                    EVT_CALL(N(func_802426A4_9C7A84), LVar0, LVar1, LVar2)
+                    EVT_CALL(GetNpcPos, NPC_Bobomb_02, LVar0, LVar1, LVar2)
+                    EVT_CALL(PlaySoundAtNpc, NPC_Bobomb_02, SOUND_CANNON1, 0)
+                    EVT_CALL(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
                 EVT_END_THREAD
                 EVT_WAIT(20)
                 EVT_THREAD
-                    EVT_CALL(PlayerFaceNpc, NPC_Bombomb_01, FALSE)
-                    EVT_CALL(SetNpcAnimation, NPC_Bombomb_01, ANIM_WorldBobomb_Red_Run)
+                    EVT_CALL(PlayerFaceNpc, NPC_Bobomb_01, FALSE)
+                    EVT_CALL(SetNpcAnimation, NPC_Bobomb_01, ANIM_WorldBobomb_Red_Run)
                     EVT_WAIT(10)
-                    EVT_CALL(SetNpcAnimation, NPC_Bombomb_01, ANIM_WorldBobomb_Red_Idle)
+                    EVT_CALL(SetNpcAnimation, NPC_Bobomb_01, ANIM_WorldBobomb_Red_Idle)
                     EVT_WAIT(3)
-                    EVT_CALL(GetNpcPos, NPC_Bombomb_01, LVar0, LVar1, LVar2)
-                    EVT_CALL(PlaySoundAtNpc, NPC_Bombomb_01, SOUND_CANNON1, 0)
-                    EVT_CALL(N(func_802426A4_9C7A84), LVar0, LVar1, LVar2)
+                    EVT_CALL(GetNpcPos, NPC_Bobomb_01, LVar0, LVar1, LVar2)
+                    EVT_CALL(PlaySoundAtNpc, NPC_Bobomb_01, SOUND_CANNON1, 0)
+                    EVT_CALL(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
                 EVT_END_THREAD
                 EVT_WAIT(20)
                 EVT_THREAD
@@ -215,7 +215,7 @@ EvtScript N(EVS_NpcInteract_Bombomb_03_Normal) = {
                     EVT_WAIT(3)
                     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_CANNON1, 0)
-                    EVT_CALL(N(func_802426A4_9C7A84), LVar0, LVar1, LVar2)
+                    EVT_CALL(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
                 EVT_END_THREAD
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, MSG_CH1_0051)
@@ -229,42 +229,42 @@ EvtScript N(EVS_NpcInteract_Bombomb_03_Normal) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Koopa_01_Normal) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Koopa_01_Normal)))
+EvtScript N(EVS_NpcInit_Koover_Normal) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Koover_Normal)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_KoopaWithoutShell_01_Normal) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_KoopaWithoutShell_01_Normal)))
+EvtScript N(EVS_NpcInit_Koopa_02_Normal) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Koopa_02_Normal)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_KoopaWithoutShell_02_Normal) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_KoopaWithoutShell_02_Normal)))
+EvtScript N(EVS_NpcInit_Koopa_03_Normal) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Koopa_03_Normal)))
     EVT_IF_GE(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KoopaWithoutShell_02_Normal)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Koopa_03_Normal)))
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Koopa_Still)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Bombomb_01_Normal) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bombomb_01_Normal)))
+EvtScript N(EVS_NpcInit_Bobomb_01_Normal) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bobomb_01_Normal)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Bombomb_02_Normal) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bombomb_02_Normal)))
+EvtScript N(EVS_NpcInit_Bobomb_02_Normal) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bobomb_02_Normal)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Bombomb_03_Normal) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bombomb_03_Normal)))
+EvtScript N(EVS_NpcInit_Bobomb_03_Normal) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bobomb_03_Normal)))
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF

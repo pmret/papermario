@@ -76,14 +76,14 @@ EvtScript N(D_8024810C_8B817C) = {
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList_GoompapaTrade)[] = {
-    ITEM_LETTER10,
+    ITEM_LETTER_CHAIN_GOOMPAPA_1,
     ITEM_NONE
 };
 
 EvtScript N(EVS_LetterTrade_Goompapa) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle,
-        ITEM_LETTER10, ITEM_LETTER13,
+        ITEM_LETTER_CHAIN_GOOMPAPA_1, ITEM_LETTER_CHAIN_MUSS_T,
         MSG_CH0_006F, MSG_CH0_0070, MSG_CH0_0071, MSG_CH0_0072,
         EVT_PTR(N(LetterList_GoompapaTrade)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
@@ -92,14 +92,14 @@ EvtScript N(EVS_LetterTrade_Goompapa) = {
 };
 
 s32 N(LetterList_Goompapa)[] = {
-    ITEM_LETTER24,
+    ITEM_LETTER_CHAIN_GOOMPAPA_2,
     ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_Goompapa) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle,
-        ITEM_LETTER24, ITEM_NONE,
+        ITEM_LETTER_CHAIN_GOOMPAPA_2, ITEM_NONE,
         MSG_CH0_0073, MSG_CH0_0074, MSG_CH0_0075, MSG_CH0_0076,
         EVT_PTR(N(LetterList_Goompapa)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
@@ -116,14 +116,14 @@ EvtScript N(EVS_LetterReward_Goompapa) = {
 };
 
 s32 N(LetterList_Goompa)[] = {
-    ITEM_LETTER02,
+    ITEM_LETTER_TO_GOOMPA,
     ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_Goompa) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle,
-        ITEM_LETTER02, ITEM_NONE,
+        ITEM_LETTER_TO_GOOMPA, ITEM_NONE,
         MSG_CH0_0045, MSG_CH0_0046, MSG_CH0_0047, MSG_CH0_0048,
         EVT_PTR(N(LetterList_Goompa)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))

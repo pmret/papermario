@@ -38,14 +38,14 @@ MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(RedYoshiKidLetters)[] = {
-    ITEM_LETTER_TO_RED_YOSHI_KID,
+    ITEM_LETTER_CHAIN_YOSHI_KID,
     ITEM_NONE 
 };
 
 EvtScript N(EVS_LetterPrompt_RedYoshiKid) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_YoshiKid_02, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle,
-        ITEM_LETTER_TO_RED_YOSHI_KID, ITEM_LETTER_TO_DANE_T,
+        ITEM_LETTER_CHAIN_YOSHI_KID, ITEM_LETTER_CHAIN_DANE_T_2,
         MSG_CH5_0079, MSG_CH5_007A, MSG_CH5_007B, MSG_CH5_007C,
         EVT_PTR(N(RedYoshiKidLetters)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
@@ -690,7 +690,7 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
                         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
                         EVT_CALL(NpcMoveTo, NPC_SELF, -465, -185, 0)
                         EVT_CALL(NpcMoveTo, NPC_SELF, -540, -70, 0)
-                        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+                        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
                         EVT_SET(GB_StoryProgress, STORY_CH5_TRADED_VASE_FOR_SEED)
                 EVT_END_SWITCH
                 EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
@@ -713,7 +713,7 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
     EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_IF
     EVT_RETURN
     EVT_END

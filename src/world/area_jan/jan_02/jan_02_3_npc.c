@@ -151,7 +151,7 @@ EvtScript N(EVS_NpcInit_VillageLeader) = {
         EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
             EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_VillageLeader)))
         EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         EVT_CASE_LT(STORY_CH5_GOT_JADE_RAVEN)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_VillageLeader_Idle)
             EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)

@@ -15,14 +15,14 @@ EvtScript N(EVS_PlayerReaction_GetOldPhoto) = {
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList_Franky)[] = {
-    ITEM_LETTER_TO_FRANKY,
+    ITEM_LETTER_CHAIN_FRANKY,
     ITEM_NONE 
 };
 
 EvtScript N(EVS_LetterPrompt_Franky) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Franky, ANIM_Boo_Talk, ANIM_Boo_Idle,
-        ITEM_LETTER_TO_FRANKY, ITEM_LETTER20,
+        ITEM_LETTER_CHAIN_FRANKY, ITEM_LETTER_CHAIN_DANE_T_1,
         MSG_CH3_0067, MSG_CH3_0068, MSG_CH3_0069, MSG_CH3_006A,
         EVT_PTR(N(LetterList_Franky)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))

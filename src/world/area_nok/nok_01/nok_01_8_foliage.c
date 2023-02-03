@@ -31,7 +31,7 @@ FoliageDropList N(Bush3_Drops) = {
             .pos = { -39, 16, 404 },
             .spawnMode = ITEM_SPAWN_MODE_TOSS_NEVER_VANISH,
             .pickupFlag = GF_NOK01_Bush6_Glasses,
-            .spawnFlag = MF_Unk_0C,
+            .spawnFlag = MF_Bush3_Drop,
         },
     }
 };
@@ -47,7 +47,7 @@ SearchBushConfig N(SearchBush_Bush3) = {
 
 FoliageModelList N(Bush6_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o390, MODEL_o396, MODEL_o397, MODEL_o398);
 
-EvtScript N(D_8025159C_9D697C) = {
+EvtScript N(EVS_Bush6_HideFlowers) = {
     EVT_CALL(EnableModel, MODEL_o396, FALSE)
     EVT_CALL(EnableModel, MODEL_o397, FALSE)
     EVT_CALL(EnableModel, MODEL_o398, FALSE)
@@ -55,7 +55,7 @@ EvtScript N(D_8025159C_9D697C) = {
     EVT_END
 };
 
-EvtScript N(Bush6_CallbackScript) = {
+EvtScript N(EVS_OnSearchBush6) = {
     EVT_CALL(EnableModel, MODEL_o396, TRUE)
     EVT_WAIT(10)
     EVT_CALL(EnableModel, MODEL_o398, TRUE)
@@ -67,7 +67,7 @@ EvtScript N(Bush6_CallbackScript) = {
 
 SearchBushConfig N(SearchBush_Bush6) = {
     .bush = &N(Bush6_BushModels),
-    .callback = &N(Bush6_CallbackScript),
+    .callback = &N(EVS_OnSearchBush6),
 };
 
 FoliageModelList N(Bush7_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o391);
@@ -99,7 +99,7 @@ FoliageDropList N(Bush8_Drops) = {
             .pos = { 329, 16, 245 },
             .spawnMode = ITEM_SPAWN_MODE_TOSS,
             .pickupFlag = GF_NOK01_Bush4_KoopaLeaf,
-            .spawnFlag = MF_Unk_0A,
+            .spawnFlag = MF_Bush8_Drop,
         },
     }
 };
@@ -119,7 +119,7 @@ FoliageDropList N(Bush9_Drops) = {
             .pos = { 364, 16, 102 },
             .spawnMode = ITEM_SPAWN_MODE_TOSS,
             .pickupFlag = GF_NOK01_Bush5_Coin,
-            .spawnFlag = MF_Unk_0B,
+            .spawnFlag = MF_Bush9_Drop,
         },
     }
 };
@@ -139,12 +139,12 @@ FoliageDropList N(Bush1_Drops) = {
             .pos = { 441, 16, 57 },
             .spawnMode = ITEM_SPAWN_MODE_TOSS_NEVER_VANISH,
             .pickupFlag = GF_NOK01_Bush7_EmptyWallet,
-            .spawnFlag = MF_Unk_0D,
+            .spawnFlag = MF_Bush1_Drop,
         },
     }
 };
 
-EvtScript N(D_8025173C_9D6B1C) = {
+EvtScript N(EVS_Bush2_HideFlowers) = {
     EVT_CALL(EnableModel, MODEL_o399, FALSE)
     EVT_CALL(EnableModel, MODEL_o400, FALSE)
     EVT_CALL(EnableModel, MODEL_o401, FALSE)
@@ -152,7 +152,7 @@ EvtScript N(D_8025173C_9D6B1C) = {
     EVT_END
 };
 
-EvtScript N(Bush2_CallbackScript) = {
+EvtScript N(EVS_OnSearchBush2) = {
     EVT_CALL(EnableModel, MODEL_o399, TRUE)
     EVT_WAIT(10)
     EVT_CALL(EnableModel, MODEL_o401, TRUE)
@@ -164,13 +164,13 @@ EvtScript N(Bush2_CallbackScript) = {
 
 SearchBushConfig N(SearchBush_Bush2) = {
     .bush = &N(Bush2_BushModels),
-    .callback = &N(Bush2_CallbackScript),
+    .callback = &N(EVS_OnSearchBush2),
 };
 
 SearchBushConfig N(SearchBush_Bush1) = {
     .bush = &N(Bush2_BushModels),
     .drops = &N(Bush1_Drops),
-    .callback = &N(Bush2_CallbackScript),
+    .callback = &N(EVS_OnSearchBush2),
 };
 
 FoliageModelList N(Tree1_LeafModels) = FOLIAGE_MODEL_LIST(MODEL_o300);
@@ -198,7 +198,7 @@ EvtScript N(EVS_SetupFoliage) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o313, 1, 0)
     EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush6)))
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o419, 1, 0)
-    EVT_EXEC(N(D_8025159C_9D697C))
+    EVT_EXEC(N(EVS_Bush6_HideFlowers))
     EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush7)))
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o420, 1, 0)
     EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush8)))
@@ -211,12 +211,13 @@ EvtScript N(EVS_SetupFoliage) = {
         EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush2)))
     EVT_END_IF
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o423, 1, 0)
-    EVT_EXEC(N(D_8025173C_9D6B1C))
+    EVT_EXEC(N(EVS_Bush2_HideFlowers))
     EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o323, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_80249E24)), TRIGGER_WALL_HAMMER, COLLIDER_o323, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_80249E24)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
+    // bind the same tree a second time for the koopa shell stuck inside
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_RecoverTreeShell)), TRIGGER_WALL_HAMMER, COLLIDER_o323, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_RecoverTreeShell)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
     EVT_RETURN
     EVT_END
 };

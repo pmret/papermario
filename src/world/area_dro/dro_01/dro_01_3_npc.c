@@ -20,14 +20,14 @@ MAP_STATIC_PAD(1,post_quizmo); // or pre_key_item?
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
-    ITEM_LETTER19,
+    ITEM_LETTER_CHAIN_LITTLE_MOUSER,
     ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_ShopOwner) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Mouser_ShopOwner, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle,
-        ITEM_LETTER19, ITEM_LETTER_TO_FRANKY,
+        ITEM_LETTER_CHAIN_LITTLE_MOUSER, ITEM_LETTER_CHAIN_FRANKY,
         MSG_CH2_0089, MSG_CH2_008A, MSG_CH2_008B, MSG_CH2_008C,
         EVT_PTR(N(LetterList)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))

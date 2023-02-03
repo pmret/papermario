@@ -157,9 +157,9 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
 };
 
 s32 N(LetterList)[] = {
-    ITEM_LETTER01,
+    ITEM_LETTER_TO_MERLON,
     ITEM_LETTER_TO_KOLORADO,
-    ITEM_LETTER10,
+    ITEM_LETTER_CHAIN_GOOMPAPA_1,
     ITEM_NONE
 };
 
@@ -254,9 +254,9 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
         EVT_EXEC(N(EVS_PopSong))
         EVT_WAIT(10)
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH2_001E)
-        EVT_CALL(AddKeyItem, ITEM_LETTER01)
+        EVT_CALL(AddKeyItem, ITEM_LETTER_TO_MERLON)
         EVT_CALL(AddKeyItem, ITEM_LETTER_TO_KOLORADO)
-        EVT_CALL(AddKeyItem, ITEM_LETTER10)
+        EVT_CALL(AddKeyItem, ITEM_LETTER_CHAIN_GOOMPAPA_1)
     EVT_END_IF
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
     EVT_CALL(EnablePartnerAI)

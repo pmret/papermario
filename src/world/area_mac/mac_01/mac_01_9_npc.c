@@ -44,14 +44,14 @@ MAP_STATIC_PAD(1,key_choice);
 #include "world/common/todo/GetPlayerCoins.inc.c"
 
 s32 N(LetterList_Merlon)[] = {
-    ITEM_LETTER01,
+    ITEM_LETTER_TO_MERLON,
     ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_Merlon) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle,
-        ITEM_LETTER01, ITEM_NONE,
+        ITEM_LETTER_TO_MERLON, ITEM_NONE,
         MSG_MAC_Plaza_0043, MSG_MAC_Plaza_0044, MSG_MAC_Plaza_0045, MSG_MAC_Plaza_0046,
         EVT_PTR(N(LetterList_Merlon)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))

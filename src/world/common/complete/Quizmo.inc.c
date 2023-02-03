@@ -85,10 +85,15 @@ enum {
     // area_mac
     QUIZ_MAP_MAC_00     = 0,
     QUIZ_MAP_MAC_01     = 1,
+    QUIZ_MAP_MAC_02     = 2, // unused
+    QUIZ_MAP_MAC_03     = 3, // unused
     QUIZ_MAP_MAC_04     = 4,
     QUIZ_MAP_MAC_05     = 5,
     QUIZ_COUNT_MAC      = 6,
     // area_nok
+    QUIZ_MAP_NOK_01     = 0,
+    QUIZ_MAP_NOK_02     = 1,
+    QUIZ_COUNT_NOK      = 2,
     // area_dro
     QUIZ_MAP_DRO_01     = 0,
     QUIZ_MAP_DRO_02     = 1,

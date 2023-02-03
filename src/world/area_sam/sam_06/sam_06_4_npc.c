@@ -75,14 +75,14 @@ MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList_FrostT)[] = {
-    ITEM_LETTER_TO_FROST_T,
+    ITEM_LETTER_CHAIN_FROST_T,
     ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_FrostT) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_ShiverToad_03, ANIM_ShiverToad_Green_Talk, ANIM_ShiverToad_Green_Idle,
-        ITEM_LETTER_TO_FROST_T, ITEM_LETTER24,
+        ITEM_LETTER_CHAIN_FROST_T, ITEM_LETTER_CHAIN_GOOMPAPA_2,
         MSG_CH7_00FE, MSG_CH7_00FF, MSG_CH7_0100, MSG_CH7_0101,
         EVT_PTR(N(LetterList_FrostT)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))

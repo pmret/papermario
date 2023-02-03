@@ -58,7 +58,7 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_ArrowSign), 600, 0, 200, 0, 270, MAKE_ENTITY_END)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_ArrowSign), 336, -140, 203, 0, 70, MAKE_ENTITY_END)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_ArrowSign), 730, -250, -95, 0, 90, MAKE_ENTITY_END)
-    EVT_CALL(MakeItemEntity, ITEM_LETTER10, -275, -250, 150, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_IWA04_Item_Letter10)
+    EVT_CALL(MakeItemEntity, ITEM_LETTER_CHAIN_GOOMPAPA_1, -275, -250, 150, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_IWA04_Item_Letter10)
     EVT_RETURN
     EVT_END
 };

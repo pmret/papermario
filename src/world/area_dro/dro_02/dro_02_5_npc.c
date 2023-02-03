@@ -62,14 +62,14 @@ MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
-    ITEM_LETTER17,
+    ITEM_LETTER_CHAIN_MR_E,
     ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_MrE) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Dryite_01, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle,
-        ITEM_LETTER17, ITEM_LETTER18,
+        ITEM_LETTER_CHAIN_MR_E, ITEM_LETTER_CHAIN_MISS_T,
         MSG_CH2_0095, MSG_CH2_0096, MSG_CH2_0097, MSG_CH2_0098,
         EVT_PTR(N(LetterList)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))

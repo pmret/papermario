@@ -27,7 +27,7 @@ EvtScript N(EVS_Scene_Wishing) = {
 };
 
 s32 N(LetterList)[] = {
-    ITEM_LETTER13,
+    ITEM_LETTER_CHAIN_MUSS_T,
     ITEM_NONE
 };
 
@@ -75,7 +75,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle,
-        ITEM_LETTER13, ITEM_LETTER14,
+        ITEM_LETTER_CHAIN_MUSS_T, ITEM_LETTER_CHAIN_KOOVER_1,
         MSG_OSR_0010, MSG_OSR_0011, MSG_OSR_0012, MSG_OSR_0013,
         EVT_PTR(N(LetterList)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))

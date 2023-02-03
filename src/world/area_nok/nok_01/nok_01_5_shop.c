@@ -81,7 +81,7 @@ ShopItemLocation N(ItemPositions)[] = {
 };
 
 ShopOwner N(Owner) = {
-    .npcID = NPC_Koopa_06,
+    .npcID = NPC_Koopa_ShopOwner,
     .idleAnim = ANIM_Koopa_Idle,
     .talkAnim = ANIM_Koopa_Talk,
     .onBuyEvt = &N(EVS_OnBuy),
