@@ -83,7 +83,7 @@ typedef ModelTransformGroup* ModelTransformGroupList[MAX_MODEL_TRANSFORM_GROUPS]
 
 typedef struct ModelIDList {
     u16 count;
-    u16 list[0];
+    u16 list[VLA];
 } ModelIDList;
 
 typedef struct ModelLocalVertexCopy {
@@ -158,7 +158,7 @@ typedef struct ShapeFile {
     /* 0x10 */ char** zoneNames;
     /* 0x14 */ unsigned char pad_14[0xC];
     // end header
-    /* 0x20 */ u8 data[0];
+    /* 0x20 */ u8 data[VLA];
 } ShapeFile; // size = variable
 
 typedef ModelTreeInfo ModelTreeInfoList[0x200];

@@ -193,4 +193,10 @@
     .models = {  names } \
 }
 
+#ifdef SHIFT
+#define VLA
+#else
+#define VLA 0
+#endif
+
 #endif

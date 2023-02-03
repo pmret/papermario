@@ -2506,11 +2506,11 @@ typedef struct LavaPiranhaVine {
     /* 0x1DC */ s32 numPoints;
 } LavaPiranhaVine;
 
-// TODO look into making options here better. it's really an array of 5 substructs, each having and [8][2] array
+// TODO look into making options here better. it's really an array of 5 substructs, each having an [8][2] array
 typedef struct PlayerCelebrationAnimOptions {
     /* 0x00 */ s16 randomChance;
     /* 0x02 */ s16 hpBasedChance;
-    /* 0x04 */ s32 options[0];
+    /* 0x04 */ s32 options[VLA];
 } PlayerCelebrationAnimOptions; // size = 0x8
 
 #endif
