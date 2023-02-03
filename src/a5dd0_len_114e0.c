@@ -8,7 +8,8 @@
 #include "nu/nusys.h"
 
 #ifdef SHIFT
-#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shiftability
+ // TODO shiftability - these need to be totally separate from anything else that might cut into them
+#define MODEL_TEXTURE_BASE_ADDRESS 0x80600000
 #define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shiftability
 #define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
 #define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shiftability
@@ -3939,7 +3940,7 @@ void _load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
 }
 
 void load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
-    s32 battleOffset = ((gGameStatusPtr->isBattle != 0) << 17);
+    s32 battleOffset = ((gGameStatusPtr->isBattle != 0) << 17); // TODO FIX
 
     mdl_nextTextureAddress = mdl_textureBaseAddress + battleOffset;
 

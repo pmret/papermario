@@ -6820,11 +6820,11 @@ segments:
 #######################
   - type: code
     start: 0x415D90
+    name: 415D90
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
     - [0x415D90, c, 415D90]
-    - [auto, c, 415D902]
     - [0x4200D0]
   - type: code
     start: 0x4219F0
