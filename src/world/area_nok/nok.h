@@ -23,6 +23,11 @@ enum {
 enum {
     AF_NOK_01       = AreaFlag(1),
     AF_NOK_02       = AreaFlag(2),
+    AF_NOK_09       = AreaFlag(9),
+    AF_NOK_0A       = AreaFlag(10),
+    AF_NOK_0B       = AreaFlag(11),
+    AF_NOK_0C       = AreaFlag(12),
+    AF_NOK_0E       = AreaFlag(14),
 };
 
 extern MapSettings nok_01_settings;

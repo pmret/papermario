@@ -10878,17 +10878,16 @@ segments:
     start: 0x9C53E0
     vram: 0x80240000
     subsegments:
-    - [0x9C53E0, c]
-    - [0x9C7D10, c]
-    - [0x9C7F50, data]
-    - [0x9C8350, data]
-    - [0x9C8920, data]
-    - [0x9C89E0, data]
-    - [0x9D4EF0, data]
-    - [0x9D5110, data]
-    - [0x9D5BF0, data]
-    - [0x9D5F80, data]
-    - [0x9D6E60]
+    - [0x9C53E0, c, nok_01_0_header]
+    - [0x9C53E0, c, nok_01_1_music]
+    - [0x9C53E0, c, nok_01_2_main]
+    - [0x9C53E0, c, nok_01_3_entity]
+    - [0x9C53E0, c, nok_01_4_npc]
+    - [0x9C7B40, c, nok_01_5_shop]
+    - [0x9C7B40, c, nok_01_6_rooms]
+    - [0x9C7BA0, c, nok_01_7_radio]
+    - [0x9C7D10, c, nok_01_8_foliage]
+    - [0x9C7F50]
   - name: nok_02
     dir: world/area_nok/nok_02
     type: code
