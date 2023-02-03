@@ -6,7 +6,7 @@ typedef struct TitleDataFile {
     /* 0x08 */ s32 img_offset_press_start;
     /* 0x0C */ unsigned char unk_0C[4];
     // end of header
-    /* 0x10 */ s8 data[0];
+    /* 0x10 */ s8 data[VLA];
 } TitleDataFile; // size may vary
 
 static TitleDataFile* TitleData;

@@ -4,7 +4,7 @@
 
 typedef struct FoliageModelList {
     s32 count;
-    s32 models[0];
+    s32 models[VLA];
 } FoliageModelList;
 
 typedef struct FoliageDropList {
@@ -15,12 +15,12 @@ typedef struct FoliageDropList {
         s32 spawnMode;
         Bytecode pickupFlag;
         Bytecode spawnFlag;
-    } drops[0];
+    } drops[VLA];
 } FoliageDropList;
 
 typedef struct FoliageVectorList {
     s32 count;
-    Vec3i vectors[0];
+    Vec3i vectors[VLA];
 } FoliageVectorList;
 
 typedef struct SearchBushConfig {

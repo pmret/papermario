@@ -1525,7 +1525,7 @@ typedef struct RadiatingEnergyOrbFXData {
 } RadiatingEnergyOrbFXData; // size = 0x34
 
 typedef struct QuizmoAnswerFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char todo[VLA];
 } QuizmoAnswerFXData; // size = unknown
 
 typedef struct MotionBlurFlameFXData {
