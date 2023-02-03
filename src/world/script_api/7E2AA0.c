@@ -39,8 +39,10 @@ typedef struct AdvancedDoor {
 
 ApiStatus func_80281C20(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 var0 = evt_get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
 
-    func_800EF414(evt_get_variable(script, *args++), evt_get_variable(script, *args++));
+    func_800EF414(var0, var1);
     partner_set_tether_distance(0.0f);
     return ApiStatus_DONE2;
 }

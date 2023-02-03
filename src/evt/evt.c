@@ -124,8 +124,10 @@ ApiStatus evt_handle_wait_seconds(Evt* script) {
 
 ApiStatus evt_handle_if_equal(Evt* script) {
     Bytecode* args = script->ptrReadPos;
+    s32 val1 = evt_get_variable(script, *args++);
+    s32 val2 = evt_get_variable(script, *args++);
 
-    if (evt_get_variable(script, *args++) != evt_get_variable(script, *args++)) {
+    if (val1 != val2) {
         script->ptrNextLine = evt_skip_if(script);
         return ApiStatus_DONE2;
     }
@@ -134,8 +136,10 @@ ApiStatus evt_handle_if_equal(Evt* script) {
 
 ApiStatus evt_handle_if_not_equal(Evt* script) {
     Bytecode* args = script->ptrReadPos;
+    s32 val1 = evt_get_variable(script, *args++);
+    s32 val2 = evt_get_variable(script, *args++);
 
-    if (evt_get_variable(script, *args++) == evt_get_variable(script, *args++)) {
+    if (val1 == val2) {
         script->ptrNextLine = evt_skip_if(script);
         return ApiStatus_DONE2;
     }
@@ -144,8 +148,10 @@ ApiStatus evt_handle_if_not_equal(Evt* script) {
 
 ApiStatus evt_handle_if_less(Evt* script) {
     Bytecode* args = script->ptrReadPos;
+    s32 val1 = evt_get_variable(script, *args++);
+    s32 val2 = evt_get_variable(script, *args++);
 
-    if (evt_get_variable(script, *args++) >= evt_get_variable(script, *args++)) {
+    if (val1 >= val2) {
         script->ptrNextLine = evt_skip_if(script);
         return ApiStatus_DONE2;
     }
@@ -154,8 +160,10 @@ ApiStatus evt_handle_if_less(Evt* script) {
 
 ApiStatus evt_handle_if_greater(Evt* script) {
     Bytecode* args = script->ptrReadPos;
+    s32 val1 = evt_get_variable(script, *args++);
+    s32 val2 = evt_get_variable(script, *args++);
 
-    if (evt_get_variable(script, *args++) <= evt_get_variable(script, *args++)) {
+    if (val1 <= val2) {
         script->ptrNextLine = evt_skip_if(script);
         return ApiStatus_DONE2;
     }
@@ -164,8 +172,10 @@ ApiStatus evt_handle_if_greater(Evt* script) {
 
 ApiStatus evt_handle_if_less_equal(Evt* script) {
     Bytecode* args = script->ptrReadPos;
+    s32 val1 = evt_get_variable(script, *args++);
+    s32 val2 = evt_get_variable(script, *args++);
 
-    if (evt_get_variable(script, *args++) > evt_get_variable(script, *args++)) {
+    if (val1 > val2) {
         script->ptrNextLine = evt_skip_if(script);
         return ApiStatus_DONE2;
     }
@@ -174,8 +184,10 @@ ApiStatus evt_handle_if_less_equal(Evt* script) {
 
 ApiStatus evt_handle_if_greater_equal(Evt* script) {
     Bytecode* args = script->ptrReadPos;
+    s32 val1 = evt_get_variable(script, *args++);
+    s32 val2 = evt_get_variable(script, *args++);
 
-    if (evt_get_variable(script, *args++) < evt_get_variable(script, *args++)) {
+    if (val1 < val2) {
         script->ptrNextLine = evt_skip_if(script);
         return ApiStatus_DONE2;
     }
@@ -186,7 +198,7 @@ ApiStatus evt_handle_if_AND(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     Bytecode var = *args++;
 
-    if ((evt_get_variable(script, var) & *args) == 0) {
+    if ((evt_get_variable(script, var) & *args++) == 0) {
         script->ptrNextLine = evt_skip_if(script);
         return ApiStatus_DONE2;
     }
@@ -197,7 +209,7 @@ ApiStatus evt_handle_if_not_AND(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     Bytecode var = *args++;
 
-    if ((evt_get_variable(script, var) & *args) != 0) {
+    if ((evt_get_variable(script, var) & *args++) != 0) {
         script->ptrNextLine = evt_skip_if(script);
         return ApiStatus_DONE2;
     }
@@ -214,7 +226,8 @@ ApiStatus evt_handle_end_if(Evt* script) {
 }
 
 ApiStatus evt_handle_switch(Evt* script) {
-    Bytecode value = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    Bytecode value = evt_get_variable(script, *args++);
     s32 switchDepth = ++script->switchDepth;
 
     ASSERT(switchDepth < 8);
@@ -246,7 +259,7 @@ ApiStatus evt_handle_case_equal(Evt* script) {
 
     ASSERT(switchDepth >= 0);
 
-    var = evt_get_variable(script, *args);
+    var = evt_get_variable(script, *args++);
     switchBlockValue = script->switchBlockValue[switchDepth];
 
     if (script->switchBlockState[switchDepth] <= 0) {
@@ -269,7 +282,7 @@ ApiStatus evt_handle_case_not_equal(Evt* script) {
 
     ASSERT(switchDepth >= 0);
 
-    var = evt_get_variable(script, *args);
+    var = evt_get_variable(script, *args++);
     switchBlockValue = script->switchBlockValue[switchDepth];
 
     if (script->switchBlockState[switchDepth] <= 0) {
@@ -292,7 +305,7 @@ ApiStatus evt_handle_case_less(Evt* script) {
 
     ASSERT(switchDepth >= 0);
 
-    var = evt_get_variable(script, *args);
+    var = evt_get_variable(script, *args++);
     switchBlockValue = script->switchBlockValue[switchDepth];
 
     if (script->switchBlockState[switchDepth] <= 0) {
@@ -315,7 +328,7 @@ ApiStatus evt_handle_case_less_equal(Evt* script) {
 
     ASSERT(switchDepth >= 0);
 
-    var = evt_get_variable(script, *args);
+    var = evt_get_variable(script, *args++);
     switchBlockValue = script->switchBlockValue[switchDepth];
 
     if (script->switchBlockState[switchDepth] <= 0) {
@@ -338,7 +351,7 @@ ApiStatus evt_handle_case_greater(Evt* script) {
 
     ASSERT(switchDepth >= 0);
 
-    var = evt_get_variable(script, *args);
+    var = evt_get_variable(script, *args++);
     switchBlockValue = script->switchBlockValue[switchDepth];
 
     if (script->switchBlockState[switchDepth] <= 0) {
@@ -361,7 +374,7 @@ ApiStatus evt_handle_case_greater_equal(Evt* script) {
 
     ASSERT(switchDepth >= 0);
 
-    var = evt_get_variable(script, *args);
+    var = evt_get_variable(script, *args++);
     switchBlockValue = script->switchBlockValue[switchDepth];
 
     if (script->switchBlockState[switchDepth] <= 0) {
@@ -426,7 +439,7 @@ ApiStatus evt_handle_case_AND(Evt* script) {
 
     ASSERT(switchDepth >= 0);
 
-    var = *args;
+    var = *args++;
     switchBlockValue = script->switchBlockValue[switchDepth];
     switchBlockState = script->switchBlockState[switchDepth];
 
@@ -451,7 +464,7 @@ ApiStatus evt_handle_case_equal_OR(Evt* script) {
 
     ASSERT(switchDepth >= 0);
 
-    var = evt_get_variable(script, *args);
+    var = evt_get_variable(script, *args++);
     switchBlockValue = script->switchBlockValue[switchDepth];
     switchBlockState = script->switchBlockState[switchDepth];
 
@@ -476,7 +489,7 @@ ApiStatus evt_handle_case_equal_AND(Evt* script) {
 
     ASSERT(switchDepth >= 0);
 
-    var = evt_get_variable(script, *args);
+    var = evt_get_variable(script, *args++);
     switchBlockValue = script->switchBlockValue[switchDepth];
     switchBlockState = script->switchBlockState[switchDepth];
 
@@ -531,9 +544,9 @@ ApiStatus evt_handle_end_switch(Evt* script) {
 
 ApiStatus evt_handle_set_var(Evt* script) {
     Bytecode* args = script->ptrReadPos;
-    s32 curPtrReadPos = args[0];
+    s32 curPtrReadPos = *args++;
 
-    evt_set_variable(script, curPtrReadPos, evt_get_variable(script, args[1]));
+    evt_set_variable(script, curPtrReadPos, evt_get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
@@ -546,7 +559,7 @@ ApiStatus evt_handle_set_float(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     Bytecode var = *args++;
 
-    evt_set_float_variable(script, var, evt_get_float_variable(script, *args));
+    evt_set_float_variable(script, var, evt_get_float_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
@@ -741,7 +754,7 @@ ApiStatus evt_handle_get_Nth_word(Evt* script) {
     Bytecode var;
 
     var = *args++;
-    evt_set_variable(script, var, script->buffer[evt_get_variable(script, *args)]);
+    evt_set_variable(script, var, script->buffer[evt_get_variable(script, *args++)]);
 
     return ApiStatus_DONE2;
 }
@@ -815,7 +828,7 @@ ApiStatus evt_handle_get_Nth_float(Evt* script) {
     Bytecode var;
 
     var = *args++;
-    evt_set_float_variable(script, var, script->buffer[evt_get_variable(script, *args)]);
+    evt_set_float_variable(script, var, script->buffer[evt_get_variable(script, *args++)]);
 
     return ApiStatus_DONE2;
 }
