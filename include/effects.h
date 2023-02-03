@@ -1524,10 +1524,6 @@ typedef struct RadiatingEnergyOrbFXData {
     /* 0x30 */ f32 unk_30;
 } RadiatingEnergyOrbFXData; // size = 0x34
 
-typedef struct QuizmoAnswerFXData {
-    /* 0x00 */ char todo[VLA];
-} QuizmoAnswerFXData; // size = unknown
-
 typedef struct MotionBlurFlameFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ f32 unk_04;
@@ -2719,7 +2715,7 @@ typedef union {
     struct ChompDropFXData*             chompDrop;
     struct QuizmoStageFXData*           quizmoStage;
     struct RadiatingEnergyOrbFXData*    radiatingEnergyOrb;
-    struct QuizmoAnswerFXData*          quizmoAnswer;
+    void*                               quizmoAnswer;
     struct MotionBlurFlameFXData*       motionBlurFlame;
     struct EnergyOrbWaveFXData*         energyOrbWave;
     struct MerlinHouseStarsFXData*      merlinHouseStars;

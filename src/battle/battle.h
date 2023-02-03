@@ -400,6 +400,13 @@ typedef struct ActorOffsets {
     /* 0x03 */ s8 shadow;
 } ActorOffsets; // size = 0x04
 
+// TODO look into making options here better. it's really an array of 5 substructs, each having an [8][2] array
+typedef struct PlayerCelebrationAnimOptions {
+    /* 0x00 */ s16 randomChance;
+    /* 0x02 */ s16 hpBasedChance;
+    /* 0x04 */ s32 options[80];
+} PlayerCelebrationAnimOptions; // size = 0x8
+
 extern Battle* gCurrentBattlePtr;
 
 extern ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT];

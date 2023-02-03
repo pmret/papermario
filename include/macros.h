@@ -193,10 +193,10 @@
     .models = {  names } \
 }
 
-#ifdef SHIFT
-#define VLA
-#else
+#ifdef OLD_GCC
 #define VLA 0
+#else
+#define VLA
 #endif
 
 #endif
