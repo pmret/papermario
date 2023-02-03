@@ -260,7 +260,7 @@ ApiStatus CountFortessKeys(Evt* script, s32 isInitialCall);
 ApiStatus RemoveFortressKeys(Evt* script, s32 isInitialCall);
 ApiStatus MakeItemEntity(Evt* script, s32 isInitialCall);
 ApiStatus DropItemEntity(Evt* script, s32 isInitialCall);
-ApiStatus DropTinyItemEntity(Evt* script, s32 isInitialCall);
+ApiStatus DropResizableItemEntity(Evt* script, s32 isInitialCall);
 ApiStatus RemoveItemEntity(Evt* script, s32 isInitialCall);
 ApiStatus AddBadge(Evt* script, s32 isInitialCall);
 ApiStatus RemoveBadge(Evt* script, s32 isInitialCall);

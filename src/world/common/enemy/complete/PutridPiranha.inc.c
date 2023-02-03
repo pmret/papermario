@@ -2,30 +2,16 @@
 
 #include "world/common/enemy/ai/PiranhaPlantAI.inc.c"
 
-EvtScript N(EVS_NpcDefeat_PutridPiranha_Hitbox) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CALL(OnPlayerFled, 1)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/enemy/ai/GenericHitboxDefeat.inc.c"
 
-MobileAISettings N(AISettings_Piranha) = {
+MobileAISettings N(AISettings_PutridPiranha) = {
     .moveTime = 30,
     .waitTime = 30,
     .alertRadius = 150.0f,
     .playerSearchInterval = 1,
 };
 
-EvtScript N(EVS_NpcAI_Piranha) = {
+EvtScript N(EVS_NpcAI_PutridPiranha) = {
     EVT_CALL(SetSelfVar, 7, 1)
     EVT_CALL(SetSelfVar, 8, 10)
     EVT_CALL(SetSelfVar, 9, 9)
@@ -35,7 +21,7 @@ EvtScript N(EVS_NpcAI_Piranha) = {
     EVT_CALL(SetSelfVar, 13, 15)
     EVT_CALL(SetSelfVar, 14, 18)
     EVT_CALL(SetSelfVar, 15, 15)
-    EVT_CALL(N(PiranhaPlantAI_Main), EVT_PTR(N(AISettings_Piranha)))
+    EVT_CALL(N(PiranhaPlantAI_Main), EVT_PTR(N(AISettings_PutridPiranha)))
     EVT_RETURN
     EVT_END
 };
@@ -44,7 +30,7 @@ NpcSettings N(NpcSettings_PutridPiranha) = {
     .height = 50,
     .radius = 36,
     .level = 17,
-    .ai = &N(EVS_NpcAI_Piranha),
+    .ai = &N(EVS_NpcAI_PutridPiranha),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
@@ -67,7 +53,7 @@ EvtScript N(EVS_80244090) = {
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_JUMP)
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_CALL(GetSelfAnimationFromTable, 7, LVar0)
+            EVT_CALL(GetSelfAnimationFromTable, ENEMY_ANIM_INDEX_HIT, LVar0)
             EVT_EXEC_WAIT(EVS_NpcHitRecoil)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -80,5 +66,5 @@ NpcSettings N(NpcSettings_PutridPiranha_Hitbox) = {
     .radius = 28,
     .level = 17,
     .ai = &N(EVS_NpcAI_PutridPiranha_Hitbox),
-    .onDefeat = &N(EVS_NpcDefeat_PutridPiranha_Hitbox),
+    .onDefeat = &N(EVS_GenericHitboxDefeat),
 };

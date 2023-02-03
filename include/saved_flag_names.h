@@ -707,7 +707,7 @@ enum GameFlags {
     GF_IWA03_ItemBlock_Mushroom                 = GameFlag(0x2BF),
     GF_IWA03_ItemBlock_HoneySyrup               = GameFlag(0x2C0),
     GF_IWA01_Item_Letter01                      = GameFlag(0x2C1),
-    GF_IWA03_Item_Letter25                      = GameFlag(0x2C2),
+    GF_IWA03_Item_LettertoKolorado              = GameFlag(0x2C2),
     GF_IWA04_Item_Letter10                      = GameFlag(0x2C3),
     GF_IWA04_Defeated_Buzzar                    = GameFlag(0x2C4),
     GF_IWA10_Bush1_Coin                         = GameFlag(0x2C5),

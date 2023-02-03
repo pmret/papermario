@@ -46,7 +46,7 @@ enum {
 
 enum {
     MF_Unk_01       = MapFlag(1),
-    MF_Unk_0A       = MapFlag(10),
+    AF_JAN01_TreeDrop_StarPiece       = MapFlag(10),
 };
 
 #define NAMESPACE mac_05

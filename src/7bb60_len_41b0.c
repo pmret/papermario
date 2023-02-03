@@ -896,7 +896,7 @@ void phys_main_collision_below(void) {
     playerStatus->groundNormalPitch = get_player_normal_pitch();
 
     if (collHeightHalf + (temp_f24 * 0.5f) < outLength) {
-        colliderID = -1;
+        colliderID = NO_COLLIDER;
     }
     if (playerStatus->timeInAir == 0) {
         collisionStatus->currentFloor = colliderID;

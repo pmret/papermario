@@ -130,3 +130,23 @@
     .anim_E = ANIM_VillageLeader_Idle, \
     .anim_F = ANIM_VillageLeader_Idle, \
 }
+
+#define YOSHI_COUNCILLOR_ANIMS \
+{ \
+    .idle   = ANIM_LeadersFriend_Idle, \
+    .walk   = ANIM_LeadersFriend_Idle, \
+    .run    = ANIM_LeadersFriend_Idle, \
+    .chase  = ANIM_LeadersFriend_Idle, \
+    .anim_4 = ANIM_LeadersFriend_Idle, \
+    .anim_5 = ANIM_LeadersFriend_Idle, \
+    .death  = ANIM_LeadersFriend_Idle, \
+    .hit    = ANIM_LeadersFriend_Idle, \
+    .anim_8 = ANIM_LeadersFriend_Idle, \
+    .anim_9 = ANIM_LeadersFriend_Idle, \
+    .anim_A = ANIM_LeadersFriend_Idle, \
+    .anim_B = ANIM_LeadersFriend_Idle, \
+    .anim_C = ANIM_LeadersFriend_Idle, \
+    .anim_D = ANIM_LeadersFriend_Idle, \
+    .anim_E = ANIM_LeadersFriend_Idle, \
+    .anim_F = ANIM_LeadersFriend_Idle, \
+}

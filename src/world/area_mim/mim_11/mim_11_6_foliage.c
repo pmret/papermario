@@ -11,7 +11,7 @@ FoliageDropList N(Bush1_Drops) = {
             .itemID = ITEM_STRANGE_LEAF,
             .pos = { 357, 16, 315 },
             .spawnMode = ITEM_SPAWN_MODE_TOSS_NEVER_VANISH,
-            .spawnFlag = MF_Unk_0A,
+            .spawnFlag = AF_JAN01_TreeDrop_StarPiece,
         },
     }
 };

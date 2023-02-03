@@ -1,6 +1,6 @@
 #include "mim_07.h"
 
-#include "world/common/enemy/complete/ForestFuzzy.inc.c"
+#include "world/common/enemy/complete/ForestFuzzy_Wander.inc.c"
 
 NpcSettings N(NpcSettings_JrTroopa) = {
     .height = 32,
@@ -184,7 +184,7 @@ EvtScript N(EVS_NpcInit_Fuzzy) = {
 
 StaticNpc N(NpcData_Fuzzy_01) = {
     .id = NPC_Fuzzy_01,
-    .settings = &N(NpcSettings_ForestFuzzy),
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { -240.0f, 0.0f, -240.0f },
     .yaw = 0,
     .flags = 0,
@@ -208,7 +208,7 @@ StaticNpc N(NpcData_Fuzzy_01) = {
 
 StaticNpc N(NpcData_Fuzzy_02) = {
     .id = NPC_Fuzzy_02,
-    .settings = &N(NpcSettings_ForestFuzzy),
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { 270.0f, 0.0f, 200.0f },
     .yaw = 0,
     .flags = 0,

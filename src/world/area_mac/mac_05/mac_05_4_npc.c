@@ -50,13 +50,13 @@ EvtScript N(EVS_LetterPrompt_Fishmael) = {
 };
 
 s32 N(Kolorado_LetterList)[] = {
-    ITEM_LETTER25, ITEM_NONE 
+    ITEM_LETTER_TO_KOLORADO, ITEM_NONE 
 };
 
 EvtScript N(EVS_LetterPrompt_Kolorado) = {
     EVT_CALL(N(LetterDelivery_Init), NPC_Kolorado,
         ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
-        ITEM_LETTER25, ITEM_NONE,
+        ITEM_LETTER_TO_KOLORADO, ITEM_NONE,
         MSG_MAC_Port_0085, MSG_MAC_Port_0086,
         MSG_MAC_Port_0087, MSG_MAC_Port_0088,
         EVT_PTR(N(Kolorado_LetterList)))
@@ -1918,7 +1918,7 @@ API_CALLABLE(N(func_8024335C_8554CC)) {
 }
 
 EvtScript N(D_8024E23C_8603AC) = {
-    EVT_SET(MF_Unk_0A, TRUE)
+    EVT_SET(AF_JAN01_TreeDrop_StarPiece, TRUE)
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_400000 | ENEMY_FLAG_8000000, 1)
     EVT_CALL(InterpNpcYaw, NPC_Chanterelle, 270, 0)
     EVT_CALL(SetMusicTrack, 0, SONG_POP_DIVA_SONG, 1, 8)
@@ -1931,10 +1931,10 @@ EvtScript N(D_8024E23C_8603AC) = {
     EVT_CHILD_THREAD
         EVT_WAIT(30)
         EVT_CALL(N(func_8024335C_8554CC))
-        EVT_SET(MF_Unk_0A, FALSE)
+        EVT_SET(AF_JAN01_TreeDrop_StarPiece, FALSE)
     EVT_END_CHILD_THREAD
     EVT_LOOP(0)
-        EVT_IF_EQ(MF_Unk_0A, FALSE)
+        EVT_IF_EQ(AF_JAN01_TreeDrop_StarPiece, FALSE)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)

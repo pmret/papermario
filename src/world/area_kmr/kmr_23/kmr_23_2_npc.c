@@ -511,7 +511,7 @@ EvtScript N(EVS_Scene_EndOfChapter) = {
     EVT_CALL(ShowMessageAtScreenPos, LVar1, 160, 40)
     EVT_CALL(N(ShowMessagesBehindCurtains))
     EVT_WAIT(15)
-    EVT_SET(MF_Unk_0A, TRUE)
+    EVT_SET(AF_JAN01_TreeDrop_StarPiece, TRUE)
     EVT_RETURN
     EVT_END
 };
