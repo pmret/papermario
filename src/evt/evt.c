@@ -906,10 +906,11 @@ ApiStatus evt_handle_call(Evt* script) {
 }
 
 ApiStatus evt_handle_exec1(Evt* script) {
+    Bytecode* args = script->ptrReadPos;
     Evt* newScript;
     s32 i;
 
-    newScript = start_script_in_group((EvtScript*)evt_get_variable(script, *script->ptrReadPos), script->priority, 0,
+    newScript = start_script_in_group((EvtScript*)evt_get_variable(script, *args++), script->priority, 0,
                                       script->groupFlags);
 
     newScript->owner1 = script->owner1;
@@ -917,12 +918,14 @@ ApiStatus evt_handle_exec1(Evt* script) {
 
     i = 0;
     while (i < ARRAY_COUNT(script->varTable)) {
-        newScript->varTable[i] = script->varTable[i++];
+        newScript->varTable[i] = script->varTable[i];
+        i++;
     }
 
     i = 0;
     while (i < ARRAY_COUNT(script->varFlags)) {
-        newScript->varFlags[i] = script->varFlags[i++];
+        newScript->varFlags[i] = script->varFlags[i];
+        i++;
     }
 
     newScript->array = script->array;
@@ -930,6 +933,7 @@ ApiStatus evt_handle_exec1(Evt* script) {
 
     return ApiStatus_DONE2;
 }
+
 
 ApiStatus evt_handle_exec1_get_id(Evt* script) {
     Bytecode* args = script->ptrReadPos;
@@ -1341,7 +1345,7 @@ ApiStatus func_802C73B0(Evt* script) {
     return ApiStatus_DONE2;
 }
 
-s32 func_802C73B8(Evt* script) {
+ApiStatus func_802C73B8(Evt* script) {
     s32 i;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
@@ -1349,7 +1353,7 @@ s32 func_802C73B8(Evt* script) {
             break;
         }
     }
-    return 1;
+    return ApiStatus_DONE1;
 }
 
 s32 evt_execute_next_command(Evt* script) {

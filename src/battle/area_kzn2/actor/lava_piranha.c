@@ -279,10 +279,10 @@ enum {
     VINE_4      = 4,
 };
 
-#define VINE_0_BASE AUX_DATA_ADDR_0
-#define VINE_1_BASE AUX_DATA_ADDR_1
-#define VINE_2_BASE AUX_DATA_ADDR_2
-#define VINE_3_BASE AUX_DATA_ADDR_3
+#define VINE_0_BASE (s32) AUX_DATA_ADDR_0
+#define VINE_1_BASE (s32) AUX_DATA_ADDR_1
+#define VINE_2_BASE (s32) AUX_DATA_ADDR_2
+#define VINE_3_BASE (s32) AUX_DATA_ADDR_3
 
 BSS LavaPiranhaVine N(VineData)[NUM_VINES];
 BSS s32 N(VineRenderState);
