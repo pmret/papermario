@@ -200,7 +200,7 @@ void bulb_glow_appendGfx(void* effect) {
     temp_s6 = temp_s1->unk_10;
     temp_s3 = temp_s1->unk_14;
 
-    var_v1 = shim_func_8011CFBC(data->pos.x, data->pos.y, data->pos.z, data->unk_1C, &sp18, &sp1C);
+    var_v1 = shim_is_point_visible(data->pos.x, data->pos.y, data->pos.z, data->unk_1C, &sp18, &sp1C);
     if (unk_00 == 5) {
         var_v1 = 1;
     }
