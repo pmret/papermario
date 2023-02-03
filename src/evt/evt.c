@@ -916,16 +916,12 @@ ApiStatus evt_handle_exec1(Evt* script) {
     newScript->owner1 = script->owner1;
     newScript->owner2 = script->owner2;
 
-    i = 0;
-    while (i < ARRAY_COUNT(script->varTable)) {
+    for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
         newScript->varTable[i] = script->varTable[i];
-        i++;
     }
 
-    i = 0;
-    while (i < ARRAY_COUNT(script->varFlags)) {
+    for (i = 0; i < ARRAY_COUNT(script->varFlags); i++) {
         newScript->varFlags[i] = script->varFlags[i];
-        i++;
     }
 
     newScript->array = script->array;
