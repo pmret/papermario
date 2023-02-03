@@ -906,23 +906,22 @@ ApiStatus evt_handle_call(Evt* script) {
 }
 
 ApiStatus evt_handle_exec1(Evt* script) {
+    Bytecode* args = script->ptrReadPos;
     Evt* newScript;
     s32 i;
 
-    newScript = start_script_in_group((EvtScript*)evt_get_variable(script, *script->ptrReadPos), script->priority, 0,
+    newScript = start_script_in_group((EvtScript*)evt_get_variable(script, *args++), script->priority, 0,
                                       script->groupFlags);
 
     newScript->owner1 = script->owner1;
     newScript->owner2 = script->owner2;
 
-    i = 0;
-    while (i < ARRAY_COUNT(script->varTable)) {
-        newScript->varTable[i] = script->varTable[i++];
+    for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
+        newScript->varTable[i] = script->varTable[i];
     }
 
-    i = 0;
-    while (i < ARRAY_COUNT(script->varFlags)) {
-        newScript->varFlags[i] = script->varFlags[i++];
+    for (i = 0; i < ARRAY_COUNT(script->varFlags); i++) {
+        newScript->varFlags[i] = script->varFlags[i];
     }
 
     newScript->array = script->array;
