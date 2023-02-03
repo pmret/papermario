@@ -7,9 +7,9 @@ API_CALLABLE(N(func_80240010_907A40)) {
 }
 
 EvtScript N(D_80241190_908BC0) = {
-    EVT_SET(MF_Unk_0A, FALSE)
+    EVT_SET(AF_JAN01_TreeDrop_StarPiece, FALSE)
         EVT_LOOP(0)
-            EVT_IF_NE(MF_Unk_0A, FALSE)
+            EVT_IF_NE(AF_JAN01_TreeDrop_StarPiece, FALSE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)

@@ -1,7 +1,7 @@
 #include "mim_06.h"
 
 #include "world/common/enemy/complete/PiranhaPlant.inc.c"
-#include "world/common/enemy/complete/ForestFuzzy.inc.c"
+#include "world/common/enemy/complete/ForestFuzzy_Wander.inc.c"
 
 StaticNpc N(NpcData_PiranhaPlant_01)[] = {
     {
@@ -57,7 +57,7 @@ StaticNpc N(NpcData_PiranhaPlant_02)[] = {
 
 StaticNpc N(NpcData_Fuzzy) = {
     .id = NPC_Fuzzy,
-    .settings = &N(NpcSettings_ForestFuzzy),
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { -140.0f, 0.0f, 300.0f },
     .yaw = 0,
     .flags = ENEMY_FLAG_400,

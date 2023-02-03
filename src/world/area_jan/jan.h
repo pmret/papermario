@@ -2,27 +2,44 @@
 #define _WORLD_AREA_JAN_JAN_H_
 
 enum {
-    AB_JAN_0        = AreaByte(0),
-    AB_JAN_1        = AreaByte(1),
-    AB_JAN_2        = AreaByte(2),
-    AB_JAN_3        = AreaByte(3),
-    AB_JAN_4        = AreaByte(4),
-    AB_JAN_5        = AreaByte(5),
-    AB_JAN_6        = AreaByte(6),
-    AB_JAN_7        = AreaByte(7),
-    AB_JAN_8        = AreaByte(8),
-    AB_JAN_9        = AreaByte(9),
-    AB_JAN_A        = AreaByte(10),
-    AB_JAN_B        = AreaByte(11),
-    AB_JAN_C        = AreaByte(12),
-    AB_JAN_D        = AreaByte(13),
-    AB_JAN_E        = AreaByte(14),
-    AB_JAN_F        = AreaByte(15),
+    AB_JAN_Unused_0         = AreaByte(0),
+    AB_JAN_Unused_1         = AreaByte(1),
+    AB_JAN_Unused_2         = AreaByte(2),
+    AB_JAN_Unused_3         = AreaByte(3),
+    AB_JAN_Unused_4         = AreaByte(4),
+    AB_JAN_Unused_5         = AreaByte(5),
+    AB_JAN_Unused_6         = AreaByte(6),
+    AB_JAN_Unused_7         = AreaByte(7),
+    AB_JAN_Unused_8         = AreaByte(8),
+    AB_JAN_Unused_9         = AreaByte(9),
+    AB_JAN_Unused_A         = AreaByte(10),
+    AB_JAN_Unused_B         = AreaByte(11),
+    AB_JAN_Unused_C         = AreaByte(12),
+    AB_JAN_Unused_D         = AreaByte(13),
+    AB_JAN_Unused_E         = AreaByte(14),
+    AB_JAN_Unused_F         = AreaByte(15),
 };
 
 enum {
-    AF_JAN_03       = AreaFlag(3),
-    AF_JAN_0D       = AreaFlag(13),
+    AF_JAN_03                   = AreaFlag(3),
+    AF_JAN02_RaphaelComment     = AreaFlag(4),
+    AF_JAN02_MetCouncillor      = AreaFlag(5),
+    AF_JAN_06                   = AreaFlag(6),
+    AF_JAN_07                   = AreaFlag(7),
+    AF_JAN01_KoloradoShouting   = AreaFlag(9),
+    AF_JAN00_TreeDrop1          = AreaFlag(13),
+
+    AF_JAN01_TreeDrop2          = AreaFlag(14),
+    AF_JAN01_TreeDrop3          = AreaFlag(15),
+    AF_JAN01_TreeDrop4          = AreaFlag(16),
+    AF_JAN01_TreeDrop5          = AreaFlag(17),
+    AF_JAN01_TreeDrop6          = AreaFlag(18),
+    AF_JAN01_TreeDrop7          = AreaFlag(19),
+
+    AF_JAN02_TreeDrop2          = AreaFlag(20),
+    AF_JAN02_TreeDrop3          = AreaFlag(21),
+    AF_JAN_16                   = AreaFlag(22),
+    AF_JAN03_TreeDrop1          = AreaFlag(23),
 };
 
 extern MapSettings jan_00_settings;

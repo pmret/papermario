@@ -387,7 +387,7 @@ void fold_init_state(FoldState* state) {
     state->unk_06 = 0;
     state->flags = 0;
     state->meshType = 0;
-    state->renderType = 0;
+    state->renderType = FOLD_RENDER_TYPE_0;
     state->firstVtxIdx = 0;
     state->lastVtxIdx = 0;
     state->unk_0C = 0;
@@ -431,7 +431,7 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             state->unk_05 = 0;
             state->unk_06 = 0;
             state->meshType = 0;
-            state->renderType = 0;
+            state->renderType = FOLD_RENDER_TYPE_0;
             state->unk_1C[0][0] = -1;
             state->unk_1C[1][0] = -1;
             state->flags &= FOLD_STATE_FLAG_ENABLED;
@@ -444,7 +444,7 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             return;
         case FOLD_TYPE_1:
             state->unk_05 = 0;
-            state->renderType = 0;
+            state->renderType = FOLD_RENDER_TYPE_0;
             state->unk_1C[0][0] = -1;
             return;
         case FOLD_TYPE_2:
@@ -508,7 +508,7 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     switch (type) {
         case FOLD_TYPE_3:
             state->meshType = 0;
-            state->renderType = 0;
+            state->renderType = FOLD_RENDER_TYPE_0;
             break;
         case FOLD_TYPE_4:
             state->subdivX = 4;
@@ -518,7 +518,7 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             break;
         case FOLD_TYPE_5:
             state->meshType = 2;
-            state->renderType = 0xB;
+            state->renderType = FOLD_RENDER_TYPE_B;
             state->unk_3C[0][0] = 0.0f;
             state->unk_3C[0][1] = 0.0f;
             state->flags |= FOLD_STATE_FLAG_200;
@@ -527,21 +527,21 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
         case FOLD_TYPE_7:
         case FOLD_TYPE_8:
             if (arg2 >= 0xFF && arg3 >= 0xFF && arg4 >= 0xFF && arg5 >= 0xFF) {
-                state->renderType = 0;
+                state->renderType = FOLD_RENDER_TYPE_0;
             } else if (arg5 >= 0xFF) {
-                state->renderType = 1;
+                state->renderType = FOLD_RENDER_TYPE_1;
             } else if (arg2 >= 0xFF && arg3 >= 0xFF && arg4 >= 0xFF) {
-                state->renderType = 2;
+                state->renderType = FOLD_RENDER_TYPE_2;
             } else {
-                state->renderType = 3;
+                state->renderType = FOLD_RENDER_TYPE_3;
             }
             break;
         case FOLD_TYPE_9:
         case FOLD_TYPE_A:
             if (arg5 == 255.0) {
-                state->renderType = 4;
+                state->renderType = FOLD_RENDER_TYPE_4;
             } else {
-                state->renderType = 5;
+                state->renderType = FOLD_RENDER_TYPE_5;
             }
             break;
         case FOLD_TYPE_B:
@@ -557,9 +557,9 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                 state->meshType = 0;
 
                 if ((arg3 & 0xFF) == 0xFF) {
-                    state->renderType = 6;
+                    state->renderType = FOLD_RENDER_TYPE_6;
                 } else {
-                    state->renderType = 8;
+                    state->renderType = FOLD_RENDER_TYPE_8;
                 }
             }
             break;
@@ -576,25 +576,25 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                 state->meshType = 0;
 
                 if ((arg3 & 0xFF) == 0xFF) {
-                    state->renderType = 9;
+                    state->renderType = FOLD_RENDER_TYPE_9;
                 } else {
-                    state->renderType = 0xA;
+                    state->renderType = FOLD_RENDER_TYPE_A;
                 }
             }
             break;
         case FOLD_TYPE_D:
-            state->renderType = 0xC;
+            state->renderType = FOLD_RENDER_TYPE_C;
             break;
         case FOLD_TYPE_E:
-            state->renderType = 0xD;
+            state->renderType = FOLD_RENDER_TYPE_D;
             break;
         case FOLD_TYPE_F:
         case FOLD_TYPE_10:
             state->meshType = 4;
             if (arg3 >= 0xFF) {
-                state->renderType = 0xE;
+                state->renderType = FOLD_RENDER_TYPE_E;
             } else {
-                state->renderType = 0xF;
+                state->renderType = FOLD_RENDER_TYPE_F;
             }
             state->unk_3C[1][0] = 0.0f;
             state->unk_3C[1][1] = 0.0f;
@@ -648,7 +648,7 @@ s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Mat
         state->unk_1C[1][0] = -1;
         state->unk_05 = 0;
         state->meshType = 0;
-        state->renderType = 0;
+        state->renderType = FOLD_RENDER_TYPE_0;
         state->flags &= ~(FOLD_STATE_FLAG_1000 | FOLD_STATE_FLAG_800 | FOLD_STATE_FLAG_100 | FOLD_STATE_FLAG_80);
         fold_clear_state_gfx(state);
         ret = 1;
@@ -658,7 +658,7 @@ s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Mat
         state->unk_05 = 0;
         state->unk_06 = 0;
         state->meshType = 0;
-        state->renderType = 0;
+        state->renderType = FOLD_RENDER_TYPE_0;
         state->unk_1C[0][0] = -1;
         state->unk_1C[1][0] = -1;
         state->flags &= FOLD_STATE_FLAG_ENABLED;
@@ -744,16 +744,16 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
         if (!cond && (fold_currentImage->alphaMultiplier < 0xFF)) {
             state->unk_1C[1][3] = 0xFF;
             switch (state->renderType) {
-                case 0:
-                case 11:
-                    renderType = 2;
+                case FOLD_RENDER_TYPE_0:
+                case FOLD_RENDER_TYPE_B:
+                    renderType = FOLD_RENDER_TYPE_2;
                     break;
-                case 1:
-                case 4:
-                    renderType = 3;
+                case FOLD_RENDER_TYPE_1:
+                case FOLD_RENDER_TYPE_4:
+                    renderType = FOLD_RENDER_TYPE_3;
                     break;
-                case 9:
-                    renderType = 10;
+                case FOLD_RENDER_TYPE_9:
+                    renderType = FOLD_RENDER_TYPE_A;
                     break;
             }
             primColor = state->unk_1C[1][3] * alphaComp;
@@ -785,11 +785,11 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
         gDPSetRenderMode(gMasterGfxPos++, mode1, mode2);
 
         switch (renderType) {
-            case 1:
+            case FOLD_RENDER_TYPE_1:
                 gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
                 break;
-            case 2:
+            case FOLD_RENDER_TYPE_2:
                 if (primColor <= 0) {
                     return;
                 }
@@ -797,7 +797,7 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
                                   TEXEL0, 0, PRIMITIVE, 0);
                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, primColor);
                 break;
-            case 3:
+            case FOLD_RENDER_TYPE_3:
                 if (primColor <= 0) {
                     return;
                 }
@@ -805,12 +805,12 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1],
                                 state->unk_1C[1][2], primColor);
                 break;
-            case 4:
+            case FOLD_RENDER_TYPE_4:
                 gDPSetCombineLERP(gMasterGfxPos++, 1, PRIMITIVE, TEXEL0, PRIMITIVE, 0, 0, 0, TEXEL0, 1, PRIMITIVE,
                                   TEXEL0, PRIMITIVE, 0, 0, 0, TEXEL0);
                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
                 break;
-            case 5:
+            case FOLD_RENDER_TYPE_5:
                 if (primColor <= 0) {
                     return;
                 }
@@ -819,35 +819,35 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1],
                                 state->unk_1C[1][2], primColor);
                 break;
-            case 6:
+            case FOLD_RENDER_TYPE_6:
                 gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
                 gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
                 gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
                 break;
-            case 9:
+            case FOLD_RENDER_TYPE_9:
                 gDPSetCombineLERP(gMasterGfxPos++, 1, SHADE, TEXEL0, SHADE, 0, 0, 0, TEXEL0, 1, SHADE, TEXEL0, SHADE,
                                   0, 0, 0, TEXEL0);
                 gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
                 gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
                 break;
-            case 7:
+            case FOLD_RENDER_TYPE_7:
                 gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0,
                                   SHADE, 0);
                 gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
                 gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
                 break;
-            case 8:
+            case FOLD_RENDER_TYPE_8:
                 gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
                 gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
                 gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
                 break;
-            case 10:
+            case FOLD_RENDER_TYPE_A:
                 gDPSetCombineLERP(gMasterGfxPos++, 1, SHADE, TEXEL0, SHADE, TEXEL0, 0, SHADE, 0, 1, SHADE, TEXEL0,
                                   SHADE, TEXEL0, 0, SHADE, 0);
                 gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
                 gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
                 break;
-            case 11:
+            case FOLD_RENDER_TYPE_B:
                 if (state->flags & (FOLD_STATE_FLAG_2000 | FOLD_STATE_FLAG_8000)) {
                     Camera* currentCam = &gCameras[gCurrentCameraID];
 
@@ -867,7 +867,7 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
                 }
                 gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
                 break;
-            case 12:
+            case FOLD_RENDER_TYPE_C:
                 if (state->unk_1C[1][0] == 0) {
                     primColor = state->unk_1C[1][3] * alphaComp;
                     gDPSetCombineLERP(gMasterGfxPos++, NOISE, PRIMITIVE, PRIMITIVE, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
@@ -895,17 +895,17 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
                     gDPSetBlendColor(gMasterGfxPos++, 0, 0, 0, blendColor);
                 }
                 break;
-            case 13:
+            case FOLD_RENDER_TYPE_D:
                 gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0,
                                   TEXEL0);
                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
                 break;
-            case 0:
-            case 14:
-            case 16:
+            case FOLD_RENDER_TYPE_0:
+            case FOLD_RENDER_TYPE_E:
+            case FOLD_RENDER_TYPE_10:
                 gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
                 break;
-            case 15:
+            case FOLD_RENDER_TYPE_F:
                 gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0,
                                   PRIMITIVE, 0);
                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, state->unk_1C[1][1]);
@@ -914,17 +914,17 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
     }
 
     switch (state->meshType) {
-        case 0:
+        case FOLD_MESH_TYPE_0:
             func_8013CFA8(state, mtx);
             break;
-        case 1:
-        case 3:
+        case FOLD_MESH_TYPE_1:
+        case FOLD_MESH_TYPE_3:
             func_8013DAB4(state, mtx);
             break;
-        case 2:
+        case FOLD_MESH_TYPE_2:
             func_8013E2F0(state, mtx);
             break;
-        case 4:
+        case FOLD_MESH_TYPE_4:
             func_8013CFA8(state, mtx);
             gDPPipeSync(gMasterGfxPos++);
             func_8013E904(state, mtx);
@@ -933,7 +933,7 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
 
     gDPPipeSync(gMasterGfxPos++);
 
-    if (state->renderType == 0xC) {
+    if (state->renderType == FOLD_RENDER_TYPE_C) {
         gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
         gDPSetAlphaDither(gMasterGfxPos++, G_AD_DISABLE);
     }
@@ -1339,7 +1339,10 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
             if ((D_80151328->flags & 1) &&
                 (state->arrayIdx != 0) &&
                 (state->flags & someFlags) &&
-                (state->renderType == 0 || state->renderType == 2 || state->renderType == 15 || state->renderType == 7))
+                (state->renderType == FOLD_RENDER_TYPE_0
+                || state->renderType == FOLD_RENDER_TYPE_2
+                || state->renderType == FOLD_RENDER_TYPE_F
+                || state->renderType == FOLD_RENDER_TYPE_7))
             {
                 gDPScrollMultiTile2_4b(gMasterGfxPos++,
                     fold_currentImage->raster, G_IM_FMT_CI,
@@ -1358,13 +1361,13 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
 
                 alpha = 255;
                 switch (state->renderType) {
-                    case 0:
+                    case FOLD_RENDER_TYPE_0:
                         break;
-                    case 2:
-                    case 15:
+                    case FOLD_RENDER_TYPE_2:
+                    case FOLD_RENDER_TYPE_F:
                         alpha = state->unk_1C[1][3];
                         break;
-                    case 7:
+                    case FOLD_RENDER_TYPE_7:
                         alpha = -1;
                         break;
                 }
@@ -1423,14 +1426,14 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
                     }
 
                     switch (state->renderType) {
-                        case 0:
+                        case FOLD_RENDER_TYPE_0:
                             alpha2 = 255;
                             break;
-                        case 2:
-                        case 15:
+                        case FOLD_RENDER_TYPE_2:
+                        case FOLD_RENDER_TYPE_F:
                             alpha2 = state->unk_1C[1][3];
                             break;
-                        case 7:
+                        case FOLD_RENDER_TYPE_7:
                             alpha2 = -1;
                             break;
                     }
@@ -1504,7 +1507,9 @@ void func_8013DAB4(FoldState* state, Matrix4f mtx) {
                 if ((D_80151328->flags & 1) &&
                     (*D_80156954)[0].arrayIdx != 0 &&
                     (state->flags & (FOLD_STATE_FLAG_100000 | FOLD_STATE_FLAG_80000)) &&
-                    (state->renderType == 0 || state->renderType == 2 || state->renderType == 7)) {
+                    (state->renderType == FOLD_RENDER_TYPE_0
+                    || state->renderType == FOLD_RENDER_TYPE_2
+                    || state->renderType == FOLD_RENDER_TYPE_7)) {
                     s32 alpha = 255;
                     gDPScrollMultiTile2_4b(gMasterGfxPos++,
                         fold_currentImage->raster, G_IM_FMT_CI,
@@ -1519,13 +1524,13 @@ void func_8013DAB4(FoldState* state, Matrix4f mtx) {
                     gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
                     gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 63 << 2, 0);
                     switch (state->renderType) {
-                        case 0:
+                        case FOLD_RENDER_TYPE_0:
                             alpha = 255;
                             break;
-                        case 2:
+                        case FOLD_RENDER_TYPE_2:
                             alpha = state->unk_1C[1][3];
                             break;
-                        case 7:
+                        case FOLD_RENDER_TYPE_7:
                             alpha = -1;
                             break;
 
@@ -1569,7 +1574,10 @@ void func_8013E2F0(FoldState* state, Matrix4f mtx) {
         gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
         gDPLoadTLUT_pal16(gMasterGfxPos++, 0, fold_currentImage->palette);
         if ((D_80151328->flags & 1) && (state->flags & (FOLD_STATE_FLAG_100000 | FOLD_STATE_FLAG_80000)) &&
-            (state->renderType == 0 || state->renderType == 2 || state->renderType == 7 || state->renderType == 11)) {
+            (state->renderType == FOLD_RENDER_TYPE_0
+            || state->renderType == FOLD_RENDER_TYPE_2
+            || state->renderType == FOLD_RENDER_TYPE_7 
+            || state->renderType == FOLD_RENDER_TYPE_B)) {
             s32 alpha = 255;
             gDPScrollMultiTile2_4b(gMasterGfxPos++, fold_currentImage->raster, G_IM_FMT_CI,
                                     fold_currentImage->width, fold_currentImage->height,
@@ -1581,14 +1589,14 @@ void func_8013E2F0(FoldState* state, Matrix4f mtx) {
             gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 252, 0);
 
             switch (state->renderType) {
-                case 0:
-                case 11:
+                case FOLD_RENDER_TYPE_0:
+                case FOLD_RENDER_TYPE_B:
                     alpha = 255;
                     break;
-                case 2:
+                case FOLD_RENDER_TYPE_2:
                     alpha = state->unk_1C[1][3];
                     break;
-                case 7:
+                case FOLD_RENDER_TYPE_7:
                     alpha = -1;
                     break;
 
@@ -1617,7 +1625,7 @@ void func_8013E904(FoldState* state, Matrix4f mtx) {
     gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_XLU_DECAL, G_RM_ZB_XLU_DECAL2);
 
-    if (state->renderType == 15) {
+    if (state->renderType == FOLD_RENDER_TYPE_F) {
         s32 temp = state->unk_1C[1][1];
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, temp);
         gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);

@@ -1,6 +1,6 @@
 #include "mim_04.h"
 
-#include "world/common/enemy/complete/ForestFuzzy.inc.c"
+#include "world/common/enemy/complete/ForestFuzzy_Wander.inc.c"
 
 #include "world/common/npc/Bubulb.inc.c"
 
@@ -56,7 +56,7 @@ EvtScript N(EVS_NpcInit_Bubulb) = {
 
 StaticNpc N(NpcData_Fuzzy) = {
     .id = NPC_Fuzzy,
-    .settings = &N(NpcSettings_ForestFuzzy),
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { 240.0f, 0.0f, -240.0f },
     .yaw = 0,
     .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,

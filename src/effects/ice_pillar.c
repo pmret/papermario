@@ -97,14 +97,14 @@ void ice_pillar_update(EffectInstance* effect) {
                 (data->scale * ((shim_rand_int(10) * 0.7 * 0.1) + 0.3)), 
                 i + 30
             );
-            iceShard->data.iceShard->unk_44 = shim_rand_int(10) * 0.1;
-            iceShard->data.iceShard->unk_48 = (shim_rand_int(30) * 0.01) + 0.1;
-            iceShard->data.iceShard->unk_3C = shim_rand_int(359);
-            iceShard->data.iceShard->unk_40 = shim_rand_int(20);
-            iceShard->data.iceShard->unk_4C = shim_rand_int(10) - 5;
-            iceShard->data.iceShard->unk_50 = shim_rand_int(10) - 5;
-            iceShard->data.iceShard->unk_54 = 0;
-            iceShard->data.iceShard->unk_58 = -0.1f;
+            iceShard->data.iceShard->animFrame = shim_rand_int(10) * 0.1;
+            iceShard->data.iceShard->animRate = (shim_rand_int(30) * 0.01) + 0.1;
+            iceShard->data.iceShard->rotation = shim_rand_int(359);
+            iceShard->data.iceShard->angularVel = shim_rand_int(20);
+            iceShard->data.iceShard->vel.x = shim_rand_int(10) - 5;
+            iceShard->data.iceShard->vel.y = shim_rand_int(10) - 5;
+            iceShard->data.iceShard->vel.z = 0;
+            iceShard->data.iceShard->gravAccel = -0.1f;
         }
         shim_remove_effect(data->miscParticles);
         shim_remove_effect(effect);

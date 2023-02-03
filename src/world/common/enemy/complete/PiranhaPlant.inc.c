@@ -2,21 +2,7 @@
 
 #include "world/common/enemy/ai/PiranhaPlantAI.inc.c"
 
-EvtScript N(EVS_NpcDefeat_PiranhaPlant_Hitbox) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CALL(OnPlayerFled, 1)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/enemy/ai/GenericHitboxDefeat.inc.c"
 
 MobileAISettings N(AISettings_PiranhaPlant) = {
     .moveTime = 30,
@@ -67,7 +53,7 @@ EvtScript N(EVS_8024411C) = {
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_JUMP)
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_CALL(GetSelfAnimationFromTable, 7, LVar0)
+            EVT_CALL(GetSelfAnimationFromTable, ENEMY_ANIM_INDEX_HIT, LVar0)
             EVT_EXEC_WAIT(EVS_NpcHitRecoil)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -80,6 +66,6 @@ NpcSettings N(NpcSettings_PiranhaPlant_Hitbox) = {
     .radius = 18,
     .level = 11,
     .ai = &N(EVS_NpcAI_PiranhaPlant_Hitbox),
-    .onDefeat = &N(EVS_NpcDefeat_PiranhaPlant_Hitbox),
+    .onDefeat = &N(EVS_GenericHitboxDefeat),
     .actionFlags = AI_ACTION_08,
 };

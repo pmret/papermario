@@ -595,10 +595,10 @@ MapConfig kkj_maps[] = {
 /// Jade Jungle
 #include "area_jan/jan.h"
 MapConfig jan_maps[] = {
-    { MAP_UNSPLIT(jan_00, 0x80241BD0), .bgName = "yos_bg" },
-    { MAP_UNSPLIT(jan_01, 0x802413F0), .bgName = "yos_bg" },
-    { MAP_UNSPLIT(jan_02, 0x80242940), .bgName = "yos_bg" },
-    { MAP_UNSPLIT(jan_03, 0x802432D0), .bgName = "yos_bg" },
+    { MAP(jan_00), .bgName = "yos_bg" },
+    { MAP(jan_01), .bgName = "yos_bg" },
+    { MAP(jan_02), .bgName = "yos_bg" },
+    { MAP(jan_03), .bgName = "yos_bg" },
     { MAP_UNSPLIT(jan_04, 0x80241140), .bgName = "yos_bg" },
     { MAP_UNSPLIT(jan_05, 0x80242710), .bgName = "yos_bg" },
     { MAP_UNSPLIT(jan_06, 0x80242620), .bgName = "jan_bg" },
@@ -741,17 +741,17 @@ MapConfig flo_maps[] = {
 #include "area_sam/sam.h"
 MapConfig sam_maps[] = {
     { MAP(sam_01), .bgName = "yki_bg" },
-    { MAP_UNSPLIT(sam_02, 0x80241C00), .bgName = "yki_bg" },
-    { MAP_UNSPLIT(sam_03, 0x80240940), .bgName = "yki_bg" },
-    { MAP_UNSPLIT(sam_04, 0x80240740), .bgName = "yki_bg" },
-    { MAP_UNSPLIT(sam_05, 0x80241D60), .bgName = "sam_bg" },
+    { MAP(sam_02), .bgName = "yki_bg" },
+    { MAP(sam_03), .bgName = "yki_bg" },
+    { MAP(sam_04), .bgName = "yki_bg" },
+    { MAP(sam_05), .bgName = "sam_bg" },
     { MAP(sam_06), .bgName = "sam_bg" },
-    { MAP_UNSPLIT(sam_07, 0x80242020), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(sam_08, 0x802417D0), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(sam_09, 0x80240420), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(sam_10, 0x80240CE0), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(sam_11, 0x802421A0), .bgName = "yki_bg" },
-    { MAP_UNSPLIT(sam_12, 0x802403B0), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(sam_07), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(sam_08), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(sam_09), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(sam_10), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(sam_11), .bgName = "yki_bg" },
+    { MAP(sam_12), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
 };
 
 /// Crystal Palace

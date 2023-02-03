@@ -72,14 +72,14 @@ NpcSettings N(NpcSettings_HeartPlant_01) = {
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
-    ITEM_LETTER25,
+    ITEM_LETTER_TO_KOLORADO,
     ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_Kolorado) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Kolorado_02, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
-        ITEM_LETTER25, ITEM_NONE,
+        ITEM_LETTER_TO_KOLORADO, ITEM_NONE,
         MSG_CH5_001D, MSG_CH5_001E, MSG_CH5_001F, MSG_CH5_0020,
         EVT_PTR(N(LetterList)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))

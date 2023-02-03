@@ -26,6 +26,7 @@ enum {
     AF_SAM_03           = AreaFlag(3),
     AF_SAM_04           = AreaFlag(4),
     AF_SAM_05           = AreaFlag(5),
+    AF_SAM_06           = AreaFlag(6),
 };
 
 extern MapSettings sam_01_settings;

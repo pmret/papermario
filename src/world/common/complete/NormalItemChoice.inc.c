@@ -92,7 +92,7 @@ EvtScript N(EVS_ChooseItem) = {
 };
 
 #define EVT_CHOOSE_ANY_CONSUMABLE(unkMode) \
-    EVT_SET(LVar0, 0) \
+    EVT_SET(LVar0, NULL) \
     EVT_SET(LVar1, unkMode) \
     EVT_EXEC_WAIT(N(EVS_ChooseItem))
 
