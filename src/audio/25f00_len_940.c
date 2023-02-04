@@ -28,6 +28,7 @@ extern u64 rspbootUcodeBuffer[];
 extern s32 AlNumFields;
 extern u64 n_aspMain_text_bin[];
 extern u64 n_aspMain_data_bin[];
+
 extern u8 AuHeapBase[AUDIO_HEAP_SIZE];
 
 void create_audio_system(void) {

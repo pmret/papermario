@@ -9,7 +9,7 @@
 
 #ifdef SHIFT
  // TODO shiftability - these need to be totally separate from anything else that might cut into them
-#define MODEL_TEXTURE_BASE_ADDRESS 0x80600000
+#define MODEL_TEXTURE_BASE_ADDRESS 0x80600000 // TODO shiftability
 #define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shiftability
 #define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
 #define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shiftability

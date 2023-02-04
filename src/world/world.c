@@ -31,6 +31,10 @@ typedef struct {
 void fio_deserialize_state(void);
 void load_map_hit_asset(void);
 
+#ifdef SHIFT
+#define shim_general_heap_create_obfuscated general_heap_create
+#endif
+
 void load_map_script_lib(void) {
     dma_copy(world_script_api_ROM_START, world_script_api_ROM_END, world_script_api_VRAM);
 }

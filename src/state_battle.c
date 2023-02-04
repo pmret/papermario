@@ -18,6 +18,10 @@ s32 D_800778AC[] = {
 extern s32 D_800A0904;
 extern s32 D_800A0908;
 
+#ifdef SHIFT
+#define shim_battle_heap_create_obfuscated battle_heap_create
+#endif
+
 void state_init_battle(void) {
     D_800A0900 = 5;
 }
