@@ -769,7 +769,7 @@ StaticNpc N(NpcData_Shared)[] = {
     },
 };
 
-NpcGroupList N(DefaultNPCs) = {
+NpcGroupList N(CrisisNPCs) = {
     NPC_GROUP(N(NpcData_Crisis)),
     NPC_GROUP(N(NpcData_Shared)),
     NPC_GROUP(N(NpcData_MiscFuzzy1)),
@@ -777,7 +777,7 @@ NpcGroupList N(DefaultNPCs) = {
     {}
 };
 
-NpcGroupList N(NpcGroup1) = {
+NpcGroupList N(NormalNPCs) = {
     NPC_GROUP(N(NpcData_Normal)),
     NPC_GROUP(N(NpcData_Shared)),
     {}

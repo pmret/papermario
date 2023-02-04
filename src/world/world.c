@@ -472,7 +472,7 @@ MapConfig trd_maps[] = {
 #include "area_nok/nok.h"
 MapConfig nok_maps[] = {
     { MAP(nok_01), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(nok_02, 0x802445F0), .bgName = "nok_bg" },
+    { MAP(nok_02), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_03, 0x80240E40), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_04, 0x80240F40), .bgName = "nok_bg" },
     { MAP(nok_11), .bgName = "nok_bg" },

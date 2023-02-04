@@ -99,9 +99,9 @@ EvtScript N(EVS_Main) = {
         EVT_SET(GF_NOK01_RecoveredTreeShell, TRUE)
     EVT_END_IF
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
+        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(CrisisNPCs)))
     EVT_ELSE
-        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup1)))
+        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NormalNPCs)))
     EVT_END_IF
     EVT_CALL(ClearDefeatedEnemies)
     EVT_EXEC(N(EVS_SetupShop))

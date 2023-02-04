@@ -52,8 +52,8 @@ extern EvtScript N(EVS_80242DE0);
 extern EvtScript N(EVS_SetupFoliage);
 extern EvtScript N(EVS_MakeEntities);
 
-extern NpcGroupList N(DefaultNPCs);
-extern NpcGroupList N(NpcGroup1);
+extern NpcGroupList N(CrisisNPCs);
+extern NpcGroupList N(NormalNPCs);
 
 API_CALLABLE(N(InitializeRadio));
 API_CALLABLE(N(SetRadioVolumeMax));

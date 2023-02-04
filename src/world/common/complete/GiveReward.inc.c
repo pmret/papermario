@@ -80,4 +80,11 @@ EvtScript N(GiveCoinReward) = {
     EVT_EXEC_WAIT(N(GiveKeyReward)) \
     EVT_CALL(AddStarPieces, 1)
 
+
+#define EVT_GIVE_COIN() \
+    EVT_SET(LVar0, ITEM_COIN) \
+    EVT_SET(LVar1, 0) \
+    EVT_EXEC_WAIT(N(GiveCoinReward)) \
+    EVT_CALL(AddCoin, 1)
+
 #endif

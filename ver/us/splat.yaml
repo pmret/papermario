@@ -10894,23 +10894,18 @@ segments:
     start: 0x9D7020
     vram: 0x80240000
     subsegments:
-    - [0x9D7020, c]
-    - [0x9D7770, c]
-    - [0x9D7990, c]
-    - [0x9D7AA0, c]
-    - [0x9DA8F0, c]
-    - [0x9DB380, c]
-    - [0x9DB5C0, data]
-    - [0x9DB6C0, data]
-    - [0x9DCD20, data]
-    - [0x9DCF50, data]
-    - [0x9DDE40, data]
-    - [0x9DDE90, data]
-    - [0x9E8B60, data]
-    - [0x9E9420, data]
-    - [0x9EA630, data]
-    - [0x9EB3D0, data]
-    - [0x9EB620]
+    - [0x9D7020, c, nok_02_0_header]
+    - [0x9D7020, c, nok_02_1_music]
+    - [0x9D7020, c, nok_02_2_main]
+    - [0x9D7770, c, nok_02_3_entity]
+    - [0x9D7990, c, nok_02_4_rooms]
+    - [0x9D7AA0, c, nok_02_5]
+    - [0x9D7AA0, c, nok_02_6_npc]
+    - [0x9DA8F0, c, nok_02_7_demo]
+    - [0x9DA9E0, c, nok_02_8_koot_favors]
+    - [0x9DB380, c, nok_02_9_foliage]
+    - [0x9DB5C0, c, nok_02_10_epilogue]
+    - [0x9DB5C0]
   - name: nok_03
     dir: world/area_nok/nok_03
     type: code
