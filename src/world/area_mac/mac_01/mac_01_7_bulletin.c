@@ -1,7 +1,7 @@
 #include "mac_01.h"
 
 EvtScript N(EVS_UpdateBulletinKootFavor) = {
-    EVT_IF_NE(GB_KootFavor_Current, 9)
+    EVT_IF_NE(GB_KootFavor_Current, KOOT_FAVOR_CH4_2)
         EVT_RETURN
     EVT_END_IF
     EVT_SET(LVar1, GF_MAC01_KootFavor_ReadNewsBulletin)

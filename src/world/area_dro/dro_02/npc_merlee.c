@@ -763,7 +763,7 @@ EvtScript N(EVS_NpcInteract_Merlee) = {
     EVT_CALL(func_802D2C14, 1)
     EVT_EXEC_WAIT(N(EVS_BeginMerleeCamera))
     EVT_SET(LVar0, 0)
-    EVT_IF_EQ(GB_KootFavor_Current, 8)
+    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH4_1)
         EVT_ADD(LVar0, 1)
     EVT_END_IF
     EVT_IF_EQ(GF_HOS06_MerluvleeRequestedCrystalBall, 1)

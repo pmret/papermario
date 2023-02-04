@@ -235,6 +235,35 @@ enum StoryProgress {
     STORY_61                                    = 97,
 };
 
+enum KoopaKootFavors {
+    KOOT_FAVOR_CH1_1        = 0,
+    KOOT_FAVOR_CH1_2        = 1,
+    KOOT_FAVOR_CH2_1        = 2,
+    KOOT_FAVOR_CH2_2        = 3,
+    KOOT_FAVOR_CH2_3        = 4,
+    KOOT_FAVOR_CH3_1        = 5,
+    KOOT_FAVOR_CH3_2        = 6,
+    KOOT_FAVOR_CH3_3        = 7,
+    KOOT_FAVOR_CH4_1        = 8,
+    KOOT_FAVOR_CH4_2        = 9,
+    KOOT_FAVOR_CH4_3        = 10,
+    KOOT_FAVOR_CH5_1        = 11,
+    KOOT_FAVOR_CH5_2        = 12,
+    KOOT_FAVOR_CH5_3        = 13,
+    KOOT_FAVOR_CH6_1        = 14,
+    KOOT_FAVOR_CH6_2        = 15,
+    KOOT_FAVOR_CH6_3        = 16,
+    KOOT_FAVOR_CH7_1        = 17,
+    KOOT_FAVOR_CH7_2        = 18,
+    KOOT_FAVOR_CH7_3        = 19,
+};
+
+enum KoopaKootFavorStates {
+    KOOT_FAVOR_STATE_0      = 0,
+    KOOT_FAVOR_STATE_1      = 1,
+    KOOT_FAVOR_STATE_2      = 2,
+};
+
 enum EncounterTriggers {
     ENCOUNTER_TRIGGER_NONE                            = 1,
     ENCOUNTER_TRIGGER_JUMP                            = 2,

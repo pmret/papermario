@@ -1,7 +1,7 @@
 #include "nok_02.h"
 #include "world/partners.h"
 
-EvtScript N(D_80251B40_9E8B60) = {
+EvtScript N(EVS_ProvideDemoInputs) = {
     EVT_CALL(DemoJoystickXY, 6, 4)
     EVT_WAIT(1)
     EVT_CALL(DemoJoystickXY, 29, 20)
@@ -130,7 +130,7 @@ EvtScript N(D_80251B40_9E8B60) = {
     EVT_END
 };
 
-EvtScript N(D_802522F4_9E9314) = {
+EvtScript N(EVS_MonitorDemoState) = {
     EVT_WAIT(10)
     EVT_LOOP(0)
         EVT_CALL(GetDemoState, LVar0)
@@ -149,21 +149,18 @@ EvtScript N(D_802522F4_9E9314) = {
     EVT_END
 };
 
-s32 N(D_802523B4_9E93D4) = {
-0 
-};
+s32 N(DemoInitState) = 0;
 
-// SetupDemoScene
-API_CALLABLE(N(func_802438D0_9DA8F0)) {
+API_CALLABLE(N(SetupDemoScene)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    switch (N(D_802523B4_9E93D4)) {
+    switch (N(DemoInitState)) {
         case 0:
-            N(D_802523B4_9E93D4) = 1;
+            N(DemoInitState) = 1;
             break;
         case 1:
         case 2:
-            N(D_802523B4_9E93D4)++;
+            N(DemoInitState)++;
             break;
         case 3:
             partner_clear_player_tracking(wPartnerNpc);
@@ -175,15 +172,14 @@ API_CALLABLE(N(func_802438D0_9DA8F0)) {
             playerStatus->spriteFacingAngle = 0.0f;
             return ApiStatus_DONE2;
     }
-
     return ApiStatus_BLOCK;
 }
 
-EvtScript N(EVS_802523B8) = {
-    EVT_CALL(N(func_802438D0_9DA8F0))
+EvtScript N(EVS_SetupDemo) = {
+    EVT_CALL(N(SetupDemoScene))
     EVT_SET(GF_DemoSceneDone, FALSE)
-    EVT_EXEC(N(D_802522F4_9E9314))
-    EVT_EXEC(N(D_80251B40_9E8B60))
+    EVT_EXEC(N(EVS_MonitorDemoState))
+    EVT_EXEC(N(EVS_ProvideDemoInputs))
     EVT_RETURN
     EVT_END
 };

@@ -20,7 +20,7 @@ EvtScript N(EVS_ExitWalk_nok_01_1) = {
 };
 
 EvtScript N(EVS_ExitWalk_nok_03_0) = {
-    EVT_IF_EQ(GB_KootFavor_State, 2)
+    EVT_IF_EQ(GB_KootFavor_State, KOOT_FAVOR_STATE_2)
         EVT_SET(GF_KootFavor_LeftKoopaVillage, TRUE)
     EVT_END_IF
     EVT_CALL(UseExitHeading, 60, nok_02_ENTRY_1)
@@ -105,7 +105,7 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(EpilogueNPCs)))
         EVT_EXEC_WAIT(N(EVS_MakeEntities))
         EVT_EXEC(N(EVS_TexPan_Flowers))
-        EVT_EXEC(N(D_802543B0_9EB3D0))
+        EVT_EXEC(N(EVS_Scene_Epilogue))
         EVT_CALL(FadeInMusic, 0, SONG_KOOPA_VILLAGE, 0, 3000, 0, 127)
         EVT_WAIT(1)
         EVT_RETURN
@@ -128,14 +128,14 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC_WAIT(N(EVS_SetupFoliage))
     EVT_EXEC(N(EVS_TexPan_Flowers))
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80246E20_9DDE40)), TRIGGER_WALL_PRESS_A, COLLIDER_o236, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Setup_Bookshelf)), TRIGGER_WALL_PRESS_A, COLLIDER_o236, 1, 0)
     EVT_EXEC_WAIT(N(EVS_80246B50))
     EVT_CALL(GetDemoState, LVar0)
     EVT_IF_NE(LVar0, DEMO_STATE_NONE)
-        EVT_EXEC_WAIT(N(EVS_802523B8))
+        EVT_EXEC_WAIT(N(EVS_SetupDemo))
         EVT_RETURN
     EVT_END_IF
-    EVT_EXEC(N(EVS_80244630))
+    EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitw, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitn, COLLIDER_FLAGS_UPPER_MASK)
     EVT_EXEC(N(EVS_EnterMap))

@@ -42,7 +42,7 @@ EvtScript N(EVS_HandItemOver) = {
 };
 
 EvtScript N(EVS_KootFavorCheck_Luigi) = {
-    EVT_IF_NE(GB_KootFavor_Current, 5)
+    EVT_IF_NE(GB_KootFavor_Current, KOOT_FAVOR_CH3_1)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_NE(GF_KMR20_Gift_LuigisAutograph, FALSE)

@@ -24,8 +24,8 @@
 #include "sprite/npc/KoopaKoot.h"
 
 enum {
-	NPC_Parakarry               = 0,
-	NPC_Bombette                = 1,
+	NPC_Koopa_00                = 0,
+//	NPC_Bombette                = 1,
 	NPC_KoloradoWife_01         = 2,
 	NPC_KoopaWithoutShell       = 3,
 	NPC_Koopa_01                = 4,
@@ -38,12 +38,15 @@ enum {
 	NPC_Kooper_02               = 11,
 	NPC_Fuzzy_01                = 12,
 	NPC_MiscFuzzy1              = 13,
-	NPC_Fuzzy_03                = 14,
+	NPC_MiscFuzzy2                = 14,
 	NPC_Fuzzy_04                = 15,
-	NPC_Bombomb_01              = 16,
-	NPC_Bombomb_02              = 17,
-	NPC_Bombomb_03              = 18,
+	NPC_Bobomb_01               = 16,
+	NPC_Bobomb_02               = 17,
+	NPC_Bobomb_03               = 18,
 	NPC_ChuckQuizmo             = 19,
+	// epilogue
+	NPC_Parakarry               = 0,
+	NPC_Bombette                = 1,
 };
 
 enum {
@@ -51,7 +54,7 @@ enum {
     MV_Unk_01       = MapVar(1),
     MV_Unk_02       = MapVar(2),
     MV_Unk_03       = MapVar(3),
-    MV_Unk_0A       = MapVar(10),
+    MV_StarPieceItem	= MapVar(10),
 };
 
 enum {
@@ -63,12 +66,12 @@ enum {
 
 extern EvtScript N(EVS_Main);
 extern EvtScript N(D_802446A0_9DB6C0);
-extern EvtScript N(D_802543B0_9EB3D0);
-extern EvtScript N(D_80246E20_9DDE40);
+extern EvtScript N(EVS_Scene_Epilogue);
+extern EvtScript N(EVS_Setup_Bookshelf);
 extern EvtScript N(EVS_80246B50);
-extern EvtScript N(EVS_802523B8);
-extern EvtScript N(EVS_80244630);
-extern EvtScript N(EVS_8024B488);
+extern EvtScript N(EVS_SetupDemo);
+extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_BreakBlock_DropShell);
 extern EvtScript N(EVS_8024A8EC);
 extern EvtScript N(EVS_8024A908);
 extern EvtScript N(D_8025254C_9E956C);

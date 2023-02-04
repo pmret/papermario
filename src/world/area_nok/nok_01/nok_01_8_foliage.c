@@ -190,7 +190,7 @@ BombTrigger N(BombPos_Tree1) = {
 EvtScript N(EVS_SetupFoliage) = {
     EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush5)))
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o312, 1, 0)
-    EVT_IF_EQ(GB_KootFavor_Current, 15)
+    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH6_2)
         EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush3)))
     EVT_ELSE
         EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush4)))
@@ -205,7 +205,7 @@ EvtScript N(EVS_SetupFoliage) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o421, 1, 0)
     EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush9)))
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o422, 1, 0)
-    EVT_IF_EQ(GB_KootFavor_Current, 6)
+    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH3_2)
         EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush1)))
     EVT_ELSE
         EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush2)))

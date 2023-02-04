@@ -791,7 +791,7 @@ EvtScript N(EVS_NpcIdle_Goompa) = {
 };
 
 EvtScript N(EVS_KootFavorCheck_Goompa) = {
-    EVT_IF_EQ(GB_KootFavor_Current, 3)
+    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH2_2)
         EVT_IF_EQ(GF_KMR02_Gift_TheTape, FALSE)
             EVT_SET(GF_KMR02_Gift_TheTape, TRUE)
             EVT_EXEC_WAIT(N(D_8024810C_8B817C))

@@ -1,6 +1,6 @@
 #include "nok_02.h"
 
-EvtScript N(D_802543B0_9EB3D0) = {
+EvtScript N(EVS_Scene_Epilogue) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)

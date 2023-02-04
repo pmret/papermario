@@ -135,7 +135,7 @@ EvtScript N(EVS_Scene_RecoverBlockShell) = {
     EVT_END
 };
 
-EvtScript N(EVS_BreakBlock_ShellAtop) = {
+EvtScript N(EVS_BreakBlock_DropShell) = {
     EVT_EXEC(N(EVS_Scene_RecoverBlockShell))
     EVT_RETURN
     EVT_END

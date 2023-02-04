@@ -653,7 +653,7 @@ EvtScript N(EVS_NpcInit_Merluvlee) = {
 };
 
 EvtScript N(EVS_KootRequestBall_Merluvlee) = {
-    EVT_IF_EQ(GB_KootFavor_Current, 8)
+    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH4_1)
         EVT_IF_EQ(GF_HOS06_MerluvleeRequestedCrystalBall, FALSE)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
             EVT_WAIT(1)

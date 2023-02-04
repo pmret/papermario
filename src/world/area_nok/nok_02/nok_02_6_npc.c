@@ -1,73 +1,10 @@
 #include "nok_02.h"
 
-#include "world/common/enemy/ai/PatrolNoAttackAI.inc.c"
+#include "world/common/npc/Koopa_Wander.inc.c"
+#include "world/common/npc/KoopaWithoutShell_Patrol.inc.c"
+#include "world/common/npc/Koopa.inc.c"
 
-MobileAISettings N(D_80246E70_9DDE90) = {
-    .moveSpeed = 1.5f,
-    .moveTime = 60,
-    .waitTime = 30,
-    .playerSearchInterval = -1,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(EVS_NpcAI_Parakarry) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(D_80246E70_9DDE90)))
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_ParakarryA) = {
-    .height = 35,
-    .radius = 24,
-    .level = 99,
-    .ai = &N(EVS_NpcAI_Parakarry),
-    .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
-};
-
-s32 N(missing_80246EEC_6EEC)[] = {
-    0x00000000, 0x002A0018, 0x00000000, 0x00000000, 0x80246EA0, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00630000, 
-};
-
-MobileAISettings N(AISettings_KoopaWithoutShell) = {
-    .moveSpeed = 1.5f,
-    .moveTime = 30,
-    .waitTime = 30,
-    .playerSearchInterval = -1,
-    .unk_AI_2C = 1,
-};
-
-EvtScript N(EVS_NpcAI_KoopaWithoutShell) = {
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(AISettings_KoopaWithoutShell)))
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_KoopaWithoutShell) = {
-    .height = 35,
-    .radius = 24,
-    .level = 99,
-    .ai = &N(EVS_NpcAI_KoopaWithoutShell),
-    .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
-};
-
-s32 N(missing_80246F94_6F94)[] = {
-    0x00000000, 0x002A0018, 0x00000000, 0x00000000, 0x80246F48, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00630000, 
-};
-
-NpcSettings N(NpcSettings_ParakarryB) = {
-    .height = 35,
-    .radius = 24,
-    .level = 99,
-    .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
-};
-
-NpcSettings N(NpcSettings_Kolorado) = {
-    .height = 40,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/Kolorado.inc.c"
 
 NpcSettings N(NpcSettings_KoloradoWife_02) = {
     .height = 38,
@@ -75,13 +12,7 @@ NpcSettings N(NpcSettings_KoloradoWife_02) = {
     .level = 99,
 };
 
-NpcSettings N(NpcSettings_Bombette) = {
-    .height = 20,
-    .radius = 22,
-    .level = 6,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
+#include "world/common/enemy/complete/Fuzzy.inc.c"
 
 NpcSettings N(NpcSettings_KoopaKoot) = {
     .height = 32,
@@ -89,13 +20,7 @@ NpcSettings N(NpcSettings_KoopaKoot) = {
     .level = 99,
 };
 
-NpcSettings N(NpcSettings_Bombomb_01) = {
-    .height = 23,
-    .radius = 20,
-    .level = 6,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
+#include "world/common/npc/Bobomb.inc.c"
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
@@ -378,12 +303,12 @@ EvtScript N(EVS_NpcInteract_Kooper_01) = {
             EVT_CALL(PlaySoundAt, SOUND_BASIC_DOOR_OPEN, 0, 0, 0, -180)
             EVT_CALL(MakeLerp, 0, 90, 15, EASING_COS_FAST_OVERSHOOT)
             EVT_LABEL(10)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_o185, LVar0, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(10)
-            EVT_END_IF
+                EVT_CALL(UpdateLerp)
+                EVT_CALL(RotateModel, MODEL_o185, LVar0, 0, 1, 0)
+                EVT_WAIT(1)
+                EVT_IF_EQ(LVar1, 1)
+                    EVT_GOTO(10)
+                EVT_END_IF
         EVT_END_THREAD
         EVT_THREAD
             EVT_CALL(PlayerMoveTo, -25, -130, 10)
@@ -411,12 +336,12 @@ EvtScript N(EVS_NpcInteract_Kooper_01) = {
         EVT_THREAD
             EVT_CALL(MakeLerp, 90, 0, 30, EASING_COS_IN_OUT)
             EVT_LABEL(20)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_o185, LVar0, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(20)
-            EVT_END_IF
+                EVT_CALL(UpdateLerp)
+                EVT_CALL(RotateModel, MODEL_o185, LVar0, 0, 1, 0)
+                EVT_WAIT(1)
+                EVT_IF_EQ(LVar1, 1)
+                    EVT_GOTO(20)
+                EVT_END_IF
             EVT_CALL(PlaySoundAt, SOUND_BASIC_DOOR_CLOSE, 0, 0, 0, -180)
             EVT_CALL(SetGroupEnabled, MODEL_g111, 0)
         EVT_END_THREAD
@@ -567,7 +492,7 @@ Vec2i N(FuzzyJumpPath2)[] = {
     {  293,  123 },
 };
 
-EvtScript N(D_8024AD54_9E1D74) = {
+EvtScript N(EVS_NpcIdle_MiscFuzzy1) = {
     EVT_LABEL(100)
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_ARRIVED_AT_KOOPA_VILLAGE)
         EVT_WAIT(8)
@@ -578,16 +503,16 @@ EvtScript N(D_8024AD54_9E1D74) = {
     EVT_BUF_READ2(LVar0, LVar2)
     EVT_CALL(SetNpcPos, NPC_MiscFuzzy1, LVar0, LVar1, LVar2)
     EVT_LABEL(0)
-    EVT_USE_BUF(EVT_PTR(N(FuzzyJumpPath1)))
-    EVT_LOOP(18)
-        EVT_SET(LVar1, 0)
-        EVT_BUF_READ2(LVar0, LVar2)
-        EVT_CALL(RandInt, 10, LVar3)
-        EVT_ADD(LVar3, 15)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_332, 0)
-        EVT_CALL(NpcJump0, NPC_MiscFuzzy1, LVar0, LVar1, LVar2, LVar3)
-    EVT_END_LOOP
-    EVT_GOTO(0)
+        EVT_USE_BUF(EVT_PTR(N(FuzzyJumpPath1)))
+        EVT_LOOP(18)
+            EVT_SET(LVar1, 0)
+            EVT_BUF_READ2(LVar0, LVar2)
+            EVT_CALL(RandInt, 10, LVar3)
+            EVT_ADD(LVar3, 15)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_332, 0)
+            EVT_CALL(NpcJump0, NPC_MiscFuzzy1, LVar0, LVar1, LVar2, LVar3)
+        EVT_END_LOOP
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -629,22 +554,22 @@ EvtScript N(D_8024AE9C_9E1EBC) = {
     EVT_END
 };
 
-EvtScript N(D_8024B16C_9E218C) = {
+EvtScript N(EVS_NpcHit_MiscFuzzy1) = {
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(D_8024AE9C_9E1EBC)))
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000, 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024B1A4_9E21C4) = {
+EvtScript N(EVS_NpcIdle_MiscFuzzy2) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
         EVT_RETURN
     EVT_END_IF
     EVT_LABEL(100)
-    EVT_IF_EQ(AF_NOK_13, FALSE)
-        EVT_WAIT(1)
-        EVT_GOTO(100)
-    EVT_END_IF
+        EVT_IF_EQ(AF_NOK_13, FALSE)
+            EVT_WAIT(1)
+            EVT_GOTO(100)
+        EVT_END_IF
     EVT_CALL(SetNpcPos, NPC_SELF, 438, 150, 155)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_333, 0)
     EVT_CALL(NpcJump0, NPC_SELF, 438, 0, 150, 10)
@@ -653,51 +578,51 @@ EvtScript N(D_8024B1A4_9E21C4) = {
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_333, 0)
     EVT_CALL(NpcJump0, NPC_SELF, 384, 0, 160, 7)
     EVT_LABEL(0)
-    EVT_USE_BUF(EVT_PTR(N(FuzzyJumpPath2)))
-    EVT_LOOP(18)
-        EVT_SET(LVar1, 0)
-        EVT_BUF_READ2(LVar0, LVar2)
-        EVT_CALL(RandInt, 9, LVar3)
-        EVT_ADD(LVar3, 13)
-        EVT_MULF(LVar0, EVT_FLOAT(0.9))
-        EVT_MULF(LVar2, EVT_FLOAT(0.9))
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_333, 0)
-        EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, LVar3)
-    EVT_END_LOOP
-    EVT_GOTO(0)
+        EVT_USE_BUF(EVT_PTR(N(FuzzyJumpPath2)))
+        EVT_LOOP(18)
+            EVT_SET(LVar1, 0)
+            EVT_BUF_READ2(LVar0, LVar2)
+            EVT_CALL(RandInt, 9, LVar3)
+            EVT_ADD(LVar3, 13)
+            EVT_MULF(LVar0, EVT_FLOAT(0.9))
+            EVT_MULF(LVar2, EVT_FLOAT(0.9))
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_333, 0)
+            EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, LVar3)
+        EVT_END_LOOP
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024B3A8_9E23C8) = {
+EvtScript N(EVS_NpcHit_MiscFuzzy2) = {
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(D_8024AE9C_9E1EBC)))
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000, 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024B3E0_9E2400) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_8024AD54_9E1D74)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(D_8024B16C_9E218C)))
+EvtScript N(EVS_NpcInit_MiscFuzzy1) = {
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_MiscFuzzy1)))
+    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_MiscFuzzy1)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024B418_9E2438) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_8024B1A4_9E21C4)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(D_8024B3A8_9E23C8)))
+EvtScript N(EVS_NpcInit_MiscFuzzy2) = {
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_MiscFuzzy2)))
+    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_MiscFuzzy2)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(D_8024B450_9E2470) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_8024B1A4_9E21C4)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(D_8024B3A8_9E23C8)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_MiscFuzzy2)))
+    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_MiscFuzzy2)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_8024B488) = {
+EvtScript N(EVS_BreakBlock_DropShell) = {
     EVT_IF_EQ(GF_NOK02_RecoveredShellB, TRUE)
         EVT_RETURN
     EVT_END_IF
@@ -773,12 +698,12 @@ EvtScript N(D_8024B970_9E2990) = {
     EVT_IF_EQ(GF_NOK02_RecoveredShellB, TRUE)
         EVT_RETURN
     EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_NpcAI_Parakarry))
+    EVT_EXEC_WAIT(N(EVS_NpcAI_Koopa_Wander))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024B9AC_9E29CC) = {
+EvtScript N(EVS_NpcInteract_Koopa_00_Crisis) = {
     EVT_IF_EQ(GF_NOK02_RecoveredShellA, TRUE)
         EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0057)
         EVT_RETURN
@@ -798,11 +723,11 @@ EvtScript N(D_8024B9AC_9E29CC) = {
 
 EvtScript N(D_8024BA90_9E2AB0) = {
     EVT_LABEL(0)
-    EVT_CALL(GetNpcPos, NPC_Bombette, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar2, 1)
-    EVT_CALL(SetNpcPos, NPC_KoloradoWife_01, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_CALL(GetNpcPos, NPC_Bombette, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar2, 1)
+        EVT_CALL(SetNpcPos, NPC_KoloradoWife_01, LVar0, LVar1, LVar2)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -812,23 +737,23 @@ EvtScript N(D_8024BB0C_9E2B2C) = {
     EVT_CALL(GetNpcPointer, NPC_Parakarry, LVarE)
     EVT_SET(LVar2, 0)
     EVT_LABEL(0)
-    EVT_CALL(N(func_802430CC_9DA0EC), LVarF, LVarE)
-    EVT_SET(MV_Unk_02, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_LABEL(1)
-        EVT_CALL(N(func_80243294_9DA2B4), LVarF, LVarE)
-        EVT_CALL(SetNpcFlagBits, NPC_Bombette, NPC_FLAG_100, TRUE)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_331, 0)
-        EVT_CALL(NpcJump0, NPC_Bombette, LVarA, 0, LVarB, LVarC)
-        EVT_CALL(SetNpcFlagBits, NPC_Bombette, NPC_FLAG_100, FALSE)
         EVT_CALL(N(func_802430CC_9DA0EC), LVarF, LVarE)
         EVT_SET(MV_Unk_02, LVar0)
         EVT_IF_NE(LVar0, 0)
-            EVT_GOTO(1)
+            EVT_LABEL(1)
+            EVT_CALL(N(func_80243294_9DA2B4), LVarF, LVarE)
+            EVT_CALL(SetNpcFlagBits, NPC_Bombette, NPC_FLAG_100, TRUE)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_331, 0)
+            EVT_CALL(NpcJump0, NPC_Bombette, LVarA, 0, LVarB, LVarC)
+            EVT_CALL(SetNpcFlagBits, NPC_Bombette, NPC_FLAG_100, FALSE)
+            EVT_CALL(N(func_802430CC_9DA0EC), LVarF, LVarE)
+            EVT_SET(MV_Unk_02, LVar0)
+            EVT_IF_NE(LVar0, 0)
+                EVT_GOTO(1)
+            EVT_END_IF
         EVT_END_IF
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -836,25 +761,25 @@ EvtScript N(D_8024BB0C_9E2B2C) = {
 EvtScript N(D_8024BC84_9E2CA4) = {
     EVT_SET_GROUP(EVT_GROUP_0B)
     EVT_LABEL(0)
-    EVT_CALL(GetNpcPos, NPC_KoloradoWife_01, LVar0, LVar1, LVar2)
-    EVT_CALL(GetNpcAnimation, NPC_Parakarry, LVarF)
-    EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_KoopaWithoutShell_CryRun)
-    EVT_CALL(NpcMoveTo, NPC_Parakarry, LVar0, LVar2, 30)
-    EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_KoopaWithoutShell_CryIdle)
-    EVT_CALL(RandInt, 20, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_WAIT(LVar0)
-    EVT_END_IF
-    EVT_GOTO(0)
+        EVT_CALL(GetNpcPos, NPC_KoloradoWife_01, LVar0, LVar1, LVar2)
+        EVT_CALL(GetNpcAnimation, NPC_Parakarry, LVarF)
+        EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_KoopaWithoutShell_CryRun)
+        EVT_CALL(NpcMoveTo, NPC_Parakarry, LVar0, LVar2, 30)
+        EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_KoopaWithoutShell_CryIdle)
+        EVT_CALL(RandInt, 20, LVar0)
+        EVT_IF_NE(LVar0, 0)
+            EVT_WAIT(LVar0)
+        EVT_END_IF
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_8024BD64) = {
     EVT_LABEL(0)
-    EVT_CALL(NpcFaceNpc, NPC_Parakarry, NPC_KoloradoWife_01, 0)
-    EVT_WAIT(5)
-    EVT_GOTO(0)
+        EVT_CALL(NpcFaceNpc, NPC_Parakarry, NPC_KoloradoWife_01, 0)
+        EVT_WAIT(5)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -893,19 +818,19 @@ EvtScript N(D_8024BDB0_9E2DD0) = {
     EVT_END
 };
 
-EvtScript N(D_8024BF3C_9E2F5C) = {
+EvtScript N(EVS_NpcIdle_Koopa_00_Crisis) = {
     EVT_IF_EQ(GF_NOK02_RecoveredShellA, TRUE)
         EVT_CALL(SetNpcPos, NPC_Bombette, NPC_DISPOSE_LOCATION)
         EVT_CALL(SetNpcPos, NPC_KoloradoWife_01, NPC_DISPOSE_LOCATION)
         EVT_CALL(SetNpcSpeed, NPC_Parakarry, EVT_FLOAT(3.0))
         EVT_LABEL(5)
-        EVT_CALL(GetNpcPointer, NPC_Parakarry, LVarF)
-        EVT_CALL(N(func_8024351C_9DA53C), LVarF)
-        EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_Koopa_Run)
-        EVT_CALL(NpcMoveTo, NPC_Parakarry, LVarA, LVarB, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_Koopa_Talk)
-        EVT_WAIT(10)
-        EVT_GOTO(5)
+            EVT_CALL(GetNpcPointer, NPC_Parakarry, LVarF)
+            EVT_CALL(N(func_8024351C_9DA53C), LVarF)
+            EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_Koopa_Run)
+            EVT_CALL(NpcMoveTo, NPC_Parakarry, LVarA, LVarB, 0)
+            EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_Koopa_Talk)
+            EVT_WAIT(10)
+            EVT_GOTO(5)
     EVT_END_IF
     EVT_EXEC_GET_TID(N(D_8024BA90_9E2AB0), LVar9)
     EVT_EXEC_GET_TID(N(D_8024BB0C_9E2B2C), LVar8)
@@ -1011,7 +936,7 @@ EvtScript N(D_8024BF3C_9E2F5C) = {
         EVT_END_THREAD
         EVT_WAIT(30)
         EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(D_8024BF3C_9E2F5C)))
+        EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Koopa_00_Crisis)))
         EVT_RETURN
     EVT_END_IF
     EVT_RETURN
@@ -1032,9 +957,9 @@ EvtScript N(D_8024C830_9E3850) = {
     EVT_END
 };
 
-EvtScript N(D_8024C8C4_9E38E4) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_8024BF3C_9E2F5C)))
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(D_8024B9AC_9E29CC)))
+EvtScript N(EVS_NpcInit_Koopa_00_Crisis) = {
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Koopa_00_Crisis)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Koopa_00_Crisis)))
     EVT_IF_EQ(GF_NOK02_RecoveredShellA, TRUE)
         EVT_RETURN
     EVT_END_IF
@@ -1222,86 +1147,86 @@ EvtScript N(D_8024D164_9E4184) = {
 
 EvtScript N(D_8024D188_9E41A8) = {
     EVT_LABEL(10)
-    EVT_IF_EQ(AF_NOK_10, FALSE)
-        EVT_WAIT(1)
+        EVT_IF_EQ(AF_NOK_10, FALSE)
+            EVT_WAIT(1)
+            EVT_GOTO(10)
+        EVT_END_IF
+        EVT_IF_EQ(AF_NOK_11, TRUE)
+            EVT_WAIT(1)
+            EVT_GOTO(10)
+        EVT_END_IF
+        EVT_CALL(SetNpcAnimation, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Run)
+        EVT_WAIT(10)
+        EVT_CALL(SetNpcAnimation, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Idle)
+        EVT_WAIT(3)
+        EVT_CALL(GetNpcPos, NPC_Bobomb_02, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAtNpc, NPC_Bobomb_02, SOUND_CANNON1, 0)
+        EVT_CALL(N(func_80243010_9DA030), LVar0, LVar1, LVar2)
+        EVT_WAIT(30)
+        EVT_LABEL(20)
+            EVT_IF_EQ(AF_NOK_10, FALSE)
+                EVT_WAIT(1)
+                EVT_GOTO(20)
+            EVT_END_IF
+            EVT_IF_EQ(AF_NOK_11, TRUE)
+                EVT_WAIT(1)
+                EVT_GOTO(20)
+            EVT_END_IF
+        EVT_CALL(SetNpcAnimation, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Run)
+        EVT_WAIT(10)
+        EVT_CALL(SetNpcAnimation, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Idle)
+        EVT_WAIT(3)
+        EVT_CALL(GetNpcPos, NPC_Bobomb_01, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAtNpc, NPC_Bobomb_01, SOUND_CANNON1, 0)
+        EVT_CALL(N(func_80243010_9DA030), LVar0, LVar1, LVar2)
+        EVT_WAIT(30)
         EVT_GOTO(10)
-    EVT_END_IF
-    EVT_IF_EQ(AF_NOK_11, TRUE)
-        EVT_WAIT(1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_Bombomb_02, ANIM_WorldBobomb_Green_Run)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Bombomb_02, ANIM_WorldBobomb_Green_Idle)
-    EVT_WAIT(3)
-    EVT_CALL(GetNpcPos, NPC_Bombomb_02, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bombomb_02, SOUND_CANNON1, 0)
-    EVT_CALL(N(func_80243010_9DA030), LVar0, LVar1, LVar2)
-    EVT_WAIT(30)
-    EVT_LABEL(20)
-    EVT_IF_EQ(AF_NOK_10, FALSE)
-        EVT_WAIT(1)
-        EVT_GOTO(20)
-    EVT_END_IF
-    EVT_IF_EQ(AF_NOK_11, TRUE)
-        EVT_WAIT(1)
-        EVT_GOTO(20)
-    EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_Bombomb_01, ANIM_WorldBobomb_Blue_Run)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Bombomb_01, ANIM_WorldBobomb_Blue_Idle)
-    EVT_WAIT(3)
-    EVT_CALL(GetNpcPos, NPC_Bombomb_01, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bombomb_01, SOUND_CANNON1, 0)
-    EVT_CALL(N(func_80243010_9DA030), LVar0, LVar1, LVar2)
-    EVT_WAIT(30)
-    EVT_GOTO(10)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(D_8024D3AC_9E43CC) = {
-    EVT_IF_EQ(GB_KootFavor_Current, 12)
+    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH5_2)
         EVT_CALL(GetCurrentPartnerID, LVar0)
         EVT_IF_EQ(LVar0, PARTNER_BOMBETTE)
             EVT_SET(AF_NOK_11, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_Bombomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007B)
-            EVT_CALL(SpeakToNpc, NPC_Bombomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bombomb_01, MSG_CH1_007C)
-            EVT_CALL(SpeakToPlayer, NPC_Bombomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007D)
+            EVT_CALL(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007B)
+            EVT_CALL(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_007C)
+            EVT_CALL(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007D)
             EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, NPC_Bombomb_01, MSG_CH1_007E)
+            EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, NPC_Bobomb_01, MSG_CH1_007E)
             EVT_CALL(EnablePartnerAI)
-            EVT_CALL(SpeakToPlayer, NPC_Bombomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 5, MSG_CH1_007F)
-            EVT_CALL(SpeakToNpc, NPC_Bombomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bombomb_01, MSG_CH1_0080)
-            EVT_CALL(SetNpcAnimation, NPC_Bombomb_01, ANIM_WorldBobomb_Blue_Idle)
-            EVT_CALL(SetNpcAnimation, NPC_Bombomb_02, ANIM_WorldBobomb_Green_Idle)
+            EVT_CALL(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 5, MSG_CH1_007F)
+            EVT_CALL(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_0080)
+            EVT_CALL(SetNpcAnimation, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Idle)
+            EVT_CALL(SetNpcAnimation, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Idle)
             EVT_SET(GF_NOK02_ConfrontedBobombs, TRUE)
             EVT_SET(GF_MAC02_KootFavor_CurrentComplete, TRUE)
         EVT_ELSE
             EVT_SET(AF_NOK_11, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_Bombomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007B)
-            EVT_CALL(SpeakToNpc, NPC_Bombomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bombomb_01, MSG_CH1_007C)
-            EVT_CALL(SpeakToPlayer, NPC_Bombomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 5, MSG_CH1_0081)
-            EVT_CALL(SpeakToNpc, NPC_Bombomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bombomb_01, MSG_CH1_0082)
+            EVT_CALL(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007B)
+            EVT_CALL(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_007C)
+            EVT_CALL(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 5, MSG_CH1_0081)
+            EVT_CALL(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_0082)
             EVT_SET(AF_NOK_11, FALSE)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetCurrentPartnerID, LVar0)
         EVT_IF_EQ(LVar0, PARTNER_BOMBETTE)
             EVT_SET(AF_NOK_11, TRUE)
-            EVT_CALL(SpeakToNpc, NPC_Bombomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_PARTNER, MSG_CH1_0077)
-            EVT_CALL(SpeakToNpc, NPC_Bombomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, NPC_PARTNER, MSG_CH1_0078)
+            EVT_CALL(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_PARTNER, MSG_CH1_0077)
+            EVT_CALL(SpeakToNpc, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, NPC_PARTNER, MSG_CH1_0078)
             EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, NPC_Bombomb_01, MSG_CH1_0079)
+            EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, NPC_Bobomb_01, MSG_CH1_0079)
             EVT_CALL(EnablePartnerAI)
-            EVT_CALL(SpeakToPlayer, NPC_Bombomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 5, MSG_CH1_007A)
+            EVT_CALL(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 5, MSG_CH1_007A)
             EVT_SET(AF_NOK_11, FALSE)
         EVT_ELSE
             EVT_SET(AF_NOK_11, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_Bombomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0073)
-            EVT_CALL(SpeakToNpc, NPC_Bombomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, NPC_Bombomb_02, MSG_CH1_0074)
-            EVT_CALL(SpeakToNpc, NPC_Bombomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bombomb_01, MSG_CH1_0075)
-            EVT_CALL(SpeakToNpc, NPC_Bombomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, NPC_Bombomb_02, MSG_CH1_0076)
+            EVT_CALL(SpeakToPlayer, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0073)
+            EVT_CALL(SpeakToNpc, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, NPC_Bobomb_02, MSG_CH1_0074)
+            EVT_CALL(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_0075)
+            EVT_CALL(SpeakToNpc, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, NPC_Bobomb_02, MSG_CH1_0076)
             EVT_SET(AF_NOK_11, FALSE)
         EVT_END_IF
     EVT_END_IF
@@ -1350,7 +1275,7 @@ EvtScript N(D_8024D978_9E4998) = {
                 EVT_EXEC_WAIT(N(D_8024D3AC_9E43CC))
             EVT_ELSE
                 EVT_SET(AF_NOK_11, TRUE)
-                EVT_CALL(SpeakToNpc, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bombomb_01, MSG_CH1_0080)
+                EVT_CALL(SpeakToNpc, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_0080)
             EVT_END_IF
         EVT_CASE_GE(STORY_CH7_STAR_SPRIT_DEPARTED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0084)
@@ -1618,7 +1543,7 @@ EvtScript N(D_8024E670_9E5690) = {
         EVT_CASE_GE(STORY_CH7_STAR_SPRIT_DEPARTED)
             EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008F)
     EVT_END_SWITCH
-    EVT_IF_EQ(GB_KootFavor_Current, 1)
+    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH1_2)
         EVT_IF_EQ(GF_NOK02_Gift_KoopaLegends, FALSE)
             EVT_SET(GF_NOK02_Gift_KoopaLegends, TRUE)
             EVT_EXEC_WAIT(N(D_8024988C_9E08AC))
@@ -1673,17 +1598,13 @@ EvtScript N(D_8024E9FC_9E5A1C) = {
 
 StaticNpc N(NpcData_Parakarry_Crisis)[] = {
     {
-        .id = NPC_Parakarry,
-        .settings = &N(NpcSettings_ParakarryA),
+        .id = NPC_Koopa_00,
+        .settings = &N(NpcSettings_Koopa_Wander),
         .pos = { -109.0f, 0.0f, 191.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(D_8024C8C4_9E38E4),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .init = &N(EVS_NpcInit_Koopa_00_Crisis),
+        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1696,100 +1617,37 @@ StaticNpc N(NpcData_Parakarry_Crisis)[] = {
                 .detectSize = { 500 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Koopa_Idle,
-            .walk   = ANIM_Koopa_Walk,
-            .run    = ANIM_Koopa_Run,
-            .chase  = ANIM_Koopa_Run,
-            .anim_4 = ANIM_Koopa_Idle,
-            .anim_5 = ANIM_Koopa_Idle,
-            .death  = ANIM_Koopa_Still,
-            .hit    = ANIM_Koopa_Still,
-            .anim_8 = ANIM_Koopa_Still,
-            .anim_9 = ANIM_Koopa_Still,
-            .anim_A = ANIM_Koopa_Still,
-            .anim_B = ANIM_Koopa_Still,
-            .anim_C = ANIM_Koopa_Still,
-            .anim_D = ANIM_Koopa_Still,
-            .anim_E = ANIM_Koopa_Still,
-            .anim_F = ANIM_Koopa_Still,
-        },
+        .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_GenericKoopaC,
     },
     {
         .id = NPC_Bombette,
-        .settings = &N(NpcSettings_Bombette),
+        .settings = &N(NpcSettings_Fuzzy),
         .pos = { -109.0f, 0.0f, 191.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
         .init = &N(D_8024C948_9E3968),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Fuzzy_Walk,
-            .walk   = ANIM_Fuzzy_Walk,
-            .run    = ANIM_Fuzzy_Run,
-            .chase  = ANIM_Fuzzy_Run,
-            .anim_4 = ANIM_Fuzzy_Idle,
-            .anim_5 = ANIM_Fuzzy_Idle,
-            .death  = ANIM_Fuzzy_Hurt,
-            .hit    = ANIM_Fuzzy_Hurt,
-            .anim_8 = ANIM_Fuzzy_Run,
-            .anim_9 = ANIM_Fuzzy_Run,
-            .anim_A = ANIM_Fuzzy_Run,
-            .anim_B = ANIM_Fuzzy_Run,
-            .anim_C = ANIM_Fuzzy_Run,
-            .anim_D = ANIM_Fuzzy_Run,
-            .anim_E = ANIM_Fuzzy_Run,
-            .anim_F = ANIM_Fuzzy_Run,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = FUZZY_ANIMS,
     },
     {
         .id = NPC_KoloradoWife_01,
-        .settings = &N(NpcSettings_ParakarryB),
+        .settings = &N(NpcSettings_Koopa),
         .pos = { -109.0f, 0.0f, 191.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(D_8024C9A0_9E39C0),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Koopa_Idle,
-            .walk   = ANIM_Koopa_Walk,
-            .run    = ANIM_Koopa_Run,
-            .chase  = ANIM_Koopa_Run,
-            .anim_4 = ANIM_Koopa_Idle,
-            .anim_5 = ANIM_Koopa_Idle,
-            .death  = ANIM_Koopa_Still,
-            .hit    = ANIM_Koopa_Still,
-            .anim_8 = ANIM_Koopa_Still,
-            .anim_9 = ANIM_Koopa_Still,
-            .anim_A = ANIM_Koopa_Still,
-            .anim_B = ANIM_Koopa_Still,
-            .anim_C = ANIM_Koopa_Still,
-            .anim_D = ANIM_Koopa_Still,
-            .anim_E = ANIM_Koopa_Still,
-            .anim_F = ANIM_Koopa_Still,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = KOOPA_ANIMS,
     },
     {
         .id = NPC_KoopaWithoutShell,
-        .settings = &N(NpcSettings_KoopaWithoutShell),
+        .settings = &N(NpcSettings_KoopaWithoutShell_Patrol),
         .pos = { 192.0f, 0.0f, 152.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(D_8024C9D8_9E39F8),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -1804,69 +1662,27 @@ StaticNpc N(NpcData_Parakarry_Crisis)[] = {
                 .detectSize = { 500 },
             }
         },
-        .animations = {
-            .idle   = ANIM_KoopaWithoutShell_CryIdle,
-            .walk   = ANIM_KoopaWithoutShell_CryRun,
-            .run    = ANIM_KoopaWithoutShell_Walk,
-            .chase  = ANIM_KoopaWithoutShell_CryRun,
-            .anim_4 = ANIM_KoopaWithoutShell_Walk,
-            .anim_5 = ANIM_KoopaWithoutShell_Walk,
-            .death  = ANIM_KoopaWithoutShell_Still,
-            .hit    = ANIM_KoopaWithoutShell_Still,
-            .anim_8 = ANIM_KoopaWithoutShell_Still,
-            .anim_9 = ANIM_KoopaWithoutShell_Still,
-            .anim_A = ANIM_KoopaWithoutShell_Still,
-            .anim_B = ANIM_KoopaWithoutShell_Still,
-            .anim_C = ANIM_KoopaWithoutShell_Still,
-            .anim_D = ANIM_KoopaWithoutShell_Still,
-            .anim_E = ANIM_KoopaWithoutShell_Still,
-            .anim_F = ANIM_KoopaWithoutShell_Still,
-        },
+        .animations = KOOPA_WITHOUT_SHELL_ANIMS,
         .tattle = MSG_NpcTattle_NOK_GenericKoopaD,
     },
     {
         .id = NPC_Koopa_01,
-        .settings = &N(NpcSettings_ParakarryB),
+        .settings = &N(NpcSettings_Koopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(D_8024CA60_9E3A80),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Koopa_Idle,
-            .walk   = ANIM_Koopa_Walk,
-            .run    = ANIM_Koopa_Run,
-            .chase  = ANIM_Koopa_Run,
-            .anim_4 = ANIM_Koopa_Idle,
-            .anim_5 = ANIM_Koopa_Idle,
-            .death  = ANIM_Koopa_Still,
-            .hit    = ANIM_Koopa_Still,
-            .anim_8 = ANIM_Koopa_Still,
-            .anim_9 = ANIM_Koopa_Still,
-            .anim_A = ANIM_Koopa_Still,
-            .anim_B = ANIM_Koopa_Still,
-            .anim_C = ANIM_Koopa_Still,
-            .anim_D = ANIM_Koopa_Still,
-            .anim_E = ANIM_Koopa_Still,
-            .anim_F = ANIM_Koopa_Still,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = KOOPA_ANIMS,
     },
     {
         .id = NPC_Kooper_01,
-        .settings = &N(NpcSettings_ParakarryB),
+        .settings = &N(NpcSettings_Koopa),
         .pos = { 20.0f, 0.0f, -145.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(D_8024CA98_9E3AB8),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
             .walk   = ANIM_WorldKooper_Walk,
@@ -1889,47 +1705,22 @@ StaticNpc N(NpcData_Parakarry_Crisis)[] = {
     },
     {
         .id = NPC_Fuzzy_01,
-        .settings = &N(NpcSettings_Bombette),
+        .settings = &N(NpcSettings_Fuzzy),
         .pos = { 12.0f, 10.0f, -351.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(D_8024CB58_9E3B78),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Fuzzy_Walk,
-            .walk   = ANIM_Fuzzy_Walk,
-            .run    = ANIM_Fuzzy_Run,
-            .chase  = ANIM_Fuzzy_Run,
-            .anim_4 = ANIM_Fuzzy_Idle,
-            .anim_5 = ANIM_Fuzzy_Idle,
-            .death  = ANIM_Fuzzy_Hurt,
-            .hit    = ANIM_Fuzzy_Hurt,
-            .anim_8 = ANIM_Fuzzy_Run,
-            .anim_9 = ANIM_Fuzzy_Run,
-            .anim_A = ANIM_Fuzzy_Run,
-            .anim_B = ANIM_Fuzzy_Run,
-            .anim_C = ANIM_Fuzzy_Run,
-            .anim_D = ANIM_Fuzzy_Run,
-            .anim_E = ANIM_Fuzzy_Run,
-            .anim_F = ANIM_Fuzzy_Run,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = FUZZY_ANIMS,
     },
     {
         .id = NPC_Kooper_02,
-        .settings = &N(NpcSettings_ParakarryB),
+        .settings = &N(NpcSettings_Koopa),
         .pos = { 12.0f, 0.0f, -351.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(D_8024CBB8_9E3BD8),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
             .walk   = ANIM_WorldKooper_Walk,
@@ -1951,83 +1742,37 @@ StaticNpc N(NpcData_Parakarry_Crisis)[] = {
     },
 };
 
-StaticNpc N(NpcData_Fuzzy_02) = {
+StaticNpc N(NpcData_MiscFuzzy1) = {
     .id = NPC_MiscFuzzy1,
-    .settings = &N(NpcSettings_Bombette),
+    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
-    .init = &N(D_8024B3E0_9E2400),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Fuzzy_Walk,
-        .walk   = ANIM_Fuzzy_Walk,
-        .run    = ANIM_Fuzzy_Run,
-        .chase  = ANIM_Fuzzy_Run,
-        .anim_4 = ANIM_Fuzzy_Idle,
-        .anim_5 = ANIM_Fuzzy_Idle,
-        .death  = ANIM_Fuzzy_Hurt,
-        .hit    = ANIM_Fuzzy_Hurt,
-        .anim_8 = ANIM_Fuzzy_Run,
-        .anim_9 = ANIM_Fuzzy_Run,
-        .anim_A = ANIM_Fuzzy_Run,
-        .anim_B = ANIM_Fuzzy_Run,
-        .anim_C = ANIM_Fuzzy_Run,
-        .anim_D = ANIM_Fuzzy_Run,
-        .anim_E = ANIM_Fuzzy_Run,
-        .anim_F = ANIM_Fuzzy_Run,
-    },
+    .init = &N(EVS_NpcInit_MiscFuzzy1),
+    .drops = NPC_NO_DROPS,
+    .animations = FUZZY_ANIMS,
 };
 
 StaticNpc N(NpcData_Fuzzy_03) = {
-    .id = NPC_Fuzzy_03,
-    .settings = &N(NpcSettings_Bombette),
+    .id = NPC_MiscFuzzy2,
+    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
-    .init = &N(D_8024B418_9E2438),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Fuzzy_Walk,
-        .walk   = ANIM_Fuzzy_Walk,
-        .run    = ANIM_Fuzzy_Run,
-        .chase  = ANIM_Fuzzy_Run,
-        .anim_4 = ANIM_Fuzzy_Idle,
-        .anim_5 = ANIM_Fuzzy_Idle,
-        .death  = ANIM_Fuzzy_Hurt,
-        .hit    = ANIM_Fuzzy_Hurt,
-        .anim_8 = ANIM_Fuzzy_Run,
-        .anim_9 = ANIM_Fuzzy_Run,
-        .anim_A = ANIM_Fuzzy_Run,
-        .anim_B = ANIM_Fuzzy_Run,
-        .anim_C = ANIM_Fuzzy_Run,
-        .anim_D = ANIM_Fuzzy_Run,
-        .anim_E = ANIM_Fuzzy_Run,
-        .anim_F = ANIM_Fuzzy_Run,
-    },
+    .init = &N(EVS_NpcInit_MiscFuzzy2),
+    .drops = NPC_NO_DROPS,
+    .animations = FUZZY_ANIMS,
 };
 
 StaticNpc N(NpcData_Parakarry_Normal)[] = {
     {
         .id = NPC_Parakarry,
-        .settings = &N(NpcSettings_ParakarryA),
+        .settings = &N(NpcSettings_Koopa_Wander),
         .pos = { -109.0f, 0.0f, 191.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(D_8024CCF0_9E3D10),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2040,38 +1785,17 @@ StaticNpc N(NpcData_Parakarry_Normal)[] = {
                 .detectSize = { 500 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Koopa_Idle,
-            .walk   = ANIM_Koopa_Walk,
-            .run    = ANIM_Koopa_Run,
-            .chase  = ANIM_Koopa_Run,
-            .anim_4 = ANIM_Koopa_Idle,
-            .anim_5 = ANIM_Koopa_Idle,
-            .death  = ANIM_Koopa_Still,
-            .hit    = ANIM_Koopa_Still,
-            .anim_8 = ANIM_Koopa_Still,
-            .anim_9 = ANIM_Koopa_Still,
-            .anim_A = ANIM_Koopa_Still,
-            .anim_B = ANIM_Koopa_Still,
-            .anim_C = ANIM_Koopa_Still,
-            .anim_D = ANIM_Koopa_Still,
-            .anim_E = ANIM_Koopa_Still,
-            .anim_F = ANIM_Koopa_Still,
-        },
+        .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_GenericKoopaC,
     },
     {
         .id = NPC_KoopaWithoutShell,
-        .settings = &N(NpcSettings_ParakarryA),
+        .settings = &N(NpcSettings_Koopa_Wander),
         .pos = { 200.0f, 0.0f, 117.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(D_8024CE14_9E3E34),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2084,120 +1808,40 @@ StaticNpc N(NpcData_Parakarry_Normal)[] = {
                 .detectSize = { 500 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Koopa_Idle,
-            .walk   = ANIM_Koopa_Walk,
-            .run    = ANIM_Koopa_Run,
-            .chase  = ANIM_Koopa_Run,
-            .anim_4 = ANIM_Koopa_Idle,
-            .anim_5 = ANIM_Koopa_Idle,
-            .death  = ANIM_Koopa_Still,
-            .hit    = ANIM_Koopa_Still,
-            .anim_8 = ANIM_Koopa_Still,
-            .anim_9 = ANIM_Koopa_Still,
-            .anim_A = ANIM_Koopa_Still,
-            .anim_B = ANIM_Koopa_Still,
-            .anim_C = ANIM_Koopa_Still,
-            .anim_D = ANIM_Koopa_Still,
-            .anim_E = ANIM_Koopa_Still,
-            .anim_F = ANIM_Koopa_Still,
-        },
+        .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_GenericKoopaD,
     },
     {
-        .id = NPC_Bombomb_01,
-        .settings = &N(NpcSettings_Bombomb_01),
+        .id = NPC_Bobomb_01,
+        .settings = &N(NpcSettings_Bobomb),
         .pos = { 0.0f, 0.0f, -333.0f },
         .yaw = 180,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(D_8024DB48_9E4B68),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldBobomb_Blue_Idle,
-            .walk   = ANIM_WorldBobomb_Blue_Walk,
-            .run    = ANIM_WorldBobomb_Blue_Run,
-            .chase  = ANIM_WorldBobomb_Blue_Run,
-            .anim_4 = ANIM_WorldBobomb_Blue_Idle,
-            .anim_5 = ANIM_WorldBobomb_Blue_Idle,
-            .death  = ANIM_WorldBobomb_Blue_Still,
-            .hit    = ANIM_WorldBobomb_Blue_Still,
-            .anim_8 = ANIM_WorldBobomb_Blue_Still,
-            .anim_9 = ANIM_WorldBobomb_Blue_Still,
-            .anim_A = ANIM_WorldBobomb_Blue_Still,
-            .anim_B = ANIM_WorldBobomb_Blue_Still,
-            .anim_C = ANIM_WorldBobomb_Blue_Still,
-            .anim_D = ANIM_WorldBobomb_Blue_Still,
-            .anim_E = ANIM_WorldBobomb_Blue_Still,
-            .anim_F = ANIM_WorldBobomb_Blue_Still,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = BOBOMB_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombD,
     },
     {
-        .id = NPC_Bombomb_02,
-        .settings = &N(NpcSettings_Bombomb_01),
+        .id = NPC_Bobomb_02,
+        .settings = &N(NpcSettings_Bobomb),
         .pos = { -7.0f, 0.0f, -285.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(D_8024DBA0_9E4BC0),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldBobomb_Green_Idle,
-            .walk   = ANIM_WorldBobomb_Green_Walk,
-            .run    = ANIM_WorldBobomb_Green_Run,
-            .chase  = ANIM_WorldBobomb_Green_Run,
-            .anim_4 = ANIM_WorldBobomb_Green_Idle,
-            .anim_5 = ANIM_WorldBobomb_Green_Idle,
-            .death  = ANIM_WorldBobomb_Green_Still,
-            .hit    = ANIM_WorldBobomb_Green_Still,
-            .anim_8 = ANIM_WorldBobomb_Green_Still,
-            .anim_9 = ANIM_WorldBobomb_Green_Still,
-            .anim_A = ANIM_WorldBobomb_Green_Still,
-            .anim_B = ANIM_WorldBobomb_Green_Still,
-            .anim_C = ANIM_WorldBobomb_Green_Still,
-            .anim_D = ANIM_WorldBobomb_Green_Still,
-            .anim_E = ANIM_WorldBobomb_Green_Still,
-            .anim_F = ANIM_WorldBobomb_Green_Still,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = BOBOMB_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombE,
     },
     {
-        .id = NPC_Bombomb_03,
-        .settings = &N(NpcSettings_Bombomb_01),
+        .id = NPC_Bobomb_03,
+        .settings = &N(NpcSettings_Bobomb),
         .pos = { 47.0f, 0.0f, -140.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(D_8024DC48_9E4C68),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldBobomb_Green_Idle,
-            .walk   = ANIM_WorldBobomb_Green_Walk,
-            .run    = ANIM_WorldBobomb_Green_Run,
-            .chase  = ANIM_WorldBobomb_Green_Run,
-            .anim_4 = ANIM_WorldBobomb_Green_Idle,
-            .anim_5 = ANIM_WorldBobomb_Green_Idle,
-            .death  = ANIM_WorldBobomb_Green_Still,
-            .hit    = ANIM_WorldBobomb_Green_Still,
-            .anim_8 = ANIM_WorldBobomb_Green_Still,
-            .anim_9 = ANIM_WorldBobomb_Green_Still,
-            .anim_A = ANIM_WorldBobomb_Green_Still,
-            .anim_B = ANIM_WorldBobomb_Green_Still,
-            .anim_C = ANIM_WorldBobomb_Green_Still,
-            .anim_D = ANIM_WorldBobomb_Green_Still,
-            .anim_E = ANIM_WorldBobomb_Green_Still,
-            .anim_F = ANIM_WorldBobomb_Green_Still,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = BOBOMB_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombF,
     },
     {
@@ -2207,63 +1851,21 @@ StaticNpc N(NpcData_Parakarry_Normal)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(D_8024E090_9E50B0),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Kolorado_Idle,
-            .walk   = ANIM_Kolorado_Walk,
-            .run    = ANIM_Kolorado_Run,
-            .chase  = ANIM_Kolorado_Run,
-            .anim_4 = ANIM_Kolorado_Idle,
-            .anim_5 = ANIM_Kolorado_Idle,
-            .death  = ANIM_Kolorado_Idle,
-            .hit    = ANIM_Kolorado_Idle,
-            .anim_8 = ANIM_Kolorado_Idle,
-            .anim_9 = ANIM_Kolorado_Idle,
-            .anim_A = ANIM_Kolorado_Idle,
-            .anim_B = ANIM_Kolorado_Idle,
-            .anim_C = ANIM_Kolorado_Idle,
-            .anim_D = ANIM_Kolorado_Idle,
-            .anim_E = ANIM_Kolorado_Idle,
-            .anim_F = ANIM_Kolorado_Idle,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
     },
 };
 
 StaticNpc N(NpcData_Fuzzy_04) = {
     .id = NPC_Fuzzy_04,
-    .settings = &N(NpcSettings_Bombette),
+    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(D_8024B450_9E2470),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_Fuzzy_Walk,
-        .walk   = ANIM_Fuzzy_Walk,
-        .run    = ANIM_Fuzzy_Run,
-        .chase  = ANIM_Fuzzy_Run,
-        .anim_4 = ANIM_Fuzzy_Idle,
-        .anim_5 = ANIM_Fuzzy_Idle,
-        .death  = ANIM_Fuzzy_Hurt,
-        .hit    = ANIM_Fuzzy_Hurt,
-        .anim_8 = ANIM_Fuzzy_Run,
-        .anim_9 = ANIM_Fuzzy_Run,
-        .anim_A = ANIM_Fuzzy_Run,
-        .anim_B = ANIM_Fuzzy_Run,
-        .anim_C = ANIM_Fuzzy_Run,
-        .anim_D = ANIM_Fuzzy_Run,
-        .anim_E = ANIM_Fuzzy_Run,
-        .anim_F = ANIM_Fuzzy_Run,
-    },
+    .drops = NPC_NO_DROPS,
+    .animations = FUZZY_ANIMS,
 };
 
 StaticNpc N(NpcData_KoopaKoot)[] = {
@@ -2274,11 +1876,7 @@ StaticNpc N(NpcData_KoopaKoot)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_KoopaKoot),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaKoot_Idle,
             .walk   = ANIM_KoopaKoot_Idle,
@@ -2306,11 +1904,7 @@ StaticNpc N(NpcData_KoopaKoot)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(D_8024E8B0_9E58D0),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .animations = {
             .idle   = ANIM_KoloradoWife_Idle,
             .walk   = ANIM_KoloradoWife_Walk,
@@ -2333,48 +1927,23 @@ StaticNpc N(NpcData_KoopaKoot)[] = {
     },
     {
         .id = NPC_Koopa_02,
-        .settings = &N(NpcSettings_ParakarryB),
+        .settings = &N(NpcSettings_Koopa),
         .pos = { -307.0f, 0.0f, 97.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(D_8024D040_9E4060),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Koopa_Idle,
-            .walk   = ANIM_Koopa_Walk,
-            .run    = ANIM_Koopa_Run,
-            .chase  = ANIM_Koopa_Run,
-            .anim_4 = ANIM_Koopa_Idle,
-            .anim_5 = ANIM_Koopa_Idle,
-            .death  = ANIM_Koopa_Still,
-            .hit    = ANIM_Koopa_Still,
-            .anim_8 = ANIM_Koopa_Still,
-            .anim_9 = ANIM_Koopa_Still,
-            .anim_A = ANIM_Koopa_Still,
-            .anim_B = ANIM_Koopa_Still,
-            .anim_C = ANIM_Koopa_Still,
-            .anim_D = ANIM_Koopa_Still,
-            .anim_E = ANIM_Koopa_Still,
-            .anim_F = ANIM_Koopa_Still,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_SenseOfJustice,
     },
     {
         .id = NPC_Koopa_03,
-        .settings = &N(NpcSettings_KoopaWithoutShell),
+        .settings = &N(NpcSettings_KoopaWithoutShell_Patrol),
         .pos = { 285.0f, 0.0f, 223.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(D_8024D164_9E4184),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -2389,24 +1958,7 @@ StaticNpc N(NpcData_KoopaKoot)[] = {
                 .detectSize = { 0 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Koopa_Idle,
-            .walk   = ANIM_Koopa_Walk,
-            .run    = ANIM_Koopa_Run,
-            .chase  = ANIM_Koopa_Run,
-            .anim_4 = ANIM_Koopa_Idle,
-            .anim_5 = ANIM_Koopa_Idle,
-            .death  = ANIM_Koopa_Still,
-            .hit    = ANIM_Koopa_Still,
-            .anim_8 = ANIM_Koopa_Still,
-            .anim_9 = ANIM_Koopa_Still,
-            .anim_A = ANIM_Koopa_Still,
-            .anim_B = ANIM_Koopa_Still,
-            .anim_C = ANIM_Koopa_Still,
-            .anim_D = ANIM_Koopa_Still,
-            .anim_E = ANIM_Koopa_Still,
-            .anim_F = ANIM_Koopa_Still,
-        },
+        .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_PrettyMellow,
     },
 };
@@ -2414,16 +1966,12 @@ StaticNpc N(NpcData_KoopaKoot)[] = {
 StaticNpc N(NpcData_Parakarry)[] = {
     {
         .id = NPC_Parakarry,
-        .settings = &N(NpcSettings_ParakarryB),
+        .settings = &N(NpcSettings_Koopa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(D_8024E97C_9E599C),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldParakarry_Idle,
             .walk   = ANIM_WorldParakarry_Walk,
@@ -2445,16 +1993,12 @@ StaticNpc N(NpcData_Parakarry)[] = {
     },
     {
         .id = NPC_Bombette,
-        .settings = &N(NpcSettings_ParakarryB),
+        .settings = &N(NpcSettings_Koopa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(D_8024E9BC_9E59DC),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldBombette_Idle,
             .walk   = ANIM_WorldBombette_Walk,
@@ -2476,16 +2020,12 @@ StaticNpc N(NpcData_Parakarry)[] = {
     },
     {
         .id = NPC_KoloradoWife_01,
-        .settings = &N(NpcSettings_ParakarryB),
+        .settings = &N(NpcSettings_Koopa),
         .pos = { -328.0f, 0.0f, -180.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(D_8024E9FC_9E5A1C),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NPC_NO_DROPS,
         .animations = {
             .idle   = ANIM_KoloradoWife_Idle,
             .walk   = ANIM_KoloradoWife_Walk,
@@ -2515,37 +2055,16 @@ StaticNpc N(NpcData_ChuckQuizmo) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .initVarCount = 1,
-    .initVar = { .value = 0x00020201 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_ChuckQuizmo_Idle,
-        .walk   = ANIM_ChuckQuizmo_Walk,
-        .run    = ANIM_ChuckQuizmo_Run,
-        .chase  = ANIM_ChuckQuizmo_Run,
-        .anim_4 = ANIM_ChuckQuizmo_Idle,
-        .anim_5 = ANIM_ChuckQuizmo_Idle,
-        .death  = ANIM_ChuckQuizmo_Still,
-        .hit    = ANIM_ChuckQuizmo_Still,
-        .anim_8 = ANIM_ChuckQuizmo_Run,
-        .anim_9 = ANIM_ChuckQuizmo_Run,
-        .anim_A = ANIM_ChuckQuizmo_Run,
-        .anim_B = ANIM_ChuckQuizmo_Run,
-        .anim_C = ANIM_ChuckQuizmo_Run,
-        .anim_D = ANIM_ChuckQuizmo_Run,
-        .anim_E = ANIM_ChuckQuizmo_Run,
-        .anim_F = ANIM_ChuckQuizmo_Run,
-    },
+    .initVar = { .bytes = { 0, QUIZ_AREA_NOK, QUIZ_COUNT_NOK, QUIZ_MAP_NOK_02 }},
+    .drops = NPC_NO_DROPS,
+    .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,
 };
 
 NpcGroupList N(CrisisNPCs) = {
     NPC_GROUP(N(NpcData_Parakarry_Crisis)),
     NPC_GROUP(N(NpcData_KoopaKoot)),
-    NPC_GROUP(N(NpcData_Fuzzy_02)),
+    NPC_GROUP(N(NpcData_MiscFuzzy1)),
     NPC_GROUP(N(NpcData_Fuzzy_03)),
     {}
 };

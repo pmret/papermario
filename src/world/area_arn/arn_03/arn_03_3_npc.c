@@ -155,7 +155,7 @@ EvtScript N(EVS_NpcInteract_Boo_02) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007E)
     EVT_END_SWITCH
     EVT_IF_EQ(GF_ARN03_RecievedPackage, FALSE)
-        EVT_IF_EQ(GB_KootFavor_Current, 18)
+        EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH7_2)
             EVT_EXEC_WAIT(N(EVS_PlayerReact))
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007F)
             EVT_CALL(EndSpeech, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0)

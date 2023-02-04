@@ -1,7 +1,7 @@
 #include "nok_01.h"
 
 EvtScript N(EVS_ExitWalk_nok_13_1) = {
-    EVT_IF_EQ(GB_KootFavor_State, 2)
+    EVT_IF_EQ(GB_KootFavor_State, KOOT_FAVOR_STATE_2)
         EVT_SET(GF_KootFavor_LeftKoopaVillage, TRUE)
     EVT_END_IF
     EVT_CALL(N(func_802428B8_9C7C98))

@@ -165,7 +165,7 @@ EvtScript N(EVS_NpcInteract_Franky) = {
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(GB_KootFavor_Current, 13)
+    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH5_3)
         EVT_IF_EQ(GF_OBK01_Gift_OldPhoto, FALSE)
             EVT_SET(GF_OBK01_Gift_OldPhoto, TRUE)
             EVT_EXEC_WAIT(N(EVS_PlayerReaction_GetOldPhoto))

@@ -5,14 +5,6 @@
 #include "world/common/npc/KoopaWithoutShell_Wander.inc.c"
 #include "world/common/npc/Koopa_Wander.inc.c"
 
-//TODO -- possibly part of Koopa_Wander?
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 42,
-    .radius = 24,
-    .ai = &N(EVS_NpcAI_Koopa_Wander),
-    .level = 99,
-};
-
 NpcSettings N(NpcSettings_Unused2) = {
     .height = 35,
     .radius = 24,

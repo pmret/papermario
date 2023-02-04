@@ -10899,7 +10899,7 @@ segments:
     - [0x9D7020, c, nok_02_2_main]
     - [0x9D7770, c, nok_02_3_entity]
     - [0x9D7990, c, nok_02_4_rooms]
-    - [0x9D7AA0, c, nok_02_5]
+    - [0x9D7AA0, c, nok_02_5_bookshelf]
     - [0x9D7AA0, c, nok_02_6_npc]
     - [0x9DA8F0, c, nok_02_7_demo]
     - [0x9DA9E0, c, nok_02_8_koot_favors]

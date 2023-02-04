@@ -273,8 +273,8 @@ s32 N(D_80246B30_9DDB50)[] = {
 };
 
 s32 N(D_80246B3C_9DDB5C)[] = {
-    NPC_Bombomb_01,
-    NPC_Bombomb_02,
+    NPC_Bobomb_01,
+    NPC_Bobomb_02,
     -1
 };
 
@@ -285,25 +285,125 @@ s32 N(D_80246B48_9DDB68)[] = {
 
 EvtScript N(EVS_80246B50) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        EVT_CALL(MakeDoorAdvanced, 0, EVT_PTR(N(D_802462A0_9DD2C0)), EVT_PTR(N(D_802462D0_9DD2F0)), EVT_PTR(N(D_80246370_9DD390)), EVT_PTR(N(D_80246A2C_9DDA4C)), COLLIDER_o310, COLLIDER_o313, MODEL_sakuji, EVT_PTR(N(D_80246B2C_9DDB4C)))
-        EVT_CALL(MakeDoorAdvanced, 0, EVT_PTR(N(D_802463DC_9DD3FC)), EVT_PTR(N(D_8024640C_9DD42C)), 0, 0, COLLIDER_o314, COLLIDER_o317, MODEL_o271, 0)
+        EVT_CALL(MakeDoorAdvanced,
+            0,
+            EVT_PTR(N(D_802462A0_9DD2C0)),
+            EVT_PTR(N(D_802462D0_9DD2F0)),
+            EVT_PTR(N(D_80246370_9DD390)),
+            EVT_PTR(N(D_80246A2C_9DDA4C)),
+            COLLIDER_o310,
+            COLLIDER_o313,
+            MODEL_sakuji,
+            EVT_PTR(N(D_80246B2C_9DDB4C)))
+        EVT_CALL(MakeDoorAdvanced,
+            0,
+            EVT_PTR(N(D_802463DC_9DD3FC)),
+            EVT_PTR(N(D_8024640C_9DD42C)),
+            NULL,
+            NULL,
+            COLLIDER_o314,
+            COLLIDER_o317,
+            MODEL_o271,
+            NULL)
     EVT_ELSE
         EVT_IF_EQ(GF_NOK11_Defeated_KentC, TRUE)
-            EVT_CALL(MakeDoorAdvanced, 0, EVT_PTR(N(D_802462A0_9DD2C0)), EVT_PTR(N(D_802462D0_9DD2F0)), EVT_PTR(N(D_80246370_9DD390)), EVT_PTR(N(D_80246A2C_9DDA4C)), COLLIDER_o310, COLLIDER_o313, MODEL_sakuji, EVT_PTR(N(D_80246B2C_9DDB4C)))
-            EVT_CALL(MakeDoorAdvanced, 0, EVT_PTR(N(D_802463DC_9DD3FC)), EVT_PTR(N(D_8024640C_9DD42C)), 0, 0, COLLIDER_o314, COLLIDER_o317, MODEL_o271, 0)
+            EVT_CALL(MakeDoorAdvanced,
+                0,
+                EVT_PTR(N(D_802462A0_9DD2C0)),
+                EVT_PTR(N(D_802462D0_9DD2F0)),
+                EVT_PTR(N(D_80246370_9DD390)),
+                EVT_PTR(N(D_80246A2C_9DDA4C)),
+                COLLIDER_o310,
+                COLLIDER_o313,
+                MODEL_sakuji,
+                EVT_PTR(N(D_80246B2C_9DDB4C)))
+            EVT_CALL(MakeDoorAdvanced,
+                0,
+                EVT_PTR(N(D_802463DC_9DD3FC)),
+                EVT_PTR(N(D_8024640C_9DD42C)),
+                NULL,
+                NULL,
+                COLLIDER_o314,
+                COLLIDER_o317,
+                MODEL_o271,
+                NULL)
         EVT_ELSE
-            EVT_CALL(MakeDoorAdvanced, 0, EVT_PTR(N(D_802462A0_9DD2C0)), EVT_PTR(N(D_802462D0_9DD2F0)), EVT_PTR(N(D_80246370_9DD390)), EVT_PTR(N(D_80246A2C_9DDA4C)), COLLIDER_o310, COLLIDER_o313, MODEL_sakuji, EVT_PTR(N(D_80246B24_9DDB44)))
-            EVT_CALL(MakeDoorAdvanced, 0, EVT_PTR(N(D_802463DC_9DD3FC)), EVT_PTR(N(D_8024640C_9DD42C)), 0, 0, COLLIDER_o314, COLLIDER_o317, MODEL_o271, 0)
+            EVT_CALL(MakeDoorAdvanced,
+                0,
+                EVT_PTR(N(D_802462A0_9DD2C0)),
+                EVT_PTR(N(D_802462D0_9DD2F0)),
+                EVT_PTR(N(D_80246370_9DD390)),
+                EVT_PTR(N(D_80246A2C_9DDA4C)),
+                COLLIDER_o310,
+                COLLIDER_o313,
+                MODEL_sakuji,
+                EVT_PTR(N(D_80246B24_9DDB44)))
+            EVT_CALL(MakeDoorAdvanced,
+                0,
+                EVT_PTR(N(D_802463DC_9DD3FC)),
+                EVT_PTR(N(D_8024640C_9DD42C)),
+                NULL,
+                NULL,
+                COLLIDER_o314,
+                COLLIDER_o317,
+                MODEL_o271,
+                NULL)
         EVT_END_IF
     EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-        EVT_CALL(MakeDoorAdvanced, 512, EVT_PTR(N(D_8024653C_9DD55C)), EVT_PTR(N(D_80246724_9DD744)), 0, EVT_PTR(N(D_80246928_9DD948)), COLLIDER_o284, COLLIDER_o287, MODEL_kameki, EVT_PTR(N(D_80246B30_9DDB50)))
-        EVT_CALL(MakeDoorAdvanced, 514, EVT_PTR(N(D_8024656C_9DD58C)), EVT_PTR(N(D_80246724_9DD744)), 0, EVT_PTR(N(D_80246928_9DD948)), COLLIDER_o302, COLLIDER_o299, MODEL_kameki, EVT_PTR(N(D_80246B30_9DDB50)))
+    EVT_IF_LT(GB_StoryProgress,
+        STORY_CH1_KOOPER_JOINED_PARTY)
+        EVT_CALL(MakeDoorAdvanced,
+            0x200,
+            EVT_PTR(N(D_8024653C_9DD55C)),
+            EVT_PTR(N(D_80246724_9DD744)),
+            NULL,
+            EVT_PTR(N(D_80246928_9DD948)),
+            COLLIDER_o284,
+            COLLIDER_o287,
+            MODEL_kameki,
+            EVT_PTR(N(D_80246B30_9DDB50)))
+        EVT_CALL(MakeDoorAdvanced,
+            0x202,
+            EVT_PTR(N(D_8024656C_9DD58C)),
+            EVT_PTR(N(D_80246724_9DD744)),
+            NULL,
+            EVT_PTR(N(D_80246928_9DD948)),
+            COLLIDER_o302,
+            COLLIDER_o299,
+            MODEL_kameki,
+            EVT_PTR(N(D_80246B30_9DDB50)))
     EVT_ELSE
-        EVT_CALL(MakeDoorAdvanced, 512, EVT_PTR(N(D_8024653C_9DD55C)), EVT_PTR(N(D_80246724_9DD744)), 0, EVT_PTR(N(D_80246928_9DD948)), COLLIDER_o284, COLLIDER_o287, MODEL_kameki, EVT_PTR(N(D_80246B3C_9DDB5C)))
-        EVT_CALL(MakeDoorAdvanced, 514, EVT_PTR(N(D_8024656C_9DD58C)), EVT_PTR(N(D_80246724_9DD744)), 0, EVT_PTR(N(D_80246928_9DD948)), COLLIDER_o302, COLLIDER_o299, MODEL_kameki, EVT_PTR(N(D_80246B3C_9DDB5C)))
+        EVT_CALL(MakeDoorAdvanced,
+            0x200,
+            EVT_PTR(N(D_8024653C_9DD55C)),
+            EVT_PTR(N(D_80246724_9DD744)),
+            NULL,
+            EVT_PTR(N(D_80246928_9DD948)),
+            COLLIDER_o284,
+            COLLIDER_o287,
+            MODEL_kameki,
+            EVT_PTR(N(D_80246B3C_9DDB5C)))
+        EVT_CALL(MakeDoorAdvanced,
+            0x202,
+            EVT_PTR(N(D_8024656C_9DD58C)),
+            EVT_PTR(N(D_80246724_9DD744)),
+            NULL,
+            EVT_PTR(N(D_80246928_9DD948)),
+            COLLIDER_o302,
+            COLLIDER_o299,
+            MODEL_kameki,
+            EVT_PTR(N(D_80246B3C_9DDB5C)))
     EVT_END_IF
-    EVT_CALL(MakeDoorAdvanced, 0, EVT_PTR(N(D_802467EC_9DD80C)), EVT_PTR(N(D_8024681C_9DD83C)), EVT_PTR(N(D_802468BC_9DD8DC)), EVT_PTR(N(D_80246AA8_9DDAC8)), COLLIDER_o226, COLLIDER_o283, MODEL_mura, EVT_PTR(N(D_80246B48_9DDB68)))
+    EVT_CALL(MakeDoorAdvanced,
+        0,
+        EVT_PTR(N(D_802467EC_9DD80C)),
+        EVT_PTR(N(D_8024681C_9DD83C)),
+        EVT_PTR(N(D_802468BC_9DD8DC)),
+        EVT_PTR(N(D_80246AA8_9DDAC8)),
+        COLLIDER_o226,
+        COLLIDER_o283,
+        MODEL_mura,
+        EVT_PTR(N(D_80246B48_9DDB68)))
     EVT_SET(LVar0, 3)
     EVT_EXEC(N(D_80246A2C_9DDA4C))
     EVT_EXEC(N(D_80246928_9DD948))

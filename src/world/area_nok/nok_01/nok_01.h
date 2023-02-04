@@ -42,11 +42,11 @@ enum {
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_SetupMusic);
 extern EvtScript N(EVS_PlayRestingSong);
-extern EvtScript N(EVS_BreakBlock_ShellAtop);
+extern EvtScript N(EVS_BreakBlock_DropShell);
+extern EvtScript N(EVS_Scene_RecoverTreeShell);
 extern EvtScript N(EVS_SetupShop);
 extern EvtScript N(EVS_SetupRadio);
 extern EvtScript N(EVS_MakeRooms);
-extern EvtScript N(EVS_Scene_RecoverTreeShell);
 extern EvtScript N(EVS_80242C38);
 extern EvtScript N(EVS_80242DE0);
 extern EvtScript N(EVS_SetupFoliage);
