@@ -73,11 +73,12 @@ EvtScript N(EVS_LetterReward_Kolorado) = {
     EVT_END
 };
 
-s32 N(Kolorado_ArtifactList)[] = {
-    ITEM_ARTIFACT, ITEM_NONE
+s32 N(ItemList_Artifact)[] = {
+    ITEM_ARTIFACT,
+    ITEM_NONE
 };
 
-EvtScript N(EVS_Kolorado_ArtifactReward) = {
+EvtScript N(EVS_ArtifactReward_Kolorado) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Port_008E)
     EVT_GIVE_STAR_PIECE()
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Port_008F)
@@ -86,7 +87,7 @@ EvtScript N(EVS_Kolorado_ArtifactReward) = {
     EVT_END
 };
 
-EvtScript N(EVS_Kolorado_TryArtifactTrade) = {
+EvtScript N(EVS_ArtifactPrompt_Kolorado) = {
     EVT_IF_EQ(GF_SBK_GaveArtifactToKolorado, TRUE)
         EVT_RETURN
     EVT_END_IF
@@ -106,21 +107,21 @@ EvtScript N(EVS_Kolorado_TryArtifactTrade) = {
         EVT_SET(LVar0, MSG_MAC_Port_008B)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, LVar0)
-    EVT_SET(LVar0, EVT_PTR(N(Kolorado_ArtifactList)))
+    EVT_SET(LVar0, EVT_PTR(N(ItemList_Artifact)))
     EVT_SET(LVar1, 1)
     EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
     EVT_SWITCH(LVar0)
         EVT_CASE_GE(1)
-            EVT_EXEC_WAIT(N(EVS_Kolorado_ArtifactReward))
+            EVT_EXEC_WAIT(N(EVS_ArtifactReward_Kolorado))
             EVT_BREAK_SWITCH
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Port_008C)
-            EVT_SET(LVar0, EVT_PTR(N(Kolorado_ArtifactList)))
+            EVT_SET(LVar0, EVT_PTR(N(ItemList_Artifact)))
             EVT_SET(LVar1, 1)
             EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
             EVT_SWITCH(LVar0)
                 EVT_CASE_GE(1)
-                    EVT_EXEC_WAIT(N(EVS_Kolorado_ArtifactReward))
+                    EVT_EXEC_WAIT(N(EVS_ArtifactReward_Kolorado))
                 EVT_CASE_DEFAULT
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Port_008D)
             EVT_END_SWITCH
@@ -1153,7 +1154,7 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
         EVT_CASE_LT(STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
             EVT_CALL(SpeakToPlayer, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Port_00AC)
     EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_Kolorado_TryArtifactTrade))
+    EVT_EXEC_WAIT(N(EVS_ArtifactPrompt_Kolorado))
     EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado))
     EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
     EVT_IF_NE(LVarC, 0)

@@ -9,13 +9,10 @@
 #include "mapfs/nok_02_shape.h"
 #include "mapfs/nok_02_hit.h"
 
-#include "sprite/npc/ChuckQuizmo.h"
 #include "sprite/npc/WorldParakarry.h"
 #include "sprite/npc/KooperWithoutShell.h"
-#include "sprite/npc/WorldGoombario.h"
-#include "sprite/npc/Fuzzy.h"
 #include "sprite/npc/KoopaWithoutShell.h"
-#include "sprite/npc/Koopa.h"
+#include "sprite/npc/WorldGoombario.h"
 #include "sprite/npc/WorldKooper.h"
 #include "sprite/npc/WorldBobomb.h"
 #include "sprite/npc/WorldBombette.h"
@@ -25,7 +22,7 @@
 
 enum {
     NPC_Koopa_01                = 0,
-    NPC_FuzzyThief              = 1, // NPC_Bombette
+    NPC_FuzzyThief              = 1,
     NPC_KoopaShell_01           = 2,
     NPC_Koopa_02                = 3,
     NPC_KoopaShell_02           = 4,
@@ -39,7 +36,7 @@ enum {
     NPC_FuzzyBoss               = 12,
     NPC_MiscFuzzy1              = 13,
     NPC_MiscFuzzy2              = 14,
-    NPC_Fuzzy_04                = 15,
+    NPC_Fuzzy_Later             = 15,
     NPC_Bobomb_01               = 16,
     NPC_Bobomb_02               = 17,
     NPC_Bobomb_03               = 18,
