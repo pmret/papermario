@@ -345,7 +345,7 @@ EvtScript N(EVS_NpcInteract_Yoshi_03) = {
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_006D)
                 EVT_SET(LVar0, ITEM_MELON)
                 EVT_SET(LVar1, ITEM_TYPE_CONSUMABLE)
-                EVT_EXEC_WAIT(N(GiveKeyReward)) // misuse?
+                EVT_EXEC_WAIT(N(GiveItemReward)) // misuse?
                 EVT_CALL(AddItem, ITEM_MELON, LVar0)
             EVT_END_IF
             EVT_RETURN

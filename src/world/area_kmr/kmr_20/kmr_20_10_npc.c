@@ -32,14 +32,7 @@ API_CALLABLE(N(PlaySpringLaunchAnimation)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(EVS_HandItemOver) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
-    EVT_WAIT(20)
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/atomic/MarioSalute.inc.c"
 
 EvtScript N(EVS_KootFavorCheck_Luigi) = {
     EVT_IF_NE(GB_KootFavor_Current, KOOT_FAVOR_CH3_1)
@@ -49,7 +42,7 @@ EvtScript N(EVS_KootFavorCheck_Luigi) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Luigi_Idle)
-    EVT_EXEC_WAIT(N(EVS_HandItemOver))
+    EVT_EXEC_WAIT(N(EVS_MarioSalute))
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Luigi_Talk, ANIM_Luigi_Idle, 0, MSG_CH0_0103)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
     EVT_WAIT(40)
@@ -69,7 +62,7 @@ EvtScript N(EVS_KootFavorCheck_Luigi) = {
     EVT_WAIT(10)
     EVT_SET(LVar0, ITEM_KOOT_MERLUVLEE_AUTOGRAPH)
     EVT_SET(LVar1, 1)
-    EVT_EXEC_WAIT(N(GiveKeyReward))
+    EVT_EXEC_WAIT(N(GiveItemReward))
     EVT_CALL(AddKeyItem, LVar0)
     EVT_SET(GF_KMR20_Gift_LuigisAutograph, TRUE)
     EVT_IF_GE(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)

@@ -3,23 +3,10 @@
 #include "world/common/npc/Koopa_Wander.inc.c"
 #include "world/common/npc/KoopaWithoutShell_Patrol.inc.c"
 #include "world/common/npc/Koopa.inc.c"
-
 #include "world/common/npc/Kolorado.inc.c"
-
-NpcSettings N(NpcSettings_KoloradoWife_02) = {
-    .height = 38,
-    .radius = 24,
-    .level = 99,
-};
-
+#include "world/common/npc/KoloradoWife.inc.c"
 #include "world/common/enemy/complete/Fuzzy.inc.c"
-
-NpcSettings N(NpcSettings_KoopaKoot) = {
-    .height = 32,
-    .radius = 24,
-    .level = 99,
-};
-
+#include "world/common/npc/KoopaKoot.inc.c"
 #include "world/common/npc/Bobomb.inc.c"
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
@@ -28,14 +15,7 @@ NpcSettings N(NpcSettings_KoopaKoot) = {
 MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/KeyItemChoice.inc.c"
 
-EvtScript N(D_8024988C_9E08AC) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
-    EVT_WAIT(20)
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/atomic/MarioSalute.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
 
@@ -87,18 +67,17 @@ EvtScript N(EVS_GetBackIntoShell) = {
 
 #include "world/common/todo/SwitchToPartner.inc.c"
 
-
-API_CALLABLE(N(func_80243010_9DA030)) {
+API_CALLABLE(N(SpawnExplosionEffect)) {
     Bytecode* args = script->ptrReadPos;
-    f32 temp_f20;
-    f32 temp_f22;
-    f32 f3;
+    f32 posY;
+    f32 posX;
+    f32 posZ;
 
-    temp_f22 = evt_get_variable(script, *args++);
-    temp_f20 = evt_get_variable(script, *args++);
-    f3 = evt_get_variable(script, *args++);
+    posX = evt_get_variable(script, *args++);
+    posY = evt_get_variable(script, *args++);
+    posZ = evt_get_variable(script, *args++);
 
-    fx_explosion(0, temp_f22, temp_f20 + 15.0f, f3);
+    fx_explosion(0, posX, posY + 15.0f, posZ);
     exec_ShakeCam1(0, 0, 20);
     return ApiStatus_DONE2;
 }
@@ -312,27 +291,27 @@ EvtScript N(EVS_NpcInteract_Kooper_01) = {
         EVT_END_THREAD
         EVT_THREAD
             EVT_CALL(PlayerMoveTo, -25, -130, 10)
-            EVT_CALL(PlayerFaceNpc, NPC_Kooper_01, FALSE)
+            EVT_CALL(PlayerFaceNpc, NPC_Kooper, FALSE)
         EVT_END_THREAD
         EVT_THREAD
             EVT_CALL(N(SwitchToPartner), 1)
             EVT_CALL(DisablePartnerAI, 0)
             EVT_CALL(NpcMoveTo, NPC_PARTNER, -55, -130, 15)
-            EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Kooper_01, 0)
+            EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Kooper, 0)
             EVT_CALL(EnablePartnerAI)
         EVT_END_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_Kooper_01, NPC_FLAG_100, TRUE)
-        EVT_CALL(SetNpcPos, NPC_Kooper_01, 0, 0, -207)
-        EVT_CALL(SetNpcAnimation, NPC_Kooper_01, ANIM_KooperWithoutShell_Idle)
+        EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcPos, NPC_Kooper, 0, 0, -207)
+        EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
         EVT_WAIT(35)
-        EVT_CALL(SetNpcAnimation, NPC_Kooper_01, ANIM_KooperWithoutShell_Run)
+        EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Run)
         EVT_THREAD
             EVT_LOOP(30)
-                EVT_CALL(PlayerFaceNpc, NPC_Kooper_01, FALSE)
+                EVT_CALL(PlayerFaceNpc, NPC_Kooper, FALSE)
                 EVT_WAIT(1)
             EVT_END_LOOP
         EVT_END_THREAD
-        EVT_CALL(NpcMoveTo, NPC_Kooper_01, 0, -148, 20)
+        EVT_CALL(NpcMoveTo, NPC_Kooper, 0, -148, 20)
         EVT_THREAD
             EVT_CALL(MakeLerp, 90, 0, 30, EASING_COS_IN_OUT)
             EVT_LABEL(20)
@@ -345,27 +324,27 @@ EvtScript N(EVS_NpcInteract_Kooper_01) = {
             EVT_CALL(PlaySoundAt, SOUND_BASIC_DOOR_CLOSE, 0, 0, 0, -180)
             EVT_CALL(SetGroupEnabled, MODEL_g111, 0)
         EVT_END_THREAD
-        EVT_CALL(NpcMoveTo, NPC_Kooper_01, 25, -130, 10)
-        EVT_CALL(SetNpcAnimation, NPC_Kooper_01, ANIM_KooperWithoutShell_Idle)
-        EVT_CALL(NpcFacePlayer, NPC_Kooper_01, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Kooper_01, NPC_FLAG_100, FALSE)
+        EVT_CALL(NpcMoveTo, NPC_Kooper, 25, -130, 10)
+        EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
+        EVT_CALL(NpcFacePlayer, NPC_Kooper, 0)
+        EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_100, FALSE)
         EVT_WAIT(10)
-        EVT_CALL(SpeakToPlayer, NPC_Kooper_01, ANIM_KooperWithoutShell_Celebrate, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00B5)
+        EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Celebrate, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00B5)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
         EVT_WAIT(15)
-        EVT_CALL(EndSpeech, NPC_Kooper_01, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Kooper_01, ANIM_KooperWithoutShell_Celebrate)
+        EVT_CALL(EndSpeech, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0)
+        EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Celebrate)
         EVT_WAIT(30)
-        EVT_CALL(SetNpcAnimation, NPC_Kooper_01, ANIM_KooperWithoutShell_Idle)
-        EVT_CALL(EndSpeech, NPC_Kooper_01, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0)
+        EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
+        EVT_CALL(EndSpeech, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0)
         EVT_CALL(AdjustCam, CAM_DEFAULT, 6, 30, EVT_FLOAT(225.0), EVT_FLOAT(17.0), EVT_FLOAT(-8.5))
         EVT_WAIT(5)
-        EVT_CALL(SpeakToPlayer, NPC_Kooper_01, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00B6)
+        EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00B6)
         EVT_WAIT(10)
-        EVT_CALL(SetNpcAnimation, NPC_Kooper_01, ANIM_KooperWithoutShell_Bow)
+        EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Bow)
         EVT_WAIT(30)
-        EVT_CALL(SetNpcAnimation, NPC_Kooper_01, ANIM_KooperWithoutShell_Idle)
-        EVT_CALL(EndSpeech, NPC_Kooper_01, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0)
+        EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
+        EVT_CALL(EndSpeech, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0)
         EVT_CALL(AdjustCam, CAM_DEFAULT, 4, -30, EVT_FLOAT(225.0), EVT_FLOAT(17.0), EVT_FLOAT(-8.5))
         EVT_WAIT(10)
         EVT_THREAD
@@ -377,19 +356,19 @@ EvtScript N(EVS_NpcInteract_Kooper_01) = {
         EVT_CALL(EnablePartnerAI)
         EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(90.0), 0, EVT_FLOAT(375.0), EVT_FLOAT(17.0), EVT_FLOAT(-5.5))
         EVT_WAIT(10)
-        EVT_CALL(PlayerFaceNpc, NPC_Kooper_01, FALSE)
+        EVT_CALL(PlayerFaceNpc, NPC_Kooper, FALSE)
         EVT_WAIT(10)
-        EVT_CALL(SpeakToPlayer, NPC_Kooper_01, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00B8)
-        EVT_CALL(BindNpcInteract, NPC_Kooper_01, EVT_PTR(N(EVS_NpcInteract_Kooper_01)))
+        EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00B8)
+        EVT_CALL(BindNpcInteract, NPC_Kooper, EVT_PTR(N(EVS_NpcInteract_Kooper_01)))
         EVT_THREAD
             EVT_CALL(ResetCam, CAM_DEFAULT, 3)
         EVT_END_THREAD
         EVT_RETURN
     EVT_END_IF
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_HID_IN_TREE)
-        EVT_CALL(SpeakToPlayer, NPC_Kooper_01, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00BA)
+        EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00BA)
     EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_Kooper_01, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00BB)
+        EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00BB)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -410,21 +389,21 @@ EvtScript N(EVS_8024A908) = {
     EVT_END_IF
     EVT_SET(MF_Unk_00, TRUE)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SpeakToPlayer, NPC_Fuzzy_01, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 0, MSG_CH1_00B9)
+    EVT_CALL(SpeakToPlayer, NPC_FuzzyBoss, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 0, MSG_CH1_00B9)
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, ANIM_Fuzzy_Walk)
-    EVT_CALL(GetNpcPos, NPC_Fuzzy_01, LVarA, LVarB, LVarC)
+    EVT_CALL(SetNpcAnimation, NPC_FuzzyBoss, ANIM_Fuzzy_Walk)
+    EVT_CALL(GetNpcPos, NPC_FuzzyBoss, LVarA, LVarB, LVarC)
     EVT_SET(LVarD, LVarA)
     EVT_ADD(LVarD, -5)
     EVT_LABEL(10)
         EVT_THREAD
-            EVT_CALL(SetNpcJumpscale, NPC_Kooper_02, 2)
-            EVT_CALL(NpcJump0, NPC_Kooper_02, LVarD, 0, LVarC, 12)
+            EVT_CALL(SetNpcJumpscale, NPC_KoopersShell, 2)
+            EVT_CALL(NpcJump0, NPC_KoopersShell, LVarD, 0, LVarC, 12)
         EVT_END_THREAD
         EVT_WAIT(1)
-        EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_01, 2)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_331, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, 0, LVarC, 12)
+        EVT_CALL(SetNpcJumpscale, NPC_FuzzyBoss, 2)
+        EVT_CALL(PlaySoundAtNpc, NPC_FuzzyBoss, SOUND_331, 0)
+        EVT_CALL(NpcJump0, NPC_FuzzyBoss, LVarA, 0, LVarC, 12)
         EVT_CALL(IsPlayerWithin, 0, -400, 130, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_GOTO(10)
@@ -435,17 +414,17 @@ EvtScript N(EVS_8024A908) = {
     EVT_SET(LVarD, -514)
     EVT_SET(LVarE, 15)
     EVT_THREAD
-        EVT_CALL(SetNpcJumpscale, NPC_Kooper_02, 2)
-        EVT_CALL(NpcJump0, NPC_Kooper_02, LVarB, LVarC, LVarD, LVarE)
+        EVT_CALL(SetNpcJumpscale, NPC_KoopersShell, 2)
+        EVT_CALL(NpcJump0, NPC_KoopersShell, LVarB, LVarC, LVarD, LVarE)
     EVT_END_THREAD
     EVT_WAIT(1)
-    EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_01, 2)
-    EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_331, 0)
-    EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarB, LVarC, LVarD, LVarE)
-    EVT_CALL(SetNpcFlagBits, NPC_Fuzzy_01, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kooper_02, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcPos, NPC_Fuzzy_01, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcPos, NPC_Kooper_02, NPC_DISPOSE_LOCATION)
+    EVT_CALL(SetNpcJumpscale, NPC_FuzzyBoss, 2)
+    EVT_CALL(PlaySoundAtNpc, NPC_FuzzyBoss, SOUND_331, 0)
+    EVT_CALL(NpcJump0, NPC_FuzzyBoss, LVarB, LVarC, LVarD, LVarE)
+    EVT_CALL(SetNpcFlagBits, NPC_FuzzyBoss, NPC_FLAG_GRAVITY, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_KoopersShell, NPC_FLAG_GRAVITY, FALSE)
+    EVT_CALL(SetNpcPos, NPC_FuzzyBoss, NPC_DISPOSE_LOCATION)
+    EVT_CALL(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
     EVT_RETURN
     EVT_END
 };
@@ -627,53 +606,53 @@ EvtScript N(EVS_BreakBlock_DropShell) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_NOK02_RecoveredShellB, TRUE)
-    EVT_CALL(BindNpcAI, NPC_KoopaWithoutShell, EVT_PTR(N(EVS_DoNothing)))
+    EVT_CALL(BindNpcAI, NPC_Koopa_02, EVT_PTR(N(EVS_DoNothing)))
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(NpcJump0, NPC_Koopa_01, 227, 0, 247, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_Koopa_01, SOUND_21A, 0)
-    EVT_CALL(PlayerFaceNpc, NPC_Koopa_01, FALSE)
-    EVT_CALL(NpcFaceNpc, NPC_KoopaWithoutShell, NPC_Koopa_01, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_KoopaWithoutShell, NPC_FLAG_100, TRUE)
+    EVT_CALL(NpcJump0, NPC_KoopaShell_02, 227, 0, 247, 20)
+    EVT_CALL(PlaySoundAtNpc, NPC_KoopaShell_02, SOUND_21A, 0)
+    EVT_CALL(PlayerFaceNpc, NPC_KoopaShell_02, FALSE)
+    EVT_CALL(NpcFaceNpc, NPC_Koopa_02, NPC_KoopaShell_02, 0)
+    EVT_CALL(SetNpcFlagBits, NPC_Koopa_02, NPC_FLAG_100, TRUE)
     EVT_ADD(LVar0, -1)
     EVT_ADD(LVar2, -1)
-    EVT_CALL(GetNpcPos, NPC_KoopaWithoutShell, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaWithoutShell, ANIM_KoopaWithoutShell_Happy)
-    EVT_CALL(NpcJump0, NPC_KoopaWithoutShell, LVar0, 0, LVar2, 15)
-    EVT_CALL(GetNpcPos, NPC_Koopa_01, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPos, NPC_Koopa_02, LVar0, LVar1, LVar2)
+    EVT_CALL(SetNpcAnimation, NPC_Koopa_02, ANIM_KoopaWithoutShell_Happy)
+    EVT_CALL(NpcJump0, NPC_Koopa_02, LVar0, 0, LVar2, 15)
+    EVT_CALL(GetNpcPos, NPC_KoopaShell_02, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 1)
     EVT_ADD(LVar2, 1)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaWithoutShell, ANIM_KoopaWithoutShell_Run)
-    EVT_CALL(NpcMoveTo, NPC_KoopaWithoutShell, LVar0, LVar2, 15)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaWithoutShell, ANIM_KoopaWithoutShell_Idle)
-    EVT_CALL(GetNpcPos, NPC_KoopaWithoutShell, LVar0, LVar1, LVar2)
+    EVT_CALL(SetNpcAnimation, NPC_Koopa_02, ANIM_KoopaWithoutShell_Run)
+    EVT_CALL(NpcMoveTo, NPC_Koopa_02, LVar0, LVar2, 15)
+    EVT_CALL(SetNpcAnimation, NPC_Koopa_02, ANIM_KoopaWithoutShell_Idle)
+    EVT_CALL(GetNpcPos, NPC_Koopa_02, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 1)
     EVT_ADD(LVar2, 1)
     EVT_ADD(LVar1, 10)
-    EVT_CALL(NpcJump0, NPC_Koopa_01, LVar0, LVar1, LVar2, 10)
-    EVT_CALL(PlayerFaceNpc, NPC_KoopaWithoutShell, FALSE)
-    EVT_CALL(NpcFacePlayer, NPC_KoopaWithoutShell, 0)
+    EVT_CALL(NpcJump0, NPC_KoopaShell_02, LVar0, LVar1, LVar2, 10)
+    EVT_CALL(PlayerFaceNpc, NPC_Koopa_02, FALSE)
+    EVT_CALL(NpcFacePlayer, NPC_Koopa_02, 0)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaWithoutShell, ANIM_KoopaWithoutShell_Still)
-    EVT_CALL(EnableNpcBlur, NPC_Koopa_01, TRUE)
-    EVT_CALL(GetNpcPos, NPC_KoopaWithoutShell, LVar0, LVar1, LVar2)
+    EVT_CALL(SetNpcAnimation, NPC_Koopa_02, ANIM_KoopaWithoutShell_Still)
+    EVT_CALL(EnableNpcBlur, NPC_KoopaShell_02, TRUE)
+    EVT_CALL(GetNpcPos, NPC_Koopa_02, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 1)
     EVT_ADD(LVar2, 1)
     EVT_ADD(LVar1, 20)
-    EVT_SET(LVar3, NPC_Koopa_01)
-    EVT_SET(LVar4, NPC_KoopaWithoutShell)
+    EVT_SET(LVar3, NPC_KoopaShell_02)
+    EVT_SET(LVar4, NPC_Koopa_02)
     EVT_EXEC(N(EVS_GetBackIntoShell))
     EVT_CALL(InterpNpcYaw, LVar3, 60, 0)
-    EVT_CALL(NpcJump0, NPC_Koopa_01, LVar0, LVar1, LVar2, 30)
-    EVT_CALL(SetNpcPos, NPC_Koopa_01, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcSprite, NPC_KoopaWithoutShell, ANIM_Koopa_Idle)
-    EVT_CALL(SetNpcFlagBits, NPC_KoopaWithoutShell, NPC_FLAG_100, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaWithoutShell, ANIM_Koopa_Still)
+    EVT_CALL(NpcJump0, NPC_KoopaShell_02, LVar0, LVar1, LVar2, 30)
+    EVT_CALL(SetNpcPos, NPC_KoopaShell_02, NPC_DISPOSE_LOCATION)
+    EVT_CALL(SetNpcSprite, NPC_Koopa_02, ANIM_Koopa_Idle)
+    EVT_CALL(SetNpcFlagBits, NPC_Koopa_02, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcAnimation, NPC_Koopa_02, ANIM_Koopa_Still)
     EVT_WAIT(4)
-    EVT_CALL(EnableNpcBlur, NPC_Koopa_01, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaWithoutShell, ANIM_Koopa_Happy)
+    EVT_CALL(EnableNpcBlur, NPC_KoopaShell_02, TRUE)
+    EVT_CALL(SetNpcAnimation, NPC_Koopa_02, ANIM_Koopa_Happy)
     EVT_WAIT(30)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaWithoutShell, ANIM_Koopa_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_KoopaWithoutShell, ANIM_Koopa_Happy, ANIM_Koopa_Idle, 0, MSG_CH1_005E)
+    EVT_CALL(SetNpcAnimation, NPC_Koopa_02, ANIM_Koopa_Idle)
+    EVT_CALL(SpeakToPlayer, NPC_Koopa_02, ANIM_Koopa_Happy, ANIM_Koopa_Idle, 0, MSG_CH1_005E)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -681,15 +660,15 @@ EvtScript N(EVS_BreakBlock_DropShell) = {
 
 EvtScript N(D_8024B8B0_9E28D0) = {
     EVT_IF_EQ(GF_NOK02_RecoveredShellB, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_KoopaWithoutShell, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_005F)
+        EVT_CALL(SpeakToPlayer, NPC_Koopa_02, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_005F)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(GF_NOK02_StolenShellComplaintB, FALSE)
         EVT_SET(GF_NOK02_StolenShellComplaintB, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_KoopaWithoutShell, ANIM_KoopaWithoutShell_CryTalk, ANIM_KoopaWithoutShell_CryIdle, 0, MSG_CH1_005C)
+        EVT_CALL(SpeakToPlayer, NPC_Koopa_02, ANIM_KoopaWithoutShell_CryTalk, ANIM_KoopaWithoutShell_CryIdle, 0, MSG_CH1_005C)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_KoopaWithoutShell, ANIM_KoopaWithoutShell_CryTalk, ANIM_KoopaWithoutShell_CryIdle, 0, MSG_CH1_005D)
+    EVT_CALL(SpeakToPlayer, NPC_Koopa_02, ANIM_KoopaWithoutShell_CryTalk, ANIM_KoopaWithoutShell_CryIdle, 0, MSG_CH1_005D)
     EVT_RETURN
     EVT_END
 };
@@ -705,27 +684,27 @@ EvtScript N(D_8024B970_9E2990) = {
 
 EvtScript N(EVS_NpcInteract_Koopa_00_Crisis) = {
     EVT_IF_EQ(GF_NOK02_RecoveredShellA, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0057)
+        EVT_CALL(SpeakToPlayer, NPC_Koopa_01, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0057)
         EVT_RETURN
     EVT_END_IF
     EVT_SUSPEND_THREAD(MV_Unk_00)
     EVT_WAIT(1)
     EVT_IF_EQ(GF_NOK02_StolenShellComplaintA, FALSE)
         EVT_SET(GF_NOK02_StolenShellComplaintA, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_KoopaWithoutShell_CryTalk, ANIM_KoopaWithoutShell_CryIdle, 0, MSG_CH1_0054)
+        EVT_CALL(SpeakToPlayer, NPC_Koopa_01, ANIM_KoopaWithoutShell_CryTalk, ANIM_KoopaWithoutShell_CryIdle, 0, MSG_CH1_0054)
     EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_KoopaWithoutShell_CryTalk, ANIM_KoopaWithoutShell_CryIdle, 0, MSG_CH1_0055)
+        EVT_CALL(SpeakToPlayer, NPC_Koopa_01, ANIM_KoopaWithoutShell_CryTalk, ANIM_KoopaWithoutShell_CryIdle, 0, MSG_CH1_0055)
     EVT_END_IF
     EVT_RESUME_THREAD(MV_Unk_00)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024BA90_9E2AB0) = {
+EvtScript N(EVS_TetherShellToFuzzy) = {
     EVT_LABEL(0)
-        EVT_CALL(GetNpcPos, NPC_Bombette, LVar0, LVar1, LVar2)
+        EVT_CALL(GetNpcPos, NPC_FuzzyThief, LVar0, LVar1, LVar2)
         EVT_ADD(LVar2, 1)
-        EVT_CALL(SetNpcPos, NPC_KoloradoWife_01, LVar0, LVar1, LVar2)
+        EVT_CALL(SetNpcPos, NPC_KoopaShell_01, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_RETURN
@@ -733,8 +712,8 @@ EvtScript N(D_8024BA90_9E2AB0) = {
 };
 
 EvtScript N(D_8024BB0C_9E2B2C) = {
-    EVT_CALL(GetNpcPointer, NPC_Bombette, LVarF)
-    EVT_CALL(GetNpcPointer, NPC_Parakarry, LVarE)
+    EVT_CALL(GetNpcPointer, NPC_FuzzyThief, LVarF)
+    EVT_CALL(GetNpcPointer, NPC_Koopa_01, LVarE)
     EVT_SET(LVar2, 0)
     EVT_LABEL(0)
         EVT_CALL(N(func_802430CC_9DA0EC), LVarF, LVarE)
@@ -742,10 +721,10 @@ EvtScript N(D_8024BB0C_9E2B2C) = {
         EVT_IF_NE(LVar0, 0)
             EVT_LABEL(1)
             EVT_CALL(N(func_80243294_9DA2B4), LVarF, LVarE)
-            EVT_CALL(SetNpcFlagBits, NPC_Bombette, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_FuzzyThief, NPC_FLAG_100, TRUE)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_331, 0)
-            EVT_CALL(NpcJump0, NPC_Bombette, LVarA, 0, LVarB, LVarC)
-            EVT_CALL(SetNpcFlagBits, NPC_Bombette, NPC_FLAG_100, FALSE)
+            EVT_CALL(NpcJump0, NPC_FuzzyThief, LVarA, 0, LVarB, LVarC)
+            EVT_CALL(SetNpcFlagBits, NPC_FuzzyThief, NPC_FLAG_100, FALSE)
             EVT_CALL(N(func_802430CC_9DA0EC), LVarF, LVarE)
             EVT_SET(MV_Unk_02, LVar0)
             EVT_IF_NE(LVar0, 0)
@@ -761,11 +740,11 @@ EvtScript N(D_8024BB0C_9E2B2C) = {
 EvtScript N(D_8024BC84_9E2CA4) = {
     EVT_SET_GROUP(EVT_GROUP_0B)
     EVT_LABEL(0)
-        EVT_CALL(GetNpcPos, NPC_KoloradoWife_01, LVar0, LVar1, LVar2)
-        EVT_CALL(GetNpcAnimation, NPC_Parakarry, LVarF)
-        EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_KoopaWithoutShell_CryRun)
-        EVT_CALL(NpcMoveTo, NPC_Parakarry, LVar0, LVar2, 30)
-        EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_KoopaWithoutShell_CryIdle)
+        EVT_CALL(GetNpcPos, NPC_KoopaShell_01, LVar0, LVar1, LVar2)
+        EVT_CALL(GetNpcAnimation, NPC_Koopa_01, LVarF)
+        EVT_CALL(SetNpcAnimation, NPC_Koopa_01, ANIM_KoopaWithoutShell_CryRun)
+        EVT_CALL(NpcMoveTo, NPC_Koopa_01, LVar0, LVar2, 30)
+        EVT_CALL(SetNpcAnimation, NPC_Koopa_01, ANIM_KoopaWithoutShell_CryIdle)
         EVT_CALL(RandInt, 20, LVar0)
         EVT_IF_NE(LVar0, 0)
             EVT_WAIT(LVar0)
@@ -777,7 +756,7 @@ EvtScript N(D_8024BC84_9E2CA4) = {
 
 EvtScript N(EVS_8024BD64) = {
     EVT_LABEL(0)
-        EVT_CALL(NpcFaceNpc, NPC_Parakarry, NPC_KoloradoWife_01, 0)
+        EVT_CALL(NpcFaceNpc, NPC_Koopa_01, NPC_KoopaShell_01, 0)
         EVT_WAIT(5)
         EVT_GOTO(0)
     EVT_RETURN
@@ -821,7 +800,7 @@ EvtScript N(D_8024BDB0_9E2DD0) = {
 EvtScript N(EVS_NpcIdle_Koopa_00_Crisis) = {
     EVT_IF_EQ(GF_NOK02_RecoveredShellA, TRUE)
         EVT_CALL(SetNpcPos, NPC_Bombette, NPC_DISPOSE_LOCATION)
-        EVT_CALL(SetNpcPos, NPC_KoloradoWife_01, NPC_DISPOSE_LOCATION)
+        EVT_CALL(SetNpcPos, NPC_KoloradoWife_Epilogue, NPC_DISPOSE_LOCATION)
         EVT_CALL(SetNpcSpeed, NPC_Parakarry, EVT_FLOAT(3.0))
         EVT_LABEL(5)
             EVT_CALL(GetNpcPointer, NPC_Parakarry, LVarF)
@@ -832,7 +811,7 @@ EvtScript N(EVS_NpcIdle_Koopa_00_Crisis) = {
             EVT_WAIT(10)
             EVT_GOTO(5)
     EVT_END_IF
-    EVT_EXEC_GET_TID(N(D_8024BA90_9E2AB0), LVar9)
+    EVT_EXEC_GET_TID(N(EVS_TetherShellToFuzzy), LVar9)
     EVT_EXEC_GET_TID(N(D_8024BB0C_9E2B2C), LVar8)
     EVT_EXEC_GET_TID(N(D_8024BC84_9E2CA4), MV_Unk_00)
     EVT_EXEC_GET_TID(N(D_8024BDB0_9E2DD0), MV_Unk_01)
@@ -854,7 +833,7 @@ EvtScript N(EVS_NpcIdle_Koopa_00_Crisis) = {
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_THREAD
             EVT_CALL(SetNpcFlagBits, NPC_Bombette, NPC_FLAG_100, TRUE)
-            EVT_CALL(GetNpcPos, NPC_KoloradoWife_01, LVar0, LVar1, LVar2)
+            EVT_CALL(GetNpcPos, NPC_KoloradoWife_Epilogue, LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcAnimation, NPC_Bombette, ANIM_Fuzzy_Hurt)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_331, 0)
             EVT_CALL(NpcJump0, NPC_Bombette, LVar0, 0, LVar2, 25)
@@ -881,22 +860,22 @@ EvtScript N(EVS_NpcIdle_Koopa_00_Crisis) = {
             EVT_CALL(SetNpcFlagBits, NPC_Bombette, NPC_FLAG_GRAVITY, FALSE)
             EVT_CALL(SetNpcPos, NPC_Bombette, NPC_DISPOSE_LOCATION)
         EVT_END_THREAD
-        EVT_CALL(GetNpcPos, NPC_KoloradoWife_01, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcJump0, NPC_KoloradoWife_01, LVar0, 0, LVar2, 15)
+        EVT_CALL(GetNpcPos, NPC_KoloradoWife_Epilogue, LVar0, LVar1, LVar2)
+        EVT_CALL(NpcJump0, NPC_KoloradoWife_Epilogue, LVar0, 0, LVar2, 15)
         EVT_LOOP(70)
             EVT_CALL(PlayerFaceNpc, NPC_Bombette, FALSE)
             EVT_CALL(NpcFaceNpc, NPC_Parakarry, NPC_Bombette, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(PlayerFaceNpc, NPC_KoloradoWife_01, FALSE)
-        EVT_CALL(NpcFaceNpc, NPC_Parakarry, NPC_KoloradoWife_01, 0)
+        EVT_CALL(PlayerFaceNpc, NPC_KoloradoWife_Epilogue, FALSE)
+        EVT_CALL(NpcFaceNpc, NPC_Parakarry, NPC_KoloradoWife_Epilogue, 0)
         EVT_THREAD
             EVT_CALL(AdjustCam, CAM_DEFAULT, 4, 0, EVT_FLOAT(300.0), EVT_FLOAT(17.0), EVT_FLOAT(-7.0))
         EVT_END_THREAD
         EVT_CALL(GetNpcPos, NPC_Parakarry, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_KoopaWithoutShell_Happy)
         EVT_CALL(NpcJump0, NPC_Parakarry, LVar0, 0, LVar2, 15)
-        EVT_CALL(GetNpcPos, NPC_KoloradoWife_01, LVar0, LVar1, LVar2)
+        EVT_CALL(GetNpcPos, NPC_KoloradoWife_Epilogue, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 1)
         EVT_ADD(LVar2, 1)
         EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_KoopaWithoutShell_Run)
@@ -906,27 +885,27 @@ EvtScript N(EVS_NpcIdle_Koopa_00_Crisis) = {
         EVT_ADD(LVar0, 1)
         EVT_ADD(LVar2, 1)
         EVT_ADD(LVar1, 10)
-        EVT_CALL(NpcJump0, NPC_KoloradoWife_01, LVar0, LVar1, LVar2, 10)
+        EVT_CALL(NpcJump0, NPC_KoloradoWife_Epilogue, LVar0, LVar1, LVar2, 10)
         EVT_CALL(PlayerFaceNpc, NPC_Parakarry, FALSE)
         EVT_CALL(NpcFacePlayer, NPC_Parakarry, 0)
         EVT_WAIT(10)
         EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_KoopaWithoutShell_Still)
-        EVT_CALL(EnableNpcBlur, NPC_KoloradoWife_01, TRUE)
+        EVT_CALL(EnableNpcBlur, NPC_KoloradoWife_Epilogue, TRUE)
         EVT_CALL(GetNpcPos, NPC_Parakarry, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 1)
         EVT_ADD(LVar2, 1)
         EVT_ADD(LVar1, 20)
-        EVT_SET(LVar3, NPC_KoloradoWife_01)
-        EVT_SET(LVar4, NPC_Parakarry)
+        EVT_SET(LVar3, NPC_KoopaShell_01)
+        EVT_SET(LVar4, NPC_Koopa_01)
         EVT_EXEC(N(EVS_GetBackIntoShell))
         EVT_CALL(InterpNpcYaw, LVar3, 60, 0)
-        EVT_CALL(NpcJump0, NPC_KoloradoWife_01, LVar0, LVar1, LVar2, 30)
-        EVT_CALL(SetNpcPos, NPC_KoloradoWife_01, NPC_DISPOSE_LOCATION)
+        EVT_CALL(NpcJump0, NPC_KoloradoWife_Epilogue, LVar0, LVar1, LVar2, 30)
+        EVT_CALL(SetNpcPos, NPC_KoloradoWife_Epilogue, NPC_DISPOSE_LOCATION)
         EVT_CALL(SetNpcSprite, NPC_Parakarry, ANIM_Koopa_Idle)
         EVT_CALL(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_100, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_Koopa_Still)
         EVT_WAIT(4)
-        EVT_CALL(EnableNpcBlur, NPC_KoloradoWife_01, TRUE)
+        EVT_CALL(EnableNpcBlur, NPC_KoloradoWife_Epilogue, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_Koopa_Happy)
         EVT_WAIT(30)
         EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_Koopa_Idle)
@@ -969,7 +948,7 @@ EvtScript N(EVS_NpcInit_Koopa_00_Crisis) = {
     EVT_END
 };
 
-EvtScript N(D_8024C948_9E3968) = {
+EvtScript N(EVS_NpcInit_Fuzzy_XX) = {
     EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(D_8024C830_9E3850)))
     EVT_IF_EQ(GF_NOK02_RecoveredShellA, TRUE)
         EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
@@ -978,7 +957,7 @@ EvtScript N(D_8024C948_9E3968) = {
     EVT_END
 };
 
-EvtScript N(D_8024C9A0_9E39C0) = {
+EvtScript N(EVS_NpcInit_KoopaShell_XX) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Koopa_Shell)
     EVT_RETURN
@@ -989,15 +968,15 @@ EvtScript N(D_8024C9D8_9E39F8) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_8024B970_9E2990)))
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(D_8024B8B0_9E28D0)))
     EVT_IF_EQ(GF_NOK02_RecoveredShellB, FALSE)
-        EVT_CALL(SetNpcPos, NPC_Koopa_01, 150, 106, 250)
+        EVT_CALL(SetNpcPos, NPC_KoopaShell_02, 150, 106, 250)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetNpcSprite, NPC_KoopaWithoutShell, ANIM_Koopa_Idle)
+    EVT_CALL(SetNpcSprite, NPC_Koopa_02, ANIM_Koopa_Idle)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024CA60_9E3A80) = {
+EvtScript N(EVS_NpcInit_KoopaShell_XB) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Koopa_Shell)
     EVT_RETURN
@@ -1007,23 +986,23 @@ EvtScript N(D_8024CA60_9E3A80) = {
 EvtScript N(D_8024CA98_9E3AB8) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH1_PROMISED_TO_HELP_KOOPER)
-            EVT_CALL(SetNpcPos, NPC_Kooper_01, NPC_DISPOSE_LOCATION)
+            EVT_CALL(SetNpcPos, NPC_Kooper, NPC_DISPOSE_LOCATION)
         EVT_CASE_GE(STORY_CH1_KOOPER_JOINED_PARTY)
             EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kooper_01)))
-            EVT_CALL(SetNpcPos, NPC_Kooper_01, NPC_DISPOSE_LOCATION)
+            EVT_CALL(SetNpcPos, NPC_Kooper, NPC_DISPOSE_LOCATION)
             EVT_RETURN
         EVT_CASE_DEFAULT
             EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kooper_01)))
     EVT_END_SWITCH
-    EVT_CALL(SetNpcSprite, NPC_Kooper_01, ANIM_KooperWithoutShell_Idle)
+    EVT_CALL(SetNpcSprite, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(D_8024CB58_9E3B78) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_LEFT_TOWN)
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_01, NPC_DISPOSE_LOCATION)
-        EVT_CALL(SetNpcPos, NPC_Kooper_02, NPC_DISPOSE_LOCATION)
+        EVT_CALL(SetNpcPos, NPC_FuzzyBoss, NPC_DISPOSE_LOCATION)
+        EVT_CALL(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -1085,10 +1064,10 @@ EvtScript N(D_8024CE14_9E3E34) = {
 EvtScript N(D_8024CE38_9E3E58) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Koopa_Run)
-    EVT_CALL(EnableNpcBlur, NPC_Koopa_02, TRUE)
-    EVT_CALL(GetNpcPointer, NPC_Koopa_02, LVarF)
+    EVT_CALL(EnableNpcBlur, NPC_Koopa_03, TRUE)
+    EVT_CALL(GetNpcPointer, NPC_Koopa_03, LVarF)
     EVT_CALL(N(func_80243754_9DA774), LVarF, -150, 15)
-    EVT_CALL(EnableNpcBlur, NPC_Koopa_02, FALSE)
+    EVT_CALL(EnableNpcBlur, NPC_Koopa_03, FALSE)
     EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Koopa_Idle)
     EVT_WAIT(5)
@@ -1161,7 +1140,7 @@ EvtScript N(D_8024D188_9E41A8) = {
         EVT_WAIT(3)
         EVT_CALL(GetNpcPos, NPC_Bobomb_02, LVar0, LVar1, LVar2)
         EVT_CALL(PlaySoundAtNpc, NPC_Bobomb_02, SOUND_CANNON1, 0)
-        EVT_CALL(N(func_80243010_9DA030), LVar0, LVar1, LVar2)
+        EVT_CALL(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
         EVT_WAIT(30)
         EVT_LABEL(20)
             EVT_IF_EQ(AF_NOK_10, FALSE)
@@ -1178,7 +1157,7 @@ EvtScript N(D_8024D188_9E41A8) = {
         EVT_WAIT(3)
         EVT_CALL(GetNpcPos, NPC_Bobomb_01, LVar0, LVar1, LVar2)
         EVT_CALL(PlaySoundAtNpc, NPC_Bobomb_01, SOUND_CANNON1, 0)
-        EVT_CALL(N(func_80243010_9DA030), LVar0, LVar1, LVar2)
+        EVT_CALL(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
         EVT_WAIT(30)
         EVT_GOTO(10)
     EVT_RETURN
@@ -1393,9 +1372,9 @@ EvtScript N(D_8024DD44_9E4D64) = {
 
 EvtScript N(D_8024DF60_9E4F80) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH1_0093)
-    EVT_CALL(NpcFaceNpc, NPC_KoloradoWife_02, NPC_SELF, 0)
-    EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 5, MSG_CH1_0094)
-    EVT_CALL(NpcFaceNpc, NPC_SELF, NPC_KoloradoWife_02, 0)
+    EVT_CALL(NpcFaceNpc, NPC_KoloradoWife, NPC_SELF, 0)
+    EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 5, MSG_CH1_0094)
+    EVT_CALL(NpcFaceNpc, NPC_SELF, NPC_KoloradoWife, 0)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_CH1_0095)
     EVT_WAIT(15)
     EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
@@ -1457,18 +1436,18 @@ EvtScript N(D_8024E26C_9E528C) = {
     EVT_SET(LVarA, 60)
     EVT_SET(LVar9, 39)
     EVT_EXEC(N(D_8024E110_9E5130))
-    EVT_CALL(NpcMoveTo, NPC_KoloradoWife_02, -314, -94, 10)
+    EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -314, -94, 10)
     EVT_WAIT(10)
-    EVT_CALL(NpcMoveTo, NPC_KoloradoWife_02, -304, -161, 20)
+    EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -304, -161, 20)
     EVT_WAIT(100)
     EVT_EXEC(N(D_8024E110_9E5130))
     EVT_WAIT(10)
-    EVT_CALL(NpcMoveTo, NPC_KoloradoWife_02, -308, -102, 20)
+    EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -308, -102, 20)
     EVT_WAIT(10)
-    EVT_CALL(NpcMoveTo, NPC_KoloradoWife_02, -338, -85, 20)
-    EVT_CALL(NpcFacePlayer, NPC_KoloradoWife_02, 0)
+    EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -338, -85, 20)
+    EVT_CALL(NpcFacePlayer, NPC_KoloradoWife, 0)
     EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_KoloradoWife_02, ANIM_KoloradoWife_Idle)
+    EVT_CALL(SetNpcAnimation, NPC_KoloradoWife, ANIM_KoloradoWife_Idle)
     EVT_CALL(EnableModel, MODEL_g98, FALSE)
     EVT_CALL(EnableGroup, MODEL_g109, FALSE)
     EVT_CALL(EnableGroup, MODEL_g47, FALSE)
@@ -1479,27 +1458,27 @@ EvtScript N(D_8024E26C_9E528C) = {
 EvtScript N(D_8024E400_9E5420) = {
     EVT_SET(LVarA, 58)
     EVT_SET(LVar9, 42)
-    EVT_CALL(NpcMoveTo, NPC_KoloradoWife_02, -277, -186, 20)
+    EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -277, -186, 20)
     EVT_EXEC(N(D_8024E110_9E5130))
     EVT_WAIT(10)
-    EVT_CALL(NpcMoveTo, NPC_KoloradoWife_02, -265, -261, 20)
+    EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -265, -261, 20)
     EVT_WAIT(100)
     EVT_EXEC(N(D_8024E110_9E5130))
     EVT_WAIT(10)
-    EVT_CALL(NpcMoveTo, NPC_KoloradoWife_02, -277, -186, 20)
+    EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -277, -186, 20)
     EVT_WAIT(10)
-    EVT_CALL(NpcMoveTo, NPC_KoloradoWife_02, -328, -180, 20)
-    EVT_CALL(NpcFacePlayer, NPC_KoloradoWife_02, 0)
+    EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -328, -180, 20)
+    EVT_CALL(NpcFacePlayer, NPC_KoloradoWife, 0)
     EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_KoloradoWife_02, ANIM_KoloradoWife_Idle)
+    EVT_CALL(SetNpcAnimation, NPC_KoloradoWife, ANIM_KoloradoWife_Idle)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(D_8024E51C_9E553C) = {
-    EVT_CALL(SetNpcFlagBits, NPC_KoloradoWife_02, NPC_FLAG_100, TRUE)
-    EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0090)
-    EVT_CALL(SetNpcAnimation, NPC_KoloradoWife_02, ANIM_KoloradoWife_Walk)
+    EVT_CALL(SetNpcFlagBits, NPC_KoloradoWife, NPC_FLAG_100, TRUE)
+    EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0090)
+    EVT_CALL(SetNpcAnimation, NPC_KoloradoWife, ANIM_KoloradoWife_Walk)
     EVT_IF_GE(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
         EVT_EXEC_WAIT(N(D_8024E26C_9E528C))
     EVT_ELSE
@@ -1509,10 +1488,10 @@ EvtScript N(D_8024E51C_9E553C) = {
             EVT_EXEC_WAIT(N(D_8024E400_9E5420))
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0091)
+    EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0091)
     EVT_GIVE_KEY_REWARD(ITEM_KOOT_KOOPA_LEGENDS)
-    EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0092)
-    EVT_CALL(SetNpcFlagBits, NPC_KoloradoWife_02, NPC_FLAG_100, FALSE)
+    EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0092)
+    EVT_CALL(SetNpcFlagBits, NPC_KoloradoWife, NPC_FLAG_100, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -1522,31 +1501,31 @@ EvtScript N(D_8024E670_9E5690) = {
         EVT_CASE_LT(STORY_CH1_KOOPER_JOINED_PARTY)
             EVT_IF_EQ(GF_NOK02_KoloradoWife_FuzzyComplaint, FALSE)
                 EVT_SET(GF_NOK02_KoloradoWife_FuzzyComplaint, TRUE)
-                EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0088)
+                EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0088)
                 EVT_RETURN
             EVT_END_IF
-            EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0089)
+            EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0089)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008A)
+            EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008A)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008B)
+            EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008B)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008C)
+            EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008C)
         EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008D)
+            EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008D)
         EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_NOK11_Defeated_KentC, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008E)
+                EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008E)
             EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008F)
+                EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008F)
             EVT_END_IF
         EVT_CASE_GE(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_KoloradoWife_02, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008F)
+            EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008F)
     EVT_END_SWITCH
     EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH1_2)
         EVT_IF_EQ(GF_NOK02_Gift_KoopaLegends, FALSE)
             EVT_SET(GF_NOK02_Gift_KoopaLegends, TRUE)
-            EVT_EXEC_WAIT(N(D_8024988C_9E08AC))
+            EVT_EXEC_WAIT(N(EVS_MarioSalute))
             EVT_EXEC_WAIT(N(D_8024E51C_9E553C))
         EVT_END_IF
     EVT_END_IF
@@ -1570,35 +1549,35 @@ EvtScript N(D_8024E8B0_9E58D0) = {
 
 EvtScript N(EVS_NpcInit_KoopaKoot) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_KoopaKoot)))
-    EVT_EXEC(N(EVS_80253350))
+    EVT_EXEC(N(EVS_SetupKootFavors))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024E97C_9E599C) = {
+EvtScript N(EVS_NpcInit_Koopa_Epilogue) = {
     EVT_CALL(SetNpcPos, NPC_SELF, -25, 10, -50)
     EVT_CALL(SetNpcYaw, NPC_SELF, 90)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024E9BC_9E59DC) = {
+EvtScript N(EVS_NpcInit_Bombette_Epilogue) = {
     EVT_CALL(SetNpcPos, NPC_SELF, 25, 0, -50)
     EVT_CALL(SetNpcYaw, NPC_SELF, 270)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024E9FC_9E5A1C) = {
+EvtScript N(EVS_NpcInit_KoloradoWife_Epilogue) = {
     EVT_CALL(SetNpcPos, NPC_SELF, -150, 0, -50)
     EVT_CALL(SetNpcYaw, NPC_SELF, 90)
     EVT_RETURN
     EVT_END
 };
 
-StaticNpc N(NpcData_Parakarry_Crisis)[] = {
+StaticNpc N(NpcData_Crisis)[] = {
     {
-        .id = NPC_Koopa_00,
+        .id = NPC_Koopa_01,
         .settings = &N(NpcSettings_Koopa_Wander),
         .pos = { -109.0f, 0.0f, 191.0f },
         .yaw = 0,
@@ -1621,27 +1600,27 @@ StaticNpc N(NpcData_Parakarry_Crisis)[] = {
         .tattle = MSG_NpcTattle_NOK_GenericKoopaC,
     },
     {
-        .id = NPC_Bombette,
+        .id = NPC_FuzzyThief,
         .settings = &N(NpcSettings_Fuzzy),
         .pos = { -109.0f, 0.0f, 191.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
-        .init = &N(D_8024C948_9E3968),
+        .init = &N(EVS_NpcInit_Fuzzy_XX),
         .drops = NPC_NO_DROPS,
         .animations = FUZZY_ANIMS,
     },
     {
-        .id = NPC_KoloradoWife_01,
+        .id = NPC_KoopaShell_01,
         .settings = &N(NpcSettings_Koopa),
         .pos = { -109.0f, 0.0f, 191.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(D_8024C9A0_9E39C0),
+        .init = &N(EVS_NpcInit_KoopaShell_XX),
         .drops = NPC_NO_DROPS,
         .animations = KOOPA_ANIMS,
     },
     {
-        .id = NPC_KoopaWithoutShell,
+        .id = NPC_Koopa_02,
         .settings = &N(NpcSettings_KoopaWithoutShell_Patrol),
         .pos = { 192.0f, 0.0f, 152.0f },
         .yaw = 0,
@@ -1666,17 +1645,17 @@ StaticNpc N(NpcData_Parakarry_Crisis)[] = {
         .tattle = MSG_NpcTattle_NOK_GenericKoopaD,
     },
     {
-        .id = NPC_Koopa_01,
+        .id = NPC_KoopaShell_02,
         .settings = &N(NpcSettings_Koopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(D_8024CA60_9E3A80),
+        .init = &N(EVS_NpcInit_KoopaShell_XB),
         .drops = NPC_NO_DROPS,
         .animations = KOOPA_ANIMS,
     },
     {
-        .id = NPC_Kooper_01,
+        .id = NPC_Kooper,
         .settings = &N(NpcSettings_Koopa),
         .pos = { 20.0f, 0.0f, -145.0f },
         .yaw = 0,
@@ -1704,7 +1683,7 @@ StaticNpc N(NpcData_Parakarry_Crisis)[] = {
         .tattle = MSG_NpcTattle_NOK_Kooper,
     },
     {
-        .id = NPC_Fuzzy_01,
+        .id = NPC_FuzzyBoss,
         .settings = &N(NpcSettings_Fuzzy),
         .pos = { 12.0f, 10.0f, -351.0f },
         .yaw = 90,
@@ -1714,7 +1693,7 @@ StaticNpc N(NpcData_Parakarry_Crisis)[] = {
         .animations = FUZZY_ANIMS,
     },
     {
-        .id = NPC_Kooper_02,
+        .id = NPC_KoopersShell,
         .settings = &N(NpcSettings_Koopa),
         .pos = { 12.0f, 0.0f, -351.0f },
         .yaw = 90,
@@ -1742,7 +1721,7 @@ StaticNpc N(NpcData_Parakarry_Crisis)[] = {
     },
 };
 
-StaticNpc N(NpcData_MiscFuzzy1) = {
+StaticNpc N(NpcData_Fuzzy_01) = {
     .id = NPC_MiscFuzzy1,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -1753,7 +1732,7 @@ StaticNpc N(NpcData_MiscFuzzy1) = {
     .animations = FUZZY_ANIMS,
 };
 
-StaticNpc N(NpcData_Fuzzy_03) = {
+StaticNpc N(NpcData_Fuzzy_02) = {
     .id = NPC_MiscFuzzy2,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -1764,9 +1743,9 @@ StaticNpc N(NpcData_Fuzzy_03) = {
     .animations = FUZZY_ANIMS,
 };
 
-StaticNpc N(NpcData_Parakarry_Normal)[] = {
+StaticNpc N(NpcData_Normal)[] = {
     {
-        .id = NPC_Parakarry,
+        .id = NPC_Koopa_01,
         .settings = &N(NpcSettings_Koopa_Wander),
         .pos = { -109.0f, 0.0f, 191.0f },
         .yaw = 0,
@@ -1789,7 +1768,7 @@ StaticNpc N(NpcData_Parakarry_Normal)[] = {
         .tattle = MSG_NpcTattle_NOK_GenericKoopaC,
     },
     {
-        .id = NPC_KoopaWithoutShell,
+        .id = NPC_Koopa_02,
         .settings = &N(NpcSettings_Koopa_Wander),
         .pos = { 200.0f, 0.0f, 117.0f },
         .yaw = 90,
@@ -1868,7 +1847,7 @@ StaticNpc N(NpcData_Fuzzy_04) = {
     .animations = FUZZY_ANIMS,
 };
 
-StaticNpc N(NpcData_KoopaKoot)[] = {
+StaticNpc N(NpcData_Shared)[] = {
     {
         .id = NPC_KoopaKoot,
         .settings = &N(NpcSettings_KoopaKoot),
@@ -1877,56 +1856,22 @@ StaticNpc N(NpcData_KoopaKoot)[] = {
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_KoopaKoot),
         .drops = NPC_NO_DROPS,
-        .animations = {
-            .idle   = ANIM_KoopaKoot_Idle,
-            .walk   = ANIM_KoopaKoot_Idle,
-            .run    = ANIM_KoopaKoot_Idle,
-            .chase  = ANIM_KoopaKoot_Idle,
-            .anim_4 = ANIM_KoopaKoot_Idle,
-            .anim_5 = ANIM_KoopaKoot_Idle,
-            .death  = ANIM_KoopaKoot_Idle,
-            .hit    = ANIM_KoopaKoot_Idle,
-            .anim_8 = ANIM_KoopaKoot_Idle,
-            .anim_9 = ANIM_KoopaKoot_Idle,
-            .anim_A = ANIM_KoopaKoot_Idle,
-            .anim_B = ANIM_KoopaKoot_Idle,
-            .anim_C = ANIM_KoopaKoot_Idle,
-            .anim_D = ANIM_KoopaKoot_Idle,
-            .anim_E = ANIM_KoopaKoot_Idle,
-            .anim_F = ANIM_KoopaKoot_Idle,
-        },
+        .animations = KOOPA_KOOT_ANIMS,
         .tattle = MSG_NpcTattle_KoopaKoot,
     },
     {
-        .id = NPC_KoloradoWife_02,
-        .settings = &N(NpcSettings_KoloradoWife_02),
+        .id = NPC_KoloradoWife,
+        .settings = &N(NpcSettings_KoloradoWife),
         .pos = { -328.0f, 0.0f, -180.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(D_8024E8B0_9E58D0),
         .drops = NPC_NO_DROPS,
-        .animations = {
-            .idle   = ANIM_KoloradoWife_Idle,
-            .walk   = ANIM_KoloradoWife_Walk,
-            .run    = ANIM_KoloradoWife_Run,
-            .chase  = ANIM_KoloradoWife_Run,
-            .anim_4 = ANIM_KoloradoWife_Idle,
-            .anim_5 = ANIM_KoloradoWife_Idle,
-            .death  = ANIM_KoloradoWife_Idle,
-            .hit    = ANIM_KoloradoWife_Idle,
-            .anim_8 = ANIM_KoloradoWife_Idle,
-            .anim_9 = ANIM_KoloradoWife_Idle,
-            .anim_A = ANIM_KoloradoWife_Idle,
-            .anim_B = ANIM_KoloradoWife_Idle,
-            .anim_C = ANIM_KoloradoWife_Idle,
-            .anim_D = ANIM_KoloradoWife_Idle,
-            .anim_E = ANIM_KoloradoWife_Idle,
-            .anim_F = ANIM_KoloradoWife_Idle,
-        },
+        .animations = KOLORADO_WIFE_ANIMS,
         .tattle = MSG_NpcTattle_KoloradoWife,
     },
     {
-        .id = NPC_Koopa_02,
+        .id = NPC_Koopa_03,
         .settings = &N(NpcSettings_Koopa),
         .pos = { -307.0f, 0.0f, 97.0f },
         .yaw = 90,
@@ -1937,7 +1882,7 @@ StaticNpc N(NpcData_KoopaKoot)[] = {
         .tattle = MSG_NpcTattle_NOK_SenseOfJustice,
     },
     {
-        .id = NPC_Koopa_03,
+        .id = NPC_Koopa_04,
         .settings = &N(NpcSettings_KoopaWithoutShell_Patrol),
         .pos = { 285.0f, 0.0f, 223.0f },
         .yaw = 270,
@@ -1963,14 +1908,14 @@ StaticNpc N(NpcData_KoopaKoot)[] = {
     },
 };
 
-StaticNpc N(NpcData_Parakarry)[] = {
+StaticNpc N(NpcData_Epilogue)[] = {
     {
         .id = NPC_Parakarry,
         .settings = &N(NpcSettings_Koopa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .init = &N(D_8024E97C_9E599C),
+        .init = &N(EVS_NpcInit_Koopa_Epilogue),
         .drops = NPC_NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldParakarry_Idle,
@@ -1997,7 +1942,7 @@ StaticNpc N(NpcData_Parakarry)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .init = &N(D_8024E9BC_9E59DC),
+        .init = &N(EVS_NpcInit_Bombette_Epilogue),
         .drops = NPC_NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldBombette_Idle,
@@ -2019,31 +1964,14 @@ StaticNpc N(NpcData_Parakarry)[] = {
         },
     },
     {
-        .id = NPC_KoloradoWife_01,
+        .id = NPC_KoloradoWife_Epilogue,
         .settings = &N(NpcSettings_Koopa),
         .pos = { -328.0f, 0.0f, -180.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .init = &N(D_8024E9FC_9E5A1C),
+        .init = &N(EVS_NpcInit_KoloradoWife_Epilogue),
         .drops = NPC_NO_DROPS,
-        .animations = {
-            .idle   = ANIM_KoloradoWife_Idle,
-            .walk   = ANIM_KoloradoWife_Walk,
-            .run    = ANIM_KoloradoWife_Run,
-            .chase  = ANIM_KoloradoWife_Run,
-            .anim_4 = ANIM_KoloradoWife_Idle,
-            .anim_5 = ANIM_KoloradoWife_Idle,
-            .death  = ANIM_KoloradoWife_Idle,
-            .hit    = ANIM_KoloradoWife_Idle,
-            .anim_8 = ANIM_KoloradoWife_Idle,
-            .anim_9 = ANIM_KoloradoWife_Idle,
-            .anim_A = ANIM_KoloradoWife_Idle,
-            .anim_B = ANIM_KoloradoWife_Idle,
-            .anim_C = ANIM_KoloradoWife_Idle,
-            .anim_D = ANIM_KoloradoWife_Idle,
-            .anim_E = ANIM_KoloradoWife_Idle,
-            .anim_F = ANIM_KoloradoWife_Idle,
-        },
+        .animations = KOLORADO_WIFE_ANIMS,
         .tattle = MSG_NpcTattle_KoloradoWife,
     },
 };
@@ -2062,22 +1990,22 @@ StaticNpc N(NpcData_ChuckQuizmo) = {
 };
 
 NpcGroupList N(CrisisNPCs) = {
-    NPC_GROUP(N(NpcData_Parakarry_Crisis)),
-    NPC_GROUP(N(NpcData_KoopaKoot)),
-    NPC_GROUP(N(NpcData_MiscFuzzy1)),
-    NPC_GROUP(N(NpcData_Fuzzy_03)),
+    NPC_GROUP(N(NpcData_Crisis)),
+    NPC_GROUP(N(NpcData_Shared)),
+    NPC_GROUP(N(NpcData_Fuzzy_01)),
+    NPC_GROUP(N(NpcData_Fuzzy_02)),
     {}
 };
 
 NpcGroupList N(NormalNPCs) = {
-    NPC_GROUP(N(NpcData_Parakarry_Normal)),
-    NPC_GROUP(N(NpcData_KoopaKoot)),
+    NPC_GROUP(N(NpcData_Normal)),
+    NPC_GROUP(N(NpcData_Shared)),
     NPC_GROUP(N(NpcData_Fuzzy_04)),
     NPC_GROUP(N(NpcData_ChuckQuizmo)),
     {}
 };
 
 NpcGroupList N(EpilogueNPCs) = {
-    NPC_GROUP(N(NpcData_Parakarry)),
+    NPC_GROUP(N(NpcData_Epilogue)),
     {}
 };

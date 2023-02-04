@@ -98,7 +98,7 @@ EvtScript N(EVS_LetterReward_ToadKid1B) = {
         // EVT_GIVE_KEY_REWARD(ITEM_LETTER_CHAIN_FROST_T), but LVar1/LVar0 are set in wrong order
         EVT_SET(LVar1, 1)
         EVT_SET(LVar0, ITEM_LETTER_CHAIN_FROST_T)
-        EVT_EXEC_WAIT(N(GiveKeyReward))
+        EVT_EXEC_WAIT(N(GiveItemReward))
         EVT_CALL(AddKeyItem, ITEM_LETTER_CHAIN_FROST_T)
     EVT_END_IF
     EVT_RETURN

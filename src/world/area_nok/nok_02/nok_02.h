@@ -24,29 +24,30 @@
 #include "sprite/npc/KoopaKoot.h"
 
 enum {
-	NPC_Koopa_00                = 0,
-//	NPC_Bombette                = 1,
-	NPC_KoloradoWife_01         = 2,
-	NPC_KoopaWithoutShell       = 3,
-	NPC_Koopa_01                = 4,
-	NPC_Koopa_02                = 5,
-	NPC_Koopa_03                = 6,
-	NPC_Kolorado                = 7,
-	NPC_KoloradoWife_02         = 8,
-	NPC_KoopaKoot               = 9,
-	NPC_Kooper_01               = 10,
-	NPC_Kooper_02               = 11,
-	NPC_Fuzzy_01                = 12,
-	NPC_MiscFuzzy1              = 13,
-	NPC_MiscFuzzy2                = 14,
-	NPC_Fuzzy_04                = 15,
-	NPC_Bobomb_01               = 16,
-	NPC_Bobomb_02               = 17,
-	NPC_Bobomb_03               = 18,
-	NPC_ChuckQuizmo             = 19,
-	// epilogue
-	NPC_Parakarry               = 0,
-	NPC_Bombette                = 1,
+    NPC_Koopa_01                = 0,
+    NPC_FuzzyThief              = 1, // NPC_Bombette
+    NPC_KoopaShell_01           = 2,
+    NPC_Koopa_02                = 3,
+    NPC_KoopaShell_02           = 4,
+    NPC_Koopa_03                = 5,
+    NPC_Koopa_04                = 6,
+    NPC_Kolorado                = 7,
+    NPC_KoloradoWife            = 8,
+    NPC_KoopaKoot               = 9,
+    NPC_Kooper                  = 10,
+    NPC_KoopersShell            = 11,
+    NPC_FuzzyBoss               = 12,
+    NPC_MiscFuzzy1              = 13,
+    NPC_MiscFuzzy2              = 14,
+    NPC_Fuzzy_04                = 15,
+    NPC_Bobomb_01               = 16,
+    NPC_Bobomb_02               = 17,
+    NPC_Bobomb_03               = 18,
+    NPC_ChuckQuizmo             = 19,
+    // epilogue
+    NPC_Parakarry               = 0,
+    NPC_Bombette                = 1,
+    NPC_KoloradoWife_Epilogue   = 2,
 };
 
 enum {
@@ -54,7 +55,7 @@ enum {
     MV_Unk_01       = MapVar(1),
     MV_Unk_02       = MapVar(2),
     MV_Unk_03       = MapVar(3),
-    MV_StarPieceItem	= MapVar(10),
+    MV_StarPieceItem    = MapVar(10),
 };
 
 enum {
@@ -65,24 +66,19 @@ enum {
 #define NAMESPACE nok_02
 
 extern EvtScript N(EVS_Main);
-extern EvtScript N(D_802446A0_9DB6C0);
-extern EvtScript N(EVS_Scene_Epilogue);
-extern EvtScript N(EVS_Setup_Bookshelf);
-extern EvtScript N(EVS_80246B50);
-extern EvtScript N(EVS_SetupDemo);
 extern EvtScript N(EVS_SetupMusic);
+extern EvtScript N(EVS_Scene_Epilogue);
 extern EvtScript N(EVS_BreakBlock_DropShell);
 extern EvtScript N(EVS_8024A8EC);
 extern EvtScript N(EVS_8024A908);
-extern EvtScript N(D_8025254C_9E956C);
-extern EvtScript N(D_802526D0_9E96F0);
-extern EvtScript N(D_80252754_9E9774);
-extern EvtScript N(D_80252724_9E9744);
-extern EvtScript N(D_8024988C_9E08AC);
-extern EvtScript N(EVS_80253350);
+extern EvtScript N(EVS_SetupKootFavors);
 extern EvtScript N(EVS_NpcInteract_KoopaKoot);
+extern EvtScript N(EVS_Setup_Bookshelf);
+extern EvtScript N(EVS_SetupRooms);
 extern EvtScript N(EVS_MakeEntities);
 extern EvtScript N(EVS_SetupFoliage);
+extern EvtScript N(EVS_SetupDemo);
+
 extern NpcGroupList N(EpilogueNPCs);
 extern NpcGroupList N(CrisisNPCs);
 extern NpcGroupList N(NormalNPCs);

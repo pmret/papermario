@@ -6,14 +6,7 @@
 #include "world/common/complete/GiveReward.inc.c"
 #include "world/common/complete/KeyItemChoice.inc.c"
 
-EvtScript N(EVS_PlayerReact) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
-    EVT_WAIT(20)
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/atomic/MarioSalute.inc.c"
 
 EvtScript N(EVS_NpcInteract_Boo_01) = {
     EVT_SWITCH(GB_StoryProgress)
@@ -125,7 +118,7 @@ EvtScript N(EVS_NpcInteract_Boo_02) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0081)
             EVT_SET(LVar0, 118)
             EVT_SET(LVar1, 1)
-            EVT_EXEC_WAIT(N(GiveKeyReward))
+            EVT_EXEC_WAIT(N(GiveItemReward))
             EVT_CALL(AddKeyItem, ITEM_KOOT_PACKAGE)
             EVT_SET(MV_Unk_00, 0)
             EVT_SET(GF_ARN03_RecievedPackage, TRUE)
@@ -156,7 +149,7 @@ EvtScript N(EVS_NpcInteract_Boo_02) = {
     EVT_END_SWITCH
     EVT_IF_EQ(GF_ARN03_RecievedPackage, FALSE)
         EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH7_2)
-            EVT_EXEC_WAIT(N(EVS_PlayerReact))
+            EVT_EXEC_WAIT(N(EVS_MarioSalute))
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007F)
             EVT_CALL(EndSpeech, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0)
             EVT_SET(MV_Unk_00, 0)

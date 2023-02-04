@@ -1889,7 +1889,7 @@ EvtScript N(EVS_NpcInteract_ArtistToad) = {
                 EVT_WAIT(10)
                 EVT_SET(LVar0, ITEM_ATTACK_FX_D)
                 EVT_SET(LVar3, ITEM_TYPE_BADGE)
-                EVT_EXEC_WAIT(N(GiveKeyReward))
+                EVT_EXEC_WAIT(N(GiveItemReward))
                 EVT_CALL(AddBadge, LVar0, LVar1)
                 EVT_CALL(SetTattleMessage, NPC_Chanterelle, MSG_NpcTattle_PopDiva_CanSing)
         EVT_END_SWITCH

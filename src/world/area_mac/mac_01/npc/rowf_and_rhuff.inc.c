@@ -175,7 +175,7 @@ EvtScript N(EVS_NpcInteract_Rowf_C) = {
             EVT_WAIT(10)
             EVT_SET(LVar0, ITEM_I_SPY)
             EVT_SET(LVar3, 2)
-            EVT_EXEC_WAIT(N(GiveKeyReward))
+            EVT_EXEC_WAIT(N(GiveItemReward))
             EVT_CALL(AddBadge, LVar0, LVar1)
             EVT_SET(GF_MAC01_CalculatorReturned, TRUE)
             EVT_WAIT(10)

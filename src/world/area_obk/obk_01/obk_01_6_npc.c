@@ -3,14 +3,7 @@
 #include "world/common/npc/Boo_Wander.inc.c"
 #include "world/common/npc/Boo.inc.c"
 
-EvtScript N(EVS_PlayerReaction_GetOldPhoto) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
-    EVT_WAIT(20)
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/atomic/MarioSalute.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
 
@@ -168,7 +161,7 @@ EvtScript N(EVS_NpcInteract_Franky) = {
     EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH5_3)
         EVT_IF_EQ(GF_OBK01_Gift_OldPhoto, FALSE)
             EVT_SET(GF_OBK01_Gift_OldPhoto, TRUE)
-            EVT_EXEC_WAIT(N(EVS_PlayerReaction_GetOldPhoto))
+            EVT_EXEC_WAIT(N(EVS_MarioSalute))
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_006B)
             EVT_GIVE_KEY_REWARD(ITEM_KOOT_OLD_PHOTO)
         EVT_END_IF

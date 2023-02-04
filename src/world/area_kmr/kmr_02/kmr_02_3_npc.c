@@ -64,14 +64,7 @@ MAP_STATIC_PAD(1,key_choice);
 #include "wander_territories.inc.c"
 #define NAME_SUFFIX
 
-EvtScript N(D_8024810C_8B817C) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
-    EVT_WAIT(20)
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/atomic/MarioSalute.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
 
@@ -794,7 +787,7 @@ EvtScript N(EVS_KootFavorCheck_Goompa) = {
     EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH2_2)
         EVT_IF_EQ(GF_KMR02_Gift_TheTape, FALSE)
             EVT_SET(GF_KMR02_Gift_TheTape, TRUE)
-            EVT_EXEC_WAIT(N(D_8024810C_8B817C))
+            EVT_EXEC_WAIT(N(EVS_MarioSalute))
             EVT_CALL(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_0049)
             EVT_CALL(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_004A)
             EVT_THREAD

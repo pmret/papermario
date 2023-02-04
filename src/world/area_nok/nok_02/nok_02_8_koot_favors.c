@@ -1,7 +1,6 @@
 #include "nok_02.h"
 
 #define NAME_SUFFIX _Koot
-//MAP_STATIC_PAD(2,key_choice);
 #include "world/common/complete/KeyItemChoice.inc.c"
 MAP_STATIC_PAD(1,item_choice);
 #include "world/common/complete/NormalItemChoice.inc.c"
@@ -9,9 +8,9 @@ MAP_STATIC_PAD(1,item_choice);
 #define NAME_SUFFIX
 
 typedef struct KootFavor {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
+    /* 0x00 */ s32 requestMsg;
+    /* 0x04 */ s32 minorRewardMsg;
+    /* 0x08 */ s32 majorRewardMsg;
     /* 0x0C */ s32 unlockedFlag;
     /* 0x10 */ s32 gaveUpFlag;
     /* 0x14 */ s32 completeFlag;
@@ -20,180 +19,180 @@ typedef struct KootFavor {
 
 KootFavor N(KootFavorData)[] = {
     [KOOT_FAVOR_CH1_1] {
-        .unk_00 = MSG_KootFavor_0000,
-        .unk_04 = MSG_KootFavor_0001,
-        .unk_08 = MSG_KootFavor_0002,
+        .requestMsg = MSG_KootFavor_0000,
+        .minorRewardMsg = MSG_KootFavor_0001,
+        .majorRewardMsg = MSG_KootFavor_0002,
         .unlockedFlag = GF_NOK02_KootFavor00_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor00_GaveUp,
         .completeFlag = GF_NOK02_KootFavor00_Complete,
         .requiredItem = ITEM_KOOT_KOOPA_LEGENDS,
     },
     [KOOT_FAVOR_CH1_2] {
-        .unk_00 = MSG_KootFavor_0003,
-        .unk_04 = MSG_KootFavor_0004,
-        .unk_08 = MSG_KootFavor_0005,
+        .requestMsg = MSG_KootFavor_0003,
+        .minorRewardMsg = MSG_KootFavor_0004,
+        .majorRewardMsg = MSG_KootFavor_0005,
         .unlockedFlag = GF_NOK02_KootFavor01_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor01_GaveUp,
         .completeFlag = GF_NOK02_KootFavor01_Complete,
         .requiredItem = ITEM_SLEEPY_SHEEP,
     },
     [KOOT_FAVOR_CH2_1] {
-        .unk_00 = MSG_KootFavor_0006,
-        .unk_04 = MSG_KootFavor_0007,
-        .unk_08 = MSG_KootFavor_0008,
+        .requestMsg = MSG_KootFavor_0006,
+        .minorRewardMsg = MSG_KootFavor_0007,
+        .majorRewardMsg = MSG_KootFavor_0008,
         .unlockedFlag = GF_NOK02_KootFavor02_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor02_GaveUp,
         .completeFlag = GF_NOK02_KootFavor02_Complete,
         .requiredItem = ITEM_KOOT_THE_TAPE,
     },
     [KOOT_FAVOR_CH2_2] {
-        .unk_00 = MSG_KootFavor_0009,
-        .unk_04 = MSG_KootFavor_000A,
-        .unk_08 = MSG_KootFavor_000B,
+        .requestMsg = MSG_KootFavor_0009,
+        .minorRewardMsg = MSG_KootFavor_000A,
+        .majorRewardMsg = MSG_KootFavor_000B,
         .unlockedFlag = GF_NOK02_KootFavor03_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor03_GaveUp,
         .completeFlag = GF_NOK02_KootFavor03_Complete,
         .requiredItem = ITEM_KOOPA_TEA,
     },
     [KOOT_FAVOR_CH2_3] {
-        .unk_00 = MSG_KootFavor_000C,
-        .unk_04 = MSG_KootFavor_000D,
-        .unk_08 = MSG_KootFavor_000E,
+        .requestMsg = MSG_KootFavor_000C,
+        .minorRewardMsg = MSG_KootFavor_000D,
+        .majorRewardMsg = MSG_KootFavor_000E,
         .unlockedFlag = GF_NOK02_KootFavor04_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor04_GaveUp,
         .completeFlag = GF_NOK02_KootFavor04_Complete,
         .requiredItem = ITEM_KOOT_MERLUVLEE_AUTOGRAPH,
     },
     [KOOT_FAVOR_CH3_1] {
-        .unk_00 = MSG_KootFavor_000F,
-        .unk_04 = MSG_KootFavor_0010,
-        .unk_08 = MSG_KootFavor_0011,
+        .requestMsg = MSG_KootFavor_000F,
+        .minorRewardMsg = MSG_KootFavor_0010,
+        .majorRewardMsg = MSG_KootFavor_0011,
         .unlockedFlag = GF_NOK02_KootFavor05_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor05_GaveUp,
         .completeFlag = GF_NOK02_KootFavor05_Complete,
         .requiredItem = ITEM_KOOT_EMPTY_WALLET,
     },
     [KOOT_FAVOR_CH3_2] {
-        .unk_00 = MSG_KootFavor_0012,
-        .unk_04 = MSG_KootFavor_0013,
-        .unk_08 = MSG_KootFavor_0014,
+        .requestMsg = MSG_KootFavor_0012,
+        .minorRewardMsg = MSG_KootFavor_0013,
+        .majorRewardMsg = MSG_KootFavor_0014,
         .unlockedFlag = GF_NOK02_KootFavor06_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor06_GaveUp,
         .completeFlag = GF_NOK02_KootFavor06_Complete,
         .requiredItem = ITEM_TASTY_TONIC,
     },
     [KOOT_FAVOR_CH3_3] {
-        .unk_00 = MSG_KootFavor_0015,
-        .unk_04 = MSG_KootFavor_0016,
-        .unk_08 = MSG_KootFavor_0017,
+        .requestMsg = MSG_KootFavor_0015,
+        .minorRewardMsg = MSG_KootFavor_0016,
+        .majorRewardMsg = MSG_KootFavor_0017,
         .unlockedFlag = GF_NOK02_KootFavor07_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor07_GaveUp,
         .completeFlag = GF_NOK02_KootFavor07_Complete,
         .requiredItem = ITEM_KOOT_LUIGI_AUTOGRAPH,
     },
     [KOOT_FAVOR_CH4_1] {
-        .unk_00 = MSG_KootFavor_0018,
-        .unk_04 = MSG_KootFavor_0019,
-        .unk_08 = MSG_KootFavor_001A,
+        .requestMsg = MSG_KootFavor_0018,
+        .minorRewardMsg = MSG_KootFavor_0019,
+        .majorRewardMsg = MSG_KootFavor_001A,
         .unlockedFlag = GF_NOK02_KootFavor08_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor08_GaveUp,
         .completeFlag = GF_NOK02_KootFavor08_Complete,
         .requiredItem = ITEM_NONE,
     },
     [KOOT_FAVOR_CH4_2] {
-        .unk_00 = MSG_KootFavor_001B,
-        .unk_04 = MSG_KootFavor_001C,
-        .unk_08 = MSG_KootFavor_001D,
+        .requestMsg = MSG_KootFavor_001B,
+        .minorRewardMsg = MSG_KootFavor_001C,
+        .majorRewardMsg = MSG_KootFavor_001D,
         .unlockedFlag = GF_NOK02_KootFavor09_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor09_GaveUp,
         .completeFlag = GF_NOK02_KootFavor09_Complete,
         .requiredItem = ITEM_LIFE_SHROOM,
     },
     [KOOT_FAVOR_CH4_3] {
-        .unk_00 = MSG_KootFavor_001E,
-        .unk_04 = MSG_KootFavor_001F,
-        .unk_08 = MSG_KootFavor_0020,
+        .requestMsg = MSG_KootFavor_001E,
+        .minorRewardMsg = MSG_KootFavor_001F,
+        .majorRewardMsg = MSG_KootFavor_0020,
         .unlockedFlag = GF_NOK02_KootFavor0A_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor0A_GaveUp,
         .completeFlag = GF_NOK02_KootFavor0A_Complete,
         .requiredItem = ITEM_NUTTY_CAKE,
     },
     [KOOT_FAVOR_CH5_1] {
-        .unk_00 = MSG_KootFavor_0021,
-        .unk_04 = MSG_KootFavor_0022,
-        .unk_08 = MSG_KootFavor_0023,
+        .requestMsg = MSG_KootFavor_0021,
+        .minorRewardMsg = MSG_KootFavor_0022,
+        .majorRewardMsg = MSG_KootFavor_0023,
         .unlockedFlag = GF_NOK02_KootFavor0B_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor0B_GaveUp,
         .completeFlag = GF_NOK02_KootFavor0B_Complete,
         .requiredItem = ITEM_NONE,
     },
     [KOOT_FAVOR_CH5_2] {
-        .unk_00 = MSG_KootFavor_0024,
-        .unk_04 = MSG_KootFavor_0025,
-        .unk_08 = MSG_KootFavor_0026,
+        .requestMsg = MSG_KootFavor_0024,
+        .minorRewardMsg = MSG_KootFavor_0025,
+        .majorRewardMsg = MSG_KootFavor_0026,
         .unlockedFlag = GF_NOK02_KootFavor0C_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor0C_GaveUp,
         .completeFlag = GF_NOK02_KootFavor0C_Complete,
         .requiredItem = ITEM_KOOT_OLD_PHOTO,
     },
     [KOOT_FAVOR_CH5_3] {
-        .unk_00 = MSG_KootFavor_0027,
-        .unk_04 = MSG_KootFavor_0028,
-        .unk_08 = MSG_KootFavor_0029,
+        .requestMsg = MSG_KootFavor_0027,
+        .minorRewardMsg = MSG_KootFavor_0028,
+        .majorRewardMsg = MSG_KootFavor_0029,
         .unlockedFlag = GF_NOK02_KootFavor0D_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor0D_GaveUp,
         .completeFlag = GF_NOK02_KootFavor0D_Complete,
         .requiredItem = ITEM_KOOPASTA,
     },
     [KOOT_FAVOR_CH6_1] {
-        .unk_00 = MSG_KootFavor_002A,
-        .unk_04 = MSG_KootFavor_002B,
-        .unk_08 = MSG_KootFavor_002C,
+        .requestMsg = MSG_KootFavor_002A,
+        .minorRewardMsg = MSG_KootFavor_002B,
+        .majorRewardMsg = MSG_KootFavor_002C,
         .unlockedFlag = GF_NOK02_KootFavor0E_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor0E_GaveUp,
         .completeFlag = GF_NOK02_KootFavor0E_Complete,
         .requiredItem = ITEM_KOOT_GLASSES,
     },
     [KOOT_FAVOR_CH6_2] {
-        .unk_00 = MSG_KootFavor_002D,
-        .unk_04 = MSG_KootFavor_002E,
-        .unk_08 = MSG_KootFavor_002F,
+        .requestMsg = MSG_KootFavor_002D,
+        .minorRewardMsg = MSG_KootFavor_002E,
+        .majorRewardMsg = MSG_KootFavor_002F,
         .unlockedFlag = GF_NOK02_KootFavor0F_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor0F_GaveUp,
         .completeFlag = GF_NOK02_KootFavor0F_Complete,
         .requiredItem = ITEM_LIME,
     },
     [KOOT_FAVOR_CH6_3] {
-        .unk_00 = MSG_KootFavor_0030,
-        .unk_04 = MSG_KootFavor_0031,
-        .unk_08 = MSG_KootFavor_0032,
+        .requestMsg = MSG_KootFavor_0030,
+        .minorRewardMsg = MSG_KootFavor_0031,
+        .majorRewardMsg = MSG_KootFavor_0032,
         .unlockedFlag = GF_NOK02_KootFavor10_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor10_GaveUp,
         .completeFlag = GF_NOK02_KootFavor10_Complete,
         .requiredItem = ITEM_KOOKY_COOKIE,
     },
     [KOOT_FAVOR_CH7_1] {
-        .unk_00 = MSG_KootFavor_0033,
-        .unk_04 = MSG_KootFavor_0034,
-        .unk_08 = MSG_KootFavor_0035,
+        .requestMsg = MSG_KootFavor_0033,
+        .minorRewardMsg = MSG_KootFavor_0034,
+        .majorRewardMsg = MSG_KootFavor_0035,
         .unlockedFlag = GF_NOK02_KootFavor11_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor11_GaveUp,
         .completeFlag = GF_NOK02_KootFavor11_Complete,
         .requiredItem = ITEM_KOOT_PACKAGE,
     },
     [KOOT_FAVOR_CH7_2] {
-        .unk_00 = MSG_KootFavor_0036,
-        .unk_04 = MSG_KootFavor_0037,
-        .unk_08 = MSG_KootFavor_0038,
+        .requestMsg = MSG_KootFavor_0036,
+        .minorRewardMsg = MSG_KootFavor_0037,
+        .majorRewardMsg = MSG_KootFavor_0038,
         .unlockedFlag = GF_NOK02_KootFavor12_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor12_GaveUp,
         .completeFlag = GF_NOK02_KootFavor12_Complete,
         .requiredItem = ITEM_COCONUT,
     },
     [KOOT_FAVOR_CH7_3] {
-        .unk_00 = MSG_KootFavor_0039,
-        .unk_04 = MSG_KootFavor_003A,
-        .unk_08 = MSG_KootFavor_003B,
+        .requestMsg = MSG_KootFavor_0039,
+        .minorRewardMsg = MSG_KootFavor_003A,
+        .majorRewardMsg = MSG_KootFavor_003B,
         .unlockedFlag = GF_NOK02_KootFavor13_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor13_GaveUp,
         .completeFlag = GF_NOK02_KootFavor13_Complete,
@@ -206,24 +205,27 @@ API_CALLABLE(N(IsFourthMultipleFavor)) {
     s32 favorIdx = evt_get_variable(script, *args++);
 
     if ((favorIdx % 4) != 0) {
-        script->varTable[0] = 0;
+        script->varTable[0] = FALSE;
     } else {
-        script->varTable[0] = 1;
+        script->varTable[0] = TRUE;
     }
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80243F10_9DAF30)) {
+API_CALLABLE(N(FindNextFavor)) {
     Bytecode* args = script->ptrReadPos;
-    s32 a0 = *args++;
+    s32 currentFavorVar = *args++;
     u32 count = 0;
     KootFavor* it = N(KootFavorData);
+    s32 randomIdx;
     u32 i;
 
+    // count number of available favors
     for (i = 0; i < ARRAY_COUNT(N(KootFavorData)); i++, it++) {
         if (evt_get_variable(script, it->unlockedFlag) && !evt_get_variable(script, it->completeFlag)) {
             count++;
             if (!evt_get_variable(script, it->gaveUpFlag)) {
+                // after first non-skipped favor is found, break the loop
                 break;
             }
         }
@@ -231,38 +233,42 @@ API_CALLABLE(N(func_80243F10_9DAF30)) {
 
     if (i == ARRAY_COUNT(N(KootFavorData))) {
         if (count == 0) {
+            // found no available favors and none were skipped
             script->varTable[0] = 0;
-            evt_set_variable(script, a0, 0xFF);
+            evt_set_variable(script, currentFavorVar, 0xFF);
             return ApiStatus_DONE2;
         } else {
-            s32 temp_s6 = rand_int(count - 1);
+            // found no new favors, choose one randomly among the skipped ones
+            randomIdx = rand_int(count - 1);
             count = 0;
 
             it = N(KootFavorData);
             for (i = 0; i < ARRAY_COUNT(N(KootFavorData)); i++, it++) {
                 if (evt_get_variable(script, it->unlockedFlag) && !evt_get_variable(script, it->completeFlag)) {
-                    if (count++ == temp_s6) {
+                    if (count++ == randomIdx) {
                         break;
                     }
                 }
             }
         }
-        script->varTable[0] = it->unk_00;
-        evt_set_variable(script, a0, i + 1);
+        script->varTable[0] = it->requestMsg;
+        evt_set_variable(script, currentFavorVar, i + 1);
         return ApiStatus_DONE2;
     } else {
-        script->varTable[0] = it->unk_00;
-        evt_set_variable(script, a0, i + 1);
+        // found a new pending favor
+        script->varTable[0] = it->requestMsg;
+        evt_set_variable(script, currentFavorVar, i + 1);
         return ApiStatus_DONE2;
     }
 }
 
-API_CALLABLE(N(func_80244078_9DB098)) {
+API_CALLABLE(N(GiveUpFavor)) {
     Bytecode* args = script->ptrReadPos;
-    s32 a0 = *args++;
-    s32 count = 0;
-    s32 favorIdx = evt_get_variable(script, a0) - 1;
+    s32 currentFavorVar = *args++;
+    s32 favorIdx = evt_get_variable(script, currentFavorVar) - 1;
     KootFavor* it = N(KootFavorData);
+    s32 count = 0;
+    s32 randomIdx;
     u32 i;
 
     evt_set_variable(script, N(KootFavorData)[favorIdx].gaveUpFlag, TRUE);
@@ -279,11 +285,10 @@ API_CALLABLE(N(func_80244078_9DB098)) {
     if (i == ARRAY_COUNT(N(KootFavorData))) {
         if (count < 2) {
             script->varTable[0] = 0;
-            evt_set_variable(script, a0, 0xFF);
+            evt_set_variable(script, currentFavorVar, 0xFF);
             return ApiStatus_DONE2;
         } else {
-            s32 temp_s6 = rand_int(count - 2);
-
+            randomIdx = rand_int(count - 2);
             count = 0;
 
             it = N(KootFavorData);
@@ -292,18 +297,18 @@ API_CALLABLE(N(func_80244078_9DB098)) {
                     continue;
                 }
                 if (evt_get_variable(script, it->unlockedFlag) && !evt_get_variable(script, it->completeFlag)) {
-                    if (count++ == temp_s6) {
+                    if (count++ == randomIdx) {
                         break;
                     }
                 }
             }
         }
-        script->varTable[0] = it->unk_00;
-        evt_set_variable(script, a0, i + 1);
+        script->varTable[0] = it->requestMsg;
+        evt_set_variable(script, currentFavorVar, i + 1);
         return ApiStatus_DONE2;
     } else {
-        script->varTable[0] = it->unk_00;
-        evt_set_variable(script, a0, i + 1);
+        script->varTable[0] = it->requestMsg;
+        evt_set_variable(script, currentFavorVar, i + 1);
         return ApiStatus_DONE2;
     }
 }
@@ -313,9 +318,9 @@ API_CALLABLE(N(GetFavorMessages)) {
     s32 favorIdx = evt_get_variable(script, *args++) - 1;
     KootFavor* favor = &N(KootFavorData)[favorIdx];
 
-    script->varTable[0] = favor->unk_00;
-    script->varTable[1] = favor->unk_04;
-    script->varTable[2] = favor->unk_08;
+    script->varTable[0] = favor->requestMsg;
+    script->varTable[1] = favor->minorRewardMsg;
+    script->varTable[2] = favor->majorRewardMsg;
     return ApiStatus_DONE2;
 }
 
@@ -396,10 +401,10 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
             EVT_END_IF
             EVT_SWITCH(GB_KootFavor_Completed)
                 #define NAME_SUFFIX _Koot
-                EVT_CASE_EQ(2)
+                EVT_CASE_EQ(1 + KOOT_FAVOR_CH1_2)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B2)
                     EVT_GIVE_KEY_REWARD(ITEM_SILVER_CREDIT)
-                EVT_CASE_EQ(10)
+                EVT_CASE_EQ(1 + KOOT_FAVOR_CH4_2)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B3)
                     EVT_GIVE_KEY_REWARD(ITEM_GOLD_CREDIT)
                     EVT_CALL(FindKeyItem, ITEM_SILVER_CREDIT, LVar1)
@@ -409,14 +414,15 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
             EVT_SET(GB_KootFavor_State, KOOT_FAVOR_STATE_0)
             EVT_GOTO(90)
         EVT_END_IF
+        // ask about current favor progress
         EVT_IF_EQ(GF_KootFavor_LeftKoopaArea, TRUE)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AD)
             EVT_CALL(ShowChoice, MSG_Choice_0012)
             EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(0)
+                EVT_CASE_EQ(0) // go on
                     EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AE)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(N(func_80244078_9DB098), GB_KootFavor_Current)
+                EVT_CASE_EQ(1) // give up
+                    EVT_CALL(N(GiveUpFavor), GB_KootFavor_Current)
                     EVT_IF_EQ(LVar0, 0)
                         EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B0)
                         EVT_SET(GB_KootFavor_State, KOOT_FAVOR_STATE_1)
@@ -425,7 +431,7 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
                         EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AF)
                     EVT_END_IF
                     EVT_GOTO(50)
-                EVT_CASE_EQ(2)
+                EVT_CASE_EQ(2) // forgotten
                     EVT_CALL(N(GetFavorMessages), GB_KootFavor_Current)
                     EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar0)
             EVT_END_SWITCH
@@ -446,7 +452,7 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
         EVT_END_IF
         EVT_GOTO(90)
     EVT_END_IF
-    EVT_CALL(N(func_80243F10_9DAF30), GB_KootFavor_Current)
+    EVT_CALL(N(FindNextFavor), GB_KootFavor_Current)
     EVT_IF_EQ(LVar0, 0)
         EVT_IF_LT(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A5)
@@ -494,7 +500,7 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
     EVT_END
 };
 
-EvtScript N(EVS_80253350) = {
+EvtScript N(EVS_SetupKootFavors) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
         EVT_GOTO(80)
     EVT_END_IF

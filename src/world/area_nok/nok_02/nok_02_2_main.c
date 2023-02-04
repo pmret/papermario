@@ -129,7 +129,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_SetupFoliage))
     EVT_EXEC(N(EVS_TexPan_Flowers))
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Setup_Bookshelf)), TRIGGER_WALL_PRESS_A, COLLIDER_o236, 1, 0)
-    EVT_EXEC_WAIT(N(EVS_80246B50))
+    EVT_EXEC_WAIT(N(EVS_SetupRooms))
     EVT_CALL(GetDemoState, LVar0)
     EVT_IF_NE(LVar0, DEMO_STATE_NONE)
         EVT_EXEC_WAIT(N(EVS_SetupDemo))
