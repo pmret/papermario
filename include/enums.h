@@ -555,6 +555,7 @@ enum SoundIDs {
     SOUND_36                        = 0x00000036,
     SOUND_37                        = 0x00000037,
     SOUND_38                        = 0x00000038,
+    SOUND_39                        = 0x00000039,
     SOUND_3F                        = 0x0000003F,
     SOUND_40                        = 0x00000040,
     SOUND_41                        = 0x00000041,
@@ -853,6 +854,8 @@ enum SoundIDs {
     SOUND_227                       = 0x00000227,
     SOUND_228                       = 0x00000228,
     SOUND_229                       = 0x00000229,
+    SOUND_22A                       = 0x0000022A,
+    SOUND_22B                       = 0x0000022B,
     SOUND_22C                       = 0x0000022C,
     SOUND_22D                       = 0x0000022D,
     SOUND_230                       = 0x00000230,
@@ -1541,6 +1544,8 @@ enum SoundIDs {
 };
 
 enum SoundInstanceFlags {
+    SOUND_INSTANCE_FLAG_1           = 0x00000001,
+    SOUND_INSTANCE_FLAG_2           = 0x00000002,
     SOUND_INSTANCE_FLAG_4           = 0x00000004,
 };
 
@@ -1562,9 +1567,9 @@ enum SoundSpatializationFlags {
 enum SoundType {
     SOUND_TYPE_SPECIAL              = 0x80000000,
     SOUND_TYPE_LOOPING              = 0,
-    SOUND_TYPE_DOOR1                = 1,
-    SOUND_TYPE_DOOR2                = 2,
-    SOUND_TYPE_ALTERNATING          = 3
+    SOUND_TYPE_EXIT_DOOR            = 1, // 0x90000000 (with SOUND_TYPE_SPECIAL)
+    SOUND_TYPE_ROOM_DOOR            = 2, // 0xA0000000 (with SOUND_TYPE_SPECIAL)
+    SOUND_TYPE_ALTERNATING          = 3, // 0xB0000000 (with SOUND_TYPE_SPECIAL)
 };
 
 enum SoundIDBits {
@@ -3099,9 +3104,9 @@ enum TriggerFlags {
     TRIGGER_WALL_TOUCH          = 0x00000400,
     TRIGGER_FLOOR_PRESS_A       = 0x00000800,
     TRIGGER_WALL_HAMMER         = 0x00001000,
-    TRIGGER_FLAG_2000          = 0x00002000,
-    TRIGGER_FLAG_4000          = 0x00004000,
-    TRIGGER_FLAG_8000          = 0x00008000,
+    TRIGGER_FLAG_2000           = 0x00002000,
+    TRIGGER_FLAG_4000           = 0x00004000,
+    TRIGGER_FLAG_8000           = 0x00008000,
     TRIGGER_GAME_FLAG_SET       = 0x00010000,
     TRIGGER_AREA_FLAG_SET       = 0x00020000,
     TRIGGER_CEILING_TOUCH       = 0x00040000,
@@ -3364,7 +3369,7 @@ enum NpcFlags {
     NPC_FLAG_MOTION_BLUR             = 0x00100000, ///< Gives motion blur effect as NPC moves. Set by enable_npc_blur
     NPC_FLAG_200000                  = 0x00200000,
     NPC_FLAG_400000                  = 0x00400000,
-    NPC_FLAG_NO_DROPS                = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
+    NPC_FLAG_HIDING                  = 0x00800000, 
     NPC_FLAG_1000000                 = 0x01000000, // TODO. fails assert in set_npc_sprite
     NPC_FLAG_SIMPLIFIED_PHYSICS      = 0x02000000,
     /// Use simpler, faster physics calculations:
@@ -4862,6 +4867,24 @@ enum ModelAnimUnit {
     MDL_ANIMATOR_F  = 0xF,
 };
 
+enum MapRoomFlags {
+    ROOM_FLAGS_VISGROUP_MASK    = 0xF000,
+    ROOM_FLAGS_MASK   			= 0x0F00,
+    ROOM_FLAGS_DOOR_TYPE_MASK   = 0x00FF,
+    ROOM_DOOR_TYPE_0	        = 0,
+    ROOM_DOOR_TYPE_1	        = 1,
+    ROOM_DOOR_TYPE_2	        = 2,
+    ROOM_DOOR_TYPE_3	        = 3,
+    ROOM_DOOR_TYPE_4	        = 4,
+    ROOM_DOOR_TYPE_5	        = 5,
+    ROOM_DOOR_TYPE_6	        = 6,
+    ROOM_DOOR_TYPE_7	        = 7,
+	ROOM_FLAG_CUSTOM_ANIM_OPEN_DOOR	= 0x0100,
+	ROOM_FLAG_CUSTOM_ANIM_WALL_ROT	= 0x0200,
+	ROOM_FLAG_CUSTOM_ANIM_DROP_DOOR	= 0x0400,
+	ROOM_FLAG_800               = 0x0800,
+};
+
 enum EnemyFlags {
     ENEMY_FLAG_1                 = 0x00000001,
     ENEMY_FLAG_2                 = 0x00000002,
@@ -4886,7 +4909,7 @@ enum EnemyFlags {
     ENEMY_FLAG_100000            = 0x00100000,
     ENEMY_FLAG_200000            = 0x00200000,
     ENEMY_FLAG_400000            = 0x00400000,
-    ENEMY_FLAG_800000            = 0x00800000,
+    ENEMY_FLAG_NO_DROPS          = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
     ENEMY_FLAG_IGNORE_TOUCH      = 0x01000000,
     ENEMY_FLAG_IGNORE_JUMP       = 0x02000000,
     ENEMY_FLAG_IGNORE_HAMMER     = 0x04000000,

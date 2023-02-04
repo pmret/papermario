@@ -243,7 +243,7 @@ API_CALLABLE(N(Quizmo_HideWorld)) {
             Npc* npc = get_npc_by_index(i);
 
             if (npc != NULL && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != CHUCK_QUIZMO_NPC_ID) {
-                npc->flags |= NPC_FLAG_NO_DROPS; // odd
+                npc->flags |= NPC_FLAG_HIDING;
             }
         }
 
@@ -297,7 +297,7 @@ API_CALLABLE(N(Quizmo_FadeInWorld)) {
             Npc* npc = get_npc_by_index(i);
             if (npc != NULL && npc->flags != 0) {
                 if (npc->npcID != NPC_PARTNER && npc->npcID != CHUCK_QUIZMO_NPC_ID) {
-                    npc->flags &= ~NPC_FLAG_NO_DROPS;
+                    npc->flags &= ~NPC_FLAG_HIDING;
                 }
             }
         }

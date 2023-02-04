@@ -140,7 +140,7 @@ EvtScript N(EVS_NpcIdle_Pokey_03) = {
 
 EvtScript N(EVS_NpcInit_Pokey_01) = {
     EVT_IF_EQ(GF_ISK07_Defeated_Mummies, FALSE)
-        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_800000)
+        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
     EVT_END_IF
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey_01)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey_01)))
@@ -152,7 +152,7 @@ EvtScript N(EVS_NpcInit_Pokey_01) = {
 
 EvtScript N(EVS_NpcInit_Pokey_02) = {
     EVT_IF_EQ(GF_ISK07_Defeated_Mummies, FALSE)
-        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_800000)
+        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
     EVT_END_IF
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey_02)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey_01)))
@@ -163,7 +163,7 @@ EvtScript N(EVS_NpcInit_Pokey_02) = {
 
 EvtScript N(EVS_NpcInit_Pokey_03) = {
     EVT_IF_EQ(GF_ISK07_Defeated_Mummies, FALSE)
-        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_800000)
+        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
     EVT_END_IF
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey_03)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey_01)))

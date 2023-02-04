@@ -10501,7 +10501,7 @@ segments:
     - [0x95B200, c, dro_01_2_main]
     - [0x95B7E0, c, dro_01_3_npc]
     - [0x95E660, c, dro_01_4_shop]
-    - [0x95E660, c, dro_01_5_building]
+    - [0x95E660, c, dro_01_5_rooms]
     - [0x95E7A0, c, dro_01_6_entity]
     - [0x95EA80, c, dro_01_7_foliage]
     - [0x95ECC0]
@@ -10515,13 +10515,13 @@ segments:
     - [0x9691C0, c, dro_02_1_music]
     - [0x9691C0, c, dro_02_2_entity]
     - [0x9691C0, c, dro_02_3_main]
-    - [0x9694C0, c, dro_02_4_building]
+    - [0x9694C0, c, dro_02_4_rooms]
     - [0x9694C0, c, dro_02_5_npc]
     - [0x96CC30, .data, dro_02_0_header]
     - [0x96CCB0, .data, dro_02_1_music]
     - [0x96CD90, .data, dro_02_2_entity]
     - [0x96CE00, .data, dro_02_3_main]
-    - [0x96D380, .data, dro_02_4_building]
+    - [0x96D380, .data, dro_02_4_rooms]
     - start: 0x96DFA0
       type: .data
       name: dro_02_5_npc

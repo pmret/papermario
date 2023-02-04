@@ -169,8 +169,8 @@ s32 N(InteriorNPCs_RightHouse)[] = {
 
 EvtScript N(EVS_SetupLockedHouse) = {
     // lower right house
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_RightHouse)),
         EVT_PTR(N(EVS_MoveWalls_RightHouse)),
         EVT_PTR(N(EVS_DropDoor_RightHouse)),
@@ -187,8 +187,8 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(SetGroupEnabled, MODEL_g_naiso, 0)
     EVT_CALL(EnableModel, MODEL_gn_dan1, TRUE)
     // lower left house
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_LeftHouse)),
         EVT_PTR(N(EVS_MoveWalls_LeftHouse)),
         EVT_PTR(N(EVS_DropDoor_LeftHouse)),

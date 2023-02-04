@@ -25,7 +25,7 @@ EvtScript N(EVS_DropDoor_MayorFoyer) = {
 };
 
 EvtScript N(EVS_ToggleVis_MayorFoyer) = {
-    EVT_CALL(UseAdvancedDoorSounds, DOOR_SOUNDS_BASIC)
+    EVT_CALL(UseRoomDoorSounds, DOOR_SOUNDS_BASIC)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_SET(AF_SAM_04, TRUE)
@@ -66,7 +66,7 @@ EvtScript N(EVS_MoveWalls_MayorOffice) = {
 };
 
 EvtScript N(EVS_ToggleVis_MayorOffice) = {
-    EVT_CALL(UseAdvancedDoorSounds, DOOR_SOUNDS_BASIC)
+    EVT_CALL(UseRoomDoorSounds, DOOR_SOUNDS_BASIC)
     EVT_IF_EQ(GB_StoryProgress, STORY_CH7_HERRINGWAY_AT_MAYORS_HOUSE)
         EVT_IF_EQ(AF_SAM_03, TRUE)
             EVT_SET(LVar0, -1)
@@ -123,7 +123,7 @@ EvtScript N(EVS_MoveWalls_MiddleHouse) = {
 };
 
 EvtScript N(EVS_ToggleVis_MiddleHouse) = {
-    EVT_CALL(UseAdvancedDoorSounds, DOOR_SOUNDS_DOOR)
+    EVT_CALL(UseRoomDoorSounds, DOOR_SOUNDS_DOOR)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_SET(AF_SAM_Snowing, FALSE)
@@ -164,7 +164,7 @@ EvtScript N(EVS_MoveWalls_RightHouse) = {
 };
 
 EvtScript N(EVS_ToggleVis_UpperRightHouse) = {
-    EVT_CALL(UseAdvancedDoorSounds, DOOR_SOUNDS_BASIC)
+    EVT_CALL(UseRoomDoorSounds, DOOR_SOUNDS_BASIC)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_SET(AF_SAM_Snowing, FALSE)
@@ -178,7 +178,7 @@ EvtScript N(EVS_ToggleVis_UpperRightHouse) = {
 };
 
 EvtScript N(EVS_ToggleVis_LowerRightHouse) = {
-    EVT_CALL(UseAdvancedDoorSounds, DOOR_SOUNDS_DOOR)
+    EVT_CALL(UseRoomDoorSounds, DOOR_SOUNDS_DOOR)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_SET(AF_SAM_Snowing, FALSE)
@@ -230,8 +230,8 @@ EvtScript N(EVS_SetupMayorRooms) = {
             EVT_SET(LVar0, EVT_PTR(N(InteriorNPCs_MayorAfter)))
     EVT_END_SWITCH
     // mayor's foyer
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_MayorFoyer)),
         EVT_PTR(N(EVS_MoveWalls_MayorFoyer)),
         EVT_PTR(N(EVS_DropDoor_MayorFoyer)),
@@ -241,8 +241,8 @@ EvtScript N(EVS_SetupMayorRooms) = {
         MODEL_son,
         LVar0)
     // mayor's office
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_MayorOffice)),
         EVT_PTR(N(EVS_MoveWalls_MayorOffice)),
         NULL,
@@ -262,8 +262,8 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_END_IF
     // upper middle house
     EVT_CALL(SetGroupEnabled, MODEL_f_naiso, 0)
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_0),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_MiddleHouse)),
         EVT_PTR(N(EVS_MoveWalls_MiddleHouse)),
         NULL,
@@ -274,8 +274,8 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_PTR(N(InteriorNPCs_MiddleHouse)))
     // lower right house
     EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 0)
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_1, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_UpperRightHouse)),
         EVT_PTR(N(EVS_MoveWalls_RightHouse)),
         NULL,
@@ -286,8 +286,8 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_PTR(N(InteriorNPCs_RightHouse)))
     // upper right house
     EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 0)
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_0),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_LowerRightHouse)),
         EVT_PTR(N(EVS_MoveWalls_RightHouse)),
         NULL,

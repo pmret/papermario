@@ -241,8 +241,8 @@ s32 N(InteriorNPCs_BeachHouse_After)[] = {
 
 EvtScript N(EVS_MakeRooms) = {
     // toad house
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, 0x200),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
         EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
         EVT_PTR(N(EVS_MoveWalls_ToadHouse)),
         NULL,
@@ -252,8 +252,8 @@ EvtScript N(EVS_MakeRooms) = {
         MODEL_aka,
         EVT_PTR(N(InteriorNPCs_ToadHouse)))
     // shop
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_1, 0x200),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_TYPE_0 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
         EVT_PTR(N(EVS_SetDoorRot_Shop)),
         EVT_PTR(N(EVS_MoveWalls_Shop)),
         NULL,
@@ -264,8 +264,8 @@ EvtScript N(EVS_MakeRooms) = {
         EVT_PTR(N(InteriorNPCs_Shop)))
     // beach house
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-        EVT_CALL(MakeDoorAdvanced,
-            VIS_GROUP_PAIR(VIS_GROUP_0, 0x200),
+        EVT_CALL(CreateMapRoom,
+            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             EVT_PTR(N(EVS_SetDoorRot_BeachHouse)),
             EVT_PTR(N(EVS_MoveWalls_BeachHouse)),
             EVT_PTR(N(EVS_DropDoor_BeachHouse)),
@@ -275,8 +275,8 @@ EvtScript N(EVS_MakeRooms) = {
             MODEL_ao,
             EVT_PTR(N(InteriorNPCs_BeachHouse_Before)))
     EVT_ELSE
-        EVT_CALL(MakeDoorAdvanced,
-            VIS_GROUP_PAIR(VIS_GROUP_0, 0x200),
+        EVT_CALL(CreateMapRoom,
+            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             EVT_PTR(N(EVS_SetDoorRot_BeachHouse)),
             EVT_PTR(N(EVS_MoveWalls_BeachHouse)),
             EVT_PTR(N(EVS_DropDoor_BeachHouse)),

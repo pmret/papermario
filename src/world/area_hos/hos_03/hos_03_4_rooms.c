@@ -84,8 +84,8 @@ s32 N(InteriorNPCs_ToadHouse)[] = {
 
 EvtScript N(EVS_SetupRooms) = {
     // house
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_0),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_House)),
         EVT_PTR(N(EVS_MoveWalls_House)),
         EVT_PTR(N(EVS_DropDoor_House)),
@@ -95,8 +95,8 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_o76,
         NULL)
     // shop
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_0),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_Shop)),
         EVT_PTR(N(EVS_MoveWalls_Shop)),
         NULL,
@@ -106,8 +106,8 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_o76,
         EVT_PTR(N(InteriorNPCs_Shop)))
     // toad house
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_0),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
         EVT_PTR(N(EVS_MoveWalls_ToadHouse)),
         NULL,

@@ -189,8 +189,8 @@ s32 N(InteriorNPCs_WaterfrontHouse)[] = {
 
 EvtScript N(EVS_SetupRooms) = {
     // RussT's house
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_0),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_RussHouse)),
         EVT_PTR(N(EVS_MoveWalls_RussHouse)),
         EVT_PTR(N(EVS_DropDoor_RussHouse)),
@@ -200,16 +200,16 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_intel_house,
         EVT_PTR(N(InteriorNPCs_RussHouse)))
     // harry's shop
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_1, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_Shop)),
         EVT_PTR(N(EVS_MoveWalls_Shop)),
         NULL,
         EVT_PTR(N(EVS_ToggleVis_Shop)),
         COLLIDER_deilit5, COLLIDER_deilit5u, MODEL_omise, EVT_PTR(N(InteriorNPCs_Shop)))
     // the dojo
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_Dojo)),
         EVT_PTR(N(EVS_MoveWalls_Dojo)),
         EVT_PTR(N(EVS_DropDoor_Dojo)),
@@ -219,8 +219,8 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_minka_1,
         EVT_PTR(N(InteriorNPCs_Dojo)))
     // the waterfront house
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_Waterfront)),
         EVT_PTR(N(EVS_MoveWalls_Waterfront)),
         NULL,

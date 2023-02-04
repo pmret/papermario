@@ -97,8 +97,8 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(SetGroupEnabled, MODEL_g31, 0)
     EVT_CALL(SetGroupEnabled, MODEL_g51, 0)
     EVT_BIND_PADLOCK(EVT_PTR(N(EVS_ManageUpstairsVisibility)), TRIGGER_FLOOR_TOUCH, COLLIDER_o92, 0, 0, 1)
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_0),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_House)),
         EVT_PTR(N(EVS_MoveWalls_House)),
         EVT_PTR(N(EVS_DropDoor_House)),
@@ -107,8 +107,8 @@ EvtScript N(EVS_SetupRooms) = {
         COLLIDER_o159,
         MODEL_g2,
         NULL)
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_0),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_Downstairs)),
         NULL,
         NULL,
@@ -117,8 +117,8 @@ EvtScript N(EVS_SetupRooms) = {
         COLLIDER_o160,
         MODEL_o1,
         NULL)
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_1),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_1),
         EVT_PTR(N(EVS_SetDoorRot_Upstairs)),
         NULL,
         NULL,

@@ -119,7 +119,7 @@ API_CALLABLE(N(DarkenWorld)) {
         for (i = 0; i < MAX_NPCS; i++) {
             Npc* npc = get_npc_by_index(i);
             if (npc != 0 && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != NPC_Merlee) {
-                npc->flags |= NPC_FLAG_NO_DROPS;
+                npc->flags |= NPC_FLAG_HIDING;
             }
         }
         script->functionTemp[0] = 0;
@@ -157,7 +157,7 @@ API_CALLABLE(N(UndarkenWorld)) {
             Npc* npc = get_npc_by_index(i);
 
             if (npc != NULL && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != NPC_Merlee) {
-                npc->flags &= ~NPC_FLAG_NO_DROPS;
+                npc->flags &= ~NPC_FLAG_HIDING;
             }
         }
         return ApiStatus_DONE2;

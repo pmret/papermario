@@ -210,8 +210,8 @@ s32 N(InsideNPCs_MerlonHouse)[] = {
 
 EvtScript N(EVS_SetupRooms) = {
     // post office
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_PostOffice)),
         EVT_PTR(N(EVS_MoveWalls_PostOffice)),
         EVT_PTR(N(EVS_DropDoor_PostOffice)),
@@ -221,8 +221,8 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_post_office,
         EVT_PTR(N(InsideNPCs_PostOffice)))
     // toad house
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
         EVT_PTR(N(EVS_MoveWalls_ToadHouse)),
         NULL,
@@ -232,8 +232,8 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_kinopi, 
         EVT_PTR(N(InsideNPCs_ToadHouse)))
     // merlon's house
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_MerlonHouse)),
         EVT_PTR(N(EVS_MoveWalls_MerlonHouse)),
         NULL,

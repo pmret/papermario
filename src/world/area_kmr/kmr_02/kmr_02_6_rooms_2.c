@@ -87,8 +87,8 @@ EvtScript N(EVS_SetupToadHouse) = {
         EVT_CALL(SetGroupEnabled, MODEL_kino_in, 0)
     EVT_END_IF
     // toad house
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_0),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_OpenDoor_ToadHouse)),
         EVT_PTR(N(EVS_MoveWalls_ToadHouse)),
         NULL,

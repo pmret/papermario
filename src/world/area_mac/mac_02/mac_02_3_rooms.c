@@ -15,7 +15,7 @@ API_CALLABLE(N(InitEntryFromTunnels)) {
         npc = get_npc_by_index(i);
         if (npc != NULL) {
             if (npc->flags != 0 && npc->npcID != NPC_PARTNER) {
-                npc->flags |= NPC_FLAG_NO_DROPS;
+                npc->flags |= NPC_FLAG_HIDING;
             }
         }
     }
@@ -101,8 +101,8 @@ s32 N(InsideNPCs_BlueHouse)[] = {
 
 EvtScript N(EVS_SetupRooms) = {
     // tayce T's house on the right
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_TayceT)),
         EVT_PTR(N(EVS_MoveWalls_TayceT)),
         NULL,
@@ -112,8 +112,8 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_cooking,
         EVT_PTR(N(InsideNPCs_TayceT)))
     // blue house on the left
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_BlueHouse)),
         EVT_PTR(N(EVS_MoveWalls_BlueHouse)),
         NULL,

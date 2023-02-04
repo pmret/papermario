@@ -147,7 +147,7 @@ void spawn_drops(Enemy* enemy) {
         s32 temp = var_s1 + 1;
         var_s1 = temp + rand_int(2);
     }
-    if (enemy->flags & ENEMY_FLAG_800000) {
+    if (enemy->flags & ENEMY_FLAG_NO_DROPS) {
         var_s1 = 0;
     }
     if (var_s1 != 0) {
@@ -204,7 +204,7 @@ void spawn_drops(Enemy* enemy) {
         s32 temp = var_s1 + 1;
         var_s1 = temp + rand_int(2);
     }
-    if (enemy->flags & ENEMY_FLAG_800000) {
+    if (enemy->flags & ENEMY_FLAG_NO_DROPS) {
         var_s1 = 0;
     }
     if (var_s1 != 0) {
@@ -274,7 +274,7 @@ void spawn_drops(Enemy* enemy) {
     if (var_s1 > 20) {
         var_s1 = 20;
     }
-    if (enemy->flags & ENEMY_FLAG_800000) {
+    if (enemy->flags & ENEMY_FLAG_NO_DROPS) {
         var_s1 = 0;
     }
     if (var_s1 * 2 > sp28) {
@@ -334,7 +334,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
 
     amt += currentEncounter->coinsEarned;
 
-    if (enemy->flags & (ENEMY_FLAG_800000 | ENEMY_FLAG_40000)) {
+    if (enemy->flags & (ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_40000)) {
         amt = 0;
     }
 

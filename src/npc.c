@@ -873,12 +873,12 @@ void render_npcs(void) {
                     renderTaskPtr->appendGfx = appendGfx_npc;
                     renderTaskPtr->renderMode = npc->renderMode;
 
-                    if (npc->flags & NPC_FLAG_NO_DROPS) {
+                    if (npc->flags & NPC_FLAG_HIDING) {
                         u8 r, g, b, a;
                         get_background_color_blend(&r, &g, &b, &a);
-                        npc->alpha2 = 0xFF - a;
+                        npc->alpha2 = 255 - a;
                     } else {
-                        npc->alpha2 = 0xFF;
+                        npc->alpha2 = 255;
                     }
 
                     if (npc->alpha2 != 0) {

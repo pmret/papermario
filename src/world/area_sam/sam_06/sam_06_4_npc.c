@@ -358,8 +358,8 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
     EVT_THREAD
         EVT_SET(LVar0, 0)
         EVT_SET(LVarF, MODEL_k)
-        EVT_CALL(SetNpcFlagBits, NPC_Merle, NPC_FLAG_NO_DROPS, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_StarKid_03, NPC_FLAG_NO_DROPS, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Merle, NPC_FLAG_HIDING, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_StarKid_03, NPC_FLAG_HIDING, TRUE)
         EVT_CALL(N(func_80242538_D223C8))
     EVT_END_THREAD
     EVT_THREAD

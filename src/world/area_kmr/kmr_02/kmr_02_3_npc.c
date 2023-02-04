@@ -1443,12 +1443,12 @@ API_CALLABLE(N(func_80242F28_8B2F98)) {
 
 EvtScript N(EVS_Scene_EldstarsPlea) = {
     EVT_CALL(FadeOutMusic, 0, 500)
-    EVT_CALL(SetNpcFlagBits, NPC_Goombario, NPC_FLAG_NO_DROPS, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_NO_DROPS, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Goompapa, NPC_FLAG_NO_DROPS, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Goomama, NPC_FLAG_NO_DROPS, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_NO_DROPS, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Gooma, NPC_FLAG_NO_DROPS, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Goombario, NPC_FLAG_HIDING, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_HIDING, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Goompapa, NPC_FLAG_HIDING, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Goomama, NPC_FLAG_HIDING, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_HIDING, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Gooma, NPC_FLAG_HIDING, TRUE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)

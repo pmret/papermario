@@ -244,14 +244,14 @@ ApiStatus func_802D62E4(Evt* script, s32 isInitialCall) {
 ApiStatus UseDoorSounds(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    gCurrentDoorSoundsSet = evt_get_variable(script, *args++);
+    gCurrentDoorSounds = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
-ApiStatus UseAdvancedDoorSounds(Evt* script, s32 isInitialCall) {
+ApiStatus UseRoomDoorSounds(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_80151308 = evt_get_variable(script, *args++);
+    gCurrentRoomDoorSounds = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 

@@ -207,15 +207,15 @@ s32 N(InsideNPCs_ToadHouse)[] = {
     -1
 };
 
-EvtScript N(EVS_SetupBuildings) = {
+EvtScript N(EVS_SetupRooms) = {
     EVT_EXEC(N(EVS_SwingToadHouseSign))
     EVT_CALL(ParentColliderToModel, COLLIDER_o1287, MODEL_1_doa)
     EVT_IF_GE(GB_StoryProgress, STORY_CH2_BOUGHT_SECRET_ITEMS)
         EVT_CALL(RotateModel, MODEL_1_doa, 18, 0, 1, 0)
         EVT_CALL(UpdateColliderTransform, COLLIDER_o1287)
     EVT_END_IF
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_4),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_4),
         EVT_PTR(N(EVS_OpenDoor_Hideout)),
         EVT_PTR(N(EVS_MoveWalls_Hideout)),
         EVT_PTR(N(EVS_DropDoor_Hideout)),
@@ -228,8 +228,8 @@ EvtScript N(EVS_SetupBuildings) = {
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OpenSecretDoor_FromOutside)), TRIGGER_WALL_PRESS_A, COLLIDER_o1287, 1, 0)
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OpenSecretDoor_FromInside)), TRIGGER_WALL_PRESS_A, COLLIDER_o1289, 1, 0)
     EVT_END_IF
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_1, VIS_GROUP_5),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_TYPE_5),
         EVT_PTR(N(EVS_OpenDoor_ToadHouse)),
         EVT_PTR(N(EVS_MoveWalls_ToadHouse)),
         NULL,

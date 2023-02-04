@@ -205,8 +205,8 @@ s32 N(InsideNPCs_House)[] = {
 
 EvtScript N(EVS_SetupRooms) = {
     // goomba family home, main room
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_5),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_5),
         EVT_PTR(N(EVS_OpenDoor_House)),
         EVT_PTR(N(EVS_MoveWalls_House)),
         EVT_PTR(N(EVS_DropDoor_House)),
@@ -216,8 +216,8 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_kuribou_house,
         EVT_PTR(N(InsideNPCs_House)))
     // verdana
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_7),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_7),
         EVT_PTR(N(EVS_OpenDoor_Verdana)),
         EVT_PTR(N(EVS_MoveWalls_Verdana)),
         NULL,
