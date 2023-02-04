@@ -45,6 +45,7 @@ class SplatOpts:
     #
     # It's possible to use more than one file by supplying a list instead of a string
     symbol_addrs_paths: List[Path]
+    reloc_addrs_paths: List[Path]
     # Determines the path to the project build directory
     build_path: Path
     # Determines the path to the source code directory
@@ -95,6 +96,11 @@ class SplatOpts:
     ld_discard_section: bool
     # Determines the list of section labels that are to be added to the linker script
     ld_section_labels: List[str]
+    # Determines whether to add wildcards for section linking in the linker script (.rodata* for example)
+    ld_wildcard_sections: bool
+    # Determines whether to use use "follows" settings to determine locations of overlays in the linker script.
+    # If disabled, this effectively ignores "follows" directives in the yaml.
+    ld_use_follows: bool
 
     ################################################################################
     # C file options
@@ -118,6 +124,8 @@ class SplatOpts:
     symbol_name_format_no_rom: str
     # Determines whether to detect and hint to the user about likely file splits when disassembling
     find_file_boundaries: bool
+    # Determines whether to detect and hint to the user about possible rodata sections corresponding to a text section
+    pair_rodata_to_text: bool
     # Determines whether to attempt to automatically migrate rodata into functions
     # (only works in certain circumstances)
     migrate_rodata_to_functions: bool
@@ -150,6 +158,8 @@ class SplatOpts:
     create_asm_dependencies: bool
     # Global option for rodata string encoding. This can be overriden per segment
     string_encoding: Optional[str]
+    # Global option for allowing data symbols using addends on symbol references. It can be overriden per symbol
+    allow_data_addends: bool
 
     ################################################################################
     # N64-specific options
@@ -231,6 +241,16 @@ class OptParser:
             return None
         return self.parse_path(base_path, opt)
 
+    def parse_path_list(self, base_path: Path, opt: str, default: str) -> List[Path]:
+        paths = self.parse_opt(opt, object, default)
+
+        if isinstance(paths, str):
+            return [base_path / paths]
+        elif isinstance(paths, list):
+            return [base_path / path for path in paths]
+        else:
+            raise ValueError(f"Expected str or list for '{opt}', got {type(paths)}")
+
     def check_no_unread_opts(self) -> None:
         opts = [opt for opt in self._yaml if opt not in self._read_opts]
         if opts:
@@ -244,18 +264,6 @@ def _parse_yaml(
     verbose: bool = False,
 ) -> SplatOpts:
     p = OptParser(yaml)
-
-    def parse_symbol_addrs_paths(base_path: Path) -> List[Path]:
-        paths = p.parse_opt("symbol_addrs_path", object, "symbol_addrs.txt")
-
-        if isinstance(paths, str):
-            return [base_path / paths]
-        elif isinstance(paths, list):
-            return [base_path / path for path in paths]
-        else:
-            raise ValueError(
-                f"Expected str or list for 'symbol_addrs_paths', got {type(paths)}"
-            )
 
     basename = p.parse_opt("basename", str)
     platform = p.parse_opt_within("platform", str, ["n64", "psx", "gc", "ps2"])
@@ -298,7 +306,12 @@ def _parse_yaml(
         use_o_as_suffix=p.parse_opt("o_as_suffix", bool, False),
         gp=p.parse_opt("gp_value", int, 0),
         asset_path=p.parse_path(base_path, "asset_path", "assets"),
-        symbol_addrs_paths=parse_symbol_addrs_paths(base_path),
+        symbol_addrs_paths=p.parse_path_list(
+            base_path, "symbol_addrs_path", "symbol_addrs.txt"
+        ),
+        reloc_addrs_paths=p.parse_path_list(
+            base_path, "reloc_addrs_path", "reloc_addrs.txt"
+        ),
         build_path=p.parse_path(base_path, "build_path", "build"),
         src_path=p.parse_path(base_path, "src_path", "src"),
         asm_path=asm_path,
@@ -332,6 +345,8 @@ def _parse_yaml(
             list,
             [".text", ".data", ".rodata", ".bss"],
         ),
+        ld_wildcard_sections=p.parse_opt("ld_wildcard_sections", bool, False),
+        ld_use_follows=p.parse_opt("ld_use_follows", bool, True),
         create_c_files=p.parse_opt("create_c_files", bool, True),
         auto_decompile_empty_functions=p.parse_opt(
             "auto_decompile_empty_functions", bool, True
@@ -343,6 +358,7 @@ def _parse_yaml(
             "symbol_name_format_no_rom", str, "$VRAM_$SEG"
         ),
         find_file_boundaries=p.parse_opt("find_file_boundaries", bool, True),
+        pair_rodata_to_text=p.parse_opt("pair_rodata_to_text", bool, True),
         migrate_rodata_to_functions=p.parse_opt(
             "migrate_rodata_to_functions", bool, True
         ),
@@ -375,6 +391,7 @@ def _parse_yaml(
         add_set_gp_64=p.parse_opt("add_set_gp_64", bool, True),
         create_asm_dependencies=p.parse_opt("create_asm_dependencies", bool, False),
         string_encoding=p.parse_optional_opt("string_encoding", str),
+        allow_data_addends=p.parse_opt("allow_data_addends", bool, True),
         header_encoding=p.parse_opt("header_encoding", str, "ASCII"),
         gfx_ucode=p.parse_opt_within(
             "gfx_ucode",

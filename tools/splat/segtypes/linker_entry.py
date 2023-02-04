@@ -10,6 +10,7 @@ from util import options
 from segtypes.n64.palette import N64SegPalette
 from segtypes.segment import Segment
 
+
 # clean 'foo/../bar' to 'bar'
 @lru_cache(maxsize=None)
 def clean_up_path(path: Path) -> Path:
@@ -202,6 +203,8 @@ class LinkerWriter:
                 )
                 self._write_symbol(path_cname, ".")
 
+            wildcard = "*" if options.opts.ld_wildcard_sections else ""
+
             # Create new linker section for BSS
             if entering_bss or leaving_bss:
                 # If this is the last entry of its type, add the END marker for the section we're ending
@@ -230,10 +233,13 @@ class LinkerWriter:
                 section_labels[cur_section].started = True
 
                 # Write THIS linker entry
-                self._writeln(f"{entry.object_path}({entry.section});")
+                self._writeln(f"{entry.object_path}({entry.section}{wildcard});")
             else:
                 # Write THIS linker entry
-                self._writeln(f"{entry.object_path}({entry.section}*);")
+                if entry.section == ".bss" and entry.segment.bss_contains_common:
+                    self._writeln(f"{entry.object_path}(.bss COMMON .scommon);")
+                else:
+                    self._writeln(f"{entry.object_path}({entry.section}{wildcard});")
 
                 # If this is the last entry of its type, add the END marker for the section we're ending
                 if entry in last_seen_sections:
@@ -332,9 +338,11 @@ class LinkerWriter:
 
         self._write_symbol(f"{name}_VRAM", f"ADDR(.{name})")
 
-        self._writeln(
-            f".{name} {vram_str}: AT({name}_ROM_START) SUBALIGN({segment.subalign})"
-        )
+        line = f".{name} {vram_str}: AT({name}_ROM_START)"
+        if segment.subalign != None:
+            line += f" SUBALIGN({segment.subalign})"
+
+        self._writeln(line)
         self._begin_block()
 
     def _begin_bss_segment(self, segment: Segment, is_first: bool = False):
@@ -358,7 +366,11 @@ class LinkerWriter:
         else:
             addr_str = "(NOLOAD)"
 
-        self._writeln(f".{name} {addr_str} : SUBALIGN({segment.subalign})")
+        line = f".{name} {addr_str} :"
+        if segment.subalign != None:
+            line += f" SUBALIGN({segment.subalign})"
+
+        self._writeln(line)
         self._begin_block()
 
     def _end_segment(

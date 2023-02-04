@@ -3,12 +3,13 @@ from typing import Optional
 import spimdisasm
 import rabbitizer
 
-from util import options, symbols
+from util import options, symbols, log
 
 from segtypes import segment
 from segtypes.common.code import CommonSegCode
 
 from segtypes.segment import Segment
+
 
 # abstract class for c, asm, data, etc
 class CommonSegCodeSubsegment(Segment):
@@ -18,11 +19,6 @@ class CommonSegCodeSubsegment(Segment):
         vram = segment.parse_segment_vram(self.yaml)
         if vram is not None:
             self.vram_start = vram
-        self.partial_migration: bool = (
-            self.yaml.get("partial_migration", False)
-            if isinstance(self.yaml, dict)
-            else False
-        )
 
         self.str_encoding: Optional[str] = (
             self.yaml.get("str_encoding", None) if isinstance(self.yaml, dict) else None
@@ -41,11 +37,22 @@ class CommonSegCodeSubsegment(Segment):
         return ".text"
 
     def scan_code(self, rom_bytes, is_hasm=False):
-        assert isinstance(self.rom_start, int)
-        assert isinstance(self.rom_end, int)
+        if not isinstance(self.rom_start, int):
+            log.error(
+                f"Segment '{self.name}' (type '{self.type}') requires a rom_start. Got '{self.rom_start}'"
+            )
 
+        # Supposedly logic error, not user error
+        assert isinstance(self.rom_end, int), self.rom_end
+
+        # Supposedly logic error, not user error
         segment_rom_start = self.get_most_parent().rom_start
-        assert isinstance(segment_rom_start, int)
+        assert isinstance(segment_rom_start, int), segment_rom_start
+
+        if not isinstance(self.vram_start, int):
+            log.error(
+                f"Segment '{self.name}' (type '{self.type}') requires a vram address. Got '{self.vram_start}'"
+            )
 
         self.spim_section = spimdisasm.mips.sections.SectionText(
             symbols.spim_context,
@@ -157,6 +164,7 @@ class CommonSegCodeSubsegment(Segment):
 
     def gather_jumptable_labels(self, rom_bytes):
         assert isinstance(self.rom_start, int)
+        assert isinstance(self.vram_start, int)
 
         # TODO: use the seg_symbols for this
         # jumptables = [j.type == "jtbl" for j in self.seg_symbols]
@@ -180,11 +188,11 @@ class CommonSegCodeSubsegment(Segment):
     def should_scan(self) -> bool:
         return (
             options.opts.is_mode_active("code")
-            and self.rom_start != "auto"
-            and self.rom_end != "auto"
+            and self.rom_start is not None
+            and self.rom_end is not None
         )
 
     def should_split(self) -> bool:
-        return self.extract and (
-            self.partial_migration or options.opts.is_mode_active("code")
-        )
+        return (
+            self.extract and options.opts.is_mode_active("code") and self.should_scan()
+        )  # only split if the segment was scanned first

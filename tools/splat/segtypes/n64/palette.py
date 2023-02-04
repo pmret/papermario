@@ -35,7 +35,7 @@ class N64SegPalette(N64Segment):
         )
 
         if self.extract:
-            if self.rom_end == "auto":
+            if self.rom_end is None:
                 log.error(
                     f"segment {self.name} needs to know where it ends; add a position marker [0xDEADBEEF] after it"
                 )
@@ -44,6 +44,7 @@ class N64SegPalette(N64Segment):
                 expected_len = int(self.max_length())
                 assert isinstance(self.rom_end, int)
                 assert isinstance(self.rom_start, int)
+                assert isinstance(self.subalign, int)
                 actual_len = self.rom_end - self.rom_start
                 if (
                     actual_len > expected_len

@@ -15,7 +15,7 @@ class CommonSegBin(CommonSegment):
         assert path is not None
         path.parent.mkdir(parents=True, exist_ok=True)
 
-        if self.rom_end == "auto":
+        if self.rom_end is None:
             log.error(
                 f"segment {self.name} needs to know where it ends; add a position marker [0xDEADBEEF] after it"
             )

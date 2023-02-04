@@ -14,12 +14,12 @@ from colorama import Fore, Style
 from intervaltree import Interval, IntervalTree
 
 from segtypes.linker_entry import LinkerWriter, to_cname
-from segtypes.segment import RomAddr, Segment
-from util import compiler, log, options, palettes, symbols
+from segtypes.segment import Segment
+from util import compiler, log, options, palettes, symbols, relocs
 
-VERSION = "0.12.9"
+VERSION = "0.13.1"
 # This value should be keep in sync with the version listed on requirements.txt
-SPIMDISASM_MIN = (1, 7, 11)
+SPIMDISASM_MIN = (1, 11, 1)
 
 parser = argparse.ArgumentParser(
     description="Split a rom given a rom, a config, and output directory"
@@ -62,6 +62,8 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
     segments_by_name: Dict[str, Segment] = {}
     ret = []
 
+    last_rom_end = 0
+
     for i, seg_yaml in enumerate(config_segments):
         # end marker
         if isinstance(seg_yaml, list) and len(seg_yaml) == 1:
@@ -74,9 +76,15 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
         this_start = Segment.parse_segment_start(seg_yaml)
 
         if i == len(config_segments) - 1 and Segment.parse_segment_file_path(seg_yaml):
-            next_start: RomAddr = 0
+            next_start: Optional[int] = 0
         else:
             next_start = Segment.parse_segment_start(config_segments[i + 1])
+
+        if segment_class.is_noload():
+            # Pretend bss's rom address is after the last actual rom segment
+            this_start = last_rom_end
+            # and it has a rom size of zero
+            next_start = last_rom_end
 
         segment: Segment = Segment.from_yaml(
             segment_class, seg_yaml, this_start, next_start
@@ -101,6 +109,9 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
             and segment.vram_start != segment.vram_end
         ):
             segment_rams.addi(segment.vram_start, segment.vram_end, segment)
+
+        if next_start is not None:
+            last_rom_end = next_start
 
     for segment in ret:
         if segment.follows_vram:
@@ -226,18 +237,18 @@ def configure_disassembler():
 
     rabbitizer.config.pseudos_pseudoMove = False
 
-    selectedCompiler = options.opts.compiler
-    if selectedCompiler == compiler.SN64:
+    selected_compiler = options.opts.compiler
+    if selected_compiler == compiler.SN64:
         rabbitizer.config.regNames_namedRegisters = False
         rabbitizer.config.toolchainTweaks_sn64DivFix = True
         rabbitizer.config.toolchainTweaks_treatJAsUnconditionalBranch = True
         spimdisasm.common.GlobalConfig.ASM_COMMENT = False
         spimdisasm.common.GlobalConfig.SYMBOL_FINDER_FILTERED_ADDRESSES_AS_HILO = False
         spimdisasm.common.GlobalConfig.COMPILER = spimdisasm.common.Compiler.SN64
-    elif selectedCompiler == compiler.GCC:
+    elif selected_compiler == compiler.GCC:
         rabbitizer.config.toolchainTweaks_treatJAsUnconditionalBranch = True
         spimdisasm.common.GlobalConfig.COMPILER = spimdisasm.common.Compiler.GCC
-    elif selectedCompiler == compiler.IDO:
+    elif selected_compiler == compiler.IDO:
         spimdisasm.common.GlobalConfig.COMPILER = spimdisasm.common.Compiler.IDO
 
     spimdisasm.common.GlobalConfig.GP_VALUE = options.opts.gp
@@ -255,6 +266,10 @@ def configure_disassembler():
         spimdisasm.common.GlobalConfig.ASM_DATA_SYM_AS_LABEL = True
 
     spimdisasm.common.GlobalConfig.LINE_ENDS = options.opts.c_newline
+
+    spimdisasm.common.GlobalConfig.ALLOW_ALL_ADDENDS_ON_DATA = (
+        options.opts.allow_data_addends
+    )
 
 
 def brief_seg_name(seg: Segment, limit: int, ellipsis="…") -> str:
@@ -332,22 +347,16 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
     # Initialize segments
     all_segments = initialize_segments(config["segments"])
 
-    # addr_set = set()
-    # for seg in all_segments:
-    #     if isinstance(seg.vram_start, int):
-    #         if not (seg.follows_vram_segment or seg.follows_vram_symbol):
-    #             if seg.vram_start not in addr_set:
-    #                 addr_set.add(seg.vram_start)
-    #                 print(f"VRAM: {seg.vram_start:08X} {seg.name}")
-
     # Load and process symbols
     symbols.initialize(all_segments)
+    relocs.initialize()
 
     # Assign symbols to segments
     assign_symbols_to_segments()
 
     if options.opts.is_mode_active("code"):
         symbols.initialize_spim_context(all_segments)
+        relocs.initialize_spim_context()
 
     # Resolve raster/palette siblings
     if options.opts.is_mode_active("img"):
@@ -489,7 +498,7 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
         with open(options.opts.cache_path, "wb") as f4:
             pickle.dump(cache, f4)
 
-    if options.opts.dump_symbols:
+    if options.opts.dump_symbols and options.opts.is_mode_active("code"):
         from pathlib import Path
 
         splat_hidden_folder = Path(".splat/")

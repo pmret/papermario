@@ -3,7 +3,7 @@ from typing import Dict, List, Optional, Set, TYPE_CHECKING
 
 import spimdisasm
 import tqdm
-from intervaltree import Interval, IntervalTree
+from intervaltree import IntervalTree
 
 # circular import
 if TYPE_CHECKING:
@@ -144,6 +144,9 @@ def initialize(all_segments: "List[Segment]"):
                                                 # Add segment to symbol
                                                 sym.segment = seg
                                             continue
+                                        if attr_name == "name_end":
+                                            sym.given_name_end = attr_val
+                                            continue
                                     except:
                                         log.parsing_error_preamble(path, line_num, line)
                                         log.write(
@@ -186,8 +189,20 @@ def initialize(all_segments: "List[Segment]"):
                                         if attr_name == "force_not_migration":
                                             sym.force_not_migration = tf_val
                                             continue
+                                        if attr_name == "allow_addend":
+                                            sym.allow_addend = tf_val
+                                            continue
+                                        if attr_name == "dont_allow_addend":
+                                            sym.dont_allow_addend = tf_val
+                                            continue
                         if ignore_sym:
-                            ignored_addresses.add(sym.vram_start)
+                            if sym.given_size == None or sym.given_size == 0:
+                                ignored_addresses.add(sym.vram_start)
+                            else:
+                                spim_context.addBannedSymbolRangeBySize(
+                                    sym.vram_start, sym.given_size
+                                )
+
                             ignore_sym = False
                             continue
 
@@ -340,7 +355,13 @@ def add_symbol_to_spim_segment(
         context_sym.forceMigration = True
     if sym.force_not_migration:
         context_sym.forceNotMigration = True
+    if sym.allow_addend:
+        context_sym.allowedToReferenceAddends = True
+    if sym.dont_allow_addend:
+        context_sym.notAllowedToReferenceAddends = True
     context_sym.setNameGetCallbackIfUnset(lambda _: sym.name)
+    if sym.given_name_end:
+        context_sym.nameEnd = sym.given_name_end
 
     return context_sym
 
@@ -384,6 +405,8 @@ def add_symbol_to_spim_section(
     if sym.force_not_migration:
         context_sym.forceNotMigration = True
     context_sym.setNameGetCallbackIfUnset(lambda _: sym.name)
+    if sym.given_name_end:
+        context_sym.nameEnd = sym.given_name_end
 
     return context_sym
 
@@ -455,6 +478,7 @@ class Symbol:
     vram_start: int
 
     given_name: Optional[str] = None
+    given_name_end: Optional[str] = None
     rom: Optional[int] = None
     type: Optional[str] = None
     given_size: Optional[int] = None
@@ -468,6 +492,11 @@ class Symbol:
 
     force_migration: bool = False
     force_not_migration: bool = False
+
+    allow_addend: bool = False
+    dont_allow_addend: bool = False
+
+    linker_section: Optional[str] = None
 
     _generated_default_name: Optional[str] = None
     _last_type: Optional[str] = None

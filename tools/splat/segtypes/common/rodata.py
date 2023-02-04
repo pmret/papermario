@@ -1,5 +1,7 @@
+from typing import Optional, Set, Tuple
 import spimdisasm
-from util import compiler, options, symbols
+from segtypes.segment import Segment
+from util import log, options, symbols
 
 from segtypes.common.data import CommonSegData
 
@@ -8,12 +10,48 @@ class CommonSegRodata(CommonSegData):
     def get_linker_section(self) -> str:
         return ".rodata"
 
-    def disassemble_data(self, rom_bytes):
-        assert isinstance(self.rom_start, int)
-        assert isinstance(self.rom_end, int)
+    @staticmethod
+    def is_rodata() -> bool:
+        return True
 
+    def get_possible_text_subsegment_for_symbol(
+        self, rodata_sym: spimdisasm.mips.symbols.SymbolBase
+    ) -> Optional[Tuple[Segment, spimdisasm.common.ContextSymbol]]:
+        # Check if this rodata segment does not have a corresponding code file, try to look for one
+
+        if self.sibling is not None or not options.opts.pair_rodata_to_text:
+            return None
+
+        if not rodata_sym.shouldMigrate():
+            return None
+
+        if len(rodata_sym.contextSym.referenceFunctions) != 1:
+            return None
+
+        func = list(rodata_sym.contextSym.referenceFunctions)[0]
+        text_segment = self.parent.get_subsegment_for_ram(func.vram)
+
+        if text_segment is None or not text_segment.is_text():
+            return None
+        return text_segment, func
+
+    def disassemble_data(self, rom_bytes):
+        if not isinstance(self.rom_start, int):
+            log.error(
+                f"Segment '{self.name}' (type '{self.type}') requires a rom_start. Got '{self.rom_start}'"
+            )
+
+        # Supposedly logic error, not user error
+        assert isinstance(self.rom_end, int), self.rom_end
+
+        # Supposedly logic error, not user error
         segment_rom_start = self.get_most_parent().rom_start
-        assert isinstance(segment_rom_start, int)
+        assert isinstance(segment_rom_start, int), segment_rom_start
+
+        if not isinstance(self.vram_start, int):
+            log.error(
+                f"Segment '{self.name}' (type '{self.type}') requires a vram address. Got '{self.vram_start}'"
+            )
 
         self.spim_section = spimdisasm.mips.sections.SectionRodata(
             symbols.spim_context,
@@ -38,30 +76,22 @@ class CommonSegRodata(CommonSegData):
         self.spim_section.analyze()
         self.spim_section.setCommentOffset(self.rom_start)
 
+        possible_text_segments: Set[Segment] = set()
+
         for symbol in self.spim_section.symbolList:
-            symbols.create_symbol_from_spim_symbol(
+            generated_symbol = symbols.create_symbol_from_spim_symbol(
                 self.get_most_parent(), symbol.contextSym
             )
+            generated_symbol.linker_section = self.get_linker_section()
 
-    def split(self, rom_bytes: bytes):
-        # Disassemble the file itself
-        super().split(rom_bytes)
-
-        if options.opts.migrate_rodata_to_functions:
-            if self.spim_section is not None and self.partial_migration:
-                path_folder = options.opts.nonmatchings_path / self.dir / self.name
-                path_folder.mkdir(parents=True, exist_ok=True)
-
-                for rodataSym in self.spim_section.symbolList:
-                    if rodataSym.shouldMigrate():
-                        continue
-
-                    path = path_folder / f"{rodataSym.getName()}.s"
-                    with open(path, "w", newline="\n") as f:
-                        if options.opts.include_macro_inc:
-                            f.write('.include "macro.inc"\n\n')
-                        preamble = options.opts.generated_s_preamble
-                        if preamble:
-                            f.write(preamble + "\n")
-                        f.write(f".section {self.get_linker_section()}\n\n")
-                        f.write(rodataSym.disassemble())
+            possible_text = self.get_possible_text_subsegment_for_symbol(symbol)
+            if possible_text is not None:
+                text_segment, refenceeFunction = possible_text
+                if text_segment not in possible_text_segments:
+                    print(
+                        f"\nRodata segment '{self.name}' may belong to the text segment '{text_segment.name}'"
+                    )
+                    print(
+                        f"    Based on the usage from the function {refenceeFunction.getName()} to the symbol {symbol.getName()}"
+                    )
+                    possible_text_segments.add(text_segment)
