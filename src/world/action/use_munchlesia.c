@@ -58,7 +58,7 @@ void action_update_use_munchlesia(void) {
             gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             hitPosY = player_check_collision_below(Munchlesia_LaunchVelocity, &colliderID);
             if (colliderID >= 0) {
-                sfx_play_sound_at_player(SOUND_162, 0);
+                sfx_play_sound_at_player(SOUND_162, SOUND_SPACE_MODE_0);
                 suggest_player_anim_setUnkFlag(ANIM_Mario_80003);
                 playerStatus->position.y = hitPosY;
                 D_802B62E0 = 10;

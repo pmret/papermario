@@ -19,8 +19,8 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(PlaySound, SOUND_80000028)
-    EVT_CALL(PlaySoundAtF, SOUND_80000029, 1, -230, -180, 120)
-    EVT_CALL(PlaySoundAtF, SOUND_8000002A, 1, 20, -180, 120)
+    EVT_CALL(PlaySoundAtF, SOUND_80000029, SOUND_SPACE_MODE_1, -230, -180, 120)
+    EVT_CALL(PlaySoundAtF, SOUND_8000002A, SOUND_SPACE_MODE_1, 20, -180, 120)
     EVT_EXEC(N(EVS_SetupDrips))
     EVT_CALL(EnableTexPanning, MODEL_nagare1, TRUE)
     EVT_THREAD

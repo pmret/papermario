@@ -26,7 +26,7 @@ EvtScript N(EVS_UnlockDoor) = {
     EVT_CALL(CloseChoicePopup)
     EVT_SET(GB_StoryProgress, STORY_CH3_UNLOCKED_WINDY_MILL)
     EVT_CALL(N(GetEntityPosition), MV_Unk_00, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAt, SOUND_269, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_269, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MV_Unk_00)
     EVT_CALL(N(RemovePadlock))
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)

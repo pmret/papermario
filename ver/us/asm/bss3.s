@@ -76,7 +76,7 @@ dlabel gEntityHeapBottom
 dlabel D_80151304
 .space 4
 
-dlabel D_80151308
+dlabel gCurrentAdvancedDoorSoundsSet
 .space 4
 
 dlabel gMsgBGScrollAmtY
@@ -658,16 +658,16 @@ dlabel D_801597D0
 dlabel D_80159880
 .space 0x00000020
 
-dlabel D_801598A0
+dlabel wEnvSounds
 .space 0x00000118
 
-dlabel D_801599B8
+dlabel bEnvSounds
 .space 0x00000118
 
-dlabel D_80159AD0
+dlabel gCurrentEnvSounds
 .space 4
 
-dlabel D_80159AD4
+dlabel SfxReverbMode
 .space 4
 
 dlabel D_80159AD8

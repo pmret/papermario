@@ -49,7 +49,7 @@ EVT_END_IF //@bug unmatched endif
         // repeatedly jump for the treasure chest
         EVT_LABEL(1)
             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, SOUND_SPACE_MODE_0)
             EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 15)
             EVT_IF_EQ(AF_KZN23_GrabbedKolorado, FALSE)
                 EVT_WAIT(1)

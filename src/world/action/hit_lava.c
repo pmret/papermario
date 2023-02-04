@@ -48,7 +48,7 @@ void action_update_hit_lava(void) {
         subtract_hp(1);
         open_status_menu_long();
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
-        sfx_play_sound_at_player(SOUND_E8, 0);
+        sfx_play_sound_at_player(SOUND_E8, SOUND_SPACE_MODE_0);
     }
 
     switch (playerStatus->actionSubstate) {
@@ -173,7 +173,7 @@ void action_update_hit_lava(void) {
                 start_rumble(256, 50);
                 phys_adjust_cam_on_landing();
                 gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_FLAG_2;
-                sfx_play_sound_at_player(SOUND_3FB, 0);
+                sfx_play_sound_at_player(SOUND_3FB, SOUND_SPACE_MODE_0);
                 suggest_player_anim_setUnkFlag(ANIM_Mario_8001A);
                 playerStatus->flags &= ~PS_FLAG_HIT_FIRE;
                 playerStatus->flags &= ~PS_FLAG_FLYING;

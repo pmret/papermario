@@ -41,7 +41,7 @@ API_CALLABLE(N(func_80241BD8_8333D8)) {
     f32 y = evt_get_variable(script, *args++);
     f32 z = evt_get_variable(script, *args++);
     f32 yaw = evt_get_variable(script, *args++);
-    
+
     effect->data.lilOink->x[index] = x;
     effect->data.lilOink->y[index] = y;
     effect->data.lilOink->z[index] = z;
@@ -51,7 +51,7 @@ API_CALLABLE(N(func_80241BD8_8333D8)) {
 
 s32 N(LetterList_A)[] = {
     ITEM_LETTER20,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_ToadKid1_LetterPromptA) = {
@@ -80,7 +80,7 @@ EvtScript N(EVS_ToadKid1_LetterRewardA) = {
 
 s32 N(LetterList_B)[] = {
     ITEM_LETTER22,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_ToadKid1_LetterPromptB) = {
@@ -471,7 +471,7 @@ EvtScript N(EVS_NpcInit_Toad_03) = {
 
 EvtScript N(D_8024A7F4_83BFF4) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_B0000021, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_B0000021, SOUND_SPACE_MODE_0)
         EVT_WAIT(2)
     EVT_END_LOOP
     EVT_RETURN
@@ -486,11 +486,11 @@ EvtScript N(EVS_NpcIdle_ShyGuy) = {
     EVT_LOOP(0)
         EVT_CALL(NpcMoveTo, NPC_SELF, -250, -25, 30)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_SELF, -250, 0, 30, 15)
         EVT_CALL(NpcMoveTo, NPC_SELF, -100, 30, 30)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_SELF, -100, 0, -25, 15)
     EVT_END_LOOP
     EVT_RETURN
@@ -510,10 +510,10 @@ EvtScript N(EVS_NpcAI_ShyGuy) = {
     EVT_KILL_THREAD(LVarA)
     EVT_CALL(ShowSweat, -1, 1, 45, 1, 0, 0, 0, 0, 20)
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_SELF, -30, 0, 0, 20)
     EVT_CALL(ShowSweat, -1, 1, 45, 1, 0, 0, 0, 0, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_203F, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_203F, SOUND_SPACE_MODE_0)
     EVT_EXEC_GET_TID(N(D_8024A7F4_83BFF4), LVarA)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(8.0))
     EVT_CALL(NpcMoveTo, NPC_SELF, 30, -200, 0)
@@ -545,8 +545,8 @@ EvtScript N(EVS_NpcHit_ShyGuy) = {
     EVT_IF_EQ(LVar1, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HIT_PLAYER_NORMAL, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_203E, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_203E, SOUND_SPACE_MODE_0)
     EVT_SET(GF_MAC03_ShyGuyChasedOff, TRUE)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_ShyGuy)))
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000, 1)

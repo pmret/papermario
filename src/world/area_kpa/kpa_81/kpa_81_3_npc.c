@@ -163,7 +163,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_WAIT(25)
         EVT_CALL(EnableModel, MODEL_o165, FALSE)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitts, SOUND_2091, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitts, SOUND_2091, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 90, 30, EASING_COS_SLOW_OVERSHOOT)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
@@ -179,7 +179,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_80018)
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_161, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_161, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_LOOP(65)

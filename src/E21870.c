@@ -126,7 +126,7 @@ void func_802B71D4(void) {
             D_802B7D18_E22588->unk_20++;
             if (D_802B7D18_E22588->unk_20 >= var_v1 + 2) {
                 D_802B7D18_E22588->unk_20 = 0;
-                sfx_play_sound_at_player(SOUND_7D, 0);
+                sfx_play_sound_at_player(SOUND_7D, SOUND_SPACE_MODE_0);
             }
             if (D_802B7D18_E22588->unk_20 < 2) {
                 part.palette = D_802B7C80_E224F0;

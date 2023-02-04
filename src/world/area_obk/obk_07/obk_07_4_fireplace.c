@@ -95,7 +95,7 @@ EvtScript N(EVS_Inspect_Fireplace) = {
         EVT_CALL(InterpPlayerYaw, 90, 0)
         EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtPlayer, SOUND_F5, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_F5, SOUND_SPACE_MODE_0)
     EVT_SET(LVar0, EVT_PTR(N(ExplosionPositions1)))
     EVT_EXEC(N(EVS_PlayExplosionFX))
     EVT_SET(LVar0, EVT_PTR(N(ExplosionPositions2)))

@@ -297,7 +297,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 evt->functionTemp[1]--;
                 break;
             }
-            sfx_play_sound_at_npc(SOUND_80000000, 0, -4);
+            sfx_play_sound_at_npc(SOUND_80000000, SOUND_SPACE_MODE_0, NPC_PARTNER);
             D_802BE924 = 1;
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 0.0f, npc->yaw);
             npc->currentAnim = ANIM_WorldBombette_WalkLit;
@@ -340,9 +340,9 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             } else {
                 if (!(evt->functionTemp[1] & 3)) {
                     if (gGameStatusPtr->frameCounter & 1) {
-                        sfx_play_sound_at_npc(SOUND_STEP_NORMAL1, 0, -4);
+                        sfx_play_sound_at_npc(SOUND_STEP_NORMAL1, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     } else {
-                        sfx_play_sound_at_npc(SOUND_STEP_NORMAL2, 0, -4);
+                        sfx_play_sound_at_npc(SOUND_STEP_NORMAL2, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     }
                 }
                 if (evt->functionTemp[1] == 40) {
@@ -386,13 +386,13 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             fx_explosion(gPlayerData.partners[gPlayerData.currentPartner].level, npc->pos.x, npc->pos.y + (npc->collisionHeight * 0.5f), npc->pos.z);
             switch (gPlayerData.partners[gPlayerData.currentPartner].level) {
                 case 0:
-                    sfx_play_sound_at_npc(SOUND_CANNON1, 0, -4);
+                    sfx_play_sound_at_npc(SOUND_CANNON1, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     break;
                 case 1:
-                    sfx_play_sound_at_npc(SOUND_CANNON2, 0, -4);
+                    sfx_play_sound_at_npc(SOUND_CANNON2, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     break;
                 case 2:
-                    sfx_play_sound_at_npc(SOUND_CANNON3, 0, -4);
+                    sfx_play_sound_at_npc(SOUND_CANNON3, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     break;
             }
             exec_ShakeCam1(0, 0, 20);

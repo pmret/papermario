@@ -637,10 +637,10 @@ ApiStatus N(ProcessPeachStarBeam)(Evt* script, s32 isInitialCall) {
                 script->functionTemp[1]--;
                 if (script->functionTemp[1] == 0) {
                     if (script->functionTemp[2] == 0) {
-                        func_80149A6C(SOUND_248, TRUE);
+                        snd_stop_tracking_env_sound_pos(SOUND_248, TRUE);
                         sfx_play_sound(SOUND_248 | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     } else {
-                        func_80149A6C(SOUND_249, TRUE);
+                        snd_stop_tracking_env_sound_pos(SOUND_249, TRUE);
                         sfx_play_sound(SOUND_249 | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     }
                 }
@@ -680,9 +680,9 @@ ApiStatus N(ProcessPeachStarBeam)(Evt* script, s32 isInitialCall) {
             }
 
             if (script->functionTemp[2] == 0) {
-                func_80149A6C(SOUND_248, FALSE);
+                snd_stop_tracking_env_sound_pos(SOUND_248, FALSE);
             } else {
-                func_80149A6C(SOUND_249, FALSE);
+                snd_stop_tracking_env_sound_pos(SOUND_249, FALSE);
             }
             script->functionTemp[0] = PEACH_STAR_BEAM_SPIRITS_SCATTER;
             break;

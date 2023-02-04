@@ -266,7 +266,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
                 anim = ANIM_Mario_90005;
             }
             suggest_player_anim_clearUnkFlag(anim);
-            sfx_play_sound_at_player(SOUND_JUMP_2081, 0);
+            sfx_play_sound_at_player(SOUND_JUMP_2081, SOUND_SPACE_MODE_0);
         }
         script->functionTemp[0] = 1;
     }

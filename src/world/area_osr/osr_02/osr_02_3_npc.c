@@ -115,7 +115,7 @@ EvtScript N(EVS_Twink_FlyAway) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_Twink, SOUND_62, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Twink, SOUND_62, SOUND_SPACE_MODE_0)
         EVT_CALL(LoadPath, 120, EVT_PTR(N(FlightPath_TwinkDepart)), ARRAY_COUNT(N(FlightPath_TwinkDepart)), EASING_QUADRATIC_IN)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
@@ -283,42 +283,42 @@ EvtScript N(EVS_Scene_ReturnStarRod) = {
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
     EVT_THREAD
         EVT_SET(LVar4, NPC_Eldstar)
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2045, 0)
+        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2045, SOUND_SPACE_MODE_0)
         EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(30)
         EVT_SET(LVar4, NPC_Misstar)
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2046, 0)
+        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2046, SOUND_SPACE_MODE_0)
         EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(60)
         EVT_SET(LVar4, NPC_Skolar)
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2045, 0)
+        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2045, SOUND_SPACE_MODE_0)
         EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(90)
         EVT_SET(LVar4, NPC_Mamar)
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2046, 0)
+        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2046, SOUND_SPACE_MODE_0)
         EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(120)
         EVT_SET(LVar4, NPC_Kalmar)
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2045, 0)
+        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2045, SOUND_SPACE_MODE_0)
         EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(150)
         EVT_SET(LVar4, NPC_Muskular)
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2046, 0)
+        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2046, SOUND_SPACE_MODE_0)
         EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_END_THREAD
     EVT_WAIT(180)
     EVT_SET(LVar4, NPC_Klevar)
-    EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2045, 0)
+    EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2045, SOUND_SPACE_MODE_0)
     EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(20)

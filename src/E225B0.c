@@ -136,7 +136,7 @@ void func_802B735C_E2290C(void) {
         case 2:
             D_802B7C78_E23228->scale = 0.57f;
             D_802B7C78_E23228->unk_24++;
-            sfx_play_sound_at_player(SOUND_17B, 0);
+            sfx_play_sound_at_player(SOUND_17B, SOUND_SPACE_MODE_0);
             break;
         case 3:
             D_802B7C78_E23228->scale = 0.53f;

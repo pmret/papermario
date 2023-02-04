@@ -34,7 +34,7 @@ EvtScript N(EVS_OnTouch_BlueSwitchCenter) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2096, SOUND_208A, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2096, SOUND_208A, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, -14, 30, EASING_LINEAR)
     EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -44,7 +44,7 @@ EvtScript N(EVS_OnTouch_BlueSwitchCenter) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2096, SOUND_208B, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2096, SOUND_208B, SOUND_SPACE_MODE_0)
     EVT_SET(AF_ISK09_FlippingBlueStairs, TRUE)
     EVT_LABEL(15)
         EVT_WAIT(1)
@@ -71,7 +71,7 @@ EvtScript N(EVS_OnTouch_BlueSwitchMidLeft) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2099, SOUND_208A, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2099, SOUND_208A, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, -14, 30, EASING_LINEAR)
     EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -81,7 +81,7 @@ EvtScript N(EVS_OnTouch_BlueSwitchMidLeft) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2099, SOUND_208B, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2099, SOUND_208B, SOUND_SPACE_MODE_0)
     EVT_SET(AF_ISK09_FlippingBlueStairs, TRUE)
     EVT_LABEL(15)
         EVT_WAIT(1)
@@ -108,7 +108,7 @@ EvtScript N(EVS_OnTouch_BlueSwitchTopLeft) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2102, SOUND_208A, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2102, SOUND_208A, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, -14, 30, EASING_LINEAR)
     EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -118,7 +118,7 @@ EvtScript N(EVS_OnTouch_BlueSwitchTopLeft) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2102, SOUND_208B, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2102, SOUND_208B, SOUND_SPACE_MODE_0)
     EVT_SET(AF_ISK09_FlippingBlueStairs, TRUE)
     EVT_LABEL(15)
         EVT_WAIT(1)
@@ -145,7 +145,7 @@ EvtScript N(EVS_OnTouch_RedSwitch) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2105, SOUND_208A, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2105, SOUND_208A, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, -14, 30, EASING_LINEAR)
     EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -155,7 +155,7 @@ EvtScript N(EVS_OnTouch_RedSwitch) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2105, SOUND_208B, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2105, SOUND_208B, SOUND_SPACE_MODE_0)
     EVT_SET(AF_ISK09_FlippingRedStairs, TRUE)
     EVT_LABEL(15)
         EVT_WAIT(1)

@@ -3,7 +3,7 @@
 
 API_CALLABLE(N(ShutterCrashRumble)) {
     Bytecode* args = script->ptrReadPos;
-    
+
     start_rumble(100, evt_get_variable(script, *args++) & 0xFFFF);
     return ApiStatus_DONE2;
 }
@@ -15,7 +15,7 @@ API_CALLABLE(N(EnableItemTransparency)) {
 
 EvtScript N(EVS_AnimateShutterLeft) = {
     EVT_CALL(PlaySoundWithVolume, SOUND_B0000011, 0)
-    EVT_CALL(PlaySoundAtModel, LVar2, SOUND_B0000011, 0)
+    EVT_CALL(PlaySoundAtModel, LVar2, SOUND_B0000011, SOUND_SPACE_MODE_0)
     EVT_CALL(N(ShutterCrashRumble), 5)
     EVT_SET(LVar3, 90)
     EVT_CALL(MakeLerp, 0, LVar3, 15, EASING_COS_FAST_OVERSHOOT)
@@ -64,7 +64,7 @@ EvtScript N(EVS_AnimateShutterLeft) = {
             EVT_GOTO(40)
         EVT_END_IF
     EVT_CALL(PlaySoundWithVolume, SOUND_B0000012, 0)
-    EVT_CALL(PlaySoundAtModel, LVar2, SOUND_B0000012, 0)
+    EVT_CALL(PlaySoundAtModel, LVar2, SOUND_B0000012, SOUND_SPACE_MODE_0)
     EVT_RETURN
     EVT_END
 };

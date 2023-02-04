@@ -16,7 +16,7 @@ API_CALLABLE(N(func_8024107C_91C95C)) {
 
 EvtScript N(EVS_FlapWingSounds) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20EF, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20EF, SOUND_SPACE_MODE_0)
         EVT_WAIT(16)
     EVT_END_LOOP
     EVT_RETURN

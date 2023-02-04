@@ -96,7 +96,7 @@ EvtScript N(EVS_NpcAI_Goompa) = {
                 EVT_CALL(NpcMoveTo, NPC_PARTNER, 582, 6, 0)
                 EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
                 EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_ENABLE_HIT_SCRIPT, FALSE)
-                EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_61, 0)
+                EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_61, SOUND_SPACE_MODE_0)
                 EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00AD)
                 EVT_WAIT(10)
                 EVT_THREAD

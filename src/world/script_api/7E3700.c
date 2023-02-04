@@ -2,8 +2,9 @@
 #include "entity.h"
 
 extern PushBlockGrid* D_802DBC88[8];
-extern f32 D_80285640_7E64C0[13];
 extern EvtScript D_80285674_7E64F4;
+
+f32 D_80285640_7E64C0[] = { 0.04f, 0.04f, 0.08f, 0.16f, 0.21f, 0.4f, 0.6f, 0.72f, 0.84f, 0.92f, 0.96f, 0.96f, 1.0f };
 
 ApiStatus func_80282880(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -391,3 +392,63 @@ ApiStatus SetPushBlockFallEffect(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
+
+EvtScript D_80285674_7E64F4 = {
+    EVT_SET(LVarA, LVar0)
+    EVT_SET(LVarB, LVar1)
+    EVT_CALL(func_80282E30)
+    EVT_CALL(func_802D2884, LVar3, LVar5, 0)
+    EVT_IF_NE(LVar9, 2)
+        EVT_CALL(func_80282880)
+    EVT_END_IF
+    EVT_SET(LVarC, 0)
+    EVT_CALL(CheckActionState, LVarD, ACTION_STATE_RUN)
+    EVT_IF_EQ(LVarD, FALSE)
+        EVT_CALL(CheckActionState, LVarD, ACTION_STATE_PUSHING_BLOCK)
+        EVT_IF_EQ(LVarD, FALSE)
+            EVT_RETURN
+        EVT_END_IF
+    EVT_END_IF
+    EVT_IF_NE(LVar9, 0)
+        EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_SET(LVarC, 0)
+    EVT_LABEL(0)
+    EVT_ADD(LVarC, 1)
+    EVT_CALL(func_80283174)
+    EVT_IF_EQ(LVarD, 1)
+        EVT_GOTO(1)
+    EVT_END_IF
+    EVT_CALL(GetPlayerActionState, LVarD)
+    EVT_IF_EQ(LVarD, ACTION_STATE_JUMP)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
+    EVT_RETURN
+    EVT_LABEL(1)
+    EVT_CALL(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
+    EVT_CALL(func_80282880)
+    EVT_IF_LT(LVarC, 8)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
+    EVT_END_IF
+    EVT_CALL(func_80283080)
+    EVT_CALL(PlaySound, SOUND_2088)
+    EVT_CALL(DisablePlayerPhysics, TRUE)
+    EVT_CALL(func_802828DC)
+    EVT_CALL(func_80282C40)
+    EVT_THREAD
+        EVT_WAIT(2)
+        EVT_CALL(CheckActionState, LVarD, 20)
+        EVT_IF_NE(LVarD, 0)
+            EVT_CALL(func_80283240, LVarD, EVT_PTR(D_80285674_7E64F4))
+            EVT_IF_EQ(LVarD, 0)
+                EVT_CALL(SetPlayerActionState, 0)
+            EVT_END_IF
+        EVT_END_IF
+    EVT_END_THREAD
+    EVT_CALL(DisablePlayerPhysics, FALSE)
+    EVT_RETURN
+    EVT_END
+};

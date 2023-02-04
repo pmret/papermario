@@ -203,7 +203,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                 EVT_THREAD
                     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(1.0))
                 EVT_END_THREAD
-                EVT_CALL(PlaySoundAtCollider, COLLIDER_tt1, SOUND_1E4, 0)
+                EVT_CALL(PlaySoundAtCollider, COLLIDER_tt1, SOUND_1E4, SOUND_SPACE_MODE_0)
                 EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 37, 37, 1, 10, 30)
                 EVT_CALL(EnableModel, MODEL_o821, TRUE)
                 EVT_LOOP(10)

@@ -104,7 +104,7 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim01)
     EVT_THREAD
         EVT_WAIT(59)
-        EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_3EF, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_3EF, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, 255, 0, 0, 0)
     EVT_CALL(func_802CFE2C, 0, 0x00000800)
@@ -137,7 +137,7 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
 
 EvtScript N(EVS_PlayChompSounds) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_ChainChomp, SOUND_2061, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_ChainChomp, SOUND_2061, SOUND_SPACE_MODE_0)
         EVT_WAIT(5)
     EVT_END_LOOP
     EVT_RETURN
@@ -153,11 +153,11 @@ EvtScript N(EVS_Scene_TutankoopaDefeated) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim06)
     EVT_CALL(SetNpcJumpscale, NPC_Tutankoopa_01, EVT_FLOAT(1.0))
-    EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_20E3, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_20E3, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_Tutankoopa_01, 442, -910, 393, 30)
-    EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_JUMP_3E2, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_JUMP_3E2, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_Tutankoopa_01, 416, -910, 420, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_JUMP_3E2, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_JUMP_3E2, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_Tutankoopa_01, 395, -910, 440, 10)
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim01)
@@ -183,7 +183,7 @@ EvtScript N(EVS_Scene_TutankoopaDefeated) = {
     EVT_CALL(NpcFaceNpc, NPC_Tutankoopa_01, NPC_ChainChomp, 0)
     EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim06)
     EVT_CALL(GetNpcPos, NPC_Tutankoopa_01, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_JUMP_3E2, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_JUMP_3E2, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_Tutankoopa_01, LVar0, LVar1, LVar2, 20)
     EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim01)
     EVT_CALL(SpeakToPlayer, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim0B, ANIM_Tutankoopa_Anim01, 5, MSG_CH2_00E9)

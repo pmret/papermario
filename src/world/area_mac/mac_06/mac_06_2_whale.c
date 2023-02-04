@@ -89,7 +89,7 @@ EvtScript N(EVS_WhaleState_Shout) = {
     EVT_CALL(GetNpcVar, NPC_Whale, 0, LVar3)
     EVT_IF_EQ(LVar3, 0)
         EVT_CALL(N(UnkPlayerPosFunc))
-        EVT_CALL(PlaySoundAt, SOUND_8000004F, 0, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_8000004F, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
         EVT_CALL(N(CreateWhaleGeyser), 0, LVar0, LVar1, LVar2, 0, -1, 0, 30)
         EVT_CALL(SetNpcVar, NPC_Whale, 0, LVar0)
     EVT_END_IF
@@ -300,12 +300,12 @@ EvtScript N(EVS_WhaleMain) = {
             EVT_END_IF
             EVT_SWITCH(LVarB)
                 EVT_CASE_EQ(ANIM_Kolorado_IdleSad)
-                    EVT_CALL(PlaySoundAtNpc, NPC_Whale, SOUND_2037, 0)
+                    EVT_CALL(PlaySoundAtNpc, NPC_Whale, SOUND_2037, SOUND_SPACE_MODE_0)
                     EVT_SET(LVarD, EVT_PTR(N(EVS_WhaleState_IdleSad)))
                 EVT_CASE_EQ(ANIM_Kolorado_Still)
                     EVT_SET(LVarD, EVT_PTR(N(EVS_WhaleState_Still)))
                 EVT_CASE_EQ(ANIM_Kolorado_Yell)
-                    EVT_CALL(PlaySoundAtNpc, NPC_Whale, SOUND_2036, 0)
+                    EVT_CALL(PlaySoundAtNpc, NPC_Whale, SOUND_2036, SOUND_SPACE_MODE_0)
                     EVT_SET(LVarD, EVT_PTR(N(EVS_WhaleState_2)))
                 EVT_CASE_EQ(ANIM_Kolorado_Idle)
                     EVT_SET(LVarD, EVT_PTR(N(EVS_WhaleState_Idle)))

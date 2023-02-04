@@ -16,7 +16,7 @@ EvtScript N(EVS_GotoMap_tik_06_2) = {
     EVT_END
 };
 
-EvtScript N(EVS_ExitPipe_tik_06_2) = EVT_EXIT_PIPE_HORIZONTAL(tik_06_ENTRY_3, COLLIDER_ttd, N(EVS_GotoMap_tik_06_2)); 
+EvtScript N(EVS_ExitPipe_tik_06_2) = EVT_EXIT_PIPE_HORIZONTAL(tik_06_ENTRY_3, COLLIDER_ttd, N(EVS_GotoMap_tik_06_2));
 
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_tik_09_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
@@ -35,7 +35,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(PlaySound, SOUND_80000033)
-    EVT_CALL(PlaySoundAtF, SOUND_80000034, 1, -30, -30, -85)
+    EVT_CALL(PlaySoundAtF, SOUND_80000034, SOUND_SPACE_MODE_1, -30, -30, -85)
     EVT_EXEC(N(EVS_SetupDrips))
     EVT_CALL(EnableTexPanning, MODEL_nagare1, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_o92, TRUE)

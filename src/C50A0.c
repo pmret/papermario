@@ -2322,34 +2322,34 @@ void update_item_entity_collectable(ItemEntity* item) {
                             item->flags |= ITEM_ENTITY_FLAG_20000000;
                         } else {
                             if (IS_BADGE(item->itemID)) {
-                                sfx_play_sound_at_position(SOUND_21B, 0, item->position.x, item->position.y, item->position.z);
+                                sfx_play_sound_at_position(SOUND_21B, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                             } else if (IS_ITEM(item->itemID)) {
-                                sfx_play_sound_at_position(SOUND_21A, 0, item->position.x, item->position.y, item->position.z);
+                                sfx_play_sound_at_position(SOUND_21A, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                             } else {
                                 switch (item->itemID) {
                                     case ITEM_HEART:
-                                        sfx_play_sound_at_position(SOUND_214, 0, item->position.x, item->position.y, item->position.z);
+                                        sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                                         break;
                                     case ITEM_COIN:
-                                        sfx_play_sound_at_position(SOUND_212, 0, item->position.x, item->position.y, item->position.z);
+                                        sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                                         break;
                                     case ITEM_KOOPA_FORTRESS_KEY:
-                                        sfx_play_sound_at_position(SOUND_212, 0, item->position.x, item->position.y, item->position.z);
+                                        sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                                         break;
                                     case ITEM_HEART_PIECE:
-                                        sfx_play_sound_at_position(SOUND_214, 0, item->position.x, item->position.y, item->position.z);
+                                        sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                                         break;
                                     case ITEM_STAR_POINT:
-                                        sfx_play_sound_at_position(SOUND_212, 0, item->position.x, item->position.y, item->position.z);
+                                        sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                                         break;
                                     case ITEM_HEART_POINT:
-                                        sfx_play_sound_at_position(SOUND_214, 0, item->position.x, item->position.y, item->position.z);
+                                        sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                                         break;
                                     case ITEM_STAR_PIECE:
-                                        sfx_play_sound_at_position(SOUND_219, 0, item->position.x, item->position.y, item->position.z);
+                                        sfx_play_sound_at_position(SOUND_219, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                                         break;
                                     case ITEM_FLOWER_POINT:
-                                        sfx_play_sound_at_position(SOUND_218, 0, item->position.x, item->position.y, item->position.z);
+                                        sfx_play_sound_at_position(SOUND_218, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                                         break;
                                 }
                             }
@@ -2390,25 +2390,25 @@ void update_item_entity_collectable(ItemEntity* item) {
                     case ITEM_HEART:
                         if (playerData->curHP < playerData->curMaxHP) {
                             fx_recover(0, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 1);
-                            sfx_play_sound_at_position(SOUND_2056, 0, item->position.x, item->position.y, item->position.z);
+                            sfx_play_sound_at_position(SOUND_2056, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                         }
                         playerData->curHP++;
                         if (playerData->curHP > playerData->curMaxHP) {
                             playerData->curHP = playerData->curMaxHP;
                         }
-                        sfx_play_sound_at_position(SOUND_213, 0, item->position.x, item->position.y, item->position.z);
+                        sfx_play_sound_at_position(SOUND_213, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                         fx_sparkles(4, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 30.0f);
                         break;
                     case ITEM_FLOWER_POINT:
                         if (playerData->curFP < playerData->curMaxFP) {
                             fx_recover(1, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 1);
-                            sfx_play_sound_at_position(SOUND_2056, 0, item->position.x, item->position.y, item->position.z);
+                            sfx_play_sound_at_position(SOUND_2056, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                         }
                         playerData->curFP++;
                         if (playerData->curFP > playerData->curMaxFP) {
                             playerData->curFP = playerData->curMaxFP;
                         }
-                        sfx_play_sound_at_position(SOUND_217, 0, item->position.x, item->position.y, item->position.z);
+                        sfx_play_sound_at_position(SOUND_217, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                         fx_sparkles(4, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 30.0f);
                         break;
                     case ITEM_COIN:
@@ -2416,7 +2416,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                         if (playerData->coins > 999) {
                             playerData->coins = 999;
                         }
-                        sfx_play_sound_at_position(SOUND_211, 0, item->position.x, item->position.y, item->position.z);
+                        sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                         playerData->totalCoinsEarned++;
                         if (playerData->totalCoinsEarned > 99999) {
                             playerData->totalCoinsEarned = 99999;
@@ -2424,19 +2424,19 @@ void update_item_entity_collectable(ItemEntity* item) {
                         break;
                     case ITEM_KOOPA_FORTRESS_KEY:
                         playerData->fortressKeyCount = playerData->fortressKeyCount + 1;
-                        sfx_play_sound_at_position(SOUND_211, 0, item->position.x, item->position.y, item->position.z);
+                        sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                         break;
                     case ITEM_STAR_POINT:
                         playerData->starPoints++;
                         if (playerData->starPoints > 100) {
                             playerData->starPoints = 100;
                         }
-                        sfx_play_sound_at_position(SOUND_211, 0, item->position.x, item->position.y, item->position.z);
+                        sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                         break;
                     case ITEM_HEART_POINT:
                         playerData->curHP = playerData->curMaxHP;
                         playerData->curFP = playerData->curMaxFP;
-                        sfx_play_sound_at_position(SOUND_213, 0, item->position.x, item->position.y, item->position.z);
+                        sfx_play_sound_at_position(SOUND_213, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                         break;
                 }
                 D_801565A8 = 0;

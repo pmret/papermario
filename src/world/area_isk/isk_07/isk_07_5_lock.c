@@ -22,14 +22,14 @@ EvtScript N(EVS_UnlockPrompt_RuinsDoor) = {
             EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
             EVT_RETURN
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAt, SOUND_269, 0, -300, -380, 530)
+    EVT_CALL(PlaySoundAt, SOUND_269, SOUND_SPACE_MODE_0, -300, -380, 530)
     EVT_CALL(RemoveKeyItemAt, LVar1)
     EVT_SET(GF_ISK07_UnlockedDoor, TRUE)
     EVT_SET(LVar0, MV_LockEntityID)
     EVT_CALL(N(RemovePadlock))
     EVT_SET(LVar1, 0)
     EVT_WAIT(5)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_265, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_265, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 65, 65, EASING_LINEAR)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
@@ -63,7 +63,7 @@ EvtScript N(EVS_SetupLock) = {
 
 EvtScript N(EVS_ShutEntryDoor) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilitte, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitte, SOUND_266, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitte, SOUND_266, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 65, 0, 15, EASING_QUADRATIC_IN)
     EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -73,7 +73,7 @@ EvtScript N(EVS_ShutEntryDoor) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitte, SOUND_267, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitte, SOUND_267, SOUND_SPACE_MODE_0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(0.3))
     EVT_RETURN
     EVT_END

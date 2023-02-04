@@ -436,7 +436,7 @@ ApiStatus N(CarryAway)(Evt* evt, s32 isInitialCall) {
             parakarry->state.moveTime = clamp_angle(parakarry->state.moveTime);
 
             if (gGameStatusPtr->frameCounter % 10 == 0) {
-                sfx_play_sound_at_position(SOUND_2009, 0, parakarry->state.currentPos.x, parakarry->state.currentPos.y, parakarry->state.currentPos.z);
+                sfx_play_sound_at_position(SOUND_2009, SOUND_SPACE_MODE_0, parakarry->state.currentPos.x, parakarry->state.currentPos.y, parakarry->state.currentPos.z);
             }
 
             if (parakarry->state.currentPos.x > 240.0f) {
@@ -499,9 +499,9 @@ ApiStatus N(FlyAround)(Evt* script, s32 isInitialCall) {
                 }
 
                 if (script->functionTemp[3] != 0) {
-                    sfx_play_sound_at_position(SOUND_200A, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200A, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_200B, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200B, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
                 }
                 script->functionTemp[3] = 1 - script->functionTemp[3];
             }
@@ -521,9 +521,9 @@ ApiStatus N(FlyAround)(Evt* script, s32 isInitialCall) {
                 } while (0);
 
                 if (script->functionTemp[3] != 0) {
-                    sfx_play_sound_at_position(SOUND_200A, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200A, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_200B, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200B, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
                 }
                 script->functionTemp[3] = 1 - script->functionTemp[3];
             }
@@ -543,9 +543,9 @@ ApiStatus N(FlyAround)(Evt* script, s32 isInitialCall) {
                 } while (0); // TODO macro?
 
                 if (script->functionTemp[3] != 0) {
-                    sfx_play_sound_at_position(SOUND_200A, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200A, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_200B, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200B, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
                 }
                 script->functionTemp[3] = 1 - script->functionTemp[3];
             }
@@ -565,9 +565,9 @@ ApiStatus N(FlyAround)(Evt* script, s32 isInitialCall) {
                 } while (0); // TODO macro?
 
                 if (script->functionTemp[3] != 0) {
-                    sfx_play_sound_at_position(SOUND_200A, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200A, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_200B, 0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200B, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
                 }
                 script->functionTemp[3] = 1 - script->functionTemp[3];
             }

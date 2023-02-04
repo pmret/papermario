@@ -154,7 +154,7 @@ EvtScript N(EVS_NpcInteract_Rowf_B) = {
 
 s32 N(ItemList_Calculator)[] = {
     ITEM_CALCULATOR,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_NpcInteract_Rowf_C) = {
@@ -382,38 +382,38 @@ EvtScript N(EVS_UpdateRhuffAnims) = {
 };
 
 s32 N(D_802555AC_815E2C)[] = {
-    600,   0, 598,   0, 
-    595,   0, 590,   0, 
-    583,   0, 574,   0, 
-    562,   0, 547,   0, 
-    529,   0, 509,   0, 
-    489,   0, 469,   0, 
-    449,   0, 429,   0, 
-    409,   0, 389,   0, 
-    369,   0, 349,   0, 
-    329,   0, 309,   0, 
-    289,   0, 269,   0, 
-    249,   0, 229,   0, 
-    209,   0, 189,   0, 
-    169,   0, 149,   0, 
-    129,   0, 109,   0, 
-     89,   0,  69,   0, 
+    600,   0, 598,   0,
+    595,   0, 590,   0,
+    583,   0, 574,   0,
+    562,   0, 547,   0,
+    529,   0, 509,   0,
+    489,   0, 469,   0,
+    449,   0, 429,   0,
+    409,   0, 389,   0,
+    369,   0, 349,   0,
+    329,   0, 309,   0,
+    289,   0, 269,   0,
+    249,   0, 229,   0,
+    209,   0, 189,   0,
+    169,   0, 149,   0,
+    129,   0, 109,   0,
+     89,   0,  69,   0,
      49,   0,  29,   0,
-      9,   0, -11, -11, 
+      9,   0, -11, -11,
     -16, -16, -18, -18,
-    -19, -19, -19, -19, 
     -19, -19, -19, -19,
-    -15, -15,  -5,  -5, 
+    -19, -19, -19, -19,
+    -15, -15,  -5,  -5,
       2,   2,   3,   3,
-      1,   1,   0,   0, 
-      0,   0,   0,   0, 
+      1,   1,   0,   0,
+      0,   0,   0,   0,
 };
 
 EvtScript N(EVS_Rhuff_RevealBadges) = {
     EVT_SET(MF_BadgeShopOpen, TRUE)
     EVT_CALL(SetNpcYaw, NPC_Rowf, 270)
     EVT_THREAD
-        EVT_CALL(PlaySoundAt, SOUND_A9, 0, -220, 37, 271)
+        EVT_CALL(PlaySoundAt, SOUND_A9, SOUND_SPACE_MODE_0, -220, 37, 271)
         EVT_CALL(MakeLerp, 0, -220, 30, EASING_COS_BOUNCE)
         EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
@@ -448,7 +448,7 @@ EvtScript N(EVS_Rhuff_RevealBadges) = {
     EVT_END_THREAD
     EVT_CALL(EnableModel, MODEL_ju_1, TRUE)
     EVT_CALL(N(RevealRowfBadges))
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o295, SOUND_AA, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o295, SOUND_AA, SOUND_SPACE_MODE_0)
     EVT_USE_BUF(EVT_PTR(N(D_802555AC_815E2C)))
     EVT_LOOP(50)
         EVT_BUF_READ2(LVar0, MV_RowfRugRippleAmount)
@@ -488,7 +488,7 @@ EvtScript N(EVS_Rhuff_HideBadges) = {
     EVT_END_IF
     EVT_CALL(NpcJump0, NPC_Rowf, -220, -54, 261, 16)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o295, SOUND_AC, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o295, SOUND_AC, SOUND_SPACE_MODE_0)
         EVT_CALL(MakeLerp, 0, 600, 50, EASING_LINEAR)
         EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -516,7 +516,7 @@ EvtScript N(EVS_Rhuff_HideBadges) = {
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
-        EVT_CALL(PlaySoundAt, SOUND_AB, 0, -220, 37, 271)
+        EVT_CALL(PlaySoundAt, SOUND_AB, SOUND_SPACE_MODE_0, -220, 37, 271)
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_THREAD

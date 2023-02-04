@@ -6,7 +6,7 @@
 API_CALLABLE(N(SetScreenBlackFadeAmount)) {
     Bytecode* args = script->ptrReadPos;
     f32 amount = evt_get_variable(script, *args++);
-    
+
     set_screen_overlay_params_front(0, amount);
     return ApiStatus_DONE2;
 }
@@ -158,9 +158,9 @@ EvtScript N(EVS_NpcIdle_Guards) = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_01, SOUND_262, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_02, SOUND_262, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_03, SOUND_262, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_01, SOUND_262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_02, SOUND_262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_03, SOUND_262, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_Koopatrol_01, EMOTE_EXCLAMATION, 0, 15, TRUE, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Koopatrol_02, EMOTE_EXCLAMATION, 0, 15, TRUE, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Koopatrol_03, EMOTE_EXCLAMATION, 0, 15, TRUE, 0, 0, 0, 0)

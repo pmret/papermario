@@ -4,20 +4,20 @@
 
 API_CALLABLE(N(GetSmallWheelsAngle)) {
     f32 angle = clamp_angle(script->varTable[2] * -2.4f);
-    
+
     evt_set_float_variable(script, LVar0, angle);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(GetLargeWheelAngle)) {
     f32 angle = clamp_angle(script->varTable[2] * -2.4f * 0.6f);
-    
+
     evt_set_float_variable(script, LVar0, angle);
     return ApiStatus_DONE2;
 }
 
 EvtScript N(EVS_SpawnSmoke) = {
-    EVT_CALL(PlaySoundAtModel, MODEL_07, SOUND_B000001A, 0)
+    EVT_CALL(PlaySoundAtModel, MODEL_07, SOUND_B000001A, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, MV_TrainMoveDist)
     EVT_IF_EQ(MF_TrainReverseDir, FALSE)
         EVT_ADDF(LVar0, -310)

@@ -239,6 +239,11 @@ enum SoundManagerState {
     SND_MANAGER_STATE_DISABLED  = 1,
 };
 
+enum SoundInstanceFlags {
+    SOUND_INSTANCE_FLAG_ACTIVE = 1,
+    SOUND_INSTANCE_FLAG_POSITION_CHANGED = 2,
+};
+
 typedef union Q32 {
     u8 u8[4];
     u16 u16[2];

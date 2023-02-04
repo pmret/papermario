@@ -34,7 +34,7 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
     EVT_END_LOOP
     EVT_SET(GB_ARN_Tubba_MapID, 8)
     EVT_SET(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_HALL)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_OPEN, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -61,7 +61,7 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_CLOSE, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_CALL(NpcMoveTo, NPC_SELF, -500, 80, 10)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Tubba)))
@@ -359,7 +359,7 @@ EvtScript N(EVS_NpcIdle_LastClubba) = {
 
 EvtScript N(EVS_NpcInteract_LastClubba) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim08)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2F1, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2F1, SOUND_SPACE_MODE_0)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim02)
     EVT_WAIT(20)

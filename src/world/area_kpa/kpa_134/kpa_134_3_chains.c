@@ -84,7 +84,7 @@ EvtScript N(EVS_SetupLowerChain) = {
         EVT_CALL(N(DetectLowerChainGrab))
         EVT_CALL(DisablePlayerPhysics, TRUE)
         EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_229, 0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_229, SOUND_SPACE_MODE_0)
         EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
         EVT_WAIT(1)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000D)
@@ -211,7 +211,7 @@ EvtScript N(EVS_RaiseWaterLevel1) = {
             EVT_GOTO(15)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAt, SOUND_80000052, 0, 118, 115, -11)
+    EVT_CALL(PlaySoundAt, SOUND_80000052, SOUND_SPACE_MODE_0, 118, 115, -11)
     EVT_WAIT(20)
     EVT_THREAD
         EVT_CALL(SetTexPanner, MODEL_o388, 2)
@@ -331,7 +331,7 @@ EvtScript N(EVS_SetupUpperChain) = {
         EVT_CALL(N(DetectUpperChainGrab))
         EVT_CALL(DisablePlayerPhysics, TRUE)
         EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_229, 0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_229, SOUND_SPACE_MODE_0)
         EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
         EVT_WAIT(1)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000D)
@@ -455,7 +455,7 @@ EvtScript N(EVS_RaiseWaterLevel2) = {
             EVT_GOTO(15)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAt, SOUND_80000052, 0, 500, 240, -25)
+    EVT_CALL(PlaySoundAt, SOUND_80000052, SOUND_SPACE_MODE_0, 500, 240, -25)
     EVT_WAIT(20)
     EVT_THREAD
         EVT_CALL(SetTexPanner, MODEL_o388, 2)

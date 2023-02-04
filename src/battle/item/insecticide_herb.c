@@ -20,7 +20,7 @@ ApiStatus N(func_802A1280_72A9D0)(Evt* script, s32 isInitialCall) {
     Actor* enemy = get_actor(script->owner1.enemyID);
     Actor* target;
 
-    sfx_play_sound_at_position(SOUND_231, 0, enemy->state.goalPos.x, enemy->state.goalPos.y, enemy->state.goalPos.z);
+    sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, enemy->state.goalPos.x, enemy->state.goalPos.y, enemy->state.goalPos.z);
     target = get_actor(enemy->targetActorID);
     dispatch_event_actor(target, EVENT_SCARE_AWAY);
 

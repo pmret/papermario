@@ -61,11 +61,11 @@ s32 N(LetterStoryRequirements)[] = {
     STORY_CH3_STAR_SPIRIT_RESCUED,
     STORY_CH3_STAR_SPIRIT_RESCUED,
     STORY_CH4_STAR_SPIRIT_RESCUED,
-    STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY, 
+    STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY,
     STORY_CH5_RETURNED_TO_TOAD_TOWN,
     STORY_CH6_STAR_SPRIT_DEPARTED,
     STORY_CH4_GOT_TAYCE_TS_CAKE,
-    STORY_CH7_STAR_SPIRIT_RESCUED, 
+    STORY_CH7_STAR_SPIRIT_RESCUED,
 };
 
 s32 N(LetterSenderStringIDs)[] = {
@@ -76,11 +76,11 @@ s32 N(LetterSenderStringIDs)[] = {
     MSG_Document_Letter_Mario05_From,
     MSG_Document_Letter_Mario06_From,
     MSG_Document_Letter_Mario07_From,
-    MSG_Document_Letter_Mario08_From, 
+    MSG_Document_Letter_Mario08_From,
     MSG_Document_Letter_Mario09_From,
     MSG_Document_Letter_Mario10_From,
     MSG_Document_Letter_Mario11_From,
-    MSG_Document_Letter_Mario12_From, 
+    MSG_Document_Letter_Mario12_From,
 };
 
 s32 N(LetterBodyStringIDs)[] = {
@@ -91,11 +91,11 @@ s32 N(LetterBodyStringIDs)[] = {
     MSG_Document_Letter_Mario05_Body,
     MSG_Document_Letter_Mario06_Body,
     MSG_Document_Letter_Mario07_Body,
-    MSG_Document_Letter_Mario08_Body, 
+    MSG_Document_Letter_Mario08_Body,
     MSG_Document_Letter_Mario09_Body,
     MSG_Document_Letter_Mario10_Body,
     MSG_Document_Letter_Mario11_Body,
-    MSG_Document_Letter_Mario12_Body, 
+    MSG_Document_Letter_Mario12_Body,
 };
 
 //TODO shiftability -- these are offsets relative to 0x10F1B0
@@ -231,7 +231,7 @@ API_CALLABLE(N(ReadLetters)){
                 dma_copy(charset_ROM_START + N(LetterDmaOffsets)[1],
                          charset_ROM_START + N(LetterDmaOffsets)[1] + sizeof(N(LetterBackgroundPal)),
                          N(LetterBackgroundPal));
-        
+
                 N(LetterImgData)[0].raster = N(LetterBackgroundImg);
                 N(LetterImgData)[0].palette = N(LetterBackgroundPal);
                 N(LetterImgData)[0].width = 150;
@@ -245,7 +245,7 @@ API_CALLABLE(N(ReadLetters)){
                 dma_copy(charset_ROM_START + N(LetterDmaOffsets)[(userIndex * 2) + 3],
                          charset_ROM_START + N(LetterDmaOffsets)[(userIndex * 2) + 3] + sizeof(N(N(LetterPhotoPal))),
                          N(N(LetterPhotoPal)));
-                         
+
                 N(LetterImgData)[1].raster = N(LetterPhotoImg);
                 N(LetterImgData)[1].palette = N(N(LetterPhotoPal));
                 N(LetterImgData)[1].width = 70;
@@ -307,11 +307,11 @@ s32 N(DiaryStoryRequirements)[] = {
     STORY_CH5_TRADED_VASE_FOR_SEED,
     STORY_CH5_TRADED_VASE_FOR_SEED,
     STORY_CH6_RETURNED_TO_TOAD_TOWN,
-    STORY_CH6_RETURNED_TO_TOAD_TOWN, 
+    STORY_CH6_RETURNED_TO_TOAD_TOWN,
     STORY_CH7_STAR_SPRIT_DEPARTED,
     STORY_CH7_STAR_SPRIT_DEPARTED,
     STORY_EPILOGUE,
-    STORY_EPILOGUE, 
+    STORY_EPILOGUE,
 };
 
 s32 N(DiaryEntryStringIDs)[] = {
@@ -445,7 +445,7 @@ EvtScript N(EVS_Inspect_LuigisDiary) = {
 };
 
 EvtScript N(EVS_Shake_Mailbox) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o305, SOUND_E0, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o305, SOUND_E0, SOUND_SPACE_MODE_0)
     EVT_CALL(TranslateModel, MODEL_o222, 2, 0, 0)
     EVT_CALL(TranslateModel, MODEL_o223, 3, 0, 0)
     EVT_CALL(TranslateModel, MODEL_o224, 1, 0, 0)
@@ -471,7 +471,7 @@ EvtScript N(EVS_Shake_Mailbox) = {
 
 EvtScript N(EVS_SecretPanel_Flip) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o252, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o252, SOUND_20AB, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o252, SOUND_20AB, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 2160, 60, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -481,7 +481,7 @@ EvtScript N(EVS_SecretPanel_Flip) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o252, SOUND_20AC, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o252, SOUND_20AC, SOUND_SPACE_MODE_0)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o252, COLLIDER_FLAGS_UPPER_MASK)
     EVT_RETURN
     EVT_END

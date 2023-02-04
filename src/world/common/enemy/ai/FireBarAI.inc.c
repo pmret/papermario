@@ -91,7 +91,7 @@ ApiStatus N(FireBarAI_Main)(Evt* script, s32 isInitialCall) {
     clampedYaw = clamp_angle(data->yaw);
     if (clampedYaw != data->yaw) {
         data->yaw = clampedYaw;
-        sfx_play_sound_at_position(N(FireBar_Sounds)[data->soundIndex], 0, data->centerPos.x, data->centerPos.y, data->centerPos.z);
+        sfx_play_sound_at_position(N(FireBar_Sounds)[data->soundIndex], SOUND_SPACE_MODE_0, data->centerPos.x, data->centerPos.y, data->centerPos.z);
     }
     distToPlayer = dist2D(data->centerPos.x, data->centerPos.z, playerStatus->position.x, playerStatus->position.z);
     distToNpc = dist2D(data->centerPos.x, data->centerPos.z, npc->pos.x, npc->pos.z)
@@ -103,7 +103,7 @@ ApiStatus N(FireBarAI_Main)(Evt* script, s32 isInitialCall) {
     if ((hitDetected > 0) && (playerStatus->actionState != ACTION_STATE_HIT_FIRE)) {
         playerStatus->hazardType = HAZARD_TYPE_FIRE_BAR;
         set_action_state(ACTION_STATE_HIT_FIRE);
-        sfx_play_sound_at_position(SOUND_E8, 0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+        sfx_play_sound_at_position(SOUND_E8, SOUND_SPACE_MODE_0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
         gCurrentEncounter.battleTriggerCooldown = 45;
         playerStatus->blinkTimer = 45;
         playerStatus->lastGoodPosition.x = playerStatus->position.x;

@@ -52,9 +52,9 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     f32 vt1 = (f32)enemy->varTable[1] / 100.0;
     f32 posX, posY, posZ, posW;
     f32 temp_f24;
-    
+
     enemy->varTable[4] = npc->pos.y * 100.0;
-    
+
     temp_f24 = vt3 + vt7;
 
     if ((enemy->varTable[0] & 0x11) == 1) {
@@ -73,7 +73,7 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
             }
         }
     }
-    
+
     if ((enemy->varTable[0] & 0x11) == 0x11) {
         f64 test;
         f32 yTemp;
@@ -132,14 +132,14 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
         if (aiSettings->playerSearchInterval >= 0) {
             if (script->functionTemp[1] <= 0) {
                 script->functionTemp[1] = aiSettings->playerSearchInterval;
-                if (gPlayerStatusPtr->position.y < (npc->pos.y + npc->collisionHeight) + 10.0 && 
-                    basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist, 0) != 0) 
+                if (gPlayerStatusPtr->position.y < (npc->pos.y + npc->collisionHeight) + 10.0 &&
+                    basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist, 0) != 0)
                 {
                     s32 emoteTemp;
                     fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &emoteTemp);
                     npc->moveToPos.y = npc->pos.y;
-                    ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
-                    
+                    ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
+
                     if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
                         script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
                     } else {
@@ -153,9 +153,9 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     } else {
         enemy->varTable[9]--;
     }
-    
-    if (is_point_within_region(enemy->territory->wander.wanderShape, 
-                               enemy->territory->wander.centerPos.x, 
+
+    if (is_point_within_region(enemy->territory->wander.wanderShape,
+                               enemy->territory->wander.centerPos.x,
                                enemy->territory->wander.centerPos.z,
                                npc->pos.x, npc->pos.z,
                                enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
@@ -236,7 +236,7 @@ void N(FlyingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
             && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             npc->moveToPos.y = npc->pos.y;
-            ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
+            ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
             if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
                 script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
             } else {

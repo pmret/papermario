@@ -39,21 +39,21 @@ EvtScript N(EVS_NpcIdle_GoombaKing) = {
         EVT_CALL(GetNpcPos, NPC_RedGoombaBro, LVar0, LVar1, LVar2)
         EVT_CALL(GetAngleToPlayer, NPC_RedGoombaBro, LVar3)
         EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(100.0), LVar3)
-        EVT_CALL(PlaySoundAtNpc, NPC_RedGoombaBro, SOUND_10F, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_RedGoombaBro, SOUND_10F, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_RedGoombaBro, LVar0, 0, LVar2, 30)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_BlueGoombaBro, LVar0, LVar1, LVar2)
         EVT_CALL(GetAngleToPlayer, NPC_BlueGoombaBro, LVar3)
         EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(100.0), LVar3)
-        EVT_CALL(PlaySoundAtNpc, NPC_BlueGoombaBro, SOUND_10F, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_BlueGoombaBro, SOUND_10F, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_BlueGoombaBro, LVar0, 0, LVar2, 30)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_GoombaKing, LVar0, LVar1, LVar2)
         EVT_CALL(GetAngleToPlayer, NPC_GoombaKing, LVar3)
         EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(100.0), LVar3)
-        EVT_CALL(PlaySoundAtNpc, NPC_GoombaKing, SOUND_3E7, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_GoombaKing, SOUND_3E7, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_GoombaKing, LVar0, 0, LVar2, 30)
     EVT_END_THREAD
     EVT_WAIT(15)
@@ -92,7 +92,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
         EVT_CALL(NpcMoveTo, NPC_RedGoombaBro, -396, -89, 0)
     EVT_END_THREAD
     EVT_WAIT(2)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_tt, SOUND_METAL_DOOR_OPEN, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_tt, SOUND_METAL_DOOR_OPEN, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 90, 20, EASING_COS_IN_OUT)
     EVT_LABEL(0)
     EVT_CALL(UpdateLerp)
@@ -112,7 +112,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_tt, SOUND_METAL_DOOR_CLOSE, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_tt, SOUND_METAL_DOOR_CLOSE, SOUND_SPACE_MODE_0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(2.0))
     EVT_SET(GB_StoryProgress, STORY_CH0_DEFEATED_GOOMBA_KING)
     EVT_EXEC(N(EVS_SetupMusic))
@@ -213,7 +213,7 @@ EvtScript N(EVS_NpcAux_Kammy) = {
 
 s32 N(KammyFloatingOffsets)[] = {
      1,  2,  3,  2,  1,
-    -1, -2, -3, -2, -1, 
+    -1, -2, -3, -2, -1,
 };
 
 EvtScript N(EVS_NpcAI_Kammy) = {

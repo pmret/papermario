@@ -10,7 +10,8 @@ ApiStatus func_802416A4_D31324(Evt* script, s32 isInitialCall) {
     s32 y = evt_get_variable(script, *args++);
     s32 z = evt_get_variable(script, *args++);
 
-    sfx_adjust_env_sound_pos(0x8000006C, 0, x, y, z);
+    // @bug need to use real sound id, not environmental sound id
+    sfx_adjust_env_sound_pos(SOUND_8000006C, SOUND_SPACE_MODE_0, x, y, z);
 
     return ApiStatus_DONE2;
 }

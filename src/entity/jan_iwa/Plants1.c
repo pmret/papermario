@@ -138,12 +138,12 @@ void entity_SpinningFlower_init(Entity* entity) {
 }
 
 void func_802BB314_E2DC44(Entity* entity) {
-    sfx_play_sound_at_position(SOUND_8000006A, 0, entity->position.x, entity->position.y, entity->position.z);
+    sfx_play_sound_at_position(SOUND_8000006A, SOUND_SPACE_MODE_0, entity->position.x, entity->position.y, entity->position.z);
 }
 
 void func_802BB34C_E2DC7C(void) {
     sfx_play_sound(SOUND_391 | SOUND_ID_TRIGGER_CHANGE_SOUND);
-    func_80149A6C(0x391, 1);
+    snd_stop_tracking_env_sound_pos(SOUND_391, TRUE);
 }
 
 void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {

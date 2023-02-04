@@ -15,7 +15,7 @@ EvtScript N(EVS_FlickerTexPanner) = {
             EVT_SET(LVarA, ArrayVar(5))
     EVT_END_SWITCH
     EVT_IF_EQ(LVarA, 1)
-        EVT_CALL(PlaySoundAt, SOUND_3A0, 0, -300, 0, -10)
+        EVT_CALL(PlaySoundAt, SOUND_3A0, SOUND_SPACE_MODE_0, -300, 0, -10)
         EVT_CALL(SetTexPanOffset, LVar1, 0, 0, 0)
     EVT_ELSE
         EVT_CALL(SetTexPanOffset, LVar1, 0, 0, -0x8000)
@@ -39,7 +39,7 @@ EvtScript N(EVS_FlickerTexPanner) = {
 };
 
 EvtScript N(EVS_AnimateMushroomSet) = {
-    EVT_CALL(PlaySoundAt, SOUND_3A0, 0, -300, 0, -10)
+    EVT_CALL(PlaySoundAt, SOUND_3A0, SOUND_SPACE_MODE_0, -300, 0, -10)
     EVT_EXEC(N(EVS_FlickerTexPanner))
     EVT_WAIT(30)
     EVT_LOOP(4)
@@ -68,7 +68,7 @@ EvtScript N(EVS_InspectMushrooms_West) = {
 };
 
 EvtScript N(EVS_InspectMushrooms_South) = {
-    EVT_CALL(PlaySoundAt, SOUND_3A0, 0, -20, 0, 300)
+    EVT_CALL(PlaySoundAt, SOUND_3A0, SOUND_SPACE_MODE_0, -20, 0, 300)
     EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, -0x8000)
     EVT_WAIT(20)
     EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, 0)
@@ -77,7 +77,7 @@ EvtScript N(EVS_InspectMushrooms_South) = {
 };
 
 EvtScript N(EVS_InspectMushrooms_North) = {
-    EVT_CALL(PlaySoundAt, SOUND_3A0, 0, 20, 0, -300)
+    EVT_CALL(PlaySoundAt, SOUND_3A0, SOUND_SPACE_MODE_0, 20, 0, -300)
     EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, 0, -0x8000)
     EVT_WAIT(20)
     EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, 0, 0)
@@ -86,7 +86,7 @@ EvtScript N(EVS_InspectMushrooms_North) = {
 };
 
 EvtScript N(EVS_InspectMushrooms_East) = {
-    EVT_CALL(PlaySoundAt, SOUND_3A0, 0, 300, 0, 10)
+    EVT_CALL(PlaySoundAt, SOUND_3A0, SOUND_SPACE_MODE_0, 300, 0, 10)
     EVT_CALL(SetTexPanOffset, TEX_PANNER_3, TEX_PANNER_MAIN, 0, -0x8000)
     EVT_WAIT(50)
     EVT_CALL(SetTexPanOffset, TEX_PANNER_3, TEX_PANNER_MAIN, 0, 0)

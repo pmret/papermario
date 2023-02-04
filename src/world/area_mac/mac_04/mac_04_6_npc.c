@@ -67,7 +67,7 @@ EvtScript N(EVS_ItemPrompt_ToyTrain) = {
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(RemoveKeyItemAt, LVar1)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_1AA, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_1AA, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, -90, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -93,7 +93,7 @@ EvtScript N(EVS_ItemPrompt_ToyTrain) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_1AA, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_1AA, SOUND_SPACE_MODE_0)
     EVT_CALL(CloseChoicePopup)
     EVT_SET(GB_StoryProgress, STORY_CH4_RETURNED_TOY_TRAIN)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)

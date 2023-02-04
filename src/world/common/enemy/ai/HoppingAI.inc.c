@@ -13,12 +13,12 @@ void N(HoppingAI_HopInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     npc->jumpVelocity = (rand_int(45) / 10.0) + 8.0;
     npc->jumpScale = 1.5f;
     ai_enemy_play_sound(npc, SOUND_B0000017, 0);
-    
-    if (is_point_within_region(enemy->territory->wander.wanderShape, 
-                               enemy->territory->wander.centerPos.x, 
-                               enemy->territory->wander.centerPos.z, 
-                               npc->pos.x, npc->pos.z, 
-                               enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) 
+
+    if (is_point_within_region(enemy->territory->wander.wanderShape,
+                               enemy->territory->wander.centerPos.x,
+                               enemy->territory->wander.centerPos.z,
+                               npc->pos.x, npc->pos.z,
+                               enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z))
     {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
         x = npc->pos.x;
@@ -26,8 +26,8 @@ void N(HoppingAI_HopInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
         z = npc->pos.z;
 
         for (i = 0; i < 6; i++) {
-            if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, 25.0f, 
-                                                   npc->yaw, npc->collisionHeight, npc->collisionRadius)) 
+            if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, 25.0f,
+                                                   npc->yaw, npc->collisionHeight, npc->collisionRadius))
             {
                 npc->yaw += 30.0;
             } else {
@@ -51,7 +51,7 @@ void N(HoppingAI_Hop)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
                 if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist, 0) != 0) {
                     s32 emoteTemp;
                     fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-                    ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
+                    ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
                     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
                     script->AI_TEMP_STATE = 12;
                     return;
@@ -75,7 +75,7 @@ void N(HoppingAI_Hop)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
 
         if (!npc_test_move_simple_with_slipping(npc->collisionChannel,
                 &posX, &posY, &posZ,
-                moveSpeed, npc->yaw, collHeight, collRadius * 1.2)) 
+                moveSpeed, npc->yaw, collHeight, collRadius * 1.2))
         {
             npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         } else {
@@ -89,8 +89,8 @@ void N(HoppingAI_Hop)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
         posZ = npc->pos.z;
         hitDepth = fabsf(npc->jumpVelocity) + 16.0;
 
-        if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &hitDepth) && 
-            hitDepth <= fabsf(npc->jumpVelocity) + 13.0) 
+        if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &hitDepth) &&
+            hitDepth <= fabsf(npc->jumpVelocity) + 13.0)
         {
             npc->jumpVelocity = 0.0f;
             npc->pos.y = posY;
@@ -107,7 +107,7 @@ void N(HoppingAI_Hop)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
             }
             return;
         }
-    } 
+    }
     npc->pos.y += npc->jumpVelocity;
     npc->jumpVelocity -= npc->jumpScale;
 }
@@ -129,7 +129,7 @@ void N(HoppingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectV
     if (aiSettings->playerSearchInterval >= 0 && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0) != 0) {
         s32 emoteTemp;
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-        ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
+        ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->AI_TEMP_STATE = 12;
     } else if (npc->turnAroundYawAdjustment == 0) {

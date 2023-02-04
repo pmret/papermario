@@ -313,7 +313,7 @@ EvtScript N(EVS_Scene_ReleaseWatt) = {
     EVT_CALL(func_802D2C14, 0)
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_Watt, ANIM_WorldWatt_Idle)
-    EVT_CALL(PlaySoundAtNpc, NPC_Watt, SOUND_262, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Watt, SOUND_262, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_Watt, EMOTE_EXCLAMATION, 0, 30, TRUE, 0, 0, 0, 0)
     EVT_WAIT(40)
     EVT_CALL(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_0059)

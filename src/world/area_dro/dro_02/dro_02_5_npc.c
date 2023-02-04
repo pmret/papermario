@@ -268,7 +268,7 @@ EvtScript N(EVS_NpcIdle_Mouser_03) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Run)
     EVT_CALL(NpcMoveTo, NPC_SELF, 150, 18, 20)
     EVT_CALL(EnableNpcBlur, NPC_SELF, TRUE)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_174, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_174, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcMoveTo, NPC_SELF, -83, 11, 20)
     EVT_CALL(NpcMoveTo, NPC_SELF, -239, 5, 20)
     EVT_CALL(NpcMoveTo, NPC_SELF, -371, 5, 20)

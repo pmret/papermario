@@ -1,6 +1,6 @@
 s32 N(LetterList_RussT)[] = {
     ITEM_LETTER04,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_RussT_LetterPrompt) = {
@@ -27,7 +27,7 @@ EvtScript N(EVS_RussT_LetterReward) = {
 
 EvtScript N(EVS_ShyGuy_PlayRunningSounds) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_B0000021, 0)
+        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_B0000021, SOUND_SPACE_MODE_0)
         EVT_WAIT(2)
     EVT_END_LOOP
     EVT_RETURN
@@ -43,42 +43,42 @@ typedef struct RussTLoreEntry {
 } RussTLoreEntry; // size = 0x14
 
 RussTLoreEntry N(RussTLore)[] = {
-    { MSG_RussTHint_0000, STORY_CH0_WAKE_UP,             AF_MAC_45, GF_MAC00_RussT_HeardLore_00, AF_MAC_77 }, 
-    { MSG_RussTHint_0001, STORY_CH0_WAKE_UP,             AF_MAC_46, GF_MAC00_RussT_HeardLore_01, AF_MAC_78 }, 
-    { MSG_RussTHint_0002, STORY_CH0_WAKE_UP,             AF_MAC_47, GF_MAC00_RussT_HeardLore_02, AF_MAC_79 }, 
-    { MSG_RussTHint_0003, STORY_CH0_WAKE_UP,             AF_MAC_48, GF_MAC00_RussT_HeardLore_03, AF_MAC_7A }, 
-    { MSG_RussTHint_0004, STORY_CH0_BEGAN_PEACH_MISSION, AF_MAC_49, GF_MAC00_RussT_HeardLore_04, AF_MAC_7B }, 
-    { MSG_RussTHint_0005, STORY_CH0_BEGAN_PEACH_MISSION, AF_MAC_4A, GF_MAC00_RussT_HeardLore_05, AF_MAC_7C }, 
-    { MSG_RussTHint_0006, STORY_CH0_BEGAN_PEACH_MISSION, AF_MAC_4B, GF_MAC00_RussT_HeardLore_06, AF_MAC_7D }, 
-    { MSG_RussTHint_0007, STORY_CH0_BEGAN_PEACH_MISSION, AF_MAC_4C, GF_MAC00_RussT_HeardLore_07, AF_MAC_7E }, 
-    { MSG_RussTHint_0008, STORY_CH1_BEGAN_PEACH_MISSION, AF_MAC_4D, GF_MAC00_RussT_HeardLore_08, AF_MAC_7F }, 
-    { MSG_RussTHint_0009, STORY_CH1_BEGAN_PEACH_MISSION, AF_MAC_4E, GF_MAC00_RussT_HeardLore_09, AF_MAC_80 }, 
-    { MSG_RussTHint_000A, STORY_CH1_BEGAN_PEACH_MISSION, AF_MAC_4F, GF_MAC00_RussT_HeardLore_0A, AF_MAC_81 }, 
-    { MSG_RussTHint_000B, STORY_CH1_BEGAN_PEACH_MISSION, AF_MAC_50, GF_MAC00_RussT_HeardLore_0B, AF_MAC_82 }, 
-    { MSG_RussTHint_000C, STORY_CH2_BEGAN_PEACH_MISSION, AF_MAC_51, GF_MAC00_RussT_HeardLore_0C, AF_MAC_83 }, 
-    { MSG_RussTHint_000D, STORY_CH2_BEGAN_PEACH_MISSION, AF_MAC_52, GF_MAC00_RussT_HeardLore_0D, AF_MAC_84 }, 
-    { MSG_RussTHint_000E, STORY_CH2_BEGAN_PEACH_MISSION, AF_MAC_53, GF_MAC00_RussT_HeardLore_0E, AF_MAC_85 }, 
-    { MSG_RussTHint_000F, STORY_CH2_BEGAN_PEACH_MISSION, AF_MAC_54, GF_MAC00_RussT_HeardLore_0F, AF_MAC_86 }, 
-    { MSG_RussTHint_0010, STORY_CH3_BEGAN_PEACH_MISSION, AF_MAC_55, GF_MAC00_RussT_HeardLore_10, AF_MAC_87 }, 
-    { MSG_RussTHint_0011, STORY_CH3_BEGAN_PEACH_MISSION, AF_MAC_56, GF_MAC00_RussT_HeardLore_11, AF_MAC_88 }, 
-    { MSG_RussTHint_0012, STORY_CH3_BEGAN_PEACH_MISSION, AF_MAC_57, GF_MAC00_RussT_HeardLore_12, AF_MAC_89 }, 
-    { MSG_RussTHint_0013, STORY_CH3_BEGAN_PEACH_MISSION, AF_MAC_58, GF_MAC00_RussT_HeardLore_13, AF_MAC_8A }, 
-    { MSG_RussTHint_0014, STORY_CH4_BEGAN_PEACH_MISSION, AF_MAC_59, GF_MAC00_RussT_HeardLore_14, AF_MAC_8B }, 
-    { MSG_RussTHint_0015, STORY_CH4_BEGAN_PEACH_MISSION, AF_MAC_5A, GF_MAC00_RussT_HeardLore_15, AF_MAC_8C }, 
-    { MSG_RussTHint_0016, STORY_CH4_BEGAN_PEACH_MISSION, AF_MAC_5B, GF_MAC00_RussT_HeardLore_16, AF_MAC_8D }, 
-    { MSG_RussTHint_0017, STORY_CH4_BEGAN_PEACH_MISSION, AF_MAC_5C, GF_MAC00_RussT_HeardLore_17, AF_MAC_8E }, 
-    { MSG_RussTHint_0018, STORY_CH5_BEGAN_PEACH_MISSION, AF_MAC_5D, GF_MAC00_RussT_HeardLore_18, AF_MAC_8F }, 
-    { MSG_RussTHint_0019, STORY_CH5_BEGAN_PEACH_MISSION, AF_MAC_5E, GF_MAC00_RussT_HeardLore_19, AF_MAC_90 }, 
-    { MSG_RussTHint_001A, STORY_CH5_BEGAN_PEACH_MISSION, AF_MAC_5F, GF_MAC00_RussT_HeardLore_1A, AF_MAC_91 }, 
-    { MSG_RussTHint_001B, STORY_CH5_BEGAN_PEACH_MISSION, AF_MAC_60, GF_MAC00_RussT_HeardLore_1B, AF_MAC_92 }, 
-    { MSG_RussTHint_001C, STORY_CH6_BEGAN_PEACH_MISSION, AF_MAC_61, GF_MAC00_RussT_HeardLore_1C, AF_MAC_93 }, 
-    { MSG_RussTHint_001D, STORY_CH6_BEGAN_PEACH_MISSION, AF_MAC_62, GF_MAC00_RussT_HeardLore_1D, AF_MAC_94 }, 
-    { MSG_RussTHint_001E, STORY_CH6_BEGAN_PEACH_MISSION, AF_MAC_63, GF_MAC00_RussT_HeardLore_1E, AF_MAC_95 }, 
-    { MSG_RussTHint_001F, STORY_CH6_BEGAN_PEACH_MISSION, AF_MAC_64, GF_MAC00_RussT_HeardLore_1F, AF_MAC_96 }, 
-    { MSG_RussTHint_0020, STORY_CH7_BEGAN_PEACH_MISSION, AF_MAC_65, GF_MAC00_RussT_HeardLore_20, AF_MAC_97 }, 
-    { MSG_RussTHint_0021, STORY_CH7_BEGAN_PEACH_MISSION, AF_MAC_66, GF_MAC00_RussT_HeardLore_21, AF_MAC_98 }, 
-    { MSG_RussTHint_0022, STORY_CH7_BEGAN_PEACH_MISSION, AF_MAC_67, GF_MAC00_RussT_HeardLore_22, AF_MAC_99 }, 
-    { MSG_RussTHint_0023, STORY_CH7_BEGAN_PEACH_MISSION, AF_MAC_68, GF_MAC00_RussT_HeardLore_23, AF_MAC_9A }, 
+    { MSG_RussTHint_0000, STORY_CH0_WAKE_UP,             AF_MAC_45, GF_MAC00_RussT_HeardLore_00, AF_MAC_77 },
+    { MSG_RussTHint_0001, STORY_CH0_WAKE_UP,             AF_MAC_46, GF_MAC00_RussT_HeardLore_01, AF_MAC_78 },
+    { MSG_RussTHint_0002, STORY_CH0_WAKE_UP,             AF_MAC_47, GF_MAC00_RussT_HeardLore_02, AF_MAC_79 },
+    { MSG_RussTHint_0003, STORY_CH0_WAKE_UP,             AF_MAC_48, GF_MAC00_RussT_HeardLore_03, AF_MAC_7A },
+    { MSG_RussTHint_0004, STORY_CH0_BEGAN_PEACH_MISSION, AF_MAC_49, GF_MAC00_RussT_HeardLore_04, AF_MAC_7B },
+    { MSG_RussTHint_0005, STORY_CH0_BEGAN_PEACH_MISSION, AF_MAC_4A, GF_MAC00_RussT_HeardLore_05, AF_MAC_7C },
+    { MSG_RussTHint_0006, STORY_CH0_BEGAN_PEACH_MISSION, AF_MAC_4B, GF_MAC00_RussT_HeardLore_06, AF_MAC_7D },
+    { MSG_RussTHint_0007, STORY_CH0_BEGAN_PEACH_MISSION, AF_MAC_4C, GF_MAC00_RussT_HeardLore_07, AF_MAC_7E },
+    { MSG_RussTHint_0008, STORY_CH1_BEGAN_PEACH_MISSION, AF_MAC_4D, GF_MAC00_RussT_HeardLore_08, AF_MAC_7F },
+    { MSG_RussTHint_0009, STORY_CH1_BEGAN_PEACH_MISSION, AF_MAC_4E, GF_MAC00_RussT_HeardLore_09, AF_MAC_80 },
+    { MSG_RussTHint_000A, STORY_CH1_BEGAN_PEACH_MISSION, AF_MAC_4F, GF_MAC00_RussT_HeardLore_0A, AF_MAC_81 },
+    { MSG_RussTHint_000B, STORY_CH1_BEGAN_PEACH_MISSION, AF_MAC_50, GF_MAC00_RussT_HeardLore_0B, AF_MAC_82 },
+    { MSG_RussTHint_000C, STORY_CH2_BEGAN_PEACH_MISSION, AF_MAC_51, GF_MAC00_RussT_HeardLore_0C, AF_MAC_83 },
+    { MSG_RussTHint_000D, STORY_CH2_BEGAN_PEACH_MISSION, AF_MAC_52, GF_MAC00_RussT_HeardLore_0D, AF_MAC_84 },
+    { MSG_RussTHint_000E, STORY_CH2_BEGAN_PEACH_MISSION, AF_MAC_53, GF_MAC00_RussT_HeardLore_0E, AF_MAC_85 },
+    { MSG_RussTHint_000F, STORY_CH2_BEGAN_PEACH_MISSION, AF_MAC_54, GF_MAC00_RussT_HeardLore_0F, AF_MAC_86 },
+    { MSG_RussTHint_0010, STORY_CH3_BEGAN_PEACH_MISSION, AF_MAC_55, GF_MAC00_RussT_HeardLore_10, AF_MAC_87 },
+    { MSG_RussTHint_0011, STORY_CH3_BEGAN_PEACH_MISSION, AF_MAC_56, GF_MAC00_RussT_HeardLore_11, AF_MAC_88 },
+    { MSG_RussTHint_0012, STORY_CH3_BEGAN_PEACH_MISSION, AF_MAC_57, GF_MAC00_RussT_HeardLore_12, AF_MAC_89 },
+    { MSG_RussTHint_0013, STORY_CH3_BEGAN_PEACH_MISSION, AF_MAC_58, GF_MAC00_RussT_HeardLore_13, AF_MAC_8A },
+    { MSG_RussTHint_0014, STORY_CH4_BEGAN_PEACH_MISSION, AF_MAC_59, GF_MAC00_RussT_HeardLore_14, AF_MAC_8B },
+    { MSG_RussTHint_0015, STORY_CH4_BEGAN_PEACH_MISSION, AF_MAC_5A, GF_MAC00_RussT_HeardLore_15, AF_MAC_8C },
+    { MSG_RussTHint_0016, STORY_CH4_BEGAN_PEACH_MISSION, AF_MAC_5B, GF_MAC00_RussT_HeardLore_16, AF_MAC_8D },
+    { MSG_RussTHint_0017, STORY_CH4_BEGAN_PEACH_MISSION, AF_MAC_5C, GF_MAC00_RussT_HeardLore_17, AF_MAC_8E },
+    { MSG_RussTHint_0018, STORY_CH5_BEGAN_PEACH_MISSION, AF_MAC_5D, GF_MAC00_RussT_HeardLore_18, AF_MAC_8F },
+    { MSG_RussTHint_0019, STORY_CH5_BEGAN_PEACH_MISSION, AF_MAC_5E, GF_MAC00_RussT_HeardLore_19, AF_MAC_90 },
+    { MSG_RussTHint_001A, STORY_CH5_BEGAN_PEACH_MISSION, AF_MAC_5F, GF_MAC00_RussT_HeardLore_1A, AF_MAC_91 },
+    { MSG_RussTHint_001B, STORY_CH5_BEGAN_PEACH_MISSION, AF_MAC_60, GF_MAC00_RussT_HeardLore_1B, AF_MAC_92 },
+    { MSG_RussTHint_001C, STORY_CH6_BEGAN_PEACH_MISSION, AF_MAC_61, GF_MAC00_RussT_HeardLore_1C, AF_MAC_93 },
+    { MSG_RussTHint_001D, STORY_CH6_BEGAN_PEACH_MISSION, AF_MAC_62, GF_MAC00_RussT_HeardLore_1D, AF_MAC_94 },
+    { MSG_RussTHint_001E, STORY_CH6_BEGAN_PEACH_MISSION, AF_MAC_63, GF_MAC00_RussT_HeardLore_1E, AF_MAC_95 },
+    { MSG_RussTHint_001F, STORY_CH6_BEGAN_PEACH_MISSION, AF_MAC_64, GF_MAC00_RussT_HeardLore_1F, AF_MAC_96 },
+    { MSG_RussTHint_0020, STORY_CH7_BEGAN_PEACH_MISSION, AF_MAC_65, GF_MAC00_RussT_HeardLore_20, AF_MAC_97 },
+    { MSG_RussTHint_0021, STORY_CH7_BEGAN_PEACH_MISSION, AF_MAC_66, GF_MAC00_RussT_HeardLore_21, AF_MAC_98 },
+    { MSG_RussTHint_0022, STORY_CH7_BEGAN_PEACH_MISSION, AF_MAC_67, GF_MAC00_RussT_HeardLore_22, AF_MAC_99 },
+    { MSG_RussTHint_0023, STORY_CH7_BEGAN_PEACH_MISSION, AF_MAC_68, GF_MAC00_RussT_HeardLore_23, AF_MAC_9A },
 };
 
 API_CALLABLE(N(ResetRussHintsGiven)) {
@@ -129,7 +129,7 @@ API_CALLABLE(N(GetRussHintMessage)) {
             s32 chosenHint = rand_int(count - 1);
 
             count = 0;
-            
+
             for (i = hasHintMessage; i < ARRAY_COUNT(N(RussTLore)); i++, entry++) {
                 if (evt_get_variable(script, entry->isAvailableFlag) &&
                     !evt_get_variable(script, entry->hasBeenGivenFlag) &&
@@ -197,7 +197,7 @@ EvtScript N(EVS_ShyGuy_StealDictionary) = {
     EVT_EXEC(N(EVS_ManageCarriedDictionary))
     EVT_THREAD
         EVT_CALL(SetGroupEnabled, MODEL_intel_inn, 1)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_OPEN, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
         EVT_SET(LVar0, 0)
         EVT_LOOP(10)
             EVT_ADD(LVar0, 8)
@@ -209,7 +209,7 @@ EvtScript N(EVS_ShyGuy_StealDictionary) = {
             EVT_CALL(RotateModel, MODEL_o210, LVar0, 0, 1, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_CLOSE, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
         EVT_CALL(SetGroupEnabled, MODEL_intel_inn, 0)
     EVT_END_THREAD
     EVT_WAIT(5)
@@ -218,10 +218,10 @@ EvtScript N(EVS_ShyGuy_StealDictionary) = {
     EVT_EXEC_GET_TID(N(EVS_ShyGuy_PlayRunningSounds), LVarA)
     EVT_CALL(NpcMoveTo, NPC_ShyGuyThief, -10, -410, 0)
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuyThief, SOUND_32C, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuyThief, SOUND_32C, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_ShyGuyThief, -10, 0, -340, 0)
     EVT_SET(LVar0, 21)
-    EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_203F, 0)
+    EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_203F, SOUND_SPACE_MODE_0)
     EVT_EXEC_GET_TID(N(EVS_ShyGuy_PlayRunningSounds), LVarA)
     EVT_CALL(NpcMoveTo, NPC_ShyGuyThief, 45, -186, 0)
     EVT_CALL(NpcMoveTo, NPC_ShyGuyThief, 139, -67, 0)

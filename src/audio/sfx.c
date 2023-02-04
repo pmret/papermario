@@ -5,56 +5,56 @@
 
 // sound IDs
 s32 LoopingSounds[] = {
-    0x00000287, 0x000002A8, 0x00000054, 0x00000056, 0x00000024, 0x00000027, 0x00000021, 0x00000022, 0x00000349,
-    0x00000273, 0x00000275, 0x00000275, 0x00000274, 0x00000273, 0x00000274, 0x00000099, 0x0000009E, 0x0000032E,
-    0x0000008E, 0x00000089, 0x00000083, 0x00000388, 0x000000A0, 0x0000004A, 0x0000009F, 0x00000168, 0x00000185,
-    0x00000052, 0x0000004E, 0x0000004F, 0x00000189, 0x00000000, 0x00000000, 0x00000198, 0x00000199, 0x00000194,
-    0x0000019A, 0x00000091, 0x00000164, 0x00000271, 0x00000271, 0x00000274, 0x00000275, 0x00000271, 0x00000273,
-    0x00000271, 0x00000273, 0x00000271, 0x00000274, 0x00000275, 0x00000276, 0x00000271, 0x00000273, 0x00000271,
-    0x00000274, 0x00000276, 0x00000275, 0x00000271, 0x00000271, 0x00000271, 0x00000271, 0x00000276, 0x00000275,
-    0x00000274, 0x0000039E, 0x00000341, 0x00000207, 0x00000271, 0x00000271, 0x00000275, 0x00000276, 0x00000271,
-    0x00000271, 0x00000271, 0x00000050, 0x00000070, 0x0000036C, 0x0000036D, 0x00000295, 0x00000043, 0x00000197,
-    0x00000221, 0x0000022A, 0x0000022B, 0x00002040, 0x00000046, 0x00000033, 0x00000034, 0x00000039, 0x0000004C,
-    0x0000004D, 0x000001B1, 0x000001B2, 0x00000094, 0x0000005D, 0x0000005B, 0x00000060, 0x000001B3, 0x00000000,
-    0x000000AD, 0x000000AE, 0x000000AF, 0x0000023D, 0x000000A2, 0x00000248, 0x00000249, 0x00000391, 0x000003BC,
-    0x000003AD, 0x0000022C, 0x0000022D,
+    SOUND_287, SOUND_2A8, SOUND_54, SOUND_56, SOUND_24, SOUND_27, SOUND_21, SOUND_22, SOUND_349,
+    SOUND_273, SOUND_275, SOUND_275, SOUND_274, SOUND_273, SOUND_274, SOUND_99, SOUND_9E, SOUND_32E,
+    SOUND_8E, SOUND_89, SOUND_83, SOUND_388, SOUND_A0, SOUND_4A, SOUND_9F, SOUND_168, SOUND_185,
+    SOUND_52, SOUND_4E, SOUND_4F, SOUND_189, 0, 0, SOUND_198, SOUND_199, SOUND_194,
+    SOUND_19A, SOUND_91, SOUND_164, SOUND_271, SOUND_271, SOUND_274, SOUND_275, SOUND_271, SOUND_273,
+    SOUND_271, SOUND_273, SOUND_271, SOUND_274, SOUND_275, SOUND_276, SOUND_271, SOUND_273, SOUND_271,
+    SOUND_274, SOUND_276, SOUND_275, SOUND_271, SOUND_271, SOUND_271, SOUND_271, SOUND_276, SOUND_275,
+    SOUND_274, SOUND_39E, SOUND_341, SOUND_207, SOUND_271, SOUND_271, SOUND_275, SOUND_276, SOUND_271,
+    SOUND_271, SOUND_271, SOUND_50, SOUND_70, SOUND_36C, SOUND_36D, SOUND_295, SOUND_43, SOUND_197,
+    SOUND_221, SOUND_22A, SOUND_22B, SOUND_2040, SOUND_JR_TROOPA_SWIM, SOUND_33, SOUND_34, SOUND_39, SOUND_4C,
+    SOUND_4D, SOUND_1B1, SOUND_1B2, SOUND_94, SOUND_5D, SOUND_5B, SOUND_60, SOUND_1B3, 0,
+    SOUND_AD, SOUND_AE, SOUND_AF, SOUND_23D, SOUND_A2, SOUND_248, SOUND_249, SOUND_391, SOUND_3BC,
+    SOUND_3AD, SOUND_22C, SOUND_22D,
 };
 
 // all sound IDs for alternating sounds
-s32 D_8014F48C[] = { 0x00000336, 0x00000316 };
-s32 D_8014F494[] = { 0x00000337, 0x00000317 };
-s32 D_8014F49C[] = { 0x00000338, 0x00000318 };
-s32 D_8014F4A4[] = { 0x00000339, 0x00000319 };
-s32 D_8014F4AC[] = { 0x0000033A, 0x0000031A };
-s32 D_8014F4B4[] = { 0x0000033B, 0x0000031B };
-s32 D_8014F4BC[] = { 0x0000033C, 0x0000031C };
-s32 D_8014F4C4[] = { 0x0000033D, 0x0000031D };
-s32 D_8014F4CC[] = { 0x0000033E, 0x0000031E };
-s32 D_8014F4D4[] = { 0x0000033F, 0x0000031F };
-s32 D_8014F4DC[] = { 0x00000340, 0x00000340 };
-s32 D_8014F4E4[] = { 0x000002F4, 0x000002F5 };
-s32 D_8014F4EC[] = { 0x0000032F, 0x00000330 };
-s32 D_8014F4F4[] = { 0x00000334, 0x00000335 };
-s32 D_8014F4FC[] = { 0x000002F1, 0x000002F2 };
-s32 D_8014F504[] = { 0x000000C1, 0x000000C2 };
-s32 D_8014F50C[] = { 0x000000C3, 0x000000C4 };
-s32 D_8014F514[] = { 0x000001CB, 0x000001CD };
-s32 D_8014F51C[] = { 0x000001CC, 0x000001CE };
-s32 D_8014F524[] = { 0x000002A6, 0x000002A7 };
-s32 D_8014F52C[] = { 0x0000020C, 0x0000020D, 0x0000020E };
-s32 D_8014F538[] = { 0x00000259, 0x0000025A };
-s32 D_8014F540[] = { 0x0000025C, 0x0000025D };
-s32 D_8014F548[] = { 0x00000331, 0x00000332, 0x00000333 };
-s32 D_8014F554[] = { 0x00002078, 0x00002079 };
-s32 D_8014F55C[] = { 0x00000179, 0x0000017A };
-s32 D_8014F564[] = { 0x000001FB, 0x000001FC };
-s32 D_8014F56C[] = { 0x0000203A, 0x0000203B };
-s32 D_8014F574[] = { 0x0000022E, 0x0000022F };
-s32 D_8014F57C[] = { 0x0000202A, 0x0000202B };
-s32 D_8014F584[] = { 0x00002041, 0x00002042 };
-s32 D_8014F58C[] = { 0x00002043, 0x00002044 };
-s32 D_8014F594[] = { 0x00002078, 0x00002079 };
-s32 D_8014F59C[] = { 0x000003B6, 0x000003B7 };
+s32 D_8014F48C[] = { SOUND_336, SOUND_316 };
+s32 D_8014F494[] = { SOUND_337, SOUND_317 };
+s32 D_8014F49C[] = { SOUND_338, SOUND_318 };
+s32 D_8014F4A4[] = { SOUND_339, SOUND_319 };
+s32 D_8014F4AC[] = { SOUND_33A, SOUND_31A };
+s32 D_8014F4B4[] = { SOUND_33B, SOUND_31B };
+s32 D_8014F4BC[] = { SOUND_33C, SOUND_31C };
+s32 D_8014F4C4[] = { SOUND_33D, SOUND_31D };
+s32 D_8014F4CC[] = { SOUND_33E, SOUND_31E };
+s32 D_8014F4D4[] = { SOUND_33F, SOUND_31F };
+s32 D_8014F4DC[] = { SOUND_340, SOUND_340 };
+s32 D_8014F4E4[] = { SOUND_2F4, SOUND_2F5 };
+s32 D_8014F4EC[] = { SOUND_32F, SOUND_330 };
+s32 D_8014F4F4[] = { SOUND_334, SOUND_335 };
+s32 D_8014F4FC[] = { SOUND_2F1, SOUND_2F2 };
+s32 D_8014F504[] = { SOUND_BOO_VANISH, SOUND_C2 };
+s32 D_8014F50C[] = { SOUND_BOO_APPEAR, SOUND_C4 };
+s32 D_8014F514[] = { SOUND_1CB, SOUND_1CD };
+s32 D_8014F51C[] = { SOUND_1CC, SOUND_1CE };
+s32 D_8014F524[] = { SOUND_2A6, SOUND_2A7 };
+s32 D_8014F52C[] = { SOUND_20C, SOUND_20D, SOUND_20E };
+s32 D_8014F538[] = { SOUND_259, SOUND_25A };
+s32 D_8014F540[] = { SOUND_25C, SOUND_25D };
+s32 D_8014F548[] = { SOUND_331, SOUND_332, SOUND_333 };
+s32 D_8014F554[] = { SOUND_2078, SOUND_2079 };
+s32 D_8014F55C[] = { SOUND_179, SOUND_17A };
+s32 D_8014F564[] = { SOUND_1FB, SOUND_1FC };
+s32 D_8014F56C[] = { SOUND_203A, SOUND_203B };
+s32 D_8014F574[] = { SOUND_22E, SOUND_22F };
+s32 D_8014F57C[] = { SOUND_202A, SOUND_202B };
+s32 D_8014F584[] = { SOUND_2041, SOUND_2042 };
+s32 D_8014F58C[] = { SOUND_2043, SOUND_2044 };
+s32 D_8014F594[] = { SOUND_2078, SOUND_2079 };
+s32 D_8014F59C[] = { SOUND_3B6, SOUND_3B7 };
 
 AlternatingSoundSet AlternatingSounds[] = {
     {
@@ -205,10 +205,10 @@ s32 OpenCloseSounds[][2] = {
     { SOUND_20A3, SOUND_20A4 },
 };
 
-extern SoundInstance D_801598A0[MAX_SOUND_INSTANCES];
-extern SoundInstance D_801599B8[MAX_SOUND_INSTANCES];
-extern SoundInstance* D_80159AD0;
-extern s32 D_80159AD4;
+extern SoundInstance wEnvSounds[MAX_SOUND_INSTANCES];
+extern SoundInstance bEnvSounds[MAX_SOUND_INSTANCES];
+extern SoundInstance* gCurrentEnvSounds;
+extern s32 SfxReverbMode;
 
 void sfx_compute_spatialized_sound_params_full(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags) {
     s32 screenX, screenY, screenZ;
@@ -294,13 +294,13 @@ void sfx_compute_spatialized_sound_params_full(f32 x, f32 y, f32 z, s16* volume,
 
 void sfx_reset_door_sounds(void) {
     gCurrentDoorSoundsSet = 0;
-    D_80151308 = 0;
+    gCurrentAdvancedDoorSoundsSet = 0;
 }
 
 void sfx_clear_sounds(void) {
-    bzero(&D_801598A0, sizeof(D_801598A0));
-    bzero(&D_801599B8, sizeof(D_801599B8));
-    D_80159AD0 = D_801598A0;
+    bzero(&wEnvSounds, sizeof(wEnvSounds));
+    bzero(&bEnvSounds, sizeof(bEnvSounds));
+    gCurrentEnvSounds = wEnvSounds;
     sfx_set_reverb_mode(0);
     sfx_reset_door_sounds();
 }
@@ -308,34 +308,34 @@ void sfx_clear_sounds(void) {
 // name might be incorrect?
 void sfx_clear_env_sounds(s16 playSounds) {
     if (!gGameStatusPtr->isBattle) {
-        D_80159AD0 = D_801598A0;
+        gCurrentEnvSounds = wEnvSounds;
     } else {
-        D_80159AD0 = D_801599B8;
+        gCurrentEnvSounds = bEnvSounds;
     }
 
     if (playSounds) {
-        SoundInstance* sound = D_80159AD0;
+        SoundInstance* sound = gCurrentEnvSounds;
         s32 i;
 
         for (i = 0; i < MAX_SOUND_INSTANCES; i++, sound++) {
-            if (sound->flags & 1) {
+            if (sound->flags & SOUND_INSTANCE_FLAG_ACTIVE) {
                 snd_start_sound_with_shift(sound->soundID, sound->volume, sound->pan, sound->pitchShift);
             }
         }
     } else {
-        bzero(D_80159AD0, MAX_SOUND_INSTANCES * sizeof(SoundInstance));
+        bzero(gCurrentEnvSounds, MAX_SOUND_INSTANCES * sizeof(SoundInstance));
     }
 }
 
-void sfx_update_looping_sound_params(void) {
-    SoundInstance* sound = D_80159AD0;
+void sfx_update_env_sound_params(void) {
+    SoundInstance* sound = gCurrentEnvSounds;
     u16 volume;
     u16 pan;
     s32 i;
 
-    for (i = 0; i < 10; i++, sound++) {
-        if (sound->flags & 1) {
-            if (sound->flags & 2) {
+    for (i = 0; i < MAX_SOUND_INSTANCES; i++, sound++) {
+        if (sound->flags & SOUND_INSTANCE_FLAG_ACTIVE) {
+            if (sound->flags & SOUND_INSTANCE_FLAG_POSITION_CHANGED) {
                 sfx_get_spatialized_sound_params(sound->position.x, sound->position.y, sound->position.z, &volume, &pan, sound->sourceFlags);
                 sound->volume = volume;
                 sound->pan = pan;
@@ -347,11 +347,11 @@ void sfx_update_looping_sound_params(void) {
 
 void sfx_set_reverb_mode(s32 mode) {
     func_800561E4(mode);
-    D_80159AD4 = mode;
+    SfxReverbMode = mode;
 }
 
 s32 sfx_get_reverb_mode(void) {
-    return D_80159AD4;
+    return SfxReverbMode;
 }
 
 void sfx_stop_env_sounds(void) {
@@ -359,25 +359,25 @@ void sfx_stop_env_sounds(void) {
     s32 i;
 
     if (!gGameStatusPtr->isBattle) {
-        D_80159AD0 = D_801598A0;
+        gCurrentEnvSounds = wEnvSounds;
     } else {
-        D_80159AD0 = D_801599B8;
+        gCurrentEnvSounds = bEnvSounds;
     }
 
-    sound = D_80159AD0;
+    sound = gCurrentEnvSounds;
     for (i = 0; i < MAX_SOUND_INSTANCES; i++, sound++) {
-        if (sound->flags & 1) {
+        if (sound->flags & SOUND_INSTANCE_FLAG_ACTIVE) {
             snd_stop_sound(sound->soundID);
         }
     }
 }
 
 SoundInstance* sfx_get_env_sound_instance(s32 soundID) {
-    SoundInstance* sound = D_80159AD0;
+    SoundInstance* sound = gCurrentEnvSounds;
     s32 i;
 
     for (i = 0; i < MAX_SOUND_INSTANCES; i++, sound++) {
-        if (sound->flags & 1 && sound->soundID == soundID) {
+        if (sound->flags & SOUND_INSTANCE_FLAG_ACTIVE && sound->soundID == soundID) {
             return sound;
         }
     }
@@ -386,11 +386,11 @@ SoundInstance* sfx_get_env_sound_instance(s32 soundID) {
 }
 
 void sfx_play_sound_looping(s32 soundId, u8 volume, u8 pan, s16 pitchShift) {
-    SoundInstance* sound = D_80159AD0;
+    SoundInstance* sound = gCurrentEnvSounds;
     s32 i;
 
     for (i = 0; i < MAX_SOUND_INSTANCES; i++, sound++) {
-        if (!(sound->flags & 1)) {
+        if (!(sound->flags & SOUND_INSTANCE_FLAG_ACTIVE)) {
             break;
         }
     }
@@ -399,17 +399,17 @@ void sfx_play_sound_looping(s32 soundId, u8 volume, u8 pan, s16 pitchShift) {
     sound->soundID = soundId;
     sound->volume = volume;
     sound->pitchShift = pitchShift;
-    sound->flags |= 1;
+    sound->flags |= SOUND_INSTANCE_FLAG_ACTIVE;
 
     snd_start_sound_with_shift(soundId, volume, pan, pitchShift);
 }
 
 void sfx_register_looping_sound_at_position(s32 soundID, s32 flags, f32 x, f32 y, f32 z) {
-    SoundInstance* sound = D_80159AD0;
+    SoundInstance* sound = gCurrentEnvSounds;
     s32 i;
 
     for (i = 0; i < MAX_SOUND_INSTANCES; i++, sound++) {
-        if (!(sound->flags & 1)) {
+        if (!(sound->flags & SOUND_INSTANCE_FLAG_ACTIVE)) {
             break;
         }
     }
@@ -419,7 +419,7 @@ void sfx_register_looping_sound_at_position(s32 soundID, s32 flags, f32 x, f32 y
     sound->position.y = y;
     sound->position.z = z;
     sound->soundID = soundID;
-    sound->flags |= 3;
+    sound->flags |= SOUND_INSTANCE_FLAG_ACTIVE | SOUND_INSTANCE_FLAG_POSITION_CHANGED;
 
     sfx_play_sound_at_position(soundID, flags, x, y, z);
 }
@@ -436,15 +436,15 @@ s32 sfx_adjust_env_sound_pos(s32 soundID, s32 sourceFlags, f32 x, f32 y, f32 z) 
     sound->position.y = y;
     sound->position.z = z;
     sound->soundID = soundID;
-    sound->flags |= 3;
+    sound->flags |= SOUND_INSTANCE_FLAG_ACTIVE | SOUND_INSTANCE_FLAG_POSITION_CHANGED;
     return TRUE;
 }
 
-void func_80149A6C(s32 soundID, s32 keepPlaying) {
+void snd_stop_tracking_env_sound_pos(s32 soundID, s32 keepPlaying) {
     SoundInstance* sound = sfx_get_env_sound_instance(soundID);
 
     if (sound != NULL) {
-        sound->flags &= -SOUND_INSTANCE_FLAG_4;
+        sound->flags &= ~(SOUND_INSTANCE_FLAG_ACTIVE | SOUND_INSTANCE_FLAG_POSITION_CHANGED);
         if (!keepPlaying) {
             snd_stop_sound(sound->soundID);
         }
@@ -463,15 +463,19 @@ void sfx_play_sound_with_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
         s32 soundType = ((u32)soundID >> 0x1C) & 7;
         switch (soundType) {
             case SOUND_TYPE_LOOPING:
+                // 0x8xxxxxxx
                 sfx_play_sound_looping(LoopingSounds[soundIndex], volume, pan, pitchShift);
                 return;
             case SOUND_TYPE_DOOR1:
+                // 0x9xxxxxxx
                 soundID = OpenCloseSounds[gCurrentDoorSoundsSet][soundIndex];
                 break;
             case SOUND_TYPE_DOOR2:
-                soundID = OpenCloseSounds[D_80151308][soundIndex];
+                // 0xAxxxxxxx
+                soundID = OpenCloseSounds[gCurrentAdvancedDoorSoundsSet][soundIndex];
                 break;
             case SOUND_TYPE_ALTERNATING:
+                // 0xBxxxxxxx
                 alternatingSet = &AlternatingSounds[soundIndex];
                 if (alternatingSet->currentIndex >= alternatingSet->soundCount) {
                     alternatingSet->currentIndex = 0;
@@ -502,7 +506,7 @@ void sfx_stop_sound(s32 soundID) {
     s32 sound = soundID;
 
     if (sound & SOUND_TYPE_SPECIAL) {
-        func_80149A6C(LoopingSounds[sound & 0xFFFF], 0);
+        snd_stop_tracking_env_sound_pos(LoopingSounds[sound & 0xFFFF], FALSE);
     } else {
         snd_stop_sound(sound);
     }
@@ -518,16 +522,16 @@ void sfx_play_sound_at_player(s32 soundID, s32 flags) {
     sfx_play_sound_at_position(soundID, flags, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
 }
 
-void sfx_play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID) {
+void sfx_play_sound_at_npc(s32 soundID, s32 flags, s32 npcID) {
     Npc* npc = get_npc_safe(npcID);
 
     if (npc != NULL) {
-        sfx_play_sound_at_position(soundID, arg1, npc->pos.x, npc->pos.y, npc->pos.z);
+        sfx_play_sound_at_position(soundID, flags, npc->pos.x, npc->pos.y, npc->pos.z);
     }
 }
 
 void sfx_play_sound_at_position(s32 soundID, s32 flags, f32 posX, f32 posY, f32 posZ) {
-    if ((soundID & 0xF0000000) == 0x80000000) {
+    if ((soundID & 0xF0000000) == SOUND_TYPE_SPECIAL) {
         s32 id = LoopingSounds[soundID & 0xFFFF];
 
         sfx_register_looping_sound_at_position(id, flags, posX, posY, posZ);
@@ -614,6 +618,7 @@ void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s1
     }
 
     if (!gGameStatusPtr->isBattle) {
+        // 25/75 at screen edge
         *pan = (screenX * 0.2f) + 32.0f;
     } else {
         f32 temp_f20 = ((screenX * 127.0) / SCREEN_WIDTH) - 64.0;

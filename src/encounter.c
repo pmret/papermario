@@ -756,7 +756,7 @@ void update_encounters_neutral(void) {
                         cond = TRUE;
                     }
                     if (cond) {
-                        sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, 0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+                        sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
                         currentEncounter->hitType = ENCOUNTER_TRIGGER_HAMMER;
                         currentEncounter->hitTier = gPlayerData.hammerLevel;
                         enemy->encountered = ENCOUNTER_TRIGGER_HAMMER;
@@ -842,7 +842,7 @@ void update_encounters_neutral(void) {
                                     currentEncounter->hitTier = 2;
                                     break;
                             }
-                            sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, 0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+                            sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
                             enemy->encountered = ENCOUNTER_STATE_NEUTRAL;
                             currentEncounter->currentEncounter = encounter;
                             currentEncounter->currentEnemy = enemy;
@@ -890,7 +890,7 @@ void update_encounters_neutral(void) {
                 cond = TRUE;
             }
             if ((playerStatus->animFlags & PA_FLAG_SPINNING) && !(enemy->flags & ENEMY_FLAG_20000000) && cond) {
-                sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, 0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+                sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
                 testX = playerStatus->position.x + ((npc->pos.x - playerStatus->position.x) * 0.5f);
                 testY = playerStatus->position.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->position.y + playerStatus->colliderHeight)) * 0.5f);
                 testZ = playerStatus->position.z + ((npc->pos.z - playerStatus->position.z) * 0.5f);
@@ -981,7 +981,7 @@ START_BATTLE:
             if (!is_ability_active(ABILITY_CHILL_OUT) && currentEncounter->firstStrikeType == FIRST_STRIKE_ENEMY) {
                 set_action_state(ACTION_STATE_ENEMY_FIRST_STRIKE);
                 npc = get_npc_unsafe(enemy->npcID);
-                sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, 0, npc->pos.x, npc->pos.y, npc->pos.z);
+                sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
             }
             currentEncounter->scriptedBattle = FALSE;
             gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
