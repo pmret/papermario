@@ -298,7 +298,7 @@ EvtScript N(EVS_NpcIdle_MiscFuzzy1) = {
     EVT_END
 };
 
-EvtScript N(D_8024AE9C_9E1EBC) = {
+EvtScript N(EVS_MiscFuzzyFlee) = {
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_THREAD
         EVT_CALL(MakeItemEntity, ITEM_COIN, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0)
@@ -336,7 +336,7 @@ EvtScript N(D_8024AE9C_9E1EBC) = {
 };
 
 EvtScript N(EVS_NpcHit_MiscFuzzy1) = {
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(D_8024AE9C_9E1EBC)))
+    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_MiscFuzzyFlee)))
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000, 1)
     EVT_RETURN
     EVT_END
@@ -376,7 +376,7 @@ EvtScript N(EVS_NpcIdle_MiscFuzzy2) = {
 };
 
 EvtScript N(EVS_NpcHit_MiscFuzzy2) = {
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(D_8024AE9C_9E1EBC)))
+    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_MiscFuzzyFlee)))
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000, 1)
     EVT_RETURN
     EVT_END
@@ -463,7 +463,7 @@ EvtScript N(EVS_BreakBlock_DropShell) = {
 #include "npcs_crisis.inc.c"
 #include "npcs_normal.inc.c"
 
-EvtScript N(D_8024E110_9E5130) = {
+EvtScript N(EVS_OpenDoor_KoloradoHouse) = {
     EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_BASIC_DOOR_OPEN, 0)
     EVT_CALL(MakeLerp, 0, 80, 15, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
@@ -489,18 +489,18 @@ EvtScript N(D_8024E110_9E5130) = {
     EVT_END
 };
 
-EvtScript N(D_8024E26C_9E528C) = {
+EvtScript N(EVS_KoloradoWife_FetchFromHouse) = {
     EVT_CALL(EnableModel, MODEL_g98, TRUE)
     EVT_CALL(EnableGroup, MODEL_g109, TRUE)
     EVT_CALL(EnableGroup, MODEL_g47, TRUE)
-    EVT_SET(LVarA, 60)
-    EVT_SET(LVar9, 39)
-    EVT_EXEC(N(D_8024E110_9E5130))
+    EVT_SET(LVarA, MODEL_g42)
+    EVT_SET(LVar9, COLLIDER_o310)
+    EVT_EXEC(N(EVS_OpenDoor_KoloradoHouse))
     EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -314, -94, 10)
     EVT_WAIT(10)
     EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -304, -161, 20)
     EVT_WAIT(100)
-    EVT_EXEC(N(D_8024E110_9E5130))
+    EVT_EXEC(N(EVS_OpenDoor_KoloradoHouse))
     EVT_WAIT(10)
     EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -308, -102, 20)
     EVT_WAIT(10)
@@ -515,15 +515,15 @@ EvtScript N(D_8024E26C_9E528C) = {
     EVT_END
 };
 
-EvtScript N(D_8024E400_9E5420) = {
-    EVT_SET(LVarA, 58)
-    EVT_SET(LVar9, 42)
+EvtScript N(EVS_KoloradoWife_FetchFromOffice) = {
+    EVT_SET(LVarA, MODEL_g41)
+    EVT_SET(LVar9, COLLIDER_o314)
     EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -277, -186, 20)
-    EVT_EXEC(N(D_8024E110_9E5130))
+    EVT_EXEC(N(EVS_OpenDoor_KoloradoHouse))
     EVT_WAIT(10)
     EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -265, -261, 20)
     EVT_WAIT(100)
-    EVT_EXEC(N(D_8024E110_9E5130))
+    EVT_EXEC(N(EVS_OpenDoor_KoloradoHouse))
     EVT_WAIT(10)
     EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -277, -186, 20)
     EVT_WAIT(10)
@@ -535,17 +535,17 @@ EvtScript N(D_8024E400_9E5420) = {
     EVT_END
 };
 
-EvtScript N(D_8024E51C_9E553C) = {
+EvtScript N(EVS_KoloradoWife_FetchKoopaLegends) = {
     EVT_CALL(SetNpcFlagBits, NPC_KoloradoWife, NPC_FLAG_100, TRUE)
     EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0090)
     EVT_CALL(SetNpcAnimation, NPC_KoloradoWife, ANIM_KoloradoWife_Walk)
     EVT_IF_GE(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        EVT_EXEC_WAIT(N(D_8024E26C_9E528C))
+        EVT_EXEC_WAIT(N(EVS_KoloradoWife_FetchFromHouse))
     EVT_ELSE
         EVT_IF_EQ(GF_NOK11_Defeated_KentC, TRUE)
-            EVT_EXEC_WAIT(N(D_8024E26C_9E528C))
+            EVT_EXEC_WAIT(N(EVS_KoloradoWife_FetchFromHouse))
         EVT_ELSE
-            EVT_EXEC_WAIT(N(D_8024E400_9E5420))
+            EVT_EXEC_WAIT(N(EVS_KoloradoWife_FetchFromOffice))
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0091)
@@ -586,7 +586,7 @@ EvtScript N(EVS_NpcInteract_KoloradoWife) = {
         EVT_IF_EQ(GF_NOK02_Gift_KoopaLegends, FALSE)
             EVT_SET(GF_NOK02_Gift_KoopaLegends, TRUE)
             EVT_EXEC_WAIT(N(EVS_MarioSalute))
-            EVT_EXEC_WAIT(N(D_8024E51C_9E553C))
+            EVT_EXEC_WAIT(N(EVS_KoloradoWife_FetchKoopaLegends))
         EVT_END_IF
     EVT_END_IF
     EVT_RETURN

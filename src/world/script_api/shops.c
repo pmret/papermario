@@ -8,10 +8,10 @@ extern u8 MessagePlural[];
 extern u8 MessageSingular[];
 extern HudScript* HES_Item_Coin;
 
-ApiStatus func_802803C8(Evt* script, s32 isInitialCall);
-ApiStatus func_80280410(Evt* script, s32 isInitialCall);
-ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall);
-ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802803C8);
+API_CALLABLE(func_80280410);
+API_CALLABLE(ShowShopPurchaseDialog);
+API_CALLABLE(ShowShopOwnerDialog);
 
 EvtScript ShopBeginSpeech = {
     EVT_CALL(SpeakToPlayer, LVar1, LVar2, LVar3, 0, LVar0)
@@ -40,13 +40,13 @@ EvtScript ShopEndSpeech = {
 
 EvtScript D_80283F58_7E4DD8 = {
     EVT_CALL(GetPartnerInUse, LVar1)
-    EVT_IF_EQ(LVar1, 0)
+    EVT_IF_EQ(LVar1, PARTNER_NONE)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_IF_EQ(LVar1, 2)
+    EVT_IF_EQ(LVar1, PARTNER_KOOPER)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_IF_EQ(LVar1, 3)
+    EVT_IF_EQ(LVar1, PARTNER_BOMBETTE)
         EVT_GOTO(10)
     EVT_END_IF
     EVT_RETURN
@@ -176,7 +176,7 @@ s32 shop_owner_end_speech(void) {
     return script->id;
 }
 
-ApiStatus func_802803C8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802803C8) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     script->varTable[2] = FALSE;
@@ -194,7 +194,7 @@ ApiStatus func_802803C8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80280410(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80280410) {
     static Evt* D_80286520;
     static s32 D_80286524;
 
@@ -244,7 +244,7 @@ enum PurchaseDialogState {
     PURCHASE_DIALOG_STATE_WAIT_FOR_SPEECH   = 100,
 };
 
-ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ShowShopPurchaseDialog) {
     PlayerData* playerData = &gPlayerData;
     s32 shopItemSlot = script->varTable[0];
     Shop* shop = gGameStatusPtr->mapShop;
@@ -427,7 +427,7 @@ void shop_open_item_select_popup(s32 mode) {
     open_status_menu_short();
 }
 #else
-INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_open_item_select_popup);
+INCLUDE_ASM(s32, "world/script_api/shops", shop_open_item_select_popup);
 #endif
 
 s32 shop_update_item_select_popup(s32* selectedIndex) {
@@ -477,7 +477,7 @@ s32 shop_get_sell_price(s32 itemID) {
     return gItemTable[itemID].sellValue;
 }
 
-ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ShowShopOwnerDialog) {
     GameStatus* gameStatus = gGameStatusPtr;
     PlayerData* playerData = &gPlayerData;
     Shop* shop = gameStatus->mapShop;
@@ -864,7 +864,7 @@ void draw_shop_items(void) {
 // This should be equivalent to the original code but there is some funny business with
 // the evt_get_variable's at the beginning that makes absolutely no sense.
 #ifdef NON_MATCHING
-ApiStatus MakeShop(Evt* script, s32 isInitialCall) {
+API_CALLABLE(MakeShop) {
     Bytecode* args = script->ptrReadPos;
     ShopItemLocation* itemDataPositions;
     ShopItemData* inventory;
@@ -950,10 +950,10 @@ ApiStatus MakeShop(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", MakeShop, Evt* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/script_api/shops", MakeShop, Evt* script, s32 isInitialCall);
 #endif
 
-ApiStatus MakeShopOwner(Evt* script, s32 isInitialCall) {
+API_CALLABLE(MakeShopOwner) {
     Shop* mapShop = gGameStatusPtr->mapShop;
 
     mapShop->owner = (ShopOwner*) evt_get_variable(script, *script->ptrReadPos);

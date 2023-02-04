@@ -74,7 +74,7 @@ EvtScript N(EVS_EnterMap) = {
                 EVT_CALL(DisablePlayerPhysics, TRUE)
                 EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
                 EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-                EVT_CALL(SetPlayerPos, LVar0, -1000, LVar2)
+                EVT_CALL(SetPlayerPos, LVar0, NPC_DISPOSE_POS_Y, LVar2)
                 EVT_WAIT(30)
                 EVT_CALL(PlaySound, SOUND_208E)
                 EVT_SET(GF_NOK02_WarpPipe, TRUE)

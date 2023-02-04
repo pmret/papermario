@@ -2,10 +2,12 @@
 #include "entity.h"
 
 extern PushBlockGrid* D_802DBC88[8];
-extern f32 D_80285640_7E64C0[13];
-extern EvtScript D_80285674_7E64F4;
 
-ApiStatus func_80282880(Evt* script, s32 isInitialCall) {
+f32 D_80285640_7E64C0[] = {
+    0.04, 0.04, 0.08, 0.16, 0.21, 0.4, 0.6, 0.72, 0.84, 0.92, 0.96, 0.96, 1.0,
+};
+
+API_CALLABLE(func_80282880) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->position.x += (script->varTable[0] - playerStatus->position.x) / 2;
@@ -14,7 +16,7 @@ ApiStatus func_80282880(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802828DC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802828DC) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Entity* entity = get_entity_by_index(script->varTable[11]);
     f32 temp_f4;
@@ -60,7 +62,7 @@ ApiStatus func_802828DC(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80282C40(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80282C40) {
     PushBlockGrid* grid = script->varTablePtr[10];
     Entity* block = get_entity_by_index(script->varTable[11]);
     f32 hitX, hitY, hitZ, hitDepth;
@@ -106,10 +108,10 @@ ApiStatus func_80282C40(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-ApiStatus func_80282E30(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_80282E30);
 // regalloc
 #ifdef NON_MATCHING
-ApiStatus func_80282E30(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80282E30) {
     PushBlockGrid* grid = (PushBlockGrid*) script->varTable[10];
     Entity* entity = get_entity_by_index(script->varTable[11]);
     s32 xThing, yThing, zThing;
@@ -199,10 +201,10 @@ ApiStatus func_80282E30(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(s32, "world/script_api/7E3700", func_80282E30);
+INCLUDE_ASM(s32, "world/script_api/push_blocks", func_80282E30);
 #endif
 
-ApiStatus func_80283080(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80283080) {
     PushBlockGrid* grid = script->varTablePtr[10];
     Entity* block = get_entity_by_index(script->varTable[11]);
     s32 ip, jp;
@@ -219,7 +221,7 @@ ApiStatus func_80283080(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80283174(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80283174) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 collider = script->varTable[11] + COLLISION_WITH_ENTITY_BIT;
 
@@ -242,7 +244,7 @@ ApiStatus func_80283174(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus CheckActionState(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CheckActionState) {
     Bytecode* args = script->ptrReadPos;
     Bytecode outVar = *args++;
     s32 checkState = evt_get_float_variable(script, *args++);
@@ -251,7 +253,7 @@ ApiStatus CheckActionState(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80283240(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80283240) {
     Bytecode* args = script->ptrReadPos;
     Bytecode outVar = *args++;
     Bytecode* sourceToFind = (Bytecode*)evt_get_variable(script, *args++);
@@ -273,7 +275,67 @@ ApiStatus func_80283240(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus CreatePushBlockGrid(Evt* script, s32 isInitialCall) {
+EvtScript D_80285674_7E64F4 = {
+	EVT_SET(LVarA, LVar0)
+	EVT_SET(LVarB, LVar1)
+	EVT_CALL(func_80282E30)
+	EVT_CALL(func_802D2884, LVar3, LVar5, 0)
+	EVT_IF_NE(LVar9, 2)
+		EVT_CALL(func_80282880)
+	EVT_END_IF
+	EVT_SET(LVarC, 0)
+	EVT_CALL(CheckActionState, LVarD, ACTION_STATE_RUN)
+	EVT_IF_EQ(LVarD, FALSE)
+		EVT_CALL(CheckActionState, LVarD, ACTION_STATE_PUSHING_BLOCK)
+		EVT_IF_EQ(LVarD, FALSE)
+			EVT_RETURN
+		EVT_END_IF
+	EVT_END_IF
+	EVT_IF_NE(LVar9, 0)
+		EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
+		EVT_RETURN
+	EVT_END_IF
+	EVT_SET(LVarC, 0)
+	EVT_LABEL(0)
+	EVT_ADD(LVarC, 1)
+	EVT_CALL(func_80283174)
+	EVT_IF_EQ(LVarD, TRUE)
+		EVT_GOTO(1)
+	EVT_END_IF
+	EVT_CALL(GetPlayerActionState, LVarD)
+	EVT_IF_EQ(LVarD, ACTION_STATE_JUMP)
+		EVT_RETURN
+	EVT_END_IF
+	EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
+	EVT_RETURN
+	EVT_LABEL(1)
+	EVT_CALL(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
+	EVT_CALL(func_80282880)
+	EVT_IF_LT(LVarC, 8)
+		EVT_WAIT(1)
+		EVT_GOTO(0)
+	EVT_END_IF
+	EVT_CALL(func_80283080)
+	EVT_CALL(PlaySound, SOUND_2088)
+	EVT_CALL(DisablePlayerPhysics, TRUE)
+	EVT_CALL(func_802828DC)
+	EVT_CALL(func_80282C40)
+	EVT_THREAD
+		EVT_WAIT(2)
+		EVT_CALL(CheckActionState, LVarD, ACTION_STATE_PUSHING_BLOCK)
+		EVT_IF_NE(LVarD, FALSE)
+			EVT_CALL(func_80283240, LVarD, EVT_PTR(D_80285674_7E64F4))
+			EVT_IF_EQ(LVarD, 0)
+				EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
+			EVT_END_IF
+		EVT_END_IF
+	EVT_END_THREAD
+	EVT_CALL(DisablePlayerPhysics, FALSE)
+	EVT_RETURN
+	EVT_END
+};
+
+API_CALLABLE(CreatePushBlockGrid) {
     Bytecode* arg = script->ptrReadPos;
     s32 blockSystemID = evt_get_variable(script, *arg++);
     s32 sizeNx = evt_get_variable(script, *arg++);
@@ -312,7 +374,7 @@ ApiStatus CreatePushBlockGrid(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPushBlock(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetPushBlock) {
     Bytecode* args = script->ptrReadPos;
     s32 blockSystemID = evt_get_variable(script, *args++);
     s32 gridX = evt_get_variable(script, *args++);
@@ -338,7 +400,7 @@ ApiStatus SetPushBlock(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetPushBlock(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetPushBlock) {
     Bytecode* args = script->ptrReadPos;
     s32 blockSystemID = evt_get_variable(script, *args++);
     s32 gridX = evt_get_variable(script, *args++);
@@ -358,7 +420,7 @@ ApiStatus GetPushBlock(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetGridIndexFromPos(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetGridIndexFromPos) {
     Bytecode* args = script->ptrReadPos;
     s32 blockSystemID = evt_get_variable(script, *args++);
     s32 posX = evt_get_variable(script, *args++);
@@ -382,7 +444,7 @@ ApiStatus GetGridIndexFromPos(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPushBlockFallEffect(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetPushBlockFallEffect) {
     Bytecode* args = script->ptrReadPos;
     s32 blockSystemID = evt_get_variable(script, *args++);
     PushBlockFallCallback fallCallback = (PushBlockFallCallback)evt_get_variable(script, *args++);

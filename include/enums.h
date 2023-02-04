@@ -1278,6 +1278,7 @@ enum SoundIDs {
     SOUND_2085                      = 0x00002085,
     SOUND_2086                      = 0x00002086,
     SOUND_2087                      = 0x00002087,
+    SOUND_2088                      = 0x00002088,
     SOUND_2089                      = 0x00002089,
     SOUND_208A                      = 0x0000208A,
     SOUND_208B                      = 0x0000208B,
@@ -1505,6 +1506,8 @@ enum SoundIDs {
     SOUND_8000006B                  = 0x8000006B,
     SOUND_8000006C                  = 0x8000006C,
 
+    SOUND_A0000000                  = 0xA0000000,
+    SOUND_A0000001                  = 0xA0000001,
     SOUND_FIRE_BAR_0                = 0xB0000000,
     SOUND_FIRE_BAR_1                = 0xB0000001,
     SOUND_FIRE_BAR_2                = 0xB0000002,
