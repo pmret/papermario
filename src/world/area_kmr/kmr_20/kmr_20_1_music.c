@@ -1,7 +1,7 @@
 #include "kmr_20.h"
 
 API_CALLABLE(N(FadeOutAmbientSounds)){
-    snd_ambient_slow_fade_out(0, 500);
+    au_ambient_stop_slow(0, 500);
     return ApiStatus_DONE2;
 }
 

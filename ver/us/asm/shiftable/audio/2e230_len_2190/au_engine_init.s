@@ -225,7 +225,7 @@ glabel au_engine_init
 /* 2E5B8 800531B8 24060001 */  addiu     $a2, $zero, 1
 /* 2E5BC 800531BC 3C04800A */  lui       $a0, %hi(gAuAmbienceManager)
 /* 2E5C0 800531C0 8C84A628 */  lw        $a0, %lo(gAuAmbienceManager)($a0)
-/* 2E5C4 800531C4 0C0142E4 */  jal       au_mseq_manager_init
+/* 2E5C4 800531C4 0C0142E4 */  jal       au_amb_manager_init
 /* 2E5C8 800531C8 0280382D */   daddu    $a3, $s4, $zero
 /* 2E5CC 800531CC 0C014985 */  jal       au_init_voices
 /* 2E5D0 800531D0 0280202D */   daddu    $a0, $s4, $zero

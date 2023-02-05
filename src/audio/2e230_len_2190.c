@@ -86,7 +86,7 @@ void au_engine_init(s32 outputRate) {
         voice->pitchRatio = 0;
         voice->p_volume = -1;
         voice->pan = 0xFF;
-        voice->fxmix = 0xFF;
+        voice->reverb = 0xFF;
         voice->busId = 0;
         voice->stopPending = FALSE;
         voice->syncFlags = 0;
@@ -115,7 +115,7 @@ void au_engine_init(s32 outputRate) {
     au_bgm_set_effect_indices(gBGMPlayerB, effects);
 
     au_sfx_init(gSoundManager, AU_PRIORITY_SFX_MANAGER, FX_BUS_SOUND, globals, 16);
-    au_mseq_manager_init(gAuAmbienceManager, AU_PRIORITY_MSEQ_MANAGER, FX_BUS_SOUND, globals);
+    au_amb_manager_init(gAuAmbienceManager, AU_PRIORITY_MSEQ_MANAGER, FX_BUS_SOUND, globals);
     au_init_voices(globals);
     au_load_BK_headers(globals, alHeap);
     if (au_fetch_SBN_file(globals->mseqFileList[0], AU_FMT_SEF, &fileEntry) == AU_RESULT_OK) {
@@ -195,7 +195,7 @@ static void au_reset_instrument_entry(BGMInstrumentInfo* arg0) {
 void au_update_clients_2(void) {
     AuGlobals* globals = gSoundGlobals;
     SoundManager* sfxManager = gSoundManager;
-    AuAmbienceManager* ambManager = gAuAmbienceManager;
+    AmbienceManager* ambManager = gAuAmbienceManager;
     BGMPlayer* bgmPlayer;
 
     au_syn_update(globals);
@@ -203,7 +203,7 @@ void au_update_clients_2(void) {
     ambManager->nextUpdateCounter -= ambManager->nextUpdateStep;
     if (ambManager->nextUpdateCounter <= 0) {
         ambManager->nextUpdateCounter += ambManager->nextUpdateInterval;
-        snd_ambient_manager_update(ambManager);
+        au_amb_manager_update(ambManager);
     }
 
     if (sfxManager->fadeInfo.fadeTime != 0) {
@@ -341,7 +341,7 @@ void au_syn_update(AuGlobals* globals) {
 
         if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_ALL) {
             au_voice_start(voice, &voice->envelope);
-            au_syn_start_voice_params(i, voice->busId, voice->instrument, voice->pitchRatio, voice->p_volume, voice->pan, voice->fxmix, voice->delta);
+            au_syn_start_voice_params(i, voice->busId, voice->instrument, voice->pitchRatio, voice->p_volume, voice->pan, voice->reverb, voice->delta);
             // priority may be AU_PRIORITY_FREE if this voice was stolen and reset
             voice->priority = voice->clientPriority;
         } else {
@@ -350,9 +350,9 @@ void au_syn_update(AuGlobals* globals) {
             }
 
             if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_PARAMS) {
-                au_syn_set_mixer_params(i, voice->p_volume, voice->delta, voice->pan, voice->fxmix);
+                au_syn_set_mixer_params(i, voice->p_volume, voice->delta, voice->pan, voice->reverb);
             } else if (voiceUpdateFlags & AU_VOICE_SYNC_FLAG_PAN_FXMIX) {
-                au_syn_set_pan_fxmix(i, voice->pan, voice->fxmix);
+                au_syn_set_pan_fxmix(i, voice->pan, voice->reverb);
             }
         }
         voice->syncFlags = 0;
@@ -644,8 +644,8 @@ BGMPlayer* func_80053F64(s32 arg0) {
 
 #define SBN_LOOKUP(i,fmt,e) (au_fetch_SBN_file(globals->mseqFileList[AmbientSoundIDtoMSEQFileIndex[i]], fmt, &e))
 
-AuResult func_80053F80(u32 ambSoundID) {
-    AuAmbienceManager* manager;
+AuResult au_load_ambient_sound(u32 ambSoundID) {
+    AmbienceManager* manager;
     SBNFileEntry fileEntry;
     AuGlobals* globals;
     MSEQHeader* mseqFile;
@@ -654,19 +654,19 @@ AuResult func_80053F80(u32 ambSoundID) {
     globals = gSoundGlobals;
     manager = gAuAmbienceManager;
     if (ambSoundID < 16) {
-        if (manager->mseqPlayers[0].mseqName == 0 && SBN_LOOKUP(ambSoundID, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
+        if (manager->players[0].mseqName == 0 && SBN_LOOKUP(ambSoundID, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
             au_read_rom(fileEntry.offset, globals->dataMSEQ[0], fileEntry.data & 0xFFFFFF);
             manager->mseqFiles[0] = globals->dataMSEQ[0];
             for (i = 1; i < ARRAY_COUNT(manager->mseqFiles); i++) {
                 manager->mseqFiles[i] = NULL;
             }
-            manager->unk_20 = 1;
+            manager->numActivePlayers = 1;
         }
     } else if (ambSoundID == AMBIENT_RADIO
-            && manager->mseqPlayers[0].mseqName == 0
-            && manager->mseqPlayers[1].mseqName == 0
-            && manager->mseqPlayers[2].mseqName == 0) {
-        manager->unk_20 = 0;
+            && manager->players[0].mseqName == 0
+            && manager->players[1].mseqName == 0
+            && manager->players[2].mseqName == 0) {
+        manager->numActivePlayers = 0;
         for (i = 0; i < ARRAY_COUNT(manager->mseqFiles); i++) {
             manager->mseqFiles[i] = NULL;
         }
@@ -691,7 +691,7 @@ AuResult func_80053F80(u32 ambSoundID) {
                         au_read_rom(fileEntry.offset, mseqFile, fileEntry.data & 0xFFFFFF);
                         manager->mseqFiles[3] = mseqFile;
 
-                        manager->unk_20 = 4;
+                        manager->numActivePlayers = 4;
                         if (SBN_LOOKUP(ambSoundID + 4, AU_FMT_BK, fileEntry) == AU_RESULT_OK) {
                             snd_load_BK(fileEntry.offset, 2);
                         }

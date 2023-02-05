@@ -57,7 +57,7 @@ API_CALLABLE(N(AdjustFog)) {
 }
 
 API_CALLABLE(N(func_80240A44_C6D364)) {
-    snd_ambient_80055618(0, 1);
+    au_ambient_mute(0, TRUE);
     return ApiStatus_DONE2;
 }
 

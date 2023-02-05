@@ -244,17 +244,15 @@ enum SoundInstanceFlags {
     SOUND_INSTANCE_FLAG_POSITION_CHANGED = 2,
 };
 
-typedef union Q32 {
-    u8 u8[4];
-    u16 u16[2];
-    s32 s32;
-} Q32;
-
-typedef union Vol32 {
-    s32 full;
-    s16 half;
-    s8 byte;
-} Vol32;
+typedef union AmbVoiceStateInfo {
+    struct {
+        u8 playerIndex;
+        u8 trackIndex;
+        u8 tune;
+        u8 released;
+    };
+    s32 all;
+} AmbVoiceStateInfo;
 
 struct BGMPlayer;
 struct AuGlobals;
@@ -290,7 +288,7 @@ typedef union SeqArgs {
     } MasterEffect;
     // command E7 unused
     struct { // cmd E8
-        u8 effectType;
+        u8 bank;
         u8 patch;
     } TrackOverridePatch;
     struct { // cmd E9
@@ -718,7 +716,7 @@ typedef struct AuVoice {
     /* 0x08 */ s32 delta;
     /* 0x0C */ s16 p_volume; // volume for pvoice
     /* 0x0E */ u8 pan;
-    /* 0x0F */ u8 fxmix;
+    /* 0x0F */ u8 reverb;
     /* 0x10 */ u8 busId;
     /* 0x11 */ char unk_11[0x3];
     /* 0x14 */ EnvelopeData envelope;
@@ -1090,101 +1088,93 @@ typedef struct BGMPlayer {
     /* 0x85C */ SeqNote notes[24];
 } BGMPlayer; // size = 0xA9C
 
-typedef struct AlUnkMSEQData {
-    /* 0x0 */ u8 unk_00;
-    /* 0x1 */ u8 unk_01;
-    /* 0x2 */ s16 unk_02;
-    /* 0x4 */ s16 unk_04;
-    /* 0x6 */ u16 unk_06;
-} AlUnkMSEQData; // size = 0x8
+typedef struct MSEQTrackData {
+    /* 0x0 */ u8 trackIndex;
+    /* 0x1 */ u8 type;
+    /* 0x2 */ s16 time;
+    /* 0x4 */ s16 delta;
+    /* 0x6 */ u16 goal;
+} MSEQTrackData; // size = 0x8
 
 typedef struct MSEQHeader {
     /* 0x00 */ s32 signature; // 'MSEQ '
     /* 0x04 */ s32 size; // including header
     /* 0x08 */ s32 name;
-    /* 0x0C */ u8 first_iota;
-    /* 0x0D */ u8 unkCount;
-    /* 0x0E */ u16 unkOffset;
+    /* 0x0C */ u8 firstVoiceIdx;
+    /* 0x0D */ u8 trackSettingsCount;
+    /* 0x0E */ u16 trackSettingsOffset;
     /* 0x10 */ u16 dataStart;
 } MSEQHeader; // size variable
 
-typedef struct AlUnkXi {
+typedef struct AmbienceTrack {
     /* 0x00 */ Instrument* instrument;
-    /* 0x04 */ EnvelopeData unk_04;
-    /* 0x0C */ s16 pitch;
-    /* 0x0E */ s16 unk_0E;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s16 unk_14;
-    /* 0x16 */ s16 unk_16;
-    /* 0x18 */ Vol32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s16 unk_20;
-    /* 0x22 */ s16 unk_22;
+    /* 0x04 */ EnvelopeData envelope;
+    /* 0x0C */ SoundLerp tuneLerp;
+    /* 0x18 */ SoundLerp volumeLerp;
     /* 0x24 */ s8 pan;
     /* 0x25 */ s8 reverb;
     /* 0x26 */ u8 flags;
-    /* 0x27 */ char unk_26[1];
-} AlUnkXi; // size = 0x28
+    /* 0x27 */ char unk_27[1];
+} AmbienceTrack; // size = 0x28
 
-typedef struct AlUnkOmega {
-    /* 0x0 */ u8 unk_00;
-    /* 0x1 */ u8 unk_01;
-    /* 0x2 */ s8 unk_02;
-    /* 0x4 */ s8 unk__03;
-} AlUnkOmega; // size = 0x4
+typedef struct AmbienceSavedVoice {
+    /* 0x0 */ u8 trackIndex;
+    /* 0x1 */ u8 tune;
+    /* 0x2 */ s8 volume;
+    /* 0x4 */ char unk_03[1];
+} AmbienceSavedVoice; // size = 0x4
 
-typedef struct AlUnkIota {
-    /* 0x00 */ Q32 unk_00;
+typedef struct AmbienceVoiceState {
+    /* 0x00 */ AmbVoiceStateInfo info;
     /* 0x04 */ s16 pitch;
     /* 0x06 */ s8 volume;
-    /* 0x07 */ u8 unk_07;
-} AlUnkIota; // size = 0x8
+    /* 0x07 */ u8 isResumable;
+} AmbienceVoiceState; // size = 0x8
 
-//TODO AuStreamPlayer?
-typedef struct AuAmbPlayer {
+typedef struct AmbiencePlayer {
     /* 0x000 */ MSEQHeader* mseqFile;
     /* 0x004 */ AuFilePos mseqReadStart;
     /* 0x008 */ AuFilePos mseqReadPos;
-    /* 0x00C */ AuFilePos unk_0C;
-    /* 0x010 */ AuFilePos unk_10;
-    /* 0x014 */ Q32 unk_14;
-    /* 0x018 */ s32 unk_18;
+    /* 0x00C */ AuFilePos loopStartPos[2];
+    /* 0x014 */ AmbVoiceStateInfo id;
+    /* 0x018 */ s32 delay;
     /* 0x01C */ s32 unk_1C;
     /* 0x020 */ s32 mseqName;
-    /* 0x024 */ u8 unk_24;
+    /* 0x024 */ u8 mode;
     /* 0x025 */ u8 playState;
-    /* 0x026 */ u8 unk_26;
-    /* 0x027 */ u8 unk_27;
-    /* 0x028 */ u16 time;
-    /* 0x02A */ u8 unk_2A;
-    /* 0x02B */ u8 volume;
-    /* 0x02C */ char unk_2C[4];
-    /* 0x030 */ s32 firstVoiceIdx;
+    /* 0x026 */ u8 fadeSettingsType;
+    /* 0x027 */ char unk_27[1];
+    /* 0x028 */ u16 fadeSettingsTime;
+    /* 0x02A */ u8 fadeSettingsInitial; // 255 means from current volume
+    /* 0x02B */ u8 fadeSettingsGoal;
+    /* 0x02C */ u8 loopCount[2];
+    /* 0x02E */ char unk_2E[2];
+    /* 0x030 */ u32 firstVoiceIdx;
     /* 0x034 */ u32 lastVoiceIdx;
-    /* 0x038 */ s32 unk_38;
-    /* 0x03C */ s32 volInterpStep;
-    /* 0x040 */ u16 volInterpTime;
-    /* 0x042 */ u8 unk_42;
-    /* 0x043 */ u8 unk_43;
-    /* 0x044 */ AlUnkXi unk_44[10];
-    /* 0x1D4 */ AlUnkOmega unk_1D4[4];
-} AuAmbPlayer; // size = 0x1E4
+    /* 0x038 */ s32 fadeVolume;
+    /* 0x03C */ s32 fadeStep;
+    /* 0x040 */ u16 fadeTime;
+    /* 0x042 */ u8 fadeGoal;
+    /* 0x043 */ u8 resetRequired;
+    /* 0x044 */ AmbienceTrack tracks[10];
+    /* 0x1D4 */ AmbienceSavedVoice savedVoices[4];
+} AmbiencePlayer; // size = 0x1E4
 
 //TODO AuStreamingManager ?
 // 801D57A0
-typedef struct AuAmbienceManager {
+typedef struct AmbienceManager {
     /* 0x000 */ AuGlobals* globals;
     /* 0x004 */ s32 nextUpdateStep;
     /* 0x008 */ s32 nextUpdateInterval;
     /* 0x00C */ s32 nextUpdateCounter;
     /* 0x010 */ MSEQHeader* mseqFiles[4];
-    /* 0x020 */ u8 unk_20;
-    /* 0x021 */ u8 unk_21;
+    /* 0x020 */ u8 numActivePlayers;
+    /* 0x021 */ u8 loadTracksFadeInfo;
     /* 0x022 */ u8 priority;
     /* 0x023 */ u8 busId;
-    /* 0x024 */ AuAmbPlayer mseqPlayers[4];
-    /* 0x7B4 */ AlUnkIota mseqVoiceStates[16];
-} AuAmbienceManager;
+    /* 0x024 */ AmbiencePlayer players[4];
+    /* 0x7B4 */ AmbienceVoiceState voiceStates[16];
+} AmbienceManager;
 
 typedef struct AlUnkGemini {
     /* 0x00 */ u16 sound1;
@@ -1213,7 +1203,7 @@ extern EnvelopePreset DummyInstrumentEnvelope;
 extern u8 AmbientSoundIDtoMSEQFileIndex[];
 extern s32 AuEnvelopeIntervals[];
 extern s32 PreventBGMPlayerUpdate;
-extern u16 D_80078DB6;
+extern u16 AuAmbiencePlayOnlyIndex;
 
 extern AuSynDriver* gActiveSynDriverPtr;
 extern AuSynDriver* gSynDriverPtr;
@@ -1225,7 +1215,7 @@ extern AuGlobals* gSoundGlobals;
 extern BGMPlayer* gBGMPlayerC;
 extern BGMPlayer* gBGMPlayerB;
 extern AuCallback BeginSoundUpdateCallback;
-extern AuAmbienceManager* gAuAmbienceManager;
+extern AmbienceManager* gAuAmbienceManager;
 extern SoundManager* gSoundManager;
 extern BGMPlayer* gBGMPlayerA;
 

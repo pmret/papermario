@@ -2513,7 +2513,7 @@ enum AmbientSounds {
     AMBIENT_RADIO              = 16, // radio songs for nok
     // the following 4 IDs are reserved for additional radio songs,
     // and no more are expected to follow after that
-    // see: func_80053F80
+    // see: au_load_ambient_sound
 };
 
 enum EncounterOutcomes {

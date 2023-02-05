@@ -4,13 +4,13 @@
 static void au_sfx_play_sound(SoundManager* manager, SoundPlayer* player, s8* readPos, SoundSFXEntry* sfxEntry, s32 arg4, s32 arg5);
 static void au_sfx_set_triggers(SoundManager* manager, u32 soundID);
 static void au_sfx_stop_by_id(SoundManager* manager, u32 soundID);
-static void au_sfx_stop_by_exlusiveID(SoundManager* manager, u32 soundID);
+static void au_sfx_stop_by_exlusive_id(SoundManager* manager, u32 soundID);
 static void au_sfx_set_modifiers(SoundManager* manager, SoundSFXEntry* sfxEntry);
 static void au_sfx_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxEntry);
 
-static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AuVoice* arg2, u8 arg3);
+static void au_sfx_update_basic(SoundManager* manager, SoundPlayer* player, AuVoice* arg2, u8 arg3);
 static s16 au_sfx_get_scaled_volume(SoundManager* manager, SoundPlayer* player);
-static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AuVoice* arg2, u8 arg3);
+static void au_sfx_update_sequence(SoundManager* manager, SoundPlayer* player, AuVoice* arg2, u8 arg3);
 static void snd_set_voice_volume(AuVoice* voice, SoundManager* manager, SoundPlayer* player);
 static u8 au_sfx_get_random_pan(s32 arg0, s32 arg1, s32 arg2);
 static void au_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player);
@@ -44,18 +44,18 @@ static void au_sfx_reset_players(SoundManager* manager);
 
 enum SoundEffectParamFlags {
     // 8 bytes: flags, instrument, volume, pan, reverb, pitch, randomPitch
-    SFX_PARAM_MODE_0                = 0x00000000,
+    SFX_PARAM_MODE_ADVANCED         = 0x00000000,
     // arbitrary sequence of commands
-    SFX_PARAM_MODE_1                = 0x00000001,
+    SFX_PARAM_MODE_SEQUENCE         = 0x00000001,
     // 4 bytes: flags, instrument, volume and randomPitch
-    SFX_PARAM_MODE_2                = 0x00000002,
+    SFX_PARAM_MODE_BASIC            = 0x00000002,
     SFX_PARAM_FLAG_MODE             = 0x00000003,
     // when flags below are set, these params can't be changed from api functions like sfx_play_sound_with_params
     SFX_PARAM_FLAG_VOLUME           = 0x00000004,
     SFX_PARAM_FLAG_PAN              = 0x00000008,
     SFX_PARAM_FLAG_PITCH            = 0x00000010,
     // prevents from changing reverb amount via SetReverb command
-    SFX_PARAM_FLAG_REVERB           = 0x00000020
+    SFX_PARAM_FLAG_FIXED_REVERB     = 0x00000020
 };
 
 u16 DummyInstrumentPredictor[32] = {
@@ -863,7 +863,7 @@ void au_sfx_load_sound(SoundManager* manager, SoundSFXEntry* entry, SoundManager
                     cmdList = AU_FILE_RELATIVE(manager->sefData, *cmdList);
                     exclusiveID = (soundInfo & 0x1800) >> 11; // bits 11, 12
                     if (exclusiveID != 0) {
-                        au_sfx_stop_by_exlusiveID(manager, exclusiveID);
+                        au_sfx_stop_by_exlusive_id(manager, exclusiveID);
                     } else {
                         au_sfx_stop_by_id(manager, entry->soundID);
                     }
@@ -977,14 +977,14 @@ static void au_sfx_play_sound(SoundManager* manager, SoundPlayer* player, s8* re
         player->triggers = 0;
         player->sfxParamsFlags = *player->sefDataReadPos++;
         switch (player->sfxParamsFlags & SFX_PARAM_FLAG_MODE) {
-            case SFX_PARAM_MODE_0:
+            case SFX_PARAM_MODE_ADVANCED:
                 player->state = SND_PLAYER_STATE_INIT;
                 break;
-            case SFX_PARAM_MODE_1:
+            case SFX_PARAM_MODE_SEQUENCE:
                 player->state = SND_PLAYER_STATE_INIT;
                 break;
-            case SFX_PARAM_MODE_2:
-                player->sfxParamsFlags = (player->sfxParamsFlags & ~SFX_PARAM_FLAG_MODE) | SFX_PARAM_MODE_0;
+            case SFX_PARAM_MODE_BASIC:
+                player->sfxParamsFlags = (player->sfxParamsFlags & ~SFX_PARAM_FLAG_MODE) | SFX_PARAM_MODE_ADVANCED;
                 player->state = SND_PLAYER_STATE_INIT;
                 player->cmdList_mode2[0] = player->sefDataReadPos[0]; // instrument bank
                 player->cmdList_mode2[1] = player->sefDataReadPos[1]; // instrument patch
@@ -1018,7 +1018,7 @@ static void au_sfx_stop_by_id(SoundManager* manager, u32 soundID) {
         if (player->currentSoundID == (soundID & SOUND_ID_LOWER)) {
             player->sefDataReadPos = BlankSEFData;
             player->alternativeDataPos = NULL;
-            player->sfxParamsFlags = SFX_PARAM_MODE_1;
+            player->sfxParamsFlags = SFX_PARAM_MODE_SEQUENCE;
             player->state = SND_PLAYER_STATE_CONTINUE;
             player->delay = 1;
             player->priority = 0;
@@ -1027,7 +1027,7 @@ static void au_sfx_stop_by_id(SoundManager* manager, u32 soundID) {
     }
 }
 
-static void au_sfx_stop_by_exlusiveID(SoundManager* manager, u32 exclusiveID) {
+static void au_sfx_stop_by_exlusive_id(SoundManager* manager, u32 exclusiveID) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(manager->players); i++) {
@@ -1035,7 +1035,7 @@ static void au_sfx_stop_by_exlusiveID(SoundManager* manager, u32 exclusiveID) {
         if (exclusiveID == player->exclusiveID) {
             player->sefDataReadPos = BlankSEFData;
             player->alternativeDataPos = NULL;
-            player->sfxParamsFlags = SFX_PARAM_MODE_1;
+            player->sfxParamsFlags = SFX_PARAM_MODE_SEQUENCE;
             player->state = SND_PLAYER_STATE_CONTINUE;
             player->delay = 1;
             player->priority = 0;
@@ -1096,13 +1096,13 @@ s16 au_sfx_manager_update(SoundManager* manager) {
             if (voice->priority <= manager->priority) {
                 manager->currentVoiceIndex = i;
                 switch (player->sfxParamsFlags & SFX_PARAM_FLAG_MODE) {
-                    case SFX_PARAM_MODE_0:
-                        au_sfx_update_mode_0(manager, player, voice, i);
+                    case SFX_PARAM_MODE_ADVANCED:
+                        au_sfx_update_basic(manager, player, voice, i);
                         break;
-                    case SFX_PARAM_MODE_1:
-                        au_sfx_update_mode_1(manager, player, voice, i);
+                    case SFX_PARAM_MODE_SEQUENCE:
+                        au_sfx_update_sequence(manager, player, voice, i);
                         break;
-                    case SFX_PARAM_MODE_2:
+                    case SFX_PARAM_MODE_BASIC:
                         break;
                 }
             } else {
@@ -1115,7 +1115,7 @@ s16 au_sfx_manager_update(SoundManager* manager) {
     return 0;
 }
 
-static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AuVoice* voice, u8 voiceIdx) {
+static void au_sfx_update_basic(SoundManager* manager, SoundPlayer* player, AuVoice* voice, u8 voiceIdx) {
     s16 volume;
     s32 tune;
     s32 pan;
@@ -1183,7 +1183,7 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AuV
                     voice->pan = player->sfxPan;
                 }
 
-                voice->fxmix = player->reverb;
+                voice->reverb = player->reverb;
                 voice->clientVolume = au_sfx_get_scaled_volume(manager, player);
                 voice->envelope.cmdListPress = player->envelope.cmdListPress;
                 voice->envelope.cmdListRelease = player->envelope.cmdListRelease;
@@ -1214,7 +1214,7 @@ static s16 au_sfx_get_scaled_volume(SoundManager* manager, SoundPlayer* player) 
     return outVolume;
 }
 
-static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AuVoice* voice, u8 voiceIdx) {
+static void au_sfx_update_sequence(SoundManager* manager, SoundPlayer* player, AuVoice* voice, u8 voiceIdx) {
     s32* var_v0_3;
     s32 pitchShift;
     s32 temp_a0;
@@ -1297,7 +1297,7 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AuV
                     voice->pan = player->masterPan;
                 }
 
-                voice->fxmix = player->reverb;
+                voice->reverb = player->reverb;
                 snd_set_voice_volume(voice, manager, player);
                 if (player->envelopCustomPressProfile == NULL) {
                     voice->envelope.cmdListPress = player->envelope.cmdListPress;
@@ -1356,7 +1356,7 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AuV
                 voice->pan = player->masterPan;
             }
             voice->syncFlags |= AU_VOICE_SYNC_FLAG_PAN_FXMIX;
-            voice->fxmix = player->reverb;
+            voice->reverb = player->reverb;
         }
     }
     if (player->changed.volume && voice->priority == manager->priority) {
@@ -1459,7 +1459,7 @@ static void au_SEFCmd_03_SetReverb(SoundManager* manager, SoundPlayer* player) {
     u8 reverb = buf[0];
     player->sefDataReadPos = &buf[1];
 
-    if (player->sfxParamsFlags & SFX_PARAM_FLAG_REVERB) {
+    if (player->sfxParamsFlags & SFX_PARAM_FLAG_FIXED_REVERB) {
         reverb = manager->defaultReverbAmt;
     }
     player->reverb = reverb;
@@ -1731,7 +1731,7 @@ static void au_sfx_reset_players(SoundManager* manager) {
         SoundPlayer* player = &manager->players[i];
         player->sefDataReadPos = BlankSEFData;
         player->alternativeDataPos = NULL;
-        player->sfxParamsFlags = SFX_PARAM_MODE_1;
+        player->sfxParamsFlags = SFX_PARAM_MODE_SEQUENCE;
         player->state = SND_PLAYER_STATE_CONTINUE;
         player->delay = 1;
         player->priority = 0;

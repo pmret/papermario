@@ -5,7 +5,7 @@ static u8* snd_song_get_track_volumes_set(MusicTrackVols arg0);
 
 s32 PreventBGMPlayerUpdate = FALSE;
 u16 D_80078DB4 = 0;
-u16 D_80078DB6 = 0;
+u16 AuAmbiencePlayOnlyIndex = 0;
 
 // lists of data:
 //  u8 trackIdx
@@ -269,136 +269,135 @@ void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan) {
     au_sfx_enqueue_event(soundManager, soundID, volume, pitchShift, pan);
 }
 
-AuResult snd_ambient_80055448(s32 ambSoundID) {
-    return func_80053F80(ambSoundID);
+AuResult au_ambient_load_sound(s32 ambSoundID) {
+    return au_load_ambient_sound(ambSoundID);
 }
 
-AuResult snd_ambient_80055464(s32 arg0, s32 arg1) {
-    AuResult status = func_80050C30(arg0);
+AuResult au_ambient_play(s32 index, s32 fadeInTime) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status != AU_RESULT_OK) {
         return status;
     }
-    return func_80050CA0(arg0, arg1);
+    return au_amb_start(index, fadeInTime);
 }
 
-AuResult snd_ambient_quick_fade_out(s32 arg0) {
-    AuResult status = func_80050C30(arg0);
+AuResult au_ambient_stop_quick(s32 index) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050EF0_fade_out_quick(arg0);
+        au_amb_stop_quick(index);
     }
 
     return status;
 }
 
-AuResult snd_ambient_slow_fade_out(s32 arg0, s32 arg1) {
-    AuResult status = func_80050C30(arg0);
+AuResult au_ambient_stop_slow(s32 index, s32 fadeOutTime) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050EF0_fade_out_slow(arg0, arg1);
+        au_amb_stop_slow(index, fadeOutTime);
     }
 
     return status;
 }
 
-// fade out sounds (kmr_00)
-AuResult snd_ambient_8005553C(s32 arg0, s32 arg1) {
-    AuResult status = func_80050C30(arg0);
+AuResult au_ambient_pause(s32 index, s32 fadeOutTime) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050EF0_fade_out_unk(arg0, arg1);
+        au_amb_pause(index, fadeOutTime);
     }
 
     return status;
 }
 
-// fade in sounds (kmr_00) -- restart?
-AuResult snd_ambient_80055590(s32 arg0, s32 arg1) {
-    AuResult status = func_80050C30(arg0);
+AuResult au_ambient_resume(s32 index, s32 fadeInTime) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050EF0_fade_in_unk(arg0, arg1);
+        au_amb_resume(index, fadeInTime);
     }
 
     return status;
 }
 
-AuResult snd_ambient_800555E4(s32 arg0) {
-    AuResult status = func_80050C30(arg0);
+AuResult au_ambient_is_stopped(s32 index) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status != AU_RESULT_OK) {
         return status;
     }
-    return func_80051050(arg0);
+    return au_amb_is_stopped(index);
 }
 
-//TODO au_ambience_disable? -- sets a flag which tells the manager to mute players
-AuResult snd_ambient_80055618(s32 index, s32 arg1) {
-    AuResult status = func_80050C30(index);
+// TODO perhaps inaccurate name
+AuResult au_ambient_mute(s32 index, s32 arg1) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050C54(index, arg1);
+        au_amb_load_tracks_fade(index, arg1);
     }
 
     return status;
 }
 
-AuResult au_ambience_set_volume(s32 index, s32 time, s32 volume) {
-    AuResult status = func_80050C30(index);
+AuResult au_ambient_set_volume(s32 index, s32 time, s32 volume) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        au_mseq_set_volume(index, time, volume);
+        au_amb_set_volume(index, time, volume);
     }
 
     return status;
 }
 
-AuResult au_ambience_disable(s32 index) {
-    AuResult status = func_80050C30(index);
+AuResult au_ambient_disable(s32 index) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        au_mseq_set_disabled(index, TRUE);
+        au_amb_set_disabled(index, TRUE);
     }
 
     return status;
 }
 
-AuResult au_ambience_enable(s32 index) {
-    AuResult status  = func_80050C30(index);
+AuResult au_ambient_enable(s32 index) {
+    AuResult status  = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        au_mseq_set_disabled(index, FALSE);
+        au_amb_set_disabled(index, FALSE);
     }
 
     return status;
 }
 
-void snd_ambient_80055760(s32 arg0) {
+
+void au_ambient_80055760(s32 index) {
     u32 i;
     s32 lim = 4;
 
-    D_80078DB6 = 0xFF;
+    AuAmbiencePlayOnlyIndex = 0xFF;
 
     for (i = 0; i < lim; i++) {
-        if (snd_ambient_80055464(i, 0) != AU_RESULT_OK) {
+        if (au_ambient_play(i, 0) != AU_RESULT_OK) {
             return;
         }
     }
 
-    snd_ambient_80055848(arg0);
+    au_ambient_play_only(index);
 }
 
-AuResult snd_ambient_800557CC(s32 arg0) {
+AuResult au_ambient_stop_all(s32 time) {
     AuResult status = AU_RESULT_OK;
     s32 lim = 4;
     u32 i;
 
     for (i = 0; i < lim; i++) {
-        if (i == D_80078DB6) {
-            status = snd_ambient_slow_fade_out(i, arg0);
+        if (i == AuAmbiencePlayOnlyIndex) {
+            status = au_ambient_stop_slow(i, time);
         } else {
-            status = snd_ambient_quick_fade_out(i);
+            status = au_ambient_stop_quick(i);
         }
         if (status != AU_RESULT_OK) {
             break;
@@ -407,19 +406,18 @@ AuResult snd_ambient_800557CC(s32 arg0) {
     return status;
 }
 
-// play only
-AuResult snd_ambient_80055848(s32 index) {
+AuResult au_ambient_play_only(s32 index) {
     AuResult status = AU_RESULT_OK;
     s32 lim = 4;
 
-    if (index != D_80078DB6) {
+    if (index != AuAmbiencePlayOnlyIndex) {
         u32 i;
 
         for (i = 0; i < lim; i++) {
             if (i == index) {
-                status = au_ambience_enable(index);
+                status = au_ambient_enable(i);
             } else {
-                status = au_ambience_disable(i); // mute
+                status = au_ambient_disable(i);
             }
 
             if (status != AU_RESULT_OK) {
@@ -428,7 +426,7 @@ AuResult snd_ambient_80055848(s32 index) {
         }
 
         if (status == AU_RESULT_OK) {
-            D_80078DB6 = index;
+            AuAmbiencePlayOnlyIndex = index;
         }
     }
 

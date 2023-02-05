@@ -1264,9 +1264,9 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                         voice->pan = drumInfo->pan;
                                     }
                                     if (drumInfo->randReverb != 0) {
-                                        voice->fxmix = au_bgm_get_random_reverb(player->randomValue1, drumInfo->reverb, drumInfo->randReverb);
+                                        voice->reverb = au_bgm_get_random_reverb(player->randomValue1, drumInfo->reverb, drumInfo->randReverb);
                                     } else {
-                                        voice->fxmix = drumInfo->reverb;
+                                        voice->reverb = drumInfo->reverb;
                                     }
                                 } else {
                                     note->volume = ((
@@ -1291,7 +1291,7 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                     } else {
                                         voice->pan = track->subTrackPan;
                                     }
-                                    voice->fxmix = track->subTrackReverb;
+                                    voice->reverb = track->subTrackReverb;
 
                                     if (track->unk_4C != 0) {
                                         voice->envelope.cmdListPress = (u8*) player->unk_174[track->unk_4C - 1]; //TODO ???
@@ -1418,10 +1418,10 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                     voice->clientVolume = note->volume;
                                     voice->envelopeFlags |= AU_VOICE_ENV_FLAG_VOL_CHANGED;
                                     voice->pan = track->subTrackPan;
-                                    voice->fxmix = track->subTrackReverb;
+                                    voice->reverb = track->subTrackReverb;
                                 } else if (track->changed.pan || track->changed.reverb) {
                                     voice->pan = track->subTrackPan;
-                                    voice->fxmix = track->subTrackReverb;
+                                    voice->reverb = track->subTrackReverb;
                                     voice->syncFlags |= AU_VOICE_SYNC_FLAG_PAN_FXMIX;
                                 }
                             }
@@ -1537,7 +1537,7 @@ void au_BGMCmd_E5_MasterVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
 
 void au_BGMCmd_E8_TrackOverridePatch(BGMPlayer* player, BGMPlayerTrack* track) {
     track->patch = player->seqCmdArgs.TrackOverridePatch.patch;
-    track->instrument = au_get_instrument(player->globals, player->seqCmdArgs.TrackOverridePatch.effectType, track->patch, &track->envelope);
+    track->instrument = au_get_instrument(player->globals, player->seqCmdArgs.TrackOverridePatch.bank, track->patch, &track->envelope);
 }
 
 void au_BGMCmd_E9_SubTrackVolume(BGMPlayer* arg0, BGMPlayerTrack* track) {
