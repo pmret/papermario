@@ -66,7 +66,7 @@ EvtScript N(EVS_NpcAI_BoxedShyGuy) = {
                 EVT_WAIT(25)
                 EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
                 EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
                 EVT_CALL(SetSelfVar, 0, 0)
                 EVT_CALL(DisablePlayerInput, FALSE)
         EVT_END_SWITCH

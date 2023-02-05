@@ -446,7 +446,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             }
             npc->collisionChannel = COLLISION_CHANNEL_10000;
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
-            npc->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_40);
+            npc->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_WORLD_COLLISION);
             disable_npc_shadow(npc);
             func_8003D624(npc, 4, 2, 0, 0, 0, 0);
             npc->currentAnim = ANIM_WorldSushie_Ride;
@@ -642,7 +642,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             if (collider >= 0) {
                 playerStatus->flags &= ~PS_FLAG_MOVEMENT_LOCKED;
                 suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
-                npc->flags |= NPC_FLAG_40;
+                npc->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
                 dist = dist2D(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z) +
                             (playerStatus->colliderDiameter * 0.5f);
                 npc->jumpVelocity = 8.0f;
@@ -668,7 +668,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                 bss_802BFEEC = 0;
                 npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
                 npc->flags |= NPC_FLAG_GRAVITY;
-                npc->flags &= ~NPC_FLAG_40;
+                npc->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
                 partnerActionStatus->actingPartner = 0;
@@ -746,7 +746,7 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
             SushieTweesterPhysicsPtr->angularVelocity = 6.0f;
             SushieTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             SushieTweesterPhysicsPtr->countdown = 120;
-            sushie->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            sushie->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_ENABLE_HIT_SCRIPT;
             sushie->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(SushieTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);

@@ -114,7 +114,7 @@ ApiStatus KooperUpdate(Evt* script, s32 isInitialCall) {
             KooperTweesterPhysicsPtr->angularVelocity = 6.0f;
             KooperTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             KooperTweesterPhysicsPtr->countdown = 120;
-            kooper->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            kooper->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_ENABLE_HIT_SCRIPT;
             kooper->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(KooperTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -231,7 +231,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                             D_802BEB40_31CB60 = 0;
                             D_802BEC6C = 0;
                             kooper->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING | NPC_FLAG_ENABLE_HIT_SCRIPT);
-                            kooper->flags |= (NPC_FLAG_100 | NPC_FLAG_40);
+                            kooper->flags |= (NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION);
                             partnerActionStatus->actingPartner = PARTNER_KOOPER;
                             partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_1;
                             D_802BEC58 = func_800EF4E0();
@@ -573,7 +573,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 
             D_802BEB40_31CB60 = 0;
             kooper->flags |= NPC_FLAG_100;
-            kooper->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_40);
+            kooper->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_IGNORE_WORLD_COLLISION);
             partnerActionStatus->actingPartner = PARTNER_NONE;
             partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
             kooper->jumpVelocity = 0.0f;
@@ -698,7 +698,7 @@ void world_kooper_pre_battle(Npc* kooper) {
 
         kooper->jumpVelocity = 0.0f;
         kooper->flags &= ~NPC_FLAG_JUMPING;
-        kooper->flags &= ~NPC_FLAG_40;
+        kooper->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
 
         sfx_stop_sound(SOUND_284);
         set_action_state(0);

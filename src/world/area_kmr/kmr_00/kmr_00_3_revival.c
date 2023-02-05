@@ -526,7 +526,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_CALL(N(func_80240000_8ABF90), 255, 255, 255, 0, 0, 0, 50)
     EVT_CALL(SetNpcSpeed, NPC_Goombaria, EVT_FLOAT(3.0))
     EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_100 | NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_Goombaria, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_Goombaria, ANIM_Goombaria_Walk)
     EVT_CALL(SetNpcPos, NPC_Goombaria, 300, 0, 0)

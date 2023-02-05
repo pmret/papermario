@@ -3088,6 +3088,12 @@ enum EntityCollisionFlags {
     ENTITY_COLLISION_PLAYER_LAST_FLOOR                      = 0x00000100
 };
 
+enum EntityHideMode {
+    ENTITY_HIDE_MODE_0      =   0,
+    ENTITY_HIDE_MODE_1      =   1,
+    ENTITY_HIDE_MODE_2      =   2,
+};
+
 typedef enum PushGridOccupant {
     PUSH_GRID_EMPTY         = 0,
     PUSH_GRID_BLOCK         = 1,
@@ -3354,7 +3360,7 @@ enum NpcFlags {
     NPC_FLAG_ENABLE_HIT_SCRIPT       = 0x00000008,
     NPC_FLAG_HAS_SHADOW              = 0x00000010, ///< Set by default and by enable_npc_shadow
     NPC_FLAG_NO_AI                   = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
-    NPC_FLAG_40                      = 0x00000040,
+    NPC_FLAG_IGNORE_WORLD_COLLISION                      = 0x00000040,
     NPC_FLAG_UPSIDE_DOWN             = 0x00000080, ///< Render NPCs upside-down
     NPC_FLAG_100                     = 0x00000100, // TODO
     NPC_FLAG_GRAVITY                 = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_JUMPING is set.
@@ -3378,7 +3384,7 @@ enum NpcFlags {
     ///  - Perform only one lateral collision test during motion
     ///  - Allow falling below Y=-2000 (by default, NPC_FLAG_JUMPING is set when an NPC falls out-of-bounds)
     NPC_FLAG_PARTICLE                = 0x04000000,
-    NPC_FLAG_8000000                 = 0x08000000,
+    NPC_FLAG_WORLD_COLLISION_DIRTY                 = 0x08000000,
     NPC_FLAG_10000000                = 0x10000000,
     NPC_FLAG_20000000                = 0x20000000,
     NPC_FLAG_NO_ANIMS_LOADED         = 0x40000000, ///< Npc has no animations loaded
@@ -4888,11 +4894,28 @@ enum MapRoomFlags {
 };
 
 enum MapRoomNotifications {
+    // dispatched to listener script during interactions with the room door
     ROOM_UPDATE_ENTER_BEGIN     = 0,
     ROOM_UPDATE_ENTER_DONE      = 1,
     ROOM_UPDATE_EXIT_BEGIN      = 2,
-    ROOM_UPDATE_EXIT_END        = 3,
+    ROOM_UPDATE_EXIT_END        = 3, 
+    // when handling ROOM_UPDATE_ENTER_BEGIN, listener may return this to cancel the door opening. useful for locked doors.   
     ROOM_UPDATE_REQUEST_CANCEL  = -1,
+    // anim move door updates
+    ROOM_MOVE_DOOR_ENTER_OPEN   = 0,
+    ROOM_MOVE_DOOR_ENTER_CLOSE  = 1,
+    ROOM_MOVE_DOOR_EXIT_OPEN    = 2,
+    ROOM_MOVE_DOOR_EXIT_CLOSE   = 3,
+    // anim move walls update
+    ROOM_MOVE_WALL_OPEN         = 0,
+    ROOM_MOVE_WALL_1            = 1, // unused
+    ROOM_MOVE_WALL_2            = 2, // unused
+    ROOM_MOVE_WALL_CLOSE        = 3,
+    // anim drop droor updates
+    ROOM_DROP_DOOR_ENTER        = 0,
+    ROOM_DROP_DOOR_1            = 1, // unused
+    ROOM_DROP_DOOR_2            = 2, // unused
+    ROOM_DROP_DOOR_EXIT         = 3,
 };
 
 enum EnemyFlags {

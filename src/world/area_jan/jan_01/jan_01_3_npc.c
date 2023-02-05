@@ -18,7 +18,7 @@ EvtScript N(EVS_PlayerWatchKolorado) = {
 
 EvtScript N(EVS_Kolorado_RunToVillage) = {
     EVT_EXEC_GET_TID(N(EVS_PlayerWatchKolorado), LVar9)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40 | NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Run)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.5))
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -237,7 +237,7 @@ EvtScript N(EVS_NpcDefeat_Fuzzy_01) = {
                 EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
                 EVT_CALL(N(SetCamera0Flag1000))
                 EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-                EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_40 | NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
                 EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Run)
                 EVT_CALL(SetNpcSpeed, NPC_Kolorado, EVT_FLOAT(3.0))
                 EVT_IF_LT(LVar2, -45)

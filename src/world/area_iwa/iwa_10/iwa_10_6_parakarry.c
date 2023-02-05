@@ -34,7 +34,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_END_THREAD
     EVT_WAIT(20)
     EVT_CALL(SetNpcPos, NPC_Parakarry, -400, 215, -510)
-    EVT_CALL(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_40, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_THREAD
         EVT_CALL(SetNpcRotation, NPC_Parakarry, 0, 0, 15)
         EVT_CALL(InterpNpcYaw, NPC_Parakarry, 270, 0)

@@ -49,7 +49,7 @@ EvtScript N(EVS_NpcIdle_KoopaBros) = {
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Anim03)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.5))
     EVT_CALL(NpcMoveTo, NPC_SELF, -556, 180, 0)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))

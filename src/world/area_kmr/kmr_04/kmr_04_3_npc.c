@@ -9,7 +9,7 @@ NpcSettings N(NpcSettings_JrTroopa) = {
 
 EvtScript N(EVS_NpcAuxAI_Goompa) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
@@ -74,7 +74,7 @@ EvtScript N(EVS_NpcAI_Goompa) = {
                 EVT_CALL(DisablePlayerInput, TRUE)
                 EVT_CALL(N(CheckPartnerFlags1000))
                 EVT_CALL(DisablePartnerAI, 0)
-                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
                 EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Walk)
                 EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(3.0))
                 EVT_CALL(NpcMoveTo, NPC_PARTNER, 420, 6, 0)

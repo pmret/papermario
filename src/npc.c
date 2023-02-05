@@ -284,11 +284,11 @@ void npc_do_world_collision(Npc* npc) {
     f32 temp_y;
     f32 temp_z;
 
-    if (npc->flags & NPC_FLAG_40) {
-        npc->flags |= NPC_FLAG_8000000;
+    if (npc->flags & NPC_FLAG_IGNORE_WORLD_COLLISION) {
+        npc->flags |= NPC_FLAG_WORLD_COLLISION_DIRTY;
     } else if ((npc->pos.x != npc->colliderPos.x) || (npc->pos.y != npc->colliderPos.y)
-               || (npc->pos.z != npc->colliderPos.z) || npc->flags & NPC_FLAG_8000000) {
-        npc->flags &= ~NPC_FLAG_8000000;
+               || (npc->pos.z != npc->colliderPos.z) || npc->flags & NPC_FLAG_WORLD_COLLISION_DIRTY) {
+        npc->flags &= ~NPC_FLAG_WORLD_COLLISION_DIRTY;
         temp_f0 = clamp_angle(npc->yaw);
         temp_x = npc->pos.x;
         temp_y = npc->pos.y;

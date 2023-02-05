@@ -1,10 +1,10 @@
 #include "common.h"
 #include "model.h"
 
-void set_current_item_entity_render_group(s32);
-s32 get_current_item_entity_render_group(void);
 void func_800EF414(s32, s32);
 void get_flat_collider_normal(s32, f32*, f32*, f32*);
+s32 get_current_item_entity_render_group(void);
+void set_current_item_entity_render_group(s32);
 
 extern EvtScript EVS_EnterRoomDoor;
 extern EvtScript EVS_ExitRoomDoor;
@@ -15,26 +15,25 @@ typedef enum RoomState {
     ROOM_STATE_EXITING          = 2,
 } RoomState;
 
-enum {
-    ROOM_MOVE_DOOR_ENTER_OPEN	= 0,
-    ROOM_MOVE_DOOR_ENTER_CLOSE	= 1,
-    ROOM_MOVE_DOOR_EXIT_OPEN	= 2,
-    ROOM_MOVE_DOOR_EXIT_CLOSE	= 3,
-};
-
-enum {
-    ROOM_MOVE_WALL_OPEN         = 0,
-    ROOM_MOVE_WALL_1            = 1,
-    ROOM_MOVE_WALL_2            = 2,
-    ROOM_MOVE_WALL_CLOSE        = 3,
-};
-
-enum {
-    ROOM_DROP_DOOR_0            = 0,
-    ROOM_DROP_DOOR_1            = 1,
-    ROOM_DROP_DOOR_2            = 2,
-    ROOM_DROP_DOOR_3            = 3,
-};
+typedef struct MapRoom {
+    /* 0x00 */ RoomState state;
+    /* 0x04 */ s32 flags;
+    /* 0x08 */ s16 newItemVisGroup;
+    /* 0x0A */ s16 prevItemVisGroup;
+    /* 0x0C */ VecXZf posEnterA;
+    /* 0x14 */ VecXZf posEnterB;
+    /* 0x1C */ VecXZf posExitA;
+    /* 0x24 */ VecXZf posExitB;
+    /* 0x2C */ EvtScript* overrideOpenDoor;
+    /* 0x2C */ EvtScript* overrideMoveWall;
+    /* 0x2C */ EvtScript* overrideDropDoor;
+    /* 0x2C */ EvtScript* stateListenerScript;
+    /* 0x3C */ s32 modelID;
+    /* 0x40 */ s32 bgColor[3];
+    /* 0x4C */ s32 scriptIDs[4];
+    /* 0x5C */ s32* npcList;
+    /* 0x60 */ s32 colliderID;
+} MapRoom; // size = 0x64
 
 // data fetched with GetDoorData is stored in these local vars
 enum {
@@ -50,7 +49,7 @@ enum {
     ROOM_DATA_EVT_OPEN_DOOR     = LVarB,
     ROOM_DATA_EVT_MOVE_WALL     = LVarC,
     ROOM_DATA_EVT_DROP_DOOR     = LVarD,
-    ROOM_DATA_EVT_TOGGLE_VIS    = LVarE,
+    ROOM_DATA_EVT_LISTENER      = LVarE,
     ROOM_DATA_MODEL_ID          = LVarF,
 };
 
@@ -61,25 +60,10 @@ enum {
     ROOM_SCRIPT_IDX_3       = 3,
 };
 
-typedef struct MapRoom {
-    /* 0x00 */ RoomState state;
-    /* 0x04 */ s32 flags;
-    /* 0x08 */ s16 newItemVisGroup;
-    /* 0x0A */ s16 prevItemVisGroup;
-    /* 0x0C */ VecXZf posEnterA;
-    /* 0x14 */ VecXZf posEnterB;
-    /* 0x1C */ VecXZf posExitA;
-    /* 0x24 */ VecXZf posExitB;
-    /* 0x2C */ EvtScript* overrideOpenDoor;
-    /* 0x2C */ EvtScript* overrideMoveWall;
-    /* 0x2C */ EvtScript* overrideDropDoor;
-    /* 0x2C */ EvtScript* toggleVisScript;
-    /* 0x3C */ s32 modelID;
-    /* 0x40 */ s32 bgColor[3];
-    /* 0x4C */ s32 scriptIDs[4];
-    /* 0x5C */ s32* npcList;
-    /* 0x60 */ s32 colliderID;
-} MapRoom; // size = 0x64
+enum {
+    ROOM_VISIBILITY_SHOW        = 0,
+    ROOM_VISIBILITY_HIDE        = 3,
+};
 
 API_CALLABLE(MovePartnerThroughDoor) {
     Bytecode* args = script->ptrReadPos;
@@ -102,7 +86,7 @@ API_CALLABLE(ResetPartnerMovement) {
     EvtScript* openDoor
     EvtScript* moveWalls
     EvtScript* dropDoor
-    EvtScript* toggleVis
+    EvtScript* stateListener
     s32 doorInColliderID
     s32 doorOutColliderID
     s32 interiorModelGroup
@@ -114,7 +98,7 @@ API_CALLABLE(CreateMapRoom) {
     EvtScript* openDoorScript;
     EvtScript* moveWallsScript;
     EvtScript* dropDoorScript;
-    EvtScript* toggleVisScript;
+    EvtScript* stateListenerScript;
     s32 colliderID;
     s32 triggerColliderID;
     s32 roomFlags;
@@ -130,7 +114,7 @@ API_CALLABLE(CreateMapRoom) {
     openDoorScript  = (EvtScript*) evt_get_variable(script, *args++);
     moveWallsScript = (EvtScript*) evt_get_variable(script, *args++);
     dropDoorScript  = (EvtScript*) evt_get_variable(script, *args++);
-    toggleVisScript = (EvtScript*) evt_get_variable(script, *args++);
+    stateListenerScript = (EvtScript*) evt_get_variable(script, *args++);
     room->colliderID = colliderID = evt_get_variable(script, *args++);
     triggerColliderID = evt_get_variable(script, *args++);
     room->modelID = evt_get_variable(script, *args++);
@@ -195,7 +179,7 @@ API_CALLABLE(CreateMapRoom) {
     room->overrideOpenDoor = openDoorScript;
     room->overrideMoveWall = moveWallsScript;
     room->overrideDropDoor = dropDoorScript;
-    room->toggleVisScript = toggleVisScript;
+    room->stateListenerScript = stateListenerScript;
 
     room->posExitA.x = room->posEnterB.x;
     room->posExitA.z = room->posEnterB.z;
@@ -272,7 +256,7 @@ API_CALLABLE(RoomVisibilityToggleImpl) {
     s32 alpha, r, g, b;
 
     if (isInitialCall) {
-        if (script->varTable[0] == 0) {
+        if (script->varTable[0] == ROOM_VISIBILITY_SHOW) {
             func_8011B950(script->varTable[15], -1, FOG_MODE_1, 1);
         }
         script->functionTemp[1] = 0;
@@ -281,7 +265,7 @@ API_CALLABLE(RoomVisibilityToggleImpl) {
     if (script->functionTemp[1] > 255) {
         script->functionTemp[1] = 255;
     }
-    if (script->varTable[0] == 0) {
+    if (script->varTable[0] == ROOM_VISIBILITY_SHOW) {
         alpha = script->functionTemp[1];
     } else {
         alpha = 255 - script->functionTemp[1];
@@ -295,7 +279,7 @@ API_CALLABLE(RoomVisibilityToggleImpl) {
     gCameras[CAM_DEFAULT].bgColor[2] = b;
 
     if (script->functionTemp[1] >= 255) {
-        if (script->varTable[0] == 3) {
+        if (script->varTable[0] == ROOM_VISIBILITY_HIDE) {
             // ROOM_DATA_MODEL_ID
             func_8011B950(script->varTable[15], -1, FOG_MODE_0, 1);
         }
@@ -323,17 +307,17 @@ API_CALLABLE(SetRoomCamMoveSpeed) {
 }
 
 API_CALLABLE(SetEntityHideMode1) {
-    gEntityHideMode = 1;
+    gEntityHideMode = ENTITY_HIDE_MODE_1;
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(SetEntityHideMode2) {
-    gEntityHideMode = 2;
+    gEntityHideMode = ENTITY_HIDE_MODE_2;
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(SetEntityHideMode0) {
-    gEntityHideMode = 0;
+    gEntityHideMode = ENTITY_HIDE_MODE_0;
     return ApiStatus_DONE2;
 }
 
@@ -424,7 +408,7 @@ API_CALLABLE(GetDoorData) {
     script->varTablePtr[11] = door->overrideOpenDoor;
     script->varTablePtr[12] = door->overrideMoveWall;
     script->varTablePtr[13] = door->overrideDropDoor;
-    script->varTablePtr[14] = door->toggleVisScript;
+    script->varTablePtr[14] = door->stateListenerScript;
     script->varTable[15] = door->modelID;
     return ApiStatus_DONE2;
 }
@@ -568,13 +552,13 @@ EvtScript EVS_Default_AnimateWallRot = {
 EvtScript EVS_Default_AnimateDropDoor = {
     EVT_SET(LVar2, ROOM_DATA_EVT_DROP_DOOR)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ROOM_DROP_DOOR_0)
+        EVT_CASE_EQ(ROOM_DROP_DOOR_ENTER)
             EVT_CALL(MakeLerp, 0, 90, 20, EASING_CUBIC_IN)
         EVT_CASE_EQ(ROOM_DROP_DOOR_1)
             EVT_CALL(MakeLerp, 90, 0, 10, EASING_CUBIC_OUT)
         EVT_CASE_EQ(ROOM_DROP_DOOR_2)
             EVT_CALL(MakeLerp, 0, 90, 20, EASING_CUBIC_IN)
-        EVT_CASE_EQ(ROOM_DROP_DOOR_3)
+        EVT_CASE_EQ(ROOM_DROP_DOOR_EXIT)
             EVT_CALL(MakeLerp, 90, 0, 10, EASING_CUBIC_OUT)
     EVT_END_SWITCH
     EVT_LABEL(0)
@@ -588,14 +572,10 @@ EvtScript EVS_Default_AnimateDropDoor = {
     EVT_END
 };
 
-/*
-    Called from triger activatation with:
-        LVar0   ?
-        LVar1   MapRoom*
-*/
+// executed from trigger activatation with MapRoom* stored in LVar1
 EvtScript EVS_EnterRoomDoor = {
     EVT_SET_GROUP(EVT_GROUP_00)
-	// ensure valid player action state
+    // ensure valid player action state
     EVT_CALL(GetPlayerActionState, LVar3)
     EVT_SET(LVar4, 0)
     EVT_IF_EQ(LVar3, ACTION_STATE_IDLE)
@@ -623,21 +603,21 @@ EvtScript EVS_EnterRoomDoor = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePlayerInput, TRUE)
 
-	// callback for ROOM_UPDATE_ENTER_BEGIN
+    // notify listener ROOM_UPDATE_ENTER_BEGIN
     EVT_CALL(GetDoorData)
     EVT_SET(LVar0, ROOM_UPDATE_ENTER_BEGIN)
-    EVT_IF_NE(ROOM_DATA_EVT_TOGGLE_VIS, NULL)
-        EVT_EXEC_WAIT(ROOM_DATA_EVT_TOGGLE_VIS)
+    EVT_IF_NE(ROOM_DATA_EVT_LISTENER, NULL)
+        EVT_EXEC_WAIT(ROOM_DATA_EVT_LISTENER)
     EVT_END_IF
     EVT_IF_EQ(LVar0, ROOM_UPDATE_REQUEST_CANCEL)
         EVT_GOTO(1)
     EVT_END_IF
 
-	// adjust camera to face door
+    // adjust camera to face door
     EVT_CALL(GetDoorData)
     EVT_EXEC(EVS_EnterRoom_MoveCam)
 
-	// move player to front of door
+    // move player to door
     EVT_CALL(GetDoorData)
     EVT_BITWISE_AND_CONST(LVar2, ROOM_FLAGS_DOOR_TYPE_MASK)
     EVT_SET(LVarE, 10)
@@ -656,8 +636,9 @@ EvtScript EVS_EnterRoomDoor = {
             EVT_EXEC_WAIT(EVS_EnterRoom_MovePlayerA)
     EVT_END_SWITCH
     
+    // reveal room interior and hide world
     EVT_CALL(GetDoorData)
-    EVT_SET(LVar0, 0)
+    EVT_SET(LVar0, ROOM_VISIBILITY_SHOW)
     EVT_CALL(GetDoorPtr)
     EVT_IF_NE(ROOM_DATA_MODEL_ID, 0)
         EVT_EXEC_GET_TID(EVS_RoomContentVisiblityToggle, LVar5)
@@ -668,7 +649,7 @@ EvtScript EVS_EnterRoomDoor = {
         EVT_CALL(AwaitUseDoorScript, ROOM_SCRIPT_IDX_0)
     EVT_END_IF
 
-	// wall movement animation
+    // wall movement animation
     EVT_CALL(GetDoorData)
     EVT_SET(LVar0, ROOM_MOVE_WALL_OPEN)
     EVT_BITWISE_AND_CONST(ROOM_DATA_FLAGS, ROOM_FLAG_CUSTOM_ANIM_WALL_ROT)
@@ -682,7 +663,8 @@ EvtScript EVS_EnterRoomDoor = {
     EVT_IF_NE(ROOM_DATA_EVT_MOVE_WALL, NULL)
         EVT_CALL(SaveUseDoorScript, ROOM_SCRIPT_IDX_0, LVar5)
     EVT_END_IF
-	// open the door
+
+    // open the door
     EVT_SET(LVar0, ROOM_MOVE_DOOR_ENTER_OPEN)
     EVT_BITWISE_AND_CONST(ROOM_DATA_FLAGS, ROOM_FLAG_CUSTOM_ANIM_OPEN_DOOR)
     EVT_IF_NE(ROOM_DATA_FLAGS, 0)
@@ -691,10 +673,10 @@ EvtScript EVS_EnterRoomDoor = {
         EVT_EXEC_GET_TID(EVS_Default_AnimateDoorRot, LVar5)
     EVT_END_IF
     EVT_CALL(SaveUseDoorScript, ROOM_SCRIPT_IDX_3, LVar5)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_CALL(AwaitUseDoorScript, ROOM_SCRIPT_IDX_3)
 
-	// move player into the room
+    // move party through the doorway
     EVT_CALL(SetEntityHideMode2)
     EVT_EXEC_GET_TID(EVS_EnterRoom_MovePlayerB, LVar7)
     EVT_CALL(SaveUseDoorScript, ROOM_SCRIPT_IDX_3, LVar7)
@@ -702,14 +684,15 @@ EvtScript EVS_EnterRoomDoor = {
     EVT_CALL(SaveDoorPtr)
     EVT_CALL(GetDoorData)
     EVT_CALL(MovePartnerThroughDoor, ROOM_DATA_ENTER_POS_BX, ROOM_DATA_ENTER_POS_BZ)
+
+    // allow input when movement is done
     EVT_CALL(AwaitUseDoorScript, ROOM_SCRIPT_IDX_3)
-	// 
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_CALL(ResetPartnerMovement)
 
-	// close the door
+    // close the door
     EVT_SET(LVar0, ROOM_MOVE_DOOR_ENTER_CLOSE)
     EVT_BITWISE_AND_CONST(ROOM_DATA_FLAGS, ROOM_FLAG_CUSTOM_ANIM_OPEN_DOOR)
     EVT_IF_NE(ROOM_DATA_FLAGS, 0)
@@ -719,7 +702,8 @@ EvtScript EVS_EnterRoomDoor = {
     EVT_END_IF
     EVT_CALL(SaveUseDoorScript, ROOM_SCRIPT_IDX_3, LVar5)
 
-    EVT_SET(LVar0, ROOM_DROP_DOOR_0)
+    // drop the door
+    EVT_SET(LVar0, ROOM_DROP_DOOR_ENTER)
     EVT_BITWISE_AND_CONST(ROOM_DATA_FLAGS, ROOM_FLAG_CUSTOM_ANIM_DROP_DOOR)
     EVT_IF_NE(ROOM_DATA_EVT_DROP_DOOR, NULL)
         EVT_CALL(AwaitUseDoorScript, ROOM_SCRIPT_IDX_3)
@@ -733,19 +717,19 @@ EvtScript EVS_EnterRoomDoor = {
         EVT_CALL(SaveUseDoorScript, ROOM_SCRIPT_IDX_1, LVar5)
     EVT_END_IF
 
-	// callback for ROOM_UPDATE_ENTER_DONE
+    // notify listener ROOM_UPDATE_ENTER_DONE
     EVT_SET(LVar0, ROOM_UPDATE_ENTER_DONE)
-    EVT_IF_NE(ROOM_DATA_EVT_TOGGLE_VIS, NULL)
-        EVT_EXEC_GET_TID(ROOM_DATA_EVT_TOGGLE_VIS, LVar5)
+    EVT_IF_NE(ROOM_DATA_EVT_LISTENER, NULL)
+        EVT_EXEC_GET_TID(ROOM_DATA_EVT_LISTENER, LVar5)
     EVT_END_IF
-    EVT_IF_NE(ROOM_DATA_EVT_TOGGLE_VIS, NULL)
+    EVT_IF_NE(ROOM_DATA_EVT_LISTENER, NULL)
         EVT_CALL(SaveUseDoorScript, ROOM_SCRIPT_IDX_2, LVar5)
     EVT_END_IF
-    EVT_IF_NE(ROOM_DATA_EVT_TOGGLE_VIS, NULL)
+    EVT_IF_NE(ROOM_DATA_EVT_LISTENER, NULL)
         EVT_CALL(AwaitUseDoorScript, ROOM_SCRIPT_IDX_2)
     EVT_END_IF
 
-	// wait for other scripts
+    // wait for all anim scripts
     EVT_IF_NE(ROOM_DATA_EVT_MOVE_WALL, NULL)
         EVT_CALL(AwaitUseDoorScript, ROOM_SCRIPT_IDX_0)
     EVT_END_IF
@@ -753,11 +737,11 @@ EvtScript EVS_EnterRoomDoor = {
         EVT_CALL(AwaitUseDoorScript, ROOM_SCRIPT_IDX_1)
     EVT_END_IF
 
-	// reset and return
+    // reset and return
     EVT_CALL(SetDoorState, ROOM_STATE_IDLE)
     EVT_RETURN
 
-	// handle ROOM_UPDATE_REQUEST_CANCEL from callback to ROOM_UPDATE_ENTER_BEGIN
+    // handle ROOM_UPDATE_REQUEST_CANCEL from callback to ROOM_UPDATE_ENTER_BEGIN
     EVT_LABEL(1)
     EVT_CALL(SetDoorState, ROOM_STATE_IDLE)
     EVT_LABEL(0)
@@ -767,8 +751,10 @@ EvtScript EVS_EnterRoomDoor = {
     EVT_END
 };
 
+// executed from trigger activatation with MapRoom* stored in LVar1
 EvtScript EVS_ExitRoomDoor = {
     EVT_SET_GROUP(EVT_GROUP_00)
+    // ensure valid player action state
     EVT_CALL(GetPlayerActionState, LVar3)
     EVT_SET(LVar4, 0)
     EVT_IF_EQ(LVar3, ACTION_STATE_IDLE)
@@ -784,6 +770,7 @@ EvtScript EVS_ExitRoomDoor = {
         EVT_RETURN
     EVT_END_IF
 
+    // initialize
     EVT_CALL(SaveDoorPtr)
     EVT_CALL(GetDoorState)
     EVT_IF_NE(LVar0, ROOM_STATE_IDLE)
@@ -792,28 +779,34 @@ EvtScript EVS_ExitRoomDoor = {
     EVT_CALL(SetDoorState, ROOM_STATE_EXITING)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePlayerInput, TRUE)
+
+    // notify listener ROOM_UPDATE_EXIT_BEGIN
     EVT_CALL(GetDoorData)
     EVT_SET(LVar0, ROOM_UPDATE_EXIT_BEGIN)
-    EVT_IF_NE(ROOM_DATA_EVT_TOGGLE_VIS, NULL)
-        EVT_EXEC_WAIT(ROOM_DATA_EVT_TOGGLE_VIS)
+    EVT_IF_NE(ROOM_DATA_EVT_LISTENER, NULL)
+        EVT_EXEC_WAIT(ROOM_DATA_EVT_LISTENER)
     EVT_END_IF
     EVT_IF_EQ(LVar0, ROOM_UPDATE_REQUEST_CANCEL)
         EVT_GOTO(1)
     EVT_END_IF
 
+    // adjust camera to face door
     EVT_CALL(GetDoorData)
     EVT_EXEC(EVS_ExitRoom_MoveCam)
+
+    // move player to door
     EVT_CALL(GetDoorData)
     EVT_BITWISE_AND_CONST(LVar2, ROOM_FLAGS_DOOR_TYPE_MASK)
     EVT_SWITCH(LVar2)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(ROOM_DOOR_RIGHT_HINGE_OPENS_IN)
             EVT_EXEC_WAIT(EVS_ExitRoom_MovePlayerA)
-        EVT_CASE_EQ(6)
+        EVT_CASE_EQ(ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_IN)
             EVT_EXEC_WAIT(EVS_ExitRoom_MovePlayerA)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_DOOR_LEFT_HINGE_OPENS_IN)
             EVT_EXEC_WAIT(EVS_ExitRoom_MovePlayerA)
     EVT_END_SWITCH
 
+    // wall movement animation
     EVT_CALL(GetDoorData)
     EVT_CALL(GetDoorPtr)
     EVT_SET(LVar0, ROOM_MOVE_WALL_CLOSE)
@@ -829,7 +822,8 @@ EvtScript EVS_ExitRoomDoor = {
         EVT_CALL(SaveUseDoorScript, ROOM_SCRIPT_IDX_0, LVar5)
     EVT_END_IF
 
-    EVT_SET(LVar0, ROOM_DROP_DOOR_3)
+    // raise the door if its been dropped
+    EVT_SET(LVar0, ROOM_DROP_DOOR_EXIT)
     EVT_BITWISE_AND_CONST(LVar2, ROOM_FLAG_CUSTOM_ANIM_DROP_DOOR)
     EVT_IF_NE(ROOM_DATA_EVT_DROP_DOOR, NULL)
         EVT_IF_NE(LVar2, 0)
@@ -845,6 +839,7 @@ EvtScript EVS_ExitRoomDoor = {
         EVT_CALL(AwaitUseDoorScript, ROOM_SCRIPT_IDX_1)
     EVT_END_IF
 
+    // open the door
     EVT_SET(LVar0, ROOM_MOVE_DOOR_EXIT_OPEN)
     EVT_BITWISE_AND_CONST(LVar2, ROOM_FLAG_CUSTOM_ANIM_OPEN_DOOR)
     EVT_IF_NE(LVar2, 0)
@@ -855,8 +850,9 @@ EvtScript EVS_ExitRoomDoor = {
     EVT_CALL(SaveUseDoorScript, ROOM_SCRIPT_IDX_1, LVar5)
     EVT_CALL(AwaitUseDoorScript, ROOM_SCRIPT_IDX_1)
 
+    // move party through the doorway
     EVT_CALL(GetDoorPtr)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_CALL(SaveDoorPtr)
     EVT_CALL(GetDoorData)
     EVT_CALL(MovePartnerThroughDoor, ROOM_DATA_EXIT_POS_BX, ROOM_DATA_EXIT_POS_BZ)
@@ -864,9 +860,8 @@ EvtScript EVS_ExitRoomDoor = {
     EVT_CALL(SaveUseDoorScript, ROOM_SCRIPT_IDX_1, LVar5)
     EVT_CALL(SetEntityHideMode0)
 
-    // begin part 3
-
-    EVT_SET(LVar0, 3)
+    // hide room interior and reveal world
+    EVT_SET(LVar0, ROOM_VISIBILITY_HIDE)
     EVT_IF_NE(ROOM_DATA_MODEL_ID, 0)
         EVT_EXEC_GET_TID(EVS_RoomContentVisiblityToggle, LVar5)
     EVT_END_IF
@@ -876,12 +871,15 @@ EvtScript EVS_ExitRoomDoor = {
     EVT_IF_NE(ROOM_DATA_MODEL_ID, 0)
         EVT_CALL(AwaitUseDoorScript, ROOM_SCRIPT_IDX_2)
     EVT_END_IF
+
+    // allow input when movement is done
     EVT_CALL(AwaitUseDoorScript, ROOM_SCRIPT_IDX_1)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_CALL(ResetPartnerMovement)
 
+    // close the door
     EVT_CALL(GetDoorData)
     EVT_SET(LVar0, ROOM_MOVE_DOOR_EXIT_CLOSE)
     EVT_BITWISE_AND_CONST(LVar2, ROOM_FLAG_CUSTOM_ANIM_OPEN_DOOR)
@@ -891,16 +889,20 @@ EvtScript EVS_ExitRoomDoor = {
         EVT_EXEC_WAIT(EVS_Default_AnimateDoorRot)
     EVT_END_IF
 
+    // notify listener ROOM_UPDATE_EXIT_END
     EVT_CALL(GetDoorData)
     EVT_SET(LVar0, ROOM_UPDATE_EXIT_END)
-    EVT_IF_NE(ROOM_DATA_EVT_TOGGLE_VIS, NULL)
-        EVT_EXEC_WAIT(ROOM_DATA_EVT_TOGGLE_VIS)
+    EVT_IF_NE(ROOM_DATA_EVT_LISTENER, NULL)
+        EVT_EXEC_WAIT(ROOM_DATA_EVT_LISTENER)
     EVT_END_IF
 
+    // reset and return
     EVT_CALL(RevealHiddenRoomNPCs)
     EVT_CALL(RestorePrevItemVisGroup)
     EVT_CALL(SetDoorState, ROOM_STATE_IDLE)
     EVT_RETURN
+
+    // handle ROOM_UPDATE_REQUEST_CANCEL from callback to ROOM_UPDATE_ENTER_BEGIN
     EVT_LABEL(1)
     EVT_CALL(SetDoorState, ROOM_STATE_IDLE)
     EVT_LABEL(0)

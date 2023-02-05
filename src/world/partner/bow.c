@@ -69,7 +69,7 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
             BowTweesterPhysicsPtr->angularVelocity = 6.0f;
             BowTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             BowTweesterPhysicsPtr->countdown = 120;
-            bow->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            bow->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_ENABLE_HIT_SCRIPT;
             bow->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(BowTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -285,7 +285,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
                     script->functionTemp[0]++;
                     playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
-                    bow->flags |= NPC_FLAG_40;
+                    bow->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
                 }
 
                 get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 >> 1;
@@ -358,7 +358,7 @@ void func_802BDDF0_324740(Npc* bow) {
     }
 
     playerStatus->flags &= ~(PS_FLAG_HAZARD_INVINCIBILITY | PS_FLAG_JUMPING);
-    bow->flags &= ~(NPC_FLAG_40 | NPC_FLAG_2);
+    bow->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_2);
     D_802BE0C4 = FALSE;
     actionState = ACTION_STATE_IDLE;
 

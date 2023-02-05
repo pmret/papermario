@@ -326,7 +326,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Crowd) = {
             EVT_WAIT(30)
             EVT_CALL(SetSelfVar, 0, 3)
         EVT_CASE_EQ(3)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
             EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
             EVT_CALL(NpcMoveTo, NPC_SELF, 235, 0, 0)
             EVT_CALL(NpcMoveTo, NPC_SELF, 300, 0, 0)

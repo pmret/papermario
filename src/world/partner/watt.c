@@ -136,7 +136,7 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                 WattTweesterPhysicsPtr->angularVelocity = 6.0f;
                 WattTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
                 WattTweesterPhysicsPtr->countdown = 120;
-                watt->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
+                watt->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_ENABLE_HIT_SCRIPT;
                 watt->flags &= ~NPC_FLAG_GRAVITY;
             case 1:
                 sin_cos_rad(DEG_TO_RAD(WattTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);

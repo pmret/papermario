@@ -217,7 +217,7 @@ EvtScript N(EVS_NpcAI_ShyGuy) = {
                     EVT_SET(MV_SecretDoorAngle, LVar2)
                     EVT_MOD(MV_SecretDoorAngle, 360)
                     EVT_SET(AF_OMO07_DoorOpening, FALSE)
-                    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, FALSE)
+                    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
                 EVT_END_THREAD
                 EVT_WAIT(10)
                 EVT_CALL(NpcMoveTo, NPC_SELF, -10, 50, 0)
@@ -255,7 +255,7 @@ EvtScript N(EVS_NpcDefeat_ShyGuy) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40 | NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
             EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_1, 1)
             EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
             EVT_CALL(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_RECYCLE)

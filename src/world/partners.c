@@ -2599,7 +2599,7 @@ void partner_move_to_goal(Npc* partner, s32 isFlying) {
                 }
                 func_8003D660(partner, var_a1);
             } else {
-                partner->flags &= ~NPC_FLAG_40;
+                partner->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
                 partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                 D_8010CFCE++;
             }

@@ -79,7 +79,7 @@ EvtScript N(EVS_RoomListener_MayorOffice) = {
                 EVT_THREAD
                     EVT_CALL(BindNpcInteract, NPC_Herringway, 0)
                     EVT_CALL(SetNpcFlagBits, NPC_Herringway, NPC_FLAG_100, TRUE)
-                    EVT_CALL(SetNpcFlagBits, NPC_Herringway, NPC_FLAG_40, TRUE)
+                    EVT_CALL(SetNpcFlagBits, NPC_Herringway, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
                     EVT_CALL(SetNpcAnimation, NPC_Herringway, ANIM_Penguin_Walk)
                     EVT_CALL(SetNpcSpeed, NPC_Herringway, EVT_FLOAT(1.5))
                     EVT_CALL(NpcMoveTo, NPC_Herringway, -252, -55, 0)

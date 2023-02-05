@@ -2551,7 +2551,7 @@ void create_encounters(void) {
                         newNpc->shadowScale = 1.0f;
                     }
                     if (enemy->flags & ENEMY_FLAG_100) {
-                        newNpc->flags |= NPC_FLAG_40;
+                        newNpc->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
                     }
                     if (enemy->flags & ENEMY_FLAG_200) {
                         newNpc->flags |= NPC_FLAG_100;

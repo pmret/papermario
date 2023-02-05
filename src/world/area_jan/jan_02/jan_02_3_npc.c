@@ -23,7 +23,7 @@ EvtScript N(EVS_GetRescuedYoshiCount) = {
 };
 
 EvtScript N(EVS_Scene_GetJadeRaven) = {
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_IF_EQ(GF_JAN02_Met_VillageLeader, TRUE)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_VillageLeader_Talk, ANIM_VillageLeader_Idle, 0, MSG_CH5_0023)
     EVT_ELSE
@@ -64,7 +64,7 @@ EvtScript N(EVS_Scene_GetJadeRaven) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.5))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_CALL(func_802D2C14, 0)
     EVT_CALL(GetCurrentPartnerID, LVar0)
     EVT_IF_EQ(LVar0, PARTNER_SUSHIE)

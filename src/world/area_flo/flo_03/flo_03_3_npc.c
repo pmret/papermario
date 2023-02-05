@@ -390,7 +390,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
         EVT_END_IF
         EVT_IF_EQ(LV_ShouldBurrow, TRUE)
             EVT_IF_EQ(AF_FLO_IsUnderground_Mole_01, FALSE)
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_01, 1)
                 EVT_WAIT(1)
                 EVT_SET(AF_FLO_IsUnderground_Mole_01, TRUE)
@@ -424,7 +424,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
                     EVT_END_LOOP
                     EVT_CALL(SetNpcPos, NPC_MontyMole_01, LVar1, LVar2, LVar3)
                 EVT_END_IF
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_SET(AF_FLO_IsUnderground_Mole_01, FALSE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_01, 1)
                 EVT_WAIT(1)
@@ -469,7 +469,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
         EVT_END_IF
         EVT_IF_EQ(LV_ShouldBurrow, TRUE)
             EVT_IF_EQ(AF_FLO_IsUnderground_Mole_02, FALSE)
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_02, 1)
                 EVT_WAIT(1)
                 EVT_SET(AF_FLO_IsUnderground_Mole_02, TRUE)
@@ -503,7 +503,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
                     EVT_END_LOOP
                     EVT_CALL(SetNpcPos, NPC_MontyMole_02, LVar1, LVar2, LVar3)
                 EVT_END_IF
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_SET(AF_FLO_IsUnderground_Mole_02, FALSE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_02, 1)
                 EVT_WAIT(1)
@@ -548,7 +548,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
         EVT_END_IF
         EVT_IF_EQ(LV_ShouldBurrow, TRUE)
             EVT_IF_EQ(AF_FLO_IsUnderground_Mole_03, FALSE)
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_03, 1)
                 EVT_WAIT(1)
                 EVT_SET(AF_FLO_IsUnderground_Mole_03, TRUE)
@@ -582,7 +582,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
                     EVT_END_LOOP
                     EVT_CALL(SetNpcPos, NPC_MontyMole_03, LVar1, LVar2, LVar3)
                 EVT_END_IF
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_SET(AF_FLO_IsUnderground_Mole_03, FALSE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_03, 1)
                 EVT_WAIT(1)
@@ -627,7 +627,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
         EVT_END_IF
         EVT_IF_EQ(LV_ShouldBurrow, TRUE)
             EVT_IF_EQ(AF_FLO_IsUnderground_Mole_04, FALSE)
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_04, 1)
                 EVT_WAIT(1)
                 EVT_SET(AF_FLO_IsUnderground_Mole_04, TRUE)
@@ -661,7 +661,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
                     EVT_END_LOOP
                     EVT_CALL(SetNpcPos, NPC_MontyMole_04, LVar1, LVar2, LVar3)
                 EVT_END_IF
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_SET(AF_FLO_IsUnderground_Mole_04, FALSE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_04, 1)
                 EVT_WAIT(1)

@@ -87,7 +87,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
                 add_vec2D_polar(&npc->pos.x, &npc->pos.z, 375.0f, yaw2);
             }
         } else {
-            if (!(npc->flags & NPC_FLAG_40)) {
+            if (!(npc->flags & NPC_FLAG_IGNORE_WORLD_COLLISION)) {
                 sp20 = gPlayerStatusPtr->position.x;
                 sp24 = gPlayerStatusPtr->position.y + 18.0;
                 sp28 = gPlayerStatusPtr->position.z;
