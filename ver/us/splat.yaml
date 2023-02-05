@@ -838,7 +838,6 @@ segments:
     - [0xDE740, c, de740_len_23f0]
     - [0xDF950, c, audio/sfx]
     - [0xE0B30, c, audio/e0b30_len_b80]
-    - [0xE16B0, c, heaps]
     - [0xE16B0, .data, a5dd0_len_114e0]
     - [0xE2950, .data, B4580]
     - [0xE2960, .data, entity_model]
@@ -866,6 +865,15 @@ segments:
     - [0xE59D0, .data, audio/sfx]
     - [0xE5DF0, .data, audio/e0b30_len_b80]
     - [0xE5E40]
+  - name: heaps
+    type: code
+    start: 0xE79B0
+    vram: 0x80197000
+    align: 0x1000
+    subalign: 0x1000
+    follows_vram: engine2
+    subsegments:
+    - [0xE79B0, c, heaps]
   - name: evt
     type: code
     dir: evt
@@ -7091,7 +7099,7 @@ segments:
     type: code
     start: 0x4309A0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subalign: 4
     subsegments:
     - [0x4309A0, c, area]
@@ -7108,7 +7116,7 @@ segments:
     type: code
     start: 0x439A90
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subalign: 4
     subsegments:
     - [0x439A90, c, area]
@@ -7128,7 +7136,7 @@ segments:
     type: code
     start: 0x447440
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subalign: 4
     subsegments:
     - [0x447440, c, area]
@@ -7156,7 +7164,7 @@ segments:
     type: code
     start: 0x464490
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x464490, c, actor/chan]
     - [0x464560, c, actor/lee]
@@ -7171,7 +7179,7 @@ segments:
     type: code
     start: 0x47F0B0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x47F0B0, c, actor/goombario_tutor]
     - [0x47F0D0, c, actor/ember]
@@ -7185,7 +7193,7 @@ segments:
     type: code
     start: 0x48D1A0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subalign: 4
     subsegments:
     - [0x48D1A0, c, area]
@@ -7205,7 +7213,7 @@ segments:
     type: code
     start: 0x4A10A0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x4A10A0, c, area]
     - [0x4A10A0, c, actor/bullet_bill]
@@ -7232,7 +7240,7 @@ segments:
     type: code
     start: 0x4B11F0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subalign: 4
     subsegments:
     - [0x4B11F0, c, area]
@@ -7258,7 +7266,7 @@ segments:
     type: code
     start: 0x4CF1B0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x4CF1B0, c, area]
     - [0x4CF1B0, c, actor/eldstar]
@@ -7268,7 +7276,7 @@ segments:
     type: code
     start: 0x4D01F0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subalign: 4
     subsegments:
     - [0x4D01F0, c, area]
@@ -7284,7 +7292,7 @@ segments:
     type: code
     start: 0x4DA5E0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subalign: 16 # BSS alignment hack
     subsegments:
     - [0x4DA5E0, c, actor/pokey]
@@ -7296,7 +7304,7 @@ segments:
     type: code
     start: 0x4E2740
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x4E2740, c, actor/pokey_mummy]
     - [0x4E2810, c, actor/swooper]
@@ -7322,7 +7330,7 @@ segments:
     type: code
     start: 0x4EF4A0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x4EF4A0, c, actor/chain_chomp]
     - [0x4EFB30, c, actor/tutankoopa]
@@ -7344,7 +7352,7 @@ segments:
     type: code
     start: 0x4F7BE0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x4F7BE0, c, actor/forest_fuzzy]
     - [0x4F7D50, c, actor/bzzap]
@@ -7356,7 +7364,7 @@ segments:
     type: code
     start: 0x4FEA50
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x4FEA50, c, actor/hypergoomba]
     - [0x4FED30, c, actor/hyper_paragoomba]
@@ -7375,7 +7383,7 @@ segments:
     type: code
     start: 0x50F020
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x50F020, c, actor/clubba]
     - [0x50F020, c, actor/tubba_blubba]
@@ -7390,7 +7398,7 @@ segments:
     type: code
     start: 0x5125D0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x5125D0, c, actor/red_shy_guy]
     - [0x5126A0, c, actor/blue_shy_guy]
@@ -7418,7 +7426,7 @@ segments:
     type: code
     start: 0x52B6A0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x52B6A0, c, actor/general_guy]
     - [0x52B7C0, c, actor/toy_tank]
@@ -7471,7 +7479,7 @@ segments:
     type: code
     start: 0x5573E0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x5573E0, c, actor/big_lantern_ghost]
     - [0x557870, c, stage/omo_01]
@@ -7496,7 +7504,7 @@ segments:
     type: code
     start: 0x56E2A0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x56E2A0, c, actor/fuzzipede]
     - [0x56E800, c, stage/kgr_01]
@@ -7506,7 +7514,7 @@ segments:
     type: code
     start: 0x573920
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x573920, c, actor/spear_guy]
     - [0x5739F0, c, actor/hurt_plant]
@@ -7528,7 +7536,7 @@ segments:
     type: code
     start: 0x584940
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x584940, c, actor/putrid_piranha]
     - [0x584B90, c, actor/white_magikoopa]
@@ -7546,7 +7554,7 @@ segments:
     type: code
     start: 0x58C2F0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x58C2F0, c, actor/lava_bubble]
     - [0x58C420, c, actor/putrid_piranha]
@@ -7567,7 +7575,7 @@ segments:
     type: code
     start: 0x59E6E0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [0x59E6E0, c, anim/unused_gfx]
@@ -7643,7 +7651,7 @@ segments:
     type: code
     start: 0x5B14B0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x5B14B0, c, actor/lakitu]
     - [0x5B14B0, c, actor/spiny]
@@ -7672,7 +7680,7 @@ segments:
     type: code
     start: 0x5CE690
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x5CE690, c, actor/huff_n_puff]
     - [0x5CF2D0, c, actor/tuff_puff]
@@ -7694,7 +7702,7 @@ segments:
     type: code
     start: 0x5EC490
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x5EC490, c, actor/dark_koopa]
     - [0x5EC560, c, actor/dark_paratroopa]
@@ -7715,7 +7723,7 @@ segments:
     type: code
     start: 0x608AB0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x608AB0, c, actor/blooper]
     - [0x608CB0, c, actor/electro_blooper]
@@ -7732,7 +7740,7 @@ segments:
     type: code
     start: 0x6186F0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x6186F0, c, actor/swooper]
     - [0x6187C0, c, actor/swoopula]
@@ -7747,7 +7755,7 @@ segments:
     type: code
     start: 0x623BA0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x623BA0, c, actor/duplighost]
     - [0x625190, c, actor/gulpit]
@@ -7766,7 +7774,7 @@ segments:
     type: code
     start: 0x63D1E0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x63D1E0, c, actor/monstar]
     - [0x63D710, c, actor/paragoomba]
@@ -7807,7 +7815,7 @@ segments:
     type: code
     start: 0x648E10
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x648E10, c, actor/swoopula]
     - [0x649050, c, actor/albino_dino]
@@ -7828,7 +7836,7 @@ segments:
     type: code
     start: 0x660750
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subalign: 16 # BSS alignment hack
     subsegments:
     - [0x660750, c, actor/crystal_king]
@@ -7839,7 +7847,7 @@ segments:
     type: code
     start: 0x669D80
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x669D80, c, actor/duplighost]
     - [0x66B370, c, actor/swoopula]
@@ -7857,7 +7865,7 @@ segments:
     type: code
     start: 0x684A30
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x684A30, c, actor/bony_beetle]
     - [0x684B00, c, actor/dry_bones]
@@ -7885,7 +7893,7 @@ segments:
     type: code
     start: 0x69F200
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x69F200, c, actor/bowser]
     - [0x69F320, c, actor/bowser_intro]
@@ -7901,7 +7909,7 @@ segments:
     type: code
     start: 0x6BBB90
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x6BBB90, c, actor/anti_guy]
     - [0x6BBC60, c, actor/duplighost]
@@ -7912,7 +7920,7 @@ segments:
     type: code
     start: 0x6CC070
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x6CC070, c, actor/bombshell_bill_blaster]
     - [0x6CC090, c, actor/bombshell_bill]
@@ -7938,7 +7946,7 @@ segments:
     type: code
     start: 0x6DBDA0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x6DBDA0, c, area]
     - [0x6DBDA0, c, actor/kammy_koopa]
@@ -7948,7 +7956,7 @@ segments:
     type: code
     start: 0x6DDDC0
     vram: 0x80218000
-    follows_vram: engine2
+    follows_vram: heaps
     subsegments:
     - [0x6DDDC0, c, actor/koopa_troopa]
     - [0x6DDE90, c, actor/fuzzy]

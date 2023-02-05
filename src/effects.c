@@ -8,8 +8,8 @@ typedef TlbEntry TlbMappablePage[15];
 
 #define EFFECT_LOADED 1
 
-SHIFT_BSS EffectGraphics gEffectGraphicsData[15];
-SHIFT_BSS EffectInstance* gEffectInstances[96];
+extern EffectGraphics gEffectGraphicsData[15];
+extern EffectInstance* gEffectInstances[96];
 
 extern TlbMappablePage D_80197000;
 extern Addr D_801A6000;
