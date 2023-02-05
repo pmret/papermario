@@ -629,7 +629,7 @@ EvtScript N(EVS_PerformHintRitual) = {
     EVT_WAIT(70)
     EVT_CALL(func_802D7B10, ArrayVar(2))
     EVT_WAIT(40)
-    EVT_CALL(PlaySoundAt, SOUND_607, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_207 | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, LVar0, LVar1, LVar2)
     EVT_CALL(N(func_80241F98_A3B478), ArrayVar(1))
     EVT_WAIT(15)
     EVT_CALL(EnableModel, MODEL_o185, TRUE)

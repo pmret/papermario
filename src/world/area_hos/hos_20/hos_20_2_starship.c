@@ -93,7 +93,7 @@ EvtScript N(EVS_Starship_Flight1) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_WAIT(100)
-        EVT_CALL(PlaySound, SOUND_57C)
+        EVT_CALL(PlaySound, SOUND_17C | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_CALL(GotoMap, EVT_PTR("hos_00"), hos_00_ENTRY_3)
     EVT_ELSE
         EVT_THREAD
@@ -107,7 +107,7 @@ EvtScript N(EVS_Starship_Flight1) = {
                 EVT_END_IF
             EVT_END_LOOP
             EVT_WAIT(75)
-            EVT_CALL(PlaySound, SOUND_57C)
+            EVT_CALL(PlaySound, SOUND_17C | SOUND_ID_TRIGGER_CHANGE_SOUND)
             EVT_CALL(PlaySound, SOUND_20A1)
             EVT_CALL(MakeLerp, 0, 300, 60, EASING_CUBIC_IN)
             EVT_LOOP(0)
@@ -128,7 +128,7 @@ EvtScript N(EVS_Starship_Flight1) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySound, SOUND_57C)
+        EVT_CALL(PlaySound, SOUND_17C | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_CALL(GotoMap, EVT_PTR("kpa_60"), kpa_60_ENTRY_4)
     EVT_END_IF
     EVT_WAIT(100)
@@ -154,7 +154,7 @@ EvtScript N(EVS_Starship_Flight2) = {
     EVT_SET(MV_Starship_Yaw, 0)
     EVT_EXEC(N(EVS_AnimateStarship))
     EVT_WAIT(100)
-    EVT_CALL(PlaySound, SOUND_57C)
+    EVT_CALL(PlaySound, SOUND_17C | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_CALL(PlaySound, SOUND_20A1)
     EVT_CALL(MakeLerp, 0, 300, 60, EASING_CUBIC_IN)
     EVT_LOOP(0)
@@ -201,7 +201,7 @@ EvtScript N(EVS_Starship_Return) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_WAIT(75)
-        EVT_CALL(PlaySound, SOUND_57C)
+        EVT_CALL(PlaySound, SOUND_17C | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_CALL(PlaySound, SOUND_20A1)
         EVT_CALL(MakeLerp, 0, -300, 60, EASING_CUBIC_IN)
         EVT_LOOP(0)
@@ -222,7 +222,7 @@ EvtScript N(EVS_Starship_Return) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySound, SOUND_57C)
+    EVT_CALL(PlaySound, SOUND_17C | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_CALL(GotoMap, EVT_PTR("hos_05"), hos_05_ENTRY_1)
     EVT_WAIT(100)
     EVT_RETURN
