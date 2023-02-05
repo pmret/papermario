@@ -4885,6 +4885,13 @@ enum MapRoomFlags {
 	ROOM_FLAG_800               = 0x0800,
 };
 
+enum MapRoomNotifications {
+    ROOM_UPDATE_ENTER_BEGIN     = 0,
+    ROOM_UPDATE_ENTER_DONE      = 1,
+    ROOM_UPDATE_EXIT_BEGIN      = 2,
+    ROOM_UPDATE_EXIT_END        = 3,
+};
+
 enum EnemyFlags {
     ENEMY_FLAG_1                 = 0x00000001,
     ENEMY_FLAG_2                 = 0x00000002,

@@ -6,7 +6,7 @@ EvtScript N(EVS_SetDoorRot_ToadHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_ToadHouse) = {
+EvtScript N(EVS_SetWallRot_ToadHouse) = {
     EVT_CALL(RotateGroup, MODEL_khm_yane, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_khm_sita, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
@@ -19,12 +19,12 @@ EvtScript N(EVS_MoveWalls_ToadHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_ToadHouse) = {
+EvtScript N(EVS_RoomListener_ToadHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_kh_naiso, 1)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
             EVT_CALL(SetGroupEnabled, MODEL_kh_naiso, 0)
     EVT_END_SWITCH
@@ -38,7 +38,7 @@ EvtScript N(EVS_SetDoorRot_MerleHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_MerleHouse) = {
+EvtScript N(EVS_SetWallRot_MerleHouse) = {
     EVT_CALL(RotateGroup, MODEL_km_yane, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_km_sita, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
@@ -51,17 +51,17 @@ EvtScript N(EVS_MoveWalls_MerleHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_MerleHouse) = {
+EvtScript N(EVS_RoomListener_MerleHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 1)
             EVT_CALL(EnableModel, MODEL_k_naiso, TRUE)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_IF_LT(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_SCARF)
                 EVT_CALL(DisablePlayerInput, TRUE)
             EVT_END_IF
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
             EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 0)
             EVT_IF_LT(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_SCARF)
@@ -78,7 +78,7 @@ EvtScript N(EVS_SetDoorRot_CookHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_CookHouse) = {
+EvtScript N(EVS_SetWallRot_CookHouse) = {
     EVT_CALL(RotateGroup, MODEL_hm_yane, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_hm_sita, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
@@ -101,12 +101,12 @@ EvtScript N(EVS_MoveWalls_CookHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_CookHouse) = {
+EvtScript N(EVS_RoomListener_CookHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_h_naiso, 1)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
             EVT_CALL(SetGroupEnabled, MODEL_h_naiso, 0)
     EVT_END_SWITCH
@@ -138,9 +138,9 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
-        EVT_PTR(N(EVS_MoveWalls_ToadHouse)),
+        EVT_PTR(N(EVS_SetWallRot_ToadHouse)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_ToadHouse)),
+        EVT_PTR(N(EVS_RoomListener_ToadHouse)),
         COLLIDER_kh_d1,
         COLLIDER_kh_d2,
         MODEL_kinohuse,
@@ -150,9 +150,9 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_MerleHouse)),
-        EVT_PTR(N(EVS_MoveWalls_MerleHouse)),
+        EVT_PTR(N(EVS_SetWallRot_MerleHouse)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_MerleHouse)),
+        EVT_PTR(N(EVS_RoomListener_MerleHouse)),
         COLLIDER_k_d1,
         COLLIDER_k_d2,
         MODEL_k,
@@ -162,9 +162,9 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_CookHouse)),
-        EVT_PTR(N(EVS_MoveWalls_CookHouse)),
+        EVT_PTR(N(EVS_SetWallRot_CookHouse)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_CookHouse)),
+        EVT_PTR(N(EVS_RoomListener_CookHouse)),
         COLLIDER_h_doa1,
         COLLIDER_h_doa2,
         MODEL_hakun,

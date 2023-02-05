@@ -17,7 +17,7 @@ NpcSettings N(NpcSettings_Sentinel) = {
     .level = 99,
 };
 
-EvtScript N(EVS_OpenDoors) = {
+EvtScript N(EVS_SetDoorRots) = {
     EVT_SET(LVar3, 0)
     EVT_SUB(LVar3, LVar2)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deiliwt, COLLIDER_FLAGS_UPPER_MASK)
@@ -262,7 +262,7 @@ EvtScript N(EVS_Scene_BoosApproachManor) = {
     EVT_CALL(InterpPlayerYaw, 270, 1)
     EVT_CALL(SetNpcPos, NPC_PARTNER, 350, 10, -150)
     EVT_SET(LVar2, 1)
-    EVT_EXEC_WAIT(N(EVS_OpenDoors))
+    EVT_EXEC_WAIT(N(EVS_SetDoorRots))
     EVT_RETURN
     EVT_END
 };
@@ -534,7 +534,7 @@ EvtScript N(EVS_Scene_ThrownOutBySentinel) = {
     EVT_WAIT(20)
     EVT_THREAD
         EVT_SET(LVar2, 1)
-        EVT_EXEC(N(EVS_OpenDoors))
+        EVT_EXEC(N(EVS_SetDoorRots))
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_THREAD

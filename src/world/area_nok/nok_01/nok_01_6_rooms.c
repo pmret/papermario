@@ -72,7 +72,7 @@ EvtScript N(EVS_SetWallsRot_ToadHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_ToadHouse) = {
+EvtScript N(EVS_SetWallRot_ToadHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_WAIT(20)
@@ -109,7 +109,7 @@ EvtScript N(EVS_SetWallsRot_Shop) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_Shop) = {
+EvtScript N(EVS_SetWallRot_Shop) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_WAIT(20)
@@ -148,7 +148,7 @@ EvtScript N(EVS_SetWallsRot_BeachHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_BeachHouse) = {
+EvtScript N(EVS_SetWallRot_BeachHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_SET(LVar0, 0)
@@ -176,40 +176,41 @@ EvtScript N(EVS_DropDoor_BeachHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_ToadHouse) = {
+EvtScript N(EVS_RoomListener_ToadHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_g111, 1)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_g111, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_Shop) = {
+EvtScript N(EVS_RoomListener_Shop) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_g114, 1)
-        EVT_CASE_EQ(2)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_g114, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_BeachHouse) = {
+EvtScript N(EVS_RoomListener_BeachHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_g79, 1)
             EVT_CALL(N(SetRadioVolumeMax), AB_NOK_0)
             EVT_EXEC(N(EVS_80242C38))
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_CALL(N(SetRadioVolumeMute), AB_NOK_0)
             EVT_EXEC(N(EVS_80242DE0))
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_g79, 0)
             EVT_CALL(N(func_80242898_9C7C78))
     EVT_END_SWITCH
@@ -244,9 +245,9 @@ EvtScript N(EVS_MakeRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
         EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
-        EVT_PTR(N(EVS_MoveWalls_ToadHouse)),
+        EVT_PTR(N(EVS_SetWallRot_ToadHouse)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_ToadHouse)),
+        EVT_PTR(N(EVS_RoomListener_ToadHouse)),
         COLLIDER_o200,
         COLLIDER_o284,
         MODEL_aka,
@@ -255,9 +256,9 @@ EvtScript N(EVS_MakeRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_TYPE_0 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
         EVT_PTR(N(EVS_SetDoorRot_Shop)),
-        EVT_PTR(N(EVS_MoveWalls_Shop)),
+        EVT_PTR(N(EVS_SetWallRot_Shop)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_Shop)),
+        EVT_PTR(N(EVS_RoomListener_Shop)),
         COLLIDER_o226,
         COLLIDER_o286,
         MODEL_ki,
@@ -267,9 +268,9 @@ EvtScript N(EVS_MakeRooms) = {
         EVT_CALL(CreateMapRoom,
             PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             EVT_PTR(N(EVS_SetDoorRot_BeachHouse)),
-            EVT_PTR(N(EVS_MoveWalls_BeachHouse)),
+            EVT_PTR(N(EVS_SetWallRot_BeachHouse)),
             EVT_PTR(N(EVS_DropDoor_BeachHouse)),
-            EVT_PTR(N(EVS_ToggleVis_BeachHouse)),
+            EVT_PTR(N(EVS_RoomListener_BeachHouse)),
             COLLIDER_o246,
             COLLIDER_o291,
             MODEL_ao,
@@ -278,19 +279,19 @@ EvtScript N(EVS_MakeRooms) = {
         EVT_CALL(CreateMapRoom,
             PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             EVT_PTR(N(EVS_SetDoorRot_BeachHouse)),
-            EVT_PTR(N(EVS_MoveWalls_BeachHouse)),
+            EVT_PTR(N(EVS_SetWallRot_BeachHouse)),
             EVT_PTR(N(EVS_DropDoor_BeachHouse)),
-            EVT_PTR(N(EVS_ToggleVis_BeachHouse)),
+            EVT_PTR(N(EVS_RoomListener_BeachHouse)),
             COLLIDER_o246,
             COLLIDER_o291,
             MODEL_ao,
             EVT_PTR(N(InteriorNPCs_BeachHouse_After)))
     EVT_END_IF
     EVT_CALL(N(InitializeRadio))
-    EVT_SET(LVar0, 3)
-    EVT_EXEC(N(EVS_ToggleVis_ToadHouse))
-    EVT_EXEC(N(EVS_ToggleVis_Shop))
-    EVT_EXEC(N(EVS_ToggleVis_BeachHouse))
+    EVT_SET(LVar0, ROOM_UPDATE_EXIT_END)
+    EVT_EXEC(N(EVS_RoomListener_ToadHouse))
+    EVT_EXEC(N(EVS_RoomListener_Shop))
+    EVT_EXEC(N(EVS_RoomListener_BeachHouse))
     EVT_EXEC(N(EVS_AnimateSwingingSigns))
     EVT_EXEC(N(EVS_SpinCeilingFan))
     EVT_RETURN

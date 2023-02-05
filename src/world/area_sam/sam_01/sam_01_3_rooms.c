@@ -6,7 +6,7 @@ EvtScript N(EVS_SetDoorRot_MayorFoyer) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_MayorFoyer) = {
+EvtScript N(EVS_SetWallRot_MayorFoyer) = {
     EVT_CALL(RotateGroup, MODEL_s_mae, LVar0, 1, 0, 0)
     EVT_IF_GT(LVar0, 89)
         EVT_CALL(SetGroupEnabled, MODEL_s_mae, 0)
@@ -24,10 +24,10 @@ EvtScript N(EVS_DropDoor_MayorFoyer) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_MayorFoyer) = {
+EvtScript N(EVS_RoomListener_MayorFoyer) = {
     EVT_CALL(UseRoomDoorSounds, DOOR_SOUNDS_BASIC)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_04, TRUE)
             EVT_SET(AF_SAM_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_s_naisou, 1)
@@ -37,7 +37,7 @@ EvtScript N(EVS_ToggleVis_MayorFoyer) = {
                 EVT_CALL(SetNpcPos, NPC_MayorPenguinWife, -300, 0, -50)
                 EVT_CALL(InterpNpcYaw, NPC_MayorPenguinWife, 0, 0)
             EVT_END_IF
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_04, FALSE)
             EVT_SET(AF_SAM_Snowing, TRUE)
             EVT_CALL(SetGroupEnabled, MODEL_s_naisou, 0)
@@ -52,7 +52,7 @@ EvtScript N(EVS_SetDoorRot_MayorOffice) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_MayorOffice) = {
+EvtScript N(EVS_SetWallRot_MayorOffice) = {
     EVT_CALL(RotateGroup, MODEL_s_yane, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_s_yoko, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
@@ -65,7 +65,7 @@ EvtScript N(EVS_MoveWalls_MayorOffice) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_MayorOffice) = {
+EvtScript N(EVS_RoomListener_MayorOffice) = {
     EVT_CALL(UseRoomDoorSounds, DOOR_SOUNDS_BASIC)
     EVT_IF_EQ(GB_StoryProgress, STORY_CH7_HERRINGWAY_AT_MAYORS_HOUSE)
         EVT_IF_EQ(AF_SAM_03, TRUE)
@@ -74,7 +74,7 @@ EvtScript N(EVS_ToggleVis_MayorOffice) = {
         EVT_END_IF
     EVT_END_IF
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_IF_EQ(GB_StoryProgress, STORY_CH7_HERRINGWAY_AT_MAYORS_HOUSE)
                 EVT_THREAD
                     EVT_CALL(BindNpcInteract, NPC_Herringway, 0)
@@ -88,12 +88,12 @@ EvtScript N(EVS_ToggleVis_MayorOffice) = {
                     EVT_CALL(BindNpcInteract, NPC_Herringway, EVT_PTR(N(EVS_NpcInteract_Herringway)))
                 EVT_END_THREAD
             EVT_END_IF
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
             EVT_IF_EQ(GB_StoryProgress, STORY_CH7_HERRINGWAY_AT_MAYORS_HOUSE)
                 EVT_CALL(SetMusicTrack, 0, SONG_PENGUIN_WHODUNIT, 1, 8)
             EVT_END_IF
             EVT_SET(AF_SAM_03, TRUE)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_IF_EQ(GB_StoryProgress, STORY_CH7_MAYOR_MURDER_MYSTERY)
                 EVT_EXEC(N(EVS_SetupMusic))
             EVT_END_IF
@@ -109,7 +109,7 @@ EvtScript N(EVS_SetDoorRot_MiddleHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_MiddleHouse) = {
+EvtScript N(EVS_SetWallRot_MiddleHouse) = {
     EVT_CALL(RotateGroup, MODEL_f_ue, LVar0, 0, 0, -1)
     EVT_CALL(RotateGroup, MODEL_f_sita, LVar0, 0, 0, 1)
     EVT_IF_GT(LVar0, 89)
@@ -122,15 +122,17 @@ EvtScript N(EVS_MoveWalls_MiddleHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_MiddleHouse) = {
+EvtScript N(EVS_RoomListener_MiddleHouse) = {
     EVT_CALL(UseRoomDoorSounds, DOOR_SOUNDS_DOOR)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_f_naiso, 1)
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(2)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
             EVT_CALL(SetGroupEnabled, MODEL_f_naiso, 0)
     EVT_END_SWITCH
@@ -150,7 +152,7 @@ EvtScript N(EVS_SetDoorRot_LowerRightHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_RightHouse) = {
+EvtScript N(EVS_SetWallRot_RightHouse) = {
     EVT_CALL(RotateGroup, MODEL_m_ue, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_m_mae, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
@@ -163,13 +165,13 @@ EvtScript N(EVS_MoveWalls_RightHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_UpperRightHouse) = {
+EvtScript N(EVS_RoomListener_UpperRightHouse) = {
     EVT_CALL(UseRoomDoorSounds, DOOR_SOUNDS_BASIC)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 1)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
             EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 0)
     EVT_END_SWITCH
@@ -177,13 +179,13 @@ EvtScript N(EVS_ToggleVis_UpperRightHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_LowerRightHouse) = {
+EvtScript N(EVS_RoomListener_LowerRightHouse) = {
     EVT_CALL(UseRoomDoorSounds, DOOR_SOUNDS_DOOR)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 1)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
             EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 0)
     EVT_END_SWITCH
@@ -233,9 +235,9 @@ EvtScript N(EVS_SetupMayorRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_MayorFoyer)),
-        EVT_PTR(N(EVS_MoveWalls_MayorFoyer)),
+        EVT_PTR(N(EVS_SetWallRot_MayorFoyer)),
         EVT_PTR(N(EVS_DropDoor_MayorFoyer)),
-        EVT_PTR(N(EVS_ToggleVis_MayorFoyer)),
+        EVT_PTR(N(EVS_RoomListener_MayorFoyer)),
         COLLIDER_tts,
         COLLIDER_o352,
         MODEL_son,
@@ -244,9 +246,9 @@ EvtScript N(EVS_SetupMayorRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_MayorOffice)),
-        EVT_PTR(N(EVS_MoveWalls_MayorOffice)),
+        EVT_PTR(N(EVS_SetWallRot_MayorOffice)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_MayorOffice)),
+        EVT_PTR(N(EVS_RoomListener_MayorOffice)),
         COLLIDER_ttsn,
         COLLIDER_o353,
         MODEL_o430,
@@ -265,9 +267,9 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_MiddleHouse)),
-        EVT_PTR(N(EVS_MoveWalls_MiddleHouse)),
+        EVT_PTR(N(EVS_SetWallRot_MiddleHouse)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_MiddleHouse)),
+        EVT_PTR(N(EVS_RoomListener_MiddleHouse)),
         COLLIDER_ttf2,
         COLLIDER_o354,
         MODEL_f2,
@@ -277,9 +279,9 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_UpperRightHouse)),
-        EVT_PTR(N(EVS_MoveWalls_RightHouse)),
+        EVT_PTR(N(EVS_SetWallRot_RightHouse)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_UpperRightHouse)),
+        EVT_PTR(N(EVS_RoomListener_UpperRightHouse)),
         COLLIDER_ttm,
         COLLIDER_o355,
         MODEL_min,
@@ -289,9 +291,9 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_LowerRightHouse)),
-        EVT_PTR(N(EVS_MoveWalls_RightHouse)),
+        EVT_PTR(N(EVS_SetWallRot_RightHouse)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_LowerRightHouse)),
+        EVT_PTR(N(EVS_RoomListener_LowerRightHouse)),
         COLLIDER_o376,
         COLLIDER_o390,
         MODEL_min,

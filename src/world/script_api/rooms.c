@@ -30,13 +30,6 @@ enum {
 };
 
 enum {
-    ROOM_UPDATE_ENTER_BEGIN     = 0,
-    ROOM_UPDATE_ENTER_DONE      = 1,
-    ROOM_UPDATE_EXIT_BEGIN      = 2,
-    ROOM_UPDATE_EXIT_END        = 3,
-};
-
-enum {
     ROOM_MOVE_WALL_0            = 0,
     ROOM_MOVE_WALL_1            = 1,
     ROOM_MOVE_WALL_2            = 2,

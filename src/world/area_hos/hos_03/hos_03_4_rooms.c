@@ -6,7 +6,7 @@ EvtScript N(EVS_SetDoorRot_House) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_House) = {
+EvtScript N(EVS_SetWallRot_House) = {
     EVT_SET(LVar1, LVar0)
     EVT_MULF(LVar1, EVT_FLOAT(-1.0))
     EVT_CALL(RotateGroup, MODEL_g71, LVar1, 0, 0, 1)
@@ -32,7 +32,7 @@ EvtScript N(EVS_SetDoorRot_Shop) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_Shop) = {
+EvtScript N(EVS_SetWallRot_Shop) = {
     EVT_SET(LVar1, LVar0)
     EVT_MULF(LVar1, EVT_FLOAT(-1.0))
     EVT_CALL(RotateGroup, MODEL_g64, LVar1, 0, 0, 1)
@@ -57,7 +57,7 @@ EvtScript N(EVS_SetDoorRot_ToadHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_ToadHouse) = {
+EvtScript N(EVS_SetWallRot_ToadHouse) = {
     EVT_SET(LVar1, LVar0)
     EVT_MULF(LVar1, EVT_FLOAT(-1.0))
     EVT_CALL(RotateGroup, MODEL_g58, LVar1, 0, 0, 1)
@@ -87,7 +87,7 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_House)),
-        EVT_PTR(N(EVS_MoveWalls_House)),
+        EVT_PTR(N(EVS_SetWallRot_House)),
         EVT_PTR(N(EVS_DropDoor_House)),
         NULL,
         COLLIDER_o99,
@@ -98,7 +98,7 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_Shop)),
-        EVT_PTR(N(EVS_MoveWalls_Shop)),
+        EVT_PTR(N(EVS_SetWallRot_Shop)),
         NULL,
         NULL,
         COLLIDER_o72,
@@ -109,7 +109,7 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
-        EVT_PTR(N(EVS_MoveWalls_ToadHouse)),
+        EVT_PTR(N(EVS_SetWallRot_ToadHouse)),
         NULL,
         NULL,
         COLLIDER_o100,

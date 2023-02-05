@@ -16,7 +16,7 @@ EvtScript N(EVS_SetDoorRot_House) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_House) = {
+EvtScript N(EVS_SetWallRot_House) = {
     EVT_CALL(RotateGroup, MODEL_g60, LVar0, 1, 0, 0)
     EVT_CALL(RotateGroup, MODEL_g34, LVar0, -1, 0, 0)
     EVT_SWITCH(LVar0)
@@ -39,17 +39,19 @@ EvtScript N(EVS_MoveWalls_House) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_House) = {
+EvtScript N(EVS_RoomListener_House) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(N(SetAmbienceVolumeHalf_Rooms))
             EVT_CALL(EnableGroup, MODEL_g20, TRUE)
             EVT_CALL(EnableGroup, MODEL_g21, TRUE)
             EVT_CALL(EnableGroup, MODEL_g49, TRUE)
             EVT_CALL(EnableModel, MODEL_g56, TRUE)
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(2)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(N(SetAmbienceVolumeFull_Rooms))
             EVT_CALL(EnableGroup, MODEL_g20, FALSE)
             EVT_CALL(EnableGroup, MODEL_g21, FALSE)
@@ -70,9 +72,9 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_House)),
-        EVT_PTR(N(EVS_MoveWalls_House)),
+        EVT_PTR(N(EVS_SetWallRot_House)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_House)),
+        EVT_PTR(N(EVS_RoomListener_House)),
         COLLIDER_o246,
         COLLIDER_o245,
         MODEL_g62,
@@ -94,8 +96,8 @@ EvtScript N(EVS_SetupRooms) = {
             EVT_CALL(N(SetAmbienceVolumeHalf_Rooms))
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
-            EVT_SET(LVar0, 3)
-            EVT_EXEC(N(EVS_ToggleVis_House))
+            EVT_SET(LVar0, ROOM_UPDATE_EXIT_END)
+            EVT_EXEC(N(EVS_RoomListener_House))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

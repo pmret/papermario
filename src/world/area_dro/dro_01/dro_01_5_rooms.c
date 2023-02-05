@@ -6,7 +6,7 @@ EvtScript N(EVS_SetDoorRot_LeftHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_LeftHouse) = {
+EvtScript N(EVS_SetWallRot_LeftHouse) = {
     EVT_SET(LVar1, LVar0)
     EVT_DIVF(LVar1, 50)
     EVT_CALL(TranslateModel, MODEL_1_m_kabe, 0, LVar1, 0)
@@ -34,7 +34,7 @@ EvtScript N(EVS_SetDoorRot_Shop) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_Shop) = {
+EvtScript N(EVS_SetWallRot_Shop) = {
     EVT_SET(LVar1, LVar0)
     EVT_DIVF(LVar1, 50)
     EVT_CALL(TranslateModel, MODEL_m_m_kabe, 0, LVar1, 0)
@@ -65,7 +65,7 @@ EvtScript N(EVS_DropDoor_RightHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_RightHouse) = {
+EvtScript N(EVS_SetWallRot_RightHouse) = {
     EVT_IF_EQ(LVar0, 90)
         EVT_CALL(EnableModel, MODEL_nuno, FALSE)
     EVT_ELSE
@@ -88,20 +88,20 @@ EvtScript N(EVS_MoveWalls_RightHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_LeftHouse) = {
+EvtScript N(EVS_RoomListener_LeftHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_ie_naka, TRUE)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_ie_naka, FALSE)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_Shop) = {
+EvtScript N(EVS_RoomListener_Shop) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SWITCH(GB_StoryProgress)
                 EVT_CASE_LT(STORY_CH2_SPOKE_WITH_SHEEK)
                     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_017B, 160, 40)
@@ -112,13 +112,13 @@ EvtScript N(EVS_ToggleVis_Shop) = {
                     EVT_RETURN
             EVT_END_SWITCH
             EVT_CALL(SetGroupEnabled, MODEL_mise_naka, 1)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_THREAD
                 EVT_WAIT(45)
                 EVT_CALL(SetNpcPos, NPC_Mouser_ShopOwner, 33, 0, -375)
                 EVT_CALL(SetNpcYaw, NPC_Mouser_ShopOwner, 180)
             EVT_END_THREAD
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_mise_naka, 0)
             EVT_SET(AB_DRO_SHOP_PREV1, 0)
             EVT_SET(AB_DRO_SHOP_PREV2, 0)
@@ -127,12 +127,13 @@ EvtScript N(EVS_ToggleVis_Shop) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_RightHouse) = {
+EvtScript N(EVS_RoomListener_RightHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_ie2_naka, 1)
-        EVT_CASE_EQ(2)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_ie2_naka, 0)
     EVT_END_SWITCH
     EVT_RETURN
@@ -158,9 +159,9 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_5),
         EVT_PTR(N(EVS_SetDoorRot_LeftHouse)),
-        EVT_PTR(N(EVS_MoveWalls_LeftHouse)),
+        EVT_PTR(N(EVS_SetWallRot_LeftHouse)),
         EVT_PTR(N(EVS_DropDoor_LeftHouse)),
-        EVT_PTR(N(EVS_ToggleVis_LeftHouse)),
+        EVT_PTR(N(EVS_RoomListener_LeftHouse)),
         COLLIDER_ei1_1,
         COLLIDER_ei1_2,
         MODEL_k_i1,
@@ -168,9 +169,9 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_5),
         EVT_PTR(N(EVS_SetDoorRot_Shop)),
-        EVT_PTR(N(EVS_MoveWalls_Shop)),
+        EVT_PTR(N(EVS_SetWallRot_Shop)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_Shop)),
+        EVT_PTR(N(EVS_RoomListener_Shop)),
         COLLIDER_em_1,
         COLLIDER_em_2,
         MODEL_k_m1,
@@ -178,17 +179,17 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_5),
         EVT_PTR(N(EVS_SetDoorRot_RightHouse)),
-        EVT_PTR(N(EVS_MoveWalls_RightHouse)),
+        EVT_PTR(N(EVS_SetWallRot_RightHouse)),
         EVT_PTR(N(EVS_DropDoor_RightHouse)),
-        EVT_PTR(N(EVS_ToggleVis_RightHouse)),
+        EVT_PTR(N(EVS_RoomListener_RightHouse)),
         COLLIDER_ei2_1,
         COLLIDER_ei_2,
         MODEL_k_i2,
         EVT_PTR(N(InteriorNPCs_RightHouse)))
-    EVT_SET(LVar0, 3)
-    EVT_EXEC(N(EVS_ToggleVis_LeftHouse))
-    EVT_EXEC(N(EVS_ToggleVis_Shop))
-    EVT_EXEC(N(EVS_ToggleVis_RightHouse))
+    EVT_SET(LVar0, ROOM_UPDATE_EXIT_END)
+    EVT_EXEC(N(EVS_RoomListener_LeftHouse))
+    EVT_EXEC(N(EVS_RoomListener_Shop))
+    EVT_EXEC(N(EVS_RoomListener_RightHouse))
     EVT_RETURN
     EVT_END
 };

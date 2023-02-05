@@ -31,14 +31,14 @@ EvtScript N(EVS_UnusedDoorSetup) = {
     EVT_END
 };
 
-EvtScript N(EVS_OpenDoor_Hideout) = {
+EvtScript N(EVS_SetDoorRot_Hideout) = {
     EVT_CALL(RotateModel, MODEL_o769, LVar0, 0, -1, 0)
     EVT_CALL(RotateModel, MODEL_o770, LVar0, 0, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_Hideout) = {
+EvtScript N(EVS_SetWallRot_Hideout) = {
     EVT_SET(LVar1, LVar0)
     EVT_DIVF(LVar1, 50)
     EVT_CALL(TranslateModel, MODEL_6_kabe, 0, LVar1, 0)
@@ -62,13 +62,13 @@ EvtScript N(EVS_DropDoor_Hideout) = {
     EVT_END
 };
 
-EvtScript N(EVS_OpenDoor_ToadHouse) = {
+EvtScript N(EVS_SetDoorRot_ToadHouse) = {
     EVT_CALL(RotateModel, MODEL_4_doa, LVar0, 0, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_ToadHouse) = {
+EvtScript N(EVS_SetWallRot_ToadHouse) = {
     EVT_SET(LVar1, LVar0)
     EVT_DIVF(LVar1, 50)
     EVT_CALL(RotateGroup, MODEL_mobe, LVar0, 0, 0, -1)
@@ -87,12 +87,12 @@ EvtScript N(EVS_SetupCamSpeed) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_ToadHouse) = {
+EvtScript N(EVS_RoomListener_ToadHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_ie4_naka, 1)
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_ie4_naka, 0)
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.334))
     EVT_END_SWITCH
@@ -100,9 +100,9 @@ EvtScript N(EVS_ToggleVis_ToadHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_Hideout) = {
+EvtScript N(EVS_RoomListener_Hideout) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_ie5_naka, 1)
             EVT_CALL(SetCamType, CAM_DEFAULT, 0, FALSE)
             EVT_CALL(SetCamDistance, CAM_DEFAULT, 260)
@@ -113,13 +113,13 @@ EvtScript N(EVS_ToggleVis_Hideout) = {
             EVT_CALL(SetPanTarget, CAM_DEFAULT, -395, 140, -150)
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_CALL(SetPanTarget, CAM_DEFAULT, -365, 140, -145)
             EVT_CALL(SetCamPitch, CAM_DEFAULT, 20, -7)
             EVT_CALL(SetCamDistance, CAM_DEFAULT, 400)
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
             EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_ie5_naka, 0)
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.334))
@@ -216,10 +216,10 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_END_IF
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_4),
-        EVT_PTR(N(EVS_OpenDoor_Hideout)),
-        EVT_PTR(N(EVS_MoveWalls_Hideout)),
+        EVT_PTR(N(EVS_SetDoorRot_Hideout)),
+        EVT_PTR(N(EVS_SetWallRot_Hideout)),
         EVT_PTR(N(EVS_DropDoor_Hideout)),
-        EVT_PTR(N(EVS_ToggleVis_Hideout)),
+        EVT_PTR(N(EVS_RoomListener_Hideout)),
         COLLIDER_o1252,
         COLLIDER_o1253,
         MODEL_k_i5,
@@ -230,18 +230,18 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_END_IF
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_TYPE_5),
-        EVT_PTR(N(EVS_OpenDoor_ToadHouse)),
-        EVT_PTR(N(EVS_MoveWalls_ToadHouse)),
+        EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
+        EVT_PTR(N(EVS_SetWallRot_ToadHouse)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_ToadHouse)),
+        EVT_PTR(N(EVS_RoomListener_ToadHouse)),
         COLLIDER_o1204,
         COLLIDER_o1261,
         MODEL_k_i4,
         EVT_PTR(N(InsideNPCs_ToadHouse)))
-    EVT_SET(LVar0, 3)
-    EVT_EXEC(N(EVS_ToggleVis_Hideout))
+    EVT_SET(LVar0, ROOM_UPDATE_EXIT_END)
+    EVT_EXEC(N(EVS_RoomListener_Hideout))
     EVT_EXEC(N(EVS_SetupCamSpeed))
-    EVT_EXEC(N(EVS_ToggleVis_ToadHouse))
+    EVT_EXEC(N(EVS_RoomListener_ToadHouse))
     EVT_RETURN
     EVT_END
 };

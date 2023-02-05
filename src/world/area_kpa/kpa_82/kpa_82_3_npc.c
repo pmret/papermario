@@ -181,7 +181,7 @@ EvtScript N(EVS_SetCam_BeforeBattle) = {
     EVT_END
 };
 
-EvtScript N(EVS_OpenDoors) = {
+EvtScript N(EVS_SetDoorRots) = {
     EVT_CALL(MakeLerp, 0, 60, 30, EASING_LINEAR)
     EVT_CALL(PlaySound, SOUND_225)
     EVT_LABEL(0)
@@ -1093,7 +1093,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_SET(MF_Sync_MusicChange, TRUE)
         EVT_WAIT(2)
         EVT_CALL(SetMusicTrack, 0, SONG_NORMAL_BATTLE, 0, 8)
-        EVT_EXEC_WAIT(N(EVS_OpenDoors))
+        EVT_EXEC_WAIT(N(EVS_SetDoorRots))
         EVT_EXEC_WAIT(N(EVS_Release_Wave))
         EVT_WAIT(200)
         EVT_THREAD
@@ -1147,7 +1147,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_CALL(SetNpcPos, NPC_AntiGuy_03, 100, 0, 0)
     EVT_CALL(InterpPlayerYaw, 315, 0)
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 315, 0)
-    EVT_EXEC_WAIT(N(EVS_OpenDoors))
+    EVT_EXEC_WAIT(N(EVS_SetDoorRots))
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0042)
     EVT_CALL(PlayerFaceNpc, NPC_AntiGuy_02, 5)
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)

@@ -29,7 +29,7 @@ s16 N(Models_PostOfficeWalls_Unused)[] = {
     MODEL_k13,
 };
 
-EvtScript N(EVS_MoveWalls_PostOffice) = {
+EvtScript N(EVS_SetWallRot_PostOffice) = {
     EVT_SET(LVar1, LVar0)
     EVT_CALL(RotateModel, MODEL_k11, LVar1, 1, 0, 0)
     EVT_CALL(RotateModel, MODEL_k12, LVar1, 1, 0, 0)
@@ -62,12 +62,12 @@ EvtScript N(EVS_DropDoor_PostOffice) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_PostOffice) = {
+EvtScript N(EVS_RoomListener_PostOffice) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_yubin_in, 1)
             EVT_EXEC_WAIT(N(EVS_Scene_MailbagTheft))
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_yubin_in, 0)
     EVT_END_SWITCH
     EVT_RETURN
@@ -90,7 +90,7 @@ s16 N(Models_ToadHouseWalls_Unused)[] = {
     MODEL_kk11,
 };
 
-EvtScript N(EVS_MoveWalls_ToadHouse) = {
+EvtScript N(EVS_SetWallRot_ToadHouse) = {
     EVT_SET(LVar1, LVar0)
     EVT_MULF(LVar1, EVT_FLOAT(1.0))
     EVT_CALL(RotateModel, MODEL_kk11, LVar1, 1, 0, 0)
@@ -110,12 +110,12 @@ EvtScript N(EVS_MoveWalls_ToadHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_ToadHouse) = {
+EvtScript N(EVS_RoomListener_ToadHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_kino_in, 1)
             EVT_SET(MF_InsideToadHouse, TRUE)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_kino_in, 0)
             EVT_SET(MF_InsideToadHouse, FALSE)
     EVT_END_SWITCH
@@ -129,7 +129,7 @@ EvtScript N(EVS_SetDoorRot_MerlonHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_MerlonHouse) = {
+EvtScript N(EVS_SetWallRot_MerlonHouse) = {
     EVT_SET(LVar1, LVar0)
     EVT_MUL(LVar1, 2)
     EVT_CALL(RotateGroup, MODEL_off_kabe, LVar1, 0, 1, 0)
@@ -137,9 +137,9 @@ EvtScript N(EVS_MoveWalls_MerlonHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_MerlonHouse) = {
+EvtScript N(EVS_RoomListener_MerlonHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SWITCH(GB_StoryProgress)
                 EVT_CASE_LT(STORY_CH1_SPOKE_WITH_MERLIN)
                     EVT_EXEC_WAIT(N(EVS_MerlonShooAway))
@@ -163,9 +163,11 @@ EvtScript N(EVS_ToggleVis_MerlonHouse) = {
             EVT_END_SWITCH
             EVT_CALL(SetGroupEnabled, MODEL_dr_in, 1)
             EVT_SET(MF_MusicMixTrigger1, TRUE)
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(2)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_dr_in, 0)
             EVT_SET(MF_MusicMixTrigger1, FALSE)
     EVT_END_SWITCH
@@ -213,9 +215,9 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_PostOffice)),
-        EVT_PTR(N(EVS_MoveWalls_PostOffice)),
+        EVT_PTR(N(EVS_SetWallRot_PostOffice)),
         EVT_PTR(N(EVS_DropDoor_PostOffice)),
-        EVT_PTR(N(EVS_ToggleVis_PostOffice)),
+        EVT_PTR(N(EVS_RoomListener_PostOffice)),
         COLLIDER_deilit1,
         COLLIDER_deilit1u,
         MODEL_post_office,
@@ -224,9 +226,9 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
-        EVT_PTR(N(EVS_MoveWalls_ToadHouse)),
+        EVT_PTR(N(EVS_SetWallRot_ToadHouse)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_ToadHouse)),
+        EVT_PTR(N(EVS_RoomListener_ToadHouse)),
         COLLIDER_deilit2,
         COLLIDER_deilit2u,
         MODEL_kinopi, 
@@ -235,19 +237,19 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_MerlonHouse)),
-        EVT_PTR(N(EVS_MoveWalls_MerlonHouse)),
+        EVT_PTR(N(EVS_SetWallRot_MerlonHouse)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_MerlonHouse)),
+        EVT_PTR(N(EVS_RoomListener_MerlonHouse)),
         COLLIDER_deilitd,
         COLLIDER_deilitud,
         MODEL_de_aru,
         EVT_PTR(N(InsideNPCs_MerlonHouse)))
     // initial visibility
     EVT_EXEC(N(EVS_SpinRoof))
-    EVT_SET(LVar0, VIS_GROUP_3)
-    EVT_EXEC(N(EVS_ToggleVis_PostOffice))
-    EVT_EXEC(N(EVS_ToggleVis_ToadHouse))
-    EVT_EXEC(N(EVS_ToggleVis_MerlonHouse))
+    EVT_SET(LVar0, ROOM_UPDATE_EXIT_END)
+    EVT_EXEC(N(EVS_RoomListener_PostOffice))
+    EVT_EXEC(N(EVS_RoomListener_ToadHouse))
+    EVT_EXEC(N(EVS_RoomListener_MerlonHouse))
     EVT_RETURN
     EVT_END
 };

@@ -463,7 +463,7 @@ EvtScript N(EVS_BreakBlock_DropShell) = {
 #include "npcs_crisis.inc.c"
 #include "npcs_normal.inc.c"
 
-EvtScript N(EVS_OpenDoor_KoloradoHouse) = {
+EvtScript N(EVS_AnimateDoor_KoloradoHouse) = {
     EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_BASIC_DOOR_OPEN, 0)
     EVT_CALL(MakeLerp, 0, 80, 15, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
@@ -495,12 +495,12 @@ EvtScript N(EVS_KoloradoWife_FetchFromHouse) = {
     EVT_CALL(EnableGroup, MODEL_g47, TRUE)
     EVT_SET(LVarA, MODEL_g42)
     EVT_SET(LVar9, COLLIDER_o310)
-    EVT_EXEC(N(EVS_OpenDoor_KoloradoHouse))
+    EVT_EXEC(N(EVS_AnimateDoor_KoloradoHouse))
     EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -314, -94, 10)
     EVT_WAIT(10)
     EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -304, -161, 20)
     EVT_WAIT(100)
-    EVT_EXEC(N(EVS_OpenDoor_KoloradoHouse))
+    EVT_EXEC(N(EVS_AnimateDoor_KoloradoHouse))
     EVT_WAIT(10)
     EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -308, -102, 20)
     EVT_WAIT(10)
@@ -519,11 +519,11 @@ EvtScript N(EVS_KoloradoWife_FetchFromOffice) = {
     EVT_SET(LVarA, MODEL_g41)
     EVT_SET(LVar9, COLLIDER_o314)
     EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -277, -186, 20)
-    EVT_EXEC(N(EVS_OpenDoor_KoloradoHouse))
+    EVT_EXEC(N(EVS_AnimateDoor_KoloradoHouse))
     EVT_WAIT(10)
     EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -265, -261, 20)
     EVT_WAIT(100)
-    EVT_EXEC(N(EVS_OpenDoor_KoloradoHouse))
+    EVT_EXEC(N(EVS_AnimateDoor_KoloradoHouse))
     EVT_WAIT(10)
     EVT_CALL(NpcMoveTo, NPC_KoloradoWife, -277, -186, 20)
     EVT_WAIT(10)

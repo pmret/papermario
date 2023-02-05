@@ -30,7 +30,7 @@ EvtScript N(EVS_SetDoorRot_TayceT) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_TayceT) = {
+EvtScript N(EVS_SetWallRot_TayceT) = {
     EVT_SET(LVar1, LVar0)
     EVT_CALL(RotateModel, MODEL_ck1, LVar1, 1, 0, 0)
     EVT_CALL(RotateModel, MODEL_ck2, LVar1, 1, 0, 0)
@@ -42,12 +42,12 @@ EvtScript N(EVS_MoveWalls_TayceT) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_TayceT) = {
+EvtScript N(EVS_RoomListener_TayceT) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_cook_in, 1)
             EVT_SET(MF_MusicMixTrigger1, TRUE)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_cook_in, 0)
             EVT_SET(MF_MusicMixTrigger1, FALSE)
     EVT_END_SWITCH
@@ -61,7 +61,7 @@ EvtScript N(EVS_SetDoorRot_BlueHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_BlueHouse) = {
+EvtScript N(EVS_SetWallRot_BlueHouse) = {
     EVT_SET(LVar1, LVar0)
     EVT_CALL(RotateModel, MODEL_sk1, LVar1, 0, 0, 1)
     EVT_CALL(RotateModel, MODEL_sk2, LVar1, 0, 0, 1)
@@ -69,21 +69,21 @@ EvtScript N(EVS_MoveWalls_BlueHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_BlueHouse) = {
+EvtScript N(EVS_RoomListener_BlueHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_IF_EQ(GF_MAC02_UnlockedHouse, FALSE)
                 EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Inspect_LockedFromInside, 160, 40)
                 EVT_SET(LVar0, -1)
                 EVT_RETURN
             EVT_END_IF
             EVT_CALL(SetGroupEnabled, MODEL_souko_in, 1)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_IF_EQ(GF_MAC02_UnlockedHouse, FALSE)
                 EVT_SET(LVar0, -1)
                 EVT_RETURN
             EVT_END_IF
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_souko_in, 0)
     EVT_END_SWITCH
     EVT_RETURN
@@ -104,9 +104,9 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_TayceT)),
-        EVT_PTR(N(EVS_MoveWalls_TayceT)),
+        EVT_PTR(N(EVS_SetWallRot_TayceT)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_TayceT)),
+        EVT_PTR(N(EVS_RoomListener_TayceT)),
         COLLIDER_deilit1u,
         COLLIDER_deilit1,
         MODEL_cooking,
@@ -115,9 +115,9 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
         EVT_PTR(N(EVS_SetDoorRot_BlueHouse)),
-        EVT_PTR(N(EVS_MoveWalls_BlueHouse)),
+        EVT_PTR(N(EVS_SetWallRot_BlueHouse)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_BlueHouse)),
+        EVT_PTR(N(EVS_RoomListener_BlueHouse)),
         COLLIDER_deilit2,
         COLLIDER_deilit2u,
         MODEL_souko,
@@ -125,16 +125,16 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, mac_02_ENTRY_5)
         EVT_SET(LVar0, 3)
-        EVT_EXEC(N(EVS_ToggleVis_TayceT))
+        EVT_EXEC(N(EVS_RoomListener_TayceT))
         EVT_CALL(SetGroupEnabled, MODEL_souko_in, 1)
         EVT_CALL(N(InitEntryFromTunnels))
         EVT_SET(LVar0, 90)
         EVT_CALL(RotateModel, MODEL_sk1, LVar0, 0, 0, 1)
         EVT_CALL(RotateModel, MODEL_sk2, LVar0, 0, 0, 1)
     EVT_ELSE
-        EVT_SET(LVar0, 3)
-        EVT_EXEC(N(EVS_ToggleVis_TayceT))
-        EVT_EXEC(N(EVS_ToggleVis_BlueHouse))
+        EVT_SET(LVar0, ROOM_UPDATE_EXIT_END)
+        EVT_EXEC(N(EVS_RoomListener_TayceT))
+        EVT_EXEC(N(EVS_RoomListener_BlueHouse))
     EVT_END_IF
     EVT_RETURN
     EVT_END

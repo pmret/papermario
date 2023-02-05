@@ -87,7 +87,7 @@ EvtScript N(EVS_SetDoorRot_KoloradoHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_KoloradoHouse) = {
+EvtScript N(EVS_SetWallRot_KoloradoHouse) = {
     EVT_MULF(LVar0, EVT_FLOAT(-0.5))
     EVT_CALL(RotateModel, MODEL_o151, LVar0, 1, 0, 0)
     EVT_CALL(RotateModel, MODEL_o152, LVar0, 1, 0, 0)
@@ -112,7 +112,7 @@ EvtScript N(EVS_SetDoorRot_KoloradoOffice) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_KoloradoOffice) = {
+EvtScript N(EVS_SetWallRot_KoloradoOffice) = {
     EVT_SET(LVar1, LVar0)
     EVT_SUB(LVar1, 90)
     EVT_MULF(LVar0, EVT_FLOAT(1.0))
@@ -163,7 +163,7 @@ EvtScript N(EVS_SetWallsRot_KooperHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_KooperHouse) = {
+EvtScript N(EVS_SetWallRot_KooperHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_WAIT(20)
@@ -189,7 +189,7 @@ EvtScript N(EVS_SetDoorRot_KootHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_KootHouse) = {
+EvtScript N(EVS_SetWallRot_KootHouse) = {
     EVT_MULF(LVar0, EVT_FLOAT(0.5))
     EVT_CALL(RotateModel, MODEL_o225, LVar0, -1, 0, 0)
     EVT_CALL(RotateModel, MODEL_o224, LVar0, -1, 0, 0)
@@ -208,9 +208,9 @@ EvtScript N(EVS_DropDoor_KootHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_KooperHouse) = {
+EvtScript N(EVS_RoomListener_KooperHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_NOK_12, TRUE)
             EVT_IF_LT(GB_StoryProgress, STORY_CH1_PROMISED_TO_HELP_KOOPER)
                 EVT_EXEC_WAIT(N(EVS_8024A8EC))
@@ -218,12 +218,12 @@ EvtScript N(EVS_ToggleVis_KooperHouse) = {
                 EVT_RETURN
             EVT_END_IF
             EVT_CALL(SetGroupEnabled, MODEL_g111, 1)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
             EVT_EXEC(N(EVS_8024A908))
             EVT_SET(AF_NOK_10, TRUE)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_SET(AF_NOK_10, FALSE)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_NOK_12, FALSE)
             EVT_CALL(SetGroupEnabled, MODEL_g111, 0)
     EVT_END_SWITCH
@@ -231,26 +231,30 @@ EvtScript N(EVS_ToggleVis_KooperHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_KoloradoHouse) = {
+EvtScript N(EVS_RoomListener_KoloradoHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_g45, 1)
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(2)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_g45, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_KootHouse) = {
+EvtScript N(EVS_RoomListener_KootHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_g63, 1)
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(2)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_g63, 0)
     EVT_END_SWITCH
     EVT_RETURN
@@ -289,9 +293,9 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_CALL(CreateMapRoom,
             PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
             EVT_PTR(N(EVS_SetDoorRot_KoloradoHouse)),
-            EVT_PTR(N(EVS_MoveWalls_KoloradoHouse)),
+            EVT_PTR(N(EVS_SetWallRot_KoloradoHouse)),
             EVT_PTR(N(EVS_DropDoor_KoloradoHouse)),
-            EVT_PTR(N(EVS_ToggleVis_KoloradoHouse)),
+            EVT_PTR(N(EVS_RoomListener_KoloradoHouse)),
             COLLIDER_o310,
             COLLIDER_o313,
             MODEL_sakuji,
@@ -300,7 +304,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_CALL(CreateMapRoom,
             PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
             EVT_PTR(N(EVS_SetDoorRot_KoloradoOffice)),
-            EVT_PTR(N(EVS_MoveWalls_KoloradoOffice)),
+            EVT_PTR(N(EVS_SetWallRot_KoloradoOffice)),
             NULL,
             NULL,
             COLLIDER_o314,
@@ -313,9 +317,9 @@ EvtScript N(EVS_SetupRooms) = {
             EVT_CALL(CreateMapRoom,
                 PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
                 EVT_PTR(N(EVS_SetDoorRot_KoloradoHouse)),
-                EVT_PTR(N(EVS_MoveWalls_KoloradoHouse)),
+                EVT_PTR(N(EVS_SetWallRot_KoloradoHouse)),
                 EVT_PTR(N(EVS_DropDoor_KoloradoHouse)),
-                EVT_PTR(N(EVS_ToggleVis_KoloradoHouse)),
+                EVT_PTR(N(EVS_RoomListener_KoloradoHouse)),
                 COLLIDER_o310,
                 COLLIDER_o313,
                 MODEL_sakuji,
@@ -324,7 +328,7 @@ EvtScript N(EVS_SetupRooms) = {
             EVT_CALL(CreateMapRoom,
                 PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
                 EVT_PTR(N(EVS_SetDoorRot_KoloradoOffice)),
-                EVT_PTR(N(EVS_MoveWalls_KoloradoOffice)),
+                EVT_PTR(N(EVS_SetWallRot_KoloradoOffice)),
                 NULL,
                 NULL,
                 COLLIDER_o314,
@@ -336,9 +340,9 @@ EvtScript N(EVS_SetupRooms) = {
             EVT_CALL(CreateMapRoom,
                 PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
                 EVT_PTR(N(EVS_SetDoorRot_KoloradoHouse)),
-                EVT_PTR(N(EVS_MoveWalls_KoloradoHouse)),
+                EVT_PTR(N(EVS_SetWallRot_KoloradoHouse)),
                 EVT_PTR(N(EVS_DropDoor_KoloradoHouse)),
-                EVT_PTR(N(EVS_ToggleVis_KoloradoHouse)),
+                EVT_PTR(N(EVS_RoomListener_KoloradoHouse)),
                 COLLIDER_o310,
                 COLLIDER_o313,
                 MODEL_sakuji,
@@ -347,7 +351,7 @@ EvtScript N(EVS_SetupRooms) = {
             EVT_CALL(CreateMapRoom,
                 PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
                 EVT_PTR(N(EVS_SetDoorRot_KoloradoOffice)),
-                EVT_PTR(N(EVS_MoveWalls_KoloradoOffice)),
+                EVT_PTR(N(EVS_SetWallRot_KoloradoOffice)),
                 NULL,
                 NULL,
                 COLLIDER_o314,
@@ -361,9 +365,9 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_CALL(CreateMapRoom,
             PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             EVT_PTR(N(EVS_SetDoorRot_KooperFrontDoor)),
-            EVT_PTR(N(EVS_MoveWalls_KooperHouse)),
+            EVT_PTR(N(EVS_SetWallRot_KooperHouse)),
             NULL,
-            EVT_PTR(N(EVS_ToggleVis_KooperHouse)),
+            EVT_PTR(N(EVS_RoomListener_KooperHouse)),
             COLLIDER_o284,
             COLLIDER_o287,
             MODEL_kameki,
@@ -372,9 +376,9 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_CALL(CreateMapRoom,
             PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             EVT_PTR(N(EVS_SetDoorRot_KooperBackDoor)),
-            EVT_PTR(N(EVS_MoveWalls_KooperHouse)),
+            EVT_PTR(N(EVS_SetWallRot_KooperHouse)),
             NULL,
-            EVT_PTR(N(EVS_ToggleVis_KooperHouse)),
+            EVT_PTR(N(EVS_RoomListener_KooperHouse)),
             COLLIDER_o302,
             COLLIDER_o299,
             MODEL_kameki,
@@ -384,9 +388,9 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_CALL(CreateMapRoom,
             PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             EVT_PTR(N(EVS_SetDoorRot_KooperFrontDoor)),
-            EVT_PTR(N(EVS_MoveWalls_KooperHouse)),
+            EVT_PTR(N(EVS_SetWallRot_KooperHouse)),
             NULL,
-            EVT_PTR(N(EVS_ToggleVis_KooperHouse)),
+            EVT_PTR(N(EVS_RoomListener_KooperHouse)),
             COLLIDER_o284,
             COLLIDER_o287,
             MODEL_kameki,
@@ -395,9 +399,9 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_CALL(CreateMapRoom,
             PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             EVT_PTR(N(EVS_SetDoorRot_KooperBackDoor)),
-            EVT_PTR(N(EVS_MoveWalls_KooperHouse)),
+            EVT_PTR(N(EVS_SetWallRot_KooperHouse)),
             NULL,
-            EVT_PTR(N(EVS_ToggleVis_KooperHouse)),
+            EVT_PTR(N(EVS_RoomListener_KooperHouse)),
             COLLIDER_o302,
             COLLIDER_o299,
             MODEL_kameki,
@@ -407,17 +411,17 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
         EVT_PTR(N(EVS_SetDoorRot_KootHouse)),
-        EVT_PTR(N(EVS_MoveWalls_KootHouse)),
+        EVT_PTR(N(EVS_SetWallRot_KootHouse)),
         EVT_PTR(N(EVS_DropDoor_KootHouse)),
-        EVT_PTR(N(EVS_ToggleVis_KootHouse)),
+        EVT_PTR(N(EVS_RoomListener_KootHouse)),
         COLLIDER_o226,
         COLLIDER_o283,
         MODEL_mura,
         EVT_PTR(N(InteriorNPCs_KootHouse)))
-    EVT_SET(LVar0, 3)
-    EVT_EXEC(N(EVS_ToggleVis_KoloradoHouse))
-    EVT_EXEC(N(EVS_ToggleVis_KooperHouse))
-    EVT_EXEC(N(EVS_ToggleVis_KootHouse))
+    EVT_SET(LVar0, ROOM_UPDATE_EXIT_END)
+    EVT_EXEC(N(EVS_RoomListener_KoloradoHouse))
+    EVT_EXEC(N(EVS_RoomListener_KooperHouse))
+    EVT_EXEC(N(EVS_RoomListener_KootHouse))
     EVT_EXEC(N(EVS_SpinKooperCeilingFan))
     EVT_EXEC(N(EVS_PlayKooperVsFuzzyEffects))
     EVT_RETURN
