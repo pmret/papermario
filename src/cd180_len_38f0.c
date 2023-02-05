@@ -412,16 +412,16 @@ void set_screen_overlay_center(s32 idx, s32 arg1, s32 arg2, s32 arg3) {
 
 void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z) {
     Camera* camera = &gCameras[gCurrentCameraID];
-    f32 tx, ty, tz, ts;
+    f32 tx, ty, tz, tw;
 
     switch (idx) {
         case 0:
         case 1:
-            transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &tx, &ty, &tz, &ts);
-            ts = 1.0f / ts;
-            tx *= ts;
-            ty *= -ts;
-            tz *= ts;
+            transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &tx, &ty, &tz, &tw);
+            tw = 1.0f / tw;
+            tx *= tw;
+            ty *= -tw;
+            tz *= tw;
             tx = (((tx * camera->viewportW) + camera->viewportW) * 0.5) + camera->viewportStartX;
             ty = (((ty * camera->viewportH) + camera->viewportH) * 0.5) + camera->viewportStartY;
 

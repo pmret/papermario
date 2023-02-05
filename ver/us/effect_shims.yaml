@@ -20,7 +20,7 @@
 - shim_load_effect
 - shim_sqrtf
 - shim_mdl_draw_hidden_panel_surface
-- shim_func_8011CFBC
+- shim_is_point_visible
 - shim_guPerspectiveF
 - shim_guMtxIdentF
 - shim_transform_point

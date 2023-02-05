@@ -442,12 +442,12 @@ void get_cam_viewport(s32 camID, u16* x, u16* y, u16* width, u16* height) {
 
 void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ) {
     Camera* camera = &gCameras[camID];
-    f32 tS;
+    f32 tW;
     f32 tZ;
     f32 tY;
     f32 tX;
 
-    transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &tX, &tY, &tZ, &tS);
+    transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &tX, &tY, &tZ, &tW);
 
     *screenZ = tZ + 5000.0f;
     if (*screenZ < 0) {
@@ -456,14 +456,14 @@ void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screen
         *screenZ = 10000;
     }
 
-    if (tS < 0.01 && tS > -0.01) {
+    if (tW < 0.01 && tW > -0.01) {
         *screenX = 0;
         *screenY = 0;
         *screenZ = 0;
     } else {
-        tS = 1.0f / tS;
-        *screenX = (s32) ((camera->viewportW / 2) + (tX * tS * camera->viewportW * 0.5f)) + camera->viewportStartX;
-        *screenY = (s32) ((camera->viewportH / 2) - (tY * tS * camera->viewportH * 0.5f)) + camera->viewportStartY;
+        tW = 1.0f / tW;
+        *screenX = (s32) ((camera->viewportW / 2) + (tX * tW * camera->viewportW * 0.5f)) + camera->viewportStartX;
+        *screenY = (s32) ((camera->viewportH / 2) - (tY * tW * camera->viewportH * 0.5f)) + camera->viewportStartY;
     }
 }
 

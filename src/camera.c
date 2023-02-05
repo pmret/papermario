@@ -165,7 +165,7 @@ void func_80032C64(Camera* camera) {
     CameraControlSettings* settings2;
     CameraControlSettings* settings3;
     s32 s2;
-    f32 X, Y, Z, S;
+    f32 X, Y, Z, W;
     f32 product;
     f32 newPosX, newPosZ;
     Collider* zone;
@@ -189,12 +189,12 @@ void func_80032C64(Camera* camera) {
                                (f32)camera->viewportW / (f32)camera->viewportH, camera->nearClip, camera->farClip, 1.0f);
                 guMtxCatF(camera->viewMtxPlayer, camera->perspectiveMatrix, camera->perspectiveMatrix);
                 transform_point(camera->perspectiveMatrix, camera->targetPos.x, camera->targetPos.y, camera->targetPos.z,
-                                1.0f, &X, &Y, &Z, &S);
-                if (S == 0.0f) {
-                    S = 1.0f;
+                                1.0f, &X, &Y, &Z, &W);
+                if (W == 0.0f) {
+                    W = 1.0f;
                 }
-                S = 1.0f / S;
-                X *= S;
+                W = 1.0f / W;
+                X *= W;
                 camera->unk_52C = (X > 0.0f) ? 1 : (X < 0.0f) ? -1 : 0;
                 camera->unk_530 = 0;
             } else {

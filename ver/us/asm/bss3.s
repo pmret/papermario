@@ -289,7 +289,7 @@ dlabel D_80153376
 dlabel D_80153378
 .space 8
 
-dlabel D_80153380
+dlabel depthCopyBuffer
 .space 0x00000020
 
 dlabel mdl_renderTaskLists
