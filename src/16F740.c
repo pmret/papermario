@@ -311,7 +311,7 @@ void btl_state_update_normal_start(void) {
             battleStatus->buffEffect = fx_partner_buff(0, 0.0f, 0.0f, 0.0f, 0.0f, 0);
             func_800E9810();
             gCurrentCameraID = CAM_BATTLE;
-            script = start_script(EVS_OnBattleInit, EVT_PRIORITY_A, 0);
+            script = start_script(&EVS_OnBattleInit, EVT_PRIORITY_A, 0);
             battleStatus->camMovementScript = script;
             battleStatus->camMovementScriptID = script->id;
             gBattleSubState = BTL_SUBSTATE_NORMAL_START_CREATE_ENEMIES;
@@ -382,9 +382,9 @@ void btl_state_update_normal_start(void) {
             load_player_actor();
             actor = battleStatus->playerActor;
             if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
-                script = start_script(EVS_Peach_OnActorCreate, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_Peach_OnActorCreate, EVT_PRIORITY_A, 0);
             } else {
-                script = start_script(EVS_Mario_OnActorCreate, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_Mario_OnActorCreate, EVT_PRIORITY_A, 0);
             }
             actor->takeTurnScript = script;
             actor->takeTurnScriptID = script->id;

@@ -5,9 +5,17 @@
 #include "include_asm.h"
 
 #ifndef M2CTX
+
+#ifdef SHIFT
+#define SHIFT_BSS __attribute__ ((section (".bss")))
+#else
+#define SHIFT_BSS extern
+#endif
+
 #define BSS __attribute__ ((section (".bss")))
 #define TRANSPARENT_UNION __attribute__ ((__transparent_union__))
 #else
+#define SHIFT_BSS static
 #define BSS static
 #define TRANSPARENT_UNION
 #endif

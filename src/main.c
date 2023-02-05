@@ -18,7 +18,6 @@ void gfx_init_state(void);
 #ifdef VERSION_US
 extern s32 D_80073E00;
 #else
-void func_8002CA00(void);
 extern s32 D_80073DE0;
 #endif
 extern u16* D_80073E04;

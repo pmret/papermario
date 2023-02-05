@@ -84,7 +84,7 @@ void bgm_update_music_settings(void) {
     s16 state2 = 2;
     s16 flag4 = MUSIC_SETTINGS_FLAG_4;
     s32 flags;
-    
+
     for (i; i < 2; i++, music++) {
         switch (music->state) {
         case 0:
@@ -165,7 +165,7 @@ void bgm_update_music_settings(void) {
                     music->variation = music->savedVariation;
                     music->songName = music->savedSongName;
                     music->state = 0;
-                    music->flags |= MUSIC_SETTINGS_FLAG_1; 
+                    music->flags |= MUSIC_SETTINGS_FLAG_1;
                     music->flags &= ~MUSIC_SETTINGS_FLAG_8;
                 }
             }

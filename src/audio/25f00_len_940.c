@@ -13,21 +13,21 @@ u8 nuAuTaskStop = NU_AU_TASK_RUN;
 u8 volatile AuSynUseStereo = TRUE;
 
 //bss
-extern Acmd* AlCmdListBuffers[3];
-extern NUScTask D_800A3520[3];
-extern u8* D_800A3628[3];
-extern s32 AlFrameSize;
-extern s32 AlMinFrameSize;
-extern OSMesgQueue nuAuDmaMesgQ;
-extern OSMesg nuAuDmaMesgBuf[50];
-extern OSIoMesg nuAuDmaIOMesgBuf[];
-extern NUDMABuffer* D_800A3BD4;
-extern NUDMABuffer nuAuDmaBufList[50];
-extern AuSynDriver auSynDriver;
-extern u64 rspbootUcodeBuffer[];
-extern s32 AlNumFields;
-extern u64 n_aspMain_text_bin[];
-extern u64 n_aspMain_data_bin[];
+SHIFT_BSS Acmd* AlCmdListBuffers[3];
+SHIFT_BSS NUScTask D_800A3520[3];
+SHIFT_BSS u8* D_800A3628[3];
+SHIFT_BSS s32 AlFrameSize;
+SHIFT_BSS s32 AlMinFrameSize;
+SHIFT_BSS OSMesgQueue nuAuDmaMesgQ;
+SHIFT_BSS OSMesg nuAuDmaMesgBuf[50];
+SHIFT_BSS OSIoMesg nuAuDmaIOMesgBuf[];
+SHIFT_BSS NUDMABuffer* D_800A3BD4;
+SHIFT_BSS NUDMABuffer nuAuDmaBufList[50];
+SHIFT_BSS AuSynDriver auSynDriver;
+SHIFT_BSS u64 rspbootUcodeBuffer[];
+SHIFT_BSS s32 AlNumFields;
+SHIFT_BSS u64 n_aspMain_text_bin[];
+SHIFT_BSS u64 n_aspMain_data_bin[];
 
 extern u8 AuHeapBase[AUDIO_HEAP_SIZE];
 

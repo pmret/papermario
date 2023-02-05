@@ -4,7 +4,7 @@
 #include "hud_element.h"
 #include "camera.h"
 
-extern f32 D_8009A5EC;
+//extern f32 D_8009A5EC; TODO BSS
 
 void render_models(void);
 void execute_render_tasks(void);

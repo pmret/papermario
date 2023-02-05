@@ -438,6 +438,9 @@ void btl_init_menu_partner(void);
 void func_800F52BC(void);
 void func_800F16CC(void);
 
+void btl_init_menu_boots(void);
+void btl_init_menu_hammer(void);
+
 void btl_main_menu_init(void) {
     D_802AD006 = 255;
     BattleMenuAlpha = 255;

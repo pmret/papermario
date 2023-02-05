@@ -1118,7 +1118,7 @@ extern TextureHandle mdl_textureHandles[128];
 
 extern RenderTask mdl_clearRenderTasks[3][0x100];
 
-extern s32 D_801A7000; // todo ???
+extern Addr D_801A7000; // todo ???
 
 extern u16 depthCopyBuffer[16];
 
@@ -1145,6 +1145,11 @@ void func_801180E8(TextureHeader*, Gfx**, IMG_PTR raster, PAL_PTR palette, IMG_P
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth);
 s32 is_identity_fixed_mtx(Mtx* mtx);
 void build_custom_gfx(void);
+
+#ifndef SHIFT
+// This padding allows us to place some symbols into this overlay such that they get the proper memory address and are shiftable.
+static BSS u8 bss_padding[0x3A0];
+#endif
 
 void update_entities(void) {
     s32 i;
@@ -1887,7 +1892,7 @@ void clear_entity_data(s32 arg0) {
         gEntityHeapBottom = BATTLE_ENTITY_HEAP_BOTTOM;
         gEntityHeapBase = BATTLE_ENTITY_HEAP_BASE;
     } else {
-        gEntityHeapBottom = (s32)&D_801A7000;
+        gEntityHeapBottom = (s32)D_801A7000;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
 
@@ -1914,7 +1919,7 @@ void init_entity_data(void) {
         for (i = 0; i < 4; i++) {
             bEntityBlueprint[i] = 0;
         }
-        gEntityHeapBottom = (s32)&D_801A7000;
+        gEntityHeapBottom = (s32)D_801A7000;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
     gCurrentEntityListPtr = get_entity_list();
@@ -3673,8 +3678,13 @@ void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, 
     handle->gfx = (Gfx*) mdl_nextTextureAddress;
     memcpy(&handle->header, header, sizeof(*header));
     func_801180E8(header, (Gfx**)&mdl_nextTextureAddress, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
+
+    #ifdef SHIFT
     gSPEndDisplayList(mdl_nextTextureAddress);
     mdl_nextTextureAddress += 8;
+    #else
+    gSPEndDisplayList(((Gfx*)mdl_nextTextureAddress)++);
+    #endif
 }
 
 void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) {

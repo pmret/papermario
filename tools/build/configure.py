@@ -244,7 +244,7 @@ class Configure:
         self.version_path = ROOT / f"ver/{version}"
         self.linker_entries = None
 
-    def split(self, assets: bool, code: bool, debug: bool):
+    def split(self, assets: bool, code: bool, shift: bool, debug: bool):
         import split
 
         modes = ["ld"]
@@ -258,6 +258,9 @@ class Configure:
         splat_file = [str(self.version_path / "splat.yaml")]
         if debug:
             splat_file += [str(self.version_path / "splat-debug.yaml")]
+
+        if shift:
+            splat_file += [str(self.version_path / "splat-shift.yaml")]
 
         split.main(
             splat_file,
@@ -316,7 +319,8 @@ class Configure:
         # ¯\_(ツ)_/¯
         return path
 
-    def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str], non_matching: bool, debug: bool):
+    def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str], non_matching: bool, shift: bool,
+                    debug: bool):
         import segtypes
         import segtypes.common.data
         import segtypes.n64.yay0
@@ -326,7 +330,8 @@ class Configure:
         built_objects = set()
         generated_headers = []
 
-        def build(object_paths: Union[Path, List[Path]], src_paths: List[Path], task: str, variables: Dict[str, str] = {}, implicit_outputs: List[str] = []):
+        def build(object_paths: Union[Path, List[Path]], src_paths: List[Path], task: str,
+                  variables: Dict[str, str] = {}, implicit_outputs: List[str] = []):
             if not isinstance(object_paths, list):
                 object_paths = [object_paths]
 
@@ -396,15 +401,16 @@ class Configure:
                 bad_list = []
                 seg_dir = str(seg.dir)
 
-                task = "cc_modern"
+                if shift:
+                    task = "cc_modern"
 
-                if ("world/area" in seg_dir and (
-                    "nok" in seg_dir or
-                    "kkj" in seg_dir or
-                    "jan" in seg_dir or
-                    "pra" in seg_dir
-                )) or seg.name in bad_list:
-                    task = "cc"
+                    if ("world/area" in seg_dir and (
+                        "nok" in seg_dir or
+                        "kkj" in seg_dir or
+                        "jan" in seg_dir or
+                        "pra" in seg_dir
+                    )) or seg.name in bad_list:
+                        task = "cc"
 
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
@@ -832,11 +838,12 @@ if __name__ == "__main__":
         if not first_configure:
             first_configure = configure
 
-        configure.split(not args.no_split_assets, args.split_code, args.debug)
-        configure.write_ninja(ninja, skip_files, args.non_matching, args.debug)
+        configure.split(not args.no_split_assets, args.split_code, args.shift, args.debug)
+        configure.write_ninja(ninja, skip_files, args.non_matching, args.shift, args.debug)
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 
+    assert(first_configure)
     first_configure.make_current(ninja)
 
     ninja.build("all", "phony", all_rom_oks)

@@ -24,6 +24,8 @@ options:
   create_undefined_syms_auto: False
   undefined_funcs_auto_path: ver/us/undefined_funcs_auto.txt
   undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
+  ld_wildcard_sections: True
+  ld_use_follows: True
 asset_stack:
   - us
 segments:
@@ -836,6 +838,7 @@ segments:
     - [0xDE740, c, de740_len_23f0]
     - [0xDF950, c, audio/sfx]
     - [0xE0B30, c, audio/e0b30_len_b80]
+    - [0xE16B0, c, heaps]
     - [0xE16B0, .data, a5dd0_len_114e0]
     - [0xE2950, .data, B4580]
     - [0xE2960, .data, entity_model]
@@ -12994,6 +12997,7 @@ segments:
     dir: world/area_dgb
     start: 0xC20F40
     vram: 0x80200000
+    follows_vram_symbol: AuHeapBase
     subsegments:
     - [0xC20F40, c, dgb_01_smash_bridges]
     - start: 0xC20F40

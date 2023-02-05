@@ -19,12 +19,7 @@ mdl_clearRenderTasks = 0x802B7E00;
 #endif
 
 // hard-coded heapy things
-D_80197000 = 0x80197000; // effect tlb stuff
-D_801A6000 = 0x801A6000; // effect tlb stuff
-D_801A7000 = 0x801A7000;
-AuHeapBase = 0x801AA000;
-D_80200000 = 0x80200000;
-gBackgroundImage = 0x80200000;
+gBackgroundImage = D_80200000;
 D_80210000 = 0x80210000;
 heap_collisionHead = 0x80268000;
 heap_generalHead = 0x802FB800;

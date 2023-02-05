@@ -138,7 +138,7 @@ void state_init_title_screen(void) {
     load_map_bg("title_bg");
     read_background_size(&gBackgroundImage);
     bgm_set_song(0, SONG_MAIN_THEME, 0, 500, 8);
-    D_800A0988 = 120;
+    D_800A0988 = 480;
 }
 
 void state_step_title_screen(void) {
