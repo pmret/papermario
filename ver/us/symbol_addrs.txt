@@ -27282,4 +27282,6 @@ dead_evt_get_variable = 0x802D4E8C; // type:func dead:yes
 dead_evt_set_variable = 0x802D5468; // type:func dead:yes
 dead_evt_get_float_variable = 0x802D57FC; // type:func dead:yes
 dead_evt_set_float_variable = 0x802D5A10; // type:func dead:yes
-AuxData3 = 0x8022C000; // type:data appears_after_overlays_addr:0x80218000
+battle_partner_vram_start = 0x80238000; // type:data appears_after_overlays_addr:0x80218000
+battle_code_vram_start = 0x8023E000; // type:data appears_after_overlays_addr:0x80238000
+map_vram_end = 0x0; // type:data appears_after_overlays_addr:0x80240000

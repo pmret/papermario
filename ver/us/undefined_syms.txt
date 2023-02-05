@@ -19,13 +19,10 @@ mdl_clearRenderTasks = 0x802B7E00;
 
 // hard-coded heapy things
 D_80210000 = 0x80210000; // needs to be hard-coded atm due to pointers in shape data
-AuxData2 = AuxData3 + 0x2000;
-AuxData1 = AuxData2 + 0x3000;
-AuxData0 = AuxData1 + 0x3000;
 
 heap_collisionHead = 0x80268000;
-
 heap_generalHead = 0x802FB800;
+
 gSpriteHeapPtr = heap_generalHead + 0x54000;
 D_8038F800 = gSpriteHeapPtr + 0x40000;
 D_803B5000 = D_8038F800 + 0x25800;

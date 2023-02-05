@@ -61,11 +61,11 @@ s32 N(LetterStoryRequirements)[] = {
     STORY_CH3_STAR_SPIRIT_RESCUED,
     STORY_CH3_STAR_SPIRIT_RESCUED,
     STORY_CH4_STAR_SPIRIT_RESCUED,
-    STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY, 
+    STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY,
     STORY_CH5_RETURNED_TO_TOAD_TOWN,
     STORY_CH6_STAR_SPRIT_DEPARTED,
     STORY_CH4_GOT_TAYCE_TS_CAKE,
-    STORY_CH7_STAR_SPIRIT_RESCUED, 
+    STORY_CH7_STAR_SPIRIT_RESCUED,
 };
 
 s32 N(LetterSenderStringIDs)[] = {
@@ -76,11 +76,11 @@ s32 N(LetterSenderStringIDs)[] = {
     MSG_Document_Letter_Mario05_From,
     MSG_Document_Letter_Mario06_From,
     MSG_Document_Letter_Mario07_From,
-    MSG_Document_Letter_Mario08_From, 
+    MSG_Document_Letter_Mario08_From,
     MSG_Document_Letter_Mario09_From,
     MSG_Document_Letter_Mario10_From,
     MSG_Document_Letter_Mario11_From,
-    MSG_Document_Letter_Mario12_From, 
+    MSG_Document_Letter_Mario12_From,
 };
 
 s32 N(LetterBodyStringIDs)[] = {
@@ -91,28 +91,27 @@ s32 N(LetterBodyStringIDs)[] = {
     MSG_Document_Letter_Mario05_Body,
     MSG_Document_Letter_Mario06_Body,
     MSG_Document_Letter_Mario07_Body,
-    MSG_Document_Letter_Mario08_Body, 
+    MSG_Document_Letter_Mario08_Body,
     MSG_Document_Letter_Mario09_Body,
     MSG_Document_Letter_Mario10_Body,
     MSG_Document_Letter_Mario11_Body,
-    MSG_Document_Letter_Mario12_Body, 
+    MSG_Document_Letter_Mario12_Body,
 };
 
-//TODO shiftability -- these are offsets relative to 0x10F1B0
 s32 N(LetterDmaOffsets)[] = {
-    0x0000B290, 0x0000D158,
-    0x0000D178, 0x0000EB78,
-    0x0000ED78, 0x00010778,
-    0x00010978, 0x00012378,
-    0x00012578, 0x00013F78,
-    0x00014178, 0x00015B78,
-    0x00015D78, 0x00017778,
-    0x00017978, 0x00019378,
-    0x00019578, 0x0001AF78,
-    0x0001B178, 0x0001CB78,
-    0x0001CD78, 0x0001E778,
-    0x0001E978, 0x00020378,
-    0x00020578, 0x00021F78,
+    (s32) charset_postcard_OFFSET, (s32) charset_postcard_pal_OFFSET + 5,
+    (s32) charset_letter_content_1_OFFSET, (s32) charset_letter_content_1_pal_OFFSET + 6,
+    (s32) charset_letter_content_2_OFFSET, (s32) charset_letter_content_2_pal_OFFSET + 6,
+    (s32) charset_letter_content_3_OFFSET, (s32) charset_letter_content_3_pal_OFFSET + 6,
+    (s32) charset_letter_content_4_OFFSET, (s32) charset_letter_content_4_pal_OFFSET + 6,
+    (s32) charset_letter_content_5_OFFSET, (s32) charset_letter_content_5_pal_OFFSET + 6,
+    (s32) charset_letter_content_6_OFFSET, (s32) charset_letter_content_6_pal_OFFSET + 6,
+    (s32) charset_letter_content_7_OFFSET, (s32) charset_letter_content_7_pal_OFFSET + 6,
+    (s32) charset_letter_content_8_OFFSET, (s32) charset_letter_content_8_pal_OFFSET + 6,
+    (s32) charset_letter_content_9_OFFSET, (s32) charset_letter_content_9_pal_OFFSET + 6,
+    (s32) charset_letter_content_10_OFFSET, (s32) charset_letter_content_10_pal_OFFSET + 6,
+    (s32) charset_letter_content_11_OFFSET, (s32) charset_letter_content_11_pal_OFFSET + 6,
+    (s32) charset_letter_content_12_OFFSET, (s32) charset_letter_content_12_pal_OFFSET + 6,
 };
 
 API_CALLABLE(N(InitLetters)){
@@ -231,7 +230,7 @@ API_CALLABLE(N(ReadLetters)){
                 dma_copy(charset_ROM_START + N(LetterDmaOffsets)[1],
                          charset_ROM_START + N(LetterDmaOffsets)[1] + sizeof(N(LetterBackgroundPal)),
                          N(LetterBackgroundPal));
-        
+
                 N(LetterImgData)[0].raster = N(LetterBackgroundImg);
                 N(LetterImgData)[0].palette = N(LetterBackgroundPal);
                 N(LetterImgData)[0].width = 150;
@@ -245,7 +244,7 @@ API_CALLABLE(N(ReadLetters)){
                 dma_copy(charset_ROM_START + N(LetterDmaOffsets)[(userIndex * 2) + 3],
                          charset_ROM_START + N(LetterDmaOffsets)[(userIndex * 2) + 3] + sizeof(N(N(LetterPhotoPal))),
                          N(N(LetterPhotoPal)));
-                         
+
                 N(LetterImgData)[1].raster = N(LetterPhotoImg);
                 N(LetterImgData)[1].palette = N(N(LetterPhotoPal));
                 N(LetterImgData)[1].width = 70;
@@ -307,11 +306,11 @@ s32 N(DiaryStoryRequirements)[] = {
     STORY_CH5_TRADED_VASE_FOR_SEED,
     STORY_CH5_TRADED_VASE_FOR_SEED,
     STORY_CH6_RETURNED_TO_TOAD_TOWN,
-    STORY_CH6_RETURNED_TO_TOAD_TOWN, 
+    STORY_CH6_RETURNED_TO_TOAD_TOWN,
     STORY_CH7_STAR_SPRIT_DEPARTED,
     STORY_CH7_STAR_SPRIT_DEPARTED,
     STORY_EPILOGUE,
-    STORY_EPILOGUE, 
+    STORY_EPILOGUE,
 };
 
 s32 N(DiaryEntryStringIDs)[] = {

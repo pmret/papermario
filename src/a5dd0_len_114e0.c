@@ -10,14 +10,14 @@
 #ifdef SHIFT
  // TODO shiftability - these need to be totally separate from anything else that might cut into them
 #define MODEL_TEXTURE_BASE_ADDRESS 0x80600000 // TODO shiftability
-#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shiftability
+#define WORLD_ENTITY_HEAP_BASE 0x80267FF0 // TODO shiftability
 #define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
-#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shiftability
+#define WORLD_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shiftability
 #else
 #define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000
-#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0
+#define WORLD_ENTITY_HEAP_BASE 0x80267FF0
 #define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
-#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000
+#define WORLD_ENTITY_HEAP_BOTTOM 0x80250000
 #endif
 
 typedef struct Fog {
@@ -1889,8 +1889,8 @@ void clear_entity_data(s32 arg0) {
     }
 
     if (!gGameStatusPtr->isBattle) {
-        gEntityHeapBottom = BATTLE_ENTITY_HEAP_BOTTOM;
-        gEntityHeapBase = BATTLE_ENTITY_HEAP_BASE;
+        gEntityHeapBottom = WORLD_ENTITY_HEAP_BOTTOM;
+        gEntityHeapBase = WORLD_ENTITY_HEAP_BASE;
     } else {
         gEntityHeapBottom = (s32)D_801A7000;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
@@ -1910,8 +1910,8 @@ void clear_entity_data(s32 arg0) {
 
 void init_entity_data(void) {
     if (!gGameStatusPtr->isBattle) {
-        gEntityHeapBottom = BATTLE_ENTITY_HEAP_BOTTOM;
-        gEntityHeapBase = BATTLE_ENTITY_HEAP_BASE;
+        gEntityHeapBottom = WORLD_ENTITY_HEAP_BOTTOM;
+        gEntityHeapBase = WORLD_ENTITY_HEAP_BASE;
         reload_world_entity_data();
     } else {
         s32 i;

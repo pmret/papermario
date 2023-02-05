@@ -31,13 +31,24 @@ extern ActorBlueprint b_area_kzn2_petit_piranha_bomb;
 extern Formation N(formation_petit_piranha_1);
 extern Formation N(formation_petit_piranha_2);
 
+static s32 N(unusedArray)[64];
+
+#ifndef SHIFT
+static BSS u8 bss_padding[0x8A0];
+#endif
+
+BSS u8 Vine3Base[0x2000];
+BSS u8 Vine2Base[0x3000];
+BSS u8 Vine1Base[0x3000];
+BSS u8 Vine0Base[0x4000];
+
 enum {
     VINE_1      = 1,
     VINE_2      = 2,
 };
 
-#define VINE_1_BASE (s32) AUX_DATA_ADDR_1
-#define VINE_2_BASE (s32) AUX_DATA_ADDR_2
+#define VINE_1_BASE (s32) Vine1Base
+#define VINE_2_BASE (s32) Vine2Base
 
 s32 N(idleAnimations)[] = {
     STATUS_NORMAL, ANIM_LavaBud_Anim03,
@@ -160,8 +171,6 @@ ActorBlueprint NAMESPACE = {
     .statusIconOffset = { -18, 10 },
     .statusMessageOffset = { 0, 0 },
 };
-
-static s32 N(unusedArray)[64];
 
 EvtScript N(init) = {
     EVT_USE_ARRAY(N(unusedArray))
