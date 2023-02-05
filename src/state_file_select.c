@@ -23,6 +23,7 @@ NUPiOverlaySegment D_8007798C = {
 u8 D_800779B0 = 0;
 
 extern s32 D_80200000;
+extern ShapeFile D_80210000;
 
 void state_init_language_select(void) {
     D_800A0931 = 0;

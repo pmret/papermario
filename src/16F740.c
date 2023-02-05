@@ -29,6 +29,8 @@ BSS s32 D_8029F264;
 
 s32 dispatch_damage_event_player_0(s32 damageAmount, s32 event);
 
+extern ShapeFile D_80210000;
+
 void btl_merlee_on_start_turn(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     EncounterStatus* currentEncounter = &gCurrentEncounter;

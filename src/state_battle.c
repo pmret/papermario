@@ -22,6 +22,8 @@ extern s32 D_800A0908;
 #define shim_battle_heap_create_obfuscated battle_heap_create
 #endif
 
+extern ShapeFile D_80210000;
+
 void state_init_battle(void) {
     D_800A0900 = 5;
 }

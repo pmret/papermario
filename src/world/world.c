@@ -35,6 +35,8 @@ void load_map_hit_asset(void);
 #define shim_general_heap_create_obfuscated general_heap_create
 #endif
 
+extern ShapeFile D_80210000;
+
 void load_map_script_lib(void) {
     dma_copy(world_script_api_ROM_START, world_script_api_ROM_END, world_script_api_VRAM);
 }

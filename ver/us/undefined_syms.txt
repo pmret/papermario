@@ -6,9 +6,8 @@ obfuscated_create_audio_system = create_audio_system - 0x7B;
 obfuscated_obfuscation_shims_VRAM = obfuscation_shims_VRAM - 0xA912928;
 obfuscated_obfuscation_shims_ROM_START = obfuscation_shims_ROM_START - 0x8939221;
 
-// hacks for various things
 fx_sun_undeclared = fx_sun;
-D_802AD673 = 0x802AD673; // remove when func_802A45D8 is decompiled with D_802AD670 instead of D_802AD673
+gBackgroundImage = D_80200000;
 
 #ifdef SHIFT
 mdl_clearRenderTasks = MAX(inspect_icon_VRAM_END, speech_bubble_VRAM_END);
@@ -19,15 +18,19 @@ mdl_clearRenderTasks = 0x802B7E00;
 #endif
 
 // hard-coded heapy things
-gBackgroundImage = D_80200000;
-D_80210000 = 0x80210000;
+D_80210000 = 0x80210000; // needs to be hard-coded atm due to pointers in shape data
+AuxData2 = AuxData3 + 0x2000;
+AuxData1 = AuxData2 + 0x3000;
+AuxData0 = AuxData1 + 0x3000;
+
 heap_collisionHead = 0x80268000;
+
 heap_generalHead = 0x802FB800;
-gSpriteHeapPtr = 0x8034F800;
-D_8038F800 = 0x8038F800;
-D_803B5000 = 0x803B5000;
-D_803DA800 = 0x803DA800;
-heap_battleHead = 0x803DA800;
+gSpriteHeapPtr = heap_generalHead + 0x54000;
+D_8038F800 = gSpriteHeapPtr + 0x40000;
+D_803B5000 = D_8038F800 + 0x25800;
+D_803DA800 = D_803B5000 + 0x25800;
+heap_battleHead = D_803DA800;
 
 // Letter delivery BSS
 nok_01_LetterDelivery_SavedNpcAnim = 0x80251E34;

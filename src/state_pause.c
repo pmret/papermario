@@ -8,6 +8,8 @@
 
 u16* D_80077950[] = { D_8038F800, D_803B5000, D_803DA800 };
 
+extern ShapeFile D_80210000;
+
 NUPiOverlaySegment D_8007795C = {
     .romStart = pause_ROM_START,
     .romEnd = pause_ROM_END,

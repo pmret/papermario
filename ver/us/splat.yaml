@@ -25,7 +25,7 @@ options:
   undefined_funcs_auto_path: ver/us/undefined_funcs_auto.txt
   undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
   ld_wildcard_sections: True
-  ld_use_follows: True
+  ld_use_follows: False
 asset_stack:
   - us
 segments:
@@ -7383,36 +7383,42 @@ segments:
     type: code
     start: 0x543570
     vram: 0x80231000
+    follows_vram_symbol: AuxData1
     subsegments:
     - [0x543570, c, actor/shy_squad]
   - dir: battle/area_omo2_2
     type: code
     start: 0x5483E0
     vram: 0x80231000
+    follows_vram_symbol: AuxData1
     subsegments:
     - [0x5483E0, c, actor/stilt_guy]
   - dir: battle/area_omo2_3
     type: code
     start: 0x54CC70
     vram: 0x80231000
+    follows_vram_symbol: AuxData1
     subsegments:
     - [0x54CC70, c, actor/shy_stack]
   - dir: battle/area_omo2_4
     type: code
     start: 0x552440
     vram: 0x80231000
+    follows_vram_symbol: AuxData1
     subsegments:
     - [0x552440, c, actor/signal_guy]
   - dir: battle/area_omo2_5
     type: code
     start: 0x552BB0
     vram: 0x80231000
+    follows_vram_symbol: AuxData1
     subsegments:
     - [0x552BB0, c, actor/shy_squad_dup]
   - dir: battle/area_omo2_6
     type: code
     start: 0x556C90
     vram: 0x80231000
+    follows_vram_symbol: AuxData1
     subsegments:
     - [0x556C90, c, actor/shy_guy_dup]
   - dir: battle/area_omo3
@@ -8915,6 +8921,7 @@ segments:
     type: code
     start: 0x7B5960
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7B5960, c, "01"]
   - name: world_model_anim_kzn_00
@@ -8922,6 +8929,7 @@ segments:
     type: code
     start: 0x7B6690
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7B6690, c, "00"]
   - name: world_model_anim_kzn_04
@@ -8929,6 +8937,7 @@ segments:
     type: code
     start: 0x7B70E0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7B70E0, c, "04"]
   - name: world_model_anim_kzn_05
@@ -8936,6 +8945,7 @@ segments:
     type: code
     start: 0x7B8030
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7B8030, c, "05"]
   - name: world_model_anim_kzn_06
@@ -8943,6 +8953,7 @@ segments:
     type: code
     start: 0x7B8D30
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7B8D30, c, "06"]
   - name: world_model_anim_kzn_07
@@ -8950,6 +8961,7 @@ segments:
     type: code
     start: 0x7B97E0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7B97E0, c, "07"]
   - name: world_model_anim_kzn_08
@@ -8957,6 +8969,7 @@ segments:
     type: code
     start: 0x7BA280
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7BA280, c, "08"]
   - name: world_model_anim_kzn_09
@@ -8964,6 +8977,7 @@ segments:
     type: code
     start: 0x7BB050
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7BB050, c, "09"]
   - name: world_model_anim_kzn_0A
@@ -8971,6 +8985,7 @@ segments:
     type: code
     start: 0x7BBD80
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7BBD80, c, "0A"]
   - name: world_model_anim_kzn_0B
@@ -8978,6 +8993,7 @@ segments:
     type: code
     start: 0x7BEDD0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7BEDD0, c, "0B"]
   - name: world_model_anim_kzn_0C
@@ -8985,6 +9001,7 @@ segments:
     type: code
     start: 0x7C16C0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7C16C0, c, "0C"]
   - name: world_model_anim_kzn_0D
@@ -8992,6 +9009,7 @@ segments:
     type: code
     start: 0x7C3A00
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7C3A00, c, "0D"]
   - name: world_model_anim_kzn_0E
@@ -8999,6 +9017,7 @@ segments:
     type: code
     start: 0x7C44D0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7C44D0, c, "0E"]
   - name: world_model_anim_kzn_02
@@ -9006,6 +9025,7 @@ segments:
     type: code
     start: 0x7C4F50
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7C4F50, c, "02"]
   - name: world_model_anim_kzn_03
@@ -9013,6 +9033,7 @@ segments:
     type: code
     start: 0x7C7410
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7C7410, c, "03"]
   - name: world_model_anim_kzn_0F
@@ -9020,6 +9041,7 @@ segments:
     type: code
     start: 0x7C7E50
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7C7E50, c, "0F"]
   - name: world_model_anim_kzn_10
@@ -9027,6 +9049,7 @@ segments:
     type: code
     start: 0x7CA850
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7CA850, c, "10"]
   - name: world_model_anim_kzn_11
@@ -9034,6 +9057,7 @@ segments:
     type: code
     start: 0x7CD5F0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7CD5F0, c, "11"]
   - name: world_model_anim_kzn_12
@@ -9041,6 +9065,7 @@ segments:
     type: code
     start: 0x7CDB30
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7CDB30, c, "12"]
   - name: world_model_anim_kzn_13
@@ -9048,6 +9073,7 @@ segments:
     type: code
     start: 0x7CEFF0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7CEFF0, c, "13"]
   - name: world_model_anim_kzn_14
@@ -9055,6 +9081,7 @@ segments:
     type: code
     start: 0x7CFCC0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7CFCC0, c, "14"]
   - name: world_model_anim_kzn_15
@@ -9062,6 +9089,7 @@ segments:
     type: code
     start: 0x7D0860
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7D0860, c, "15"]
   - name: world_model_anim_kzn_16
@@ -9069,6 +9097,7 @@ segments:
     type: code
     start: 0x7D14E0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7D14E0, c, "16"]
   - name: world_model_anim_kzn_17
@@ -9076,6 +9105,7 @@ segments:
     type: code
     start: 0x7D2080
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7D2080, c, "17"]
   - name: world_model_anim_kzn_18
@@ -9083,6 +9113,7 @@ segments:
     type: code
     start: 0x7D2960
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7D2960, c, "18"]
   - name: world_model_anim_kzn_19
@@ -9090,6 +9121,7 @@ segments:
     type: code
     start: 0x7D3260
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7D3260, c, "19"]
   - name: world_model_anim_kzn_1A
@@ -9097,6 +9129,7 @@ segments:
     type: code
     start: 0x7D5570
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7D5570, c, "1A"]
   - name: world_model_anim_kzn_1B
@@ -9104,6 +9137,7 @@ segments:
     type: code
     start: 0x7D6F80
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7D6F80, c, "1B"]
   - name: world_model_anim_kzn_1C
@@ -9111,6 +9145,7 @@ segments:
     type: code
     start: 0x7D76B0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7D76B0, c, "1C"]
   - name: world_model_anim_kzn_1D
@@ -9118,6 +9153,7 @@ segments:
     type: code
     start: 0x7D8FF0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7D8FF0, c, "1D"]
   - name: world_model_anim_kzn_1E
@@ -9125,6 +9161,7 @@ segments:
     type: code
     start: 0x7D96E0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7D96E0, c, "1E"]
   - name: world_model_anim_kzn_1F
@@ -9139,6 +9176,7 @@ segments:
     type: code
     start: 0x7DA140
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7DA140, c, "20"]
   - name: world_model_anim_kzn_21
@@ -9146,6 +9184,7 @@ segments:
     type: code
     start: 0x7DC180
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7DC180, c, "21"]
   - name: world_model_anim_kzn_22
@@ -9153,6 +9192,7 @@ segments:
     type: code
     start: 0x7DE970
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7DE970, c, "22"]
   - name: world_model_anim_kzn_23
@@ -9160,6 +9200,7 @@ segments:
     type: code
     start: 0x7DF2B0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7DF2B0, c, "23"]
   - name: world_model_anim_kzn_24
@@ -9167,6 +9208,7 @@ segments:
     type: code
     start: 0x7E03B0
     vram: 0x80234000
+    follows_vram_symbol: AuxData0
     subsegments:
     - [0x7E03B0, c, "24"]
   - dir: world/script_api
@@ -12997,7 +13039,7 @@ segments:
     dir: world/area_dgb
     start: 0xC20F40
     vram: 0x80200000
-    follows_vram_symbol: AuHeapBase
+    follows_vram_symbol: D_80200000
     subsegments:
     - [0xC20F40, c, dgb_01_smash_bridges]
     - start: 0xC20F40
