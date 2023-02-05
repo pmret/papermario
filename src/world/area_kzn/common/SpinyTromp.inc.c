@@ -1,12 +1,12 @@
 #include "common.h"
 #include "world/area_kzn/kzn.h"
 
-ApiStatus N(SpinyTrompHit)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpinyTrompHit)) {
     subtract_hp(1);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SpinyTromp_GetActingPartner)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpinyTromp_GetActingPartner)) {
     if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
         script->varTable[0] = gPartnerActionStatus.actingPartner;
     } else {

@@ -1,6 +1,6 @@
 #include "kgr_02.h"
  
-ApiStatus N(HasBombetteExploded)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(HasBombetteExploded)) {
     if (gCollisionStatus.bombetteExploded >= 0) {
         script->varTable[1] = TRUE;
     }

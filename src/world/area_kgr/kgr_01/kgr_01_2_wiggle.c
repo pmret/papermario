@@ -71,7 +71,7 @@ void N(make_tongue_gfx)(s32 index) {
 // stores the effective height offset of the tongue at a point given by Var0/Var1/Var2
 // in Var0. this value is the offset from a neutral position used for collision,
 // ignoring minor undulations and deformation imposed by the player.
-ApiStatus N(GetEffectiveTongueOffset)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetEffectiveTongueOffset)) {
     f32 amplitude = 2.0f * sin_rad(
         (f32)script->varTable[0] * 0.06 +
         (f32)script->varTable[2] * 0.03f +

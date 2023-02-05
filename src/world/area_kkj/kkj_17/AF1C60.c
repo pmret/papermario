@@ -17,9 +17,8 @@ static char* N(exit_str_1) = "";
 
 ApiStatus func_802402BC_AF1F1C(Evt* script, s32 isInitialCall) {
     PopupMenu *menu;
-    s32 numEntries;
+    s32 menuIdx;
     s32 index;
-    s32 temp;
     s32 var1;
     s32 var2;
     s32 i;
@@ -39,28 +38,28 @@ ApiStatus func_802402BC_AF1F1C(Evt* script, s32 isInitialCall) {
             menu->popupType = POPUP_MENU_TAKE_FROM_CHEST;
         }
 
-        numEntries = 0;
+        menuIdx = 0;
         for (i = 0; i < ARRAY_COUNT(D_8024092C_AF258C); i++) {
             var1 = evt_get_variable(NULL, script->varTable[1] + i);
             var2 = evt_get_variable(NULL, script->varTable[2] + i);
             if ((var1 != 0) && (var2 == 0)) {
                 ItemData* item = &gItemTable[D_8024092C_AF258C[i]];
                 IconHudScriptPair* itemHudScripts = &gItemHudScripts[item->hudElemID];
-                menu->ptrIcon[numEntries] = itemHudScripts->enabled;
-                menu->userIndex[numEntries] = i;
-                menu->enabled[numEntries] = TRUE;
-                menu->nameMsg[numEntries] = item->nameMsg;
-                menu->descMsg[numEntries] = item->shortDescMsg;
-                numEntries++;
+                menu->ptrIcon[menuIdx] = itemHudScripts->enabled;
+                menu->userIndex[menuIdx] = i;
+                menu->enabled[menuIdx] = TRUE;
+                menu->nameMsg[menuIdx] = item->nameMsg;
+                menu->descMsg[menuIdx] = item->shortDescMsg;
+                menuIdx++;
             }
         }
 
-        if (numEntries == 0) {
+        if (menuIdx == 0) {
             script->varTable[0] = 0;
             return ApiStatus_DONE1;
         }
 
-        menu->numEntries = numEntries;
+        menu->numEntries = menuIdx;
         menu->initialPos = 0;
         create_popup_menu(menu);
         script->functionTemp[0] = 0;
@@ -82,11 +81,10 @@ ApiStatus func_802402BC_AF1F1C(Evt* script, s32 isInitialCall) {
 
     destroy_popup_menu();
 
-    temp = script->functionTemp[1];
-    if (temp == 255) {
+    if (script->functionTemp[1] == 255) {
         script->varTable[0] = -1;
     } else {
-        index = menu->userIndex[temp - 1];
+        index = menu->userIndex[script->functionTemp[1] - 1];
         script->varTable[0] = D_8024092C_AF258C[index];
         if (script->varTable[10] == 0) {
             evt_set_variable(NULL, script->varTable[2] + index, 1);

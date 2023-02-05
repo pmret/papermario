@@ -16,7 +16,7 @@ extern Gfx D_090015D0_37EFA0[];
 extern Gfx D_09001648_37F018[];
 extern Gfx D_090016C0_37F090[];
 extern Gfx D_09001738_37F108[];
-extern Gfx D_090017B0_37F190[];
+extern Gfx D_090017B0_37F180[];
 
 Gfx* D_E007C510[] = {
     D_09001378_37ED48, D_090013F0_37EDC0, D_09001468_37EE38,
@@ -95,19 +95,16 @@ void blast_render(EffectInstance* effect) {
 #ifdef NON_MATCHING
 void blast_appendGfx(void* effect) {
     Matrix4f sp18, sp58, sp98;
-    Gfx* dlist = D_090017B0_37F190;
     BlastFXData* data = ((EffectInstance*)effect)->data.blast;
-    s32 temp_f4;
-    s32 alpha;
-    f32 new_var;
-
-    new_var = (temp_f4 = data->unk_20);
-    alpha = (new_var - ((s32) data->unk_20)) * 256.0f;
+    Gfx* dlist = D_090017B0_37F180;
+    s32 unk_20 = data->unk_20;
+    f32 unk_20f = unk_20;
+    s32 envAlpha = (unk_20f - unk_20) * 256.0f;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMasterGfxPos++, D_09001300_37ECD0);
-    gSPDisplayList(gMasterGfxPos++, D_E007C510[temp_f4]);
+    gSPDisplayList(gMasterGfxPos++, D_E007C510[unk_20]);
 
     shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
     shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
@@ -126,7 +123,7 @@ void blast_appendGfx(void* effect) {
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 128, 127);
     }
 
-    gDPSetEnvColor(gMasterGfxPos++, 255, 255, 139, alpha);
+    gDPSetEnvColor(gMasterGfxPos++, 255, 255, 139, envAlpha);
 
     gSPDisplayList(gMasterGfxPos++, dlist);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);

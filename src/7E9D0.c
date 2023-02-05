@@ -5,6 +5,14 @@
 #include "world/actions.h"
 #include "npc.h"
 #include "effects.h"
+#include "ld_addrs.h"
+
+#ifdef SHIFT
+// TODO same address as all world actions - picked the first one
+#define PLAYER_ACTION_VRAM_DEF world_action_idle_VRAM
+#else
+#define PLAYER_ACTION_VRAM_DEF (void*) 0x802B6000
+#endif
 
 extern void* D_8010C924;
 extern s32 D_8010C964;
@@ -270,7 +278,7 @@ void phys_update_action_state(void) {
 
             if (dmaStart != NULL && dmaStart != D_8010C924) {
                 D_8010C924 = dmaStart;
-                dma_copy(dmaStart, PlayerActionsTable[playerStatus->actionState].dmaEnd, (void* )0x802B6000); // TODO shiftability fix
+                dma_copy(dmaStart, PlayerActionsTable[playerStatus->actionState].dmaEnd, PLAYER_ACTION_VRAM_DEF);
             }
         }
         PlayerActionsTable[playerStatus->actionState].update();
@@ -294,8 +302,7 @@ void phys_peach_update(void) {
                 if (action->dmaStart != NULL && action->dmaStart != D_8010C924) {
                     D_8010C924 = action->dmaStart;
 
-                    // TODO: This needs to be a defined linker define for full shiftability
-                    dma_copy(D_8010C924, PlayerActionsTable[playerStatus->actionState].dmaEnd, (void* )0x802B6000); // TODO shiftability fix
+                    dma_copy(D_8010C924, PlayerActionsTable[playerStatus->actionState].dmaEnd, PLAYER_ACTION_VRAM_DEF);
                 }
 
                 if (PlayerActionsTable[playerStatus->actionState].flag) {

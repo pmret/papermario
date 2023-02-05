@@ -29,7 +29,7 @@ EvtScript N(EVS_NpcIdle_TubbasHeart) = {
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20C8, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_SELF, 0, 200, 0, 15)
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_SET(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WELL)
     EVT_RETURN
     EVT_END

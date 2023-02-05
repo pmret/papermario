@@ -2061,8 +2061,8 @@ void func_8003D3BC(Npc* npc) {
     }
 }
 
-void func_8003D624(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
-    npc->unk_98 = arg1;
+void func_8003D624(Npc* npc, s32 foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    npc->unk_98 = foldType;
     npc->unk_9A = arg2;
     npc->unk_9C = arg3;
     npc->unk_9E = arg4;

@@ -47,8 +47,8 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
 
     gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_MARIO_WORLD;
-    func_8002D160();
-    func_802B2078();
+    load_obfuscation_shims();
+    shim_general_heap_create_obfuscated();
     clear_render_tasks();
     clear_worker_list();
     clear_script_list();
@@ -111,8 +111,8 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         load_map_bg(wMapBgName);
     }
 
-    func_8002D160();
-    func_802B2078();
+    load_obfuscation_shims();
+    shim_general_heap_create_obfuscated();
     sfx_clear_env_sounds(0);
     clear_worker_list();
     clear_script_list();
@@ -476,8 +476,8 @@ MapConfig nok_maps[] = {
     { MAP_UNSPLIT(nok_03, 0x80240E40), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_04, 0x80240F40), .bgName = "nok_bg" },
     { MAP(nok_11), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(nok_12, 0x80242100), .bgName = "nok_bg" },
-    { MAP_UNSPLIT(nok_13, 0x802414C0), .bgName = "nok_bg" },
+    { MAP(nok_12), .bgName = "nok_bg" },
+    { MAP(nok_13), .bgName = "nok_bg" },
     { MAP(nok_14), .bgName = "nok_bg" },
     { MAP(nok_15), .bgName = "nok_bg" },
 };
@@ -485,15 +485,15 @@ MapConfig nok_maps[] = {
 /// Star Region
 #include "area_hos/hos.h"
 MapConfig hos_maps[] = {
-    { MAP_UNSPLIT(hos_00, 0x80240D50), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(hos_01, 0x80240E40), .bgName = "hos_bg" },
+    { MAP_WITH_INIT(hos_00), .bgName = "nok_bg" },
+    { MAP(hos_01), .bgName = "hos_bg" },
     { MAP(hos_02), .bgName = "hos_bg" },
     { MAP(hos_03), .bgName = "hos_bg" },
-    { MAP_UNSPLIT(hos_04, 0x80240EE0), .bgName = "hos_bg" },
-    { MAP_UNSPLIT(hos_05, 0x80245910), .bgName = "hos_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(hos_06, 0x80242570), .bgName = "hos_bg" },
-    { MAP_UNSPLIT(hos_10, 0x80240CE0), .bgName = "hos_bg", .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(hos_20, 0x80240390), .bgName = "hos_bg" },
+    { MAP(hos_04), .bgName = "hos_bg" },
+    { MAP(hos_05), .bgName = "hos_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP(hos_06), .bgName = "hos_bg" },
+    { MAP_WITH_INIT(hos_10), .bgName = "hos_bg" },
+    { MAP(hos_20), .bgName = "hos_bg" },
 };
 
 /// Bowser's Castle
@@ -595,10 +595,10 @@ MapConfig kkj_maps[] = {
 /// Jade Jungle
 #include "area_jan/jan.h"
 MapConfig jan_maps[] = {
-    { MAP_UNSPLIT(jan_00, 0x80241BD0), .bgName = "yos_bg" },
-    { MAP_UNSPLIT(jan_01, 0x802413F0), .bgName = "yos_bg" },
-    { MAP_UNSPLIT(jan_02, 0x80242940), .bgName = "yos_bg" },
-    { MAP_UNSPLIT(jan_03, 0x802432D0), .bgName = "yos_bg" },
+    { MAP(jan_00), .bgName = "yos_bg" },
+    { MAP(jan_01), .bgName = "yos_bg" },
+    { MAP(jan_02), .bgName = "yos_bg" },
+    { MAP(jan_03), .bgName = "yos_bg" },
     { MAP_UNSPLIT(jan_04, 0x80241140), .bgName = "yos_bg" },
     { MAP_UNSPLIT(jan_05, 0x80242710), .bgName = "yos_bg" },
     { MAP_UNSPLIT(jan_06, 0x80242620), .bgName = "jan_bg" },
@@ -740,18 +740,18 @@ MapConfig flo_maps[] = {
 /// Shiver Region
 #include "area_sam/sam.h"
 MapConfig sam_maps[] = {
-    { MAP_UNSPLIT(sam_01, 0x80241F70), .bgName = "yki_bg" },
-    { MAP_UNSPLIT(sam_02, 0x80241C00), .bgName = "yki_bg" },
-    { MAP_UNSPLIT(sam_03, 0x80240940), .bgName = "yki_bg" },
-    { MAP_UNSPLIT(sam_04, 0x80240740), .bgName = "yki_bg" },
-    { MAP_UNSPLIT(sam_05, 0x80241D60), .bgName = "sam_bg" },
+    { MAP(sam_01), .bgName = "yki_bg" },
+    { MAP(sam_02), .bgName = "yki_bg" },
+    { MAP(sam_03), .bgName = "yki_bg" },
+    { MAP(sam_04), .bgName = "yki_bg" },
+    { MAP(sam_05), .bgName = "sam_bg" },
     { MAP(sam_06), .bgName = "sam_bg" },
-    { MAP_UNSPLIT(sam_07, 0x80242020), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(sam_08, 0x802417D0), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(sam_09, 0x80240420), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(sam_10, 0x80240CE0), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(sam_11, 0x802421A0), .bgName = "yki_bg" },
-    { MAP_UNSPLIT(sam_12, 0x802403B0), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(sam_07), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(sam_08), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(sam_09), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(sam_10), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(sam_11), .bgName = "yki_bg" },
+    { MAP(sam_12), .bgName = "yki_bg", .songVariation = 1, .sfxReverb = 1 },
 };
 
 /// Crystal Palace

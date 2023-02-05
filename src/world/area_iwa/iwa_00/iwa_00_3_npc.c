@@ -175,8 +175,8 @@ EvtScript N(EVS_NpcInteract_Whacka_01) = {
 EvtScript N(EVS_NpcIdle_Whacka_01) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Whacka_Idle)
     EVT_CALL(GetNpcPos, NPC_SELF, LVarA, LVarB, LVarC)
-    EVT_CALL(SetNpcPos, NPC_Whacka_01, 0, -1000, 0)
-    EVT_CALL(SetNpcPos, NPC_Whacka_02, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_Whacka_01, NPC_DISPOSE_LOCATION)
+    EVT_CALL(SetNpcPos, NPC_Whacka_02, NPC_DISPOSE_LOCATION)
     EVT_LABEL(0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_IF_GE(LVar1, 20)
@@ -206,9 +206,9 @@ EvtScript N(EVS_NpcIdle_Whacka_01) = {
         EVT_GOTO(10)
     EVT_END_IF
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Whacka_Burrow)
-    EVT_CALL(SetNpcPos, NPC_Whacka_02, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_Whacka_02, NPC_DISPOSE_LOCATION)
     EVT_WAIT(15)
-    EVT_CALL(SetNpcPos, NPC_Whacka_01, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_Whacka_01, NPC_DISPOSE_LOCATION)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -308,8 +308,8 @@ EvtScript N(EVS_NpcHit_Whacka_02) = {
     EVT_IF_GE(GB_IWA00_Whacka_HitCount, 8)
         EVT_CALL(N(func_80240118_90CD58))
     EVT_END_IF
-    EVT_CALL(SetNpcPos, NPC_Whacka_01, 0, -1000, 0)
-    EVT_CALL(SetNpcPos, NPC_Whacka_02, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_Whacka_01, NPC_DISPOSE_LOCATION)
+    EVT_CALL(SetNpcPos, NPC_Whacka_02, NPC_DISPOSE_LOCATION)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(RemoveNpc, NPC_Whacka_01)
     EVT_CALL(RemoveNpc, NPC_Whacka_02)

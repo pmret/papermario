@@ -40,7 +40,7 @@ EvtScript N(EVS_NpcIdle_Bootler) = {
         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_293, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcMoveTo, NPC_SELF, 580, -40, 0)
-        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_THREAD
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 430, 1, 35)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 430, 1, 35)
@@ -98,7 +98,7 @@ EvtScript N(EVS_NpcIdle_Bootler) = {
     EVT_EXEC_WAIT(N(D_8024ACA4_82DF64))
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_293, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcFlyTo, NPC_SELF, 550, 40, 10, 40, 10, EASING_LINEAR)
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(SpeakToPlayer, NPC_FiceT, ANIM_FiceT_Afraid, ANIM_FiceT_Afraid, 5, MSG_MAC_Bridge_0028)
     EVT_WAIT(10)
     EVT_CALL(InterpPlayerYaw, 90, 0)

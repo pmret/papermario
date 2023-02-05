@@ -1,6 +1,6 @@
 #include "common.h"
 
-typedef s32 SparkleScript[0];
+typedef s32 SparkleScript[];
 
 enum {
     SPARKLE_OP_End      = 0,

@@ -29,7 +29,7 @@ enum {
 enum {
     MF_TrainUnk_00          = MapFlag(0),
     MF_EitherSwitchPressed  = MapFlag(1),
-    MF_Unk_0A               = MapFlag(10),
+    AF_JAN01_TreeDrop_StarPiece               = MapFlag(10),
 };
 
 #define NAMESPACE omo_10

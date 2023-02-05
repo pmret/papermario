@@ -119,6 +119,12 @@ typedef s32 ApiStatus;
 #define ApiStatus_REPEAT 3   /* Call again immediately */
 #define ApiStatus_FINISH 255 /* Corresponds to EVT_FINISH */
 
+enum EventCommandResults {
+    EVT_CMD_RESULT_YIELD        = -1,
+    EVT_CMD_RESULT_CONTINUE     = 0,
+    EVT_CMD_RESULT_ERROR        = 1,
+};
+
 enum EventGroupFlags {
     EVT_GROUP_00    = 0x00,
     EVT_GROUP_0A    = 0x0A, // 8 | 2

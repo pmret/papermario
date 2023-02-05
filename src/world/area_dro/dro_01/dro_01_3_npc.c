@@ -24,7 +24,7 @@ s32 N(LetterList)[] = {
     ITEM_NONE
 };
 
-EvtScript N(EVS_ShopOwner_LetterDelivery) = {
+EvtScript N(EVS_LetterPrompt_ShopOwner) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Mouser_ShopOwner, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle,
         ITEM_LETTER19, ITEM_LETTER_TO_FRANKY,

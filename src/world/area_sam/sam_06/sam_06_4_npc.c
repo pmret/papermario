@@ -75,14 +75,14 @@ MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList_FrostT)[] = {
-    ITEM_LETTER_TO_FROSTT,
+    ITEM_LETTER_TO_FROST_T,
     ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_FrostT) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_ShiverToad_03, ANIM_ShiverToad_Green_Talk, ANIM_ShiverToad_Green_Idle,
-        ITEM_LETTER_TO_FROSTT, ITEM_LETTER24,
+        ITEM_LETTER_TO_FROST_T, ITEM_LETTER24,
         MSG_CH7_00FE, MSG_CH7_00FF, MSG_CH7_0100, MSG_CH7_0101,
         EVT_PTR(N(LetterList_FrostT)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
@@ -343,7 +343,7 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(70)
         EVT_END_IF
-    EVT_SET(AF_SAM06_Snowing, FALSE)
+    EVT_SET(AF_SAM_Snowing, FALSE)
     EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 1)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)

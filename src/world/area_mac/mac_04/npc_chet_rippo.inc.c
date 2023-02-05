@@ -157,7 +157,7 @@ EvtScript N(EVS_NpcInteract_ChetRippo) = {
     EVT_END_IF
     EVT_CALL(AddCoin, -39)
     EVT_CALL(ShowCoinCounter, FALSE)
-    EVT_CALL(SetMessageMsg, LVar1, 0)
+    EVT_CALL(SetMessageText, LVar1, 0)
     EVT_CALL(ContinueSpeech, NPC_ChetRippo, ANIM_ChetRippo_Talk, ANIM_ChetRippo_Idle, 0, MSG_MAC_Housing_00AE)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_ChetRippo, ANIM_ChetRippo_Spread)

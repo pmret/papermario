@@ -8,19 +8,19 @@
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
-    ITEM_LETTER25,
+    ITEM_LETTER_TO_KOLORADO,
     ITEM_NONE
 };
 
 EVT_LETTER_PROMPT(Kolorado1, NPC_Kolorado,
     ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
     MSG_CH5_00E4, MSG_CH5_00E5, MSG_CH5_00E6, MSG_CH5_00E7,
-    ITEM_LETTER25, N(LetterList));
+    ITEM_LETTER_TO_KOLORADO, N(LetterList));
 
 EVT_LETTER_PROMPT(Kolorado2, NPC_Kolorado,
     ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
     MSG_CH5_00E8, MSG_CH5_00E9, MSG_CH5_00EA, MSG_CH5_00EB,
-    ITEM_LETTER25, N(LetterList));
+    ITEM_LETTER_TO_KOLORADO, N(LetterList));
 
 EVT_LETTER_REWARD(Kolorado);
 
@@ -101,12 +101,12 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
 EvtScript N(EVS_NpcInteract_Kolorado) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_HIDDEN_PASSAGE_OPEN)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00FC)
-        EVT_EXEC_WAIT(N(EVS_Kolorado1_LetterPrompt))
-        EVT_EXEC_WAIT(N(EVS_Kolorado_LetterReward))
+        EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado1))
+        EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_HurtStill, 5, MSG_CH5_00FA)
-        EVT_EXEC_WAIT(N(EVS_Kolorado2_LetterPrompt))
-        EVT_EXEC_WAIT(N(EVS_Kolorado_LetterReward))
+        EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado2))
+        EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
     EVT_END_IF
     EVT_RETURN
     EVT_END

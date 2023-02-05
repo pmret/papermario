@@ -1749,8 +1749,8 @@ enum ItemIDs {
     ITEM_LETTER02                     = 0x00000037,
     ITEM_LETTER03                     = 0x00000038,
     ITEM_LETTER04                     = 0x00000039,
-    ITEM_LETTER05                     = 0x0000003A,
-    ITEM_LETTER06                     = 0x0000003B,
+    ITEM_LETTER_TO_MAYOR_PENGUIN      = 0x0000003A,
+    ITEM_LETTER_TO_MERLOW             = 0x0000003B,
     ITEM_LETTER07                     = 0x0000003C,
     ITEM_LETTER08                     = 0x0000003D,
     ITEM_LETTER_TO_MINHT              = 0x0000003E,
@@ -1770,12 +1770,12 @@ enum ItemIDs {
     ITEM_LETTER19                     = 0x0000004C,
     ITEM_UNUSED_LETTER06              = 0x0000004D,
     ITEM_LETTER20                     = 0x0000004E,
-    ITEM_LETTER21                     = 0x0000004F,
-    ITEM_LETTER22                     = 0x00000050,
-    ITEM_LETTER_TO_FROSTT             = 0x00000051,
+    ITEM_LETTER_TO_RED_YOSHI_KID      = 0x0000004F,
+    ITEM_LETTER_TO_DANE_T             = 0x00000050,
+    ITEM_LETTER_TO_FROST_T            = 0x00000051,
     ITEM_LETTER24                     = 0x00000052,
     ITEM_ARTIFACT                     = 0x00000053,
-    ITEM_LETTER25                     = 0x00000054,
+    ITEM_LETTER_TO_KOLORADO           = 0x00000054,
     ITEM_UNUSED_LETTER07              = 0x00000055,
     ITEM_DOLLY                        = 0x00000056,
     ITEM_WATER_STONE                  = 0x00000057,
@@ -3172,7 +3172,7 @@ enum ItemEntityFlags {
     ITEM_ENTITY_FLAG_800           = 0x00000800,
     ITEM_ENTITY_FLAG_1000          = 0x00001000,
     ITEM_ENTITY_FLAG_FIXED         = 0x00002000,
-    ITEM_ENTITY_FLAG_TINY          = 0x00004000,
+    ITEM_ENTITY_RESIZABLE          = 0x00004000,
     ITEM_ENTITY_FLAG_8000          = 0x00008000,
     ITEM_ENTITY_FLAG_10000         = 0x00010000,
     ITEM_ENTITY_FLAG_20000         = 0x00020000,
@@ -4853,6 +4853,7 @@ enum TexPanner {
 };
 
 enum CustomGfxUnit {
+    CUSTOM_GFX_NONE = -1,
     CUSTOM_GFX_0    = 0x00,
     CUSTOM_GFX_1    = 0x01,
     CUSTOM_GFX_2    = 0x02,
@@ -5000,6 +5001,7 @@ enum EnemyActionFlags {
 enum EnemyDetectFlags {
     AI_DETECT_SIGHT                 = 0x01,
     AI_DETECT_SENSITIVE_MOTION      = 0x02,
+    AI_DETECT_FLAG_8                = 0x08,
 };
 
 enum EnemyTerritoryFlags {
@@ -5707,12 +5709,40 @@ typedef enum FoldType {
     FOLD_TYPE_A                       = 0xA,
     FOLD_TYPE_B                       = 0xB,
     FOLD_TYPE_C                       = 0xC,
-    FOLD_TYPE_D                       = 0xD,
+    FOLD_TYPE_D                       = 0xD,    // noisy hologram -- used for ghostly star spirits and merlar
     FOLD_TYPE_E                       = 0xE,
     FOLD_TYPE_F                       = 0xF,
     FOLD_TYPE_10                      = 0x10,
     FOLD_TYPE_11                      = 0x11,
 } FoldType;
+
+typedef enum FoldRenderType {
+    FOLD_RENDER_TYPE_0                  = 0x0,
+    FOLD_RENDER_TYPE_1                  = 0x1,
+    FOLD_RENDER_TYPE_2                  = 0x2,
+    FOLD_RENDER_TYPE_3                  = 0x3,
+    FOLD_RENDER_TYPE_4                  = 0x4,
+    FOLD_RENDER_TYPE_5                  = 0x5,
+    FOLD_RENDER_TYPE_6                  = 0x6,
+    FOLD_RENDER_TYPE_7                  = 0x7,
+    FOLD_RENDER_TYPE_8                  = 0x8,
+    FOLD_RENDER_TYPE_9                  = 0x9,
+    FOLD_RENDER_TYPE_A                  = 0xA,
+    FOLD_RENDER_TYPE_B                  = 0xB,
+    FOLD_RENDER_TYPE_C                  = 0xC,
+    FOLD_RENDER_TYPE_D                  = 0xD,
+    FOLD_RENDER_TYPE_E                  = 0xE,
+    FOLD_RENDER_TYPE_F                  = 0xF,
+    FOLD_RENDER_TYPE_10                 = 0x10,
+} FoldRenderType;
+
+typedef enum FoldMeshType {
+    FOLD_MESH_TYPE_0                  = 0x0,
+    FOLD_MESH_TYPE_1                  = 0x1,
+    FOLD_MESH_TYPE_2                  = 0x2,
+    FOLD_MESH_TYPE_3                  = 0x3,
+    FOLD_MESH_TYPE_4                  = 0x4,
+} FoldMeshType;
 
 enum MoveType {
     MOVE_TYPE_NONE          = 0,

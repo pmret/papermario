@@ -773,7 +773,7 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
     gCollisionRayStartY = startY;
     gCollisionRayStartZ = startZ;
     gCollisionRayLength = *hitDepth;
-    colliderID = -1;
+    colliderID = NO_COLLIDER;
 
     if (dirX < 0) {
         min_x = startX + dirX * gCollisionRayLength;
@@ -866,7 +866,7 @@ s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 d
     gCollisionRayStartY = startY;
     gCollisionRayStartZ = startZ;
     gCollisionRayLength = *hitDepth;
-    colliderID = -1;
+    colliderID = NO_COLLIDER;
 
     for (i = 0; i < collisionData->numColliders; i++) {
         collider = &collisionData->colliderList[i];

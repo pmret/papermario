@@ -13,8 +13,8 @@ EvtScript N(EVS_BindExitTriggers) = {
 EvtScript N(EVS_EnterMap) = {
     EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
     EVT_EXEC(EnterWalk)
-    EVT_CALL(SetNpcPos, NPC_GateBoo_01, 0, -1000, 0)
-    EVT_CALL(SetNpcPos, NPC_GateBoo_02, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_GateBoo_01, NPC_DISPOSE_LOCATION)
+    EVT_CALL(SetNpcPos, NPC_GateBoo_02, NPC_DISPOSE_LOCATION)
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20)
         EVT_SUBF(LVar0, EVT_FLOAT(12.0))

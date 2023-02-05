@@ -23,7 +23,7 @@ void is_debug_init(void);
 f32 signF(f32 val);
 
 s32 func_8002ACDC(void);
-void func_8002D160(void);
+void load_obfuscation_shims(void);
 
 void* heap_malloc(s32 size);
 void* _heap_malloc(HeapNode* head, u32 size);
@@ -218,7 +218,7 @@ void set_time_freeze_mode(s32);
 s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID);
 
 void get_dpad_input_radial(f32* angle, f32* magnitude);
-void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
+void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outW);
 void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
 void phys_reset_spin_history(void);
@@ -748,10 +748,10 @@ void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void));
 
 void func_80260A60(void);
 
-void func_802B2000(void);
-void func_802B203C(void);
-void func_802B2078(void);
-void func_802B20B4(void);
+void shim_create_audio_system_obfuscated(void);
+void shim_load_engine_data_obfuscated(void);
+void shim_general_heap_create_obfuscated(void);
+void shim_battle_heap_create_obfuscated(void);
 void func_802B7000_E225B0(void);
 void func_802B70B4_E201C4(void);
 void func_802B7140(void);
@@ -821,7 +821,7 @@ void* load_asset_by_name(const char* assetName, u32* decompressedSize);
 Gfx* mdl_get_copied_gfx(s32 copyIndex);
 void mdl_get_copied_vertices(s32 copyIndex, Vtx** firstVertex, Vtx** copiedVertices, s32* numCopied);
 void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
-s32 func_8011CFBC(f32 arg0, f32 arg1, f32 arg2, s32 arg3, f32* arg4, f32* arg5);
+s32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* screenY);
 void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z);
 void* mdl_get_next_texture_address(s32);
 s32 cancel_current_message(void);

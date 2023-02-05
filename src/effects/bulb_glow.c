@@ -17,8 +17,8 @@ extern Gfx D_09001570_37C340[];
 extern Gfx D_09001618_37C3E8[];
 extern Gfx D_090016C0_37C490[];
 
-Gfx* D_E0078900[] = { 
-    D_09001400_37C1D0, D_090014B8_37C288, D_09001570_37C340, D_09001618_37C3E8, D_090016C0_37C490, D_09001570_37C340 
+Gfx* D_E0078900[] = {
+    D_09001400_37C1D0, D_090014B8_37C288, D_09001570_37C340, D_09001618_37C3E8, D_090016C0_37C490, D_09001570_37C340
 };
 
 UnkBulbGlow D_E0078918[] = {
@@ -157,33 +157,27 @@ void bulb_glow_appendGfx(void* effect) {
     f32 sp18;
     f32 sp1C;
     s32 sp20;
-    s32 sp24;
     s32 sp28;
-    EffectInstance* effectTemp = effect;
-    BulbGlowFXData* data = effectTemp->data.bulbGlow;
-    Gfx* temp_a0_4;
-    Gfx* temp_a1;
-    Gfx* temp_a3;
-    Gfx* temp_a3_2;
-    Gfx* temp_v1;
+    s32 sp30;
+    BulbGlowFXData* data = ((EffectInstance*) effect)->data.bulbGlow;
+    s32 unk_10;
+    s32 unk_00;
     UnkBulbGlow* temp_s1;
+    s32 temp_s3;
+    s32 temp_s6;
+    s32 i;
+    s32 j;
+
     f32 temp_f0;
     f32 temp_f4;
-    s32 temp_a0_3;
-    s32 temp_a2;
+    s32 temp_a0_2;
     s32 temp_f6;
     s32 temp_lo;
     s32 temp_s0_2;
-    s32 temp_s2;
     s32 temp_s2_2;
-    s32 temp_s3;
-    s32 temp_s6;
-    s32 temp_s6_2;
     s32 temp_t0;
     s32 temp_t5;
-    s32 var_s4;
     s32 var_t2;
-    s32 var_t3;
     s32 var_t4;
     s32 var_t5;
     s32 var_t7;
@@ -192,44 +186,42 @@ void bulb_glow_appendGfx(void* effect) {
     u32 temp_t6;
     u8* temp_v0;
 
-    s32 j;
 
-    
-    var_s4 = data->unk_10;
-    temp_s2 = data->unk_00;
-    if (var_s4 > 127) {
-        var_s4 = 127;
+    unk_10 = data->unk_10;
+    unk_00 = data->unk_00;
+    if (unk_10 > 127) {
+        unk_10 = 127;
     }
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    temp_s1 = &D_E0078918[temp_s2];
+    temp_s1 = &D_E0078918[unk_00];
     temp_s6 = temp_s1->unk_10;
     temp_s3 = temp_s1->unk_14;
 
-    var_v1 = shim_func_8011CFBC(data->pos.x, data->pos.y);
-    if (temp_s2 == 5) {
+    var_v1 = shim_is_point_visible(data->pos.x, data->pos.y, data->pos.z, data->unk_1C, &sp18, &sp1C);
+    if (unk_00 == 5) {
         var_v1 = 1;
     }
     if ((var_v1 != 0) && !(sp18 < 0.0f) && !(sp1C < 0.0f) && !(sp18 >= 320.0f) && !(sp1C >= 240.0f)) {
-        gSPDisplayList(gMasterGfxPos++, D_E0078900[temp_s2]);
+        u8 r, g, b;
 
-        temp_v0 = D_E00789AC[data->unk_20 * 3];
-        temp_t0 = var_s4 * 2;
-        temp_f0 = (f32) temp_s6;
-        sp20 = (s32) (sp18 - temp_f0);
-        temp_a0_3 = temp_s6 * 2;
-        var_t7 = sp20 + temp_a0_3;
-        temp_f6 = (s32) (sp1C - temp_f0);
-        var_t4 = temp_f6 + temp_a0_3;
+        gSPDisplayList(gMasterGfxPos++, D_E0078900[unk_00]);
 
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 
-            (temp_v0[0] * temp_t0) / 255, 
-            (temp_v0[1] * temp_t0) / 255, 
-            (temp_v0[2] * temp_t0) / 255,
-            127
-        );
+        temp_v0 = &D_E00789AC[data->unk_20 * 3];
+        temp_t0 = unk_10 * 2;
+
+        r = temp_v0[0] * temp_t0 / 255;
+        g = temp_v0[1] * temp_t0 / 255;
+        b = temp_v0[2] * temp_t0 / 255;
+
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, r, g, b, 127);
+
+        sp20 = sp18 - temp_s6;
+        var_t7 = sp20 + temp_s6 * 2;
+        temp_f6 = sp1C - temp_s6;
+        var_t4 = temp_f6 + temp_s6 * 2;
 
         var_t5 = 0;
         if (sp20 < 0) {
@@ -239,69 +231,37 @@ void bulb_glow_appendGfx(void* effect) {
         if (temp_f6 < 0) {
             var_v1_2 = -temp_f6;
         }
-        if (var_t7 > SCREEN_WIDTH) {
-            var_t7 = SCREEN_WIDTH - 1;
+        if (var_t7 > 320) {
+            var_t7 = 319;
         }
-        if (var_t4 > SCREEN_HEIGHT) {
-            var_t4 = SCREEN_HEIGHT - 1;
+        if (var_t4 > 240) {
+            var_t4 = 239;
         }
-        var_t3 = var_v1_2 / temp_s3;
         temp_lo = (s32) (var_t4 - temp_f6) / temp_s3;
-        sp24 = temp_lo;
-        if (var_t3 < temp_lo) {
-            temp_s6_2 = sp20 + var_t5;
-            sp28 = (var_t7 - temp_s6_2) * 2;
-            var_t2 = (var_t3 * temp_s3) + temp_f6;
-loop_19:
-            if ((var_t2 + temp_s3) < 0xF0) {
-                temp_f4 = (f32) sp20;
-                temp_t5 = ((temp_s6_2 * 4) & 0xFFF) << 0xC;
-                temp_s2_2 = (((var_t7 - 1) * 4) & 0xFFF) << 0xC;
-                temp_s0_2 = ((temp_s3 - 1) * 4) & 0xFFF;
 
-                temp_a3_2->words.w0 = ((((s32) (temp_f4 * temp_s1->unk_08) * 4) & 0xFFF) << 0xC) | ((((s32) ((f32) (temp_s1->unk_04 * 0x14) - ((f32) (var_t3 * temp_s1->unk_14) * temp_s1->unk_0C)) * 4) & 0xFFF) | 0xF2000000);
-                temp_a3_2->words.w1 = ((((s32) ((temp_f4 * temp_s1->unk_08) + (f32) temp_s1->unk_00) * 4) & 0xFFF) << 0xC) | (((s32) ((f32) (temp_s1->unk_04 * 0x15) - ((f32) (var_t3 * temp_s1->unk_14) * temp_s1->unk_0C)) * 4) & 0xFFF);
+        for (i = var_v1_2 / temp_s3; i < temp_lo; i++) {
+            if ((i + 1) * temp_s3 + temp_f6 >= 240) {
+                break;
+            }
 
-                for (j = 0; j < 1; j++) {
-                    temp_a0_4->words.w0 = 0xFD10013F;
-                    temp_a0_4->words.w1 = (u32) (nuGfxCfb_ptr + (var_t2 * 0x280) + 0x80000000);
+            gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE,
+                (s32) (sp20 * temp_s1->unk_08) * 4,
+                (s32) (temp_s1->unk_04 * 0x14 - i * temp_s1->unk_14 * temp_s1->unk_0C) * 4,
+                (s32) (sp20 * temp_s1->unk_08 + temp_s1->unk_00) * 4,
+                (s32) (temp_s1->unk_04 * 0x15 - i * temp_s1->unk_14 * temp_s1->unk_0C) * 4);
 
-                    temp_a1->words.w0 = ((((s32) (sp28 + 7) >> 3) & 0x1FF) << 9) | 0xF5100100;
-                    temp_a1->words.w1 = 07020090
-
-                    temp_a1->unk8 = E600000000000000
-
-                    temp_a2 = var_t2 + temp_s3;
-                    
-                    temp_a1->unk10 = temp_t5 | 0xF4000000;
-                    temp_a1->unk14 = (s32) (temp_s2_2 | (temp_s0_2 | 0x07000000));
-
-                    temp_a1->unk18 = E700000000000000
-
-                    temp_a1->unk20 = ((((s32) (sp28 + 7) >> 3) & 0x1FF) << 9) | 0xF5100100;
-                    temp_a1->unk24 = 0x01020090;
-
-                    temp_a1->unk28 = (s32) (temp_t5 | 0xF2000000);
-                    temp_a1->unk2C = (s32) (temp_s2_2 | (temp_s0_2 | 0x01000000));
-
-                    temp_a1->unk30 = (s32) ((((var_t7 * 4) & 0xFFF) << 0xC) | (((temp_a2 * 4) & 0xFFF) | 0xE4000000));
-                    temp_a1->unk34 = (s32) (temp_t5 | ((var_t2 * 4) & 0xFFF));
-
-                    temp_a1->unk38 = E1000000
-                    temp_a1->unk3C = (s32) ((temp_s6_2 & 0x1FF) << 0x15);
-
-                    temp_a1->unk40 = F100000004000400
-                    temp_a1->unk48 = E700000000000000
-                }
-                var_t3 += 1;
-                var_t2 = temp_a2;
-                if (var_t3 < sp24) {
-                    goto loop_19;
-                }
+            for (j = 0; j < 1; j++) {
+                gDPLoadMultiTile(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(nuGfxCfb_ptr + (i * temp_s3 + temp_f6) * 0x280),
+                    0x0100, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 0, sp20 + var_t5, 0, var_t7 - 1, temp_s3 - 1,
+                    0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 9, 8, G_TX_NOLOD, G_TX_NOLOD);
+                gSPTextureRectangle(gMasterGfxPos++, (sp20 + var_t5) * 4, (i * temp_s3 + temp_f6) * 4, var_t7 * 4, ((i + 1) * temp_s3 + temp_f6) * 4, G_TX_RENDERTILE, sp20 + var_t5, 0, 0x0400, 0x0400);
+                gDPPipeSync(gMasterGfxPos++);
             }
         }
     }
 }
+
 #else
 INCLUDE_ASM(s32, "effects/bulb_glow", bulb_glow_appendGfx);
 #endif
+

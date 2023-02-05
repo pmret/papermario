@@ -6,7 +6,7 @@ s32 N(DojoBattleIDs)[] = {
     BTL_MAC_FORMATION_04
 };
 
-ApiStatus N(SetDojoBattle)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetDojoBattle)) {
     Enemy* enemy = script->owner1.enemy;
     s32 battleIndex = evt_get_variable(script, GB_MAC00_DojoRank);
 

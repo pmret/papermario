@@ -950,10 +950,10 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     itemEntity->unk_34.z = -9999;
     D_801565A6 = 30;
 
-    itemEntity->flags |= ITEM_ENTITY_FLAG_TINY;
+    itemEntity->flags |= ITEM_ENTITY_RESIZABLE;
     if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
         itemEntity->flags |= ITEM_ENTITY_FLAG_40000;
-        itemEntity->flags &= ~ITEM_ENTITY_FLAG_TINY;
+        itemEntity->flags &= ~ITEM_ENTITY_RESIZABLE;
     }
 
     if (ItemEntityAlternatingSpawn != 0) {
@@ -1045,33 +1045,33 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
         case ITEM_SPAWN_MODE_TOSS_FADE1:
             itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_1000;
             itemEntity->scale = 0.8f;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_TINY;
+            itemEntity->flags |= ITEM_ENTITY_RESIZABLE;
             break;
         case ITEM_SPAWN_MODE_TOSS_FADE2:
             itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_1000;
             itemEntity->flags |= ITEM_ENTITY_FLAG_10000;
             itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_FADE1;
             itemEntity->scale = 0.8f;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_TINY;
+            itemEntity->flags |= ITEM_ENTITY_RESIZABLE;
             break;
         case ITEM_SPAWN_MODE_TOSS_FADE3:
             itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_1000;
             itemEntity->flags |= ITEM_ENTITY_FLAG_400000;
             itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_FADE1;
             itemEntity->scale = 0.8f;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_TINY;
+            itemEntity->flags |= ITEM_ENTITY_RESIZABLE;
             break;
         case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL:
             itemEntity->flags |= ITEM_ENTITY_FLAG_800000;
             itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
             itemEntity->scale = 0.8f;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_TINY;
+            itemEntity->flags |= ITEM_ENTITY_RESIZABLE;
             break;
         case ITEM_SPAWN_MODE_UNKNOWN_1B:
             itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_8000;
             itemEntity->spawnType = ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS;
             itemEntity->scale = 0.8f;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_TINY;
+            itemEntity->flags |= ITEM_ENTITY_RESIZABLE;
             break;
         case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
             itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_8000 | ITEM_ENTITY_FLAG_NEVER_VANISH;
@@ -1188,10 +1188,10 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     item->physicsData = NULL;
     item->pickupDelay = 0;
     item->wsFaceAngle = 0;
-    item->flags |= ITEM_ENTITY_FLAG_TINY;
+    item->flags |= ITEM_ENTITY_RESIZABLE;
 
     if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
-        item->flags = (item->flags | ITEM_ENTITY_FLAG_40000) & ~ITEM_ENTITY_FLAG_TINY;
+        item->flags = (item->flags | ITEM_ENTITY_FLAG_40000) & ~ITEM_ENTITY_RESIZABLE;
     }
     if (ItemEntityAlternatingSpawn != 0) {
         item->flags |= ITEM_ENTITY_FLAG_20000;
@@ -1394,7 +1394,7 @@ void appendGfx_item_entity(void* data) {
     rot = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
     guTranslateF(mtxTranslate, itemEntity->position.x, itemEntity->position.y + yOffset, itemEntity->position.z);
     guRotateF(mtxRotY, rot, 0.0f, 1.0f, 0.0f);
-    if (itemEntity->flags & ITEM_ENTITY_FLAG_TINY) {
+    if (itemEntity->flags & ITEM_ENTITY_RESIZABLE) {
         guScaleF(mtxScale, itemEntity->scale, itemEntity->scale, itemEntity->scale);
         guMtxCatF(mtxRotY, mtxScale, mtxRotY);
     }
@@ -1605,7 +1605,7 @@ void render_item_entities(void) {
                         rotX = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
                         guTranslateF(sp58, item->position.x, -item->position.y - offsetY, item->position.z);
                         guRotateF(sp98, rotX, 0.0f, 1.0f, 0.0f);
-                        if (item->flags & ITEM_ENTITY_FLAG_TINY) {
+                        if (item->flags & ITEM_ENTITY_RESIZABLE) {
                             guScaleF(spD8, item->scale, item->scale, item->scale);
                             guMtxCatF(sp98, spD8, sp98);
                         }
@@ -1766,12 +1766,12 @@ void func_80133A94(s32 idx, s32 itemID) {
 
     item->itemID = itemID;
 
-    item->flags |= ITEM_ENTITY_FLAG_TINY;
+    item->flags |= ITEM_ENTITY_RESIZABLE;
     item->flags &= ~ITEM_ENTITY_FLAG_40000;
 
     if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
         item->flags |= ITEM_ENTITY_FLAG_40000;
-        item->flags &= ~ITEM_ENTITY_FLAG_TINY;
+        item->flags &= ~ITEM_ENTITY_RESIZABLE;
     }
 
     item_entity_load(item);

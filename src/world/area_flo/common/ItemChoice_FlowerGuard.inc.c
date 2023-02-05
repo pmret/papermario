@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(FlowerGuard_SetItemEntityPosition)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(FlowerGuard_SetItemEntityPosition)) {
     Bytecode* args = script->ptrReadPos;
     s32 itemIdx = evt_get_variable(script, *args++);
     s32 x = evt_get_variable(script, *args++);
@@ -15,7 +15,7 @@ ApiStatus N(FlowerGuard_SetItemEntityPosition)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(FlowerGuard_JudgeItemTastiness)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(FlowerGuard_JudgeItemTastiness)) {
     s32 itemId = evt_get_variable(script, *script->ptrReadPos);
     ItemData* item = &gItemTable[itemId];
 
@@ -30,7 +30,7 @@ ApiStatus N(FlowerGuard_JudgeItemTastiness)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(FlowerGuard_MakeItemList)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(FlowerGuard_MakeItemList)) {
     s32 i;
 
     for (i = 0; i < ITEM_NUM_CONSUMABLES; i++) {

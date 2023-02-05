@@ -48,7 +48,7 @@ EvtScript N(D_802525B0_864720) = {
             EVT_CALL(EnableModel, MODEL_o139, FALSE)
             EVT_CALL(EnableModel, MODEL_o140, FALSE)
         EVT_CASE_EQ(3)
-            EVT_SET(MF_Unk_0A, FALSE)
+            EVT_SET(AF_JAN01_TreeDrop_StarPiece, FALSE)
             EVT_CALL(EnableGroup, MODEL_bar_inn, FALSE)
             EVT_CALL(EnableModel, MODEL_o139, TRUE)
             EVT_CALL(EnableModel, MODEL_o140, TRUE)

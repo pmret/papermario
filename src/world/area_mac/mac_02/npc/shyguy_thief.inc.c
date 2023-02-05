@@ -69,7 +69,7 @@ EvtScript N(D_8024B6E8_82E9A8) = {
     EVT_CALL(NpcMoveTo, NPC_ShyGuy, -190, -20, 0)
     EVT_CALL(NpcMoveTo, NPC_ShyGuy, -350, -20, 0)
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetNpcPos, NPC_ShyGuy, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_ShyGuy, NPC_DISPOSE_LOCATION)
     EVT_SET(GB_StoryProgress, STORY_CH4_FRYING_PAN_STOLEN)
     EVT_WAIT(10)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0))

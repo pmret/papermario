@@ -21,9 +21,12 @@ enum {
 };
 
 enum {
-    AF_SAM06_Snowing       = AreaFlag(1),
-    AF_SAM06_LastSnowing       = AreaFlag(2),
-    AF_SAM_05       = AreaFlag(5),
+    AF_SAM_Snowing      = AreaFlag(1),
+    AF_SAM_LastSnowing  = AreaFlag(2),
+    AF_SAM_03           = AreaFlag(3),
+    AF_SAM_04           = AreaFlag(4),
+    AF_SAM_05           = AreaFlag(5),
+    AF_SAM_06           = AreaFlag(6),
 };
 
 extern MapSettings sam_01_settings;

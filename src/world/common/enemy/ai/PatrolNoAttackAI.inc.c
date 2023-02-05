@@ -1,3 +1,6 @@
+#ifndef _PATROL_AI_NO_ATTACK_
+#define _PATROL_AI_NO_ATTACK_
+
 #include "common.h"
 #include "npc.h"
 
@@ -111,3 +114,5 @@ ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
+
+#endif

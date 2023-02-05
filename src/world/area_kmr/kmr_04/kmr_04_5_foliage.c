@@ -141,7 +141,7 @@ FoliageDropList N(Bush1_Drops) = {
             .pos = { 248, 17, 97 },
             .spawnMode = ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE,
             .pickupFlag = GF_KMR04_Bush1_Coin,
-            .spawnFlag = MF_Unk_0A,
+            .spawnFlag = AF_JAN01_TreeDrop_StarPiece,
         },
     }
 };
@@ -397,7 +397,7 @@ BombTrigger N(BombPos_Tree2) = {
     .radius = 0.0f
 };
 
-EvtScript N(Tree3_CallbackScript) = {
+EvtScript N(EVS_OnShakeTree3) = {
     EVT_IF_EQ(GF_KMR04_Tree3_Dolly, TRUE)
         EVT_RETURN
     EVT_END_IF
@@ -443,7 +443,7 @@ ShakeTreeConfig N(ShakeTree_Tree3) = {
     .leaves = &N(Tree3_LeafModels),
     .trunk = &N(Tree3_TrunkModels),
     .vectors = &N(Tree3_Effects),
-    .callback = &N(Tree3_CallbackScript),
+    .callback = &N(EVS_OnShakeTree3),
 };
 
 BombTrigger N(BombPos_Tree3) = {

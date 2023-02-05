@@ -634,42 +634,42 @@ ApiStatus func_802D2520(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 a0 = *args++;
-    s32 val = evt_get_variable(script, *args++);
+    s32 foldType = evt_get_variable(script, *args++);
     s32 a2, a3, a4, a5;
 
     func_802DDFF8(a0, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
 
-    switch (val) {
-        case 0:
+    switch (foldType) {
+        case FOLD_TYPE_NONE:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             func_802DDFF8(a0, FOLD_TYPE_NONE, 0, 0, 0, 0, D_802DB5B0);
             break;
-        case 2:
-        case 3:
+        case FOLD_TYPE_2:
+        case FOLD_TYPE_3:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
-        case 1:
-            func_802DDFF8(a0, val, 0, 0, 0, 0, D_802DB5B0);
+        case FOLD_TYPE_1:
+            func_802DDFF8(a0, foldType, 0, 0, 0, 0, D_802DB5B0);
             break;
-        case 4:
+        case FOLD_TYPE_4:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
             func_802DDFF8(a0, FOLD_TYPE_4, a2, a3, a4, 0, D_802DB5B0);
             break;
-        case 6:
+        case FOLD_TYPE_6:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
             func_802DDFF8(a0, FOLD_TYPE_6, a2, a3, a4, 255, D_802DB5B0);
             break;
-        case 7:
+        case FOLD_TYPE_7:
             playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
             a5 = evt_get_variable(script, *args++);
             func_802DDFF8(a0, FOLD_TYPE_7, 255, 255, 255, a5, D_802DB5B0);
             break;
-        case 8:
+        case FOLD_TYPE_8:
             playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
@@ -677,14 +677,14 @@ ApiStatus func_802D2520(Evt* script, s32 isInitialCall) {
             a5 = evt_get_variable(script, *args++);
             func_802DDFF8(a0, FOLD_TYPE_8, a2, a3, a4, a5, D_802DB5B0);
             break;
-        case 5:
+        case FOLD_TYPE_5:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
             func_802DDFF8(a0, FOLD_TYPE_5, a2, a3, a4, 0, D_802DB5B0);
             break;
-        case 13:
+        case FOLD_TYPE_D:
             playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);

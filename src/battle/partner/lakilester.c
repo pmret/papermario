@@ -695,7 +695,7 @@ ApiStatus N(CloudNineFX)(Evt* script, s32 isInitialCall) {
             if (sCounter >= 1.0) {
                 return ApiStatus_DONE2;
             }
-            battleStatus->cloudNineEffect->data.endingDecals->unk_10 += 0.2;
+            battleStatus->cloudNineEffect->data.endingDecals->scale += 0.2;
             sCounter += 0.2;
             break;
     }
@@ -1375,7 +1375,7 @@ ApiStatus N(ProcessHurricane)(Evt* script, s32 isInitialCall) {
             partner->state.moveArcAmplitude = 0;
             sIsHurricaneActive = TRUE;
             D_8023D338 = 255;
-            sHuffPuffBreathEffect = effect = fx_huff_puff_breath(0, 0.0f, -1000.0f, 0.0f, 0.0f, -2.0f, 0.6f, 0);
+            sHuffPuffBreathEffect = effect = fx_huff_puff_breath(0, NPC_DISPOSE_LOCATION, 0.0f, -2.0f, 0.6f, 0);
 
             effect->data.huffPuffBreath->primR = 20;
             effect->data.huffPuffBreath->primG = 80;

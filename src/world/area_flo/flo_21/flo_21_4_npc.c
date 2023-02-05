@@ -20,23 +20,7 @@ NpcSettings N(NpcSettings_HuffNPuff) = {
     .level = 99,
 };
 
-NpcSettings N(NpcSettings_Unused1) = {
-    .height = 26,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused2) = {
-    .height = 20,
-    .radius = 20,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_Unused3) = {
-    .height = 22,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/StarSpirit.inc.c"
 
 Vec3f N(Path_JumpOut)[] = {
     {  600.0,   104.0,    0.0 },

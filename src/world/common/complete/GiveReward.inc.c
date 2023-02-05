@@ -56,6 +56,12 @@ EvtScript N(GiveCoinReward) = {
     EVT_EXEC_WAIT(N(GiveKeyReward)) \
     EVT_CALL(AddBadge, itemID, LVar0)
 
+#define EVT_GIVE_BADGE_REWARD_ALT(itemID, outIdx) \
+    EVT_SET(LVar0, itemID) \
+    EVT_SET(LVar1, ITEM_TYPE_BADGE) \
+    EVT_EXEC_WAIT(N(GiveKeyReward)) \
+    EVT_CALL(AddBadge, LVar0, outIdx)
+
 #define EVT_GIVE_CONSUMABLE_REWARD(itemID) \
     EVT_SET(LVar0, itemID) \
     EVT_SET(LVar1, ITEM_TYPE_CONSUMABLE) \

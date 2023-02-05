@@ -95,14 +95,14 @@ ApiStatus func_802404E0_AD63B0(Evt* script, s32 isInitialCall) {
         temp_f26 *= 0.1;
         temp_f24 += cos_deg(temp_f20 * 15.0f) * 5.0f;
         effect = fx_ice_shard(a0, a1, a2, -150.0f, ((i & 3) * 0.4) + 1.0, ((i & 3) * 4) + 30);
-        effect->data.iceShard->unk_44 = 0;
-        effect->data.iceShard->unk_48 = (rand_int(10) * 0.2) + 0.1;
-        effect->data.iceShard->unk_3C = 35 * i;
-        effect->data.iceShard->unk_40 = rand_int(10) - 5;
-        effect->data.iceShard->unk_4C = temp_f24;
-        effect->data.iceShard->unk_50 = temp_f26;
-        effect->data.iceShard->unk_54 = 2.0f;
-        effect->data.iceShard->unk_58 = -0.1f;
+        effect->data.iceShard->animFrame = 0;
+        effect->data.iceShard->animRate = (rand_int(10) * 0.2) + 0.1;
+        effect->data.iceShard->rotation = 35 * i;
+        effect->data.iceShard->angularVel = rand_int(10) - 5;
+        effect->data.iceShard->vel.x = temp_f24;
+        effect->data.iceShard->vel.y = temp_f26;
+        effect->data.iceShard->vel.z = 2.0f;
+        effect->data.iceShard->gravAccel = -0.1f;
     }
     return ApiStatus_DONE2;
 }

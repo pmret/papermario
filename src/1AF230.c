@@ -126,3 +126,7 @@ ApiStatus LoadStarPowerScript(Evt* script, s32 isInitialCall) {
     script->varTable[0] = (s32) (&D_8029C7D0[starPowerIdx])->init;
     return ApiStatus_DONE2;
 }
+
+#ifndef SHIFT
+static BSS u8 bss_padding[0x1390];
+#endif

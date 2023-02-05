@@ -1,7 +1,10 @@
 #include "common.h"
 #include "entity.h"
 
-EntityModelScript D_8014C260[] = { {ems_End}, {ems_End }};
+EntityModelScript D_8014C260 = {
+    ems_End
+    ems_End
+};
 Lights1 D_8014C268 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
 
 extern EntityModelList gWorldEntityModelList;
@@ -112,7 +115,7 @@ s32 load_entity_model(EntityModelScript* cmdList) {
     newEntityModel->nextFrameTime = 1.0f;
     newEntityModel->timeScale = 1.0f;
     if (cmdList == NULL) {
-        newEntityModel->cmdListReadPos = D_8014C260;
+        newEntityModel->cmdListReadPos = &D_8014C260;
     }
     newEntityModel->vertexArray = NULL;
     newEntityModel->fpSetupGfxCallback = NULL;
@@ -154,7 +157,7 @@ s32 ALT_load_entity_model(EntityModelScript* cmdList) {
     newEntityModel->nextFrameTime = 1.0f;
     newEntityModel->timeScale = 1.0f;
     if (cmdList == NULL) {
-        newEntityModel->cmdListReadPos = D_8014C260;
+        newEntityModel->cmdListReadPos = &D_8014C260;
     }
     newEntityModel->vertexArray = NULL;
     newEntityModel->fpSetupGfxCallback = NULL;
@@ -168,7 +171,6 @@ s32 ALT_load_entity_model(EntityModelScript* cmdList) {
 
 void exec_entity_model_commandlist(s32 idx) {
     EntityModel* entityModel;
-    void* temp_v0_2;
 
     if (!gGameStatusPtr->isBattle || (idx & BATTLE_ENTITY_ID_MASK)) {
         idx &= ~BATTLE_ENTITY_ID_MASK;
@@ -190,7 +192,7 @@ void exec_entity_model_commandlist(s32 idx) {
 s32 step_entity_model_commandlist(EntityModel* entityModel) {
     SpriteRasterInfo* imageData;
 
-    u32* curPos = entityModel->cmdListReadPos[0];
+    u32* curPos = *entityModel->cmdListReadPos;
     switch (*curPos++) {
         case 0: // kill model
             free_entity_model_by_ref(entityModel);
@@ -413,7 +415,7 @@ void draw_entity_model_A(s32 modelIdx, Mtx* transformMtx) {
     RenderTask* rtPtr = &rt;
     Camera* camera = &gCameras[gCurrentCamID];
     Matrix4f mtx;
-    f32 x, y, z, s;
+    f32 x, y, z, w;
     f32 inX, inY, inZ;
 
     if ((gGameStatusPtr->isBattle == 0) || (modelIdx & 0x800)) {
@@ -431,7 +433,7 @@ void draw_entity_model_A(s32 modelIdx, Mtx* transformMtx) {
                             inX = mtx[3][0];
                             inY = mtx[3][1];
                             inZ = mtx[3][2];
-                            transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &s);
+                            transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &w);
                             rtPtr->renderMode = model->renderMode;
                             rtPtr->appendGfxArg = model;
                             rtPtr->appendGfx = (void(*)(void*))appendGfx_entity_model;
@@ -451,7 +453,7 @@ void draw_entity_model_B(s32 modelIdx, Mtx* transformMtx, s32 vertexSegment, Vec
     RenderTask* rtPtr = &rt;
     Camera* camera = &gCameras[gCurrentCamID];
     Matrix4f mtx;
-    f32 x, y, z, s;
+    f32 x, y, z, w;
     f32 inX, inY, inZ;
 
     if ((gGameStatusPtr->isBattle == 0) || (modelIdx & 0x800)) {
@@ -470,7 +472,7 @@ void draw_entity_model_B(s32 modelIdx, Mtx* transformMtx, s32 vertexSegment, Vec
                             inX = mtx[3][0];
                             inY = mtx[3][1];
                             inZ = mtx[3][2];
-                            transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &s);
+                            transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &w);
                             rtPtr->renderMode = model->renderMode;
                             rtPtr->appendGfxArg = model;
                             rtPtr->appendGfx = (void(*)(void*))appendGfx_entity_model;
@@ -720,7 +722,7 @@ void set_entity_model_render_command_list(s32 idx, EntityModelScript* cmdList) {
 
     if (entityModel != NULL && entityModel->flags) {
         if (cmdList == NULL) {
-            cmdList = D_8014C260;
+            cmdList = &D_8014C260;
         }
         entityModel->cmdListReadPos = cmdList;
         entityModel->cmdListSavedPos = cmdList;

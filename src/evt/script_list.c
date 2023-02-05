@@ -251,7 +251,7 @@ Evt* start_script(EvtScript* source, s32 priority, s32 flags) {
     ASSERT(newScript != NULL);
 
     newScript->stateFlags = flags | EVT_FLAG_ACTIVE;
-    newScript->currentOpcode = 0;
+    newScript->currentOpcode = EVT_OP_INTERNAL_FETCH;
     newScript->priority = priority;
     newScript->ptrNextLine = (Bytecode*)source;
     newScript->ptrFirstLine = (Bytecode*)source;
@@ -323,7 +323,7 @@ Evt* start_script_in_group(EvtScript* source, u8 priority, u8 flags, u8 groupFla
     // Some of this function is surely macros. I think we'll learn more as we do others in this file. -Ethan
     do {
         newScript->stateFlags = flags | EVT_FLAG_ACTIVE;
-        newScript->currentOpcode = 0;
+        newScript->currentOpcode = EVT_OP_INTERNAL_FETCH;
         newScript->priority = priority;
         newScript->id = gStaticScriptCounter++;
         newScript->ptrNextLine = (Bytecode*)source;
@@ -395,7 +395,7 @@ Evt* start_child_script(Evt* parentScript, EvtScript* source, s32 flags) {
     child->ptrCurrentLine = child->ptrFirstLine = child->ptrNextLine = (Bytecode*)source;
 
 
-    child->currentOpcode = 0;
+    child->currentOpcode = EVT_OP_INTERNAL_FETCH;
     child->userData = NULL;
     child->blockingParent = parentScript;
     child->childScript = NULL;
@@ -463,7 +463,7 @@ Evt* func_802C39F8(Evt* parentScript, Bytecode* nextLine, s32 newState) {
     child->ptrNextLine = nextLine;
     child->ptrFirstLine = nextLine;
     child->ptrCurrentLine = nextLine;
-    child->currentOpcode = 0;
+    child->currentOpcode = EVT_OP_INTERNAL_FETCH;
     child->userData = NULL;
     child->blockingParent = NULL;
     child->parentScript = parentScript;
@@ -514,7 +514,7 @@ Evt* func_802C3C10(Evt* script, Bytecode* line, s32 arg2) {
     script->ptrNextLine = line;
     script->ptrFirstLine = line;
     script->ptrCurrentLine = line;
-    script->currentOpcode = 0;
+    script->currentOpcode = EVT_OP_INTERNAL_FETCH;
     script->frameCounter = 0;
     script->stateFlags |= arg2;
     script->timeScale = 1.0f;
@@ -555,7 +555,7 @@ Evt* restart_script(Evt* script) {
     script->loopDepth = -1;
     script->switchDepth = -1;
     script->frameCounter = 0;
-    script->currentOpcode = 0;
+    script->currentOpcode = EVT_OP_INTERNAL_FETCH;
 
     script->ptrNextLine = ptrFirstLine;
     script->ptrCurrentLine = ptrFirstLine;
@@ -600,11 +600,11 @@ void update_scripts(void) {
 
                     script->frameCounter -= 1.0;
                     status = evt_execute_next_command(script);
-                    if (status == 1) {
+                    if (status == EVT_CMD_RESULT_ERROR) {
                         stop = TRUE;
                         break;
                     }
-                } while (status != -1);
+                } while (status != EVT_CMD_RESULT_YIELD);
 
                 if (stop) {
                     break;

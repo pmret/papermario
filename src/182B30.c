@@ -1406,7 +1406,7 @@ void appendGfx_player_actor(void* arg0) {
             effect->data.endingDecals->pos.x = playerPosX;
             effect->data.endingDecals->pos.y = playerPosY;
             effect->data.endingDecals->pos.z = playerPosZ;
-            effect->data.endingDecals->unk_10 = player->scalingFactor;
+            effect->data.endingDecals->scale = player->scalingFactor;
         } else {
             effect = battleStatus->cloudNineEffect;
             effect->data.endingDecals->pos.x = playerPosX;

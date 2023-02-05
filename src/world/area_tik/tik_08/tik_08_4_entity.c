@@ -39,7 +39,7 @@ EvtScript N(EVS_OnSwitchActivate) = {
 
 EvtScript N(EVS_MakeEntities) = {
     EVT_IF_EQ(GF_TIK08_WarpPipe, FALSE)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_BlueSwitch), 0, -1000, 0, 0, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_BlueSwitch), NPC_DISPOSE_LOCATION, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_TIK_04))
         EVT_SET(MV_BlueSwitch, LVar0)
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnSwitchActivate)), TRIGGER_AREA_FLAG_SET, AF_TIK_04, 1, 0)

@@ -218,7 +218,7 @@ NpcGroupList N(DefaultNPCs) = {
 
 NpcGroupList N(EpilogueNPCs) = {
     //@bug? only loads the first NPC from the group, cannot use macro here
-    { .npcCount = 1, .npcs = &N(NpcData_TrainToads)[0], .battle = 0, .stage = 0 },
+    { .npcCount = 1, .npcs = &N(NpcData_TrainToads)[0] },
     NPC_GROUP(N(NpcData_Epilogue)),
     {}
 };

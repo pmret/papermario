@@ -26,7 +26,7 @@ enum {
 };
 
 enum {
-    MV_Unk_0A           = MapVar(10),
+    MV_ActingPartner    = MapVar(10),
 };
 
 #define NAMESPACE omo_14

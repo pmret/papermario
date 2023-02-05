@@ -11,7 +11,7 @@ struct Evt;
 
 typedef ApiStatus(*ApiFunc)(struct Evt*, s32);
 
-typedef Bytecode EvtScript[0];
+typedef Bytecode EvtScript[];
 
 typedef void NoArgCallback(void*);
 
@@ -1738,6 +1738,12 @@ typedef struct BombTrigger {
     /* 0x00 */ Vec3f pos;
     /* 0x0C */ s32 radius; // effective 'size' of the object, usually set to zero because bombettes explosion radius is large enough
 } BombTrigger; // size = 0x10;
+
+// the use of this is a bug in sam_11
+typedef struct BombTriggerF {
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C */ f32 radius;
+} BombTriggerF; // size = 0x10;
 
 typedef struct AnimatedModel {
     /* 0x00 */ s32 animModelID;

@@ -81,23 +81,7 @@ EvtScript N(EVS_BindExitTriggers) = {
     EVT_END
 };
 
-EvtScript N(EVS_ManageSnowfall) = {
-    EVT_SET(AF_SAM06_Snowing, TRUE)
-    EVT_SET(AF_SAM06_LastSnowing, FALSE)
-    EVT_LABEL(10)
-        EVT_IF_NE(AF_SAM06_Snowing, AF_SAM06_LastSnowing)
-            EVT_IF_EQ(AF_SAM06_Snowing, FALSE)
-                EVT_CALL(RemoveEffect, LVarF)
-            EVT_ELSE
-                EVT_PLAY_EFFECT(EFFECT_SNOWFALL, 0, 10)
-            EVT_END_IF
-            EVT_SET(AF_SAM06_LastSnowing, AF_SAM06_Snowing)
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_GOTO(10)
-    EVT_RETURN
-    EVT_END
-};
+#include "../common/ManageSnowfall.inc.c"
 
 EvtScript N(EVS_TexPan_Fire) = {
     EVT_CALL(EnableTexPanning, MODEL_hi1, TRUE)

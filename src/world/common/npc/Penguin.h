@@ -69,3 +69,43 @@
     .anim_E = ANIM_MayorPenguinWife_Idle, \
     .anim_F = ANIM_MayorPenguinWife_Idle, \
 }
+
+#define PENGUIN_PATROL_ANIMS \
+{ \
+    .idle   = ANIM_PenguinPatrol_Idle, \
+    .walk   = ANIM_PenguinPatrol_Walk, \
+    .run    = ANIM_PenguinPatrol_Idle, \
+    .chase  = ANIM_PenguinPatrol_Idle, \
+    .anim_4 = ANIM_PenguinPatrol_Idle, \
+    .anim_5 = ANIM_PenguinPatrol_Idle, \
+    .death  = ANIM_PenguinPatrol_Idle, \
+    .hit    = ANIM_PenguinPatrol_Idle, \
+    .anim_8 = ANIM_PenguinPatrol_Idle, \
+    .anim_9 = ANIM_PenguinPatrol_Idle, \
+    .anim_A = ANIM_PenguinPatrol_Idle, \
+    .anim_B = ANIM_PenguinPatrol_Idle, \
+    .anim_C = ANIM_PenguinPatrol_Idle, \
+    .anim_D = ANIM_PenguinPatrol_Idle, \
+    .anim_E = ANIM_PenguinPatrol_Idle, \
+    .anim_F = ANIM_PenguinPatrol_Idle, \
+}
+
+#define HERRINGWAY_ANIMS \
+{ \
+    .idle   = ANIM_Herringway_Idle, \
+    .walk   = ANIM_Herringway_Walk, \
+    .run    = ANIM_Herringway_Idle, \
+    .chase  = ANIM_Herringway_Idle, \
+    .anim_4 = ANIM_Herringway_Idle, \
+    .anim_5 = ANIM_Herringway_Idle, \
+    .death  = ANIM_Herringway_Idle, \
+    .hit    = ANIM_Herringway_Idle, \
+    .anim_8 = ANIM_Herringway_Idle, \
+    .anim_9 = ANIM_Herringway_Idle, \
+    .anim_A = ANIM_Herringway_Idle, \
+    .anim_B = ANIM_Herringway_Idle, \
+    .anim_C = ANIM_Herringway_Idle, \
+    .anim_D = ANIM_Herringway_Idle, \
+    .anim_E = ANIM_Herringway_Idle, \
+    .anim_F = ANIM_Herringway_Idle, \
+}

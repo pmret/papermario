@@ -1,6 +1,6 @@
 #include "kgr_02.h"
 
-ApiStatus N(AwaitPartnerWatt)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AwaitPartnerWatt)) {
     if (gPartnerActionStatus.actingPartner == PARTNER_WATT) {
         return ApiStatus_DONE2;
     } else {
@@ -8,7 +8,7 @@ ApiStatus N(AwaitPartnerWatt)(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus N(AwaitPartnerNotWatt)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AwaitPartnerNotWatt)) {
     if (gPartnerActionStatus.actingPartner != PARTNER_WATT) {
         return ApiStatus_DONE2;
     } else {

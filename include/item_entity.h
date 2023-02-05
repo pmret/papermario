@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-typedef s32 ItemScript[0];
+typedef s32 ItemScript[];
 
 enum {
     ITEM_SCRIPT_OP_End,

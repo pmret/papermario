@@ -27,7 +27,7 @@ EvtScript N(EVS_BreakBlock_ThunderBolt) = {
             EVT_CALL(GetNpcPos, NPC_KoopaTroopa_02, LVar0, LVar1, LVar2)
             EVT_CALL(SetItemPos, MV_Item_ThunderBolt, LVar0, LVar1, LVar2)
         EVT_END_LOOP
-        EVT_CALL(SetNpcPos, NPC_KoopaTroopa_02, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_KoopaTroopa_02, NPC_DISPOSE_LOCATION)
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_END_THREAD
     EVT_CALL(SetNpcPos, NPC_KoopaTroopa_02, -345, 75, -117)

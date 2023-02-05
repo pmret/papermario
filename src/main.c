@@ -56,13 +56,13 @@ void boot_main(void* data) {
     nuGfxInit();
     gGameStatusPtr->contBitPattern = nuContInit();
 #ifdef VERSION_US
-    func_8002D160();
-    func_802B2000();
-    func_802B203C();
+    load_obfuscation_shims();
+    shim_create_audio_system_obfuscated();
+    shim_load_engine_data_obfuscated();
 #else
     func_8002CA00();
-    func_802B2000();
-    func_802B203C();
+    shim_create_audio_system_obfuscated();
+    shim_load_engine_data_obfuscated();
 #endif
     nuGfxFuncSet((NUGfxFunc) gfxRetrace_Callback);
     nuGfxPreNMIFuncSet(gfxPreNMI_Callback);

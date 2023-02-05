@@ -408,4 +408,16 @@ void func_80072BCC(s32 arg0);
 void load_demo_battle(u32 index);
 Actor* create_actor(Formation formation);
 
+#ifdef SHIFT
+#define AUX_DATA_ADDR_0 world_model_anim_kzn_01_VRAM // (picked the first overlay among those with this address)
+#define AUX_DATA_ADDR_1 battle_area_omo2_1_VRAM // (picked the first overlay among those with this address)
+#define AUX_DATA_ADDR_2 0x8022E000 // TODO shiftability
+#define AUX_DATA_ADDR_3 0x8022C000 // TODO shiftability
+#else
+#define AUX_DATA_ADDR_0 0x80234000
+#define AUX_DATA_ADDR_1 0x80231000
+#define AUX_DATA_ADDR_2 0x8022E000
+#define AUX_DATA_ADDR_3 0x8022C000
+#endif
+
 #endif

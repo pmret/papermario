@@ -7,7 +7,7 @@ EvtScript N(EVS_Unused_DoNothing) = {
 
 #include "world/common/npc/Oaklie.inc.c"
 
-#include "world/common/enemy/complete/ForestFuzzy.inc.c"
+#include "world/common/enemy/complete/ForestFuzzy_Wander.inc.c"
 
 s32 N(KeyList)[] = {
     ITEM_FOREST_PASS,
@@ -170,7 +170,7 @@ StaticNpc N(NpcData_Oaklie) = {
 
 StaticNpc N(NpcData_Fuzzy_01) = {
     .id = NPC_Fuzzy_01,
-    .settings = &N(NpcSettings_ForestFuzzy),
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { 300.0f, 0.0f, 130.0f },
     .yaw = 0,
     .flags = 0,
@@ -193,7 +193,7 @@ StaticNpc N(NpcData_Fuzzy_01) = {
 
 StaticNpc N(NpcData_Fuzzy_02) = {
     .id = NPC_Fuzzy_02,
-    .settings = &N(NpcSettings_ForestFuzzy),
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { -100.0f, 0.0f, -320.0f },
     .yaw = 0,
     .flags = 0,

@@ -14,13 +14,13 @@ NpcSettings N(NpcSettings_Zipline) = {
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
-    ITEM_LETTER25,
+    ITEM_LETTER_TO_KOLORADO,
     ITEM_NONE
 };
 
 EVT_LETTER_PROMPT(Kolorado, NPC_Kolorado, ANIM_Kolorado_Fallen, ANIM_Kolorado_Fallen,
     MSG_CH5_00E8, MSG_CH5_00E9, MSG_CH5_00EA, MSG_CH5_00EB,
-    ITEM_LETTER25, N(LetterList));
+    ITEM_LETTER_TO_KOLORADO, N(LetterList));
 
 EVT_LETTER_REWARD(Kolorado);
 

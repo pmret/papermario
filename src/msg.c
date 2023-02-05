@@ -1,5 +1,6 @@
 #include "common.h"
 #include "ld_addrs.h"
+#include "message_ids.h"
 #include "sprite.h"
 
 enum RewindArrowStates {
@@ -15,8 +16,6 @@ enum RewindArrowStates {
 
 typedef MessageImageData* MessageImageDataList[1];
 
-extern IMG_BIN D_802EF0D0;
-
 s32 D_8014C280[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, };
 
 u8 MessagePlural[] = { MSG_CHAR_LOWER_S, MSG_CHAR_READ_END };
@@ -25,7 +24,13 @@ u8 MessageSingular[] = { MSG_CHAR_READ_ENDL, MSG_CHAR_READ_END };
 
 s16 gNextMessageBuffer = 0;
 
-s32 gRewindArrowQuad[] = { 0xFFF00009, 0x00000000, 0x00000000, 0xFFFFFFFF, 0x00100009, 0x00000000, 0x04000000, 0xFFFFFFFF, 0xFFF0FFF7, 0x00000000, 0x00000240, 0xFFFFFFFF, 0x0010FFF7, 0x00000000, 0x04000240, 0xFFFFFFFF, };
+//TODO Vtx
+s32 gRewindArrowQuad[] = {
+    0xFFF00009, 0x00000000, 0x00000000, 0xFFFFFFFF,
+    0x00100009, 0x00000000, 0x04000000, 0xFFFFFFFF,
+    0xFFF0FFF7, 0x00000000, 0x00000240, 0xFFFFFFFF,
+    0x0010FFF7, 0x00000000, 0x04000240, 0xFFFFFFFF,
+};
 
 Gfx D_8014C2D8[] = {
     gsDPSetCycleType(G_CYC_2CYCLE),
@@ -44,16 +49,72 @@ Gfx D_8014C2D8[] = {
     gsSPEndDisplayList(),
 };
 
+// unsorted
+extern s32 D_8015131C;
+extern MessageDrawState D_80155D20;
+extern IMG_BIN D_80159B50[];
+extern PAL_BIN D_8015C7E0[];
+
+// BSS
+extern s32 gMsgBGScrollAmtX;
+extern u16 gMsgGlobalWaveCounter;
+extern MessageImageDataList gMsgVarImages;
+extern s32 gMsgBGScrollAmtY;
+extern Gfx* D_80151338;
+extern char gMessageBuffers[][1024];
+extern u8 gMessageMsgVars[3][32];
+extern s16 D_80155C98;
+extern Mtx gMessageWindowProjMatrix[2];
+extern MessageDrawState* msg_drawState;
+
+extern s16 D_802EB644[22];
+
+extern IMG_BIN ui_msg_bubble_left_png[];
+extern IMG_BIN ui_msg_bubble_mid_png[];
+extern IMG_BIN ui_msg_bubble_right_png[];
+extern IMG_BIN ui_msg_arrow_png[];
+extern unsigned char ui_msg_palettes[16][32];
+extern IMG_BIN ui_msg_sign_corner_topleft_png[];
+extern IMG_BIN ui_msg_sign_corner_topright_png[];
+extern IMG_BIN ui_msg_sign_corner_bottomleft_png[];
+extern IMG_BIN ui_msg_sign_corner_bottomright_png[];
+extern IMG_BIN ui_msg_lamppost_corner_bottomright_png[];
+extern IMG_BIN ui_msg_sign_side_top_png[];
+extern IMG_BIN ui_msg_sign_side_left_png[];
+extern IMG_BIN ui_msg_sign_side_right_png[];
+extern IMG_BIN ui_msg_sign_side_bottom_png[];
+extern IMG_BIN ui_msg_sign_fill_png[];
+extern PAL_BIN ui_msg_sign_pal[];
+extern PAL_BIN ui_msg_lamppost_pal[];
+extern IMG_BIN ui_msg_background_png[];
+extern IMG_BIN ui_msg_rewind_arrow_png[];
+extern PAL_BIN ui_msg_rewind_arrow_pal[];
+extern IMG_BIN ui_msg_star_png[];
+extern IMG_BIN ui_msg_star_silhouette_png[];
+
+extern IMG_BIN D_802ED550[];
+extern PAL_BIN D_802ED670[];
+extern IMG_BIN D_802ED970[];
+extern IMG_BIN D_802EE8D0[];
+extern MessageCharset* gMsgCharsets[5];
+extern IMG_BIN D_802F39D0[];
+extern PAL_BIN D_802F4560[80][8];
+
+extern s32 gMessageBoxFrameParts[2][16];
+
+extern IMG_BIN ui_point_right_png[];
+extern PAL_BIN ui_point_right_pal[];
+
 MessageNumber gMsgNumbers[] = {
     {
-        .rasters = &D_802EF0D0,
+        .rasters = &D_802EE8D0[0x800],
         .texSize = 128,
         .texWidth = 16,
         .texHeight = 16,
         .digitWidth = {11, 8, 11, 11, 11, 11, 11, 11, 11, 11},
         .fixedWidth = 11
     }, {
-        .rasters = &D_802EF0D0,
+        .rasters = &D_802EE8D0[0x800],
         .texSize = 128,
         .texWidth = 16,
         .texHeight = 16,
@@ -132,62 +193,6 @@ Gfx D_8014C500[] = {
 
 u8 D_8014C580[] = { 50, 80, 100, 105, 100, 0, 0, 0 };
 u8 D_8014C588[] = { 105, 100, 77, 57, 40, 27, 16, 8, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-// unsorted
-extern s32 D_8015131C;
-extern MessageDrawState D_80155D20;
-extern IMG_BIN D_80159B50[];
-extern PAL_BIN D_8015C7E0[];
-
-// BSS
-extern s32 gMsgBGScrollAmtX;
-extern u16 gMsgGlobalWaveCounter;
-extern MessageImageDataList gMsgVarImages;
-extern s32 gMsgBGScrollAmtY;
-extern Gfx* D_80151338;
-extern char gMessageBuffers[][1024];
-extern u8 gMessageMsgVars[3][32];
-extern s16 D_80155C98;
-extern Mtx gMessageWindowProjMatrix[2];
-extern MessageDrawState* msg_drawState;
-
-extern s16 D_802EB644[22];
-
-extern IMG_BIN ui_msg_bubble_left_png[];
-extern IMG_BIN ui_msg_bubble_mid_png[];
-extern IMG_BIN ui_msg_bubble_right_png[];
-extern IMG_BIN ui_msg_arrow_png[];
-extern unsigned char ui_msg_palettes[16][32];
-extern IMG_BIN ui_msg_sign_corner_topleft_png[];
-extern IMG_BIN ui_msg_sign_corner_topright_png[];
-extern IMG_BIN ui_msg_sign_corner_bottomleft_png[];
-extern IMG_BIN ui_msg_sign_corner_bottomright_png[];
-extern IMG_BIN ui_msg_lamppost_corner_bottomright_png[];
-extern IMG_BIN ui_msg_sign_side_top_png[];
-extern IMG_BIN ui_msg_sign_side_left_png[];
-extern IMG_BIN ui_msg_sign_side_right_png[];
-extern IMG_BIN ui_msg_sign_side_bottom_png[];
-extern IMG_BIN ui_msg_sign_fill_png[];
-extern PAL_BIN ui_msg_sign_pal[];
-extern PAL_BIN ui_msg_lamppost_pal[];
-extern IMG_BIN ui_msg_background_png[];
-extern IMG_BIN ui_msg_rewind_arrow_png[];
-extern PAL_BIN ui_msg_rewind_arrow_pal[];
-extern IMG_BIN ui_msg_star_png[];
-extern IMG_BIN ui_msg_star_silhouette_png[];
-
-extern IMG_BIN D_802ED550[];
-extern PAL_BIN D_802ED670[];
-extern IMG_BIN D_802ED970[];
-extern IMG_BIN D_802EE8D0[];
-extern MessageCharset* gMsgCharsets[5];
-extern IMG_BIN D_802F39D0[];
-extern PAL_BIN D_802F4560[80][8];
-
-extern s32 gMessageBoxFrameParts[2][16];
-
-extern IMG_BIN ui_point_right_png[];
-extern PAL_BIN ui_point_right_pal[];
 
 s32 draw_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
                              u16 clipULy, u16 clipLRx, u16 clipRLy);
@@ -1356,6 +1361,7 @@ void dma_load_msg(u32 msgID, void* dest) {
     dma_copy(MSG_ROM_START + offset[0], MSG_ROM_START + offset[1], dest);
 }
 #else
+void dma_load_msg(u32 msgID, void* dest);
 INCLUDE_ASM_SHIFT(void, "msg", dma_load_msg);
 #endif
 
@@ -1387,7 +1393,7 @@ MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWritebac
     s32 maxLinesPerPage;
     s32 i;
 
-    if (msgID == 0) {
+    if (msgID == MSG_NONE) {
         return NULL;
     }
 
@@ -1646,7 +1652,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
     maxLinesOnPage = 0;
     spaceCount = 0;
 
-    if (msgID == 0) {
+    if (msgID == MSG_NONE) {
         return;
     }
 

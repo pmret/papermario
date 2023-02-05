@@ -143,7 +143,7 @@ EvtScript N(EVS_NpcInit_ShopOwner) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_StarKid_01)[] = {
+StaticNpc N(NpcData_Townsfolk)[] = {
     {
         .id = NPC_StarMan_01,
         .settings = &N(NpcSettings_StarMan),
@@ -260,6 +260,6 @@ StaticNpc N(NpcData_StarKid_01)[] = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_StarKid_01)),
+    NPC_GROUP(N(NpcData_Townsfolk)),
     {}
 };

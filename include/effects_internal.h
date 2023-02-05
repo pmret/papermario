@@ -29,10 +29,11 @@ void shim_guPositionF(float mf[4][4], float r, float p, float h, float s, float 
 void shim_guOrthoF(float mf[4][4], float l, float r, float b, float t, float n, float f, float scale);
 void shim_guFrustumF(float mf[4][4], float l, float r, float b, float t, float n, float f, float scale);
 void shim_mem_clear(void* data, s32 numBytes);
-void shim_transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
+void shim_transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outW);
 s32 shim_npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
 void shim_sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 void shim_mdl_draw_hidden_panel_surface(Gfx**, u16 treeIndex);
+s32 shim_is_point_visible(f32, f32, f32, s32, f32*, f32*);
 void shim_draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
                    u8 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(void*),
                    void* drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, f32 (*outMtx)[4]);
