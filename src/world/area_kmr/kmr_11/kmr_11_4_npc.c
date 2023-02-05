@@ -288,7 +288,7 @@ NpcSettings N(NpcSettings_Kammy) = {
     .otherAI = &N(EVS_NpcAuxAI_Kammy),
     .ai = &N(EVS_NpcAI_Kammy),
     .aux = &N(EVS_NpcAux_Kammy),
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
 };
 
 StaticNpc N(NpcData_Enemies)[] = {
@@ -428,7 +428,7 @@ StaticNpc N(NpcData_Kammy) = {
     .settings = &N(NpcSettings_Kammy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 100,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .animations = {},

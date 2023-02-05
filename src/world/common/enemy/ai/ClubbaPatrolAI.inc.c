@@ -29,10 +29,10 @@ ApiStatus N(ClubbaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->patrol.isFlying) {
             npc->flags |= NPC_FLAG_GRAVITY;
-            npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags &= ~NPC_FLAG_8;
         } else {
             npc->flags &= ~NPC_FLAG_GRAVITY;
-            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags |= NPC_FLAG_8;
         }
         if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;

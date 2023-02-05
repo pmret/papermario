@@ -69,7 +69,7 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
             BowTweesterPhysicsPtr->angularVelocity = 6.0f;
             BowTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             BowTweesterPhysicsPtr->countdown = 120;
-            bow->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            bow->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             bow->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(BowTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);

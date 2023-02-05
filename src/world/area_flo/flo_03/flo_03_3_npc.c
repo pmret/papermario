@@ -232,11 +232,11 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             EVT_SET(LVar4, EVT_FLOAT(90.0))
             EVT_EXEC_WAIT(N(EVS_FocusCamBetween))
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0057)
-            EVT_CALL(SetEnemyFlagBits, NPC_Dayzee, ENEMY_FLAG_1, 0)
-            EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_01, ENEMY_FLAG_1, 0)
-            EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_02, ENEMY_FLAG_1, 0)
-            EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAG_1, 0)
-            EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAG_1, 0)
+            EVT_CALL(SetEnemyFlagBits, NPC_Dayzee, ENEMY_FLAG_PASSIVE, 0)
+            EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_01, ENEMY_FLAG_PASSIVE, 0)
+            EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_02, ENEMY_FLAG_PASSIVE, 0)
+            EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAG_PASSIVE, 0)
+            EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAG_PASSIVE, 0)
             EVT_CALL(BindNpcAI, NPC_Dayzee, EVT_PTR(N(EVS_NpcAI_Dayzee)))
             EVT_SET(MV_PauseBurrowing, FALSE)
             EVT_SET(MV_NextBurrowTriggerRadius, 60)
@@ -296,7 +296,7 @@ EvtScript N(EVS_NpcInit_Dayzee) = {
             EVT_CALL(SetNpcPos, NPC_Dayzee, NPC_DISPOSE_LOCATION)
         EVT_CASE_DEFAULT
             EVT_IF_EQ(GF_FLO03_Defeated_Dayzee, FALSE)
-                EVT_CALL(SetEnemyFlagBits, NPC_Dayzee, ENEMY_FLAG_1, 0)
+                EVT_CALL(SetEnemyFlagBits, NPC_Dayzee, ENEMY_FLAG_PASSIVE, 0)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Dayzee)))
             EVT_ELSE
                 EVT_CALL(SetNpcPos, NPC_Dayzee, NPC_DISPOSE_LOCATION)
@@ -390,7 +390,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
         EVT_END_IF
         EVT_IF_EQ(LV_ShouldBurrow, TRUE)
             EVT_IF_EQ(AF_FLO_IsUnderground_Mole_01, FALSE)
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_01, 1)
                 EVT_WAIT(1)
                 EVT_SET(AF_FLO_IsUnderground_Mole_01, TRUE)
@@ -424,7 +424,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
                     EVT_END_LOOP
                     EVT_CALL(SetNpcPos, NPC_MontyMole_01, LVar1, LVar2, LVar3)
                 EVT_END_IF
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_SET(AF_FLO_IsUnderground_Mole_01, FALSE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_01, 1)
                 EVT_WAIT(1)
@@ -469,7 +469,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
         EVT_END_IF
         EVT_IF_EQ(LV_ShouldBurrow, TRUE)
             EVT_IF_EQ(AF_FLO_IsUnderground_Mole_02, FALSE)
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_02, 1)
                 EVT_WAIT(1)
                 EVT_SET(AF_FLO_IsUnderground_Mole_02, TRUE)
@@ -503,7 +503,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
                     EVT_END_LOOP
                     EVT_CALL(SetNpcPos, NPC_MontyMole_02, LVar1, LVar2, LVar3)
                 EVT_END_IF
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_SET(AF_FLO_IsUnderground_Mole_02, FALSE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_02, 1)
                 EVT_WAIT(1)
@@ -548,7 +548,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
         EVT_END_IF
         EVT_IF_EQ(LV_ShouldBurrow, TRUE)
             EVT_IF_EQ(AF_FLO_IsUnderground_Mole_03, FALSE)
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_03, 1)
                 EVT_WAIT(1)
                 EVT_SET(AF_FLO_IsUnderground_Mole_03, TRUE)
@@ -582,7 +582,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
                     EVT_END_LOOP
                     EVT_CALL(SetNpcPos, NPC_MontyMole_03, LVar1, LVar2, LVar3)
                 EVT_END_IF
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_SET(AF_FLO_IsUnderground_Mole_03, FALSE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_03, 1)
                 EVT_WAIT(1)
@@ -627,7 +627,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
         EVT_END_IF
         EVT_IF_EQ(LV_ShouldBurrow, TRUE)
             EVT_IF_EQ(AF_FLO_IsUnderground_Mole_04, FALSE)
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_04, 1)
                 EVT_WAIT(1)
                 EVT_SET(AF_FLO_IsUnderground_Mole_04, TRUE)
@@ -661,7 +661,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
                     EVT_END_LOOP
                     EVT_CALL(SetNpcPos, NPC_MontyMole_04, LVar1, LVar2, LVar3)
                 EVT_END_IF
-                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
                 EVT_SET(AF_FLO_IsUnderground_Mole_04, FALSE)
                 EVT_CALL(NpcFacePlayer, NPC_MontyMole_04, 1)
                 EVT_WAIT(1)
@@ -696,7 +696,7 @@ EvtScript N(EVS_NpcInit_MontyMole_01) = {
             EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleA, FALSE)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_MontyMole_01)))
                 EVT_CALL(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim10)
-                EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_01, ENEMY_FLAG_1, 0)
+                EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_01, ENEMY_FLAG_PASSIVE, 0)
             EVT_ELSE
                 EVT_CALL(SetNpcPos, NPC_MontyMole_01, NPC_DISPOSE_LOCATION)
             EVT_END_IF
@@ -719,7 +719,7 @@ EvtScript N(EVS_NpcInit_MontyMole_02) = {
             EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleB, FALSE)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_MontyMole_02)))
                 EVT_CALL(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim10)
-                EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_02, ENEMY_FLAG_1, 0)
+                EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_02, ENEMY_FLAG_PASSIVE, 0)
             EVT_ELSE
                 EVT_CALL(SetNpcPos, NPC_MontyMole_02, NPC_DISPOSE_LOCATION)
             EVT_END_IF
@@ -742,7 +742,7 @@ EvtScript N(EVS_NpcInit_MontyMole_03) = {
             EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleC, FALSE)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_MontyMole_03)))
                 EVT_CALL(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim10)
-                EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAG_1, 0)
+                EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAG_PASSIVE, 0)
             EVT_ELSE
                 EVT_CALL(SetNpcPos, NPC_MontyMole_03, NPC_DISPOSE_LOCATION)
             EVT_END_IF
@@ -765,7 +765,7 @@ EvtScript N(EVS_NpcInit_MontyMole_04) = {
             EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleD, FALSE)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_MontyMole_04)))
                 EVT_CALL(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim10)
-                EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAG_1, 0)
+                EVT_CALL(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAG_PASSIVE, 0)
             EVT_ELSE
                 EVT_CALL(SetNpcPos, NPC_MontyMole_04, NPC_DISPOSE_LOCATION)
             EVT_END_IF
@@ -781,7 +781,7 @@ StaticNpc N(NpcData_Petunia) = {
     .settings = &N(NpcSettings_Petunia),
     .pos = { -30.0f, 0.0f, 100.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Petunia),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -814,7 +814,7 @@ StaticNpc N(NpcData_Dayzee) = {
     .settings = &N(NpcSettings_Dayzee),
     .pos = { -233.0f, 0.0f, -217.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Dayzee),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -846,7 +846,7 @@ StaticNpc N(NpcData_MontyMole_01) = {
     .settings = &N(NpcSettings_Dayzee),
     .pos = { -100.0f, 0.0f, 210.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_MontyMole_01),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -878,7 +878,7 @@ StaticNpc N(NpcData_MontyMole_02) = {
     .settings = &N(NpcSettings_Dayzee),
     .pos = { -130.0f, 0.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_MontyMole_02),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -910,7 +910,7 @@ StaticNpc N(NpcData_MontyMole_03) = {
     .settings = &N(NpcSettings_Dayzee),
     .pos = { 75.0f, 0.0f, 20.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_MontyMole_03),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -942,7 +942,7 @@ StaticNpc N(NpcData_MontyMole_04) = {
     .settings = &N(NpcSettings_Dayzee),
     .pos = { 71.0f, 0.0f, 200.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_MontyMole_04),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,

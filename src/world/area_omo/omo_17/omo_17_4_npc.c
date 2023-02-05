@@ -36,7 +36,7 @@ StaticNpc N(NpcData_Conductor) = {
     .settings = &N(NpcSettings_Conductor),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
     .initVarCount = 1,
     .initVar = { .value = 0 },
 };

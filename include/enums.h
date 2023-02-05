@@ -3354,13 +3354,13 @@ enum NpcPalSwapState {
 };
 
 enum NpcFlags {
-    NPC_FLAG_PASSIVE                 = 0x00000001, ///< Collision does not trigger battle
+    NPC_FLAG_1                       = 0x00000001,
     NPC_FLAG_2                       = 0x00000002,
     NPC_FLAG_4                       = 0x00000004,
-    NPC_FLAG_ENABLE_HIT_SCRIPT       = 0x00000008,
+    NPC_FLAG_8                       = 0x00000008,
     NPC_FLAG_HAS_SHADOW              = 0x00000010, ///< Set by default and by enable_npc_shadow
-    NPC_FLAG_NO_AI                   = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
-    NPC_FLAG_IGNORE_WORLD_COLLISION                      = 0x00000040,
+    NPC_FLAG_20                      = 0x00000020,
+    NPC_FLAG_IGNORE_WORLD_COLLISION  = 0x00000040,
     NPC_FLAG_UPSIDE_DOWN             = 0x00000080, ///< Render NPCs upside-down
     NPC_FLAG_100                     = 0x00000100, // TODO
     NPC_FLAG_GRAVITY                 = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_JUMPING is set.
@@ -3384,7 +3384,7 @@ enum NpcFlags {
     ///  - Perform only one lateral collision test during motion
     ///  - Allow falling below Y=-2000 (by default, NPC_FLAG_JUMPING is set when an NPC falls out-of-bounds)
     NPC_FLAG_PARTICLE                = 0x04000000,
-    NPC_FLAG_WORLD_COLLISION_DIRTY                 = 0x08000000,
+    NPC_FLAG_WORLD_COLLISION_DIRTY   = 0x08000000,
     NPC_FLAG_10000000                = 0x10000000,
     NPC_FLAG_20000000                = 0x20000000,
     NPC_FLAG_NO_ANIMS_LOADED         = 0x40000000, ///< Npc has no animations loaded
@@ -4919,38 +4919,38 @@ enum MapRoomNotifications {
 };
 
 enum EnemyFlags {
-    ENEMY_FLAG_1                 = 0x00000001,
-    ENEMY_FLAG_2                 = 0x00000002,
-    ENEMY_FLAG_4                 = 0x00000004,
-    ENEMY_FLAG_8                 = 0x00000008,
-    ENEMY_FLAG_FLED              = 0x00000010,
-    ENEMY_FLAG_20                = 0x00000020,
-    ENEMY_FLAG_40                = 0x00000040,
-    ENEMY_FLAG_80                = 0x00000080,
-    ENEMY_FLAG_100               = 0x00000100,
-    ENEMY_FLAG_200               = 0x00000200,
-    ENEMY_FLAG_400               = 0x00000400,
-    ENEMY_FLAG_800               = 0x00000800,
-    ENEMY_FLAG_GRAVITY           = 0x00001000,
-    ENEMY_FLAG_2000              = 0x00002000,
-    ENEMY_FLAG_4000              = 0x00004000,
-    ENEMY_FLAG_8000              = 0x00008000,
-    ENEMY_FLAG_10000             = 0x00010000,
-    ENEMY_FLAG_20000             = 0x00020000,
-    ENEMY_FLAG_40000             = 0x00040000,
-    ENEMY_FLAG_80000             = 0x00080000,
-    ENEMY_FLAG_100000            = 0x00100000,
-    ENEMY_FLAG_200000            = 0x00200000,
-    ENEMY_FLAG_400000            = 0x00400000,
-    ENEMY_FLAG_NO_DROPS          = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
-    ENEMY_FLAG_IGNORE_TOUCH      = 0x01000000,
-    ENEMY_FLAG_IGNORE_JUMP       = 0x02000000,
-    ENEMY_FLAG_IGNORE_HAMMER     = 0x04000000,
-    ENEMY_FLAG_8000000           = 0x08000000,
-    ENEMY_FLAG_10000000          = 0x10000000,
-    ENEMY_FLAG_20000000          = 0x20000000,
-    ENEMY_FLAG_40000000          = 0x40000000, // spawn in AI_STATE_CHASE_INIT
-    ENEMY_FLAG_80000000          = 0x80000000,
+    ENEMY_FLAG_PASSIVE              = 0x00000001, ///< Collision does not trigger battle
+    ENEMY_FLAG_2                    = 0x00000002,
+    ENEMY_FLAG_4                    = 0x00000004,
+    ENEMY_FLAG_ENABLE_HIT_SCRIPT    = 0x00000008,
+    ENEMY_FLAG_FLED                 = 0x00000010,
+    ENEMY_FLAG_DISABLE_AI           = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
+    ENEMY_FLAG_40                   = 0x00000040,
+    ENEMY_FLAG_80                   = 0x00000080,
+    ENEMY_FLAG_100                  = 0x00000100,
+    ENEMY_FLAG_200                  = 0x00000200,
+    ENEMY_FLAG_400                  = 0x00000400,
+    ENEMY_FLAG_800                  = 0x00000800,
+    ENEMY_FLAG_GRAVITY              = 0x00001000,
+    ENEMY_FLAG_2000                 = 0x00002000,
+    ENEMY_FLAG_4000                 = 0x00004000,
+    ENEMY_FLAG_8000                 = 0x00008000,
+    ENEMY_FLAG_10000                = 0x00010000,
+    ENEMY_FLAG_20000                = 0x00020000,
+    ENEMY_FLAG_40000                = 0x00040000,
+    ENEMY_FLAG_80000                = 0x00080000,
+    ENEMY_FLAG_100000               = 0x00100000,
+    ENEMY_FLAG_200000               = 0x00200000,
+    ENEMY_FLAG_400000               = 0x00400000,
+    ENEMY_FLAG_NO_DROPS             = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
+    ENEMY_FLAG_IGNORE_TOUCH         = 0x01000000,
+    ENEMY_FLAG_IGNORE_JUMP          = 0x02000000,
+    ENEMY_FLAG_IGNORE_HAMMER        = 0x04000000,
+    ENEMY_FLAG_8000000              = 0x08000000,
+    ENEMY_FLAG_10000000             = 0x10000000,
+    ENEMY_FLAG_20000000             = 0x20000000,
+    ENEMY_FLAG_40000000             = 0x40000000, // spawn in AI_STATE_CHASE_INIT
+    ENEMY_FLAG_80000000             = 0x80000000,
 };
 
 // used with enemy->aiFlags

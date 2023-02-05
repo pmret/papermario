@@ -137,7 +137,7 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
             GoombarioTweesterPhysicsPtr->angularVelocity = 6.0f;
             GoombarioTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             GoombarioTweesterPhysicsPtr->countdown = 120;
-            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100 | NPC_FLAG_40000;
+            npc->flags |= NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100 | NPC_FLAG_40000;
             npc->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(GoombarioTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);

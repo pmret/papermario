@@ -211,10 +211,10 @@ ApiStatus N(GuardAI_Main)(Evt* script, s32 isInitialCall) {
 
         if (!(enemy->territory->wander.isFlying)) {
             npc->flags |= NPC_FLAG_GRAVITY;
-            npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags &= ~NPC_FLAG_8;
         } else {
             npc->flags &= ~NPC_FLAG_GRAVITY;
-            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags |= NPC_FLAG_8;
         }
 
         if (enemy->aiFlags & ENEMY_AI_FLAG_4) {

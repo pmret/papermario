@@ -39,5 +39,5 @@ NpcSettings N(NpcSettings_GoombaKing) = {
     .onInteract = &N(EVS_NpcInteract_GoombaKing),
     .ai = &N(EVS_NpcAI_GoombaKing),
     .onHit = &N(EVS_NpcHit_GoombaKing),
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };

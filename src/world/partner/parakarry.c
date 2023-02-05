@@ -71,7 +71,7 @@ ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
             ParakarryTweesterPhysicsPtr->angularVelocity = 6.0f;
             ParakarryTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             ParakarryTweesterPhysicsPtr->countdown = 120;
-            parakarry->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            parakarry->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             parakarry->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(ParakarryTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -239,7 +239,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                 D_802BEBB0 = 1;
                 gCameras[0].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
                 parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
-                parakarry->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_ENABLE_HIT_SCRIPT;
+                parakarry->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
                 partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
                 D_802BEBBC = func_800EF4E0();

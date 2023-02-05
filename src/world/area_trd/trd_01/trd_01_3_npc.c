@@ -22,7 +22,7 @@ API_CALLABLE(N(SetNewWanderCenterPos)) {
 
 EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_CALL(GetSelfNpcID, LVar0)
     EVT_IF_EQ(LVar0, 1)
@@ -79,7 +79,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
     EVT_END_IF
     EVT_WAIT(10)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, FALSE)
     EVT_CALL(GetSelfNpcID, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
@@ -93,7 +93,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(1.5))
     EVT_CALL(N(SetNewWanderCenterPos))
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_KoopaTroopa_Wander)))
     EVT_RETURN

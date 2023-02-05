@@ -369,7 +369,7 @@ EvtScript N(EVS_NpcHit_FuzzyWithShell) = {
     EVT_IF_NE(LVar1, 0)
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_SET(GF_NOK01_RecoveredShellA, TRUE)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 1)
+        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
         EVT_THREAD
             EVT_CALL(GetNpcPos, NPC_KooversShell, LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcAnimation, NPC_FuzzyWithShell, ANIM_Fuzzy_Hurt)

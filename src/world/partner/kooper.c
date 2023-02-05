@@ -114,7 +114,7 @@ ApiStatus KooperUpdate(Evt* script, s32 isInitialCall) {
             KooperTweesterPhysicsPtr->angularVelocity = 6.0f;
             KooperTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             KooperTweesterPhysicsPtr->countdown = 120;
-            kooper->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            kooper->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             kooper->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(KooperTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -230,7 +230,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                             D_802BEC64 = 1;
                             D_802BEB40_31CB60 = 0;
                             D_802BEC6C = 0;
-                            kooper->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING | NPC_FLAG_ENABLE_HIT_SCRIPT);
+                            kooper->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING | NPC_FLAG_8);
                             kooper->flags |= (NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION);
                             partnerActionStatus->actingPartner = PARTNER_KOOPER;
                             partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_1;

@@ -159,7 +159,7 @@ EvtScript N(EVS_Player_EnterPipe_Epilogue) = {
 
 EvtScript N(EVS_Luigi_EnterPipe_Epilogue) = {
     EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_8, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_Luigi_1, FALSE)
     EVT_SET(LVar0, 4)
     EVT_CALL(N(Pipe_GetEntryPos_Epilogue))

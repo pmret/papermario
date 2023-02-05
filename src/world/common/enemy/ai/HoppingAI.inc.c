@@ -243,7 +243,7 @@ ApiStatus N(HoppingAI_Main)(Evt* script, s32 isInitialCall) {
         script->functionTemp[1] = 0;
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->flags &= ~NPC_FLAG_GRAVITY;
-        npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+        npc->flags |= NPC_FLAG_8;
 
         enemy->aiFlags |= (ENEMY_AI_FLAG_8 | ENEMY_AI_FLAG_10);
         if (enemy->flags & ENEMY_FLAG_40000000) {

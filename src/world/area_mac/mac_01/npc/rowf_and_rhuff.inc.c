@@ -709,13 +709,13 @@ s32 N(ExtraAnims_Rowf)[] = {
 NpcSettings N(NpcSettings_Rowf) = {
     .height = 36,
     .radius = 24,
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcSettings N(NpcSettings_Rhuff) = {
     .height = 27,
     .radius = 18,
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 StaticNpc N(NpcData_RowfAndRhuff)[] = {
@@ -724,7 +724,7 @@ StaticNpc N(NpcData_RowfAndRhuff)[] = {
         .settings = &N(NpcSettings_Rowf),
         .pos = { -213.0f, -54.0f, 256.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rowf),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -742,7 +742,7 @@ StaticNpc N(NpcData_RowfAndRhuff)[] = {
         .settings = &N(NpcSettings_Rhuff),
         .pos = { -250.0f, 0.0f, 263.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rhuff),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,

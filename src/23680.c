@@ -389,7 +389,7 @@ s32 func_80048F0C(void) {
             for (j = 0; j < encounter->count; j++) {
                 Enemy* enemy = encounter->enemy[j];
 
-                if (enemy != NULL && !(enemy->flags & ENEMY_FLAG_20)) {
+                if (enemy != NULL && !(enemy->flags & ENEMY_FLAG_DISABLE_AI)) {
                     get_npc_unsafe(enemy->npcID);
                 }
             }
@@ -867,10 +867,10 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
             npc->flags |= NPC_FLAG_GRAVITY;
-            npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags &= ~NPC_FLAG_8;
         } else {
             npc->flags &= ~NPC_FLAG_GRAVITY;
-            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags |= NPC_FLAG_8;
         }
 
         if (enemy->aiFlags & ENEMY_AI_FLAG_4) {

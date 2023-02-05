@@ -444,7 +444,7 @@ void func_80149A6C(s32 soundID, s32 keepPlaying) {
     SoundInstance* sound = sfx_get_env_sound_instance(soundID);
 
     if (sound != NULL) {
-        sound->flags &= -SOUND_INSTANCE_FLAG_4;
+        sound->flags &= -SOUND_INSTANCE_FLAG_4; //TODO use logical negate here
         if (!keepPlaying) {
             snd_stop_sound(sound->soundID);
         }

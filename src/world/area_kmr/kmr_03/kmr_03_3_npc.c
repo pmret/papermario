@@ -156,7 +156,7 @@ EvtScript N(EVS_NpcInit_Goompa) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_GE(STORY_CH0_GOOMPA_JOINED_PARTY)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_SWITCH
     EVT_RETURN
@@ -168,7 +168,7 @@ StaticNpc N(NpcData_GoombaFamily) = {
     .settings = &N(NpcSettings_Goompa),
     .pos = { -50.0f, 0.0f, 80.0f },
     .yaw = 45,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Goompa),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,

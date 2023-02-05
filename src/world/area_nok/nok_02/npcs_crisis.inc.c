@@ -433,10 +433,10 @@ EvtScript N(EVS_NpcHit_Fuzzy_Thief) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
             EVT_SET(GF_NOK02_RecoveredShellA, TRUE)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 1)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
         EVT_CASE_EQ(ENCOUNTER_TRIGGER_JUMP)
             EVT_SET(GF_NOK02_RecoveredShellA, TRUE)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 1)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

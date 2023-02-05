@@ -328,7 +328,7 @@ EvtScript N(EVS_Scene_KammyStrikes) = {
     EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_GRAVITY, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_8, TRUE)
     EVT_CALL(SetNpcPos, NPC_Goompa, NPC_DISPOSE_LOCATION)
     EVT_CALL(EnableNpcShadow, NPC_Goompa, FALSE)
     EVT_SET(GB_StoryProgress, STORY_CH0_GATE_CRUSHED)

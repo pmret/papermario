@@ -373,7 +373,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             npc->moveToPos.y = npc->pos.y;
             playerStatus->position.y = npc->moveToPos.y + 16.0f;
             bss_802BFEEC = 1;
-            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags |= NPC_FLAG_8;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->flags |= NPC_FLAG_100;
             suggest_player_anim_setUnkFlag(ANIM_Mario_8000F);
@@ -445,7 +445,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                 break;
             }
             npc->collisionChannel = COLLISION_CHANNEL_10000;
-            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags |= NPC_FLAG_8;
             npc->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_WORLD_COLLISION);
             disable_npc_shadow(npc);
             func_8003D624(npc, 4, 2, 0, 0, 0, 0);
@@ -666,7 +666,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                 enable_npc_shadow(npc);
                 partner_clear_player_tracking(npc);
                 bss_802BFEEC = 0;
-                npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+                npc->flags &= ~NPC_FLAG_8;
                 npc->flags |= NPC_FLAG_GRAVITY;
                 npc->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
@@ -746,7 +746,7 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
             SushieTweesterPhysicsPtr->angularVelocity = 6.0f;
             SushieTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             SushieTweesterPhysicsPtr->countdown = 120;
-            sushie->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            sushie->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             sushie->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(SushieTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -881,7 +881,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             partnerNPC->moveToPos.x = partnerNPC->pos.x;
             partnerNPC->moveToPos.y = partnerNPC->pos.y;
             partnerNPC->moveToPos.z = partnerNPC->pos.z;
-            partnerNPC->flags |= NPC_FLAG_100 | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            partnerNPC->flags |= NPC_FLAG_100 | NPC_FLAG_8;
             partnerNPC->flags &= ~NPC_FLAG_GRAVITY;
             disable_npc_shadow(partnerNPC);
             disable_player_shadow();
