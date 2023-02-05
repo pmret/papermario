@@ -69,7 +69,7 @@ s32 N(InteriorNPCs_ToadHouse)[] = {
 EvtScript N(EVS_SetupRooms) = {
     // shop
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_TYPE_6),
+        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_IN),
         EVT_PTR(N(EVS_SetDoorRot_Shop)),
         EVT_PTR(N(EVS_SetWallRot_Shop)),
         NULL,
@@ -82,7 +82,7 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_EXEC(N(EVS_RoomListener_Shop))
     // toad house
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_5),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
         EVT_PTR(N(EVS_SetWallRot_ToadHouse)),
         NULL,

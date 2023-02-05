@@ -215,7 +215,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_CALL(UpdateColliderTransform, COLLIDER_o1287)
     EVT_END_IF
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_4),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_STRAIGHT_THROUGH),
         EVT_PTR(N(EVS_SetDoorRot_Hideout)),
         EVT_PTR(N(EVS_SetWallRot_Hideout)),
         EVT_PTR(N(EVS_DropDoor_Hideout)),
@@ -229,7 +229,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OpenSecretDoor_FromInside)), TRIGGER_WALL_PRESS_A, COLLIDER_o1289, 1, 0)
     EVT_END_IF
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_TYPE_5),
+        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
         EVT_PTR(N(EVS_SetWallRot_ToadHouse)),
         NULL,

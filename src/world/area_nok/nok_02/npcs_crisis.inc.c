@@ -73,12 +73,12 @@ API_CALLABLE(N(IsPlayerWalking)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80243294_9DA2B4)) {
+API_CALLABLE(N(ChooseSafeJumpLocation)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 randRange = 10000;
-    Npc* npc1 = (Npc*) evt_get_variable(script, *args++);
-    Npc* npc2 = (Npc*) evt_get_variable(script, *args++);
+    Npc* fuzzyNpc = (Npc*) evt_get_variable(script, *args++);
+    Npc* koopaNpc = (Npc*) evt_get_variable(script, *args++);
     f32 xDiff, zDiff;
     f32 x, z;
     f32 dist;
@@ -86,19 +86,19 @@ API_CALLABLE(N(func_80243294_9DA2B4)) {
 
     while (TRUE) {
         rand = rand_int(randRange);
-        x = ((rand - (randRange / 2)) / 100) + npc1->pos.x;
+        x = ((rand - (randRange / 2)) / 100) + fuzzyNpc->pos.x;
         rand = rand_int(randRange);
-        z = ((rand - (randRange / 2)) / 100) + npc1->pos.z;
+        z = ((rand - (randRange / 2)) / 100) + fuzzyNpc->pos.z;
 
         xDiff = x - -150.0f;
         zDiff = z - 250.0f;
-        if (SQ(xDiff) + SQ(zDiff) < 22500.0f) {
+        if (SQ(xDiff) + SQ(zDiff) < SQ(150.0f)) {
             xDiff = x - playerStatus->position.x;
             zDiff = z - playerStatus->position.z;
-            if (SQ(xDiff) + SQ(zDiff) > 6400.0f) {
-                xDiff = x - npc2->pos.x;
-                zDiff = z - npc2->pos.z;
-                if (SQ(xDiff) + SQ(zDiff) > 1600.0f) {
+            if (SQ(xDiff) + SQ(zDiff) > SQ(80.0f)) {
+                xDiff = x - koopaNpc->pos.x;
+                zDiff = z - koopaNpc->pos.z;
+                if (SQ(xDiff) + SQ(zDiff) > SQ(40.0f)) {
                     break;
                 }
             }
@@ -109,8 +109,8 @@ API_CALLABLE(N(func_80243294_9DA2B4)) {
             randRange = 30000;
         }
     }
-    xDiff = x - npc1->pos.x;
-    zDiff = z - npc1->pos.z;
+    xDiff = x - fuzzyNpc->pos.x;
+    zDiff = z - fuzzyNpc->pos.z;
     dist = SQ(xDiff) + SQ(zDiff);
     if (dist != 0.0f) {
         dist = sqrtf(dist) / 10.0f;
@@ -121,7 +121,7 @@ API_CALLABLE(N(func_80243294_9DA2B4)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_8024351C_9DA53C)) {
+API_CALLABLE(N(ChooseLocationNotNearPlayer)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 randRange = 10000;
@@ -193,7 +193,7 @@ EvtScript N(EVS_NpcInteract_Koopa_01_Crisis) = {
         EVT_CALL(SpeakToPlayer, NPC_Koopa_01, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0057)
         EVT_RETURN
     EVT_END_IF
-    EVT_SUSPEND_THREAD(MV_Unk_00)
+    EVT_SUSPEND_THREAD(MV_KoopaChaseThiefScript)
     EVT_WAIT(1)
     EVT_IF_EQ(GF_NOK02_StolenShellComplaintA, FALSE)
         EVT_SET(GF_NOK02_StolenShellComplaintA, TRUE)
@@ -201,7 +201,7 @@ EvtScript N(EVS_NpcInteract_Koopa_01_Crisis) = {
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_Koopa_01, ANIM_KoopaWithoutShell_CryTalk, ANIM_KoopaWithoutShell_CryIdle, 0, MSG_CH1_0055)
     EVT_END_IF
-    EVT_RESUME_THREAD(MV_Unk_00)
+    EVT_RESUME_THREAD(MV_KoopaChaseThiefScript)
     EVT_RETURN
     EVT_END
 };
@@ -217,22 +217,22 @@ EvtScript N(EVS_TetherShellToFuzzy) = {
     EVT_END
 };
 
-EvtScript N(D_8024BB0C_9E2B2C) = {
+EvtScript N(EVS_FuzzyThief_AvoidCapture) = {
     EVT_CALL(GetNpcPointer, NPC_FuzzyThief, LVarF)
     EVT_CALL(GetNpcPointer, NPC_Koopa_01, LVarE)
     EVT_SET(LVar2, 0)
     EVT_LABEL(0)
         EVT_CALL(N(IsPlayerOrKoopaNearby), LVarF, LVarE)
-        EVT_SET(MV_Unk_02, LVar0)
+        EVT_SET(MV_IsPlayerNearbyThief, LVar0)
         EVT_IF_NE(LVar0, 0)
             EVT_LABEL(1)
-            EVT_CALL(N(func_80243294_9DA2B4), LVarF, LVarE)
+            EVT_CALL(N(ChooseSafeJumpLocation), LVarF, LVarE)
             EVT_CALL(SetNpcFlagBits, NPC_FuzzyThief, NPC_FLAG_100, TRUE)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_331, 0)
             EVT_CALL(NpcJump0, NPC_FuzzyThief, LVarA, 0, LVarB, LVarC)
             EVT_CALL(SetNpcFlagBits, NPC_FuzzyThief, NPC_FLAG_100, FALSE)
             EVT_CALL(N(IsPlayerOrKoopaNearby), LVarF, LVarE)
-            EVT_SET(MV_Unk_02, LVar0)
+            EVT_SET(MV_IsPlayerNearbyThief, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_GOTO(1)
             EVT_END_IF
@@ -276,7 +276,7 @@ EvtScript N(D_8024BDB0_9E2DD0) = {
     EVT_LOOP(0)
         EVT_CALL(N(IsPlayerWalking))
         EVT_CALL(IsPlayerWithin, -150, 250, 150, LVar1)
-        EVT_IF_EQ(LVar1, 1)
+        EVT_IF_EQ(LVar1, TRUE)
             EVT_IF_EQ(LVar0, 1)
                 EVT_SET(LVar3, 1)
             EVT_ELSE
@@ -288,11 +288,11 @@ EvtScript N(D_8024BDB0_9E2DD0) = {
         EVT_END_IF
         EVT_IF_NE(LVar3, LVar4)
             EVT_IF_EQ(LVar3, 0)
-                EVT_EXEC_GET_TID(N(EVS_Koopa_01_ChaseThief), MV_Unk_00)
+                EVT_EXEC_GET_TID(N(EVS_Koopa_01_ChaseThief), MV_KoopaChaseThiefScript)
             EVT_ELSE
-                EVT_IF_NE(MV_Unk_00, -1)
-                    EVT_KILL_THREAD(MV_Unk_00)
-                    EVT_SET(MV_Unk_00, -1)
+                EVT_IF_NE(MV_KoopaChaseThiefScript, -1)
+                    EVT_KILL_THREAD(MV_KoopaChaseThiefScript)
+                    EVT_SET(MV_KoopaChaseThiefScript, -1)
                 EVT_END_IF
             EVT_END_IF
             EVT_SET(LVar4, LVar3)
@@ -310,7 +310,7 @@ EvtScript N(EVS_NpcIdle_Koopa_01_Crisis) = {
         EVT_CALL(SetNpcSpeed, NPC_Koopa_01, EVT_FLOAT(3.0))
         EVT_LABEL(5)
             EVT_CALL(GetNpcPointer, NPC_Koopa_01, LVarF)
-            EVT_CALL(N(func_8024351C_9DA53C), LVarF)
+            EVT_CALL(N(ChooseLocationNotNearPlayer), LVarF)
             EVT_CALL(SetNpcAnimation, NPC_Koopa_01, ANIM_Koopa_Run)
             EVT_CALL(NpcMoveTo, NPC_Koopa_01, LVarA, LVarB, 0)
             EVT_CALL(SetNpcAnimation, NPC_Koopa_01, ANIM_Koopa_Talk)
@@ -318,8 +318,8 @@ EvtScript N(EVS_NpcIdle_Koopa_01_Crisis) = {
             EVT_GOTO(5)
     EVT_END_IF
     EVT_EXEC_GET_TID(N(EVS_TetherShellToFuzzy), LVar9)
-    EVT_EXEC_GET_TID(N(D_8024BB0C_9E2B2C), LVar8)
-    EVT_EXEC_GET_TID(N(EVS_Koopa_01_ChaseThief), MV_Unk_00)
+    EVT_EXEC_GET_TID(N(EVS_FuzzyThief_AvoidCapture), LVar8)
+    EVT_EXEC_GET_TID(N(EVS_Koopa_01_ChaseThief), MV_KoopaChaseThiefScript)
     EVT_EXEC_GET_TID(N(D_8024BDB0_9E2DD0), MV_Unk_01)
     EVT_LABEL(10)
     EVT_IF_EQ(GF_NOK02_RecoveredShellA, FALSE)
@@ -328,9 +328,9 @@ EvtScript N(EVS_NpcIdle_Koopa_01_Crisis) = {
     EVT_ELSE
         EVT_KILL_THREAD(LVar9)
         EVT_KILL_THREAD(LVar8)
-        EVT_IS_THREAD_RUNNING(MV_Unk_00, LVar0)
+        EVT_IS_THREAD_RUNNING(MV_KoopaChaseThiefScript, LVar0)
         EVT_IF_EQ(LVar0, 1)
-            EVT_KILL_THREAD(MV_Unk_00)
+            EVT_KILL_THREAD(MV_KoopaChaseThiefScript)
         EVT_END_IF
         EVT_IS_THREAD_RUNNING(MV_Unk_01, LVar0)
         EVT_IF_EQ(LVar0, 1)

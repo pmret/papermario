@@ -12,29 +12,29 @@
 #include "sprite/npc/WorldBombette.h"
 
 enum {
-	NPC_Koover                	= 0,
-	NPC_FuzzyWithShell          = 1,
-	NPC_KooversShell            = 2,
-	NPC_Koopa_02    			= 3,
-	NPC_KoopaShell_02          = 4,
-	NPC_Koopa_03    			= 5,
-	NPC_KoopaShell_03          = 6,
-	NPC_RelaxedKoopa         	= 7,
-	NPC_MortT                   = 8,
-	NPC_Koopa_ShopOwner			= 9,
-	NPC_MiscFuzzy1             	= 10,
-	NPC_MiscFuzzy2             	= 11,
-	NPC_Bobomb_01             	= 12,
-	NPC_Bobomb_02             	= 13,
-	NPC_Bobomb_03             	= 14,
-	NPC_ChuckQuizmo         	= 15,
+    NPC_Koover                  = 0,
+    NPC_FuzzyWithShell          = 1,
+    NPC_KooversShell            = 2,
+    NPC_Koopa_02                = 3,
+    NPC_KoopaShell_02           = 4,
+    NPC_Koopa_03                = 5,
+    NPC_KoopaShell_03           = 6,
+    NPC_RelaxedKoopa            = 7,
+    NPC_MortT                   = 8,
+    NPC_Koopa_ShopOwner         = 9,
+    NPC_MiscFuzzy1              = 10,
+    NPC_MiscFuzzy2              = 11,
+    NPC_Bobomb_01               = 12,
+    NPC_Bobomb_02               = 13,
+    NPC_Bobomb_03               = 14,
+    NPC_ChuckQuizmo             = 15,
 };
 
 enum {
-    MF_Bush8_Drop		= MapFlag(10),
-    MF_Bush9_Drop		= MapFlag(11),
-    MF_Bush3_Drop		= MapFlag(12),
-    MF_Bush1_Drop		= MapFlag(13),
+    MF_Bush8_Drop       = MapFlag(10),
+    MF_Bush9_Drop       = MapFlag(11),
+    MF_Bush3_Drop       = MapFlag(12),
+    MF_Bush1_Drop       = MapFlag(13),
 };
 
 #define NAMESPACE nok_01

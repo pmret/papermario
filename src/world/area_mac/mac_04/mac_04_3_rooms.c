@@ -184,7 +184,7 @@ s32 N(InsideNPCs_Warehouse)[] = {
 
 EvtScript N(EVS_MakeHiddenRoom) = {
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_HiddenRoom)),
         EVT_PTR(N(EVS_SetWallRot_HiddenRoom)),
         NULL,
@@ -199,7 +199,7 @@ EvtScript N(EVS_MakeHiddenRoom) = {
 
 EvtScript N(EVS_MakeStoreroom) = {
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_2, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_2, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_Storeroom)),
         EVT_PTR(N(EVS_SetWallRot_Storeroom)),
         EVT_PTR(N(EVS_DropDoor_Storeroom)),
@@ -215,7 +215,7 @@ EvtScript N(EVS_MakeStoreroom) = {
 EvtScript N(EVS_SetupRooms) = {
     // harry's shop on the right
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_Shop)),
         EVT_PTR(N(EVS_SetWallRot_Shop)),
         NULL,
@@ -226,7 +226,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_PTR(N(InsideNPCs_Shop)))
     // nice house in the middle
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_NiceHouse)),
         EVT_PTR(N(EVS_SetWallRot_NiceHouse)),
         EVT_PTR(N(EVS_DropDoor_NiceHouse)),
@@ -237,7 +237,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_PTR(N(InsideNPCs_NiceHouse)))
     // warehouse on the left
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_Warehouse)),
         EVT_PTR(N(EVS_SetWallRot_Warehouse)),
         NULL,

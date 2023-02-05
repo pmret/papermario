@@ -37,15 +37,15 @@ EvtScript N(EVS_UpdateKooperFightSounds) = {
 
 EvtScript N(EVS_PlayKooperVsFuzzyEffects) = {
     EVT_SET_GROUP(EVT_GROUP_0A)
-    EVT_EXEC_GET_TID(N(EVS_UpdateKooperFightSounds), MV_Unk_03)
+    EVT_EXEC_GET_TID(N(EVS_UpdateKooperFightSounds), MV_KooperFightSoundsScript)
     EVT_LABEL(0)
         EVT_SWITCH(GB_StoryProgress)
             EVT_CASE_RANGE(STORY_CH1_PROMISED_TO_HELP_KOOPER, STORY_CH4_BEGAN_PEACH_MISSION)
-                EVT_KILL_THREAD(MV_Unk_03)
+                EVT_KILL_THREAD(MV_KooperFightSoundsScript)
                 EVT_RETURN
         EVT_END_SWITCH
         EVT_IF_EQ(GF_NOK02_ConfrontedBobombs, TRUE)
-            EVT_KILL_THREAD(MV_Unk_03)
+            EVT_KILL_THREAD(MV_KooperFightSoundsScript)
             EVT_RETURN
         EVT_END_IF
         EVT_CALL(RandInt, 30, LVar0)
@@ -58,14 +58,14 @@ EvtScript N(EVS_PlayKooperVsFuzzyEffects) = {
         EVT_END_IF
         EVT_LOOP(LVar0)
             EVT_IF_EQ(AF_NOK_12, TRUE)
-                EVT_KILL_THREAD(MV_Unk_03)
+                EVT_KILL_THREAD(MV_KooperFightSoundsScript)
                 EVT_CALL(TranslateGroup, MODEL_kameki, 0, 0, 0)
                 EVT_LABEL(10)
                 EVT_IF_EQ(AF_NOK_12, TRUE)
                     EVT_WAIT(1)
                     EVT_GOTO(10)
                 EVT_END_IF
-                EVT_EXEC_GET_TID(N(EVS_UpdateKooperFightSounds), MV_Unk_03)
+                EVT_EXEC_GET_TID(N(EVS_UpdateKooperFightSounds), MV_KooperFightSoundsScript)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(RandInt, 5, LVar1)
@@ -213,13 +213,13 @@ EvtScript N(EVS_RoomListener_KooperHouse) = {
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_NOK_12, TRUE)
             EVT_IF_LT(GB_StoryProgress, STORY_CH1_PROMISED_TO_HELP_KOOPER)
-                EVT_EXEC_WAIT(N(EVS_8024A8EC))
-                EVT_SET(LVar0, -1)
+                EVT_EXEC_WAIT(N(EVS_Scene_MeetKooper))
+                EVT_SET(LVar0, ROOM_UPDATE_REQUEST_CANCEL)
                 EVT_RETURN
             EVT_END_IF
             EVT_CALL(SetGroupEnabled, MODEL_g111, 1)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
-            EVT_EXEC(N(EVS_8024A908))
+            EVT_EXEC(N(EVS_FuzzyBoss_PlayerEntersKoopersHouse))
             EVT_SET(AF_NOK_10, TRUE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_SET(AF_NOK_10, FALSE)
@@ -291,7 +291,7 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
         // kolorado house
         EVT_CALL(CreateMapRoom,
-            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
+            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
             EVT_PTR(N(EVS_SetDoorRot_KoloradoHouse)),
             EVT_PTR(N(EVS_SetWallRot_KoloradoHouse)),
             EVT_PTR(N(EVS_DropDoor_KoloradoHouse)),
@@ -302,7 +302,7 @@ EvtScript N(EVS_SetupRooms) = {
             EVT_PTR(N(InteriorNPCs_AfterKentC)))
         // kolorado office
         EVT_CALL(CreateMapRoom,
-            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
+            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
             EVT_PTR(N(EVS_SetDoorRot_KoloradoOffice)),
             EVT_PTR(N(EVS_SetWallRot_KoloradoOffice)),
             NULL,
@@ -315,7 +315,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_IF_EQ(GF_NOK11_Defeated_KentC, TRUE)
             // kolorado house
             EVT_CALL(CreateMapRoom,
-                PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
+                PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
                 EVT_PTR(N(EVS_SetDoorRot_KoloradoHouse)),
                 EVT_PTR(N(EVS_SetWallRot_KoloradoHouse)),
                 EVT_PTR(N(EVS_DropDoor_KoloradoHouse)),
@@ -326,7 +326,7 @@ EvtScript N(EVS_SetupRooms) = {
                 EVT_PTR(N(InteriorNPCs_AfterKentC)))
             // kolorado office
             EVT_CALL(CreateMapRoom,
-                PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
+                PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
                 EVT_PTR(N(EVS_SetDoorRot_KoloradoOffice)),
                 EVT_PTR(N(EVS_SetWallRot_KoloradoOffice)),
                 NULL,
@@ -338,7 +338,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_ELSE
             // kolorado house
             EVT_CALL(CreateMapRoom,
-                PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
+                PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
                 EVT_PTR(N(EVS_SetDoorRot_KoloradoHouse)),
                 EVT_PTR(N(EVS_SetWallRot_KoloradoHouse)),
                 EVT_PTR(N(EVS_DropDoor_KoloradoHouse)),
@@ -349,7 +349,7 @@ EvtScript N(EVS_SetupRooms) = {
                 EVT_PTR(N(InteriorNPCs_BeforeKentC)))
             // kolorado office
             EVT_CALL(CreateMapRoom,
-                PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
+                PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
                 EVT_PTR(N(EVS_SetDoorRot_KoloradoOffice)),
                 EVT_PTR(N(EVS_SetWallRot_KoloradoOffice)),
                 NULL,
@@ -363,7 +363,7 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
         // kooper front door
         EVT_CALL(CreateMapRoom,
-            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
+            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             EVT_PTR(N(EVS_SetDoorRot_KooperFrontDoor)),
             EVT_PTR(N(EVS_SetWallRot_KooperHouse)),
             NULL,
@@ -374,7 +374,7 @@ EvtScript N(EVS_SetupRooms) = {
             EVT_PTR(N(InteriorNPCs_KooperHouse_BeforeJoin)))
         // kooper back door
         EVT_CALL(CreateMapRoom,
-            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
+            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             EVT_PTR(N(EVS_SetDoorRot_KooperBackDoor)),
             EVT_PTR(N(EVS_SetWallRot_KooperHouse)),
             NULL,
@@ -386,7 +386,7 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_ELSE
         // kooper front door
         EVT_CALL(CreateMapRoom,
-            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
+            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             EVT_PTR(N(EVS_SetDoorRot_KooperFrontDoor)),
             EVT_PTR(N(EVS_SetWallRot_KooperHouse)),
             NULL,
@@ -397,7 +397,7 @@ EvtScript N(EVS_SetupRooms) = {
             EVT_PTR(N(InteriorNPCs_KooperHouse_AfterJoin)))
         // kooper back door
         EVT_CALL(CreateMapRoom,
-            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2 | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
+            PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             EVT_PTR(N(EVS_SetDoorRot_KooperBackDoor)),
             EVT_PTR(N(EVS_SetWallRot_KooperHouse)),
             NULL,
@@ -409,7 +409,7 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_END_IF
     // koot house
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_KootHouse)),
         EVT_PTR(N(EVS_SetWallRot_KootHouse)),
         EVT_PTR(N(EVS_DropDoor_KootHouse)),

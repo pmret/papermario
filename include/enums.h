@@ -1415,6 +1415,7 @@ enum SoundIDs {
     SOUND_212D                      = 0x0000212D,
     SOUND_212E                      = 0x0000212E,
     SOUND_8161                      = 0x00008161,
+    
     SOUND_80000000                  = 0x80000000,
     SOUND_80000001                  = 0x80000001,
     SOUND_80000002                  = 0x80000002,
@@ -1509,8 +1510,9 @@ enum SoundIDs {
     SOUND_8000006B                  = 0x8000006B,
     SOUND_8000006C                  = 0x8000006C,
 
-    SOUND_A0000000                  = 0xA0000000,
-    SOUND_A0000001                  = 0xA0000001,
+    SOUND_ROOM_DOOR_OPEN            = 0xA0000000,
+    SOUND_ROOM_DOOR_CLOSE           = 0xA0000001,
+
     SOUND_FIRE_BAR_0                = 0xB0000000,
     SOUND_FIRE_BAR_1                = 0xB0000001,
     SOUND_FIRE_BAR_2                = 0xB0000002,
@@ -4868,21 +4870,21 @@ enum ModelAnimUnit {
 };
 
 enum MapRoomFlags {
-    ROOM_FLAGS_VISGROUP_MASK    = 0xF000,
-    ROOM_FLAGS_MASK   			= 0x0F00,
-    ROOM_FLAGS_DOOR_TYPE_MASK   = 0x00FF,
-    ROOM_DOOR_TYPE_0	        = 0,
-    ROOM_DOOR_TYPE_1	        = 1,
-    ROOM_DOOR_TYPE_2	        = 2,
-    ROOM_DOOR_TYPE_3	        = 3,
-    ROOM_DOOR_TYPE_4	        = 4,
-    ROOM_DOOR_TYPE_5	        = 5,
-    ROOM_DOOR_TYPE_6	        = 6,
-    ROOM_DOOR_TYPE_7	        = 7,
-	ROOM_FLAG_CUSTOM_ANIM_OPEN_DOOR	= 0x0100,
-	ROOM_FLAG_CUSTOM_ANIM_WALL_ROT	= 0x0200,
-	ROOM_FLAG_CUSTOM_ANIM_DROP_DOOR	= 0x0400,
-	ROOM_FLAG_800               = 0x0800,
+    ROOM_FLAGS_VISGROUP_MASK                = 0xF000,
+    ROOM_FLAGS_MASK   			            = 0x0F00,
+    ROOM_FLAGS_DOOR_TYPE_MASK               = 0x00FF,
+    ROOM_DOOR_RIGHT_HINGE_OPENS_OUT	        = 0, // left --> center (hinge on right)
+    ROOM_DOOR_RIGHT_HINGE_OPENS_IN	        = 1, // center --> left
+    ROOM_DOOR_LEFT_HINGE_OPENS_OUT	        = 2, // right --> center (hinge on left)
+    ROOM_DOOR_LEFT_HINGE_OPENS_IN	        = 3, // center --> right
+    ROOM_DOOR_STRAIGHT_THROUGH              = 4, // center --> center
+    ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_OUT   = 5, // deep left  --> center     (hinge on right)
+    ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_IN    = 6, // center     --> deep left
+    ROOM_LARGE_DOOR_LEFT_HINGE_OPENS_OUT    = 7, // deep right --> center     (hinge on left)
+	ROOM_FLAG_CUSTOM_ANIM_OPEN_DOOR	        = 0x100,
+	ROOM_FLAG_CUSTOM_ANIM_WALL_ROT	        = 0x200,
+	ROOM_FLAG_CUSTOM_ANIM_DROP_DOOR	        = 0x400,
+	ROOM_FLAG_EXIT_DOOR_DROPS               = 0x800, // for internal use
 };
 
 enum MapRoomNotifications {
@@ -4890,6 +4892,7 @@ enum MapRoomNotifications {
     ROOM_UPDATE_ENTER_DONE      = 1,
     ROOM_UPDATE_EXIT_BEGIN      = 2,
     ROOM_UPDATE_EXIT_END        = 3,
+    ROOM_UPDATE_REQUEST_CANCEL  = -1,
 };
 
 enum EnemyFlags {

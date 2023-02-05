@@ -191,7 +191,7 @@ s32 N(InteriorNPCs_WaterfrontHouse)[] = {
 EvtScript N(EVS_SetupRooms) = {
     // RussT's house
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_RussHouse)),
         EVT_PTR(N(EVS_SetWallRot_RussHouse)),
         EVT_PTR(N(EVS_DropDoor_RussHouse)),
@@ -202,7 +202,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_PTR(N(InteriorNPCs_RussHouse)))
     // harry's shop
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_Shop)),
         EVT_PTR(N(EVS_SetWallRot_Shop)),
         NULL,
@@ -210,7 +210,7 @@ EvtScript N(EVS_SetupRooms) = {
         COLLIDER_deilit5, COLLIDER_deilit5u, MODEL_omise, EVT_PTR(N(InteriorNPCs_Shop)))
     // the dojo
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_Dojo)),
         EVT_PTR(N(EVS_SetWallRot_Dojo)),
         EVT_PTR(N(EVS_DropDoor_Dojo)),
@@ -221,7 +221,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_PTR(N(InteriorNPCs_Dojo)))
     // the waterfront house
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_Waterfront)),
         EVT_PTR(N(EVS_SetWallRot_Waterfront)),
         NULL,

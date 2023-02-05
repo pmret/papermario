@@ -2431,8 +2431,8 @@ void func_800EF3E4(void) {
     D_8010CFCE = 0;
 }
 
-void func_800EF414(s32 arg0, s32 arg1) {
-    partner_set_goal_pos(arg0, arg1);
+void func_800EF414(s32 posX, s32 posZ) {
+    partner_set_goal_pos(posX, posZ);
     wPartnerFollowState = 20;
 }
 

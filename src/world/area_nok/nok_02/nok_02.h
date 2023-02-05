@@ -48,16 +48,16 @@ enum {
 };
 
 enum {
-    MV_Unk_00       = MapVar(0),
-    MV_Unk_01       = MapVar(1),
-    MV_Unk_02       = MapVar(2),
-    MV_Unk_03       = MapVar(3),
-    MV_StarPieceItem    = MapVar(10),
+    MV_KoopaChaseThiefScript    = MapVar(0),
+    MV_Unk_01                   = MapVar(1),
+    MV_IsPlayerNearbyThief      = MapVar(2),
+    MV_KooperFightSoundsScript  = MapVar(3),
+    MV_StarPieceItem            = MapVar(10),
 };
 
 enum {
-    MF_Unk_00       = MapFlag(0),
-    MF_Unk_0A       = MapFlag(10),
+    MF_FuzzyBossTaunt   = MapFlag(0),
+    MF_Bush1_Drop       = MapFlag(10),
 };
 
 #define NAMESPACE nok_02
@@ -66,8 +66,8 @@ extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_SetupMusic);
 extern EvtScript N(EVS_Scene_Epilogue);
 extern EvtScript N(EVS_BreakBlock_DropShell);
-extern EvtScript N(EVS_8024A8EC);
-extern EvtScript N(EVS_8024A908);
+extern EvtScript N(EVS_Scene_MeetKooper);
+extern EvtScript N(EVS_FuzzyBoss_PlayerEntersKoopersHouse);
 extern EvtScript N(EVS_SetupKootFavors);
 extern EvtScript N(EVS_NpcInteract_KoopaKoot);
 extern EvtScript N(EVS_Setup_Bookshelf);

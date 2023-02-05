@@ -136,7 +136,7 @@ EvtScript N(EVS_SetupRooms) = {
     // toad house
     EVT_CALL(SetGroupEnabled, MODEL_kh_naiso, 0)
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
         EVT_PTR(N(EVS_SetWallRot_ToadHouse)),
         NULL,
@@ -148,7 +148,7 @@ EvtScript N(EVS_SetupRooms) = {
     // merle's house
     EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 0)
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_MerleHouse)),
         EVT_PTR(N(EVS_SetWallRot_MerleHouse)),
         NULL,
@@ -160,7 +160,7 @@ EvtScript N(EVS_SetupRooms) = {
     // cooking house
     EVT_CALL(SetGroupEnabled, MODEL_h_naiso, 0)
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_CookHouse)),
         EVT_PTR(N(EVS_SetWallRot_CookHouse)),
         NULL,

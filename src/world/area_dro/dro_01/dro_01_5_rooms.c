@@ -157,7 +157,7 @@ s32 N(InteriorNPCs_RightHouse)[] = {
 
 EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_5),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_LeftHouse)),
         EVT_PTR(N(EVS_SetWallRot_LeftHouse)),
         EVT_PTR(N(EVS_DropDoor_LeftHouse)),
@@ -167,7 +167,7 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_k_i1,
         EVT_PTR(N(InteriorNPCs_LeftHouse)))
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_5),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_Shop)),
         EVT_PTR(N(EVS_SetWallRot_Shop)),
         NULL,
@@ -177,7 +177,7 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_k_m1,
         EVT_PTR(N(InteriorNPCs_Shop)))
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_5),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_RightHouse)),
         EVT_PTR(N(EVS_SetWallRot_RightHouse)),
         EVT_PTR(N(EVS_DropDoor_RightHouse)),

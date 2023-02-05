@@ -102,7 +102,7 @@ s32 N(InsideNPCs_BlueHouse)[] = {
 EvtScript N(EVS_SetupRooms) = {
     // tayce T's house on the right
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_TayceT)),
         EVT_PTR(N(EVS_SetWallRot_TayceT)),
         NULL,
@@ -113,7 +113,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_PTR(N(InsideNPCs_TayceT)))
     // blue house on the left
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_BlueHouse)),
         EVT_PTR(N(EVS_SetWallRot_BlueHouse)),
         NULL,

@@ -233,7 +233,7 @@ EvtScript N(EVS_SetupMayorRooms) = {
     EVT_END_SWITCH
     // mayor's foyer
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_MayorFoyer)),
         EVT_PTR(N(EVS_SetWallRot_MayorFoyer)),
         EVT_PTR(N(EVS_DropDoor_MayorFoyer)),
@@ -244,7 +244,7 @@ EvtScript N(EVS_SetupMayorRooms) = {
         LVar0)
     // mayor's office
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_MayorOffice)),
         EVT_PTR(N(EVS_SetWallRot_MayorOffice)),
         NULL,
@@ -265,7 +265,7 @@ EvtScript N(EVS_SetupRooms) = {
     // upper middle house
     EVT_CALL(SetGroupEnabled, MODEL_f_naiso, 0)
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_MiddleHouse)),
         EVT_PTR(N(EVS_SetWallRot_MiddleHouse)),
         NULL,
@@ -277,7 +277,7 @@ EvtScript N(EVS_SetupRooms) = {
     // lower right house
     EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 0)
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_UpperRightHouse)),
         EVT_PTR(N(EVS_SetWallRot_RightHouse)),
         NULL,
@@ -289,7 +289,7 @@ EvtScript N(EVS_SetupRooms) = {
     // upper right house
     EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 0)
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_LowerRightHouse)),
         EVT_PTR(N(EVS_SetWallRot_RightHouse)),
         NULL,

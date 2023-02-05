@@ -12,7 +12,7 @@ FoliageDropList N(Bush1_Drops) = {
             .pos = { -407, 16, 90 },
             .spawnMode = ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE,
             .pickupFlag = GF_NOK02_Bush1_KoopaLeaf,
-            .spawnFlag = MF_Unk_0A,
+            .spawnFlag = MF_Bush1_Drop,
         },
     }
 };

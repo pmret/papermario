@@ -213,7 +213,7 @@ s32 N(InsideNPCs_MerlonHouse)[] = {
 EvtScript N(EVS_SetupRooms) = {
     // post office
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_PostOffice)),
         EVT_PTR(N(EVS_SetWallRot_PostOffice)),
         EVT_PTR(N(EVS_DropDoor_PostOffice)),
@@ -224,7 +224,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_PTR(N(InsideNPCs_PostOffice)))
     // toad house
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
         EVT_PTR(N(EVS_SetWallRot_ToadHouse)),
         NULL,
@@ -235,7 +235,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_PTR(N(InsideNPCs_ToadHouse)))
     // merlon's house
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_2),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_MerlonHouse)),
         EVT_PTR(N(EVS_SetWallRot_MerlonHouse)),
         NULL,

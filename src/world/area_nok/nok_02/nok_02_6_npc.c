@@ -176,20 +176,20 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
     EVT_END
 };
 
-EvtScript N(EVS_8024A8EC) = {
+EvtScript N(EVS_Scene_MeetKooper) = {
     EVT_EXEC_WAIT(N(EVS_NpcInteract_Kooper))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_8024A908) = {
+EvtScript N(EVS_FuzzyBoss_PlayerEntersKoopersHouse) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_LEFT_TOWN)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(MF_Unk_00, TRUE)
+    EVT_IF_EQ(MF_FuzzyBossTaunt, TRUE)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(MF_Unk_00, TRUE)
+    EVT_SET(MF_FuzzyBossTaunt, TRUE)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SpeakToPlayer, NPC_FuzzyBoss, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 0, MSG_CH1_00B9)
     EVT_CALL(DisablePlayerInput, FALSE)

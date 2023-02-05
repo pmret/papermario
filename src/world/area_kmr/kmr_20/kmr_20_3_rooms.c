@@ -70,7 +70,7 @@ s32 N(InteriorNPCs_House)[] = {
 
 EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(CreateMapRoom,
-        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_TYPE_0),
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_House)),
         EVT_PTR(N(EVS_SetWallRot_House)),
         NULL,
