@@ -323,9 +323,9 @@ class LinkerWriter:
             self.symbols.append(symbol)
 
     def _begin_segment(self, segment: Segment):
-        if segment.follows_vram_segment:
+        if options.opts.ld_use_follows and segment.follows_vram_segment:
             vram_str = get_segment_cname(segment.follows_vram_segment) + "_VRAM_END "
-        elif segment.follows_vram_symbol:
+        elif options.opts.ld_use_follows and segment.follows_vram_symbol:
             vram_str = segment.follows_vram_symbol + " "
         else:
             vram_str = (
@@ -346,9 +346,9 @@ class LinkerWriter:
         self._begin_block()
 
     def _begin_bss_segment(self, segment: Segment, is_first: bool = False):
-        if segment.follows_vram_segment:
+        if options.opts.ld_use_follows and segment.follows_vram_segment:
             vram_str = get_segment_cname(segment.follows_vram_segment) + "_VRAM_END "
-        elif segment.follows_vram_symbol:
+        elif options.opts.ld_use_follows and segment.follows_vram_symbol:
             vram_str = segment.follows_vram_symbol + " "
         else:
             vram_str = (

@@ -1,5 +1,8 @@
 # splat Release Notes
 
+### 0.13.2
+* Actually implemented `ld_use_follows`. Oopz
+
 ### 0.13.1
 * Added `ld_wildcard_sections` option (disabled by default), which adds a wildcard to the linker script for section linking. This can be helpful for modern GCC, which creates additional rodata sections such as ".rodata.xyz".
 * Added `ld_use_follows` option (enabled by default), which, if disabled, makes splat ignore follows_vram and follows_symbols. This helps for fixing matching builds while being able to add infrastructure to the yaml for non-matching builds by just re-enabling the option.
