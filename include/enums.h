@@ -4877,20 +4877,20 @@ enum ModelAnimUnit {
 
 enum MapRoomFlags {
     ROOM_FLAGS_VISGROUP_MASK                = 0xF000,
-    ROOM_FLAGS_MASK   			            = 0x0F00,
+    ROOM_FLAGS_MASK                         = 0x0F00,
     ROOM_FLAGS_DOOR_TYPE_MASK               = 0x00FF,
-    ROOM_DOOR_RIGHT_HINGE_OPENS_OUT	        = 0, // left --> center (hinge on right)
-    ROOM_DOOR_RIGHT_HINGE_OPENS_IN	        = 1, // center --> left
-    ROOM_DOOR_LEFT_HINGE_OPENS_OUT	        = 2, // right --> center (hinge on left)
-    ROOM_DOOR_LEFT_HINGE_OPENS_IN	        = 3, // center --> right
+    ROOM_DOOR_RIGHT_HINGE_OPENS_OUT         = 0, // left --> center (hinge on right)
+    ROOM_DOOR_RIGHT_HINGE_OPENS_IN          = 1, // center --> left
+    ROOM_DOOR_LEFT_HINGE_OPENS_OUT          = 2, // right --> center (hinge on left)
+    ROOM_DOOR_LEFT_HINGE_OPENS_IN           = 3, // center --> right
     ROOM_DOOR_STRAIGHT_THROUGH              = 4, // center --> center
     ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_OUT   = 5, // deep left  --> center     (hinge on right)
     ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_IN    = 6, // center     --> deep left
     ROOM_LARGE_DOOR_LEFT_HINGE_OPENS_OUT    = 7, // deep right --> center     (hinge on left)
-	ROOM_FLAG_CUSTOM_ANIM_OPEN_DOOR	        = 0x100,
-	ROOM_FLAG_CUSTOM_ANIM_WALL_ROT	        = 0x200,
-	ROOM_FLAG_CUSTOM_ANIM_DROP_DOOR	        = 0x400,
-	ROOM_FLAG_EXIT_DOOR_DROPS               = 0x800, // for internal use
+    ROOM_FLAG_CUSTOM_ANIM_OPEN_DOOR         = 0x100,
+    ROOM_FLAG_CUSTOM_ANIM_WALL_ROT          = 0x200,
+    ROOM_FLAG_CUSTOM_ANIM_DROP_DOOR         = 0x400,
+    ROOM_FLAG_EXIT_DOOR_DROPS               = 0x800, // for internal use
 };
 
 enum MapRoomNotifications {
