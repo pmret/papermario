@@ -1,5 +1,8 @@
 # splat Release Notes
 
+### 0.13.3
+* Added a new symbol_addrs attribute `appears_after_overlays_syms:0x1234` which will modify the linker script such that the symbol's address is equal to the value of the end of the longest overlay starting with address 0x1234. It achieve this by writing a series of sym = MAX(sym, seg_vram_END) statements into the linker script. For some games, it's feasible to manually create such statements, but for games with hundreds of overlays at the same address, this is very tedious and prone to error. The new attribute allows you to have peace of mind that the symbol will end up after all of these overlays. 
+
 ### 0.13.2
 * Actually implemented `ld_use_follows`. Oopz
 

@@ -17,7 +17,9 @@ from segtypes.linker_entry import LinkerWriter, to_cname
 from segtypes.segment import Segment
 from util import compiler, log, options, palettes, symbols, relocs
 
-VERSION = "0.13.2"
+from util.symbols import Symbol
+
+VERSION = "0.13.3"
 # This value should be keep in sync with the version listed on requirements.txt
 SPIMDISASM_MIN = (1, 11, 1)
 
@@ -423,12 +425,24 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
     if (
         options.opts.is_mode_active("ld") and options.opts.platform != "gc"
     ):  # TODO move this to platform initialization when it gets implemented
+
+        # Calculate list of segments for which we need to find the largest so we can safely place the symbol after it
+        linker_afters: Dict[Symbol, list[Segment]] = {}
+        for sym in symbols.appears_after_overlays_syms:
+            linker_afters[sym] = [
+                seg
+                for seg in all_segments
+                if isinstance(seg.vram_start, int)
+                and seg.vram_start == sym.appears_after_overlays_addr
+            ]
+
         global linker_writer
-        linker_writer = LinkerWriter()
+        linker_writer = LinkerWriter(linker_afters)
         linker_bar = tqdm.tqdm(
             all_segments,
             total=len(all_segments),
         )
+
         for i, segment in enumerate(linker_bar):
             linker_bar.set_description(f"Linker script {brief_seg_name(segment, 20)}")
             next_segment: Optional[Segment] = None

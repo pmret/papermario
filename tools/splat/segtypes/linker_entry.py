@@ -9,6 +9,7 @@ from util import options
 
 from segtypes.n64.palette import N64SegPalette
 from segtypes.segment import Segment
+from util.symbols import Symbol
 
 
 # clean 'foo/../bar' to 'bar'
@@ -109,7 +110,7 @@ class LinkerEntry:
 
 
 class LinkerWriter:
-    def __init__(self):
+    def __init__(self, linker_afters: Dict[Symbol, List[Segment]]):
         self.linker_discard_section: bool = options.opts.ld_discard_section
         # Used to store all the linker entries - build tools may want this information
         self.entries: List[LinkerEntry] = []
@@ -118,6 +119,19 @@ class LinkerWriter:
         self.symbols: List[str] = []
 
         self._indent_level = 0
+
+        if linker_afters:
+            for symbol, segments in linker_afters.items():
+                for segment in segments:
+                    if segment == segments[0]:
+                        self._writeln(
+                            f"{symbol.name} = {get_segment_cname(segment)}_VRAM_END;"
+                        )
+                    else:
+                        self._writeln(
+                            f"{symbol.name} = MAX({symbol.name}, {get_segment_cname(segment)}_VRAM_END);"
+                        )
+            self._writeln("")
 
         self._writeln("SECTIONS")
         self._begin_block()
