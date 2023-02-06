@@ -2,68 +2,29 @@
 #include "nok_04.h"
 #include "effects.h"
 
-typedef struct Unk80241440_2 {
-    /* 0x00 */ f32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ f32 unk_34;
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ f32 unk_3C;
-    /* 0x40 */ f32 unk_40;
-} Unk80241440_2; //size = 0x44
+#define NUM_THREAD_SEGMENTS 16
 
-typedef struct Unk80241440 {
-    /* 0x00 */ Vec3f unk_00;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ f32 unk_34;
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ f32 unk_3C;
-    /* 0x40 */ Unk80241440_2* unk_40;
-    /* 0x44 */ Unk80241440_2* unk_44;
-} Unk80241440; //size = 0x48
-
-/*
-trees in this room are labeled with a 0 through 5 system, meaning there are "6" tree values
-(tree indexes from left to right in both rows, each tree has 2 unique numbers besides 0)
-0, 1, 2, 3
-0, 5, 4, 3
-*/
+typedef struct FuzzyThread {
+    /* 0x00 */ Vec3f anchorPos;
+    /* 0x0C */ f32 targetLength;
+    /* 0x10 */ f32 currentLength;
+    /* 0x14 */ f32 overshootVel;
+    /* 0x18 */ f32 targetAngle;
+    /* 0x1C */ f32 overshootAngleVel;
+    /* 0x20 */ f32 currentAngle;
+    /* 0x24 */ Vec3f endPoint;
+    /* 0x30 */ f32 duration;
+    /* 0x34 */ f32 time;
+    /* 0x38 */ f32 lengthStep;
+    /* 0x3C */ f32 angleStep;
+    /* 0x40 */ Npc* frontNpc;
+    /* 0x44 */ Npc* backNpc;
+} FuzzyThread; //size = 0x48
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
-NpcSettings N(NpcSettings_Fuzzy_02) = {
-    .height = 20,
-    .radius = 22,
-    .level = 6,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
-NpcSettings N(NpcSettings_Kooper_01) = {
-    .height = 35,
-    .radius = 24,
-    .level = 99,
-    .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
-};
+#include "world/common/enemy/complete/Fuzzy.inc.c"
+#include "world/common/npc/Koopa.inc.c"
 
 EvtScript N(D_80241328_9EEF18) = {
     EVT_CALL(GetNpcYaw, LVar4, LVar1)
@@ -83,17 +44,18 @@ EvtScript N(D_80241328_9EEF18) = {
     EVT_END
 };
 
-Unk80241440 N(D_802413F8_9EEFE8) = {};
+FuzzyThread N(ThreadData) = {};
 
-s32 N(D_80241440_9EF030)[] = {
-    -82, 101, 130, 38,
-    164, 130, 158, 135, 
-    157, 281, 156, 202, 
+s32 N(TreeHidingSpotPositions)[] = {
+    -82, 101, 130,
+    38, 164, 130,
+    158, 135, 157,
+    281, 156, 202, 
 };
 
 #include "common/CosInterpMinMax.inc.c"
 
-EvtScript N(D_80241470_9EF060) = {
+EvtScript N(EVS_AnimBranch_JumpTo) = {
     EVT_SET(LVar2, LVar0)
     EVT_SET(LVar3, LVar1)
     EVT_SET(LVar4, 600)
@@ -106,23 +68,23 @@ EvtScript N(D_80241470_9EF060) = {
     EVT_SETF(LVar8, EVT_FLOAT(5.0))
     EVT_CALL(MakeLerp, LVar5, 0, LVar4, EASING_COS_FAST_OVERSHOOT)
     EVT_LABEL(0)
-    EVT_CALL(UpdateLerp)
-    EVT_MULF(LVar0, EVT_FLOAT(0.40625))
-    EVT_ADD(LVar6, 1)
-    EVT_SETF(LVar9, LVar8)
-    EVT_MULF(LVar9, EVT_FLOAT(-1.0))
-    EVT_CALL(N(CosInterpMinMax), LVar6, LVar7, LVar9, LVar8, 3, 0, 0)
-    EVT_MULF(LVar8, EVT_FLOAT(0.90625))
-    EVT_CALL(TranslateModel, LVar2, LVar7, LVar0, 0)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_MULF(LVar0, EVT_FLOAT(0.40625))
+        EVT_ADD(LVar6, 1)
+        EVT_SETF(LVar9, LVar8)
+        EVT_MULF(LVar9, EVT_FLOAT(-1.0))
+        EVT_CALL(N(CosInterpMinMax), LVar6, LVar7, LVar9, LVar8, 3, 0, 0)
+        EVT_MULF(LVar8, EVT_FLOAT(0.90625))
+        EVT_CALL(TranslateModel, LVar2, LVar7, LVar0, 0)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_WAIT(1)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024161C_9EF20C) = {
+EvtScript N(EVS_AnimBranch_Hit) = {
     EVT_SET(LVar2, LVar0)
     EVT_SET(LVar3, LVar1)
     EVT_SET(LVar4, 600)
@@ -141,277 +103,263 @@ EvtScript N(D_8024161C_9EF20C) = {
     EVT_END
 };
 
-EvtScript N(D_80241710_9EF300) = {
+EvtScript N(EVS_MoveCam_TrackBoss) = {
     EVT_CALL(InterpCamTargetPos, 0, 1, LVarA, LVarB, LVarC, LVarD)
     EVT_RETURN
     EVT_END
 };
 
- // split?
-
- static s32 N(pad_1744)[] = {
-    0x00000000, 
+Vtx N(ThreadSegmentVertices)[] = {
+    {{{  -2,   0,     0 }, 0, {     0,     0 }, { 255, 255, 255, 255 }}},
+    {{{   1,   0,     0 }, 0, {   512,     0 }, { 255, 255, 255, 255 }}},
 };
 
-
-s32 N(D_80241748_9EF338)[] = {
-    0xFFFE0000, 0, 0, -1,
-    0x00010000, 0, 0x02000000, -1 
+Gfx N(ThreadGfx)[] = {
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
+    gsDPPipeSync(),
+    gsDPSetCycleType(G_CYC_1CYCLE),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetTextureFilter(G_TF_POINT),
+    gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+    gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
+    gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH),
+    gsSPEndDisplayList(),
 };
 
-s32 N(D_80241768_9EF358)[] = {
-    0xD7000000, -1,
-    0xE7000000, 0,
-    0xE3000A01, 0,
-    0xFCFFFFFF, 0xFFFE793C ,
-    0xE3001201, 0,
-    0xE200001C, 0x00552078,
-    0xD9C0F9FB, 0,
-    0xD9FFFFFF, 0x00200005 ,
-    0xDF000000, 0 ,
-};
-
-API_CALLABLE(N(func_80240314_9EDF04)) {
+API_CALLABLE(N(SetThreadAnchorPos)) {
     Bytecode* args = script->ptrReadPos;
     s32 temp_s2 = evt_get_variable(script, *args++);
     s32 temp_s0_3 = evt_get_variable(script, *args++);
     f32 temp_f6 = evt_get_variable(script, *args++);
 
-    N(D_802413F8_9EEFE8).unk_00.x = temp_s2;
-    N(D_802413F8_9EEFE8).unk_00.y = temp_s0_3 + 4.0f;
-    N(D_802413F8_9EEFE8).unk_00.z = temp_f6;
+    N(ThreadData).anchorPos.x = temp_s2;
+    N(ThreadData).anchorPos.y = temp_s0_3 + 4.0f;
+    N(ThreadData).anchorPos.z = temp_f6;
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802403C0_9EDFB0)) {
+API_CALLABLE(N(SetThreadTargetLengthAngle)) {
     Bytecode* args = script->ptrReadPos;
-    s32 temp_s2 = evt_get_variable(script, *args++);
+    s32 goal = evt_get_variable(script, *args++);
     s32 temp_s0_3 = evt_get_variable(script, *args++);
-    s32 temp_a0 = evt_get_variable(script, *args++);
-    s32 phi_s0 = temp_s0_3;
-    Unk80241440* d802413F8 = &N(D_802413F8_9EEFE8); //needed to match
-    f32 temp_f4;
-    f32 temp_f6;
-    f32 temp_f8;
-    f32 temp_f10;
+    s32 duration = evt_get_variable(script, *args++);
 
-    if (temp_s0_3 < 0) {
-        phi_s0 = temp_s0_3 + 15;
+    FuzzyThread* thread = &N(ThreadData); //needed to match
+    N(ThreadData).targetAngle = temp_s0_3 / NUM_THREAD_SEGMENTS;
+    N(ThreadData).targetLength = (f32)goal / NUM_THREAD_SEGMENTS;
+    N(ThreadData).duration = duration;
+    N(ThreadData).time = 0.0f;
+
+    if (0.0f < N(ThreadData).duration) {
+        N(ThreadData).lengthStep = (N(ThreadData).targetLength - N(ThreadData).currentLength) / N(ThreadData).duration;
+        N(ThreadData).angleStep = (N(ThreadData).targetAngle - N(ThreadData).currentAngle) / N(ThreadData).duration;
     }
 
-    temp_f8 = phi_s0 >> 4;
-    N(D_802413F8_9EEFE8).unk_34 = 0.0f;
-    temp_f6 = temp_s2 * 0.0625f;
-    temp_f10 = N(D_802413F8_9EEFE8).unk_34;
-    temp_f4 = temp_a0;
-    N(D_802413F8_9EEFE8).unk_18 = temp_f8;
-    N(D_802413F8_9EEFE8).unk_30 = temp_f4;
-    N(D_802413F8_9EEFE8).unk_0C = temp_f6;
-
-    if (temp_f10 < temp_f4) {
-        N(D_802413F8_9EEFE8).unk_38 = (temp_f6 - N(D_802413F8_9EEFE8).unk_10) / temp_f4;
-        N(D_802413F8_9EEFE8).unk_3C = (temp_f8 - N(D_802413F8_9EEFE8).unk_20) / temp_f4;
-    }
-
-    if (temp_f4 < temp_f10) {
-        N(D_802413F8_9EEFE8).unk_10 = temp_f6;
-        N(D_802413F8_9EEFE8).unk_20 = temp_f8;
-        N(D_802413F8_9EEFE8).unk_30 = temp_f10;
+    if (N(ThreadData).duration < 0.0f) {
+        N(ThreadData).currentLength = N(ThreadData).targetLength;
+        N(ThreadData).currentAngle = N(ThreadData).targetAngle;
+        N(ThreadData).duration = 0.0f;
     }
 
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802404D0_9EE0C0)) {
-    N(D_802413F8_9EEFE8).unk_00.x = 0;
-    N(D_802413F8_9EEFE8).unk_00.y = 0;
-    N(D_802413F8_9EEFE8).unk_00.z = 0;
-    N(D_802413F8_9EEFE8).unk_10 = 0;
-    N(D_802413F8_9EEFE8).unk_0C = 0;
-    N(D_802413F8_9EEFE8).unk_14 = 0;
-    N(D_802413F8_9EEFE8).unk_18 = 0;
-    N(D_802413F8_9EEFE8).unk_20 = 0;
-    N(D_802413F8_9EEFE8).unk_1C = 0;
-    N(D_802413F8_9EEFE8).unk_40 = NULL;
-    N(D_802413F8_9EEFE8).unk_44 = NULL;
-    N(D_802413F8_9EEFE8).unk_34 = 0;
-    N(D_802413F8_9EEFE8).unk_30 = 0;
-    N(D_802413F8_9EEFE8).unk_38 = 0;
-    N(D_802413F8_9EEFE8).unk_3C = 0;
+API_CALLABLE(N(InitThreadData)) {
+    N(ThreadData).anchorPos.x = 0;
+    N(ThreadData).anchorPos.y = 0;
+    N(ThreadData).anchorPos.z = 0;
+    N(ThreadData).currentLength = 0;
+    N(ThreadData).targetLength = 0;
+    N(ThreadData).overshootVel = 0;
+    N(ThreadData).targetAngle = 0;
+    N(ThreadData).currentAngle = 0;
+    N(ThreadData).overshootAngleVel = 0;
+    N(ThreadData).frontNpc = NULL;
+    N(ThreadData).backNpc = NULL;
+    N(ThreadData).time = 0;
+    N(ThreadData).duration = 0;
+    N(ThreadData).lengthStep = 0;
+    N(ThreadData).angleStep = 0;
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_8024051C_9EE10C)) {
+API_CALLABLE(N(AttachThreadFrontNpc)) {
     Bytecode* args = script->ptrReadPos;
-    N(D_802413F8_9EEFE8).unk_40 = (Unk80241440_2*) evt_get_variable(script, *args++);
+    N(ThreadData).frontNpc = (Npc*) evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80240548_9EE138)) {
+API_CALLABLE(N(AttachThreadBackNpc)) {
     Bytecode* args = script->ptrReadPos;
-    N(D_802413F8_9EEFE8).unk_44 = (Unk80241440_2*) evt_get_variable(script, *args++);
+    N(ThreadData).backNpc = (Npc*) evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80240574_9EE164)) {
+API_CALLABLE(N(GetTreeHidingSpotPos)) {
     Bytecode *args = script->ptrReadPos;
-    s32 mapVar1 = evt_get_variable(script, *args++) * 3;
-    s32 var1 = *args++;
-    s32 var2 = *args++;
-    s32 var3 = *args++;
+    s32 treeIdx = evt_get_variable(script, *args++) * 3;
+    s32 outVarX = *args++;
+    s32 outVarY = *args++;
+    s32 outVarZ = *args++;
 
-    evt_set_variable(script, var1, N(D_80241440_9EF030)[mapVar1]);
-    evt_set_variable(script, var2, N(D_80241440_9EF030)[mapVar1 + 1]);
-    evt_set_variable(script, var3, N(D_80241440_9EF030)[mapVar1 + 2]);
+    evt_set_variable(script, outVarX, N(TreeHidingSpotPositions)[treeIdx + 0]);
+    evt_set_variable(script, outVarY, N(TreeHidingSpotPositions)[treeIdx + 1]);
+    evt_set_variable(script, outVarZ, N(TreeHidingSpotPositions)[treeIdx + 2]);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80240630_9EE220)) {
+// get pattern from counter: 0, 1, 2, 3, 2, 1, (begin repeat) 0, 1, 2, 3, ...
+API_CALLABLE(N(EVS_ConvertTreeIndex)) {
     Bytecode* args = script->ptrReadPos;
-    s32 evtVar = evt_get_variable(script, *args++);
+    s32 treeIdx = evt_get_variable(script, *args++);
     Bytecode outVar = *args++;
-    evtVar %= 6;
 
-    if (evtVar < 4) {
-        evt_set_variable(script, outVar, evtVar);
+    treeIdx %= 6;
+
+    if (treeIdx < 4) {
+        evt_set_variable(script, outVar, treeIdx);
     } else {
-        evt_set_variable(script, outVar, 6 - evtVar);
+        evt_set_variable(script, outVar, 6 - treeIdx);
     }
 
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802406C4_9EE2B4)) {
+// args: tree index, animation type (0 = jump to, 1 = hit)
+API_CALLABLE(N(AnimateTreeBranch)) {
     Bytecode* args = script->ptrReadPos;
-    s32 temp_s1_2 = evt_get_variable(script, *args++);
+    s32 treeIdx = evt_get_variable(script, *args++);
     s32 temp_s2 = evt_get_variable(script, *args++);
-    Evt* script2;
-    EvtScript* phi_a0;
+    Evt* animScript;
+    EvtScript* animSrc;
 
-    temp_s1_2 %= 6;
+    // get pattern: 0, 1, 2, 3, 2, 1, (begin repeat) 0, 1, 2, 3, ...
+    treeIdx %= 6;
 
-    if (temp_s1_2 >= 4) {
-        temp_s1_2 = 6 - temp_s1_2;
+    if (treeIdx >= 4) {
+        treeIdx = 6 - treeIdx;
     }
 
-    if (does_script_exist(script->varTable[temp_s1_2 + 6])) {
-        kill_script_by_ID(script->varTable[temp_s1_2 + 6]);
+    if (does_script_exist(script->varTable[treeIdx + 6])) {
+        kill_script_by_ID(script->varTable[treeIdx + 6]);
     }
 
-    phi_a0 = &N(D_80241470_9EF060);
+    animSrc = &N(EVS_AnimBranch_JumpTo);
 
     switch (temp_s2) {
         case 0:
-            phi_a0 = &N(D_80241470_9EF060);
+            animSrc = &N(EVS_AnimBranch_JumpTo);
             break;
         case 1:
-            phi_a0 = &N(D_8024161C_9EF20C);
+            animSrc = &N(EVS_AnimBranch_Hit);
             break;
     }
 
-    script2 = start_script(phi_a0, EVT_PRIORITY_1, 0);
-    script->varTable[temp_s1_2 + 6] = script2->id;
+    animScript = start_script(animSrc, EVT_PRIORITY_1, 0);
+    script->varTable[treeIdx + 6] = animScript->id;
 
-    switch (temp_s1_2) {
+    switch (treeIdx) {
         case 0:
-            script2->varTable[0] = 0x4C;
+            animScript->varTable[0] = MODEL_o177;
             break;
         case 1:
-            script2->varTable[0] = 0x4D;
+            animScript->varTable[0] = MODEL_o178;
             break;
         case 2:
-            script2->varTable[0] = 0x4E;
+            animScript->varTable[0] = MODEL_o181;
             break;
         case 3:
-            script2->varTable[0] = 0x4F;
+            animScript->varTable[0] = MODEL_o180;
             break;
     }
 
     return ApiStatus_DONE2;
 }
 
-void N(func_80240814_9EE404)(s32 index) {
-    f32 x = N(D_802413F8_9EEFE8).unk_00.x;
-    f32 y = N(D_802413F8_9EEFE8).unk_00.y;
-    f32 z = N(D_802413F8_9EEFE8).unk_00.z;
+void N(build_gfx_thread)(void) {
+    f32 x = N(ThreadData).anchorPos.x;
+    f32 y = N(ThreadData).anchorPos.y;
+    f32 z = N(ThreadData).anchorPos.z;
     s32 i;
-    f32 angle, deltaY, fs3;
+    f32 segAngle, segLength, fs3;
 
-    N(D_802413F8_9EEFE8).unk_14 += 0.2;
-    if (N(D_802413F8_9EEFE8).unk_30 != 0.0f) {
-        N(D_802413F8_9EEFE8).unk_10 += N(D_802413F8_9EEFE8).unk_38;
-        if (N(D_802413F8_9EEFE8).unk_0C < N(D_802413F8_9EEFE8).unk_10) {
-            N(D_802413F8_9EEFE8).unk_14 += (N(D_802413F8_9EEFE8).unk_0C - N(D_802413F8_9EEFE8).unk_10) * 0.5f;
+    N(ThreadData).overshootVel += 0.2;
+    if (N(ThreadData).duration != 0.0f) {
+        // thread extension/retraction
+        N(ThreadData).currentLength += N(ThreadData).lengthStep;
+        if (N(ThreadData).currentLength > N(ThreadData).targetLength) {
+            N(ThreadData).overshootVel += (N(ThreadData).targetLength - N(ThreadData).currentLength) * 0.5f;
         }
-        N(D_802413F8_9EEFE8).unk_34 += 1.0f;
-        N(D_802413F8_9EEFE8).unk_1C = (N(D_802413F8_9EEFE8).unk_1C + (N(D_802413F8_9EEFE8).unk_18 - N(D_802413F8_9EEFE8).unk_20) / 10.0f) * 0.92;
-        N(D_802413F8_9EEFE8).unk_20 += N(D_802413F8_9EEFE8).unk_3C;
-        if (N(D_802413F8_9EEFE8).unk_30 <= N(D_802413F8_9EEFE8).unk_34) {
-            N(D_802413F8_9EEFE8).unk_30 = 0.0f;
+        N(ThreadData).time += 1.0f;
+        N(ThreadData).overshootAngleVel = (N(ThreadData).overshootAngleVel + (N(ThreadData).targetAngle - N(ThreadData).currentAngle) / 10.0f) * 0.92;
+        N(ThreadData).currentAngle += N(ThreadData).angleStep;
+        if (N(ThreadData).duration <= N(ThreadData).time) {
+            N(ThreadData).duration = 0.0f;
         }
     } else {
-        N(D_802413F8_9EEFE8).unk_10 += N(D_802413F8_9EEFE8).unk_14;
-        if (N(D_802413F8_9EEFE8).unk_0C < N(D_802413F8_9EEFE8).unk_10) {
-            N(D_802413F8_9EEFE8).unk_14 += (N(D_802413F8_9EEFE8).unk_0C - N(D_802413F8_9EEFE8).unk_10) * 0.5f;
+        // thread overshoot
+        N(ThreadData).currentLength += N(ThreadData).overshootVel;
+        if (N(ThreadData).targetLength < N(ThreadData).currentLength) {
+            N(ThreadData).overshootVel += (N(ThreadData).targetLength - N(ThreadData).currentLength) * 0.5f;
         }
-        N(D_802413F8_9EEFE8).unk_1C = (N(D_802413F8_9EEFE8).unk_1C + (N(D_802413F8_9EEFE8).unk_18 - N(D_802413F8_9EEFE8).unk_20) / 10.0f) * 0.92;
-        N(D_802413F8_9EEFE8).unk_20 += N(D_802413F8_9EEFE8).unk_1C;
+        N(ThreadData).overshootAngleVel = (N(ThreadData).overshootAngleVel + (N(ThreadData).targetAngle - N(ThreadData).currentAngle) / 10.0f) * 0.92;
+        N(ThreadData).currentAngle += N(ThreadData).overshootAngleVel;
     }
-    N(D_802413F8_9EEFE8).unk_14 *= 0.5;
+    N(ThreadData).overshootVel *= 0.5;
 
-    gSPDisplayList(gMasterGfxPos++, N(D_80241768_9EF358));
-    guTranslate(&gDisplayContext->matrixStack[gMatrixListPos], N(D_802413F8_9EEFE8).unk_00.x, N(D_802413F8_9EEFE8).unk_00.y, N(D_802413F8_9EEFE8).unk_00.z);
+    gSPDisplayList(gMasterGfxPos++, N(ThreadGfx));
+    guTranslate(&gDisplayContext->matrixStack[gMatrixListPos], N(ThreadData).anchorPos.x, N(ThreadData).anchorPos.y, N(ThreadData).anchorPos.z);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    angle = N(D_802413F8_9EEFE8).unk_20;
-    deltaY = -N(D_802413F8_9EEFE8).unk_10;
-    x += -deltaY * sin_rad(N(D_802413F8_9EEFE8).unk_20 * 0 / 180.0f * PI);
-    y += deltaY * cos_rad(N(D_802413F8_9EEFE8).unk_20 * 0 / 180.0f * PI);
+    segAngle = N(ThreadData).currentAngle;
+    segLength = -N(ThreadData).currentLength;
+    x += -segLength * sin_rad(N(ThreadData).currentAngle * 0 / 180.0f * PI);
+    y +=  segLength * cos_rad(N(ThreadData).currentAngle * 0 / 180.0f * PI);
 
-    guPosition(&gDisplayContext->matrixStack[gMatrixListPos], 0.0f, 0.0f, angle, 1.0f, 0.0f, deltaY, 0.0f);
+    guPosition(&gDisplayContext->matrixStack[gMatrixListPos], 0.0f, 0.0f, segAngle, 1.0f, 0.0f, segLength, 0.0f);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    for (i = 1; i < 16; i++) {
-        angle = N(D_802413F8_9EEFE8).unk_20;
-        deltaY = -N(D_802413F8_9EEFE8).unk_10;
-        x += -deltaY * sin_rad(N(D_802413F8_9EEFE8).unk_20 * i / 180.0f * PI);
-        y += deltaY * cos_rad(N(D_802413F8_9EEFE8).unk_20 * i / 180.0f * PI);
-        gSPVertex(gMasterGfxPos++, N(D_80241748_9EF338), 2, 0);
-        guPosition(&gDisplayContext->matrixStack[gMatrixListPos], 0.0f, 0.0f, angle, 1.0f, 0.0f, deltaY, 0.0f);
+    for (i = 1; i < NUM_THREAD_SEGMENTS; i++) {
+        segAngle = N(ThreadData).currentAngle;
+        segLength = -N(ThreadData).currentLength;
+        x += -segLength * sin_rad(N(ThreadData).currentAngle * i / 180.0f * PI);
+        y +=  segLength * cos_rad(N(ThreadData).currentAngle * i / 180.0f * PI);
+        gSPVertex(gMasterGfxPos++, N(ThreadSegmentVertices), 2, 0);
+        guPosition(&gDisplayContext->matrixStack[gMatrixListPos], 0.0f, 0.0f, segAngle, 1.0f, 0.0f, segLength, 0.0f);
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPVertex(gMasterGfxPos++, N(D_80241748_9EF338), 2, 2);
+        gSPVertex(gMasterGfxPos++, N(ThreadSegmentVertices), 2, 2);
         gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 2, 3, 1, 0);
     }
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMasterGfxPos++);
 
-    N(D_802413F8_9EEFE8).unk_24 = x;
-    N(D_802413F8_9EEFE8).unk_28 = y;
-    N(D_802413F8_9EEFE8).unk_2C = z;
+    N(ThreadData).endPoint.x = x;
+    N(ThreadData).endPoint.y = y;
+    N(ThreadData).endPoint.z = z;
 
-    if (N(D_802413F8_9EEFE8).unk_40 != NULL) {
-        N(D_802413F8_9EEFE8).unk_40->unk_38 = x;
-        N(D_802413F8_9EEFE8).unk_40->unk_3C = y - 4.0f;
-        N(D_802413F8_9EEFE8).unk_40->unk_40 = z + 6.0f;
+    if (N(ThreadData).frontNpc != NULL) {
+        N(ThreadData).frontNpc->pos.x = x;
+        N(ThreadData).frontNpc->pos.y = y - 4.0f;
+        N(ThreadData).frontNpc->pos.z = z + 6.0f;
     }
 
-    if (N(D_802413F8_9EEFE8).unk_44 != NULL) {
-        N(D_802413F8_9EEFE8).unk_44->unk_38 = x;
-        N(D_802413F8_9EEFE8).unk_44->unk_3C = y - 4.0f;
-        N(D_802413F8_9EEFE8).unk_44->unk_40 = z + 3.0f;
+    if (N(ThreadData).backNpc != NULL) {
+        N(ThreadData).backNpc->pos.x = x;
+        N(ThreadData).backNpc->pos.y = y - 4.0f;
+        N(ThreadData).backNpc->pos.z = z + 3.0f;
     }
 }
 
-EvtScript N(D_802417B0_9EF3A0) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
-    EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarB, LVarC, LVarD)
+EvtScript N(EVS_BossJumpTo) = {
+    EVT_CALL(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_B0000017, 0)
+    EVT_CALL(NpcJump0, NPC_BossFuzzy, LVarA, LVarB, LVarC, LVarD)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(D_802417F8_9EF3E8) = {
-    EVT_CALL(PlayerFaceNpc, NPC_Fuzzy_01, FALSE)
+    EVT_CALL(PlayerFaceNpc, NPC_BossFuzzy, FALSE)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_00BE, 160, 40)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamType, CAM_DEFAULT, 1, FALSE)
@@ -425,11 +373,11 @@ EvtScript N(D_802417F8_9EF3E8) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(60)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+    EVT_CALL(SetNpcJumpscale, NPC_BossFuzzy, 3)
+    EVT_CALL(SetNpcJumpscale, NPC_KoopersShell, 3)
     EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_01, 3)
-    EVT_CALL(SetNpcJumpscale, NPC_Kooper_01, 3)
+    EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_02, 3)
     EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_03, 3)
-    EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_04, 3)
-    EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_05, 3)
     EVT_SWITCH(MV_Unk_00)
         EVT_CASE_EQ(0)
             EVT_SET(LVarE, 10)
@@ -447,7 +395,7 @@ EvtScript N(D_802417F8_9EF3E8) = {
     EVT_SET(LVarF, MV_Unk_01)
     EVT_LOOP(LVarE)
         EVT_SET(LVarA, MV_Unk_01)
-        EVT_CALL(N(func_80240630_9EE220), LVarF, MV_Unk_01)
+        EVT_CALL(N(EVS_ConvertTreeIndex), LVarF, MV_Unk_01)
         EVT_SWITCH(LVarF)
             EVT_CASE_EQ(0)
                 EVT_SET(LVarB, 2)
@@ -508,24 +456,24 @@ EvtScript N(D_802417F8_9EF3E8) = {
             EVT_CASE_EQ(2)
                 EVT_SET(LVarD, 6)
         EVT_END_SWITCH
-        EVT_SET(LVar0, 0x002B0005)
+        EVT_SET(LVar0, ANIM_Fuzzy_Jump)
         EVT_CALL(RandInt, 2, LVar1)
         EVT_ADD(LVar0, LVar1)
+        EVT_CALL(SetNpcAnimation, NPC_BossFuzzy, LVar0)
         EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, LVar0)
+        EVT_CALL(SetNpcAnimation, NPC_Fuzzy_02, LVar0)
         EVT_CALL(SetNpcAnimation, NPC_Fuzzy_03, LVar0)
-        EVT_CALL(SetNpcAnimation, NPC_Fuzzy_04, LVar0)
-        EVT_CALL(SetNpcAnimation, NPC_Fuzzy_05, LVar0)
         EVT_CALL(PlaySound, SOUND_B0000017)
         EVT_THREAD
-            EVT_CALL(N(func_80240574_9EE164), MV_Unk_01, LVar0, LVar1, LVar2)
-            EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVar0, LVar1, LVar2, LVarD)
+            EVT_CALL(N(GetTreeHidingSpotPos), MV_Unk_01, LVar0, LVar1, LVar2)
+            EVT_CALL(NpcJump0, NPC_BossFuzzy, LVar0, LVar1, LVar2, LVarD)
         EVT_END_THREAD
         EVT_IF_NE(MV_Unk_01, LVarA)
             EVT_THREAD
-                EVT_CALL(N(func_80240574_9EE164), MV_Unk_01, LVar0, LVar1, LVar2)
-                EVT_CALL(SetNpcPos, NPC_Fuzzy_03, LVar0, LVar1, LVar2)
-                EVT_CALL(N(func_80240574_9EE164), LVarA, LVar0, LVar1, LVar2)
-                EVT_CALL(NpcJump0, NPC_Fuzzy_03, LVar0, LVar1, LVar2, LVarD)
+                EVT_CALL(N(GetTreeHidingSpotPos), MV_Unk_01, LVar0, LVar1, LVar2)
+                EVT_CALL(SetNpcPos, NPC_Fuzzy_01, LVar0, LVar1, LVar2)
+                EVT_CALL(N(GetTreeHidingSpotPos), LVarA, LVar0, LVar1, LVar2)
+                EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVar0, LVar1, LVar2, LVarD)
             EVT_END_THREAD
             EVT_SET(LocalFlag(0), FALSE)
             EVT_IF_EQ(LVarB, 0)
@@ -535,66 +483,66 @@ EvtScript N(D_802417F8_9EF3E8) = {
             EVT_END_IF
             EVT_IF_EQ(LocalFlag(0), FALSE)
                 EVT_THREAD
-                    EVT_CALL(N(func_80240574_9EE164), LVarB, LVar0, LVar1, LVar2)
-                    EVT_CALL(SetNpcPos, NPC_Fuzzy_04, LVar0, LVar1, LVar2)
-                    EVT_CALL(N(func_80240574_9EE164), LVarC, LVar0, LVar1, LVar2)
-                    EVT_CALL(NpcJump0, NPC_Fuzzy_04, LVar0, LVar1, LVar2, LVarD)
+                    EVT_CALL(N(GetTreeHidingSpotPos), LVarB, LVar0, LVar1, LVar2)
+                    EVT_CALL(SetNpcPos, NPC_Fuzzy_02, LVar0, LVar1, LVar2)
+                    EVT_CALL(N(GetTreeHidingSpotPos), LVarC, LVar0, LVar1, LVar2)
+                    EVT_CALL(NpcJump0, NPC_Fuzzy_02, LVar0, LVar1, LVar2, LVarD)
                 EVT_END_THREAD
                 EVT_THREAD
-                    EVT_CALL(N(func_80240574_9EE164), LVarC, LVar0, LVar1, LVar2)
-                    EVT_CALL(SetNpcPos, NPC_Fuzzy_05, LVar0, LVar1, LVar2)
-                    EVT_CALL(N(func_80240574_9EE164), LVarB, LVar0, LVar1, LVar2)
-                    EVT_CALL(NpcJump0, NPC_Fuzzy_05, LVar0, LVar1, LVar2, LVarD)
+                    EVT_CALL(N(GetTreeHidingSpotPos), LVarC, LVar0, LVar1, LVar2)
+                    EVT_CALL(SetNpcPos, NPC_Fuzzy_03, LVar0, LVar1, LVar2)
+                    EVT_CALL(N(GetTreeHidingSpotPos), LVarB, LVar0, LVar1, LVar2)
+                    EVT_CALL(NpcJump0, NPC_Fuzzy_03, LVar0, LVar1, LVar2, LVarD)
                 EVT_END_THREAD
             EVT_ELSE
                 EVT_THREAD
-                    EVT_CALL(N(func_80240574_9EE164), LVarB, LVar0, LVar1, LVar2)
-                    EVT_CALL(SetNpcPos, NPC_Fuzzy_04, LVar0, LVar1, LVar2)
-                    EVT_CALL(N(func_80240574_9EE164), LVarB, LVar0, LVar1, LVar2)
-                    EVT_CALL(NpcJump0, NPC_Fuzzy_04, LVar0, LVar1, LVar2, LVarD)
+                    EVT_CALL(N(GetTreeHidingSpotPos), LVarB, LVar0, LVar1, LVar2)
+                    EVT_CALL(SetNpcPos, NPC_Fuzzy_02, LVar0, LVar1, LVar2)
+                    EVT_CALL(N(GetTreeHidingSpotPos), LVarB, LVar0, LVar1, LVar2)
+                    EVT_CALL(NpcJump0, NPC_Fuzzy_02, LVar0, LVar1, LVar2, LVarD)
                 EVT_END_THREAD
                 EVT_THREAD
-                    EVT_CALL(N(func_80240574_9EE164), LVarC, LVar0, LVar1, LVar2)
-                    EVT_CALL(SetNpcPos, NPC_Fuzzy_05, LVar0, LVar1, LVar2)
-                    EVT_CALL(N(func_80240574_9EE164), LVarC, LVar0, LVar1, LVar2)
-                    EVT_CALL(NpcJump0, NPC_Fuzzy_05, LVar0, LVar1, LVar2, LVarD)
+                    EVT_CALL(N(GetTreeHidingSpotPos), LVarC, LVar0, LVar1, LVar2)
+                    EVT_CALL(SetNpcPos, NPC_Fuzzy_03, LVar0, LVar1, LVar2)
+                    EVT_CALL(N(GetTreeHidingSpotPos), LVarC, LVar0, LVar1, LVar2)
+                    EVT_CALL(NpcJump0, NPC_Fuzzy_03, LVar0, LVar1, LVar2, LVarD)
                 EVT_END_THREAD
             EVT_END_IF
         EVT_ELSE
             EVT_THREAD
                 EVT_ADD(LVarA, 1)
                 EVT_MOD(LVarA, 4)
-                EVT_CALL(N(func_80240574_9EE164), LVarA, LVar0, LVar1, LVar2)
-                EVT_CALL(SetNpcPos, NPC_Fuzzy_03, LVar0, LVar1, LVar2)
-                EVT_CALL(NpcJump0, NPC_Fuzzy_03, LVar0, LVar1, LVar2, LVarD)
+                EVT_CALL(N(GetTreeHidingSpotPos), LVarA, LVar0, LVar1, LVar2)
+                EVT_CALL(SetNpcPos, NPC_Fuzzy_01, LVar0, LVar1, LVar2)
+                EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVar0, LVar1, LVar2, LVarD)
             EVT_END_THREAD
             EVT_THREAD
                 EVT_ADD(LVarA, 2)
                 EVT_MOD(LVarA, 4)
-                EVT_CALL(N(func_80240574_9EE164), LVarA, LVar0, LVar1, LVar2)
-                EVT_CALL(SetNpcPos, NPC_Fuzzy_04, LVar0, LVar1, LVar2)
-                EVT_CALL(NpcJump0, NPC_Fuzzy_04, LVar0, LVar1, LVar2, LVarD)
+                EVT_CALL(N(GetTreeHidingSpotPos), LVarA, LVar0, LVar1, LVar2)
+                EVT_CALL(SetNpcPos, NPC_Fuzzy_02, LVar0, LVar1, LVar2)
+                EVT_CALL(NpcJump0, NPC_Fuzzy_02, LVar0, LVar1, LVar2, LVarD)
             EVT_END_THREAD
             EVT_THREAD
                 EVT_ADD(LVarA, 3)
                 EVT_MOD(LVarA, 4)
-                EVT_CALL(N(func_80240574_9EE164), LVarA, LVar0, LVar1, LVar2)
-                EVT_CALL(SetNpcPos, NPC_Fuzzy_05, LVar0, LVar1, LVar2)
-                EVT_CALL(NpcJump0, NPC_Fuzzy_05, LVar0, LVar1, LVar2, LVarD)
+                EVT_CALL(N(GetTreeHidingSpotPos), LVarA, LVar0, LVar1, LVar2)
+                EVT_CALL(SetNpcPos, NPC_Fuzzy_03, LVar0, LVar1, LVar2)
+                EVT_CALL(NpcJump0, NPC_Fuzzy_03, LVar0, LVar1, LVar2, LVarD)
             EVT_END_THREAD
         EVT_END_IF
         EVT_WAIT(2)
-        EVT_CALL(N(func_80240574_9EE164), MV_Unk_01, LVar0, LVar1, LVar2)
+        EVT_CALL(N(GetTreeHidingSpotPos), MV_Unk_01, LVar0, LVar1, LVar2)
         EVT_ADD(LVar2, 2)
-        EVT_CALL(NpcJump0, NPC_Kooper_01, LVar0, LVar1, LVar2, LVarD)
+        EVT_CALL(NpcJump0, NPC_KoopersShell, LVar0, LVar1, LVar2, LVarD)
+        EVT_CALL(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Still)
         EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, ANIM_Fuzzy_Still)
+        EVT_CALL(SetNpcAnimation, NPC_Fuzzy_02, ANIM_Fuzzy_Still)
         EVT_CALL(SetNpcAnimation, NPC_Fuzzy_03, ANIM_Fuzzy_Still)
-        EVT_CALL(SetNpcAnimation, NPC_Fuzzy_04, ANIM_Fuzzy_Still)
-        EVT_CALL(SetNpcAnimation, NPC_Fuzzy_05, ANIM_Fuzzy_Still)
-        EVT_CALL(N(func_802406C4_9EE2B4), 0, 0)
-        EVT_CALL(N(func_802406C4_9EE2B4), 1, 0)
-        EVT_CALL(N(func_802406C4_9EE2B4), 2, 0)
-        EVT_CALL(N(func_802406C4_9EE2B4), 3, 0)
+        EVT_CALL(N(AnimateTreeBranch), TREE_0, 0)
+        EVT_CALL(N(AnimateTreeBranch), TREE_1, 0)
+        EVT_CALL(N(AnimateTreeBranch), TREE_2, 0)
+        EVT_CALL(N(AnimateTreeBranch), TREE_3, 0)
         EVT_CALL(PlaySound, SOUND_SHAKE_TREE)
     EVT_END_LOOP
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
@@ -617,50 +565,50 @@ EvtScript N(D_80242500_9F00F0) = {
             EVT_CALL(DisablePlayerPhysics, TRUE)
         EVT_END_THREAD
     EVT_END_IF
-    EVT_CALL(N(func_802406C4_9EE2B4), 2, 0)
+    EVT_CALL(N(AnimateTreeBranch), 2, 0)
     EVT_CALL(PlaySound, SOUND_SHAKE_TREE)
-    EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, ANIM_Fuzzy_Anim0B)
-    EVT_CALL(N(func_80240574_9EE164), 2, LVar0, LVar1, LVar2)
-    EVT_CALL(N(func_80240314_9EDF04), LVar0, LVar1, LVar2)
-    EVT_CALL(N(func_802403C0_9EDFB0), 50, 0, 0)
-    EVT_CALL(GetNpcPointer, NPC_Fuzzy_01, LVar0)
-    EVT_CALL(GetNpcPointer, NPC_Kooper_01, LVar1)
-    EVT_CALL(N(func_80240548_9EE138), LVar0)
-    EVT_CALL(N(func_8024051C_9EE10C), LVar1)
-    EVT_CALL(SetModelFlags, MODEL_o177, 16, TRUE)
+    EVT_CALL(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Anim0B)
+    EVT_CALL(N(GetTreeHidingSpotPos), 2, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetThreadAnchorPos), LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetThreadTargetLengthAngle), 50, 0, 0)
+    EVT_CALL(GetNpcPointer, NPC_BossFuzzy, LVar0)
+    EVT_CALL(GetNpcPointer, NPC_KoopersShell, LVar1)
+    EVT_CALL(N(AttachThreadBackNpc), LVar0)
+    EVT_CALL(N(AttachThreadFrontNpc), LVar1)
+    EVT_CALL(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_HID_IN_TREE)
-        EVT_SET(LVar0, 0x000C00BC)
+        EVT_SET(LVar0, MSG_CH1_00BC)
         EVT_SET(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_HID_IN_TREE)
     EVT_ELSE
-        EVT_SET(LVar0, 0x000C00BD)
+        EVT_SET(LVar0, MSG_CH1_00BD)
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_Fuzzy_01, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 5, LVar0)
+    EVT_CALL(SpeakToPlayer, NPC_BossFuzzy, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 5, LVar0)
     EVT_CALL(SetMusicTrack, 0, SONG_PLAYROOM, 0, 8)
-    EVT_CALL(N(func_802403C0_9EDFB0), 0, 0, 30)
+    EVT_CALL(N(SetThreadTargetLengthAngle), 0, 0, 30)
     EVT_WAIT(30)
-    EVT_CALL(SetModelFlags, MODEL_o177, 16, FALSE)
-    EVT_CALL(N(func_8024051C_9EE10C), 0)
-    EVT_CALL(N(func_80240548_9EE138), 0)
+    EVT_CALL(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, FALSE)
+    EVT_CALL(N(AttachThreadFrontNpc), NULL)
+    EVT_CALL(N(AttachThreadBackNpc), NULL)
     EVT_EXEC(N(D_802417F8_9EF3E8))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024274C_9F033C) = {
+EvtScript N(EVS_Scene_HideInTree) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_EQ(STORY_CH1_FUZZY_THIEF_HID_IN_TREE)
             EVT_LABEL(0)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_IF_LT(LVar0, 60)
-                EVT_WAIT(1)
-                EVT_GOTO(0)
-            EVT_END_IF
+                EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+                EVT_IF_LT(LVar0, 60)
+                    EVT_WAIT(1)
+                    EVT_GOTO(0)
+                EVT_END_IF
             EVT_SET(LocalFlag(0), FALSE)
             EVT_EXEC(N(D_80242500_9F00F0))
             EVT_RETURN
         EVT_CASE_GE(STORY_CH1_KOOPER_JOINED_PARTY)
-            EVT_CALL(SetNpcPos, NPC_Fuzzy_01, 0, -1000, 0)
-            EVT_CALL(SetNpcPos, NPC_Kooper_01, 0, -1000, 0)
+            EVT_CALL(SetNpcPos, NPC_BossFuzzy, NPC_DISPOSE_LOCATION)
+            EVT_CALL(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
             EVT_RETURN
     EVT_END_SWITCH
     EVT_CALL(DisablePlayerInput, TRUE)
@@ -671,56 +619,56 @@ EvtScript N(D_8024274C_9F033C) = {
         EVT_CALL(PlayerMoveTo, -300, 325, 0)
     EVT_END_THREAD
     EVT_WAIT(5)
-    EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_01, EVT_FLOAT(0.703125))
-    EVT_CALL(SetNpcJumpscale, NPC_Kooper_01, EVT_FLOAT(0.703125))
+    EVT_CALL(SetNpcJumpscale, NPC_BossFuzzy, EVT_FLOAT(0.703125))
+    EVT_CALL(SetNpcJumpscale, NPC_KoopersShell, EVT_FLOAT(0.703125))
     EVT_THREAD
         EVT_WAIT(20)
         EVT_SET(LVarA, 58)
         EVT_SET(LVarB, 0)
         EVT_SET(LVarC, 227)
         EVT_SET(LVarD, 80)
-        EVT_EXEC(N(D_80241710_9EF300))
+        EVT_EXEC(N(EVS_MoveCam_TrackBoss))
     EVT_END_THREAD
     EVT_SET(LVarA, -260)
     EVT_SET(LVarB, 0)
     EVT_SET(LVarC, 290)
     EVT_SET(LVarD, 20)
-    EVT_EXEC(N(D_802417B0_9EF3A0))
+    EVT_EXEC(N(EVS_BossJumpTo))
     EVT_WAIT(1)
-    EVT_CALL(NpcJump0, NPC_Kooper_01, LVarA, 0, 293, LVarD)
+    EVT_CALL(NpcJump0, NPC_KoopersShell, LVarA, 0, 293, LVarD)
     EVT_SET(LVarA, -180)
     EVT_SET(LVarB, 0)
     EVT_SET(LVarC, 245)
     EVT_SET(LVarD, 15)
-    EVT_EXEC(N(D_802417B0_9EF3A0))
+    EVT_EXEC(N(EVS_BossJumpTo))
     EVT_WAIT(1)
-    EVT_CALL(NpcJump0, NPC_Kooper_01, LVarA, LVarB, 248, LVarD)
+    EVT_CALL(NpcJump0, NPC_KoopersShell, LVarA, LVarB, 248, LVarD)
     EVT_SET(LVarA, -100)
     EVT_SET(LVarB, 0)
     EVT_SET(LVarC, 235)
     EVT_SET(LVarD, 15)
-    EVT_EXEC(N(D_802417B0_9EF3A0))
+    EVT_EXEC(N(EVS_BossJumpTo))
     EVT_WAIT(1)
-    EVT_CALL(NpcJump0, NPC_Kooper_01, LVarA, LVarB, 238, LVarD)
+    EVT_CALL(NpcJump0, NPC_KoopersShell, LVarA, LVarB, 238, LVarD)
     EVT_SET(LVarA, 85)
     EVT_SET(LVarB, 0)
     EVT_SET(LVarC, 217)
     EVT_SET(LVarD, 30)
-    EVT_EXEC(N(D_802417B0_9EF3A0))
+    EVT_EXEC(N(EVS_BossJumpTo))
     EVT_WAIT(1)
-    EVT_CALL(NpcJump0, NPC_Kooper_01, LVarA, LVarB, 220, LVarD)
-    EVT_CALL(N(func_80240574_9EE164), 2, LVar0, LVar1, LVar2)
+    EVT_CALL(NpcJump0, NPC_KoopersShell, LVarA, LVarB, 220, LVarD)
+    EVT_CALL(N(GetTreeHidingSpotPos), 2, LVar0, LVar1, LVar2)
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarB, LVar1)
     EVT_SET(LVarC, LVar3)
     EVT_SET(LVarD, 30)
-    EVT_EXEC(N(D_802417B0_9EF3A0))
+    EVT_EXEC(N(EVS_BossJumpTo))
     EVT_WAIT(1)
     EVT_ADD(LVarC, 3)
-    EVT_CALL(NpcJump0, NPC_Kooper_01, LVarA, LVarB, LVarC, LVarD)
-    EVT_CALL(EnableNpcShadow, NPC_Fuzzy_01, FALSE)
-    EVT_CALL(EnableNpcShadow, NPC_Kooper_01, FALSE)
-    EVT_CALL(N(func_802406C4_9EE2B4), 2, 0)
+    EVT_CALL(NpcJump0, NPC_KoopersShell, LVarA, LVarB, LVarC, LVarD)
+    EVT_CALL(EnableNpcShadow, NPC_BossFuzzy, FALSE)
+    EVT_CALL(EnableNpcShadow, NPC_KoopersShell, FALSE)
+    EVT_CALL(N(AnimateTreeBranch), 2, 0)
     EVT_CALL(PlaySound, SOUND_SHAKE_TREE)
     EVT_CALL(SetPlayerPos, -152, 0, 235)
     EVT_CALL(PlayerMoveTo, 58, 227, 60)
@@ -730,18 +678,18 @@ EvtScript N(D_8024274C_9F033C) = {
     EVT_END
 };
 
-EvtScript N(D_80242C5C_9F084C) = {
+EvtScript N(EVS_WaitForBossTrigger) = {
     EVT_LABEL(0)
-    EVT_IF_EQ(MV_Unk_02, 1)
-        EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-        EVT_LABEL(1)
         EVT_IF_EQ(MV_Unk_02, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(1)
+            EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
+            EVT_LABEL(1)
+                EVT_IF_EQ(MV_Unk_02, 1)
+                    EVT_WAIT(1)
+                    EVT_GOTO(1)
+                EVT_END_IF
         EVT_END_IF
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -750,44 +698,44 @@ EvtScript N(EVS_80242CF4) = {
     EVT_CALL(RandInt, 399, LVar4)
     EVT_DIV(LVar4, 100)
     EVT_LABEL(0)
-    EVT_CALL(RandInt, 300, LVar5)
-    EVT_SWITCH(LVar5)
-        EVT_CASE_LT(100)
-            EVT_SUB(LVar4, 1)
-        EVT_CASE_LT(200)
-            EVT_ADD(LVar4, 1)
-    EVT_END_SWITCH
-    EVT_IF_LT(LVar4, 0)
-        EVT_SET(LVar4, 1)
-    EVT_END_IF
-    EVT_IF_GT(LVar4, 3)
-        EVT_SET(LVar4, 2)
-    EVT_END_IF
-    EVT_CALL(N(func_80240574_9EE164), LVar4, LVar0, LVar1, LVar2)
-    EVT_CALL(RandInt, 10, LVar3)
-    EVT_ADD(LVar3, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_B0000017, 0)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, LVar3)
-    EVT_GOTO(0)
+        EVT_CALL(RandInt, 300, LVar5)
+        EVT_SWITCH(LVar5)
+            EVT_CASE_LT(100)
+                EVT_SUB(LVar4, 1)
+            EVT_CASE_LT(200)
+                EVT_ADD(LVar4, 1)
+        EVT_END_SWITCH
+        EVT_IF_LT(LVar4, 0)
+            EVT_SET(LVar4, 1)
+        EVT_END_IF
+        EVT_IF_GT(LVar4, 3)
+            EVT_SET(LVar4, 2)
+        EVT_END_IF
+        EVT_CALL(N(GetTreeHidingSpotPos), LVar4, LVar0, LVar1, LVar2)
+        EVT_CALL(RandInt, 10, LVar3)
+        EVT_ADD(LVar3, 20)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, LVar3)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80242E68_9F0A58) = {
-    EVT_CALL(N(func_802404D0_9EE0C0))
-    EVT_CALL(SetNpcAnimation, NPC_Fuzzy_02, ANIM_Fuzzy_Anim0B)
-    EVT_CALL(N(func_80240574_9EE164), MV_Unk_03, LVar0, LVar1, LVar2)
-    EVT_CALL(N(func_80240314_9EDF04), LVar0, LVar1, LVar2)
+EvtScript N(EVS_NpcDefeat_BossFuzzy) = {
+    EVT_CALL(N(InitThreadData))
+    EVT_CALL(SetNpcAnimation, NPC_AmbushFuzzy, ANIM_Fuzzy_Anim0B)
+    EVT_CALL(N(GetTreeHidingSpotPos), MV_Unk_03, LVar0, LVar1, LVar2)
+    EVT_CALL(N(SetThreadAnchorPos), LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 50)
-    EVT_CALL(GetNpcPointer, NPC_Fuzzy_02, LVar3)
-    EVT_CALL(N(func_8024051C_9EE10C), LVar3)
-    EVT_CALL(N(func_80240548_9EE138), 0)
-    EVT_CALL(N(func_802403C0_9EDFB0), LVar1, 0, -1)
-    EVT_CALL(SetModelFlags, MODEL_o177, 16, TRUE)
-    EVT_CALL(N(func_802403C0_9EDFB0), 0, 0, 30)
+    EVT_CALL(GetNpcPointer, NPC_AmbushFuzzy, LVar3)
+    EVT_CALL(N(AttachThreadFrontNpc), LVar3)
+    EVT_CALL(N(AttachThreadBackNpc), NULL)
+    EVT_CALL(N(SetThreadTargetLengthAngle), LVar1, 0, -1)
+    EVT_CALL(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
+    EVT_CALL(N(SetThreadTargetLengthAngle), 0, 0, 30)
     EVT_WAIT(30)
-    EVT_CALL(N(func_8024051C_9EE10C), 0)
-    EVT_CALL(SetModelFlags, MODEL_o177, 16, FALSE)
+    EVT_CALL(N(AttachThreadFrontNpc), NULL)
+    EVT_CALL(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, FALSE)
     EVT_SET(MV_Unk_02, 0)
     EVT_RETURN
     EVT_END
@@ -797,12 +745,12 @@ EvtScript N(D_80242F9C_9F0B8C) = {
     EVT_SET(LVar3, LVar0)
     EVT_CALL(MakeLerp, LVarB, LVarD, 30, EASING_QUARTIC_IN)
     EVT_LABEL(0)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(SetNpcPos, NPC_Kooper_01, LVar3, LVar0, LVar2)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(SetNpcPos, NPC_KoopersShell, LVar3, LVar0, LVar2)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_WAIT(1)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_RETURN
     EVT_END
 };
@@ -811,20 +759,20 @@ EvtScript N(D_8024303C_9F0C2C) = {
     EVT_SET(LVar3, LVar0)
     EVT_CALL(MakeLerp, LVarB, LVarD, 30, EASING_QUARTIC_IN)
     EVT_LABEL(0)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(SetNpcPos, NPC_Kooper_01, LVar3, LVar0, LVar2)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(SetNpcPos, NPC_KoopersShell, LVar3, LVar0, LVar2)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_WAIT(1)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcAI_Fuzzy_01A) = {
     EVT_LABEL(10)
-    EVT_WAIT(1)
-    EVT_GOTO(10)
+        EVT_WAIT(1)
+        EVT_GOTO(10)
     EVT_RETURN
     EVT_END
 };
@@ -835,8 +783,8 @@ EvtScript N(EVS_NpcAI_Fuzzy_01B) = {
         EVT_SET(AF_NOK_04, TRUE)
     EVT_END_IF
     EVT_LABEL(10)
-    EVT_WAIT(1)
-    EVT_GOTO(10)
+        EVT_WAIT(1)
+        EVT_GOTO(10)
     EVT_RETURN
     EVT_END
 };
@@ -848,11 +796,11 @@ EvtScript N(EVS_NpcDefeat_Fuzzy_01) = {
             EVT_SET(AF_NOK_05, TRUE)
             EVT_SET(AF_NOK_08, FALSE)
             EVT_LABEL(10)
-            EVT_IF_EQ(AF_NOK_08, FALSE)
-                EVT_WAIT(1)
-                EVT_GOTO(10)
-            EVT_END_IF
-            EVT_CALL(BindNpcAI, NPC_Fuzzy_01, EVT_PTR(N(EVS_NpcAI_Fuzzy_01A)))
+                EVT_IF_EQ(AF_NOK_08, FALSE)
+                    EVT_WAIT(1)
+                    EVT_GOTO(10)
+                EVT_END_IF
+            EVT_CALL(BindNpcAI, NPC_BossFuzzy, EVT_PTR(N(EVS_NpcAI_Fuzzy_01A)))
         EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
             EVT_CALL(DisablePlayerInput, FALSE)
@@ -880,22 +828,21 @@ API_CALLABLE(N(func_80240E70_9EEA60)) {
     return ApiStatus_DONE2;
 }
 
-
-EvtScript N(D_80243258_9F0E48) = {
+EvtScript N(EVS_ShellPrompt) = {
     EVT_SET(LocalFlag(10), FALSE)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_LABEL(0)
-    EVT_CALL(ShowKeyChoicePopup)
-    EVT_CALL(CloseChoicePopup)
-    EVT_IF_NE(LVar0, 25)
-        EVT_IF_EQ(LocalFlag(10), FALSE)
-            EVT_SET(LocalFlag(10), TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_Kooper_02, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00C5)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_Kooper_02, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00C6)
+        EVT_CALL(ShowKeyChoicePopup)
+        EVT_CALL(CloseChoicePopup)
+        EVT_IF_NE(LVar0, 25)
+            EVT_IF_EQ(LocalFlag(10), FALSE)
+                EVT_SET(LocalFlag(10), TRUE)
+                EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00C5)
+            EVT_ELSE
+                EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00C6)
+            EVT_END_IF
+            EVT_GOTO(0)
         EVT_END_IF
-        EVT_GOTO(0)
-    EVT_END_IF
     EVT_CALL(RemoveKeyItemAt, LVar1)
     EVT_CALL(N(func_80240E70_9EEA60))
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -904,13 +851,13 @@ EvtScript N(D_80243258_9F0E48) = {
     EVT_END
 };
 
-s32 N(D_80243374_9F0F64)[] = {
+s32 N(ShellList)[] = {
     ITEM_KOOPER_SHELL,
     ITEM_NONE
 };
 
-EvtScript N(D_8024337C_9F0F6C) = {
-    EVT_BIND_PADLOCK(EVT_PTR(N(D_80243258_9F0E48)), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(D_80243374_9F0F64)), 0, 1)
+EvtScript N(EVS_ChooseShell) = {
+    EVT_BIND_PADLOCK(EVT_PTR(N(EVS_ShellPrompt)), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(ShellList)), 0, 1)
     EVT_CALL(N(func_80240E4C_9EEA3C))
     EVT_RETURN
     EVT_END
@@ -918,18 +865,18 @@ EvtScript N(D_8024337C_9F0F6C) = {
 
 EvtScript N(D_802433B8_9F0FA8) = {
     EVT_LABEL(0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar0, -104)
-    EVT_SUB(LVar2, 241)
-    EVT_MUL(LVar0, -101)
-    EVT_MUL(LVar2, 35)
-    EVT_ADD(LVar0, LVar2)
-    EVT_IF_LE(LVar0, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_SUB(LVar0, -104)
+        EVT_SUB(LVar2, 241)
+        EVT_MUL(LVar0, -101)
+        EVT_MUL(LVar2, 35)
+        EVT_ADD(LVar0, LVar2)
+        EVT_IF_LE(LVar0, 0)
+            EVT_WAIT(1)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetNpcPos, NPC_Kooper_02, -350, 0, 350)
+    EVT_CALL(SetNpcPos, NPC_Kooper, -350, 0, 350)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -220, 0, 270)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -220, 0, 270)
     EVT_CALL(GetCamDistance, CAM_DEFAULT, LVarA)
@@ -940,47 +887,47 @@ EvtScript N(D_802433B8_9F0FA8) = {
     EVT_THREAD
         EVT_WAIT(20)
         EVT_CALL(PlayerMoveTo, -205, 267, 40)
-        EVT_CALL(PlayerFaceNpc, NPC_Kooper_02, FALSE)
+        EVT_CALL(PlayerFaceNpc, NPC_Kooper, FALSE)
     EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_Kooper_02, ANIM_KooperWithoutShell_RunAngry)
-    EVT_CALL(NpcMoveTo, NPC_Kooper_02, -246, 290, 30)
-    EVT_CALL(SetNpcAnimation, NPC_Kooper_02, ANIM_KooperWithoutShell_IdleAngry)
+    EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_RunAngry)
+    EVT_CALL(NpcMoveTo, NPC_Kooper, -246, 290, 30)
+    EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_IdleAngry)
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, NPC_Kooper_02, ANIM_KooperWithoutShell_TalkAngry, ANIM_KooperWithoutShell_IdleAngry, 0, MSG_CH1_00C3)
+    EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_TalkAngry, ANIM_KooperWithoutShell_IdleAngry, 0, MSG_CH1_00C3)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Kooper_02, 0)
-    EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, NPC_Kooper_02, MSG_CH1_00C4)
-    EVT_CALL(SetNpcAnimation, NPC_Kooper_02, ANIM_KooperWithoutShell_Idle)
-    EVT_EXEC_WAIT(N(D_8024337C_9F0F6C))
+    EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Kooper, 0)
+    EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, NPC_Kooper, MSG_CH1_00C4)
+    EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
+    EVT_EXEC_WAIT(N(EVS_ChooseShell))
     EVT_CALL(PlayerMoveTo, -207, 268, 7)
-    EVT_CALL(PlayerFaceNpc, NPC_Kooper_02, FALSE)
+    EVT_CALL(PlayerFaceNpc, NPC_Kooper, FALSE)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_60005)
-    EVT_CALL(SetNpcJumpscale, NPC_Kooper_01, 1)
+    EVT_CALL(SetNpcJumpscale, NPC_KoopersShell, 1)
     EVT_THREAD
         EVT_LOOP(30)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, -15)
             EVT_ADD(LVar1, 8)
             EVT_ADD(LVar2, 12)
-            EVT_CALL(SetNpcPos, NPC_Kooper_01, LVar0, LVar1, LVar2)
+            EVT_CALL(SetNpcPos, NPC_KoopersShell, LVar0, LVar1, LVar2)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_Kooper_02, ANIM_KooperWithoutShell_Idle)
+    EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, NPC_Kooper_02, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00C7)
+    EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00C7)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Kooper_02, ANIM_KooperWithoutShell_Celebrate)
+    EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Celebrate)
     EVT_WAIT(15)
-    EVT_CALL(SetNpcAnimation, NPC_Kooper_02, ANIM_KooperWithoutShell_Idle)
-    EVT_CALL(EndSpeech, NPC_Kooper_02, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0)
-    EVT_CALL(PlayerFaceNpc, NPC_Kooper_02, FALSE)
-    EVT_CALL(NpcFacePlayer, NPC_Kooper_02, 0)
+    EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
+    EVT_CALL(EndSpeech, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0)
+    EVT_CALL(PlayerFaceNpc, NPC_Kooper, FALSE)
+    EVT_CALL(NpcFacePlayer, NPC_Kooper, 0)
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_CALL(SetNpcAnimation, NPC_Kooper_02, ANIM_KooperWithoutShell_Still)
-    EVT_CALL(EnableNpcBlur, NPC_Kooper_01, TRUE)
-    EVT_CALL(GetNpcPos, NPC_Kooper_02, LVar0, LVar1, LVar2)
+    EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Still)
+    EVT_CALL(EnableNpcBlur, NPC_KoopersShell, TRUE)
+    EVT_CALL(GetNpcPos, NPC_Kooper, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 1)
     EVT_ADD(LVar2, 1)
     EVT_ADD(LVar1, 20)
@@ -988,52 +935,52 @@ EvtScript N(D_802433B8_9F0FA8) = {
     EVT_SET(LVar4, 6)
     EVT_EXEC(N(D_80241328_9EEF18))
     EVT_CALL(InterpNpcYaw, LVar3, 60, 0)
-    EVT_CALL(NpcJump0, NPC_Kooper_01, LVar0, LVar1, LVar2, 30)
-    EVT_CALL(SetNpcPos, NPC_Kooper_01, 0, -1000, 0)
-    EVT_CALL(SetNpcSprite, NPC_Kooper_02, ANIM_WorldKooper_Idle)
-    EVT_CALL(SetNpcFlagBits, NPC_Kooper_02, NPC_FLAG_100, FALSE)
-    EVT_CALL(SetNpcSprite, NPC_Kooper_02, ANIM_WorldKooper_Still)
+    EVT_CALL(NpcJump0, NPC_KoopersShell, LVar0, LVar1, LVar2, 30)
+    EVT_CALL(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
+    EVT_CALL(SetNpcSprite, NPC_Kooper, ANIM_WorldKooper_Idle)
+    EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcSprite, NPC_Kooper, ANIM_WorldKooper_Still)
     EVT_WAIT(4)
-    EVT_CALL(EnableNpcBlur, NPC_Kooper_01, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_Kooper_02, ANIM_WorldKooper_Idle)
-    EVT_CALL(SetNpcSprite, NPC_Kooper_02, ANIM_WorldKooper_Celebrate)
+    EVT_CALL(EnableNpcBlur, NPC_KoopersShell, TRUE)
+    EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_Idle)
+    EVT_CALL(SetNpcSprite, NPC_Kooper, ANIM_WorldKooper_Celebrate)
     EVT_WAIT(30)
-    EVT_CALL(SetNpcAnimation, NPC_Kooper_02, ANIM_WorldKooper_Idle)
-    EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, NPC_Kooper_02, MSG_CH1_00C8)
+    EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_Idle)
+    EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, NPC_Kooper, MSG_CH1_00C8)
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, NPC_Kooper_02, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH1_00C9)
+    EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH1_00C9)
     EVT_WAIT(10)
     EVT_CALL(PlaySoundAtPlayer, SOUND_263, 0)
-    EVT_CALL(ShowEmote, NPC_Fuzzy_01, EMOTE_QUESTION, -45, 50, FALSE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_BossFuzzy, EMOTE_QUESTION, -45, 50, FALSE, 0, 0, 0, 0)
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
     EVT_WAIT(40)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_CH1_00CA)
-    EVT_CALL(SpeakToPlayer, NPC_Kooper_02, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH1_00CB)
+    EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH1_00CB)
     EVT_WAIT(10)
-    EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, NPC_Kooper_02, MSG_CH1_00CC)
+    EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, NPC_Kooper, MSG_CH1_00CC)
     EVT_CALL(EnablePartnerAI)
-    EVT_CALL(PlayerFaceNpc, NPC_Kooper_02, FALSE)
+    EVT_CALL(PlayerFaceNpc, NPC_Kooper, FALSE)
     EVT_LABEL(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
-    EVT_CALL(ShowChoice, MSG_Choice_000F)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(EndSpeech, NPC_Kooper_02, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0)
-        EVT_CALL(SpeakToPlayer, NPC_Kooper_02, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH1_00CD)
-        EVT_GOTO(10)
-    EVT_ELSE
-        EVT_CALL(EndSpeech, NPC_Kooper_02, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0)
-        EVT_CALL(SpeakToPlayer, NPC_Kooper_02, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH1_00CE)
-        EVT_CALL(SetNpcAnimation, NPC_Kooper_02, ANIM_WorldKooper_Celebrate)
-        EVT_WAIT(30)
-        EVT_CALL(SetNpcAnimation, NPC_Kooper_02, ANIM_WorldKooper_Idle)
-        EVT_CALL(EndSpeech, NPC_Kooper_02, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0)
-        EVT_SET(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-    EVT_END_IF
-    EVT_CALL(N(ChangeNpcToPartner), 6, 2)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
+        EVT_CALL(ShowChoice, MSG_Choice_000F)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_IF_EQ(LVar0, 1)
+            EVT_CALL(EndSpeech, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0)
+            EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH1_00CD)
+            EVT_GOTO(10)
+        EVT_ELSE
+            EVT_CALL(EndSpeech, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0)
+            EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH1_00CE)
+            EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_Celebrate)
+            EVT_WAIT(30)
+            EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_Idle)
+            EVT_CALL(EndSpeech, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0)
+            EVT_SET(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
+        EVT_END_IF
+    EVT_CALL(N(ChangeNpcToPartner), NPC_Kooper, PARTNER_KOOPER)
     EVT_CALL(N(LoadPartyImage))
     EVT_EXEC(N(EVS_PushPartnerSong))
     EVT_WAIT(15)
@@ -1053,12 +1000,12 @@ EvtScript N(D_802433B8_9F0FA8) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, 3)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, ANIM_Fuzzy_Walk)
-    EVT_CALL(SetNpcPos, NPC_Fuzzy_01, 63, 0, 212)
-    EVT_CALL(EnableNpcShadow, NPC_Fuzzy_01, TRUE)
-    EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_01, EVT_FLOAT(2.0))
-    EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
-    EVT_CALL(NpcJump0, NPC_Fuzzy_01, -100, 0, 225, 20)
+    EVT_CALL(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Walk)
+    EVT_CALL(SetNpcPos, NPC_BossFuzzy, 63, 0, 212)
+    EVT_CALL(EnableNpcShadow, NPC_BossFuzzy, TRUE)
+    EVT_CALL(SetNpcJumpscale, NPC_BossFuzzy, EVT_FLOAT(2.0))
+    EVT_CALL(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_B0000017, 0)
+    EVT_CALL(NpcJump0, NPC_BossFuzzy, -100, 0, 225, 20)
     EVT_SET(AF_NOK_06, FALSE)
     EVT_SET(AF_NOK_07, FALSE)
     EVT_SET(AF_NOK_05, FALSE)
@@ -1066,55 +1013,55 @@ EvtScript N(D_802433B8_9F0FA8) = {
         EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_00D0, 160, 40)
         EVT_SET(AF_NOK_06, TRUE)
     EVT_END_THREAD
-    EVT_CALL(GetNpcPos, NPC_Fuzzy_01, LVarA, LVarB, LVarC)
+    EVT_CALL(GetNpcPos, NPC_BossFuzzy, LVarA, LVarB, LVarC)
     EVT_LABEL(30)
-    EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_01, EVT_FLOAT(2.0))
-    EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
-    EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarB, LVarC, 12)
-    EVT_IF_EQ(AF_NOK_06, FALSE)
-        EVT_GOTO(30)
-    EVT_END_IF
+        EVT_CALL(SetNpcJumpscale, NPC_BossFuzzy, EVT_FLOAT(2.0))
+        EVT_CALL(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_BossFuzzy, LVarA, LVarB, LVarC, 12)
+        EVT_IF_EQ(AF_NOK_06, FALSE)
+            EVT_GOTO(30)
+        EVT_END_IF
     EVT_THREAD
         EVT_WAIT(27)
-        EVT_CALL(BindNpcDefeat, NPC_Fuzzy_01, EVT_PTR(N(EVS_NpcDefeat_Fuzzy_01)))
-        EVT_CALL(BindNpcAI, NPC_Fuzzy_01, EVT_PTR(N(EVS_NpcAI_Fuzzy_01B)))
+        EVT_CALL(BindNpcDefeat, NPC_BossFuzzy, EVT_PTR(N(EVS_NpcDefeat_Fuzzy_01)))
+        EVT_CALL(BindNpcAI, NPC_BossFuzzy, EVT_PTR(N(EVS_NpcAI_Fuzzy_01B)))
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_01, -212, 0, 237, 15)
+        EVT_CALL(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_BossFuzzy, -212, 0, 237, 15)
         EVT_CALL(GetPlayerPos, LVarA, LVarB, LVarC)
         EVT_ADD(LVarB, 37)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarB, LVarC, 20)
+        EVT_CALL(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_BossFuzzy, LVarA, LVarB, LVarC, 20)
         EVT_WAIT(2)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_80012)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarB, LVarC, 15)
+        EVT_CALL(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_BossFuzzy, LVarA, LVarB, LVarC, 15)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
         EVT_LABEL(21)
-        EVT_IF_EQ(AF_NOK_05, FALSE)
-            EVT_WAIT(1)
-            EVT_GOTO(21)
-        EVT_END_IF
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_01, -255, 0, 287)
-        EVT_CALL(GetNpcPos, NPC_Fuzzy_01, LVarA, LVarB, LVarC)
+            EVT_IF_EQ(AF_NOK_05, FALSE)
+                EVT_WAIT(1)
+                EVT_GOTO(21)
+            EVT_END_IF
+        EVT_CALL(SetNpcPos, NPC_BossFuzzy, -255, 0, 287)
+        EVT_CALL(GetNpcPos, NPC_BossFuzzy, LVarA, LVarB, LVarC)
         EVT_LABEL(31)
-        EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_01, EVT_FLOAT(2.0))
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarB, LVarC, 15)
-        EVT_IF_EQ(AF_NOK_07, FALSE)
-            EVT_GOTO(31)
-        EVT_END_IF
+            EVT_CALL(SetNpcJumpscale, NPC_BossFuzzy, EVT_FLOAT(2.0))
+            EVT_CALL(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_B0000017, 0)
+            EVT_CALL(NpcJump0, NPC_BossFuzzy, LVarA, LVarB, LVarC, 15)
+            EVT_IF_EQ(AF_NOK_07, FALSE)
+                EVT_GOTO(31)
+            EVT_END_IF
         EVT_ADD(LVarA, 70)
         EVT_ADD(LVarC, -30)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarB, LVarC, 15)
+        EVT_CALL(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_BossFuzzy, LVarA, LVarB, LVarC, 15)
         EVT_ADD(LVarA, 70)
         EVT_ADD(LVarC, -30)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarB, LVarC, 20)
-        EVT_CALL(EnableNpcShadow, NPC_Fuzzy_01, FALSE)
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_01, 0, -1000, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_BossFuzzy, LVarA, LVarB, LVarC, 20)
+        EVT_CALL(EnableNpcShadow, NPC_BossFuzzy, FALSE)
+        EVT_CALL(SetNpcPos, NPC_BossFuzzy, NPC_DISPOSE_LOCATION)
     EVT_END_THREAD
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -260, 0, 284)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -260, 0, 284)
@@ -1122,119 +1069,119 @@ EvtScript N(D_802433B8_9F0FA8) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, 2)
     EVT_THREAD
         EVT_WAIT(5)
+        EVT_CALL(SetNpcPos, NPC_Fuzzy_01, 63, 0, 212)
+        EVT_CALL(EnableNpcShadow, NPC_Fuzzy_01, TRUE)
+        EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_01, EVT_FLOAT(2.0))
+        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_01, -100, 0, 225, 10)
+        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_01, -197, 0, 227, 20)
+        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_01, -233, 0, 285, 10)
+        EVT_LABEL(22)
+            EVT_IF_EQ(AF_NOK_05, FALSE)
+                EVT_WAIT(1)
+                EVT_GOTO(22)
+            EVT_END_IF
+        EVT_CALL(SetNpcPos, NPC_Fuzzy_01, -210, 0, 244)
+        EVT_CALL(GetNpcPos, NPC_Fuzzy_01, LVarA, LVarB, LVarC)
+        EVT_LABEL(32)
+            EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_01, EVT_FLOAT(2.0))
+            EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
+            EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarB, LVarC, 12)
+            EVT_IF_EQ(AF_NOK_07, FALSE)
+                EVT_GOTO(32)
+            EVT_END_IF
+        EVT_ADD(LVarA, 70)
+        EVT_ADD(LVarC, -30)
+        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarB, LVarC, 10)
+        EVT_ADD(LVarA, 70)
+        EVT_ADD(LVarC, -30)
+        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarB, LVarC, 20)
+        EVT_CALL(EnableNpcShadow, NPC_Fuzzy_01, FALSE)
+        EVT_CALL(SetNpcPos, NPC_Fuzzy_01, NPC_DISPOSE_LOCATION)
+    EVT_END_THREAD
+    EVT_THREAD
+        EVT_WAIT(7)
+        EVT_CALL(SetNpcPos, NPC_Fuzzy_02, 63, 0, 212)
+        EVT_CALL(EnableNpcShadow, NPC_Fuzzy_02, TRUE)
+        EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_02, EVT_FLOAT(2.0))
+        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_02, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_02, -122, 0, 219, 20)
+        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_02, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_02, -177, 0, 242, 10)
+        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_02, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_02, -213, 0, 300, 15)
+        EVT_LABEL(23)
+            EVT_IF_EQ(AF_NOK_05, FALSE)
+                EVT_WAIT(1)
+                EVT_GOTO(23)
+            EVT_END_IF
+        EVT_CALL(SetNpcPos, NPC_Fuzzy_02, -210, 0, 266)
+        EVT_CALL(GetNpcPos, NPC_Fuzzy_02, LVarA, LVarB, LVarC)
+        EVT_WAIT(2)
+        EVT_LABEL(33)
+            EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_02, EVT_FLOAT(2.0))
+            EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_02, SOUND_B0000017, 0)
+            EVT_CALL(NpcJump0, NPC_Fuzzy_02, LVarA, LVarB, LVarC, 12)
+            EVT_IF_EQ(AF_NOK_07, FALSE)
+                EVT_GOTO(33)
+            EVT_END_IF
+        EVT_ADD(LVarA, 70)
+        EVT_ADD(LVarC, -30)
+        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_02, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_02, LVarA, LVarB, LVarC, 20)
+        EVT_ADD(LVarA, 70)
+        EVT_ADD(LVarC, -30)
+        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_02, SOUND_B0000017, 0)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_02, LVarA, LVarB, LVarC, 15)
+        EVT_CALL(EnableNpcShadow, NPC_Fuzzy_02, FALSE)
+        EVT_CALL(SetNpcPos, NPC_Fuzzy_02, NPC_DISPOSE_LOCATION)
+    EVT_END_THREAD
+    EVT_THREAD
+        EVT_WAIT(8)
         EVT_CALL(SetNpcPos, NPC_Fuzzy_03, 63, 0, 212)
         EVT_CALL(EnableNpcShadow, NPC_Fuzzy_03, TRUE)
         EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_03, EVT_FLOAT(2.0))
         EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_03, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_03, -100, 0, 225, 10)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_03, -100, 0, 269, 20)
         EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_03, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_03, -197, 0, 227, 20)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_03, -217, 0, 212, 10)
         EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_03, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_03, -233, 0, 285, 10)
-        EVT_LABEL(22)
-        EVT_IF_EQ(AF_NOK_05, FALSE)
-            EVT_WAIT(1)
-            EVT_GOTO(22)
-        EVT_END_IF
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_03, -210, 0, 244)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_03, -253, 0, 270, 10)
+        EVT_LABEL(24)
+            EVT_IF_EQ(AF_NOK_05, FALSE)
+                EVT_WAIT(1)
+                EVT_GOTO(24)
+            EVT_END_IF
+        EVT_CALL(SetNpcPos, NPC_Fuzzy_03, -183, 0, 257)
         EVT_CALL(GetNpcPos, NPC_Fuzzy_03, LVarA, LVarB, LVarC)
-        EVT_LABEL(32)
-        EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_03, EVT_FLOAT(2.0))
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_03, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_03, LVarA, LVarB, LVarC, 12)
-        EVT_IF_EQ(AF_NOK_07, FALSE)
-            EVT_GOTO(32)
-        EVT_END_IF
+        EVT_WAIT(5)
+        EVT_LABEL(34)
+            EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_03, EVT_FLOAT(2.0))
+            EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_03, SOUND_B0000017, 0)
+            EVT_CALL(NpcJump0, NPC_Fuzzy_03, LVarA, LVarB, LVarC, 12)
+            EVT_IF_EQ(AF_NOK_07, FALSE)
+                EVT_GOTO(34)
+            EVT_END_IF
         EVT_ADD(LVarA, 70)
         EVT_ADD(LVarC, -30)
         EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_03, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_03, LVarA, LVarB, LVarC, 10)
+        EVT_CALL(NpcJump0, NPC_Fuzzy_03, LVarA, LVarB, LVarC, 15)
         EVT_ADD(LVarA, 70)
         EVT_ADD(LVarC, -30)
         EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_03, SOUND_B0000017, 0)
         EVT_CALL(NpcJump0, NPC_Fuzzy_03, LVarA, LVarB, LVarC, 20)
         EVT_CALL(EnableNpcShadow, NPC_Fuzzy_03, FALSE)
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_03, 0, -1000, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(7)
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_04, 63, 0, 212)
-        EVT_CALL(EnableNpcShadow, NPC_Fuzzy_04, TRUE)
-        EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_04, EVT_FLOAT(2.0))
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_04, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_04, -122, 0, 219, 20)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_04, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_04, -177, 0, 242, 10)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_04, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_04, -213, 0, 300, 15)
-        EVT_LABEL(23)
-        EVT_IF_EQ(AF_NOK_05, FALSE)
-            EVT_WAIT(1)
-            EVT_GOTO(23)
-        EVT_END_IF
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_04, -210, 0, 266)
-        EVT_CALL(GetNpcPos, NPC_Fuzzy_04, LVarA, LVarB, LVarC)
-        EVT_WAIT(2)
-        EVT_LABEL(33)
-        EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_04, EVT_FLOAT(2.0))
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_04, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_04, LVarA, LVarB, LVarC, 12)
-        EVT_IF_EQ(AF_NOK_07, FALSE)
-            EVT_GOTO(33)
-        EVT_END_IF
-        EVT_ADD(LVarA, 70)
-        EVT_ADD(LVarC, -30)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_04, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_04, LVarA, LVarB, LVarC, 20)
-        EVT_ADD(LVarA, 70)
-        EVT_ADD(LVarC, -30)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_04, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_04, LVarA, LVarB, LVarC, 15)
-        EVT_CALL(EnableNpcShadow, NPC_Fuzzy_04, FALSE)
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_04, 0, -1000, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(8)
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_05, 63, 0, 212)
-        EVT_CALL(EnableNpcShadow, NPC_Fuzzy_05, TRUE)
-        EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_05, EVT_FLOAT(2.0))
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_05, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_05, -100, 0, 269, 20)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_05, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_05, -217, 0, 212, 10)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_05, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_05, -253, 0, 270, 10)
-        EVT_LABEL(24)
-        EVT_IF_EQ(AF_NOK_05, FALSE)
-            EVT_WAIT(1)
-            EVT_GOTO(24)
-        EVT_END_IF
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_05, -183, 0, 257)
-        EVT_CALL(GetNpcPos, NPC_Fuzzy_05, LVarA, LVarB, LVarC)
-        EVT_WAIT(5)
-        EVT_LABEL(34)
-        EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_05, EVT_FLOAT(2.0))
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_05, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_05, LVarA, LVarB, LVarC, 12)
-        EVT_IF_EQ(AF_NOK_07, FALSE)
-            EVT_GOTO(34)
-        EVT_END_IF
-        EVT_ADD(LVarA, 70)
-        EVT_ADD(LVarC, -30)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_05, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_05, LVarA, LVarB, LVarC, 15)
-        EVT_ADD(LVarA, 70)
-        EVT_ADD(LVarC, -30)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_05, SOUND_B0000017, 0)
-        EVT_CALL(NpcJump0, NPC_Fuzzy_05, LVarA, LVarB, LVarC, 20)
-        EVT_CALL(EnableNpcShadow, NPC_Fuzzy_05, FALSE)
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_05, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_Fuzzy_03, NPC_DISPOSE_LOCATION)
     EVT_END_THREAD
     EVT_LABEL(40)
-    EVT_IF_EQ(AF_NOK_05, FALSE)
-        EVT_WAIT(1)
-        EVT_GOTO(40)
-    EVT_END_IF
+        EVT_IF_EQ(AF_NOK_05, FALSE)
+            EVT_WAIT(1)
+            EVT_GOTO(40)
+        EVT_END_IF
     EVT_CALL(SetPlayerPos, -305, 0, 329)
     EVT_CALL(InterpPlayerYaw, 50, 0)
     EVT_CALL(SetNpcPos, NPC_PARTNER, -335, 0, 355)
@@ -1254,9 +1201,9 @@ EvtScript N(D_802433B8_9F0FA8) = {
     EVT_END
 };
 
-EvtScript N(D_80244D0C_9F28FC) = {
+EvtScript N(EVS_HitTree_Correct) = {
     EVT_THREAD
-        EVT_CALL(N(func_80240574_9EE164), LVar0, LVar0, LVar1, LVar2)
+        EVT_CALL(N(GetTreeHidingSpotPos), LVar0, LVar0, LVar1, LVar2)
         EVT_CALL(GetPlayerPos, LVarA, LVarB, LVarC)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVarA, LVarB, LVarC)
         EVT_ADD(LVarA, LVar0)
@@ -1268,9 +1215,9 @@ EvtScript N(D_80244D0C_9F28FC) = {
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, 3)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_END_THREAD
-    EVT_CALL(N(func_80240574_9EE164), LVar0, LVar0, LVar1, LVar2)
-    EVT_CALL(GetNpcPointer, NPC_Fuzzy_01, LVarE)
-    EVT_CALL(GetNpcPointer, NPC_Kooper_01, LVarF)
+    EVT_CALL(N(GetTreeHidingSpotPos), LVar0, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPointer, NPC_BossFuzzy, LVarE)
+    EVT_CALL(GetNpcPointer, NPC_KoopersShell, LVarF)
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarB, LVar1)
     EVT_SET(LVarC, LVar2)
@@ -1278,8 +1225,8 @@ EvtScript N(D_80244D0C_9F28FC) = {
         EVT_CASE_EQ(0)
             EVT_SET(LVar4, LVarC)
             EVT_SUB(LVar4, 4)
-            EVT_CALL(N(func_80240314_9EDF04), LVarA, LVarB, LVar4)
-            EVT_CALL(SetModelFlags, MODEL_o177, 16, TRUE)
+            EVT_CALL(N(SetThreadAnchorPos), LVarA, LVarB, LVar4)
+            EVT_CALL(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
             EVT_SET(LVar3, LVarB)
             EVT_DIV(LVar3, 2)
             EVT_SET(LVarD, LVarB)
@@ -1287,36 +1234,36 @@ EvtScript N(D_80244D0C_9F28FC) = {
             EVT_EXEC(N(D_8024303C_9F0C2C))
             EVT_WAIT(1)
             EVT_WAIT(30)
-            EVT_CALL(N(func_8024051C_9EE10C), 0)
-            EVT_CALL(N(func_80240548_9EE138), 0)
-            EVT_CALL(N(func_802403C0_9EDFB0), 0, 0, -1)
-            EVT_CALL(N(func_802403C0_9EDFB0), LVar3, 0, -1)
+            EVT_CALL(N(AttachThreadFrontNpc), NULL)
+            EVT_CALL(N(AttachThreadBackNpc), NULL)
+            EVT_CALL(N(SetThreadTargetLengthAngle), 0, 0, -1)
+            EVT_CALL(N(SetThreadTargetLengthAngle), LVar3, 0, -1)
             EVT_WAIT(1)
-            EVT_CALL(N(func_8024051C_9EE10C), LVarF)
+            EVT_CALL(N(AttachThreadFrontNpc), LVarF)
             EVT_WAIT(20)
-            EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, ANIM_Fuzzy_Hurt)
-            EVT_CALL(PlayerFaceNpc, NPC_Fuzzy_01, FALSE)
-            EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_01, 0)
-            EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
-            EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarD, LVarC, 30)
-            EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, ANIM_Fuzzy_Anim09)
+            EVT_CALL(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Hurt)
+            EVT_CALL(PlayerFaceNpc, NPC_BossFuzzy, FALSE)
+            EVT_CALL(SetNpcJumpscale, NPC_BossFuzzy, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_B0000017, 0)
+            EVT_CALL(NpcJump0, NPC_BossFuzzy, LVarA, LVarD, LVarC, 30)
+            EVT_CALL(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Anim09)
             EVT_SET(LVar9, LVarC)
-            EVT_CALL(SpeakToPlayer, NPC_Fuzzy_01, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 5, MSG_CH1_00BF)
-            EVT_CALL(N(func_802403C0_9EDFB0), 0, 0, 30)
-            EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, ANIM_Fuzzy_Anim0B)
+            EVT_CALL(SpeakToPlayer, NPC_BossFuzzy, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 5, MSG_CH1_00BF)
+            EVT_CALL(N(SetThreadTargetLengthAngle), 0, 0, 30)
+            EVT_CALL(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Anim0B)
             EVT_SET(LVarC, LVar9)
-            EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
-            EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarB, LVarC, 30)
-            EVT_CALL(N(func_8024051C_9EE10C), 0)
-            EVT_CALL(SetModelFlags, MODEL_o177, 16, FALSE)
+            EVT_CALL(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_B0000017, 0)
+            EVT_CALL(NpcJump0, NPC_BossFuzzy, LVarA, LVarB, LVarC, 30)
+            EVT_CALL(N(AttachThreadFrontNpc), NULL)
+            EVT_CALL(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, FALSE)
             EVT_ADD(MV_Unk_00, 1)
             EVT_EXEC(N(D_802417F8_9EF3E8))
             EVT_RETURN
         EVT_CASE_EQ(1)
             EVT_SET(LVar4, LVarC)
             EVT_SUB(LVar4, 4)
-            EVT_CALL(N(func_80240314_9EDF04), LVarA, LVarB, LVar4)
-            EVT_CALL(SetModelFlags, MODEL_o177, 16, TRUE)
+            EVT_CALL(N(SetThreadAnchorPos), LVarA, LVarB, LVar4)
+            EVT_CALL(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
             EVT_SET(LVar3, LVarB)
             EVT_MUL(LVar3, 2)
             EVT_DIV(LVar3, 3)
@@ -1325,51 +1272,51 @@ EvtScript N(D_80244D0C_9F28FC) = {
             EVT_EXEC(N(D_80242F9C_9F0B8C))
             EVT_WAIT(1)
             EVT_WAIT(30)
-            EVT_CALL(N(func_8024051C_9EE10C), 0)
-            EVT_CALL(N(func_80240548_9EE138), 0)
-            EVT_CALL(N(func_802403C0_9EDFB0), 0, 0, -1)
-            EVT_CALL(N(func_802403C0_9EDFB0), LVar3, 0, -1)
+            EVT_CALL(N(AttachThreadFrontNpc), NULL)
+            EVT_CALL(N(AttachThreadBackNpc), NULL)
+            EVT_CALL(N(SetThreadTargetLengthAngle), 0, 0, -1)
+            EVT_CALL(N(SetThreadTargetLengthAngle), LVar3, 0, -1)
             EVT_WAIT(1)
-            EVT_CALL(N(func_8024051C_9EE10C), LVarF)
+            EVT_CALL(N(AttachThreadFrontNpc), LVarF)
             EVT_WAIT(20)
-            EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, ANIM_Fuzzy_Hurt)
-            EVT_CALL(PlayerFaceNpc, NPC_Fuzzy_01, FALSE)
-            EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_01, 0)
-            EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
-            EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarD, LVarC, 30)
-            EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, ANIM_Fuzzy_Anim09)
+            EVT_CALL(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Hurt)
+            EVT_CALL(PlayerFaceNpc, NPC_BossFuzzy, FALSE)
+            EVT_CALL(SetNpcJumpscale, NPC_BossFuzzy, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_B0000017, 0)
+            EVT_CALL(NpcJump0, NPC_BossFuzzy, LVarA, LVarD, LVarC, 30)
+            EVT_CALL(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Anim09)
             EVT_SET(LVar9, LVarC)
-            EVT_CALL(SpeakToPlayer, NPC_Fuzzy_01, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 5, MSG_CH1_00C0)
-            EVT_CALL(N(func_802403C0_9EDFB0), 0, 0, 30)
-            EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, ANIM_Fuzzy_Anim0B)
+            EVT_CALL(SpeakToPlayer, NPC_BossFuzzy, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 5, MSG_CH1_00C0)
+            EVT_CALL(N(SetThreadTargetLengthAngle), 0, 0, 30)
+            EVT_CALL(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Anim0B)
             EVT_SET(LVarC, LVar9)
-            EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_01, SOUND_B0000017, 0)
-            EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVarA, LVarB, LVarC, 30)
-            EVT_CALL(N(func_8024051C_9EE10C), 0)
-            EVT_CALL(SetModelFlags, MODEL_o177, 16, FALSE)
+            EVT_CALL(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_B0000017, 0)
+            EVT_CALL(NpcJump0, NPC_BossFuzzy, LVarA, LVarB, LVarC, 30)
+            EVT_CALL(N(AttachThreadFrontNpc), NULL)
+            EVT_CALL(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, FALSE)
             EVT_ADD(MV_Unk_00, 1)
             EVT_EXEC(N(D_802417F8_9EF3E8))
             EVT_RETURN
         EVT_CASE_EQ(2)
-            EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, ANIM_Fuzzy_Hurt)
-            EVT_CALL(PlayerFaceNpc, NPC_Fuzzy_01, FALSE)
-            EVT_CALL(N(func_80240314_9EDF04), LVarA, LVarB, LVarC)
-            EVT_CALL(N(func_802403C0_9EDFB0), 0, 0, -1)
+            EVT_CALL(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Hurt)
+            EVT_CALL(PlayerFaceNpc, NPC_BossFuzzy, FALSE)
+            EVT_CALL(N(SetThreadAnchorPos), LVarA, LVarB, LVarC)
+            EVT_CALL(N(SetThreadTargetLengthAngle), 0, 0, -1)
             EVT_SET(LVar0, LVarB)
             EVT_SUB(LVar0, 50)
-            EVT_CALL(N(func_802403C0_9EDFB0), LVar0, 0, 0)
-            EVT_CALL(N(func_8024051C_9EE10C), LVarF)
-            EVT_CALL(N(func_80240548_9EE138), LVarE)
-            EVT_CALL(SetModelFlags, MODEL_o177, 16, TRUE)
+            EVT_CALL(N(SetThreadTargetLengthAngle), LVar0, 0, 0)
+            EVT_CALL(N(AttachThreadFrontNpc), LVarF)
+            EVT_CALL(N(AttachThreadBackNpc), LVarE)
+            EVT_CALL(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
             EVT_WAIT(20)
-            EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, ANIM_Fuzzy_Anim09)
-            EVT_CALL(SpeakToPlayer, NPC_Fuzzy_01, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 5, MSG_CH1_00C1)
+            EVT_CALL(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Anim09)
+            EVT_CALL(SpeakToPlayer, NPC_BossFuzzy, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 5, MSG_CH1_00C1)
             EVT_WAIT(10)
-            EVT_CALL(N(func_8024051C_9EE10C), 0)
+            EVT_CALL(N(AttachThreadFrontNpc), NULL)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 40)
-            EVT_CALL(SetNpcJumpscale, NPC_Kooper_01, EVT_FLOAT(0.6))
-            EVT_CALL(NpcJump0, NPC_Kooper_01, LVar0, LVar1, LVar2, 10)
+            EVT_CALL(SetNpcJumpscale, NPC_KoopersShell, EVT_FLOAT(0.6))
+            EVT_CALL(NpcJump0, NPC_KoopersShell, LVar0, LVar1, LVar2, 10)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_10024)
             EVT_THREAD
                 EVT_WAIT(4)
@@ -1383,18 +1330,18 @@ EvtScript N(D_80244D0C_9F28FC) = {
             EVT_END_THREAD
             EVT_CALL(PlaySound, SOUND_D2)
             EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_GotKooperShell, 160, 40)
-            EVT_CALL(SetNpcPos, NPC_Kooper_01, 0, -1000, 0)
+            EVT_CALL(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
             EVT_CALL(AddKeyItem, ITEM_KOOPER_SHELL)
             EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Fuzzy_01, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 5, MSG_CH1_00C2)
-            EVT_CALL(SetNpcAnimation, NPC_Fuzzy_01, ANIM_Fuzzy_Anim0B)
-            EVT_CALL(N(func_802403C0_9EDFB0), 0, 0, 20)
+            EVT_CALL(SpeakToPlayer, NPC_BossFuzzy, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 5, MSG_CH1_00C2)
+            EVT_CALL(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Anim0B)
+            EVT_CALL(N(SetThreadTargetLengthAngle), 0, 0, 20)
             EVT_WAIT(20)
-            EVT_CALL(SetModelFlags, MODEL_o177, 16, FALSE)
-            EVT_CALL(N(func_80240548_9EE138), 0)
-            EVT_CALL(SetNpcPos, NPC_Fuzzy_01, 0, -1000, 0)
-            EVT_CALL(SetNpcPos, NPC_Kooper_01, 0, -1000, 0)
+            EVT_CALL(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, FALSE)
+            EVT_CALL(N(AttachThreadBackNpc), 0)
+            EVT_CALL(SetNpcPos, NPC_BossFuzzy, NPC_DISPOSE_LOCATION)
+            EVT_CALL(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
             EVT_CALL(SetMusicTrack, 0, SONG_KOOPA_VILLAGE, 0, 8)
             EVT_CALL(DisablePlayerPhysics, FALSE)
             EVT_CALL(DisablePlayerInput, FALSE)
@@ -1407,9 +1354,9 @@ EvtScript N(D_80244D0C_9F28FC) = {
     EVT_END
 };
 
-EvtScript N(D_80245858_9F3448) = {
+EvtScript N(EVS_HitTree_Wrong) = {
     EVT_THREAD
-        EVT_CALL(N(func_80240574_9EE164), LVar0, LVar0, LVar1, LVar2)
+        EVT_CALL(N(GetTreeHidingSpotPos), LVar0, LVar0, LVar1, LVar2)
         EVT_CALL(GetPlayerPos, LVarA, LVarB, LVarC)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVarA, LVarB, LVarC)
         EVT_ADD(LVarA, LVar0)
@@ -1423,8 +1370,8 @@ EvtScript N(D_80245858_9F3448) = {
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_SET(MV_Unk_03, LVar0)
-    EVT_CALL(N(func_80240574_9EE164), MV_Unk_03, LVar0, LVar1, LVar2)
-    EVT_CALL(GetNpcPointer, NPC_Kooper_01, LVarF)
+    EVT_CALL(N(GetTreeHidingSpotPos), MV_Unk_03, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPointer, NPC_KoopersShell, LVarF)
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarB, LVar1)
     EVT_SET(LVarC, LVar2)
@@ -1439,29 +1386,29 @@ EvtScript N(D_80245858_9F3448) = {
             EVT_CALL(MakeItemEntity, ITEM_COIN, LVar0, 200, LVar2, ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS, 0)
             EVT_WAIT(30)
         EVT_CASE_LT(1000)
-            EVT_CALL(SetNpcAnimation, NPC_Fuzzy_02, ANIM_Fuzzy_Anim06)
-            EVT_CALL(SetNpcJumpscale, NPC_Fuzzy_02, 1)
-            EVT_CALL(SetNpcPos, NPC_Fuzzy_02, LVarA, LVarB, LVarC)
+            EVT_CALL(SetNpcAnimation, NPC_AmbushFuzzy, ANIM_Fuzzy_Anim06)
+            EVT_CALL(SetNpcJumpscale, NPC_AmbushFuzzy, 1)
+            EVT_CALL(SetNpcPos, NPC_AmbushFuzzy, LVarA, LVarB, LVarC)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_ADD(LVar2, 10)
             EVT_ADD(LVar1, 10)
-            EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_02, SOUND_B0000017, 0)
-            EVT_CALL(NpcJump0, NPC_Fuzzy_02, LVar0, LVar1, LVar2, 20)
+            EVT_CALL(PlaySoundAtNpc, NPC_AmbushFuzzy, SOUND_B0000017, 0)
+            EVT_CALL(NpcJump0, NPC_AmbushFuzzy, LVar0, LVar1, LVar2, 20)
             EVT_SET(MV_Unk_02, 1)
     EVT_END_SWITCH
     EVT_LABEL(0)
-    EVT_IF_EQ(MV_Unk_02, 1)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_IF_EQ(MV_Unk_02, 1)
+            EVT_WAIT(1)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_WAIT(20)
     EVT_EXEC(N(D_802417F8_9EF3E8))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_80245BD8) = {
-    EVT_CALL(N(func_802406C4_9EE2B4), LVar0, 1)
+EvtScript N(EVS_HitTree) = {
+    EVT_CALL(N(AnimateTreeBranch), LVar0, 1)
     EVT_CALL(PlaySound, SOUND_SHAKE_TREE)
     EVT_IF_EQ(AF_NOK_03, FALSE)
         EVT_RETURN
@@ -1476,13 +1423,13 @@ EvtScript N(EVS_80245BD8) = {
             EVT_WAIT(15)
             EVT_CALL(PlaySound, SOUND_21C)
         EVT_END_THREAD
-        EVT_EXEC_WAIT(N(D_80244D0C_9F28FC))
+        EVT_EXEC_WAIT(N(EVS_HitTree_Correct))
     EVT_ELSE
         EVT_THREAD
             EVT_WAIT(15)
             EVT_CALL(PlaySound, SOUND_MENU_ERROR)
         EVT_END_THREAD
-        EVT_EXEC_WAIT(N(D_80245858_9F3448))
+        EVT_EXEC_WAIT(N(EVS_HitTree_Wrong))
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -1493,52 +1440,52 @@ EvtScript N(D_80245CF8_9F38E8) = {
     EVT_END
 };
 
-EvtScript N(D_80245D08_9F38F8) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_8024274C_9F033C)))
+EvtScript N(EVS_SetupMinigame) = {
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_Scene_HideInTree)))
     EVT_IF_GE(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_01, 0, -1000, 0)
-        EVT_CALL(SetNpcPos, NPC_Kooper_01, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_BossFuzzy, NPC_DISPOSE_LOCATION)
+        EVT_CALL(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
         EVT_RETURN
     EVT_END_IF
     EVT_SET(MV_Unk_00, 0)
     EVT_SET(MV_Unk_01, 2)
     EVT_SET(MV_Unk_04, 2)
-    EVT_CALL(N(func_802404D0_9EE0C0))
-    EVT_CALL(SetCustomGfxBuilders, 0, 0, EVT_PTR(N(func_80240814_9EE404)))
-    EVT_CALL(SetNpcPos, NPC_Fuzzy_01, -293, 0, 319)
-    EVT_CALL(SetNpcPos, NPC_Kooper_01, -293, 0, 322)
+    EVT_CALL(N(InitThreadData))
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, NULL, EVT_PTR(N(build_gfx_thread)))
+    EVT_CALL(SetNpcPos, NPC_BossFuzzy, -293, 0, 319)
+    EVT_CALL(SetNpcPos, NPC_KoopersShell, -293, 0, 322)
+    EVT_CALL(EnableNpcShadow, NPC_AmbushFuzzy, FALSE)
+    EVT_CALL(EnableNpcShadow, NPC_Fuzzy_01, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_Fuzzy_02, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_Fuzzy_03, FALSE)
-    EVT_CALL(EnableNpcShadow, NPC_Fuzzy_04, FALSE)
-    EVT_CALL(EnableNpcShadow, NPC_Fuzzy_05, FALSE)
-    EVT_CALL(SetModelFlags, MODEL_o177, 512, FALSE)
+    EVT_CALL(SetModelFlags, MODEL_o177, MODEL_FLAG_FLAG_200, FALSE)
     EVT_IF_GE(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_HID_IN_TREE)
-        EVT_CALL(N(func_80240574_9EE164), LVar4, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_01, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcPos, NPC_Kooper_01, LVar0, LVar1, LVar2)
-        EVT_CALL(EnableNpcShadow, NPC_Fuzzy_01, FALSE)
-        EVT_CALL(EnableNpcShadow, NPC_Kooper_01, FALSE)
+        EVT_CALL(N(GetTreeHidingSpotPos), LVar4, LVar0, LVar1, LVar2)
+        EVT_CALL(SetNpcPos, NPC_BossFuzzy, LVar0, LVar1, LVar2)
+        EVT_CALL(SetNpcPos, NPC_KoopersShell, LVar0, LVar1, LVar2)
+        EVT_CALL(EnableNpcShadow, NPC_BossFuzzy, FALSE)
+        EVT_CALL(EnableNpcShadow, NPC_KoopersShell, FALSE)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80245F18_9F3B08) = {
+EvtScript N(EVS_NpcInit_KoopersShell) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldKooper_StillShellAlt)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80245F50_9F3B40) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(D_80242C5C_9F084C)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(D_80242E68_9F0A58)))
+EvtScript N(EVS_NpcInit_BossFuzzy) = {
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_WaitForBossTrigger)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_BossFuzzy)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80245F88_9F3B78) = {
+EvtScript N(EVS_NpcInit_Fuzzy_Aux) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, 0)
     EVT_RETURN
     EVT_END
@@ -1548,60 +1495,35 @@ EvtScript N(D_80245FAC_9F3B9C) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(D_80245CF8_9F38E8)))
     EVT_IF_GE(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
         EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-            EVT_CALL(InterpNpcYaw, NPC_Kooper_02, 225, 0)
-            EVT_CALL(SetNpcPos, NPC_Kooper_02, -275, 0, 305)
+            EVT_CALL(InterpNpcYaw, NPC_Kooper, 225, 0)
+            EVT_CALL(SetNpcPos, NPC_Kooper, -275, 0, 305)
             EVT_RETURN
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(SetNpcSprite, NPC_Kooper_02, ANIM_KooperWithoutShell_IdleAngry)
+    EVT_CALL(SetNpcSprite, NPC_Kooper, ANIM_KooperWithoutShell_IdleAngry)
     EVT_RETURN
     EVT_END
 };
 
-StaticNpc N(NpcData_Kooper_01)[] = {
+StaticNpc N(NpcData_Minigame)[] = {
     {
-        .id = NPC_Kooper_01,
-        .settings = &N(NpcSettings_Kooper_01),
+        .id = NPC_KoopersShell,
+        .settings = &N(NpcSettings_Koopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(D_80245F18_9F3B08),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldKooper_Idle,
-            .walk   = ANIM_WorldKooper_Walk,
-            .run    = ANIM_WorldKooper_Walk,
-            .chase  = ANIM_WorldKooper_Walk,
-            .anim_4 = ANIM_WorldKooper_Walk,
-            .anim_5 = ANIM_WorldKooper_Walk,
-            .death  = ANIM_WorldKooper_Still,
-            .hit    = ANIM_WorldKooper_Still,
-            .anim_8 = ANIM_WorldKooper_Still,
-            .anim_9 = ANIM_WorldKooper_Still,
-            .anim_A = ANIM_WorldKooper_Still,
-            .anim_B = ANIM_WorldKooper_Still,
-            .anim_C = ANIM_WorldKooper_Still,
-            .anim_D = ANIM_WorldKooper_Still,
-            .anim_E = ANIM_WorldKooper_Still,
-            .anim_F = ANIM_WorldKooper_Still,
-        },
+        .init = &N(EVS_NpcInit_KoopersShell),
+        .drops = NPC_NO_DROPS,
+        .animations = KOOPER_ANIMS,
     },
     {
-        .id = NPC_Fuzzy_02,
-        .settings = &N(NpcSettings_Fuzzy_02),
+        .id = NPC_AmbushFuzzy,
+        .settings = &N(NpcSettings_Fuzzy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(D_80245F50_9F3B40),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .init = &N(EVS_NpcInit_BossFuzzy),
+        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -1614,37 +1536,60 @@ StaticNpc N(NpcData_Kooper_01)[] = {
                 .detectSize = { 0 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Fuzzy_Walk,
-            .walk   = ANIM_Fuzzy_Walk,
-            .run    = ANIM_Fuzzy_Run,
-            .chase  = ANIM_Fuzzy_Run,
-            .anim_4 = ANIM_Fuzzy_Idle,
-            .anim_5 = ANIM_Fuzzy_Idle,
-            .death  = ANIM_Fuzzy_Hurt,
-            .hit    = ANIM_Fuzzy_Hurt,
-            .anim_8 = ANIM_Fuzzy_Run,
-            .anim_9 = ANIM_Fuzzy_Run,
-            .anim_A = ANIM_Fuzzy_Run,
-            .anim_B = ANIM_Fuzzy_Run,
-            .anim_C = ANIM_Fuzzy_Run,
-            .anim_D = ANIM_Fuzzy_Run,
-            .anim_E = ANIM_Fuzzy_Run,
-            .anim_F = ANIM_Fuzzy_Run,
+        .animations = FUZZY_ANIMS,
+    },
+    {
+        .id = NPC_Fuzzy_01,
+        .settings = &N(NpcSettings_Fuzzy),
+        .pos = { NPC_DISPOSE_LOCATION },
+        .yaw = 0,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .init = &N(EVS_NpcInit_Fuzzy_Aux),
+        .drops = NPC_NO_DROPS,
+        .territory = {
+            .wander = {
+                .isFlying = FALSE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_CYLINDER,
+                .centerPos  = { 0, 0, 0 },
+                .wanderSize = { 0 },
+                .detectShape = SHAPE_CYLINDER,
+                .detectPos  = { 0, 0, 0 },
+                .detectSize = { 0 },
+            }
         },
+        .animations = FUZZY_ANIMS,
+    },
+    {
+        .id = NPC_Fuzzy_02,
+        .settings = &N(NpcSettings_Fuzzy),
+        .pos = { NPC_DISPOSE_LOCATION },
+        .yaw = 0,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .init = &N(EVS_NpcInit_Fuzzy_Aux),
+        .drops = NPC_NO_DROPS,
+        .territory = {
+            .wander = {
+                .isFlying = FALSE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_CYLINDER,
+                .centerPos  = { 0, 0, 0 },
+                .wanderSize = { 0 },
+                .detectShape = SHAPE_CYLINDER,
+                .detectPos  = { 0, 0, 0 },
+                .detectSize = { 0 },
+            }
+        },
+        .animations = FUZZY_ANIMS,
     },
     {
         .id = NPC_Fuzzy_03,
-        .settings = &N(NpcSettings_Fuzzy_02),
+        .settings = &N(NpcSettings_Fuzzy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(D_80245F88_9F3B78),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .init = &N(EVS_NpcInit_Fuzzy_Aux),
+        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -1657,156 +1602,28 @@ StaticNpc N(NpcData_Kooper_01)[] = {
                 .detectSize = { 0 },
             }
         },
-        .animations = {
-            .idle   = ANIM_Fuzzy_Walk,
-            .walk   = ANIM_Fuzzy_Walk,
-            .run    = ANIM_Fuzzy_Run,
-            .chase  = ANIM_Fuzzy_Run,
-            .anim_4 = ANIM_Fuzzy_Idle,
-            .anim_5 = ANIM_Fuzzy_Idle,
-            .death  = ANIM_Fuzzy_Hurt,
-            .hit    = ANIM_Fuzzy_Hurt,
-            .anim_8 = ANIM_Fuzzy_Run,
-            .anim_9 = ANIM_Fuzzy_Run,
-            .anim_A = ANIM_Fuzzy_Run,
-            .anim_B = ANIM_Fuzzy_Run,
-            .anim_C = ANIM_Fuzzy_Run,
-            .anim_D = ANIM_Fuzzy_Run,
-            .anim_E = ANIM_Fuzzy_Run,
-            .anim_F = ANIM_Fuzzy_Run,
-        },
+        .animations = FUZZY_ANIMS,
     },
     {
-        .id = NPC_Fuzzy_04,
-        .settings = &N(NpcSettings_Fuzzy_02),
-        .pos = { NPC_DISPOSE_LOCATION },
-        .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(D_80245F88_9F3B78),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = FALSE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_CYLINDER,
-                .centerPos  = { 0, 0, 0 },
-                .wanderSize = { 0 },
-                .detectShape = SHAPE_CYLINDER,
-                .detectPos  = { 0, 0, 0 },
-                .detectSize = { 0 },
-            }
-        },
-        .animations = {
-            .idle   = ANIM_Fuzzy_Walk,
-            .walk   = ANIM_Fuzzy_Walk,
-            .run    = ANIM_Fuzzy_Run,
-            .chase  = ANIM_Fuzzy_Run,
-            .anim_4 = ANIM_Fuzzy_Idle,
-            .anim_5 = ANIM_Fuzzy_Idle,
-            .death  = ANIM_Fuzzy_Hurt,
-            .hit    = ANIM_Fuzzy_Hurt,
-            .anim_8 = ANIM_Fuzzy_Run,
-            .anim_9 = ANIM_Fuzzy_Run,
-            .anim_A = ANIM_Fuzzy_Run,
-            .anim_B = ANIM_Fuzzy_Run,
-            .anim_C = ANIM_Fuzzy_Run,
-            .anim_D = ANIM_Fuzzy_Run,
-            .anim_E = ANIM_Fuzzy_Run,
-            .anim_F = ANIM_Fuzzy_Run,
-        },
-    },
-    {
-        .id = NPC_Fuzzy_05,
-        .settings = &N(NpcSettings_Fuzzy_02),
-        .pos = { NPC_DISPOSE_LOCATION },
-        .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(D_80245F88_9F3B78),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = FALSE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_CYLINDER,
-                .centerPos  = { 0, 0, 0 },
-                .wanderSize = { 0 },
-                .detectShape = SHAPE_CYLINDER,
-                .detectPos  = { 0, 0, 0 },
-                .detectSize = { 0 },
-            }
-        },
-        .animations = {
-            .idle   = ANIM_Fuzzy_Walk,
-            .walk   = ANIM_Fuzzy_Walk,
-            .run    = ANIM_Fuzzy_Run,
-            .chase  = ANIM_Fuzzy_Run,
-            .anim_4 = ANIM_Fuzzy_Idle,
-            .anim_5 = ANIM_Fuzzy_Idle,
-            .death  = ANIM_Fuzzy_Hurt,
-            .hit    = ANIM_Fuzzy_Hurt,
-            .anim_8 = ANIM_Fuzzy_Run,
-            .anim_9 = ANIM_Fuzzy_Run,
-            .anim_A = ANIM_Fuzzy_Run,
-            .anim_B = ANIM_Fuzzy_Run,
-            .anim_C = ANIM_Fuzzy_Run,
-            .anim_D = ANIM_Fuzzy_Run,
-            .anim_E = ANIM_Fuzzy_Run,
-            .anim_F = ANIM_Fuzzy_Run,
-        },
-    },
-    {
-        .id = NPC_Kooper_02,
-        .settings = &N(NpcSettings_Kooper_01),
+        .id = NPC_Kooper,
+        .settings = &N(NpcSettings_Koopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(D_80245FAC_9F3B9C),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldKooper_Idle,
-            .walk   = ANIM_WorldKooper_Walk,
-            .run    = ANIM_WorldKooper_Walk,
-            .chase  = ANIM_WorldKooper_Walk,
-            .anim_4 = ANIM_WorldKooper_Walk,
-            .anim_5 = ANIM_WorldKooper_Walk,
-            .death  = ANIM_WorldKooper_Still,
-            .hit    = ANIM_WorldKooper_Still,
-            .anim_8 = ANIM_WorldKooper_Still,
-            .anim_9 = ANIM_WorldKooper_Still,
-            .anim_A = ANIM_WorldKooper_Still,
-            .anim_B = ANIM_WorldKooper_Still,
-            .anim_C = ANIM_WorldKooper_Still,
-            .anim_D = ANIM_WorldKooper_Still,
-            .anim_E = ANIM_WorldKooper_Still,
-            .anim_F = ANIM_WorldKooper_Still,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = KOOPER_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Fuzzy_01) = {
-    .id = NPC_Fuzzy_01,
-    .settings = &N(NpcSettings_Fuzzy_02),
+StaticNpc N(NpcData_Miniboss) = {
+    .id = NPC_BossFuzzy,
+    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-    .init = &N(D_80245D08_9F38F8),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .init = &N(EVS_SetupMinigame),
+    .drops = NPC_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -1819,28 +1636,11 @@ StaticNpc N(NpcData_Fuzzy_01) = {
             .detectSize = { 0 },
         }
     },
-    .animations = {
-        .idle   = ANIM_Fuzzy_Walk,
-        .walk   = ANIM_Fuzzy_Walk,
-        .run    = ANIM_Fuzzy_Run,
-        .chase  = ANIM_Fuzzy_Run,
-        .anim_4 = ANIM_Fuzzy_Idle,
-        .anim_5 = ANIM_Fuzzy_Idle,
-        .death  = ANIM_Fuzzy_Hurt,
-        .hit    = ANIM_Fuzzy_Hurt,
-        .anim_8 = ANIM_Fuzzy_Run,
-        .anim_9 = ANIM_Fuzzy_Run,
-        .anim_A = ANIM_Fuzzy_Run,
-        .anim_B = ANIM_Fuzzy_Run,
-        .anim_C = ANIM_Fuzzy_Run,
-        .anim_D = ANIM_Fuzzy_Run,
-        .anim_E = ANIM_Fuzzy_Run,
-        .anim_F = ANIM_Fuzzy_Run,
-    },
+    .animations = FUZZY_ANIMS,
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_Kooper_01), BTL_NOK_FORMATION_16, BTL_NOK_STAGE_03),
-    NPC_GROUP(N(NpcData_Fuzzy_01), BTL_NOK_FORMATION_17, BTL_NOK_STAGE_03),
+    NPC_GROUP(N(NpcData_Minigame), BTL_NOK_FORMATION_16, BTL_NOK_STAGE_03),
+    NPC_GROUP(N(NpcData_Miniboss), BTL_NOK_FORMATION_17, BTL_NOK_STAGE_03),
     {}
 };
