@@ -6,6 +6,7 @@
 #include "hud_element.h"
 #include "effects.h"
 #include "nu/nusys.h"
+#include "model_clear_render_tasks.h"
 
 #ifdef SHIFT
 extern Addr map_vram_end;
@@ -1116,8 +1117,6 @@ extern s32 mdl_renderTaskQueueIdx;
 extern s32 mdl_renderTaskCount;
 
 extern TextureHandle mdl_textureHandles[128];
-
-extern RenderTask mdl_clearRenderTasks[3][0x100];
 
 extern Addr D_801A7000; // todo ???
 

@@ -12,6 +12,12 @@
 #define SHIFT_BSS extern
 #endif
 
+#ifdef SHIFT
+#define MATCHING_BSS(size)
+#else
+#define MATCHING_BSS(size) static BSS u8 padding_bss[size];
+#endif
+
 #define BSS __attribute__ ((section (".bss")))
 #define TRANSPARENT_UNION __attribute__ ((__transparent_union__))
 #else
