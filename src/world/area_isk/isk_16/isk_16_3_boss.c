@@ -24,13 +24,13 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     EVT_CALL(SetNpcYaw, NPC_PARTNER, 45)
     EVT_CALL(ClearPartnerMoveHistory, NPC_PARTNER)
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_WAIT(10)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
         EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(2.5))
         EVT_CALL(NpcMoveTo, NPC_PARTNER, 311, 487, 0)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_END_THREAD
     EVT_CALL(SetPlayerSpeed, EVT_FLOAT(4.0))
     EVT_CALL(PlayerMoveTo, 343, 460, 0)

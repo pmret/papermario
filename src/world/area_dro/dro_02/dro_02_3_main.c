@@ -54,7 +54,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
     EVT_CALL(InitVirtualEntityList)
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC_WAIT(N(EVS_SetupBuildings))
+    EVT_EXEC_WAIT(N(EVS_SetupRooms))
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)

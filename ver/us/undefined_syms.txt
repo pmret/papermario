@@ -34,22 +34,6 @@ D_803B5000 = 0x803B5000;
 D_803DA800 = 0x803DA800;
 heap_battleHead = 0x803DA800;
 
-// Letter delivery BSS
-nok_01_LetterDelivery_SavedNpcAnim = 0x80251E34;
-nok_02_LetterDelivery_SavedNpcAnim = 0x80254B94;
-
-// Quizmo BSS
-nok_01_Quizmo_Worker = 0x80251C40;
-nok_01_Quizmo_AnswerResult = 0x80251C58;
-nok_01_Quizmo_StageEffect = 0x80251C60;
-nok_01_Quizmo_AudienceEffect = 0x80251C64;
-nok_01_Quizmo_VannaTEffect = 0x80251C68;
-nok_02_Quizmo_AnswerResult = 0x802549B8;
-nok_02_Quizmo_Worker = 0x802549A0;
-nok_02_Quizmo_StageEffect = 0x802549C0;
-nok_02_Quizmo_AudienceEffect = 0x802549C4;
-nok_02_Quizmo_VannaTEffect = 0x802549C8;
-
 // boot
 D_A0000000 = 0xA0000000;
 D_A4000000 = 0xA4000000;

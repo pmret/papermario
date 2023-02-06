@@ -16,7 +16,7 @@ MobileAISettings N(AISettings_Fuzzy_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_Fuzzy_Wander) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_CALL(N(HoppingAI_Main), EVT_PTR(N(AISettings_Fuzzy_Wander)), 0)
     EVT_RETURN
     EVT_END

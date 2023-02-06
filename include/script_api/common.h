@@ -246,7 +246,7 @@ ApiStatus PlaySoundWithVolume(Evt* script, s32 isInitialCall);
 ApiStatus PlaySoundAt(Evt* script, s32 isInitialCall);
 ApiStatus StopSound(Evt* script, s32 isInitialCall);
 ApiStatus UseDoorSounds(Evt* script, s32 isInitialCall);
-ApiStatus UseAdvancedDoorSounds(Evt* script, s32 isInitialCall);
+ApiStatus UseRoomDoorSounds(Evt* script, s32 isInitialCall);
 ApiStatus PlaySoundAtF(Evt* script, s32 isInitialCall);
 ApiStatus RemoveKeyItemAt(Evt* script, s32 isInitialCall);
 ApiStatus RemoveItemAt(Evt* script, s32 isInitialCall);

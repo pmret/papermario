@@ -3,26 +3,19 @@
 #include "world/common/npc/Boo_Wander.inc.c"
 #include "world/common/npc/Boo.inc.c"
 
-EvtScript N(EVS_PlayerReaction_GetOldPhoto) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
-    EVT_WAIT(20)
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/atomic/MarioSalute.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList_Franky)[] = {
-    ITEM_LETTER_TO_FRANKY,
+    ITEM_LETTER_CHAIN_FRANKY,
     ITEM_NONE 
 };
 
 EvtScript N(EVS_LetterPrompt_Franky) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Franky, ANIM_Boo_Talk, ANIM_Boo_Idle,
-        ITEM_LETTER_TO_FRANKY, ITEM_LETTER20,
+        ITEM_LETTER_CHAIN_FRANKY, ITEM_LETTER_CHAIN_DANE_T_1,
         MSG_CH3_0067, MSG_CH3_0068, MSG_CH3_0069, MSG_CH3_006A,
         EVT_PTR(N(LetterList_Franky)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
@@ -165,10 +158,10 @@ EvtScript N(EVS_NpcInteract_Franky) = {
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(GB_KootFavor_Current, 13)
+    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH5_3)
         EVT_IF_EQ(GF_OBK01_Gift_OldPhoto, FALSE)
             EVT_SET(GF_OBK01_Gift_OldPhoto, TRUE)
-            EVT_EXEC_WAIT(N(EVS_PlayerReaction_GetOldPhoto))
+            EVT_EXEC_WAIT(N(EVS_MarioSalute))
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_006B)
             EVT_GIVE_KEY_REWARD(ITEM_KOOT_OLD_PHOTO)
         EVT_END_IF
@@ -200,7 +193,7 @@ StaticNpc N(NpcData_JumpScareBoo) = {
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .drops = BOO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
@@ -210,7 +203,7 @@ StaticNpc N(NpcData_TrafficBoo1) = {
     .settings = &N(NpcSettings_Boo),
     .pos = { 523.0f, -139.0f, 193.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_TrafficBoo1),
     .drops = BOO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
@@ -221,7 +214,7 @@ StaticNpc N(NpcData_TrafficBoo2) = {
     .settings = &N(NpcSettings_Boo),
     .pos = { 473.0f, -122.0f, 247.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_TrafficBoo2),
     .drops = BOO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
@@ -233,7 +226,7 @@ StaticNpc N(NpcData_Boos)[] = {
         .settings = &N(NpcSettings_Boo_Wander),
         .pos = { 422.0f, -200.0f, 112.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_UpstairsBoo),
         .drops = BOO_DROPS,
         .territory = {
@@ -256,7 +249,7 @@ StaticNpc N(NpcData_Boos)[] = {
         .settings = &N(NpcSettings_Boo_Wander),
         .pos = { 397.0f, -410.0f, 352.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Franky),
         .drops = BOO_DROPS,
         .territory = {

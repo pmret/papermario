@@ -71,7 +71,7 @@ EvtScript N(EVS_Main) = {
         EVT_WAIT(1)
     EVT_END_IF
     EVT_EXEC(N(EVS_SetupAurora))
-    EVT_CALL(UseAdvancedDoorSounds, DOOR_SOUNDS_UNUSED)
+    EVT_CALL(UseRoomDoorSounds, DOOR_SOUNDS_UNUSED)
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(PlaySound, SOUND_80000063)
     EVT_EXEC(N(EVS_SetupRooms))

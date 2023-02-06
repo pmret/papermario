@@ -293,8 +293,8 @@ void sfx_compute_spatialized_sound_params_full(f32 x, f32 y, f32 z, s16* volume,
 }
 
 void sfx_reset_door_sounds(void) {
-    gCurrentDoorSoundsSet = 0;
-    D_80151308 = 0;
+    gCurrentDoorSounds = 0;
+    gCurrentRoomDoorSounds = 0;
 }
 
 void sfx_clear_sounds(void) {
@@ -318,7 +318,7 @@ void sfx_clear_env_sounds(s16 playSounds) {
         s32 i;
 
         for (i = 0; i < MAX_SOUND_INSTANCES; i++, sound++) {
-            if (sound->flags & 1) {
+            if (sound->flags & SOUND_INSTANCE_FLAG_1) {
                 snd_start_sound_with_shift(sound->soundID, sound->volume, sound->pan, sound->pitchShift);
             }
         }
@@ -333,9 +333,9 @@ void sfx_update_looping_sound_params(void) {
     u16 pan;
     s32 i;
 
-    for (i = 0; i < 10; i++, sound++) {
-        if (sound->flags & 1) {
-            if (sound->flags & 2) {
+    for (i = 0; i < MAX_SOUND_INSTANCES; i++, sound++) {
+        if (sound->flags & SOUND_INSTANCE_FLAG_1) {
+            if (sound->flags & SOUND_INSTANCE_FLAG_2) {
                 sfx_get_spatialized_sound_params(sound->position.x, sound->position.y, sound->position.z, &volume, &pan, sound->sourceFlags);
                 sound->volume = volume;
                 sound->pan = pan;
@@ -366,7 +366,7 @@ void sfx_stop_env_sounds(void) {
 
     sound = D_80159AD0;
     for (i = 0; i < MAX_SOUND_INSTANCES; i++, sound++) {
-        if (sound->flags & 1) {
+        if (sound->flags & SOUND_INSTANCE_FLAG_1) {
             snd_stop_sound(sound->soundID);
         }
     }
@@ -377,7 +377,7 @@ SoundInstance* sfx_get_env_sound_instance(s32 soundID) {
     s32 i;
 
     for (i = 0; i < MAX_SOUND_INSTANCES; i++, sound++) {
-        if (sound->flags & 1 && sound->soundID == soundID) {
+        if (sound->flags & SOUND_INSTANCE_FLAG_1 && sound->soundID == soundID) {
             return sound;
         }
     }
@@ -390,7 +390,7 @@ void sfx_play_sound_looping(s32 soundId, u8 volume, u8 pan, s16 pitchShift) {
     s32 i;
 
     for (i = 0; i < MAX_SOUND_INSTANCES; i++, sound++) {
-        if (!(sound->flags & 1)) {
+        if (!(sound->flags & SOUND_INSTANCE_FLAG_1)) {
             break;
         }
     }
@@ -399,7 +399,7 @@ void sfx_play_sound_looping(s32 soundId, u8 volume, u8 pan, s16 pitchShift) {
     sound->soundID = soundId;
     sound->volume = volume;
     sound->pitchShift = pitchShift;
-    sound->flags |= 1;
+    sound->flags |= SOUND_INSTANCE_FLAG_1;
 
     snd_start_sound_with_shift(soundId, volume, pan, pitchShift);
 }
@@ -409,7 +409,7 @@ void sfx_register_looping_sound_at_position(s32 soundID, s32 flags, f32 x, f32 y
     s32 i;
 
     for (i = 0; i < MAX_SOUND_INSTANCES; i++, sound++) {
-        if (!(sound->flags & 1)) {
+        if (!(sound->flags & SOUND_INSTANCE_FLAG_1)) {
             break;
         }
     }
@@ -419,7 +419,7 @@ void sfx_register_looping_sound_at_position(s32 soundID, s32 flags, f32 x, f32 y
     sound->position.y = y;
     sound->position.z = z;
     sound->soundID = soundID;
-    sound->flags |= 3;
+    sound->flags |= (SOUND_INSTANCE_FLAG_1 | SOUND_INSTANCE_FLAG_2);
 
     sfx_play_sound_at_position(soundID, flags, x, y, z);
 }
@@ -436,7 +436,7 @@ s32 sfx_adjust_env_sound_pos(s32 soundID, s32 sourceFlags, f32 x, f32 y, f32 z) 
     sound->position.y = y;
     sound->position.z = z;
     sound->soundID = soundID;
-    sound->flags |= 3;
+    sound->flags |= (SOUND_INSTANCE_FLAG_1 | SOUND_INSTANCE_FLAG_2);
     return TRUE;
 }
 
@@ -444,7 +444,7 @@ void func_80149A6C(s32 soundID, s32 keepPlaying) {
     SoundInstance* sound = sfx_get_env_sound_instance(soundID);
 
     if (sound != NULL) {
-        sound->flags &= -SOUND_INSTANCE_FLAG_4;
+        sound->flags &= -SOUND_INSTANCE_FLAG_4; //TODO use logical negate here
         if (!keepPlaying) {
             snd_stop_sound(sound->soundID);
         }
@@ -460,16 +460,16 @@ void sfx_play_sound_with_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
 
     if (soundID & SOUND_TYPE_SPECIAL) {
         s32 soundIndex = soundID & 0xFF;
-        s32 soundType = ((u32)soundID >> 0x1C) & 7;
+        s32 soundType = (soundID & 0x70000000) >> 0x1C;
         switch (soundType) {
             case SOUND_TYPE_LOOPING:
                 sfx_play_sound_looping(LoopingSounds[soundIndex], volume, pan, pitchShift);
                 return;
-            case SOUND_TYPE_DOOR1:
-                soundID = OpenCloseSounds[gCurrentDoorSoundsSet][soundIndex];
+            case SOUND_TYPE_EXIT_DOOR:
+                soundID = OpenCloseSounds[gCurrentDoorSounds][soundIndex];
                 break;
-            case SOUND_TYPE_DOOR2:
-                soundID = OpenCloseSounds[D_80151308][soundIndex];
+            case SOUND_TYPE_ROOM_DOOR:
+                soundID = OpenCloseSounds[gCurrentRoomDoorSounds][soundIndex];
                 break;
             case SOUND_TYPE_ALTERNATING:
                 alternatingSet = &AlternatingSounds[soundIndex];

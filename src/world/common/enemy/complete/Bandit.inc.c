@@ -81,7 +81,7 @@ EvtScript N(EVS_NpcDefeat_Bandit) = {
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
             EVT_CALL(DisablePlayerInput, TRUE)
             EVT_SET(HAS_COIN_FLAG, TRUE)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bandit_Anim02)
             EVT_CALL(GetSelfNpcID, LVar0)
             EVT_EXEC(N(EVS_Bandit_CreateStolenCoin))

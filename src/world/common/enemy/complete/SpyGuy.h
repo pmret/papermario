@@ -64,7 +64,7 @@
     .settings = &N(NpcSettings_SpyGuyRock), \
     .pos = { NPC_DISPOSE_LOCATION }, \
     .yaw = 90, \
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_800000, \
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_NO_DROPS, \
     .drops = NPC_NO_DROPS, \
     .territory = { \
         .wander = { \

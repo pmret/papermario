@@ -66,7 +66,7 @@ EvtScript N(EVS_MakeCrystalBerry) = {
         EVT_SET(GF_FLO07_CrystalBerryFellOnLeftSide, TRUE)
     EVT_END_IF
     EVT_CALL(PlaySound, SOUND_7BC)
-    EVT_CALL(func_802D62E4, 956)
+    EVT_CALL(func_802D62E4, SOUND_3BC)
     EVT_SET(AF_FLO_MadeCrystalBerry, TRUE)
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_Posie, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_006A)
@@ -236,7 +236,7 @@ StaticNpc N(NpcData_Posie) = {
     .settings = &N(NpcSettings_Posie),
     .pos = { -260.0f, 0.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Posie),
     .drops = POSIE_DROPS,
     .animations = POSIE_ANIMS,

@@ -28,7 +28,7 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
 };
 
 EvtScript N(EVS_NpcInit_KoopaTroopa) = {
-    EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_800000)
+    EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_KoopaTroopa)))
     EVT_IF_EQ(GF_TRD07_Defeated_DungeonAmbush, TRUE)
         EVT_CALL(RemoveNpc, NPC_SELF)

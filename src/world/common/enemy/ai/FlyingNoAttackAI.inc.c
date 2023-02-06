@@ -56,7 +56,7 @@ void N(FlyingNoAttackAI_13)(Evt* script, MobileAISettings* aiSettings, EnemyDete
 
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     flag = 0;
-    if (!(npc->flags & NPC_FLAG_ENABLE_HIT_SCRIPT)) {
+    if (!(npc->flags & NPC_FLAG_8)) {
         x = npc->pos.x;
         y = npc->pos.y + npc->collisionHeight;
         z = npc->pos.z;

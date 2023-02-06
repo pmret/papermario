@@ -430,7 +430,7 @@ API_CALLABLE(N(RunMinigame)) {
                     data->box[i].state = BOX_STATE_FUZZY_IDLE;
                     data->box[i].stateTimer = rand_int(210);
                     npc->pos.y = NPC_DISPOSE_POS_Y;
-                    npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
+                    npc->flags &= ~NPC_FLAG_2;
                     disable_npc_shadow(npc);
                     // fallthrough
                 case BOX_STATE_FUZZY_IDLE:
@@ -438,7 +438,7 @@ API_CALLABLE(N(RunMinigame)) {
                     if (data->box[i].stateTimer <= 0) {
                         npc->currentAnim = ANIM_Fuzzy_Walk;
                         data->box[i].state = BOX_STATE_FUZZY_POPUP;
-                        sfx_play_sound_at_position(enemy->varTable[8], 0x100000, npc->pos.x, npc->pos.y, npc->pos.z);
+                        sfx_play_sound_at_position(enemy->varTable[8], SOUND_PARAM_MOST_QUIET, npc->pos.x, npc->pos.y, npc->pos.z);
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                         npc->jumpVelocity = 10.5f;
                         npc->pos.x = centerX;
@@ -559,13 +559,13 @@ API_CALLABLE(N(RunMinigame)) {
                     data->box[i].stateTimer = rand_int(210);
                     npc->pos.y = NPC_DISPOSE_POS_Y;
                     disable_npc_shadow(npc);
-                    npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
+                    npc->flags &= ~NPC_FLAG_2;
                     // fallthrough
                 case BOX_STATE_BOMB_IDLE:
                     data->box[i].stateTimer--;
                     if (data->box[i].stateTimer <= 0) {
                         data->box[i].state = BOX_STATE_BOMB_POPUP;
-                        sfx_play_sound_at_position(enemy->varTable[8], 0x100000, npc->pos.x, npc->pos.y, npc->pos.z);
+                        sfx_play_sound_at_position(enemy->varTable[8], SOUND_PARAM_MOST_QUIET, npc->pos.x, npc->pos.y, npc->pos.z);
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                         npc->jumpVelocity = 10.5f;
                         npc->pos.x = centerX;
@@ -676,7 +676,7 @@ API_CALLABLE(N(RunMinigame)) {
                         npc->jumpScale = 1.1f;
                         data->box[i].stateTimer = 0;
                         model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
-                        model->flags &= -(MODEL_FLAG_FLAG_1 | MODEL_FLAG_ENABLED);
+                        model->flags &= ~MODEL_FLAG_ENABLED;
                         if (!(model->flags & MODEL_FLAG_HAS_TRANSFORM_APPLIED)) {
                             guTranslateF(model->transformMatrix, npc->pos.x, npc->pos.y, npc->pos.z);
                             model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
@@ -717,7 +717,7 @@ API_CALLABLE(N(RunMinigame)) {
                     enable_npc_shadow(npc);
                     npc->duration = 0;
                     data->box[i].state = BOX_STATE_PEACH_EMERGE;
-                    model->flags &= -(MODEL_FLAG_FLAG_1 | MODEL_FLAG_ENABLED);
+                    model->flags &= ~MODEL_FLAG_ENABLED;
                     // fallthrough
                 case BOX_STATE_PEACH_EMERGE:
                     hittingPeachBlock = TRUE;
@@ -1782,7 +1782,7 @@ StaticNpc N(NpcData_GuideToad) = {
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 353.0f, -20.0f, 185.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .init = &N(EVS_NpcInit_Toad),
     .drops = TOAD_DROPS,
     .animations = TOAD_RED_ANIMS,
@@ -1805,7 +1805,7 @@ EvtScript N(EVS_NpcInit_Fuzzy) = {
         EVT_CASE_DEFAULT
             EVT_CALL(SetSelfVar, 8, 818)
     EVT_END_SWITCH
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_JUMPING, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_JUMPING, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(RandInt, 100, LVar0)
@@ -1821,7 +1821,7 @@ EvtScript N(EVS_NpcInit_Fuzzy) = {
 EvtScript N(EVS_NpcInit_Bobomb) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bobomb_Anim0B)
     EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_JUMPING, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_JUMPING, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(GetSelfNpcID, LVar0)
@@ -1848,7 +1848,7 @@ EvtScript N(EVS_NpcInit_Bobomb) = {
 EvtScript N(EVS_NpcInit_Luigi) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Luigi_Jump)
     EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_JUMPING, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_JUMPING, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(RandInt, 100, LVar0)
@@ -1866,7 +1866,7 @@ StaticNpc N(NpcData_Fuzzy_01) = {
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
     .init = &N(EVS_NpcInit_Fuzzy),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -1899,7 +1899,7 @@ StaticNpc N(NpcData_Fuzzy_02) = {
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
     .init = &N(EVS_NpcInit_Fuzzy),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -1932,7 +1932,7 @@ StaticNpc N(NpcData_Fuzzy_03) = {
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
     .init = &N(EVS_NpcInit_Fuzzy),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -1965,7 +1965,7 @@ StaticNpc N(NpcData_Fuzzy_04) = {
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
     .init = &N(EVS_NpcInit_Fuzzy),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -1998,7 +1998,7 @@ StaticNpc N(NpcData_Fuzzy_05) = {
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
     .init = &N(EVS_NpcInit_Fuzzy),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -2031,7 +2031,7 @@ StaticNpc N(NpcData_Bobomb_01) = {
     .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
     .init = &N(EVS_NpcInit_Bobomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -2064,7 +2064,7 @@ StaticNpc N(NpcData_Bobomb_02) = {
     .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
     .init = &N(EVS_NpcInit_Bobomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -2097,7 +2097,7 @@ StaticNpc N(NpcData_Bobomb_03) = {
     .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
     .init = &N(EVS_NpcInit_Bobomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -2130,7 +2130,7 @@ StaticNpc N(NpcData_Bobomb_04) = {
     .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
     .init = &N(EVS_NpcInit_Bobomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -2163,7 +2163,7 @@ StaticNpc N(NpcData_Bobomb_05) = {
     .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
     .init = &N(EVS_NpcInit_Bobomb),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -2197,7 +2197,7 @@ StaticNpc N(NpcData_Luigis)[] = {
         .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -2229,7 +2229,7 @@ StaticNpc N(NpcData_Luigis)[] = {
         .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -2261,7 +2261,7 @@ StaticNpc N(NpcData_Luigis)[] = {
         .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -2293,7 +2293,7 @@ StaticNpc N(NpcData_Luigis)[] = {
         .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -2325,7 +2325,7 @@ StaticNpc N(NpcData_Luigis)[] = {
         .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -2357,7 +2357,7 @@ StaticNpc N(NpcData_Luigis)[] = {
         .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -2389,7 +2389,7 @@ StaticNpc N(NpcData_Luigis)[] = {
         .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -2421,7 +2421,7 @@ StaticNpc N(NpcData_Luigis)[] = {
         .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -2453,7 +2453,7 @@ StaticNpc N(NpcData_Luigis)[] = {
         .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -2485,7 +2485,7 @@ StaticNpc N(NpcData_Luigis)[] = {
         .settings = &N(NpcSettings_Luigi),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_Luigi),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,

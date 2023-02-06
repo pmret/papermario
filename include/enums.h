@@ -235,6 +235,35 @@ enum StoryProgress {
     STORY_61                                    = 97,
 };
 
+enum KoopaKootFavors {
+    KOOT_FAVOR_CH1_1        = 0,
+    KOOT_FAVOR_CH1_2        = 1,
+    KOOT_FAVOR_CH2_1        = 2,
+    KOOT_FAVOR_CH2_2        = 3,
+    KOOT_FAVOR_CH2_3        = 4,
+    KOOT_FAVOR_CH3_1        = 5,
+    KOOT_FAVOR_CH3_2        = 6,
+    KOOT_FAVOR_CH3_3        = 7,
+    KOOT_FAVOR_CH4_1        = 8,
+    KOOT_FAVOR_CH4_2        = 9,
+    KOOT_FAVOR_CH4_3        = 10,
+    KOOT_FAVOR_CH5_1        = 11,
+    KOOT_FAVOR_CH5_2        = 12,
+    KOOT_FAVOR_CH5_3        = 13,
+    KOOT_FAVOR_CH6_1        = 14,
+    KOOT_FAVOR_CH6_2        = 15,
+    KOOT_FAVOR_CH6_3        = 16,
+    KOOT_FAVOR_CH7_1        = 17,
+    KOOT_FAVOR_CH7_2        = 18,
+    KOOT_FAVOR_CH7_3        = 19,
+};
+
+enum KoopaKootFavorStates {
+    KOOT_FAVOR_STATE_0      = 0,
+    KOOT_FAVOR_STATE_1      = 1,
+    KOOT_FAVOR_STATE_2      = 2,
+};
+
 enum EncounterTriggers {
     ENCOUNTER_TRIGGER_NONE                            = 1,
     ENCOUNTER_TRIGGER_JUMP                            = 2,
@@ -451,7 +480,7 @@ enum Abilities {
     ABILITY_FLOWER_FINDER           = 0x0000002C,
     ABILITY_DIZZY_ATTACK            = 0x0000002D,
     ABILITY_FINAL_GOOMPA            = 0x0000002E,
-    ABILITY_FINAL_BOMBOMB           = 0x0000002F,
+    ABILITY_FINAL_BOBOMB            = 0x0000002F,
     ABILITY_DEEP_FOCUS              = 0x00000030,
     ABILITY_SUPER_FOCUS             = 0x00000031,
     ABILITY_KAIDEN                  = 0x00000032,
@@ -526,6 +555,7 @@ enum SoundIDs {
     SOUND_36                        = 0x00000036,
     SOUND_37                        = 0x00000037,
     SOUND_38                        = 0x00000038,
+    SOUND_39                        = 0x00000039,
     SOUND_3F                        = 0x0000003F,
     SOUND_40                        = 0x00000040,
     SOUND_41                        = 0x00000041,
@@ -824,6 +854,8 @@ enum SoundIDs {
     SOUND_227                       = 0x00000227,
     SOUND_228                       = 0x00000228,
     SOUND_229                       = 0x00000229,
+    SOUND_22A                       = 0x0000022A,
+    SOUND_22B                       = 0x0000022B,
     SOUND_22C                       = 0x0000022C,
     SOUND_22D                       = 0x0000022D,
     SOUND_230                       = 0x00000230,
@@ -1249,6 +1281,7 @@ enum SoundIDs {
     SOUND_2085                      = 0x00002085,
     SOUND_2086                      = 0x00002086,
     SOUND_2087                      = 0x00002087,
+    SOUND_2088                      = 0x00002088,
     SOUND_2089                      = 0x00002089,
     SOUND_208A                      = 0x0000208A,
     SOUND_208B                      = 0x0000208B,
@@ -1382,6 +1415,7 @@ enum SoundIDs {
     SOUND_212D                      = 0x0000212D,
     SOUND_212E                      = 0x0000212E,
     SOUND_8161                      = 0x00008161,
+    
     SOUND_80000000                  = 0x80000000,
     SOUND_80000001                  = 0x80000001,
     SOUND_80000002                  = 0x80000002,
@@ -1476,6 +1510,9 @@ enum SoundIDs {
     SOUND_8000006B                  = 0x8000006B,
     SOUND_8000006C                  = 0x8000006C,
 
+    SOUND_ROOM_DOOR_OPEN            = 0xA0000000,
+    SOUND_ROOM_DOOR_CLOSE           = 0xA0000001,
+
     SOUND_FIRE_BAR_0                = 0xB0000000,
     SOUND_FIRE_BAR_1                = 0xB0000001,
     SOUND_FIRE_BAR_2                = 0xB0000002,
@@ -1509,6 +1546,8 @@ enum SoundIDs {
 };
 
 enum SoundInstanceFlags {
+    SOUND_INSTANCE_FLAG_1           = 0x00000001,
+    SOUND_INSTANCE_FLAG_2           = 0x00000002,
     SOUND_INSTANCE_FLAG_4           = 0x00000004,
 };
 
@@ -1530,9 +1569,9 @@ enum SoundSpatializationFlags {
 enum SoundType {
     SOUND_TYPE_SPECIAL              = 0x80000000,
     SOUND_TYPE_LOOPING              = 0,
-    SOUND_TYPE_DOOR1                = 1,
-    SOUND_TYPE_DOOR2                = 2,
-    SOUND_TYPE_ALTERNATING          = 3
+    SOUND_TYPE_EXIT_DOOR            = 1, // 0x90000000 (with SOUND_TYPE_SPECIAL)
+    SOUND_TYPE_ROOM_DOOR            = 2, // 0xA0000000 (with SOUND_TYPE_SPECIAL)
+    SOUND_TYPE_ALTERNATING          = 3, // 0xB0000000 (with SOUND_TYPE_SPECIAL)
 };
 
 enum SoundIDBits {
@@ -1664,39 +1703,39 @@ enum ItemIDs {
     ITEM_SNOWMAN_SCARF                = 0x00000032,
     ITEM_RED_KEY                      = 0x00000033,
     ITEM_BLUE_KEY                     = 0x00000034,
-    ITEM_UNUSED_LETTER01              = 0x00000035,
-    ITEM_LETTER01                     = 0x00000036,
-    ITEM_LETTER02                     = 0x00000037,
-    ITEM_LETTER03                     = 0x00000038,
-    ITEM_LETTER04                     = 0x00000039,
+    ITEM_UNUSED_LETTER_1              = 0x00000035,
+    ITEM_LETTER_TO_MERLON             = 0x00000036,
+    ITEM_LETTER_TO_GOOMPA             = 0x00000037,
+    ITEM_LETTER_TO_MORT_T             = 0x00000038,
+    ITEM_LETTER_TO_RUSS_T             = 0x00000039,
     ITEM_LETTER_TO_MAYOR_PENGUIN      = 0x0000003A,
     ITEM_LETTER_TO_MERLOW             = 0x0000003B,
-    ITEM_LETTER07                     = 0x0000003C,
-    ITEM_LETTER08                     = 0x0000003D,
+    ITEM_LETTER_TO_FICE_T             = 0x0000003C,
+    ITEM_LETTER_TO_NOMADIMOUSE        = 0x0000003D,
     ITEM_LETTER_TO_MINHT              = 0x0000003E,
-    ITEM_UNUSED_LETTER02              = 0x0000003F,
-    ITEM_LETTER10                     = 0x00000040,
+    ITEM_UNUSED_LETTER_2              = 0x0000003F,
+    ITEM_LETTER_CHAIN_GOOMPAPA_1      = 0x00000040,
     ITEM_LETTER_TO_IGOR               = 0x00000041,
-    ITEM_UNUSED_LETTER03              = 0x00000042,
-    ITEM_UNUSED_LETTER04              = 0x00000043,
-    ITEM_UNUSED_LETTER05              = 0x00000044,
-    ITEM_LETTER_TO_FRANKY             = 0x00000045,
-    ITEM_LETTER13                     = 0x00000046,
-    ITEM_LETTER14                     = 0x00000047,
-    ITEM_LETTER15                     = 0x00000048,
-    ITEM_LETTER16                     = 0x00000049,
-    ITEM_LETTER17                     = 0x0000004A,
-    ITEM_LETTER18                     = 0x0000004B,
-    ITEM_LETTER19                     = 0x0000004C,
-    ITEM_UNUSED_LETTER06              = 0x0000004D,
-    ITEM_LETTER20                     = 0x0000004E,
-    ITEM_LETTER_TO_RED_YOSHI_KID      = 0x0000004F,
-    ITEM_LETTER_TO_DANE_T             = 0x00000050,
-    ITEM_LETTER_TO_FROST_T            = 0x00000051,
-    ITEM_LETTER24                     = 0x00000052,
+    ITEM_UNUSED_LETTER_3              = 0x00000042,
+    ITEM_UNUSED_LETTER_4              = 0x00000043,
+    ITEM_UNUSED_LETTER_5              = 0x00000044,
+    ITEM_LETTER_CHAIN_FRANKY          = 0x00000045,
+    ITEM_LETTER_CHAIN_MUSS_T          = 0x00000046,
+    ITEM_LETTER_CHAIN_KOOVER_1        = 0x00000047,
+    ITEM_LETTER_CHAIN_FISHMAEL        = 0x00000048,
+    ITEM_LETTER_CHAIN_KOOVER_2        = 0x00000049,
+    ITEM_LETTER_CHAIN_MR_E            = 0x0000004A,
+    ITEM_LETTER_CHAIN_MISS_T          = 0x0000004B,
+    ITEM_LETTER_CHAIN_LITTLE_MOUSER   = 0x0000004C,
+    ITEM_UNUSED_LETTER_6              = 0x0000004D,
+    ITEM_LETTER_CHAIN_DANE_T_1        = 0x0000004E,
+    ITEM_LETTER_CHAIN_YOSHI_KID       = 0x0000004F,
+    ITEM_LETTER_CHAIN_DANE_T_2        = 0x00000050,
+    ITEM_LETTER_CHAIN_FROST_T         = 0x00000051,
+    ITEM_LETTER_CHAIN_GOOMPAPA_2      = 0x00000052,
     ITEM_ARTIFACT                     = 0x00000053,
     ITEM_LETTER_TO_KOLORADO           = 0x00000054,
-    ITEM_UNUSED_LETTER07              = 0x00000055,
+    ITEM_UNUSED_LETTER_7              = 0x00000055,
     ITEM_DOLLY                        = 0x00000056,
     ITEM_WATER_STONE                  = 0x00000057,
     ITEM_MAGICAL_BEAN                 = 0x00000058,
@@ -2433,7 +2472,7 @@ enum AmbientSounds {
     AMBIENT_RADIO              = 16, // radio songs for nok
     // the following 4 IDs are reserved for additional radio songs,
     // and no more are expected to follow after that
-    // see: func_80053F80
+    // see: au_ambient_load
 };
 
 enum EncounterOutcomes {
@@ -3049,6 +3088,12 @@ enum EntityCollisionFlags {
     ENTITY_COLLISION_PLAYER_LAST_FLOOR                      = 0x00000100
 };
 
+enum EntityHideMode {
+    ENTITY_HIDE_MODE_0      =   0,
+    ENTITY_HIDE_MODE_1      =   1,
+    ENTITY_HIDE_MODE_2      =   2,
+};
+
 typedef enum PushGridOccupant {
     PUSH_GRID_EMPTY         = 0,
     PUSH_GRID_BLOCK         = 1,
@@ -3067,9 +3112,9 @@ enum TriggerFlags {
     TRIGGER_WALL_TOUCH          = 0x00000400,
     TRIGGER_FLOOR_PRESS_A       = 0x00000800,
     TRIGGER_WALL_HAMMER         = 0x00001000,
-    TRIGGER_FLAG_2000          = 0x00002000,
-    TRIGGER_FLAG_4000          = 0x00004000,
-    TRIGGER_FLAG_8000          = 0x00008000,
+    TRIGGER_FLAG_2000           = 0x00002000,
+    TRIGGER_FLAG_4000           = 0x00004000,
+    TRIGGER_FLAG_8000           = 0x00008000,
     TRIGGER_GAME_FLAG_SET       = 0x00010000,
     TRIGGER_AREA_FLAG_SET       = 0x00020000,
     TRIGGER_CEILING_TOUCH       = 0x00040000,
@@ -3309,13 +3354,13 @@ enum NpcPalSwapState {
 };
 
 enum NpcFlags {
-    NPC_FLAG_PASSIVE                 = 0x00000001, ///< Collision does not trigger battle
+    NPC_FLAG_1                       = 0x00000001,
     NPC_FLAG_2                       = 0x00000002,
     NPC_FLAG_4                       = 0x00000004,
-    NPC_FLAG_ENABLE_HIT_SCRIPT       = 0x00000008,
+    NPC_FLAG_8                       = 0x00000008,
     NPC_FLAG_HAS_SHADOW              = 0x00000010, ///< Set by default and by enable_npc_shadow
-    NPC_FLAG_NO_AI                   = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
-    NPC_FLAG_40                      = 0x00000040,
+    NPC_FLAG_20                      = 0x00000020,
+    NPC_FLAG_IGNORE_WORLD_COLLISION  = 0x00000040,
     NPC_FLAG_UPSIDE_DOWN             = 0x00000080, ///< Render NPCs upside-down
     NPC_FLAG_100                     = 0x00000100, // TODO
     NPC_FLAG_GRAVITY                 = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_JUMPING is set.
@@ -3332,14 +3377,14 @@ enum NpcFlags {
     NPC_FLAG_MOTION_BLUR             = 0x00100000, ///< Gives motion blur effect as NPC moves. Set by enable_npc_blur
     NPC_FLAG_200000                  = 0x00200000,
     NPC_FLAG_400000                  = 0x00400000,
-    NPC_FLAG_NO_DROPS                = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
+    NPC_FLAG_HIDING                  = 0x00800000, 
     NPC_FLAG_1000000                 = 0x01000000, // TODO. fails assert in set_npc_sprite
     NPC_FLAG_SIMPLIFIED_PHYSICS      = 0x02000000,
     /// Use simpler, faster physics calculations:
     ///  - Perform only one lateral collision test during motion
     ///  - Allow falling below Y=-2000 (by default, NPC_FLAG_JUMPING is set when an NPC falls out-of-bounds)
     NPC_FLAG_PARTICLE                = 0x04000000,
-    NPC_FLAG_8000000                 = 0x08000000,
+    NPC_FLAG_WORLD_COLLISION_DIRTY   = 0x08000000,
     NPC_FLAG_10000000                = 0x10000000,
     NPC_FLAG_20000000                = 0x20000000,
     NPC_FLAG_NO_ANIMS_LOADED         = 0x40000000, ///< Npc has no animations loaded
@@ -3885,7 +3930,7 @@ enum MoveIDs {
     MOVE_SPEEDY_SPIN                = 0x0000006D,
     MOVE_REFUND                     = 0x0000006E,
     MOVE_UNUSED_FINAL_GOOMPA        = 0x0000006F,
-    MOVE_UNUSED_FINAL_BOMBOMB       = 0x00000070,
+    MOVE_UNUSED_FINAL_BOBOMB        = 0x00000070,
     MOVE_DEEP_FOCUS                 = 0x00000071,
     MOVE_SUPER_FOCUS                = 0x00000072,
     MOVE_KAIDEN                     = 0x00000073,
@@ -4830,39 +4875,82 @@ enum ModelAnimUnit {
     MDL_ANIMATOR_F  = 0xF,
 };
 
+enum MapRoomFlags {
+    ROOM_FLAGS_VISGROUP_MASK                = 0xF000,
+    ROOM_FLAGS_MASK                         = 0x0F00,
+    ROOM_FLAGS_DOOR_TYPE_MASK               = 0x00FF,
+    ROOM_DOOR_RIGHT_HINGE_OPENS_OUT         = 0, // left --> center (hinge on right)
+    ROOM_DOOR_RIGHT_HINGE_OPENS_IN          = 1, // center --> left
+    ROOM_DOOR_LEFT_HINGE_OPENS_OUT          = 2, // right --> center (hinge on left)
+    ROOM_DOOR_LEFT_HINGE_OPENS_IN           = 3, // center --> right
+    ROOM_DOOR_STRAIGHT_THROUGH              = 4, // center --> center
+    ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_OUT   = 5, // deep left  --> center     (hinge on right)
+    ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_IN    = 6, // center     --> deep left
+    ROOM_LARGE_DOOR_LEFT_HINGE_OPENS_OUT    = 7, // deep right --> center     (hinge on left)
+    ROOM_FLAG_CUSTOM_ANIM_OPEN_DOOR         = 0x100,
+    ROOM_FLAG_CUSTOM_ANIM_WALL_ROT          = 0x200,
+    ROOM_FLAG_CUSTOM_ANIM_DROP_DOOR         = 0x400,
+    ROOM_FLAG_EXIT_DOOR_DROPS               = 0x800, // for internal use
+};
+
+enum MapRoomNotifications {
+    // dispatched to listener script during interactions with the room door
+    ROOM_UPDATE_ENTER_BEGIN     = 0,
+    ROOM_UPDATE_ENTER_DONE      = 1,
+    ROOM_UPDATE_EXIT_BEGIN      = 2,
+    ROOM_UPDATE_EXIT_END        = 3, 
+    // when handling ROOM_UPDATE_ENTER_BEGIN, listener may return this to cancel the door opening. useful for locked doors.   
+    ROOM_UPDATE_REQUEST_CANCEL  = -1,
+    // anim move door updates
+    ROOM_MOVE_DOOR_ENTER_OPEN   = 0,
+    ROOM_MOVE_DOOR_ENTER_CLOSE  = 1,
+    ROOM_MOVE_DOOR_EXIT_OPEN    = 2,
+    ROOM_MOVE_DOOR_EXIT_CLOSE   = 3,
+    // anim move walls update
+    ROOM_MOVE_WALL_OPEN         = 0,
+    ROOM_MOVE_WALL_1            = 1, // unused
+    ROOM_MOVE_WALL_2            = 2, // unused
+    ROOM_MOVE_WALL_CLOSE        = 3,
+    // anim drop droor updates
+    ROOM_DROP_DOOR_ENTER        = 0,
+    ROOM_DROP_DOOR_1            = 1, // unused
+    ROOM_DROP_DOOR_2            = 2, // unused
+    ROOM_DROP_DOOR_EXIT         = 3,
+};
+
 enum EnemyFlags {
-    ENEMY_FLAG_1                 = 0x00000001,
-    ENEMY_FLAG_2                 = 0x00000002,
-    ENEMY_FLAG_4                 = 0x00000004,
-    ENEMY_FLAG_8                 = 0x00000008,
-    ENEMY_FLAG_FLED              = 0x00000010,
-    ENEMY_FLAG_20                = 0x00000020,
-    ENEMY_FLAG_40                = 0x00000040,
-    ENEMY_FLAG_80                = 0x00000080,
-    ENEMY_FLAG_100               = 0x00000100,
-    ENEMY_FLAG_200               = 0x00000200,
-    ENEMY_FLAG_400               = 0x00000400,
-    ENEMY_FLAG_800               = 0x00000800,
-    ENEMY_FLAG_GRAVITY           = 0x00001000,
-    ENEMY_FLAG_2000              = 0x00002000,
-    ENEMY_FLAG_4000              = 0x00004000,
-    ENEMY_FLAG_8000              = 0x00008000,
-    ENEMY_FLAG_10000             = 0x00010000,
-    ENEMY_FLAG_20000             = 0x00020000,
-    ENEMY_FLAG_40000             = 0x00040000,
-    ENEMY_FLAG_80000             = 0x00080000,
-    ENEMY_FLAG_100000            = 0x00100000,
-    ENEMY_FLAG_200000            = 0x00200000,
-    ENEMY_FLAG_400000            = 0x00400000,
-    ENEMY_FLAG_800000            = 0x00800000,
-    ENEMY_FLAG_IGNORE_TOUCH      = 0x01000000,
-    ENEMY_FLAG_IGNORE_JUMP       = 0x02000000,
-    ENEMY_FLAG_IGNORE_HAMMER     = 0x04000000,
-    ENEMY_FLAG_8000000           = 0x08000000,
-    ENEMY_FLAG_10000000          = 0x10000000,
-    ENEMY_FLAG_20000000          = 0x20000000,
-    ENEMY_FLAG_40000000          = 0x40000000, // spawn in AI_STATE_CHASE_INIT
-    ENEMY_FLAG_80000000          = 0x80000000,
+    ENEMY_FLAG_PASSIVE              = 0x00000001, ///< Collision does not trigger battle
+    ENEMY_FLAG_2                    = 0x00000002,
+    ENEMY_FLAG_4                    = 0x00000004,
+    ENEMY_FLAG_ENABLE_HIT_SCRIPT    = 0x00000008,
+    ENEMY_FLAG_FLED                 = 0x00000010,
+    ENEMY_FLAG_DISABLE_AI           = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
+    ENEMY_FLAG_40                   = 0x00000040,
+    ENEMY_FLAG_80                   = 0x00000080,
+    ENEMY_FLAG_100                  = 0x00000100,
+    ENEMY_FLAG_200                  = 0x00000200,
+    ENEMY_FLAG_400                  = 0x00000400,
+    ENEMY_FLAG_800                  = 0x00000800,
+    ENEMY_FLAG_GRAVITY              = 0x00001000,
+    ENEMY_FLAG_2000                 = 0x00002000,
+    ENEMY_FLAG_4000                 = 0x00004000,
+    ENEMY_FLAG_8000                 = 0x00008000,
+    ENEMY_FLAG_10000                = 0x00010000,
+    ENEMY_FLAG_20000                = 0x00020000,
+    ENEMY_FLAG_40000                = 0x00040000,
+    ENEMY_FLAG_80000                = 0x00080000,
+    ENEMY_FLAG_100000               = 0x00100000,
+    ENEMY_FLAG_200000               = 0x00200000,
+    ENEMY_FLAG_400000               = 0x00400000,
+    ENEMY_FLAG_NO_DROPS             = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
+    ENEMY_FLAG_IGNORE_TOUCH         = 0x01000000,
+    ENEMY_FLAG_IGNORE_JUMP          = 0x02000000,
+    ENEMY_FLAG_IGNORE_HAMMER        = 0x04000000,
+    ENEMY_FLAG_8000000              = 0x08000000,
+    ENEMY_FLAG_10000000             = 0x10000000,
+    ENEMY_FLAG_20000000             = 0x20000000,
+    ENEMY_FLAG_40000000             = 0x40000000, // spawn in AI_STATE_CHASE_INIT
+    ENEMY_FLAG_80000000             = 0x80000000,
 };
 
 // used with enemy->aiFlags

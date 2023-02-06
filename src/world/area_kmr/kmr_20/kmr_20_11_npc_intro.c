@@ -26,7 +26,7 @@ API_CALLABLE(N(func_80241CF0_8EDB10)) {
 }
 
 API_CALLABLE(N(SetAmbienceVolumeHalf_Intro)) {
-    au_ambience_set_volume(0, 1000, 63);
+    snd_ambient_set_volume(0, 1000, 63);
     return ApiStatus_DONE2;
 }
 
@@ -87,7 +87,7 @@ EvtScript N(EVS_Player_EnterPipe_Intro) = {
 
 EvtScript N(EVS_Luigi_EnterPipe_Intro) = {
     EVT_CALL(SetNpcFlagBits, NPC_Scene_Luigi, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Scene_Luigi, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Scene_Luigi, NPC_FLAG_8, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_Scene_Luigi, FALSE)
     EVT_SET(LVar0, kmr_20_ENTRY_4)
     EVT_CALL(N(Pipe_GetEntryPos_Intro))

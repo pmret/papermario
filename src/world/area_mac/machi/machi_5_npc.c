@@ -217,7 +217,7 @@ NpcSettings N(NpcSettings_StarRod) = {
     .otherAI = &N(EVS_NpcAuxAI_StarRod),
     .onInteract = &N(EVS_NpcInteract_StarRod),
     .ai = &N(EVS_NpcAI_StarRod),
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcSettings N(NpcSettings_Koopa) = {
@@ -226,7 +226,7 @@ NpcSettings N(NpcSettings_Koopa) = {
     .radius = 24,
     .onInteract = &N(EVS_NpcInteract_Koopa),
     .ai = &N(EVS_NpcAI_Koopa),
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcSettings N(NpcSettings_Kolorado) = {
@@ -235,7 +235,7 @@ NpcSettings N(NpcSettings_Kolorado) = {
     .radius = 24,
     .onInteract = &N(EVS_NpcInteract_Kolorado),
     .ai = &N(EVS_NpcAI_Kolorado),
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcSettings N(NpcSettings_Goompa) = {
@@ -283,7 +283,7 @@ StaticNpc N(NpcData_GoombaFamily) = {
     .settings = &N(NpcSettings_Goompa),
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_8,
+    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
     .init = (void*) 0x1F64,
     .animations = {
     },
@@ -295,7 +295,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_8,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -304,7 +304,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_8,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -313,7 +313,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_8,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -322,7 +322,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_8,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -331,7 +331,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_8,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -340,7 +340,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_8,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -349,7 +349,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_8,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -358,7 +358,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_8,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .init = (void*) 0x1F64,
         .animations = {},
     },
@@ -367,7 +367,7 @@ StaticNpc N(NpcData_0B)[] = {
         .settings = &N(NpcSettings_Goompa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_8,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .init = (void*) 0x1F64,
         .animations = {},
     },

@@ -52,7 +52,7 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
         npc->flags &= ~NPC_FLAG_JUMPING;
         enemy->flags |= ENEMY_FLAG_200000;
         npc->flags &= ~NPC_FLAG_GRAVITY;
-        npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+        npc->flags |= NPC_FLAG_8;
         enemy->varTable[10] = 0;
         enemy->varTable[11] = -1;
         npc->pos.x = 0.0f;
@@ -90,10 +90,10 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
             if (enemy->varTable[13] != 0) {
                 if (npc->pos.y <= 0.0) {
                     npc->flags &= ~NPC_FLAG_GRAVITY;
-                    npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+                    npc->flags |= NPC_FLAG_8;
                 } else {
                     npc->flags |= NPC_FLAG_GRAVITY;
-                    npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+                    npc->flags &= ~NPC_FLAG_8;
                 }
             }
             basic_ai_wander(script, aiSettings, territoryPtr);
@@ -131,7 +131,7 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
             npc->pos.y = npc2->pos.y + 25.0;
             npc->pos.z = npc2->pos.z + 1.0;
             npc->rotation.y = 0.0f;
-            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags |= NPC_FLAG_8;
             npc->flags &= ~NPC_FLAG_2;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->renderYaw = 0.0f;
@@ -177,17 +177,17 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
                     if (enemy->varTable[13] != 0) {
                         if (npc->pos.y <= 0.0) {
                             npc->flags &= ~NPC_FLAG_GRAVITY;
-                            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+                            npc->flags |= NPC_FLAG_8;
                         } else {
                             npc->flags |= NPC_FLAG_GRAVITY;
-                            npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+                            npc->flags &= ~NPC_FLAG_8;
                         }
                     } else if (!enemy->territory->wander.isFlying) {
                         npc->flags |= NPC_FLAG_GRAVITY;
-                        npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+                        npc->flags &= ~NPC_FLAG_8;
                     } else {
                         npc->flags &= ~NPC_FLAG_GRAVITY;
-                        npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+                        npc->flags |= NPC_FLAG_8;
                     }
                     npc->flags |= NPC_FLAG_40000;
                     npc->flags &= ~NPC_FLAG_JUMPING;
@@ -215,7 +215,7 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
             npc->pos.x = 0.0f;
             npc->pos.z = 0.0f;
             npc->pos.y = -1000.0f;
-            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_2;
+            npc->flags |= NPC_FLAG_8 | NPC_FLAG_2;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             script->AI_TEMP_STATE = 111;
         case 111:

@@ -18,7 +18,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa_01) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(5)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40 | NPC_FLAG_40000 | NPC_FLAG_200000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_40000 | NPC_FLAG_200000, TRUE)
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 360, 20, EASING_LINEAR)
         EVT_LABEL(1)
@@ -31,7 +31,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa_01) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.6))
     EVT_CALL(NpcJump0, NPC_SELF, -650, 75, -30, 20)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40 | NPC_FLAG_40000 | NPC_FLAG_200000, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_40000 | NPC_FLAG_200000, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_KoopaTroopa_Wander)))
     EVT_RETURN
@@ -124,7 +124,7 @@ StaticNpc N(NpcData_KoopaTroopa_02) = {
     .settings = &N(NpcSettings_KoopaTroopa_Stationary),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000,
     .init = &N(EVS_NpcInit_KoopaTroopa_02),
     .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,

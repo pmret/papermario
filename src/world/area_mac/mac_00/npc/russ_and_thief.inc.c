@@ -1,12 +1,12 @@
 s32 N(LetterList_RussT)[] = {
-    ITEM_LETTER04,
+    ITEM_LETTER_TO_RUSS_T,
     ITEM_NONE 
 };
 
 EvtScript N(EVS_LetterPrompt_RussT) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_RussT, ANIM_RussT_Talk, ANIM_RussT_Idle,
-        ITEM_LETTER04, ITEM_NONE,
+        ITEM_LETTER_TO_RUSS_T, ITEM_NONE,
         MSG_MAC_Gate_0011, MSG_MAC_Gate_0012, MSG_MAC_Gate_0013, MSG_MAC_Gate_0014,
         EVT_PTR(N(LetterList_RussT)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
@@ -378,5 +378,5 @@ NpcSettings N(NpcSettings_RussT) = {
     .height = 30,
     .radius = 24,
     .level = 99,
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };

@@ -565,8 +565,8 @@ GameFlag(563) GF_Unused_HOS_20
 GameFlag(564) GF_Unused_HOS_21
 GameFlag(565) GF_Unused_HOS_22
 GameFlag(566) GF_NOK01_RecoveredShellA
-GameFlag(567) GF_NOK01_RecoveredShellB
-GameFlag(568) GF_NOK01_RecoveredShellC
+GameFlag(567) GF_NOK01_RecoveredBlockShell
+GameFlag(568) GF_NOK01_RecoveredTreeShell
 GameFlag(569) GF_NOK02_StolenShellComplaintA
 GameFlag(570) GF_NOK02_RecoveredShellA
 GameFlag(571) GF_NOK02_StolenShellComplaintB
@@ -1004,7 +1004,7 @@ GameFlag(1002) GF_ARN02_ItemBlock_CoinA
 GameFlag(1003) GF_ARN02_ItemBlock_CoinB
 GameFlag(1004) GF_ARN02_ItemBlock_RepelGel
 GameFlag(1005) GF_ARN02_Item_DizzyDial
-GameFlag(1006) GF_ARN02_Item_Letter07
+GameFlag(1006) GF_ARN02_Item_LetterFiceT
 GameFlag(1007) GF_ARN03_ItemBlock_Coin
 GameFlag(1008) GF_ARN04_ItemBlock_SuperShroom
 GameFlag(1009) GF_ARN04_ItemBlock_Coin

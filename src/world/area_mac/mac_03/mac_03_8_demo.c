@@ -79,7 +79,7 @@ EvtScript N(EVS_DemoDepartForMtRugged) = {
     EVT_CALL(HidePlayerShadow, TRUE)
     EVT_CALL(SetPlayerPos, -425, 45, 20)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40 | NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, -410)
     EVT_SET(LVar1, 45)

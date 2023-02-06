@@ -1,12 +1,12 @@
 #include "kmr_02.h"
 
-EvtScript N(EVS_OpenDoor_ToadHouse) = {
+EvtScript N(EVS_SetDoorRot_ToadHouse) = {
     EVT_CALL(RotateModel, MODEL_o275, LVar0, 0, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_ToadHouse) = {
+EvtScript N(EVS_SetWallRot_ToadHouse) = {
     EVT_SET(LVar1, LVar0)
     EVT_ADD(LVar1, LVar0)
     EVT_CALL(RotateModel, MODEL_k_k_1, LVar1, 0, 1, 0)
@@ -17,13 +17,14 @@ EvtScript N(EVS_MoveWalls_ToadHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_ToadHouse) = {
+EvtScript N(EVS_RoomListener_ToadHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_kino_in, 1)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o767, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_THREAD
                 EVT_WAIT(5)
             EVT_END_THREAD
@@ -31,7 +32,7 @@ EvtScript N(EVS_ToggleVis_ToadHouse) = {
             EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
             EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_kino_in, 0)
             EVT_CALL(EnableModel, MODEL_o422, TRUE)
             EVT_CALL(EnableModel, MODEL_o424, TRUE)
@@ -87,12 +88,12 @@ EvtScript N(EVS_SetupToadHouse) = {
         EVT_CALL(SetGroupEnabled, MODEL_kino_in, 0)
     EVT_END_IF
     // toad house
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_0),
-        EVT_PTR(N(EVS_OpenDoor_ToadHouse)),
-        EVT_PTR(N(EVS_MoveWalls_ToadHouse)),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
+        EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
+        EVT_PTR(N(EVS_SetWallRot_ToadHouse)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_ToadHouse)),
+        EVT_PTR(N(EVS_RoomListener_ToadHouse)),
         COLLIDER_deilit7,
         COLLIDER_deilit8,
         MODEL_kinopi,

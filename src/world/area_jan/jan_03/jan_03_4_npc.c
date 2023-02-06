@@ -38,14 +38,14 @@ MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(RedYoshiKidLetters)[] = {
-    ITEM_LETTER_TO_RED_YOSHI_KID,
+    ITEM_LETTER_CHAIN_YOSHI_KID,
     ITEM_NONE 
 };
 
 EvtScript N(EVS_LetterPrompt_RedYoshiKid) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_YoshiKid_02, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle,
-        ITEM_LETTER_TO_RED_YOSHI_KID, ITEM_LETTER_TO_DANE_T,
+        ITEM_LETTER_CHAIN_YOSHI_KID, ITEM_LETTER_CHAIN_DANE_T_2,
         MSG_CH5_0079, MSG_CH5_007A, MSG_CH5_007B, MSG_CH5_007C,
         EVT_PTR(N(RedYoshiKidLetters)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
@@ -345,7 +345,7 @@ EvtScript N(EVS_NpcInteract_Yoshi_03) = {
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_006D)
                 EVT_SET(LVar0, ITEM_MELON)
                 EVT_SET(LVar1, ITEM_TYPE_CONSUMABLE)
-                EVT_EXEC_WAIT(N(GiveKeyReward)) // misuse?
+                EVT_EXEC_WAIT(N(GiveItemReward)) // misuse?
                 EVT_CALL(AddItem, ITEM_MELON, LVar0)
             EVT_END_IF
             EVT_RETURN
@@ -690,7 +690,7 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
                         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
                         EVT_CALL(NpcMoveTo, NPC_SELF, -465, -185, 0)
                         EVT_CALL(NpcMoveTo, NPC_SELF, -540, -70, 0)
-                        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+                        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
                         EVT_SET(GB_StoryProgress, STORY_CH5_TRADED_VASE_FOR_SEED)
                 EVT_END_SWITCH
                 EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
@@ -713,7 +713,7 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
     EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -770,7 +770,7 @@ StaticNpc N(NpcData_VillageLeader) = {
     .settings = &N(NpcSettings_Yoshi),
     .pos = { -300.0f, 0.0f, -70.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .init = &N(EVS_NpcInit_VillageLeader),
     .drops = NPC_NO_DROPS,
     .animations = YOSHI_LEADER_ANIMS,
@@ -790,7 +790,7 @@ StaticNpc N(NpcData_Sushie) = {
     .settings = &N(NpcSettings_Sushie),
     .pos = { -425.0f, 0.0f, -350.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .init = &N(EVS_NpcInit_Sushie),
     .drops = NPC_NO_DROPS,
     .animations = {
@@ -828,7 +828,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .settings = &N(NpcSettings_Kolorado),
     .pos = { -475.0f, 0.0f, -75.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .init = &N(EVS_NpcInit_Kolorado),
     .drops = NPC_NO_DROPS,
     .animations = KOLORADO_ANIMS,
@@ -842,7 +842,7 @@ StaticNpc N(NpcData_Toad)[] = {
         .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 275.0f, 0.0f, -70.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Toad),
         .drops = NPC_NO_DROPS,
         .animations = TOAD_RED_ANIMS,
@@ -853,7 +853,7 @@ StaticNpc N(NpcData_Toad)[] = {
         .settings = &N(NpcSettings_Yoshi),
         .pos = { 125.0f, 30.0f, -425.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Yoshi_01),
         .drops = NPC_NO_DROPS,
         .animations = YOSHI_BLUE_ANIMS,
@@ -864,7 +864,7 @@ StaticNpc N(NpcData_Toad)[] = {
         .settings = &N(NpcSettings_Yoshi_Patrol),
         .pos = { -350.0f, 0.0f, -220.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Yoshi_02),
         .drops = NPC_NO_DROPS,
         .territory = {
@@ -889,7 +889,7 @@ StaticNpc N(NpcData_Toad)[] = {
         .settings = &N(NpcSettings_Yoshi_Patrol),
         .pos = { -100.0f, 0.0f, -80.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Yoshi_03),
         .drops = NPC_NO_DROPS,
         .territory = {
@@ -914,7 +914,7 @@ StaticNpc N(NpcData_Toad)[] = {
         .settings = &N(NpcSettings_YoshiKid_Patrol),
         .pos = { -450.0f, 0.0f, -160.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_YoshiKid_01),
         .drops = NPC_NO_DROPS,
         .territory = {
@@ -942,7 +942,7 @@ StaticNpc N(NpcData_Toad)[] = {
         .settings = &N(NpcSettings_YoshiKid_Patrol),
         .pos = { -340.0f, 0.0f, -385.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_YoshiKid_02),
         .drops = NPC_NO_DROPS,
         .territory = {
@@ -968,7 +968,7 @@ StaticNpc N(NpcData_Toad)[] = {
         .settings = &N(NpcSettings_YoshiKid_Patrol),
         .pos = { -260.0f, 0.0f, -220.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_YoshiKid_03),
         .drops = NPC_NO_DROPS,
         .territory = {
@@ -994,7 +994,7 @@ StaticNpc N(NpcData_Toad)[] = {
         .settings = &N(NpcSettings_YoshiKid_Patrol),
         .pos = { -460.0f, 0.0f, 150.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_YoshiKid_04),
         .drops = NPC_NO_DROPS,
         .territory = {
@@ -1020,7 +1020,7 @@ StaticNpc N(NpcData_Toad)[] = {
         .settings = &N(NpcSettings_YoshiKid_Patrol),
         .pos = { -320.0f, 0.0f, 80.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_YoshiKid_05),
         .drops = NPC_NO_DROPS,
         .territory = {
@@ -1056,7 +1056,7 @@ StaticNpc N(NpcData_Ravens)[] = {
         .settings = &N(NpcSettings_Raven),
         .pos = { -650.0f, 374.0f, -150.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Raven),
         .drops = NPC_NO_DROPS,
         .animations = RAVEN_ANIMS,
@@ -1068,7 +1068,7 @@ StaticNpc N(NpcData_Ravens)[] = {
         .settings = &N(NpcSettings_Raven),
         .pos = { -645.0f, 457.0f, -255.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Raven),
         .drops = NPC_NO_DROPS,
         .animations = RAVEN_ANIMS,
@@ -1078,7 +1078,7 @@ StaticNpc N(NpcData_Ravens)[] = {
         .settings = &N(NpcSettings_Raven),
         .pos = { -570.0f, 374.0f, -300.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Raven),
         .drops = NPC_NO_DROPS,
         .animations = RAVEN_ANIMS,
@@ -1089,7 +1089,7 @@ StaticNpc N(NpcData_Ravens)[] = {
         .settings = &N(NpcSettings_Raven),
         .pos = { -500.0f, 374.0f, -285.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Raven),
         .drops = NPC_NO_DROPS,
         .animations = RAVEN_ANIMS,
@@ -1100,7 +1100,7 @@ StaticNpc N(NpcData_Ravens)[] = {
         .settings = &N(NpcSettings_Raven),
         .pos = { -450.0f, 374.0f, -175.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Raven),
         .drops = NPC_NO_DROPS,
         .animations = RAVEN_ANIMS,
@@ -1113,7 +1113,7 @@ StaticNpc N(NpcData_ChuckQuizmo) = {
     .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { 300.0f, 0.0f, 400.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_JAN, QUIZ_COUNT_JAN, QUIZ_MAP_JAN_03 }},
     .drops = NPC_NO_DROPS,
