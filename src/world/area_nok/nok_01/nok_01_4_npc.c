@@ -126,23 +126,7 @@ EvtScript N(EVS_DoNothing) = {
     EVT_END
 };
 
-EvtScript N(EVS_GetBackIntoShell) = {
-    EVT_CALL(GetNpcYaw, LVar4, LVar1)
-    EVT_SET(LVar2, 30)
-    EVT_IF_GT(LVar1, 151)
-        EVT_IF_LE(LVar1, 331)
-            EVT_SET(LVar2, -30)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_SET(LVar0, 0)
-    EVT_LOOP(15)
-        EVT_ADD(LVar0, LVar2)
-        EVT_CALL(SetNpcRotation, LVar3, 0, 0, LVar0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
+#include "../common/GetIntoShell.inc.c"
 
 Vec2i N(FuzzyJumpPath1)[] = {
     { -255,  399 },
@@ -398,12 +382,12 @@ EvtScript N(EVS_NpcInit_MortT) = {
 
 EvtScript N(EVS_NpcInteract_RelaxedKoopa) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-        EVT_IF_EQ(AF_NOK_09, FALSE)
+        EVT_IF_EQ(AF_NOK01_Dialogue_RelaxedKoopa, FALSE)
             EVT_CALL(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0021)
-            EVT_SET(AF_NOK_09, TRUE)
+            EVT_SET(AF_NOK01_Dialogue_RelaxedKoopa, TRUE)
         EVT_ELSE
             EVT_CALL(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0022)
-            EVT_SET(AF_NOK_09, FALSE)
+            EVT_SET(AF_NOK01_Dialogue_RelaxedKoopa, FALSE)
         EVT_END_IF
         EVT_RETURN
     EVT_END_IF

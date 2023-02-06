@@ -21,7 +21,7 @@ enum {
 };
 
 enum {
-    MV_Unk_00       = MapVar(0),
+    MV_SwitchEntityID   = MapVar(0),
 };
 
 #define NAMESPACE nok_12

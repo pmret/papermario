@@ -15,21 +15,21 @@
 #include "sprite/npc/WorldKooper.h"
 
 enum {
-	NPC_BossFuzzy			= 0,
-	NPC_KoopersShell		= 1,
-	NPC_AmbushFuzzy			= 2,
-	NPC_Fuzzy_01       		= 3,
-	NPC_Fuzzy_02       		= 4,
-	NPC_Fuzzy_03       		= 5,
-	NPC_Kooper      		= 6,
+    NPC_BossFuzzy           = 0,
+    NPC_KoopersShell        = 1,
+    NPC_AmbushFuzzy         = 2,
+    NPC_Fuzzy_01            = 3,
+    NPC_Fuzzy_02            = 4,
+    NPC_Fuzzy_03            = 5,
+    NPC_Kooper              = 6,
 };
 
 enum {
-	MV_Unk_00		= MapVar(0),
-	MV_Unk_01		= MapVar(1),
-	MV_Unk_02		= MapVar(2),
-	MV_Unk_03		= MapVar(3),
-	MV_Unk_04		= MapVar(4),
+    MV_CorrectCount         = MapVar(0),
+    MV_CorrectTreeIndex     = MapVar(1),
+    MV_WrongAnswerBattle    = MapVar(2),
+    MV_LastWrongTreeIndex   = MapVar(3),
+    MV_LastCorrectTreeIndex = MapVar(4), // unused
 };
 
 enum {

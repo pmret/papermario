@@ -103,7 +103,7 @@ EvtScript N(EVS_Scene_BuildBridge) = {
 
 EvtScript N(EVS_SetupBridge) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_MADE_FIRST_BRIDGE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_BuildBridge)), TRIGGER_AREA_FLAG_SET, AF_NOK_01, 1, 0)
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_BuildBridge)), TRIGGER_AREA_FLAG_SET, AF_NOK12_HitSwitch, 1, 0)
         EVT_CALL(TranslateGroup, MODEL_hashi, 0, -320, 0)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o204, COLLIDER_FLAGS_UPPER_MASK)
         EVT_RETURN

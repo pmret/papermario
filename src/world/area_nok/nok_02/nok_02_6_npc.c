@@ -47,23 +47,7 @@ EvtScript N(EVS_DoNothing) = {
     EVT_END
 };
 
-EvtScript N(EVS_GetBackIntoShell) = {
-    EVT_CALL(GetNpcYaw, LVar4, LVar1)
-    EVT_SET(LVar2, 30)
-    EVT_IF_GT(LVar1, 151)
-        EVT_IF_LE(LVar1, 331)
-            EVT_SET(LVar2, -30)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_SET(LVar0, 0)
-    EVT_LOOP(15)
-        EVT_ADD(LVar0, LVar2)
-        EVT_CALL(SetNpcRotation, LVar3, 0, 0, LVar0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
+#include "../common/GetIntoShell.inc.c"
 
 #include "world/common/todo/SwitchToPartner.inc.c"
 
@@ -442,7 +426,7 @@ EvtScript N(EVS_BreakBlock_DropShell) = {
     EVT_ADD(LVar1, 20)
     EVT_SET(LVar3, NPC_KoopaShell_02)
     EVT_SET(LVar4, NPC_Koopa_02)
-    EVT_EXEC(N(EVS_GetBackIntoShell))
+    EVT_EXEC(N(EVS_GetIntoShell))
     EVT_CALL(InterpNpcYaw, LVar3, 60, 0)
     EVT_CALL(NpcJump0, NPC_KoopaShell_02, LVar0, LVar1, LVar2, 30)
     EVT_CALL(SetNpcPos, NPC_KoopaShell_02, NPC_DISPOSE_LOCATION)
