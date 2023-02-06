@@ -9,7 +9,7 @@ NpcSettings N(NpcSettings_JrTroopa) = {
 
 EvtScript N(EVS_NpcAuxAI_Goompa) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
@@ -74,7 +74,7 @@ EvtScript N(EVS_NpcAI_Goompa) = {
                 EVT_CALL(DisablePlayerInput, TRUE)
                 EVT_CALL(N(CheckPartnerFlags1000))
                 EVT_CALL(DisablePartnerAI, 0)
-                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
                 EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Walk)
                 EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(3.0))
                 EVT_CALL(NpcMoveTo, NPC_PARTNER, 420, 6, 0)
@@ -90,12 +90,12 @@ EvtScript N(EVS_NpcAI_Goompa) = {
                     EVT_CALL(PlayerMoveTo, 395, 0, 0)
                     EVT_CALL(InterpPlayerYaw, 90, 0)
                 EVT_END_THREAD
-                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8, TRUE)
                 EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(6.0))
                 EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Run)
                 EVT_CALL(NpcMoveTo, NPC_PARTNER, 582, 6, 0)
                 EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
-                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_ENABLE_HIT_SCRIPT, FALSE)
+                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8, FALSE)
                 EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_61, SOUND_SPACE_MODE_0)
                 EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00AD)
                 EVT_WAIT(10)
@@ -246,7 +246,7 @@ NpcSettings N(NpcSettings_Goompa) = {
     .ai = &N(EVS_NpcAI_Goompa),
     .aux = &N(EVS_NpcAux_Goompa),
     .onDefeat = &N(EVS_NpcDefeat_Goompa),
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100,
 };
 
 EvtScript N(EVS_NpcInit_JrTroopa) = {
@@ -263,7 +263,7 @@ StaticNpc N(NpcData_JrTroopa) = {
     .settings = &N(NpcSettings_JrTroopa),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_800000,
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_JrTroopa),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,

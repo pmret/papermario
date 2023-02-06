@@ -6,14 +6,7 @@
 #include "world/common/complete/GiveReward.inc.c"
 #include "world/common/complete/KeyItemChoice.inc.c"
 
-EvtScript N(EVS_PlayerReact) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
-    EVT_WAIT(20)
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/atomic/MarioSalute.inc.c"
 
 EvtScript N(EVS_NpcInteract_Boo_01) = {
     EVT_SWITCH(GB_StoryProgress)
@@ -125,7 +118,7 @@ EvtScript N(EVS_NpcInteract_Boo_02) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0081)
             EVT_SET(LVar0, 118)
             EVT_SET(LVar1, 1)
-            EVT_EXEC_WAIT(N(GiveKeyReward))
+            EVT_EXEC_WAIT(N(GiveItemReward))
             EVT_CALL(AddKeyItem, ITEM_KOOT_PACKAGE)
             EVT_SET(MV_Unk_00, 0)
             EVT_SET(GF_ARN03_RecievedPackage, TRUE)
@@ -155,8 +148,8 @@ EvtScript N(EVS_NpcInteract_Boo_02) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007E)
     EVT_END_SWITCH
     EVT_IF_EQ(GF_ARN03_RecievedPackage, FALSE)
-        EVT_IF_EQ(GB_KootFavor_Current, 18)
-            EVT_EXEC_WAIT(N(EVS_PlayerReact))
+        EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH7_2)
+            EVT_EXEC_WAIT(N(EVS_MarioSalute))
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007F)
             EVT_CALL(EndSpeech, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0)
             EVT_SET(MV_Unk_00, 0)
@@ -380,7 +373,7 @@ StaticNpc N(NpcData_Boo_01) = {
     .settings = &N(NpcSettings_Boo_Patrol),
     .pos = { 36.0f, 185.0f, 140.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_01),
     .drops = BOO_DROPS,
     .territory = {
@@ -406,7 +399,7 @@ StaticNpc N(NpcData_Boo_02) = {
     .settings = &N(NpcSettings_Boo),
     .pos = { 209.0f, 185.0f, 217.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_02),
     .drops = BOO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
@@ -418,7 +411,7 @@ StaticNpc N(NpcData_Boo_03) = {
     .settings = &N(NpcSettings_Boo_Patrol),
     .pos = { 379.0f, 186.0f, 186.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_03),
     .drops = BOO_DROPS,
     .territory = {
@@ -444,7 +437,7 @@ StaticNpc N(NpcData_Boo_04) = {
     .settings = &N(NpcSettings_Boo),
     .pos = { 544.0f, 235.0f, 128.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_04),
     .drops = BOO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
@@ -456,7 +449,7 @@ StaticNpc N(NpcData_Boo_05) = {
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_05),
     .drops = BOO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
@@ -520,7 +513,7 @@ StaticNpc N(NpcData_Boo_06)[] = {
         .settings = &N(NpcSettings_Boo),
         .pos = { 36.0f, 277.0f, 140.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Boo_06),
         .drops = BOO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
@@ -530,7 +523,7 @@ StaticNpc N(NpcData_Boo_06)[] = {
         .settings = &N(NpcSettings_Boo),
         .pos = { 180.0f, 285.0f, 182.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Boo_07),
         .drops = BOO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
@@ -540,7 +533,7 @@ StaticNpc N(NpcData_Boo_06)[] = {
         .settings = &N(NpcSettings_Boo),
         .pos = { 349.0f, 286.0f, 152.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Boo_08),
         .drops = BOO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
@@ -550,7 +543,7 @@ StaticNpc N(NpcData_Boo_06)[] = {
         .settings = &N(NpcSettings_Boo),
         .pos = { 490.0f, 324.0f, 128.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Boo_09),
         .drops = BOO_DROPS,
         .animations = GUSTY_BOO_ANIMS,

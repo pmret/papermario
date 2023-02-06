@@ -39,7 +39,7 @@ MobileAISettings N(AISettings_MontyMole_WallAmbush) = {
 EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
     EVT_CALL(func_800445D4, LVar0)
     EVT_IF_EQ(LVar0, 100)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 1)
+        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
         EVT_LABEL(10)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar2, 130)
@@ -56,7 +56,7 @@ EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
         EVT_CALL(SetNpcPos, LVar0, LVar1, LVar2, LVar3)
         EVT_WAIT(1)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_4, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Anim0E)
         EVT_CALL(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
@@ -65,8 +65,8 @@ EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
         EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.7))
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_SELF, LVar1, LVar2, LVar3, 20)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, FALSE)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 0)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
         EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
         EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_40000000, 1)
     EVT_END_IF

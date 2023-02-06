@@ -147,7 +147,7 @@ void spawn_drops(Enemy* enemy) {
         s32 temp = var_s1 + 1;
         var_s1 = temp + rand_int(2);
     }
-    if (enemy->flags & ENEMY_FLAG_800000) {
+    if (enemy->flags & ENEMY_FLAG_NO_DROPS) {
         var_s1 = 0;
     }
     if (var_s1 != 0) {
@@ -204,7 +204,7 @@ void spawn_drops(Enemy* enemy) {
         s32 temp = var_s1 + 1;
         var_s1 = temp + rand_int(2);
     }
-    if (enemy->flags & ENEMY_FLAG_800000) {
+    if (enemy->flags & ENEMY_FLAG_NO_DROPS) {
         var_s1 = 0;
     }
     if (var_s1 != 0) {
@@ -274,7 +274,7 @@ void spawn_drops(Enemy* enemy) {
     if (var_s1 > 20) {
         var_s1 = 20;
     }
-    if (enemy->flags & ENEMY_FLAG_800000) {
+    if (enemy->flags & ENEMY_FLAG_NO_DROPS) {
         var_s1 = 0;
     }
     if (var_s1 * 2 > sp28) {
@@ -334,7 +334,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
 
     amt += currentEncounter->coinsEarned;
 
-    if (enemy->flags & (ENEMY_FLAG_800000 | ENEMY_FLAG_40000)) {
+    if (enemy->flags & (ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_40000)) {
         amt = 0;
     }
 
@@ -389,7 +389,7 @@ s32 func_80048F0C(void) {
             for (j = 0; j < encounter->count; j++) {
                 Enemy* enemy = encounter->enemy[j];
 
-                if (enemy != NULL && !(enemy->flags & ENEMY_FLAG_20)) {
+                if (enemy != NULL && !(enemy->flags & ENEMY_FLAG_DISABLE_AI)) {
                     get_npc_unsafe(enemy->npcID);
                 }
             }
@@ -867,10 +867,10 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
             npc->flags |= NPC_FLAG_GRAVITY;
-            npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags &= ~NPC_FLAG_8;
         } else {
             npc->flags &= ~NPC_FLAG_GRAVITY;
-            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags |= NPC_FLAG_8;
         }
 
         if (enemy->aiFlags & ENEMY_AI_FLAG_4) {

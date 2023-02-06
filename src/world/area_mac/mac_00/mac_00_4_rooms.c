@@ -6,7 +6,7 @@ EvtScript N(EVS_SetDoorRot_RussHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_RussHouse) = {
+EvtScript N(EVS_SetWallRot_RussHouse) = {
     EVT_SET(LVar1, LVar0)
     EVT_MULF(LVar1, EVT_FLOAT(-2.0))
     EVT_CALL(RotateModel, MODEL_o201, LVar1, 0, 1, 0)
@@ -37,12 +37,12 @@ EvtScript N(EVS_DropDoor_RussHouse) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_RussHouse) = {
+EvtScript N(EVS_RoomListener_RussHouse) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_intel_inn, 1)
             EVT_SET(MF_MusicMixTrigger1, TRUE)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_intel_inn, 0)
             EVT_SET(MF_MusicMixTrigger1, FALSE)
     EVT_END_SWITCH
@@ -56,7 +56,7 @@ EvtScript N(EVS_SetDoorRot_Shop) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_Shop) = {
+EvtScript N(EVS_SetWallRot_Shop) = {
     EVT_SET(LVar1, LVar0)
     EVT_CALL(RotateModel, MODEL_o370, LVar1, 1, 0, 0)
     EVT_CALL(RotateModel, MODEL_o371, LVar1, 1, 0, 0)
@@ -71,13 +71,14 @@ EvtScript N(EVS_MoveWalls_Shop) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_Shop) = {
+EvtScript N(EVS_RoomListener_Shop) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_shop_in, 1)
             EVT_CALL(EnableModel, MODEL_o375, FALSE)
-        EVT_CASE_EQ(2)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_shop_in, 0)
             EVT_CALL(EnableModel, MODEL_o375, TRUE)
     EVT_END_SWITCH
@@ -91,7 +92,7 @@ EvtScript N(EVS_SetDoorRot_Dojo) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_Dojo) = {
+EvtScript N(EVS_SetWallRot_Dojo) = {
     EVT_SET(LVar1, LVar0)
     EVT_MULF(LVar1, EVT_FLOAT(2.0))
     EVT_CALL(RotateModel, MODEL_o159, LVar1, 0, 1, 0)
@@ -108,12 +109,12 @@ EvtScript N(EVS_DropDoor_Dojo) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_Dojo) = {
+EvtScript N(EVS_RoomListener_Dojo) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_minka_inn, 1)
             EVT_SET(MF_MusicMixTrigger2, TRUE)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_minka_inn, 0)
             EVT_CALL(EnableMusicProximityMix, 0)
             EVT_SET(MF_MusicMixTrigger2, FALSE)
@@ -128,7 +129,7 @@ EvtScript N(EVS_SetDoorRot_Waterfront) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_Waterfront) = {
+EvtScript N(EVS_SetWallRot_Waterfront) = {
     EVT_SET(LVar1, LVar0)
     EVT_CALL(RotateModel, MODEL_o437, LVar1, 1, 0, 0)
     EVT_CALL(RotateModel, MODEL_o453, LVar1, 1, 0, 0)
@@ -143,9 +144,9 @@ EvtScript N(EVS_MoveWalls_Waterfront) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_Waterfront) = {
+EvtScript N(EVS_RoomListener_Waterfront) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SWITCH(GB_StoryProgress)
                 EVT_CASE_RANGE(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_BEGAN_PEACH_MISSION)
                     EVT_EXEC(N(EVS_WaterfrontHouse_DoorLocked))
@@ -153,7 +154,7 @@ EvtScript N(EVS_ToggleVis_Waterfront) = {
                 EVT_CASE_DEFAULT
                     EVT_CALL(SetGroupEnabled, MODEL_minka2_inn, 1)
             EVT_END_SWITCH
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_minka2_inn, 0)
     EVT_END_SWITCH
     EVT_RETURN
@@ -189,52 +190,52 @@ s32 N(InteriorNPCs_WaterfrontHouse)[] = {
 
 EvtScript N(EVS_SetupRooms) = {
     // RussT's house
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_0),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_RussHouse)),
-        EVT_PTR(N(EVS_MoveWalls_RussHouse)),
+        EVT_PTR(N(EVS_SetWallRot_RussHouse)),
         EVT_PTR(N(EVS_DropDoor_RussHouse)),
-        EVT_PTR(N(EVS_ToggleVis_RussHouse)),
+        EVT_PTR(N(EVS_RoomListener_RussHouse)),
         COLLIDER_deilit3,
         COLLIDER_deilit3u,
         MODEL_intel_house,
         EVT_PTR(N(InteriorNPCs_RussHouse)))
     // harry's shop
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_1, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_Shop)),
-        EVT_PTR(N(EVS_MoveWalls_Shop)),
+        EVT_PTR(N(EVS_SetWallRot_Shop)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_Shop)),
+        EVT_PTR(N(EVS_RoomListener_Shop)),
         COLLIDER_deilit5, COLLIDER_deilit5u, MODEL_omise, EVT_PTR(N(InteriorNPCs_Shop)))
     // the dojo
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_Dojo)),
-        EVT_PTR(N(EVS_MoveWalls_Dojo)),
+        EVT_PTR(N(EVS_SetWallRot_Dojo)),
         EVT_PTR(N(EVS_DropDoor_Dojo)),
-        EVT_PTR(N(EVS_ToggleVis_Dojo)),
+        EVT_PTR(N(EVS_RoomListener_Dojo)),
         COLLIDER_deilit6,
         COLLIDER_deilit6u,
         MODEL_minka_1,
         EVT_PTR(N(InteriorNPCs_Dojo)))
     // the waterfront house
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_2),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_Waterfront)),
-        EVT_PTR(N(EVS_MoveWalls_Waterfront)),
+        EVT_PTR(N(EVS_SetWallRot_Waterfront)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_Waterfront)),
+        EVT_PTR(N(EVS_RoomListener_Waterfront)),
         COLLIDER_deilit4,
         COLLIDER_deilit4u,
         MODEL_minka2,
         EVT_PTR(N(InteriorNPCs_WaterfrontHouse)))
     // initial visibility
     EVT_SET(LVar0, VIS_GROUP_3)
-    EVT_EXEC(N(EVS_ToggleVis_RussHouse))
-    EVT_EXEC(N(EVS_ToggleVis_Waterfront))
-    EVT_EXEC(N(EVS_ToggleVis_Shop))
-    EVT_EXEC(N(EVS_ToggleVis_Dojo))
+    EVT_EXEC(N(EVS_RoomListener_RussHouse))
+    EVT_EXEC(N(EVS_RoomListener_Waterfront))
+    EVT_EXEC(N(EVS_RoomListener_Shop))
+    EVT_EXEC(N(EVS_RoomListener_Dojo))
     EVT_RETURN
     EVT_END
 };

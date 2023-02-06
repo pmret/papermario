@@ -155,14 +155,14 @@ API_CALLABLE(N(func_80241E24_97F8F4)) {
 }
 
 EvtScript N(EVS_NpcIdle_StoneChomp) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
     EVT_LABEL(100)
     EVT_IF_EQ(GF_ISK05_Hammer2Block, FALSE)
         EVT_WAIT(1)
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(PlaySound, SOUND_A)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_20, 0)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_266, SOUND_SPACE_MODE_0)

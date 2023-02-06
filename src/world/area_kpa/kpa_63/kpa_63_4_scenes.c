@@ -113,7 +113,7 @@ EvtScript N(EVS_Starship_Depart) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_ADD(LVar2, 10)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40 | NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcJumpscale, NPC_PARTNER, 1)
     EVT_CALL(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 15)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
@@ -139,7 +139,7 @@ EvtScript N(EVS_Starship_Depart) = {
             EVT_CALL(NpcJump0, NPC_PARTNER, -65, 0, 225, 13)
         EVT_END_IF
         EVT_CALL(EnableNpcShadow, NPC_PARTNER, TRUE)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
         EVT_CALL(EnablePartnerAI)
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_RETURN

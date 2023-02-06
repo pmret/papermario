@@ -2206,7 +2206,7 @@ s32 partner_put_away(Npc* partner) {
             tempMoveToY = partner->pos.y;
             tempMoveToZ = partner->pos.z;
             partner->flags &= ~NPC_FLAG_GRAVITY;
-            partner->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+            partner->flags &= ~NPC_FLAG_8;
             tempPosX = playerStatus->position.x;
             partner->moveToPos.x = tempPosX;
             tempPosY = playerStatus->position.y + (playerStatus->colliderHeight / 2);
@@ -2431,8 +2431,8 @@ void func_800EF3E4(void) {
     D_8010CFCE = 0;
 }
 
-void func_800EF414(s32 arg0, s32 arg1) {
-    partner_set_goal_pos(arg0, arg1);
+void func_800EF414(s32 posX, s32 posZ) {
+    partner_set_goal_pos(posX, posZ);
     wPartnerFollowState = 20;
 }
 
@@ -2599,7 +2599,7 @@ void partner_move_to_goal(Npc* partner, s32 isFlying) {
                 }
                 func_8003D660(partner, var_a1);
             } else {
-                partner->flags &= ~NPC_FLAG_40;
+                partner->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
                 partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                 D_8010CFCE++;
             }

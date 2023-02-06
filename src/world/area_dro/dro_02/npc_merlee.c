@@ -119,7 +119,7 @@ API_CALLABLE(N(DarkenWorld)) {
         for (i = 0; i < MAX_NPCS; i++) {
             Npc* npc = get_npc_by_index(i);
             if (npc != 0 && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != NPC_Merlee) {
-                npc->flags |= NPC_FLAG_NO_DROPS;
+                npc->flags |= NPC_FLAG_HIDING;
             }
         }
         script->functionTemp[0] = 0;
@@ -157,7 +157,7 @@ API_CALLABLE(N(UndarkenWorld)) {
             Npc* npc = get_npc_by_index(i);
 
             if (npc != NULL && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != NPC_Merlee) {
-                npc->flags &= ~NPC_FLAG_NO_DROPS;
+                npc->flags &= ~NPC_FLAG_HIDING;
             }
         }
         return ApiStatus_DONE2;
@@ -763,7 +763,7 @@ EvtScript N(EVS_NpcInteract_Merlee) = {
     EVT_CALL(func_802D2C14, 1)
     EVT_EXEC_WAIT(N(EVS_BeginMerleeCamera))
     EVT_SET(LVar0, 0)
-    EVT_IF_EQ(GB_KootFavor_Current, 8)
+    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH4_1)
         EVT_ADD(LVar0, 1)
     EVT_END_IF
     EVT_IF_EQ(GF_HOS06_MerluvleeRequestedCrystalBall, 1)
@@ -776,7 +776,7 @@ EvtScript N(EVS_NpcInteract_Merlee) = {
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DC)
         EVT_SET(LVar0, ITEM_CRYSTAL_BALL)
         EVT_SET(LVar1, 1)
-        EVT_EXEC_WAIT(N(GiveKeyReward))
+        EVT_EXEC_WAIT(N(GiveItemReward))
         EVT_CALL(AddKeyItem, ITEM_CRYSTAL_BALL)
         EVT_SET(GF_DRO01_Gift_CrystalBall, 1)
         EVT_WAIT(20)

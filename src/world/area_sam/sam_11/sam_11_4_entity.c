@@ -49,17 +49,17 @@ API_CALLABLE(N(UpdateHouseShowHide)) {
 }
 
 API_CALLABLE(N(SetEntityHideMode1)) {
-    gEntityHideMode = 1;
+    gEntityHideMode = ENTITY_HIDE_MODE_1;
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(SetEntityHideMode2)) {
-    gEntityHideMode = 2;
+    gEntityHideMode = ENTITY_HIDE_MODE_2;
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(SetEntityHideMode0)) {
-    gEntityHideMode = 0;
+    gEntityHideMode = ENTITY_HIDE_MODE_0;
     return ApiStatus_DONE2;
 }
 

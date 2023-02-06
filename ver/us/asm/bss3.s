@@ -76,7 +76,7 @@ dlabel gEntityHeapBottom
 dlabel D_80151304
 .space 4
 
-dlabel gCurrentAdvancedDoorSoundsSet
+dlabel gCurrentRoomDoorSounds
 .space 4
 
 dlabel gMsgBGScrollAmtY
@@ -121,7 +121,7 @@ dlabel D_80151338
 dlabel gHudElementCacheSize
 .space 4
 
-dlabel gCurrentDoorSoundsSet
+dlabel gCurrentDoorSounds
 .space 4
 
 dlabel D_80151344

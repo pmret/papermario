@@ -43,7 +43,7 @@ EvtScript N(D_802525B0_864720) = {
         EVT_CASE_EQ(0)
             EVT_CALL(SetMusicTrack, 0, SONG_CLUB64, 0, 8)
             EVT_CALL(StopSound, SOUND_80000058)
-            EVT_CALL(func_802D62E4, 57)
+            EVT_CALL(func_802D62E4, SOUND_39)
             EVT_CALL(EnableGroup, MODEL_bar_inn, TRUE)
             EVT_CALL(EnableModel, MODEL_o139, FALSE)
             EVT_CALL(EnableModel, MODEL_o140, FALSE)
@@ -68,8 +68,17 @@ s32 N(D_802526C8_864838)[] = {
     -1
 };
 
-EvtScript N(EVS_802526E0) = {
-    EVT_CALL(MakeDoorAdvanced, 2, EVT_PTR(N(D_802522E0_864450)), EVT_PTR(N(D_80252310_864480)), EVT_PTR(N(D_80252580_8646F0)), EVT_PTR(N(D_802525B0_864720)), COLLIDER_deilit1, COLLIDER_deilit1u, MODEL_harbour_club, EVT_PTR(N(D_802526C8_864838)))
+EvtScript N(EVS_SetupRooms) = {
+    EVT_CALL(CreateMapRoom,
+        2,
+        EVT_PTR(N(D_802522E0_864450)),
+        EVT_PTR(N(D_80252310_864480)),
+        EVT_PTR(N(D_80252580_8646F0)),
+        EVT_PTR(N(D_802525B0_864720)),
+        COLLIDER_deilit1,
+        COLLIDER_deilit1u,
+        MODEL_harbour_club,
+        EVT_PTR(N(D_802526C8_864838)))
     EVT_SET(LVar0, 3)
     EVT_EXEC(N(D_802525B0_864720))
     EVT_RETURN

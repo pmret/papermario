@@ -13,7 +13,7 @@ void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift)
 void snd_stop_sound(s32 soundID);
 void snd_reset(void);
 void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan);
-AuResult snd_ambient_load_sound(s32 arg0);
+AuResult snd_load_ambient(s32 arg0);
 AuResult snd_ambient_play(s32 arg0, s32 arg1);
 AuResult snd_ambient_stop_quick(s32 arg0);
 AuResult snd_ambient_stop_slow(s32 arg0, s32 arg1);

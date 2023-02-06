@@ -293,8 +293,8 @@ void sfx_compute_spatialized_sound_params_full(f32 x, f32 y, f32 z, s16* volume,
 }
 
 void sfx_reset_door_sounds(void) {
-    gCurrentDoorSoundsSet = 0;
-    gCurrentAdvancedDoorSoundsSet = 0;
+    gCurrentDoorSounds = 0;
+    gCurrentRoomDoorSounds = 0;
 }
 
 void sfx_clear_sounds(void) {
@@ -460,19 +460,17 @@ void sfx_play_sound_with_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
 
     if (soundID & SOUND_TYPE_SPECIAL) {
         s32 soundIndex = soundID & 0xFF;
-        s32 soundType = ((u32)soundID >> 0x1C) & 7;
+        s32 soundType = (soundID & 0x70000000) >> 0x1C;
         switch (soundType) {
             case SOUND_TYPE_LOOPING:
                 // 0x8xxxxxxx
                 sfx_play_sound_looping(LoopingSounds[soundIndex], volume, pan, pitchShift);
                 return;
-            case SOUND_TYPE_DOOR1:
-                // 0x9xxxxxxx
-                soundID = OpenCloseSounds[gCurrentDoorSoundsSet][soundIndex];
+            case SOUND_TYPE_EXIT_DOOR:
+                soundID = OpenCloseSounds[gCurrentDoorSounds][soundIndex];
                 break;
-            case SOUND_TYPE_DOOR2:
-                // 0xAxxxxxxx
-                soundID = OpenCloseSounds[gCurrentAdvancedDoorSoundsSet][soundIndex];
+            case SOUND_TYPE_ROOM_DOOR:
+                soundID = OpenCloseSounds[gCurrentRoomDoorSounds][soundIndex];
                 break;
             case SOUND_TYPE_ALTERNATING:
                 // 0xBxxxxxxx

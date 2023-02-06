@@ -48,7 +48,7 @@ extern EvtScript N(EVS_SetupMusic);
 extern EvtScript N(EVS_PlayRestMusic);
 extern EvtScript N(EVS_PlayMoustafaMusic);
 
-extern EvtScript N(EVS_SetupBuildings);
+extern EvtScript N(EVS_SetupRooms);
 extern EvtScript N(8024D434);
 
 #endif

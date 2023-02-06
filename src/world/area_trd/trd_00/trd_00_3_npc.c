@@ -49,7 +49,7 @@ EvtScript N(EVS_NpcIdle_KoopaBros) = {
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Anim03)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.5))
     EVT_CALL(NpcMoveTo, NPC_SELF, -556, 180, 0)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
@@ -309,7 +309,7 @@ StaticNpc N(NpcData_KoopaBros) = {
     .settings = &N(NpcSettings_KoopaBros),
     .pos = { -469.0f, 0.0f, 101.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_KoopaBros),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -341,7 +341,7 @@ StaticNpc N(NpcData_Eldstar) = {
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Eldstar),
     .drops = ELDSTAR_DROPS,
     .territory = {

@@ -106,7 +106,7 @@ s32 _create_npc(NpcBlueprint* blueprint, AnimID* animList, s32 skipLoadingAnims)
     gNpcCount++;
     ASSERT(npc != NULL);
 
-    npc->flags = blueprint->flags | (NPC_FLAG_400000 | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW | NPC_FLAG_PASSIVE);
+    npc->flags = blueprint->flags | (NPC_FLAG_400000 | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW | NPC_FLAG_1);
     if (skipLoadingAnims) {
         npc->flags |= NPC_FLAG_NO_ANIMS_LOADED;
     }
@@ -284,11 +284,11 @@ void npc_do_world_collision(Npc* npc) {
     f32 temp_y;
     f32 temp_z;
 
-    if (npc->flags & NPC_FLAG_40) {
-        npc->flags |= NPC_FLAG_8000000;
+    if (npc->flags & NPC_FLAG_IGNORE_WORLD_COLLISION) {
+        npc->flags |= NPC_FLAG_WORLD_COLLISION_DIRTY;
     } else if ((npc->pos.x != npc->colliderPos.x) || (npc->pos.y != npc->colliderPos.y)
-               || (npc->pos.z != npc->colliderPos.z) || npc->flags & NPC_FLAG_8000000) {
-        npc->flags &= ~NPC_FLAG_8000000;
+               || (npc->pos.z != npc->colliderPos.z) || npc->flags & NPC_FLAG_WORLD_COLLISION_DIRTY) {
+        npc->flags &= ~NPC_FLAG_WORLD_COLLISION_DIRTY;
         temp_f0 = clamp_angle(npc->yaw);
         temp_x = npc->pos.x;
         temp_y = npc->pos.y;
@@ -488,7 +488,7 @@ void npc_do_gravity(Npc* npc) {
 }
 
 s32 func_800397E8(Npc* npc, f32 arg1) {
-    if (!(npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_ENABLE_HIT_SCRIPT))) {
+    if (!(npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_8))) {
         f32 x;
         f32 y;
         f32 z;
@@ -598,7 +598,7 @@ void update_npcs(void) {
                         x = npc->pos.x;
                         y = npc->pos.y;
                         z = npc->pos.z;
-                        if (!(npc->flags & NPC_FLAG_NO_AI)) {
+                        if (!(npc->flags & NPC_FLAG_20)) {
                             if (
                                 x != npc->colliderPos.x ||
                                 y != npc->colliderPos.y ||
@@ -873,19 +873,19 @@ void render_npcs(void) {
                     renderTaskPtr->appendGfx = appendGfx_npc;
                     renderTaskPtr->renderMode = npc->renderMode;
 
-                    if (npc->flags & NPC_FLAG_NO_DROPS) {
+                    if (npc->flags & NPC_FLAG_HIDING) {
                         u8 r, g, b, a;
                         get_background_color_blend(&r, &g, &b, &a);
-                        npc->alpha2 = 0xFF - a;
+                        npc->alpha2 = 255 - a;
                     } else {
-                        npc->alpha2 = 0xFF;
+                        npc->alpha2 = 255;
                     }
 
                     if (npc->alpha2 != 0) {
                         queue_render_task(renderTaskPtr);
                     }
 
-                    if ((npc->flags & NPC_FLAG_MOTION_BLUR) != 0) {
+                    if (npc->flags & NPC_FLAG_MOTION_BLUR) {
                         renderTaskPtr->distance = -phi_f20;
                         renderTaskPtr->appendGfx = appendGfx_npc_blur;
                         renderTaskPtr->appendGfxArg = npc;
@@ -1947,7 +1947,7 @@ s32 npc_find_standing_on_entity(s32 entityIndex) {
         if (npc->pos.y < y) {
             continue;
         }
-        if (npc->flags & (NPC_FLAG_8000 | NPC_FLAG_ENABLE_HIT_SCRIPT)) {
+        if (npc->flags & (NPC_FLAG_8000 | NPC_FLAG_8)) {
             var_v1 = npc_get_collider_below(npc);
             if (var_v1 != 0) {
                 if (idx == var_v1) {
@@ -2535,8 +2535,8 @@ void kill_enemy(Enemy* enemy) {
 
     do {
         if (!(enemy->flags & ENEMY_FLAG_4)) {
-            if (!(enemy->flags & ENEMY_FLAG_8) || (enemy == encounterStatus->currentEnemy)) {
-                if (!(enemy->flags & ENEMY_FLAG_1)) {
+            if (!(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || (enemy == encounterStatus->currentEnemy)) {
+                if (!(enemy->flags & ENEMY_FLAG_PASSIVE)) {
                     if (!(enemy->flags & ENEMY_FLAG_FLED)) {
                         COPY_set_defeated(encounterStatus->mapID, encounter->encounterID + i);
                     }

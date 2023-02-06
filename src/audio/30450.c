@@ -269,8 +269,8 @@ void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan) {
     au_sfx_enqueue_event(soundManager, soundID, volume, pitchShift, pan);
 }
 
-AuResult snd_ambient_load_sound(s32 ambSoundID) {
-    return au_load_ambient_sound(ambSoundID);
+AuResult snd_load_ambient(s32 ambSoundID) {
+    return au_ambient_load(ambSoundID);
 }
 
 AuResult snd_ambient_play(s32 index, s32 fadeInTime) {
@@ -372,7 +372,7 @@ AuResult snd_ambient_enable(s32 index) {
     return status;
 }
 
-
+// snd_ambient_init_tracks ?
 void snd_ambient_80055760(s32 index) {
     u32 i;
     s32 lim = 4;
@@ -417,7 +417,7 @@ AuResult snd_ambient_play_only(s32 index) {
             if (i == index) {
                 status = snd_ambient_enable(i);
             } else {
-                status = snd_ambient_disable(i);
+                status = snd_ambient_disable(i); // mute
             }
 
             if (status != AU_RESULT_OK) {

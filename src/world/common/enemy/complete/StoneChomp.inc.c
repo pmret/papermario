@@ -15,8 +15,8 @@ API_CALLABLE(N(StoneChompFXA)) {
     blurData = heap_malloc(8 * sizeof(*blurData));
     npc->blur.chomp = blurData;
 
-    bp.flags = NPC_FLAG_8000 | NPC_FLAG_100 | NPC_FLAG_40
-        | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_2;
+    bp.flags = NPC_FLAG_8000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION
+        | NPC_FLAG_8 | NPC_FLAG_2;
     bp.initialAnim = ANIM_StoneChomp_Anim02;
     bp.onUpdate = NULL;
     bp.onRender = NULL;

@@ -630,31 +630,31 @@ EvtScript N(EVS_SlotMachine_MainUpdate) = {
                         EVT_CALL(SetNpcPos, NPC_ShyGuy_Jackpot1, 485, 130, -50)
                         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_Jackpot1, EVT_FLOAT(0.8))
                         EVT_CALL(NpcJump0, NPC_ShyGuy_Jackpot1, 460, 0, 50, 30)
-                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot1, NPC_FLAG_40, FALSE)
+                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot1, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
                     EVT_END_THREAD
                     EVT_THREAD
                         EVT_CALL(SetNpcPos, NPC_ShyGuy_Jackpot2, 510, 130, -50)
                         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_Jackpot2, EVT_FLOAT(0.8))
                         EVT_CALL(NpcJump0, NPC_ShyGuy_Jackpot2, 497, 0, 50, 30)
-                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot2, NPC_FLAG_40, FALSE)
+                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot2, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
                     EVT_END_THREAD
                     EVT_THREAD
                         EVT_CALL(SetNpcPos, NPC_ShyGuy_Jackpot3, 535, 130, -50)
                         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_Jackpot3, EVT_FLOAT(0.8))
                         EVT_CALL(NpcJump0, NPC_ShyGuy_Jackpot3, 535, 0, 50, 30)
-                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot3, NPC_FLAG_40, FALSE)
+                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot3, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
                     EVT_END_THREAD
                     EVT_THREAD
                         EVT_CALL(SetNpcPos, NPC_ShyGuy_Jackpot4, 560, 130, -50)
                         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_Jackpot4, EVT_FLOAT(0.8))
                         EVT_CALL(NpcJump0, NPC_ShyGuy_Jackpot4, 573, 0, 50, 30)
-                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot4, NPC_FLAG_40, FALSE)
+                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot4, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
                     EVT_END_THREAD
                     EVT_THREAD
                         EVT_CALL(SetNpcPos, NPC_ShyGuy_Jackpot5, 585, 130, -50)
                         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_Jackpot5, EVT_FLOAT(0.8))
                         EVT_CALL(NpcJump0, NPC_ShyGuy_Jackpot5, 610, 0, 50, 30)
-                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot5, NPC_FLAG_40, FALSE)
+                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot5, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
                     EVT_END_THREAD
                     EVT_WAIT(20)
                 EVT_CASE_EQ(SLOT_MATCH_TWO)
@@ -663,13 +663,13 @@ EvtScript N(EVS_SlotMachine_MainUpdate) = {
                         EVT_CALL(SetNpcPos, NPC_ShyGuy_Jackpot2, 510, 130, -50)
                         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_Jackpot2, EVT_FLOAT(0.8))
                         EVT_CALL(NpcJump0, NPC_ShyGuy_Jackpot2, 497, 0, 50, 30)
-                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot2, NPC_FLAG_40, FALSE)
+                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot2, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
                     EVT_END_THREAD
                     EVT_THREAD
                         EVT_CALL(SetNpcPos, NPC_ShyGuy_Jackpot4, 560, 130, -50)
                         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_Jackpot4, EVT_FLOAT(0.8))
                         EVT_CALL(NpcJump0, NPC_ShyGuy_Jackpot4, 573, 0, 50, 30)
-                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot4, NPC_FLAG_40, FALSE)
+                        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_Jackpot4, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
                     EVT_END_THREAD
                     EVT_WAIT(20)
                 EVT_CASE_DEFAULT

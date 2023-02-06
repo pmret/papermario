@@ -114,7 +114,7 @@ static void N(MontyMoleAI_Wander)(Evt* script, MobileAISettings* aiSettings, Ene
         }
         script->functionTemp[1]--;
     }
-    if (!(npc->flags & (NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_1000))) {
+    if (!(npc->flags & (NPC_FLAG_8 | NPC_FLAG_1000))) {
         npc->homePos.x = npc->pos.x;
         npc->homePos.z = npc->pos.z;
     }
@@ -128,7 +128,7 @@ static void N(MontyMoleAI_PreSurface)(Evt* script, MobileAISettings* aiSettings,
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
-    npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
+    npc->flags &= ~NPC_FLAG_2;
     ai_enemy_play_sound(npc, SOUND_BURROW_SURFACE, 0);
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     npc->currentAnim = ANIM_MontyMole_Anim10; // emerge from ground
@@ -245,7 +245,7 @@ ApiStatus N(MontyMoleAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->AI_TEMP_STATE = AI_STATE_MOLE_INIT;
         npc->duration = 0;
-        npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING);
+        npc->flags &= ~NPC_FLAG_JUMPING;
         enemy->aiFlags |= (ENEMY_AI_FLAG_8 | ENEMY_AI_FLAG_10);
     }
     

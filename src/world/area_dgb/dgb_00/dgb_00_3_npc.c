@@ -17,7 +17,7 @@ NpcSettings N(NpcSettings_Sentinel) = {
     .level = 99,
 };
 
-EvtScript N(EVS_OpenDoors) = {
+EvtScript N(EVS_SetDoorRots) = {
     EVT_SET(LVar3, 0)
     EVT_SUB(LVar3, LVar2)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deiliwt, COLLIDER_FLAGS_UPPER_MASK)
@@ -262,7 +262,7 @@ EvtScript N(EVS_Scene_BoosApproachManor) = {
     EVT_CALL(InterpPlayerYaw, 270, 1)
     EVT_CALL(SetNpcPos, NPC_PARTNER, 350, 10, -150)
     EVT_SET(LVar2, 1)
-    EVT_EXEC_WAIT(N(EVS_OpenDoors))
+    EVT_EXEC_WAIT(N(EVS_SetDoorRots))
     EVT_RETURN
     EVT_END
 };
@@ -445,7 +445,7 @@ StaticNpc N(NpcData_Boo_01) = {
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Boo_01),
     .drops = BOO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
@@ -457,7 +457,7 @@ StaticNpc N(NpcData_Boo_02) = {
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_02),
     .drops = BOO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
@@ -468,7 +468,7 @@ StaticNpc N(NpcData_Boo_03) = {
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_03),
     .drops = BOO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
@@ -479,7 +479,7 @@ StaticNpc N(NpcData_Boo_04) = {
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_04),
     .drops = BOO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
@@ -490,7 +490,7 @@ StaticNpc N(NpcData_Boo_05) = {
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_05),
     .drops = BOO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
@@ -501,7 +501,7 @@ StaticNpc N(NpcData_Boo_06) = {
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_06),
     .drops = BOO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
@@ -534,7 +534,7 @@ EvtScript N(EVS_Scene_ThrownOutBySentinel) = {
     EVT_WAIT(20)
     EVT_THREAD
         EVT_SET(LVar2, 1)
-        EVT_EXEC(N(EVS_OpenDoors))
+        EVT_EXEC(N(EVS_SetDoorRots))
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_THREAD
@@ -658,7 +658,7 @@ StaticNpc N(NpcData_Sentinel) = {
     .settings = &N(NpcSettings_Sentinel),
     .pos = { 0.0f, 0.0f, -1000.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Sentinel),
     .drops = SENTINEL_DROPS,
     .animations = SENTINEL_ANIMS,

@@ -295,7 +295,7 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         npc->flags &= ~NPC_FLAG_GRAVITY;
-        npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+        npc->flags |= NPC_FLAG_8;
         npc->flags |= NPC_FLAG_200000;
         enemy->flags |= ENEMY_FLAG_200000;
         enemy->varTable[1] = npc->pos.y * 100.0;

@@ -644,7 +644,7 @@ BGMPlayer* func_80053F64(s32 arg0) {
 
 #define SBN_LOOKUP(i,fmt,e) (au_fetch_SBN_file(globals->mseqFileList[AmbientSoundIDtoMSEQFileIndex[i]], fmt, &e))
 
-AuResult au_load_ambient_sound(u32 ambSoundID) {
+AuResult au_ambient_load(u32 ambSoundID) {
     AmbienceManager* manager;
     SBNFileEntry fileEntry;
     AuGlobals* globals;
@@ -653,7 +653,7 @@ AuResult au_load_ambient_sound(u32 ambSoundID) {
 
     globals = gSoundGlobals;
     manager = gAuAmbienceManager;
-    if (ambSoundID < 16) {
+    if (ambSoundID < AMBIENT_RADIO) {
         if (manager->players[0].mseqName == 0 && SBN_LOOKUP(ambSoundID, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
             au_read_rom(fileEntry.offset, globals->dataMSEQ[0], fileEntry.data & 0xFFFFFF);
             manager->mseqFiles[0] = globals->dataMSEQ[0];

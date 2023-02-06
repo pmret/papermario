@@ -564,7 +564,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_01, EVT_FLOAT(1.0))
         EVT_ADD(LVar2, 60)
         EVT_CALL(NpcJump0, NPC_ShyGuy_01, LVar0, 0, LVar2, 20)
-        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_01, NPC_FLAG_40, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_01, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_END_THREAD
     EVT_WAIT(3)
     EVT_THREAD
@@ -584,7 +584,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_02, EVT_FLOAT(1.0))
         EVT_ADD(LVar2, 60)
         EVT_CALL(NpcJump0, NPC_ShyGuy_02, LVar0, 0, LVar2, 20)
-        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_02, NPC_FLAG_40, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_02, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_END_THREAD
     EVT_WAIT(3)
     EVT_THREAD
@@ -604,7 +604,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_03, EVT_FLOAT(1.0))
         EVT_ADD(LVar2, 60)
         EVT_CALL(NpcJump0, NPC_ShyGuy_03, LVar0, 0, LVar2, 20)
-        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_03, NPC_FLAG_40, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_03, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_END_THREAD
     EVT_WAIT(3)
     EVT_THREAD
@@ -624,7 +624,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_04, EVT_FLOAT(1.0))
         EVT_ADD(LVar2, 60)
         EVT_CALL(NpcJump0, NPC_ShyGuy_04, LVar0, 0, LVar2, 20)
-        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_04, NPC_FLAG_40, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_04, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
         EVT_CALL(ResetCam, CAM_DEFAULT, 1)
         EVT_EXEC(N(EVS_ResetBoxesAfterAmbush))
     EVT_END_THREAD

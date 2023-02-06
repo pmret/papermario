@@ -110,7 +110,6 @@ EvtScript N(EVS_MonitorDemoState) = {
 
 s32 N(DemoInitState) = 0;
 
-// duplicate of SetupDemoScene from trd_09
 API_CALLABLE(N(SetupDemoScene)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 

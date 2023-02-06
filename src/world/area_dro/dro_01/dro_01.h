@@ -43,7 +43,7 @@ extern EvtScript N(EVS_MakeEntities);
 extern NpcGroupList N(DefaultNPCs);
 extern NpcGroupList N(Chapter3NPCs);
 
-extern EvtScript N(EVS_SetupBuildings);
+extern EvtScript N(EVS_SetupRooms);
 extern EvtScript N(EVS_SwingSign_Shop);
 extern EvtScript N(EVS_OpenShopDoor);
 extern EvtScript N(EVS_CloseShopDoor);

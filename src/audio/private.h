@@ -56,7 +56,7 @@ void au_get_bgm_player(u32 playerIndex, BGMPlayer** outPlayer);
 AuResult au_load_song_files(u32 arg0, BGMHeader* arg1, BGMPlayer* arg2);
 AuResult func_80053E58(s32 arg0, BGMHeader* arg1);
 BGMPlayer* func_80053F64(s32 arg0);
-AuResult au_load_ambient_sound(u32 arg0);
+AuResult au_ambient_load(u32 arg0);
 BGMPlayer* func_80054248(u8 arg0);
 void au_load_INIT(AuGlobals* arg0, s32 romAddr, ALHeap* heap);
 AuResult au_fetch_SBN_file(u32 fileIdx, AuFileFormat format, SBNFileEntry* arg2);
@@ -181,7 +181,7 @@ void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift)
 void snd_stop_sound(s32 soundID);
 void snd_reset(void);
 void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan);
-AuResult snd_ambient_load_sound(s32 arg0);
+AuResult snd_load_ambient(s32 arg0);
 AuResult snd_ambient_play(s32 arg0, s32 arg1);
 AuResult snd_ambient_stop_quick(s32 arg0);
 AuResult snd_ambient_stop_slow(s32 arg0, s32 arg1);

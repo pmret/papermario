@@ -9,7 +9,7 @@ FoliageDropList N(Tree1_Drops) = {
     .count = 1,
     .drops = {
         {
-            .itemID = ITEM_LETTER02,
+            .itemID = ITEM_LETTER_TO_GOOMPA,
             .pos = { 204, 92, -220 },
             .spawnMode = ITEM_SPAWN_MODE_FALL_NEVER_VANISH,
             .pickupFlag = GF_SBK30_Tree2_Letter02,

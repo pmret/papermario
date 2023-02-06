@@ -223,9 +223,9 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
         npc->flags &= ~NPC_FLAG_JUMPING;
         enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_NONE;
         if (!enemy->territory->wander.isFlying) {
-            npc->flags = (npc->flags | NPC_FLAG_GRAVITY) & ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags = (npc->flags | NPC_FLAG_GRAVITY) & ~NPC_FLAG_8;
         } else {
-            npc->flags = (npc->flags & ~NPC_FLAG_GRAVITY) | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags = (npc->flags & ~NPC_FLAG_GRAVITY) | NPC_FLAG_8;
         }
         if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;

@@ -115,7 +115,7 @@ EvtScript N(EVS_EnterFromAirshipDock) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetPlayerPos, -30, 21, 590)
     EVT_CALL(SetNpcPos, NPC_PARTNER, -30, 21, 590)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_CALL(EnableModel, MODEL_o1616, FALSE)
     EVT_CALL(TranslateModel, MODEL_o1650, -10, 0, 45)
     EVT_THREAD
@@ -126,7 +126,7 @@ EvtScript N(EVS_EnterFromAirshipDock) = {
     EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(3.0))
     EVT_CALL(NpcMoveTo, NPC_PARTNER, 65, 600, 0)
     EVT_EXEC_WAIT(N(EVS_CloseAirshipDockDoor))
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN

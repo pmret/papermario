@@ -59,7 +59,7 @@ void update_ambient_sounds(void) {
             }
             if (ambientSoundState->soundID < 0) {
                 ambientSoundState->fadeState = AMBIENT_SOUND_IDLE;
-            } else if (snd_ambient_load_sound(ambientSoundState->soundID) == AU_RESULT_OK) {
+            } else if (snd_load_ambient(ambientSoundState->soundID) == AU_RESULT_OK) {
                 if (snd_ambient_play(0, 0) == AU_RESULT_OK) {
                     ambientSoundState->fadeState = AMBIENT_SOUND_IDLE;
                     ambientSoundState->flags |= 1;
