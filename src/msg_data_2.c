@@ -115,3 +115,7 @@ BSS IMG_BIN D_802EE8D0[0x5100];
 BSS IMG_BIN D_802F39D0[0xB88];
 BSS char MSG_unused[8];
 BSS PAL_BIN D_802F4560[80][8];
+
+#ifndef SHIFT
+static BSS u8 bss_padding[0x6DA0];
+#endif

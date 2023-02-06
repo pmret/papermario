@@ -879,6 +879,7 @@ segments:
     dir: evt
     start: 0xE79B0
     vram: 0x802C3000
+    follows_vram: world_use_item
     subsegments:
     - [0xE79B0, c, script_list]
     - [0xE92D0, c, evt]
@@ -2623,6 +2624,7 @@ segments:
     name: world_partner_goombario
     start: 0x317020
     vram: 0x802BD100
+    follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x317020, c, goombario]
     - [0x317B60]
@@ -2631,6 +2633,7 @@ segments:
     name: world_partner_bombette
     start: 0x317E50
     vram: 0x802BD100
+    follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x317E50, c, bombette]
     - [0x3195D0]
@@ -2639,6 +2642,7 @@ segments:
     name: world_partner_parakarry
     start: 0x319670
     vram: 0x802BD100
+    follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x319670, c, parakarry]
     - [0x31B000]
@@ -2647,6 +2651,7 @@ segments:
     name: world_partner_kooper
     start: 0x31B120
     vram: 0x802BD100
+    follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x31B120, c, kooper]
     - [0x31CB60]
@@ -2655,6 +2660,7 @@ segments:
     name: world_partner_watt
     start: 0x31CC70
     vram: 0x802BD100
+    follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x31CC70, c, watt]
     - [0x31DDC0]
@@ -2663,6 +2669,7 @@ segments:
     name: world_partner_sushie
     start: 0x31DE70
     vram: 0x802BD100
+    follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x31DE70, c, sushie]
     - [0x320B20]
@@ -2671,6 +2678,7 @@ segments:
     name: world_partner_lakilester
     start: 0x320C50
     vram: 0x802BD100
+    follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x320C50, c, lakilester]
     - [0x3239B0]
@@ -2679,6 +2687,7 @@ segments:
     name: world_partner_bow
     start: 0x323A50
     vram: 0x802BD100
+    follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x323A50, c, bow]
     - [0x324930]
@@ -2687,6 +2696,7 @@ segments:
     name: world_partner_goompa
     start: 0x324A10
     vram: 0x802BD100
+    follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x324A10, c, goompa]
     - [0x324E80]
@@ -2695,6 +2705,7 @@ segments:
     name: world_partner_goombaria
     start: 0x324F10
     vram: 0x802BD100
+    follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x324F10, c, goombaria]
     - [0x325000]
@@ -2703,6 +2714,7 @@ segments:
     name: world_partner_twink
     start: 0x325070
     vram: 0x802BD100
+    follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x325070, c, twink]
     - [0x325160]
@@ -2710,6 +2722,7 @@ segments:
     start: 0x3251D0
     name: world_use_item
     vram: 0x802C0000
+    follows_vram_symbol: world_partner_vram_end
     subsegments:
     - [0x3251D0, c, world_use_item]
     - [0x3255E0]
@@ -8925,6 +8938,7 @@ segments:
     name: starpoint
     start: 0x7A89A0
     vram: 0x802A1000
+    follows_vram: battle_code
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [0x7A89A0, c, starpoint]
@@ -9255,6 +9269,7 @@ segments:
     type: code
     start: 0x7D98E0
     vram: 0x80234000
+    follows_vram_symbol: Vine0Base
     subsegments:
     - [0x7D98E0, c, "1F"]
   - name: world_model_anim_kzn_20
@@ -9301,6 +9316,7 @@ segments:
     type: code
     start: 0x7E0E80
     vram: 0x80280000
+    follows_vram_symbol: script_api_vram
     subsegments:
     - [0x7E0E80, c, shops]
     - [0x7E2AA0, c, rooms]
@@ -14974,6 +14990,7 @@ segments:
     start: 0xE20110
     name: inspect_icon
     vram: 0x802B7000
+    follows_vram_symbol: world_action_vram_end
     subsegments:
     - [0xE20110, c, inspect_icon]
     - start: 0xE20B30
@@ -14989,6 +15006,7 @@ segments:
     start: 0xE20EB0
     name: speech_bubble
     vram: 0x802B7000
+    follows_vram_symbol: world_action_vram_end
     subsegments:
     - [0xE20EB0, c, speech_bubble]
     - start: 0xE215C0
@@ -15004,6 +15022,7 @@ segments:
     start: 0xE21870
     name: pulse_stone
     vram: 0x802B7000
+    follows_vram_symbol: world_action_vram_end
     subsegments:
     - [0xE21870, c, pulse_stone]
     - start: 0xE21EB0
@@ -15020,6 +15039,7 @@ segments:
     start: 0xE225B0
     name: i_spy
     vram: 0x802B7000
+    follows_vram_symbol: world_action_vram_end
     subsegments:
     - [0xE225B0, c, i_spy]
     - start: 0xE22B30
