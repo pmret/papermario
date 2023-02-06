@@ -75,7 +75,7 @@ BSS char D_802DBB70[0x100];
 // why is this at the end? com section vs bss?
 BSS u32 gWorldMapFlags[MAX_MAPFLAGS];
 BSS s32 DoorModelsSwingCW[3];
-BSS PushBlockGrid* D_802DBC88[8];
+BSS PushBlockGrid* wPushBlockGrids[8];
 BSS u32 gWorldMapVars[MAX_MAPVARS];
 BSS u32 gBattleMapVars[MAX_MAPVARS];
 BSS s32 DoorModelsSwingCCW[3];

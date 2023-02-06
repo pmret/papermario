@@ -461,7 +461,7 @@ s32 N(BeanstalkIngredients)[] = {
 
 EvtScript N(EVS_BeanPatch_ItemPrompt) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(func_802D2884, -85, 85, 0)
+    EVT_CALL(FacePlayerTowardPoint, -85, 85, 0)
     EVT_CALL(func_802CF56C, 2)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_IF_EQ(GF_FLO00_PlacedFertileSoil, FALSE)

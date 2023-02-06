@@ -217,7 +217,7 @@
 #define PlayerJump dead_PlayerJump
 #define StopSound dead_StopSound
 #define NpcFacePlayer dead_NpcFacePlayer
-#define func_802D2884 dead_func_802D2884
+#define FacePlayerTowardPoint dead_FacePlayerTowardPoint
 #define SetTimeFreezeMode dead_SetTimeFreezeMode
 #define ShowKeyChoicePopup dead_ShowKeyChoicePopup
 #define CloseChoicePopup dead_CloseChoicePopup

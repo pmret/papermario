@@ -19,7 +19,7 @@ MAP_STATIC_PAD(1,key_choice);
 #include "world/common/complete/KeyItemChoice.inc.c"
 
 EvtScript N(EVS_TossTrainInToybox) = {
-    EVT_CALL(func_802D2884, -440, -150, 0)
+    EVT_CALL(FacePlayerTowardPoint, -440, -150, 0)
     EVT_WAIT(15)
     EVT_THREAD
         EVT_WAIT(7)

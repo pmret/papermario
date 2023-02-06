@@ -653,7 +653,7 @@ EvtScript N(EVS_Quizmo_MovePlayerToPodium) = {
         EVT_CALL(SetPlayerPos, LVar3, QUIZ_ARRAY_ORIGIN_Y, LVar4)
     EVT_END_THREAD
     EVT_CALL(N(Quizmo_SpinPlayer))
-    EVT_CALL(func_802D2884, QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 0)
+    EVT_CALL(FacePlayerTowardPoint, QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_RETURN
     EVT_END

@@ -1,13 +1,34 @@
 #include "common.h"
 #include "entity.h"
 
-extern PushBlockGrid* D_802DBC88[8];
+extern PushBlockGrid* wPushBlockGrids[8];
 
-f32 D_80285640_7E64C0[] = {
+// outVars for values returned by FetchPushedBlockProperties (func_80282E30)
+enum {
+    BLOCK_PROP_X    = LVar0,
+    BLOCK_PROP_Y    = LVar1,
+    BLOCK_PROP_Z    = LVar2,
+    BLOCK_PROP_I    = LVar3,
+    BLOCK_PROP_J    = LVar4,
+    BLOCK_PROP_K    = LVar5,
+    BLOCK_PROP_DI   = LVar6,
+    BLOCK_PROP_DJ   = LVar7,
+    BLOCK_PROP_DK   = LVar8,
+    BLOCK_PROP_RESULT   = LVar9,
+};
+
+// values for BLOCK_PROP_RESULT
+enum {
+    PUSH_BLOCK_READY        = 0,
+    PUSH_BLOCK_OBSTRUCTED   = 1,
+    PUSH_BLOCK_INVALID      = 2,
+};
+
+f32 PushBlockMovePositions[] = {
     0.04, 0.04, 0.08, 0.16, 0.21, 0.4, 0.6, 0.72, 0.84, 0.92, 0.96, 0.96, 1.0,
 };
 
-API_CALLABLE(func_80282880) {
+API_CALLABLE(MovePlayerTowardBlock) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->position.x += (script->varTable[0] - playerStatus->position.x) / 2;
@@ -16,10 +37,10 @@ API_CALLABLE(func_80282880) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802828DC) {
+API_CALLABLE(UpdatePushBlockMotion) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Entity* entity = get_entity_by_index(script->varTable[11]);
-    f32 temp_f4;
+    f32 moveRatio;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
@@ -33,20 +54,20 @@ API_CALLABLE(func_802828DC) {
         script->varTable[12] = entity->rotation.z;
     }
 
-    temp_f4 = D_80285640_7E64C0[script->functionTemp[0]];
-    playerStatus->position.x = script->varTable[0] + (script->varTable[6] * temp_f4 * BLOCK_GRID_SIZE);
-    playerStatus->position.y = script->varTable[1] + (script->varTable[7] * temp_f4 * BLOCK_GRID_SIZE);
-    playerStatus->position.z = script->varTable[2] + (script->varTable[8] * temp_f4 * BLOCK_GRID_SIZE);
-    entity->position.x = script->varTable[3] + (script->varTable[6] * temp_f4 * BLOCK_GRID_SIZE);
-    entity->position.y = script->varTable[4] + (script->varTable[7] * temp_f4 * BLOCK_GRID_SIZE);
-    entity->position.z = script->varTable[5] + (script->varTable[8] * temp_f4 * BLOCK_GRID_SIZE);
+    moveRatio = PushBlockMovePositions[script->functionTemp[0]];
+    playerStatus->position.x = script->varTable[0] + (script->varTable[6] * moveRatio * BLOCK_GRID_SIZE);
+    playerStatus->position.y = script->varTable[1] + (script->varTable[7] * moveRatio * BLOCK_GRID_SIZE);
+    playerStatus->position.z = script->varTable[2] + (script->varTable[8] * moveRatio * BLOCK_GRID_SIZE);
+    entity->position.x = script->varTable[3] + (script->varTable[6] * moveRatio * BLOCK_GRID_SIZE);
+    entity->position.y = script->varTable[4] + (script->varTable[7] * moveRatio * BLOCK_GRID_SIZE);
+    entity->position.z = script->varTable[5] + (script->varTable[8] * moveRatio * BLOCK_GRID_SIZE);
 
     if (script->functionTemp[0] < 12) {
-        entity->rotation.z = script->varTable[12] + (script->varTable[6] * temp_f4 * -90.0f);
-        entity->rotation.x = script->varTable[9] + (script->varTable[8] * temp_f4 * 90.0f);
-        entity->position.y = entity->position.y + (sin_deg(temp_f4 * 90.0f) * BLOCK_GRID_SIZE * 0.5);
-        entity->position.x = entity->position.x - (script->varTable[6] * sin_deg(temp_f4 * 90.0f) * BLOCK_GRID_SIZE * 0.5);
-        entity->position.z = entity->position.z - (script->varTable[8] * sin_deg(temp_f4 * 90.0f) * BLOCK_GRID_SIZE * 0.5);
+        entity->rotation.z = script->varTable[12] + (script->varTable[6] * moveRatio * -90.0f);
+        entity->rotation.x = script->varTable[9] + (script->varTable[8] * moveRatio * 90.0f);
+        entity->position.y = entity->position.y + (sin_deg(moveRatio * 90.0f) * BLOCK_GRID_SIZE * 0.5);
+        entity->position.x = entity->position.x - (script->varTable[6] * sin_deg(moveRatio * 90.0f) * BLOCK_GRID_SIZE * 0.5);
+        entity->position.z = entity->position.z - (script->varTable[8] * sin_deg(moveRatio * 90.0f) * BLOCK_GRID_SIZE * 0.5);
     } else {
         entity->rotation.z = entity->rotation.x = 0.0f;
     }
@@ -56,13 +77,13 @@ API_CALLABLE(func_802828DC) {
     gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
 
     script->functionTemp[0]++;
-    if (script->functionTemp[0] == ARRAY_COUNT(D_80285640_7E64C0)) {
+    if (script->functionTemp[0] == ARRAY_COUNT(PushBlockMovePositions)) {
         return ApiStatus_DONE1;
     }
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(func_80282C40) {
+API_CALLABLE(FinishPushBlockMotion) {
     PushBlockGrid* grid = script->varTablePtr[10];
     Entity* block = get_entity_by_index(script->varTable[11]);
     f32 hitX, hitY, hitZ, hitDepth;
@@ -96,9 +117,9 @@ API_CALLABLE(func_80282C40) {
             return ApiStatus_BLOCK;
         }
     } else {
-        block->position.y = script->varTable[0] - (D_80285640_7E64C0[script->functionTemp[0]] * BLOCK_GRID_SIZE);
+        block->position.y = script->varTable[0] - (PushBlockMovePositions[script->functionTemp[0]] * BLOCK_GRID_SIZE);
         script->functionTemp[0]++;
-        if (script->functionTemp[0] != ARRAY_COUNT(D_80285640_7E64C0)) {
+        if (script->functionTemp[0] != ARRAY_COUNT(PushBlockMovePositions)) {
             return ApiStatus_BLOCK;
         }
         i = (block->position.x - grid->centerPos.x) / BLOCK_GRID_SIZE;
@@ -108,6 +129,7 @@ API_CALLABLE(func_80282C40) {
     return ApiStatus_DONE1;
 }
 
+//TODO FetchPushedBlockProperties
 API_CALLABLE(func_80282E30);
 // regalloc
 #ifdef NON_MATCHING
@@ -204,11 +226,11 @@ API_CALLABLE(func_80282E30) {
 INCLUDE_ASM(s32, "world/script_api/push_blocks", func_80282E30);
 #endif
 
-API_CALLABLE(func_80283080) {
+API_CALLABLE(ClearPushedBlockFromGrid) {
     PushBlockGrid* grid = script->varTablePtr[10];
     Entity* block = get_entity_by_index(script->varTable[11]);
-    s32 ip, jp;
-    s32 in, jn;
+    s32 ip, jp; // prev grid pos (i,j)
+    s32 in, jn; // next grid pos (i,j)
 
     ip = ((s32)block->position.x - grid->centerPos.x) / BLOCK_GRID_SIZE;
     jp = ((s32)block->position.z - grid->centerPos.z) / BLOCK_GRID_SIZE;
@@ -221,30 +243,25 @@ API_CALLABLE(func_80283080) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80283174) {
+API_CALLABLE(CanPlayerPushBlock) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 collider = script->varTable[11] + COLLISION_WITH_ENTITY_BIT;
+    s32 blockCollider = script->varTable[11] + COLLISION_WITH_ENTITY_BIT;
 
-    if (gCollisionStatus.pushingAgainstWall == collider) {
-        if (playerStatus->actionState == ACTION_STATE_PUSHING_BLOCK
+    if ((gCollisionStatus.pushingAgainstWall == blockCollider)
+        && (playerStatus->actionState == ACTION_STATE_PUSHING_BLOCK
         || playerStatus->actionState == ACTION_STATE_WALK
-        || playerStatus->actionState == ACTION_STATE_RUN) {
-            if (playerStatus->animFlags & PA_FLAG_USING_WATT) {
-                script->varTable[13] = FALSE;
-            } else {
-                script->varTable[13] = TRUE;
-            }
+        || playerStatus->actionState == ACTION_STATE_RUN) 
+        && !(playerStatus->animFlags & PA_FLAG_USING_WATT))
+        {
+            script->varTable[13] = TRUE;
         } else {
             script->varTable[13] = FALSE;
         }
-    } else {
-        script->varTable[13] = FALSE;
-    }
-
+    
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(CheckActionState) {
+API_CALLABLE(CheckPlayerActionState) {
     Bytecode* args = script->ptrReadPos;
     Bytecode outVar = *args++;
     s32 checkState = evt_get_float_variable(script, *args++);
@@ -253,12 +270,12 @@ API_CALLABLE(CheckActionState) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80283240) {
+API_CALLABLE(IsEventForSourceRunning) {
     Bytecode* args = script->ptrReadPos;
     Bytecode outVar = *args++;
     Bytecode* sourceToFind = (Bytecode*)evt_get_variable(script, *args++);
 
-    s32 retVal = FALSE;
+    s32 foundScript = FALSE;
     s32 i;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
@@ -266,66 +283,71 @@ API_CALLABLE(func_80283240) {
 
         if (iterScript != NULL) {
             if (iterScript->ptrFirstLine == sourceToFind) {
-                retVal = TRUE;
+                foundScript = TRUE;
                 break;
             }
         }
     }
-    evt_set_variable(script, outVar, retVal);
+    evt_set_variable(script, outVar, foundScript);
     return ApiStatus_DONE2;
 }
 
-EvtScript D_80285674_7E64F4 = {
-	EVT_SET(LVarA, LVar0)
-	EVT_SET(LVarB, LVar1)
+EvtScript EVS_PushWall_PushBlock = {
+	EVT_SET(LVarA, LVar0) // grid system
+	EVT_SET(LVarB, LVar1) // block entity ID
+    // check cell where the block will move to
 	EVT_CALL(func_80282E30)
-	EVT_CALL(func_802D2884, LVar3, LVar5, 0)
-	EVT_IF_NE(LVar9, 2)
-		EVT_CALL(func_80282880)
+	EVT_CALL(FacePlayerTowardPoint, BLOCK_PROP_I, BLOCK_PROP_K, 0)
+	EVT_IF_NE(LVar9, PUSH_BLOCK_INVALID)
+		EVT_CALL(MovePlayerTowardBlock)
 	EVT_END_IF
+    // try setting the player action state
 	EVT_SET(LVarC, 0)
-	EVT_CALL(CheckActionState, LVarD, ACTION_STATE_RUN)
+	EVT_CALL(CheckPlayerActionState, LVarD, ACTION_STATE_RUN)
 	EVT_IF_EQ(LVarD, FALSE)
-		EVT_CALL(CheckActionState, LVarD, ACTION_STATE_PUSHING_BLOCK)
+		EVT_CALL(CheckPlayerActionState, LVarD, ACTION_STATE_PUSHING_BLOCK)
 		EVT_IF_EQ(LVarD, FALSE)
 			EVT_RETURN
 		EVT_END_IF
 	EVT_END_IF
-	EVT_IF_NE(LVar9, 0)
+    // cancel state change if the block can't bt pushed
+	EVT_IF_NE(LVar9, PUSH_BLOCK_READY)
 		EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
 		EVT_RETURN
 	EVT_END_IF
+    // wait for 8 frames of pushing
 	EVT_SET(LVarC, 0)
 	EVT_LABEL(0)
-	EVT_ADD(LVarC, 1)
-	EVT_CALL(func_80283174)
-	EVT_IF_EQ(LVarD, TRUE)
-		EVT_GOTO(1)
-	EVT_END_IF
-	EVT_CALL(GetPlayerActionState, LVarD)
-	EVT_IF_EQ(LVarD, ACTION_STATE_JUMP)
-		EVT_RETURN
-	EVT_END_IF
-	EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-	EVT_RETURN
-	EVT_LABEL(1)
-	EVT_CALL(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
-	EVT_CALL(func_80282880)
-	EVT_IF_LT(LVarC, 8)
-		EVT_WAIT(1)
-		EVT_GOTO(0)
-	EVT_END_IF
-	EVT_CALL(func_80283080)
+        EVT_ADD(LVarC, 1)
+        EVT_CALL(CanPlayerPushBlock)
+        EVT_IF_EQ(LVarD, TRUE)
+            EVT_GOTO(1)
+        EVT_END_IF
+            EVT_CALL(GetPlayerActionState, LVarD)
+            EVT_IF_EQ(LVarD, ACTION_STATE_JUMP)
+                EVT_RETURN
+            EVT_END_IF
+            EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
+            EVT_RETURN
+        EVT_LABEL(1)
+        EVT_CALL(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
+        EVT_CALL(MovePlayerTowardBlock)
+        EVT_IF_LT(LVarC, 8)
+            EVT_WAIT(1)
+            EVT_GOTO(0)
+        EVT_END_IF
+    // perform the push
+	EVT_CALL(ClearPushedBlockFromGrid)
 	EVT_CALL(PlaySound, SOUND_2088)
 	EVT_CALL(DisablePlayerPhysics, TRUE)
-	EVT_CALL(func_802828DC)
-	EVT_CALL(func_80282C40)
+	EVT_CALL(UpdatePushBlockMotion)
+	EVT_CALL(FinishPushBlockMotion)
 	EVT_THREAD
 		EVT_WAIT(2)
-		EVT_CALL(CheckActionState, LVarD, ACTION_STATE_PUSHING_BLOCK)
+		EVT_CALL(CheckPlayerActionState, LVarD, ACTION_STATE_PUSHING_BLOCK)
 		EVT_IF_NE(LVarD, FALSE)
-			EVT_CALL(func_80283240, LVarD, EVT_PTR(D_80285674_7E64F4))
-			EVT_IF_EQ(LVarD, 0)
+			EVT_CALL(IsEventForSourceRunning, LVarD, EVT_PTR(EVS_PushWall_PushBlock))
+			EVT_IF_EQ(LVarD, FALSE)
 				EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
 			EVT_END_IF
 		EVT_END_IF
@@ -349,7 +371,7 @@ API_CALLABLE(CreatePushBlockGrid) {
     u8* dataToCopy;
     s32 i;
 
-    D_802DBC88[blockSystemID] = blockGrid = general_heap_malloc(sizeof(*blockGrid));
+    wPushBlockGrids[blockSystemID] = blockGrid = general_heap_malloc(sizeof(*blockGrid));
 
     blockGrid->cells = general_heap_malloc(sizeNx*sizeNz);
 
@@ -381,7 +403,7 @@ API_CALLABLE(SetPushBlock) {
     s32 gridZ = evt_get_variable(script, *args++);
     s32 occupant = evt_get_variable(script, *args++);
 
-    PushBlockGrid* blockGrid = D_802DBC88[blockSystemID];
+    PushBlockGrid* blockGrid = wPushBlockGrids[blockSystemID];
     s32 blockEntityID;
     s32 cellIndex;
 
@@ -393,7 +415,7 @@ API_CALLABLE(SetPushBlock) {
         s32 posY = blockGrid->centerPos.y;
         s32 posZ = blockGrid->centerPos.z + (gridZ * BLOCK_GRID_SIZE) + (BLOCK_GRID_SIZE / 2);
         blockEntityID = create_entity(&Entity_PushBlock, posX, posY, posZ, 0, 0, 0, 0, MAKE_ENTITY_END);
-        bind_trigger_1(&D_80285674_7E64F4, TRIGGER_WALL_PUSH, blockEntityID + EVT_ENTITY_ID_BIT, (s32)blockGrid, blockEntityID, 3);
+        bind_trigger_1(&EVS_PushWall_PushBlock, TRIGGER_WALL_PUSH, blockEntityID + EVT_ENTITY_ID_BIT, (s32)blockGrid, blockEntityID, 3);
         script->varTable[0] = blockEntityID;
     }
 
@@ -407,7 +429,7 @@ API_CALLABLE(GetPushBlock) {
     s32 gridZ = evt_get_variable(script, *args++);
     s32 outVar = *args++;
 
-    PushBlockGrid* blockGrid = D_802DBC88[blockSystemID];
+    PushBlockGrid* blockGrid = wPushBlockGrids[blockSystemID];
     s32 cellIndex;
 
     if (gridX >= blockGrid->numCellsX || gridX < 0 || gridZ >= blockGrid->numCellsZ || gridZ < 0) {
@@ -429,7 +451,7 @@ API_CALLABLE(GetGridIndexFromPos) {
     Bytecode outVarX = *args++;
     Bytecode outVarZ = *args++;
 
-    PushBlockGrid* blockGrid = D_802DBC88[blockSystemID];
+    PushBlockGrid* blockGrid = wPushBlockGrids[blockSystemID];
     s32 gridX;
     s32 gridZ;
 
@@ -449,7 +471,7 @@ API_CALLABLE(SetPushBlockFallEffect) {
     s32 blockSystemID = evt_get_variable(script, *args++);
     PushBlockFallCallback fallCallback = (PushBlockFallCallback)evt_get_variable(script, *args++);
 
-    D_802DBC88[blockSystemID]->dropCallback = fallCallback;
+    wPushBlockGrids[blockSystemID]->dropCallback = fallCallback;
 
     return ApiStatus_DONE2;
 }
