@@ -1,8 +1,7 @@
 #include "common.h"
-#include "Koopa.h"
 #include "Kooper.h"
 
-NpcSettings N(NpcSettings_Koopa) = {
+NpcSettings N(NpcSettings_Kooper) = {
     .height = 35,
     .radius = 24,
     .level = 99,

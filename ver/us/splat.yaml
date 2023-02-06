@@ -10910,23 +10910,25 @@ segments:
     start: 0x9EB7F0
     vram: 0x80240000
     subsegments:
-    - [0x9EB7F0, c]
-    - [0x9EC610, data]
-    - [0x9EC700, data]
-    - [0x9ECBD0, data]
-    - [0x9EDB90]
+    - [0x9EB7F0, c, nok_03_0_header]
+    - [0x9EB7F0, c, nok_03_1_music]
+    - [0x9EB7F0, c, nok_03_2_main]
+    - [0x9EB7F0, c, nok_03_3_entity]
+    - [0x9EB7F0, c, nok_03_4_npc]
+    - [0x9EC610]
   - name: nok_04
     dir: world/area_nok/nok_04
     type: code
     start: 0x9EDBF0
     vram: 0x80240000
     subsegments:
-    - [0x9EDBF0, c]
-    - [0x9EEA80, c]
-    - [0x9EEB20, data]
-    - [0x9EEC40, data]
-    - [0x9EEEB0, data]
-    - [0x9F4A00]
+    - [0x9EDBF0, c, nok_04_0_header]
+    - [0x9EDBF0, c, nok_04_1_music]
+    - [0x9EDBF0, c, nok_04_2_main]
+    - [0x9EDBF0, c, nok_04_3_entity]
+    - [0x9EDBF0, c, nok_04_4_npc]
+    - [0x9EEA80, c, nok_04_5_partner]
+    - [0x9EEB20]
   - name: nok_11
     dir: world/area_nok/nok_11
     type: code
