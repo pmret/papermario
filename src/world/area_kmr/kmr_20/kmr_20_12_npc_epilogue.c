@@ -53,12 +53,12 @@ API_CALLABLE(N(func_802420EC_8EDF0C)) {
 }
 
 API_CALLABLE(N(SetAmbienceVolumeHalf_Epilogue)) {
-    au_ambient_set_volume(0, 1000, 63);
+    snd_ambient_set_volume(0, 1000, 63);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(SetAmbienceVolumeFull_Epilogue)) {
-    au_ambient_set_volume(0, 1000, 127);
+    snd_ambient_set_volume(0, 1000, 127);
     return ApiStatus_DONE2;
 }
 

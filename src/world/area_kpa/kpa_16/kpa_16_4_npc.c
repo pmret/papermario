@@ -12,7 +12,7 @@ API_CALLABLE(N(SetScreenBlackFadeAmount)) {
 }
 
 API_CALLABLE(N(MuteAmbience)) {
-    au_ambient_mute(0, TRUE);
+    snd_ambient_mute(0, TRUE);
     return ApiStatus_DONE2;
 }
 

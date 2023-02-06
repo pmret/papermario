@@ -81,17 +81,17 @@ API_CALLABLE(N(func_80240530_8AC4C0)) {
 }
 
 API_CALLABLE(N(func_80240584_8AC514)) {
-    au_ambient_pause(0, 2000);
+    snd_ambient_pause(0, 2000);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(func_802405A8_8AC538)) {
-    au_ambient_resume(0, 2000);
+    snd_ambient_resume(0, 2000);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(func_802405CC_8AC55C)) {
-    au_ambient_stop_slow(0, 1000);
+    snd_ambient_stop_slow(0, 1000);
     return ApiStatus_DONE2;
 }
 

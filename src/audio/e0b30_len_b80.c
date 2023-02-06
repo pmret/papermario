@@ -401,7 +401,7 @@ void bgm_pop_battle_song(void) {
         } else {
             musicSetting->flags |= MUSIC_SETTINGS_FLAG_8;
             _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, 8);
-            au_ambient_resume(0, 250);
+            snd_ambient_resume(0, 250);
         }
     }
 }
@@ -410,7 +410,7 @@ void bgm_push_battle_song(void) {
     MusicSettings* musicSetting = gMusicSettings;
 
     if (gGameStatusPtr->demoState == 0 && !(gOverrideFlags & GLOBAL_OVERRIDES_20000)) {
-        au_ambient_pause(0, 250);
+        snd_ambient_pause(0, 250);
         musicSetting->savedSongID = musicSetting->songID;
         musicSetting->savedVariation = musicSetting->variation;
         musicSetting->savedSongName = musicSetting->songName;

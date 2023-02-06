@@ -163,7 +163,7 @@ EvtScript N(EVS_KoloradoBurned_PlayerReaction) = {
 };
 
 API_CALLABLE(N(func_80240A68_C96998)) {
-    au_ambient_mute(0, TRUE);
+    snd_ambient_mute(0, TRUE);
     return ApiStatus_DONE2;
 }
 

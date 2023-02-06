@@ -409,7 +409,7 @@ API_CALLABLE(N(ReadDiary)){
 }
 
 API_CALLABLE(N(MuteAmbienceVolume_Documents)){
-    au_ambient_set_volume(0, 1000, 1);
+    snd_ambient_set_volume(0, 1000, 1);
     return ApiStatus_DONE2;
 }
 

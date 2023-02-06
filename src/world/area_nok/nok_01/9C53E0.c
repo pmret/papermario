@@ -110,9 +110,9 @@ ApiStatus func_802427C0_9C7BA0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     evt_get_variable(script, *args++);
-    au_ambient_load_sound(AMBIENT_RADIO);
-    au_ambient_80055760(4);
-    au_ambient_set_volume(0, 250, 1);
+    snd_ambient_load_sound(AMBIENT_RADIO);
+    snd_ambient_80055760(4);
+    snd_ambient_set_volume(0, 250, 1);
     return ApiStatus_DONE2;
 }
 
@@ -122,8 +122,8 @@ ApiStatus func_80242804_9C7BE4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 idx = evt_get_variable(script, *args++);
 
-    au_ambient_play_only(D_80250810_9D5BF0[idx]);
-    au_ambient_set_volume(D_80250810_9D5BF0[idx], 1500, 127);
+    snd_ambient_play_only(D_80250810_9D5BF0[idx]);
+    snd_ambient_set_volume(D_80250810_9D5BF0[idx], 1500, 127);
     return ApiStatus_DONE2;
 }
 
@@ -131,17 +131,17 @@ ApiStatus func_80242858_9C7C38(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 idx = evt_get_variable(script, *args++);
 
-    au_ambient_set_volume(D_80250810_9D5BF0[idx], 1500, 1);
+    snd_ambient_set_volume(D_80250810_9D5BF0[idx], 1500, 1);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80242898_9C7C78(Evt* script, s32 isInitialCall) {
-    au_ambient_play_only(4);
+    snd_ambient_play_only(4);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802428B8_9C7C98(Evt* script, s32 isInitialCall) {
-    au_ambient_stop_all(100);
+    snd_ambient_stop_all(100);
     return ApiStatus_DONE2;
 }
 
@@ -150,7 +150,7 @@ ApiStatus func_802428D8_9C7CB8(Evt* script, s32 isInitialCall) {
     s32 index = evt_get_variable(script, *args++);
 
     NOP_FIX // TODO: REMOVE WHEN DATA (D_80250810_9D5BF0) IS MIGRATED
-    au_ambient_play_only(D_80250810_9D5BF0[index]);
+    snd_ambient_play_only(D_80250810_9D5BF0[index]);
     return ApiStatus_DONE2;
 }
 

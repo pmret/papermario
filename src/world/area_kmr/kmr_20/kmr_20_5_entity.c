@@ -2,7 +2,7 @@
 #include "entity.h"
 
 API_CALLABLE(N(SetAmbienceVolumeHalf_Entity)){
-    au_ambient_set_volume(0, 1000, 63);
+    snd_ambient_set_volume(0, 1000, 63);
     return ApiStatus_DONE2;
 }
 
