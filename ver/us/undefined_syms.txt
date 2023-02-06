@@ -89,11 +89,7 @@ battle_move_end = MAX(battle_move_end, battle_star_peach_dash_VRAM_END);
 // hard-coded heapy things
 D_80210000 = 0x80210000; // needs to be hard-coded atm due to pointers in shape data
 
-heap_collisonHead_SIZE = 0x18000;
-heap_collisionHead = map_vram_end + 0x10;
-script_api_vram = heap_collisionHead + heap_collisonHead_SIZE;
 heap_generalHead = font_width_VRAM_END;
-
 gSpriteHeapPtr = heap_generalHead + 0x54000;
 D_8038F800 = gSpriteHeapPtr + 0x40000;
 D_803B5000 = D_8038F800 + 0x25800;

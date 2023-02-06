@@ -2722,7 +2722,7 @@ segments:
     start: 0x3251D0
     name: world_use_item
     vram: 0x802C0000
-    #follows_vram_symbol: world_partner_vram_end # TODO uncomment and diagnose
+    # follows_vram_symbol: world_partner_vram_end # TODO uncomment and diagnose
     subsegments:
     - [0x3251D0, c, world_use_item]
     - [0x3255E0]
@@ -9340,7 +9340,7 @@ segments:
     type: code
     start: 0x7E0E80
     vram: 0x80280000
-    follows_vram_symbol: script_api_vram
+    follows_vram: heaps2
     subsegments:
     - [0x7E0E80, c, shops]
     - [0x7E2AA0, c, rooms]
@@ -15439,6 +15439,13 @@ segments:
     - [0xE1E460, c, gv_01_0_header]
     - [0xE1E460, c, gv_01_1_main]
     - [0xE1EC20]
+  - name: heaps2
+    type: code
+    start: 0xE20110
+    vram: 0x80267FF0
+    follows_vram_symbol: map_vram_end
+    subsegments:
+    - [0xE20110, c, heaps2]
   - type: code
     start: 0xE20110
     name: inspect_icon

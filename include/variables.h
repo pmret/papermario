@@ -223,7 +223,6 @@ extern u16 D_8038F800[];
 extern u16 D_803B5000[];
 extern u16 D_803DA800[];
 
-extern HeapNode heap_collisionHead;
 extern HeapNode heap_generalHead;
 extern HeapNode heap_battleHead;
 

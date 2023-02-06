@@ -8,8 +8,7 @@
 #include "ld_addrs.h"
 
 #ifdef SHIFT
-// TODO shiftability same address as all world actions - picked the first one
-#define PLAYER_ACTION_VRAM_DEF world_action_idle_VRAM
+#define PLAYER_ACTION_VRAM_DEF texture_memory_vram_END
 #else
 #define PLAYER_ACTION_VRAM_DEF (void*) 0x802B6000
 #endif

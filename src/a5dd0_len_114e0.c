@@ -8,18 +8,17 @@
 #include "nu/nusys.h"
 #include "model_clear_render_tasks.h"
 
+extern Addr MapTextureMemory;
+
 #ifdef SHIFT
-extern Addr map_vram_end;
- // TODO shiftability - these need to be totally separate from anything else that might cut into them
-#define MODEL_TEXTURE_BASE_ADDRESS 0x80600000 // TODO shiftability
-#define WORLD_ENTITY_HEAP_BASE map_vram_end
-#define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
-#define WORLD_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shiftability
+extern Addr WorldEntityHeapBase;
+#define WORLD_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shiftability (used only for munchlesia, hacky as hell)
+#define WORLD_ENTITY_HEAP_BASE WorldEntityHeapBase
+#define AREA_SPECIFIC_ENTITY_VRAM model_clear_render_tasks_VRAM_END
 #else
-#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000
+#define WORLD_ENTITY_HEAP_BOTTOM 0x80250000
 #define WORLD_ENTITY_HEAP_BASE 0x80267FF0
 #define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
-#define WORLD_ENTITY_HEAP_BOTTOM 0x80250000
 #endif
 
 typedef struct Fog {
@@ -401,7 +400,7 @@ Gfx D_8014B400[21][5] = {
     },
 };
 
-void* mdl_textureBaseAddress = (void*) MODEL_TEXTURE_BASE_ADDRESS;
+void* mdl_textureBaseAddress = (void*) &MapTextureMemory;
 
 u8 mdl_bgMultiplyColorA = 0;
 u8 mdl_bgMultiplyColorR = 0;
