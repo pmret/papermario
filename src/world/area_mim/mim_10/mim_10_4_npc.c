@@ -121,7 +121,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_WAIT(20)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_VANISH, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_VANISH, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(20)
         EVT_ADDF(LVar0, EVT_FLOAT(12.0))
@@ -146,7 +146,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_WAIT(30)
     EVT_CALL(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Talk, ANIM_Bootler_Idle, 0, MSG_CH3_0001)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_APPEAR, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_APPEAR, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20)
         EVT_SUBF(LVar0, EVT_FLOAT(12.0))
@@ -167,7 +167,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_292, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_292, SOUND_SPACE_MODE_0)
     EVT_EXEC_WAIT(N(EVS_Bootler_SpookPlayer))
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 450)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)

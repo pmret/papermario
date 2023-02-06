@@ -282,7 +282,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         parakarry->currentAnim = ANIM_WorldParakarry_CarryHeavy;
                         parakarry->planarFlyDist = 0;
                         suggest_player_anim_setUnkFlag(ANIM_Mario_8000D);
-                        sfx_play_sound_at_npc(SOUND_2009, 0, -4);
+                        sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
                         gCollisionStatus.lastTouchedFloor = -1;
                         gCollisionStatus.currentFloor = -1;
                         parakarry->currentFloor = -1;
@@ -301,7 +301,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         tempFrameCounterU32 = tempFrameCounter;
                         tempFrameCounterU32 /= 6;
                         if (!((tempFrameCounter - tempFrameCounterU32 * 6) & 0xFFFF)) {
-                            sfx_play_sound_at_npc(SOUND_2009, 0, -4);
+                            sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
                         }
                         sp2C = fabsf(sin_rad(DEG_TO_RAD((20 - D_802BEBC4) * 18))) * 1.3;
                         playerStatus->position.y += sp2C;
@@ -429,7 +429,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                             tempFrameCounterTwo = tempFrameCounterTwoU32;
                             tempFrameCounterTwoU32 /= 6;
                             if (!((tempFrameCounterTwo - tempFrameCounterTwoU32 * 6) & 0xFFFF)) {
-                                sfx_play_sound_at_npc(SOUND_2009, 0, -4);
+                                sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
                             }
 
                             parakarry->jumpVelocity -= parakarry->jumpScale;

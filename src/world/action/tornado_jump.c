@@ -91,7 +91,7 @@ void action_update_tornado_jump(void) {
                 playerStatus->currentStateTime = 3;
                 playerStatus->flags |= PS_FLAG_FALLING;
                 playerStatus->actionSubstate++;
-                sfx_play_sound_at_player(SOUND_TORNADO_JUMP, 0);
+                sfx_play_sound_at_player(SOUND_TORNADO_JUMP, SOUND_SPACE_MODE_0);
             }
             if (colliderBelow >= 0) {
                 playerStatus->flags &= ~(PS_FLAG_SPINNING | PS_FLAG_FLYING);
@@ -123,7 +123,7 @@ void action_update_tornado_jump(void) {
                         playerStatus->flags &= ~(PS_FLAG_SPINNING | PS_FLAG_FLYING);
                         phys_player_land();
                         exec_ShakeCam1(0, 0, 4);
-                        sfx_play_sound_at_player(SOUND_14A, 0);
+                        sfx_play_sound_at_player(SOUND_14A, SOUND_SPACE_MODE_0);
                         start_rumble(256, 50);
 
                         gCurrentHiddenPanels.tryFlipTrigger = TRUE;
@@ -150,7 +150,7 @@ void action_update_tornado_jump(void) {
                 playerStatus->actionState = ACTION_STATE_TORNADO_POUND;
                 playerStatus->actionSubstate++;
                 exec_ShakeCam1(0, 0, 4);
-                sfx_play_sound_at_player(SOUND_14A, 0);
+                sfx_play_sound_at_player(SOUND_14A, SOUND_SPACE_MODE_0);
                 start_rumble(256, 50);
 
                 gCurrentHiddenPanels.tryFlipTrigger = TRUE;

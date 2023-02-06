@@ -14,7 +14,7 @@ EvtScript N(EVS_LogBridge) = {
                 EVT_IF_EQ(LVar8, 0)
                     EVT_THREAD
                         EVT_CALL(GetModelCenter, LVar5)
-                        EVT_CALL(PlaySoundAt, SOUND_1DB, 0x400000, LVar0, LVar1, LVar2)
+                        EVT_CALL(PlaySoundAt, SOUND_1DB, SOUND_PARAM_QUIET | SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
                     EVT_END_THREAD
                 EVT_END_IF
                 EVT_IF_LT(LVar7, 90)
@@ -37,7 +37,7 @@ EvtScript N(EVS_LogBridge) = {
                 EVT_SET(LVar7, 0)
                 EVT_THREAD
                     EVT_CALL(GetModelCenter, LVar5)
-                    EVT_CALL(PlaySoundAt, SOUND_1DC, 0, LVar0, LVar1, LVar2)
+                    EVT_CALL(PlaySoundAt, SOUND_1DC, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
                 EVT_END_THREAD
                 EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, LVar9, COLLIDER_FLAGS_UPPER_MASK)
             EVT_END_IF

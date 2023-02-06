@@ -11,7 +11,7 @@ enum SlotSymbol {
     SYM_SHYGUY          = 1,
     SYM_COIN            = 2,
     SYM_STAR            = 3,
-};  
+};
 
 enum SlotMachineProgress {
     SLOT_PROGRESS_HIT_ONE       = 2,
@@ -45,8 +45,8 @@ EvtScript N(EVS_SetCam_ViewPayout) = {
 
 s32 N(HitBlockRecoilOffsets)[] = {
     3, 0, -3, 0,
-    2, 0, -2, 0, 
-    1, 0, -1, 0, 
+    2, 0, -2, 0,
+    1, 0, -1, 0,
 };
 
 EvtScript N(EVS_HitBlockRecoil) = {
@@ -64,7 +64,7 @@ EvtScript N(EVS_HitBlock_SlotStart) = {
     EVT_IF_EQ(MF_HitStartBlock, FALSE)
         EVT_THREAD
             EVT_WAIT(15)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_s1, SOUND_80000015, 0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_s1, SOUND_80000015, SOUND_SPACE_MODE_0)
         EVT_END_THREAD
         EVT_SET(MF_HitStartBlock, TRUE)
         EVT_SET(AF_OMO09_StartBlock_DontBlink, TRUE)
@@ -217,7 +217,7 @@ EvtScript N(EVS_UpdateActiveBlock1) = {
     EVT_SET(MF_Block1_Active, FALSE)
     EVT_SET(MV_SlotWheel1_Angle, LVar4)
     EVT_IF_EQ(AB_OMO09_IsPlayerNearSlotMachine, TRUE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_h1, SOUND_3F3, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_h1, SOUND_3F3, SOUND_SPACE_MODE_0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -298,7 +298,7 @@ EvtScript N(EVS_UpdateActiveBlock2) = {
     EVT_SET(MF_Block2_Active, FALSE)
     EVT_SET(MV_SlotWheel2_Angle, LVar4)
     EVT_IF_EQ(AB_OMO09_IsPlayerNearSlotMachine, TRUE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_h2, SOUND_3F3, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_h2, SOUND_3F3, SOUND_SPACE_MODE_0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -379,7 +379,7 @@ EvtScript N(EVS_UpdateActiveBlock3) = {
     EVT_SET(MF_Block3_Active, FALSE)
     EVT_SET(MV_SlotWheel3_Angle, LVar4)
     EVT_IF_EQ(AB_OMO09_IsPlayerNearSlotMachine, TRUE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_h3, SOUND_3F3, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_h3, SOUND_3F3, SOUND_SPACE_MODE_0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -604,7 +604,7 @@ EvtScript N(EVS_SlotMachine_MainUpdate) = {
             EVT_IF_NE(LVarA, SLOT_MATCH_NONE)
                 // partial match after two blocks hit
                 EVT_SET(MF_AnimateSlotLights, TRUE)
-                EVT_CALL(PlaySoundAtCollider, COLLIDER_o881, SOUND_B88, 0)
+                EVT_CALL(PlaySoundAtCollider, COLLIDER_o881, SOUND_388 | SOUND_ID_TRIGGER_CHANGE_VOLUME, SOUND_SPACE_MODE_0)
             EVT_END_IF
         EVT_END_IF
         EVT_WAIT(1)
@@ -769,7 +769,7 @@ s32 N(SlotMachineBlocks)[] = {
     MODEL_s1,
     MODEL_h1,
     MODEL_h2,
-    MODEL_h3, 
+    MODEL_h3,
 };
 
 API_CALLABLE(N(UpdateSlotMachineBlockShadows)) {

@@ -39,7 +39,7 @@ EvtScript N(EVS_PlayRumbleSounds) = {
 };
 
 EvtScript N(EVS_HuffNPuff_JumpOut) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_3C0, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_3C0, SOUND_SPACE_MODE_0)
     EVT_PLAY_EFFECT(EFFECT_SHOCKWAVE, 3, 650, 104, 0)
     EVT_WAIT(15)
     EVT_CALL(SetNpcJumpscale, NPC_HuffNPuff_02, EVT_FLOAT(0.0))
@@ -315,7 +315,7 @@ EvtScript N(EVS_HuffNPuff_Defeat_AnimateScale) = {
     EVT_CHILD_THREAD
         EVT_USE_BUF(EVT_PTR(N(BeginAnimScaleX)))
         EVT_LOOP(ARRAY_COUNT(N(BeginAnimScaleX)))
-            EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_20B6, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_20B6, SOUND_SPACE_MODE_0)
             EVT_BUF_READ3(LVar6, LVar7, LVar8)
             EVT_CALL(MakeLerp, LVar6, LVar7, LVar8, EASING_SIN_OUT)
             EVT_LOOP(0)
@@ -332,7 +332,7 @@ EvtScript N(EVS_HuffNPuff_Defeat_AnimateScale) = {
         EVT_LOOP(0)
             EVT_USE_BUF(EVT_PTR(N(LoopAnimScaleX)))
             EVT_LOOP(ARRAY_COUNT(N(LoopAnimScaleX)))
-                EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_20B6, 0)
+                EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_20B6, SOUND_SPACE_MODE_0)
                 EVT_BUF_READ2(LVar6, LVar7)
                 EVT_CALL(MakeLerp, LVar6, LVar7, 4, EASING_SIN_OUT)
                 EVT_LOOP(0)
@@ -417,7 +417,7 @@ EvtScript N(EVS_HuffNPuff_Defeat_BlowUp) = {
             EVT_CALL(SetNpcPos, LVar8, LVar1, LVar2, -30)
             EVT_CALL(RandInt, 2, LVar5)
             EVT_ADD(LVar5, 8)
-            EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_3D5, 0)
+            EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_3D5, SOUND_SPACE_MODE_0)
             EVT_CALL(NpcJump0, LVar8, LVar3, LVar4, -15, LVar5)
             EVT_CALL(SetNpcPos, LVar8, NPC_DISPOSE_LOCATION)
         EVT_END_THREAD
@@ -430,7 +430,7 @@ EvtScript N(EVS_HuffNPuff_Defeat_BlowUp) = {
     EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)
     EVT_WAIT(5)
     EVT_CALL(SetNpcPos, LVar8, LVar1, LVar2, -30)
-    EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_3D6, 0)
+    EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_3D6, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, LVar8, LVar3, LVar4, -15, 10)
     EVT_CALL(SetNpcPos, LVar8, NPC_DISPOSE_LOCATION)
     EVT_RETURN

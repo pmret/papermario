@@ -21,9 +21,9 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
     EVT_CALL(InterruptUsePartner)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000A)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, SOUND_SPACE_MODE_0)
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, SOUND_SPACE_MODE_0)
         EVT_WAIT(5)
     EVT_END_THREAD
     EVT_THREAD
@@ -32,7 +32,7 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
     EVT_WAIT(30)
     EVT_THREAD
         EVT_LOOP(12)
-            EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, SOUND_SPACE_MODE_0)
             EVT_WAIT(5)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -133,10 +133,10 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
         EVT_CALL(NpcMoveTo, NPC_Tubba, 176, 0, 0)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, SOUND_SPACE_MODE_0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(0.3))
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, SOUND_SPACE_MODE_0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 2, EVT_FLOAT(0.15))
         EVT_WAIT(8)
     EVT_END_THREAD
@@ -160,10 +160,10 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_LOOP(0)
-            EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, SOUND_SPACE_MODE_0)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(0.3))
             EVT_WAIT(5)
-            EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, SOUND_SPACE_MODE_0)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 2, EVT_FLOAT(0.15))
             EVT_WAIT(8)
         EVT_END_LOOP

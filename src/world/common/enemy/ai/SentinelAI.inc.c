@@ -105,7 +105,7 @@ void N(SentinelAI_DescendInit)(Evt* script, MobileAISettings* aiSettings, EnemyD
     if (!(enemy->varTable[0] & SENTINEL_AI_FLAG_PLAYING_SOUND)) {
         enemy->varTable[0] |= SENTINEL_AI_FLAG_PLAYING_SOUND;
     }
-    sfx_play_sound_at_position(SOUND_80000011, 2, npc->pos.x, npc->pos.y, npc->pos.z);
+    sfx_play_sound_at_position(SOUND_80000011, SOUND_SPACE_FULL, npc->pos.x, npc->pos.y, npc->pos.z);
     npc->duration = 0;
     script->AI_TEMP_STATE = AI_STATE_SENTINEL_DESCEND;
 }
@@ -116,7 +116,8 @@ void N(SentinelAI_Descend)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     f32 posX, posY, posZ, hitDepth;
     s32 color;
 
-    sfx_adjust_env_sound_pos(SOUND_80000011, 2, npc->pos.x, npc->pos.y, npc->pos.z);
+    // @bug need to use real sound id, not environmental sound id
+    sfx_adjust_env_sound_pos(SOUND_80000011, SOUND_SPACE_FULL, npc->pos.x, npc->pos.y, npc->pos.z);
     if (!basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
         enemy->varTable[0] &= ~SENTINEL_AI_FLAG_CHASING;
         npc->rotation.y = 0.0f;
@@ -254,7 +255,7 @@ void N(SentinelAI_ReturnHome)(Evt* script, MobileAISettings* aiSettings, EnemyDe
         script->functionTemp[1] = aiSettings->playerSearchInterval;
         if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->alertOffsetDist * 0.5, 0)) {
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &emoteTemp);
-            ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
+            ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
             npc->moveToPos.y = npc->pos.y;
             script->AI_TEMP_STATE = AI_STATE_SENTINEL_CHASE_INIT;
             return;

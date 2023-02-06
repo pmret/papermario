@@ -144,7 +144,7 @@ void entity_shattering_block_init(Entity* entity) {
             fragmentMatrices = Entity_ShatteringHammer3Block_FragmentsMatrices;
             break;
         case ENTITY_TYPE_BRICK_BLOCK:
-            sfx_play_sound_at_position(SOUND_158, 0, entity->position.x, entity->position.y, entity->position.z);
+            sfx_play_sound_at_position(SOUND_158, SOUND_SPACE_MODE_0, entity->position.x, entity->position.y, entity->position.z);
             fragmentDisplayLists = Entity_ShatteringBrickBlock_FragmentsRender;
             fragmentMatrices = Entity_ShatteringBrickBlock_FragmentsMatrices;
             break;

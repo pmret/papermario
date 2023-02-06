@@ -980,7 +980,7 @@ void btl_state_update_celebration(void) {
             if (battleStatus->currentButtonsPressed & BUTTON_A) {
                 if (!CantLevelUpStat[battleStatus->currentSubmenu]) {
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    sfx_play_sound(SOUND_749);
+                    sfx_play_sound(SOUND_349 | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_UPGRADE;
                 } else {
                     sfx_play_sound(SOUND_MENU_ERROR);

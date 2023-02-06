@@ -49,7 +49,7 @@ EvtScript N(EVS_Main) = {
     EVT_WAIT(1)
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_EXEC(N(EVS_SetupFoliage))
-    EVT_CALL(PlaySoundAtF, SOUND_80000009, 1, -560, 0, -233)
+    EVT_CALL(PlaySoundAtF, SOUND_80000009, SOUND_SPACE_MODE_1, -560, 0, -233)
     EVT_THREAD
         EVT_SET(LVarF, 0)
         EVT_LABEL(10)

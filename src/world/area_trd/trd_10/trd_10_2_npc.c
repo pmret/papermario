@@ -89,7 +89,7 @@ EvtScript N(EVS_NpcAI_KoopaBros_01) = {
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_00F6, 300, 100)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_00F7, 300, 100)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_00F8, 300, 100)
-    EVT_CALL(PlaySoundAt, SOUND_1E2, 0, 0, 0, 0)
+    EVT_CALL(PlaySoundAt, SOUND_1E2, SOUND_SPACE_MODE_0, 0, 0, 0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(1.0))
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_00F9, 300, 100)
     EVT_WAIT(30)
@@ -170,7 +170,7 @@ EvtScript N(EVS_NpcDefeat_KoopaBros_01) = {
                 EVT_CALL(DisablePlayerInput, FALSE)
             EVT_END_THREAD
             EVT_WAIT(120)
-            EVT_CALL(PlaySoundAt, SOUND_1E2, 0, 0, 0, 0)
+            EVT_CALL(PlaySoundAt, SOUND_1E2, SOUND_SPACE_MODE_0, 0, 0, 0)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(0.5))
             EVT_WAIT(15)
             EVT_SET(GF_TRD10_Defeated_KoopaBros, TRUE)

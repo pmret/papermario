@@ -91,8 +91,6 @@ void func_802BD368_31E0D8(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
     }
 }
 
-// void func_802BD414_31E184(Npc*);
-// INCLUDE_ASM(s32, "world/partner/sushie", func_802BD414_31E184);
 void func_802BD414_31E184(Npc* npc) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
@@ -270,7 +268,7 @@ void func_802BD414_31E184(Npc* npc) {
         }
         if (bss_802BFEE8 >= 10 && (!(partnerActionStatus->currentButtons & BUTTON_C_DOWN) || bss_802BFEE8 >= 30)) {
             npc->currentAnim = ANIM_WorldSushie_Rise;
-            sfx_play_sound_at_npc(SOUND_694, 0, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_294 | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_MODE_0, NPC_PARTNER);
             bss_802BFEE4 = 3;
         }
     }
@@ -439,7 +437,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             npc->duration--;
             if (npc->duration != 0) {
                 if (npc->duration == 2) {
-                    sfx_play_sound_at_npc(SOUND_JUMP_2081, 0, NPC_PARTNER);
+                    sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
                 }
                 break;
@@ -485,7 +483,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                 disable_player_shadow();
                 playerStatus->flags &= ~PS_FLAG_MOVEMENT_LOCKED;
                 suggest_player_anim_setUnkFlag(ANIM_Mario_8000F);
-                sfx_play_sound_at_npc(SOUND_2013, 0, NPC_PARTNER);
+                sfx_play_sound_at_npc(SOUND_2013, SOUND_SPACE_MODE_0, NPC_PARTNER);
                 playerStatus->position.x = npc->pos.x;
                 playerStatus->position.y = npc->pos.y;
                 playerStatus->position.z = npc->pos.z;
@@ -515,9 +513,9 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                     func_802BD20C_31DF7C(&angle, &sp34);
                     if (bss_802BFEE4 == 0) {
                         if (sp34 != 0.0f) {
-                            sfx_play_sound_at_npc(SOUND_2015, 0, NPC_PARTNER);
+                            sfx_play_sound_at_npc(SOUND_2015, SOUND_SPACE_MODE_0, NPC_PARTNER);
                         } else {
-                            sfx_play_sound_at_npc(SOUND_2014, 0, NPC_PARTNER);
+                            sfx_play_sound_at_npc(SOUND_2014, SOUND_SPACE_MODE_0, NPC_PARTNER);
                         }
                     }
                 }
@@ -563,14 +561,14 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
 
                     if (npc->currentWall < 0 || npc->currentWall & COLLISION_WITH_ENTITY_BIT) {
                         if (bss_802BFEE4 == 2 && bss_802BFEE8 == 1) {
-                            sfx_play_sound_at_npc(SOUND_294, 0, NPC_PARTNER);
+                            sfx_play_sound_at_npc(SOUND_294, SOUND_SPACE_MODE_0, NPC_PARTNER);
                         }
                         break;
                     }
                     collider = get_collider_flags(npc->currentWall) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                     if (collider != SURFACE_TYPE_DOCK_WALL) {
                         if (bss_802BFEE4 == 2 && bss_802BFEE8 == 1) {
-                            sfx_play_sound_at_npc(SOUND_294, 0, NPC_PARTNER);
+                            sfx_play_sound_at_npc(SOUND_294, SOUND_SPACE_MODE_0, NPC_PARTNER);
                         }
                         break;
                     }
@@ -602,7 +600,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                         npc->duration = (2.0f * npc->jumpVelocity) / 0.6f;
                         npc->moveSpeed = dist / npc->duration;
                         npc->jumpVelocity += (npc->moveToPos.y - playerStatus->position.y) / npc->duration;
-                        sfx_play_sound_at_npc(SOUND_JUMP_2081, 0, NPC_PARTNER);
+                        sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_MODE_0, NPC_PARTNER);
                         suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
                         enable_player_shadow();
                         playerStatus->flags |= PS_FLAG_MOVEMENT_LOCKED;

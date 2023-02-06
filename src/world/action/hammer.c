@@ -109,7 +109,7 @@ void action_hammer_play_hit_fx(s32 hitID) {
             break;
     }
 
-    sfx_play_sound_at_player(soundID, 0);
+    sfx_play_sound_at_player(soundID, SOUND_SPACE_MODE_0);
     start_rumble(256, 50);
 }
 
@@ -265,7 +265,7 @@ void action_update_hammer(void) {
         }
 
         suggest_player_anim_clearUnkFlag(anim);
-        sfx_play_sound_at_player(soundID, 0);
+        sfx_play_sound_at_player(soundID, SOUND_SPACE_MODE_0);
         HammerHit->unk_0C = 0;
         HammerHit->unk_14 = 0;
     }
@@ -378,7 +378,7 @@ void func_802B6820_E256F0(void) {
         } else {
             soundID = SOUND_2115;
         }
-        sfx_play_sound_at_player(soundID, 0);
+        sfx_play_sound_at_player(soundID, SOUND_SPACE_MODE_0);
 
         action_hammer_play_hit_fx(HammerHit->hitID);
 

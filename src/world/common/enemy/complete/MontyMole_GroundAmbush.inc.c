@@ -59,7 +59,7 @@ EvtScript N(EVS_NpcAI_MontyMole_GroundAmbush) = {
         EVT_CALL(GetNpcPos, NPC_SELF, LVar4, LVar5, LVar6)
         EVT_ADD(LVar5, 30)
         EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_SELF, LVar4, LVar5, LVar6, 20)
         EVT_CALL(SetNpcPos, LVar0, NPC_DISPOSE_LOCATION)
         EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)

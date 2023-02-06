@@ -63,7 +63,7 @@ EvtScript N(EVS_NpcAI_Goompa) = {
             EVT_END_IF
             EVT_CALL(DisablePlayerInput, TRUE)
             EVT_CALL(SetNpcAux, NPC_Goompa, 0)
-            EVT_CALL(PlaySoundAtNpc, NPC_Goompa, SOUND_262, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Goompa, SOUND_262, SOUND_SPACE_MODE_0)
             EVT_CALL(ShowEmote, NPC_Goompa, EMOTE_EXCLAMATION, 45, 15, TRUE, 0, 0, 0, 0)
             EVT_WAIT(15)
             EVT_CALL(NpcFacePlayer, NPC_SELF, 5)

@@ -82,7 +82,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_NE(LVar0, osr_00_ENTRY_3)
         EVT_EXEC(N(EVS_TexPan_Fountain))
-        EVT_CALL(PlaySoundAtF, SOUND_80000059, 1, 300, 0, 400)
+        EVT_CALL(PlaySoundAtF, SOUND_80000059, SOUND_SPACE_MODE_1, 300, 0, 400)
     EVT_END_IF
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)

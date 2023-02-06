@@ -15,7 +15,7 @@ s32 N(ChandelierModels)[] = {
     MODEL_kusari_1,
     MODEL_kusari_2,
     MODEL_wa,
-    MODEL_hi 
+    MODEL_hi
 };
 
 API_CALLABLE(N(SetCameraVFOV)) {
@@ -127,7 +127,7 @@ API_CALLABLE(N(UpdateChandelier)) {
     chandelier = script->functionTempPtr[1];
     model = chandelier->models[0];
     lastDropDistance = chandelier->dropDistance;
-    
+
     if (chandelier->controlData->controlState == CONTROL_STATE_RETRACT) {
         script->functionTemp[0] = CHANDELIER_STATE_PRE_RETRACT;
         chandelier->controlData->controlState = CONTROL_STATE_RETRACTING;
@@ -206,7 +206,7 @@ API_CALLABLE(N(UpdateChandelier)) {
         }
         // detect direction reversal
         if (nextSwingAngle * chandelier->swingAngle <= 0.0f) {
-            sfx_play_sound_at_player(SOUND_9D, 0);
+            sfx_play_sound_at_player(SOUND_9D, SOUND_SPACE_MODE_0);
         }
         chandelier->swingAngle = nextSwingAngle;
     }
@@ -215,7 +215,7 @@ API_CALLABLE(N(UpdateChandelier)) {
     if (!script->functionTemp[2]) {
         // is chain moving?
         if (chandelier->dropDistance != lastDropDistance) {
-            sfx_play_sound_at_position(SOUND_8000000F, 0, 440.0f, chandelier->dropDistance, 271.0f);
+            sfx_play_sound_at_position(SOUND_8000000F, SOUND_SPACE_MODE_0, 440.0f, chandelier->dropDistance, 271.0f);
             script->functionTemp[2] = TRUE;
         }
     } else {
@@ -232,9 +232,9 @@ API_CALLABLE(N(UpdateChandelier)) {
          // is cabinet moving?
         if (cabinetPos != script->varTable[1]) {
             f32 x, y, z;
-           
+
             get_collider_center(COLLIDER_o557, &x, &y, &z);
-            sfx_play_sound_at_position(SOUND_80000010, 0, x, y, z);
+            sfx_play_sound_at_position(SOUND_80000010, SOUND_SPACE_MODE_0, x, y, z);
             script->functionTemp[3] = TRUE;
         }
     } else {
@@ -418,7 +418,7 @@ EvtScript N(EVS_LaunchFromCouch_GrabChandelier) = {
     EVT_SET(CONTROL_DATA_8, FALSE)
     EVT_SET(LVar8, MODEL_tobu1)
     EVT_EXEC(N(EVS_Couch_AnimateCushion))
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o567, SOUND_2086, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o567, SOUND_2086, SOUND_SPACE_MODE_0)
     EVT_SET(LVar8, MODEL_bane1)
     EVT_EXEC(N(EVS_Couch_AnimateSpring))
     EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
@@ -553,7 +553,7 @@ EvtScript N(EVS_LaunchFromCouch_Crash) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_SET(LVar8, MODEL_tobu1)
     EVT_EXEC(N(EVS_Couch_AnimateCushion))
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o567, SOUND_2086, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o567, SOUND_2086, SOUND_SPACE_MODE_0)
     EVT_SET(LVar8, MODEL_bane1)
     EVT_EXEC(N(EVS_Couch_AnimateSpring))
     EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
@@ -569,16 +569,16 @@ EvtScript N(EVS_LaunchFromCouch_Crash) = {
     EVT_CALL(PlayerJump, 51, -210, 87, 60)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_162, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_162, SOUND_SPACE_MODE_0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_80003)
     EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_GetUp)
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_DustOff)
     EVT_WAIT(7)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_DUST_OFF, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_DUST_OFF, SOUND_SPACE_MODE_0)
     EVT_WAIT(8)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_DUST_OFF, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_DUST_OFF, SOUND_SPACE_MODE_0)
     EVT_WAIT(15)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
     EVT_KILL_THREAD(LVarA)

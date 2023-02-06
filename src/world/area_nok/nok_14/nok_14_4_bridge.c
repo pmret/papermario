@@ -13,7 +13,7 @@ EvtScript N(EVS_Scene_BuildBridge) = {
     EVT_CALL(InterpCamTargetPos, CAM_DEFAULT, TRUE, 3, 0, -60, 20)
     EVT_WAIT(10)
     EVT_SET(GB_StoryProgress, STORY_CH1_MADE_SECOND_BRIDGE)
-    EVT_CALL(PlaySoundAt, SOUND_71, 0, 0, 0, -60)
+    EVT_CALL(PlaySoundAt, SOUND_71, SOUND_SPACE_MODE_0, 0, 0, -60)
     EVT_CALL(MakeLerp, -200, 0, 15, EASING_COS_IN)
     EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -29,7 +29,7 @@ EvtScript N(EVS_Scene_BuildBridge) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAt, SOUND_67, 0, -84, 0, -60)
+    EVT_CALL(PlaySoundAt, SOUND_67, SOUND_SPACE_MODE_0, -84, 0, -60)
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 90, 8, EASING_COS_IN_OUT)
         EVT_LABEL(20)
@@ -41,7 +41,7 @@ EvtScript N(EVS_Scene_BuildBridge) = {
             EVT_END_IF
     EVT_END_THREAD
     EVT_WAIT(3)
-    EVT_CALL(PlaySoundAt, SOUND_68, 0, -56, 0, -60)
+    EVT_CALL(PlaySoundAt, SOUND_68, SOUND_SPACE_MODE_0, -56, 0, -60)
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 90, 8, EASING_LINEAR)
         EVT_LABEL(24)
@@ -53,7 +53,7 @@ EvtScript N(EVS_Scene_BuildBridge) = {
             EVT_END_IF
     EVT_END_THREAD
     EVT_WAIT(3)
-    EVT_CALL(PlaySoundAt, SOUND_69, 0, -28, 0, -60)
+    EVT_CALL(PlaySoundAt, SOUND_69, SOUND_SPACE_MODE_0, -28, 0, -60)
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 90, 8, EASING_LINEAR)
         EVT_LABEL(21)
@@ -65,7 +65,7 @@ EvtScript N(EVS_Scene_BuildBridge) = {
             EVT_END_IF
     EVT_END_THREAD
     EVT_WAIT(3)
-    EVT_CALL(PlaySoundAt, SOUND_6A, 0, 0, 0, -60)
+    EVT_CALL(PlaySoundAt, SOUND_6A, SOUND_SPACE_MODE_0, 0, 0, -60)
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 90, 8, EASING_LINEAR)
         EVT_LABEL(25)
@@ -77,7 +77,7 @@ EvtScript N(EVS_Scene_BuildBridge) = {
             EVT_END_IF
     EVT_END_THREAD
     EVT_WAIT(3)
-    EVT_CALL(PlaySoundAt, SOUND_6B, 0, 28, 0, -60)
+    EVT_CALL(PlaySoundAt, SOUND_6B, SOUND_SPACE_MODE_0, 28, 0, -60)
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 90, 8, EASING_LINEAR)
         EVT_LABEL(22)
@@ -89,7 +89,7 @@ EvtScript N(EVS_Scene_BuildBridge) = {
             EVT_END_IF
     EVT_END_THREAD
     EVT_WAIT(3)
-    EVT_CALL(PlaySoundAt, SOUND_6C, 0, 56, 0, -60)
+    EVT_CALL(PlaySoundAt, SOUND_6C, SOUND_SPACE_MODE_0, 56, 0, -60)
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 90, 8, EASING_LINEAR)
         EVT_LABEL(26)
@@ -101,7 +101,7 @@ EvtScript N(EVS_Scene_BuildBridge) = {
             EVT_END_IF
     EVT_END_THREAD
     EVT_WAIT(3)
-    EVT_CALL(PlaySoundAt, SOUND_6D, 0, 84, 0, -60)
+    EVT_CALL(PlaySoundAt, SOUND_6D, SOUND_SPACE_MODE_0, 84, 0, -60)
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 90, 8, EASING_LINEAR)
         EVT_LABEL(23)

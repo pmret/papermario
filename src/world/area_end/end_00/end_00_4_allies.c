@@ -6,7 +6,7 @@ EvtScript N(EVS_ParadePhase_Luigi) = {
     EVT_WAIT(80)
     EVT_THREAD
         EVT_LOOP(9)
-            EVT_CALL(PlaySoundAtNpc, NPC_Luigi, SOUND_11, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Luigi, SOUND_11, SOUND_SPACE_MODE_0)
             EVT_WAIT(15)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -20,7 +20,7 @@ EvtScript N(EVS_ParadePhase_Luigi) = {
     EVT_THREAD
         EVT_WAIT(10)
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtNpc, NPC_Luigi, SOUND_14, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Luigi, SOUND_14, SOUND_SPACE_MODE_0)
             EVT_WAIT(15)
         EVT_END_LOOP
     EVT_END_THREAD

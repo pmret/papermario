@@ -144,7 +144,7 @@ glabel au_engine_init
 .L8005307C:
 /* 2E47C 8005307C 327000FF */  andi      $s0, $s3, 0xff
 /* 2E480 80053080 0200202D */  daddu     $a0, $s0, $zero
-/* 2E484 80053084 0C015BB0 */  jal       au_pvoice_set_group
+/* 2E484 80053084 0C015BB0 */  jal       au_pvoice_set_bus
 /* 2E488 80053088 0000282D */   daddu    $a1, $zero, $zero
 /* 2E48C 8005308C 0200202D */  daddu     $a0, $s0, $zero
 /* 2E490 80053090 8E850004 */  lw        $a1, 4($s4)
@@ -225,9 +225,9 @@ glabel au_engine_init
 /* 2E5B8 800531B8 24060001 */  addiu     $a2, $zero, 1
 /* 2E5BC 800531BC 3C04800A */  lui       $a0, %hi(gAuAmbienceManager)
 /* 2E5C0 800531C0 8C84A628 */  lw        $a0, %lo(gAuAmbienceManager)($a0)
-/* 2E5C4 800531C4 0C0142E4 */  jal       au_mseq_manager_init
+/* 2E5C4 800531C4 0C0142E4 */  jal       au_amb_manager_init
 /* 2E5C8 800531C8 0280382D */   daddu    $a3, $s4, $zero
-/* 2E5CC 800531CC 0C014985 */  jal       func_80052614
+/* 2E5CC 800531CC 0C014985 */  jal       au_init_voices
 /* 2E5D0 800531D0 0280202D */   daddu    $a0, $s4, $zero
 /* 2E5D4 800531D4 0280202D */  daddu     $a0, $s4, $zero
 /* 2E5D8 800531D8 0C0153F0 */  jal       au_load_BK_headers

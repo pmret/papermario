@@ -16,7 +16,7 @@ NpcSettings N(NpcSettings_AntiGuy) = {
 
 s32 N(BribeItemList)[] = {
     ITEM_LEMON_CANDY,
-    -1 
+    -1
 };
 
 EvtScript N(EVS_NpcInteract_AntiGuy) = {
@@ -51,7 +51,7 @@ EvtScript N(EVS_NpcInteract_AntiGuy) = {
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_004A)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_262, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_262, SOUND_SPACE_MODE_0)
         EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 30, TRUE, 0, 0, 0, 0)
         EVT_WAIT(30)
         EVT_CALL(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0)

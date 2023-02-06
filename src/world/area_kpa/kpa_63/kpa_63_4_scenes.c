@@ -146,7 +146,7 @@ EvtScript N(EVS_Starship_Depart) = {
     EVT_END_IF
     EVT_CALL(SetMusicTrack, 0, SONG_STARSHIP_THEME, 1, 8)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtPlayer, SOUND_17E, 0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_17E, SOUND_SPACE_MODE_0)
         EVT_SET(LVar2, MV_Starship_PosY)
         EVT_CALL(MakeLerp, 0, -110, 60, EASING_QUADRATIC_OUT)
         EVT_LOOP(0)
@@ -184,7 +184,7 @@ EvtScript N(EVS_Starship_Arrive) = {
     EVT_CALL(HidePlayerShadow, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_PARTNER, TRUE)
     EVT_EXEC_GET_TID(N(EVS_UpdatePassengers), LVar9)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_17F, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_17F, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(MakeLerp, -100, 0, 60, EASING_QUADRATIC_OUT)
         EVT_LOOP(0)

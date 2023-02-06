@@ -56,7 +56,7 @@ EvtScript N(EVS_PushLeftStatue_Impl) = {
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_END_THREAD
     EVT_CALL(MakeLerp, LVar6, LVar7, 100, EASING_LINEAR)
-    EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_80000010, 0)
+    EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_80000010, SOUND_SPACE_MODE_0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, MODEL_g19, LVar0, 0, 0)

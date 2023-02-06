@@ -23,7 +23,7 @@ EvtScript N(EVS_SetupWindmill) = {
 EvtScript N(EVS_UpdateWindmill) = {
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_SET(LVar1, 30)
-    EVT_CALL(PlaySoundAtModel, MODEL_o36, SOUND_8000004A, 0)
+    EVT_CALL(PlaySoundAtModel, MODEL_o36, SOUND_8000004A, SOUND_SPACE_MODE_0)
     EVT_LABEL(0)
         EVT_ADDF(LVar0, EVT_FLOAT(1.0))
         EVT_CALL(N(WrapWindmillAngle))

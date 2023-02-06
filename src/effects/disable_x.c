@@ -151,7 +151,7 @@ void disable_x_update(EffectInstance* effect) {
                     data[1].unk_28 = 0;
                     data->unk_38++;
                     if (data->pos.y > -500.0f) {
-                        shim_sfx_play_sound_at_position(SOUND_2107, 0, data->pos.x, data->pos.y, data->pos.z);
+                        shim_sfx_play_sound_at_position(SOUND_2107, SOUND_SPACE_MODE_0, data->pos.x, data->pos.y, data->pos.z);
                     }
                 } else if (unk_3C < unk_38) {
                     shim_load_effect(EFFECT_DISABLE_X);

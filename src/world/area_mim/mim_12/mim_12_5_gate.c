@@ -25,16 +25,16 @@ API_CALLABLE(N(InitializeForestFogProperties)) {
 API_CALLABLE(N(InterpFogDistance)) {
     Bytecode* args = script->ptrReadPos;
     s32 retVal = ApiStatus_BLOCK;
-    
+
     if (isInitialCall) {
         script->functionTemp[1] = evt_get_variable(script, *args++);
         script->functionTemp[2] = evt_get_variable(script, *args++);
         script->functionTemp[0] = evt_get_variable(script, *args++);
         script->functionTemp[3] = evt_get_variable(script, *args++);
     }
-    
+
     script->functionTemp[1] += script->functionTemp[3];
-    
+
     if (script->functionTemp[3] >= 0) {
         if (script->functionTemp[1] >= script->functionTemp[2]) {
             script->functionTemp[1] = script->functionTemp[2];
@@ -54,15 +54,15 @@ API_CALLABLE(N(InterpFogDistance)) {
 API_CALLABLE(N(InterpBackgroundDarkness)) {
     Bytecode* args = script->ptrReadPos;
     s32 retVal = ApiStatus_BLOCK;
-    
+
     if (isInitialCall) {
         script->functionTemp[1] = evt_get_variable(script, *args++);
         script->functionTemp[2] = evt_get_variable(script, *args++);
         script->functionTemp[3] = evt_get_variable(script, *args++);
     }
-    
+
     script->functionTemp[1] += script->functionTemp[3];
-    
+
     if (script->functionTemp[3] >= 0) {
         if (script->functionTemp[1] >= script->functionTemp[2]) {
             script->functionTemp[1] = script->functionTemp[2];
@@ -82,7 +82,7 @@ API_CALLABLE(N(InterpBackgroundDarkness)) {
 API_CALLABLE(N(InterpSpriteShadingColor)) {
     SpriteShadingProfile* shadingProfile = D_80151328;
     Bytecode* args = script->ptrReadPos;
-    
+
     if (isInitialCall) {
         script->varTable[0] = evt_get_variable(script, *args++);
         script->varTable[1] = evt_get_variable(script, *args++);
@@ -93,7 +93,7 @@ API_CALLABLE(N(InterpSpriteShadingColor)) {
         script->varTable[6] = 0;
         D_80151328->flags |= 1;
     }
-    
+
     script->varTable[6]++;
     shadingProfile->ambientColor.r = update_lerp(0, script->varTable[3], script->varTable[0], script->varTable[6], 20);
     shadingProfile->ambientColor.g = update_lerp(0, script->varTable[4], script->varTable[1], script->varTable[6], 20);
@@ -111,7 +111,7 @@ API_CALLABLE(N(InterpSpriteShadingColor)) {
 API_CALLABLE(N(MoveNpcAlongArc)) {
     Npc* npc = resolve_npc(script, script->varTable[0]);
     f32 angle, sinAngle, cosAngle;
-    
+
     if (isInitialCall) {
         script->varTable[6] = script->varTable[5];
         script->varTable[7] = dist2D(npc->pos.x, npc->pos.z, script->varTable[1], script->varTable[2]);
@@ -160,7 +160,7 @@ EvtScript N(EVS_FadeToGustyShading) = {
 };
 
 EvtScript N(EVS_OpenGate) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o67, SOUND_METAL_GATE_OPEN, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o67, SOUND_METAL_GATE_OPEN, SOUND_SPACE_MODE_0)
     EVT_SET(LVar3, 0)
     EVT_SUB(LVar3, LVar2)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o67, COLLIDER_FLAGS_UPPER_MASK)
@@ -189,7 +189,7 @@ EvtScript N(EVS_CloseGate) = {
     EVT_IF_NE(LVar1, 0)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o67, SOUND_METAL_GATE_CLOSE, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o67, SOUND_METAL_GATE_CLOSE, SOUND_SPACE_MODE_0)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o67, COLLIDER_FLAGS_UPPER_MASK)
     EVT_RETURN
     EVT_END
@@ -325,7 +325,7 @@ EvtScript N(EVS_Scene_UnlockGate) = {
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(SetNpcPos, NPC_GateBoo_01, -103, 65, 64)
     EVT_CALL(SetNpcPos, NPC_GateBoo_02, -45, 65, -66)
-    EVT_CALL(PlaySoundAtNpc, NPC_GateBoo_01, SOUND_BOO_VANISH, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_GateBoo_01, SOUND_BOO_VANISH, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(20)
         EVT_ADDF(LVar0, EVT_FLOAT(12.0))
@@ -355,7 +355,7 @@ EvtScript N(EVS_Scene_UnlockGate) = {
     EVT_EXEC_WAIT(N(EVS_StartGustyMusic))
     EVT_EXEC_WAIT(N(EVS_HaveBoosCloseGate))
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtNpc, NPC_GateBoo_01, SOUND_BOO_APPEAR, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_GateBoo_01, SOUND_BOO_APPEAR, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20)
         EVT_SUBF(LVar0, EVT_FLOAT(12.0))
