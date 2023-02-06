@@ -229,7 +229,7 @@ EvtScript N(EVS_NpcIdle_TheMaster) = {
                     EVT_CALL(RemoveKeyItemAt, LVar1)
                 EVT_END_IF
                 EVT_SET(LVar1, 1)
-                EVT_EXEC_WAIT(N(GiveKeyReward))
+                EVT_EXEC_WAIT(N(GiveItemReward))
                 EVT_CALL(AddKeyItem, LVar0)
                 EVT_IF_LT(GB_MAC00_DojoRank, 5)
                     EVT_CALL(SpeakToPlayer, NPC_TheMaster, ANIM_TheMaster_Talk, ANIM_TheMaster_Idle, 0, MSG_MAC_Gate_0041)

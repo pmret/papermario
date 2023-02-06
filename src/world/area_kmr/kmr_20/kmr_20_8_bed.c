@@ -5,12 +5,12 @@
 #include "world/common/atomic/ToadHouse.data.inc.c"
 
 API_CALLABLE(N(MuteAmbienceVolume_Bed)) {
-    au_ambience_set_volume(0, 1000, 1);
+    snd_ambient_set_volume(0, 1000, 1);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(SetAmbienceVolumeHalf_Bed)) {
-    au_ambience_set_volume(0, 1000, 63);
+    snd_ambient_set_volume(0, 1000, 63);
     return ApiStatus_DONE2;
 }
 

@@ -32,24 +32,17 @@ API_CALLABLE(N(PlaySpringLaunchAnimation)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(EVS_HandItemOver) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
-    EVT_WAIT(20)
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/atomic/MarioSalute.inc.c"
 
 EvtScript N(EVS_KootFavorCheck_Luigi) = {
-    EVT_IF_NE(GB_KootFavor_Current, 5)
+    EVT_IF_NE(GB_KootFavor_Current, KOOT_FAVOR_CH3_1)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_NE(GF_KMR20_Gift_LuigisAutograph, FALSE)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Luigi_Idle)
-    EVT_EXEC_WAIT(N(EVS_HandItemOver))
+    EVT_EXEC_WAIT(N(EVS_MarioSalute))
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Luigi_Talk, ANIM_Luigi_Idle, 0, MSG_CH0_0103)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
     EVT_WAIT(40)
@@ -69,7 +62,7 @@ EvtScript N(EVS_KootFavorCheck_Luigi) = {
     EVT_WAIT(10)
     EVT_SET(LVar0, ITEM_KOOT_MERLUVLEE_AUTOGRAPH)
     EVT_SET(LVar1, 1)
-    EVT_EXEC_WAIT(N(GiveKeyReward))
+    EVT_EXEC_WAIT(N(GiveItemReward))
     EVT_CALL(AddKeyItem, LVar0)
     EVT_SET(GF_KMR20_Gift_LuigisAutograph, TRUE)
     EVT_IF_GE(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
@@ -142,7 +135,7 @@ EvtScript N(EVS_Scene_LuigiWaitingAround) = {
     EVT_SET(MF_ReadyForPlayerEntry, TRUE)
     EVT_WAIT(15)
     EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_ENABLE_HIT_SCRIPT, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_8, FALSE)
     EVT_CALL(PlaySoundAtNpc, NPC_Luigi_1, SOUND_262, 0)
     EVT_CALL(ShowEmote, NPC_Luigi_1, EMOTE_EXCLAMATION, -30, 20, TRUE, 0, 0, 0, 0)
     EVT_CALL(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Jump)
@@ -228,7 +221,7 @@ EvtScript N(EVS_Scene_LuigiWaitingAround) = {
     EVT_END_SWITCH
     EVT_CALL(SpeakToPlayer, NPC_Luigi_1, ANIM_Luigi_Talk, ANIM_Luigi_Idle, 5, MSG_CH0_00E3)
     EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_8, TRUE)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.5))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
@@ -625,7 +618,7 @@ StaticNpc N(NpcData_Luigi_0) = {
     .settings = &N(NpcSettings_Luigi),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Luigi_0),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -658,7 +651,7 @@ StaticNpc N(NpcData_Luigi_1) = {
     .settings = &N(NpcSettings_Luigi),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Luigi_1),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
@@ -786,7 +779,7 @@ StaticNpc N(NpcData_ShyGuy) = {
     .settings = &N(NpcSettings_ShyGuy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_ShyGuy),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,

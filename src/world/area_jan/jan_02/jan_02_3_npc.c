@@ -23,7 +23,7 @@ EvtScript N(EVS_GetRescuedYoshiCount) = {
 };
 
 EvtScript N(EVS_Scene_GetJadeRaven) = {
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_IF_EQ(GF_JAN02_Met_VillageLeader, TRUE)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_VillageLeader_Talk, ANIM_VillageLeader_Idle, 0, MSG_CH5_0023)
     EVT_ELSE
@@ -64,7 +64,7 @@ EvtScript N(EVS_Scene_GetJadeRaven) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.5))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_CALL(func_802D2C14, 0)
     EVT_CALL(GetCurrentPartnerID, LVar0)
     EVT_IF_EQ(LVar0, PARTNER_SUSHIE)
@@ -151,7 +151,7 @@ EvtScript N(EVS_NpcInit_VillageLeader) = {
         EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
             EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_VillageLeader)))
         EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         EVT_CASE_LT(STORY_CH5_GOT_JADE_RAVEN)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_VillageLeader_Idle)
             EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
@@ -394,7 +394,7 @@ StaticNpc N(NpcData_Townsfolk)[] = {
         .settings = &N(NpcSettings_Yoshi),
         .pos = { 323.0f, 30.0f, 412.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_VillageLeader),
         .drops = NPC_NO_DROPS,
         .animations = YOSHI_LEADER_ANIMS,
@@ -405,7 +405,7 @@ StaticNpc N(NpcData_Townsfolk)[] = {
         .settings = &N(NpcSettings_Yoshi),
         .pos = { 172.0f, 30.0f, 418.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Councillor),
         .drops = NPC_NO_DROPS,
         .animations = YOSHI_COUNCILLOR_ANIMS,
@@ -417,7 +417,7 @@ StaticNpc N(NpcData_Townsfolk)[] = {
         .settings = &N(NpcSettings_Yoshi_Patrol),
         .pos = { -520.0f, 0.0f, -270.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Yoshi_01),
         .drops = NPC_NO_DROPS,
         .territory = {
@@ -442,7 +442,7 @@ StaticNpc N(NpcData_Townsfolk)[] = {
         .settings = &N(NpcSettings_Yoshi_Patrol),
         .pos = { 180.0f, 0.0f, -520.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Yoshi_02),
         .drops = NPC_NO_DROPS,
         .territory = {
@@ -468,7 +468,7 @@ StaticNpc N(NpcData_Townsfolk)[] = {
         .settings = &N(NpcSettings_Yoshi_Patrol),
         .pos = { 600.0f, 0.0f, -150.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Yoshi_03),
         .drops = NPC_NO_DROPS,
         .territory = {
@@ -495,7 +495,7 @@ StaticNpc N(NpcData_ChuckQuizmo) = {
     .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { -150.0f, 15.0f, 300.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_JAN, QUIZ_COUNT_JAN, QUIZ_MAP_JAN_02 }},
     .drops = NPC_NO_DROPS,

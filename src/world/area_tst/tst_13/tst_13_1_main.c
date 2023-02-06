@@ -90,7 +90,7 @@ NpcSettings N(NpcSettings_00) = {
     .radius = 24,
     .otherAI = &N(EVS_NpcAuxAI_00),
     .onInteract = &N(EVS_NpcInteract_00),
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcSettings N(NpcSettings_01) = {
@@ -99,7 +99,7 @@ NpcSettings N(NpcSettings_01) = {
     .radius = 24,
     .otherAI = &N(EVS_NpcAuxAI_00),
     .onInteract = &N(EVS_NpcInteract_01),
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcSettings N(NpcSettings_02) = {
@@ -108,7 +108,7 @@ NpcSettings N(NpcSettings_02) = {
     .radius = 24,
     .otherAI = &N(EVS_NpcAuxAI_00),
     .onInteract = &N(EVS_NpcInteract_02),
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcSettings N(NpcSettings_03) = {
@@ -117,7 +117,7 @@ NpcSettings N(NpcSettings_03) = {
     .radius = 24,
     .otherAI = &N(EVS_NpcAuxAI_00),
     .onInteract = &N(EVS_NpcInteract_03),
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcSettings N(NpcSettings_04) = {
@@ -126,7 +126,7 @@ NpcSettings N(NpcSettings_04) = {
     .radius = 24,
     .otherAI = &N(EVS_NpcAuxAI_00),
     .onInteract = &N(EVS_NpcInteract_04),
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcSettings N(NpcSettings_05) = {
@@ -135,7 +135,7 @@ NpcSettings N(NpcSettings_05) = {
     .radius = 24,
     .otherAI = &N(EVS_NpcAuxAI_00),
     .onInteract = &N(EVS_NpcInteract_05),
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcSettings N(NpcSettings_06) = {
@@ -144,7 +144,7 @@ NpcSettings N(NpcSettings_06) = {
     .radius = 24,
     .otherAI = &N(EVS_NpcAuxAI_00),
     .onInteract = &N(EVS_NpcInteract_06),
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcSettings N(NpcSettings_07) = {
@@ -153,7 +153,7 @@ NpcSettings N(NpcSettings_07) = {
     .radius = 24,
     .otherAI = &N(EVS_NpcAuxAI_00),
     .onInteract = &N(EVS_NpcInteract_07),
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcSettings N(NpcSettings_08) = {
@@ -162,7 +162,7 @@ NpcSettings N(NpcSettings_08) = {
     .radius = 24,
     .otherAI = &N(EVS_NpcAuxAI_00),
     .onInteract = &N(EVS_NpcInteract_08),
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcSettings N(NpcSettings_09) = {
@@ -171,7 +171,7 @@ NpcSettings N(NpcSettings_09) = {
     .radius = 24,
     .otherAI = &N(EVS_NpcAuxAI_00),
     .onInteract = &N(EVS_NpcInteract_09),
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 StaticNpc N(NpcData_Testing)[] = {
@@ -180,7 +180,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_00),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .animations = {
         },
     },
@@ -189,7 +189,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_01),
         .pos = { 20.0f, 0.0f, 20.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .animations = {
         },
     },
@@ -198,7 +198,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_02),
         .pos = { 40.0f, 0.0f, 40.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .animations = {
         },
     },
@@ -207,7 +207,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_03),
         .pos = { 60.0f, 0.0f, 60.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .animations = {
         },
     },
@@ -216,7 +216,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_04),
         .pos = { 80.0f, 0.0f, 80.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .animations = {
         },
     },
@@ -225,7 +225,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_05),
         .pos = { 100.0f, 0.0f, 100.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .animations = {
         },
     },
@@ -234,7 +234,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_06),
         .pos = { 120.0f, 0.0f, 120.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .animations = {
         },
     },
@@ -243,7 +243,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_07),
         .pos = { 140.0f, 0.0f, 140.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .animations = {
         },
     },
@@ -252,7 +252,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_08),
         .pos = { 160.0f, 0.0f, 160.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .animations = {
         },
     },
@@ -261,7 +261,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_09),
         .pos = { 180.0f, 0.0f, 180.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .animations = {
         },
     },

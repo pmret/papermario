@@ -87,7 +87,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
                 add_vec2D_polar(&npc->pos.x, &npc->pos.z, 375.0f, yaw2);
             }
         } else {
-            if (!(npc->flags & NPC_FLAG_40)) {
+            if (!(npc->flags & NPC_FLAG_IGNORE_WORLD_COLLISION)) {
                 sp20 = gPlayerStatusPtr->position.x;
                 sp24 = gPlayerStatusPtr->position.y + 18.0;
                 sp28 = gPlayerStatusPtr->position.z;
@@ -166,7 +166,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
             }
         }
 
-        if (!phi_s7 && (!(npc->flags & NPC_FLAG_ENABLE_HIT_SCRIPT) || phi_fp)) {
+        if (!phi_s7 && (!(npc->flags & NPC_FLAG_8) || phi_fp)) {
             sp20 = npc->pos.x;
             sp38 = 400.0f;
             sp28 = npc->pos.z;

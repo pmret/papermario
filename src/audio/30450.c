@@ -269,8 +269,8 @@ void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan) {
     au_sfx_enqueue_event(soundManager, soundID, volume, pitchShift, pan);
 }
 
-AuResult snd_ambient_80055448(s32 ambSoundID) {
-    return func_80053F80(ambSoundID);
+AuResult snd_ambient_load(s32 ambSoundID) {
+    return au_ambient_load(ambSoundID);
 }
 
 AuResult snd_ambient_80055464(s32 arg0, s32 arg1) {
@@ -333,7 +333,7 @@ AuResult snd_ambient_800555E4(s32 arg0) {
     return func_80051050(arg0);
 }
 
-//TODO au_ambience_disable? -- sets a flag which tells the manager to mute players
+//TODO sets a flag which tells the manager to mute players
 AuResult snd_ambient_80055618(s32 index, s32 arg1) {
     AuResult status = func_80050C30(index);
 
@@ -344,7 +344,7 @@ AuResult snd_ambient_80055618(s32 index, s32 arg1) {
     return status;
 }
 
-AuResult au_ambience_set_volume(s32 index, s32 time, s32 volume) {
+AuResult snd_ambient_set_volume(s32 index, s32 time, s32 volume) {
     AuResult status = func_80050C30(index);
 
     if (status == AU_RESULT_OK) {
@@ -354,7 +354,7 @@ AuResult au_ambience_set_volume(s32 index, s32 time, s32 volume) {
     return status;
 }
 
-AuResult au_ambience_disable(s32 index) {
+AuResult snd_ambient_disable(s32 index) {
     AuResult status = func_80050C30(index);
 
     if (status == AU_RESULT_OK) {
@@ -364,7 +364,7 @@ AuResult au_ambience_disable(s32 index) {
     return status;
 }
 
-AuResult au_ambience_enable(s32 index) {
+AuResult snd_ambient_enable(s32 index) {
     AuResult status  = func_80050C30(index);
 
     if (status == AU_RESULT_OK) {
@@ -374,7 +374,8 @@ AuResult au_ambience_enable(s32 index) {
     return status;
 }
 
-void snd_ambient_80055760(s32 arg0) {
+// snd_ambient_init_tracks?
+void snd_ambient_80055760(s32 trackIdx) {
     u32 i;
     s32 lim = 4;
 
@@ -386,17 +387,17 @@ void snd_ambient_80055760(s32 arg0) {
         }
     }
 
-    snd_ambient_80055848(arg0);
+    snd_ambient_set_track(trackIdx);
 }
 
-AuResult snd_ambient_800557CC(s32 arg0) {
+AuResult snd_ambient_800557CC(s32 fadeTime) {
     AuResult status = AU_RESULT_OK;
     s32 lim = 4;
     u32 i;
 
     for (i = 0; i < lim; i++) {
         if (i == D_80078DB6) {
-            status = snd_ambient_slow_fade_out(i, arg0);
+            status = snd_ambient_slow_fade_out(i, fadeTime);
         } else {
             status = snd_ambient_quick_fade_out(i);
         }
@@ -407,8 +408,7 @@ AuResult snd_ambient_800557CC(s32 arg0) {
     return status;
 }
 
-// play only
-AuResult snd_ambient_80055848(s32 index) {
+AuResult snd_ambient_set_track(s32 index) {
     AuResult status = AU_RESULT_OK;
     s32 lim = 4;
 
@@ -417,9 +417,9 @@ AuResult snd_ambient_80055848(s32 index) {
 
         for (i = 0; i < lim; i++) {
             if (i == index) {
-                status = au_ambience_enable(index);
+                status = snd_ambient_enable(i);
             } else {
-                status = au_ambience_disable(i); // mute
+                status = snd_ambient_disable(i); // mute
             }
 
             if (status != AU_RESULT_OK) {

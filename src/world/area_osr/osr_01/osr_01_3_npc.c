@@ -27,7 +27,7 @@ EvtScript N(EVS_Scene_Wishing) = {
 };
 
 s32 N(LetterList)[] = {
-    ITEM_LETTER13,
+    ITEM_LETTER_CHAIN_MUSS_T,
     ITEM_NONE
 };
 
@@ -75,7 +75,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle,
-        ITEM_LETTER13, ITEM_LETTER14,
+        ITEM_LETTER_CHAIN_MUSS_T, ITEM_LETTER_CHAIN_KOOVER_1,
         MSG_OSR_0010, MSG_OSR_0011, MSG_OSR_0012, MSG_OSR_0013,
         EVT_PTR(N(LetterList)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
@@ -104,7 +104,7 @@ StaticNpc N(NpcData_Toad) = {
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 25.0f, 0.0f, 130.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
     .init = &N(EVS_NpcInit_Toad),
     .drops = TOAD_DROPS,
     .animations = TOAD_RED_ANIMS,

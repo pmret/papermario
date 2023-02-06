@@ -158,7 +158,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(N(EVS_SetupCrystalBallGfx))
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(UseDoorSounds, DOOR_SOUNDS_LARGE)
-    EVT_CALL(UseAdvancedDoorSounds, DOOR_SOUNDS_BASIC)
+    EVT_CALL(UseRoomDoorSounds, DOOR_SOUNDS_BASIC)
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
     EVT_CALL(EnableTexPanning, MODEL_hikari, TRUE)

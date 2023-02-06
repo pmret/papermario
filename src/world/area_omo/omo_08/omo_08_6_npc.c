@@ -66,7 +66,7 @@ EvtScript N(EVS_NpcAI_BoxedShyGuy) = {
                 EVT_WAIT(25)
                 EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
                 EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
                 EVT_CALL(SetSelfVar, 0, 0)
                 EVT_CALL(DisablePlayerInput, FALSE)
         EVT_END_SWITCH
@@ -103,7 +103,7 @@ StaticNpc N(NpcData_Toads)[] = {
         .settings = &N(NpcSettings_TrainToad),
         .pos = { -145.0f, 50.0f, -110.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Conductor),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -118,7 +118,7 @@ StaticNpc N(NpcData_Toads)[] = {
         .settings = &N(NpcSettings_TrainToad),
         .pos = { -250.0f, 0.0f, 50.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_TrainToad),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,

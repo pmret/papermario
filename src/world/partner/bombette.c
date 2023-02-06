@@ -116,7 +116,7 @@ ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
             BombetteTweesterPhysicsPtr->angularVelocity = 6.0f;
             BombetteTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             BombetteTweesterPhysicsPtr->countdown = 120;
-            bombette->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            bombette->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             bombette->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(BombetteTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -235,7 +235,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             D_802BE928 = 0;
             D_802BE930 = 0;
             D_802BE934 = 0;
-            npc->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT);
+            npc->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
             partnerActionStatus->partnerActionState = PARTNER_ACTION_USE;
             partnerActionStatus->actingPartner = PARTNER_BOMBETTE;
             D_802BE920 = func_800EF4E0();

@@ -367,7 +367,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(165)
     EVT_CALL(PlaySound, SOUND_76D)
-    EVT_CALL(func_802D62E4, 877)
+    EVT_CALL(func_802D62E4, SOUND_36D)
     EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim04)
     EVT_CALL(SetNpcPos, NPC_ShyGuy_01, -285, 0, 35)
     EVT_CALL(SetNpcSpeed, NPC_ShyGuy_01, EVT_FLOAT(8.0))

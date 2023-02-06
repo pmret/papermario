@@ -110,6 +110,6 @@ StaticNpc N(NpcData_Misstar) = {
     .settings = &N(NpcSettings_Misstar),
     .pos = { 320.0f, 30.0f, -290.0f },
     .yaw = 100,
-    .flags = ENEMY_FLAG_1,
+    .flags = ENEMY_FLAG_PASSIVE,
     .animations = {},
 };

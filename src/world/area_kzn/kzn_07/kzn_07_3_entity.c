@@ -42,8 +42,8 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_END_IF
     EVT_CALL(CreatePushBlockGrid, 0, 15, 5, -62, 0, 35, 0)
     EVT_CALL(SetPushBlockFallEffect, 0, EVT_PTR(N(push_block_handle_fall)))
-    EVT_CALL(SetPushBlock, 0, 8, 1, 1)
-    EVT_CALL(SetPushBlock, 0, 11, 4, 1)
+    EVT_CALL(SetPushBlock, 0, 8, 1, PUSH_GRID_BLOCK)
+    EVT_CALL(SetPushBlock, 0, 11, 4, PUSH_GRID_BLOCK)
     EVT_RETURN
     EVT_END
 };

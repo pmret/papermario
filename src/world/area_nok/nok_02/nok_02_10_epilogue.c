@@ -1,0 +1,36 @@
+#include "nok_02.h"
+
+EvtScript N(EVS_Scene_Epilogue) = {
+    EVT_CALL(DisablePlayerInput, TRUE)
+    EVT_CALL(DisablePlayerPhysics, TRUE)
+    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPlayerPos, NPC_DISPOSE_LOCATION)
+    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
+    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
+    EVT_WAIT(50)
+    EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Talk)
+    EVT_WAIT(15)
+    EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Idle)
+    EVT_WAIT(15)
+    EVT_CALL(SetNpcAnimation, NPC_Bombette, ANIM_WorldBombette_Talk)
+    EVT_WAIT(15)
+    EVT_CALL(SetNpcAnimation, NPC_Bombette, ANIM_WorldBombette_Idle)
+    EVT_WAIT(15)
+    EVT_CALL(SetNpcAnimation, NPC_KoloradoWife_Epilogue, ANIM_KoloradoWife_Walk)
+    EVT_CALL(NpcMoveTo, NPC_KoloradoWife_Epilogue, -80, -50, 30)
+    EVT_CALL(SetNpcAnimation, NPC_KoloradoWife_Epilogue, ANIM_KoloradoWife_Idle)
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
+    EVT_CALL(SetPanTarget, CAM_DEFAULT, -53, LVar1, LVar2)
+    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
+    EVT_CALL(InterpNpcYaw, NPC_Parakarry, 270, 0)
+    EVT_WAIT(15)
+    EVT_CALL(SetNpcAnimation, NPC_KoloradoWife_Epilogue, ANIM_KoloradoWife_Talk)
+    EVT_WAIT(45)
+    EVT_CALL(FadeOutMusic, 0, 1000)
+    EVT_CALL(GotoMap, EVT_PTR("obk_09"), obk_09_ENTRY_2)
+    EVT_WAIT(100)
+    EVT_RETURN
+    EVT_END
+};

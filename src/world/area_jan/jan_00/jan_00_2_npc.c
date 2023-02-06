@@ -477,7 +477,7 @@ EvtScript N(EVS_NpcInteract_Kolorado_01) = {
     EVT_SET(LVar0, 0)
     EVT_EXEC(N(D_80242DB0_B232F0))
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
@@ -563,7 +563,7 @@ EvtScript N(EVS_NpcInit_Kolorado_01) = {
         EVT_CALL(DisablePlayerPhysics, TRUE)
         EVT_CALL(InterpPlayerYaw, 90, 0)
         EVT_CALL(DisablePartnerAI, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
         EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
         EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
@@ -701,7 +701,7 @@ StaticNpc N(D_8024488C_B24DCC)[] = {
         .settings = &N(NpcSettings_Kolorado_01),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Kolorado_01),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -733,7 +733,7 @@ StaticNpc N(D_8024488C_B24DCC)[] = {
         .settings = &N(NpcSettings_Kolorado_02),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Kolorado_02),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -765,7 +765,7 @@ StaticNpc N(D_8024488C_B24DCC)[] = {
         .settings = &N(NpcSettings_JrTroopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_JrTroopa),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -798,7 +798,7 @@ StaticNpc N(D_80244E5C_B2539C) = {
     .settings = &N(NpcSettings_HeartPlant_01),
     .pos = { 455.0f, 0.0f, 115.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .heartDrops  = NO_DROPS,
@@ -830,7 +830,7 @@ StaticNpc N(D_8024504C_B2558C) = {
     .settings = &N(NpcSettings_HeartPlant_01),
     .pos = { 167.0f, 0.0f, 404.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .heartDrops  = NO_DROPS,
@@ -862,7 +862,7 @@ StaticNpc N(D_8024523C_B2577C) = {
     .settings = &N(NpcSettings_HeartPlant_01),
     .pos = { 90.0f, 0.0f, 316.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .heartDrops  = NO_DROPS,
@@ -894,7 +894,7 @@ StaticNpc N(D_8024542C_B2596C) = {
     .settings = &N(NpcSettings_HeartPlant_01),
     .pos = { 424.0f, 0.0f, 182.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .heartDrops  = NO_DROPS,
@@ -926,7 +926,7 @@ StaticNpc N(D_8024561C_B25B5C) = {
     .settings = &N(NpcSettings_HeartPlant_01),
     .pos = { 143.0f, 0.0f, 260.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .heartDrops  = NO_DROPS,

@@ -419,7 +419,7 @@ EvtScript N(EVS_ArriveFromMtRugged) = {
     EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
     EVT_CALL(PlayerJump, LVar0, LVar1, LVar2, 15)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40 | NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(3.0))
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -454,7 +454,7 @@ EvtScript N(EVS_ArriveFromMtRugged) = {
     EVT_SET(MF_TrainArrivePlayerDisembark, TRUE)
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_TrainToad_01, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, MSG_MAC_Station_0005)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_40, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN

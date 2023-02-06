@@ -9,14 +9,14 @@ NpcSettings N(NpcSettings_Nomadimouse) = {
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList_Nomadimouse)[] = {
-    ITEM_LETTER08,
+    ITEM_LETTER_TO_NOMADIMOUSE,
     ITEM_NONE
 };
 
 EvtScript N(EVS_Nomadimouse_LetterDelivery) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Nomadimouse, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle,
-        ITEM_LETTER08, ITEM_NONE,
+        ITEM_LETTER_TO_NOMADIMOUSE, ITEM_NONE,
         MSG_CH2_005B, MSG_CH2_005C, MSG_CH2_005D, MSG_CH2_005E,
         EVT_PTR(N(LetterList_Nomadimouse)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
@@ -83,7 +83,7 @@ StaticNpc N(NpcData_Nomadimouse)[] = {
         .settings = &N(NpcSettings_Nomadimouse),
         .pos = { 114.0f, 0.0f, -50.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Nomadimouse),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -115,7 +115,7 @@ StaticNpc N(NpcData_Nomadimouse)[] = {
         .settings = &N(NpcSettings_Nomadimouse),
         .pos = { 134.0f, 0.0f, -50.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Sack),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,

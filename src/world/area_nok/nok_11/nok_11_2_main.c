@@ -1,7 +1,7 @@
 #include "nok_11.h"
 
 EvtScript N(EVS_ExitWalk_mac_01_1) = {
-    EVT_IF_EQ(GB_KootFavor_State, 2)
+    EVT_IF_EQ(GB_KootFavor_State, KOOT_FAVOR_STATE_2)
         EVT_SET(GF_KootFavor_LeftKoopaArea, TRUE)
     EVT_END_IF
     EVT_CALL(UseExitHeading, 60, nok_11_ENTRY_0)

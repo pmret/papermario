@@ -4,7 +4,7 @@
 #include "world/common/npc/GoombaFamily_Wander.inc.c"
 #define NAME_SUFFIX
 
-EvtScript N(EVS_OpenDoor_House) = {
+EvtScript N(EVS_SetDoorRot_House) = {
     EVT_CALL(RotateModel, MODEL_syoumen_enter, LVar0, 0, 1, 0)
     EVT_RETURN
     EVT_END
@@ -16,7 +16,7 @@ EvtScript N(EVS_DropDoor_House) = {
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_House) = {
+EvtScript N(EVS_SetWallRot_House) = {
     EVT_CALL(RotateModel, MODEL_door_ki, LVar0, 1, 0, 0)
     EVT_CALL(RotateModel, MODEL_o122, LVar0, 1, 0, 0)
     EVT_CALL(RotateModel, MODEL_o123, LVar0, 1, 0, 0)
@@ -51,12 +51,13 @@ EvtScript N(EVS_NpcAI_Goombario) = {
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_House) = {
+EvtScript N(EVS_RoomListener_House) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(SetGroupEnabled, MODEL_of, 1)
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
+            // do nothing
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_IF_EQ(GB_StoryProgress, STORY_CH0_MET_GOOMPA)
                 EVT_IF_EQ(GF_KMR02_Met_Goompapa, TRUE)
                     EVT_IF_EQ(GF_KMR02_Goombario_RelayedMessage, FALSE)
@@ -66,7 +67,7 @@ EvtScript N(EVS_ToggleVis_House) = {
                     EVT_END_IF
                 EVT_END_IF
             EVT_END_IF
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(SetGroupEnabled, MODEL_of, 0)
             EVT_IF_EQ(GB_StoryProgress, STORY_CH0_MET_GOOMPA)
                 EVT_IF_EQ(GF_KMR02_Met_Goompapa, TRUE)
@@ -85,25 +86,25 @@ EvtScript N(EVS_ToggleVis_House) = {
     EVT_END
 };
 
-EvtScript N(EVS_OpenDoor_Verdana) = {
+EvtScript N(EVS_SetDoorRot_Verdana) = {
     EVT_CALL(RotateModel, MODEL_ura_exit, LVar0, 0, -1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_MoveWalls_Verdana) = {
+EvtScript N(EVS_SetWallRot_Verdana) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_ToggleVis_Verdana) = {
+EvtScript N(EVS_RoomListener_Verdana) = {
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
             EVT_WAIT(30)
             EVT_CALL(SetGroupEnabled, MODEL_monohoshi, 0)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_IF_GT(GB_StoryProgress, STORY_CH0_GATE_CRUSHED)
                 EVT_IF_LT(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
                     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Inspect_DangerSealed, 160, 40)
@@ -128,7 +129,7 @@ EvtScript N(EVS_ToggleVis_Verdana) = {
                     EVT_CALL(EnableModel, MODEL_o437, FALSE)
                     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o625, COLLIDER_FLAGS_UPPER_MASK)
             EVT_END_SWITCH
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_IF_GE(GB_StoryProgress, STORY_CH0_GATE_CRUSHED)
                 EVT_IF_LT(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
                     EVT_WAIT(12)
@@ -205,29 +206,29 @@ s32 N(InsideNPCs_House)[] = {
 
 EvtScript N(EVS_SetupRooms) = {
     // goomba family home, main room
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_5),
-        EVT_PTR(N(EVS_OpenDoor_House)),
-        EVT_PTR(N(EVS_MoveWalls_House)),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_LARGE_DOOR_RIGHT_HINGE_OPENS_OUT),
+        EVT_PTR(N(EVS_SetDoorRot_House)),
+        EVT_PTR(N(EVS_SetWallRot_House)),
         EVT_PTR(N(EVS_DropDoor_House)),
-        EVT_PTR(N(EVS_ToggleVis_House)),
+        EVT_PTR(N(EVS_RoomListener_House)),
         COLLIDER_deilit5,
         COLLIDER_deilit6,
         MODEL_kuribou_house,
         EVT_PTR(N(InsideNPCs_House)))
     // verdana
-    EVT_CALL(MakeDoorAdvanced,
-        VIS_GROUP_PAIR(VIS_GROUP_0, VIS_GROUP_7),
-        EVT_PTR(N(EVS_OpenDoor_Verdana)),
-        EVT_PTR(N(EVS_MoveWalls_Verdana)),
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_LARGE_DOOR_LEFT_HINGE_OPENS_OUT),
+        EVT_PTR(N(EVS_SetDoorRot_Verdana)),
+        EVT_PTR(N(EVS_SetWallRot_Verdana)),
         NULL,
-        EVT_PTR(N(EVS_ToggleVis_Verdana)),
+        EVT_PTR(N(EVS_RoomListener_Verdana)),
         COLLIDER_deilit4,
         COLLIDER_deilit4_1,
         MODEL_kuribou_house,
         EVT_PTR(N(InsideNPCs_House)))
-    EVT_SET(LVar0, 3)
-    EVT_EXEC(N(EVS_ToggleVis_House))
+    EVT_SET(LVar0, ROOM_UPDATE_EXIT_END)
+    EVT_EXEC(N(EVS_RoomListener_House))
     EVT_CALL(SetGroupEnabled, MODEL_monohoshi, 0)
     EVT_RETURN
     EVT_END

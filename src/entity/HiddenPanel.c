@@ -80,8 +80,8 @@ void entity_HiddenPanel_idle(Entity* entity) {
                     Npc* npc = get_npc_by_index(npcIndex);
                     dist2D(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
                     data->standingNpcIndex = npcIndex;
-                    data->npcFlags = npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_ENABLE_HIT_SCRIPT);
-                    npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+                    data->npcFlags = npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_8);
+                    npc->flags &= ~NPC_FLAG_8;
                     npc->flags |= NPC_FLAG_GRAVITY;
                     data->riseVelocity = 0.5f;
                     exec_entity_commandlist(entity);
@@ -237,7 +237,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
                 entity->flags &= ~ENTITY_FLAG_DISABLE_COLLISION;
                 if (data->standingNpcIndex >= 0) {
                     Npc* npc = get_npc_by_index(data->standingNpcIndex);
-                    npc->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_ENABLE_HIT_SCRIPT);
+                    npc->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_8);
                     npc->flags |= data->npcFlags;
                 }
             }

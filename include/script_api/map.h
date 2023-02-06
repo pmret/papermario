@@ -11,7 +11,7 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall);
 ApiStatus ResetFromLava(Evt* script, s32 isInitialCall);
 ApiStatus MakeShop(Evt* script, s32 isInitialCall);
 ApiStatus MakeShopOwner(Evt* script, s32 isInitialCall);
-ApiStatus MakeDoorAdvanced(Evt* script, s32 isInitialCall);
+ApiStatus CreateMapRoom(Evt* script, s32 isInitialCall);
 ApiStatus CheckActionState(Evt* script, s32 isInitialCall);
 ApiStatus CreatePushBlockGrid(Evt* script, s32 isInitialCall);
 ApiStatus SetPushBlock(Evt* script, s32 isInitialCall);

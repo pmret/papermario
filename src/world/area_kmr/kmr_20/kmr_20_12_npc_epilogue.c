@@ -53,12 +53,12 @@ API_CALLABLE(N(func_802420EC_8EDF0C)) {
 }
 
 API_CALLABLE(N(SetAmbienceVolumeHalf_Epilogue)) {
-    au_ambience_set_volume(0, 1000, 63);
+    snd_ambient_set_volume(0, 1000, 63);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(SetAmbienceVolumeFull_Epilogue)) {
-    au_ambience_set_volume(0, 1000, 127);
+    snd_ambient_set_volume(0, 1000, 127);
     return ApiStatus_DONE2;
 }
 
@@ -159,7 +159,7 @@ EvtScript N(EVS_Player_EnterPipe_Epilogue) = {
 
 EvtScript N(EVS_Luigi_EnterPipe_Epilogue) = {
     EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_8, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_Luigi_1, FALSE)
     EVT_SET(LVar0, 4)
     EVT_CALL(N(Pipe_GetEntryPos_Epilogue))

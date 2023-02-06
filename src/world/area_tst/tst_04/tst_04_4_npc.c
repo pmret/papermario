@@ -48,7 +48,7 @@ NpcSettings N(NpcSettings_Goompa) = {
     .aux = &N(EVS_NpcAux_Goompa),
     .onDefeat = &N(EVS_NpcDefeat_Goompa),
     .unk_24 = 200,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_4,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
 };
 
 StaticNpc N(NpcData_GoombaFamily) = {

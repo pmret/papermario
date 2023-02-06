@@ -34,7 +34,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_END_THREAD
     EVT_WAIT(20)
     EVT_CALL(SetNpcPos, NPC_Parakarry, -400, 215, -510)
-    EVT_CALL(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_40, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_THREAD
         EVT_CALL(SetNpcRotation, NPC_Parakarry, 0, 0, 15)
         EVT_CALL(InterpNpcYaw, NPC_Parakarry, 270, 0)
@@ -157,9 +157,9 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
 };
 
 s32 N(LetterList)[] = {
-    ITEM_LETTER01,
+    ITEM_LETTER_TO_MERLON,
     ITEM_LETTER_TO_KOLORADO,
-    ITEM_LETTER10,
+    ITEM_LETTER_CHAIN_GOOMPAPA_1,
     ITEM_NONE
 };
 
@@ -254,9 +254,9 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
         EVT_EXEC(N(EVS_PopSong))
         EVT_WAIT(10)
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH2_001E)
-        EVT_CALL(AddKeyItem, ITEM_LETTER01)
+        EVT_CALL(AddKeyItem, ITEM_LETTER_TO_MERLON)
         EVT_CALL(AddKeyItem, ITEM_LETTER_TO_KOLORADO)
-        EVT_CALL(AddKeyItem, ITEM_LETTER10)
+        EVT_CALL(AddKeyItem, ITEM_LETTER_CHAIN_GOOMPAPA_1)
     EVT_END_IF
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
     EVT_CALL(EnablePartnerAI)
@@ -310,7 +310,7 @@ StaticNpc N(NpcData_Parakarry) = {
     .settings = &N(NpcSettings_Parakarry),
     .pos = { -610.0f, 230.0f, -485.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_Parakarry),
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,

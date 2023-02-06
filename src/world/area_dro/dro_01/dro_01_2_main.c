@@ -114,7 +114,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_CALL(MakeShop, EVT_PTR(N(Shop_ItemPositions)), EVT_PTR(N(Shop_Inventory)), EVT_PTR(N(Shop_PriceList)), 0)
     EVT_CALL(MakeShopOwner, EVT_PTR(N(Shop_Owner)))
-    EVT_EXEC_WAIT(N(EVS_SetupBuildings))
+    EVT_EXEC_WAIT(N(EVS_SetupRooms))
     EVT_EXEC(N(EVS_SwingSign_Shop))
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_EXEC(N(EVS_EnterMap))

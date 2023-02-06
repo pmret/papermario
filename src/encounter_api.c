@@ -212,7 +212,7 @@ void start_battle(Evt* script, s32 songID) {
     for (i = 0; i < encounter->count; i++) {
         enemy = encounter->enemy[i];
         if ((enemy != NULL && (
-            !(enemy->flags & ENEMY_FLAG_8) || enemy == currentEncounter->currentEnemy)
+            !(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || enemy == currentEncounter->currentEnemy)
             ) && enemy->hitBytecode != NULL) {
             Evt* hitEvtInstance;
             enemy->encountered = TRUE;
@@ -280,7 +280,7 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
     for (i = 0; i < encounter->count; i++) {
         enemy = encounter->enemy[i];
         if ((enemy != NULL && (
-            !(enemy->flags & ENEMY_FLAG_8) || enemy == currentEncounter->currentEnemy)
+            !(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || enemy == currentEncounter->currentEnemy)
             ) && enemy->hitBytecode != NULL) {
             enemy->encountered = TRUE;
 
@@ -344,7 +344,7 @@ ApiStatus BindNpcAI(Evt* script, s32 isInitialCall) {
         enemy = get_enemy(id);
     }
 
-    if (enemy->flags & ENEMY_FLAG_1) {
+    if (enemy->flags & ENEMY_FLAG_PASSIVE) {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
@@ -394,7 +394,7 @@ ApiStatus RestartNpcAI(Evt* script, s32 isInitialCall) {
 
     enemy = get_enemy(npcID);
 
-    if (enemy->flags & ENEMY_FLAG_1) {
+    if (enemy->flags & ENEMY_FLAG_PASSIVE) {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
@@ -512,7 +512,7 @@ ApiStatus RestartNpcAux(Evt* script, s32 isInitialCall) {
 
     enemy = get_enemy(npcID);
 
-    if (enemy->flags & ENEMY_FLAG_1) {
+    if (enemy->flags & ENEMY_FLAG_PASSIVE) {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
         groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
@@ -825,9 +825,7 @@ ApiStatus OnPlayerFled(Evt* script, s32 isInitialCall) {
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 0.0f, -20.0f, 40, &unk);
         }
 
-        if ((npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING | NPC_FLAG_ENABLE_HIT_SCRIPT)) ==
-            (NPC_FLAG_JUMPING | NPC_FLAG_ENABLE_HIT_SCRIPT))
-        {
+        if ((npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING | NPC_FLAG_8)) == (NPC_FLAG_JUMPING | NPC_FLAG_8)) {
             f32 x = npc->pos.x;
             f32 y = npc->pos.y + npc->collisionHeight;
             f32 z = npc->pos.z;

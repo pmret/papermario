@@ -55,7 +55,7 @@ extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_802496FC);
 extern EvtScript N(EVS_80248878);
 extern EvtScript N(EVS_8025194C);
-extern EvtScript N(EVS_802526E0);
+extern EvtScript N(EVS_SetupRooms);
 extern EvtScript N(EVS_802441E0);
 extern EvtScript N(EVS_AnimateClub64Sign);
 extern EvtScript N(EVS_MakeEntities);

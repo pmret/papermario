@@ -85,10 +85,15 @@ enum {
     // area_mac
     QUIZ_MAP_MAC_00     = 0,
     QUIZ_MAP_MAC_01     = 1,
+    QUIZ_MAP_MAC_02     = 2, // unused
+    QUIZ_MAP_MAC_03     = 3, // unused
     QUIZ_MAP_MAC_04     = 4,
     QUIZ_MAP_MAC_05     = 5,
     QUIZ_COUNT_MAC      = 6,
     // area_nok
+    QUIZ_MAP_NOK_01     = 0,
+    QUIZ_MAP_NOK_02     = 1,
+    QUIZ_COUNT_NOK      = 2,
     // area_dro
     QUIZ_MAP_DRO_01     = 0,
     QUIZ_MAP_DRO_02     = 1,
@@ -132,12 +137,12 @@ QuizRequirement N(Quizmo_Requirements)[] = {
 };
 
 API_CALLABLE(N(Quizmo_HideEntities)) {
-    gEntityHideMode = 1;
+    gEntityHideMode = ENTITY_HIDE_MODE_1;
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(Quizmo_ShowEntities)) {
-    gEntityHideMode = 0;
+    gEntityHideMode = ENTITY_HIDE_MODE_0;
     return ApiStatus_DONE2;
 }
 
@@ -238,7 +243,7 @@ API_CALLABLE(N(Quizmo_HideWorld)) {
             Npc* npc = get_npc_by_index(i);
 
             if (npc != NULL && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != CHUCK_QUIZMO_NPC_ID) {
-                npc->flags |= NPC_FLAG_NO_DROPS; // odd
+                npc->flags |= NPC_FLAG_HIDING;
             }
         }
 
@@ -292,7 +297,7 @@ API_CALLABLE(N(Quizmo_FadeInWorld)) {
             Npc* npc = get_npc_by_index(i);
             if (npc != NULL && npc->flags != 0) {
                 if (npc->npcID != NPC_PARTNER && npc->npcID != CHUCK_QUIZMO_NPC_ID) {
-                    npc->flags &= ~NPC_FLAG_NO_DROPS;
+                    npc->flags &= ~NPC_FLAG_HIDING;
                 }
             }
         }
@@ -988,7 +993,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_EXEC_GET_TID(N(EVS_Quizmo_SetCharacterPositons), LVar1)
@@ -1087,7 +1092,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_OpenHat)
             EVT_SET(LVar0, ITEM_STAR_PIECE)
             EVT_SET(LVar1, 3)
-            EVT_EXEC_WAIT(N(GiveKeyReward))
+            EVT_EXEC_WAIT(N(GiveItemReward))
             EVT_CALL(AddStarPieces, 1)
             EVT_CALL(N(Quizmo_SetStageLightsDelay), 15)
             EVT_CALL(N(Quizmo_SetVannaAnim_Idle))
@@ -1106,7 +1111,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_OpenHat)
             EVT_SET(LVar0, ITEM_STAR_PIECE)
             EVT_SET(LVar1, 1)
-            EVT_EXEC_WAIT(N(GiveKeyReward))
+            EVT_EXEC_WAIT(N(GiveItemReward))
             EVT_CALL(AddStarPieces, 1)
             EVT_CALL(N(Quizmo_SetStageLightsDelay), 15)
             EVT_CALL(N(Quizmo_SetVannaAnim_Idle))
@@ -1211,7 +1216,7 @@ NpcSettings N(NpcSettings_ChuckQuizmo) = {
     .otherAI = &N(EVS_Quizmo_NPC_OtherAI),
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .aux = &N(EVS_Quizmo_NPC_Aux),
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .level = 99,
 };
 
@@ -1224,7 +1229,7 @@ NpcSettings N(Quizmo_AltNpcSettings) = {
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .ai = &N(EVS_Quizmo_Npc_AI),
     .aux = &N(EVS_Quizmo_NPC_Aux),
-    .flags = ENEMY_FLAG_1 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .level = 99,
     .actionFlags = 16,
 };

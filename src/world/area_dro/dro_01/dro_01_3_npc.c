@@ -20,14 +20,14 @@ MAP_STATIC_PAD(1,post_quizmo); // or pre_key_item?
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList)[] = {
-    ITEM_LETTER19,
+    ITEM_LETTER_CHAIN_LITTLE_MOUSER,
     ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_ShopOwner) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_Mouser_ShopOwner, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle,
-        ITEM_LETTER19, ITEM_LETTER_TO_FRANKY,
+        ITEM_LETTER_CHAIN_LITTLE_MOUSER, ITEM_LETTER_CHAIN_FRANKY,
         MSG_CH2_0089, MSG_CH2_008A, MSG_CH2_008B, MSG_CH2_008C,
         EVT_PTR(N(LetterList)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
@@ -194,7 +194,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .id = NPC_Mouser_01,
         .settings = &N(NpcSettings_Mouser),
         .pos = { -332.0f, 0.0f, 188.0f },
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Mouser_01),
         .yaw = 90,
         .drops = MOUSER_DROPS,
@@ -205,7 +205,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .id = NPC_Dryite_01,
         .settings = &N(NpcSettings_Dryite_Wander),
         .pos = { -235.0f, 0.0f, 160.0f },
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Dryite_01),
         .yaw = 90,
         .drops = DRYITE_DROPS,
@@ -228,7 +228,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .id = NPC_Dryite_02,
         .settings = &N(NpcSettings_Dryite),
         .pos = { -380.0f, 0.0f, -15.0f },
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Dryite_02),
         .yaw = 61,
         .drops = DRYITE_DROPS,
@@ -239,7 +239,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .id = NPC_Dryite_03,
         .settings = &N(NpcSettings_Dryite),
         .pos = { 195.0f, 0.0f, -75.0f },
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_HintDryite),
         .yaw = 74,
         .drops = DRYITE_DROPS,
@@ -250,7 +250,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .id = NPC_Dryite_04,
         .settings = &N(NpcSettings_Dryite),
         .pos = { 225.0f, 0.0f, -83.0f },
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Dryite_04),
         .yaw = 257,
         .drops = DRYITE_DROPS,
@@ -261,7 +261,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .id = NPC_ArtistToad,
         .settings = &N(NpcSettings_Dryite),
         .pos = { 285.0f, 0.0f, -274.0f },
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Composer),
         .yaw = 271,
         .drops = {
@@ -293,7 +293,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .id = NPC_Mouser_ShopOwner,
         .settings = &N(NpcSettings_Mouser),
         .pos = { 31.0f, 0.0f, -374.0f },
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_ShopOwner),
         .yaw = 180,
         .drops = MOUSER_DROPS,
@@ -304,7 +304,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .id = NPC_ChuckQuizmo,
         .settings = &N(NpcSettings_ChuckQuizmo),
         .pos = { -400.0f, 0.0f, 100.0f },
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .initVarCount = 1,
         .initVar = { .bytes = { 0, QUIZ_AREA_DRO, QUIZ_COUNT_DRO, QUIZ_MAP_DRO_01 }},
         .yaw = 263,
@@ -338,7 +338,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .settings = &N(NpcSettings_Dryite_Wander),
         .pos = { -120.0f, 0.0f, 134.0f },
         .yaw = 257,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_DojoGrad),
         .drops = DRYITE_DROPS,
         .territory = {
@@ -361,7 +361,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .settings = &N(NpcSettings_Dryite_Patrol),
         .pos = { 40.0f, 0.0f, 105.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_8 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Dryite_06),
         .drops = DRYITE_DROPS,
         .territory = {
@@ -388,7 +388,7 @@ StaticNpc N(ThreeSisterNPCs)[] = {
         .id = NPC_ThreeSisters_01,
         .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -141.0f, 0.0f, -18.0f },
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_ThreeSisters),
         .yaw = 62,
         .drops = TOADETTE_DROPS,
@@ -399,7 +399,7 @@ StaticNpc N(ThreeSisterNPCs)[] = {
         .id = NPC_ThreeSisters_02,
         .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -124.0f, 0.0f, -61.0f },
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_ThreeSisters),
         .yaw = 63,
         .drops = TOADETTE_DROPS,
@@ -410,7 +410,7 @@ StaticNpc N(ThreeSisterNPCs)[] = {
         .id = NPC_ThreeSisters_03,
         .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -80.0f, 0.0f, -35.0f },
-        .flags = ENEMY_FLAG_1 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_ThreeSisters),
         .yaw = 244,
         .drops = TOADETTE_DROPS,

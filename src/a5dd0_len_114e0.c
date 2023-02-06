@@ -1416,7 +1416,7 @@ void render_entities(void) {
 
         if (entity != NULL) {
             if (!gGameStatusPtr->isBattle) {
-                if (gEntityHideMode != 0 &&
+                if (gEntityHideMode != ENTITY_HIDE_MODE_0 &&
                     !(entity->flags & ENTITY_FLAG_IGNORE_DISTANCE_CULLING) &&
                     dist2D(gPlayerStatusPtr->position.x,
                            gPlayerStatusPtr->position.z,
@@ -1426,11 +1426,11 @@ void render_entities(void) {
                     continue;
                 }
 
-                if (gEntityHideMode == 1) {
+                if (gEntityHideMode == ENTITY_HIDE_MODE_1) {
                     if (!(entity->flags & ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE1)) {
                         continue;
                     }
-                } else if (gEntityHideMode == 2) {
+                } else if (gEntityHideMode == ENTITY_HIDE_MODE_2) {
                     if (!(entity->flags & ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE2)) {
                         continue;
                     }
@@ -1866,7 +1866,7 @@ void clear_entity_data(s32 arg0) {
     D_80151304 = 0;
 
     if (!gGameStatusPtr->isBattle) {
-        gEntityHideMode = 0;
+        gEntityHideMode = ENTITY_HIDE_MODE_0;
     }
 
     entity_area_specific_data_is_loaded = FALSE;
