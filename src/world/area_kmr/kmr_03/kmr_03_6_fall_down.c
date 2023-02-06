@@ -33,11 +33,11 @@ EvtScript N(EVS_Scene_FallingDown) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_THREAD
         EVT_WAIT(18)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_175, 0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_175, SOUND_SPACE_MODE_0)
         EVT_WAIT(30)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_176, 0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_176, SOUND_SPACE_MODE_0)
         EVT_WAIT(28)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_175, 0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_175, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_CALL(HidePlayerShadow, TRUE)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)

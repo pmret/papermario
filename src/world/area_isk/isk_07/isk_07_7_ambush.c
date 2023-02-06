@@ -86,7 +86,7 @@ EvtScript N(EVS_SetupSarcophagi) = {
 };
 
 EvtScript N(EVS_OpenSarcophagusAnim) = {
-    EVT_CALL(PlaySoundAtModel, LVar3, SOUND_1D1, 0)
+    EVT_CALL(PlaySoundAtModel, LVar3, SOUND_1D1, SOUND_SPACE_MODE_0)
     EVT_CALL(TranslateModel, LVar3, 0, 0, 13)
     EVT_WAIT(3)
     EVT_CALL(MakeLerp, 0, 35, 9, EASING_COS_IN_OUT)

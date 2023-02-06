@@ -202,6 +202,7 @@ ApiStatus FullyRestoreSP(Evt* script, s32 isInitialCall);
 ApiStatus EnablePartner(Evt* script, s32 isInitialCall);
 ApiStatus DisablePartner(Evt* script, s32 isInitialCall);
 ApiStatus UseEntryHeading(Evt* script, s32 isInitialCall);
+ApiStatus func_802D2148(Evt* script, s32 isInitialCall);
 ApiStatus UseExitHeading(Evt* script, s32 isInitialCall);
 ApiStatus InitVirtualEntityList(Evt* script, s32 isInitialCall);
 ApiStatus DisablePulseStone(Evt* script, s32 isInitialCall);

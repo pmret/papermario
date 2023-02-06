@@ -14,7 +14,7 @@ u8 volatile AuSynUseStereo = TRUE;
 
 //bss
 extern Acmd* AlCmdListBuffers[3];
-extern NUScTask D_800A3520[3];
+extern NUScTask nuAuTasks[3];
 extern u8* D_800A3628[3];
 extern s32 AlFrameSize;
 extern s32 AlMinFrameSize;
@@ -25,7 +25,6 @@ extern NUDMABuffer* D_800A3BD4;
 extern NUDMABuffer nuAuDmaBufList[50];
 extern AuSynDriver auSynDriver;
 extern u64 rspbootUcodeBuffer[];
-extern s32 AlNumFields;
 extern u64 n_aspMain_text_bin[];
 extern u64 n_aspMain_data_bin[];
 extern u8 AuHeapBase[AUDIO_HEAP_SIZE];
@@ -41,7 +40,7 @@ void create_audio_system(void) {
     config.num_pvoice = 24;
     config.num_bus = 4;
     outputRate = osAiSetFrequency(32000);
-    frameSize = (AlNumFields * outputRate + 59) / 60;
+    frameSize = (nusched.retraceCount * outputRate + 59) / 60;
     config.outputRate = outputRate;
     config.unk_0C = 0;
     config.heap = &nuAuHeap;
@@ -53,21 +52,21 @@ void create_audio_system(void) {
         AlCmdListBuffers[i] = alHeapAlloc(config.heap, 1, AUDIO_COMMAND_LIST_BUFFER_SIZE);
     }
 
-    for (i = 0; i < ARRAY_COUNT(D_800A3520); i++) {
-        D_800A3520[i].next = NULL;
-        D_800A3520[i].msg = 0;
-        D_800A3520[i].list.t.type = M_AUDTASK;
-        D_800A3520[i].list.t.ucode_boot = rspbootUcodeBuffer;
-        D_800A3520[i].list.t.ucode_boot_size = 0x100;
-        D_800A3520[i].list.t.ucode = n_aspMain_text_bin;
-        D_800A3520[i].list.t.ucode_data = n_aspMain_data_bin;
-        D_800A3520[i].list.t.ucode_data_size = SP_UCODE_DATA_SIZE;
-        D_800A3520[i].list.t.dram_stack = NULL;
-        D_800A3520[i].list.t.dram_stack_size = 0;
-        D_800A3520[i].list.t.output_buff = NULL;
-        D_800A3520[i].list.t.output_buff_size = 0;
-        D_800A3520[i].list.t.yield_data_ptr = NULL;
-        D_800A3520[i].list.t.yield_data_size = 0;
+    for (i = 0; i < ARRAY_COUNT(nuAuTasks); i++) {
+        nuAuTasks[i].next = NULL;
+        nuAuTasks[i].msg = 0;
+        nuAuTasks[i].list.t.type = M_AUDTASK;
+        nuAuTasks[i].list.t.ucode_boot = rspbootUcodeBuffer;
+        nuAuTasks[i].list.t.ucode_boot_size = 0x100;
+        nuAuTasks[i].list.t.ucode = n_aspMain_text_bin;
+        nuAuTasks[i].list.t.ucode_data = n_aspMain_data_bin;
+        nuAuTasks[i].list.t.ucode_data_size = SP_UCODE_DATA_SIZE;
+        nuAuTasks[i].list.t.dram_stack = NULL;
+        nuAuTasks[i].list.t.dram_stack_size = 0;
+        nuAuTasks[i].list.t.output_buff = NULL;
+        nuAuTasks[i].list.t.output_buff_size = 0;
+        nuAuTasks[i].list.t.yield_data_ptr = NULL;
+        nuAuTasks[i].list.t.yield_data_size = 0;
     }
 
     for (i = 0; i < ARRAY_COUNT(D_800A3628); i++) {
@@ -128,10 +127,10 @@ void nuAuMgr(void* arg) {
         switch (*mesg_type) {
             case NU_SC_RETRACE_MSG:
                 if (cmdList_len != 0 && nuAuTaskStop == NU_AU_TASK_RUN) {
-                    D_800A3520[cmdListIndex].msgQ = &auRtnMesgQ;
-                    D_800A3520[cmdListIndex].list.t.data_ptr = (u64*)cmdListBuf;
-                    D_800A3520[cmdListIndex].list.t.data_size = (cmdListAfter_ptr - cmdListBuf) * sizeof(Acmd);
-                    osSendMesg(&nusched.audioRequestMQ, &D_800A3520[cmdListIndex], OS_MESG_BLOCK);
+                    nuAuTasks[cmdListIndex].msgQ = &auRtnMesgQ;
+                    nuAuTasks[cmdListIndex].list.t.data_ptr = (u64*)cmdListBuf;
+                    nuAuTasks[cmdListIndex].list.t.data_size = (cmdListAfter_ptr - cmdListBuf) * sizeof(Acmd);
+                    osSendMesg(&nusched.audioRequestMQ, &nuAuTasks[cmdListIndex], OS_MESG_BLOCK);
                     nuAuCleanDMABuffers();
                     osRecvMesg(&auRtnMesgQ, NULL, 1);
                     if (++bufferIndex == 3) {

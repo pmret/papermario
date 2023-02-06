@@ -425,42 +425,42 @@ EvtScript N(8021B0E4) = {
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 5, EVT_FLOAT(0.5))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 5, LVar0, LVar1, LVar2, 60, 1)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtModel, 15, 482, 0)
+    EVT_CALL(PlaySoundAtModel, 15, SOUND_1E2, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 100, 20)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtModel, 11, 482, 0)
+    EVT_CALL(PlaySoundAtModel, 11, SOUND_1E2, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.5))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 150, 20)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtModel, 9, 482, 0)
+    EVT_CALL(PlaySoundAtModel, 9, SOUND_1E2, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 100, 20)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtModel, 31, 482, 0)
+    EVT_CALL(PlaySoundAtModel, 31, SOUND_1E2, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.7))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 70, 20)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtModel, 25, 482, 0)
+    EVT_CALL(PlaySoundAtModel, 25, SOUND_1E2, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 100, 20)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtModel, 43, 482, 0)
+    EVT_CALL(PlaySoundAtModel, 43, SOUND_1E2, SOUND_SPACE_MODE_0)
     EVT_CALL(N(StartRumbleWithParams), 60, 20)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)

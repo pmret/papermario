@@ -9,9 +9,9 @@ API_CALLABLE(N(GetFlowerNormal)) {
     s32 treeIndex = get_model_list_index_from_tree_index(modelID);
     Model* mdl = get_model_from_list_index(treeIndex);
     f32 x, y, z;
-    
+
     N(GetFirstTriangleNormal)(mdl->modelNode->displayData->displayList, &x, &y, &z);
-    
+
     evt_set_variable(script, *args++, EVT_FLOAT_TO_FIXED(x));
     evt_set_variable(script, *args++, EVT_FLOAT_TO_FIXED(y));
     evt_set_variable(script, *args++, EVT_FLOAT_TO_FIXED(z));
@@ -21,7 +21,7 @@ API_CALLABLE(N(GetFlowerNormal)) {
 API_CALLABLE(N(GetWitherTranslation)) {
     Bytecode* args = script->ptrReadPos;
     s32 angle = evt_get_variable(script, *args++);
-    
+
     evt_set_variable(script, *args++, sin_deg(angle) * 10.0f);
     return ApiStatus_DONE2;
 }
@@ -84,7 +84,7 @@ EvtScript N(EVS_InspectFlowers_South) = {
     EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, -0x8000)
     EVT_WAIT(2)
     EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, -0x10000)
-    EVT_CALL(PlaySoundAt, SOUND_205B, 0, -10, 0, -300)
+    EVT_CALL(PlaySoundAt, SOUND_205B, SOUND_SPACE_MODE_0, -10, 0, -300)
     EVT_CALL(MakeLerp, 0, 30, 50, EASING_COS_IN_OUT)
     EVT_LABEL(0)
     EVT_CALL(UpdateLerp)
@@ -141,7 +141,7 @@ EvtScript N(EVS_InspectFlowers_West) = {
     EVT_WAIT(2)
     EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, 0, -0x10000)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAt, SOUND_205C, 0, -300, 0, -10)
+    EVT_CALL(PlaySoundAt, SOUND_205C, SOUND_SPACE_MODE_0, -300, 0, -10)
     EVT_USE_BUF(EVT_PTR(N(FlowerModels_West)))
     EVT_BUF_READ2(LVarA, LVarB)
     EVT_EXEC(N(EVS_FlowersWither))
@@ -159,7 +159,7 @@ EvtScript N(EVS_InspectFlowers_North) = {
     EVT_WAIT(2)
     EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, 0, -0x10000)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAt, SOUND_205C, 0, 10, 0, 300)
+    EVT_CALL(PlaySoundAt, SOUND_205C, SOUND_SPACE_MODE_0, 10, 0, 300)
     EVT_USE_BUF(EVT_PTR(N(FlowerModels_North)))
     EVT_BUF_READ2(LVarA, LVarB)
     EVT_EXEC(N(EVS_FlowersWither))
@@ -177,7 +177,7 @@ EvtScript N(EVS_InspectFlowers_East) = {
     EVT_WAIT(2)
     EVT_CALL(SetTexPanOffset, TEX_PANNER_3, TEX_PANNER_MAIN, 0, -0x10000)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAt, SOUND_205C, 0, 300, 0, -10)
+    EVT_CALL(PlaySoundAt, SOUND_205C, SOUND_SPACE_MODE_0, 300, 0, -10)
     EVT_USE_BUF(EVT_PTR(N(FlowerModels_East)))
     EVT_BUF_READ2(LVarA, LVarB)
     EVT_EXEC(N(EVS_FlowersWither))

@@ -379,7 +379,7 @@ EvtScript N(handleEvent_8021B8BC) = {
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(47)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_759)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_359 | SOUND_ID_TRIGGER_CHANGE_SOUND)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(DoShockHit)
@@ -388,7 +388,7 @@ EvtScript N(handleEvent_8021B8BC) = {
             EVT_EXEC_WAIT(DoJumpBack)
             EVT_EXEC_WAIT(N(8021B2FC))
         EVT_CASE_EQ(38)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_759)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_359 | SOUND_ID_TRIGGER_CHANGE_SOUND)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(DoShockHit)

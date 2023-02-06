@@ -68,7 +68,7 @@ EvtScript N(EVS_UseSpring) = {
             EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.0))
             EVT_CALL(PlayerJump1, 375, 25, -250, 10)
             EVT_CALL(N(PlaySpringAnimation))
-            EVT_CALL(PlaySoundAtPlayer, SOUND_2086, 0)
+            EVT_CALL(PlaySoundAtPlayer, SOUND_2086, SOUND_SPACE_MODE_0)
             EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
             EVT_CALL(PlayerJump, 375, 0, -175, 15)
             EVT_KILL_THREAD(LVarA)

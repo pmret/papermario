@@ -70,18 +70,18 @@ typedef enum AuPriority {
     AU_PRIORITY_MSEQ_MANAGER    = 6,
 } AuPriority;
 
-enum AuVoiceFlags3D {
-    AU_VOICE_3D_FLAG_1                     = 0x01,
-    AU_VOICE_3D_FLAG_HANDLED_VOL_CHANGE    = 0x02,
-    AU_VOICE_3D_FLAG_10                    = 0x10,
-    AU_VOICE_3D_FLAG_VOL_CHANGED           = 0x20,
+enum AuVoiceEnvelopeFlags {
+    AU_VOICE_ENV_FLAG_STOP                  = 0x01,
+    AU_VOICE_ENV_FLAG_HANDLED_VOL_CHANGE    = 0x02,
+    AU_VOICE_ENV_FLAG_KEY_RELEASED          = 0x10,
+    AU_VOICE_ENV_FLAG_VOL_CHANGED           = 0x20,
 };
 
-enum AuVoiceFlags43 {
-    AU_VOICE_SYNC_FLAG_ALL     = 0x02,
-    AU_VOICE_SYNC_FLAG_4       = 0x04,
-    AU_VOICE_SYNC_FLAG_PITCH   = 0x08,
-    AU_VOICE_SYNC_FLAG_10      = 0x10,
+enum AuVoiceSyncFlags {
+    AU_VOICE_SYNC_FLAG_ALL          = 0x02,
+    AU_VOICE_SYNC_FLAG_PARAMS       = 0x04,
+    AU_VOICE_SYNC_FLAG_PITCH        = 0x08,
+    AU_VOICE_SYNC_FLAG_PAN_FXMIX    = 0x10,
 };
 
 typedef enum AuEffectType {
@@ -117,27 +117,146 @@ typedef enum SegmentControlCommands {
 } SegmentControlCommands;
 
 typedef enum FxBus {
-    FX_BUS_0 = 0,
-    FX_BUS_1 = 1,
-    FX_BUS_2 = 2,
-    FX_BUS_3 = 3,
+    FX_BUS_BGMA_MAIN    = 0,
+    FX_BUS_SOUND        = 1,
+    FX_BUS_BGMB         = 2,
+    FX_BUS_BGMA_AUX     = 3,
 } FxBus;
 
-typedef union Q32 {
-    u8 u8[4];
-    u16 u16[2];
-    s32 s32;
-} Q32;
+typedef enum EnvelopeCommand {
+    ENV_CMD_END_LOOP        = 0xFB,
+    ENV_CMD_START_LOOP      = 0xFC,
+    ENV_CMD_ADD_MULTIPLIER  = 0xFD,
+    ENV_CMD_SET_MULTIPLIER  = 0xFE,
+    ENV_CMD_END             = 0xFF,
+} EnvelopeCommand;
 
-typedef union Vol32 {
-    s32 full;
-    s16 half;
-    s8 byte;
-} Vol32;
+enum EnvelopeTimeIntervals {
+    ENV_TIME_60S        = 0,
+    ENV_TIME_55S        = 1,
+    ENV_TIME_50S        = 2,
+    ENV_TIME_45S        = 3,
+    ENV_TIME_40S        = 4,
+    ENV_TIME_35S        = 5,
+    ENV_TIME_30S        = 6,
+    ENV_TIME_27_5S      = 7,
+    ENV_TIME_25S        = 8,
+    ENV_TIME_22_5S      = 9,
+    ENV_TIME_20S        = 10,
+    ENV_TIME_19S        = 11,
+    ENV_TIME_18S        = 12,
+    ENV_TIME_17S        = 13,
+    ENV_TIME_16S        = 14,
+    ENV_TIME_15S        = 15,
+    ENV_TIME_14S        = 16,
+    ENV_TIME_13S        = 17,
+    ENV_TIME_12S        = 18,
+    ENV_TIME_11S        = 19,
+    ENV_TIME_10S        = 20,
+    ENV_TIME_9S         = 21,
+    ENV_TIME_8S         = 22,
+    ENV_TIME_7S         = 23,
+    ENV_TIME_6S         = 24,
+    ENV_TIME_5S         = 25,
+    ENV_TIME_4_5S       = 26,
+    ENV_TIME_4S         = 27,
+    ENV_TIME_3_5S       = 28,
+    ENV_TIME_3S         = 29,
+    ENV_TIME_2750MS     = 30,
+    ENV_TIME_2500MS     = 31,
+    ENV_TIME_2250MS     = 32,
+    ENV_TIME_2S         = 33,
+    ENV_TIME_1900MS     = 34,
+    ENV_TIME_1800MS     = 35,
+    ENV_TIME_1700MS     = 36,
+    ENV_TIME_1600MS     = 37,
+    ENV_TIME_1500MS     = 38,
+    ENV_TIME_1400MS     = 39,
+    ENV_TIME_1300MS     = 40,
+    ENV_TIME_1200MS     = 41,
+    ENV_TIME_1100MS     = 42,
+    ENV_TIME_1S         = 43,
+    ENV_TIME_950MS      = 44,
+    ENV_TIME_900MS      = 45,
+    ENV_TIME_850MS      = 46,
+    ENV_TIME_800MS      = 47,
+    ENV_TIME_750MS      = 48,
+    ENV_TIME_700MS      = 49,
+    ENV_TIME_650MS      = 50,
+    ENV_TIME_600MS      = 51,
+    ENV_TIME_550MS      = 52,
+    ENV_TIME_500MS      = 53,
+    ENV_TIME_450MS      = 54,
+    ENV_TIME_400MS      = 55,
+    ENV_TIME_375MS      = 56,
+    ENV_TIME_350MS      = 57,
+    ENV_TIME_325MS      = 58,
+    ENV_TIME_300MS      = 59,
+    ENV_TIME_290MS      = 60,
+    ENV_TIME_280MS      = 61,
+    ENV_TIME_270MS      = 62,
+    ENV_TIME_260MS      = 63,
+    ENV_TIME_250MS      = 64,
+    ENV_TIME_240MS      = 65,
+    ENV_TIME_230MS      = 66,
+    ENV_TIME_220MS      = 67,
+    ENV_TIME_210MS      = 68,
+    ENV_TIME_200MS      = 69,
+    ENV_TIME_190MS      = 70,
+    ENV_TIME_180MS      = 71,
+    ENV_TIME_170MS      = 72,
+    ENV_TIME_160MS      = 73,
+    ENV_TIME_150MS      = 74,
+    ENV_TIME_140MS      = 75,
+    ENV_TIME_130MS      = 76,
+    ENV_TIME_120MS      = 77,
+    ENV_TIME_110MS      = 78,
+    ENV_TIME_100MS      = 79,
+    ENV_TIME_16UNITS    = 80,
+    ENV_TIME_14UNITS    = 81,
+    ENV_TIME_12UNITS    = 81,
+    ENV_TIME_11UNITS    = 83,
+    ENV_TIME_10UNITS    = 84,
+    ENV_TIME_9UNITS     = 85,
+    ENV_TIME_8UNITS     = 86,
+    ENV_TIME_7UNITS     = 87,
+    ENV_TIME_6UNITS     = 88,
+    ENV_TIME_5UNITS     = 89,
+    ENV_TIME_4UNITS     = 90,
+    ENV_TIME_3UNITS     = 91,
+    ENV_TIME_2UNITS     = 92,
+    ENV_TIME_1UNITS     = 93,
+    ENV_TIME_0          = 94,
+};
+
+enum SoundPlayerState {
+    SND_PLAYER_STATE_CONTINUE   = 0,
+    SND_PLAYER_STATE_INIT       = 1,
+};
+
+enum SoundManagerState {
+    SND_MANAGER_STATE_ENABLED   = 0,
+    SND_MANAGER_STATE_DISABLED  = 1,
+};
+
+enum SoundInstanceFlags {
+    SOUND_INSTANCE_FLAG_ACTIVE = 1,
+    SOUND_INSTANCE_FLAG_POSITION_CHANGED = 2,
+};
+
+typedef union AmbVoiceStateInfo {
+    struct {
+        u8 playerIndex;
+        u8 trackIndex;
+        u8 tune;
+        u8 released;
+    };
+    s32 all;
+} AmbVoiceStateInfo;
 
 struct BGMPlayer;
 struct AuGlobals;
-struct AlUnkVoice;
+struct AuVoice;
 
 typedef void (*AuCallback)(void);
 
@@ -153,7 +272,7 @@ typedef union SeqArgs {
         u8 cent;
     } MasterPitchShift;
     struct { // cmd E3
-        u8 bank;
+        u8 effectType;
     } UnkCmdE3;
     struct { // cmd E4
         u16 time;
@@ -382,7 +501,7 @@ typedef struct AuPVoice {
     /* 0x48 */ AuEnvMixer envMixer;
     /* 0x74 */ s16 unk_74;
     /* 0x76 */ s16 unk_76;
-    /* 0x78 */ u8 groupID; //?
+    /* 0x78 */ u8 busId;
     /* 0x79 */ u8 index;
     /* 0x7A */ u8 unk_7A[2];
 } AuPVoice;
@@ -411,21 +530,21 @@ typedef struct SoundSFXEntry {
     /* 0x9 */ char unk_9[0x1];
 } SoundSFXEntry; // size = 0xA
 
-typedef struct AlUnkInstrumentData {
-    /* 0x00 */ s32* unk_00;
-    /* 0x04 */ s32* unk_04;
-} AlUnkInstrumentData; // size = 0x8
+typedef struct EnvelopeData {
+    /* 0x00 */ u8* cmdListPress;
+    /* 0x04 */ u8* cmdListRelease;
+} EnvelopeData; // size = 0x8
 
-typedef struct InstrumentEffectSub {
-    /* 0x00 */ u16 unkOffset1;
-    /* 0x02 */ u16 unkOffset2;
-} InstrumentEffectSub; // size = 0x4;
+typedef struct EnvelopeOffset {
+    /* 0x00 */ u16 offsetPress;
+    /* 0x02 */ u16 offsetRelease;
+} EnvelopeOffset; // size = 0x4;
 
-typedef struct InstrumentEffect {
+typedef struct EnvelopePreset {
     /* 0x00 */ u8 count;
     /* 0x01 */ char unk_01[3];
-    /* 0x04 */ InstrumentEffectSub unk_04[1]; // variable size
-} InstrumentEffect;
+    /* 0x04 */ EnvelopeOffset offsets[1]; // variable size
+} EnvelopePreset;
 
 // partially ALWaveTable?
 typedef struct Instrument {
@@ -438,7 +557,10 @@ typedef struct Instrument {
     /* 0x18 */ u16* predictor;
     /* 0x1C */ u16 dc_bookSize;
     /* 0x1E */ u16 keyBase;
-    /* 0x20 */ f32 pitchRatio;
+    /* 0x20 */ union {
+                    f32 pitchRatio;
+                    s32 outputRate;
+               };
     /* 0x24 */ u8 type;
     /* 0x25 */ u8 unk_25;
     /* 0x26 */ s8 unk_26;
@@ -447,7 +569,7 @@ typedef struct Instrument {
     /* 0x29 */ s8 unk_29;
     /* 0x2A */ s8 unk_2A;
     /* 0x2B */ s8 unk_2B;
-    /* 0x2C */ InstrumentEffect* unkOffset;
+    /* 0x2C */ EnvelopePreset* envelopes;
 } Instrument; // size = 0x30;
 
 typedef Instrument* InstrumentGroup[16];
@@ -474,45 +596,38 @@ typedef struct SoundPlayChange {
 typedef struct SoundPlayer {
     /* 0x00 */ AuFilePos sefDataReadPos;
     /* 0x04 */ char pad4[0xC];
-    /* 0x10 */ AlUnkInstrumentData unk_10;
-    /* 0x18 */ s32* unk_18;
+    /* 0x10 */ EnvelopeData envelope;
+    /* 0x18 */ u8* envelopCustomPressProfile;
     /* 0x1C */ Instrument* sfxInstrumentRef;
     /* 0x20 */ Instrument sfxInstrument;
     /* 0x50 */ AuFilePos sefReadStart;
     /* 0x54 */ SoundPlayChange changed;
     /* 0x58 */ f32 pitchRatio;
     /* 0x5C */ s16 sfxVolume;
-    /* 0x5E */ s16 unk_5E;
+    /* 0x5E */ s16 alternativeVolume;
     /* 0x60 */ SoundLerp tuneLerp;
     /* 0x6C */ SoundLerp volumeLerp;
-    /* 0x78 */ u8 locatorB;
-    /* 0x79 */ u8 locatorC;
-    /* 0x7A */ u8 locatorD;
-    /* 0x7B */ u8 unk_7B;
-    /* 0x7C */ u8 unk_7C;
-    /* 0x7D */ u8 unk_7D;
-    /* 0x7E */ u8 unk_7E;
-    /* 0x7F */ u8 unk_7F;
-    /* 0x80 */ AuFilePos unk_80;
-    /* 0x84 */ s8 unk_84;
-    /* 0x85 */ u8 soundC00;
+    /* 0x78 */ u8 cmdList_mode2[8];
+    /* 0x80 */ AuFilePos alternativeDataPos;
+    /* 0x84 */ s8 alternativeType;
+    /* 0x85 */ u8 triggers;
     /* 0x86 */ char unk_86[0x2];
     /* 0x88 */ s8* loopStartPos;
     /* 0x8C */ u8 loopIterCount;
     /* 0x8D */ char unk_8D;
     /* 0x8E */ u16 delay;
     /* 0x90 */ u16 playLength;
-    /* 0x92 */ s16 unk_92;
-    /* 0x94 */ s8 unk_94;
+    /* 0x92 */ s16 coarseTune;
+    /* 0x94 */ s8 fineTune;
     /* 0x95 */ char unk_05;
     /* 0x96 */ u16 currentSoundID;
-    /* 0x98 */ u8 unk_98;
-    /* 0x99 */ u8 unk_99;
+    /* 0x98 */ u8 priority;
+    /* 0x99 */ u8 exclusiveID;
     /* 0x9A */ u8 sfxParamsFlags;
     /* 0x9B */ u8 sfxPan;
     /* 0x9C */ u8 reverb;
     /* 0x9D */ u8 instrumentIndex; // ?
-    /* 0x9E */ u8 unk_9E;
+    /* 0x9E */ u8 envelopePreset;
     /* 0x9F */ u8 playVelocity;
     /* 0xA0 */ u8 unk_A0;
     /* 0xA1 */ u8 randomPitch;
@@ -521,7 +636,7 @@ typedef struct SoundPlayer {
     /* 0xA4 */ s16 masterPitchShift;
     /* 0xA6 */ s16 masterVolume;
     /* 0xA8 */ u8 masterPan;
-    /* 0xA8 */ u8 unk_A9;
+    /* 0xA8 */ u8 state;
     /* 0xA9 */ char unk_AA[0x2];
 } SoundPlayer; // size = 0xAC
 
@@ -537,39 +652,37 @@ typedef struct SoundManager90 {
     };
 } SoundManager90; // size = 4
 
-typedef struct SoundManagerA0 {
-    /* 0x0 */ u16 unk_00;
-    /* 0x2 */ u16 unk_02;
-    /* 0x4 */ u16 unk_04;
-} SoundManagerA0; // size = 6
+typedef struct SoundManagerCustomCmdList {
+    /* 0x0 */ u16 data[3];
+} SoundManagerCustomCmdList; // size = 6
 
 typedef struct SoundManager {
     /* 0x000 */ struct AuGlobals* globals;
-    /* 0x004 */ struct AlUnkVoice* currentVoice;
+    /* 0x004 */ struct AuVoice* currentVoice;
     /* 0x008 */ u8* sefData;
     /* 0x00C */ s32* normalSounds[8];
-    /* 0x02C */ s32* soundsWithBit2000;
+    /* 0x02C */ s32* extraSounds;
     /* 0x030 */ s32 playCounter; //?
     /* 0x034 */ s32 nextUpdateStep;
     /* 0x038 */ s32 nextUpdateInterval;
     /* 0x03C */ s32 nextUpdateCounter;
     /* 0x040 */ struct Fade fadeInfo;
-    /* 0x05C */ s32 unk_5C;
+    /* 0x05C */ s32 busVolume;
     /* 0x060 */ s32 randomValue;
     /* 0x064 */ s32* customReverbParams[8];
     /* 0x084 */ s8 customReverbAmounts[8];
     /* 0x08C */ u8 lastCustomEffectIdx;
     /* 0x08D */ s8 defaultReverbAmt;
     /* 0x08E */ char unk_8E[0x2];
-    /* 0x090 */ SoundManager90 unk_90[4];
-    /* 0x0A0 */ SoundManagerA0 unk_A0[4];
-    /* 0x0B8 */ u16 unk_B8;
+    /* 0x090 */ SoundManager90 bgmSounds[4];
+    /* 0x0A0 */ SoundManagerCustomCmdList customCmdList[4];
+    /* 0x0B8 */ u16 baseVolume;
     /* 0x0BA */ s16 unk_BA;
     /* 0x0BC */ u8 priority;
     /* 0x0BD */ u8 sfxPlayerSelector;
-    /* 0x0BE */ u8 defaultReverbType;
-    /* 0x0BF */ u8 unk_BF;
-    /* 0x0C0 */ u8 unk_C0;
+    /* 0x0BE */ u8 busId;
+    /* 0x0BF */ u8 currentVoiceIndex;
+    /* 0x0C0 */ u8 state;
     /* 0x0C1 */ char unk_C1[0x1];
     /* 0x0C2 */ SoundSFXEntry soundQueue[16];
     /* 0x162 */ s8 unk_162;
@@ -577,7 +690,7 @@ typedef struct SoundManager {
     /* 0x164 */ u8 sfxQueueNextPos;
     /* 0x165 */ s8 unk_165;
     /* 0x166 */ char unk_166[0x2];
-    /* 0x168 */ s32 unk_168;
+    /* 0x168 */ s32 resetPending;
     /* 0x16C */ SoundPlayer players[8];
 } SoundManager; // size = 0x6CC
 
@@ -597,38 +710,38 @@ typedef struct AlternatingSoundSet {
     /* 0x06 */ s16 currentIndex;
 } AlternatingSoundSet; // size = 0x08
 
-typedef struct AlUnkVoice {
+typedef struct AuVoice {
     /* 0x00 */ Instrument* instrument;
     /* 0x04 */ f32 pitchRatio;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s16 volume;
+    /* 0x08 */ s32 delta;
+    /* 0x0C */ s16 p_volume; // volume for pvoice
     /* 0x0E */ u8 pan;
-    /* 0x0F */ u8 reverbAmt;
-    /* 0x10 */ u8 reverbType;
+    /* 0x0F */ u8 reverb;
+    /* 0x10 */ u8 busId;
     /* 0x11 */ char unk_11[0x3];
-    /* 0x14 */ AlUnkInstrumentData unk_14;
-    /* 0x1C */ u8* unk_1C;
+    /* 0x14 */ EnvelopeData envelope;
+    /* 0x1C */ u8* cmdPtr;
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ s32 unk_30;
-    /* 0x34 */ u8* unk_34;
-    /* 0x38 */ u8 unk_38;
-    /* 0x39 */ u8 unk_39;
-    /* 0x3A */ u8 unk_3A;
-    /* 0x3B */ u8 unk_3B;
+    /* 0x24 */ s32 volChangeTime;
+    /* 0x28 */ s32 timeLeft;
+    /* 0x2C */ f32 rate;
+    /* 0x30 */ s32 volMult;
+    /* 0x34 */ u8* loopStart;
+    /* 0x38 */ u8 loopCounter;
+    /* 0x39 */ u8 initialAmp;
+    /* 0x3A */ u8 targetAmp;
+    /* 0x3B */ u8 timeIntervalIndex;
     /* 0x3C */ u8 unk_3C;
-    /* 0x3D */ u8 unk_flags_3D;
-    /* 0x3E */ u8 unk_3E;
-    /* 0x3F */ u8 unk_3F;
-    /* 0x40 */ s16 adjustedVolume;
-    /* 0x42 */ u8 unk_42;
-    /* 0x43 */ u8 unk_flags_43;
-    /* 0x44 */ s8 priorityCopy;
+    /* 0x3D */ u8 envelopeFlags;
+    /* 0x3E */ u8 relativeReleaseVolumes;
+    /* 0x3F */ u8 releaseVolumeMult;
+    /* 0x40 */ s16 clientVolume;
+    /* 0x42 */ u8 stopPending;
+    /* 0x43 */ u8 syncFlags;
+    /* 0x44 */ s8 clientPriority;
     /* 0x45 */ u8 priority;
     /* 0x46 */ char unk_46[2];
-} AlUnkVoice; // size = 0x48
+} AuVoice; // size = 0x48
 
 typedef struct BGMFileInfo {
     /* 0x10 */ u8 numSegments;
@@ -699,8 +812,8 @@ typedef struct SEFHeader {
     /* 0x0E */ u8 hasExtraSection; // 1
     /* 0x0F */ s8 unkF; // 0
     /* 0x10 */ u16 sections[8];
-    /* 0x14 */ u16 section2000;
-} SEFHeader; // size = 0x16
+    /* 0x20 */ u16 section2000;
+} SEFHeader; // size = 0x22
 
 typedef struct INITHeader {
     /* 0x00 */ s32 signature; // 'INIT'
@@ -795,7 +908,7 @@ typedef struct AuGlobals {
     /* 0x003C */ u16* mseqFileList;
     /* 0x0040 */ AuEffectChange effectChanges[4];
     /* 0x0050 */ u8 channelDelayPending;
-    /* 0x0051 */ u8 channelDelayGroupIdx;
+    /* 0x0051 */ u8 channelDelayBusId;
     /* 0x0052 */ u8 channelDelayTime;
     /* 0x0053 */ u8 channelDelaySide;
     /* 0x0054 */ PEREntry* dataPER;
@@ -828,7 +941,7 @@ typedef struct AuGlobals {
     /* 0x130D */ char unk_130D[3];
     /* 0x1310 */ SoundBank* banks[3];
     /* 0x131C */ char unk_131C[4];
-    /* 0x1320 */ AlUnkVoice voices[24];
+    /* 0x1320 */ AuVoice voices[24];
 } AuGlobals; // size = 0x19E0
 
 typedef struct BGMPlayerTrack {
@@ -836,7 +949,7 @@ typedef struct BGMPlayerTrack {
     /* 0x04 */ AuFilePos savedPos;
     /* 0x08 */ AuFilePos prevReadPos;
     /* 0x0C */ Instrument* instrument;
-    /* 0x10 */ AlUnkInstrumentData unk_10;
+    /* 0x10 */ EnvelopeData envelope;
     /* 0x18 */ s32 subTrackVolume;
     /* 0x1C */ s32 subTrackVolumeStep;
     /* 0x20 */ s32 subTrackVolumeTarget;
@@ -873,7 +986,7 @@ typedef struct BGMPlayerTrack {
     /* 0x58 */ u8 isDrumTrack;
     /* 0x59 */ u8 parentTrackIdx;
     /* 0x5A */ u8 unk_5A;
-    /* 0x5B */ s8 subtrackReverbType;
+    /* 0x5B */ s8 subtrackBusId;
     /* 0x5C */ u8 index;
     /* 0x5D */ char unk_5D[0x3];
 } BGMPlayerTrack; // size = 0x60;
@@ -905,7 +1018,7 @@ typedef struct BGMPlayer {
     /* 0x024 */ s32 bgmFileIndex;
     /* 0x028 */ s32 songID;
     /* 0x02C */ Fade fadeInfo;
-    /* 0x048 */ s32 unk_48;
+    /* 0x048 */ s32 busVolume;
     /* 0x04C */ u8 effectIndices[4];
     /* 0x050 */ s32 randomValue1;
     /* 0x054 */ s32 randomValue2;
@@ -964,7 +1077,7 @@ typedef struct BGMPlayer {
     /* 0x232 */ u8 bFadeConfigSetsVolume;
     /* 0x233 */ u8 unk_233;
     /* 0x234 */ u8 priority;
-    /* 0x235 */ u8 defaultReverbType;
+    /* 0x235 */ u8 busId;
     /* 0x236 */ char unk_236[0x2];
     /* 0x238 */ s32 unk_238[8];
     /* 0x258 */ u8 unk_258;
@@ -975,101 +1088,93 @@ typedef struct BGMPlayer {
     /* 0x85C */ SeqNote notes[24];
 } BGMPlayer; // size = 0xA9C
 
-typedef struct AlUnkMSEQData {
-    /* 0x0 */ u8 unk_00;
-    /* 0x1 */ u8 unk_01;
-    /* 0x2 */ s16 unk_02;
-    /* 0x4 */ s16 unk_04;
-    /* 0x6 */ u16 unk_06;
-} AlUnkMSEQData; // size = 0x8
+typedef struct MSEQTrackData {
+    /* 0x0 */ u8 trackIndex;
+    /* 0x1 */ u8 type;
+    /* 0x2 */ s16 time;
+    /* 0x4 */ s16 delta;
+    /* 0x6 */ u16 goal;
+} MSEQTrackData; // size = 0x8
 
 typedef struct MSEQHeader {
     /* 0x00 */ s32 signature; // 'MSEQ '
     /* 0x04 */ s32 size; // including header
     /* 0x08 */ s32 name;
-    /* 0x0C */ u8 first_iota;
-    /* 0x0D */ u8 unkCount;
-    /* 0x0E */ u16 unkOffset;
+    /* 0x0C */ u8 firstVoiceIdx;
+    /* 0x0D */ u8 trackSettingsCount;
+    /* 0x0E */ u16 trackSettingsOffset;
     /* 0x10 */ u16 dataStart;
 } MSEQHeader; // size variable
 
-typedef struct AlUnkXi {
+typedef struct AmbienceTrack {
     /* 0x00 */ Instrument* instrument;
-    /* 0x04 */ AlUnkInstrumentData unk_04;
-    /* 0x0C */ s16 pitch;
-    /* 0x0E */ s16 unk_0E;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s16 unk_14;
-    /* 0x16 */ s16 unk_16;
-    /* 0x18 */ Vol32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s16 unk_20;
-    /* 0x22 */ s16 unk_22;
+    /* 0x04 */ EnvelopeData envelope;
+    /* 0x0C */ SoundLerp tuneLerp;
+    /* 0x18 */ SoundLerp volumeLerp;
     /* 0x24 */ s8 pan;
     /* 0x25 */ s8 reverb;
     /* 0x26 */ u8 flags;
-    /* 0x27 */ char unk_26[1];
-} AlUnkXi; // size = 0x28
+    /* 0x27 */ char unk_27[1];
+} AmbienceTrack; // size = 0x28
 
-typedef struct AlUnkOmega {
-    /* 0x0 */ u8 unk_00;
-    /* 0x1 */ u8 unk_01;
-    /* 0x2 */ s8 unk_02;
-    /* 0x4 */ s8 unk__03;
-} AlUnkOmega; // size = 0x4
+typedef struct AmbienceSavedVoice {
+    /* 0x0 */ u8 trackIndex;
+    /* 0x1 */ u8 tune;
+    /* 0x2 */ s8 volume;
+    /* 0x4 */ char unk_03[1];
+} AmbienceSavedVoice; // size = 0x4
 
-typedef struct AlUnkIota {
-    /* 0x00 */ Q32 unk_00;
+typedef struct AmbienceVoiceState {
+    /* 0x00 */ AmbVoiceStateInfo info;
     /* 0x04 */ s16 pitch;
     /* 0x06 */ s8 volume;
-    /* 0x07 */ u8 unk_07;
-} AlUnkIota; // size = 0x8
+    /* 0x07 */ u8 isResumable;
+} AmbienceVoiceState; // size = 0x8
 
-//TODO AuStreamPlayer?
-typedef struct AuAmbPlayer {
+typedef struct AmbiencePlayer {
     /* 0x000 */ MSEQHeader* mseqFile;
     /* 0x004 */ AuFilePos mseqReadStart;
     /* 0x008 */ AuFilePos mseqReadPos;
-    /* 0x00C */ AuFilePos unk_0C;
-    /* 0x010 */ AuFilePos unk_10;
-    /* 0x014 */ Q32 unk_14;
-    /* 0x018 */ s32 unk_18;
+    /* 0x00C */ AuFilePos loopStartPos[2];
+    /* 0x014 */ AmbVoiceStateInfo id;
+    /* 0x018 */ s32 delay;
     /* 0x01C */ s32 unk_1C;
     /* 0x020 */ s32 mseqName;
-    /* 0x024 */ u8 unk_24;
+    /* 0x024 */ u8 mode;
     /* 0x025 */ u8 playState;
-    /* 0x026 */ u8 unk_26;
-    /* 0x027 */ u8 unk_27;
-    /* 0x028 */ u16 time;
-    /* 0x02A */ u8 unk_2A;
-    /* 0x02B */ u8 volume;
-    /* 0x02C */ char unk_2C[4];
-    /* 0x030 */ s32 firstVoiceIdx;
+    /* 0x026 */ u8 fadeSettingsType;
+    /* 0x027 */ char unk_27[1];
+    /* 0x028 */ u16 fadeSettingsTime;
+    /* 0x02A */ u8 fadeSettingsInitial; // 255 means from current volume
+    /* 0x02B */ u8 fadeSettingsGoal;
+    /* 0x02C */ u8 loopCount[2];
+    /* 0x02E */ char unk_2E[2];
+    /* 0x030 */ u32 firstVoiceIdx;
     /* 0x034 */ u32 lastVoiceIdx;
-    /* 0x038 */ s32 unk_38;
-    /* 0x03C */ s32 volInterpStep;
-    /* 0x040 */ u16 volInterpTime;
-    /* 0x042 */ u8 unk_42;
-    /* 0x043 */ u8 unk_43;
-    /* 0x044 */ AlUnkXi unk_44[10];
-    /* 0x1D4 */ AlUnkOmega unk_1D4[4];
-} AuAmbPlayer; // size = 0x1E4
+    /* 0x038 */ s32 fadeVolume;
+    /* 0x03C */ s32 fadeStep;
+    /* 0x040 */ u16 fadeTime;
+    /* 0x042 */ u8 fadeGoal;
+    /* 0x043 */ u8 resetRequired;
+    /* 0x044 */ AmbienceTrack tracks[10];
+    /* 0x1D4 */ AmbienceSavedVoice savedVoices[4];
+} AmbiencePlayer; // size = 0x1E4
 
 //TODO AuStreamingManager ?
 // 801D57A0
-typedef struct AuAmbienceManager {
+typedef struct AmbienceManager {
     /* 0x000 */ AuGlobals* globals;
     /* 0x004 */ s32 nextUpdateStep;
     /* 0x008 */ s32 nextUpdateInterval;
     /* 0x00C */ s32 nextUpdateCounter;
     /* 0x010 */ MSEQHeader* mseqFiles[4];
-    /* 0x020 */ u8 unk_20;
-    /* 0x021 */ u8 unk_21;
+    /* 0x020 */ u8 numActivePlayers;
+    /* 0x021 */ u8 loadTracksFadeInfo;
     /* 0x022 */ u8 priority;
-    /* 0x023 */ u8 defaultReverbType;
-    /* 0x024 */ AuAmbPlayer mseqPlayers[4];
-    /* 0x7B4 */ AlUnkIota mseqVoiceStates[16];
-} AuAmbienceManager;
+    /* 0x023 */ u8 busId;
+    /* 0x024 */ AmbiencePlayer players[4];
+    /* 0x7B4 */ AmbienceVoiceState voiceStates[16];
+} AmbienceManager;
 
 typedef struct AlUnkGemini {
     /* 0x00 */ u16 sound1;
@@ -1094,11 +1199,11 @@ extern s32 CUSTOM_SMALL_ROOM_PARAMS[];
 extern s32 CUSTOM_ECHO_PARAMS_1[];
 extern s32 CUSTOM_ECHO_PARAMS_3[];
 extern s32 CUSTOM_ECHO_PARAMS_2[];
-extern s32 D_80078544[];
+extern EnvelopePreset DummyInstrumentEnvelope;
 extern u8 AmbientSoundIDtoMSEQFileIndex[];
-extern s32 D_800785A0[];
+extern s32 AuEnvelopeIntervals[];
 extern s32 PreventBGMPlayerUpdate;
-extern u16 D_80078DB6;
+extern u16 AuAmbiencePlayOnlyIndex;
 
 extern AuSynDriver* gActiveSynDriverPtr;
 extern AuSynDriver* gSynDriverPtr;
@@ -1110,7 +1215,7 @@ extern AuGlobals* gSoundGlobals;
 extern BGMPlayer* gBGMPlayerC;
 extern BGMPlayer* gBGMPlayerB;
 extern AuCallback BeginSoundUpdateCallback;
-extern AuAmbienceManager* gAuAmbienceManager;
+extern AmbienceManager* gAuAmbienceManager;
 extern SoundManager* gSoundManager;
 extern BGMPlayer* gBGMPlayerA;
 

@@ -22,13 +22,13 @@ EvtScript N(EVS_ExitWalk_nok_11_0) = {
 s32 N(Models_CastleGateL)[] = {
     MODEL_o306,
     MODEL_o307,
-    -1 
+    -1
 };
 
 s32 N(Models_CastleGateR)[] = {
     MODEL_o308,
     MODEL_o309,
-    -1 
+    -1
 };
 
 EvtScript N(EVS_ExitDoors_osr_01_0) = {
@@ -94,7 +94,7 @@ EvtScript N(EVS_EnterMap) = {
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_LOOP
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitn, SOUND_LARGE_DOOR_CLOSE, 0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitn, SOUND_LARGE_DOOR_CLOSE, SOUND_SPACE_MODE_0)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilitn, COLLIDER_FLAGS_UPPER_MASK)
             EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CASE_EQ(mac_01_ENTRY_4)

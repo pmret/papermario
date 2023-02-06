@@ -75,7 +75,7 @@ EvtScript N(EVS_Scene_RescuedKalmar) = {
     EVT_CALL(SetNpcAnimation, NPC_Kalmar, ANIM_WorldKalmar_Leap)
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_GotItem)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_139, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_139, SOUND_SPACE_MODE_0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_SET(LVar3, LVar1)
     EVT_ADD(LVar1, 50)
@@ -88,7 +88,7 @@ EvtScript N(EVS_Scene_RescuedKalmar) = {
         EVT_WAIT(6)
     EVT_END_LOOP
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_188, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_188, SOUND_SPACE_MODE_0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30)
@@ -154,7 +154,7 @@ EvtScript N(EVS_Scene_RescuedKalmar) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtNpc, NPC_Kalmar, SOUND_2045, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Kalmar, SOUND_2045, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)

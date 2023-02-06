@@ -34,10 +34,10 @@ EvtScript N(EVS_Scene_MeetHeart) = {
     EVT_THREAD
         EVT_CALL(SetNpcJumpscale, NPC_TubbasHeart, EVT_FLOAT(2.5))
         EVT_CALL(GetNpcPos, NPC_TubbasHeart, LVar0, LVar1, LVar2)
-        EVT_CALL(PlaySoundAtNpc, NPC_TubbasHeart, SOUND_20C8, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_TubbasHeart, SOUND_20C8, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_TubbasHeart, LVar0, LVar1, LVar2, 10)
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtNpc, NPC_TubbasHeart, SOUND_20C8, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_TubbasHeart, SOUND_20C8, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_TubbasHeart, LVar0, LVar1, LVar2, 10)
     EVT_END_THREAD
     EVT_WAIT(40)

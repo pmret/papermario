@@ -439,7 +439,7 @@ EvtScript N(acrobaticAttack) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_349)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_749)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_349 | SOUND_ID_TRIGGER_CHANGE_SOUND)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ShyGuy_Red_Anim09)
             EVT_WAIT(10)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ShyGuy_Red_Anim07)

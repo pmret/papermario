@@ -44,8 +44,8 @@ void action_update_land(void) {
         }
 
         suggest_player_anim_clearUnkFlag(anim);
-        sfx_play_sound_at_player(SOUND_8161, 0);
-        sfx_play_sound_at_player(SOUND_SOFT_LAND, 0);
+        sfx_play_sound_at_player(SOUND_161 | SOUND_ID_STOP, SOUND_SPACE_MODE_0);
+        sfx_play_sound_at_player(SOUND_SOFT_LAND, SOUND_SPACE_MODE_0);
 
         if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
             phys_adjust_cam_on_landing();
@@ -132,7 +132,7 @@ void action_update_peach_land(void) {
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
 
-        sfx_play_sound_at_player(SOUND_SOFT_LAND, 0);
+        sfx_play_sound_at_player(SOUND_SOFT_LAND, SOUND_SPACE_MODE_0);
 
         if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
             phys_adjust_cam_on_landing();

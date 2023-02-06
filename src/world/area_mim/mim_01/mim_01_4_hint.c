@@ -9,9 +9,9 @@ API_CALLABLE(N(GetFlowerNormal)) {
     s32 treeIndex = get_model_list_index_from_tree_index(modelID);
     Model* mdl = get_model_from_list_index(treeIndex);
     f32 x, y, z;
-    
+
     N(GetFirstTriangleNormal)(mdl->modelNode->displayData->displayList, &x, &y, &z);
-    
+
     evt_set_variable(script, *args++, EVT_FLOAT_TO_FIXED(x));
     evt_set_variable(script, *args++, EVT_FLOAT_TO_FIXED(y));
     evt_set_variable(script, *args++, EVT_FLOAT_TO_FIXED(z));
@@ -19,7 +19,7 @@ API_CALLABLE(N(GetFlowerNormal)) {
 }
 
 EvtScript N(EVS_LaughingFlowers) = {
-    EVT_CALL(PlaySoundAt, SOUND_DF, 0, 301, 0, -27)
+    EVT_CALL(PlaySoundAt, SOUND_DF, SOUND_SPACE_MODE_0, 301, 0, -27)
     EVT_LOOP(6)
         EVT_SET(LVar0, 2)
         EVT_CALL(TranslateModel, MODEL_ea_1, 0, 0, LVar0)
@@ -52,7 +52,7 @@ EvtScript N(EVS_LaughingFlowers) = {
     EVT_WAIT(2)
     EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, 0, -0x10000)
     EVT_WAIT(2)
-    EVT_CALL(PlaySoundAt, SOUND_205B, 0, 301, 0, -27)
+    EVT_CALL(PlaySoundAt, SOUND_205B, SOUND_SPACE_MODE_0, 301, 0, -27)
     EVT_CALL(MakeLerp, 0, 30, 50, EASING_COS_IN_OUT)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
@@ -69,7 +69,7 @@ EvtScript N(EVS_LaughingFlowers) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_205B, 0, 301, 0, -27)
+    EVT_CALL(PlaySoundAt, SOUND_205B, SOUND_SPACE_MODE_0, 301, 0, -27)
     EVT_CALL(MakeLerp, 30, -30, 50, EASING_COS_IN_OUT)
     EVT_LABEL(20)
     EVT_CALL(UpdateLerp)
@@ -86,7 +86,7 @@ EvtScript N(EVS_LaughingFlowers) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(20)
     EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_205B, 0, 301, 0, -27)
+    EVT_CALL(PlaySoundAt, SOUND_205B, SOUND_SPACE_MODE_0, 301, 0, -27)
     EVT_CALL(MakeLerp, -30, 0, 50, EASING_COS_IN_OUT)
     EVT_LABEL(30)
     EVT_CALL(UpdateLerp)

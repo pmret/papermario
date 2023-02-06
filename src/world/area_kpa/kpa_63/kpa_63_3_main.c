@@ -1,7 +1,7 @@
 #include "kpa_63.h"
 
 EvtScript N(EVS_OpenHangerDoor) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_tts, SOUND_1DF, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_tts, SOUND_1DF, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 100, 0, 20, EASING_CUBIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -29,7 +29,7 @@ EvtScript N(EVS_CloseHangerDoor) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_tts, SOUND_1E0, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_tts, SOUND_1E0, SOUND_SPACE_MODE_0)
     EVT_RETURN
     EVT_END
 };

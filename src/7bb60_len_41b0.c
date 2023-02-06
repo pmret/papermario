@@ -387,7 +387,7 @@ void phys_player_land(void) {
     playerStatus->landPos.x = playerStatus->position.x;
     playerStatus->landPos.z = playerStatus->position.z;
     playerStatus->flags &= ~PS_FLAG_AIRBORNE;
-    sfx_play_sound_at_player(SOUND_SOFT_LAND, 0);
+    sfx_play_sound_at_player(SOUND_SOFT_LAND, SOUND_SPACE_MODE_0);
     if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
         phys_adjust_cam_on_landing();
     }
@@ -1128,7 +1128,7 @@ void try_player_footstep_sounds(s32 interval) {
             soundID = altSoundID;
         }
 
-        sfx_play_sound_at_player(soundID, 0);
+        sfx_play_sound_at_player(soundID, SOUND_SPACE_MODE_0);
         FootstepSoundSelector ^= 1;
     }
 }

@@ -25,7 +25,7 @@ EvtScript N(EVS_PushStatue_Impl) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o160, SOUND_80000010, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o160, SOUND_80000010, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 100, EVT_FLOAT(0.6))
     EVT_END_THREAD

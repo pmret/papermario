@@ -125,13 +125,13 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
     s32 j, k;
 
     if (isInitialCall) {
-        sfx_play_sound_at_position(SOUND_80000016, 0, 315.0f, 125.0f, -100.0f);
+        sfx_play_sound_at_position(SOUND_80000016, SOUND_SPACE_MODE_0, 315.0f, 125.0f, -100.0f);
         script->functionTempPtr[0] = it = heap_malloc(sizeof(*it) * ARRAY_COUNT(N(RotatingPlatformModels)));
         script->functionTemp[1] = 0;
 
         for (i = 0; i < ARRAY_COUNT(N(RotatingPlatformModels)); it++, i += 2) {
             loopModel = get_model_from_list_index(get_model_list_index_from_tree_index(N(RotatingPlatformModels)[i]));
-            
+
             it->relativePos.x = x = loopModel->center.x - axisModel->center.x;
             it->relativePos.y = y = loopModel->center.y - axisModel->center.y;
             it->relativePos.z = z = loopModel->center.z - axisModel->center.z;
@@ -148,7 +148,7 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
 
             it++;
             loopModel = get_model_from_list_index(get_model_list_index_from_tree_index(N(RotatingPlatformModels)[i + 1]));
-            
+
             it->relativePos.x = ox;
             it->relativePos.y = oy;
             it->relativePos.z = oz;

@@ -334,7 +334,7 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
     EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
     EVT_CALL(PlayerMoveTo, 15, -90, 0)
     EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 1)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 90, 10, EASING_QUADRATIC_OUT)
     EVT_LABEL(70)
         EVT_CALL(UpdateLerp)
@@ -376,7 +376,7 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
                 EVT_GOTO(71)
             EVT_END_IF
         EVT_CALL(SetGroupEnabled, MODEL_km_sita, 0)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_CALL(PlayerMoveTo, 0, -240, 0)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k_d1, COLLIDER_FLAGS_UPPER_MASK)
@@ -491,7 +491,7 @@ EvtScript N(EVS_Scene_Merle_OneLastThing) = {
     EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 1)
     EVT_CALL(SetGroupEnabled, MODEL_km_sita, 1)
     EVT_CALL(SetNpcPos, NPC_Merle, 0, 90, -180)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 90, 10, EASING_QUADRATIC_IN)
     EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
@@ -512,7 +512,7 @@ EvtScript N(EVS_Scene_Merle_OneLastThing) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(1)
         EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
     EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 0)
     EVT_CALL(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
     EVT_CALL(PlayerFaceNpc, NPC_Merle, FALSE)
@@ -527,7 +527,7 @@ EvtScript N(EVS_Scene_Merle_OneLastThing) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F3)
     EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 1)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 90, 10, EASING_QUADRATIC_IN)
     EVT_LABEL(2)
         EVT_CALL(UpdateLerp)
@@ -551,7 +551,7 @@ EvtScript N(EVS_Scene_Merle_OneLastThing) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(3)
         EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
     EVT_CALL(SetGroupEnabled, MODEL_k_naiso, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)

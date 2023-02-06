@@ -309,7 +309,7 @@
 #define SetTexPanner dead_SetTexPanner
 #define func_802D7B10 dead_func_802D7B10
 #define Entity_Chest dead_Entity_Chest
-#define snd_ambient_80055618 dead_snd_ambient_80055618
+#define snd_ambient_mute dead_snd_ambient_mute
 #define GetPlayerAnimation dead_GetPlayerAnimation
 #define SetPlayerSpeed dead_SetPlayerSpeed
 #define SetItemPos dead_SetItemPos

@@ -30,7 +30,7 @@ EvtScript N(EVS_TrySpawningStarCard) = {
             EVT_CALL(PlaySound, SOUND_80000067)
             EVT_CALL(N(StarSpiritEffectFunc1))
             EVT_CALL(StopSound, SOUND_80000067)
-            EVT_CALL(PlaySoundAt, SOUND_B2, 0, -100, 85, 0)
+            EVT_CALL(PlaySoundAt, SOUND_B2, SOUND_SPACE_MODE_0, -100, 85, 0)
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(45)
@@ -39,7 +39,7 @@ EvtScript N(EVS_TrySpawningStarCard) = {
         EVT_THREAD
             EVT_WAIT(180)
             EVT_WAIT(115)
-            EVT_CALL(PlaySoundAt, SOUND_137, 0, -100, 85, 0)
+            EVT_CALL(PlaySoundAt, SOUND_137, SOUND_SPACE_MODE_0, -100, 85, 0)
         EVT_END_THREAD
         EVT_CALL(N(StarSpiritEffectFunc4), 1)
         EVT_THREAD
@@ -67,7 +67,7 @@ EvtScript N(EVS_TrySpawningStarCard) = {
     EVT_END_IF
     // wait for pickup
     EVT_CALL(N(StarSpiritEffectFunc4), 3)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_138, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_138, SOUND_SPACE_MODE_0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(GB_StoryProgress, STORY_CH4_STAR_SPIRIT_RESCUED)
     EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), kmr_23_ENTRY_3, TRANSITION_14)

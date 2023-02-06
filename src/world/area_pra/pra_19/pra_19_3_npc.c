@@ -44,7 +44,7 @@ API_CALLABLE(N(ChooseImposterBattleFormation)) {
     Enemy* enemy = script->owner1.enemy;
     Encounter* encounter;
     s32 unmaskedCount = 0;
-    
+
     if (evt_get_variable(script, *args++) == 0) {
         unmaskedCount++;
     }
@@ -257,7 +257,7 @@ EvtScript N(EVS_Imposter_Unmask) = {
     EVT_CALL(SetNpcPos, LVar3, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcFlagBits, LVar3, NPC_FLAG_100, FALSE)
     EVT_CALL(SetNpcPos, LVar4, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_SMOKE_BURST, 0)
+    EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_SMOKE_BURST, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 8 * 360, 40, EASING_QUADRATIC_OUT)
     EVT_LABEL(1)
         EVT_CALL(UpdateLerp)
@@ -273,7 +273,7 @@ EvtScript N(EVS_Imposter_Unmask) = {
         EVT_CALL(SetNpcAnimation, LVar4, ANIM_Duplighost_Anim04)
         EVT_CALL(InterpNpcYaw, LVar4, 90, 0)
         EVT_CALL(SetNpcSpeed, LVar4, EVT_FLOAT(6.5))
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2CB, 0)
+        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2CB, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcMoveTo, LVar4, 0, LVar2, 0)
         EVT_CALL(SetNpcPos, LVar4, NPC_DISPOSE_LOCATION)
     EVT_END_THREAD
@@ -299,7 +299,7 @@ EvtScript N(EVS_RevealEveryImposter) = {
             EVT_CALL(SetNpcPos, NPC_FakeGoompa, NPC_DISPOSE_LOCATION)
             EVT_CALL(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcPos, NPC_GoompaGhost, LVar0, LVar1, LVar2)
-            EVT_CALL(PlaySoundAtNpc, NPC_GoompaGhost, SOUND_SMOKE_BURST, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_GoompaGhost, SOUND_SMOKE_BURST, SOUND_SPACE_MODE_0)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_CALL(NpcMoveTo, NPC_GoompaGhost, LVar0, LVar2, 30)
         EVT_END_THREAD
@@ -310,7 +310,7 @@ EvtScript N(EVS_RevealEveryImposter) = {
             EVT_CALL(SetNpcPos, NPC_FakeLuigi, NPC_DISPOSE_LOCATION)
             EVT_CALL(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcPos, NPC_LuigiGhost, LVar0, LVar1, LVar2)
-            EVT_CALL(PlaySoundAtNpc, NPC_LuigiGhost, SOUND_SMOKE_BURST, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_LuigiGhost, SOUND_SMOKE_BURST, SOUND_SPACE_MODE_0)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_CALL(NpcMoveTo, NPC_LuigiGhost, LVar0, LVar2, 30)
         EVT_END_THREAD
@@ -321,7 +321,7 @@ EvtScript N(EVS_RevealEveryImposter) = {
             EVT_CALL(SetNpcPos, NPC_FakeKoopaKoot, NPC_DISPOSE_LOCATION)
             EVT_CALL(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcPos, NPC_KoopaKootGhost, LVar0, LVar1, LVar2)
-            EVT_CALL(PlaySoundAtNpc, NPC_KoopaKootGhost, SOUND_SMOKE_BURST, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_KoopaKootGhost, SOUND_SMOKE_BURST, SOUND_SPACE_MODE_0)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_CALL(NpcMoveTo, NPC_KoopaKootGhost, LVar0, LVar2, 30)
         EVT_END_THREAD
@@ -332,7 +332,7 @@ EvtScript N(EVS_RevealEveryImposter) = {
             EVT_CALL(SetNpcPos, NPC_FakeKolorado, NPC_DISPOSE_LOCATION)
             EVT_CALL(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcPos, NPC_KoloradoGhost, LVar0, LVar1, LVar2)
-            EVT_CALL(PlaySoundAtNpc, NPC_KoloradoGhost, SOUND_SMOKE_BURST, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_KoloradoGhost, SOUND_SMOKE_BURST, SOUND_SPACE_MODE_0)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_CALL(NpcMoveTo, NPC_KoloradoGhost, LVar0, LVar2, 30)
         EVT_END_THREAD
@@ -627,11 +627,11 @@ EvtScript N(EVS_ManageImpostersScene) = {
     EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, TRUE)
     EVT_WAIT(60)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_Question)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_263, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_263, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_FakeKooper, EMOTE_QUESTION, 0, 30, FALSE, 0, 0, 0, 0)
     EVT_WAIT(35)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1054, SOUND_1E4, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1054, SOUND_1E4, SOUND_SPACE_MODE_0)
     EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 34, 22, 1, 10, 30)
     EVT_CALL(EnableModel, MODEL_o1024, FALSE)
     EVT_CALL(EnableModel, MODEL_o1026, TRUE)

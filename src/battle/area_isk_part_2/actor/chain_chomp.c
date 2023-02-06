@@ -300,7 +300,7 @@ ApiStatus b_area_isk_part_2_chain_chomp_ChompChainUpdate(Evt* script, s32 isInit
         if (animState->unk_18 < 2.0f * -animState->unk_14) {
             animState->unk_18 = 2.0f * -animState->unk_14;
             if (actor->state.varTable[8] != 0 && i == 0) {
-                sfx_play_sound_at_position(SOUND_2063, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+                sfx_play_sound_at_position(SOUND_2063, SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
             }
         }
         animState->currentPos.y += animState->unk_18;

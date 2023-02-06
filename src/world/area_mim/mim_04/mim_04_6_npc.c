@@ -8,8 +8,8 @@
 
 EvtScript N(EVS_NpcInteract_Bubulb) = {
     EVT_IF_EQ(GF_MIM04_Gift_MagicalSeed3, FALSE)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, 0)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_MODE_0)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Green_PopUp)
         EVT_WAIT(45)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Green_Idle)

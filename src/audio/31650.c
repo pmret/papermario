@@ -70,7 +70,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         voice->envMixer.pan = 64;
         voice->unk_74 = 0;
         voice->next = NULL;
-        voice->groupID = 0;
+        voice->busId = FX_BUS_BGMA_MAIN;
         voice->index = i;
     }
 
@@ -141,8 +141,8 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
             for (i = 0; i < gSynDriverPtr->num_pvoice; i++) {
                 pvoice = &gSynDriverPtr->pvoices[i];
 
-                if ((pvoice->groupID != 0xFF) && (pvoice->groupID < gSynDriverPtr->num_bus)) {
-                    fxBus = &gSynDriverPtr->fxBus[pvoice->groupID];
+                if ((pvoice->busId != 0xFF) && (pvoice->busId < gSynDriverPtr->num_bus)) {
+                    fxBus = &gSynDriverPtr->fxBus[pvoice->busId];
                     if (fxBus->tail != NULL) {
                         fxBus->tail->next = pvoice;
                     } else {
@@ -284,10 +284,10 @@ void au_bus_set_fx_params(u8 index, s16 delayIndex, s16 paramID, s32 value) {
     au_fx_param_hdl(fxBus->fxR, delayIndex, paramID, value);
 }
 
-void au_pvoice_set_group(u8 index, s8 groupID) {
+void au_pvoice_set_bus(u8 index, s8 busId) {
     AuPVoice* pvoice = &gSynDriverPtr->pvoices[index];
 
-    pvoice->groupID = groupID;
+    pvoice->busId = busId;
 }
 
 // based on n_alSynStopVoice
@@ -325,13 +325,13 @@ void au_syn_start_voice(u8 voiceIdx) {
 }
 
 // based on n_alSynStartVoiceParams
-void au_syn_start_voice_params(u8 voiceIdx, u8 groupIdx, Instrument* instrument, f32 pitch, s16 vol, u8 pan, u8 fxMix, s32 delta) {
+void au_syn_start_voice_params(u8 voiceIdx, u8 busId, Instrument* instrument, f32 pitch, s16 vol, u8 pan, u8 fxMix, s32 delta) {
     AuPVoice* pvoice = &gSynDriverPtr->pvoices[voiceIdx];
     AuLoadFilter* decoder = &pvoice->decoder;
     AuEnvMixer* envMixer = &pvoice->envMixer;
     AuResampler* resampler = &pvoice->resampler;
 
-    pvoice->groupID = groupIdx;
+    pvoice->busId = busId;
     decoder->instrument = instrument;
 
     pvoice->decoder.memin = (s32)decoder->instrument->base;
@@ -591,7 +591,7 @@ s32 au_syn_get_playing(u8 voiceIdx) {
 s32 au_syn_get_bus(u8 voiceIdx) {
     AuPVoice* pvoice =  &gSynDriverPtr->pvoices[voiceIdx];
 
-    return pvoice->groupID;
+    return pvoice->busId;
 }
 
 f32 au_syn_get_pitch(u8 voiceIdx) {
