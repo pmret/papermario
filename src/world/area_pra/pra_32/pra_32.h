@@ -10,14 +10,14 @@
 #include "mapfs/pra_32_hit.h"
 
 enum {
-	NPC_CrystalKing_01          = 0,
-	NPC_CrystalKing_02          = 1,
-	NPC_Kalmar                  = 2,
-	NPC_CrystalKing_03          = 3,
+    NPC_CrystalKing_01  = 0,
+    NPC_CrystalKing_02  = 1,
+    NPC_Kalmar          = 2,
+    NPC_CrystalKing_03  = 3,
 };
 
 enum {
-    MV_Unk_00       = MapVar(0),
+    MV_CamDistance      = MapVar(0),
 };
 
 #define NAMESPACE pra_32

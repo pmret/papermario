@@ -3547,7 +3547,7 @@ enum PlayerStatusAnimFlags {
        Not sure why - seems like it might contribute to being unable to *stop* using your partner during a cutscene. */
     PA_FLAG_PARTNER_USAGE_FORCED             = 0x00200000,
     PA_FLAG_RIDING_PARTNER                   = 0x00400000,
-    PA_FLAG_PUSHED_ALBINO_DINO               = 0x00800000,
+    PA_FLAG_ABORT_PUSHING_BLOCK              = 0x00800000,
     /* Changes how Mario is rendered. Seems to be intended to make Mario's depth render properly when using Bow behind a switch (two translucent objects on top of eachother), but it doesn't actually work. */
     PA_FLAG_MAP_HAS_SWITCH                   = 0x01000000,
     PA_FLAG_2000000                          = 0x02000000,

@@ -10,21 +10,21 @@
 #include "mapfs/pra_09_hit.h"
 
 enum {
-	NPC_Bombette_01             = 0,
-	NPC_Bombette_02             = 1,
-	NPC_Bombette_03             = 2,
-	NPC_Bombette_04             = 3,
-	NPC_Bombette_05             = 4,
-	NPC_Duplighost_01           = 5,
-	NPC_Duplighost_02           = 6,
-	NPC_Duplighost_03           = 7,
-	NPC_Duplighost_04           = 8,
-	NPC_Duplighost_05           = 9,
-	NPC_Bombette_01_Target      = 10,
-	NPC_Bombette_02_Target      = 11,
-	NPC_Bombette_03_Target      = 12,
-	NPC_Bombette_04_Target      = 13,
-	NPC_Bombette_05_Target      = 14,
+    NPC_Bombette_01             = 0,
+    NPC_Bombette_02             = 1,
+    NPC_Bombette_03             = 2,
+    NPC_Bombette_04             = 3,
+    NPC_Bombette_05             = 4,
+    NPC_Duplighost_01           = 5,
+    NPC_Duplighost_02           = 6,
+    NPC_Duplighost_03           = 7,
+    NPC_Duplighost_04           = 8,
+    NPC_Duplighost_05           = 9,
+    NPC_Bombette_01_Target      = 10,
+    NPC_Bombette_02_Target      = 11,
+    NPC_Bombette_03_Target      = 12,
+    NPC_Bombette_04_Target      = 13,
+    NPC_Bombette_05_Target      = 14,
 };
 
 enum {

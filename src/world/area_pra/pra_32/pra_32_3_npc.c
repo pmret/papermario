@@ -5,12 +5,12 @@
 #include "world/common/npc/StarSpirit.inc.c"
 
 EvtScript N(EVS_AnimateCam_CrystalKing) = {
-    EVT_SET(MV_Unk_00, 400)
+    EVT_SET(MV_CamDistance, 400)
     EVT_THREAD
         EVT_CALL(MakeLerp, 400, 300, 200, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_SET(MV_Unk_00, LVar0)
+            EVT_SET(MV_CamDistance, LVar0)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 0)
                 EVT_BREAK_LOOP
@@ -25,7 +25,7 @@ EvtScript N(EVS_AnimateCam_CrystalKing) = {
         EVT_ADD(LVar5, -30)
         EVT_IF_GE(LVar5, 100)
             EVT_CALL(SetPanTarget, CAM_DEFAULT, 588, LVar5, 116)
-            EVT_CALL(SetCamDistance, CAM_DEFAULT, MV_Unk_00)
+            EVT_CALL(SetCamDistance, CAM_DEFAULT, MV_CamDistance)
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
         EVT_END_IF

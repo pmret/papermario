@@ -208,7 +208,7 @@ void action_update_pushing_block(void) {
 
     check_input_jump();
 
-    if (playerStatus->animFlags & PA_FLAG_PUSHED_ALBINO_DINO) {
+    if (playerStatus->animFlags & PA_FLAG_ABORT_PUSHING_BLOCK) {
         if (playerStatus->currentStateTime != 0) {
             playerStatus->currentStateTime--;
             if (playerStatus->currentStateTime == 0) {

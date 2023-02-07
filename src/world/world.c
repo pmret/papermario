@@ -779,7 +779,7 @@ MapConfig pra_maps[] = {
     { MAP_WITH_INIT(pra_27), .songVariation = 1, .sfxReverb = 1 },
     { MAP_WITH_INIT(pra_28), .songVariation = 1, .sfxReverb = 1 },
     { MAP_WITH_INIT(pra_29), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(pra_31, 0x802410E0), .songVariation = 1, .sfxReverb = 2, .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(pra_31), .songVariation = 1, .sfxReverb = 2 },
     { MAP_WITH_INIT(pra_32), .bgName = "sam_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP_WITH_INIT(pra_33), .songVariation = 1, .sfxReverb = 2 },
     { MAP_WITH_INIT(pra_34), .songVariation = 1, .sfxReverb = 1 },

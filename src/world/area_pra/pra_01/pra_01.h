@@ -12,7 +12,7 @@
 #include "sprite/npc/WorldKalmar.h"
 
 enum {
-	NPC_Kalmar      = 0,
+    NPC_Kalmar      = 0,
 };
 
 #define NAMESPACE pra_01

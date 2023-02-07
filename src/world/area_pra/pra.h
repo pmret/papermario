@@ -21,8 +21,8 @@ enum {
 };
 
 enum {
-    AF_PRA_02           = AreaFlag(2),
-    AF_PRA33_FlippingWall           = AreaFlag(3),
+    AF_PRA09_HitSwitch      = AreaFlag(2),
+    AF_PRA33_FlippingWall   = AreaFlag(3),
 };
 
 extern MapSettings pra_01_settings;

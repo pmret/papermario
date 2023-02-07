@@ -12,7 +12,7 @@
 #include "sprite/npc/Duplighost.h"
 
 enum {
-	NPC_Duplighost      = 0,
+    NPC_Duplighost      = 0,
 };
 
 #define NAMESPACE pra_39

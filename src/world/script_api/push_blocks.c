@@ -252,11 +252,11 @@ API_CALLABLE(CanPlayerPushBlock) {
         || playerStatus->actionState == ACTION_STATE_WALK
         || playerStatus->actionState == ACTION_STATE_RUN) 
         && !(playerStatus->animFlags & PA_FLAG_USING_WATT))
-        {
-            script->varTable[13] = TRUE;
-        } else {
-            script->varTable[13] = FALSE;
-        }
+    {
+        script->varTable[13] = TRUE;
+    } else {
+        script->varTable[13] = FALSE;
+    }
     
     return ApiStatus_DONE2;
 }
@@ -310,7 +310,7 @@ EvtScript EVS_PushWall_PushBlock = {
 			EVT_RETURN
 		EVT_END_IF
 	EVT_END_IF
-    // cancel state change if the block can't bt pushed
+    // cancel state change if the block can't be pushed
 	EVT_IF_NE(LVar9, PUSH_BLOCK_READY)
 		EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
 		EVT_RETURN

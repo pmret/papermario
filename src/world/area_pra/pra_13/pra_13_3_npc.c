@@ -24,15 +24,15 @@ API_CALLABLE(N(DoNothingWithNpcID)) {
     return ApiStatus_DONE2;
 }
 
-void N(func_8024140C_D659EC)(void);
-void N(func_802414BC_D65A9C)(void* npc);
+void N(appendGfx_fake_player)(void* data);
+void N(worker_draw_fake_player)(void);
 
-API_CALLABLE(N(func_802413D0_D659B0)) {
-    script->array[0] = create_worker_world(NULL, N(func_8024140C_D659EC));
+API_CALLABLE(N(CreateFakePlayerRenderer)) {
+    script->array[0] = create_worker_world(NULL, N(worker_draw_fake_player));
     return ApiStatus_DONE2;
 }
 
-void N(func_8024140C_D659EC)(void) {
+void N(worker_draw_fake_player)(void) {
     RenderTask rt;
     RenderTask* rtPtr = &rt;
     Npc* npc = get_npc_safe(NPC_FakeMario);
@@ -44,27 +44,27 @@ void N(func_8024140C_D659EC)(void) {
         rtPtr->renderMode = npc->renderMode;
         rtPtr->distance = -z;
         rtPtr->appendGfxArg = npc;
-        rtPtr->appendGfx = N(func_802414BC_D65A9C);
+        rtPtr->appendGfx = N(appendGfx_fake_player);
         queue_render_task(rtPtr);
     }
 }
 
-void N(func_802414BC_D65A9C)(void* data) {
+void N(appendGfx_fake_player)(void* data) {
     Npc* npc = data;
-    Matrix4f sp18, sp58, sp98, spD8;
+    Matrix4f mtxTransform, mtxTranslate, sp98, mtxScale;
 
     npc_get_render_yaw(npc);
-    guRotateF(sp18, npc->renderYaw + gCameras[gCurrentCamID].currentYaw, 0.0f, 1.0f, 0.0f);
-    guScaleF(spD8, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
-    guMtxCatF(sp18, spD8, sp18);
-    guTranslateF(sp58, npc->pos.x, npc->pos.y, npc->pos.z);
-    guMtxCatF(sp18, sp58, sp18);
+    guRotateF(mtxTransform, npc->renderYaw + gCameras[gCurrentCamID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guScaleF(mtxScale, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
+    guMtxCatF(mtxTransform, mtxScale, mtxTransform);
+    guTranslateF(mtxTranslate, npc->pos.x, npc->pos.y, npc->pos.z);
+    guMtxCatF(mtxTransform, mtxTranslate, mtxTransform);
     spr_update_player_sprite(PLAYER_SPRITE_AUX2, npc->currentAnim, 1.0f);
-    spr_draw_player_sprite(PLAYER_SPRITE_AUX2, 0, 0, 0, sp18);
+    spr_draw_player_sprite(PLAYER_SPRITE_AUX2, 0, 0, 0, mtxTransform);
 }
 
-EvtScript N(D_802425EC_D66BCC) = {
-    EVT_CALL(MakeLerp, 0, 2880, 40, EASING_QUADRATIC_OUT)
+EvtScript N(EVS_ImposterSpin) = {
+    EVT_CALL(MakeLerp, 0, 8 * 360, 40, EASING_QUADRATIC_OUT)
     EVT_LABEL(1)
         EVT_CALL(UpdateLerp)
         EVT_CALL(SetNpcRotation, LVar4, 0, LVar0, 0)
@@ -103,7 +103,7 @@ EvtScript N(EVS_Scene_ImpostersCaught) = {
                 EVT_CALL(SetNpcFlagBits, NPC_Duplighost_01, NPC_FLAG_100, TRUE)
                 EVT_SET(LVar4, 2)
                 EVT_CALL(SetNpcYaw, NPC_Duplighost_01, 90)
-                EVT_EXEC_WAIT(N(D_802425EC_D66BCC))
+                EVT_EXEC_WAIT(N(EVS_ImposterSpin))
                 EVT_CALL(SetNpcAnimation, NPC_Duplighost_01, ANIM_Duplighost_Anim04)
                 EVT_CALL(SetNpcFlagBits, NPC_Duplighost_01, NPC_FLAG_100, TRUE)
                 EVT_CALL(NpcMoveTo, NPC_Duplighost_01, 430, -70, 15)
@@ -118,7 +118,7 @@ EvtScript N(EVS_Scene_ImpostersCaught) = {
                 EVT_CALL(SetNpcFlagBits, NPC_Duplighost_02, NPC_FLAG_100, TRUE)
                 EVT_SET(LVar4, 3)
                 EVT_CALL(SetNpcYaw, NPC_Duplighost_02, 90)
-                EVT_EXEC_WAIT(N(D_802425EC_D66BCC))
+                EVT_EXEC_WAIT(N(EVS_ImposterSpin))
                 EVT_CALL(SetNpcAnimation, NPC_Duplighost_02, ANIM_Duplighost_Anim04)
                 EVT_CALL(SetNpcFlagBits, NPC_Duplighost_02, NPC_FLAG_100, TRUE)
                 EVT_CALL(NpcMoveTo, NPC_Duplighost_02, 420, -70, 15)
@@ -131,7 +131,7 @@ EvtScript N(EVS_Scene_ImpostersCaught) = {
     EVT_END
 };
 
-EvtScript N(D_80242A70_D67050) = {
+EvtScript N(EVS_Scene_DefeatImposters) = {
     EVT_CALL(SetNpcPos, NPC_Duplighost_01, 400, 0, -70)
     EVT_CALL(SetNpcPos, NPC_Duplighost_02, 370, 0, -70)
     EVT_CALL(SetNpcAnimation, NPC_Duplighost_01, ANIM_Duplighost_Anim02)
@@ -163,7 +163,7 @@ EvtScript N(D_80242A70_D67050) = {
     EVT_END
 };
 
-EvtScript N(D_80242CA0_D67280) = {
+EvtScript N(EVS_NpcInit_FakeMario) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mario_10002)
     EVT_CALL(GetEntryID, LVar0)
@@ -183,23 +183,23 @@ EvtScript N(D_80242CA0_D67280) = {
     EVT_END
 };
 
-EvtScript N(D_80242DA4_D67384) = {
+EvtScript N(EVS_NpcInit_FakeBombette) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_Scene_ImpostersCaught)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(D_80242A70_D67050)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_Scene_DefeatImposters)))
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, pra_13_ENTRY_2)
         EVT_IF_LT(GB_StoryProgress, STORY_CH7_DEFEATED_MIRROR_DUPLIGHOSTS)
             EVT_CALL(SetNpcPos, NPC_SELF, 345, 0, -59)
             EVT_MALLOC_ARRAY(16, LVarA)
-            EVT_CALL(N(func_802413D0_D659B0))
+            EVT_CALL(N(CreateFakePlayerRenderer))
         EVT_END_IF
     EVT_ELSE
         EVT_IF_EQ(GF_PRA_BrokeIllusion, TRUE)
             EVT_IF_LT(GB_StoryProgress, STORY_CH7_DEFEATED_MIRROR_DUPLIGHOSTS)
                 EVT_CALL(SetNpcPos, NPC_SELF, 435, 0, -59)
                 EVT_MALLOC_ARRAY(16, LVarA)
-                EVT_CALL(N(func_802413D0_D659B0))
+                EVT_CALL(N(CreateFakePlayerRenderer))
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
@@ -207,13 +207,13 @@ EvtScript N(D_80242DA4_D67384) = {
     EVT_END
 };
 
-EvtScript N(D_80242EDC_D674BC) = {
+EvtScript N(EVS_NpcInit_Duplighost_01) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80242F04_D674E4) = {
+EvtScript N(EVS_NpcInit_Duplighost_02) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
     EVT_RETURN
     EVT_END
@@ -225,7 +225,7 @@ StaticNpc N(NpcData_FakeMario) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
-    .init = &N(D_80242CA0_D67280),
+    .init = &N(EVS_NpcInit_FakeMario),
     .drops = NPC_NO_DROPS,
     .animations = BOMBETTE_ANIMS,
 };
@@ -237,7 +237,7 @@ StaticNpc N(NpcData_Imposters)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
         .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(D_80242DA4_D67384),
+        .init = &N(EVS_NpcInit_FakeBombette),
         .drops = NPC_NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
@@ -247,7 +247,7 @@ StaticNpc N(NpcData_Imposters)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(D_80242EDC_D674BC),
+        .init = &N(EVS_NpcInit_Duplighost_01),
         .drops = NPC_NO_DROPS,
         .animations = DUPLIGHOST_ANIMS,
     },
@@ -257,7 +257,7 @@ StaticNpc N(NpcData_Imposters)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(D_80242F04_D674E4),
+        .init = &N(EVS_NpcInit_Duplighost_02),
         .drops = NPC_NO_DROPS,
         .animations = DUPLIGHOST_ANIMS,
     },
