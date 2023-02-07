@@ -109,7 +109,7 @@ EvtScript N(EVS_NpcAux_TrafficBoo) = {
     EVT_SET(LVar1, 0)
     EVT_LOOP(0)
         EVT_CALL(N(UpdateTrafficBooAlpha))
-        EVT_CALL(func_802CFD30, -1, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_SELF, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN

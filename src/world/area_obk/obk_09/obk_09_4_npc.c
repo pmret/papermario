@@ -108,7 +108,7 @@ EvtScript N(EVS_NpcInit_Skolar) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldSkolar_IdleSad)
     EVT_CALL(SetNpcPos, NPC_SELF, 0, NPC_DISPOSE_POS_Y, -100)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(func_802CFD30, -1, 7, 170, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_SELF, FOLD_TYPE_7, 170, 0, 0, 0)
     EVT_IF_GE(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF

@@ -46,7 +46,7 @@ EvtScript N(D_80242560_BB95D0) = {
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(90)
         EVT_ADDF(LVar0, EVT_FLOAT(2.667))
-        EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Bootler, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Talk, ANIM_Bootler_Idle, 0, MSG_CH3_0028)
@@ -69,7 +69,7 @@ EvtScript N(D_80242560_BB95D0) = {
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(90)
         EVT_SUBF(LVar0, EVT_FLOAT(2.667))
-        EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Bootler, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(RemoveNpc, NPC_Bootler)

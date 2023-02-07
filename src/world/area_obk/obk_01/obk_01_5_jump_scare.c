@@ -32,7 +32,7 @@ EvtScript N(EVS_Scene_JumpScareBoo) = {
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20)
         EVT_SUBF(LVar0, EVT_FLOAT(12.0))
-        EVT_CALL(func_802CFD30, 0, FOLD_TYPE_7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_JumpScareBoo, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(RemoveNpc, NPC_JumpScareBoo)

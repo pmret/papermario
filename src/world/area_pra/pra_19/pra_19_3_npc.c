@@ -203,7 +203,6 @@ API_CALLABLE(N(UpdateExampleKooperMotion)) {
     return ApiStatus_BLOCK;
 }
 
-
 EvtScript N(EVS_FocusCam_OnPosition) = {
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, LVarA)

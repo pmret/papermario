@@ -70,10 +70,10 @@ EvtScript N(EVS_MerlarFlickering) = {
             EVT_USE_BUF(EVT_PTR(N(FlickeringStaticAmts)))
             EVT_LOOP(5)
                 EVT_BUF_READ1(LVar0)
-                EVT_CALL(func_802CFD30, 0, FOLD_TYPE_D, EVT_FLOAT(0.0), LVar0, EVT_FLOAT(200.0), EVT_FLOAT(100.0))
+                EVT_CALL(func_802CFD30, NPC_Merlar, FOLD_TYPE_D, EVT_FLOAT(0.0), LVar0, EVT_FLOAT(200.0), EVT_FLOAT(100.0))
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(func_802CFD30, 0, FOLD_TYPE_D, EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(100.0))
+            EVT_CALL(func_802CFD30, NPC_Merlar, FOLD_TYPE_D, EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(100.0))
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_GOTO(0)
@@ -141,7 +141,7 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(100)
         EVT_ADDF(LVar0, EVT_FLOAT(1.0))
-        EVT_CALL(func_802CFD30, 0, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Merlar, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_EXEC_GET_TID(N(EVS_MerlarFlickering), LVar8)
@@ -245,7 +245,7 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
     EVT_SETF(LVar0, EVT_FLOAT(100.0))
     EVT_LOOP(100)
         EVT_ADDF(LVar0, EVT_FLOAT(-1.0))
-        EVT_CALL(func_802CFD30, 0, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Merlar, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetNpcPos, NPC_Merlar, NPC_DISPOSE_LOCATION)

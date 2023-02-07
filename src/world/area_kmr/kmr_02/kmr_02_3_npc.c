@@ -1540,7 +1540,7 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
         EVT_CALL(MakeLerp, 60, 0, 40, EASING_LINEAR)
         EVT_LABEL(6)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(func_802CFD30, 12, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Eldstar_02, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(6)
@@ -1750,11 +1750,11 @@ EvtScript N(EVS_NpcAI_Eldstar_02) = {
     EVT_SETF(LVar0, EVT_FLOAT(100.0))
     EVT_LABEL(1)
     EVT_LOOP(50)
-        EVT_CALL(func_802CFD30, -1, 13, 0, ArrayVar(0), 0, MV_Unk_01)
+        EVT_CALL(func_802CFD30, NPC_SELF, 13, 0, ArrayVar(0), 0, MV_Unk_01)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_LOOP(50)
-        EVT_CALL(func_802CFD30, -1, 13, 0, ArrayVar(0), 0, MV_Unk_01)
+        EVT_CALL(func_802CFD30, NPC_SELF, 13, 0, ArrayVar(0), 0, MV_Unk_01)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_GOTO(1)

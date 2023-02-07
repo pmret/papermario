@@ -21,6 +21,7 @@ enum {
 };
 
 enum {
+    AF_PRA_02           = AreaFlag(2),
     AF_PRA33_FlippingWall           = AreaFlag(3),
 };
 

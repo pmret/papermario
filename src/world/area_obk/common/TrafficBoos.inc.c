@@ -101,7 +101,7 @@ EvtScript N(EVS_NpcIdle_TrafficBoo) = {
     EVT_LOOP(0)
         EVT_CALL(N(UpdateTrafficBooMotion))
         EVT_CALL(N(UpdateTrafficBooAlpha))
-        EVT_CALL(func_802CFD30, -1, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_SELF, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_CALL(SetNpcRenderMode, NPC_SELF, RENDER_MODE_SURFACE_XLU_LAYER1)
         EVT_WAIT(1)
     EVT_END_LOOP
