@@ -2722,7 +2722,7 @@ segments:
     start: 0x3251D0
     name: world_use_item
     vram: 0x802C0000
-    # follows_vram_symbol: world_partner_vram_end # TODO uncomment and diagnose
+    follows_vram_symbol: world_partner_vram_end # TODO uncomment and diagnose
     subsegments:
     - [0x3251D0, c, world_use_item]
     - [0x3255E0]
