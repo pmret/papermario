@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import re
 from typing import Dict, List, Optional, Set, TYPE_CHECKING
 
 import spimdisasm
@@ -43,6 +44,15 @@ def add_symbol(sym: "Symbol"):
     # For larger symbols, add their ranges to interval trees for faster lookup
     if sym.size > 4:
         all_symbols_ranges.addi(sym.vram_start, sym.vram_end, sym)
+
+
+def to_cname(symbol_name: str) -> str:
+    symbol_name = re.sub(r"[^0-9a-zA-Z_]", "_", symbol_name)
+
+    if symbol_name[0] in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+        symbol_name = "_" + symbol_name
+
+    return symbol_name
 
 
 def initialize(all_segments: "List[Segment]"):

@@ -4,7 +4,7 @@ import argparse
 import hashlib
 import importlib
 import pickle
-from typing import Any, Dict, List, Optional, Set, Union
+from typing import Any, Dict, List, Optional, Set, Tuple, Union
 
 import rabbitizer
 import spimdisasm
@@ -13,14 +13,18 @@ import yaml
 from colorama import Fore, Style
 from intervaltree import Interval, IntervalTree
 
-from segtypes.linker_entry import LinkerWriter, to_cname
+from segtypes.linker_entry import (
+    LinkerWriter,
+    get_segment_vram_end_symbol_name,
+    to_cname,
+)
 from segtypes.segment import Segment
 from util import compiler, log, options, palettes, symbols, relocs
 
 from util.symbols import Symbol
 
-VERSION = "0.13.3"
-# This value should be keep in sync with the version listed on requirements.txt
+VERSION = "0.13.4"
+# This value should be kept in sync with the version listed on requirements.txt
 SPIMDISASM_MIN = (1, 11, 1)
 
 parser = argparse.ArgumentParser(
@@ -116,12 +120,14 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
             last_rom_end = next_start
 
     for segment in ret:
-        if segment.follows_vram:
-            if segment.follows_vram not in segments_by_name:
+        if segment.given_follows_vram:
+            if segment.given_follows_vram not in segments_by_name:
                 log.error(
-                    f"segment '{segment.name}' follows_vram segment'{segment.follows_vram}' does not exist"
+                    f"segment '{segment.given_follows_vram}', the 'follows_vram' value for segment '{segment.name}', does not exist"
                 )
-            segment.follows_vram_segment = segments_by_name[segment.follows_vram]
+            segment.vram_of_symbol = get_segment_vram_end_symbol_name(
+                segments_by_name[segment.given_follows_vram]
+            )
 
     return ret
 
@@ -426,28 +432,40 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
         options.opts.is_mode_active("ld") and options.opts.platform != "gc"
     ):  # TODO move this to platform initialization when it gets implemented
         # Calculate list of segments for which we need to find the largest so we can safely place the symbol after it
-        linker_afters: Dict[Symbol, List[Segment]] = {}
+        max_vram_end_syms: Dict[str, List[Segment]] = {}
         for sym in symbols.appears_after_overlays_syms:
-            linker_afters[sym] = [
+            max_vram_end_syms[sym.name] = [
                 seg
                 for seg in all_segments
                 if isinstance(seg.vram_start, int)
                 and seg.vram_start == sym.appears_after_overlays_addr
             ]
+        max_vram_end_sym_names: Set[str] = set(max_vram_end_syms.keys())
+
+        max_vram_end_insertion_points: Dict[
+            Segment, List[Tuple[str, List[Segment]]]
+        ] = {}
+        # Find the last segment whose vram_of_symbol is one of the max_vram_end_syms
+        for segment in reversed(all_segments):
+            vram_of_sym = segment.vram_of_symbol
+            if vram_of_sym is not None and vram_of_sym in max_vram_end_sym_names:
+                if segment not in max_vram_end_insertion_points:
+                    max_vram_end_insertion_points[segment] = []
+                max_vram_end_insertion_points[segment].append(
+                    (vram_of_sym, max_vram_end_syms[vram_of_sym])
+                )
+                max_vram_end_sym_names.remove(vram_of_sym)
 
         global linker_writer
-        linker_writer = LinkerWriter(linker_afters)
+        linker_writer = LinkerWriter()
         linker_bar = tqdm.tqdm(
             all_segments,
             total=len(all_segments),
         )
 
-        for i, segment in enumerate(linker_bar):
+        for segment in linker_bar:
             linker_bar.set_description(f"Linker script {brief_seg_name(segment, 20)}")
-            next_segment: Optional[Segment] = None
-            if i < len(all_segments) - 1:
-                next_segment = all_segments[i + 1]
-            linker_writer.add(segment, next_segment)
+            linker_writer.add(segment, max_vram_end_insertion_points.get(segment, []))
         linker_writer.save_linker_script()
         linker_writer.save_symbol_header()
 

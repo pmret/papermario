@@ -7,7 +7,7 @@ from typing import Dict, List, Optional, Set, Type, TYPE_CHECKING, Union
 from intervaltree import Interval, IntervalTree
 
 from util import log, options, symbols
-from util.symbols import Symbol
+from util.symbols import Symbol, to_cname
 
 # circular import
 if TYPE_CHECKING:
@@ -50,9 +50,9 @@ def parse_segment_follows_vram(segment: Union[dict, list]) -> Optional[str]:
     return None
 
 
-def parse_segment_follows_vram_symbol(segment: Union[dict, list]) -> Optional[str]:
+def parse_segment_vram_of_symbol(segment: Union[dict, list]) -> Optional[str]:
     if isinstance(segment, dict):
-        return segment.get("follows_vram_symbol", None)
+        return segment.get("vram_of_symbol", segment.get("follows_vram_symbol", None))
     return None
 
 
@@ -206,8 +206,8 @@ class Segment:
         self.symbol_ranges_rom: IntervalTree = IntervalTree()
 
         self.given_section_order: List[str] = options.opts.section_order
-        self.follows_vram: Optional[str] = None
-        self.follows_vram_symbol: Optional[str] = None
+        self.given_follows_vram: Optional[str] = None
+        self.vram_of_symbol: Optional[str] = None
 
         self.given_symbol_name_format: str = options.opts.symbol_name_format
         self.given_symbol_name_format_no_rom: str = (
@@ -217,7 +217,6 @@ class Segment:
         self.parent: Optional[Segment] = None
         self.sibling: Optional[Segment] = None
         self.rodata_sibling: Optional[Segment] = None
-        self.follows_vram_segment: Optional[Segment] = None
         self.file_path: Optional[Path] = None
 
         self.args: List[str] = args
@@ -278,11 +277,11 @@ class Segment:
         ret.file_path = Segment.parse_segment_file_path(yaml)
 
         ret.bss_contains_common = Segment.parse_segment_bss_contains_common(yaml)
-        if not ret.follows_vram:
-            ret.follows_vram = parse_segment_follows_vram(yaml)
+        if not ret.given_follows_vram:
+            ret.given_follows_vram = parse_segment_follows_vram(yaml)
 
-        if not ret.follows_vram_symbol:
-            ret.follows_vram_symbol = parse_segment_follows_vram_symbol(yaml)
+        if not ret.vram_of_symbol:
+            ret.vram_of_symbol = parse_segment_vram_of_symbol(yaml)
 
         if not ret.align:
             ret.align = parse_segment_align(yaml)
