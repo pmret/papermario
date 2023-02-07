@@ -349,14 +349,6 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
     # Initialize segments
     all_segments = initialize_segments(config["segments"])
 
-    # addrs = set()
-    # for seg in all_segments:
-    #     if isinstance(seg.vram_start, int):
-    #         if not (seg.follows_vram or seg.follows_vram_symbol):
-    #             if seg.vram_start not in addrs:
-    #                 addrs.add(seg.vram_start)
-    #                 print(f"{seg.vram_start:X} - {seg.name}")
-
     # Load and process symbols
     symbols.initialize(all_segments)
     relocs.initialize()
@@ -433,9 +425,8 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
     if (
         options.opts.is_mode_active("ld") and options.opts.platform != "gc"
     ):  # TODO move this to platform initialization when it gets implemented
-
         # Calculate list of segments for which we need to find the largest so we can safely place the symbol after it
-        linker_afters: Dict[Symbol, list[Segment]] = {}
+        linker_afters: Dict[Symbol, List[Segment]] = {}
         for sym in symbols.appears_after_overlays_syms:
             linker_afters[sym] = [
                 seg
