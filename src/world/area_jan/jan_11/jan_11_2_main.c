@@ -3,7 +3,6 @@
 #include "world/common/atomic/CreateDarkness.inc.c"
 
 #include "world/common/entity/Pipe.inc.c"
-#include "world/common/entity/Pipe.data.inc.c"
 
 #define MODEL_sizuku MODEL_o140 //TODO parameterize all DripVolume includes
 #include "world/area_tik/common/DripVolumes.inc.c"

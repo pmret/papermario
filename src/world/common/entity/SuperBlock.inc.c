@@ -3,15 +3,21 @@
 #include "effects.h"
 #include "hud_element.h"
 
-// map-specific parameters for this data
-// which saved byte to associate this block with
+// ----------------------------------------------------------------
+// Requirements
+
+// GameFlag for super block availability
 #ifndef SUPER_BLOCK_GAMEFLAG
     #error SUPER_BLOCK_GAMEFLAG is not defined!
 #endif
-// which map var to store the entity ID in
+
+// MapVar for super block entity ID
 #ifndef SUPER_BLOCK_MAPVAR
     #error SUPER_BLOCK_MAPVAR  is not defined!
 #endif
+
+// ----------------------------------------------------------------
+// User macros
 
 // use this in an EvtScript calling MakeEntity for this super block
 // expects SUPER_BLOCK_GAMEFLAG and SUPER_BLOCK_MAPVAR to be valid
@@ -21,7 +27,8 @@
     EVT_CALL(AssignBlockFlag, SUPER_BLOCK_GAMEFLAG)\
     EVT_CALL(AssignScript, EVT_PTR(N(SuperBlock_OnHit)))
 
-// begin implmentation
+// ----------------------------------------------------------------
+// Implementation
 
 #define SUPER_BLOCK_NUM_ORBS 3
 

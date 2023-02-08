@@ -4,7 +4,6 @@
 #include "world/common/atomic/TexturePan.data.inc.c"
 
 #include "world/common/entity/Pipe.inc.c"
-#include "world/common/entity/Pipe.data.inc.c"
 
 API_CALLABLE(N(ResetTrackVolumes)) {
     bgm_clear_track_volumes(0, TRACK_VOLS_2);
