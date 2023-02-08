@@ -7,13 +7,17 @@ from segtypes.common.codesubsegment import CommonSegCodeSubsegment
 
 
 class CommonSegAsm(CommonSegCodeSubsegment):
+    @staticmethod
+    def is_text() -> bool:
+        return True
+
     def out_path(self) -> Optional[Path]:
         return options.opts.asm_path / self.dir / f"{self.name}.s"
 
     def scan(self, rom_bytes: bytes):
         if (
-            self.rom_start != "auto"
-            and self.rom_end != "auto"
+            self.rom_start is not None
+            and self.rom_end is not None
             and self.rom_start != self.rom_end
         ):
             self.scan_code(rom_bytes)

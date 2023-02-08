@@ -4,7 +4,7 @@ tqdm
 intervaltree
 colorama
 # This value should be keep in sync with the version listed on split.py
-spimdisasm>=1.7.11
-rabbitizer>=1.3.1
+spimdisasm>=1.11.1
+rabbitizer>=1.4.0
 pygfxd
-n64img>=0.1.2
+n64img>=0.1.4

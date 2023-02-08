@@ -2,18 +2,16 @@ import importlib
 import importlib.util
 from pathlib import Path
 
-from typing import Any, Dict, List, Optional, Set, Type, TYPE_CHECKING, Union
+from typing import Dict, List, Optional, Set, Type, TYPE_CHECKING, Union
 
 from intervaltree import Interval, IntervalTree
 
 from util import log, options, symbols
-from util.symbols import Symbol
+from util.symbols import Symbol, to_cname
 
 # circular import
 if TYPE_CHECKING:
     from segtypes.linker_entry import LinkerEntry
-
-RomAddr = Union[int, str]
 
 
 def parse_segment_vram(segment: Union[dict, list]) -> Optional[int]:
@@ -32,7 +30,10 @@ def parse_segment_align(segment: Union[dict, list]) -> Optional[int]:
 def parse_segment_subalign(segment: Union[dict, list]) -> int:
     default = options.opts.subalign
     if isinstance(segment, dict):
-        return int(segment.get("subalign", default))
+        subalign = segment.get("subalign", default)
+        if subalign != None:
+            subalign = int(subalign)
+        return subalign
     return default
 
 
@@ -49,9 +50,9 @@ def parse_segment_follows_vram(segment: Union[dict, list]) -> Optional[str]:
     return None
 
 
-def parse_segment_follows_vram_symbol(segment: Union[dict, list]) -> Optional[str]:
+def parse_segment_vram_of_symbol(segment: Union[dict, list]) -> Optional[str]:
     if isinstance(segment, dict):
-        return segment.get("follows_vram_symbol", None)
+        return segment.get("vram_of_symbol", segment.get("follows_vram_symbol", None))
     return None
 
 
@@ -118,14 +119,16 @@ class Segment:
         )
 
     @staticmethod
-    def parse_segment_start(segment: Union[dict, list]) -> RomAddr:
+    def parse_segment_start(segment: Union[dict, list]) -> Optional[int]:
         if isinstance(segment, dict):
             s = segment.get("start", "auto")
         else:
             s = segment[0]
 
         if s == "auto":
-            return "auto"
+            return None
+        elif s == "...":
+            return None
         else:
             return int(s)
 
@@ -167,13 +170,20 @@ class Segment:
             return Path(segment["path"])
         return None
 
+    @staticmethod
+    def parse_segment_bss_contains_common(segment: Union[dict, list]) -> bool:
+        if isinstance(segment, dict) and "bss_contains_common" in segment:
+            return bool(segment["bss_contains_common"])
+        else:
+            return False
+
     def __init__(
         self,
-        rom_start: RomAddr,
-        rom_end: RomAddr,
+        rom_start: Optional[int],
+        rom_end: Optional[int],
         type: str,
         name: str,
-        vram_start: Any,
+        vram_start: Optional[int],
         args: list,
         yaml,
     ):
@@ -181,7 +191,7 @@ class Segment:
         self.rom_end = rom_end
         self.type = type
         self.name = name
-        self.vram_start = vram_start
+        self.vram_start: Optional[int] = vram_start
 
         self.align: Optional[int] = None
         self.given_subalign: int = options.opts.subalign
@@ -196,8 +206,8 @@ class Segment:
         self.symbol_ranges_rom: IntervalTree = IntervalTree()
 
         self.given_section_order: List[str] = options.opts.section_order
-        self.follows_vram: Optional[str] = None
-        self.follows_vram_symbol: Optional[str] = None
+        self.given_follows_vram: Optional[str] = None
+        self.vram_of_symbol: Optional[str] = None
 
         self.given_symbol_name_format: str = options.opts.symbol_name_format
         self.given_symbol_name_format_no_rom: str = (
@@ -206,20 +216,21 @@ class Segment:
 
         self.parent: Optional[Segment] = None
         self.sibling: Optional[Segment] = None
-        self.follows_vram_segment: Optional[Segment] = None
+        self.rodata_sibling: Optional[Segment] = None
         self.file_path: Optional[Path] = None
 
         self.args: List[str] = args
         self.yaml = yaml
 
         self.extract: bool = True
-        if self.rom_start == "auto":
+        if self.rom_start is None:
             self.extract = False
         elif self.type.startswith("."):
             self.extract = False
 
         self.warnings: List[str] = []
         self.did_run = False
+        self.bss_contains_common = Segment.parse_segment_bss_contains_common(yaml)
 
         # For segments which are not in the usual VRAM segment space, like N64's IPL3 which lives in 0xA4...
         self.special_vram_segment: bool = False
@@ -234,8 +245,8 @@ class Segment:
     def from_yaml(
         cls: Type["Segment"],
         yaml: Union[dict, list],
-        rom_start: RomAddr,
-        rom_end: RomAddr,
+        rom_start: Optional[int],
+        rom_end: Optional[int],
         vram=None,
     ):
         type = Segment.parse_segment_type(yaml)
@@ -265,15 +276,31 @@ class Segment:
         )
         ret.file_path = Segment.parse_segment_file_path(yaml)
 
-        if not ret.follows_vram:
-            ret.follows_vram = parse_segment_follows_vram(yaml)
+        ret.bss_contains_common = Segment.parse_segment_bss_contains_common(yaml)
+        if not ret.given_follows_vram:
+            ret.given_follows_vram = parse_segment_follows_vram(yaml)
 
-        if not ret.follows_vram_symbol:
-            ret.follows_vram_symbol = parse_segment_follows_vram_symbol(yaml)
+        if not ret.vram_of_symbol:
+            ret.vram_of_symbol = parse_segment_vram_of_symbol(yaml)
 
         if not ret.align:
             ret.align = parse_segment_align(yaml)
         return ret
+
+    # For executable segments (.text); like c, asm or hasm
+    @staticmethod
+    def is_text() -> bool:
+        return False
+
+    # For readonly segments (.rodata); like rodata or rdata
+    @staticmethod
+    def is_rodata() -> bool:
+        return False
+
+    # For segments which does not take space in ROM; like bss
+    @staticmethod
+    def is_noload() -> bool:
+        return False
 
     @property
     def needs_symbols(self) -> bool:

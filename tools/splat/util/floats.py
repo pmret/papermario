@@ -1,6 +1,7 @@
 import math
 import struct
 
+
 # From mips_to_c: https://github.com/matt-kempster/mips_to_c/blob/d208400cca045113dada3e16c0d59c50cdac4529/src/translate.py#L2085
 def format_f32_imm(num: int) -> str:
     packed = struct.pack(">I", num & (2**32 - 1))
