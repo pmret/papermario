@@ -7,9 +7,9 @@ Originally written by Mark Street (https://github.com/mkst)
 
 import struct
 from pathlib import Path
+from typing import Optional
 
-from util import options
-from util.log import error
+from util import options, log
 
 from segtypes.common.codesubsegment import CommonSegCodeSubsegment
 
@@ -17,12 +17,12 @@ from segtypes.common.codesubsegment import CommonSegCodeSubsegment
 class N64SegVtx(CommonSegCodeSubsegment):
     def __init__(
         self,
-        rom_start,
-        rom_end,
-        type,
-        name,
-        vram_start,
-        args,
+        rom_start: Optional[int],
+        rom_end: Optional[int],
+        type: str,
+        name: str,
+        vram_start: Optional[int],
+        args: list,
         yaml,
     ):
         super().__init__(
@@ -52,11 +52,12 @@ class N64SegVtx(CommonSegCodeSubsegment):
     def disassemble_data(self, rom_bytes):
         assert isinstance(self.rom_start, int)
         assert isinstance(self.rom_end, int)
+        assert isinstance(self.vram_start, int)
 
         vertex_data = rom_bytes[self.rom_start : self.rom_end]
         segment_length = len(vertex_data)
         if (segment_length) % 16 != 0:
-            error(
+            log.error(
                 f"Error: Vtx segment {self.name} length ({segment_length}) is not a multiple of 16!"
             )
 
@@ -97,8 +98,8 @@ class N64SegVtx(CommonSegCodeSubsegment):
     def should_scan(self) -> bool:
         return (
             options.opts.is_mode_active("vtx")
-            and self.rom_start != "auto"
-            and self.rom_end != "auto"
+            and self.rom_start is not None
+            and self.rom_end is not None
         )
 
     def should_split(self) -> bool:

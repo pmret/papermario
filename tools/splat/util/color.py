@@ -2,6 +2,7 @@ from math import ceil
 
 from util import options
 
+
 # RRRRRGGG GGBBBBBA
 def unpack_color(data):
     s = int.from_bytes(data[0:2], byteorder=options.opts.endianness)

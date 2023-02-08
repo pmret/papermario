@@ -6,7 +6,6 @@
 #define NAME_SUFFIX _Unused
 #include "world/common/complete/GiveReward.inc.c"
 
-//MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/KeyItemChoice.inc.c"
 #define NAME_SUFFIX
 

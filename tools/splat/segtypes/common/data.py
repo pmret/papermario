@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Optional
 
 import spimdisasm
-from util import options, symbols
+from util import options, symbols, log
 
 from segtypes.common.codesubsegment import CommonSegCodeSubsegment
 from segtypes.common.group import CommonSegGroup
@@ -24,7 +24,7 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
     def scan(self, rom_bytes: bytes):
         CommonSegGroup.scan(self, rom_bytes)
 
-        if super().should_scan():
+        if self.should_scan():
             self.disassemble_data(rom_bytes)
 
     def split(self, rom_bytes: bytes):
@@ -54,10 +54,12 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
     def should_self_split(self) -> bool:
         return options.opts.is_mode_active("data")
 
-    def should_split(self) -> bool:
-        return True
-
     def should_scan(self) -> bool:
+        # Ensure data segments are scanned even if extract is False so subsegments get scanned too
+        # Check for not None so we avoid scanning "auto" segments
+        return self.rom_start is not None and self.rom_end is not None
+
+    def should_split(self) -> bool:
         return True
 
     def cache(self):
@@ -70,11 +72,22 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
         return CommonSegCodeSubsegment.get_linker_entries(self)
 
     def disassemble_data(self, rom_bytes):
-        assert isinstance(self.rom_start, int)
-        assert isinstance(self.rom_end, int)
+        if not isinstance(self.rom_start, int):
+            log.error(
+                f"Segment '{self.name}' (type '{self.type}') requires a rom_start. Got '{self.rom_start}'"
+            )
 
+        # Supposedly logic error, not user error
+        assert isinstance(self.rom_end, int), self.rom_end
+
+        # Supposedly logic error, not user error
         segment_rom_start = self.get_most_parent().rom_start
-        assert isinstance(segment_rom_start, int)
+        assert isinstance(segment_rom_start, int), segment_rom_start
+
+        if not isinstance(self.vram_start, int):
+            log.error(
+                f"Segment '{self.name}' (type '{self.type}') requires a vram address. Got '{self.vram_start}'"
+            )
 
         self.spim_section = spimdisasm.mips.sections.SectionData(
             symbols.spim_context,

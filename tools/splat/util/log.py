@@ -1,5 +1,5 @@
 import sys
-from typing import Optional
+from typing import NoReturn, Optional
 
 from colorama import Fore, init, Style
 
@@ -20,7 +20,7 @@ def write(*args, status=None, **kwargs):
     print(status_to_ansi(status) + str(args[0]), *args[1:], **kwargs)
 
 
-def error(*args, **kwargs):
+def error(*args, **kwargs) -> NoReturn:
     write(*args, **kwargs, status="error")
     sys.exit(2)
 

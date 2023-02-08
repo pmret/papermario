@@ -403,7 +403,7 @@ EvtScript N(EVS_NpcIdle_Koopa_01_Crisis) = {
         EVT_ADD(LVar1, 20)
         EVT_SET(LVar3, NPC_KoopaShell_01)
         EVT_SET(LVar4, NPC_Koopa_01)
-        EVT_EXEC(N(EVS_GetBackIntoShell))
+        EVT_EXEC(N(EVS_GetIntoShell))
         EVT_CALL(InterpNpcYaw, LVar3, 60, 0)
         EVT_CALL(NpcJump0, NPC_KoopaShell_01, LVar0, LVar1, LVar2, 30)
         EVT_CALL(SetNpcPos, NPC_KoopaShell_01, NPC_DISPOSE_LOCATION)

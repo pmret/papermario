@@ -40,7 +40,7 @@ EvtScript N(EVS_UseSpring) = {
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.1))
     EVT_CALL(PlayerJump, -556, 300, -195, 15)
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(func_802D2884, -630, -50, 0)
+    EVT_CALL(FacePlayerTowardPoint, -630, -50, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimMidair)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
     EVT_CALL(PlayerJump2, -601, 376, -105, 30)

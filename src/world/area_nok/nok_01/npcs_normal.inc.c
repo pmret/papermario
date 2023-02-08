@@ -79,11 +79,11 @@ EvtScript N(EVS_NpcInteract_Koopa_03_Normal) = {
 EvtScript N(EVS_NpcInteract_Bobomb_01_Normal) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(AF_NOK_0B, FALSE)
-                EVT_SET(AF_NOK_0B, TRUE)
+            EVT_IF_EQ(AF_NOK01_Dialogue_Bobomb_01, FALSE)
+                EVT_SET(AF_NOK01_Dialogue_Bobomb_01, TRUE)
                 EVT_SET(LVar0, MSG_CH1_003F)
             EVT_ELSE
-                EVT_SET(AF_NOK_0B, FALSE)
+                EVT_SET(AF_NOK01_Dialogue_Bobomb_01, FALSE)
                 EVT_SET(LVar0, MSG_CH1_0040)
             EVT_END_IF
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, LVar0)
@@ -109,17 +109,17 @@ EvtScript N(EVS_NpcInteract_Bobomb_01_Normal) = {
 EvtScript N(EVS_NpcInteract_Bobomb_02_Normal) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(AF_NOK_0C, FALSE)
-                EVT_SET(AF_NOK_0C, TRUE)
+            EVT_IF_EQ(AF_NOK01_Dialogue_Bobomb_02, FALSE)
+                EVT_SET(AF_NOK01_Dialogue_Bobomb_02, TRUE)
                 EVT_SET(LVar0, MSG_CH1_0046)
             EVT_ELSE
-                EVT_SET(AF_NOK_0C, FALSE)
+                EVT_SET(AF_NOK01_Dialogue_Bobomb_02, FALSE)
                 EVT_SET(LVar0, MSG_CH1_0047)
             EVT_END_IF
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, LVar0)
         EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(AF_NOK_0C, FALSE)
-                EVT_SET(AF_NOK_0C, TRUE)
+            EVT_IF_EQ(AF_NOK01_Dialogue_Bobomb_02, FALSE)
+                EVT_SET(AF_NOK01_Dialogue_Bobomb_02, TRUE)
                 EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
                 EVT_CALL(BringPartnerOut, PARTNER_BOMBETTE)
                 EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_SELF, 0)

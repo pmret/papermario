@@ -51,7 +51,7 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_END_IF
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_BlueSwitch), 100, 0, -185, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_NOK_02))
+        EVT_CALL(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_NOK14_HitSwitch))
     EVT_END_IF
     EVT_CALL(MakeItemEntity, ITEM_COIN, -655, 75, -35, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_NOK14_Item_CoinA)
     EVT_CALL(MakeItemEntity, ITEM_COIN, -640, 75, -20, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_NOK14_Item_CoinB)

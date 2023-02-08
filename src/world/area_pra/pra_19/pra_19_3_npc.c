@@ -82,7 +82,7 @@ API_CALLABLE(N(ChooseImposterBattleFormation)) {
 void N(appendGfx_example_player)(void* data);
 void N(worker_draw_example_player)(void);
 
-API_CALLABLE(N(CreateExamplePlayerWorker)) {
+API_CALLABLE(N(CreateExamplePlayerRenderer)) {
     script->array[0] = create_worker_world(NULL, N(worker_draw_example_player));
     return ApiStatus_DONE2;
 }
@@ -117,6 +117,7 @@ void N(appendGfx_example_player)(void* data) {
     spr_update_player_sprite(PLAYER_SPRITE_AUX2, npc->currentAnim, 1.0f);
     spr_draw_player_sprite(PLAYER_SPRITE_AUX2, 0, 0, 0, mtxTransform);
 }
+
 
 API_CALLABLE(N(SetPlayerFacingAngle)) {
     gPlayerStatus.spriteFacingAngle = script->varTable[0];
@@ -202,7 +203,6 @@ API_CALLABLE(N(UpdateExampleKooperMotion)) {
     }
     return ApiStatus_BLOCK;
 }
-
 
 EvtScript N(EVS_FocusCam_OnPosition) = {
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -963,7 +963,7 @@ EvtScript N(EVS_NpcInit_ExamplePlayer) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100 | NPC_FLAG_10000000, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mario_10002)
     EVT_MALLOC_ARRAY(16, LVarA)
-    EVT_CALL(N(CreateExamplePlayerWorker))
+    EVT_CALL(N(CreateExamplePlayerRenderer))
     EVT_RETURN
     EVT_END
 };

@@ -624,7 +624,7 @@ EvtScript N(EVS_OnInteract_Pedestal) = {
         EVT_WAIT(10)
         EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
         EVT_CALL(PlayerMoveTo, LVar0, 80, 0)
-        EVT_CALL(func_802D2884, 0, 0, 0)
+        EVT_CALL(FacePlayerTowardPoint, 0, 0, 0)
     EVT_END_THREAD
     EVT_EXEC(N(EVS_DarkenEnvironment))
     EVT_WAIT(30)
@@ -680,7 +680,7 @@ EvtScript N(EVS_Ruins_Arise_Continued) = {
     EVT_CALL(PlaySound, SOUND_5C)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802CF56C, 1)
-    EVT_CALL(func_802D2884, 0, 0, 0)
+    EVT_CALL(FacePlayerTowardPoint, 0, 0, 0)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_iwa, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(EnableModel, MODEL_point_iwa, FALSE)
     EVT_CALL(EnableGroup, MODEL_day_version, FALSE)

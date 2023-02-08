@@ -40,7 +40,7 @@ EvtScript N(EVS_Scene_RecoverTreeShell) = {
     EVT_ADD(LVar1, 20)
     EVT_SET(LVar3, NPC_KoopaShell_03)
     EVT_SET(LVar4, NPC_Koopa_03)
-    EVT_EXEC(N(EVS_GetBackIntoShell))
+    EVT_EXEC(N(EVS_GetIntoShell))
     EVT_CALL(InterpNpcYaw, LVar3, 60, 0)
     EVT_CALL(NpcJump0, NPC_KoopaShell_03, LVar0, LVar1, LVar2, 30)
     EVT_CALL(SetNpcPos, NPC_KoopaShell_03, NPC_DISPOSE_LOCATION)
@@ -117,7 +117,7 @@ EvtScript N(EVS_Scene_RecoverBlockShell) = {
     EVT_ADD(LVar1, 20)
     EVT_SET(LVar3, NPC_KoopaShell_02)
     EVT_SET(LVar4, NPC_Koopa_02)
-    EVT_EXEC(N(EVS_GetBackIntoShell))
+    EVT_EXEC(N(EVS_GetIntoShell))
     EVT_CALL(InterpNpcYaw, LVar3, 60, 0)
     EVT_CALL(NpcJump0, NPC_KoopaShell_02, LVar0, LVar1, LVar2, 30)
     EVT_CALL(SetNpcPos, NPC_KoopaShell_02, NPC_DISPOSE_LOCATION)
@@ -438,7 +438,7 @@ EvtScript N(EVS_NpcHit_FuzzyWithShell) = {
         EVT_ADD(LVar1, 20)
         EVT_SET(LVar3, NPC_KooversShell)
         EVT_SET(LVar4, NPC_Koover)
-        EVT_EXEC(N(EVS_GetBackIntoShell))
+        EVT_EXEC(N(EVS_GetIntoShell))
         EVT_CALL(InterpNpcYaw, LVar3, 60, 0)
         EVT_CALL(NpcJump0, NPC_KooversShell, LVar0, LVar1, LVar2, 30)
         EVT_CALL(SetNpcPos, NPC_KooversShell, NPC_DISPOSE_LOCATION)
@@ -463,11 +463,11 @@ EvtScript N(EVS_NpcHit_FuzzyWithShell) = {
 };
 
 EvtScript N(EVS_NpcInteract_Bobomb_01_Crisis) = {
-    EVT_IF_EQ(AF_NOK_0A, FALSE)
-        EVT_SET(AF_NOK_0A, TRUE)
+    EVT_IF_EQ(AF_NOK01_Dialogue_Bobomb_01_Crisis, FALSE)
+        EVT_SET(AF_NOK01_Dialogue_Bobomb_01_Crisis, TRUE)
         EVT_SET(LVar0, MSG_CH1_003D)
     EVT_ELSE
-        EVT_SET(AF_NOK_0A, FALSE)
+        EVT_SET(AF_NOK01_Dialogue_Bobomb_01_Crisis, FALSE)
         EVT_SET(LVar0, MSG_CH1_003E)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, LVar0)
@@ -482,11 +482,11 @@ EvtScript N(EVS_NpcInit_Bobomb_01_Crisis) = {
 };
 
 EvtScript N(EVS_NpcInteract_Bobomb_02_Crisis) = {
-    EVT_IF_EQ(AF_NOK_0C, FALSE)
-        EVT_SET(AF_NOK_0C, TRUE)
+    EVT_IF_EQ(AF_NOK01_Dialogue_Bobomb_02, FALSE)
+        EVT_SET(AF_NOK01_Dialogue_Bobomb_02, TRUE)
         EVT_SET(LVar0, MSG_CH1_0044)
     EVT_ELSE
-        EVT_SET(AF_NOK_0C, FALSE)
+        EVT_SET(AF_NOK01_Dialogue_Bobomb_02, FALSE)
         EVT_SET(LVar0, MSG_CH1_0045)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, LVar0)

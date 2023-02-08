@@ -179,9 +179,9 @@ EvtScript N(EVS_NpcAux_LavaPiranhaHead) = {
 };
 
 EvtScript N(EVS_NpcInit_LavaPiranhaHead) = {
-    EVT_CALL(func_802CFD30, 21, 14, 80, 80, 80, 0)
-    EVT_CALL(func_802CFD30, 22, 14, 80, 80, 80, 0)
-    EVT_CALL(func_802CFD30, 23, 14, 80, 80, 80, 0)
+    EVT_CALL(func_802CFD30, NPC_LavaPiranhaHead, FOLD_TYPE_E, 80, 80, 80, 0)
+    EVT_CALL(func_802CFD30, NPC_LavaBud_01, FOLD_TYPE_E, 80, 80, 80, 0)
+    EVT_CALL(func_802CFD30, NPC_LavaBud_02, FOLD_TYPE_E, 80, 80, 80, 0)
     EVT_CALL(SetNpcAnimation, NPC_LavaPiranhaHead, ANIM_LavaPiranha_Anim03)
     EVT_CALL(SetNpcAnimation, NPC_LavaBud_01, ANIM_LavaBud_Anim03)
     EVT_CALL(SetNpcAnimation, NPC_LavaBud_02, ANIM_LavaBud_Anim03)

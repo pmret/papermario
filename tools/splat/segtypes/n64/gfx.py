@@ -4,6 +4,7 @@ Dumps out Gfx[] as a .inc.c file.
 """
 
 import re
+from typing import Optional
 
 from pathlib import Path
 
@@ -47,12 +48,12 @@ LIGHTS_RE = re.compile(r"\*\(Lightsn \*\)0x[0-9A-F]{8}")
 class N64SegGfx(CommonSegCodeSubsegment):
     def __init__(
         self,
-        rom_start,
-        rom_end,
-        type,
-        name,
-        vram_start,
-        args,
+        rom_start: Optional[int],
+        rom_end: Optional[int],
+        type: str,
+        name: str,
+        vram_start: Optional[int],
+        args: list,
         yaml,
     ):
         super().__init__(
@@ -134,7 +135,7 @@ class N64SegGfx(CommonSegCodeSubsegment):
         sym = self.create_symbol(
             addr=addr, in_segment=True, type="data", reference=True
         )
-        gfxd_printf(self.format_sym_name(sym))
+        gfxd_printf(f"&{self.format_sym_name(sym)}")
         return 1
 
     def lookat_handler(self, addr, count):
@@ -175,6 +176,7 @@ class N64SegGfx(CommonSegCodeSubsegment):
     def disassemble_data(self, rom_bytes):
         assert isinstance(self.rom_start, int)
         assert isinstance(self.rom_end, int)
+        assert isinstance(self.vram_start, int)
 
         gfx_data = rom_bytes[self.rom_start : self.rom_end]
         segment_length = len(gfx_data)
@@ -250,8 +252,8 @@ class N64SegGfx(CommonSegCodeSubsegment):
     def should_scan(self) -> bool:
         return (
             options.opts.is_mode_active("gfx")
-            and self.rom_start != "auto"
-            and self.rom_end != "auto"
+            and self.rom_start is not None
+            and self.rom_end is not None
         )
 
     def should_split(self) -> bool:

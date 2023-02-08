@@ -10,7 +10,7 @@
 #include "mapfs/pra_04_hit.h"
 
 enum {
-	NPC_Swoopula    = 0,
+    NPC_Swoopula    = 0,
 };
 
 enum {

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(UnkFunc11)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFunc11)) {
     s32 pushableColliderID = evt_get_variable(script, *script->ptrReadPos);
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;

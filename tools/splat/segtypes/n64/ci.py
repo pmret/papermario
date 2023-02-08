@@ -7,6 +7,7 @@ from segtypes.n64.img import N64SegImg
 if TYPE_CHECKING:
     from segtypes.n64.palette import N64SegPalette
 
+
 # Base class for CI4/CI8
 class N64SegCi(N64SegImg):
     def parse_palette_name(self, yaml, args) -> str:

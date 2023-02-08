@@ -74,7 +74,7 @@ EvtScript N(EVS_Scene_Starship) = {
     EVT_END_THREAD
     EVT_CHILD_THREAD
         EVT_LOOP(0)
-            EVT_CALL(func_802D2884, 0, 0, 0)
+            EVT_CALL(FacePlayerTowardPoint, 0, 0, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD

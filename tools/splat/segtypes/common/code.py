@@ -1,13 +1,13 @@
 import typing
 from collections import OrderedDict
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Set
 
 from util import log, options
 from util.range import Range
 from util.symbols import Symbol
 
 from segtypes.common.group import CommonSegGroup
-from segtypes.segment import RomAddr, Segment
+from segtypes.segment import Segment
 
 CODE_TYPES = ["c", "asm", "hasm"]
 
@@ -20,12 +20,12 @@ def dotless_type(type: str) -> str:
 class CommonSegCode(CommonSegGroup):
     def __init__(
         self,
-        rom_start,
-        rom_end,
-        type,
-        name,
-        vram_start,
-        args,
+        rom_start: Optional[int],
+        rom_end: Optional[int],
+        type: str,
+        name: str,
+        vram_start: Optional[int],
+        args: list,
         yaml,
     ):
         self.bss_size: int = yaml.get("bss_size", 0) if isinstance(yaml, dict) else 0
@@ -41,7 +41,7 @@ class CommonSegCode(CommonSegGroup):
         )
 
         self.reported_file_split = False
-        self.jtbl_glabels_to_add = set()
+        self.jtbl_glabels_to_add: Set[int] = set()
         self.jumptables: Dict[int, Tuple[int, int]] = {}
         self.rodata_syms: Dict[int, List[Symbol]] = {}
         self.align = 0x10
@@ -91,9 +91,10 @@ class CommonSegCode(CommonSegGroup):
                         self.rom_start, int
                     ):
                         # Shoddy rom to ram
+                        assert self.vram_start is not None, self.vram_start
                         vram_start = elem.rom_start - self.rom_start + self.vram_start
                     else:
-                        vram_start = "auto"
+                        vram_start = None
                     rep: Segment = replace_class(
                         rom_start=elem.rom_start,
                         rom_end=elem.rom_end,
@@ -158,7 +159,7 @@ class CommonSegCode(CommonSegGroup):
 
         base_segments: OrderedDict[str, Segment] = OrderedDict()
         ret = []
-        prev_start: RomAddr = -1
+        prev_start: Optional[int] = -1
         inserts: OrderedDict[
             str, int
         ] = (
@@ -217,6 +218,8 @@ class CommonSegCode(CommonSegGroup):
 
         inserts = self.find_inserts(found_sections)
 
+        last_rom_end = 0
+
         for i, subsection_yaml in enumerate(segment_yaml["subsegments"]):
             # endpos marker
             if isinstance(subsection_yaml, list) and len(subsection_yaml) == 1:
@@ -229,10 +232,10 @@ class CommonSegCode(CommonSegGroup):
             if typ.startswith("all_"):
                 dummy_seg = Segment(
                     rom_start=start,
-                    rom_end="auto",
+                    rom_end=None,
                     type=typ,
                     name="",
-                    vram_start="auto",
+                    vram_start=None,
                     args=[],
                     yaml={},
                 )
@@ -260,14 +263,24 @@ class CommonSegCode(CommonSegGroup):
                 )
 
             vram = None
-            if start != "auto":
+            if start is not None:
                 assert isinstance(start, int)
                 vram = self.get_most_parent().rom_to_ram(start)
+
+            if segment_class.is_noload():
+                # Pretend bss's rom address is after the last actual rom segment
+                start = last_rom_end
+                # and it has a rom size of zero
+                end = last_rom_end
 
             segment: Segment = Segment.from_yaml(
                 segment_class, subsection_yaml, start, end, vram
             )
+
             segment.sibling = base_segments.get(segment.name, None)
+            if segment.is_rodata() and segment.sibling is not None:
+                segment.sibling.rodata_sibling = segment
+
             segment.parent = self
             if segment.special_vram_segment:
                 self.special_vram_segment = True
@@ -281,13 +294,15 @@ class CommonSegCode(CommonSegGroup):
                         self.section_boundaries[prev_section].end = segment.vram_start
                     self.section_boundaries[section].start = segment.vram_start
 
+            segment.bss_contains_common = self.bss_contains_common
             ret.append(segment)
 
-            # todo change
-            if typ in CODE_TYPES:
+            if segment.is_text():
                 base_segments[segment.name] = segment
 
             prev_start = start
+            if end is not None:
+                last_rom_end = end
 
         # Add the automatic all_ sections
         orig_len = len(ret)
@@ -298,16 +313,21 @@ class CommonSegCode(CommonSegGroup):
                 idx = orig_len
 
             # bss hack TODO maybe rethink
-            if section == "bss" and self.vram_start is not None:
+            if (
+                section == "bss"
+                and self.vram_start is not None
+                and self.rom_end is not None
+                and self.rom_start is not None
+            ):
                 rom_start = self.rom_end
                 vram_start = self.vram_start + self.rom_end - self.rom_start
             else:
-                rom_start = "auto"
-                vram_start = "auto"
+                rom_start = None
+                vram_start = None
 
             new_seg = Segment(
                 rom_start=rom_start,
-                rom_end="auto",
+                rom_end=None,
                 type="all_" + section,
                 name="",
                 vram_start=vram_start,
