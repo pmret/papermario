@@ -1,6 +1,6 @@
 #include "pra_31.h"
 
-Matrix4s N(D_80247740_D864A0) = {
+Matrix4s N(unk_30_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
@@ -9,7 +9,7 @@ Matrix4s N(D_80247740_D864A0) = {
     },
 };
 
-Matrix4s N(D_80247780_D864E0) = {
+Matrix4s N(unk_26_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
@@ -18,7 +18,7 @@ Matrix4s N(D_80247780_D864E0) = {
     },
 };
 
-Matrix4s N(D_802477C0_D86520) = {
+Matrix4s N(unk_24_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
@@ -27,7 +27,7 @@ Matrix4s N(D_802477C0_D86520) = {
     },
 };
 
-Matrix4s N(D_80247800_D86560) = {
+Matrix4s N(unk_22_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
@@ -36,7 +36,7 @@ Matrix4s N(D_80247800_D86560) = {
     },
 };
 
-Matrix4s N(D_80247840_D865A0) = {
+Matrix4s N(unk_20_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
@@ -45,7 +45,7 @@ Matrix4s N(D_80247840_D865A0) = {
     },
 };
 
-Matrix4s N(D_80247880_D865E0) = {
+Matrix4s N(unk_18_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
@@ -54,7 +54,7 @@ Matrix4s N(D_80247880_D865E0) = {
     },
 };
 
-Matrix4s N(D_802478C0_D86620) = {
+Matrix4s N(unk_16_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
@@ -63,7 +63,7 @@ Matrix4s N(D_802478C0_D86620) = {
     },
 };
 
-Matrix4s N(D_80247900_D86660) = {
+Matrix4s N(unk_14_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
@@ -72,7 +72,7 @@ Matrix4s N(D_80247900_D86660) = {
     },
 };
 
-Matrix4s N(D_80247940_D866A0) = {
+Matrix4s N(unk_12_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
@@ -81,7 +81,7 @@ Matrix4s N(D_80247940_D866A0) = {
     },
 };
 
-Matrix4s N(D_80247980_D866E0) = {
+Matrix4s N(unk_10_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
@@ -90,7 +90,7 @@ Matrix4s N(D_80247980_D866E0) = {
     },
 };
 
-Matrix4s N(D_802479C0_D86720) = {
+Matrix4s N(unk_08_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
@@ -99,7 +99,7 @@ Matrix4s N(D_802479C0_D86720) = {
     },
 };
 
-Matrix4s N(D_80247A00_D86760) = {
+Matrix4s N(unk_06_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
@@ -108,7 +108,7 @@ Matrix4s N(D_80247A00_D86760) = {
     },
 };
 
-Matrix4s N(D_80247A40_D867A0) = {
+Matrix4s N(unk_04_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
@@ -117,7 +117,7 @@ Matrix4s N(D_80247A40_D867A0) = {
     },
 };
 
-Matrix4s N(D_80247A80_D867E0) = {
+Matrix4s N(unk_02_mtx) = {
     .whole = {
         {    1,    0,    0,    0 },
         {    0,    1,    0,    0 },
