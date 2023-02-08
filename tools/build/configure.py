@@ -401,14 +401,14 @@ class Configure:
                 bad_list = []
                 seg_dir = str(seg.dir)
 
-                if shift:
-                    task = "cc_modern"
+                # if shift:
+                #     task = "cc_modern"
 
-                    if ("world/area" in seg_dir and (
-                        "kkj" in seg_dir or
-                        "jan" in seg_dir
-                    )) or seg.name in bad_list:
-                        task = "cc"
+                #     if ("world/area" in seg_dir and (
+                #         "kkj" in seg_dir or
+                #         "jan" in seg_dir
+                #     )) or seg.name in bad_list:
+                #         task = "cc"
 
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
