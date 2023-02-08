@@ -1,7 +1,7 @@
 #include "common.h"
 
-// LVar0 wall model ID
-// LVar1 door model ID
+// LVar0 wall 1 model ID
+// LVar1 wall 2 model ID
 // LVar2 tex panner ID
 EvtScript N(EVS_GlassShimmer) = {
     EVT_CALL(SetTexPanner, LVar0, LVar2)

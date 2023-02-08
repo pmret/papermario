@@ -708,7 +708,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             D_802BFF14 = 101;
             break;
         case 101:
-            sfx_play_sound_at_npc(SOUND_JUMP_2081, 0, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_MODE_0, NPC_PARTNER);
             suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
             /* fallthrough */
         case 102:
@@ -796,7 +796,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                         D_802BFF14 = 3;
                     } else {
                         if (!(playerStatus->animFlags & PA_FLAG_PARTNER_USAGE_STOPPED)) {
-                            sfx_play_sound_at_npc(SOUND_MENU_ERROR, 0, NPC_PARTNER);
+                            sfx_play_sound_at_npc(SOUND_MENU_ERROR, SOUND_SPACE_MODE_0, NPC_PARTNER);
                         }
                         playerStatus->animFlags &= ~PA_FLAG_PARTNER_USAGE_STOPPED;
                     }
@@ -1152,7 +1152,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
                 }
             }
 
-            sfx_play_sound_at_npc(SOUND_295, 0, -4);
+            sfx_play_sound_at_npc(SOUND_295, SOUND_SPACE_MODE_0, NPC_PARTNER);
             playerStatus->anim = ANIM_Mario_8000E;
             playerStatus->animNotifyValue = 0;
             playerStatus->flags |= PS_FLAG_FACE_FORWARDS;

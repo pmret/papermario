@@ -63,7 +63,7 @@ EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
         EVT_SUB(LVar2, 30)
         EVT_ADD(LVar3, 80)
         EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.7))
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_SELF, LVar1, LVar2, LVar3, 20)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
         EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)

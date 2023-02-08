@@ -268,7 +268,7 @@ EvtScript N(EVS_NpcDefeat_StoneChomp_Override) = {
     EVT_SET(GF_ISK13_Defeated_StoneChomp, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-    EVT_CALL(func_802CFD30, -1, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_SELF, 0, 0, 0, 0, 0)
     EVT_CALL(N(DestroyAmbushWorker))
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)

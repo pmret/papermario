@@ -24,7 +24,7 @@ EvtScript N(EVS_UnlockPrompt_Door) = {
     EVT_CALL(CloseChoicePopup)
     EVT_SET(GF_DGB01_UnlockedEastWing, TRUE)
     EVT_CALL(N(GetEntityPosition), MV_PadlockEntityID, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAt, SOUND_269, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_269, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MV_PadlockEntityID)
     EVT_CALL(N(RemovePadlock))
     EVT_RESUME_GROUP(EVT_GROUP_01)

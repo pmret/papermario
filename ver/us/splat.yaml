@@ -11230,11 +11230,12 @@ segments:
     vram: 0x80240000
     follows_vram_symbol: world_model_data_vram_end
     subsegments:
-    - [0x9EB7F0, c]
-    - [0x9EC610, data]
-    - [0x9EC700, data]
-    - [0x9ECBD0, data]
-    - [0x9EDB90]
+    - [0x9EB7F0, c, nok_03_0_header]
+    - [0x9EB7F0, c, nok_03_1_music]
+    - [0x9EB7F0, c, nok_03_2_main]
+    - [0x9EB7F0, c, nok_03_3_entity]
+    - [0x9EB7F0, c, nok_03_4_npc]
+    - [0x9EC610]
   - name: nok_04
     dir: world/area_nok/nok_04
     type: code
@@ -11242,12 +11243,13 @@ segments:
     vram: 0x80240000
     follows_vram_symbol: world_model_data_vram_end
     subsegments:
-    - [0x9EDBF0, c]
-    - [0x9EEA80, c]
-    - [0x9EEB20, data]
-    - [0x9EEC40, data]
-    - [0x9EEEB0, data]
-    - [0x9F4A00]
+    - [0x9EDBF0, c, nok_04_0_header]
+    - [0x9EDBF0, c, nok_04_1_music]
+    - [0x9EDBF0, c, nok_04_2_main]
+    - [0x9EDBF0, c, nok_04_3_entity]
+    - [0x9EDBF0, c, nok_04_4_npc]
+    - [0x9EEA80, c, nok_04_5_partner]
+    - [0x9EEB20]
   - name: nok_11
     dir: world/area_nok/nok_11
     type: code
@@ -14766,11 +14768,11 @@ segments:
     vram: 0x80240000
     follows_vram_symbol: world_model_data_vram_end
     subsegments:
-    - [0xD58890, c]
-    - [0xD588B0, c]
-    - [0xD59EE0, data]
-    - [0xD59F80, data]
-    - [0xD5F2A0]
+    - [0xD58890, c, pra_09_0_header]
+    - [0xD588B0, c, pra_09_1_music]
+    - [0xD588B0, c, pra_09_2_main]
+    - [0xD597B0, c, pra_09_3_npc]
+    - [0xD59EE0]
   - name: pra_10
     dir: world/area_pra/pra_10
     type: code
@@ -14814,12 +14816,11 @@ segments:
     vram: 0x80240000
     follows_vram_symbol: world_model_data_vram_end
     subsegments:
-    - [0xD645E0, c]
-    - [0xD64600, c]
-    - [0xD65BC0, data]
-    - [0xD65C70, data]
-    - [0xD66880, data]
-    - [0xD67CF0]
+    - [0xD645E0, c, pra_13_0_header]
+    - [0xD64600, c, pra_13_1_music]
+    - [0xD64600, c, pra_13_2_main]
+    - [0xD65500, c, pra_13_3_npc]
+    - [0xD65BC0]
   - name: pra_14
     dir: world/area_pra/pra_14
     type: code
@@ -14862,12 +14863,11 @@ segments:
     vram: 0x80240000
     follows_vram_symbol: world_model_data_vram_end
     subsegments:
-    - [0xD6B620, c]
-    - [0xD6B640, c]
-    - [0xD6C540, data]
-    - [0xD6C5F0, data]
-    - [0xD6CF60, data]
-    - [0xD6E9A0]
+    - [0xD6B620, c, pra_18_0_header]
+    - [0xD6B640, c, pra_18_1_music]
+    - [0xD6B640, c, pra_18_2_main]
+    - [0xD6B640, c, pra_18_3_npc]
+    - [0xD6C540]
   - name: pra_19
     dir: world/area_pra/pra_19
     type: code
@@ -14946,12 +14946,12 @@ segments:
     vram: 0x80240000
     follows_vram_symbol: world_model_data_vram_end
     subsegments:
-    - [0xD7CB50, c]
-    - [0xD7CB70, c]
-    - [0xD7DDD0, data]
-    - [0xD7DE90, data]
-    - [0xD7E9B0, data]
-    - [0xD7ED50]
+    - [0xD7CB50, c, pra_29_0_header]
+    - [0xD7CB70, c, pra_29_1_music]
+    - [0xD7CB70, c, pra_29_2_entity]
+    - [0xD7CB70, c, pra_29_3_main]
+    - [0xD7DA70, c, pra_29_4_bridge]
+    - [0xD7DDD0]
   - name: pra_31
     dir: world/area_pra/pra_31
     type: code
@@ -14959,13 +14959,94 @@ segments:
     vram: 0x80240000
     follows_vram_symbol: world_model_data_vram_end
     subsegments:
-    - [0xD7ED60, c]
-    - [0xD7ED80, c]
-    - [0xD7F270, c]
-    - [0xD7FE10, data]
-    - [0xD7FEC0, data]
-    - [0xD80E20, data]
-    - [0xD81250, data]
+    - [0xD7ED60, c, pra_31_0_header]
+    - [0xD7ED80, c, pra_31_1_music]
+    - [0xD7ED80, c, pra_31_2_npc]
+    - [0xD7F270, c, pra_31_3_main]
+    - [0xD7F270, c, pra_31_4_puzzle]
+    - [0xD7FE10, c, pra_31_5_texture_1]
+    - [0xD7FE10, c, pra_31_6_texture_2]
+    - [0xD7FE10, c, pra_31_7_texture_3]
+    - [0xD7FE10, c, pra_31_8_stairs_skele]
+    - [0xD7FE10, c, pra_31_9_stairs_anim]
+    - [0xD7FE10, c, pra_31_10_stairs_lights]
+    - [0xD7FE10, c, pra_31_11_stairs_vtx]
+    - [0xD7FE10, .data, pra_31_0_header]
+    - [0xD7FE80, .data, pra_31_1_music]
+    - [0xD7FEC0, .data, pra_31_2_npc]
+    - [0xD80E20, .data, pra_31_3_main]
+    - [0xD81250, .data, pra_31_4_puzzle]
+    - start: 0xD82270
+      type: .data
+      name: pra_31_5_texture_1
+      subsegments:
+      - [0xD82270, ci4, texture_1, 64, 64]
+      - [0xD82A70, palette, texture_1]
+      - [0xD82A90, gfx, texture_1]
+      - [0xD82B48]
+    - start: 0xD82B50
+      type: .data
+      name: pra_31_6_texture_2
+      subsegments:
+      - [0xD82B50, ci4, texture_2, 64, 64]
+      - [0xD83350, palette, texture_2]
+      - [0xD83370, gfx, texture_2]
+      - [0xD83418]
+    - start: 0xD83420
+      type: .data
+      name: pra_31_7_texture_3
+      subsegments:
+      - [0xD83420, rgba16, texture_3, 32, 32]
+      - [0xD83C20, gfx, texture_3]
+      - [0xD83CA8]
+    - start: 0xD83CB0
+      type: .data
+      name: pra_31_8_stairs_skele
+      subsegments:
+      - [0xD83CB0, gfx, unk_01]
+      - [0xD83D28, gfx, unk_02]
+      - [0xD83D60, gfx, unk_03]
+      - [0xD83DC8, gfx, unk_04]
+      - [0xD83E00, gfx, unk_05]
+      - [0xD83E78, gfx, unk_06]
+      - [0xD83EB0, gfx, unk_07]
+      - [0xD83F28, gfx, unk_08]
+      - [0xD83F60, gfx, unk_09]
+      - [0xD83FC8, gfx, unk_10]
+      - [0xD84000, gfx, unk_11]
+      - [0xD84078, gfx, unk_12]
+      - [0xD840B0, gfx, unk_13]
+      - [0xD84128, gfx, unk_14]
+      - [0xD84160, gfx, unk_15]
+      - [0xD841C8, gfx, unk_16]
+      - [0xD84200, gfx, unk_17]
+      - [0xD84278, gfx, unk_18]
+      - [0xD842B0, gfx, unk_19]
+      - [0xD84328, gfx, unk_20]
+      - [0xD84360, gfx, unk_21]
+      - [0xD843C8, gfx, unk_22]
+      - [0xD84400, gfx, unk_23]
+      - [0xD84478, gfx, unk_24]
+      - [0xD844B0, gfx, unk_25]
+      - [0xD84528, gfx, unk_26]
+      - [0xD84560, gfx, unk_27]
+      - [0xD845C8, gfx, unk_28]
+      - [0xD84628, gfx, unk_29]
+      - [0xD84690, gfx, unk_30]
+      - [0xD846D8, gfx, unk_31]
+      - [0xD84768, gfx, unk_32]
+      - [0xD84790, gfx, unk_33]
+      - [0xD847B8, gfx, unk_34]
+      - [0xD847F0]
+    - [0xD84E90, .data, pra_31_9_stairs_anim]
+    - [0xD86480, .data, pra_31_10_stairs_lights]
+    - start: 0xD864A0
+      type: .data
+      name: pra_31_11_stairs_vtx
+      subsegments:
+      - [0xD864A0]
+      - [0xD86820, vtx, stairs]
+      - [0xD869E0]      
     - [0xD869E0]
   - name: pra_32
     dir: world/area_pra/pra_32
@@ -14974,11 +15055,11 @@ segments:
     vram: 0x80240000
     follows_vram_symbol: world_model_data_vram_end
     subsegments:
-    - [0xD86A00, c]
-    - [0xD86A20, c]
-    - [0xD87240, data]
-    - [0xD87DF0, data]
-    - [0xD896B0]
+    - [0xD86A00, c, pra_32_0_header]
+    - [0xD86A20, c, pra_32_1_music]
+    - [0xD86A20, c, pra_32_2_main]
+    - [0xD86A20, c, pra_32_3_npc]
+    - [0xD87240]
   - name: pra_33
     dir: world/area_pra/pra_33
     type: code
@@ -14998,12 +15079,11 @@ segments:
     vram: 0x80240000
     follows_vram_symbol: world_model_data_vram_end
     subsegments:
-    - [0xD8B3B0, c]
-    - [0xD8B3D0, c]
-    - [0xD8C3B0, data]
-    - [0xD8C470, data]
-    - [0xD8D130, data]
-    - [0xD8D240]
+    - [0xD8B3B0, c, pra_34_0_header]
+    - [0xD8B3D0, c, pra_34_1_music]
+    - [0xD8B3D0, c, pra_34_2_main]
+    - [0xD8B3D0, c, pra_34_3_entity]
+    - [0xD8C3B0]
   - name: pra_35
     dir: world/area_pra/pra_35
     type: code
@@ -15011,14 +15091,12 @@ segments:
     vram: 0x80240000
     follows_vram_symbol: world_model_data_vram_end
     subsegments:
-    - [0xD8D250, c]
-    - [0xD8D270, c]
-    - [0xD8FBA0, c]
-    - [0xD8FE60, data]
-    - [0xD8FF10, data]
-    - [0xD90700, data]
-    - [0xD91030, data]
-    - [0xD91220]
+    - [0xD8B3B0, c, pra_35_0_header]
+    - [0xD8D270, c, pra_35_1_music]
+    - [0xD8D270, c, pra_35_2_main]
+    - [0xD8D270, c, pra_35_3_npc]
+    - [0xD8FBA0, c, pra_35_4_entity]
+    - [0xD8FE60]
   - name: pra_36
     dir: world/area_pra/pra_36
     type: code

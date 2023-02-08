@@ -4,8 +4,6 @@
 extern s32 DoorModelsSwingCCW[3];
 extern s32 DoorModelsSwingCW[3];
 
-extern API_CALLABLE(func_802D2148);
-
 API_CALLABLE(CheckRideScriptForEnterExit) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 

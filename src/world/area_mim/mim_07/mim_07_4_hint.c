@@ -85,7 +85,7 @@ EvtScript N(EVS_OnInspectEvilRock) = {
     EVT_IF_EQ(LVar0, 1)
         EVT_WAIT(10)
         EVT_EXEC_GET_TID(N(EVS_ManageEvilRock), LVar9)
-        EVT_CALL(PlaySoundAt, SOUND_205E, 0, -34, 0, -300)
+        EVT_CALL(PlaySoundAt, SOUND_205E, SOUND_SPACE_MODE_0, -34, 0, -300)
         EVT_LOOP(18)
             EVT_CALL(TranslateModel, MODEL_o289, EVT_FLOAT(1.0), 0, EVT_FLOAT(1.0))
             EVT_CALL(TranslateModel, MODEL_o440, EVT_FLOAT(1.0), 0, EVT_FLOAT(1.0))
@@ -113,7 +113,7 @@ EvtScript N(EVS_OnInspectEvilRock) = {
 EvtScript N(EVS_SetupExitHint) = {
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(gfx_build_evil_rock_face)), 0)
     EVT_CALL(SetModelCustomGfx, MODEL_o440, CUSTOM_GFX_1, -1)
-    EVT_CALL(SetModelFlags, MODEL_o440, 16, TRUE)
+    EVT_CALL(SetModelFlags, MODEL_o440, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnInspectEvilRock)), TRIGGER_WALL_PRESS_A, COLLIDER_o491, 1, 0)
     EVT_CALL(SetTexPanner, MODEL_o440, TEX_PANNER_0)
     EVT_RETURN

@@ -56,7 +56,7 @@ void action_update_sliding(void) {
         D_802B6798 = 0.0f;
         D_802B679C = 0;
         suggest_player_anim_clearUnkFlag(ANIM_Mario_1000A);
-        sfx_play_sound_at_player(SOUND_167, 0);
+        sfx_play_sound_at_player(SOUND_167, SOUND_SPACE_MODE_0);
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
     }
     speed = playerStatus->currentSpeed;
@@ -119,7 +119,7 @@ void action_update_sliding(void) {
                 }
                 playerStatus->currentSpeed -= speed;
                 if (playerStatus->currentSpeed <= 0.0f) {
-                    sfx_play_sound_at_player(SOUND_DUST_OFF, 0);
+                    sfx_play_sound_at_player(SOUND_DUST_OFF, SOUND_SPACE_MODE_0);
                     suggest_player_anim_setUnkFlag(ANIM_Mario_DustOff);
                     playerStatus->actionSubstate = SUBSTATE_DUST_OFF;
                     playerStatus->currentStateTime = 15;
@@ -149,7 +149,7 @@ void action_update_sliding(void) {
             if (hitID >= 0) {
                 SlideLaunchSpeed = -1;
                 suggest_player_anim_setUnkFlag(ANIM_Mario_80003);
-                sfx_play_sound_at_player(SOUND_162, 0);
+                sfx_play_sound_at_player(SOUND_162, SOUND_SPACE_MODE_0);
                 playerStatus->actionSubstate++; // SUBSTATE_CRASH
             }
             break;
@@ -170,7 +170,7 @@ void action_update_sliding(void) {
             }
             if (playerStatus->animNotifyValue != 0) {
                 suggest_player_anim_setUnkFlag(ANIM_Mario_DustOff);
-                sfx_play_sound_at_player(SOUND_DUST_OFF, 0);
+                sfx_play_sound_at_player(SOUND_DUST_OFF, SOUND_SPACE_MODE_0);
                 playerStatus->currentStateTime = 15;
                 playerStatus->actionSubstate++; // SUBSTATE_DUST_OFF
             }

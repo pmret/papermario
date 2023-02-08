@@ -5,7 +5,7 @@ static u8* snd_song_get_track_volumes_set(MusicTrackVols arg0);
 
 s32 PreventBGMPlayerUpdate = FALSE;
 u16 D_80078DB4 = 0;
-u16 D_80078DB6 = 0;
+u16 AuAmbiencePlayOnlyIndex = 0;
 
 // lists of data:
 //  u8 trackIdx
@@ -229,7 +229,7 @@ void snd_adjust_sound(s32 soundID, u8 volume, u8 pan) {
         pan = 0x7F;
     }
 
-    au_sfx_enqueue_event(soundManager, soundID | 0x1000, vol, 0, pan);
+    au_sfx_enqueue_event(soundManager, soundID | SOUND_ID_ADJUST, vol, 0, pan);
 }
 
 void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
@@ -250,17 +250,17 @@ void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift)
         pitchShift = -2400;
     }
 
-    au_sfx_enqueue_event(soundManager, soundID | 0x1000, vol, pitchShift, pan);
+    au_sfx_enqueue_event(soundManager, soundID | SOUND_ID_ADJUST, vol, pitchShift, pan);
 }
 
 void snd_stop_sound(s32 soundID) {
     SoundManager* soundManager = gSoundManager;
 
-    au_sfx_enqueue_event(soundManager, soundID | 0x8000, 0, 0, 0);
+    au_sfx_enqueue_event(soundManager, soundID | SOUND_ID_STOP, 0, 0, 0);
 }
 
-void func_800553F4(void) {
-    gSoundManager->unk_168 = 1;
+void snd_reset(void) {
+    gSoundManager->resetPending = 1;
 }
 
 void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan) {
@@ -269,137 +269,135 @@ void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan) {
     au_sfx_enqueue_event(soundManager, soundID, volume, pitchShift, pan);
 }
 
-AuResult snd_ambient_load(s32 ambSoundID) {
+AuResult snd_load_ambient(s32 ambSoundID) {
     return au_ambient_load(ambSoundID);
 }
 
-AuResult snd_ambient_80055464(s32 arg0, s32 arg1) {
-    AuResult status = func_80050C30(arg0);
+AuResult snd_ambient_play(s32 index, s32 fadeInTime) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status != AU_RESULT_OK) {
         return status;
     }
-    return func_80050CA0(arg0, arg1);
+    return au_amb_start(index, fadeInTime);
 }
 
-AuResult snd_ambient_quick_fade_out(s32 arg0) {
-    AuResult status = func_80050C30(arg0);
+AuResult snd_ambient_stop_quick(s32 index) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050EF0_fade_out_quick(arg0);
+        au_amb_stop_quick(index);
     }
 
     return status;
 }
 
-AuResult snd_ambient_slow_fade_out(s32 arg0, s32 arg1) {
-    AuResult status = func_80050C30(arg0);
+AuResult snd_ambient_stop_slow(s32 index, s32 fadeOutTime) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050EF0_fade_out_slow(arg0, arg1);
+        au_amb_stop_slow(index, fadeOutTime);
     }
 
     return status;
 }
 
-// fade out sounds (kmr_00)
-AuResult snd_ambient_8005553C(s32 arg0, s32 arg1) {
-    AuResult status = func_80050C30(arg0);
+AuResult snd_ambient_pause(s32 index, s32 fadeOutTime) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050EF0_fade_out_unk(arg0, arg1);
+        au_amb_pause(index, fadeOutTime);
     }
 
     return status;
 }
 
-// fade in sounds (kmr_00) -- restart?
-AuResult snd_ambient_80055590(s32 arg0, s32 arg1) {
-    AuResult status = func_80050C30(arg0);
+AuResult snd_ambient_resume(s32 index, s32 fadeInTime) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050EF0_fade_in_unk(arg0, arg1);
+        au_amb_resume(index, fadeInTime);
     }
 
     return status;
 }
 
-AuResult snd_ambient_800555E4(s32 arg0) {
-    AuResult status = func_80050C30(arg0);
+AuResult snd_ambient_is_stopped(s32 index) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status != AU_RESULT_OK) {
         return status;
     }
-    return func_80051050(arg0);
+    return au_amb_is_stopped(index);
 }
 
-//TODO sets a flag which tells the manager to mute players
-AuResult snd_ambient_80055618(s32 index, s32 arg1) {
-    AuResult status = func_80050C30(index);
+// TODO perhaps inaccurate name
+AuResult snd_ambient_mute(s32 index, s32 arg1) {
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050C54(index, arg1);
+        au_amb_load_tracks_fade(index, arg1);
     }
 
     return status;
 }
 
 AuResult snd_ambient_set_volume(s32 index, s32 time, s32 volume) {
-    AuResult status = func_80050C30(index);
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        au_mseq_set_volume(index, time, volume);
+        au_amb_set_volume(index, time, volume);
     }
 
     return status;
 }
 
 AuResult snd_ambient_disable(s32 index) {
-    AuResult status = func_80050C30(index);
+    AuResult status = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        au_mseq_set_disabled(index, TRUE);
+        au_amb_set_disabled(index, TRUE);
     }
 
     return status;
 }
 
 AuResult snd_ambient_enable(s32 index) {
-    AuResult status  = func_80050C30(index);
+    AuResult status  = au_amb_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
-        au_mseq_set_disabled(index, FALSE);
+        au_amb_set_disabled(index, FALSE);
     }
 
     return status;
 }
 
-// snd_ambient_init_tracks?
-void snd_ambient_80055760(s32 trackIdx) {
+// snd_ambient_init_tracks ?
+void snd_ambient_80055760(s32 index) {
     u32 i;
     s32 lim = 4;
 
-    D_80078DB6 = 0xFF;
+    AuAmbiencePlayOnlyIndex = 0xFF;
 
     for (i = 0; i < lim; i++) {
-        if (snd_ambient_80055464(i, 0) != AU_RESULT_OK) {
+        if (snd_ambient_play(i, 0) != AU_RESULT_OK) {
             return;
         }
     }
 
-    snd_ambient_set_track(trackIdx);
+    snd_ambient_play_only(index);
 }
 
-AuResult snd_ambient_800557CC(s32 fadeTime) {
+AuResult snd_ambient_stop_all(s32 time) {
     AuResult status = AU_RESULT_OK;
     s32 lim = 4;
     u32 i;
 
     for (i = 0; i < lim; i++) {
-        if (i == D_80078DB6) {
-            status = snd_ambient_slow_fade_out(i, fadeTime);
+        if (i == AuAmbiencePlayOnlyIndex) {
+            status = snd_ambient_stop_slow(i, time);
         } else {
-            status = snd_ambient_quick_fade_out(i);
+            status = snd_ambient_stop_quick(i);
         }
         if (status != AU_RESULT_OK) {
             break;
@@ -408,11 +406,11 @@ AuResult snd_ambient_800557CC(s32 fadeTime) {
     return status;
 }
 
-AuResult snd_ambient_set_track(s32 index) {
+AuResult snd_ambient_play_only(s32 index) {
     AuResult status = AU_RESULT_OK;
     s32 lim = 4;
 
-    if (index != D_80078DB6) {
+    if (index != AuAmbiencePlayOnlyIndex) {
         u32 i;
 
         for (i = 0; i < lim; i++) {
@@ -428,7 +426,7 @@ AuResult snd_ambient_set_track(s32 index) {
         }
 
         if (status == AU_RESULT_OK) {
-            D_80078DB6 = index;
+            AuAmbiencePlayOnlyIndex = index;
         }
     }
 
@@ -860,10 +858,10 @@ void func_800561E4(s32 arg0) {
     func_80054D74(0x10, arg0);
 }
 
-void func_80056204(void) {
-    func_8004BA54(gSoundManager, 0);
+void enable_sounds(void) {
+    au_sfx_set_state(gSoundManager, SND_MANAGER_STATE_ENABLED);
 }
 
-void func_80056228(void) {
-    func_8004BA54(gSoundManager, 1);
+void disable_sounds(void) {
+    au_sfx_set_state(gSoundManager, SND_MANAGER_STATE_DISABLED);
 }

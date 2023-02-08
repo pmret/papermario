@@ -1,5 +1,6 @@
 #include "common.h"
 #include "Koopa.h"
+#include "Kooper.h"
 
 NpcSettings N(NpcSettings_Koopa) = {
     .height = 35,

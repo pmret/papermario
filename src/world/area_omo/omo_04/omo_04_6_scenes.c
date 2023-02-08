@@ -3,7 +3,7 @@
 
 s32 N(HoverOffsets)[] = {
      1,  2,  3,  2,  1,
-    -1, -2, -3, -2, -1, 
+    -1, -2, -3, -2, -1,
 };
 
 EvtScript N(EVS_NpcIdle_Kammy) = {
@@ -90,7 +90,7 @@ Vec3f N(FlightPath_Kammy3)[] = {
 
 EvtScript N(EVS_PlayKammyFlightSounds) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_295, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_295, SOUND_SPACE_MODE_0)
         EVT_WAIT(4)
     EVT_END_LOOP
     EVT_RETURN
@@ -142,7 +142,7 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     EVT_END_LOOP
     EVT_SET(MF_KammyFlying, FALSE)
     EVT_KILL_THREAD(MV_FlightSoundsScriptID)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_32B, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_32B, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim10)
         EVT_WAIT(1)
@@ -183,12 +183,12 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     EVT_CALL(GetNpcPos, NPC_Kammy, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 25)
     EVT_ADD(LVar1, 38)
-    EVT_CALL(PlaySoundAt, SOUND_207A, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_207A, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 100)
     EVT_WAIT(100)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim0F)
     EVT_ADD(LVar0, 55)
-    EVT_CALL(PlaySoundAt, SOUND_2098, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_2098, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, 0, 0, 1, 15, 3, 8)
     EVT_WAIT(5)
     EVT_IF_NE(AB_OMO_CurrentPeachChoice, 2)
@@ -232,7 +232,7 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     EVT_END_THREAD
     EVT_WAIT(90)
     EVT_IF_NE(AB_OMO_CurrentPeachChoice, 2)
-        EVT_CALL(PlaySoundAtNpc, MV_AmbushID, SOUND_263, 0)
+        EVT_CALL(PlaySoundAtNpc, MV_AmbushID, SOUND_263, SOUND_SPACE_MODE_0)
         EVT_CALL(ShowEmote, MV_AmbushID, EMOTE_QUESTION, 0, 20, TRUE, 0, 0, 0, 0)
         EVT_WAIT(5)
     EVT_END_IF

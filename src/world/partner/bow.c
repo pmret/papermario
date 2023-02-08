@@ -269,7 +269,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                     bow->yaw = playerStatus->targetYaw;
                     func_8003D624(bow, 7, playerStatus->alpha1, 0, 0, 0, 0);
                     suggest_player_anim_setUnkFlag(ANIM_Mario_Crouch);
-                    sfx_play_sound_at_npc(SOUND_BOW_VANISH, 0, -4);
+                    sfx_play_sound_at_npc(SOUND_BOW_VANISH, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     script->functionTemp[0] = 1;
                 }
                 break;
@@ -330,7 +330,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                 break;
             }
 
-            sfx_play_sound_at_npc(SOUND_BOW_APPEAR, 0, -4);
+            sfx_play_sound_at_npc(SOUND_BOW_APPEAR, SOUND_SPACE_MODE_0, NPC_PARTNER);
             func_802BDDF0_324740(bow);
             return ApiStatus_DONE1;
     }
@@ -380,7 +380,7 @@ ApiStatus func_802BDF08_324858(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         partner_init_put_away(bow);
         if (D_802BE0C0) {
-            sfx_play_sound_at_npc(SOUND_BOW_APPEAR, 0, -4);
+            sfx_play_sound_at_npc(SOUND_BOW_APPEAR, SOUND_SPACE_MODE_0, NPC_PARTNER);
         }
         func_802BDDF0_324740(bow);
     }

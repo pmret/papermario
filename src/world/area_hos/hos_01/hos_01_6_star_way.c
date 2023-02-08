@@ -16,7 +16,7 @@ EvtScript N(EVS_Scene_StarWayOpened) = {
         EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    EVT_CALL(func_802D2884, -30, -160, 0)
+    EVT_CALL(FacePlayerTowardPoint, -30, -160, 0)
     EVT_WAIT(15)
     EVT_CALL(ShowMessageAtScreenPos, MSG_HOS_005C, 160, 40)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)

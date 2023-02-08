@@ -206,7 +206,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy_01) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcDefeat_Fuzzy_01) = {
+EvtScript N(EVS_NpcDefeat_FuzzyBoss) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
@@ -261,7 +261,7 @@ EvtScript N(EVS_NpcInit_Fuzzy_01) = {
         EVT_CALL(SetSelfVar, 0, 0)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Jungle_Anim04)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Fuzzy_01)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Fuzzy_01)))
+        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_FuzzyBoss)))
     EVT_ELSE
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF

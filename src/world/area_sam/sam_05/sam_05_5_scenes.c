@@ -217,7 +217,7 @@ EvtScript N(EVS_StarKidsFlee) = {
         EVT_IF_EQ(LVarA, -1)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_CALL(func_802CFD30, LVarA, 7, LVar2, 0, 0, 0)
+        EVT_CALL(func_802CFD30, LVarA, FOLD_TYPE_7, LVar2, 0, 0, 0)
     EVT_END_LOOP
     EVT_WAIT(1)
     EVT_IF_EQ(LVar1, 1)

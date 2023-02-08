@@ -4,7 +4,7 @@
 EvtScript N(EVS_ChestTrap) = {
     EVT_WAIT(15)
     EVT_THREAD
-        EVT_CALL(PlaySoundAt, SOUND_212A, 0, 4, 26, -12)
+        EVT_CALL(PlaySoundAt, SOUND_212A, SOUND_SPACE_MODE_0, 4, 26, -12)
         EVT_CALL(MakeLerp, 0, -80, 10, EASING_QUADRATIC_IN)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -14,10 +14,10 @@ EvtScript N(EVS_ChestTrap) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAt, SOUND_212B, 0, 4, 26, -12)
+        EVT_CALL(PlaySoundAt, SOUND_212B, SOUND_SPACE_MODE_0, 4, 26, -12)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(1.5))
         EVT_WAIT(40)
-        EVT_CALL(PlaySoundAt, SOUND_212C, 0, 4, 26, -12)
+        EVT_CALL(PlaySoundAt, SOUND_212C, SOUND_SPACE_MODE_0, 4, 26, -12)
         EVT_CALL(MakeLerp, -80, 0, 20, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)

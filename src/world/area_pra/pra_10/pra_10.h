@@ -10,8 +10,8 @@
 #include "mapfs/pra_10_hit.h"
 
 enum {
-	NPC_Swoopula_01     = 0,
-	NPC_Swoopula_02     = 1,
+    NPC_Swoopula_01     = 0,
+    NPC_Swoopula_02     = 1,
 };
 
 #define NAMESPACE pra_10

@@ -32,7 +32,7 @@ EvtScript N(EVS_SetupSpikes) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_WAIT(60)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o215, SOUND_2093, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o215, SOUND_2093, SOUND_SPACE_MODE_0)
         EVT_THREAD
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o215, COLLIDER_FLAGS_UPPER_MASK)
         EVT_END_THREAD

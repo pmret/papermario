@@ -5,13 +5,13 @@ s32 N(ShakeCamParams)[] = {
     10, EVT_FLOAT(0.6),
     13, EVT_FLOAT(0.75),
     16, EVT_FLOAT(0.9),
-    19, EVT_FLOAT(1.05), 
+    19, EVT_FLOAT(1.05),
     22, EVT_FLOAT(1.2),
     25, EVT_FLOAT(1.05),
     24, EVT_FLOAT(0.9),
-    25, EVT_FLOAT(0.75), 
+    25, EVT_FLOAT(0.75),
     24, EVT_FLOAT(0.6),
-    10, EVT_FLOAT(1.7), 
+    10, EVT_FLOAT(1.7),
 };
 
 EvtScript N(EVS_MonitorFallingStairs) = {
@@ -44,7 +44,7 @@ EvtScript N(EVS_MonitorFallingStairs) = {
         EVT_END_THREAD
         EVT_THREAD
             EVT_LOOP(6)
-                EVT_CALL(PlaySoundAtCollider, COLLIDER_o175, SOUND_187, 0)
+                EVT_CALL(PlaySoundAtCollider, COLLIDER_o175, SOUND_187, SOUND_SPACE_MODE_0)
                 EVT_WAIT(20)
             EVT_END_LOOP
         EVT_END_THREAD

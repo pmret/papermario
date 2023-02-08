@@ -135,7 +135,7 @@ class N64SegGfx(CommonSegCodeSubsegment):
         sym = self.create_symbol(
             addr=addr, in_segment=True, type="data", reference=True
         )
-        gfxd_printf(self.format_sym_name(sym))
+        gfxd_printf(f"&{self.format_sym_name(sym)}")
         return 1
 
     def lookat_handler(self, addr, count):

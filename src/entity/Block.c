@@ -386,7 +386,7 @@ s32 entity_block_handle_collision(Entity* entity) {
                 return TRUE;
             }
             set_entity_commandlist(entity, Entity_BreakingBlock_Script);
-            sfx_play_sound_at_position(SOUND_14F, 0, entity->position.x, entity->position.y, entity->position.z);
+            sfx_play_sound_at_position(SOUND_14F, SOUND_SPACE_MODE_0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case ENTITY_TYPE_HAMMER2_BLOCK:
         case ENTITY_TYPE_HAMMER2_BLOCK_TINY:
@@ -401,7 +401,7 @@ s32 entity_block_handle_collision(Entity* entity) {
                 return TRUE;
             }
             set_entity_commandlist(entity, Entity_BreakingBlock_Script);
-            sfx_play_sound_at_position(SOUND_150, 0, entity->position.x, entity->position.y, entity->position.z);
+            sfx_play_sound_at_position(SOUND_150, SOUND_SPACE_MODE_0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case ENTITY_TYPE_HAMMER3_BLOCK:
         case ENTITY_TYPE_HAMMER3_BLOCK_TINY:
@@ -409,7 +409,7 @@ s32 entity_block_handle_collision(Entity* entity) {
                 return TRUE;
             }
             set_entity_commandlist(entity, Entity_BreakingBlock_Script);
-            sfx_play_sound_at_position(SOUND_151, 0, entity->position.x, entity->position.y, entity->position.z);
+            sfx_play_sound_at_position(SOUND_151, SOUND_SPACE_MODE_0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case ENTITY_TYPE_MULTI_TRIGGER_BLOCK:
         case ENTITY_TYPE_HEALING_BLOCK:

@@ -28,7 +28,7 @@ ApiStatus func_80240214_B769C4(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = evt_get_variable(script, *args++);
         script->functionTemp[1] = evt_get_variable(script, *args++);
         script->functionTemp[2] = evt_get_variable(script, *args++);
-        sfx_adjust_env_sound_pos(SOUND_4E, 0, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
+        sfx_adjust_env_sound_pos(SOUND_4E, SOUND_SPACE_MODE_0, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
     }
     return ApiStatus_DONE2;
 }

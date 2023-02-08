@@ -39,9 +39,9 @@ void update_ambient_sounds(void) {
         case AMBIENT_SOUND_FADE_OUT:
             if (ambientSoundState->flags & 1) {
                 if (ambientSoundState->fadeTime < 250) {
-                    error = snd_ambient_quick_fade_out(0);
+                    error = snd_ambient_stop_quick(0);
                 } else {
-                    error = snd_ambient_slow_fade_out(0, ambientSoundState->fadeTime);
+                    error = snd_ambient_stop_slow(0, ambientSoundState->fadeTime);
                 }
 
                 if (error != AU_RESULT_OK) {
@@ -52,15 +52,15 @@ void update_ambient_sounds(void) {
             break;
         case AMBIENT_SOUND_FADE_IN:
             if (ambientSoundState->flags & 1) {
-                if (snd_ambient_800555E4(0) != AU_RESULT_OK) {
+                if (snd_ambient_is_stopped(0) != AU_RESULT_OK) {
                     return;
                 }
                 ambientSoundState->flags &= ~1;
             }
             if (ambientSoundState->soundID < 0) {
                 ambientSoundState->fadeState = AMBIENT_SOUND_IDLE;
-            } else if (snd_ambient_load(ambientSoundState->soundID) == AU_RESULT_OK) {
-                if (snd_ambient_80055464(0, 0) == AU_RESULT_OK) {
+            } else if (snd_load_ambient(ambientSoundState->soundID) == AU_RESULT_OK) {
+                if (snd_ambient_play(0, 0) == AU_RESULT_OK) {
                     ambientSoundState->fadeState = AMBIENT_SOUND_IDLE;
                     ambientSoundState->flags |= 1;
                 }
@@ -73,7 +73,7 @@ s32 play_ambient_sounds(s32 soundID, s32 fadeTime) {
     AmbientSoundSettings* state = &AmbientSoundData;
 
     if (!gGameStatusPtr->musicEnabled) {
-        snd_ambient_quick_fade_out(state->soundID);
+        snd_ambient_stop_quick(state->soundID);
         state->flags &= ~1;
         return 1;
     }

@@ -104,7 +104,7 @@ EvtScript N(EVS_Interact_LowerPortrait) = {
             EVT_WAIT(1)
             EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
             EVT_CALL(PlayerJump, 812, -170, -2, 20)
-            EVT_CALL(PlaySoundAtPlayer, SOUND_D9, 0)
+            EVT_CALL(PlaySoundAtPlayer, SOUND_D9, SOUND_SPACE_MODE_0)
             EVT_WAIT(10)
             EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 812, 0, 28)
             EVT_CALL(SetPanTarget, CAM_DEFAULT, 812, 0, 28)
@@ -114,7 +114,7 @@ EvtScript N(EVS_Interact_LowerPortrait) = {
             EVT_WAIT(10)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimMidairStill)
             EVT_WAIT(1)
-            EVT_CALL(PlaySoundAtPlayer, SOUND_DA, 0)
+            EVT_CALL(PlaySoundAtPlayer, SOUND_DA, SOUND_SPACE_MODE_0)
             EVT_CALL(SetPlayerPos, 812, 61, -2)
             EVT_CALL(PlayerJump, 812, 0, 28, 8)
             EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
@@ -147,7 +147,7 @@ EvtScript N(EVS_Interact_UpperPortrait) = {
     EVT_WAIT(1)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
     EVT_CALL(PlayerJump, 812, 40, -2, 20)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_D9, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_D9, SOUND_SPACE_MODE_0)
     EVT_WAIT(10)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 812, -210, 28)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 812, -210, 28)
@@ -157,7 +157,7 @@ EvtScript N(EVS_Interact_UpperPortrait) = {
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimMidairStill)
     EVT_WAIT(1)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_DA, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_DA, SOUND_SPACE_MODE_0)
     EVT_CALL(SetPlayerPos, 812, -146, -2)
     EVT_CALL(PlayerJump, 812, -210, 28, 8)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
@@ -244,12 +244,12 @@ EvtScript N(EVS_SetupPortrait) = {
 };
 
 s32 N(Unused_80243C7C_3C7C)[] = {
-    0, 1, 0, 5, 1, 0, 5, 1, 
-    0, 5, 1, 1, 5, 1, 1, 5, 
-    2, 2, 5, 2, 2, 5, 2, 2, 
-    5, 2, 3, 5, 2, 3, 5, 3, 
-    4, 5, 3, 4, 5, 3, 4, 5, 
-    3, 5, 5, 3, 5, 5, 4, 6, 
-    5, 4, 6, 5, 4, 6, 5, 4, 
-    7, 5, 4, 7, 5, 
+    0, 1, 0, 5, 1, 0, 5, 1,
+    0, 5, 1, 1, 5, 1, 1, 5,
+    2, 2, 5, 2, 2, 5, 2, 2,
+    5, 2, 3, 5, 2, 3, 5, 3,
+    4, 5, 3, 4, 5, 3, 4, 5,
+    3, 5, 5, 3, 5, 5, 4, 6,
+    5, 4, 6, 5, 4, 6, 5, 4,
+    7, 5, 4, 7, 5,
 };

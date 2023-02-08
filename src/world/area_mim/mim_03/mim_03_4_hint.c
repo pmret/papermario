@@ -9,9 +9,9 @@ API_CALLABLE(N(GetFlowerNormal)) {
     s32 treeIndex = get_model_list_index_from_tree_index(modelID);
     Model* mdl = get_model_from_list_index(treeIndex);
     f32 x, y, z;
-    
+
     N(GetFirstTriangleNormal)(mdl->modelNode->displayData->displayList, &x, &y, &z);
-    
+
     evt_set_variable(script, *args++, EVT_FLOAT_TO_FIXED(x));
     evt_set_variable(script, *args++, EVT_FLOAT_TO_FIXED(y));
     evt_set_variable(script, *args++, EVT_FLOAT_TO_FIXED(z));
@@ -124,7 +124,7 @@ EvtScript N(EVS_FlowersReact_Correct) = {
 };
 
 EvtScript N(EVS_CheckFlowers_North) = {
-    EVT_CALL(PlaySoundAt, SOUND_2059, 0, 0, 0, -300)
+    EVT_CALL(PlaySoundAt, SOUND_2059, SOUND_SPACE_MODE_0, 0, 0, -300)
     EVT_SET(LVar8, EVT_PTR(N(FlowerModels_North)))
     EVT_SET(LVar9, 0)
     EVT_EXEC_WAIT(N(EVS_FlowersReact_Wrong))
@@ -133,7 +133,7 @@ EvtScript N(EVS_CheckFlowers_North) = {
 };
 
 EvtScript N(EVS_CheckFlowers_West) = {
-    EVT_CALL(PlaySoundAt, SOUND_205A, 0, -300, 0, 0)
+    EVT_CALL(PlaySoundAt, SOUND_205A, SOUND_SPACE_MODE_0, -300, 0, 0)
     EVT_SET(LVar8, EVT_PTR(N(FlowerModels_West)))
     EVT_SET(LVar9, 1)
     EVT_EXEC_WAIT(N(EVS_FlowersReact_Correct))
@@ -142,7 +142,7 @@ EvtScript N(EVS_CheckFlowers_West) = {
 };
 
 EvtScript N(EVS_CheckFlowers_South) = {
-    EVT_CALL(PlaySoundAt, SOUND_2059, 0, 0, 0, 300)
+    EVT_CALL(PlaySoundAt, SOUND_2059, SOUND_SPACE_MODE_0, 0, 0, 300)
     EVT_SET(LVar8, EVT_PTR(N(FlowerModels_South)))
     EVT_SET(LVar9, 2)
     EVT_EXEC_WAIT(N(EVS_FlowersReact_Wrong))
@@ -151,7 +151,7 @@ EvtScript N(EVS_CheckFlowers_South) = {
 };
 
 EvtScript N(EVS_CheckFlowers_East) = {
-    EVT_CALL(PlaySoundAt, SOUND_2059, 0, 300, 0, 0)
+    EVT_CALL(PlaySoundAt, SOUND_2059, SOUND_SPACE_MODE_0, 300, 0, 0)
     EVT_SET(LVar8, EVT_PTR(N(FlowerModels_East)))
     EVT_SET(LVar9, 3)
     EVT_EXEC_WAIT(N(EVS_FlowersReact_Wrong))

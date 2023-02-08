@@ -2,20 +2,20 @@
 
 s32 N(WallPanels)[] = {
     MODEL_o371, -230, 272, -100,
-    MODEL_o372, -160, 272, -100, 
+    MODEL_o372, -160, 272, -100,
     MODEL_o373, -103, 272, -100,
-    MODEL_o374, -46, 272, -100, 
+    MODEL_o374, -46, 272, -100,
     MODEL_o375, 10, 272, -100,
-    MODEL_o376, 67, 272, -100, 
+    MODEL_o376, 67, 272, -100,
     MODEL_o377, 135, 272, -100,
-    MODEL_o382, 245, 272, -100, 
+    MODEL_o382, 245, 272, -100,
     MODEL_o381, 318, 272, -100,
-    MODEL_o380, 375, 272, -100, 
+    MODEL_o380, 375, 272, -100,
     MODEL_o379, 432, 272, -100,
-    MODEL_o378, 490, 272, -100, 
+    MODEL_o378, 490, 272, -100,
     MODEL_o383, 547, 272, -100,
-    MODEL_o384, 615, 272, -100, 
-    -1, 
+    MODEL_o384, 615, 272, -100,
+    -1,
 };
 
 EvtScript N(EVS_FocusCam_Wall) = {
@@ -67,7 +67,7 @@ EvtScript N(EVS_FlipWallPanels) = {
         EVT_IF_EQ(LVar5, -1)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_CALL(PlaySoundAt, SOUND_2040, 0, LVar6, LVar7, LVar8)
+        EVT_CALL(PlaySoundAt, SOUND_2040, SOUND_SPACE_MODE_0, LVar6, LVar7, LVar8)
         EVT_EXEC(N(EVS_FlipWallPanel))
         EVT_WAIT(10)
     EVT_END_LOOP

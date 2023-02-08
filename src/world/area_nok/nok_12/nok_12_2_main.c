@@ -116,7 +116,7 @@ EvtScript N(EVS_EnterMap) = {
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_PLEASANT_PATH)
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SET(AF_NOK_01, FALSE)
+    EVT_SET(AF_NOK12_HitSwitch, FALSE)
     EVT_SETUP_CAMERA_DEFAULT()
     EVT_CALL(GetDemoState, LVar0)
     EVT_IF_EQ(LVar0, DEMO_STATE_NONE)

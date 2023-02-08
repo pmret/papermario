@@ -463,7 +463,7 @@ ApiStatus N(SpinyFlipActionCommand)(Evt* script, s32 isInitialCall) {
             } else {
                 sAimingTimer = 80;
                 hud_element_set_script(hudStick, &HES_StickTapRight);
-                sfx_play_sound_at_position(SOUND_312, 0, 0.0f, 0.0f, 0.0f);
+                sfx_play_sound_at_position(SOUND_312, SOUND_SPACE_MODE_0, 0.0f, 0.0f, 0.0f);
                 script->functionTemp[0] = 2;
             }
             break;
@@ -1464,7 +1464,7 @@ ApiStatus N(ProcessHurricane)(Evt* script, s32 isInitialCall) {
             sHuffPuffBreathEffect->data.huffPuffBreath->pos.z = 0.0f;
 
             if (script->functionTemp[2] != 0) {
-                sfx_play_sound_at_position(SOUND_201E, 0, partner->currentPos.x, partner->currentPos.y, partner->currentPos.z);
+                sfx_play_sound_at_position(SOUND_201E, SOUND_SPACE_MODE_0, partner->currentPos.x, partner->currentPos.y, partner->currentPos.z);
             }
             script->functionTemp[2] = 0;
 
@@ -1487,7 +1487,7 @@ ApiStatus N(ProcessHurricane)(Evt* script, s32 isInitialCall) {
             sHuffPuffBreathEffect->data.huffPuffBreath->speedX = 2.0f;
 
             if (script->functionTemp[2] == 0) {
-                sfx_play_sound_at_position(SOUND_201F, 0, partner->currentPos.x, partner->currentPos.y, partner->currentPos.z);
+                sfx_play_sound_at_position(SOUND_201F, SOUND_SPACE_MODE_0, partner->currentPos.x, partner->currentPos.y, partner->currentPos.z);
             }
             script->functionTemp[2] = 1;
 

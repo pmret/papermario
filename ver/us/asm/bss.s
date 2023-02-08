@@ -484,11 +484,8 @@ dlabel AlCmdListBuffers
 dlabel D_800A351C
 .space 4
 
-dlabel D_800A3520
-.space 4
-
-dlabel D_800A3524
-.space 0x00000104
+dlabel nuAuTasks
+.space 0x00000108
 
 dlabel D_800A3628
 .space 0x0000000c
@@ -1001,13 +998,7 @@ dlabel D_800DA040
 .space 0x00000400
 
 dlabel nusched
-.space 0x678
-
-dlabel AlNumFields
-.space 4
-
-dlabel D_800DAABC
-.space 4
+.space 0x00000680
 
 dlabel __osEepromTimerQ
 .space 0x00000018

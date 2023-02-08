@@ -35,7 +35,7 @@ EvtScript N(EVS_RaisePoundableSwitch) = {
 };
 
 EvtScript N(EVS_LowerPoundableSwitch) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1344, SOUND_208B, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1344, SOUND_208B, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, -10, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -183,9 +183,9 @@ EvtScript N(EVS_ItemPrompt_RedPadlock) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_pra_16_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittse, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_pra_16_3)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittne, 1, 0)
     EVT_CALL(N(GetEntityPosition), MV_NearRedPadlock, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAt, SOUND_269, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_269, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_CALL(N(GetEntityPosition), MV_FarRedPadlock, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAt, SOUND_269, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_269, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MV_NearRedPadlock)
     EVT_SET(MV_NearRedPadlock, -1)
     EVT_CALL(N(RemovePadlock))
@@ -220,9 +220,9 @@ EvtScript N(EVS_ItemPrompt_BluePadlock) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_pra_13_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittse2, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_pra_13_3)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittne2, 1, 0)
     EVT_CALL(N(GetEntityPosition), MV_NearBluePadlock, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAt, SOUND_269, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_269, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_CALL(N(GetEntityPosition), MV_FarBluePadlock, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAt, SOUND_269, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_269, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MV_NearBluePadlock)
     EVT_SET(MV_NearBluePadlock, -1)
     EVT_CALL(N(RemovePadlock))

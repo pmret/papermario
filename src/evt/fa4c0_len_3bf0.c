@@ -237,7 +237,7 @@ ApiStatus func_802D62E4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
 
-    func_80149A6C(soundID, TRUE);
+    snd_stop_tracking_env_sound_pos(soundID, TRUE);
     return ApiStatus_DONE2;
 }
 

@@ -4,14 +4,14 @@
 
 s32 N(BarricadeModels)[] = {
     MODEL_t2, MODEL_t3, MODEL_t4, MODEL_t5,
-    MODEL_t2_2, MODEL_t2_3, MODEL_t2_4, MODEL_t2_5, 
-    MODEL_t3_1, MODEL_t3_3, MODEL_t3_4, MODEL_t3_5, 
+    MODEL_t2_2, MODEL_t2_3, MODEL_t2_4, MODEL_t2_5,
+    MODEL_t3_1, MODEL_t3_3, MODEL_t3_4, MODEL_t3_5,
 };
 
 s32 N(BarricadeColliders)[] = {
     COLLIDER_t2, COLLIDER_t3, COLLIDER_t4, COLLIDER_t5,
-    COLLIDER_t2_2, COLLIDER_t2_3, COLLIDER_t2_4, COLLIDER_t2_5, 
-    COLLIDER_t3_1, COLLIDER_t3_3, COLLIDER_t3_4, COLLIDER_t3_5, 
+    COLLIDER_t2_2, COLLIDER_t2_3, COLLIDER_t2_4, COLLIDER_t2_5,
+    COLLIDER_t3_1, COLLIDER_t3_3, COLLIDER_t3_4, COLLIDER_t3_5,
 };
 
 typedef struct BarricadePart {
@@ -250,7 +250,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtModel, MODEL_t1, SOUND_1F4, 0)
+        EVT_CALL(PlaySoundAtModel, MODEL_t1, SOUND_1F4, SOUND_SPACE_MODE_0)
         EVT_CALL(GetModelCenter, MODEL_t1)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
@@ -287,7 +287,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtModel, MODEL_t2_1, SOUND_1F4, 0)
+        EVT_CALL(PlaySoundAtModel, MODEL_t2_1, SOUND_1F4, SOUND_SPACE_MODE_0)
         EVT_CALL(GetModelCenter, MODEL_t2_1)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
@@ -334,7 +334,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtModel, MODEL_t3_2, SOUND_1F4, 0)
+    EVT_CALL(PlaySoundAtModel, MODEL_t3_2, SOUND_1F4, SOUND_SPACE_MODE_0)
     EVT_CALL(GetModelCenter, MODEL_t3_2)
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
@@ -366,7 +366,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(165)
-    EVT_CALL(PlaySound, SOUND_76D)
+    EVT_CALL(PlaySound, SOUND_36D | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_CALL(func_802D62E4, SOUND_36D)
     EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim04)
     EVT_CALL(SetNpcPos, NPC_ShyGuy_01, -285, 0, 35)
@@ -389,11 +389,11 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
         EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim10)
     EVT_END_THREAD
     EVT_CALL(NpcJump0, NPC_ShyGuy_01, -45, 0, -8, 10)
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_MISS_JUMP, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_MISS_JUMP, SOUND_SPACE_MODE_0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
     EVT_WAIT(50)
     EVT_LOOP(2)
-        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_3E4, 0)
+        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_3E4, SOUND_SPACE_MODE_0)
         EVT_WAIT(7)
     EVT_END_LOOP
     EVT_CALL(SetNpcRotationPivot, NPC_ShyGuy_01, 0)
@@ -401,7 +401,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     EVT_CALL(NpcJump0, NPC_ShyGuy_01, -50, 0, -8, 10)
     EVT_CALL(InterpNpcYaw, NPC_ShyGuy_01, 270, 0)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_3A2, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_3A2, SOUND_SPACE_MODE_0)
     EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim04)
     EVT_CALL(SetNpcSpeed, NPC_ShyGuy_01, EVT_FLOAT(6.0))
     EVT_CALL(NpcMoveTo, NPC_ShyGuy_01, 100, 50, 0)

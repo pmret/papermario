@@ -1,7 +1,5 @@
 #include "sam_08.h"
 
-#include "world/common/enemy/ai/WanderMeleeAI.inc.c"
-
 NpcSettings N(NpcSettings_Kooper) = {
     .height = 35,
     .radius = 24,
@@ -16,7 +14,8 @@ NpcSettings N(NpcSettings_Duplighost) = {
     .level = 99,
 };
 
-#include "world/common/enemy/complete/FrostClubba_Wander.inc.c"
+#define INCLUDE_FROST_CLUBBA_WANDER
+#include "world/common/enemy/complete/FrostClubba_Multi.inc.c"
 
 EvtScript N(EVS_NpcInteract_TrueKooperA) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH7_012B)

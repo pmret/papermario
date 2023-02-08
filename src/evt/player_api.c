@@ -266,7 +266,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
                 anim = ANIM_Mario_90005;
             }
             suggest_player_anim_clearUnkFlag(anim);
-            sfx_play_sound_at_player(SOUND_JUMP_2081, 0);
+            sfx_play_sound_at_player(SOUND_JUMP_2081, SOUND_SPACE_MODE_0);
         }
         script->functionTemp[0] = 1;
     }
@@ -705,46 +705,50 @@ ApiStatus func_802D286C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2884(Evt* script, s32 isInitialCall) {
+ApiStatus FacePlayerTowardPoint(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32* ft1 = &script->functionTempF[1];
-    f32* angle = &script->functionTempF[2];
-    s32* ft3 = &script->functionTemp[3];
+    f32* initialYaw = &script->functionTempF[1];
+    f32* deltaYaw = &script->functionTempF[2];
+    s32* duration = &script->functionTemp[3];
 
     if (isInitialCall) {
-        f32 x = evt_get_float_variable(script, *args++);
-        f32 z = evt_get_float_variable(script, *args++);
-        f32 yawTemp;
+        f32 targetX = evt_get_float_variable(script, *args++);
+        f32 targetY = evt_get_float_variable(script, *args++);
+        f32 targetYaw;
 
-        *ft1 = playerNpc->yaw = playerStatus->targetYaw;
+        *initialYaw = playerNpc->yaw = playerStatus->targetYaw;
 
-        if (playerStatus->position.x != x || playerStatus->position.z != z) {
-            yawTemp = atan2(playerStatus->position.x, playerStatus->position.z, x, z);
+        if (playerStatus->position.x != targetX || playerStatus->position.z != targetY) {
+            targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, targetX, targetY);
         } else {
-            yawTemp = playerStatus->targetYaw;
+            targetYaw = playerStatus->targetYaw;
         }
 
-        *angle = yawTemp - *ft1;
-        *ft3 = evt_get_variable(script, *args++);
+        *deltaYaw = targetYaw - *initialYaw;
+        *duration = evt_get_variable(script, *args++);
         playerNpc->duration = 0;
 
-        if (*angle < -180.0f) {
-            *angle += 360.0f;
+        if (*deltaYaw < -180.0f) {
+            *deltaYaw += 360.0f;
         }
-        if (*angle > 180.0f) {
-            *angle -= 360.0f;
+        if (*deltaYaw > 180.0f) {
+            *deltaYaw -= 360.0f;
         }
     }
 
-    if (*ft3 > 0) {
+    if (*duration > 0) {
         playerNpc->duration++;
-        playerNpc->yaw = *ft1 + ((*angle * playerNpc->duration) / *ft3);
+        playerNpc->yaw = *initialYaw + ((*deltaYaw * playerNpc->duration) / *duration);
         playerStatus->targetYaw = playerNpc->yaw = clamp_angle(playerNpc->yaw);
-        return !(playerNpc->duration < *ft3) * ApiStatus_DONE1;
+        if (playerNpc->duration < *duration) {
+            return ApiStatus_BLOCK;
+        } else {
+            return ApiStatus_DONE1;
+        }
     }
 
-    playerNpc->yaw += *angle;
+    playerNpc->yaw += *deltaYaw;
     playerStatus->targetYaw = playerNpc->yaw = clamp_angle(playerNpc->yaw);
     return ApiStatus_DONE2;
 }

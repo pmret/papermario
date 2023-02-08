@@ -532,14 +532,14 @@ s32 ai_check_player_dist(Enemy* enemy, s32 chance, f32 radius, f32 moveSpeed) {
 
 void ai_enemy_play_sound(Npc* npc, s32 soundID, s32 upperSoundFlags) {
     Enemy* enemy = get_enemy(npc->npcID);
-    s32 soundFlags = (upperSoundFlags & 0xFFFF0000) | 2;
+    s32 soundFlags = (upperSoundFlags & SOUND_SPACE_PARAMS_MASK) | SOUND_SPACE_FULL;
 
     if (upperSoundFlags & 1) {
-        soundFlags |= 0x10000;
+        soundFlags |= SOUND_PARAM_MUTE;
     }
 
     if (enemy->npcSettings->actionFlags & AI_ACTION_20) {
-        soundFlags |= 0x20000;
+        soundFlags |= SOUND_PARAM_CLIP_OFFSCREEN_ANY;
     }
 
     sfx_play_sound_at_position(soundID, soundFlags, npc->pos.x, npc->pos.y, npc->pos.z);
@@ -593,7 +593,7 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
                 yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
                 if (!npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, aiSettings->chaseSpeed, yaw, npc->collisionHeight, npc->collisionRadius)) {
                     npc->yaw = yaw;
-                    ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
+                    ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
                     fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp34);
                     enemy->aiFlags &= ~ENEMY_AI_FLAG_40;
                     enemy->aiFlags &= ~ENEMY_AI_FLAG_20;
@@ -689,7 +689,7 @@ void basic_ai_loiter(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
         yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         if (!npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, aiSettings->chaseSpeed, yaw, npc->collisionHeight, npc->collisionRadius)) {
             npc->yaw = yaw;
-            ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
+            ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
             fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
             if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
                 script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;

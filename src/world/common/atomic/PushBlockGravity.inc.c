@@ -12,7 +12,7 @@ s32 N(push_block_handle_fall)(Entity* block, Evt* source) {
 
     block->position.y = source->varTable[0] - (N(PushBlockFallCurve)[source->functionTemp[0]] * BLOCK_GRID_SIZE);
     if (source->functionTemp[0] == 0) {
-        sfx_play_sound_at_position(SOUND_1DA, 0, block->position.x, block->position.y, block->position.z);
+        sfx_play_sound_at_position(SOUND_1DA, SOUND_SPACE_MODE_0, block->position.x, block->position.y, block->position.z);
     }
 
     if ((source->functionTemp[0] > 4) && (source->functionTemp[0] & 1)) {

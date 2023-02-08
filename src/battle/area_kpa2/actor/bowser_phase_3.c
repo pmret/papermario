@@ -1596,7 +1596,7 @@ EvtScript N(attackFlameBreath) = {
         EVT_CALL(N(StartRumbleWithParams), 50, 148)
         EVT_CALL(PlaySound, SOUND_3BD)
         EVT_WAIT(70)
-        EVT_CALL(PlaySound, SOUND_7BD)
+        EVT_CALL(PlaySound, SOUND_3BD | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)

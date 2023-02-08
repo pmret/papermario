@@ -18,27 +18,27 @@
 #include "sprite/npc/Luigi.h"
 
 enum {
-	// passive NPC for each imposter than can be interacted with
+    // passive NPC for each imposter than can be interacted with
     NPC_FakeKooper              = 0,
     NPC_FakeGoompa              = 1,
     NPC_FakeLuigi               = 2,
     NPC_FakeKoopaKoot           = 3,
     NPC_FakeKolorado            = 4,
-	// mario and partner in the mirror showing what to do
+    // mario and partner in the mirror showing what to do
     NPC_ExamplePlayer           = 5,
     NPC_ExampleKooper           = 6,
-	// duplighosts for each imposter
+    // duplighosts for each imposter
     NPC_GoompaGhost             = 7,
     NPC_LuigiGhost              = 8,
     NPC_KoopaKootGhost          = 9,
     NPC_KoloradoGhost           = 10,
     NPC_Duplighost_Controller   = 11, // controls the scene
-	// second set of NPCs for each imposter which detect hammer hits
-    NPC_TargetKooper			= 12,
-    NPC_TargetGoompa			= 13,
-    NPC_TargetLuigi				= 14,
-    NPC_TargetKoopaKoot			= 15,
-    NPC_TargetKolorado			= 16,
+    // second set of NPCs for each imposter which detect hammer hits
+    NPC_TargetKooper            = 12,
+    NPC_TargetGoompa            = 13,
+    NPC_TargetLuigi             = 14,
+    NPC_TargetKoopaKoot         = 15,
+    NPC_TargetKolorado          = 16,
 };
 
 enum {

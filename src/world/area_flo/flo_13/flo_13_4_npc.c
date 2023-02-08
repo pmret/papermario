@@ -205,7 +205,7 @@ EvtScript N(EVS_Lakilulu_SpinyToss) = {
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(2.0))
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtPlayer, SOUND_HIT_PLAYER_NORMAL, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_FallBack)
     EVT_SET(LVar0, 90)
     EVT_LOOP(20)

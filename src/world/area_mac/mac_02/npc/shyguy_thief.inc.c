@@ -17,7 +17,7 @@ EvtScript N(D_8024B5AC_82E86C) = {
 
 EvtScript N(D_8024B6A0_82E960) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy, SOUND_B0000021, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy, SOUND_B0000021, SOUND_SPACE_MODE_0)
         EVT_WAIT(2)
     EVT_END_LOOP
     EVT_RETURN
@@ -43,7 +43,7 @@ EvtScript N(D_8024B6E8_82E9A8) = {
     EVT_EXEC(N(D_8024B5AC_82E86C))
     EVT_THREAD
         EVT_CALL(EnableGroup, MODEL_cook_in, TRUE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit1u, SOUND_BASIC_DOOR_OPEN, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit1u, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
         EVT_SET(LVar0, 0)
         EVT_LOOP(10)
             EVT_ADD(LVar0, 8)
@@ -56,11 +56,11 @@ EvtScript N(D_8024B6E8_82E9A8) = {
             EVT_CALL(RotateModel, MODEL_c_door, LVar0, 0, -1, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit1u, SOUND_BASIC_DOOR_CLOSE, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit1u, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
         EVT_CALL(EnableGroup, MODEL_cook_in, FALSE)
     EVT_END_THREAD
     EVT_WAIT(5)
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy, SOUND_203F, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy, SOUND_203F, SOUND_SPACE_MODE_0)
     EVT_EXEC_GET_TID(N(D_8024B6A0_82E960), LVarA)
     EVT_CALL(SetNpcSpeed, NPC_ShyGuy, 8)
     EVT_CALL(NpcMoveTo, NPC_ShyGuy, -140, -240, 0)

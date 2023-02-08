@@ -111,7 +111,7 @@ void step_game_loop(void) {
     func_80138198();
     bgm_update_music_settings();
     update_ambient_sounds();
-    sfx_update_looping_sound_params();
+    sfx_update_env_sound_params();
     update_windows();
     update_curtains();
 

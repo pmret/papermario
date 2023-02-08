@@ -663,9 +663,9 @@ EvtScript N(spawnColorado) = {
     EVT_CALL(SpeakToPlayer, 0, -1, -1, 0, MSG_CH5_0104)
     EVT_THREAD
         EVT_LOOP(9)
-            EVT_CALL(PlaySoundAtNpc, 0, SOUND_20BA, 0)
+            EVT_CALL(PlaySoundAtNpc, 0, SOUND_20BA, SOUND_SPACE_MODE_0)
             EVT_WAIT(2)
-            EVT_CALL(PlaySoundAtNpc, 0, SOUND_3B4, 0)
+            EVT_CALL(PlaySoundAtNpc, 0, SOUND_3B4, SOUND_SPACE_MODE_0)
             EVT_WAIT(2)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -673,7 +673,7 @@ EvtScript N(spawnColorado) = {
     EVT_CALL(SetNpcAnimationSpeed, 0, EVT_FLOAT(2.0))
     EVT_CALL(SetNpcSpeed, 0, EVT_FLOAT(10.0))
     EVT_CALL(NpcMoveTo, 0, 70, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, 0, SOUND_E8, 0)
+    EVT_CALL(PlaySoundAtNpc, 0, SOUND_E8, SOUND_SPACE_MODE_0)
     EVT_CALL(SetNpcAnimationSpeed, 0, EVT_FLOAT(1.0))
     EVT_CALL(SetNpcJumpscale, 0, EVT_FLOAT(1.0))
     EVT_CALL(SetNpcAnimation, 0, ANIM_BattleKolorado_Injured)
@@ -704,9 +704,9 @@ EvtScript N(spawnColorado) = {
     EVT_CALL(NpcJump0, 0, 50, 0, 0, 12)
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtNpc, 0, SOUND_20BA, 0)
+            EVT_CALL(PlaySoundAtNpc, 0, SOUND_20BA, SOUND_SPACE_MODE_0)
             EVT_WAIT(2)
-            EVT_CALL(PlaySoundAtNpc, 0, SOUND_3B4, 0)
+            EVT_CALL(PlaySoundAtNpc, 0, SOUND_3B4, SOUND_SPACE_MODE_0)
             EVT_WAIT(2)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -1384,7 +1384,7 @@ EvtScript N(onDeath) = {
         EVT_THREAD
             EVT_CALL(PlaySound, SOUND_3BC)
             EVT_CALL(ShakeCam, 1, 0, 119, EVT_FLOAT(0.3))
-            EVT_CALL(PlaySound, SOUND_7BC)
+            EVT_CALL(PlaySound, SOUND_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 234)
         EVT_CALL(func_8027D32C, ACTOR_SELF)
@@ -1482,7 +1482,7 @@ EvtScript N(onDeath) = {
         EVT_THREAD
             EVT_CALL(PlaySound, SOUND_3BC)
             EVT_CALL(ShakeCam, 1, 0, 165, EVT_FLOAT(1.2))
-            EVT_CALL(PlaySound, SOUND_7BC)
+            EVT_CALL(PlaySound, SOUND_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 300)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
@@ -1655,7 +1655,7 @@ EvtScript N(onDeath) = {
             EVT_CALL(PlaySound, SOUND_3BC)
             EVT_CALL(ShakeCam, 1, 0, 100, EVT_FLOAT(0.5))
             EVT_CALL(ShakeCam, 1, 0, 8, EVT_FLOAT(0.2))
-            EVT_CALL(PlaySound, SOUND_7BC)
+            EVT_CALL(PlaySound, SOUND_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 216)
         EVT_THREAD
