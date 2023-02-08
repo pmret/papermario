@@ -9,6 +9,4 @@ ApiStatus func_802A10E4_785C04(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifndef SHIFT
-static BSS u8 bss_padding[0x3CC0];
-#endif
+MATCHING_BSS(0x3CC0);

@@ -2624,7 +2624,7 @@ segments:
     name: world_partner_goombario
     start: 0x317020
     vram: 0x802BD100
-    follows_vram_symbol: entity_data_vram_end
+    #follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x317020, c, goombario]
     - [0x317B60]
@@ -2633,7 +2633,7 @@ segments:
     name: world_partner_bombette
     start: 0x317E50
     vram: 0x802BD100
-    follows_vram_symbol: entity_data_vram_end
+    #follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x317E50, c, bombette]
     - [0x3195D0]
@@ -2642,7 +2642,7 @@ segments:
     name: world_partner_parakarry
     start: 0x319670
     vram: 0x802BD100
-    follows_vram_symbol: entity_data_vram_end
+    #follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x319670, c, parakarry]
     - [0x31B000]
@@ -2651,7 +2651,7 @@ segments:
     name: world_partner_kooper
     start: 0x31B120
     vram: 0x802BD100
-    follows_vram_symbol: entity_data_vram_end
+    #follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x31B120, c, kooper]
     - [0x31CB60]
@@ -2660,7 +2660,7 @@ segments:
     name: world_partner_watt
     start: 0x31CC70
     vram: 0x802BD100
-    follows_vram_symbol: entity_data_vram_end
+    #follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x31CC70, c, watt]
     - [0x31DDC0]
@@ -2669,7 +2669,7 @@ segments:
     name: world_partner_sushie
     start: 0x31DE70
     vram: 0x802BD100
-    follows_vram_symbol: entity_data_vram_end
+    #follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x31DE70, c, sushie]
     - [0x320B20]
@@ -2678,7 +2678,7 @@ segments:
     name: world_partner_lakilester
     start: 0x320C50
     vram: 0x802BD100
-    follows_vram_symbol: entity_data_vram_end
+    #follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x320C50, c, lakilester]
     - [0x3239B0]
@@ -2687,7 +2687,7 @@ segments:
     name: world_partner_bow
     start: 0x323A50
     vram: 0x802BD100
-    follows_vram_symbol: entity_data_vram_end
+    #follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x323A50, c, bow]
     - [0x324930]
@@ -2696,7 +2696,7 @@ segments:
     name: world_partner_goompa
     start: 0x324A10
     vram: 0x802BD100
-    follows_vram_symbol: entity_data_vram_end
+    #follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x324A10, c, goompa]
     - [0x324E80]
@@ -2705,7 +2705,7 @@ segments:
     name: world_partner_goombaria
     start: 0x324F10
     vram: 0x802BD100
-    follows_vram_symbol: entity_data_vram_end
+    #follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x324F10, c, goombaria]
     - [0x325000]
@@ -2714,7 +2714,7 @@ segments:
     name: world_partner_twink
     start: 0x325070
     vram: 0x802BD100
-    follows_vram_symbol: entity_data_vram_end
+    #follows_vram_symbol: entity_data_vram_end
     subsegments:
     - [0x325070, c, twink]
     - [0x325160]
@@ -15525,7 +15525,7 @@ segments:
     dir: world/action
     start: 0xE23260
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE23260, c, idle]
     - [0xE23690]
@@ -15534,7 +15534,7 @@ segments:
     dir: world/action
     start: 0xE236E0
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE236E0, c, walk]
     - [0xE23FF0]
@@ -15543,7 +15543,7 @@ segments:
     dir: world/action
     start: 0xE24040
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE24040, c, jump]
   - type: code
@@ -15551,7 +15551,7 @@ segments:
     dir: world/action
     start: 0xE245D0
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE245D0, c, step_up]
     - [0xE248D0]
@@ -15560,7 +15560,7 @@ segments:
     dir: world/action
     start: 0xE24920
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE24920, c, land]
   - type: code
@@ -15568,7 +15568,7 @@ segments:
     dir: world/action
     start: 0xE24ED0
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE24ED0, c, hammer]
     - [0xE25C80]
@@ -15577,7 +15577,7 @@ segments:
     dir: world/action
     start: 0xE25D60
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE25D60, c, spin]
     - [0xE26700]
@@ -15586,7 +15586,7 @@ segments:
     dir: world/action
     start: 0xE26710
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE26710, c, tornado_jump]
     - [0xE26DA0]
@@ -15595,7 +15595,7 @@ segments:
     dir: world/action
     start: 0xE26DE0
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE26DE0, c, spin_jump]
     - [0xE274C0]
@@ -15604,7 +15604,7 @@ segments:
     dir: world/action
     start: 0xE27510
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE27510, c, slide]
     - [0xE27C50]
@@ -15613,7 +15613,7 @@ segments:
     dir: world/action
     start: 0xE27C90
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE27C90, c, hit_fire]
   - type: code
@@ -15621,7 +15621,7 @@ segments:
     dir: world/action
     start: 0xE27F40
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE27F40, c, hit_lava]
     - [0xE28790]
@@ -15630,7 +15630,7 @@ segments:
     dir: world/action
     start: 0xE287F0
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE287F0, c, knockback]
   - type: code
@@ -15638,7 +15638,7 @@ segments:
     dir: world/action
     start: 0xE28A30
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE28A30, c, misc]
     - [0xE29190]
@@ -15647,7 +15647,7 @@ segments:
     dir: world/action
     start: 0xE291A0
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE291A0, c, use_munchlesia]
     - [0xE29450]
@@ -15656,7 +15656,7 @@ segments:
     dir: world/action
     start: 0xE29470
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE29470, c, use_spinning_flower]
     - [0xE2A300]
@@ -15665,7 +15665,7 @@ segments:
     dir: world/action
     start: 0xE2A340
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE2A340, c, use_tweester]
     - [0xE2A690]
@@ -15674,7 +15674,7 @@ segments:
     dir: world/action
     start: 0xE2A6B0
     vram: 0x802B6000
-    vram_follows: texture_memory
+    follows_vram: texture_memory
     subsegments:
     - [0xE2A6B0, c, sneaky_parasol]
     - [0xE2B430]

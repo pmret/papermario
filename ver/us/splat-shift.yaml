@@ -1,2 +1,2 @@
 options:
-  ld_use_follows: False
+  ld_use_follows: True

@@ -204,6 +204,4 @@ EvtScript EVS_World_UseItem = {
     EVT_END
 };
 
-#ifndef SHIFT
-static BSS u8 bss_padding[0x2700];
-#endif
+MATCHING_BSS(0x2700);

@@ -3581,6 +3581,4 @@ Mtx N(D_80253960_C111E0) = {{
 
 #include "smash_bridges_anim.inc.c"
 
-#ifndef SHIFT
-static BSS u8 bss_padding[0x4930];
-#endif
+MATCHING_BSS(0x4930);

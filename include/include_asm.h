@@ -19,7 +19,6 @@
         "\t.end\t"#NAME \
     );
 #define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...) INCLUDE_ASM_INTERNAL(TYPE, "nonmatchings", FOLDER, NAME, ARGS)
-#define INCLUDE_ASM_SHIFT(TYPE, FOLDER, NAME, ARGS...) INCLUDE_ASM_INTERNAL(TYPE, "shiftable", FOLDER, NAME, ARGS)
 #endif
 __asm__(".include \"include/macro.inc\"\n");
 #else

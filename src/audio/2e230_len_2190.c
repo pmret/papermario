@@ -20,7 +20,6 @@ void func_80052E30(u8 index) {
     voice->priority = AU_PRIORITY_FREE;
 }
 
-#ifndef SHIFT
 void au_engine_init(s32 outputRate) {
     AuGlobals* globals;
     ALHeap* alHeap;
@@ -144,9 +143,6 @@ void au_engine_init(s32 outputRate) {
     au_delay_channel(0);
     func_80055050(alHeap);
 }
-#else
-INCLUDE_ASM_SHIFT(void, "audio/2e230_len_2190", au_engine_init);
-#endif
 
 static void au_reset_instrument(Instrument* instrument) {
     instrument->base = DummyInstrumentBase;

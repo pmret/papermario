@@ -1347,7 +1347,6 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->sizeScale = 1.0f;
 }
 
-#ifndef SHIFT
 void dma_load_msg(u32 msgID, void* dest) {
     u8* addr = (u8*) MSG_ROM_START + (msgID >> 14); // (msgID >> 16) * 4
     u8* offset[2]; // start, end
@@ -1360,10 +1359,6 @@ void dma_load_msg(u32 msgID, void* dest) {
     // Load the msg data
     dma_copy(MSG_ROM_START + offset[0], MSG_ROM_START + offset[1], dest);
 }
-#else
-void dma_load_msg(u32 msgID, void* dest);
-INCLUDE_ASM_SHIFT(void, "msg", dma_load_msg);
-#endif
 
 s8* load_message_to_buffer(s32 msgID) {
     s8* prevBufferPos;

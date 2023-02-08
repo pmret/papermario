@@ -1145,10 +1145,7 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMt
 s32 is_identity_fixed_mtx(Mtx* mtx);
 void build_custom_gfx(void);
 
-#ifndef SHIFT
-// This padding allows us to place some symbols into this overlay such that they get the proper memory address and are shiftable.
-static BSS u8 bss_padding[0x3A0];
-#endif
+MATCHING_BSS(0x3A0);
 
 void update_entities(void) {
     s32 i;

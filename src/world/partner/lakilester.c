@@ -1198,6 +1198,4 @@ EvtScript world_lakilester_while_riding = {
     EVT_END
 };
 
-#ifndef SHIFT
-static BSS u8 bss_padding[0xB0];
-#endif
+MATCHING_BSS(0xB0);

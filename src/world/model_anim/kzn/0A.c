@@ -1296,6 +1296,4 @@ AnimScript LavaPiranha_ModelScript_0A = {
     AS_END,
 };
 
-#ifndef SHIFT
-static BSS u8 bss_padding[0x8FB0];
-#endif
+MATCHING_BSS(0x8FB0);

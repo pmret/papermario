@@ -216,7 +216,6 @@ s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID) {
     return FALSE;
 }
 
-#ifndef SHIFT
 void* load_asset_by_name(const char* assetName, u32* decompressedSize) {
     AssetHeader firstHeader;
     AssetHeader* assetTableBuffer;
@@ -237,11 +236,7 @@ void* load_asset_by_name(const char* assetName, u32* decompressedSize) {
     heap_free(assetTableBuffer);
     return ret;
 }
-#else
-INCLUDE_ASM_SHIFT(void*, "world/world", load_asset_by_name);
-#endif
 
-#ifndef SHIFT
 s32 get_asset_offset(char* assetName, s32* compressedSize) {
     AssetHeader firstHeader;
     AssetHeader* assetTableBuffer;
@@ -260,9 +255,6 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
     heap_free(assetTableBuffer);
     return ret;
 }
-#else
-INCLUDE_ASM_SHIFT(s32, "world/world", get_asset_offset);
-#endif
 
 #define AREA(area, jp_name) { ARRAY_COUNT(area##_maps), area##_maps, "area_" #area, jp_name }
 

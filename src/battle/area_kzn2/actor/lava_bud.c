@@ -33,9 +33,7 @@ extern Formation N(formation_petit_piranha_2);
 
 static s32 N(unusedArray)[64];
 
-#ifndef SHIFT
-static BSS u8 bss_padding[0x8A0];
-#endif
+MATCHING_BSS(0x8A0);
 
 BSS u8 Vine3Base[0x2000];
 BSS u8 Vine2Base[0x3000];

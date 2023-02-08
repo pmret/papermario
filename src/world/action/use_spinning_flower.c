@@ -286,6 +286,4 @@ void action_update_use_spinning_flower(void) {
     }
 }
 
-#ifndef SHIFT
-static BSS u8 bss_padding[0x100];
-#endif
+MATCHING_BSS(0x100);

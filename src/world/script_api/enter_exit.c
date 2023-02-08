@@ -471,6 +471,4 @@ EvtScript BaseEnterDoor = {
 	EVT_END
 };
 
-#ifndef SHIFT
-static BSS u8 bss_padding[0x7AB0];
-#endif
+MATCHING_BSS(0x7AB0);
