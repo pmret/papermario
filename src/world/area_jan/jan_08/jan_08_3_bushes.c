@@ -6,7 +6,7 @@
 
 #include "world/common/todo/PullVineSub.inc.c"
 
-EvtScript N(EVS_UpdateSeparatingBushes) = {
+EvtScript N(EVS_MoveBush_Separate) = {
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o70, SOUND_209F, 0)
     EVT_SET(LVar0, MV_Unk_00)
     EVT_SET(LVar1, MV_Unk_01)
@@ -39,7 +39,7 @@ EvtScript N(EVS_UpdateSeparatingBushes) = {
 
 EvtScript N(EVS_Inspect_SeparateBushes) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o70, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(EVS_UpdateSeparatingBushes))
+    EVT_EXEC(N(EVS_MoveBush_Separate))
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(MakeLerp, 0, 45, 30, EASING_CUBIC_OUT)
     EVT_LOOP(0)

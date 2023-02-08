@@ -26,3 +26,5 @@ enum {
 };
 
 #define NAMESPACE jan_00
+
+extern EvtScript N(D_80245860_B25DA0);

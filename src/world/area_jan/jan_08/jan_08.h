@@ -9,12 +9,6 @@
 #include "mapfs/jan_08_shape.h"
 #include "mapfs/jan_08_hit.h"
 
-#include "sprite/npc/MBush.h"
-#include "sprite/npc/HeartPlant.h"
-#include "sprite/npc/HurtPlant.h"
-#include "sprite/npc/JungleGuy.h"
-#include "sprite/npc/YoshiKid.h"
-
 enum {
 	NPC_SpearGuy			= 0,
 	NPC_SpearGuy_Hitbox		= 1,

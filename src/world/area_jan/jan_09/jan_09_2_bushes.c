@@ -6,15 +6,15 @@
 
 #include "world/common/todo/PullVineSub.inc.c"
 
-EvtScript N(D_80243684_B69134) = {
+EvtScript N(EVS_MoveBush_RightShore) = {
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o84, SOUND_209F, 0)
-    EVT_SET(LVar0, MV_Unk_00)
-    EVT_SET(LVar1, MV_Unk_01)
+    EVT_SET(LVar0, MV_RightShoreBushOffsetL)
+    EVT_SET(LVar1, MV_RightShoreBushOffsetR)
     EVT_SET(LVar6, 0)
     EVT_SET(LVar7, 0)
     EVT_LOOP(60)
-        EVT_SETF(LVar2, MV_Unk_00)
-        EVT_SETF(LVar3, MV_Unk_01)
+        EVT_SETF(LVar2, MV_RightShoreBushOffsetL)
+        EVT_SETF(LVar3, MV_RightShoreBushOffsetR)
         EVT_SUBF(LVar2, LVar0)
         EVT_SUBF(LVar3, LVar1)
         EVT_SETF(LVar4, LVar2)
@@ -27,45 +27,45 @@ EvtScript N(D_80243684_B69134) = {
         EVT_ADDF(LVar7, LVar5)
         EVT_ADDF(LVar0, LVar6)
         EVT_ADDF(LVar1, LVar7)
-        EVT_CALL(TranslateModel, MODEL_o83, MV_Unk_00, 0, 0)
-        EVT_CALL(TranslateModel, MODEL_o84, MV_Unk_01, 0, 0)
-        EVT_CALL(N(PullVine_ShearBushModel), 95, LVar6)
-        EVT_CALL(N(PullVine_ShearBushModel), 97, LVar7)
+        EVT_CALL(TranslateModel, MODEL_o83, MV_RightShoreBushOffsetL, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o84, MV_RightShoreBushOffsetR, 0, 0)
+        EVT_CALL(N(PullVine_ShearBushModel), MODEL_o83, LVar6)
+        EVT_CALL(N(PullVine_ShearBushModel), MODEL_o84, LVar7)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_8024384C_B692FC) = {
+EvtScript N(EVS_MoveBush_CliffTop1) = {
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o82, SOUND_209F, 0)
-    EVT_SET(LVar0, MV_Unk_02)
+    EVT_SET(LVar0, MV_CliffTopBush1OffsetR)
     EVT_SET(LVar6, 0)
     EVT_LOOP(60)
-        EVT_SETF(LVar2, MV_Unk_02)
+        EVT_SETF(LVar2, MV_CliffTopBush1OffsetR)
         EVT_SUBF(LVar2, LVar0)
         EVT_SETF(LVar4, LVar2)
         EVT_MULF(LVar4, EVT_FLOAT(0.09375))
         EVT_MULF(LVar6, EVT_FLOAT(0.8))
         EVT_ADDF(LVar6, LVar4)
         EVT_ADDF(LVar0, LVar6)
-        EVT_CALL(TranslateModel, MODEL_o82, MV_Unk_02, 0, 0)
-        EVT_CALL(N(PullVine_ShearBushModel), 99, LVar6)
+        EVT_CALL(TranslateModel, MODEL_o82, MV_CliffTopBush1OffsetR, 0, 0)
+        EVT_CALL(N(PullVine_ShearBushModel), MODEL_o82, LVar6)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243954_B69404) = {
+EvtScript N(EVS_MoveBush_CliffTop2) = {
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o88, SOUND_209F, 0)
-    EVT_SET(LVar0, MV_Unk_03)
-    EVT_SET(LVar1, MV_Unk_04)
+    EVT_SET(LVar0, MV_CliffTopBush2OffsetL)
+    EVT_SET(LVar1, MV_CliffTopBush2OffsetR)
     EVT_SET(LVar6, 0)
     EVT_SET(LVar7, 0)
     EVT_LOOP(60)
-        EVT_SETF(LVar2, MV_Unk_03)
-        EVT_SETF(LVar3, MV_Unk_04)
+        EVT_SETF(LVar2, MV_CliffTopBush2OffsetL)
+        EVT_SETF(LVar3, MV_CliffTopBush2OffsetR)
         EVT_SUBF(LVar2, LVar0)
         EVT_SUBF(LVar3, LVar1)
         EVT_SETF(LVar4, LVar2)
@@ -78,26 +78,26 @@ EvtScript N(D_80243954_B69404) = {
         EVT_ADDF(LVar7, LVar5)
         EVT_ADDF(LVar0, LVar6)
         EVT_ADDF(LVar1, LVar7)
-        EVT_CALL(TranslateModel, MODEL_o88, MV_Unk_03, 0, 0)
-        EVT_CALL(TranslateModel, MODEL_o81, MV_Unk_04, 0, 0)
-        EVT_CALL(N(PullVine_ShearBushModel), 101, LVar6)
-        EVT_CALL(N(PullVine_ShearBushModel), 103, LVar7)
+        EVT_CALL(TranslateModel, MODEL_o88, MV_CliffTopBush2OffsetL, 0, 0)
+        EVT_CALL(TranslateModel, MODEL_o81, MV_CliffTopBush2OffsetR, 0, 0)
+        EVT_CALL(N(PullVine_ShearBushModel), MODEL_o88, LVar6)
+        EVT_CALL(N(PullVine_ShearBushModel), MODEL_o81, LVar7)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80243B1C_B695CC) = {
+EvtScript N(EVS_Inspect_MoveBush_RightShore) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o84, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(D_80243684_B69134))
+    EVT_EXEC(N(EVS_MoveBush_RightShore))
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(MakeLerp, 0, 45, 30, EASING_CUBIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_SETF(MV_Unk_01, LVar0)
-        EVT_SETF(MV_Unk_00, MV_Unk_01)
-        EVT_MULF(MV_Unk_00, -1)
+        EVT_SETF(MV_RightShoreBushOffsetR, LVar0)
+        EVT_SETF(MV_RightShoreBushOffsetL, MV_RightShoreBushOffsetR)
+        EVT_MULF(MV_RightShoreBushOffsetL, -1)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
@@ -108,14 +108,14 @@ EvtScript N(D_80243B1C_B695CC) = {
     EVT_END
 };
 
-EvtScript N(D_80243C08_B696B8) = {
+EvtScript N(EVS_Inspect_MoveBush_CliffTop1) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o82, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(D_8024384C_B692FC))
+    EVT_EXEC(N(EVS_MoveBush_CliffTop1))
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(MakeLerp, 0, 45, 30, EASING_CUBIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_SETF(MV_Unk_02, LVar0)
+        EVT_SETF(MV_CliffTopBush1OffsetR, LVar0)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
@@ -126,16 +126,16 @@ EvtScript N(D_80243C08_B696B8) = {
     EVT_END
 };
 
-EvtScript N(D_80243CD4_B69784) = {
+EvtScript N(EVS_Inspect_MoveBush_CliffTop2) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o88, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(D_80243954_B69404))
+    EVT_EXEC(N(EVS_MoveBush_CliffTop2))
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(MakeLerp, 0, 45, 30, EASING_CUBIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_SETF(MV_Unk_04, LVar0)
-        EVT_SETF(MV_Unk_03, MV_Unk_04)
-        EVT_MULF(MV_Unk_03, -1)
+        EVT_SETF(MV_CliffTopBush2OffsetR, LVar0)
+        EVT_SETF(MV_CliffTopBush2OffsetL, MV_CliffTopBush2OffsetR)
+        EVT_MULF(MV_CliffTopBush2OffsetL, -1)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
@@ -146,18 +146,18 @@ EvtScript N(D_80243CD4_B69784) = {
     EVT_END
 };
 
-EvtScript N(D_80243DC0_B69870) = {
+EvtScript N(EVS_ForceMoveCliffTopBushes) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o82, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o88, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(D_8024384C_B692FC))
-    EVT_EXEC(N(D_80243954_B69404))
+    EVT_EXEC(N(EVS_MoveBush_CliffTop1))
+    EVT_EXEC(N(EVS_MoveBush_CliffTop2))
     EVT_CALL(MakeLerp, 0, 45, 30, EASING_CUBIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_SETF(MV_Unk_02, LVar0)
-        EVT_SETF(MV_Unk_04, LVar0)
-        EVT_SETF(MV_Unk_03, MV_Unk_04)
-        EVT_MULF(MV_Unk_03, -1)
+        EVT_SETF(MV_CliffTopBush1OffsetR, LVar0)
+        EVT_SETF(MV_CliffTopBush2OffsetR, LVar0)
+        EVT_SETF(MV_CliffTopBush2OffsetL, MV_CliffTopBush2OffsetR)
+        EVT_MULF(MV_CliffTopBush2OffsetL, -1)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
@@ -188,23 +188,23 @@ EvtScript N(EVS_80243EC0) = {
 
 EvtScript N(D_80243FC4_B69A74) = {
     EVT_LABEL(10)
-    EVT_LABEL(0)
-    EVT_IF_EQ(MV_Unk_05, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_SET(LVar3, MV_Unk_05)
-    EVT_CALL(MakeLerp, 0, MV_Unk_05, 120, EASING_COS_IN_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_SET(MV_Unk_05, LVar3)
-        EVT_SUB(MV_Unk_05, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_GOTO(10)
+        EVT_LABEL(0)
+            EVT_IF_EQ(MV_Unk_05, 0)
+                EVT_WAIT(1)
+                EVT_GOTO(0)
+            EVT_END_IF
+        EVT_SET(LVar3, MV_Unk_05)
+        EVT_CALL(MakeLerp, 0, MV_Unk_05, 120, EASING_COS_IN_OUT)
+        EVT_LOOP(0)
+            EVT_CALL(UpdateLerp)
+            EVT_SET(MV_Unk_05, LVar3)
+            EVT_SUB(MV_Unk_05, LVar0)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVar1, 0)
+                EVT_BREAK_LOOP
+            EVT_END_IF
+        EVT_END_LOOP
+        EVT_GOTO(10)
     EVT_RETURN
     EVT_END
 };
@@ -523,11 +523,11 @@ SearchBushConfig N(SearchBush_Bush18) = {
 EvtScript N(EVS_SetupBushes) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, jan_09_ENTRY_3)
-        EVT_EXEC(N(D_80243DC0_B69870))
+        EVT_EXEC(N(EVS_ForceMoveCliffTopBushes))
     EVT_END_IF
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243B1C_B695CC)), TRIGGER_WALL_PRESS_A, COLLIDER_o84, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243C08_B696B8)), TRIGGER_WALL_PRESS_A, COLLIDER_o82, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80243CD4_B69784)), TRIGGER_WALL_PRESS_A, COLLIDER_o88, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Inspect_MoveBush_RightShore)), TRIGGER_WALL_PRESS_A, COLLIDER_o84, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Inspect_MoveBush_CliffTop1)), TRIGGER_WALL_PRESS_A, COLLIDER_o82, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Inspect_MoveBush_CliffTop2)), TRIGGER_WALL_PRESS_A, COLLIDER_o88, 1, 0)
     EVT_EXEC(N(D_80243FC4_B69A74))
     EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush1)))
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o78, 1, 0)

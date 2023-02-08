@@ -1,7 +1,7 @@
 #include "common.h"
 #include "model.h"
 
-ApiStatus N(PullVine_WaitForPlayerGrab)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(PullVine_WaitForPlayerGrab)) {
     Bytecode* args = script->ptrReadPos;
     f32 modelX, modelY, modelZ;
     f32 dx, dy, dz;
@@ -23,7 +23,7 @@ ApiStatus N(PullVine_WaitForPlayerGrab)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(PullVine_UpdatePosition)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(PullVine_UpdatePosition)) {
     Bytecode* args = script->ptrReadPos;
     f32 x1 = evt_get_float_variable(script, *args++);
     f32 x2 = evt_get_float_variable(script, *args++);
@@ -31,5 +31,3 @@ ApiStatus N(PullVine_UpdatePosition)(Evt* script, s32 isInitialCall) {
     evt_set_float_variable(script, *args++, (x2 - x1) / 10.0f);
     return ApiStatus_DONE2;
 }
-
-#include "world/common/todo/PullVineSub.inc.c"

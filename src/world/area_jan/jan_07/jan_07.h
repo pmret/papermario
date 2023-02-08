@@ -9,10 +9,6 @@
 #include "mapfs/jan_07_shape.h"
 #include "mapfs/jan_07_hit.h"
 
-#include "sprite/npc/YoshiKid.h"
-#include "sprite/npc/LargePiranha.h"
-#include "sprite/npc/JungleGuy.h"
-
 enum {
 	NPC_YoshiKid                = 0,
 	NPC_PutridPiranha_01        = 1,

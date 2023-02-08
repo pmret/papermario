@@ -12292,7 +12292,6 @@ segments:
     type: code
     start: 0xB5E2B0
     vram: 0x80240000
-    subalign: 0x10
     subsegments:
     - [0xB5E2B0, c, jan_08_0_header]
     - [0xB5E2B0, c, jan_08_1_music]
@@ -12321,17 +12320,15 @@ segments:
     start: 0xB6C390
     vram: 0x80240000
     subsegments:
-    - [0xB6C390, c]
-    - [0xB6C6A0, c]
-    - [0xB6D4C0, c]
-    - [0xB6D610, c]
-    - [0xB6D890, c]
-    - [0xB6DAD0, data]
-    - [0xB6DB60, data]
-    - [0xB6F1D0, data]
-    - [0xB6FC50, data]
-    - [0xB707C0, data]
-    - [0xB70800]
+    - [0xB6C390, c, jan_10_0_header]
+    - [0xB6C390, c, jan_10_1_music]
+    - [0xB6C390, c, jan_10_2_main]
+    - [0xB6C6A0, c, jan_10_3_npc]
+    - [0xB6D4C0, c, jan_10_4_log]
+    - [0xB6D610, c, jan_10_5_trees]
+    - [0xB6D890, c, jan_10_6_bushes]
+    - [0xB6DAD0, c, jan_10_7_entity]
+    - [0xB6DAD0]
   - name: jan_11
     dir: world/area_jan/jan_11
     type: code
@@ -12349,24 +12346,25 @@ segments:
     start: 0xB730B0
     vram: 0x80240000
     subsegments:
-    - [0xB730B0, c]
-    - [0xB73570, c]
-    - [0xB74310, data]
-    - [0xB75250, data]
-    - [0xB75D30, data]
-    - [0xB76450]
+    - [0xB730B0, c, jan_12_0_header]
+    - [0xB730B0, c, jan_12_1_main]
+    - [0xB730B0, c, jan_12_2_vines]
+    - [0xB73330, c, jan_12_3_trees]
+    - [0xB73570, c, jan_12_4_entity]
+    - [0xB73570, c, jan_12_5_npc]
+    - [0xB74310]
   - name: jan_13
     dir: world/area_jan/jan_13
     type: code
     start: 0xB767B0
     vram: 0x80240000
     subsegments:
-    - [0xB767B0, c]
-    - [0xB76D80, data]
-    - [0xB77000, data]
-    - [0xB794C0, data]
-    - [0xB79FA0, data]
-    - [0xB7A020]
+    - [0xB767B0, c, jan_13_0_header]
+    - [0xB767B0, c, jan_13_1_main]
+    - [0xB767B0, c, jan_13_2_puzzle]
+    - [0xB76B40, c, jan_13_3_trees]
+    - [0xB76D80, c, jan_13_4_entity]
+    - [0xB76D80]
   - name: jan_14
     dir: world/area_jan/jan_14
     type: code

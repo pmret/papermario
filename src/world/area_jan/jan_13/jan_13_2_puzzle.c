@@ -1,0 +1,662 @@
+#include "jan_13.h"
+#include "effects.h"
+
+u16 N(D_80240850_B77000) = 0;
+
+void N(func_80240000_B767B0)(void) {
+    f64 temp_f20 = ((sin_rad((f32) N(D_80240850_B77000) * 0.02) + 1.0f) * 0.3) + 0.6;
+    f64 temp_f21 = (sin_rad((f32) N(D_80240850_B77000) * 0.1) + 1.0f) * 0.1;
+    f32 scale = temp_f20 + temp_f21;
+
+    guScale(&gDisplayContext->matrixStack[gMatrixListPos], (scale * 0.3) + 0.5, scale, (scale * 0.3) + 0.5);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    N(D_80240850_B77000)++;
+}
+
+API_CALLABLE(N(func_802401AC_B7695C)) {
+    script->varTable[2] = EVT_FLOAT_TO_FIXED(script->varTable[1] / 100.0f);
+    script->varTable[3] = EVT_FLOAT_TO_FIXED(script->varTable[1] / 100.0f);
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(func_80240214_B769C4)) {
+    Bytecode* args = script->ptrReadPos;
+
+    if (*args++ != 0) {
+        script->functionTemp[0] = evt_get_variable(script, *args++);
+        script->functionTemp[1] = evt_get_variable(script, *args++);
+        script->functionTemp[2] = evt_get_variable(script, *args++);
+        sfx_adjust_env_sound_pos(SOUND_4E, SOUND_SPACE_MODE_0, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
+    }
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(func_802402B8_B76A68)) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 vt0 = script->varTable[0];
+    s32 vt2 = script->varTable[2];
+
+    if (script->varTable[1] >= -99) {
+        f32 theta = (playerStatus->targetYaw / 180.0f) * 3.141592f;
+
+        vt0 -= (s32) (sin_rad(theta) * 25.0f);
+        vt2 -= (s32) (-cos_rad(theta) * 25.0f);
+    } else {
+        vt2 += 25;
+    }
+    script->varTable[0] = vt0;
+    script->varTable[2] = vt2;
+    return ApiStatus_DONE2;
+}
+
+EvtScript N(EVS_SetupGeyser) = {
+    EVT_SET(LVarA, LVar0) // rock model
+    EVT_SET(LVarB, LVar1) // index in solution
+    EVT_SET(LVarD, LVar2) // central collider
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 0)
+    EVT_LOOP(0)
+        EVT_IF_EQ(LVarB, MV_PuzzleProgress)
+            EVT_ADD(LVar0, 10)
+        EVT_ELSE
+            EVT_ADD(LVar0, -10)
+        EVT_END_IF
+        EVT_IF_LT(LVar0, -10)
+            EVT_SET(LVar0, -10)
+        EVT_END_IF
+        EVT_IF_GT(LVar0, 10)
+            EVT_SET(LVar0, 10)
+        EVT_END_IF
+        EVT_ADD(LVar1, LVar0)
+        EVT_IF_LT(LVar1, 0)
+            EVT_SET(LVar1, 0)
+        EVT_END_IF
+        EVT_IF_GT(LVar1, 100)
+            EVT_SET(LVar1, 100)
+        EVT_END_IF
+        EVT_CALL(N(func_802401AC_B7695C))
+        EVT_IF_EQ(LVar1, 0)
+            EVT_IF_NE(LVarD, 0)
+            EVT_END_IF
+            EVT_CALL(EnableModel, LVarA, FALSE)
+        EVT_ELSE
+            EVT_IF_NE(LVarD, 0)
+            EVT_END_IF
+            EVT_CALL(EnableModel, LVarA, TRUE)
+            EVT_CALL(ScaleModel, LVarA, LVar3, LVar2, LVar3)
+        EVT_END_IF
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(D_80240A64_B77214) = {
+    EVT_CALL(N(func_802401AC_B7695C))
+    EVT_IF_LT(LVar3, EVT_FLOAT(1.0))
+        EVT_SETF(LVar4, LVar3)
+    EVT_ELSE
+        EVT_SETF(LVar4, EVT_FLOAT(1.0))
+    EVT_END_IF
+    EVT_CALL(ScaleModel, LVarA, LVar4, LVar2, LVar3)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(D_80240ADC_B7728C) = {
+    EVT_SET(LVarA, LVar0)
+    EVT_SET(LVarB, LVar1)
+    EVT_SET(LVarD, LVar2)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 0)
+    EVT_IF_EQ(GF_JAN13_SolvedBlockPuzzle, TRUE)
+        EVT_GOTO(10)
+    EVT_END_IF
+    EVT_LOOP(0)
+        EVT_IF_EQ(MV_PuzzleProgress, 5)
+            EVT_IF_EQ(AB_JAN_2, 1)
+                EVT_ADD(LVar0, 10)
+            EVT_ELSE
+                EVT_ADD(LVar0, -10)
+            EVT_END_IF
+        EVT_ELSE
+            EVT_ADD(LVar0, -10)
+        EVT_END_IF
+        EVT_IF_LT(LVar0, -10)
+            EVT_SET(LVar0, -10)
+        EVT_END_IF
+        EVT_IF_GT(LVar0, 10)
+            EVT_SET(LVar0, 10)
+        EVT_END_IF
+        EVT_ADD(LVar1, LVar0)
+        EVT_IF_LT(LVar1, 50)
+            EVT_SET(LVar1, 50)
+        EVT_END_IF
+        EVT_IF_GT(LVar1, 70)
+            EVT_SET(LVar1, 70)
+        EVT_END_IF
+        EVT_IF_EQ(LVar1, 0)
+            EVT_CALL(EnableModel, LVarA, FALSE)
+            EVT_WAIT(1)
+        EVT_ELSE
+            EVT_CALL(EnableModel, LVarA, TRUE)
+            EVT_EXEC_WAIT(N(D_80240A64_B77214))
+        EVT_END_IF
+        EVT_IF_EQ(AB_JAN_2, 2)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+    EVT_END_LOOP
+    EVT_SET(LVar0, 10)
+    EVT_LOOP(0)
+        EVT_IF_EQ(MV_PuzzleProgress, 5)
+            EVT_ADD(LVar1, LVar0)
+            EVT_IF_GT(LVar1, 300)
+                EVT_SET(LVar1, 300)
+            EVT_END_IF
+            EVT_EXEC_WAIT(N(D_80240A64_B77214))
+        EVT_ELSE
+            EVT_WAIT(1)
+        EVT_END_IF
+        EVT_IF_NE(GF_JAN13_SolvedBlockPuzzle, FALSE)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+    EVT_END_LOOP
+    EVT_SET(LVar0, -7)
+    EVT_LOOP(28)
+        EVT_ADD(LVar1, LVar0)
+        EVT_EXEC_WAIT(N(D_80240A64_B77214))
+    EVT_END_LOOP
+    EVT_LABEL(10)
+    EVT_IF_EQ(MV_PuzzleProgress, 5)
+        EVT_ADD(LVar0, 10)
+    EVT_ELSE
+        EVT_ADD(LVar0, -10)
+    EVT_END_IF
+    EVT_IF_LT(LVar0, -10)
+        EVT_SET(LVar0, -10)
+    EVT_END_IF
+    EVT_IF_GT(LVar0, 10)
+        EVT_SET(LVar0, 10)
+    EVT_END_IF
+    EVT_ADD(LVar1, LVar0)
+    EVT_IF_LT(LVar1, 0)
+        EVT_SET(LVar1, 0)
+    EVT_END_IF
+    EVT_IF_GT(LVar1, 100)
+        EVT_SET(LVar1, 100)
+    EVT_END_IF
+    EVT_IF_EQ(LVar1, 0)
+        EVT_CALL(EnableModel, LVarA, FALSE)
+        EVT_WAIT(1)
+    EVT_ELSE
+        EVT_CALL(EnableModel, LVarA, TRUE)
+        EVT_EXEC_WAIT(N(D_80240A64_B77214))
+    EVT_END_IF
+    EVT_GOTO(10)
+    EVT_RETURN
+    EVT_END
+};
+
+Vec3i N(D_80240F70_B77720)[] = {
+    {  312, 0,   12 },
+    {  237, 0,  -38 },
+    {  137, 0,   62 },
+    { -288, 0,  -38 },
+    {  -38, 0,   12 },
+    {   37, 0, -138 }, 
+};
+
+EvtScript N(D_80240FB8_B77768) = {
+    EVT_IF_NE(AB_JAN_3, MV_PuzzleProgress)
+        EVT_SET(AB_JAN_3, MV_PuzzleProgress)
+        EVT_SET(MF_Unk_0A, FALSE)
+        EVT_CALL(StopSound, SOUND_8000001C)
+        EVT_CALL(StopSound, SOUND_8000001D)
+        EVT_IF_EQ(MV_PuzzleProgress, 5)
+            EVT_IF_EQ(GF_JAN13_SolvedBlockPuzzle, FALSE)
+                EVT_RETURN
+            EVT_END_IF
+        EVT_ELSE
+            EVT_IF_EQ(MV_PuzzleProgress, 6)
+                EVT_RETURN
+            EVT_END_IF
+        EVT_END_IF
+        EVT_CALL(PlaySound, SOUND_8000001C)
+        EVT_SET(MF_Unk_0A, TRUE)
+        EVT_SET(LVar0, MV_PuzzleProgress)
+        EVT_ADD(LVar0, 1)
+        EVT_USE_BUF(EVT_PTR(N(D_80240F70_B77720)))
+        EVT_LOOP(LVar0)
+            EVT_BUF_READ3(LVar1, LVar2, LVar3)
+        EVT_END_LOOP
+        EVT_CALL(N(func_80240214_B769C4), MF_Unk_0A, LVar1, LVar2, LVar3)
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_BoulderTremble) = {
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o33, SOUND_191, 0)
+    EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.5))
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_ManagePuzzle) = {
+    EVT_SET(LocalFlag(0), FALSE)
+    EVT_SET(AB_JAN_2, 0)
+    EVT_SET(AB_JAN_3, -1)
+    EVT_EXEC(N(D_80240FB8_B77768))
+    EVT_LABEL(0)
+        EVT_IF_EQ(GF_JAN13_SolvedBlockPuzzle, TRUE)
+            EVT_IF_EQ(LocalFlag(0), FALSE)
+                EVT_CALL(EnableModel, MODEL_o33, FALSE)
+                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o33, COLLIDER_FLAGS_UPPER_MASK)
+                EVT_CALL(SetPushBlock, 0, 15, 0, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 16, 0, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 17, 0, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 18, 0, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 19, 0, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 15, 1, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 16, 1, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 17, 1, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 18, 1, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 19, 1, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 15, 2, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 16, 2, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 17, 2, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 18, 2, PUSH_GRID_EMPTY)
+                EVT_CALL(SetPushBlock, 0, 19, 2, PUSH_GRID_EMPTY)
+                EVT_SET(LocalFlag(0), TRUE)
+            EVT_END_IF
+        EVT_END_IF
+        EVT_CALL(GetPushBlock, 0, 28, 6, LVar0)
+        EVT_IF_EQ(LVar0, 0)
+            EVT_SET(MV_PuzzleProgress, 0)
+            EVT_GOTO(1)
+        EVT_END_IF
+        EVT_CALL(GetPushBlock, 0, 25, 4, LVar0)
+        EVT_IF_EQ(LVar0, 0)
+            EVT_SET(MV_PuzzleProgress, 1)
+            EVT_GOTO(1)
+        EVT_END_IF
+        EVT_CALL(GetPushBlock, 0, 21, 8, LVar0)
+        EVT_IF_EQ(LVar0, 0)
+            EVT_SET(MV_PuzzleProgress, 2)
+            EVT_GOTO(1)
+        EVT_END_IF
+        EVT_CALL(GetPushBlock, 0, 4, 4, LVar0)
+        EVT_IF_EQ(LVar0, 0)
+            EVT_SET(MV_PuzzleProgress, 3)
+            EVT_GOTO(1)
+        EVT_END_IF
+        EVT_CALL(GetPushBlock, 0, 14, 6, LVar0)
+        EVT_IF_EQ(LVar0, 0)
+            EVT_SET(MV_PuzzleProgress, 4)
+            EVT_GOTO(1)
+        EVT_END_IF
+        EVT_IF_EQ(GF_JAN13_SolvedBlockPuzzle, FALSE)
+            EVT_CALL(DisablePlayerInput, TRUE)
+            EVT_CALL(SetPushBlock, 0, 15, 0, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 16, 0, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 17, 0, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 18, 0, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 19, 0, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 15, 1, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 16, 1, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 17, 1, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 18, 1, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 19, 1, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 15, 2, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 16, 2, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 17, 2, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 18, 2, PUSH_GRID_EMPTY)
+            EVT_CALL(SetPushBlock, 0, 19, 2, PUSH_GRID_EMPTY)
+            EVT_SET(MV_PuzzleProgress, 5)
+            EVT_WAIT(30)
+            EVT_LOOP(2)
+                EVT_EXEC(N(EVS_BoulderTremble))
+                EVT_CALL(RotateModel, MODEL_o33, 3, 0, EVT_FLOAT(0.2), 1)
+                EVT_WAIT(8)
+                EVT_CALL(RotateModel, MODEL_o33, -3, 0, EVT_FLOAT(0.2), 1)
+                EVT_WAIT(8)
+            EVT_END_LOOP
+            EVT_THREAD
+                EVT_CALL(PlaySoundAtPlayer, SOUND_262, 0)
+                EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)
+                EVT_CALL(GetModelCenter, MODEL_o33)
+                EVT_CALL(FacePlayerTowardPoint, LVar0, LVar2, 4)
+                EVT_CALL(GetPlayerPos, LVar3, LVar1, LVar2)
+                EVT_SET(LVar4, LVar0)
+                EVT_SET(LVar5, LVar0)
+                EVT_SUB(LVar4, 120)
+                EVT_ADD(LVar5, 120)
+                EVT_SWITCH(LVar3)
+                    EVT_CASE_RANGE(LVar4, LVar5)
+                        EVT_ADD(LVar0, LVar3)
+                        EVT_DIV(LVar0, 2)
+                EVT_END_SWITCH
+                EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+                EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+                EVT_CALL(SetCamDistance, CAM_DEFAULT, 400)
+                EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
+                EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
+            EVT_END_THREAD
+            EVT_LOOP(3)
+                EVT_EXEC(N(EVS_BoulderTremble))
+                EVT_CALL(RotateModel, MODEL_o33, 5, 0, EVT_FLOAT(0.2), 1)
+                EVT_WAIT(5)
+                EVT_CALL(RotateModel, MODEL_o33, -5, 0, EVT_FLOAT(0.2), 1)
+                EVT_WAIT(5)
+            EVT_END_LOOP
+            EVT_LOOP(7)
+                EVT_EXEC(N(EVS_BoulderTremble))
+                EVT_CALL(RotateModel, MODEL_o33, 7, 0, EVT_FLOAT(0.2), 1)
+                EVT_WAIT(3)
+                EVT_CALL(RotateModel, MODEL_o33, -7, 0, EVT_FLOAT(0.2), 1)
+                EVT_WAIT(3)
+            EVT_END_LOOP
+            EVT_LOOP(8)
+                EVT_CALL(RandInt, 2, LVar0)
+                EVT_SWITCH(LVar0)
+                    EVT_CASE_EQ(0)
+                        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 8, 0, -82, 0)
+                    EVT_CASE_EQ(1)
+                        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 38, 0, -62, 0)
+                    EVT_CASE_EQ(2)
+                        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 78, 0, -77, 0)
+                EVT_END_SWITCH
+                EVT_EXEC(N(EVS_BoulderTremble))
+                EVT_CALL(RotateModel, MODEL_o33, 10, 0, EVT_FLOAT(0.2), 1)
+                EVT_WAIT(3)
+                EVT_CALL(RotateModel, MODEL_o33, -10, 0, EVT_FLOAT(0.2), 1)
+                EVT_WAIT(3)
+            EVT_END_LOOP
+            EVT_THREAD
+                EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(0.4))
+            EVT_END_THREAD
+            EVT_CALL(PlaySoundAt, SOUND_8000001D, 0, 37, 0, -138)
+            EVT_SET(AB_JAN_2, 1)
+            EVT_THREAD
+                EVT_LOOP(200)
+                    EVT_CALL(RotateModel, MODEL_o33, 10, 0, EVT_FLOAT(0.2), 1)
+                    EVT_WAIT(3)
+                    EVT_CALL(RotateModel, MODEL_o33, -10, 0, EVT_FLOAT(0.2), 1)
+                    EVT_WAIT(3)
+                EVT_END_LOOP
+            EVT_END_THREAD
+            EVT_SET(LVar0, 0)
+            EVT_LOOP(18)
+                EVT_ADD(LVar0, 3)
+                EVT_CALL(TranslateModel, MODEL_o33, 0, LVar0, 0)
+                EVT_WAIT(1)
+            EVT_END_LOOP
+            EVT_LOOP(60)
+                EVT_CALL(TranslateModel, MODEL_o33, 0, LVar0, 0)
+                EVT_WAIT(1)
+            EVT_END_LOOP
+            EVT_SET(AB_JAN_2, 2)
+            EVT_LOOP(25)
+                EVT_ADD(LVar0, 8)
+                EVT_CALL(TranslateModel, MODEL_o33, 0, LVar0, 0)
+                EVT_WAIT(1)
+            EVT_END_LOOP
+            EVT_SET(LVar0, 200)
+            EVT_SET(LVar1, 0)
+            EVT_SET(LVar2, 0)
+            EVT_LOOP(60)
+                EVT_ADD(LVar1, 1)
+                EVT_SUB(LVar0, LVar1)
+                EVT_ADD(LVar2, 10)
+                EVT_ADD(LVar2, -10)
+                EVT_CALL(TranslateModel, MODEL_o33, -200, LVar0, -500)
+                EVT_CALL(RotateModel, MODEL_o33, LVar2, -1, EVT_FLOAT(0.1), EVT_FLOAT(0.1))
+                EVT_WAIT(1)
+            EVT_END_LOOP
+            EVT_CALL(EnableModel, MODEL_o33, FALSE)
+            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o33, COLLIDER_FLAGS_UPPER_MASK)
+            EVT_SET(GF_JAN13_SolvedBlockPuzzle, TRUE)
+            EVT_SET(LocalFlag(0), TRUE)
+            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
+            EVT_CALL(DisablePlayerInput, FALSE)
+        EVT_ELSE
+            EVT_CALL(GetPushBlock, 0, 17, 0, LVar0)
+            EVT_IF_EQ(LVar0, 0)
+                EVT_SET(MV_PuzzleProgress, 5)
+                EVT_GOTO(1)
+            EVT_END_IF
+        EVT_END_IF
+        EVT_SET(MV_PuzzleProgress, 6)
+        EVT_LABEL(1)
+        EVT_EXEC(N(D_80240FB8_B77768))
+        EVT_WAIT(1)
+        EVT_GOTO(0)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(D_80241F5C_B7870C) = {
+    EVT_LOOP(0)
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_CALL(GetGridIndexFromPos, 0, LVar0, LVar1, LVar2, LVar3, LVar4)
+        EVT_SET(LVar5, 0)
+        EVT_IF_EQ(MV_PuzzleProgress, 0)
+            EVT_IF_EQ(LVar3, 28)
+                EVT_IF_EQ(LVar4, 6)
+                    EVT_SET(LVar5, 1)
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+        EVT_IF_EQ(MV_PuzzleProgress, 1)
+            EVT_IF_EQ(LVar3, 25)
+                EVT_IF_EQ(LVar4, 4)
+                    EVT_SET(LVar5, 1)
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+        EVT_IF_EQ(MV_PuzzleProgress, 2)
+            EVT_IF_EQ(LVar3, 21)
+                EVT_IF_EQ(LVar4, 8)
+                    EVT_SET(LVar5, 1)
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+        EVT_IF_EQ(MV_PuzzleProgress, 3)
+            EVT_IF_EQ(LVar3, 4)
+                EVT_IF_EQ(LVar4, 4)
+                    EVT_SET(LVar5, 1)
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+        EVT_IF_EQ(MV_PuzzleProgress, 4)
+            EVT_IF_EQ(LVar3, 14)
+                EVT_IF_EQ(LVar4, 6)
+                    EVT_SET(LVar5, 1)
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+        EVT_IF_EQ(MV_PuzzleProgress, 5)
+            EVT_IF_EQ(LVar3, 17)
+                EVT_IF_EQ(LVar4, 0)
+                    EVT_SET(LVar5, 1)
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+        EVT_IF_EQ(MV_PuzzleProgress, 5)
+            EVT_IF_EQ(LVar3, 16)
+                EVT_IF_EQ(LVar4, 0)
+                    EVT_SET(LVar5, 1)
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+        EVT_IF_EQ(MV_PuzzleProgress, 5)
+            EVT_IF_EQ(LVar3, 18)
+                EVT_IF_EQ(LVar4, 0)
+                    EVT_SET(LVar5, 1)
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+        EVT_IF_EQ(MV_PuzzleProgress, 5)
+            EVT_IF_EQ(LVar3, 19)
+                EVT_IF_EQ(LVar4, 0)
+                    EVT_SET(LVar5, 1)
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+        EVT_IF_EQ(LVar5, 1)
+            EVT_CALL(DisablePlayerInput, TRUE)
+            EVT_CALL(N(func_802402B8_B76A68))
+            EVT_CALL(InterruptUsePartner)
+            EVT_LOOP(10)
+                EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
+                EVT_IF_LT(LVar4, 40)
+                    EVT_ADDF(LVar4, 6)
+                EVT_END_IF
+                EVT_MULF(LVar3, 10)
+                EVT_MULF(LVar5, 10)
+                EVT_ADDF(LVar3, LVar0)
+                EVT_ADDF(LVar5, LVar2)
+                EVT_DIVF(LVar3, 11)
+                EVT_DIVF(LVar5, 11)
+                EVT_CALL(SetPlayerPos, LVar3, LVar4, LVar5)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002E)
+                EVT_WAIT(1)
+            EVT_END_LOOP
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+            EVT_CALL(DisablePlayerInput, FALSE)
+        EVT_END_IF
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_SetupPuzzle) = {
+    EVT_CALL(CreatePushBlockGrid, 0, 32, 12, -400, 0, -150, 0)
+    EVT_CALL(SetPushBlock, 0,  7, 5, PUSH_GRID_BLOCK)
+    EVT_CALL(SetPushBlock, 0, 13, 9, PUSH_GRID_BLOCK)
+    EVT_CALL(SetPushBlock, 0, 16, 5, PUSH_GRID_BLOCK)
+    EVT_CALL(SetPushBlock, 0, 21, 2, PUSH_GRID_BLOCK)
+    EVT_CALL(SetPushBlock, 0, 22, 4, PUSH_GRID_BLOCK)
+    EVT_CALL(SetPushBlock, 0, 26, 6, PUSH_GRID_BLOCK)
+    EVT_CALL(SetPushBlock, 0, 27, 7, PUSH_GRID_BLOCK)
+    EVT_CALL(SetPushBlock, 0, 15, 0, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 16, 0, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 17, 0, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 18, 0, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 19, 0, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 15, 1, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 16, 1, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 17, 1, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 18, 1, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 19, 1, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 15, 2, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 16, 2, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 17, 2, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 18, 2, PUSH_GRID_OBSTRUCTION)
+    EVT_CALL(SetPushBlock, 0, 19, 2, PUSH_GRID_OBSTRUCTION)
+    // obstruct row 0
+    EVT_SET(LVar0, 0)
+    EVT_LOOP(32)
+        EVT_CALL(SetPushBlock, 0, LVar0, 0, PUSH_GRID_OBSTRUCTION)
+        EVT_ADD(LVar0, 1)
+    EVT_END_LOOP
+    // obstruct row 1 from 0 to 15
+    EVT_SET(LVar0, 0)
+    EVT_LOOP(15)
+        EVT_CALL(SetPushBlock, 0, LVar0, 1, PUSH_GRID_OBSTRUCTION)
+        EVT_ADD(LVar0, 1)
+    EVT_END_LOOP
+    // obstruct row 1 from 0 to 32
+    EVT_SET(LVar0, 20)
+    EVT_LOOP(12)
+        EVT_CALL(SetPushBlock, 0, LVar0, 1, PUSH_GRID_OBSTRUCTION)
+        EVT_ADD(LVar0, 1)
+    EVT_END_LOOP
+    // obstruct row 2 from 0 to 3
+    EVT_SET(LVar0, 0)
+    EVT_LOOP(3)
+        EVT_CALL(SetPushBlock, 0, LVar0, 2, PUSH_GRID_OBSTRUCTION)
+        EVT_ADD(LVar0, 1)
+    EVT_END_LOOP
+    // obstruct row 2 from 10 to 14
+    EVT_SET(LVar0, 10)
+    EVT_LOOP(4)
+        EVT_CALL(SetPushBlock, 0, LVar0, 2, PUSH_GRID_OBSTRUCTION)
+        EVT_ADD(LVar0, 1)
+    EVT_END_LOOP
+    // obstruct row 2 from 26 to 32
+    EVT_SET(LVar0, 26)
+    EVT_LOOP(6)
+        EVT_CALL(SetPushBlock, 0, LVar0, 2, PUSH_GRID_OBSTRUCTION)
+        EVT_ADD(LVar0, 1)
+    EVT_END_LOOP
+    // obstruct row 3 from 0 to 2
+    EVT_SET(LVar0, 0)
+    EVT_LOOP(2)
+        EVT_CALL(SetPushBlock, 0, LVar0, 3, PUSH_GRID_OBSTRUCTION)
+        EVT_ADD(LVar0, 1)
+    EVT_END_LOOP
+    // obstruct row 3 from 10 to 14
+    EVT_SET(LVar0, 10)
+    EVT_LOOP(4)
+        EVT_CALL(SetPushBlock, 0, LVar0, 3, PUSH_GRID_OBSTRUCTION)
+        EVT_ADD(LVar0, 1)
+    EVT_END_LOOP
+    EVT_EXEC(N(EVS_ManagePuzzle))
+    EVT_SET(LVar0, MODEL_o72)
+    EVT_SET(LVar1, 0)
+    EVT_SET(LVar2, COLLIDER_o50)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar2, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_EXEC(N(EVS_SetupGeyser))
+    EVT_SET(LVar0, MODEL_o73)
+    EVT_SET(LVar1, 1)
+    EVT_SET(LVar2, COLLIDER_o51)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar2, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_EXEC(N(EVS_SetupGeyser))
+    EVT_SET(LVar0, MODEL_o74)
+    EVT_SET(LVar1, 2)
+    EVT_SET(LVar2, COLLIDER_o52)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar2, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_EXEC(N(EVS_SetupGeyser))
+    EVT_SET(LVar0, MODEL_o75)
+    EVT_SET(LVar1, 3)
+    EVT_SET(LVar2, COLLIDER_o53)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar2, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_EXEC(N(EVS_SetupGeyser))
+    EVT_SET(LVar0, MODEL_o76)
+    EVT_SET(LVar1, 4)
+    EVT_SET(LVar2, COLLIDER_o49)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar2, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_EXEC(N(EVS_SetupGeyser))
+    EVT_SET(LVar0, MODEL_o71)
+    EVT_SET(LVar1, 5)
+    EVT_SET(LVar2, COLLIDER_o76)
+    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar2, COLLIDER_FLAGS_UPPER_MASK)
+    EVT_EXEC(N(D_80240ADC_B7728C))
+    EVT_EXEC(N(D_80241F5C_B7870C))
+    EVT_CALL(EnableTexPanning, MODEL_o72, TRUE)
+    EVT_CALL(EnableTexPanning, MODEL_o73, TRUE)
+    EVT_CALL(EnableTexPanning, MODEL_o74, TRUE)
+    EVT_CALL(EnableTexPanning, MODEL_o75, TRUE)
+    EVT_CALL(EnableTexPanning, MODEL_o76, TRUE)
+    EVT_CALL(EnableTexPanning, MODEL_o71, TRUE)
+    EVT_CALL(SetModelCustomGfx, MODEL_o72, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o73, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o74, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o75, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o76, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o71, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, EVT_PTR(N(func_80240000_B767B0)), NULL)
+    EVT_SET(LVar0, 0)
+    EVT_LOOP(0)
+        EVT_SUB(LVar0, 2000)
+        EVT_IF_LT(LVar0, -0x10000)
+            EVT_ADD(LVar0, 0x10000)
+        EVT_END_IF
+        EVT_CALL(SetTexPanOffset, TEX_PANNER_1, 0, 0, LVar0)
+        EVT_WAIT(1)
+    EVT_END_LOOP
+    EVT_RETURN
+    EVT_END
+};

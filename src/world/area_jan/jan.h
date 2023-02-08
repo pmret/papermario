@@ -4,8 +4,8 @@
 enum {
     AB_JAN_Unused_0         = AreaByte(0),
     AB_JAN_Unused_1         = AreaByte(1),
-    AB_JAN_Unused_2         = AreaByte(2),
-    AB_JAN_Unused_3         = AreaByte(3),
+    AB_JAN_2                = AreaByte(2),
+    AB_JAN_3                = AreaByte(3),
     AB_JAN_Unused_4         = AreaByte(4),
     AB_JAN_Unused_5         = AreaByte(5),
     AB_JAN_Unused_6         = AreaByte(6),
