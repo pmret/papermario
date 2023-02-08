@@ -485,7 +485,7 @@ void update_encounters_neutral(void) {
     s32 cond;
     s32 cond2;
     s32 firstStrikeType;
-    s32 aiPaused;
+    s32 suspendTime;
 
     Enemy* enemy;
     Enemy* currentEnemy;
@@ -548,15 +548,15 @@ void update_encounters_neutral(void) {
                 continue;
             }
             npc = get_npc_unsafe(enemy->npcID);
-            if (enemy->aiPaused != 0) {
+            if (enemy->aiSuspendTime != 0) {
                 if (!(gOverrideFlags & GLOBAL_OVERRIDES_40)) {
-                    enemy->aiPaused--;
-                    aiPaused = enemy->aiPaused;
+                    enemy->aiSuspendTime--;
+                    suspendTime = enemy->aiSuspendTime;
                 } else {
-                    aiPaused = 0;
+                    suspendTime = 0;
                 }
 
-                if (aiPaused & 1) {
+                if (suspendTime & 1) {
                     npc->flags |= NPC_FLAG_80000000;
                     enemy->flags |= ENEMY_FLAG_80000000;
                 } else {
@@ -1865,7 +1865,7 @@ void update_encounters_post_battle(void) {
                 enemy = currentEncounter->currentEnemy;
                 encounter = currentEncounter->currentEncounter;
                 if (!(enemy->flags & ENEMY_FLAG_40000)) {
-                    enemy->aiPaused = 45;
+                    enemy->aiSuspendTime = 45;
                     playerStatus->blinkTimer = 45;
                     for (j = 0; j < encounter->count; j++) {
                         enemy = encounter->enemy[j];
@@ -1878,7 +1878,7 @@ void update_encounters_post_battle(void) {
                         if (enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) {
                             continue;
                         }
-                        enemy->aiPaused = 45;
+                        enemy->aiSuspendTime = 45;
                         playerStatus->blinkTimer = 45;
                     }
                 }
@@ -2116,7 +2116,7 @@ void update_encounters_post_battle(void) {
                 enemy = currentEncounter->currentEnemy;
                 if (!(enemy->flags & ENEMY_FLAG_4)) {
                     encounter = currentEncounter->currentEncounter;
-                    enemy->aiPaused = 45;
+                    enemy->aiSuspendTime = 45;
                     playerStatus->blinkTimer = 45;
                     for (j = 0; j < encounter->count; j++) {
                         enemy = encounter->enemy[j];
@@ -2129,7 +2129,7 @@ void update_encounters_post_battle(void) {
                         if (enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) {
                             continue;
                         }
-                        enemy->aiPaused = 45;
+                        enemy->aiSuspendTime = 45;
                         playerStatus->blinkTimer = 45;
                     }
                 }
@@ -2158,8 +2158,8 @@ void update_encounters_post_battle(void) {
             }
 
             npc = get_npc_unsafe(enemy->npcID);
-            if (enemy->aiPaused != 0) {
-                if (enemy->aiPaused & 1) {
+            if (enemy->aiSuspendTime != 0) {
+                if (enemy->aiSuspendTime & 1) {
                     npc->flags |= NPC_FLAG_80000000;
                     enemy->flags |= ENEMY_FLAG_80000000;
                 } else {
@@ -2492,7 +2492,7 @@ void create_encounters(void) {
 
                     enemy->aiFlags = npcData->aiFlags;
                     enemy->unk_DC = 0;
-                    enemy->aiPaused = 0;
+                    enemy->aiSuspendTime = 0;
                     enemy->unk_B8 = (EvtScript*)npcSettings->unk_24; // ??
                     enemy->unk_BC = NULL;
                     enemy->unk_C0 = 0;

@@ -2,14 +2,6 @@
 
 #include "world/common/atomic/CreateDarkness.inc.c"
 
-EvtScript N(EVS_SetupDarkness) = {
-    EVT_THREAD
-        EVT_CALL(N(DarkRoomUpdate))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
-};
-
 EvtScript N(EVS_ExitDoor_kpa_14_1) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
@@ -58,7 +50,7 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_SetupDarkness))
+    EVT_EXEC(N(EVS_CreateDarkness))
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
     EVT_EXEC(N(EVS_SetupMusic))

@@ -1,7 +1,7 @@
 #include "pra_27.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 EvtScript N(EVS_OpenChest_PalaceKey) = EVT_OPEN_CHEST_KEY(ITEM_CRYSTAL_PALACE_KEY, GF_PRA27_Chest_PalaceKey);
 

@@ -1,0 +1,51 @@
+#include "jan_09.h"
+
+#include "world/common/enemy/complete/MBush.inc.c"
+#include "world/common/enemy/complete/SpearGuy_Wander.inc.c"
+
+StaticNpc N(NpcData_SpearGuy)[] = {
+    {
+        .id = NPC_SpearGuy,
+        .settings = &N(NpcSettings_SpearGuy_Wander),
+        .pos = { -200.0f, 90.0f, -330.0f },
+        .yaw = 90,
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = SPEAR_GUY_DROPS,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_CYLINDER,
+                .centerPos  = { -200, 90, -330 },
+                .wanderSize = { 20 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { -182, 90, -302 },
+                .detectSize = { 212, 100 },
+            }
+        },
+        .animations = SPEAR_GUY_ANIMS,
+        .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
+    },
+    SPEAR_GUY_HITBOX(NPC_SpearGuy_Hitbox)
+};
+
+StaticNpc N(NpcData_MBush_01) = {
+    .id = NPC_MBush_01,
+    .pos = { 335.0f, 0.0f, -40.0f },
+    .yaw = 90,
+    MBUSH_NPC_DATA
+};
+
+StaticNpc N(NpcData_MBush_02) = {
+    .id = NPC_MBush_02,
+    .pos = { 415.0f, 0.0f, -65.0f },
+    .yaw = 90,
+    MBUSH_NPC_DATA
+};
+
+NpcGroupList N(DefaultNPCs) = {
+    NPC_GROUP(N(NpcData_SpearGuy), BTL_JAN_FORMATION_03, BTL_JAN_STAGE_02),
+    NPC_GROUP(N(NpcData_MBush_01), BTL_JAN_FORMATION_0E, BTL_JAN_STAGE_02),
+    NPC_GROUP(N(NpcData_MBush_02), BTL_JAN_FORMATION_0E, BTL_JAN_STAGE_02),
+    {}
+};

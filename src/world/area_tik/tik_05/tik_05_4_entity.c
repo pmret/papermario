@@ -1,7 +1,7 @@
 #include "tik_05.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 extern s16 Entity_ScriptSpring_AnimLaunch[];
 

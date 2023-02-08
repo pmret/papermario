@@ -12280,47 +12280,41 @@ segments:
     start: 0xB59870
     vram: 0x80240000
     subsegments:
-    - [0xB59870, c]
-    - [0xB5A610, c]
-    - [0xB5A850, c]
-    - [0xB5AA90, data]
-    - [0xB5AB20, data]
-    - [0xB5ACA0, data]
-    - [0xB5CA50, data]
-    - [0xB5D490, data]
-    - [0xB5DF60]
+    - [0xB59870, c, jan_07_0_header]
+    - [0xB59870, c, jan_07_1_music]
+    - [0xB59870, c, jan_07_2_main]
+    - [0xB59870, c, jan_07_3_npc]
+    - [0xB5A610, c, jan_07_4_trees]
+    - [0xB5A850, c, jan_07_5_bushes]
+    - [0xB5AA90]
   - name: jan_08
     dir: world/area_jan/jan_08
     type: code
     start: 0xB5E2B0
     vram: 0x80240000
+    subalign: 0x10
     subsegments:
-    - [0xB5E2B0, c]
-    - [0xB5E5C0, c]
-    - [0xB5E910, c]
-    - [0xB5F650, c]
-    - [0xB604A0, c]
-    - [0xB606E0, data]
-    - [0xB60790, data]
-    - [0xB620B0, data]
-    - [0xB62850, data]
-    - [0xB64B90, data]
-    - [0xB65740]
+    - [0xB5E2B0, c, jan_08_0_header]
+    - [0xB5E2B0, c, jan_08_1_music]
+    - [0xB5E2B0, c, jan_08_2_main]
+    - [0xB5E5C0, c, jan_08_3_bushes]
+    - [0xB5E910, c, jan_08_4_entity]
+    - [0xB5F650, c, jan_08_5_npc]
+    - [0xB604A0, c, jan_08_6_trees]
+    - [0xB606E0]
   - name: jan_09
     dir: world/area_jan/jan_09
     type: code
     start: 0xB65AB0
     vram: 0x80240000
     subsegments:
-    - [0xB65AB0, c]
-    - [0xB660A0, c]
-    - [0xB663F0, c]
-    - [0xB67190, c]
-    - [0xB673D0, data]
-    - [0xB687D0, data]
-    - [0xB6B400, data]
-    - [0xB6BFB0, data]
-    - [0xB6C020]
+    - [0xB65AB0, c, jan_09_0_header]
+    - [0xB65AB0, c, jan_09_1_main]
+    - [0xB660A0, c, jan_09_2_bushes]
+    - [0xB663F0, c, jan_09_3_npc]
+    - [0xB67190, c, jan_09_4_trees]
+    - [0xB673D0, c, jan_09_5_entity]
+    - [0xB673D0]
   - name: jan_10
     dir: world/area_jan/jan_10
     type: code
@@ -12344,12 +12338,11 @@ segments:
     start: 0xB70860
     vram: 0x80240000
     subsegments:
-    - [0xB70860, c]
-    - [0xB71010, c]
-    - [0xB71060, data]
-    - [0xB710F0, data]
-    - [0xB728B0, data]
-    - [0xB730A0]
+    - [0xB70860, c, jan_11_0_header]
+    - [0xB70860, c, jan_11_1_music]
+    - [0xB70860, c, jan_11_2_main]
+    - [0xB71010, c, jan_11_3_npc]
+    - [0xB71060]
   - name: jan_12
     dir: world/area_jan/jan_12
     type: code

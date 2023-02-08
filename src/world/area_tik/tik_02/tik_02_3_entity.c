@@ -1,7 +1,7 @@
 #include "tik_02.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 EvtScript N(EVS_OpenChest) = EVT_OPEN_CHEST_BADGE(ITEM_SHRINK_STOMP, GF_TIK02_Chest_ShrinkStomp);
 

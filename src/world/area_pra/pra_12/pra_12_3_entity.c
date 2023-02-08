@@ -1,7 +1,7 @@
 #include "pra_12.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 EvtScript N(EVS_OpenChest_PDownDUp) = EVT_OPEN_CHEST_BADGE(ITEM_P_DOWN_D_UP, GF_PRA12_Chest_PDownDUp);
 

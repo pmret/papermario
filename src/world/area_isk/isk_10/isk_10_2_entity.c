@@ -4,7 +4,6 @@
 #define SUPER_BLOCK_MAPVAR MV_SuperBlock
 #define SUPER_BLOCK_GAMEFLAG GF_ISK10_SuperBlock
 #include "world/common/entity/SuperBlock.inc.c"
-#include "world/common/entity/SuperBlock.data.inc.c"
 
 API_CALLABLE(N(MonitorPlayerLastFloor)) {
     s32 level = -1;

@@ -1,7 +1,7 @@
 #include "dgb_18.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 EvtScript N(EVS_OpenChest_MysticalKey) = {
     EVT_SET(GF_DGB18_Chest_MysticalKey, TRUE)

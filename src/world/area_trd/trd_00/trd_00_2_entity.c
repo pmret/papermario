@@ -1,7 +1,7 @@
 #include "trd_00.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 EvtScript N(EVS_OpenChest_Refund) = EVT_OPEN_CHEST_BADGE(ITEM_REFUND, GF_TRD00_Chest_Refund);
 EvtScript N(EVS_OpenChest_FPPlus) = EVT_OPEN_CHEST_BADGE(ITEM_FP_PLUS_B, GF_TRD00_Chest_FPPlusB);

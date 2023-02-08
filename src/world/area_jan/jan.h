@@ -21,6 +21,8 @@ enum {
 };
 
 enum {
+    AF_JAN_02                   = AreaFlag(2),
+
     AF_JAN_03                   = AreaFlag(3),
     AF_JAN02_RaphaelComment     = AreaFlag(4),
     AF_JAN02_MetCouncillor      = AreaFlag(5),

@@ -1,7 +1,7 @@
 #include "omo_06.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 EvtScript N(EVS_OpenChest_Mailbag) = {
     EVT_SET(LVarA, ITEM_MAILBAG)

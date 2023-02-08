@@ -249,9 +249,9 @@ ApiStatus N(MontyMoleAI_Main)(Evt* script, s32 isInitialCall) {
         enemy->aiFlags |= (ENEMY_AI_FLAG_8 | ENEMY_AI_FLAG_10);
     }
     
-    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
-        if (enemy->aiPaused == 0) {
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+        if (enemy->aiSuspendTime == 0) {
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
         } else {
             return ApiStatus_BLOCK;
         }

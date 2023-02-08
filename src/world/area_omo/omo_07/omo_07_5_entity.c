@@ -1,7 +1,7 @@
 #include "omo_07.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 EvtScript N(EVS_OpenChest_FryingPan) = {
     EVT_SET(LVarA, ITEM_FRYING_PAN)

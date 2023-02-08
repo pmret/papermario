@@ -5027,7 +5027,7 @@ enum EnemyFlags {
 enum EnemyAIFlags {
     ENEMY_AI_FLAG_1              = 0x00000001,
     ENEMY_AI_FLAG_2              = 0x00000002, // do not move; do not sense player
-    ENEMY_AI_FLAG_4              = 0x00000004, // pause ai? reset ai?
+    ENEMY_AI_FLAG_SUSPEND        = 0x00000004,
     ENEMY_AI_FLAG_8              = 0x00000008,
     ENEMY_AI_FLAG_10             = 0x00000010,
     ENEMY_AI_FLAG_20             = 0x00000020,

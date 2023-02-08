@@ -15,14 +15,6 @@ NpcSettings N(NpcSettings_Watt) = {
 
 #include "world/common/atomic/CreateDarkness.inc.c"
 
-EvtScript N(EVS_SetupDarkness) = {
-    EVT_THREAD
-        EVT_CALL(N(DarkRoomUpdate))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
-};
-
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 #include "world/common/todo/UnsetCamera0Flag1000.inc.c"
 
@@ -105,7 +97,7 @@ EvtScript N(EVS_SetupLightSource) = {
             EVT_SET(AB_OMO12_LightPowerMod, 102)
             EVT_EXEC(N(EVS_ManageLanternLight))
         EVT_CASE_GE(STORY_CH4_WATT_JOINED_PARTY)
-            EVT_EXEC_WAIT(N(EVS_SetupDarkness))
+            EVT_EXEC_WAIT(N(EVS_CreateDarkness))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -400,7 +392,7 @@ EvtScript N(EVS_Scene_ReleaseWatt) = {
     EVT_WAIT(30)
     EVT_CALL(CloseMessage)
     EVT_WAIT(10)
-    EVT_EXEC_WAIT(N(EVS_SetupDarkness))
+    EVT_EXEC_WAIT(N(EVS_CreateDarkness))
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_005B)
     EVT_CALL(EnablePartnerAI)

@@ -1,7 +1,7 @@
 #include "iwa_03.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 MAP_RODATA_PAD(1,entity);
 

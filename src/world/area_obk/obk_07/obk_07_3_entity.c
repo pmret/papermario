@@ -1,7 +1,7 @@
 #include "obk_07.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 EvtScript N(EVS_OpenChest_BooWeight) = {
     EVT_SET(LVarA, ITEM_BOO_WEIGHT)

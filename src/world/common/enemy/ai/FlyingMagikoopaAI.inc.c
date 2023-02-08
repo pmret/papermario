@@ -307,11 +307,11 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
 
     npc->verticalRenderOffset = -5;
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
-        if (enemy->aiPaused != 0) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+        if (enemy->aiSuspendTime != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
     }
 
     switch (script->AI_TEMP_STATE) {

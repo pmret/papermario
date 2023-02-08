@@ -1,7 +1,7 @@
 #include "pra_11.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 EvtScript N(EVS_OpenChest_RedKey) = EVT_OPEN_CHEST_KEY(ITEM_RED_KEY, GF_PRA11_Chest_RedKey);
 
