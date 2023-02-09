@@ -676,7 +676,7 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
                         EVT_WAIT(15)
                         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_262, 0)
-                        EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, TRUE, 0, 0, 0, 0)
+                        EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
                         EVT_WAIT(25)
                         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_001A)
                         EVT_GIVE_KEY_REWARD(ITEM_MAGICAL_SEED4)

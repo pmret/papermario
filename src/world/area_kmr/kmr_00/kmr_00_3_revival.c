@@ -550,7 +550,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_WAIT(25)
     EVT_CALL(SetNpcAnimation, NPC_Goombaria, ANIM_Goombaria_LeanOver)
     EVT_CALL(PlaySoundAtNpc, NPC_Goombaria, SOUND_263, SOUND_SPACE_MODE_0)
-    EVT_CALL(ShowEmote, NPC_Goombaria, EMOTE_QUESTION, 0, 20, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_Goombaria, EMOTE_QUESTION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(25)
     EVT_CALL(SetNpcAnimation, NPC_Goombaria, ANIM_Goombaria_Stand)
     EVT_CALL(SpeakToPlayer, NPC_Goombaria, ANIM_Goombaria_Talk, ANIM_Goombaria_Stand, 5, MSG_CH0_0004)

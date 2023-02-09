@@ -15,8 +15,8 @@ enum {
 };
 
 enum {
-    MV_BushOffsetL           = MapVar(0),
-    MV_BushOffsetR           = MapVar(1),
+    MV_BushOffsetL      = MapVar(0),
+    MV_BushOffsetR      = MapVar(1),
     MV_Unk_0A           = MapVar(10),
 };
 

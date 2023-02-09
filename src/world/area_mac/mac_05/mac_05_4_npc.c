@@ -1248,7 +1248,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa_01) = {
         EVT_CALL(PlaySoundAtPlayer, SOUND_262, SOUND_SPACE_MODE_0)
         EVT_CALL(ShowEmote, NPC_Whale, EMOTE_EXCLAMATION, 0, 30, FALSE, 0, 0, 0, 0)
         EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_262, SOUND_SPACE_MODE_0)
-        EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 30, TRUE, 0, 0, 0, 0)
+        EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(ShowMessageAtScreenPos, MSG_MAC_Port_00B4, 160, 40)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -100, -10, 490)

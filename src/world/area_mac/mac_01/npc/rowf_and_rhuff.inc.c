@@ -316,7 +316,7 @@ EvtScript N(EVS_NpcIdle_Rowf) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_WAIT(15)
-    EVT_CALL(ShowEmote, NPC_Rhuff, EMOTE_SHOCK, -45, 20, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_Rhuff, EMOTE_SHOCK, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Still)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)

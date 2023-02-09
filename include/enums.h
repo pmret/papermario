@@ -502,7 +502,8 @@ enum Emotes {
 
 enum Emoters {
     EMOTER_PLAYER   = 0,
-    EMOTER_NPC      = 1
+    EMOTER_NPC      = 1,
+    EMOTER_POS      = 2,
 };
 
 enum EasingType {

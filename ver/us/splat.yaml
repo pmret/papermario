@@ -12371,38 +12371,37 @@ segments:
     start: 0xB7A050
     vram: 0x80240000
     subsegments:
-    - [0xB7A050, c]
-    - [0xB7A510, c]
-    - [0xB7B330, data]
-    - [0xB7B5C0, data]
-    - [0xB7C630, data]
-    - [0xB7D2C0, data]
-    - [0xB7D8B0]
+    - [0xB7A050, c, jan_14_0_header]
+    - [0xB7A050, c, jan_14_1_main]
+    - [0xB7A050, c, jan_14_2_vines]
+    - [0xB7A2D0, c, jan_14_3_trees]
+    - [0xB7A510, c, jan_14_4_npc]
+    - [0xB7B330]
   - name: jan_15
     dir: world/area_jan/jan_15
     type: code
     start: 0xB7D920
     vram: 0x80240000
     subsegments:
-    - [0xB7D920, c]
-    - [0xB7D9E0, c]
-    - [0xB7DC20, data]
-    - [0xB7DEE0, data]
-    - [0xB7F4A0, data]
-    - [0xB7FF80, data]
-    - [0xB7FFF0]
+    - [0xB7D920, c, jan_15_0_header]
+    - [0xB7D920, c, jan_15_1_main]
+    - [0xB7D920, c, jan_15_2_npc]
+    - [0xB7D9E0, c, jan_15_3_trees]
+    - [0xB7DC20, c, jan_15_4_entity]
+    - [0xB7DC20]
   - name: jan_16
     dir: world/area_jan/jan_16
     type: code
     start: 0xB80000
     vram: 0x80240000
     subsegments:
-    - [0xB80000, c]
-    - [0xB80300, c]
-    - [0xB80540, data]
-    - [0xB82C70, data]
-    - [0xB82CD0, data]
-    - [0xB837A0]
+    - [0xB80000, c, jan_16_0_header]
+    - [0xB80000, c, jan_16_1_music]
+    - [0xB80000, c, jan_16_2_main]
+    - [0xB80300, c, jan_16_3_npc]
+    - [0xB80300, c, jan_16_4_entity]
+    - [0xB80300, c, jan_16_5_bushes]
+    - [0xB80540]
   - name: jan_17
     dir: world/area_jan/jan_17
     type: code
@@ -12455,10 +12454,11 @@ segments:
     start: 0xB8FCD0
     vram: 0x80240000
     subsegments:
-    - [0xB8FCD0, c]
-    - [0xB8FCD0, data]
-    - [0xB903A0, data]
-    - [0xB93430]
+    - [0xB8FCD0, c, jan_23_0_header]
+    - [0xB8FCD0, c, jan_23_1_music]
+    - [0xB8FCD0, c, jan_23_2_main]
+    - [0xB8FCD0, c, jan_23_3_npc]
+    - [0xB8FCD0]
   - name: mim_01
     dir: world/area_mim/mim_01
     type: code

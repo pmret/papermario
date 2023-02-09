@@ -3,7 +3,7 @@
 
 u16 N(D_80240850_B77000) = 0;
 
-void N(func_80240000_B767B0)(void) {
+void N(setup_gfx_geyser)(void) {
     f64 temp_f20 = ((sin_rad((f32) N(D_80240850_B77000) * 0.02) + 1.0f) * 0.3) + 0.6;
     f64 temp_f21 = (sin_rad((f32) N(D_80240850_B77000) * 0.1) + 1.0f) * 0.1;
     f32 scale = temp_f20 + temp_f21;
@@ -207,8 +207,8 @@ Vec3i N(D_80240F70_B77720)[] = {
 };
 
 EvtScript N(D_80240FB8_B77768) = {
-    EVT_IF_NE(AB_JAN_3, MV_PuzzleProgress)
-        EVT_SET(AB_JAN_3, MV_PuzzleProgress)
+    EVT_IF_NE(AB_JAN13_LastPuzzleProgress, MV_PuzzleProgress)
+        EVT_SET(AB_JAN13_LastPuzzleProgress, MV_PuzzleProgress)
         EVT_SET(MF_Unk_0A, FALSE)
         EVT_CALL(StopSound, SOUND_8000001C)
         EVT_CALL(StopSound, SOUND_8000001D)
@@ -245,7 +245,7 @@ EvtScript N(EVS_BoulderTremble) = {
 EvtScript N(EVS_ManagePuzzle) = {
     EVT_SET(LocalFlag(0), FALSE)
     EVT_SET(AB_JAN_2, 0)
-    EVT_SET(AB_JAN_3, -1)
+    EVT_SET(AB_JAN13_LastPuzzleProgress, -1)
     EVT_EXEC(N(D_80240FB8_B77768))
     EVT_LABEL(0)
         EVT_IF_EQ(GF_JAN13_SolvedBlockPuzzle, TRUE)
@@ -647,7 +647,7 @@ EvtScript N(EVS_SetupPuzzle) = {
     EVT_CALL(SetModelCustomGfx, MODEL_o75, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
     EVT_CALL(SetModelCustomGfx, MODEL_o76, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
     EVT_CALL(SetModelCustomGfx, MODEL_o71, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, EVT_PTR(N(func_80240000_B767B0)), NULL)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, EVT_PTR(N(setup_gfx_geyser)), NULL)
     EVT_SET(LVar0, 0)
     EVT_LOOP(0)
         EVT_SUB(LVar0, 2000)
