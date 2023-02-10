@@ -870,7 +870,6 @@ segments:
     type: code
     start: 0xE79B0
     vram: 0x80197000
-    align: 0x1000
     subalign: 0x1000
     follows_vram: engine2
     subsegments:
@@ -9351,7 +9350,6 @@ segments:
   - name: texture_memory
     type: code
     start: 0x7E73A0
-    sub: 0x1000
     vram: 0x8028E000
     follows_vram: world_script_api
     subsegments:

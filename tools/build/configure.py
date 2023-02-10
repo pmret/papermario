@@ -724,12 +724,14 @@ class Configure:
             implicit=[CRC_TOOL],
             variables={ "version": self.version },
         )
-        ninja.build(
-            str(self.rom_ok_path()),
-            "sha1sum",
-            f"ver/{self.version}/checksum.sha1",
-            implicit=[str(self.rom_path())],
-        )
+
+        if not non_matching:
+            ninja.build(
+                str(self.rom_ok_path()),
+                "sha1sum",
+                f"ver/{self.version}/checksum.sha1",
+                implicit=[str(self.rom_path())],
+            )
 
         ninja.build("generated_headers_" + self.version, "phony", generated_headers)
 
@@ -834,6 +836,8 @@ if __name__ == "__main__":
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w"), width=9999)
 
+    non_matching = args.non_matching or args.modern_gcc or args.shift
+
     write_ninja_rules(ninja, args.cpp or "cpp", cppflags, cflags, args.ccache, args.non_matching, args.shift, args.debug)
     write_ninja_for_tools(ninja)
 
@@ -850,12 +854,15 @@ if __name__ == "__main__":
             first_configure = configure
 
         configure.split(not args.no_split_assets, args.split_code, args.shift, args.debug)
-        configure.write_ninja(ninja, skip_files, args.non_matching, args.modern_gcc, args.debug)
+        configure.write_ninja(ninja, skip_files, non_matching, args.modern_gcc, args.debug)
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 
     assert(first_configure)
     first_configure.make_current(ninja)
 
-    ninja.build("all", "phony", all_rom_oks)
+    if non_matching:
+        ninja.build("all", "phony", [str(first_configure.rom_path())])
+    else:
+        ninja.build("all", "phony", all_rom_oks)
     ninja.default("all")
