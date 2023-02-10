@@ -75,8 +75,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     ninja.variable("python", sys.executable)
 
     ld_args = f"-T ver/$version/build/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map $mapfile --no-check-sections -T $in -o $out"
-    if shift:
 
+    if shift:
         ninja.rule("ld",
             description="link($version) $out",
             command=f"{cross}ld --defsym entity_data_vram_end=0x80000000 {ld_args} && \
@@ -328,7 +328,7 @@ class Configure:
         # ¯\_(ツ)_/¯
         return path
 
-    def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str], non_matching: bool, shift: bool,
+    def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str], non_matching: bool, modern_gcc: bool,
                     debug: bool):
         import segtypes
         import segtypes.common.data
@@ -410,14 +410,14 @@ class Configure:
                 bad_list = []
                 seg_dir = str(seg.dir)
 
-                # if shift:
-                #     task = "cc_modern"
+                if modern_gcc:
+                    task = "cc_modern"
 
-                #     if ("world/area" in seg_dir and (
-                #         "kkj" in seg_dir or
-                #         "jan" in seg_dir
-                #     )) or seg.name in bad_list:
-                #         task = "cc"
+                    if ("world/area" in seg_dir and (
+                        "kkj" in seg_dir or
+                        "jan" in seg_dir
+                    )) or seg.name in bad_list:
+                        task = "cc"
 
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
@@ -758,6 +758,7 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--debug", action="store_true", help="Generate debugging information")
     parser.add_argument("-n", "--non-matching", action="store_true", help="Compile nonmatching code. Combine with --debug for more detailed debug info")
     parser.add_argument("--shift", action="store_true", help="Build a shiftable ROM")
+    parser.add_argument("--modern-gcc", action="store_true", help="Use modern GCC instead of the original compiler")
     parser.add_argument("-w", "--no-warn", action="store_true", help="Inhibit compiler warnings")
     parser.add_argument("--ccache", action="store_true", help="Use ccache")
     args = parser.parse_args()
@@ -822,6 +823,9 @@ if __name__ == "__main__":
     if args.shift:
         cppflags += " -DSHIFT"
 
+    if args.modern_gcc:
+        cppflags += " -DMODERN_GCC"
+
     if not args.no_warn:
         cflags += " -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
 
@@ -846,7 +850,7 @@ if __name__ == "__main__":
             first_configure = configure
 
         configure.split(not args.no_split_assets, args.split_code, args.shift, args.debug)
-        configure.write_ninja(ninja, skip_files, args.non_matching, args.shift, args.debug)
+        configure.write_ninja(ninja, skip_files, args.non_matching, args.modern_gcc, args.debug)
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 

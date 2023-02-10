@@ -10,16 +10,16 @@
 
 extern Addr MapTextureMemory;
 
-#ifndef SHIFT
+#ifdef SHIFT
 extern Addr WorldEntityHeapBase;
 #define WORLD_ENTITY_HEAP_BOTTOM 0x80650000 // TODO shiftability (used only for munchlesia, hacky as hell)
-#define WORLD_ENTITY_HEAP_BASE WorldEntityHeapBase
+#define WORLD_ENTITY_HEAP_BASE (s32) WorldEntityHeapBase
  // TODO this only refers to one of 3 overlays which happen to share the same address space but don't necessarily have to
-#define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
+#define AREA_SPECIFIC_ENTITY_VRAM (s32) entity_default_VRAM
 #else
-#define WORLD_ENTITY_HEAP_BOTTOM 0x80650000
-#define WORLD_ENTITY_HEAP_BASE 0x80667FF0
-#define AREA_SPECIFIC_ENTITY_VRAM 0x806BAE00 // TODO shift
+#define WORLD_ENTITY_HEAP_BOTTOM 0x80250000
+#define WORLD_ENTITY_HEAP_BASE 0x80267FF0
+#define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
 #endif
 
 typedef struct Fog {
@@ -3676,7 +3676,7 @@ void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, 
     memcpy(&handle->header, header, sizeof(*header));
     func_801180E8(header, (Gfx**)&mdl_nextTextureAddress, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
 
-    #ifndef SHIFT
+    #ifndef MODERN_GCC
     gSPEndDisplayList(mdl_nextTextureAddress);
     mdl_nextTextureAddress += 8;
     #else
