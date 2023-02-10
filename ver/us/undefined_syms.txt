@@ -7,7 +7,6 @@ obfuscated_obfuscation_shims_VRAM = obfuscation_shims_VRAM - 0xA912928;
 obfuscated_obfuscation_shims_ROM_START = obfuscation_shims_ROM_START - 0x8939221;
 
 fx_sun_undeclared = fx_sun;
-gBackgroundImage = D_80200000;
 
 battle_move_end = mushroom_VRAM_END;
 battle_move_end = MAX(battle_move_end, fire_flower_VRAM_END);
@@ -86,7 +85,8 @@ battle_move_end = MAX(battle_move_end, battle_star_peach_beam_VRAM_END);
 battle_move_end = MAX(battle_move_end, battle_star_peach_focus_VRAM_END);
 battle_move_end = MAX(battle_move_end, battle_star_peach_dash_VRAM_END);
 
-// hard-coded heapy things
+// hard-coded things
+gBackgroundImage = 0x80200000; // hard-coded inside mapfs for now
 D_80210000 = 0x80210000; // needs to be hard-coded atm due to pointers in shape data
 
 heap_generalHead = font_width_VRAM_END;
@@ -95,6 +95,10 @@ D_8038F800 = gSpriteHeapPtr + 0x40000;
 D_803B5000 = D_8038F800 + 0x25800;
 D_803DA800 = D_803B5000 + 0x25800;
 heap_battleHead = D_803DA800;
+
+D_806C3000 = 0x806C3000;
+D_804DC500 = 0x804DC500;
+entity_data_vram_end = 0x806BD100;
 
 // boot
 D_A0000000 = 0xA0000000;

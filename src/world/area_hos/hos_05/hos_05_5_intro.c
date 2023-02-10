@@ -1488,7 +1488,9 @@ void N(worker_draw_story_graphics)(void) {
 }
 
 #ifdef SHIFT
-#define TAPE_OFFSET title_tape_ROM_START - title_bg_1_ROM_START
+// TODO this breaks stuff to enable it for the shift build
+// #define TAPE_OFFSET title_tape_ROM_START - title_bg_1_ROM_START
+#define TAPE_OFFSET 0x2A440
 #else
 #define TAPE_OFFSET 0x2A440
 #endif

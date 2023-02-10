@@ -23,7 +23,7 @@ typedef union {
 #define __ll_lowpart(t) ((USItype) (t) % __ll_B)
 #define __ll_highpart(t) ((USItype) (t) / __ll_B)
 
-#ifdef SHIFT
+#ifndef SHIFT
 #define umul_ppmm(w1, w0, u, v)						\
   do {									\
     UDItype __x = (UDItype) (USItype) (u) * (USItype) (v);		\

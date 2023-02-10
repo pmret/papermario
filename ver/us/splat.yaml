@@ -377,7 +377,8 @@ segments:
     type: code
     start: 0x759B0
     vram: 0x800DC500
-    follows_vram: main
+    vram_of_symbol: D_804DC500
+    #follows_vram: main
     subsegments:
     - [0x759B0, hasm, bss2]
     - [0x759B0, c, npc_collision]
@@ -880,6 +881,7 @@ segments:
     start: 0xE79B0
     vram: 0x802C3000
     follows_vram: world_use_item
+    # vram_of_symbol: D_806C3000
     subsegments:
     - [0xE79B0, c, script_list]
     - [0xE92D0, c, evt]
@@ -1112,7 +1114,7 @@ segments:
     type: code
     start: 0x131340
     vram: 0x8023E000
-    follows_vram_symbol: battle_code_vram_start
+    vram_of_symbol: battle_code_vram_start
     subsegments:
     - [0x131340, ci4, ui/pause/unused_badge_points, 24, 24]
     - [0x131460, palette, ui/pause/unused_badge_points]
@@ -1356,7 +1358,7 @@ segments:
     start: 0x16C8E0
     name: battle_code
     vram: 0x8023E000
-    follows_vram_symbol: battle_code_vram_start
+    vram_of_symbol: battle_code_vram_start
     subsegments:
     - [0x16C8E0, c, 16c8e0]
     - [0x16F740, c, 16F740]
@@ -2624,7 +2626,7 @@ segments:
     name: world_partner_goombario
     start: 0x317020
     vram: 0x802BD100
-    #follows_vram_symbol: entity_data_vram_end
+    vram_of_symbol: entity_data_vram_end
     subsegments:
     - [0x317020, c, goombario]
     - [0x317B60]
@@ -2633,7 +2635,7 @@ segments:
     name: world_partner_bombette
     start: 0x317E50
     vram: 0x802BD100
-    #follows_vram_symbol: entity_data_vram_end
+    vram_of_symbol: entity_data_vram_end
     subsegments:
     - [0x317E50, c, bombette]
     - [0x3195D0]
@@ -2642,7 +2644,7 @@ segments:
     name: world_partner_parakarry
     start: 0x319670
     vram: 0x802BD100
-    #follows_vram_symbol: entity_data_vram_end
+    vram_of_symbol: entity_data_vram_end
     subsegments:
     - [0x319670, c, parakarry]
     - [0x31B000]
@@ -2651,7 +2653,7 @@ segments:
     name: world_partner_kooper
     start: 0x31B120
     vram: 0x802BD100
-    #follows_vram_symbol: entity_data_vram_end
+    vram_of_symbol: entity_data_vram_end
     subsegments:
     - [0x31B120, c, kooper]
     - [0x31CB60]
@@ -2660,7 +2662,7 @@ segments:
     name: world_partner_watt
     start: 0x31CC70
     vram: 0x802BD100
-    #follows_vram_symbol: entity_data_vram_end
+    vram_of_symbol: entity_data_vram_end
     subsegments:
     - [0x31CC70, c, watt]
     - [0x31DDC0]
@@ -2669,7 +2671,7 @@ segments:
     name: world_partner_sushie
     start: 0x31DE70
     vram: 0x802BD100
-    #follows_vram_symbol: entity_data_vram_end
+    vram_of_symbol: entity_data_vram_end
     subsegments:
     - [0x31DE70, c, sushie]
     - [0x320B20]
@@ -2678,7 +2680,7 @@ segments:
     name: world_partner_lakilester
     start: 0x320C50
     vram: 0x802BD100
-    #follows_vram_symbol: entity_data_vram_end
+    vram_of_symbol: entity_data_vram_end
     subsegments:
     - [0x320C50, c, lakilester]
     - [0x3239B0]
@@ -2687,7 +2689,7 @@ segments:
     name: world_partner_bow
     start: 0x323A50
     vram: 0x802BD100
-    #follows_vram_symbol: entity_data_vram_end
+    vram_of_symbol: entity_data_vram_end
     subsegments:
     - [0x323A50, c, bow]
     - [0x324930]
@@ -2696,7 +2698,7 @@ segments:
     name: world_partner_goompa
     start: 0x324A10
     vram: 0x802BD100
-    #follows_vram_symbol: entity_data_vram_end
+    vram_of_symbol: entity_data_vram_end
     subsegments:
     - [0x324A10, c, goompa]
     - [0x324E80]
@@ -2705,7 +2707,7 @@ segments:
     name: world_partner_goombaria
     start: 0x324F10
     vram: 0x802BD100
-    #follows_vram_symbol: entity_data_vram_end
+    vram_of_symbol: entity_data_vram_end
     subsegments:
     - [0x324F10, c, goombaria]
     - [0x325000]
@@ -2714,7 +2716,7 @@ segments:
     name: world_partner_twink
     start: 0x325070
     vram: 0x802BD100
-    #follows_vram_symbol: entity_data_vram_end
+    vram_of_symbol: entity_data_vram_end
     subsegments:
     - [0x325070, c, twink]
     - [0x325160]
@@ -2722,7 +2724,7 @@ segments:
     start: 0x3251D0
     name: world_use_item
     vram: 0x802C0000
-    follows_vram_symbol: world_partner_vram_end
+    vram_of_symbol: world_partner_vram_end
     subsegments:
     - [0x3251D0, c, world_use_item]
     - [0x3255E0]
@@ -6881,7 +6883,7 @@ segments:
   - type: code
     start: 0x4219F0
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_jump
     subsegments:
@@ -6890,7 +6892,7 @@ segments:
   - type: code
     start: 0x422000
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_hammer
     subsegments:
@@ -6899,7 +6901,7 @@ segments:
   - type: code
     start: 0x422AD0
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_flee
     subsegments:
@@ -6908,7 +6910,7 @@ segments:
   - type: code
     start: 0x4233F0
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_break_free
     subsegments:
@@ -6917,7 +6919,7 @@ segments:
   - type: code
     start: 0x423C70
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_whirlwind
     subsegments:
@@ -6947,7 +6949,7 @@ segments:
   - type: code
     start: 0x425590
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_stop_leech
     subsegments:
@@ -6956,7 +6958,7 @@ segments:
   - type: code
     start: 0x425B50
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_07
     subsegments:
@@ -6965,7 +6967,7 @@ segments:
   - type: code
     start: 0x426170
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_dizzy_shell
     subsegments:
@@ -6974,7 +6976,7 @@ segments:
   - type: code
     start: 0x4269D0
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_fire_shell
     subsegments:
@@ -6983,7 +6985,7 @@ segments:
   - type: code
     start: 0x4273B0
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_0A
     subsegments:
@@ -6992,7 +6994,7 @@ segments:
   - type: code
     start: 0x427A70
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_bomb
     subsegments:
@@ -7001,7 +7003,7 @@ segments:
   - type: code
     start: 0x4282E0
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_body_slam
     subsegments:
@@ -7010,7 +7012,7 @@ segments:
   - type: code
     start: 0x428A70
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_air_lift
     subsegments:
@@ -7019,7 +7021,7 @@ segments:
   - type: code
     start: 0x429320
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_air_raid
     subsegments:
@@ -7028,7 +7030,7 @@ segments:
   - type: code
     start: 0x429D20
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_squirt
     subsegments:
@@ -7037,7 +7039,7 @@ segments:
   - type: code
     start: 0x42A4F0
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_water_block
     subsegments:
@@ -7067,7 +7069,7 @@ segments:
   - type: code
     start: 0x42C6F0
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_tidal_wave
     subsegments:
@@ -7076,7 +7078,7 @@ segments:
   - type: code
     start: 0x42CF10
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_power_shock
     subsegments:
@@ -7085,7 +7087,7 @@ segments:
   - type: code
     start: 0x42DA10
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_mega_shock
     subsegments:
@@ -7094,7 +7096,7 @@ segments:
   - type: code
     start: 0x42E3A0
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_smack
     subsegments:
@@ -7103,7 +7105,7 @@ segments:
   - type: code
     start: 0x42EE20
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_spiny_surge
     subsegments:
@@ -7112,7 +7114,7 @@ segments:
   - type: code
     start: 0x42F6E0
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_hurricane
     subsegments:
@@ -7121,7 +7123,7 @@ segments:
   - type: code
     start: 0x430020
     vram: 0x802A9000
-    follows_vram_symbol: battle_move_end
+    vram_of_symbol: battle_move_end
     dir: battle/action_cmd
     name: action_cmd_spook
     subsegments:
@@ -7473,42 +7475,42 @@ segments:
     type: code
     start: 0x543570
     vram: 0x80231000
-    follows_vram_symbol: Vine1Base
+    vram_of_symbol: Vine1Base
     subsegments:
     - [0x543570, c, actor/shy_squad]
   - dir: battle/area_omo2_2
     type: code
     start: 0x5483E0
     vram: 0x80231000
-    follows_vram_symbol: Vine1Base
+    vram_of_symbol: Vine1Base
     subsegments:
     - [0x5483E0, c, actor/stilt_guy]
   - dir: battle/area_omo2_3
     type: code
     start: 0x54CC70
     vram: 0x80231000
-    follows_vram_symbol: Vine1Base
+    vram_of_symbol: Vine1Base
     subsegments:
     - [0x54CC70, c, actor/shy_stack]
   - dir: battle/area_omo2_4
     type: code
     start: 0x552440
     vram: 0x80231000
-    follows_vram_symbol: Vine1Base
+    vram_of_symbol: Vine1Base
     subsegments:
     - [0x552440, c, actor/signal_guy]
   - dir: battle/area_omo2_5
     type: code
     start: 0x552BB0
     vram: 0x80231000
-    follows_vram_symbol: Vine1Base
+    vram_of_symbol: Vine1Base
     subsegments:
     - [0x552BB0, c, actor/shy_squad_dup]
   - dir: battle/area_omo2_6
     type: code
     start: 0x556C90
     vram: 0x80231000
-    follows_vram_symbol: Vine1Base
+    vram_of_symbol: Vine1Base
     subsegments:
     - [0x556C90, c, actor/shy_guy_dup]
   - dir: battle/area_omo3
@@ -8022,7 +8024,7 @@ segments:
     type: code
     start: 0x6F0B30
     vram: 0x80238000
-    follows_vram_symbol: battle_partner_vram_start
+    vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [0x6F0B30, c, goompa]
     - [0x6F0B30]
@@ -8031,7 +8033,7 @@ segments:
     type: code
     start: 0x6F10E0
     vram: 0x80238000
-    follows_vram_symbol: battle_partner_vram_start
+    vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [0x6F10E0, c, goombario]
     - [0x6F2290]
@@ -8040,7 +8042,7 @@ segments:
     type: code
     start: 0x6F5E80
     vram: 0x80238000
-    follows_vram_symbol: battle_partner_vram_start
+    vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [0x6F5E80, c, kooper]
     - [0x6F62B0]
@@ -8049,7 +8051,7 @@ segments:
     type: code
     start: 0x6FAD10
     vram: 0x80238000
-    follows_vram_symbol: battle_partner_vram_start
+    vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [0x6FAD10, c, bombette]
     - [0x6FB350]
@@ -8058,7 +8060,7 @@ segments:
     type: code
     start: 0x6FFD80
     vram: 0x80238000
-    follows_vram_symbol: battle_partner_vram_start
+    vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [0x6FFD80, c, parakarry]
     - [0x701590]
@@ -8067,7 +8069,7 @@ segments:
     type: code
     start: 0x703AF0
     vram: 0x80238000
-    follows_vram_symbol: battle_partner_vram_start
+    vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [0x703AF0, c, watt]
     - [0x704A80]
@@ -8076,7 +8078,7 @@ segments:
     type: code
     start: 0x707CA0
     vram: 0x80238000
-    follows_vram_symbol: battle_partner_vram_start
+    vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [0x707CA0, c, sushie]
     - [0x708B70]
@@ -8085,7 +8087,7 @@ segments:
     type: code
     start: 0x70BD10
     vram: 0x80238000
-    follows_vram_symbol: battle_partner_vram_start
+    vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [0x70BD10, c, lakilester]
     - [0x70DEE0]
@@ -8094,7 +8096,7 @@ segments:
     type: code
     start: 0x710EF0
     vram: 0x80238000
-    follows_vram_symbol: battle_partner_vram_start
+    vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [0x710EF0, c, bow]
     - [0x7111F0]
@@ -8103,7 +8105,7 @@ segments:
     type: code
     start: 0x714CF0
     vram: 0x80238000
-    follows_vram_symbol: battle_partner_vram_start
+    vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [0x714CF0, c, twink]
     - [0x714DC0]
@@ -9044,7 +9046,7 @@ segments:
     type: code
     start: 0x7B5960
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7B5960, c, "01"]
   - name: world_model_anim_kzn_00
@@ -9052,7 +9054,7 @@ segments:
     type: code
     start: 0x7B6690
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7B6690, c, "00"]
   - name: world_model_anim_kzn_04
@@ -9060,7 +9062,7 @@ segments:
     type: code
     start: 0x7B70E0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7B70E0, c, "04"]
   - name: world_model_anim_kzn_05
@@ -9068,7 +9070,7 @@ segments:
     type: code
     start: 0x7B8030
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7B8030, c, "05"]
   - name: world_model_anim_kzn_06
@@ -9076,7 +9078,7 @@ segments:
     type: code
     start: 0x7B8D30
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7B8D30, c, "06"]
   - name: world_model_anim_kzn_07
@@ -9084,7 +9086,7 @@ segments:
     type: code
     start: 0x7B97E0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7B97E0, c, "07"]
   - name: world_model_anim_kzn_08
@@ -9092,7 +9094,7 @@ segments:
     type: code
     start: 0x7BA280
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7BA280, c, "08"]
   - name: world_model_anim_kzn_09
@@ -9100,7 +9102,7 @@ segments:
     type: code
     start: 0x7BB050
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7BB050, c, "09"]
   - name: world_model_anim_kzn_0A
@@ -9108,7 +9110,7 @@ segments:
     type: code
     start: 0x7BBD80
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7BBD80, c, "0A"]
   - name: world_model_anim_kzn_0B
@@ -9116,7 +9118,7 @@ segments:
     type: code
     start: 0x7BEDD0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7BEDD0, c, "0B"]
   - name: world_model_anim_kzn_0C
@@ -9124,7 +9126,7 @@ segments:
     type: code
     start: 0x7C16C0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7C16C0, c, "0C"]
   - name: world_model_anim_kzn_0D
@@ -9132,7 +9134,7 @@ segments:
     type: code
     start: 0x7C3A00
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7C3A00, c, "0D"]
   - name: world_model_anim_kzn_0E
@@ -9140,7 +9142,7 @@ segments:
     type: code
     start: 0x7C44D0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7C44D0, c, "0E"]
   - name: world_model_anim_kzn_02
@@ -9148,7 +9150,7 @@ segments:
     type: code
     start: 0x7C4F50
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7C4F50, c, "02"]
   - name: world_model_anim_kzn_03
@@ -9156,7 +9158,7 @@ segments:
     type: code
     start: 0x7C7410
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7C7410, c, "03"]
   - name: world_model_anim_kzn_0F
@@ -9164,7 +9166,7 @@ segments:
     type: code
     start: 0x7C7E50
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7C7E50, c, "0F"]
   - name: world_model_anim_kzn_10
@@ -9172,7 +9174,7 @@ segments:
     type: code
     start: 0x7CA850
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7CA850, c, "10"]
   - name: world_model_anim_kzn_11
@@ -9180,7 +9182,7 @@ segments:
     type: code
     start: 0x7CD5F0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7CD5F0, c, "11"]
   - name: world_model_anim_kzn_12
@@ -9188,7 +9190,7 @@ segments:
     type: code
     start: 0x7CDB30
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7CDB30, c, "12"]
   - name: world_model_anim_kzn_13
@@ -9196,7 +9198,7 @@ segments:
     type: code
     start: 0x7CEFF0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7CEFF0, c, "13"]
   - name: world_model_anim_kzn_14
@@ -9204,7 +9206,7 @@ segments:
     type: code
     start: 0x7CFCC0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7CFCC0, c, "14"]
   - name: world_model_anim_kzn_15
@@ -9212,7 +9214,7 @@ segments:
     type: code
     start: 0x7D0860
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7D0860, c, "15"]
   - name: world_model_anim_kzn_16
@@ -9220,7 +9222,7 @@ segments:
     type: code
     start: 0x7D14E0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7D14E0, c, "16"]
   - name: world_model_anim_kzn_17
@@ -9228,7 +9230,7 @@ segments:
     type: code
     start: 0x7D2080
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7D2080, c, "17"]
   - name: world_model_anim_kzn_18
@@ -9236,7 +9238,7 @@ segments:
     type: code
     start: 0x7D2960
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7D2960, c, "18"]
   - name: world_model_anim_kzn_19
@@ -9244,7 +9246,7 @@ segments:
     type: code
     start: 0x7D3260
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7D3260, c, "19"]
   - name: world_model_anim_kzn_1A
@@ -9252,7 +9254,7 @@ segments:
     type: code
     start: 0x7D5570
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7D5570, c, "1A"]
   - name: world_model_anim_kzn_1B
@@ -9260,7 +9262,7 @@ segments:
     type: code
     start: 0x7D6F80
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7D6F80, c, "1B"]
   - name: world_model_anim_kzn_1C
@@ -9268,7 +9270,7 @@ segments:
     type: code
     start: 0x7D76B0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7D76B0, c, "1C"]
   - name: world_model_anim_kzn_1D
@@ -9276,7 +9278,7 @@ segments:
     type: code
     start: 0x7D8FF0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7D8FF0, c, "1D"]
   - name: world_model_anim_kzn_1E
@@ -9284,7 +9286,7 @@ segments:
     type: code
     start: 0x7D96E0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7D96E0, c, "1E"]
   - name: world_model_anim_kzn_1F
@@ -9292,7 +9294,7 @@ segments:
     type: code
     start: 0x7D98E0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7D98E0, c, "1F"]
   - name: world_model_anim_kzn_20
@@ -9300,7 +9302,7 @@ segments:
     type: code
     start: 0x7DA140
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7DA140, c, "20"]
   - name: world_model_anim_kzn_21
@@ -9308,7 +9310,7 @@ segments:
     type: code
     start: 0x7DC180
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7DC180, c, "21"]
   - name: world_model_anim_kzn_22
@@ -9316,7 +9318,7 @@ segments:
     type: code
     start: 0x7DE970
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7DE970, c, "22"]
   - name: world_model_anim_kzn_23
@@ -9324,7 +9326,7 @@ segments:
     type: code
     start: 0x7DF2B0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7DF2B0, c, "23"]
   - name: world_model_anim_kzn_24
@@ -9332,7 +9334,7 @@ segments:
     type: code
     start: 0x7E03B0
     vram: 0x80234000
-    follows_vram_symbol: Vine0Base
+    vram_of_symbol: Vine0Base
     subsegments:
     - [0x7E03B0, c, "24"]
   - name: world_script_api
@@ -9365,7 +9367,7 @@ segments:
     type: code
     start: 0x7E73A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x7E73A0, c, machi_0_header]
     - [0x7E73A0, c, machi_1_tables]
@@ -9381,7 +9383,7 @@ segments:
     type: code
     start: 0x7EAD10
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x7EAD10, c, mac_00_0_header]
     - [0x7EAD10, c, mac_00_1_music]
@@ -9404,7 +9406,7 @@ segments:
     type: code
     start: 0x800880
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x800880, c, mac_01_0_header]
     - [0x800880, c, mac_01_1_music]
@@ -9448,7 +9450,7 @@ segments:
     type: code
     start: 0x8232C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8232C0, c, mac_02_0_header]
     - [0x8232C0, c, mac_02_1_music]
@@ -9464,7 +9466,7 @@ segments:
     type: code
     start: 0x831800
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x831800, c, mac_03_0_header]
     - [0x831800, c, mac_03_1_music]
@@ -9481,7 +9483,7 @@ segments:
     type: code
     start: 0x842BD0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x842BD0, c, mac_04_0_header]
     - [0x842C20, c, mac_04_1_music]
@@ -9499,7 +9501,7 @@ segments:
     type: code
     start: 0x852170
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x852170, c, mac_05_0_header]
     - [0x852170, c, mac_05_1_music]
@@ -9515,7 +9517,7 @@ segments:
     type: code
     start: 0x864B40
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x864B40, c, mac_06_0_header]
     - [0x864B40, c, mac_06_1_main]
@@ -9527,7 +9529,7 @@ segments:
     type: code
     start: 0x8694B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8694B0, c, tik_01_0_header]
     - [0x8694B0, c, tik_01_1_music]
@@ -9541,7 +9543,7 @@ segments:
     type: code
     start: 0x86C740
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x86C740, c, tik_02_0_header]
     - [0x86C740, c, tik_02_1_music]
@@ -9555,7 +9557,7 @@ segments:
     type: code
     start: 0x86EB00
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x86EB00, c, tik_03_0_header]
     - [0x86EB00, c, tik_03_1_music]
@@ -9570,7 +9572,7 @@ segments:
     type: code
     start: 0x871A30
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x871A30, c, tik_04_0_header]
     - [0x871A30, c, tik_04_1_music]
@@ -9584,7 +9586,7 @@ segments:
     type: code
     start: 0x874DC0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x874DC0, c, tik_05_0_header]
     - [0x874DC0, c, tik_05_1_music]
@@ -9598,7 +9600,7 @@ segments:
     type: code
     start: 0x876EE0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x876EE0, c, tik_06_0_header]
     - [0x876EE0, c, tik_06_1_music]
@@ -9611,7 +9613,7 @@ segments:
     type: code
     start: 0x879BE0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x879BE0, c, tik_07_0_header]
     - [0x879BE0, c, tik_07_1_music]
@@ -9626,7 +9628,7 @@ segments:
     type: code
     start: 0x87EDF0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x87EDF0, c, tik_08_0_header]
     - [0x87EDF0, c, tik_08_1_music]
@@ -9640,7 +9642,7 @@ segments:
     type: code
     start: 0x8821C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8821C0, c, tik_09_0_header]
     - [0x8821C0, c, tik_09_1_music]
@@ -9654,7 +9656,7 @@ segments:
     type: code
     start: 0x8863C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8863C0, c, tik_10_0_header]
     - [0x8863C0, c, tik_10_1_music]
@@ -9667,7 +9669,7 @@ segments:
     type: code
     start: 0x888BD0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x888BD0, c, tik_12_0_header]
     - [0x888BD0, c, tik_12_1_music]
@@ -9681,7 +9683,7 @@ segments:
     type: code
     start: 0x88D600
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x88D600, c, tik_14_0_header]
     - [0x88D600, c, tik_14_1_music]
@@ -9694,7 +9696,7 @@ segments:
     type: code
     start: 0x88FBA0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x88FBA0, c, tik_15_0_header]
     - [0x88FBA0, c, tik_15_1_music]
@@ -9708,7 +9710,7 @@ segments:
     type: code
     start: 0x892A20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x892A20, c, tik_17_0_header]
     - [0x892A20, c, tik_17_1_music]
@@ -9720,7 +9722,7 @@ segments:
     type: code
     start: 0x8956E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8956E0, c, tik_18_0_header]
     - [0x8956E0, c, tik_18_1_music]
@@ -9734,7 +9736,7 @@ segments:
     type: code
     start: 0x8975E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8975E0, c, tik_19_0_header]
     - [0x8975E0, c, tik_19_1_music]
@@ -9746,7 +9748,7 @@ segments:
     type: code
     start: 0x89A350
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x89A350, c, tik_20_0_header]
     - [0x89A350, c, tik_20_1_music]
@@ -9759,7 +9761,7 @@ segments:
     type: code
     start: 0x89D7A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x89D7A0, c, tik_21_0_header]
     - [0x89D7A0, c, tik_21_1_music]
@@ -9771,7 +9773,7 @@ segments:
     type: code
     start: 0x89FEC0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x89FEC0, c, tik_22_0_header]
     - [0x89FEC0, c, tik_22_1_music]
@@ -9782,7 +9784,7 @@ segments:
     type: code
     start: 0x8A23D0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8A23D0, c, tik_23_0_header]
     - [0x8A23D0, c, tik_23_1_music]
@@ -9795,7 +9797,7 @@ segments:
     type: code
     start: 0x8A5A80
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8A5A80, c, tik_24_0_header]
     - [0x8A5AD0, c, tik_24_1_music]
@@ -9809,7 +9811,7 @@ segments:
     type: code
     start: 0x8A7F80
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8A7F80, c, tik_25_0_header]
     - [0x8A7F80, c, tik_25_1_music]
@@ -9821,7 +9823,7 @@ segments:
     type: code
     start: 0x8A9A10
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8A9A10, c, kgr_01_1_main]
     - [0x8A9B70, c, kgr_01_2_wiggle]
@@ -9832,7 +9834,7 @@ segments:
     type: code
     start: 0x8AA450
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8AA450, c, kgr_02_1_main]
     - [0x8AA5B0, c, kgr_02_2_unused]
@@ -9844,7 +9846,7 @@ segments:
     type: code
     start: 0x8ABF90
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8ABF90, c, kmr_00_0_header]
     - [0x8ABF90, c, kmr_00_1_music]
@@ -9858,7 +9860,7 @@ segments:
     type: code
     start: 0x8B0070
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8B0070, c, kmr_02_0_header]
     - [0x8B0070, c, kmr_02_1_music]
@@ -9891,7 +9893,7 @@ segments:
     type: code
     start: 0x8C7F90
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8C7F90, c, kmr_03_0_header]
     - [0x8C7F90, c, kmr_03_1_music]
@@ -9906,7 +9908,7 @@ segments:
     type: code
     start: 0x8CA900
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8CA900, c, kmr_04_0_header]
     - [0x8CA900, c, kmr_04_1_music]
@@ -9931,7 +9933,7 @@ segments:
     type: code
     start: 0x8CE070
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8CE070, c, kmr_05_0_header]
     - [0x8CE070, c, kmr_05_1_music]
@@ -9945,7 +9947,7 @@ segments:
     type: code
     start: 0x8D1510
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8D1510, c, kmr_06_0_header]
     - [0x8D1510, c, kmr_06_1_music]
@@ -9959,7 +9961,7 @@ segments:
     type: code
     start: 0x8D3DC0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8D3DC0, c, kmr_07_0_header]
     - [0x8D3DC0, c, kmr_07_1_music]
@@ -9972,7 +9974,7 @@ segments:
     type: code
     start: 0x8D5E00
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8D5E00, c, kmr_09_0_header]
     - [0x8D5E00, c, kmr_09_1_music]
@@ -9985,7 +9987,7 @@ segments:
     type: code
     start: 0x8D84D0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8D84D0, c, kmr_10_0_header]
     - [0x8D84D0, c, kmr_10_1_music]
@@ -9999,7 +10001,7 @@ segments:
     type: code
     start: 0x8DA100
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8DA100, c, kmr_11_0_header]
     - [0x8DA100, c, kmr_11_1_music]
@@ -10019,7 +10021,7 @@ segments:
     type: code
     start: 0x8EB360
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8EB360, c, kmr_12_0_header]
     - [0x8EB360, c, kmr_12_1_music]
@@ -10032,7 +10034,7 @@ segments:
     type: code
     start: 0x8EBE20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8EBE20, c, kmr_20_0_header]
     - [0x8EBE20, c, kmr_20_1_music]
@@ -10072,7 +10074,7 @@ segments:
     type: code
     start: 0x8FEE80
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8FEE80, c, kmr_21_0_header]
     - [0x8FEE90, c, kmr_21_1_main]
@@ -10082,7 +10084,7 @@ segments:
     type: code
     start: 0x8FF670
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x8FF670, c, kmr_22_0_header]
     - [0x8FF680, c, kmr_22_1_main]
@@ -10103,7 +10105,7 @@ segments:
     type: code
     start: 0x907A30
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x907A30, c, kmr_23_0_header]
     - [0x907A40, c, kmr_23_1_main]
@@ -10125,7 +10127,7 @@ segments:
     type: code
     start: 0x90B240
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x90B240, c, kmr_24_0_header]
     - [0x90B250, c, kmr_24_1_main]
@@ -10135,7 +10137,7 @@ segments:
     type: code
     start: 0x90B6D0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x90B6D0, c, kmr_30_0_header]
     - [0x90B6D0, c, kmr_30_1_main]
@@ -10147,7 +10149,7 @@ segments:
     type: code
     start: 0x90CC40
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x90CC40, c, iwa_00_0_header]
     - [0x90CC40, c, iwa_00_1_main]
@@ -10160,7 +10162,7 @@ segments:
     type: code
     start: 0x90F6B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x90F6B0, c, iwa_01_0_header]
     - [0x90F6B0, c, iwa_01_1_main]
@@ -10186,7 +10188,7 @@ segments:
     type: code
     start: 0x915D70
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x915D70, c, iwa_02_0_header]
     - [0x915D70, c, iwa_02_1_main]
@@ -10198,7 +10200,7 @@ segments:
     type: code
     start: 0x918BB0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x918BB0, c, iwa_03_0_header]
     - [0x918BB0, c, iwa_03_1_main]
@@ -10211,7 +10213,7 @@ segments:
     type: code
     start: 0x91B8E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x91B8E0, c, iwa_04_0_header]
     - [0x91B8E0, c, iwa_04_1_music]
@@ -10224,7 +10226,7 @@ segments:
     type: code
     start: 0x91E570
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x91E570, c, iwa_10_0_header]
     - [0x91E570, c, iwa_10_1_music]
@@ -10241,7 +10243,7 @@ segments:
     type: code
     start: 0x9269F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9269F0, c, iwa_11_0_header]
     - [0x9269F0, c, iwa_11_1_music]
@@ -10255,7 +10257,7 @@ segments:
     type: code
     start: 0x929270
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x929270, c, sbk_00_1_main]
     - [0x9292B0, c, sbk_00_2_npc]
@@ -10266,7 +10268,7 @@ segments:
     type: code
     start: 0x929A90
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x929A90, c, sbk_01_1_main]
     - [0x929AD0, c, sbk_01_2_npc]
@@ -10276,7 +10278,7 @@ segments:
     type: code
     start: 0x92A2B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x92A2B0, c, sbk_02_0_header]
     - [0x92A2F0, c, sbk_02_1_music]
@@ -10290,7 +10292,7 @@ segments:
     type: code
     start: 0x92F8B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x92F8B0, c, sbk_03_1_main]
     - [0x92F8F0, c, sbk_03_2_npc]
@@ -10300,7 +10302,7 @@ segments:
     type: code
     start: 0x9304D0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9304D0, c, sbk_04_1_main]
     - [0x930510, c, sbk_04_2_npc]
@@ -10310,7 +10312,7 @@ segments:
     type: code
     start: 0x930CF0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x930CF0, c, sbk_05_1_main]
     - [0x930D30, c, sbk_05_2_entity]
@@ -10321,7 +10323,7 @@ segments:
     type: code
     start: 0x9325C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9325C0, c, sbk_06_1_main]
     - [0x932600, c, sbk_06_2_npc]
@@ -10333,7 +10335,7 @@ segments:
     type: code
     start: 0x933C80
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x933C80, c, sbk_10_1_main]
     - [0x933C80, c, sbk_10_2_entity]
@@ -10343,7 +10345,7 @@ segments:
     type: code
     start: 0x934040
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x934040, c, sbk_11_1_main]
     - [0x934080, c, sbk_11_2_npc]
@@ -10353,7 +10355,7 @@ segments:
     type: code
     start: 0x934D40
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x934D40, c, sbk_12_1_main]
     - [0x934D80, c, sbk_12_2_npc]
@@ -10363,7 +10365,7 @@ segments:
     type: code
     start: 0x9357E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9357E0, c, sbk_13_1_main]
     - [0x935820, c, sbk_13_2_npc]
@@ -10373,7 +10375,7 @@ segments:
     type: code
     start: 0x9366E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9366E0, c, sbk_14_1_main]
     - [0x9366E0, c, sbk_14_2_entity]
@@ -10383,7 +10385,7 @@ segments:
     type: code
     start: 0x936CD0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x936CD0, c, sbk_15_1_main]
     - [0x936D10, c, sbk_15_2_npc]
@@ -10393,7 +10395,7 @@ segments:
     type: code
     start: 0x937570
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x937570, c, sbk_16_1_main]
     - [0x9375B0, c, sbk_16_2_foliage]
@@ -10403,7 +10405,7 @@ segments:
     type: code
     start: 0x938590
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x938590, c, sbk_20_1_main]
     - [0x9385D0, c, sbk_20_2_entity]
@@ -10414,7 +10416,7 @@ segments:
     type: code
     start: 0x939560
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x939560, c, sbk_21_1_main]
     - [0x9395A0]
@@ -10423,7 +10425,7 @@ segments:
     type: code
     start: 0x939930
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x939930, c, sbk_22_1_main]
     - [0x939970, c, sbk_22_2_npc]
@@ -10434,7 +10436,7 @@ segments:
     type: code
     start: 0x93A760
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x93A760, c, sbk_23_1_main]
     - [0x93A760, c, sbk_23_2_entity]
@@ -10444,7 +10446,7 @@ segments:
     type: code
     start: 0x93AC30
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x93AC30, c, sbk_24_1_main]
     - [0x93AC70, c, sbk_24_2_npc]
@@ -10456,7 +10458,7 @@ segments:
     type: code
     start: 0x93C280
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x93C280, c, sbk_25_1_main]
     - [0x93C2C0, c, sbk_25_2_npc]
@@ -10468,7 +10470,7 @@ segments:
     type: code
     start: 0x93DCD0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x93DCD0, c, sbk_26_1_main]
     - [0x93DD10, c, sbk_26_2_npc]
@@ -10479,7 +10481,7 @@ segments:
     type: code
     start: 0x93F5B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x93F5B0, c, sbk_30_0_header]
     - [0x93F5B0, c, sbk_30_1_music]
@@ -10492,7 +10494,7 @@ segments:
     type: code
     start: 0x944000
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x944000, c, sbk_31_1_main]
     - [0x944040, c, sbk_31_2_npc]
@@ -10502,7 +10504,7 @@ segments:
     type: code
     start: 0x944A60
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x944A60, c, sbk_32_1_main]
     - [0x944AA0, c, sbk_32_2_npc]
@@ -10512,7 +10514,7 @@ segments:
     type: code
     start: 0x9459D0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments: # unusual organization
     - [0x9459D0, c, sbk_33_0_header]
     - [0x9459D0, c, sbk_33_1_entity]
@@ -10523,7 +10525,7 @@ segments:
     type: code
     start: 0x945ED0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x945ED0, c, sbk_34_1_main]
     - [0x945F10, c, sbk_34_2_npc]
@@ -10534,7 +10536,7 @@ segments:
     type: code
     start: 0x9486B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9486B0, c, sbk_35_1_main]
     - [0x9486F0, c, sbk_35_2_npc]
@@ -10545,7 +10547,7 @@ segments:
     type: code
     start: 0x949E60
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x949E60, c, sbk_36_1_main]
     - [0x949EA0, c, sbk_36_2_foliage]
@@ -10556,7 +10558,7 @@ segments:
     type: code
     start: 0x94B3A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x94B3A0, c, sbk_40_1_main]
     - [0x94B3E0, c, sbk_40_2_npc]
@@ -10567,7 +10569,7 @@ segments:
     type: code
     start: 0x94C040
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x94C040, c, sbk_41_1_main]
     - [0x94C040, c, sbk_41_2_entity]
@@ -10577,7 +10579,7 @@ segments:
     type: code
     start: 0x94C510
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x94C510, c, sbk_42_1_main]
     - [0x94C550, c, sbk_42_2_npc]
@@ -10587,7 +10589,7 @@ segments:
     type: code
     start: 0x94D170
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x94D170, c, sbk_43_1_main]
     - [0x94D170, c, sbk_43_2_entity]
@@ -10597,7 +10599,7 @@ segments:
     type: code
     start: 0x94D5A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x94D5A0, c, sbk_44_1_main]
     - [0x94D5E0, c, sbk_44_2_npc]
@@ -10607,7 +10609,7 @@ segments:
     type: code
     start: 0x94E4A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x94E4A0, c, sbk_45_1_main]
     - [0x94E4A0, c, sbk_45_2_entity]
@@ -10617,7 +10619,7 @@ segments:
     type: code
     start: 0x94E9A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x94E9A0, c, sbk_46_1_main]
     - [0x94E9E0, c, sbk_46_2_npc]
@@ -10629,7 +10631,7 @@ segments:
     type: code
     start: 0x950610
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x950610, c, sbk_50_1_main]
     - [0x950650]
@@ -10638,7 +10640,7 @@ segments:
     type: code
     start: 0x950970
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x950970, c, sbk_51_1_main]
     - [0x9509B0, c, sbk_51_2_npc]
@@ -10648,7 +10650,7 @@ segments:
     type: code
     start: 0x951670
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x951670, c, sbk_52_1_main]
     - [0x951670, c, sbk_52_2_entity]
@@ -10658,7 +10660,7 @@ segments:
     type: code
     start: 0x951AE0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x951AE0, c, sbk_53_1_main]
     - [0x951B20, c, sbk_53_2_npc]
@@ -10668,7 +10670,7 @@ segments:
     type: code
     start: 0x952580
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x952580, c, sbk_54_1_main]
     - [0x952580, c, sbk_54_2_entity]
@@ -10678,7 +10680,7 @@ segments:
     type: code
     start: 0x952A50
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x952A50, c, sbk_55_1_main]
     - [0x952A90, c, sbk_55_2_npc]
@@ -10690,7 +10692,7 @@ segments:
     type: code
     start: 0x953FC0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x953FC0, c, sbk_56_1_main]
     - [0x954D80, c, sbk_56_2_entity]
@@ -10701,7 +10703,7 @@ segments:
     type: code
     start: 0x9569F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9569F0, c, sbk_60_1_main]
     - [0x956A30, c, sbk_60_2_npc]
@@ -10711,7 +10713,7 @@ segments:
     type: code
     start: 0x956F90
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x956F90, c, sbk_61_1_main]
     - [0x956F90, c, sbk_61_2_entity]
@@ -10721,7 +10723,7 @@ segments:
     type: code
     start: 0x957350
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x957350, c, sbk_62_1_main]
     - [0x957390, c, sbk_62_2_npc]
@@ -10731,7 +10733,7 @@ segments:
     type: code
     start: 0x957D70
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x957D70, c, sbk_63_1_main]
     - [0x957DB0, c, sbk_63_2_npc]
@@ -10741,7 +10743,7 @@ segments:
     type: code
     start: 0x958590
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x958590, c, sbk_64_1_main]
     - [0x958590, c, sbk_64_2_entity]
@@ -10751,7 +10753,7 @@ segments:
     type: code
     start: 0x958950
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x958950, c, sbk_65_1_main]
     - [0x958990]
@@ -10760,7 +10762,7 @@ segments:
     type: code
     start: 0x958CB0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x958CB0, c, sbk_66_1_main]
     - [0x958CF0, c, sbk_66_2_npc]
@@ -10772,7 +10774,7 @@ segments:
     type: code
     start: 0x95AEB0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x95AEB0, c, sbk_99_1_main]
     - [0x95AEB0, c, sbk_99_2_entity]
@@ -10782,7 +10784,7 @@ segments:
     type: code
     start: 0x95B200
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x95B200, c, dro_01_0_header]
     - [0x95B200, c, dro_01_1_music]
@@ -10798,7 +10800,7 @@ segments:
     type: code
     start: 0x9691C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9691C0, c, dro_02_0_header]
     - [0x9691C0, c, dro_02_1_music]
@@ -10832,7 +10834,7 @@ segments:
     type: code
     start: 0x978140
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x978140, c, isk_01_0_header]
     - [0x978140, c, isk_01_1_music]
@@ -10845,7 +10847,7 @@ segments:
     type: code
     start: 0x978710
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x978710, c, isk_02_0_header]
     - [0x978710, c, isk_02_1_main]
@@ -10859,7 +10861,7 @@ segments:
     type: code
     start: 0x979E50
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x979E50, c, isk_03_0_header]
     - [0x979E50, c, isk_03_1_main]
@@ -10872,7 +10874,7 @@ segments:
     type: code
     start: 0x97B630
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x97B630, c, isk_04_0_header]
     - [0x97B630, c, isk_04_1_music]
@@ -10887,7 +10889,7 @@ segments:
     type: code
     start: 0x97DAD0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x97DAD0, c, isk_05_0_header]
     - [0x97DAD0, c, isk_05_1_main]
@@ -10899,7 +10901,7 @@ segments:
     type: code
     start: 0x980A20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x980A20, c, isk_06_0_header]
     - [0x980A20, c, isk_06_1_main]
@@ -10912,7 +10914,7 @@ segments:
     type: code
     start: 0x982440
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x982440, c, isk_07_0_header]
     - [0x982440, c, isk_07_1_main]
@@ -10928,7 +10930,7 @@ segments:
     type: code
     start: 0x984E30
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x984E30, c, isk_08_0_header]
     - [0x984E30, c, isk_08_1_main]
@@ -10940,7 +10942,7 @@ segments:
     type: code
     start: 0x9864E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9864E0, c, isk_09_0_header]
     - [0x9864E0, c, isk_09_1_music]
@@ -10954,7 +10956,7 @@ segments:
     type: code
     start: 0x988B60
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x988B60, c, isk_10_0_header]
     - [0x988B60, c, isk_10_1_main]
@@ -10966,7 +10968,7 @@ segments:
     type: code
     start: 0x98AA10
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x98AA10, c, isk_11_0_header]
     - [0x98AA10, c, isk_11_1_music]
@@ -10981,7 +10983,7 @@ segments:
     type: code
     start: 0x98D640
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x98D640, c, isk_12_0_header]
     - [0x98D640, c, isk_12_1_main]
@@ -10994,7 +10996,7 @@ segments:
     type: code
     start: 0x98F7E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x98F7E0, c, isk_13_0_header]
     - [0x98F7E0, c, isk_13_1_main]
@@ -11006,7 +11008,7 @@ segments:
     type: code
     start: 0x992730
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x992730, c, isk_14_0_header]
     - [0x992730, c, isk_14_1_main]
@@ -11018,7 +11020,7 @@ segments:
     type: code
     start: 0x9951F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9951F0, c, isk_16_0_header]
     - [0x9951F0, c, isk_16_1_main]
@@ -11031,7 +11033,7 @@ segments:
     type: code
     start: 0x997F70
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x997F70, c, isk_18_0_header]
     - [0x997F70, c, isk_18_1_main]
@@ -11043,7 +11045,7 @@ segments:
     type: code
     start: 0x999740
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x999740, c, isk_19_0_header]
     - [0x999740, c, isk_19_1_music]
@@ -11055,7 +11057,7 @@ segments:
     type: code
     start: 0x999C70
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x999C70, c, trd_00_0_header]
     - [0x999C70, c, trd_00_1_main]
@@ -11067,7 +11069,7 @@ segments:
     type: code
     start: 0x99C990
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x99C990, c, trd_01_0_header]
     - [0x99C990, c, trd_01_1_main]
@@ -11079,7 +11081,7 @@ segments:
     type: code
     start: 0x9A0FE0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9A0FE0, c, trd_02_0_header]
     - [0x9A0FE0, c, trd_02_1_main]
@@ -11091,7 +11093,7 @@ segments:
     type: code
     start: 0x9A4650
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9A4650, c, trd_03_0_header]
     - [0x9A4650, c, trd_03_1_main]
@@ -11104,7 +11106,7 @@ segments:
     type: code
     start: 0x9A83F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9A83F0, c, trd_04_0_header]
     - [0x9A83F0, c, trd_04_1_main]
@@ -11116,7 +11118,7 @@ segments:
     type: code
     start: 0x9AE700
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9AE700, c, trd_05_0_header]
     - [0x9AE700, c, trd_05_1_main]
@@ -11129,7 +11131,7 @@ segments:
     type: code
     start: 0x9B1790
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9B1790, c, trd_06_0_header]
     - [0x9B1790, c, trd_06_1_main]
@@ -11143,7 +11145,7 @@ segments:
     type: code
     start: 0x9B6980
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9B6980, c, trd_07_0_header]
     - [0x9B6980, c, trd_07_1_main]
@@ -11155,7 +11157,7 @@ segments:
     type: code
     start: 0x9BB2A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9BB2A0, c, trd_08_0_header]
     - [0x9BB2A0, c, trd_08_1_main]
@@ -11167,7 +11169,7 @@ segments:
     type: code
     start: 0x9BD660
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9BD660, c, trd_09_0_header]
     - [0x9BD660, c, trd_09_1_main]
@@ -11180,7 +11182,7 @@ segments:
     type: code
     start: 0x9C2910
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9C2910, c, trd_10_0_header]
     - [0x9C2910, c, trd_10_1_main]
@@ -11192,7 +11194,7 @@ segments:
     type: code
     start: 0x9C53E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9C53E0, c, nok_01_0_header]
     - [0x9C53E0, c, nok_01_1_music]
@@ -11209,7 +11211,7 @@ segments:
     type: code
     start: 0x9D7020
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9D7020, c, nok_02_0_header]
     - [0x9D7020, c, nok_02_1_music]
@@ -11228,7 +11230,7 @@ segments:
     type: code
     start: 0x9EB7F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9EB7F0, c, nok_03_0_header]
     - [0x9EB7F0, c, nok_03_1_music]
@@ -11241,7 +11243,7 @@ segments:
     type: code
     start: 0x9EDBF0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9EDBF0, c, nok_04_0_header]
     - [0x9EDBF0, c, nok_04_1_music]
@@ -11255,7 +11257,7 @@ segments:
     type: code
     start: 0x9F4A40
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9F4A40, c, nok_11_0_header]
     - [0x9F4A40, c, nok_11_1_music]
@@ -11268,7 +11270,7 @@ segments:
     type: code
     start: 0x9FA7F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0x9FA7F0, c, nok_12_0_header]
     - [0x9FA7F0, c, nok_12_1_music]
@@ -11284,7 +11286,7 @@ segments:
     type: code
     start: 0xA00600
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA00600, c, nok_13_0_header]
     - [0xA00600, c, nok_13_1_music]
@@ -11298,7 +11300,7 @@ segments:
     type: code
     start: 0xA02840
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA02840, c, nok_14_0_header]
     - [0xA02840, c, nok_14_1_music]
@@ -11312,7 +11314,7 @@ segments:
     type: code
     start: 0xA06F00
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA06F00, c, nok_15_0_header]
     - [0xA06F00, c, nok_15_1_music]
@@ -11326,7 +11328,7 @@ segments:
     type: code
     start: 0xA0BCF0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA0BCF0, c, hos_00_0_header]
     - [0xA0BD40, c, hos_00_1_music]
@@ -11342,7 +11344,7 @@ segments:
     type: code
     start: 0xA10880
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA10880, c, hos_01_0_header]
     - [0xA10880, c, hos_01_1_music]
@@ -11357,7 +11359,7 @@ segments:
     type: code
     start: 0xA16220
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA16220, c, hos_02_0_header]
     - [0xA16220, c, hos_02_1_music]
@@ -11372,7 +11374,7 @@ segments:
     type: code
     start: 0xA1B100
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA1B100, c, hos_03_0_header]
     - [0xA1B100, c, hos_03_1_music]
@@ -11389,7 +11391,7 @@ segments:
     type: code
     start: 0xA26ED0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA26ED0, c, hos_04_0_header]
     - [0xA26ED0, c, hos_04_1_music]
@@ -11405,7 +11407,7 @@ segments:
     type: code
     start: 0xA2A240
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA2A240, c, hos_05_0_header]
     - [0xA2A240, c, hos_05_1_music]
@@ -11422,7 +11424,7 @@ segments:
     type: code
     start: 0xA394E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA394E0, c, hos_06_0_header]
     - [0xA394E0, c, hos_06_1_entity]
@@ -11437,7 +11439,7 @@ segments:
     type: code
     start: 0xA3F740
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA3F740, c, hos_10_0_header]
     - [0xA3F760, c, hos_10_1_music]
@@ -11453,7 +11455,7 @@ segments:
     type: code
     start: 0xA45930
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA45930, c, hos_20_0_header]
     - [0xA45930, c, hos_20_1_main]
@@ -11464,7 +11466,7 @@ segments:
     type: code
     start: 0xA46F60
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA46F60, c, kpa_01_0_header]
     - [0xA46F60, c, kpa_01_1_music]
@@ -11477,7 +11479,7 @@ segments:
     type: code
     start: 0xA485C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA485C0, c, kpa_03_0_header]
     - [0xA485C0, c, kpa_03_1_music]
@@ -11490,7 +11492,7 @@ segments:
     type: code
     start: 0xA4BF60
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA4BF60, c, kpa_04_0_header]
     - [0xA4BF60, c, kpa_04_1_music]
@@ -11502,7 +11504,7 @@ segments:
     type: code
     start: 0xA4CA20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA4CA20, c, kpa_08_0_header]
     - [0xA4CA20, c, kpa_08_1_music]
@@ -11515,7 +11517,7 @@ segments:
     type: code
     start: 0xA4F000
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA4F000, c, kpa_09_0_header]
     - [0xA4F000, c, kpa_09_1_music]
@@ -11528,7 +11530,7 @@ segments:
     type: code
     start: 0xA51980
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA51980, c, kpa_10_0_header]
     - [0xA51980, c, kpa_10_1_music]
@@ -11541,7 +11543,7 @@ segments:
     type: code
     start: 0xA528C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA528C0, c, kpa_11_0_header]
     - [0xA528C0, c, kpa_11_1_music]
@@ -11554,7 +11556,7 @@ segments:
     type: code
     start: 0xA54950
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA54950, c, kpa_12_0_header]
     - [0xA54990, c, kpa_12_1_music]
@@ -11566,7 +11568,7 @@ segments:
     type: code
     start: 0xA55F20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA55F20, c, kpa_13_0_header]
     - [0xA55F60, c, kpa_13_1_music]
@@ -11579,7 +11581,7 @@ segments:
     type: code
     start: 0xA574B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA574B0, c, kpa_14_0_header]
     - [0xA574F0, c, kpa_14_1_music]
@@ -11592,7 +11594,7 @@ segments:
     type: code
     start: 0xA59390
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA59390, c, kpa_15_0_header]
     - [0xA59390, c, kpa_15_1_music]
@@ -11604,7 +11606,7 @@ segments:
     type: code
     start: 0xA5A030
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA5A030, c, kpa_16_0_header]
     - [0xA5A030, c, kpa_16_1_music]
@@ -11617,7 +11619,7 @@ segments:
     type: code
     start: 0xA5CA20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA5CA20, c, kpa_17_0_header]
     - [0xA5CA20, c, kpa_17_1_music]
@@ -11630,7 +11632,7 @@ segments:
     type: code
     start: 0xA5E0C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA5E0C0, c, kpa_32_0_header]
     - [0xA5E0C0, c, kpa_32_1_music]
@@ -11642,7 +11644,7 @@ segments:
     type: code
     start: 0xA5F080
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA5F080, c, kpa_33_0_header]
     - [0xA5F080, c, kpa_33_1_music]
@@ -11654,7 +11656,7 @@ segments:
     type: code
     start: 0xA60040
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA60040, c, kpa_40_0_header]
     - [0xA60040, c, kpa_40_1_music]
@@ -11665,7 +11667,7 @@ segments:
     type: code
     start: 0xA60470
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA60470, c, kpa_41_0_header]
     - [0xA60470, c, kpa_41_1_music]
@@ -11676,7 +11678,7 @@ segments:
     type: code
     start: 0xA609D0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA609D0, c, kpa_50_0_header]
     - [0xA609D0, c, kpa_50_1_music]
@@ -11688,7 +11690,7 @@ segments:
     type: code
     start: 0xA64090
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA64090, c, kpa_51_0_header]
     - [0xA640E0, c, kpa_51_1_music]
@@ -11700,7 +11702,7 @@ segments:
     type: code
     start: 0xA67100
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA67100, c, kpa_52_0_header]
     - [0xA67100, c, kpa_52_1_music]
@@ -11713,7 +11715,7 @@ segments:
     type: code
     start: 0xA6ACA0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA6ACA0, c, kpa_53_0_header]
     - [0xA6ACF0, c, kpa_53_1_music]
@@ -11726,7 +11728,7 @@ segments:
     type: code
     start: 0xA6CB00
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA6CB00, c, kpa_60_0_header]
     - [0xA6CB00, c, kpa_60_1_music]
@@ -11739,7 +11741,7 @@ segments:
     type: code
     start: 0xA6E3E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA6E3E0, c, kpa_61_0_header]
     - [0xA6E3E0, c, kpa_61_1_music]
@@ -11752,7 +11754,7 @@ segments:
     type: code
     start: 0xA72220
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA72220, c, kpa_62_0_header]
     - [0xA72220, c, kpa_62_1_music]
@@ -11764,7 +11766,7 @@ segments:
     type: code
     start: 0xA735B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA735B0, c, kpa_63_0_header]
     - [0xA735B0, c, kpa_63_1_music]
@@ -11777,7 +11779,7 @@ segments:
     type: code
     start: 0xA74870
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA74870, c, kpa_70_0_header]
     - [0xA74870, c, kpa_70_1_music]
@@ -11791,7 +11793,7 @@ segments:
     type: code
     start: 0xA784C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA784C0, c, kpa_81_0_header]
     - [0xA784C0, c, kpa_81_1_music]
@@ -11803,7 +11805,7 @@ segments:
     type: code
     start: 0xA7A500
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA7A500, c, kpa_82_0_header]
     - [0xA7A500, c, kpa_82_1_music]
@@ -11815,7 +11817,7 @@ segments:
     type: code
     start: 0xA83490
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA83490, c, kpa_83_0_header]
     - [0xA83490, c, kpa_83_1_music]
@@ -11827,7 +11829,7 @@ segments:
     type: code
     start: 0xA867B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA867B0, c, kpa_90_0_header]
     - [0xA867B0, c, kpa_90_1_music]
@@ -11838,7 +11840,7 @@ segments:
     type: code
     start: 0xA86A50
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA86A50, c, kpa_91_0_header]
     - [0xA86A50, c, kpa_91_1_music]
@@ -11851,7 +11853,7 @@ segments:
     type: code
     start: 0xA8C7C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA8C7C0, c, kpa_94_0_header]
     - [0xA8C7C0, c, kpa_94_1_music]
@@ -11862,7 +11864,7 @@ segments:
     type: code
     start: 0xA8CA80
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA8CA80, c, kpa_95_0_header]
     - [0xA8CA80, c, kpa_95_1_music]
@@ -11875,7 +11877,7 @@ segments:
     type: code
     start: 0xA927C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA927C0, c, kpa_96_0_header]
     - [0xA927C0, c, kpa_96_1_music]
@@ -11887,7 +11889,7 @@ segments:
     type: code
     start: 0xA93160
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA93160, c, kpa_100_0_header]
     - [0xA931B0, c, kpa_100_1_music]
@@ -11899,7 +11901,7 @@ segments:
     type: code
     start: 0xA93440
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA93440, c, kpa_101_0_header]
     - [0xA93440, c, kpa_101_1_music]
@@ -11911,7 +11913,7 @@ segments:
     type: code
     start: 0xA93740
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA93740, c, kpa_102_0_header]
     - [0xA93740, c, kpa_102_1_music]
@@ -11923,7 +11925,7 @@ segments:
     type: code
     start: 0xA99590
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA99590, c, kpa_111_0_header]
     - [0xA99590, c, kpa_111_1_music]
@@ -11937,7 +11939,7 @@ segments:
     type: code
     start: 0xA9C990
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA9C990, c, kpa_112_0_header]
     - [0xA9C990, c, kpa_112_1_music]
@@ -11948,7 +11950,7 @@ segments:
     type: code
     start: 0xA9CC30
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA9CC30, c, kpa_113_0_header]
     - [0xA9CC30, c, kpa_113_1_music]
@@ -11962,7 +11964,7 @@ segments:
     type: code
     start: 0xA9E980
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA9E980, c, kpa_114_0_header]
     - [0xA9E9D0, c, kpa_114_1_music]
@@ -11974,7 +11976,7 @@ segments:
     type: code
     start: 0xA9ED40
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xA9ED40, c, kpa_115_0_header]
     - [0xA9ED40, c, kpa_115_1_music]
@@ -11987,7 +11989,7 @@ segments:
     type: code
     start: 0xAA1EE0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAA1EE0, c, kpa_116_0_header]
     - [0xAA1EE0, c, kpa_116_1_music]
@@ -11998,7 +12000,7 @@ segments:
     type: code
     start: 0xAA2180
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAA2180, c, kpa_117_0_header]
     - [0xAA2180, c, kpa_117_1_music]
@@ -12009,7 +12011,7 @@ segments:
     type: code
     start: 0xAA23C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAA23C0, c, kpa_118_0_header]
     - [0xAA23C0, c, kpa_118_1_music]
@@ -12020,7 +12022,7 @@ segments:
     type: code
     start: 0xAA2660
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAA2660, c, kpa_119_0_header]
     - [0xAA2660, c, kpa_119_1_music]
@@ -12032,7 +12034,7 @@ segments:
     type: code
     start: 0xAA28F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAA28F0, c, kpa_121_0_header]
     - [0xAA28F0, c, kpa_121_1_music]
@@ -12043,7 +12045,7 @@ segments:
     type: code
     start: 0xAA2D20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAA2D20, c, kpa_130_0_header]
     - [0xAA2D20, c, kpa_130_1_music]
@@ -12055,7 +12057,7 @@ segments:
     type: code
     start: 0xAA7480
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAA7480, c, kpa_133_0_header]
     - [0xAA7480, c, kpa_133_1_music]
@@ -12070,7 +12072,7 @@ segments:
     type: code
     start: 0xAA8FA0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAA8FA0, c, kpa_134_0_header]
     - [0xAA8FA0, c, kpa_134_1_music]
@@ -12085,7 +12087,7 @@ segments:
     type: code
     start: 0xAAC830
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAAC830, c, osr_00_0_header]
     - [0xAAC830, c, osr_00_1_music]
@@ -12099,7 +12101,7 @@ segments:
     type: code
     start: 0xAAFFF0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAAFFF0, c, osr_01_0_header]
     - [0xAB0040, c, osr_01_1_music]
@@ -12111,7 +12113,7 @@ segments:
     type: code
     start: 0xAB2170
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAB2170, c, osr_02_0_header]
     - [0xAB2190, c, osr_02_1_main]
@@ -12124,7 +12126,7 @@ segments:
     type: code
     start: 0xAB6290
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAB6290, c, osr_03_0_header]
     - [0xAB62B0, c, osr_03_1_main]
@@ -12139,7 +12141,7 @@ segments:
     type: code
     start: 0xAB92B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAB92B0, c, osr_04_0_header]
     - [0xAB9300, c, osr_04_1_main]
@@ -12150,7 +12152,7 @@ segments:
     type: code
     start: 0xABB290
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xABB290, c]
     - [0xABB340, c]
@@ -12165,7 +12167,7 @@ segments:
     type: code
     start: 0xAC5170
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAC5170, c]
     - [0xAC6000, data]
@@ -12177,7 +12179,7 @@ segments:
     type: code
     start: 0xAC8D20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAC8D20, c]
     - [0xAC8D20, data]
@@ -12189,7 +12191,7 @@ segments:
     type: code
     start: 0xAC9710
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAC9710, c]
     - [0xAC9730, c]
@@ -12203,7 +12205,7 @@ segments:
     type: code
     start: 0xACAB20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xACAB20, c]
     - [0xACAB90, c]
@@ -12218,7 +12220,7 @@ segments:
     type: code
     start: 0xACE140
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xACE140, c]
     - [0xACE1B0, c]
@@ -12235,7 +12237,7 @@ segments:
     type: code
     start: 0xAD4090
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAD4090, c]
     - [0xAD4100, c]
@@ -12246,7 +12248,7 @@ segments:
     type: code
     start: 0xAD5ED0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAD5ED0, c]
     - [0xAD5EF0, c]
@@ -12263,7 +12265,7 @@ segments:
     type: code
     start: 0xADAEA0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xADAEA0, c]
     - [0xADAEF0, c]
@@ -12287,7 +12289,7 @@ segments:
     type: code
     start: 0xAE5590
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAE5590, c]
     - [0xAE58D0, c]
@@ -12309,7 +12311,7 @@ segments:
     type: code
     start: 0xAED410
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAED410, c]
     - [0xAEDC60, c]
@@ -12323,7 +12325,7 @@ segments:
     type: code
     start: 0xAF1C60
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAF1C60, c]
     - [0xAF2200, data]
@@ -12335,7 +12337,7 @@ segments:
     type: code
     start: 0xAF2CA0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAF2CA0, c]
     - [0xAF2FE0, c]
@@ -12350,7 +12352,7 @@ segments:
     type: code
     start: 0xAF7950
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAF7950, c]
     - [0xAF7C00, c]
@@ -12364,7 +12366,7 @@ segments:
     type: code
     start: 0xAFDB40
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xAFDB40, c]
     - [0xAFDE00, c]
@@ -12378,7 +12380,7 @@ segments:
     type: code
     start: 0xB022A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB022A0, c]
     - [0xB022A0, data]
@@ -12388,7 +12390,7 @@ segments:
     type: code
     start: 0xB024F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB024F0, c]
     - [0xB024F0, data]
@@ -12399,7 +12401,7 @@ segments:
     type: code
     start: 0xB02880
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB02880, c]
     - [0xB028A0, c]
@@ -12415,7 +12417,7 @@ segments:
     type: code
     start: 0xB06570
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB06570, c]
     - [0xB06590, data]
@@ -12427,7 +12429,7 @@ segments:
     type: code
     start: 0xB06A00
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB06A00, c]
     - [0xB06A20, c]
@@ -12445,7 +12447,7 @@ segments:
     type: code
     start: 0xB13120
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB13120, c]
     - [0xB13150, data]
@@ -12457,7 +12459,7 @@ segments:
     type: code
     start: 0xB13D70
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB13D70, c]
     - [0xB14080, c]
@@ -12470,7 +12472,7 @@ segments:
     type: code
     start: 0xB14EA0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB14EA0, c]
     - [0xB14EA0, data]
@@ -12480,7 +12482,7 @@ segments:
     type: code
     start: 0xB150B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB150B0, c]
     - [0xB150E0, c]
@@ -12493,7 +12495,7 @@ segments:
     type: code
     start: 0xB1A900
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB1A900, c, tst_01_1_main]
     - [0xB1A900, c, tst_01_2_entity]
@@ -12503,7 +12505,7 @@ segments:
     type: code
     start: 0xB1AC30
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB1AC30, c, tst_02_1_main]
     - [0xB1AC30, c, tst_02_2_entity]
@@ -12513,7 +12515,7 @@ segments:
     type: code
     start: 0xB1AF80
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB1AF80, c, tst_03_1_main]
     - [0xB1AF80, c, tst_03_2_entity]
@@ -12523,7 +12525,7 @@ segments:
     type: code
     start: 0xB1B570
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB1B570, c, tst_04_1_main]
     - [0xB1B7D0, c, tst_04_2_entity]
@@ -12535,7 +12537,7 @@ segments:
     type: code
     start: 0xB1C540
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB1C540, c, tst_10_1_main]
     - [0xB1C540]
@@ -12544,7 +12546,7 @@ segments:
     type: code
     start: 0xB1CA50
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB1CA50, c, tst_11_1_main]
     - [0xB1CA50, c, tst_11_2_extra]
@@ -12554,7 +12556,7 @@ segments:
     type: code
     start: 0xB1D2F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB1D2F0, c, tst_12_1_main]
   - name: tst_13
@@ -12562,7 +12564,7 @@ segments:
     type: code
     start: 0xB1D760
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB1D760, c, tst_13_1_main]
     - start: 0xB1DB20
@@ -12578,7 +12580,7 @@ segments:
     type: code
     start: 0xB20470
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB20470, c, tst_20_1_main]
   - name: jan_00
@@ -12586,7 +12588,7 @@ segments:
     type: code
     start: 0xB20540
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB20540, c, jan_00_0_header]
     - [0xB20540, c, jan_00_1_main]
@@ -12600,7 +12602,7 @@ segments:
     type: code
     start: 0xB28030
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB28030, c, jan_01_0_header]
     - [0xB28030, c, jan_01_1_music]
@@ -12614,7 +12616,7 @@ segments:
     type: code
     start: 0xB2C470
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB2C470, c, jan_02_0_header]
     - [0xB2C470, c, jan_02_1_music]
@@ -12628,7 +12630,7 @@ segments:
     type: code
     start: 0xB34BD0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB34BD0, c, jan_03_0_header]
     - [0xB34BD0, c, jan_03_1_music]
@@ -12644,7 +12646,7 @@ segments:
     type: code
     start: 0xB44770
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB44770, c]
     - [0xB447B0, c]
@@ -12669,7 +12671,7 @@ segments:
     type: code
     start: 0xB4AA70
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB4AA70, c]
     - [0xB4AAB0, c]
@@ -12689,7 +12691,7 @@ segments:
     type: code
     start: 0xB52830
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB52830, c]
     - [0xB52B40, c]
@@ -12709,7 +12711,7 @@ segments:
     type: code
     start: 0xB59870
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB59870, c]
     - [0xB5A610, c]
@@ -12725,7 +12727,7 @@ segments:
     type: code
     start: 0xB5E2B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB5E2B0, c]
     - [0xB5E5C0, c]
@@ -12743,7 +12745,7 @@ segments:
     type: code
     start: 0xB65AB0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB65AB0, c]
     - [0xB660A0, c]
@@ -12759,7 +12761,7 @@ segments:
     type: code
     start: 0xB6C390
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB6C390, c]
     - [0xB6C6A0, c]
@@ -12777,7 +12779,7 @@ segments:
     type: code
     start: 0xB70860
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB70860, c]
     - [0xB71010, c]
@@ -12790,7 +12792,7 @@ segments:
     type: code
     start: 0xB730B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB730B0, c]
     - [0xB73570, c]
@@ -12803,7 +12805,7 @@ segments:
     type: code
     start: 0xB767B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB767B0, c]
     - [0xB76D80, data]
@@ -12816,7 +12818,7 @@ segments:
     type: code
     start: 0xB7A050
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB7A050, c]
     - [0xB7A510, c]
@@ -12830,7 +12832,7 @@ segments:
     type: code
     start: 0xB7D920
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB7D920, c]
     - [0xB7D9E0, c]
@@ -12844,7 +12846,7 @@ segments:
     type: code
     start: 0xB80000
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB80000, c]
     - [0xB80300, c]
@@ -12857,7 +12859,7 @@ segments:
     type: code
     start: 0xB837C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB837C0, c, jan_17_0_header]
     - [0xB837C0, c, jan_17_1_music]
@@ -12869,7 +12871,7 @@ segments:
     type: code
     start: 0xB83B90
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB83B90, c, jan_18_0_header]
     - [0xB83B90, c, jan_18_1_music]
@@ -12881,7 +12883,7 @@ segments:
     type: code
     start: 0xB83E60
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB83E60, c, jan_19_0_header]
     - [0xB83E60, c, jan_19_1_music]
@@ -12893,7 +12895,7 @@ segments:
     type: code
     start: 0xB84180
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB84180, c]
     - [0xB851A0, c]
@@ -12907,7 +12909,7 @@ segments:
     type: code
     start: 0xB8FCD0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB8FCD0, c]
     - [0xB8FCD0, data]
@@ -12918,7 +12920,7 @@ segments:
     type: code
     start: 0xB93440
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB93440, c, mim_01_0_header]
     - [0xB93440, c, mim_01_1_music]
@@ -12933,7 +12935,7 @@ segments:
     type: code
     start: 0xB97C00
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB97C00, c, mim_02_0_header]
     - [0xB97C00, c, mim_02_1_music]
@@ -12947,7 +12949,7 @@ segments:
     type: code
     start: 0xB9B480
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB9B480, c, mim_03_0_header]
     - [0xB9B480, c, mim_03_1_music]
@@ -12962,7 +12964,7 @@ segments:
     type: code
     start: 0xB9D960
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xB9D960, c, mim_04_0_header]
     - [0xB9D960, c, mim_04_1_music]
@@ -12977,7 +12979,7 @@ segments:
     type: code
     start: 0xBA0730
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBA0730, c, mim_05_0_header]
     - [0xBA07A0, c, mim_05_1_music]
@@ -12992,7 +12994,7 @@ segments:
     type: code
     start: 0xBA4780
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBA4780, c, mim_06_0_header]
     - [0xBA4780, c, mim_06_1_music]
@@ -13007,7 +13009,7 @@ segments:
     type: code
     start: 0xBAA140
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBAA140, c, mim_07_0_header]
     - [0xBAA140, c, mim_07_1_music]
@@ -13022,7 +13024,7 @@ segments:
     type: code
     start: 0xBAD940
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBAD940, c, mim_08_0_header]
     - [0xBAD940, c, mim_08_1_music]
@@ -13036,7 +13038,7 @@ segments:
     type: code
     start: 0xBB2E00
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBB2E00, c, mim_09_0_header]
     - [0xBB2E00, c, mim_09_1_music]
@@ -13051,7 +13053,7 @@ segments:
     type: code
     start: 0xBB59E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBB59E0, c, mim_10_0_header]
     - [0xBB59E0, c, mim_10_1_music]
@@ -13064,7 +13066,7 @@ segments:
     type: code
     start: 0xBB7070
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBB7070, c, mim_11_0_header]
     - [0xBB7070, c, mim_11_1_music]
@@ -13079,7 +13081,7 @@ segments:
     type: code
     start: 0xBBB380
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBBB380, c, mim_12_0_header]
     - [0xBBB380, c, mim_12_1_music]
@@ -13093,7 +13095,7 @@ segments:
     type: code
     start: 0xBBD1A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBBD1A0, c, obk_01_0_header]
     - [0xBBD1A0, c, obk_01_1_music]
@@ -13109,7 +13111,7 @@ segments:
     type: code
     start: 0xBC2A90
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBC2A90, c, obk_02_0_header]
     - [0xBC2A90, c, obk_02_1_music]
@@ -13124,7 +13126,7 @@ segments:
     type: code
     start: 0xBC4280
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBC4280, c, obk_03_0_header]
     - [0xBC4280, c, obk_03_1_music]
@@ -13140,7 +13142,7 @@ segments:
     type: code
     start: 0xBC7E60
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBC7E60, c, obk_04_0_header]
     - [0xBC7E60, c, obk_04_1_music]
@@ -13155,7 +13157,7 @@ segments:
     type: code
     start: 0xBCD060
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBCD060, c, obk_05_0_header]
     - [0xBCD060, c, obk_05_1_music]
@@ -13170,7 +13172,7 @@ segments:
     type: code
     start: 0xBCE690
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBCE690, c, obk_06_0_header]
     - [0xBCE690, c, obk_06_1_music]
@@ -13183,7 +13185,7 @@ segments:
     type: code
     start: 0xBCEBF0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBCEBF0, c, obk_07_0_header]
     - [0xBCEBF0, c, obk_07_1_music]
@@ -13198,7 +13200,7 @@ segments:
     type: code
     start: 0xBD3870
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBD3870, c, obk_08_0_header]
     - [0xBD3870, c, obk_08_1_music]
@@ -13213,7 +13215,7 @@ segments:
     type: code
     start: 0xBDA7B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBDA7B0, c, obk_09_0_header]
     - [0xBDA7B0, c, obk_09_1_music]
@@ -13228,7 +13230,7 @@ segments:
     type: code
     start: 0xBDD1B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBDD1B0, c, arn_02_0_header]
     - [0xBDD1B0, c, arn_02_1_music]
@@ -13241,7 +13243,7 @@ segments:
     type: code
     start: 0xBDED90
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBDED90, c, arn_03_0_header]
     - [0xBDED90, c, arn_03_1_music]
@@ -13254,7 +13256,7 @@ segments:
     type: code
     start: 0xBE37B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBE37B0, c, arn_04_0_header]
     - [0xBE37B0, c, arn_04_1_music]
@@ -13267,7 +13269,7 @@ segments:
     type: code
     start: 0xBE7BE0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBE7BE0, c, arn_05_0_header]
     - [0xBE7BE0, c, arn_05_1_music]
@@ -13280,7 +13282,7 @@ segments:
     type: code
     start: 0xBECDF0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBECDF0, c, arn_07_0_header]
     - [0xBECDF0, c, arn_07_1_music]
@@ -13294,7 +13296,7 @@ segments:
     type: code
     start: 0xBF47A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBF47A0, c, arn_08_0_header]
     - [0xBF47A0, c, arn_08_1_music]
@@ -13310,7 +13312,7 @@ segments:
     type: code
     start: 0xBF6060
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBF6060, c, arn_09_0_header]
     - [0xBF6060, c, arn_09_1_music]
@@ -13324,7 +13326,7 @@ segments:
     type: code
     start: 0xBF6A00
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBF6A00, c, arn_10_0_header]
     - [0xBF6A00, c, arn_10_1_music]
@@ -13337,7 +13339,7 @@ segments:
     type: code
     start: 0xBF7680
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBF7680, c, arn_11_0_header]
     - [0xBF7680, c, arn_11_1_music]
@@ -13349,7 +13351,7 @@ segments:
     type: code
     start: 0xBF8790
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBF8790, c, arn_12_0_header]
     - [0xBF8790, c, arn_12_1_music]
@@ -13362,7 +13364,7 @@ segments:
     type: code
     start: 0xBF9410
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBF9410, c, arn_13_0_header]
     - [0xBF9410, c, arn_13_1_music]
@@ -13375,7 +13377,7 @@ segments:
     type: code
     start: 0xBFA0A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBFA0A0, c, dgb_00_0_header]
     - [0xBFA0A0, c, dgb_00_1_music]
@@ -13388,7 +13390,7 @@ segments:
     type: code
     start: 0xBFD880
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xBFD880, c, dgb_01_0_header]
     - [0xBFD880, c, dgb_01_1_music]
@@ -13466,7 +13468,7 @@ segments:
     dir: world/area_dgb
     start: 0xC20F40
     vram: 0x80200000
-    follows_vram_symbol: D_80200000
+    vram_of_symbol: D_80200000
     subsegments:
     - [0xC20F40, c, dgb_01_smash_bridges]
     - start: 0xC20F40
@@ -13768,7 +13770,7 @@ segments:
     type: code
     start: 0xC2EBA0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC2EBA0, c, dgb_02_0_header]
     - [0xC2EBA0, c, dgb_02_1_music]
@@ -13780,7 +13782,7 @@ segments:
     type: code
     start: 0xC314E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC314E0, c, dgb_03_0_header]
     - [0xC314E0, c, dgb_03_1_music]
@@ -13794,7 +13796,7 @@ segments:
     type: code
     start: 0xC36530
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC36530, c, dgb_04_0_header]
     - [0xC36530, c, dgb_04_1_music]
@@ -13807,7 +13809,7 @@ segments:
     type: code
     start: 0xC3AA10
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC3AA10, c, dgb_05_0_header]
     - [0xC3AA10, c, dgb_05_1_music]
@@ -13821,7 +13823,7 @@ segments:
     type: code
     start: 0xC3D080
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC3D080, c, dgb_06_0_header]
     - [0xC3D080, c, dgb_06_1_music]
@@ -13834,7 +13836,7 @@ segments:
     type: code
     start: 0xC3DBF0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC3DBF0, c, dgb_07_0_header]
     - [0xC3DBF0, c, dgb_07_1_music]
@@ -13847,7 +13849,7 @@ segments:
     type: code
     start: 0xC3FDB0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC3FDB0, c, dgb_08_0_header]
     - [0xC3FDB0, c, dgb_08_1_music]
@@ -13860,7 +13862,7 @@ segments:
     type: code
     start: 0xC46BE0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC46BE0, c, dgb_09_0_header]
     - [0xC46BE0, c, dgb_09_1_music]
@@ -13873,7 +13875,7 @@ segments:
     type: code
     start: 0xC4C390
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC4C390, c, dgb_10_0_header]
     - [0xC4C390, c, dgb_10_1_music]
@@ -13886,7 +13888,7 @@ segments:
     type: code
     start: 0xC4D3E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC4D3E0, c, dgb_11_0_header]
     - [0xC4D3E0, c, dgb_11_1_music]
@@ -13898,7 +13900,7 @@ segments:
     type: code
     start: 0xC4DEF0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC4DEF0, c, dgb_12_0_header]
     - [0xC4DEF0, c, dgb_12_1_music]
@@ -13911,7 +13913,7 @@ segments:
     type: code
     start: 0xC4E960
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC4E960, c, dgb_13_0_header]
     - [0xC4E960, c, dgb_13_1_music]
@@ -13924,7 +13926,7 @@ segments:
     type: code
     start: 0xC4F030
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC4F030, c, dgb_14_0_header]
     - [0xC4F030, c, dgb_14_1_music]
@@ -13936,7 +13938,7 @@ segments:
     type: code
     start: 0xC4F510
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC4F510, c, dgb_15_0_header]
     - [0xC4F510, c, dgb_15_1_music]
@@ -13949,7 +13951,7 @@ segments:
     type: code
     start: 0xC52540
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC52540, c, dgb_16_0_header]
     - [0xC52540, c, dgb_16_1_music]
@@ -13962,7 +13964,7 @@ segments:
     type: code
     start: 0xC55A60
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC55A60, c, dgb_17_0_header]
     - [0xC55A60, c, dgb_17_1_music]
@@ -13974,7 +13976,7 @@ segments:
     type: code
     start: 0xC55F40
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC55F40, c, dgb_18_0_header]
     - [0xC55F40, c, dgb_18_1_music]
@@ -13987,7 +13989,7 @@ segments:
     type: code
     start: 0xC599D0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC599D0, c, kzn_01_0_header]
     - [0xC599D0, c, kzn_01_1_main]
@@ -13998,7 +14000,7 @@ segments:
     type: code
     start: 0xC5A740
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC5A740, c, kzn_02_0_header]
     - [0xC5A740, c, kzn_02_1_main]
@@ -14011,7 +14013,7 @@ segments:
     type: code
     start: 0xC60D10
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC60D10, c, kzn_03_0_header]
     - [0xC60D10, c, kzn_03_1_main]
@@ -14024,7 +14026,7 @@ segments:
     type: code
     start: 0xC68130
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC68130, c, kzn_04_0_header]
     - [0xC68130, c, kzn_04_1_main]
@@ -14036,7 +14038,7 @@ segments:
     type: code
     start: 0xC6C0D0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC6C0D0, c, kzn_05_0_header]
     - [0xC6C0D0, c, kzn_05_1_main]
@@ -14046,7 +14048,7 @@ segments:
     type: code
     start: 0xC6C920
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC6C920, c, kzn_06_0_header]
     - [0xC6C920, c, kzn_06_1_main]
@@ -14058,7 +14060,7 @@ segments:
     type: code
     start: 0xC6E330
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC6E330, c, kzn_07_0_header]
     - [0xC6E330, c, kzn_07_1_music]
@@ -14071,7 +14073,7 @@ segments:
     type: code
     start: 0xC71480
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC71480, c, kzn_08_0_header]
     - [0xC71480, c, kzn_08_1_main]
@@ -14084,7 +14086,7 @@ segments:
     type: code
     start: 0xC76CE0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC76CE0, c, kzn_09_0_header]
     - [0xC76CE0, c, kzn_09_1_main]
@@ -14097,7 +14099,7 @@ segments:
     type: code
     start: 0xC7E180
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC7E180, c, kzn_10_0_header]
     - [0xC7E180, c, kzn_10_1_main]
@@ -14108,7 +14110,7 @@ segments:
     type: code
     start: 0xC801A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC801A0, c, kzn_11_0_header]
     - [0xC801A0, c, kzn_11_1_main]
@@ -14120,7 +14122,7 @@ segments:
     type: code
     start: 0xC85AB0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC85AB0, c, kzn_17_0_header]
     - [0xC85AB0, c, kzn_17_1_main]
@@ -14133,7 +14135,7 @@ segments:
     type: code
     start: 0xC8C0A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC8C0A0, c, kzn_18_0_header]
     - [0xC8C0E0, c, kzn_18_1_main]
@@ -14145,7 +14147,7 @@ segments:
     type: code
     start: 0xC8DBB0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC8DBB0, c, kzn_19_0_header]
     - [0xC8DBB0, c, kzn_19_1_music]
@@ -14174,7 +14176,7 @@ segments:
     type: code
     start: 0xC95F30
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC95F30, c, kzn_20_0_header]
     - [0xC95F30, c, kzn_20_1_music]
@@ -14186,7 +14188,7 @@ segments:
     type: code
     start: 0xC9A200
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC9A200, c, kzn_22_0_header]
     - [0xC9A200, c, kzn_22_1_music]
@@ -14199,7 +14201,7 @@ segments:
     type: code
     start: 0xC9C300
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC9C300, c, kzn_23_0_header]
     - [0xC9C300, c, kzn_23_1_music]
@@ -14211,7 +14213,7 @@ segments:
     type: code
     start: 0xC9DF20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xC9DF20, c, flo_00_0_header]
     - [0xC9DF20, c, flo_00_1_music]
@@ -14226,7 +14228,7 @@ segments:
     type: code
     start: 0xCA72A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCA72A0, c, flo_03_0_header]
     - [0xCA72A0, c, flo_03_1_music]
@@ -14240,7 +14242,7 @@ segments:
     type: code
     start: 0xCAC1F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCAC1F0, c, flo_07_0_header]
     - [0xCAC1F0, c, flo_07_1_music]
@@ -14252,7 +14254,7 @@ segments:
     type: code
     start: 0xCAED40
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCAED40, c, flo_08_0_header]
     - [0xCAED40, c, flo_08_1_music]
@@ -14267,7 +14269,7 @@ segments:
     type: code
     start: 0xCB5000
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCB5000, c, flo_09_0_header]
     - [0xCB5000, c, flo_09_1_music]
@@ -14281,7 +14283,7 @@ segments:
     type: code
     start: 0xCB9200
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCB9200, c, flo_10_0_header]
     - [0xCB9240, c, flo_10_1_music]
@@ -14297,7 +14299,7 @@ segments:
     type: code
     start: 0xCBDCD0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCBDCD0, c, flo_11_0_header]
     - [0xCBDCD0, c, flo_11_1_music]
@@ -14310,7 +14312,7 @@ segments:
     type: code
     start: 0xCC0E30
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCC0E30, c, flo_12_0_header]
     - [0xCC0E30, c, flo_12_1_music]
@@ -14322,7 +14324,7 @@ segments:
     type: code
     start: 0xCC3810
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCC3810, c, flo_13_0_header]
     - [0xCC3810, c, flo_13_1_music]
@@ -14336,7 +14338,7 @@ segments:
     type: code
     start: 0xCCB310
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCCB310, c, flo_14_0_header]
     - [0xCCB310, c, flo_14_1_music]
@@ -14351,7 +14353,7 @@ segments:
     type: code
     start: 0xCD06C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCD06C0, c, flo_15_0_header]
     - [0xCD06C0, c, flo_15_1_music]
@@ -14365,7 +14367,7 @@ segments:
     type: code
     start: 0xCD1E30
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCD1E30, c, flo_16_0_header]
     - [0xCD1E30, c, flo_16_1_music]
@@ -14380,7 +14382,7 @@ segments:
     type: code
     start: 0xCD72E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCD72E0, c, flo_17_0_header]
     - [0xCD72E0, c, flo_17_1_music]
@@ -14394,7 +14396,7 @@ segments:
     type: code
     start: 0xCDC6A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCDC6A0, c, flo_18_0_header]
     - [0xCDC6A0, c, flo_18_1_music]
@@ -14408,7 +14410,7 @@ segments:
     type: code
     start: 0xCE36F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCE36F0, c, flo_19_0_header]
     - [0xCE36F0, c, flo_19_1_music]
@@ -14422,7 +14424,7 @@ segments:
     type: code
     start: 0xCE6700
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCE6700, c, flo_21_0_header]
     - [0xCE6700, c, flo_21_1_music]
@@ -14435,7 +14437,7 @@ segments:
     type: code
     start: 0xCEC240
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCEC240, c, flo_22_0_header]
     - [0xCEC240, c, flo_22_1_music]
@@ -14449,7 +14451,7 @@ segments:
     type: code
     start: 0xCEE260
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCEE260, c, flo_23_0_header]
     - [0xCEE260, c, flo_23_1_music]
@@ -14462,7 +14464,7 @@ segments:
     type: code
     start: 0xCF0940
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCF0940, c, flo_24_0_header]
     - [0xCF0940, c, flo_24_1_music]
@@ -14476,7 +14478,7 @@ segments:
     type: code
     start: 0xCF2BD0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCF2BD0, c, flo_25_0_header]
     - [0xCF2BD0, c, flo_25_1_music]
@@ -14491,7 +14493,7 @@ segments:
     type: code
     start: 0xCF7B70
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xCF7B70, c, sam_01_0_header]
     - [0xCF7B70, c, sam_01_1_music]
@@ -14506,7 +14508,7 @@ segments:
     type: code
     start: 0xD05730
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD05730, c, sam_02_0_header]
     - [0xD05730, c, sam_02_1_music]
@@ -14521,7 +14523,7 @@ segments:
     type: code
     start: 0xD110C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD110C0, c, sam_03_0_header]
     - [0xD110C0, c, sam_03_1_music]
@@ -14534,7 +14536,7 @@ segments:
     type: code
     start: 0xD135D0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD135D0, c, sam_04_0_header]
     - [0xD135D0, c, sam_04_1_music]
@@ -14548,7 +14550,7 @@ segments:
     type: code
     start: 0xD187E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD187E0, c, sam_05_0_header]
     - [0xD187E0, c, sam_05_1_music]
@@ -14590,7 +14592,7 @@ segments:
     type: code
     start: 0xD1FE90
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD1FE90, c, sam_06_0_header]
     - [0xD1FE90, c, sam_06_1_music]
@@ -14604,7 +14606,7 @@ segments:
     type: code
     start: 0xD2BD30
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD2BD30, c, sam_07_0_header]
     - [0xD2BD30, c, sam_07_1_music]
@@ -14618,7 +14620,7 @@ segments:
     type: code
     start: 0xD2FC80
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD2FC80, c, sam_08_0_header]
     - [0xD2FC80, c, sam_08_1_music]
@@ -14632,7 +14634,7 @@ segments:
     type: code
     start: 0xD362F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD362F0, c, sam_09_0_header]
     - [0xD362F0, c, sam_09_1_music]
@@ -14645,7 +14647,7 @@ segments:
     type: code
     start: 0xD37800
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD37800, c, sam_10_0_header]
     - [0xD37800, c, sam_10_1_music]
@@ -14659,7 +14661,7 @@ segments:
     type: code
     start: 0xD3A5D0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD3A5D0, c, sam_11_0_header]
     - [0xD3A610, c, sam_11_1_music]
@@ -14677,7 +14679,7 @@ segments:
     type: code
     start: 0xD4BA20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD4BA20, c, sam_12_0_header]
     - [0xD4BA20, c, sam_12_1_music]
@@ -14691,7 +14693,7 @@ segments:
     type: code
     start: 0xD4D040
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD4D040, c, pra_01_0_header]
     - [0xD4D060, c, pra_01_1_music]
@@ -14704,7 +14706,7 @@ segments:
     type: code
     start: 0xD4FFF0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD4FFF0, c, pra_02_0_header]
     - [0xD50010, c, pra_02_1_music]
@@ -14717,7 +14719,7 @@ segments:
     type: code
     start: 0xD53CB0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD53CB0, c, pra_03_0_header]
     - [0xD53CD0, c, pra_03_1_music]
@@ -14729,7 +14731,7 @@ segments:
     type: code
     start: 0xD54690
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD54690, c, pra_04_0_header]
     - [0xD546B0, c, pra_04_1_music]
@@ -14742,7 +14744,7 @@ segments:
     type: code
     start: 0xD55BB0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD55BB0, c, pra_05_0_header]
     - [0xD55BD0, c, pra_05_1_music]
@@ -14754,7 +14756,7 @@ segments:
     type: code
     start: 0xD57430
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD57430, c, pra_06_0_header]
     - [0xD57430, c, pra_06_1_music]
@@ -14766,7 +14768,7 @@ segments:
     type: code
     start: 0xD58890
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD58890, c, pra_09_0_header]
     - [0xD588B0, c, pra_09_1_music]
@@ -14778,7 +14780,7 @@ segments:
     type: code
     start: 0xD5F2B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD5F2B0, c, pra_10_0_header]
     - [0xD5F2D0, c, pra_10_1_music]
@@ -14790,7 +14792,7 @@ segments:
     type: code
     start: 0xD61500
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD61500, c, pra_11_0_header]
     - [0xD61520, c, pra_11_1_music]
@@ -14802,7 +14804,7 @@ segments:
     type: code
     start: 0xD62D10
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD62D10, c, pra_12_0_header]
     - [0xD62D10, c, pra_12_1_music]
@@ -14814,7 +14816,7 @@ segments:
     type: code
     start: 0xD645E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD645E0, c, pra_13_0_header]
     - [0xD64600, c, pra_13_1_music]
@@ -14826,7 +14828,7 @@ segments:
     type: code
     start: 0xD67D00
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD67D00, c, pra_14_0_header]
     - [0xD67D20, c, pra_14_1_music]
@@ -14838,7 +14840,7 @@ segments:
     type: code
     start: 0xD69810
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD69810, c, pra_15_0_header]
     - [0xD69830, c, pra_15_1_music]
@@ -14850,7 +14852,7 @@ segments:
     type: code
     start: 0xD69B20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD69B20, c, pra_16_0_header]
     - [0xD69B40, c, pra_16_1_music]
@@ -14861,7 +14863,7 @@ segments:
     type: code
     start: 0xD6B620
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD6B620, c, pra_18_0_header]
     - [0xD6B640, c, pra_18_1_music]
@@ -14873,7 +14875,7 @@ segments:
     type: code
     start: 0xD6E9B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD6E9B0, c, pra_19_0_header]
     - [0xD6E9D0, c, pra_19_1_music]
@@ -14885,7 +14887,7 @@ segments:
     type: code
     start: 0xD763A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD763A0, c, pra_20_0_header]
     - [0xD763C0, c, pra_20_1_music]
@@ -14896,7 +14898,7 @@ segments:
     type: code
     start: 0xD77F20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD77F20, c, pra_21_0_header]
     - [0xD77F40, c, pra_21_1_music]
@@ -14908,7 +14910,7 @@ segments:
     type: code
     start: 0xD78880
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD78880, c, pra_22_0_header]
     - [0xD788A0, c, pra_22_1_music]
@@ -14920,7 +14922,7 @@ segments:
     type: code
     start: 0xD799F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD799F0, c, pra_27_0_header]
     - [0xD799F0, c, pra_27_1_music]
@@ -14932,7 +14934,7 @@ segments:
     type: code
     start: 0xD7B2A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD7B2A0, c, pra_28_0_header]
     - [0xD7B2A0, c, pra_28_1_music]
@@ -14944,7 +14946,7 @@ segments:
     type: code
     start: 0xD7CB50
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD7CB50, c, pra_29_0_header]
     - [0xD7CB70, c, pra_29_1_music]
@@ -14957,7 +14959,7 @@ segments:
     type: code
     start: 0xD7ED60
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD7ED60, c, pra_31_0_header]
     - [0xD7ED80, c, pra_31_1_music]
@@ -15046,14 +15048,14 @@ segments:
       subsegments:
       - [0xD864A0]
       - [0xD86820, vtx, stairs]
-      - [0xD869E0]      
+      - [0xD869E0]
     - [0xD869E0]
   - name: pra_32
     dir: world/area_pra/pra_32
     type: code
     start: 0xD86A00
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD86A00, c, pra_32_0_header]
     - [0xD86A20, c, pra_32_1_music]
@@ -15065,7 +15067,7 @@ segments:
     type: code
     start: 0xD896E0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD896E0, c, pra_33_0_header]
     - [0xD89700, c, pra_33_1_music]
@@ -15077,7 +15079,7 @@ segments:
     type: code
     start: 0xD8B3B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD8B3B0, c, pra_34_0_header]
     - [0xD8B3D0, c, pra_34_1_music]
@@ -15089,7 +15091,7 @@ segments:
     type: code
     start: 0xD8D250
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD8B3B0, c, pra_35_0_header]
     - [0xD8D270, c, pra_35_1_music]
@@ -15102,7 +15104,7 @@ segments:
     type: code
     start: 0xD91700
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD91700, c, pra_36_0_header]
     - [0xD91700, c, pra_36_1_music]
@@ -15114,7 +15116,7 @@ segments:
     type: code
     start: 0xD92F40
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD92F40, c, pra_37_0_header]
     - [0xD92F40, c, pra_37_1_music]
@@ -15126,7 +15128,7 @@ segments:
     type: code
     start: 0xD955F0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD955F0, c, pra_38_0_header]
     - [0xD955F0, c, pra_38_1_music]
@@ -15138,7 +15140,7 @@ segments:
     type: code
     start: 0xD97890
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD97890, c, pra_39_0_header]
     - [0xD97890, c, pra_39_1_music]
@@ -15150,7 +15152,7 @@ segments:
     type: code
     start: 0xD999B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD999B0, c, pra_40_0_header]
     - [0xD999D0, c, pra_40_1_music]
@@ -15162,7 +15164,7 @@ segments:
     type: code
     start: 0xD9AEF0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD9AEF0, c, omo_01_0_header]
     - [0xD9AEF0, c, omo_01_1_music]
@@ -15176,7 +15178,7 @@ segments:
     type: code
     start: 0xD9D4D0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xD9D4D0, c, omo_02_0_header]
     - [0xD9D4D0, c, omo_02_1_music]
@@ -15191,7 +15193,7 @@ segments:
     type: code
     start: 0xDA5240
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDA5240, c, omo_03_0_header]
     - [0xDA5240, c, omo_03_1_music]
@@ -15208,7 +15210,7 @@ segments:
     type: code
     start: 0xDAD400
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDAD400, c, omo_04_0_header]
     - [0xDAD400, c, omo_04_1_music]
@@ -15223,7 +15225,7 @@ segments:
     type: code
     start: 0xDB22C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDB22C0, c, omo_05_0_header]
     - [0xDB22C0, c, omo_05_1_music]
@@ -15237,7 +15239,7 @@ segments:
     type: code
     start: 0xDB7910
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDB7910, c, omo_06_0_header]
     - [0xDB7910, c, omo_06_1_music]
@@ -15252,7 +15254,7 @@ segments:
     type: code
     start: 0xDBD2B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDBD2B0, c, omo_07_0_header]
     - [0xDBD2B0, c, omo_07_1_music]
@@ -15267,7 +15269,7 @@ segments:
     type: code
     start: 0xDC43D0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDC43D0, c, omo_08_0_header]
     - [0xDC43D0, c, omo_08_1_music]
@@ -15282,7 +15284,7 @@ segments:
     type: code
     start: 0xDCCCD0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDCCCD0, c, omo_09_0_header]
     - [0xDCCCD0, c, omo_09_1_music]
@@ -15299,7 +15301,7 @@ segments:
     type: code
     start: 0xDD79B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDD79B0, c, omo_10_0_header]
     - [0xDD79B0, c, omo_10_1_music]
@@ -15314,7 +15316,7 @@ segments:
     type: code
     start: 0xDDC830
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDDC830, c, omo_11_0_header]
     - [0xDDC830, c, omo_11_1_music]
@@ -15328,7 +15330,7 @@ segments:
     type: code
     start: 0xDDF310
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDDF310, c, omo_12_0_header]
     - [0xDDF310, c, omo_12_1_music]
@@ -15341,7 +15343,7 @@ segments:
     type: code
     start: 0xDE2490
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDE2490, c, omo_13_0_header]
     - [0xDE2490, c, omo_13_1_music]
@@ -15355,7 +15357,7 @@ segments:
     type: code
     start: 0xDE56B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDE56B0, c, omo_14_0_header]
     - [0xDE56B0, c, omo_14_1_music]
@@ -15367,7 +15369,7 @@ segments:
     type: code
     start: 0xDE8770
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDE8770, c, omo_15_0_header]
     - [0xDE8770, c, omo_15_1_music]
@@ -15379,7 +15381,7 @@ segments:
     type: code
     start: 0xDEBED0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDEBED0, c, omo_16_0_header]
     - [0xDEBED0, c, omo_16_1_main]
@@ -15391,7 +15393,7 @@ segments:
     type: code
     start: 0xDEEEA0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDEEEA0, c, omo_17_0_header]
     - [0xDEEEA0, c, omo_17_1_main]
@@ -15405,7 +15407,7 @@ segments:
     type: code
     start: 0xDF6A00
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xDF6A00, c, end_00_0_header]
     - [0xDF6A20, c, end_00_1_main]
@@ -15425,7 +15427,7 @@ segments:
     type: code
     start: 0xE05360
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xE05360, c, end_01_0_header]
     - [0xE05370, c, end_01_1_main]
@@ -15441,7 +15443,7 @@ segments:
     type: code
     start: 0xE0E7A0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xE0E7A0, c, mgm_00_0_header]
     - [0xE0E7A0, c, mgm_00_1_main]
@@ -15453,7 +15455,7 @@ segments:
     type: code
     start: 0xE12760
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xE12760, c, mgm_01_0_header]
     - [0xE12760, c, mgm_01_1_main]
@@ -15482,7 +15484,7 @@ segments:
     type: code
     start: 0xE15D80
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
       - [0xE15D80, c, mgm_02_0_header]
       - [0xE15D80, c, mgm_02_1_main]
@@ -15503,7 +15505,7 @@ segments:
     type: code
     start: 0xE1E380
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xE1E380, c, mgm_03_0_header]
     - [0xE1E380, c, mgm_03_1_main]
@@ -15512,7 +15514,7 @@ segments:
     type: code
     start: 0xE1E460
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xE1E460, c, gv_01_0_header]
     - [0xE1E460, c, gv_01_1_main]
@@ -15521,14 +15523,14 @@ segments:
     type: code
     start: 0xE20110
     vram: 0x80267FF0
-    follows_vram_symbol: map_vram_end
+    vram_of_symbol: map_vram_end
     subsegments:
     - [0xE20110, c, heaps2]
   - type: code
     start: 0xE20110
     name: inspect_icon
     vram: 0x802B7000
-    follows_vram_symbol: world_action_vram_end
+    vram_of_symbol: world_action_vram_end
     subsegments:
     - [0xE20110, c, inspect_icon]
     - start: 0xE20B30
@@ -15544,7 +15546,7 @@ segments:
     start: 0xE20EB0
     name: speech_bubble
     vram: 0x802B7000
-    follows_vram_symbol: world_action_vram_end
+    vram_of_symbol: world_action_vram_end
     subsegments:
     - [0xE20EB0, c, speech_bubble]
     - start: 0xE215C0
@@ -15560,7 +15562,7 @@ segments:
     start: 0xE21870
     name: pulse_stone
     vram: 0x802B7000
-    follows_vram_symbol: world_action_vram_end
+    vram_of_symbol: world_action_vram_end
     subsegments:
     - [0xE21870, c, pulse_stone]
     - start: 0xE21EB0
@@ -15577,7 +15579,7 @@ segments:
     start: 0xE225B0
     name: i_spy
     vram: 0x802B7000
-    follows_vram_symbol: world_action_vram_end
+    vram_of_symbol: world_action_vram_end
     subsegments:
     - [0xE225B0, c, i_spy]
     - start: 0xE22B30
@@ -15595,7 +15597,7 @@ segments:
     name: model_clear_render_tasks
     start: 0xE23260
     vram: 0x802B7E00
-    follows_vram_symbol: world_misc_vram_end
+    vram_of_symbol: world_misc_vram_end
     subsegments:
     - [0xE23260, c, model_clear_render_tasks]
   - type: code
@@ -16941,7 +16943,7 @@ segments:
     type: code
     start: 0xEA0900
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEA0900, c, kzn_17_0_header]
     - [0xEA0900, c, kzn_17_1_main]
@@ -16954,7 +16956,7 @@ segments:
     type: code
     start: 0xEA6FD0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEA6FD0, c, kzn_18_0_header]
     - [0xEA7010, c, kzn_18_1_main]
@@ -16966,7 +16968,7 @@ segments:
     type: code
     start: 0xEA8AE0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEA8AE0, c, kzn_19_0_header]
     - [0xEA8AE0, c, kzn_19_1_music]
@@ -16981,7 +16983,7 @@ segments:
     type: code
     start: 0xEB0E60
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEB0E60, c, kzn_20_0_header]
     - [0xEB0E60, c, kzn_20_1_music]
@@ -16993,7 +16995,7 @@ segments:
     type: code
     start: 0xEB5130
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEB5130, c, kzn_22_0_header]
     - [0xEB5130, c, kzn_22_1_music]
@@ -17006,7 +17008,7 @@ segments:
     type: code
     start: 0xEB7230
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEB7230, c, kzn_23_0_header]
     - [0xEB7230, c, kzn_23_1_music]
@@ -17018,7 +17020,7 @@ segments:
     type: code
     start: 0xEB8E50
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEB8E50, c, flo_00_0_header]
     - [0xEB8E50, c, flo_00_1_music]
@@ -17033,7 +17035,7 @@ segments:
     type: code
     start: 0xEC2200
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEC2200, c, flo_03_0_header]
     - [0xEC2200, c, flo_03_1_music]
@@ -17047,7 +17049,7 @@ segments:
     type: code
     start: 0xEC71B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEC71B0, c, flo_07_0_header]
     - [0xEC71B0, c, flo_07_1_music]
@@ -17059,7 +17061,7 @@ segments:
     type: code
     start: 0xEC9D00
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEC9D00, c, flo_08_0_header]
     - [0xEC9D00, c, flo_08_1_music]
@@ -17074,7 +17076,7 @@ segments:
     type: code
     start: 0xECFFF0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xECFFF0, c, flo_09_0_header]
     - [0xECFFF0, c, flo_09_1_music]
@@ -17088,7 +17090,7 @@ segments:
     type: code
     start: 0xED4220
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xED4220, c, flo_10_0_header]
     - [0xED4260, c, flo_10_1_music]
@@ -17104,7 +17106,7 @@ segments:
     type: code
     start: 0xED8E20
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xED8E20, c, flo_11_0_header]
     - [0xED8E20, c, flo_11_1_music]
@@ -17117,7 +17119,7 @@ segments:
     type: code
     start: 0xEDBFE0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEDBFE0, c, flo_12_0_header]
     - [0xEDBFE0, c, flo_12_1_music]
@@ -17129,7 +17131,7 @@ segments:
     type: code
     start: 0xEDE9C0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEDE9C0, c, flo_13_0_header]
     - [0xEDE9C0, c, flo_13_1_music]
@@ -17143,7 +17145,7 @@ segments:
     type: code
     start: 0xEE65B0
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEE65B0, c, flo_14_0_header]
     - [0xEE65B0, c, flo_14_1_music]
@@ -17158,7 +17160,7 @@ segments:
     type: code
     start: 0xEEB990
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEEB990, c, flo_15_0_header]
     - [0xEEB990, c, flo_15_1_music]
@@ -17172,7 +17174,7 @@ segments:
     type: code
     start: 0xEED100
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEED100, c, flo_16_0_header]
     - [0xEED100, c, flo_16_1_music]
@@ -17187,7 +17189,7 @@ segments:
     type: code
     start: 0xEF2610
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEF2610, c, flo_17_0_header]
     - [0xEF2610, c, flo_17_1_music]
@@ -17201,7 +17203,7 @@ segments:
     type: code
     start: 0xEF7A80
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEF7A80, c, flo_18_0_header]
     - [0xEF7A80, c, flo_18_1_music]
@@ -17229,7 +17231,7 @@ segments:
   - type: code
     start: 0xEFEB00
     vram: 0x80240000
-    follows_vram_symbol: world_model_data_vram_end
+    vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [0xEFEB00, c]
     - [0xEFF440, bin] # part of overlay

@@ -284,10 +284,10 @@ extern Addr Vine3Base;
 extern Addr Vine2Base;
 extern Addr Vine1Base;
 extern Addr Vine0Base;
-#define VINE_0_BASE Vine0Base
-#define VINE_1_BASE Vine1Base
-#define VINE_2_BASE Vine2Base
-#define VINE_3_BASE Vine3Base
+#define VINE_0_BASE (s32) Vine0Base
+#define VINE_1_BASE (s32) Vine1Base
+#define VINE_2_BASE (s32) Vine2Base
+#define VINE_3_BASE (s32) Vine3Base
 #else
 #define VINE_0_BASE 0x80234000
 #define VINE_1_BASE 0x80231000
