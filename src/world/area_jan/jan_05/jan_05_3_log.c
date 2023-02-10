@@ -127,7 +127,7 @@ EvtScript N(EVS_LogAnim_Split) = {
     EVT_END
 };
 
-EvtScript N(EVS_SmashWall_BuriedLog) = {
+EvtScript N(EVS_Smash_BuriedLog) = {
     EVT_SET(GF_JAN05_CreateLogBridge, TRUE)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_EXEC_WAIT(N(EVS_LogAnim_RiseUp))
@@ -146,7 +146,7 @@ EvtScript N(EVS_SmashWall_BuriedLog) = {
 
 EvtScript N(EVS_SetupLogs) = {
     EVT_IF_EQ(GF_JAN05_CreateLogBridge, FALSE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SmashWall_BuriedLog)), TRIGGER_WALL_HAMMER, COLLIDER_o94, 1, 0)
+        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Smash_BuriedLog)), TRIGGER_WALL_HAMMER, COLLIDER_o94, 1, 0)
     EVT_END_IF
     EVT_EXEC(N(EVS_SetupLogObjects))
     EVT_RETURN

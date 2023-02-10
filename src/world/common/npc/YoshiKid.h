@@ -2,13 +2,6 @@
 
 #include "sprite/npc/YoshiKid.h"
 
-#define YOSHI_KID_FLAGS \
-      ENEMY_FLAG_PASSIVE \
-    | ENEMY_FLAG_ENABLE_HIT_SCRIPT \
-    | ENEMY_FLAG_100 \
-    | ENEMY_FLAG_400 \
-    | ENEMY_FLAG_800
-
 #define YOSHI_KID_GREEN_ANIMS \
 { \
     .idle   = ANIM_YoshiKid_Green_Idle, \

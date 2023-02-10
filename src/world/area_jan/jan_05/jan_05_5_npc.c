@@ -38,7 +38,7 @@ EvtScript N(EVS_NpcInit_JungleFuzzy) = {
     EVT_END
 };
 
-EvtScript N(D_8024556C_B4FFDC) = {
+EvtScript N(EVS_YoshiKid_WatchPlayerProximinity) = {
     EVT_LABEL(1)
     EVT_CALL(GetSelfVar, 0, LVar0)
     EVT_SWITCH(LVar0)
@@ -58,7 +58,7 @@ EvtScript N(D_8024556C_B4FFDC) = {
     EVT_END
 };
 
-EvtScript N(D_80245670_B500E0) = {
+EvtScript N(EVS_OnShakeTree_Yoshi) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcVar, NPC_YoshiKid, 0, 9)
     EVT_THREAD
@@ -75,7 +75,7 @@ EvtScript N(D_80245670_B500E0) = {
     EVT_END
 };
 
-EvtScript N(D_80245754_B501C4) = {
+EvtScript N(EVS_YoshiKid_Sleeping) = {
     EVT_LOOP(0)
         EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_32F, 0)
         EVT_WAIT(24)
@@ -90,8 +90,8 @@ EvtScript N(D_80245754_B501C4) = {
     EVT_END
 };
 
-EvtScript N(D_802457F8_B50268) = {
-    EVT_EXEC_GET_TID(N(D_80245754_B501C4), LVar9)
+EvtScript N(EVS_YoshiKid_PlaySounds) = {
+    EVT_EXEC_GET_TID(N(EVS_YoshiKid_Sleeping), LVar9)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetNpcVar, NPC_YoshiKid, 0, LVar0)
@@ -116,8 +116,8 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
         EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00B8, 160, 40)
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_END_IF
-    EVT_BIND_TRIGGER(EVT_PTR(N(D_80245670_B500E0)), TRIGGER_WALL_HAMMER, COLLIDER_o87, 1, 0)
-    EVT_EXEC_GET_TID(N(D_8024556C_B4FFDC), LVar9)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnShakeTree_Yoshi)), TRIGGER_WALL_HAMMER, COLLIDER_o87, 1, 0)
+    EVT_EXEC_GET_TID(N(EVS_YoshiKid_WatchPlayerProximinity), LVar9)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetSelfVar, 0, LVar0)
@@ -210,7 +210,7 @@ EvtScript N(EVS_NpcInit_YoshiKid) = {
             EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Purple_Sleep)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_YoshiKid)))
-            EVT_EXEC(N(D_802457F8_B50268))
+            EVT_EXEC(N(EVS_YoshiKid_PlaySounds))
             EVT_RETURN
         EVT_END_IF
     EVT_END_IF
@@ -224,7 +224,7 @@ StaticNpc N(NpcData_YoshiKid) = {
     .settings = &N(NpcSettings_YoshiKid),
     .pos = { -320.0f, 0.0f, 80.0f },
     .yaw = 270,
-    .flags = YOSHI_KID_FLAGS | ENEMY_FLAG_400000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_YoshiKid),
     .drops = NPC_NO_DROPS,
     .animations = YOSHI_KID_PURPLE_ANIMS,
@@ -293,29 +293,8 @@ StaticNpc N(NpcData_HeartPlant) = {
     .pos = { 430.0f, 0.0f, 205.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_HeartPlant_Anim00,
-        .walk   = ANIM_HeartPlant_Anim00,
-        .run    = ANIM_HeartPlant_Anim00,
-        .chase  = ANIM_HeartPlant_Anim00,
-        .anim_4 = ANIM_HeartPlant_Anim00,
-        .anim_5 = ANIM_HeartPlant_Anim00,
-        .death  = ANIM_HeartPlant_Anim00,
-        .hit    = ANIM_HeartPlant_Anim00,
-        .anim_8 = ANIM_HeartPlant_Anim00,
-        .anim_9 = ANIM_HeartPlant_Anim00,
-        .anim_A = ANIM_HeartPlant_Anim00,
-        .anim_B = ANIM_HeartPlant_Anim00,
-        .anim_C = ANIM_HeartPlant_Anim00,
-        .anim_D = ANIM_HeartPlant_Anim00,
-        .anim_E = ANIM_HeartPlant_Anim00,
-        .anim_F = ANIM_HeartPlant_Anim00,
-    },
+    .drops = NPC_NO_DROPS,
+    .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
@@ -332,36 +311,8 @@ StaticNpc N(NpcData_MBush) = {
     .pos = { 400.0f, 0.0f, -75.0f },
     .yaw = 90,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .itemDropChance = 10,
-        .itemDrops = {
-            { ITEM_TASTY_TONIC, 5, 0 },
-            { ITEM_SUPER_SODA, 5, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 0,
-        .maxCoinBonus = 2,
-    },
-    .animations = {
-        .idle   = ANIM_MBush_Anim02,
-        .walk   = ANIM_MBush_Anim02,
-        .run    = ANIM_MBush_Anim02,
-        .chase  = ANIM_MBush_Anim02,
-        .anim_4 = ANIM_MBush_Anim02,
-        .anim_5 = ANIM_MBush_Anim02,
-        .death  = ANIM_MBush_Anim07,
-        .hit    = ANIM_MBush_Anim07,
-        .anim_8 = ANIM_MBush_Anim02,
-        .anim_9 = ANIM_MBush_Anim02,
-        .anim_A = ANIM_MBush_Anim02,
-        .anim_B = ANIM_MBush_Anim02,
-        .anim_C = ANIM_MBush_Anim02,
-        .anim_D = ANIM_MBush_Anim02,
-        .anim_E = ANIM_MBush_Anim02,
-        .anim_F = ANIM_MBush_Anim02,
-    },
+    .drops = MBUSH_DROPS,
+    .animations = MBUSH_ANIMS,
     .tattle = MSG_NpcTattle_MBush,
 };
 

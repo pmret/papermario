@@ -527,7 +527,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .id = NPC_ChuckQuizmo,
         .settings = &N(NpcSettings_ChuckQuizmo),
         .pos = { -335.0f, 0.0f, 90.0f },
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .initVarCount = 1,
         .initVar = { .bytes = { 0, QUIZ_AREA_DRO, QUIZ_COUNT_DRO, QUIZ_MAP_DRO_02 } },
         .yaw = 270,
