@@ -1,7 +1,7 @@
 #include "pra_35.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 EvtScript N(EVS_OpenChest_TripleDip) = EVT_OPEN_CHEST_BADGE(ITEM_TRIPLE_DIP, GF_PRA35_Chest_TripleDip);
 

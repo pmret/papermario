@@ -313,7 +313,7 @@ EvtScript N(main) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 32)
-    EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, -45, 20, 2, LVar0, LVar1, LVar2, 10)
+    EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, -45, 20, EMOTER_POS, LVar0, LVar1, LVar2, 10)
     EVT_WAIT(30)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
     EVT_WAIT(1)

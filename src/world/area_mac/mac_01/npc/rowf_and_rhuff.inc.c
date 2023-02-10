@@ -316,7 +316,7 @@ EvtScript N(EVS_NpcIdle_Rowf) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_WAIT(15)
-    EVT_CALL(ShowEmote, NPC_Rhuff, EMOTE_SHOCK, -45, 20, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_Rhuff, EMOTE_SHOCK, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Still)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)
@@ -724,7 +724,7 @@ StaticNpc N(NpcData_RowfAndRhuff)[] = {
         .settings = &N(NpcSettings_Rowf),
         .pos = { -213.0f, -54.0f, 256.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rowf),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
@@ -742,7 +742,7 @@ StaticNpc N(NpcData_RowfAndRhuff)[] = {
         .settings = &N(NpcSettings_Rhuff),
         .pos = { -250.0f, 0.0f, 263.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rhuff),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,

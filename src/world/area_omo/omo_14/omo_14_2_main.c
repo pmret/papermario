@@ -2,14 +2,6 @@
 
 #include "world/common/atomic/CreateDarkness.inc.c"
 
-EvtScript N(EVS_SetupDarkness) = {
-    EVT_THREAD
-        EVT_CALL(N(DarkRoomUpdate))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
-};
-
 EvtScript N(EVS_ExitWalk_omo_02_1) = EVT_EXIT_WALK(60, omo_14_ENTRY_0, "omo_02", omo_02_ENTRY_1);
 EvtScript N(EVS_ExitWalk_omo_15_0) = EVT_EXIT_WALK(60, omo_14_ENTRY_1, "omo_15", omo_15_ENTRY_0);
 
@@ -29,7 +21,7 @@ EvtScript N(EVS_Main) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
         EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_8000004C, SOUND_SPACE_MODE_0)
     EVT_END_IF
-    EVT_EXEC(N(EVS_SetupDarkness))
+    EVT_EXEC(N(EVS_CreateDarkness))
     EVT_IF_GE(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
         EVT_CALL(EnableModel, MODEL_o823, FALSE)
         EVT_CALL(EnableModel, MODEL_o828, FALSE)

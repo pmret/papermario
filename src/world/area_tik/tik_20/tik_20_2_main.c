@@ -4,7 +4,6 @@
 #include "world/common/atomic/TexturePan.data.inc.c"
 
 #include "world/common/entity/Pipe.inc.c"
-#include "world/common/entity/Pipe.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_tik_08_1) = EVT_EXIT_WALK(60, tik_20_ENTRY_0, "tik_08", tik_08_ENTRY_1);
 EvtScript N(EVS_ExitWalk_tik_21_0) = EVT_EXIT_WALK(60, tik_20_ENTRY_1, "tik_21", tik_21_ENTRY_0);

@@ -1,7 +1,6 @@
 #include "nok_02.h"
 
 #include "world/common/entity/Pipe.inc.c"
-#include "world/common/entity/Pipe.data.inc.c"
 
 #define NAME_SUFFIX _Unused
 #include "world/common/complete/GiveReward.inc.c"

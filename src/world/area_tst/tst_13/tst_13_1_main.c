@@ -180,7 +180,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_00),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
@@ -189,7 +189,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_01),
         .pos = { 20.0f, 0.0f, 20.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
@@ -198,7 +198,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_02),
         .pos = { 40.0f, 0.0f, 40.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
@@ -207,7 +207,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_03),
         .pos = { 60.0f, 0.0f, 60.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
@@ -216,7 +216,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_04),
         .pos = { 80.0f, 0.0f, 80.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
@@ -225,7 +225,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_05),
         .pos = { 100.0f, 0.0f, 100.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
@@ -234,7 +234,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_06),
         .pos = { 120.0f, 0.0f, 120.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
@@ -243,7 +243,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_07),
         .pos = { 140.0f, 0.0f, 140.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
@@ -252,7 +252,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_08),
         .pos = { 160.0f, 0.0f, 160.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
@@ -261,7 +261,7 @@ StaticNpc N(NpcData_Testing)[] = {
         .settings = &N(NpcSettings_09),
         .pos = { 180.0f, 0.0f, 180.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },

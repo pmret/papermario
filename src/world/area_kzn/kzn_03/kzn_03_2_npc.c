@@ -1,15 +1,8 @@
 #include "kzn_03.h"
 
 #include "world/common/enemy/complete/SpikeTop.inc.c"
-
 #include "world/common/enemy/complete/PutridPiranha.inc.c"
-
-NpcSettings N(NpcSettings_ZiplineDummy) = {
-    .height = 24,
-    .radius = 24,
-    .level = 99,
-};
-
+#include "world/common/npc/Dummy.inc.c"
 #include "world/common/npc/Kolorado.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
@@ -178,7 +171,7 @@ StaticNpc N(NpcData_PassiveNPCs)[] = {
     },
     {
         .id = NPC_ZiplineDummy1,
-        .settings = &N(NpcSettings_ZiplineDummy),
+        .settings = &N(NpcSettings_Dummy),
         .pos = { 392.0f, 470.0f, 218.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
@@ -189,7 +182,7 @@ StaticNpc N(NpcData_PassiveNPCs)[] = {
     },
     {
         .id = NPC_ZiplineDummy2,
-        .settings = &N(NpcSettings_ZiplineDummy),
+        .settings = &N(NpcSettings_Dummy),
         .pos = { 392.0f, 470.0f, 218.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,

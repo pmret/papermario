@@ -248,14 +248,14 @@ ApiStatus N(MagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     territory.halfHeight = 100.0f;
     territory.detectFlags = 0;
     
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         npc->currentAnim = enemy->animList[0];
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->flags |= NPC_FLAG_200000;
         enemy->flags |= ENEMY_FLAG_200000;
         npc->duration = 0;
-        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
             npc->alpha = 0xFF;
             npc->duration = 20;
             npc->scale.x = 1.0f;

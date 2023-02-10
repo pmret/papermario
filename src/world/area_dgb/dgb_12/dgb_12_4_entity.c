@@ -1,7 +1,7 @@
 #include "dgb_12.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 EvtScript N(EVS_Chest_Interact) = EVT_OPEN_CHEST_KEY(ITEM_TUBBA_CASTLE_KEY, GF_DGB12_Chest_CastleKey1);
 

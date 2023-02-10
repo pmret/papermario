@@ -33,9 +33,9 @@ API_CALLABLE(N(SwooperAI_Main)) {
         enemy->varTable[1] = y;
     }
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
-        if (enemy->aiPaused == 0) {
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+        if (enemy->aiSuspendTime == 0) {
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
         } else {
             return ApiStatus_BLOCK;
         }

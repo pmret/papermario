@@ -149,7 +149,7 @@ ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
                 npc->verticalRenderOffset = npc->collisionHeight / 2;
             }
 
-            if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_4)) {
+            if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
                 script->functionTemp[0] = 0;
                 npc->duration = 0;
                 npc->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_2;
@@ -159,8 +159,8 @@ ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
                 enemy->flags |= ENEMY_FLAG_10000000 | ENEMY_FLAG_8000000 | ENEMY_FLAG_IGNORE_HAMMER |
                                 ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_200000 |
                                 ENEMY_FLAG_100000 | ENEMY_FLAG_40;
-                if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
-                    enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+                if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+                    enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
                 }
             }
 

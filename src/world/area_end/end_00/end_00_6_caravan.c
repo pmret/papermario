@@ -136,7 +136,7 @@ EvtScript N(EVS_ParadePhase_Caravan) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_WAIT(20)
-        EVT_CALL(ShowEmote, NPC_Tutankoopa1, EMOTE_ELLIPSIS, 0, 60, TRUE, 0, 0, 0, 0)
+        EVT_CALL(ShowEmote, NPC_Tutankoopa1, EMOTE_ELLIPSIS, 0, 60, EMOTER_NPC, 0, 0, 0, 0)
         EVT_WAIT(60)
         EVT_CALL(MakeLerp, 90, 0, 5, EASING_LINEAR)
         EVT_LOOP(5)
@@ -190,7 +190,7 @@ EvtScript N(EVS_ParadePhase_BuzzarNest) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_WAIT(200)
-    EVT_CALL(ShowEmote, NPC_Buzzar, EMOTE_SHOCK, 45, 30, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_Buzzar, EMOTE_SHOCK, 45, 30, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(40)
     EVT_CALL(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_Anim03)
     EVT_CALL(NpcFlyTo, NPC_Buzzar, -855, 100, -180, 60, 0, EASING_LINEAR)

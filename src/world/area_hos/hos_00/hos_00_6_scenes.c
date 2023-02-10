@@ -253,7 +253,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
     EVT_CALL(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 40)
     EVT_CALL(NpcMoveTo, NPC_Twink, LVar0, LVar2, 0)
-    EVT_CALL(ShowEmote, NPC_Twink, EMOTE_SHOCK, 45, 20, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_Twink, EMOTE_SHOCK, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_ShoutJoy)
     EVT_CALL(SetNpcJumpscale, NPC_Twink, EVT_FLOAT(1.0))

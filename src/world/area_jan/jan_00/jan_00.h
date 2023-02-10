@@ -9,11 +9,6 @@
 #include "mapfs/jan_00_shape.h"
 #include "mapfs/jan_00_hit.h"
 
-#include "sprite/npc/HeartPlant.h"
-#include "sprite/npc/WorldParakarry.h"
-#include "sprite/npc/Kolorado.h"
-#include "sprite/npc/JrTroopa.h"
-
 enum {
     NPC_Whale                   = 0,
     NPC_Kolorado_02             = 1,
@@ -26,3 +21,5 @@ enum {
 };
 
 #define NAMESPACE jan_00
+
+extern EvtScript N(D_80245860_B25DA0);

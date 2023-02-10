@@ -17,7 +17,6 @@ MapSettings N(settings) = {
 };
 
 #include "world/common/atomic/CreateDarkness.inc.c"
-#include "world/common/atomic/CreateDarkness.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_kgr_02_0) = EVT_EXIT_WALK(60, kgr_01_ENTRY_1, "kgr_02", kgr_02_ENTRY_0);
 EvtScript N(EVS_ExitWalk_mac_05_3) = EVT_EXIT_WALK(60, kgr_01_ENTRY_0, "mac_05", mac_05_ENTRY_3);

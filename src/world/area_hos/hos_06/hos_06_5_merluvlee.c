@@ -688,7 +688,7 @@ EvtScript N(EVS_KootCheckBall_Merluvlee) = {
         EVT_CHOOSE_KEY_ITEM_FROM(N(CrystalBallItems))
         EVT_IF_NE(LVar0, -1)
             EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0049)
-            EVT_GIVE_KEY_REWARD(ITEM_KOOT_LUIGI_AUTOGRAPH)
+            EVT_GIVE_KEY_REWARD(ITEM_KOOT_MERLUVLEES_AUTOGRAPH)
             EVT_SET(GF_HOS06_Gift_MerluvleesAutograph, TRUE)
         EVT_ELSE
             EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0048)

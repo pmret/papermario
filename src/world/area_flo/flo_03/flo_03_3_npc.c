@@ -171,7 +171,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             EVT_CALL(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim16)
             EVT_WAIT(10)
             EVT_CALL(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_263, SOUND_SPACE_MODE_0)
-            EVT_CALL(ShowEmote, NPC_MontyMole_01, EMOTE_QUESTION, -45, 30, TRUE, 0, 0, 0, 0)
+            EVT_CALL(ShowEmote, NPC_MontyMole_01, EMOTE_QUESTION, -45, 30, EMOTER_NPC, 0, 0, 0, 0)
             EVT_CALL(GetNpcPos, NPC_MontyMole_02, LVar0, LVar1, LVar2)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0052)
             EVT_CALL(SetNpcYaw, NPC_MontyMole_02, 90)
@@ -226,7 +226,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
             EVT_CALL(SetNpcAnimation, NPC_Dayzee, ANIM_Dayzee_Anim0D)
             EVT_CALL(PlaySoundAtNpc, NPC_Dayzee, SOUND_262, SOUND_SPACE_MODE_0)
-            EVT_CALL(ShowEmote, NPC_Dayzee, EMOTE_EXCLAMATION, 45, 30, TRUE, 0, 0, 0, 0)
+            EVT_CALL(ShowEmote, NPC_Dayzee, EMOTE_EXCLAMATION, 45, 30, EMOTER_NPC, 0, 0, 0, 0)
             EVT_WAIT(15)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0056)
             EVT_SET(LVar4, EVT_FLOAT(90.0))
@@ -401,7 +401,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
                         EVT_SET(LVar1, 10)
                     EVT_END_IF
                     EVT_CALL(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_262, SOUND_SPACE_MODE_0)
-                    EVT_CALL(ShowEmote, NPC_MontyMole_01, EMOTE_EXCLAMATION, 0, LVar1, TRUE, 0, 0, 0, 0)
+                    EVT_CALL(ShowEmote, NPC_MontyMole_01, EMOTE_EXCLAMATION, 0, LVar1, EMOTER_NPC, 0, 0, 0, 0)
                     EVT_WAIT(LVar1)
                     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_10000000, 1)
                 EVT_END_IF
@@ -480,7 +480,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
                         EVT_SET(LVar1, 10)
                     EVT_END_IF
                     EVT_CALL(PlaySoundAtNpc, NPC_MontyMole_02, SOUND_262, SOUND_SPACE_MODE_0)
-                    EVT_CALL(ShowEmote, NPC_MontyMole_02, EMOTE_EXCLAMATION, 0, LVar1, TRUE, 0, 0, 0, 0)
+                    EVT_CALL(ShowEmote, NPC_MontyMole_02, EMOTE_EXCLAMATION, 0, LVar1, EMOTER_NPC, 0, 0, 0, 0)
                     EVT_WAIT(LVar1)
                     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_10000000, 1)
                 EVT_END_IF
@@ -559,7 +559,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
                         EVT_SET(LVar1, 10)
                     EVT_END_IF
                     EVT_CALL(PlaySoundAtNpc, NPC_MontyMole_03, SOUND_262, SOUND_SPACE_MODE_0)
-                    EVT_CALL(ShowEmote, NPC_MontyMole_03, EMOTE_EXCLAMATION, 0, LVar1, TRUE, 0, 0, 0, 0)
+                    EVT_CALL(ShowEmote, NPC_MontyMole_03, EMOTE_EXCLAMATION, 0, LVar1, EMOTER_NPC, 0, 0, 0, 0)
                     EVT_WAIT(LVar1)
                     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_10000000, 1)
                 EVT_END_IF
@@ -638,7 +638,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
                         EVT_SET(LVar1, 10)
                     EVT_END_IF
                     EVT_CALL(PlaySoundAtNpc, NPC_MontyMole_04, SOUND_262, SOUND_SPACE_MODE_0)
-                    EVT_CALL(ShowEmote, NPC_MontyMole_04, EMOTE_EXCLAMATION, 0, LVar1, TRUE, 0, 0, 0, 0)
+                    EVT_CALL(ShowEmote, NPC_MontyMole_04, EMOTE_EXCLAMATION, 0, LVar1, EMOTER_NPC, 0, 0, 0, 0)
                     EVT_WAIT(LVar1)
                     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_10000000, 1)
                 EVT_END_IF

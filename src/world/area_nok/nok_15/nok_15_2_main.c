@@ -2,7 +2,6 @@
 #include "effects.h"
 
 #include "world/common/entity/Pipe.inc.c"
-#include "world/common/entity/Pipe.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_nok_14_1) = EVT_EXIT_WALK_NOK(60, nok_15_ENTRY_0, "nok_14", nok_14_ENTRY_1);
 EvtScript N(EVS_ExitWalk_trd_00_0) = EVT_EXIT_WALK_NOK(60, nok_15_ENTRY_1, "trd_00", trd_00_ENTRY_0);

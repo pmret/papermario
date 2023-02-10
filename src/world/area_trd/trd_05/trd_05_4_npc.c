@@ -145,7 +145,7 @@ EvtScript N(EVS_KoopaBros_SetTrap) = {
     EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Anim14, ANIM_KoopaBros_Yellow_Anim04, 5, MSG_CH1_00D5)
     EVT_CALL(GetNpcPos, NPC_KoopaBros_01, LVar0, LVar1, LVar2)
     EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_01, SOUND_262, SOUND_SPACE_MODE_0)
-    EVT_CALL(ShowEmote, NPC_KoopaBros_01, EMOTE_EXCLAMATION, 0, 25, 2, LVar0, LVar1, LVar2, 40)
+    EVT_CALL(ShowEmote, NPC_KoopaBros_01, EMOTE_EXCLAMATION, 0, 25, EMOTER_POS, LVar0, LVar1, LVar2, 40)
     EVT_WAIT(25)
     EVT_CALL(InterpNpcYaw, NPC_KoopaBros_01, 270, 2)
     EVT_WAIT(7)

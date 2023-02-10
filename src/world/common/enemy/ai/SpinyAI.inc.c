@@ -60,10 +60,10 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
         npc->pos.z = 0.0f;
     }
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
         npc->duration = 0;
         npc->collisionHeight = enemy->varTable[6];
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
         if (npc->flags & NPC_FLAG_JUMPING) {
             npc->currentAnim = ANIM_Spiny_Anim18;
             npc->moveSpeed = 0.0f;

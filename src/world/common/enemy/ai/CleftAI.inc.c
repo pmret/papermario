@@ -316,11 +316,11 @@ s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
         }
     }
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
-        if (enemy->aiPaused) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+        if (enemy->aiSuspendTime) {
             return ApiStatus_BLOCK;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
     }
 
     if (((script->AI_TEMP_STATE == AI_STATE_CLEFT_CHASE_INIT)

@@ -736,7 +736,7 @@ StaticNpc N(NpcData_Shared)[] = {
         .settings = &N(NpcSettings_ChuckQuizmo),
         .pos = { 356.0f, 0.0f, 166.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .initVarCount = 1,
         .initVar = { .bytes = { 0, QUIZ_AREA_NOK, QUIZ_COUNT_NOK, QUIZ_MAP_NOK_01 }},
         .drops = NPC_NO_DROPS,

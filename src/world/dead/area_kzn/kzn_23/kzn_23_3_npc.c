@@ -198,7 +198,7 @@ EvtScript N(EVS_SpawnPyroclasts) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcIdle_Misstar) = {
+EvtScript N(EVS_Scene_Misstar) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
@@ -270,7 +270,7 @@ EvtScript N(EVS_NpcIdle_Misstar) = {
 EvtScript N(EVS_NpcInit_Misstar) = {
     EVT_CALL(SetNpcPos, NPC_SELF, 0, -100, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldMisstar_IdleAngry)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Misstar)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_Scene_Misstar)))
     EVT_RETURN
     EVT_END
 };

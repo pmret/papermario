@@ -1,0 +1,33 @@
+#include "jan_12.h"
+
+#include "world/common/enemy/complete/SpearGuy_Wander.inc.c"
+
+StaticNpc N(NpcData_SpearGuy)[] = {
+    {
+        .id = NPC_SpearGuy,
+        .pos = { 165.0f, 0.0f, 15.0f },
+        .yaw = 270,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_CYLINDER,
+                .centerPos  = { 165, 0, 15 },
+                .wanderSize = { 30 },
+                .detectShape = SHAPE_CYLINDER,
+                .detectPos  = { 165, 0, 15 },
+                .detectSize = { 150 },
+            }
+        },
+        .settings = &N(NpcSettings_SpearGuy_Wander),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .drops = SPEAR_GUY_DROPS,
+        .animations = SPEAR_GUY_ANIMS,
+    },
+    SPEAR_GUY_HITBOX(NPC_SpearGuy_Hitbox)
+};
+
+NpcGroupList N(DefaultNPCs) = {
+    NPC_GROUP(N(NpcData_SpearGuy), BTL_JAN_FORMATION_06, BTL_JAN_STAGE_06),
+    {}
+};

@@ -4,7 +4,6 @@
 #define SUPER_BLOCK_MAPVAR MV_SuperBlock
 #define SUPER_BLOCK_GAMEFLAG GF_FLO16_SuperBlock
 #include "world/common/entity/SuperBlock.inc.c"
-#include "world/common/entity/SuperBlock.data.inc.c"
 
 EvtScript N(EVS_TetherCameraToPlayer) = {
     EVT_LABEL(0)

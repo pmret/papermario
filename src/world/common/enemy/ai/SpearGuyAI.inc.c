@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
-#include "sprite/npc/JungleGuy.h"
+#include "sprite/npc/SpearGuy.h"
 
 void N(SpearGuyAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -31,7 +31,7 @@ void N(SpearGuyAI_Loiter)(Evt *script, MobileAISettings* aiSettings, EnemyDetect
         case 1:
             enemy->varTable[0] = 2;
             enemy->varTable[1] = 0;
-            npc->currentAnim = ANIM_JungleGuy_Anim0F;
+            npc->currentAnim = ANIM_SpearGuy_Anim0F;
         case 2:
             enemy->varTable[1]++;
             if (enemy->varTable[1] > 50) {
@@ -41,7 +41,7 @@ void N(SpearGuyAI_Loiter)(Evt *script, MobileAISettings* aiSettings, EnemyDetect
         case 3:
             enemy->varTable[0] = 4;
             enemy->varTable[1] = 0;
-            npc->currentAnim = ANIM_JungleGuy_Anim10;
+            npc->currentAnim = ANIM_SpearGuy_Anim10;
         case 4:
             enemy->varTable[1]++;
             if (enemy->varTable[1] == 25) {
@@ -54,7 +54,7 @@ void N(SpearGuyAI_Loiter)(Evt *script, MobileAISettings* aiSettings, EnemyDetect
         case 5:
             enemy->varTable[0] = 6;
             enemy->varTable[1] = 0;
-            npc->currentAnim = ANIM_JungleGuy_Anim03;
+            npc->currentAnim = ANIM_SpearGuy_Anim03;
             fx_sweat(0, npc->pos.x, npc->pos.y, npc->pos.z, npc->collisionHeight, 0, 10);
         case 6:
             enemy->varTable[1]++;
@@ -97,7 +97,7 @@ ApiStatus N(SpearGuyAI_Main)(Evt *script, s32 isInitialCall) {
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
@@ -111,10 +111,10 @@ ApiStatus N(SpearGuyAI_Main)(Evt *script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_8;
         }
 
-        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->AI_TEMP_STATE_AFTER_SUSPEND = AI_STATE_WANDER_INIT;
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
         }
         enemy->varTable[0] = 0;
     }

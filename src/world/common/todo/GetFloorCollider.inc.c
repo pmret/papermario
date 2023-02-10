@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(GetFloorCollider)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetFloorCollider)) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 

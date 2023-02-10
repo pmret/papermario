@@ -1,7 +1,7 @@
 #include "kpa_15.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 EvtScript N(EVS_OpenChest_CastleKey) = EVT_OPEN_CHEST_KEY(ITEM_BOWSER_CASTLE_KEY, GF_KPA15_Chest_CastleKey2);
 

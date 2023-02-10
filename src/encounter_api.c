@@ -812,7 +812,7 @@ ApiStatus OnPlayerFled(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 skipReaction = evt_get_variable(script, *args++);
 
-    enemy->aiFlags |= ENEMY_AI_FLAG_4;
+    enemy->aiFlags |= ENEMY_AI_FLAG_SUSPEND;
 
     if (!skipReaction) {
         s32 unk;

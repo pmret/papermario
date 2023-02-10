@@ -2110,10 +2110,10 @@ EvtScript N(EVS_NpcIdle_Eldstar_Epilogue) = {
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(PlaySoundAtNpc, NPC_Goombaria, SOUND_262, SOUND_SPACE_MODE_0)
-        EVT_CALL(ShowEmote, NPC_Goombaria, EMOTE_EXCLAMATION, 0, 30, TRUE, 0, 0, 0, 0)
+        EVT_CALL(ShowEmote, NPC_Goombaria, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtNpc, NPC_Goombario, SOUND_262, SOUND_SPACE_MODE_0)
-    EVT_CALL(ShowEmote, NPC_Goombario, EMOTE_EXCLAMATION, 0, 30, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_Goombario, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(10)
     EVT_CALL(InterpNpcYaw, NPC_Goombario, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_Goombaria, 90, 0)

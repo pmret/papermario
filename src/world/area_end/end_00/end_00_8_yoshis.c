@@ -11,11 +11,11 @@ EvtScript N(EVS_ParadePhase_Yoshis) = {
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(SetNpcScale, NPC_RafaelRaven, EVT_FLOAT(2.0), EVT_FLOAT(2.0), 1)
+        EVT_CALL(SetNpcScale, NPC_RaphaelRaven, EVT_FLOAT(2.0), EVT_FLOAT(2.0), 1)
         EVT_LOOP(0)
-            EVT_CALL(NpcFlyTo, NPC_RafaelRaven, 357, 0, -30, 10, 0, EASING_LINEAR)
+            EVT_CALL(NpcFlyTo, NPC_RaphaelRaven, 357, 0, -30, 10, 0, EASING_LINEAR)
             EVT_WAIT(60)
-            EVT_CALL(NpcFlyTo, NPC_RafaelRaven, 357, -120, -30, 10, 0, EASING_LINEAR)
+            EVT_CALL(NpcFlyTo, NPC_RaphaelRaven, 357, -120, -30, 10, 0, EASING_LINEAR)
             EVT_WAIT(60)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD

@@ -120,7 +120,7 @@ ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
     hitboxEnemy->unk_118 = 0.0001f;
     #endif
 
-    if (isInitialCall || (hitboxEnemy->aiFlags & ENEMY_AI_FLAG_4)) {
+    if (isInitialCall || (hitboxEnemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         script->functionTemp[0] = 0;
         hitboxNpc->duration = 0;
         hitboxNpc->flags |= (NPC_FLAG_2 | NPC_FLAG_100);
@@ -128,8 +128,8 @@ ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
         hitboxNpc->pos.x = NPC_DISPOSE_POS_X;
         hitboxNpc->pos.y = NPC_DISPOSE_POS_Y;
         hitboxNpc->pos.z = NPC_DISPOSE_POS_Z;
-        if (hitboxEnemy->aiFlags & ENEMY_AI_FLAG_4) {
-            hitboxEnemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        if (hitboxEnemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+            hitboxEnemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
         }
     }
 

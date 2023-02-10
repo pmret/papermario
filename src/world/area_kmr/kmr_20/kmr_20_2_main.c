@@ -1,7 +1,6 @@
 #include "kmr_20.h"
 
 #include "world/common/entity/Pipe.inc.c"
-#include "world/common/entity/Pipe.data.inc.c"
 
 API_CALLABLE(N(func_80240310_8EC130)){
     set_map_transition_effect(TRANSITION_4);

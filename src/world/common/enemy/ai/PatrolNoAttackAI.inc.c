@@ -41,7 +41,7 @@ ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
     enemy->unk_118 = 0.0001f;
     #endif
 
-    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAG_4) {
+    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
         script->AI_TEMP_STATE = AI_STATE_PATROL_INIT;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
@@ -55,10 +55,10 @@ ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_8;
         }
 
-        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = 0;
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
         } else if (enemy->flags & ENEMY_FLAG_40000000) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
             enemy->flags &= ~ENEMY_FLAG_40000000;

@@ -4,36 +4,140 @@
 #include "sprite.h"
 
 typedef struct DemoSceneData {
-    /* 0x0 */ s16 unk_0;
-    /* 0x2 */ u16 entryID;
+    /* 0x0 */ s16 sceneType;
+    /* 0x2 */ u16 index; // entryID for WORLD, battle index for BATTLE
     /* 0x4 */ char unk_4;
     /* 0x5 */ s8 partnerID;
-    /* 0x6 */ s8 unk_6;
+    /* 0x6 */ s8 storyProgress;
     /* 0x7 */ char unk_7;
     /* 0x8 */ char* mapName;
 } DemoSceneData; // size = 0xC;
 
-DemoSceneData D_80077AE0[20] = {
-    { .unk_0 = 0, .entryID = 2, .unk_4 = 0, .partnerID = PARTNER_GOOMBARIO, .unk_6 = 0x9D, .mapName = "nok_12" },
-    { .unk_0 = 2, .entryID = 0, .unk_4 = 0, .partnerID = PARTNER_NONE, .unk_6 = 0 },
-    { .unk_0 = 0, .entryID = 5, .unk_4 = 0, .partnerID = PARTNER_PARAKARRY, .unk_6 = 0x9D, .mapName = "isk_04" },
-    { .unk_0 = 0, .entryID = 2, .unk_4 = 0, .partnerID = PARTNER_KOOPER, .unk_6 = 0x9D, .mapName = "tik_03" },
-    { .unk_0 = 0, .entryID = 2, .unk_4 = 0, .partnerID = PARTNER_PARAKARRY, .unk_6 = 0xB3, .mapName = "trd_09" },
-    //{ .unk_0 = 0, .entryID = 4, .unk_4 = 0, .partnerID = PARTNER_SUSHIE, .unk_6 = 0x9D, .mapName = "jan_04" },
-    { .unk_0 = 2, .entryID = 1, .unk_4 = 0, .partnerID = PARTNER_NONE, .unk_6 = 0x00 },
-    { .unk_0 = 0, .entryID = 6, .unk_4 = 0, .partnerID = PARTNER_BOMBETTE, .unk_6 = 0x9D, .mapName = "mac_00" },
-    { .unk_0 = 0, .entryID = 2, .unk_4 = 0, .partnerID = PARTNER_KOOPER, .unk_6 = 0x1B, .mapName = "kzn_02" },
-    { .unk_0 = 2, .entryID = 2, .unk_4 = 0, .partnerID = PARTNER_NONE, .unk_6 = 0x00 },
-    { .unk_0 = 0, .entryID = 3, .unk_4 = 0, .partnerID = PARTNER_BOMBETTE, .unk_6 = 0x9D, .mapName = "mac_03" },
-    { .unk_0 = 0, .entryID = 4, .unk_4 = 0, .partnerID = PARTNER_GOOMBARIO, .unk_6 = 0x9D, .mapName = "nok_02" },
-    { .unk_0 = 2, .entryID = 3, .unk_4 = 0, .partnerID = PARTNER_NONE, .unk_6 = 0x00 },
-    //{ .unk_0 = 1, .entryID = 8, .unk_4 = 0, .partnerID = PARTNER_TWINK, .unk_6 = 0x26, .mapName = "kkj_11" },
-    { .unk_0 = 0, .entryID = 2, .unk_4 = 0, .partnerID = PARTNER_BOW, .unk_6 = 0xE8, .mapName = "arn_08" },
-    { .unk_0 = 2, .entryID = 4, .unk_4 = 0, .partnerID = PARTNER_NONE, .unk_6 = 0x00 },
-    { .unk_0 = 0, .entryID = 3, .unk_4 = 0, .partnerID = PARTNER_GOOMBARIO, .unk_6 = 0x9D, .mapName = "nok_12" },
-    //{ .unk_0 = 1, .entryID = 3, .unk_4 = 0, .partnerID = PARTNER_NONE, .unk_6 = 0x9D, .mapName = "kkj_26" },
-    { .unk_0 = 3, .entryID = 0, .unk_4 = 0, .partnerID = PARTNER_NONE, .unk_6 = 0x00, .mapName = "end" },
-    { .unk_0 = 0, .entryID = 0, .unk_4 = 0, .partnerID = PARTNER_NONE, .unk_6 = 0x00, },
+enum DemoSceneType {
+    DEMO_SCENE_WORLD        = 0,
+    DEMO_SCENE_PEACH        = 1,
+    DEMO_SCENE_BATTLE       = 2,
+    DEMO_SCENE_DONE         = 3,
+    DEMO_SCENE_EXIT         = 4,
+};
+
+DemoSceneData DemoScenes[] = {
+    {
+        .sceneType = DEMO_SCENE_WORLD,
+        .mapName = "nok_12",
+        .index = nok_12_ENTRY_2,
+        .partnerID = PARTNER_GOOMBARIO,
+        .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
+    },
+    {
+        .sceneType = DEMO_SCENE_BATTLE,
+        .index = 0
+    },
+    {
+        .sceneType = DEMO_SCENE_WORLD,
+        .mapName = "isk_04",
+        .index = isk_04_ENTRY_5,
+        .partnerID = PARTNER_PARAKARRY,
+        .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
+    },
+    {
+        .sceneType = DEMO_SCENE_WORLD,
+        .mapName = "tik_03",
+        .index = tik_03_ENTRY_2,
+        .partnerID = PARTNER_KOOPER,
+        .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
+    },
+    {
+        .sceneType = DEMO_SCENE_WORLD,
+        .mapName = "trd_09",
+        .index = trd_09_ENTRY_2,
+        .partnerID = PARTNER_PARAKARRY,
+        .storyProgress = STORY_CH1_STAR_SPIRIT_RESCUED
+    },
+    {
+        .sceneType = DEMO_SCENE_WORLD,
+        .mapName = "jan_04",
+        .index = jan_04_ENTRY_4,
+        .partnerID = PARTNER_SUSHIE,
+        .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
+    },
+    {
+        .sceneType = DEMO_SCENE_BATTLE,
+        .index = 1
+    },
+    {
+        .sceneType = DEMO_SCENE_WORLD,
+        .mapName = "mac_00",
+        .index = mac_00_ENTRY_6,
+        .partnerID = PARTNER_BOMBETTE,
+        .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
+    },
+    {
+        .sceneType = DEMO_SCENE_WORLD,
+        .mapName = "kzn_02",
+        .index = kzn_02_ENTRY_2,
+        .partnerID = PARTNER_KOOPER,
+        .storyProgress = STORY_CH5_LAVA_STREAM_BLOCKED
+    },
+    {
+        .sceneType = DEMO_SCENE_BATTLE,
+        .index = 2
+    },
+    {
+        .sceneType = DEMO_SCENE_WORLD,
+        .mapName = "mac_03",
+        .index = mac_03_ENTRY_3,
+        .partnerID = PARTNER_BOMBETTE,
+        .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
+    },
+    {
+        .sceneType = DEMO_SCENE_WORLD,
+        .mapName = "nok_02" ,
+        .index = nok_02_ENTRY_4,
+        .partnerID = PARTNER_GOOMBARIO,
+        .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
+    },
+    {
+        .sceneType = DEMO_SCENE_BATTLE,
+        .index = 3
+    },
+    // {
+    //     .sceneType = DEMO_SCENE_PEACH,
+    //     .mapName = "kkj_11",
+    //     .index = kkj_11_ENTRY_8,
+    //     .partnerID = PARTNER_TWINK,
+    //     .storyProgress = STORY_CH5_BEGAN_PEACH_MISSION
+    // },
+    {
+        .sceneType = DEMO_SCENE_WORLD,
+        .mapName = "arn_08",
+        .index = arn_08_ENTRY_2,
+        .partnerID = PARTNER_BOW,
+        .storyProgress = STORY_CH3_UNLOCKED_WINDY_MILL
+    },
+    {
+        .sceneType = DEMO_SCENE_BATTLE,
+        .index = 4
+    },
+    {
+        .sceneType = DEMO_SCENE_WORLD,
+        .mapName = "nok_12",
+        .index = nok_12_ENTRY_3,
+        .partnerID = PARTNER_GOOMBARIO,
+        .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
+    },
+    // {
+    //     .sceneType = DEMO_SCENE_PEACH,
+    //     .mapName = "kkj_26",
+    //     .index = kkj_26_ENTRY_3,
+    //     .partnerID = PARTNER_NONE,
+    //     .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
+    // },
+    {
+        .sceneType = DEMO_SCENE_DONE,
+        .mapName = "end"
+    },
+    {} // final entry blank
 };
 
 char versionString[] = "Prg Ver.00/12/05 16:54";
@@ -57,20 +161,20 @@ void state_init_demo(void) {
 
 void state_step_demo(void) {
     PlayerData* playerData = &gPlayerData;
-    DemoSceneData* demoSceneData = &D_80077AE0[gGameStatusPtr->nextDemoScene];
-    s16 mode = demoSceneData->unk_0;
+    DemoSceneData* demoSceneData = &DemoScenes[gGameStatusPtr->nextDemoScene];
+    s16 mode = demoSceneData->sceneType;
     s16 mapID;
     s16 areaID;
 
     if (gGameStatusPtr->demoState == 4) {
-        mode = 3;
+        mode = DEMO_SCENE_DONE;
     }
     if (gGameStatusPtr->demoState == 5) {
-        mode = 4;
+        mode = DEMO_SCENE_EXIT;
     }
 
     switch (mode) {
-        case 3:
+        case DEMO_SCENE_DONE:
             intro_logos_set_fade_alpha(255);
             intro_logos_set_fade_color(224);
             gGameStatusPtr->introState = INTRO_STATE_3;
@@ -78,7 +182,7 @@ void state_step_demo(void) {
             intro_logos_update_fade();
             gGameStatusPtr->demoState = 5;
             break;
-        case 4:
+        case DEMO_SCENE_EXIT:
             if (gGameStatusPtr->introState != INTRO_STATE_0) {
                 gGameStatusPtr->introState--;
             }
@@ -121,15 +225,15 @@ void state_step_demo(void) {
                 set_game_mode(GAME_MODE_TITLE_SCREEN);
             }
             return;
-        case 0:
+        case DEMO_SCENE_WORLD:
             get_map_IDs_by_name(demoSceneData->mapName, &areaID, &mapID);
             gGameStatusPtr->areaID = areaID;
             gGameStatusPtr->mapID = mapID;
-            gGameStatusPtr->entryID = demoSceneData->entryID;
+            gGameStatusPtr->entryID = demoSceneData->index;
             gGameStatusPtr->peachFlags = 0;
             playerData->currentPartner = demoSceneData->partnerID;
             set_cam_viewport(0, 29, 20, -262, 177);
-            evt_set_variable(NULL, GB_StoryProgress, demoSceneData->unk_6);
+            evt_set_variable(NULL, GB_StoryProgress, demoSceneData->storyProgress);
 
             if (gGameStatusPtr->nextDemoScene == 0) {
                 set_map_transition_effect(3);
@@ -139,15 +243,15 @@ void state_step_demo(void) {
 
             set_game_mode(GAME_MODE_ENTER_DEMO_WORLD);
             break;
-        case 1:
+        case DEMO_SCENE_PEACH:
             get_map_IDs_by_name(demoSceneData->mapName, &areaID, &mapID);
             gGameStatusPtr->areaID = areaID;
             gGameStatusPtr->mapID = mapID;
-            gGameStatusPtr->entryID = demoSceneData->entryID;
+            gGameStatusPtr->entryID = demoSceneData->index;
             gGameStatusPtr->peachFlags = PEACH_STATUS_FLAG_IS_PEACH;
             playerData->currentPartner = demoSceneData->partnerID;
             set_cam_viewport(0, 29, 20, -262, 177);
-            evt_set_variable(NULL, GB_StoryProgress, demoSceneData->unk_6);
+            evt_set_variable(NULL, GB_StoryProgress, demoSceneData->storyProgress);
 
             if (gGameStatusPtr->nextDemoScene == 0) {
                 set_map_transition_effect(3);
@@ -157,14 +261,14 @@ void state_step_demo(void) {
 
             set_game_mode(GAME_MODE_ENTER_DEMO_WORLD);
             break;
-        case 2:
-            load_demo_battle(demoSceneData->entryID);
+        case DEMO_SCENE_BATTLE:
+            load_demo_battle(demoSceneData->index);
             break;
     }
 
-    gGameStatusPtr->nextDemoScene += 1;
-    if (gGameStatusPtr->nextDemoScene > 0x12) {
-        gGameStatusPtr->nextDemoScene = 0x12;
+    gGameStatusPtr->nextDemoScene++;
+    if (gGameStatusPtr->nextDemoScene > ARRAY_COUNT(DemoScenes) - 2) {
+        gGameStatusPtr->nextDemoScene = ARRAY_COUNT(DemoScenes) - 2;
     }
 }
 

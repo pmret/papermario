@@ -15,14 +15,6 @@ NpcSettings N(NpcSettings_Watt) = {
 
 #include "world/common/atomic/CreateDarkness.inc.c"
 
-EvtScript N(EVS_SetupDarkness) = {
-    EVT_THREAD
-        EVT_CALL(N(DarkRoomUpdate))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
-};
-
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 #include "world/common/todo/UnsetCamera0Flag1000.inc.c"
 
@@ -105,7 +97,7 @@ EvtScript N(EVS_SetupLightSource) = {
             EVT_SET(AB_OMO12_LightPowerMod, 102)
             EVT_EXEC(N(EVS_ManageLanternLight))
         EVT_CASE_GE(STORY_CH4_WATT_JOINED_PARTY)
-            EVT_EXEC_WAIT(N(EVS_SetupDarkness))
+            EVT_EXEC_WAIT(N(EVS_CreateDarkness))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -314,7 +306,7 @@ EvtScript N(EVS_Scene_ReleaseWatt) = {
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_Watt, ANIM_WorldWatt_Idle)
     EVT_CALL(PlaySoundAtNpc, NPC_Watt, SOUND_262, SOUND_SPACE_MODE_0)
-    EVT_CALL(ShowEmote, NPC_Watt, EMOTE_EXCLAMATION, 0, 30, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_Watt, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(40)
     EVT_CALL(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_0059)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_80011)
@@ -400,7 +392,7 @@ EvtScript N(EVS_Scene_ReleaseWatt) = {
     EVT_WAIT(30)
     EVT_CALL(CloseMessage)
     EVT_WAIT(10)
-    EVT_EXEC_WAIT(N(EVS_SetupDarkness))
+    EVT_EXEC_WAIT(N(EVS_CreateDarkness))
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_005B)
     EVT_CALL(EnablePartnerAI)
@@ -648,7 +640,7 @@ StaticNpc N(NpcData_Watt) = {
     .settings = &N(NpcSettings_Watt),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = COMMON_PASSIVE_FLAGS,
     .init = &N(EVS_NpcInit_Watt),
     .initVarCount = 1,
     .initVar = { .value = 0 },
@@ -679,7 +671,7 @@ StaticNpc N(NpcData_LanternTop) = {
     .settings = &N(NpcSettings_Watt),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_LanternTop),
     .initVarCount = 1,
     .initVar = { .value = 0 },

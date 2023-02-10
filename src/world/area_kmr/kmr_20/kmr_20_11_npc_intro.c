@@ -3,7 +3,6 @@
 
 #define NAME_SUFFIX _Intro
 #include "world/common/entity/Pipe.inc.c"
-#include "world/common/entity/Pipe.data.inc.c"
 #include "common/foliage.inc.c"
 #define NAME_SUFFIX
 

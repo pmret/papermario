@@ -104,7 +104,7 @@ EvtScript N(D_802483B8_84AF88) = {
 EvtScript N(D_80248624_84B1F4) = {
     EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_203E, SOUND_SPACE_MODE_0)
     EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_262, SOUND_SPACE_MODE_0)
-    EVT_CALL(ShowEmote, NPC_ShyGuy_01, EMOTE_EXCLAMATION, 0, 20, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_ShyGuy_01, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_ShyGuy_01, ANIM_ShyGuy_Pink_Anim11, ANIM_ShyGuy_Pink_Anim01, 0, MSG_MAC_Housing_00B2)
     EVT_CALL(InterpNpcYaw, NPC_ShyGuy_01, 180, 10)

@@ -5,62 +5,28 @@
 #define NAMESPACE b_area_tik_tik_05
 
 #include "world/common/atomic/TexturePan.inc.c"
-
-EvtScript N(80233540) = {
-    EVT_SET_GROUP(0)
-    EVT_IF_EQ(LVar5, 1)
-        EVT_IF_EQ(LVar6, 1)
-            EVT_IF_EQ(LVar7, 1)
-                EVT_IF_EQ(LVar8, 1)
-                    EVT_CALL(N(UpdateTexturePanSmooth))
-                    EVT_RETURN
-                EVT_END_IF
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(N(UpdateTexturePanStepped))
-    EVT_RETURN
-    EVT_END
-};
+#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_CALL(SetTexPanner, 15, TEX_PANNER_1)
-    EVT_CALL(EnableTexPanning, 15, 1)
+    EVT_CALL(SetTexPanner, MODEL_taki1, TEX_PANNER_1)
+    EVT_CALL(EnableTexPanning, MODEL_taki1, TRUE)
     EVT_THREAD
-        EVT_SET(LVar0, 1)
-        EVT_SET(LVar1, 0)
-        EVT_SET(LVar2, -2700)
-        EVT_SET(LVar3, 0)
-        EVT_SET(LVar4, -3000)
-        EVT_SET(LVar5, 1)
-        EVT_SET(LVar6, 1)
-        EVT_SET(LVar7, 1)
-        EVT_SET(LVar8, 1)
-        EVT_SET(LVar9, 0)
-        EVT_SET(LVarA, 0)
-        EVT_SET(LVarB, 0)
-        EVT_SET(LVarC, 0)
-        EVT_EXEC(N(80233540))
+        TEX_PAN_PARAMS_ID(TEX_PANNER_1)
+        TEX_PAN_PARAMS_STEP(   0, -2700,   0, -3000)
+        TEX_PAN_PARAMS_FREQ(   1,     1,   1,     1)
+        TEX_PAN_PARAMS_INIT(   0,     0,   0,     0)
+        EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
-    EVT_CALL(SetTexPanner, 16, TEX_PANNER_2)
-    EVT_CALL(EnableTexPanning, 16, 1)
+    EVT_CALL(SetTexPanner, MODEL_taki2, TEX_PANNER_2)
+    EVT_CALL(EnableTexPanning, MODEL_taki2, TRUE)
     EVT_THREAD
-        EVT_SET(LVar0, 2)
-        EVT_SET(LVar1, 50)
-        EVT_SET(LVar2, -200)
-        EVT_SET(LVar3, 110)
-        EVT_SET(LVar4, -500)
-        EVT_SET(LVar5, 1)
-        EVT_SET(LVar6, 1)
-        EVT_SET(LVar7, 1)
-        EVT_SET(LVar8, 1)
-        EVT_SET(LVar9, 0)
-        EVT_SET(LVarA, 0)
-        EVT_SET(LVarB, 0)
-        EVT_SET(LVarC, 0)
-        EVT_EXEC(N(80233540))
+        TEX_PAN_PARAMS_ID(TEX_PANNER_2)
+        TEX_PAN_PARAMS_STEP(   50, -200,  110, -500)
+        TEX_PAN_PARAMS_FREQ(    1,    1,    1,    1)
+        TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
+        EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
     EVT_RETURN
     EVT_END

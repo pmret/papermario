@@ -1,7 +1,6 @@
 #include "kmr_02.h"
 
 #include "world/common/entity/Pipe.inc.c"
-#include "world/common/entity/Pipe.data.inc.c"
 
 #define NAME_SUFFIX _Main
 #include "world/common/npc/GoombaFamily_Wander.inc.c"

@@ -2,7 +2,7 @@
 #include "entity.h"
 
 // begin incomplete Chest include
-//#include "world/common/atomic/Chest.inc.c"
+//#include "world/common/entity/Chest.inc.c"
 
 #include "world/common/todo/StashVars.inc.c"
 #include "world/common/todo/GetItemName.inc.c"
@@ -29,7 +29,6 @@ MAP_RODATA_PAD(1,unk);
 #define SUPER_BLOCK_MAPVAR MV_SuperBlock
 #define SUPER_BLOCK_GAMEFLAG GF_TIK02_SuperBlock
 #include "world/common/entity/SuperBlock.inc.c"
-#include "world/common/entity/SuperBlock.data.inc.c"
 
 EvtScript N(EVS_SmashBlockA) = {
     EVT_SET(GF_TIK12_Hammer3BlockA, TRUE)
