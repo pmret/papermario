@@ -95,7 +95,7 @@ EvtScript N(D_8024202C_B861AC) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_EQ(STORY_CH5_RAFAEL_MOVED_ROOT)
             EVT_THREAD
-                EVT_EXEC(N(D_80244BD0_B88D50))
+                EVT_EXEC(N(EVS_Scene_RaphaelComingThrough))
                 EVT_WAIT(200)
                 EVT_EXEC(N(EVS_BindExitTriggers))
             EVT_END_THREAD
@@ -124,8 +124,8 @@ EvtScript N(EVS_Main) = {
             EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(RavenNPCs)))
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_80249EC4))
-    EVT_EXEC(N(D_80242CE4_B86E64))
+    EVT_EXEC(N(EVS_SetupZiplines))
+    EVT_EXEC(N(EVS_SetupBasketElevator))
     EVT_EXEC(N(EVS_SetupTrees))
     EVT_EXEC(N(EVS_SetupBushes))
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o294, SURFACE_TYPE_LAVA)

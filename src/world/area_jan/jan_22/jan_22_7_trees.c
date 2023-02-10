@@ -14,9 +14,12 @@ FoliageVectorList N(Tree1_Effects) = {
     }
 };
 
-//@bug
-s32 N(missing_8024B874_B874)[] = {
-    0xFFFFFFE2, 0x0000000F, 0xF840606F, 0x00000000, 
+//@bug last part of a FoliageDropList
+s32 N(InvalidTreepDrop)[] = {
+    -30,
+    ITEM_SPAWN_MODE_FALL_SPAWN_ONCE,
+    GF_JAN_30,
+    0,
 };
 
 ShakeTreeConfig N(ShakeTree_Tree1) = {

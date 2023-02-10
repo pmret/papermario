@@ -367,7 +367,7 @@ API_CALLABLE(N(GetFloorCollider)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(EVS_NpcIdle_Misstar) = {
+EvtScript N(EVS_Scene_Misstar) = {
     EVT_IF_EQ(AF_KZN20_MisstarFlightDone, FALSE)
         EVT_CALL(SetNpcPos, NPC_SELF, -120, 70, 45)
         EVT_WAIT(30)
@@ -516,7 +516,7 @@ EvtScript N(EVS_NpcInteract_Misstar) = {
 EvtScript N(EVS_NpcInit_Misstar) = {
     EVT_IF_EQ(GB_StoryProgress, STORY_CH5_MT_LAVA_LAVA_ERUPTING)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldMisstar_IdleAngry)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Misstar)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_Scene_Misstar)))
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Misstar)))
     EVT_ELSE
         EVT_CALL(RemoveNpc, NPC_SELF)

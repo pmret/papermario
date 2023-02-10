@@ -4,7 +4,8 @@
 #include "common/foliage.inc.c"
 #define NAME_SUFFIX
 
-#include "../common/MoveBushes.inc.c"
+#include "../common/MoveBush.inc.c"
+#include "../common/MoveBushTemplates.h"
 
 EvtScript N(EVS_MoveBush_Separate) = EVT_MOVE_BUSHES(COLLIDER_o70,
     MODEL_o67, MODEL_o68, MV_Unk_00, MV_Unk_01);

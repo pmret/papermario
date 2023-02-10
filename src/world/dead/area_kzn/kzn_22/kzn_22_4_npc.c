@@ -164,7 +164,7 @@ EvtScript N(EVS_SetCharacterPositions) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcIdle_Misstar) = {
+EvtScript N(EVS_Scene_Misstar) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_IF_NE(AF_KZN23_MessageClosed, FALSE)
@@ -257,7 +257,7 @@ EvtScript N(EVS_NpcInit_Misstar) = {
     EVT_SET(AF_KZN23_GrabbedKolorado, FALSE)
     EVT_SET(AF_KZN23_GrabbedPlayer, FALSE)
     EVT_SET(AF_KZN22_FlewAway, FALSE)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Misstar)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_Scene_Misstar)))
     EVT_RETURN
     EVT_END
 };

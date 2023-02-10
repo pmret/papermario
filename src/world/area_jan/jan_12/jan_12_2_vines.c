@@ -3,7 +3,8 @@
 #define PULL_VINE_CALLBACK_SCRIPT MV_PullVineCallback
 #include "../common/PullVine.inc.c"
 
-#include "../common/MoveBushes.inc.c"
+#include "../common/MoveBush.inc.c"
+#include "../common/MoveBushTemplates.h"
 
 EvtScript N(EVS_MoveBushes_Separate) = EVT_MOVE_BUSHES(COLLIDER_o12,
     MODEL_o12, MODEL_o26, MV_BushOffsetL, MV_BushOffsetR);

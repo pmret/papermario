@@ -5,30 +5,7 @@
 #include "common/foliage.inc.c"
 #define NAME_SUFFIX
 
-void N(MoveBush_apply_shear_mtx)(Matrix4f mtx, f32 f) {
-    guMtxIdentF(mtx);
-    mtx[1][0] = f * 0.2;
-    mtx[1][1] = 1.0f;
-    mtx[1][2] = 0.0f;
-}
-
-ApiStatus N(MoveBush_AnimateShearing)(Evt* script) {
-    Bytecode* args = script->ptrReadPos;
-    s32 modelID = evt_get_variable(script, *args++);
-    s32 modelIndex = get_model_list_index_from_tree_index(modelID);
-    f32 f = evt_get_float_variable(script, *args++);
-    Model* mdl = get_model_from_list_index(modelIndex);
-    Matrix4f mtx;
-
-    if (!(mdl->flags & MODEL_FLAG_HAS_TRANSFORM_APPLIED)) {
-        N(MoveBush_apply_shear_mtx)(mdl->transformMatrix, f);
-        mdl->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
-    } else {
-        N(MoveBush_apply_shear_mtx)(mtx, f);
-        guMtxCatF(mtx, mdl->transformMatrix, mdl->transformMatrix);
-    }
-    return ApiStatus_DONE2;
-}
+#include "../common/MoveBush.inc.c"
 
 EvtScript N(EVS_MoveBushes_Separate) = {
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o149, SOUND_209F, 0)
@@ -57,7 +34,7 @@ EvtScript N(EVS_MoveBushes_Separate) = {
         EVT_CALL(N(MoveBush_AnimateShearing), 31, LVar7)
         EVT_WAIT(1)
     EVT_END_LOOP
-    // script is equivalent to MoveBushes.inc.c, except for this additional line:
+    // script is equivalent to MoveBushTemplates.h, except for this additional line:
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o149, COLLIDER_FLAGS_UPPER_MASK)
     EVT_RETURN
     EVT_END
