@@ -1832,9 +1832,9 @@ enum ItemIDs {
     ITEM_STAR_STONE                   = 0x0000006C,
     ITEM_SNEAKY_PARASOL               = 0x0000006D,
     ITEM_KOOT_KOOPA_LEGENDS           = 0x0000006E,
-    ITEM_KOOT_MERLUVLEE_AUTOGRAPH     = 0x0000006F,
+    ITEM_KOOT_LUIGIS_AUTOGRAPH        = 0x0000006F,
     ITEM_KOOT_EMPTY_WALLET            = 0x00000070,
-    ITEM_KOOT_LUIGI_AUTOGRAPH         = 0x00000071,
+    ITEM_KOOT_MERLUVLEES_AUTOGRAPH    = 0x00000071,
     ITEM_KOOT_SHELL                   = 0x00000072,
     ITEM_KOOT_OLD_PHOTO               = 0x00000073,
     ITEM_KOOT_GLASSES                 = 0x00000074,
@@ -5023,6 +5023,13 @@ enum EnemyFlags {
     ENEMY_FLAG_40000000             = 0x40000000, // spawn in AI_STATE_CHASE_INIT
     ENEMY_FLAG_80000000             = 0x80000000,
 };
+
+#define COMMON_PASSIVE_FLAGS \
+      ENEMY_FLAG_PASSIVE \
+    | ENEMY_FLAG_ENABLE_HIT_SCRIPT \
+    | ENEMY_FLAG_100 \
+    | ENEMY_FLAG_400 \
+    | ENEMY_FLAG_800
 
 // used with enemy->aiFlags
 enum EnemyAIFlags {

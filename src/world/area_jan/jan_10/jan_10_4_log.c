@@ -1,8 +1,6 @@
 #include "jan_10.h"
 #include "effects.h"
 
-#include "world/common/todo/UpdateLogShadow.inc.c"
-
 EvtScript N(EVS_SetupLogObjects) = {
     EVT_IF_EQ(GF_JAN10_CreateLogBridge, FALSE)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o23, COLLIDER_FLAGS_UPPER_MASK)
@@ -42,6 +40,8 @@ EvtScript N(EVS_LogAnim_RiseUp) = {
     EVT_RETURN
     EVT_END
 };
+
+#include "world/common/todo/UpdateLogShadow.inc.c"
 
 EvtScript N(EVS_LogAnim_FallDown) = {
     EVT_THREAD

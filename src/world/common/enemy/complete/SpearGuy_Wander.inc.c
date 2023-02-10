@@ -93,7 +93,6 @@ NpcSettings N(NpcSettings_SpearGuy_Hitbox) = {
 
 #define SPEAR_GUY_WANDER_NPC_DATA \
     .settings = &N(NpcSettings_SpearGuy_Wander), \
-    .flags = ENEMY_FLAG_400, \
     .drops = SPEAR_GUY_DROPS, \
     .animations = SPEAR_GUY_ANIMS, \
     .extraAnimations = N(ExtraAnims_SpearGuy), \

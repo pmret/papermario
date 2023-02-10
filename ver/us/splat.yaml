@@ -10927,7 +10927,7 @@ segments:
     - [0x9EDBF0, c, nok_04_2_main]
     - [0x9EDBF0, c, nok_04_3_entity]
     - [0x9EDBF0, c, nok_04_4_npc]
-    - [0x9EEA80, c, nok_04_5_partner]
+    - [0x9EEA80, c, nok_04_5_new_partner]
     - [0x9EEB20]
   - name: nok_11
     dir: world/area_nok/nok_11
@@ -12218,43 +12218,33 @@ segments:
     start: 0xB44770
     vram: 0x80240000
     subsegments:
-    - [0xB44770, c]
-    - [0xB447B0, c]
-    - [0xB44AC0, c]
-    - [0xB44D80, c]
-    - [0xB44F10, c]
-    - [0xB45150, c]
-    - [0xB451F0, c]
-    - [0xB45730, c]
-    - [0xB45860, data]
-    - [0xB45A20, data]
-    - [0xB461B0, data]
-    - [0xB47EC0, data]
-    - [0xB47FE0, data]
-    - [0xB48B70, data]
-    - [0xB490C0, data]
-    - [0xB497F0, data]
-    - [0xB4A4B0, data]
-    - [0xB4AA20]
+    - [0xB44770, c, jan_04_0_header]
+    - [0xB447B0, c, jan_04_1_music]
+    - [0xB447B0, c, jan_04_2_main]
+    - [0xB44AC0, c, jan_04_3_entity]
+    - [0xB44D80, c, jan_04_4_npc]
+    - [0xB44F10, c, jan_04_5_unused]
+    - [0xB44F10, c, jan_04_6_trees]
+    - [0xB451F0, c, jan_04_7_scenes]
+    - [0xB451F0, c, jan_04_8_treasure]
+    - [0xB454F0, c, jan_04_9_bushes]
+    - [0xB45730, c, jan_04_10_demo]
+    - [0xB45860]
   - name: jan_05
     dir: world/area_jan/jan_05
     type: code
     start: 0xB4AA70
     vram: 0x80240000
     subsegments:
-    - [0xB4AA70, c]
-    - [0xB4AAB0, c]
-    - [0xB4ADC0, c]
-    - [0xB4AF10, c]
-    - [0xB4B260, c]
-    - [0xB4D140, data]
-    - [0xB4D200, data]
-    - [0xB4D7A0, data]
-    - [0xB4E050, data]
-    - [0xB4F170, data]
-    - [0xB517F0, data]
-    - [0xB523E0, data]
-    - [0xB52470]
+    - [0xB4AA70, c, jan_05_0_header]
+    - [0xB4AAB0, c, jan_05_1_music]
+    - [0xB4AAB0, c, jan_05_2_main]
+    - [0xB4ADC0, c, jan_05_3_log]
+    - [0xB4AF10, c, jan_05_4_bushes]
+    - [0xB4B260, c, jan_05_5_npc]
+    - [0xB4CEC0, c, jan_05_6_trees]
+    - [0xB4D140, c, jan_05_7_entity]
+    - [0xB4D140]
   - name: jan_06
     dir: world/area_jan/jan_06
     type: code
@@ -14735,7 +14725,7 @@ segments:
     - [0xDDF310, c, omo_12_1_music]
     - [0xDDF310, c, omo_12_2_main]
     - [0xDDF310, c, omo_12_3_npc]
-    - [0xDDF730, c, omo_12_4_partner]
+    - [0xDDF730, c, omo_12_4_new_partner]
     - [0xDDF7D0]
   - name: omo_13
     dir: world/area_omo/omo_13
@@ -16940,7 +16930,7 @@ segments:
       - GourmetGuy
       - VillageLeader
       - LeadersFriend
-      - RafaelRaven
+      - RaphaelRaven
       - Tolielup
       - GateFlower
       - Petunia

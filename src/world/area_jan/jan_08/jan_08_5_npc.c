@@ -157,6 +157,7 @@ StaticNpc N(NpcData_SpearGuy)[] = {
                 .detectSize = { 150 },
             }
         },
+        .flags = ENEMY_FLAG_400,
         SPEAR_GUY_WANDER_NPC_DATA
     },
     SPEAR_GUY_HITBOX(NPC_SpearGuy_Hitbox)

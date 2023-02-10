@@ -4,89 +4,16 @@
 #include "common/foliage.inc.c"
 #define NAME_SUFFIX
 
-#include "world/common/todo/PullVineSub.inc.c"
+#include "../common/MoveBushes.inc.c"
 
-EvtScript N(EVS_MoveBush_RightShore) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o84, SOUND_209F, 0)
-    EVT_SET(LVar0, MV_RightShoreBushOffsetL)
-    EVT_SET(LVar1, MV_RightShoreBushOffsetR)
-    EVT_SET(LVar6, 0)
-    EVT_SET(LVar7, 0)
-    EVT_LOOP(60)
-        EVT_SETF(LVar2, MV_RightShoreBushOffsetL)
-        EVT_SETF(LVar3, MV_RightShoreBushOffsetR)
-        EVT_SUBF(LVar2, LVar0)
-        EVT_SUBF(LVar3, LVar1)
-        EVT_SETF(LVar4, LVar2)
-        EVT_SETF(LVar5, LVar3)
-        EVT_MULF(LVar4, EVT_FLOAT(0.09375))
-        EVT_MULF(LVar5, EVT_FLOAT(0.09375))
-        EVT_MULF(LVar6, EVT_FLOAT(0.8))
-        EVT_MULF(LVar7, EVT_FLOAT(0.8))
-        EVT_ADDF(LVar6, LVar4)
-        EVT_ADDF(LVar7, LVar5)
-        EVT_ADDF(LVar0, LVar6)
-        EVT_ADDF(LVar1, LVar7)
-        EVT_CALL(TranslateModel, MODEL_o83, MV_RightShoreBushOffsetL, 0, 0)
-        EVT_CALL(TranslateModel, MODEL_o84, MV_RightShoreBushOffsetR, 0, 0)
-        EVT_CALL(N(PullVine_ShearBushModel), MODEL_o83, LVar6)
-        EVT_CALL(N(PullVine_ShearBushModel), MODEL_o84, LVar7)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
+EvtScript N(EVS_MoveBush_RightShore) = EVT_MOVE_BUSHES(COLLIDER_o84,
+    MODEL_o83, MODEL_o84, MV_RightShoreBushOffsetL, MV_RightShoreBushOffsetR);
 
-EvtScript N(EVS_MoveBush_CliffTop1) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o82, SOUND_209F, 0)
-    EVT_SET(LVar0, MV_CliffTopBush1OffsetR)
-    EVT_SET(LVar6, 0)
-    EVT_LOOP(60)
-        EVT_SETF(LVar2, MV_CliffTopBush1OffsetR)
-        EVT_SUBF(LVar2, LVar0)
-        EVT_SETF(LVar4, LVar2)
-        EVT_MULF(LVar4, EVT_FLOAT(0.09375))
-        EVT_MULF(LVar6, EVT_FLOAT(0.8))
-        EVT_ADDF(LVar6, LVar4)
-        EVT_ADDF(LVar0, LVar6)
-        EVT_CALL(TranslateModel, MODEL_o82, MV_CliffTopBush1OffsetR, 0, 0)
-        EVT_CALL(N(PullVine_ShearBushModel), MODEL_o82, LVar6)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
+EvtScript N(EVS_MoveBush_CliffTop1) = EVT_MOVE_BUSH(COLLIDER_o82,
+    MODEL_o82, MV_CliffTopBush1OffsetR);
 
-EvtScript N(EVS_MoveBush_CliffTop2) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o88, SOUND_209F, 0)
-    EVT_SET(LVar0, MV_CliffTopBush2OffsetL)
-    EVT_SET(LVar1, MV_CliffTopBush2OffsetR)
-    EVT_SET(LVar6, 0)
-    EVT_SET(LVar7, 0)
-    EVT_LOOP(60)
-        EVT_SETF(LVar2, MV_CliffTopBush2OffsetL)
-        EVT_SETF(LVar3, MV_CliffTopBush2OffsetR)
-        EVT_SUBF(LVar2, LVar0)
-        EVT_SUBF(LVar3, LVar1)
-        EVT_SETF(LVar4, LVar2)
-        EVT_SETF(LVar5, LVar3)
-        EVT_MULF(LVar4, EVT_FLOAT(0.09375))
-        EVT_MULF(LVar5, EVT_FLOAT(0.09375))
-        EVT_MULF(LVar6, EVT_FLOAT(0.8))
-        EVT_MULF(LVar7, EVT_FLOAT(0.8))
-        EVT_ADDF(LVar6, LVar4)
-        EVT_ADDF(LVar7, LVar5)
-        EVT_ADDF(LVar0, LVar6)
-        EVT_ADDF(LVar1, LVar7)
-        EVT_CALL(TranslateModel, MODEL_o88, MV_CliffTopBush2OffsetL, 0, 0)
-        EVT_CALL(TranslateModel, MODEL_o81, MV_CliffTopBush2OffsetR, 0, 0)
-        EVT_CALL(N(PullVine_ShearBushModel), MODEL_o88, LVar6)
-        EVT_CALL(N(PullVine_ShearBushModel), MODEL_o81, LVar7)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
+EvtScript N(EVS_MoveBush_CliffTop2) = EVT_MOVE_BUSHES(COLLIDER_o88,
+    MODEL_o88, MODEL_o81, MV_CliffTopBush2OffsetL, MV_CliffTopBush2OffsetR);
 
 EvtScript N(EVS_Inspect_MoveBush_RightShore) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o84, COLLIDER_FLAGS_UPPER_MASK)

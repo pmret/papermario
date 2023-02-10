@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitWalk_jan_19_1) = EVT_EXIT_WALK(60, jan_23_ENTRY_0, "jan_19", jan_19_ENTRY_1);
 
-EvtScript N(D_802400CC_B8FD9C) = {
+EvtScript N(EVS_ExitFall_jan_16_4) = {
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -89,7 +89,7 @@ EvtScript N(D_802400CC_B8FD9C) = {
 
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_jan_19_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_EXEC(N(D_802400CC_B8FD9C))
+    EVT_EXEC(N(EVS_ExitFall_jan_16_4))
     EVT_RETURN
     EVT_END
 };

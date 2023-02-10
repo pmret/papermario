@@ -10,11 +10,11 @@
 #include "mapfs/jan_13_hit.h"
 
 enum {
-    MV_PuzzleProgress   = MapVar(0),
+    MV_PuzzleProgress       = MapVar(0),
 };
 
 enum {
-    MF_Unk_0A           = MapFlag(10),
+    MF_GeyserSoundPlaying   = MapFlag(10),
 };
 
 #define NAMESPACE jan_13

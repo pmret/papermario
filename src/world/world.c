@@ -599,7 +599,7 @@ MapConfig jan_maps[] = {
     { MAP(jan_01), .bgName = "yos_bg" },
     { MAP(jan_02), .bgName = "yos_bg" },
     { MAP(jan_03), .bgName = "yos_bg" },
-    { MAP_UNSPLIT(jan_04, 0x80241140), .bgName = "yos_bg" },
+    { MAP(jan_04), .bgName = "yos_bg" },
     { MAP_UNSPLIT(jan_05, 0x80242710), .bgName = "yos_bg" },
     { MAP_UNSPLIT(jan_06, 0x80242620), .bgName = "jan_bg" },
     { MAP(jan_07), .bgName = "yos_bg" },
@@ -616,7 +616,7 @@ MapConfig jan_maps[] = {
     { MAP(jan_18), .bgName = "yos_bg" },
     { MAP(jan_19), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(jan_22, 0x802419A0), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 1 },
-    { MAP_UNSPLIT(jan_23, 0x80240010), .bgName = "yos_bg" },
+    { MAP(jan_23), .bgName = "yos_bg" },
 };
 
 /// Forever Forest

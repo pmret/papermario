@@ -1,25 +1,38 @@
 #include "jan_13.h"
+#include "entity.h"
 #include "effects.h"
 
-u16 N(D_80240850_B77000) = 0;
+// geyser positions in grid coordinates
+#define POS_0_I 28
+#define POS_0_J 6
+#define POS_1_I 25
+#define POS_1_J 4
+#define POS_2_I 21
+#define POS_2_J 8
+#define POS_3_I 4
+#define POS_3_J 4
+#define POS_4_I 14
+#define POS_4_J 6
+
+u16 N(GeyserAnimPhase) = 0;
 
 void N(setup_gfx_geyser)(void) {
-    f64 temp_f20 = ((sin_rad((f32) N(D_80240850_B77000) * 0.02) + 1.0f) * 0.3) + 0.6;
-    f64 temp_f21 = (sin_rad((f32) N(D_80240850_B77000) * 0.1) + 1.0f) * 0.1;
+    f64 temp_f20 = ((sin_rad((f32) N(GeyserAnimPhase) * 0.02) + 1.0f) * 0.3) + 0.6;
+    f64 temp_f21 = (sin_rad((f32) N(GeyserAnimPhase) * 0.1) + 1.0f) * 0.1;
     f32 scale = temp_f20 + temp_f21;
 
     guScale(&gDisplayContext->matrixStack[gMatrixListPos], (scale * 0.3) + 0.5, scale, (scale * 0.3) + 0.5);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    N(D_80240850_B77000)++;
+    N(GeyserAnimPhase)++;
 }
 
-API_CALLABLE(N(func_802401AC_B7695C)) {
+API_CALLABLE(N(GetRatioFromPercent)) {
     script->varTable[2] = EVT_FLOAT_TO_FIXED(script->varTable[1] / 100.0f);
     script->varTable[3] = EVT_FLOAT_TO_FIXED(script->varTable[1] / 100.0f);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80240214_B769C4)) {
+API_CALLABLE(N(AdjustEnvSoundPosition)) {
     Bytecode* args = script->ptrReadPos;
 
     if (*args++ != 0) {
@@ -31,36 +44,38 @@ API_CALLABLE(N(func_80240214_B769C4)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802402B8_B76A68)) {
+API_CALLABLE(N(GetPlayerPosAfterPush)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 vt0 = script->varTable[0];
-    s32 vt2 = script->varTable[2];
+    s32 posX = script->varTable[0];
+    s32 posZ = script->varTable[2];
 
-    if (script->varTable[1] >= -99) {
+    if (script->varTable[1] > -100) {
         f32 theta = (playerStatus->targetYaw / 180.0f) * 3.141592f;
 
-        vt0 -= (s32) (sin_rad(theta) * 25.0f);
-        vt2 -= (s32) (-cos_rad(theta) * 25.0f);
+        posX -= (s32) (sin_rad(theta) * 25.0f);
+        posZ -= (s32) (-cos_rad(theta) * 25.0f);
     } else {
-        vt2 += 25;
+        posZ += 25;
     }
-    script->varTable[0] = vt0;
-    script->varTable[2] = vt2;
+    script->varTable[0] = posX;
+    script->varTable[2] = posZ;
     return ApiStatus_DONE2;
 }
 
-EvtScript N(EVS_SetupGeyser) = {
-    EVT_SET(LVarA, LVar0) // rock model
+EvtScript N(EVS_ManageSmallGeyser) = {
+    EVT_SET(LVarA, LVar0) // geyser model
     EVT_SET(LVarB, LVar1) // index in solution
     EVT_SET(LVarD, LVar2) // central collider
     EVT_SET(LVar0, 0)
     EVT_SET(LVar1, 0)
     EVT_LOOP(0)
+        // get percent delta
         EVT_IF_EQ(LVarB, MV_PuzzleProgress)
             EVT_ADD(LVar0, 10)
         EVT_ELSE
             EVT_ADD(LVar0, -10)
         EVT_END_IF
+        // clamp delta to [-10, 10]
         EVT_IF_LT(LVar0, -10)
             EVT_SET(LVar0, -10)
         EVT_END_IF
@@ -68,13 +83,15 @@ EvtScript N(EVS_SetupGeyser) = {
             EVT_SET(LVar0, 10)
         EVT_END_IF
         EVT_ADD(LVar1, LVar0)
+        // clamp percent to [0, 100]
         EVT_IF_LT(LVar1, 0)
             EVT_SET(LVar1, 0)
         EVT_END_IF
         EVT_IF_GT(LVar1, 100)
             EVT_SET(LVar1, 100)
         EVT_END_IF
-        EVT_CALL(N(func_802401AC_B7695C))
+        // set geyser scale
+        EVT_CALL(N(GetRatioFromPercent))
         EVT_IF_EQ(LVar1, 0)
             EVT_IF_NE(LVarD, 0)
             EVT_END_IF
@@ -91,8 +108,8 @@ EvtScript N(EVS_SetupGeyser) = {
     EVT_END
 };
 
-EvtScript N(D_80240A64_B77214) = {
-    EVT_CALL(N(func_802401AC_B7695C))
+EvtScript N(SetLargeGeyserScale) = {
+    EVT_CALL(N(GetRatioFromPercent))
     EVT_IF_LT(LVar3, EVT_FLOAT(1.0))
         EVT_SETF(LVar4, LVar3)
     EVT_ELSE
@@ -103,10 +120,10 @@ EvtScript N(D_80240A64_B77214) = {
     EVT_END
 };
 
-EvtScript N(D_80240ADC_B7728C) = {
-    EVT_SET(LVarA, LVar0)
-    EVT_SET(LVarB, LVar1)
-    EVT_SET(LVarD, LVar2)
+EvtScript N(EVS_ManageLargeGeyser) = {
+    EVT_SET(LVarA, LVar0) // geyser model
+    EVT_SET(LVarB, LVar1) // index in solution
+    EVT_SET(LVarD, LVar2) // central collider
     EVT_SET(LVar0, 0)
     EVT_SET(LVar1, 0)
     EVT_IF_EQ(GF_JAN13_SolvedBlockPuzzle, TRUE)
@@ -140,7 +157,7 @@ EvtScript N(D_80240ADC_B7728C) = {
             EVT_WAIT(1)
         EVT_ELSE
             EVT_CALL(EnableModel, LVarA, TRUE)
-            EVT_EXEC_WAIT(N(D_80240A64_B77214))
+            EVT_EXEC_WAIT(N(SetLargeGeyserScale))
         EVT_END_IF
         EVT_IF_EQ(AB_JAN_2, 2)
             EVT_BREAK_LOOP
@@ -153,7 +170,7 @@ EvtScript N(D_80240ADC_B7728C) = {
             EVT_IF_GT(LVar1, 300)
                 EVT_SET(LVar1, 300)
             EVT_END_IF
-            EVT_EXEC_WAIT(N(D_80240A64_B77214))
+            EVT_EXEC_WAIT(N(SetLargeGeyserScale))
         EVT_ELSE
             EVT_WAIT(1)
         EVT_END_IF
@@ -164,7 +181,7 @@ EvtScript N(D_80240ADC_B7728C) = {
     EVT_SET(LVar0, -7)
     EVT_LOOP(28)
         EVT_ADD(LVar1, LVar0)
-        EVT_EXEC_WAIT(N(D_80240A64_B77214))
+        EVT_EXEC_WAIT(N(SetLargeGeyserScale))
     EVT_END_LOOP
     EVT_LABEL(10)
     EVT_IF_EQ(MV_PuzzleProgress, 5)
@@ -190,26 +207,26 @@ EvtScript N(D_80240ADC_B7728C) = {
         EVT_WAIT(1)
     EVT_ELSE
         EVT_CALL(EnableModel, LVarA, TRUE)
-        EVT_EXEC_WAIT(N(D_80240A64_B77214))
+        EVT_EXEC_WAIT(N(SetLargeGeyserScale))
     EVT_END_IF
     EVT_GOTO(10)
     EVT_RETURN
     EVT_END
 };
 
-Vec3i N(D_80240F70_B77720)[] = {
-    {  312, 0,   12 },
-    {  237, 0,  -38 },
-    {  137, 0,   62 },
-    { -288, 0,  -38 },
-    {  -38, 0,   12 },
+Vec3i N(GeyserSoundPositions)[] = {
+    { -400 + POS_0_I * BLOCK_GRID_SIZE + HALF_BLOCK_GRID_SIZE, 0, -150 + POS_0_J * BLOCK_GRID_SIZE + HALF_BLOCK_GRID_SIZE },
+    { -400 + POS_1_I * BLOCK_GRID_SIZE + HALF_BLOCK_GRID_SIZE, 0, -150 + POS_1_J * BLOCK_GRID_SIZE + HALF_BLOCK_GRID_SIZE },
+    { -400 + POS_2_I * BLOCK_GRID_SIZE + HALF_BLOCK_GRID_SIZE, 0, -150 + POS_2_J * BLOCK_GRID_SIZE + HALF_BLOCK_GRID_SIZE },
+    { -400 + POS_3_I * BLOCK_GRID_SIZE + HALF_BLOCK_GRID_SIZE, 0, -150 + POS_3_J * BLOCK_GRID_SIZE + HALF_BLOCK_GRID_SIZE },
+    { -400 + POS_4_I * BLOCK_GRID_SIZE + HALF_BLOCK_GRID_SIZE, 0, -150 + POS_4_J * BLOCK_GRID_SIZE + HALF_BLOCK_GRID_SIZE },
     {   37, 0, -138 }, 
 };
 
-EvtScript N(D_80240FB8_B77768) = {
+EvtScript N(EVS_ManageGeyserSounds) = {
     EVT_IF_NE(AB_JAN13_LastPuzzleProgress, MV_PuzzleProgress)
         EVT_SET(AB_JAN13_LastPuzzleProgress, MV_PuzzleProgress)
-        EVT_SET(MF_Unk_0A, FALSE)
+        EVT_SET(MF_GeyserSoundPlaying, FALSE)
         EVT_CALL(StopSound, SOUND_8000001C)
         EVT_CALL(StopSound, SOUND_8000001D)
         EVT_IF_EQ(MV_PuzzleProgress, 5)
@@ -222,14 +239,14 @@ EvtScript N(D_80240FB8_B77768) = {
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(PlaySound, SOUND_8000001C)
-        EVT_SET(MF_Unk_0A, TRUE)
+        EVT_SET(MF_GeyserSoundPlaying, TRUE)
         EVT_SET(LVar0, MV_PuzzleProgress)
         EVT_ADD(LVar0, 1)
-        EVT_USE_BUF(EVT_PTR(N(D_80240F70_B77720)))
+        EVT_USE_BUF(EVT_PTR(N(GeyserSoundPositions)))
         EVT_LOOP(LVar0)
             EVT_BUF_READ3(LVar1, LVar2, LVar3)
         EVT_END_LOOP
-        EVT_CALL(N(func_80240214_B769C4), MF_Unk_0A, LVar1, LVar2, LVar3)
+        EVT_CALL(N(AdjustEnvSoundPosition), MF_GeyserSoundPlaying, LVar1, LVar2, LVar3)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -246,7 +263,7 @@ EvtScript N(EVS_ManagePuzzle) = {
     EVT_SET(LocalFlag(0), FALSE)
     EVT_SET(AB_JAN_2, 0)
     EVT_SET(AB_JAN13_LastPuzzleProgress, -1)
-    EVT_EXEC(N(D_80240FB8_B77768))
+    EVT_EXEC(N(EVS_ManageGeyserSounds))
     EVT_LABEL(0)
         EVT_IF_EQ(GF_JAN13_SolvedBlockPuzzle, TRUE)
             EVT_IF_EQ(LocalFlag(0), FALSE)
@@ -270,27 +287,27 @@ EvtScript N(EVS_ManagePuzzle) = {
                 EVT_SET(LocalFlag(0), TRUE)
             EVT_END_IF
         EVT_END_IF
-        EVT_CALL(GetPushBlock, 0, 28, 6, LVar0)
+        EVT_CALL(GetPushBlock, 0, POS_0_I, POS_0_J, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_SET(MV_PuzzleProgress, 0)
             EVT_GOTO(1)
         EVT_END_IF
-        EVT_CALL(GetPushBlock, 0, 25, 4, LVar0)
+        EVT_CALL(GetPushBlock, 0, POS_1_I, POS_1_J, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_SET(MV_PuzzleProgress, 1)
             EVT_GOTO(1)
         EVT_END_IF
-        EVT_CALL(GetPushBlock, 0, 21, 8, LVar0)
+        EVT_CALL(GetPushBlock, 0, POS_2_I, POS_2_J, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_SET(MV_PuzzleProgress, 2)
             EVT_GOTO(1)
         EVT_END_IF
-        EVT_CALL(GetPushBlock, 0, 4, 4, LVar0)
+        EVT_CALL(GetPushBlock, 0, POS_3_I, POS_3_J, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_SET(MV_PuzzleProgress, 3)
             EVT_GOTO(1)
         EVT_END_IF
-        EVT_CALL(GetPushBlock, 0, 14, 6, LVar0)
+        EVT_CALL(GetPushBlock, 0, POS_4_I, POS_4_J, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_SET(MV_PuzzleProgress, 4)
             EVT_GOTO(1)
@@ -428,49 +445,49 @@ EvtScript N(EVS_ManagePuzzle) = {
         EVT_END_IF
         EVT_SET(MV_PuzzleProgress, 6)
         EVT_LABEL(1)
-        EVT_EXEC(N(D_80240FB8_B77768))
+        EVT_EXEC(N(EVS_ManageGeyserSounds))
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(D_80241F5C_B7870C) = {
+EvtScript N(EVS_ManageGeyserPlayerPhysics) = {
     EVT_LOOP(0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(GetGridIndexFromPos, 0, LVar0, LVar1, LVar2, LVar3, LVar4)
         EVT_SET(LVar5, 0)
         EVT_IF_EQ(MV_PuzzleProgress, 0)
-            EVT_IF_EQ(LVar3, 28)
-                EVT_IF_EQ(LVar4, 6)
+            EVT_IF_EQ(LVar3, POS_0_I)
+                EVT_IF_EQ(LVar4, POS_0_J)
                     EVT_SET(LVar5, 1)
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
         EVT_IF_EQ(MV_PuzzleProgress, 1)
-            EVT_IF_EQ(LVar3, 25)
-                EVT_IF_EQ(LVar4, 4)
+            EVT_IF_EQ(LVar3, POS_1_I)
+                EVT_IF_EQ(LVar4, POS_1_J)
                     EVT_SET(LVar5, 1)
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
         EVT_IF_EQ(MV_PuzzleProgress, 2)
-            EVT_IF_EQ(LVar3, 21)
-                EVT_IF_EQ(LVar4, 8)
+            EVT_IF_EQ(LVar3, POS_2_I)
+                EVT_IF_EQ(LVar4, POS_2_J)
                     EVT_SET(LVar5, 1)
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
         EVT_IF_EQ(MV_PuzzleProgress, 3)
-            EVT_IF_EQ(LVar3, 4)
-                EVT_IF_EQ(LVar4, 4)
+            EVT_IF_EQ(LVar3, POS_3_I)
+                EVT_IF_EQ(LVar4, POS_3_J)
                     EVT_SET(LVar5, 1)
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
         EVT_IF_EQ(MV_PuzzleProgress, 4)
-            EVT_IF_EQ(LVar3, 14)
-                EVT_IF_EQ(LVar4, 6)
+            EVT_IF_EQ(LVar3, POS_4_I)
+                EVT_IF_EQ(LVar4, POS_4_J)
                     EVT_SET(LVar5, 1)
                 EVT_END_IF
             EVT_END_IF
@@ -503,9 +520,10 @@ EvtScript N(D_80241F5C_B7870C) = {
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
+        // player is standing in a geyser
         EVT_IF_EQ(LVar5, 1)
             EVT_CALL(DisablePlayerInput, TRUE)
-            EVT_CALL(N(func_802402B8_B76A68))
+            EVT_CALL(N(GetPlayerPosAfterPush))
             EVT_CALL(InterruptUsePartner)
             EVT_LOOP(10)
                 EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
@@ -608,33 +626,33 @@ EvtScript N(EVS_SetupPuzzle) = {
     EVT_SET(LVar1, 0)
     EVT_SET(LVar2, COLLIDER_o50)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(EVS_SetupGeyser))
+    EVT_EXEC(N(EVS_ManageSmallGeyser))
     EVT_SET(LVar0, MODEL_o73)
     EVT_SET(LVar1, 1)
     EVT_SET(LVar2, COLLIDER_o51)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(EVS_SetupGeyser))
+    EVT_EXEC(N(EVS_ManageSmallGeyser))
     EVT_SET(LVar0, MODEL_o74)
     EVT_SET(LVar1, 2)
     EVT_SET(LVar2, COLLIDER_o52)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(EVS_SetupGeyser))
+    EVT_EXEC(N(EVS_ManageSmallGeyser))
     EVT_SET(LVar0, MODEL_o75)
     EVT_SET(LVar1, 3)
     EVT_SET(LVar2, COLLIDER_o53)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(EVS_SetupGeyser))
+    EVT_EXEC(N(EVS_ManageSmallGeyser))
     EVT_SET(LVar0, MODEL_o76)
     EVT_SET(LVar1, 4)
     EVT_SET(LVar2, COLLIDER_o49)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(EVS_SetupGeyser))
+    EVT_EXEC(N(EVS_ManageSmallGeyser))
     EVT_SET(LVar0, MODEL_o71)
     EVT_SET(LVar1, 5)
     EVT_SET(LVar2, COLLIDER_o76)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(D_80240ADC_B7728C))
-    EVT_EXEC(N(D_80241F5C_B7870C))
+    EVT_EXEC(N(EVS_ManageLargeGeyser))
+    EVT_EXEC(N(EVS_ManageGeyserPlayerPhysics))
     EVT_CALL(EnableTexPanning, MODEL_o72, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_o73, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_o74, TRUE)

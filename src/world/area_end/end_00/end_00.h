@@ -34,7 +34,7 @@
 #include "sprite/npc/TuffPuff.h"
 #include "sprite/npc/GourmetGuy.h"
 
-#include "sprite/npc/RafaelRaven.h"
+#include "sprite/npc/RaphaelRaven.h"
 #include "sprite/npc/LavaPiranha.h"
 #include "sprite/npc/ParadeYoshi.h"
 #include "sprite/npc/YoshiKid.h"
@@ -109,7 +109,7 @@ enum {
     NPC_Yoshi3                  = 59,
     NPC_Yoshi4                  = 60,
     NPC_YoshiChief              = 61,
-    NPC_RafaelRaven             = 62,
+    NPC_RaphaelRaven             = 62,
     NPC_LavaPiranha             = 63,
     NPC_YoshiKidGreen           = 64,
     NPC_YoshiKidBlue            = 65,

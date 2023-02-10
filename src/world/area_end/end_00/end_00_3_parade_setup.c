@@ -253,8 +253,8 @@ s32 N(ExtraAnims_GoombaKing)[] = {
     -1
 };
 
-s32 N(ExtraAnims_RafaelRaven)[] = {
-    ANIM_RafaelRaven_IdleNoFeet,
+s32 N(ExtraAnims_RaphaelRaven)[] = {
+    ANIM_RaphaelRaven_IdleNoFeet,
     -1
 };
 
@@ -633,9 +633,9 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .pos = { 232.0f, 50.0f, 25.0f },
         .yaw = 270.0f
     },
-    [NPC_RafaelRaven] {
-        .initialAnim = ANIM_RafaelRaven_IdleNoFeet,
-        .animList = N(ExtraAnims_RafaelRaven),
+    [NPC_RaphaelRaven] {
+        .initialAnim = ANIM_RaphaelRaven_IdleNoFeet,
+        .animList = N(ExtraAnims_RaphaelRaven),
         .pos = { 357.0f, -120.0f, -30.0f },
         .yaw = 90.0f
     },
@@ -1015,7 +1015,7 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(DeleteNpc, NPC_Boo3)
     EVT_CALL(DeleteNpc, NPC_TubbasHeart)
     EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_RafaelRaven)
+    EVT_CALL(N(CreateParadeNPC), NPC_RaphaelRaven)
     EVT_CALL(N(CreateParadeNPC), NPC_LavaPiranha)
     EVT_CALL(N(CreateParadeNPC), NPC_Yoshi1)
     EVT_CALL(N(CreateParadeNPC), NPC_Yoshi2)
@@ -1052,7 +1052,7 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(DeleteNpc, NPC_Yoshi3)
     EVT_CALL(DeleteNpc, NPC_Yoshi4)
     EVT_CALL(DeleteNpc, NPC_YoshiChief)
-    EVT_CALL(DeleteNpc, NPC_RafaelRaven)
+    EVT_CALL(DeleteNpc, NPC_RaphaelRaven)
     EVT_CALL(DeleteNpc, NPC_LavaPiranha)
     EVT_WAIT(1)
     EVT_CALL(N(CreateParadeNPC), NPC_HuffNPuffBody)

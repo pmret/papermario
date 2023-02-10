@@ -4,38 +4,10 @@
 #include "common/foliage.inc.c"
 #define NAME_SUFFIX
 
-#include "world/common/todo/PullVineSub.inc.c"
+#include "../common/MoveBushes.inc.c"
 
-EvtScript N(EVS_MoveBush_Separate) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o70, SOUND_209F, 0)
-    EVT_SET(LVar0, MV_Unk_00)
-    EVT_SET(LVar1, MV_Unk_01)
-    EVT_SET(LVar6, 0)
-    EVT_SET(LVar7, 0)
-    EVT_LOOP(60)
-        EVT_SETF(LVar2, MV_Unk_00)
-        EVT_SETF(LVar3, MV_Unk_01)
-        EVT_SUBF(LVar2, LVar0)
-        EVT_SUBF(LVar3, LVar1)
-        EVT_SETF(LVar4, LVar2)
-        EVT_SETF(LVar5, LVar3)
-        EVT_MULF(LVar4, EVT_FLOAT(0.09375))
-        EVT_MULF(LVar5, EVT_FLOAT(0.09375))
-        EVT_MULF(LVar6, EVT_FLOAT(0.8))
-        EVT_MULF(LVar7, EVT_FLOAT(0.8))
-        EVT_ADDF(LVar6, LVar4)
-        EVT_ADDF(LVar7, LVar5)
-        EVT_ADDF(LVar0, LVar6)
-        EVT_ADDF(LVar1, LVar7)
-        EVT_CALL(TranslateModel, MODEL_o67, MV_Unk_00, 0, 0)
-        EVT_CALL(TranslateModel, MODEL_o68, MV_Unk_01, 0, 0)
-        EVT_CALL(N(PullVine_ShearBushModel), MODEL_o67, LVar6)
-        EVT_CALL(N(PullVine_ShearBushModel), MODEL_o68, LVar7)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
+EvtScript N(EVS_MoveBush_Separate) = EVT_MOVE_BUSHES(COLLIDER_o70,
+    MODEL_o67, MODEL_o68, MV_Unk_00, MV_Unk_01);
 
 EvtScript N(EVS_Inspect_SeparateBushes) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o70, COLLIDER_FLAGS_UPPER_MASK)

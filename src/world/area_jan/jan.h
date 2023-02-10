@@ -28,6 +28,7 @@ enum {
     AF_JAN02_MetCouncillor      = AreaFlag(5),
     AF_JAN_06                   = AreaFlag(6),
     AF_JAN_07                   = AreaFlag(7),
+    AF_JAN_08                   = AreaFlag(8),
     AF_JAN01_KoloradoShouting   = AreaFlag(9),
     AF_JAN00_TreeDrop1          = AreaFlag(13),
 

@@ -10,10 +10,10 @@
 #include "mapfs/jan_16_hit.h"
 
 #include "sprite/npc/Raven.h"
-#include "sprite/npc/RafaelRaven.h"
+#include "sprite/npc/RaphaelRaven.h"
 
 enum {
-	NPC_RafaelRaven     = 0,
+	NPC_RaphaelRaven     = 0,
 	NPC_Raven_01        = 1,
 	NPC_Raven_02        = 2,
 	NPC_Raven_03        = 3,

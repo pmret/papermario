@@ -63,6 +63,7 @@ enum {
 #define ENTITY_ROM(name) { entity_model_##name##_ROM_START, entity_model_##name##_ROM_END }
 
 #define BLOCK_GRID_SIZE 25
+#define HALF_BLOCK_GRID_SIZE (BLOCK_GRID_SIZE / 2)
 
 #define TWEESTER_PATH_STOP 0x80000000
 #define TWEESTER_PATH_LOOP 0x80000001
