@@ -27,6 +27,8 @@ extern s32 D_80073E10[];
 extern u16* D_8009A680;
 
 #ifdef SHIFT
+void create_audio_system(void);
+void load_engine_data(void);
 #define shim_create_audio_system_obfuscated create_audio_system
 #define shim_load_engine_data_obfuscated load_engine_data
 #endif

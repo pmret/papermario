@@ -33,7 +33,7 @@ def exec_shell(command: List[str]) -> str:
     return ret.stdout
 
 def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra_cflags: str, use_ccache: bool,
-                      non_matching: bool, debug: bool):
+                      non_matching: bool, shift: bool, debug: bool):
     # platform-specific
     if sys.platform  == "darwin":
         iconv = "tools/iconv.py UTF-8 SHIFT-JIS"
@@ -74,10 +74,19 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.variable("python", sys.executable)
 
-    ninja.rule("ld",
-        description="link($version) $out",
-        command=f"{cross}ld -T ver/$version/build/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map $mapfile --no-check-sections -T $in -o $out",
-    )
+    ld_args = f"-T ver/$version/build/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map $mapfile --no-check-sections -T $in -o $out"
+    if shift:
+
+        ninja.rule("ld",
+            description="link($version) $out",
+            command=f"{cross}ld --defsym entity_data_vram_end=0x80000000 {ld_args} && \
+                      {cross}ld --defsym entity_data_vram_end=$$(tools/build/ld/calc_sym_addr.py $version) {ld_args}",
+        )
+    else:
+        ninja.rule("ld",
+            description="link($version) $out",
+            command=f"{cross}ld {ld_args}",
+        )
 
     Z64_DEBUG = ""
     if debug:
@@ -821,7 +830,7 @@ if __name__ == "__main__":
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w"), width=9999)
 
-    write_ninja_rules(ninja, args.cpp or "cpp", cppflags, cflags, args.ccache, args.non_matching, args.debug)
+    write_ninja_rules(ninja, args.cpp or "cpp", cppflags, cflags, args.ccache, args.non_matching, args.shift, args.debug)
     write_ninja_for_tools(ninja)
 
     skip_files = set()

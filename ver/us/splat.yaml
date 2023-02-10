@@ -881,7 +881,6 @@ segments:
     start: 0xE79B0
     vram: 0x802C3000
     follows_vram: world_use_item
-    # vram_of_symbol: D_806C3000
     subsegments:
     - [0xE79B0, c, script_list]
     - [0xE92D0, c, evt]

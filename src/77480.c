@@ -3,7 +3,7 @@
 #include "world/actions.h"
 #include "sprite.h"
 
-#ifndef SHIFT
+#ifdef SHIFT
 #define inspect_icon_VRAM_DEF inspect_icon_VRAM
 #define speech_bubble_VRAM_DEF speech_bubble_VRAM
 #define pulse_stone_VRAM_DEF pulse_stone_VRAM
