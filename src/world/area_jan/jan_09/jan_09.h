@@ -10,10 +10,10 @@
 #include "mapfs/jan_09_hit.h"
 
 enum {
-	NPC_SpearGuy        = 30,
-	NPC_SpearGuy_Hitbox = 31,
-	NPC_MBush_01        = 70,
-	NPC_MBush_02        = 80,
+    NPC_SpearGuy        = 30,
+    NPC_SpearGuy_Hitbox = 31,
+    NPC_MBush_01        = 70,
+    NPC_MBush_02        = 80,
 };
 
 enum {

@@ -31,8 +31,8 @@ enum {
 
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_SetupStatue);
-extern EvtScript N(EVS_SetupFoliage);
-extern EvtScript N(EVS_80246A14);
+extern EvtScript N(EVS_SetupTrees);
+extern EvtScript N(EVS_SetupBushes);
 extern EvtScript N(EVS_SetupLogs);
 extern EvtScript N(EVS_MakeEntities);
 

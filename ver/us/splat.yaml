@@ -12427,13 +12427,15 @@ segments:
     start: 0xB84180
     vram: 0x80240000
     subsegments:
-    - [0xB84180, c]
-    - [0xB851A0, c]
-    - [0xB858A0, c]
-    - [0xB85AE0, data]
-    - [0xB8D910, data]
-    - [0xB8E200, data]
-    - [0xB8FB00]
+    - [0xB84180, c, jan_22_0_header]
+    - [0xB84180, c, jan_22_1_music]
+    - [0xB84180, c, jan_22_2_main]
+    - [0xB84180, c, jan_22_3_npc]
+    - [0xB851A0, c, jan_22_4_entity]
+    - [0xB851A0, c, jan_22_5_zipline]
+    - [0xB85550, c, jan_22_6_bushes]
+    - [0xB858A0, c, jan_22_7_trees]
+    - [0xB85AE0]
   - name: jan_23
     dir: world/area_jan/jan_23
     type: code

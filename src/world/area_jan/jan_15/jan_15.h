@@ -12,11 +12,11 @@
 #include "sprite/npc/LargePiranha.h"
 
 enum {
-	NPC_PutridPiranha_01        = 0,
-	NPC_PutridPiranha_02        = 1,
-	NPC_PutridPiranha_03        = 2,
-	NPC_HeartPlant_01           = 3,
-	NPC_HeartPlant_02           = 4,
+    NPC_PutridPiranha_01        = 0,
+    NPC_PutridPiranha_02        = 1,
+    NPC_PutridPiranha_03        = 2,
+    NPC_HeartPlant_01           = 3,
+    NPC_HeartPlant_02           = 4,
 };
 
 #define NAMESPACE jan_15

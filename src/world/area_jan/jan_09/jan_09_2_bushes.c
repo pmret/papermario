@@ -97,11 +97,11 @@ EvtScript N(EVS_ForceMoveCliffTopBushes) = {
 EvtScript N(EVS_80243EC0) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_LOOP(3)
-        EVT_CALL(N(PullVine_ShearBushModel), LVar1, 1)
+        EVT_CALL(N(MoveBush_AnimateShearing), LVar1, 1)
         EVT_WAIT(1)
-        EVT_CALL(N(PullVine_ShearBushModel), LVar1, 0)
+        EVT_CALL(N(MoveBush_AnimateShearing), LVar1, 0)
         EVT_WAIT(1)
-        EVT_CALL(N(PullVine_ShearBushModel), LVar1, -1)
+        EVT_CALL(N(MoveBush_AnimateShearing), LVar1, -1)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(TranslateModel, LVar1, 0, 0, 0)

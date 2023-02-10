@@ -9,9 +9,6 @@
 #include "mapfs/jan_01_shape.h"
 #include "mapfs/jan_01_hit.h"
 
-#include "sprite/npc/Kolorado.h"
-#include "sprite/npc/Fuzzy.h"
-
 enum {
     NPC_Kolorado        = 0,
     NPC_JungleFuzzy_01  = 1,

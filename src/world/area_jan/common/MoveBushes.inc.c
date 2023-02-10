@@ -1,6 +1,30 @@
 #include "common.h"
+#include "model.h"
 
-#include "world/common/todo/PullVineSub.inc.c"
+void N(MoveBush_apply_shear_mtx)(Matrix4f mtx, f32 f) {
+    guMtxIdentF(mtx);
+    mtx[1][0] = f * 0.2;
+    mtx[1][1] = 1.0f;
+    mtx[1][2] = 0.0f;
+}
+
+ApiStatus N(MoveBush_AnimateShearing)(Evt* script) {
+    Bytecode* args = script->ptrReadPos;
+    s32 modelID = evt_get_variable(script, *args++);
+    s32 modelIndex = get_model_list_index_from_tree_index(modelID);
+    f32 f = evt_get_float_variable(script, *args++);
+    Model* mdl = get_model_from_list_index(modelIndex);
+    Matrix4f mtx;
+
+    if (!(mdl->flags & MODEL_FLAG_HAS_TRANSFORM_APPLIED)) {
+        N(MoveBush_apply_shear_mtx)(mdl->transformMatrix, f);
+        mdl->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+    } else {
+        N(MoveBush_apply_shear_mtx)(mtx, f);
+        guMtxCatF(mtx, mdl->transformMatrix, mdl->transformMatrix);
+    }
+    return ApiStatus_DONE2;
+}
 
 #define EVT_MOVE_BUSHES(collider, bushModelL, bushmodelR, moveVarL, moveVarR) \
 { \
@@ -26,8 +50,8 @@
         EVT_ADDF(LVar1, LVar7) \
         EVT_CALL(TranslateModel, bushModelL, moveVarL, 0, 0) \
         EVT_CALL(TranslateModel, bushmodelR, moveVarR, 0, 0) \
-        EVT_CALL(N(PullVine_ShearBushModel), bushModelL, LVar6) \
-        EVT_CALL(N(PullVine_ShearBushModel), bushmodelR, LVar7) \
+        EVT_CALL(N(MoveBush_AnimateShearing), bushModelL, LVar6) \
+        EVT_CALL(N(MoveBush_AnimateShearing), bushmodelR, LVar7) \
         EVT_WAIT(1) \
     EVT_END_LOOP \
     EVT_RETURN \
@@ -48,7 +72,7 @@
         EVT_ADDF(LVar6, LVar4) \
         EVT_ADDF(LVar0, LVar6) \
         EVT_CALL(TranslateModel, bushModel, moveVar, 0, 0) \
-        EVT_CALL(N(PullVine_ShearBushModel), bushModel, LVar6) \
+        EVT_CALL(N(MoveBush_AnimateShearing), bushModel, LVar6) \
         EVT_WAIT(1) \
     EVT_END_LOOP \
     EVT_RETURN \

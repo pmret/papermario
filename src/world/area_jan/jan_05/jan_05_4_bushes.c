@@ -251,7 +251,7 @@ SearchBushConfig N(SearchBush_Bush14) = {
     .vectors = &N(Bush14_Effects),
 };
 
-EvtScript N(EVS_80244464) = {
+EvtScript N(EVS_SetupBushes) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_MoveBushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o64, 1, 0)
     EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush1)))
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o135, 1, 0)

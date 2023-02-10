@@ -62,7 +62,7 @@ BombTrigger N(BombPos_Tree2) = {
     .radius = 0.0f
 };
 
-EvtScript N(EVS_SetupFoliage) = {
+EvtScript N(EVS_SetupTrees) = {
     EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_Trees)), TRIGGER_WALL_HAMMER, COLLIDER_o183, 1, 0)
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_Trees)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)

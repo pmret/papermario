@@ -2,8 +2,8 @@
 #define _WORLD_AREA_JAN_JAN_H_
 
 enum {
-    AB_JAN_Unused_0             = AreaByte(0),
-    AB_JAN_Unused_1             = AreaByte(1),
+    AB_JAN_0                    = AreaByte(0),
+    AB_JAN_1                    = AreaByte(1),
     AB_JAN_2                    = AreaByte(2),
     AB_JAN13_LastPuzzleProgress = AreaByte(3),
     AB_JAN_Unused_4             = AreaByte(4),
@@ -30,6 +30,9 @@ enum {
     AF_JAN_07                   = AreaFlag(7),
     AF_JAN_08                   = AreaFlag(8),
     AF_JAN01_KoloradoShouting   = AreaFlag(9),
+    AF_JAN_0A                   = AreaFlag(10),
+    AF_JAN_0B                   = AreaFlag(11),
+    AF_JAN_0C                   = AreaFlag(12),
     AF_JAN00_TreeDrop1          = AreaFlag(13),
 
     AF_JAN01_TreeDrop2          = AreaFlag(14),

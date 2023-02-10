@@ -13,12 +13,12 @@
 #include "sprite/npc/Raven.h"
 
 enum {
-	NPC_RaphaelRaven             = 0,
-	NPC_Raven_01                = 1,
-	NPC_Raven_02                = 2,
-	NPC_Raven_03                = 3,
-	NPC_Raven_04                = 4,
-	NPC_Raven_05                = 5,
+    NPC_RaphaelRaven    = 0,
+    NPC_Raven_01        = 1,
+    NPC_Raven_02        = 2,
+    NPC_Raven_03        = 3,
+    NPC_Raven_04        = 4,
+    NPC_Raven_05        = 5,
 };
 
 enum {

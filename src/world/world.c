@@ -615,7 +615,7 @@ MapConfig jan_maps[] = {
     { MAP(jan_17), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP(jan_18), .bgName = "yos_bg" },
     { MAP(jan_19), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(jan_22, 0x802419A0), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 1 },
+    { MAP(jan_22), .bgName = "jan_bg", .songVariation = 1, .sfxReverb = 1 },
     { MAP(jan_23), .bgName = "yos_bg" },
 };
 

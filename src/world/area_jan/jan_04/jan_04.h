@@ -10,17 +10,16 @@
 #include "mapfs/jan_04_hit.h"
 
 #include "sprite/npc/WorldSushie.h"
-#include "sprite/npc/Bubulb.h"
 #include "sprite/npc/YoshiKid.h"
 
 enum {
-	NPC_Sushie                  = 0,
-	NPC_Bubulb                  = 1,
-	NPC_YoshiKid_01             = 2,
-	NPC_YoshiKid_02             = 3,
-	NPC_YoshiKid_03             = 4,
-	NPC_YoshiKid_04             = 5,
-	NPC_YoshiKid_05             = 6,
+    NPC_Sushie                  = 0,
+    NPC_Bubulb                  = 1,
+    NPC_YoshiKid_01             = 2,
+    NPC_YoshiKid_02             = 3,
+    NPC_YoshiKid_03             = 4,
+    NPC_YoshiKid_04             = 5,
+    NPC_YoshiKid_05             = 6,
 };
 
 enum {
@@ -29,7 +28,7 @@ enum {
 };
 
 enum {
-	MF_TreeDrop_Letter	= MapFlag(10),
+    MF_TreeDrop_Letter  = MapFlag(10),
 };
 
 #define NAMESPACE jan_04

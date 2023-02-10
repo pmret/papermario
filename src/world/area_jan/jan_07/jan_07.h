@@ -10,11 +10,11 @@
 #include "mapfs/jan_07_hit.h"
 
 enum {
-	NPC_YoshiKid                = 0,
-	NPC_PutridPiranha_01        = 1,
-	NPC_PutridPiranha_02        = 2,
-	NPC_SpearGuy            	= 10,
-	NPC_SpearGuy_Hitbox			= 11,
+    NPC_YoshiKid                = 0,
+    NPC_PutridPiranha_01        = 1,
+    NPC_PutridPiranha_02        = 2,
+    NPC_SpearGuy                = 10,
+    NPC_SpearGuy_Hitbox         = 11,
 };
 
 #define NAMESPACE jan_07

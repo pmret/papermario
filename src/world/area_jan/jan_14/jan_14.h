@@ -10,8 +10,8 @@
 #include "mapfs/jan_14_hit.h"
 
 enum {
-	NPC_JungleFuzzy_01  = 0,
-	NPC_JungleFuzzy_02  = 1,
+    NPC_JungleFuzzy_01  = 0,
+    NPC_JungleFuzzy_02  = 1,
 };
 
 enum {

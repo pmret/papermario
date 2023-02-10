@@ -10,12 +10,12 @@
 #include "mapfs/jan_10_hit.h"
 
 enum {
-	NPC_YoshiKid    	= 0,
-	NPC_JungleFuzzy		= 1,
+    NPC_YoshiKid        = 0,
+    NPC_JungleFuzzy     = 1,
 };
 
 enum {
-    MF_KillLogShadow	= MapFlag(10),
+    MF_KillLogShadow    = MapFlag(10),
 };
 
 #define NAMESPACE jan_10
