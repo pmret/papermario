@@ -3,7 +3,6 @@
 
 #define NAME_SUFFIX _Epilogue
 #include "world/common/entity/Pipe.inc.c"
-#include "world/common/entity/Pipe.data.inc.c"
 #define NAME_SUFFIX
 
 API_CALLABLE(N(func_80242030_8EDE50)) {
@@ -225,7 +224,7 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     EVT_CALL(PlaySoundAtPlayer, SOUND_263, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_Luigi_0, EMOTE_QUESTION, 0, 20, FALSE, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_Luigi_1, SOUND_263, SOUND_SPACE_MODE_0)
-    EVT_CALL(ShowEmote, NPC_Luigi_1, EMOTE_QUESTION, 0, 20, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_Luigi_1, EMOTE_QUESTION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(30)
     EVT_CALL(SpeakToPlayer, NPC_Luigi_1, ANIM_Luigi_TalkSit, ANIM_Luigi_IdleSit, 0, MSG_Outro_0021)
     EVT_WAIT(10)

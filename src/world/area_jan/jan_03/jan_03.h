@@ -9,27 +9,25 @@
 #include "mapfs/jan_03_shape.h"
 #include "mapfs/jan_03_hit.h"
 
-#include "sprite/npc/WorldSushie.h"
-
 enum {
-    NPC_Toad          		= 0,
-    NPC_Yoshi_01      		= 1,
-    NPC_VillageLeader 		= 2,
-    NPC_Yoshi_02      		= 3,
-    NPC_Yoshi_03      		= 4,
-    NPC_YoshiKid_01   		= 5,
-    NPC_YoshiKid_02   		= 6,
-    NPC_YoshiKid_03   		= 7,
-    NPC_YoshiKid_04   		= 8,
-    NPC_YoshiKid_05   		= 9,
-    NPC_Raven_01      		= 10,
-    NPC_Raven_02      		= 11,
-    NPC_Raven_03      		= 12,
-    NPC_Raven_04      		= 13,
-    NPC_Raven_05      		= 14,
-    NPC_Kolorado      		= 15,
-    NPC_Sushie        		= 16,
-    NPC_ChuckQuizmo   		= 17,
+    NPC_Toad                = 0,
+    NPC_Yoshi_01            = 1,
+    NPC_VillageLeader       = 2,
+    NPC_Yoshi_02            = 3,
+    NPC_Yoshi_03            = 4,
+    NPC_YoshiKid_01         = 5,
+    NPC_YoshiKid_02         = 6,
+    NPC_YoshiKid_03         = 7,
+    NPC_YoshiKid_04         = 8,
+    NPC_YoshiKid_05         = 9,
+    NPC_Raven_01            = 10,
+    NPC_Raven_02            = 11,
+    NPC_Raven_03            = 12,
+    NPC_Raven_04            = 13,
+    NPC_Raven_05            = 14,
+    NPC_Kolorado            = 15,
+    NPC_Sushie              = 16,
+    NPC_ChuckQuizmo         = 17,
 };
 
 #define NAMESPACE jan_03

@@ -9,19 +9,16 @@
 #include "mapfs/jan_01_shape.h"
 #include "mapfs/jan_01_hit.h"
 
-#include "sprite/npc/Kolorado.h"
-#include "sprite/npc/Fuzzy.h"
-
 enum {
-    NPC_Kolorado    = 0,
-    NPC_Fuzzy_01    = 1,
-    NPC_Fuzzy_02    = 2,
-    NPC_Fuzzy_03    = 3,
-    NPC_Fuzzy_04    = 4,
+    NPC_Kolorado        = 0,
+    NPC_JungleFuzzy_01  = 1,
+    NPC_JungleFuzzy_02  = 2,
+    NPC_JungleFuzzy_03  = 3,
+    NPC_JungleFuzzy_04  = 4,
 };
 
 enum {
-    AF_JAN01_TreeDrop_StarPiece       = MapFlag(10),
+    AF_JAN01_TreeDrop_StarPiece = MapFlag(10),
 };
 
 #define NAMESPACE jan_01

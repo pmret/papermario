@@ -53,7 +53,7 @@ EvtScript N(EVS_NpcIdle_SpikedGoomba) = {
                 EVT_GOTO(10)
             EVT_END_IF
             EVT_CALL(SetNpcAux, NPC_SELF, 0)
-            EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, -30, 12, TRUE, 0, 0, 0, 0)
+            EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, -30, 12, EMOTER_NPC, 0, 0, 0, 0)
             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
             EVT_CALL(NpcJump0, NPC_SELF, 685, 100, -35, 0)

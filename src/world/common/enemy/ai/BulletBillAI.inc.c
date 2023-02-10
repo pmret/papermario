@@ -56,11 +56,11 @@ API_CALLABLE(N(BulletBillAI_Main)) {
         enemy->AI_VAR_BULLET_BLASTER = -1;
     }
     
-    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
-        if (enemy->aiPaused != 0) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+        if (enemy->aiSuspendTime != 0) {
             return 0;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
     }
 
     switch (script->AI_TEMP_STATE) {
@@ -172,12 +172,12 @@ API_CALLABLE(N(BillBlasterAI_Main)) {
         return ApiStatus_BLOCK;
     }
     
-    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
-        if (enemy->aiPaused != 0) {
+        if (enemy->aiSuspendTime != 0) {
             return ApiStatus_BLOCK;
         } 
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
     }
     
     switch (script->AI_TEMP_STATE) {

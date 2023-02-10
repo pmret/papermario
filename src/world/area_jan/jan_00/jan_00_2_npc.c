@@ -2,72 +2,15 @@
 #include "effects.h"
 #include "npc.h"
 
-extern EvtScript N(D_80245860_B25DA0);
-extern EvtScript N(EVS_NpcInteract_HeartPlant_01);
-
-#include "world/common/todo/HeartPlant_SpawnHeart.inc.c"
-
 NpcSettings N(NpcSettings_Kolorado_01) = {
     .height = 24,
     .radius = 48,
     .level = 99,
 };
 
-NpcSettings N(NpcSettings_Kolorado_02) = {
-    .height = 40,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_JrTroopa) = {
-    .height = 32,
-    .radius = 24,
-    .level = 99,
-};
-
-EvtScript N(EVS_NpcAuxAI_HeartPlant_01) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 1, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(D_80242260_B227A0) = {
-    EVT_WAIT(45)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_HeartPlant_01)))
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_NpcInteract_HeartPlant_01) = {
-    EVT_CALL(GetSelfVar, 1, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SetSelfVar, 1, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2099, SOUND_SPACE_MODE_0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HeartPlant_Anim00)
-        EVT_WAIT(1)
-        EVT_CALL(N(HeartPlant_SpawnHeart))
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HeartPlant_Anim01)
-        EVT_THREAD
-            EVT_CALL(BindNpcInteract, NPC_SELF, 0)
-            EVT_EXEC(N(D_80242260_B227A0))
-            EVT_WAIT(45)
-            EVT_CALL(SetSelfVar, 1, 0)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HeartPlant_Anim00)
-        EVT_END_THREAD
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_HeartPlant_01) = {
-    .height = 20,
-    .radius = 28,
-    .level = 99,
-    .otherAI = &N(EVS_NpcAuxAI_HeartPlant_01),
-    .onInteract = &N(EVS_NpcInteract_HeartPlant_01),
-};
+#include "world/common/npc/Kolorado.inc.c"
+#include "world/common/npc/JrTroopa.inc.c"
+#include "world/common/enemy/complete/HeartPlant.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
 
@@ -653,7 +596,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Panic)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_262, SOUND_SPACE_MODE_0)
-    EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20)
     EVT_CALL(NpcJump0, NPC_SELF, 250, 0, 90, 10)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Panic, ANIM_JrTroopa_Panic, 0, MSG_CH5_000B)
@@ -695,7 +638,7 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
     EVT_END
 };
 
-StaticNpc N(D_8024488C_B24DCC)[] = {
+StaticNpc N(NpcData_Characters)[] = {
     {
         .id = NPC_Whale,
         .settings = &N(NpcSettings_Kolorado_01),
@@ -703,61 +646,19 @@ StaticNpc N(D_8024488C_B24DCC)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Kolorado_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Kolorado_Idle,
-            .walk   = ANIM_Kolorado_Walk,
-            .run    = ANIM_Kolorado_Run,
-            .chase  = ANIM_Kolorado_Run,
-            .anim_4 = ANIM_Kolorado_Idle,
-            .anim_5 = ANIM_Kolorado_Idle,
-            .death  = ANIM_Kolorado_Idle,
-            .hit    = ANIM_Kolorado_Idle,
-            .anim_8 = ANIM_Kolorado_Idle,
-            .anim_9 = ANIM_Kolorado_Idle,
-            .anim_A = ANIM_Kolorado_Idle,
-            .anim_B = ANIM_Kolorado_Idle,
-            .anim_C = ANIM_Kolorado_Idle,
-            .anim_D = ANIM_Kolorado_Idle,
-            .anim_E = ANIM_Kolorado_Idle,
-            .anim_F = ANIM_Kolorado_Idle,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Whale,
     },
     {
         .id = NPC_Kolorado_02,
-        .settings = &N(NpcSettings_Kolorado_02),
+        .settings = &N(NpcSettings_Kolorado),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Kolorado_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_Kolorado_Idle,
-            .walk   = ANIM_Kolorado_Walk,
-            .run    = ANIM_Kolorado_Run,
-            .chase  = ANIM_Kolorado_Run,
-            .anim_4 = ANIM_Kolorado_Idle,
-            .anim_5 = ANIM_Kolorado_Idle,
-            .death  = ANIM_Kolorado_Idle,
-            .hit    = ANIM_Kolorado_Idle,
-            .anim_8 = ANIM_Kolorado_Idle,
-            .anim_9 = ANIM_Kolorado_Idle,
-            .anim_A = ANIM_Kolorado_Idle,
-            .anim_B = ANIM_Kolorado_Idle,
-            .anim_C = ANIM_Kolorado_Idle,
-            .anim_D = ANIM_Kolorado_Idle,
-            .anim_E = ANIM_Kolorado_Idle,
-            .anim_F = ANIM_Kolorado_Idle,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
     },
     {
@@ -767,198 +668,72 @@ StaticNpc N(D_8024488C_B24DCC)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_JrTroopa),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_JrTroopa_Idle,
-            .walk   = ANIM_JrTroopa_Walk,
-            .run    = ANIM_JrTroopa_Walk,
-            .chase  = ANIM_JrTroopa_Walk,
-            .anim_4 = ANIM_JrTroopa_Idle,
-            .anim_5 = ANIM_JrTroopa_Idle,
-            .death  = ANIM_JrTroopa_Idle,
-            .hit    = ANIM_JrTroopa_Idle,
-            .anim_8 = ANIM_JrTroopa_Idle,
-            .anim_9 = ANIM_JrTroopa_Idle,
-            .anim_A = ANIM_JrTroopa_Idle,
-            .anim_B = ANIM_JrTroopa_Idle,
-            .anim_C = ANIM_JrTroopa_Idle,
-            .anim_D = ANIM_JrTroopa_Idle,
-            .anim_E = ANIM_JrTroopa_Idle,
-            .anim_F = ANIM_JrTroopa_Idle,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = JR_TROOPA_ANIMS,
     },
 };
 
-StaticNpc N(D_80244E5C_B2539C) = {
+StaticNpc N(NpcData_HeartPlant_01) = {
     .id = NPC_HeartPlant_01,
-    .settings = &N(NpcSettings_HeartPlant_01),
+    .settings = &N(NpcSettings_HeartPlant),
     .pos = { 455.0f, 0.0f, 115.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_HeartPlant_Anim00,
-        .walk   = ANIM_HeartPlant_Anim00,
-        .run    = ANIM_HeartPlant_Anim00,
-        .chase  = ANIM_HeartPlant_Anim00,
-        .anim_4 = ANIM_HeartPlant_Anim00,
-        .anim_5 = ANIM_HeartPlant_Anim00,
-        .death  = ANIM_HeartPlant_Anim00,
-        .hit    = ANIM_HeartPlant_Anim00,
-        .anim_8 = ANIM_HeartPlant_Anim00,
-        .anim_9 = ANIM_HeartPlant_Anim00,
-        .anim_A = ANIM_HeartPlant_Anim00,
-        .anim_B = ANIM_HeartPlant_Anim00,
-        .anim_C = ANIM_HeartPlant_Anim00,
-        .anim_D = ANIM_HeartPlant_Anim00,
-        .anim_E = ANIM_HeartPlant_Anim00,
-        .anim_F = ANIM_HeartPlant_Anim00,
-    },
+    .drops = NPC_NO_DROPS,
+    .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(D_8024504C_B2558C) = {
+StaticNpc N(NpcData_HeartPlant_02) = {
     .id = NPC_HeartPlant_02,
-    .settings = &N(NpcSettings_HeartPlant_01),
+    .settings = &N(NpcSettings_HeartPlant),
     .pos = { 167.0f, 0.0f, 404.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_HeartPlant_Anim00,
-        .walk   = ANIM_HeartPlant_Anim00,
-        .run    = ANIM_HeartPlant_Anim00,
-        .chase  = ANIM_HeartPlant_Anim00,
-        .anim_4 = ANIM_HeartPlant_Anim00,
-        .anim_5 = ANIM_HeartPlant_Anim00,
-        .death  = ANIM_HeartPlant_Anim00,
-        .hit    = ANIM_HeartPlant_Anim00,
-        .anim_8 = ANIM_HeartPlant_Anim00,
-        .anim_9 = ANIM_HeartPlant_Anim00,
-        .anim_A = ANIM_HeartPlant_Anim00,
-        .anim_B = ANIM_HeartPlant_Anim00,
-        .anim_C = ANIM_HeartPlant_Anim00,
-        .anim_D = ANIM_HeartPlant_Anim00,
-        .anim_E = ANIM_HeartPlant_Anim00,
-        .anim_F = ANIM_HeartPlant_Anim00,
-    },
+    .drops = NPC_NO_DROPS,
+    .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(D_8024523C_B2577C) = {
+StaticNpc N(NpcData_HeartPlant_03) = {
     .id = NPC_HeartPlant_03,
-    .settings = &N(NpcSettings_HeartPlant_01),
+    .settings = &N(NpcSettings_HeartPlant),
     .pos = { 90.0f, 0.0f, 316.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_HeartPlant_Anim00,
-        .walk   = ANIM_HeartPlant_Anim00,
-        .run    = ANIM_HeartPlant_Anim00,
-        .chase  = ANIM_HeartPlant_Anim00,
-        .anim_4 = ANIM_HeartPlant_Anim00,
-        .anim_5 = ANIM_HeartPlant_Anim00,
-        .death  = ANIM_HeartPlant_Anim00,
-        .hit    = ANIM_HeartPlant_Anim00,
-        .anim_8 = ANIM_HeartPlant_Anim00,
-        .anim_9 = ANIM_HeartPlant_Anim00,
-        .anim_A = ANIM_HeartPlant_Anim00,
-        .anim_B = ANIM_HeartPlant_Anim00,
-        .anim_C = ANIM_HeartPlant_Anim00,
-        .anim_D = ANIM_HeartPlant_Anim00,
-        .anim_E = ANIM_HeartPlant_Anim00,
-        .anim_F = ANIM_HeartPlant_Anim00,
-    },
+    .drops = NPC_NO_DROPS,
+    .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(D_8024542C_B2596C) = {
+StaticNpc N(NpcData_HeartPlant_04) = {
     .id = NPC_HeartPlant_04,
-    .settings = &N(NpcSettings_HeartPlant_01),
+    .settings = &N(NpcSettings_HeartPlant),
     .pos = { 424.0f, 0.0f, 182.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_HeartPlant_Anim00,
-        .walk   = ANIM_HeartPlant_Anim00,
-        .run    = ANIM_HeartPlant_Anim00,
-        .chase  = ANIM_HeartPlant_Anim00,
-        .anim_4 = ANIM_HeartPlant_Anim00,
-        .anim_5 = ANIM_HeartPlant_Anim00,
-        .death  = ANIM_HeartPlant_Anim00,
-        .hit    = ANIM_HeartPlant_Anim00,
-        .anim_8 = ANIM_HeartPlant_Anim00,
-        .anim_9 = ANIM_HeartPlant_Anim00,
-        .anim_A = ANIM_HeartPlant_Anim00,
-        .anim_B = ANIM_HeartPlant_Anim00,
-        .anim_C = ANIM_HeartPlant_Anim00,
-        .anim_D = ANIM_HeartPlant_Anim00,
-        .anim_E = ANIM_HeartPlant_Anim00,
-        .anim_F = ANIM_HeartPlant_Anim00,
-    },
+    .drops = NPC_NO_DROPS,
+    .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(D_8024561C_B25B5C) = {
+StaticNpc N(NpcData_HeartPlant_05) = {
     .id = NPC_HeartPlant_05,
-    .settings = &N(NpcSettings_HeartPlant_01),
+    .settings = &N(NpcSettings_HeartPlant),
     .pos = { 143.0f, 0.0f, 260.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
-    .animations = {
-        .idle   = ANIM_HeartPlant_Anim00,
-        .walk   = ANIM_HeartPlant_Anim00,
-        .run    = ANIM_HeartPlant_Anim00,
-        .chase  = ANIM_HeartPlant_Anim00,
-        .anim_4 = ANIM_HeartPlant_Anim00,
-        .anim_5 = ANIM_HeartPlant_Anim00,
-        .death  = ANIM_HeartPlant_Anim00,
-        .hit    = ANIM_HeartPlant_Anim00,
-        .anim_8 = ANIM_HeartPlant_Anim00,
-        .anim_9 = ANIM_HeartPlant_Anim00,
-        .anim_A = ANIM_HeartPlant_Anim00,
-        .anim_B = ANIM_HeartPlant_Anim00,
-        .anim_C = ANIM_HeartPlant_Anim00,
-        .anim_D = ANIM_HeartPlant_Anim00,
-        .anim_E = ANIM_HeartPlant_Anim00,
-        .anim_F = ANIM_HeartPlant_Anim00,
-    },
+    .drops = NPC_NO_DROPS,
+    .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(D_8024488C_B24DCC)),
-    NPC_GROUP(N(D_80244E5C_B2539C)),
-    NPC_GROUP(N(D_8024504C_B2558C)),
-    NPC_GROUP(N(D_8024523C_B2577C)),
-    NPC_GROUP(N(D_8024542C_B2596C)),
-    NPC_GROUP(N(D_8024561C_B25B5C)),
+    NPC_GROUP(N(NpcData_Characters)),
+    NPC_GROUP(N(NpcData_HeartPlant_01)),
+    NPC_GROUP(N(NpcData_HeartPlant_02)),
+    NPC_GROUP(N(NpcData_HeartPlant_03)),
+    NPC_GROUP(N(NpcData_HeartPlant_04)),
+    NPC_GROUP(N(NpcData_HeartPlant_05)),
     {}
 };

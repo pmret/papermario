@@ -2,13 +2,6 @@
 
 #include "sprite/npc/YoshiKid.h"
 
-#define YOSHI_KID_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define YOSHI_KID_GREEN_ANIMS \
 { \
     .idle   = ANIM_YoshiKid_Green_Idle, \

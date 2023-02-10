@@ -202,7 +202,7 @@ ApiStatus N(GuardAI_Main)(Evt* script, s32 isInitialCall) {
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = AI_STATE_GUARD_IDLE_INIT;
         npc->duration = 0;
         enemy->varTable[0] = npc->yaw;
@@ -217,10 +217,10 @@ ApiStatus N(GuardAI_Main)(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_8;
         }
 
-        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = 15;
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
         } else if (enemy->flags & ENEMY_FLAG_40000000) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
             enemy->flags &= ~ENEMY_FLAG_40000000;

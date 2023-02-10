@@ -1,7 +1,7 @@
 #include "kmr_10.h"
 #include "entity.h"
 
-#include "world/common/atomic/Chest.inc.c"
+#include "world/common/entity/Chest.inc.c"
 
 #include "world/common/util/PlaySpringReboundAnimation.inc.c"
 

@@ -48,7 +48,7 @@ ApiStatus N(MagikoopaAI_SpellMain)(Evt* script, s32 isInitialCall) {
     f32 t1;
     f32 t2;
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         script->functionTemp[0] = 0;
         npc1->duration = 0;
         npc1->flags |= NPC_FLAG_200000 | NPC_FLAG_40000 | NPC_FLAG_100 |  NPC_FLAG_2;
@@ -56,8 +56,8 @@ ApiStatus N(MagikoopaAI_SpellMain)(Evt* script, s32 isInitialCall) {
                         ENEMY_FLAG_200000 | ENEMY_FLAG_40;
         npc1->scale.x = 0.4f;
         npc1->scale.y = 0.4f;
-        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
         }
     }
 

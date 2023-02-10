@@ -134,11 +134,11 @@ ApiStatus N(FlyingNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
     }
     npc->verticalRenderOffset = -2;
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
-        if (enemy->aiPaused) {
+    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+        if (enemy->aiSuspendTime) {
             return ApiStatus_BLOCK;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
     }
 
     switch (script->functionTemp[0]) {

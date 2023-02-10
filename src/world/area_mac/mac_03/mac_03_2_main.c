@@ -1,7 +1,6 @@
 #include "mac_03.h"
 
 #include "world/common/entity/Pipe.inc.c"
-#include "world/common/entity/Pipe.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_mac_02_3) = EVT_EXIT_WALK(60, mac_03_ENTRY_0, "mac_02", mac_02_ENTRY_3);
 

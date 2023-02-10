@@ -3967,7 +3967,7 @@ Fuzzipede:
     - Anim29
     - Anim2A
     - Anim2B
-JungleGuy:
+SpearGuy:
   frames:
     - Raster00
     - Raster01
@@ -10266,7 +10266,7 @@ LeadersFriend:
     - TalkSit
     - BowSit
     - TalkSitSad
-RafaelRaven:
+RaphaelRaven:
   frames:
     - Feathers1
     - Feathers2

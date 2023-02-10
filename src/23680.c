@@ -682,21 +682,23 @@ void basic_ai_loiter(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
     f32 yaw;
     s32 emoteTemp;
 
-    if (aiSettings->playerSearchInterval >= 0 && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
-        x = npc->pos.x;
-        y = npc->pos.y;
-        z = npc->pos.z;
-        yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        if (!npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, aiSettings->chaseSpeed, yaw, npc->collisionHeight, npc->collisionRadius)) {
-            npc->yaw = yaw;
-            ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
-            fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-            if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
-                script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
-            } else {
-                script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
+    if (aiSettings->playerSearchInterval >= 0) {
+        if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
+            x = npc->pos.x;
+            y = npc->pos.y;
+            z = npc->pos.z;
+            yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+            if (!npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, aiSettings->chaseSpeed, yaw, npc->collisionHeight, npc->collisionRadius)) {
+                npc->yaw = yaw;
+                ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
+                fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
+                if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
+                    script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
+                } else {
+                    script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
+                }
+                return;
             }
-            return;
         }
     }
 
@@ -858,7 +860,7 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
 
-    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAG_4) {
+    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
         script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         npc->duration = 0;
 
@@ -873,14 +875,14 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_8;
         }
 
-        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = AI_STATE_WANDER_INIT;
         } else if (enemy->flags & ENEMY_FLAG_40000000) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         }
 
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
         enemy->flags &= ~ENEMY_FLAG_40000000;
     }
 

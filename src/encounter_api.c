@@ -806,7 +806,7 @@ ApiStatus OnPlayerFled(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 skipReaction = evt_get_variable(script, *script->ptrReadPos);
 
-    enemy->aiFlags |= ENEMY_AI_FLAG_4;
+    enemy->aiFlags |= ENEMY_AI_FLAG_SUSPEND;
 
     if (!skipReaction) {
         s32 unk;

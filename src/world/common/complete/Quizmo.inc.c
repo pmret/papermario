@@ -5,7 +5,7 @@
 #include "sprite/npc/ChuckQuizmo.h"
 
 #ifndef CHUCK_QUIZMO_NPC_ID
-#  error CHUCK_QUIZMO_NPC_ID must be defined for Quizmo.inc.c
+    #error CHUCK_QUIZMO_NPC_ID must be defined for Quizmo.inc.c
 #endif
 
 #define QUIZMO_DROPS \

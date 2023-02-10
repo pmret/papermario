@@ -227,7 +227,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_CH5_010B)
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_262, SOUND_SPACE_MODE_0)
-                EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 15, TRUE, 0, 0, 0, 0)
+                EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
                 EVT_WAIT(15)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
                 EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.5))
@@ -367,7 +367,7 @@ API_CALLABLE(N(GetFloorCollider)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(EVS_NpcIdle_Misstar) = {
+EvtScript N(EVS_Scene_Misstar) = {
     EVT_IF_EQ(AF_KZN20_MisstarFlightDone, FALSE)
         EVT_CALL(SetNpcPos, NPC_SELF, -120, 70, 45)
         EVT_WAIT(30)
@@ -447,7 +447,7 @@ EvtScript N(EVS_NpcIdle_Misstar) = {
                 EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
                 EVT_CALL(NpcMoveTo, NPC_SELF, 145, -10, 0)
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_262, SOUND_SPACE_MODE_0)
-                EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 15, TRUE, 0, 0, 0, 0)
+                EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
                 EVT_WAIT(20)
                 EVT_CALL(SetNpcRotation, NPC_SELF, 0, -30, 0)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldMisstar_Back)
@@ -516,7 +516,7 @@ EvtScript N(EVS_NpcInteract_Misstar) = {
 EvtScript N(EVS_NpcInit_Misstar) = {
     EVT_IF_EQ(GB_StoryProgress, STORY_CH5_MT_LAVA_LAVA_ERUPTING)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldMisstar_IdleAngry)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Misstar)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_Scene_Misstar)))
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Misstar)))
     EVT_ELSE
         EVT_CALL(RemoveNpc, NPC_SELF)

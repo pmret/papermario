@@ -50,7 +50,7 @@ EvtScript N(EVS_NpcAI_Duplighost_Flee) = {
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_262, SOUND_SPACE_MODE_0)
-    EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 45, 20, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 5)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Duplighost_Anim04)
@@ -405,7 +405,7 @@ StaticNpc N(NpcData_Imposter)[] = {
         .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost),
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,

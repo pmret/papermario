@@ -269,7 +269,7 @@ EvtScript N(EVS_NpcIdle_Koover_Crisis) = {
         EVT_SUB(LVar0, 5)
         EVT_ADD(LVar1, 35)
         EVT_CALL(PlaySoundAtNpc, NPC_Koover, SOUND_262, 0)
-        EVT_CALL(ShowEmote, NPC_Koover, EMOTE_EXCLAMATION, 0, 20, 2, LVar0, LVar1, LVar2, 0)
+        EVT_CALL(ShowEmote, NPC_Koover, EMOTE_EXCLAMATION, 0, 20, EMOTER_POS, LVar0, LVar1, LVar2, 0)
         EVT_WAIT(20)
         EVT_CALL(SetNpcAnimation, NPC_Koover, ANIM_Koopa_Run)
         EVT_CALL(GetPlayerPos, LVarA, LVarB, LVarC)

@@ -2,7 +2,7 @@
 #include "effects.h"
 
 #include "world/common/enemy/complete/JungleFuzzy_Wander.inc.c"
-#include "world/common/enemy/complete/Fuzzy.inc.c"
+#include "world/common/enemy/complete/JungleFuzzy.inc.c"
 #include "world/common/npc/Kolorado.inc.c"
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 #include "world/common/todo/UnsetCamera0Flag1000.inc.c"
@@ -49,7 +49,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_CALL(PlaySoundAtPlayer, SOUND_262, 0)
     EVT_CALL(ShowEmote, NPC_Kolorado, EMOTE_EXCLAMATION, 0, 25, FALSE, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_262, 0)
-    EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 25, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 25, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(25)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_LABEL(0)
@@ -63,7 +63,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                         EVT_CALL(InterruptUsePartner)
                     EVT_END_IF
                     EVT_CALL(DisablePlayerInput, TRUE)
-                    EVT_CALL(RemoveNpc, NPC_Fuzzy_01)
+                    EVT_CALL(RemoveNpc, NPC_JungleFuzzy_01)
                     EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_0010, 0, 60)
                     EVT_CALL(InterpPlayerYaw, 270, 4)
                     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
@@ -152,7 +152,7 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcIdle_Fuzzy_01) = {
+EvtScript N(EVS_NpcIdle_JungleFuzzy_01) = {
     EVT_CHILD_THREAD
         EVT_CALL(GetNpcPos, NPC_Kolorado, LVar3, LVar1, LVar2)
         EVT_SET(LVar4, LVar3)
@@ -206,7 +206,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy_01) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcDefeat_FuzzyBoss) = {
+EvtScript N(EVS_NpcDefeat_JungleFuzzyBoss) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
@@ -256,12 +256,12 @@ EvtScript N(EVS_NpcDefeat_FuzzyBoss) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_Fuzzy_01) = {
+EvtScript N(EVS_NpcInit_JungleFuzzy_01) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_KOLORADO_ESCAPED_FUZZIES)
         EVT_CALL(SetSelfVar, 0, 0)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Jungle_Anim04)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Fuzzy_01)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_FuzzyBoss)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_JungleFuzzy_01)))
+        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_JungleFuzzyBoss)))
     EVT_ELSE
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -281,18 +281,18 @@ StaticNpc N(NpcData_Kolorado) = {
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(NpcData_Fuzzy_01) = {
-    .id = NPC_Fuzzy_01,
-    .settings = &N(NpcSettings_Fuzzy),
+StaticNpc N(NpcData_JungleFuzzy_01) = {
+    .id = NPC_JungleFuzzy_01,
+    .settings = &N(NpcSettings_JungleFuzzy),
     .pos = { -30.0f, 0.0f, 90.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-    .init = &N(EVS_NpcInit_Fuzzy_01),
+    .init = &N(EVS_NpcInit_JungleFuzzy_01),
     .drops = NPC_NO_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
 };
 
-EvtScript N(EVS_NpcInit_Fuzzy_02) = {
+EvtScript N(EVS_NpcInit_JungleFuzzy_02) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_KOLORADO_ESCAPED_FUZZIES)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -300,13 +300,13 @@ EvtScript N(EVS_NpcInit_Fuzzy_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Fuzzy_02) = {
-    .id = NPC_Fuzzy_02,
+StaticNpc N(NpcData_JungleFuzzy_02) = {
+    .id = NPC_JungleFuzzy_02,
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { -350.0f, 3.0f, 40.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .init = &N(EVS_NpcInit_Fuzzy_02),
+    .init = &N(EVS_NpcInit_JungleFuzzy_02),
     .drops = JUNGLE_FUZZY_DROPS,
     .territory = {
         .wander = {
@@ -324,13 +324,13 @@ StaticNpc N(NpcData_Fuzzy_02) = {
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Fuzzy_03) = {
-    .id = NPC_Fuzzy_03,
+StaticNpc N(NpcData_JungleFuzzy_03) = {
+    .id = NPC_JungleFuzzy_03,
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 0.0f, -10.0f, 110.0f },
     .yaw = 90,
     .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .init = &N(EVS_NpcInit_Fuzzy_02),
+    .init = &N(EVS_NpcInit_JungleFuzzy_02),
     .drops = JUNGLE_FUZZY_DROPS,
     .territory = {
         .wander = {
@@ -348,13 +348,13 @@ StaticNpc N(NpcData_Fuzzy_03) = {
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Fuzzy_04) = {
-    .id = NPC_Fuzzy_04,
+StaticNpc N(NpcData_JungleFuzzy_04) = {
+    .id = NPC_JungleFuzzy_04,
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 350.0f, 3.0f, 40.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .init = &N(EVS_NpcInit_Fuzzy_02),
+    .init = &N(EVS_NpcInit_JungleFuzzy_02),
     .drops = JUNGLE_FUZZY_DROPS,
     .territory = {
         .wander = {
@@ -374,9 +374,9 @@ StaticNpc N(NpcData_Fuzzy_04) = {
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_Kolorado)),
-    NPC_GROUP(N(NpcData_Fuzzy_01), BTL_JAN_FORMATION_0A, BTL_JAN_STAGE_00),
-    NPC_GROUP(N(NpcData_Fuzzy_02), BTL_JAN_FORMATION_0A, BTL_JAN_STAGE_00),
-    NPC_GROUP(N(NpcData_Fuzzy_03), BTL_JAN_FORMATION_0B, BTL_JAN_STAGE_00),
-    NPC_GROUP(N(NpcData_Fuzzy_04), BTL_JAN_FORMATION_0A, BTL_JAN_STAGE_00),
+    NPC_GROUP(N(NpcData_JungleFuzzy_01), BTL_JAN_FORMATION_0A, BTL_JAN_STAGE_00),
+    NPC_GROUP(N(NpcData_JungleFuzzy_02), BTL_JAN_FORMATION_0A, BTL_JAN_STAGE_00),
+    NPC_GROUP(N(NpcData_JungleFuzzy_03), BTL_JAN_FORMATION_0B, BTL_JAN_STAGE_00),
+    NPC_GROUP(N(NpcData_JungleFuzzy_04), BTL_JAN_FORMATION_0A, BTL_JAN_STAGE_00),
     {}
 };

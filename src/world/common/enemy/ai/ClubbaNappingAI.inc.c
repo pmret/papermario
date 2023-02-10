@@ -216,7 +216,7 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
     territory.halfHeight = 40.0f;
     territory.detectFlags = 0;
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_INIT;
         npc->duration = 30;
         npc->currentAnim = enemy->animList[10];
@@ -227,12 +227,12 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
         } else {
             npc->flags = (npc->flags & ~NPC_FLAG_GRAVITY) | NPC_FLAG_8;
         }
-        if (enemy->aiFlags & ENEMY_AI_FLAG_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->AI_TEMP_STATE_AFTER_SUSPEND = AI_RETURN_HOME_INIT;
             npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
     }
 
     if (script->AI_TEMP_STATE >= AI_STATE_ALERT_INIT
