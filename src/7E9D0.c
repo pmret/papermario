@@ -7,10 +7,10 @@
 #include "effects.h"
 #include "ld_addrs.h"
 
-#ifndef SHIFT
+#ifdef SHIFT
 #define PLAYER_ACTION_VRAM_DEF texture_memory_VRAM_END
 #else
-#define PLAYER_ACTION_VRAM_DEF (void*) 0x806B6000 // TODO shift
+#define PLAYER_ACTION_VRAM_DEF (void*) 0x802B6000
 #endif
 
 extern void* D_8010C924;
