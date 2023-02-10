@@ -12,7 +12,7 @@
 #include "sprite/npc/MBush.h"
 #include "sprite/npc/HeartPlant.h"
 #include "sprite/npc/HurtPlant.h"
-#include "sprite/npc/JungleGuy.h"
+#include "sprite/npc/SpearGuy.h"
 #include "sprite/npc/Fuzzy.h"
 #include "sprite/npc/YoshiKid.h"
 

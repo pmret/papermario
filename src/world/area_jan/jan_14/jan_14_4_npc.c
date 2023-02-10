@@ -2,6 +2,7 @@
 
 #include "world/common/enemy/complete/JungleFuzzy.h"
 
+// uses base fuzzy includes instead of JungleFuzzy!
 #include "world/common/enemy/complete/Fuzzy_Wander.inc.c"
 #include "world/common/enemy/complete/Fuzzy.inc.c"
 

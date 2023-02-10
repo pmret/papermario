@@ -13,8 +13,8 @@ s32 N(ExtraAnims_JungleFuzzy)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Fuzzy) = {
-    .id = NPC_Fuzzy,
+StaticNpc N(NpcData_JungleFuzzy) = {
+    .id = NPC_JungleFuzzy,
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 310.0f, 24.0f, 35.0f },
     .yaw = 270,
@@ -38,22 +38,22 @@ StaticNpc N(NpcData_Fuzzy) = {
 };
 
 s32 N(ExtraAnims_SpearGuy_Custom)[] = {
-    ANIM_JungleGuy_Anim03,
-    ANIM_JungleGuy_Anim04,
-    ANIM_JungleGuy_Anim05,
-    ANIM_JungleGuy_Anim06,
-    ANIM_JungleGuy_Anim0F,
-    ANIM_JungleGuy_Anim10,
-    ANIM_JungleGuy_Anim07,
-    ANIM_JungleGuy_Anim08,
-    ANIM_JungleGuy_Anim09,
-    ANIM_JungleGuy_Anim0D,
-    ANIM_JungleGuy_Anim1A,
-    ANIM_JungleGuy_Anim1B,
+    ANIM_SpearGuy_Anim03,
+    ANIM_SpearGuy_Anim04,
+    ANIM_SpearGuy_Anim05,
+    ANIM_SpearGuy_Anim06,
+    ANIM_SpearGuy_Anim0F,
+    ANIM_SpearGuy_Anim10,
+    ANIM_SpearGuy_Anim07,
+    ANIM_SpearGuy_Anim08,
+    ANIM_SpearGuy_Anim09,
+    ANIM_SpearGuy_Anim0D,
+    ANIM_SpearGuy_Anim1A,
+    ANIM_SpearGuy_Anim1B,
     -1
 };
 
-StaticNpc N(NpcData_SpearGuy_01)[] = {
+StaticNpc N(NpcData_SpearGuy)[] = {
     {
         .id = NPC_SpearGuy,
         .pos = { -298.0f, 35.0f, 37.0f },
@@ -114,8 +114,8 @@ StaticNpc N(NpcData_HurtPlant_02) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_Fuzzy), BTL_JAN_FORMATION_0D, BTL_JAN_STAGE_01),
-    NPC_GROUP(N(NpcData_SpearGuy_01), BTL_JAN_FORMATION_02, BTL_JAN_STAGE_01),
+    NPC_GROUP(N(NpcData_JungleFuzzy), BTL_JAN_FORMATION_0D, BTL_JAN_STAGE_01),
+    NPC_GROUP(N(NpcData_SpearGuy), BTL_JAN_FORMATION_02, BTL_JAN_STAGE_01),
     NPC_GROUP(N(NpcData_HeartPlant)),
     NPC_GROUP(N(NpcData_HurtPlant_01), BTL_JAN_FORMATION_08, BTL_JAN_STAGE_01),
     NPC_GROUP(N(NpcData_HurtPlant_02), BTL_JAN_FORMATION_08, BTL_JAN_STAGE_01),

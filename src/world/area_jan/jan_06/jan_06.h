@@ -9,13 +9,8 @@
 #include "mapfs/jan_06_shape.h"
 #include "mapfs/jan_06_hit.h"
 
-#include "sprite/npc/HeartPlant.h"
-#include "sprite/npc/HurtPlant.h"
-#include "sprite/npc/JungleGuy.h"
-#include "sprite/npc/Fuzzy.h"
-
 enum {
-    NPC_Fuzzy               = 0,
+    NPC_JungleFuzzy         = 0,
     NPC_SpearGuy            = 1,
     NPC_SpearGuy_Hitbox     = 2,
     NPC_HeartPlant          = 3,

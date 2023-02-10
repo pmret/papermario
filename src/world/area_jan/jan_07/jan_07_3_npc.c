@@ -278,7 +278,7 @@ EvtScript N(EVS_NpcInit_PutridPiranha) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_JungleGuy_Hitbox) = {
+EvtScript N(EVS_NpcInit_SpearGuy_Hitbox) = {
     EVT_IF_EQ(GF_JAN07_SavedYoshi, FALSE)
         EVT_CALL(RemoveNpc, NPC_SpearGuy)
         EVT_CALL(RemoveNpc, NPC_SpearGuy_Hitbox)
@@ -316,7 +316,7 @@ StaticNpc N(NpcData_SpearGuy)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
         .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_JungleGuy_Hitbox),
+        .init = &N(EVS_NpcInit_SpearGuy_Hitbox),
         .drops = NPC_NO_DROPS,
         .animations = SPEAR_GUY_ANIMS,
     },

@@ -3,20 +3,20 @@
 #include "world/common/enemy/ai/SpearGuyAI.inc.c"
 
 s32 N(ExtraAnims_SpearGuy)[] = {
-    ANIM_JungleGuy_Anim00,
-    ANIM_JungleGuy_Anim03,
-    ANIM_JungleGuy_Anim05,
-    ANIM_JungleGuy_Anim06,
-    ANIM_JungleGuy_Anim07,
-    ANIM_JungleGuy_Anim0F,
-    ANIM_JungleGuy_Anim10,
-    ANIM_JungleGuy_Anim1A, 
-    ANIM_JungleGuy_Anim1B,
+    ANIM_SpearGuy_Anim00,
+    ANIM_SpearGuy_Anim03,
+    ANIM_SpearGuy_Anim05,
+    ANIM_SpearGuy_Anim06,
+    ANIM_SpearGuy_Anim07,
+    ANIM_SpearGuy_Anim0F,
+    ANIM_SpearGuy_Anim10,
+    ANIM_SpearGuy_Anim1A, 
+    ANIM_SpearGuy_Anim1B,
     -1,
 };
 
 s32 N(ExtraAnims_SpearGuy_Hitbox)[] = {
-    ANIM_JungleGuy_Anim00,
+    ANIM_SpearGuy_Anim00,
     -1, 
 };
 

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "sprite/npc/JungleGuy.h"
+#include "sprite/npc/SpearGuy.h"
 
 #define SPEAR_GUY_DROPS \
 { \
@@ -16,22 +16,22 @@
 
 #define SPEAR_GUY_ANIMS \
 { \
-    .idle   = ANIM_JungleGuy_Anim03, \
-    .walk   = ANIM_JungleGuy_Anim05, \
-    .run    = ANIM_JungleGuy_Anim06, \
-    .chase  = ANIM_JungleGuy_Anim06, \
-    .anim_4 = ANIM_JungleGuy_Anim03, \
-    .anim_5 = ANIM_JungleGuy_Anim03, \
-    .death  = ANIM_JungleGuy_Anim07, \
-    .hit    = ANIM_JungleGuy_Anim07, \
-    .anim_8 = ANIM_JungleGuy_Anim1A, \
-    .anim_9 = ANIM_JungleGuy_Anim1B, \
-    .anim_A = ANIM_JungleGuy_Anim03, \
-    .anim_B = ANIM_JungleGuy_Anim03, \
-    .anim_C = ANIM_JungleGuy_Anim03, \
-    .anim_D = ANIM_JungleGuy_Anim03, \
-    .anim_E = ANIM_JungleGuy_Anim03, \
-    .anim_F = ANIM_JungleGuy_Anim03, \
+    .idle   = ANIM_SpearGuy_Anim03, \
+    .walk   = ANIM_SpearGuy_Anim05, \
+    .run    = ANIM_SpearGuy_Anim06, \
+    .chase  = ANIM_SpearGuy_Anim06, \
+    .anim_4 = ANIM_SpearGuy_Anim03, \
+    .anim_5 = ANIM_SpearGuy_Anim03, \
+    .death  = ANIM_SpearGuy_Anim07, \
+    .hit    = ANIM_SpearGuy_Anim07, \
+    .anim_8 = ANIM_SpearGuy_Anim1A, \
+    .anim_9 = ANIM_SpearGuy_Anim1B, \
+    .anim_A = ANIM_SpearGuy_Anim03, \
+    .anim_B = ANIM_SpearGuy_Anim03, \
+    .anim_C = ANIM_SpearGuy_Anim03, \
+    .anim_D = ANIM_SpearGuy_Anim03, \
+    .anim_E = ANIM_SpearGuy_Anim03, \
+    .anim_F = ANIM_SpearGuy_Anim03, \
 }
 
 #define SPEAR_GUY_HITBOX(npcID) \
