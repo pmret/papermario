@@ -1,6 +1,6 @@
 #include "kpa_50.h"
 
-#include "world/common/enemy/complete/HammerBros.inc.c"
+#include "world/common/enemy/complete/HammerBros_Wander.inc.c"
 #include "world/common/enemy/complete/Koopatrol_Wander.inc.c"
 
 StaticNpc N(NpcData_Koopatrol_01) = {
@@ -50,7 +50,7 @@ StaticNpc N(NpcData_Koopatrol_02) = {
 StaticNpc N(NpcData_HammerBros_01)[] = {
     {
         .id = NPC_HammerBros,
-        .settings = &N(NpcSettings_HammerBros),
+        .settings = &N(NpcSettings_HammerBros_Wander),
         .pos = { 450.0f, 0.0f, -30.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,

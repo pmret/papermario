@@ -45,7 +45,6 @@ API_CALLABLE(N(ChestItemPrompt)) {
     PopupMenu *menu;
     s32 menuIdx;
     s32 selectIdx;
-    s32 temp;
     s32 canUseItem;
     s32 itemUsedBefore;
     s32 i;
@@ -53,10 +52,10 @@ API_CALLABLE(N(ChestItemPrompt)) {
     if (isInitialCall) {
         menu = heap_malloc(sizeof(*menu));
         script->functionTempPtr[2] = menu;
-        temp = script->varTable[0];
         script->varTable[10] = script->varTable[0];
 
-        if (temp == 0) {
+        // NOTE: identical to ChestItemPrompt in kkj_17 EXCEPT here, where varTable[10] is required instead of varTable[0]
+        if (script->varTable[10] == 0) {
             // storing items
             script->varTable[1] = GF_KKJ16_Item_PowerRush;
             script->varTable[2] = GF_KKJ_Stored_PowerRush;
@@ -179,7 +178,7 @@ EvtScript N(EVS_CloseChest) = {
     EVT_END
 };
 
-EvtScript N(EVS_Interact_MagicChest) = {
+EvtScript N(EVS_Interact_MagicChest_Mario) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_EXEC_WAIT(N(EVS_OpenChest))
     EVT_SET(LVar0, 1)
@@ -215,7 +214,7 @@ EvtScript N(EVS_Interact_MagicChest) = {
 };
 
 EvtScript N(EVS_SetupMagicChest) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Interact_MagicChest)), TRIGGER_WALL_PRESS_A, COLLIDER_o207, 1, 0)
+    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Interact_MagicChest_Mario)), TRIGGER_WALL_PRESS_A, COLLIDER_o207, 1, 0)
     EVT_RETURN
     EVT_END
 };

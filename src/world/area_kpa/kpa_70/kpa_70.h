@@ -25,6 +25,6 @@ extern NpcGroupList N(DefaultNPCs);
 extern StaticAnimatorNode* N(ChainDriveSkeleton)[];
 extern AnimScript N(AS_ChainDriveAnim);
 
-ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall);
-ApiStatus SetAnimatedModelRenderMode(Evt* script, s32 isInitialCall);
-ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(InitAnimatedModels);
+API_CALLABLE(SetAnimatedModelRenderMode);
+API_CALLABLE(DeleteAnimatedModel);

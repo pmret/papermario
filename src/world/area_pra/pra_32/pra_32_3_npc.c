@@ -131,7 +131,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
         EVT_WAIT(2)
         EVT_CALL(FadeOutMusic, 0, 500)
     EVT_END_THREAD
-    EVT_CALL(SetEncounterStatusFlags, 1, TRUE)
+    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_1, TRUE)
     EVT_CALL(SetPlayerPos, 475, 100, 116)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(GetNpcPos, NPC_CrystalKing_01, LVar0, LVar1, LVar2)

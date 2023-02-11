@@ -1,26 +1,10 @@
 #include "osr_02.h"
 #include "effects.h"
 
-NpcSettings N(NpcSettings_Peach) = {
-    .height = 46,
-    .radius = 36,
-    .level = 99,
-};
-
+#include "world/common/npc/Peach.inc.c"
 #include "world/common/npc/Twink.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
-
-EvtScript N(EVS_NpcAuxAI_StarRod) = {
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_StarRod) = {
-    .height = 24,
-    .radius = 24,
-    .level = 99,
-    .otherAI = &N(EVS_NpcAuxAI_StarRod),
-};
+#include "world/common/npc/StarRod.inc.c"
 
 Vec3f N(FlightPath_TwinkStepForward)[] = {
     {  -10.0,    40.0,   10.0 },
@@ -552,24 +536,7 @@ StaticNpc N(NpcData_Spirits)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_20000,
         .init = &N(EVS_NpcInit_Peach),
         .drops = NPC_NO_DROPS,
-        .animations = {
-            .idle   = ANIM_Peach_A0000,
-            .walk   = ANIM_Peach_A0000,
-            .run    = ANIM_Peach_A0000,
-            .chase  = ANIM_Peach_A0000,
-            .anim_4 = ANIM_Peach_A0000,
-            .anim_5 = ANIM_Peach_A0000,
-            .death  = ANIM_Peach_A0000,
-            .hit    = ANIM_Peach_A0000,
-            .anim_8 = ANIM_Peach_A0000,
-            .anim_9 = ANIM_Peach_A0000,
-            .anim_A = ANIM_Peach_A0000,
-            .anim_B = ANIM_Peach_A0000,
-            .anim_C = ANIM_Peach_A0000,
-            .anim_D = ANIM_Peach_A0000,
-            .anim_E = ANIM_Peach_A0000,
-            .anim_F = ANIM_Peach_A0000,
-        },
+        .animations = PEACH_ANIMS,
         .extraAnimations = N(ExtraAnims_Peach),
     },
     {
@@ -668,24 +635,7 @@ StaticNpc N(NpcData_Spirits)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarRod),
         .drops = NPC_NO_DROPS,
-        .animations = {
-            .idle   = ANIM_StarRod_Still,
-            .walk   = ANIM_StarRod_Still,
-            .run    = ANIM_StarRod_Still,
-            .chase  = ANIM_StarRod_Still,
-            .anim_4 = ANIM_StarRod_Still,
-            .anim_5 = ANIM_StarRod_Still,
-            .death  = ANIM_StarRod_Still,
-            .hit    = ANIM_StarRod_Still,
-            .anim_8 = ANIM_StarRod_Still,
-            .anim_9 = ANIM_StarRod_Still,
-            .anim_A = ANIM_StarRod_Still,
-            .anim_B = ANIM_StarRod_Still,
-            .anim_C = ANIM_StarRod_Still,
-            .anim_D = ANIM_StarRod_Still,
-            .anim_E = ANIM_StarRod_Still,
-            .anim_F = ANIM_StarRod_Still,
-        },
+        .animations = STAR_ROD_ANIMS,
     },
 };
 

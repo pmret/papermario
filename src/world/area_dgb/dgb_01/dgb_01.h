@@ -42,9 +42,9 @@ extern NpcGroupList N(ThirdFloorEscapeNPCs);
 extern StaticAnimatorNode* N(SmashBridgesSkeleton)[];
 extern AnimScript N(AS_SmashBridges);
 
-ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall);
-ApiStatus SetAnimatedModelRenderMode(Evt* script, s32 isInitialCall);
-ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(InitAnimatedModels);
+API_CALLABLE(SetAnimatedModelRenderMode);
+API_CALLABLE(DeleteAnimatedModel);
 
 extern Gfx N(img0_gfx)[];
 extern Gfx N(img1_gfx)[];

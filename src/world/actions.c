@@ -2,6 +2,10 @@
 #include "ld_addrs.h"
 #include "actions.h"
 
+#include "sprite/npc/WorldClubba.h"
+#include "sprite/npc/WorldKoopatrol.h"
+#include "sprite/npc/HammerBros.h"
+
 void action_update_idle(void);
 void action_update_walk(void);
 void action_update_run(void);
@@ -51,20 +55,90 @@ s16 FootstepSoundSelector = 0;
 s32 D_800F7B84[] = { 0, 0, 0};
 f32 LastMidairPlayerVelY = 0.0;
 
-AnimID ClubbaDisguiseExtraAnims[] = { 0x00390000, 0x00390002, 0x00390003, 0x00390004, 0x00390005, 0x00390008, 0x00390007, 0x00390013, 0x00390014, ANIM_LIST_END };
-
-AnimID HammerBroDisguiseExtraAnims[] = { 0x005A0000, 0x005A0002, 0x005A0003, 0x005A0004, 0x005A0006, 0x005A0007, 0x005A0009, 0x005A000A, 0x005A000B, 0x005A001A, ANIM_LIST_END };
-
-AnimID KoopatrolDisguiseExtraAnims[] = { 0x00580000, 0x00580001, 0x00580002, 0x00580004, 0x00580005, 0x00580006, 0x00580007, 0x00580008, 0x00580009, 0x00580012, 0x00580014, 0x0058001B, ANIM_LIST_END };
-
-DisguiseAnims BasicPeachDisguiseAnims[4] = {
-    {0x00580001, 0x00580004, 0x00580006, 0x00580008, 0x00580000, 0x0058001B},
-    {0x00580001, 0x00580004, 0x00580006, 0x00580008, 0x00580000, 0x0058001B},
-    {0x005A0003, 0x005A0006, 0x005A0009, 0x005A000B, 0x005A0000, 0x005A001A},
-    {0x00390002, 0x00390003, 0x00390004, 0x00390005, 0x00390000, 0x00390014},
+AnimID ClubbaDisguiseExtraAnims[] = {
+    ANIM_WorldClubba_Anim00,
+    ANIM_WorldClubba_Anim02,
+    ANIM_WorldClubba_Anim03,
+    ANIM_WorldClubba_Anim04,
+    ANIM_WorldClubba_Anim05,
+    ANIM_WorldClubba_Anim08,
+    ANIM_WorldClubba_Anim07,
+    ANIM_WorldClubba_Anim13,
+    ANIM_WorldClubba_Anim14,
+    ANIM_LIST_END
 };
 
-AnimID* PeachDisguiseExtraAnims[4] = { KoopatrolDisguiseExtraAnims, KoopatrolDisguiseExtraAnims, HammerBroDisguiseExtraAnims, ClubbaDisguiseExtraAnims };
+AnimID HammerBroDisguiseExtraAnims[] = {
+    ANIM_HammerBros_Anim00,
+    ANIM_HammerBros_Anim02,
+    ANIM_HammerBros_Anim03,
+    ANIM_HammerBros_Anim04,
+    ANIM_HammerBros_Anim06,
+    ANIM_HammerBros_Anim07,
+    ANIM_HammerBros_Anim09,
+    ANIM_HammerBros_Anim0A,
+    ANIM_HammerBros_Anim0B,
+    ANIM_HammerBros_Anim1A,
+    ANIM_LIST_END
+};
+
+AnimID KoopatrolDisguiseExtraAnims[] = {
+    ANIM_WorldKoopatrol_Anim00,
+    ANIM_WorldKoopatrol_Anim01,
+    ANIM_WorldKoopatrol_Anim02,
+    ANIM_WorldKoopatrol_Anim04,
+    ANIM_WorldKoopatrol_Anim05,
+    ANIM_WorldKoopatrol_Anim06,
+    ANIM_WorldKoopatrol_Anim07,
+    ANIM_WorldKoopatrol_Anim08,
+    ANIM_WorldKoopatrol_Anim09,
+    ANIM_WorldKoopatrol_Anim12,
+    ANIM_WorldKoopatrol_Anim14,
+    ANIM_WorldKoopatrol_Anim1B,
+    ANIM_LIST_END
+};
+
+DisguiseAnims BasicPeachDisguiseAnims[] = {
+    [PEACH_DISGUISE_NONE] {
+        ANIM_WorldKoopatrol_Anim01,
+        ANIM_WorldKoopatrol_Anim04,
+        ANIM_WorldKoopatrol_Anim06,
+        ANIM_WorldKoopatrol_Anim08,
+        ANIM_WorldKoopatrol_Anim00,
+        ANIM_WorldKoopatrol_Anim1B
+    },
+    [PEACH_DISGUISE_KOOPATROL] {
+        ANIM_WorldKoopatrol_Anim01,
+        ANIM_WorldKoopatrol_Anim04,
+        ANIM_WorldKoopatrol_Anim06,
+        ANIM_WorldKoopatrol_Anim08,
+        ANIM_WorldKoopatrol_Anim00,
+        ANIM_WorldKoopatrol_Anim1B
+    },
+    [PEACH_DISGUISE_HAMMER_BROS] {
+        ANIM_HammerBros_Anim03,
+        ANIM_HammerBros_Anim06,
+        ANIM_HammerBros_Anim09,
+        ANIM_HammerBros_Anim0B,
+        ANIM_HammerBros_Anim00,
+        ANIM_HammerBros_Anim1A
+    },
+    [PEACH_DISGUISE_CLUBBA] {
+        ANIM_WorldClubba_Anim02,
+        ANIM_WorldClubba_Anim03,
+        ANIM_WorldClubba_Anim04,
+        ANIM_WorldClubba_Anim05,
+        ANIM_WorldClubba_Anim00,
+        ANIM_WorldClubba_Anim14
+    },
+};
+
+AnimID* PeachDisguiseExtraAnims[] = {
+    [PEACH_DISGUISE_NONE] KoopatrolDisguiseExtraAnims,
+    [PEACH_DISGUISE_KOOPATROL] KoopatrolDisguiseExtraAnims,
+    [PEACH_DISGUISE_HAMMER_BROS] HammerBroDisguiseExtraAnims,
+    [PEACH_DISGUISE_CLUBBA] ClubbaDisguiseExtraAnims
+};
 
 #define ACTION_FILE(name) world_action_##name##_ROM_START, world_action_##name##_ROM_END
 

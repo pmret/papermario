@@ -3030,8 +3030,9 @@ enum CookingIngredients {
 };
 
 enum PeachDisguises {
-    PEACH_DISGUISE_1        = 1,
-    PEACH_DISGUISE_2        = 2,
+    PEACH_DISGUISE_NONE     = 0,
+    PEACH_DISGUISE_KOOPATROL        = 1,
+    PEACH_DISGUISE_HAMMER_BROS        = 2,
     PEACH_DISGUISE_CLUBBA   = 3,
 };
 
@@ -5183,6 +5184,7 @@ enum TempColliderFlagsModifyMode {
 };
 
 enum CollisionChannels {
+    COLLISION_CHANNEL_8000          = 0x00008000,
     COLLISION_CHANNEL_10000         = 0x00010000,
     COLLISION_CHANNEL_20000         = 0x00020000,
     COLLISION_IGNORE_ENTITIES       = 0x00040000,

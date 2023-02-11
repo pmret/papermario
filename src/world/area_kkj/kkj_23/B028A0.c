@@ -26,7 +26,7 @@ ApiStatus func_80240080_B02900(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/atomic/UnkPhysicsFuncs.inc.c"
+#include "../common/Searchlights.inc.c"
 
 #include "world/common/todo/GetPeachDisguise.inc.c"
 
@@ -35,6 +35,6 @@ ApiStatus func_80240784_B03004(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/todo/UnkGooberFunc50.inc.c"
+#include "../common/ApproachPlayer50Units.inc.c"
 
 const char* kkj_23_str = "kkj_14";

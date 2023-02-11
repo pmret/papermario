@@ -1,6 +1,6 @@
 #include "kpa_102.h"
 
-#include "world/common/enemy/complete/HammerBros.inc.c"
+#include "world/common/enemy/complete/HammerBros_Wander.inc.c"
 #include "world/common/enemy/complete/Koopatrol_Wander.inc.c"
 #include "world/common/enemy/complete/FlyingMagikoopa.inc.c"
 
@@ -56,7 +56,7 @@ StaticNpc N(NpcData_FlyingMagikoopa)[] = {
 StaticNpc N(NpcData_HammerBros)[] = {
     {
         .id = NPC_HammerBros,
-        .settings = &N(NpcSettings_HammerBros),
+        .settings = &N(NpcSettings_HammerBros_Wander),
         .pos = { 450.0f, 0.0f, -225.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,

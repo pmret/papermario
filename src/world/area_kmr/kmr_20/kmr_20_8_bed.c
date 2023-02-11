@@ -143,7 +143,7 @@ EvtScript N(EVS_UseBed) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(N(ToadHouse_DisableStatusMenu))
     EVT_IF_NE(LVar4, 0)
-        EVT_EXEC(N(8024AC8C))
+        EVT_EXEC(N(EVS_ToadHouse_Unk2))
     EVT_END_IF
     EVT_CALL(N(ToadHouse_PutPartnerAway), LVarA)
     EVT_WAIT(20)
@@ -161,7 +161,7 @@ EvtScript N(EVS_UseBed) = {
         EVT_CALL(FullyRestoreHPandFP)
         EVT_CALL(FullyRestoreSP)
         EVT_IF_NE(LVar4, 0)
-            EVT_EXEC(N(8024AC14))
+            EVT_EXEC(N(EVS_ToadHouse_Unk1))
         EVT_END_IF
         EVT_CALL(N(ToadHouse_GetPartnerBackOut), LVarA)
         EVT_WAIT(30)

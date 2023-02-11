@@ -12,11 +12,7 @@ API_CALLABLE(N(UnlockStarBeam)) {
 
 #include "world/common/npc/StarSpirit.inc.c"
 
-NpcSettings N(NpcSettings_Bowser) = {
-    .height = 75,
-    .radius = 72,
-    .level = 99,
-};
+#include "world/common/npc/Bowser.inc.c"
 
 NpcSettings N(NpcSettings_Kammy) = {
     .height = 34,
@@ -26,17 +22,7 @@ NpcSettings N(NpcSettings_Kammy) = {
     .onDefeat = &EnemyNpcDefeat,
 };
 
-EvtScript N(EVS_NpcAuxAI_StarRod) = {
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_StarRod) = {
-    .height = 24,
-    .radius = 24,
-    .level = 99,
-    .otherAI = &N(EVS_NpcAuxAI_StarRod),
-};
+#include "world/common/npc/StarRod.inc.c"
 
 EvtScript N(EVS_StarSpirit_HoverBobbing) = {
     EVT_CALL(SetNpcVar, NPC_Eldstar, 0, 0)
@@ -509,7 +495,7 @@ s32 N(ExtraAnims_Kammy)[] = {
 
 StaticNpc N(NpcData_Thieves)[] = {
     {
-        .id = NPC_Bowser_Main,
+        .id = NPC_Bowser_Body,
         .settings = &N(NpcSettings_Bowser),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
@@ -519,24 +505,7 @@ StaticNpc N(NpcData_Thieves)[] = {
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-        .animations = {
-            .idle   = ANIM_WorldBowser_Idle,
-            .walk   = ANIM_WorldBowser_Idle,
-            .run    = ANIM_WorldBowser_Idle,
-            .chase  = ANIM_WorldBowser_Idle,
-            .anim_4 = ANIM_WorldBowser_Idle,
-            .anim_5 = ANIM_WorldBowser_Idle,
-            .death  = ANIM_WorldBowser_Idle,
-            .hit    = ANIM_WorldBowser_Idle,
-            .anim_8 = ANIM_WorldBowser_Idle,
-            .anim_9 = ANIM_WorldBowser_Idle,
-            .anim_A = ANIM_WorldBowser_Idle,
-            .anim_B = ANIM_WorldBowser_Idle,
-            .anim_C = ANIM_WorldBowser_Idle,
-            .anim_D = ANIM_WorldBowser_Idle,
-            .anim_E = ANIM_WorldBowser_Idle,
-            .anim_F = ANIM_WorldBowser_Idle,
-        },
+        .animations = BOWSER_ANIMS,
         .extraAnimations = N(NpcData_ClownCar),
     },
     {
@@ -550,24 +519,7 @@ StaticNpc N(NpcData_Thieves)[] = {
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-        .animations = {
-            .idle   = ANIM_WorldBowser_Idle,
-            .walk   = ANIM_WorldBowser_Idle,
-            .run    = ANIM_WorldBowser_Idle,
-            .chase  = ANIM_WorldBowser_Idle,
-            .anim_4 = ANIM_WorldBowser_Idle,
-            .anim_5 = ANIM_WorldBowser_Idle,
-            .death  = ANIM_WorldBowser_Idle,
-            .hit    = ANIM_WorldBowser_Idle,
-            .anim_8 = ANIM_WorldBowser_Idle,
-            .anim_9 = ANIM_WorldBowser_Idle,
-            .anim_A = ANIM_WorldBowser_Idle,
-            .anim_B = ANIM_WorldBowser_Idle,
-            .anim_C = ANIM_WorldBowser_Idle,
-            .anim_D = ANIM_WorldBowser_Idle,
-            .anim_E = ANIM_WorldBowser_Idle,
-            .anim_F = ANIM_WorldBowser_Idle,
-        },
+        .animations = BOWSER_ANIMS,
         .extraAnimations = N(NpcData_ClownCar),
     },
     {
@@ -607,29 +559,8 @@ StaticNpc N(NpcData_Thieves)[] = {
         .pos = { 0.0f, 174.0f, 0.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_StarRod_Still,
-            .walk   = ANIM_StarRod_Still,
-            .run    = ANIM_StarRod_Still,
-            .chase  = ANIM_StarRod_Still,
-            .anim_4 = ANIM_StarRod_Still,
-            .anim_5 = ANIM_StarRod_Still,
-            .death  = ANIM_StarRod_Still,
-            .hit    = ANIM_StarRod_Still,
-            .anim_8 = ANIM_StarRod_Still,
-            .anim_9 = ANIM_StarRod_Still,
-            .anim_A = ANIM_StarRod_Still,
-            .anim_B = ANIM_StarRod_Still,
-            .anim_C = ANIM_StarRod_Still,
-            .anim_D = ANIM_StarRod_Still,
-            .anim_E = ANIM_StarRod_Still,
-            .anim_F = ANIM_StarRod_Still,
-        },
+        .drops = NPC_NO_DROPS,
+        .animations = STAR_ROD_ANIMS,
     },
 };
 

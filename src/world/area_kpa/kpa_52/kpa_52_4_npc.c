@@ -1,12 +1,12 @@
 
 #include "kpa_52.h"
 
-#include "world/common/enemy/complete/HammerBros.inc.c"
+#include "world/common/enemy/complete/HammerBros_Wander.inc.c"
 
 StaticNpc N(NpcData_HammerBros_01)[] = {
     {
         .id = NPC_HammerBros_01,
-        .settings = &N(NpcSettings_HammerBros),
+        .settings = &N(NpcSettings_HammerBros_Wander),
         .pos = { 190.0f, 0.0f, -27.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
@@ -36,7 +36,7 @@ StaticNpc N(NpcData_HammerBros_01)[] = {
 StaticNpc N(NpcData_HammerBros_02)[] = {
     {
         .id = NPC_HammerBros_02,
-        .settings = &N(NpcSettings_HammerBros),
+        .settings = &N(NpcSettings_HammerBros_Wander),
         .pos = { 190.0f, 120.0f, -145.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,

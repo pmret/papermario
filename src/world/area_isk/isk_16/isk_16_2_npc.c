@@ -16,7 +16,7 @@ EvtScript N(EVS_NpcDefeat_Tutankoopa_01) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetEncounterStatusFlags, 1, TRUE)
+            EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_1, TRUE)
             EVT_CALL(InterpPlayerYaw, 90, 0)
             EVT_EXEC_WAIT(N(EVS_Scene_TutankoopaDefeated))
             EVT_EXEC(N(EVS_SpawnStarCard))

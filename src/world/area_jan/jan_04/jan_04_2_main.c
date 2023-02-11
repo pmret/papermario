@@ -74,7 +74,7 @@ EvtScript N(EVS_Main) = {
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
     EVT_CALL(GetDemoState, LVar0)
-    EVT_IF_NE(LVar0, 0)
+    EVT_IF_NE(LVar0, DEMO_STATE_NONE)
         EVT_EXEC_WAIT(N(EVS_PlayDemoScene))
         EVT_RETURN
     EVT_END_IF

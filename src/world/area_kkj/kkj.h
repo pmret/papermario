@@ -20,29 +20,42 @@ enum {
     AB_KKJ_Unused_F     = AreaByte(15),
 };
 
-extern MapConfig kkj_00_settings;
-extern MapConfig kkj_01_settings;
-extern MapConfig kkj_02_settings;
-extern MapConfig kkj_03_settings;
-extern MapConfig kkj_10_settings;
-extern MapConfig kkj_11_settings;
-extern MapConfig kkj_12_settings;
-extern MapConfig kkj_13_settings;
-extern MapConfig kkj_14_settings;
-extern MapConfig kkj_15_settings;
-extern MapConfig kkj_16_settings;
-extern MapConfig kkj_17_settings;
-extern MapConfig kkj_18_settings;
-extern MapConfig kkj_19_settings;
-extern MapConfig kkj_20_settings;
-extern MapConfig kkj_21_settings;
-extern MapConfig kkj_22_settings;
-extern MapConfig kkj_23_settings;
-extern MapConfig kkj_24_settings;
-extern MapConfig kkj_25_settings;
-extern MapConfig kkj_26_settings;
-extern MapConfig kkj_27_settings;
-extern MapConfig kkj_28_settings;
-extern MapConfig kkj_29_settings;
+enum {
+    AF_KKJ_01   = AreaFlag(1),
+    AF_KKJ_02   = AreaFlag(2),
+    AF_KKJ_07   = AreaFlag(7),
+};
+
+extern MapSettings kkj_00_settings;
+extern MapSettings kkj_01_settings;
+extern MapSettings kkj_02_settings;
+extern MapSettings kkj_03_settings;
+extern MapSettings kkj_10_settings;
+extern MapSettings kkj_11_settings;
+extern MapSettings kkj_12_settings;
+extern MapSettings kkj_13_settings;
+extern MapSettings kkj_14_settings;
+extern MapSettings kkj_15_settings;
+extern MapSettings kkj_16_settings;
+extern MapSettings kkj_17_settings;
+extern MapSettings kkj_18_settings;
+extern MapSettings kkj_19_settings;
+extern MapSettings kkj_20_settings;
+extern MapSettings kkj_21_settings;
+extern MapSettings kkj_22_settings;
+extern MapSettings kkj_23_settings;
+extern MapSettings kkj_24_settings;
+extern MapSettings kkj_25_settings;
+extern MapSettings kkj_26_settings;
+extern MapSettings kkj_27_settings;
+extern MapSettings kkj_28_settings;
+extern MapSettings kkj_29_settings;
+
+s32 kkj_00_map_init(void);
+s32 kkj_03_map_init(void);
+s32 kkj_13_map_init(void);
+s32 kkj_14_map_init(void);
+s32 kkj_23_map_init(void);
+s32 kkj_25_map_init(void);
 
 #endif
