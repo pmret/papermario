@@ -16535,11 +16535,12 @@ segments:
   # should end at 0xF01B10
 
   - type: code
+    dir: world/dead/area_flo/flo_19
     start: 0xEFEB00
     vram: 0x80240000
     subsegments:
     - [0xEFEB00, c]
-    - [0xEFF440, bin] # part of overlay
+    - [0xEFF440] # part of overlay
 
 #############
 ### Audio ###
