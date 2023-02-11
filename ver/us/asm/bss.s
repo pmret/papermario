@@ -242,10 +242,11 @@ dlabel swapBufMsg
 .space 2
 
 dlabel GfxTaskMgrThread
-.space 0x000021b0
+.space 0x000001b0
 
-dlabel D_8009E6C8
-.space 8
+.align 4
+dlabel GfxTaskMgrStack
+.space 0x00002000
 
 dlabel D_8009E6D0
 .space 0x00000020
@@ -476,7 +477,10 @@ dlabel D_800A0F54
 .space 4
 
 dlabel nuAuMgrThread
-.space 0x000025b8
+.space 0x000005b8
+
+dlabel AuStack
+.space 0x00002000
 
 dlabel AlCmdListBuffers
 .space 0x0000000c
@@ -512,13 +516,9 @@ dlabel nuAuDmaIOMesgBuf
 .space 0x000004b0
 
 dlabel nuAuDmaState
-.space 4
+.space 0x0000000c
 
-dlabel D_800A3BD4
 .space 4
-
-dlabel D_800A3BD8
-.space 8
 
 dlabel nuAuDmaBufList
 .space 0x000003e8
@@ -629,7 +629,10 @@ dlabel IdleThread
 .space 0x000001b0
 
 dlabel MainThread
-.space 0x000021b0
+.space 0x000001b0
+
+dlabel IdleStack
+.space 0x00002000
 
 dlabel nuScStack
 .space 0x00002000
@@ -650,7 +653,10 @@ dlabel D_800AC5E8
 .space 0x000000c8
 
 dlabel nuGfxMesgBuf
-.space 0x00002020
+.space 0x00000020
+
+dlabel GfxStack
+.space 0x00002000
 
 dlabel nuContWaitMesgBuf
 .space 4
@@ -932,9 +938,12 @@ dlabel D_800B451F
 .space 1
 
 dlabel D_800B4520
-.space 0x00002070
+.space 0x00000070
 
-dlabel D_800B6590
+dlabel nuBootStack
+.space 0x00002000
+
+dlabel nuMainStack
 .space 0x00002000
 
 dlabel nuYieldBuf

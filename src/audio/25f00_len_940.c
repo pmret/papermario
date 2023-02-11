@@ -21,13 +21,13 @@ extern s32 AlMinFrameSize;
 extern OSMesgQueue nuAuDmaMesgQ;
 extern OSMesg nuAuDmaMesgBuf[50];
 extern OSIoMesg nuAuDmaIOMesgBuf[];
-extern NUDMABuffer* D_800A3BD4;
 extern NUDMABuffer nuAuDmaBufList[50];
 extern AuSynDriver auSynDriver;
 extern u64 rspbootUcodeBuffer[];
 extern u64 n_aspMain_text_bin[];
 extern u64 n_aspMain_data_bin[];
 extern u8 AuHeapBase[AUDIO_HEAP_SIZE];
+extern u64 AuStack[NU_AU_STACK_SIZE / sizeof(u64)];
 
 void create_audio_system(void) {
     u32 i;
@@ -84,7 +84,7 @@ void create_audio_system(void) {
     nuAuPreNMIFunc = nuAuPreNMIProc;
     au_driver_init(&auSynDriver, &config);
     au_engine_init(config.outputRate);
-    osCreateThread(&nuAuMgrThread, NU_MAIN_THREAD_ID, nuAuMgr, NULL, &AlCmdListBuffers, NU_AU_MGR_THREAD_PRI); //why main thread?
+    osCreateThread(&nuAuMgrThread, NU_MAIN_THREAD_ID, nuAuMgr, NULL, &AuStack[NU_AU_STACK_SIZE / sizeof(u64)], NU_AU_MGR_THREAD_PRI); //why main thread?
     osStartThread(&nuAuMgrThread);
 }
 
@@ -188,7 +188,7 @@ s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 arg3) {
     }
 
     lastDmaPtr = NULL;
-    dmaPtr = D_800A3BD4;
+    dmaPtr = nuAuDmaState.firstUsed;
     addrEnd = addr + len;
 
     while (dmaPtr != NULL) {
