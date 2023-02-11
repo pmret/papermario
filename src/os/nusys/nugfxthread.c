@@ -3,12 +3,12 @@
 
 void gfxThread(void*);
 
-extern OSMesg nuContWaitMesgBuf;
+extern s32 GfxStack[NU_GFX_STACK_SIZE / 4];
 extern OSThread D_800B1B90;
 extern OSMesg nuGfxMesgBuf[NU_GFX_MESGS];
 
 void nuGfxThreadStart(void) {
-    osCreateThread(&D_800B1B90, 4, gfxThread, NULL, &nuContWaitMesgBuf, NU_GFX_THREAD_PRI);
+    osCreateThread(&D_800B1B90, 4, gfxThread, NULL, &GfxStack[NU_GFX_STACK_SIZE / 4], NU_GFX_THREAD_PRI);
     osStartThread(&D_800B1B90);
 }
 

@@ -14,7 +14,8 @@ extern s16 swapBufMsg;
 extern OSThread GfxTaskMgrThread;
 extern NUScTask nuGfxTask[NU_GFX_TASK_NUM];
 extern s32 D_800DA040;
-extern s32 D_800B91D0;
+extern s32 D_800B91D0[NU_GFX_RDP_OUTPUTBUFF_SIZE / sizeof(u32)];
+extern u64 GfxTaskMgrStack[NU_GFX_TASKMGR_STACK_SIZE / sizeof(u64)];
 extern u8 rspbootUcodeBuffer[];
 
 void nuGfxTaskMgr(void* data) {
@@ -60,7 +61,7 @@ void nuGfxTaskMgrInit(void) {
     swapBufMsg = NU_SC_SWAPBUFFER_MSG;
     nuGfxTaskSpool = 0;
     nuGfxDisplayOff();
-    osCreateThread(&GfxTaskMgrThread, NU_GFX_TASKMGR_THREAD_ID, nuGfxTaskMgr, NULL, &D_8009E6D0, NU_GFX_TASKMGR_THREAD_PRI);
+    osCreateThread(&GfxTaskMgrThread, NU_GFX_TASKMGR_THREAD_ID, nuGfxTaskMgr, NULL, &GfxTaskMgrStack[NU_GFX_TASKMGR_STACK_SIZE / sizeof(u64)], NU_GFX_TASKMGR_THREAD_PRI);
     osStartThread(&GfxTaskMgrThread);
 
     for (i = 0; i < NU_GFX_TASK_NUM; i++) {
@@ -76,7 +77,7 @@ void nuGfxTaskMgrInit(void) {
         nuGfxTask[i].list.t.dram_stack = (u64*) &D_800DA040;
         nuGfxTask[i].list.t.dram_stack_size = SP_DRAM_STACK_SIZE8;
         nuGfxTask[i].list.t.output_buff = (u64*) &D_800B91D0;
-        nuGfxTask[i].list.t.output_buff_size = (u64*) &gZoneCollisionData;
+        nuGfxTask[i].list.t.output_buff_size = (u64*) &D_800B91D0[NU_GFX_RDP_OUTPUTBUFF_SIZE / sizeof(u32)];
         nuGfxTask[i].list.t.yield_data_ptr = (u64*) &nuYieldBuf;
         nuGfxTask[i].list.t.yield_data_size = NU_GFX_YIELD_BUF_SIZE;
     }
