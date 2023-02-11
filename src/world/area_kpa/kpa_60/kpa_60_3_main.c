@@ -1,7 +1,6 @@
 #include "kpa_60.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_OpenAirshipDockDoor) = {
     EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitts, SOUND_1DF, SOUND_SPACE_MODE_0)

@@ -1,6 +1,8 @@
 #include "common.h"
 #include "npc.h"
 
+#include "TexturePan.h"
+
 ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall) {
     script->varTable[9] += script->varTable[1];
     if (script->varTable[9] < 0) {
@@ -106,3 +108,21 @@ ApiStatus N(UpdateTexturePanStepped)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
+
+EvtScript N(EVS_UpdateTexturePan) = {
+    EVT_SET_GROUP(EVT_GROUP_00)
+    EVT_IF_EQ(LVar5, 1)
+        EVT_IF_EQ(LVar6, 1)
+            EVT_IF_EQ(LVar7, 1)
+                EVT_IF_EQ(LVar8, 1)
+                    EVT_CALL(N(UpdateTexturePanSmooth))
+                    EVT_RETURN
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+    EVT_END_IF
+    EVT_CALL(N(UpdateTexturePanStepped))
+    EVT_RETURN
+    EVT_END
+};
+

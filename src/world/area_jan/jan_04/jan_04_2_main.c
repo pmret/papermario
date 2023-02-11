@@ -1,7 +1,6 @@
 #include "jan_04.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_GotoMap_kmr_24_0) = {
     EVT_CALL(FadeOutMusic, 0, 1500)

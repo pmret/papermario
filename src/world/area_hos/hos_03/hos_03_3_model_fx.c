@@ -1,7 +1,6 @@
 #include "hos_03.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 u16 N(D_80243BCC_A1ECCC) = 0;
 u16 N(D_80243BCE_A1ECCE) = 0;

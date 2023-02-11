@@ -3,7 +3,6 @@
 
 #define NAME_SUFFIX _PreTitle
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 #define NAME_SUFFIX
 
 EvtScript N(EVS_Scene_PreTitle) = {

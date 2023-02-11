@@ -64,7 +64,6 @@ s32 split_pad_main[] = {
 // begin main
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 #include "effects.h"
 

@@ -10,7 +10,6 @@ extern NpcGroupList N(NpcGroupBefore);
 extern NpcGroupList N(NpcGroupAfter);
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_ExitDoors_trd_03_1) = EVT_EXIT_DOUBLE_DOOR(trd_04_ENTRY_0, "trd_03", trd_03_ENTRY_1,
     COLLIDER_ttw2, MODEL_o6, MODEL_o7);

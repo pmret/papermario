@@ -1,7 +1,6 @@
 #include "tik_05.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_tik_04_0) = EVT_EXIT_WALK(60, tik_05_ENTRY_0, "tik_04", tik_04_ENTRY_0);
 

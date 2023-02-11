@@ -5,7 +5,6 @@ extern EvtScript N(EVS_SetupMusic);
 extern NpcGroupList N(DefaultNPCs);
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_trd_08_0) = EVT_EXIT_WALK(60, trd_07_ENTRY_1, "trd_08", trd_08_ENTRY_0);
 EvtScript N(EVS_ExitWalk_trd_04_4) = EVT_EXIT_WALK(60, trd_07_ENTRY_0, "trd_04", trd_04_ENTRY_4);

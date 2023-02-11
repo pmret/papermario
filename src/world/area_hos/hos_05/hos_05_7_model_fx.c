@@ -9,7 +9,6 @@ MAP_RODATA_PAD(1,unk);
 #define NAME_SUFFIX _Starship
 #include "world/common/atomic/UnkFunc27.inc.c"
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 API_CALLABLE(N(SetWorldColorParams)) {
     Bytecode* args;

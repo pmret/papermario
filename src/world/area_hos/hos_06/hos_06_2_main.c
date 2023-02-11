@@ -1,7 +1,6 @@
 #include "hos_06.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_TexPan_MysticPyramid) = {
     EVT_CALL(EnableTexPanning, MODEL_o185, TRUE)

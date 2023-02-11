@@ -21,7 +21,6 @@ void N(setup_gfx_fountain_stars)(void) {
 }
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_SetupFountains) = {
     EVT_THREAD

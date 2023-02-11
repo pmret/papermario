@@ -4,7 +4,6 @@ extern char STR_TIK_25[];
 extern char STR_TIK_23[];
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_tik_25_0) = EVT_EXIT_WALK(60, tik_24_ENTRY_0, STR_TIK_25, tik_25_ENTRY_0);
 EvtScript N(EVS_ExitWalk_tik_23_0) = EVT_EXIT_WALK(60, tik_24_ENTRY_1, STR_TIK_23, tik_23_ENTRY_0);

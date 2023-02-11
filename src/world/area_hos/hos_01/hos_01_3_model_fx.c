@@ -2,7 +2,6 @@
 #include "effects.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 s32 N(GlowingStarAlpha) = 255;
 s32 N(GivingPowerAlpha) = 255;
