@@ -6,16 +6,7 @@
 #include "../common/SetPeachFlag8.inc.c"
 #include "../common/ApproachPlayer50Units.inc.c"
 
-#include "world/common/enemy/complete/Kammy.h"
-
-NpcSettings N(NpcSettings_Kammy) = {
-    .height = 40,
-    .radius = 30,
-    .level = 26,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
+#include "world/common/enemy/complete/Kammy.inc.c"
 #include "world/common/enemy/complete/Koopatrol_Stationary.inc.c"
 
 s32 N(ExtraAnims_Koopatrol)[] = {

@@ -1,5 +1,6 @@
 #include "kkj_27.h"
-#include "world/common/atomic/TexturePan.h"
+
+#include "world/common/atomic/TexturePan.inc.c"
 
 Gfx N(setup_gfx_candle_lights)[] = {
     gsDPPipeSync(),

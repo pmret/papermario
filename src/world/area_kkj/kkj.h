@@ -2,12 +2,22 @@
 #define _WORLD_AREA_KKJ_KKJ_H_
 
 enum {
-    AB_KKJ_Unused_0     = AreaByte(0),
-    AB_KKJ_Unused_1     = AreaByte(1),
-    AB_KKJ_Unused_2     = AreaByte(2),
-    AB_KKJ_Unused_3     = AreaByte(3),
-    AB_KKJ_Unused_4     = AreaByte(4),
-    AB_KKJ_Unused_5     = AreaByte(5),
+    CAKE_TYPE_NONE              = 0, // cake has not been started
+    CAKE_TYPE_BEGUN             = 1, // the cake has been imagined
+    CAKE_TYPE_READY_TO_MIX      = 2, // added sugar and eggs
+    CAKE_TYPE_MIXED             = 3, // mixed the batter
+    CAKE_TYPE_READY_TO_BAKE     = 4, // added flour and butter
+    CAKE_TYPE_BAKED             = 5, // baked in the oven
+    CAKE_TYPE_DONE              = 6, // decorated
+};
+
+enum {
+    AB_KKJ19_CurrentBakeStep        = AreaByte(0),
+    AB_KKJ_CompletedBakeStep        = AreaByte(1),
+    AB_KKJ19_HeldIngredient         = AreaByte(2),
+    AB_KKJ19_BakeStepProgress       = AreaByte(3),
+    AB_KKJ19_CookwareItemIdx        = AreaByte(4),
+    AB_KKJ19_CakeItemIdx            = AreaByte(5),
     AB_KKJ29_AnsweringContestant    = AreaByte(6),
     AB_KKJ29_AnswerScore            = AreaByte(7),
     AB_KKJ29_LeftKoopatrolScore     = AreaByte(8),
@@ -25,6 +35,16 @@ enum {
     AF_KKJ_02   = AreaFlag(2),
     AF_KKJ_06   = AreaFlag(6),
     AF_KKJ_07   = AreaFlag(7),
+    AF_KKJ19_FailedBakingTask   = AreaFlag(9),
+    AF_KKJ19_AddedEgg           = AreaFlag(10),
+    AF_KKJ19_AddedSugar         = AreaFlag(11),
+    AF_KKJ19_AddedFlour         = AreaFlag(12),
+    AF_KKJ19_AddedButter        = AreaFlag(13),
+    AF_KKJ19_AddedNothingWrong  = AreaFlag(14),
+    AB_KKJ19_AddedIcing         = AreaFlag(15),
+    AB_KKJ19_AddedBerries       = AreaFlag(16),
+    AF_KKJ_FinishedBakingCake   = AreaFlag(17),
+    AF_KKJ19_CanCheckIngredients    = AreaFlag(18),
 };
 
 extern MapSettings kkj_00_settings;

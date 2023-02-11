@@ -11799,10 +11799,9 @@ segments:
     subsegments:
     - [0xAC9710, c, kkj_03_0_header]
     - [0xAC9730, c, kkj_03_1_music]
-    - [0xAC9730, c, kkj_03_2_texpan]
-    - [0xAC9A40, c, kkj_03_3_main]
-    - [0xAC9A40, c, kkj_03_4_npc]
-    - [0xAC9A40, c, kkj_03_5_scenes]
+    - [0xAC9A40, c, kkj_03_2_main]
+    - [0xAC9A40, c, kkj_03_3_npc]
+    - [0xAC9A40, c, kkj_03_4_scenes]
     - [0xAC9A40]
   - name: kkj_10
     dir: world/area_kkj/kkj_10
@@ -11848,11 +11847,10 @@ segments:
     subsegments:
     - [0xAD5ED0, c, kkj_13_0_header]
     - [0xAD5EF0, c, kkj_13_1_music]
-    - [0xAD5EF0, c, kkj_13_2_texpan]
-    - [0xAD6200, c, kkj_13_3_main]
-    - [0xAD6200, c, kkj_13_4_chapter8]
-    - [0xAD6260, c, kkj_13_5_intro_npc]
-    - [0xAD6260, c, kkj_13_6_intro_scenes]
+    - [0xAD6200, c, kkj_13_2_main]
+    - [0xAD6200, c, kkj_13_3_npcs_finale]
+    - [0xAD6260, c, kkj_13_4_npcs_intro]
+    - [0xAD6260, c, kkj_13_5_intro_scenes]
     - [0xAD6630]
   - name: kkj_14
     dir: world/area_kkj/kkj_14
@@ -11928,27 +11926,25 @@ segments:
     start: 0xAF2CA0
     vram: 0x80240000
     subsegments:
-    - [0xAF2CA0, c]
-    - [0xAF2FE0, c]
-    - [0xAF34C0, data]
-    - [0xAF3560, data]
-    - [0xAF3600, data]
-    - [0xAF3CB0, data]
-    - [0xAF4BB0, data]
-    - [0xAF7920]
+    - [0xAF2CA0, c, kkj_18_0_header]
+    - [0xAF2CA0, c, kkj_18_1_music]
+    - [0xAF2CA0, c, kkj_18_2_main]
+    - [0xAF2FE0, c, kkj_18_3_npc]
+    - [0xAF2FE0, c, kkj_18_4_gourmet]
+    - [0xAF34C0]
   - name: kkj_19
     dir: world/area_kkj/kkj_19
     type: code
     start: 0xAF7950
     vram: 0x80240000
     subsegments:
-    - [0xAF7950, c]
-    - [0xAF7C00, c]
-    - [0xAF8660, data]
-    - [0xAF8B40, data]
-    - [0xAF9050, data]
-    - [0xAF9460, data]
-    - [0xAFDAF0]
+    - [0xAF7950, c, kkj_19_0_header]
+    - [0xAF7950, c, kkj_19_1_music]
+    - [0xAF7C00, c, kkj_19_2_main]
+    - [0xAF7C00, c, kkj_19_3_npcs_intro]
+    - [0xAF7C00, c, kkj_19_4_npcs_peach]
+    - [0xAF7C00, c, kkj_19_5_baking]
+    - [0xAF8660]
   - name: kkj_20
     dir: world/area_kkj/kkj_20
     type: code
@@ -12040,9 +12036,8 @@ segments:
     subsegments:
     - [0xB13D70, c, kkj_27_0_header]
     - [0xB13D70, c, kkj_27_1_music]
-    - [0xB13D70, c, kkj_27_2_texpan]
-    - [0xB13D70, c, kkj_27_3_main]
-    - [0xB14080, c, kkj_27_4_secret]
+    - [0xB13D70, c, kkj_27_2_main]
+    - [0xB14080, c, kkj_27_3_secret]
     - [0xB14210]
   - name: kkj_28
     dir: world/area_kkj/kkj_28

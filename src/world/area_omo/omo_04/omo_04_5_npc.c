@@ -16,7 +16,7 @@ NpcSettings N(NpcSettings_Goomba) = {
 };
 
 #include "world/common/enemy/complete/Clubba.inc.c"
-#include "world/common/enemy/complete/Kammy.inc.c"
+#include "world/common/enemy/complete/Kammy_Flying.inc.c"
 
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 #include "world/common/todo/UnsetCamera0Flag1000.inc.c"
@@ -169,7 +169,7 @@ s32 N(ExtraAnims_Kammy)[] = {
 
 StaticNpc N(NpcData_Kammy) = {
     .id = NPC_Kammy,
-    .settings = &N(NpcSettings_Kammy),
+    .settings = &N(NpcSettings_Kammy_Flying),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
     .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,

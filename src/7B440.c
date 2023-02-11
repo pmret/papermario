@@ -76,7 +76,7 @@ void reset_player_status(void) {
     } else {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
-        gGameStatusPtr->peachCookingIngredient = 0;
+        gGameStatusPtr->peachBakingIngredient = 0;
     }
 
     // TODO required to match

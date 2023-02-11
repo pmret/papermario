@@ -12,15 +12,15 @@
 #include "sprite/npc/WorldKoopatrol.h"
 
 enum {
-	NPC_Koopatrol_01        = 0,
-	NPC_Koopatrol_02        = 1,
-	NPC_Koopatrol_03        = 2,
-	NPC_Koopatrol_04        = 3,
-	NPC_Koopatrol_05        = 4,
+    NPC_Koopatrol_01        = 0,
+    NPC_Koopatrol_02        = 1,
+    NPC_Koopatrol_03        = 2,
+    NPC_Koopatrol_04        = 3,
+    NPC_Koopatrol_05        = 4,
 };
 
 enum {
-	MV_PadlockEntityIdx		= MapVar(0),
+    MV_PadlockEntityIdx     = MapVar(0),
 };
 
 #define NAMESPACE kkj_11

@@ -1,3 +1,6 @@
+#ifndef _AI_GUARD_H_
+#define _AI_GUARD_H_
+
 // Used in:
 // - kmr_02 Toad
 // - kmr_07 GoombaBros
@@ -262,3 +265,5 @@ ApiStatus N(GuardAI_Main)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
+
+#endif

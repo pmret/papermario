@@ -14,16 +14,16 @@
 #include "sprite/npc/WorldKoopatrol.h"
 
 enum {
-	// shared
-	NPC_Bowser_Body		= 0,
-	NPC_Bowser_Prop		= 1,
-	// chapter 8
-	NPC_CaptivePeach    = 2,
-	// intro
-	NPC_Koopatrol_01    = 2,
-	NPC_Koopatrol_02    = 3,
-	NPC_Kammy           = 4,
-	NPC_Peach           = 5,
+    // shared
+    NPC_Bowser_Body     = 0,
+    NPC_Bowser_Prop     = 1,
+    // chapter 8
+    NPC_CaptivePeach    = 2,
+    // intro
+    NPC_Koopatrol_01    = 2,
+    NPC_Koopatrol_02    = 3,
+    NPC_Kammy           = 4,
+    NPC_Peach           = 5,
 };
 
 #define NAMESPACE kkj_13

@@ -4,15 +4,7 @@
 
 #include "world/common/npc/Bowser.inc.c"
 #include "world/common/npc/Dummy.inc.c"
-
-NpcSettings N(NpcSettings_Kammy) = {
-    .height = 40,
-    .radius = 30,
-    .level = 26,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
+#include "world/common/enemy/complete/Kammy.inc.c"
 #include "world/common/enemy/complete/Koopatrol_Stationary.inc.c"
 #include "world/common/npc/Peach.inc.c"
 
@@ -152,24 +144,7 @@ StaticNpc N(NpcData_Characters)[] = {
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-        .animations = {
-            .idle   = ANIM_WorldKammy_Anim01,
-            .walk   = ANIM_WorldKammy_Anim02,
-            .run    = ANIM_WorldKammy_Anim03,
-            .chase  = ANIM_WorldKammy_Anim03,
-            .anim_4 = ANIM_WorldKammy_Anim01,
-            .anim_5 = ANIM_WorldKammy_Anim01,
-            .death  = ANIM_WorldKammy_Anim00,
-            .hit    = ANIM_WorldKammy_Anim00,
-            .anim_8 = ANIM_WorldKammy_Anim03,
-            .anim_9 = ANIM_WorldKammy_Anim03,
-            .anim_A = ANIM_WorldKammy_Anim03,
-            .anim_B = ANIM_WorldKammy_Anim03,
-            .anim_C = ANIM_WorldKammy_Anim03,
-            .anim_D = ANIM_WorldKammy_Anim03,
-            .anim_E = ANIM_WorldKammy_Anim03,
-            .anim_F = ANIM_WorldKammy_Anim03,
-        },
+        .animations = KAMMY_ANIMS,
         .extraAnimations = N(ExtraAnims_Kammy),
     },
     {

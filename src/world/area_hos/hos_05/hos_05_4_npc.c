@@ -13,13 +13,7 @@ API_CALLABLE(N(UnlockStarBeam)) {
 #include "world/common/npc/StarSpirit.inc.c"
 #include "world/common/npc/Bowser.inc.c"
 
-NpcSettings N(NpcSettings_Kammy) = {
-    .height = 34,
-    .radius = 24,
-    .level = 26,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
+#include "world/common/enemy/complete/Kammy_Flying.inc.c"
 
 #include "world/common/npc/StarRod.inc.c"
 
@@ -523,7 +517,7 @@ StaticNpc N(NpcData_Thieves)[] = {
     },
     {
         .id = NPC_Kammy,
-        .settings = &N(NpcSettings_Kammy),
+        .settings = &N(NpcSettings_Kammy_Flying),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
@@ -532,24 +526,7 @@ StaticNpc N(NpcData_Thieves)[] = {
             .heartDrops  = NO_DROPS,
             .flowerDrops = NO_DROPS,
         },
-        .animations = {
-            .idle   = ANIM_WorldKammy_Anim01,
-            .walk   = ANIM_WorldKammy_Anim02,
-            .run    = ANIM_WorldKammy_Anim03,
-            .chase  = ANIM_WorldKammy_Anim03,
-            .anim_4 = ANIM_WorldKammy_Anim01,
-            .anim_5 = ANIM_WorldKammy_Anim01,
-            .death  = ANIM_WorldKammy_Anim00,
-            .hit    = ANIM_WorldKammy_Anim00,
-            .anim_8 = ANIM_WorldKammy_Anim03,
-            .anim_9 = ANIM_WorldKammy_Anim03,
-            .anim_A = ANIM_WorldKammy_Anim03,
-            .anim_B = ANIM_WorldKammy_Anim03,
-            .anim_C = ANIM_WorldKammy_Anim03,
-            .anim_D = ANIM_WorldKammy_Anim03,
-            .anim_E = ANIM_WorldKammy_Anim03,
-            .anim_F = ANIM_WorldKammy_Anim03,
-        },
+        .animations = KAMMY_ANIMS,
         .extraAnimations = N(ExtraAnims_Kammy),
     },
     {

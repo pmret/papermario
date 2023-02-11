@@ -15,10 +15,10 @@
 #include "sprite/npc/Twink.h"
 
 enum {
-	NPC_Bowser          = 0,
-	NPC_Koopatrol_01    = 1,
-	NPC_Koopatrol_02    = 2,
-	NPC_HammerBros      = 3,
+    NPC_Bowser          = 0,
+    NPC_Koopatrol_01    = 1,
+    NPC_Koopatrol_02    = 2,
+    NPC_HammerBros      = 3,
 };
 
 #define NAMESPACE kkj_29

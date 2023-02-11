@@ -10,9 +10,9 @@
 #include "mapfs/kkj_12_hit.h"
 
 enum {
-	NPC_Koopatrol_01    = 0,
-	NPC_Koopatrol_02    = 1,
-	NPC_Clubba          = 2,
+    NPC_Koopatrol_01    = 0,
+    NPC_Koopatrol_02    = 1,
+    NPC_Clubba          = 2,
 };
 
 #define NAMESPACE kkj_12

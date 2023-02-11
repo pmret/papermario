@@ -1,14 +1,6 @@
 #include "osr_03.h"
 
-#include "world/common/enemy/complete/Kammy.h"
-
-NpcSettings N(NpcSettings_Kammy) = {
-    .height = 40,
-    .radius = 30,
-    .level = 26,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
+#include "world/common/enemy/complete/Kammy.inc.c"
 
 s32 N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim09,

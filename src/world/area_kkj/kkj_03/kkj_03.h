@@ -10,7 +10,7 @@
 #include "mapfs/kkj_03_hit.h"
 
 enum {
-	NPC_Peach   = 0,
+    NPC_Peach   = 0,
 };
 
 #define NAMESPACE kkj_03

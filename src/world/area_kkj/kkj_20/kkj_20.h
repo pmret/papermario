@@ -13,7 +13,7 @@
 #include "sprite/npc/Twink.h"
 
 enum {
-	NPC_Toad	= 0,
+    NPC_Toad    = 0,
 };
 
 #define NAMESPACE kkj_20

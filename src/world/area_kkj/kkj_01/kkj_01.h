@@ -10,17 +10,17 @@
 #include "mapfs/kkj_01_hit.h"
 
 enum {
-	NPC_ToadMinister  		= 0,
-	NPC_Toad_01       		= 1,
-	NPC_Toad_02       		= 2,
-	NPC_Toad_03       		= 3,
-	NPC_Toadette      		= 4,
-	NPC_ToadGuard_01  		= 5,
-	NPC_ToadGuard_02  		= 6,
-	NPC_Dryite        		= 7,
-	NPC_Mouser        		= 8,
-	NPC_MayorPenguin  		= 9,
-	NPC_Koopa         		= 10,
+    NPC_ToadMinister        = 0,
+    NPC_Toad_01             = 1,
+    NPC_Toad_02             = 2,
+    NPC_Toad_03             = 3,
+    NPC_Toadette            = 4,
+    NPC_ToadGuard_01        = 5,
+    NPC_ToadGuard_02        = 6,
+    NPC_Dryite              = 7,
+    NPC_Mouser              = 8,
+    NPC_MayorPenguin        = 9,
+    NPC_Koopa               = 10,
 };
 
 #define NAMESPACE kkj_01

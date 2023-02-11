@@ -31,30 +31,7 @@ API_CALLABLE(N(func_80242014_8B2084)) {
 
 #include "world/common/npc/GoombaFamily_Wander.inc.c"
 #include "world/common/npc/GoombaFamily.inc.c"
-
-#include "world/common/enemy/complete/Kammy.h"
-
-GuardAISettings N(AISettings_Kammy) = {
-    .playerSearchInterval = -1,
-    .chaseRadius = 300.0f,
-    .unk_AI_20 = 30,
-};
-
-EvtScript N(EVS_NpcAI_Kammy) = {
-    EVT_CALL(N(GuardAI_Main), EVT_PTR(N(AISettings_Kammy)))
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_Kammy) = {
-    .height = 40,
-    .radius = 30,
-    .level = 26,
-    .ai = &N(EVS_NpcAI_Kammy),
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
+#include "world/common/enemy/complete/Kammy_Guard.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
 
 MAP_STATIC_PAD(1,key_choice);
@@ -1945,7 +1922,7 @@ s32 N(ExtraAnims_Kammy)[] = {
 
 StaticNpc N(NpcData_Kammy) = {
     .id = NPC_Kammy,
-    .settings = &N(NpcSettings_Kammy),
+    .settings = &N(NpcSettings_Kammy_Guard),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800,

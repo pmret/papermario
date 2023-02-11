@@ -3007,33 +3007,33 @@ enum PeachStatusFlags {
     PEACH_STATUS_FLAG_HAS_INGREDIENT    = 0x10
 };
 
-enum CookingIngredients {
-    PEACH_COOKING_NONE              = 0x00,
-    PEACH_COOKING_CREAM             = 0x01,
-    PEACH_COOKING_STRAWBERRY        = 0x02,
-    PEACH_COOKING_BUTTER            = 0x03,
-    PEACH_COOKING_CLEANSER          = 0x04,
-    PEACH_COOKING_WATER             = 0x05,
-    PEACH_COOKING_MILK              = 0x06,
-    PEACH_COOKING_FLOUR             = 0x07,
-    PEACH_COOKING_EGG               = 0x08,
-    PEACH_COOKING_COMPLETE_CAKE     = 0x09,
-    PEACH_COOKING_CAKE_BOWL         = 0x0A,
-    PEACH_COOKING_CAKE_MIXED        = 0x0B,
-    PEACH_COOKING_CAKE_PAN          = 0x0C,
-    PEACH_COOKING_CAKE_BATTER       = 0x0D,
-    PEACH_COOKING_CAKE_BARE         = 0x0E,
-    PEACH_COOKING_SALT              = 0x0F,
-    PEACH_COOKING_SUGAR             = 0x10,
-    PEACH_COOKING_CAKE_WITH_ICING   = 0x11,
-    PEACH_COOKING_CAKE_WITH_BERRIES = 0x12,
+enum PeachBakingItems {
+    PEACH_BAKING_NONE                   = 0,
+    PEACH_BAKING_CREAM                  = 1,
+    PEACH_BAKING_STRAWBERRY             = 2,
+    PEACH_BAKING_BUTTER                 = 3,
+    PEACH_BAKING_CLEANSER               = 4,
+    PEACH_BAKING_WATER                  = 5,
+    PEACH_BAKING_MILK                   = 6,
+    PEACH_BAKING_FLOUR                  = 7,
+    PEACH_BAKING_EGG                    = 8,
+    PEACH_BAKING_COMPLETE_CAKE          = 9,
+    PEACH_BAKING_CAKE_BOWL              = 10,
+    PEACH_BAKING_CAKE_MIXED             = 11,
+    PEACH_BAKING_CAKE_PAN               = 12,
+    PEACH_BAKING_CAKE_BATTER            = 13,
+    PEACH_BAKING_CAKE_BARE              = 14,
+    PEACH_BAKING_SALT                   = 15,
+    PEACH_BAKING_SUGAR                  = 16,
+    PEACH_BAKING_CAKE_WITH_ICING        = 17,
+    PEACH_BAKING_CAKE_WITH_BERRIES      = 18,
 };
 
 enum PeachDisguises {
-    PEACH_DISGUISE_NONE         = 0,
-    PEACH_DISGUISE_KOOPATROL    = 1,
-    PEACH_DISGUISE_HAMMER_BROS  = 2,
-    PEACH_DISGUISE_CLUBBA       = 3,
+    PEACH_DISGUISE_NONE                 = 0,
+    PEACH_DISGUISE_KOOPATROL            = 1,
+    PEACH_DISGUISE_HAMMER_BROS          = 2,
+    PEACH_DISGUISE_CLUBBA               = 3,
 };
 
 // Requires decimals
@@ -5872,8 +5872,8 @@ enum WindowId {
     WINDOW_ID_7 = 7,
     WINDOW_ID_8 = 8,
     WINDOW_ID_9 = 9,
-    WINDOW_ID_10 = 10,
-    WINDOW_ID_11 = 11,
+    WINDOW_ID_ITEM_INFO_NAME = 10,
+    WINDOW_ID_ITEM_INFO_DESC = 11,
     WINDOW_ID_12 = 12,
     WINDOW_ID_13 = 13,
     WINDOW_ID_14 = 14,

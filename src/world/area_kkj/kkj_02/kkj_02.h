@@ -10,8 +10,8 @@
 #include "mapfs/kkj_02_hit.h"
 
 enum {
-	NPC_Toad         	= 0,
-	NPC_ToadGuard    	= 1,
+    NPC_Toad            = 0,
+    NPC_ToadGuard       = 1,
 };
 
 #define NAMESPACE kkj_02
