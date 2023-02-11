@@ -98,6 +98,9 @@ heap_battleHead = D_803DA800;
 
 D_804DC500 = 0x804DC500;
 
+world_battle_vram_end = battle_code_VRAM_END;
+world_battle_vram_end = MAX(world_battle_vram_end, world_script_api_VRAM_END);
+
 // boot
 D_A0000000 = 0xA0000000;
 D_A4000000 = 0xA4000000;

@@ -9351,7 +9351,7 @@ segments:
     type: code
     start: 0x7E73A0
     vram: 0x8028E000
-    follows_vram: world_script_api
+    vram_of_symbol: world_battle_vram_end
     subsegments:
     - [0x7E73A0, c, texture_memory]
 

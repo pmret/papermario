@@ -1198,4 +1198,4 @@ EvtScript world_lakilester_while_riding = {
     EVT_END
 };
 
-//MATCHING_BSS(0xB0);
+MATCHING_BSS(0xB0);

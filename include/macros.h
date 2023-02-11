@@ -6,13 +6,13 @@
 
 #ifndef M2CTX
 
-#ifndef SHIFT
+#ifdef SHIFT
 #define SHIFT_BSS __attribute__ ((section (".bss")))
 #else
 #define SHIFT_BSS extern
 #endif
 
-#ifndef SHIFT
+#ifdef SHIFT
 #define MATCHING_BSS(size)
 #else
 #define MATCHING_BSS(size) static BSS u8 padding_bss[size];

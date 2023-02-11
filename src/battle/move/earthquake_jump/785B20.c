@@ -9,4 +9,4 @@ ApiStatus func_802A10E4_785C04(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-//MATCHING_BSS(0x3CC0);
+MATCHING_BSS(0x3CC0);

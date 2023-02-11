@@ -79,8 +79,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     if shift:
         ninja.rule("ld",
             description="link($version) $out",
-            command=f"{cross}ld --defsym entity_data_vram_end=0x80000000 {ld_args} && \
-                      {cross}ld --defsym entity_data_vram_end=$$(tools/build/ld/calc_sym_addr.py $version) {ld_args}",
+            command=f"{cross}ld $$(tools/build/ld/multilink_calc.py $version hardcode) {ld_args} && \
+                      {cross}ld $$(tools/build/ld/multilink_calc.py $version calc) {ld_args}",
         )
     else:
         ninja.rule("ld",

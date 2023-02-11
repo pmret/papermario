@@ -469,5 +469,4 @@ EvtScript BaseEnterDoor = {
 	EVT_END
 };
 
-//MATCHING_BSS(0x7AB0);
-MATCHING_BSS(0x63B1);
+MATCHING_BSS(0x7AB0);
