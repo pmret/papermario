@@ -11,7 +11,6 @@ API_CALLABLE(N(UnlockStarBeam)) {
 }
 
 #include "world/common/npc/StarSpirit.inc.c"
-
 #include "world/common/npc/Bowser.inc.c"
 
 NpcSettings N(NpcSettings_Kammy) = {

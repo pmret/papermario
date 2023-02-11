@@ -8,11 +8,11 @@ enum {
     AB_KKJ_Unused_3     = AreaByte(3),
     AB_KKJ_Unused_4     = AreaByte(4),
     AB_KKJ_Unused_5     = AreaByte(5),
-    AB_KKJ_Unused_6     = AreaByte(6),
-    AB_KKJ_Unused_7     = AreaByte(7),
-    AB_KKJ_Unused_8     = AreaByte(8),
-    AB_KKJ_Unused_9     = AreaByte(9),
-    AB_KKJ_Unused_A     = AreaByte(10),
+    AB_KKJ29_AnsweringContestant    = AreaByte(6),
+    AB_KKJ29_AnswerScore            = AreaByte(7),
+    AB_KKJ29_LeftKoopatrolScore     = AreaByte(8),
+    AB_KKJ29_PeachScore             = AreaByte(9),
+    AB_KKJ29_RightKoopatrolScore    = AreaByte(10),
     AB_KKJ_Unused_B     = AreaByte(11),
     AB_KKJ_Unused_C     = AreaByte(12),
     AB_KKJ_Unused_D     = AreaByte(13),
@@ -23,6 +23,7 @@ enum {
 enum {
     AF_KKJ_01   = AreaFlag(1),
     AF_KKJ_02   = AreaFlag(2),
+    AF_KKJ_06   = AreaFlag(6),
     AF_KKJ_07   = AreaFlag(7),
 };
 

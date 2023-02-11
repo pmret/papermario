@@ -31,7 +31,7 @@ enum {
 
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_ManageSneakingScenes);
-extern EvtScript N(EVS_EndPeachChapter3);
+extern EvtScript N(EVS_EndPeachChapter2);
 extern EvtScript N(EVS_MakeEntities);
 
 extern NpcGroupList N(EarlyNPCs);

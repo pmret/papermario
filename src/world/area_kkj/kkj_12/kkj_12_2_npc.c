@@ -3,12 +3,7 @@
 #include "../common/Searchlights.inc.c"
 
 #include "world/common/todo/GetPeachDisguise.inc.c"
-
-API_CALLABLE(N(func_80240714_AD47A4)) {
-    gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_8;
-    return ApiStatus_DONE2;
-}
-
+#include "../common/SetPeachFlag8.inc.c"
 #include "../common/ApproachPlayer100Units.inc.c"
 
 API_CALLABLE(N(DisableLightSource1)) {
@@ -116,9 +111,9 @@ EvtScript N(EVS_NpcInteract_Koopatrol_02) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcAI_Searchlight) = {
+EvtScript N(EVS_CapturePeach) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(func_80240714_AD47A4))
+    EVT_CALL(N(SetPeachFlag8))
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_262, 0)
@@ -157,7 +152,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_01) = {
                 EVT_IF_EQ(LVar1, PEACH_DISGUISE_NONE)
                     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 1)
                     EVT_IF_NE(LVar0, 0)
-                        EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Searchlight)))
+                        EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_CapturePeach)))
                         EVT_SET(LVar2, 1)
                     EVT_END_IF
                 EVT_ELSE
@@ -190,7 +185,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_02) = {
                 EVT_IF_EQ(LVar1, PEACH_DISGUISE_NONE)
                     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 1)
                     EVT_IF_NE(LVar0, 0)
-                        EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Searchlight)))
+                        EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_CapturePeach)))
                         EVT_SET(LVar2, 1)
                     EVT_END_IF
                 EVT_ELSE

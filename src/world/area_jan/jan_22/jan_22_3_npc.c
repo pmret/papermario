@@ -1079,9 +1079,9 @@ EvtScript N(EVS_NpcIdle_SpearGuy) = {
         EVT_IF_EQ(LVar9, 0)
             EVT_THREAD
                 EVT_WAIT(40)
-                EVT_CALL(ShowSweat, 0, 1, -45, 1, 0, 0, 0, 0, 20)
+                EVT_CALL(ShowSweat, NPC_Kolorado_01, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
             EVT_END_THREAD
-            EVT_CALL(ShowSweat, 0, 1, 45, 1, 0, 0, 0, 0, 20)
+            EVT_CALL(ShowSweat, NPC_Kolorado_01, 1, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
             EVT_SET(LVar9, 3)
         EVT_ELSE
             EVT_SUB(LVar9, 1)

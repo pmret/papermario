@@ -117,7 +117,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     EVT_CALL(SetSelfVar, 0, 1)
     EVT_THREAD
         EVT_LABEL(3)
-        EVT_CALL(ShowSweat, NPC_SELF, 1, -45, 1, 0, 0, 0, 0, 20)
+        EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
         EVT_CALL(GetSelfVar, 0, LVar0)
         EVT_IF_EQ(LVar0, 1)
             EVT_WAIT(25)

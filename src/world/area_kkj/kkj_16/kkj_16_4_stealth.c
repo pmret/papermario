@@ -267,7 +267,7 @@ EvtScript N(EVS_ManageSneakingScenes) = {
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_CALL(FadeOutMusic, 0, 1000)
-    EVT_EXEC_WAIT(N(EVS_EndPeachChapter3))
+    EVT_EXEC_WAIT(N(EVS_EndPeachChapter2))
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)

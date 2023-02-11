@@ -21,19 +21,14 @@ s32 N(ExtraAnims_Koopatrol)[] = {
 
 #include "../common/Searchlights.inc.c"
 #include "world/common/todo/GetPeachDisguise.inc.c"
-
-API_CALLABLE(N(func_80240F44_ACBA64)) {
-    gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_8;
-    return ApiStatus_DONE2;
-}
-
+#include "../common/SetPeachFlag8.inc.c"
 #include "../common/ApproachPlayer100Units.inc.c"
 
 EvtScript N(EVS_CapturePeach) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    EVT_CALL(N(func_80240F44_ACBA64))
+    EVT_CALL(N(SetPeachFlag8))
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_262, 0)
     EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, TRUE, 0, 0, 0, 0)
     EVT_CALL(NpcFacePlayer, NPC_SELF, 5)
@@ -67,7 +62,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_01) = {
             EVT_CALL(N(UpdateSearchlight), LVar0, 100, 90, 0, 40, 130, 0)
             EVT_IF_EQ(LVar2, 0)
                 EVT_CALL(N(GetPeachDisguise), LVar1)
-                EVT_IF_EQ(LVar1, 0)
+                EVT_IF_EQ(LVar1, PEACH_DISGUISE_NONE)
                     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 1)
                     EVT_IF_NE(LVar0, 0)
                         EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_CapturePeach)))
@@ -106,7 +101,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_02) = {
             EVT_CALL(N(UpdateSearchlight), LVar0, 100, 90, 0, 40, 131, 1)
             EVT_IF_EQ(LVar2, 0)
                 EVT_CALL(N(GetPeachDisguise), LVar1)
-                EVT_IF_EQ(LVar1, 0)
+                EVT_IF_EQ(LVar1, PEACH_DISGUISE_NONE)
                     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 0)
                     EVT_IF_NE(LVar0, 0)
                         EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_CapturePeach)))
@@ -157,7 +152,7 @@ EvtScript N(EVS_NpcInteract_Koopatrol_01) = {
 EvtScript N(EVS_NpcInteract_Koopatrol_02) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(N(GetPeachDisguise), LVar0)
-    EVT_IF_EQ(LVar0, 3)
+    EVT_IF_EQ(LVar0, PEACH_DISGUISE_CLUBBA)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim09, ANIM_WorldKoopatrol_Anim02, 5, MSG_Peach_0140)
     EVT_ELSE
         EVT_CALL(GetSelfVar, 0, LVar0)

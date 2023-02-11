@@ -570,7 +570,7 @@ MapConfig kkj_maps[] = {
     { MAP(kkj_02), .bgName = "nok_bg", .sfxReverb = 2 },
     { MAP_WITH_INIT(kkj_03), .bgName = "nok_bg", .sfxReverb = 3 },
     { MAP(kkj_10), .songVariation = 1, .sfxReverb = 3 },
-    { MAP_UNSPLIT(kkj_11, 0x80241160), .songVariation = 1, .sfxReverb = 3 },
+    { MAP(kkj_11), .songVariation = 1, .sfxReverb = 3 },
     { MAP(kkj_12), .songVariation = 1, .sfxReverb = 2 },
     { MAP_WITH_INIT(kkj_13), .bgName = "kpa_bg",  .songVariation = 1, .sfxReverb = 3},
     { MAP_UNSPLIT(kkj_14, 0x80240580), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
@@ -582,14 +582,14 @@ MapConfig kkj_maps[] = {
     { MAP(kkj_20) },
     { MAP(kkj_21), .sfxReverb = 1 },
     { MAP(kkj_22), .bgName = "kpa_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(kkj_23, 0x802409F0), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(kkj_23), .bgName = "kpa_bg" },
     { MAP(kkj_24), .bgName = "kpa_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_UNSPLIT(kkj_25, 0x80240F50), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
     { MAP(kkj_26), .bgName = "kpa_bg" },
-    { MAP_UNSPLIT(kkj_26, 0x80240070), .sfxReverb = 2 },
+    { MAP(kkj_26), .sfxReverb = 2 },
     { MAP(kkj_27), .sfxReverb = 1 },
     { MAP(kkj_28), .sfxReverb = 1 },
-    { MAP_UNSPLIT(kkj_29, 0x80240080), .sfxReverb = 1 },
+    { MAP(kkj_29), .sfxReverb = 1 },
 };
 
 /// Jade Jungle

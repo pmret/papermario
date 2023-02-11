@@ -1894,7 +1894,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_02) = {
 
 EvtScript N(EVS_NpcAI_ShyGuy_02) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowSweat, -1, 1, -45, 1, 0, 0, 0, 0, 20)
+    EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim0C)
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_SELF, LVar0, 36, LVar2, 10)
@@ -1919,7 +1919,7 @@ EvtScript N(EVS_NpcAI_ShyGuy_02) = {
         EVT_END_LOOP
         EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit2u, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
-    EVT_CALL(ShowSweat, -1, 1, -45, 1, 0, 0, 0, 0, 20)
+    EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
     EVT_SET(LVar0, -1)
     EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_203F, SOUND_SPACE_MODE_0)
     EVT_EXEC_GET_TID(N(D_8024E6F8_80EF78), LVarA)

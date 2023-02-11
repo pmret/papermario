@@ -205,7 +205,7 @@ EvtScript N(EVS_Raven4_MoveToMeetingPos) = {
 
 EvtScript N(EVS_Raven5_Sweat) = {
     EVT_LABEL(0)
-        EVT_CALL(ShowSweat, NPC_Raven_05, 1, -45, 1, 0, 0, 0, 0, 20)
+        EVT_CALL(ShowSweat, NPC_Raven_05, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
         EVT_WAIT(8)
         EVT_GOTO(0)
     EVT_RETURN

@@ -3030,10 +3030,10 @@ enum CookingIngredients {
 };
 
 enum PeachDisguises {
-    PEACH_DISGUISE_NONE     = 0,
-    PEACH_DISGUISE_KOOPATROL        = 1,
-    PEACH_DISGUISE_HAMMER_BROS        = 2,
-    PEACH_DISGUISE_CLUBBA   = 3,
+    PEACH_DISGUISE_NONE         = 0,
+    PEACH_DISGUISE_KOOPATROL    = 1,
+    PEACH_DISGUISE_HAMMER_BROS  = 2,
+    PEACH_DISGUISE_CLUBBA       = 3,
 };
 
 // Requires decimals

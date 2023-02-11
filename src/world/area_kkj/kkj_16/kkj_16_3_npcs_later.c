@@ -20,12 +20,7 @@ s32 N(ExtraAnims_HammerBros)[] = {
 
 #include "../common/Searchlights.inc.c"
 #include "world/common/todo/GetPeachDisguise.inc.c"
-
-API_CALLABLE(N(func_80240EF4_AEE304)) {
-    gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_8;
-    return ApiStatus_DONE2;
-}
-
+#include "../common/SetPeachFlag8.inc.c"
 #include "../common/ApproachPlayer50Units.inc.c"
 
 EvtScript N(EVS_NpcInteract_HammerBros_01) = {
@@ -72,7 +67,7 @@ EvtScript N(EVS_NpcInteract_HammerBros_03) = {
 
 EvtScript N(EVS_CapturePeach) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(func_80240EF4_AEE304))
+    EVT_CALL(N(SetPeachFlag8))
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_262, 0)

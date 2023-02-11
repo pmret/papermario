@@ -3,7 +3,7 @@
 #include "../common/RestoreFromPeachState.inc.c"
 #include "../common/SetAvailableDisguise.inc.c"
 
-EvtScript N(EVS_EndPeachChapter3) = {
+EvtScript N(EVS_EndPeachChapter2) = {
     EVT_SET(LVar0, GB_KKJ_LastPartner)
     EVT_CALL(N(RestoreFromPeachState))
     EVT_CALL(PlaySound, SOUND_DC)

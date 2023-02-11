@@ -28,9 +28,9 @@ EvtScript N(EVS_NpcAI_ShyGuy_03) = {
     EVT_CALL(NpcFacePlayer, NPC_ShyGuy_02, 0)
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_ShyGuy_02, ANIM_ShyGuy_Red_Anim11, ANIM_ShyGuy_Red_Anim01, 0, MSG_MAC_Gate_0002)
-    EVT_CALL(ShowSweat, 22, 1, 45, 1, 0, 0, 0, 0, 20)
+    EVT_CALL(ShowSweat, NPC_ShyGuy_02, 1, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
     EVT_WAIT(10)
-    EVT_CALL(ShowSweat, 22, 1, 45, 1, 0, 0, 0, 0, 20)
+    EVT_CALL(ShowSweat, NPC_ShyGuy_02, 1, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(SetPlayerSpeed, EVT_FLOAT(2.0))
