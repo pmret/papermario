@@ -60,7 +60,7 @@ void reset_player_status(void) {
     playerStatus->alpha1 = 255;
     playerStatus->alpha2 = 255;
     gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_8;
-    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_HAS_INGREDIENT;
+    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_DEPRESSED;
 
     one = 1.0f;
 

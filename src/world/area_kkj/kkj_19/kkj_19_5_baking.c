@@ -379,7 +379,7 @@ EvtScript N(EVS_TakeIngredient) = {
             EVT_RETURN
     EVT_END_SWITCH
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(AF_KKJ19_CanCheckIngredients, FALSE)
+    EVT_SET(AF_KKJ19_CanTakeIngredients, FALSE)
     EVT_WAIT(5)
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarB, LVar0)
@@ -473,7 +473,7 @@ EvtScript N(EVS_TakeIngredient) = {
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
-    EVT_SET(AF_KKJ19_CanCheckIngredients, TRUE)
+    EVT_SET(AF_KKJ19_CanTakeIngredients, TRUE)
     EVT_WAIT(5)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
@@ -972,7 +972,7 @@ EvtScript N(EVS_ManageBaking) = {
     EVT_LABEL(LBL_ADD_SUGAR_EGGS)
     EVT_SET(AB_KKJ19_CurrentBakeStep, BAKE_STEP_ADD_SUGAR_AND_EGGS)
     EVT_SET(AB_KKJ19_BakeStepProgress, 0)
-    EVT_SET(AF_KKJ19_CanCheckIngredients, TRUE)
+    EVT_SET(AF_KKJ19_CanTakeIngredients, TRUE)
     EVT_SET(AF_KKJ19_AddedSugar, FALSE)
     EVT_SET(AF_KKJ19_AddedEgg, FALSE)
     EVT_SET(AF_KKJ19_AddedNothingWrong, TRUE)
@@ -1052,7 +1052,7 @@ EvtScript N(EVS_ManageBaking) = {
     EVT_LABEL(LBL_MIX_RESUME)
     EVT_SET(AB_KKJ19_CurrentBakeStep, BAKE_STEP_MIXING)
     EVT_SET(AB_KKJ19_BakeStepProgress, 0)
-    EVT_SET(AF_KKJ19_CanCheckIngredients, FALSE)
+    EVT_SET(AF_KKJ19_CanTakeIngredients, FALSE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetPlayerSpeed, EVT_FLOAT(2.0))
     EVT_CALL(PlayerMoveTo, LVar0, -74, 0)
@@ -1118,7 +1118,7 @@ EvtScript N(EVS_ManageBaking) = {
     EVT_LABEL(LBL_ADD_FLOUR_BUTTER_RESUME)
     EVT_SET(AB_KKJ19_CurrentBakeStep, BAKE_STEP_ADD_FLOUR_AND_BUTTER)
     EVT_SET(AB_KKJ19_BakeStepProgress, 0)
-    EVT_SET(AF_KKJ19_CanCheckIngredients, TRUE)
+    EVT_SET(AF_KKJ19_CanTakeIngredients, TRUE)
     EVT_SET(AF_KKJ19_AddedFlour, FALSE)
     EVT_SET(AF_KKJ19_AddedButter, FALSE)
     EVT_SET(AF_KKJ19_AddedNothingWrong, TRUE)
@@ -1189,7 +1189,7 @@ EvtScript N(EVS_ManageBaking) = {
     // resume failed step from here
     EVT_LABEL(LBL_BAKE_RESUME)
     EVT_SET(AB_KKJ19_CurrentBakeStep, BAKE_STEP_BAKING)
-    EVT_SET(AF_KKJ19_CanCheckIngredients, FALSE)
+    EVT_SET(AF_KKJ19_CanTakeIngredients, FALSE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetPlayerSpeed, EVT_FLOAT(2.0))
     EVT_CALL(PlayerMoveTo, LVar0, -74, 0)
@@ -1335,7 +1335,7 @@ EvtScript N(EVS_ManageBaking) = {
     EVT_LABEL(LBL_DECORATE_RESUME)
     EVT_SET(AB_KKJ19_CurrentBakeStep, BAKE_STEP_DECORATING)
     EVT_SET(AB_KKJ19_BakeStepProgress, 0)
-    EVT_SET(AF_KKJ19_CanCheckIngredients, TRUE)
+    EVT_SET(AF_KKJ19_CanTakeIngredients, TRUE)
     EVT_SET(AB_KKJ19_AddedIcing, FALSE)
     EVT_SET(AB_KKJ19_AddedBerries, FALSE)
     // wait for peach to tell twink shes done
@@ -1393,7 +1393,7 @@ EvtScript N(EVS_ManageBaking) = {
     // cake ready for gourmet guy (but not necessarily succcesful)
     EVT_LABEL(LBL_FINISHED)
     EVT_SET(AB_KKJ19_CurrentBakeStep, BAKE_STEP_DONE)
-    EVT_SET(AF_KKJ19_CanCheckIngredients, FALSE)
+    EVT_SET(AF_KKJ19_CanTakeIngredients, FALSE)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
     EVT_EXEC(N(EVS_BindCakePickup))
     EVT_CALL(EnablePartnerAI)

@@ -33,6 +33,9 @@ enum {
 enum {
     AF_KKJ_01   = AreaFlag(1),
     AF_KKJ_02   = AreaFlag(2),
+    AF_KKJ_03   = AreaFlag(3),
+    AF_KKJ_04   = AreaFlag(4),
+    AF_KKJ_05   = AreaFlag(5),
     AF_KKJ_06   = AreaFlag(6),
     AF_KKJ_07   = AreaFlag(7),
     AF_KKJ19_FailedBakingTask   = AreaFlag(9),
@@ -44,7 +47,13 @@ enum {
     AB_KKJ19_AddedIcing         = AreaFlag(15),
     AB_KKJ19_AddedBerries       = AreaFlag(16),
     AF_KKJ_FinishedBakingCake   = AreaFlag(17),
-    AF_KKJ19_CanCheckIngredients    = AreaFlag(18),
+    AF_KKJ19_CanTakeIngredients = AreaFlag(18),
+    AF_KKJ_13                   = AreaFlag(19),
+    AF_KKJ_14                   = AreaFlag(20),
+    AF_KKJ_15                   = AreaFlag(21),
+    AF_KKJ_17                   = AreaFlag(23),
+    AF_KKJ_18                   = AreaFlag(24),
+    AF_KKJ_19                   = AreaFlag(25),
 };
 
 extern MapSettings kkj_00_settings;

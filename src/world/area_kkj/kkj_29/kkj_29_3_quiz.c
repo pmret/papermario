@@ -1145,7 +1145,7 @@ EvtScript N(EVS_ManageQuizGame) = {
         EVT_CALL(SetNpcSpeed, NPC_Koopatrol_02, EVT_FLOAT(2.0))
         EVT_CALL(NpcMoveTo, NPC_Koopatrol_02, 0, -140, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Koopatrol_02, NPC_FLAG_GRAVITY, FALSE)
-        EVT_CALL(SetNpcPos, NPC_Koopatrol_02, 0, -1000, 0)
+        EVT_CALL(SetNpcPos, NPC_Koopatrol_02, NPC_DISPOSE_LOCATION)
     EVT_END_THREAD
     EVT_LOOP(0)
         EVT_WAIT(1)

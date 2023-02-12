@@ -28,7 +28,7 @@ API_CALLABLE(N(TryOpenIngredientWindows)) {
     s32 canCheck;
 
     N(IngredientWindowsIndex) = evt_get_variable(script, *args++);
-    canCheck = evt_get_variable(NULL, AF_KKJ19_CanCheckIngredients);
+    canCheck = evt_get_variable(NULL, AF_KKJ19_CanTakeIngredients);
 
     if (canCheck == TRUE) {
         N(IngredientWindowsOpen) = TRUE;

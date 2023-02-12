@@ -2998,13 +2998,12 @@ enum LandOnSwitchSubstate {
     LANDING_ON_SWITCH_SUBSTATE_2    = 2,
 };
 
-/* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
 enum PeachStatusFlags {
     PEACH_STATUS_FLAG_IS_PEACH          = 0x01,
     PEACH_STATUS_FLAG_DISGUISED         = 0x02,
     PEACH_STATUS_FLAG_HAS_PARASOL       = 0x04,
     PEACH_STATUS_FLAG_8                 = 0x08,
-    PEACH_STATUS_FLAG_HAS_INGREDIENT    = 0x10
+    PEACH_STATUS_FLAG_DEPRESSED         = 0x10
 };
 
 enum PeachBakingItems {
