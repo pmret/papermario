@@ -3,6 +3,175 @@
 #include "item_entity.h"
 #include "world/world.h"
 
+#if !defined(VERSION_JP)
+#define MSG_FullDesc_32 0
+#define MSG_ItemFullDesc_AutoJump 0
+#define MSG_ItemFullDesc_AutoMultibounce 0
+#define MSG_ItemFullDesc_AutoSmash 0
+#define MSG_ItemFullDesc_Berserker 0
+#define MSG_ItemFullDesc_CrazyHeart 0
+#define MSG_ItemFullDesc_EarthquakeJump 0
+#define MSG_ItemFullDesc_FlowerFanatic 0
+#define MSG_ItemFullDesc_ForestPass 0
+#define MSG_ItemFullDesc_HealthyHealthy 0
+#define MSG_ItemFullDesc_HustleDrink 0
+#define MSG_ItemFullDesc_InsecticideHerb 0
+#define MSG_ItemFullDesc_JumpCharge0 0
+#define MSG_ItemFullDesc_Kaiden 0
+#define MSG_ItemFullDesc_KootAltPhoto 0
+#define MSG_ItemFullDesc_KootShell 0
+#define MSG_ItemFullDesc_MegaHPDrain 0
+#define MSG_ItemFullDesc_MysteryScroll 0
+#define MSG_ItemFullDesc_PleaseComeBack 0
+#define MSG_ItemFullDesc_Screwdriver 0
+#define MSG_ItemFullDesc_ShellCrack 0
+#define MSG_ItemFullDesc_SmashCharge0 0
+#define MSG_ItemFullDesc_SuperFocus 0
+#define MSG_ItemFullDesc_SuperJump 0
+#define MSG_ItemFullDesc_SuperSmash 0
+#define MSG_ItemFullDesc_SuspiciousNote 0
+#define MSG_ItemFullDesc_ToadDoll 0
+#define MSG_ItemFullDesc_UnusedLetter 0
+#define MSG_ItemFullDesc_UnusedLetter02 0
+#define MSG_ItemFullDesc_UnusedLetter03 0
+#define MSG_ItemFullDesc_UnusedLetter04 0
+#define MSG_ItemFullDesc_UnusedLetter05 0
+#define MSG_ItemFullDesc_UnusedLetter06 0
+#define MSG_ItemName_Heart 0
+#define MSG_ItemName_Coin 0
+#define MSG_ItemName_HeartPiece 0
+#define MSG_ItemName_StarPoint 0
+#define MSG_ItemName_HeartPoint 0
+#define MSG_ItemName_FlowerPoint 0
+#define MSG_ItemName_Map 0
+#define MSG_ItemName_BigMap 0
+#define MSG_ItemName_AutoJump 0
+#define MSG_ItemName_AutoMultibounce 0
+#define MSG_ItemName_AutoSmash 0
+#define MSG_ItemName_Berserker 0
+#define MSG_ItemName_CrazyHeart 0
+#define MSG_ItemName_EarthquakeJump 0
+#define MSG_ItemName_FlowerFanatic 0
+#define MSG_ItemName_ForestPass 0
+#define MSG_ItemName_HealthyHealthy 0
+#define MSG_ItemName_HustleDrink 0
+#define MSG_ItemName_InsecticideHerb 0
+#define MSG_ItemName_JumpCharge0 0
+#define MSG_ItemName_Kaiden 0
+#define MSG_ItemName_KootAltPhoto 0
+#define MSG_ItemName_KootShell 0
+#define MSG_ItemName_MegaHPDrain 0
+#define MSG_ItemName_MysteryScroll 0
+#define MSG_ItemName_PleaseComeBack 0
+#define MSG_ItemName_Screwdriver 0
+#define MSG_ItemName_ShellCrack 0
+#define MSG_ItemName_SmashCharge0 0
+#define MSG_ItemName_SuperFocus 0
+#define MSG_ItemName_SuperJump 0
+#define MSG_ItemName_SuperSmash 0
+#define MSG_ItemName_SuspiciousNote 0
+#define MSG_ItemName_ToadDoll 0
+#define MSG_ItemName_UnusedLetter 0
+#define MSG_ItemName_UnusedLetter02 0
+#define MSG_ItemName_UnusedLetter03 0
+#define MSG_ItemName_UnusedLetter04 0
+#define MSG_ItemName_UnusedLetter05 0
+#define MSG_ItemName_UnusedLetter06 0
+#define MSG_ItemShortDesc_AutoJump 0
+#define MSG_ItemShortDesc_AutoMultibounce 0
+#define MSG_ItemShortDesc_AutoSmash 0
+#define MSG_ItemShortDesc_Berserker 0
+#define MSG_ItemShortDesc_CrazyHeart 0
+#define MSG_ItemShortDesc_EarthquakeJump 0
+#define MSG_ItemShortDesc_FlowerFanatic 0
+#define MSG_ItemShortDesc_ForestPass 0
+#define MSG_ItemShortDesc_HealthyHealthy 0
+#define MSG_ItemShortDesc_HustleDrink 0
+#define MSG_ItemShortDesc_InsecticideHerb 0
+#define MSG_ItemShortDesc_JumpCharge0 0
+#define MSG_ItemShortDesc_Kaiden 0
+#define MSG_ItemShortDesc_KootAltPhoto 0
+#define MSG_ItemShortDesc_KootShell 0
+#define MSG_ItemShortDesc_MegaHPDrain 0
+#define MSG_ItemShortDesc_MysteryScroll 0
+#define MSG_ItemShortDesc_PleaseComeBack 0
+#define MSG_ItemShortDesc_Screwdriver 0
+#define MSG_ItemShortDesc_ShellCrack 0
+#define MSG_ItemShortDesc_SmashCharge0 0
+#define MSG_ItemShortDesc_SuperFocus 0
+#define MSG_ItemShortDesc_SuperJump 0
+#define MSG_ItemShortDesc_SuperSmash 0
+#define MSG_ItemShortDesc_SuspiciousNote 0
+#define MSG_ItemShortDesc_ToadDoll 0
+#define MSG_ItemShortDesc_UnusedLetter 0
+#define MSG_ItemShortDesc_UnusedLetter02 0
+#define MSG_ItemShortDesc_UnusedLetter03 0
+#define MSG_ItemShortDesc_UnusedLetter04 0
+#define MSG_ItemShortDesc_UnusedLetter05 0
+#define MSG_ItemShortDesc_UnusedLetter06 0
+#define MSG_MoveName_32 0
+#define MSG_MoveName_AutoJump 0
+#define MSG_MoveName_AutoMultibounce 0
+#define MSG_MoveName_AutoSmash 0
+#define MSG_MoveName_Berserker 0
+#define MSG_MoveName_BumpAttack 0
+#define MSG_MoveName_CloseCall 0
+#define MSG_MoveName_CrazyHeart 0
+#define MSG_MoveName_DefendPlus 0
+#define MSG_MoveName_DizzyAttack 0
+#define MSG_MoveName_EarthquakeJump 0
+#define MSG_MoveName_FlowerFanatic 0
+#define MSG_MoveName_FlowerFinder 0
+#define MSG_MoveName_HealthyHealthy 0
+#define MSG_MoveName_HeartFinder 0
+#define MSG_MoveName_ISpy 0
+#define MSG_MoveName_JumpCharge0 0
+#define MSG_MoveName_LastStand 0
+#define MSG_MoveName_LuckyDay 0
+#define MSG_MoveName_MegaHPDrain 0
+#define MSG_MoveName_PowerRush 0
+#define MSG_MoveName_SmashCharge0 0
+#define MSG_MoveName_SpeedySpin 0
+#define MSG_MoveName_SpinAttack 0
+#define MSG_MoveName_SuperJump 0
+#define MSG_MoveName_SuperSmash 0
+#define MSG_PartnerDesc_Goombaria_Battle 0
+#define MSG_PartnerDesc_Goombaria_World 0
+#define MSG_PartnerDesc_Goompa_Battle 0
+#define MSG_PartnerDesc_Goompa_World 0
+#define MSG_PartnerDesc_Twink_Battle 0
+#define MSG_PartnerDesc_Twink_World 0
+#define MSG_ShortDesc_32 0
+#endif
+
+#if !defined(VERSION_JP)
+// Use generic names for the different levels of partner moves
+#define MSG_PartnerMoveName_BellyFlop1 MSG_PartnerMoveName_BellyFlop
+#define MSG_PartnerMoveName_BellyFlop2 MSG_PartnerMoveName_BellyFlop
+#define MSG_PartnerMoveName_BellyFlop3 MSG_PartnerMoveName_BellyFlop
+#define MSG_PartnerMoveName_BodySlam1 MSG_PartnerMoveName_BodySlam
+#define MSG_PartnerMoveName_BodySlam2 MSG_PartnerMoveName_BodySlam
+#define MSG_PartnerMoveName_BodySlam3 MSG_PartnerMoveName_BodySlam
+#define MSG_PartnerMoveName_ElectroDash1 MSG_PartnerMoveName_ElectroDash
+#define MSG_PartnerMoveName_ElectroDash2 MSG_PartnerMoveName_ElectroDash
+#define MSG_PartnerMoveName_ElectroDash3 MSG_PartnerMoveName_ElectroDash
+#define MSG_PartnerMoveName_Headbonk1 MSG_PartnerMoveName_Headbonk
+#define MSG_PartnerMoveName_Headbonk2 MSG_PartnerMoveName_Headbonk
+#define MSG_PartnerMoveName_Headbonk3 MSG_PartnerMoveName_Headbonk
+#define MSG_PartnerMoveName_ShellToss1 MSG_PartnerMoveName_ShellToss
+#define MSG_PartnerMoveName_ShellToss2 MSG_PartnerMoveName_ShellToss
+#define MSG_PartnerMoveName_ShellToss3 MSG_PartnerMoveName_ShellToss
+#define MSG_PartnerMoveName_SkyDive1 MSG_PartnerMoveName_SkyDive
+#define MSG_PartnerMoveName_SkyDive2 MSG_PartnerMoveName_SkyDive
+#define MSG_PartnerMoveName_SkyDive3 MSG_PartnerMoveName_SkyDive
+#define MSG_PartnerMoveName_Smack1 MSG_PartnerMoveName_Smack
+#define MSG_PartnerMoveName_Smack2 MSG_PartnerMoveName_Smack
+#define MSG_PartnerMoveName_Smack3 MSG_PartnerMoveName_Smack
+#define MSG_PartnerMoveName_SpinyFlip1 MSG_PartnerMoveName_SpinyFlip
+#define MSG_PartnerMoveName_SpinyFlip2 MSG_PartnerMoveName_SpinyFlip
+#define MSG_PartnerMoveName_SpinyFlip3 MSG_PartnerMoveName_SpinyFlip
+#endif
+
 #define STANDARD_ITEM_SCRIPT(icon) \
     { \
         is_SetIcon(60, icon) \
@@ -193,8 +362,8 @@ PartnerPopupProperties gPartnerPopupProperties[] = {
     [PARTNER_GOOMPA] {
         MSG_Menus_Party_Goompa,
         0x00000001,
-        0x00000000,
-        0x00000000,
+        MSG_PartnerDesc_Goompa_World,
+        MSG_PartnerDesc_Goompa_Battle,
     },
     [PARTNER_WATT] {
         MSG_Menus_Party_Watt,
@@ -223,14 +392,14 @@ PartnerPopupProperties gPartnerPopupProperties[] = {
     [PARTNER_GOOMBARIA] {
         MSG_Menus_Party_Goombaria,
         0x00000001,
-        0x00000000,
-        0x00000000,
+        MSG_PartnerDesc_Goombaria_World,
+        MSG_PartnerDesc_Goombaria_Battle,
     },
     [PARTNER_TWINK] {
         MSG_Menus_Party_Twink,
         0x00000001,
-        0x00000000,
-        0x00000000,
+        MSG_PartnerDesc_Twink_World,
+        MSG_PartnerDesc_Twink_Battle,
     }
 };
 

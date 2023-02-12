@@ -351,6 +351,9 @@ ApiStatus BindNpcAI(Evt* script, s32 isInitialCall) {
     }
 
     if (enemy->aiScript != NULL) {
+#if defined(VERSION_JP)
+        groupFlags = enemy->aiScript->groupFlags;
+#endif
         kill_script_by_ID(enemy->aiScriptID);
     }
 
@@ -401,6 +404,9 @@ ApiStatus RestartNpcAI(Evt* script, s32 isInitialCall) {
     }
 
     if (enemy->aiScript != NULL) {
+#if defined(VERSION_JP)
+        groupFlags = enemy->aiScript->groupFlags;
+#endif
         kill_script_by_ID(enemy->aiScriptID);
     }
 
@@ -519,6 +525,9 @@ ApiStatus RestartNpcAux(Evt* script, s32 isInitialCall) {
     }
 
     if (enemy->auxScript != NULL) {
+#if defined(VERSION_JP)
+        groupFlags = enemy->auxScript->groupFlags;
+#endif
         kill_script_by_ID(enemy->auxScriptID);
     }
 

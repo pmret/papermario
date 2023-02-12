@@ -1,11 +1,7 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-#ifdef VERSION_US
 s16 D_80074010 = 8; // might be an array, could be size 1-8
-#else
-extern s16 D_80074010;
-#endif
 
 void gfxRetrace_Callback(s32);
 void gfxPreNMI_Callback(void);
@@ -14,12 +10,7 @@ void gfx_task_main(void);
 void gfx_draw_frame(void);
 void gfx_init_state(void);
 
-// TODO: name these symbols the same, this is just a shift
-#ifdef VERSION_US
 extern s32 D_80073E00;
-#else
-extern s32 D_80073DE0;
-#endif
 extern u16* D_80073E04;
 extern s16 D_80073E08;
 extern s16 D_80073E0A;
@@ -61,9 +52,11 @@ void boot_main(void* data) {
     is_debug_init();
     nuGfxInit();
     gGameStatusPtr->contBitPattern = nuContInit();
+
     load_obfuscation_shims();
     shim_create_audio_system_obfuscated();
     shim_load_engine_data_obfuscated();
+
     nuGfxFuncSet((NUGfxFunc) gfxRetrace_Callback);
     nuGfxPreNMIFuncSet(gfxPreNMI_Callback);
     gRandSeed += osGetCount();
@@ -72,7 +65,6 @@ void boot_main(void* data) {
     while (TRUE) {}
 }
 
-#ifdef VERSION_US
 void gfxRetrace_Callback(s32 arg0) {
     if (D_80073E00 != 0) {
         if (D_80073E00 == 1) {
@@ -107,11 +99,7 @@ void gfxRetrace_Callback(s32 arg0) {
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "main", gfxRetrace_Callback);
-#endif
 
-#ifdef VERSION_US
 void gfx_task_main(void) {
     s16 t;
     s16 i;
@@ -182,15 +170,8 @@ void gfx_task_main(void) {
     nuGfxTaskStart(gDisplayContext->mainGfx, (u32)(gMasterGfxPos - gDisplayContext->mainGfx) * 8, NU_GFX_UCODE_F3DEX, NU_SC_TASK_LODABLE);
     gCurrentDisplayContextIndex ^= 1;
 }
-#else
-INCLUDE_ASM(s32, "main", func_80026148);
-#endif
 
 void gfxPreNMI_Callback(void) {
-#ifdef VERSION_US
     D_80073E00 = 1;
-#else
-    D_80073DE0 = 1;
-#endif
     nuContRmbForceStop();
 }

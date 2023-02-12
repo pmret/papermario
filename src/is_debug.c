@@ -89,15 +89,7 @@ char* is_debug_print(char* arg0, const char* str, size_t count) {
     return (char*) 1;
 }
 
-#ifdef VERSION_US
 void func_80025F44(const char* message, char* file, s32 line) {
     osSyncPrintf("File:%s Line:%d  %s \n", file, line, message);
     PANIC();
 }
-#elif VERSION_JP
-extern const char D_80097D10[]; // "File:%s Line:%d  %s \n\0\0\0"
-void func_80025F44(char* arg0, char* file, s32 line, char* arg3) {
-    osSyncPrintf(D_80097D10, file, line, arg0);
-    PANIC();
-}
-#endif

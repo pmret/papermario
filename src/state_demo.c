@@ -140,7 +140,13 @@ DemoSceneData DemoScenes[] = {
     {} // final entry blank
 };
 
+#if defined(VERSION_JP)
+char versionString[] = "Prg Ver.00/07/06 22:22";
+#elif defined(VERSION_US)
 char versionString[] = "Prg Ver.00/12/05 16:54";
+#else
+char versionString[] = "Prg Ver.??/??/?? ??:??";
+#endif
 
 void state_init_demo(void) {
     if (gGameStatusPtr->demoState == 0) {

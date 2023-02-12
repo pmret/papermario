@@ -3,22 +3,33 @@
 #include "hud_element.h"
 #include "sprite.h"
 
+#ifdef VERSION_JP
+#define TITLE_WIDTH 272
+#define TITLE_TILE_HEIGHT 2
+#define TITLE_HEIGHT 88
+#define TITLE_POS_LEFT 25
+#define TITLE_POS_TOP 34
+#define FILENAME_ERROR "\x54\x77\xA2\xF7\xF7\xf7\xf7\xf7"
+#else
 // Properties of the title screen Paper Mario logo
 #define TITLE_WIDTH  200 // Width of the texture
 #define TITLE_HEIGHT 112 // Height of the texture
 #define TITLE_TILE_HEIGHT 2 // Height of an individually loaded tile in the texture
-#define TITLE_NUM_TILES (TITLE_HEIGHT / TITLE_TILE_HEIGHT) // Number of tiles in the texture
-#define TITLE_TILE_PIXELS (TITLE_WIDTH * TITLE_TILE_HEIGHT) // Number of pixels in a single tile of the texture
 #define TITLE_POS_LEFT ((SCREEN_WIDTH - TITLE_WIDTH) / 2) // Left edge of the texture on screen
 #define TITLE_POS_TOP 15 // Top edge of the texture on screen (with no offset)
+#define FILENAME_ERROR "ERROR\xf7\xf7\xf7"
+#endif
+
+#define TITLE_NUM_TILES (TITLE_HEIGHT / TITLE_TILE_HEIGHT) // Number of tiles in the texture
+#define TITLE_TILE_PIXELS (TITLE_WIDTH * TITLE_TILE_HEIGHT) // Number of pixels in a single tile of the texture
 
 s16 D_800779C0[2] = {0, 0};
 
 SaveMetadata gSaveSlotMetadata[4] = {
-    { .filename = {"ERROR\xf7\xf7\xf7"}, },
-    { .filename = {"ERROR\xf7\xf7\xf7"}, },
-    { .filename = {"ERROR\xf7\xf7\xf7"}, },
-    { .filename = {"ERROR\xf7\xf7\xf7"}, },
+    { .filename = {FILENAME_ERROR}, },
+    { .filename = {FILENAME_ERROR}, },
+    { .filename = {FILENAME_ERROR}, },
+    { .filename = {FILENAME_ERROR}, },
 };
 
 u8 gSaveSlotHasData[4] = {TRUE, TRUE, TRUE, TRUE};
@@ -54,13 +65,17 @@ typedef struct TitleDataStruct {
     /* 0x0 */ s32 unk_00;
     /* 0x4 */ s32 unk_04;
     /* 0x8 */ s32 unk_08;
-} TitleDataStruct; // size = 0xC
+    /* 0xC */ s32 img2_pal;
+} TitleDataStruct; // size = 0x10
 
 extern s16 D_800A0970;
 extern TitleDataStruct* D_800A0974;
 extern s32* D_800A0978;
 extern s32* D_800A097C;
 extern s32* D_800A0980;
+#ifdef VERSION_JP
+extern s32* JP_800A0980;
+#endif
 extern s16 D_800A0988;
 
 void appendGfx_title_screen(void);
@@ -94,6 +109,9 @@ void state_init_title_screen(void) {
     D_800A0978 = (s32*)(D_800A0974->unk_00 + (s32) D_800A0974);
     D_800A097C = (s32*)(D_800A0974->unk_04 + (s32) D_800A0974);
     D_800A0980 = (s32*)(D_800A0974->unk_08 + (s32) D_800A0974);
+#ifdef VERSION_JP
+    JP_800A0980 = (s32*)(D_800A0974->img2_pal + (s32) D_800A0974);
+#endif
 
     create_cameras_a();
     gCameras[CAM_DEFAULT].updateMode = 6;
@@ -433,6 +451,9 @@ void title_screen_draw_copyright(f32 arg0) {
     s32 i;
 
     gSPDisplayList(gMasterGfxPos++, &D_80077A50);
+#ifdef VERSION_JP
+    gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
+#endif
     gDPPipeSync(gMasterGfxPos++);
 
     alpha = 255.0f - (arg0 * 255.0f);
@@ -445,6 +466,14 @@ void title_screen_draw_copyright(f32 arg0) {
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha);
     }
 
+#ifdef VERSION_JP
+    gDPLoadTLUT_pal16(gMasterGfxPos++, 0, JP_800A0980);
+    gDPLoadTextureTile_4b(gMasterGfxPos++, D_800A097C, G_IM_FMT_CI, 128, 0, 0, 0, 127, 31, 0,
+                          G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                          G_TX_NOLOD);
+    gSPTextureRectangle(gMasterGfxPos++, 388, 764, 900, 892, G_TX_RENDERTILE,
+                        0, 0, 0x0400, 0x0400);
+#else
     for (i = 0; i < 2; i++) {
         alpha = 0; // TODO figure out why this is needed
         gDPLoadTextureTile(gMasterGfxPos++, &D_800A097C[0x240 * i], G_IM_FMT_IA, G_IM_SIZ_8b, 144, 32, 0, 0, 143, 15, 0,
@@ -453,5 +482,6 @@ void title_screen_draw_copyright(f32 arg0) {
         gSPTextureRectangle(gMasterGfxPos++, 356, 764 + (0x40 * i), 932, 828 + (0x40 * i), G_TX_RENDERTILE,
                             0, 0, 0x0400, 0x0400);
     }
+#endif
     gDPPipeSync(gMasterGfxPos++);
 }

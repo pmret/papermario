@@ -70,8 +70,11 @@ typedef struct HudStatusIcon {
     /* 0xA8 */ HudSimpleStatusIcon danger;
 } HudStatusIcon; // size = 0xB0
 
+#if !defined(VERSION_JP)
 s16 D_80078160[] = { 28, 40 };
 s16 D_80078164[] = { 0, -2 };
+#endif
+
 s32 D_80078168[] = {
     MSG_Menus_Merlee_IncreaseCoins,
     MSG_Menus_Merlee_Exhausted,
@@ -253,6 +256,18 @@ void update_merlee_message(void* data) {
 }
 
 void draw_merlee_message_string(PopupMessage* popup, s32 posX, s32 posY) {
+#if defined(VERSION_JP)
+    s32 messageID;
+
+    posX += 11;
+    posY += 6;
+
+    if (popup->messageIndex >= ARRAY_COUNT(D_80078168)) return;
+    if (popup->messageIndex < 0) return;
+
+    messageID = D_80078168[popup->messageIndex];
+    draw_msg(messageID, posX, posY, 255, MSG_PAL_0F, 0);
+#else
     s32 messageID = D_80078168[popup->messageIndex];
 
     posY += 6;
@@ -261,9 +276,43 @@ void draw_merlee_message_string(PopupMessage* popup, s32 posX, s32 posY) {
     posY += D_80078164[get_msg_lines(messageID) - 1];
 
     draw_msg(messageID, posX, posY, 255, MSG_PAL_0F, 0);
+#endif
 }
 
 void draw_merlee_message(void* data) {
+#if defined(VERSION_JP)
+    s32 width;
+    s32 height;
+    s32 messageID;
+    s32 xPos;
+    PopupMessage *popup = data;
+
+    switch (popup->messageIndex) {
+        case 0:
+            if (popup->unk_17 != 0) {
+                popup->unk_17 = 0;
+                messageID = D_80078168[popup->messageIndex];
+                width = get_msg_width(messageID, 0) + 23;
+                xPos = 160 - (width / 2);
+                height = 45;
+                set_window_properties(WINDOW_ID_9, xPos, 80, width, height, 0, draw_merlee_message_string, popup, -1);
+                set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
+            }
+            break;
+
+        case 1:
+            if (popup->unk_17 != 0) {
+                popup->unk_17 = 0;
+                messageID = D_80078168[popup->messageIndex];
+                width = get_msg_width(messageID, 0) + 23;
+                xPos = 160 - (width / 2);
+                height = 28;
+                set_window_properties(WINDOW_ID_9, xPos, 80, width, height, 0, draw_merlee_message_string, popup, -1);
+                set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
+            }
+            break;
+    }
+#else
     PopupMessage* popup = data;
     s32 messageID;
     s32 xPos;
@@ -277,6 +326,7 @@ void draw_merlee_message(void* data) {
         set_window_properties(WINDOW_ID_BATTLE_POPUP, xPos, 80, width, D_80078160[get_msg_lines(messageID) - 1], 0, draw_merlee_message_string, popup, -1);
         set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
     }
+#endif
 }
 
 s32 is_merlee_message_done(void) {

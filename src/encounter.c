@@ -7,7 +7,15 @@
 #include "world/partners.h"
 #include "sprite.h"
 #include "model.h"
+
+#if !defined(VERSION_JP)
 #include "sprite/npc/BattleMerlee.h"
+#endif
+
+#if defined(VERSION_JP)
+#define ANIM_BattleMerlee_Gather 0x00BB0001
+#define ANIM_BattleMerlee_Release 0x00BB0000
+#endif
 
 ApiStatus ShowMerleeCoinMessage(Evt* script, s32 isInitialCall);
 ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall);
