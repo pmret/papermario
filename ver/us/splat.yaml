@@ -25,7 +25,7 @@ options:
   undefined_funcs_auto_path: ver/us/undefined_funcs_auto.txt
   undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
   ld_wildcard_sections: True
-  ld_use_follows: True
+  ld_use_follows: False
 asset_stack:
   - us
 segments:

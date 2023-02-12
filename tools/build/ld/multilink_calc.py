@@ -3,10 +3,12 @@
 import os
 from pathlib import Path
 import sys
-from typing import Dict
+from typing import Dict, List
 
 script_dir = Path(os.path.dirname(os.path.realpath(__file__)))
 root_dir = script_dir / "../../.."
+
+HARDCODED_ADDR = 0x80000000
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
@@ -45,12 +47,12 @@ if __name__ == "__main__":
         ]
     }
 
-    addrs: Dict[str, list[int]] = {}
+    addrs: Dict[str, List[int]] = {}
 
     if mode == "hardcode":
         out = ""
         for sym in syms_to_max:
-            addrs[sym] = [0x80000000]
+            addrs[sym] = [HARDCODED_ADDR]
     elif mode == "calc":
         with open(root_dir / "ver" / version / "build/papermario.map") as f:
             lines = f.readlines()
@@ -76,7 +78,11 @@ if __name__ == "__main__":
             print(f"Error: {syms_to_max} not found in map file")
             sys.exit(1)
 
+    out_addrs = {sym: max(addrs[sym]) for sym in addrs}
+
+    out_addrs["entity_data_vram_end"] = out_addrs["entity_data_vram_end"] + out_addrs["world_action_vram_end"] - HARDCODED_ADDR
+
     out = ""
-    for sym in addrs:
-        out += f" --defsym {sym}=0x{max(addrs[sym]):X}"
+    for sym in out_addrs:
+        out += f" --defsym {sym}=0x{out_addrs[sym]:X}"
     print(out)

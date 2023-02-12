@@ -9,10 +9,10 @@
 #define pulse_stone_VRAM_DEF pulse_stone_VRAM
 #define i_spy_VRAM_DEF i_spy_VRAM
 #else
-#define inspect_icon_VRAM_DEF (void*)0x806B7000 // TODO shift
-#define speech_bubble_VRAM_DEF (void*)0x806B7000 // TODO shift
-#define pulse_stone_VRAM_DEF (void*)0x806B7000 // TODO shift
-#define i_spy_VRAM_DEF (void*)0x806B7000 // TODO shift
+#define inspect_icon_VRAM_DEF (void*)0x802B7000
+#define speech_bubble_VRAM_DEF (void*)0x802B7000
+#define pulse_stone_VRAM_DEF (void*)0x802B7000
+#define i_spy_VRAM_DEF (void*)0x802B7000
 #endif
 
 extern f32 D_800F7B48;

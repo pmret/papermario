@@ -101,13 +101,13 @@ DemoSceneData DemoScenes[] = {
         .sceneType = DEMO_SCENE_BATTLE,
         .index = 3
     },
-    // {
-    //     .sceneType = DEMO_SCENE_PEACH,
-    //     .mapName = "kkj_11",
-    //     .index = kkj_11_ENTRY_8,
-    //     .partnerID = PARTNER_TWINK,
-    //     .storyProgress = STORY_CH5_BEGAN_PEACH_MISSION
-    // },
+    {
+        .sceneType = DEMO_SCENE_PEACH,
+        .mapName = "kkj_11",
+        .index = kkj_11_ENTRY_8,
+        .partnerID = PARTNER_TWINK,
+        .storyProgress = STORY_CH5_BEGAN_PEACH_MISSION
+    },
     {
         .sceneType = DEMO_SCENE_WORLD,
         .mapName = "arn_08",
@@ -126,13 +126,13 @@ DemoSceneData DemoScenes[] = {
         .partnerID = PARTNER_GOOMBARIO,
         .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
     },
-    // {
-    //     .sceneType = DEMO_SCENE_PEACH,
-    //     .mapName = "kkj_26",
-    //     .index = kkj_26_ENTRY_3,
-    //     .partnerID = PARTNER_NONE,
-    //     .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
-    // },
+    {
+        .sceneType = DEMO_SCENE_PEACH,
+        .mapName = "kkj_26",
+        .index = kkj_26_ENTRY_3,
+        .partnerID = PARTNER_NONE,
+        .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
+    },
     {
         .sceneType = DEMO_SCENE_DONE,
         .mapName = "end"
