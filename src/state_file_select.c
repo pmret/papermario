@@ -6,7 +6,10 @@
 #include "sprite.h"
 #include "model.h"
 
-u16* D_80077980[] = { D_8038F800, D_803B5000, D_803DA800 };
+extern u16 gFrameBuf0[];
+extern u16 gFrameBuf1[];
+extern u16 gFrameBuf2[];
+u16* fsFrameBuffers[] = { gFrameBuf0, gFrameBuf1, gFrameBuf2 };
 
 NUPiOverlaySegment D_8007798C = {
     .romStart = filemenu_ROM_START,
@@ -23,7 +26,7 @@ NUPiOverlaySegment D_8007798C = {
 u8 D_800779B0 = 0;
 
 extern s32 D_80200000;
-extern ShapeFile D_80210000;
+extern ShapeFile gMapShapeData;
 
 void state_init_language_select(void) {
     D_800A0931 = 0;
@@ -100,7 +103,7 @@ void state_step_language_select(void) {
         case 2:
             D_800A0930--;
             if (D_800A0930 == 0) {
-                nuGfxSetCfb(D_80077980, 2);
+                nuGfxSetCfb(fsFrameBuffers, 2);
                 if (nuGfxCfb[2] == nuGfxCfb_ptr) {
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                 } else {
@@ -266,7 +269,7 @@ void state_step_exit_language_select(void) {
                     BackgroundHeader* bgHeader;
 
                     D_800A0930 = -1;
-                    nuGfxSetCfb(D_80077980, ARRAY_COUNT(D_80077980));
+                    nuGfxSetCfb(fsFrameBuffers, ARRAY_COUNT(fsFrameBuffers));
                     filemenu_cleanup();
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                     mapSettings = get_current_map_settings();
@@ -289,7 +292,7 @@ void state_step_exit_language_select(void) {
                     init_entity_data();
                     init_trigger_list();
                     mapShape = load_asset_by_name(wMapShapeName, &mapShapeSize);
-                    decode_yay0(mapShape, &D_80210000);
+                    decode_yay0(mapShape, &gMapShapeData);
                     general_heap_free(mapShape);
                     initialize_collision();
                     restore_map_collision_data();

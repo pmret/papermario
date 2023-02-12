@@ -18,8 +18,8 @@ glabel spr_init_player_raster_cache
 /* 101E84 802DED94 2406000C */   addiu    $a2, $zero, 0xc
 /* 101E88 802DED98 3C060194 */  lui       $a2, %hi(_1943000_ROM_START + 0x10)
 /* 101E8C 802DED9C 34C63010 */  addiu     $a2, $a2, %lo(_1943000_ROM_START + 0x10)
-/* 101E90 802DEDA0 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
-/* 101E94 802DEDA4 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
+/* 101E90 802DEDA0 3C048035 */  lui       $a0, %hi(heap_spriteHead)
+/* 101E94 802DEDA4 2484F800 */  addiu     $a0, $a0, %lo(heap_spriteHead)
 /* 101E98 802DEDA8 8E020000 */  lw        $v0, ($s0)
 /* 101E9C 802DEDAC 02510018 */  mult      $s2, $s1
 /* 101EA0 802DEDB0 3C01802E */  lui       $at, %hi(PlayerRasterCacheSize)

@@ -1,10 +1,10 @@
-// Obfuscation symbols
-obfuscated_battle_heap_create = battle_heap_create - 0xFEFFFFF;
-obfuscated_general_heap_create = general_heap_create - 0xFEFEFEF;
-obfuscated_load_engine_data = load_engine_data - 0x315;
-obfuscated_create_audio_system = create_audio_system - 0x7B;
-obfuscated_obfuscation_shims_VRAM = obfuscation_shims_VRAM - 0xA912928;
-obfuscated_obfuscation_shims_ROM_START = obfuscation_shims_ROM_START - 0x8939221;
+// hard-coded things
+gBackgroundImage = 0x80200000; // hard-coded inside mapfs for now
+gMapShapeData = 0x80210000; // needs to be hard-coded atm due to pointers in shape data
+
+heap_battleHead = gFrameBuf2;
+
+D_804DC500 = 0x804DC500;
 
 fx_sun_undeclared = fx_sun;
 
@@ -85,19 +85,6 @@ battle_move_end = MAX(battle_move_end, battle_star_peach_beam_VRAM_END);
 battle_move_end = MAX(battle_move_end, battle_star_peach_focus_VRAM_END);
 battle_move_end = MAX(battle_move_end, battle_star_peach_dash_VRAM_END);
 
-// hard-coded things
-gBackgroundImage = 0x80200000; // hard-coded inside mapfs for now
-D_80210000 = 0x80210000; // needs to be hard-coded atm due to pointers in shape data
-
-heap_generalHead = font_width_VRAM_END;
-gSpriteHeapPtr = heap_generalHead + 0x54000;
-D_8038F800 = gSpriteHeapPtr + 0x40000;
-D_803B5000 = D_8038F800 + 0x25800;
-D_803DA800 = D_803B5000 + 0x25800;
-heap_battleHead = D_803DA800;
-
-D_804DC500 = 0x804DC500;
-
 world_battle_vram_end = battle_code_VRAM_END;
 world_battle_vram_end = MAX(world_battle_vram_end, world_script_api_VRAM_END);
 
@@ -123,6 +110,14 @@ D_A6000000 = 0xA6000000;
 D_B0000000 = 0xB0000000;
 D_B0000008 = 0xB0000008;
 D_B0000010 = 0xB0000010;
+
+// Obfuscation symbols
+obfuscated_battle_heap_create = battle_heap_create - 0xFEFFFFF;
+obfuscated_general_heap_create = general_heap_create - 0xFEFEFEF;
+obfuscated_load_engine_data = load_engine_data - 0x315;
+obfuscated_create_audio_system = create_audio_system - 0x7B;
+obfuscated_obfuscation_shims_VRAM = obfuscation_shims_VRAM - 0xA912928;
+obfuscated_obfuscation_shims_ROM_START = obfuscation_shims_ROM_START - 0x8939221;
 
 // Invalid pointers from dead code
 dead_transform_point = transform_point + 0x12F0;

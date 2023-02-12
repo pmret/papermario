@@ -8,8 +8,11 @@ NUUcode nugfx_ucode = {
     gspF3DEX2kawase_fifo_text_bin, gspF3DEX2kawase_fifo_data_bin,
 };
 
-u16* FrameBuf[3] = {
-    D_8038F800, D_803B5000, D_803DA800
+extern u16 gFrameBuf0[];
+extern u16 gFrameBuf1[];
+extern u16 gFrameBuf2[];
+u16* FrameBuf[] = {
+    gFrameBuf0, gFrameBuf1, gFrameBuf2
 };
 
 Gfx rdpstateinit_dl[] = {

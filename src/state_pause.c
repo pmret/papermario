@@ -6,9 +6,12 @@
 #include "sprite.h"
 #include "model.h"
 
-u16* D_80077950[] = { D_8038F800, D_803B5000, D_803DA800 };
+extern u16 gFrameBuf0[];
+extern u16 gFrameBuf1[];
+extern u16 gFrameBuf2[];
+u16* pause_frameBuffers[] = { gFrameBuf0, gFrameBuf1, gFrameBuf2 };
 
-extern ShapeFile D_80210000;
+extern ShapeFile gMapShapeData;
 
 NUPiOverlaySegment D_8007795C = {
     .romStart = pause_ROM_START,
@@ -58,7 +61,7 @@ void state_step_pause(void) {
 
                 if (D_800A0920 == 0) {
                     D_800A0920 = -1;
-                    nuGfxSetCfb(D_80077950, 2);
+                    nuGfxSetCfb(pause_frameBuffers, 2);
                     gGameStatusPtr->savedBackgroundDarkness = gGameStatusPtr->backgroundDarkness;
                     sfx_stop_env_sounds();
                     func_8003B1A8();
@@ -135,11 +138,11 @@ void state_step_unpause(void) {
                     if (D_800A0920 == 0) {
                         MapSettings* mapSettings;
                         MapConfig* mapConfig;
-                        void* assetData;
+                        void* mapShape;
                         s32 assetSize;
 
                         D_800A0920 = -1;
-                        nuGfxSetCfb(D_80077950, ARRAY_COUNT(D_80077950));
+                        nuGfxSetCfb(pause_frameBuffers, ARRAY_COUNT(pause_frameBuffers));
                         pause_cleanup();
                         gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                         mapSettings = get_current_map_settings();
@@ -166,9 +169,9 @@ void state_step_unpause(void) {
                         sfx_set_reverb_mode(SavedReverbMode);
                         bgm_reset_max_volume();
                         load_map_script_lib();
-                        assetData = load_asset_by_name(wMapShapeName, &assetSize);
-                        decode_yay0(assetData, &D_80210000);
-                        general_heap_free(assetData);
+                        mapShape = load_asset_by_name(wMapShapeName, &assetSize);
+                        decode_yay0(mapShape, &gMapShapeData);
+                        general_heap_free(mapShape);
                         initialize_collision();
                         restore_map_collision_data();
 

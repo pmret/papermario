@@ -1,6 +1,8 @@
 #include "end_01.h"
 #include "effects.h"
 
+extern HeapNode heap_spriteHead;
+
 extern s32 spr_allocateBtlComponentsOnWorldHeap;
 extern ParadeNpcInfo N(ParadeNpcsTable)[];
 
@@ -49,7 +51,7 @@ API_CALLABLE(N(ParadeSpriteHeapMalloc)) {
     s32 heapSize = evt_get_variable(script, *args++);
     s32 outVar = *args++;
 
-    evt_set_variable(script, outVar, (s32) _heap_malloc(&gSpriteHeapPtr, heapSize));
+    evt_set_variable(script, outVar, (s32) _heap_malloc(&heap_spriteHead, heapSize));
     return ApiStatus_DONE2;
 }
 
@@ -57,7 +59,7 @@ API_CALLABLE(N(ParadeSpriteHeapFree)) {
     Bytecode* args = script->ptrReadPos;
     s32 pointer = *args++;
 
-    _heap_free(&gSpriteHeapPtr, (void*) evt_get_variable(script, pointer));
+    _heap_free(&heap_spriteHead, (void*) evt_get_variable(script, pointer));
     return ApiStatus_DONE2;
 }
 

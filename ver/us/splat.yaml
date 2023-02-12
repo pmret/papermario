@@ -1037,6 +1037,13 @@ segments:
       - [0x10EEB0, palette, ui/msg/rewind_arrow]
       - [0x10EED0, rgba16, ui/msg/star, 16, 18]
       - [0x10F110, i4, ui/msg/star_silhouette, 16, 20]
+  - type: code
+    name: heaps3
+    start: 0x10F1B0
+    vram: 0x802FB800
+    follows_vram: font_width
+    subsegments:
+    - [0x10F1B0, c, heaps3]
   - type: group
     dir: charset
     vram: 0

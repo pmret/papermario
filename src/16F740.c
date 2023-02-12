@@ -29,7 +29,7 @@ BSS s32 D_8029F264;
 
 s32 dispatch_damage_event_player_0(s32 damageAmount, s32 event);
 
-extern ShapeFile D_80210000;
+extern ShapeFile gMapShapeData;
 
 void btl_merlee_on_start_turn(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -219,12 +219,12 @@ void btl_state_update_normal_start(void) {
             BattleEnemiesCreated = battle->formationSize;
             set_screen_overlay_params_back(255, -1.0f);
             compressedAsset = load_asset_by_name(stage->shape, &size);
-            decode_yay0(compressedAsset, &D_80210000);
+            decode_yay0(compressedAsset, &gMapShapeData);
             general_heap_free(compressedAsset);
 
             ASSERT(size <= 0x8000);
 
-            model = D_80210000.root;
+            model = gMapShapeData.root;
             textureRom = get_asset_offset(stage->texture, &size);
             if (model != NULL) {
                 load_data_for_models(model, textureRom, size);

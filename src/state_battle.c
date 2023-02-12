@@ -6,8 +6,11 @@
 #include "battle/battle.h"
 #include "model.h"
 
-u16* D_800778A0[] = {
-    D_8038F800, D_803B5000, D_803DA800
+extern u16 gFrameBuf0[];
+extern u16 gFrameBuf1[];
+extern u16 gFrameBuf2[];
+u16* bFrameBuffers[] = {
+    gFrameBuf0, gFrameBuf1, gFrameBuf2
 };
 
 s32 D_800778AC[] = {
@@ -22,7 +25,7 @@ extern s32 D_800A0908;
 #define shim_battle_heap_create_obfuscated battle_heap_create
 #endif
 
-extern ShapeFile D_80210000;
+extern ShapeFile gMapShapeData;
 
 void state_init_battle(void) {
     D_800A0900 = 5;
@@ -47,7 +50,7 @@ void state_step_battle(void) {
             return;
         } else {
             D_800A0900 = -1;
-            nuGfxSetCfb(D_800778A0, 2);
+            nuGfxSetCfb(bFrameBuffers, 2);
             nuContRmbForceStopEnd();
             sfx_stop_env_sounds();
             func_8003B1A8();
@@ -131,7 +134,7 @@ void state_step_end_battle(void) {
             MapConfig* mapConfig;
 
             D_800A0900 = -1;
-            nuGfxSetCfb(D_800778A0, 3);
+            nuGfxSetCfb(bFrameBuffers, 3);
             gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
             nuContRmbForceStopEnd();
             sfx_stop_env_sounds();
@@ -169,7 +172,7 @@ void state_step_end_battle(void) {
                 partner_init_after_battle(playerData->currentPartner);
                 load_map_script_lib();
                 mapShape = load_asset_by_name(wMapShapeName, &sizeTemp);
-                decode_yay0(mapShape, &D_80210000);
+                decode_yay0(mapShape, &gMapShapeData);
                 general_heap_free(mapShape);
                 initialize_collision();
                 restore_map_collision_data();

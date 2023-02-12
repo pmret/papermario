@@ -1,9 +1,10 @@
 #include "common.h"
 
+extern HeapNode heap_generalHead;
 extern HeapNode heap_collisionHead;
 
 HeapNode* general_heap_create(void) {
-    return _heap_create(&heap_generalHead, 0x54000);
+    return _heap_create(&heap_generalHead, GENERAL_HEAP_SIZE);
 }
 
 void* general_heap_malloc(s32 size) {
@@ -19,7 +20,7 @@ s32 general_heap_free(void* data) {
 }
 
 s32 battle_heap_create(void) {
-    if ((s32)_heap_create(&heap_battleHead, 0x25800) == -1) {
+    if ((s32)_heap_create(&heap_battleHead, BATTLE_HEAP_SIZE) == -1) {
         return -1;
     } else {
         return 0;
@@ -47,7 +48,7 @@ s32 heap_free(void* data) {
 }
 
 s32 collision_heap_create(void) {
-    if ((s32)_heap_create(&heap_collisionHead, 0x18000) == -1) {
+    if ((s32)_heap_create(&heap_collisionHead, COLLISION_HEAP_SIZE) == -1) {
         return -1;
     }
     return 0;
