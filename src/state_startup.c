@@ -71,7 +71,7 @@ void state_step_startup(void) {
 
     fio_has_valid_backup();
 
-    if (D_800D9620 == 0) {
+    if (D_800D95E8.saveSlot == 0) {
         gGameStatusPtr->soundOutputMode = SOUND_OUT_STEREO;
         audio_set_stereo();
     } else {
