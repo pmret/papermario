@@ -10,7 +10,6 @@ API_CALLABLE(N(UpdateRotatingPlayerPosition)) {
     mag = dist2D(-250.0f, 0.0f, script->varTable[9], script->varTable[10]);
     angle = atan2(-250.0f, 0.0f, script->varTable[9], script->varTable[10]);
     angle = clamp_angle(angle - var);
-
     gPlayerStatus.position.x = -250.0f + mag * sin_deg(angle);
     gPlayerStatus.position.z = 0.0f - mag * cos_deg(angle);
 

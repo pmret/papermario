@@ -26,8 +26,8 @@ void clear_sprite_shading_data(void) {
     init_sprite_shading_data();
 
     for (i = 0; i < ARRAY_COUNT(D_80151328->sources); i++) {
-        D_80151328->sources[i].flags = 0;
-        D_801512B0->sources[i].flags = 0;
+        D_80151328->sources[i].flags = LIGHT_SOURCE_DISABLED;
+        D_801512B0->sources[i].flags = LIGHT_SOURCE_DISABLED;
     }
 
     D_80151328->flags = 0;
@@ -80,12 +80,12 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
     f32 temp_f10;
     f32 temp_f12;
     f32 temp_f16;
-    f32 temp_f20;
-    f32 temp_f26, temp_f24, temp_f22;
+    f32 distSq;
+    f32 dx, dy, dz;
     f32 temp_f6;
     f32 var_f0_2;
-    f32 var_f2;
-    f32 var_f8;
+    f32 dist;
+    f32 intensityScale;
     f32 temp3;
     f32 qx, qy, qz;
     f32 wx, wy, wz;
@@ -128,51 +128,51 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
 
     for (i = 0; i < ARRAY_COUNT(D_80151328->sources); i++) {
         lightSource = &D_80151328->sources[i];
-        if (lightSource->flags & 1) {
-            temp_f26 = sp54 - lightSource->pos.x;
-            temp_f24 = sp58 - lightSource->pos.y;
-            temp_f22 = sp5C - lightSource->pos.z;
+        if (lightSource->flags & LIGHT_SOURCE_ENABLED) {
+            dx = sp54 - lightSource->pos.x;
+            dy = sp58 - lightSource->pos.y;
+            dz = sp5C - lightSource->pos.z;
 
-            temp_f20 = SQ(temp_f26) + SQ(temp_f24) + SQ(temp_f22);
+            distSq = SQ(dx) + SQ(dy) + SQ(dz);
 
-            if (temp_f20 != 0.0f) {
-                var_f2 = sqrtf(temp_f20);
-                var_f0_2 = 1.0f / var_f2;
+            if (distSq != 0.0f) {
+                dist = sqrtf(distSq);
+                var_f0_2 = 1.0f / dist;
             } else {
-                var_f2 = 0.0f;
+                dist = 0.0f;
                 var_f0_2 = 0.0f;
             }
 
-            temp_f26 *= var_f0_2;
-            temp_f24 *= var_f0_2;
-            temp_f22 *= var_f0_2;
+            dx *= var_f0_2;
+            dy *= var_f0_2;
+            dz *= var_f0_2;
 
-            if ((lightSource->flags & 4)) {
-                if ((var_f2 == 0.0f) && (lightSource->falloff == 0.0f)) {
-                    var_f8 = 1.0f;
+            if ((lightSource->flags & LIGHT_SOURCE_LINEAR_FALLOFF)) {
+                if ((dist == 0.0f) && (lightSource->falloff == 0.0f)) {
+                    intensityScale = 1.0f;
                 } else {
-                    var_f8 = 1.0f / (var_f2 * lightSource->falloff);
-                    temp_f26 *= var_f8;
-                    temp_f24 *= var_f8;
-                    temp_f22 *= var_f8;
+                    intensityScale = 1.0f / (dist * lightSource->falloff);
+                    dx *= intensityScale;
+                    dy *= intensityScale;
+                    dz *= intensityScale;
                 }
             } else {
-                if ((lightSource->flags & 8) && (temp_f20 != 0.0f || lightSource->falloff != 0.0f)) {
-                    var_f8 = 1.0f / (temp_f20 * lightSource->falloff);
-                    temp_f26 *= var_f8;
-                    temp_f24 *= var_f8;
-                    temp_f22 *= var_f8;
+                if ((lightSource->flags & LIGHT_SOURCE_QUADRATIC_FALLOFF) && (distSq != 0.0f || lightSource->falloff != 0.0f)) {
+                    intensityScale = 1.0f / (distSq * lightSource->falloff);
+                    dx *= intensityScale;
+                    dy *= intensityScale;
+                    dz *= intensityScale;
                 } else {
-                    var_f8 = 1.0f;
+                    intensityScale = 1.0f;
                 }
             }
 
-            if (var_f8 > 1.0f) {
-                var_f8 = 1.0f;
+            if (intensityScale > 1.0f) {
+                intensityScale = 1.0f;
             }
-            shadowX += temp_f26;
-            shadowY += temp_f24;
-            shadowZ += temp_f22;
+            shadowX += dx;
+            shadowY += dy;
+            shadowZ += dz;
 
             if (sp60 < 0.0f) {
                 ex = sp64;
@@ -183,7 +183,7 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
                 ey = var_f30;
                 ez = sp68;
             }
-            temp_f10 = ex * temp_f26 + ey * temp_f24 + ez * temp_f22;
+            temp_f10 = ex * dx + ey * dy + ez * dz;
 
             if (sp60 < 0.0f) {
                 wx = sp68;
@@ -194,11 +194,11 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
                 wy = var_f30;
                 wz = -sp64;
             }
-            temp3 = wx * temp_f26 + wy * temp_f24 + wz * temp_f22;
+            temp3 = wx * dx + wy * dy + wz * dz;
 
             temp_f16 = temp3;
-            temp_f12 = var_f8 * fabsf(temp_f10);
-            temp_f6 = var_f8 * fabsf(temp_f16);
+            temp_f12 = intensityScale * fabsf(temp_f10);
+            temp_f6 = intensityScale * fabsf(temp_f16);
             if (temp_f10 > 0.0f) {
                 sp78 += lightSource->rgb.r * temp_f12;
                 sp7C += lightSource->rgb.g * temp_f12;

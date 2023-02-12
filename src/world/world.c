@@ -574,7 +574,7 @@ MapConfig kkj_maps[] = {
     { MAP(kkj_12), .songVariation = 1, .sfxReverb = 2 },
     { MAP_WITH_INIT(kkj_13), .bgName = "kpa_bg",  .songVariation = 1, .sfxReverb = 3},
     { MAP_WITH_INIT(kkj_14), .bgName = "kpa_bg" },
-    { MAP_UNSPLIT(kkj_15, 0x80240640) },
+    { MAP(kkj_15) },
     { MAP(kkj_16), .sfxReverb = 1 },
     { MAP(kkj_17) },
     { MAP(kkj_18), .bgName = "kpa_bg" },

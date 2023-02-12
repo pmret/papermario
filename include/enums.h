@@ -2943,6 +2943,13 @@ enum DoorSounds {
 #include "sprite/sprite_shading_profiles.h"
 #endif
 
+enum LightSourceFlags {
+    LIGHT_SOURCE_DISABLED           = 0,
+    LIGHT_SOURCE_ENABLED            = 1,
+    LIGHT_SOURCE_LINEAR_FALLOFF     = 4,
+    LIGHT_SOURCE_QUADRATIC_FALLOFF  = 8,
+};
+
 enum ActionStates {
     ACTION_STATE_IDLE                           = 0x00000000,
     ACTION_STATE_WALK                           = 0x00000001,

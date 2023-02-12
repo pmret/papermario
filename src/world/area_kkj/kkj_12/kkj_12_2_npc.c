@@ -7,7 +7,7 @@
 #include "../common/ApproachPlayer100Units.inc.c"
 
 API_CALLABLE(N(DisableLightSource1)) {
-    D_80151328->sources[1].flags = 0;
+    D_80151328->sources[1].flags = LIGHT_SOURCE_DISABLED;
     return ApiStatus_DONE2;
 }
 

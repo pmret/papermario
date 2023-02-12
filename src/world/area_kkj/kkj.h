@@ -38,6 +38,7 @@ enum {
     AF_KKJ_05   = AreaFlag(5),
     AF_KKJ_06   = AreaFlag(6),
     AF_KKJ_07   = AreaFlag(7),
+    AF_KKJ_08   = AreaFlag(8),
     AF_KKJ19_FailedBakingTask   = AreaFlag(9),
     AF_KKJ19_AddedEgg           = AreaFlag(10),
     AF_KKJ19_AddedSugar         = AreaFlag(11),

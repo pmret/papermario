@@ -11881,21 +11881,18 @@ segments:
     start: 0xAE5590
     vram: 0x80240000
     subsegments:
-    - [0xAE5590, c]
-    - [0xAE58D0, c]
-    - [0xAE5A90, c]
-    - [0xAE5B60, c]
-    - [0xAE5BA0, data]
-    - [0xAE5CE0, data]
-    - [0xAE5D80, data]
-    - [0xAE65A0, data]
-    - [0xAE6BF0, data]
-    - [0xAE8A50, data]
-    - [0xAEA0D0, data]
-    - [0xAEA230, data]
-    - [0xAEB820, data]
-    - [0xAECB30, data]
-    - [0xAED3E0]
+    - [0xAE5590, c, kkj_15_0_header]
+    - [0xAE5590, c, kkj_15_1_music]
+    - [0xAE5590, c, kkj_15_2_main]
+    - [0xAE58D0, c, kkj_15_3_rotating_wall]
+    - [0xAE5A90, c, kkj_15_4_chapter0]
+    - [0xAE5B60, c, kkj_15_5_chapter1]
+    - [0xAE5B60, c, kkj_15_6_chapter2]
+    - [0xAE5B60, c, kkj_15_7_chapter3]
+    - [0xAE5BA0, c, kkj_15_8_npc_chapter0]
+    - [0xAE5BA0, c, kkj_15_9_npc_chapter1]
+    - [0xAE5BA0, c, kkj_15_10_npc_chapter3]
+    - [0xAE5BA0]
   - name: kkj_16
     dir: world/area_kkj/kkj_16
     type: code
@@ -12037,7 +12034,7 @@ segments:
     - [0xB13D70, c, kkj_27_0_header]
     - [0xB13D70, c, kkj_27_1_music]
     - [0xB13D70, c, kkj_27_2_main]
-    - [0xB14080, c, kkj_27_3_secret]
+    - [0xB14080, c, kkj_27_3_rotating_wall]
     - [0xB14210]
   - name: kkj_28
     dir: world/area_kkj/kkj_28
