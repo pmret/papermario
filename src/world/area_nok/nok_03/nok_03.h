@@ -12,10 +12,10 @@
 #include "sprite/npc/WorldKooper.h"
 
 enum {
-	NPC_Fuzzy_01        = 0,
-	NPC_Fuzzy_02        = 1,
-	NPC_Fuzzy_03        = 4,
-	NPC_KoopersShell    = 5,
+    NPC_Fuzzy_01        = 0,
+    NPC_Fuzzy_02        = 1,
+    NPC_Fuzzy_03        = 4,
+    NPC_KoopersShell    = 5,
 };
 
 #define NAMESPACE nok_03

@@ -88,7 +88,7 @@ EvtScript N(EVS_AnimatePlatforms) = {
         EVT_END_IF
         EVT_SETF(LVar0, LVarA)
         // the rest of the script is cut off halfway through the next EVT_SETF cmd
-	/*
+    /*
         EVT_SETF(LVar1, LVarB)
         EVT_SETF(LVar2, LVarC)
         EVT_SETF(LVar3, LVarD)
@@ -116,8 +116,8 @@ EvtScript N(EVS_AnimatePlatforms) = {
 };
 
 // half of EVT_SETF(LVar1, LVarB)
-s32 N(EVS_AnimatePlatforms_Fragment)[] = {    	
-	EVT_OP_SETF, 2,
+s32 N(EVS_AnimatePlatforms_Fragment)[] = {
+    EVT_OP_SETF, 2,
 };
 
 // remaining data is truncated

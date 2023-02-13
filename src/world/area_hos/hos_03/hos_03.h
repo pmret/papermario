@@ -13,14 +13,14 @@
 #include "sprite/npc/ChuckQuizmo.h"
 
 enum {
-	NPC_StarMan_01              = 0,
-	NPC_StarMan_02              = 1,
-	NPC_StarMan_03              = 2,
-	NPC_StarMan_04              = 3,
-	NPC_StarMan_05              = 4,
-	NPC_StarMan_ToadHouse       = 5,
-	NPC_StarMan_ShopOwner       = 6,
-	NPC_ChuckQuizmo             = 7,
+    NPC_StarMan_01              = 0,
+    NPC_StarMan_02              = 1,
+    NPC_StarMan_03              = 2,
+    NPC_StarMan_04              = 3,
+    NPC_StarMan_05              = 4,
+    NPC_StarMan_ToadHouse       = 5,
+    NPC_StarMan_ShopOwner       = 6,
+    NPC_ChuckQuizmo             = 7,
 };
 
 #define NAMESPACE hos_03

@@ -10,12 +10,12 @@ API_CALLABLE(N(SpawnSunEffect)) {
 
 EvtScript N(EVS_ExitWalk_flo_21_0) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
-	EVT_CALL(UseExitHeading, 60, flo_19_ENTRY_1)
-	EVT_EXEC(ExitWalk)
-	EVT_CALL(GotoMap, 0x80243000, flo_21_ENTRY_0) // raw pointer to missing string "flo_21"
-	EVT_WAIT(100)
-	EVT_RETURN
-	EVT_END
+    EVT_CALL(UseExitHeading, 60, flo_19_ENTRY_1)
+    EVT_EXEC(ExitWalk)
+    EVT_CALL(GotoMap, 0x80243000, flo_21_ENTRY_0) // raw pointer to missing string "flo_21"
+    EVT_WAIT(100)
+    EVT_RETURN
+    EVT_END
 };
 
 EvtScript N(EVS_BindExitTriggers) = {
