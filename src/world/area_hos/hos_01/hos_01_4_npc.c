@@ -447,7 +447,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS,
         .init = &N(EVS_NpcInit_Eldstar),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
         .tattle = MSG_NpcTattle_Eldstar,
     },
@@ -457,7 +457,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .pos = { 100.0f, 260.0f, -215.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = MAMAR_ANIMS,
     },
     {
@@ -466,7 +466,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .pos = { -145.0f, 260.0f, -225.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = SKOLAR_ANIMS,
     },
     {
@@ -475,7 +475,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .pos = { 20.0f, 260.0f, -45.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = MUSKULAR_ANIMS,
     },
     {
@@ -484,7 +484,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .pos = { -155.0f, 260.0f, -125.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = MISSTAR_ANIMS,
     },
     {
@@ -493,7 +493,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .pos = { 90.0f, 260.0f, -110.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = KLEVAR_ANIMS,
     },
     {
@@ -502,7 +502,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .pos = { -75.0f, 260.0f, -290.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = KALMAR_ANIMS,
     },
 };

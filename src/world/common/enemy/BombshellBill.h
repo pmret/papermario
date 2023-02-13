@@ -10,13 +10,6 @@
     .maxCoinBonus = 3, \
 }
 
-#define BOMBSHELL_BLASTER_NO_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define BOMBSHELL_BLASTER_ANIMS \
 { \
     .idle   = ANIM_BillBlaster_Gold_Anim01, \

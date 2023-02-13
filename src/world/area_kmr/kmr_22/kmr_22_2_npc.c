@@ -38,7 +38,7 @@ StaticNpc N(NpcData_Chapter1)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar),
-        .drops = ELDSTAR_DROPS,
+        .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
     },
     {
@@ -91,7 +91,7 @@ StaticNpc N(NpcData_Chapter2)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Mamar),
-        .drops = MAMAR_DROPS,
+        .drops = NO_DROPS,
         .animations = MAMAR_ANIMS,
     },
     {
@@ -101,11 +101,7 @@ StaticNpc N(NpcData_Chapter2)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Tutankoopa),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Tutankoopa_Anim01,
             .walk   = ANIM_Tutankoopa_Anim01,
@@ -132,11 +128,7 @@ StaticNpc N(NpcData_Chapter2)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ChainChomp),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ChainChomp_Anim00,
             .walk   = ANIM_ChainChomp_Anim00,
@@ -162,11 +154,7 @@ StaticNpc N(NpcData_Chapter2)[] = {
         .pos = { 23.0f, -4.0f, -180.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ChainChomp_Anim00,
             .walk   = ANIM_ChainChomp_Anim00,
@@ -192,11 +180,7 @@ StaticNpc N(NpcData_Chapter2)[] = {
         .pos = { 23.0f, -4.0f, -180.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ChainChomp_Anim00,
             .walk   = ANIM_ChainChomp_Anim00,
@@ -222,11 +206,7 @@ StaticNpc N(NpcData_Chapter2)[] = {
         .pos = { 23.0f, -4.0f, -180.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ChainChomp_Anim00,
             .walk   = ANIM_ChainChomp_Anim00,
@@ -252,11 +232,7 @@ StaticNpc N(NpcData_Chapter2)[] = {
         .pos = { 23.0f, -4.0f, -180.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ChainChomp_Anim00,
             .walk   = ANIM_ChainChomp_Anim00,
@@ -286,7 +262,7 @@ StaticNpc N(NpcData_Chapter3)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Skolar),
-        .drops = SKOLAR_DROPS,
+        .drops = NO_DROPS,
         .animations = SKOLAR_ANIMS,
     },
     {
@@ -296,11 +272,7 @@ StaticNpc N(NpcData_Chapter3)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Tubba),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldTubba_Anim06,
             .walk   = ANIM_WorldTubba_Anim09,
@@ -330,7 +302,7 @@ StaticNpc N(NpcData_Chapter4)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Muskular),
-        .drops = MUSKULAR_DROPS,
+        .drops = NO_DROPS,
         .animations = MUSKULAR_ANIMS,
     },
     {
@@ -340,11 +312,7 @@ StaticNpc N(NpcData_Chapter4)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_GeneralGuy),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GeneralGuy_Anim02,
             .walk   = ANIM_GeneralGuy_Anim02,
@@ -394,7 +362,7 @@ StaticNpc N(NpcData_Chapter5)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Misstar),
-        .drops = MISSTAR_DROPS,
+        .drops = NO_DROPS,
         .animations = MISSTAR_ANIMS,
     },
     {
@@ -440,7 +408,7 @@ StaticNpc N(NpcData_Chapter6)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Klevar),
-        .drops = KLEVAR_DROPS,
+        .drops = NO_DROPS,
         .animations = KLEVAR_ANIMS,
     },
     {
@@ -450,11 +418,7 @@ StaticNpc N(NpcData_Chapter6)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_HuffNPuff_Body),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_HuffNPuff_Anim01,
             .walk   = ANIM_HuffNPuff_Anim01,
@@ -481,11 +445,7 @@ StaticNpc N(NpcData_Chapter6)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_HuffNPuff_Face),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_HuffNPuff_Anim01,
             .walk   = ANIM_HuffNPuff_Anim01,
@@ -512,11 +472,7 @@ StaticNpc N(NpcData_Chapter6)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_HuffNPuff_Arms),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_HuffNPuff_Anim01,
             .walk   = ANIM_HuffNPuff_Anim01,
@@ -543,11 +499,7 @@ StaticNpc N(NpcData_Chapter6)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_TuffPuff_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_TuffPuff_Still,
             .walk   = ANIM_TuffPuff_Still,
@@ -573,11 +525,7 @@ StaticNpc N(NpcData_Chapter6)[] = {
         .pos = { 14.0f, 61.0f, 1.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_TuffPuff_Still,
             .walk   = ANIM_TuffPuff_Still,
@@ -607,7 +555,7 @@ StaticNpc N(NpcData_Chapter7)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Kalmar),
-        .drops = KALMAR_DROPS,
+        .drops = NO_DROPS,
         .animations = KALMAR_ANIMS,
     },
     {
@@ -617,11 +565,7 @@ StaticNpc N(NpcData_Chapter7)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_CrystalKing),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_CrystalKing_Anim09,
             .walk   = ANIM_CrystalKing_Anim09,
@@ -648,11 +592,7 @@ StaticNpc N(NpcData_Chapter7)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_IceCube),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_CrystalKing_Anim09,
             .walk   = ANIM_CrystalKing_Anim09,
@@ -679,11 +619,7 @@ StaticNpc N(NpcData_Chapter7)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_IceSphere),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_CrystalKing_Anim09,
             .walk   = ANIM_CrystalKing_Anim09,
@@ -710,11 +646,7 @@ StaticNpc N(NpcData_Chapter7)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_IceSpike),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_CrystalKing_Anim09,
             .walk   = ANIM_CrystalKing_Anim09,
@@ -743,11 +675,7 @@ StaticNpc N(NpcData_Chapter8) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Bowser),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_WorldBowser_Idle,
         .walk   = ANIM_WorldBowser_Idle,

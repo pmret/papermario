@@ -631,7 +631,7 @@ StaticNpc N(NpcData_Misstar) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_400000,
-    .drops = MISSTAR_DROPS,
+    .drops = NO_DROPS,
     .animations = MISSTAR_ANIMS,
     .tattle = MSG_NpcTattle_Misstar,
 };

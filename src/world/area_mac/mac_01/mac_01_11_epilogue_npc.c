@@ -268,11 +268,7 @@ StaticNpc N(NpcData_RowfAndRhuff)[] = {
         .yaw = 90,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rowf),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Rowf_Idle,
         },
@@ -286,11 +282,7 @@ StaticNpc N(NpcData_RowfAndRhuff)[] = {
         .yaw = 90,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rhuff),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Rowf_Idle,
         },
@@ -354,11 +346,7 @@ StaticNpc N(NpcData_Artists)[] = {
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Chanterelle),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Chanterelle_Idle,
             .walk   = ANIM_Chanterelle_Still,
@@ -387,11 +375,7 @@ StaticNpc N(NpcData_Artists)[] = {
         .yaw = 90,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Poet),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Musician_Poet_Idle,
             .walk   = ANIM_Musician_Poet_Idle,
@@ -420,11 +404,7 @@ StaticNpc N(NpcData_Artists)[] = {
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Composer),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Musician_Composer_Idle,
             .walk   = ANIM_Musician_Composer_Still,

@@ -159,7 +159,7 @@ StaticNpc N(NpcData_Default)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Skolar),
-        .drops = SKOLAR_DROPS,
+        .drops = NO_DROPS,
         .animations = SKOLAR_ANIMS,
     },
 };

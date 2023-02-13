@@ -170,11 +170,7 @@ StaticNpc N(NpcData_GoombaFamily) = {
     .yaw = 45,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Goompa),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Goompa_Idle,
         .walk   = ANIM_Goompa_Walk,

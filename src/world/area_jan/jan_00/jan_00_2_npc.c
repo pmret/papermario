@@ -646,7 +646,7 @@ StaticNpc N(NpcData_Characters)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Kolorado_01),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Whale,
     },
@@ -657,7 +657,7 @@ StaticNpc N(NpcData_Characters)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Kolorado_02),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
     },
@@ -668,7 +668,7 @@ StaticNpc N(NpcData_Characters)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_JrTroopa),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = JR_TROOPA_ANIMS,
     },
 };
@@ -679,7 +679,7 @@ StaticNpc N(NpcData_HeartPlant_01) = {
     .pos = { 455.0f, 0.0f, 115.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };
@@ -690,7 +690,7 @@ StaticNpc N(NpcData_HeartPlant_02) = {
     .pos = { 167.0f, 0.0f, 404.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };
@@ -701,7 +701,7 @@ StaticNpc N(NpcData_HeartPlant_03) = {
     .pos = { 90.0f, 0.0f, 316.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };
@@ -712,7 +712,7 @@ StaticNpc N(NpcData_HeartPlant_04) = {
     .pos = { 424.0f, 0.0f, 182.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };
@@ -723,7 +723,7 @@ StaticNpc N(NpcData_HeartPlant_05) = {
     .pos = { 143.0f, 0.0f, 260.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };

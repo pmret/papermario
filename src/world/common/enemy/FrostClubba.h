@@ -41,7 +41,7 @@
     .pos = { NPC_DISPOSE_LOCATION }, \
     .yaw = 0, \
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_NO_DROPS, \
-    .drops = NPC_NO_DROPS, \
+    .drops = NO_DROPS, \
     .animations = FROST_CLUBBA_ANIMS, \
     .extraAnimations = N(ExtraAnims_FrostClubba_Hitbox), \
 }

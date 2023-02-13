@@ -5,13 +5,6 @@
 #include "sprite/npc/Goomama.h"
 #include "sprite/npc/Goombaria.h"
 
-#define GOOMPA_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define GOOMPA_ANIMS \
 { \
     .idle   = ANIM_Goompa_Idle, \
@@ -30,13 +23,6 @@
     .anim_D = ANIM_Goompa_Run, \
     .anim_E = ANIM_Goompa_Run, \
     .anim_F = ANIM_Goompa_Run, \
-}
-
-#define GOOMA_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
 }
 
 #define GOOMA_ANIMS \
@@ -59,13 +45,6 @@
     .anim_F = ANIM_Gooma_Run, \
 }
 
-#define GOOMPAPA_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define GOOMPAPA_ANIMS \
 { \
     .idle   = ANIM_Goompapa_Idle, \
@@ -84,13 +63,6 @@
     .anim_D = ANIM_Goompapa_Run, \
     .anim_E = ANIM_Goompapa_Run, \
     .anim_F = ANIM_Goompapa_Run, \
-}
-
-#define GOOMAMA_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
 }
 
 #define GOOMAMA_ANIMS \
@@ -113,13 +85,6 @@
     .anim_F = ANIM_Goomama_Run, \
 }
 
-#define GOOMBARIO_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define GOOMBARIO_ANIMS \
 { \
     .idle   = ANIM_WorldGoombario_Idle, \
@@ -138,13 +103,6 @@
     .anim_D = ANIM_WorldGoombario_Run, \
     .anim_E = ANIM_WorldGoombario_Run, \
     .anim_F = ANIM_WorldGoombario_Run, \
-}
-
-#define GOOMBARIA_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
 }
 
 #define GOOMBARIA_ANIMS \

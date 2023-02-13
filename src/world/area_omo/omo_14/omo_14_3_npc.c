@@ -388,7 +388,7 @@ StaticNpc N(NpcData_ShyGuy_Loner) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200,
     .init = &N(EVS_NpcInit_ShyGuy_Loner),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
@@ -400,7 +400,7 @@ StaticNpc N(NpcData_ShyGuy_Crowd)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
@@ -410,7 +410,7 @@ StaticNpc N(NpcData_ShyGuy_Crowd)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
@@ -420,7 +420,7 @@ StaticNpc N(NpcData_ShyGuy_Crowd)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
@@ -430,7 +430,7 @@ StaticNpc N(NpcData_ShyGuy_Crowd)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
@@ -440,7 +440,7 @@ StaticNpc N(NpcData_ShyGuy_Crowd)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
@@ -450,7 +450,7 @@ StaticNpc N(NpcData_ShyGuy_Crowd)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
@@ -460,7 +460,7 @@ StaticNpc N(NpcData_ShyGuy_Crowd)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
@@ -470,7 +470,7 @@ StaticNpc N(NpcData_ShyGuy_Crowd)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
@@ -480,7 +480,7 @@ StaticNpc N(NpcData_ShyGuy_Crowd)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
@@ -490,7 +490,7 @@ StaticNpc N(NpcData_ShyGuy_Crowd)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
 };

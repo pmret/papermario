@@ -5,7 +5,7 @@
 #include "sprite/npc/ToadGuard.h"
 #include "sprite/npc/ToadMinister.h"
 
-#define TOAD_DROPS NPC_NO_DROPS
+#define TOAD_DROPS NO_DROPS
 
 #define TOAD_RED_ANIMS \
 { \
@@ -110,8 +110,8 @@
 #define TOAD_KID_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
+    .heartDrops  = NO_STAT_DROPS, \
+    .flowerDrops = NO_STAT_DROPS, \
 }
 
 #define TOAD_KID_RED_ANIMS \
@@ -197,8 +197,8 @@
 #define TOADETTE_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
+    .heartDrops  = NO_STAT_DROPS, \
+    .flowerDrops = NO_STAT_DROPS, \
 }
 
 #define TOADETTE_ORANGE_ANIMS \

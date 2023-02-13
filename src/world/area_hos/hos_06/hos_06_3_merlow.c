@@ -260,7 +260,7 @@ StaticNpc N(NpcData_Merluvlee)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Merluvlee_Passthrough),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Merluvlee_Idle,
         },
@@ -273,7 +273,7 @@ StaticNpc N(NpcData_Merluvlee)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Merlow),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Merlow_Idle,
         },

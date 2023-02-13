@@ -226,7 +226,7 @@ StaticNpc N(NpcData_FakeMario) = {
     .yaw = 90,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_FakeMario),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = BOMBETTE_ANIMS,
 };
 
@@ -238,7 +238,7 @@ StaticNpc N(NpcData_Imposters)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_FakeBombette),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
     {
@@ -248,7 +248,7 @@ StaticNpc N(NpcData_Imposters)[] = {
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_01),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = DUPLIGHOST_ANIMS,
     },
     {
@@ -258,7 +258,7 @@ StaticNpc N(NpcData_Imposters)[] = {
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_02),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = DUPLIGHOST_ANIMS,
     },
 };

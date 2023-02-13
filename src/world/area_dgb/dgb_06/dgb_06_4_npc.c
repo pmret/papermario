@@ -30,7 +30,7 @@ StaticNpc N(NpcData_Boo) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
     .tattle = MSG_NpcTattle_HidingBoo,
 };

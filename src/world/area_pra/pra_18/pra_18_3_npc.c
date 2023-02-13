@@ -340,7 +340,7 @@ StaticNpc N(NpcData_Clubba_01)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Clubba_01),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
     {
@@ -350,7 +350,7 @@ StaticNpc N(NpcData_Clubba_01)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Clubba_01_Aux),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
 };
@@ -363,7 +363,7 @@ StaticNpc N(NpcData_Clubba_02)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Clubba_02),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
     {
@@ -373,7 +373,7 @@ StaticNpc N(NpcData_Clubba_02)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Clubba_02_Aux),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
 };
@@ -386,7 +386,7 @@ StaticNpc N(NpcData_Clubba_03)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Clubba_03),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
     {
@@ -396,7 +396,7 @@ StaticNpc N(NpcData_Clubba_03)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Clubba_03_Aux),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
 };

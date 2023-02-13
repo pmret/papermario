@@ -17,7 +17,7 @@ StaticNpc N(NpcData_Merlar) = {
     .yaw = 180,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Merlar),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = MERLAR_ANIMS,
 };
 

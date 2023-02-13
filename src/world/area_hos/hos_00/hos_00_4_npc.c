@@ -130,7 +130,7 @@ StaticNpc N(NpcData_Twink) = {
     .yaw = 90,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Twink),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = TWINK_ANIMS,
 };
 
@@ -141,7 +141,7 @@ StaticNpc N(NpcData_FlyingMagikoopa) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_FlyingMagikoopa),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = FLYING_MAGIKOOPA_ANIMS,
 };
 
@@ -152,7 +152,7 @@ StaticNpc N(NpcData_Wishing)[] = {
         .pos = { 280.0f, -10.0f, -50.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
     },
     {
@@ -161,7 +161,7 @@ StaticNpc N(NpcData_Wishing)[] = {
         .pos = { 330.0f, -10.0f, -40.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = TOAD_KID_RED_ANIMS,
     },
 };

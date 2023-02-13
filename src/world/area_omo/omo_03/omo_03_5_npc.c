@@ -129,7 +129,7 @@ StaticNpc N(NpcData_TrainToads)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Conductor),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = TRAIN_CONDUCTOR_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,
     },
@@ -140,7 +140,7 @@ StaticNpc N(NpcData_TrainToads)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_TrainToad),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = TRAIN_TOAD_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,
     }
@@ -153,7 +153,7 @@ StaticNpc N(NpcData_Epilogue)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = PARAKARRY_ANIMS,
     },
     {
@@ -162,7 +162,7 @@ StaticNpc N(NpcData_Epilogue)[] = {
         .pos = { 50.0f, 15.0f, 160.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldWatt_Idle,
             .walk   = ANIM_WorldWatt_Idle,
@@ -188,7 +188,7 @@ StaticNpc N(NpcData_Epilogue)[] = {
         .pos = { 100.0f, 0.0f, 160.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
@@ -197,7 +197,7 @@ StaticNpc N(NpcData_Epilogue)[] = {
         .pos = { 115.0f, 0.0f, 200.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
@@ -206,7 +206,7 @@ StaticNpc N(NpcData_Epilogue)[] = {
         .pos = { 145.0f, 0.0f, 150.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
 };

@@ -151,11 +151,7 @@ StaticNpc N(NpcData_KoopaTroopa_01) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_KoopaTroopa_01),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,

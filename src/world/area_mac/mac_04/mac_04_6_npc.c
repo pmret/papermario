@@ -177,11 +177,7 @@ StaticNpc N(NpcData_Townsfolk)[] = {
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS,
         .init = &N(EVS_NpcInit_ChetRippo),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ChetRippo_Idle,
         },
@@ -194,11 +190,7 @@ StaticNpc N(NpcData_Townsfolk)[] = {
         .yaw = 230,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_HarryT),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_HarryT_Idle,
             .walk   = ANIM_HarryT_Walk,
@@ -379,11 +371,7 @@ StaticNpc N(NpcData_Chapter4)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShyGuy_Red_Anim01,
             .walk   = ANIM_ShyGuy_Red_Anim02,
@@ -410,11 +398,7 @@ StaticNpc N(NpcData_Chapter4)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_ShyGuy_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShyGuy_Red_Anim01,
             .walk   = ANIM_ShyGuy_Red_Anim02,
@@ -444,7 +428,7 @@ StaticNpc N(NpcData_PostChapter4)[] = {
         .yaw = 90,
         .flags = COMMON_PASSIVE_FLAGS,
         .init = &N(EVS_NpcInit_Muskular),
-        .drops = MUSKULAR_DROPS,
+        .drops = NO_DROPS,
         .animations = MUSKULAR_ANIMS,
     },
     {
@@ -454,11 +438,7 @@ StaticNpc N(NpcData_PostChapter4)[] = {
         .yaw = 90,
         .flags = COMMON_PASSIVE_FLAGS,
         .init = &N(EVS_NpcInit_TwinkEndCh4),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
     },
 };
@@ -471,7 +451,7 @@ StaticNpc N(NpcData_GoombaFamily)[] = {
         .yaw = 90,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Goomama),
-        .drops = GOOMAMA_DROPS,
+        .drops = NO_DROPS,
         .animations = GOOMAMA_ANIMS,
         .tattle = MSG_NpcTattle_Goomama,
     },
@@ -482,7 +462,7 @@ StaticNpc N(NpcData_GoombaFamily)[] = {
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Goombaria),
-        .drops = GOOMBARIA_DROPS,
+        .drops = NO_DROPS,
         .animations = GOOMBARIA_ANIMS,
         .tattle = MSG_NpcTattle_Goombaria,
     },
@@ -496,7 +476,7 @@ StaticNpc N(NpcData_ChuckQuizmo) = {
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_4000,
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_MAC, QUIZ_COUNT_MAC, QUIZ_MAP_MAC_04 }},
-    .drops = QUIZMO_DROPS,
+    .drops = NO_DROPS,
     .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,
 };

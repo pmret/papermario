@@ -10,13 +10,6 @@
     .maxCoinBonus = 1, \
 }
 
-#define BILL_BLASTER_NO_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define BILL_BLASTER_ANIMS \
 { \
     .idle   = ANIM_BillBlaster_Anim01, \

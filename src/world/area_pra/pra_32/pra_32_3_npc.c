@@ -244,7 +244,7 @@ StaticNpc N(NpcData_CrystalKing_01)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_CrystalKing_Aux),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = CRYSTAL_KING_ANIMS,
     },
     {
@@ -253,7 +253,7 @@ StaticNpc N(NpcData_CrystalKing_01)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
         .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = CRYSTAL_KING_ANIMS,
     },
     {
@@ -263,7 +263,7 @@ StaticNpc N(NpcData_CrystalKing_01)[] = {
         .yaw = 90,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Kalmar),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = KALMAR_ANIMS,
     },
     {
@@ -273,7 +273,7 @@ StaticNpc N(NpcData_CrystalKing_01)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_CrystalKing),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = CRYSTAL_KING_ANIMS,
     },
 };

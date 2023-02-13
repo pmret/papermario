@@ -153,11 +153,7 @@ StaticNpc N(NpcData_Toad) = {
     .yaw = 270,
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Toad),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_IWA_TravelAgent,
 };

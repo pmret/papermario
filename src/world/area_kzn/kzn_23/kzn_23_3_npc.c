@@ -294,7 +294,7 @@ StaticNpc N(NpcData_Misstar) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_Misstar),
-    .drops = MISSTAR_DROPS,
+    .drops = NO_DROPS,
     .animations = MISSTAR_ANIMS,
 };
 

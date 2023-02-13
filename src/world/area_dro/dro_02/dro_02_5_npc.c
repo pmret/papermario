@@ -362,11 +362,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Archeologist),
         .yaw = 90,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .territory = { .temp = { -303, 0, 22, 146, 38, -32767, 1, 0, 0, 0, 0, 0, 0, 1 }},
         .animations = {
             ANIM_Archeologist_Idle,
@@ -429,11 +425,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcAuxAI_Merlee),
         .yaw = 180,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             ANIM_WorldMerlee_Idle,
             ANIM_WorldMerlee_Walk,
@@ -494,11 +486,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Mouser_01),
         .yaw = 180,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = MOUSER_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_DRO_CrushingOnMerlee,
     },
@@ -531,7 +519,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .initVarCount = 1,
         .initVar = { .bytes = { 0, QUIZ_AREA_DRO, QUIZ_COUNT_DRO, QUIZ_MAP_DRO_02 } },
         .yaw = 270,
-        .drops = QUIZMO_DROPS,
+        .drops = NO_DROPS,
         .animations = QUIZMO_ANIMS,
         .tattle = MSG_NpcTattle_ChuckQuizmo,
     },

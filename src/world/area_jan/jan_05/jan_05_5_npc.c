@@ -226,7 +226,7 @@ StaticNpc N(NpcData_YoshiKid) = {
     .yaw = 270,
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_YoshiKid),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = YOSHI_KID_PURPLE_ANIMS,
     .tattle = MSG_NpcTattle_PurpleYoshiKid,
 };
@@ -293,7 +293,7 @@ StaticNpc N(NpcData_HeartPlant) = {
     .pos = { 430.0f, 0.0f, 205.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };

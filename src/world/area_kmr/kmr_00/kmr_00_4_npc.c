@@ -113,7 +113,7 @@ StaticNpc N(NpcData_Goombaria) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Goombaria),
-    .drops = GOOMBARIA_DROPS,
+    .drops = NO_DROPS,
     .animations = GOOMBARIA_ANIMS,
 };
 
@@ -125,7 +125,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = ELDSTAR_DROPS,
+        .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
     },
     {
@@ -135,7 +135,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = MAMAR_DROPS,
+        .drops = NO_DROPS,
         .animations = MAMAR_ANIMS,
     },
     {
@@ -145,7 +145,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = SKOLAR_DROPS,
+        .drops = NO_DROPS,
         .animations = SKOLAR_ANIMS,
     },
     {
@@ -155,7 +155,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = MUSKULAR_DROPS,
+        .drops = NO_DROPS,
         .animations = MUSKULAR_ANIMS,
     },
     {
@@ -165,7 +165,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = MISSTAR_DROPS,
+        .drops = NO_DROPS,
         .animations = MISSTAR_ANIMS,
     },
     {
@@ -175,7 +175,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = KLEVAR_DROPS,
+        .drops = NO_DROPS,
         .animations = KLEVAR_ANIMS,
     },
     {
@@ -185,7 +185,7 @@ StaticNpc N(NpcData_StarSpirits)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = KALMAR_DROPS,
+        .drops = NO_DROPS,
         .animations = KALMAR_ANIMS,
     },
 };

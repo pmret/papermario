@@ -73,11 +73,7 @@ StaticNpc N(NpcData_Tutankoopa)[] = {
         .init = &N(EVS_NpcInit_Tutankoopa_01),
         .initVarCount = 1,
         .initVar = { .value = 0 },
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Tutankoopa_Anim01,
             .walk   = ANIM_Tutankoopa_Anim01,
@@ -103,11 +99,7 @@ StaticNpc N(NpcData_Tutankoopa)[] = {
         .pos = { 500.0f, -1300.0f, 316.0f },
         .yaw = 230,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Tutankoopa_Anim01,
             .walk   = ANIM_Tutankoopa_Anim01,
@@ -136,11 +128,7 @@ StaticNpc N(NpcData_ChainChomp) = {
     .yaw = 230,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_ChainChomp),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_ChainChomp_Anim00,
         .walk   = ANIM_ChainChomp_Anim00,

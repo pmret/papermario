@@ -4,8 +4,8 @@
 #define KOOPA_BROS_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
+    .heartDrops  = NO_STAT_DROPS, \
+    .flowerDrops = NO_STAT_DROPS, \
 }
 
 #define BLACK_KOOPA_BROS_ANIMS \

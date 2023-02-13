@@ -220,7 +220,7 @@ StaticNpc N(NpcData_Door) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
     .init = &N(EVS_NpcInit_Door),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
 };
 

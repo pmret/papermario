@@ -27,7 +27,7 @@ StaticNpc N(NpcData_Kammy) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),
 };

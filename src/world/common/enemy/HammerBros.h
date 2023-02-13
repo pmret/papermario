@@ -42,11 +42,7 @@
     .pos = { NPC_DISPOSE_LOCATION }, \
     .yaw = 90, \
     .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_NO_DROPS, \
-    .drops = { \
-        .dropFlags = NPC_DROP_FLAG_80, \
-        .heartDrops  = NO_DROPS, \
-        .flowerDrops = NO_DROPS, \
-    }, \
+    .drops = NO_DROPS, \
     .territory = { \
         .wander = { \
             .isFlying = TRUE, \

@@ -264,11 +264,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Composer),
         .yaw = 271,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             ANIM_Musician_Composer_Idle,
             ANIM_Musician_Composer_Still,
@@ -308,11 +304,7 @@ StaticNpc N(PassiveNPCs)[] = {
         .initVarCount = 1,
         .initVar = { .bytes = { 0, QUIZ_AREA_DRO, QUIZ_COUNT_DRO, QUIZ_MAP_DRO_01 }},
         .yaw = 263,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ChuckQuizmo_Idle,
             .walk   = ANIM_ChuckQuizmo_Walk,

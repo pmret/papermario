@@ -42,10 +42,6 @@
     .pos = { NPC_DISPOSE_LOCATION }, \
     .yaw = 0, \
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_NO_DROPS, \
-    .drops = { \
-        .dropFlags = NPC_DROP_FLAG_80, \
-        .heartDrops  = NO_DROPS, \
-        .flowerDrops = NO_DROPS, \
-    }, \
+    .drops = NO_DROPS, \
     .animations = PUTRID_PIRANHA_ANIMS, \
 }

@@ -1053,11 +1053,7 @@ StaticNpc N(NpcData_Merlon) = {
     .yaw = 30,
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Merlon),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Merlon_Idle,
     },
@@ -1072,11 +1068,7 @@ StaticNpc N(NpcData_DarkToads)[] = {
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_DarkToad_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_DarkToad_Red_Idle,
         },
@@ -1089,11 +1081,7 @@ StaticNpc N(NpcData_DarkToads)[] = {
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_DarkToad_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_DarkToad_Black_Idle,
         },
@@ -1106,11 +1094,7 @@ StaticNpc N(NpcData_DarkToads)[] = {
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_DarkToad_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_DarkToad_Yellow_Idle,
         },
@@ -1123,11 +1107,7 @@ StaticNpc N(NpcData_DarkToads)[] = {
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_DarkToad_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_DarkToad_Green_Idle,
         },
@@ -1150,11 +1130,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Black_Anim04,
             .walk   = ANIM_KoopaBros_Black_Anim02,
@@ -1181,11 +1157,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Red_Anim04,
             .walk   = ANIM_KoopaBros_Red_Anim02,
@@ -1212,11 +1184,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Yellow_Anim04,
             .walk   = ANIM_KoopaBros_Yellow_Anim02,
@@ -1243,11 +1211,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Green_Anim04,
             .walk   = ANIM_KoopaBros_Green_Anim02,
@@ -1276,11 +1240,7 @@ StaticNpc N(NpcData_Ninji) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Ninji_Idle,
         .walk   = ANIM_Ninji_Walk,
@@ -2288,11 +2248,7 @@ StaticNpc N(NpcData_Townsfolk)[] = {
         .yaw = 300,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000,
         .init = &N(EVS_NpcInit_Postmaster),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Postmaster_Idle,
         },
@@ -2307,11 +2263,7 @@ StaticNpc N(NpcData_Parakarry) = {
     .yaw = 120,
     .flags = COMMON_PASSIVE_FLAGS,
     .init = &N(EVS_NpcInit_Parakarry),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_WorldParakarry_Idle,
         .walk   = ANIM_WorldParakarry_Walk,
@@ -2424,7 +2376,7 @@ StaticNpc N(NpcData_ChuckQuizmo) = {
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_4000,
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_MAC, QUIZ_COUNT_MAC, QUIZ_MAP_MAC_01 }},
-    .drops = QUIZMO_DROPS,
+    .drops = NO_DROPS,
     .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,
 };

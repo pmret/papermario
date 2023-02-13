@@ -293,7 +293,7 @@ StaticNpc N(NpcData_ToadMinister)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ToadMinister),
-        .drops  = NPC_NO_DROPS,
+        .drops  = NO_DROPS,
         .animations = TOAD_MINISTER_ANIMS,
     },
     {
@@ -303,7 +303,7 @@ StaticNpc N(NpcData_ToadMinister)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Toad_01),
-        .drops  = NPC_NO_DROPS,
+        .drops  = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
     },
     {
@@ -313,7 +313,7 @@ StaticNpc N(NpcData_ToadMinister)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Toad_02),
-        .drops  = NPC_NO_DROPS,
+        .drops  = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -335,7 +335,7 @@ StaticNpc N(NpcData_ToadMinister)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Toad_03),
-        .drops  = NPC_NO_DROPS,
+        .drops  = NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -359,7 +359,7 @@ StaticNpc N(NpcData_ToadMinister)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Toadette),
-        .drops  = NPC_NO_DROPS,
+        .drops  = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -381,7 +381,7 @@ StaticNpc N(NpcData_ToadMinister)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ToadGuard_01),
-        .drops  = NPC_NO_DROPS,
+        .drops  = NO_DROPS,
         .animations = TOAD_GUARD_RED_ANIMS,
     },
     {
@@ -391,7 +391,7 @@ StaticNpc N(NpcData_ToadMinister)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ToadGuard_02),
-        .drops  = NPC_NO_DROPS,
+        .drops  = NO_DROPS,
         .animations = TOAD_GUARD_YELLOW_ANIMS,
     },
     {
@@ -401,7 +401,7 @@ StaticNpc N(NpcData_ToadMinister)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Dryite),
-        .drops  = NPC_NO_DROPS,
+        .drops  = NO_DROPS,
         .animations = DRYITE_YELLOW_ANIMS,
     },
     {
@@ -411,7 +411,7 @@ StaticNpc N(NpcData_ToadMinister)[] = {
         .settings = &N(NpcSettings_Mouser),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Mouser),
-        .drops  = NPC_NO_DROPS,
+        .drops  = NO_DROPS,
         .animations = MOUSER_BLUE_ANIMS,
     },
     {
@@ -421,7 +421,7 @@ StaticNpc N(NpcData_ToadMinister)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_MayorPenguin),
-        .drops  = NPC_NO_DROPS,
+        .drops  = NO_DROPS,
         .animations = MAYOR_PENGUIN_ANIMS,
     },
     {
@@ -431,7 +431,7 @@ StaticNpc N(NpcData_ToadMinister)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Koopa),
-        .drops  = NPC_NO_DROPS,
+        .drops  = NO_DROPS,
         .animations = KOOPA_ANIMS,
     },
 };

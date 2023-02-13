@@ -184,7 +184,7 @@ StaticNpc N(NpcData_Kalmar) = {
     .yaw = 90,
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Kalmar),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = KALMAR_ANIMS,
 };
 

@@ -47,7 +47,7 @@ StaticNpc N(NpcData_Toads)[] = {
         .settings = &N(NpcSettings_Toad_Wander),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Toad),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
     },
     {
@@ -57,7 +57,7 @@ StaticNpc N(NpcData_Toads)[] = {
         .settings = &N(NpcSettings_Toad_Stationary),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ToadGuard),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = TOAD_GUARD_RED_ANIMS,
     },
 };

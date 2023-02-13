@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/TuffPuff.h"
 
-#define TUFF_PUFF_NO_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define TUFF_PUFF_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAG_80, \

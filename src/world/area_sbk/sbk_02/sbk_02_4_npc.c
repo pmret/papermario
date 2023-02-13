@@ -258,7 +258,7 @@ StaticNpc N(NpcData_Mamar) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Mamar),
-    .drops = MAMAR_DROPS,
+    .drops = NO_DROPS,
     .animations = MAMAR_ANIMS,
 };
 
@@ -269,11 +269,7 @@ StaticNpc N(NpcData_TradingToad) = {
     .yaw = 90,
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
     .init = &N(EVS_NpcInit_TradingToad),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Toad_Pink_Idle,
         .walk   = ANIM_Toad_Pink_Walk,

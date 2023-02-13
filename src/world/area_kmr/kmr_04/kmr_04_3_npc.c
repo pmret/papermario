@@ -265,11 +265,7 @@ StaticNpc N(NpcData_JrTroopa) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_JrTroopa),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_JrTroopa_Idle,
         .walk   = ANIM_JrTroopa_Walk,

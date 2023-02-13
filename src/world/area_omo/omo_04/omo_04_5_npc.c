@@ -96,7 +96,7 @@ StaticNpc N(NpcData_Goomba) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Goomba),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = GOOMBA_ANIMS,
 };
 
@@ -107,7 +107,7 @@ StaticNpc N(NpcData_Clubba) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Clubba),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = CLUBBA_ANIMS_ALT,
 };
 
@@ -174,7 +174,7 @@ StaticNpc N(NpcData_Kammy) = {
     .yaw = 90,
     .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Kammy),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),
 };

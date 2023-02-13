@@ -658,11 +658,7 @@ StaticNpc N(NpcData_Bow) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_Bow),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_WorldBow_Idle,
         .walk   = ANIM_WorldBow_Walk,
@@ -690,11 +686,7 @@ StaticNpc N(NpcData_Bootler) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_Bootler),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Bootler_Idle,
         .walk   = ANIM_Bootler_Walk,
@@ -805,7 +797,7 @@ StaticNpc N(NpcData_Skolar) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Skolar),
-    .drops = SKOLAR_DROPS,
+    .drops = NO_DROPS,
     .animations = SKOLAR_ANIMS,
 };
 

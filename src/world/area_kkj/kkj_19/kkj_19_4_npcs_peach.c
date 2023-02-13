@@ -43,11 +43,7 @@ StaticNpc N(NpcData_Twink) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000000,
     .init = &N(EVS_NpcInit_Twink),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = TWINK_ANIMS,
 };
 

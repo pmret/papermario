@@ -312,11 +312,7 @@ StaticNpc N(NpcData_Parakarry) = {
     .yaw = 0,
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_Parakarry),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = PARAKARRY_ANIMS,
     .tattle = MSG_NpcTattle_IWA_Parakarry,
 };

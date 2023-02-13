@@ -762,11 +762,7 @@ StaticNpc N(NpcData_ShyGuy) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
     .init = &N(EVS_NpcInit_ShyGuy),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_ShyGuy_Red_Anim01,
         .walk   = ANIM_ShyGuy_Red_Anim02,

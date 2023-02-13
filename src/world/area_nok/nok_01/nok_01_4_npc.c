@@ -430,7 +430,7 @@ StaticNpc N(NpcData_Crisis)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Koover_Crisis),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -453,7 +453,7 @@ StaticNpc N(NpcData_Crisis)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000,
         .init = &N(EVS_NpcInit_FuzzyWithShell),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -475,7 +475,7 @@ StaticNpc N(NpcData_Crisis)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_KooversShell),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
     },
     {
@@ -485,7 +485,7 @@ StaticNpc N(NpcData_Crisis)[] = {
         .yaw = 180,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Koopa_02_Crisis),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -508,7 +508,7 @@ StaticNpc N(NpcData_Crisis)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_KoopaShell_02),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
     },
     {
@@ -518,7 +518,7 @@ StaticNpc N(NpcData_Crisis)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Koopa_03_Crisis),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -541,7 +541,7 @@ StaticNpc N(NpcData_Crisis)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_KoopaShell_03),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
     },
     {
@@ -551,7 +551,7 @@ StaticNpc N(NpcData_Crisis)[] = {
         .yaw = 82,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bobomb_01_Crisis),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = BOBOMB_RED_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombA,
     },
@@ -562,7 +562,7 @@ StaticNpc N(NpcData_Crisis)[] = {
         .yaw = 82,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bobomb_02_Crisis),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = BOBOMB_RED_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombB,
     },
@@ -576,7 +576,7 @@ StaticNpc N(NpcData_MiscFuzzy1) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_MiscFuzzy1),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = FUZZY_ANIMS,
 };
 
@@ -588,7 +588,7 @@ StaticNpc N(NpcData_MiscFuzzy2) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_MiscFuzzy2),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = FUZZY_ANIMS,
 };
 
@@ -600,7 +600,7 @@ StaticNpc N(NpcData_Normal)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Koover_Normal),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -623,7 +623,7 @@ StaticNpc N(NpcData_Normal)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Koopa_02_Normal),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -646,7 +646,7 @@ StaticNpc N(NpcData_Normal)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Koopa_03_Normal),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -669,7 +669,7 @@ StaticNpc N(NpcData_Normal)[] = {
         .yaw = 82,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bobomb_01_Normal),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = BOBOMB_RED_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombA,
     },
@@ -680,7 +680,7 @@ StaticNpc N(NpcData_Normal)[] = {
         .yaw = 82,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bobomb_02_Normal),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = BOBOMB_RED_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombB,
     },
@@ -691,7 +691,7 @@ StaticNpc N(NpcData_Normal)[] = {
         .yaw = 262,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bobomb_03_Normal),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = BOBOMB_RED_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombC,
     },
@@ -705,7 +705,7 @@ StaticNpc N(NpcData_Shared)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_MortT),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_NOK_ToadHouseToad,
     },
@@ -716,7 +716,7 @@ StaticNpc N(NpcData_Shared)[] = {
         .yaw = 157,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Koopa_ShopOwner),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_ShopOwner,
     },
@@ -727,7 +727,7 @@ StaticNpc N(NpcData_Shared)[] = {
         .yaw = 262,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_RelaxedKoopa),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_RadioLover,
     },
@@ -739,7 +739,7 @@ StaticNpc N(NpcData_Shared)[] = {
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .initVarCount = 1,
         .initVar = { .bytes = { 0, QUIZ_AREA_NOK, QUIZ_COUNT_NOK, QUIZ_MAP_NOK_01 }},
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = QUIZMO_ANIMS,
         .tattle = MSG_NpcTattle_ChuckQuizmo,
     },

@@ -16,14 +16,12 @@
 #define NPC_GROUP_EXPLICIT_SIZE4(npcs, start, count, battle)        { count, (StaticNpc*) &npcs[start], battle, 0 }
 #define NPC_GROUP_EXPLICIT_SIZE5(npcs, start, count, battle, stage) { count, (StaticNpc*) &npcs[start], battle, stage + 1 }
 
+#define NO_STAT_DROPS { { F16(100), F16(0), 0, F16(0) }, }
 
-#define NO_DROPS { { F16(100), F16(0), 0, F16(0) }, }
-
-// rename this to NO_DROPS and the above to NO_STAT_DROPS after all map data done
-#define NPC_NO_DROPS { \
+#define NO_DROPS { \
     .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
+    .heartDrops  = NO_STAT_DROPS, \
+    .flowerDrops = NO_STAT_DROPS, \
 }
 
 #define STANDARD_HEART_DROPS(attempts) { \

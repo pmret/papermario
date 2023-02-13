@@ -543,7 +543,7 @@ StaticNpc N(NpcData_Eldstar)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = ELDSTAR_DROPS,
+        .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
     },
     {
@@ -553,7 +553,7 @@ StaticNpc N(NpcData_Eldstar)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = ELDSTAR_DROPS,
+        .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
     },
 };
@@ -566,7 +566,7 @@ StaticNpc N(NpcData_Mamar)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = MAMAR_DROPS,
+        .drops = NO_DROPS,
         .animations = MAMAR_ANIMS,
     },
     {
@@ -576,7 +576,7 @@ StaticNpc N(NpcData_Mamar)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = MAMAR_DROPS,
+        .drops = NO_DROPS,
         .animations = MAMAR_ANIMS,
     },
 };
@@ -589,7 +589,7 @@ StaticNpc N(NpcData_Skolar)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = SKOLAR_DROPS,
+        .drops = NO_DROPS,
         .animations = SKOLAR_ANIMS,
     },
     {
@@ -599,7 +599,7 @@ StaticNpc N(NpcData_Skolar)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = SKOLAR_DROPS,
+        .drops = NO_DROPS,
         .animations = SKOLAR_ANIMS,
     },
 };
@@ -612,7 +612,7 @@ StaticNpc N(NpcData_Muskular)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = MUSKULAR_DROPS,
+        .drops = NO_DROPS,
         .animations = MUSKULAR_ANIMS,
     },
     {
@@ -622,7 +622,7 @@ StaticNpc N(NpcData_Muskular)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = MUSKULAR_DROPS,
+        .drops = NO_DROPS,
         .animations = MUSKULAR_ANIMS,
     },
 };
@@ -635,7 +635,7 @@ StaticNpc N(NpcData_Misstar)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = MISSTAR_DROPS,
+        .drops = NO_DROPS,
         .animations = MISSTAR_ANIMS,
     },
     {
@@ -645,7 +645,7 @@ StaticNpc N(NpcData_Misstar)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = MISSTAR_DROPS,
+        .drops = NO_DROPS,
         .animations = MISSTAR_ANIMS,
     },
 };
@@ -658,7 +658,7 @@ StaticNpc N(NpcData_Klevar)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = KLEVAR_DROPS,
+        .drops = NO_DROPS,
         .animations = KLEVAR_ANIMS,
     },
     {
@@ -668,7 +668,7 @@ StaticNpc N(NpcData_Klevar)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = KLEVAR_DROPS,
+        .drops = NO_DROPS,
         .animations = KLEVAR_ANIMS,
     },
 };
@@ -681,7 +681,7 @@ StaticNpc N(NpcData_Kalmar)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = KALMAR_DROPS,
+        .drops = NO_DROPS,
         .animations = KALMAR_ANIMS,
     },
     {
@@ -691,7 +691,7 @@ StaticNpc N(NpcData_Kalmar)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = KALMAR_DROPS,
+        .drops = NO_DROPS,
         .animations = KALMAR_ANIMS,
     },
 };

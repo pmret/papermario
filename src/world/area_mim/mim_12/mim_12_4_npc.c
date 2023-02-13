@@ -20,11 +20,7 @@ StaticNpc N(NpcData_GateBoos)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_GateBoo_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
     },
     {
@@ -34,11 +30,7 @@ StaticNpc N(NpcData_GateBoos)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_GateBoo_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
     },
 };

@@ -276,7 +276,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .yaw = 90,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
     .init = &N(EVS_NpcInit_Kolorado),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
 };
@@ -288,7 +288,7 @@ StaticNpc N(NpcData_JungleFuzzy_01) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_JungleFuzzy_01),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
 };
 

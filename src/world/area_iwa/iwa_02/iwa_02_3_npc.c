@@ -105,11 +105,7 @@ StaticNpc N(NpcData_MontyMole_01)[] = {
         .pos = { 867.0f, 0.0f, 101.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,

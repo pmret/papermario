@@ -82,11 +82,7 @@ StaticNpc N(NpcData_Bootler)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Bootler),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Bootler_Idle,
             .walk   = ANIM_Bootler_Walk,
@@ -113,11 +109,7 @@ StaticNpc N(NpcData_Bootler)[] = {
         .yaw = 135,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Skolar),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldSkolar_Idle,
             .walk   = ANIM_WorldSkolar_Idle,

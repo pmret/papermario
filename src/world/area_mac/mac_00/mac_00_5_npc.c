@@ -226,11 +226,7 @@ StaticNpc N(NpcData_RussT) = {
     .yaw = 119,
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
     .init = &N(EVS_NpcInit_RussT),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_RussT_Idle,
         .walk   = ANIM_RussT_Idle,
@@ -260,11 +256,7 @@ StaticNpc N(NpcData_Toad_01)[] = {
         .yaw = 223,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
         .init = &N(EVS_NpcInit_Toad_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_HarryT_Idle,
             .walk   = ANIM_HarryT_Walk,
@@ -281,11 +273,7 @@ StaticNpc N(NpcData_Toad_01)[] = {
         .yaw = 223,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
         .init = &N(EVS_NpcInit_Toad_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_HarryT_Idle,
             .walk   = ANIM_HarryT_Walk,
@@ -329,11 +317,7 @@ StaticNpc N(NpcData_Toad_03)[] = {
         .yaw = 225,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_TheMaster),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_TheMaster_Idle,
             .walk   = ANIM_TheMaster_Still,
@@ -362,11 +346,7 @@ StaticNpc N(NpcData_Toad_03)[] = {
         .yaw = 45,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Chan),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Chan_Idle,
         },
@@ -380,11 +360,7 @@ StaticNpc N(NpcData_Toad_03)[] = {
         .yaw = 45,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Lee),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Lee_Idle,
         },
@@ -401,7 +377,7 @@ StaticNpc N(NpcData_Quizmo_Unused) = {
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_4000,
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_MAC, QUIZ_COUNT_MAC, QUIZ_MAP_MAC_00 }},
-    .drops = QUIZMO_DROPS,
+    .drops = NO_DROPS,
     .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,
 };
