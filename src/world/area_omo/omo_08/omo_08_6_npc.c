@@ -97,7 +97,7 @@ EvtScript N(EVS_NpcInit_BoxedShyGuy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Toads)[] = {
+NpcData N(NpcData_Toads)[] = {
     {
         .id = NPC_Conductor,
         .settings = &N(NpcSettings_TrainToad),
@@ -122,7 +122,7 @@ StaticNpc N(NpcData_Toads)[] = {
     },
 };
 
-StaticNpc N(NpcData_ShyGuy_01) = {
+NpcData N(NpcData_ShyGuy_01) = {
     .id = NPC_ShyGuy_01,
     .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -145,7 +145,7 @@ StaticNpc N(NpcData_ShyGuy_01) = {
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_02) = {
+NpcData N(NpcData_ShyGuy_02) = {
     .id = NPC_ShyGuy_02,
     .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -168,7 +168,7 @@ StaticNpc N(NpcData_ShyGuy_02) = {
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_03) = {
+NpcData N(NpcData_ShyGuy_03) = {
     .id = NPC_ShyGuy_03,
     .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -191,7 +191,7 @@ StaticNpc N(NpcData_ShyGuy_03) = {
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_04) = {
+NpcData N(NpcData_ShyGuy_04) = {
     .id = NPC_ShyGuy_04,
     .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },

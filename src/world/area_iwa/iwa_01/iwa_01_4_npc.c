@@ -5,7 +5,7 @@
 #include "world/common/enemy/MontyMole_WallAmbush.inc.c"
 #include "world/common/enemy/Cleft.inc.c"
 
-StaticNpc N(NpcData_MontyMole_WallAmbush)[] = {
+NpcData N(NpcData_MontyMole_WallAmbush)[] = {
     {
         .id = NPC_MontyMole_01,
         .settings = &N(NpcSettings_MontyMole_WallAmbush),
@@ -52,7 +52,7 @@ StaticNpc N(NpcData_MontyMole_WallAmbush)[] = {
     },
 };
 
-StaticNpc N(NpcData_MontyMole_StoneThrower_01)[] = {
+NpcData N(NpcData_MontyMole_StoneThrower_01)[] = {
     {
         .id = NPC_MontyMole_02,
         .settings = &N(NpcSettings_MontyMole_StoneThrower),
@@ -78,7 +78,7 @@ StaticNpc N(NpcData_MontyMole_StoneThrower_01)[] = {
     MONTY_MOLE_STONE_HITBOX(NPC_MontyMole_02_Stone)
 };
 
-StaticNpc N(NpcData_MontyMole_StoneThrower_02)[] = {
+NpcData N(NpcData_MontyMole_StoneThrower_02)[] = {
     {
         .id = NPC_MontyMole_03,
         .settings = &N(NpcSettings_MontyMole_StoneThrower),
@@ -104,7 +104,7 @@ StaticNpc N(NpcData_MontyMole_StoneThrower_02)[] = {
     MONTY_MOLE_STONE_HITBOX(NPC_MontyMole_03_Stone)
 };
 
-StaticNpc N(NpcData_MontyMole_StoneThrower_03)[] = {
+NpcData N(NpcData_MontyMole_StoneThrower_03)[] = {
     {
         .id = NPC_MontyMole_04,
         .settings = &N(NpcSettings_MontyMole_StoneThrower),
@@ -130,7 +130,7 @@ StaticNpc N(NpcData_MontyMole_StoneThrower_03)[] = {
     MONTY_MOLE_STONE_HITBOX(NPC_MontyMole_04_Stone)
 };
 
-StaticNpc N(NpcData_Cleft) = {
+NpcData N(NpcData_Cleft) = {
     .id = NPC_Cleft,
     .settings = &N(NpcSettings_Cleft),
     .pos = { -657.0f, 163.0f, 155.0f },

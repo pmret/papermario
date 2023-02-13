@@ -21,7 +21,7 @@ EvtScript N(EVS_NpcInit_Luigi_Scenes) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Scenes)[] = {
+NpcData N(NpcData_Scenes)[] = {
     {
         .id = NPC_Scene_Parakarry,
         .settings = &N(NpcSettings_Scenes),

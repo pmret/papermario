@@ -243,7 +243,7 @@ EvtScript N(EVS_NpcInit_Sentinel_04) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Sentinel_01) = {
+NpcData N(NpcData_Sentinel_01) = {
     .id = NPC_Sentinel_01,
     .settings = &N(NpcSettings_Sentinel),
     .pos = { -180.0f, 100.0f, 230.0f },
@@ -266,7 +266,7 @@ StaticNpc N(NpcData_Sentinel_01) = {
     .animations = SENTINEL_ANIMS,
 };
 
-StaticNpc N(NpcData_Sentinel_02) = {
+NpcData N(NpcData_Sentinel_02) = {
     .id = NPC_Sentinel_02,
     .settings = &N(NpcSettings_Sentinel),
     .pos = { 180.0f, 100.0f, 230.0f },
@@ -289,7 +289,7 @@ StaticNpc N(NpcData_Sentinel_02) = {
     .animations = SENTINEL_ANIMS,
 };
 
-StaticNpc N(NpcData_Sentinel_03) = {
+NpcData N(NpcData_Sentinel_03) = {
     .id = NPC_Sentinel_03,
     .settings = &N(NpcSettings_Sentinel),
     .pos = { -180.0f, 100.0f, -230.0f },
@@ -312,7 +312,7 @@ StaticNpc N(NpcData_Sentinel_03) = {
     .animations = SENTINEL_ANIMS,
 };
 
-StaticNpc N(NpcData_Sentinel_04) = {
+NpcData N(NpcData_Sentinel_04) = {
     .id = NPC_Sentinel_04,
     .settings = &N(NpcSettings_Sentinel),
     .pos = { 180.0f, 100.0f, -230.0f },
@@ -350,7 +350,7 @@ s32 N(ExtraAnims_Tubba)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Tubba_Floor3) = {
+NpcData N(NpcData_Tubba_Floor3) = {
     .id = NPC_Tubba,
     .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -362,7 +362,7 @@ StaticNpc N(NpcData_Tubba_Floor3) = {
     .extraAnimations = N(ExtraAnims_Tubba),
 };
 
-StaticNpc N(NpcData_Tubba_Floor2) = {
+NpcData N(NpcData_Tubba_Floor2) = {
     .id = NPC_Tubba,
     .settings = &N(NpcSettings_TubbaBlubba_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -389,7 +389,7 @@ StaticNpc N(NpcData_Tubba_Floor2) = {
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Tubba_Floor1) = {
+NpcData N(NpcData_Tubba_Floor1) = {
     .id = NPC_Tubba,
     .settings = &N(NpcSettings_TubbaBlubba_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },

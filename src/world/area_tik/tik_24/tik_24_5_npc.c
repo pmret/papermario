@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/DarkTroopa_Wander.inc.c"
 
-StaticNpc N(NpcData_DarkTroopa_01) = {
+NpcData N(NpcData_DarkTroopa_01) = {
     .id = NPC_DarkTroopa_01,
     .settings = &N(NpcSettings_DarkTroopa_Wander),
     .pos = { -75.0f, -10.0f, 50.0f },
@@ -25,7 +25,7 @@ StaticNpc N(NpcData_DarkTroopa_01) = {
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_DarkTroopa_02) = {
+NpcData N(NpcData_DarkTroopa_02) = {
     .id = NPC_DarkTroopa_02,
     .settings = &N(NpcSettings_DarkTroopa_Wander),
     .pos = { 175.0f, -10.0f, -50.0f },

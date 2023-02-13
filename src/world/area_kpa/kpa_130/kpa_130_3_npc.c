@@ -151,7 +151,7 @@ EvtScript N(EVS_NpcInit_BillBlaster_03) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_BillBlaster_01)[] = {
+NpcData N(NpcData_BillBlaster_01)[] = {
     {
         .id = NPC_BillBlaster_01,
         .settings = &N(NpcSettings_BillBlaster),
@@ -198,7 +198,7 @@ StaticNpc N(NpcData_BillBlaster_01)[] = {
     },
 };
 
-StaticNpc N(NpcData_BillBlaster_03)[] = {
+NpcData N(NpcData_BillBlaster_03)[] = {
     {
         .id = NPC_BillBlaster_03,
         .settings = &N(NpcSettings_BillBlaster),
@@ -245,7 +245,7 @@ StaticNpc N(NpcData_BillBlaster_03)[] = {
     },
 };
 
-StaticNpc N(NpcData_BillBlaster_05)[] = {
+NpcData N(NpcData_BillBlaster_05)[] = {
     {
         .id = NPC_BillBlaster_05,
         .settings = &N(NpcSettings_BillBlaster),
@@ -292,7 +292,7 @@ StaticNpc N(NpcData_BillBlaster_05)[] = {
     },
 };
 
-StaticNpc N(NpcData_BillBlaster_07)[] = {
+NpcData N(NpcData_BillBlaster_07)[] = {
     {
         .id = NPC_BillBlaster_07,
         .settings = &N(NpcSettings_BillBlaster),
@@ -339,28 +339,28 @@ StaticNpc N(NpcData_BillBlaster_07)[] = {
     },
 };
 
-StaticNpc N(NpcData_BulletBill_01) = BOMBSHELL_BILL_NPC(NPC_BulletBill_01);
-StaticNpc N(NpcData_BulletBill_02) = BOMBSHELL_BILL_NPC(NPC_BulletBill_02);
-StaticNpc N(NpcData_BulletBill_03) = BOMBSHELL_BILL_NPC(NPC_BulletBill_03);
-StaticNpc N(NpcData_BulletBill_04) = BOMBSHELL_BILL_NPC(NPC_BulletBill_04);
-StaticNpc N(NpcData_BulletBill_05) = BOMBSHELL_BILL_NPC(NPC_BulletBill_05);
-StaticNpc N(NpcData_BulletBill_06) = BOMBSHELL_BILL_NPC(NPC_BulletBill_06);
-StaticNpc N(NpcData_BulletBill_07) = BOMBSHELL_BILL_NPC(NPC_BulletBill_07);
-StaticNpc N(NpcData_BulletBill_08) = BOMBSHELL_BILL_NPC(NPC_BulletBill_08);
-StaticNpc N(NpcData_BulletBill_09) = BOMBSHELL_BILL_NPC(NPC_BulletBill_09);
-StaticNpc N(NpcData_BulletBill_10) = BOMBSHELL_BILL_NPC(NPC_BulletBill_10);
+NpcData N(NpcData_BulletBill_01) = BOMBSHELL_BILL_NPC(NPC_BulletBill_01);
+NpcData N(NpcData_BulletBill_02) = BOMBSHELL_BILL_NPC(NPC_BulletBill_02);
+NpcData N(NpcData_BulletBill_03) = BOMBSHELL_BILL_NPC(NPC_BulletBill_03);
+NpcData N(NpcData_BulletBill_04) = BOMBSHELL_BILL_NPC(NPC_BulletBill_04);
+NpcData N(NpcData_BulletBill_05) = BOMBSHELL_BILL_NPC(NPC_BulletBill_05);
+NpcData N(NpcData_BulletBill_06) = BOMBSHELL_BILL_NPC(NPC_BulletBill_06);
+NpcData N(NpcData_BulletBill_07) = BOMBSHELL_BILL_NPC(NPC_BulletBill_07);
+NpcData N(NpcData_BulletBill_08) = BOMBSHELL_BILL_NPC(NPC_BulletBill_08);
+NpcData N(NpcData_BulletBill_09) = BOMBSHELL_BILL_NPC(NPC_BulletBill_09);
+NpcData N(NpcData_BulletBill_10) = BOMBSHELL_BILL_NPC(NPC_BulletBill_10);
 
 // the following NPCs are unused
-StaticNpc N(NpcData_BulletBill_11) = BOMBSHELL_BILL_NPC(NPC_BulletBill_11);
-StaticNpc N(NpcData_BulletBill_12) = BOMBSHELL_BILL_NPC(NPC_BulletBill_12);
-StaticNpc N(NpcData_BulletBill_13) = BOMBSHELL_BILL_NPC(NPC_BulletBill_13);
-StaticNpc N(NpcData_BulletBill_14) = BOMBSHELL_BILL_NPC(NPC_BulletBill_14);
-StaticNpc N(NpcData_BulletBill_15) = BOMBSHELL_BILL_NPC(NPC_BulletBill_15);
-StaticNpc N(NpcData_BulletBill_16) = BOMBSHELL_BILL_NPC(NPC_BulletBill_16);
-StaticNpc N(NpcData_BulletBill_17) = BOMBSHELL_BILL_NPC(NPC_BulletBill_17);
-StaticNpc N(NpcData_BulletBill_18) = BOMBSHELL_BILL_NPC(NPC_BulletBill_18);
-StaticNpc N(NpcData_BulletBill_19) = BOMBSHELL_BILL_NPC(NPC_BulletBill_19);
-StaticNpc N(NpcData_BulletBill_20) = BOMBSHELL_BILL_NPC(NPC_BulletBill_20);
+NpcData N(NpcData_BulletBill_11) = BOMBSHELL_BILL_NPC(NPC_BulletBill_11);
+NpcData N(NpcData_BulletBill_12) = BOMBSHELL_BILL_NPC(NPC_BulletBill_12);
+NpcData N(NpcData_BulletBill_13) = BOMBSHELL_BILL_NPC(NPC_BulletBill_13);
+NpcData N(NpcData_BulletBill_14) = BOMBSHELL_BILL_NPC(NPC_BulletBill_14);
+NpcData N(NpcData_BulletBill_15) = BOMBSHELL_BILL_NPC(NPC_BulletBill_15);
+NpcData N(NpcData_BulletBill_16) = BOMBSHELL_BILL_NPC(NPC_BulletBill_16);
+NpcData N(NpcData_BulletBill_17) = BOMBSHELL_BILL_NPC(NPC_BulletBill_17);
+NpcData N(NpcData_BulletBill_18) = BOMBSHELL_BILL_NPC(NPC_BulletBill_18);
+NpcData N(NpcData_BulletBill_19) = BOMBSHELL_BILL_NPC(NPC_BulletBill_19);
+NpcData N(NpcData_BulletBill_20) = BOMBSHELL_BILL_NPC(NPC_BulletBill_20);
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_BillBlaster_01), BTL_KPA4_FORMATION_02, BTL_KPA4_STAGE_04),

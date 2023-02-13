@@ -251,7 +251,7 @@ EvtScript N(EVS_NpcInit_TradingToad) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Mamar) = {
+NpcData N(NpcData_Mamar) = {
     .id = NPC_Mamar,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -262,7 +262,7 @@ StaticNpc N(NpcData_Mamar) = {
     .animations = MAMAR_ANIMS,
 };
 
-StaticNpc N(NpcData_TradingToad) = {
+NpcData N(NpcData_TradingToad) = {
     .id = NPC_TradingToad,
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 0.0f, 2.0f, 150.0f },

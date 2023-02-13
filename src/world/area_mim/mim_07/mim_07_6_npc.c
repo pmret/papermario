@@ -182,7 +182,7 @@ EvtScript N(EVS_NpcInit_Fuzzy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Fuzzy_01) = {
+NpcData N(NpcData_Fuzzy_01) = {
     .id = NPC_Fuzzy_01,
     .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { -240.0f, 0.0f, -240.0f },
@@ -206,7 +206,7 @@ StaticNpc N(NpcData_Fuzzy_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Fuzzy_02) = {
+NpcData N(NpcData_Fuzzy_02) = {
     .id = NPC_Fuzzy_02,
     .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { 270.0f, 0.0f, 200.0f },
@@ -230,7 +230,7 @@ StaticNpc N(NpcData_Fuzzy_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_JrTroopa) = {
+NpcData N(NpcData_JrTroopa) = {
     .id = NPC_JrTroopa,
     .settings = &N(NpcSettings_JrTroopa),
     .pos = { -338.0f, 0.0f, 0.0f },

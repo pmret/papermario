@@ -338,7 +338,7 @@ EvtScript N(EVS_NpcInit_Bobomb_04) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Bombette) = {
+NpcData N(NpcData_Bombette) = {
     .id = NPC_Bombette,
     .settings = &N(NpcSettings_Bobomb),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -367,7 +367,7 @@ StaticNpc N(NpcData_Bombette) = {
     .tattle = MSG_NpcTattle_TRD_Bombette,
 };
 
-StaticNpc N(NpcData_Jailers)[] = {
+NpcData N(NpcData_Jailers)[] = {
     {
         .id = NPC_Jailer_KoopaTroopa,
         .settings = &N(NpcSettings_KoopaTroopa),
@@ -460,7 +460,7 @@ StaticNpc N(NpcData_Jailers)[] = {
     },
 };
 
-StaticNpc N(NpcData_Inmates)[] = {
+NpcData N(NpcData_Inmates)[] = {
     {
         .id = NPC_Bobomb_01,
         .settings = &N(NpcSettings_Bobomb),

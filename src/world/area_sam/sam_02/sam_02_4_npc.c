@@ -368,7 +368,7 @@ EvtScript N(EVS_NpcInit_Penguin_07) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Townsfolk)[] = {
+NpcData N(NpcData_Townsfolk)[] = {
     {
         .id = NPC_Penguin_ShopOwner,
         .settings = &N(NpcSettings_Penguin),
@@ -474,7 +474,7 @@ StaticNpc N(NpcData_Townsfolk)[] = {
     },
 };
 
-StaticNpc N(NpcData_MysteryOnly)[] = {
+NpcData N(NpcData_MysteryOnly)[] = {
     {
         .id = NPC_Penguin_02,
         .settings = &N(NpcSettings_Penguin),
@@ -511,7 +511,7 @@ StaticNpc N(NpcData_MysteryOnly)[] = {
     },
 };
 
-StaticNpc N(NpcData_ChuckQuizmo) = {
+NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
     .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { -230.0f, 0.0f, 160.0f },

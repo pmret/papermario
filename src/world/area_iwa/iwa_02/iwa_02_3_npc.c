@@ -7,7 +7,7 @@
 
 #include "world/common/complete/GiveReward.inc.c"
 
-StaticNpc N(NpcData_Cleft_01) = {
+NpcData N(NpcData_Cleft_01) = {
     .id = NPC_Cleft_01,
     .settings = &N(NpcSettings_Cleft),
     .pos = { 526.0f, 238.0f, 69.0f },
@@ -30,7 +30,7 @@ StaticNpc N(NpcData_Cleft_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Cleft_02) = {
+NpcData N(NpcData_Cleft_02) = {
     .id = NPC_Cleft_02,
     .settings = &N(NpcSettings_Cleft),
     .pos = { 450.0f, 50.0f, 215.0f },
@@ -53,7 +53,7 @@ StaticNpc N(NpcData_Cleft_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Cleft_03) = {
+NpcData N(NpcData_Cleft_03) = {
     .id = NPC_Cleft_03,
     .settings = &N(NpcSettings_Cleft),
     .pos = { 90.0f, 0.0f, 160.0f },
@@ -76,7 +76,7 @@ StaticNpc N(NpcData_Cleft_03) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_MontyMole_01)[] = {
+NpcData N(NpcData_MontyMole_01)[] = {
     {
         .id = NPC_MontyMole,
         .settings = &N(NpcSettings_MontyMole_WallAmbush),
@@ -180,7 +180,7 @@ EvtScript N(EVS_NpcInit_Bubulb) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Bubulb) = {
+NpcData N(NpcData_Bubulb) = {
     .id = NPC_Bubulb,
     .settings = &N(NpcSettings_Bubulb),
     .pos = { 1075.0f, 50.0f, 230.0f },

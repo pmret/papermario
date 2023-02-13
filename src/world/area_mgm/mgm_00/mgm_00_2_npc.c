@@ -165,7 +165,7 @@ EvtScript N(EVS_NpcInit_RedToad) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_RedToad) = {
+NpcData N(NpcData_RedToad) = {
     .id = NPC_RedToad,
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { -213.0f, 12.0f, -180.0f },
@@ -205,7 +205,7 @@ EvtScript N(EVS_NpcInit_GreenToad) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GreenToad) = {
+NpcData N(NpcData_GreenToad) = {
     .id = NPC_GreenToad,
     .settings = &N(NpcSettings_Toad_Patrol),
     .pos = { -88.0f, 0.0f, -95.0f },
@@ -255,7 +255,7 @@ EvtScript N(EVS_NpcInit_BlueToad) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_BlueToad) = {
+NpcData N(NpcData_BlueToad) = {
     .id = NPC_BlueToad,
     .settings = &N(NpcSettings_Toad_Patrol),
     .pos = { 46.0f, 0.0f, -205.0f },

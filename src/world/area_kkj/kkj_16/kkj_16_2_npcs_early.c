@@ -188,7 +188,7 @@ s32 N(ExtraAnims_Koopatrol)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Minions)[] = {
+NpcData N(NpcData_Minions)[] = {
     {
         .id = NPC_HammerBros,
         .settings = &N(NpcSettings_HammerBros),

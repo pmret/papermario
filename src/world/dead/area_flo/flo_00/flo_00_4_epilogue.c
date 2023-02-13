@@ -75,7 +75,7 @@ EvtScript N(EVS_NpcInit_Parakarry_Epilogue) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Lakilester_Epilogue)[] = {
+NpcData N(NpcData_Lakilester_Epilogue)[] = {
     {
         .id = NPC_Lakilester_Epilogue,
         .settings = &N(NpcSettings_Lakilester_Epilogue),

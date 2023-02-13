@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/SpikeTop.inc.c"
 
-StaticNpc N(NpcData_BuzzyBeetle_01) = {
+NpcData N(NpcData_BuzzyBeetle_01) = {
     .id = NPC_BuzzyBeetle_01,
     .settings = &N(NpcSettings_BuzzyBeetle_Ceiling),
     .pos = { -372.0f, -700.0f, 439.0f },
@@ -26,7 +26,7 @@ StaticNpc N(NpcData_BuzzyBeetle_01) = {
     .animations = BUZZY_BEETLE_ANIMS,
 };
 
-StaticNpc N(NpcData_BuzzyBeetle_02) = {
+NpcData N(NpcData_BuzzyBeetle_02) = {
     .id = NPC_BuzzyBeetle_02,
     .settings = &N(NpcSettings_BuzzyBeetle_Ceiling),
     .pos = { -58.0f, -700.0f, 591.0f },
@@ -50,7 +50,7 @@ StaticNpc N(NpcData_BuzzyBeetle_02) = {
     .animations = BUZZY_BEETLE_ANIMS,
 };
 
-StaticNpc N(NpcData_BuzzyBeetle_03) = {
+NpcData N(NpcData_BuzzyBeetle_03) = {
     .id = NPC_BuzzyBeetle_03,
     .settings = &N(NpcSettings_BuzzyBeetle),
     .pos = { 292.0f, -780.0f, 488.0f },

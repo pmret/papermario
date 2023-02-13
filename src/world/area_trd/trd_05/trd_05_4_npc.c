@@ -201,7 +201,7 @@ EvtScript N(EVS_NpcInit_KoopaBros) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KoopaBros)[] = {
+NpcData N(NpcData_KoopaBros)[] = {
     {
         .id = NPC_KoopaBros_01,
         .settings = &N(NpcSettings_KoopaBros),

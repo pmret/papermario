@@ -4,7 +4,7 @@
 #include "world/common/enemy/Magikoopa.inc.c"
 #include "world/common/enemy/Koopatrol_Wander.inc.c"
 
-StaticNpc N(NpcData_Magikoopa_01)[] = {
+NpcData N(NpcData_Magikoopa_01)[] = {
     {
         .id = NPC_Magikoopa_01,
         .settings = &N(NpcSettings_Magikoopa),
@@ -31,7 +31,7 @@ StaticNpc N(NpcData_Magikoopa_01)[] = {
     MAGIKOOPA_SPELL_HITBOX(NPC_Magikoopa_01 + 1)
 };
 
-StaticNpc N(NpcData_Magikoopa_02)[] = {
+NpcData N(NpcData_Magikoopa_02)[] = {
     {
         .id = NPC_Magikoopa_02,
         .settings = &N(NpcSettings_Magikoopa),
@@ -58,7 +58,7 @@ StaticNpc N(NpcData_Magikoopa_02)[] = {
     MAGIKOOPA_SPELL_HITBOX(NPC_Magikoopa_02 + 1)
 };
 
-StaticNpc N(NpcData_Koopatrol) = {
+NpcData N(NpcData_Koopatrol) = {
     .id = NPC_Koopatrol,
     .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 0.0f, 0.0f, -30.0f },

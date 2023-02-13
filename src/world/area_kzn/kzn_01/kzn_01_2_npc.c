@@ -45,7 +45,7 @@ EvtScript N(EVS_NpcInit_PutridPiranha) = {
     EVT_END
 };
 
-StaticNpc N(NpcPutridPiranha) = {
+NpcData N(NpcPutridPiranha) = {
     .id = NPC_PutridPiranha,
     .settings = &N(NpcSettings_PutridPiranhaSentinel),
     .pos = { NPC_DISPOSE_LOCATION },

@@ -31,7 +31,7 @@ NpcSettings N(NpcSettings_Conductor) = {
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
-StaticNpc N(NpcData_Conductor) = {
+NpcData N(NpcData_Conductor) = {
     .id = NPC_Conductor,
     .settings = &N(NpcSettings_Conductor),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -41,7 +41,7 @@ StaticNpc N(NpcData_Conductor) = {
     .initVar = { .value = 0 },
 };
 
-StaticNpc N(NpcData_SpyGuy)[] = {
+NpcData N(NpcData_SpyGuy)[] = {
     {
         .id = NPC_SpyGuy,
         .settings = &N(NpcSettings_SpyGuy),
@@ -69,7 +69,7 @@ StaticNpc N(NpcData_SpyGuy)[] = {
     SPY_GUY_ROCK_HITBOX(NPC_SpyGuy_Rock3),
 };
 
-StaticNpc N(NpcData_PyroGuy) = {
+NpcData N(NpcData_PyroGuy) = {
     .id = NPC_PyroGuy,
     .settings = &N(NpcSettings_PyroGuy),
     .pos = { 354.0f, 10.0f, -113.0f },
@@ -92,7 +92,7 @@ StaticNpc N(NpcData_PyroGuy) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_GrooveGuy) = {
+NpcData N(NpcData_GrooveGuy) = {
     .id = NPC_GrooveGuy,
     .settings = &N(NpcSettings_GrooveGuy),
     .pos = { -150.0f, 10.0f, -125.0f },

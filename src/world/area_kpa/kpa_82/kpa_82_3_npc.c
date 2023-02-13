@@ -1271,7 +1271,7 @@ EvtScript N(EVS_NpcInit_AntiGuy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_AntiGuys)[] = {
+NpcData N(NpcData_AntiGuys)[] = {
     {
         .id = NPC_Dummy,
         .settings = &N(NpcSettings_AntiGuy),
@@ -1382,7 +1382,7 @@ StaticNpc N(NpcData_AntiGuys)[] = {
     },
 };
 
-StaticNpc N(NpcData_Goombas)[] = {
+NpcData N(NpcData_Goombas)[] = {
     {
         .id = NPC_Goomba_01,
         .settings = &N(NpcSettings_Short),
@@ -1495,7 +1495,7 @@ StaticNpc N(NpcData_Goombas)[] = {
     },
 };
 
-StaticNpc N(NpcData_RedShyGuys)[] = {
+NpcData N(NpcData_RedShyGuys)[] = {
     {
         .id = NPC_RedShyGuy_01,
         .settings = &N(NpcSettings_ShyGuy),
@@ -1688,7 +1688,7 @@ StaticNpc N(NpcData_RedShyGuys)[] = {
     },
 };
 
-StaticNpc N(NpcData_BlueShyGuys)[] = {
+NpcData N(NpcData_BlueShyGuys)[] = {
     {
         .id = NPC_BlueShyGuy_01,
         .settings = &N(NpcSettings_ShyGuy),
@@ -1881,7 +1881,7 @@ StaticNpc N(NpcData_BlueShyGuys)[] = {
     },
 };
 
-StaticNpc N(NpcData_GreenShyGuys)[] = {
+NpcData N(NpcData_GreenShyGuys)[] = {
     {
         .id = NPC_GreenShyGuy_01,
         .settings = &N(NpcSettings_ShyGuy),
@@ -2074,7 +2074,7 @@ StaticNpc N(NpcData_GreenShyGuys)[] = {
     },
 };
 
-StaticNpc N(NpcData_DarkTroopas)[] = {
+NpcData N(NpcData_DarkTroopas)[] = {
     {
         .id = NPC_DarkTroopa_01,
         .settings = &N(NpcSettings_KoopaTroopa),
@@ -2242,7 +2242,7 @@ StaticNpc N(NpcData_DarkTroopas)[] = {
     },
 };
 
-StaticNpc N(NpcData_KoopaTroopas)[] = {
+NpcData N(NpcData_KoopaTroopas)[] = {
     {
         .id = NPC_KoopaTroopa_01,
         .settings = &N(NpcSettings_KoopaTroopa),
@@ -2410,7 +2410,7 @@ StaticNpc N(NpcData_KoopaTroopas)[] = {
     },
 };
 
-StaticNpc N(NpcData_Bobombs)[] = {
+NpcData N(NpcData_Bobombs)[] = {
     {
         .id = NPC_Bobomb_01,
         .settings = &N(NpcSettings_Short),

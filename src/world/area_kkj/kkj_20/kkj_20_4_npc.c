@@ -337,7 +337,7 @@ EvtScript N(EVS_NpcInit_Toad) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Toad) = {
+NpcData N(NpcData_Toad) = {
     .id = NPC_Toad,
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { NPC_DISPOSE_LOCATION },

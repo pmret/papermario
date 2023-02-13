@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/DryBones.inc.c"
 
-StaticNpc N(NpcData_DryBones)[] = {
+NpcData N(NpcData_DryBones)[] = {
     {
         .id = NPC_DryBones,
         .settings = &N(NpcSettings_DryBones),

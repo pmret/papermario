@@ -439,7 +439,7 @@ EvtScript N(EVS_NpcInit_Eldstar) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_StarSpirits)[] = {
+NpcData N(NpcData_StarSpirits)[] = {
     {
         .id = NPC_Eldstar,
         .settings = &N(NpcSettings_StarSpirit),

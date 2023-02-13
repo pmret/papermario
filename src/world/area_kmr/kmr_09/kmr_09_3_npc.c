@@ -4,7 +4,7 @@
 #include "world/common/enemy/Goomba_Wander.inc.c"
 #include "world/common/enemy/Paragoomba_Wander.inc.c"
 
-StaticNpc N(NpcData_Goomba_01) = {
+NpcData N(NpcData_Goomba_01) = {
     .id = NPC_Goomba_01,
     .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 200.0f, 0.0f, 24.0f },
@@ -26,7 +26,7 @@ StaticNpc N(NpcData_Goomba_01) = {
     .animations = GOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_Goomba_02) = {
+NpcData N(NpcData_Goomba_02) = {
     .id = NPC_Goomba_02,
     .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 250.0f, 0.0f, 35.0f },
@@ -127,7 +127,7 @@ EvtScript N(EVS_NpcInit_Goomba_Ambush) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Goomba_Ambush) = {
+NpcData N(NpcData_Goomba_Ambush) = {
     .id = NPC_Goomba_Ambush,
     .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { -34.0f, 29.0f, -32.0f },
@@ -150,7 +150,7 @@ StaticNpc N(NpcData_Goomba_Ambush) = {
     .animations = GOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_Paragoomba) = {
+NpcData N(NpcData_Paragoomba) = {
     .id = NPC_Paragoomba,
     .settings = &N(NpcSettings_Paragoomba_Wander),
     .pos = { 670.0f, 60.0f, 20.0f },

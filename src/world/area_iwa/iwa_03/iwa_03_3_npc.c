@@ -3,7 +3,7 @@
 #include "world/common/enemy/MontyMole_GroundAmbush.inc.c"
 #include "world/common/enemy/Cleft.inc.c"
 
-StaticNpc N(NpcData_Cleft_01) = {
+NpcData N(NpcData_Cleft_01) = {
     .id = NPC_Cleft_01,
     .settings = &N(NpcSettings_Cleft),
     .pos = { -525.0f, -75.0f, 60.0f },
@@ -26,7 +26,7 @@ StaticNpc N(NpcData_Cleft_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Cleft_02) = {
+NpcData N(NpcData_Cleft_02) = {
     .id = NPC_Cleft_02,
     .settings = &N(NpcSettings_Cleft),
     .pos = { -1686.0f, -60.0f, 180.0f },
@@ -49,7 +49,7 @@ StaticNpc N(NpcData_Cleft_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Cleft_03) = {
+NpcData N(NpcData_Cleft_03) = {
     .id = NPC_Cleft_03,
     .settings = &N(NpcSettings_Cleft),
     .pos = { -1300.0f, 408.0f, -125.0f },
@@ -72,7 +72,7 @@ StaticNpc N(NpcData_Cleft_03) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_MontyMole)[] = {
+NpcData N(NpcData_MontyMole)[] = {
     {
         .id = NPC_MontyMole,
         .settings = &N(NpcSettings_MontyMole_GroundAmbush),

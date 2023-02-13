@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Pokey.inc.c"
 
-StaticNpc N(NpcData_Pokey_01) = {
+NpcData N(NpcData_Pokey_01) = {
     .id = NPC_Pokey_01,
     .settings = &N(NpcSettings_Pokey),
     .pos = { -280.0f, 0.0f, -110.0f },
@@ -25,7 +25,7 @@ StaticNpc N(NpcData_Pokey_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Pokey_02) = {
+NpcData N(NpcData_Pokey_02) = {
     .id = NPC_Pokey_02,
     .settings = &N(NpcSettings_Pokey),
     .pos = { -200.0f, 0.0f, -80.0f },
@@ -48,7 +48,7 @@ StaticNpc N(NpcData_Pokey_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Pokey_03) = {
+NpcData N(NpcData_Pokey_03) = {
     .id = NPC_Pokey_03,
     .settings = &N(NpcSettings_Pokey),
     .pos = { -160.0f, 0.0f, -225.0f },
@@ -71,7 +71,7 @@ StaticNpc N(NpcData_Pokey_03) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Pokey_04) = {
+NpcData N(NpcData_Pokey_04) = {
     .id = NPC_Pokey_04,
     .settings = &N(NpcSettings_Pokey),
     .pos = { -100.0f, 0.0f, 70.0f },
@@ -94,7 +94,7 @@ StaticNpc N(NpcData_Pokey_04) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Pokey_05) = {
+NpcData N(NpcData_Pokey_05) = {
     .id = NPC_Pokey_05,
     .settings = &N(NpcSettings_Pokey),
     .pos = { -10.0f, 0.0f, 30.0f },
@@ -117,7 +117,7 @@ StaticNpc N(NpcData_Pokey_05) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Pokey_06) = {
+NpcData N(NpcData_Pokey_06) = {
     .id = NPC_Pokey_06,
     .settings = &N(NpcSettings_Pokey),
     .pos = { 20.0f, 0.0f, -110.0f },
@@ -140,7 +140,7 @@ StaticNpc N(NpcData_Pokey_06) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Pokey_07) = {
+NpcData N(NpcData_Pokey_07) = {
     .id = NPC_Pokey_07,
     .settings = &N(NpcSettings_Pokey),
     .pos = { 170.0f, 0.0f, -50.0f },
@@ -163,7 +163,7 @@ StaticNpc N(NpcData_Pokey_07) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Pokey_08) = {
+NpcData N(NpcData_Pokey_08) = {
     .id = NPC_Pokey_08,
     .settings = &N(NpcSettings_Pokey),
     .pos = { 250.0f, 0.0f, 130.0f },
@@ -186,7 +186,7 @@ StaticNpc N(NpcData_Pokey_08) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Pokey_09) = {
+NpcData N(NpcData_Pokey_09) = {
     .id = NPC_Pokey_09,
     .settings = &N(NpcSettings_Pokey),
     .pos = { 340.0f, 0.0f, 200.0f },
@@ -209,7 +209,7 @@ StaticNpc N(NpcData_Pokey_09) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Pokey_10) = {
+NpcData N(NpcData_Pokey_10) = {
     .id = NPC_Pokey_10,
     .settings = &N(NpcSettings_Pokey),
     .pos = { -150.0f, 0.0f, 360.0f },

@@ -24,7 +24,7 @@ s32 N(ExtraAnims_Kammy)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Characters)[] = {
+NpcData N(NpcData_Characters)[] = {
     {
         .id = NPC_Bowser,
         .settings = &N(NpcSettings_Bowser),

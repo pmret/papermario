@@ -195,7 +195,7 @@ s32 N(ExtraAnims_Bobomb)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Koopas)[] = {
+NpcData N(NpcData_Koopas)[] = {
     {
         .id = NPC_Kolorado,
         .settings = &N(NpcSettings_Kolorado),
@@ -260,7 +260,7 @@ s32 N(ExtraAnims_Rowf)[] = {
     -1
 };
 
-StaticNpc N(NpcData_RowfAndRhuff)[] = {
+NpcData N(NpcData_RowfAndRhuff)[] = {
     {
         .id = NPC_Rowf,
         .settings = &N(NpcSettings_Dummy),
@@ -298,7 +298,7 @@ s32 N(ExtraAnims_Dryite)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Dryites)[] = {
+NpcData N(NpcData_Dryites)[] = {
     {
         .id = NPC_Dryite_01,
         .settings = &N(NpcSettings_Dryite),
@@ -338,7 +338,7 @@ s32 N(ExtraAnims_Poet)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Artists)[] = {
+NpcData N(NpcData_Artists)[] = {
     {
         .id = NPC_Chanterelle,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -429,7 +429,7 @@ StaticNpc N(NpcData_Artists)[] = {
 };
 
 #define NAME_SUFFIX
-extern StaticNpc N(NpcData_Townsfolk)[10];
+extern NpcData N(NpcData_Townsfolk)[10];
 
 NpcGroupList N(EpilogueNPCs) = {
     NPC_GROUP(N(NpcData_Koopas_Epilogue)),

@@ -41,7 +41,7 @@ EvtScript N(EVS_NpcInit_Oaklie) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Oaklie) = {
+NpcData N(NpcData_Oaklie) = {
     .id = NPC_Oaklie,
     .settings = &N(NpcSettings_Oaklie),
     .pos = { 0.0f, 32.0f, 0.0f },

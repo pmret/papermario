@@ -3,7 +3,7 @@
 
 #include "world/common/enemy/HammerBros_Wander.inc.c"
 
-StaticNpc N(NpcData_HammerBros_01)[] = {
+NpcData N(NpcData_HammerBros_01)[] = {
     {
         .id = NPC_HammerBros_01,
         .settings = &N(NpcSettings_HammerBros_Wander),
@@ -33,7 +33,7 @@ StaticNpc N(NpcData_HammerBros_01)[] = {
     HAMMER_BROS_HAMMER_HITBOX(NPC_HammerBros_01 + 6),
 };
 
-StaticNpc N(NpcData_HammerBros_02)[] = {
+NpcData N(NpcData_HammerBros_02)[] = {
     {
         .id = NPC_HammerBros_02,
         .settings = &N(NpcSettings_HammerBros_Wander),

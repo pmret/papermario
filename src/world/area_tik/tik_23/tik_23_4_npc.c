@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Spiny.inc.c"
 
-StaticNpc N(NpcData_Spiny_01) = {
+NpcData N(NpcData_Spiny_01) = {
     .id = NPC_Spiny_01,
     .settings = &N(NpcSettings_Spiny),
     .pos = { 25.0f, -20.0f, 0.0f },
@@ -25,7 +25,7 @@ StaticNpc N(NpcData_Spiny_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_02) = {
+NpcData N(NpcData_Spiny_02) = {
     .id = NPC_Spiny_02,
     .settings = &N(NpcSettings_Spiny),
     .pos = { 275.0f, -20.0f, 120.0f },
@@ -48,7 +48,7 @@ StaticNpc N(NpcData_Spiny_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_03) = {
+NpcData N(NpcData_Spiny_03) = {
     .id = NPC_Spiny_03,
     .settings = &N(NpcSettings_Spiny),
     .pos = { -150.0f, -20.0f, 120.0f },

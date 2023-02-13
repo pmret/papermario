@@ -103,7 +103,7 @@ EvtScript N(EVS_NpcInit_Dayzee) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Bzzap) = {
+NpcData N(NpcData_Bzzap) = {
     .id = NPC_Bzzap,
     .settings = &N(NpcSettings_Dummy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -114,7 +114,7 @@ StaticNpc N(NpcData_Bzzap) = {
     .animations = BZZAP_ANIMS,
 };
 
-StaticNpc N(NpcData_Dayzee) = {
+NpcData N(NpcData_Dayzee) = {
     .id = NPC_Dayzee,
     .settings = &N(NpcSettings_Dummy),
     .pos = { NPC_DISPOSE_LOCATION },

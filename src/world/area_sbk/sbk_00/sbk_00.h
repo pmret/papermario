@@ -17,3 +17,7 @@ enum {
 };
 
 #define NAMESPACE sbk_00
+
+extern EvtScript N(EVS_Main);
+extern NpcGroupList N(DefaultNPCs);
+extern EvtScript N(EVS_MakeEntities);

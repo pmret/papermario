@@ -335,7 +335,7 @@ NpcSettings N(NpcSettings_KoopaBros_04) = {
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
-StaticNpc N(NpcData_KoopaBros_01)[] = {
+NpcData N(NpcData_KoopaBros_01)[] = {
     {
         .id = NPC_KoopaBros_01,
         .settings = &N(NpcSettings_KoopaBros_01),

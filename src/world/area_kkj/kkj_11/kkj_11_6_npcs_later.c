@@ -313,7 +313,7 @@ EvtScript N(EVS_NpcInit_Koopatrol_04) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Minions_Later)[] = {
+NpcData N(NpcData_Minions_Later)[] = {
     {
         .id = NPC_Koopatrol_01,
         .settings = &N(NpcSettings_Koopatrol_Stationary),

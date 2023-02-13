@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Pokey.inc.c"
 
-StaticNpc N(NpcData_Pokey) = {
+NpcData N(NpcData_Pokey) = {
     .id = NPC_Pokey,
     .settings = &N(NpcSettings_Pokey),
     .pos = { 160.0f, 0.0f, -120.0f },

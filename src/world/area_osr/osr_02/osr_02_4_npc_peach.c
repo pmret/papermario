@@ -73,7 +73,7 @@ EvtScript N(EVS_NpcInit_Clubba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Clubba) = {
+NpcData N(NpcData_Clubba) = {
     .id = NPC_Clubba,
     .settings = &N(NpcSettings_Clubba),
     .pos = { -70.0f, 0.0f, -100.0f },

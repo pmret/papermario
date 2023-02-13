@@ -6,7 +6,7 @@
 #include "world/common/npc/Toad_Stationary.inc.c"
 #define NAME_SUFFIX
 
-StaticNpc N(NpcData_IntroNPCs)[] = {
+NpcData N(NpcData_IntroNPCs)[] = {
     {
         .id = NPC_Luigi,
         .settings = &N(NpcSettings_Luigi_Intro),

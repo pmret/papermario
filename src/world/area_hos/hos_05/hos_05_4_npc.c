@@ -381,7 +381,7 @@ s32 N(ExtraAnims_Kalmar)[] = {
     -1
 };
 
-StaticNpc N(NpcData_StarSpirits)[] = {
+NpcData N(NpcData_StarSpirits)[] = {
     {
         .id = NPC_Mamar,
         .settings = &N(NpcSettings_StarSpirit),
@@ -486,7 +486,7 @@ s32 N(ExtraAnims_Kammy)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Thieves)[] = {
+NpcData N(NpcData_Thieves)[] = {
     {
         .id = NPC_Bowser_Body,
         .settings = &N(NpcSettings_Bowser),

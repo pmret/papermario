@@ -49,7 +49,7 @@ EvtScript N(EVS_NpcInit_DarkTroopa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KoopaTroopa_01) = {
+NpcData N(NpcData_KoopaTroopa_01) = {
     .id = NPC_KoopaTroopa_01,
     .settings = &N(NpcSettings_DarkTroopa_Wander),
     .pos = { -80.0f, -10.0f, 0.0f },
@@ -73,7 +73,7 @@ StaticNpc N(NpcData_KoopaTroopa_01) = {
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_KoopaTroopa_02) = {
+NpcData N(NpcData_KoopaTroopa_02) = {
     .id = NPC_KoopaTroopa_02,
     .settings = &N(NpcSettings_DarkTroopa_Wander),
     .pos = { 60.0f, -10.0f, 0.0f },
@@ -97,7 +97,7 @@ StaticNpc N(NpcData_KoopaTroopa_02) = {
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_KoopaTroopa_03) = {
+NpcData N(NpcData_KoopaTroopa_03) = {
     .id = NPC_KoopaTroopa_03,
     .settings = &N(NpcSettings_DarkTroopa_Wander),
     .pos = { 180.0f, -10.0f, 0.0f },

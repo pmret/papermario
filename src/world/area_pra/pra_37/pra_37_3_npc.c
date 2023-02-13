@@ -9,7 +9,7 @@ EvtScript N(EVS_NpcInit_FrostClubba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_FrostClubba)[] = {
+NpcData N(NpcData_FrostClubba)[] = {
     {
         .id = NPC_FrostClubba,
         .settings = &N(NpcSettings_FrostClubba_Wander),

@@ -757,7 +757,7 @@ s32 N(ExtraAnims_VillageLeader)[] = {
     -1
 };
 
-StaticNpc N(NpcData_VillageLeader) = {
+NpcData N(NpcData_VillageLeader) = {
     .id = NPC_VillageLeader,
     .settings = &N(NpcSettings_Yoshi),
     .pos = { -300.0f, 0.0f, -70.0f },
@@ -777,7 +777,7 @@ s32 N(ExtraAnims_Sushie)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Sushie) = {
+NpcData N(NpcData_Sushie) = {
     .id = NPC_Sushie,
     .settings = &N(NpcSettings_Sushie),
     .pos = { -425.0f, 0.0f, -350.0f },
@@ -798,7 +798,7 @@ s32 N(ExtraAnims_Kolorado)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Kolorado) = {
+NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
     .settings = &N(NpcSettings_Kolorado),
     .pos = { -475.0f, 0.0f, -75.0f },
@@ -811,7 +811,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(NpcData_Toad)[] = {
+NpcData N(NpcData_Toad)[] = {
     {
         .id = NPC_Toad,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -1025,7 +1025,7 @@ s32 N(ExtraAnims_Raven)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Ravens)[] = {
+NpcData N(NpcData_Ravens)[] = {
     {
         .id = NPC_Raven_01,
         .settings = &N(NpcSettings_Raven),
@@ -1083,7 +1083,7 @@ StaticNpc N(NpcData_Ravens)[] = {
     },
 };
 
-StaticNpc N(NpcData_ChuckQuizmo) = {
+NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
     .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { 300.0f, 0.0f, 400.0f },

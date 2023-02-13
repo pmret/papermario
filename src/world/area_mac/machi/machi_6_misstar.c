@@ -105,7 +105,7 @@ NpcSettings N(NpcSettings_Misstar) = {
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
-StaticNpc N(NpcData_Misstar) = {
+NpcData N(NpcData_Misstar) = {
     .id = NPC_Misstar,
     .settings = &N(NpcSettings_Misstar),
     .pos = { 320.0f, 30.0f, -290.0f },

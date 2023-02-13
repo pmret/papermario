@@ -206,7 +206,7 @@ EvtScript N(EVS_NpcInit_GoombaBros_Blue) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GoombaBros_Red)[] = {
+NpcData N(NpcData_GoombaBros_Red)[] = {
     {
         .id = NPC_GoombaBros_Red,
         .settings = &N(NpcSettings_GoombaBros_Guard),

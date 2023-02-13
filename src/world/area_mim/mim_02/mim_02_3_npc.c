@@ -156,7 +156,7 @@ EvtScript N(EVS_NpcInit_Oaklie) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Oaklie) = {
+NpcData N(NpcData_Oaklie) = {
     .id = NPC_Oaklie,
     .settings = &N(NpcSettings_Oaklie),
     .pos = { -426.0f, 58.0f, -70.0f },
@@ -168,7 +168,7 @@ StaticNpc N(NpcData_Oaklie) = {
     .tattle = MSG_NpcTattle_Oaklie,
 };
 
-StaticNpc N(NpcData_Fuzzy_01) = {
+NpcData N(NpcData_Fuzzy_01) = {
     .id = NPC_Fuzzy_01,
     .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { 300.0f, 0.0f, 130.0f },
@@ -191,7 +191,7 @@ StaticNpc N(NpcData_Fuzzy_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Fuzzy_02) = {
+NpcData N(NpcData_Fuzzy_02) = {
     .id = NPC_Fuzzy_02,
     .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { -100.0f, 0.0f, -320.0f },

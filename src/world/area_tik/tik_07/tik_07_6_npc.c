@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Paragloomba_Wander.inc.c"
 
-StaticNpc N(NpcData_Paragloomba_01) = {
+NpcData N(NpcData_Paragloomba_01) = {
     .id = NPC_Paragoomba_01,
     .settings = &N(NpcSettings_Paragloomba_Wander),
     .pos = { 230.0f, 50.0f, 50.0f },
@@ -24,7 +24,7 @@ StaticNpc N(NpcData_Paragloomba_01) = {
     .animations = PARAGLOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_Paragloomba_02) = {
+NpcData N(NpcData_Paragloomba_02) = {
     .id = NPC_Paragoomba_02,
     .settings = &N(NpcSettings_Paragloomba_Wander),
     .pos = { 535.0f, 50.0f, 20.0f },

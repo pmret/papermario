@@ -246,7 +246,7 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Bootler) = {
+NpcData N(NpcData_Bootler) = {
     .id = NPC_Bootler,
     .settings = &N(NpcSettings_Bootler),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -274,7 +274,7 @@ StaticNpc N(NpcData_Bootler) = {
     },
 };
 
-StaticNpc N(NpcData_JrTroopa) = {
+NpcData N(NpcData_JrTroopa) = {
     .id = NPC_JrTroopa,
     .settings = &N(NpcSettings_JrTroopa),
     .pos = { 0.0f, 0.0f, 0.0f },

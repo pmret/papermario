@@ -217,7 +217,7 @@ EvtScript N(EVS_NpcInit_RaphaelRaven) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_RaphaelRaven)[] = {
+NpcData N(NpcData_RaphaelRaven)[] = {
     {
         .id = NPC_RaphaelRaven,
         .settings = &N(NpcSettings_RaphaelRaven),

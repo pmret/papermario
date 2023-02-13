@@ -237,7 +237,7 @@ s32 N(ExtraAnims_Koopatrol)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Minions)[] = {
+NpcData N(NpcData_Minions)[] = {
     {
         .id = NPC_Koopatrol_01,
         .settings = &N(NpcSettings_Koopatrol_Stationary),

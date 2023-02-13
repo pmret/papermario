@@ -219,7 +219,7 @@ EvtScript N(EVS_NpcInit_Dummy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Snowmen)[] = {
+NpcData N(NpcData_Snowmen)[] = {
     {
         .id = NPC_Snowman_01,
         .settings = &N(NpcSettings_Snowman),
@@ -288,7 +288,7 @@ StaticNpc N(NpcData_Snowmen)[] = {
     },
 };
 
-StaticNpc N(NpcData_Dummy) = {
+NpcData N(NpcData_Dummy) = {
     .id = NPC_LetterDummy,
     .settings = &N(NpcSettings_Snowman),
     .pos = { NPC_DISPOSE_LOCATION },

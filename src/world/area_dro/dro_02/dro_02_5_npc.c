@@ -354,7 +354,7 @@ EvtScript N(EVS_NpcInit_ToadHouseKeeper) = {
     EVT_END
 };
 
-StaticNpc N(PassiveNPCs)[] = {
+NpcData N(PassiveNPCs)[] = {
     {
         .id = NPC_Archeologist,
         .settings = &N(NpcSettings_Archeologist),

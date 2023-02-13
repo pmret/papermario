@@ -756,7 +756,7 @@ EvtScript N(EVS_NpcInit_Duplighost_04) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_InteractableBombettes)[] = {
+NpcData N(NpcData_InteractableBombettes)[] = {
     {
         .id = NPC_Bombette_01,
         .settings = &N(NpcSettings_Bombette),
@@ -809,7 +809,7 @@ StaticNpc N(NpcData_InteractableBombettes)[] = {
     },
 };
 
-StaticNpc N(NpcData_Duplighosts)[] = {
+NpcData N(NpcData_Duplighosts)[] = {
     {
         .id = NPC_Duplighost_01,
         .settings = &N(NpcSettings_Duplighost),
@@ -1002,7 +1002,7 @@ EvtScript N(EVS_NpcInit_TargetBombette_05) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TargetBombettes)[] = {
+NpcData N(NpcData_TargetBombettes)[] = {
     {
         .id = NPC_Bombette_01_Target,
         .settings = &N(NpcSettings_Bombette),

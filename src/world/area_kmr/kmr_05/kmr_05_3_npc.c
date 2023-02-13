@@ -69,7 +69,7 @@ EvtScript N(EVS_NpcIdle_SpikedGoomba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Goomba_01) = {
+NpcData N(NpcData_Goomba_01) = {
     .id = NPC_Goomba_01,
     .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 305.0f, 50.0f, -13.0f },
@@ -92,7 +92,7 @@ StaticNpc N(NpcData_Goomba_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Goomba_02) = {
+NpcData N(NpcData_Goomba_02) = {
     .id = NPC_Goomba_02,
     .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 700.0f, 210.0f, -165.0f },
@@ -122,7 +122,7 @@ EvtScript N(EVS_NpcInit_SpikedGoomba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_SpikedGoomba) = {
+NpcData N(NpcData_SpikedGoomba) = {
     .id = NPC_SpikedGoomba,
     .settings = &N(NpcSettings_SpikedGoomba_Wander),
     .pos = { 712.0f, 100.0f, -95.0f },
@@ -146,7 +146,7 @@ StaticNpc N(NpcData_SpikedGoomba) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Paragoomba) = {
+NpcData N(NpcData_Paragoomba) = {
     .id = NPC_Paragoomba,
     .settings = &N(NpcSettings_Paragoomba_Wander),
     .pos = { 960.0f, 210.0f, -20.0f },

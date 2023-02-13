@@ -3,7 +3,7 @@
 #include "world/common/enemy/Koopatrol_Wander.inc.c"
 #include "world/common/enemy/FlyingMagikoopa.inc.c"
 
-StaticNpc N(NpcData_Koopatrol_01) = {
+NpcData N(NpcData_Koopatrol_01) = {
     .id = NPC_Koopatrol_01,
     .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 300.0f, -160.0f, 140.0f },
@@ -25,7 +25,7 @@ StaticNpc N(NpcData_Koopatrol_01) = {
     .animations = KOOPATROL_ANIMS,
 };
 
-StaticNpc N(NpcData_Koopatrol_02) = {
+NpcData N(NpcData_Koopatrol_02) = {
     .id = NPC_Koopatrol_02,
     .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 850.0f, -160.0f, 390.0f },
@@ -47,7 +47,7 @@ StaticNpc N(NpcData_Koopatrol_02) = {
     .animations = KOOPATROL_ANIMS,
 };
 
-StaticNpc N(NpcData_FlyingMagikoopa_01)[] = {
+NpcData N(NpcData_FlyingMagikoopa_01)[] = {
     {
         .id = NPC_FlyingMagikoopa_01,
         .settings = &N(NpcSettings_FlyingMagikoopa),
@@ -74,7 +74,7 @@ StaticNpc N(NpcData_FlyingMagikoopa_01)[] = {
     FLYING_MAGIKOOPA_SPELL_HITBOX(NPC_FlyingMagikoopa_01_Spell),
 };
 
-StaticNpc N(NpcData_FlyingMagikoopa_02)[] = {
+NpcData N(NpcData_FlyingMagikoopa_02)[] = {
     {
         .id = NPC_FlyingMagikoopa_02,
         .settings = &N(NpcSettings_FlyingMagikoopa),

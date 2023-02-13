@@ -120,7 +120,7 @@ EvtScript N(EVS_NpcInit_YoshiKid) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_YoshiKid) = {
+NpcData N(NpcData_YoshiKid) = {
     .id = NPC_YoshiKid,
     .pos = { -450.0f, 0.0f, -160.0f },
     .yaw = 90,

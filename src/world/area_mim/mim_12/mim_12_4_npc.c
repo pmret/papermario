@@ -12,7 +12,7 @@ EvtScript N(EVS_NpcInit_GateBoo_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GateBoos)[] = {
+NpcData N(NpcData_GateBoos)[] = {
     {
         .id = NPC_GateBoo_01,
         .settings = &N(NpcSettings_Boo),

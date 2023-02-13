@@ -10019,6 +10019,7 @@ segments:
     start: 0x929270
     vram: 0x80240000
     subsegments:
+    - [0x929270, c, sbk_00_0_header]
     - [0x929270, c, sbk_00_1_main]
     - [0x9292B0, c, sbk_00_2_npc]
     - [0x9292B0, c, sbk_00_3_entity]

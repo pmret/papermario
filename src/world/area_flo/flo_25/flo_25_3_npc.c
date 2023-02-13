@@ -157,7 +157,7 @@ EvtScript N(EVS_NpcInit_GateFlower) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GateFlower) = {
+NpcData N(NpcData_GateFlower) = {
     .id = NPC_GateFlower,
     .settings = &N(NpcSettings_GateFlower),
     .pos = { 505.0f, 0.0f, -25.0f },
@@ -169,7 +169,7 @@ StaticNpc N(NpcData_GateFlower) = {
     .tattle = MSG_NpcTattle_RedGateFlower,
 };
 
-StaticNpc N(NpcData_TuffPuff) = {
+NpcData N(NpcData_TuffPuff) = {
     .id = NPC_TuffPuff,
     .settings = &N(NpcSettings_TuffPuff),
     .pos = { -200.0f, 45.0f, 0.0f },
@@ -192,7 +192,7 @@ StaticNpc N(NpcData_TuffPuff) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Bzzap) = {
+NpcData N(NpcData_Bzzap) = {
     .id = NPC_Bzzap,
     .settings = &N(NpcSettings_Bzzap),
     .pos = { 150.0f, 55.0f, 0.0f },

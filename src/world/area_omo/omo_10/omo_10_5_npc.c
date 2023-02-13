@@ -35,7 +35,7 @@ EvtScript N(EVS_NpcInit_TrainToad) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Toads)[] = {
+NpcData N(NpcData_Toads)[] = {
     {
         .id = NPC_Conductor,
         .settings = &N(NpcSettings_TrainToad),

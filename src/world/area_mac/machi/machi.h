@@ -43,7 +43,7 @@ extern EvtScript N(EVS_FlyPartnerAround);
 extern EvtScript N(EVS_MakeEntities);
 
 extern NpcSettings N(NpcSettings_GoombaKing);
-extern StaticNpc N(NpcData_Misstar);
+extern NpcData N(NpcData_Misstar);
 extern NpcGroupList N(DefaultNPCs);
 
 typedef struct GameVarRange {

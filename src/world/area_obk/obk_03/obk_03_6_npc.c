@@ -49,7 +49,7 @@ EvtScript N(EVS_NpcInit_Igor) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Igor) = {
+NpcData N(NpcData_Igor) = {
     .id = NPC_Igor,
     .settings = &N(NpcSettings_Boo),
     .pos = { 43.0f, -200.0f, -9.0f },

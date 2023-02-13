@@ -27,7 +27,7 @@ EvtScript N(EVS_NpcInit_ToadGuard) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Toads)[] = {
+NpcData N(NpcData_Toads)[] = {
     {
         .id = NPC_Toad,
         .pos = { 0.0f, 0.0f, -100.0f },

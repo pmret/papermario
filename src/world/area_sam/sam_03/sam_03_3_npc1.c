@@ -144,7 +144,7 @@ EvtScript N(EVS_NpcInit_JrTroopaHitbox) = {
 };
 
 // first Jr Troopa is for interacting with player, the second is 'hostile' and can respond to being hit
-StaticNpc N(NpcData_JrTroopa)[] = {
+NpcData N(NpcData_JrTroopa)[] = {
     {
         .id = NPC_JrTroopa,
         .settings = &N(NpcSettings_JrTroopa),

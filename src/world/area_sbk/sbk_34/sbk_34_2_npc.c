@@ -77,7 +77,7 @@ EvtScript N(EVS_NpcInit_Sack) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Nomadimouse)[] = {
+NpcData N(NpcData_Nomadimouse)[] = {
     {
         .id = NPC_Nomadimouse,
         .settings = &N(NpcSettings_Nomadimouse),

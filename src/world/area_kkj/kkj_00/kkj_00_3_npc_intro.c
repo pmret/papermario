@@ -266,7 +266,7 @@ EvtScript N(EVS_NpcInit_ToadGuard_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Characters)[] = {
+NpcData N(NpcData_Characters)[] = {
     {
         .id = NPC_Luigi,
         .settings = &N(NpcSettings_Luigi),

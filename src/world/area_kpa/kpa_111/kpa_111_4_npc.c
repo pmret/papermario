@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/DryBones.inc.c"
 
-StaticNpc N(NpcData_DryBones)[] = {
+NpcData N(NpcData_DryBones)[] = {
     {
         .id = NPC_DryBones_01,
         .settings = &N(NpcSettings_DryBones),
@@ -29,7 +29,7 @@ StaticNpc N(NpcData_DryBones)[] = {
     DRY_BONES_BONE_HITBOX(NPC_DryBones_01 + 3),
 };
 
-StaticNpc N(NpcData_DryBones_02)[] = {
+NpcData N(NpcData_DryBones_02)[] = {
     {
         .id = NPC_DryBones_02,
         .settings = &N(NpcSettings_DryBones),

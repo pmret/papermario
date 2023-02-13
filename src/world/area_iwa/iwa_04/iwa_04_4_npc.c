@@ -277,7 +277,7 @@ NpcSettings N(NpcSettings_Buzzar) = {
     .onDefeat = &N(EVS_NpcDefeat_Buzzar),
 };
 
-StaticNpc N(NpcData_Cleft) = {
+NpcData N(NpcData_Cleft) = {
     .id = NPC_Cleft,
     .settings = &N(NpcSettings_Cleft),
     .pos = { -412.0f, -250.0f, 143.0f },
@@ -300,7 +300,7 @@ StaticNpc N(NpcData_Cleft) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Buzzar) = {
+NpcData N(NpcData_Buzzar) = {
     .id = NPC_Buzzar,
     .settings = &N(NpcSettings_Buzzar),
     .pos = { NPC_DISPOSE_LOCATION },

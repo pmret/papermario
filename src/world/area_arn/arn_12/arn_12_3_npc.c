@@ -60,7 +60,7 @@ EvtScript N(EVS_NpcInit_HyperGoomba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TubbasHeart) = {
+NpcData N(NpcData_TubbasHeart) = {
     .id = NPC_TubbasHeart,
     .settings = &N(NpcSettings_TubbasHeart),
     .pos = { 80.0f, 50.0f, 0.0f },
@@ -71,7 +71,7 @@ StaticNpc N(NpcData_TubbasHeart) = {
     .animations = TUBBAS_HEART_ANIMS,
 };
 
-StaticNpc N(NpcData_HyperGoomba) = {
+NpcData N(NpcData_HyperGoomba) = {
     .id = NPC_HyperGoomba,
     .settings = &N(NpcSettings_HyperGoomba),
     .pos = { 0.0f, 0.0f, 0.0f },

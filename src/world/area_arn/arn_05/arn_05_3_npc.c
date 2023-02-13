@@ -228,7 +228,7 @@ EvtScript N(EVS_NpcInit_Boo_05) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Boo_01)[] = {
+NpcData N(NpcData_Boo_01)[] = {
     {
         .id = NPC_Boo_01,
         .settings = &N(NpcSettings_Boo_Patrol),
@@ -634,7 +634,7 @@ s32 N(extraAnimationList_80244390)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Tubba) = {
+NpcData N(NpcData_Tubba) = {
     .id = NPC_Tubba,
     .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -698,7 +698,7 @@ EvtScript N(EVS_NpcInit_Boo_09) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Boo_06)[] = {
+NpcData N(NpcData_Boo_06)[] = {
     {
         .id = NPC_Boo_06,
         .settings = &N(NpcSettings_Boo),

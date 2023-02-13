@@ -74,7 +74,7 @@ EvtScript N(EVS_NpcInit_Bootler) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Bootler)[] = {
+NpcData N(NpcData_Bootler)[] = {
     {
         .id = NPC_Bootler,
         .settings = &N(NpcSettings_Bootler),

@@ -18,7 +18,7 @@ EvtScript N(EVS_NpcInit_TrafficBoo2) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TrafficBoos)[] = {
+NpcData N(NpcData_TrafficBoos)[] = {
     {
         .id = NPC_TrafficBoo1,
         .settings = &N(NpcSettings_Boo),

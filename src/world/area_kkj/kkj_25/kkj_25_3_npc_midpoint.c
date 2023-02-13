@@ -235,7 +235,7 @@ s32 N(ExtraAnims_Kalmar)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Bowser) = {
+NpcData N(NpcData_Bowser) = {
     .id = NPC_Bowser_02,
     .settings = &N(NpcSettings_Bowser),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -247,7 +247,7 @@ StaticNpc N(NpcData_Bowser) = {
     .extraAnimations = N(ExtraAnims_Bowser),
 };
 
-StaticNpc N(NpcData_Peach) = {
+NpcData N(NpcData_Peach) = {
     .id = NPC_Peach_01,
     .settings = &N(NpcSettings_Dummy),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -259,7 +259,7 @@ StaticNpc N(NpcData_Peach) = {
     .extraAnimations = N(ExtraAnims_Peach),
 };
 
-StaticNpc N(NpcData_Kammy)[] = {
+NpcData N(NpcData_Kammy)[] = {
     {
         .id = NPC_Kammy_03,
         .settings = &N(NpcSettings_Kammy_Flying),
@@ -318,7 +318,7 @@ StaticNpc N(NpcData_Kammy)[] = {
     },
 };
 
-StaticNpc N(NpcData_Twink) = {
+NpcData N(NpcData_Twink) = {
     .id = NPC_Twink_01,
     .settings = &N(NpcSettings_Dummy),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -330,7 +330,7 @@ StaticNpc N(NpcData_Twink) = {
     .extraAnimations = N(ExtraAnims_Twink),
 };
 
-StaticNpc N(NpcData_Eldstar) = {
+NpcData N(NpcData_Eldstar) = {
     .id = NPC_Eldstar,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -342,7 +342,7 @@ StaticNpc N(NpcData_Eldstar) = {
     .extraAnimations = N(ExtraAnims_Eldstar),
 };
 
-StaticNpc N(NpcData_Mamar) = {
+NpcData N(NpcData_Mamar) = {
     .id = NPC_Mamar,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -354,7 +354,7 @@ StaticNpc N(NpcData_Mamar) = {
     .extraAnimations = N(ExtraAnims_Mamar),
 };
 
-StaticNpc N(NpcData_Skolar) = {
+NpcData N(NpcData_Skolar) = {
     .id = NPC_Skolar,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -366,7 +366,7 @@ StaticNpc N(NpcData_Skolar) = {
     .extraAnimations = N(ExtraAnims_Skolar),
 };
 
-StaticNpc N(NpcData_Muskular) = {
+NpcData N(NpcData_Muskular) = {
     .id = NPC_Muskular,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -378,7 +378,7 @@ StaticNpc N(NpcData_Muskular) = {
     .extraAnimations = N(ExtraAnims_Muskular),
 };
 
-StaticNpc N(NpcData_Misstar) = {
+NpcData N(NpcData_Misstar) = {
     .id = NPC_Misstar,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -390,7 +390,7 @@ StaticNpc N(NpcData_Misstar) = {
     .extraAnimations = N(ExtraAnims_Misstar),
 };
 
-StaticNpc N(NpcData_Klevar) = {
+NpcData N(NpcData_Klevar) = {
     .id = NPC_Klevar,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -402,7 +402,7 @@ StaticNpc N(NpcData_Klevar) = {
     .extraAnimations = N(ExtraAnims_Klevar),
 };
 
-StaticNpc N(NpcData_Kalmar) = {
+NpcData N(NpcData_Kalmar) = {
     .id = NPC_Kalmar,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { 0.0f, 0.0f, 0.0f },

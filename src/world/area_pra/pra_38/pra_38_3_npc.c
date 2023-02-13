@@ -8,7 +8,7 @@ EvtScript N(EVS_NpcInit_Swoopula) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Swoopula_01) = {
+NpcData N(NpcData_Swoopula_01) = {
     .id = NPC_Swoopula_01,
     .settings = &N(NpcSettings_Swoopula),
     .pos = { 175.0f, 130.0f, 75.0f },
@@ -32,7 +32,7 @@ StaticNpc N(NpcData_Swoopula_01) = {
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Swoopula_02) = {
+NpcData N(NpcData_Swoopula_02) = {
     .id = NPC_Swoopula_02,
     .settings = &N(NpcSettings_Swoopula),
     .pos = { 325.0f, 130.0f, 75.0f },

@@ -43,7 +43,7 @@ API_CALLABLE(N(func_80240118_90CD58)) {
     }
 }
 
-StaticNpc N(NpcData_MontyMole_GroundAmbush)[] = {
+NpcData N(NpcData_MontyMole_GroundAmbush)[] = {
     {
         .id = NPC_MontyMole_01,
         .settings = &N(NpcSettings_MontyMole_GroundAmbush),
@@ -89,7 +89,7 @@ StaticNpc N(NpcData_MontyMole_GroundAmbush)[] = {
     },
 };
 
-StaticNpc N(NpcData_MontyMole_WallAmbush)[] = {
+NpcData N(NpcData_MontyMole_WallAmbush)[] = {
     {
         .id = NPC_MontyMole_02,
         .settings = &N(NpcSettings_MontyMole_WallAmbush),
@@ -334,7 +334,7 @@ EvtScript N(EVS_NpcInit_Whacka_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Whacka)[] = {
+NpcData N(NpcData_Whacka)[] = {
     {
         .id = NPC_Whacka_01,
         .settings = &N(NpcSettings_Whacka),

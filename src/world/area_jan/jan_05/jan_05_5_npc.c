@@ -219,7 +219,7 @@ EvtScript N(EVS_NpcInit_YoshiKid) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_YoshiKid) = {
+NpcData N(NpcData_YoshiKid) = {
     .id = NPC_YoshiKid,
     .settings = &N(NpcSettings_YoshiKid),
     .pos = { -320.0f, 0.0f, 80.0f },
@@ -239,7 +239,7 @@ s32 N(ExtraAnims_JungleFuzzy)[] = {
     -1
 };
 
-StaticNpc N(NpcData_JungleFuzzy) = {
+NpcData N(NpcData_JungleFuzzy) = {
     .id = NPC_JungleFuzzy,
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -264,7 +264,7 @@ StaticNpc N(NpcData_JungleFuzzy) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_SpearGuy)[] = {
+NpcData N(NpcData_SpearGuy)[] = {
     {
         .id = NPC_SpearGuy,
         .pos = { 0.0f, 0.0f, 0.0f },
@@ -287,7 +287,7 @@ StaticNpc N(NpcData_SpearGuy)[] = {
     SPEAR_GUY_HITBOX(NPC_SpearGuy_Hitbox)
 };
 
-StaticNpc N(NpcData_HeartPlant) = {
+NpcData N(NpcData_HeartPlant) = {
     .id = NPC_HeartPlant,
     .settings = &N(NpcSettings_HeartPlant),
     .pos = { 430.0f, 0.0f, 205.0f },
@@ -298,14 +298,14 @@ StaticNpc N(NpcData_HeartPlant) = {
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(NpcData_HurtPlant) = {
+NpcData N(NpcData_HurtPlant) = {
     .id = NPC_HurtPlant,
     .pos = { 375.0f, 0.0f, 260.0f },
     .yaw = 270,
     HURT_PLANT_NPC_DATA
 };
 
-StaticNpc N(NpcData_MBush) = {
+NpcData N(NpcData_MBush) = {
     .id = NPC_MBush,
     .settings = &N(NpcSettings_MBush),
     .pos = { 400.0f, 0.0f, -75.0f },

@@ -36,7 +36,7 @@ EvtScript N(EVS_NpcInit_Twink) = {
 };
 
 // normally, you cant interact with your partner, so a dummy npc is created to allow it
-StaticNpc N(NpcData_Twink) = {
+NpcData N(NpcData_Twink) = {
     .id = NPC_Twink,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { 0.0f, -500.0f, 0.0f },

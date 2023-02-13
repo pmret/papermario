@@ -248,7 +248,7 @@ NpcSettings N(NpcSettings_Goompa) = {
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000,
 };
 
-StaticNpc N(NpcData_05)[] = {
+NpcData N(NpcData_05)[] = {
     {
         .id = NPC_05,
         .settings = &N(NpcSettings_StarRod),
@@ -278,7 +278,7 @@ StaticNpc N(NpcData_05)[] = {
     },
 };
 
-StaticNpc N(NpcData_GoombaFamily) = {
+NpcData N(NpcData_GoombaFamily) = {
     .id = NPC_Goompa,
     .settings = &N(NpcSettings_Goompa),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -289,7 +289,7 @@ StaticNpc N(NpcData_GoombaFamily) = {
     },
 };
 
-StaticNpc N(NpcData_0B)[] = {
+NpcData N(NpcData_0B)[] = {
     {
         .id = NPC_0B,
         .settings = &N(NpcSettings_Goompa),
@@ -373,7 +373,7 @@ StaticNpc N(NpcData_0B)[] = {
     },
 };
 
-StaticNpc N(NpcData_GoombaKing) = {
+NpcData N(NpcData_GoombaKing) = {
     .id = NPC_GoombaKing,
     .settings = &N(NpcSettings_GoombaKing),
     .pos = { 12.0f, 0.0f, -13.0f },

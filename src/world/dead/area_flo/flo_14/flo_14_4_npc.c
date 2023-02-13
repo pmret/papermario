@@ -78,7 +78,7 @@ EvtScript N(EVS_NpcInit_BubbleFlower) = {
 };
 
 // uses a dummy bubulb for collision
-StaticNpc N(NpcData_BubbleFlower) = {
+NpcData N(NpcData_BubbleFlower) = {
     .id = NPC_BubbleFlower,
     .settings = &N(NpcSettings_BubbleFlower),
     .pos = { 617.0f, 0.0f, 108.0f },
@@ -90,7 +90,7 @@ StaticNpc N(NpcData_BubbleFlower) = {
     .tattle = MSG_NpcTattle_BubblePlant,
 };
 
-StaticNpc N(NpcData_Bzzap) = {
+NpcData N(NpcData_Bzzap) = {
     .id = NPC_Bzzap,
     .settings = &N(NpcSettings_Bzzap),
     .pos = { -175.0f, 55.0f, 15.0f },

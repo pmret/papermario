@@ -216,7 +216,7 @@ s32 N(ExtraAnims_YoshiKid)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Yoshis)[] = {
+NpcData N(NpcData_Yoshis)[] = {
     {
         .id = NPC_YoshiLeader,
         .settings = &N(NpcSettings_Yoshi),
@@ -276,7 +276,7 @@ s32 N(ExtraAnims_Penguin)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Penguins)[] = {
+NpcData N(NpcData_Penguins)[] = {
     {
         .id = NPC_MayorPenguin,
         .settings = &N(NpcSettings_Penguin),
@@ -339,7 +339,7 @@ s32 N(ExtraAnims_Mouser)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Mousers)[] = {
+NpcData N(NpcData_Mousers)[] = {
     {
         .id = NPC_Moustafa,
         .settings = &N(NpcSettings_Mouser),
@@ -372,7 +372,7 @@ s32 N(ExtraAnims_Boos)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Boos)[] = {
+NpcData N(NpcData_Boos)[] = {
     {
         .id = NPC_Boo_01,
         .settings = &N(NpcSettings_Boo),
@@ -411,7 +411,7 @@ s32 N(ExtraAnims_ToadGuard)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Toads)[] = {
+NpcData N(NpcData_Toads)[] = {
     {
         .id = NPC_Toad,
         .settings = &N(NpcSettings_Toad_Stationary),

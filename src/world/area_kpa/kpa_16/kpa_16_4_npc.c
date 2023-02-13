@@ -286,7 +286,7 @@ EvtScript N(EVS_NpcInit_Guards) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Guards)[] = {
+NpcData N(NpcData_Guards)[] = {
     {
         .id = NPC_Koopatrol_01,
         .settings = &N(NpcSettings_Dummy),

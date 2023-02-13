@@ -209,7 +209,7 @@ EvtScript N(EVS_NpcInit_ShyGuy_Jackpot) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Pokey) = {
+NpcData N(NpcData_Pokey) = {
     .id = NPC_Pokey,
     .settings = &N(NpcSettings_Pokey),
     .pos = { 1900.0f, 150.0f, -30.0f },
@@ -220,7 +220,7 @@ StaticNpc N(NpcData_Pokey) = {
     .animations = POKEY_ANIMS,
 };
 
-StaticNpc N(NpcData_Koopatrol) = {
+NpcData N(NpcData_Koopatrol) = {
     .id = NPC_Koopatrol,
     .settings = &N(NpcSettings_Koopatrol_Stationary),
     .pos = { 1900.0f, 150.0f, -30.0f },
@@ -231,7 +231,7 @@ StaticNpc N(NpcData_Koopatrol) = {
     .animations = KOOPATROL_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_01) = {
+NpcData N(NpcData_ShyGuy_01) = {
     .id = NPC_ShyGuy_Jackpot1,
     .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -254,7 +254,7 @@ StaticNpc N(NpcData_ShyGuy_01) = {
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_02) = {
+NpcData N(NpcData_ShyGuy_02) = {
     .id = NPC_ShyGuy_Jackpot2,
     .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -277,7 +277,7 @@ StaticNpc N(NpcData_ShyGuy_02) = {
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_03) = {
+NpcData N(NpcData_ShyGuy_03) = {
     .id = NPC_ShyGuy_Jackpot3,
     .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -300,7 +300,7 @@ StaticNpc N(NpcData_ShyGuy_03) = {
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_04) = {
+NpcData N(NpcData_ShyGuy_04) = {
     .id = NPC_ShyGuy_Jackpot4,
     .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -323,7 +323,7 @@ StaticNpc N(NpcData_ShyGuy_04) = {
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_05) = {
+NpcData N(NpcData_ShyGuy_05) = {
     .id = NPC_ShyGuy_Jackpot5,
     .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -356,7 +356,7 @@ s32 N(ExtraAnims_Kammy)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Kammy) = {
+NpcData N(NpcData_Kammy) = {
     .id = NPC_Kammy,
     .settings = &N(NpcSettings_Kammy_Flying),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -383,7 +383,7 @@ EvtScript N(EVS_ShyGuy_Thief) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_Thief) = {
+NpcData N(NpcData_ShyGuy_Thief) = {
     .id = NPC_ShyGuy_Thief,
     .settings = &N(NpcSettings_ShyGuy_Patrol),
     .pos = { 155.0f, 10.0f, -96.0f },
@@ -410,7 +410,7 @@ StaticNpc N(NpcData_ShyGuy_Thief) = {
     .aiFlags = ENEMY_AI_FLAG_1,
 };
 
-StaticNpc N(NpcData_SpyGuy)[] = {
+NpcData N(NpcData_SpyGuy)[] = {
     {
         .id = NPC_SpyGuy,
         .settings = &N(NpcSettings_SpyGuy),

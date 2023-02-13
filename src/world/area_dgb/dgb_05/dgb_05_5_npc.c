@@ -3,7 +3,7 @@
 #define INCLUDE_CLUBBA_NAPPING
 #include "world/common/enemy/Clubba_Multi.inc.c"
 
-StaticNpc N(NpcData_Clubba_01)[] = {
+NpcData N(NpcData_Clubba_01)[] = {
     {
         .id = NPC_Clubba_01,
         .settings = &N(NpcSettings_Clubba_Napping),
@@ -29,7 +29,7 @@ StaticNpc N(NpcData_Clubba_01)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_01_Hitbox),
 };
 
-StaticNpc N(NpcData_Clubba_02)[] = {
+NpcData N(NpcData_Clubba_02)[] = {
     {
         .id = NPC_Clubba_02,
         .settings = &N(NpcSettings_Clubba_Napping),

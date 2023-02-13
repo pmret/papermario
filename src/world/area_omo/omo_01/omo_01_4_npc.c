@@ -77,7 +77,7 @@ EvtScript N(EVS_NpcInit_ShyGuy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_01) = {
+NpcData N(NpcData_ShyGuy_01) = {
     .id = NPC_ShyGuy_01,
     .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
     .pos = { -165.0f, 0.0f, -50.0f },
@@ -112,7 +112,7 @@ EvtScript N(EVS_NpcInit_ShyGuy_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_02) = {
+NpcData N(NpcData_ShyGuy_02) = {
     .id = NPC_ShyGuy_02,
     .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
     .pos = { -25.0f, 0.0f, -160.0f },
@@ -147,7 +147,7 @@ EvtScript N(EVS_NpcInit_ShyGuy_03) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_03) = {
+NpcData N(NpcData_ShyGuy_03) = {
     .id = NPC_ShyGuy_03,
     .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
     .pos = { -60.0f, 0.0f, 390.0f },
@@ -182,7 +182,7 @@ EvtScript N(EVS_NpcInit_ShyGuy_04) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_04) = {
+NpcData N(NpcData_ShyGuy_04) = {
     .id = NPC_ShyGuy_04,
     .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
     .pos = { 50.0f, 0.0f, 230.0f },
@@ -217,7 +217,7 @@ EvtScript N(EVS_NpcInit_ShyGuy_05) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_05) = {
+NpcData N(NpcData_ShyGuy_05) = {
     .id = NPC_ShyGuy_05,
     .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
     .pos = { 340.0f, 0.0f, 120.0f },

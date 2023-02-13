@@ -215,7 +215,7 @@ EvtScript N(EVS_NpcInit_StoneChomp) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_StoneChomp) = {
+NpcData N(NpcData_StoneChomp) = {
     .id = NPC_StoneChomp,
     .settings = &N(NpcSettings_StoneChomp),
     .pos = { NPC_DISPOSE_LOCATION },

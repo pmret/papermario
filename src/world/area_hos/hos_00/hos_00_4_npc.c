@@ -123,7 +123,7 @@ EvtScript N(EVS_NpcInit_Twink) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Twink) = {
+NpcData N(NpcData_Twink) = {
     .id = NPC_Twink,
     .settings = &N(NpcSettings_Twink),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -134,7 +134,7 @@ StaticNpc N(NpcData_Twink) = {
     .animations = TWINK_ANIMS,
 };
 
-StaticNpc N(NpcData_FlyingMagikoopa) = {
+NpcData N(NpcData_FlyingMagikoopa) = {
     .id = NPC_FlyingMagikoopa,
     .settings = &N(NpcSettings_FlyingMagikoopa),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -145,7 +145,7 @@ StaticNpc N(NpcData_FlyingMagikoopa) = {
     .animations = FLYING_MAGIKOOPA_ANIMS,
 };
 
-StaticNpc N(NpcData_Wishing)[] = {
+NpcData N(NpcData_Wishing)[] = {
     {
         .id = NPC_Toadette,
         .settings = &N(NpcSettings_Toad_Stationary),

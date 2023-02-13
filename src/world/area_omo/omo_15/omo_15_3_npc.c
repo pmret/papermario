@@ -438,7 +438,7 @@ EvtScript N(EVS_NpcInit_GeneralGuy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GeneralGuy)[] = {
+NpcData N(NpcData_GeneralGuy)[] = {
     {
         .id = NPC_GeneralGuy,
         .settings = &N(NpcSettings_ShyGuy_Stationary),

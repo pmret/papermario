@@ -166,7 +166,7 @@ EvtScript N(EVS_NpcInit_AlbinoDino_03) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_AlbinoDinos)[] = {
+NpcData N(NpcData_AlbinoDinos)[] = {
     {
         .id = NPC_AlbinoDino_01,
         .settings = &N(NpcSettings_AlbinoDino),

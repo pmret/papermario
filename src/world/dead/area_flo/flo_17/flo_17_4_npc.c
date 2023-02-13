@@ -6,7 +6,7 @@
 #define AI_LAKITU_LAST_SPINY_ID     NPC_Spiny_04
 #include "world/common/enemy/Lakitu_SpinySpawner.inc.c"
 
-StaticNpc N(NpcData_Lakitu_01) = {
+NpcData N(NpcData_Lakitu_01) = {
     .id = NPC_Lakitu_01,
     .settings = &N(NpcSettings_Lakitu_SpinySpawner),
     .pos = { -185.0f, 90.0f, 10.0f },
@@ -29,7 +29,7 @@ StaticNpc N(NpcData_Lakitu_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Lakitu_02) = {
+NpcData N(NpcData_Lakitu_02) = {
     .id = NPC_Lakitu_02,
     .settings = &N(NpcSettings_Lakitu_SpinySpawner),
     .pos = { 200.0f, 90.0f, -25.0f },
@@ -52,7 +52,7 @@ StaticNpc N(NpcData_Lakitu_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_01) = {
+NpcData N(NpcData_Spiny_01) = {
     .id = NPC_Spiny_01,
     .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -75,7 +75,7 @@ StaticNpc N(NpcData_Spiny_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_02) = {
+NpcData N(NpcData_Spiny_02) = {
     .id = NPC_Spiny_02,
     .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -98,7 +98,7 @@ StaticNpc N(NpcData_Spiny_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_03) = {
+NpcData N(NpcData_Spiny_03) = {
     .id = NPC_Spiny_03,
     .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -121,7 +121,7 @@ StaticNpc N(NpcData_Spiny_03) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_04) = {
+NpcData N(NpcData_Spiny_04) = {
     .id = NPC_Spiny_04,
     .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },

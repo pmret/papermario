@@ -34,7 +34,7 @@ s32 N(ExtraAnims_Lee_Intro)[] = {
     -1
 };
 
-StaticNpc N(NpcData_IntroNPCs)[] = {
+NpcData N(NpcData_IntroNPCs)[] = {
     {
         .id = NPC_Luigi_Intro,
         .settings = &N(NpcSettings_Luigi_Intro),

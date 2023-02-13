@@ -38,7 +38,7 @@ EvtScript N(EVS_NpcInit_JungleFuzzy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_JungleFuzzy_01) = {
+NpcData N(NpcData_JungleFuzzy_01) = {
     .id = NPC_JungleFuzzy_01,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -50,7 +50,7 @@ StaticNpc N(NpcData_JungleFuzzy_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_JungleFuzzy_02) = {
+NpcData N(NpcData_JungleFuzzy_02) = {
     .id = NPC_JungleFuzzy_02,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },

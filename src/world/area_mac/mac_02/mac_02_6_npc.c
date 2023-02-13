@@ -52,7 +52,7 @@ s32 N(D_8024CB2C_82FDEC)[] = {
     -1
 };
 
-StaticNpc N(NpcData_TayceT)[] = {
+NpcData N(NpcData_TayceT)[] = {
     {
         .id = NPC_TayceT,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -196,7 +196,7 @@ StaticNpc N(NpcData_TayceT)[] = {
     },
 };
 
-StaticNpc N(NpcData_Bootler) = {
+NpcData N(NpcData_Bootler) = {
     .id = NPC_Bootler,
     .settings = &N(NpcSettings_Bootler),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -218,7 +218,7 @@ s32 N(D_8024DEA8_831168)[] = {
     -1
 };
 
-StaticNpc N(NpcData_ShyGuy) = {
+NpcData N(NpcData_ShyGuy) = {
     .id = NPC_ShyGuy,
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { NPC_DISPOSE_LOCATION },

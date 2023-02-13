@@ -4,7 +4,7 @@
 #include "world/common/enemy/KoopaTroopa_Wander.inc.c"
 #include "world/common/enemy/KoopaTroopa_Patrol.inc.c"
 
-StaticNpc N(NpcData_Bobomb_01) = {
+NpcData N(NpcData_Bobomb_01) = {
     .id = NPC_Bobomb_01,
     .settings = &N(NpcSettings_Bobomb_Wander),
     .pos = { -70.0f, 0.0f, 80.0f },
@@ -27,7 +27,7 @@ StaticNpc N(NpcData_Bobomb_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Bobomb_02) = {
+NpcData N(NpcData_Bobomb_02) = {
     .id = NPC_Bobomb_02,
     .settings = &N(NpcSettings_Bobomb_Wander),
     .pos = { 140.0f, 0.0f, 80.0f },
@@ -50,7 +50,7 @@ StaticNpc N(NpcData_Bobomb_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_KoopaTroopa) = {
+NpcData N(NpcData_KoopaTroopa) = {
     .id = NPC_KoopaTroopa,
     .settings = &N(NpcSettings_KoopaTroopa_Patrol),
     .pos = { 50.0f, 187.0f, 183.0f },

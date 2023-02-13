@@ -8,7 +8,7 @@
 #define AI_SENTINEL_LAST_NPC  NPC_Sentinel
 #include "world/common/enemy/Sentinel.inc.c"
 
-StaticNpc N(NpcData_Clubba_Wander)[] = {
+NpcData N(NpcData_Clubba_Wander)[] = {
     {
         .id = NPC_Clubba_Wander,
         .settings = &N(NpcSettings_Clubba_Wander),
@@ -45,7 +45,7 @@ EvtScript N(EVS_NpcInit_Clubba_Napping) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Clubba_Napping)[] = {
+NpcData N(NpcData_Clubba_Napping)[] = {
     {
         .id = NPC_Clubba_Napping,
         .settings = &N(NpcSettings_Clubba_Napping),
@@ -73,7 +73,7 @@ StaticNpc N(NpcData_Clubba_Napping)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_Napping_Hitbox),
 };
 
-StaticNpc N(NpcData_Sentinel) = {
+NpcData N(NpcData_Sentinel) = {
     .id = NPC_Sentinel,
     .settings = &N(NpcSettings_Sentinel),
     .pos = { -20.0f, 100.0f, 180.0f },

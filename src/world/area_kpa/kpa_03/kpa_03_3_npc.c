@@ -13,7 +13,7 @@ s32 N(ExtraAnims_Koopatrol)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Koopatrol_01) = {
+NpcData N(NpcData_Koopatrol_01) = {
     .id = NPC_Koopatrol_01,
     .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 1045.0f, -255.0f, -194.0f },
@@ -37,7 +37,7 @@ StaticNpc N(NpcData_Koopatrol_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Koopatrol_02) = {
+NpcData N(NpcData_Koopatrol_02) = {
     .id = NPC_Koopatrol_02,
     .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 950.0f, -265.0f, 0.0f },
@@ -61,7 +61,7 @@ StaticNpc N(NpcData_Koopatrol_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_BonyBeetle_01) = {
+NpcData N(NpcData_BonyBeetle_01) = {
     .id = NPC_BonyBeetle_01,
     .settings = &N(NpcSettings_BonyBeetle),
     .pos = { -940.0f, 140.0f, -145.0f },
@@ -84,7 +84,7 @@ StaticNpc N(NpcData_BonyBeetle_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_BonyBeetle_02) = {
+NpcData N(NpcData_BonyBeetle_02) = {
     .id = NPC_BonyBeetle_02,
     .settings = &N(NpcSettings_BonyBeetle),
     .pos = { 175.0f, -130.0f, 0.0f },
@@ -107,7 +107,7 @@ StaticNpc N(NpcData_BonyBeetle_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Magikoopa_01)[] = {
+NpcData N(NpcData_Magikoopa_01)[] = {
     {
         .id = NPC_Magikoopa_01,
         .settings = &N(NpcSettings_Magikoopa),

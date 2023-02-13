@@ -422,7 +422,7 @@ EvtScript N(EVS_NpcInit_RelaxedKoopa) = {
 
 #include "npcs_normal.inc.c"
 
-StaticNpc N(NpcData_Crisis)[] = {
+NpcData N(NpcData_Crisis)[] = {
     {
         .id = NPC_Koover,
         .settings = &N(NpcSettings_Koopa_Wander),
@@ -569,7 +569,7 @@ StaticNpc N(NpcData_Crisis)[] = {
 };
 
 // just jumps around the map; can be hit for a coin
-StaticNpc N(NpcData_MiscFuzzy1) = {
+NpcData N(NpcData_MiscFuzzy1) = {
     .id = NPC_MiscFuzzy1,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -581,7 +581,7 @@ StaticNpc N(NpcData_MiscFuzzy1) = {
 };
 
 // just jumps around the map; can be hit for a coin
-StaticNpc N(NpcData_MiscFuzzy2) = {
+NpcData N(NpcData_MiscFuzzy2) = {
     .id = NPC_MiscFuzzy2,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -592,7 +592,7 @@ StaticNpc N(NpcData_MiscFuzzy2) = {
     .animations = FUZZY_ANIMS,
 };
 
-StaticNpc N(NpcData_Normal)[] = {
+NpcData N(NpcData_Normal)[] = {
     {
         .id = NPC_Koover,
         .settings = &N(NpcSettings_Koopa_Wander),
@@ -697,7 +697,7 @@ StaticNpc N(NpcData_Normal)[] = {
     },
 };
 
-StaticNpc N(NpcData_Shared)[] = {
+NpcData N(NpcData_Shared)[] = {
     {
         .id = NPC_MortT,
         .settings = &N(NpcSettings_Toad_Stationary),

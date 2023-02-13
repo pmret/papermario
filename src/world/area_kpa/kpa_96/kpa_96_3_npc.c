@@ -140,7 +140,7 @@ EvtScript N(EVS_NpcInit_SpikedGoomba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_SpikedGoomba) = {
+NpcData N(NpcData_SpikedGoomba) = {
     .id = NPC_SpikedGoomba,
     .settings = &N(NpcSettings_SpikedGoomba),
     .pos = { -122.0f, 0.0f, 163.0f },

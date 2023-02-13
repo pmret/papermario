@@ -626,7 +626,7 @@ EvtScript N(EVS_NpcInit_Penguin_09) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_MayorPenguin)[] = {
+NpcData N(NpcData_MayorPenguin)[] = {
     {
         .id = NPC_MayorPenguin,
         .settings = &N(NpcSettings_Penguin),
@@ -764,7 +764,7 @@ StaticNpc N(NpcData_MayorPenguin)[] = {
     },
 };
 
-StaticNpc N(NpcData_Penguin_05)[] = {
+NpcData N(NpcData_Penguin_05)[] = {
     {
         .id = NPC_Penguin_05,
         .settings = &N(NpcSettings_Penguin),
@@ -811,7 +811,7 @@ StaticNpc N(NpcData_Penguin_05)[] = {
     },
 };
 
-StaticNpc N(NpcData_Penguin_09) = {
+NpcData N(NpcData_Penguin_09) = {
     .id = NPC_Penguin_09,
     .settings = &N(NpcSettings_Penguin),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -822,7 +822,7 @@ StaticNpc N(NpcData_Penguin_09) = {
     .animations = PENGUIN_ANIMS,
 };
 
-StaticNpc N(NpcData_ChuckQuizmo) = {
+NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
     .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { 230.0f, 0.0f, 150.0f },

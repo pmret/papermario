@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Gulpit.inc.c"
 
-StaticNpc N(NpcData_Gulpit_01)[] = {
+NpcData N(NpcData_Gulpit_01)[] = {
     {
         .id = NPC_Gulpit_01,
         .settings = &N(NpcSettings_Gulpit),
@@ -29,7 +29,7 @@ StaticNpc N(NpcData_Gulpit_01)[] = {
     GULPIT_HITBOX(NPC_Gulpit_01_Hitbox),
 };
 
-StaticNpc N(NpcData_Gulpit_02)[] = {
+NpcData N(NpcData_Gulpit_02)[] = {
     {
         .id = NPC_Gulpit_02,
         .settings = &N(NpcSettings_Gulpit),

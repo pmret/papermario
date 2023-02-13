@@ -6,7 +6,7 @@ NpcSettings N(NpcSettings_ParadePeach) = {
     .level = 99,
 };
 
-StaticNpc N(NpcData_ParadePeach) = {
+NpcData N(NpcData_ParadePeach) = {
     .id = NPC_ParadePeach,
     .settings = &N(NpcSettings_ParadePeach),
     .pos = { NPC_DISPOSE_LOCATION },

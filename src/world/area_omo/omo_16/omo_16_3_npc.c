@@ -2,7 +2,7 @@
 
 #include "world/common/npc/TrainToad.inc.c"
 
-StaticNpc N(NpcData_TrainToad) = {
+NpcData N(NpcData_TrainToad) = {
     .id = NPC_Conductor,
     .settings = &N(NpcSettings_TrainToad),
     .pos = { NPC_DISPOSE_LOCATION },

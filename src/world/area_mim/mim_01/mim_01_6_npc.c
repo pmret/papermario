@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/PiranhaPlant.inc.c"
 
-StaticNpc N(NpcData_PiranhaPlant)[] = {
+NpcData N(NpcData_PiranhaPlant)[] = {
     {
         .id = NPC_PiranhaPlant,
         .settings = &N(NpcSettings_PiranhaPlant),

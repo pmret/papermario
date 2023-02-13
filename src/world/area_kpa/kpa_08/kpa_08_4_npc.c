@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Magikoopa.inc.c"
 
-StaticNpc N(NpcData_Magikoopa)[] = {
+NpcData N(NpcData_Magikoopa)[] = {
     {
         .id = NPC_Magikoopa,
         .settings = &N(NpcSettings_Magikoopa),

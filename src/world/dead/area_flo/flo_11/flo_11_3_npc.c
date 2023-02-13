@@ -368,7 +368,7 @@ EvtScript N(EVS_NpcInit_Lakitu_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Lakitus)[] = {
+NpcData N(NpcData_Lakitus)[] = {
     {
         .id = NPC_Lakitu_01,
         .settings = &N(NpcSettings_Lakitu),

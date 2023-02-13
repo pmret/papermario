@@ -593,7 +593,7 @@ EvtScript N(EVS_NpcInit_Spiny) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Lakilester) = {
+NpcData N(NpcData_Lakilester) = {
     .id = NPC_Lakilester,
     .settings = &N(NpcSettings_Lakilester),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -621,7 +621,7 @@ StaticNpc N(NpcData_Lakilester) = {
     },
 };
 
-StaticNpc N(NpcData_Lakilulu) = {
+NpcData N(NpcData_Lakilulu) = {
     .id = NPC_Lakilulu,
     .settings = &N(NpcSettings_Lakilester),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -650,7 +650,7 @@ StaticNpc N(NpcData_Lakilulu) = {
     .tattle = MSG_NpcTattle_Lakilulu,
 };
 
-StaticNpc N(NpcData_Lakilulu_Spiny) = {
+NpcData N(NpcData_Lakilulu_Spiny) = {
     .id = NPC_Lakilulu_Spiny,
     .settings = &N(NpcSettings_Lakilester),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -678,7 +678,7 @@ StaticNpc N(NpcData_Lakilulu_Spiny) = {
     },
 };
 
-StaticNpc N(NpcData_Lakitu_01) = {
+NpcData N(NpcData_Lakitu_01) = {
     .id = NPC_Lakitu_01,
     .settings = &N(NpcSettings_Lakitu_SpinySpawner),
     .pos = { 335.0f, 90.0f, 45.0f },
@@ -702,7 +702,7 @@ StaticNpc N(NpcData_Lakitu_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Lakitu_02) = {
+NpcData N(NpcData_Lakitu_02) = {
     .id = NPC_Lakitu_02,
     .settings = &N(NpcSettings_Lakitu_SpinySpawner),
     .pos = { -320.0f, 90.0f, 0.0f },
@@ -726,7 +726,7 @@ StaticNpc N(NpcData_Lakitu_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_01) = {
+NpcData N(NpcData_Spiny_01) = {
     .id = NPC_Spiny_01,
     .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -750,7 +750,7 @@ StaticNpc N(NpcData_Spiny_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_02) = {
+NpcData N(NpcData_Spiny_02) = {
     .id = NPC_Spiny_02,
     .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -774,7 +774,7 @@ StaticNpc N(NpcData_Spiny_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_03) = {
+NpcData N(NpcData_Spiny_03) = {
     .id = NPC_Spiny_03,
     .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -798,7 +798,7 @@ StaticNpc N(NpcData_Spiny_03) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_04) = {
+NpcData N(NpcData_Spiny_04) = {
     .id = NPC_Spiny_04,
     .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -822,7 +822,7 @@ StaticNpc N(NpcData_Spiny_04) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_05) = {
+NpcData N(NpcData_Spiny_05) = {
     .id = NPC_Spiny_05,
     .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -846,7 +846,7 @@ StaticNpc N(NpcData_Spiny_05) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_06) = {
+NpcData N(NpcData_Spiny_06) = {
     .id = NPC_Spiny_06,
     .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },

@@ -12,7 +12,7 @@ EvtScript N(EVS_NpcInit_TrafficBoo1) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TrafficBoo1) = {
+NpcData N(NpcData_TrafficBoo1) = {
     .id = NPC_TrafficBoo1,
     .settings = &N(NpcSettings_Boo),
     .pos = { 523.0f, -139.0f, 193.0f },
@@ -29,7 +29,7 @@ EvtScript N(EVS_NpcInit_TrafficBoo2) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TrafficBoo2) = {
+NpcData N(NpcData_TrafficBoo2) = {
     .id = NPC_TrafficBoo2,
     .settings = &N(NpcSettings_Boo),
     .pos = { 473.0f, -122.0f, 247.0f },
@@ -51,7 +51,7 @@ EvtScript N(EVS_NpcInit_GuardBoo) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GuardBoo) = {
+NpcData N(NpcData_GuardBoo) = {
     .id = NPC_GuardBoo,
     .settings = &N(NpcSettings_Boo),
     .pos = { 168.0f, 0.0f, -161.0f },

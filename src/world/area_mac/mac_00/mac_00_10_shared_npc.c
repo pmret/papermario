@@ -572,7 +572,7 @@ EvtScript N(EVS_NpcInit_DojoFan) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_SharedTownsfolk)[] = {
+NpcData N(NpcData_SharedTownsfolk)[] = {
     {
         .id = NPC_Toad_04,
         .settings = &N(NpcSettings_Toad_Stationary_Shared),

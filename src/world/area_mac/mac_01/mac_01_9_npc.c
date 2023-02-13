@@ -1046,7 +1046,7 @@ NpcSettings N(NpcSettings_Merlon) = {
     .level = 99,
 };
 
-StaticNpc N(NpcData_Merlon) = {
+NpcData N(NpcData_Merlon) = {
     .id = NPC_Merlon,
     .settings = &N(NpcSettings_Merlon),
     .pos = { -337.0f, 20.0f, -360.0f },
@@ -1060,7 +1060,7 @@ StaticNpc N(NpcData_Merlon) = {
     .tattle = MSG_NpcTattle_Merlon,
 };
 
-StaticNpc N(NpcData_DarkToads)[] = {
+NpcData N(NpcData_DarkToads)[] = {
     {
         .id = NPC_DarkToad_01,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -1123,7 +1123,7 @@ s32 N(ExtraAnims_KoopaBros)[] = {
     -1
 };
 
-StaticNpc N(NpcData_KoopaBros)[] = {
+NpcData N(NpcData_KoopaBros)[] = {
     {
         .id = NPC_KoopaBros_01,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -1234,7 +1234,7 @@ StaticNpc N(NpcData_KoopaBros)[] = {
     },
 };
 
-StaticNpc N(NpcData_Ninji) = {
+NpcData N(NpcData_Ninji) = {
     .id = NPC_Ninji,
     .settings = &N(NpcSettings_Ninji),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -2077,7 +2077,7 @@ s32 N(ExtraAnims_Bubulb)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Townsfolk)[] = {
+NpcData N(NpcData_Townsfolk)[] = {
     {
         .id = NPC_Toad_04,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -2256,7 +2256,7 @@ StaticNpc N(NpcData_Townsfolk)[] = {
     },
 };
 
-StaticNpc N(NpcData_Parakarry) = {
+NpcData N(NpcData_Parakarry) = {
     .id = NPC_Parakarry,
     .settings = &N(NpcSettings_Parakarry),
     .pos = { 145.0f, 20.0f, -472.0f },
@@ -2293,7 +2293,7 @@ s32 N(ExtraAnims_Twink)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Twink) = {
+NpcData N(NpcData_Twink) = {
     .id = NPC_Twink,
     .settings = &N(NpcSettings_Twink),
     .pos = { -350.0f, 20.0f, -100.0f },
@@ -2305,7 +2305,7 @@ StaticNpc N(NpcData_Twink) = {
     .extraAnimations = N(ExtraAnims_Twink),
 };
 
-StaticNpc N(NpcData_ShyGuys)[] = {
+NpcData N(NpcData_ShyGuys)[] = {
     {
         .id = NPC_PostOfficeShyGuy,
         .settings = &N(NpcSettings_ShyGuy_Stationary),
@@ -2355,7 +2355,7 @@ s32 N(D_8025EBB8_81F438)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Kolorado) = {
+NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
     .settings = &N(NpcSettings_Kolorado),
     .pos = { 520.0f, 0.0f, -25.0f },
@@ -2368,7 +2368,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(NpcData_ChuckQuizmo) = {
+NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
     .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { -440.0f, 20.0f, -140.0f },

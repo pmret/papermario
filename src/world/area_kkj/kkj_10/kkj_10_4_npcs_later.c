@@ -187,7 +187,7 @@ EvtScript N(EVS_NpcInit_Koopatrol_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Koopatrol)[] = {
+NpcData N(NpcData_Koopatrol)[] = {
     {
         .id = NPC_Koopatrol_01,
         .settings = &N(NpcSettings_Koopatrol_Stationary),

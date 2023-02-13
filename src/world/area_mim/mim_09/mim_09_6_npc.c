@@ -3,7 +3,7 @@
 #include "world/common/npc/Oaklie.inc.c"
 #include "world/common/enemy/ForestFuzzy_Wander.inc.c"
 
-StaticNpc N(NpcData_Fuzzy) = {
+NpcData N(NpcData_Fuzzy) = {
     .id = NPC_Fuzzy,
     .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { 270.0f, 0.0f, 200.0f },

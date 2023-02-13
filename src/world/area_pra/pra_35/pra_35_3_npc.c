@@ -12,7 +12,7 @@ EvtScript N(EVS_NpcInit_EnableReflection) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Clubba)[] = {
+NpcData N(NpcData_Clubba)[] = {
     {
         .id = NPC_Clubba,
         .settings = &N(NpcSettings_FrostClubba_Patrol),
@@ -41,7 +41,7 @@ StaticNpc N(NpcData_Clubba)[] = {
     FROST_CLUBBA_MACE_HITBOX(NPC_Clubba_Hitbox),
 };
 
-StaticNpc N(NpcData_Duplighost) = {
+NpcData N(NpcData_Duplighost) = {
     .id = NPC_Duplighost,
     .settings = &N(NpcSettings_Duplighost_Patrol),
     .pos = { 200.0f, 0.0f, -75.0f },

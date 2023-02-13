@@ -2059,7 +2059,7 @@ EvtScript N(EVS_NpcInit_TradeEventToad) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Toad_01) = {
+NpcData N(NpcData_Toad_01) = {
     .id = NPC_Whale,
     .settings = &N(NpcSettings_Whale),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -2071,7 +2071,7 @@ StaticNpc N(NpcData_Toad_01) = {
     .tattle = MSG_NpcTattle_Whale,
 };
 
-StaticNpc N(NpcData_Kolorado) = {
+NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
     .settings = &N(NpcSettings_Kolorado),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -2083,7 +2083,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(NpcData_Fishmael) = {
+NpcData N(NpcData_Fishmael) = {
     .id = NPC_Fishmael,
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 370.0f, -10.0f, -115.0f },
@@ -2106,7 +2106,7 @@ AnimID N(Fuzzipede_ExtraAnims)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Fuzzipede) = {
+NpcData N(NpcData_Fuzzipede) = {
     .id = NPC_Fuzzipede,
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 320.0f, -10.0f, -115.0f },
@@ -2137,7 +2137,7 @@ AnimID N(JrTroopa_ExtraAnims)[] = {
     -1
 };
 
-StaticNpc N(NpcData_JrTroopa_01)[] = {
+NpcData N(NpcData_JrTroopa_01)[] = {
     {
         .id = NPC_JrTroopa_01,
         .settings = &N(NpcSettings_JrTroopa_01),
@@ -2198,7 +2198,7 @@ StaticNpc N(NpcData_JrTroopa_01)[] = {
     },
 };
 
-StaticNpc N(NpcData_Toad_04)[] = {
+NpcData N(NpcData_Toad_04)[] = {
     {
         .id = NPC_Toad_04,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -2327,7 +2327,7 @@ StaticNpc N(NpcData_Toad_04)[] = {
     },
 };
 
-StaticNpc N(NpcData_Bartender)[] = {
+NpcData N(NpcData_Bartender)[] = {
     {
         .id = NPC_Bartender,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -2470,7 +2470,7 @@ StaticNpc N(NpcData_Bartender)[] = {
     },
 };
 
-StaticNpc N(NpcData_ChuckQuizmo) = {
+NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
     .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { 472.0f, 0.0f, -230.0f },

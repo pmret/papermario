@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Fuzzy_Wander.inc.c"
 
-StaticNpc N(NpcData_Fuzzy) = {
+NpcData N(NpcData_Fuzzy) = {
     .id = NPC_UnusedFuzzy,
     .settings = &N(NpcSettings_Fuzzy_Wander),
     .pos = { 175.0f, 0.0f, -270.0f },

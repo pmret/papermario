@@ -46,7 +46,7 @@ EvtScript N(EVS_Scene_ImprisonedKoopaBros) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KoopaBros)[] = {
+NpcData N(NpcData_KoopaBros)[] = {
     {
         .id = NPC_KoopaBros_Red,
         .settings = &N(NpcSettings_KoopaBros),

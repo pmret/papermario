@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Bandit.inc.c"
 
-StaticNpc N(NpcData_Bandit_01) = {
+NpcData N(NpcData_Bandit_01) = {
     .id = NPC_Bandit_01,
     .settings = &N(NpcSettings_Bandit),
     .pos = { -120.0f, 0.0f, 45.0f },
@@ -25,7 +25,7 @@ StaticNpc N(NpcData_Bandit_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Bandit_02) = {
+NpcData N(NpcData_Bandit_02) = {
     .id = NPC_Bandit_02,
     .settings = &N(NpcSettings_Bandit),
     .pos = { -76.0f, 0.0f, -20.0f },
@@ -48,7 +48,7 @@ StaticNpc N(NpcData_Bandit_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Bandit_03) = {
+NpcData N(NpcData_Bandit_03) = {
     .id = NPC_Bandit_03,
     .settings = &N(NpcSettings_Bandit),
     .pos = { -78.0f, 0.0f, 80.0f },
@@ -71,7 +71,7 @@ StaticNpc N(NpcData_Bandit_03) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Bandit_04) = {
+NpcData N(NpcData_Bandit_04) = {
     .id = NPC_Bandit_04,
     .settings = &N(NpcSettings_Bandit),
     .pos = { -20.0f, 0.0f, 40.0f },
@@ -94,7 +94,7 @@ StaticNpc N(NpcData_Bandit_04) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Bandit_05) = {
+NpcData N(NpcData_Bandit_05) = {
     .id = NPC_Bandit_05,
     .settings = &N(NpcSettings_Bandit),
     .pos = { 45.0f, 0.0f, -30.0f },
@@ -117,7 +117,7 @@ StaticNpc N(NpcData_Bandit_05) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Bandit_06) = {
+NpcData N(NpcData_Bandit_06) = {
     .id = NPC_Bandit_06,
     .settings = &N(NpcSettings_Bandit),
     .pos = { 40.0f, 0.0f, 150.0f },

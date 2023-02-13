@@ -722,7 +722,7 @@ class ScriptDisassembler:
             elif name.startswith("N(npcSettings_"):
                 prefix = "NpcSettings "
             elif name.startswith("N(npcGroup_"):
-                prefix = "StaticNpc "
+                prefix = "NpcData "
             elif name.startswith("N(entryList_"):
                 prefix = "EntryList "
             elif name.startswith("N(npcGroupList_"):
@@ -1057,7 +1057,7 @@ if __name__ == "__main__":
                     script_text = script.disassemble()
                     if script.instructions > 1 and "_EVT_CMD" not in script_text:
                         if gap and first_print:
-                            potential_struct_sizes = { "StaticNpc": 0x1F0, "MobileAISettings":0x30, "NpcSettings":0x2C, "NpcGroupList":0xC }
+                            potential_struct_sizes = { "NpcData": 0x1F0, "MobileAISettings":0x30, "NpcSettings":0x2C, "NpcGroupList":0xC }
                             gap_size = offset - gap_start
                             potential_struct = "Unknown data"
                             potential_count = 1

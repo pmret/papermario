@@ -21,7 +21,7 @@ s32 N(ExtraAnims_Kammy)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Kammy) = {
+NpcData N(NpcData_Kammy) = {
     .id = NPC_Kammy,
     .settings = &N(NpcSettings_Kammy),
     .pos = { NPC_DISPOSE_LOCATION },

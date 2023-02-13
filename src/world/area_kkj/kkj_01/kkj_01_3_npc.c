@@ -285,7 +285,7 @@ EvtScript N(EVS_NpcInit_Koopa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ToadMinister)[] = {
+NpcData N(NpcData_ToadMinister)[] = {
     {
         .id = NPC_ToadMinister,
         .settings = &N(NpcSettings_Toad_Stationary),

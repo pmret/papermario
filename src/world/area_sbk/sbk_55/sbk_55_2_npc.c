@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Pokey.inc.c"
 
-StaticNpc N(NpcData_Pokey_01) = {
+NpcData N(NpcData_Pokey_01) = {
     .id = NPC_Pokey_01,
     .settings = &N(NpcSettings_Pokey),
     .pos = { 43.0f, 0.0f, -120.0f },
@@ -25,7 +25,7 @@ StaticNpc N(NpcData_Pokey_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Pokey_02) = {
+NpcData N(NpcData_Pokey_02) = {
     .id = NPC_Pokey_02,
     .settings = &N(NpcSettings_Pokey),
     .pos = { -100.0f, 0.0f, -120.0f },

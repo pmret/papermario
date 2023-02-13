@@ -74,7 +74,7 @@ s32 N(ExtraAnims_Koopatrol)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Bowser) = {
+NpcData N(NpcData_Bowser) = {
     .id = NPC_Bowser_Body,
     .settings = &N(NpcSettings_Bowser),
     .pos = { 0.0f, -500.0f, 0.0f },
@@ -86,7 +86,7 @@ StaticNpc N(NpcData_Bowser) = {
     .extraAnimations = N(ExtraAnims_Bowser),
 };
 
-StaticNpc N(NpcData_Characters)[] = {
+NpcData N(NpcData_Characters)[] = {
     {
         .id = NPC_Bowser_Prop,
         .settings = &N(NpcSettings_Dummy),

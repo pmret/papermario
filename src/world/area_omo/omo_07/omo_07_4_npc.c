@@ -347,7 +347,7 @@ EvtScript N(EVS_NpcInit_Kammy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy) = {
+NpcData N(NpcData_ShyGuy) = {
     .id = NPC_ShyGuy_01,
     .settings = &N(NpcSettings_ShyGuy_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -376,7 +376,7 @@ StaticNpc N(NpcData_ShyGuy) = {
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_02) = {
+NpcData N(NpcData_ShyGuy_02) = {
     .id = NPC_ShyGuy_02,
     .settings = &N(NpcSettings_ShyGuy_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -405,7 +405,7 @@ StaticNpc N(NpcData_ShyGuy_02) = {
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_03) = {
+NpcData N(NpcData_ShyGuy_03) = {
     .id = NPC_ShyGuy_03,
     .settings = &N(NpcSettings_ShyGuy_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -434,7 +434,7 @@ StaticNpc N(NpcData_ShyGuy_03) = {
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_04) = {
+NpcData N(NpcData_ShyGuy_04) = {
     .id = NPC_ShyGuy_04,
     .settings = &N(NpcSettings_ShyGuy_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -463,7 +463,7 @@ StaticNpc N(NpcData_ShyGuy_04) = {
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_Fuzzy) = {
+NpcData N(NpcData_Fuzzy) = {
     .id = NPC_Fuzzy,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { 1050.0f, 0.0f, 0.0f },
@@ -491,7 +491,7 @@ StaticNpc N(NpcData_Fuzzy) = {
     },
 };
 
-StaticNpc N(NpcData_HammerBros) = {
+NpcData N(NpcData_HammerBros) = {
     .id = NPC_HammerBros,
     .settings = &N(NpcSettings_HammerBros),
     .pos = { 1050.0f, 0.0f, 0.0f },
@@ -519,7 +519,7 @@ StaticNpc N(NpcData_HammerBros) = {
     },
 };
 
-StaticNpc N(NpcData_SkyGuy_01) = {
+NpcData N(NpcData_SkyGuy_01) = {
     .id = NPC_SkyGuy_01,
     .settings = &N(NpcSettings_SkyGuy),
     .pos = { -650.0f, 140.0f, -105.0f },
@@ -542,7 +542,7 @@ StaticNpc N(NpcData_SkyGuy_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_SkyGuy_02) = {
+NpcData N(NpcData_SkyGuy_02) = {
     .id = NPC_SkyGuy_02,
     .settings = &N(NpcSettings_SkyGuy),
     .pos = { -550.0f, 60.0f, 70.0f },
@@ -575,7 +575,7 @@ s32 N(ExtraAnims_Kammy)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Kammy) = {
+NpcData N(NpcData_Kammy) = {
     .id = NPC_Kammy,
     .settings = &N(NpcSettings_Kammy_Flying),
     .pos = { NPC_DISPOSE_LOCATION },

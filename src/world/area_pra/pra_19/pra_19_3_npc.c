@@ -1038,7 +1038,7 @@ s32 N(ExtraAnims_Duplighost)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Imposters)[] = {
+NpcData N(NpcData_Imposters)[] = {
     {
         .id = NPC_FakeKooper,
         .settings = &N(NpcSettings_Kooper),
@@ -1201,7 +1201,7 @@ StaticNpc N(NpcData_Imposters)[] = {
     },
 };
 
-StaticNpc N(NpcData_Duplighosts)[] = {
+NpcData N(NpcData_Duplighosts)[] = {
     {
         .id = NPC_GoompaGhost,
         .settings = &N(NpcSettings_Duplighost),
@@ -1484,7 +1484,7 @@ EvtScript N(EVS_NpcInit_TargetKolorado) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Targets)[] = {
+NpcData N(NpcData_Targets)[] = {
     {
         .id = NPC_TargetKooper,
         .settings = &N(NpcSettings_Kooper),

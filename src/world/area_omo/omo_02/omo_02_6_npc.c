@@ -283,7 +283,7 @@ EvtScript N(EVS_NpcInit_ShyGuy_Crowd) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_Loner) = {
+NpcData N(NpcData_ShyGuy_Loner) = {
     .id = NPC_ShyGuy_01,
     .settings = &N(NpcSettings_ShyGuy_Stationary),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -294,7 +294,7 @@ StaticNpc N(NpcData_ShyGuy_Loner) = {
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_Crowd)[] = {
+NpcData N(NpcData_ShyGuy_Crowd)[] = {
     {
         .id = NPC_ShyGuy_02,
         .settings = &N(NpcSettings_ShyGuy_Stationary),
@@ -397,7 +397,7 @@ StaticNpc N(NpcData_ShyGuy_Crowd)[] = {
     },
 };
 
-StaticNpc N(NpcData_SpyGuy)[] = {
+NpcData N(NpcData_SpyGuy)[] = {
     {
         .id = NPC_SpyGuy,
         .settings = &N(NpcSettings_SpyGuy),
@@ -425,7 +425,7 @@ StaticNpc N(NpcData_SpyGuy)[] = {
 };
 
 // separated into its own NPC to make the group count match in DefaultNPCs
-StaticNpc N(NpcData_SpyGuy_UnusedRock)[] = {
+NpcData N(NpcData_SpyGuy_UnusedRock)[] = {
     SPY_GUY_ROCK_HITBOX(NPC_SpyGuy_Rock3),
 };
 

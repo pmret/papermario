@@ -125,7 +125,7 @@ EvtScript N(EVS_NpcInit_KoopersShell) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Fuzzy_01) = {
+NpcData N(NpcData_Fuzzy_01) = {
     .id = NPC_Fuzzy_01,
     .settings = &N(NpcSettings_Fuzzy_Wander),
     .pos = { -388.0f, 100.0f, -107.0f },
@@ -149,7 +149,7 @@ StaticNpc N(NpcData_Fuzzy_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Fuzzy_02) = {
+NpcData N(NpcData_Fuzzy_02) = {
     .id = NPC_Fuzzy_02,
     .settings = &N(NpcSettings_Fuzzy_Wander),
     .pos = { -76.0f, 118.0f, -43.0f },
@@ -173,7 +173,7 @@ StaticNpc N(NpcData_Fuzzy_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_FuzzyBoss)[] = {
+NpcData N(NpcData_FuzzyBoss)[] = {
     {
         .id = NPC_Fuzzy_03,
         .settings = &N(NpcSettings_Fuzzy),

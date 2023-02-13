@@ -35,7 +35,7 @@ EvtScript N(EVS_NpcInit_WishingToadKid) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_WishSceneToads)[] = {
+NpcData N(NpcData_WishSceneToads)[] = {
     {
         .id = NPC_WishingToadKid,
         .settings = &N(NpcSettings_Toad_Stationary_Wish),

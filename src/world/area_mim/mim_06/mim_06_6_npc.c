@@ -3,7 +3,7 @@
 #include "world/common/enemy/PiranhaPlant.inc.c"
 #include "world/common/enemy/ForestFuzzy_Wander.inc.c"
 
-StaticNpc N(NpcData_PiranhaPlant_01)[] = {
+NpcData N(NpcData_PiranhaPlant_01)[] = {
     {
         .id = NPC_PiranhaPlant_01,
         .settings = &N(NpcSettings_PiranhaPlant),
@@ -29,7 +29,7 @@ StaticNpc N(NpcData_PiranhaPlant_01)[] = {
     PIRANHA_PLANT_HITBOX(NPC_PiranhaPlant_01_Hitbox)
 };
 
-StaticNpc N(NpcData_PiranhaPlant_02)[] = {
+NpcData N(NpcData_PiranhaPlant_02)[] = {
     {
         .id = NPC_PiranhaPlant_02,
         .settings = &N(NpcSettings_PiranhaPlant),
@@ -55,7 +55,7 @@ StaticNpc N(NpcData_PiranhaPlant_02)[] = {
     PIRANHA_PLANT_HITBOX(NPC_PiranhaPlant_02_Hitbox)
 };
 
-StaticNpc N(NpcData_Fuzzy) = {
+NpcData N(NpcData_Fuzzy) = {
     .id = NPC_Fuzzy,
     .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { -140.0f, 0.0f, 300.0f },

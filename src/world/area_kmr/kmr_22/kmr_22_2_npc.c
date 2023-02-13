@@ -30,7 +30,7 @@ NpcSettings N(NpcSettings_Unused) = {
 #include "npc/chapter_7.inc.c"
 #include "npc/chapter_8.inc.c"
 
-StaticNpc N(NpcData_Chapter1)[] = {
+NpcData N(NpcData_Chapter1)[] = {
     {
         .id = NPC_Eldstar,
         .settings = &N(NpcSettings_Dummy),
@@ -83,7 +83,7 @@ StaticNpc N(NpcData_Chapter1)[] = {
     },
 };
 
-StaticNpc N(NpcData_Chapter2)[] = {
+NpcData N(NpcData_Chapter2)[] = {
     {
         .id = NPC_Mamar,
         .settings = &N(NpcSettings_Dummy),
@@ -254,7 +254,7 @@ StaticNpc N(NpcData_Chapter2)[] = {
     },
 };
 
-StaticNpc N(NpcData_Chapter3)[] = {
+NpcData N(NpcData_Chapter3)[] = {
     {
         .id = NPC_Skolar,
         .settings = &N(NpcSettings_Dummy),
@@ -294,7 +294,7 @@ StaticNpc N(NpcData_Chapter3)[] = {
     },
 };
 
-StaticNpc N(NpcData_Chapter4)[] = {
+NpcData N(NpcData_Chapter4)[] = {
     {
         .id = NPC_Muskular,
         .settings = &N(NpcSettings_Dummy),
@@ -354,7 +354,7 @@ StaticNpc N(NpcData_Chapter4)[] = {
     },
 };
 
-StaticNpc N(NpcData_Chapter5)[] = {
+NpcData N(NpcData_Chapter5)[] = {
     {
         .id = NPC_Misstar,
         .settings = &N(NpcSettings_Dummy),
@@ -400,7 +400,7 @@ StaticNpc N(NpcData_Chapter5)[] = {
     },
 };
 
-StaticNpc N(NpcData_Chapter6)[] = {
+NpcData N(NpcData_Chapter6)[] = {
     {
         .id = NPC_Klevar,
         .settings = &N(NpcSettings_Dummy),
@@ -547,7 +547,7 @@ StaticNpc N(NpcData_Chapter6)[] = {
     },
 };
 
-StaticNpc N(NpcData_Chapter7)[] = {
+NpcData N(NpcData_Chapter7)[] = {
     {
         .id = NPC_Kalmar,
         .settings = &N(NpcSettings_Dummy),
@@ -668,7 +668,7 @@ StaticNpc N(NpcData_Chapter7)[] = {
     },
 };
 
-StaticNpc N(NpcData_Chapter8) = {
+NpcData N(NpcData_Chapter8) = {
     .id = NPC_Bowser,
     .settings = &N(NpcSettings_Dummy),
     .pos = { 58.0f, 0.0f, 20.0f },

@@ -339,7 +339,7 @@ EvtScript N(EVS_NpcInit_Guardian) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Imposter)[] = {
+NpcData N(NpcData_Imposter)[] = {
     {
         .id = NPC_Follower,
         .settings = &N(NpcSettings_Peach),

@@ -435,7 +435,7 @@ EvtScript N(EVS_NpcInit_Boo_06) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Boo_01) = {
+NpcData N(NpcData_Boo_01) = {
     .id = NPC_Boo_01,
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -447,7 +447,7 @@ StaticNpc N(NpcData_Boo_01) = {
     .tattle = MSG_NpcTattle_BraveBoo,
 };
 
-StaticNpc N(NpcData_Boo_02) = {
+NpcData N(NpcData_Boo_02) = {
     .id = NPC_Boo_02,
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -458,7 +458,7 @@ StaticNpc N(NpcData_Boo_02) = {
     .animations = GUSTY_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_Boo_03) = {
+NpcData N(NpcData_Boo_03) = {
     .id = NPC_Boo_03,
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -469,7 +469,7 @@ StaticNpc N(NpcData_Boo_03) = {
     .animations = GUSTY_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_Boo_04) = {
+NpcData N(NpcData_Boo_04) = {
     .id = NPC_Boo_04,
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -480,7 +480,7 @@ StaticNpc N(NpcData_Boo_04) = {
     .animations = GUSTY_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_Boo_05) = {
+NpcData N(NpcData_Boo_05) = {
     .id = NPC_Boo_05,
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -491,7 +491,7 @@ StaticNpc N(NpcData_Boo_05) = {
     .animations = GUSTY_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_Boo_06) = {
+NpcData N(NpcData_Boo_06) = {
     .id = NPC_Boo_06,
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -648,7 +648,7 @@ EvtScript N(EVS_NpcInit_Sentinel) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Sentinel) = {
+NpcData N(NpcData_Sentinel) = {
     .id = NPC_Sentinel,
     .settings = &N(NpcSettings_Dummy),
     .pos = { 0.0f, 0.0f, -1000.0f },

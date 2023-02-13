@@ -535,7 +535,7 @@ EvtScript N(EVS_NpcInit_Eldstar_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Eldstar)[] = {
+NpcData N(NpcData_Eldstar)[] = {
     {
         .id = NPC_StarSpirit,
         .settings = &N(NpcSettings_StarSpirit),
@@ -558,7 +558,7 @@ StaticNpc N(NpcData_Eldstar)[] = {
     },
 };
 
-StaticNpc N(NpcData_Mamar)[] = {
+NpcData N(NpcData_Mamar)[] = {
     {
         .id = NPC_StarSpirit,
         .settings = &N(NpcSettings_StarSpirit),
@@ -581,7 +581,7 @@ StaticNpc N(NpcData_Mamar)[] = {
     },
 };
 
-StaticNpc N(NpcData_Skolar)[] = {
+NpcData N(NpcData_Skolar)[] = {
     {
         .id = NPC_StarSpirit,
         .settings = &N(NpcSettings_StarSpirit),
@@ -604,7 +604,7 @@ StaticNpc N(NpcData_Skolar)[] = {
     },
 };
 
-StaticNpc N(NpcData_Muskular)[] = {
+NpcData N(NpcData_Muskular)[] = {
     {
         .id = NPC_StarSpirit,
         .settings = &N(NpcSettings_StarSpirit),
@@ -627,7 +627,7 @@ StaticNpc N(NpcData_Muskular)[] = {
     },
 };
 
-StaticNpc N(NpcData_Misstar)[] = {
+NpcData N(NpcData_Misstar)[] = {
     {
         .id = NPC_StarSpirit,
         .settings = &N(NpcSettings_StarSpirit),
@@ -650,7 +650,7 @@ StaticNpc N(NpcData_Misstar)[] = {
     },
 };
 
-StaticNpc N(NpcData_Klevar)[] = {
+NpcData N(NpcData_Klevar)[] = {
     {
         .id = NPC_StarSpirit,
         .settings = &N(NpcSettings_StarSpirit),
@@ -673,7 +673,7 @@ StaticNpc N(NpcData_Klevar)[] = {
     },
 };
 
-StaticNpc N(NpcData_Kalmar)[] = {
+NpcData N(NpcData_Kalmar)[] = {
     {
         .id = NPC_StarSpirit,
         .settings = &N(NpcSettings_StarSpirit),

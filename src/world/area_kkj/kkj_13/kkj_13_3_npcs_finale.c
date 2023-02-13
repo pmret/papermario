@@ -342,7 +342,7 @@ s32 N(ExtraAnims_Bowser)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Bowser_Body) = {
+NpcData N(NpcData_Bowser_Body) = {
     .id = NPC_Bowser_Body,
     .settings = &N(NpcSettings_Bowser),
     .pos = { 0.0f, -500.0f, 0.0f },
@@ -354,7 +354,7 @@ StaticNpc N(NpcData_Bowser_Body) = {
     .extraAnimations = N(ExtraAnims_Bowser),
 };
 
-StaticNpc N(NpcData_Bowser_Prop) = {
+NpcData N(NpcData_Bowser_Prop) = {
     .id = NPC_Bowser_Prop,
     .settings = &N(NpcSettings_Dummy),
     .pos = { 0.0f, -500.0f, 0.0f },
@@ -366,7 +366,7 @@ StaticNpc N(NpcData_Bowser_Prop) = {
     .extraAnimations = N(ExtraAnims_Bowser),
 };
 
-StaticNpc N(NpcData_CaptivePeach) = {
+NpcData N(NpcData_CaptivePeach) = {
     .id = NPC_CaptivePeach,
     .settings = &N(NpcSettings_Dummy),
     .pos = { 670.0f, 0.0f, -12.0f },

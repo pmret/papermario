@@ -3,7 +3,7 @@
 #include "world/common/enemy/Gulpit.inc.c"
 #include "world/common/enemy/FrostPiranha.inc.c"
 
-StaticNpc N(NpcData_Gulpit)[] = {
+NpcData N(NpcData_Gulpit)[] = {
     {
         .id = NPC_Gulpit,
         .settings = &N(NpcSettings_Gulpit),
@@ -29,7 +29,7 @@ StaticNpc N(NpcData_Gulpit)[] = {
     GULPIT_HITBOX(NPC_Gulpit_Hitbox),
 };
 
-StaticNpc N(NpcData_FrostPiranha_01)[] = {
+NpcData N(NpcData_FrostPiranha_01)[] = {
     {
         .id = NPC_FrostPiranha_01,
         .settings = &N(NpcSettings_FrostPiranha),
@@ -55,7 +55,7 @@ StaticNpc N(NpcData_FrostPiranha_01)[] = {
     FROST_PIRANHA_HITBOX(NPC_FrostPiranha_01_Hitbox),
 };
 
-StaticNpc N(NpcData_FrostPiranha_02)[] = {
+NpcData N(NpcData_FrostPiranha_02)[] = {
     {
         .id = NPC_FrostPiranha_02,
         .settings = &N(NpcSettings_FrostPiranha),

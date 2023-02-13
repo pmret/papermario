@@ -230,7 +230,7 @@ s32 N(ExtraAnims_Ninji)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Peach) = {
+NpcData N(NpcData_Peach) = {
     .id = NPC_Peach,
     .settings = &N(NpcSettings_Peach),
     .pos = { 0.0f, 100.0f, -440.0f },
@@ -241,7 +241,7 @@ StaticNpc N(NpcData_Peach) = {
     .extraAnimations = N(ExtraAnims_Peach),
 };
 
-StaticNpc N(NpcData_SpecialToads)[] = {
+NpcData N(NpcData_SpecialToads)[] = {
     {
         .id = NPC_ToadMinister,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -322,7 +322,7 @@ StaticNpc N(NpcData_SpecialToads)[] = {
     },
 };
 
-StaticNpc N(NpcData_Party)[] = {
+NpcData N(NpcData_Party)[] = {
     {
         .id = NPC_Goombario,
         .settings = &N(NpcSettings_Dummy),
@@ -543,7 +543,7 @@ StaticNpc N(NpcData_Party)[] = {
     },
 };
 
-StaticNpc N(NpcData_Wizards)[] = {
+NpcData N(NpcData_Wizards)[] = {
     {
         .id = NPC_Merlon,
         .settings = &N(NpcSettings_Dummy),
@@ -636,7 +636,7 @@ StaticNpc N(NpcData_Wizards)[] = {
     },
 };
 
-StaticNpc N(NpcData_PartyFamily)[] = {
+NpcData N(NpcData_PartyFamily)[] = {
     {
         .id = NPC_Lakilulu,
         .settings = &N(NpcSettings_Dummy),
@@ -747,7 +747,7 @@ StaticNpc N(NpcData_PartyFamily)[] = {
     },
 };
 
-StaticNpc N(NpcData_Visitors)[] = {
+NpcData N(NpcData_Visitors)[] = {
     {
         .id = NPC_Yoshi,
         .settings = &N(NpcSettings_Dummy),
@@ -885,7 +885,7 @@ StaticNpc N(NpcData_Visitors)[] = {
     },
 };
 
-StaticNpc N(NpcData_Toads)[] = {
+NpcData N(NpcData_Toads)[] = {
     {
         .id = NPC_Toad_04,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -928,7 +928,7 @@ StaticNpc N(NpcData_Toads)[] = {
     },
 };
 
-StaticNpc N(NpcData_Toadettes)[] = {
+NpcData N(NpcData_Toadettes)[] = {
     {
         .id = NPC_Toadette_03,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -973,7 +973,7 @@ StaticNpc N(NpcData_Toadettes)[] = {
     },
 };
 
-StaticNpc N(NpcData_ToadGuards)[] = {
+NpcData N(NpcData_ToadGuards)[] = {
     {
         .id = NPC_ToadGuard_03,
         .settings = &N(NpcSettings_Toad_Stationary),

@@ -133,7 +133,7 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Kolorado) = {
+NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
     .settings = &N(NpcSettings_Kolorado),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -145,7 +145,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(NpcData_Piranha)[] = {
+NpcData N(NpcData_Piranha)[] = {
     {
         .id = NPC_Piranha,
         .settings = &N(NpcSettings_PutridPiranha),
@@ -171,7 +171,7 @@ StaticNpc N(NpcData_Piranha)[] = {
     PUTRID_PIRANHA_HITBOX(NPC_Piranha_Hitbox)
 };
 
-StaticNpc N(NpcData_SpikeTop) = {
+NpcData N(NpcData_SpikeTop) = {
     .id = NPC_SpikeTop,
     .settings = &N(NpcSettings_SpikeTop),
     .pos = { -450.0f, 0.0f, 100.0f },

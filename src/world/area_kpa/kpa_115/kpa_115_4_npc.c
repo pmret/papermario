@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/HammerBros_Wander.inc.c"
 
-StaticNpc N(NpcData_HammerBros)[] = {
+NpcData N(NpcData_HammerBros)[] = {
     {
         .id = NPC_HammerBros,
         .settings = &N(NpcSettings_HammerBros_Wander),

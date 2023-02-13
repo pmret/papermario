@@ -3,7 +3,7 @@
 
 #include "world/common/enemy/LavaBubble.inc.c"
 
-StaticNpc N(NpcData_LavaBubble_01) = {
+NpcData N(NpcData_LavaBubble_01) = {
     .id = NPC_Bubble_01,
     .settings = &N(NpcSettings_LavaBubble),
     .pos = { -200.0f, 50.0f, 150.0f },
@@ -26,7 +26,7 @@ StaticNpc N(NpcData_LavaBubble_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_LavaBubble_02) = {
+NpcData N(NpcData_LavaBubble_02) = {
     .id = NPC_Bubble_02,
     .settings = &N(NpcSettings_LavaBubble),
     .pos = { -250.0f, 80.0f, 50.0f },

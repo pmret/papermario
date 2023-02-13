@@ -213,7 +213,7 @@ EvtScript N(EVS_NpcInit_Door) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Door) = {
+NpcData N(NpcData_Door) = {
     .id = NPC_Door,
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { NPC_DISPOSE_LOCATION },

@@ -613,7 +613,7 @@ EvtScript N(EVS_NpcInit_Luigi_1) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Luigi_0) = {
+NpcData N(NpcData_Luigi_0) = {
     .id = NPC_Luigi_0,
     .settings = &N(NpcSettings_Luigi),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -642,7 +642,7 @@ StaticNpc N(NpcData_Luigi_0) = {
     .tattle = MSG_NpcTattle_Luigi,
 };
 
-StaticNpc N(NpcData_Luigi_1) = {
+NpcData N(NpcData_Luigi_1) = {
     .id = NPC_Luigi_1,
     .settings = &N(NpcSettings_Luigi),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -766,7 +766,7 @@ EvtScript N(EVS_NpcInit_ShyGuy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy) = {
+NpcData N(NpcData_ShyGuy) = {
     .id = NPC_ShyGuy,
     .settings = &N(NpcSettings_ShyGuy),
     .pos = { NPC_DISPOSE_LOCATION },

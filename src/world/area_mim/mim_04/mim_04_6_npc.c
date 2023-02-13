@@ -54,7 +54,7 @@ EvtScript N(EVS_NpcInit_Bubulb) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Fuzzy) = {
+NpcData N(NpcData_Fuzzy) = {
     .id = NPC_Fuzzy,
     .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { 240.0f, 0.0f, -240.0f },
@@ -77,7 +77,7 @@ StaticNpc N(NpcData_Fuzzy) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Bubulb) = {
+NpcData N(NpcData_Bubulb) = {
     .id = NPC_Bubulb,
     .settings = &N(NpcSettings_Bubulb),
     .pos = { 0.0f, 32.0f, 0.0f },

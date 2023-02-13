@@ -33,7 +33,7 @@ EvtScript N(EVS_NpcInit_Koopatrol) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Koopatrol) = {
+NpcData N(NpcData_Koopatrol) = {
     .id = NPC_Koopatrol,
     .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 550.0f, 30.0f, -145.0f },
@@ -61,7 +61,7 @@ EvtScript N(EVS_NpcInit_Prisoner) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Prisoners)[] = {
+NpcData N(NpcData_Prisoners)[] = {
     {
         .id = NPC_Toad_01,
         .settings = &N(NpcSettings_Toad_Stationary),

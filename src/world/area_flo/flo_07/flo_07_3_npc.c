@@ -231,7 +231,7 @@ EvtScript N(EVS_SetupFoliage) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Posie) = {
+NpcData N(NpcData_Posie) = {
     .id = NPC_Posie,
     .settings = &N(NpcSettings_Posie),
     .pos = { -260.0f, 0.0f, 0.0f },

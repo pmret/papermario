@@ -45,7 +45,7 @@ EvtScript N(EVS_NpcInit_Yakkey) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TubbasHeart) = {
+NpcData N(NpcData_TubbasHeart) = {
     .id = NPC_TubbasHeart,
     .settings = &N(NpcSettings_TubbasHeart),
     .pos = { -23.0f, 75.0f, 31.0f },
@@ -56,7 +56,7 @@ StaticNpc N(NpcData_TubbasHeart) = {
     .animations = TUBBAS_HEART_ANIMS,
 };
 
-StaticNpc N(NpcData_Yakkey) = {
+NpcData N(NpcData_Yakkey) = {
     .id = NPC_Yakkey,
     .settings = &N(NpcSettings_Yakkey),
     .pos = { 38.0f, 0.0f, 97.0f },

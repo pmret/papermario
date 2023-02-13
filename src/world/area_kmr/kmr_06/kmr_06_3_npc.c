@@ -3,7 +3,7 @@
 #include "world/common/enemy/SpikedGoomba_Wander.inc.c"
 #include "world/common/enemy/Paragoomba_Wander.inc.c"
 
-StaticNpc N(NpcData_SpikedGoomba) = {
+NpcData N(NpcData_SpikedGoomba) = {
     .id = NPC_SpikedGoomba,
     .settings = &N(NpcSettings_SpikedGoomba_Wander),
     .pos = { 160.0f, 0.0f, 30.0f },
@@ -25,7 +25,7 @@ StaticNpc N(NpcData_SpikedGoomba) = {
     .animations = SPIKED_GOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_Paragoomba) = {
+NpcData N(NpcData_Paragoomba) = {
     .id = NPC_Paragoomba,
     .settings = &N(NpcSettings_Paragoomba_Wander),
     .pos = { 525.0f, 60.0f, 15.0f },

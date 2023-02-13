@@ -104,7 +104,7 @@ EvtScript N(EVS_NpcInit_YoshiKid) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_YoshiKid) = {
+NpcData N(NpcData_YoshiKid) = {
     .id = NPC_YoshiKid,
     .settings = &N(NpcSettings_YoshiKid),
     .pos = { -260.0f, 0.0f, -220.0f },
@@ -116,7 +116,7 @@ StaticNpc N(NpcData_YoshiKid) = {
     .tattle = MSG_NpcTattle_BlueYoshiKid,
 };
 
-StaticNpc N(NpcData_JungleFuzzy) = {
+NpcData N(NpcData_JungleFuzzy) = {
     .id = NPC_JungleFuzzy,
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 0.0f, 0.0f, 0.0f },

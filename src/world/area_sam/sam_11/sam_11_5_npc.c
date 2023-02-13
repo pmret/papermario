@@ -541,7 +541,7 @@ EvtScript N(EVS_NpcInit_Toadette_03) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Townsfolk)[] = {
+NpcData N(NpcData_Townsfolk)[] = {
     {
         .id = NPC_PenguinPatrol,
         .settings = &N(NpcSettings_Penguin),
@@ -622,7 +622,7 @@ StaticNpc N(NpcData_Townsfolk)[] = {
     },
 };
 
-StaticNpc N(NpcData_PondPenginsBefore)[] = {
+NpcData N(NpcData_PondPenginsBefore)[] = {
     {
         .id = NPC_Penguin_02,
         .settings = &N(NpcSettings_Penguin_Wander),
@@ -671,7 +671,7 @@ StaticNpc N(NpcData_PondPenginsBefore)[] = {
     },
 };
 
-StaticNpc N(NpcData_PondPenginsAfter)[] = {
+NpcData N(NpcData_PondPenginsAfter)[] = {
     {
         .id = NPC_Penguin_02,
         .settings = &N(NpcSettings_Penguin_Wander),
@@ -720,7 +720,7 @@ StaticNpc N(NpcData_PondPenginsAfter)[] = {
     },
 };
 
-StaticNpc N(NpcData_Tourists)[] = {
+NpcData N(NpcData_Tourists)[] = {
     {
         .id = NPC_Toadette_01,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -981,7 +981,7 @@ EvtScript N(EVS_NpcInit_Archeologist_01) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Epilogue)[] = {
+NpcData N(NpcData_Epilogue)[] = {
     {
         .id = NPC_Kolorado,
         .settings = &N(NpcSettings_Kolorado),
@@ -1068,7 +1068,7 @@ StaticNpc N(NpcData_Epilogue)[] = {
     },
 };
 
-StaticNpc N(NpcData_ChuckQuizmo) = {
+NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
     .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { 0.0f, 0.0f, -150.0f },

@@ -146,7 +146,7 @@ s32 N(ExtraAnims_Luigi_Epilogue)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Luigi_Epilogue) = {
+NpcData N(NpcData_Luigi_Epilogue) = {
     .id = NPC_Luigi_Epilogue,
     .settings = &N(NpcSettings_Luigi_Epilogue),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -178,7 +178,7 @@ s32 N(ExtraAnims_Gooma_Epilogue)[] = {
     -1
 };
 
-StaticNpc N(NpcData_GoombaFamilypa_Epilogue)[] = {
+NpcData N(NpcData_GoombaFamilypa_Epilogue)[] = {
     {
         .id = NPC_Goompapa_Epilogue,
         .settings = &N(NpcSettings_GoombaFamily_Epilogue),
@@ -231,7 +231,7 @@ s32 N(ExtraAnims_VannaT_Epilogue)[] = {
     -1
 };
 
-StaticNpc N(NpcData_ChuckQuizmo_Epilogue)[] = {
+NpcData N(NpcData_ChuckQuizmo_Epilogue)[] = {
     {
         .id = NPC_ChuckQuizmo,
         .settings = &N(NpcSettings_Luigi_Epilogue),
@@ -313,7 +313,7 @@ s32 N(D_80254964_7FF674_Epilogue)[] = {
     -1
 };
 
-StaticNpc N(NpcData_DojoMembers_Epilogue)[] = {
+NpcData N(NpcData_DojoMembers_Epilogue)[] = {
     {
         .id = NPC_TheMaster,
         .settings = &N(NpcSettings_Luigi_Epilogue),
@@ -380,7 +380,7 @@ s32 N(ExtraAnims_HarryT_Epilogue)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Toad_01_Epilogue)[] = {
+NpcData N(NpcData_Toad_01_Epilogue)[] = {
     {
         .id = NPC_Toad_01,
         .settings = &N(NpcSettings_Toad_Stationary_Epilogue),
@@ -419,8 +419,8 @@ StaticNpc N(NpcData_Toad_01_Epilogue)[] = {
     },
 };
 
-extern StaticNpc N(NpcData_SharedTownsfolk)[9]; //@bug this NPC list actually has 10 NPCs in it...
-extern StaticNpc N(NpcData_Waterfront_Family)[4];
+extern NpcData N(NpcData_SharedTownsfolk)[9]; //@bug this NPC list actually has 10 NPCs in it...
+extern NpcData N(NpcData_Waterfront_Family)[4];
 
 NpcGroupList N(EpilogueNPCs) = {
     NPC_GROUP(N(NpcData_Luigi_Epilogue)),

@@ -2,7 +2,7 @@
 
 #include "world/common/npc/Luigi.inc.c"
 
-StaticNpc N(NpcData_Luigi) = {
+NpcData N(NpcData_Luigi) = {
     .id = NPC_Luigi,
     .settings = &N(NpcSettings_Luigi),
     .pos = { NPC_DISPOSE_LOCATION },

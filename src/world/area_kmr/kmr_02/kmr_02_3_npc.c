@@ -1739,7 +1739,7 @@ EvtScript N(EVS_NpcAI_Eldstar_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GoombaFamily)[] = {
+NpcData N(NpcData_GoombaFamily)[] = {
     {
         .id = NPC_Goompa,
         .settings = &N(NpcSettings_GoombaFamily_Wander),
@@ -1856,7 +1856,7 @@ StaticNpc N(NpcData_GoombaFamily)[] = {
     },
 };
 
-StaticNpc N(NpcData_Goomama) = {
+NpcData N(NpcData_Goomama) = {
     .id = NPC_Goomama,
     .settings = &N(NpcSettings_GoombaFamily_Wander),
     .pos = { -200.0f, 0.0f, 100.0f },
@@ -1886,7 +1886,7 @@ EvtScript N(EVS_NpcInit_Toad) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Toad) = {
+NpcData N(NpcData_Toad) = {
     .id = NPC_Toad,
     .settings = &N(NpcSettings_Toad_Guard),
     .pos = { -138.0f, 19.0f, -297.0f },
@@ -1920,7 +1920,7 @@ s32 N(ExtraAnims_Kammy)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Kammy) = {
+NpcData N(NpcData_Kammy) = {
     .id = NPC_Kammy,
     .settings = &N(NpcSettings_Kammy_Guard),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -1944,7 +1944,7 @@ StaticNpc N(NpcData_Kammy) = {
     .extraAnimations = N(ExtraAnims_Kammy),
 };
 
-StaticNpc N(NpcData_ChuckQuizmo) = {
+NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
     .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { -300.0f, 0.0f, 175.0f },
@@ -1990,7 +1990,7 @@ s32 N(ExtraAnims_Eldstar)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Eldstar_Prologue)[] = {
+NpcData N(NpcData_Eldstar_Prologue)[] = {
     {
         .id = NPC_Eldstar_01,
         .settings = &N(NpcSettings_StarSpirit),
@@ -2206,7 +2206,7 @@ EvtScript N(EVS_NpcInit_Parakarry_Epilogue) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Epilogue)[] = {
+NpcData N(NpcData_Epilogue)[] = {
     {
         .id = NPC_Eldstar_01,
         .settings = &N(NpcSettings_StarSpirit),

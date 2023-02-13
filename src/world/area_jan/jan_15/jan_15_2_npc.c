@@ -174,7 +174,7 @@ EvtScript N(EVS_NpcInit_PutridPiranha) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Piranhas)[] = {
+NpcData N(NpcData_Piranhas)[] = {
     {
         .id = NPC_PutridPiranha_01,
         .settings = &N(NpcSettings_PutridPiranhaSentinel),
@@ -205,7 +205,7 @@ StaticNpc N(NpcData_Piranhas)[] = {
     },
 };
 
-StaticNpc N(NpcData_HeartPlant_01) = {
+NpcData N(NpcData_HeartPlant_01) = {
     .id = NPC_HeartPlant_01,
     .settings = &N(NpcSettings_HeartPlant),
     .pos = { -183.0f, 0.0f, 47.0f },
@@ -216,7 +216,7 @@ StaticNpc N(NpcData_HeartPlant_01) = {
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(NpcData_HeartPlant_02) = {
+NpcData N(NpcData_HeartPlant_02) = {
     .id = NPC_HeartPlant_02,
     .settings = &N(NpcSettings_HeartPlant),
     .pos = { -124.0f, 0.0f, 20.0f },

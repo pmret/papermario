@@ -52,7 +52,7 @@ EvtScript N(EVS_NpcInit_KoopaTroopa_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KoopaTroopa_01) = {
+NpcData N(NpcData_KoopaTroopa_01) = {
     .id = NPC_KoopaTroopa_01,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { -667.0f, 75.0f, -50.0f },
@@ -75,7 +75,7 @@ StaticNpc N(NpcData_KoopaTroopa_01) = {
     .animations = KOOPA_TROOPA_ANIMS,
 };
 
-StaticNpc N(NpcData_ParaTroopa) = {
+NpcData N(NpcData_ParaTroopa) = {
     .id = NPC_ParaTroopa,
     .settings = &N(NpcSettings_ParaTroopa),
     .pos = { 184.0f, 50.0f, -100.0f },
@@ -97,7 +97,7 @@ StaticNpc N(NpcData_ParaTroopa) = {
     .animations = PARATROOPA_ANIMS,
 };
 
-StaticNpc N(NpcData_SpikedGoomba) = {
+NpcData N(NpcData_SpikedGoomba) = {
     .id = NPC_SpikedGoomba,
     .settings = &N(NpcSettings_SpikedGoomba_Wander),
     .pos = { -257.0f, 0.0f, -47.0f },
@@ -119,7 +119,7 @@ StaticNpc N(NpcData_SpikedGoomba) = {
     .animations = SPIKED_GOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_KoopaTroopa_02) = {
+NpcData N(NpcData_KoopaTroopa_02) = {
     .id = NPC_KoopaTroopa_02,
     .settings = &N(NpcSettings_KoopaTroopa_Stationary),
     .pos = { NPC_DISPOSE_LOCATION },

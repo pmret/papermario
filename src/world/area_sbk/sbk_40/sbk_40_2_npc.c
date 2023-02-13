@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Bandit.inc.c"
 
-StaticNpc N(NpcData_Bandit_01) = {
+NpcData N(NpcData_Bandit_01) = {
     .id = NPC_Bandit_01,
     .settings = &N(NpcSettings_Bandit),
     .pos = { -300.0f, 0.0f, 85.0f },
@@ -25,7 +25,7 @@ StaticNpc N(NpcData_Bandit_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Bandit_02) = {
+NpcData N(NpcData_Bandit_02) = {
     .id = NPC_Bandit_02,
     .settings = &N(NpcSettings_Bandit),
     .pos = { -80.0f, 0.0f, 190.0f },

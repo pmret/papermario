@@ -388,7 +388,7 @@ s32 N(ExtraAnims_Councillor)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Townsfolk)[] = {
+NpcData N(NpcData_Townsfolk)[] = {
     {
         .id = NPC_YoshiLeader,
         .settings = &N(NpcSettings_Yoshi),
@@ -490,7 +490,7 @@ StaticNpc N(NpcData_Townsfolk)[] = {
     },
 };
 
-StaticNpc N(NpcData_ChuckQuizmo) = {
+NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
     .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { -150.0f, 15.0f, 300.0f },

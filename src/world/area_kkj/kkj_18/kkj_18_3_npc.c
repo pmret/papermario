@@ -83,7 +83,7 @@ s32 N(ExtraAnims_Koopatrol)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Characters)[] = {
+NpcData N(NpcData_Characters)[] = {
     {
         .id = NPC_Kammy,
         .settings = &N(NpcSettings_Kammy),

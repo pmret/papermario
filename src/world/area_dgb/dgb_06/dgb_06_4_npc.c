@@ -23,7 +23,7 @@ EvtScript N(EVS_NpcInit_Boo) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Boo) = {
+NpcData N(NpcData_Boo) = {
     .id = NPC_Boo,
     .settings = &N(NpcSettings_Boo),
     .pos = { -300.0f, 10.0f, 150.0f },

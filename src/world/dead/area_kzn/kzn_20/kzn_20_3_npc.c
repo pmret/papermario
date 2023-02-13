@@ -525,7 +525,7 @@ EvtScript N(EVS_NpcInit_Misstar) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Kolorado) = {
+NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
     .settings = &N(NpcSettings_Kolorado),
     .pos = { -65.0f, 0.0f, 190.0f },
@@ -537,7 +537,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(NpcData_Misstar) = {
+NpcData N(NpcData_Misstar) = {
     .id = NPC_Misstar,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { 100.0f, 160.0f, 0.0f },

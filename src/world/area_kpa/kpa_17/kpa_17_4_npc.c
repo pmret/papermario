@@ -187,7 +187,7 @@ EvtScript N(EVS_NpcInit_ToadMinister) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Prisoners)[] = {
+NpcData N(NpcData_Prisoners)[] = {
     {
         .id = NPC_Toad_01,
         .settings = &N(NpcSettings_Toad_Stationary),

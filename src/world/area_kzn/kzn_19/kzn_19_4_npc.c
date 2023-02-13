@@ -613,7 +613,7 @@ EvtScript N(EVS_NpcInit_LavaBud) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Kolorado) = {
+NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
     .settings = &N(NpcSettings_Kolorado),
     .pos = { 380.0f, 250.0f, -330.0f },
@@ -625,7 +625,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(NpcData_Misstar) = {
+NpcData N(NpcData_Misstar) = {
     .id = NPC_Misstar,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -647,7 +647,7 @@ s32 N(ExtraAnims_LavaBud)[] = {
     -1
 };
 
-StaticNpc N(NpcData_LavaPiranha)[] = {
+NpcData N(NpcData_LavaPiranha)[] = {
     {
         .id = NPC_LavaPiranhaHead,
         .settings = &N(NpcSettings_LavaPiranhaHead),

@@ -287,7 +287,7 @@ EvtScript N(EVS_NpcInit_SpearGuy_Hitbox) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_SpearGuy)[] = {
+NpcData N(NpcData_SpearGuy)[] = {
     {
         .id = NPC_SpearGuy,
         .settings = &N(NpcSettings_SpearGuy_Wander),
@@ -322,7 +322,7 @@ StaticNpc N(NpcData_SpearGuy)[] = {
     },
 };
 
-StaticNpc N(NpcData_PutridPiranhas)[] = {
+NpcData N(NpcData_PutridPiranhas)[] = {
     {
         .id = NPC_PutridPiranha_01,
         .settings = &N(NpcSettings_PutridPiranha),
@@ -344,7 +344,7 @@ StaticNpc N(NpcData_PutridPiranhas)[] = {
     },
 };
 
-StaticNpc N(NpcData_YoshiKid) = {
+NpcData N(NpcData_YoshiKid) = {
     .id = NPC_YoshiKid,
     .settings = &N(NpcSettings_YoshiKid),
     .pos = { 30.0f, 0.0f, 20.0f },

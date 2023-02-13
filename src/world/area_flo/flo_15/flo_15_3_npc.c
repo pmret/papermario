@@ -197,7 +197,7 @@ EvtScript N(EVS_NpcInit_Sun_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Sun)[] = {
+NpcData N(NpcData_Sun)[] = {
     {
         .id = NPC_Sun_01,
         .settings = &N(NpcSettings_Sun),

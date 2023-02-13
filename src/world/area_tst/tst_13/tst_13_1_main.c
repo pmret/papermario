@@ -174,7 +174,7 @@ NpcSettings N(NpcSettings_09) = {
     .flags = ENEMY_FLAG_PASSIVE,
 };
 
-StaticNpc N(NpcData_Testing)[] = {
+NpcData N(NpcData_Testing)[] = {
     {
         .id = NPC_00,
         .settings = &N(NpcSettings_00),

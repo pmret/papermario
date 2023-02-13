@@ -202,7 +202,7 @@ s32 N(ExtraAnims_Koopatrol)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Guards)[] = {
+NpcData N(NpcData_Guards)[] = {
     {
         .id = NPC_Koopatrol_Guard_01,
         .settings = &N(NpcSettings_Koopatrol_Stationary),

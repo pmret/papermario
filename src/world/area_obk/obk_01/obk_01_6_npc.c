@@ -188,7 +188,7 @@ EvtScript N(EVS_NpcInit_Franky) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_JumpScareBoo) = {
+NpcData N(NpcData_JumpScareBoo) = {
     .id = NPC_JumpScareBoo,
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -198,7 +198,7 @@ StaticNpc N(NpcData_JumpScareBoo) = {
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_TrafficBoo1) = {
+NpcData N(NpcData_TrafficBoo1) = {
     .id = NPC_TrafficBoo1,
     .settings = &N(NpcSettings_Boo),
     .pos = { 523.0f, -139.0f, 193.0f },
@@ -209,7 +209,7 @@ StaticNpc N(NpcData_TrafficBoo1) = {
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_TrafficBoo2) = {
+NpcData N(NpcData_TrafficBoo2) = {
     .id = NPC_TrafficBoo2,
     .settings = &N(NpcSettings_Boo),
     .pos = { 473.0f, -122.0f, 247.0f },
@@ -220,7 +220,7 @@ StaticNpc N(NpcData_TrafficBoo2) = {
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_Boos)[] = {
+NpcData N(NpcData_Boos)[] = {
     {
         .id = NPC_UpstairsBoo,
         .settings = &N(NpcSettings_Boo_Wander),

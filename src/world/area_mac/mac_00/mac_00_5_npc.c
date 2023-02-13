@@ -184,7 +184,7 @@ EvtScript N(EVS_NpcInit_Toad_02) = {
 #include "npc/waterfront_family.inc.c"
 #include "npc/trading_toad.inc.c"
 
-StaticNpc N(NpcData_ShyGuy_01)[] = {
+NpcData N(NpcData_ShyGuy_01)[] = {
     {
         .id = NPC_ShyGuyThief,
         .settings = &N(NpcSettings_ShyGuy_Stationary),
@@ -219,7 +219,7 @@ StaticNpc N(NpcData_ShyGuy_01)[] = {
     },
 };
 
-StaticNpc N(NpcData_RussT) = {
+NpcData N(NpcData_RussT) = {
     .id = NPC_RussT,
     .settings = &N(NpcSettings_RussT),
     .pos = { -66.0f, 20.0f, -532.0f },
@@ -248,7 +248,7 @@ StaticNpc N(NpcData_RussT) = {
     .tattle = MSG_NpcTattle_RussT,
 };
 
-StaticNpc N(NpcData_Toad_01)[] = {
+NpcData N(NpcData_Toad_01)[] = {
     {
         .id = NPC_Toad_01,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -309,7 +309,7 @@ s32 N(D_8024D024_7F7D34)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Toad_03)[] = {
+NpcData N(NpcData_Toad_03)[] = {
     {
         .id = NPC_TheMaster,
         .settings = &N(NpcSettings_Dummy),
@@ -369,7 +369,7 @@ StaticNpc N(NpcData_Toad_03)[] = {
     },
 };
 
-StaticNpc N(NpcData_Quizmo_Unused) = {
+NpcData N(NpcData_Quizmo_Unused) = {
     .id = NPC_ChuckQuizmo,
     .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { 545.0f, 20.0f, 150.0f },
@@ -382,7 +382,7 @@ StaticNpc N(NpcData_Quizmo_Unused) = {
     .tattle = MSG_NpcTattle_ChuckQuizmo,
 };
 
-StaticNpc N(NpcData_Waterfront_Family)[] = {
+NpcData N(NpcData_Waterfront_Family)[] = {
     {
         .id = NPC_Waterfront_Dad,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -429,7 +429,7 @@ StaticNpc N(NpcData_Waterfront_Family)[] = {
     },
 };
 
-StaticNpc N(NpcData_PrizeToad) = {
+NpcData N(NpcData_PrizeToad) = {
     .id = NPC_Toad_11,
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { -112.0f, 0.0f, -62.0f },
@@ -458,7 +458,7 @@ StaticNpc N(NpcData_PrizeToad) = {
     .tattle = MSG_NpcTattle_PrizeToad,
 };
 
-extern StaticNpc N(NpcData_SharedTownsfolk)[10];
+extern NpcData N(NpcData_SharedTownsfolk)[10];
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_Toad_03)),

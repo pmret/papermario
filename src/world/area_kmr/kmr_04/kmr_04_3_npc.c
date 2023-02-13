@@ -258,7 +258,7 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_JrTroopa) = {
+NpcData N(NpcData_JrTroopa) = {
     .id = NPC_JrTroopa,
     .settings = &N(NpcSettings_JrTroopa),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -286,7 +286,7 @@ StaticNpc N(NpcData_JrTroopa) = {
     },
 };
 
-StaticNpc N(NpcData_GoombaFamily) = {
+NpcData N(NpcData_GoombaFamily) = {
     .id = NPC_Goompa,
     .settings = &N(NpcSettings_Goompa),
     .pos = { -58.0f, 0.0f, 130.0f },

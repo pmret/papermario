@@ -172,7 +172,7 @@ EvtScript N(EVS_NpcInit_Pokey_03) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Pokey_01) = {
+NpcData N(NpcData_Pokey_01) = {
     .id = NPC_Pokey_01,
     .settings = &N(NpcSettings_PokeyMummy),
     .pos = { -132.0f, -390.0f, 492.0f },
@@ -195,7 +195,7 @@ StaticNpc N(NpcData_Pokey_01) = {
     .animations = POKEY_MUMMY_ANIMS,
 };
 
-StaticNpc N(NpcData_Pokey_02) = {
+NpcData N(NpcData_Pokey_02) = {
     .id = NPC_Pokey_02,
     .settings = &N(NpcSettings_PokeyMummy),
     .pos = { 45.0f, -390.0f, 507.0f },
@@ -218,7 +218,7 @@ StaticNpc N(NpcData_Pokey_02) = {
     .animations = POKEY_MUMMY_ANIMS,
 };
 
-StaticNpc N(NpcData_Pokey_03) = {
+NpcData N(NpcData_Pokey_03) = {
     .id = NPC_Pokey_03,
     .settings = &N(NpcSettings_PokeyMummy),
     .pos = { 220.0f, -389.0f, 467.0f },

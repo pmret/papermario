@@ -1777,7 +1777,7 @@ EvtScript N(EVS_NpcInit_Toad) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GuideToad) = {
+NpcData N(NpcData_GuideToad) = {
     .id = NPC_Toad,
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 353.0f, -20.0f, 185.0f },
@@ -1861,7 +1861,7 @@ EvtScript N(EVS_NpcInit_Luigi) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Fuzzy_01) = {
+NpcData N(NpcData_Fuzzy_01) = {
     .id = NPC_Fuzzy_01,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -1890,7 +1890,7 @@ StaticNpc N(NpcData_Fuzzy_01) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Fuzzy_02) = {
+NpcData N(NpcData_Fuzzy_02) = {
     .id = NPC_Fuzzy_02,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -1919,7 +1919,7 @@ StaticNpc N(NpcData_Fuzzy_02) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Fuzzy_03) = {
+NpcData N(NpcData_Fuzzy_03) = {
     .id = NPC_Fuzzy_03,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -1948,7 +1948,7 @@ StaticNpc N(NpcData_Fuzzy_03) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Fuzzy_04) = {
+NpcData N(NpcData_Fuzzy_04) = {
     .id = NPC_Fuzzy_04,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -1977,7 +1977,7 @@ StaticNpc N(NpcData_Fuzzy_04) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Fuzzy_05) = {
+NpcData N(NpcData_Fuzzy_05) = {
     .id = NPC_Fuzzy_05,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -2006,7 +2006,7 @@ StaticNpc N(NpcData_Fuzzy_05) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Bobomb_01) = {
+NpcData N(NpcData_Bobomb_01) = {
     .id = NPC_Bobomb_01,
     .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -2035,7 +2035,7 @@ StaticNpc N(NpcData_Bobomb_01) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Bobomb_02) = {
+NpcData N(NpcData_Bobomb_02) = {
     .id = NPC_Bobomb_02,
     .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -2064,7 +2064,7 @@ StaticNpc N(NpcData_Bobomb_02) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Bobomb_03) = {
+NpcData N(NpcData_Bobomb_03) = {
     .id = NPC_Bobomb_03,
     .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -2093,7 +2093,7 @@ StaticNpc N(NpcData_Bobomb_03) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Bobomb_04) = {
+NpcData N(NpcData_Bobomb_04) = {
     .id = NPC_Bobomb_04,
     .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -2122,7 +2122,7 @@ StaticNpc N(NpcData_Bobomb_04) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Bobomb_05) = {
+NpcData N(NpcData_Bobomb_05) = {
     .id = NPC_Bobomb_05,
     .settings = &N(NpcSettings_Bobomb),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -2151,7 +2151,7 @@ StaticNpc N(NpcData_Bobomb_05) = {
     .tattle = MSG_NpcTattle_MGM_SmashAttackGuide,
 };
 
-StaticNpc N(NpcData_Luigis)[] = {
+NpcData N(NpcData_Luigis)[] = {
     {
         .id = NPC_Luigi_01,
         .settings = &N(NpcSettings_Luigi),

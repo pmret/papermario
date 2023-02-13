@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/PyroGuy.inc.c"
 
-StaticNpc N(NpcData_PyroGuy_01) = {
+NpcData N(NpcData_PyroGuy_01) = {
     .id = NPC_PyroGuy_01,
     .settings = &N(NpcSettings_PyroGuy),
     .pos = { -180.0f, 0.0f, 70.0f },
@@ -25,7 +25,7 @@ StaticNpc N(NpcData_PyroGuy_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_PyroGuy_02) = {
+NpcData N(NpcData_PyroGuy_02) = {
     .id = NPC_PyroGuy_02,
     .settings = &N(NpcSettings_PyroGuy),
     .pos = { 330.0f, 0.0f, 83.0f },

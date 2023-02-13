@@ -95,7 +95,7 @@ EvtScript N(EVS_NpcInit_KoopaTroopa_02_Demo) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KoopaTroopa_01) = {
+NpcData N(NpcData_KoopaTroopa_01) = {
     .id = NPC_KoopaTroopa_01,
     .settings = &N(NpcSettings_KoopaTroopa_Patrol),
     .pos = { -370.0f, 0.0f, -25.0f },
@@ -120,7 +120,7 @@ StaticNpc N(NpcData_KoopaTroopa_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_KoopaTroopa_02) = {
+NpcData N(NpcData_KoopaTroopa_02) = {
     .id = NPC_KoopaTroopa_02,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { 563.0f, 50.0f, -43.0f },
@@ -144,7 +144,7 @@ StaticNpc N(NpcData_KoopaTroopa_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_KoopaTroopa_02_Demo) = {
+NpcData N(NpcData_KoopaTroopa_02_Demo) = {
     .id = NPC_KoopaTroopa_02,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { 600.0f, 50.0f, -75.0f },
@@ -168,7 +168,7 @@ StaticNpc N(NpcData_KoopaTroopa_02_Demo) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Goomba) = {
+NpcData N(NpcData_Goomba) = {
     .id = NPC_Goomba,
     .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 50.0f, 0.0f, -72.0f },
@@ -191,7 +191,7 @@ StaticNpc N(NpcData_Goomba) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_SpikedGoomba) = {
+NpcData N(NpcData_SpikedGoomba) = {
     .id = NPC_SpikedGoomba,
     .settings = &N(NpcSettings_SpikedGoomba_Wander),
     .pos = { -160.0f, 0.0f, -120.0f },

@@ -157,7 +157,7 @@ EvtScript N(EVS_NpcInit_GateFlower) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GateFlower) = {
+NpcData N(NpcData_GateFlower) = {
     .id = NPC_GateFlower,
     .settings = &N(NpcSettings_GateFlower),
     .pos = { 385.0f, 0.0f, -35.0f },
@@ -169,7 +169,7 @@ StaticNpc N(NpcData_GateFlower) = {
     .tattle = MSG_NpcTattle_BlueGateFlower,
 };
 
-StaticNpc N(NpcData_Spiny_01) = {
+NpcData N(NpcData_Spiny_01) = {
     .id = NPC_Spiny_01,
     .settings = &N(NpcSettings_Spiny),
     .pos = { 80.0f, 0.0f, 0.0f },
@@ -191,7 +191,7 @@ StaticNpc N(NpcData_Spiny_01) = {
     .animations = SPINY_ANIMS,
 };
 
-StaticNpc N(NpcData_Spiny_02) = {
+NpcData N(NpcData_Spiny_02) = {
     .id = NPC_Spiny_02,
     .settings = &N(NpcSettings_Spiny),
     .pos = { -320.0f, 0.0f, 0.0f },

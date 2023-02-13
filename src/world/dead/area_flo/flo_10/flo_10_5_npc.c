@@ -198,7 +198,7 @@ EvtScript N(EVS_NpcInit_Lily) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Lily) = {
+NpcData N(NpcData_Lily) = {
     .id = NPC_Lily,
     .settings = &N(NpcSettings_Lily),
     .pos = { 80.0f, -60.0f, 0.0f },

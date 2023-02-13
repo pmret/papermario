@@ -157,7 +157,7 @@ EvtScript N(EVS_NpcInit_GateFlower) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GateFlower) = {
+NpcData N(NpcData_GateFlower) = {
     .id = NPC_GateFlower,
     .settings = &N(NpcSettings_GateFlower),
     .pos = { -695.0f, 0.0f, -30.0f },
@@ -169,7 +169,7 @@ StaticNpc N(NpcData_GateFlower) = {
     .tattle = MSG_NpcTattle_YellowGateFlower,
 };
 
-StaticNpc N(NpcData_Dayzee_01) = {
+NpcData N(NpcData_Dayzee_01) = {
     .id = NPC_Dayzee_01,
     .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { 205.0f, 0.0f, -80.0f },
@@ -192,7 +192,7 @@ StaticNpc N(NpcData_Dayzee_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_02) = {
+NpcData N(NpcData_Dayzee_02) = {
     .id = NPC_Dayzee_02,
     .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { 275.0f, 0.0f, -115.0f },
@@ -215,7 +215,7 @@ StaticNpc N(NpcData_Dayzee_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_03) = {
+NpcData N(NpcData_Dayzee_03) = {
     .id = NPC_Dayzee_03,
     .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { -230.0f, 60.0f, -110.0f },
@@ -238,7 +238,7 @@ StaticNpc N(NpcData_Dayzee_03) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_04) = {
+NpcData N(NpcData_Dayzee_04) = {
     .id = NPC_Dayzee_04,
     .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { -330.0f, 60.0f, -110.0f },
@@ -261,7 +261,7 @@ StaticNpc N(NpcData_Dayzee_04) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_05) = {
+NpcData N(NpcData_Dayzee_05) = {
     .id = NPC_Dayzee_05,
     .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { -430.0f, 60.0f, -110.0f },
@@ -284,7 +284,7 @@ StaticNpc N(NpcData_Dayzee_05) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_06) = {
+NpcData N(NpcData_Dayzee_06) = {
     .id = NPC_Dayzee_06,
     .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { -530.0f, 60.0f, -110.0f },
@@ -307,7 +307,7 @@ StaticNpc N(NpcData_Dayzee_06) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_07) = {
+NpcData N(NpcData_Dayzee_07) = {
     .id = NPC_Dayzee_07,
     .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { -630.0f, 60.0f, -110.0f },
@@ -351,7 +351,7 @@ EvtScript N(EVS_NpcInit_AmazyDayzee) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_AmazyDayzee) = {
+NpcData N(NpcData_AmazyDayzee) = {
     .id = NPC_AmazyDayzee,
     .settings = &N(NpcSettings_AmazyDayzee),
     .pos = { 240.0f, 0.0f, -90.0f },

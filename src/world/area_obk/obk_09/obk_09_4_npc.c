@@ -130,7 +130,7 @@ EvtScript N(EVS_NpcInit_Bootler_Epilogue) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Default)[] = {
+NpcData N(NpcData_Default)[] = {
     {
         .id = NPC_Bow,
         .settings = &N(NpcSettings_Dummy),
@@ -164,7 +164,7 @@ StaticNpc N(NpcData_Default)[] = {
     },
 };
 
-StaticNpc N(NpcData_Epilogue)[] = {
+NpcData N(NpcData_Epilogue)[] = {
     {
         .id = NPC_Bow,
         .settings = &N(NpcSettings_Dummy),

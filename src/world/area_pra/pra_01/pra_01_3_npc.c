@@ -177,7 +177,7 @@ EvtScript N(EVS_NpcInit_Kalmar) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Kalmar) = {
+NpcData N(NpcData_Kalmar) = {
     .id = NPC_Kalmar,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },

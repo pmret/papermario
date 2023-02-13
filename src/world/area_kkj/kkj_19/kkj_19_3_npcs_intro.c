@@ -27,7 +27,7 @@ EvtScript N(EVS_NpcInit_Toad) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TayceT)[] = {
+NpcData N(NpcData_TayceT)[] = {
     {
         .id = NPC_TayceT,
         .settings = &N(NpcSettings_Toad_Stationary),

@@ -4,7 +4,7 @@
 #define AI_SENTINEL_LAST_NPC  NPC_Sentinel
 #include "world/common/enemy/Sentinel.inc.c"
 
-StaticNpc N(NpcData_Sentinel) = {
+NpcData N(NpcData_Sentinel) = {
     .id = NPC_Sentinel,
     .settings = &N(NpcSettings_Sentinel),
     .pos = { 70.0f, -220.0f, 186.0f },

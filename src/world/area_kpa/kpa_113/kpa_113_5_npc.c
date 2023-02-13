@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/SpikeTop.inc.c"
 
-StaticNpc N(NpcData_BonyBeetle) = {
+NpcData N(NpcData_BonyBeetle) = {
     .id = NPC_BonyBeetle,
     .settings = &N(NpcSettings_BonyBeetle),
     .pos = { 100.0f, 0.0f, 83.0f },

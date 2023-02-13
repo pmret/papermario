@@ -163,7 +163,7 @@ EvtScript N(EVS_NpcInit_Goompa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GoombaFamily) = {
+NpcData N(NpcData_GoombaFamily) = {
     .id = NPC_Goompa,
     .settings = &N(NpcSettings_Goompa),
     .pos = { -50.0f, 0.0f, 80.0f },

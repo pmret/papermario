@@ -509,7 +509,7 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Whale) = {
+NpcData N(NpcData_Whale) = {
     .id = NPC_Whale,
     .settings = &N(NpcSettings_Whale),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -537,7 +537,7 @@ StaticNpc N(NpcData_Whale) = {
     },
 };
 
-StaticNpc N(NpcData_Kolorado) = {
+NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
     .settings = &N(NpcSettings_Kolorado),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -572,7 +572,7 @@ s32 N(ExtraAnims_JrTroopa)[] = {
     -1
 };
 
-StaticNpc N(NpcData_JrTroopa) = {
+NpcData N(NpcData_JrTroopa) = {
     .id = NPC_JrTroopa,
     .settings = &N(NpcSettings_JrTroopa),
     .pos = { NPC_DISPOSE_LOCATION },

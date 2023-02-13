@@ -192,7 +192,7 @@ s32 N(ExtraAnims_Twink)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Bowser) = {
+NpcData N(NpcData_Bowser) = {
     .id = NPC_Bowser_01,
     .settings = &N(NpcSettings_Bowser),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -204,7 +204,7 @@ StaticNpc N(NpcData_Bowser) = {
     .extraAnimations = N(ExtraAnims_Bowser),
 };
 
-StaticNpc N(NpcData_Peach) = {
+NpcData N(NpcData_Peach) = {
     .id = NPC_Peach_01,
     .settings = &N(NpcSettings_Dummy),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -216,7 +216,7 @@ StaticNpc N(NpcData_Peach) = {
     .extraAnimations = N(ExtraAnims_Peach),
 };
 
-StaticNpc N(NpcData_Kammy)[] = {
+NpcData N(NpcData_Kammy)[] = {
     {
         .id = NPC_Kammy_01,
         .settings = &N(NpcSettings_Kammy_Flying),
@@ -275,7 +275,7 @@ StaticNpc N(NpcData_Kammy)[] = {
     },
 };
 
-StaticNpc N(NpcData_Twink) = {
+NpcData N(NpcData_Twink) = {
     .id = NPC_Twink_01,
     .settings = &N(NpcSettings_Dummy),
     .pos = { 0.0f, 0.0f, 0.0f },

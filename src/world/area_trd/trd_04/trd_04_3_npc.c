@@ -30,7 +30,7 @@ EvtScript N(EVS_NpcInit_KoopaTroopa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KoopaTroopa_Wander) = {
+NpcData N(NpcData_KoopaTroopa_Wander) = {
     .id = NPC_KoopaTroopa,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { 0.0f, 0.0f, 125.0f },
@@ -53,7 +53,7 @@ StaticNpc N(NpcData_KoopaTroopa_Wander) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_KoopaTroopa_Patrol) = {
+NpcData N(NpcData_KoopaTroopa_Patrol) = {
     .id = NPC_KoopaTroopa,
     .settings = &N(NpcSettings_KoopaTroopa_Patrol),
     .pos = { 220.0f, 0.0f, 30.0f },
@@ -79,7 +79,7 @@ StaticNpc N(NpcData_KoopaTroopa_Patrol) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_ParaTroopa) = {
+NpcData N(NpcData_ParaTroopa) = {
     .id = NPC_ParaTroopa,
     .settings = &N(NpcSettings_ParaTroopa),
     .pos = { -5.0f, 237.0f, 157.0f },

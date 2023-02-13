@@ -620,7 +620,7 @@ s32 N(ExtraAnims_LanternGhost)[] = {
     -1
 };
 
-StaticNpc N(NpcData_BigLanternGhost) = {
+NpcData N(NpcData_BigLanternGhost) = {
     .id = NPC_BigLanternGhost,
     .settings = &N(NpcSettings_BigLanternGhost),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -635,7 +635,7 @@ StaticNpc N(NpcData_BigLanternGhost) = {
     .tattle = MSG_NpcTattle_OMO_Lantern,
 };
 
-StaticNpc N(NpcData_Watt) = {
+NpcData N(NpcData_Watt) = {
     .id = NPC_Watt,
     .settings = &N(NpcSettings_Watt),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -666,7 +666,7 @@ StaticNpc N(NpcData_Watt) = {
     .tattle = MSG_NpcTattle_OMO_Lantern,
 };
 
-StaticNpc N(NpcData_LanternTop) = {
+NpcData N(NpcData_LanternTop) = {
     .id = NPC_LaternTop,
     .settings = &N(NpcSettings_Watt),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -681,7 +681,7 @@ StaticNpc N(NpcData_LanternTop) = {
     .tattle = MSG_NpcTattle_OMO_Lantern,
 };
 
-StaticNpc N(NpcData_LanternBottom) = {
+NpcData N(NpcData_LanternBottom) = {
     .id = NPC_LaternBottom,
     .settings = &N(NpcSettings_Watt),
     .pos = { NPC_DISPOSE_LOCATION },

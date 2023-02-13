@@ -4,7 +4,7 @@
 #include "world/common/enemy/Koopatrol_Wander.inc.c"
 #include "world/common/enemy/FlyingMagikoopa.inc.c"
 
-StaticNpc N(NpcData_Koopatrol) = {
+NpcData N(NpcData_Koopatrol) = {
     .id = NPC_Koopatrol,
     .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { -200.0f, 0.0f, -225.0f },
@@ -26,7 +26,7 @@ StaticNpc N(NpcData_Koopatrol) = {
     .animations = KOOPATROL_ANIMS,
 };
 
-StaticNpc N(NpcData_FlyingMagikoopa)[] = {
+NpcData N(NpcData_FlyingMagikoopa)[] = {
     {
         .id = NPC_FlyingMagikoopa,
         .settings = &N(NpcSettings_FlyingMagikoopa),
@@ -53,7 +53,7 @@ StaticNpc N(NpcData_FlyingMagikoopa)[] = {
     FLYING_MAGIKOOPA_SPELL_HITBOX(NPC_FlyingMagikoopa + 1),
 };
 
-StaticNpc N(NpcData_HammerBros)[] = {
+NpcData N(NpcData_HammerBros)[] = {
     {
         .id = NPC_HammerBros,
         .settings = &N(NpcSettings_HammerBros_Wander),

@@ -25,7 +25,7 @@ EvtScript N(EVS_NpcInit_Bzzap) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Bzzap) = {
+NpcData N(NpcData_Bzzap) = {
     .id = NPC_Bzzap,
     .settings = &N(NpcSettings_Bzzap),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -48,7 +48,7 @@ StaticNpc N(NpcData_Bzzap) = {
     .animations = BZZAP_ANIMS,
 };
 
-StaticNpc N(NpcData_PiranhaPlant_01)[] = {
+NpcData N(NpcData_PiranhaPlant_01)[] = {
     {
         .id = NPC_PiranhaPlant_01,
         .settings = &N(NpcSettings_PiranhaPlant),
@@ -74,7 +74,7 @@ StaticNpc N(NpcData_PiranhaPlant_01)[] = {
     PIRANHA_PLANT_HITBOX(NPC_PiranhaPlant_01_Hitbox)
 };
 
-StaticNpc N(NpcData_PiranhaPlant_02)[] = {
+NpcData N(NpcData_PiranhaPlant_02)[] = {
     {
         .id = NPC_PiranhaPlant_02,
         .settings = &N(NpcSettings_PiranhaPlant),

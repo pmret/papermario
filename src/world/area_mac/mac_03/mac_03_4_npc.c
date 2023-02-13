@@ -605,7 +605,7 @@ EvtScript N(EVS_NpcInit_Toad_04) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Toads)[] = {
+NpcData N(NpcData_Toads)[] = {
     {
         .id = NPC_TrainToad_01,
         .settings = &N(NpcSettings_TrainToad),
@@ -719,7 +719,7 @@ StaticNpc N(NpcData_Toads)[] = {
     },
 };
 
-StaticNpc N(NpcData_ThreeSisters)[] = {
+NpcData N(NpcData_ThreeSisters)[] = {
     {
         .id = NPC_ThreeSisters_02,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -755,7 +755,7 @@ StaticNpc N(NpcData_ThreeSisters)[] = {
     },
 };
 
-StaticNpc N(NpcData_ShyGuy) = {
+NpcData N(NpcData_ShyGuy) = {
     .id = NPC_ShyGuy,
     .settings = &N(NpcSettings_ShyGuy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -783,7 +783,7 @@ StaticNpc N(NpcData_ShyGuy) = {
     },
 };
 
-StaticNpc N(NpcData_LilOinks)[] = {
+NpcData N(NpcData_LilOinks)[] = {
     {
         .id = NPC_LilOink_01,
         .settings = &N(NpcSettings_Toad_Wander),

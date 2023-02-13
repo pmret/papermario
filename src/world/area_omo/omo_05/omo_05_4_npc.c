@@ -389,7 +389,7 @@ EvtScript N(EVS_NpcInit_GourmetGuy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GourmetGuy)[] = {
+NpcData N(NpcData_GourmetGuy)[] = {
     {
         .id = NPC_GourmetGuy,
         .settings = &N(NpcSettings_GourmetGuy),
@@ -423,7 +423,7 @@ StaticNpc N(NpcData_GourmetGuy)[] = {
     },
 };
 
-StaticNpc N(NpcData_GrooveGuy) = {
+NpcData N(NpcData_GrooveGuy) = {
     .id = NPC_GrooveGuy,
     .settings = &N(NpcSettings_GrooveGuy),
     .pos = { 320.0f, 10.0f, -145.0f },

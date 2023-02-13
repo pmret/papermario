@@ -10,7 +10,7 @@ EvtScript N(EVS_NpcInit_Merlar) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Merlar) = {
+NpcData N(NpcData_Merlar) = {
     .id = NPC_Merlar,
     .settings = &N(NpcSettings_Merlar),
     .pos = { NPC_DISPOSE_LOCATION },

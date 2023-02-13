@@ -167,7 +167,7 @@ EvtScript N(EVS_NpcInit_Peach) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Bowser_Body) = {
+NpcData N(NpcData_Bowser_Body) = {
     .id = NPC_Bowser_Body,
     .settings = &N(NpcSettings_Bowser),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -178,7 +178,7 @@ StaticNpc N(NpcData_Bowser_Body) = {
     .animations = BOWSER_ANIMS,
 };
 
-StaticNpc N(NpcData_Bowser_Prop) = {
+NpcData N(NpcData_Bowser_Prop) = {
     .id = NPC_Bowser_Prop,
     .settings = &N(NpcSettings_Dummy),
     .pos = { 0.0f, 0.0f, 0.0f },
@@ -189,7 +189,7 @@ StaticNpc N(NpcData_Bowser_Prop) = {
     .animations = BOWSER_ANIMS,
 };
 
-StaticNpc N(NpcData_Peach) = {
+NpcData N(NpcData_Peach) = {
     .id = NPC_Peach,
     .settings = &N(NpcSettings_Dummy),
     .pos = { 0.0f, 0.0f, 0.0f },

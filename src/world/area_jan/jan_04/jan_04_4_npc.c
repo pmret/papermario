@@ -250,7 +250,7 @@ EvtScript N(EVS_NpcInit_Bubulb) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Characters)[] = {
+NpcData N(NpcData_Characters)[] = {
     {
         .id = NPC_Sushie,
         .settings = &N(NpcSettings_Sushie),
@@ -274,7 +274,7 @@ StaticNpc N(NpcData_Characters)[] = {
     },
 };
 
-StaticNpc N(NpcData_YoshiKids)[] = {
+NpcData N(NpcData_YoshiKids)[] = {
     {
         .id = NPC_YoshiKid_01,
         .settings = &N(NpcSettings_YoshiKid),

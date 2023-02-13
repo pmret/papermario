@@ -39,7 +39,7 @@ s32 N(ExtraAnims_Koopatrol)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Characters)[] = {
+NpcData N(NpcData_Characters)[] = {
     {
         .id = NPC_Ch7_Bowser,
         .settings = &N(NpcSettings_Bowser),

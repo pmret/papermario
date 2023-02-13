@@ -89,7 +89,7 @@ EvtScript N(EVS_NpcInit_Kammy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Goomba) = {
+NpcData N(NpcData_Goomba) = {
     .id = NPC_Goomba,
     .settings = &N(NpcSettings_Goomba),
     .pos = { 1100.0f, 0.0f, 0.0f },
@@ -100,7 +100,7 @@ StaticNpc N(NpcData_Goomba) = {
     .animations = GOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_Clubba) = {
+NpcData N(NpcData_Clubba) = {
     .id = NPC_Clubba,
     .settings = &N(NpcSettings_Clubba),
     .pos = { 1100.0f, 0.0f, 0.0f },
@@ -111,7 +111,7 @@ StaticNpc N(NpcData_Clubba) = {
     .animations = CLUBBA_ANIMS_ALT,
 };
 
-StaticNpc N(NpcData_ShyGuy) = {
+NpcData N(NpcData_ShyGuy) = {
     .id = NPC_ShyGuy,
     .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { -770.0f, 0.0f, 0.0f },
@@ -134,7 +134,7 @@ StaticNpc N(NpcData_ShyGuy) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_SkyGuy) = {
+NpcData N(NpcData_SkyGuy) = {
     .id = NPC_SkyGuy,
     .settings = &N(NpcSettings_SkyGuy),
     .pos = { -170.0f, 60.0f, 30.0f },
@@ -167,7 +167,7 @@ s32 N(ExtraAnims_Kammy)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Kammy) = {
+NpcData N(NpcData_Kammy) = {
     .id = NPC_Kammy,
     .settings = &N(NpcSettings_Kammy_Flying),
     .pos = { NPC_DISPOSE_LOCATION },

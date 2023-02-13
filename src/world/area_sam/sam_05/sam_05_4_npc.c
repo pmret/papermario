@@ -162,7 +162,7 @@ s32 N(ExtraAnims_Monstar)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Monstar) = {
+NpcData N(NpcData_Monstar) = {
     .id = NPC_Monstar,
     .settings = &N(NpcSettings_Monstar),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -199,7 +199,7 @@ s32 N(ExtraAnims_StarKid)[] = {
     -1
 };
 
-StaticNpc N(NpcData_StarKids)[] = {
+NpcData N(NpcData_StarKids)[] = {
     {
         .id = NPC_StarKid_01,
         .settings = &N(NpcSettings_Twink),
@@ -378,7 +378,7 @@ StaticNpc N(NpcData_StarKids)[] = {
     },
 };
 
-StaticNpc N(NpcData_Gulpit)[] = {
+NpcData N(NpcData_Gulpit)[] = {
     {
         .id = NPC_Gulpit,
         .settings = &N(NpcSettings_Gulpit),
@@ -405,7 +405,7 @@ StaticNpc N(NpcData_Gulpit)[] = {
     GULPIT_HITBOX(NPC_Gulpit_Hitbox),
 };
 
-StaticNpc N(NpcData_FrostPiranha_01)[] = {
+NpcData N(NpcData_FrostPiranha_01)[] = {
     {
         .id = NPC_FrostPiranha_01,
         .settings = &N(NpcSettings_FrostPiranha),
@@ -432,7 +432,7 @@ StaticNpc N(NpcData_FrostPiranha_01)[] = {
     FROST_PIRANHA_HITBOX(NPC_FrostPiranha_01_Hitbox),
 };
 
-StaticNpc N(NpcData_FrostPiranha_02)[] = {
+NpcData N(NpcData_FrostPiranha_02)[] = {
     {
         .id = NPC_FrostPiranha_02,
         .settings = &N(NpcSettings_FrostPiranha),

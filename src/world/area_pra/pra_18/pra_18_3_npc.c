@@ -332,7 +332,7 @@ EvtScript N(EVS_NpcInit_Clubba_03_Aux) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Clubba_01)[] = {
+NpcData N(NpcData_Clubba_01)[] = {
     {
         .id = NPC_Clubba_01,
         .settings = &N(NpcSettings_Clubba),
@@ -355,7 +355,7 @@ StaticNpc N(NpcData_Clubba_01)[] = {
     },
 };
 
-StaticNpc N(NpcData_Clubba_02)[] = {
+NpcData N(NpcData_Clubba_02)[] = {
     {
         .id = NPC_Clubba_02,
         .settings = &N(NpcSettings_Clubba),
@@ -378,7 +378,7 @@ StaticNpc N(NpcData_Clubba_02)[] = {
     },
 };
 
-StaticNpc N(NpcData_Clubba_03)[] = {
+NpcData N(NpcData_Clubba_03)[] = {
     {
         .id = NPC_Clubba_03,
         .settings = &N(NpcSettings_Clubba),

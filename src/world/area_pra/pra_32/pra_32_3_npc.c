@@ -236,7 +236,7 @@ EvtScript N(EVS_NpcInit_Kalmar) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_CrystalKing_01)[] = {
+NpcData N(NpcData_CrystalKing_01)[] = {
     {
         .id = NPC_CrystalKing_01,
         .settings = &N(NpcSettings_CrystalKing),

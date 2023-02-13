@@ -3,7 +3,7 @@
 #define INCLUDE_CLUBBA_NAPPING
 #include "world/common/enemy/Clubba_Multi.inc.c"
 
-StaticNpc N(NpcData_Clubba_01)[] = {
+NpcData N(NpcData_Clubba_01)[] = {
     {
         .id = NPC_Clubba_01,
         .settings = &N(NpcSettings_Clubba_Napping),
@@ -30,7 +30,7 @@ StaticNpc N(NpcData_Clubba_01)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_01_Hitbox),
 };
 
-StaticNpc N(NpcData_Clubba_02)[] = {
+NpcData N(NpcData_Clubba_02)[] = {
     {
         .id = NPC_Clubba_02,
         .settings = &N(NpcSettings_Clubba_Napping),
@@ -56,7 +56,7 @@ StaticNpc N(NpcData_Clubba_02)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_02_Hitbox),
 };
 
-StaticNpc N(NpcData_Clubba_03)[] = {
+NpcData N(NpcData_Clubba_03)[] = {
     {
         .id = NPC_Clubba_03,
         .settings = &N(NpcSettings_Clubba_Napping),
@@ -82,7 +82,7 @@ StaticNpc N(NpcData_Clubba_03)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_03_Hitbox),
 };
 
-StaticNpc N(NpcData_Clubba_04)[] = {
+NpcData N(NpcData_Clubba_04)[] = {
     {
         .id = NPC_Clubba_04,
         .settings = &N(NpcSettings_Clubba_Napping),
@@ -108,7 +108,7 @@ StaticNpc N(NpcData_Clubba_04)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_04_Hitbox),
 };
 
-StaticNpc N(NpcData_Clubba_05)[] = {
+NpcData N(NpcData_Clubba_05)[] = {
     {
         .id = NPC_Clubba_05,
         .settings = &N(NpcSettings_Clubba_Napping),
@@ -134,7 +134,7 @@ StaticNpc N(NpcData_Clubba_05)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_05_Hitbox),
 };
 
-StaticNpc N(NpcData_Clubba_06)[] = {
+NpcData N(NpcData_Clubba_06)[] = {
     {
         .id = NPC_Clubba_06,
         .settings = &N(NpcSettings_Clubba_Napping),

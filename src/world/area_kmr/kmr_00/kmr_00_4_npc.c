@@ -106,7 +106,7 @@ EvtScript N(EVS_NpcInit_Goombaria) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Goombaria) = {
+NpcData N(NpcData_Goombaria) = {
     .id = NPC_Goombaria,
     .settings = &N(NpcSettings_Goombaria_Stationary),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -117,7 +117,7 @@ StaticNpc N(NpcData_Goombaria) = {
     .animations = GOOMBARIA_ANIMS,
 };
 
-StaticNpc N(NpcData_StarSpirits)[] = {
+NpcData N(NpcData_StarSpirits)[] = {
     {
         .id = NPC_Eldstar,
         .settings = &N(NpcSettings_StarSpirit),

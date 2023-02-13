@@ -122,7 +122,7 @@ EvtScript N(EVS_NpcInit_ThreeSisters_01) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TrainToad)[] = {
+NpcData N(NpcData_TrainToad)[] = {
     {
         .id = NPC_TrainToad_01,
         .settings = &N(NpcSettings_TrainToad),
@@ -146,7 +146,7 @@ StaticNpc N(NpcData_TrainToad)[] = {
     },
 };
 
-StaticNpc N(NpcData_Toad) = {
+NpcData N(NpcData_Toad) = {
     .id = NPC_Toad,
     .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { -254.0f, 20.0f, 165.0f },
@@ -158,7 +158,7 @@ StaticNpc N(NpcData_Toad) = {
     .tattle = MSG_NpcTattle_IWA_TravelAgent,
 };
 
-StaticNpc N(NpcData_ThreeSisters)[] = {
+NpcData N(NpcData_ThreeSisters)[] = {
     {
         .id = NPC_ThreeSisters_02,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -194,7 +194,7 @@ StaticNpc N(NpcData_ThreeSisters)[] = {
     },
 };
 
-StaticNpc N(NpcData_Dryite)[] = {
+NpcData N(NpcData_Dryite)[] = {
     {
         .id = NPC_Dryite,
         .settings = &N(NpcSettings_Dryite),

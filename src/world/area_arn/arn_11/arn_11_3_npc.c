@@ -149,7 +149,7 @@ EvtScript N(EVS_NpcInit_TubbasHeart) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TubbasHeart) = {
+NpcData N(NpcData_TubbasHeart) = {
     .id = NPC_TubbasHeart,
     .settings = &N(NpcSettings_TubbasHeart),
     .pos = { 119.0f, 60.0f, 0.0f },

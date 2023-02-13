@@ -219,7 +219,7 @@ EvtScript N(EVS_NpcInit_Duplighost_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_FakeMario) = {
+NpcData N(NpcData_FakeMario) = {
     .id = NPC_FakeMario,
     .settings = &N(NpcSettings_Player),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -230,7 +230,7 @@ StaticNpc N(NpcData_FakeMario) = {
     .animations = BOMBETTE_ANIMS,
 };
 
-StaticNpc N(NpcData_Imposters)[] = {
+NpcData N(NpcData_Imposters)[] = {
     {
         .id = NPC_FakeBombette,
         .settings = &N(NpcSettings_Player),

@@ -153,7 +153,7 @@ EvtScript N(EVS_NpcInit_Penguin) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Prisoners)[] = {
+NpcData N(NpcData_Prisoners)[] = {
     {
         .id = NPC_Toad_01,
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -230,7 +230,7 @@ EvtScript N(EVS_NpcInit_Koopatrol) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Koopatrol) = {
+NpcData N(NpcData_Koopatrol) = {
     .id = NPC_Koopatrol,
     .settings = &N(NpcSettings_Koopatrol_Patrol),
     .pos = { -70.0f, 0.0f, 55.0f },

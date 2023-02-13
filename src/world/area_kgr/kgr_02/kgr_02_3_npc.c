@@ -286,7 +286,7 @@ NpcSettings N(NpcSettings_Fuzzipede) = {
     .unk_24 = 100,
 };
 
-StaticNpc N(NpcData_Fuzzipede) = {
+NpcData N(NpcData_Fuzzipede) = {
     .id = NPC_Fuzzipede,
     .settings = &N(NpcSettings_Fuzzipede),
     .pos = { 333.0f, -10.0f, -130.0f },

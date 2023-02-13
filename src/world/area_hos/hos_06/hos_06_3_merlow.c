@@ -252,7 +252,7 @@ EvtScript N(EVS_NpcInit_Merlow) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Merluvlee)[] = {
+NpcData N(NpcData_Merluvlee)[] = {
     {
         .id = NPC_Merluvlee,
         .settings = &N(NpcSettings_Merluvlee),

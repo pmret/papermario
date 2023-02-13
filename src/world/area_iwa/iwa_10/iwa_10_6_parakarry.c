@@ -305,7 +305,7 @@ EvtScript N(EVS_NpcInit_Parakarry) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Parakarry) = {
+NpcData N(NpcData_Parakarry) = {
     .id = NPC_Parakarry,
     .settings = &N(NpcSettings_Parakarry),
     .pos = { -610.0f, 230.0f, -485.0f },

@@ -293,7 +293,7 @@ EvtScript N(EVS_NpcInit_Archeologist_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Archeologist_02)[] = {
+NpcData N(NpcData_Archeologist_02)[] = {
     {
         .id = NPC_Kolorado,
         .settings = &N(NpcSettings_Kolorado),

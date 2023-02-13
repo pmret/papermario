@@ -3,7 +3,7 @@
 #include "world/common/enemy/LavaBubble.inc.c"
 #include "world/common/enemy/PutridPiranha.inc.c"
 
-StaticNpc N(NpcData_PutridPiranha)[] = {
+NpcData N(NpcData_PutridPiranha)[] = {
     {
         .id = NPC_PutridPiranha,
         .settings = &N(NpcSettings_PutridPiranha),

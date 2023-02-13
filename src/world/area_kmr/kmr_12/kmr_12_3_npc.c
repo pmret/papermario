@@ -87,7 +87,7 @@ EvtScript N(EVS_NpcInit_Goomba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Goomba) = {
+NpcData N(NpcData_Goomba) = {
     .id = NPC_Goomba_Ambush,
     .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { -33.0f, 30.0f, -25.0f },

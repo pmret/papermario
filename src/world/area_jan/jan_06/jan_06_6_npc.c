@@ -13,7 +13,7 @@ s32 N(ExtraAnims_JungleFuzzy)[] = {
     -1
 };
 
-StaticNpc N(NpcData_JungleFuzzy) = {
+NpcData N(NpcData_JungleFuzzy) = {
     .id = NPC_JungleFuzzy,
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 310.0f, 24.0f, 35.0f },
@@ -53,7 +53,7 @@ s32 N(ExtraAnims_SpearGuy_Custom)[] = {
     -1
 };
 
-StaticNpc N(NpcData_SpearGuy)[] = {
+NpcData N(NpcData_SpearGuy)[] = {
     {
         .id = NPC_SpearGuy,
         .pos = { -298.0f, 35.0f, 37.0f },
@@ -80,7 +80,7 @@ StaticNpc N(NpcData_SpearGuy)[] = {
     SPEAR_GUY_HITBOX(NPC_SpearGuy_Hitbox),
 };
 
-StaticNpc N(NpcData_HeartPlant) = {
+NpcData N(NpcData_HeartPlant) = {
     .id = NPC_HeartPlant,
     .pos = { 410.0f, 0.0f, -30.0f },
     .yaw = 270,
@@ -91,7 +91,7 @@ StaticNpc N(NpcData_HeartPlant) = {
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(NpcData_HurtPlant_01) = {
+NpcData N(NpcData_HurtPlant_01) = {
     .id = NPC_HurtPlant_01,
     .pos = { 110.0f, 0.0f, 55.0f },
     .yaw = 90,
@@ -102,7 +102,7 @@ StaticNpc N(NpcData_HurtPlant_01) = {
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(NpcData_HurtPlant_02) = {
+NpcData N(NpcData_HurtPlant_02) = {
     .id = NPC_HurtPlant_02,
     .pos = { -430.0f, 0.0f, -80.0f },
     .yaw = 90,

@@ -290,7 +290,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             staticNpc = bytes.read(struct["length"])
             curr_base = 0
             numNpcs = struct['length'] // 0x1F0
-            tmp_out = f"StaticNpc {name}" + ("[]" if numNpcs > 1 else "") + f" = {{\n"
+            tmp_out = f"NpcData {name}" + ("[]" if numNpcs > 1 else "") + f" = {{\n"
 
             for z in range(numNpcs):
                 i = 0

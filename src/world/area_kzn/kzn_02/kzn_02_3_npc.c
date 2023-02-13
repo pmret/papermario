@@ -162,7 +162,7 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Kolorado) = {
+NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
     .settings = &N(NpcSettings_Kolorado),
     .pos = { -740.0f, 20.0f, 0.0f },
@@ -174,7 +174,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(NpcData_LavaBubble) = {
+NpcData N(NpcData_LavaBubble) = {
     .id = NPC_LavaBubble,
     .settings = &N(NpcSettings_LavaBubble),
     .pos = { 250.0f, 50.0f, 0.0f },

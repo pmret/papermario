@@ -1416,7 +1416,7 @@ EvtScript N(EVS_NpcInit_Misstar) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Kolorado)[] = {
+NpcData N(NpcData_Kolorado)[] = {
     {
         .id = NPC_Kolorado_01,
         .settings = &N(NpcSettings_Kolorado),
@@ -1463,7 +1463,7 @@ StaticNpc N(NpcData_Kolorado)[] = {
     },
 };
 
-StaticNpc N(NpcData_SpearGuy) = {
+NpcData N(NpcData_SpearGuy) = {
     .id = NPC_SpearGuy,
     .pos = { -70.0f, 0.0f, 10.0f },
     .yaw = 270,
@@ -1489,7 +1489,7 @@ StaticNpc N(NpcData_SpearGuy) = {
     .animations = SPEAR_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_RaphaelRaven)[] = {
+NpcData N(NpcData_RaphaelRaven)[] = {
     {
         .id = NPC_RaphaelRaven,
         .pos = { NPC_DISPOSE_LOCATION },
@@ -1553,7 +1553,7 @@ StaticNpc N(NpcData_RaphaelRaven)[] = {
     },
 };
 
-StaticNpc N(NpcData_Misstar) = {
+NpcData N(NpcData_Misstar) = {
     .id = NPC_Misstar,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { 1075.0f, 120.0f, 130.0f },

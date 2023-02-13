@@ -143,7 +143,7 @@ NpcSettings N(NpcSettings_FireBar_Extra) = {
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
-StaticNpc N(NpcData_FireBar_01)[] = {
+NpcData N(NpcData_FireBar_01)[] = {
     {
         .id = NPC_FireBar_1A,
         .settings = &N(NpcSettings_FireBar_01),
@@ -186,7 +186,7 @@ StaticNpc N(NpcData_FireBar_01)[] = {
     },
 };
 
-StaticNpc N(NpcData_FireBar_02)[] = {
+NpcData N(NpcData_FireBar_02)[] = {
     {
         .id = NPC_FireBar_2A,
         .settings = &N(NpcSettings_FireBar_02),
@@ -229,7 +229,7 @@ StaticNpc N(NpcData_FireBar_02)[] = {
     },
 };
 
-StaticNpc N(NpcData_FireBar_03)[] = {
+NpcData N(NpcData_FireBar_03)[] = {
     {
         .id = NPC_FireBar_3A,
         .settings = &N(NpcSettings_FireBar_03),
@@ -272,7 +272,7 @@ StaticNpc N(NpcData_FireBar_03)[] = {
     },
 };
 
-StaticNpc N(NpcData_Bubble_01) = {
+NpcData N(NpcData_Bubble_01) = {
     .id = NPC_Bubble_01,
     .settings = &N(NpcSettings_LavaBubble),
     .pos = { -150.0f, 50.0f, 10.0f },
@@ -295,7 +295,7 @@ StaticNpc N(NpcData_Bubble_01) = {
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Bubble_02) = {
+NpcData N(NpcData_Bubble_02) = {
     .id = NPC_Bubble_02,
     .settings = &N(NpcSettings_LavaBubble),
     .pos = { 150.0f, 50.0f, 10.0f },

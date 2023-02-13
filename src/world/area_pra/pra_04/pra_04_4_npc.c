@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Swooper.inc.c"
 
-StaticNpc N(NpcData_Swoopula) = {
+NpcData N(NpcData_Swoopula) = {
     .id = NPC_Swoopula,
     .settings = &N(NpcSettings_Swoopula),
     .pos = { 50.0f, 130.0f, 75.0f },

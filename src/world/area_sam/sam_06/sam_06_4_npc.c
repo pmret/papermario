@@ -887,7 +887,7 @@ EvtScript N(EVS_NpcInit_ShiverToad_04) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Merle)[] = {
+NpcData N(NpcData_Merle)[] = {
     {
         .id = NPC_Merle,
         .settings = &N(NpcSettings_Toad_Stationary),

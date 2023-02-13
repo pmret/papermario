@@ -638,7 +638,7 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Characters)[] = {
+NpcData N(NpcData_Characters)[] = {
     {
         .id = NPC_Whale,
         .settings = &N(NpcSettings_Kolorado_01),
@@ -673,7 +673,7 @@ StaticNpc N(NpcData_Characters)[] = {
     },
 };
 
-StaticNpc N(NpcData_HeartPlant_01) = {
+NpcData N(NpcData_HeartPlant_01) = {
     .id = NPC_HeartPlant_01,
     .settings = &N(NpcSettings_HeartPlant),
     .pos = { 455.0f, 0.0f, 115.0f },
@@ -684,7 +684,7 @@ StaticNpc N(NpcData_HeartPlant_01) = {
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(NpcData_HeartPlant_02) = {
+NpcData N(NpcData_HeartPlant_02) = {
     .id = NPC_HeartPlant_02,
     .settings = &N(NpcSettings_HeartPlant),
     .pos = { 167.0f, 0.0f, 404.0f },
@@ -695,7 +695,7 @@ StaticNpc N(NpcData_HeartPlant_02) = {
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(NpcData_HeartPlant_03) = {
+NpcData N(NpcData_HeartPlant_03) = {
     .id = NPC_HeartPlant_03,
     .settings = &N(NpcSettings_HeartPlant),
     .pos = { 90.0f, 0.0f, 316.0f },
@@ -706,7 +706,7 @@ StaticNpc N(NpcData_HeartPlant_03) = {
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(NpcData_HeartPlant_04) = {
+NpcData N(NpcData_HeartPlant_04) = {
     .id = NPC_HeartPlant_04,
     .settings = &N(NpcSettings_HeartPlant),
     .pos = { 424.0f, 0.0f, 182.0f },
@@ -717,7 +717,7 @@ StaticNpc N(NpcData_HeartPlant_04) = {
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(NpcData_HeartPlant_05) = {
+NpcData N(NpcData_HeartPlant_05) = {
     .id = NPC_HeartPlant_05,
     .settings = &N(NpcSettings_HeartPlant),
     .pos = { 143.0f, 0.0f, 260.0f },

@@ -63,7 +63,7 @@ NpcSettings N(NpcSettings_Tutankoopa_02) = {
     .radius = 36,
 };
 
-StaticNpc N(NpcData_Tutankoopa)[] = {
+NpcData N(NpcData_Tutankoopa)[] = {
     {
         .id = NPC_Tutankoopa_01,
         .settings = &N(NpcSettings_Tutankoopa_01),
@@ -121,7 +121,7 @@ StaticNpc N(NpcData_Tutankoopa)[] = {
     },
 };
 
-StaticNpc N(NpcData_ChainChomp) = {
+NpcData N(NpcData_ChainChomp) = {
     .id = NPC_ChainChomp,
     .settings = &N(NpcSettings_ChainChomp),
     .pos = { 457.0f, -1300.0f, 316.0f },

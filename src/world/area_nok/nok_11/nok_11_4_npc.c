@@ -449,7 +449,7 @@ EvtScript N(EVS_NpcDefeat_KentCKoopa_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KoopaTroopa) = {
+NpcData N(NpcData_KoopaTroopa) = {
     .id = NPC_KoopaTroopa,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { -350.0f, 0.0f, -30.0f },
@@ -471,7 +471,7 @@ StaticNpc N(NpcData_KoopaTroopa) = {
     .animations = KOOPA_TROOPA_ANIMS,
 };
 
-StaticNpc N(NpcData_Paragoomba) = {
+NpcData N(NpcData_Paragoomba) = {
     .id = NPC_Paragoomba,
     .settings = &N(NpcSettings_Paragoomba_Wander),
     .pos = { 0.0f, 60.0f, -30.0f },
@@ -493,7 +493,7 @@ StaticNpc N(NpcData_Paragoomba) = {
     .animations = PARAGOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_SpikedGoomba) = {
+NpcData N(NpcData_SpikedGoomba) = {
     .id = NPC_SpikedGoomba,
     .settings = &N(NpcSettings_SpikedGoomba_Wander),
     .pos = { 430.0f, 0.0f, -27.0f },
@@ -532,7 +532,7 @@ EvtScript N(EVS_NpcInit_JrTroopa_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_JrTroopa)[] = {
+NpcData N(NpcData_JrTroopa)[] = {
     {
         .id = NPC_JrTroopa_01,
         .settings = &N(NpcSettings_JrTroopa),
@@ -580,7 +580,7 @@ EvtScript N(EVS_NpcInit_KentCKoopa_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KentCKoopa)[] = {
+NpcData N(NpcData_KentCKoopa)[] = {
     {
         .id = NPC_KentCKoopa_01,
         .settings = &N(NpcSettings_KentCKoopa),

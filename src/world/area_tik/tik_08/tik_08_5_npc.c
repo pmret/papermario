@@ -104,7 +104,7 @@ EvtScript N(EVS_NpcInit_Blooper) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Blooper) = {
+NpcData N(NpcData_Blooper) = {
     .id = NPC_Blooper,
     .settings = &N(NpcSettings_Blooper),
     .pos = { NPC_DISPOSE_LOCATION },

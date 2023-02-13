@@ -162,7 +162,7 @@ EvtScript N(EVS_NpcInit_Tubba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Tubba) = {
+NpcData N(NpcData_Tubba) = {
     .id = NPC_Tubba,
     .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },

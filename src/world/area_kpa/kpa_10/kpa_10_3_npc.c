@@ -2,7 +2,7 @@
 
 #include "world/common/npc/Toad_Stationary.inc.c"
 
-StaticNpc N(NpcData_Prisoners)[] = {
+NpcData N(NpcData_Prisoners)[] = {
     {
         .id = NPC_Toad_01,
         .settings = &N(NpcSettings_Toad_Stationary),

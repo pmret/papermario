@@ -618,7 +618,7 @@ EvtScript N(EVS_NpcInit_Lakilulu) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Wisterwood) = {
+NpcData N(NpcData_Wisterwood) = {
     .id = NPC_Dummy_Wisterwood,
     .settings = &N(NpcSettings_Dummy),
     .pos = { -72.0f, 60.0f, -100.0f },
@@ -629,7 +629,7 @@ StaticNpc N(NpcData_Wisterwood) = {
     .animations = BUBULB_PINK_ANIMS,
 };
 
-StaticNpc N(NpcData_Bubulbs)[] = {
+NpcData N(NpcData_Bubulbs)[] = {
     {
         .id = NPC_Bubulb_01,
         .settings = &N(NpcSettings_Bubulb_Patrol),
@@ -732,7 +732,7 @@ StaticNpc N(NpcData_Bubulbs)[] = {
     },
 };
 
-StaticNpc N(NpcData_Tolielup) = {
+NpcData N(NpcData_Tolielup) = {
     .id = NPC_Tolielup,
     .settings = &N(NpcSettings_Tolielup),
     .pos = { -400.0f, 0.0f, 190.0f },
@@ -744,7 +744,7 @@ StaticNpc N(NpcData_Tolielup) = {
     .tattle = MSG_NpcTattle_Tolielup,
 };
 
-StaticNpc N(NpcData_Klevar) = {
+NpcData N(NpcData_Klevar) = {
     .id = NPC_Klevar,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -755,7 +755,7 @@ StaticNpc N(NpcData_Klevar) = {
     .animations = KLEVAR_ANIMS,
 };
 
-StaticNpc N(NpcData_Lakilulu) = {
+NpcData N(NpcData_Lakilulu) = {
     .id = NPC_Lakilulu,
     .settings = &N(NpcSettings_Dummy),
     .pos = { 198.0f, 0.0f, 363.0f },

@@ -3,7 +3,7 @@
 #include "world/common/enemy/Bandit.inc.c"
 #include "world/common/enemy/Pokey.inc.c"
 
-StaticNpc N(NpcData_Pokey) = {
+NpcData N(NpcData_Pokey) = {
     .id = NPC_Pokey,
     .settings = &N(NpcSettings_Pokey),
     .pos = { -120.0f, 0.0f, 90.0f },
@@ -26,7 +26,7 @@ StaticNpc N(NpcData_Pokey) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Bandit) = {
+NpcData N(NpcData_Bandit) = {
     .id = NPC_Bandit,
     .settings = &N(NpcSettings_Bandit),
     .pos = { -200.0f, 0.0f, 230.0f },

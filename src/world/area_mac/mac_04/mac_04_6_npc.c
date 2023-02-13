@@ -169,7 +169,7 @@ API_CALLABLE(N(EnforceNewStatLimits)) {
 #include "npc_gossip_trio.inc.c"
 #include "npc_goomba_family.inc.c"
 
-StaticNpc N(NpcData_Townsfolk)[] = {
+NpcData N(NpcData_Townsfolk)[] = {
     {
         .id = NPC_ChetRippo,
         .settings = &N(NpcSettings_ChetRippo),
@@ -353,7 +353,7 @@ s32 N(ExtraAnims_Twink)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Chapter4)[] = {
+NpcData N(NpcData_Chapter4)[] = {
     {
         .id = NPC_Twink,
         .settings = &N(NpcSettings_Twink),
@@ -420,7 +420,7 @@ StaticNpc N(NpcData_Chapter4)[] = {
     },
 };
 
-StaticNpc N(NpcData_PostChapter4)[] = {
+NpcData N(NpcData_PostChapter4)[] = {
     {
         .id = NPC_Muskular,
         .settings = &N(NpcSettings_StarSpirit),
@@ -443,7 +443,7 @@ StaticNpc N(NpcData_PostChapter4)[] = {
     },
 };
 
-StaticNpc N(NpcData_GoombaFamily)[] = {
+NpcData N(NpcData_GoombaFamily)[] = {
     {
         .id = NPC_Goomama,
         .settings = &N(NpcSettings_GoombaFamily),
@@ -468,7 +468,7 @@ StaticNpc N(NpcData_GoombaFamily)[] = {
     },
 };
 
-StaticNpc N(NpcData_ChuckQuizmo) = {
+NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
     .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { 57.0f, 20.0f, -114.0f },

@@ -510,7 +510,7 @@ s32 N(ExtraAnims_KoopaBros)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Enemies)[] = {
+NpcData N(NpcData_Enemies)[] = {
     {
         .id = NPC_KoopaBrosBlk,
         .settings = &N(NpcSettings_KoopaBros),

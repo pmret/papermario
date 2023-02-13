@@ -126,7 +126,7 @@ EvtScript N(EVS_NpcInit_RipCheato) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_RipCheato) = {
+NpcData N(NpcData_RipCheato) = {
     .id = NPC_RipCheato,
     .settings = &N(NpcSettings_RipCheato),
     .pos = { -80.0f, -10.0f, 0.0f },

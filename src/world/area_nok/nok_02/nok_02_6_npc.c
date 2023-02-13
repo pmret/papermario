@@ -619,7 +619,7 @@ EvtScript N(EVS_NpcInit_KoloradoWife_Epilogue) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Crisis)[] = {
+NpcData N(NpcData_Crisis)[] = {
     {
         .id = NPC_Koopa_01,
         .settings = &N(NpcSettings_Koopa_Wander),
@@ -731,7 +731,7 @@ StaticNpc N(NpcData_Crisis)[] = {
     },
 };
 
-StaticNpc N(NpcData_Fuzzy_01) = {
+NpcData N(NpcData_Fuzzy_01) = {
     .id = NPC_MiscFuzzy1,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -742,7 +742,7 @@ StaticNpc N(NpcData_Fuzzy_01) = {
     .animations = FUZZY_ANIMS,
 };
 
-StaticNpc N(NpcData_Fuzzy_02) = {
+NpcData N(NpcData_Fuzzy_02) = {
     .id = NPC_MiscFuzzy2,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -753,7 +753,7 @@ StaticNpc N(NpcData_Fuzzy_02) = {
     .animations = FUZZY_ANIMS,
 };
 
-StaticNpc N(NpcData_Normal)[] = {
+NpcData N(NpcData_Normal)[] = {
     {
         .id = NPC_Koopa_01,
         .settings = &N(NpcSettings_Koopa_Wander),
@@ -846,7 +846,7 @@ StaticNpc N(NpcData_Normal)[] = {
     },
 };
 
-StaticNpc N(NpcData_Fuzzy_Later) = {
+NpcData N(NpcData_Fuzzy_Later) = {
     .id = NPC_Fuzzy_Later,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -857,7 +857,7 @@ StaticNpc N(NpcData_Fuzzy_Later) = {
     .animations = FUZZY_ANIMS,
 };
 
-StaticNpc N(NpcData_Shared)[] = {
+NpcData N(NpcData_Shared)[] = {
     {
         .id = NPC_KoopaKoot,
         .settings = &N(NpcSettings_KoopaKoot),
@@ -918,7 +918,7 @@ StaticNpc N(NpcData_Shared)[] = {
     },
 };
 
-StaticNpc N(NpcData_Epilogue)[] = {
+NpcData N(NpcData_Epilogue)[] = {
     {
         .id = NPC_Parakarry,
         .settings = &N(NpcSettings_Koopa),
@@ -986,7 +986,7 @@ StaticNpc N(NpcData_Epilogue)[] = {
     },
 };
 
-StaticNpc N(NpcData_ChuckQuizmo) = {
+NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
     .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { 300.0f, 0.0f, 330.0f },

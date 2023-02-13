@@ -542,7 +542,7 @@ EvtScript N(EVS_NpcInit_BillBlaster) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_BillBlasters)[] = {
+NpcData N(NpcData_BillBlasters)[] = {
     {
         .id = NPC_BillBlaster_01,
         .settings = &N(NpcSettings_BillBlaster),
@@ -609,18 +609,18 @@ StaticNpc N(NpcData_BillBlasters)[] = {
     },
 };
 
-StaticNpc N(NpcData_BulletBill_01) = BULLET_BILL_NPC(NPC_BulletBill_01);
-StaticNpc N(NpcData_BulletBill_02) = BULLET_BILL_NPC(NPC_BulletBill_02);
-StaticNpc N(NpcData_BulletBill_03) = BULLET_BILL_NPC(NPC_BulletBill_03);
-StaticNpc N(NpcData_BulletBill_04) = BULLET_BILL_NPC(NPC_BulletBill_04);
-StaticNpc N(NpcData_BulletBill_05) = BULLET_BILL_NPC(NPC_BulletBill_05);
-StaticNpc N(NpcData_BulletBill_06) = BULLET_BILL_NPC(NPC_BulletBill_06);
-StaticNpc N(NpcData_BulletBill_07) = BULLET_BILL_NPC(NPC_BulletBill_07);
-StaticNpc N(NpcData_BulletBill_08) = BULLET_BILL_NPC(NPC_BulletBill_08);
-StaticNpc N(NpcData_BulletBill_09) = BULLET_BILL_NPC(NPC_BulletBill_09);
-StaticNpc N(NpcData_BulletBill_10) = BULLET_BILL_NPC(NPC_BulletBill_10);
+NpcData N(NpcData_BulletBill_01) = BULLET_BILL_NPC(NPC_BulletBill_01);
+NpcData N(NpcData_BulletBill_02) = BULLET_BILL_NPC(NPC_BulletBill_02);
+NpcData N(NpcData_BulletBill_03) = BULLET_BILL_NPC(NPC_BulletBill_03);
+NpcData N(NpcData_BulletBill_04) = BULLET_BILL_NPC(NPC_BulletBill_04);
+NpcData N(NpcData_BulletBill_05) = BULLET_BILL_NPC(NPC_BulletBill_05);
+NpcData N(NpcData_BulletBill_06) = BULLET_BILL_NPC(NPC_BulletBill_06);
+NpcData N(NpcData_BulletBill_07) = BULLET_BILL_NPC(NPC_BulletBill_07);
+NpcData N(NpcData_BulletBill_08) = BULLET_BILL_NPC(NPC_BulletBill_08);
+NpcData N(NpcData_BulletBill_09) = BULLET_BILL_NPC(NPC_BulletBill_09);
+NpcData N(NpcData_BulletBill_10) = BULLET_BILL_NPC(NPC_BulletBill_10);
 
-StaticNpc N(NpcData_KoopaBros)[] = {
+NpcData N(NpcData_KoopaBros)[] = {
     {
         .id = NPC_KoopaBros_Red,
         .settings = &N(NpcSettings_KoopaBros_Red),
@@ -690,7 +690,7 @@ EvtScript N(EVS_NpcInit_BulletBill_Demo) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_BulletBill_Demo1) = {
+NpcData N(NpcData_BulletBill_Demo1) = {
     .id = NPC_BulletBill_Demo1,
     .settings = &N(NpcSettings_BulletBill),
     .pos = { -100.0f, 11.0f, 50.0f },
@@ -740,7 +740,7 @@ StaticNpc N(NpcData_BulletBill_Demo1) = {
     },
 };
 
-StaticNpc N(NpcData_BulletBill_Demo2) = {
+NpcData N(NpcData_BulletBill_Demo2) = {
     .id = NPC_BulletBill_Demo2,
     .settings = &N(NpcSettings_BulletBill),
     .pos = { -150.0f, 11.0f, 5.0f },
@@ -790,7 +790,7 @@ StaticNpc N(NpcData_BulletBill_Demo2) = {
     },
 };
 
-StaticNpc N(NpcData_BulletBill_Demo3) = {
+NpcData N(NpcData_BulletBill_Demo3) = {
     .id = NPC_BulletBill_Demo3,
     .settings = &N(NpcSettings_BulletBill),
     .pos = { 120.0f, 11.0f, 50.0f },
@@ -840,7 +840,7 @@ StaticNpc N(NpcData_BulletBill_Demo3) = {
     },
 };
 
-StaticNpc N(NpcData_BulletBill_Demo4) = {
+NpcData N(NpcData_BulletBill_Demo4) = {
     .id = NPC_BulletBill_Demo4,
     .settings = &N(NpcSettings_BulletBill),
     .pos = { 330.0f, 11.0f, 5.0f },
@@ -890,7 +890,7 @@ StaticNpc N(NpcData_BulletBill_Demo4) = {
     },
 };
 
-StaticNpc N(NpcData_BulletBill_Demo5) = {
+NpcData N(NpcData_BulletBill_Demo5) = {
     .id = NPC_BulletBill_Demo5,
     .settings = &N(NpcSettings_BulletBill),
     .pos = { 380.0f, 11.0f, -40.0f },

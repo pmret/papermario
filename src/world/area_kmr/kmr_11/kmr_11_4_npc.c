@@ -291,7 +291,7 @@ NpcSettings N(NpcSettings_Kammy) = {
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
 };
 
-StaticNpc N(NpcData_Enemies)[] = {
+NpcData N(NpcData_Enemies)[] = {
     {
         .id = NPC_BlueGoombaBro,
         .settings = &N(NpcSettings_GoombaBros_Guard),
@@ -411,7 +411,7 @@ StaticNpc N(NpcData_Enemies)[] = {
     },
 };
 
-StaticNpc N(NpcData_Kammy) = {
+NpcData N(NpcData_Kammy) = {
     .id = NPC_Kammy,
     .settings = &N(NpcSettings_Kammy),
     .pos = { NPC_DISPOSE_LOCATION },

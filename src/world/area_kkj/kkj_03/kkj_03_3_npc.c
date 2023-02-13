@@ -2,7 +2,7 @@
 
 #include "world/common/npc/Peach.inc.c"
 
-StaticNpc N(NpcData_Peach) = {
+NpcData N(NpcData_Peach) = {
     .id = NPC_Peach,
     .pos = { 670.0f, 0.0f, -12.0f },
     .yaw = 270,

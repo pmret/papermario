@@ -3,7 +3,7 @@
 #include "world/common/enemy/HammerBros_Wander.inc.c"
 #include "world/common/enemy/Koopatrol_Wander.inc.c"
 
-StaticNpc N(NpcData_Koopatrol_01) = {
+NpcData N(NpcData_Koopatrol_01) = {
     .id = NPC_Koopatrol_01,
     .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { -251.0f, 0.0f, -30.0f },
@@ -25,7 +25,7 @@ StaticNpc N(NpcData_Koopatrol_01) = {
     .animations = KOOPATROL_ANIMS,
 };
 
-StaticNpc N(NpcData_Koopatrol_02) = {
+NpcData N(NpcData_Koopatrol_02) = {
     .id = NPC_Koopatrol_02,
     .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 100.0f, 0.0f, -30.0f },
@@ -47,7 +47,7 @@ StaticNpc N(NpcData_Koopatrol_02) = {
     .animations = KOOPATROL_ANIMS,
 };
 
-StaticNpc N(NpcData_HammerBros_01)[] = {
+NpcData N(NpcData_HammerBros_01)[] = {
     {
         .id = NPC_HammerBros,
         .settings = &N(NpcSettings_HammerBros_Wander),

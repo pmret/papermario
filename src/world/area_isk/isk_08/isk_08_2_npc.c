@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/SpikeTop.inc.c"
 
-StaticNpc N(NpcData_BuzzyBeetle) = {
+NpcData N(NpcData_BuzzyBeetle) = {
     .id = NPC_BuzzyBeetle,
     .settings = &N(NpcSettings_BuzzyBeetle),
     .pos = { -415.0f, -520.0f, 355.0f },

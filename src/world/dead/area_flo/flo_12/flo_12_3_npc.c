@@ -188,7 +188,7 @@ EvtScript N(EVS_NpcInit_Rosie) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Rosie)[] = {
+NpcData N(NpcData_Rosie)[] = {
     {
         .id = NPC_Rosie,
         .settings = &N(NpcSettings_Rosie),

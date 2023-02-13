@@ -185,7 +185,7 @@ EvtScript N(EVS_NpcInit_HammerBros_03) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Minions)[] = {
+NpcData N(NpcData_Minions)[] = {
     {
         .id = NPC_HammerBros_01,
         .settings = &N(NpcSettings_HammerBros),

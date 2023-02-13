@@ -130,7 +130,7 @@ NpcSettings N(NpcSettings_FireBar_Extra) = {
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
-StaticNpc N(NpcData_00)[] = {
+NpcData N(NpcData_00)[] = {
     {
         .id = NPC_FireBar_1A,
         .settings = &N(NpcSettings_FireBar_01),
@@ -173,7 +173,7 @@ StaticNpc N(NpcData_00)[] = {
     },
 };
 
-StaticNpc N(NpcData_05)[] = {
+NpcData N(NpcData_05)[] = {
     {
         .id = NPC_FireBar_2A,
         .settings = &N(NpcSettings_FireBar_02),

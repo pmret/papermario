@@ -3,7 +3,7 @@
 #include "world/common/enemy/MBush.inc.c"
 #include "world/common/enemy/SpearGuy_Wander.inc.c"
 
-StaticNpc N(NpcData_SpearGuy)[] = {
+NpcData N(NpcData_SpearGuy)[] = {
     {
         .id = NPC_SpearGuy,
         .settings = &N(NpcSettings_SpearGuy_Wander),
@@ -29,14 +29,14 @@ StaticNpc N(NpcData_SpearGuy)[] = {
     SPEAR_GUY_HITBOX(NPC_SpearGuy_Hitbox)
 };
 
-StaticNpc N(NpcData_MBush_01) = {
+NpcData N(NpcData_MBush_01) = {
     .id = NPC_MBush_01,
     .pos = { 335.0f, 0.0f, -40.0f },
     .yaw = 90,
     MBUSH_NPC_DATA
 };
 
-StaticNpc N(NpcData_MBush_02) = {
+NpcData N(NpcData_MBush_02) = {
     .id = NPC_MBush_02,
     .pos = { 415.0f, 0.0f, -65.0f },
     .yaw = 90,

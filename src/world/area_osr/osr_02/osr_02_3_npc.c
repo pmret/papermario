@@ -527,7 +527,7 @@ s32 N(ExtraAnims_Kalmar)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Spirits)[] = {
+NpcData N(NpcData_Spirits)[] = {
     {
         .id = NPC_Peach,
         .settings = &N(NpcSettings_Peach),

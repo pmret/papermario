@@ -170,7 +170,7 @@ EvtScript N(EVS_NpcInit_Tubba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Tubba) = {
+NpcData N(NpcData_Tubba) = {
     .id = NPC_Tubba,
     .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -204,7 +204,7 @@ StaticNpc N(NpcData_Tubba) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Clubba_01)[] = {
+NpcData N(NpcData_Clubba_01)[] = {
     {
         .id = NPC_Clubba_01,
         .settings = &N(NpcSettings_Clubba_Wander),
@@ -231,7 +231,7 @@ StaticNpc N(NpcData_Clubba_01)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_01_Hitbox),
 };
 
-StaticNpc N(NpcData_Clubba_02)[] = {
+NpcData N(NpcData_Clubba_02)[] = {
     {
         .id = NPC_Clubba_02,
         .settings = &N(NpcSettings_Clubba_Wander),
@@ -258,7 +258,7 @@ StaticNpc N(NpcData_Clubba_02)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_02_Hitbox),
 };
 
-StaticNpc N(NpcData_Clubba_03)[] = {
+NpcData N(NpcData_Clubba_03)[] = {
     {
         .id = NPC_Clubba_03,
         .settings = &N(NpcSettings_Clubba_Wander),
@@ -285,7 +285,7 @@ StaticNpc N(NpcData_Clubba_03)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_03_Hitbox),
 };
 
-StaticNpc N(NpcData_Sentinel_01) = {
+NpcData N(NpcData_Sentinel_01) = {
     .id = NPC_Sentinel_01,
     .settings = &N(NpcSettings_Sentinel),
     .pos = { 75.0f, 310.0f, 85.0f },
@@ -307,7 +307,7 @@ StaticNpc N(NpcData_Sentinel_01) = {
     .animations = SENTINEL_ANIMS,
 };
 
-StaticNpc N(NpcData_Sentinel_02) = {
+NpcData N(NpcData_Sentinel_02) = {
     .id = NPC_Sentinel_02,
     .settings = &N(NpcSettings_Sentinel),
     .pos = { -451.0f, 310.0f, 81.0f },
@@ -394,7 +394,7 @@ EvtScript N(EVS_NpcInit_LastClubba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_LastClubba) = {
+NpcData N(NpcData_LastClubba) = {
     .id = NPC_Clubba_Last,
     .settings = &N(NpcSettings_LastClubba),
     .pos = { 426.0f, 0.0f, 38.0f },
@@ -431,7 +431,7 @@ EvtScript N(EVS_NpcInit_Clubba_Unused) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Clubba_Unused) = {
+NpcData N(NpcData_Clubba_Unused) = {
     .id = NPC_Clubba_Unused,
     .settings = &N(NpcSettings_Clubba_Wander),
     .pos = { -250.0f, 0.0f, 135.0f },

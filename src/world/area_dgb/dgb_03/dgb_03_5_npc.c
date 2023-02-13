@@ -14,7 +14,7 @@ EvtScript N(EVS_NpcInit_Clubba_Napping) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Clubba_Wander)[] = {
+NpcData N(NpcData_Clubba_Wander)[] = {
     {
         .id = NPC_Clubba_Wander,
         .settings = &N(NpcSettings_Clubba_Wander),
@@ -40,7 +40,7 @@ StaticNpc N(NpcData_Clubba_Wander)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_Wander_Hitbox),
 };
 
-StaticNpc N(NpcData_Clubba_Patrol)[] = {
+NpcData N(NpcData_Clubba_Patrol)[] = {
     {
         .id = NPC_Clubba_Patrol,
         .settings = &N(NpcSettings_Clubba_Patrol),
@@ -68,7 +68,7 @@ StaticNpc N(NpcData_Clubba_Patrol)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_Patrol_Hitbox),
 };
 
-StaticNpc N(NpcData_Clubba_Napping)[] = {
+NpcData N(NpcData_Clubba_Napping)[] = {
     {
         .id = NPC_Clubba_Napping,
         .settings = &N(NpcSettings_Clubba_Napping),

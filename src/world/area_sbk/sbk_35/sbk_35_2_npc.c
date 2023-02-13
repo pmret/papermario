@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Bandit.inc.c"
 
-StaticNpc N(NpcData_Bandit) = {
+NpcData N(NpcData_Bandit) = {
     .id = NPC_Bandit,
     .settings = &N(NpcSettings_Bandit),
     .pos = { -40.0f, 0.0f, 155.0f },

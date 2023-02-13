@@ -3,7 +3,7 @@
 #define INCLUDE_FROST_CLUBBA_WANDER
 #include "world/common/enemy/FrostClubba_Multi.inc.c"
 
-StaticNpc N(NpcData_Clubba)[] = {
+NpcData N(NpcData_Clubba)[] = {
     {
         .id = NPC_FrostClubba,
         .settings = &N(NpcSettings_FrostClubba_Wander),

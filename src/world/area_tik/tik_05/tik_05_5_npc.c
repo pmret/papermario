@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/SpikedGloomba_Wander.inc.c"
 
-StaticNpc N(NpcData_SpikedGloomba_01) = {
+NpcData N(NpcData_SpikedGloomba_01) = {
     .id = NPC_SpikedGoomba_01,
     .settings = &N(NpcSettings_SpikedGloomba_Wander),
     .pos = { 220.0f, -10.0f, -80.0f },
@@ -24,7 +24,7 @@ StaticNpc N(NpcData_SpikedGloomba_01) = {
     .animations = SPIKED_GLOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_SpikedGloomba_02) = {
+NpcData N(NpcData_SpikedGloomba_02) = {
     .id = NPC_SpikedGoomba_02,
     .settings = &N(NpcSettings_SpikedGloomba_Wander),
     .pos = { 130.0f, -10.0f, 45.0f },

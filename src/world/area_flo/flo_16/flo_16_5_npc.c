@@ -3,7 +3,7 @@
 
 #include "world/common/enemy/TuffPuff.inc.c"
 
-StaticNpc N(NpcData_TuffPuff_01) = {
+NpcData N(NpcData_TuffPuff_01) = {
     .id = NPC_TuffPuff_01,
     .settings = &N(NpcSettings_TuffPuff),
     .pos = { 440.0f, 145.0f, 15.0f },
@@ -26,7 +26,7 @@ StaticNpc N(NpcData_TuffPuff_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_TuffPuff_02) = {
+NpcData N(NpcData_TuffPuff_02) = {
     .id = NPC_TuffPuff_02,
     .settings = &N(NpcSettings_TuffPuff),
     .pos = { 600.0f, 145.0f, 15.0f },

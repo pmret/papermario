@@ -58,7 +58,7 @@ EvtScript N(EVS_NpcInit_Bzzap_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Dayzee_01) = {
+NpcData N(NpcData_Dayzee_01) = {
     .id = NPC_Dayzee_01,
     .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { -350.0f, 0.0f, 40.0f },
@@ -81,7 +81,7 @@ StaticNpc N(NpcData_Dayzee_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_02) = {
+NpcData N(NpcData_Dayzee_02) = {
     .id = NPC_Dayzee_02,
     .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { 260.0f, 0.0f, 75.0f },
@@ -104,7 +104,7 @@ StaticNpc N(NpcData_Dayzee_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Bzzap_01) = {
+NpcData N(NpcData_Bzzap_01) = {
     .id = NPC_Bzzap_01,
     .settings = &N(NpcSettings_Bzzap),
     .pos = { -50.0f, 55.0f, 90.0f },
@@ -127,7 +127,7 @@ StaticNpc N(NpcData_Bzzap_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Bzzap_02) = {
+NpcData N(NpcData_Bzzap_02) = {
     .id = NPC_Bzzap_02,
     .settings = &N(NpcSettings_Bzzap_02),
     .pos = { NPC_DISPOSE_LOCATION },

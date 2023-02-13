@@ -9,7 +9,7 @@ EvtScript N(EVS_NpcInit_Duplighost) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Duplighost) = {
+NpcData N(NpcData_Duplighost) = {
     .id = NPC_Duplighost,
     .settings = &N(NpcSettings_Duplighost_Wander),
     .pos = { 250.0f, 0.0f, 75.0f },

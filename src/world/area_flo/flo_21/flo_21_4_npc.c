@@ -586,7 +586,7 @@ s32 N(ExtraAnims_HuffNPuff)[] = {
     ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_HuffNPuff)[] = {
+NpcData N(NpcData_HuffNPuff)[] = {
     {
         .id = NPC_HuffNPuff_01,
         .settings = &N(NpcSettings_HuffNPuff),
@@ -627,7 +627,7 @@ s32 N(ExtraAnims_TuffPuff)[] = {
     ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_TuffPuffs)[] = {
+NpcData N(NpcData_TuffPuffs)[] = {
     {
         .id = NPC_TuffPuff_01,
         .settings = &N(NpcSettings_TuffPuff),

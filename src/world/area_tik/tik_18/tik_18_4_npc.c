@@ -51,7 +51,7 @@ EvtScript N(EVS_NpcInit_SpikedGloomba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Gloomba) = {
+NpcData N(NpcData_Gloomba) = {
     .id = NPC_Gloomba,
     .settings = &N(NpcSettings_Gloomba_Wander),
     .pos = { -60.0f, -10.0f, -30.0f },
@@ -73,7 +73,7 @@ StaticNpc N(NpcData_Gloomba) = {
     .animations = GLOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_SpikedGloomba) = {
+NpcData N(NpcData_SpikedGloomba) = {
     .id = NPC_SpikedGloomba,
     .settings = &N(NpcSettings_SpikedGloomba_Wander),
     .pos = { 30.0f, -10.0f, -20.0f },

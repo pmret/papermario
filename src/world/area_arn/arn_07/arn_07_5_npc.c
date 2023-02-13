@@ -558,7 +558,7 @@ EvtScript N(EVS_NpcInit_Skolar) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Tubba)[] = {
+NpcData N(NpcData_Tubba)[] = {
     {
         .id = NPC_Tubba,
         .settings = &N(NpcSettings_TubbaBlubba),
@@ -582,7 +582,7 @@ StaticNpc N(NpcData_Tubba)[] = {
     },
 };
 
-StaticNpc N(NpcData_Boos)[] = {
+NpcData N(NpcData_Boos)[] = {
     {
         .id = NPC_Boo_01,
         .settings = &N(NpcSettings_Boo),
@@ -651,7 +651,7 @@ StaticNpc N(NpcData_Boos)[] = {
     },
 };
 
-StaticNpc N(NpcData_Bow) = {
+NpcData N(NpcData_Bow) = {
     .id = NPC_Bow,
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -679,7 +679,7 @@ StaticNpc N(NpcData_Bow) = {
     },
 };
 
-StaticNpc N(NpcData_Bootler) = {
+NpcData N(NpcData_Bootler) = {
     .id = NPC_Bootler,
     .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -718,7 +718,7 @@ EvtScript N(EVS_NpcInit_HyperParagoomba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_HyperParagoomba_01) = {
+NpcData N(NpcData_HyperParagoomba_01) = {
     .id = NPC_HyperParagoomba_01,
     .settings = &N(NpcSettings_HyperParagoomba),
     .pos = { -216.0f, 60.0f, -10.0f },
@@ -742,7 +742,7 @@ StaticNpc N(NpcData_HyperParagoomba_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_HyperParagoomba_02) = {
+NpcData N(NpcData_HyperParagoomba_02) = {
     .id = NPC_HyperParagoomba_02,
     .settings = &N(NpcSettings_HyperParagoomba),
     .pos = { 0.0f, 60.0f, 150.0f },
@@ -766,7 +766,7 @@ StaticNpc N(NpcData_HyperParagoomba_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_HyperParagoomba_03) = {
+NpcData N(NpcData_HyperParagoomba_03) = {
     .id = NPC_HyperParagoomba_03,
     .settings = &N(NpcSettings_HyperParagoomba),
     .pos = { 260.0f, 60.0f, 30.0f },
@@ -790,7 +790,7 @@ StaticNpc N(NpcData_HyperParagoomba_03) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Skolar) = {
+NpcData N(NpcData_Skolar) = {
     .id = NPC_Skolar,
     .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },

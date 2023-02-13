@@ -189,7 +189,7 @@ EvtScript N(EVS_NpcInit_Dryite_06) = {
     EVT_END
 };
 
-StaticNpc N(PassiveNPCs)[] = {
+NpcData N(PassiveNPCs)[] = {
     {
         .id = NPC_Mouser_01,
         .settings = &N(NpcSettings_Mouser),
@@ -375,7 +375,7 @@ StaticNpc N(PassiveNPCs)[] = {
     },
 };
 
-StaticNpc N(ThreeSisterNPCs)[] = {
+NpcData N(ThreeSisterNPCs)[] = {
     {
         .id = NPC_ThreeSisters_01,
         .settings = &N(NpcSettings_Toad_Stationary),

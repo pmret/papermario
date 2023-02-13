@@ -486,7 +486,7 @@ EvtScript N(EVS_NpcInit_Yakkey) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Tubba) = {
+NpcData N(NpcData_Tubba) = {
     .id = NPC_Tubba,
     .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
@@ -514,7 +514,7 @@ StaticNpc N(NpcData_Tubba) = {
     .animations = TUBBA_ANGRY_ANIMS,
 };
 
-StaticNpc N(NpcData_Yakkey) = {
+NpcData N(NpcData_Yakkey) = {
     .id = NPC_Yakkey,
     .settings = &N(NpcSettings_Yakkey),
     .pos = { NPC_DISPOSE_LOCATION },

@@ -208,7 +208,7 @@ EvtScript N(EVS_NpcInit_AntiGuy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_AntiGuy) = {
+NpcData N(NpcData_AntiGuy) = {
     .id = NPC_AntiGuy,
     .settings = &N(NpcSettings_AntiGuy),
     .pos = { 110.0f, 0.0f, -20.0f },
@@ -237,7 +237,7 @@ StaticNpc N(NpcData_AntiGuy) = {
     .tattle = MSG_NpcTattle_AntiGuy,
 };
 
-StaticNpc N(NpcData_ShyGuy) = {
+NpcData N(NpcData_ShyGuy) = {
     .id = NPC_ShyGuy,
     .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { 300.0f, 0.0f, 50.0f },
@@ -260,7 +260,7 @@ StaticNpc N(NpcData_ShyGuy) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_GrooveGuy) = {
+NpcData N(NpcData_GrooveGuy) = {
     .id = NPC_GrooveGuy,
     .settings = &N(NpcSettings_GrooveGuy),
     .pos = { -222.0f, 0.0f, 35.0f },

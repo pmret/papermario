@@ -269,7 +269,7 @@ EvtScript N(EVS_NpcInit_JungleFuzzy_01) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Kolorado) = {
+NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
     .settings = &N(NpcSettings_Kolorado),
     .pos = { -70.0f, -9.0f, 90.0f },
@@ -281,7 +281,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(NpcData_JungleFuzzy_01) = {
+NpcData N(NpcData_JungleFuzzy_01) = {
     .id = NPC_JungleFuzzy_01,
     .settings = &N(NpcSettings_JungleFuzzy),
     .pos = { -30.0f, 0.0f, 90.0f },
@@ -300,7 +300,7 @@ EvtScript N(EVS_NpcInit_JungleFuzzy_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_JungleFuzzy_02) = {
+NpcData N(NpcData_JungleFuzzy_02) = {
     .id = NPC_JungleFuzzy_02,
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { -350.0f, 3.0f, 40.0f },
@@ -324,7 +324,7 @@ StaticNpc N(NpcData_JungleFuzzy_02) = {
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_JungleFuzzy_03) = {
+NpcData N(NpcData_JungleFuzzy_03) = {
     .id = NPC_JungleFuzzy_03,
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 0.0f, -10.0f, 110.0f },
@@ -348,7 +348,7 @@ StaticNpc N(NpcData_JungleFuzzy_03) = {
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_JungleFuzzy_04) = {
+NpcData N(NpcData_JungleFuzzy_04) = {
     .id = NPC_JungleFuzzy_04,
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 350.0f, 3.0f, 40.0f },

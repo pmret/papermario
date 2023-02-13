@@ -1492,7 +1492,7 @@ EvtScript N(EVS_NpcInit_Kooper) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Minigame)[] = {
+NpcData N(NpcData_Minigame)[] = {
     {
         .id = NPC_KoopersShell,
         .settings = &N(NpcSettings_Koopa),
@@ -1603,7 +1603,7 @@ StaticNpc N(NpcData_Minigame)[] = {
     },
 };
 
-StaticNpc N(NpcData_Miniboss) = {
+NpcData N(NpcData_Miniboss) = {
     .id = NPC_BossFuzzy,
     .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },

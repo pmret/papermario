@@ -157,7 +157,7 @@ EvtScript N(EVS_NpcInit_ZiplineDummy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_PassiveNPCs)[] = {
+NpcData N(NpcData_PassiveNPCs)[] = {
     {
         .id = NPC_Kolorado,
         .settings = &N(NpcSettings_Kolorado),
@@ -193,7 +193,7 @@ StaticNpc N(NpcData_PassiveNPCs)[] = {
     },
 };
 
-StaticNpc N(NpcData_SpikeTop_01) = {
+NpcData N(NpcData_SpikeTop_01) = {
     .id = NPC_SpikeTop_01,
     .settings = &N(NpcSettings_SpikeTop),
     .pos = { 140.0f, 670.0f, -20.0f },
@@ -216,7 +216,7 @@ StaticNpc N(NpcData_SpikeTop_01) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_SpikeTop_02) = {
+NpcData N(NpcData_SpikeTop_02) = {
     .id = NPC_SpikeTop_02,
     .settings = &N(NpcSettings_SpikeTop),
     .pos = { -200.0f, 670.0f, -35.0f },
@@ -239,7 +239,7 @@ StaticNpc N(NpcData_SpikeTop_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_SpikeTop_03) = {
+NpcData N(NpcData_SpikeTop_03) = {
     .id = NPC_SpikeTop_03,
     .settings = &N(NpcSettings_SpikeTop),
     .pos = { 30.0f, 20.0f, 320.0f },
@@ -262,7 +262,7 @@ StaticNpc N(NpcData_SpikeTop_03) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_PutridPiranha)[] = {
+NpcData N(NpcData_PutridPiranha)[] = {
     {
         .id = NPC_Piranha,
         .settings = &N(NpcSettings_PutridPiranha),

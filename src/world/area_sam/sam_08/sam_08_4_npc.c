@@ -123,7 +123,7 @@ EvtScript N(EVS_NpcInit_Duplighost) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Ambush)[] = {
+NpcData N(NpcData_Ambush)[] = {
     {
         .id = NPC_Kooper_01A,
         .settings = &N(NpcSettings_Kooper),
@@ -251,7 +251,7 @@ EvtScript N(EVS_NpcInit_FakeKooperB) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Hittable)[] = {
+NpcData N(NpcData_Hittable)[] = {
     {
         .id = NPC_Kooper_01B,
         .settings = &N(NpcSettings_Kooper),
@@ -308,7 +308,7 @@ StaticNpc N(NpcData_Hittable)[] = {
     },
 };
 
-StaticNpc N(NpcData_FrostClubba)[] = {
+NpcData N(NpcData_FrostClubba)[] = {
     {
         .id = NPC_Clubba_01,
         .settings = &N(NpcSettings_FrostClubba_Wander),

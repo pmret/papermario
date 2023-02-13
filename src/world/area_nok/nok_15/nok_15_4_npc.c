@@ -4,7 +4,7 @@
 #include "world/common/enemy/Paratroopa.inc.c"
 #include "world/common/enemy/SpikedGoomba_Wander.inc.c"
 
-StaticNpc N(NpcData_KoopaTroopa) = {
+NpcData N(NpcData_KoopaTroopa) = {
     .id = NPC_KoopaTroopa,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { -450.0f, 0.0f, -45.0f },
@@ -27,7 +27,7 @@ StaticNpc N(NpcData_KoopaTroopa) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_ParaTroopa) = {
+NpcData N(NpcData_ParaTroopa) = {
     .id = NPC_ParaTroopa,
     .settings = &N(NpcSettings_ParaTroopa),
     .pos = { -150.0f, 50.0f, -70.0f },

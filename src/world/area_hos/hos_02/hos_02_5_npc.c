@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Ember.inc.c"
 
-StaticNpc N(NpcData_Ember) = {
+NpcData N(NpcData_Ember) = {
     .id = NPC_Ember_01,
     .settings = &N(NpcSettings_Ember),
     .pos = { -410.0f, -15.0f, 260.0f },
@@ -25,7 +25,7 @@ StaticNpc N(NpcData_Ember) = {
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Ember_02) = {
+NpcData N(NpcData_Ember_02) = {
     .id = NPC_Ember_02,
     .settings = &N(NpcSettings_Ember),
     .pos = { 220.0f, 200.0f, -205.0f },
@@ -48,7 +48,7 @@ StaticNpc N(NpcData_Ember_02) = {
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Ember_03) = {
+NpcData N(NpcData_Ember_03) = {
     .id = NPC_Ember_03,
     .settings = &N(NpcSettings_Ember),
     .pos = { -135.0f, 370.0f, 270.0f },

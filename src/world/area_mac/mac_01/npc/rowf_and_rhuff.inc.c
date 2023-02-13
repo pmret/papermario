@@ -718,7 +718,7 @@ NpcSettings N(NpcSettings_Rhuff) = {
     .flags = ENEMY_FLAG_PASSIVE,
 };
 
-StaticNpc N(NpcData_RowfAndRhuff)[] = {
+NpcData N(NpcData_RowfAndRhuff)[] = {
     {
         .id = NPC_Rowf,
         .settings = &N(NpcSettings_Rowf),
