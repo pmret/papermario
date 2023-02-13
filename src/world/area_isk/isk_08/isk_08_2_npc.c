@@ -18,8 +18,8 @@ NpcData N(NpcData_BuzzyBeetle) = {
             .detectSize = { 60 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_BuzzyBeetle),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = ISK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

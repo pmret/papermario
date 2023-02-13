@@ -25,8 +25,8 @@ NpcData N(NpcData_Duplighost) = {
         }
     },
     .init = &N(EVS_NpcInit_Duplighost),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_Duplighost_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .drops = DUPLIGHOST_DROPS,
     .animations = DUPLIGHOST_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

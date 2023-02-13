@@ -19,8 +19,8 @@ NpcData N(NpcData_Koopatrol_01) = {
             .detectSize = { 300 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Koopatrol_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
@@ -41,8 +41,8 @@ NpcData N(NpcData_Koopatrol_02) = {
             .detectSize = { 300 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Koopatrol_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
@@ -64,8 +64,8 @@ NpcData N(NpcData_HammerBros_01)[] = {
                 .detectSize = { 300 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_HammerBros_Wander),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = HAMMER_BROS_DROPS,
         .animations = HAMMER_BROS_ANIMS,
     },

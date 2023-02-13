@@ -161,8 +161,8 @@ NpcData N(NpcData_KoopaTroopa_01) = {
         }
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_01),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_NO_DROPS,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -185,8 +185,8 @@ NpcData N(NpcData_KoopaTroopa_02) = {
         }
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_02),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -209,8 +209,8 @@ NpcData N(NpcData_KoopaTroopa_03) = {
         }
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_02),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_2000,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_2000,
     .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -232,8 +232,8 @@ NpcData N(NpcData_Bobomb) = {
             .detectSize = { 100 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .settings = &N(NpcSettings_Bobomb_Guard),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = BOBOMB_DROPS,
     .animations = BOBOMB_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

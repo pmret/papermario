@@ -19,8 +19,8 @@ NpcData N(NpcData_Koopatrol_01) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Koopatrol_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
@@ -41,8 +41,8 @@ NpcData N(NpcData_Koopatrol_02) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Koopatrol_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
@@ -64,8 +64,8 @@ NpcData N(NpcData_FlyingMagikoopa_01)[] = {
                 .detectSize = { 200 },
             }
         },
-        .flags = ENEMY_FLAG_800,
         .settings = &N(NpcSettings_FlyingMagikoopa),
+        .flags = ENEMY_FLAG_800,
         .drops = FLYING_MAGINO_DROPS,
         .animations = FLYING_MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_FlyingMagikoopa),
@@ -91,8 +91,8 @@ NpcData N(NpcData_FlyingMagikoopa_02)[] = {
                 .detectSize = { 200 },
             }
         },
-        .flags = ENEMY_FLAG_800,
         .settings = &N(NpcSettings_FlyingMagikoopa),
+        .flags = ENEMY_FLAG_800,
         .drops = FLYING_MAGINO_DROPS,
         .animations = FLYING_MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_FlyingMagikoopa),

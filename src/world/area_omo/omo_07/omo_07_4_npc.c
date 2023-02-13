@@ -370,8 +370,8 @@ NpcData N(NpcData_ShyGuy) = {
         }
     },
     .init = &N(EVS_NpcInit_ShyGuy),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_ShyGuy_Patrol),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -399,8 +399,8 @@ NpcData N(NpcData_ShyGuy_02) = {
         }
     },
     .init = &N(EVS_NpcInit_ShyGuy),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_ShyGuy_Patrol),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -428,8 +428,8 @@ NpcData N(NpcData_ShyGuy_03) = {
         }
     },
     .init = &N(EVS_NpcInit_ShyGuy),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_ShyGuy_Patrol),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -457,8 +457,8 @@ NpcData N(NpcData_ShyGuy_04) = {
         }
     },
     .init = &N(EVS_NpcInit_ShyGuy),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_ShyGuy_Patrol),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -468,8 +468,8 @@ NpcData N(NpcData_Fuzzy) = {
     .pos = { 1050.0f, 0.0f, 0.0f },
     .yaw = 270,
     .init = &N(EVS_NpcInit_Fuzzy),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .settings = &N(NpcSettings_Fuzzy),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Fuzzy_Walk,
@@ -496,8 +496,8 @@ NpcData N(NpcData_HammerBros) = {
     .pos = { 1050.0f, 0.0f, 0.0f },
     .yaw = 270,
     .init = &N(EVS_NpcInit_HammerBros),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .settings = &N(NpcSettings_HammerBros),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_HammerBros_Anim02,
@@ -535,8 +535,8 @@ NpcData N(NpcData_SkyGuy_01) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_SkyGuy),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SKY_GUY_DROPS,
     .animations = SKY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -558,8 +558,8 @@ NpcData N(NpcData_SkyGuy_02) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_SkyGuy),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SKY_GUY_DROPS,
     .animations = SKY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -580,8 +580,8 @@ NpcData N(NpcData_Kammy) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kammy),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Kammy_Flying),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),

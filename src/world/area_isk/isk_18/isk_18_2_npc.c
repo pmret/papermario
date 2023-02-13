@@ -20,8 +20,8 @@ NpcData N(NpcData_BuzzyBeetle_01) = {
     },
     .initVarCount = 1,
     .initVar = { .value = BTL_ISK_PART_1_FORMATION_0E },
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_BuzzyBeetle_Ceiling),
+    .flags = ENEMY_FLAG_400,
     .drops = ISK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
 };
@@ -44,8 +44,8 @@ NpcData N(NpcData_BuzzyBeetle_02) = {
     },
     .initVarCount = 1,
     .initVar = { .value = BTL_ISK_PART_1_FORMATION_0B },
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_BuzzyBeetle_Ceiling),
+    .flags = ENEMY_FLAG_400,
     .drops = ISK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
 };
@@ -66,8 +66,8 @@ NpcData N(NpcData_BuzzyBeetle_03) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_BuzzyBeetle),
+    .flags = ENEMY_FLAG_400,
     .drops = ISK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
 };

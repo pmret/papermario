@@ -20,8 +20,8 @@ NpcData N(NpcData_Goomba_01) = {
             .detectSize = { 250 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .settings = &N(NpcSettings_Goomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -42,8 +42,8 @@ NpcData N(NpcData_Goomba_02) = {
             .detectSize = { 250 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .settings = &N(NpcSettings_Goomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -144,8 +144,8 @@ NpcData N(NpcData_Goomba_Ambush) = {
         }
     },
     .init = &N(EVS_NpcInit_Goomba_Ambush),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Goomba_Wander),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -166,8 +166,8 @@ NpcData N(NpcData_Paragoomba) = {
             .detectSize = { 250 },
         }
     },
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Paragoomba_Wander),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = PARAGOOMBA_DROPS,
     .animations = PARAGOOMBA_ANIMS,
 };

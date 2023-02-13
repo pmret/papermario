@@ -18,8 +18,8 @@ NpcData N(NpcData_BonyBeetle) = {
             .detectSize = { 260, 100 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .settings = &N(NpcSettings_BonyBeetle),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = BONY_BEETLE_DROPS,
     .animations = BONY_BEETLE_ANIMS,
 };

@@ -31,8 +31,8 @@ NpcData N(NpcData_Clubba_Wander)[] = {
                 .detectSize = { 355, 255 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Clubba_Wander),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -59,8 +59,8 @@ NpcData N(NpcData_Clubba_Patrol)[] = {
                 .detectSize = { 355, 255 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Clubba_Patrol),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -86,8 +86,8 @@ NpcData N(NpcData_Clubba_Napping)[] = {
             }
         },
         .init = &N(EVS_NpcInit_Clubba_Napping),
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Clubba_Napping),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

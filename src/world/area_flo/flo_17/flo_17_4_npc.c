@@ -22,8 +22,8 @@ NpcData N(NpcData_Lakitu_01) = {
             .detectSize = { 85, 120 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Lakitu_SpinySpawner),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = LAKITU_DROPS,
     .animations = LAKITU_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -45,8 +45,8 @@ NpcData N(NpcData_Lakitu_02) = {
             .detectSize = { 85, 120 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Lakitu_SpinySpawner),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = LAKITU_DROPS,
     .animations = LAKITU_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -68,8 +68,8 @@ NpcData N(NpcData_Spiny_01) = {
             .detectSize = { 0 },
         }
     },
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_SpawnedSpiny),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -91,8 +91,8 @@ NpcData N(NpcData_Spiny_02) = {
             .detectSize = { 0 },
         }
     },
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_SpawnedSpiny),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -114,8 +114,8 @@ NpcData N(NpcData_Spiny_03) = {
             .detectSize = { 0 },
         }
     },
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_SpawnedSpiny),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -137,8 +137,8 @@ NpcData N(NpcData_Spiny_04) = {
             .detectSize = { 0 },
         }
     },
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_SpawnedSpiny),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

@@ -23,8 +23,8 @@ NpcData N(NpcData_TrainToad) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
     .init = &N(EVS_NpcInit_TrainToad),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .settings = &N(NpcSettings_TrainToad),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = TRAIN_CONDUCTOR_ANIMS,
 };

@@ -18,8 +18,8 @@ NpcData N(NpcData_BuzzyBeetle_01) = {
             .detectSize = { 80 },
         }
     },
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_BuzzyBeetle),
+    .flags = ENEMY_FLAG_400,
     .drops = ISK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
 };
@@ -40,8 +40,8 @@ NpcData N(NpcData_BuzzyBeetle_02) = {
             .detectSize = { 80 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_BuzzyBeetle),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = ISK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
 };

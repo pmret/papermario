@@ -61,8 +61,8 @@ NpcData N(NpcData_SpikedGloomba_01) = {
         }
     },
     .init = &N(EVS_NpcInit_SpikedGloomba),
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_SpikedGloomba_Wander),
+    .flags = ENEMY_FLAG_400,
     .drops = SPIKED_GLOOMBA_DROPS,
     .animations = SPIKED_GLOOMBA_ANIMS,
 };
@@ -84,8 +84,8 @@ NpcData N(NpcData_SpikedGloomba_02) = {
         }
     },
     .init = &N(EVS_NpcInit_SpikedGloomba),
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_SpikedGloomba_Wander),
+    .flags = ENEMY_FLAG_400,
     .drops = SPIKED_GLOOMBA_DROPS,
     .animations = SPIKED_GLOOMBA_ANIMS,
 };

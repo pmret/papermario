@@ -67,8 +67,8 @@ NpcData N(NpcData_Gloomba) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .settings = &N(NpcSettings_Gloomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = GLOOMBA_DROPS,
     .animations = GLOOMBA_ANIMS,
 };
@@ -90,8 +90,8 @@ NpcData N(NpcData_SpikedGloomba) = {
         }
     },
     .init = &N(EVS_NpcInit_SpikedGloomba),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .settings = &N(NpcSettings_SpikedGloomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = SPIKED_GLOOMBA_DROPS,
     .animations = SPIKED_GLOOMBA_ANIMS,
 };

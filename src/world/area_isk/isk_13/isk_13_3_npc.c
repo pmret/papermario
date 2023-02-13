@@ -314,8 +314,8 @@ NpcData N(NpcData_StoneChomp) = {
     .init = &N(EVS_NpcInit_StoneChomp),
     .initVarCount = 1,
     .initVar = { .value = -650 },
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000,
     .settings = &N(NpcSettings_StoneChomp),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000,
     .drops = STONE_CHOMP_DROPS,
     .animations = STONE_CHOMP_ANIMS,
 };

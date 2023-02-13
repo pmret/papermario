@@ -18,8 +18,8 @@ NpcData N(NpcData_Swoopula) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_Swoopula),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .drops = SWOOPULA_DROPS,
     .animations = SWOOPULA_ANIMS,
 };

@@ -309,8 +309,8 @@ NpcData N(NpcData_KoopaBros) = {
     .pos = { -469.0f, 0.0f, 101.0f },
     .yaw = 0,
     .init = &N(EVS_NpcInit_KoopaBros),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_KoopaBros),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_KoopaBros_Green_Anim04,
@@ -349,8 +349,8 @@ NpcData N(NpcData_Eldstar) = {
         }
     },
     .init = &N(EVS_NpcInit_Eldstar),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_StarSpirit),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = ELDSTAR_ANIMS,
 };

@@ -22,8 +22,8 @@ NpcData N(NpcData_MontyMole_WallAmbush)[] = {
                 .detectSize = { 145, 300 },
             }
         },
-        .flags = ENEMY_FLAG_400,
         .settings = &N(NpcSettings_MontyMole_WallAmbush),
+        .flags = ENEMY_FLAG_400,
         .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -44,8 +44,8 @@ NpcData N(NpcData_MontyMole_WallAmbush)[] = {
                 .detectSize = { 0 },
             }
         },
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_NO_DROPS,
         .settings = &N(NpcSettings_MontyMole_WallAmbush_Hole),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -69,8 +69,8 @@ NpcData N(NpcData_MontyMole_StoneThrower_01)[] = {
                 .detectSize = { 180 },
             }
         },
-        .flags = ENEMY_FLAG_800,
         .settings = &N(NpcSettings_MontyMole_StoneThrower),
+        .flags = ENEMY_FLAG_800,
         .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_THROWER_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -95,8 +95,8 @@ NpcData N(NpcData_MontyMole_StoneThrower_02)[] = {
                 .detectSize = { 180 },
             }
         },
-        .flags = ENEMY_FLAG_800,
         .settings = &N(NpcSettings_MontyMole_StoneThrower),
+        .flags = ENEMY_FLAG_800,
         .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_THROWER_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -121,8 +121,8 @@ NpcData N(NpcData_MontyMole_StoneThrower_03)[] = {
                 .detectSize = { 180 },
             }
         },
-        .flags = ENEMY_FLAG_800,
         .settings = &N(NpcSettings_MontyMole_StoneThrower),
+        .flags = ENEMY_FLAG_800,
         .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_THROWER_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -146,8 +146,8 @@ NpcData N(NpcData_Cleft) = {
             .detectSize = { 125, 125 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Cleft),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = CLEFT_DROPS,
     .animations = CLEFT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

@@ -19,8 +19,8 @@ NpcData N(NpcData_DryBones)[] = {
                 .detectSize = { 180 },
             }
         },
-        .flags = ENEMY_FLAG_800,
         .settings = &N(NpcSettings_DryBones),
+        .flags = ENEMY_FLAG_800,
         .drops = DRY_BONES_DROPS,
         .animations = DRY_BONES_ANIMS,
     },
@@ -46,8 +46,8 @@ NpcData N(NpcData_DryBones_02)[] = {
                 .detectSize = { 180 },
             }
         },
-        .flags = ENEMY_FLAG_800,
         .settings = &N(NpcSettings_DryBones),
+        .flags = ENEMY_FLAG_800,
         .drops = DRY_BONES_DROPS,
         .animations = DRY_BONES_ANIMS,
     },

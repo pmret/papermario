@@ -18,8 +18,8 @@ NpcData N(NpcData_Ember) = {
             .detectSize = { 1000 },
         }
     },
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Ember),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = EMBER_DROPS,
     .animations = EMBER_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -41,8 +41,8 @@ NpcData N(NpcData_Ember_02) = {
             .detectSize = { 1000 },
         }
     },
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Ember),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = EMBER_DROPS,
     .animations = EMBER_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -64,8 +64,8 @@ NpcData N(NpcData_Ember_03) = {
             .detectSize = { 1000 },
         }
     },
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Ember),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = EMBER_DROPS,
     .animations = EMBER_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

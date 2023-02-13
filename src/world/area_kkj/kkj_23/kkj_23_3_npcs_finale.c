@@ -172,8 +172,8 @@ NpcData N(NpcData_Bowser_Body) = {
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 270,
     .init = &N(EVS_NpcInit_Bowser_Body),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Bowser),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = BOWSER_ANIMS,
 };
@@ -183,8 +183,8 @@ NpcData N(NpcData_Bowser_Prop) = {
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 270,
     .init = &N(EVS_NpcInit_Bowser_Propeller),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Dummy),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = BOWSER_ANIMS,
 };
@@ -194,8 +194,8 @@ NpcData N(NpcData_Peach) = {
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 270,
     .init = &N(EVS_NpcInit_Peach),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_20000,
     .settings = &N(NpcSettings_Dummy),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_20000,
     .drops = NO_DROPS,
     .animations = PEACH_ANIMS,
 };

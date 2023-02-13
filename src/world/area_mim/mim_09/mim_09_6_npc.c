@@ -19,8 +19,8 @@ NpcData N(NpcData_Fuzzy) = {
             .detectSize = { 400 },
         }
     },
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_ForestFuzzy_Wander),
+    .flags = ENEMY_FLAG_400,
     .drops = FOREST_FUZZY_DROPS,
     .animations = FOREST_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

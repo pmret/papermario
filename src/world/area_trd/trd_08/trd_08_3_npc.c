@@ -136,8 +136,8 @@ NpcData N(NpcData_00)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x00004003,
-        .flags = ENEMY_FLAG_PASSIVE,
         .settings = &N(NpcSettings_FireBar_01),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
@@ -146,8 +146,8 @@ NpcData N(NpcData_00)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x00004003,
-        .flags = ENEMY_FLAG_PASSIVE,
         .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
@@ -156,8 +156,8 @@ NpcData N(NpcData_00)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x00004003,
-        .flags = ENEMY_FLAG_PASSIVE,
         .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
@@ -166,8 +166,8 @@ NpcData N(NpcData_00)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x00004003,
-        .flags = ENEMY_FLAG_PASSIVE,
         .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
@@ -179,8 +179,8 @@ NpcData N(NpcData_05)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x00004003,
-        .flags = ENEMY_FLAG_PASSIVE,
         .settings = &N(NpcSettings_FireBar_02),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
@@ -189,8 +189,8 @@ NpcData N(NpcData_05)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x00004003,
-        .flags = ENEMY_FLAG_PASSIVE,
         .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
@@ -199,8 +199,8 @@ NpcData N(NpcData_05)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x00004003,
-        .flags = ENEMY_FLAG_PASSIVE,
         .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
@@ -209,8 +209,8 @@ NpcData N(NpcData_05)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x00004003,
-        .flags = ENEMY_FLAG_PASSIVE,
         .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },

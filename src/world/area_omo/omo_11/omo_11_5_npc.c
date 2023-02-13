@@ -18,8 +18,8 @@ NpcData N(NpcData_PyroGuy_01) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_PyroGuy),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = PYRO_GUY_DROPS,
     .animations = PYRO_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -41,8 +41,8 @@ NpcData N(NpcData_PyroGuy_02) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_PyroGuy),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = PYRO_GUY_DROPS,
     .animations = PYRO_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

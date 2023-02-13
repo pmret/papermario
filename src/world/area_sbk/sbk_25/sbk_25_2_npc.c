@@ -18,8 +18,8 @@ NpcData N(NpcData_Bandit_01) = {
             .detectSize = { 1000 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .settings = &N(NpcSettings_Bandit),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = BANDIT_DROPS,
     .animations = BANDIT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -41,8 +41,8 @@ NpcData N(NpcData_Bandit_02) = {
             .detectSize = { 1000 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .settings = &N(NpcSettings_Bandit),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = BANDIT_DROPS,
     .animations = BANDIT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

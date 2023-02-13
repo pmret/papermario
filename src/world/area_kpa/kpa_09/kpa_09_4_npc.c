@@ -19,8 +19,8 @@ NpcData N(NpcData_DryBones)[] = {
                 .detectSize = { 200 },
             }
         },
-        .flags = ENEMY_FLAG_800,
         .settings = &N(NpcSettings_DryBones),
+        .flags = ENEMY_FLAG_800,
         .drops = DRY_BONES_DROPS,
         .animations = DRY_BONES_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

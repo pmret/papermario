@@ -113,8 +113,8 @@ NpcData N(NpcData_KoopaTroopa_01) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_KoopaTroopa_Patrol),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -137,8 +137,8 @@ NpcData N(NpcData_KoopaTroopa_02) = {
         }
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_02),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -161,8 +161,8 @@ NpcData N(NpcData_KoopaTroopa_02_Demo) = {
         }
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_02_Demo),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -184,8 +184,8 @@ NpcData N(NpcData_Goomba) = {
             .detectSize = { 150, 80 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Goomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -208,8 +208,8 @@ NpcData N(NpcData_SpikedGoomba) = {
         }
     },
     .init = &N(EVS_NpcInit_SpikedGoomba),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_SpikedGoomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SPIKED_GOOMBA_DROPS,
     .animations = SPIKED_GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

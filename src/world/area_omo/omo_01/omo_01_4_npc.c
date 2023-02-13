@@ -94,8 +94,8 @@ NpcData N(NpcData_ShyGuy_01) = {
         }
     },
     .init = &N(EVS_NpcInit_ShyGuy),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SHY_GUY_DROPS,
     .animations = RED_AVOID_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -129,8 +129,8 @@ NpcData N(NpcData_ShyGuy_02) = {
         }
     },
     .init = &N(EVS_NpcInit_ShyGuy_02),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SHY_GUY_DROPS,
     .animations = YELLOW_AVOID_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -164,8 +164,8 @@ NpcData N(NpcData_ShyGuy_03) = {
         }
     },
     .init = &N(EVS_NpcInit_ShyGuy_03),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SHY_GUY_DROPS,
     .animations = YELLOW_AVOID_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -199,8 +199,8 @@ NpcData N(NpcData_ShyGuy_04) = {
         }
     },
     .init = &N(EVS_NpcInit_ShyGuy_04),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SHY_GUY_DROPS,
     .animations = BLUE_AVOID_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -234,8 +234,8 @@ NpcData N(NpcData_ShyGuy_05) = {
         }
     },
     .init = &N(EVS_NpcInit_ShyGuy_05),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SHY_GUY_DROPS,
     .animations = GREEN_AVOID_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

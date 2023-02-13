@@ -25,8 +25,8 @@ NpcData N(NpcData_Clubba_Wander)[] = {
                 .detectSize = { 600, 250 },
             }
         },
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Clubba_Wander),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
@@ -63,8 +63,8 @@ NpcData N(NpcData_Clubba_Napping)[] = {
             }
         },
         .init = &N(EVS_NpcInit_Clubba_Napping),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Clubba_Napping),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
@@ -89,8 +89,8 @@ NpcData N(NpcData_Sentinel) = {
             .detectSize = { 250 },
         }
     },
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };

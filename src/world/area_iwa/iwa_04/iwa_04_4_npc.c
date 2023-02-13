@@ -293,8 +293,8 @@ NpcData N(NpcData_Cleft) = {
             .detectSize = { 175, 195 },
         }
     },
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Cleft),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800,
     .drops = CLEFT_DROPS,
     .animations = CLEFT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -304,8 +304,8 @@ NpcData N(NpcData_Buzzar) = {
     .id = NPC_Buzzar,
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
     .settings = &N(NpcSettings_Buzzar),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .heartDrops  = STANDARD_HEART_DROPS(3),

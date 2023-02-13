@@ -20,8 +20,8 @@ NpcData N(NpcData_PiranhaPlant_01)[] = {
                 .detectSize = { 400 },
             }
         },
-        .flags = 0,
         .settings = &N(NpcSettings_PiranhaPlant),
+        .flags = 0,
         .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -46,8 +46,8 @@ NpcData N(NpcData_PiranhaPlant_02)[] = {
                 .detectSize = { 400 },
             }
         },
-        .flags = 0,
         .settings = &N(NpcSettings_PiranhaPlant),
+        .flags = 0,
         .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -71,8 +71,8 @@ NpcData N(NpcData_Fuzzy) = {
             .detectSize = { 400 },
         }
     },
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_ForestFuzzy_Wander),
+    .flags = ENEMY_FLAG_400,
     .drops = FOREST_FUZZY_DROPS,
     .animations = FOREST_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

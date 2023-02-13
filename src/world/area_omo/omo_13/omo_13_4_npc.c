@@ -213,8 +213,8 @@ NpcData N(NpcData_AntiGuy) = {
     .pos = { 110.0f, 0.0f, -20.0f },
     .yaw = 270,
     .init = &N(EVS_NpcInit_AntiGuy),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
     .settings = &N(NpcSettings_AntiGuy),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_ShyGuy_Black_Anim01,
@@ -253,8 +253,8 @@ NpcData N(NpcData_ShyGuy) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SHY_GUY_DROPS,
     .animations = YELLOW_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -276,8 +276,8 @@ NpcData N(NpcData_GrooveGuy) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_GrooveGuy),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = GROOVE_GUY_DROPS_B,
     .animations = GROOVE_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

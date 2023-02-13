@@ -224,8 +224,8 @@ NpcData N(NpcData_GoombaBros_Red)[] = {
             }
         },
         .init = &N(EVS_NpcInit_GoombaBros_Red),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
         .settings = &N(NpcSettings_GoombaBros_Guard),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = GOOMBA_BROS_RED_ANIMS,
     },
@@ -246,8 +246,8 @@ NpcData N(NpcData_GoombaBros_Red)[] = {
             }
         },
         .init = &N(EVS_NpcInit_GoombaBros_Blue),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
         .settings = &N(NpcSettings_GoombaBros_Guard),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = GOOMBA_BROS_BLUE_ANIMS,
     },

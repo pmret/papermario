@@ -37,8 +37,8 @@ NpcData N(NpcData_Conductor) = {
     .yaw = 0,
     .initVarCount = 1,
     .initVar = { .value = 0 },
-    .flags = ENEMY_FLAG_PASSIVE,
     .settings = &N(NpcSettings_Conductor),
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
 NpcData N(NpcData_SpyGuy)[] = {
@@ -58,8 +58,8 @@ NpcData N(NpcData_SpyGuy)[] = {
                 .detectSize = { 250 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_SpyGuy),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = SPY_GUY_DROPS,
         .animations = SPY_GUY_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -85,8 +85,8 @@ NpcData N(NpcData_PyroGuy) = {
             .detectSize = { 250 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_PyroGuy),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = PYRO_GUY_DROPS,
     .animations = PYRO_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -108,8 +108,8 @@ NpcData N(NpcData_GrooveGuy) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_GrooveGuy),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = GROOVE_GUY_DROPS_B,
     .animations = GROOVE_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

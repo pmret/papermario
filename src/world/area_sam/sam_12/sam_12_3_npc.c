@@ -15,8 +15,8 @@ NpcData N(NpcData_Merlar) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 180,
     .init = &N(EVS_NpcInit_Merlar),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .settings = &N(NpcSettings_Merlar),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = MERLAR_ANIMS,
 };

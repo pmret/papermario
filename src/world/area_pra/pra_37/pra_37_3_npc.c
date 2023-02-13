@@ -27,8 +27,8 @@ NpcData N(NpcData_FrostClubba)[] = {
             }
         },
         .init = &N(EVS_NpcInit_FrostClubba),
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_FrostClubba_Wander),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = FROST_CLUBBA_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

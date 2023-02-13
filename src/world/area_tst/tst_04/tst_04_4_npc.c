@@ -55,8 +55,8 @@ NpcData N(NpcData_GoombaFamily) = {
     .id = NPC_Goompa,
     .pos = { 80.0f, 40.0f, -84.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_GRAVITY,
     .settings = &N(NpcSettings_Goompa),
+    .flags = ENEMY_FLAG_GRAVITY,
 };
 
 NpcGroupList N(DefaultNPCs) = {

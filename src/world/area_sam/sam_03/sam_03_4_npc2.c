@@ -19,8 +19,8 @@ NpcData N(NpcData_Gulpit_01)[] = {
                 .detectSize = { 250 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Gulpit),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = GULPIT_DROPS,
         .animations = GULPIT_ANIMS,
         .extraAnimations = N(ExtraAnims_Gulpit),
@@ -46,8 +46,8 @@ NpcData N(NpcData_Gulpit_02)[] = {
                 .detectSize = { 250 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Gulpit),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = GULPIT_DROPS,
         .animations = GULPIT_ANIMS,
         .extraAnimations = N(ExtraAnims_Gulpit),

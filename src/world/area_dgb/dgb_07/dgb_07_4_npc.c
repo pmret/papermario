@@ -20,8 +20,8 @@ NpcData N(NpcData_Clubba_01)[] = {
                 .detectSize = { 200 },
             }
         },
-        .flags = ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Clubba_Napping),
+        .flags = ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),

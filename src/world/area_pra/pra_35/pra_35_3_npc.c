@@ -32,8 +32,8 @@ NpcData N(NpcData_Clubba)[] = {
             }
         },
         .init = &N(EVS_NpcInit_EnableReflection),
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_FrostClubba_Patrol),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = FROST_CLUBBA_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -60,8 +60,8 @@ NpcData N(NpcData_Duplighost) = {
         }
     },
     .init = &N(EVS_NpcInit_EnableReflection),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_Duplighost_Patrol),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .drops = DUPLIGHOST_DROPS,
     .animations = DUPLIGHOST_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

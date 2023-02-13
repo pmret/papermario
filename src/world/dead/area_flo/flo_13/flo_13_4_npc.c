@@ -598,8 +598,8 @@ NpcData N(NpcData_Lakilester) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
     .init = &N(EVS_NpcInit_Lakilester),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .settings = &N(NpcSettings_Lakilester),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_WorldLakilester_Idle,
@@ -626,8 +626,8 @@ NpcData N(NpcData_Lakilulu) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
     .init = &N(EVS_NpcInit_Lakilulu),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Lakilester),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Lakilulu_Idle,
@@ -655,8 +655,8 @@ NpcData N(NpcData_Lakilulu_Spiny) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
     .init = &N(EVS_NpcInit_Lakilulu_Spiny),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Lakilester),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Lakilulu_Idle,
@@ -695,8 +695,8 @@ NpcData N(NpcData_Lakitu_01) = {
         }
     },
     .init = &N(EVS_NpcInit_Lakitu),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Lakitu_SpinySpawner),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = LAKITU_DROPS,
     .animations = LAKITU_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -719,8 +719,8 @@ NpcData N(NpcData_Lakitu_02) = {
         }
     },
     .init = &N(EVS_NpcInit_Lakitu),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Lakitu_SpinySpawner),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = LAKITU_DROPS,
     .animations = LAKITU_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -743,8 +743,8 @@ NpcData N(NpcData_Spiny_01) = {
         }
     },
     .init = &N(EVS_NpcInit_Spiny),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
     .settings = &N(NpcSettings_SpawnedSpiny),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -767,8 +767,8 @@ NpcData N(NpcData_Spiny_02) = {
         }
     },
     .init = &N(EVS_NpcInit_Spiny),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
     .settings = &N(NpcSettings_SpawnedSpiny),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -791,8 +791,8 @@ NpcData N(NpcData_Spiny_03) = {
         }
     },
     .init = &N(EVS_NpcInit_Spiny),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
     .settings = &N(NpcSettings_SpawnedSpiny),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -815,8 +815,8 @@ NpcData N(NpcData_Spiny_04) = {
         }
     },
     .init = &N(EVS_NpcInit_Spiny),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
     .settings = &N(NpcSettings_SpawnedSpiny),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -839,8 +839,8 @@ NpcData N(NpcData_Spiny_05) = {
         }
     },
     .init = &N(EVS_NpcInit_Spiny),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
     .settings = &N(NpcSettings_SpawnedSpiny),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -863,8 +863,8 @@ NpcData N(NpcData_Spiny_06) = {
         }
     },
     .init = &N(EVS_NpcInit_Spiny),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
     .settings = &N(NpcSettings_SpawnedSpiny),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

@@ -18,8 +18,8 @@ NpcData N(NpcData_Spiny_01) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Spiny),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -41,8 +41,8 @@ NpcData N(NpcData_Spiny_02) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Spiny),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -64,8 +64,8 @@ NpcData N(NpcData_Spiny_03) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Spiny),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

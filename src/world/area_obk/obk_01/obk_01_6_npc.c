@@ -192,8 +192,8 @@ NpcData N(NpcData_JumpScareBoo) = {
     .id = NPC_JumpScareBoo,
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
@@ -203,8 +203,8 @@ NpcData N(NpcData_TrafficBoo1) = {
     .pos = { 523.0f, -139.0f, 193.0f },
     .yaw = 0,
     .init = &N(EVS_NpcInit_TrafficBoo1),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
@@ -214,8 +214,8 @@ NpcData N(NpcData_TrafficBoo2) = {
     .pos = { 473.0f, -122.0f, 247.0f },
     .yaw = 0,
     .init = &N(EVS_NpcInit_TrafficBoo2),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
@@ -238,8 +238,8 @@ NpcData N(NpcData_Boos)[] = {
             }
         },
         .init = &N(EVS_NpcInit_UpstairsBoo),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Boo_Wander),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
         .tattle = MSG_NpcTattle_OBK_BooA,
@@ -261,8 +261,8 @@ NpcData N(NpcData_Boos)[] = {
             }
         },
         .init = &N(EVS_NpcInit_Franky),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Boo_Wander),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
         .tattle = MSG_NpcTattle_OBK_BooB,

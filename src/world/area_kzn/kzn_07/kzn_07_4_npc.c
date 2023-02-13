@@ -19,8 +19,8 @@ NpcData N(NpcData_LavaBubble_01) = {
             .detectSize = { 300 },
         }
     },
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_LavaBubble),
+    .flags = ENEMY_FLAG_400,
     .drops = LAVA_BUBBLE_DROPS,
     .animations = LAVA_BUBBLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -42,8 +42,8 @@ NpcData N(NpcData_LavaBubble_02) = {
             .detectSize = { 300 },
         }
     },
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_LavaBubble),
+    .flags = ENEMY_FLAG_400,
     .drops = LAVA_BUBBLE_DROPS,
     .animations = LAVA_BUBBLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

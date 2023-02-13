@@ -66,8 +66,8 @@ NpcData N(NpcData_KoopaTroopa_01) = {
         }
     },
     .init = &N(EVS_NpcInit_DarkTroopa),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .settings = &N(NpcSettings_DarkTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .drops = DARK_TROOPA_DROPS,
     .animations = DARK_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -90,8 +90,8 @@ NpcData N(NpcData_KoopaTroopa_02) = {
         }
     },
     .init = &N(EVS_NpcInit_DarkTroopa),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .settings = &N(NpcSettings_DarkTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .drops = DARK_TROOPA_DROPS,
     .animations = DARK_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -114,8 +114,8 @@ NpcData N(NpcData_KoopaTroopa_03) = {
         }
     },
     .init = &N(EVS_NpcInit_DarkTroopa),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .settings = &N(NpcSettings_DarkTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .drops = DARK_TROOPA_DROPS,
     .animations = DARK_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

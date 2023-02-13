@@ -103,8 +103,8 @@ NpcData N(NpcData_Toads)[] = {
         .pos = { -145.0f, 50.0f, -110.0f },
         .yaw = 270,
         .init = &N(EVS_NpcInit_Conductor),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .settings = &N(NpcSettings_TrainToad),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = TRAIN_CONDUCTOR_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,
@@ -114,8 +114,8 @@ NpcData N(NpcData_Toads)[] = {
         .pos = { -250.0f, 0.0f, 50.0f },
         .yaw = 90,
         .init = &N(EVS_NpcInit_TrainToad),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .settings = &N(NpcSettings_TrainToad),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = TRAIN_TOAD_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,
@@ -139,8 +139,8 @@ NpcData N(NpcData_ShyGuy_01) = {
         }
     },
     .init = &N(EVS_NpcInit_BoxedShyGuy),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -162,8 +162,8 @@ NpcData N(NpcData_ShyGuy_02) = {
         }
     },
     .init = &N(EVS_NpcInit_BoxedShyGuy),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -185,8 +185,8 @@ NpcData N(NpcData_ShyGuy_03) = {
         }
     },
     .init = &N(EVS_NpcInit_BoxedShyGuy),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -208,8 +208,8 @@ NpcData N(NpcData_ShyGuy_04) = {
         }
     },
     .init = &N(EVS_NpcInit_BoxedShyGuy),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };

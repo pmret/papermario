@@ -210,8 +210,8 @@ NpcData N(NpcData_Twink) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .init = &N(EVS_NpcInit_Twink),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_StarSpirit),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = TWINK_ANIMS,
 };

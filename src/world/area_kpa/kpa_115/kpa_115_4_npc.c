@@ -19,8 +19,8 @@ NpcData N(NpcData_HammerBros)[] = {
                 .detectSize = { 200 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_HammerBros_Wander),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = HAMMER_BROS_DROPS,
         .animations = HAMMER_BROS_ANIMS,
     },

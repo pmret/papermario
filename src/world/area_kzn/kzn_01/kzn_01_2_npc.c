@@ -50,8 +50,8 @@ NpcData N(NpcPutridPiranha) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .init = &N(EVS_NpcInit_PutridPiranha),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_PutridPiranhaSentinel),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
     .drops = PIRANHA_NO_DROPS,
     .animations = PIRANHA_SENTINEL_ANIMS,
 };

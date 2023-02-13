@@ -254,8 +254,8 @@ NpcData N(NpcData_05)[] = {
         .pos = { 16.0f, 0.0f, -411.0f },
         .yaw = 0,
         .init = (void*) 0x1F64,
-        .flags = 0,
         .settings = &N(NpcSettings_StarRod),
+        .flags = 0,
         .animations = {},
     },
     {
@@ -263,8 +263,8 @@ NpcData N(NpcData_05)[] = {
         .pos = { 389.0f, 0.0f, -278.0f },
         .yaw = 0,
         .init = (void*) 0x1F64,
-        .flags = 0,
         .settings = &N(NpcSettings_Koopa),
+        .flags = 0,
         .animations = {},
     },
     {
@@ -272,8 +272,8 @@ NpcData N(NpcData_05)[] = {
         .pos = { 481.0f, 0.0f, -44.0f },
         .yaw = 0,
         .init = (void*) 0x1F64,
-        .flags = 0,
         .settings = &N(NpcSettings_Kolorado),
+        .flags = 0,
         .animations = {},
     },
 };
@@ -283,8 +283,8 @@ NpcData N(NpcData_GoombaFamily) = {
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 0,
     .init = (void*) 0x1F64,
-    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
     .settings = &N(NpcSettings_Goompa),
+    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
     .animations = {
     },
 };
@@ -295,8 +295,8 @@ NpcData N(NpcData_0B)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x1F64,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .settings = &N(NpcSettings_Goompa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .animations = {},
     },
     {
@@ -304,8 +304,8 @@ NpcData N(NpcData_0B)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x1F64,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .settings = &N(NpcSettings_Goompa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .animations = {},
     },
     {
@@ -313,8 +313,8 @@ NpcData N(NpcData_0B)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x1F64,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .settings = &N(NpcSettings_Goompa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .animations = {},
     },
     {
@@ -322,8 +322,8 @@ NpcData N(NpcData_0B)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x1F64,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .settings = &N(NpcSettings_Goompa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .animations = {},
     },
     {
@@ -331,8 +331,8 @@ NpcData N(NpcData_0B)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x1F64,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .settings = &N(NpcSettings_Goompa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .animations = {},
     },
     {
@@ -340,8 +340,8 @@ NpcData N(NpcData_0B)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x1F64,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .settings = &N(NpcSettings_Goompa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .animations = {},
     },
     {
@@ -349,8 +349,8 @@ NpcData N(NpcData_0B)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x1F64,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .settings = &N(NpcSettings_Goompa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .animations = {},
     },
     {
@@ -358,8 +358,8 @@ NpcData N(NpcData_0B)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x1F64,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .settings = &N(NpcSettings_Goompa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .animations = {},
     },
     {
@@ -367,8 +367,8 @@ NpcData N(NpcData_0B)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
         .init = (void*) 0x1F64,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .settings = &N(NpcSettings_Goompa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT,
         .animations = {},
     },
 };
@@ -378,8 +378,8 @@ NpcData N(NpcData_GoombaKing) = {
     .pos = { 12.0f, 0.0f, -13.0f },
     .yaw = 0,
     .init = (void*) 0x4003,
-    .flags = 0,
     .settings = &N(NpcSettings_GoombaKing),
+    .flags = 0,
     .animations = {}
 };
 

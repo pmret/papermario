@@ -20,8 +20,8 @@ NpcData N(NpcData_Clubba_01)[] = {
                 .detectSize = { 430, 92 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Clubba_Napping),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
@@ -47,8 +47,8 @@ NpcData N(NpcData_Clubba_02)[] = {
                 .detectSize = { 430, 92 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Clubba_Napping),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -73,8 +73,8 @@ NpcData N(NpcData_Clubba_03)[] = {
                 .detectSize = { 430, 92 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Clubba_Napping),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -99,8 +99,8 @@ NpcData N(NpcData_Clubba_04)[] = {
                 .detectSize = { 430, 92 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Clubba_Napping),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -125,8 +125,8 @@ NpcData N(NpcData_Clubba_05)[] = {
                 .detectSize = { 430, 92 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Clubba_Napping),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -151,8 +151,8 @@ NpcData N(NpcData_Clubba_06)[] = {
                 .detectSize = { 430, 92 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Clubba_Napping),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

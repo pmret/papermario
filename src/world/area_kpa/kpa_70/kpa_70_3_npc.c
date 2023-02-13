@@ -18,8 +18,8 @@ NpcData N(NpcData_Koopatrol_01) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_Koopatrol_Wander),
+    .flags = ENEMY_FLAG_400,
     .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
@@ -40,8 +40,8 @@ NpcData N(NpcData_Koopatrol_02) = {
             .detectSize = { 200 },
         }
     },
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_Koopatrol_Wander),
+    .flags = ENEMY_FLAG_400,
     .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };

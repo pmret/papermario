@@ -41,8 +41,8 @@ NpcData N(NpcData_Twink) = {
     .pos = { 0.0f, -500.0f, 0.0f },
     .yaw = 0,
     .init = &N(EVS_NpcInit_Twink),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000000,
     .settings = &N(NpcSettings_StarSpirit),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000000,
     .drops = NO_DROPS,
     .animations = TWINK_ANIMS,
 };

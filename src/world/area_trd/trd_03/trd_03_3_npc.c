@@ -185,8 +185,8 @@ NpcData N(NpcData_KoopaBros) = {
     .pos = { -569.0f, 0.0f, -57.0f },
     .yaw = 270,
     .init = &N(EVS_NpcInit_KoopaBros),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_KoopaBros),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_KoopaBros_Green_Anim04,
@@ -225,8 +225,8 @@ NpcData N(NpcData_KoopaTroopa_01) = {
         }
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_01),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -249,8 +249,8 @@ NpcData N(NpcData_KoopaTroopa_02) = {
         }
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_02),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -272,8 +272,8 @@ NpcData N(NpcData_KoopaTroopa_03) = {
             .detectSize = { 350 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

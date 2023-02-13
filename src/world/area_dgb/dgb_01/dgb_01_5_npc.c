@@ -260,8 +260,8 @@ NpcData N(NpcData_Sentinel_01) = {
         }
     },
     .init = &N(EVS_NpcInit_Sentinel_01),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -283,8 +283,8 @@ NpcData N(NpcData_Sentinel_02) = {
         }
     },
     .init = &N(EVS_NpcInit_Sentinel_02),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -306,8 +306,8 @@ NpcData N(NpcData_Sentinel_03) = {
         }
     },
     .init = &N(EVS_NpcInit_Sentinel_03),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -329,8 +329,8 @@ NpcData N(NpcData_Sentinel_04) = {
         }
     },
     .init = &N(EVS_NpcInit_Sentinel_04),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -355,8 +355,8 @@ NpcData N(NpcData_Tubba_Floor3) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .init = &N(EVS_NpcInit_Tubba_Floor3),
-    .flags = ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_TubbaBlubba),
+    .flags = ENEMY_FLAG_200000,
     .drops = NO_DROPS,
     .animations = TUBBA_ANIMS,
     .extraAnimations = N(ExtraAnims_Tubba),
@@ -381,8 +381,8 @@ NpcData N(NpcData_Tubba_Floor2) = {
         }
     },
     .init = &N(EVS_NpcInit_Tubba_Floor2),
-    .flags = ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_TubbaBlubba_Patrol),
+    .flags = ENEMY_FLAG_200000,
     .drops = CLUBBA_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
     .extraAnimations = N(ExtraAnims_Tubba),
@@ -414,8 +414,8 @@ NpcData N(NpcData_Tubba_Floor1) = {
         }
     },
     .init = &N(EVS_NpcInit_Tubba_Floor1),
-    .flags = ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_TubbaBlubba_Patrol),
+    .flags = ENEMY_FLAG_200000,
     .drops = CLUBBA_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
     .extraAnimations = N(ExtraAnims_Tubba),

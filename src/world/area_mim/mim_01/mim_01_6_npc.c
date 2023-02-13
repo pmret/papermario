@@ -19,8 +19,8 @@ NpcData N(NpcData_PiranhaPlant)[] = {
                 .detectSize = { 400 },
             }
         },
-        .flags = ENEMY_FLAG_400,
         .settings = &N(NpcSettings_PiranhaPlant),
+        .flags = ENEMY_FLAG_400,
         .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,

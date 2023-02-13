@@ -199,8 +199,8 @@ NpcData N(NpcData_Fuzzy_01) = {
         }
     },
     .init = &N(EVS_NpcInit_Fuzzy),
-    .flags = 0,
     .settings = &N(NpcSettings_ForestFuzzy_Wander),
+    .flags = 0,
     .drops = FOREST_FUZZY_DROPS,
     .animations = FOREST_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -223,8 +223,8 @@ NpcData N(NpcData_Fuzzy_02) = {
         }
     },
     .init = &N(EVS_NpcInit_Fuzzy),
-    .flags = 0,
     .settings = &N(NpcSettings_ForestFuzzy_Wander),
+    .flags = 0,
     .drops = FOREST_FUZZY_DROPS,
     .animations = FOREST_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -235,8 +235,8 @@ NpcData N(NpcData_JrTroopa) = {
     .pos = { -338.0f, 0.0f, 0.0f },
     .yaw = 0,
     .init = &N(EVS_NpcInit_JrTroopa),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
     .settings = &N(NpcSettings_JrTroopa),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_JrTroopa_Idle,

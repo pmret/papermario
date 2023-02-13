@@ -508,8 +508,8 @@ NpcData N(NpcData_Tubba) = {
         }
     },
     .init = &N(EVS_NpcInit_Tubba),
-    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
     .settings = &N(NpcSettings_TubbaBlubba),
+    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
 };
@@ -519,8 +519,8 @@ NpcData N(NpcData_Yakkey) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .init = &N(EVS_NpcInit_Yakkey),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Yakkey),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Yakkey_Idle,

@@ -20,8 +20,8 @@ NpcData N(NpcData_Bobomb_01) = {
             .detectSize = { 250, 175 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Bobomb_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = BOBOMB_DROPS,
     .animations = BOBOMB_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -43,8 +43,8 @@ NpcData N(NpcData_Bobomb_02) = {
             .detectSize = { 250, 175 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Bobomb_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = BOBOMB_DROPS,
     .animations = BOBOMB_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -68,8 +68,8 @@ NpcData N(NpcData_KoopaTroopa) = {
             .detectSize = { 150, 80 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_KoopaTroopa_Patrol),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

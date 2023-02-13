@@ -42,8 +42,8 @@ NpcData N(NpcData_Bzzap) = {
         }
     },
     .init = &N(EVS_NpcInit_Bzzap),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_200000,
     .settings = &N(NpcSettings_Bzzap),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_200000,
     .drops = NO_DROPS,
     .animations = BZZAP_ANIMS,
 };
@@ -65,8 +65,8 @@ NpcData N(NpcData_PiranhaPlant_01)[] = {
                 .detectSize = { 400 },
             }
         },
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .settings = &N(NpcSettings_PiranhaPlant),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -91,8 +91,8 @@ NpcData N(NpcData_PiranhaPlant_02)[] = {
                 .detectSize = { 400 },
             }
         },
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .settings = &N(NpcSettings_PiranhaPlant),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,

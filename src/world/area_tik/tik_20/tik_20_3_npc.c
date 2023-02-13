@@ -18,8 +18,8 @@ NpcData N(NpcData_DarkTroopa_01) = {
             .detectSize = { 250 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_DarkTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = DARK_TROOPA_DROPS,
     .animations = DARK_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -41,8 +41,8 @@ NpcData N(NpcData_DarkTroopa_02) = {
             .detectSize = { 250 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_DarkTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = DARK_TROOPA_DROPS,
     .animations = DARK_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

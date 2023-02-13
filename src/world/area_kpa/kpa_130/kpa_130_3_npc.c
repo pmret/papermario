@@ -169,8 +169,8 @@ NpcData N(NpcData_BillBlaster_01)[] = {
             }
         },
         .init = &N(EVS_NpcInit_BillBlaster),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .settings = &N(NpcSettings_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = NO_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
@@ -191,8 +191,8 @@ NpcData N(NpcData_BillBlaster_01)[] = {
             }
         },
         .init = &N(EVS_NpcInit_BillBlaster),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .settings = &N(NpcSettings_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = NO_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
@@ -216,8 +216,8 @@ NpcData N(NpcData_BillBlaster_03)[] = {
             }
         },
         .init = &N(EVS_NpcInit_BillBlaster_03),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .settings = &N(NpcSettings_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = BOMBSHELL_BLASTER_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
@@ -238,8 +238,8 @@ NpcData N(NpcData_BillBlaster_03)[] = {
             }
         },
         .init = &N(EVS_NpcInit_BillBlaster_03),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .settings = &N(NpcSettings_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = NO_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
@@ -263,8 +263,8 @@ NpcData N(NpcData_BillBlaster_05)[] = {
             }
         },
         .init = &N(EVS_NpcInit_BillBlaster),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .settings = &N(NpcSettings_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = BOMBSHELL_BLASTER_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
@@ -285,8 +285,8 @@ NpcData N(NpcData_BillBlaster_05)[] = {
             }
         },
         .init = &N(EVS_NpcInit_BillBlaster),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .settings = &N(NpcSettings_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = NO_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
@@ -310,8 +310,8 @@ NpcData N(NpcData_BillBlaster_07)[] = {
             }
         },
         .init = &N(EVS_NpcInit_BillBlaster),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .settings = &N(NpcSettings_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = BOMBSHELL_BLASTER_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
@@ -332,8 +332,8 @@ NpcData N(NpcData_BillBlaster_07)[] = {
             }
         },
         .init = &N(EVS_NpcInit_BillBlaster),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .settings = &N(NpcSettings_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = NO_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },

@@ -197,8 +197,8 @@ NpcData N(NpcData_Tubba) = {
         }
     },
     .init = &N(EVS_NpcInit_Tubba),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
     .settings = &N(NpcSettings_TubbaBlubba),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
     .drops = CLUBBA_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -221,8 +221,8 @@ NpcData N(NpcData_Clubba_01)[] = {
                 .detectSize = { 250 },
             }
         },
-        .flags = ENEMY_FLAG_400,
         .settings = &N(NpcSettings_Clubba_Wander),
+        .flags = ENEMY_FLAG_400,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
@@ -248,8 +248,8 @@ NpcData N(NpcData_Clubba_02)[] = {
                 .detectSize = { 250 },
             }
         },
-        .flags = ENEMY_FLAG_400,
         .settings = &N(NpcSettings_Clubba_Wander),
+        .flags = ENEMY_FLAG_400,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
@@ -275,8 +275,8 @@ NpcData N(NpcData_Clubba_03)[] = {
                 .detectSize = { 150 },
             }
         },
-        .flags = ENEMY_FLAG_400,
         .settings = &N(NpcSettings_Clubba_Wander),
+        .flags = ENEMY_FLAG_400,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
@@ -301,8 +301,8 @@ NpcData N(NpcData_Sentinel_01) = {
             .detectSize = { 250, 55 },
         }
     },
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -323,8 +323,8 @@ NpcData N(NpcData_Sentinel_02) = {
             .detectSize = { 250, 145 },
         }
     },
-    .flags = ENEMY_FLAG_400,
     .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -411,8 +411,8 @@ NpcData N(NpcData_LastClubba) = {
         }
     },
     .init = &N(EVS_NpcInit_LastClubba),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
     .settings = &N(NpcSettings_LastClubba),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = CLUBBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -448,8 +448,8 @@ NpcData N(NpcData_Clubba_Unused) = {
         }
     },
     .init = &N(EVS_NpcInit_Clubba_Unused),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_400,
     .settings = &N(NpcSettings_Clubba_Wander),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_400,
     .drops = CLUBBA_DROPS,
     .animations = CLUBBA_ANIMS,
     .extraAnimations = N(ExtraAnims_Clubba),

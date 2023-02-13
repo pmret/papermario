@@ -20,8 +20,8 @@ NpcData N(NpcData_Gulpit)[] = {
                 .detectSize = { 200 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Gulpit),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = GULPIT_DROPS,
         .animations = GULPIT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -46,8 +46,8 @@ NpcData N(NpcData_FrostPiranha_01)[] = {
                 .detectSize = { 260, 65 },
             }
         },
-        .flags = ENEMY_FLAG_400,
         .settings = &N(NpcSettings_FrostPiranha),
+        .flags = ENEMY_FLAG_400,
         .drops = FROST_PIRANHA_DROPS,
         .animations = FROST_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -72,8 +72,8 @@ NpcData N(NpcData_FrostPiranha_02)[] = {
                 .detectSize = { 260, 65 },
             }
         },
-        .flags = ENEMY_FLAG_400,
         .settings = &N(NpcSettings_FrostPiranha),
+        .flags = ENEMY_FLAG_400,
         .drops = FROST_PIRANHA_DROPS,
         .animations = FROST_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

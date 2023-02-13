@@ -18,8 +18,8 @@ NpcData N(NpcData_Paragloomba_01) = {
             .detectSize = { 150 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Paragloomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = PARAGLOOMBA_DROPS,
     .animations = PARAGLOOMBA_ANIMS,
 };
@@ -40,8 +40,8 @@ NpcData N(NpcData_Paragloomba_02) = {
             .detectSize = { 150 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Paragloomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = PARAGLOOMBA_DROPS,
     .animations = PARAGLOOMBA_ANIMS,
 };

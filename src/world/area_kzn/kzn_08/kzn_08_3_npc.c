@@ -20,8 +20,8 @@ NpcData N(NpcData_PutridPiranha)[] = {
                 .detectSize = { 130, 60 },
             }
         },
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400,
         .settings = &N(NpcSettings_PutridPiranha),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400,
         .drops = PUTRID_PIRANHA_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

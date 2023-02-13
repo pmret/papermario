@@ -63,8 +63,8 @@ NpcData N(NpcData_KoopaBros)[] = {
                 .detectSize = { 0 },
             }
         },
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_KoopaBros),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = RED_KOOPA_BROS_ANIMS,
     },
@@ -84,8 +84,8 @@ NpcData N(NpcData_KoopaBros)[] = {
                 .detectSize = { 0 },
             }
         },
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_KoopaBros),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = BLACK_KOOPA_BROS_ANIMS,
     },
@@ -105,8 +105,8 @@ NpcData N(NpcData_KoopaBros)[] = {
                 .detectSize = { 0 },
             }
         },
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_KoopaBros),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = YELLOW_KOOPA_BROS_ANIMS,
     },
@@ -126,8 +126,8 @@ NpcData N(NpcData_KoopaBros)[] = {
                 .detectSize = { 0 },
             }
         },
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_KoopaBros),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = GREEN_KOOPA_BROS_ANIMS,
     },

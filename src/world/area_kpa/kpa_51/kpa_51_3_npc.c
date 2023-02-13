@@ -21,8 +21,8 @@ NpcData N(NpcData_Magikoopa_01)[] = {
                 .detectSize = { 200 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Magikoopa),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = MAGINO_DROPS,
         .animations = MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_Magikoopa),
@@ -48,8 +48,8 @@ NpcData N(NpcData_Magikoopa_02)[] = {
                 .detectSize = { 200 },
             }
         },
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .settings = &N(NpcSettings_Magikoopa),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .drops = MAGINO_DROPS,
         .animations = MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_Magikoopa),
@@ -74,8 +74,8 @@ NpcData N(NpcData_Koopatrol) = {
             .detectSize = { 300 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Koopatrol_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

@@ -20,8 +20,8 @@ NpcData N(NpcData_Sentinel) = {
             .detectSize = { 80, 150 },
         }
     },
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
