@@ -654,7 +654,7 @@ EvtScript N(takeTurn_8021A61C) = {
     EVT_END
 };
 
-Vec3i N(vector3D_8021A7F4) = { 0, -1000, 0 };
+Vec3i N(vector3D_8021A7F4) = { NPC_DISPOSE_LOCATION };
 
 Formation N(specialFormation_8021A800) = {
     { .actor = &NAMESPACE, .home = { .vec = &N(vector3D_8021A7F4) }},

@@ -55,9 +55,9 @@ API_CALLABLE(N(SpinyAI_Main)) {
         npc->flags |= NPC_FLAG_8;
         enemy->varTable[10] = 0;
         enemy->varTable[11] = -1;
-        npc->pos.x = 0.0f;
-        npc->pos.y = -1000.0f;
-        npc->pos.z = 0.0f;
+        npc->pos.x = NPC_DISPOSE_POS_X;
+        npc->pos.y = NPC_DISPOSE_POS_Y;
+        npc->pos.z = NPC_DISPOSE_POS_Z;
     }
 
     if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
@@ -212,9 +212,9 @@ API_CALLABLE(N(SpinyAI_Main)) {
             break;
         case 110:
             npc->duration = 30;
-            npc->pos.x = 0.0f;
-            npc->pos.z = 0.0f;
-            npc->pos.y = -1000.0f;
+            npc->pos.x = NPC_DISPOSE_POS_X;
+            npc->pos.y = NPC_DISPOSE_POS_Y;
+            npc->pos.z = NPC_DISPOSE_POS_Z;
             npc->flags |= NPC_FLAG_8 | NPC_FLAG_2;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             script->AI_TEMP_STATE = 111;

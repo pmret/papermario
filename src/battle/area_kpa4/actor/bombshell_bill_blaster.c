@@ -230,7 +230,7 @@ EvtScript N(wait) = {
 
 extern ActorBlueprint A(bombshell_bill);
 
-Vec3i N(bill_pos) = { 0, -1000, 0 };
+Vec3i N(bill_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_bill) = {
     { .actor = &A(bombshell_bill), .home = { .vec = &N(bill_pos) }, .priority = 100, },

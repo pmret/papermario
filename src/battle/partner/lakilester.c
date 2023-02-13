@@ -1461,9 +1461,9 @@ ApiStatus N(ProcessHurricane)(Evt* script, s32 isInitialCall) {
             sHuffPuffBreathEffect->data.huffPuffBreath->speedX = -2.0f;
 
             // looks like this was breath inhale phase, but then the devs removed it
-            sHuffPuffBreathEffect->data.huffPuffBreath->pos.x = 0.0f;
-            sHuffPuffBreathEffect->data.huffPuffBreath->pos.y = -1000.0f;
-            sHuffPuffBreathEffect->data.huffPuffBreath->pos.z = 0.0f;
+            sHuffPuffBreathEffect->data.huffPuffBreath->pos.x = NPC_DISPOSE_POS_X;
+            sHuffPuffBreathEffect->data.huffPuffBreath->pos.y = NPC_DISPOSE_POS_Y;
+            sHuffPuffBreathEffect->data.huffPuffBreath->pos.z = NPC_DISPOSE_POS_Z;
 
             if (script->functionTemp[2] != 0) {
                 sfx_play_sound_at_position(SOUND_201E, SOUND_SPACE_MODE_0, partner->currentPos.x, partner->currentPos.y, partner->currentPos.z);
@@ -1474,9 +1474,9 @@ ApiStatus N(ProcessHurricane)(Evt* script, s32 isInitialCall) {
             set_animation(ACTOR_PARTNER, -1, ANIM_BattleLakilester_HurricaneInhale);
             break;
         case STATE_DISABLED:
-            sHuffPuffBreathEffect->data.huffPuffBreath->pos.x = 0.0f;
-            sHuffPuffBreathEffect->data.huffPuffBreath->pos.y = -1000.0f;
-            sHuffPuffBreathEffect->data.huffPuffBreath->pos.z = 0.0f;
+            sHuffPuffBreathEffect->data.huffPuffBreath->pos.x = NPC_DISPOSE_POS_X;
+            sHuffPuffBreathEffect->data.huffPuffBreath->pos.y = NPC_DISPOSE_POS_Y;
+            sHuffPuffBreathEffect->data.huffPuffBreath->pos.z = NPC_DISPOSE_POS_Z;
             break;
         case STATE_EXHALE:
             x = partner->currentPos.x;

@@ -191,7 +191,7 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
     EVT_CALL(SetNpcSpeed, NPC_RaphaelRaven, EVT_FLOAT(4.0))
     EVT_CALL(NpcMoveTo, NPC_SELF, 340, 270, 0)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(ResetCam, CAM_DEFAULT, 5)
     EVT_SET(GB_StoryProgress, STORY_CH5_RAFAEL_MOVED_ROOT)
     EVT_CALL(DisablePlayerInput, FALSE)

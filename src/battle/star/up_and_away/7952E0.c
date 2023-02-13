@@ -383,7 +383,7 @@ EvtScript N(usePower) = {
                     EVT_CALL(SetActorScale, LVarA, LVar0, LVar0, LVar0)
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_CALL(SetActorPos, LVarA, 0, -1000, 0)
+                EVT_CALL(SetActorPos, LVarA, NPC_DISPOSE_LOCATION)
                 EVT_CALL(GetActorPos, LVarA, LVar0, LVar1, LVar2)
                 EVT_LOOP(10)
                     EVT_CALL(PlayEffect, 0x11, 1, LVar0, LVar1, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)

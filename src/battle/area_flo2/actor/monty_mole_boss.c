@@ -186,7 +186,7 @@ ActorBlueprint N(hole) = {
     .statusMessageOffset = { 10, 20 },
 };
 
-Vec3i N(hole_pos) = { 0, -1000, 0 };
+Vec3i N(hole_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_hole_1) = {
     { .actor = &N(hole), .home = { .vec = &N(hole_pos) }, .priority = 0, },

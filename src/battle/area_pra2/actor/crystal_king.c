@@ -1214,7 +1214,7 @@ ActorBlueprint N(clone) = {
     .statusMessageOffset = { 15, 40 },
 };
 
-Vec3i N(pos_crystal_clone) = { 0, -1000, 0 };
+Vec3i N(pos_crystal_clone) = { NPC_DISPOSE_LOCATION };
 
 Formation N(clone_formation) = {
     { .actor = &N(clone), .home = { .vec = &N(pos_crystal_clone) }, .priority = 0 },
