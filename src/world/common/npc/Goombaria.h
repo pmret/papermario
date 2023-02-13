@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Goombaria.h"
 
-#define NO_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define GOOMBARIA_ANIMS \
 { \
     .idle   = ANIM_Goombaria_Idle, \

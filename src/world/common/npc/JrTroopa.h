@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/JrTroopa.h"
 
-#define JR_TROOPA_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define JR_TROOPA_ANIMS \
 { \
     .idle   = ANIM_JrTroopa_Idle, \

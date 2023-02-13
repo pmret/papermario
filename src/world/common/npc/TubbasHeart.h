@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/TubbasHeart.h"
 
-#define TUBBAS_HEART_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define TUBBAS_HEART_ANIMS \
 { \
     .idle   = ANIM_TubbasHeart_Anim01, \

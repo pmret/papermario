@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Boo.h"
 
-#define BOO_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define NORMAL_BOO_ANIMS \
 { \
     .idle   = ANIM_Boo_Idle, \

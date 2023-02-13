@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/HuffNPuff.h"
 
-#define HUFF_N_PUFF_NO_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define HUFF_N_PUFF_ANIMS \
 { \
     .idle   = ANIM_HuffNPuff_Anim01, \

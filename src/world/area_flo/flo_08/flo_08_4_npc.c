@@ -164,7 +164,7 @@ StaticNpc N(NpcData_GateFlower) = {
     .yaw = 270,
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_GateFlower),
-    .drops = GATE_FLOWER_DROPS,
+    .drops = NO_DROPS,
     .animations = GATE_FLOWER_YELLOW_ANIMS,
     .tattle = MSG_NpcTattle_YellowGateFlower,
 };

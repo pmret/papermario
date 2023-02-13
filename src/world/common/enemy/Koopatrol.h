@@ -14,13 +14,6 @@
     .maxCoinBonus = 3, \
 }
 
-#define KOOPATROL_NO_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define KOOPATROL_ANIMS \
 { \
     .idle   = ANIM_WorldKoopatrol_Anim01, \

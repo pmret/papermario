@@ -2066,7 +2066,7 @@ StaticNpc N(NpcData_Toad_01) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Toad_01),
-    .drops = TOAD_DROPS,
+    .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_Whale,
 };
@@ -2078,7 +2078,7 @@ StaticNpc N(NpcData_Kolorado) = {
     .yaw = 270,
     .flags = COMMON_PASSIVE_FLAGS,
     .init = &N(EVS_NpcInit_Kolorado),
-    .drops = KOLORADO_DROPS,
+    .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
 };

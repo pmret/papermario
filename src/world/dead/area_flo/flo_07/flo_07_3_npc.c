@@ -238,7 +238,7 @@ StaticNpc N(NpcData_Posie) = {
     .yaw = 90,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Posie),
-    .drops = POSIE_DROPS,
+    .drops = NO_DROPS,
     .animations = POSIE_ANIMS,
     .tattle = MSG_NpcTattle_Posie,
 };

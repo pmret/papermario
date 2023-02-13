@@ -196,7 +196,7 @@ StaticNpc N(NpcData_Rosie)[] = {
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Rosie),
-        .drops = ROSIE_DROPS,
+        .drops = NO_DROPS,
         .animations = ROSIE_ANIMS,
         .tattle = MSG_NpcTattle_Rosie,
     },
@@ -206,7 +206,7 @@ StaticNpc N(NpcData_Rosie)[] = {
         .pos = { -70.0f, 0.0f, 20.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200,
-        .drops = ROSIE_DROPS,
+        .drops = NO_DROPS,
         .animations = ROSIE_ANIMS,
     },
 };

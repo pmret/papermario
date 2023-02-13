@@ -629,7 +629,7 @@ StaticNpc N(NpcData_BigLanternGhost) = {
     .init = &N(EVS_NpcInit_BigLanternGhost),
     .initVarCount = 1,
     .initVar = { .value = 0 },
-    .drops = BIG_LANTERN_GHOST_DROPS,
+    .drops = NO_DROPS,
     .animations = BIG_LANTERN_GHOST_ANIMS,
     .extraAnimations = N(ExtraAnims_LanternGhost),
     .tattle = MSG_NpcTattle_OMO_Lantern,

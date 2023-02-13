@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Sentinel.h"
 
-#define SENTINEL_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define SENTINEL_ANIMS \
 { \
     .idle   = ANIM_Sentinel_Anim01, \

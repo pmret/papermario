@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/KoloradoWife.h"
 
-#define KOLORADO_WIFE_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define KOLORADO_WIFE_ANIMS \
 { \
     .idle   = ANIM_KoloradoWife_Idle, \

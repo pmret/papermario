@@ -106,7 +106,7 @@ StaticNpc N(NpcData_Toad) = {
     .yaw = 270,
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
     .init = &N(EVS_NpcInit_Toad),
-    .drops = TOAD_DROPS,
+    .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_OSR_LovesToClean,
 };

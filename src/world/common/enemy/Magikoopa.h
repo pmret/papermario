@@ -2,7 +2,7 @@
 #include "sprite/npc/Magikoopa.h"
 #include "sprite/npc/FlyingMagikoopa.h"
 
-#define MAGIKOOPA_DROPS \
+#define MAGINO_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 5, \

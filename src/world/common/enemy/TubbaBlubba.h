@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/WorldTubba.h"
 
-#define TUBBA_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define TUBBA_ANIMS \
 { \
     .idle   = ANIM_WorldTubba_Anim06, \

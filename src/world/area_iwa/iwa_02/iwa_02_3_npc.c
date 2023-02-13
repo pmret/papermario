@@ -187,7 +187,7 @@ StaticNpc N(NpcData_Bubulb) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Bubulb),
-    .drops = BUBULB_DROPS,
+    .drops = NO_DROPS,
     .animations = BUBULB_PURPLE_ANIMS,
     .tattle = MSG_NpcTattle_IWA_Bubulb_Revealed,
 };

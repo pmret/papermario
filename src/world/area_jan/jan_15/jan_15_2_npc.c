@@ -182,7 +182,7 @@ StaticNpc N(NpcData_Piranhas)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_PutridPiranha),
-        .drops = PIRANHA_SENTINEL_DROPS,
+        .drops = PIRANHA_NO_DROPS,
         .animations = PIRANHA_SENTINEL_ANIMS,
     },
     {
@@ -191,7 +191,7 @@ StaticNpc N(NpcData_Piranhas)[] = {
         .pos = { 325.0f, 0.0f, 0.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
-        .drops = PIRANHA_SENTINEL_DROPS,
+        .drops = PIRANHA_NO_DROPS,
         .animations = PIRANHA_SENTINEL_ANIMS,
     },
     {
@@ -200,7 +200,7 @@ StaticNpc N(NpcData_Piranhas)[] = {
         .pos = { 375.0f, 0.0f, 45.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
-        .drops = PIRANHA_SENTINEL_DROPS,
+        .drops = PIRANHA_NO_DROPS,
         .animations = PIRANHA_SENTINEL_ANIMS,
     },
 };

@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Blooper.h"
 
-#define BLOOPER_NO_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define BLOOPER_ANIMS \
 { \
     .idle   = ANIM_Blooper_Anim0C, \

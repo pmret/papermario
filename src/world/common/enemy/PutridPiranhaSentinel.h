@@ -1,7 +1,7 @@
 #include "common.h"
 #include "sprite/npc/LargePiranha.h"
 
-#define PIRANHA_SENTINEL_DROPS \
+#define PIRANHA_NO_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAG_80, \
     .itemDropChance = 5, \

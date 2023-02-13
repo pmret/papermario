@@ -13,7 +13,7 @@ StaticNpc N(NpcData_IntroNPCs)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = LUIGI_DROPS,
+        .drops = NO_DROPS,
         .animations = LUIGI_ANIMS,
     },
     {
@@ -22,7 +22,7 @@ StaticNpc N(NpcData_IntroNPCs)[] = {
         .pos = { -94.0f, 0.0f, -117.0f },
         .yaw = 90,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .drops = TOAD_DROPS,
+        .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_MAC_RunsHisMouth,
     },
@@ -32,7 +32,7 @@ StaticNpc N(NpcData_IntroNPCs)[] = {
         .pos = { 40.0f, 0.0f, -300.0f },
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .drops = TOAD_DROPS,
+        .drops = NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -56,7 +56,7 @@ StaticNpc N(NpcData_IntroNPCs)[] = {
         .pos = { -380.0f, 20.0f, -100.0f },
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .drops = TOAD_DROPS,
+        .drops = NO_DROPS,
         .animations = TOAD_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_MAC_SeeksTheSouth,
     },

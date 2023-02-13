@@ -26,7 +26,7 @@ StaticNpc N(NpcData_TrafficBoos)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_TrafficBoo1),
-        .drops = BOO_DROPS,
+        .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
     },
     {
@@ -36,7 +36,7 @@ StaticNpc N(NpcData_TrafficBoos)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_TrafficBoo2),
-        .drops = BOO_DROPS,
+        .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
     },
 };

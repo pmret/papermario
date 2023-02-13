@@ -112,7 +112,7 @@ StaticNpc N(NpcData_Blooper) = {
     .yaw = 90,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_Blooper),
-    .drops = BLOOPER_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = BLOOPER_ANIMS,
 };
 

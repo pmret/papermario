@@ -25,7 +25,7 @@ StaticNpc N(NpcData_TrainToad) = {
     .yaw = 90,
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_TrainToad),
-    .drops = TRAIN_CONDUCTOR_DROPS,
+    .drops = NO_DROPS,
     .animations = TRAIN_CONDUCTOR_ANIMS,
 };
 

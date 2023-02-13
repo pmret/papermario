@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/KentCKoopa.h"
 
-#define KENT_C_KOOPA_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define KENT_C_KOOPA_ANIMS \
 { \
     .idle   = ANIM_KentCKoopa_Anim01, \

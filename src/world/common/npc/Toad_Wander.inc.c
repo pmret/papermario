@@ -1,4 +1,4 @@
-#include "Toad.h"
+#include "Toad_Collection.h"
 
 MobileAISettings N(AISettings_Toad_Wander) = {
     .moveSpeed = 1.5f,

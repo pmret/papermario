@@ -56,7 +56,7 @@ StaticNpc N(NpcData_Igor) = {
     .yaw = 90,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Igor),
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
     .tattle = MSG_NpcTattle_OBK_ShopOwner,
 };

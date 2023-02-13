@@ -52,7 +52,7 @@ StaticNpc N(NpcPutridPiranha) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_PutridPiranha),
-    .drops = PIRANHA_SENTINEL_DROPS,
+    .drops = PIRANHA_NO_DROPS,
     .animations = PIRANHA_SENTINEL_ANIMS,
 };
 

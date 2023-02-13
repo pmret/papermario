@@ -493,7 +493,7 @@ StaticNpc N(NpcData_Boo_01) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_Boo_01),
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
@@ -504,7 +504,7 @@ StaticNpc N(NpcData_KeepAwayBoo1) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo1),
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
@@ -515,7 +515,7 @@ StaticNpc N(NpcData_KeepAwayBoo2) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo2),
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
@@ -526,7 +526,7 @@ StaticNpc N(NpcData_KeepAwayBoo3) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo3),
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
@@ -537,7 +537,7 @@ StaticNpc N(NpcData_KeepAwayBoo4) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo4),
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
@@ -548,7 +548,7 @@ StaticNpc N(NpcData_KeepAwayBoo5) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo5),
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
@@ -559,7 +559,7 @@ StaticNpc N(NpcData_KeepAwayBoo6) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo6),
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
@@ -570,7 +570,7 @@ StaticNpc N(NpcData_KeepAwayBoo7) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo7),
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
@@ -581,7 +581,7 @@ StaticNpc N(NpcData_KeepAwayBoo8) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo8),
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
@@ -628,7 +628,7 @@ StaticNpc N(NpcData_KeepAwayExtras)[] = {
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Boo_10),
-        .drops = BOO_DROPS,
+        .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
     },
     {
@@ -638,7 +638,7 @@ StaticNpc N(NpcData_KeepAwayExtras)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000,
         .init = &N(EVS_NpcInit_Boo_11),
-        .drops = BOO_DROPS,
+        .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
     },
 };
@@ -650,7 +650,7 @@ StaticNpc N(NpcData_TutorialBoo) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_TutorialBoo),
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
     .tattle = MSG_NpcTattle_OBK_BootsTutor,
 };

@@ -194,7 +194,7 @@ StaticNpc N(NpcData_JumpScareBoo) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
@@ -205,7 +205,7 @@ StaticNpc N(NpcData_TrafficBoo1) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_TrafficBoo1),
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
@@ -216,7 +216,7 @@ StaticNpc N(NpcData_TrafficBoo2) = {
     .yaw = 0,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_TrafficBoo2),
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
@@ -228,7 +228,7 @@ StaticNpc N(NpcData_Boos)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_UpstairsBoo),
-        .drops = BOO_DROPS,
+        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -251,7 +251,7 @@ StaticNpc N(NpcData_Boos)[] = {
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Franky),
-        .drops = BOO_DROPS,
+        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,

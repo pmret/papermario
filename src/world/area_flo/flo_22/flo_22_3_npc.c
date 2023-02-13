@@ -110,7 +110,7 @@ StaticNpc N(NpcData_Bzzap) = {
     .yaw = 270,
     .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Bzzap),
-    .drops = BZZAP_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = BZZAP_ANIMS,
 };
 

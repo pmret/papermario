@@ -321,7 +321,7 @@ StaticNpc N(NpcData_Guards)[] = {
         .pos = { 505.0f, 230.0f, -120.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .drops = MAGIKOOPA_DROPS,
+        .drops = MAGINO_DROPS,
         .animations = MAGIKOOPA_ANIMS,
     },
 };

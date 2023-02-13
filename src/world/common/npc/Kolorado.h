@@ -2,13 +2,6 @@
 #include "sprite/npc/Kolorado.h"
 #include "sprite/npc/Archeologist.h"
 
-#define KOLORADO_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define KOLORADO_ANIMS \
 { \
     .idle   = ANIM_Kolorado_Idle, \

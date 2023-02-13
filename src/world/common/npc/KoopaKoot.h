@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/KoopaKoot.h"
 
-#define KOOPA_KOOT_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define KOOPA_KOOT_ANIMS \
 { \
     .idle   = ANIM_KoopaKoot_Idle, \

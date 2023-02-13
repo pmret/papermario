@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Bzzap.h"
 
-#define BZZAP_NO_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define BZZAP_DROPS \
 { \
     .dropFlags = NPC_DROP_FLAG_80, \

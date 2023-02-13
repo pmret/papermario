@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Bubulb.h"
 
-#define BUBULB_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define BUBULB_PINK_ANIMS \
 { \
     .idle   = ANIM_Bubulb_Pink_Idle, \

@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Rosie.h"
 
-#define ROSIE_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_STAT_DROPS, \
-    .flowerDrops = NO_STAT_DROPS, \
-}
-
 #define ROSIE_ANIMS \
 { \
     .idle   = ANIM_Rosie_Idle, \
