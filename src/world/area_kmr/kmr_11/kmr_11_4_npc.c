@@ -1,6 +1,6 @@
 #include "kmr_11.h"
 
-#include "world/common/enemy/complete/GoombaBros_Guard.inc.c"
+#include "world/common/enemy/GoombaBros_Guard.inc.c"
 
 EvtScript N(EVS_NpcIdle_GoombaBros_01) = {
     EVT_RETURN

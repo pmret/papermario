@@ -13,7 +13,7 @@ API_CALLABLE(N(UnlockStarBeam)) {
 #include "world/common/npc/StarSpirit.inc.c"
 #include "world/common/npc/Bowser.inc.c"
 
-#include "world/common/enemy/complete/Kammy_Flying.inc.c"
+#include "world/common/enemy/Kammy_Flying.inc.c"
 
 #include "world/common/npc/StarRod.inc.c"
 

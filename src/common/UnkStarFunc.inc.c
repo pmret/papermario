@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(UnkStarFunc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkStarFunc)) {
     PlayerData* playerData = &gPlayerData;
     Bytecode* args = script->ptrReadPos;
 

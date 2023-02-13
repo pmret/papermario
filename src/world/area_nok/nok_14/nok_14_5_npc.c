@@ -1,9 +1,9 @@
 #include "nok_14.h"
 
-#include "world/common/enemy/complete/KoopaTroopa_Wander.inc.c"
-#include "world/common/enemy/complete/SpikedGoomba_Wander.inc.c"
-#include "world/common/enemy/complete/Paratroopa.inc.c"
-#include "world/common/enemy/complete/KoopaTroopa_Stationary.inc.c"
+#include "world/common/enemy/KoopaTroopa_Wander.inc.c"
+#include "world/common/enemy/SpikedGoomba_Wander.inc.c"
+#include "world/common/enemy/Paratroopa.inc.c"
+#include "world/common/enemy/KoopaTroopa_Stationary.inc.c"
 
 EvtScript N(EVS_NpcIdle_KoopaTroopa_01) = {
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)

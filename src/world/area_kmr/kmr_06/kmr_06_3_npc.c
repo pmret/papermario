@@ -1,7 +1,7 @@
 #include "kmr_06.h"
 
-#include "world/common/enemy/complete/SpikedGoomba_Wander.inc.c"
-#include "world/common/enemy/complete/Paragoomba_Wander.inc.c"
+#include "world/common/enemy/SpikedGoomba_Wander.inc.c"
+#include "world/common/enemy/Paragoomba_Wander.inc.c"
 
 StaticNpc N(NpcData_SpikedGoomba) = {
     .id = NPC_SpikedGoomba,

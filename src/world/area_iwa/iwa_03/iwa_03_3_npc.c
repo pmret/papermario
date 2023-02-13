@@ -1,7 +1,7 @@
 #include "iwa_03.h"
 
-#include "world/common/enemy/complete/MontyMole_GroundAmbush.inc.c"
-#include "world/common/enemy/complete/Cleft.inc.c"
+#include "world/common/enemy/MontyMole_GroundAmbush.inc.c"
+#include "world/common/enemy/Cleft.inc.c"
 
 StaticNpc N(NpcData_Cleft_01) = {
     .id = NPC_Cleft_01,

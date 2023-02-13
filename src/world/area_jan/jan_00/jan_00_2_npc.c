@@ -10,7 +10,7 @@ NpcSettings N(NpcSettings_Kolorado_01) = {
 
 #include "world/common/npc/Kolorado.inc.c"
 #include "world/common/npc/JrTroopa.inc.c"
-#include "world/common/enemy/complete/HeartPlant.inc.c"
+#include "world/common/enemy/HeartPlant.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
 

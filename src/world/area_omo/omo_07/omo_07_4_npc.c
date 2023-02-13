@@ -1,8 +1,8 @@
 #include "omo_07.h"
 
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
-#include "world/common/enemy/complete/ShyGuy_Patrol.inc.c"
-#include "world/common/enemy/complete/SkyGuy.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/ShyGuy_Patrol.inc.c"
+#include "world/common/enemy/SkyGuy.inc.c"
 
 NpcSettings N(NpcSettings_Fuzzy) = {
     .height = 23,
@@ -19,7 +19,7 @@ NpcSettings N(NpcSettings_HammerBros) = {
     .level = 27,
 };
 
-#include "world/common/enemy/complete/Kammy_Flying.inc.c"
+#include "world/common/enemy/Kammy_Flying.inc.c"
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 #include "world/common/todo/UnsetCamera0Flag1000.inc.c"
 

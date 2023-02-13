@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(CanPlayerLoseAction)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(CanPlayerLoseAction)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 

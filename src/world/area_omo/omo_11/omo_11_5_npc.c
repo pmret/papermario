@@ -1,6 +1,6 @@
 #include "omo_11.h"
 
-#include "world/common/enemy/complete/PyroGuy.inc.c"
+#include "world/common/enemy/PyroGuy.inc.c"
 
 StaticNpc N(NpcData_PyroGuy_01) = {
     .id = NPC_PyroGuy_01,

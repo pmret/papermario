@@ -1,7 +1,7 @@
 #include "omo_08.h"
 
 #include "world/common/npc/TrainToad.inc.c"
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
 
 EvtScript N(EVS_NpcInteract_Conductor) = {
     EVT_CALL(DisablePlayerInput, TRUE)

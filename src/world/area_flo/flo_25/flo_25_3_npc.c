@@ -1,8 +1,8 @@
 #include "flo_25.h"
 
 #include "world/common/npc/GateFlower.inc.c"
-#include "world/common/enemy/complete/TuffPuff.inc.c"
-#include "world/common/enemy/complete/Bzzap.inc.c"
+#include "world/common/enemy/TuffPuff.inc.c"
+#include "world/common/enemy/Bzzap.inc.c"
 
 #include "world/common/complete/NormalItemChoice.inc.c"
 

@@ -8,7 +8,7 @@ s32 N(jump_icons)[] = { ITEM_BOOTS1_ICON, ITEM_BOOTS2_ICON, ITEM_BOOTS3_ICON };
 
 s32 N(jump_text)[] = { 76, 77, 78 };
 
-ApiStatus N(DisableRandomAbility)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(DisableRandomAbility)) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;

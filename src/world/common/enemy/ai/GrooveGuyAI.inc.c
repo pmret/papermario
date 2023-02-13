@@ -65,7 +65,7 @@ void N(GrooveGuyAI_03)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     }
 }
 
-ApiStatus N(GrooveGuyAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GrooveGuyAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;

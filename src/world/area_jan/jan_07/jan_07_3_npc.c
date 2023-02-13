@@ -2,7 +2,7 @@
 
 #include "world/common/npc/YoshiKid.inc.c"
 
-#include "world/common/enemy/complete/PutridPiranha.h"
+#include "world/common/enemy/PutridPiranha.h"
 
 NpcSettings N(NpcSettings_PutridPiranha) = {
     .height = 24,
@@ -10,7 +10,7 @@ NpcSettings N(NpcSettings_PutridPiranha) = {
     .level = 99,
 };
 
-#include "world/common/enemy/complete/SpearGuy_Wander.inc.c"
+#include "world/common/enemy/SpearGuy_Wander.inc.c"
 
 EvtScript N(EVS_YoshiKid_CryForHelp) = {
     EVT_SET(AF_JAN_02, FALSE)

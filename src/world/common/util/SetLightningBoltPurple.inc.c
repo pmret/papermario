@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-ApiStatus N(SetLightningBoltPurple)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetLightningBoltPurple)) {
     EffectInstance* effect = (EffectInstance*)script->varTable[15];
 
     effect->data.lightningBolt->outerColor.r = 85;

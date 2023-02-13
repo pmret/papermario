@@ -1,10 +1,10 @@
 #include "jan_14.h"
 
-#include "world/common/enemy/complete/JungleFuzzy.h"
+#include "world/common/enemy/JungleFuzzy.h"
 
 // uses base fuzzy includes instead of JungleFuzzy!
-#include "world/common/enemy/complete/Fuzzy_Wander.inc.c"
-#include "world/common/enemy/complete/Fuzzy.inc.c"
+#include "world/common/enemy/Fuzzy_Wander.inc.c"
+#include "world/common/enemy/Fuzzy.inc.c"
 
 EvtScript N(EVS_NpcIdle_JungleFuzzy) = {
     EVT_LABEL(0)

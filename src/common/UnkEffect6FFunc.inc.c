@@ -1,7 +1,7 @@
 #include "battle/battle.h"
 #include "effects.h"
 
-ApiStatus N(UnkEffect6FFunc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkEffect6FFunc)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect;
     s32 unused_var = evt_get_variable(script, *args++);

@@ -38,7 +38,7 @@ s32 N(MagikoopaAI_CanShootSpell)(Evt* script, f32 arg1, f32 arg2, EnemyDetectVol
     return -1;
 }
 
-ApiStatus N(MagikoopaAI_SpellMain)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MagikoopaAI_SpellMain)) {
     Enemy* enemy = script->owner1.enemy;
     Npc sp20;
     Npc* sp20Ptr = &sp20;

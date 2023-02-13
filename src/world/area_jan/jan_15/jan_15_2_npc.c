@@ -1,7 +1,7 @@
 #include "jan_15.h"
 
-#include "world/common/enemy/complete/PutridPiranhaSentinel.inc.c"
-#include "world/common/enemy/complete/HeartPlant.inc.c"
+#include "world/common/enemy/PutridPiranhaSentinel.inc.c"
+#include "world/common/enemy/HeartPlant.inc.c"
 
 EvtScript N(EVS_PutridPiranhas_IdleChomping) = {
     EVT_CHILD_THREAD

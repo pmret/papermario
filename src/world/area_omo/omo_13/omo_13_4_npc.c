@@ -1,7 +1,7 @@
 #include "omo_13.h"
 
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
-#include "world/common/enemy/complete/GrooveGuy.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/GrooveGuy.inc.c"
 
 NpcSettings N(NpcSettings_AntiGuy) = {
     .height = 23,

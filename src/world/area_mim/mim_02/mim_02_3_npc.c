@@ -7,7 +7,7 @@ EvtScript N(EVS_Unused_DoNothing) = {
 
 #include "world/common/npc/Oaklie.inc.c"
 
-#include "world/common/enemy/complete/ForestFuzzy_Wander.inc.c"
+#include "world/common/enemy/ForestFuzzy_Wander.inc.c"
 
 s32 N(KeyList)[] = {
     ITEM_FOREST_PASS,

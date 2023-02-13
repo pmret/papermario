@@ -3,7 +3,7 @@
 #include "world/common/npc/TrainToad.inc.c"
 #include "world/common/npc/Parakarry.inc.c"
 
-#include "world/common/enemy/complete/ShyGuy_Stationary.inc.c"
+#include "world/common/enemy/ShyGuy_Stationary.inc.c"
 
 EvtScript N(EVS_ItemPrompt_ToyTrain) = {
     EVT_CALL(DisablePlayerInput, TRUE)

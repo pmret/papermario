@@ -94,7 +94,7 @@ void N(FlyingNoAttackAI_20)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     }
 }
 
-ApiStatus N(FlyingNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(FlyingNoAttackAI_Main)) {
     #ifdef _DEAD_H_
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     #else

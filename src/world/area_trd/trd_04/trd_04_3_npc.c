@@ -2,9 +2,9 @@
 
 extern EvtScript N(EVS_80245198);
 
-#include "world/common/enemy/complete/KoopaTroopa_Wander.inc.c"
-#include "world/common/enemy/complete/KoopaTroopa_Patrol.inc.c"
-#include "world/common/enemy/complete/Paratroopa.inc.c"
+#include "world/common/enemy/KoopaTroopa_Wander.inc.c"
+#include "world/common/enemy/KoopaTroopa_Patrol.inc.c"
+#include "world/common/enemy/Paratroopa.inc.c"
 
 EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
     EVT_CALL(GetBattleOutcome, LVar0)

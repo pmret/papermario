@@ -1,7 +1,7 @@
 #include "sam_10.h"
 
 #define INCLUDE_FROST_CLUBBA_WANDER
-#include "world/common/enemy/complete/FrostClubba_Multi.inc.c"
+#include "world/common/enemy/FrostClubba_Multi.inc.c"
 
 StaticNpc N(NpcData_Clubba)[] = {
     {

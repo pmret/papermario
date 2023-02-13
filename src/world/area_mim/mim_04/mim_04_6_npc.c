@@ -1,6 +1,6 @@
 #include "mim_04.h"
 
-#include "world/common/enemy/complete/ForestFuzzy_Wander.inc.c"
+#include "world/common/enemy/ForestFuzzy_Wander.inc.c"
 
 #include "world/common/npc/Bubulb.inc.c"
 

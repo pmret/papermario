@@ -2,8 +2,8 @@
 
 #include "world/common/todo/UnkFunc42.inc.c"
 
-#include "world/common/enemy/complete/Lakitu.h"
-#include "world/common/enemy/complete/YMagikoopa.h"
+#include "world/common/enemy/Lakitu.h"
+#include "world/common/enemy/YMagikoopa.h"
 
 NpcSettings N(NpcSettings_Lakitu) = {
     .height = 32,

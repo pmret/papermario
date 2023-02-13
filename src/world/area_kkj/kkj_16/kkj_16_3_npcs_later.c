@@ -2,7 +2,7 @@
 
 #define NAME_SUFFIX _Later
 
-#include "world/common/enemy/complete/HammerBros.inc.c"
+#include "world/common/enemy/HammerBros.inc.c"
 
 s32 N(ExtraAnims_HammerBros)[] = {
     ANIM_HammerBros_Anim00,

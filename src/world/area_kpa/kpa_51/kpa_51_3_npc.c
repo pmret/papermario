@@ -1,8 +1,8 @@
 
 #include "kpa_51.h"
 
-#include "world/common/enemy/complete/Magikoopa.inc.c"
-#include "world/common/enemy/complete/Koopatrol_Wander.inc.c"
+#include "world/common/enemy/Magikoopa.inc.c"
+#include "world/common/enemy/Koopatrol_Wander.inc.c"
 
 StaticNpc N(NpcData_Magikoopa_01)[] = {
     {

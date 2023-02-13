@@ -31,7 +31,7 @@ API_CALLABLE(N(func_80242014_8B2084)) {
 
 #include "world/common/npc/GoombaFamily_Wander.inc.c"
 #include "world/common/npc/GoombaFamily.inc.c"
-#include "world/common/enemy/complete/Kammy_Guard.inc.c"
+#include "world/common/enemy/Kammy_Guard.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
 
 MAP_STATIC_PAD(1,key_choice);

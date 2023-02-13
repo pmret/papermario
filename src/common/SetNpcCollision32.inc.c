@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(SetNpcCollision32)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetNpcCollision32)) {
     Npc* npc = get_npc_unsafe(100);
 
     npc->collisionHeight = 32;

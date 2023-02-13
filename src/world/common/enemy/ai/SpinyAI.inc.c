@@ -8,7 +8,7 @@
 // prerequisites
 #include "world/common/enemy/ai/TackleAI.inc.c"
 
-ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpinyAI_Main)) {
     #ifdef _DEAD_H_
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     #else

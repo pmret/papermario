@@ -5,7 +5,7 @@
 #include "world/common/npc/Koopa.inc.c"
 #include "world/common/npc/Kolorado.inc.c"
 #include "world/common/npc/KoloradoWife.inc.c"
-#include "world/common/enemy/complete/Fuzzy.inc.c"
+#include "world/common/enemy/Fuzzy.inc.c"
 #include "world/common/npc/KoopaKoot.inc.c"
 #include "world/common/npc/Bobomb.inc.c"
 

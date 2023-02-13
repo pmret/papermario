@@ -1,7 +1,7 @@
 #include "kzn_07.h"
 #include "effects.h"
 
-#include "world/common/enemy/complete/LavaBubble.inc.c"
+#include "world/common/enemy/LavaBubble.inc.c"
 
 StaticNpc N(NpcData_LavaBubble_01) = {
     .id = NPC_Bubble_01,

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(RemoveChillOut)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(RemoveChillOut)) {
     Actor* actor = get_actor(script->owner1.actorID);
     s32 hudElementDataIndex = actor->hudElementDataIndex;
 

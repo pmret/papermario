@@ -1,6 +1,6 @@
 #include "kpa_111.h"
 
-#include "world/common/enemy/complete/DryBones.inc.c"
+#include "world/common/enemy/DryBones.inc.c"
 
 StaticNpc N(NpcData_DryBones)[] = {
     {

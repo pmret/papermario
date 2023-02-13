@@ -1,7 +1,7 @@
 
 #include "kpa_52.h"
 
-#include "world/common/enemy/complete/HammerBros_Wander.inc.c"
+#include "world/common/enemy/HammerBros_Wander.inc.c"
 
 StaticNpc N(NpcData_HammerBros_01)[] = {
     {

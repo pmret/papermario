@@ -1,6 +1,6 @@
 #include "kpa_130.h"
 
-#include "world/common/enemy/complete/BombshellBill.h"
+#include "world/common/enemy/BombshellBill.h"
 
 #include "world/common/enemy/ai/BulletBillAI.inc.c"
 

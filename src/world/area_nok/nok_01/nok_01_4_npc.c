@@ -18,7 +18,7 @@ NpcSettings N(NpcSettings_Unused3) = {
 };
 
 #include "world/common/npc/Koopa.inc.c"
-#include "world/common/enemy/complete/Fuzzy.inc.c"
+#include "world/common/enemy/Fuzzy.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/npc/Bobomb.inc.c"
 

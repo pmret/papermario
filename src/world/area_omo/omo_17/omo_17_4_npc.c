@@ -1,10 +1,10 @@
 #include "omo_17.h"
 
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
-#include "world/common/enemy/complete/PyroGuy.inc.c"
-#include "world/common/enemy/complete/GrooveGuy.inc.c"
-#include "world/common/enemy/complete/SkyGuy.inc.c"
-#include "world/common/enemy/complete/SpyGuy.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/PyroGuy.inc.c"
+#include "world/common/enemy/GrooveGuy.inc.c"
+#include "world/common/enemy/SkyGuy.inc.c"
+#include "world/common/enemy/SpyGuy.inc.c"
 
 EvtScript N(EVS_NpcAuxAI_Conductor) = {
     EVT_RETURN

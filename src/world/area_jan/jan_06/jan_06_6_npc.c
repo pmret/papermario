@@ -1,9 +1,9 @@
 #include "jan_06.h"
 
-#include "world/common/enemy/complete/JungleFuzzy_Wander.inc.c"
-#include "world/common/enemy/complete/HeartPlant.inc.c"
-#include "world/common/enemy/complete/HurtPlant.inc.c"
-#include "world/common/enemy/complete/SpearGuy_Wander.inc.c"
+#include "world/common/enemy/JungleFuzzy_Wander.inc.c"
+#include "world/common/enemy/HeartPlant.inc.c"
+#include "world/common/enemy/HurtPlant.inc.c"
+#include "world/common/enemy/SpearGuy_Wander.inc.c"
 
 s32 N(ExtraAnims_JungleFuzzy)[] = {
     ANIM_Fuzzy_Blue_Idle,

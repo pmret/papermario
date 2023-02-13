@@ -1,6 +1,6 @@
 #include "sam_03.h"
 
-#include "world/common/enemy/complete/Gulpit.inc.c"
+#include "world/common/enemy/Gulpit.inc.c"
 
 StaticNpc N(NpcData_Gulpit_01)[] = {
     {

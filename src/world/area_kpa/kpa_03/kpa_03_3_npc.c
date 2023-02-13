@@ -1,8 +1,8 @@
 #include "kpa_03.h"
 
-#include "world/common/enemy/complete/Koopatrol_Wander.inc.c"
-#include "world/common/enemy/complete/SpikeTop.inc.c"
-#include "world/common/enemy/complete/Magikoopa.inc.c"
+#include "world/common/enemy/Koopatrol_Wander.inc.c"
+#include "world/common/enemy/SpikeTop.inc.c"
+#include "world/common/enemy/Magikoopa.inc.c"
 
 s32 N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim01,

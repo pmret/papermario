@@ -1,6 +1,6 @@
 #include "omo_15.h"
 
-#include "world/common/enemy/complete/ShyGuy_Stationary.inc.c"
+#include "world/common/enemy/ShyGuy_Stationary.inc.c"
 
 enum {
     MANAGER_IDLE_STATE      = 0,

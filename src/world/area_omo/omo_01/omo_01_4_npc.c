@@ -1,6 +1,6 @@
 #include "omo_01.h"
 
-#include "world/common/enemy/complete/ShyGuy_AvoidPlayer.inc.c"
+#include "world/common/enemy/ShyGuy_AvoidPlayer.inc.c"
 
 EvtScript N(EVS_ShyGuy_CarryItem) = {
     EVT_SET(LVarA, LVar0) // npcID

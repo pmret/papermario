@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(AddHP)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AddHP)) {
     PlayerData* playerData = &gPlayerData;
 
     s32 amt = evt_get_variable(script, *script->ptrReadPos);

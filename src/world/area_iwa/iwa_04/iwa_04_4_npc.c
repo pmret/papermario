@@ -1,6 +1,6 @@
 #include "iwa_04.h"
 
-#include "world/common/enemy/complete/Cleft.inc.c"
+#include "world/common/enemy/Cleft.inc.c"
 
 API_CALLABLE(N(func_80241060_91C940)) {
     gCameras[CAM_DEFAULT].unk_498 = 1.0f;

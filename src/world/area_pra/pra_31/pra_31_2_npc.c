@@ -1,6 +1,6 @@
 #include "pra_31.h"
 
-#include "world/common/enemy/complete/AlbinoDino.inc.c"
+#include "world/common/enemy/AlbinoDino.inc.c"
 
 #include "world/common/complete/KeyItemChoice.inc.c"
 MAP_STATIC_PAD(1,key_item);

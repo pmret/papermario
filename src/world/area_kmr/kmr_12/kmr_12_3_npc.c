@@ -1,7 +1,7 @@
 #include "kmr_12.h"
 #include "entity.h"
 
-#include "world/common/enemy/complete/Goomba_Wander.inc.c"
+#include "world/common/enemy/Goomba_Wander.inc.c"
 
 API_CALLABLE(N(GetAmbushEnemy)) {
     script->varTablePtr[0] = get_enemy_safe(NPC_Goomba_Ambush);

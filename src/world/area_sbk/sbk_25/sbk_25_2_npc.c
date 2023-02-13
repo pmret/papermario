@@ -1,6 +1,6 @@
 #include "sbk_25.h"
 
-#include "world/common/enemy/complete/Bandit.inc.c"
+#include "world/common/enemy/Bandit.inc.c"
 
 StaticNpc N(NpcData_Bandit_01) = {
     .id = NPC_Bandit_01,

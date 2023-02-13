@@ -11,7 +11,7 @@
 // prerequisites
 #include "world/common/enemy/ai/States_PatrolAI.inc.c"
 
-ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(PatrolNoAttackAI_Main)) {
     #ifdef _DEAD_H_
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     #else

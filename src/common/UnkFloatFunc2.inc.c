@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(UnkFloatFunc2)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFloatFunc2)) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = evt_get_variable(script, *args++);
     s32 a1 = *args++;

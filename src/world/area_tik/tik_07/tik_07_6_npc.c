@@ -1,6 +1,6 @@
 #include "tik_07.h"
 
-#include "world/common/enemy/complete/Paragloomba_Wander.inc.c"
+#include "world/common/enemy/Paragloomba_Wander.inc.c"
 
 StaticNpc N(NpcData_Paragloomba_01) = {
     .id = NPC_Paragoomba_01,

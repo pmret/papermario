@@ -1,6 +1,6 @@
 #include "kzn_02.h"
 
-#include "world/common/enemy/complete/LavaBubble.inc.c"
+#include "world/common/enemy/LavaBubble.inc.c"
 
 #include "world/common/npc/Kolorado.inc.c"
 

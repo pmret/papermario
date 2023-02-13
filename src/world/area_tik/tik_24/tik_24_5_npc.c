@@ -1,6 +1,6 @@
 #include "tik_24.h"
 
-#include "world/common/enemy/complete/DarkTroopa_Wander.inc.c"
+#include "world/common/enemy/DarkTroopa_Wander.inc.c"
 
 StaticNpc N(NpcData_DarkTroopa_01) = {
     .id = NPC_DarkTroopa_01,

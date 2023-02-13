@@ -2,7 +2,7 @@
 
 #include "sprite/npc/WorldBow.h"
 
-#include "world/common/enemy/complete/TubbaBlubba.inc.c"
+#include "world/common/enemy/TubbaBlubba.inc.c"
 #include "world/common/npc/Boo_Patrol.inc.c"
 #include "world/common/npc/Boo.inc.c"
 

@@ -13,7 +13,7 @@ enum {
     FIRE_BAR_HIT        = 2,
 };
 
-ApiStatus N(FireBarAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(FireBarAI_Main)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     Bytecode* args = script->ptrReadPos;

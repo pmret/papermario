@@ -1,7 +1,7 @@
 #include "tik_18.h"
 
-#include "world/common/enemy/complete/Gloomba_Wander.inc.c"
-#include "world/common/enemy/complete/SpikedGloomba_Wander.inc.c"
+#include "world/common/enemy/Gloomba_Wander.inc.c"
+#include "world/common/enemy/SpikedGloomba_Wander.inc.c"
 
 EvtScript N(EVS_NpcIdle_SpikedGloomba) = {
     // wait for activation from block breaking

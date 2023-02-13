@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "model.h"
 
-ApiStatus N(CheckDripCollisionWithNPC)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(CheckDripCollisionWithNPC)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 treeIndex = evt_get_variable(script, *args++);

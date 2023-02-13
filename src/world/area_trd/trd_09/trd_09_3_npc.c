@@ -1,7 +1,7 @@
 #include "trd_09.h"
 #include "effects.h"
 
-#include "world/common/enemy/complete/BulletBill.h"
+#include "world/common/enemy/BulletBill.h"
 
 API_CALLABLE(N(func_80240000_9BD660)) {
     Bytecode* args = script->ptrReadPos;

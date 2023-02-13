@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "battle/action_cmd.h"
 
-ApiStatus N(IsBerserkerEquipped)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(IsBerserkerEquipped)) {
     script->varTable[0] = gBattleStatus.actionCommandMode;
     script->varTable[1] = 15;
 

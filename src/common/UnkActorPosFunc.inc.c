@@ -1,6 +1,6 @@
 #include "battle/battle.h"
 
-ApiStatus N(UnkActorPosFunc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkActorPosFunc)) {
     Actor* actor = get_actor(script->owner1.actorID);
     ActorState* actorState = &actor->state;
 

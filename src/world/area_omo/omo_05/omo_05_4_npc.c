@@ -1,8 +1,8 @@
 #include "omo_05.h"
 
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
-#include "world/common/enemy/complete/GrooveGuy.inc.c"
-#include "world/common/enemy/complete/SkyGuy.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/GrooveGuy.inc.c"
+#include "world/common/enemy/SkyGuy.inc.c"
 
 #include "world/common/npc/GourmetGuy.inc.c"
 

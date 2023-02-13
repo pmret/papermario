@@ -11,8 +11,8 @@ NpcSettings N(NpcSettings_Monstar) = {
 
 #include "world/common/npc/Twink.inc.c"
 
-#include "world/common/enemy/complete/Gulpit.inc.c"
-#include "world/common/enemy/complete/FrostPiranha.inc.c"
+#include "world/common/enemy/Gulpit.inc.c"
+#include "world/common/enemy/FrostPiranha.inc.c"
 
 EvtScript N(EVS_NpcAI_Monstar) = {
     EVT_LABEL(0)

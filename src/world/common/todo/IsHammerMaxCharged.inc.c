@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(IsHammerMaxCharged)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(IsHammerMaxCharged)) {
     script->varTable[0] = FALSE;
 
     if (gBattleStatus.hammerCharge >= 99) {

@@ -1,6 +1,6 @@
 #include "pra_36.h"
 
-#include "world/common/enemy/complete/Duplighost_Wander.inc.c"
+#include "world/common/enemy/Duplighost_Wander.inc.c"
 
 EvtScript N(EVS_NpcInit_Duplighost) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_REFLECT_FLOOR, TRUE)

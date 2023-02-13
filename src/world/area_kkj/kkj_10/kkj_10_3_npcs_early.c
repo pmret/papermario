@@ -1,7 +1,7 @@
 #include "kkj_10.h"
 
 #define NAME_SUFFIX _Early
-#include "world/common/enemy/complete/Koopatrol_Stationary.inc.c"
+#include "world/common/enemy/Koopatrol_Stationary.inc.c"
 
 #include "../common/Searchlights.inc.c"
 #include "../common/ApproachPlayer100Units.inc.c"

@@ -1,8 +1,8 @@
 #include "flo_08.h"
 
-#include "world/common/enemy/complete/AmazyDayzee.inc.c"
+#include "world/common/enemy/AmazyDayzee.inc.c"
 #include "world/common/npc/GateFlower.inc.c"
-#include "world/common/enemy/complete/CrazyDayzee.inc.c"
+#include "world/common/enemy/CrazyDayzee.inc.c"
 
 #include "world/common/complete/NormalItemChoice.inc.c"
 

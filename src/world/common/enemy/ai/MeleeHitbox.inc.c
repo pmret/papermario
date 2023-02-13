@@ -101,7 +101,7 @@ s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
     return ret;
 }
 
-ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MeleeHitbox_Main)) {
     #ifdef _DEAD_H_
     DeadEnemy* hitboxEnemy = (DeadEnemy*)script->owner1.enemy;
     #else

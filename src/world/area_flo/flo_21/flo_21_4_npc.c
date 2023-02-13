@@ -1,8 +1,8 @@
 #include "flo_21.h"
 #include "effects.h"
 
-#include "world/common/enemy/complete/HuffNPuff.h"
-#include "world/common/enemy/complete/TuffPuff.h"
+#include "world/common/enemy/HuffNPuff.h"
+#include "world/common/enemy/TuffPuff.h"
 
 #include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
 

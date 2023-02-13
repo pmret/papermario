@@ -2,7 +2,7 @@
 
 #define AI_SENTINEL_FIRST_NPC NPC_Sentinel
 #define AI_SENTINEL_LAST_NPC  NPC_Sentinel
-#include "world/common/enemy/complete/Sentinel.inc.c"
+#include "world/common/enemy/Sentinel.inc.c"
 
 StaticNpc N(NpcData_Sentinel) = {
     .id = NPC_Sentinel,

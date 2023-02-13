@@ -1,11 +1,11 @@
 #include "nok_11.h"
 
-#include "world/common/enemy/complete/Goomba_Wander.inc.c"
-#include "world/common/enemy/complete/KoopaTroopa_Wander.inc.c"
-#include "world/common/enemy/complete/Paragoomba_Wander.inc.c"
-#include "world/common/enemy/complete/SpikedGoomba_Wander.inc.c"
+#include "world/common/enemy/Goomba_Wander.inc.c"
+#include "world/common/enemy/KoopaTroopa_Wander.inc.c"
+#include "world/common/enemy/Paragoomba_Wander.inc.c"
+#include "world/common/enemy/SpikedGoomba_Wander.inc.c"
 #include "world/common/npc/JrTroopa.inc.c"
-#include "world/common/enemy/complete/KentCKoopa.inc.c"
+#include "world/common/enemy/KentCKoopa.inc.c"
 
 #include "common/foliage.inc.c"
 

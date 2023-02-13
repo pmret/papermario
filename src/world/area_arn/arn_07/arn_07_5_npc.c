@@ -1,9 +1,9 @@
 #include "arn_07.h"
 #include "effects.h"
 
-#include "world/common/enemy/complete/HyperParagoomba.inc.c"
+#include "world/common/enemy/HyperParagoomba.inc.c"
 #include "world/common/npc/TubbasHeart.inc.c"
-#include "world/common/enemy/complete/TubbaBlubba.inc.c"
+#include "world/common/enemy/TubbaBlubba.inc.c"
 #include "world/common/npc/Boo.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
 

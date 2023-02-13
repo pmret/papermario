@@ -3,7 +3,7 @@
 
 #include "TexturePan.h"
 
-ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UpdateTexturePanSmooth)) {
     script->varTable[9] += script->varTable[1];
     if (script->varTable[9] < 0) {
         script->varTable[9] += 0x20000;
@@ -39,7 +39,7 @@ ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(UpdateTexturePanStepped)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UpdateTexturePanStepped)) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
         script->functionTemp[1] = 0;

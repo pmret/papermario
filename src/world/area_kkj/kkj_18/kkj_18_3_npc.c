@@ -3,8 +3,8 @@
 #include "world/common/npc/GourmetGuy.inc.c"
 #include "world/common/npc/Dummy.inc.c"
 
-#include "world/common/enemy/complete/Kammy.inc.c"
-#include "world/common/enemy/complete/Koopatrol_Stationary.inc.c"
+#include "world/common/enemy/Kammy.inc.c"
+#include "world/common/enemy/Koopatrol_Stationary.inc.c"
 
 EvtScript N(EVS_NpcIdle_GourmetGuy) = {
     EVT_CALL(WaitForPlayerInputEnabled)

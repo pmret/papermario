@@ -1,7 +1,7 @@
 #include "flo_16.h"
 #include "entity.h"
 
-#include "world/common/enemy/complete/TuffPuff.inc.c"
+#include "world/common/enemy/TuffPuff.inc.c"
 
 StaticNpc N(NpcData_TuffPuff_01) = {
     .id = NPC_TuffPuff_01,

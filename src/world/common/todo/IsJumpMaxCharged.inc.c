@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(IsJumpMaxCharged)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(IsJumpMaxCharged)) {
     script->varTable[0] = FALSE;
 
     if (gBattleStatus.jumpCharge >= 99) {

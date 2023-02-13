@@ -1,6 +1,6 @@
 #include "flo_14.h"
 
-#include "world/common/enemy/complete/Bzzap.inc.c"
+#include "world/common/enemy/Bzzap.inc.c"
 
 #include "world/common/npc/Bubulb.h"
 

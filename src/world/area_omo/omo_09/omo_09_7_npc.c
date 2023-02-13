@@ -1,6 +1,6 @@
 #include "omo_09.h"
 
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
 
 MobileAISettings N(AISettings_ShyGuy_Wander_NoReaction) = {
     .moveSpeed = 2.0f,
@@ -33,11 +33,11 @@ NpcSettings N(NpcSettings_ShyGuy_Wander_NoReaction) = {
     .actionFlags = 0,
 };
 
-#include "world/common/enemy/complete/ShyGuy_Patrol.inc.c"
-#include "world/common/enemy/complete/SpyGuy.inc.c"
-#include "world/common/enemy/complete/Koopatrol_Stationary.inc.c"
-#include "world/common/enemy/complete/Pokey.inc.c"
-#include "world/common/enemy/complete/Kammy_Flying.inc.c"
+#include "world/common/enemy/ShyGuy_Patrol.inc.c"
+#include "world/common/enemy/SpyGuy.inc.c"
+#include "world/common/enemy/Koopatrol_Stationary.inc.c"
+#include "world/common/enemy/Pokey.inc.c"
+#include "world/common/enemy/Kammy_Flying.inc.c"
 
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 #include "world/common/todo/UnsetCamera0Flag1000.inc.c"

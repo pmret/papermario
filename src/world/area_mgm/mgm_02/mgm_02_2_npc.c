@@ -1012,7 +1012,7 @@ NpcSettings N(NpcSettings_Luigi) = {
     .level = 99,
 };
 
-#include "world/common/enemy/complete/Fuzzy.inc.c"
+#include "world/common/enemy/Fuzzy.inc.c"
 
 NpcSettings N(NpcSettings_Bobomb) = {
     .height = 23,

@@ -2,7 +2,7 @@
 
 #include "world/common/todo/GetPeachDisguise.inc.c"
 
-#include "world/common/enemy/complete/Clubba.inc.c"
+#include "world/common/enemy/Clubba.inc.c"
 
 s32 N(ExtraAnims_Clubba)[] = {
     ANIM_WorldClubba_Anim00,

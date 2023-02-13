@@ -199,7 +199,7 @@ void N(ClubbaNappingAI_FallAsleep)(Evt* script, MobileAISettings* aiSettings, En
     }
 }
 
-ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ClubbaNappingAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

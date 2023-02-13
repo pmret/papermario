@@ -1,7 +1,7 @@
 #include "jan_22.h"
 
 #include "world/common/npc/Kolorado.inc.c"
-#include "world/common/enemy/complete/SpearGuy_Patrol.inc.c"
+#include "world/common/enemy/SpearGuy_Patrol.inc.c"
 #include "world/common/npc/RaphaelRaven.inc.c"
 #include "world/common/npc/Raven.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"

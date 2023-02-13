@@ -3,7 +3,7 @@
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/npc/Penguin.inc.c"
 
-#include "world/common/enemy/complete/Koopatrol_Patrol.inc.c"
+#include "world/common/enemy/Koopatrol_Patrol.inc.c"
 
 #include "world/common/complete/ToadHouseBlanketAnim.inc.c"
 #include "world/common/atomic/ToadHouse.inc.c"

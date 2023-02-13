@@ -2,8 +2,8 @@
 
 #include "world/common/npc/Kolorado.inc.c"
 
-#include "world/common/enemy/complete/PutridPiranha.inc.c"
-#include "world/common/enemy/complete/SpikeTop.inc.c"
+#include "world/common/enemy/PutridPiranha.inc.c"
+#include "world/common/enemy/SpikeTop.inc.c"
 
 NpcSettings N(NpcSettings_Zipline) = {
     .height = 24,

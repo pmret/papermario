@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(SetPlayerStatusPosYaw)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetPlayerStatusPosYaw)) {
     Bytecode* args = script->ptrReadPos;
     f32 x = evt_get_float_variable(script, *args++);
     f32 y = evt_get_float_variable(script, *args++);

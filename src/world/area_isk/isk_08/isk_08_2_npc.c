@@ -1,6 +1,6 @@
 #include "isk_08.h"
 
-#include "world/common/enemy/complete/SpikeTop.inc.c"
+#include "world/common/enemy/SpikeTop.inc.c"
 
 StaticNpc N(NpcData_BuzzyBeetle) = {
     .id = NPC_BuzzyBeetle,

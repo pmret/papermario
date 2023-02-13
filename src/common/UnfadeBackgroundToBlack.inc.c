@@ -2,7 +2,7 @@
 #include "model.h"
 #include "map.h"
 
-ApiStatus N(UnfadeBackgroundToBlack)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnfadeBackgroundToBlack)) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
     }

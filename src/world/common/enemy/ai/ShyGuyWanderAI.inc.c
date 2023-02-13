@@ -57,7 +57,7 @@ void N(ShyGuyWanderAI_17)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     }
 }
 
-ApiStatus N(ShyGuyWanderAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ShyGuyWanderAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;

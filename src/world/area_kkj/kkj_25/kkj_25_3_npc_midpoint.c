@@ -4,7 +4,7 @@
 
 #include "world/common/npc/Bowser.inc.c"
 #include "world/common/npc/Dummy.inc.c"
-#include "world/common/enemy/complete/Kammy_Flying.inc.c"
+#include "world/common/enemy/Kammy_Flying.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
 
 #include "world/common/npc/Peach.h"

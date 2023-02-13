@@ -1,7 +1,7 @@
 #include "kpa_16.h"
 
-#include "world/common/enemy/complete/Koopatrol.h"
-#include "world/common/enemy/complete/Magikoopa.h"
+#include "world/common/enemy/Koopatrol.h"
+#include "world/common/enemy/Magikoopa.h"
 
 API_CALLABLE(N(SetScreenBlackFadeAmount)) {
     Bytecode* args = script->ptrReadPos;

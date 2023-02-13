@@ -191,7 +191,7 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
     EVT_END
 };
 
-#include "world/common/enemy/complete/Koopatrol_Stationary.inc.c"
+#include "world/common/enemy/Koopatrol_Stationary.inc.c"
 
 s32 N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim01,

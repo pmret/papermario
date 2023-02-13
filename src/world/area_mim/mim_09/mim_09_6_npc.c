@@ -1,7 +1,7 @@
 #include "mim_09.h"
 
 #include "world/common/npc/Oaklie.inc.c"
-#include "world/common/enemy/complete/ForestFuzzy_Wander.inc.c"
+#include "world/common/enemy/ForestFuzzy_Wander.inc.c"
 
 StaticNpc N(NpcData_Fuzzy) = {
     .id = NPC_Fuzzy,

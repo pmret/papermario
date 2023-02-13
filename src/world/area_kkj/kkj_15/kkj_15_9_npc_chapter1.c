@@ -3,7 +3,7 @@
 #define NAME_SUFFIX _Ch1
 
 #include "world/common/npc/Bowser.inc.c"
-#include "world/common/enemy/complete/Koopatrol_Stationary.inc.c"
+#include "world/common/enemy/Koopatrol_Stationary.inc.c"
 
 s32 N(ExtraAnims_Bowser)[] = {
     ANIM_WorldBowser_Still,

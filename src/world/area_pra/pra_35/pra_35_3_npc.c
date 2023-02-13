@@ -1,8 +1,8 @@
 #include "pra_35.h"
 
 #define INCLUDE_FROST_CLUBBA_PATROL
-#include "world/common/enemy/complete/FrostClubba_Multi.inc.c"
-#include "world/common/enemy/complete/Duplighost_Patrol.inc.c"
+#include "world/common/enemy/FrostClubba_Multi.inc.c"
+#include "world/common/enemy/Duplighost_Patrol.inc.c"
 
 #include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 

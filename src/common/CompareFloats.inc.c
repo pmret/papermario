@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(CompareFloats)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(CompareFloats)) {
     Bytecode* args = script->ptrReadPos;
     f32 temp_f20 = evt_get_float_variable(script, *args++);
     f32 temp = evt_get_float_variable(script, *args++);

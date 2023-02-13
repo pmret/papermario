@@ -129,7 +129,7 @@ void N(ProjectileHitbox_33)(Evt* script) {
     }
 }
 
-ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ProjectileAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     s32 phi_s6 = 0;
@@ -265,7 +265,7 @@ ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(ProjectileAI_Reflect)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ProjectileAI_Reflect)) {
     Enemy* enemy = script->owner1.enemy;
     Camera* camera = &gCameras[gCurrentCamID];
     s32 phi_s4 = 0;

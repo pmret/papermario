@@ -4,7 +4,7 @@
 
 #define AI_LAKITU_FIRST_SPINY_ID    NPC_Spiny_01
 #define AI_LAKITU_LAST_SPINY_ID     NPC_Spiny_04
-#include "world/common/enemy/complete/Lakitu_SpinySpawner.inc.c"
+#include "world/common/enemy/Lakitu_SpinySpawner.inc.c"
 
 StaticNpc N(NpcData_Lakitu_01) = {
     .id = NPC_Lakitu_01,

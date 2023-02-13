@@ -1,7 +1,7 @@
 #include "pra_32.h"
 #include "effects.h"
 
-#include "world/common/enemy/complete/CrystalKing.inc.c"
+#include "world/common/enemy/CrystalKing.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
 
 EvtScript N(EVS_AnimateCam_CrystalKing) = {

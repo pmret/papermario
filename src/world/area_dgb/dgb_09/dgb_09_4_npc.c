@@ -2,11 +2,11 @@
 
 #define INCLUDE_CLUBBA_WANDER
 #define INCLUDE_CLUBBA_NAPPING
-#include "world/common/enemy/complete/Clubba_Multi.inc.c"
+#include "world/common/enemy/Clubba_Multi.inc.c"
 
 #define AI_SENTINEL_FIRST_NPC NPC_Sentinel
 #define AI_SENTINEL_LAST_NPC  NPC_Sentinel
-#include "world/common/enemy/complete/Sentinel.inc.c"
+#include "world/common/enemy/Sentinel.inc.c"
 
 StaticNpc N(NpcData_Clubba_Wander)[] = {
     {

@@ -1,6 +1,6 @@
 #include "hos_02.h"
 
-#include "world/common/enemy/complete/Ember.inc.c"
+#include "world/common/enemy/Ember.inc.c"
 
 StaticNpc N(NpcData_Ember) = {
     .id = NPC_Ember_01,

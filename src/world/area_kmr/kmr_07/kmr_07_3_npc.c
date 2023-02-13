@@ -1,7 +1,7 @@
 #include "kmr_07.h"
 #include "animation_script.h"
 
-#include "world/common/enemy/complete/GoombaBros_Guard.inc.c"
+#include "world/common/enemy/GoombaBros_Guard.inc.c"
 
 extern AnimScript Entity_SimpleSpring_AnimLaunch;
 

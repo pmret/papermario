@@ -1,6 +1,6 @@
 #include "tik_09.h"
 
-#include "world/common/enemy/complete/DarkTroopa_Wander.inc.c"
+#include "world/common/enemy/DarkTroopa_Wander.inc.c"
 
 #include "world/common/util/GetDefeatedEnemyCount.inc.c"
 

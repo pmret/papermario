@@ -1,6 +1,6 @@
 #include "tik_04.h"
 
-#include "world/common/enemy/complete/SpikedGloomba_Wander.inc.c"
+#include "world/common/enemy/SpikedGloomba_Wander.inc.c"
 
 EvtScript N(EVS_NpcIdle_SpikedGloomba) = {
     EVT_CALL(GetEntryID, LVar0)

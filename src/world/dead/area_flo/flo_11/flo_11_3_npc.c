@@ -1,6 +1,6 @@
 #include "flo_11.h"
 
-#include "world/common/enemy/complete/Lakitu_Stationary.inc.c"
+#include "world/common/enemy/Lakitu_Stationary.inc.c"
 
 Vec3f N(FlightPath_Lakitu_01_Search)[] = {
     {  460.0,   200.0, -240.0 },

@@ -1,9 +1,9 @@
 #include "iwa_00.h"
 #include "effects.h"
 
-#include "world/common/enemy/complete/MontyMole_GroundAmbush.inc.c"
-#include "world/common/enemy/complete/MontyMole_WallAmbush.inc.c"
-#include "world/common/enemy/complete/Whacka.inc.c"
+#include "world/common/enemy/MontyMole_GroundAmbush.inc.c"
+#include "world/common/enemy/MontyMole_WallAmbush.inc.c"
+#include "world/common/enemy/Whacka.inc.c"
 
 #include "world/common/complete/GiveReward.inc.c"
 

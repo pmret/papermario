@@ -1,9 +1,9 @@
 #include "omo_04.h"
 
-#include "world/common/enemy/complete/SkyGuy.inc.c"
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/SkyGuy.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
 
-#include "world/common/enemy/complete/Goomba.h"
+#include "world/common/enemy/Goomba.h"
 
 // level changed from 5 -> 14
 NpcSettings N(NpcSettings_Goomba) = {
@@ -15,8 +15,8 @@ NpcSettings N(NpcSettings_Goomba) = {
     .actionFlags = AI_ACTION_JUMP_WHEN_SEE_PLAYER,
 };
 
-#include "world/common/enemy/complete/Clubba.inc.c"
-#include "world/common/enemy/complete/Kammy_Flying.inc.c"
+#include "world/common/enemy/Clubba.inc.c"
+#include "world/common/enemy/Kammy_Flying.inc.c"
 
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 #include "world/common/todo/UnsetCamera0Flag1000.inc.c"

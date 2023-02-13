@@ -1,8 +1,8 @@
 #include "flo_22.h"
 
 #include "world/common/npc/Dummy.inc.c"
-#include "world/common/enemy/complete/Bzzap.h"
-#include "world/common/enemy/complete/CrazyDayzee.h"
+#include "world/common/enemy/Bzzap.h"
+#include "world/common/enemy/CrazyDayzee.h"
 
 EvtScript N(EVS_NpcIdle_Bzzap) = {
     EVT_SET(MV_Bzzap_State, 0)

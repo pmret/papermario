@@ -1,6 +1,6 @@
 #include "mim_07.h"
 
-#include "world/common/enemy/complete/ForestFuzzy_Wander.inc.c"
+#include "world/common/enemy/ForestFuzzy_Wander.inc.c"
 
 NpcSettings N(NpcSettings_JrTroopa) = {
     .height = 32,

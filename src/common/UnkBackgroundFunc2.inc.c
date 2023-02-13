@@ -1,7 +1,7 @@
 #include "common.h"
 #include "model.h"
 
-ApiStatus N(UnkBackgroundFunc2)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkBackgroundFunc2)) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(FOG_MODE_1);
         *gBackgroundFogModePtr = FOG_MODE_1;

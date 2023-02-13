@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(UnkFunc12)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFunc12)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 posX, posY, posZ, hitDepth;
 

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-ApiStatus N(UnkFireBreathFXFunc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFireBreathFXFunc)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
     FireBreathFXData* data = effect->data.fireBreath;

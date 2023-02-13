@@ -1,8 +1,8 @@
 #include "pra_13.h"
 #include "sprite.h"
 
-#include "world/common/enemy/complete/Bombette.h"
-#include "world/common/enemy/complete/Duplighost.h"
+#include "world/common/enemy/Bombette.h"
+#include "world/common/enemy/Duplighost.h"
 
 NpcSettings N(NpcSettings_Player) = {
     .height = 30,

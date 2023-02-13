@@ -3,7 +3,7 @@
 #define NAME_SUFFIX _Ch0
 
 #include "world/common/npc/Bowser.inc.c"
-#include "world/common/enemy/complete/Kammy.inc.c"
+#include "world/common/enemy/Kammy.inc.c"
 
 #include "world/common/npc/KoopaBros.h"
 

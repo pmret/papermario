@@ -1,7 +1,7 @@
 #include "dgb_05.h"
 
 #define INCLUDE_CLUBBA_NAPPING
-#include "world/common/enemy/complete/Clubba_Multi.inc.c"
+#include "world/common/enemy/Clubba_Multi.inc.c"
 
 StaticNpc N(NpcData_Clubba_01)[] = {
     {

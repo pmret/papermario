@@ -1,11 +1,11 @@
 #include "jan_05.h"
 
-#include "world/common/enemy/complete/MBush.inc.c"
+#include "world/common/enemy/MBush.inc.c"
 #include "world/common/npc/YoshiKid.inc.c"
-#include "world/common/enemy/complete/HeartPlant.inc.c"
-#include "world/common/enemy/complete/HurtPlant.inc.c"
-#include "world/common/enemy/complete/JungleFuzzy_Wander.inc.c"
-#include "world/common/enemy/complete/SpearGuy_Wander.inc.c"
+#include "world/common/enemy/HeartPlant.inc.c"
+#include "world/common/enemy/HurtPlant.inc.c"
+#include "world/common/enemy/JungleFuzzy_Wander.inc.c"
+#include "world/common/enemy/SpearGuy_Wander.inc.c"
 
 EvtScript N(EVS_NpcIdle_JungleFuzzy) = {
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)

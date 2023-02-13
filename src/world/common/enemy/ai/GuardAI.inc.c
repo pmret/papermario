@@ -188,7 +188,7 @@ void N(GuardAI_ReturnHome)(Evt* script, GuardAISettings* aiSettings, EnemyDetect
     }
 }
 
-ApiStatus N(GuardAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GuardAI_Main)) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);

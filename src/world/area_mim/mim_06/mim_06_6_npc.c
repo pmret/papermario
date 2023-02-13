@@ -1,7 +1,7 @@
 #include "mim_06.h"
 
-#include "world/common/enemy/complete/PiranhaPlant.inc.c"
-#include "world/common/enemy/complete/ForestFuzzy_Wander.inc.c"
+#include "world/common/enemy/PiranhaPlant.inc.c"
+#include "world/common/enemy/ForestFuzzy_Wander.inc.c"
 
 StaticNpc N(NpcData_PiranhaPlant_01)[] = {
     {

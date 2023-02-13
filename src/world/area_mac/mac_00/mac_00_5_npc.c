@@ -2,7 +2,7 @@
 #include "effects.h"
 
 #include "world/common/npc/Toad_Stationary.inc.c"
-#include "world/common/enemy/complete/ShyGuy_Stationary.inc.c"
+#include "world/common/enemy/ShyGuy_Stationary.inc.c"
 #include "world/common/npc/Dummy.inc.c"
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo

@@ -1,6 +1,6 @@
 #include "kzn_11.h"
 
-#include "world/common/enemy/complete/LavaBubble.inc.c"
+#include "world/common/enemy/LavaBubble.inc.c"
 
 #include "sprite/npc/Fire.h"
 #include "world/common/enemy/ai/FireBarAI.inc.c"

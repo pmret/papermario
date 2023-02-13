@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(BuildItemChoiceList)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(BuildItemChoiceList)) {
     Bytecode* args = script->ptrReadPos;
     s32* allowedItemList = (s32*)evt_get_variable(script, *args++);
     s32 i;

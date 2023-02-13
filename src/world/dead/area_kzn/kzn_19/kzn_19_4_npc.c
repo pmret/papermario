@@ -3,7 +3,7 @@
 
 #include "world/common/npc/Kolorado.h"
 #include "world/common/npc/StarSpirit.h"
-#include "world/common/enemy/complete/LavaPiranha.h"
+#include "world/common/enemy/LavaPiranha.h"
 
 enum {
     VINE_0      = 0,

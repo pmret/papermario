@@ -12,7 +12,7 @@ NpcSettings N(NpcSettings_Lakilester) = {
 
 #define AI_LAKITU_FIRST_SPINY_ID    NPC_Spiny_01
 #define AI_LAKITU_LAST_SPINY_ID     NPC_Spiny_06
-#include "world/common/enemy/complete/Lakitu_SpinySpawner.inc.c"
+#include "world/common/enemy/Lakitu_SpinySpawner.inc.c"
 
 #include "world/common/todo/UnkFunc42.inc.c"
 

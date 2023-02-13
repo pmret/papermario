@@ -4,8 +4,8 @@
 extern EvtScript N(EVS_NpcAI_Tubba_Chase);
 extern EvtScript N(EVS_NpcAI_Tubba_WakeUp);
 
-#include "world/common/enemy/complete/TubbaBlubba_Patrol.inc.c"
-#include "world/common/enemy/complete/TubbaBlubba.inc.c"
+#include "world/common/enemy/TubbaBlubba_Patrol.inc.c"
+#include "world/common/enemy/TubbaBlubba.inc.c"
 
 #include "world/common/todo/UnkFunc1.inc.c"
 

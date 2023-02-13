@@ -1,8 +1,8 @@
 #include "kpa_102.h"
 
-#include "world/common/enemy/complete/HammerBros_Wander.inc.c"
-#include "world/common/enemy/complete/Koopatrol_Wander.inc.c"
-#include "world/common/enemy/complete/FlyingMagikoopa.inc.c"
+#include "world/common/enemy/HammerBros_Wander.inc.c"
+#include "world/common/enemy/Koopatrol_Wander.inc.c"
+#include "world/common/enemy/FlyingMagikoopa.inc.c"
 
 StaticNpc N(NpcData_Koopatrol) = {
     .id = NPC_Koopatrol,

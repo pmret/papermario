@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(GetJumpHammerCharge)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetJumpHammerCharge)) {
     Bytecode* args = script->ptrReadPos;
 
     evt_set_variable(script, *args++, gBattleStatus.jumpCharge);

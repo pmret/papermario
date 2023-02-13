@@ -1,6 +1,6 @@
 #include "kpa_01.h"
 
-#include "world/common/enemy/complete/SpikeTop.inc.c"
+#include "world/common/enemy/SpikeTop.inc.c"
 
 StaticNpc N(NpcData_BonyBeetle_01) = {
     .id = NPC_BonyBeetle_01,

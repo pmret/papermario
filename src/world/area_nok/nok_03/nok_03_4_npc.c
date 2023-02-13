@@ -1,7 +1,7 @@
 #include "nok_03.h"
 
-#include "world/common/enemy/complete/Fuzzy_Wander.inc.c"
-#include "world/common/enemy/complete/Fuzzy.inc.c"
+#include "world/common/enemy/Fuzzy_Wander.inc.c"
+#include "world/common/enemy/Fuzzy.inc.c"
 #include "world/common/npc/Koopa.inc.c"
 
 EvtScript N(EVS_NpcIdle_FuzzyBoss) = {

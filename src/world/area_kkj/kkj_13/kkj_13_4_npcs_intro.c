@@ -4,8 +4,8 @@
 
 #include "world/common/npc/Bowser.inc.c"
 #include "world/common/npc/Dummy.inc.c"
-#include "world/common/enemy/complete/Kammy.inc.c"
-#include "world/common/enemy/complete/Koopatrol_Stationary.inc.c"
+#include "world/common/enemy/Kammy.inc.c"
+#include "world/common/enemy/Koopatrol_Stationary.inc.c"
 #include "world/common/npc/Peach.inc.c"
 
 EvtScript N(EVS_NpcIdle_BowserAwaitBattle) = {

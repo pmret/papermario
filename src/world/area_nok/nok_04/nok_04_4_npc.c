@@ -23,7 +23,7 @@ typedef struct FuzzyThread {
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
-#include "world/common/enemy/complete/Fuzzy.inc.c"
+#include "world/common/enemy/Fuzzy.inc.c"
 #include "world/common/npc/Koopa.inc.c"
 
 #include "../common/GetIntoShell.inc.c"

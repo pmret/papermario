@@ -2,7 +2,7 @@
 
 #include "world/common/npc/StarSpirit.h"
 #include "world/common/npc/KoopaBros.h"
-#include "world/common/enemy/complete/ShyGuy.h"
+#include "world/common/enemy/ShyGuy.h"
 
 MAP_RODATA_PAD(1,npc);
 

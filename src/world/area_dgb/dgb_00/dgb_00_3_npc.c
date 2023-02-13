@@ -9,7 +9,7 @@ API_CALLABLE(N(PlaySentinelSounds)) {
 }
 
 #include "world/common/npc/Boo.inc.c"
-#include "world/common/enemy/complete/Sentinel.h"
+#include "world/common/enemy/Sentinel.h"
 
 NpcSettings N(NpcSettings_Sentinel) = {
     .height = 24,

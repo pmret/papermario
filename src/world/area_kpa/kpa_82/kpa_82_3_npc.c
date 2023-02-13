@@ -1,9 +1,9 @@
 #include "kpa_82.h"
 
-#include "world/common/enemy/complete/Goomba.h"
-#include "world/common/enemy/complete/KoopaTroopa.h"
-#include "world/common/enemy/complete/DarkTroopa.h"
-#include "world/common/enemy/complete/ShyGuy.h"
+#include "world/common/enemy/Goomba.h"
+#include "world/common/enemy/KoopaTroopa.h"
+#include "world/common/enemy/DarkTroopa.h"
+#include "world/common/enemy/ShyGuy.h"
 
 enum {
     ANSWER_CORRECT  = 0,

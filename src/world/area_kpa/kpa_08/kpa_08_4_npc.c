@@ -1,6 +1,6 @@
 #include "kpa_08.h"
 
-#include "world/common/enemy/complete/Magikoopa.inc.c"
+#include "world/common/enemy/Magikoopa.inc.c"
 
 StaticNpc N(NpcData_Magikoopa)[] = {
     {

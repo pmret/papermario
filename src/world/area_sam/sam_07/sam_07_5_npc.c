@@ -1,7 +1,7 @@
 #include "sam_07.h"
 
-#include "world/common/enemy/complete/Gulpit.inc.c"
-#include "world/common/enemy/complete/FrostPiranha.inc.c"
+#include "world/common/enemy/Gulpit.inc.c"
+#include "world/common/enemy/FrostPiranha.inc.c"
 
 StaticNpc N(NpcData_Gulpit)[] = {
     {

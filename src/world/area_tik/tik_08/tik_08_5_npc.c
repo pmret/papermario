@@ -2,7 +2,7 @@
 
 #include "world/common/todo/GetFloorCollider.inc.c"
 
-#include "world/common/enemy/complete/Blooper.inc.c"
+#include "world/common/enemy/Blooper.inc.c"
 
 EvtScript N(EVS_NpcIdle_Blooper) = {
     EVT_LOOP(0)

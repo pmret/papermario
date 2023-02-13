@@ -11,8 +11,8 @@ API_CALLABLE(N(DisableLightSource1)) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/enemy/complete/Clubba.h"
-#include "world/common/enemy/complete/Koopatrol_Stationary.inc.c"
+#include "world/common/enemy/Clubba.h"
+#include "world/common/enemy/Koopatrol_Stationary.inc.c"
 #include "world/common/npc/Dummy.inc.c"
 
 s32 N(ExtraAnims_Koopatrol)[] = {

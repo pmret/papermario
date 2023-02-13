@@ -1,7 +1,7 @@
 #include "pra_09.h"
 #include "effects.h"
 
-#include "world/common/enemy/complete/Duplighost.h"
+#include "world/common/enemy/Duplighost.h"
 
 NpcSettings N(NpcSettings_Duplighost) = {
     .height = 30,
@@ -9,7 +9,7 @@ NpcSettings N(NpcSettings_Duplighost) = {
     .level = 99,
 };
 
-#include "world/common/enemy/complete/Bombette.inc.c"
+#include "world/common/enemy/Bombette.inc.c"
 
 #include "world/common/complete/KeyItemChoice.inc.c"
 MAP_STATIC_PAD(1,key_item);

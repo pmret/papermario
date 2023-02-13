@@ -1,6 +1,6 @@
 #include "sbk_05.h"
 
-#include "world/common/enemy/complete/Pokey.inc.c"
+#include "world/common/enemy/Pokey.inc.c"
 
 StaticNpc N(NpcData_Pokey_01) = {
     .id = NPC_Pokey_01,

@@ -1,6 +1,6 @@
 #include "pra_04.h"
 
-#include "world/common/enemy/complete/Swooper.inc.c"
+#include "world/common/enemy/Swooper.inc.c"
 
 StaticNpc N(NpcData_Swoopula) = {
     .id = NPC_Swoopula,

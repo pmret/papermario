@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(GetBootsHammerLevel)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetBootsHammerLevel)) {
     Bytecode* args = script->ptrReadPos;
 
     evt_set_variable(script, *args++, gPlayerData.bootsLevel);

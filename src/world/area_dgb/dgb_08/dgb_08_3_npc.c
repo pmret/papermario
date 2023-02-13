@@ -1,7 +1,7 @@
 #include "dgb_08.h"
 
-#include "world/common/enemy/complete/TubbaBlubba_Patrol.inc.c"
-#include "world/common/enemy/complete/TubbaBlubba.inc.c"
+#include "world/common/enemy/TubbaBlubba_Patrol.inc.c"
+#include "world/common/enemy/TubbaBlubba.inc.c"
 
 NpcSettings N(NpcSettings_Yakkey) = {
     .height = 24,
@@ -10,11 +10,11 @@ NpcSettings N(NpcSettings_Yakkey) = {
 };
 
 #define INCLUDE_CLUBBA_WANDER
-#include "world/common/enemy/complete/Clubba_Multi.inc.c"
+#include "world/common/enemy/Clubba_Multi.inc.c"
 
 #define AI_SENTINEL_FIRST_NPC NPC_Sentinel_01
 #define AI_SENTINEL_LAST_NPC  NPC_Tubba
-#include "world/common/enemy/complete/Sentinel.inc.c"
+#include "world/common/enemy/Sentinel.inc.c"
 
 NpcSettings N(NpcSettings_LastClubba) = {
     .height = 24,

@@ -4,7 +4,7 @@
 
 #include "world/common/complete/NormalItemChoice.inc.c"
 
-#include "world/common/enemy/complete/Spiny.inc.c"
+#include "world/common/enemy/Spiny.inc.c"
 
 BSS s32 N(FlowerGuard_ItemChoiceList)[ITEM_NUM_CONSUMABLES + 1];
 #include "../common/ItemChoice_FlowerGuard.inc.c"

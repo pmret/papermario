@@ -1,8 +1,8 @@
 #include "nok_15.h"
 
-#include "world/common/enemy/complete/KoopaTroopa_Wander.inc.c"
-#include "world/common/enemy/complete/Paratroopa.inc.c"
-#include "world/common/enemy/complete/SpikedGoomba_Wander.inc.c"
+#include "world/common/enemy/KoopaTroopa_Wander.inc.c"
+#include "world/common/enemy/Paratroopa.inc.c"
+#include "world/common/enemy/SpikedGoomba_Wander.inc.c"
 
 StaticNpc N(NpcData_KoopaTroopa) = {
     .id = NPC_KoopaTroopa,

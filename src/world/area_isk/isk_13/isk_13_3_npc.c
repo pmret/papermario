@@ -1,7 +1,7 @@
 #include "isk_13.h"
 #include "sprite.h"
 
-#include "world/common/enemy/complete/StoneChomp.inc.c"
+#include "world/common/enemy/StoneChomp.inc.c"
 
 typedef struct StoneChompAmbushIsk13 {
     /* 0x00 */ s32 useBitingAnim;

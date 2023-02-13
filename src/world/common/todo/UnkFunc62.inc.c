@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFunc62)) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.enemyID);
     ActorState* state = &actor->state;

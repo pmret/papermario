@@ -23,8 +23,8 @@ API_CALLABLE(N(func_80240264_B06C64)) {
 #define NAME_SUFFIX _Unused1A
 #include "world/common/npc/Bowser.inc.c"
 #include "world/common/npc/Dummy.inc.c"
-#include "world/common/enemy/complete/Kammy_Flying.inc.c"
-#include "world/common/enemy/complete/ShyGuy_Stationary.inc.c"
+#include "world/common/enemy/Kammy_Flying.inc.c"
+#include "world/common/enemy/ShyGuy_Stationary.inc.c"
 #define NAME_SUFFIX _Unused1B
 #include "world/common/npc/Dummy.inc.c"
 #define NAME_SUFFIX

@@ -1,8 +1,8 @@
 #include "iwa_02.h"
 
-#include "world/common/enemy/complete/MontyMole_GroundAmbush.inc.c"
-#include "world/common/enemy/complete/MontyMole_WallAmbush.inc.c"
-#include "world/common/enemy/complete/Cleft.inc.c"
+#include "world/common/enemy/MontyMole_GroundAmbush.inc.c"
+#include "world/common/enemy/MontyMole_WallAmbush.inc.c"
+#include "world/common/enemy/Cleft.inc.c"
 #include "world/common/npc/Bubulb.inc.c"
 
 #include "world/common/complete/GiveReward.inc.c"

@@ -2,8 +2,8 @@
 
 extern EvtScript N(EVS_RestoreMagicDoors);
 
-#include "world/common/enemy/complete/KoopaTroopa_Wander.inc.c"
-#include "world/common/enemy/complete/Paratroopa.inc.c"
+#include "world/common/enemy/KoopaTroopa_Wander.inc.c"
+#include "world/common/enemy/Paratroopa.inc.c"
 
 #include "world/common/util/GetDefeatedEnemyCount.inc.c"
 

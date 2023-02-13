@@ -1,6 +1,6 @@
 #include "mim_01.h"
 
-#include "world/common/enemy/complete/PiranhaPlant.inc.c"
+#include "world/common/enemy/PiranhaPlant.inc.c"
 
 StaticNpc N(NpcData_PiranhaPlant)[] = {
     {

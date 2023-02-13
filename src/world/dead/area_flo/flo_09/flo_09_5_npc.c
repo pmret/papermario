@@ -1,8 +1,8 @@
 #include "flo_09.h"
 
-#include "world/common/enemy/complete/CrazyDayzee.inc.c"
+#include "world/common/enemy/CrazyDayzee.inc.c"
 
-#include "world/common/enemy/complete/Bzzap.inc.c"
+#include "world/common/enemy/Bzzap.inc.c"
 
 NpcSettings N(NpcSettings_Bzzap_02) = {
     .height = 24,

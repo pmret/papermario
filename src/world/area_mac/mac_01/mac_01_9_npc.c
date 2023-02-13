@@ -8,7 +8,7 @@ extern EvtScript N(EVS_MerlonBargeOut);
 #include "world/common/npc/Toad_Wander.inc.c"
 #include "world/common/npc/Toad_Patrol.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
-#include "world/common/enemy/complete/ShyGuy_Stationary.inc.c"
+#include "world/common/enemy/ShyGuy_Stationary.inc.c"
 
 NpcSettings N(NpcSettings_Ninji) = {
     .height = 24,
