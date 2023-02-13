@@ -55,6 +55,7 @@ enum {
     AF_KKJ_17                   = AreaFlag(23),
     AF_KKJ_18                   = AreaFlag(24),
     AF_KKJ_19                   = AreaFlag(25),
+    AF_KKJ_1A                   = AreaFlag(26),
 };
 
 extern MapSettings kkj_00_settings;

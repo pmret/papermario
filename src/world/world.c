@@ -6,6 +6,31 @@
 #include "sprite.h"
 #include "model.h"
 
+s32 WorldReverbModeMapping[] = { 0, 1, 2, 3 };
+
+//TODO possible data split here
+
+Vec3s gEntityColliderFaces[] = {
+    { 4, 6, 5 }, { 4, 7, 6 },
+    { 0, 3, 4 }, { 3, 7, 4 },
+    { 3, 2, 7 }, { 2, 6, 7 },
+    { 2, 1, 6 }, { 1, 5, 6 },
+    { 1, 0, 5 }, { 0, 4, 5 },
+    { 0, 1, 2 }, { 0, 2, 3 },
+};
+
+Vec3f gEntityColliderNormals[] = {
+    {  0.0f,  1.0f,  0.0f }, {  0.0f,  1.0f,  0.0f },
+    {  1.0f,  0.0f,  0.0f }, {  1.0f,  0.0f,  0.0f },
+    {  0.0f,  0.0f, -1.0f }, {  0.0f,  0.0f, -1.0f },
+    { -1.0f,  0.0f,  0.0f }, { -1.0f,  0.0f,  0.0f },
+    {  0.0f,  0.0f,  1.0f }, {  0.0f,  0.0f,  1.0f },
+    {  0.0f, -1.0f,  0.0f }, {  0.0f, -1.0f,  0.0f },
+};
+
+//TODO data split here!
+s32 pad_map_table[] = { 0, 0 };
+
 #ifdef SHIFT
 #define ASSET_TABLE_ROM_START mapfs_ROM_START
 #else
@@ -14,8 +39,6 @@
 
 #define ASSET_TABLE_HEADER_SIZE 0x20
 #define ASSET_TABLE_FIRST_ENTRY (ASSET_TABLE_ROM_START + ASSET_TABLE_HEADER_SIZE)
-
-s32 WorldReverbModeMapping[] = { 0, 1, 2, 3 };
 
 // bss
 MapSettings gMapSettings;
@@ -270,22 +293,6 @@ INCLUDE_ASM_SHIFT(s32, "world/world", get_asset_offset);
 #define MAP_WITH_INIT(map) \
     MAP(map), \
     .init = &map##_map_init \
-
-// Should be removed once the data section containing .init and .settings of all maps have been disassembled
-#define MAP_UNSPLIT(map, settingsVRAM) \
-    .id = #map, \
-    .settings = (MapSettings*)(settingsVRAM), \
-    .dmaStart = map##_ROM_START, \
-    .dmaEnd = map##_ROM_END, \
-    .dmaDest = map##_VRAM \
-
-// these, along with all the *_maps, almost certainly belong in the next file
-s16 gEntityColliderFaces[] = { 4, 6, 5, 4, 7, 6, 0, 3, 4, 3, 7, 4, 3, 2, 7, 2, 6, 7, 2, 1, 6, 1, 5, 6, 1, 0, 5,
-                                 0, 4, 5, 0, 1, 2, 0, 2, 3};
-
-f32 gEntityColliderNormals[] = { 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
-                                       0.0f, -1.0f, 0.0f, 0.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
-                                       1.0f, 0.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f};
 
 /// Toad Town
 #include "area_mac/mac.h"
@@ -584,7 +591,7 @@ MapConfig kkj_maps[] = {
     { MAP(kkj_22), .bgName = "kpa_bg", .songVariation = 1, .sfxReverb = 2 },
     { MAP_WITH_INIT(kkj_23), .bgName = "kpa_bg" },
     { MAP(kkj_24), .bgName = "kpa_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(kkj_25, 0x80240F50), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
+    { MAP_WITH_INIT(kkj_25), .bgName = "kpa_bg" },
     { MAP(kkj_26), .bgName = "kpa_bg" },
     { MAP(kkj_26), .sfxReverb = 2 },
     { MAP(kkj_27), .sfxReverb = 1 },
@@ -880,5 +887,3 @@ AreaConfig gAreas[] = {
     AREA(tst, "テストマップ"),  // tesuto mappu [Test map]
     {},
 };
-
-const f32 world_rodata_alignment = 0.0f;

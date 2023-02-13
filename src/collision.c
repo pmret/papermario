@@ -32,13 +32,7 @@ typedef struct HitAssetCollider {
     /* 0x08 */ s32 trianglesOffset;
 } HitAssetCollider; // size = 0x0C
 
-typedef struct VertexIndexStruct {
-    /* 0x00 */ s16 i1;
-    /* 0x02 */ s16 i2;
-    /* 0x04 */ s16 i3;
-} VertexIndexStruct; // size = 0x06
-
-extern VertexIndexStruct gEntityColliderFaces[];
+extern Vec3s gEntityColliderFaces[];
 extern Vec3f gEntityColliderNormals[];
 extern f32 gCollisionRayStartX;
 extern f32 gCollisionRayStartY;
@@ -1017,9 +1011,9 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
                   startZ - entity->position.z, &gCollisionRayStartX, &gCollisionRayStartY, &gCollisionRayStartZ);
 
         for (j = 0; j < 12; j++) {
-            Vec3f* v1 = triangle->v1 = &boxVertices[gEntityColliderFaces[j].i1];
-            Vec3f* v2 = triangle->v2 = &boxVertices[gEntityColliderFaces[j].i2];
-            Vec3f* v3 = triangle->v3 = &boxVertices[gEntityColliderFaces[j].i3];
+            Vec3f* v1 = triangle->v1 = &boxVertices[gEntityColliderFaces[j].x];
+            Vec3f* v2 = triangle->v2 = &boxVertices[gEntityColliderFaces[j].y];
+            Vec3f* v3 = triangle->v3 = &boxVertices[gEntityColliderFaces[j].z];
             triangle->e13.x = v3->x - v1->x;
             triangle->e13.y = v3->y - v1->y;
             triangle->e13.z = v3->z - v1->z;
