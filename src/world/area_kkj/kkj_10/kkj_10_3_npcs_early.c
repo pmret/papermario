@@ -118,7 +118,7 @@ EvtScript N(EVS_NpcInit_Koopatrol_02) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Koopatrol)[] = {
+AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim02,
     ANIM_WorldKoopatrol_Anim05,
     ANIM_WorldKoopatrol_Anim07,

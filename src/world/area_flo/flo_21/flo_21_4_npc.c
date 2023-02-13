@@ -574,7 +574,7 @@ EvtScript N(EVS_NpcInit_TuffPuff) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_HuffNPuff)[] = {
+AnimID N(ExtraAnims_HuffNPuff)[] = {
     ANIM_HuffNPuff_Anim00,
     ANIM_HuffNPuff_Anim01,
     ANIM_HuffNPuff_Anim02,
@@ -622,7 +622,7 @@ NpcData N(NpcData_HuffNPuff)[] = {
     },
 };
 
-s32 N(ExtraAnims_TuffPuff)[] = {
+AnimID N(ExtraAnims_TuffPuff)[] = {
     ANIM_TuffPuff_Dizzy,
     ANIM_LIST_END
 };

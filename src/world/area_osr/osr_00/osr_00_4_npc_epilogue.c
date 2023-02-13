@@ -195,25 +195,25 @@ EvtScript N(EVS_NpcInit_ToadGuard_02) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_YoshiLeader)[] = {
+AnimID N(ExtraAnims_YoshiLeader)[] = {
     ANIM_VillageLeader_Still,
     ANIM_VillageLeader_Idle,
     ANIM_VillageLeader_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Yoshi)[] = {
+AnimID N(ExtraAnims_Yoshi)[] = {
     ANIM_Yoshi_Green_Still,
     ANIM_Yoshi_Green_Idle,
     ANIM_Yoshi_Green_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_YoshiKid)[] = {
+AnimID N(ExtraAnims_YoshiKid)[] = {
     ANIM_YoshiKid_Green_Still,
     ANIM_YoshiKid_Green_Idle,
     ANIM_YoshiKid_Green_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Yoshis)[] = {
@@ -255,25 +255,25 @@ NpcData N(NpcData_Yoshis)[] = {
     },
 };
 
-s32 N(ExtraAnims_MayorPenguin)[] = {
+AnimID N(ExtraAnims_MayorPenguin)[] = {
     ANIM_MayorPenguin_Still,
     ANIM_MayorPenguin_Idle,
     ANIM_MayorPenguin_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_MayorPenguinWife)[] = {
+AnimID N(ExtraAnims_MayorPenguinWife)[] = {
     ANIM_MayorPenguinWife_Still,
     ANIM_MayorPenguinWife_Idle,
     ANIM_MayorPenguinWife_Laugh,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Penguin)[] = {
+AnimID N(ExtraAnims_Penguin)[] = {
     ANIM_Penguin_Still,
     ANIM_Penguin_Idle,
     ANIM_Penguin_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Penguins)[] = {
@@ -325,18 +325,18 @@ NpcData N(NpcData_Penguins)[] = {
     },
 };
 
-s32 N(ExtraAnims_Moustafa)[] = {
+AnimID N(ExtraAnims_Moustafa)[] = {
     ANIM_Moustafa_Still,
     ANIM_Moustafa_Idle,
     ANIM_Moustafa_Shout,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Mouser)[] = {
+AnimID N(ExtraAnims_Mouser)[] = {
     ANIM_Mouser_Blue_Still,
     ANIM_Mouser_Blue_Idle,
     ANIM_Mouser_Blue_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Mousers)[] = {
@@ -365,11 +365,11 @@ NpcData N(NpcData_Mousers)[] = {
     },
 };
 
-s32 N(ExtraAnims_Boos)[] = {
+AnimID N(ExtraAnims_Boos)[] = {
     ANIM_Boo_Still,
     ANIM_Boo_Idle,
     ANIM_Boo_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Boos)[] = {
@@ -397,18 +397,18 @@ NpcData N(NpcData_Boos)[] = {
     },
 };
 
-s32 N(ExtraAnims_Toad)[] = {
+AnimID N(ExtraAnims_Toad)[] = {
     ANIM_Toad_Red_Still,
     ANIM_Toad_Red_Idle,
     ANIM_Toad_Red_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_ToadGuard)[] = {
+AnimID N(ExtraAnims_ToadGuard)[] = {
     ANIM_ToadGuard_Red_Still,
     ANIM_ToadGuard_Red_Idle,
     ANIM_ToadGuard_Red_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Toads)[] = {

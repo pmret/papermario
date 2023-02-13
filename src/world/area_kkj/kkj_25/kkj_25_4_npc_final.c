@@ -65,34 +65,34 @@ EvtScript N(EVS_NpcInit_Twink_02) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Bowser)[] = {
+AnimID N(ExtraAnims_Bowser)[] = {
     ANIM_WorldBowser_Idle,
     ANIM_WorldBowser_Walk,
     ANIM_WorldBowser_Talk,
     ANIM_WorldBowser_Shock,
     ANIM_WorldBowser_DefeatedIdle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Peach)[] = {
+AnimID N(ExtraAnims_Peach)[] = {
     ANIM_Peach_A0001,
     ANIM_Peach_A0002,
     ANIM_Peach_C0000,
     ANIM_Peach_C0006,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Kammy)[] = {
+AnimID N(ExtraAnims_Kammy)[] = {
     ANIM_BattleKammy_Anim04,
     ANIM_BattleKammy_Anim06,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Twink)[] = {
+AnimID N(ExtraAnims_Twink)[] = {
     ANIM_Twink_Idle,
     ANIM_Twink_Talk,
     ANIM_Twink_Cringe,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Bowser) = {

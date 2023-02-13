@@ -225,7 +225,7 @@ EvtScript N(EVS_NpcInit_Koopatrol_05) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Koopatrol)[] = {
+AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim01,
     ANIM_WorldKoopatrol_Anim04,
     ANIM_WorldKoopatrol_Anim06,
@@ -234,7 +234,7 @@ s32 N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim05,
     ANIM_WorldKoopatrol_Anim07,
     ANIM_WorldKoopatrol_Anim09,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Minions)[] = {

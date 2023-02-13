@@ -5,23 +5,23 @@
 #include "world/common/npc/Bowser.inc.c"
 #include "world/common/enemy/Koopatrol_Stationary.inc.c"
 
-s32 N(ExtraAnims_Bowser)[] = {
+AnimID N(ExtraAnims_Bowser)[] = {
     ANIM_WorldBowser_Still,
     ANIM_WorldBowser_Idle,
     ANIM_WorldBowser_Walk,
     ANIM_WorldBowser_Talk,
     ANIM_WorldBowser_Shock,
     ANIM_WorldBowser_AngryTalk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Koopatrol)[] = {
+AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim01,
     ANIM_WorldKoopatrol_Anim06,
     ANIM_WorldKoopatrol_Anim08,
     ANIM_WorldKoopatrol_Anim12,
     ANIM_WorldKoopatrol_Anim14,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Characters)[] = {

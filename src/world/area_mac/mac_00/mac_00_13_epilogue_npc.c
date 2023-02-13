@@ -137,13 +137,13 @@ EvtScript N(EVS_NpcInit_HarryT_Epilogue) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Luigi_Epilogue)[] = {
+AnimID N(ExtraAnims_Luigi_Epilogue)[] = {
     ANIM_Luigi_Still,
     ANIM_Luigi_Idle,
     ANIM_Luigi_Walk,
     ANIM_Luigi_Run,
     ANIM_Luigi_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Luigi_Epilogue) = {
@@ -157,25 +157,25 @@ NpcData N(NpcData_Luigi_Epilogue) = {
     .extraAnimations = N(ExtraAnims_Luigi_Epilogue),
 };
 
-s32 N(ExtraAnims_Goompapa_Epilogue)[] = {
+AnimID N(ExtraAnims_Goompapa_Epilogue)[] = {
     ANIM_Goompapa_Still,
     ANIM_Goompapa_Idle,
     ANIM_Goompapa_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Goomama_Epilogue)[] = {
+AnimID N(ExtraAnims_Goomama_Epilogue)[] = {
     ANIM_Goomama_Still,
     ANIM_Goomama_Idle,
     ANIM_Goomama_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Gooma_Epilogue)[] = {
+AnimID N(ExtraAnims_Gooma_Epilogue)[] = {
     ANIM_Gooma_Still,
     ANIM_Gooma_Idle,
     ANIM_Gooma_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_GoombaFamilypa_Epilogue)[] = {
@@ -217,18 +217,18 @@ NpcData N(NpcData_GoombaFamilypa_Epilogue)[] = {
     },
 };
 
-s32 N(ExtraAnims_Quizmo_Epilogue)[] = {
+AnimID N(ExtraAnims_Quizmo_Epilogue)[] = {
     ANIM_ChuckQuizmo_Still,
     ANIM_ChuckQuizmo_Idle,
     ANIM_ChuckQuizmo_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_VannaT_Epilogue)[] = {
+AnimID N(ExtraAnims_VannaT_Epilogue)[] = {
     ANIM_VannaT_Still,
     ANIM_VannaT_Happy,
     ANIM_VannaT_Wave,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_ChuckQuizmo_Epilogue)[] = {
@@ -373,11 +373,11 @@ NpcData N(NpcData_DojoMembers_Epilogue)[] = {
     },
 };
 
-s32 N(ExtraAnims_HarryT_Epilogue)[] = {
+AnimID N(ExtraAnims_HarryT_Epilogue)[] = {
     ANIM_HarryT_Still,
     ANIM_HarryT_Idle,
     ANIM_HarryT_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Toad_01_Epilogue)[] = {

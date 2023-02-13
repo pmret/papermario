@@ -46,7 +46,7 @@ EvtScript N(EVS_NpcInit_ToadGuard_03) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Peach)[] = {
+AnimID N(ExtraAnims_Peach)[] = {
     ANIM_Peach_A0000,
     ANIM_Peach_A0001,
     ANIM_Peach_C0026,
@@ -56,178 +56,178 @@ s32 N(ExtraAnims_Peach)[] = {
     ANIM_Peach_A0002,
     ANIM_Peach_C0010,
     ANIM_Peach_D000F,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Minister)[] = {
+AnimID N(ExtraAnims_Minister)[] = {
     ANIM_ToadMinister_Still,
     ANIM_ToadMinister_Idle,
     ANIM_ToadMinister_Walk,
     ANIM_ToadMinister_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_TayceT)[] = {
+AnimID N(ExtraAnims_TayceT)[] = {
     ANIM_TayceT_Still,
     ANIM_TayceT_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_RussT)[] = {
+AnimID N(ExtraAnims_RussT)[] = {
     ANIM_RussT_Still,
     ANIM_RussT_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_ShiverToad)[] = {
+AnimID N(ExtraAnims_ShiverToad)[] = {
     ANIM_ShiverToad_Red_Still,
     ANIM_ShiverToad_Red_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Toad)[] = {
+AnimID N(ExtraAnims_Toad)[] = {
     ANIM_Toad_Red_Still,
     ANIM_Toad_Red_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Toadette)[] = {
+AnimID N(ExtraAnims_Toadette)[] = {
     ANIM_Toadette_Orange_Still,
     ANIM_Toadette_Orange_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_ToadGuard)[] = {
+AnimID N(ExtraAnims_ToadGuard)[] = {
     ANIM_ToadGuard_Red_Still,
     ANIM_ToadGuard_Red_Idle,
     ANIM_ToadGuard_Red_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Goombario)[] = {
+AnimID N(ExtraAnims_Goombario)[] = {
     ANIM_WorldGoombario_Still,
     ANIM_WorldGoombario_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Kooper)[] = {
+AnimID N(ExtraAnims_Kooper)[] = {
     ANIM_WorldKooper_Still,
     ANIM_WorldKooper_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Bombette)[] = {
+AnimID N(ExtraAnims_Bombette)[] = {
     ANIM_WorldBombette_Still,
     ANIM_WorldBombette_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Parakarry)[] = {
+AnimID N(ExtraAnims_Parakarry)[] = {
     ANIM_WorldParakarry_Still,
     ANIM_WorldParakarry_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Bow)[] = {
+AnimID N(ExtraAnims_Bow)[] = {
     ANIM_WorldBow_Still,
     ANIM_WorldBow_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Watt)[] = {
+AnimID N(ExtraAnims_Watt)[] = {
     ANIM_WorldWatt_Still,
     ANIM_WorldWatt_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Sushie)[] = {
+AnimID N(ExtraAnims_Sushie)[] = {
     ANIM_WorldSushie_Still,
     ANIM_WorldSushie_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Lakilester)[] = {
+AnimID N(ExtraAnims_Lakilester)[] = {
     ANIM_WorldLakilester_Still,
     ANIM_WorldLakilester_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Merlon)[] = {
+AnimID N(ExtraAnims_Merlon)[] = {
     ANIM_Merlon_Still,
     ANIM_Merlon_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Merluvlee)[] = {
+AnimID N(ExtraAnims_Merluvlee)[] = {
     ANIM_Merluvlee_Still,
     ANIM_Merluvlee_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Merlow)[] = {
+AnimID N(ExtraAnims_Merlow)[] = {
     ANIM_Merlow_Still,
     ANIM_Merlow_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Merlee)[] = {
+AnimID N(ExtraAnims_Merlee)[] = {
     ANIM_WorldMerlee_Still,
     ANIM_WorldMerlee_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Merle)[] = {
+AnimID N(ExtraAnims_Merle)[] = {
     ANIM_Merle_Still,
     ANIM_Merle_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Lakilulu)[] = {
+AnimID N(ExtraAnims_Lakilulu)[] = {
     ANIM_Lakilulu_Still,
     ANIM_Lakilulu_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Bootler)[] = {
+AnimID N(ExtraAnims_Bootler)[] = {
     ANIM_Bootler_Still,
     ANIM_Bootler_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Goompa)[] = {
+AnimID N(ExtraAnims_Goompa)[] = {
     ANIM_Goompa_Still,
     ANIM_Goompa_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Goombaria)[] = {
+AnimID N(ExtraAnims_Goombaria)[] = {
     ANIM_Goombaria_Still,
     ANIM_Goombaria_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Yoshi)[] = {
+AnimID N(ExtraAnims_Yoshi)[] = {
     ANIM_Yoshi_Green_Still,
     ANIM_Yoshi_Green_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Penguin)[] = {
+AnimID N(ExtraAnims_Penguin)[] = {
     ANIM_Penguin_Still,
     ANIM_Penguin_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Dryite)[] = {
+AnimID N(ExtraAnims_Dryite)[] = {
     ANIM_Dryite_Green_Still,
     ANIM_Dryite_Green_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Ninji)[] = {
+AnimID N(ExtraAnims_Ninji)[] = {
     ANIM_Ninji_Still,
     ANIM_Ninji_Idle,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Peach) = {

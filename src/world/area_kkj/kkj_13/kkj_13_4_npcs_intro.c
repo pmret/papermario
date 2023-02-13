@@ -36,7 +36,7 @@ EvtScript N(EVS_NpcInit_Bowser_Body) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Bowser)[] = {
+AnimID N(ExtraAnims_Bowser)[] = {
     ANIM_WorldBowser_Still,
     ANIM_WorldBowser_Idle,
     ANIM_WorldBowser_BrandishIdle,
@@ -53,25 +53,25 @@ s32 N(ExtraAnims_Bowser)[] = {
     ANIM_WorldBowser_ClownCarStill,
     ANIM_WorldBowser_ClownCarIdle,
     ANIM_WorldBowser_ClownCarPropeller,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Kammy)[] = {
+AnimID N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim01,
     ANIM_WorldKammy_Anim02,
     ANIM_WorldKammy_Anim04,
     ANIM_WorldKammy_Anim09,
     ANIM_WorldKammy_Anim0A,
     ANIM_WorldKammy_Anim0B,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Koopatrol)[] = {
+AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim00,
     ANIM_WorldKoopatrol_Anim01,
     ANIM_WorldKoopatrol_Anim04,
     ANIM_WorldKoopatrol_Anim06,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Bowser) = {

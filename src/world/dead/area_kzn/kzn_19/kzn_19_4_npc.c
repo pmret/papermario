@@ -1001,15 +1001,15 @@ NpcData N(NpcData_Misstar) = {
     .tattle = MSG_NpcTattle_Misstar,
 };
 
-s32 N(ExtraAnims_LavaPiranha)[] = {
+AnimID N(ExtraAnims_LavaPiranha)[] = {
     ANIM_LavaPiranha_Anim03,
     ANIM_LavaPiranha_Anim0E,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_LavaBud)[] = {
+AnimID N(ExtraAnims_LavaBud)[] = {
     ANIM_LavaBud_Anim03,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_LavaPiranha)[] = {

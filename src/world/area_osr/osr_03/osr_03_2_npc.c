@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/Kammy.inc.c"
 
-s32 N(ExtraAnims_Kammy)[] = {
+AnimID N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim09,
     ANIM_WorldKammy_Anim0A,
     ANIM_WorldKammy_Anim0B,
@@ -18,7 +18,7 @@ s32 N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim15,
     ANIM_WorldKammy_Anim16,
     ANIM_WorldKammy_Anim1A,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Kammy) = {

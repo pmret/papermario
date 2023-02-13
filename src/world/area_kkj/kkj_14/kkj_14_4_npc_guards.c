@@ -193,13 +193,13 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
 
 #include "world/common/enemy/Koopatrol_Stationary.inc.c"
 
-s32 N(ExtraAnims_Koopatrol)[] = {
+AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim01,
     ANIM_WorldKoopatrol_Anim06,
     ANIM_WorldKoopatrol_Anim12,
     ANIM_WorldKoopatrol_Anim14,
     ANIM_WorldKoopatrol_Anim15,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Guards)[] = {

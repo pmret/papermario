@@ -565,11 +565,11 @@ NpcData N(NpcData_Kolorado) = {
     },
 };
 
-s32 N(ExtraAnims_JrTroopa)[] = {
+AnimID N(ExtraAnims_JrTroopa)[] = {
     ANIM_JrTroopa_Still,
     ANIM_JrTroopa_Idle,
     ANIM_JrTroopa_ChargeTripped,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_JrTroopa) = {

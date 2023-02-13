@@ -5,12 +5,12 @@
 #include "world/common/enemy/HurtPlant.inc.c"
 #include "world/common/enemy/SpearGuy_Wander.inc.c"
 
-s32 N(ExtraAnims_JungleFuzzy)[] = {
+AnimID N(ExtraAnims_JungleFuzzy)[] = {
     ANIM_Fuzzy_Blue_Idle,
     ANIM_Fuzzy_Blue_Walk,
     ANIM_Fuzzy_Blue_Run,
     ANIM_Fuzzy_Blue_Hurt,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_JungleFuzzy) = {
@@ -37,7 +37,7 @@ NpcData N(NpcData_JungleFuzzy) = {
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-s32 N(ExtraAnims_SpearGuy_Custom)[] = {
+AnimID N(ExtraAnims_SpearGuy_Custom)[] = {
     ANIM_SpearGuy_Anim03,
     ANIM_SpearGuy_Anim04,
     ANIM_SpearGuy_Anim05,
@@ -50,7 +50,7 @@ s32 N(ExtraAnims_SpearGuy_Custom)[] = {
     ANIM_SpearGuy_Anim0D,
     ANIM_SpearGuy_Anim1A,
     ANIM_SpearGuy_Anim1B,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_SpearGuy)[] = {

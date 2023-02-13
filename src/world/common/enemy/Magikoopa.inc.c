@@ -73,7 +73,7 @@ NpcSettings N(NpcSettings_Magikoopa) = {
     .onDefeat = &N(EVS_NpcDefeat_Magikoopa),
 };
 
-s32 N(ExtraAnims_Magikoopa)[] = {
+AnimID N(ExtraAnims_Magikoopa)[] = {
     ANIM_Magikoopa_Anim00,
     ANIM_Magikoopa_Anim01,
     ANIM_Magikoopa_Anim01,
@@ -81,7 +81,7 @@ s32 N(ExtraAnims_Magikoopa)[] = {
     ANIM_Magikoopa_Anim02,
     ANIM_Magikoopa_Anim03,
     ANIM_Magikoopa_Anim04,
-    -1
+    ANIM_LIST_END
 };
 
 EvtScript N(EVS_NpcAuxAI_Magikoopa_GroundHitbox) = {

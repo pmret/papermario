@@ -380,12 +380,12 @@ EvtScript N(EVS_NpcInit_Yoshi_03) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Councillor)[] = {
+AnimID N(ExtraAnims_Councillor)[] = {
     ANIM_LeadersFriend_TalkSit,
     ANIM_LeadersFriend_TalkSitSad,
     ANIM_LeadersFriend_IdleSit,
     ANIM_LeadersFriend_BowSit,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Townsfolk)[] = {

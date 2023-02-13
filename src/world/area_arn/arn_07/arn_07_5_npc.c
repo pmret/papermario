@@ -364,7 +364,7 @@ EvtScript N(EVS_NpcInit_Bootler) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Tubba)[] = {
+AnimID N(ExtraAnims_Tubba)[] = {
     ANIM_WorldTubba_Anim00,
     ANIM_WorldTubba_Anim22,
     ANIM_WorldTubba_Anim23,
@@ -373,22 +373,22 @@ s32 N(ExtraAnims_Tubba)[] = {
     ANIM_WorldTubba_Anim08,
     ANIM_WorldTubba_Anim0F,
     ANIM_WorldTubba_Anim12,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Boo)[] = {
+AnimID N(ExtraAnims_Boo)[] = {
     ANIM_Boo_Still,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_GustyBoo)[] = {
+AnimID N(ExtraAnims_GustyBoo)[] = {
     ANIM_Boo_Tan_Still,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Bootler)[] = {
+AnimID N(ExtraAnims_Bootler)[] = {
     ANIM_Bootler_Idle,
-    -1
+    ANIM_LIST_END
 };
 
 EvtScript N(EVS_NpcIdle_Skolar) = {

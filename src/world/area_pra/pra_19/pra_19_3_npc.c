@@ -998,44 +998,44 @@ EvtScript N(EVS_NpcInit_Duplighost_Kolorado) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Goompa)[] = {
+AnimID N(ExtraAnims_Goompa)[] = {
     ANIM_Goompa_Idle,
     ANIM_Goompa_Walk,
     ANIM_Goompa_Talk,
     ANIM_Goompa_Run,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Luigi)[] = {
+AnimID N(ExtraAnims_Luigi)[] = {
     ANIM_Luigi_Idle,
     ANIM_Luigi_Walk,
     ANIM_Luigi_Talk,
     ANIM_Luigi_Run,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_KoopaKoot)[] = {
+AnimID N(ExtraAnims_KoopaKoot)[] = {
     ANIM_KoopaKoot_Idle,
     ANIM_KoopaKoot_Walk,
     ANIM_KoopaKoot_Talk,
     ANIM_KoopaKoot_Run,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Kolorado)[] = {
+AnimID N(ExtraAnims_Kolorado)[] = {
     ANIM_Kolorado_Idle,
     ANIM_Kolorado_Walk,
     ANIM_Kolorado_Talk,
     ANIM_Kolorado_Run,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Duplighost)[] = {
+AnimID N(ExtraAnims_Duplighost)[] = {
     ANIM_Duplighost_Anim02,
     ANIM_Duplighost_Anim03,
     ANIM_Duplighost_Anim05,
     ANIM_Duplighost_Anim04,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Imposters)[] = {

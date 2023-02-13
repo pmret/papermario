@@ -3,7 +3,7 @@
 #define NAME_SUFFIX _Later
 #include "world/common/enemy/Koopatrol_Stationary.inc.c"
 
-s32 N(ExtraAnims_Koopatrol)[] = {
+AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim00,
     ANIM_WorldKoopatrol_Anim01,
     ANIM_WorldKoopatrol_Anim02,

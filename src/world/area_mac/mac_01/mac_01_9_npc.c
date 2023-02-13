@@ -1115,12 +1115,12 @@ NpcData N(NpcData_DarkToads)[] = {
     },
 };
 
-s32 N(ExtraAnims_KoopaBros)[] = {
+AnimID N(ExtraAnims_KoopaBros)[] = {
     ANIM_KoopaBros_Black_Anim03,
     ANIM_KoopaBros_Black_Anim04,
     ANIM_KoopaBros_Black_Anim0B,
     ANIM_KoopaBros_Black_Anim14,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_KoopaBros)[] = {
@@ -2061,20 +2061,20 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Toad)[] = {
+AnimID N(ExtraAnims_Toad)[] = {
     ANIM_Toad_Red_Still,
     ANIM_Toad_Red_Idle,
     ANIM_Toad_Red_Walk,
     ANIM_Toad_Red_Run,
     ANIM_Toad_Red_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Bubulb)[] = {
+AnimID N(ExtraAnims_Bubulb)[] = {
     ANIM_Bubulb_Pink_Idle,
     ANIM_Bubulb_Pink_EmbedIdle,
     ANIM_Bubulb_Pink_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Townsfolk)[] = {
@@ -2286,11 +2286,11 @@ NpcData N(NpcData_Parakarry) = {
     .tattle = MSG_NpcTattle_MAC_Parakarry,
 };
 
-s32 N(ExtraAnims_Twink)[] = {
+AnimID N(ExtraAnims_Twink)[] = {
     ANIM_Twink_Idle,
     ANIM_Twink_Fly,
     ANIM_Twink_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Twink) = {

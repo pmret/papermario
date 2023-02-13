@@ -58,17 +58,17 @@ NpcSettings N(NpcSettings_Gulpit_Hitbox) = {
     .actionFlags = AI_ACTION_08,
 };
 
-s32 N(ExtraAnims_Gulpit_Hitbox)[] = {
+AnimID N(ExtraAnims_Gulpit_Hitbox)[] = {
     ANIM_Gulpit_Anim00,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Gulpit)[] = {
+AnimID N(ExtraAnims_Gulpit)[] = {
     ANIM_Gulpit_Anim00,
     ANIM_Gulpit_Anim01,
     ANIM_Gulpit_Anim0B,
     ANIM_Gulpit_Anim04,
     ANIM_Gulpit_Anim02,
     ANIM_Gulpit_Anim03,
-    -1
+    ANIM_LIST_END
 };

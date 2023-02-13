@@ -50,7 +50,7 @@ EvtScript N(EVS_NpcInit_GourmetGuy) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_GourmetGuy)[] = {
+AnimID N(ExtraAnims_GourmetGuy)[] = {
     ANIM_GourmetGuy_Idle,
     ANIM_GourmetGuy_Walk,
     ANIM_GourmetGuy_Panic,
@@ -63,24 +63,24 @@ s32 N(ExtraAnims_GourmetGuy)[] = {
     ANIM_GourmetGuy_Inspect,
     ANIM_GourmetGuy_Knife,
     ANIM_GourmetGuy_Fork,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Kammy)[] = {
+AnimID N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim01,
     ANIM_WorldKammy_Anim02,
     ANIM_WorldKammy_Anim04,
     ANIM_WorldKammy_Anim05,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Koopatrol)[] = {
+AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim01,
     ANIM_WorldKoopatrol_Anim06,
     ANIM_WorldKoopatrol_Anim08,
     ANIM_WorldKoopatrol_Anim12,
     ANIM_WorldKoopatrol_Anim14,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Characters)[] = {

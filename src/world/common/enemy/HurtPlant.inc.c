@@ -58,12 +58,12 @@ NpcSettings N(NpcSettings_HurtPlant) = {
     .onDefeat = &N(EVS_NpcDefeat_HurtPlant),
 };
 
-s32 N(ExtraAnims_HurtPlant)[] = {
+AnimID N(ExtraAnims_HurtPlant)[] = {
     ANIM_HurtPlant_Anim00,
     ANIM_HurtPlant_Anim01,
     ANIM_HurtPlant_Anim02,
     ANIM_HurtPlant_Anim08,
-    -1
+    ANIM_LIST_END
 };
 
 #define HURT_PLANT_NPC_DATA \

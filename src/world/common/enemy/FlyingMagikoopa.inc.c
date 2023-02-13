@@ -47,7 +47,7 @@ NpcSettings N(NpcSettings_FlyingMagikoopa) = {
     .onDefeat = &N(EVS_NpcDefeat_FlyingMagikoopa),
 };
 
-s32 N(ExtraAnims_FlyingMagikoopa)[] = {
+AnimID N(ExtraAnims_FlyingMagikoopa)[] = {
     ANIM_FlyingMagikoopa_Anim00,
     ANIM_FlyingMagikoopa_Anim01,
     ANIM_FlyingMagikoopa_Anim01,
@@ -55,7 +55,7 @@ s32 N(ExtraAnims_FlyingMagikoopa)[] = {
     ANIM_FlyingMagikoopa_Anim02,
     ANIM_FlyingMagikoopa_Anim03,
     ANIM_FlyingMagikoopa_Anim04,
-    -1
+    ANIM_LIST_END
 };
 
 EvtScript N(EVS_NpcAuxAI_FlyingMagikoopa_AltHitbox) = {

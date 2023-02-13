@@ -4,13 +4,13 @@
 #include "world/common/enemy/SpikeTop.inc.c"
 #include "world/common/enemy/Magikoopa.inc.c"
 
-s32 N(ExtraAnims_Koopatrol)[] = {
+AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim01,
     ANIM_WorldKoopatrol_Anim04,
     ANIM_WorldKoopatrol_Anim06,
     ANIM_WorldKoopatrol_Anim10,
     ANIM_WorldKoopatrol_Anim0B,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Koopatrol_01) = {

@@ -160,39 +160,39 @@ EvtScript N(EVS_NpcInit_Composer) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Kolorado)[] = {
+AnimID N(ExtraAnims_Kolorado)[] = {
     ANIM_Kolorado_Still,
     ANIM_Kolorado_Idle,
     ANIM_Kolorado_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_KoloradoWife)[] = {
+AnimID N(ExtraAnims_KoloradoWife)[] = {
     ANIM_KoloradoWife_Still,
     ANIM_KoloradoWife_Idle,
     ANIM_KoloradoWife_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_KoopaKoot)[] = {
+AnimID N(ExtraAnims_KoopaKoot)[] = {
     ANIM_KoopaKoot_Still,
     ANIM_KoopaKoot_Idle,
     ANIM_KoopaKoot_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Koopa)[] = {
+AnimID N(ExtraAnims_Koopa)[] = {
     ANIM_Koopa_Still,
     ANIM_Koopa_Idle,
     ANIM_Koopa_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Bobomb)[] = {
+AnimID N(ExtraAnims_Bobomb)[] = {
     ANIM_WorldBobomb_Green_Still,
     ANIM_WorldBobomb_Green_Idle,
     ANIM_WorldBobomb_Green_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Koopas)[] = {
@@ -253,11 +253,11 @@ NpcData N(NpcData_Koopas)[] = {
     },
 };
 
-s32 N(ExtraAnims_Rowf)[] = {
+AnimID N(ExtraAnims_Rowf)[] = {
     ANIM_Rowf_Still,
     ANIM_Rowf_Idle,
     ANIM_Rowf_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_RowfAndRhuff)[] = {
@@ -291,11 +291,11 @@ NpcData N(NpcData_RowfAndRhuff)[] = {
     },
 };
 
-s32 N(ExtraAnims_Dryite)[] = {
+AnimID N(ExtraAnims_Dryite)[] = {
     ANIM_Dryite_Green_Still,
     ANIM_Dryite_Green_Idle,
     ANIM_Dryite_Green_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Dryites)[] = {
@@ -323,19 +323,19 @@ NpcData N(NpcData_Dryites)[] = {
     },
 };
 
-s32 N(ExtraAnims_Chanterelle)[] = {
+AnimID N(ExtraAnims_Chanterelle)[] = {
     ANIM_Chanterelle_Still,
     ANIM_Chanterelle_Idle,
     ANIM_Chanterelle_Sing,
     ANIM_Chanterelle_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Poet)[] = {
+AnimID N(ExtraAnims_Poet)[] = {
     ANIM_Musician_Poet_Still,
     ANIM_Musician_Poet_Idle,
     ANIM_Musician_Poet_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Artists)[] = {

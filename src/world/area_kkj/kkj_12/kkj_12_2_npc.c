@@ -15,7 +15,7 @@ API_CALLABLE(N(DisableLightSource1)) {
 #include "world/common/enemy/Koopatrol_Stationary.inc.c"
 #include "world/common/npc/Dummy.inc.c"
 
-s32 N(ExtraAnims_Koopatrol)[] = {
+AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim00,
     ANIM_WorldKoopatrol_Anim01,
     ANIM_WorldKoopatrol_Anim02,
@@ -28,10 +28,10 @@ s32 N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim12,
     ANIM_WorldKoopatrol_Anim14,
     ANIM_WorldKoopatrol_Anim1B,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Clubba)[] = {
+AnimID N(ExtraAnims_Clubba)[] = {
     ANIM_WorldClubba_Anim00,
     ANIM_WorldClubba_Anim02,
     ANIM_WorldClubba_Anim03,
@@ -41,7 +41,7 @@ s32 N(ExtraAnims_Clubba)[] = {
     ANIM_WorldClubba_Anim07,
     ANIM_WorldClubba_Anim13,
     ANIM_WorldClubba_Anim14,
-    -1
+    ANIM_LIST_END
 };
 
 EvtScript N(EVS_NpcInteract_Koopatrol_01) = {

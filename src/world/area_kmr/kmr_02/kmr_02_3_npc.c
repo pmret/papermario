@@ -1910,14 +1910,14 @@ NpcData N(NpcData_Toad) = {
     .tattle = MSG_NpcTattle_KMR_ToadHouseToad,
 };
 
-s32 N(ExtraAnims_Kammy)[] = {
+AnimID N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim15,
     ANIM_WorldKammy_Anim10,
     ANIM_WorldKammy_Anim0E,
     ANIM_WorldKammy_Anim0F,
     ANIM_WorldKammy_Anim16,
     ANIM_WorldKammy_Anim13,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Kammy) = {
@@ -1983,11 +1983,11 @@ EvtScript N(EVS_NpcInit_Eldstar_02) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Eldstar)[] = {
+AnimID N(ExtraAnims_Eldstar)[] = {
     ANIM_WorldEldstar_Idle,
     ANIM_WorldEldstar_Wave,
     ANIM_Goompa_Still, // ??
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Eldstar_Prologue)[] = {

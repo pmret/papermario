@@ -25,7 +25,7 @@ EvtScript N(EVS_NpcInit_Koopatrol_02) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Bowser)[] = {
+AnimID N(ExtraAnims_Bowser)[] = {
     ANIM_WorldBowser_Still,
     ANIM_WorldBowser_Idle,
     ANIM_WorldBowser_Walk,
@@ -34,10 +34,10 @@ s32 N(ExtraAnims_Bowser)[] = {
     ANIM_WorldBowser_AngryTalk,
     ANIM_WorldBowser_Shock,
     ANIM_WorldBowser_RearUpMock,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_HammerBros)[] = {
+AnimID N(ExtraAnims_HammerBros)[] = {
     ANIM_HammerBros_Anim01,
     ANIM_HammerBros_Anim03,
     ANIM_HammerBros_Anim06,
@@ -45,10 +45,10 @@ s32 N(ExtraAnims_HammerBros)[] = {
     ANIM_HammerBros_Anim09,
     ANIM_HammerBros_Anim0B,
     ANIM_HammerBros_Anim13,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Koopatrol)[] = {
+AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim00,
     ANIM_WorldKoopatrol_Anim01,
     ANIM_WorldKoopatrol_Anim03,
@@ -59,7 +59,7 @@ s32 N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim1A,
     ANIM_WorldKoopatrol_Anim12,
     ANIM_WorldKoopatrol_Anim14,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Characters)[] = {

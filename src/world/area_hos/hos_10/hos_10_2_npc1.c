@@ -65,62 +65,62 @@ EvtScript N(EVS_NpcInit_Kalmar) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Peach)[] = {
+AnimID N(ExtraAnims_Peach)[] = {
     ANIM_Peach_A0001,
     ANIM_Peach_A0002,
     ANIM_Peach_C0000,
     ANIM_Peach_C0006,
     ANIM_Peach_C001E,
     ANIM_Peach_C0026,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Twink)[] = {
+AnimID N(ExtraAnims_Twink)[] = {
     ANIM_Twink_Idle,
     ANIM_Twink_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Eldstar)[] = {
+AnimID N(ExtraAnims_Eldstar)[] = {
     ANIM_WorldEldstar_Idle,
     ANIM_WorldEldstar_Wave,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Mamar)[] = {
+AnimID N(ExtraAnims_Mamar)[] = {
     ANIM_WorldMamar_Idle,
     ANIM_WorldMamar_TalkHappy,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Skolar)[] = {
+AnimID N(ExtraAnims_Skolar)[] = {
     ANIM_WorldSkolar_Idle,
     ANIM_WorldSkolar_TalkAngry,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Muskular)[] = {
+AnimID N(ExtraAnims_Muskular)[] = {
     ANIM_WorldMuskular_Idle,
     ANIM_WorldMuskular_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Misstar)[] = {
+AnimID N(ExtraAnims_Misstar)[] = {
     ANIM_WorldMisstar_Idle,
     ANIM_WorldMisstar_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Klevar)[] = {
+AnimID N(ExtraAnims_Klevar)[] = {
     ANIM_WorldKlevar_Idle,
     ANIM_WorldKlevar_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Kalmar)[] = {
+AnimID N(ExtraAnims_Kalmar)[] = {
     ANIM_WorldKalmar_Idle,
     ANIM_WorldKalmar_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Spirits)[] = {

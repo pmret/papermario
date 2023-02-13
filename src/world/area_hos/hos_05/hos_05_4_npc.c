@@ -314,71 +314,71 @@ EvtScript N(EVS_NpcInit_StarSpirit) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Eldstar)[] = {
+AnimID N(ExtraAnims_Eldstar)[] = {
     ANIM_WorldEldstar_Idle,
     ANIM_WorldEldstar_Panic,
     ANIM_WorldEldstar_Wave,
     ANIM_WorldEldstar_Angry,
     ANIM_WorldEldstar_Hurt,
     ANIM_WorldEldstar_Back,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Mamar)[] = {
+AnimID N(ExtraAnims_Mamar)[] = {
     ANIM_WorldMamar_Idle,
     ANIM_WorldMamar_Panic,
     ANIM_WorldMamar_Angry,
     ANIM_WorldMamar_Hurt,
     ANIM_WorldMamar_Back,
     ANIM_WorldMamar_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Skolar)[] = {
+AnimID N(ExtraAnims_Skolar)[] = {
     ANIM_WorldSkolar_Idle,
     ANIM_WorldSkolar_IdleSad,
     ANIM_WorldSkolar_Panic,
     ANIM_WorldSkolar_Hurt,
     ANIM_WorldSkolar_Talk,
     ANIM_WorldSkolar_Back,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Muskular)[] = {
+AnimID N(ExtraAnims_Muskular)[] = {
     ANIM_WorldMuskular_Idle,
     ANIM_WorldMuskular_Panic,
     ANIM_WorldMuskular_Hurt,
     ANIM_WorldMuskular_Happy,
     ANIM_WorldMuskular_Back,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Misstar)[] = {
+AnimID N(ExtraAnims_Misstar)[] = {
     ANIM_WorldMisstar_Still,
     ANIM_WorldMisstar_Idle,
     ANIM_WorldMisstar_Panic,
     ANIM_WorldMisstar_Hurt,
     ANIM_WorldMisstar_Happy,
     ANIM_WorldMisstar_Back,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Klevar)[] = {
+AnimID N(ExtraAnims_Klevar)[] = {
     ANIM_WorldKlevar_Idle,
     ANIM_WorldKlevar_Panic,
     ANIM_WorldKlevar_Hurt,
     ANIM_WorldKlevar_TalkHappy,
     ANIM_WorldKlevar_Back,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Kalmar)[] = {
+AnimID N(ExtraAnims_Kalmar)[] = {
     ANIM_WorldKalmar_Idle,
     ANIM_WorldKalmar_Panic,
     ANIM_WorldKalmar_Hurt,
     ANIM_WorldKalmar_TalkHappy,
     ANIM_WorldKalmar_Back,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_StarSpirits)[] = {
@@ -475,7 +475,7 @@ s32 N(NpcData_ClownCar)[] = {
     -1
 };
 
-s32 N(ExtraAnims_Kammy)[] = {
+AnimID N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim09,
     ANIM_WorldKammy_Anim0B,
     ANIM_WorldKammy_Anim0D,
@@ -483,7 +483,7 @@ s32 N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim11,
     ANIM_WorldKammy_Anim12,
     ANIM_WorldKammy_Anim17,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Thieves)[] = {

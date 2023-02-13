@@ -335,7 +335,7 @@ NpcData N(NpcData_Sentinel_04) = {
     .animations = SENTINEL_ANIMS,
 };
 
-s32 N(ExtraAnims_Tubba)[] = {
+AnimID N(ExtraAnims_Tubba)[] = {
     ANIM_WorldTubba_Anim06,
     ANIM_WorldTubba_Anim10,
     ANIM_WorldTubba_Anim09,
@@ -347,7 +347,7 @@ s32 N(ExtraAnims_Tubba)[] = {
     ANIM_WorldTubba_Anim1B,
     ANIM_WorldTubba_Anim1C,
     ANIM_WorldTubba_Anim1D,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Tubba_Floor3) = {

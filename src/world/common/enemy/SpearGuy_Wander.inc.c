@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/ai/SpearGuyAI.inc.c"
 
-s32 N(ExtraAnims_SpearGuy)[] = {
+AnimID N(ExtraAnims_SpearGuy)[] = {
     ANIM_SpearGuy_Anim00,
     ANIM_SpearGuy_Anim03,
     ANIM_SpearGuy_Anim05,
@@ -12,10 +12,10 @@ s32 N(ExtraAnims_SpearGuy)[] = {
     ANIM_SpearGuy_Anim10,
     ANIM_SpearGuy_Anim1A, 
     ANIM_SpearGuy_Anim1B,
-    -1,
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_SpearGuy_Hitbox)[] = {
+AnimID N(ExtraAnims_SpearGuy_Hitbox)[] = {
     ANIM_SpearGuy_Anim00,
     -1, 
 };

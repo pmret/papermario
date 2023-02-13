@@ -16,7 +16,7 @@ EvtScript N(EVS_NpcDefeat_FrostClubba) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_FrostClubba)[] = {
+AnimID N(ExtraAnims_FrostClubba)[] = {
     ANIM_WorldClubba_Anim00,
     ANIM_WorldClubba_Anim02,
     ANIM_WorldClubba_Anim03,
@@ -26,12 +26,12 @@ s32 N(ExtraAnims_FrostClubba)[] = {
     ANIM_WorldClubba_Anim08,
     ANIM_WorldClubba_Anim11,
     ANIM_WorldClubba_Anim12,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_FrostClubba_Hitbox)[] = {
+AnimID N(ExtraAnims_FrostClubba_Hitbox)[] = {
     ANIM_WorldClubba_Anim00,
-    -1
+    ANIM_LIST_END
 };
 
 #ifdef INCLUDE_FROST_CLUBBA_WANDER

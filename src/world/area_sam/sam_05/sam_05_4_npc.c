@@ -150,7 +150,7 @@ EvtScript N(EVS_NpcInit_StarKid) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Monstar)[] = {
+AnimID N(ExtraAnims_Monstar)[] = {
     ANIM_Monstar_Still,
     ANIM_Monstar_Idle1,
     ANIM_Monstar_Hurt,
@@ -159,7 +159,7 @@ s32 N(ExtraAnims_Monstar)[] = {
     ANIM_Monstar_Flail,
     ANIM_Monstar_HappyRearUp,
     ANIM_Monstar_RearUp,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Monstar) = {
@@ -191,12 +191,12 @@ NpcData N(NpcData_Monstar) = {
     .extraAnimations = N(ExtraAnims_Monstar),
 };
 
-s32 N(ExtraAnims_StarKid)[] = {
+AnimID N(ExtraAnims_StarKid)[] = {
     ANIM_Twink_Idle,
     ANIM_Twink_Fly,
     ANIM_Twink_Angry,
     ANIM_Twink_Shout,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_StarKids)[] = {

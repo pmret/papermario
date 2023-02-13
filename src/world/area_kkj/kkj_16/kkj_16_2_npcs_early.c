@@ -167,17 +167,17 @@ EvtScript N(EVS_NpcInit_Koopatrol_04) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_HammerBros)[] = {
+AnimID N(ExtraAnims_HammerBros)[] = {
     ANIM_HammerBros_Anim00,
     ANIM_HammerBros_Anim02,
     ANIM_HammerBros_Anim04,
     ANIM_HammerBros_Anim08,
     ANIM_HammerBros_Anim0A,
     ANIM_HammerBros_Anim13,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Koopatrol)[] = {
+AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim00,
     ANIM_WorldKoopatrol_Anim01,
     ANIM_WorldKoopatrol_Anim04,
@@ -185,7 +185,7 @@ s32 N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim08,
     ANIM_WorldKoopatrol_Anim12,
     ANIM_WorldKoopatrol_Anim14,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Minions)[] = {

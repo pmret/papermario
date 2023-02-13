@@ -7,7 +7,7 @@
 
 #include "world/common/enemy/Koopatrol_Stationary.inc.c"
 
-s32 N(ExtraAnims_Koopatrol)[] = {
+AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim00,
     ANIM_WorldKoopatrol_Anim01,
     ANIM_WorldKoopatrol_Anim02,
@@ -20,7 +20,7 @@ s32 N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim12,
     ANIM_WorldKoopatrol_Anim14,
     ANIM_WorldKoopatrol_Anim1B,
-    -1
+    ANIM_LIST_END
 };
 
 EvtScript N(EVS_CapturePeach) = {

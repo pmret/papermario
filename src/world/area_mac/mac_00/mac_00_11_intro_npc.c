@@ -20,18 +20,18 @@ EvtScript N(EVS_NpcInit_Lee_Intro) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Chan_Intro)[] = {
+AnimID N(ExtraAnims_Chan_Intro)[] = {
     ANIM_Chan_Still,
     ANIM_Chan_Idle,
     ANIM_Chan_Run,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Lee_Intro)[] = {
+AnimID N(ExtraAnims_Lee_Intro)[] = {
     ANIM_Lee_Still,
     ANIM_Lee_Idle,
     ANIM_Lee_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_IntroNPCs)[] = {

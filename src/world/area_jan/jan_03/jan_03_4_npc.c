@@ -744,7 +744,7 @@ EvtScript N(EVS_NpcInit_Sushie) = {
 
 #include "world/common/npc/Raven.inc.c"
 
-s32 N(ExtraAnims_VillageLeader)[] = {
+AnimID N(ExtraAnims_VillageLeader)[] = {
     ANIM_VillageLeader_Idle,
     ANIM_VillageLeader_IdleSad,
     ANIM_VillageLeader_Walk,
@@ -754,7 +754,7 @@ s32 N(ExtraAnims_VillageLeader)[] = {
     ANIM_VillageLeader_Shout,
     ANIM_VillageLeader_Celebrate,
     ANIM_VillageLeader_CrossArms,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_VillageLeader) = {
@@ -770,11 +770,11 @@ NpcData N(NpcData_VillageLeader) = {
     .tattle = MSG_NpcTattle_VillageLeader,
 };
 
-s32 N(ExtraAnims_Sushie)[] = {
+AnimID N(ExtraAnims_Sushie)[] = {
     ANIM_WorldSushie_Idle,
     ANIM_WorldSushie_Run,
     ANIM_WorldSushie_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Sushie) = {
@@ -790,12 +790,12 @@ NpcData N(NpcData_Sushie) = {
     .tattle = MSG_NpcTattle_Sushie,
 };
 
-s32 N(ExtraAnims_Kolorado)[] = {
+AnimID N(ExtraAnims_Kolorado)[] = {
     ANIM_Kolorado_Idle,
     ANIM_Kolorado_IdleSad,
     ANIM_Kolorado_Walk,
     ANIM_Kolorado_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Kolorado) = {
@@ -1018,11 +1018,11 @@ NpcData N(NpcData_Toad)[] = {
     },
 };
 
-s32 N(ExtraAnims_Raven)[] = {
+AnimID N(ExtraAnims_Raven)[] = {
     ANIM_Raven_Still,
     ANIM_Raven_Idle,
     ANIM_Raven_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Ravens)[] = {

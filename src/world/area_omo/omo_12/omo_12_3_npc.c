@@ -607,7 +607,7 @@ EvtScript N(EVS_NpcInit_Watt) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_LanternGhost)[] = {
+AnimID N(ExtraAnims_LanternGhost)[] = {
     ANIM_BigLanternGhost_Anim01,
     ANIM_BigLanternGhost_Anim06,
     ANIM_BigLanternGhost_Anim07,
@@ -617,7 +617,7 @@ s32 N(ExtraAnims_LanternGhost)[] = {
     ANIM_BigLanternGhost_Anim02,
     ANIM_BigLanternGhost_Anim03,
     ANIM_BigLanternGhost_Anim04,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_BigLanternGhost) = {

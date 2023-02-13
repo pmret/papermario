@@ -231,12 +231,12 @@ NpcData N(NpcData_YoshiKid) = {
     .tattle = MSG_NpcTattle_PurpleYoshiKid,
 };
 
-s32 N(ExtraAnims_JungleFuzzy)[] = {
+AnimID N(ExtraAnims_JungleFuzzy)[] = {
     ANIM_Fuzzy_Jungle_Idle,
     ANIM_Fuzzy_Jungle_Walk,
     ANIM_Fuzzy_Jungle_Run,
     ANIM_Fuzzy_Jungle_Hurt,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_JungleFuzzy) = {

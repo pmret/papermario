@@ -4,7 +4,7 @@
 
 #include "world/common/enemy/Clubba.inc.c"
 
-s32 N(ExtraAnims_Clubba)[] = {
+AnimID N(ExtraAnims_Clubba)[] = {
     ANIM_WorldClubba_Anim00,
     ANIM_WorldClubba_Anim02,
     ANIM_WorldClubba_Anim03,
@@ -14,7 +14,7 @@ s32 N(ExtraAnims_Clubba)[] = {
     ANIM_WorldClubba_Anim07,
     ANIM_WorldClubba_Anim13,
     ANIM_WorldClubba_Anim14,
-    -1
+    ANIM_LIST_END
 };
 
 EvtScript N(EVS_NpcInteract_Clubba) = {

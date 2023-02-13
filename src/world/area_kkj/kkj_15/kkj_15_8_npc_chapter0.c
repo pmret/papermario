@@ -15,24 +15,24 @@ NpcSettings N(NpcSettings_KoopaBros) = {
     .onDefeat = &EnemyNpcDefeat,
 };
 
-s32 N(ExtraAnims_Bowser)[] = {
+AnimID N(ExtraAnims_Bowser)[] = {
     ANIM_WorldBowser_Still,
     ANIM_WorldBowser_Idle,
     ANIM_WorldBowser_BrandishIdle,
     ANIM_WorldBowser_Talk,
     ANIM_WorldBowser_BrandishTalk,
     ANIM_WorldBowser_Brandish,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Kammy)[] = {
+AnimID N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim01,
     ANIM_WorldKammy_Anim02,
     ANIM_WorldKammy_Anim04,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_KoopaBros)[] = {
+AnimID N(ExtraAnims_KoopaBros)[] = {
     ANIM_KoopaBros_Black_Anim02,
     ANIM_KoopaBros_Black_Anim03,
     ANIM_KoopaBros_Black_Anim04,
@@ -42,7 +42,7 @@ s32 N(ExtraAnims_KoopaBros)[] = {
     ANIM_KoopaBros_Black_Anim12,
     ANIM_KoopaBros_Black_Anim14,
     ANIM_KoopaBros_Black_Anim1A,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Characters)[] = {

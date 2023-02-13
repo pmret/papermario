@@ -325,7 +325,7 @@ EvtScript N(EVS_NpcInit_CaptivePeach) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Bowser)[] = {
+AnimID N(ExtraAnims_Bowser)[] = {
     ANIM_WorldBowser_Still,
     ANIM_WorldBowser_Idle,
     ANIM_WorldBowser_Walk,
@@ -339,7 +339,7 @@ s32 N(ExtraAnims_Bowser)[] = {
     ANIM_WorldBowser_ClownCarTalk,
     ANIM_WorldBowser_ClownCarLaugh,
     ANIM_WorldBowser_ClownCarPropeller,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Bowser_Body) = {

@@ -498,7 +498,7 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_KoopaBros)[] = {
+AnimID N(ExtraAnims_KoopaBros)[] = {
     ANIM_KoopaBros_Black_Anim1E,
     ANIM_KoopaBros_Black_Anim04,
     ANIM_KoopaBros_Black_Anim05,
@@ -507,7 +507,7 @@ s32 N(ExtraAnims_KoopaBros)[] = {
     ANIM_KoopaBros_Black_Anim14,
     ANIM_KoopaBros_Black_Anim10,
     ANIM_KoopaBros_Black_Anim15,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Enemies)[] = {

@@ -4,7 +4,7 @@
 
 #include "world/common/enemy/HammerBros.inc.c"
 
-s32 N(ExtraAnims_HammerBros)[] = {
+AnimID N(ExtraAnims_HammerBros)[] = {
     ANIM_HammerBros_Anim00,
     ANIM_HammerBros_Anim02,
     ANIM_HammerBros_Anim03,
@@ -15,7 +15,7 @@ s32 N(ExtraAnims_HammerBros)[] = {
     ANIM_HammerBros_Anim0A,
     ANIM_HammerBros_Anim0B,
     ANIM_HammerBros_Anim1A,
-    -1
+    ANIM_LIST_END
 };
 
 #include "../common/Searchlights.inc.c"

@@ -346,11 +346,11 @@ NpcData N(NpcData_Townsfolk)[] = {
     },
 };
 
-s32 N(ExtraAnims_Twink)[] = {
+AnimID N(ExtraAnims_Twink)[] = {
     ANIM_Twink_Idle,
     ANIM_Twink_Fly,
     ANIM_Twink_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Chapter4)[] = {

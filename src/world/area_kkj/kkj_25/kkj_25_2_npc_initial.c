@@ -144,7 +144,7 @@ EvtScript N(EVS_NpcInit_Twink) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Bowser)[] = {
+AnimID N(ExtraAnims_Bowser)[] = {
     ANIM_WorldBowser_Idle,
     ANIM_WorldBowser_Walk,
     ANIM_WorldBowser_Talk,
@@ -153,10 +153,10 @@ s32 N(ExtraAnims_Bowser)[] = {
     ANIM_WorldBowser_Tantrum,
     ANIM_WorldBowser_Jump,
     ANIM_WorldBowser_Land,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Peach)[] = {
+AnimID N(ExtraAnims_Peach)[] = {
     ANIM_Peach_C001D,
     ANIM_Peach_A0001,
     ANIM_Peach_A0002,
@@ -168,10 +168,10 @@ s32 N(ExtraAnims_Peach)[] = {
     ANIM_Peach_D000B,
     ANIM_Peach_C0026,
     ANIM_Peach_D000F,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Kammy)[] = {
+AnimID N(ExtraAnims_Kammy)[] = {
     ANIM_BattleKammy_Anim00,
     ANIM_BattleKammy_Anim01,
     ANIM_BattleKammy_Anim04,
@@ -181,15 +181,15 @@ s32 N(ExtraAnims_Kammy)[] = {
     ANIM_BattleKammy_Anim02,
     ANIM_BattleKammy_Anim0C,
     ANIM_BattleKammy_Anim03,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Twink)[] = {
+AnimID N(ExtraAnims_Twink)[] = {
     ANIM_Twink_Idle,
     ANIM_Twink_Sad,
     ANIM_Twink_Back,
     ANIM_Twink_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Bowser) = {

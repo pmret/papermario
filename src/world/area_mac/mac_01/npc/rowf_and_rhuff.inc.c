@@ -695,7 +695,7 @@ EvtScript N(EVS_NpcInit_Rhuff) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Rowf)[] = {
+AnimID N(ExtraAnims_Rowf)[] = {
     ANIM_Rowf_Still,
     ANIM_Rowf_Idle,
     ANIM_Rowf_Walk,
@@ -703,7 +703,7 @@ s32 N(ExtraAnims_Rowf)[] = {
     ANIM_Rowf_Cheer,
     ANIM_Rowf_Think,
     ANIM_Rowf_WaveOff,
-    -1
+    ANIM_LIST_END
 };
 
 NpcSettings N(NpcSettings_Rowf) = {

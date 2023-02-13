@@ -565,14 +565,14 @@ NpcData N(NpcData_SkyGuy_02) = {
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-s32 N(ExtraAnims_Kammy)[] = {
+AnimID N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim0E,
     ANIM_WorldKammy_Anim0F,
     ANIM_WorldKammy_Anim10,
     ANIM_WorldKammy_Anim13,
     ANIM_WorldKammy_Anim15,
     ANIM_WorldKammy_Anim16,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Kammy) = {
