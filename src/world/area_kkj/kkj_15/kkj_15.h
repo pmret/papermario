@@ -16,20 +16,20 @@
 #include "sprite/npc/WorldKoopatrol.h"
 
 enum {
-	// shared
-	NPC_Bowser                  = 0,
-	NPC_Kammy                   = 1,
-	// chapter 0 npcs
-	NPC_KoopaBros_01            = 2,
-	NPC_KoopaBros_02            = 3,
-	NPC_KoopaBros_03            = 4,
-	NPC_KoopaBros_04            = 5,
-	// chapter 1 npcs
-	NPC_Koopatrol_01			= 1,
-	NPC_Koopatrol_02			= 2,
-	// chapter 3 npcs
-	NPC_Koopatrol_03			= 2,
-	NPC_Koopatrol_04			= 3,
+    // shared
+    NPC_Bowser                  = 0,
+    NPC_Kammy                   = 1,
+    // chapter 0 npcs
+    NPC_KoopaBros_01            = 2,
+    NPC_KoopaBros_02            = 3,
+    NPC_KoopaBros_03            = 4,
+    NPC_KoopaBros_04            = 5,
+    // chapter 1 npcs
+    NPC_Koopatrol_01            = 1,
+    NPC_Koopatrol_02            = 2,
+    // chapter 3 npcs
+    NPC_Koopatrol_03            = 2,
+    NPC_Koopatrol_04            = 3,
 };
 
 #define NAMESPACE kkj_15

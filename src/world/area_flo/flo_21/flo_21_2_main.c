@@ -1,5 +1,6 @@
 #include "flo_21.h"
 
+#define STAR_SPIRIT_DATA_VAR MV_Unk_01
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"

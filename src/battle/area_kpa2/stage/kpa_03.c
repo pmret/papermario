@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_kpa2_kpa_03
 
-#include "common/UnkLightningFXFunc.inc.c"
+#include "world/common/util/SetLightningBoltPurple.inc.c"
 
 s32 N(lightningsSettings1)[] = {
     0xFFFFFFEA, 0x000000BE, 0xFFFFFFA5, 0xFFFFFFA8, 0x00000015, 0xFFFFFFA5, 0x0000003C,
@@ -19,7 +19,7 @@ EvtScript N(createLightnings1) = {
         EVT_BUF_READ3(LVar0, LVar1, LVar2)
         EVT_BUF_READ3(LVar3, LVar4, LVar5)
         EVT_CALL(PlayEffect, EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 8, 0, 0, 0, 0)
-        EVT_CALL(N(UnkLightningFXFunc))
+        EVT_CALL(N(SetLightningBoltPurple))
         EVT_BUF_READ1(LVar0)
         EVT_WAIT(LVar0)
     EVT_END_LOOP
@@ -42,7 +42,7 @@ EvtScript N(createLightnings2) = {
         EVT_BUF_READ3(LVar0, LVar1, LVar2)
         EVT_BUF_READ3(LVar3, LVar4, LVar5)
         EVT_CALL(PlayEffect, EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 5, 0, 0, 0, 0)
-        EVT_CALL(N(UnkLightningFXFunc))
+        EVT_CALL(N(SetLightningBoltPurple))
         EVT_BUF_READ1(LVar0)
         EVT_WAIT(LVar0)
     EVT_END_LOOP

@@ -18,6 +18,7 @@ enum {
 
 enum {
     MV_CamDistance      = MapVar(0),
+    MV_Unk_01           = MapVar(1),
 };
 
 #define NAMESPACE pra_32

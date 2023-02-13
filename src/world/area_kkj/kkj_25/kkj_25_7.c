@@ -1,6 +1,14 @@
 #include "kkj_25.h"
-#include "entity.h"
 #include "effects.h"
+
+#include "sprite/npc/WorldGoombario.h"
+#include "sprite/npc/WorldKooper.h"
+#include "sprite/npc/WorldBombette.h"
+#include "sprite/npc/WorldParakarry.h"
+#include "sprite/npc/WorldWatt.h"
+#include "sprite/npc/WorldSushie.h"
+#include "sprite/npc/WorldLakilester.h"
+#include "sprite/npc/WorldBow.h"
 
 API_CALLABLE(N(func_80240C60_B07660)) {
     EffectInstance* effect;
@@ -18,7 +26,7 @@ API_CALLABLE(N(func_80240CD4_B076D4)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80240CE8_B076E8)) {
+API_CALLABLE(N(UpgradeStarBeam)) {
     gPlayerData.starBeamLevel = 2;
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
@@ -127,7 +135,7 @@ EvtScript N(D_802488A4_B0F2A4) = {
     EVT_END
 };
 
-EvtScript N(EVS_80248998) = {
+EvtScript N(EVS_Scene_KammyDefeated) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_BeforeJump)
@@ -139,8 +147,8 @@ EvtScript N(EVS_80248998) = {
         EVT_CALL(SetNpcPos, NPC_PARTNER, 60, 0, 0)
     EVT_END_IF
     EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000106)
-    EVT_CALL(GetNpcPos, NPC_BattleKooper_01, LVar0, LVar1, LVar2)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
+    EVT_CALL(GetNpcPos, NPC_Peach_01, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -148,36 +156,36 @@ EvtScript N(EVS_80248998) = {
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-8.5))
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(GetNpcPos, NPC_BattleKammy_04, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPos, NPC_Kammy_04, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 30)
     EVT_SET(LVar3, 20)
     EVT_SET(LVar4, 3)
     EVT_CALL(N(func_80240C60_B07660))
     EVT_SET(MV_Unk_01, LVar0)
     EVT_WAIT(20)
-    EVT_CALL(InterpNpcYaw, NPC_BattleKooper_01, 90, 0)
+    EVT_CALL(InterpNpcYaw, NPC_Peach_01, 90, 0)
     EVT_WAIT(20)
-    EVT_CALL(InterpNpcYaw, NPC_BattleKooper_01, 270, 0)
+    EVT_CALL(InterpNpcYaw, NPC_Peach_01, 270, 0)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_BattleKooper_01, ANIM_BattleParakarry_Still)
+    EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach_C0000)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_BattleKooper_01, 0x000C0026)
-    EVT_CALL(SpeakToPlayer, NPC_BattleKooper_01, ANIM_BattleParakarry_Idle, 0x000C0026, 5, MSG_CH8_009C)
+    EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach_C0026)
+    EVT_CALL(SpeakToPlayer, NPC_Peach_01, ANIM_Peach_C0001, ANIM_Peach_C0026, 5, MSG_CH8_009C)
     EVT_WAIT(10)
-    EVT_CALL(InterpNpcYaw, NPC_BattleKooper_01, 90, 0)
+    EVT_CALL(InterpNpcYaw, NPC_Peach_01, 90, 0)
     EVT_CALL(SpeakToPlayer, NPC_Twink_01, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_CH8_009D)
     EVT_WAIT(10)
     EVT_CALL(StopSound, SOUND_22D)
     EVT_CALL(SetMusicTrack, 0, SONG_PEACH_WISHES, 0, 8)
-    EVT_CALL(InterpNpcYaw, NPC_BattleKooper_01, 270, 0)
+    EVT_CALL(InterpNpcYaw, NPC_Peach_01, 270, 0)
     EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_BattleKooper_01, ANIM_BattleParakarry_Idle, 0x000C0026, 5, MSG_CH8_009E)
+    EVT_CALL(SpeakToPlayer, NPC_Peach_01, ANIM_Peach_C0001, ANIM_Peach_C0026, 5, MSG_CH8_009E)
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_Twink_01, ANIM_Twink_Talk, ANIM_Twink_Idle, 5, MSG_CH8_009F)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_BattleKooper_01, ANIM_BattleParakarry_Walk)
+    EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach_C0002)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_BattleKooper_01, ANIM_BattleBow_Laugh)
+    EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach_D000F)
     EVT_WAIT(10)
     EVT_CALL(LoadPath, 20, EVT_PTR(N(D_80248880_B0F280)), 3, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
@@ -189,7 +197,7 @@ EvtScript N(EVS_80248998) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_WAIT(20)
-    EVT_CALL(GetNpcPos, NPC_BattleKooper_01, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPos, NPC_Peach_01, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 245)
@@ -197,7 +205,7 @@ EvtScript N(EVS_80248998) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.6))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(GetNpcPos, NPC_BattleKooper_01, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPos, NPC_Peach_01, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 10)
     EVT_CALL(PlaySoundAt, SOUND_2051, 0, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 5, LVar0, LVar1, LVar2, 40, 120, 45, 150)
@@ -234,7 +242,7 @@ EvtScript N(EVS_80248998) = {
     EVT_CALL(NpcJump0, NPC_Twink_01, 195, 200, 0, 20)
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000106)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Bowser_02, ANIM_WorldBowser_Idle)
         EVT_CALL(InterpNpcYaw, NPC_Bowser_02, 90, 0)
@@ -254,19 +262,19 @@ EvtScript N(EVS_80248998) = {
     EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 5, 100, 45, -66, 40, 50, 45, 80)
     EVT_CALL(PlaySound, SOUND_2051)
     EVT_WAIT(30)
-    EVT_SET(LVar0, 8)
+    EVT_SET(LVar0, NPC_Eldstar)
     EVT_EXEC(N(D_802488A4_B0F2A4))
-    EVT_SET(LVar0, 9)
+    EVT_SET(LVar0, NPC_Mamar)
     EVT_EXEC(N(D_802488A4_B0F2A4))
-    EVT_SET(LVar0, 10)
+    EVT_SET(LVar0, NPC_Skolar)
     EVT_EXEC(N(D_802488A4_B0F2A4))
-    EVT_SET(LVar0, 11)
+    EVT_SET(LVar0, NPC_Muskular)
     EVT_EXEC(N(D_802488A4_B0F2A4))
-    EVT_SET(LVar0, 12)
+    EVT_SET(LVar0, NPC_Misstar)
     EVT_EXEC(N(D_802488A4_B0F2A4))
-    EVT_SET(LVar0, 13)
+    EVT_SET(LVar0, NPC_Klevar)
     EVT_EXEC(N(D_802488A4_B0F2A4))
-    EVT_SET(LVar0, 14)
+    EVT_SET(LVar0, NPC_Kalmar)
     EVT_EXEC(N(D_802488A4_B0F2A4))
     EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 15)
@@ -311,21 +319,21 @@ EvtScript N(EVS_80248998) = {
     EVT_SETF(LVar0, 0)
     EVT_LOOP(20)
         EVT_ADDF(LVar0, EVT_FLOAT(12.0))
-        EVT_CALL(func_802CFD30, 9, 7, LVar0, 0, 0, 0)
-        EVT_CALL(func_802CFD30, 10, 7, LVar0, 0, 0, 0)
-        EVT_CALL(func_802CFD30, 11, 7, LVar0, 0, 0, 0)
-        EVT_CALL(func_802CFD30, 12, 7, LVar0, 0, 0, 0)
-        EVT_CALL(func_802CFD30, 13, 7, LVar0, 0, 0, 0)
-        EVT_CALL(func_802CFD30, 14, 7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Mamar,    FOLD_TYPE_7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Skolar,   FOLD_TYPE_7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Muskular, FOLD_TYPE_7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Misstar,  FOLD_TYPE_7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Klevar,   FOLD_TYPE_7, LVar0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Kalmar,   FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(func_802CFD30, 8, 0, 0, 0, 0, 0)
-    EVT_CALL(func_802CFD30, 9, 0, 0, 0, 0, 0)
-    EVT_CALL(func_802CFD30, 10, 0, 0, 0, 0, 0)
-    EVT_CALL(func_802CFD30, 11, 0, 0, 0, 0, 0)
-    EVT_CALL(func_802CFD30, 12, 0, 0, 0, 0, 0)
-    EVT_CALL(func_802CFD30, 13, 0, 0, 0, 0, 0)
-    EVT_CALL(func_802CFD30, 14, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Eldstar,  FOLD_TYPE_NONE, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Mamar,    FOLD_TYPE_NONE, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Skolar,   FOLD_TYPE_NONE, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Muskular, FOLD_TYPE_NONE, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Misstar,  FOLD_TYPE_NONE, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Klevar,   FOLD_TYPE_NONE, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Kalmar,   FOLD_TYPE_NONE, 0, 0, 0, 0)
     EVT_CALL(SetNpcJumpscale, NPC_Twink_01, EVT_FLOAT(0.0))
     EVT_CALL(NpcJump0, NPC_Twink_01, 140, 65, 30, 20)
     EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
@@ -446,7 +454,7 @@ EvtScript N(EVS_80248998) = {
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, 110, 20, 3, 30)
         EVT_WAIT(6)
     EVT_END_LOOP
-    EVT_CALL(N(func_80240CE8_B076E8))
+    EVT_CALL(N(UpgradeStarBeam))
     EVT_WAIT(30)
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0199, 160, 40)
     EVT_WAIT(30)
@@ -481,36 +489,25 @@ EvtScript N(EVS_80248998) = {
     EVT_END
 };
 
-s32 N(missing_8024A860_A860)[] = {
-    0x00000000, 0x004B0048, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00630000, 0x00000000, 0x00180018, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00630000, 0x00000000, 0x00220018, 
-    0x00000000, 0x00000000, 0x00000000, 0x80077F70, 0x00000000, 0x8007809C, 0x00000000, 0x00000000, 
-    0x001A0000, 0x00000000, 0x00170016, 0x00000000, 0x00000000, 0x00000000, 0x80077F70, 0x00000000, 
-    0x8007809C, 0x00000000, 0x00000000, 0x000E0001, 0x00000000, 0x00180018, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00630000, 0x00000000, 
-    0x001A0018, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00630000, 0x00000000, 0x00140014, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00630000, 0x00000000, 0x00160018, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00630000, 
-};
-
-EvtScript N(D_8024A9C0_B113C0) = {
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(missing_8024A9D0_A9D0)[] = {
-    0x00000000, 0x00180018, 0x8024A9C0, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00630000, 
-};
+#define NAME_SUFFIX _Unused2A
+#include "world/common/npc/Bowser.inc.c"
+#include "world/common/npc/Dummy.inc.c"
+#include "world/common/enemy/complete/Kammy_Flying.inc.c"
+#include "world/common/enemy/complete/ShyGuy_Stationary.inc.c"
+#define NAME_SUFFIX _Unused2B
+#include "world/common/npc/Dummy.inc.c"
+#define NAME_SUFFIX _Unused2A
+#include "world/common/npc/StarSpirit.inc.c"
+#include "world/common/npc/StarRod.inc.c"
+#define NAME_SUFFIX
 
 s32 N(D_8024A9FC_B113FC)[] = {
-    0, 0, 0, 30, EVT_FLOAT(3.0), EVT_FLOAT(1.0), 450, -50, 
-    330, 40, EVT_FLOAT(4.0), EVT_FLOAT(2.0), 280, -100, 350, 50, 
-    EVT_FLOAT(5.0), EVT_FLOAT(2.0), 80, -200, -60, 30, EVT_FLOAT(3.0), EVT_FLOAT(1.0), 
-    500, -200, 20, 30, EVT_FLOAT(3.0), EVT_FLOAT(1.0), 350, -120, 
-    350, 50, EVT_FLOAT(5.0), EVT_FLOAT(2.0), 
+      0,    0,   0, 30, EVT_FLOAT(3.0), EVT_FLOAT(1.0),
+    450,  -50, 330, 40, EVT_FLOAT(4.0), EVT_FLOAT(2.0),
+    280, -100, 350, 50, EVT_FLOAT(5.0), EVT_FLOAT(2.0),
+     80, -200, -60, 30, EVT_FLOAT(3.0), EVT_FLOAT(1.0),
+    500, -200,  20, 30, EVT_FLOAT(3.0), EVT_FLOAT(1.0),
+    350, -120, 350, 50, EVT_FLOAT(5.0), EVT_FLOAT(2.0),
 };
 
 EvtScript N(D_8024AA8C_B1148C) = {
@@ -584,7 +581,7 @@ EvtScript N(D_8024AEA8_B118A8) = {
         EVT_CALL(NpcJump0, NPC_Bowser_03, 700, -50, 1000, 100)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 0xFFFFF8F8, 100, EASING_LINEAR)
+        EVT_CALL(MakeLerp, 0, -1800, 100, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
             EVT_CALL(SetNpcRotation, NPC_Bowser_03, 0, 0, LVar0)
@@ -595,14 +592,14 @@ EvtScript N(D_8024AEA8_B118A8) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetNpcJumpscale, NPC_BattleKammy_05, EVT_FLOAT(0.1))
-        EVT_CALL(NpcJump0, NPC_BattleKammy_05, 600, -250, 1000, 100)
+        EVT_CALL(SetNpcJumpscale, NPC_Kammy_05, EVT_FLOAT(0.1))
+        EVT_CALL(NpcJump0, NPC_Kammy_05, 600, -250, 1000, 100)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 0xFFFFF790, 100, EASING_LINEAR)
+        EVT_CALL(MakeLerp, 0, -2160, 100, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcRotation, NPC_BattleKammy_05, 0, 0, LVar0)
+            EVT_CALL(SetNpcRotation, NPC_Kammy_05, 0, 0, LVar0)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 0)
                 EVT_BREAK_LOOP
@@ -641,7 +638,7 @@ EvtScript N(D_8024AEA8_B118A8) = {
     EVT_END
 };
 
-EvtScript N(EVS_8024B254) = {
+EvtScript N(EVS_Scene_BowserDefeated) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_EXEC(N(D_8024AA8C_B1148C))
@@ -654,7 +651,7 @@ EvtScript N(EVS_8024B254) = {
         EVT_CALL(SetNpcPos, NPC_PARTNER, 110, 0, 0)
     EVT_END_IF
     EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000106)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_CALL(GetNpcPos, NPC_Bowser_03, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -40)
     EVT_ADD(LVar1, 60)
@@ -702,21 +699,21 @@ EvtScript N(EVS_8024B254) = {
     EVT_CALL(GetCurrentPartnerID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PARTNER_GOOMBARIO)
-            EVT_SET(LVar1, 0x00010009)
+            EVT_SET(LVar1, ANIM_WorldGoombario_Celebrate)
         EVT_CASE_EQ(PARTNER_KOOPER)
-            EVT_SET(LVar1, 0x00020010)
+            EVT_SET(LVar1, ANIM_WorldKooper_Celebrate)
         EVT_CASE_EQ(PARTNER_BOMBETTE)
-            EVT_SET(LVar1, 0x0003000F)
+            EVT_SET(LVar1, ANIM_WorldBombette_Celebrate)
         EVT_CASE_EQ(PARTNER_PARAKARRY)
-            EVT_SET(LVar1, 0x00040007)
+            EVT_SET(LVar1, ANIM_WorldParakarry_Celebrate)
         EVT_CASE_EQ(PARTNER_BOW)
-            EVT_SET(LVar1, 0x0005000A)
+            EVT_SET(LVar1, ANIM_WorldBow_CelebrateSlow)
         EVT_CASE_EQ(PARTNER_WATT)
-            EVT_SET(LVar1, 0x00060006)
+            EVT_SET(LVar1, ANIM_WorldWatt_Celebrate)
         EVT_CASE_EQ(PARTNER_SUSHIE)
-            EVT_SET(LVar1, 0x00070006)
+            EVT_SET(LVar1, ANIM_WorldSushie_Celebrate)
         EVT_CASE_EQ(PARTNER_LAKILESTER)
-            EVT_SET(LVar1, 0x0008000D)
+            EVT_SET(LVar1, ANIM_WorldLakilester_Celebrate)
     EVT_END_SWITCH
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, LVar1)
     EVT_SWITCH(LVar0)
@@ -730,15 +727,15 @@ EvtScript N(EVS_8024B254) = {
                 EVT_CALL(NpcJump0, NPC_PARTNER, LVar1, LVar2, LVar3, 10)
             EVT_END_LOOP
     EVT_END_SWITCH
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x00000106)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, NPC_BattleKooper_02, ANIM_BattleParakarry_Still, ANIM_BattleKooper_StillHappy, 0, MSG_CH8_00AB)
+    EVT_CALL(SpeakToPlayer, NPC_Peach_02, ANIM_Peach_C0000, ANIM_Peach_A0001, 0, MSG_CH8_00AB)
     EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_BattleKooper_02, ANIM_BattleKooper_StillSad)
-        EVT_CALL(NpcMoveTo, NPC_BattleKooper_02, 200, 0, 85)
-        EVT_CALL(SetNpcAnimation, NPC_BattleKooper_02, ANIM_BattleKooper_StillHappy)
+        EVT_CALL(SetNpcAnimation, NPC_Peach_02, ANIM_Peach_A0002)
+        EVT_CALL(NpcMoveTo, NPC_Peach_02, 200, 0, 85)
+        EVT_CALL(SetNpcAnimation, NPC_Peach_02, ANIM_Peach_A0001)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -752,20 +749,20 @@ EvtScript N(EVS_8024B254) = {
     EVT_END_THREAD
     EVT_CALL(NpcMoveTo, NPC_Twink_02, 230, 30, 85)
     EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_BattleKooper_02, ANIM_BattleParakarry_Still, ANIM_BattleKooper_StillHappy, 0, MSG_CH8_00AC)
+    EVT_CALL(SpeakToPlayer, NPC_Peach_02, ANIM_Peach_C0000, ANIM_Peach_A0001, 0, MSG_CH8_00AC)
     EVT_WAIT(20)
     EVT_CALL(PlaySound, SOUND_8000006B)
     EVT_SET(MV_Unk_0C, 1)
     EVT_CALL(PlaySoundAtPlayer, SOUND_262, 0)
     EVT_CALL(ShowEmote, NPC_Bowser_01, EMOTE_EXCLAMATION, 0, 20, FALSE, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_BattleKooper_02, SOUND_262, 0)
-    EVT_CALL(ShowEmote, NPC_BattleKooper_02, EMOTE_EXCLAMATION, 0, 20, TRUE, 0, 0, 0, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Peach_02, SOUND_262, 0)
+    EVT_CALL(ShowEmote, NPC_Peach_02, EMOTE_EXCLAMATION, 0, 20, TRUE, 0, 0, 0, 0)
     EVT_WAIT(20)
     EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_CALL(InterpNpcYaw, NPC_BattleKooper_02, 90, 0)
+    EVT_CALL(InterpNpcYaw, NPC_Peach_02, 90, 0)
     EVT_WAIT(15)
     EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_CALL(InterpNpcYaw, NPC_BattleKooper_02, 270, 0)
+    EVT_CALL(InterpNpcYaw, NPC_Peach_02, 270, 0)
     EVT_WAIT(10)
     EVT_CALL(GetNpcPos, NPC_Bowser_03, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -787,7 +784,7 @@ EvtScript N(EVS_8024B254) = {
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-10.5))
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(SetNpcAnimation, NPC_BattleKooper_02, ANIM_BattleParakarry_PostDive)
+    EVT_CALL(SetNpcAnimation, NPC_Peach_02, ANIM_Peach_C0006)
     EVT_CALL(SetNpcAnimation, NPC_Twink_02, ANIM_Twink_Cringe)
     EVT_CALL(SetNpcAnimation, NPC_Bowser_03, ANIM_WorldBowser_Shock)
     EVT_CALL(SetNpcJumpscale, NPC_Bowser_03, EVT_FLOAT(1.0))
@@ -806,7 +803,7 @@ EvtScript N(EVS_8024B254) = {
     EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, 370, -10, 180, EVT_FLOAT(6.0), 40)
     EVT_SET(MV_Unk_0C, 3)
     EVT_WAIT(20)
-    EVT_CALL(InterpNpcYaw, NPC_BattleKooper_02, 90, 0)
+    EVT_CALL(InterpNpcYaw, NPC_Peach_02, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_Twink_02, 90, 0)
     EVT_WAIT(30)
     EVT_CALL(GetNpcPos, NPC_Bowser_03, LVar0, LVar1, LVar2)
@@ -833,13 +830,13 @@ EvtScript N(EVS_8024B254) = {
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 350)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToNpc, NPC_Bowser_03, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 512, NPC_BattleKammy_05, MSG_CH8_00AE)
+    EVT_CALL(SpeakToNpc, NPC_Bowser_03, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 512, NPC_Kammy_05, MSG_CH8_00AE)
     EVT_WAIT(5)
     EVT_CALL(PlaySoundAt, SOUND_203C, 0, 350, 50, -100)
     EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, 350, 50, -100, EVT_FLOAT(4.0), 20)
     EVT_SET(MV_Unk_0C, 5)
     EVT_WAIT(25)
-    EVT_CALL(SpeakToNpc, NPC_BattleKammy_05, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim04, 512, NPC_Bowser_03, MSG_CH8_00AF)
+    EVT_CALL(SpeakToNpc, NPC_Kammy_05, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim04, 512, NPC_Bowser_03, MSG_CH8_00AF)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Bowser_03, ANIM_WorldBowser_Shock)
@@ -852,7 +849,7 @@ EvtScript N(EVS_8024B254) = {
         EVT_SET(MV_Unk_0C, 6)
     EVT_END_THREAD
     EVT_WAIT(30)
-    EVT_CALL(SpeakToNpc, NPC_Bowser_03, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 512, NPC_BattleKammy_05, MSG_CH8_00B0)
+    EVT_CALL(SpeakToNpc, NPC_Bowser_03, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 512, NPC_Kammy_05, MSG_CH8_00B0)
     EVT_SET(MV_Unk_0B, -1)
     EVT_WAIT(20)
     EVT_CALL(StopSound, SOUND_3BC)
@@ -867,9 +864,9 @@ EvtScript N(EVS_8024B254) = {
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -200)
     EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(GetNpcPos, NPC_BattleKooper_02, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPos, NPC_Peach_02, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -200)
-    EVT_CALL(SetNpcPos, NPC_BattleKooper_02, LVar0, LVar1, LVar2)
+    EVT_CALL(SetNpcPos, NPC_Peach_02, LVar0, LVar1, LVar2)
     EVT_CALL(GetNpcPos, NPC_Twink_02, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -200)
     EVT_CALL(SetNpcPos, NPC_Twink_02, LVar0, LVar1, LVar2)
@@ -883,10 +880,10 @@ EvtScript N(EVS_8024B254) = {
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 1100)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(SetNpcAnimation, NPC_Bowser_03, ANIM_WorldBowser_Idle)
-    EVT_CALL(InterpNpcYaw, NPC_BattleKammy_05, 90, 0)
+    EVT_CALL(InterpNpcYaw, NPC_Kammy_05, 90, 0)
     EVT_WAIT(5)
     EVT_CALL(SetNpcRotationPivot, NPC_Bowser_03, 34)
-    EVT_CALL(SetNpcRotationPivot, NPC_BattleKammy_05, 12)
+    EVT_CALL(SetNpcRotationPivot, NPC_Kammy_05, 12)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(N(func_80240E54_B07854))
@@ -894,17 +891,6 @@ EvtScript N(EVS_8024B254) = {
     EVT_EXEC_WAIT(N(D_8024AEA8_B118A8))
     EVT_CALL(GotoMap, EVT_PTR("osr_03"), osr_03_ENTRY_5)
     EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_MakeEntities) = {
-    EVT_IF_EQ(GF_KKJ25_Defeated_Kammy, FALSE)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_GreenStompSwitch), 300, 0, 0, 0, MAKE_ENTITY_END)
-        EVT_SET(MV_Unk_00, LVar0)
-        EVT_CALL(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_KKJ_1A))
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_802463F4)), TRIGGER_AREA_FLAG_SET, AF_KKJ_1A, 1, 0)
-    EVT_END_IF
     EVT_RETURN
     EVT_END
 };

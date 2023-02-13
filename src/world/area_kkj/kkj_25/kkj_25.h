@@ -12,9 +12,6 @@
 #include "sprite/npc/BattleKammy.h"
 #include "sprite/npc/Twink.h"
 #include "sprite/npc/WorldBowser.h"
-#include "sprite/npc/BattleKooper.h"
-#include "sprite/npc/BattleParakarry.h"
-#include "sprite/npc/BattleBow.h"
 #include "sprite/npc/WorldEldstar.h"
 #include "sprite/npc/WorldMamar.h"
 #include "sprite/npc/WorldSkolar.h"
@@ -25,26 +22,29 @@
 #include "sprite/npc/StarRod.h"
 
 enum {
-	NPC_Bowser_01               = 0,
-	NPC_BattleKooper_01         = 1,
-	NPC_BattleKammy_01          = 2,
-	NPC_BattleKammy_02          = 3,
-	NPC_Twink_01                = 4,
-	NPC_Bowser_02               = 5,
-	NPC_BattleKammy_03          = 6,
-	NPC_BattleKammy_04          = 7,
-	NPC_Eldstar                 = 8,
-	NPC_Mamar                   = 9,
-	NPC_Skolar                  = 10,
-	NPC_Muskular                = 11,
-	NPC_Misstar                 = 12,
-	NPC_Klevar                  = 13,
-	NPC_Kalmar                  = 14,
-	NPC_Bowser_03               = 15,
-	NPC_BattleKooper_02         = 16,
-	NPC_BattleKammy_05          = 17,
-	NPC_Twink_02                = 18,
-	NPC_StarRod                 = 19,
+    // part 1
+    NPC_Bowser_01       = 0,
+    NPC_Peach_01        = 1,
+    NPC_Kammy_01        = 2,
+    NPC_Kammy_02        = 3,
+    NPC_Twink_01        = 4,
+    // part 2
+    NPC_Bowser_02       = 5,
+    NPC_Kammy_03        = 6,
+    NPC_Kammy_04        = 7,
+    NPC_Eldstar         = 8,
+    NPC_Mamar           = 9,
+    NPC_Skolar          = 10,
+    NPC_Muskular        = 11,
+    NPC_Misstar         = 12,
+    NPC_Klevar          = 13,
+    NPC_Kalmar          = 14,
+    // part 3
+    NPC_Bowser_03       = 15,
+    NPC_Peach_02        = 16,
+    NPC_Kammy_05        = 17,
+    NPC_Twink_02        = 18,
+    NPC_StarRod         = 19,
 };
 
 enum {
@@ -60,14 +60,14 @@ enum {
 
 extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_80247194);
-extern EvtScript N(EVS_80245AF0);
-extern EvtScript N(EVS_80248998);
-extern EvtScript N(EVS_8024B254);
+extern EvtScript N(EVS_Scene_BowserTrapsMario);
+extern EvtScript N(EVS_Scene_KammyDefeated);
+extern EvtScript N(EVS_Scene_BowserDefeated);
 extern EvtScript N(EVS_80247AAC);
-extern EvtScript N(EVS_802463F4);
+extern EvtScript N(EVS_Scene_ActivateMachine);
 extern EvtScript N(D_802479C4_B0E3C4);
 extern EvtScript N(EVS_MakeEntities);
 
-extern NpcGroupList N(DefaultNPCs);
-extern NpcGroupList N(NpcGroup1);
-extern NpcGroupList N(NpcGroup2);
+extern NpcGroupList N(InitialNpcs);
+extern NpcGroupList N(MidpointNpcs);
+extern NpcGroupList N(FinaleNpcs);

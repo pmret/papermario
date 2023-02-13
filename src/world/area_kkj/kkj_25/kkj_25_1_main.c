@@ -48,11 +48,11 @@ EvtScript N(EVS_EnterMap) = {
             EVT_SET(LVar3, MODEL_o85)
             EVT_EXEC_WAIT(EnterDoubleDoor)
             EVT_EXEC(N(EVS_BindExitTriggers))
-            EVT_EXEC(N(EVS_80245AF0))
+            EVT_EXEC(N(EVS_Scene_BowserTrapsMario))
         EVT_CASE_EQ(kkj_25_ENTRY_1)
-            EVT_EXEC(N(EVS_80248998))
+            EVT_EXEC(N(EVS_Scene_KammyDefeated))
         EVT_CASE_EQ(kkj_25_ENTRY_2)
-            EVT_EXEC(N(EVS_8024B254))
+            EVT_EXEC(N(EVS_Scene_BowserDefeated))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -100,13 +100,13 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.75))
     EVT_IF_EQ(GF_KKJ25_Defeated_Bowser, FALSE)
         EVT_IF_EQ(GF_KKJ25_Defeated_Kammy, FALSE)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(InitialNpcs)))
         EVT_ELSE
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup1)))
+            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(MidpointNpcs)))
             EVT_CALL(EnableGroup, MODEL_g30, FALSE)
         EVT_END_IF
     EVT_ELSE
-        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup2)))
+        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(FinaleNpcs)))
         EVT_CALL(EnableGroup, MODEL_g30, FALSE)
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_MakeEntities))

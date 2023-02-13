@@ -2,6 +2,10 @@
 #include "npc.h"
 #include "effects.h"
 
+#ifndef STAR_SPIRIT_DATA_VAR
+    #error STAR_SPIRIT_DATA_VAR is not defined!
+#endif
+
 // seems to be a macro in the original based on usage
 #define EVT_SPIRIT_ADJUST_CAM(pitch) \
     EVT_CALL(GetCamDistance, CAM_DEFAULT, LVar1) \
@@ -31,7 +35,7 @@ ApiStatus N(StarSpiritEffectFunc2)(Evt* script, s32 isInitialCall) {
         StarSpiritData* ptr = heap_malloc(sizeof(*ptr));
 
         script->varTablePtr[0] = ptr;
-        evt_set_variable(NULL, MapVar(1), script->varTable[0]);
+        evt_set_variable(NULL, STAR_SPIRIT_DATA_VAR, script->varTable[0]);
         ptr->unk_38 = evt_get_variable(script, *args++);
         ptr->unk_3C = evt_get_variable(script, *args++);
         ptr->unk_0C = evt_get_float_variable(script, *args++);

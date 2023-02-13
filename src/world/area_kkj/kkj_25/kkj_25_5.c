@@ -3,7 +3,7 @@
 
 #include "world/common/todo/GetFloorCollider.inc.c"
 
-#include "common/UnkLightningFXFunc.inc.c"
+#include "world/common/util/SetLightningBoltPurple.inc.c"
 
 #include "world/common/todo/SetEntityPositionF.inc.c"
 
@@ -20,15 +20,14 @@ API_CALLABLE(N(func_80240264_B06C64)) {
     return ApiStatus_DONE2;
 }
 
-s32 N(missing_80245640_5640)[] = {
-    0x00000000, 0x004B0048, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00630000, 0x00000000, 0x00180018, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00630000, 0x00000000, 
-    0x00220018, 0x00000000, 0x00000000, 0x00000000, 0x80077F70, 0x00000000, 0x8007809C, 0x00000000, 
-    0x00000000, 0x001A0000, 0x00000000, 0x00170016, 0x00000000, 0x00000000, 0x00000000, 0x80077F70, 
-    0x00000000, 0x8007809C, 0x00000000, 0x00000000, 0x000E0001, 0x00000000, 0x00180018, 0x00000000, 
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00630000, 
-};
+#define NAME_SUFFIX _Unused1A
+#include "world/common/npc/Bowser.inc.c"
+#include "world/common/npc/Dummy.inc.c"
+#include "world/common/enemy/complete/Kammy_Flying.inc.c"
+#include "world/common/enemy/complete/ShyGuy_Stationary.inc.c"
+#define NAME_SUFFIX _Unused1B
+#include "world/common/npc/Dummy.inc.c"
+#define NAME_SUFFIX
 
 EvtScript N(D_8024571C_B0C11C) = {
     EVT_CALL(PlaySoundAt, SOUND_5A, 0, 300, -70, 280)
@@ -38,7 +37,7 @@ EvtScript N(D_8024571C_B0C11C) = {
     EVT_END
 };
 
-EvtScript N(D_80245784_B0C184) = {
+EvtScript N(EVS_BowserActivatesSwitch) = {
     EVT_THREAD
         EVT_WAIT(20)
         EVT_CALL(N(GetEntityPosition), MV_Unk_00, LVar7, LVar8, LVar9)
@@ -68,7 +67,7 @@ EvtScript N(D_80245784_B0C184) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySound, 0x000007BC)
+        EVT_CALL(PlaySound, SOUND_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_Bowser_01, EVT_FLOAT(1.0))
     EVT_CALL(NpcJump0, NPC_Bowser_01, 300, 0, 0, 20)
@@ -96,18 +95,32 @@ EvtScript N(EVS_802459E4) = {
     EVT_END
 };
 
-s32 N(D_80245AB0_B0C4B0)[] = {
-    87, 84, 81, 78, 75, 72, 69, 66, 
-    63, 60, 57, 54, 51, 48, 45, 42, 
+s32 N(BridgeModels)[] = {
+    MODEL_g49,
+    MODEL_g48,
+    MODEL_g47,
+    MODEL_g46,
+    MODEL_g45,
+    MODEL_g44,
+    MODEL_g43,
+    MODEL_g42, 
+    MODEL_g41,
+    MODEL_g40,
+    MODEL_g39,
+    MODEL_g38,
+    MODEL_g37,
+    MODEL_g36,
+    MODEL_g35,
+    MODEL_g34, 
 };
 
-EvtScript N(EVS_80245AF0) = {
+EvtScript N(EVS_Scene_BowserTrapsMario) = {
     EVT_LABEL(0)
-    EVT_CALL(N(GetFloorCollider), LVar0)
-    EVT_IF_NE(LVar0, 11)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_CALL(N(GetFloorCollider), LVar0)
+        EVT_IF_NE(LVar0, COLLIDER_o128)
+            EVT_WAIT(1)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_THREAD
         EVT_WAIT(1)
         EVT_CALL(DisablePlayerInput, TRUE)
@@ -115,11 +128,11 @@ EvtScript N(EVS_80245AF0) = {
         EVT_CALL(GetPartnerInUse, LVar0)
         EVT_CALL(GetCurrentPartnerID, LVar1)
         EVT_IF_EQ(LVar1, PARTNER_BOMBETTE)
-            EVT_IF_NE(LVar0, 0)
+            EVT_IF_NE(LVar0, PARTNER_NONE)
                 EVT_GOTO(1)
             EVT_END_IF
         EVT_END_IF
-        EVT_IF_NE(LVar0, 0)
+        EVT_IF_NE(LVar0, PARTNER_NONE)
             EVT_CALL(GetCurrentPartnerID, LVar1)
             EVT_IF_NE(LVar1, PARTNER_LAKILESTER)
                 EVT_CALL(WaitForPlayerTouchingFloor)
@@ -154,7 +167,7 @@ EvtScript N(EVS_80245AF0) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_Bowser_01, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, MSG_CH8_007D)
-    EVT_EXEC_WAIT(N(D_80245784_B0C184))
+    EVT_EXEC_WAIT(N(EVS_BowserActivatesSwitch))
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -150, 0, 0)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -150, 0, 100)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 250)
@@ -168,11 +181,11 @@ EvtScript N(EVS_80245AF0) = {
     EVT_END
 };
 
-EvtScript N(D_80245F20_B0C920) = {
-    EVT_USE_BUF(EVT_PTR(N(D_80245AB0_B0C4B0)))
+EvtScript N(EVS_WaveBridgeModels) = {
+    EVT_USE_BUF(EVT_PTR(N(BridgeModels)))
     EVT_SETF(LVar1, EVT_FLOAT(1.0))
     EVT_SET(LVar2, 1)
-    EVT_LOOP(16)
+    EVT_LOOP(ARRAY_COUNT(N(BridgeModels)))
         EVT_BUF_READ1(LVar3)
         EVT_SETF(LVar0, 0)
         EVT_THREAD
@@ -209,19 +222,19 @@ EvtScript N(D_80245F20_B0C920) = {
     EVT_END
 };
 
-EvtScript N(D_80246128_B0CB28) = {
+EvtScript N(EVS_AnimateBridgeCollapsing) = {
     EVT_LOOP(4)
-        EVT_EXEC(N(D_80245F20_B0C920))
+        EVT_EXEC(N(EVS_WaveBridgeModels))
         EVT_WAIT(25)
     EVT_END_LOOP
     EVT_THREAD
         EVT_WAIT(15)
         EVT_SET(MV_Unk_0A, 11)
     EVT_END_THREAD
-    EVT_USE_BUF(EVT_PTR(N(D_80245AB0_B0C4B0)))
+    EVT_USE_BUF(EVT_PTR(N(BridgeModels)))
     EVT_SET(LVar2, 35)
     EVT_SET(LVar5, -15)
-    EVT_LOOP(16)
+    EVT_LOOP(ARRAY_COUNT(N(BridgeModels)))
         EVT_CALL(PlaySoundAt, SOUND_B000001B, 0, LVar5, 0, 0)
         EVT_ADD(LVar5, -30)
         EVT_BUF_READ1(LVar3)
@@ -256,17 +269,21 @@ EvtScript N(D_80246128_B0CB28) = {
     EVT_END
 };
 
-s32 N(D_80246394_B0CD94)[] = {
-    230, 160, 0, 350, 160, 90, 420, 160, 
-    10, 280, 160, -10, 
+Vec3i N(D_80246394_B0CD94)[] = {
+    { 230, 160,   0 },
+    { 350, 160,  90 },
+    { 420, 160,  10 },
+    { 280, 160, -10 },
 };
 
-s32 N(D_802463C4_B0CDC4)[] = {
-    330, 160, 50, 360, 160, -50, 370, 160, 
-    50, 330, 160, -50, 
+Vec3i N(D_802463C4_B0CDC4)[] = {
+    { 330, 160,  50 },
+    { 360, 160, -50 },
+    { 370, 160,  50 },
+    { 330, 160, -50 }, 
 };
 
-EvtScript N(EVS_802463F4) = {
+EvtScript N(EVS_Scene_ActivateMachine) = {
     EVT_SET(AF_KKJ_1A, FALSE)
     EVT_WAIT(10)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -150, 0, 0)
@@ -284,7 +301,7 @@ EvtScript N(EVS_802463F4) = {
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000A)
     EVT_END_THREAD
     EVT_SET(MV_Unk_0A, 10)
-    EVT_EXEC_WAIT(N(D_80246128_B0CB28))
+    EVT_EXEC_WAIT(N(EVS_AnimateBridgeCollapsing))
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SetPlayerPos, 100, 0, 0)
     EVT_CALL(PartnerIsFlying, LVar0)
@@ -307,19 +324,19 @@ EvtScript N(EVS_802463F4) = {
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_Bowser_01, ANIM_WorldBowser_RearUpLaugh, ANIM_WorldBowser_RearUpLaugh, 0, MSG_CH8_007E)
     EVT_THREAD
-        EVT_CALL(SetNpcJumpscale, NPC_BattleKooper_01, EVT_FLOAT(1.0))
-        EVT_CALL(GetNpcPos, NPC_BattleKooper_01, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcJump0, NPC_BattleKooper_01, LVar0, LVar1, LVar2, 12)
+        EVT_CALL(SetNpcJumpscale, NPC_Peach_01, EVT_FLOAT(1.0))
+        EVT_CALL(GetNpcPos, NPC_Peach_01, LVar0, LVar1, LVar2)
+        EVT_CALL(NpcJump0, NPC_Peach_01, LVar0, LVar1, LVar2, 12)
         EVT_WAIT(8)
-        EVT_CALL(GetNpcPos, NPC_BattleKooper_01, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcJump0, NPC_BattleKooper_01, LVar0, LVar1, LVar2, 7)
+        EVT_CALL(GetNpcPos, NPC_Peach_01, LVar0, LVar1, LVar2)
+        EVT_CALL(NpcJump0, NPC_Peach_01, LVar0, LVar1, LVar2, 7)
         EVT_WAIT(10)
     EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_BattleKooper_01, ANIM_BattleBow_FanSmackOnce, 0x000C001E, 0, MSG_CH8_007F)
+    EVT_CALL(SpeakToPlayer, NPC_Peach_01, ANIM_Peach_D000A, ANIM_Peach_C001E, 0, MSG_CH8_007F)
     EVT_WAIT(15)
-    EVT_CALL(SpeakToPlayer, NPC_BattleKammy_01, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim04, 512, MSG_CH8_0080)
+    EVT_CALL(SpeakToPlayer, NPC_Kammy_01, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim04, 512, MSG_CH8_0080)
     EVT_WAIT(15)
-    EVT_CALL(GetNpcPos, NPC_BattleKammy_01, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPos, NPC_Kammy_01, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 250)
@@ -331,21 +348,21 @@ EvtScript N(EVS_802463F4) = {
     EVT_WAIT(10)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(InterpNpcYaw, NPC_BattleKooper_01, 90, 0)
+        EVT_CALL(InterpNpcYaw, NPC_Peach_01, 90, 0)
         EVT_WAIT(30)
-        EVT_CALL(InterpNpcYaw, NPC_BattleKooper_01, 270, 0)
+        EVT_CALL(InterpNpcYaw, NPC_Peach_01, 270, 0)
     EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_BattleKammy_01, ANIM_BattleKammy_Anim07)
-    EVT_CALL(SpeakToPlayer, NPC_BattleKammy_01, ANIM_BattleKammy_Anim07, ANIM_BattleKammy_Anim07, 512, MSG_CH8_0081)
-    EVT_CALL(FadeOutMusic, 0, 0x000005DC)
-    EVT_CALL(SetNpcAnimation, NPC_BattleKammy_01, ANIM_BattleKammy_Anim08)
-    EVT_CALL(GetNpcPos, NPC_BattleKammy_01, LVar0, LVar1, LVar2)
+    EVT_CALL(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_Anim07)
+    EVT_CALL(SpeakToPlayer, NPC_Kammy_01, ANIM_BattleKammy_Anim07, ANIM_BattleKammy_Anim07, 512, MSG_CH8_0081)
+    EVT_CALL(FadeOutMusic, 0, 1500)
+    EVT_CALL(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_Anim08)
+    EVT_CALL(GetNpcPos, NPC_Kammy_01, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -30)
     EVT_CALL(PlaySoundAt, SOUND_207A, 0, LVar0, 22, 0)
     EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, LVar0, 22, 0, 1, 80)
     EVT_THREAD
         EVT_WAIT(80)
-        EVT_CALL(SetNpcAnimation, NPC_BattleKammy_01, ANIM_BattleKammy_Anim04)
+        EVT_CALL(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_Anim04)
     EVT_END_THREAD
     EVT_WAIT(40)
     EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(4.0), 300, 0, 0, 1100, EVT_FLOAT(7.0), EVT_FLOAT(0.0))
@@ -372,7 +389,7 @@ EvtScript N(EVS_802463F4) = {
     EVT_CALL(GetNpcPos, NPC_Bowser_01, LVar3, LVar4, LVar5)
     EVT_THREAD
         EVT_USE_BUF(EVT_PTR(N(D_80246394_B0CD94)))
-        EVT_LOOP(4)
+        EVT_LOOP(ARRAY_COUNT(N(D_80246394_B0CD94)))
             EVT_BUF_READ3(LVar0, LVar1, LVar2)
             EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 8)
             EVT_WAIT(8)
@@ -380,7 +397,7 @@ EvtScript N(EVS_802463F4) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_USE_BUF(EVT_PTR(N(D_802463C4_B0CDC4)))
-        EVT_LOOP(4)
+        EVT_LOOP(ARRAY_COUNT(N(D_802463C4_B0CDC4)))
             EVT_BUF_READ3(LVar0, LVar1, LVar2)
             EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 8)
             EVT_WAIT(12)
@@ -497,11 +514,11 @@ EvtScript N(EVS_80247194) = {
     EVT_CHILD_THREAD
         EVT_LOOP(0)
             EVT_USE_BUF(EVT_PTR(N(D_80246FFC_B0D9FC)))
-            EVT_LOOP(9)
+            EVT_LOOP(ARRAY_COUNT(N(D_80246FFC_B0D9FC)) / 2)
                 EVT_BUF_READ3(LVar0, LVar1, LVar2)
                 EVT_BUF_READ3(LVar3, LVar4, LVar5)
                 EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 5)
-                EVT_CALL(N(UnkLightningFXFunc))
+                EVT_CALL(N(SetLightningBoltPurple))
                 EVT_WAIT(5)
             EVT_END_LOOP
         EVT_END_LOOP
@@ -517,11 +534,11 @@ EvtScript N(EVS_80247194) = {
             EVT_END_LOOP
             EVT_IF_NE(MV_Unk_0B, 10)
                 EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 10)
-                EVT_CALL(N(UnkLightningFXFunc))
+                EVT_CALL(N(SetLightningBoltPurple))
                 EVT_WAIT(30)
             EVT_ELSE
                 EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 5)
-                EVT_CALL(N(UnkLightningFXFunc))
+                EVT_CALL(N(SetLightningBoltPurple))
                 EVT_WAIT(15)
             EVT_END_IF
         EVT_END_LOOP

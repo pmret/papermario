@@ -12005,12 +12005,13 @@ segments:
     subsegments:
     - [0xB06A00, c, kkj_25_0_header]
     - [0xB06A20, c, kkj_25_1_main]
-    - [0xB06A20, c, kkj_25_2_npc_1]
-    - [0xB06A50, c, kkj_25_3_npc_2]
-    - [0xB06A80, c, kkj_25_4_npc_3]
+    - [0xB06A20, c, kkj_25_2_npc_initial]
+    - [0xB06A50, c, kkj_25_3_npc_midpoint]
+    - [0xB06A80, c, kkj_25_4_npc_final]
     - [0xB06A80, c, kkj_25_5]
     - [0xB06D10, c, kkj_25_6]
     - [0xB07660, c, kkj_25_7]
+    - [0xB07940, c, kkj_25_8_entity]
     - [0xB07940]
   - name: kkj_26
     dir: world/area_kkj/kkj_26
