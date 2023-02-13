@@ -8,7 +8,15 @@ API_CALLABLE(N(SpawnSunEffect)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(EVS_ExitWalk_flo_21_0) = EVT_EXIT_WALK(60, flo_19_ENTRY_1, "flo_21", flo_21_ENTRY_0);
+EvtScript N(EVS_ExitWalk_flo_21_0) = {
+    EVT_SET_GROUP(EVT_GROUP_1B)
+	EVT_CALL(UseExitHeading, 60, flo_19_ENTRY_1)
+	EVT_EXEC(ExitWalk)
+	EVT_CALL(GotoMap, 0x80243000, flo_21_ENTRY_0) // raw pointer to missing string "flo_21"
+	EVT_WAIT(100)
+	EVT_RETURN
+	EVT_END
+};
 
 EvtScript N(EVS_BindExitTriggers) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_flo_21_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
@@ -25,8 +33,8 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_CALL(ParentColliderToModel, COLLIDER_o117, MODEL_o142)
     EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_EXEC(N(EVS_SetupBeanstalk))
-    EVT_EXEC(N(EVS_SetupClouds))
+    EVT_EXEC(0x80242FD0) // raw pointer to missing N(EVS_SetupBeanstalk)
+    EVT_EXEC(0x80241780) // raw pointer to missing N(EVS_SetupClouds)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o122, SURFACE_TYPE_CLOUD)
     EVT_CALL(EnableTexPanning, MODEL_o59, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_o60, TRUE)
@@ -56,10 +64,10 @@ EvtScript N(EVS_Main) = {
             EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
             EVT_EXEC(EnterWalk)
         EVT_CASE_EQ(flo_19_ENTRY_2)
-            EVT_EXEC(N(EVS_Scene_BeanstalkGrowing))
+            EVT_EXEC(0x80242A2C) // raw pointer to missing N(EVS_Scene_BeanstalkGrowing)
             EVT_EXEC(N(EVS_BindExitTriggers))
         EVT_CASE_EQ(flo_19_ENTRY_3)
-            EVT_EXEC(N(EVS_Enter_Beanstalk))
+            EVT_EXEC(0x80241CC4) // raw pointer to missing N(EVS_Enter_Beanstalk)
             EVT_EXEC(N(EVS_BindExitTriggers))
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(EVS_SetupMusic))
