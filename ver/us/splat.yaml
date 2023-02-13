@@ -12009,10 +12009,11 @@ segments:
     - [0xB06A20, c, kkj_25_2_npc_initial]
     - [0xB06A50, c, kkj_25_3_npc_midpoint]
     - [0xB06A80, c, kkj_25_4_npc_final]
-    - [0xB06A80, c, kkj_25_5]
-    - [0xB06D10, c, kkj_25_6]
-    - [0xB07660, c, kkj_25_7]
-    - [0xB07940, c, kkj_25_8_entity]
+    - [0xB06A80, c, kkj_25_5_arena]
+    - [0xB06D10, c, kkj_25_6_peach_free]
+    - [0xB07660, c, kkj_25_7_kammy_defeated]
+    - [0xB07730, c, kkj_25_8_bowser_defeated]
+    - [0xB07940, c, kkj_25_9_entity]
     - [0xB07940]
   - name: kkj_26
     dir: world/area_kkj/kkj_26

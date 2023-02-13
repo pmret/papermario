@@ -38,7 +38,7 @@ EvtScript N(EVS_NpcIdle_Bowser) = {
 EvtScript N(EVS_NpcDefeat_Bowser) = {
     #define NAME_SUFFIX
     EVT_CALL(PlaySound, SOUND_22D)
-    EVT_EXEC(N(EVS_80247AAC))
+    EVT_EXEC(N(EVS_Scene_PeachBreaksFree))
     EVT_RETURN
     EVT_END
     #define NAME_SUFFIX _Npc1

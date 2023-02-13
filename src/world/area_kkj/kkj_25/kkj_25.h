@@ -48,24 +48,46 @@ enum {
 };
 
 enum {
-    MV_Unk_00       = MapVar(0),
-    MV_Unk_01       = MapVar(1),
-    MV_Unk_0A       = MapVar(10),
-    MV_Unk_0B       = MapVar(11),
-    MV_Unk_0C       = MapVar(12),
-    MV_Unk_0D       = MapVar(13),
+    ARENA_STATE_IDLE            = 0,
+    ARENA_STATE_ACTIVATING      = 1,
+    ARENA_STATE_FULL_POWER      = 2,
+    ARENA_STATE_OVERLOADING     = 10,
+    ARENA_STATE_BROKEN          = -1,
+};
+
+enum {
+    DESTRUCT_STATE_NONE         = 0,
+    DESTRUCT_STATE_1            = 1,
+    DESTRUCT_STATE_2            = 2,
+    DESTRUCT_STATE_3            = 3,
+    DESTRUCT_STATE_4            = 4,
+    DESTRUCT_STATE_5            = 5,
+    DESTRUCT_STATE_6            = 6,
+    DESTRUCT_STATE_7            = 7,
+    DESTRUCT_STATE_10           = 10,
+    DESTRUCT_STATE_TREMBLE      = -1,
+};
+
+enum {
+    MV_SwitchEntityIdx      = MapVar(0),
+    MV_OrbitingEffectAIdx   = MapVar(0),
+    MV_OrbitingEffectBIdx   = MapVar(1),
+    MV_Unk_0A               = MapVar(10), // KNOCK_DOWN_MAP_VAR
+    MV_ArenaState           = MapVar(11),
+    MV_DestructState        = MapVar(12),
+    MV_PrevDestructState    = MapVar(13),
 };
 
 #define NAMESPACE kkj_25
 
 extern EvtScript N(EVS_Main);
-extern EvtScript N(EVS_80247194);
+extern EvtScript N(EVS_ManageArenaEffects);
 extern EvtScript N(EVS_Scene_BowserTrapsMario);
 extern EvtScript N(EVS_Scene_KammyDefeated);
 extern EvtScript N(EVS_Scene_BowserDefeated);
-extern EvtScript N(EVS_80247AAC);
+extern EvtScript N(EVS_Scene_PeachBreaksFree);
 extern EvtScript N(EVS_Scene_ActivateMachine);
-extern EvtScript N(D_802479C4_B0E3C4);
+extern EvtScript N(EVS_SpawnBowserStarEnergyWaves);
 extern EvtScript N(EVS_MakeEntities);
 
 extern NpcGroupList N(InitialNpcs);

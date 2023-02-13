@@ -9,7 +9,7 @@
 
 #include "world/common/todo/GetEntityPosition.inc.c"
 
-API_CALLABLE(N(func_80240264_B06C64)) {
+API_CALLABLE(N(SpawnLensFlare)) {
     Bytecode* args = script->ptrReadPos;
     f32 posX = evt_get_float_variable(script, *args++);
     f32 posY = evt_get_float_variable(script, *args++);
@@ -29,10 +29,10 @@ API_CALLABLE(N(func_80240264_B06C64)) {
 #include "world/common/npc/Dummy.inc.c"
 #define NAME_SUFFIX
 
-EvtScript N(D_8024571C_B0C11C) = {
+EvtScript N(EVS_ArenaEyesFlash) = {
     EVT_CALL(PlaySoundAt, SOUND_5A, 0, 300, -70, 280)
-    EVT_CALL(N(func_80240264_B06C64), 225, -70, 280, 240)
-    EVT_CALL(N(func_80240264_B06C64), 380, -70, 280, 240)
+    EVT_CALL(N(SpawnLensFlare), 225, -70, 280, 240)
+    EVT_CALL(N(SpawnLensFlare), 380, -70, 280, 240)
     EVT_RETURN
     EVT_END
 };
@@ -40,16 +40,16 @@ EvtScript N(D_8024571C_B0C11C) = {
 EvtScript N(EVS_BowserActivatesSwitch) = {
     EVT_THREAD
         EVT_WAIT(20)
-        EVT_CALL(N(GetEntityPosition), MV_Unk_00, LVar7, LVar8, LVar9)
+        EVT_CALL(N(GetEntityPosition), MV_SwitchEntityIdx, LVar7, LVar8, LVar9)
         EVT_CALL(MakeLerp, 0, -13, 5, EASING_COS_IN_OUT)
         EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetEntityPositionF), MV_Unk_00, LVar7, LVar0, LVar9)
+        EVT_CALL(N(SetEntityPositionF), MV_SwitchEntityIdx, LVar7, LVar0, LVar9)
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(0)
         EVT_END_IF
         EVT_WAIT(30)
-        EVT_CALL(N(SetEntityPositionF), MV_Unk_00, LVar7, -20, LVar9)
+        EVT_CALL(N(SetEntityPositionF), MV_SwitchEntityIdx, LVar7, -20, LVar9)
         EVT_CALL(SetNpcFlagBits, NPC_Bowser_01, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_END_THREAD
     EVT_THREAD
@@ -269,14 +269,14 @@ EvtScript N(EVS_AnimateBridgeCollapsing) = {
     EVT_END
 };
 
-Vec3i N(D_80246394_B0CD94)[] = {
+Vec3i N(PowerUpBoltOrigins1)[] = {
     { 230, 160,   0 },
     { 350, 160,  90 },
     { 420, 160,  10 },
     { 280, 160, -10 },
 };
 
-Vec3i N(D_802463C4_B0CDC4)[] = {
+Vec3i N(PowerUpBoltOrigins2)[] = {
     { 330, 160,  50 },
     { 360, 160, -50 },
     { 370, 160,  50 },
@@ -368,12 +368,12 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(4.0), 300, 0, 0, 1100, EVT_FLOAT(7.0), EVT_FLOAT(0.0))
     EVT_WAIT(20)
     EVT_CALL(SetMusicTrack, 0, SONG_BOWSER_BATTLE, 0, 8)
-    EVT_EXEC(N(D_8024571C_B0C11C))
+    EVT_EXEC(N(EVS_ArenaEyesFlash))
     EVT_WAIT(30)
-    EVT_SET(MV_Unk_0B, 1)
+    EVT_SET(MV_ArenaState, ARENA_STATE_ACTIVATING)
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_IF_NE(MV_Unk_0B, 1)
+        EVT_IF_NE(MV_ArenaState, ARENA_STATE_ACTIVATING)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -388,16 +388,16 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     EVT_CALL(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_Shock)
     EVT_CALL(GetNpcPos, NPC_Bowser_01, LVar3, LVar4, LVar5)
     EVT_THREAD
-        EVT_USE_BUF(EVT_PTR(N(D_80246394_B0CD94)))
-        EVT_LOOP(ARRAY_COUNT(N(D_80246394_B0CD94)))
+        EVT_USE_BUF(EVT_PTR(N(PowerUpBoltOrigins1)))
+        EVT_LOOP(ARRAY_COUNT(N(PowerUpBoltOrigins1)))
             EVT_BUF_READ3(LVar0, LVar1, LVar2)
             EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 8)
             EVT_WAIT(8)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_USE_BUF(EVT_PTR(N(D_802463C4_B0CDC4)))
-        EVT_LOOP(ARRAY_COUNT(N(D_802463C4_B0CDC4)))
+        EVT_USE_BUF(EVT_PTR(N(PowerUpBoltOrigins2)))
+        EVT_LOOP(ARRAY_COUNT(N(PowerUpBoltOrigins2)))
             EVT_BUF_READ3(LVar0, LVar1, LVar2)
             EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 8)
             EVT_WAIT(12)
@@ -445,7 +445,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     EVT_END
 };
 
-Vec3i N(D_80246FFC_B0D9FC)[] = {
+Vec3i N(CirculatingBoltPositions)[] = {
     { EVT_FLOAT(625.825), EVT_FLOAT(-9.194), EVT_FLOAT(-91.893)  }, { EVT_FLOAT(609.671), EVT_FLOAT(-9.194), EVT_FLOAT(136.274)  },
     { EVT_FLOAT(609.671), EVT_FLOAT(-9.194), EVT_FLOAT(136.274)  }, { EVT_FLOAT(450.634), EVT_FLOAT(-9.194), EVT_FLOAT(300.677)  },
     { EVT_FLOAT(450.634), EVT_FLOAT(-9.194), EVT_FLOAT(300.677)  }, { EVT_FLOAT(223.128), EVT_FLOAT(-9.194), EVT_FLOAT(324.39)   },
@@ -457,7 +457,7 @@ Vec3i N(D_80246FFC_B0D9FC)[] = {
     { EVT_FLOAT(491.536), EVT_FLOAT(-9.194), EVT_FLOAT(-277.063) }, { EVT_FLOAT(625.825), EVT_FLOAT(-9.194), EVT_FLOAT(-91.893)  },
 };
 
-Vec3i N(D_802470D4_B0DAD4)[] = {
+Vec3i N(RandomBoltPositions)[] = {
     { 180, 300, -200 }, { 250, 0, -150 },
     { 270, 300, -200 }, { 200, 0, -150 },
     { 350, 300, -240 }, { 500, 0, -160 },
@@ -468,7 +468,7 @@ Vec3i N(D_802470D4_B0DAD4)[] = {
     { 215, 300,  -50 }, { 130, 0,  -50 },
 };
 
-EvtScript N(EVS_80247194) = {
+EvtScript N(EVS_ManageArenaEffects) = {
     EVT_CHILD_THREAD
         EVT_SET(LVar2, 0)
         EVT_SET(LVar3, 0)
@@ -513,8 +513,8 @@ EvtScript N(EVS_80247194) = {
     EVT_WAIT(45)
     EVT_CHILD_THREAD
         EVT_LOOP(0)
-            EVT_USE_BUF(EVT_PTR(N(D_80246FFC_B0D9FC)))
-            EVT_LOOP(ARRAY_COUNT(N(D_80246FFC_B0D9FC)) / 2)
+            EVT_USE_BUF(EVT_PTR(N(CirculatingBoltPositions)))
+            EVT_LOOP(ARRAY_COUNT(N(CirculatingBoltPositions)) / 2)
                 EVT_BUF_READ3(LVar0, LVar1, LVar2)
                 EVT_BUF_READ3(LVar3, LVar4, LVar5)
                 EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 5)
@@ -525,14 +525,14 @@ EvtScript N(EVS_80247194) = {
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
         EVT_LOOP(0)
-            EVT_USE_BUF(EVT_PTR(N(D_802470D4_B0DAD4)))
+            EVT_USE_BUF(EVT_PTR(N(RandomBoltPositions)))
             EVT_CALL(RandInt, 7, LVar6)
             EVT_ADD(LVar6, 1)
             EVT_LOOP(LVar6)
                 EVT_BUF_READ3(LVar0, LVar1, LVar2)
                 EVT_BUF_READ3(LVar3, LVar4, LVar5)
             EVT_END_LOOP
-            EVT_IF_NE(MV_Unk_0B, 10)
+            EVT_IF_NE(MV_ArenaState, ARENA_STATE_OVERLOADING)
                 EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 10)
                 EVT_CALL(N(SetLightningBoltPurple))
                 EVT_WAIT(30)
@@ -568,7 +568,7 @@ EvtScript N(EVS_80247194) = {
             EVT_END_LOOP
         EVT_END_IF
         EVT_LOOP(0)
-            EVT_IF_NE(MV_Unk_0B, 10)
+            EVT_IF_NE(MV_ArenaState, ARENA_STATE_OVERLOADING)
                 EVT_SET(LVar2, 250)
             EVT_ELSE
                 EVT_SET(LVar2, 90)
@@ -598,10 +598,10 @@ EvtScript N(EVS_80247194) = {
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_WAIT(180)
-    EVT_SET(MV_Unk_0B, 2)
+    EVT_SET(MV_ArenaState, ARENA_STATE_FULL_POWER)
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_IF_EQ(MV_Unk_0B, -1)
+        EVT_IF_EQ(MV_ArenaState, ARENA_STATE_BROKEN)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP

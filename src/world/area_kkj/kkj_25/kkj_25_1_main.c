@@ -116,19 +116,19 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(N(EVS_Rotate_Propellers))
     EVT_CALL(GetEntryID, LVar0)
     EVT_THREAD
-        EVT_SET(MV_Unk_0B, 0)
+        EVT_SET(MV_ArenaState, ARENA_STATE_IDLE)
         EVT_IF_EQ(LVar0, kkj_25_ENTRY_0)
             EVT_CALL(EnableModel, MODEL_o122, FALSE)
             EVT_LOOP(0)
                 EVT_WAIT(1)
-                EVT_IF_EQ(MV_Unk_0B, 1)
+                EVT_IF_EQ(MV_ArenaState, ARENA_STATE_ACTIVATING)
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_LOOP
         EVT_ELSE
             EVT_CALL(ScaleModel, MODEL_o122, 250, 1, 250)
         EVT_END_IF
-        EVT_EXEC(N(EVS_80247194))
+        EVT_EXEC(N(EVS_ManageArenaEffects))
     EVT_END_THREAD
     EVT_RETURN
     EVT_END

@@ -4,7 +4,7 @@
 #define KNOCK_DOWN_MAP_VAR MV_Unk_0A
 #include "world/common/complete/KnockDownPlayer.inc.c"
 
-API_CALLABLE(N(func_80240B18_B07518)) {
+API_CALLABLE(N(SpawnStarsOrbitingKammy1)) {
     EffectInstance* effect;
 
     fx_stars_orbiting(0, script->varTable[0], script->varTable[1], script->varTable[2], script->varTable[3], script->varTable[4], &effect);
@@ -13,34 +13,34 @@ API_CALLABLE(N(func_80240B18_B07518)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80240B8C_B0758C)) {
+API_CALLABLE(N(DismissStarsOrbitingKammy1)) {
     EffectInstance* effect = (EffectInstance*) script->varTablePtr[0];
 
-    effect->data.starsOrbiting->unk_28 = 0;
+    effect->data.starsOrbiting->enabled = FALSE;
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80240BA0_B075A0)) {
+API_CALLABLE(N(SetEnergyWaveOrigin)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
-    s32 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
-    s32 var3 = evt_get_variable(script, *args++);
+    s32 posX = evt_get_variable(script, *args++);
+    s32 posY = evt_get_variable(script, *args++);
+    s32 posZ = evt_get_variable(script, *args++);
 
-    effect->data.starsOrbiting->pos.x = var1;
-    effect->data.starsOrbiting->pos.y = var2;
-    effect->data.starsOrbiting->pos.z = var3;
+    effect->data.energyInOut->pos.x = posX;
+    effect->data.energyInOut->pos.y = posY;
+    effect->data.energyInOut->pos.z = posZ;
 
     return ApiStatus_DONE2;
 }
 
-Vec3f N(D_802479A0_B0E3A0)[] = {
+Vec3f N(TwinkArrivePath)[] = {
     {  445.0,    60.0,    0.0 },
     {  480.0,    40.0,  -20.0 },
     {  510.0,    25.0,    0.0 },
 };
 
-EvtScript N(D_802479C4_B0E3C4) = {
+EvtScript N(EVS_SpawnBowserStarEnergyWaves) = {
     EVT_CALL(GetNpcPos, LVar8, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, EVT_FLOAT(54.0))
     EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 4, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), -1)
@@ -48,13 +48,13 @@ EvtScript N(D_802479C4_B0E3C4) = {
         EVT_WAIT(1)
         EVT_CALL(GetNpcPos, LVar8, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, EVT_FLOAT(54.0))
-        EVT_CALL(N(func_80240BA0_B075A0), LVarF, LVar0, LVar1, LVar2)
+        EVT_CALL(N(SetEnergyWaveOrigin), LVarF, LVar0, LVar1, LVar2)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_80247AAC) = {
+EvtScript N(EVS_Scene_PeachBreaksFree) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_BeforeJump)
@@ -75,8 +75,8 @@ EvtScript N(EVS_80247AAC) = {
     EVT_CALL(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_Anim04)
     EVT_CALL(SetNpcDecoration, NPC_Bowser_01, 0, NPC_DECORATION_BOWSER_AURA)
     EVT_CALL(SetNpcDecoration, NPC_Bowser_01, 1, NPC_DECORATION_CHARGED)
-    EVT_SET(LVar8, 0)
-    EVT_EXEC(N(D_802479C4_B0E3C4))
+    EVT_SET(LVar8, NPC_Bowser_01)
+    EVT_EXEC(N(EVS_SpawnBowserStarEnergyWaves))
     EVT_CALL(SetCamType, CAM_DEFAULT, 0, FALSE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -138,8 +138,8 @@ EvtScript N(EVS_80247AAC) = {
         EVT_ADD(LVar1, 30)
         EVT_SET(LVar3, 20)
         EVT_SET(LVar4, 3)
-        EVT_CALL(N(func_80240B18_B07518))
-        EVT_SET(MV_Unk_00, LVar0)
+        EVT_CALL(N(SpawnStarsOrbitingKammy1))
+        EVT_SET(MV_OrbitingEffectAIdx, LVar0)
         EVT_CALL(PlaySound, SOUND_20E5)
         EVT_WAIT(5)
         EVT_CALL(SetNpcAnimation, NPC_Kammy_02, ANIM_BattleKammy_Anim03)
@@ -150,7 +150,7 @@ EvtScript N(EVS_80247AAC) = {
         EVT_CALL(InterpNpcYaw, NPC_Twink_01, 90, 0)
     EVT_END_THREAD
     EVT_WAIT(50)
-    EVT_CALL(LoadPath, 30, EVT_PTR(N(D_802479A0_B0E3A0)), 3, EASING_QUADRATIC_IN)
+    EVT_CALL(LoadPath, 30, EVT_PTR(N(TwinkArrivePath)), ARRAY_COUNT(N(TwinkArrivePath)), EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, NPC_Twink_01, LVar1, LVar2, LVar3)
@@ -212,8 +212,8 @@ EvtScript N(EVS_80247AAC) = {
     EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach_A0001)
     EVT_CALL(SetNpcAnimation, NPC_Twink_01, ANIM_Twink_Idle)
     EVT_WAIT(20)
-    EVT_SET(LVar0, MV_Unk_00)
-    EVT_CALL(N(func_80240B8C_B0758C))
+    EVT_SET(LVar0, MV_OrbitingEffectAIdx)
+    EVT_CALL(N(DismissStarsOrbitingKammy1))
     EVT_CALL(SetNpcAnimation, NPC_Kammy_02, ANIM_BattleKammy_Anim00)
     EVT_WAIT(5)
     EVT_CALL(InterpNpcYaw, NPC_Twink_01, 90, 0)
