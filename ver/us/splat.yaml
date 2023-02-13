@@ -11761,14 +11761,14 @@ segments:
     start: 0xABB290
     vram: 0x80240000
     subsegments:
-    - [0xABB290, c]
-    - [0xABB340, c]
-    - [0xABC250, data]
-    - [0xABC3D0, data]
-    - [0xABEC70, data]
-    - [0xABEF20, data]
-    - [0xAC40D0, data]
-    - [0xAC4FB0]
+    - [0xABB290, c, kkj_00_0_header]
+    - [0xABB290, c, kkj_00_1_music]
+    - [0xABB290, c, kkj_00_2_main]
+    - [0xABB340, c, kkj_00_3_npc_intro]
+    - [0xABC1D0, c, kkj_00_4_scene_intro]
+    - [0xABC1D0, c, kkj_00_5_npc_ending]
+    - [0xABC1D0, c, kkj_00_6_scene_ending]
+    - [0xABC250]
   - name: kkj_01
     dir: world/area_kkj/kkj_01
     type: code

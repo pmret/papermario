@@ -565,7 +565,7 @@ MapConfig osr_maps[] = {
 /// @bug There are two entries for kkj_26; the latter is unreachable.
 #include "area_kkj/kkj.h"
 MapConfig kkj_maps[] = {
-    { MAP_UNSPLIT(kkj_00, 0x80241030), .bgName = "nok_bg", .init = (MapInit)0x80240000, .songVariation = 1, .sfxReverb = 3 },
+    { MAP_WITH_INIT(kkj_00), .bgName = "nok_bg", .songVariation = 1, .sfxReverb = 3 },
     { MAP(kkj_01), .bgName = "nok_bg", .songVariation = 1, .sfxReverb = 3 },
     { MAP(kkj_02), .bgName = "nok_bg", .sfxReverb = 2 },
     { MAP_WITH_INIT(kkj_03), .bgName = "nok_bg", .sfxReverb = 3 },
