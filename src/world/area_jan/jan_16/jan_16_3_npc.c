@@ -220,11 +220,11 @@ EvtScript N(EVS_NpcInit_RaphaelRaven) = {
 NpcData N(NpcData_RaphaelRaven)[] = {
     {
         .id = NPC_RaphaelRaven,
-        .settings = &N(NpcSettings_RaphaelRaven),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_RaphaelRaven),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_RaphaelRaven),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_RaphaelRaven_Idle,
@@ -248,11 +248,11 @@ NpcData N(NpcData_RaphaelRaven)[] = {
     },
     {
         .id = NPC_Raven_01,
-        .settings = &N(NpcSettings_Raven),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
         .init = &N(EVS_NpcInit_Raven),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .settings = &N(NpcSettings_Raven),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Raven_Idle,
@@ -276,11 +276,11 @@ NpcData N(NpcData_RaphaelRaven)[] = {
     },
     {
         .id = NPC_Raven_02,
-        .settings = &N(NpcSettings_Raven),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
         .init = &N(EVS_NpcInit_Raven),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .settings = &N(NpcSettings_Raven),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Raven_Idle,
@@ -304,11 +304,11 @@ NpcData N(NpcData_RaphaelRaven)[] = {
     },
     {
         .id = NPC_Raven_03,
-        .settings = &N(NpcSettings_Raven),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
         .init = &N(EVS_NpcInit_Raven),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .settings = &N(NpcSettings_Raven),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Raven_Idle,
@@ -332,11 +332,11 @@ NpcData N(NpcData_RaphaelRaven)[] = {
     },
     {
         .id = NPC_Raven_04,
-        .settings = &N(NpcSettings_Raven),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
         .init = &N(EVS_NpcInit_Raven),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .settings = &N(NpcSettings_Raven),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Raven_Idle,
@@ -360,11 +360,11 @@ NpcData N(NpcData_RaphaelRaven)[] = {
     },
     {
         .id = NPC_Raven_05,
-        .settings = &N(NpcSettings_Raven),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
         .init = &N(EVS_NpcInit_Raven),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .settings = &N(NpcSettings_Raven),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Raven_Idle,

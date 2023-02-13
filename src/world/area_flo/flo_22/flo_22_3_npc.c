@@ -105,22 +105,22 @@ EvtScript N(EVS_NpcInit_Dayzee) = {
 
 NpcData N(NpcData_Bzzap) = {
     .id = NPC_Bzzap,
-    .settings = &N(NpcSettings_Dummy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Bzzap),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Dummy),
     .drops = NO_DROPS,
     .animations = BZZAP_ANIMS,
 };
 
 NpcData N(NpcData_Dayzee) = {
     .id = NPC_Dayzee,
-    .settings = &N(NpcSettings_Dummy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Dayzee),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Dummy),
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

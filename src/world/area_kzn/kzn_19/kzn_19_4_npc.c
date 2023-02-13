@@ -615,11 +615,11 @@ EvtScript N(EVS_NpcInit_LavaBud) = {
 
 NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(NpcSettings_Kolorado),
     .pos = { 380.0f, 250.0f, -330.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Kolorado),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Kolorado),
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
@@ -627,10 +627,10 @@ NpcData N(NpcData_Kolorado) = {
 
 NpcData N(NpcData_Misstar) = {
     .id = NPC_Misstar,
-    .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_StarSpirit),
     .drops = NO_DROPS,
     .animations = MISSTAR_ANIMS,
     .tattle = MSG_NpcTattle_Misstar,
@@ -650,11 +650,11 @@ s32 N(ExtraAnims_LavaBud)[] = {
 NpcData N(NpcData_LavaPiranha)[] = {
     {
         .id = NPC_LavaPiranhaHead,
-        .settings = &N(NpcSettings_LavaPiranhaHead),
         .pos = { 400.0f, 25.0f, -30.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_LavaPiranha),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+        .settings = &N(NpcSettings_LavaPiranhaHead),
         .drops = LAVA_PIRANHA_DROPS,
         .animations = LAVA_PIRANHA_HEAD_ANIMS,
         .extraAnimations = N(ExtraAnims_LavaPiranha),
@@ -662,11 +662,11 @@ NpcData N(NpcData_LavaPiranha)[] = {
     },
     {
         .id = NPC_LavaBud_01,
-        .settings = &N(NpcSettings_LavaPiranhaHead),
         .pos = { 400.0f, 25.0f, -30.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_LavaBud),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_40000,
+        .settings = &N(NpcSettings_LavaPiranhaHead),
         .drops = LAVA_PIRANHA_DROPS,
         .animations = LAVA_PIRANHA_BUD_ANIMS,
         .extraAnimations = N(ExtraAnims_LavaBud),
@@ -674,11 +674,11 @@ NpcData N(NpcData_LavaPiranha)[] = {
     },
     {
         .id = NPC_LavaBud_02,
-        .settings = &N(NpcSettings_LavaPiranhaHead),
         .pos = { 400.0f, 25.0f, -30.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_LavaBud),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_40000,
+        .settings = &N(NpcSettings_LavaPiranhaHead),
         .drops = LAVA_PIRANHA_DROPS,
         .animations = LAVA_PIRANHA_BUD_ANIMS,
         .extraAnimations = N(ExtraAnims_LavaBud),

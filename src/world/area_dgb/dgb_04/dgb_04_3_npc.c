@@ -6,11 +6,8 @@
 
 NpcData N(NpcData_Sentinel) = {
     .id = NPC_Sentinel,
-    .settings = &N(NpcSettings_Sentinel),
     .pos = { 70.0f, -220.0f, 186.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -23,6 +20,9 @@ NpcData N(NpcData_Sentinel) = {
             .detectSize = { 80, 150 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Sentinel),
+    .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

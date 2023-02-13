@@ -6,11 +6,8 @@
 NpcData N(NpcData_PiranhaPlant_01)[] = {
     {
         .id = NPC_PiranhaPlant_01,
-        .settings = &N(NpcSettings_PiranhaPlant),
         .pos = { -240.0f, 0.0f, -240.0f },
         .yaw = 0,
-        .flags = 0,
-        .drops = PIRANHA_PLANT_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -23,6 +20,9 @@ NpcData N(NpcData_PiranhaPlant_01)[] = {
                 .detectSize = { 400 },
             }
         },
+        .flags = 0,
+        .settings = &N(NpcSettings_PiranhaPlant),
+        .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
@@ -32,11 +32,8 @@ NpcData N(NpcData_PiranhaPlant_01)[] = {
 NpcData N(NpcData_PiranhaPlant_02)[] = {
     {
         .id = NPC_PiranhaPlant_02,
-        .settings = &N(NpcSettings_PiranhaPlant),
         .pos = { 240.0f, 0.0f, -240.0f },
         .yaw = 0,
-        .flags = 0,
-        .drops = PIRANHA_PLANT_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -49,6 +46,9 @@ NpcData N(NpcData_PiranhaPlant_02)[] = {
                 .detectSize = { 400 },
             }
         },
+        .flags = 0,
+        .settings = &N(NpcSettings_PiranhaPlant),
+        .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
@@ -57,11 +57,8 @@ NpcData N(NpcData_PiranhaPlant_02)[] = {
 
 NpcData N(NpcData_Fuzzy) = {
     .id = NPC_Fuzzy,
-    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { -140.0f, 0.0f, 300.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_400,
-    .drops = FOREST_FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -74,6 +71,9 @@ NpcData N(NpcData_Fuzzy) = {
             .detectSize = { 400 },
         }
     },
+    .flags = ENEMY_FLAG_400,
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
+    .drops = FOREST_FUZZY_DROPS,
     .animations = FOREST_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

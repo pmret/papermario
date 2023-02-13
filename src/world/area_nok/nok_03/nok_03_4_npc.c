@@ -127,12 +127,8 @@ EvtScript N(EVS_NpcInit_KoopersShell) = {
 
 NpcData N(NpcData_Fuzzy_01) = {
     .id = NPC_Fuzzy_01,
-    .settings = &N(NpcSettings_Fuzzy_Wander),
     .pos = { -388.0f, 100.0f, -107.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .init = &N(EVS_NpcInit_Fuzzy_01),
-    .drops = FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -145,18 +141,18 @@ NpcData N(NpcData_Fuzzy_01) = {
             .detectSize = { 300 },
         }
     },
+    .init = &N(EVS_NpcInit_Fuzzy_01),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Fuzzy_Wander),
+    .drops = FUZZY_DROPS,
     .animations = FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_Fuzzy_02) = {
     .id = NPC_Fuzzy_02,
-    .settings = &N(NpcSettings_Fuzzy_Wander),
     .pos = { -76.0f, 118.0f, -43.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .init = &N(EVS_NpcInit_Fuzzy_02),
-    .drops = FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -169,6 +165,10 @@ NpcData N(NpcData_Fuzzy_02) = {
             .detectSize = { 300 },
         }
     },
+    .init = &N(EVS_NpcInit_Fuzzy_02),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Fuzzy_Wander),
+    .drops = FUZZY_DROPS,
     .animations = FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
@@ -176,12 +176,8 @@ NpcData N(NpcData_Fuzzy_02) = {
 NpcData N(NpcData_FuzzyBoss)[] = {
     {
         .id = NPC_Fuzzy_03,
-        .settings = &N(NpcSettings_Fuzzy),
         .pos = { -540.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_FuzzyBoss),
-        .drops = FUZZY_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -194,15 +190,19 @@ NpcData N(NpcData_FuzzyBoss)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_FuzzyBoss),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Fuzzy),
+        .drops = FUZZY_DROPS,
         .animations = FUZZY_ANIMS,
     },
     {
         .id = NPC_KoopersShell,
-        .settings = &N(NpcSettings_Koopa),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_KoopersShell),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Koopa),
         .drops = FUZZY_DROPS,
         .animations = KOOPER_ANIMS,
     },

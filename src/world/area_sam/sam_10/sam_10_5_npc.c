@@ -6,11 +6,8 @@
 NpcData N(NpcData_Clubba)[] = {
     {
         .id = NPC_FrostClubba,
-        .settings = &N(NpcSettings_FrostClubba_Wander),
         .pos = { 575.0f, 480.0f, -50.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .drops = FROST_CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -23,6 +20,9 @@ NpcData N(NpcData_Clubba)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_FrostClubba_Wander),
+        .drops = FROST_CLUBBA_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },

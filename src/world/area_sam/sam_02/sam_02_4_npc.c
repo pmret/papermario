@@ -371,22 +371,22 @@ EvtScript N(EVS_NpcInit_Penguin_07) = {
 NpcData N(NpcData_Townsfolk)[] = {
     {
         .id = NPC_Penguin_ShopOwner,
-        .settings = &N(NpcSettings_Penguin),
         .pos = { 35.0f, 0.0f, -365.0f },
         .yaw = 180,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Penguin_ShopOwner),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Penguin),
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_ShopOwner,
     },
     {
         .id = NPC_ShiverToad,
-        .settings = &N(NpcSettings_ShiverToad),
         .pos = { 329.0f, 0.0f, -167.0f },
         .yaw = 180,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_ShiverToad),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_ShiverToad),
         .drops = NO_DROPS,
         .animations = SHIVER_TOAD_RED_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_FLAG_8,
@@ -394,12 +394,8 @@ NpcData N(NpcData_Townsfolk)[] = {
     },
     {
         .id = NPC_Penguin_04,
-        .settings = &N(NpcSettings_Penguin_Wander),
         .pos = { 0.0f, 0.0f, 60.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Penguin_04),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -412,17 +408,17 @@ NpcData N(NpcData_Townsfolk)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_Penguin_04),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Penguin_Wander),
+        .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_CorroboratesRumors,
     },
     {
         .id = NPC_Penguin_05,
-        .settings = &N(NpcSettings_Penguin_Wander),
         .pos = { -400.0f, 0.0f, 60.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Penguin_05),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -435,17 +431,17 @@ NpcData N(NpcData_Townsfolk)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_Penguin_05),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Penguin_Wander),
+        .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_EasyGoing,
     },
     {
         .id = NPC_Penguin_06,
-        .settings = &N(NpcSettings_Penguin_Wander),
         .pos = { 400.0f, 0.0f, 60.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Penguin_06),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -458,16 +454,20 @@ NpcData N(NpcData_Townsfolk)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_Penguin_06),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Penguin_Wander),
+        .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_NeverLeavesTown,
     },
     {
         .id = NPC_Penguin_07,
-        .settings = &N(NpcSettings_Penguin),
         .pos = { -237.0f, 0.0f, 273.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Penguin_07),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Penguin),
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_VisitedTheDojo,
@@ -477,23 +477,19 @@ NpcData N(NpcData_Townsfolk)[] = {
 NpcData N(NpcData_MysteryOnly)[] = {
     {
         .id = NPC_Penguin_02,
-        .settings = &N(NpcSettings_Penguin),
         .pos = { -380.0f, 0.0f, -140.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Penguin_02),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Penguin),
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_RumorLovingPenguins,
     },
     {
         .id = NPC_Penguin_03,
-        .settings = &N(NpcSettings_Penguin_Wander),
         .pos = { 200.0f, 0.0f, 60.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Penguin_03),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -506,6 +502,10 @@ NpcData N(NpcData_MysteryOnly)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_Penguin_03),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Penguin_Wander),
+        .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_NotAdventurous,
     },
@@ -513,12 +513,12 @@ NpcData N(NpcData_MysteryOnly)[] = {
 
 NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
-    .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { -230.0f, 0.0f, 160.0f },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_SAM, QUIZ_COUNT_SAM, QUIZ_MAP_SAM_02 }},
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_ChuckQuizmo),
     .drops = NO_DROPS,
     .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,

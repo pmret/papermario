@@ -164,11 +164,11 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
 
 NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(NpcSettings_Kolorado),
     .pos = { -740.0f, 20.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
     .init = &N(EVS_NpcInit_Kolorado),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+    .settings = &N(NpcSettings_Kolorado),
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
@@ -176,11 +176,8 @@ NpcData N(NpcData_Kolorado) = {
 
 NpcData N(NpcData_LavaBubble) = {
     .id = NPC_LavaBubble,
-    .settings = &N(NpcSettings_LavaBubble),
     .pos = { 250.0f, 50.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = LAVA_BUBBLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -193,6 +190,9 @@ NpcData N(NpcData_LavaBubble) = {
             .detectSize = { 70, 200 },
         }
     },
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_LavaBubble),
+    .drops = LAVA_BUBBLE_DROPS,
     .animations = LAVA_BUBBLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

@@ -349,12 +349,8 @@ EvtScript N(EVS_NpcInit_Kammy) = {
 
 NpcData N(NpcData_ShyGuy) = {
     .id = NPC_ShyGuy_01,
-    .settings = &N(NpcSettings_ShyGuy_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_ShyGuy),
-    .drops = NO_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -373,17 +369,17 @@ NpcData N(NpcData_ShyGuy) = {
             .detectSize = { 100 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_ShyGuy_Patrol),
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
 NpcData N(NpcData_ShyGuy_02) = {
     .id = NPC_ShyGuy_02,
-    .settings = &N(NpcSettings_ShyGuy_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_ShyGuy),
-    .drops = NO_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -402,17 +398,17 @@ NpcData N(NpcData_ShyGuy_02) = {
             .detectSize = { 100 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_ShyGuy_Patrol),
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
 NpcData N(NpcData_ShyGuy_03) = {
     .id = NPC_ShyGuy_03,
-    .settings = &N(NpcSettings_ShyGuy_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_ShyGuy),
-    .drops = NO_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -431,17 +427,17 @@ NpcData N(NpcData_ShyGuy_03) = {
             .detectSize = { 100 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_ShyGuy_Patrol),
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
 NpcData N(NpcData_ShyGuy_04) = {
     .id = NPC_ShyGuy_04,
-    .settings = &N(NpcSettings_ShyGuy_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_ShyGuy),
-    .drops = NO_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -460,16 +456,20 @@ NpcData N(NpcData_ShyGuy_04) = {
             .detectSize = { 100 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_ShyGuy_Patrol),
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
 NpcData N(NpcData_Fuzzy) = {
     .id = NPC_Fuzzy,
-    .settings = &N(NpcSettings_Fuzzy),
     .pos = { 1050.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Fuzzy),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Fuzzy),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Fuzzy_Walk,
@@ -493,11 +493,11 @@ NpcData N(NpcData_Fuzzy) = {
 
 NpcData N(NpcData_HammerBros) = {
     .id = NPC_HammerBros,
-    .settings = &N(NpcSettings_HammerBros),
     .pos = { 1050.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_HammerBros),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_HammerBros),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_HammerBros_Anim02,
@@ -521,11 +521,8 @@ NpcData N(NpcData_HammerBros) = {
 
 NpcData N(NpcData_SkyGuy_01) = {
     .id = NPC_SkyGuy_01,
-    .settings = &N(NpcSettings_SkyGuy),
     .pos = { -650.0f, 140.0f, -105.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = SKY_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -538,17 +535,17 @@ NpcData N(NpcData_SkyGuy_01) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_SkyGuy),
+    .drops = SKY_GUY_DROPS,
     .animations = SKY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_SkyGuy_02) = {
     .id = NPC_SkyGuy_02,
-    .settings = &N(NpcSettings_SkyGuy),
     .pos = { -550.0f, 60.0f, 70.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = SKY_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -561,6 +558,9 @@ NpcData N(NpcData_SkyGuy_02) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_SkyGuy),
+    .drops = SKY_GUY_DROPS,
     .animations = SKY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
@@ -577,11 +577,11 @@ s32 N(ExtraAnims_Kammy)[] = {
 
 NpcData N(NpcData_Kammy) = {
     .id = NPC_Kammy,
-    .settings = &N(NpcSettings_Kammy_Flying),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Kammy),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Kammy_Flying),
     .drops = NO_DROPS,
     .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),

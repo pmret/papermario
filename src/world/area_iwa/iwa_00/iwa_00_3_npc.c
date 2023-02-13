@@ -46,11 +46,8 @@ API_CALLABLE(N(func_80240118_90CD58)) {
 NpcData N(NpcData_MontyMole_GroundAmbush)[] = {
     {
         .id = NPC_MontyMole_01,
-        .settings = &N(NpcSettings_MontyMole_GroundAmbush),
         .pos = { 880.0f, 70.0f, 67.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_400,
-        .drops = MONTY_MOLE_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -63,16 +60,16 @@ NpcData N(NpcData_MontyMole_GroundAmbush)[] = {
                 .detectSize = { 120 },
             }
         },
+        .flags = ENEMY_FLAG_400,
+        .settings = &N(NpcSettings_MontyMole_GroundAmbush),
+        .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
     {
         .id = NPC_MontyMole_01_Hole,
-        .settings = &N(NpcSettings_MontyMole_GroundAmbush_Hole),
         .pos = { 880.0f, 70.0f, 67.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -85,6 +82,9 @@ NpcData N(NpcData_MontyMole_GroundAmbush)[] = {
                 .detectSize = { 0 },
             }
         },
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_MontyMole_GroundAmbush_Hole),
+        .drops = NO_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
     },
 };
@@ -92,11 +92,8 @@ NpcData N(NpcData_MontyMole_GroundAmbush)[] = {
 NpcData N(NpcData_MontyMole_WallAmbush)[] = {
     {
         .id = NPC_MontyMole_02,
-        .settings = &N(NpcSettings_MontyMole_WallAmbush),
         .pos = { 1220.0f, -30.0f, 70.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_400,
-        .drops = MONTY_MOLE_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -109,16 +106,16 @@ NpcData N(NpcData_MontyMole_WallAmbush)[] = {
                 .detectSize = { 120 },
             }
         },
+        .flags = ENEMY_FLAG_400,
+        .settings = &N(NpcSettings_MontyMole_WallAmbush),
+        .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
     {
         .id = NPC_MontyMole_02_Hole,
-        .settings = &N(NpcSettings_MontyMole_WallAmbush_Hole),
         .pos = { 1220.0f, -30.0f, 70.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -131,6 +128,9 @@ NpcData N(NpcData_MontyMole_WallAmbush)[] = {
                 .detectSize = { 0 },
             }
         },
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_MontyMole_WallAmbush_Hole),
+        .drops = NO_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
     },
 };
@@ -337,22 +337,22 @@ EvtScript N(EVS_NpcInit_Whacka_02) = {
 NpcData N(NpcData_Whacka)[] = {
     {
         .id = NPC_Whacka_01,
-        .settings = &N(NpcSettings_Whacka),
         .pos = { 725.0f, -30.0f, 225.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Whacka_01),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Whacka),
         .drops = NO_DROPS,
         .animations = WHACKA_ANIMS,
         .tattle = MSG_NpcTattle_Whacka,
     },
     {
         .id = NPC_Whacka_02,
-        .settings = &N(NpcSettings_Whacka),
         .pos = { 725.0f, -30.0f, 225.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_Whacka_02),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .settings = &N(NpcSettings_Whacka),
         .drops = NO_DROPS,
         .animations = WHACKA_ANIMS,
         .tattle = MSG_NpcTattle_Whacka,

@@ -253,22 +253,22 @@ EvtScript N(EVS_NpcInit_TradingToad) = {
 
 NpcData N(NpcData_Mamar) = {
     .id = NPC_Mamar,
-    .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Mamar),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_StarSpirit),
     .drops = NO_DROPS,
     .animations = MAMAR_ANIMS,
 };
 
 NpcData N(NpcData_TradingToad) = {
     .id = NPC_TradingToad,
-    .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 0.0f, 2.0f, 150.0f },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
     .init = &N(EVS_NpcInit_TradingToad),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+    .settings = &N(NpcSettings_Toad_Stationary),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Toad_Pink_Idle,

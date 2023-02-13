@@ -28,20 +28,20 @@ s32 N(ExtraAnims_Kammy)[] = {
 NpcData N(NpcData_Characters)[] = {
     {
         .id = NPC_Bowser,
-        .settings = &N(NpcSettings_Bowser),
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Bowser),
         .drops = NO_DROPS,
         .animations = BOWSER_ANIMS,
         .extraAnimations = N(ExtraAnims_Bowser),
     },
     {
         .id = NPC_Kammy,
-        .settings = &N(NpcSettings_Kammy),
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Kammy),
         .drops = NO_DROPS,
         .animations = KAMMY_ANIMS,
         .extraAnimations = N(ExtraAnims_Kammy),

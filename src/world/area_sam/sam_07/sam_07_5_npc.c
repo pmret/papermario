@@ -6,11 +6,8 @@
 NpcData N(NpcData_Gulpit)[] = {
     {
         .id = NPC_Gulpit,
-        .settings = &N(NpcSettings_Gulpit),
         .pos = { -500.0f, -150.0f, -75.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = GULPIT_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -23,6 +20,9 @@ NpcData N(NpcData_Gulpit)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Gulpit),
+        .drops = GULPIT_DROPS,
         .animations = GULPIT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
@@ -32,11 +32,8 @@ NpcData N(NpcData_Gulpit)[] = {
 NpcData N(NpcData_FrostPiranha_01)[] = {
     {
         .id = NPC_FrostPiranha_01,
-        .settings = &N(NpcSettings_FrostPiranha),
         .pos = { 250.0f, 120.0f, -75.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400,
-        .drops = FROST_PIRANHA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -49,6 +46,9 @@ NpcData N(NpcData_FrostPiranha_01)[] = {
                 .detectSize = { 260, 65 },
             }
         },
+        .flags = ENEMY_FLAG_400,
+        .settings = &N(NpcSettings_FrostPiranha),
+        .drops = FROST_PIRANHA_DROPS,
         .animations = FROST_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
@@ -58,11 +58,8 @@ NpcData N(NpcData_FrostPiranha_01)[] = {
 NpcData N(NpcData_FrostPiranha_02)[] = {
     {
         .id = NPC_FrostPiranha_02,
-        .settings = &N(NpcSettings_FrostPiranha),
         .pos = { 400.0f, 120.0f, -75.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400,
-        .drops = FROST_PIRANHA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -75,6 +72,9 @@ NpcData N(NpcData_FrostPiranha_02)[] = {
                 .detectSize = { 260, 65 },
             }
         },
+        .flags = ENEMY_FLAG_400,
+        .settings = &N(NpcSettings_FrostPiranha),
+        .drops = FROST_PIRANHA_DROPS,
         .animations = FROST_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },

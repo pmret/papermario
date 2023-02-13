@@ -5,11 +5,8 @@
 NpcData N(NpcData_HammerBros)[] = {
     {
         .id = NPC_HammerBros,
-        .settings = &N(NpcSettings_HammerBros_Wander),
         .pos = { 100.0f, 0.0f, 120.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = HAMMER_BROS_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -22,6 +19,9 @@ NpcData N(NpcData_HammerBros)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_HammerBros_Wander),
+        .drops = HAMMER_BROS_DROPS,
         .animations = HAMMER_BROS_ANIMS,
     },
     HAMMER_BROS_HAMMER_HITBOX(NPC_HammerBros + 1),

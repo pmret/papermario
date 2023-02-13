@@ -5,11 +5,8 @@
 
 NpcData N(NpcData_Koopatrol_01) = {
     .id = NPC_Koopatrol_01,
-    .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 300.0f, -160.0f, 140.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = KOOPATROL_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -22,16 +19,16 @@ NpcData N(NpcData_Koopatrol_01) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Koopatrol_Wander),
+    .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
 
 NpcData N(NpcData_Koopatrol_02) = {
     .id = NPC_Koopatrol_02,
-    .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 850.0f, -160.0f, 390.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = KOOPATROL_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -44,17 +41,17 @@ NpcData N(NpcData_Koopatrol_02) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Koopatrol_Wander),
+    .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
 
 NpcData N(NpcData_FlyingMagikoopa_01)[] = {
     {
         .id = NPC_FlyingMagikoopa_01,
-        .settings = &N(NpcSettings_FlyingMagikoopa),
         .pos = { 500.0f, 250.0f, -50.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_800,
-        .drops = FLYING_MAGINO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -67,6 +64,9 @@ NpcData N(NpcData_FlyingMagikoopa_01)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_FlyingMagikoopa),
+        .drops = FLYING_MAGINO_DROPS,
         .animations = FLYING_MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_FlyingMagikoopa),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -77,11 +77,8 @@ NpcData N(NpcData_FlyingMagikoopa_01)[] = {
 NpcData N(NpcData_FlyingMagikoopa_02)[] = {
     {
         .id = NPC_FlyingMagikoopa_02,
-        .settings = &N(NpcSettings_FlyingMagikoopa),
         .pos = { 200.0f, 250.0f, -50.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_800,
-        .drops = FLYING_MAGINO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -94,6 +91,9 @@ NpcData N(NpcData_FlyingMagikoopa_02)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_FlyingMagikoopa),
+        .drops = FLYING_MAGINO_DROPS,
         .animations = FLYING_MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_FlyingMagikoopa),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

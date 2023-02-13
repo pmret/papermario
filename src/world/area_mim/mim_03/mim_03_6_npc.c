@@ -43,11 +43,11 @@ EvtScript N(EVS_NpcInit_Oaklie) = {
 
 NpcData N(NpcData_Oaklie) = {
     .id = NPC_Oaklie,
-    .settings = &N(NpcSettings_Oaklie),
     .pos = { 0.0f, 32.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Oaklie),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Oaklie),
     .drops = NO_DROPS,
     .animations = OAKLIE_ANIMS,
     .tattle = MSG_NpcTattle_Oaklie,

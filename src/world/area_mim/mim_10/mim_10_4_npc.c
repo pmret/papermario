@@ -248,11 +248,11 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
 
 NpcData N(NpcData_Bootler) = {
     .id = NPC_Bootler,
-    .settings = &N(NpcSettings_Bootler),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Bootler),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Bootler),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Bootler_Idle,
@@ -276,11 +276,11 @@ NpcData N(NpcData_Bootler) = {
 
 NpcData N(NpcData_JrTroopa) = {
     .id = NPC_JrTroopa,
-    .settings = &N(NpcSettings_JrTroopa),
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_JrTroopa),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_JrTroopa),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_JrTroopa_Idle,

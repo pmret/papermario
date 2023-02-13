@@ -271,11 +271,11 @@ EvtScript N(EVS_NpcInit_JungleFuzzy_01) = {
 
 NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(NpcSettings_Kolorado),
     .pos = { -70.0f, -9.0f, 90.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
     .init = &N(EVS_NpcInit_Kolorado),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
+    .settings = &N(NpcSettings_Kolorado),
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
@@ -283,11 +283,11 @@ NpcData N(NpcData_Kolorado) = {
 
 NpcData N(NpcData_JungleFuzzy_01) = {
     .id = NPC_JungleFuzzy_01,
-    .settings = &N(NpcSettings_JungleFuzzy),
     .pos = { -30.0f, 0.0f, 90.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_JungleFuzzy_01),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+    .settings = &N(NpcSettings_JungleFuzzy),
     .drops = NO_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
 };
@@ -302,12 +302,8 @@ EvtScript N(EVS_NpcInit_JungleFuzzy_02) = {
 
 NpcData N(NpcData_JungleFuzzy_02) = {
     .id = NPC_JungleFuzzy_02,
-    .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { -350.0f, 3.0f, 40.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .init = &N(EVS_NpcInit_JungleFuzzy_02),
-    .drops = JUNGLE_FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -320,18 +316,18 @@ NpcData N(NpcData_JungleFuzzy_02) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_JungleFuzzy_02),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_JungleFuzzy_Wander),
+    .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_JungleFuzzy_03) = {
     .id = NPC_JungleFuzzy_03,
-    .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 0.0f, -10.0f, 110.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .init = &N(EVS_NpcInit_JungleFuzzy_02),
-    .drops = JUNGLE_FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -344,18 +340,18 @@ NpcData N(NpcData_JungleFuzzy_03) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_JungleFuzzy_02),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_JungleFuzzy_Wander),
+    .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_JungleFuzzy_04) = {
     .id = NPC_JungleFuzzy_04,
-    .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 350.0f, 3.0f, 40.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .init = &N(EVS_NpcInit_JungleFuzzy_02),
-    .drops = JUNGLE_FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -368,6 +364,10 @@ NpcData N(NpcData_JungleFuzzy_04) = {
             .detectSize = { 200, 125 },
         }
     },
+    .init = &N(EVS_NpcInit_JungleFuzzy_02),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_JungleFuzzy_Wander),
+    .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

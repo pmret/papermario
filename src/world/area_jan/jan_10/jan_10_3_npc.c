@@ -106,11 +106,11 @@ EvtScript N(EVS_NpcInit_YoshiKid) = {
 
 NpcData N(NpcData_YoshiKid) = {
     .id = NPC_YoshiKid,
-    .settings = &N(NpcSettings_YoshiKid),
     .pos = { -260.0f, 0.0f, -220.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_YoshiKid),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_YoshiKid),
     .drops = NO_DROPS,
     .animations = YOSHI_KID_BLUE_ANIMS,
     .tattle = MSG_NpcTattle_BlueYoshiKid,
@@ -118,12 +118,8 @@ NpcData N(NpcData_YoshiKid) = {
 
 NpcData N(NpcData_JungleFuzzy) = {
     .id = NPC_JungleFuzzy,
-    .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .init = &N(EVS_NpcInit_JungleFuzzy),
-    .drops = JUNGLE_FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -136,6 +132,10 @@ NpcData N(NpcData_JungleFuzzy) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_JungleFuzzy),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_JungleFuzzy_Wander),
+    .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
 };
 

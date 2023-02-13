@@ -159,11 +159,11 @@ EvtScript N(EVS_NpcInit_GateFlower) = {
 
 NpcData N(NpcData_GateFlower) = {
     .id = NPC_GateFlower,
-    .settings = &N(NpcSettings_GateFlower),
     .pos = { 505.0f, 0.0f, -25.0f },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_GateFlower),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_GateFlower),
     .drops = NO_DROPS,
     .animations = GATE_FLOWER_RED_ANIMS,
     .tattle = MSG_NpcTattle_RedGateFlower,
@@ -171,11 +171,8 @@ NpcData N(NpcData_GateFlower) = {
 
 NpcData N(NpcData_TuffPuff) = {
     .id = NPC_TuffPuff,
-    .settings = &N(NpcSettings_TuffPuff),
     .pos = { -200.0f, 45.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = TUFF_PUFF_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -188,17 +185,17 @@ NpcData N(NpcData_TuffPuff) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400,
+    .settings = &N(NpcSettings_TuffPuff),
+    .drops = TUFF_PUFF_DROPS,
     .animations = TUFF_PUFF_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_Bzzap) = {
     .id = NPC_Bzzap,
-    .settings = &N(NpcSettings_Bzzap),
     .pos = { 150.0f, 55.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = BZZAP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -211,6 +208,9 @@ NpcData N(NpcData_Bzzap) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400,
+    .settings = &N(NpcSettings_Bzzap),
+    .drops = BZZAP_DROPS,
     .animations = BZZAP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };

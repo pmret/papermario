@@ -6,11 +6,8 @@
 NpcData N(NpcData_Clubba_01)[] = {
     {
         .id = NPC_Clubba_01,
-        .settings = &N(NpcSettings_Clubba_Napping),
         .pos = { -500.0f, 0.0f, -240.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_800,
-        .drops = CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -23,6 +20,9 @@ NpcData N(NpcData_Clubba_01)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Clubba_Napping),
+        .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

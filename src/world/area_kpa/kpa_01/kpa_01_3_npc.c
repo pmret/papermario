@@ -4,11 +4,8 @@
 
 NpcData N(NpcData_BonyBeetle_01) = {
     .id = NPC_BonyBeetle_01,
-    .settings = &N(NpcSettings_BonyBeetle),
     .pos = { 1740.0f, -215.0f, 60.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = BONY_BEETLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -21,16 +18,16 @@ NpcData N(NpcData_BonyBeetle_01) = {
             .detectSize = { 300 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_BonyBeetle),
+    .drops = BONY_BEETLE_DROPS,
     .animations = BONY_BEETLE_ANIMS,
 };
 
 NpcData N(NpcData_BonyBeetle_02) = {
     .id = NPC_BonyBeetle_02,
-    .settings = &N(NpcSettings_BonyBeetle),
     .pos = { 243.0f, 5.0f, 230.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = BONY_BEETLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -43,6 +40,9 @@ NpcData N(NpcData_BonyBeetle_02) = {
             .detectSize = { 300 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_BonyBeetle),
+    .drops = BONY_BEETLE_DROPS,
     .animations = BONY_BEETLE_ANIMS,
 };
 

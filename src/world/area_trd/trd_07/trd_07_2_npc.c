@@ -39,12 +39,8 @@ EvtScript N(EVS_NpcInit_KoopaTroopa) = {
 
 NpcData N(NpcData_KoopaTroopa) = {
     .id = NPC_KoopaTroopa,
-    .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { -75.0f, 0.0f, -30.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
-    .init = &N(EVS_NpcInit_KoopaTroopa),
-    .drops = KOOPA_TROOPA_TRD_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -57,17 +53,17 @@ NpcData N(NpcData_KoopaTroopa) = {
             .detectSize = { 1000 },
         }
     },
+    .init = &N(EVS_NpcInit_KoopaTroopa),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
 };
 
 NpcData N(NpcData_ParaTroopa_01) = {
     .id = NPC_ParaTroopa_01,
-    .settings = &N(NpcSettings_ParaTroopa),
     .pos = { 0.0f, 50.0f, 30.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
-    .init = &N(EVS_NpcInit_KoopaTroopa),
-    .drops = PARATROOPA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -80,17 +76,17 @@ NpcData N(NpcData_ParaTroopa_01) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_KoopaTroopa),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .settings = &N(NpcSettings_ParaTroopa),
+    .drops = PARATROOPA_DROPS,
     .animations = PARATROOPA_ANIMS,
 };
 
 NpcData N(NpcData_ParaTroopa_02) = {
     .id = NPC_ParaTroopa_02,
-    .settings = &N(NpcSettings_ParaTroopa),
     .pos = { 75.0f, 50.0f, -30.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
-    .init = &N(EVS_NpcInit_KoopaTroopa),
-    .drops = PARATROOPA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -103,6 +99,10 @@ NpcData N(NpcData_ParaTroopa_02) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_KoopaTroopa),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .settings = &N(NpcSettings_ParaTroopa),
+    .drops = PARATROOPA_DROPS,
     .animations = PARATROOPA_ANIMS,
 };
 

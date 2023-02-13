@@ -15,12 +15,8 @@ EvtScript N(EVS_NpcInit_EnableReflection) = {
 NpcData N(NpcData_Clubba)[] = {
     {
         .id = NPC_Clubba,
-        .settings = &N(NpcSettings_FrostClubba_Patrol),
         .pos = { 200.0f, 0.0f, 75.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_EnableReflection),
-        .drops = FROST_CLUBBA_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -35,6 +31,10 @@ NpcData N(NpcData_Clubba)[] = {
                 .detectSize = { 200, 100 },
             }
         },
+        .init = &N(EVS_NpcInit_EnableReflection),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_FrostClubba_Patrol),
+        .drops = FROST_CLUBBA_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
@@ -43,12 +43,8 @@ NpcData N(NpcData_Clubba)[] = {
 
 NpcData N(NpcData_Duplighost) = {
     .id = NPC_Duplighost,
-    .settings = &N(NpcSettings_Duplighost_Patrol),
     .pos = { 200.0f, 0.0f, -75.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_EnableReflection),
-    .drops = DUPLIGHOST_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -63,6 +59,10 @@ NpcData N(NpcData_Duplighost) = {
             .detectSize = { 200, 100 },
         }
     },
+    .init = &N(EVS_NpcInit_EnableReflection),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_Duplighost_Patrol),
+    .drops = DUPLIGHOST_DROPS,
     .animations = DUPLIGHOST_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };

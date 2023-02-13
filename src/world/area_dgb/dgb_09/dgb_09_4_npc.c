@@ -11,11 +11,8 @@
 NpcData N(NpcData_Clubba_Wander)[] = {
     {
         .id = NPC_Clubba_Wander,
-        .settings = &N(NpcSettings_Clubba_Wander),
         .pos = { -350.0f, 0.0f, 180.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -28,6 +25,9 @@ NpcData N(NpcData_Clubba_Wander)[] = {
                 .detectSize = { 600, 250 },
             }
         },
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Clubba_Wander),
+        .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -48,12 +48,8 @@ EvtScript N(EVS_NpcInit_Clubba_Napping) = {
 NpcData N(NpcData_Clubba_Napping)[] = {
     {
         .id = NPC_Clubba_Napping,
-        .settings = &N(NpcSettings_Clubba_Napping),
         .pos = { 310.0f, 0.0f, 88.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_Clubba_Napping),
-        .drops = CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -66,6 +62,10 @@ NpcData N(NpcData_Clubba_Napping)[] = {
                 .detectSize = { 600, 250 },
             }
         },
+        .init = &N(EVS_NpcInit_Clubba_Napping),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Clubba_Napping),
+        .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -75,11 +75,8 @@ NpcData N(NpcData_Clubba_Napping)[] = {
 
 NpcData N(NpcData_Sentinel) = {
     .id = NPC_Sentinel,
-    .settings = &N(NpcSettings_Sentinel),
     .pos = { -20.0f, 100.0f, 180.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -92,6 +89,9 @@ NpcData N(NpcData_Sentinel) = {
             .detectSize = { 250 },
         }
     },
+    .flags = ENEMY_FLAG_400,
+    .settings = &N(NpcSettings_Sentinel),
+    .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
 

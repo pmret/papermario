@@ -1048,11 +1048,11 @@ NpcSettings N(NpcSettings_Merlon) = {
 
 NpcData N(NpcData_Merlon) = {
     .id = NPC_Merlon,
-    .settings = &N(NpcSettings_Merlon),
     .pos = { -337.0f, 20.0f, -360.0f },
     .yaw = 30,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Merlon),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Merlon),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Merlon_Idle,
@@ -1063,11 +1063,11 @@ NpcData N(NpcData_Merlon) = {
 NpcData N(NpcData_DarkToads)[] = {
     {
         .id = NPC_DarkToad_01,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 505.0f, 0.0f, 5.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_DarkToad_01),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_DarkToad_Red_Idle,
@@ -1076,11 +1076,11 @@ NpcData N(NpcData_DarkToads)[] = {
     },
     {
         .id = NPC_DarkToad_02,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 530.0f, 0.0f, -35.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_DarkToad_02),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_DarkToad_Black_Idle,
@@ -1089,11 +1089,11 @@ NpcData N(NpcData_DarkToads)[] = {
     },
     {
         .id = NPC_DarkToad_03,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 540.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_DarkToad_02),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_DarkToad_Yellow_Idle,
@@ -1102,11 +1102,11 @@ NpcData N(NpcData_DarkToads)[] = {
     },
     {
         .id = NPC_DarkToad_04,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 550.0f, 0.0f, 35.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_DarkToad_02),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_DarkToad_Green_Idle,
@@ -1126,10 +1126,10 @@ s32 N(ExtraAnims_KoopaBros)[] = {
 NpcData N(NpcData_KoopaBros)[] = {
     {
         .id = NPC_KoopaBros_01,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Black_Anim04,
@@ -1153,10 +1153,10 @@ NpcData N(NpcData_KoopaBros)[] = {
     },
     {
         .id = NPC_KoopaBros_02,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Red_Anim04,
@@ -1180,10 +1180,10 @@ NpcData N(NpcData_KoopaBros)[] = {
     },
     {
         .id = NPC_KoopaBros_03,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Yellow_Anim04,
@@ -1207,10 +1207,10 @@ NpcData N(NpcData_KoopaBros)[] = {
     },
     {
         .id = NPC_KoopaBros_04,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Green_Anim04,
@@ -1236,10 +1236,10 @@ NpcData N(NpcData_KoopaBros)[] = {
 
 NpcData N(NpcData_Ninji) = {
     .id = NPC_Ninji,
-    .settings = &N(NpcSettings_Ninji),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .settings = &N(NpcSettings_Ninji),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Ninji_Idle,
@@ -2080,11 +2080,11 @@ s32 N(ExtraAnims_Bubulb)[] = {
 NpcData N(NpcData_Townsfolk)[] = {
     {
         .id = NPC_Toad_04,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -94.0f, 0.0f, -117.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Toad_04),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .extraAnimations = N(ExtraAnims_Toad),
@@ -2092,12 +2092,8 @@ NpcData N(NpcData_Townsfolk)[] = {
     },
     {
         .id = NPC_Toad_05,
-        .settings = &N(NpcSettings_Toad_Wander),
         .pos = { -145.0f, 0.0f, -25.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Toad_05),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2110,18 +2106,18 @@ NpcData N(NpcData_Townsfolk)[] = {
                 .detectSize = { 10 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_05),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Wander),
+        .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .extraAnimations = N(ExtraAnims_Toad),
         .tattle = MSG_NpcTattle_MAC_KnowsTheGossip,
     },
     {
         .id = NPC_Toad_06,
-        .settings = &N(NpcSettings_Toad_Patrol),
         .pos = { 40.0f, 0.0f, -300.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Toad_06),
-        .drops = NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -2136,18 +2132,18 @@ NpcData N(NpcData_Townsfolk)[] = {
                 .detectSize = { 10 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_06),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Patrol),
+        .drops = NO_DROPS,
         .animations = TOAD_YELLOW_ANIMS,
         .extraAnimations = N(ExtraAnims_Toad),
         .tattle = MSG_NpcTattle_MAC_PrincessFan,
     },
     {
         .id = NPC_Toad_07,
-        .settings = &N(NpcSettings_Toad_Patrol),
         .pos = { -440.0f, 0.0f, -20.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Toad_07),
-        .drops = NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -2162,18 +2158,18 @@ NpcData N(NpcData_Townsfolk)[] = {
                 .detectSize = { 10 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_07),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Patrol),
+        .drops = NO_DROPS,
         .animations = TOAD_YELLOW_ANIMS,
         .extraAnimations = N(ExtraAnims_Toad),
         .tattle = MSG_NpcTattle_MAC_KnowsTheRumors,
     },
     {
         .id = NPC_Toad_08,
-        .settings = &N(NpcSettings_Toad_Patrol),
         .pos = { 400.0f, 20.0f, 260.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Toad_08),
-        .drops = NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -2188,17 +2184,21 @@ NpcData N(NpcData_Townsfolk)[] = {
                 .detectSize = { 10 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_08),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Patrol),
+        .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
         .extraAnimations = N(ExtraAnims_Toad),
         .tattle = MSG_NpcTattle_MAC_CrushingOnMinhT,
     },
     {
         .id = NPC_Toad_09,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -380.0f, 20.0f, -100.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Toad_09),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_GREEN_ANIMS,
         .extraAnimations = N(ExtraAnims_Toad),
@@ -2206,11 +2206,11 @@ NpcData N(NpcData_Townsfolk)[] = {
     },
     {
         .id = NPC_ToadHouseToad,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 488.0f, 20.0f, -174.0f },
         .yaw = 30,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_ToadHouseKeeper),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .extraAnimations = N(ExtraAnims_Toad),
@@ -2218,11 +2218,11 @@ NpcData N(NpcData_Townsfolk)[] = {
     },
     {
         .id = NPC_Bubulb,
-        .settings = &N(NpcSettings_Bubulb),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bubulb),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Bubulb),
         .drops = NO_DROPS,
         .animations = BUBULB_PINK_ANIMS,
         .extraAnimations = N(ExtraAnims_Bubulb),
@@ -2230,11 +2230,11 @@ NpcData N(NpcData_Townsfolk)[] = {
     },
     {
         .id = NPC_MinhT,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 150.0f, 20.0f, 485.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_MinhT),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_MinhT_Idle,
@@ -2243,11 +2243,11 @@ NpcData N(NpcData_Townsfolk)[] = {
     },
     {
         .id = NPC_Postmaster,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 312.0f, 30.0f, -438.0f },
         .yaw = 300,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000,
         .init = &N(EVS_NpcInit_Postmaster),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Postmaster_Idle,
@@ -2258,11 +2258,11 @@ NpcData N(NpcData_Townsfolk)[] = {
 
 NpcData N(NpcData_Parakarry) = {
     .id = NPC_Parakarry,
-    .settings = &N(NpcSettings_Parakarry),
     .pos = { 145.0f, 20.0f, -472.0f },
     .yaw = 120,
-    .flags = COMMON_PASSIVE_FLAGS,
     .init = &N(EVS_NpcInit_Parakarry),
+    .flags = COMMON_PASSIVE_FLAGS,
+    .settings = &N(NpcSettings_Parakarry),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_WorldParakarry_Idle,
@@ -2295,11 +2295,11 @@ s32 N(ExtraAnims_Twink)[] = {
 
 NpcData N(NpcData_Twink) = {
     .id = NPC_Twink,
-    .settings = &N(NpcSettings_Twink),
     .pos = { -350.0f, 20.0f, -100.0f },
     .yaw = 274,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Twink),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Twink),
     .drops = NO_DROPS,
     .animations = TWINK_ANIMS,
     .extraAnimations = N(ExtraAnims_Twink),
@@ -2308,41 +2308,41 @@ NpcData N(NpcData_Twink) = {
 NpcData N(NpcData_ShyGuys)[] = {
     {
         .id = NPC_PostOfficeShyGuy,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ShyGuy_01),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ToadHouseShyGuy,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
         .init = &N(EVS_NpcInit_ShyGuy_02),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_GardenShyGuy1,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
         .init = &N(EVS_NpcInit_GardenShyGuy1),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_GardenShyGuy2,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
         .init = &N(EVS_NpcInit_GardenShyGuy2),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
@@ -2357,11 +2357,11 @@ s32 N(D_8025EBB8_81F438)[] = {
 
 NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(NpcSettings_Kolorado),
     .pos = { 520.0f, 0.0f, -25.0f },
     .yaw = 270,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
     .init = &N(EVS_NpcInit_Kolorado),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Kolorado),
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .extraAnimations = N(D_8025EBB8_81F438),
@@ -2370,12 +2370,12 @@ NpcData N(NpcData_Kolorado) = {
 
 NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
-    .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { -440.0f, 20.0f, -140.0f },
     .yaw = 30,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_4000,
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_MAC, QUIZ_COUNT_MAC, QUIZ_MAP_MAC_01 }},
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_4000,
+    .settings = &N(NpcSettings_ChuckQuizmo),
     .drops = NO_DROPS,
     .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,

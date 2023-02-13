@@ -233,11 +233,11 @@ EvtScript N(EVS_SetupFoliage) = {
 
 NpcData N(NpcData_Posie) = {
     .id = NPC_Posie,
-    .settings = &N(NpcSettings_Posie),
     .pos = { -260.0f, 0.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Posie),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Posie),
     .drops = NO_DROPS,
     .animations = POSIE_ANIMS,
     .tattle = MSG_NpcTattle_Posie,

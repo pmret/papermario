@@ -154,12 +154,8 @@ EvtScript N(EVS_NpcInit_BillBlaster_03) = {
 NpcData N(NpcData_BillBlaster_01)[] = {
     {
         .id = NPC_BillBlaster_01,
-        .settings = &N(NpcSettings_BillBlaster),
         .pos = { -288.0f, 120.0f, 120.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_BillBlaster),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -172,16 +168,16 @@ NpcData N(NpcData_BillBlaster_01)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_BillBlaster),
+        .drops = NO_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
     {
         .id = NPC_BillBlaster_02,
-        .settings = &N(NpcSettings_BillBlaster),
         .pos = { -288.0f, 120.0f, 78.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_BillBlaster),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -194,6 +190,10 @@ NpcData N(NpcData_BillBlaster_01)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_BillBlaster),
+        .drops = NO_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
 };
@@ -201,12 +201,8 @@ NpcData N(NpcData_BillBlaster_01)[] = {
 NpcData N(NpcData_BillBlaster_03)[] = {
     {
         .id = NPC_BillBlaster_03,
-        .settings = &N(NpcSettings_BillBlaster),
         .pos = { -748.0f, 300.0f, -22.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_BillBlaster_03),
-        .drops = BOMBSHELL_BLASTER_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -219,16 +215,16 @@ NpcData N(NpcData_BillBlaster_03)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_BillBlaster_03),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_BillBlaster),
+        .drops = BOMBSHELL_BLASTER_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
     {
         .id = NPC_BillBlaster_04,
-        .settings = &N(NpcSettings_BillBlaster),
         .pos = { -748.0f, 300.0f, 22.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_BillBlaster_03),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -241,6 +237,10 @@ NpcData N(NpcData_BillBlaster_03)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_BillBlaster_03),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_BillBlaster),
+        .drops = NO_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
 };
@@ -248,12 +248,8 @@ NpcData N(NpcData_BillBlaster_03)[] = {
 NpcData N(NpcData_BillBlaster_05)[] = {
     {
         .id = NPC_BillBlaster_05,
-        .settings = &N(NpcSettings_BillBlaster),
         .pos = { 30.0f, 480.0f, -122.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_BillBlaster),
-        .drops = BOMBSHELL_BLASTER_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -266,16 +262,16 @@ NpcData N(NpcData_BillBlaster_05)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_BillBlaster),
+        .drops = BOMBSHELL_BLASTER_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
     {
         .id = NPC_BillBlaster_06,
-        .settings = &N(NpcSettings_BillBlaster),
         .pos = { 30.0f, 480.0f, -78.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_BillBlaster),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -288,6 +284,10 @@ NpcData N(NpcData_BillBlaster_05)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_BillBlaster),
+        .drops = NO_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
 };
@@ -295,12 +295,8 @@ NpcData N(NpcData_BillBlaster_05)[] = {
 NpcData N(NpcData_BillBlaster_07)[] = {
     {
         .id = NPC_BillBlaster_07,
-        .settings = &N(NpcSettings_BillBlaster),
         .pos = { 820.0f, 600.0f, -122.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_BillBlaster),
-        .drops = BOMBSHELL_BLASTER_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -313,16 +309,16 @@ NpcData N(NpcData_BillBlaster_07)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_BillBlaster),
+        .drops = BOMBSHELL_BLASTER_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
     {
         .id = NPC_BillBlaster_08,
-        .settings = &N(NpcSettings_BillBlaster),
         .pos = { 820.0f, 600.0f, -78.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_BillBlaster),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -335,6 +331,10 @@ NpcData N(NpcData_BillBlaster_07)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_BillBlaster),
+        .drops = NO_DROPS,
         .animations = BOMBSHELL_BLASTER_ANIMS,
     },
 };

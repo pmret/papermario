@@ -344,11 +344,11 @@ s32 N(ExtraAnims_Bowser)[] = {
 
 NpcData N(NpcData_Bowser_Body) = {
     .id = NPC_Bowser_Body,
-    .settings = &N(NpcSettings_Bowser),
     .pos = { 0.0f, -500.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_Bowser_Body),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+    .settings = &N(NpcSettings_Bowser),
     .drops = NO_DROPS,
     .animations = BOWSER_ANIMS,
     .extraAnimations = N(ExtraAnims_Bowser),
@@ -356,11 +356,11 @@ NpcData N(NpcData_Bowser_Body) = {
 
 NpcData N(NpcData_Bowser_Prop) = {
     .id = NPC_Bowser_Prop,
-    .settings = &N(NpcSettings_Dummy),
     .pos = { 0.0f, -500.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_Bowser_Prop),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+    .settings = &N(NpcSettings_Dummy),
     .drops = NO_DROPS,
     .animations = BOWSER_ANIMS,
     .extraAnimations = N(ExtraAnims_Bowser),
@@ -368,11 +368,11 @@ NpcData N(NpcData_Bowser_Prop) = {
 
 NpcData N(NpcData_CaptivePeach) = {
     .id = NPC_CaptivePeach,
-    .settings = &N(NpcSettings_Dummy),
     .pos = { 670.0f, 0.0f, -12.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_20000 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_CaptivePeach),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_20000 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+    .settings = &N(NpcSettings_Dummy),
     .drops = NO_DROPS,
     .animations = PEACH_ANIMS,
 };

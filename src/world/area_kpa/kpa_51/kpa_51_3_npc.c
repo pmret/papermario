@@ -7,11 +7,8 @@
 NpcData N(NpcData_Magikoopa_01)[] = {
     {
         .id = NPC_Magikoopa_01,
-        .settings = &N(NpcSettings_Magikoopa),
         .pos = { -130.0f, 0.0f, -30.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = MAGINO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -24,6 +21,9 @@ NpcData N(NpcData_Magikoopa_01)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Magikoopa),
+        .drops = MAGINO_DROPS,
         .animations = MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_Magikoopa),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -34,11 +34,8 @@ NpcData N(NpcData_Magikoopa_01)[] = {
 NpcData N(NpcData_Magikoopa_02)[] = {
     {
         .id = NPC_Magikoopa_02,
-        .settings = &N(NpcSettings_Magikoopa),
         .pos = { 150.0f, 0.0f, -30.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = MAGINO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -51,6 +48,9 @@ NpcData N(NpcData_Magikoopa_02)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Magikoopa),
+        .drops = MAGINO_DROPS,
         .animations = MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_Magikoopa),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -60,11 +60,8 @@ NpcData N(NpcData_Magikoopa_02)[] = {
 
 NpcData N(NpcData_Koopatrol) = {
     .id = NPC_Koopatrol,
-    .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 0.0f, 0.0f, -30.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = KOOPATROL_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -77,6 +74,9 @@ NpcData N(NpcData_Koopatrol) = {
             .detectSize = { 300 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Koopatrol_Wander),
+    .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };

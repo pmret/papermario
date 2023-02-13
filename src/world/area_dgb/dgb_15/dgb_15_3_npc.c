@@ -164,12 +164,8 @@ EvtScript N(EVS_NpcInit_Tubba) = {
 
 NpcData N(NpcData_Tubba) = {
     .id = NPC_Tubba,
-    .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
-    .init = &N(EVS_NpcInit_Tubba),
-    .drops = CLUBBA_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -189,6 +185,10 @@ NpcData N(NpcData_Tubba) = {
             .detectSize = { 1000, 250 },
         }
     },
+    .init = &N(EVS_NpcInit_Tubba),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+    .settings = &N(NpcSettings_TubbaBlubba),
+    .drops = CLUBBA_DROPS,
     .animations = TUBBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

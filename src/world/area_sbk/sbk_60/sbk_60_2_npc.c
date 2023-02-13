@@ -4,11 +4,8 @@
 
 NpcData N(NpcData_Pokey) = {
     .id = NPC_Pokey,
-    .settings = &N(NpcSettings_Pokey),
     .pos = { 160.0f, 0.0f, -120.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = POKEY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,6 +18,9 @@ NpcData N(NpcData_Pokey) = {
             .detectSize = { 1000 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Pokey),
+    .drops = POKEY_DROPS,
     .animations = POKEY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

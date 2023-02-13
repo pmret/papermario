@@ -620,11 +620,11 @@ EvtScript N(EVS_NpcInit_Lakilulu) = {
 
 NpcData N(NpcData_Wisterwood) = {
     .id = NPC_Dummy_Wisterwood,
-    .settings = &N(NpcSettings_Dummy),
     .pos = { -72.0f, 60.0f, -100.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Wisterwood),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Dummy),
     .drops = NO_DROPS,
     .animations = BUBULB_PINK_ANIMS,
 };
@@ -632,12 +632,8 @@ NpcData N(NpcData_Wisterwood) = {
 NpcData N(NpcData_Bubulbs)[] = {
     {
         .id = NPC_Bubulb_01,
-        .settings = &N(NpcSettings_Bubulb_Patrol),
         .pos = { -59.0f, 0.0f, -40.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Bubulb_01),
-        .drops = NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -652,17 +648,17 @@ NpcData N(NpcData_Bubulbs)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Bubulb_01),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Bubulb_Patrol),
+        .drops = NO_DROPS,
         .animations = BUBULB_PINK_ANIMS,
         .tattle = MSG_NpcTattle_FLO_BubulbA,
     },
     {
         .id = NPC_Bubulb_02,
-        .settings = &N(NpcSettings_Bubulb_Patrol),
         .pos = { 67.0f, 0.0f, 85.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Bubulb_02),
-        .drops = NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -677,17 +673,17 @@ NpcData N(NpcData_Bubulbs)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Bubulb_02),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Bubulb_Patrol),
+        .drops = NO_DROPS,
         .animations = BUBULB_PURPLE_ANIMS,
         .tattle = MSG_NpcTattle_FLO_BubulbB,
     },
     {
         .id = NPC_Bubulb_03,
-        .settings = &N(NpcSettings_Bubulb_Patrol),
         .pos = { 90.0f, 0.0f, 410.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Bubulb_03),
-        .drops = NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -702,17 +698,17 @@ NpcData N(NpcData_Bubulbs)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Bubulb_03),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Bubulb_Patrol),
+        .drops = NO_DROPS,
         .animations = BUBULB_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_FLO_BubulbC,
     },
     {
         .id = NPC_Bubulb_04,
-        .settings = &N(NpcSettings_Bubulb_Patrol),
         .pos = { 200.0f, 0.0f, 430.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Bubulb_04),
-        .drops = NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -727,6 +723,10 @@ NpcData N(NpcData_Bubulbs)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Bubulb_04),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Bubulb_Patrol),
+        .drops = NO_DROPS,
         .animations = BUBULB_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_FLO_BubulbD,
     },
@@ -734,11 +734,11 @@ NpcData N(NpcData_Bubulbs)[] = {
 
 NpcData N(NpcData_Tolielup) = {
     .id = NPC_Tolielup,
-    .settings = &N(NpcSettings_Tolielup),
     .pos = { -400.0f, 0.0f, 190.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Tolielup),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Tolielup),
     .drops = NO_DROPS,
     .animations = TOLIELUP_ANIMS,
     .tattle = MSG_NpcTattle_Tolielup,
@@ -746,22 +746,22 @@ NpcData N(NpcData_Tolielup) = {
 
 NpcData N(NpcData_Klevar) = {
     .id = NPC_Klevar,
-    .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Klevar),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_StarSpirit),
     .drops = NO_DROPS,
     .animations = KLEVAR_ANIMS,
 };
 
 NpcData N(NpcData_Lakilulu) = {
     .id = NPC_Lakilulu,
-    .settings = &N(NpcSettings_Dummy),
     .pos = { 198.0f, 0.0f, 363.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Lakilulu),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Dummy),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Lakilulu_Idle,

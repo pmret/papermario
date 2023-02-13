@@ -47,22 +47,22 @@ EvtScript N(EVS_NpcInit_Yakkey) = {
 
 NpcData N(NpcData_TubbasHeart) = {
     .id = NPC_TubbasHeart,
-    .settings = &N(NpcSettings_TubbasHeart),
     .pos = { -23.0f, 75.0f, 31.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_TubbasHeart),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_TubbasHeart),
     .drops = NO_DROPS,
     .animations = TUBBAS_HEART_ANIMS,
 };
 
 NpcData N(NpcData_Yakkey) = {
     .id = NPC_Yakkey,
-    .settings = &N(NpcSettings_Yakkey),
     .pos = { 38.0f, 0.0f, 97.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Yakkey),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Yakkey),
     .drops = NO_DROPS,
     .animations = YAKKEY_ANIMS,
     .tattle = MSG_NpcTattle_Yakkey,

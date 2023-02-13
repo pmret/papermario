@@ -1742,12 +1742,8 @@ EvtScript N(EVS_NpcAI_Eldstar_02) = {
 NpcData N(NpcData_GoombaFamily)[] = {
     {
         .id = NPC_Goompa,
-        .settings = &N(NpcSettings_GoombaFamily_Wander),
         .pos = { 506.0f, 30.0f, -364.0f },
         .yaw = 45,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Goompa),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1760,17 +1756,17 @@ NpcData N(NpcData_GoombaFamily)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Goompa),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_GoombaFamily_Wander),
+        .drops = NO_DROPS,
         .animations = GOOMPA_ANIMS,
         .tattle = MSG_NpcTattle_Goompa,
     },
     {
         .id = NPC_Goombaria,
-        .settings = &N(NpcSettings_GoombaFamily_Wander),
         .pos = { 92.0f, 0.0f, 76.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Goombaria),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1783,17 +1779,17 @@ NpcData N(NpcData_GoombaFamily)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Goombaria),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_GoombaFamily_Wander),
+        .drops = NO_DROPS,
         .animations = GOOMBARIA_ANIMS,
         .tattle = MSG_NpcTattle_Goombaria,
     },
     {
         .id = NPC_Goombario,
-        .settings = &N(NpcSettings_GoombaFamily_Wander),
         .pos = { -50.0f, 0.0f, -30.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Goombario),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1806,16 +1802,16 @@ NpcData N(NpcData_GoombaFamily)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Goombario),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_GoombaFamily_Wander),
+        .drops = NO_DROPS,
         .animations = GOOMBARIO_ANIMS,
     },
     {
         .id = NPC_Gooma,
-        .settings = &N(NpcSettings_GoombaFamily_Wander),
         .pos = { 100.0f, 0.0f, -256.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Gooma),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1828,17 +1824,17 @@ NpcData N(NpcData_GoombaFamily)[] = {
                 .detectSize = { 30 },
             }
         },
+        .init = &N(EVS_NpcInit_Gooma),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_GoombaFamily_Wander),
+        .drops = NO_DROPS,
         .animations = GOOMA_ANIMS,
         .tattle = MSG_NpcTattle_Gooma,
     },
     {
         .id = NPC_Goompapa,
-        .settings = &N(NpcSettings_GoombaFamily_Wander),
         .pos = { 163.0f, 0.0f, 283.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Goompapa),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1851,6 +1847,10 @@ NpcData N(NpcData_GoombaFamily)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Goompapa),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_GoombaFamily_Wander),
+        .drops = NO_DROPS,
         .animations = GOOMPAPA_ANIMS,
         .tattle = MSG_NpcTattle_Goompapa,
     },
@@ -1858,12 +1858,8 @@ NpcData N(NpcData_GoombaFamily)[] = {
 
 NpcData N(NpcData_Goomama) = {
     .id = NPC_Goomama,
-    .settings = &N(NpcSettings_GoombaFamily_Wander),
     .pos = { -200.0f, 0.0f, 100.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .init = &N(EVS_NpcInit_Goomama),
-    .drops = NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -1876,6 +1872,10 @@ NpcData N(NpcData_Goomama) = {
             .detectSize = { 100 },
         }
     },
+    .init = &N(EVS_NpcInit_Goomama),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_GoombaFamily_Wander),
+    .drops = NO_DROPS,
     .animations = GOOMAMA_ANIMS,
     .tattle = MSG_NpcTattle_Goomama,
 };
@@ -1888,12 +1888,8 @@ EvtScript N(EVS_NpcInit_Toad) = {
 
 NpcData N(NpcData_Toad) = {
     .id = NPC_Toad,
-    .settings = &N(NpcSettings_Toad_Guard),
     .pos = { -138.0f, 19.0f, -297.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .init = &N(EVS_NpcInit_Toad),
-    .drops = NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -1906,6 +1902,10 @@ NpcData N(NpcData_Toad) = {
             .detectSize = { 0 },
         }
     },
+    .init = &N(EVS_NpcInit_Toad),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Toad_Guard),
+    .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_KMR_ToadHouseToad,
 };
@@ -1922,12 +1922,8 @@ s32 N(ExtraAnims_Kammy)[] = {
 
 NpcData N(NpcData_Kammy) = {
     .id = NPC_Kammy,
-    .settings = &N(NpcSettings_Kammy_Guard),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_Kammy),
-    .drops = NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -1940,18 +1936,22 @@ NpcData N(NpcData_Kammy) = {
             .detectSize = { 100 },
         }
     },
+    .init = &N(EVS_NpcInit_Kammy),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Kammy_Guard),
+    .drops = NO_DROPS,
     .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),
 };
 
 NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
-    .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { -300.0f, 0.0f, 175.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_4000 | ENEMY_FLAG_400000,
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_KMR, QUIZ_COUNT_KMR, QUIZ_MAP_KMR_02 }},
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_4000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_ChuckQuizmo),
     .drops = NO_DROPS,
     .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,
@@ -1993,22 +1993,22 @@ s32 N(ExtraAnims_Eldstar)[] = {
 NpcData N(NpcData_Eldstar_Prologue)[] = {
     {
         .id = NPC_Eldstar_01,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_4000 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_Eldstar_01),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_4000 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_StarSpirit),
         .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Eldstar),
     },
     {
         .id = NPC_Eldstar_02,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Eldstar_02),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_StarSpirit),
         .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Eldstar),
@@ -2209,22 +2209,22 @@ EvtScript N(EVS_NpcInit_Parakarry_Epilogue) = {
 NpcData N(NpcData_Epilogue)[] = {
     {
         .id = NPC_Eldstar_01,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_4000 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_Eldstar_Epilogue),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_4000 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_StarSpirit),
         .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Eldstar),
     },
     {
         .id = NPC_Parakarry,
-        .settings = &N(NpcSettings_GoombaFamily),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_Parakarry_Epilogue),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_GoombaFamily),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldParakarry_Idle,
@@ -2247,21 +2247,21 @@ NpcData N(NpcData_Epilogue)[] = {
     },
     {
         .id = NPC_Goombario,
-        .settings = &N(NpcSettings_GoombaFamily),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_Goombario_Epilogue),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_GoombaFamily),
         .drops = NO_DROPS,
         .animations = GOOMBARIO_ANIMS,
     },
     {
         .id = NPC_Goombaria,
-        .settings = &N(NpcSettings_GoombaFamily),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_Goombaria_Epilogue),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_GoombaFamily),
         .drops = NO_DROPS,
         .animations = GOOMBARIA_ANIMS,
     },

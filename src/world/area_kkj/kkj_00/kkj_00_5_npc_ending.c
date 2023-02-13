@@ -232,10 +232,10 @@ s32 N(ExtraAnims_Ninji)[] = {
 
 NpcData N(NpcData_Peach) = {
     .id = NPC_Peach,
-    .settings = &N(NpcSettings_Peach),
     .pos = { 0.0f, 100.0f, -440.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_20000,
+    .settings = &N(NpcSettings_Peach),
     .drops = NO_DROPS,
     .animations = PEACH_ANIMS,
     .extraAnimations = N(ExtraAnims_Peach),
@@ -244,20 +244,20 @@ NpcData N(NpcData_Peach) = {
 NpcData N(NpcData_SpecialToads)[] = {
     {
         .id = NPC_ToadMinister,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 100.0f, 0.0f, 250.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_MINISTER_ANIMS,
         .extraAnimations = N(ExtraAnims_Minister),
     },
     {
         .id = NPC_TayceT,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -200.0f, 0.0f, 260.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_TayceT_Idle,
@@ -266,11 +266,11 @@ NpcData N(NpcData_SpecialToads)[] = {
     },
     {
         .id = NPC_RussT_02,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 300.0f, 0.0f, 150.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_RussT),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_RussT_Idle,
@@ -294,11 +294,11 @@ NpcData N(NpcData_SpecialToads)[] = {
     },
     {
         .id = NPC_ShiverToad_02,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 330.0f, 0.0f, 135.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_ShiverToad_02),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShiverToad_Green_Idle,
@@ -325,10 +325,10 @@ NpcData N(NpcData_SpecialToads)[] = {
 NpcData N(NpcData_Party)[] = {
     {
         .id = NPC_Goombario,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 180.0f, 0.0f, 80.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldGoombario_Idle,
@@ -352,10 +352,10 @@ NpcData N(NpcData_Party)[] = {
     },
     {
         .id = NPC_Kooper,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 225.0f, 0.0f, 225.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
@@ -379,10 +379,10 @@ NpcData N(NpcData_Party)[] = {
     },
     {
         .id = NPC_Bombette,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 270.0f, 0.0f, 115.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldBombette_Idle,
@@ -406,10 +406,10 @@ NpcData N(NpcData_Party)[] = {
     },
     {
         .id = NPC_Parakarry,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 325.0f, 10.0f, 175.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldParakarry_Idle,
@@ -433,10 +433,10 @@ NpcData N(NpcData_Party)[] = {
     },
     {
         .id = NPC_Bow,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -270.0f, 0.0f, 145.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldBow_Idle,
@@ -460,12 +460,12 @@ NpcData N(NpcData_Party)[] = {
     },
     {
         .id = NPC_Watt,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -235.0f, 0.0f, 85.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .initVarCount = 1,
         .initVar = { .value = 0 },
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldWatt_Idle,
@@ -489,10 +489,10 @@ NpcData N(NpcData_Party)[] = {
     },
     {
         .id = NPC_Sushie,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -190.0f, 0.0f, 50.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldSushie_Idle,
@@ -516,10 +516,10 @@ NpcData N(NpcData_Party)[] = {
     },
     {
         .id = NPC_Lakilester,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -320.0f, 0.0f, -60.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldLakilester_Idle,
@@ -546,10 +546,10 @@ NpcData N(NpcData_Party)[] = {
 NpcData N(NpcData_Wizards)[] = {
     {
         .id = NPC_Merlon,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -145.0f, 0.0f, 415.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Merlon_Idle,
@@ -558,10 +558,10 @@ NpcData N(NpcData_Wizards)[] = {
     },
     {
         .id = NPC_Merluvlee,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -225.0f, 0.0f, 380.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Merluvlee_Idle,
@@ -570,10 +570,10 @@ NpcData N(NpcData_Wizards)[] = {
     },
     {
         .id = NPC_Merlow,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -175.0f, 0.0f, 330.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Merlow_Idle,
@@ -582,10 +582,10 @@ NpcData N(NpcData_Wizards)[] = {
     },
     {
         .id = NPC_Merlee,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -250.0f, 0.0f, 350.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldMerlee_Idle,
@@ -609,10 +609,10 @@ NpcData N(NpcData_Wizards)[] = {
     },
     {
         .id = NPC_Merle,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -220.0f, 0.0f, 450.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Merle_Idle,
@@ -639,10 +639,10 @@ NpcData N(NpcData_Wizards)[] = {
 NpcData N(NpcData_PartyFamily)[] = {
     {
         .id = NPC_Lakilulu,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -365.0f, 0.0f, -60.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Lakilulu_Idle,
@@ -666,10 +666,10 @@ NpcData N(NpcData_PartyFamily)[] = {
     },
     {
         .id = NPC_Bootler,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -340.0f, 0.0f, 100.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Bootler_Idle,
@@ -693,10 +693,10 @@ NpcData N(NpcData_PartyFamily)[] = {
     },
     {
         .id = NPC_Goompa,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 170.0f, 0.0f, 0.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Goompa_Idle,
@@ -720,10 +720,10 @@ NpcData N(NpcData_PartyFamily)[] = {
     },
     {
         .id = NPC_Goombaria,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 140.0f, 0.0f, 50.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Goombaria_Idle,
@@ -750,10 +750,10 @@ NpcData N(NpcData_PartyFamily)[] = {
 NpcData N(NpcData_Visitors)[] = {
     {
         .id = NPC_Yoshi,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -340.0f, 0.0f, 310.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Yoshi_Blue_Idle,
@@ -777,10 +777,10 @@ NpcData N(NpcData_Visitors)[] = {
     },
     {
         .id = NPC_Penguin_02,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 225.0f, 0.0f, -80.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Penguin_Idle,
@@ -804,10 +804,10 @@ NpcData N(NpcData_Visitors)[] = {
     },
     {
         .id = NPC_Penguin_03,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -250.0f, 0.0f, -150.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Penguin_Idle,
@@ -831,10 +831,10 @@ NpcData N(NpcData_Visitors)[] = {
     },
     {
         .id = NPC_Dryite,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -320.0f, 0.0f, 245.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Dryite_Yellow_Idle,
@@ -858,10 +858,10 @@ NpcData N(NpcData_Visitors)[] = {
     },
     {
         .id = NPC_Ninji,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -395.0f, 68.0f, 50.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Ninji_Idle,
@@ -888,40 +888,40 @@ NpcData N(NpcData_Visitors)[] = {
 NpcData N(NpcData_Toads)[] = {
     {
         .id = NPC_Toad_04,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 200.0f, 0.0f, 420.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .extraAnimations = N(ExtraAnims_Toad),
     },
     {
         .id = NPC_Toad_05,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -120.0f, 0.0f, 205.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_YELLOW_ANIMS,
         .extraAnimations = N(ExtraAnims_Toad),
     },
     {
         .id = NPC_Toad_06,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -440.0f, 0.0f, 220.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_GREEN_ANIMS,
         .extraAnimations = N(ExtraAnims_Toad),
     },
     {
         .id = NPC_Toad_07,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 285.0f, 0.0f, 290.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
         .extraAnimations = N(ExtraAnims_Toad),
@@ -931,42 +931,42 @@ NpcData N(NpcData_Toads)[] = {
 NpcData N(NpcData_Toadettes)[] = {
     {
         .id = NPC_Toadette_03,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -300.0f, 0.0f, 100.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_Toadette_03),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .extraAnimations = N(ExtraAnims_Toadette),
     },
     {
         .id = NPC_Toadette_04,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -270.0f, 0.0f, 85.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_Toadette_04),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOADETTE_GREEN_ANIMS,
         .extraAnimations = N(ExtraAnims_Toadette),
     },
     {
         .id = NPC_Toadette_05,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -190.0f, 0.0f, 160.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOADETTE_ORANGE_ANIMS,
         .extraAnimations = N(ExtraAnims_Toadette),
     },
     {
         .id = NPC_Toadette_06,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 190.0f, 0.0f, 300.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOADETTE_PURPLE_ANIMS,
         .extraAnimations = N(ExtraAnims_Toadette),
@@ -976,51 +976,51 @@ NpcData N(NpcData_Toadettes)[] = {
 NpcData N(NpcData_ToadGuards)[] = {
     {
         .id = NPC_ToadGuard_03,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 100.0f, 0.0f, 150.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_ToadGuard_03),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_GUARD_RED_ANIMS,
         .extraAnimations = N(ExtraAnims_ToadGuard),
     },
     {
         .id = NPC_ToadGuard_04,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -50.0f, 100.0f, -365.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_GUARD_BLUE_ANIMS,
         .extraAnimations = N(ExtraAnims_ToadGuard),
     },
     {
         .id = NPC_ToadGuard_05,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 225.0f, 0.0f, 125.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_GUARD_RED_ANIMS,
         .extraAnimations = N(ExtraAnims_ToadGuard),
     },
     {
         .id = NPC_ToadGuard_06,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -392.0f, 40.0f, -230.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_GUARD_GREEN_ANIMS,
         .extraAnimations = N(ExtraAnims_ToadGuard),
     },
     {
         .id = NPC_ToadGuard_07,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -392.0f, 40.0f, -230.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000 | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_GUARD_YELLOW_ANIMS,
         .extraAnimations = N(ExtraAnims_ToadGuard),

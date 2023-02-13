@@ -62,23 +62,19 @@ EvtScript N(EVS_NpcInit_HyperGoomba) = {
 
 NpcData N(NpcData_TubbasHeart) = {
     .id = NPC_TubbasHeart,
-    .settings = &N(NpcSettings_TubbasHeart),
     .pos = { 80.0f, 50.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_TubbasHeart),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_TubbasHeart),
     .drops = NO_DROPS,
     .animations = TUBBAS_HEART_ANIMS,
 };
 
 NpcData N(NpcData_HyperGoomba) = {
     .id = NPC_HyperGoomba,
-    .settings = &N(NpcSettings_HyperGoomba),
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_HyperGoomba),
-    .drops = HYPER_GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -91,6 +87,10 @@ NpcData N(NpcData_HyperGoomba) = {
             .detectSize = { 150 },
         }
     },
+    .init = &N(EVS_NpcInit_HyperGoomba),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_HyperGoomba),
+    .drops = HYPER_GOOMBA_DROPS,
     .animations = HYPER_GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

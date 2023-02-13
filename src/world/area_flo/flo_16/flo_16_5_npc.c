@@ -5,11 +5,8 @@
 
 NpcData N(NpcData_TuffPuff_01) = {
     .id = NPC_TuffPuff_01,
-    .settings = &N(NpcSettings_TuffPuff),
     .pos = { 440.0f, 145.0f, 15.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = TUFF_PUFF_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -22,17 +19,17 @@ NpcData N(NpcData_TuffPuff_01) = {
             .detectSize = { 225, 95 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_TuffPuff),
+    .drops = TUFF_PUFF_DROPS,
     .animations = TUFF_PUFF_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_TuffPuff_02) = {
     .id = NPC_TuffPuff_02,
-    .settings = &N(NpcSettings_TuffPuff),
     .pos = { 600.0f, 145.0f, 15.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = TUFF_PUFF_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -45,6 +42,9 @@ NpcData N(NpcData_TuffPuff_02) = {
             .detectSize = { 225, 95 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_TuffPuff),
+    .drops = TUFF_PUFF_DROPS,
     .animations = TUFF_PUFF_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };

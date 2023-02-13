@@ -9,11 +9,8 @@
 
 NpcData N(NpcData_Cleft_01) = {
     .id = NPC_Cleft_01,
-    .settings = &N(NpcSettings_Cleft),
     .pos = { 526.0f, 238.0f, 69.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_2000,
-    .drops = CLEFT_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -26,17 +23,17 @@ NpcData N(NpcData_Cleft_01) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Cleft),
+    .drops = CLEFT_DROPS,
     .animations = CLEFT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_Cleft_02) = {
     .id = NPC_Cleft_02,
-    .settings = &N(NpcSettings_Cleft),
     .pos = { 450.0f, 50.0f, 215.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_2000,
-    .drops = CLEFT_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -49,17 +46,17 @@ NpcData N(NpcData_Cleft_02) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Cleft),
+    .drops = CLEFT_DROPS,
     .animations = CLEFT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_Cleft_03) = {
     .id = NPC_Cleft_03,
-    .settings = &N(NpcSettings_Cleft),
     .pos = { 90.0f, 0.0f, 160.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_2000,
-    .drops = CLEFT_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -72,6 +69,9 @@ NpcData N(NpcData_Cleft_03) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Cleft),
+    .drops = CLEFT_DROPS,
     .animations = CLEFT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
@@ -79,11 +79,8 @@ NpcData N(NpcData_Cleft_03) = {
 NpcData N(NpcData_MontyMole_01)[] = {
     {
         .id = NPC_MontyMole,
-        .settings = &N(NpcSettings_MontyMole_WallAmbush),
         .pos = { 867.0f, 0.0f, 101.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = MONTY_MOLE_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -96,16 +93,16 @@ NpcData N(NpcData_MontyMole_01)[] = {
                 .detectSize = { 150 },
             }
         },
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_MontyMole_WallAmbush),
+        .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
     {
         .id = NPC_MontyMole_Hole,
-        .settings = &N(NpcSettings_MontyMole_WallAmbush_Hole),
         .pos = { 867.0f, 0.0f, 101.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -118,6 +115,9 @@ NpcData N(NpcData_MontyMole_01)[] = {
                 .detectSize = { 0 },
             }
         },
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_MontyMole_WallAmbush_Hole),
+        .drops = NO_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
@@ -182,11 +182,11 @@ EvtScript N(EVS_NpcInit_Bubulb) = {
 
 NpcData N(NpcData_Bubulb) = {
     .id = NPC_Bubulb,
-    .settings = &N(NpcSettings_Bubulb),
     .pos = { 1075.0f, 50.0f, 230.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Bubulb),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Bubulb),
     .drops = NO_DROPS,
     .animations = BUBULB_PURPLE_ANIMS,
     .tattle = MSG_NpcTattle_IWA_Bubulb_Revealed,

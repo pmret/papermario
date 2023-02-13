@@ -1041,11 +1041,11 @@ s32 N(ExtraAnims_Duplighost)[] = {
 NpcData N(NpcData_Imposters)[] = {
     {
         .id = NPC_FakeKooper,
-        .settings = &N(NpcSettings_Kooper),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_FakeKooper),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .settings = &N(NpcSettings_Kooper),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
@@ -1068,11 +1068,11 @@ NpcData N(NpcData_Imposters)[] = {
     },
     {
         .id = NPC_FakeGoompa,
-        .settings = &N(NpcSettings_Goompa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_FakeGoompa),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .settings = &N(NpcSettings_Goompa),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Goompa_Idle,
@@ -1096,22 +1096,22 @@ NpcData N(NpcData_Imposters)[] = {
     },
     {
         .id = NPC_FakeLuigi,
-        .settings = &N(NpcSettings_Kooper),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_FakeLuigi),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .settings = &N(NpcSettings_Kooper),
         .drops = NO_DROPS,
         .animations = LUIGI_ANIMS,
         .extraAnimations = N(ExtraAnims_Luigi),
     },
     {
         .id = NPC_FakeKoopaKoot,
-        .settings = &N(NpcSettings_KoopaKoot),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_FakeKoopaKoot),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .settings = &N(NpcSettings_KoopaKoot),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaKoot_Idle,
@@ -1135,22 +1135,22 @@ NpcData N(NpcData_Imposters)[] = {
     },
     {
         .id = NPC_FakeKolorado,
-        .settings = &N(NpcSettings_Kolorado),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_FakeKolorado),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .settings = &N(NpcSettings_Kolorado),
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .extraAnimations = N(ExtraAnims_Kolorado),
     },
     {
         .id = NPC_ExamplePlayer,
-        .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_ExamplePlayer),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .settings = &N(NpcSettings_Duplighost),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
@@ -1174,11 +1174,11 @@ NpcData N(NpcData_Imposters)[] = {
     },
     {
         .id = NPC_ExampleKooper,
-        .settings = &N(NpcSettings_Kooper),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_ExampleKooper),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .settings = &N(NpcSettings_Kooper),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
@@ -1204,11 +1204,11 @@ NpcData N(NpcData_Imposters)[] = {
 NpcData N(NpcData_Duplighosts)[] = {
     {
         .id = NPC_GoompaGhost,
-        .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_Goompa),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .settings = &N(NpcSettings_Duplighost),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
@@ -1232,11 +1232,11 @@ NpcData N(NpcData_Duplighosts)[] = {
     },
     {
         .id = NPC_LuigiGhost,
-        .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_Luigi),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .settings = &N(NpcSettings_Duplighost),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
@@ -1260,11 +1260,11 @@ NpcData N(NpcData_Duplighosts)[] = {
     },
     {
         .id = NPC_KoopaKootGhost,
-        .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_KoopaKoot),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .settings = &N(NpcSettings_Duplighost),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
@@ -1288,11 +1288,11 @@ NpcData N(NpcData_Duplighosts)[] = {
     },
     {
         .id = NPC_KoloradoGhost,
-        .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_Kolorado),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .settings = &N(NpcSettings_Duplighost),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
@@ -1316,11 +1316,11 @@ NpcData N(NpcData_Duplighosts)[] = {
     },
     {
         .id = NPC_Duplighost_Controller,
-        .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_Controller),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .settings = &N(NpcSettings_Duplighost),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
@@ -1487,11 +1487,11 @@ EvtScript N(EVS_NpcInit_TargetKolorado) = {
 NpcData N(NpcData_Targets)[] = {
     {
         .id = NPC_TargetKooper,
-        .settings = &N(NpcSettings_Kooper),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_TargetKooper),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .settings = &N(NpcSettings_Kooper),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
@@ -1514,11 +1514,11 @@ NpcData N(NpcData_Targets)[] = {
     },
     {
         .id = NPC_TargetGoompa,
-        .settings = &N(NpcSettings_Goompa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_TargetGoompa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .settings = &N(NpcSettings_Goompa),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Goompa_Idle,
@@ -1542,22 +1542,22 @@ NpcData N(NpcData_Targets)[] = {
     },
     {
         .id = NPC_TargetLuigi,
-        .settings = &N(NpcSettings_Kooper),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_TargetLuigi),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .settings = &N(NpcSettings_Kooper),
         .drops = NO_DROPS,
         .animations = LUIGI_ANIMS,
         .extraAnimations = N(ExtraAnims_Luigi),
     },
     {
         .id = NPC_TargetKoopaKoot,
-        .settings = &N(NpcSettings_KoopaKoot),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_TargetKoopaKoot),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .settings = &N(NpcSettings_KoopaKoot),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaKoot_Idle,
@@ -1581,11 +1581,11 @@ NpcData N(NpcData_Targets)[] = {
     },
     {
         .id = NPC_TargetKolorado,
-        .settings = &N(NpcSettings_Kolorado),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_TargetKolorado),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .settings = &N(NpcSettings_Kolorado),
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .extraAnimations = N(ExtraAnims_Kolorado),

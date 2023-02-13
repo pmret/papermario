@@ -177,29 +177,29 @@ EvtScript N(EVS_NpcInit_PutridPiranha) = {
 NpcData N(NpcData_Piranhas)[] = {
     {
         .id = NPC_PutridPiranha_01,
-        .settings = &N(NpcSettings_PutridPiranhaSentinel),
         .pos = { 365.0f, 0.0f, -45.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_PutridPiranha),
+        .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+        .settings = &N(NpcSettings_PutridPiranhaSentinel),
         .drops = PIRANHA_NO_DROPS,
         .animations = PIRANHA_SENTINEL_ANIMS,
     },
     {
         .id = NPC_PutridPiranha_02,
-        .settings = &N(NpcSettings_PutridPiranhaSentinel),
         .pos = { 325.0f, 0.0f, 0.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+        .settings = &N(NpcSettings_PutridPiranhaSentinel),
         .drops = PIRANHA_NO_DROPS,
         .animations = PIRANHA_SENTINEL_ANIMS,
     },
     {
         .id = NPC_PutridPiranha_03,
-        .settings = &N(NpcSettings_PutridPiranhaSentinel),
         .pos = { 375.0f, 0.0f, 45.0f },
         .yaw = 270,
         .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+        .settings = &N(NpcSettings_PutridPiranhaSentinel),
         .drops = PIRANHA_NO_DROPS,
         .animations = PIRANHA_SENTINEL_ANIMS,
     },
@@ -207,10 +207,10 @@ NpcData N(NpcData_Piranhas)[] = {
 
 NpcData N(NpcData_HeartPlant_01) = {
     .id = NPC_HeartPlant_01,
-    .settings = &N(NpcSettings_HeartPlant),
     .pos = { -183.0f, 0.0f, 47.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_HeartPlant),
     .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
@@ -218,10 +218,10 @@ NpcData N(NpcData_HeartPlant_01) = {
 
 NpcData N(NpcData_HeartPlant_02) = {
     .id = NPC_HeartPlant_02,
-    .settings = &N(NpcSettings_HeartPlant),
     .pos = { -124.0f, 0.0f, 20.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_HeartPlant),
     .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,

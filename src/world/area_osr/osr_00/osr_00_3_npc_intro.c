@@ -4,10 +4,10 @@
 
 NpcData N(NpcData_Luigi) = {
     .id = NPC_Luigi,
-    .settings = &N(NpcSettings_Luigi),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Luigi),
     .drops = NO_DROPS,
     .animations = LUIGI_ANIMS,
 };

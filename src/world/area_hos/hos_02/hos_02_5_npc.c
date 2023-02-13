@@ -4,11 +4,8 @@
 
 NpcData N(NpcData_Ember) = {
     .id = NPC_Ember_01,
-    .settings = &N(NpcSettings_Ember),
     .pos = { -410.0f, -15.0f, 260.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = EMBER_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,17 +18,17 @@ NpcData N(NpcData_Ember) = {
             .detectSize = { 1000 },
         }
     },
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Ember),
+    .drops = EMBER_DROPS,
     .animations = EMBER_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_Ember_02) = {
     .id = NPC_Ember_02,
-    .settings = &N(NpcSettings_Ember),
     .pos = { 220.0f, 200.0f, -205.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = EMBER_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -44,17 +41,17 @@ NpcData N(NpcData_Ember_02) = {
             .detectSize = { 1000 },
         }
     },
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Ember),
+    .drops = EMBER_DROPS,
     .animations = EMBER_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_Ember_03) = {
     .id = NPC_Ember_03,
-    .settings = &N(NpcSettings_Ember),
     .pos = { -135.0f, 370.0f, 270.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = EMBER_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -67,6 +64,9 @@ NpcData N(NpcData_Ember_03) = {
             .detectSize = { 1000 },
         }
     },
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Ember),
+    .drops = EMBER_DROPS,
     .animations = EMBER_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

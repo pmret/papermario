@@ -15,11 +15,8 @@ s32 N(ExtraAnims_Koopatrol)[] = {
 
 NpcData N(NpcData_Koopatrol_01) = {
     .id = NPC_Koopatrol_01,
-    .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 1045.0f, -255.0f, -194.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400,
-    .drops = KOOPATROL_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -32,6 +29,9 @@ NpcData N(NpcData_Koopatrol_01) = {
             .detectSize = { 300 },
         }
     },
+    .flags = ENEMY_FLAG_400,
+    .settings = &N(NpcSettings_Koopatrol_Wander),
+    .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
     .extraAnimations = N(ExtraAnims_Koopatrol),
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -39,11 +39,8 @@ NpcData N(NpcData_Koopatrol_01) = {
 
 NpcData N(NpcData_Koopatrol_02) = {
     .id = NPC_Koopatrol_02,
-    .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 950.0f, -265.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = KOOPATROL_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -56,6 +53,9 @@ NpcData N(NpcData_Koopatrol_02) = {
             .detectSize = { 300 },
         }
     },
+    .flags = ENEMY_FLAG_400,
+    .settings = &N(NpcSettings_Koopatrol_Wander),
+    .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
     .extraAnimations = N(ExtraAnims_Koopatrol),
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -63,11 +63,8 @@ NpcData N(NpcData_Koopatrol_02) = {
 
 NpcData N(NpcData_BonyBeetle_01) = {
     .id = NPC_BonyBeetle_01,
-    .settings = &N(NpcSettings_BonyBeetle),
     .pos = { -940.0f, 140.0f, -145.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = BONY_BEETLE_DROPS_ALT,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -80,17 +77,17 @@ NpcData N(NpcData_BonyBeetle_01) = {
             .detectSize = { 300 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_BonyBeetle),
+    .drops = BONY_BEETLE_DROPS_ALT,
     .animations = BONY_BEETLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_BonyBeetle_02) = {
     .id = NPC_BonyBeetle_02,
-    .settings = &N(NpcSettings_BonyBeetle),
     .pos = { 175.0f, -130.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = BONY_BEETLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -103,6 +100,9 @@ NpcData N(NpcData_BonyBeetle_02) = {
             .detectSize = { 300 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_BonyBeetle),
+    .drops = BONY_BEETLE_DROPS,
     .animations = BONY_BEETLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -110,11 +110,8 @@ NpcData N(NpcData_BonyBeetle_02) = {
 NpcData N(NpcData_Magikoopa_01)[] = {
     {
         .id = NPC_Magikoopa_01,
-        .settings = &N(NpcSettings_Magikoopa),
         .pos = { -1000.0f, -160.0f, -150.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_400,
-        .drops = MAGINO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -127,6 +124,9 @@ NpcData N(NpcData_Magikoopa_01)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_400,
+        .settings = &N(NpcSettings_Magikoopa),
+        .drops = MAGINO_DROPS,
         .animations = MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_Magikoopa),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

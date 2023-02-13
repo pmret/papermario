@@ -160,33 +160,33 @@ EvtScript N(EVS_NpcInit_ZiplineDummy) = {
 NpcData N(NpcData_PassiveNPCs)[] = {
     {
         .id = NPC_Kolorado,
-        .settings = &N(NpcSettings_Kolorado),
         .pos = { 392.0f, 470.0f, 218.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
         .init = &N(EVS_NpcInit_Kolorado),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+        .settings = &N(NpcSettings_Kolorado),
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
     },
     {
         .id = NPC_ZiplineDummy1,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 392.0f, 470.0f, 218.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_ZiplineDummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
     },
     {
         .id = NPC_ZiplineDummy2,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 392.0f, 470.0f, 218.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_ZiplineDummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_Dummy),
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -195,11 +195,8 @@ NpcData N(NpcData_PassiveNPCs)[] = {
 
 NpcData N(NpcData_SpikeTop_01) = {
     .id = NPC_SpikeTop_01,
-    .settings = &N(NpcSettings_SpikeTop),
     .pos = { 140.0f, 670.0f, -20.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = SPIKE_TOP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -212,17 +209,17 @@ NpcData N(NpcData_SpikeTop_01) = {
             .detectSize = { 240, 115 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_SpikeTop),
+    .drops = SPIKE_TOP_DROPS,
     .animations = SPIKE_TOP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_SpikeTop_02) = {
     .id = NPC_SpikeTop_02,
-    .settings = &N(NpcSettings_SpikeTop),
     .pos = { -200.0f, 670.0f, -35.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = SPIKE_TOP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -235,17 +232,17 @@ NpcData N(NpcData_SpikeTop_02) = {
             .detectSize = { 240, 115 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_SpikeTop),
+    .drops = SPIKE_TOP_DROPS,
     .animations = SPIKE_TOP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_SpikeTop_03) = {
     .id = NPC_SpikeTop_03,
-    .settings = &N(NpcSettings_SpikeTop),
     .pos = { 30.0f, 20.0f, 320.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = SPIKE_TOP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -258,6 +255,9 @@ NpcData N(NpcData_SpikeTop_03) = {
             .detectSize = { 180, 95 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_SpikeTop),
+    .drops = SPIKE_TOP_DROPS,
     .animations = SPIKE_TOP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -265,11 +265,8 @@ NpcData N(NpcData_SpikeTop_03) = {
 NpcData N(NpcData_PutridPiranha)[] = {
     {
         .id = NPC_Piranha,
-        .settings = &N(NpcSettings_PutridPiranha),
         .pos = { 260.0f, 20.0f, 255.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400,
-        .drops = PUTRID_PIRANHA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -282,6 +279,9 @@ NpcData N(NpcData_PutridPiranha)[] = {
                 .detectSize = { 100, 50 },
             }
         },
+        .flags = ENEMY_FLAG_400,
+        .settings = &N(NpcSettings_PutridPiranha),
+        .drops = PUTRID_PIRANHA_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },

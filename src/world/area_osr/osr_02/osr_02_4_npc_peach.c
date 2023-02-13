@@ -75,11 +75,11 @@ EvtScript N(EVS_NpcInit_Clubba) = {
 
 NpcData N(NpcData_Clubba) = {
     .id = NPC_Clubba,
-    .settings = &N(NpcSettings_Clubba),
     .pos = { -70.0f, 0.0f, -100.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Clubba),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Clubba),
     .drops = NO_DROPS,
     .animations = CLUBBA_ANIMS,
     .extraAnimations = N(ExtraAnims_Clubba),

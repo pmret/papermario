@@ -159,11 +159,11 @@ EvtScript N(EVS_NpcInit_GateFlower) = {
 
 NpcData N(NpcData_GateFlower) = {
     .id = NPC_GateFlower,
-    .settings = &N(NpcSettings_GateFlower),
     .pos = { 385.0f, 0.0f, -35.0f },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_GateFlower),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_GateFlower),
     .drops = NO_DROPS,
     .animations = GATE_FLOWER_BLUE_ANIMS,
     .tattle = MSG_NpcTattle_BlueGateFlower,
@@ -171,11 +171,8 @@ NpcData N(NpcData_GateFlower) = {
 
 NpcData N(NpcData_Spiny_01) = {
     .id = NPC_Spiny_01,
-    .settings = &N(NpcSettings_Spiny),
     .pos = { 80.0f, 0.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = SPINY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -188,16 +185,16 @@ NpcData N(NpcData_Spiny_01) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Spiny),
+    .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
 };
 
 NpcData N(NpcData_Spiny_02) = {
     .id = NPC_Spiny_02,
-    .settings = &N(NpcSettings_Spiny),
     .pos = { -320.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = SPINY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -210,6 +207,9 @@ NpcData N(NpcData_Spiny_02) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Spiny),
+    .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
 };
 

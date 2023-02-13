@@ -721,11 +721,11 @@ NpcSettings N(NpcSettings_Rhuff) = {
 NpcData N(NpcData_RowfAndRhuff)[] = {
     {
         .id = NPC_Rowf,
-        .settings = &N(NpcSettings_Rowf),
         .pos = { -213.0f, -54.0f, 256.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rowf),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Rowf),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Rowf_Idle,
@@ -735,11 +735,11 @@ NpcData N(NpcData_RowfAndRhuff)[] = {
     },
     {
         .id = NPC_Rhuff,
-        .settings = &N(NpcSettings_Rhuff),
         .pos = { -250.0f, 0.0f, 263.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rhuff),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Rhuff),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Rowf_Idle,

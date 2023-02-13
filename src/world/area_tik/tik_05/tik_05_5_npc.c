@@ -4,11 +4,8 @@
 
 NpcData N(NpcData_SpikedGloomba_01) = {
     .id = NPC_SpikedGoomba_01,
-    .settings = &N(NpcSettings_SpikedGloomba_Wander),
     .pos = { 220.0f, -10.0f, -80.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = SPIKED_GLOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,16 +18,16 @@ NpcData N(NpcData_SpikedGloomba_01) = {
             .detectSize = { 180, 100 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_SpikedGloomba_Wander),
+    .drops = SPIKED_GLOOMBA_DROPS,
     .animations = SPIKED_GLOOMBA_ANIMS,
 };
 
 NpcData N(NpcData_SpikedGloomba_02) = {
     .id = NPC_SpikedGoomba_02,
-    .settings = &N(NpcSettings_SpikedGloomba_Wander),
     .pos = { 130.0f, -10.0f, 45.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = SPIKED_GLOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -43,6 +40,9 @@ NpcData N(NpcData_SpikedGloomba_02) = {
             .detectSize = { 180, 100 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_SpikedGloomba_Wander),
+    .drops = SPIKED_GLOOMBA_DROPS,
     .animations = SPIKED_GLOOMBA_ANIMS,
 };
 

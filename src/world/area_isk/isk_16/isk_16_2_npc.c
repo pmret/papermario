@@ -66,13 +66,13 @@ NpcSettings N(NpcSettings_Tutankoopa_02) = {
 NpcData N(NpcData_Tutankoopa)[] = {
     {
         .id = NPC_Tutankoopa_01,
-        .settings = &N(NpcSettings_Tutankoopa_01),
         .pos = { 457.0f, -1300.0f, 316.0f },
         .yaw = 230,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Tutankoopa_01),
         .initVarCount = 1,
         .initVar = { .value = 0 },
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Tutankoopa_01),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Tutankoopa_Anim01,
@@ -95,10 +95,10 @@ NpcData N(NpcData_Tutankoopa)[] = {
     },
     {
         .id = NPC_Tutankoopa_02,
-        .settings = &N(NpcSettings_Tutankoopa_02),
         .pos = { 500.0f, -1300.0f, 316.0f },
         .yaw = 230,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Tutankoopa_02),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Tutankoopa_Anim01,
@@ -123,11 +123,11 @@ NpcData N(NpcData_Tutankoopa)[] = {
 
 NpcData N(NpcData_ChainChomp) = {
     .id = NPC_ChainChomp,
-    .settings = &N(NpcSettings_ChainChomp),
     .pos = { 457.0f, -1300.0f, 316.0f },
     .yaw = 230,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_ChainChomp),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_ChainChomp),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_ChainChomp_Anim00,

@@ -11,12 +11,8 @@ EvtScript N(EVS_NpcInit_Duplighost) = {
 
 NpcData N(NpcData_Duplighost) = {
     .id = NPC_Duplighost,
-    .settings = &N(NpcSettings_Duplighost_Wander),
     .pos = { 250.0f, 0.0f, 75.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_Duplighost),
-    .drops = DUPLIGHOST_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -29,6 +25,10 @@ NpcData N(NpcData_Duplighost) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_Duplighost),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_Duplighost_Wander),
+    .drops = DUPLIGHOST_DROPS,
     .animations = DUPLIGHOST_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

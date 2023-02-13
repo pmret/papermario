@@ -294,12 +294,8 @@ NpcSettings N(NpcSettings_Kammy) = {
 NpcData N(NpcData_Enemies)[] = {
     {
         .id = NPC_BlueGoombaBro,
-        .settings = &N(NpcSettings_GoombaBros_Guard),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(EVS_NpcInit_GoombaBros_01),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -312,6 +308,10 @@ NpcData N(NpcData_Enemies)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_GoombaBros_01),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .settings = &N(NpcSettings_GoombaBros_Guard),
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GoombaBros_Blue_Idle,
             .walk   = ANIM_GoombaBros_Blue_Walk,
@@ -333,12 +333,8 @@ NpcData N(NpcData_Enemies)[] = {
     },
     {
         .id = NPC_RedGoombaBro,
-        .settings = &N(NpcSettings_GoombaBros_Guard),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(EVS_NpcInit_GoombaBros_02),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -351,6 +347,10 @@ NpcData N(NpcData_Enemies)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_GoombaBros_02),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .settings = &N(NpcSettings_GoombaBros_Guard),
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GoombaBros_Red_Idle,
             .walk   = ANIM_GoombaBros_Red_Walk,
@@ -372,12 +372,8 @@ NpcData N(NpcData_Enemies)[] = {
     },
     {
         .id = NPC_GoombaKing,
-        .settings = &N(NpcSettings_GoombaBros_Guard),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(EVS_NpcInit_GoombaKing),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -390,6 +386,10 @@ NpcData N(NpcData_Enemies)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_GoombaKing),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .settings = &N(NpcSettings_GoombaBros_Guard),
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GoombaKing_Idle,
             .walk   = ANIM_GoombaKing_Walk,
@@ -413,12 +413,12 @@ NpcData N(NpcData_Enemies)[] = {
 
 NpcData N(NpcData_Kammy) = {
     .id = NPC_Kammy,
-    .settings = &N(NpcSettings_Kammy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 100,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_Kammy),
     .animations = {},
 };
 

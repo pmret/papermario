@@ -135,11 +135,11 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
 
 NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(NpcSettings_Kolorado),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Kolorado),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Kolorado),
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
@@ -148,11 +148,8 @@ NpcData N(NpcData_Kolorado) = {
 NpcData N(NpcData_Piranha)[] = {
     {
         .id = NPC_Piranha,
-        .settings = &N(NpcSettings_PutridPiranha),
         .pos = { -325.0f, 0.0f, 150.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = PUTRID_PIRANHA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -165,6 +162,9 @@ NpcData N(NpcData_Piranha)[] = {
                 .detectSize = { 270, 130 },
             }
         },
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_PutridPiranha),
+        .drops = PUTRID_PIRANHA_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
@@ -173,11 +173,8 @@ NpcData N(NpcData_Piranha)[] = {
 
 NpcData N(NpcData_SpikeTop) = {
     .id = NPC_SpikeTop,
-    .settings = &N(NpcSettings_SpikeTop),
     .pos = { -450.0f, 0.0f, 100.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = SPIKE_TOP_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -190,6 +187,9 @@ NpcData N(NpcData_SpikeTop) = {
             .detectSize = { 270, 130 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_SpikeTop),
+    .drops = SPIKE_TOP_DROPS,
     .animations = SPIKE_TOP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };

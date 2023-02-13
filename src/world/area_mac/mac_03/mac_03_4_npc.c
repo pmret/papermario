@@ -608,66 +608,62 @@ EvtScript N(EVS_NpcInit_Toad_04) = {
 NpcData N(NpcData_Toads)[] = {
     {
         .id = NPC_TrainToad_01,
-        .settings = &N(NpcSettings_TrainToad),
         .pos = { -370.0f, 20.0f, 90.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_TrainToad_01),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_TrainToad),
         .drops = NO_DROPS,
         .animations = TRAIN_TOAD_WHITE_ANIMS,
         .tattle = MSG_NpcTattle_MAC_StationMaster,
     },
     {
         .id = NPC_TrainToad_02,
-        .settings = &N(NpcSettings_TrainToad),
         .pos = { -424.0f, 74.0f, 2.0f },
         .yaw = 90,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_TrainToad),
         .drops = NO_DROPS,
         .animations = TRAIN_CONDUCTOR_ANIMS,
         .tattle = MSG_NpcTattle_MAC_StationMaster,
     },
     {
         .id = NPC_Toad_01,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -232.0f, 10.0f, 74.0f },
         .yaw = 75,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Toad_01),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_MAC_TrainLover,
     },
     {
         .id = NPC_ThreeSisters_01,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 85.0f, 0.0f, 235.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_ThreeSisters_01),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOADETTE_PURPLE_ANIMS,
         .tattle = MSG_NpcTattle_MAC_CaringToad,
     },
     {
         .id = NPC_Toad_02,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -255.0f, 20.0f, 400.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Toad_02),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_MAC_DesertTraveler,
     },
     {
         .id = NPC_ToadKid_01,
-        .settings = &N(NpcSettings_ToadKid_Wander),
         .pos = { 260.0f, 20.0f, 410.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_ToadKid_01),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -680,17 +676,17 @@ NpcData N(NpcData_Toads)[] = {
                 .detectSize = { 10, 10 },
             }
         },
+        .init = &N(EVS_NpcInit_ToadKid_01),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_ToadKid_Wander),
+        .drops = NO_DROPS,
         .animations = TOAD_KID_RED_ANIMS,
         .tattle = MSG_NpcTattle_MAC_TravelFan,
     },
     {
         .id = NPC_ToadKid_02,
-        .settings = &N(NpcSettings_ToadKid_Wander),
         .pos = { 320.0f, 20.0f, 410.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_ToadKid_02),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -703,16 +699,20 @@ NpcData N(NpcData_Toads)[] = {
                 .detectSize = { 10, 10 },
             }
         },
+        .init = &N(EVS_NpcInit_ToadKid_02),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_ToadKid_Wander),
+        .drops = NO_DROPS,
         .animations = TOAD_KID_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_MAC_GoodFriends,
     },
     {
         .id = NPC_Toad_03,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 220.0f, 20.0f, -160.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Toad_03),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_MAC_LilOinkFan,
@@ -722,33 +722,33 @@ NpcData N(NpcData_Toads)[] = {
 NpcData N(NpcData_ThreeSisters)[] = {
     {
         .id = NPC_ThreeSisters_02,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -130.0f, 0.0f, 220.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_ThreeSisters_02),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidA,
     },
     {
         .id = NPC_ThreeSisters_03,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -100.0f, 0.0f, 220.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_ThreeSisters_02),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidB,
     },
     {
         .id = NPC_ThreeSisters_04,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -70.0f, 0.0f, 220.0f },
         .yaw = 180,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_ThreeSisters_02),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidC,
@@ -757,11 +757,11 @@ NpcData N(NpcData_ThreeSisters)[] = {
 
 NpcData N(NpcData_ShyGuy) = {
     .id = NPC_ShyGuy,
-    .settings = &N(NpcSettings_ShyGuy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
     .init = &N(EVS_NpcInit_ShyGuy),
+    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
+    .settings = &N(NpcSettings_ShyGuy),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_ShyGuy_Red_Anim01,
@@ -786,12 +786,8 @@ NpcData N(NpcData_ShyGuy) = {
 NpcData N(NpcData_LilOinks)[] = {
     {
         .id = NPC_LilOink_01,
-        .settings = &N(NpcSettings_Toad_Wander),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Toad_04),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -804,16 +800,16 @@ NpcData N(NpcData_LilOinks)[] = {
                 .detectSize = { 150, 70 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_04),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Wander),
+        .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
     },
     {
         .id = NPC_LilOink_02,
-        .settings = &N(NpcSettings_Toad_Wander),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Toad_04),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -826,16 +822,16 @@ NpcData N(NpcData_LilOinks)[] = {
                 .detectSize = { 150, 70 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_04),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Wander),
+        .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
     },
     {
         .id = NPC_LilOink_03,
-        .settings = &N(NpcSettings_Toad_Wander),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Toad_04),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -848,16 +844,16 @@ NpcData N(NpcData_LilOinks)[] = {
                 .detectSize = { 150, 70 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_04),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Wander),
+        .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
     },
     {
         .id = NPC_LilOink_04,
-        .settings = &N(NpcSettings_Toad_Wander),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Toad_04),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -870,16 +866,16 @@ NpcData N(NpcData_LilOinks)[] = {
                 .detectSize = { 150, 70 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_04),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Wander),
+        .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
     },
     {
         .id = NPC_LilOink_05,
-        .settings = &N(NpcSettings_Toad_Wander),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Toad_04),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -892,16 +888,16 @@ NpcData N(NpcData_LilOinks)[] = {
                 .detectSize = { 150, 70 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_04),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Wander),
+        .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
     },
     {
         .id = NPC_LilOink_06,
-        .settings = &N(NpcSettings_Toad_Wander),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Toad_04),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -914,16 +910,16 @@ NpcData N(NpcData_LilOinks)[] = {
                 .detectSize = { 150, 70 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_04),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Wander),
+        .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
     },
     {
         .id = NPC_LilOink_07,
-        .settings = &N(NpcSettings_Toad_Wander),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Toad_04),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -936,16 +932,16 @@ NpcData N(NpcData_LilOinks)[] = {
                 .detectSize = { 150, 70 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_04),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Wander),
+        .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
     },
     {
         .id = NPC_LilOink_08,
-        .settings = &N(NpcSettings_Toad_Wander),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Toad_04),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -958,16 +954,16 @@ NpcData N(NpcData_LilOinks)[] = {
                 .detectSize = { 150, 70 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_04),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Wander),
+        .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
     },
     {
         .id = NPC_LilOink_09,
-        .settings = &N(NpcSettings_Toad_Wander),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Toad_04),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -980,16 +976,16 @@ NpcData N(NpcData_LilOinks)[] = {
                 .detectSize = { 150, 70 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_04),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Wander),
+        .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
     },
     {
         .id = NPC_LilOink_10,
-        .settings = &N(NpcSettings_Toad_Wander),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Toad_04),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1002,16 +998,16 @@ NpcData N(NpcData_LilOinks)[] = {
                 .detectSize = { 150, 70 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_04),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Toad_Wander),
+        .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
     },
     {
         .id = NPC_Capsule,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Toad_14),
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1024,6 +1020,10 @@ NpcData N(NpcData_LilOinks)[] = {
                 .detectSize = { 150, 70 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_14),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_Dummy),
+        .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
     },
 };

@@ -9,30 +9,27 @@
 NpcData N(NpcData_IntroNPCs)[] = {
     {
         .id = NPC_Luigi,
-        .settings = &N(NpcSettings_Luigi_Intro),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Luigi_Intro),
         .drops = NO_DROPS,
         .animations = LUIGI_ANIMS,
     },
     {
         .id = NPC_IntroToad1,
-        .settings = &N(NpcSettings_Toad_Stationary_Intro),
         .pos = { -94.0f, 0.0f, -117.0f },
         .yaw = 90,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary_Intro),
         .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_MAC_RunsHisMouth,
     },
     {
         .id = NPC_IntroToad2,
-        .settings = &N(NpcSettings_Toad_Stationary_Intro),
         .pos = { 40.0f, 0.0f, -300.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .drops = NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -47,15 +44,18 @@ NpcData N(NpcData_IntroNPCs)[] = {
                 .detectSize = { 10 },
             }
         },
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary_Intro),
+        .drops = NO_DROPS,
         .animations = TOAD_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_MAC_PrincessFan,
     },
     {
         .id = NPC_IntroToad3,
-        .settings = &N(NpcSettings_Toad_Stationary_Intro),
         .pos = { -380.0f, 20.0f, -100.0f },
         .yaw = 270,
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary_Intro),
         .drops = NO_DROPS,
         .animations = TOAD_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_MAC_SeeksTheSouth,

@@ -179,11 +179,11 @@ EvtScript N(EVS_NpcInit_Kalmar) = {
 
 NpcData N(NpcData_Kalmar) = {
     .id = NPC_Kalmar,
-    .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Kalmar),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_StarSpirit),
     .drops = NO_DROPS,
     .animations = KALMAR_ANIMS,
 };

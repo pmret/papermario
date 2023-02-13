@@ -101,11 +101,11 @@ EvtScript N(EVS_NpcInit_Toad) = {
 
 NpcData N(NpcData_Toad) = {
     .id = NPC_Toad,
-    .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 25.0f, 0.0f, 130.0f },
     .yaw = 270,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
     .init = &N(EVS_NpcInit_Toad),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+    .settings = &N(NpcSettings_Toad_Stationary),
     .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_OSR_LovesToClean,

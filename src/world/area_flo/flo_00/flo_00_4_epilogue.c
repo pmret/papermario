@@ -78,11 +78,11 @@ EvtScript N(EVS_NpcInit_Parakarry_Epilogue) = {
 NpcData N(NpcData_Lakilester_Epilogue)[] = {
     {
         .id = NPC_Lakilester_Epilogue,
-        .settings = &N(NpcSettings_Lakilester_Epilogue),
         .pos = { 144.0f, 0.0f, 374.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Lakilester_Epilogue),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Lakilester_Epilogue),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldLakilester_Idle,
@@ -105,11 +105,11 @@ NpcData N(NpcData_Lakilester_Epilogue)[] = {
     },
     {
         .id = NPC_Lakilulu_Epilogue,
-        .settings = &N(NpcSettings_Lakilester_Epilogue),
         .pos = { 198.0f, 0.0f, 363.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Lakilulu_Epilogue),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Lakilester_Epilogue),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Lakilulu_Idle,
@@ -132,11 +132,11 @@ NpcData N(NpcData_Lakilester_Epilogue)[] = {
     },
     {
         .id = NPC_Parakarry_Epilogue,
-        .settings = &N(NpcSettings_Parakarry),
         .pos = { 266.0f, 0.0f, 322.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Parakarry_Epilogue),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Parakarry),
         .drops = NO_DROPS,
         .animations = PARAKARRY_ANIMS,
     },

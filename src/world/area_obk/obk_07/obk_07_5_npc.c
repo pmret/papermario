@@ -14,11 +14,11 @@ EvtScript N(EVS_NpcInit_TrafficBoo1) = {
 
 NpcData N(NpcData_TrafficBoo1) = {
     .id = NPC_TrafficBoo1,
-    .settings = &N(NpcSettings_Boo),
     .pos = { 523.0f, -139.0f, 193.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_TrafficBoo1),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Boo),
     .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
@@ -31,11 +31,11 @@ EvtScript N(EVS_NpcInit_TrafficBoo2) = {
 
 NpcData N(NpcData_TrafficBoo2) = {
     .id = NPC_TrafficBoo2,
-    .settings = &N(NpcSettings_Boo),
     .pos = { 473.0f, -122.0f, 247.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_TrafficBoo2),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Boo),
     .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
@@ -53,11 +53,11 @@ EvtScript N(EVS_NpcInit_GuardBoo) = {
 
 NpcData N(NpcData_GuardBoo) = {
     .id = NPC_GuardBoo,
-    .settings = &N(NpcSettings_Boo),
     .pos = { 168.0f, 0.0f, -161.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_GuardBoo),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Boo),
     .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
     .tattle = MSG_NpcTattle_OBK_GuardingChest,

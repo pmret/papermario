@@ -56,11 +56,8 @@ EvtScript N(EVS_NpcInit_Bubulb) = {
 
 NpcData N(NpcData_Fuzzy) = {
     .id = NPC_Fuzzy,
-    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { 240.0f, 0.0f, -240.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .drops = FOREST_FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -73,17 +70,20 @@ NpcData N(NpcData_Fuzzy) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
+    .drops = FOREST_FUZZY_DROPS,
     .animations = FOREST_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_Bubulb) = {
     .id = NPC_Bubulb,
-    .settings = &N(NpcSettings_Bubulb),
     .pos = { 0.0f, 32.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Bubulb),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Bubulb),
     .drops = NO_DROPS,
     .animations = BUBULB_GREEN_ANIMS,
     .tattle = MSG_NpcTattle_MIM_Bubulb_Revealed,

@@ -19,8 +19,8 @@ NpcData N(NpcData_SpearGuy)[] = {
                 .detectSize = { 150 },
             }
         },
-        .settings = &N(NpcSettings_SpearGuy_Wander),
         .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_SpearGuy_Wander),
         .drops = SPEAR_GUY_DROPS,
         .animations = SPEAR_GUY_ANIMS,
     },

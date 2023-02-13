@@ -4,11 +4,8 @@
 
 NpcData N(NpcData_Koopatrol_01) = {
     .id = NPC_Koopatrol_01,
-    .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 435.0f, 10.0f, 125.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400,
-    .drops = KOOPATROL_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -21,16 +18,16 @@ NpcData N(NpcData_Koopatrol_01) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400,
+    .settings = &N(NpcSettings_Koopatrol_Wander),
+    .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
 
 NpcData N(NpcData_Koopatrol_02) = {
     .id = NPC_Koopatrol_02,
-    .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { 815.0f, 10.0f, 125.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400,
-    .drops = KOOPATROL_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -43,6 +40,9 @@ NpcData N(NpcData_Koopatrol_02) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400,
+    .settings = &N(NpcSettings_Koopatrol_Wander),
+    .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
 

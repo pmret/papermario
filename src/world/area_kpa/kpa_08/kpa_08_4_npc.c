@@ -5,11 +5,8 @@
 NpcData N(NpcData_Magikoopa)[] = {
     {
         .id = NPC_Magikoopa,
-        .settings = &N(NpcSettings_Magikoopa),
         .pos = { -210.0f, 0.0f, 25.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = MAGINO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -22,6 +19,9 @@ NpcData N(NpcData_Magikoopa)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Magikoopa),
+        .drops = MAGINO_DROPS,
         .animations = MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_Magikoopa),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

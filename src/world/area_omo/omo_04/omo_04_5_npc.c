@@ -91,33 +91,30 @@ EvtScript N(EVS_NpcInit_Kammy) = {
 
 NpcData N(NpcData_Goomba) = {
     .id = NPC_Goomba,
-    .settings = &N(NpcSettings_Goomba),
     .pos = { 1100.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Goomba),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Goomba),
     .drops = NO_DROPS,
     .animations = GOOMBA_ANIMS,
 };
 
 NpcData N(NpcData_Clubba) = {
     .id = NPC_Clubba,
-    .settings = &N(NpcSettings_Clubba),
     .pos = { 1100.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Clubba),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Clubba),
     .drops = NO_DROPS,
     .animations = CLUBBA_ANIMS_ALT,
 };
 
 NpcData N(NpcData_ShyGuy) = {
     .id = NPC_ShyGuy,
-    .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { -770.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_800,
-    .drops = SHY_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -130,17 +127,17 @@ NpcData N(NpcData_ShyGuy) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_ShyGuy_Wander),
+    .drops = SHY_GUY_DROPS,
     .animations = PINK_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_SkyGuy) = {
     .id = NPC_SkyGuy,
-    .settings = &N(NpcSettings_SkyGuy),
     .pos = { -170.0f, 60.0f, 30.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_800,
-    .drops = SKY_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -153,6 +150,9 @@ NpcData N(NpcData_SkyGuy) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_SkyGuy),
+    .drops = SKY_GUY_DROPS,
     .animations = SKY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
@@ -169,11 +169,11 @@ s32 N(ExtraAnims_Kammy)[] = {
 
 NpcData N(NpcData_Kammy) = {
     .id = NPC_Kammy,
-    .settings = &N(NpcSettings_Kammy_Flying),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Kammy),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Kammy_Flying),
     .drops = NO_DROPS,
     .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),

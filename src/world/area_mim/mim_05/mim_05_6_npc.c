@@ -5,11 +5,8 @@
 NpcData N(NpcData_PiranhaPlant_01)[] = {
     {
         .id = NPC_PiranhaPlant_01,
-        .settings = &N(NpcSettings_PiranhaPlant),
         .pos = { -240.0f, 0.0f, 240.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .drops = PIRANHA_PLANT_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -22,6 +19,9 @@ NpcData N(NpcData_PiranhaPlant_01)[] = {
                 .detectSize = { 400 },
             }
         },
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_PiranhaPlant),
+        .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
@@ -31,11 +31,8 @@ NpcData N(NpcData_PiranhaPlant_01)[] = {
 NpcData N(NpcData_PiranhaPlant_02)[] = {
     {
         .id = NPC_PiranhaPlant_02,
-        .settings = &N(NpcSettings_PiranhaPlant),
         .pos = { 240.0f, 0.0f, -240.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .drops = PIRANHA_PLANT_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -48,6 +45,9 @@ NpcData N(NpcData_PiranhaPlant_02)[] = {
                 .detectSize = { 400 },
             }
         },
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_PiranhaPlant),
+        .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },

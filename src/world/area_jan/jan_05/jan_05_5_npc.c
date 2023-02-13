@@ -221,11 +221,11 @@ EvtScript N(EVS_NpcInit_YoshiKid) = {
 
 NpcData N(NpcData_YoshiKid) = {
     .id = NPC_YoshiKid,
-    .settings = &N(NpcSettings_YoshiKid),
     .pos = { -320.0f, 0.0f, 80.0f },
     .yaw = 270,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_YoshiKid),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_YoshiKid),
     .drops = NO_DROPS,
     .animations = YOSHI_KID_PURPLE_ANIMS,
     .tattle = MSG_NpcTattle_PurpleYoshiKid,
@@ -241,11 +241,8 @@ s32 N(ExtraAnims_JungleFuzzy)[] = {
 
 NpcData N(NpcData_JungleFuzzy) = {
     .id = NPC_JungleFuzzy,
-    .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .init = &N(EVS_NpcInit_JungleFuzzy),
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -258,6 +255,9 @@ NpcData N(NpcData_JungleFuzzy) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_JungleFuzzy),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
     .extraAnimations = N(ExtraAnims_JungleFuzzy),
@@ -289,10 +289,10 @@ NpcData N(NpcData_SpearGuy)[] = {
 
 NpcData N(NpcData_HeartPlant) = {
     .id = NPC_HeartPlant,
-    .settings = &N(NpcSettings_HeartPlant),
     .pos = { 430.0f, 0.0f, 205.0f },
     .yaw = 270,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_HeartPlant),
     .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
@@ -307,10 +307,10 @@ NpcData N(NpcData_HurtPlant) = {
 
 NpcData N(NpcData_MBush) = {
     .id = NPC_MBush,
-    .settings = &N(NpcSettings_MBush),
     .pos = { 400.0f, 0.0f, -75.0f },
     .yaw = 90,
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_MBush),
     .drops = MBUSH_DROPS,
     .animations = MBUSH_ANIMS,
     .tattle = MSG_NpcTattle_MBush,

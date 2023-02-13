@@ -451,11 +451,8 @@ EvtScript N(EVS_NpcDefeat_KentCKoopa_02) = {
 
 NpcData N(NpcData_KoopaTroopa) = {
     .id = NPC_KoopaTroopa,
-    .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { -350.0f, 0.0f, -30.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = KOOPA_TROOPA_NOK_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -468,16 +465,16 @@ NpcData N(NpcData_KoopaTroopa) = {
             .detectSize = { 250 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
 };
 
 NpcData N(NpcData_Paragoomba) = {
     .id = NPC_Paragoomba,
-    .settings = &N(NpcSettings_Paragoomba_Wander),
     .pos = { 0.0f, 60.0f, -30.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400,
-    .drops = PARAGOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -490,16 +487,16 @@ NpcData N(NpcData_Paragoomba) = {
             .detectSize = { 250 },
         }
     },
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400,
+    .settings = &N(NpcSettings_Paragoomba_Wander),
+    .drops = PARAGOOMBA_DROPS,
     .animations = PARAGOOMBA_ANIMS,
 };
 
 NpcData N(NpcData_SpikedGoomba) = {
     .id = NPC_SpikedGoomba,
-    .settings = &N(NpcSettings_SpikedGoomba_Wander),
     .pos = { 430.0f, 0.0f, -27.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = SPIKED_GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -512,6 +509,9 @@ NpcData N(NpcData_SpikedGoomba) = {
             .detectSize = { 250 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_SpikedGoomba_Wander),
+    .drops = SPIKED_GOOMBA_DROPS,
     .animations = SPIKED_GOOMBA_ANIMS,
 };
 
@@ -535,22 +535,22 @@ EvtScript N(EVS_NpcInit_JrTroopa_02) = {
 NpcData N(NpcData_JrTroopa)[] = {
     {
         .id = NPC_JrTroopa_01,
-        .settings = &N(NpcSettings_JrTroopa),
         .pos = { -170.0f, 0.0f, -155.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_JrTroopa_01),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_JrTroopa),
         .drops = NO_DROPS,
         .animations = JR_TROOPA_ANIMS,
         .tattle = MSG_NpcTattle_JrTroopa,
     },
     {
         .id = NPC_JrTroopa_02,
-        .settings = &N(NpcSettings_JrTroopa),
         .pos = { -170.0f, 0.0f, -155.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_JrTroopa_02),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_JrTroopa),
         .drops = NO_DROPS,
         .animations = JR_TROOPA_ANIMS,
         .tattle = MSG_NpcTattle_JrTroopa,
@@ -583,21 +583,21 @@ EvtScript N(EVS_NpcInit_KentCKoopa_02) = {
 NpcData N(NpcData_KentCKoopa)[] = {
     {
         .id = NPC_KentCKoopa_01,
-        .settings = &N(NpcSettings_KentCKoopa),
         .pos = { -164.0f, 0.0f, -37.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_KentCKoopa_01),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .settings = &N(NpcSettings_KentCKoopa),
         .drops = NO_DROPS,
         .animations = KENT_C_KOOPA_ANIMS,
     },
     {
         .id = NPC_KentCKoopa_02,
-        .settings = &N(NpcSettings_KentCKoopa),
         .pos = { -164.0f, 0.0f, -37.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_KentCKoopa_02),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .settings = &N(NpcSettings_KentCKoopa),
         .drops = NO_DROPS,
         .animations = KENT_C_KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_KentCKoopa,

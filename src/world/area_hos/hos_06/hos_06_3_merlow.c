@@ -255,11 +255,11 @@ EvtScript N(EVS_NpcInit_Merlow) = {
 NpcData N(NpcData_Merluvlee)[] = {
     {
         .id = NPC_Merluvlee,
-        .settings = &N(NpcSettings_Merluvlee),
         .pos = { 62.0f, 20.0f, 7.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Merluvlee_Passthrough),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Merluvlee),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Merluvlee_Idle,
@@ -268,11 +268,11 @@ NpcData N(NpcData_Merluvlee)[] = {
     },
     {
         .id = NPC_Merlow,
-        .settings = &N(NpcSettings_Merlow),
         .pos = { -150.0f, 160.0f, -25.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Merlow),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Merlow),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Merlow_Idle,

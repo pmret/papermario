@@ -165,11 +165,11 @@ EvtScript N(EVS_NpcInit_Goompa) = {
 
 NpcData N(NpcData_GoombaFamily) = {
     .id = NPC_Goompa,
-    .settings = &N(NpcSettings_Goompa),
     .pos = { -50.0f, 0.0f, 80.0f },
     .yaw = 45,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Goompa),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Goompa),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Goompa_Idle,

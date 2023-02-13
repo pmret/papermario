@@ -4,11 +4,8 @@
 
 NpcData N(NpcData_Bandit_01) = {
     .id = NPC_Bandit_01,
-    .settings = &N(NpcSettings_Bandit),
     .pos = { -100.0f, 0.0f, 80.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_800,
-    .drops = BANDIT_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,17 +18,17 @@ NpcData N(NpcData_Bandit_01) = {
             .detectSize = { 1000 },
         }
     },
+    .flags = ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Bandit),
+    .drops = BANDIT_DROPS,
     .animations = BANDIT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_Bandit_02) = {
     .id = NPC_Bandit_02,
-    .settings = &N(NpcSettings_Bandit),
     .pos = { 120.0f, 0.0f, 30.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_800,
-    .drops = BANDIT_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -44,6 +41,9 @@ NpcData N(NpcData_Bandit_02) = {
             .detectSize = { 1000 },
         }
     },
+    .flags = ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Bandit),
+    .drops = BANDIT_DROPS,
     .animations = BANDIT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

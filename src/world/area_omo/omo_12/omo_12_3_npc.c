@@ -622,13 +622,13 @@ s32 N(ExtraAnims_LanternGhost)[] = {
 
 NpcData N(NpcData_BigLanternGhost) = {
     .id = NPC_BigLanternGhost,
-    .settings = &N(NpcSettings_BigLanternGhost),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .init = &N(EVS_NpcInit_BigLanternGhost),
     .initVarCount = 1,
     .initVar = { .value = 0 },
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .settings = &N(NpcSettings_BigLanternGhost),
     .drops = NO_DROPS,
     .animations = BIG_LANTERN_GHOST_ANIMS,
     .extraAnimations = N(ExtraAnims_LanternGhost),
@@ -637,13 +637,13 @@ NpcData N(NpcData_BigLanternGhost) = {
 
 NpcData N(NpcData_Watt) = {
     .id = NPC_Watt,
-    .settings = &N(NpcSettings_Watt),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = COMMON_PASSIVE_FLAGS,
     .init = &N(EVS_NpcInit_Watt),
     .initVarCount = 1,
     .initVar = { .value = 0 },
+    .flags = COMMON_PASSIVE_FLAGS,
+    .settings = &N(NpcSettings_Watt),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_WorldWatt_Idle,
@@ -668,13 +668,13 @@ NpcData N(NpcData_Watt) = {
 
 NpcData N(NpcData_LanternTop) = {
     .id = NPC_LaternTop,
-    .settings = &N(NpcSettings_Watt),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_LanternTop),
     .initVarCount = 1,
     .initVar = { .value = 0 },
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Watt),
     .drops = NO_DROPS,
     .animations = BIG_LANTERN_GHOST_ANIMS,
     .extraAnimations = N(ExtraAnims_LanternGhost),
@@ -683,13 +683,13 @@ NpcData N(NpcData_LanternTop) = {
 
 NpcData N(NpcData_LanternBottom) = {
     .id = NPC_LaternBottom,
-    .settings = &N(NpcSettings_Watt),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000,
     .init = &N(EVS_NpcInit_LanternBottom),
     .initVarCount = 1,
     .initVar = { .value = 0 },
+    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000,
+    .settings = &N(NpcSettings_Watt),
     .drops = NO_DROPS,
     .animations = BIG_LANTERN_GHOST_ANIMS,
     .extraAnimations = N(ExtraAnims_LanternGhost),

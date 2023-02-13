@@ -17,11 +17,8 @@ EvtScript N(EVS_NpcInit_Clubba_Napping) = {
 NpcData N(NpcData_Clubba_Wander)[] = {
     {
         .id = NPC_Clubba_Wander,
-        .settings = &N(NpcSettings_Clubba_Wander),
         .pos = { 180.0f, 0.0f, -122.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -34,6 +31,9 @@ NpcData N(NpcData_Clubba_Wander)[] = {
                 .detectSize = { 355, 255 },
             }
         },
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Clubba_Wander),
+        .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
@@ -43,11 +43,8 @@ NpcData N(NpcData_Clubba_Wander)[] = {
 NpcData N(NpcData_Clubba_Patrol)[] = {
     {
         .id = NPC_Clubba_Patrol,
-        .settings = &N(NpcSettings_Clubba_Patrol),
         .pos = { -272.0f, 0.0f, -135.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = CLUBBA_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -62,6 +59,9 @@ NpcData N(NpcData_Clubba_Patrol)[] = {
                 .detectSize = { 355, 255 },
             }
         },
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Clubba_Patrol),
+        .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
@@ -71,12 +71,8 @@ NpcData N(NpcData_Clubba_Patrol)[] = {
 NpcData N(NpcData_Clubba_Napping)[] = {
     {
         .id = NPC_Clubba_Napping,
-        .settings = &N(NpcSettings_Clubba_Napping),
         .pos = { -326.0f, 210.0f, 80.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_Clubba_Napping),
-        .drops = CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -89,6 +85,10 @@ NpcData N(NpcData_Clubba_Napping)[] = {
                 .detectSize = { 355, 255 },
             }
         },
+        .init = &N(EVS_NpcInit_Clubba_Napping),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Clubba_Napping),
+        .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },

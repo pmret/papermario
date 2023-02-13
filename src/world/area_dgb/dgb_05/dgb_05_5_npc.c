@@ -6,11 +6,8 @@
 NpcData N(NpcData_Clubba_01)[] = {
     {
         .id = NPC_Clubba_01,
-        .settings = &N(NpcSettings_Clubba_Napping),
         .pos = { 132.0f, -110.0f, 238.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400,
-        .drops = CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -23,6 +20,9 @@ NpcData N(NpcData_Clubba_01)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_400,
+        .settings = &N(NpcSettings_Clubba_Napping),
+        .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
@@ -32,11 +32,8 @@ NpcData N(NpcData_Clubba_01)[] = {
 NpcData N(NpcData_Clubba_02)[] = {
     {
         .id = NPC_Clubba_02,
-        .settings = &N(NpcSettings_Clubba_Napping),
         .pos = { 503.0f, -210.0f, 225.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400,
-        .drops = CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -49,6 +46,9 @@ NpcData N(NpcData_Clubba_02)[] = {
                 .detectSize = { 200, 150 },
             }
         },
+        .flags = ENEMY_FLAG_400,
+        .settings = &N(NpcSettings_Clubba_Napping),
+        .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },

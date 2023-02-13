@@ -10,12 +10,8 @@ EvtScript N(EVS_NpcInit_Swoopula) = {
 
 NpcData N(NpcData_Swoopula_01) = {
     .id = NPC_Swoopula_01,
-    .settings = &N(NpcSettings_Swoopula),
     .pos = { 175.0f, 130.0f, 75.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_Swoopula),
-    .drops = SWOOPULA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -28,18 +24,18 @@ NpcData N(NpcData_Swoopula_01) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_Swoopula),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_Swoopula),
+    .drops = SWOOPULA_DROPS,
     .animations = SWOOPULA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_Swoopula_02) = {
     .id = NPC_Swoopula_02,
-    .settings = &N(NpcSettings_Swoopula),
     .pos = { 325.0f, 130.0f, 75.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_Swoopula),
-    .drops = SWOOPULA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -52,6 +48,10 @@ NpcData N(NpcData_Swoopula_02) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_Swoopula),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_Swoopula),
+    .drops = SWOOPULA_DROPS,
     .animations = SWOOPULA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

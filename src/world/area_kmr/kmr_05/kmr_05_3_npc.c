@@ -71,11 +71,8 @@ EvtScript N(EVS_NpcIdle_SpikedGoomba) = {
 
 NpcData N(NpcData_Goomba_01) = {
     .id = NPC_Goomba_01,
-    .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 305.0f, 50.0f, -13.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -88,17 +85,17 @@ NpcData N(NpcData_Goomba_01) = {
             .detectSize = { 120, 130 },
         }
     },
+    .flags = ENEMY_FLAG_400,
+    .settings = &N(NpcSettings_Goomba_Wander),
+    .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_Goomba_02) = {
     .id = NPC_Goomba_02,
-    .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 700.0f, 210.0f, -165.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -111,6 +108,9 @@ NpcData N(NpcData_Goomba_02) = {
             .detectSize = { 120, 130 },
         }
     },
+    .flags = ENEMY_FLAG_400,
+    .settings = &N(NpcSettings_Goomba_Wander),
+    .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
@@ -124,12 +124,8 @@ EvtScript N(EVS_NpcInit_SpikedGoomba) = {
 
 NpcData N(NpcData_SpikedGoomba) = {
     .id = NPC_SpikedGoomba,
-    .settings = &N(NpcSettings_SpikedGoomba_Wander),
     .pos = { 712.0f, 100.0f, -95.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400,
-    .init = &N(EVS_NpcInit_SpikedGoomba),
-    .drops = SPIKED_GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -142,17 +138,18 @@ NpcData N(NpcData_SpikedGoomba) = {
             .detectSize = { 165, 150 },
         }
     },
+    .init = &N(EVS_NpcInit_SpikedGoomba),
+    .flags = ENEMY_FLAG_400,
+    .settings = &N(NpcSettings_SpikedGoomba_Wander),
+    .drops = SPIKED_GOOMBA_DROPS,
     .animations = SPIKED_GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_Paragoomba) = {
     .id = NPC_Paragoomba,
-    .settings = &N(NpcSettings_Paragoomba_Wander),
     .pos = { 960.0f, 210.0f, -20.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400,
-    .drops = PARAGOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -165,6 +162,9 @@ NpcData N(NpcData_Paragoomba) = {
             .detectSize = { 210, 100 },
         }
     },
+    .flags = ENEMY_FLAG_400,
+    .settings = &N(NpcSettings_Paragoomba_Wander),
+    .drops = PARAGOOMBA_DROPS,
     .animations = PARAGOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

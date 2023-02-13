@@ -205,20 +205,20 @@ s32 N(ExtraAnims_Koopatrol)[] = {
 NpcData N(NpcData_Guards)[] = {
     {
         .id = NPC_Koopatrol_Guard_01,
-        .settings = &N(NpcSettings_Koopatrol_Stationary),
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Koopatrol_Stationary),
         .drops = NO_DROPS,
         .animations = KOOPATROL_ANIMS,
         .extraAnimations = N(ExtraAnims_Koopatrol),
     },
     {
         .id = NPC_Koopatrol_Guard_02,
-        .settings = &N(NpcSettings_Koopatrol_Stationary),
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 0,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Koopatrol_Stationary),
         .drops = NO_DROPS,
         .animations = KOOPATROL_ANIMS,
         .extraAnimations = N(ExtraAnims_Koopatrol),

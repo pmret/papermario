@@ -4,11 +4,8 @@
 
 NpcData N(NpcData_PyroGuy_01) = {
     .id = NPC_PyroGuy_01,
-    .settings = &N(NpcSettings_PyroGuy),
     .pos = { -180.0f, 0.0f, 70.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = PYRO_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,17 +18,17 @@ NpcData N(NpcData_PyroGuy_01) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_PyroGuy),
+    .drops = PYRO_GUY_DROPS,
     .animations = PYRO_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_PyroGuy_02) = {
     .id = NPC_PyroGuy_02,
-    .settings = &N(NpcSettings_PyroGuy),
     .pos = { 330.0f, 0.0f, 83.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = PYRO_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -44,6 +41,9 @@ NpcData N(NpcData_PyroGuy_02) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_PyroGuy),
+    .drops = PYRO_GUY_DROPS,
     .animations = PYRO_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

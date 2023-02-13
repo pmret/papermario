@@ -128,11 +128,11 @@ EvtScript N(EVS_NpcInit_RipCheato) = {
 
 NpcData N(NpcData_RipCheato) = {
     .id = NPC_RipCheato,
-    .settings = &N(NpcSettings_RipCheato),
     .pos = { -80.0f, -10.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_RipCheato),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_RipCheato),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_RipCheato_Idle,

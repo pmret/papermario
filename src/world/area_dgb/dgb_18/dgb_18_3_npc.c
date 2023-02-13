@@ -488,12 +488,8 @@ EvtScript N(EVS_NpcInit_Yakkey) = {
 
 NpcData N(NpcData_Tubba) = {
     .id = NPC_Tubba,
-    .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
-    .init = &N(EVS_NpcInit_Tubba),
-    .drops = NO_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -511,16 +507,20 @@ NpcData N(NpcData_Tubba) = {
             .detectSize = { 1000, 250 },
         }
     },
+    .init = &N(EVS_NpcInit_Tubba),
+    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+    .settings = &N(NpcSettings_TubbaBlubba),
+    .drops = NO_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
 };
 
 NpcData N(NpcData_Yakkey) = {
     .id = NPC_Yakkey,
-    .settings = &N(NpcSettings_Yakkey),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Yakkey),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Yakkey),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Yakkey_Idle,

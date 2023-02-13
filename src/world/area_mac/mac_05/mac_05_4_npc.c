@@ -2061,11 +2061,11 @@ EvtScript N(EVS_NpcInit_TradeEventToad) = {
 
 NpcData N(NpcData_Toad_01) = {
     .id = NPC_Whale,
-    .settings = &N(NpcSettings_Whale),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Toad_01),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Whale),
     .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_Whale,
@@ -2073,11 +2073,11 @@ NpcData N(NpcData_Toad_01) = {
 
 NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(NpcSettings_Kolorado),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = COMMON_PASSIVE_FLAGS,
     .init = &N(EVS_NpcInit_Kolorado),
+    .flags = COMMON_PASSIVE_FLAGS,
+    .settings = &N(NpcSettings_Kolorado),
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
@@ -2085,11 +2085,11 @@ NpcData N(NpcData_Kolorado) = {
 
 NpcData N(NpcData_Fishmael) = {
     .id = NPC_Fishmael,
-    .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 370.0f, -10.0f, -115.0f },
     .yaw = 270,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Fishmael),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Toad_Stationary),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Fishmael_Idle,
@@ -2108,11 +2108,11 @@ AnimID N(Fuzzipede_ExtraAnims)[] = {
 
 NpcData N(NpcData_Fuzzipede) = {
     .id = NPC_Fuzzipede,
-    .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 320.0f, -10.0f, -115.0f },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Fuzzipede),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Toad_Stationary),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Fuzzipede_Anim04,
@@ -2140,11 +2140,11 @@ AnimID N(JrTroopa_ExtraAnims)[] = {
 NpcData N(NpcData_JrTroopa_01)[] = {
     {
         .id = NPC_JrTroopa_01,
-        .settings = &N(NpcSettings_JrTroopa_01),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_JrTroopa_01),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_JrTroopa_01),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_JrTroopa_Idle,
@@ -2169,11 +2169,11 @@ NpcData N(NpcData_JrTroopa_01)[] = {
     },
     {
         .id = NPC_JrTroopa_02,
-        .settings = &N(NpcSettings_JrTroopa_01),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_JrTroopa_02),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
+        .settings = &N(NpcSettings_JrTroopa_01),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_JrTroopa_Idle,
@@ -2201,11 +2201,11 @@ NpcData N(NpcData_JrTroopa_01)[] = {
 NpcData N(NpcData_Toad_04)[] = {
     {
         .id = NPC_Toad_04,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 320.0f, 0.0f, -300.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Toad_04),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Toad_Blue_Idle,
@@ -2229,11 +2229,11 @@ NpcData N(NpcData_Toad_04)[] = {
     },
     {
         .id = NPC_Toad_05,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -330.0f, -10.0f, -90.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Toad_05),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Toad_Blue_Idle,
@@ -2257,11 +2257,11 @@ NpcData N(NpcData_Toad_04)[] = {
     },
     {
         .id = NPC_Toad_06,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -50.0f, 0.0f, -400.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Toad_06),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Toad_Red_Idle,
@@ -2285,12 +2285,8 @@ NpcData N(NpcData_Toad_04)[] = {
     },
     {
         .id = NPC_Toad_07,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 200.0f, 0.0f, -220.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Toad_07),
-        .drops = NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -2305,6 +2301,10 @@ NpcData N(NpcData_Toad_04)[] = {
                 .detectSize = { 10 },
             }
         },
+        .init = &N(EVS_NpcInit_Toad_07),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Toad_Yellow_Idle,
             .walk   = ANIM_Toad_Yellow_Walk,
@@ -2330,11 +2330,11 @@ NpcData N(NpcData_Toad_04)[] = {
 NpcData N(NpcData_Bartender)[] = {
     {
         .id = NPC_Bartender,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -85.0f, 0.0f, -520.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bartender),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Bartender_Idle,
@@ -2358,11 +2358,11 @@ NpcData N(NpcData_Bartender)[] = {
     },
     {
         .id = NPC_Toad_02,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 30.0f, 0.0f, -570.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Toad_02),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Toad_Red_Idle,
@@ -2386,11 +2386,11 @@ NpcData N(NpcData_Bartender)[] = {
     },
     {
         .id = NPC_Chanterelle,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 208.0f, 0.0f, -530.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Chanterelle),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Chanterelle_Idle,
@@ -2414,11 +2414,11 @@ NpcData N(NpcData_Bartender)[] = {
     },
     {
         .id = NPC_ArtistToad,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 158.0f, 0.0f, -555.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_ArtistToad),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Musician_Poet_Idle,
@@ -2442,11 +2442,11 @@ NpcData N(NpcData_Bartender)[] = {
     },
     {
         .id = NPC_TradeEventToad,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 92.0f, 0.0f, -500.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
         .init = &N(EVS_NpcInit_TradeEventToad),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Toad_Pink_Idle,
@@ -2472,12 +2472,12 @@ NpcData N(NpcData_Bartender)[] = {
 
 NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
-    .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { 472.0f, 0.0f, -230.0f },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_4000,
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_MAC, QUIZ_COUNT_MAC, QUIZ_MAP_MAC_05 }},
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_4000,
+    .settings = &N(NpcSettings_ChuckQuizmo),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_ChuckQuizmo_Idle,

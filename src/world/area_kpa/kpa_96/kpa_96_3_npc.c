@@ -142,11 +142,11 @@ EvtScript N(EVS_NpcInit_SpikedGoomba) = {
 
 NpcData N(NpcData_SpikedGoomba) = {
     .id = NPC_SpikedGoomba,
-    .settings = &N(NpcSettings_SpikedGoomba),
     .pos = { -122.0f, 0.0f, 163.0f },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_SpikedGoomba),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_SpikedGoomba),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_SpikedGoomba_Idle,

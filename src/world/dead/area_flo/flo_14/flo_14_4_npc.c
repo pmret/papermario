@@ -80,11 +80,11 @@ EvtScript N(EVS_NpcInit_BubbleFlower) = {
 // uses a dummy bubulb for collision
 NpcData N(NpcData_BubbleFlower) = {
     .id = NPC_BubbleFlower,
-    .settings = &N(NpcSettings_BubbleFlower),
     .pos = { 617.0f, 0.0f, 108.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000,
     .init = &N(EVS_NpcInit_BubbleFlower),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000,
+    .settings = &N(NpcSettings_BubbleFlower),
     .drops = NO_DROPS,
     .animations = BUBULB_PINK_ANIMS,
     .tattle = MSG_NpcTattle_BubblePlant,
@@ -92,11 +92,8 @@ NpcData N(NpcData_BubbleFlower) = {
 
 NpcData N(NpcData_Bzzap) = {
     .id = NPC_Bzzap,
-    .settings = &N(NpcSettings_Bzzap),
     .pos = { -175.0f, 55.0f, 15.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = BZZAP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -109,6 +106,9 @@ NpcData N(NpcData_Bzzap) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Bzzap),
+    .drops = BZZAP_DROPS,
     .animations = BZZAP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };

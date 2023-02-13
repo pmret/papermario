@@ -5,11 +5,8 @@
 NpcData N(NpcData_DryBones)[] = {
     {
         .id = NPC_DryBones,
-        .settings = &N(NpcSettings_DryBones),
         .pos = { -73.0f, 0.0f, 0.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_800,
-        .drops = DRY_BONES_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -22,6 +19,9 @@ NpcData N(NpcData_DryBones)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_DryBones),
+        .drops = DRY_BONES_DROPS,
         .animations = DRY_BONES_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },

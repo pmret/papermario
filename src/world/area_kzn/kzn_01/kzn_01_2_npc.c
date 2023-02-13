@@ -47,11 +47,11 @@ EvtScript N(EVS_NpcInit_PutridPiranha) = {
 
 NpcData N(NpcPutridPiranha) = {
     .id = NPC_PutridPiranha,
-    .settings = &N(NpcSettings_PutridPiranhaSentinel),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_PutridPiranha),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_PutridPiranhaSentinel),
     .drops = PIRANHA_NO_DROPS,
     .animations = PIRANHA_SENTINEL_ANIMS,
 };

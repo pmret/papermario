@@ -158,11 +158,11 @@ EvtScript N(EVS_NpcInit_Oaklie) = {
 
 NpcData N(NpcData_Oaklie) = {
     .id = NPC_Oaklie,
-    .settings = &N(NpcSettings_Oaklie),
     .pos = { -426.0f, 58.0f, -70.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Oaklie),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_Oaklie),
     .drops = NO_DROPS,
     .animations = OAKLIE_ANIMS,
     .tattle = MSG_NpcTattle_Oaklie,
@@ -170,11 +170,8 @@ NpcData N(NpcData_Oaklie) = {
 
 NpcData N(NpcData_Fuzzy_01) = {
     .id = NPC_Fuzzy_01,
-    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { 300.0f, 0.0f, 130.0f },
     .yaw = 0,
-    .flags = 0,
-    .drops = FOREST_FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -187,17 +184,17 @@ NpcData N(NpcData_Fuzzy_01) = {
             .detectSize = { 400 },
         }
     },
+    .flags = 0,
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
+    .drops = FOREST_FUZZY_DROPS,
     .animations = FOREST_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_Fuzzy_02) = {
     .id = NPC_Fuzzy_02,
-    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { -100.0f, 0.0f, -320.0f },
     .yaw = 0,
-    .flags = 0,
-    .drops = FOREST_FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -210,6 +207,9 @@ NpcData N(NpcData_Fuzzy_02) = {
             .detectSize = { 400 },
         }
     },
+    .flags = 0,
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
+    .drops = FOREST_FUZZY_DROPS,
     .animations = FOREST_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

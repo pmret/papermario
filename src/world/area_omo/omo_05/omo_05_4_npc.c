@@ -392,31 +392,31 @@ EvtScript N(EVS_NpcInit_GourmetGuy) = {
 NpcData N(NpcData_GourmetGuy)[] = {
     {
         .id = NPC_GourmetGuy,
-        .settings = &N(NpcSettings_GourmetGuy),
         .pos = { -250.0f, 10.0f, 85.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_GourmetGuy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .settings = &N(NpcSettings_GourmetGuy),
         .drops = NO_DROPS,
         .animations = GOURMET_GUY_ANIMS,
         .tattle = MSG_NpcTattle_GourmetGuy,
     },
     {
         .id = NPC_GourmetGuy_Knife,
-        .settings = &N(NpcSettings_GourmetGuy),
         .pos = { -250.0f, 10.0f, 85.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_GourmetGuy),
         .drops = NO_DROPS,
         .animations = GOURMET_GUY_ANIMS,
         .tattle = MSG_NpcTattle_GourmetGuy,
     },
     {
         .id = NPC_GourmetGuy_Fork,
-        .settings = &N(NpcSettings_GourmetGuy),
         .pos = { -250.0f, 10.0f, 85.0f },
         .yaw = 90,
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_GourmetGuy),
         .drops = NO_DROPS,
         .animations = GOURMET_GUY_ANIMS,
         .tattle = MSG_NpcTattle_GourmetGuy,
@@ -425,11 +425,8 @@ NpcData N(NpcData_GourmetGuy)[] = {
 
 NpcData N(NpcData_GrooveGuy) = {
     .id = NPC_GrooveGuy,
-    .settings = &N(NpcSettings_GrooveGuy),
     .pos = { 320.0f, 10.0f, -145.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = GROOVE_GUY_DROPS_A,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -442,6 +439,9 @@ NpcData N(NpcData_GrooveGuy) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_GrooveGuy),
+    .drops = GROOVE_GUY_DROPS_A,
     .animations = GROOVE_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

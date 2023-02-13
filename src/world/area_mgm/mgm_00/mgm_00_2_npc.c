@@ -167,11 +167,11 @@ EvtScript N(EVS_NpcInit_RedToad) = {
 
 NpcData N(NpcData_RedToad) = {
     .id = NPC_RedToad,
-    .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { -213.0f, 12.0f, -180.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .init = &N(EVS_NpcInit_RedToad),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Toad_Stationary),
     .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_MGM_PlayroomReceptionist,
@@ -207,12 +207,8 @@ EvtScript N(EVS_NpcInit_GreenToad) = {
 
 NpcData N(NpcData_GreenToad) = {
     .id = NPC_GreenToad,
-    .settings = &N(NpcSettings_Toad_Patrol),
     .pos = { -88.0f, 0.0f, -95.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .init = &N(EVS_NpcInit_GreenToad),
-    .drops = NO_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -227,6 +223,10 @@ NpcData N(NpcData_GreenToad) = {
             .detectSize = { 0 },
         }
     },
+    .init = &N(EVS_NpcInit_GreenToad),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Toad_Patrol),
+    .drops = NO_DROPS,
     .animations = TOAD_GREEN_ANIMS,
     .tattle = MSG_NpcTattle_MGM_PlayroomCustomer,
 };
@@ -257,12 +257,8 @@ EvtScript N(EVS_NpcInit_BlueToad) = {
 
 NpcData N(NpcData_BlueToad) = {
     .id = NPC_BlueToad,
-    .settings = &N(NpcSettings_Toad_Patrol),
     .pos = { 46.0f, 0.0f, -205.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .init = &N(EVS_NpcInit_BlueToad),
-    .drops = NO_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -277,6 +273,10 @@ NpcData N(NpcData_BlueToad) = {
             .detectSize = { 0 },
         }
     },
+    .init = &N(EVS_NpcInit_BlueToad),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Toad_Patrol),
+    .drops = NO_DROPS,
     .animations = TOAD_BLUE_ANIMS,
     .tattle = MSG_NpcTattle_MGM_BestPlayroomCustomer,
 };

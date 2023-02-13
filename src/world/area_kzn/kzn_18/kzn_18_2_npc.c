@@ -145,11 +145,11 @@ EvtScript N(EVS_NpcInit_Piranha) = {
 
 NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(NpcSettings_Kolorado),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
     .init = &N(EVS_NpcInit_Kolorado),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+    .settings = &N(NpcSettings_Kolorado),
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
@@ -157,11 +157,11 @@ NpcData N(NpcData_Kolorado) = {
 
 NpcData N(NpcData_Piranha) = {
     .id = NPC_PutridPiranha,
-    .settings = &N(NpcSettings_PutridPiranhaSentinel),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_Piranha),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_PutridPiranhaSentinel),
     .drops = PIRANHA_NO_DROPS,
     .animations = PIRANHA_SENTINEL_ANIMS,
 };

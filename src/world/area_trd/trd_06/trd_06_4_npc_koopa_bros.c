@@ -49,11 +49,8 @@ EvtScript N(EVS_Scene_ImprisonedKoopaBros) = {
 NpcData N(NpcData_KoopaBros)[] = {
     {
         .id = NPC_KoopaBros_Red,
-        .settings = &N(NpcSettings_KoopaBros),
         .pos = { 60.0f, 0.0f, -60.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -66,15 +63,15 @@ NpcData N(NpcData_KoopaBros)[] = {
                 .detectSize = { 0 },
             }
         },
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_KoopaBros),
+        .drops = NO_DROPS,
         .animations = RED_KOOPA_BROS_ANIMS,
     },
     {
         .id = NPC_KoopaBros_Black,
-        .settings = &N(NpcSettings_KoopaBros),
         .pos = { 60.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -87,15 +84,15 @@ NpcData N(NpcData_KoopaBros)[] = {
                 .detectSize = { 0 },
             }
         },
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_KoopaBros),
+        .drops = NO_DROPS,
         .animations = BLACK_KOOPA_BROS_ANIMS,
     },
     {
         .id = NPC_KoopaBros_Yellow,
-        .settings = &N(NpcSettings_KoopaBros),
         .pos = { -10.0f, 0.0f, -60.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -108,15 +105,15 @@ NpcData N(NpcData_KoopaBros)[] = {
                 .detectSize = { 0 },
             }
         },
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_KoopaBros),
+        .drops = NO_DROPS,
         .animations = YELLOW_KOOPA_BROS_ANIMS,
     },
     {
         .id = NPC_KoopaBros_Green,
-        .settings = &N(NpcSettings_KoopaBros),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -129,6 +126,9 @@ NpcData N(NpcData_KoopaBros)[] = {
                 .detectSize = { 0 },
             }
         },
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_KoopaBros),
+        .drops = NO_DROPS,
         .animations = GREEN_KOOPA_BROS_ANIMS,
     },
 };

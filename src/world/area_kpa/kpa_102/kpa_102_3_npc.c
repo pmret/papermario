@@ -6,11 +6,8 @@
 
 NpcData N(NpcData_Koopatrol) = {
     .id = NPC_Koopatrol,
-    .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { -200.0f, 0.0f, -225.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = KOOPATROL_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -23,17 +20,17 @@ NpcData N(NpcData_Koopatrol) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Koopatrol_Wander),
+    .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
 
 NpcData N(NpcData_FlyingMagikoopa)[] = {
     {
         .id = NPC_FlyingMagikoopa,
-        .settings = &N(NpcSettings_FlyingMagikoopa),
         .pos = { 125.0f, 50.0f, -225.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_800,
-        .drops = FLYING_MAGINO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -46,6 +43,9 @@ NpcData N(NpcData_FlyingMagikoopa)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_FlyingMagikoopa),
+        .drops = FLYING_MAGINO_DROPS,
         .animations = FLYING_MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_FlyingMagikoopa),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -56,11 +56,8 @@ NpcData N(NpcData_FlyingMagikoopa)[] = {
 NpcData N(NpcData_HammerBros)[] = {
     {
         .id = NPC_HammerBros,
-        .settings = &N(NpcSettings_HammerBros_Wander),
         .pos = { 450.0f, 0.0f, -225.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = HAMMER_BROS_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -73,6 +70,9 @@ NpcData N(NpcData_HammerBros)[] = {
                 .detectSize = { 200 },
             }
         },
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_HammerBros_Wander),
+        .drops = HAMMER_BROS_DROPS,
         .animations = HAMMER_BROS_ANIMS,
     },
     HAMMER_BROS_HAMMER_HITBOX(NPC_HammerBros + 1),

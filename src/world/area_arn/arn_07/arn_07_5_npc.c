@@ -561,22 +561,22 @@ EvtScript N(EVS_NpcInit_Skolar) = {
 NpcData N(NpcData_Tubba)[] = {
     {
         .id = NPC_Tubba,
-        .settings = &N(NpcSettings_TubbaBlubba),
         .pos = { 309.0f, 0.0f, 11.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_Tubba),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_TubbaBlubba),
         .drops = NO_DROPS,
         .animations = TUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Tubba),
     },
     {
         .id = NPC_TubbasHeart,
-        .settings = &N(NpcSettings_TubbasHeart),
         .pos = { -10.0f, 50.0f, -170.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_TubbasHeart),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_TubbasHeart),
         .drops = NO_DROPS,
         .animations = TUBBAS_HEART_ANIMS,
     },
@@ -585,66 +585,66 @@ NpcData N(NpcData_Tubba)[] = {
 NpcData N(NpcData_Boos)[] = {
     {
         .id = NPC_Boo_01,
-        .settings = &N(NpcSettings_Boo),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_Boo),
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .extraAnimations = N(ExtraAnims_GustyBoo),
     },
     {
         .id = NPC_Boo_02,
-        .settings = &N(NpcSettings_Boo),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_Boo),
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .extraAnimations = N(ExtraAnims_GustyBoo),
     },
     {
         .id = NPC_Boo_03,
-        .settings = &N(NpcSettings_Boo),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_Boo),
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .extraAnimations = N(ExtraAnims_GustyBoo),
     },
     {
         .id = NPC_Boo_04,
-        .settings = &N(NpcSettings_Boo),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_Boo),
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .extraAnimations = N(ExtraAnims_GustyBoo),
     },
     {
         .id = NPC_Boo_05,
-        .settings = &N(NpcSettings_Boo),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_Boo),
         .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
         .extraAnimations = N(ExtraAnims_Boo),
     },
     {
         .id = NPC_Boo_06,
-        .settings = &N(NpcSettings_Boo),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .settings = &N(NpcSettings_Boo),
         .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
         .extraAnimations = N(ExtraAnims_Boo),
@@ -653,11 +653,11 @@ NpcData N(NpcData_Boos)[] = {
 
 NpcData N(NpcData_Bow) = {
     .id = NPC_Bow,
-    .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_Bow),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_Boo),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_WorldBow_Idle,
@@ -681,11 +681,11 @@ NpcData N(NpcData_Bow) = {
 
 NpcData N(NpcData_Bootler) = {
     .id = NPC_Bootler,
-    .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_Bootler),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .settings = &N(NpcSettings_Boo),
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Bootler_Idle,
@@ -720,12 +720,8 @@ EvtScript N(EVS_NpcInit_HyperParagoomba) = {
 
 NpcData N(NpcData_HyperParagoomba_01) = {
     .id = NPC_HyperParagoomba_01,
-    .settings = &N(NpcSettings_HyperParagoomba),
     .pos = { -216.0f, 60.0f, -10.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_HyperParagoomba),
-    .drops = HYPER_PARAGOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -738,18 +734,18 @@ NpcData N(NpcData_HyperParagoomba_01) = {
             .detectSize = { 250 },
         }
     },
+    .init = &N(EVS_NpcInit_HyperParagoomba),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_HyperParagoomba),
+    .drops = HYPER_PARAGOOMBA_DROPS,
     .animations = HYPER_PARAGOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_HyperParagoomba_02) = {
     .id = NPC_HyperParagoomba_02,
-    .settings = &N(NpcSettings_HyperParagoomba),
     .pos = { 0.0f, 60.0f, 150.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_HyperParagoomba),
-    .drops = HYPER_PARAGOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -762,18 +758,18 @@ NpcData N(NpcData_HyperParagoomba_02) = {
             .detectSize = { 250 },
         }
     },
+    .init = &N(EVS_NpcInit_HyperParagoomba),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_HyperParagoomba),
+    .drops = HYPER_PARAGOOMBA_DROPS,
     .animations = HYPER_PARAGOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_HyperParagoomba_03) = {
     .id = NPC_HyperParagoomba_03,
-    .settings = &N(NpcSettings_HyperParagoomba),
     .pos = { 260.0f, 60.0f, 30.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_HyperParagoomba),
-    .drops = HYPER_PARAGOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -786,17 +782,21 @@ NpcData N(NpcData_HyperParagoomba_03) = {
             .detectSize = { 250 },
         }
     },
+    .init = &N(EVS_NpcInit_HyperParagoomba),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_HyperParagoomba),
+    .drops = HYPER_PARAGOOMBA_DROPS,
     .animations = HYPER_PARAGOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_Skolar) = {
     .id = NPC_Skolar,
-    .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Skolar),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_StarSpirit),
     .drops = NO_DROPS,
     .animations = SKOLAR_ANIMS,
 };

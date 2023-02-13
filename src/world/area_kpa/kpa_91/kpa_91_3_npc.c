@@ -155,44 +155,44 @@ EvtScript N(EVS_NpcInit_Dryite) = {
 NpcData N(NpcData_Prisoners)[] = {
     {
         .id = NPC_Toad_01,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Toad_01),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_KPA_ToadHouseToadA,
     },
     {
         .id = NPC_Toad_02,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Toad_02),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveToadC,
     },
     {
         .id = NPC_ToadGuard,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ToadGuard),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .drops = NO_DROPS,
         .animations = TOAD_GUARD_RED_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveSoldierB,
     },
     {
         .id = NPC_Dryite,
-        .settings = &N(NpcSettings_Dryite),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Dryite),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Dryite),
         .drops = NO_DROPS,
         .animations = DRYITE_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveDryite,
@@ -231,12 +231,8 @@ EvtScript N(EVS_NpcInit_Koopatrol) = {
 
 NpcData N(NpcData_Koopatrol) = {
     .id = NPC_Koopatrol,
-    .settings = &N(NpcSettings_Koopatrol_Patrol),
     .pos = { 60.0f, 0.0f, 55.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
-    .init = &N(EVS_NpcInit_Koopatrol),
-    .drops = NO_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -251,6 +247,10 @@ NpcData N(NpcData_Koopatrol) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_Koopatrol),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+    .settings = &N(NpcSettings_Koopatrol_Patrol),
+    .drops = NO_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
 

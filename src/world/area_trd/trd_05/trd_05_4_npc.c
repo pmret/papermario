@@ -204,11 +204,11 @@ EvtScript N(EVS_NpcInit_KoopaBros) = {
 NpcData N(NpcData_KoopaBros)[] = {
     {
         .id = NPC_KoopaBros_01,
-        .settings = &N(NpcSettings_KoopaBros),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_KoopaBros),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_KoopaBros),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Yellow_Anim04,
@@ -231,11 +231,11 @@ NpcData N(NpcData_KoopaBros)[] = {
     },
     {
         .id = NPC_KoopaBros_02,
-        .settings = &N(NpcSettings_KoopaBros),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_KoopaBros),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_KoopaBros),
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Yellow_Anim04,

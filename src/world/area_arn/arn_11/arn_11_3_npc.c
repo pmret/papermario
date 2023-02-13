@@ -151,11 +151,11 @@ EvtScript N(EVS_NpcInit_TubbasHeart) = {
 
 NpcData N(NpcData_TubbasHeart) = {
     .id = NPC_TubbasHeart,
-    .settings = &N(NpcSettings_TubbasHeart),
     .pos = { 119.0f, 60.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .init = &N(EVS_NpcInit_TubbasHeart),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .settings = &N(NpcSettings_TubbasHeart),
     .drops = NO_DROPS,
     .animations = TUBBAS_HEART_ANIMS,
 };

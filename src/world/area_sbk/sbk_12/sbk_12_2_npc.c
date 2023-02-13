@@ -4,11 +4,8 @@
 
 NpcData N(NpcData_Pokey_01) = {
     .id = NPC_Pokey_01,
-    .settings = &N(NpcSettings_Pokey),
     .pos = { -190.0f, 0.0f, -130.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = POKEY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,17 +18,17 @@ NpcData N(NpcData_Pokey_01) = {
             .detectSize = { 1000 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Pokey),
+    .drops = POKEY_DROPS,
     .animations = POKEY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_Pokey_02) = {
     .id = NPC_Pokey_02,
-    .settings = &N(NpcSettings_Pokey),
     .pos = { -40.0f, 0.0f, -200.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = POKEY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -44,17 +41,17 @@ NpcData N(NpcData_Pokey_02) = {
             .detectSize = { 1000 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Pokey),
+    .drops = POKEY_DROPS,
     .animations = POKEY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_Pokey_03) = {
     .id = NPC_Pokey_03,
-    .settings = &N(NpcSettings_Pokey),
     .pos = { 195.0f, 0.0f, -255.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = POKEY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -67,6 +64,9 @@ NpcData N(NpcData_Pokey_03) = {
             .detectSize = { 1000 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_Pokey),
+    .drops = POKEY_DROPS,
     .animations = POKEY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

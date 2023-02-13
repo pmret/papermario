@@ -8,11 +8,8 @@
 
 NpcData N(NpcData_Lakitu_01) = {
     .id = NPC_Lakitu_01,
-    .settings = &N(NpcSettings_Lakitu_SpinySpawner),
     .pos = { -185.0f, 90.0f, 10.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = LAKITU_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -25,17 +22,17 @@ NpcData N(NpcData_Lakitu_01) = {
             .detectSize = { 85, 120 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Lakitu_SpinySpawner),
+    .drops = LAKITU_DROPS,
     .animations = LAKITU_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_Lakitu_02) = {
     .id = NPC_Lakitu_02,
-    .settings = &N(NpcSettings_Lakitu_SpinySpawner),
     .pos = { 200.0f, 90.0f, -25.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = LAKITU_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -48,17 +45,17 @@ NpcData N(NpcData_Lakitu_02) = {
             .detectSize = { 85, 120 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_Lakitu_SpinySpawner),
+    .drops = LAKITU_DROPS,
     .animations = LAKITU_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_Spiny_01) = {
     .id = NPC_Spiny_01,
-    .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = SPINY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -71,17 +68,17 @@ NpcData N(NpcData_Spiny_01) = {
             .detectSize = { 0 },
         }
     },
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_SpawnedSpiny),
+    .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_Spiny_02) = {
     .id = NPC_Spiny_02,
-    .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = SPINY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -94,17 +91,17 @@ NpcData N(NpcData_Spiny_02) = {
             .detectSize = { 0 },
         }
     },
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_SpawnedSpiny),
+    .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_Spiny_03) = {
     .id = NPC_Spiny_03,
-    .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = SPINY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -117,17 +114,17 @@ NpcData N(NpcData_Spiny_03) = {
             .detectSize = { 0 },
         }
     },
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_SpawnedSpiny),
+    .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_Spiny_04) = {
     .id = NPC_Spiny_04,
-    .settings = &N(NpcSettings_SpawnedSpiny),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = SPINY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -140,6 +137,9 @@ NpcData N(NpcData_Spiny_04) = {
             .detectSize = { 0 },
         }
     },
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_SpawnedSpiny),
+    .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };

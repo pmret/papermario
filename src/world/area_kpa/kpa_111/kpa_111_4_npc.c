@@ -5,11 +5,8 @@
 NpcData N(NpcData_DryBones)[] = {
     {
         .id = NPC_DryBones_01,
-        .settings = &N(NpcSettings_DryBones),
         .pos = { -10.0f, 0.0f, 100.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_800,
-        .drops = DRY_BONES_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -22,6 +19,9 @@ NpcData N(NpcData_DryBones)[] = {
                 .detectSize = { 180 },
             }
         },
+        .flags = ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_DryBones),
+        .drops = DRY_BONES_DROPS,
         .animations = DRY_BONES_ANIMS,
     },
     DRY_BONES_BONE_HITBOX(NPC_DryBones_01 + 1),
@@ -32,11 +32,8 @@ NpcData N(NpcData_DryBones)[] = {
 NpcData N(NpcData_DryBones_02)[] = {
     {
         .id = NPC_DryBones_02,
-        .settings = &N(NpcSettings_DryBones),
         .pos = { 200.0f, 0.0f, 140.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_800,
-        .drops = DRY_BONES_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -49,6 +46,9 @@ NpcData N(NpcData_DryBones_02)[] = {
                 .detectSize = { 180 },
             }
         },
+        .flags = ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_DryBones),
+        .drops = DRY_BONES_DROPS,
         .animations = DRY_BONES_ANIMS,
     },
     DRY_BONES_BONE_HITBOX(NPC_DryBones_02 + 1),

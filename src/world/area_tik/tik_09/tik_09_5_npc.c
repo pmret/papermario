@@ -51,12 +51,8 @@ EvtScript N(EVS_NpcInit_DarkTroopa) = {
 
 NpcData N(NpcData_KoopaTroopa_01) = {
     .id = NPC_KoopaTroopa_01,
-    .settings = &N(NpcSettings_DarkTroopa_Wander),
     .pos = { -80.0f, -10.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
-    .init = &N(EVS_NpcInit_DarkTroopa),
-    .drops = DARK_TROOPA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -69,18 +65,18 @@ NpcData N(NpcData_KoopaTroopa_01) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_DarkTroopa),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .settings = &N(NpcSettings_DarkTroopa_Wander),
+    .drops = DARK_TROOPA_DROPS,
     .animations = DARK_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_KoopaTroopa_02) = {
     .id = NPC_KoopaTroopa_02,
-    .settings = &N(NpcSettings_DarkTroopa_Wander),
     .pos = { 60.0f, -10.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
-    .init = &N(EVS_NpcInit_DarkTroopa),
-    .drops = DARK_TROOPA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -93,18 +89,18 @@ NpcData N(NpcData_KoopaTroopa_02) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_DarkTroopa),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .settings = &N(NpcSettings_DarkTroopa_Wander),
+    .drops = DARK_TROOPA_DROPS,
     .animations = DARK_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcData N(NpcData_KoopaTroopa_03) = {
     .id = NPC_KoopaTroopa_03,
-    .settings = &N(NpcSettings_DarkTroopa_Wander),
     .pos = { 180.0f, -10.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
-    .init = &N(EVS_NpcInit_DarkTroopa),
-    .drops = DARK_TROOPA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -117,6 +113,10 @@ NpcData N(NpcData_KoopaTroopa_03) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_DarkTroopa),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .settings = &N(NpcSettings_DarkTroopa_Wander),
+    .drops = DARK_TROOPA_DROPS,
     .animations = DARK_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

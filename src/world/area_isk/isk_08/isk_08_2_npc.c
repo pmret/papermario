@@ -4,11 +4,8 @@
 
 NpcData N(NpcData_BuzzyBeetle) = {
     .id = NPC_BuzzyBeetle,
-    .settings = &N(NpcSettings_BuzzyBeetle),
     .pos = { -415.0f, -520.0f, 355.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = ISK_BUZZY_BEETLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,6 +18,9 @@ NpcData N(NpcData_BuzzyBeetle) = {
             .detectSize = { 60 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_BuzzyBeetle),
+    .drops = ISK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

@@ -172,10 +172,10 @@ NpcData N(NpcData_HurtPlant) = {
 
 NpcData N(NpcData_MBush_01) = {
     .id = NPC_MBush_01,
-    .init = &N(EVS_NpcInit_MBush_01),
     .pos = { -407.0f, 0.0f, -42.0f },
     .yaw = 90,
     MBUSH_NPC_DATA
+    .init = &N(EVS_NpcInit_MBush_01),
 };
 
 NpcData N(NpcData_MBush_02) = {
@@ -203,9 +203,9 @@ NpcData N(NpcData_YoshiKid) = {
     .id = NPC_YoshiKid,
     .pos = { -450.0f, 0.0f, -290.0f },
     .yaw = 90,
-    .settings = &N(NpcSettings_YoshiKid),
     .init = &N(EVS_NpcInit_YoshiKid),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .settings = &N(NpcSettings_YoshiKid),
     .drops = NO_DROPS,
     .animations = YOSHI_KID_RED_ANIMS,
     .tattle = MSG_NpcTattle_RedYoshiKid,

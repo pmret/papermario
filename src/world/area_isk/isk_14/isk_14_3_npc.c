@@ -217,14 +217,8 @@ EvtScript N(EVS_NpcInit_StoneChomp) = {
 
 NpcData N(NpcData_StoneChomp) = {
     .id = NPC_StoneChomp,
-    .settings = &N(NpcSettings_StoneChomp),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 218,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
-    .init = &N(EVS_NpcInit_StoneChomp),
-    .initVarCount = 1,
-    .initVar = { .value = -780 },
-    .drops = STONE_CHOMP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -237,6 +231,12 @@ NpcData N(NpcData_StoneChomp) = {
             .detectSize = { 400 },
         }
     },
+    .init = &N(EVS_NpcInit_StoneChomp),
+    .initVarCount = 1,
+    .initVar = { .value = -780 },
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .settings = &N(NpcSettings_StoneChomp),
+    .drops = STONE_CHOMP_DROPS,
     .animations = STONE_CHOMP_ANIMS,
 };
 

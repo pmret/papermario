@@ -6,11 +6,8 @@
 NpcData N(NpcData_SpearGuy)[] = {
     {
         .id = NPC_SpearGuy,
-        .settings = &N(NpcSettings_SpearGuy_Wander),
         .pos = { -200.0f, 90.0f, -330.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .drops = SPEAR_GUY_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -23,6 +20,9 @@ NpcData N(NpcData_SpearGuy)[] = {
                 .detectSize = { 212, 100 },
             }
         },
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .settings = &N(NpcSettings_SpearGuy_Wander),
+        .drops = SPEAR_GUY_DROPS,
         .animations = SPEAR_GUY_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },

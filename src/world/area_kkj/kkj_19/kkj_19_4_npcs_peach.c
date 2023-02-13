@@ -38,11 +38,11 @@ EvtScript N(EVS_NpcInit_Twink) = {
 // normally, you cant interact with your partner, so a dummy npc is created to allow it
 NpcData N(NpcData_Twink) = {
     .id = NPC_Twink,
-    .settings = &N(NpcSettings_StarSpirit),
     .pos = { 0.0f, -500.0f, 0.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000000,
     .init = &N(EVS_NpcInit_Twink),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000000,
+    .settings = &N(NpcSettings_StarSpirit),
     .drops = NO_DROPS,
     .animations = TWINK_ANIMS,
 };

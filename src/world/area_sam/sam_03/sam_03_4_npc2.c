@@ -5,11 +5,8 @@
 NpcData N(NpcData_Gulpit_01)[] = {
     {
         .id = NPC_Gulpit_01,
-        .settings = &N(NpcSettings_Gulpit),
         .pos = { -345.0f, 0.0f, 115.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = GULPIT_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -22,6 +19,9 @@ NpcData N(NpcData_Gulpit_01)[] = {
                 .detectSize = { 250 },
             }
         },
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Gulpit),
+        .drops = GULPIT_DROPS,
         .animations = GULPIT_ANIMS,
         .extraAnimations = N(ExtraAnims_Gulpit),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -32,11 +32,8 @@ NpcData N(NpcData_Gulpit_01)[] = {
 NpcData N(NpcData_Gulpit_02)[] = {
     {
         .id = NPC_Gulpit_02,
-        .settings = &N(NpcSettings_Gulpit),
         .pos = { 200.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = GULPIT_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -49,6 +46,9 @@ NpcData N(NpcData_Gulpit_02)[] = {
                 .detectSize = { 250 },
             }
         },
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .settings = &N(NpcSettings_Gulpit),
+        .drops = GULPIT_DROPS,
         .animations = GULPIT_ANIMS,
         .extraAnimations = N(ExtraAnims_Gulpit),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

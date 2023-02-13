@@ -32,11 +32,8 @@ EvtScript N(EVS_NpcInit_KoopaTroopa) = {
 
 NpcData N(NpcData_KoopaTroopa_Wander) = {
     .id = NPC_KoopaTroopa,
-    .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { 0.0f, 0.0f, 125.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = KOOPA_TROOPA_TRD_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -49,18 +46,17 @@ NpcData N(NpcData_KoopaTroopa_Wander) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_KoopaTroopa_Patrol) = {
     .id = NPC_KoopaTroopa,
-    .settings = &N(NpcSettings_KoopaTroopa_Patrol),
     .pos = { 220.0f, 0.0f, 30.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_NO_DROPS,
-    .init = &N(EVS_NpcInit_KoopaTroopa),
-    .drops = NO_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -75,17 +71,18 @@ NpcData N(NpcData_KoopaTroopa_Patrol) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_KoopaTroopa),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_NO_DROPS,
+    .settings = &N(NpcSettings_KoopaTroopa_Patrol),
+    .drops = NO_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcData N(NpcData_ParaTroopa) = {
     .id = NPC_ParaTroopa,
-    .settings = &N(NpcSettings_ParaTroopa),
     .pos = { -5.0f, 237.0f, 157.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = PARATROOPA_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -98,6 +95,9 @@ NpcData N(NpcData_ParaTroopa) = {
             .detectSize = { 200 },
         }
     },
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .settings = &N(NpcSettings_ParaTroopa),
+    .drops = PARATROOPA_DROPS,
     .animations = PARATROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
