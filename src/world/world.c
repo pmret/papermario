@@ -41,8 +41,8 @@ s32 pad_map_table[] = { 0, 0 };
 #define ASSET_TABLE_FIRST_ENTRY (ASSET_TABLE_ROM_START + ASSET_TABLE_HEADER_SIZE)
 
 // bss
-MapSettings gMapSettings;
-MapConfig* gMapConfig;
+extern MapSettings gMapSettings;
+extern MapConfig* gMapConfig;
 
 typedef struct {
     /* 0x00 */ char name[16];
@@ -53,6 +53,12 @@ typedef struct {
 
 void fio_deserialize_state(void);
 void load_map_hit_asset(void);
+
+#ifdef SHIFT
+#define shim_general_heap_create_obfuscated general_heap_create
+#endif
+
+extern ShapeFile gMapShapeData;
 
 void load_map_script_lib(void) {
     dma_copy(world_script_api_ROM_START, world_script_api_ROM_END, world_script_api_VRAM);
@@ -118,7 +124,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     }
 
     if (!skipLoadingAssets) {
-        ShapeFile* shapeFile = &D_80210000;
+        ShapeFile* shapeFile = &gMapShapeData;
         void* yay0Asset = load_asset_by_name(wMapShapeName, &decompressedSize);
 
         decode_yay0(yay0Asset, shapeFile);
@@ -233,7 +239,6 @@ s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID) {
     return FALSE;
 }
 
-#ifndef SHIFT
 void* load_asset_by_name(const char* assetName, u32* decompressedSize) {
     AssetHeader firstHeader;
     AssetHeader* assetTableBuffer;
@@ -254,11 +259,7 @@ void* load_asset_by_name(const char* assetName, u32* decompressedSize) {
     heap_free(assetTableBuffer);
     return ret;
 }
-#else
-INCLUDE_ASM_SHIFT(void*, "world/world", load_asset_by_name);
-#endif
 
-#ifndef SHIFT
 s32 get_asset_offset(char* assetName, s32* compressedSize) {
     AssetHeader firstHeader;
     AssetHeader* assetTableBuffer;
@@ -277,9 +278,6 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
     heap_free(assetTableBuffer);
     return ret;
 }
-#else
-INCLUDE_ASM_SHIFT(s32, "world/world", get_asset_offset);
-#endif
 
 #define AREA(area, jp_name) { ARRAY_COUNT(area##_maps), area##_maps, "area_" #area, jp_name }
 

@@ -285,3 +285,5 @@ void action_update_use_spinning_flower(void) {
             break;
     }
 }
+
+MATCHING_BSS(0x100);

@@ -18,7 +18,6 @@ void gfx_init_state(void);
 #ifdef VERSION_US
 extern s32 D_80073E00;
 #else
-void func_8002CA00(void);
 extern s32 D_80073DE0;
 #endif
 extern u16* D_80073E04;
@@ -26,6 +25,13 @@ extern s16 D_80073E08;
 extern s16 D_80073E0A;
 extern s32 D_80073E10[];
 extern u16* D_8009A680;
+
+#ifdef SHIFT
+void create_audio_system(void);
+void load_engine_data(void);
+#define shim_create_audio_system_obfuscated create_audio_system
+#define shim_load_engine_data_obfuscated load_engine_data
+#endif
 
 void boot_main(void* data) {
 #ifdef VERSION_JP
@@ -37,7 +43,7 @@ void boot_main(void* data) {
     } else {
         PANIC();
     }
-#else // VERSION_JP
+#else // not VERSION_JP
     if (osTvType == OS_TV_NTSC) {
         osViSetMode(&osViModeNtscLan1);
         osViSetSpecialFeatures(OS_VI_GAMMA_OFF | OS_VI_GAMMA_DITHER_OFF | OS_VI_DIVOT_ON | OS_VI_DITHER_FILTER_ON);
@@ -55,15 +61,9 @@ void boot_main(void* data) {
     is_debug_init();
     nuGfxInit();
     gGameStatusPtr->contBitPattern = nuContInit();
-#ifdef VERSION_US
     load_obfuscation_shims();
     shim_create_audio_system_obfuscated();
     shim_load_engine_data_obfuscated();
-#else
-    func_8002CA00();
-    shim_create_audio_system_obfuscated();
-    shim_load_engine_data_obfuscated();
-#endif
     nuGfxFuncSet((NUGfxFunc) gfxRetrace_Callback);
     nuGfxPreNMIFuncSet(gfxPreNMI_Callback);
     gRandSeed += osGetCount();

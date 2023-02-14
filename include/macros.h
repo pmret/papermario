@@ -5,9 +5,23 @@
 #include "include_asm.h"
 
 #ifndef M2CTX
+
+#ifdef SHIFT
+#define SHIFT_BSS __attribute__ ((section (".bss")))
+#else
+#define SHIFT_BSS extern
+#endif
+
+#ifdef SHIFT
+#define MATCHING_BSS(size)
+#else
+#define MATCHING_BSS(size) static BSS u8 padding_bss[size];
+#endif
+
 #define BSS __attribute__ ((section (".bss")))
 #define TRANSPARENT_UNION __attribute__ ((__transparent_union__))
 #else
+#define SHIFT_BSS static
 #define BSS static
 #define TRANSPARENT_UNION
 #endif
@@ -89,6 +103,12 @@
 
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
+
+#define COLLISION_HEAP_SIZE 0x18000
+#define GENERAL_HEAP_SIZE 0x54000
+#define SPRITE_HEAP_SIZE 0x40000
+#define BATTLE_HEAP_SIZE 0x25800
+#define FRAME_BUFFER_SIZE 0x25800
 
 #define CAM_NEAR_CLIP 16
 #define CAM_FAR_CLIP 4096
@@ -192,5 +212,11 @@
     .count = __NARG__(names), \
     .models = {  names } \
 }
+
+#ifdef OLD_GCC
+#define VLA 0
+#else
+#define VLA
+#endif
 
 #endif

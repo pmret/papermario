@@ -810,12 +810,17 @@ ApiStatus SetAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
+    s32 a1;
+    s32 animationIndex;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    set_animation(actorID, evt_get_variable(script, *args++), evt_get_variable(script, *args++));
+    a1 = evt_get_variable(script, *args++);
+    animationIndex = evt_get_variable(script, *args++);
+
+    set_animation(actorID, a1, animationIndex);
 
     return ApiStatus_DONE2;
 }
@@ -845,12 +850,17 @@ ApiStatus SetAnimationRate(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
+    s32 partIndex;
+    f32 rate;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    set_animation_rate(actorID, evt_get_variable(script, *args++), evt_get_float_variable(script, *args++));
+    partIndex = evt_get_variable(script, *args++);
+    rate = evt_get_float_variable(script, *args++);
+
+    set_animation_rate(actorID, partIndex, rate);
 
     return ApiStatus_DONE2;
 }
@@ -885,12 +895,17 @@ ApiStatus GetActorYaw(Evt* script, s32 isInitialCall) {
 ApiStatus SetPartYaw(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex;
+    s32 yaw;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    set_part_yaw(actorID, evt_get_variable(script, *args++), evt_get_variable(script, *args++));
+    partIndex = evt_get_variable(script, *args++);
+    yaw = evt_get_variable(script, *args++);
+
+    set_part_yaw(actorID, partIndex, yaw);
     return ApiStatus_DONE2;
 }
 

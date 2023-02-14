@@ -1,3 +1,3 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "7E00", func_8002CA00);
+INCLUDE_ASM(s32, "7E00", load_obfuscation_shims);

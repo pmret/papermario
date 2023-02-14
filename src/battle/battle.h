@@ -400,6 +400,13 @@ typedef struct ActorOffsets {
     /* 0x03 */ s8 shadow;
 } ActorOffsets; // size = 0x04
 
+// TODO look into making options here better. it's really an array of 5 substructs, each having an [8][2] array
+typedef struct PlayerCelebrationAnimOptions {
+    /* 0x00 */ s16 randomChance;
+    /* 0x02 */ s16 hpBasedChance;
+    /* 0x04 */ s32 options[80];
+} PlayerCelebrationAnimOptions; // size = 0x8
+
 extern Battle* gCurrentBattlePtr;
 
 extern ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT];
@@ -407,17 +414,5 @@ extern ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT];
 void func_80072BCC(s32 arg0);
 void load_demo_battle(u32 index);
 Actor* create_actor(Formation formation);
-
-#ifdef SHIFT
-#define AUX_DATA_ADDR_0 world_model_anim_kzn_01_VRAM // (picked the first overlay among those with this address)
-#define AUX_DATA_ADDR_1 battle_area_omo2_1_VRAM // (picked the first overlay among those with this address)
-#define AUX_DATA_ADDR_2 0x8022E000 // TODO shiftability
-#define AUX_DATA_ADDR_3 0x8022C000 // TODO shiftability
-#else
-#define AUX_DATA_ADDR_0 0x80234000
-#define AUX_DATA_ADDR_1 0x80231000
-#define AUX_DATA_ADDR_2 0x8022E000
-#define AUX_DATA_ADDR_3 0x8022C000
-#endif
 
 #endif

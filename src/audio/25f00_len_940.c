@@ -26,6 +26,7 @@ extern AuSynDriver auSynDriver;
 extern u64 rspbootUcodeBuffer[];
 extern u64 n_aspMain_text_bin[];
 extern u64 n_aspMain_data_bin[];
+
 extern u8 AuHeapBase[AUDIO_HEAP_SIZE];
 extern u64 AuStack[NU_AU_STACK_SIZE / sizeof(u64)];
 

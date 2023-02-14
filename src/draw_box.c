@@ -11,7 +11,8 @@ typedef struct DefaultWindowStyle {
     /* 0x07 */ Color_RGBA8 color2;
 } DefaultWindowStyle; // size = 0x0B
 
-static Vtx gBoxQuadBuffer[][16];
+#define BOX_QUAD_BUFFER_NUM 21
+extern Vtx gBoxQuadBuffer[BOX_QUAD_BUFFER_NUM][16];
 
 DefaultWindowStyle gBoxDefaultStyles[] = {
     {
@@ -432,8 +433,8 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
 
         if (flags & DRAW_FLAG_ROTSCALE) {
             quads = gBoxQuadBuffer[gBoxQuadIndex++];
-            if (gBoxQuadIndex > 20) {
-                gBoxQuadIndex  = 0;
+            if (gBoxQuadIndex > BOX_QUAD_BUFFER_NUM - 1) {
+                gBoxQuadIndex = 0;
             }
         }
 
@@ -761,7 +762,7 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
         gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
         gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
         if(fpDrawContents != NULL) {
-            if(quads != NULL) {
+            if (quads != NULL) {
                 void* mdl_address = mdl_get_next_texture_address(width * height * 2);
                 if(mdl_address != 0) {
                     gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, width, OS_K0_TO_PHYSICAL(mdl_address));

@@ -2,8 +2,9 @@
 
 API_CALLABLE(N(MakeCastleChainAngle)) {
     Bytecode* args = script->ptrReadPos;
-    
-    evt_set_variable(script, *args++, sin_deg(evt_get_variable(script, *args)) * 20.0f);
+    s32 angle = evt_get_variable(script, *args);
+
+    evt_set_variable(script, *args++, sin_deg(angle) * 20.0f);
     return ApiStatus_DONE2;
 }
 

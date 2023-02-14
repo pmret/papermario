@@ -8,7 +8,7 @@ extern s8 obfuscated_obfuscation_shims_VRAM[];
 
 #ifdef SHIFT
 void load_obfuscation_shims(void) {
-    dma_copy(obfuscation_shims_ROM_START, obfuscation_shims_ROM_END, obfuscation_shims_VRAM);
+    // no-op since in shiftable builds, we bypass the obfuscation
 }
 #else
 void load_obfuscation_shims(void) {

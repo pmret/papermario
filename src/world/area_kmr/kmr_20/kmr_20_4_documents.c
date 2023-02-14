@@ -98,21 +98,20 @@ s32 N(LetterBodyStringIDs)[] = {
     MSG_Document_Letter_Mario12_Body,
 };
 
-//TODO shiftability -- these are offsets relative to 0x10F1B0
 s32 N(LetterDmaOffsets)[] = {
-    0x0000B290, 0x0000D158,
-    0x0000D178, 0x0000EB78,
-    0x0000ED78, 0x00010778,
-    0x00010978, 0x00012378,
-    0x00012578, 0x00013F78,
-    0x00014178, 0x00015B78,
-    0x00015D78, 0x00017778,
-    0x00017978, 0x00019378,
-    0x00019578, 0x0001AF78,
-    0x0001B178, 0x0001CB78,
-    0x0001CD78, 0x0001E778,
-    0x0001E978, 0x00020378,
-    0x00020578, 0x00021F78,
+    (s32) charset_postcard_OFFSET, (s32) charset_postcard_pal_OFFSET + 5,
+    (s32) charset_letter_content_1_OFFSET, (s32) charset_letter_content_1_pal_OFFSET + 6,
+    (s32) charset_letter_content_2_OFFSET, (s32) charset_letter_content_2_pal_OFFSET + 6,
+    (s32) charset_letter_content_3_OFFSET, (s32) charset_letter_content_3_pal_OFFSET + 6,
+    (s32) charset_letter_content_4_OFFSET, (s32) charset_letter_content_4_pal_OFFSET + 6,
+    (s32) charset_letter_content_5_OFFSET, (s32) charset_letter_content_5_pal_OFFSET + 6,
+    (s32) charset_letter_content_6_OFFSET, (s32) charset_letter_content_6_pal_OFFSET + 6,
+    (s32) charset_letter_content_7_OFFSET, (s32) charset_letter_content_7_pal_OFFSET + 6,
+    (s32) charset_letter_content_8_OFFSET, (s32) charset_letter_content_8_pal_OFFSET + 6,
+    (s32) charset_letter_content_9_OFFSET, (s32) charset_letter_content_9_pal_OFFSET + 6,
+    (s32) charset_letter_content_10_OFFSET, (s32) charset_letter_content_10_pal_OFFSET + 6,
+    (s32) charset_letter_content_11_OFFSET, (s32) charset_letter_content_11_pal_OFFSET + 6,
+    (s32) charset_letter_content_12_OFFSET, (s32) charset_letter_content_12_pal_OFFSET + 6,
 };
 
 API_CALLABLE(N(InitLetters)){

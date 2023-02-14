@@ -70,6 +70,8 @@ typedef struct PackedVtx {
 
 typedef FoldState FoldStateList[90];
 
+extern HeapNode heap_spriteHead;
+
 // BSS
 extern FoldImageRec D_80156920;
 extern Vtx* D_80156948[2];
@@ -167,10 +169,10 @@ void fold_init(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_80156948); i++) {
-        D_80156948[i] = _heap_malloc(&gSpriteHeapPtr, D_8014EE60 * sizeof(*(D_80156948[0])));
+        D_80156948[i] = _heap_malloc(&heap_spriteHead, D_8014EE60 * sizeof(*(D_80156948[0])));
     }
 
-    D_80156954 = (FoldStateList*)_heap_malloc(&gSpriteHeapPtr, ARRAY_COUNT(*D_80156954) * sizeof((*D_80156954)[0]));
+    D_80156954 = (FoldStateList*)_heap_malloc(&heap_spriteHead, ARRAY_COUNT(*D_80156954) * sizeof((*D_80156954)[0]));
 
     for (i = 0; i < ARRAY_COUNT(*D_80156954); i++) {
         fold_init_state(&(*D_80156954)[i]);
@@ -1576,7 +1578,7 @@ void func_8013E2F0(FoldState* state, Matrix4f mtx) {
         if ((D_80151328->flags & 1) && (state->flags & (FOLD_STATE_FLAG_100000 | FOLD_STATE_FLAG_80000)) &&
             (state->renderType == FOLD_RENDER_TYPE_0
             || state->renderType == FOLD_RENDER_TYPE_2
-            || state->renderType == FOLD_RENDER_TYPE_7 
+            || state->renderType == FOLD_RENDER_TYPE_7
             || state->renderType == FOLD_RENDER_TYPE_B)) {
             s32 alpha = 255;
             gDPScrollMultiTile2_4b(gMasterGfxPos++, fold_currentImage->raster, G_IM_FMT_CI,

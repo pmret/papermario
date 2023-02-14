@@ -1653,8 +1653,9 @@ ApiStatus PlayerTestEnemy(Evt* script, s32 isInitialCall) {
 
 ApiStatus DispatchDamagePlayerEvent(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 damageAmount = evt_get_variable(script, *args++);
 
-    if (dispatch_damage_event_player_0(evt_get_variable(script, *args++), *args++) < 0) {
+    if (dispatch_damage_event_player_0(damageAmount, *args++) < 0) {
         return ApiStatus_BLOCK;
     }
 

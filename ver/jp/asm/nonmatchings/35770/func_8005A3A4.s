@@ -25,7 +25,7 @@ glabel func_8005A3A4
 /* 357F4 8005A3F4 2402FF7F */  addiu     $v0, $zero, -0x81
 /* 357F8 8005A3F8 00621824 */  and       $v1, $v1, $v0
 /* 357FC 8005A3FC ACA30000 */  sw        $v1, ($a1)
-/* 35800 8005A400 0C00B280 */  jal       func_8002CA00
+/* 35800 8005A400 0C00B280 */  jal       load_obfuscation_shims
 /* 35804 8005A404 A0800084 */   sb       $zero, 0x84($a0)
 /* 35808 8005A408 0C0AC81E */  jal       func_802B2078
 /* 3580C 8005A40C 00108400 */   sll      $s0, $s0, 0x10
@@ -166,7 +166,7 @@ glabel func_8005A3A4
 /* 35A08 8005A608 0C052B88 */  jal       func_8014AE20
 /* 35A0C 8005A60C 00000000 */   nop
 .L8005A610:
-/* 35A10 8005A610 0C00B280 */  jal       func_8002CA00
+/* 35A10 8005A610 0C00B280 */  jal       load_obfuscation_shims
 /* 35A14 8005A614 00000000 */   nop
 /* 35A18 8005A618 0C0AC81E */  jal       func_802B2078
 /* 35A1C 8005A61C 00000000 */   nop

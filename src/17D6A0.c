@@ -2426,7 +2426,7 @@ s32 bMessages[] = {
     [BTL_MSG_17]    MSG_Menus_EnemyParalyzed,
     [BTL_MSG_18]    MSG_Menus_EnemyElectrified,
     [BTL_MSG_19]    MSG_Menus_EnemyCantMove,
-    
+
     [BTL_MSG_1A]    MSG_Menus_StarEnergyRecharged,
     [BTL_MSG_1B]    MSG_Menus_StarEnergyMaxedOut,
     [BTL_MSG_1C]    MSG_Menus_StarEnergyFilled,
@@ -2434,7 +2434,7 @@ s32 bMessages[] = {
     [BTL_MSG_1E]    MSG_Menus_DefenseUp,
     [BTL_MSG_1F]    MSG_Menus_0084,
     [BTL_MSG_20]    MSG_Menus_0085,
-    
+
     [BTL_MSG_21]    MSG_Menus_EnemyTransparent,
     [BTL_MSG_22]    MSG_Menus_EnemyElectricCharge,
     [BTL_MSG_23]    MSG_Menus_PartnerInjured,

@@ -259,3 +259,5 @@ void func_802B79C8_E20AD8(void) {
     func_800EF3D4(0);
     partner_reset_tether_distance();
 }
+
+MATCHING_BSS(0x30);

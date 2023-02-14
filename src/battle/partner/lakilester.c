@@ -40,8 +40,6 @@ typedef struct HurricaneState {
     /* 0x74 */ char unk_74[0x10];
 } HurricaneState;
 
-
-
 static s32 sSavedHurricaneIntensity;
 static s32 sBreathSizeIncrease;
 static s32 sMaxPower;
@@ -1768,3 +1766,5 @@ EvtScript N(hurricane) = {
     EVT_RETURN
     EVT_END
 };
+
+MATCHING_BSS(0xCC0);

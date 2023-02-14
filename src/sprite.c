@@ -1,5 +1,8 @@
 #include "sprite.h"
 
+extern HeapNode heap_generalHead;
+extern HeapNode heap_spriteHead;
+
 BSS s32 D_802DF520; // unused?
 BSS s32 spr_allocateBtlComponentsOnWorldHeap;
 BSS s32 D_802DF528[2]; // unused?
@@ -126,7 +129,7 @@ PlayerSpriteSet spr_playerSpriteSets[] = {
 void spr_init_quad_cache(void) {
     s32 i;
 
-    D_802DFE44 = _heap_malloc(&gSpriteHeapPtr, ARRAY_COUNT(D_802DFE48) * sizeof(*D_802DFE44));
+    D_802DFE44 = _heap_malloc(&heap_spriteHead, ARRAY_COUNT(D_802DFE48) * sizeof(*D_802DFE44));
 
     for (i = 0; i < ARRAY_COUNT(D_802DFE48); i++) {
         D_802DFE48[i] = -1;
@@ -771,7 +774,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
     s32 i;
 
     spr_allocateBtlComponentsOnWorldHeap = FALSE;
-    _heap_create(&gSpriteHeapPtr, 0x40000);
+    _heap_create(&heap_spriteHead, 0x40000);
     fold_init();
 
     for (i = 0; i < ARRAY_COUNT(spr_playerSprites); i++) {
@@ -1200,13 +1203,13 @@ s32 spr_free_sprite(s32 spriteInstanceID) {
 
     if (NpcSpriteInstanceCount[spriteIndex] == 0) {
         NpcSpriteData[spriteIndex] = NULL;
-        _heap_free(&gSpriteHeapPtr, spriteData);
+        _heap_free(&heap_spriteHead, spriteData);
     }
 
     if (spr_allocateBtlComponentsOnWorldHeap) {
         _heap_free(&heap_generalHead, compList);
     } else {
-        _heap_free(&gSpriteHeapPtr, compList);
+        _heap_free(&heap_spriteHead, compList);
     }
 
     SpriteInstances[spriteInstanceID].spriteIndex = 0;

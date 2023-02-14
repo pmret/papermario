@@ -272,3 +272,5 @@ EntityBlueprint Entity_BombableRock2 = {
     .entityType = ENTITY_TYPE_BOMBABLE_ROCK,
     .aabbSize = { 50, 50, 100 }
 };
+
+MATCHING_BSS(0x100);

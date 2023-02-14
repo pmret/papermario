@@ -409,9 +409,6 @@ BSS s32 D_802AD658[5]; // msg IDs
 BSS s32 D_802AD66C;
 BSS s32 D_802AD670;
 
-//TODO remove it in func_802A45D8 and use D_802AD670 instead
-extern s8 D_802AD673;
-
 BSS s32 D_802AD674; // unused?
 BSS s32 D_802AD678[6];
 BSS s32 D_802AD690[6];
@@ -437,6 +434,9 @@ void func_80263268(void);
 void btl_init_menu_partner(void);
 void func_800F52BC(void);
 void func_800F16CC(void);
+
+void btl_init_menu_boots(void);
+void btl_init_menu_hammer(void);
 
 void btl_main_menu_init(void) {
     D_802AD006 = 255;
@@ -1664,8 +1664,8 @@ void func_802A45D8(void) {
     s8 temp802AD673;
 
     BattleSubmenuStratsState = 0;
-    D_802AD605 = D_802AD673;
-    D_802AD606 = D_802AD673;
+    D_802AD605 = D_802AD670;
+    D_802AD606 = D_802AD670;
     D_802AD608 = 0;
     D_802AD60A = D_802AD66C;
 
@@ -1681,12 +1681,12 @@ void func_802A45D8(void) {
 
     D_802AD624 = 255;
     D_802AD60B = 1;
-    temp802AD673 = D_802AD673;
+    temp802AD673 = D_802AD670;
 
-    if (D_802AD673 < 0) {
-        D_802AD608 = D_802AD673;
+    if ((s8) D_802AD670 < 0) {
+        D_802AD608 = D_802AD670;
     }
-    if (D_802AD673 >= D_802AD609) {
+    if ((s8) D_802AD670 >= D_802AD609) {
         D_802AD608 = (temp802AD673 + 1 - D_802AD60A);
     }
 
@@ -1696,7 +1696,7 @@ void func_802A45D8(void) {
     }
 
     D_802AD60C = -D_802AD608 * 13;
-    D_802AD60E = (D_802AD673 - D_802AD608) * 13;
+    D_802AD60E = ((s8) D_802AD670 - D_802AD608) * 13;
     D_802AD607 = 0;
     D_802AD6D4 = 0;
 }
@@ -2138,7 +2138,7 @@ s32 can_btl_state_update_switch_to_player(void) {
     }
 }
 
-extern s32 D_8008EEF0[];
+extern s32 D_8008EEF0[]; // TODO MOVE
 
 s32 func_802A58D0(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -2182,9 +2182,6 @@ s32 func_802A58D0(void) {
     }
     return !partnerCantMove;
 }
-
-void btl_init_menu_boots(void);
-void btl_init_menu_hammer(void);
 
 void btl_state_update_player_menu(void) {
     BattleStatus* battleStatus = &gBattleStatus;

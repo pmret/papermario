@@ -127,7 +127,6 @@ extern char wMapTexName[];
 extern char wMapHitName[];
 extern char wMapShapeName[];
 extern char wMapBgName[];
-extern struct ShapeFile D_80210000;
 extern u8 D_802D9D70; // player alpha1 copy?
 extern u8 D_802D9D71; // player alpha2 copy?
 
@@ -214,17 +213,8 @@ extern AnimID HammerBroDisguiseExtraAnims[];
 
 extern s16 gCurrentCamID;
 
-extern HeapNode gSpriteHeapPtr;
-
 extern s32 D_8029C890[10][5];
 
-// frame buffers
-extern u16 D_8038F800[];
-extern u16 D_803B5000[];
-extern u16 D_803DA800[];
-
-extern HeapNode heap_collisionHead;
-extern HeapNode heap_generalHead;
 extern HeapNode heap_battleHead;
 
 extern u32 bMarioIdleAnims[];
