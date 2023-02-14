@@ -2,6 +2,7 @@
 #define _WORLD_AREA_KPA_KPA_H_
 
 enum {
+    AB_KPA_Unused_0             = AreaByte(0),
     AB_KPA17_Toad1_Dialogue     = AreaByte(1),
     AB_KPA17_Toad2_Dialogue     = AreaByte(2),
     AB_KPA17_Toad3_Dialogue     = AreaByte(3),
@@ -16,6 +17,7 @@ enum {
     AB_KPA82_QuizRound          = AreaByte(12),
     AB_KPA82_RightAnswers       = AreaByte(13),
     AB_KPA82_WrongAnswers       = AreaByte(14),
+    AB_KPA_Unused_F             = AreaByte(15),
 };
 
 enum {
