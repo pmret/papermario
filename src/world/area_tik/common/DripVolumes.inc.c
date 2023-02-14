@@ -196,5 +196,5 @@ typedef struct DripVolume {
 
 typedef struct DripVolumeList {
     /* 0x00 */ s32 count;
-    /* 0x04 */ DripVolume volumes[0];
+    /* 0x04 */ DripVolume volumes[VLA];
 } DripVolumeList; // size = variable

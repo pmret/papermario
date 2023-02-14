@@ -3677,7 +3677,7 @@ void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, 
     memcpy(&handle->header, header, sizeof(*header));
     func_801180E8(header, (Gfx**)&mdl_nextTextureAddress, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
 
-    #ifdef MODERN_GCC
+    #ifndef OLD_GCC
     gSPEndDisplayList(mdl_nextTextureAddress);
     mdl_nextTextureAddress += 8;
     #else

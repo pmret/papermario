@@ -68,7 +68,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
     cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
-    cflags_modern = f"-c -G0 -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mabi=32 -mgp32 -mfp32 -mno-gpopt -mabi=32 -mfix4300 -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -O2 -march=vr4300 -w -gdwarf-2 -x c {extra_cflags}"
+    cflags_modern = f"-c -G0 -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mabi=32 -mgp32 -mfp32 -mno-gpopt -mabi=32 -mfix4300 -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -O2 -march=vr4300 -Wno-builtin-declaration-mismatch -gdwarf-2 -x c {extra_cflags}"
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3","-g1")
 
@@ -108,7 +108,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc",
         description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -DOLD_GCC -MD -MF $out.d $in -o - | {iconv} | {ccache}{cc} {cflags} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cc} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -407,17 +407,8 @@ class Configure:
                 if entry.src_paths[0].suffixes[-1] == ".cpp":
                     task = "cxx"
 
-                bad_list = []
-                seg_dir = str(seg.dir)
-
                 if modern_gcc:
                     task = "cc_modern"
-
-                    if ("world/area" in seg_dir and (
-                        "kkj" in seg_dir or
-                        "jan" in seg_dir
-                    )) or seg.name in bad_list:
-                        task = "cc"
 
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
@@ -825,8 +816,8 @@ if __name__ == "__main__":
     if args.shift:
         cppflags += " -DSHIFT"
 
-    if args.modern_gcc:
-        cppflags += " -DMODERN_GCC"
+    if not args.modern_gcc:
+        cppflags += " -DOLD_GCC"
 
     if not args.no_warn:
         cflags += " -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
