@@ -28,25 +28,25 @@ API_CALLABLE(N(FadeScreenToRedAndWhite)) {
         TEMP_FADE_TO_WHITE  = 1,
         TEMP_FADE_COMPLETE  = 2,
     };
-    #define FT_state  script->functionTemp[2]
-    #define FT_alpha  script->functionTemp[1]
+    #define FT_state  functionTemp[2]
+    #define FT_alpha  functionTemp[1]
 
     if (isInitialCall) {
-        FT_alpha = 0;
-        FT_state = 0;
+        script->FT_alpha = 0;
+        script->FT_state = 0;
     }
 
-    switch (FT_state) {
+    switch (script->FT_state) {
         case TEMP_FADE_TO_RED:
             set_screen_overlay_color(0, 208, 0, 0);
-            set_screen_overlay_params_front(1, FT_alpha);
-            if (FT_alpha == 255) {
-                FT_alpha = 0;
-                FT_state = TEMP_FADE_TO_WHITE;
+            set_screen_overlay_params_front(1, script->FT_alpha);
+            if (script->FT_alpha == 255) {
+                script->FT_alpha = 0;
+                script->FT_state = TEMP_FADE_TO_WHITE;
             } else {
-                FT_alpha += 7;
-                if (FT_alpha > 255) {
-                    FT_alpha = 255;
+                script->FT_alpha += 7;
+                if (script->FT_alpha > 255) {
+                    script->FT_alpha = 255;
                 }
             }
             break;
@@ -54,20 +54,20 @@ API_CALLABLE(N(FadeScreenToRedAndWhite)) {
             set_screen_overlay_color(
                 0,
                 208,
-                (FT_alpha * 208) / 255,
-                (FT_alpha * 208) / 255
+                (script->FT_alpha * 208) / 255,
+                (script->FT_alpha * 208) / 255
             );
             set_screen_overlay_params_front(1, 255.0f);
-            if (FT_alpha == 255) {
-                FT_state = TEMP_FADE_COMPLETE;
+            if (script->FT_alpha == 255) {
+                script->FT_state = TEMP_FADE_COMPLETE;
             }
-            FT_alpha += 14;
-            if (FT_alpha > 255) {
-                FT_alpha = 255;
+            script->FT_alpha += 14;
+            if (script->FT_alpha > 255) {
+                script->FT_alpha = 255;
             }
     }
 
-    if (FT_state == TEMP_FADE_COMPLETE) {
+    if (script->FT_state == TEMP_FADE_COMPLETE) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;
