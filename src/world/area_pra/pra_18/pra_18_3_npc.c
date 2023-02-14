@@ -1,7 +1,7 @@
 #include "pra_18.h"
 #include "effects.h"
 
-#include "world/common/enemy/complete/FrostClubba.h"
+#include "world/common/enemy/FrostClubba.h"
 
 NpcSettings N(NpcSettings_Clubba) = {
     .height = 70,
@@ -332,71 +332,71 @@ EvtScript N(EVS_NpcInit_Clubba_03_Aux) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Clubba_01)[] = {
+NpcData N(NpcData_Clubba_01)[] = {
     {
         .id = NPC_Clubba_01,
-        .settings = &N(NpcSettings_Clubba),
         .pos = { 268.0f, 0.0f, 70.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Clubba_01),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Clubba),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
     {
         .id = NPC_Clubba_01_Aux,
-        .settings = &N(NpcSettings_Clubba),
         .pos = { 268.0f, 0.0f, 70.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Clubba_01_Aux),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Clubba),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Clubba_02)[] = {
+NpcData N(NpcData_Clubba_02)[] = {
     {
         .id = NPC_Clubba_02,
-        .settings = &N(NpcSettings_Clubba),
         .pos = { 490.0f, 0.0f, 70.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Clubba_02),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Clubba),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
     {
         .id = NPC_Clubba_02_Aux,
-        .settings = &N(NpcSettings_Clubba),
         .pos = { 490.0f, 0.0f, 70.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Clubba_02_Aux),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Clubba),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Clubba_03)[] = {
+NpcData N(NpcData_Clubba_03)[] = {
     {
         .id = NPC_Clubba_03,
-        .settings = &N(NpcSettings_Clubba),
         .pos = { 717.0f, 0.0f, 70.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Clubba_03),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Clubba),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
     {
         .id = NPC_Clubba_03_Aux,
-        .settings = &N(NpcSettings_Clubba),
         .pos = { 717.0f, 0.0f, 70.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Clubba_03_Aux),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Clubba),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
 };

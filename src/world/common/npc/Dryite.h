@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Dryite.h"
 
-#define DRYITE_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define DRYITE_GREEN_ANIMS \
 { \
     ANIM_Dryite_Green_Idle, \

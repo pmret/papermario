@@ -213,14 +213,14 @@ EvtScript N(EVS_NpcInit_Door) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Door) = {
+NpcData N(NpcData_Door) = {
     .id = NPC_Door,
-    .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
     .init = &N(EVS_NpcInit_Door),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Toad_Stationary),
+    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+    .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
 };
 

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(WaitForPlayerToLand)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(WaitForPlayerToLand)) {
     script->varTable[0] = 0;
     if ((gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) && (gPartnerActionStatus.actingPartner == PARTNER_BOMBETTE)) {
         script->varTable[0] = 1;

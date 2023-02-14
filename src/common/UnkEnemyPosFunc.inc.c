@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(UnkEnemyPosFunc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkEnemyPosFunc)) {
     Bytecode* args = script->ptrReadPos;
     Vec3f temp;
     Vec3f homePoses[4];

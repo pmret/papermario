@@ -4,7 +4,7 @@
 // remove this and uncomment other when all data from all maps that use this are migrated to C
 extern s32** N(varStash);
 
-ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StashVars)) {
     //static s32** varTable = NULL;
     s32 i;
 

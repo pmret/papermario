@@ -177,14 +177,14 @@ EvtScript N(EVS_NpcInit_Kalmar) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Kalmar) = {
+NpcData N(NpcData_Kalmar) = {
     .id = NPC_Kalmar,
-    .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Kalmar),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_StarSpirit),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = KALMAR_ANIMS,
 };
 

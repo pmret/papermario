@@ -1,11 +1,11 @@
 #include "jan_05.h"
 
-#include "world/common/enemy/complete/MBush.inc.c"
+#include "world/common/enemy/MBush.inc.c"
 #include "world/common/npc/YoshiKid.inc.c"
-#include "world/common/enemy/complete/HeartPlant.inc.c"
-#include "world/common/enemy/complete/HurtPlant.inc.c"
-#include "world/common/enemy/complete/JungleFuzzy_Wander.inc.c"
-#include "world/common/enemy/complete/SpearGuy_Wander.inc.c"
+#include "world/common/enemy/HeartPlant.inc.c"
+#include "world/common/enemy/HurtPlant.inc.c"
+#include "world/common/enemy/JungleFuzzy_Wander.inc.c"
+#include "world/common/enemy/SpearGuy_Wander.inc.c"
 
 EvtScript N(EVS_NpcIdle_JungleFuzzy) = {
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
@@ -219,33 +219,30 @@ EvtScript N(EVS_NpcInit_YoshiKid) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_YoshiKid) = {
+NpcData N(NpcData_YoshiKid) = {
     .id = NPC_YoshiKid,
-    .settings = &N(NpcSettings_YoshiKid),
     .pos = { -320.0f, 0.0f, 80.0f },
     .yaw = 270,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_YoshiKid),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_YoshiKid),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = YOSHI_KID_PURPLE_ANIMS,
     .tattle = MSG_NpcTattle_PurpleYoshiKid,
 };
 
-s32 N(ExtraAnims_JungleFuzzy)[] = {
+AnimID N(ExtraAnims_JungleFuzzy)[] = {
     ANIM_Fuzzy_Jungle_Idle,
     ANIM_Fuzzy_Jungle_Walk,
     ANIM_Fuzzy_Jungle_Run,
     ANIM_Fuzzy_Jungle_Hurt,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_JungleFuzzy) = {
+NpcData N(NpcData_JungleFuzzy) = {
     .id = NPC_JungleFuzzy,
-    .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .init = &N(EVS_NpcInit_JungleFuzzy),
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -258,13 +255,16 @@ StaticNpc N(NpcData_JungleFuzzy) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_JungleFuzzy),
+    .settings = &N(NpcSettings_JungleFuzzy_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
     .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
     .extraAnimations = N(ExtraAnims_JungleFuzzy),
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_SpearGuy)[] = {
+NpcData N(NpcData_SpearGuy)[] = {
     {
         .id = NPC_SpearGuy,
         .pos = { 0.0f, 0.0f, 0.0f },
@@ -287,29 +287,29 @@ StaticNpc N(NpcData_SpearGuy)[] = {
     SPEAR_GUY_HITBOX(NPC_SpearGuy_Hitbox)
 };
 
-StaticNpc N(NpcData_HeartPlant) = {
+NpcData N(NpcData_HeartPlant) = {
     .id = NPC_HeartPlant,
-    .settings = &N(NpcSettings_HeartPlant),
     .pos = { 430.0f, 0.0f, 205.0f },
     .yaw = 270,
+    .settings = &N(NpcSettings_HeartPlant),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(NpcData_HurtPlant) = {
+NpcData N(NpcData_HurtPlant) = {
     .id = NPC_HurtPlant,
     .pos = { 375.0f, 0.0f, 260.0f },
     .yaw = 270,
     HURT_PLANT_NPC_DATA
 };
 
-StaticNpc N(NpcData_MBush) = {
+NpcData N(NpcData_MBush) = {
     .id = NPC_MBush,
-    .settings = &N(NpcSettings_MBush),
     .pos = { 400.0f, 0.0f, -75.0f },
     .yaw = 90,
+    .settings = &N(NpcSettings_MBush),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = MBUSH_DROPS,
     .animations = MBUSH_ANIMS,

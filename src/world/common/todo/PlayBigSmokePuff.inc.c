@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "evt.h"
 
-ApiStatus N(PlayBigSmokePuff)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(PlayBigSmokePuff)) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);

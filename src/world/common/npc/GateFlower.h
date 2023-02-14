@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/GateFlower.h"
 
-#define GATE_FLOWER_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define GATE_FLOWER_BLUE_ANIMS \
 { \
     .idle   = ANIM_GateFlower_Blue_Idle, \

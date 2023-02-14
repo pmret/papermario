@@ -1,7 +1,6 @@
 #include "mac_05.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 #define NAMESPACE dup_mac_05
 #include "world/common/todo/UnkFloatFunc001.inc.c"

@@ -6,7 +6,7 @@
 #define KAMMY_NPC 0
 #endif
 
-ApiStatus N(GetKammyBroomEmitterPos)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetKammyBroomEmitterPos)) {
     Npc* npc = get_npc_unsafe(KAMMY_NPC);
 
     script->varTable[0] = npc->pos.x + (sin_deg(npc->yaw + gCameras[CAM_DEFAULT].currentYaw + 180.0f) * 40.0f);

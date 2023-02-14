@@ -1,7 +1,7 @@
 #include "tik_18.h"
 
-#include "world/common/enemy/complete/Gloomba_Wander.inc.c"
-#include "world/common/enemy/complete/SpikedGloomba_Wander.inc.c"
+#include "world/common/enemy/Gloomba_Wander.inc.c"
+#include "world/common/enemy/SpikedGloomba_Wander.inc.c"
 
 EvtScript N(EVS_NpcIdle_SpikedGloomba) = {
     // wait for activation from block breaking
@@ -51,13 +51,10 @@ EvtScript N(EVS_NpcInit_SpikedGloomba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Gloomba) = {
+NpcData N(NpcData_Gloomba) = {
     .id = NPC_Gloomba,
-    .settings = &N(NpcSettings_Gloomba_Wander),
     .pos = { -60.0f, -10.0f, -30.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = GLOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -70,17 +67,16 @@ StaticNpc N(NpcData_Gloomba) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_Gloomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = GLOOMBA_DROPS,
     .animations = GLOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_SpikedGloomba) = {
+NpcData N(NpcData_SpikedGloomba) = {
     .id = NPC_SpikedGloomba,
-    .settings = &N(NpcSettings_SpikedGloomba_Wander),
     .pos = { 30.0f, -10.0f, -20.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .init = &N(EVS_NpcInit_SpikedGloomba),
-    .drops = SPIKED_GLOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -93,6 +89,10 @@ StaticNpc N(NpcData_SpikedGloomba) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_SpikedGloomba),
+    .settings = &N(NpcSettings_SpikedGloomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = SPIKED_GLOOMBA_DROPS,
     .animations = SPIKED_GLOOMBA_ANIMS,
 };
 

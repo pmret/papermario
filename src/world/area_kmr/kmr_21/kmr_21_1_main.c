@@ -130,7 +130,7 @@ EvtScript N(EVS_Scene_ShowTitle) = {
 EvtScript N(EVS_Main) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerPos, -1000, 0, 0)
+    EVT_CALL(SetPlayerPos, -1000, 0, 0) //@bug? improper dispose location for player
     EVT_WAIT(1)
     EVT_CALL(GetCurrentPartnerID, LVar0)
     EVT_IF_NE(LVar0, PARTNER_NONE)

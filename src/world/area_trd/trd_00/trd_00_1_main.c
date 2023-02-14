@@ -6,7 +6,6 @@ extern EvtScript N(EVS_MakeEntities);
 extern NpcGroupList N(DefaultNPCs);
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_nok_15_1) = EVT_EXIT_WALK(60, trd_00_ENTRY_0, "nok_15", nok_15_ENTRY_1);
 EvtScript N(EVS_ExitDoors_trd_01_0) = EVT_EXIT_DOUBLE_DOOR(trd_00_ENTRY_1, "trd_01", trd_01_ENTRY_0, COLLIDER_tt2, MODEL_o62, MODEL_doa);

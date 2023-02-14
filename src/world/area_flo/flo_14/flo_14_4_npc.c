@@ -1,6 +1,6 @@
 #include "flo_14.h"
 
-#include "world/common/enemy/complete/Bzzap.inc.c"
+#include "world/common/enemy/Bzzap.inc.c"
 
 #include "world/common/npc/Bubulb.h"
 
@@ -78,25 +78,22 @@ EvtScript N(EVS_NpcInit_BubbleFlower) = {
 };
 
 // uses a dummy bubulb for collision
-StaticNpc N(NpcData_BubbleFlower) = {
+NpcData N(NpcData_BubbleFlower) = {
     .id = NPC_BubbleFlower,
-    .settings = &N(NpcSettings_BubbleFlower),
     .pos = { 617.0f, 0.0f, 108.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000,
     .init = &N(EVS_NpcInit_BubbleFlower),
-    .drops = BUBULB_DROPS,
+    .settings = &N(NpcSettings_BubbleFlower),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000,
+    .drops = NO_DROPS,
     .animations = BUBULB_PINK_ANIMS,
     .tattle = MSG_NpcTattle_BubblePlant,
 };
 
-StaticNpc N(NpcData_Bzzap) = {
+NpcData N(NpcData_Bzzap) = {
     .id = NPC_Bzzap,
-    .settings = &N(NpcSettings_Bzzap),
     .pos = { -175.0f, 55.0f, 15.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = BZZAP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -109,6 +106,9 @@ StaticNpc N(NpcData_Bzzap) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_Bzzap),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = BZZAP_DROPS,
     .animations = BZZAP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };

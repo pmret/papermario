@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(SetAngleClamped)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetAngleClamped)) {
     Bytecode* args = script->ptrReadPos;
     s32 var = *args++;
     f32 x1 = evt_get_float_variable(script, *args++);

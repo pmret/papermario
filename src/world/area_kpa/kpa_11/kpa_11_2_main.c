@@ -1,7 +1,6 @@
 #include "kpa_11.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_kpa_62_1) = EVT_EXIT_WALK(60, kpa_11_ENTRY_0, "kpa_62", kpa_62_ENTRY_1);
 EvtScript N(EVS_ExitWalk_kpa_12_0) = EVT_EXIT_WALK(60, kpa_11_ENTRY_1, "kpa_12", kpa_12_ENTRY_0);

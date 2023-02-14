@@ -2,6 +2,10 @@
 #include "npc.h"
 #include "effects.h"
 
+#ifndef STAR_SPIRIT_DATA_VAR
+    #error STAR_SPIRIT_DATA_VAR is not defined!
+#endif
+
 // seems to be a macro in the original based on usage
 #define EVT_SPIRIT_ADJUST_CAM(pitch) \
     EVT_CALL(GetCamDistance, CAM_DEFAULT, LVar1) \
@@ -12,7 +16,7 @@
         EVT_CALL(SetCamPitch, CAM_DEFAULT, LVar2, pitch) \
     EVT_END_IF
 
-ApiStatus N(StarSpiritEffectFunc1)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StarSpiritEffectFunc1)) {
     StarSpiritData* ptr = script->varTablePtr[0];
 
     sfx_adjust_env_sound_pos(SOUND_A2, SOUND_SPACE_MODE_0, ptr->unk_00, ptr->unk_04, ptr->unk_08);
@@ -24,14 +28,14 @@ ApiStatus N(StarSpiritEffectFunc1)(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus N(StarSpiritEffectFunc2)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StarSpiritEffectFunc2)) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
         StarSpiritData* ptr = heap_malloc(sizeof(*ptr));
 
         script->varTablePtr[0] = ptr;
-        evt_set_variable(NULL, MapVar(1), script->varTable[0]);
+        evt_set_variable(NULL, STAR_SPIRIT_DATA_VAR, script->varTable[0]);
         ptr->unk_38 = evt_get_variable(script, *args++);
         ptr->unk_3C = evt_get_variable(script, *args++);
         ptr->unk_0C = evt_get_float_variable(script, *args++);
@@ -53,7 +57,7 @@ ApiStatus N(StarSpiritEffectFunc2)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(StarSpiritEffectFunc3)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StarSpiritEffectFunc3)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     StarSpiritData* ptr = script->varTablePtr[0];
 
@@ -146,14 +150,14 @@ ApiStatus N(StarSpiritEffectFunc3)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(StarSpiritEffectFunc4)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StarSpiritEffectFunc4)) {
     s32 var = evt_get_variable(script, *script->ptrReadPos);
     StarSpiritData* ptr = script->varTablePtr[0];
 
     return (ptr->unk_4E == var) * ApiStatus_DONE2;
 }
 
-ApiStatus N(StarSpiritEffectFunc5)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StarSpiritEffectFunc5)) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -174,7 +178,7 @@ ApiStatus N(StarSpiritEffectFunc5)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(StarSpiritEffectFunc6)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StarSpiritEffectFunc6)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     StarSpiritData* ptr = script->varTablePtr[0];
 

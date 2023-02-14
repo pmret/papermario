@@ -49,14 +49,14 @@ EvtScript N(EVS_NpcInit_Igor) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Igor) = {
+NpcData N(NpcData_Igor) = {
     .id = NPC_Igor,
-    .settings = &N(NpcSettings_Boo),
     .pos = { 43.0f, -200.0f, -9.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Igor),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
     .tattle = MSG_NpcTattle_OBK_ShopOwner,
 };

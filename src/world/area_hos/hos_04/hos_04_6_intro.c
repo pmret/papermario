@@ -205,14 +205,14 @@ EvtScript N(EVS_NpcInit_Twink) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Twink) = {
+NpcData N(NpcData_Twink) = {
     .id = NPC_Twink,
-    .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Twink),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_StarSpirit),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = TWINK_ANIMS,
 };
 

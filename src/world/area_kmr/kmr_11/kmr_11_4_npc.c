@@ -1,6 +1,6 @@
 #include "kmr_11.h"
 
-#include "world/common/enemy/complete/GoombaBros_Guard.inc.c"
+#include "world/common/enemy/GoombaBros_Guard.inc.c"
 
 EvtScript N(EVS_NpcIdle_GoombaBros_01) = {
     EVT_RETURN
@@ -291,19 +291,11 @@ NpcSettings N(NpcSettings_Kammy) = {
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
 };
 
-StaticNpc N(NpcData_Enemies)[] = {
+NpcData N(NpcData_Enemies)[] = {
     {
         .id = NPC_BlueGoombaBro,
-        .settings = &N(NpcSettings_GoombaBros_Guard),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(EVS_NpcInit_GoombaBros_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -316,6 +308,10 @@ StaticNpc N(NpcData_Enemies)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_GoombaBros_01),
+        .settings = &N(NpcSettings_GoombaBros_Guard),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GoombaBros_Blue_Idle,
             .walk   = ANIM_GoombaBros_Blue_Walk,
@@ -337,16 +333,8 @@ StaticNpc N(NpcData_Enemies)[] = {
     },
     {
         .id = NPC_RedGoombaBro,
-        .settings = &N(NpcSettings_GoombaBros_Guard),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(EVS_NpcInit_GoombaBros_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -359,6 +347,10 @@ StaticNpc N(NpcData_Enemies)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_GoombaBros_02),
+        .settings = &N(NpcSettings_GoombaBros_Guard),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GoombaBros_Red_Idle,
             .walk   = ANIM_GoombaBros_Red_Walk,
@@ -380,16 +372,8 @@ StaticNpc N(NpcData_Enemies)[] = {
     },
     {
         .id = NPC_GoombaKing,
-        .settings = &N(NpcSettings_GoombaBros_Guard),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(EVS_NpcInit_GoombaKing),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -402,6 +386,10 @@ StaticNpc N(NpcData_Enemies)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_GoombaKing),
+        .settings = &N(NpcSettings_GoombaBros_Guard),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GoombaKing_Idle,
             .walk   = ANIM_GoombaKing_Walk,
@@ -423,14 +411,14 @@ StaticNpc N(NpcData_Enemies)[] = {
     },
 };
 
-StaticNpc N(NpcData_Kammy) = {
+NpcData N(NpcData_Kammy) = {
     .id = NPC_Kammy,
-    .settings = &N(NpcSettings_Kammy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 100,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200000,
     .initVarCount = 1,
     .initVar = { .value = 0 },
+    .settings = &N(NpcSettings_Kammy),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200000,
     .animations = {},
 };
 

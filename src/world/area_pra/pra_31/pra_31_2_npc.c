@@ -1,6 +1,6 @@
 #include "pra_31.h"
 
-#include "world/common/enemy/complete/AlbinoDino.inc.c"
+#include "world/common/enemy/AlbinoDino.inc.c"
 
 #include "world/common/complete/KeyItemChoice.inc.c"
 MAP_STATIC_PAD(1,key_item);
@@ -166,37 +166,37 @@ EvtScript N(EVS_NpcInit_AlbinoDino_03) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_AlbinoDinos)[] = {
+NpcData N(NpcData_AlbinoDinos)[] = {
     {
         .id = NPC_AlbinoDino_01,
-        .settings = &N(NpcSettings_AlbinoDino),
         .pos = { 190.0f, -10.0f, 165.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_AlbinoDino_01),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_AlbinoDino),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = ALBINO_DINO_ANIMS,
         .tattle = MSG_NpcTattle_AlbinoDino,
     },
     {
         .id = NPC_AlbinoDino_02,
-        .settings = &N(NpcSettings_AlbinoDino),
         .pos = { 300.0f, -10.0f, 89.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_AlbinoDino_02),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_AlbinoDino),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = ALBINO_DINO_ANIMS,
         .tattle = MSG_NpcTattle_AlbinoDino,
     },
     {
         .id = NPC_AlbinoDino_03,
-        .settings = &N(NpcSettings_AlbinoDino),
         .pos = { 452.0f, -10.0f, 139.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_AlbinoDino_03),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_AlbinoDino),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = ALBINO_DINO_ANIMS,
         .tattle = MSG_NpcTattle_AlbinoDino,
     },

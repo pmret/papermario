@@ -14,9 +14,9 @@
 #include "sprite/npc/WorldSkolar.h"
 
 enum {
-	NPC_Bow                     = 0,
-	NPC_Bootler                 = 1,
-	NPC_Skolar                  = 2,
+    NPC_Bow                     = 0,
+    NPC_Bootler                 = 1,
+    NPC_Skolar                  = 2,
 };
 
 #define NAMESPACE obk_09

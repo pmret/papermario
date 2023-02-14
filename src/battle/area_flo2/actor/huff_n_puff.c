@@ -542,7 +542,7 @@ EvtScript N(idle) = {
     EVT_END
 };
 
-Vec3i N(tuff_puff_pos) = { 0, -1000, 0 };
+Vec3i N(tuff_puff_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_tuff_puff_small) = {
     { .actor = &b_area_flo2_tuff_puff, .home = { .vec = &N(tuff_puff_pos) }, .priority = 0, },

@@ -3,7 +3,6 @@
 #include "world/common/entity/Pipe.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 API_CALLABLE(N(func_802405EC_BB765C)) {
     enable_world_fog();

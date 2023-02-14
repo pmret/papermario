@@ -4,7 +4,6 @@
 #include "../common/LavaGlowLighting.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 // can't use kzn_SmokeTexPanners include in this file because of this function
 API_CALLABLE(func_80240718_C71B98) {

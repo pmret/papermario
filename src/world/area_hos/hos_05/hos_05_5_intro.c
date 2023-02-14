@@ -494,7 +494,7 @@ BSS f32 N(UnusedBowserLeapBaseY);
 
 // probably for unused 'breaking ceiling' part of the scene
 API_CALLABLE(N(UnusedBowserLeapDown)) {
-    Npc* bowserMain = resolve_npc(script, NPC_Bowser_Main);
+    Npc* bowserMain = resolve_npc(script, NPC_Bowser_Body);
     Npc* bowserProp = resolve_npc(script, NPC_Bowser_Prop);
 
     if (isInitialCall) {
@@ -536,7 +536,7 @@ s16 N(BowserHoverOffsets)[] = {
 BSS f32 N(BowserHoverBaseY);
 
 API_CALLABLE(N(AddBowserHoverOffset)) {
-    Npc* bowserMain = resolve_npc(script, NPC_Bowser_Main);
+    Npc* bowserMain = resolve_npc(script, NPC_Bowser_Body);
     Npc* bowserProp = resolve_npc(script, NPC_Bowser_Prop);
 
     if (isInitialCall) {
@@ -716,7 +716,7 @@ API_CALLABLE(N(CamPushIn_BowserInhale)) {
     camera->panActive = TRUE;
     camera->controlSettings.boomLength = N(BoomLengthInhale);
     if ((N(CamMoveInhaleTime) == ((N(CamMoveInhaleTime) / 5) * 5)) && (N(BoomLengthInhale) != 90.0f)) {
-        f32 temp_f4 = resolve_npc(script, NPC_Bowser_Main)->pos.y - 150.0f;
+        f32 temp_f4 = resolve_npc(script, NPC_Bowser_Body)->pos.y - 150.0f;
 
         fx_fire_breath(
             1, script->varTable[0],
@@ -757,7 +757,7 @@ BSS f32 N(FlyToStarRodStartX);
 BSS f32 N(FlyToStarRodStartZ);
 
 API_CALLABLE(N(BowserFlyToStarRod)) {
-    Npc* bowserMain = resolve_npc(script, NPC_Bowser_Main);
+    Npc* bowserMain = resolve_npc(script, NPC_Bowser_Body);
     Npc* bowserProp = resolve_npc(script, NPC_Bowser_Prop);
 
     if (isInitialCall) {
@@ -1867,7 +1867,7 @@ EvtScript N(EVS_Intro_Main) = {
 f32 N(AnimBowser_FlyOff_Time) = 0.0;
 
 API_CALLABLE(N(AnimBowser_FlyOff)) {
-    Npc* bowserMain = resolve_npc(script, NPC_Bowser_Main);
+    Npc* bowserMain = resolve_npc(script, NPC_Bowser_Body);
     Npc* bowserProp = resolve_npc(script, NPC_Bowser_Prop);
 
     if (isInitialCall) {
@@ -1947,9 +1947,9 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_CALL(SetNpcPaletteSwapping, NPC_Klevar, 0, 1, 25, 12, 4, 18, 0, 0)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Kalmar, 0, 1, 25, 12, 4, 18, 0, 0)
     EVT_CALL(SetNpcFlagBits, NPC_StarRod, NPC_FLAG_40000, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_Bowser_Main, ANIM_WorldBowser_ClownCarStill)
+    EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarStill)
     EVT_CALL(SetNpcAnimation, NPC_Bowser_Prop, ANIM_WorldBowser_ClownCarPropeller)
-    EVT_CALL(EnableNpcShadow, NPC_Bowser_Main, FALSE)
+    EVT_CALL(EnableNpcShadow, NPC_Bowser_Body, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_Bowser_Prop, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_StarRod, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_Eldstar, FALSE)
@@ -1963,9 +1963,9 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_THREAD
         EVT_CALL(N(ForceStarRodAlwaysFaceCamera))
     EVT_END_THREAD
-    EVT_CALL(InterpNpcYaw, NPC_Bowser_Main, 90, 0)
+    EVT_CALL(InterpNpcYaw, NPC_Bowser_Body, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_Bowser_Prop, 90, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Bowser_Main, ANIM_WorldBowser_ClownCarTalk)
+    EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarTalk)
     EVT_CALL(SetNpcAnimation, NPC_Bowser_Prop, ANIM_WorldBowser_ClownCarPropeller)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim17)
     EVT_CALL(InterpNpcYaw, NPC_Kammy, 45, 0)
@@ -1978,9 +1978,9 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings6)))
     EVT_CALL(N(AnimateStorybookPages))
     EVT_WAIT(50)
-    EVT_CALL(func_802CFD30, NPC_Bowser_Main, FOLD_TYPE_8, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Bowser_Body, FOLD_TYPE_8, 0, 0, 0, 0)
     EVT_CALL(func_802CFD30, NPC_Bowser_Prop, FOLD_TYPE_8, 0, 0, 0, 0)
-    EVT_CALL(SetNpcPos, NPC_Bowser_Main, -64, 135, 85)
+    EVT_CALL(SetNpcPos, NPC_Bowser_Body, -64, 135, 85)
     EVT_CALL(SetNpcPos, NPC_Bowser_Prop, -64, 135, 85)
     EVT_THREAD
         EVT_SET(LVar0, 0)
@@ -1989,7 +1989,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
             EVT_IF_GT(LVar0, 255)
                 EVT_SET(LVar0, 255)
             EVT_END_IF
-            EVT_CALL(func_802CFD30, NPC_Bowser_Main, FOLD_TYPE_8, 0, 0, 0, LVar0)
+            EVT_CALL(func_802CFD30, NPC_Bowser_Body, FOLD_TYPE_8, 0, 0, 0, LVar0)
             EVT_CALL(func_802CFD30, NPC_Bowser_Prop, FOLD_TYPE_8, 0, 0, 0, LVar0)
             EVT_WAIT(1)
         EVT_END_LOOP
@@ -1999,11 +1999,11 @@ EvtScript N(EVS_Scene_IntroStory) = {
         EVT_SET(LVar0, 0)
         EVT_LOOP(40)
             EVT_ADD(LVar0, 36)
-            EVT_CALL(SetNpcRotation, NPC_Bowser_Main, 0, LVar0, 0)
+            EVT_CALL(SetNpcRotation, NPC_Bowser_Body, 0, LVar0, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(SetNpcRotation, NPC_Bowser_Main, 0, 0, 0)
-        EVT_CALL(InterpNpcYaw, NPC_Bowser_Main, 90, 0)
+        EVT_CALL(SetNpcRotation, NPC_Bowser_Body, 0, 0, 0)
+        EVT_CALL(InterpNpcYaw, NPC_Bowser_Body, 90, 0)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(N(SetWorldColorParams), 117, 28, 42, 0, 0, 0, 15)
@@ -2029,7 +2029,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
         EVT_WAIT(5)
     EVT_END_LOOP
     EVT_WAIT(30)
-    EVT_CALL(func_802CFD30, NPC_Bowser_Main, FOLD_TYPE_8, 0, 0, 0, 255)
+    EVT_CALL(func_802CFD30, NPC_Bowser_Body, FOLD_TYPE_8, 0, 0, 0, 255)
     EVT_CALL(func_802CFD30, NPC_Bowser_Prop, FOLD_TYPE_8, 0, 0, 0, 255)
     EVT_THREAD
         EVT_SET(LVar0, 0)
@@ -2038,7 +2038,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
             EVT_IF_GT(LVar0, 255)
                 EVT_SET(LVar0, 255)
             EVT_END_IF
-            EVT_CALL(func_802CFD30, NPC_Bowser_Main, FOLD_TYPE_8, LVar0, LVar0, LVar0, 255)
+            EVT_CALL(func_802CFD30, NPC_Bowser_Body, FOLD_TYPE_8, LVar0, LVar0, LVar0, 255)
             EVT_CALL(func_802CFD30, NPC_Bowser_Prop, FOLD_TYPE_8, LVar0, LVar0, LVar0, 255)
             EVT_WAIT(1)
         EVT_END_LOOP
@@ -2159,8 +2159,8 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_CALL(N(AdjustCamVfov), 0, 25)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -38, 210, 85)
     EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings8)))
-    EVT_CALL(SetNpcAnimation, NPC_Bowser_Main, ANIM_WorldBowser_ClownCarCloseMouth)
-    EVT_CALL(SetNpcPos, NPC_Bowser_Main, -30, 150, 162)
+    EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarCloseMouth)
+    EVT_CALL(SetNpcPos, NPC_Bowser_Body, -30, 150, 162)
     EVT_CALL(SetNpcPos, NPC_Bowser_Prop, -30, 150, 162)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim11)
     EVT_THREAD
@@ -2193,7 +2193,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_SET(LVar5, 153)
     EVT_CALL(N(CamPushIn_BowserInhale))
     EVT_PLAY_EFFECT(EFFECT_FIRE_BREATH, 0, -30, 210, 142, 0, 180, 0, 5, 2, 30)
-    EVT_CALL(SetNpcAnimation, NPC_Bowser_Main, ANIM_WorldBowser_ClownCarFireBreath)
+    EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarFireBreath)
     EVT_THREAD
         EVT_CALL(N(CamPullBack_BowserExhale))
     EVT_END_THREAD
@@ -2208,7 +2208,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -38, 210, 85)
     EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings9)))
     EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_Bowser_Main, ANIM_WorldBowser_ClownCarOpenMouth)
+    EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarOpenMouth)
     EVT_THREAD
         EVT_CALL(N(BowserFlyToStarRod))
     EVT_END_THREAD
@@ -2264,8 +2264,8 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_CALL(N(AdjustCamVfov), 0, 35)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 30, 232, 0)
     EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings11)))
-    EVT_CALL(SetNpcAnimation, NPC_Bowser_Main, ANIM_WorldBowser_ClownCarBrandish)
-    EVT_CALL(SetNpcPos, NPC_Bowser_Main, 0, 170, 0)
+    EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarBrandish)
+    EVT_CALL(SetNpcPos, NPC_Bowser_Body, 0, 170, 0)
     EVT_CALL(SetNpcPos, NPC_Bowser_Prop, 0, 170, 0)
     EVT_CALL(SetNpcPos, NPC_StarRod, NPC_DISPOSE_LOCATION)
     EVT_THREAD
@@ -2296,7 +2296,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_CALL(N(AdjustCamVfov), 0, 35)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 177, 0)
     EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings12)))
-    EVT_CALL(SetNpcAnimation, NPC_Bowser_Main, ANIM_WorldBowser_ClownCarStarRod)
+    EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarStarRod)
     EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, 20, 265, -21, EVT_FLOAT(1.0), ArrayVar(18))
     EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, 20, 265, -21, EVT_FLOAT(1.0), ArrayVar(19))
     EVT_SET(LVar0, 120)
@@ -2416,10 +2416,10 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 40, 200, -40)
     EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings13)))
     EVT_CALL(RemoveEffect, ArrayVar(16))
-    EVT_CALL(SetNpcAnimation, NPC_Bowser_Main, ANIM_WorldBowser_ClownCarIdle)
+    EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarIdle)
     EVT_THREAD
         EVT_WAIT(45)
-        EVT_CALL(NpcFaceNpc, NPC_Bowser_Main, NPC_Eldstar, 0)
+        EVT_CALL(NpcFaceNpc, NPC_Bowser_Body, NPC_Eldstar, 0)
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim12)
     EVT_EXEC(N(EVS_CaptureSpirits))
@@ -2438,7 +2438,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_CALL(N(AdjustCamVfov), 0, 50)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 200, 0)
     EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(IntroCamSettings15)))
-    EVT_CALL(SetNpcAnimation, NPC_Bowser_Main, ANIM_WorldBowser_ClownCarLaugh)
+    EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarLaugh)
     EVT_THREAD
         EVT_CALL(N(CamPullBack_Final))
     EVT_END_THREAD
@@ -2469,7 +2469,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_CALL(SetNpcJumpscale, NPC_Misstar, EVT_FLOAT(0.0))
     EVT_CALL(SetNpcJumpscale, NPC_Klevar, EVT_FLOAT(0.0))
     EVT_CALL(SetNpcJumpscale, NPC_Kalmar, EVT_FLOAT(0.0))
-    EVT_CALL(SetNpcAnimation, NPC_Bowser_Main, ANIM_WorldBowser_ClownCarStill)
+    EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarStill)
     EVT_THREAD
         EVT_CALL(N(AnimBowser_FlyOff))
     EVT_END_THREAD

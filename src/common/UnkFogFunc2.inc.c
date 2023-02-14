@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(UnkFogFunc2)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFogFunc2)) {
     enable_world_fog();
     set_world_fog_dist(950, 1000);
     set_world_fog_color(16, 16, 16, 255);

@@ -1,4 +1,4 @@
-#include "Toad.h"
+#include "Toad_Collection.h"
 
 NpcSettings N(NpcSettings_Toad_Stationary) = {
     .height = 30,

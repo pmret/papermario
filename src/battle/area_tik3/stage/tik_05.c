@@ -5,7 +5,6 @@
 #define NAMESPACE b_area_tik3_tik_05
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)

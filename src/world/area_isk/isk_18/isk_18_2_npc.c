@@ -1,16 +1,11 @@
 #include "isk_18.h"
 
-#include "world/common/enemy/complete/SpikeTop.inc.c"
+#include "world/common/enemy/SpikeTop.inc.c"
 
-StaticNpc N(NpcData_BuzzyBeetle_01) = {
+NpcData N(NpcData_BuzzyBeetle_01) = {
     .id = NPC_BuzzyBeetle_01,
-    .settings = &N(NpcSettings_BuzzyBeetle_Ceiling),
     .pos = { -372.0f, -700.0f, 439.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_400,
-    .initVarCount = 1,
-    .initVar = { .value = BTL_ISK_PART_1_FORMATION_0E },
-    .drops = ISK_BUZZY_BEETLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -23,18 +18,18 @@ StaticNpc N(NpcData_BuzzyBeetle_01) = {
             .detectSize = { 200 },
         }
     },
+    .initVarCount = 1,
+    .initVar = { .value = BTL_ISK_PART_1_FORMATION_0E },
+    .settings = &N(NpcSettings_BuzzyBeetle_Ceiling),
+    .flags = ENEMY_FLAG_400,
+    .drops = ISK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
 };
 
-StaticNpc N(NpcData_BuzzyBeetle_02) = {
+NpcData N(NpcData_BuzzyBeetle_02) = {
     .id = NPC_BuzzyBeetle_02,
-    .settings = &N(NpcSettings_BuzzyBeetle_Ceiling),
     .pos = { -58.0f, -700.0f, 591.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_400,
-    .initVarCount = 1,
-    .initVar = { .value = BTL_ISK_PART_1_FORMATION_0B },
-    .drops = ISK_BUZZY_BEETLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -47,16 +42,18 @@ StaticNpc N(NpcData_BuzzyBeetle_02) = {
             .detectSize = { 200 },
         }
     },
+    .initVarCount = 1,
+    .initVar = { .value = BTL_ISK_PART_1_FORMATION_0B },
+    .settings = &N(NpcSettings_BuzzyBeetle_Ceiling),
+    .flags = ENEMY_FLAG_400,
+    .drops = ISK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
 };
 
-StaticNpc N(NpcData_BuzzyBeetle_03) = {
+NpcData N(NpcData_BuzzyBeetle_03) = {
     .id = NPC_BuzzyBeetle_03,
-    .settings = &N(NpcSettings_BuzzyBeetle),
     .pos = { 292.0f, -780.0f, 488.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_400,
-    .drops = ISK_BUZZY_BEETLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -69,6 +66,9 @@ StaticNpc N(NpcData_BuzzyBeetle_03) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_BuzzyBeetle),
+    .flags = ENEMY_FLAG_400,
+    .drops = ISK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
 };
 

@@ -38,9 +38,9 @@ extern NpcGroupList N(DefaultNPCs);
 
 API_CALLABLE(N(SetDinoAngle));
 
-ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall);
-ApiStatus SetAnimatedModelRenderMode(Evt* script, s32 isInitialCall);
-ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(InitAnimatedModels);
+API_CALLABLE(SetAnimatedModelRenderMode);
+API_CALLABLE(DeleteAnimatedModel);
 
 extern StaticAnimatorNode* N(AS_Stairs_Skeleton)[];
 extern AnimScript N(AS_Stairs_InitializeBefore);

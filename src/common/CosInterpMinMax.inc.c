@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(CosInterpMinMax)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(CosInterpMinMax)) {
     Bytecode* args = script->ptrReadPos;
     s32 outVarTime = *args++;
     s32 time = evt_get_variable(script, outVarTime);

@@ -2,7 +2,7 @@
 #include "npc.h"
 
 // Similar to CosInterpMinMax
-ApiStatus N(UnkFloatFunc001)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFloatFunc001)) {
     Bytecode* args = script->ptrReadPos;
     s32 a1 = *args++;
     s32 var0 = evt_get_variable(script, a1);

@@ -140,14 +140,14 @@ EvtScript N(EVS_NpcInit_SpikedGoomba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_SpikedGoomba) = {
+NpcData N(NpcData_SpikedGoomba) = {
     .id = NPC_SpikedGoomba,
-    .settings = &N(NpcSettings_SpikedGoomba),
     .pos = { -122.0f, 0.0f, 163.0f },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_SpikedGoomba),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_SpikedGoomba),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_SpikedGoomba_Idle,
         .walk   = ANIM_SpikedGoomba_Walk,

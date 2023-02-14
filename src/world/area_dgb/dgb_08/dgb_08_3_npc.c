@@ -1,7 +1,7 @@
 #include "dgb_08.h"
 
-#include "world/common/enemy/complete/TubbaBlubba_Patrol.inc.c"
-#include "world/common/enemy/complete/TubbaBlubba.inc.c"
+#include "world/common/enemy/TubbaBlubba_Patrol.inc.c"
+#include "world/common/enemy/TubbaBlubba.inc.c"
 
 NpcSettings N(NpcSettings_Yakkey) = {
     .height = 24,
@@ -10,11 +10,11 @@ NpcSettings N(NpcSettings_Yakkey) = {
 };
 
 #define INCLUDE_CLUBBA_WANDER
-#include "world/common/enemy/complete/Clubba_Multi.inc.c"
+#include "world/common/enemy/Clubba_Multi.inc.c"
 
 #define AI_SENTINEL_FIRST_NPC NPC_Sentinel_01
 #define AI_SENTINEL_LAST_NPC  NPC_Tubba
-#include "world/common/enemy/complete/Sentinel.inc.c"
+#include "world/common/enemy/Sentinel.inc.c"
 
 NpcSettings N(NpcSettings_LastClubba) = {
     .height = 24,
@@ -170,14 +170,10 @@ EvtScript N(EVS_NpcInit_Tubba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Tubba) = {
+NpcData N(NpcData_Tubba) = {
     .id = NPC_Tubba,
-    .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
-    .init = &N(EVS_NpcInit_Tubba),
-    .drops = CLUBBA_DROPS,
     .territory = {
         .patrol = {
             .isFlying = FALSE,
@@ -200,18 +196,19 @@ StaticNpc N(NpcData_Tubba) = {
             .detectSize = { 1450, 200 },
         }
     },
+    .init = &N(EVS_NpcInit_Tubba),
+    .settings = &N(NpcSettings_TubbaBlubba),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+    .drops = CLUBBA_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Clubba_01)[] = {
+NpcData N(NpcData_Clubba_01)[] = {
     {
         .id = NPC_Clubba_01,
-        .settings = &N(NpcSettings_Clubba_Wander),
         .pos = { -250.0f, 0.0f, 135.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_400,
-        .drops = CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -224,6 +221,9 @@ StaticNpc N(NpcData_Clubba_01)[] = {
                 .detectSize = { 250 },
             }
         },
+        .settings = &N(NpcSettings_Clubba_Wander),
+        .flags = ENEMY_FLAG_400,
+        .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -231,14 +231,11 @@ StaticNpc N(NpcData_Clubba_01)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_01_Hitbox),
 };
 
-StaticNpc N(NpcData_Clubba_02)[] = {
+NpcData N(NpcData_Clubba_02)[] = {
     {
         .id = NPC_Clubba_02,
-        .settings = &N(NpcSettings_Clubba_Wander),
         .pos = { 220.0f, 0.0f, 155.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400,
-        .drops = CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -251,6 +248,9 @@ StaticNpc N(NpcData_Clubba_02)[] = {
                 .detectSize = { 250 },
             }
         },
+        .settings = &N(NpcSettings_Clubba_Wander),
+        .flags = ENEMY_FLAG_400,
+        .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -258,14 +258,11 @@ StaticNpc N(NpcData_Clubba_02)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_02_Hitbox),
 };
 
-StaticNpc N(NpcData_Clubba_03)[] = {
+NpcData N(NpcData_Clubba_03)[] = {
     {
         .id = NPC_Clubba_03,
-        .settings = &N(NpcSettings_Clubba_Wander),
         .pos = { 825.0f, 100.0f, 200.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400,
-        .drops = CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -278,6 +275,9 @@ StaticNpc N(NpcData_Clubba_03)[] = {
                 .detectSize = { 150 },
             }
         },
+        .settings = &N(NpcSettings_Clubba_Wander),
+        .flags = ENEMY_FLAG_400,
+        .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -285,13 +285,10 @@ StaticNpc N(NpcData_Clubba_03)[] = {
     CLUBBA_MACE_HITBOX(NPC_Clubba_03_Hitbox),
 };
 
-StaticNpc N(NpcData_Sentinel_01) = {
+NpcData N(NpcData_Sentinel_01) = {
     .id = NPC_Sentinel_01,
-    .settings = &N(NpcSettings_Sentinel),
     .pos = { 75.0f, 310.0f, 85.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = SENTINEL_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -304,16 +301,16 @@ StaticNpc N(NpcData_Sentinel_01) = {
             .detectSize = { 250, 55 },
         }
     },
+    .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400,
+    .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
 
-StaticNpc N(NpcData_Sentinel_02) = {
+NpcData N(NpcData_Sentinel_02) = {
     .id = NPC_Sentinel_02,
-    .settings = &N(NpcSettings_Sentinel),
     .pos = { -451.0f, 310.0f, 81.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = SENTINEL_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -326,6 +323,9 @@ StaticNpc N(NpcData_Sentinel_02) = {
             .detectSize = { 250, 145 },
         }
     },
+    .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400,
+    .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
 
@@ -394,14 +394,10 @@ EvtScript N(EVS_NpcInit_LastClubba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_LastClubba) = {
+NpcData N(NpcData_LastClubba) = {
     .id = NPC_Clubba_Last,
-    .settings = &N(NpcSettings_LastClubba),
     .pos = { 426.0f, 0.0f, 38.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
-    .init = &N(EVS_NpcInit_LastClubba),
-    .drops = NPC_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -414,6 +410,10 @@ StaticNpc N(NpcData_LastClubba) = {
             .detectSize = { 0 },
         }
     },
+    .init = &N(EVS_NpcInit_LastClubba),
+    .settings = &N(NpcSettings_LastClubba),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = CLUBBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     .tattle = MSG_NpcTattle_LastClubba,
@@ -431,14 +431,10 @@ EvtScript N(EVS_NpcInit_Clubba_Unused) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Clubba_Unused) = {
+NpcData N(NpcData_Clubba_Unused) = {
     .id = NPC_Clubba_Unused,
-    .settings = &N(NpcSettings_Clubba_Wander),
     .pos = { -250.0f, 0.0f, 135.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_400,
-    .init = &N(EVS_NpcInit_Clubba_Unused),
-    .drops = CLUBBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -451,6 +447,10 @@ StaticNpc N(NpcData_Clubba_Unused) = {
             .detectSize = { 250 },
         }
     },
+    .init = &N(EVS_NpcInit_Clubba_Unused),
+    .settings = &N(NpcSettings_Clubba_Wander),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_400,
+    .drops = CLUBBA_DROPS,
     .animations = CLUBBA_ANIMS,
     .extraAnimations = N(ExtraAnims_Clubba),
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

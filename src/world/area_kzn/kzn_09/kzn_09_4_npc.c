@@ -2,8 +2,8 @@
 
 #include "world/common/npc/Kolorado.inc.c"
 
-#include "world/common/enemy/complete/PutridPiranha.inc.c"
-#include "world/common/enemy/complete/SpikeTop.inc.c"
+#include "world/common/enemy/PutridPiranha.inc.c"
+#include "world/common/enemy/SpikeTop.inc.c"
 
 NpcSettings N(NpcSettings_Zipline) = {
     .height = 24,
@@ -117,7 +117,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     EVT_CALL(SetSelfVar, 0, 1)
     EVT_THREAD
         EVT_LABEL(3)
-        EVT_CALL(ShowSweat, NPC_SELF, 1, -45, 1, 0, 0, 0, 0, 20)
+        EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
         EVT_CALL(GetSelfVar, 0, LVar0)
         EVT_IF_EQ(LVar0, 1)
             EVT_WAIT(25)
@@ -225,38 +225,35 @@ EvtScript N(EVS_Dummy_Init) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_PassiveNPCs)[] = {
+NpcData N(NpcData_PassiveNPCs)[] = {
     {
         .id = NPC_Kolorado,
-        .settings = &N(NpcSettings_Kolorado),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
         .init = &N(EVS_Kolorado_Init),
-        .drops = KOLORADO_DROPS,
+        .settings = &N(NpcSettings_Kolorado),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
     },
     {
         .id = NPC_ZiplineDummy,
-        .settings = &N(NpcSettings_Zipline),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
         .init = &N(EVS_Dummy_Init),
-        .drops = KOLORADO_DROPS,
+        .settings = &N(NpcSettings_Zipline),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
     },
 };
 
-StaticNpc N(NpcData_SpikeTop) = {
+NpcData N(NpcData_SpikeTop) = {
     .id = NPC_SpikeTop,
-    .settings = &N(NpcSettings_SpikeTop),
     .pos = { -100.0f, 350.0f, 50.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = SPIKE_TOP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -269,18 +266,18 @@ StaticNpc N(NpcData_SpikeTop) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_SpikeTop),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = SPIKE_TOP_DROPS,
     .animations = SPIKE_TOP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_PutridPiranha)[] = {
+NpcData N(NpcData_PutridPiranha)[] = {
     {
         .id = NPC_Piranha,
-        .settings = &N(NpcSettings_PutridPiranha),
         .pos = { 200.0f, 350.0f, 100.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400,
-        .drops = PUTRID_PIRANHA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -293,6 +290,9 @@ StaticNpc N(NpcData_PutridPiranha)[] = {
                 .detectSize = { 220, 165 },
             }
         },
+        .settings = &N(NpcSettings_PutridPiranha),
+        .flags = ENEMY_FLAG_400,
+        .drops = PUTRID_PIRANHA_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },

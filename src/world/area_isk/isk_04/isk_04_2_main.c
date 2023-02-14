@@ -28,7 +28,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetSpriteShading, SHADING_ISK_04)
     EVT_SETUP_CAMERA_ALT_NO_LEAD()
     EVT_CALL(GetDemoState, LVar0)
-    EVT_IF_NE(LVar0, 0)
+    EVT_IF_NE(LVar0, DEMO_STATE_NONE)
         EVT_EXEC_WAIT(N(EVS_SetupObstructions))
         EVT_EXEC_WAIT(N(EVS_SetupDemo))
         EVT_RETURN

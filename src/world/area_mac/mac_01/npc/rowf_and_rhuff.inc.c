@@ -695,7 +695,7 @@ EvtScript N(EVS_NpcInit_Rhuff) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Rowf)[] = {
+AnimID N(ExtraAnims_Rowf)[] = {
     ANIM_Rowf_Still,
     ANIM_Rowf_Idle,
     ANIM_Rowf_Walk,
@@ -703,7 +703,7 @@ s32 N(ExtraAnims_Rowf)[] = {
     ANIM_Rowf_Cheer,
     ANIM_Rowf_Think,
     ANIM_Rowf_WaveOff,
-    -1
+    ANIM_LIST_END
 };
 
 NpcSettings N(NpcSettings_Rowf) = {
@@ -718,19 +718,15 @@ NpcSettings N(NpcSettings_Rhuff) = {
     .flags = ENEMY_FLAG_PASSIVE,
 };
 
-StaticNpc N(NpcData_RowfAndRhuff)[] = {
+NpcData N(NpcData_RowfAndRhuff)[] = {
     {
         .id = NPC_Rowf,
-        .settings = &N(NpcSettings_Rowf),
         .pos = { -213.0f, -54.0f, 256.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rowf),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Rowf),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Rowf_Idle,
         },
@@ -739,16 +735,12 @@ StaticNpc N(NpcData_RowfAndRhuff)[] = {
     },
     {
         .id = NPC_Rhuff,
-        .settings = &N(NpcSettings_Rhuff),
         .pos = { -250.0f, 0.0f, 263.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rhuff),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Rhuff),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Rowf_Idle,
         },

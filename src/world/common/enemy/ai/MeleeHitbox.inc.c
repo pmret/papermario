@@ -101,7 +101,7 @@ s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
     return ret;
 }
 
-ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MeleeHitbox_Main)) {
     #ifdef _DEAD_H_
     DeadEnemy* hitboxEnemy = (DeadEnemy*)script->owner1.enemy;
     #else
@@ -170,9 +170,9 @@ ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
             }
             if (baseEnemy->AI_VAR_ATTACK_STATE == MELEE_HITBOX_STATE_POST) {
                 hitboxEnemy->flags |= ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000;
-                hitboxNpc->pos.x = 0.0f;
-                hitboxNpc->pos.y = -1000.0f;
-                hitboxNpc->pos.z = 0.0f;
+                hitboxNpc->pos.x = NPC_DISPOSE_POS_X;
+                hitboxNpc->pos.y = NPC_DISPOSE_POS_Y;
+                hitboxNpc->pos.z = NPC_DISPOSE_POS_Z;
                 hitboxEnemy->unk_07 = 1;
                 script->functionTemp[0] = 0;
             }

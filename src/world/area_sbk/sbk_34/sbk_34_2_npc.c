@@ -77,19 +77,15 @@ EvtScript N(EVS_NpcInit_Sack) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Nomadimouse)[] = {
+NpcData N(NpcData_Nomadimouse)[] = {
     {
         .id = NPC_Nomadimouse,
-        .settings = &N(NpcSettings_Nomadimouse),
         .pos = { 114.0f, 0.0f, -50.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Nomadimouse),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Nomadimouse),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Nomadimouse_Idle,
             .walk   = ANIM_Nomadimouse_Idle,
@@ -112,16 +108,12 @@ StaticNpc N(NpcData_Nomadimouse)[] = {
     },
     {
         .id = NPC_Sack,
-        .settings = &N(NpcSettings_Nomadimouse),
         .pos = { 134.0f, 0.0f, -50.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Sack),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Nomadimouse),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Nomadimouse_Idle,
             .walk   = ANIM_Nomadimouse_Idle,

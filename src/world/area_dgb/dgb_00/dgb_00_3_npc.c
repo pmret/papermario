@@ -9,13 +9,8 @@ API_CALLABLE(N(PlaySentinelSounds)) {
 }
 
 #include "world/common/npc/Boo.inc.c"
-#include "world/common/enemy/complete/Sentinel.h"
-
-NpcSettings N(NpcSettings_Sentinel) = {
-    .height = 24,
-    .radius = 24,
-    .level = 99,
-};
+#include "world/common/npc/Dummy.inc.c"
+#include "world/common/enemy/Sentinel.h"
 
 EvtScript N(EVS_SetDoorRots) = {
     EVT_SET(LVar3, 0)
@@ -440,70 +435,70 @@ EvtScript N(EVS_NpcInit_Boo_06) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Boo_01) = {
+NpcData N(NpcData_Boo_01) = {
     .id = NPC_Boo_01,
-    .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Boo_01),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
     .tattle = MSG_NpcTattle_BraveBoo,
 };
 
-StaticNpc N(NpcData_Boo_02) = {
+NpcData N(NpcData_Boo_02) = {
     .id = NPC_Boo_02,
-    .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_02),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
+    .drops = NO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_Boo_03) = {
+NpcData N(NpcData_Boo_03) = {
     .id = NPC_Boo_03,
-    .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_03),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
+    .drops = NO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_Boo_04) = {
+NpcData N(NpcData_Boo_04) = {
     .id = NPC_Boo_04,
-    .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_04),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
+    .drops = NO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_Boo_05) = {
+NpcData N(NpcData_Boo_05) = {
     .id = NPC_Boo_05,
-    .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_05),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
+    .drops = NO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_Boo_06) = {
+NpcData N(NpcData_Boo_06) = {
     .id = NPC_Boo_06,
-    .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
     .init = &N(EVS_NpcInit_Boo_06),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400,
+    .drops = NO_DROPS,
     .animations = GUSTY_BOO_ANIMS,
 };
 
@@ -653,14 +648,14 @@ EvtScript N(EVS_NpcInit_Sentinel) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Sentinel) = {
+NpcData N(NpcData_Sentinel) = {
     .id = NPC_Sentinel,
-    .settings = &N(NpcSettings_Sentinel),
     .pos = { 0.0f, 0.0f, -1000.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Sentinel),
-    .drops = SENTINEL_DROPS,
+    .settings = &N(NpcSettings_Dummy),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
 

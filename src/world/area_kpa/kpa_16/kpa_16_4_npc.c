@@ -1,7 +1,7 @@
 #include "kpa_16.h"
 
-#include "world/common/enemy/complete/Koopatrol.h"
-#include "world/common/enemy/complete/Magikoopa.h"
+#include "world/common/enemy/Koopatrol.h"
+#include "world/common/enemy/Magikoopa.h"
 
 API_CALLABLE(N(SetScreenBlackFadeAmount)) {
     Bytecode* args = script->ptrReadPos;
@@ -286,42 +286,42 @@ EvtScript N(EVS_NpcInit_Guards) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Guards)[] = {
+NpcData N(NpcData_Guards)[] = {
     {
         .id = NPC_Koopatrol_01,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 585.0f, 230.0f, -145.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Guards),
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = KOOPATROL_DROPS,
         .animations = KOOPATROL_ANIMS,
     },
     {
         .id = NPC_Koopatrol_02,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 525.0f, 230.0f, -165.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_Dummy),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = KOOPATROL_DROPS,
         .animations = KOOPATROL_ANIMS,
     },
     {
         .id = NPC_Koopatrol_03,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 550.0f, 230.0f, -120.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_Dummy),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = KOOPATROL_DROPS,
         .animations = KOOPATROL_ANIMS,
     },
     {
         .id = NPC_Magikoopa,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 505.0f, 230.0f, -120.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_Dummy),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .drops = MAGIKOOPA_DROPS,
+        .drops = MAGINO_DROPS,
         .animations = MAGIKOOPA_ANIMS,
     },
 };

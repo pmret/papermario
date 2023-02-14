@@ -2,11 +2,11 @@
 
 #define AI_SENTINEL_FIRST_NPC NPC_Sentinel_01
 #define AI_SENTINEL_LAST_NPC  NPC_Tubba
-#include "world/common/enemy/complete/Sentinel.inc.c"
+#include "world/common/enemy/Sentinel.inc.c"
 
-#include "world/common/enemy/complete/Clubba.h"
-#include "world/common/enemy/complete/TubbaBlubba_Patrol.inc.c"
-#include "world/common/enemy/complete/TubbaBlubba.inc.c"
+#include "world/common/enemy/Clubba.h"
+#include "world/common/enemy/TubbaBlubba_Patrol.inc.c"
+#include "world/common/enemy/TubbaBlubba.inc.c"
 #include "world/common/npc/Yakkey.inc.c"
 
 #include "world/common/todo/UnkFunc1.inc.c"
@@ -243,14 +243,10 @@ EvtScript N(EVS_NpcInit_Sentinel_04) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Sentinel_01) = {
+NpcData N(NpcData_Sentinel_01) = {
     .id = NPC_Sentinel_01,
-    .settings = &N(NpcSettings_Sentinel),
     .pos = { -180.0f, 100.0f, 230.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_Sentinel_01),
-    .drops = SENTINEL_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -263,17 +259,17 @@ StaticNpc N(NpcData_Sentinel_01) = {
             .detectSize = { 450, 1000 },
         }
     },
+    .init = &N(EVS_NpcInit_Sentinel_01),
+    .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
 
-StaticNpc N(NpcData_Sentinel_02) = {
+NpcData N(NpcData_Sentinel_02) = {
     .id = NPC_Sentinel_02,
-    .settings = &N(NpcSettings_Sentinel),
     .pos = { 180.0f, 100.0f, 230.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_Sentinel_02),
-    .drops = SENTINEL_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -286,17 +282,17 @@ StaticNpc N(NpcData_Sentinel_02) = {
             .detectSize = { 450, 1000 },
         }
     },
+    .init = &N(EVS_NpcInit_Sentinel_02),
+    .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
 
-StaticNpc N(NpcData_Sentinel_03) = {
+NpcData N(NpcData_Sentinel_03) = {
     .id = NPC_Sentinel_03,
-    .settings = &N(NpcSettings_Sentinel),
     .pos = { -180.0f, 100.0f, -230.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_Sentinel_03),
-    .drops = SENTINEL_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -309,17 +305,17 @@ StaticNpc N(NpcData_Sentinel_03) = {
             .detectSize = { 450, 1000 },
         }
     },
+    .init = &N(EVS_NpcInit_Sentinel_03),
+    .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
 
-StaticNpc N(NpcData_Sentinel_04) = {
+NpcData N(NpcData_Sentinel_04) = {
     .id = NPC_Sentinel_04,
-    .settings = &N(NpcSettings_Sentinel),
     .pos = { 180.0f, 100.0f, -230.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_Sentinel_04),
-    .drops = SENTINEL_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -332,10 +328,14 @@ StaticNpc N(NpcData_Sentinel_04) = {
             .detectSize = { 450, 1000 },
         }
     },
+    .init = &N(EVS_NpcInit_Sentinel_04),
+    .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
 
-s32 N(ExtraAnims_Tubba)[] = {
+AnimID N(ExtraAnims_Tubba)[] = {
     ANIM_WorldTubba_Anim06,
     ANIM_WorldTubba_Anim10,
     ANIM_WorldTubba_Anim09,
@@ -347,29 +347,25 @@ s32 N(ExtraAnims_Tubba)[] = {
     ANIM_WorldTubba_Anim1B,
     ANIM_WorldTubba_Anim1C,
     ANIM_WorldTubba_Anim1D,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Tubba_Floor3) = {
+NpcData N(NpcData_Tubba_Floor3) = {
     .id = NPC_Tubba,
-    .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_Tubba_Floor3),
-    .drops = TUBBA_DROPS,
+    .settings = &N(NpcSettings_TubbaBlubba),
+    .flags = ENEMY_FLAG_200000,
+    .drops = NO_DROPS,
     .animations = TUBBA_ANIMS,
     .extraAnimations = N(ExtraAnims_Tubba),
 };
 
-StaticNpc N(NpcData_Tubba_Floor2) = {
+NpcData N(NpcData_Tubba_Floor2) = {
     .id = NPC_Tubba,
-    .settings = &N(NpcSettings_TubbaBlubba_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_Tubba_Floor2),
-    .drops = CLUBBA_DROPS,
     .territory = {
         .patrol = {
             .isFlying = FALSE,
@@ -384,19 +380,19 @@ StaticNpc N(NpcData_Tubba_Floor2) = {
             .detectSize = { 1000, 250 },
         }
     },
+    .init = &N(EVS_NpcInit_Tubba_Floor2),
+    .settings = &N(NpcSettings_TubbaBlubba_Patrol),
+    .flags = ENEMY_FLAG_200000,
+    .drops = CLUBBA_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
     .extraAnimations = N(ExtraAnims_Tubba),
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Tubba_Floor1) = {
+NpcData N(NpcData_Tubba_Floor1) = {
     .id = NPC_Tubba,
-    .settings = &N(NpcSettings_TubbaBlubba_Patrol),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_Tubba_Floor1),
-    .drops = CLUBBA_DROPS,
     .territory = {
         .patrol = {
             .isFlying = FALSE,
@@ -417,6 +413,10 @@ StaticNpc N(NpcData_Tubba_Floor1) = {
             .detectSize = { 1000, 250 },
         }
     },
+    .init = &N(EVS_NpcInit_Tubba_Floor1),
+    .settings = &N(NpcSettings_TubbaBlubba_Patrol),
+    .flags = ENEMY_FLAG_200000,
+    .drops = CLUBBA_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
     .extraAnimations = N(ExtraAnims_Tubba),
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

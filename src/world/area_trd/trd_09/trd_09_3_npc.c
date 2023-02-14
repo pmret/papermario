@@ -1,7 +1,7 @@
 #include "trd_09.h"
 #include "effects.h"
 
-#include "world/common/enemy/complete/BulletBill.h"
+#include "world/common/enemy/BulletBill.h"
 
 API_CALLABLE(N(func_80240000_9BD660)) {
     Bytecode* args = script->ptrReadPos;
@@ -542,15 +542,11 @@ EvtScript N(EVS_NpcInit_BillBlaster) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_BillBlasters)[] = {
+NpcData N(NpcData_BillBlasters)[] = {
     {
         .id = NPC_BillBlaster_01,
-        .settings = &N(NpcSettings_BillBlaster),
         .pos = { 1260.0f, 0.0f, -40.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
-        .init = &N(EVS_NpcInit_BillBlaster),
-        .drops = BILL_BLASTER_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -563,15 +559,16 @@ StaticNpc N(NpcData_BillBlasters)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_BillBlaster),
+        .settings = &N(NpcSettings_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
+        .drops = NO_DROPS,
         .animations = BILL_BLASTER_ANIMS,
     },
     {
         .id = NPC_BillBlaster_03,
-        .settings = &N(NpcSettings_BillBlaster),
         .pos = { 1275.0f, 0.0f, 5.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
-        .drops = BILL_BLASTER_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -584,15 +581,15 @@ StaticNpc N(NpcData_BillBlasters)[] = {
                 .detectSize = { 0 },
             }
         },
+        .settings = &N(NpcSettings_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
+        .drops = BILL_BLASTER_DROPS,
         .animations = BILL_BLASTER_ANIMS,
     },
     {
         .id = NPC_BillBlaster_02,
-        .settings = &N(NpcSettings_BillBlaster),
         .pos = { 1290.0f, 0.0f, 50.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
-        .drops = BILL_BLASTER_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -605,57 +602,60 @@ StaticNpc N(NpcData_BillBlasters)[] = {
                 .detectSize = { 0 },
             }
         },
+        .settings = &N(NpcSettings_BillBlaster),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
+        .drops = NO_DROPS,
         .animations = BILL_BLASTER_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_BulletBill_01) = BULLET_BILL_NPC(NPC_BulletBill_01);
-StaticNpc N(NpcData_BulletBill_02) = BULLET_BILL_NPC(NPC_BulletBill_02);
-StaticNpc N(NpcData_BulletBill_03) = BULLET_BILL_NPC(NPC_BulletBill_03);
-StaticNpc N(NpcData_BulletBill_04) = BULLET_BILL_NPC(NPC_BulletBill_04);
-StaticNpc N(NpcData_BulletBill_05) = BULLET_BILL_NPC(NPC_BulletBill_05);
-StaticNpc N(NpcData_BulletBill_06) = BULLET_BILL_NPC(NPC_BulletBill_06);
-StaticNpc N(NpcData_BulletBill_07) = BULLET_BILL_NPC(NPC_BulletBill_07);
-StaticNpc N(NpcData_BulletBill_08) = BULLET_BILL_NPC(NPC_BulletBill_08);
-StaticNpc N(NpcData_BulletBill_09) = BULLET_BILL_NPC(NPC_BulletBill_09);
-StaticNpc N(NpcData_BulletBill_10) = BULLET_BILL_NPC(NPC_BulletBill_10);
+NpcData N(NpcData_BulletBill_01) = BULLET_BILL_NPC(NPC_BulletBill_01);
+NpcData N(NpcData_BulletBill_02) = BULLET_BILL_NPC(NPC_BulletBill_02);
+NpcData N(NpcData_BulletBill_03) = BULLET_BILL_NPC(NPC_BulletBill_03);
+NpcData N(NpcData_BulletBill_04) = BULLET_BILL_NPC(NPC_BulletBill_04);
+NpcData N(NpcData_BulletBill_05) = BULLET_BILL_NPC(NPC_BulletBill_05);
+NpcData N(NpcData_BulletBill_06) = BULLET_BILL_NPC(NPC_BulletBill_06);
+NpcData N(NpcData_BulletBill_07) = BULLET_BILL_NPC(NPC_BulletBill_07);
+NpcData N(NpcData_BulletBill_08) = BULLET_BILL_NPC(NPC_BulletBill_08);
+NpcData N(NpcData_BulletBill_09) = BULLET_BILL_NPC(NPC_BulletBill_09);
+NpcData N(NpcData_BulletBill_10) = BULLET_BILL_NPC(NPC_BulletBill_10);
 
-StaticNpc N(NpcData_KoopaBros)[] = {
+NpcData N(NpcData_KoopaBros)[] = {
     {
         .id = NPC_KoopaBros_Red,
-        .settings = &N(NpcSettings_KoopaBros_Red),
         .pos = { 1590.0f, 60.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE,
         .initVarCount = 1,
         .initVar = { .value = 0 },
+        .settings = &N(NpcSettings_KoopaBros_Red),
+        .flags = ENEMY_FLAG_PASSIVE,
     },
     {
         .id = NPC_KoopaBros_Green,
-        .settings = &N(NpcSettings_KoopaBros_Green),
         .pos = { 1590.0f, 60.0f, -10.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE,
         .initVarCount = 1,
         .initVar = { .value = 0 },
+        .settings = &N(NpcSettings_KoopaBros_Green),
+        .flags = ENEMY_FLAG_PASSIVE,
     },
     {
         .id = NPC_KoopaBros_Yellow,
-        .settings = &N(NpcSettings_KoopaBros_Yellow),
         .pos = { 1605.0f, 60.0f, 5.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE,
         .initVarCount = 1,
         .initVar = { .value = 0 },
+        .settings = &N(NpcSettings_KoopaBros_Yellow),
+        .flags = ENEMY_FLAG_PASSIVE,
     },
     {
         .id = NPC_KoopaBros_Black,
-        .settings = &N(NpcSettings_KoopaBros_Black),
         .pos = { 1620.0f, 60.0f, 20.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE,
         .initVarCount = 1,
         .initVar = { .value = 0 },
+        .settings = &N(NpcSettings_KoopaBros_Black),
+        .flags = ENEMY_FLAG_PASSIVE,
     },
 };
 
@@ -690,24 +690,10 @@ EvtScript N(EVS_NpcInit_BulletBill_Demo) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_BulletBill_Demo1) = {
+NpcData N(NpcData_BulletBill_Demo1) = {
     .id = NPC_BulletBill_Demo1,
-    .settings = &N(NpcSettings_BulletBill),
     .pos = { -100.0f, 11.0f, 50.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
-    .init = &N(EVS_NpcInit_BulletBill_Demo),
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -719,6 +705,20 @@ StaticNpc N(NpcData_BulletBill_Demo1) = {
             .detectPos  = { 0, 0, 0 },
             .detectSize = { 0 },
         }
+    },
+    .init = &N(EVS_NpcInit_BulletBill_Demo),
+    .initVarCount = 1,
+    .initVar = { .value = 0 },
+    .settings = &N(NpcSettings_BulletBill),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .drops = {
+        .dropFlags = NPC_DROP_FLAG_80,
+        .itemDropChance = 3,
+        .itemDrops = {
+            { ITEM_MUSHROOM, 10, 0 },
+        },
+        .heartDrops  = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
     },
     .animations = {
         .idle   = ANIM_BulletBill_Anim01,
@@ -740,24 +740,10 @@ StaticNpc N(NpcData_BulletBill_Demo1) = {
     },
 };
 
-StaticNpc N(NpcData_BulletBill_Demo2) = {
+NpcData N(NpcData_BulletBill_Demo2) = {
     .id = NPC_BulletBill_Demo2,
-    .settings = &N(NpcSettings_BulletBill),
     .pos = { -150.0f, 11.0f, 5.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
-    .init = &N(EVS_NpcInit_BulletBill_Demo),
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -769,6 +755,20 @@ StaticNpc N(NpcData_BulletBill_Demo2) = {
             .detectPos  = { 0, 0, 0 },
             .detectSize = { 0 },
         }
+    },
+    .init = &N(EVS_NpcInit_BulletBill_Demo),
+    .initVarCount = 1,
+    .initVar = { .value = 0 },
+    .settings = &N(NpcSettings_BulletBill),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .drops = {
+        .dropFlags = NPC_DROP_FLAG_80,
+        .itemDropChance = 3,
+        .itemDrops = {
+            { ITEM_MUSHROOM, 10, 0 },
+        },
+        .heartDrops  = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
     },
     .animations = {
         .idle   = ANIM_BulletBill_Anim01,
@@ -790,24 +790,10 @@ StaticNpc N(NpcData_BulletBill_Demo2) = {
     },
 };
 
-StaticNpc N(NpcData_BulletBill_Demo3) = {
+NpcData N(NpcData_BulletBill_Demo3) = {
     .id = NPC_BulletBill_Demo3,
-    .settings = &N(NpcSettings_BulletBill),
     .pos = { 120.0f, 11.0f, 50.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
-    .init = &N(EVS_NpcInit_BulletBill_Demo),
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -819,6 +805,20 @@ StaticNpc N(NpcData_BulletBill_Demo3) = {
             .detectPos  = { 0, 0, 0 },
             .detectSize = { 0 },
         }
+    },
+    .init = &N(EVS_NpcInit_BulletBill_Demo),
+    .initVarCount = 1,
+    .initVar = { .value = 0 },
+    .settings = &N(NpcSettings_BulletBill),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .drops = {
+        .dropFlags = NPC_DROP_FLAG_80,
+        .itemDropChance = 3,
+        .itemDrops = {
+            { ITEM_MUSHROOM, 10, 0 },
+        },
+        .heartDrops  = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
     },
     .animations = {
         .idle   = ANIM_BulletBill_Anim01,
@@ -840,24 +840,10 @@ StaticNpc N(NpcData_BulletBill_Demo3) = {
     },
 };
 
-StaticNpc N(NpcData_BulletBill_Demo4) = {
+NpcData N(NpcData_BulletBill_Demo4) = {
     .id = NPC_BulletBill_Demo4,
-    .settings = &N(NpcSettings_BulletBill),
     .pos = { 330.0f, 11.0f, 5.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
-    .init = &N(EVS_NpcInit_BulletBill_Demo),
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -869,6 +855,20 @@ StaticNpc N(NpcData_BulletBill_Demo4) = {
             .detectPos  = { 0, 0, 0 },
             .detectSize = { 0 },
         }
+    },
+    .init = &N(EVS_NpcInit_BulletBill_Demo),
+    .initVarCount = 1,
+    .initVar = { .value = 0 },
+    .settings = &N(NpcSettings_BulletBill),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .drops = {
+        .dropFlags = NPC_DROP_FLAG_80,
+        .itemDropChance = 3,
+        .itemDrops = {
+            { ITEM_MUSHROOM, 10, 0 },
+        },
+        .heartDrops  = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
     },
     .animations = {
         .idle   = ANIM_BulletBill_Anim01,
@@ -890,24 +890,10 @@ StaticNpc N(NpcData_BulletBill_Demo4) = {
     },
 };
 
-StaticNpc N(NpcData_BulletBill_Demo5) = {
+NpcData N(NpcData_BulletBill_Demo5) = {
     .id = NPC_BulletBill_Demo5,
-    .settings = &N(NpcSettings_BulletBill),
     .pos = { 380.0f, 11.0f, -40.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
-    .init = &N(EVS_NpcInit_BulletBill_Demo),
-    .initVarCount = 1,
-    .initVar = { .value = 0 },
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .itemDropChance = 3,
-        .itemDrops = {
-            { ITEM_MUSHROOM, 10, 0 },
-        },
-        .heartDrops  = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    },
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -919,6 +905,20 @@ StaticNpc N(NpcData_BulletBill_Demo5) = {
             .detectPos  = { 0, 0, 0 },
             .detectSize = { 0 },
         }
+    },
+    .init = &N(EVS_NpcInit_BulletBill_Demo),
+    .initVarCount = 1,
+    .initVar = { .value = 0 },
+    .settings = &N(NpcSettings_BulletBill),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .drops = {
+        .dropFlags = NPC_DROP_FLAG_80,
+        .itemDropChance = 3,
+        .itemDrops = {
+            { ITEM_MUSHROOM, 10, 0 },
+        },
+        .heartDrops  = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
     },
     .animations = {
         .idle   = ANIM_BulletBill_Anim01,

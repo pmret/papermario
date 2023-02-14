@@ -13,7 +13,7 @@
 #include "sprite/npc/Boo.h"
 
 enum {
-	NPC_Igor	= 0,
+    NPC_Igor    = 0,
 };
 
 #define NAMESPACE obk_03

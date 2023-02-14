@@ -1,14 +1,11 @@
 #include "tik_07.h"
 
-#include "world/common/enemy/complete/Paragloomba_Wander.inc.c"
+#include "world/common/enemy/Paragloomba_Wander.inc.c"
 
-StaticNpc N(NpcData_Paragloomba_01) = {
+NpcData N(NpcData_Paragloomba_01) = {
     .id = NPC_Paragoomba_01,
-    .settings = &N(NpcSettings_Paragloomba_Wander),
     .pos = { 230.0f, 50.0f, 50.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = PARAGLOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,16 +18,16 @@ StaticNpc N(NpcData_Paragloomba_01) = {
             .detectSize = { 150 },
         }
     },
+    .settings = &N(NpcSettings_Paragloomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = PARAGLOOMBA_DROPS,
     .animations = PARAGLOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_Paragloomba_02) = {
+NpcData N(NpcData_Paragloomba_02) = {
     .id = NPC_Paragoomba_02,
-    .settings = &N(NpcSettings_Paragloomba_Wander),
     .pos = { 535.0f, 50.0f, 20.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = PARAGLOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -43,6 +40,9 @@ StaticNpc N(NpcData_Paragloomba_02) = {
             .detectSize = { 150 },
         }
     },
+    .settings = &N(NpcSettings_Paragloomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = PARAGLOOMBA_DROPS,
     .animations = PARAGLOOMBA_ANIMS,
 };
 

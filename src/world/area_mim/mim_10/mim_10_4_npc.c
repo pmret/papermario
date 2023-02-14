@@ -246,18 +246,14 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Bootler) = {
+NpcData N(NpcData_Bootler) = {
     .id = NPC_Bootler,
-    .settings = &N(NpcSettings_Bootler),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Bootler),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Bootler),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Bootler_Idle,
         .walk   = ANIM_Bootler_Walk,
@@ -278,18 +274,14 @@ StaticNpc N(NpcData_Bootler) = {
     },
 };
 
-StaticNpc N(NpcData_JrTroopa) = {
+NpcData N(NpcData_JrTroopa) = {
     .id = NPC_JrTroopa,
-    .settings = &N(NpcSettings_JrTroopa),
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_JrTroopa),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_JrTroopa),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_JrTroopa_Idle,
         .walk   = ANIM_JrTroopa_Walk,

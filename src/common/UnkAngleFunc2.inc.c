@@ -2,7 +2,7 @@
 
 // TODO: this include should have some scripts; see area_kmr_part_1/stage/kmr_03.c
 
-ApiStatus N(UnkAngleFunc2)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkAngleFunc2)) {
     Bytecode* args = script->ptrReadPos;
     f32 var0 =  evt_get_variable(script, *args++) / 10.0;
     s32 a3 = *args++;

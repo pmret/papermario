@@ -1,7 +1,6 @@
 #include "kzn_02.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_UpdateTexPanner3) = {
     EVT_SET_GROUP(EVT_GROUP_00)

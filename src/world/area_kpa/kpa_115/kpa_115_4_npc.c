@@ -1,15 +1,12 @@
 #include "kpa_115.h"
 
-#include "world/common/enemy/complete/HammerBros.inc.c"
+#include "world/common/enemy/HammerBros_Wander.inc.c"
 
-StaticNpc N(NpcData_HammerBros)[] = {
+NpcData N(NpcData_HammerBros)[] = {
     {
         .id = NPC_HammerBros,
-        .settings = &N(NpcSettings_HammerBros),
         .pos = { 100.0f, 0.0f, 120.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = HAMMER_BROS_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -22,6 +19,9 @@ StaticNpc N(NpcData_HammerBros)[] = {
                 .detectSize = { 200 },
             }
         },
+        .settings = &N(NpcSettings_HammerBros_Wander),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = HAMMER_BROS_DROPS,
         .animations = HAMMER_BROS_ANIMS,
     },
     HAMMER_BROS_HAMMER_HITBOX(NPC_HammerBros + 1),

@@ -18,14 +18,14 @@ EvtScript N(EVS_NpcInit_TrainToad) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TrainToad) = {
+NpcData N(NpcData_TrainToad) = {
     .id = NPC_TrainToad,
-    .settings = &N(NpcSettings_TrainToad),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_TrainToad),
-    .drops = TRAIN_CONDUCTOR_DROPS,
+    .settings = &N(NpcSettings_TrainToad),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = TRAIN_CONDUCTOR_ANIMS,
 };
 

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(SetEntityPositionF)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetEntityPositionF)) {
     Bytecode* args = script->ptrReadPos;
     s32 entityIndex = evt_get_variable(script, *args++);
     f32 x = evt_get_variable(script, *args++);

@@ -18,7 +18,7 @@ ApiStatus N(CreateWhaleGeyser)(Evt* script, s32 isInitialStatus) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SetWhaleGeyserPos)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetWhaleGeyserPos)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
     f32 x = evt_get_float_variable(script, *args++);

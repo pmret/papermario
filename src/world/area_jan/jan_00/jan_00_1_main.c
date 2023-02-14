@@ -11,7 +11,6 @@ extern EvtScript N(EVS_802467AC);
 extern EvtScript N(EVS_80247A2C);
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 API_CALLABLE(func_8024030C_B2084C) {
     fx_sun_undeclared(FX_SUN_FROM_LEFT, 0, 0, 0, 0, 0);

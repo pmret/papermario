@@ -1,7 +1,7 @@
 #include "pra_37.h"
 
 #define INCLUDE_FROST_CLUBBA_WANDER
-#include "world/common/enemy/complete/FrostClubba_Multi.inc.c"
+#include "world/common/enemy/FrostClubba_Multi.inc.c"
 
 EvtScript N(EVS_NpcInit_FrostClubba) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_REFLECT_FLOOR, TRUE)
@@ -9,15 +9,11 @@ EvtScript N(EVS_NpcInit_FrostClubba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_FrostClubba)[] = {
+NpcData N(NpcData_FrostClubba)[] = {
     {
         .id = NPC_FrostClubba,
-        .settings = &N(NpcSettings_FrostClubba_Wander),
         .pos = { 175.0f, 0.0f, 75.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_FrostClubba),
-        .drops = FROST_CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -30,6 +26,10 @@ StaticNpc N(NpcData_FrostClubba)[] = {
                 .detectSize = { 200 },
             }
         },
+        .init = &N(EVS_NpcInit_FrostClubba),
+        .settings = &N(NpcSettings_FrostClubba_Wander),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = FROST_CLUBBA_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },

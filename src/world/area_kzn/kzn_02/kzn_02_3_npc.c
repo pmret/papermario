@@ -1,6 +1,6 @@
 #include "kzn_02.h"
 
-#include "world/common/enemy/complete/LavaBubble.inc.c"
+#include "world/common/enemy/LavaBubble.inc.c"
 
 #include "world/common/npc/Kolorado.inc.c"
 
@@ -62,20 +62,20 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_SET(LVar0, 2)
     EVT_LOOP(3)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
-        EVT_CALL(ShowSweat, NPC_Kolorado, 1, 45, 1, 0, 0, 0, 0, 20)
+        EVT_CALL(ShowSweat, NPC_Kolorado, 1, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
         EVT_CALL(NpcMoveTo, NPC_SELF, -655, 0, LVar0)
-        EVT_CALL(ShowSweat, NPC_Kolorado, 1, -45, 1, 0, 0, 0, 0, 20)
+        EVT_CALL(ShowSweat, NPC_Kolorado, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
         EVT_CALL(NpcMoveTo, NPC_SELF, -635, 0, LVar0)
         EVT_MUL(LVar0, 2)
     EVT_END_LOOP
-    EVT_CALL(ShowSweat, NPC_Kolorado, 0, 45, 1, 0, 0, 0, 0, 20)
+    EVT_CALL(ShowSweat, NPC_Kolorado, 0, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 2)
-    EVT_CALL(ShowSweat, NPC_Kolorado, 0, -45, 1, 0, 0, 0, 0, 20)
+    EVT_CALL(ShowSweat, NPC_Kolorado, 0, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 2)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Hurt)
-    EVT_CALL(ShowSweat, NPC_Kolorado, 0, -45, 1, 0, 0, 0, 0, 20)
+    EVT_CALL(ShowSweat, NPC_Kolorado, 0, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
     EVT_CALL(SetSelfVar, 0, 1)
     EVT_THREAD
         EVT_LABEL(15)
@@ -162,25 +162,22 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Kolorado) = {
+NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(NpcSettings_Kolorado),
     .pos = { -740.0f, 20.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
     .init = &N(EVS_NpcInit_Kolorado),
-    .drops = KOLORADO_DROPS,
+    .settings = &N(NpcSettings_Kolorado),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+    .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(NpcData_LavaBubble) = {
+NpcData N(NpcData_LavaBubble) = {
     .id = NPC_LavaBubble,
-    .settings = &N(NpcSettings_LavaBubble),
     .pos = { 250.0f, 50.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = LAVA_BUBBLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -193,6 +190,9 @@ StaticNpc N(NpcData_LavaBubble) = {
             .detectSize = { 70, 200 },
         }
     },
+    .settings = &N(NpcSettings_LavaBubble),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = LAVA_BUBBLE_DROPS,
     .animations = LAVA_BUBBLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

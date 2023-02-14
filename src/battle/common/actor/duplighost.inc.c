@@ -375,8 +375,8 @@ EvtScript N(OnHitElectric) = {
     EVT_CALL(HPBarToHome, LVarA)
     EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations)))
     EVT_CALL(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim02)
-    EVT_CALL(SetActorPos, ACTOR_SELF, 0, -1000, 0)
-    EVT_CALL(ForceHomePos, ACTOR_SELF, 0, -1000, 0)
+    EVT_CALL(SetActorPos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
+    EVT_CALL(ForceHomePos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN
@@ -455,8 +455,8 @@ EvtScript N(OnShockHit) = {
     EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations)))
     EVT_CALL(ForceHomePos, LVarA, LVarB, 0, LVarD)
     EVT_CALL(HPBarToHome, LVarA)
-    EVT_CALL(SetActorPos, ACTOR_SELF, 0, -1000, 0)
-    EVT_CALL(ForceHomePos, ACTOR_SELF, 0, -1000, 0)
+    EVT_CALL(SetActorPos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
+    EVT_CALL(ForceHomePos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN
@@ -509,7 +509,7 @@ EvtScript N(OnShockDeath) = {
     EVT_END
 };
 
-Vec3i N(pos_summon) = { 0, -1000, 0 };
+Vec3i N(pos_summon) = { NPC_DISPOSE_LOCATION };
 
 #include "ghost_goombario.inc.c"
 
@@ -712,8 +712,8 @@ EvtScript N(copyPartner) = {
     EVT_CALL(HPBarToHome, LVarA)
     EVT_CALL(ResetActorSounds, LVarA, 2)
     EVT_WAIT(20)
-    EVT_CALL(SetActorPos, ACTOR_SELF, 0, -1000, 0)
-    EVT_CALL(ForceHomePos, ACTOR_SELF, 0, -1000, 0)
+    EVT_CALL(SetActorPos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
+    EVT_CALL(ForceHomePos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

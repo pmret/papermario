@@ -1,16 +1,13 @@
 #include "kmr_09.h"
 #include "entity.h"
 
-#include "world/common/enemy/complete/Goomba_Wander.inc.c"
-#include "world/common/enemy/complete/Paragoomba_Wander.inc.c"
+#include "world/common/enemy/Goomba_Wander.inc.c"
+#include "world/common/enemy/Paragoomba_Wander.inc.c"
 
-StaticNpc N(NpcData_Goomba_01) = {
+NpcData N(NpcData_Goomba_01) = {
     .id = NPC_Goomba_01,
-    .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 200.0f, 0.0f, 24.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -23,16 +20,16 @@ StaticNpc N(NpcData_Goomba_01) = {
             .detectSize = { 250 },
         }
     },
+    .settings = &N(NpcSettings_Goomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_Goomba_02) = {
+NpcData N(NpcData_Goomba_02) = {
     .id = NPC_Goomba_02,
-    .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 250.0f, 0.0f, 35.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -45,6 +42,9 @@ StaticNpc N(NpcData_Goomba_02) = {
             .detectSize = { 250 },
         }
     },
+    .settings = &N(NpcSettings_Goomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
 
@@ -127,14 +127,10 @@ EvtScript N(EVS_NpcInit_Goomba_Ambush) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Goomba_Ambush) = {
+NpcData N(NpcData_Goomba_Ambush) = {
     .id = NPC_Goomba_Ambush,
-    .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { -34.0f, 29.0f, -32.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_Goomba_Ambush),
-    .drops = GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -147,16 +143,17 @@ StaticNpc N(NpcData_Goomba_Ambush) = {
             .detectSize = { 250 },
         }
     },
+    .init = &N(EVS_NpcInit_Goomba_Ambush),
+    .settings = &N(NpcSettings_Goomba_Wander),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_Paragoomba) = {
+NpcData N(NpcData_Paragoomba) = {
     .id = NPC_Paragoomba,
-    .settings = &N(NpcSettings_Paragoomba_Wander),
     .pos = { 670.0f, 60.0f, 20.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = PARAGOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -169,6 +166,9 @@ StaticNpc N(NpcData_Paragoomba) = {
             .detectSize = { 250 },
         }
     },
+    .settings = &N(NpcSettings_Paragoomba_Wander),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = PARAGOOMBA_DROPS,
     .animations = PARAGOOMBA_ANIMS,
 };
 

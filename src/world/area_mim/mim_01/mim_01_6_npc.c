@@ -1,15 +1,12 @@
 #include "mim_01.h"
 
-#include "world/common/enemy/complete/PiranhaPlant.inc.c"
+#include "world/common/enemy/PiranhaPlant.inc.c"
 
-StaticNpc N(NpcData_PiranhaPlant)[] = {
+NpcData N(NpcData_PiranhaPlant)[] = {
     {
         .id = NPC_PiranhaPlant,
-        .settings = &N(NpcSettings_PiranhaPlant),
         .pos = { 135.0f, 0.0f, -300.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_400,
-        .drops = PIRANHA_PLANT_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -22,6 +19,9 @@ StaticNpc N(NpcData_PiranhaPlant)[] = {
                 .detectSize = { 400 },
             }
         },
+        .settings = &N(NpcSettings_PiranhaPlant),
+        .flags = ENEMY_FLAG_400,
+        .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },

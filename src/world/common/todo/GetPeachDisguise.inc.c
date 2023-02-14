@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(GetPeachDisguise)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetPeachDisguise)) {
     Bytecode* args = script->ptrReadPos;
 
     evt_set_variable(script, *args++, gPlayerStatus.peachDisguise);

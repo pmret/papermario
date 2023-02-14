@@ -1,7 +1,6 @@
 #include "mac_06.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 API_CALLABLE(N(GetWaveAmplitude)) {
     Bytecode* args = script->ptrReadPos;

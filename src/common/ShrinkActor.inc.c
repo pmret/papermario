@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-ApiStatus N(ShrinkActor)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ShrinkActor)) {
     Bytecode* args = script->ptrReadPos;
     f32 var1 = evt_get_float_variable(script, *args++);
     f32 var2 = evt_get_float_variable(script, *args++);

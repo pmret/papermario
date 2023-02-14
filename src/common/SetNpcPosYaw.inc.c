@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(SetNpcPosYaw)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetNpcPosYaw)) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
     f32 x = evt_get_float_variable(script, *args++);

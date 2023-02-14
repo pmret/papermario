@@ -11,32 +11,11 @@ API_CALLABLE(N(UnlockStarBeam)) {
 }
 
 #include "world/common/npc/StarSpirit.inc.c"
+#include "world/common/npc/Bowser.inc.c"
 
-NpcSettings N(NpcSettings_Bowser) = {
-    .height = 75,
-    .radius = 72,
-    .level = 99,
-};
+#include "world/common/enemy/Kammy_Flying.inc.c"
 
-NpcSettings N(NpcSettings_Kammy) = {
-    .height = 34,
-    .radius = 24,
-    .level = 26,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-};
-
-EvtScript N(EVS_NpcAuxAI_StarRod) = {
-    EVT_RETURN
-    EVT_END
-};
-
-NpcSettings N(NpcSettings_StarRod) = {
-    .height = 24,
-    .radius = 24,
-    .level = 99,
-    .otherAI = &N(EVS_NpcAuxAI_StarRod),
-};
+#include "world/common/npc/StarRod.inc.c"
 
 EvtScript N(EVS_StarSpirit_HoverBobbing) = {
     EVT_CALL(SetNpcVar, NPC_Eldstar, 0, 0)
@@ -335,148 +314,148 @@ EvtScript N(EVS_NpcInit_StarSpirit) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Eldstar)[] = {
+AnimID N(ExtraAnims_Eldstar)[] = {
     ANIM_WorldEldstar_Idle,
     ANIM_WorldEldstar_Panic,
     ANIM_WorldEldstar_Wave,
     ANIM_WorldEldstar_Angry,
     ANIM_WorldEldstar_Hurt,
     ANIM_WorldEldstar_Back,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Mamar)[] = {
+AnimID N(ExtraAnims_Mamar)[] = {
     ANIM_WorldMamar_Idle,
     ANIM_WorldMamar_Panic,
     ANIM_WorldMamar_Angry,
     ANIM_WorldMamar_Hurt,
     ANIM_WorldMamar_Back,
     ANIM_WorldMamar_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Skolar)[] = {
+AnimID N(ExtraAnims_Skolar)[] = {
     ANIM_WorldSkolar_Idle,
     ANIM_WorldSkolar_IdleSad,
     ANIM_WorldSkolar_Panic,
     ANIM_WorldSkolar_Hurt,
     ANIM_WorldSkolar_Talk,
     ANIM_WorldSkolar_Back,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Muskular)[] = {
+AnimID N(ExtraAnims_Muskular)[] = {
     ANIM_WorldMuskular_Idle,
     ANIM_WorldMuskular_Panic,
     ANIM_WorldMuskular_Hurt,
     ANIM_WorldMuskular_Happy,
     ANIM_WorldMuskular_Back,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Misstar)[] = {
+AnimID N(ExtraAnims_Misstar)[] = {
     ANIM_WorldMisstar_Still,
     ANIM_WorldMisstar_Idle,
     ANIM_WorldMisstar_Panic,
     ANIM_WorldMisstar_Hurt,
     ANIM_WorldMisstar_Happy,
     ANIM_WorldMisstar_Back,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Klevar)[] = {
+AnimID N(ExtraAnims_Klevar)[] = {
     ANIM_WorldKlevar_Idle,
     ANIM_WorldKlevar_Panic,
     ANIM_WorldKlevar_Hurt,
     ANIM_WorldKlevar_TalkHappy,
     ANIM_WorldKlevar_Back,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Kalmar)[] = {
+AnimID N(ExtraAnims_Kalmar)[] = {
     ANIM_WorldKalmar_Idle,
     ANIM_WorldKalmar_Panic,
     ANIM_WorldKalmar_Hurt,
     ANIM_WorldKalmar_TalkHappy,
     ANIM_WorldKalmar_Back,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_StarSpirits)[] = {
+NpcData N(NpcData_StarSpirits)[] = {
     {
         .id = NPC_Mamar,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { 220.0f, 220.0f, -170.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = MAMAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Mamar),
     },
     {
         .id = NPC_Skolar,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -275.0f, 220.0f, 60.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = SKOLAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Skolar),
     },
     {
         .id = NPC_Muskular,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { 125.0f, 220.0f, 250.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = MUSKULAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Muskular),
     },
     {
         .id = NPC_Misstar,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -125.0f, 220.0f, 250.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = MISSTAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Misstar),
     },
     {
         .id = NPC_Klevar,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { 275.0f, 220.0f, 60.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = KLEVAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Klevar),
     },
     {
         .id = NPC_Kalmar,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -220.0f, 220.0f, -170.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = KALMAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Kalmar),
     },
     {
         .id = NPC_Eldstar,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { 0.0f, 220.0f, -275.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarSpirit),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Eldstar),
     },
@@ -496,7 +475,7 @@ s32 N(NpcData_ClownCar)[] = {
     -1
 };
 
-s32 N(ExtraAnims_Kammy)[] = {
+AnimID N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim09,
     ANIM_WorldKammy_Anim0B,
     ANIM_WorldKammy_Anim0D,
@@ -504,132 +483,48 @@ s32 N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim11,
     ANIM_WorldKammy_Anim12,
     ANIM_WorldKammy_Anim17,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Thieves)[] = {
+NpcData N(NpcData_Thieves)[] = {
     {
-        .id = NPC_Bowser_Main,
-        .settings = &N(NpcSettings_Bowser),
+        .id = NPC_Bowser_Body,
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
+        .settings = &N(NpcSettings_Bowser),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldBowser_Idle,
-            .walk   = ANIM_WorldBowser_Idle,
-            .run    = ANIM_WorldBowser_Idle,
-            .chase  = ANIM_WorldBowser_Idle,
-            .anim_4 = ANIM_WorldBowser_Idle,
-            .anim_5 = ANIM_WorldBowser_Idle,
-            .death  = ANIM_WorldBowser_Idle,
-            .hit    = ANIM_WorldBowser_Idle,
-            .anim_8 = ANIM_WorldBowser_Idle,
-            .anim_9 = ANIM_WorldBowser_Idle,
-            .anim_A = ANIM_WorldBowser_Idle,
-            .anim_B = ANIM_WorldBowser_Idle,
-            .anim_C = ANIM_WorldBowser_Idle,
-            .anim_D = ANIM_WorldBowser_Idle,
-            .anim_E = ANIM_WorldBowser_Idle,
-            .anim_F = ANIM_WorldBowser_Idle,
-        },
+        .drops = NO_DROPS,
+        .animations = BOWSER_ANIMS,
         .extraAnimations = N(NpcData_ClownCar),
     },
     {
         .id = NPC_Bowser_Prop,
-        .settings = &N(NpcSettings_Bowser),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
+        .settings = &N(NpcSettings_Bowser),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldBowser_Idle,
-            .walk   = ANIM_WorldBowser_Idle,
-            .run    = ANIM_WorldBowser_Idle,
-            .chase  = ANIM_WorldBowser_Idle,
-            .anim_4 = ANIM_WorldBowser_Idle,
-            .anim_5 = ANIM_WorldBowser_Idle,
-            .death  = ANIM_WorldBowser_Idle,
-            .hit    = ANIM_WorldBowser_Idle,
-            .anim_8 = ANIM_WorldBowser_Idle,
-            .anim_9 = ANIM_WorldBowser_Idle,
-            .anim_A = ANIM_WorldBowser_Idle,
-            .anim_B = ANIM_WorldBowser_Idle,
-            .anim_C = ANIM_WorldBowser_Idle,
-            .anim_D = ANIM_WorldBowser_Idle,
-            .anim_E = ANIM_WorldBowser_Idle,
-            .anim_F = ANIM_WorldBowser_Idle,
-        },
+        .drops = NO_DROPS,
+        .animations = BOWSER_ANIMS,
         .extraAnimations = N(NpcData_ClownCar),
     },
     {
         .id = NPC_Kammy,
-        .settings = &N(NpcSettings_Kammy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
+        .settings = &N(NpcSettings_Kammy_Flying),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_WorldKammy_Anim01,
-            .walk   = ANIM_WorldKammy_Anim02,
-            .run    = ANIM_WorldKammy_Anim03,
-            .chase  = ANIM_WorldKammy_Anim03,
-            .anim_4 = ANIM_WorldKammy_Anim01,
-            .anim_5 = ANIM_WorldKammy_Anim01,
-            .death  = ANIM_WorldKammy_Anim00,
-            .hit    = ANIM_WorldKammy_Anim00,
-            .anim_8 = ANIM_WorldKammy_Anim03,
-            .anim_9 = ANIM_WorldKammy_Anim03,
-            .anim_A = ANIM_WorldKammy_Anim03,
-            .anim_B = ANIM_WorldKammy_Anim03,
-            .anim_C = ANIM_WorldKammy_Anim03,
-            .anim_D = ANIM_WorldKammy_Anim03,
-            .anim_E = ANIM_WorldKammy_Anim03,
-            .anim_F = ANIM_WorldKammy_Anim03,
-        },
+        .drops = NO_DROPS,
+        .animations = KAMMY_ANIMS,
         .extraAnimations = N(ExtraAnims_Kammy),
     },
     {
         .id = NPC_StarRod,
-        .settings = &N(NpcSettings_StarRod),
         .pos = { 0.0f, 174.0f, 0.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_StarRod),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_StarRod_Still,
-            .walk   = ANIM_StarRod_Still,
-            .run    = ANIM_StarRod_Still,
-            .chase  = ANIM_StarRod_Still,
-            .anim_4 = ANIM_StarRod_Still,
-            .anim_5 = ANIM_StarRod_Still,
-            .death  = ANIM_StarRod_Still,
-            .hit    = ANIM_StarRod_Still,
-            .anim_8 = ANIM_StarRod_Still,
-            .anim_9 = ANIM_StarRod_Still,
-            .anim_A = ANIM_StarRod_Still,
-            .anim_B = ANIM_StarRod_Still,
-            .anim_C = ANIM_StarRod_Still,
-            .anim_D = ANIM_StarRod_Still,
-            .anim_E = ANIM_StarRod_Still,
-            .anim_F = ANIM_StarRod_Still,
-        },
+        .drops = NO_DROPS,
+        .animations = STAR_ROD_ANIMS,
     },
 };
 

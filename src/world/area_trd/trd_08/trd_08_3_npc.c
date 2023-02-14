@@ -130,87 +130,87 @@ NpcSettings N(NpcSettings_FireBar_Extra) = {
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
-StaticNpc N(NpcData_00)[] = {
+NpcData N(NpcData_00)[] = {
     {
         .id = NPC_FireBar_1A,
-        .settings = &N(NpcSettings_FireBar_01),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_01),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_1B,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_1C,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_1D,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
 };
 
-StaticNpc N(NpcData_05)[] = {
+NpcData N(NpcData_05)[] = {
     {
         .id = NPC_FireBar_2A,
-        .settings = &N(NpcSettings_FireBar_02),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_02),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_2B,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_2C,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_2D,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },

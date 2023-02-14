@@ -49,7 +49,7 @@ ApiStatus N(WattFXUpdate)(Evt* script, s32 isInitialCall) {
         sWattEffectData_isActive = TRUE;
         sWattEffectData_currentEffectIndex = 0;
         sWattEffectData_effect1 = fx_static_status(0, partner->currentPos.x, partner->currentPos.y, partner->currentPos.z, 1.0f, 5, 0);
-        sWattEffectData_effect2 = fx_static_status(1, partner->currentPos.x, -1000.0f, partner->currentPos.z, 1.0f, 5, 0);
+        sWattEffectData_effect2 = fx_static_status(1, partner->currentPos.x, NPC_DISPOSE_POS_Y, partner->currentPos.z, 1.0f, 5, 0);
         sWattEffectData_initialized = TRUE;
     }
 
@@ -67,7 +67,7 @@ ApiStatus N(WattFXUpdate)(Evt* script, s32 isInitialCall) {
     y = partner->currentPos.y + partner->headOffset.y + partner->unk_19A + 12.0f;
     z = partner->currentPos.z + partner->headOffset.z;
     if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_4)) == BS_FLAGS2_4) {
-        y = -1000.0f;
+        y = NPC_DISPOSE_POS_Y;
     }
 
     if (sWattEffectData_isActive) {

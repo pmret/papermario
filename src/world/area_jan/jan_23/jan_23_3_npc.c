@@ -205,7 +205,7 @@ EvtScript N(EVS_Raven4_MoveToMeetingPos) = {
 
 EvtScript N(EVS_Raven5_Sweat) = {
     EVT_LABEL(0)
-        EVT_CALL(ShowSweat, NPC_Raven_05, 1, -45, 1, 0, 0, 0, 0, 20)
+        EVT_CALL(ShowSweat, NPC_Raven_05, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
         EVT_WAIT(8)
         EVT_GOTO(0)
     EVT_RETURN
@@ -588,69 +588,69 @@ EvtScript N(EVS_NpcInit_Raven_05) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Ravens)[] = {
+NpcData N(NpcData_Ravens)[] = {
     {
         .id = NPC_RaphaelRaven,
-        .settings = &N(NpcSettings_RaphaelRaven),
         .pos = { 590.0f, 210.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY,
         .init = &N(EVS_NpcInit_RaphaelRaven),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_RaphaelRaven),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY,
+        .drops = NO_DROPS,
         .animations = RAPHAEL_RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RaphaelRaven,
     },
     {
         .id = NPC_Raven_01,
-        .settings = &N(NpcSettings_Raven),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400,
         .init = &N(EVS_NpcInit_Raven_01),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Raven),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenA,
     },
     {
         .id = NPC_Raven_02,
-        .settings = &N(NpcSettings_Raven),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400,
         .init = &N(EVS_NpcInit_Raven_02),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Raven),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
     },
     {
         .id = NPC_Raven_03,
-        .settings = &N(NpcSettings_Raven),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400,
         .init = &N(EVS_NpcInit_Raven_03),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Raven),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenC,
     },
     {
         .id = NPC_Raven_04,
-        .settings = &N(NpcSettings_Raven),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400,
         .init = &N(EVS_NpcInit_Raven_04),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Raven),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenD,
     },
     {
         .id = NPC_Raven_05,
-        .settings = &N(NpcSettings_Raven),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400,
         .init = &N(EVS_NpcInit_Raven_05),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Raven),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenE,
     },

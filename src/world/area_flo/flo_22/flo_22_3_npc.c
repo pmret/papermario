@@ -1,8 +1,8 @@
 #include "flo_22.h"
 
 #include "world/common/npc/Dummy.inc.c"
-#include "world/common/enemy/complete/Bzzap.h"
-#include "world/common/enemy/complete/CrazyDayzee.h"
+#include "world/common/enemy/Bzzap.h"
+#include "world/common/enemy/CrazyDayzee.h"
 
 EvtScript N(EVS_NpcIdle_Bzzap) = {
     EVT_SET(MV_Bzzap_State, 0)
@@ -103,24 +103,24 @@ EvtScript N(EVS_NpcInit_Dayzee) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Bzzap) = {
+NpcData N(NpcData_Bzzap) = {
     .id = NPC_Bzzap,
-    .settings = &N(NpcSettings_Dummy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Bzzap),
-    .drops = BZZAP_NO_DROPS,
+    .settings = &N(NpcSettings_Dummy),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = BZZAP_ANIMS,
 };
 
-StaticNpc N(NpcData_Dayzee) = {
+NpcData N(NpcData_Dayzee) = {
     .id = NPC_Dayzee,
-    .settings = &N(NpcSettings_Dummy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Dayzee),
+    .settings = &N(NpcSettings_Dummy),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

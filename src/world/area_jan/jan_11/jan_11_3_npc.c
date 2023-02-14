@@ -120,14 +120,14 @@ EvtScript N(EVS_NpcInit_YoshiKid) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_YoshiKid) = {
+NpcData N(NpcData_YoshiKid) = {
     .id = NPC_YoshiKid,
     .pos = { -450.0f, 0.0f, -160.0f },
     .yaw = 90,
     .init = &N(EVS_NpcInit_YoshiKid),
     .settings = &N(NpcSettings_YoshiKid),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = YOSHI_KID_GREEN_ANIMS,
     .tattle = MSG_NpcTattle_GreenYoshiKid,
 };

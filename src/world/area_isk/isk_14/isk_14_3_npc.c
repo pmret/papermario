@@ -1,7 +1,7 @@
 #include "isk_14.h"
 #include "sprite.h"
 
-#include "world/common/enemy/complete/StoneChomp.inc.c"
+#include "world/common/enemy/StoneChomp.inc.c"
 
 typedef struct StoneChompAmbushIsk14 {
     /* 0x00 */ s32 foldID;
@@ -215,16 +215,10 @@ EvtScript N(EVS_NpcInit_StoneChomp) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_StoneChomp) = {
+NpcData N(NpcData_StoneChomp) = {
     .id = NPC_StoneChomp,
-    .settings = &N(NpcSettings_StoneChomp),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 218,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
-    .init = &N(EVS_NpcInit_StoneChomp),
-    .initVarCount = 1,
-    .initVar = { .value = -780 },
-    .drops = STONE_CHOMP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -237,6 +231,12 @@ StaticNpc N(NpcData_StoneChomp) = {
             .detectSize = { 400 },
         }
     },
+    .init = &N(EVS_NpcInit_StoneChomp),
+    .initVarCount = 1,
+    .initVar = { .value = -780 },
+    .settings = &N(NpcSettings_StoneChomp),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .drops = STONE_CHOMP_DROPS,
     .animations = STONE_CHOMP_ANIMS,
 };
 

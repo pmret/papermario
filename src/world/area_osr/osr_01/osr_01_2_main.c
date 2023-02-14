@@ -2,7 +2,6 @@
 #include "osr_01.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_mac_01_2) = EVT_EXIT_WALK(60, osr_01_ENTRY_0, "mac_01", mac_01_ENTRY_2);
 EvtScript N(EVS_ExitWalk_hos_00_0) = EVT_EXIT_WALK(60, osr_01_ENTRY_1, "hos_00", hos_00_ENTRY_0);

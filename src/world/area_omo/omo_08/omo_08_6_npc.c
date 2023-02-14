@@ -1,7 +1,7 @@
 #include "omo_08.h"
 
 #include "world/common/npc/TrainToad.inc.c"
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
 
 EvtScript N(EVS_NpcInteract_Conductor) = {
     EVT_CALL(DisablePlayerInput, TRUE)
@@ -97,47 +97,35 @@ EvtScript N(EVS_NpcInit_BoxedShyGuy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Toads)[] = {
+NpcData N(NpcData_Toads)[] = {
     {
         .id = NPC_Conductor,
-        .settings = &N(NpcSettings_TrainToad),
         .pos = { -145.0f, 50.0f, -110.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Conductor),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_TrainToad),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = TRAIN_CONDUCTOR_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,
     },
     {
         .id = NPC_TrainToad,
-        .settings = &N(NpcSettings_TrainToad),
         .pos = { -250.0f, 0.0f, 50.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_TrainToad),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_TrainToad),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = TRAIN_TOAD_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,
     },
 };
 
-StaticNpc N(NpcData_ShyGuy_01) = {
+NpcData N(NpcData_ShyGuy_01) = {
     .id = NPC_ShyGuy_01,
-    .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_BoxedShyGuy),
-    .drops = NPC_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -150,17 +138,17 @@ StaticNpc N(NpcData_ShyGuy_01) = {
             .detectSize = { 120 },
         }
     },
+    .init = &N(EVS_NpcInit_BoxedShyGuy),
+    .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_02) = {
+NpcData N(NpcData_ShyGuy_02) = {
     .id = NPC_ShyGuy_02,
-    .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_BoxedShyGuy),
-    .drops = NPC_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -173,17 +161,17 @@ StaticNpc N(NpcData_ShyGuy_02) = {
             .detectSize = { 120 },
         }
     },
+    .init = &N(EVS_NpcInit_BoxedShyGuy),
+    .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_03) = {
+NpcData N(NpcData_ShyGuy_03) = {
     .id = NPC_ShyGuy_03,
-    .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_BoxedShyGuy),
-    .drops = NPC_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -196,17 +184,17 @@ StaticNpc N(NpcData_ShyGuy_03) = {
             .detectSize = { 120 },
         }
     },
+    .init = &N(EVS_NpcInit_BoxedShyGuy),
+    .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_04) = {
+NpcData N(NpcData_ShyGuy_04) = {
     .id = NPC_ShyGuy_04,
-    .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_BoxedShyGuy),
-    .drops = NPC_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -219,6 +207,10 @@ StaticNpc N(NpcData_ShyGuy_04) = {
             .detectSize = { 120 },
         }
     },
+    .init = &N(EVS_NpcInit_BoxedShyGuy),
+    .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 

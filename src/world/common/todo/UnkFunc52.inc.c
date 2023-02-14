@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 
-ApiStatus N(UnkFunc52)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFunc52)) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor;
 

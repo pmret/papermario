@@ -11,7 +11,7 @@
 // prerequisites
 #include "world/common/enemy/ai/ProjectileHitbox.inc.c"
 
-ApiStatus N(RangedAttackAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(RangedAttackAI_Main)) {
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
     Enemy* enemy = script->owner1.enemy;

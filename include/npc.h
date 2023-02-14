@@ -7,23 +7,19 @@
 
 // battle and stage are optional in overloaded NPC_GROUP macros
 #define NPC_GROUP(args...) VFUNC(NPC_GROUP, args)
-#define NPC_GROUP1(npcs)                { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, 0, 0 }
-#define NPC_GROUP2(npcs, battle)        { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, 0 }
-#define NPC_GROUP3(npcs, battle, stage) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, stage + 1 }
+#define NPC_GROUP1(npcs)                { sizeof(npcs) / sizeof(NpcData), (NpcData*) &npcs, 0, 0 }
+#define NPC_GROUP2(npcs, battle)        { sizeof(npcs) / sizeof(NpcData), (NpcData*) &npcs, battle, 0 }
+#define NPC_GROUP3(npcs, battle, stage) { sizeof(npcs) / sizeof(NpcData), (NpcData*) &npcs, battle, stage + 1 }
 
 #define NPC_GROUP_EXPLICIT_SIZE(args...) VFUNC(NPC_GROUP_EXPLICIT_SIZE, args)
-#define NPC_GROUP_EXPLICIT_SIZE3(npcs, start, count)                { count, (StaticNpc*) &npcs[start], 0, 0 }
-#define NPC_GROUP_EXPLICIT_SIZE4(npcs, start, count, battle)        { count, (StaticNpc*) &npcs[start], battle, 0 }
-#define NPC_GROUP_EXPLICIT_SIZE5(npcs, start, count, battle, stage) { count, (StaticNpc*) &npcs[start], battle, stage + 1 }
+#define NPC_GROUP_EXPLICIT_SIZE3(npcs, start, count)                { count, (NpcData*) &npcs[start], 0, 0 }
+#define NPC_GROUP_EXPLICIT_SIZE4(npcs, start, count, battle)        { count, (NpcData*) &npcs[start], battle, 0 }
+#define NPC_GROUP_EXPLICIT_SIZE5(npcs, start, count, battle, stage) { count, (NpcData*) &npcs[start], battle, stage + 1 }
 
-
-#define NO_DROPS { { F16(100), F16(0), 0, F16(0) }, }
-
-// rename this to NO_DROPS and the above to NO_STAT_DROPS after all map data done
-#define NPC_NO_DROPS { \
+#define NO_DROPS { \
     .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
+    .heartDrops  = { { F16(100), F16(0), 0, F16(0) }, }, \
+    .flowerDrops = { { F16(100), F16(0), 0, F16(0) }, }, \
 }
 
 #define STANDARD_HEART_DROPS(attempts) { \
@@ -169,7 +165,7 @@ typedef struct ItemDrop {
 /// - Roll generalChance. If it fails, drop 0.
 /// - Roll chancePerAttempt attempts times. For each success, drop a heart/flower.
 ///
-/// StaticNpc holds a table of StatDrops for each stat (hearts, flowers). All are checked together
+/// NpcData holds a table of StatDrops for each stat (hearts, flowers). All are checked together
 /// and the number of hearts/flowers to drop is the total number of successful attempts for each stat.
 ///
 /// Each heart/flower is worth 1 HP and 1 FP respectively, if picked up.
@@ -253,7 +249,7 @@ typedef union NpcInitialVars {
     /* 0x0 */ s32* array;
 } NpcInitialVars;
 
-typedef struct StaticNpc {
+typedef struct NpcData {
     /* 0x000 */ s32 id;
     /* 0x004 */ NpcSettings* settings;
     /* 0x008 */ Vec3f pos;
@@ -289,12 +285,12 @@ typedef struct StaticNpc {
     /* 0x1E4 */ u32 aiFlags;
     /* 0x1E8 */ s32* extraAnimations;
     /* 0x1EC */ s32 tattle;
-} StaticNpc; // size = 0x1F0
+} NpcData; // size = 0x1F0
 
 /// Zero-terminated.
 typedef struct NpcGroup {
     /* 0x00 */ s32 npcCount;
-    /* 0x04 */ StaticNpc* npcs;
+    /* 0x04 */ NpcData* npcs;
     /* 0x08 */ s16 battle;
     /* 0x0A */ s16 stage;
 } NpcGroup; // size = 0x0C

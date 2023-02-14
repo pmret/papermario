@@ -1,7 +1,7 @@
 #include "arn_12.h"
 
 #include "world/common/npc/TubbasHeart.inc.c"
-#include "world/common/enemy/complete/HyperGoomba_Wander.inc.c"
+#include "world/common/enemy/HyperGoomba_Wander.inc.c"
 
 EvtScript N(EVS_NpcIdle_TubbasHeart) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
@@ -60,25 +60,21 @@ EvtScript N(EVS_NpcInit_HyperGoomba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TubbasHeart) = {
+NpcData N(NpcData_TubbasHeart) = {
     .id = NPC_TubbasHeart,
-    .settings = &N(NpcSettings_TubbasHeart),
     .pos = { 80.0f, 50.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_TubbasHeart),
-    .drops = TUBBAS_HEART_DROPS,
+    .settings = &N(NpcSettings_TubbasHeart),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = TUBBAS_HEART_ANIMS,
 };
 
-StaticNpc N(NpcData_HyperGoomba) = {
+NpcData N(NpcData_HyperGoomba) = {
     .id = NPC_HyperGoomba,
-    .settings = &N(NpcSettings_HyperGoomba),
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_HyperGoomba),
-    .drops = HYPER_GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -91,6 +87,10 @@ StaticNpc N(NpcData_HyperGoomba) = {
             .detectSize = { 150 },
         }
     },
+    .init = &N(EVS_NpcInit_HyperGoomba),
+    .settings = &N(NpcSettings_HyperGoomba),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = HYPER_GOOMBA_DROPS,
     .animations = HYPER_GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

@@ -10,6 +10,14 @@ enum {
     AB_FLO_TreePuzzle_SecondCorrect     = AreaByte(5),
     AB_FLO_GuardLakituTalkCount         = AreaByte(6),
     AB_FLO_GuardedMachineHitCount       = AreaByte(7),
+    AB_FLO_Unused_8     = AreaByte(8),
+    AB_FLO_Unused_9     = AreaByte(9),
+    AB_FLO_Unused_A     = AreaByte(10),
+    AB_FLO_Unused_B     = AreaByte(11),
+    AB_FLO_Unused_C     = AreaByte(12),
+    AB_FLO_Unused_D     = AreaByte(13),
+    AB_FLO_Unused_E     = AreaByte(14),
+    AB_FLO_Unused_F     = AreaByte(15),
 };
 
 enum {

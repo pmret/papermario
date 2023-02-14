@@ -1,8 +1,8 @@
 #include "mim_08.h"
 
-#include "world/common/enemy/complete/Bzzap.inc.c"
+#include "world/common/enemy/Bzzap.inc.c"
 
-#include "world/common/enemy/complete/PiranhaPlant.inc.c"
+#include "world/common/enemy/PiranhaPlant.inc.c"
 
 EvtScript N(EVS_NpcIdle_Bzzap) = {
     EVT_LABEL(100)
@@ -25,14 +25,10 @@ EvtScript N(EVS_NpcInit_Bzzap) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Bzzap) = {
+NpcData N(NpcData_Bzzap) = {
     .id = NPC_Bzzap,
-    .settings = &N(NpcSettings_Bzzap),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_Bzzap),
-    .drops = BZZAP_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -45,17 +41,18 @@ StaticNpc N(NpcData_Bzzap) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_Bzzap),
+    .settings = &N(NpcSettings_Bzzap),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_200000,
+    .drops = NO_DROPS,
     .animations = BZZAP_ANIMS,
 };
 
-StaticNpc N(NpcData_PiranhaPlant_01)[] = {
+NpcData N(NpcData_PiranhaPlant_01)[] = {
     {
         .id = NPC_PiranhaPlant_01,
-        .settings = &N(NpcSettings_PiranhaPlant),
         .pos = { -240.0f, 0.0f, -240.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .drops = PIRANHA_PLANT_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -68,20 +65,20 @@ StaticNpc N(NpcData_PiranhaPlant_01)[] = {
                 .detectSize = { 400 },
             }
         },
+        .settings = &N(NpcSettings_PiranhaPlant),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
     PIRANHA_PLANT_HITBOX(NPC_PiranhaPlant_01_Hitbox)
 };
 
-StaticNpc N(NpcData_PiranhaPlant_02)[] = {
+NpcData N(NpcData_PiranhaPlant_02)[] = {
     {
         .id = NPC_PiranhaPlant_02,
-        .settings = &N(NpcSettings_PiranhaPlant),
         .pos = { 240.0f, 0.0f, 240.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .drops = PIRANHA_PLANT_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -94,6 +91,9 @@ StaticNpc N(NpcData_PiranhaPlant_02)[] = {
                 .detectSize = { 400 },
             }
         },
+        .settings = &N(NpcSettings_PiranhaPlant),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },

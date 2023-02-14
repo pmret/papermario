@@ -1,7 +1,7 @@
 #include "omo_13.h"
 
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
-#include "world/common/enemy/complete/GrooveGuy.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/GrooveGuy.inc.c"
 
 NpcSettings N(NpcSettings_AntiGuy) = {
     .height = 23,
@@ -208,18 +208,14 @@ EvtScript N(EVS_NpcInit_AntiGuy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_AntiGuy) = {
+NpcData N(NpcData_AntiGuy) = {
     .id = NPC_AntiGuy,
-    .settings = &N(NpcSettings_AntiGuy),
     .pos = { 110.0f, 0.0f, -20.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_AntiGuy),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_AntiGuy),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_ShyGuy_Black_Anim01,
         .walk   = ANIM_ShyGuy_Black_Anim02,
@@ -241,13 +237,10 @@ StaticNpc N(NpcData_AntiGuy) = {
     .tattle = MSG_NpcTattle_AntiGuy,
 };
 
-StaticNpc N(NpcData_ShyGuy) = {
+NpcData N(NpcData_ShyGuy) = {
     .id = NPC_ShyGuy,
-    .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { 300.0f, 0.0f, 50.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = SHY_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -260,17 +253,17 @@ StaticNpc N(NpcData_ShyGuy) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = SHY_GUY_DROPS,
     .animations = YELLOW_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_GrooveGuy) = {
+NpcData N(NpcData_GrooveGuy) = {
     .id = NPC_GrooveGuy,
-    .settings = &N(NpcSettings_GrooveGuy),
     .pos = { -222.0f, 0.0f, 35.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = GROOVE_GUY_DROPS_B,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -283,6 +276,9 @@ StaticNpc N(NpcData_GrooveGuy) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_GrooveGuy),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = GROOVE_GUY_DROPS_B,
     .animations = GROOVE_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

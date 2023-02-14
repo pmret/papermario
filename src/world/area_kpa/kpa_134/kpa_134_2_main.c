@@ -2,7 +2,6 @@
 #include "effects.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_kpa_133_1) = EVT_EXIT_WALK(40, kpa_134_ENTRY_0, "kpa_133", kpa_133_ENTRY_1);
 EvtScript N(EVS_ExitDoors_kpa_130_0) = EVT_EXIT_DOUBLE_DOOR(kpa_134_ENTRY_1, "kpa_130", kpa_130_ENTRY_0, COLLIDER_nno, MODEL_o408, MODEL_o409);

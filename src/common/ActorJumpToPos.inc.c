@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(ActorJumpToPos)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ActorJumpToPos)) {
     Actor* actor = get_actor(script->owner1.actorID);
     Vec3f* temp_f0 = &actor->state.currentPos;
 

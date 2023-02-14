@@ -1,7 +1,7 @@
 #include "common.h"
 
 NOP_FIX
-ApiStatus N(ItemChoice_WaitForSelection)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ItemChoice_WaitForSelection)) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {

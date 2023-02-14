@@ -24,6 +24,10 @@ enum {
     NPC_ShyGuy_09       = 9,
 };
 
+enum {
+    MV_Unk_01           = MapVar(1),
+};
+
 #define NAMESPACE omo_15
 
 extern EvtScript N(EVS_Main);

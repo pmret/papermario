@@ -38,7 +38,7 @@ s32 N(MagikoopaAI_CanShootSpell)(Evt* script, f32 arg1, f32 arg2, EnemyDetectVol
     return -1;
 }
 
-ApiStatus N(MagikoopaAI_SpellMain)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MagikoopaAI_SpellMain)) {
     Enemy* enemy = script->owner1.enemy;
     Npc sp20;
     Npc* sp20Ptr = &sp20;
@@ -66,9 +66,9 @@ ApiStatus N(MagikoopaAI_SpellMain)(Evt* script, s32 isInitialCall) {
             enemy->varTable[3] = NULL;
             npc1->collisionRadius = 20;
             npc1->collisionHeight = 20;
-            npc1->pos.x = 0.0f;
-            npc1->pos.z = 0.0f;
-            npc1->pos.y = -1000.0f;
+            npc1->pos.x = NPC_DISPOSE_POS_X;
+            npc1->pos.y = NPC_DISPOSE_POS_Y;
+            npc1->pos.z = NPC_DISPOSE_POS_Z;
             enemy->varTable[0] = 0;
             script->functionTemp[0] = 1;
             /* fallthrough */
@@ -134,11 +134,11 @@ ApiStatus N(MagikoopaAI_SpellMain)(Evt* script, s32 isInitialCall) {
                 npc1->collisionRadius = ((f32) npc1->duration * 7.0) + 20.0;
                 npc1->collisionHeight = ((f32) npc1->duration * 7.0) + 20.0;
             } else if (npc1->duration == 7) {
-                npc1->pos.x = 0.0f;
-                npc1->pos.z = 0.0f;
+                npc1->pos.x = NPC_DISPOSE_POS_X;
+                npc1->pos.y = NPC_DISPOSE_POS_Y;
+                npc1->pos.z = NPC_DISPOSE_POS_Z;
                 npc1->collisionRadius = 20;
                 npc1->collisionHeight = 20;
-                npc1->pos.y = -1000.0f;
             } else if (npc1->duration >= 16) {
                 enemy->varTable[0] = 0;
                 script->functionTemp[0] = 0;

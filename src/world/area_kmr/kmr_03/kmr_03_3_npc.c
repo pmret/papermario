@@ -163,18 +163,14 @@ EvtScript N(EVS_NpcInit_Goompa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GoombaFamily) = {
+NpcData N(NpcData_GoombaFamily) = {
     .id = NPC_Goompa,
-    .settings = &N(NpcSettings_Goompa),
     .pos = { -50.0f, 0.0f, 80.0f },
     .yaw = 45,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Goompa),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Goompa),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Goompa_Idle,
         .walk   = ANIM_Goompa_Walk,

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(UnkFunc51)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFunc51)) {
     Bytecode* args = script->ptrReadPos;
 
     script->functionTemp[0] = evt_get_variable(script, *args++);

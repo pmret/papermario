@@ -1,8 +1,8 @@
 #include "flo_09.h"
 
-#include "world/common/enemy/complete/CrazyDayzee.inc.c"
+#include "world/common/enemy/CrazyDayzee.inc.c"
 
-#include "world/common/enemy/complete/Bzzap.inc.c"
+#include "world/common/enemy/Bzzap.inc.c"
 
 NpcSettings N(NpcSettings_Bzzap_02) = {
     .height = 24,
@@ -58,13 +58,10 @@ EvtScript N(EVS_NpcInit_Bzzap_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Dayzee_01) = {
+NpcData N(NpcData_Dayzee_01) = {
     .id = NPC_Dayzee_01,
-    .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { -350.0f, 0.0f, 40.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = CRAZY_DAYZEE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -77,17 +74,17 @@ StaticNpc N(NpcData_Dayzee_01) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_CrazyDayzee),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_02) = {
+NpcData N(NpcData_Dayzee_02) = {
     .id = NPC_Dayzee_02,
-    .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { 260.0f, 0.0f, 75.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = CRAZY_DAYZEE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -100,17 +97,17 @@ StaticNpc N(NpcData_Dayzee_02) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_CrazyDayzee),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Bzzap_01) = {
+NpcData N(NpcData_Bzzap_01) = {
     .id = NPC_Bzzap_01,
-    .settings = &N(NpcSettings_Bzzap),
     .pos = { -50.0f, 55.0f, 90.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = BZZAP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -123,18 +120,17 @@ StaticNpc N(NpcData_Bzzap_01) = {
             .detectSize = { 250 },
         }
     },
+    .settings = &N(NpcSettings_Bzzap),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = BZZAP_DROPS,
     .animations = BZZAP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Bzzap_02) = {
+NpcData N(NpcData_Bzzap_02) = {
     .id = NPC_Bzzap_02,
-    .settings = &N(NpcSettings_Bzzap_02),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .init = &N(EVS_NpcInit_Bzzap_02),
-    .drops = BZZAP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -147,6 +143,10 @@ StaticNpc N(NpcData_Bzzap_02) = {
             .detectSize = { 250 },
         }
     },
+    .init = &N(EVS_NpcInit_Bzzap_02),
+    .settings = &N(NpcSettings_Bzzap_02),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = BZZAP_DROPS,
     .animations = BZZAP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };

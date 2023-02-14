@@ -111,8 +111,8 @@ void action_update_idle_peach(void) {
         playerStatus->flags &= ~PS_FLAG_AIRBORNE;
 
         if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
-            if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
-                suggest_player_anim_clearUnkFlag(IdlePeachAnims[gGameStatusPtr->peachCookingIngredient]);
+            if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DEPRESSED)) {
+                suggest_player_anim_clearUnkFlag(IdlePeachAnims[gGameStatusPtr->peachBakingIngredient]);
             } else {
                 suggest_player_anim_clearUnkFlag(ANIM_Peach_C000E);
             }

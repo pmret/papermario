@@ -1,7 +1,6 @@
 #include "kmr_30.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_MARIOS_HOUSE)

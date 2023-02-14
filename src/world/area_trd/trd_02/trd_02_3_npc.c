@@ -1,16 +1,13 @@
 #include "trd_02.h"
 
-#include "world/common/enemy/complete/Bobomb_Wander.inc.c"
-#include "world/common/enemy/complete/KoopaTroopa_Wander.inc.c"
-#include "world/common/enemy/complete/KoopaTroopa_Patrol.inc.c"
+#include "world/common/enemy/Bobomb_Wander.inc.c"
+#include "world/common/enemy/KoopaTroopa_Wander.inc.c"
+#include "world/common/enemy/KoopaTroopa_Patrol.inc.c"
 
-StaticNpc N(NpcData_Bobomb_01) = {
+NpcData N(NpcData_Bobomb_01) = {
     .id = NPC_Bobomb_01,
-    .settings = &N(NpcSettings_Bobomb_Wander),
     .pos = { -70.0f, 0.0f, 80.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = BOBOMB_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -23,17 +20,17 @@ StaticNpc N(NpcData_Bobomb_01) = {
             .detectSize = { 250, 175 },
         }
     },
+    .settings = &N(NpcSettings_Bobomb_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = BOBOMB_DROPS,
     .animations = BOBOMB_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Bobomb_02) = {
+NpcData N(NpcData_Bobomb_02) = {
     .id = NPC_Bobomb_02,
-    .settings = &N(NpcSettings_Bobomb_Wander),
     .pos = { 140.0f, 0.0f, 80.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = BOBOMB_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -46,17 +43,17 @@ StaticNpc N(NpcData_Bobomb_02) = {
             .detectSize = { 250, 175 },
         }
     },
+    .settings = &N(NpcSettings_Bobomb_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = BOBOMB_DROPS,
     .animations = BOBOMB_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_KoopaTroopa) = {
+NpcData N(NpcData_KoopaTroopa) = {
     .id = NPC_KoopaTroopa,
-    .settings = &N(NpcSettings_KoopaTroopa_Patrol),
     .pos = { 50.0f, 187.0f, 183.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = KOOPA_TROOPA_TRD_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -71,6 +68,9 @@ StaticNpc N(NpcData_KoopaTroopa) = {
             .detectSize = { 150, 80 },
         }
     },
+    .settings = &N(NpcSettings_KoopaTroopa_Patrol),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

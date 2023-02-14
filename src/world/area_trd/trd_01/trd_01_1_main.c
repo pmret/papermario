@@ -8,7 +8,6 @@ extern EvtScript N(EVS_MakeEntities);
 extern NpcGroupList N(DefaultNPCs);
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_EnterMap) = {
     EVT_SET_GROUP(EVT_GROUP_00)

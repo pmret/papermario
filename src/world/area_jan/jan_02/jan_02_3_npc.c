@@ -380,46 +380,42 @@ EvtScript N(EVS_NpcInit_Yoshi_03) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Councillor)[] = {
+AnimID N(ExtraAnims_Councillor)[] = {
     ANIM_LeadersFriend_TalkSit,
     ANIM_LeadersFriend_TalkSitSad,
     ANIM_LeadersFriend_IdleSit,
     ANIM_LeadersFriend_BowSit,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Townsfolk)[] = {
+NpcData N(NpcData_Townsfolk)[] = {
     {
         .id = NPC_YoshiLeader,
-        .settings = &N(NpcSettings_Yoshi),
         .pos = { 323.0f, 30.0f, 412.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_VillageLeader),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Yoshi),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = YOSHI_LEADER_ANIMS,
         .tattle = MSG_NpcTattle_VillageLeader,
     },
     {
         .id = NPC_YoshiCouncillor,
-        .settings = &N(NpcSettings_Yoshi),
         .pos = { 172.0f, 30.0f, 418.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Councillor),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Yoshi),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = YOSHI_COUNCILLOR_ANIMS,
         .extraAnimations = N(ExtraAnims_Councillor),
         .tattle = MSG_NpcTattle_LeadersFriend,
     },
     {
         .id = NPC_Yoshi_01,
-        .settings = &N(NpcSettings_Yoshi_Patrol),
         .pos = { -520.0f, 0.0f, -270.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Yoshi_01),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -434,17 +430,17 @@ StaticNpc N(NpcData_Townsfolk)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Yoshi_01),
+        .settings = &N(NpcSettings_Yoshi_Patrol),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_RED_ANIMS,
         .tattle = MSG_NpcTattle_EntranceYoshi,
     },
     {
         .id = NPC_Yoshi_02,
-        .settings = &N(NpcSettings_Yoshi_Patrol),
         .pos = { 180.0f, 0.0f, -520.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Yoshi_02),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -460,17 +456,17 @@ StaticNpc N(NpcData_Townsfolk)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Yoshi_02),
+        .settings = &N(NpcSettings_Yoshi_Patrol),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_BlueYoshi,
     },
     {
         .id = NPC_Yoshi_03,
-        .settings = &N(NpcSettings_Yoshi_Patrol),
         .pos = { 600.0f, 0.0f, -150.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Yoshi_03),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -485,20 +481,24 @@ StaticNpc N(NpcData_Townsfolk)[] = {
                 .detectSize = { 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Yoshi_03),
+        .settings = &N(NpcSettings_Yoshi_Patrol),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_PURPLE_ANIMS,
         .tattle = MSG_NpcTattle_LikeableYoshi,
     },
 };
 
-StaticNpc N(NpcData_ChuckQuizmo) = {
+NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
-    .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { -150.0f, 15.0f, 300.0f },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_JAN, QUIZ_COUNT_JAN, QUIZ_MAP_JAN_02 }},
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_ChuckQuizmo),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+    .drops = NO_DROPS,
     .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,
 };

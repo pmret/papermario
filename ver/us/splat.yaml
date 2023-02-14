@@ -10263,6 +10263,7 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
+    - [0x929270, c, sbk_00_0_header]
     - [0x929270, c, sbk_00_1_main]
     - [0x9292B0, c, sbk_00_2_npc]
     - [0x9292B0, c, sbk_00_3_entity]
@@ -12158,14 +12159,14 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xABB290, c]
-    - [0xABB340, c]
-    - [0xABC250, data]
-    - [0xABC3D0, data]
-    - [0xABEC70, data]
-    - [0xABEF20, data]
-    - [0xAC40D0, data]
-    - [0xAC4FB0]
+    - [0xABB290, c, kkj_00_0_header]
+    - [0xABB290, c, kkj_00_1_music]
+    - [0xABB290, c, kkj_00_2_main]
+    - [0xABB340, c, kkj_00_3_npc_intro]
+    - [0xABC1D0, c, kkj_00_4_scene_intro]
+    - [0xABC1D0, c, kkj_00_5_npc_ending]
+    - [0xABC1D0, c, kkj_00_6_scene_ending]
+    - [0xABC250]
   - name: kkj_01
     dir: world/area_kkj/kkj_01
     type: code
@@ -12173,11 +12174,11 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xAC5170, c]
-    - [0xAC6000, data]
-    - [0xAC6140, data]
-    - [0xAC67E0, data]
-    - [0xAC8B60]
+    - [0xAC5170, c, kkj_01_0_header]
+    - [0xAC5170, c, kkj_01_1_music]
+    - [0xAC5170, c, kkj_01_2_main]
+    - [0xAC5170, c, kkj_01_3_npc]
+    - [0xAC6000]
   - name: kkj_02
     dir: world/area_kkj/kkj_02
     type: code
@@ -12185,11 +12186,11 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xAC8D20, c]
-    - [0xAC8D20, data]
-    - [0xAC8E40, data]
-    - [0xAC9160, data]
-    - [0xAC9700]
+    - [0xAC8D20, c, kkj_02_0_header]
+    - [0xAC8D20, c, kkj_02_1_music]
+    - [0xAC8D20, c, kkj_02_2_main]
+    - [0xAC8D20, c, kkj_02_3_npc]
+    - [0xAC8D20]
   - name: kkj_03
     dir: world/area_kkj/kkj_03
     type: code
@@ -12197,13 +12198,12 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xAC9710, c]
-    - [0xAC9730, c]
-    - [0xAC9A40, data]
-    - [0xAC9C00, data]
-    - [0xACA010, data]
-    - [0xACA250, data]
-    - [0xACAB00]
+    - [0xAC9710, c, kkj_03_0_header]
+    - [0xAC9730, c, kkj_03_1_music]
+    - [0xAC9A40, c, kkj_03_2_main]
+    - [0xAC9A40, c, kkj_03_3_npc]
+    - [0xAC9A40, c, kkj_03_4_scenes]
+    - [0xAC9A40]
   - name: kkj_10
     dir: world/area_kkj/kkj_10
     type: code
@@ -12211,14 +12211,12 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xACAB20, c]
-    - [0xACAB90, c]
-    - [0xACABD0, c]
-    - [0xACB3C0, c]
-    - [0xACBBF0, data]
-    - [0xACC510, data]
-    - [0xACC700, data]
-    - [0xACE0D0]
+    - [0xACAB20, c, kkj_10_0_header]
+    - [0xACAB20, c, kkj_10_1_main]
+    - [0xACAB90, c, kkj_10_2_entity]
+    - [0xACABD0, c, kkj_10_3_npcs_early]
+    - [0xACB3C0, c, kkj_10_4_npcs_later]
+    - [0xACBBF0]
   - name: kkj_11
     dir: world/area_kkj/kkj_11
     type: code
@@ -12226,16 +12224,14 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xACE140, c]
-    - [0xACE1B0, c]
-    - [0xACE1F0, c]
-    - [0xACE9E0, c]
-    - [0xACF210, data]
-    - [0xACFD40, data]
-    - [0xACFF30, data]
-    - [0xAD02E0, data]
-    - [0xAD27F0, data]
-    - [0xAD4010]
+    - [0xACE140, c, kkj_11_0_header]
+    - [0xACE140, c, kkj_11_1_main]
+    - [0xACE1B0, c, kkj_11_2_entity]
+    - [0xACE1F0, c, kkj_11_3_scene]
+    - [0xACE1F0, c, kkj_11_4_demo]
+    - [0xACE1F0, c, kkj_11_5_npcs_early]
+    - [0xACE9E0, c, kkj_11_6_npcs_later]
+    - [0xACF210]
   - name: kkj_12
     dir: world/area_kkj/kkj_12
     type: code
@@ -12243,10 +12239,10 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xAD4090, c]
-    - [0xAD4100, c]
-    - [0xAD4940, data]
-    - [0xAD5EA0]
+    - [0xAD4090, c, kkj_12_0_header]
+    - [0xAD4090, c, kkj_12_1_main]
+    - [0xAD4100, c, kkj_12_2_npc]
+    - [0xAD4940]
   - name: kkj_13
     dir: world/area_kkj/kkj_13
     type: code
@@ -12254,16 +12250,13 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xAD5ED0, c]
-    - [0xAD5EF0, c]
-    - [0xAD6200, c]
-    - [0xAD6630, data]
-    - [0xAD6780, data]
-    - [0xAD6820, data]
-    - [0xAD6E60, data]
-    - [0xAD8650, data]
-    - [0xAD9460, data]
-    - [0xADAE60]
+    - [0xAD5ED0, c, kkj_13_0_header]
+    - [0xAD5EF0, c, kkj_13_1_music]
+    - [0xAD6200, c, kkj_13_2_main]
+    - [0xAD6200, c, kkj_13_3_npcs_finale]
+    - [0xAD6260, c, kkj_13_4_npcs_intro]
+    - [0xAD6260, c, kkj_13_5_intro_scenes]
+    - [0xAD6630]
   - name: kkj_14
     dir: world/area_kkj/kkj_14
     type: code
@@ -12271,23 +12264,23 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xADAEA0, c]
-    - [0xADAEF0, c]
-    - [0xADB360, data]
-    - [0xADB5C0, data]
-    - [0xADC0F0, data]
-    - [0xADD870, data]
-    - [0xADE870, data]
-    - [0xADED00, data]
-    - [0xADF190, data]
-    - [0xADFA50, data]
-    - [0xAE1B30, data]
-    - [0xAE1E80, data]
-    - [0xAE3160, data]
-    - [0xAE32D0, data]
-    - [0xAE3610, data]
-    - [0xAE3850, data]
-    - [0xAE5550]
+    - [0xADAEA0, c, kkj_14_0_header]
+    - [0xADAEF0, c, kkj_14_1_music]
+    - [0xADAEF0, c, kkj_14_2_main]
+    - [0xADB240, c, kkj_14_3_interactables]
+    - [0xADB360, c, kkj_14_4_npc_guards]
+    - [0xADB360, c, kkj_14_5_npc_ch0]
+    - [0xADB360, c, kkj_14_6_npc_ch2]
+    - [0xADB360, c, kkj_14_7_npc_ch7]
+    - [0xADB360, c, kkj_14_8_chapter0]
+    - [0xADB360, c, kkj_14_9_chapter1]
+    - [0xADB360, c, kkj_14_10_chapter2]
+    - [0xADB360, c, kkj_14_11_chapter3]
+    - [0xADB360, c, kkj_14_12_chapter4]
+    - [0xADB360, c, kkj_14_13_chapter5]
+    - [0xADB360, c, kkj_14_14_chapter6]
+    - [0xADB360, c, kkj_14_15_chapter7]
+    - [0xADB360]
   - name: kkj_15
     dir: world/area_kkj/kkj_15
     type: code
@@ -12295,21 +12288,18 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xAE5590, c]
-    - [0xAE58D0, c]
-    - [0xAE5A90, c]
-    - [0xAE5B60, c]
-    - [0xAE5BA0, data]
-    - [0xAE5CE0, data]
-    - [0xAE5D80, data]
-    - [0xAE65A0, data]
-    - [0xAE6BF0, data]
-    - [0xAE8A50, data]
-    - [0xAEA0D0, data]
-    - [0xAEA230, data]
-    - [0xAEB820, data]
-    - [0xAECB30, data]
-    - [0xAED3E0]
+    - [0xAE5590, c, kkj_15_0_header]
+    - [0xAE5590, c, kkj_15_1_music]
+    - [0xAE5590, c, kkj_15_2_main]
+    - [0xAE58D0, c, kkj_15_3_rotating_wall]
+    - [0xAE5A90, c, kkj_15_4_chapter0]
+    - [0xAE5B60, c, kkj_15_5_chapter1]
+    - [0xAE5B60, c, kkj_15_6_chapter2]
+    - [0xAE5B60, c, kkj_15_7_chapter3]
+    - [0xAE5BA0, c, kkj_15_8_npc_chapter0]
+    - [0xAE5BA0, c, kkj_15_9_npc_chapter1]
+    - [0xAE5BA0, c, kkj_15_10_npc_chapter3]
+    - [0xAE5BA0]
   - name: kkj_16
     dir: world/area_kkj/kkj_16
     type: code
@@ -12317,13 +12307,13 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xAED410, c]
-    - [0xAEDC60, c]
-    - [0xAEE490, data]
-    - [0xAEE7F0, data]
-    - [0xAF09D0, data]
-    - [0xAF1B10, data]
-    - [0xAF1C10]
+    - [0xAED410, c, kkj_16_0_header]
+    - [0xAED410, c, kkj_16_1_main]
+    - [0xAED470, c, kkj_16_2_npcs_early]
+    - [0xAEDC60, c, kkj_16_3_npcs_later]
+    - [0xAEE490, c, kkj_16_4_stealth]
+    - [0xAEE490, c, kkj_16_5_entity]
+    - [0xAEE490]
   - name: kkj_17
     dir: world/area_kkj/kkj_17
     type: code
@@ -12331,11 +12321,11 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xAF1C60, c]
-    - [0xAF2200, data]
-    - [0xAF2440, data]
-    - [0xAF2520, data]
-    - [0xAF2C90]
+    - [0xAF1C60, c, kkj_17_0_header]
+    - [0xAF1C60, c, kkj_17_1_main]
+    - [0xAF1C60, c, kkj_17_2_entity]
+    - [0xAF1C60, c, kkj_17_3_chest]
+    - [0xAF2200]
   - name: kkj_18
     dir: world/area_kkj/kkj_18
     type: code
@@ -12343,14 +12333,12 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xAF2CA0, c]
-    - [0xAF2FE0, c]
-    - [0xAF34C0, data]
-    - [0xAF3560, data]
-    - [0xAF3600, data]
-    - [0xAF3CB0, data]
-    - [0xAF4BB0, data]
-    - [0xAF7920]
+    - [0xAF2CA0, c, kkj_18_0_header]
+    - [0xAF2CA0, c, kkj_18_1_music]
+    - [0xAF2CA0, c, kkj_18_2_main]
+    - [0xAF2FE0, c, kkj_18_3_npc]
+    - [0xAF2FE0, c, kkj_18_4_gourmet]
+    - [0xAF34C0]
   - name: kkj_19
     dir: world/area_kkj/kkj_19
     type: code
@@ -12358,13 +12346,13 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xAF7950, c]
-    - [0xAF7C00, c]
-    - [0xAF8660, data]
-    - [0xAF8B40, data]
-    - [0xAF9050, data]
-    - [0xAF9460, data]
-    - [0xAFDAF0]
+    - [0xAF7950, c, kkj_19_0_header]
+    - [0xAF7950, c, kkj_19_1_music]
+    - [0xAF7C00, c, kkj_19_2_main]
+    - [0xAF7C00, c, kkj_19_3_npcs_intro]
+    - [0xAF7C00, c, kkj_19_4_npcs_peach]
+    - [0xAF7C00, c, kkj_19_5_baking]
+    - [0xAF8660]
   - name: kkj_20
     dir: world/area_kkj/kkj_20
     type: code
@@ -12372,13 +12360,12 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xAFDB40, c]
-    - [0xAFDE00, c]
-    - [0xAFE130, data]
-    - [0xAFE1E0, data]
-    - [0xAFE3C0, data]
-    - [0xAFE610, data]
-    - [0xB02290]
+    - [0xAFDB40, c, kkj_20_0_header]
+    - [0xAFDB40, c, kkj_20_1_music]
+    - [0xAFDB40, c, kkj_20_2_main]
+    - [0xAFDB40, c, kkj_20_3_entity]
+    - [0xAFDE00, c, kkj_20_4_npc]
+    - [0xAFE130]
   - name: kkj_21
     dir: world/area_kkj/kkj_21
     type: code
@@ -12386,9 +12373,9 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xB022A0, c]
-    - [0xB022A0, data]
-    - [0xB024E0]
+    - [0xB022A0, c, kkj_21_0_header]
+    - [0xB022A0, c, kkj_21_1_main]
+    - [0xB022A0]
   - name: kkj_22
     dir: world/area_kkj/kkj_22
     type: code
@@ -12396,10 +12383,10 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xB024F0, c]
-    - [0xB024F0, data]
-    - [0xB025A0, data]
-    - [0xB02870]
+    - [0xB024F0, c, kkj_22_0_header]
+    - [0xB024F0, c, kkj_22_1_music]
+    - [0xB024F0, c, kkj_22_2_main]
+    - [0xB024F0]
   - name: kkj_23
     dir: world/area_kkj/kkj_23
     type: code
@@ -12407,15 +12394,13 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xB02880, c]
-    - [0xB028A0, c]
-    - [0xB03190, c]
-    - [0xB03250, data]
-    - [0xB03300, data]
-    - [0xB036B0, data]
-    - [0xB04420, data]
-    - [0xB04FB0, data]
-    - [0xB06530]
+    - [0xB02880, c, kkj_23_0_header]
+    - [0xB028A0, c, kkj_23_1_music]
+    - [0xB028A0, c, kkj_23_2_main]
+    - [0xB02900, c, kkj_23_3_npcs_finale]
+    - [0xB02960, c, kkj_23_4_npcs_peach]
+    - [0xB03190, c, kkj_23_5_scene]
+    - [0xB03250]
   - name: kkj_24
     dir: world/area_kkj/kkj_24
     type: code
@@ -12423,11 +12408,11 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xB06570, c]
-    - [0xB06590, data]
-    - [0xB06640, data]
-    - [0xB069B0, data]
-    - [0xB069F0]
+    - [0xB06570, c, kkj_24_0_header]
+    - [0xB06570, c, kkj_24_1_music]
+    - [0xB06570, c, kkj_24_2_main]
+    - [0xB06590, c, kkj_24_3_entity]
+    - [0xB06590]
   - name: kkj_25
     dir: world/area_kkj/kkj_25
     type: code
@@ -12435,17 +12420,17 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xB06A00, c]
-    - [0xB06A20, c]
-    - [0xB06A50, c]
-    - [0xB06A80, c]
-    - [0xB06D10, c]
-    - [0xB07940, data]
-    - [0xB081C0, data]
-    - [0xB0B310, data]
-    - [0xB0E3A0, data]
-    - [0xB0F280, data]
-    - [0xB13100]
+    - [0xB06A00, c, kkj_25_0_header]
+    - [0xB06A20, c, kkj_25_1_main]
+    - [0xB06A20, c, kkj_25_2_npc_initial]
+    - [0xB06A50, c, kkj_25_3_npc_midpoint]
+    - [0xB06A80, c, kkj_25_4_npc_final]
+    - [0xB06A80, c, kkj_25_5_arena]
+    - [0xB06D10, c, kkj_25_6_peach_free]
+    - [0xB07660, c, kkj_25_7_kammy_defeated]
+    - [0xB07730, c, kkj_25_8_bowser_defeated]
+    - [0xB07940, c, kkj_25_9_entity]
+    - [0xB07940]
   - name: kkj_26
     dir: world/area_kkj/kkj_26
     type: code
@@ -12453,11 +12438,11 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xB13120, c]
-    - [0xB13150, data]
-    - [0xB13500, data]
-    - [0xB13A40, data]
-    - [0xB13D50]
+    - [0xB13120, c, kkj_26_0_header]
+    - [0xB13120, c, kkj_26_1_main]
+    - [0xB13150, c, kkj_26_2_scenes]
+    - [0xB13150, c, kkj_26_3_demo]
+    - [0xB13150]
   - name: kkj_27
     dir: world/area_kkj/kkj_27
     type: code
@@ -12465,12 +12450,11 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xB13D70, c]
-    - [0xB14080, c]
-    - [0xB14210, data]
-    - [0xB14340, data]
-    - [0xB143E0, data]
-    - [0xB14E90]
+    - [0xB13D70, c, kkj_27_0_header]
+    - [0xB13D70, c, kkj_27_1_music]
+    - [0xB13D70, c, kkj_27_2_main]
+    - [0xB14080, c, kkj_27_3_rotating_wall]
+    - [0xB14210]
   - name: kkj_28
     dir: world/area_kkj/kkj_28
     type: code
@@ -12478,9 +12462,9 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xB14EA0, c]
-    - [0xB14EA0, data]
-    - [0xB150A0]
+    - [0xB14EA0, c, kkj_28_0_header]
+    - [0xB14EA0, c, kkj_28_1_main]
+    - [0xB14EA0]
   - name: kkj_29
     dir: world/area_kkj/kkj_29
     type: code
@@ -12488,12 +12472,11 @@ segments:
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xB150B0, c]
-    - [0xB150E0, c]
-    - [0xB15120, data]
-    - [0xB15410, data]
-    - [0xB15DA0, data]
-    - [0xB1A8F0]
+    - [0xB150B0, c, kkj_29_0_header]
+    - [0xB150B0, c, kkj_29_1_main]
+    - [0xB150E0, c, kkj_29_2_npc]
+    - [0xB150E0, c, kkj_29_3_quiz]
+    - [0xB15120]
   - name: tst_01
     dir: world/area_tst/tst_01
     type: code
@@ -17195,29 +17178,20 @@ segments:
     - [0xEF7FB0, c, flo_18_4_npc]
     - [0xEF8010, c, flo_18_5_foliage]
     - [0xEF8250]
-  #- name: dead_flo_19
-  #  dir: world/dead/area_flo/flo_19
-  #  type: code
-  #  start: 0xEFEB00
-  #  vram: 0x80240000
-  #  subsegments:
-  #  - [0xEFEB00, c, flo_19_0_header]
-  #  - [0xEFEB00, c, flo_19_1_music]
-  #  - [0xEFEB00, c, flo_19_2_entity]
-  #  - [0xEFEB00, c, flo_19_3_main]
-  #  - [0xEFEE40, c, flo_19_4_clouds]
-  #  - [0xEFEFD0, c, flo_19_5_beanstalk]
-  #  - [0xEFF440]
-
-  # should end at 0xF01B10
-
-  - type: code
+  - name: dead_flo_19
+    dir: world/dead/area_flo/flo_19
+    type: code
     start: 0xEFEB00
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
     subsegments:
-    - [0xEFEB00, c]
-    - [0xEFF440, bin] # part of overlay
+    - [0xEFEB00, c, flo_19_0_header]
+    - [0xEFEB00, c, flo_19_1_music]
+    - [0xEFEB00, c, flo_19_2_entity]
+    - [0xEFEB00, c, flo_19_3_main]
+    - [0xEFEE40, c, flo_19_4_clouds]
+    - [0xEFEFD0, c, flo_19_5_beanstalk]
+    - [0xEFF440]
 
 #############
 ### Audio ###

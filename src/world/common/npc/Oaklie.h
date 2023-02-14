@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Oaklie.h"
 
-#define OAKLIE_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define OAKLIE_ANIMS \
 { \
     .idle   = ANIM_Oaklie_Idle, \

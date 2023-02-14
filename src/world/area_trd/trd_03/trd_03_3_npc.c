@@ -4,7 +4,7 @@ extern EvtScript N(EVS_StartKoopaBrosTheme);
 extern EvtScript N(EVS_EndKoopaBrosTheme);
 extern EvtScript N(EVS_EnterMap);
 
-#include "world/common/enemy/complete/KoopaTroopa_Wander.inc.c"
+#include "world/common/enemy/KoopaTroopa_Wander.inc.c"
 
 NpcSettings N(NpcSettings_KoopaBros) = {
     .height = 34,
@@ -14,7 +14,7 @@ NpcSettings N(NpcSettings_KoopaBros) = {
     .onDefeat = &EnemyNpcDefeat,
 };
 
-#include "world/common/enemy/complete/Bobomb_Wander.inc.c"
+#include "world/common/enemy/Bobomb_Wander.inc.c"
 
 EvtScript N(EVS_Scene_GreenKoopaBros) = {
     EVT_CALL(DisablePlayerInput, TRUE)
@@ -180,18 +180,14 @@ EvtScript N(EVS_NpcInit_KoopaTroopa_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KoopaBros) = {
+NpcData N(NpcData_KoopaBros) = {
     .id = NPC_KoopaBros,
-    .settings = &N(NpcSettings_KoopaBros),
     .pos = { -569.0f, 0.0f, -57.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_KoopaBros),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_KoopaBros),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_KoopaBros_Green_Anim04,
         .walk   = ANIM_KoopaBros_Green_Anim02,
@@ -212,14 +208,10 @@ StaticNpc N(NpcData_KoopaBros) = {
     },
 };
 
-StaticNpc N(NpcData_KoopaTroopa_01) = {
+NpcData N(NpcData_KoopaTroopa_01) = {
     .id = NPC_KoopaTroopa_01,
-    .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { -520.0f, 0.0f, 15.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_KoopaTroopa_01),
-    .drops = KOOPA_TROOPA_TRD_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -232,18 +224,18 @@ StaticNpc N(NpcData_KoopaTroopa_01) = {
             .detectSize = { 350 },
         }
     },
+    .init = &N(EVS_NpcInit_KoopaTroopa_01),
+    .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_KoopaTroopa_02) = {
+NpcData N(NpcData_KoopaTroopa_02) = {
     .id = NPC_KoopaTroopa_02,
-    .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { -52.0f, 0.0f, -21.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_KoopaTroopa_02),
-    .drops = KOOPA_TROOPA_TRD_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -256,17 +248,18 @@ StaticNpc N(NpcData_KoopaTroopa_02) = {
             .detectSize = { 350 },
         }
     },
+    .init = &N(EVS_NpcInit_KoopaTroopa_02),
+    .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_KoopaTroopa_03) = {
+NpcData N(NpcData_KoopaTroopa_03) = {
     .id = NPC_KoopaTroopa_03,
-    .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { 375.0f, 0.0f, 15.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = KOOPA_TROOPA_TRD_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -279,6 +272,9 @@ StaticNpc N(NpcData_KoopaTroopa_03) = {
             .detectSize = { 350 },
         }
     },
+    .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

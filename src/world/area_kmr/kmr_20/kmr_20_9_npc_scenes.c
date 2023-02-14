@@ -21,18 +21,14 @@ EvtScript N(EVS_NpcInit_Luigi_Scenes) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Scenes)[] = {
+NpcData N(NpcData_Scenes)[] = {
     {
         .id = NPC_Scene_Parakarry,
-        .settings = &N(NpcSettings_Scenes),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
+        .settings = &N(NpcSettings_Scenes),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldParakarry_Idle,
             .walk   = ANIM_WorldParakarry_Walk,
@@ -54,16 +50,12 @@ StaticNpc N(NpcData_Scenes)[] = {
     },
     {
         .id = NPC_Scene_Luigi,
-        .settings = &N(NpcSettings_Scenes),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_GRAVITY,
         .init = &N(EVS_NpcInit_Luigi_Scenes),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Scenes),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_GRAVITY,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Luigi_Still,
             .walk   = ANIM_Luigi_Still,

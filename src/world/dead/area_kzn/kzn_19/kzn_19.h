@@ -21,6 +21,7 @@ enum {
 
 enum {
     MV_VinesData                = MapVar(0),
+    MV_Unk_01                   = MapVar(1),
     MV_BossDefeated             = MapVar(10),
 };
 

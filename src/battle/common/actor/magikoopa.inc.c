@@ -1394,7 +1394,7 @@ ActorBlueprint N(clone_flying) = {
     .statusMessageOffset = { 1, 34 },
 };
 
-Vec3i N(clone_pos) = { 0, -1000, 0 };
+Vec3i N(clone_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_clone) = {
     { .actor = &N(clone), .home = { .vec = &N(clone_pos) }, .priority = 0, },

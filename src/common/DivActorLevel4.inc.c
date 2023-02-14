@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 
-ApiStatus N(DivActorLevel4)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(DivActorLevel4)) {
     ActorBlueprint* actorData = get_actor(script->owner1.actorID)->actorBlueprint;
 
     actorData->level /= 4;

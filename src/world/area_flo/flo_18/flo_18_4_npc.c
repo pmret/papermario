@@ -2,8 +2,8 @@
 
 #include "world/common/todo/UnkFunc42.inc.c"
 
-#include "world/common/enemy/complete/Lakitu.h"
-#include "world/common/enemy/complete/YMagikoopa.h"
+#include "world/common/enemy/Lakitu.h"
+#include "world/common/enemy/YMagikoopa.h"
 
 NpcSettings N(NpcSettings_Lakitu) = {
     .height = 32,
@@ -597,59 +597,59 @@ EvtScript N(EVS_NpcInit_Lakitu_03) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_MachineGang)[] = {
+NpcData N(NpcData_MachineGang)[] = {
     {
         .id = NPC_Lakitu_01,
-        .settings = &N(NpcSettings_Lakitu),
         .pos = { 0.0f, 15.0f, 60.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Lakitu_01),
+        .settings = &N(NpcSettings_Lakitu),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .drops = LAKITU_DROPS,
         .animations = LAKITU_ANIMS,
         .tattle = MSG_NpcTattle_PuffPuffOperator,
     },
     {
         .id = NPC_Lakitu_02,
-        .settings = &N(NpcSettings_Lakitu),
         .pos = { 65.0f, 15.0f, 60.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Lakitu_02),
+        .settings = &N(NpcSettings_Lakitu),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .drops = LAKITU_DROPS,
         .animations = LAKITU_ANIMS,
         .tattle = MSG_NpcTattle_PuffPuffOperator,
     },
     {
         .id = NPC_Lakitu_03,
-        .settings = &N(NpcSettings_Lakitu),
         .pos = { 135.0f, 15.0f, 35.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Lakitu_03),
+        .settings = &N(NpcSettings_Lakitu),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .drops = LAKITU_DROPS,
         .animations = LAKITU_ANIMS,
         .tattle = MSG_NpcTattle_PuffPuffOperator,
     },
     {
         .id = NPC_Magikoopa,
-        .settings = &N(NpcSettings_Magikoopa),
         .pos = { -60.0f, 0.0f, 50.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Magikoopa),
-        .drops = MAGIKOOPA_DROPS,
+        .settings = &N(NpcSettings_Magikoopa),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .drops = MAGINO_DROPS,
         .animations = MAGIKOOPA_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_PuffPuffOperator,
     },
     {
         .id = NPC_FlyingMagikoopa,
-        .settings = &N(NpcSettings_Magikoopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_FlyingMagikoopa),
-        .drops = MAGIKOOPA_DROPS,
+        .settings = &N(NpcSettings_Magikoopa),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .drops = MAGINO_DROPS,
         .animations = FLYING_MAGIKOOPA_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_PuffPuffOperator,
     },

@@ -2,7 +2,7 @@
 
 #include "world/common/npc/StarSpirit.h"
 #include "world/common/npc/KoopaBros.h"
-#include "world/common/enemy/complete/ShyGuy.h"
+#include "world/common/enemy/ShyGuy.h"
 
 MAP_RODATA_PAD(1,npc);
 
@@ -30,82 +30,78 @@ NpcSettings N(NpcSettings_Unused) = {
 #include "npc/chapter_7.inc.c"
 #include "npc/chapter_8.inc.c"
 
-StaticNpc N(NpcData_Chapter1)[] = {
+NpcData N(NpcData_Chapter1)[] = {
     {
         .id = NPC_Eldstar,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -62.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar),
-        .drops = ELDSTAR_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
     },
     {
         .id = NPC_KoopaBros_01,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 10.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_KoopaBros),
-        .drops = KOOPA_BROS_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = BLACK_KOOPA_BROS_ANIMS,
     },
     {
         .id = NPC_KoopaBros_02,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 90.0f, 10.0f, 91.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_KoopaBros),
-        .drops = KOOPA_BROS_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = BLACK_KOOPA_BROS_ANIMS,
     },
     {
         .id = NPC_KoopaBros_03,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 86.0f, 0.0f, -7.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_KoopaBros),
-        .drops = KOOPA_BROS_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = BLACK_KOOPA_BROS_ANIMS,
     },
     {
         .id = NPC_KoopaBros_04,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 54.0f, -2.0f, -47.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_KoopaBros),
-        .drops = KOOPA_BROS_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = BLACK_KOOPA_BROS_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Chapter2)[] = {
+NpcData N(NpcData_Chapter2)[] = {
     {
         .id = NPC_Mamar,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -62.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Mamar),
-        .drops = MAMAR_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = MAMAR_ANIMS,
     },
     {
         .id = NPC_Tutankoopa,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 78.0f, 19.0f, 20.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Tutankoopa),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Tutankoopa_Anim01,
             .walk   = ANIM_Tutankoopa_Anim01,
@@ -127,16 +123,12 @@ StaticNpc N(NpcData_Chapter2)[] = {
     },
     {
         .id = NPC_ChainChomp_01,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 23.0f, -4.0f, -180.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ChainChomp),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ChainChomp_Anim00,
             .walk   = ANIM_ChainChomp_Anim00,
@@ -158,15 +150,11 @@ StaticNpc N(NpcData_Chapter2)[] = {
     },
     {
         .id = NPC_ChainChomp_02,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 23.0f, -4.0f, -180.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_Dummy),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ChainChomp_Anim00,
             .walk   = ANIM_ChainChomp_Anim00,
@@ -188,15 +176,11 @@ StaticNpc N(NpcData_Chapter2)[] = {
     },
     {
         .id = NPC_ChainChomp_03,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 23.0f, -4.0f, -180.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_Dummy),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ChainChomp_Anim00,
             .walk   = ANIM_ChainChomp_Anim00,
@@ -218,15 +202,11 @@ StaticNpc N(NpcData_Chapter2)[] = {
     },
     {
         .id = NPC_ChainChomp_04,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 23.0f, -4.0f, -180.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_Dummy),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ChainChomp_Anim00,
             .walk   = ANIM_ChainChomp_Anim00,
@@ -248,15 +228,11 @@ StaticNpc N(NpcData_Chapter2)[] = {
     },
     {
         .id = NPC_ChainChomp_05,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 23.0f, -4.0f, -180.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_Dummy),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ChainChomp_Anim00,
             .walk   = ANIM_ChainChomp_Anim00,
@@ -278,29 +254,25 @@ StaticNpc N(NpcData_Chapter2)[] = {
     },
 };
 
-StaticNpc N(NpcData_Chapter3)[] = {
+NpcData N(NpcData_Chapter3)[] = {
     {
         .id = NPC_Skolar,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -62.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Skolar),
-        .drops = SKOLAR_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = SKOLAR_ANIMS,
     },
     {
         .id = NPC_Tubba,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 54.0f, -1.0f, 1.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Tubba),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldTubba_Anim06,
             .walk   = ANIM_WorldTubba_Anim09,
@@ -322,29 +294,25 @@ StaticNpc N(NpcData_Chapter3)[] = {
     },
 };
 
-StaticNpc N(NpcData_Chapter4)[] = {
+NpcData N(NpcData_Chapter4)[] = {
     {
         .id = NPC_Muskular,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -62.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Muskular),
-        .drops = MUSKULAR_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = MUSKULAR_ANIMS,
     },
     {
         .id = NPC_GeneralGuy,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 97.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_GeneralGuy),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GeneralGuy_Anim02,
             .walk   = ANIM_GeneralGuy_Anim02,
@@ -366,95 +334,91 @@ StaticNpc N(NpcData_Chapter4)[] = {
     },
     {
         .id = NPC_ShyGuy_01,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 17.0f, 0.0f, -14.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ShyGuy),
-        .drops = SHY_GUY_NO_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ShyGuy_02,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 47.0f, 0.0f, 25.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ShyGuy),
-        .drops = SHY_GUY_NO_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Chapter5)[] = {
+NpcData N(NpcData_Chapter5)[] = {
     {
         .id = NPC_Misstar,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -62.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Misstar),
-        .drops = MISSTAR_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = MISSTAR_ANIMS,
     },
     {
         .id = NPC_LavaPiranhaHead,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_4,
         .init = &N(EVS_NpcInit_LavaPiranhaHead),
-        .drops = LAVA_PIRANHA_NO_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_4,
+        .drops = NO_DROPS,
         .animations = LAVA_PIRANHA_HEAD_ANIMS,
         .extraAnimations = N(D_80243848_902EB8),
     },
     {
         .id = NPC_LavaBud_01,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
         .init = &N(EVS_NpcInit_LavaBud_01),
-        .drops = LAVA_PIRANHA_NO_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
+        .drops = NO_DROPS,
         .animations = LAVA_PIRANHA_BUD_ANIMS,
         .extraAnimations = N(D_80243854_902EC4),
     },
     {
         .id = NPC_LavaBud_02,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
         .init = &N(EVS_NpcInit_LavaBud_01),
-        .drops = LAVA_PIRANHA_NO_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
+        .drops = NO_DROPS,
         .animations = LAVA_PIRANHA_BUD_ANIMS,
         .extraAnimations = N(D_80243854_902EC4),
     },
 };
 
-StaticNpc N(NpcData_Chapter6)[] = {
+NpcData N(NpcData_Chapter6)[] = {
     {
         .id = NPC_Klevar,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -62.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Klevar),
-        .drops = KLEVAR_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = KLEVAR_ANIMS,
     },
     {
         .id = NPC_HuffNPuff_Body,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 70.0f, 109.0f, 1.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_HuffNPuff_Body),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_HuffNPuff_Anim01,
             .walk   = ANIM_HuffNPuff_Anim01,
@@ -476,16 +440,12 @@ StaticNpc N(NpcData_Chapter6)[] = {
     },
     {
         .id = NPC_HuffNPuff_Face,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 70.0f, 109.0f, 1.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_HuffNPuff_Face),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_HuffNPuff_Anim01,
             .walk   = ANIM_HuffNPuff_Anim01,
@@ -507,16 +467,12 @@ StaticNpc N(NpcData_Chapter6)[] = {
     },
     {
         .id = NPC_HuffNPuff_Arms,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 70.0f, 109.0f, 1.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_HuffNPuff_Arms),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_HuffNPuff_Anim01,
             .walk   = ANIM_HuffNPuff_Anim01,
@@ -538,16 +494,12 @@ StaticNpc N(NpcData_Chapter6)[] = {
     },
     {
         .id = NPC_TuffPuff_01,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 60.0f, 40.0f, -50.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_TuffPuff_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_TuffPuff_Still,
             .walk   = ANIM_TuffPuff_Still,
@@ -569,15 +521,11 @@ StaticNpc N(NpcData_Chapter6)[] = {
     },
     {
         .id = NPC_TuffPuff_02,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 14.0f, 61.0f, 1.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_Dummy),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_TuffPuff_Still,
             .walk   = ANIM_TuffPuff_Still,
@@ -599,29 +547,25 @@ StaticNpc N(NpcData_Chapter6)[] = {
     },
 };
 
-StaticNpc N(NpcData_Chapter7)[] = {
+NpcData N(NpcData_Chapter7)[] = {
     {
         .id = NPC_Kalmar,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -62.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Kalmar),
-        .drops = KALMAR_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = KALMAR_ANIMS,
     },
     {
         .id = NPC_CrystalKing,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 60.0f, -2.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_CrystalKing),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_CrystalKing_Anim09,
             .walk   = ANIM_CrystalKing_Anim09,
@@ -643,16 +587,12 @@ StaticNpc N(NpcData_Chapter7)[] = {
     },
     {
         .id = NPC_IceCube,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 10.0f, 31.0f, -12.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_IceCube),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_CrystalKing_Anim09,
             .walk   = ANIM_CrystalKing_Anim09,
@@ -674,16 +614,12 @@ StaticNpc N(NpcData_Chapter7)[] = {
     },
     {
         .id = NPC_IceSphere,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 40.0f, 68.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_IceSphere),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_CrystalKing_Anim09,
             .walk   = ANIM_CrystalKing_Anim09,
@@ -705,16 +641,12 @@ StaticNpc N(NpcData_Chapter7)[] = {
     },
     {
         .id = NPC_IceSpike,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { 96.0f, 53.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_IceSpike),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_CrystalKing_Anim09,
             .walk   = ANIM_CrystalKing_Anim09,
@@ -736,18 +668,14 @@ StaticNpc N(NpcData_Chapter7)[] = {
     },
 };
 
-StaticNpc N(NpcData_Chapter8) = {
+NpcData N(NpcData_Chapter8) = {
     .id = NPC_Bowser,
-    .settings = &N(NpcSettings_Dummy),
     .pos = { 58.0f, 0.0f, 20.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Bowser),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Dummy),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_WorldBowser_Idle,
         .walk   = ANIM_WorldBowser_Idle,

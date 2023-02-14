@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(ChompChainInit)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ChompChainInit)) {
     Actor* actor = get_actor(script->owner1.actorID);
     ActorPart* actorPart;
     ChompChainAnimationState* it;

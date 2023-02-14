@@ -509,18 +509,14 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Whale) = {
+NpcData N(NpcData_Whale) = {
     .id = NPC_Whale,
-    .settings = &N(NpcSettings_Whale),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Whale),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Whale),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Kolorado_Idle,
         .walk   = ANIM_Kolorado_Walk,
@@ -541,18 +537,14 @@ StaticNpc N(NpcData_Whale) = {
     },
 };
 
-StaticNpc N(NpcData_Kolorado) = {
+NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(NpcSettings_Kolorado),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = COMMON_PASSIVE_FLAGS,
     .init = &N(EVS_NpcInit_Kolorado),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Kolorado),
+    .flags = COMMON_PASSIVE_FLAGS,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Kolorado_Idle,
         .walk   = ANIM_Kolorado_Walk,
@@ -573,25 +565,21 @@ StaticNpc N(NpcData_Kolorado) = {
     },
 };
 
-s32 N(ExtraAnims_JrTroopa)[] = {
+AnimID N(ExtraAnims_JrTroopa)[] = {
     ANIM_JrTroopa_Still,
     ANIM_JrTroopa_Idle,
     ANIM_JrTroopa_ChargeTripped,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_JrTroopa) = {
+NpcData N(NpcData_JrTroopa) = {
     .id = NPC_JrTroopa,
-    .settings = &N(NpcSettings_JrTroopa),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_JrTroopa),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_JrTroopa),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_JrTroopa_Idle,
         .walk   = ANIM_JrTroopa_Walk,

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(GetItemEntityPosition)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetItemEntityPosition)) {
     Bytecode* args = script->ptrReadPos;
     ItemEntity* entity = get_item_entity(evt_get_variable(script, *args++));
 

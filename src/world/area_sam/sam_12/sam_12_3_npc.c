@@ -10,14 +10,14 @@ EvtScript N(EVS_NpcInit_Merlar) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Merlar) = {
+NpcData N(NpcData_Merlar) = {
     .id = NPC_Merlar,
-    .settings = &N(NpcSettings_Merlar),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 180,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Merlar),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Merlar),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = MERLAR_ANIMS,
 };
 

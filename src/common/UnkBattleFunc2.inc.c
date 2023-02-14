@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(UnkBattleFunc2)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkBattleFunc2)) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -12,7 +12,7 @@ ApiStatus N(UnkBattleFunc2)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkBattleFunc2_2)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkBattleFunc2_2)) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);

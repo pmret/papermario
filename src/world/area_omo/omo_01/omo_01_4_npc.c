@@ -1,6 +1,6 @@
 #include "omo_01.h"
 
-#include "world/common/enemy/complete/ShyGuy_AvoidPlayer.inc.c"
+#include "world/common/enemy/ShyGuy_AvoidPlayer.inc.c"
 
 EvtScript N(EVS_ShyGuy_CarryItem) = {
     EVT_SET(LVarA, LVar0) // npcID
@@ -77,14 +77,10 @@ EvtScript N(EVS_NpcInit_ShyGuy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_01) = {
+NpcData N(NpcData_ShyGuy_01) = {
     .id = NPC_ShyGuy_01,
-    .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
     .pos = { -165.0f, 0.0f, -50.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_ShyGuy),
-    .drops = SHY_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -97,6 +93,10 @@ StaticNpc N(NpcData_ShyGuy_01) = {
             .detectSize = { 300 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy),
+    .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = SHY_GUY_DROPS,
     .animations = RED_AVOID_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
@@ -112,14 +112,10 @@ EvtScript N(EVS_NpcInit_ShyGuy_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_02) = {
+NpcData N(NpcData_ShyGuy_02) = {
     .id = NPC_ShyGuy_02,
-    .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
     .pos = { -25.0f, 0.0f, -160.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_ShyGuy_02),
-    .drops = SHY_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -132,6 +128,10 @@ StaticNpc N(NpcData_ShyGuy_02) = {
             .detectSize = { 300 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy_02),
+    .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = SHY_GUY_DROPS,
     .animations = YELLOW_AVOID_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
@@ -147,14 +147,10 @@ EvtScript N(EVS_NpcInit_ShyGuy_03) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_03) = {
+NpcData N(NpcData_ShyGuy_03) = {
     .id = NPC_ShyGuy_03,
-    .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
     .pos = { -60.0f, 0.0f, 390.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_ShyGuy_03),
-    .drops = SHY_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -167,6 +163,10 @@ StaticNpc N(NpcData_ShyGuy_03) = {
             .detectSize = { 300 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy_03),
+    .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = SHY_GUY_DROPS,
     .animations = YELLOW_AVOID_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
@@ -182,14 +182,10 @@ EvtScript N(EVS_NpcInit_ShyGuy_04) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_04) = {
+NpcData N(NpcData_ShyGuy_04) = {
     .id = NPC_ShyGuy_04,
-    .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
     .pos = { 50.0f, 0.0f, 230.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_ShyGuy_04),
-    .drops = SHY_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -202,6 +198,10 @@ StaticNpc N(NpcData_ShyGuy_04) = {
             .detectSize = { 300 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy_04),
+    .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = SHY_GUY_DROPS,
     .animations = BLUE_AVOID_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
@@ -217,14 +217,10 @@ EvtScript N(EVS_NpcInit_ShyGuy_05) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_05) = {
+NpcData N(NpcData_ShyGuy_05) = {
     .id = NPC_ShyGuy_05,
-    .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
     .pos = { 340.0f, 0.0f, 120.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_ShyGuy_05),
-    .drops = SHY_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -237,6 +233,10 @@ StaticNpc N(NpcData_ShyGuy_05) = {
             .detectSize = { 300 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy_05),
+    .settings = &N(NpcSettings_ShyGuy_AvoidPlayer),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = SHY_GUY_DROPS,
     .animations = GREEN_AVOID_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

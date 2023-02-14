@@ -338,18 +338,14 @@ EvtScript N(EVS_NpcInit_Bobomb_04) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Bombette) = {
+NpcData N(NpcData_Bombette) = {
     .id = NPC_Bombette,
-    .settings = &N(NpcSettings_Bobomb),
     .pos = { 0.0f, 0.0f, 0.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Bombette),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Bobomb),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_WorldBombette_Idle,
         .walk   = ANIM_WorldBombette_Walk,
@@ -371,14 +367,14 @@ StaticNpc N(NpcData_Bombette) = {
     .tattle = MSG_NpcTattle_TRD_Bombette,
 };
 
-StaticNpc N(NpcData_Jailers)[] = {
+NpcData N(NpcData_Jailers)[] = {
     {
         .id = NPC_Jailer_KoopaTroopa,
-        .settings = &N(NpcSettings_KoopaTroopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_KoopaTroopa),
+        .settings = &N(NpcSettings_KoopaTroopa),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -410,16 +406,12 @@ StaticNpc N(NpcData_Jailers)[] = {
     },
     {
         .id = NPC_Jailer_Bobomb_01,
-        .settings = &N(NpcSettings_Bobomb),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_Bobomb_Jailer),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Bobomb),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Bobomb_Anim02,
             .walk   = ANIM_Bobomb_Anim04,
@@ -441,16 +433,12 @@ StaticNpc N(NpcData_Jailers)[] = {
     },
     {
         .id = NPC_Jailer_Bobomb_02,
-        .settings = &N(NpcSettings_Bobomb),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_Bobomb_Jailer),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Bobomb),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Bobomb_Anim02,
             .walk   = ANIM_Bobomb_Anim04,
@@ -472,14 +460,14 @@ StaticNpc N(NpcData_Jailers)[] = {
     },
 };
 
-StaticNpc N(NpcData_Inmates)[] = {
+NpcData N(NpcData_Inmates)[] = {
     {
         .id = NPC_Bobomb_01,
-        .settings = &N(NpcSettings_Bobomb),
         .pos = { 25.0f, 0.0f, 127.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Bobomb_01),
+        .settings = &N(NpcSettings_Bobomb),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -514,11 +502,11 @@ StaticNpc N(NpcData_Inmates)[] = {
     },
     {
         .id = NPC_Bobomb_02,
-        .settings = &N(NpcSettings_Bobomb),
         .pos = { -30.0f, 0.0f, 130.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Bobomb_02),
+        .settings = &N(NpcSettings_Bobomb),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -553,11 +541,11 @@ StaticNpc N(NpcData_Inmates)[] = {
     },
     {
         .id = NPC_Bobomb_03,
-        .settings = &N(NpcSettings_Bobomb),
         .pos = { -140.0f, 0.0f, -90.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Bobomb_03),
+        .settings = &N(NpcSettings_Bobomb),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -592,11 +580,11 @@ StaticNpc N(NpcData_Inmates)[] = {
     },
     {
         .id = NPC_Bobomb_04,
-        .settings = &N(NpcSettings_Bobomb),
         .pos = { -75.0f, 0.0f, -80.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Bobomb_04),
+        .settings = &N(NpcSettings_Bobomb),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,

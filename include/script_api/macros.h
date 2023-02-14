@@ -546,7 +546,7 @@
 ///
 ///     EVT_CHILD_THREAD
 ///         EVT_WAIT_SECONDS(1)                 // child thread will be killed whilst waiting
-///         EVT_CALL(SetPlayerPos, 0, -1000, 0) // will not be executed
+///         EVT_CALL(SetPlayerPos, NPC_DISPOSE_LOCATION) // will not be executed
 ///     EVT_END_CHILD_THREAD
 ///     EVT_RETURN                              // parent thread dies
 ///

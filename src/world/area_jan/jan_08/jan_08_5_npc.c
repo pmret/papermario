@@ -1,11 +1,11 @@
 #include "jan_08.h"
 
 #include "world/common/npc/YoshiKid.inc.c"
-#include "world/common/enemy/complete/MBush.inc.c"
-#include "world/common/enemy/complete/HeartPlant.inc.c"
+#include "world/common/enemy/MBush.inc.c"
+#include "world/common/enemy/HeartPlant.inc.c"
 
-#include "world/common/enemy/complete/HurtPlant.inc.c"
-#include "world/common/enemy/complete/SpearGuy_Wander.inc.c"
+#include "world/common/enemy/HurtPlant.inc.c"
+#include "world/common/enemy/SpearGuy_Wander.inc.c"
 
 EvtScript N(EVS_YoshiKid_CryForHelp) = {
     EVT_SET(AF_JAN_02, FALSE)
@@ -140,7 +140,7 @@ EvtScript N(EVS_NpcInit_MBush_01) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_SpearGuy)[] = {
+NpcData N(NpcData_SpearGuy)[] = {
     {
         .id = NPC_SpearGuy,
         .pos = { 255.0f, 15.0f, -65.0f },
@@ -163,50 +163,50 @@ StaticNpc N(NpcData_SpearGuy)[] = {
     SPEAR_GUY_HITBOX(NPC_SpearGuy_Hitbox)
 };
 
-StaticNpc N(NpcData_HurtPlant) = {
+NpcData N(NpcData_HurtPlant) = {
     .id = NPC_HurtPlant,
     .pos = { 400.0f, 0.0f, 235.0f },
     .yaw = 270,
     HURT_PLANT_NPC_DATA
 };
 
-StaticNpc N(NpcData_MBush_01) = {
+NpcData N(NpcData_MBush_01) = {
     .id = NPC_MBush_01,
-    .init = &N(EVS_NpcInit_MBush_01),
     .pos = { -407.0f, 0.0f, -42.0f },
     .yaw = 90,
     MBUSH_NPC_DATA
+    .init = &N(EVS_NpcInit_MBush_01),
 };
 
-StaticNpc N(NpcData_MBush_02) = {
+NpcData N(NpcData_MBush_02) = {
     .id = NPC_MBush_02,
     .pos = { -120.0f, 0.0f, -395.0f },
     .yaw = 90,
     MBUSH_NPC_DATA
 };
 
-StaticNpc N(NpcData_HeartPlant_01) = {
+NpcData N(NpcData_HeartPlant_01) = {
     .id = NPC_HeartPlant_01,
     .pos = { -219.0f, 0.0f, 420.0f },
     .yaw = 270,
     HEART_PLANT_NPC_DATA
 };
 
-StaticNpc N(NpcData_HeartPlant_02) = {
+NpcData N(NpcData_HeartPlant_02) = {
     .id = NPC_HeartPlant_02,
     .pos = { -157.0f, 0.0f, 452.0f },
     .yaw = 270,
     HEART_PLANT_NPC_DATA
 };
 
-StaticNpc N(NpcData_YoshiKid) = {
+NpcData N(NpcData_YoshiKid) = {
     .id = NPC_YoshiKid,
     .pos = { -450.0f, 0.0f, -290.0f },
     .yaw = 90,
-    .settings = &N(NpcSettings_YoshiKid),
     .init = &N(EVS_NpcInit_YoshiKid),
+    .settings = &N(NpcSettings_YoshiKid),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = YOSHI_KID_RED_ANIMS,
     .tattle = MSG_NpcTattle_RedYoshiKid,
 };

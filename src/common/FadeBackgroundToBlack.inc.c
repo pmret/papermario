@@ -2,7 +2,7 @@
 #include "model.h"
 #include "npc.h"
 
-ApiStatus N(FadeBackgroundToBlack)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(FadeBackgroundToBlack)) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(FOG_MODE_1);
         *gBackgroundFogModePtr = FOG_MODE_1;

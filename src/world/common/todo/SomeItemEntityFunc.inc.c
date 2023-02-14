@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(SomeItemEntityFunc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SomeItemEntityFunc)) {
     ItemEntity* itemEntity = get_item_entity(script->varTable[0]);
 
     if (isInitialCall) {

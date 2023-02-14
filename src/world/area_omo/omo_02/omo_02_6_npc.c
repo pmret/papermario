@@ -1,9 +1,9 @@
 #include "omo_02.h"
 
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
-#include "world/common/enemy/complete/ShyGuy_Guard.inc.c"
-#include "world/common/enemy/complete/ShyGuy_Stationary.inc.c"
-#include "world/common/enemy/complete/SpyGuy.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/ShyGuy_Guard.inc.c"
+#include "world/common/enemy/ShyGuy_Stationary.inc.c"
+#include "world/common/enemy/SpyGuy.inc.c"
 
 EvtScript N(EVS_RestrictCamFromBarricade) = {
     EVT_LABEL(0)
@@ -283,128 +283,125 @@ EvtScript N(EVS_NpcInit_ShyGuy_Crowd) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_Loner) = {
+NpcData N(NpcData_ShyGuy_Loner) = {
     .id = NPC_ShyGuy_01,
-    .settings = &N(NpcSettings_ShyGuy_Stationary),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_ShyGuy_Loner),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_ShyGuy_Stationary),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_Crowd)[] = {
+NpcData N(NpcData_ShyGuy_Crowd)[] = {
     {
         .id = NPC_ShyGuy_02,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ShyGuy_03,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ShyGuy_04,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ShyGuy_05,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ShyGuy_06,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ShyGuy_07,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ShyGuy_08,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ShyGuy_09,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ShyGuy_10,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ShyGuy_11,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ShyGuy_Crowd),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_SpyGuy)[] = {
+NpcData N(NpcData_SpyGuy)[] = {
     {
         .id = NPC_SpyGuy,
-        .settings = &N(NpcSettings_SpyGuy),
         .pos = { 200.0f, 0.0f, 30.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = SPY_GUY_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -417,6 +414,9 @@ StaticNpc N(NpcData_SpyGuy)[] = {
                 .detectSize = { 200 },
             }
         },
+        .settings = &N(NpcSettings_SpyGuy),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = SPY_GUY_DROPS,
         .animations = SPY_GUY_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
@@ -425,7 +425,7 @@ StaticNpc N(NpcData_SpyGuy)[] = {
 };
 
 // separated into its own NPC to make the group count match in DefaultNPCs
-StaticNpc N(NpcData_SpyGuy_UnusedRock)[] = {
+NpcData N(NpcData_SpyGuy_UnusedRock)[] = {
     SPY_GUY_ROCK_HITBOX(NPC_SpyGuy_Rock3),
 };
 

@@ -1,8 +1,8 @@
 #include "jan_12.h"
 
-#include "world/common/enemy/complete/SpearGuy_Wander.inc.c"
+#include "world/common/enemy/SpearGuy_Wander.inc.c"
 
-StaticNpc N(NpcData_SpearGuy)[] = {
+NpcData N(NpcData_SpearGuy)[] = {
     {
         .id = NPC_SpearGuy,
         .pos = { 165.0f, 0.0f, 15.0f },

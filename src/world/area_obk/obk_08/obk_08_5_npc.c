@@ -446,102 +446,102 @@ EvtScript N(EVS_NpcInit_KeepAwayBoo8) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Boo_01) = {
+NpcData N(NpcData_Boo_01) = {
     .id = NPC_Boo_01,
-    .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_Boo_01),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_KeepAwayBoo1) = {
+NpcData N(NpcData_KeepAwayBoo1) = {
     .id = NPC_KeepAwayBoo1,
-    .settings = &N(NpcSettings_Boo),
     .pos = { -268.0f, 52.0f, 0.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo1),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_KeepAwayBoo2) = {
+NpcData N(NpcData_KeepAwayBoo2) = {
     .id = NPC_KeepAwayBoo2,
-    .settings = &N(NpcSettings_Boo),
     .pos = { -268.0f, 52.0f, 0.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo2),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_KeepAwayBoo3) = {
+NpcData N(NpcData_KeepAwayBoo3) = {
     .id = NPC_KeepAwayBoo3,
-    .settings = &N(NpcSettings_Boo),
     .pos = { -268.0f, 52.0f, 0.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo3),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_KeepAwayBoo4) = {
+NpcData N(NpcData_KeepAwayBoo4) = {
     .id = NPC_KeepAwayBoo4,
-    .settings = &N(NpcSettings_Boo),
     .pos = { -268.0f, 52.0f, 0.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo4),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_KeepAwayBoo5) = {
+NpcData N(NpcData_KeepAwayBoo5) = {
     .id = NPC_KeepAwayBoo5,
-    .settings = &N(NpcSettings_Boo),
     .pos = { -268.0f, 52.0f, 0.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo5),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_KeepAwayBoo6) = {
+NpcData N(NpcData_KeepAwayBoo6) = {
     .id = NPC_KeepAwayBoo6,
-    .settings = &N(NpcSettings_Boo),
     .pos = { -268.0f, 52.0f, 0.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo6),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_KeepAwayBoo7) = {
+NpcData N(NpcData_KeepAwayBoo7) = {
     .id = NPC_KeepAwayBoo7,
-    .settings = &N(NpcSettings_Boo),
     .pos = { -268.0f, 52.0f, 0.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo7),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_KeepAwayBoo8) = {
+NpcData N(NpcData_KeepAwayBoo8) = {
     .id = NPC_KeepAwayBoo8,
-    .settings = &N(NpcSettings_Boo),
     .pos = { -268.0f, 52.0f, 0.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_KeepAwayBoo8),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
@@ -561,25 +561,25 @@ EvtScript N(EVS_NpcInit_TrafficBoo2) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TrafficBoos)[] = {
+NpcData N(NpcData_TrafficBoos)[] = {
     {
         .id = NPC_TrafficBoo1,
-        .settings = &N(NpcSettings_Boo),
         .pos = { 523.0f, -139.0f, 193.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_TrafficBoo1),
-        .drops = BOO_DROPS,
+        .settings = &N(NpcSettings_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
     },
     {
         .id = NPC_TrafficBoo2,
-        .settings = &N(NpcSettings_Boo),
         .pos = { 473.0f, -122.0f, 247.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_TrafficBoo2),
-        .drops = BOO_DROPS,
+        .settings = &N(NpcSettings_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
     },
 };
@@ -595,25 +595,25 @@ EvtScript N(EVS_NpcInit_Boo_13) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KeepAwayExtras)[] = {
+NpcData N(NpcData_KeepAwayExtras)[] = {
     {
         .id = NPC_LeaderBoo,
-        .settings = &N(NpcSettings_Boo),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Boo_12),
-        .drops = BOO_DROPS,
+        .settings = &N(NpcSettings_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
     },
     {
         .id = NPC_DummyBoo,
-        .settings = &N(NpcSettings_Boo),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000,
         .init = &N(EVS_NpcInit_Boo_13),
-        .drops = BOO_DROPS,
+        .settings = &N(NpcSettings_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000,
+        .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
     },
 };

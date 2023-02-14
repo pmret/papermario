@@ -225,7 +225,7 @@ static void N(MontyMoleAI_Burrow)(Evt* script, MobileAISettings* aiSettings, Ene
     }
 }
 
-ApiStatus N(MontyMoleAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MontyMoleAI_Main)) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);

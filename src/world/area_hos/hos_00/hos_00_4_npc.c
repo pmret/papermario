@@ -3,7 +3,7 @@
 #include "world/common/npc/Twink.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
 
-#include "world/common/enemy/complete/FlyingMagikoopa.h"
+#include "world/common/enemy/FlyingMagikoopa.h"
 
 NpcSettings N(NpcSettings_FlyingMagikoopa) = {
     .height = 34,
@@ -123,45 +123,45 @@ EvtScript N(EVS_NpcInit_Twink) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Twink) = {
+NpcData N(NpcData_Twink) = {
     .id = NPC_Twink,
-    .settings = &N(NpcSettings_Twink),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Twink),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Twink),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = TWINK_ANIMS,
 };
 
-StaticNpc N(NpcData_FlyingMagikoopa) = {
+NpcData N(NpcData_FlyingMagikoopa) = {
     .id = NPC_FlyingMagikoopa,
-    .settings = &N(NpcSettings_FlyingMagikoopa),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_FlyingMagikoopa),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_FlyingMagikoopa),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = FLYING_MAGIKOOPA_ANIMS,
 };
 
-StaticNpc N(NpcData_Wishing)[] = {
+NpcData N(NpcData_Wishing)[] = {
     {
         .id = NPC_Toadette,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 280.0f, -10.0f, -50.0f },
         .yaw = 90,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .flags = ENEMY_FLAG_PASSIVE,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
     },
     {
         .id = NPC_ToadKid,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 330.0f, -10.0f, -40.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_Toad_Stationary),
         .flags = ENEMY_FLAG_PASSIVE,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = TOAD_KID_RED_ANIMS,
     },
 };

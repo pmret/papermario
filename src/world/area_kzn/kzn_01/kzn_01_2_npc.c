@@ -1,6 +1,6 @@
 #include "kzn_01.h"
 
-#include "world/common/enemy/complete/PutridPiranhaSentinel.inc.c"
+#include "world/common/enemy/PutridPiranhaSentinel.inc.c"
 
 EvtScript N(EVS_NpcIdle_PutridPiranha) = {
     EVT_LABEL(0)
@@ -45,14 +45,14 @@ EvtScript N(EVS_NpcInit_PutridPiranha) = {
     EVT_END
 };
 
-StaticNpc N(NpcPutridPiranha) = {
+NpcData N(NpcPutridPiranha) = {
     .id = NPC_PutridPiranha,
-    .settings = &N(NpcSettings_PutridPiranhaSentinel),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
     .init = &N(EVS_NpcInit_PutridPiranha),
-    .drops = PIRANHA_SENTINEL_DROPS,
+    .settings = &N(NpcSettings_PutridPiranhaSentinel),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
+    .drops = PIRANHA_NO_DROPS,
     .animations = PIRANHA_SENTINEL_ANIMS,
 };
 

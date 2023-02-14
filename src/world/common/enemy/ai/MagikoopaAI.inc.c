@@ -227,7 +227,7 @@ void N(MagikoopaAI_24)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     }
 }
 
-ApiStatus N(MagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MagikoopaAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;
@@ -306,7 +306,7 @@ ApiStatus N(MagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(MagikoopaAI_OnPlayerWon)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MagikoopaAI_OnPlayerWon)) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -315,7 +315,7 @@ ApiStatus N(MagikoopaAI_OnPlayerWon)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(MagikoopaAI_OnPlayerFled)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MagikoopaAI_OnPlayerFled)) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -326,14 +326,14 @@ ApiStatus N(MagikoopaAI_OnPlayerFled)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(MagikoopaAI_OnHitInit)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MagikoopaAI_OnHitInit)) {
     Enemy* enemy = script->owner1.enemy;
 
     evt_set_variable(script, LVar0, gCurrentEncounter.currentEnemy == enemy);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(MagikoopaAI_OnHit)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MagikoopaAI_OnHit)) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

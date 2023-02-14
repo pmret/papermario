@@ -1,16 +1,13 @@
 #include "kpa_102.h"
 
-#include "world/common/enemy/complete/HammerBros.inc.c"
-#include "world/common/enemy/complete/Koopatrol_Wander.inc.c"
-#include "world/common/enemy/complete/FlyingMagikoopa.inc.c"
+#include "world/common/enemy/HammerBros_Wander.inc.c"
+#include "world/common/enemy/Koopatrol_Wander.inc.c"
+#include "world/common/enemy/FlyingMagikoopa.inc.c"
 
-StaticNpc N(NpcData_Koopatrol) = {
+NpcData N(NpcData_Koopatrol) = {
     .id = NPC_Koopatrol,
-    .settings = &N(NpcSettings_Koopatrol_Wander),
     .pos = { -200.0f, 0.0f, -225.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = KOOPATROL_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -23,17 +20,17 @@ StaticNpc N(NpcData_Koopatrol) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_Koopatrol_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
 
-StaticNpc N(NpcData_FlyingMagikoopa)[] = {
+NpcData N(NpcData_FlyingMagikoopa)[] = {
     {
         .id = NPC_FlyingMagikoopa,
-        .settings = &N(NpcSettings_FlyingMagikoopa),
         .pos = { 125.0f, 50.0f, -225.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_800,
-        .drops = FLYING_MAGIKOOPA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -46,6 +43,9 @@ StaticNpc N(NpcData_FlyingMagikoopa)[] = {
                 .detectSize = { 200 },
             }
         },
+        .settings = &N(NpcSettings_FlyingMagikoopa),
+        .flags = ENEMY_FLAG_800,
+        .drops = FLYING_MAGINO_DROPS,
         .animations = FLYING_MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_FlyingMagikoopa),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -53,14 +53,11 @@ StaticNpc N(NpcData_FlyingMagikoopa)[] = {
     FLYING_MAGIKOOPA_SPELL_HITBOX(NPC_FlyingMagikoopa + 1),
 };
 
-StaticNpc N(NpcData_HammerBros)[] = {
+NpcData N(NpcData_HammerBros)[] = {
     {
         .id = NPC_HammerBros,
-        .settings = &N(NpcSettings_HammerBros),
         .pos = { 450.0f, 0.0f, -225.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = HAMMER_BROS_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -73,6 +70,9 @@ StaticNpc N(NpcData_HammerBros)[] = {
                 .detectSize = { 200 },
             }
         },
+        .settings = &N(NpcSettings_HammerBros_Wander),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = HAMMER_BROS_DROPS,
         .animations = HAMMER_BROS_ANIMS,
     },
     HAMMER_BROS_HAMMER_HITBOX(NPC_HammerBros + 1),

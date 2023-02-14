@@ -21,8 +21,8 @@ enum {
 };
 
 enum {
-    MV_UnusedPosOffset		= MapVar(10),
-    MV_CabinetPosOffset		= MapVar(11),
+    MV_UnusedPosOffset      = MapVar(10),
+    MV_CabinetPosOffset     = MapVar(11),
 };
 
 #define NAMESPACE obk_01

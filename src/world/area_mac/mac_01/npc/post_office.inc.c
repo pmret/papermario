@@ -405,11 +405,11 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Parakarry)[] = {
+AnimID N(ExtraAnims_Parakarry)[] = {
     ANIM_WorldParakarry_Still,
     ANIM_WorldParakarry_Idle,
     ANIM_WorldParakarry_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 EvtScript N(EVS_NpcInit_Parakarry) = {

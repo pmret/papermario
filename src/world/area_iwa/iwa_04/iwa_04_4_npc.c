@@ -1,6 +1,6 @@
 #include "iwa_04.h"
 
-#include "world/common/enemy/complete/Cleft.inc.c"
+#include "world/common/enemy/Cleft.inc.c"
 
 API_CALLABLE(N(func_80241060_91C940)) {
     gCameras[CAM_DEFAULT].unk_498 = 1.0f;
@@ -277,13 +277,10 @@ NpcSettings N(NpcSettings_Buzzar) = {
     .onDefeat = &N(EVS_NpcDefeat_Buzzar),
 };
 
-StaticNpc N(NpcData_Cleft) = {
+NpcData N(NpcData_Cleft) = {
     .id = NPC_Cleft,
-    .settings = &N(NpcSettings_Cleft),
     .pos = { -412.0f, -250.0f, 143.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800,
-    .drops = CLEFT_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -296,15 +293,18 @@ StaticNpc N(NpcData_Cleft) = {
             .detectSize = { 175, 195 },
         }
     },
+    .settings = &N(NpcSettings_Cleft),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800,
+    .drops = CLEFT_DROPS,
     .animations = CLEFT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Buzzar) = {
+NpcData N(NpcData_Buzzar) = {
     .id = NPC_Buzzar,
-    .settings = &N(NpcSettings_Buzzar),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
+    .settings = &N(NpcSettings_Buzzar),
     .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,

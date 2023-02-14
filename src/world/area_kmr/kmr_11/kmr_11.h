@@ -55,6 +55,6 @@ extern AnimScript N(AnimScript_Bridge);
 API_CALLABLE(N(SetCameraVFov));
 API_CALLABLE(N(SetupFog));
 
-ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall);
-ApiStatus SetAnimatedModelRenderMode(Evt* script, s32 isInitialCall);
-ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(InitAnimatedModels);
+API_CALLABLE(SetAnimatedModelRenderMode);
+API_CALLABLE(DeleteAnimatedModel);

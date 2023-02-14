@@ -887,19 +887,15 @@ EvtScript N(EVS_NpcInit_ShiverToad_04) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Merle)[] = {
+NpcData N(NpcData_Merle)[] = {
     {
         .id = NPC_Merle,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 0.0f, 90.0f, -300.0f },
         .yaw = 0,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Merle),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Merle_Idle,
             .walk   = ANIM_Merle_Idle,
@@ -922,16 +918,12 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_ShiverToad_01,
-        .settings = &N(NpcSettings_ShiverToad_Stationary),
         .pos = { -376.0f, 60.0f, 112.0f },
         .yaw = 0,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_ShiverToad_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_ShiverToad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShiverToad_Red_Idle,
             .walk   = ANIM_ShiverToad_Red_Walk,
@@ -954,16 +946,8 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_ShiverToad_02,
-        .settings = &N(NpcSettings_ShiverToad_Wander),
         .pos = { 208.0f, 80.0f, 150.0f },
         .yaw = 180,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_ShiverToad_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -976,6 +960,10 @@ StaticNpc N(NpcData_Merle)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_ShiverToad_02),
+        .settings = &N(NpcSettings_ShiverToad_Wander),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShiverToad_Blue_Idle,
             .walk   = ANIM_ShiverToad_Blue_Walk,
@@ -998,16 +986,12 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_ShiverToad_03,
-        .settings = &N(NpcSettings_ShiverToad_Stationary),
         .pos = { 127.0f, 0.0f, 445.0f },
         .yaw = 180,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_ShiverToad_03),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_ShiverToad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShiverToad_Green_Idle,
             .walk   = ANIM_ShiverToad_Green_Walk,
@@ -1030,16 +1014,8 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_Ninji_01,
-        .settings = &N(NpcSettings_Ninji_Wander),
         .pos = { -99.0f, 90.0f, -90.0f },
         .yaw = 0,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Ninji_01),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1052,6 +1028,10 @@ StaticNpc N(NpcData_Merle)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_Ninji_01),
+        .settings = &N(NpcSettings_Ninji_Wander),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Ninji_Idle,
             .walk   = ANIM_Ninji_Walk,
@@ -1074,16 +1054,8 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_Ninji_02,
-        .settings = &N(NpcSettings_Ninji_Wander),
         .pos = { -48.0f, 0.0f, 400.0f },
         .yaw = 180,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Ninji_02),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1096,6 +1068,10 @@ StaticNpc N(NpcData_Merle)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_Ninji_02),
+        .settings = &N(NpcSettings_Ninji_Wander),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Ninji_Idle,
             .walk   = ANIM_Ninji_Walk,
@@ -1118,16 +1094,12 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_Ninji_03,
-        .settings = &N(NpcSettings_Ninji_Stationary),
         .pos = { 239.0f, 50.0f, 315.0f },
         .yaw = 180,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Ninji_03),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Ninji_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Ninji_Idle,
             .walk   = ANIM_Ninji_Walk,
@@ -1150,16 +1122,12 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_Ninji_04,
-        .settings = &N(NpcSettings_Ninji_Stationary),
         .pos = { 390.0f, 80.0f, 50.0f },
         .yaw = 0,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Ninji_04),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Ninji_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Ninji_Idle,
             .walk   = ANIM_Ninji_Walk,
@@ -1182,12 +1150,8 @@ StaticNpc N(NpcData_Merle)[] = {
     },
     {
         .id = NPC_StarKid_01,
-        .settings = &N(NpcSettings_StarKid_Wander),
         .pos = { -166.0f, 10.0f, 390.0f },
         .yaw = 180,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_StarKid_01),
-        .drops = STAR_KID_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1200,76 +1164,76 @@ StaticNpc N(NpcData_Merle)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_StarKid_01),
+        .settings = &N(NpcSettings_StarKid_Wander),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = STAR_KID_ANIMS,
         .tattle = MSG_NpcTattle_SAM_StarKidA,
     },
     {
         .id = NPC_StarKid_02,
-        .settings = &N(NpcSettings_StarKid),
         .pos = { 3.0f, 60.0f, 137.0f },
         .yaw = 180,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_StarKid_02),
-        .drops = STAR_KID_DROPS,
+        .settings = &N(NpcSettings_StarKid),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = STAR_KID_ANIMS,
         .tattle = MSG_NpcTattle_SAM_StarKidB,
     },
     {
         .id = NPC_StarKid_03,
-        .settings = &N(NpcSettings_StarKid),
         .pos = { 120.0f, 100.0f, -210.0f },
         .yaw = 0,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_StarKid_03),
-        .drops = STAR_KID_DROPS,
+        .settings = &N(NpcSettings_StarKid),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = STAR_KID_ANIMS,
         .tattle = MSG_NpcTattle_SAM_PranksterStarKid,
     },
     {
         .id = NPC_StarKid_04,
-        .settings = &N(NpcSettings_StarKid),
         .pos = { 369.0f, 90.0f, 9.0f },
         .yaw = 180,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_StarKid_04),
-        .drops = STAR_KID_DROPS,
+        .settings = &N(NpcSettings_StarKid),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = STAR_KID_ANIMS,
         .tattle = MSG_NpcTattle_SAM_BabyStarKid,
     },
     {
         .id = NPC_StarKid_05,
-        .settings = &N(NpcSettings_StarKid),
         .pos = { 405.0f, 90.0f, -19.0f },
         .yaw = 180,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_StarKid_05),
-        .drops = STAR_KID_DROPS,
+        .settings = &N(NpcSettings_StarKid),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = STAR_KID_ANIMS,
         .tattle = MSG_NpcTattle_SAM_StarKidC,
     },
     {
         .id = NPC_StarKid_06,
-        .settings = &N(NpcSettings_StarKid),
         .pos = { 364.0f, 90.0f, -47.0f },
         .yaw = 180,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_StarKid_06),
-        .drops = STAR_KID_DROPS,
+        .settings = &N(NpcSettings_StarKid),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = STAR_KID_ANIMS,
         .tattle = MSG_NpcTattle_SAM_StarKidD,
     },
     {
         .id = NPC_ShiverToad_04,
-        .settings = &N(NpcSettings_ShiverToad_Stationary),
         .pos = { -274.0f, 60.0f, -28.0f },
         .yaw = 180,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_ShiverToad_04),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_ShiverToad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShiverToad_Red_Idle,
             .walk   = ANIM_ShiverToad_Red_Walk,

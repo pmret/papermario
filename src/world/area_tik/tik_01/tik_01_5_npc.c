@@ -1,6 +1,6 @@
 #include "tik_01.h"
 
-#include "world/common/enemy/complete/Blooper.inc.c"
+#include "world/common/enemy/Blooper.inc.c"
 
 EvtScript N(EVS_NpcIdle_Blooper) = {
     EVT_LOOP(0)
@@ -87,14 +87,14 @@ EvtScript N(EVS_NpcInit_Blooper) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Blooper) = {
+NpcData N(NpcData_Blooper) = {
     .id = NPC_Blooper,
-    .settings = &N(NpcSettings_Blooper),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_Blooper),
-    .drops = BLOOPER_NO_DROPS,
+    .settings = &N(NpcSettings_Blooper),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = BLOOPER_ANIMS,
 };
 

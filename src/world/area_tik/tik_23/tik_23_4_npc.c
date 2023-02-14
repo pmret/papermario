@@ -1,14 +1,11 @@
 #include "tik_23.h"
 
-#include "world/common/enemy/complete/Spiny.inc.c"
+#include "world/common/enemy/Spiny.inc.c"
 
-StaticNpc N(NpcData_Spiny_01) = {
+NpcData N(NpcData_Spiny_01) = {
     .id = NPC_Spiny_01,
-    .settings = &N(NpcSettings_Spiny),
     .pos = { 25.0f, -20.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = SPINY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,17 +18,17 @@ StaticNpc N(NpcData_Spiny_01) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_Spiny),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_02) = {
+NpcData N(NpcData_Spiny_02) = {
     .id = NPC_Spiny_02,
-    .settings = &N(NpcSettings_Spiny),
     .pos = { 275.0f, -20.0f, 120.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = SPINY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -44,17 +41,17 @@ StaticNpc N(NpcData_Spiny_02) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_Spiny),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Spiny_03) = {
+NpcData N(NpcData_Spiny_03) = {
     .id = NPC_Spiny_03,
-    .settings = &N(NpcSettings_Spiny),
     .pos = { -150.0f, -20.0f, 120.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = SPINY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -67,6 +64,9 @@ StaticNpc N(NpcData_Spiny_03) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_Spiny),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };

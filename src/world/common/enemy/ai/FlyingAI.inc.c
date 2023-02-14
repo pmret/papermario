@@ -434,7 +434,7 @@ void N(FlyingAI_Init)(Npc* npc, Enemy* enemy, Evt* script, MobileAISettings* aiS
     enemy->aiFlags |= ENEMY_AI_FLAG_10;
 }
 
-ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(FlyingAI_Main)) {
     #ifdef _DEAD_H_
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     #else

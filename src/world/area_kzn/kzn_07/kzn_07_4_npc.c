@@ -1,15 +1,12 @@
 #include "kzn_07.h"
 #include "effects.h"
 
-#include "world/common/enemy/complete/LavaBubble.inc.c"
+#include "world/common/enemy/LavaBubble.inc.c"
 
-StaticNpc N(NpcData_LavaBubble_01) = {
+NpcData N(NpcData_LavaBubble_01) = {
     .id = NPC_Bubble_01,
-    .settings = &N(NpcSettings_LavaBubble),
     .pos = { -200.0f, 50.0f, 150.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = LAVA_BUBBLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -22,17 +19,17 @@ StaticNpc N(NpcData_LavaBubble_01) = {
             .detectSize = { 300 },
         }
     },
+    .settings = &N(NpcSettings_LavaBubble),
+    .flags = ENEMY_FLAG_400,
+    .drops = LAVA_BUBBLE_DROPS,
     .animations = LAVA_BUBBLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_LavaBubble_02) = {
+NpcData N(NpcData_LavaBubble_02) = {
     .id = NPC_Bubble_02,
-    .settings = &N(NpcSettings_LavaBubble),
     .pos = { -250.0f, 80.0f, 50.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = LAVA_BUBBLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -45,6 +42,9 @@ StaticNpc N(NpcData_LavaBubble_02) = {
             .detectSize = { 300 },
         }
     },
+    .settings = &N(NpcSettings_LavaBubble),
+    .flags = ENEMY_FLAG_400,
+    .drops = LAVA_BUBBLE_DROPS,
     .animations = LAVA_BUBBLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };

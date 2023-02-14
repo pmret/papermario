@@ -776,18 +776,14 @@ EvtScript N(EVS_NpcInit_MontyMole_04) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Petunia) = {
+NpcData N(NpcData_Petunia) = {
     .id = NPC_Petunia,
-    .settings = &N(NpcSettings_Petunia),
     .pos = { -30.0f, 0.0f, 100.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Petunia),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Petunia),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Petunia_Idle,
         .walk   = ANIM_Petunia_Idle,
@@ -809,18 +805,14 @@ StaticNpc N(NpcData_Petunia) = {
     .tattle = MSG_NpcTattle_Petunia,
 };
 
-StaticNpc N(NpcData_Dayzee) = {
+NpcData N(NpcData_Dayzee) = {
     .id = NPC_Dayzee,
-    .settings = &N(NpcSettings_Dayzee),
     .pos = { -233.0f, 0.0f, -217.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Dayzee),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Dayzee),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Dayzee_Anim01,
         .walk   = ANIM_Dayzee_Anim02,
@@ -841,18 +833,14 @@ StaticNpc N(NpcData_Dayzee) = {
     },
 };
 
-StaticNpc N(NpcData_MontyMole_01) = {
+NpcData N(NpcData_MontyMole_01) = {
     .id = NPC_MontyMole_01,
-    .settings = &N(NpcSettings_Dayzee),
     .pos = { -100.0f, 0.0f, 210.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_MontyMole_01),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Dayzee),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_MontyMole_Dark_Anim01,
         .walk   = ANIM_MontyMole_Dark_Anim02,
@@ -873,18 +861,14 @@ StaticNpc N(NpcData_MontyMole_01) = {
     },
 };
 
-StaticNpc N(NpcData_MontyMole_02) = {
+NpcData N(NpcData_MontyMole_02) = {
     .id = NPC_MontyMole_02,
-    .settings = &N(NpcSettings_Dayzee),
     .pos = { -130.0f, 0.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_MontyMole_02),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Dayzee),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_MontyMole_Dark_Anim01,
         .walk   = ANIM_MontyMole_Dark_Anim02,
@@ -905,18 +889,14 @@ StaticNpc N(NpcData_MontyMole_02) = {
     },
 };
 
-StaticNpc N(NpcData_MontyMole_03) = {
+NpcData N(NpcData_MontyMole_03) = {
     .id = NPC_MontyMole_03,
-    .settings = &N(NpcSettings_Dayzee),
     .pos = { 75.0f, 0.0f, 20.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_MontyMole_03),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Dayzee),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_MontyMole_Dark_Anim01,
         .walk   = ANIM_MontyMole_Dark_Anim02,
@@ -937,18 +917,14 @@ StaticNpc N(NpcData_MontyMole_03) = {
     },
 };
 
-StaticNpc N(NpcData_MontyMole_04) = {
+NpcData N(NpcData_MontyMole_04) = {
     .id = NPC_MontyMole_04,
-    .settings = &N(NpcSettings_Dayzee),
     .pos = { 71.0f, 0.0f, 200.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_MontyMole_04),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Dayzee),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_MontyMole_Dark_Anim01,
         .walk   = ANIM_MontyMole_Dark_Anim02,

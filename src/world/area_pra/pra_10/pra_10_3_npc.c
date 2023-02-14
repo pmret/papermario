@@ -1,6 +1,6 @@
 #include "pra_10.h"
 
-#include "world/common/enemy/complete/Swooper.inc.c"
+#include "world/common/enemy/Swooper.inc.c"
 
 EvtScript N(EVS_NpcInit_Swoopula) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_REFLECT_FLOOR, TRUE)
@@ -8,14 +8,10 @@ EvtScript N(EVS_NpcInit_Swoopula) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Swoopula_01) = {
+NpcData N(NpcData_Swoopula_01) = {
     .id = NPC_Swoopula_01,
-    .settings = &N(NpcSettings_Swoopula),
     .pos = { 166.0f, 130.0f, 90.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_Swoopula),
-    .drops = SWOOPULA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -28,17 +24,17 @@ StaticNpc N(NpcData_Swoopula_01) = {
             .detectSize = { 250 },
         }
     },
+    .init = &N(EVS_NpcInit_Swoopula),
+    .settings = &N(NpcSettings_Swoopula),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .drops = SWOOPULA_DROPS,
     .animations = SWOOPULA_ANIMS,
 };
 
-StaticNpc N(NpcData_Swoopula_02) = {
+NpcData N(NpcData_Swoopula_02) = {
     .id = NPC_Swoopula_02,
-    .settings = &N(NpcSettings_Swoopula),
     .pos = { 358.0f, 130.0f, 75.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_Swoopula),
-    .drops = SWOOPULA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -51,6 +47,10 @@ StaticNpc N(NpcData_Swoopula_02) = {
             .detectSize = { 250 },
         }
     },
+    .init = &N(EVS_NpcInit_Swoopula),
+    .settings = &N(NpcSettings_Swoopula),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .drops = SWOOPULA_DROPS,
     .animations = SWOOPULA_ANIMS,
 };
 

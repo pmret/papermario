@@ -1,6 +1,6 @@
 #include "battle/battle.h"
 
-ApiStatus N(UnkActorSizeFunc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkActorSizeFunc)) {
     Actor* actor = get_actor(script->owner1.actorID);
     Actor* targetActor = get_actor(actor->targetActorID);
     s16 targetActorSizeX;

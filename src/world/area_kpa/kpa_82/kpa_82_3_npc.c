@@ -1,9 +1,9 @@
 #include "kpa_82.h"
 
-#include "world/common/enemy/complete/Goomba.h"
-#include "world/common/enemy/complete/KoopaTroopa.h"
-#include "world/common/enemy/complete/DarkTroopa.h"
-#include "world/common/enemy/complete/ShyGuy.h"
+#include "world/common/enemy/Goomba.h"
+#include "world/common/enemy/KoopaTroopa.h"
+#include "world/common/enemy/DarkTroopa.h"
+#include "world/common/enemy/ShyGuy.h"
 
 enum {
     ANSWER_CORRECT  = 0,
@@ -1271,19 +1271,15 @@ EvtScript N(EVS_NpcInit_AntiGuy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_AntiGuys)[] = {
+NpcData N(NpcData_AntiGuys)[] = {
     {
         .id = NPC_Dummy,
-        .settings = &N(NpcSettings_AntiGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_Door),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_AntiGuy),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShyGuy_Black_Anim01,
             .walk   = ANIM_ShyGuy_Black_Anim02,
@@ -1305,16 +1301,12 @@ StaticNpc N(NpcData_AntiGuys)[] = {
     },
     {
         .id = NPC_AntiGuy_01,
-        .settings = &N(NpcSettings_AntiGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_AntiGuy),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_AntiGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShyGuy_Black_Anim01,
             .walk   = ANIM_ShyGuy_Black_Anim02,
@@ -1336,16 +1328,12 @@ StaticNpc N(NpcData_AntiGuys)[] = {
     },
     {
         .id = NPC_AntiGuy_02,
-        .settings = &N(NpcSettings_AntiGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_AntiGuy),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_AntiGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShyGuy_Black_Anim01,
             .walk   = ANIM_ShyGuy_Black_Anim02,
@@ -1367,16 +1355,12 @@ StaticNpc N(NpcData_AntiGuys)[] = {
     },
     {
         .id = NPC_AntiGuy_03,
-        .settings = &N(NpcSettings_AntiGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_AntiGuy),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_AntiGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShyGuy_Black_Anim01,
             .walk   = ANIM_ShyGuy_Black_Anim02,
@@ -1398,15 +1382,11 @@ StaticNpc N(NpcData_AntiGuys)[] = {
     },
 };
 
-StaticNpc N(NpcData_Goombas)[] = {
+NpcData N(NpcData_Goombas)[] = {
     {
         .id = NPC_Goomba_01,
-        .settings = &N(NpcSettings_Short),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_Goomba),
-        .drops = GOOMBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1419,16 +1399,16 @@ StaticNpc N(NpcData_Goombas)[] = {
                 .detectSize = { 130, 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Goomba),
+        .settings = &N(NpcSettings_Short),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = GOOMBA_DROPS,
         .animations = GOOMBA_ANIMS,
     },
     {
         .id = NPC_Goomba_02,
-        .settings = &N(NpcSettings_Short),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_Goomba),
-        .drops = GOOMBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1441,16 +1421,16 @@ StaticNpc N(NpcData_Goombas)[] = {
                 .detectSize = { 130, 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Goomba),
+        .settings = &N(NpcSettings_Short),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = GOOMBA_DROPS,
         .animations = GOOMBA_ANIMS,
     },
     {
         .id = NPC_Goomba_03,
-        .settings = &N(NpcSettings_Short),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_Goomba),
-        .drops = GOOMBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1463,16 +1443,16 @@ StaticNpc N(NpcData_Goombas)[] = {
                 .detectSize = { 130, 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Goomba),
+        .settings = &N(NpcSettings_Short),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = GOOMBA_DROPS,
         .animations = GOOMBA_ANIMS,
     },
     {
         .id = NPC_Goomba_04,
-        .settings = &N(NpcSettings_Short),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_Goomba),
-        .drops = GOOMBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1485,16 +1465,16 @@ StaticNpc N(NpcData_Goombas)[] = {
                 .detectSize = { 130, 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Goomba),
+        .settings = &N(NpcSettings_Short),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = GOOMBA_DROPS,
         .animations = GOOMBA_ANIMS,
     },
     {
         .id = NPC_Goomba_05,
-        .settings = &N(NpcSettings_Short),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_Goomba),
-        .drops = GOOMBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -1507,18 +1487,34 @@ StaticNpc N(NpcData_Goombas)[] = {
                 .detectSize = { 130, 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Goomba),
+        .settings = &N(NpcSettings_Short),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = GOOMBA_DROPS,
         .animations = GOOMBA_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_RedShyGuys)[] = {
+NpcData N(NpcData_RedShyGuys)[] = {
     {
         .id = NPC_RedShyGuy_01,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -1535,28 +1531,28 @@ StaticNpc N(NpcData_RedShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_RedShyGuy_02,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -1573,28 +1569,28 @@ StaticNpc N(NpcData_RedShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_RedShyGuy_03,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -1611,28 +1607,28 @@ StaticNpc N(NpcData_RedShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_RedShyGuy_04,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -1649,28 +1645,28 @@ StaticNpc N(NpcData_RedShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_RedShyGuy_05,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -1687,31 +1683,31 @@ StaticNpc N(NpcData_RedShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = RED_SHY_GUY_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_BlueShyGuys)[] = {
+NpcData N(NpcData_BlueShyGuys)[] = {
     {
         .id = NPC_BlueShyGuy_01,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -1728,28 +1724,28 @@ StaticNpc N(NpcData_BlueShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = BLUE_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_BlueShyGuy_02,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -1766,28 +1762,28 @@ StaticNpc N(NpcData_BlueShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = BLUE_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_BlueShyGuy_03,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -1804,28 +1800,28 @@ StaticNpc N(NpcData_BlueShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = BLUE_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_BlueShyGuy_04,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -1842,28 +1838,28 @@ StaticNpc N(NpcData_BlueShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = BLUE_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_BlueShyGuy_05,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -1880,31 +1876,31 @@ StaticNpc N(NpcData_BlueShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = BLUE_SHY_GUY_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_GreenShyGuys)[] = {
+NpcData N(NpcData_GreenShyGuys)[] = {
     {
         .id = NPC_GreenShyGuy_01,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -1921,28 +1917,28 @@ StaticNpc N(NpcData_GreenShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = GREEN_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_GreenShyGuy_02,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -1959,28 +1955,28 @@ StaticNpc N(NpcData_GreenShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = GREEN_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_GreenShyGuy_03,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -1997,28 +1993,28 @@ StaticNpc N(NpcData_GreenShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = GREEN_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_GreenShyGuy_04,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -2035,28 +2031,28 @@ StaticNpc N(NpcData_GreenShyGuys)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = GREEN_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_GreenShyGuy_05,
-        .settings = &N(NpcSettings_ShyGuy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_ShyGuy),
+        .settings = &N(NpcSettings_ShyGuy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -2074,6 +2070,15 @@ StaticNpc N(NpcData_GreenShyGuys)[] = {
             .minCoinBonus = 0,
             .maxCoinBonus = 2,
         },
+        .animations = GREEN_SHY_GUY_ANIMS,
+    },
+};
+
+NpcData N(NpcData_DarkTroopas)[] = {
+    {
+        .id = NPC_DarkTroopa_01,
+        .pos = { NPC_DISPOSE_LOCATION },
+        .yaw = 0,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2086,18 +2091,9 @@ StaticNpc N(NpcData_GreenShyGuys)[] = {
                 .detectSize = { 130, 100 },
             }
         },
-        .animations = GREEN_SHY_GUY_ANIMS,
-    },
-};
-
-StaticNpc N(NpcData_DarkTroopas)[] = {
-    {
-        .id = NPC_DarkTroopa_01,
-        .settings = &N(NpcSettings_KoopaTroopa),
-        .pos = { NPC_DISPOSE_LOCATION },
-        .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_KoopaTroopa),
+        .settings = &N(NpcSettings_KoopaTroopa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -2109,40 +2105,13 @@ StaticNpc N(NpcData_DarkTroopas)[] = {
             .flowerDrops = STANDARD_FLOWER_DROPS(2),
             .minCoinBonus = 1,
             .maxCoinBonus = 1,
-        },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
         },
         .animations = DARK_TROOPA_ANIMS,
     },
     {
         .id = NPC_DarkTroopa_02,
-        .settings = &N(NpcSettings_KoopaTroopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_KoopaTroopa),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .itemDropChance = 5,
-            .itemDrops = {
-                { ITEM_MUSHROOM, 3, 0 },
-                { ITEM_KOOPA_LEAF, 7, 0 },
-            },
-            .heartDrops  = STANDARD_HEART_DROPS(2),
-            .flowerDrops = STANDARD_FLOWER_DROPS(2),
-            .minCoinBonus = 1,
-            .maxCoinBonus = 1,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2154,28 +2123,28 @@ StaticNpc N(NpcData_DarkTroopas)[] = {
                 .detectPos  = { 0, 0, 150 },
                 .detectSize = { 130, 100 },
             }
+        },
+        .init = &N(EVS_NpcInit_KoopaTroopa),
+        .settings = &N(NpcSettings_KoopaTroopa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = {
+            .dropFlags = NPC_DROP_FLAG_80,
+            .itemDropChance = 5,
+            .itemDrops = {
+                { ITEM_MUSHROOM, 3, 0 },
+                { ITEM_KOOPA_LEAF, 7, 0 },
+            },
+            .heartDrops  = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 1,
+            .maxCoinBonus = 1,
         },
         .animations = DARK_TROOPA_ANIMS,
     },
     {
         .id = NPC_DarkTroopa_03,
-        .settings = &N(NpcSettings_KoopaTroopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_KoopaTroopa),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .itemDropChance = 5,
-            .itemDrops = {
-                { ITEM_MUSHROOM, 3, 0 },
-                { ITEM_KOOPA_LEAF, 7, 0 },
-            },
-            .heartDrops  = STANDARD_HEART_DROPS(2),
-            .flowerDrops = STANDARD_FLOWER_DROPS(2),
-            .minCoinBonus = 1,
-            .maxCoinBonus = 1,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2187,28 +2156,28 @@ StaticNpc N(NpcData_DarkTroopas)[] = {
                 .detectPos  = { 0, 0, 150 },
                 .detectSize = { 130, 100 },
             }
+        },
+        .init = &N(EVS_NpcInit_KoopaTroopa),
+        .settings = &N(NpcSettings_KoopaTroopa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = {
+            .dropFlags = NPC_DROP_FLAG_80,
+            .itemDropChance = 5,
+            .itemDrops = {
+                { ITEM_MUSHROOM, 3, 0 },
+                { ITEM_KOOPA_LEAF, 7, 0 },
+            },
+            .heartDrops  = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 1,
+            .maxCoinBonus = 1,
         },
         .animations = DARK_TROOPA_ANIMS,
     },
     {
         .id = NPC_DarkTroopa_04,
-        .settings = &N(NpcSettings_KoopaTroopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_KoopaTroopa),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .itemDropChance = 5,
-            .itemDrops = {
-                { ITEM_MUSHROOM, 3, 0 },
-                { ITEM_KOOPA_LEAF, 7, 0 },
-            },
-            .heartDrops  = STANDARD_HEART_DROPS(2),
-            .flowerDrops = STANDARD_FLOWER_DROPS(2),
-            .minCoinBonus = 1,
-            .maxCoinBonus = 1,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2220,28 +2189,28 @@ StaticNpc N(NpcData_DarkTroopas)[] = {
                 .detectPos  = { 0, 0, 150 },
                 .detectSize = { 130, 100 },
             }
+        },
+        .init = &N(EVS_NpcInit_KoopaTroopa),
+        .settings = &N(NpcSettings_KoopaTroopa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = {
+            .dropFlags = NPC_DROP_FLAG_80,
+            .itemDropChance = 5,
+            .itemDrops = {
+                { ITEM_MUSHROOM, 3, 0 },
+                { ITEM_KOOPA_LEAF, 7, 0 },
+            },
+            .heartDrops  = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 1,
+            .maxCoinBonus = 1,
         },
         .animations = DARK_TROOPA_ANIMS,
     },
     {
         .id = NPC_DarkTroopa_05,
-        .settings = &N(NpcSettings_KoopaTroopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_KoopaTroopa),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .itemDropChance = 5,
-            .itemDrops = {
-                { ITEM_MUSHROOM, 3, 0 },
-                { ITEM_KOOPA_LEAF, 7, 0 },
-            },
-            .heartDrops  = STANDARD_HEART_DROPS(2),
-            .flowerDrops = STANDARD_FLOWER_DROPS(2),
-            .minCoinBonus = 1,
-            .maxCoinBonus = 1,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2253,31 +2222,31 @@ StaticNpc N(NpcData_DarkTroopas)[] = {
                 .detectPos  = { 0, 0, 150 },
                 .detectSize = { 130, 100 },
             }
+        },
+        .init = &N(EVS_NpcInit_KoopaTroopa),
+        .settings = &N(NpcSettings_KoopaTroopa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = {
+            .dropFlags = NPC_DROP_FLAG_80,
+            .itemDropChance = 5,
+            .itemDrops = {
+                { ITEM_MUSHROOM, 3, 0 },
+                { ITEM_KOOPA_LEAF, 7, 0 },
+            },
+            .heartDrops  = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 1,
+            .maxCoinBonus = 1,
         },
         .animations = DARK_TROOPA_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_KoopaTroopas)[] = {
+NpcData N(NpcData_KoopaTroopas)[] = {
     {
         .id = NPC_KoopaTroopa_01,
-        .settings = &N(NpcSettings_KoopaTroopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_KoopaTroopa),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .itemDropChance = 5,
-            .itemDrops = {
-                { ITEM_MUSHROOM, 3, 0 },
-                { ITEM_KOOPA_LEAF, 7, 0 },
-            },
-            .heartDrops  = STANDARD_HEART_DROPS(2),
-            .flowerDrops = STANDARD_FLOWER_DROPS(2),
-            .minCoinBonus = 1,
-            .maxCoinBonus = 1,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2289,28 +2258,28 @@ StaticNpc N(NpcData_KoopaTroopas)[] = {
                 .detectPos  = { 0, 0, 150 },
                 .detectSize = { 130, 100 },
             }
+        },
+        .init = &N(EVS_NpcInit_KoopaTroopa),
+        .settings = &N(NpcSettings_KoopaTroopa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = {
+            .dropFlags = NPC_DROP_FLAG_80,
+            .itemDropChance = 5,
+            .itemDrops = {
+                { ITEM_MUSHROOM, 3, 0 },
+                { ITEM_KOOPA_LEAF, 7, 0 },
+            },
+            .heartDrops  = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 1,
+            .maxCoinBonus = 1,
         },
         .animations = KOOPA_TROOPA_ANIMS,
     },
     {
         .id = NPC_KoopaTroopa_02,
-        .settings = &N(NpcSettings_KoopaTroopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_KoopaTroopa),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .itemDropChance = 5,
-            .itemDrops = {
-                { ITEM_MUSHROOM, 3, 0 },
-                { ITEM_KOOPA_LEAF, 7, 0 },
-            },
-            .heartDrops  = STANDARD_HEART_DROPS(2),
-            .flowerDrops = STANDARD_FLOWER_DROPS(2),
-            .minCoinBonus = 1,
-            .maxCoinBonus = 1,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2322,28 +2291,28 @@ StaticNpc N(NpcData_KoopaTroopas)[] = {
                 .detectPos  = { 0, 0, 150 },
                 .detectSize = { 130, 100 },
             }
+        },
+        .init = &N(EVS_NpcInit_KoopaTroopa),
+        .settings = &N(NpcSettings_KoopaTroopa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = {
+            .dropFlags = NPC_DROP_FLAG_80,
+            .itemDropChance = 5,
+            .itemDrops = {
+                { ITEM_MUSHROOM, 3, 0 },
+                { ITEM_KOOPA_LEAF, 7, 0 },
+            },
+            .heartDrops  = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 1,
+            .maxCoinBonus = 1,
         },
         .animations = KOOPA_TROOPA_ANIMS,
     },
     {
         .id = NPC_KoopaTroopa_03,
-        .settings = &N(NpcSettings_KoopaTroopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_KoopaTroopa),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .itemDropChance = 5,
-            .itemDrops = {
-                { ITEM_MUSHROOM, 3, 0 },
-                { ITEM_KOOPA_LEAF, 7, 0 },
-            },
-            .heartDrops  = STANDARD_HEART_DROPS(2),
-            .flowerDrops = STANDARD_FLOWER_DROPS(2),
-            .minCoinBonus = 1,
-            .maxCoinBonus = 1,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2355,28 +2324,28 @@ StaticNpc N(NpcData_KoopaTroopas)[] = {
                 .detectPos  = { 0, 0, 150 },
                 .detectSize = { 130, 100 },
             }
+        },
+        .init = &N(EVS_NpcInit_KoopaTroopa),
+        .settings = &N(NpcSettings_KoopaTroopa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = {
+            .dropFlags = NPC_DROP_FLAG_80,
+            .itemDropChance = 5,
+            .itemDrops = {
+                { ITEM_MUSHROOM, 3, 0 },
+                { ITEM_KOOPA_LEAF, 7, 0 },
+            },
+            .heartDrops  = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 1,
+            .maxCoinBonus = 1,
         },
         .animations = KOOPA_TROOPA_ANIMS,
     },
     {
         .id = NPC_KoopaTroopa_04,
-        .settings = &N(NpcSettings_KoopaTroopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_KoopaTroopa),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .itemDropChance = 5,
-            .itemDrops = {
-                { ITEM_MUSHROOM, 3, 0 },
-                { ITEM_KOOPA_LEAF, 7, 0 },
-            },
-            .heartDrops  = STANDARD_HEART_DROPS(2),
-            .flowerDrops = STANDARD_FLOWER_DROPS(2),
-            .minCoinBonus = 1,
-            .maxCoinBonus = 1,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2388,16 +2357,43 @@ StaticNpc N(NpcData_KoopaTroopas)[] = {
                 .detectPos  = { 0, 0, 150 },
                 .detectSize = { 130, 100 },
             }
+        },
+        .init = &N(EVS_NpcInit_KoopaTroopa),
+        .settings = &N(NpcSettings_KoopaTroopa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = {
+            .dropFlags = NPC_DROP_FLAG_80,
+            .itemDropChance = 5,
+            .itemDrops = {
+                { ITEM_MUSHROOM, 3, 0 },
+                { ITEM_KOOPA_LEAF, 7, 0 },
+            },
+            .heartDrops  = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 1,
+            .maxCoinBonus = 1,
         },
         .animations = KOOPA_TROOPA_ANIMS,
     },
     {
         .id = NPC_KoopaTroopa_05,
-        .settings = &N(NpcSettings_KoopaTroopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { 0, 0, 150 },
+                .wanderSize = { 130, 100 },
+                .detectShape = SHAPE_RECT,
+                .detectPos  = { 0, 0, 150 },
+                .detectSize = { 130, 100 },
+            }
+        },
         .init = &N(EVS_NpcInit_KoopaTroopa),
+        .settings = &N(NpcSettings_KoopaTroopa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,
@@ -2410,35 +2406,15 @@ StaticNpc N(NpcData_KoopaTroopas)[] = {
             .minCoinBonus = 1,
             .maxCoinBonus = 1,
         },
-        .territory = {
-            .wander = {
-                .isFlying = TRUE,
-                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
-                .wanderShape = SHAPE_RECT,
-                .centerPos  = { 0, 0, 150 },
-                .wanderSize = { 130, 100 },
-                .detectShape = SHAPE_RECT,
-                .detectPos  = { 0, 0, 150 },
-                .detectSize = { 130, 100 },
-            }
-        },
         .animations = KOOPA_TROOPA_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Bobombs)[] = {
+NpcData N(NpcData_Bobombs)[] = {
     {
         .id = NPC_Bobomb_01,
-        .settings = &N(NpcSettings_Short),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_Bobomb),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2451,6 +2427,10 @@ StaticNpc N(NpcData_Bobombs)[] = {
                 .detectSize = { 130, 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Bobomb),
+        .settings = &N(NpcSettings_Short),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldBobomb_Green_Idle,
             .walk   = ANIM_WorldBobomb_Green_Walk,
@@ -2472,16 +2452,8 @@ StaticNpc N(NpcData_Bobombs)[] = {
     },
     {
         .id = NPC_Bobomb_02,
-        .settings = &N(NpcSettings_Short),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_Bobomb),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2494,6 +2466,10 @@ StaticNpc N(NpcData_Bobombs)[] = {
                 .detectSize = { 130, 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Bobomb),
+        .settings = &N(NpcSettings_Short),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldBobomb_Green_Idle,
             .walk   = ANIM_WorldBobomb_Green_Walk,
@@ -2515,16 +2491,8 @@ StaticNpc N(NpcData_Bobombs)[] = {
     },
     {
         .id = NPC_Bobomb_03,
-        .settings = &N(NpcSettings_Short),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_Bobomb),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2537,6 +2505,10 @@ StaticNpc N(NpcData_Bobombs)[] = {
                 .detectSize = { 130, 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Bobomb),
+        .settings = &N(NpcSettings_Short),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldBobomb_Green_Idle,
             .walk   = ANIM_WorldBobomb_Green_Walk,
@@ -2558,16 +2530,8 @@ StaticNpc N(NpcData_Bobombs)[] = {
     },
     {
         .id = NPC_Bobomb_04,
-        .settings = &N(NpcSettings_Short),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_Bobomb),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2580,6 +2544,10 @@ StaticNpc N(NpcData_Bobombs)[] = {
                 .detectSize = { 130, 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Bobomb),
+        .settings = &N(NpcSettings_Short),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldBobomb_Green_Idle,
             .walk   = ANIM_WorldBobomb_Green_Walk,
@@ -2601,16 +2569,8 @@ StaticNpc N(NpcData_Bobombs)[] = {
     },
     {
         .id = NPC_Bobomb_05,
-        .settings = &N(NpcSettings_Short),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
-        .init = &N(EVS_NpcInit_Bobomb),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -2623,6 +2583,10 @@ StaticNpc N(NpcData_Bobombs)[] = {
                 .detectSize = { 130, 100 },
             }
         },
+        .init = &N(EVS_NpcInit_Bobomb),
+        .settings = &N(NpcSettings_Short),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldBobomb_Green_Idle,
             .walk   = ANIM_WorldBobomb_Green_Walk,

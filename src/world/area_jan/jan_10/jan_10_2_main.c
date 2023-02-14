@@ -1,7 +1,6 @@
 #include "jan_10.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_jan_09_2) = EVT_EXIT_WALK(60, jan_10_ENTRY_0, "jan_09", jan_09_ENTRY_2);
 

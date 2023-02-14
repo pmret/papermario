@@ -744,7 +744,7 @@ EvtScript N(EVS_NpcInit_Sushie) = {
 
 #include "world/common/npc/Raven.inc.c"
 
-s32 N(ExtraAnims_VillageLeader)[] = {
+AnimID N(ExtraAnims_VillageLeader)[] = {
     ANIM_VillageLeader_Idle,
     ANIM_VillageLeader_IdleSad,
     ANIM_VillageLeader_Walk,
@@ -754,94 +754,90 @@ s32 N(ExtraAnims_VillageLeader)[] = {
     ANIM_VillageLeader_Shout,
     ANIM_VillageLeader_Celebrate,
     ANIM_VillageLeader_CrossArms,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_VillageLeader) = {
+NpcData N(NpcData_VillageLeader) = {
     .id = NPC_VillageLeader,
-    .settings = &N(NpcSettings_Yoshi),
     .pos = { -300.0f, 0.0f, -70.0f },
     .yaw = 270,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
     .init = &N(EVS_NpcInit_VillageLeader),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Yoshi),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+    .drops = NO_DROPS,
     .animations = YOSHI_LEADER_ANIMS,
     .extraAnimations = N(ExtraAnims_VillageLeader),
     .tattle = MSG_NpcTattle_VillageLeader,
 };
 
-s32 N(ExtraAnims_Sushie)[] = {
+AnimID N(ExtraAnims_Sushie)[] = {
     ANIM_WorldSushie_Idle,
     ANIM_WorldSushie_Run,
     ANIM_WorldSushie_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Sushie) = {
+NpcData N(NpcData_Sushie) = {
     .id = NPC_Sushie,
-    .settings = &N(NpcSettings_Sushie),
     .pos = { -425.0f, 0.0f, -350.0f },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
     .init = &N(EVS_NpcInit_Sushie),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Sushie),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+    .drops = NO_DROPS,
     .animations = SUSHIE_ANIMS,
     .extraAnimations = N(ExtraAnims_Sushie),
     .tattle = MSG_NpcTattle_Sushie,
 };
 
-s32 N(ExtraAnims_Kolorado)[] = {
+AnimID N(ExtraAnims_Kolorado)[] = {
     ANIM_Kolorado_Idle,
     ANIM_Kolorado_IdleSad,
     ANIM_Kolorado_Walk,
     ANIM_Kolorado_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Kolorado) = {
+NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(NpcSettings_Kolorado),
     .pos = { -475.0f, 0.0f, -75.0f },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
     .init = &N(EVS_NpcInit_Kolorado),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Kolorado),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+    .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .extraAnimations = N(ExtraAnims_Kolorado),
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(NpcData_Toad)[] = {
+NpcData N(NpcData_Toad)[] = {
     {
         .id = NPC_Toad,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 275.0f, 0.0f, -70.0f },
         .yaw = 0,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Toad),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_JAN_ToadHouseToad,
     },
     {
         .id = NPC_Yoshi_01,
-        .settings = &N(NpcSettings_Yoshi),
         .pos = { 125.0f, 30.0f, -425.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Yoshi_01),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Yoshi),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_JAN_ShopOwner,
     },
     {
         .id = NPC_Yoshi_02,
-        .settings = &N(NpcSettings_Yoshi_Patrol),
         .pos = { -350.0f, 0.0f, -220.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Yoshi_02),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -856,17 +852,17 @@ StaticNpc N(NpcData_Toad)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_Yoshi_02),
+        .settings = &N(NpcSettings_Yoshi_Patrol),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_GenericYoshi,
     },
     {
         .id = NPC_Yoshi_03,
-        .settings = &N(NpcSettings_Yoshi_Patrol),
         .pos = { -100.0f, 0.0f, -80.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Yoshi_03),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -881,17 +877,17 @@ StaticNpc N(NpcData_Toad)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_Yoshi_03),
+        .settings = &N(NpcSettings_Yoshi_Patrol),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_FoodLovingYoshi,
     },
     {
         .id = NPC_YoshiKid_01,
-        .settings = &N(NpcSettings_YoshiKid_Patrol),
         .pos = { -450.0f, 0.0f, -160.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_YoshiKid_01),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -909,17 +905,17 @@ StaticNpc N(NpcData_Toad)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_YoshiKid_01),
+        .settings = &N(NpcSettings_YoshiKid_Patrol),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_KID_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_GreenYoshiKid,
     },
     {
         .id = NPC_YoshiKid_02,
-        .settings = &N(NpcSettings_YoshiKid_Patrol),
         .pos = { -340.0f, 0.0f, -385.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_YoshiKid_02),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -935,17 +931,17 @@ StaticNpc N(NpcData_Toad)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_YoshiKid_02),
+        .settings = &N(NpcSettings_YoshiKid_Patrol),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_KID_RED_ANIMS,
         .tattle = MSG_NpcTattle_RedYoshiKid,
     },
     {
         .id = NPC_YoshiKid_03,
-        .settings = &N(NpcSettings_YoshiKid_Patrol),
         .pos = { -260.0f, 0.0f, -220.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_YoshiKid_03),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -961,17 +957,17 @@ StaticNpc N(NpcData_Toad)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_YoshiKid_03),
+        .settings = &N(NpcSettings_YoshiKid_Patrol),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_KID_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_BlueYoshiKid,
     },
     {
         .id = NPC_YoshiKid_04,
-        .settings = &N(NpcSettings_YoshiKid_Patrol),
         .pos = { -460.0f, 0.0f, 150.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_YoshiKid_04),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -987,17 +983,17 @@ StaticNpc N(NpcData_Toad)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_YoshiKid_04),
+        .settings = &N(NpcSettings_YoshiKid_Patrol),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_KID_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_YellowYoshiKid,
     },
     {
         .id = NPC_YoshiKid_05,
-        .settings = &N(NpcSettings_YoshiKid_Patrol),
         .pos = { -320.0f, 0.0f, 80.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_YoshiKid_05),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = TRUE,
@@ -1013,85 +1009,89 @@ StaticNpc N(NpcData_Toad)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_YoshiKid_05),
+        .settings = &N(NpcSettings_YoshiKid_Patrol),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_KID_PURPLE_ANIMS,
         .tattle = MSG_NpcTattle_PurpleYoshiKid,
     },
 };
 
-s32 N(ExtraAnims_Raven)[] = {
+AnimID N(ExtraAnims_Raven)[] = {
     ANIM_Raven_Still,
     ANIM_Raven_Idle,
     ANIM_Raven_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Ravens)[] = {
+NpcData N(NpcData_Ravens)[] = {
     {
         .id = NPC_Raven_01,
-        .settings = &N(NpcSettings_Raven),
         .pos = { -650.0f, 374.0f, -150.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Raven),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Raven),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .extraAnimations = N(ExtraAnims_Raven),
         .tattle = MSG_NpcTattle_RavenA,
     },
     {
         .id = NPC_Raven_02,
-        .settings = &N(NpcSettings_Raven),
         .pos = { -645.0f, 457.0f, -255.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Raven),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Raven),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
     },
     {
         .id = NPC_Raven_03,
-        .settings = &N(NpcSettings_Raven),
         .pos = { -570.0f, 374.0f, -300.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Raven),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Raven),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenC,
     },
     {
         .id = NPC_Raven_04,
-        .settings = &N(NpcSettings_Raven),
         .pos = { -500.0f, 374.0f, -285.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Raven),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Raven),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenD,
     },
     {
         .id = NPC_Raven_05,
-        .settings = &N(NpcSettings_Raven),
         .pos = { -450.0f, 374.0f, -175.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Raven),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Raven),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenE,
     },
 };
 
-StaticNpc N(NpcData_ChuckQuizmo) = {
+NpcData N(NpcData_ChuckQuizmo) = {
     .id = NPC_ChuckQuizmo,
-    .settings = &N(NpcSettings_ChuckQuizmo),
     .pos = { 300.0f, 0.0f, 400.0f },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_JAN, QUIZ_COUNT_JAN, QUIZ_MAP_JAN_03 }},
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_ChuckQuizmo),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+    .drops = NO_DROPS,
     .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,
 };

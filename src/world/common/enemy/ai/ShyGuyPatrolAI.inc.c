@@ -59,7 +59,7 @@ void N(ShyGuyPatrolAI_17)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     }
 }
 
-ApiStatus N(ShyGuyPatrolAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ShyGuyPatrolAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;

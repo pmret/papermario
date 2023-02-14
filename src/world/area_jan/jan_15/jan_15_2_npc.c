@@ -1,7 +1,7 @@
 #include "jan_15.h"
 
-#include "world/common/enemy/complete/PutridPiranhaSentinel.inc.c"
-#include "world/common/enemy/complete/HeartPlant.inc.c"
+#include "world/common/enemy/PutridPiranhaSentinel.inc.c"
+#include "world/common/enemy/HeartPlant.inc.c"
 
 EvtScript N(EVS_PutridPiranhas_IdleChomping) = {
     EVT_CHILD_THREAD
@@ -174,55 +174,55 @@ EvtScript N(EVS_NpcInit_PutridPiranha) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Piranhas)[] = {
+NpcData N(NpcData_Piranhas)[] = {
     {
         .id = NPC_PutridPiranha_01,
-        .settings = &N(NpcSettings_PutridPiranhaSentinel),
         .pos = { 365.0f, 0.0f, -45.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_PutridPiranha),
-        .drops = PIRANHA_SENTINEL_DROPS,
+        .settings = &N(NpcSettings_PutridPiranhaSentinel),
+        .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+        .drops = PIRANHA_NO_DROPS,
         .animations = PIRANHA_SENTINEL_ANIMS,
     },
     {
         .id = NPC_PutridPiranha_02,
-        .settings = &N(NpcSettings_PutridPiranhaSentinel),
         .pos = { 325.0f, 0.0f, 0.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_PutridPiranhaSentinel),
         .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
-        .drops = PIRANHA_SENTINEL_DROPS,
+        .drops = PIRANHA_NO_DROPS,
         .animations = PIRANHA_SENTINEL_ANIMS,
     },
     {
         .id = NPC_PutridPiranha_03,
-        .settings = &N(NpcSettings_PutridPiranhaSentinel),
         .pos = { 375.0f, 0.0f, 45.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_PutridPiranhaSentinel),
         .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
-        .drops = PIRANHA_SENTINEL_DROPS,
+        .drops = PIRANHA_NO_DROPS,
         .animations = PIRANHA_SENTINEL_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_HeartPlant_01) = {
+NpcData N(NpcData_HeartPlant_01) = {
     .id = NPC_HeartPlant_01,
-    .settings = &N(NpcSettings_HeartPlant),
     .pos = { -183.0f, 0.0f, 47.0f },
     .yaw = 270,
+    .settings = &N(NpcSettings_HeartPlant),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(NpcData_HeartPlant_02) = {
+NpcData N(NpcData_HeartPlant_02) = {
     .id = NPC_HeartPlant_02,
-    .settings = &N(NpcSettings_HeartPlant),
     .pos = { -124.0f, 0.0f, 20.0f },
     .yaw = 270,
+    .settings = &N(NpcSettings_HeartPlant),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };

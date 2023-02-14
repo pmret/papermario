@@ -286,17 +286,13 @@ NpcSettings N(NpcSettings_Fuzzipede) = {
     .unk_24 = 100,
 };
 
-StaticNpc N(NpcData_Fuzzipede) = {
+NpcData N(NpcData_Fuzzipede) = {
     .id = NPC_Fuzzipede,
-    .settings = &N(NpcSettings_Fuzzipede),
     .pos = { 333.0f, -10.0f, -130.0f },
     .yaw = 90,
+    .settings = &N(NpcSettings_Fuzzipede),
     .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_10000000,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Fuzzipede_Anim04,
     },

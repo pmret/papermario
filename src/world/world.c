@@ -6,6 +6,31 @@
 #include "sprite.h"
 #include "model.h"
 
+s32 WorldReverbModeMapping[] = { 0, 1, 2, 3 };
+
+//TODO possible data split here
+
+Vec3s gEntityColliderFaces[] = {
+    { 4, 6, 5 }, { 4, 7, 6 },
+    { 0, 3, 4 }, { 3, 7, 4 },
+    { 3, 2, 7 }, { 2, 6, 7 },
+    { 2, 1, 6 }, { 1, 5, 6 },
+    { 1, 0, 5 }, { 0, 4, 5 },
+    { 0, 1, 2 }, { 0, 2, 3 },
+};
+
+Vec3f gEntityColliderNormals[] = {
+    {  0.0f,  1.0f,  0.0f }, {  0.0f,  1.0f,  0.0f },
+    {  1.0f,  0.0f,  0.0f }, {  1.0f,  0.0f,  0.0f },
+    {  0.0f,  0.0f, -1.0f }, {  0.0f,  0.0f, -1.0f },
+    { -1.0f,  0.0f,  0.0f }, { -1.0f,  0.0f,  0.0f },
+    {  0.0f,  0.0f,  1.0f }, {  0.0f,  0.0f,  1.0f },
+    {  0.0f, -1.0f,  0.0f }, {  0.0f, -1.0f,  0.0f },
+};
+
+//TODO data split here!
+s32 pad_map_table[] = { 0, 0 };
+
 #ifdef SHIFT
 #define ASSET_TABLE_ROM_START mapfs_ROM_START
 #else
@@ -14,8 +39,6 @@
 
 #define ASSET_TABLE_HEADER_SIZE 0x20
 #define ASSET_TABLE_FIRST_ENTRY (ASSET_TABLE_ROM_START + ASSET_TABLE_HEADER_SIZE)
-
-s32 WorldReverbModeMapping[] = { 0, 1, 2, 3 };
 
 // bss
 extern MapSettings gMapSettings;
@@ -276,22 +299,6 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
 #define MAP_WITH_INIT(map) \
     MAP(map), \
     .init = &map##_map_init \
-
-// Should be removed once the data section containing .init and .settings of all maps have been disassembled
-#define MAP_UNSPLIT(map, settingsVRAM) \
-    .id = #map, \
-    .settings = (MapSettings*)(settingsVRAM), \
-    .dmaStart = map##_ROM_START, \
-    .dmaEnd = map##_ROM_END, \
-    .dmaDest = map##_VRAM \
-
-// these, along with all the *_maps, almost certainly belong in the next file
-s16 gEntityColliderFaces[] = { 4, 6, 5, 4, 7, 6, 0, 3, 4, 3, 7, 4, 3, 2, 7, 2, 6, 7, 2, 1, 6, 1, 5, 6, 1, 0, 5,
-                                 0, 4, 5, 0, 1, 2, 0, 2, 3};
-
-f32 gEntityColliderNormals[] = { 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
-                                       0.0f, -1.0f, 0.0f, 0.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
-                                       1.0f, 0.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f};
 
 /// Toad Town
 #include "area_mac/mac.h"
@@ -571,31 +578,31 @@ MapConfig osr_maps[] = {
 /// @bug There are two entries for kkj_26; the latter is unreachable.
 #include "area_kkj/kkj.h"
 MapConfig kkj_maps[] = {
-    { MAP_UNSPLIT(kkj_00, 0x80241030), .bgName = "nok_bg", .init = (MapInit)0x80240000, .songVariation = 1, .sfxReverb = 3 },
-    { MAP_UNSPLIT(kkj_01, 0x80240F10), .bgName = "nok_bg", .songVariation = 1, .sfxReverb = 3 },
-    { MAP_UNSPLIT(kkj_02, 0x80240030), .bgName = "nok_bg", .sfxReverb = 2 },
-    { MAP_UNSPLIT(kkj_03, 0x80240360), .bgName = "nok_bg", .sfxReverb = 3, .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(kkj_10, 0x80241120), .songVariation = 1, .sfxReverb = 3 },
-    { MAP_UNSPLIT(kkj_11, 0x80241160), .songVariation = 1, .sfxReverb = 3 },
-    { MAP_UNSPLIT(kkj_12, 0x802408D0), .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(kkj_13, 0x802407A0), .bgName = "kpa_bg",  .songVariation = 1, .sfxReverb = 3, .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(kkj_14, 0x80240580), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(kkj_15, 0x80240640) },
-    { MAP_UNSPLIT(kkj_16, 0x80241090), .sfxReverb = 1 },
-    { MAP_UNSPLIT(kkj_17, 0x802405B0) },
-    { MAP_UNSPLIT(kkj_18, 0x80240830), .bgName = "kpa_bg" },
-    { MAP_UNSPLIT(kkj_19, 0x80240D20) },
-    { MAP_UNSPLIT(kkj_20, 0x80240600) },
-    { MAP_UNSPLIT(kkj_21, 0x80240010), .sfxReverb = 1 },
-    { MAP_UNSPLIT(kkj_22, 0x80240020), .bgName = "kpa_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(kkj_23, 0x802409F0), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(kkj_24, 0x80240040), .bgName = "kpa_bg", .songVariation = 1, .sfxReverb = 2 },
-    { MAP_UNSPLIT(kkj_25, 0x80240F50), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
-    { MAP_UNSPLIT(kkj_26, 0x80240070), .bgName = "kpa_bg" },
-    { MAP_UNSPLIT(kkj_26, 0x80240070), .sfxReverb = 2 },
-    { MAP_UNSPLIT(kkj_27, 0x802404C0), .sfxReverb = 1 },
-    { MAP_UNSPLIT(kkj_28, 0x80240010), .sfxReverb = 1 },
-    { MAP_UNSPLIT(kkj_29, 0x80240080), .sfxReverb = 1 },
+    { MAP_WITH_INIT(kkj_00), .bgName = "nok_bg", .songVariation = 1, .sfxReverb = 3 },
+    { MAP(kkj_01), .bgName = "nok_bg", .songVariation = 1, .sfxReverb = 3 },
+    { MAP(kkj_02), .bgName = "nok_bg", .sfxReverb = 2 },
+    { MAP_WITH_INIT(kkj_03), .bgName = "nok_bg", .sfxReverb = 3 },
+    { MAP(kkj_10), .songVariation = 1, .sfxReverb = 3 },
+    { MAP(kkj_11), .songVariation = 1, .sfxReverb = 3 },
+    { MAP(kkj_12), .songVariation = 1, .sfxReverb = 2 },
+    { MAP_WITH_INIT(kkj_13), .bgName = "kpa_bg",  .songVariation = 1, .sfxReverb = 3},
+    { MAP_WITH_INIT(kkj_14), .bgName = "kpa_bg" },
+    { MAP(kkj_15) },
+    { MAP(kkj_16), .sfxReverb = 1 },
+    { MAP(kkj_17) },
+    { MAP(kkj_18), .bgName = "kpa_bg" },
+    { MAP(kkj_19) },
+    { MAP(kkj_20) },
+    { MAP(kkj_21), .sfxReverb = 1 },
+    { MAP(kkj_22), .bgName = "kpa_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP_WITH_INIT(kkj_23), .bgName = "kpa_bg" },
+    { MAP(kkj_24), .bgName = "kpa_bg", .songVariation = 1, .sfxReverb = 2 },
+    { MAP_WITH_INIT(kkj_25), .bgName = "kpa_bg" },
+    { MAP(kkj_26), .bgName = "kpa_bg" },
+    { MAP(kkj_26), .sfxReverb = 2 },
+    { MAP(kkj_27), .sfxReverb = 1 },
+    { MAP(kkj_28), .sfxReverb = 1 },
+    { MAP(kkj_29), .sfxReverb = 1 },
 };
 
 /// Jade Jungle
@@ -886,5 +893,3 @@ AreaConfig gAreas[] = {
     AREA(tst, "テストマップ"),  // tesuto mappu [Test map]
     {},
 };
-
-const f32 world_rodata_alignment = 0.0f;

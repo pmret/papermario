@@ -15,7 +15,7 @@ NpcSettings N(NpcSettings_Duplighost) = {
 };
 
 #define INCLUDE_FROST_CLUBBA_WANDER
-#include "world/common/enemy/complete/FrostClubba_Multi.inc.c"
+#include "world/common/enemy/FrostClubba_Multi.inc.c"
 
 EvtScript N(EVS_NpcInteract_TrueKooperA) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH7_012B)
@@ -123,19 +123,15 @@ EvtScript N(EVS_NpcInit_Duplighost) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Ambush)[] = {
+NpcData N(NpcData_Ambush)[] = {
     {
         .id = NPC_Kooper_01A,
-        .settings = &N(NpcSettings_Kooper),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_TrueKooperA),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Kooper),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
             .walk   = ANIM_WorldKooper_Walk,
@@ -157,16 +153,12 @@ StaticNpc N(NpcData_Ambush)[] = {
     },
     {
         .id = NPC_Kooper_02A,
-        .settings = &N(NpcSettings_Kooper),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_RealKooperA),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Kooper),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
             .walk   = ANIM_WorldKooper_Walk,
@@ -188,16 +180,12 @@ StaticNpc N(NpcData_Ambush)[] = {
     },
     {
         .id = NPC_Duplighost,
-        .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Duplighost),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
             .walk   = ANIM_Duplighost_Anim03,
@@ -263,19 +251,15 @@ EvtScript N(EVS_NpcInit_FakeKooperB) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Hittable)[] = {
+NpcData N(NpcData_Hittable)[] = {
     {
         .id = NPC_Kooper_01B,
-        .settings = &N(NpcSettings_Kooper),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_TrueKooperB),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Kooper),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
             .walk   = ANIM_WorldKooper_Walk,
@@ -297,16 +281,12 @@ StaticNpc N(NpcData_Hittable)[] = {
     },
     {
         .id = NPC_Kooper_02B,
-        .settings = &N(NpcSettings_Kooper),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_FakeKooperB),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Kooper),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
             .walk   = ANIM_WorldKooper_Walk,
@@ -328,14 +308,11 @@ StaticNpc N(NpcData_Hittable)[] = {
     },
 };
 
-StaticNpc N(NpcData_FrostClubba)[] = {
+NpcData N(NpcData_FrostClubba)[] = {
     {
         .id = NPC_Clubba_01,
-        .settings = &N(NpcSettings_FrostClubba_Wander),
         .pos = { -450.0f, 0.0f, -90.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .drops = FROST_CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -348,6 +325,9 @@ StaticNpc N(NpcData_FrostClubba)[] = {
                 .detectSize = { 200 },
             }
         },
+        .settings = &N(NpcSettings_FrostClubba_Wander),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = FROST_CLUBBA_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },

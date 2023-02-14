@@ -1,9 +1,9 @@
 #include "dgb_15.h"
 
 #define INCLUDE_CLUBBA_WANDER
-#include "world/common/enemy/complete/Clubba_Multi.inc.c"
+#include "world/common/enemy/Clubba_Multi.inc.c"
 
-#include "world/common/enemy/complete/TubbaBlubba.inc.c"
+#include "world/common/enemy/TubbaBlubba.inc.c"
 
 NpcSettings N(NpcSettings_Yakkey) = {
     .height = 24,
@@ -162,14 +162,10 @@ EvtScript N(EVS_NpcInit_Tubba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Tubba) = {
+NpcData N(NpcData_Tubba) = {
     .id = NPC_Tubba,
-    .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
-    .init = &N(EVS_NpcInit_Tubba),
-    .drops = CLUBBA_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -189,6 +185,10 @@ StaticNpc N(NpcData_Tubba) = {
             .detectSize = { 1000, 250 },
         }
     },
+    .init = &N(EVS_NpcInit_Tubba),
+    .settings = &N(NpcSettings_TubbaBlubba),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+    .drops = CLUBBA_DROPS,
     .animations = TUBBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

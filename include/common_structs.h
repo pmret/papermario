@@ -1400,7 +1400,7 @@ typedef struct GameStatus {
     /* 0x07D */ s8 keepUsingPartnerOnMapChange;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
-    /* 0x080 */ u8 peachCookingIngredient; ///< @see enum CookingIngredient
+    /* 0x080 */ u8 peachBakingIngredient; ///< @see enum PeachBakingItems
     /* 0x081 */ s8 multiplayerEnabled;
     /* 0x082 */ s8 unk_82;
     /* 0x083 */ s8 unk_83;
@@ -2174,11 +2174,14 @@ typedef struct MenuWindowBP {
     /* 0x06 */ s16 width;
     /* 0x08 */ s16 height;
     /* 0x0A */ u8 priority;
+    /* 0x0B */ char unk_0B;
     /* 0x0C */ void (*fpDrawContents)(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
     /* 0x10 */ MenuPanel* tab;
     /* 0x14 */ s8 parentID;
+    /* 0x15 */ char unk_15[3];
     /* 0x18 */ WindowUpdateFunc fpUpdate;
     /* 0x1C */ u8 extraFlags;
+    /* 0x1D */ char unk_1D[3];
     /* 0x20 */ WindowStyle style;
 } MenuWindowBP; // size = 0x24;
 

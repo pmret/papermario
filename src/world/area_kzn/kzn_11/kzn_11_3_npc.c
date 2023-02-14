@@ -1,6 +1,6 @@
 #include "kzn_11.h"
 
-#include "world/common/enemy/complete/LavaBubble.inc.c"
+#include "world/common/enemy/LavaBubble.inc.c"
 
 #include "sprite/npc/Fire.h"
 #include "world/common/enemy/ai/FireBarAI.inc.c"
@@ -143,142 +143,139 @@ NpcSettings N(NpcSettings_FireBar_Extra) = {
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
-StaticNpc N(NpcData_FireBar_01)[] = {
+NpcData N(NpcData_FireBar_01)[] = {
     {
         .id = NPC_FireBar_1A,
-        .settings = &N(NpcSettings_FireBar_01),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_01),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_1B,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_1C,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_1D,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
 };
 
-StaticNpc N(NpcData_FireBar_02)[] = {
+NpcData N(NpcData_FireBar_02)[] = {
     {
         .id = NPC_FireBar_2A,
-        .settings = &N(NpcSettings_FireBar_02),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_02),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_2B,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_2C,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_2D,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
 };
 
-StaticNpc N(NpcData_FireBar_03)[] = {
+NpcData N(NpcData_FireBar_03)[] = {
     {
         .id = NPC_FireBar_3A,
-        .settings = &N(NpcSettings_FireBar_03),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_03),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_3B,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_3C,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
     {
         .id = NPC_FireBar_3D,
-        .settings = &N(NpcSettings_FireBar_Extra),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE,
         .init = (void*) 0x00004003,
+        .settings = &N(NpcSettings_FireBar_Extra),
+        .flags = ENEMY_FLAG_PASSIVE,
         .animations = {
         },
     },
 };
 
-StaticNpc N(NpcData_Bubble_01) = {
+NpcData N(NpcData_Bubble_01) = {
     .id = NPC_Bubble_01,
-    .settings = &N(NpcSettings_LavaBubble),
     .pos = { -150.0f, 50.0f, 10.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = LAVA_BUBBLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -291,17 +288,17 @@ StaticNpc N(NpcData_Bubble_01) = {
             .detectSize = { 150 },
         }
     },
+    .settings = &N(NpcSettings_LavaBubble),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = LAVA_BUBBLE_DROPS,
     .animations = LAVA_BUBBLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Bubble_02) = {
+NpcData N(NpcData_Bubble_02) = {
     .id = NPC_Bubble_02,
-    .settings = &N(NpcSettings_LavaBubble),
     .pos = { 150.0f, 50.0f, 10.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = LAVA_BUBBLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -314,6 +311,9 @@ StaticNpc N(NpcData_Bubble_02) = {
             .detectSize = { 150 },
         }
     },
+    .settings = &N(NpcSettings_LavaBubble),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = LAVA_BUBBLE_DROPS,
     .animations = LAVA_BUBBLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

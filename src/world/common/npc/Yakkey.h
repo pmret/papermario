@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Yakkey.h"
 
-#define YAKKEY_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define YAKKEY_ANIMS \
 { \
     .idle   = ANIM_Yakkey_Idle, \

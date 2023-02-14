@@ -129,7 +129,7 @@ void N(ProjectileHitbox_33)(Evt* script) {
     }
 }
 
-ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ProjectileAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     s32 phi_s6 = 0;
@@ -249,9 +249,9 @@ ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
             } else {
                 fx_walking_dust(2, npc->pos.x, npc->pos.y, npc->pos.z, 0, 0);
                 enemy->varTable[0] = 0;
-                npc->pos.x = 0.0f;
-                npc->pos.y = -1000.0f;
-                npc->pos.z = 0.0f;
+                npc->pos.x = NPC_DISPOSE_POS_X;
+                npc->pos.y = NPC_DISPOSE_POS_Y;
+                npc->pos.z = NPC_DISPOSE_POS_Z;
                 npc->jumpVelocity = 0.0f;
                 npc->flags |= NPC_FLAG_2;
                 disable_npc_shadow(npc);
@@ -265,7 +265,7 @@ ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(ProjectileAI_Reflect)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ProjectileAI_Reflect)) {
     Enemy* enemy = script->owner1.enemy;
     Camera* camera = &gCameras[gCurrentCamID];
     s32 phi_s4 = 0;
@@ -354,9 +354,9 @@ ApiStatus N(ProjectileAI_Reflect)(Evt* script, s32 isInitialCall) {
             if (phi_s4 != 0) {
                 fx_walking_dust(2, npc->pos.x, npc->pos.y, npc->pos.z, 0, 0);
                 enemy->varTable[0] = 0;
-                npc->pos.x = 0.0f;
-                npc->pos.z = 0.0f;
-                npc->pos.y = -1000.0f;
+                npc->pos.x = NPC_DISPOSE_POS_X;
+                npc->pos.y = NPC_DISPOSE_POS_Y;
+                npc->pos.z = NPC_DISPOSE_POS_Z;
                 npc->flags |= NPC_FLAG_2;
                 disable_npc_shadow(npc);
                 npc->flags &= ~NPC_FLAG_JUMPING;

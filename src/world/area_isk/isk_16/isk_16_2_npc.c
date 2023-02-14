@@ -16,7 +16,7 @@ EvtScript N(EVS_NpcDefeat_Tutankoopa_01) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetEncounterStatusFlags, 1, TRUE)
+            EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_1, TRUE)
             EVT_CALL(InterpPlayerYaw, 90, 0)
             EVT_EXEC_WAIT(N(EVS_Scene_TutankoopaDefeated))
             EVT_EXEC(N(EVS_SpawnStarCard))
@@ -63,21 +63,17 @@ NpcSettings N(NpcSettings_Tutankoopa_02) = {
     .radius = 36,
 };
 
-StaticNpc N(NpcData_Tutankoopa)[] = {
+NpcData N(NpcData_Tutankoopa)[] = {
     {
         .id = NPC_Tutankoopa_01,
-        .settings = &N(NpcSettings_Tutankoopa_01),
         .pos = { 457.0f, -1300.0f, 316.0f },
         .yaw = 230,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Tutankoopa_01),
         .initVarCount = 1,
         .initVar = { .value = 0 },
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Tutankoopa_01),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Tutankoopa_Anim01,
             .walk   = ANIM_Tutankoopa_Anim01,
@@ -99,15 +95,11 @@ StaticNpc N(NpcData_Tutankoopa)[] = {
     },
     {
         .id = NPC_Tutankoopa_02,
-        .settings = &N(NpcSettings_Tutankoopa_02),
         .pos = { 500.0f, -1300.0f, 316.0f },
         .yaw = 230,
+        .settings = &N(NpcSettings_Tutankoopa_02),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Tutankoopa_Anim01,
             .walk   = ANIM_Tutankoopa_Anim01,
@@ -129,18 +121,14 @@ StaticNpc N(NpcData_Tutankoopa)[] = {
     },
 };
 
-StaticNpc N(NpcData_ChainChomp) = {
+NpcData N(NpcData_ChainChomp) = {
     .id = NPC_ChainChomp,
-    .settings = &N(NpcSettings_ChainChomp),
     .pos = { 457.0f, -1300.0f, 316.0f },
     .yaw = 230,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_ChainChomp),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_ChainChomp),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_ChainChomp_Anim00,
         .walk   = ANIM_ChainChomp_Anim00,

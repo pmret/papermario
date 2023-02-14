@@ -1,25 +1,22 @@
 #include "jan_06.h"
 
-#include "world/common/enemy/complete/JungleFuzzy_Wander.inc.c"
-#include "world/common/enemy/complete/HeartPlant.inc.c"
-#include "world/common/enemy/complete/HurtPlant.inc.c"
-#include "world/common/enemy/complete/SpearGuy_Wander.inc.c"
+#include "world/common/enemy/JungleFuzzy_Wander.inc.c"
+#include "world/common/enemy/HeartPlant.inc.c"
+#include "world/common/enemy/HurtPlant.inc.c"
+#include "world/common/enemy/SpearGuy_Wander.inc.c"
 
-s32 N(ExtraAnims_JungleFuzzy)[] = {
+AnimID N(ExtraAnims_JungleFuzzy)[] = {
     ANIM_Fuzzy_Blue_Idle,
     ANIM_Fuzzy_Blue_Walk,
     ANIM_Fuzzy_Blue_Run,
     ANIM_Fuzzy_Blue_Hurt,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_JungleFuzzy) = {
+NpcData N(NpcData_JungleFuzzy) = {
     .id = NPC_JungleFuzzy,
-    .settings = &N(NpcSettings_JungleFuzzy_Wander),
     .pos = { 310.0f, 24.0f, 35.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .drops = JUNGLE_FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -32,12 +29,15 @@ StaticNpc N(NpcData_JungleFuzzy) = {
             .detectSize = { 150 },
         }
     },
+    .settings = &N(NpcSettings_JungleFuzzy_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
     .extraAnimations = N(ExtraAnims_JungleFuzzy),
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-s32 N(ExtraAnims_SpearGuy_Custom)[] = {
+AnimID N(ExtraAnims_SpearGuy_Custom)[] = {
     ANIM_SpearGuy_Anim03,
     ANIM_SpearGuy_Anim04,
     ANIM_SpearGuy_Anim05,
@@ -50,10 +50,10 @@ s32 N(ExtraAnims_SpearGuy_Custom)[] = {
     ANIM_SpearGuy_Anim0D,
     ANIM_SpearGuy_Anim1A,
     ANIM_SpearGuy_Anim1B,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_SpearGuy)[] = {
+NpcData N(NpcData_SpearGuy)[] = {
     {
         .id = NPC_SpearGuy,
         .pos = { -298.0f, 35.0f, 37.0f },
@@ -80,18 +80,18 @@ StaticNpc N(NpcData_SpearGuy)[] = {
     SPEAR_GUY_HITBOX(NPC_SpearGuy_Hitbox),
 };
 
-StaticNpc N(NpcData_HeartPlant) = {
+NpcData N(NpcData_HeartPlant) = {
     .id = NPC_HeartPlant,
     .pos = { 410.0f, 0.0f, -30.0f },
     .yaw = 270,
     .settings = &N(NpcSettings_HeartPlant),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(NpcData_HurtPlant_01) = {
+NpcData N(NpcData_HurtPlant_01) = {
     .id = NPC_HurtPlant_01,
     .pos = { 110.0f, 0.0f, 55.0f },
     .yaw = 90,
@@ -102,7 +102,7 @@ StaticNpc N(NpcData_HurtPlant_01) = {
     .tattle = MSG_NpcTattle_HeartPlant,
 };
 
-StaticNpc N(NpcData_HurtPlant_02) = {
+NpcData N(NpcData_HurtPlant_02) = {
     .id = NPC_HurtPlant_02,
     .pos = { -430.0f, 0.0f, -80.0f },
     .yaw = 90,

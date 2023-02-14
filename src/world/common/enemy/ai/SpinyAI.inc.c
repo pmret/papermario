@@ -8,7 +8,7 @@
 // prerequisites
 #include "world/common/enemy/ai/TackleAI.inc.c"
 
-ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpinyAI_Main)) {
     #ifdef _DEAD_H_
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     #else
@@ -55,9 +55,9 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
         npc->flags |= NPC_FLAG_8;
         enemy->varTable[10] = 0;
         enemy->varTable[11] = -1;
-        npc->pos.x = 0.0f;
-        npc->pos.y = -1000.0f;
-        npc->pos.z = 0.0f;
+        npc->pos.x = NPC_DISPOSE_POS_X;
+        npc->pos.y = NPC_DISPOSE_POS_Y;
+        npc->pos.z = NPC_DISPOSE_POS_Z;
     }
 
     if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
@@ -212,9 +212,9 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
             break;
         case 110:
             npc->duration = 30;
-            npc->pos.x = 0.0f;
-            npc->pos.z = 0.0f;
-            npc->pos.y = -1000.0f;
+            npc->pos.x = NPC_DISPOSE_POS_X;
+            npc->pos.y = NPC_DISPOSE_POS_Y;
+            npc->pos.z = NPC_DISPOSE_POS_Z;
             npc->flags |= NPC_FLAG_8 | NPC_FLAG_2;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             script->AI_TEMP_STATE = 111;

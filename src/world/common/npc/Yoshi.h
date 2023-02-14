@@ -4,13 +4,6 @@
 #include "sprite/npc/VillageLeader.h"
 #include "sprite/npc/LeadersFriend.h"
 
-#define YOSHI_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define YOSHI_GREEN_ANIMS \
 { \
     .idle   = ANIM_Yoshi_Green_Idle, \

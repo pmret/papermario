@@ -23,7 +23,7 @@ typedef struct FuzzyThread {
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
-#include "world/common/enemy/complete/Fuzzy.inc.c"
+#include "world/common/enemy/Fuzzy.inc.c"
 #include "world/common/npc/Koopa.inc.c"
 
 #include "../common/GetIntoShell.inc.c"
@@ -1492,25 +1492,21 @@ EvtScript N(EVS_NpcInit_Kooper) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Minigame)[] = {
+NpcData N(NpcData_Minigame)[] = {
     {
         .id = NPC_KoopersShell,
-        .settings = &N(NpcSettings_Koopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_KoopersShell),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Koopa),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = KOOPER_ANIMS,
     },
     {
         .id = NPC_AmbushFuzzy,
-        .settings = &N(NpcSettings_Fuzzy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(EVS_NpcInit_WrongFuzzy),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -1523,16 +1519,16 @@ StaticNpc N(NpcData_Minigame)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_WrongFuzzy),
+        .settings = &N(NpcSettings_Fuzzy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = FUZZY_ANIMS,
     },
     {
         .id = NPC_Fuzzy_01,
-        .settings = &N(NpcSettings_Fuzzy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(EVS_NpcInit_Fuzzy_Aux),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -1545,16 +1541,16 @@ StaticNpc N(NpcData_Minigame)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_Fuzzy_Aux),
+        .settings = &N(NpcSettings_Fuzzy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = FUZZY_ANIMS,
     },
     {
         .id = NPC_Fuzzy_02,
-        .settings = &N(NpcSettings_Fuzzy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(EVS_NpcInit_Fuzzy_Aux),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -1567,16 +1563,16 @@ StaticNpc N(NpcData_Minigame)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_Fuzzy_Aux),
+        .settings = &N(NpcSettings_Fuzzy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = FUZZY_ANIMS,
     },
     {
         .id = NPC_Fuzzy_03,
-        .settings = &N(NpcSettings_Fuzzy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .init = &N(EVS_NpcInit_Fuzzy_Aux),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -1589,28 +1585,28 @@ StaticNpc N(NpcData_Minigame)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_Fuzzy_Aux),
+        .settings = &N(NpcSettings_Fuzzy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = FUZZY_ANIMS,
     },
     {
         .id = NPC_Kooper,
-        .settings = &N(NpcSettings_Koopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Kooper),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Koopa),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = KOOPER_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Miniboss) = {
+NpcData N(NpcData_Miniboss) = {
     .id = NPC_BossFuzzy,
-    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
-    .init = &N(EVS_SetupMinigame),
-    .drops = NPC_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -1623,6 +1619,10 @@ StaticNpc N(NpcData_Miniboss) = {
             .detectSize = { 0 },
         }
     },
+    .init = &N(EVS_SetupMinigame),
+    .settings = &N(NpcSettings_Fuzzy),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = FUZZY_ANIMS,
 };
 

@@ -14,7 +14,7 @@ s32 N(ItemChoice_SelectedItemID) = 0;
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
 
-ApiStatus N(ItemChoice_WaitForSelection)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ItemChoice_WaitForSelection)) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -30,7 +30,7 @@ ApiStatus N(ItemChoice_WaitForSelection)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ItemChoice_SaveSelected)) {
     Bytecode* args = script->ptrReadPos;
 
     N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args);

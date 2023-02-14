@@ -1,5 +1,5 @@
 // outputs z sprite rotation
-ApiStatus N(MediGuySpriteRotationFunc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MediGuySpriteRotationFunc)) {
     Bytecode* args = script->ptrReadPos;
 
     s32 angle = evt_get_variable(script, *args++);

@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(SpyGuyActionFunc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpyGuyActionFunc)) {
     BattleStatus* status = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 

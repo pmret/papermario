@@ -3,7 +3,6 @@
 #include "world/common/entity/Pipe.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_GotoMap_mac_00_3) = {
     EVT_CALL(GotoMap, EVT_PTR("mac_00"), mac_00_ENTRY_3)

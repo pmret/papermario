@@ -74,19 +74,15 @@ EvtScript N(EVS_NpcInit_Bootler) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Bootler)[] = {
+NpcData N(NpcData_Bootler)[] = {
     {
         .id = NPC_Bootler,
-        .settings = &N(NpcSettings_Bootler),
         .pos = { 68.0f, 60.0f, -145.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Bootler),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Bootler),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Bootler_Idle,
             .walk   = ANIM_Bootler_Walk,
@@ -108,16 +104,12 @@ StaticNpc N(NpcData_Bootler)[] = {
     },
     {
         .id = NPC_Skolar,
-        .settings = &N(NpcSettings_Skolar),
         .pos = { 68.0f, 60.0f, -145.0f },
         .yaw = 135,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Skolar),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Skolar),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldSkolar_Idle,
             .walk   = ANIM_WorldSkolar_Idle,

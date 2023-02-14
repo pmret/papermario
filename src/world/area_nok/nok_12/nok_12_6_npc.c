@@ -1,10 +1,10 @@
 #include "nok_12.h"
 
-#include "world/common/enemy/complete/KoopaTroopa_Wander.inc.c"
-#include "world/common/enemy/complete/KoopaTroopa_Patrol.inc.c"
-#include "world/common/enemy/complete/Goomba_Wander.inc.c"
-#include "world/common/enemy/complete/SpikedGoomba_Wander.inc.c"
-#include "world/common/enemy/complete/SpikedGoomba_Patrol.inc.c"
+#include "world/common/enemy/KoopaTroopa_Wander.inc.c"
+#include "world/common/enemy/KoopaTroopa_Patrol.inc.c"
+#include "world/common/enemy/Goomba_Wander.inc.c"
+#include "world/common/enemy/SpikedGoomba_Wander.inc.c"
+#include "world/common/enemy/SpikedGoomba_Patrol.inc.c"
 
 // 'sleep' on top of brick block until it's broken
 EvtScript N(EVS_NpcIdle_SpikedGoomba) = {
@@ -95,13 +95,10 @@ EvtScript N(EVS_NpcInit_KoopaTroopa_02_Demo) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KoopaTroopa_01) = {
+NpcData N(NpcData_KoopaTroopa_01) = {
     .id = NPC_KoopaTroopa_01,
-    .settings = &N(NpcSettings_KoopaTroopa_Patrol),
     .pos = { -370.0f, 0.0f, -25.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = KOOPA_TROOPA_NOK_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -116,18 +113,17 @@ StaticNpc N(NpcData_KoopaTroopa_01) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_KoopaTroopa_Patrol),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_KoopaTroopa_02) = {
+NpcData N(NpcData_KoopaTroopa_02) = {
     .id = NPC_KoopaTroopa_02,
-    .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { 563.0f, 50.0f, -43.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_KoopaTroopa_02),
-    .drops = KOOPA_TROOPA_NOK_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -140,18 +136,18 @@ StaticNpc N(NpcData_KoopaTroopa_02) = {
             .detectSize = { 500 },
         }
     },
+    .init = &N(EVS_NpcInit_KoopaTroopa_02),
+    .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_KoopaTroopa_02_Demo) = {
+NpcData N(NpcData_KoopaTroopa_02_Demo) = {
     .id = NPC_KoopaTroopa_02,
-    .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { 600.0f, 50.0f, -75.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_KoopaTroopa_02_Demo),
-    .drops = KOOPA_TROOPA_NOK_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -164,17 +160,18 @@ StaticNpc N(NpcData_KoopaTroopa_02_Demo) = {
             .detectSize = { 500 },
         }
     },
+    .init = &N(EVS_NpcInit_KoopaTroopa_02_Demo),
+    .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Goomba) = {
+NpcData N(NpcData_Goomba) = {
     .id = NPC_Goomba,
-    .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { 50.0f, 0.0f, -72.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -187,18 +184,17 @@ StaticNpc N(NpcData_Goomba) = {
             .detectSize = { 150, 80 },
         }
     },
+    .settings = &N(NpcSettings_Goomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_SpikedGoomba) = {
+NpcData N(NpcData_SpikedGoomba) = {
     .id = NPC_SpikedGoomba,
-    .settings = &N(NpcSettings_SpikedGoomba_Wander),
     .pos = { -160.0f, 0.0f, -120.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_SpikedGoomba),
-    .drops = SPIKED_GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -211,6 +207,10 @@ StaticNpc N(NpcData_SpikedGoomba) = {
             .detectSize = { 150, 80 },
         }
     },
+    .init = &N(EVS_NpcInit_SpikedGoomba),
+    .settings = &N(NpcSettings_SpikedGoomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = SPIKED_GOOMBA_DROPS,
     .animations = SPIKED_GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

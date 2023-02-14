@@ -51,11 +51,11 @@ NpcSettings N(NpcSettings_Goompa) = {
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
 };
 
-StaticNpc N(NpcData_GoombaFamily) = {
+NpcData N(NpcData_GoombaFamily) = {
     .id = NPC_Goompa,
-    .settings = &N(NpcSettings_Goompa),
     .pos = { 80.0f, 40.0f, -84.0f },
     .yaw = 0,
+    .settings = &N(NpcSettings_Goompa),
     .flags = ENEMY_FLAG_GRAVITY,
 };
 

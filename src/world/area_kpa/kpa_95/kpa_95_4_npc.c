@@ -3,7 +3,7 @@
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/npc/Penguin.inc.c"
 
-#include "world/common/enemy/complete/Koopatrol_Patrol.inc.c"
+#include "world/common/enemy/Koopatrol_Patrol.inc.c"
 
 #include "world/common/complete/ToadHouseBlanketAnim.inc.c"
 #include "world/common/atomic/ToadHouse.inc.c"
@@ -153,48 +153,48 @@ EvtScript N(EVS_NpcInit_Penguin) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Prisoners)[] = {
+NpcData N(NpcData_Prisoners)[] = {
     {
         .id = NPC_Toad_01,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Toad_01),
-        .drops = TOAD_DROPS,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_KPA_ToadHouseToadB,
     },
     {
         .id = NPC_Toad_02,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Toad_02),
-        .drops = TOAD_DROPS,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveToadD,
     },
     {
         .id = NPC_ToadGuard,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_ToadGuard),
-        .drops = TOAD_DROPS,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TOAD_GUARD_RED_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveSoldierC,
     },
     {
         .id = NPC_Penguin,
-        .settings = &N(NpcSettings_Penguin),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Penguin),
-        .drops = PENGUIN_DROPS,
+        .settings = &N(NpcSettings_Penguin),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptivePenguin,
     },
@@ -230,14 +230,10 @@ EvtScript N(EVS_NpcInit_Koopatrol) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Koopatrol) = {
+NpcData N(NpcData_Koopatrol) = {
     .id = NPC_Koopatrol,
-    .settings = &N(NpcSettings_Koopatrol_Patrol),
     .pos = { -70.0f, 0.0f, 55.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
-    .init = &N(EVS_NpcInit_Koopatrol),
-    .drops = NPC_NO_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -252,6 +248,10 @@ StaticNpc N(NpcData_Koopatrol) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_Koopatrol),
+    .settings = &N(NpcSettings_Koopatrol_Patrol),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
 

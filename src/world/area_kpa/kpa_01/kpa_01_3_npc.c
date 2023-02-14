@@ -1,14 +1,11 @@
 #include "kpa_01.h"
 
-#include "world/common/enemy/complete/SpikeTop.inc.c"
+#include "world/common/enemy/SpikeTop.inc.c"
 
-StaticNpc N(NpcData_BonyBeetle_01) = {
+NpcData N(NpcData_BonyBeetle_01) = {
     .id = NPC_BonyBeetle_01,
-    .settings = &N(NpcSettings_BonyBeetle),
     .pos = { 1740.0f, -215.0f, 60.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = BONY_BEETLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -21,16 +18,16 @@ StaticNpc N(NpcData_BonyBeetle_01) = {
             .detectSize = { 300 },
         }
     },
+    .settings = &N(NpcSettings_BonyBeetle),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = BONY_BEETLE_DROPS,
     .animations = BONY_BEETLE_ANIMS,
 };
 
-StaticNpc N(NpcData_BonyBeetle_02) = {
+NpcData N(NpcData_BonyBeetle_02) = {
     .id = NPC_BonyBeetle_02,
-    .settings = &N(NpcSettings_BonyBeetle),
     .pos = { 243.0f, 5.0f, 230.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = BONY_BEETLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -43,6 +40,9 @@ StaticNpc N(NpcData_BonyBeetle_02) = {
             .detectSize = { 300 },
         }
     },
+    .settings = &N(NpcSettings_BonyBeetle),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = BONY_BEETLE_DROPS,
     .animations = BONY_BEETLE_ANIMS,
 };
 

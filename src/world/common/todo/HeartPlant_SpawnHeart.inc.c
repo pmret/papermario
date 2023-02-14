@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(HeartPlant_SpawnHeart)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(HeartPlant_SpawnHeart)) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     

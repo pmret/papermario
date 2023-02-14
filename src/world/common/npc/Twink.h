@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Twink.h"
 
-#define TWINK_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define TWINK_ANIMS \
 { \
     .idle   = ANIM_Twink_Idle, \

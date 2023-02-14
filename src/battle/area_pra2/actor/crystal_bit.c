@@ -234,7 +234,7 @@ ApiStatus UpdateCrystalBitEffect(Evt* script, s32 isInitialCall) {
     effect->data.miscParticles->scaleY = actorPart->scale.y * 24.0f;
     if (actorPart->flags & ACTOR_PART_FLAG_INVISIBLE) {
         effect->data.miscParticles->pos.x = actor->currentPos.x;
-        effect->data.miscParticles->pos.y = -1000.0f;
+        effect->data.miscParticles->pos.y = NPC_DISPOSE_POS_Y;
         effect->data.miscParticles->pos.z = actor->currentPos.z;
     } else {
         effect->data.miscParticles->pos.x = actor->currentPos.x;
@@ -246,7 +246,7 @@ ApiStatus UpdateCrystalBitEffect(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript N(idle) = {
-    EVT_CALL(PlayEffect, EFFECT_MISC_PARTICLES, 1, 0, -1000, 0, 24, 24, EVT_FLOAT(1.0), 5, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_MISC_PARTICLES, 1, NPC_DISPOSE_LOCATION, 24, 24, EVT_FLOAT(1.0), 5, 0, 0, 0, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVarF)
     EVT_CHILD_THREAD
         EVT_CALL(UpdateCrystalBitEffect, LVarF)

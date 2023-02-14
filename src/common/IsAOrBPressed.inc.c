@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(IsAOrBPressed)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(IsAOrBPressed)) {
     script->varTable[0] = FALSE;
     if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
         script->varTable[0] = TRUE;

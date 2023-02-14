@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(UnkBattleFunc5)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkBattleFunc5)) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);

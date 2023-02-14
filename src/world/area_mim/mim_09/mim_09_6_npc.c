@@ -1,15 +1,12 @@
 #include "mim_09.h"
 
 #include "world/common/npc/Oaklie.inc.c"
-#include "world/common/enemy/complete/ForestFuzzy_Wander.inc.c"
+#include "world/common/enemy/ForestFuzzy_Wander.inc.c"
 
-StaticNpc N(NpcData_Fuzzy) = {
+NpcData N(NpcData_Fuzzy) = {
     .id = NPC_Fuzzy,
-    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { 270.0f, 0.0f, 200.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_400,
-    .drops = FOREST_FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -22,6 +19,9 @@ StaticNpc N(NpcData_Fuzzy) = {
             .detectSize = { 400 },
         }
     },
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
+    .flags = ENEMY_FLAG_400,
+    .drops = FOREST_FUZZY_DROPS,
     .animations = FOREST_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

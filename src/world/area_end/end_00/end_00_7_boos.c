@@ -193,11 +193,11 @@ EvtScript N(EVS_ParadePhase_GoombaKing) = {
         EVT_CALL(NpcJump0, NPC_BlueGoombaBros, LVar0, LVar1, LVar2, 20)
     EVT_END_THREAD
     EVT_LOOP(16)
-        EVT_CALL(ShowSweat, NPC_RedGoombaBros, 0, 45, 1, 0, 0, 0, 0, 20)
-        EVT_CALL(ShowSweat, NPC_BlueGoombaBros, 0, -45, 1, 0, 0, 0, 0, 20)
+        EVT_CALL(ShowSweat, NPC_RedGoombaBros, 0, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
+        EVT_CALL(ShowSweat, NPC_BlueGoombaBros, 0, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
         EVT_WAIT(10)
-        EVT_CALL(ShowSweat, NPC_RedGoombaBros, 0, -45, 1, 0, 0, 0, 0, 20)
-        EVT_CALL(ShowSweat, NPC_BlueGoombaBros, 0, 45, 1, 0, 0, 0, 0, 20)
+        EVT_CALL(ShowSweat, NPC_RedGoombaBros, 0, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
+        EVT_CALL(ShowSweat, NPC_BlueGoombaBros, 0, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
         EVT_WAIT(10)
     EVT_END_LOOP
     EVT_CALL(SetNpcFlagBits, NPC_GoombaKing, NPC_FLAG_GRAVITY, TRUE)

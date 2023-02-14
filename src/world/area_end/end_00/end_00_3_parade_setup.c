@@ -207,65 +207,65 @@ EvtScript N(EVS_TexPan_Water) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Tutankoopa)[] = {
+AnimID N(ExtraAnims_Tutankoopa)[] = {
     ANIM_Tutankoopa_Anim02,
     ANIM_Tutankoopa_Anim06,
     ANIM_Tutankoopa_Anim09,
     ANIM_Tutankoopa_Anim01,
     ANIM_Tutankoopa_Anim04,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Rowf)[] = {
+AnimID N(ExtraAnims_Rowf)[] = {
     ANIM_Rowf_PackedStill,
     ANIM_Rowf_PackedIdle,
     ANIM_Rowf_PackedWalk,
     ANIM_Rowf_PackedRun,
     ANIM_Rowf_PackedTalk,
     ANIM_Rowf_PackedCheer,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Moustafa)[] = {
+AnimID N(ExtraAnims_Moustafa)[] = {
     ANIM_Moustafa_Run,
     ANIM_Moustafa_Shout,
     ANIM_Moustafa_Talk,
     ANIM_Moustafa_Toss,
     ANIM_Moustafa_Idle,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Mouser)[] = {
+AnimID N(ExtraAnims_Mouser)[] = {
     ANIM_Mouser_Blue_Run,
     ANIM_Mouser_Blue_IdleOnlyBlink,
     ANIM_Mouser_Blue_Whisper,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Buzzar)[] = {
+AnimID N(ExtraAnims_Buzzar)[] = {
     ANIM_Buzzar_Anim05,
     ANIM_Buzzar_Anim03,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_GoombaKing)[] = {
+AnimID N(ExtraAnims_GoombaKing)[] = {
     ANIM_GoombaKing_Still,
     ANIM_GoombaKing_Dead,
     ANIM_GoombaKing_Angry,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_RaphaelRaven)[] = {
+AnimID N(ExtraAnims_RaphaelRaven)[] = {
     ANIM_RaphaelRaven_IdleNoFeet,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_LavaPiranha)[] = {
+AnimID N(ExtraAnims_LavaPiranha)[] = {
     ANIM_LavaPiranha_Anim04,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_HuffNPuff)[] = {
+AnimID N(ExtraAnims_HuffNPuff)[] = {
     ANIM_HuffNPuff_Anim01,
     ANIM_HuffNPuff_Anim02,
     ANIM_HuffNPuff_Anim03,
@@ -275,17 +275,17 @@ s32 N(ExtraAnims_HuffNPuff)[] = {
     ANIM_HuffNPuff_Anim26,
     ANIM_HuffNPuff_Anim27,
     ANIM_HuffNPuff_Anim28,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_TuffPuff)[] = {
+AnimID N(ExtraAnims_TuffPuff)[] = {
     ANIM_TuffPuff_Idle,
     ANIM_TuffPuff_Hurt,
     ANIM_TuffPuff_Blush,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_GourmetGuy)[] = {
+AnimID N(ExtraAnims_GourmetGuy)[] = {
     ANIM_GourmetGuy_Walk,
     ANIM_GourmetGuy_Leap,
     ANIM_GourmetGuy_TalkSurprise,
@@ -293,26 +293,26 @@ s32 N(ExtraAnims_GourmetGuy)[] = {
     ANIM_GourmetGuy_Idle,
     ANIM_GourmetGuy_Inspect,
     ANIM_GourmetGuy_Panic,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_MageJrTroopa)[] = {
+AnimID N(ExtraAnims_MageJrTroopa)[] = {
     ANIM_MageJrTroopa_Idle,
     ANIM_MageJrTroopa_Run,
     ANIM_MageJrTroopa_RaiseStaff,
     ANIM_MageJrTroopa_SwingStaff,
     ANIM_MageJrTroopa_BurnStill,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Kammy)[] = {
+AnimID N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim14,
     ANIM_WorldKammy_Anim0C,
     ANIM_WorldKammy_Anim0E,
     ANIM_WorldKammy_Anim0F,
     ANIM_WorldKammy_Anim12,
     ANIM_WorldKammy_Anim07,
-    -1
+    ANIM_LIST_END
 };
 
 ParadeNpcInfo N(ParadeNpcsTable)[] = {

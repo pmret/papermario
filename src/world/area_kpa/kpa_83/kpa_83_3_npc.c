@@ -498,7 +498,7 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_KoopaBros)[] = {
+AnimID N(ExtraAnims_KoopaBros)[] = {
     ANIM_KoopaBros_Black_Anim1E,
     ANIM_KoopaBros_Black_Anim04,
     ANIM_KoopaBros_Black_Anim05,
@@ -507,62 +507,62 @@ s32 N(ExtraAnims_KoopaBros)[] = {
     ANIM_KoopaBros_Black_Anim14,
     ANIM_KoopaBros_Black_Anim10,
     ANIM_KoopaBros_Black_Anim15,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Enemies)[] = {
+NpcData N(NpcData_Enemies)[] = {
     {
         .id = NPC_KoopaBrosBlk,
-        .settings = &N(NpcSettings_KoopaBros),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_KoopaBros),
-        .drops = KOOPA_BROS_DROPS,
+        .settings = &N(NpcSettings_KoopaBros),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = BLACK_KOOPA_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_KoopaBros),
     },
     {
         .id = NPC_KoopaBrosRed,
-        .settings = &N(NpcSettings_KoopaBros),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_KoopaBros),
-        .drops = KOOPA_BROS_DROPS,
+        .settings = &N(NpcSettings_KoopaBros),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = RED_KOOPA_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_KoopaBros),
     },
     {
         .id = NPC_KoopaBrosYlw,
-        .settings = &N(NpcSettings_KoopaBros),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_KoopaBros),
-        .drops = KOOPA_BROS_DROPS,
+        .settings = &N(NpcSettings_KoopaBros),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = YELLOW_KOOPA_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_KoopaBros),
     },
     {
         .id = NPC_KoopaBrosGrn,
-        .settings = &N(NpcSettings_KoopaBros),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_KoopaBros),
-        .drops = KOOPA_BROS_DROPS,
+        .settings = &N(NpcSettings_KoopaBros),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = GREEN_KOOPA_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_KoopaBros),
     },
     {
         .id = NPC_JrTroopa,
-        .settings = &N(NpcSettings_JrTroopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_JrTroopa),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_JrTroopa),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_JrTroopa_Idle,
             .walk   = ANIM_JrTroopa_Walk,
@@ -584,12 +584,12 @@ StaticNpc N(NpcData_Enemies)[] = {
     },
     {
         .id = NPC_Door,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_Door),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
     },
 };

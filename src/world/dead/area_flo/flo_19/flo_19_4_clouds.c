@@ -87,6 +87,8 @@ EvtScript N(EVS_AnimatePlatforms) = {
             EVT_SET(LVarF, 0)
         EVT_END_IF
         EVT_SETF(LVar0, LVarA)
+        // the rest of the script is cut off halfway through the next EVT_SETF cmd
+    /*
         EVT_SETF(LVar1, LVarB)
         EVT_SETF(LVar2, LVarC)
         EVT_SETF(LVar3, LVarD)
@@ -110,8 +112,16 @@ EvtScript N(EVS_AnimatePlatforms) = {
         EVT_GOTO(0)
     EVT_RETURN
     EVT_END
+    */
 };
 
+// half of EVT_SETF(LVar1, LVarB)
+s32 N(EVS_AnimatePlatforms_Fragment)[] = {
+    EVT_OP_SETF, 2,
+};
+
+// remaining data is truncated
+/*
 EvtScript N(EVS_AddPlayerWeight_Platform_01) = {
     EVT_THREAD
         EVT_ADDF(MV_Distortion_Platform_01, EVT_FLOAT(-1.5))
@@ -189,3 +199,4 @@ EvtScript N(EVS_SetupClouds) = {
     EVT_RETURN
     EVT_END
 };
+*/

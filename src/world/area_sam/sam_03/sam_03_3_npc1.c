@@ -144,26 +144,26 @@ EvtScript N(EVS_NpcInit_JrTroopaHitbox) = {
 };
 
 // first Jr Troopa is for interacting with player, the second is 'hostile' and can respond to being hit
-StaticNpc N(NpcData_JrTroopa)[] = {
+NpcData N(NpcData_JrTroopa)[] = {
     {
         .id = NPC_JrTroopa,
-        .settings = &N(NpcSettings_JrTroopa),
         .pos = { 261.0f, 0.0f, -76.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_JrTroopa),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_JrTroopa),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = JR_TROOPA_ANIMS,
         .tattle = MSG_NpcTattle_JrTroopa,
     },
     {
         .id = NPC_JrTroopa_Hitbox,
-        .settings = &N(NpcSettings_JrTroopa),
         .pos = { 261.0f, 0.0f, -76.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_JrTroopaHitbox),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_JrTroopa),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
+        .drops = NO_DROPS,
         .animations = JR_TROOPA_ANIMS,
         .tattle = MSG_NpcTattle_JrTroopa,
     },

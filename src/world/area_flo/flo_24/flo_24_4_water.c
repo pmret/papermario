@@ -1,7 +1,6 @@
 #include "flo_24.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_Scene_FillWithWater) = {
     EVT_CALL(DisablePlayerInput, TRUE)

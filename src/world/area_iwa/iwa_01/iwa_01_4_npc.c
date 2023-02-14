@@ -1,18 +1,15 @@
 #include "iwa_01.h"
 
-#include "world/common/enemy/complete/MontyMole_StoneThrower.inc.c"
-#include "world/common/enemy/complete/MontyMole_GroundAmbush.inc.c"
-#include "world/common/enemy/complete/MontyMole_WallAmbush.inc.c"
-#include "world/common/enemy/complete/Cleft.inc.c"
+#include "world/common/enemy/MontyMole_StoneThrower.inc.c"
+#include "world/common/enemy/MontyMole_GroundAmbush.inc.c"
+#include "world/common/enemy/MontyMole_WallAmbush.inc.c"
+#include "world/common/enemy/Cleft.inc.c"
 
-StaticNpc N(NpcData_MontyMole_WallAmbush)[] = {
+NpcData N(NpcData_MontyMole_WallAmbush)[] = {
     {
         .id = NPC_MontyMole_01,
-        .settings = &N(NpcSettings_MontyMole_WallAmbush),
         .pos = { 340.0f, 70.0f, 101.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_400,
-        .drops = MONTY_MOLE_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -25,20 +22,16 @@ StaticNpc N(NpcData_MontyMole_WallAmbush)[] = {
                 .detectSize = { 145, 300 },
             }
         },
+        .settings = &N(NpcSettings_MontyMole_WallAmbush),
+        .flags = ENEMY_FLAG_400,
+        .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
     {
         .id = NPC_MontyMole_01_Hole,
-        .settings = &N(NpcSettings_MontyMole_WallAmbush_Hole),
         .pos = { 340.0f, 70.0f, 101.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_NO_DROPS,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -51,19 +44,19 @@ StaticNpc N(NpcData_MontyMole_WallAmbush)[] = {
                 .detectSize = { 0 },
             }
         },
+        .settings = &N(NpcSettings_MontyMole_WallAmbush_Hole),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
 };
 
-StaticNpc N(NpcData_MontyMole_StoneThrower_01)[] = {
+NpcData N(NpcData_MontyMole_StoneThrower_01)[] = {
     {
         .id = NPC_MontyMole_02,
-        .settings = &N(NpcSettings_MontyMole_StoneThrower),
         .pos = { -250.0f, 10.0f, 260.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_800,
-        .drops = MONTY_MOLE_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -76,20 +69,20 @@ StaticNpc N(NpcData_MontyMole_StoneThrower_01)[] = {
                 .detectSize = { 180 },
             }
         },
+        .settings = &N(NpcSettings_MontyMole_StoneThrower),
+        .flags = ENEMY_FLAG_800,
+        .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_THROWER_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
     MONTY_MOLE_STONE_HITBOX(NPC_MontyMole_02_Stone)
 };
 
-StaticNpc N(NpcData_MontyMole_StoneThrower_02)[] = {
+NpcData N(NpcData_MontyMole_StoneThrower_02)[] = {
     {
         .id = NPC_MontyMole_03,
-        .settings = &N(NpcSettings_MontyMole_StoneThrower),
         .pos = { -175.0f, 10.0f, 240.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_800,
-        .drops = MONTY_MOLE_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -102,20 +95,20 @@ StaticNpc N(NpcData_MontyMole_StoneThrower_02)[] = {
                 .detectSize = { 180 },
             }
         },
+        .settings = &N(NpcSettings_MontyMole_StoneThrower),
+        .flags = ENEMY_FLAG_800,
+        .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_THROWER_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
     MONTY_MOLE_STONE_HITBOX(NPC_MontyMole_03_Stone)
 };
 
-StaticNpc N(NpcData_MontyMole_StoneThrower_03)[] = {
+NpcData N(NpcData_MontyMole_StoneThrower_03)[] = {
     {
         .id = NPC_MontyMole_04,
-        .settings = &N(NpcSettings_MontyMole_StoneThrower),
         .pos = { -55.0f, 10.0f, 180.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_800,
-        .drops = MONTY_MOLE_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -128,19 +121,19 @@ StaticNpc N(NpcData_MontyMole_StoneThrower_03)[] = {
                 .detectSize = { 180 },
             }
         },
+        .settings = &N(NpcSettings_MontyMole_StoneThrower),
+        .flags = ENEMY_FLAG_800,
+        .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_THROWER_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
     MONTY_MOLE_STONE_HITBOX(NPC_MontyMole_04_Stone)
 };
 
-StaticNpc N(NpcData_Cleft) = {
+NpcData N(NpcData_Cleft) = {
     .id = NPC_Cleft,
-    .settings = &N(NpcSettings_Cleft),
     .pos = { -657.0f, 163.0f, 155.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = CLEFT_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -153,6 +146,9 @@ StaticNpc N(NpcData_Cleft) = {
             .detectSize = { 125, 125 },
         }
     },
+    .settings = &N(NpcSettings_Cleft),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = CLEFT_DROPS,
     .animations = CLEFT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

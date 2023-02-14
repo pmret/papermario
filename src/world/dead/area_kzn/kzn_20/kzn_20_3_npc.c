@@ -525,26 +525,26 @@ EvtScript N(EVS_NpcInit_Misstar) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Kolorado) = {
+NpcData N(NpcData_Kolorado) = {
     .id = NPC_Kolorado,
-    .settings = &N(NpcSettings_Kolorado),
     .pos = { -65.0f, 0.0f, 190.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Kolorado),
-    .drops = KOLORADO_DROPS,
+    .settings = &N(NpcSettings_Kolorado),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
 };
 
-StaticNpc N(NpcData_Misstar) = {
+NpcData N(NpcData_Misstar) = {
     .id = NPC_Misstar,
-    .settings = &N(NpcSettings_StarSpirit),
     .pos = { 100.0f, 160.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Misstar),
-    .drops = MISSTAR_DROPS,
+    .settings = &N(NpcSettings_StarSpirit),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = MISSTAR_ANIMS,
     .tattle = MSG_NpcTattle_Misstar,
 };

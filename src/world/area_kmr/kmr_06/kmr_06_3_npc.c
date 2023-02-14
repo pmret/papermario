@@ -1,15 +1,12 @@
 #include "kmr_06.h"
 
-#include "world/common/enemy/complete/SpikedGoomba_Wander.inc.c"
-#include "world/common/enemy/complete/Paragoomba_Wander.inc.c"
+#include "world/common/enemy/SpikedGoomba_Wander.inc.c"
+#include "world/common/enemy/Paragoomba_Wander.inc.c"
 
-StaticNpc N(NpcData_SpikedGoomba) = {
+NpcData N(NpcData_SpikedGoomba) = {
     .id = NPC_SpikedGoomba,
-    .settings = &N(NpcSettings_SpikedGoomba_Wander),
     .pos = { 160.0f, 0.0f, 30.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = SPIKED_GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -22,16 +19,16 @@ StaticNpc N(NpcData_SpikedGoomba) = {
             .detectSize = { 300 },
         }
     },
+    .settings = &N(NpcSettings_SpikedGoomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = SPIKED_GOOMBA_DROPS,
     .animations = SPIKED_GOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_Paragoomba) = {
+NpcData N(NpcData_Paragoomba) = {
     .id = NPC_Paragoomba,
-    .settings = &N(NpcSettings_Paragoomba_Wander),
     .pos = { 525.0f, 60.0f, 15.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = PARAGOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -44,6 +41,9 @@ StaticNpc N(NpcData_Paragoomba) = {
             .detectSize = { 300 },
         }
     },
+    .settings = &N(NpcSettings_Paragoomba_Wander),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = PARAGOOMBA_DROPS,
     .animations = PARAGOOMBA_ANIMS,
 };
 

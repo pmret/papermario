@@ -8,13 +8,6 @@
     #error CHUCK_QUIZMO_NPC_ID must be defined for Quizmo.inc.c
 #endif
 
-#define QUIZMO_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define QUIZMO_ANIMS \
 { \
     ANIM_ChuckQuizmo_Idle, \

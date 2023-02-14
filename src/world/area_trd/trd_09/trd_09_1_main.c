@@ -49,7 +49,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
     EVT_CALL(GetDemoState, LVar0)
-    EVT_IF_NE(LVar0, 0)
+    EVT_IF_NE(LVar0, DEMO_STATE_NONE)
         EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DemoNPCs)))
         EVT_EXEC_WAIT(N(EVS_MakeEntities))
         EVT_EXEC_WAIT(N(EVS_PlayDemoScene))

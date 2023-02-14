@@ -1,7 +1,6 @@
 #include "jan_04.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_GotoMap_kmr_24_0) = {
     EVT_CALL(FadeOutMusic, 0, 1500)
@@ -74,7 +73,7 @@ EvtScript N(EVS_Main) = {
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
     EVT_CALL(GetDemoState, LVar0)
-    EVT_IF_NE(LVar0, 0)
+    EVT_IF_NE(LVar0, DEMO_STATE_NONE)
         EVT_EXEC_WAIT(N(EVS_PlayDemoScene))
         EVT_RETURN
     EVT_END_IF

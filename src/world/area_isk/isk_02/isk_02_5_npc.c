@@ -1,6 +1,6 @@
 #include "isk_02.h"
 
-#include "world/common/enemy/complete/PokeyMummy.inc.c"
+#include "world/common/enemy/PokeyMummy.inc.c"
 
 EvtScript N(EVS_NpcIdle_Pokey_01) = {
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_10000000, 1)
@@ -80,14 +80,10 @@ EvtScript N(EVS_NpcInit_Pokey_03) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Pokey_01) = {
+NpcData N(NpcData_Pokey_01) = {
     .id = NPC_Pokey_01,
-    .settings = &N(NpcSettings_PokeyMummy),
     .pos = { -296.0f, 0.0f, 421.0f },
     .yaw = 304,
-    .flags = ENEMY_FLAG_200 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_Pokey_01),
-    .drops = POKEY_MUMMY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -100,17 +96,17 @@ StaticNpc N(NpcData_Pokey_01) = {
             .detectSize = { 400 },
         }
     },
+    .init = &N(EVS_NpcInit_Pokey_01),
+    .settings = &N(NpcSettings_PokeyMummy),
+    .flags = ENEMY_FLAG_200 | ENEMY_FLAG_800,
+    .drops = POKEY_MUMMY_DROPS,
     .animations = POKEY_MUMMY_ANIMS,
 };
 
-StaticNpc N(NpcData_Pokey_02) = {
+NpcData N(NpcData_Pokey_02) = {
     .id = NPC_Pokey_02,
-    .settings = &N(NpcSettings_PokeyMummy),
     .pos = { -133.0f, 0.0f, 497.0f },
     .yaw = 284,
-    .flags = ENEMY_FLAG_200 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_Pokey_02),
-    .drops = POKEY_MUMMY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -123,17 +119,17 @@ StaticNpc N(NpcData_Pokey_02) = {
             .detectSize = { 400 },
         }
     },
+    .init = &N(EVS_NpcInit_Pokey_02),
+    .settings = &N(NpcSettings_PokeyMummy),
+    .flags = ENEMY_FLAG_200 | ENEMY_FLAG_800,
+    .drops = POKEY_MUMMY_DROPS,
     .animations = POKEY_MUMMY_ANIMS,
 };
 
-StaticNpc N(NpcData_Pokey_03) = {
+NpcData N(NpcData_Pokey_03) = {
     .id = NPC_Pokey_03,
-    .settings = &N(NpcSettings_PokeyMummy),
     .pos = { 45.0f, 0.0f, 505.0f },
     .yaw = 264,
-    .flags = ENEMY_FLAG_200 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_Pokey_03),
-    .drops = POKEY_MUMMY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -146,6 +142,10 @@ StaticNpc N(NpcData_Pokey_03) = {
             .detectSize = { 400 },
         }
     },
+    .init = &N(EVS_NpcInit_Pokey_03),
+    .settings = &N(NpcSettings_PokeyMummy),
+    .flags = ENEMY_FLAG_200 | ENEMY_FLAG_800,
+    .drops = POKEY_MUMMY_DROPS,
     .animations = POKEY_MUMMY_ANIMS,
 };
 

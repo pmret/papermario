@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Luigi.h"
 
-#define LUIGI_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define LUIGI_ANIMS \
 { \
     .idle   = ANIM_Luigi_Still, \
