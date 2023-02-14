@@ -409,9 +409,6 @@ BSS s32 D_802AD658[5]; // msg IDs
 BSS s32 D_802AD66C;
 BSS s32 D_802AD670;
 
-//TODO remove it in func_802A45D8 and use D_802AD670 instead
-//extern s8 D_802AD673;
-
 BSS s32 D_802AD674; // unused?
 BSS s32 D_802AD678[6];
 BSS s32 D_802AD690[6];
@@ -454,7 +451,6 @@ void func_802A1030(void) {
     BattleMenuState = BTL_MENU_STATE_UNK_A;
 }
 
-
 // (after submenu closed/cancelled)
 void func_802A1050(void) {
     BattleMenuState = BTL_MENU_STATE_ACCEPT_INPUT;
@@ -467,7 +463,6 @@ void func_802A1078(void) {
     BattleMenuAlpha = 255;
     BattleMenuState = BTL_MENU_STATE_UNK_14;
 }
-
 
 // btl_main_menu_show? (canceling targeting -> submenu)
 void func_802A1098(void) {

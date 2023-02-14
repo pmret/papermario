@@ -148,9 +148,6 @@ SpriteAnimData* spr_load_sprite(s32 idx, s32 isPlayerSprite, s32 useTailAlloc) {
     return animData;
 }
 
-#ifdef SHIFT
-INCLUDE_ASM_SHIFT(void, "101b90_len_8f0", spr_init_player_raster_cache);
-#else
 void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize) {
     void* raster;
     s32 i;
@@ -178,7 +175,6 @@ void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize) {
     nuPiReadRom(SpriteDataHeader[0], &PlayerRasterHeader, sizeof(PlayerRasterHeader));
     nuPiReadRom(SpriteDataHeader[0] + PlayerRasterHeader[0], D_802E0C20, sizeof(D_802E0C20));
 }
-#endif
 
 IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID) {
     PlayerSpriteCacheEntry* temp_s0;

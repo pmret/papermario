@@ -1119,7 +1119,7 @@ extern s32 mdl_renderTaskCount;
 
 extern TextureHandle mdl_textureHandles[128];
 
-extern Addr D_801A7000; // todo ???
+extern Addr BattleEntityHeapBottom; // todo ???
 
 extern u16 depthCopyBuffer[16];
 
@@ -1890,7 +1890,7 @@ void clear_entity_data(s32 arg0) {
         gEntityHeapBottom = WORLD_ENTITY_HEAP_BOTTOM;
         gEntityHeapBase = WORLD_ENTITY_HEAP_BASE;
     } else {
-        gEntityHeapBottom = (s32)D_801A7000;
+        gEntityHeapBottom = (s32)BattleEntityHeapBottom;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
 
@@ -1917,7 +1917,7 @@ void init_entity_data(void) {
         for (i = 0; i < 4; i++) {
             bEntityBlueprint[i] = 0;
         }
-        gEntityHeapBottom = (s32)D_801A7000;
+        gEntityHeapBottom = (s32)BattleEntityHeapBottom;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
     gCurrentEntityListPtr = get_entity_list();

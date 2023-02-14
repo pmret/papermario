@@ -11,8 +11,11 @@ enum RewindArrowStates {
     REWIND_ARROW_STATE_CHANGE_COLOR_BACK = 4,
 };
 
-// todo consider symbol
+#ifdef SHIFT
+#define MSG_ROM_START (s32)msg_ROM_START
+#else
 #define MSG_ROM_START 0x1B83000
+#endif
 
 typedef MessageImageData* MessageImageDataList[1];
 
@@ -61,7 +64,7 @@ extern u16 gMsgGlobalWaveCounter;
 extern MessageImageDataList gMsgVarImages;
 extern s32 gMsgBGScrollAmtY;
 extern Gfx* D_80151338;
-extern char gMessageBuffers[][1024];
+extern char gMessageBuffers[2][1024];
 extern u8 gMessageMsgVars[3][32];
 extern s16 D_80155C98;
 extern Mtx gMessageWindowProjMatrix[2];
@@ -1347,10 +1350,6 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->sizeScale = 1.0f;
 }
 
-#ifdef SHIFT
-void dma_load_msg(u32 msgID, void* dest);
-INCLUDE_ASM_SHIFT(void, "msg", dma_load_msg);
-#else
 void dma_load_msg(u32 msgID, void* dest) {
     u8* addr = (u8*) MSG_ROM_START + (msgID >> 14); // (msgID >> 16) * 4
     u8* offset[2]; // start, end
@@ -1363,7 +1362,6 @@ void dma_load_msg(u32 msgID, void* dest) {
     // Load the msg data
     dma_copy(MSG_ROM_START + offset[0], MSG_ROM_START + offset[1], dest);
 }
-#endif
 
 s8* load_message_to_buffer(s32 msgID) {
     s8* prevBufferPos;
@@ -1372,7 +1370,7 @@ s8* load_message_to_buffer(s32 msgID) {
     prevBufferPos = gMessageBuffers[gNextMessageBuffer];
 
     gNextMessageBuffer++;
-    if (gNextMessageBuffer >= 2) {
+    if (gNextMessageBuffer >= ARRAY_COUNT(gMessageBuffers)) {
         gNextMessageBuffer = 0;
     }
 
