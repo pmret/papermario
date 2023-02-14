@@ -5014,7 +5014,7 @@ enum EnemyFlags {
     ENEMY_FLAG_4000                 = 0x00004000,
     ENEMY_FLAG_8000                 = 0x00008000,
     ENEMY_FLAG_10000                = 0x00010000,
-    ENEMY_FLAG_20000                = 0x00020000,
+    ENEMY_FLAG_USE_PLAYER_SPRITE    = 0x00020000, ///< Used for Peach NPCs
     ENEMY_FLAG_40000                = 0x00040000,
     ENEMY_FLAG_80000                = 0x00080000,
     ENEMY_FLAG_100000               = 0x00100000,

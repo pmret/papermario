@@ -117,7 +117,8 @@
 
 #define SPRITE_ID(name, pal_anim) ((name) << 16 | (pal_anim))
 
-#define BATTLE_ENTITY_ID_MASK 0x800
+#define BATTLE_NPC_ID_BIT 0x800
+#define BATTLE_ENTITY_ID_BIT 0x800
 
 #define UNPACK_BTL_AREA(battleID) (((battleID) >> 8) & 0xFF)
 #define UNPACK_BTL_INDEX(battleID) ((battleID) & 0xFF)

@@ -122,7 +122,7 @@ s32 load_entity_model(EntityModelScript* cmdList) {
     newEntityModel->cmdListSavedPos = newEntityModel->cmdListReadPos;
 
     if (gGameStatusPtr->isBattle) {
-        i |= BATTLE_ENTITY_ID_MASK;
+        i |= BATTLE_ENTITY_ID_BIT;
     }
     return i;
 }
@@ -164,7 +164,7 @@ s32 ALT_load_entity_model(EntityModelScript* cmdList) {
     newEntityModel->cmdListSavedPos = newEntityModel->cmdListReadPos;
 
     if (gGameStatusPtr->isBattle) {
-        i |= BATTLE_ENTITY_ID_MASK;
+        i |= BATTLE_ENTITY_ID_BIT;
     }
     return i;
 }
@@ -172,8 +172,8 @@ s32 ALT_load_entity_model(EntityModelScript* cmdList) {
 void exec_entity_model_commandlist(s32 idx) {
     EntityModel* entityModel;
 
-    if (!gGameStatusPtr->isBattle || (idx & BATTLE_ENTITY_ID_MASK)) {
-        idx &= ~BATTLE_ENTITY_ID_MASK;
+    if (!gGameStatusPtr->isBattle || (idx & BATTLE_ENTITY_ID_BIT)) {
+        idx &= ~BATTLE_ENTITY_ID_BIT;
         entityModel = (*gCurrentEntityModelList)[idx];
         if (entityModel != NULL && (entityModel->flags)) {
             if (!(entityModel->flags & ENTITY_MODEL_FLAG_HIDDEN)) {
@@ -718,7 +718,7 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
 }
 
 void set_entity_model_render_command_list(s32 idx, EntityModelScript* cmdList) {
-    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
+    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_BIT];
 
     if (entityModel != NULL && entityModel->flags) {
         if (cmdList == NULL) {
@@ -732,11 +732,11 @@ void set_entity_model_render_command_list(s32 idx, EntityModelScript* cmdList) {
 }
 
 EntityModel* get_entity_model(s32 listIndex) {
-    return (*gCurrentEntityModelList)[listIndex & ~BATTLE_ENTITY_ID_MASK];
+    return (*gCurrentEntityModelList)[listIndex & ~BATTLE_ENTITY_ID_BIT];
 }
 
 void free_entity_model_by_index(s32 idx) {
-    s32 index = idx & ~BATTLE_ENTITY_ID_MASK;
+    s32 index = idx & ~BATTLE_ENTITY_ID_BIT;
     EntityModel* entityModel = (*gCurrentEntityModelList)[index];
 
     if (entityModel != NULL && entityModel->flags) {
@@ -767,7 +767,7 @@ void free_entity_model_by_ref(EntityModel* entityModel) {
 }
 
 void set_entity_model_flags(s32 idx, s32 newFlags) {
-    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
+    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_BIT];
 
     if (entityModel != NULL && entityModel->flags) {
         entityModel->flags |= newFlags;
@@ -775,7 +775,7 @@ void set_entity_model_flags(s32 idx, s32 newFlags) {
 }
 
 void clear_entity_model_flags(s32 idx, s32 newFlags) {
-    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
+    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_BIT];
 
     if (entityModel != NULL && entityModel->flags) {
         entityModel->flags &= ~newFlags;
@@ -783,20 +783,20 @@ void clear_entity_model_flags(s32 idx, s32 newFlags) {
 }
 
 void bind_entity_model_setupGfx(s32 idx, void* setupGfxCallbackArg0, void (*fpSetupGfxCallback)(void*)) {
-    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
+    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_BIT];
 
     entityModel->fpSetupGfxCallback = fpSetupGfxCallback;
     entityModel->setupGfxCallbackArg0 = setupGfxCallbackArg0;
 }
 
 void func_80122F8C(s32 idx, s32 newFlags) {
-    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
+    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_BIT];
 
     entityModel->flags |= newFlags;
 }
 
 void func_80122FB8(s32 idx, s32 newFlags) {
-    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
+    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_BIT];
 
     entityModel->flags = (entityModel->flags & ~(ENTITY_MODEL_FLAG_CAM0 | ENTITY_MODEL_FLAG_CAM1 | ENTITY_MODEL_FLAG_CAM2 | ENTITY_MODEL_FLAG_CAM3)) | newFlags;
 }

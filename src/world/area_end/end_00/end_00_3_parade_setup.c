@@ -38,7 +38,7 @@ API_CALLABLE(N(CreateParadeNPC)) {
 
     spr_allocateBtlComponentsOnWorldHeap = TRUE;
 
-    npc = get_npc_by_index(_create_npc_standard(&bp, npcInfo->animList));
+    npc = get_npc_by_index(create_standard_npc(&bp, npcInfo->animList));
     npc->npcID = npcID;
     npc->flags &= ~NPC_FLAG_PARTICLE;
     npc->pos.x = npcInfo->pos.x;

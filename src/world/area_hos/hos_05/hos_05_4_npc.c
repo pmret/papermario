@@ -461,7 +461,7 @@ NpcData N(NpcData_StarSpirits)[] = {
     },
 };
 
-s32 N(NpcData_ClownCar)[] = {
+AnimID N(ExtraAnims_Bowser)[] = {
     ANIM_WorldBowser_ClownCarStill,
     ANIM_WorldBowser_ClownCarIdle,
     ANIM_WorldBowser_ClownCarOpenMouth,
@@ -472,7 +472,7 @@ s32 N(NpcData_ClownCar)[] = {
     ANIM_WorldBowser_ClownCarTalk,
     ANIM_WorldBowser_ClownCarLaugh,
     ANIM_WorldBowser_ClownCarPropeller,
-    -1
+    ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_Kammy)[] = {
@@ -495,7 +495,7 @@ NpcData N(NpcData_Thieves)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = BOWSER_ANIMS,
-        .extraAnimations = N(NpcData_ClownCar),
+        .extraAnimations = N(ExtraAnims_Bowser),
     },
     {
         .id = NPC_Bowser_Prop,
@@ -505,7 +505,7 @@ NpcData N(NpcData_Thieves)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = BOWSER_ANIMS,
-        .extraAnimations = N(NpcData_ClownCar),
+        .extraAnimations = N(ExtraAnims_Bowser),
     },
     {
         .id = NPC_Kammy,

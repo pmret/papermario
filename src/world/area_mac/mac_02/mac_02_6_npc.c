@@ -29,7 +29,7 @@ MAP_STATIC_PAD(1,item_choice);
 #include "npc/toad_4.inc.c"
 #include "npc/bubulb.inc.c"
 
-s32 N(D_8024CB04_82FDC4)[] = {
+AnimID N(ExtraAnims_TayceT)[] = {
     ANIM_TayceT_Still,
     ANIM_TayceT_Idle,
     ANIM_TayceT_Walk,
@@ -39,17 +39,17 @@ s32 N(D_8024CB04_82FDC4)[] = {
     ANIM_TayceT_IdleSad,
     ANIM_TayceT_Cooking,
     ANIM_TayceT_TurnBack,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(D_8024CB2C_82FDEC)[] = {
+AnimID N(ExtraAnims_Bubulb)[] = {
     ANIM_Bubulb_Pink_Still,
     ANIM_Bubulb_Pink_BuriedStill,
     ANIM_Bubulb_Pink_Idle,
     ANIM_Bubulb_Pink_Talk,
     ANIM_Bubulb_Pink_PopUp,
     ANIM_Bubulb_Pink_BuriedIdle,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_TayceT)[] = {
@@ -64,7 +64,7 @@ NpcData N(NpcData_TayceT)[] = {
         .animations = {
             .idle   = ANIM_TayceT_Idle,
         },
-        .extraAnimations = N(D_8024CB04_82FDC4),
+        .extraAnimations = N(ExtraAnims_TayceT),
         .tattle = MSG_NpcTattle_TayceT,
     },
     {
@@ -89,7 +89,7 @@ NpcData N(NpcData_TayceT)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = BUBULB_PINK_ANIMS,
-        .extraAnimations = N(D_8024CB2C_82FDEC),
+        .extraAnimations = N(ExtraAnims_Bubulb),
         .tattle = MSG_NpcTattle_MAC_Bubulb_Revealed,
     },
     {
@@ -207,7 +207,7 @@ NpcData N(NpcData_Bootler) = {
     .animations = BOOTLER_ANIMS,
 };
 
-s32 N(D_8024DEA8_831168)[] = {
+AnimID N(ExtraAnims_ShyGuy)[] = {
     ANIM_ShyGuy_Red_Anim00,
     ANIM_ShyGuy_Red_Anim01,
     ANIM_ShyGuy_Red_Anim02,
@@ -215,7 +215,7 @@ s32 N(D_8024DEA8_831168)[] = {
     ANIM_ShyGuy_Red_Anim11,
     ANIM_ShyGuy_Red_Anim02,
     ANIM_ShyGuy_Red_Anim04,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_ShyGuy) = {
@@ -244,7 +244,7 @@ NpcData N(NpcData_ShyGuy) = {
         .anim_E = ANIM_ShyGuy_Red_Anim01,
         .anim_F = ANIM_ShyGuy_Red_Anim01,
     },
-    .extraAnimations = N(D_8024DEA8_831168),
+    .extraAnimations = N(ExtraAnims_ShyGuy),
 };
 
 NpcGroupList N(NpcGroup4) = {

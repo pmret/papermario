@@ -39,7 +39,7 @@ ApiStatus CreateNpc(Evt* script, s32 isInitialCall) {
     blueprint.onUpdate = NULL;
     blueprint.onRender = NULL;
 
-    npc = get_npc_by_index(_create_npc_basic(&blueprint));
+    npc = get_npc_by_index(create_basic_npc(&blueprint));
     npc->npcID = npcID;
     disable_npc_shadow(npc);
     return ApiStatus_DONE2;
@@ -811,7 +811,7 @@ s32 BringPartnerOut(Evt *script, s32 isInitialCall) {
         bpPointer->onUpdate = NULL;
         bpPointer->onRender = NULL;
 
-        wExtraPartnerNpcID = _create_npc_basic(bpPointer);
+        wExtraPartnerNpcID = create_basic_npc(bpPointer);
         npc = get_npc_by_index(wExtraPartnerNpcID);
         npc->collisionRadius = 10;
         npc->collisionHeight = 10;

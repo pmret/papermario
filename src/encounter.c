@@ -2525,10 +2525,10 @@ void create_encounters(void) {
                     }
                     bp->onUpdate = NULL;
                     bp->onRender = NULL;
-                    if (!(enemy->flags & ENEMY_FLAG_20000)) {
-                        newNpcIndex = _create_npc_standard(bp, (AnimID*) npcData->extraAnimations);
+                    if (!(enemy->flags & ENEMY_FLAG_USE_PLAYER_SPRITE)) {
+                        newNpcIndex = create_standard_npc(bp, npcData->extraAnimations);
                     } else {
-                        newNpcIndex = _create_npc_partner(bp);
+                        newNpcIndex = create_peach_npc(bp);
                     }
 
                     newNpc = get_npc_by_index(newNpcIndex);
