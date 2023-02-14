@@ -229,7 +229,7 @@ void Entity_BoardedFloor_shatter(Entity* entity) {
     entity_set_render_script(entity, &Entity_BoardedFloor_RenderScriptShattered);
 }
 
-EntityScript Entity_BoardedFloor_Script = {
+EntityModelScript Entity_BoardedFloor_Script = {
     es_ClearFlags(ENTITY_FLAG_DISABLE_COLLISION)
     es_SetCallback(Entity_BoardedFloor_idle, 0)
     es_PlaySound(SOUND_2092)

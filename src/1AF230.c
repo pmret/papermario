@@ -127,6 +127,4 @@ ApiStatus LoadStarPowerScript(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifndef SHIFT
-static BSS u8 bss_padding[0x1390];
-#endif
+MATCHING_BSS(0x1390);

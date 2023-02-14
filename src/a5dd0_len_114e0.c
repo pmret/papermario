@@ -6,17 +6,21 @@
 #include "hud_element.h"
 #include "effects.h"
 #include "nu/nusys.h"
+#include "model_clear_render_tasks.h"
+
+extern Addr MapTextureMemory;
 
 #ifdef SHIFT
-#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000 // TODO shiftability
-#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0 // TODO shiftability
-#define AREA_SPECIFIC_ENTITY_VRAM entity_default_VRAM
-#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000 // TODO shiftability
+extern Addr WorldEntityHeapBase;
+#define WORLD_ENTITY_HEAP_BOTTOM 0x80650000 // TODO shiftability (used only for munchlesia, hacky as hell)
+#define WORLD_ENTITY_HEAP_BASE (s32) WorldEntityHeapBase
+// TODO this only refers to one of 3 overlays which happen to share the same address space
+// but don't necessarily have to
+#define AREA_SPECIFIC_ENTITY_VRAM (s32) entity_default_VRAM
 #else
-#define MODEL_TEXTURE_BASE_ADDRESS 0x8028E000
-#define BATTLE_ENTITY_HEAP_BASE 0x80267FF0
+#define WORLD_ENTITY_HEAP_BOTTOM 0x80250000
+#define WORLD_ENTITY_HEAP_BASE 0x80267FF0
 #define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
-#define BATTLE_ENTITY_HEAP_BOTTOM 0x80250000
 #endif
 
 typedef struct Fog {
@@ -398,7 +402,7 @@ Gfx D_8014B400[21][5] = {
     },
 };
 
-void* mdl_textureBaseAddress = (void*) MODEL_TEXTURE_BASE_ADDRESS;
+void* mdl_textureBaseAddress = (void*) &MapTextureMemory;
 
 u8 mdl_bgMultiplyColorA = 0;
 u8 mdl_bgMultiplyColorR = 0;
@@ -1115,9 +1119,7 @@ extern s32 mdl_renderTaskCount;
 
 extern TextureHandle mdl_textureHandles[128];
 
-extern RenderTask mdl_clearRenderTasks[3][0x100];
-
-extern s32 D_801A7000; // todo ???
+extern Addr BattleEntityHeapBottom; // todo ???
 
 extern u16 depthCopyBuffer[16];
 
@@ -1144,6 +1146,8 @@ void func_801180E8(TextureHeader*, Gfx**, IMG_PTR raster, PAL_PTR palette, IMG_P
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth);
 s32 is_identity_fixed_mtx(Mtx* mtx);
 void build_custom_gfx(void);
+
+MATCHING_BSS(0x3A0);
 
 void update_entities(void) {
     s32 i;
@@ -1415,7 +1419,7 @@ void render_entities(void) {
                            gPlayerStatusPtr->position.z,
                            entity->position.x,
                            entity->position.z) > 200.0f
-                   ) {
+                ) {
                     continue;
                 }
 
@@ -1883,10 +1887,10 @@ void clear_entity_data(s32 arg0) {
     }
 
     if (!gGameStatusPtr->isBattle) {
-        gEntityHeapBottom = BATTLE_ENTITY_HEAP_BOTTOM;
-        gEntityHeapBase = BATTLE_ENTITY_HEAP_BASE;
+        gEntityHeapBottom = WORLD_ENTITY_HEAP_BOTTOM;
+        gEntityHeapBase = WORLD_ENTITY_HEAP_BASE;
     } else {
-        gEntityHeapBottom = (s32)&D_801A7000;
+        gEntityHeapBottom = (s32)BattleEntityHeapBottom;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
 
@@ -1904,8 +1908,8 @@ void clear_entity_data(s32 arg0) {
 
 void init_entity_data(void) {
     if (!gGameStatusPtr->isBattle) {
-        gEntityHeapBottom = BATTLE_ENTITY_HEAP_BOTTOM;
-        gEntityHeapBase = BATTLE_ENTITY_HEAP_BASE;
+        gEntityHeapBottom = WORLD_ENTITY_HEAP_BOTTOM;
+        gEntityHeapBase = WORLD_ENTITY_HEAP_BASE;
         reload_world_entity_data();
     } else {
         s32 i;
@@ -1913,7 +1917,7 @@ void init_entity_data(void) {
         for (i = 0; i < 4; i++) {
             bEntityBlueprint[i] = 0;
         }
-        gEntityHeapBottom = (s32)&D_801A7000;
+        gEntityHeapBottom = (s32)BattleEntityHeapBottom;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
     gCurrentEntityListPtr = get_entity_list();
@@ -3672,7 +3676,13 @@ void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, 
     handle->gfx = (Gfx*) mdl_nextTextureAddress;
     memcpy(&handle->header, header, sizeof(*header));
     func_801180E8(header, (Gfx**)&mdl_nextTextureAddress, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
+
+    #ifndef OLD_GCC
+    gSPEndDisplayList(mdl_nextTextureAddress);
+    mdl_nextTextureAddress += 8;
+    #else
     gSPEndDisplayList(((Gfx*)mdl_nextTextureAddress)++);
+    #endif
 }
 
 void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) {
@@ -3938,7 +3948,7 @@ void _load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
 }
 
 void load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
-    s32 battleOffset = ((gGameStatusPtr->isBattle != 0) << 17);
+    s32 battleOffset = ((gGameStatusPtr->isBattle != 0) << 17); // TODO FIX
 
     mdl_nextTextureAddress = mdl_textureBaseAddress + battleOffset;
 
@@ -5899,8 +5909,8 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
     }
     if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
         gDPPipeSync(gMasterGfxPos++);
-        // Load a 4x1 pixel tile of the depth buffer 
-        gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1, 
+        // Load a 4x1 pixel tile of the depth buffer
+        gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1,
             (s32) outX, 0, (s32) outX + 3, 0,
             0,
             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
@@ -6005,8 +6015,8 @@ s32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* s
     }
     if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
         gDPPipeSync(gMasterGfxPos++);
-        // Load a 4x1 pixel tile of the depth buffer 
-        gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1, 
+        // Load a 4x1 pixel tile of the depth buffer
+        gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1,
             (s32) outX, 0, (s32) outX + 3, 0,
             0,
             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,

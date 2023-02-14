@@ -11,10 +11,10 @@ extern StageListRow* gCurrentStagePtr;
 extern s16 D_802809F6;
 extern s16 D_802809F8;
 extern s32 BattleScreenFadeAmt;
-extern EvtScript EVS_OnBattleInit[];
+extern EvtScript EVS_OnBattleInit;
 extern s32 D_80281454[];
-extern EvtScript EVS_Mario_OnActorCreate[];
-extern EvtScript EVS_Peach_OnActorCreate[];
+extern EvtScript EVS_Mario_OnActorCreate;
+extern EvtScript EVS_Peach_OnActorCreate;
 
 BSS s32 BattleEnemiesCreated;
 BSS u8 D_8029F244;
@@ -28,6 +28,8 @@ BSS s32 RunAwayRewardIncrement;
 BSS s32 D_8029F264;
 
 s32 dispatch_damage_event_player_0(s32 damageAmount, s32 event);
+
+extern ShapeFile gMapShapeData;
 
 void btl_merlee_on_start_turn(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -217,12 +219,12 @@ void btl_state_update_normal_start(void) {
             BattleEnemiesCreated = battle->formationSize;
             set_screen_overlay_params_back(255, -1.0f);
             compressedAsset = load_asset_by_name(stage->shape, &size);
-            decode_yay0(compressedAsset, &D_80210000);
+            decode_yay0(compressedAsset, &gMapShapeData);
             general_heap_free(compressedAsset);
 
             ASSERT(size <= 0x8000);
 
-            model = D_80210000.root;
+            model = gMapShapeData.root;
             textureRom = get_asset_offset(stage->texture, &size);
             if (model != NULL) {
                 load_data_for_models(model, textureRom, size);
@@ -311,7 +313,7 @@ void btl_state_update_normal_start(void) {
             battleStatus->buffEffect = fx_partner_buff(0, 0.0f, 0.0f, 0.0f, 0.0f, 0);
             func_800E9810();
             gCurrentCameraID = CAM_BATTLE;
-            script = start_script(EVS_OnBattleInit, EVT_PRIORITY_A, 0);
+            script = start_script(&EVS_OnBattleInit, EVT_PRIORITY_A, 0);
             battleStatus->camMovementScript = script;
             battleStatus->camMovementScriptID = script->id;
             gBattleSubState = BTL_SUBSTATE_NORMAL_START_CREATE_ENEMIES;
@@ -382,9 +384,9 @@ void btl_state_update_normal_start(void) {
             load_player_actor();
             actor = battleStatus->playerActor;
             if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
-                script = start_script(EVS_Peach_OnActorCreate, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_Peach_OnActorCreate, EVT_PRIORITY_A, 0);
             } else {
-                script = start_script(EVS_Mario_OnActorCreate, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_Mario_OnActorCreate, EVT_PRIORITY_A, 0);
             }
             actor->takeTurnScript = script;
             actor->takeTurnScriptID = script->id;

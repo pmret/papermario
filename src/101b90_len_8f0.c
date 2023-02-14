@@ -10,6 +10,8 @@
 #endif
 
 extern s32 spr_allocateBtlComponentsOnWorldHeap;
+extern HeapNode heap_generalHead;
+extern HeapNode heap_spriteHead;
 
 BSS s32 spr_asset_entry[2];
 BSS s32 D_802DFEB8[101];
@@ -91,9 +93,9 @@ SpriteAnimData* spr_load_sprite(s32 idx, s32 isPlayerSprite, s32 useTailAlloc) {
     ptr1++;
 
     if (useTailAlloc) {
-        animData = _heap_malloc_tail(&gSpriteHeapPtr, *ptr1);
+        animData = _heap_malloc_tail(&heap_spriteHead, *ptr1);
     } else {
-        animData = _heap_malloc(&gSpriteHeapPtr, *ptr1);
+        animData = _heap_malloc(&heap_spriteHead, *ptr1);
     }
     decode_yay0(data, animData);
     general_heap_free(data);
@@ -146,7 +148,6 @@ SpriteAnimData* spr_load_sprite(s32 idx, s32 isPlayerSprite, s32 useTailAlloc) {
     return animData;
 }
 
-#ifndef SHIFT
 void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize) {
     void* raster;
     s32 i;
@@ -157,7 +158,7 @@ void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize) {
     SpriteDataHeader[0] += SPRITE_ROM_START;
     SpriteDataHeader[1] += SPRITE_ROM_START;
     SpriteDataHeader[2] += SPRITE_ROM_START;
-    raster = _heap_malloc(&gSpriteHeapPtr, maxRasterSize * cacheSize);
+    raster = _heap_malloc(&heap_spriteHead, maxRasterSize * cacheSize);
 
     for (i = 0; i < ARRAY_COUNT(PlayerRasterCache); i++) {
         PlayerRasterCache[i].raster = raster;
@@ -174,9 +175,6 @@ void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize) {
     nuPiReadRom(SpriteDataHeader[0], &PlayerRasterHeader, sizeof(PlayerRasterHeader));
     nuPiReadRom(SpriteDataHeader[0] + PlayerRasterHeader[0], D_802E0C20, sizeof(D_802E0C20));
 }
-#else
-INCLUDE_ASM_SHIFT(void, "101b90_len_8f0", spr_init_player_raster_cache);
-#endif
 
 IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID) {
     PlayerSpriteCacheEntry* temp_s0;
@@ -341,7 +339,7 @@ void spr_load_npc_extra_anims(SpriteAnimData* header, u32* extraAnimList) {
         }
     }
 
-    _heap_realloc(&gSpriteHeapPtr, header, (s32)writePos - (s32)header);
+    _heap_realloc(&heap_spriteHead, header, (s32)writePos - (s32)header);
 }
 
 SpriteComponent** spr_allocate_components(s32 count) {
@@ -362,7 +360,7 @@ SpriteComponent** spr_allocate_components(s32 count) {
         listPos = listStart;
         component = (SpriteComponent*) listPos;
     } else {
-        listStart = _heap_malloc(&gSpriteHeapPtr, totalSize);
+        listStart = _heap_malloc(&heap_spriteHead, totalSize);
         listPos = listStart;
         component = (SpriteComponent*) listPos;
     }

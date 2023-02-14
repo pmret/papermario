@@ -33,7 +33,7 @@ def exec_shell(command: List[str]) -> str:
     return ret.stdout
 
 def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra_cflags: str, use_ccache: bool,
-                      non_matching: bool, debug: bool):
+                      non_matching: bool, shift: bool, debug: bool):
     # platform-specific
     if sys.platform  == "darwin":
         iconv = "tools/iconv.py UTF-8 SHIFT-JIS"
@@ -68,16 +68,25 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
     cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
-    cflags_modern = f"-c -G0 -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mabi=32 -mgp32 -mfp32 -mno-gpopt -mabi=32 -mfix4300 -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -O2 -march=vr4300 -w -gdwarf-2 -x c {extra_cflags}"
+    cflags_modern = f"-c -G0 -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mabi=32 -mgp32 -mfp32 -mno-gpopt -mabi=32 -mfix4300 -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -O2 -march=vr4300 -Wno-builtin-declaration-mismatch -gdwarf-2 -x c {extra_cflags}"
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3","-g1")
 
     ninja.variable("python", sys.executable)
 
-    ninja.rule("ld",
-        description="link($version) $out",
-        command=f"{cross}ld -T ver/$version/build/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map $mapfile --no-check-sections -T $in -o $out",
-    )
+    ld_args = f"-T ver/$version/build/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map $mapfile --no-check-sections -T $in -o $out"
+
+    if shift:
+        ninja.rule("ld",
+            description="link($version) $out",
+            command=f"{cross}ld $$(tools/build/ld/multilink_calc.py $version hardcode) {ld_args} && \
+                      {cross}ld $$(tools/build/ld/multilink_calc.py $version calc) {ld_args}",
+        )
+    else:
+        ninja.rule("ld",
+            description="link($version) $out",
+            command=f"{cross}ld {ld_args}",
+        )
 
     Z64_DEBUG = ""
     if debug:
@@ -244,7 +253,7 @@ class Configure:
         self.version_path = ROOT / f"ver/{version}"
         self.linker_entries = None
 
-    def split(self, assets: bool, code: bool, debug: bool):
+    def split(self, assets: bool, code: bool, shift: bool, debug: bool):
         import split
 
         modes = ["ld"]
@@ -258,6 +267,9 @@ class Configure:
         splat_file = [str(self.version_path / "splat.yaml")]
         if debug:
             splat_file += [str(self.version_path / "splat-debug.yaml")]
+
+        if shift:
+            splat_file += [str(self.version_path / "splat-shift.yaml")]
 
         split.main(
             splat_file,
@@ -316,7 +328,8 @@ class Configure:
         # ¯\_(ツ)_/¯
         return path
 
-    def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str], non_matching: bool, debug: bool):
+    def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str], non_matching: bool, modern_gcc: bool,
+                    debug: bool):
         import segtypes
         import segtypes.common.data
         import segtypes.n64.yay0
@@ -326,7 +339,8 @@ class Configure:
         built_objects = set()
         generated_headers = []
 
-        def build(object_paths: Union[Path, List[Path]], src_paths: List[Path], task: str, variables: Dict[str, str] = {}, implicit_outputs: List[str] = []):
+        def build(object_paths: Union[Path, List[Path]], src_paths: List[Path], task: str,
+                  variables: Dict[str, str] = {}, implicit_outputs: List[str] = []):
             if not isinstance(object_paths, list):
                 object_paths = [object_paths]
 
@@ -393,9 +407,8 @@ class Configure:
                 if entry.src_paths[0].suffixes[-1] == ".cpp":
                     task = "cxx"
 
-                top_lev_name = seg.get_most_parent().name
-                # if "evt" in top_lev_name:
-                #     task = "cc_modern"
+                if modern_gcc:
+                    task = "cc_modern"
 
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
@@ -405,7 +418,7 @@ class Configure:
                 cflags = cflags.replace("gcc_272", "")
 
                 # Dead cod
-                if isinstance(seg, segtypes.common.c.CommonSegC) and seg.rom_start >= 0xEA0900:
+                if isinstance(seg, segtypes.common.c.CommonSegC) and isinstance(seg.rom_start, int) and seg.rom_start >= 0xEA0900:
                     obj_path = str(entry.object_path)
                     init_obj_path = Path(obj_path + ".dead")
                     build(init_obj_path, entry.src_paths, task, variables={
@@ -702,12 +715,14 @@ class Configure:
             implicit=[CRC_TOOL],
             variables={ "version": self.version },
         )
-        ninja.build(
-            str(self.rom_ok_path()),
-            "sha1sum",
-            f"ver/{self.version}/checksum.sha1",
-            implicit=[str(self.rom_path())],
-        )
+
+        if not non_matching:
+            ninja.build(
+                str(self.rom_ok_path()),
+                "sha1sum",
+                f"ver/{self.version}/checksum.sha1",
+                implicit=[str(self.rom_path())],
+            )
 
         ninja.build("generated_headers_" + self.version, "phony", generated_headers)
 
@@ -736,6 +751,7 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--debug", action="store_true", help="Generate debugging information")
     parser.add_argument("-n", "--non-matching", action="store_true", help="Compile nonmatching code. Combine with --debug for more detailed debug info")
     parser.add_argument("--shift", action="store_true", help="Build a shiftable ROM")
+    parser.add_argument("--modern-gcc", action="store_true", help="Use modern GCC instead of the original compiler")
     parser.add_argument("-w", "--no-warn", action="store_true", help="Inhibit compiler warnings")
     parser.add_argument("--ccache", action="store_true", help="Use ccache")
     args = parser.parse_args()
@@ -800,6 +816,9 @@ if __name__ == "__main__":
     if args.shift:
         cppflags += " -DSHIFT"
 
+    if not args.modern_gcc:
+        cppflags += " -DOLD_GCC"
+
     if not args.no_warn:
         cflags += " -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
 
@@ -808,7 +827,9 @@ if __name__ == "__main__":
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w"), width=9999)
 
-    write_ninja_rules(ninja, args.cpp or "cpp", cppflags, cflags, args.ccache, args.non_matching, args.debug)
+    non_matching = args.non_matching or args.modern_gcc or args.shift
+
+    write_ninja_rules(ninja, args.cpp or "cpp", cppflags, cflags, args.ccache, args.non_matching, args.shift, args.debug)
     write_ninja_for_tools(ninja)
 
     skip_files = set()
@@ -823,12 +844,16 @@ if __name__ == "__main__":
         if not first_configure:
             first_configure = configure
 
-        configure.split(not args.no_split_assets, args.split_code, args.debug)
-        configure.write_ninja(ninja, skip_files, args.non_matching, args.debug)
+        configure.split(not args.no_split_assets, args.split_code, args.shift, args.debug)
+        configure.write_ninja(ninja, skip_files, non_matching, args.modern_gcc, args.debug)
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 
+    assert(first_configure)
     first_configure.make_current(ninja)
 
-    ninja.build("all", "phony", all_rom_oks)
+    if non_matching:
+        ninja.build("all", "phony", [str(first_configure.rom_path())])
+    else:
+        ninja.build("all", "phony", all_rom_oks)
     ninja.default("all")

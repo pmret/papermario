@@ -3580,3 +3580,5 @@ Mtx N(D_80253960_C111E0) = {{
 }};
 
 #include "smash_bridges_anim.inc.c"
+
+MATCHING_BSS(0x4930);

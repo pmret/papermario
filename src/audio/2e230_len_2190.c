@@ -21,7 +21,6 @@ void func_80052E30(u8 index) {
     voice->priority = AU_PRIORITY_FREE;
 }
 
-#ifndef SHIFT
 void au_engine_init(s32 outputRate) {
     AuGlobals* globals;
     ALHeap* alHeap;
@@ -41,7 +40,6 @@ void au_engine_init(s32 outputRate) {
     gBGMPlayerA->soundManager = gSoundManager;
     gAuAmbienceManager->globals = gSoundGlobals;
 
-
     globals = gSoundGlobals;
     dummyTrackData = alHeapAlloc(alHeap, 1, 0x8000);
     globals->dataBGM[0] = (BGMHeader*) &dummyTrackData[0];
@@ -49,7 +47,7 @@ void au_engine_init(s32 outputRate) {
     globals->dataMSEQ[0] = (MSEQHeader*) &dummyTrackData[0x1C00];
     globals->dataMSEQ[1] = (MSEQHeader*) &dummyTrackData[0x1400];
 
-    for (i = 0; i < 1; i++) {
+    for (i = 0; i < ARRAY_COUNT(globals->unk_globals_6C); i++) {
         globals->unk_globals_6C[i].bgmPlayer = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
     }
 
@@ -67,7 +65,7 @@ void au_engine_init(s32 outputRate) {
     globals->audioThreadCallbacks[0] = NULL;
     globals->audioThreadCallbacks[1] = NULL;
 
-    for (i = 0; i < 1; i++) {
+    for (i = 0; i < ARRAY_COUNT(globals->unk_globals_6C); i++) {
         globals->unk_globals_6C[i].unk_4 = 0;
         globals->unk_globals_6C[i].unk_5 = 0;
     }
@@ -96,7 +94,7 @@ void au_engine_init(s32 outputRate) {
 
     au_load_INIT(globals, SBN_ROM_OFFSET, alHeap);
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(globals->banks); i++) {
         globals->banks[i] = alHeapAlloc(alHeap, 1, 0x840);
     }
 
@@ -145,9 +143,6 @@ void au_engine_init(s32 outputRate) {
     au_delay_channel(0);
     func_80055050(alHeap);
 }
-#else
-INCLUDE_ASM_SHIFT(void, "audio/2e230_len_2190", au_engine_init);
-#endif
 
 static void au_reset_instrument(Instrument* instrument) {
     instrument->base = DummyInstrumentBase;

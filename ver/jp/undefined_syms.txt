@@ -1,2 +1,4 @@
 osTvType = 0x80000300;
 osViModeNtscLan1 = 0x80095800;
+load_engine_data = 0x80000000;
+create_audio_system = 0x80000000;

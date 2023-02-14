@@ -1295,3 +1295,5 @@ AnimScript LavaPiranha_ModelScript_0A = {
     AS_END_LOOP,
     AS_END,
 };
+
+MATCHING_BSS(0x8FB0);

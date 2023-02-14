@@ -52,7 +52,7 @@ glabel func_80033574
 /* EA28 80033628 24020001 */  addiu     $v0, $zero, 1
 /* EA2C 8003362C 0C016AD4 */  jal       func_8005AB50
 /* EA30 80033630 A0620070 */   sb       $v0, 0x70($v1)
-/* EA34 80033634 0C00B280 */  jal       func_8002CA00
+/* EA34 80033634 0C00B280 */  jal       load_obfuscation_shims
 /* EA38 80033638 00000000 */   nop
 /* EA3C 8003363C 0C0AC82D */  jal       func_802B20B4
 /* EA40 80033640 00000000 */   nop

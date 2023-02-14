@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8002CA00
+glabel load_obfuscation_shims
 /* 7E00 8002CA00 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* 7E04 8002CA04 AFB60030 */  sw        $s6, 0x30($sp)
 /* 7E08 8002CA08 3C16759A */  lui       $s6, 0x759a

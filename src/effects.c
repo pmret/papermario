@@ -6,14 +6,13 @@
 typedef s32 TlbEntry[0x1000 / 4];
 typedef TlbEntry TlbMappablePage[15];
 
-extern TlbMappablePage D_80197000;
-
 #define EFFECT_LOADED 1
 
 extern EffectGraphics gEffectGraphicsData[15];
 extern EffectInstance* gEffectInstances[96];
-extern s32 D_801A6000;
 
+extern TlbMappablePage D_80197000;
+extern Addr D_801A6000;
 
 #define FX_ENTRY(name, gfx_name) { \
     name##_main, effect_##name##_ROM_START, effect_##name##_ROM_END, effect_##name##_VRAM, gfx_name##_ROM_START, \
