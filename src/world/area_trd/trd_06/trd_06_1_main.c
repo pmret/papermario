@@ -10,7 +10,6 @@ extern EvtScript N(EVS_Scene_FallIntoCell);
 extern EvtScript N(EVS_Scene_ImprisonedKoopaBros);
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_ExitDoors_trd_04_5) = EVT_EXIT_DOUBLE_DOOR(trd_06_ENTRY_1, "trd_04", trd_04_ENTRY_5,
     COLLIDER_ttw, MODEL_o93, MODEL_o94);

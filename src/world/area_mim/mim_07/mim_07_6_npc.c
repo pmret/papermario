@@ -1,6 +1,6 @@
 #include "mim_07.h"
 
-#include "world/common/enemy/complete/ForestFuzzy_Wander.inc.c"
+#include "world/common/enemy/ForestFuzzy_Wander.inc.c"
 
 NpcSettings N(NpcSettings_JrTroopa) = {
     .height = 32,
@@ -182,14 +182,10 @@ EvtScript N(EVS_NpcInit_Fuzzy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Fuzzy_01) = {
+NpcData N(NpcData_Fuzzy_01) = {
     .id = NPC_Fuzzy_01,
-    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { -240.0f, 0.0f, -240.0f },
     .yaw = 0,
-    .flags = 0,
-    .init = &N(EVS_NpcInit_Fuzzy),
-    .drops = FOREST_FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -202,18 +198,18 @@ StaticNpc N(NpcData_Fuzzy_01) = {
             .detectSize = { 400 },
         }
     },
+    .init = &N(EVS_NpcInit_Fuzzy),
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
+    .flags = 0,
+    .drops = FOREST_FUZZY_DROPS,
     .animations = FOREST_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Fuzzy_02) = {
+NpcData N(NpcData_Fuzzy_02) = {
     .id = NPC_Fuzzy_02,
-    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { 270.0f, 0.0f, 200.0f },
     .yaw = 0,
-    .flags = 0,
-    .init = &N(EVS_NpcInit_Fuzzy),
-    .drops = FOREST_FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -226,22 +222,22 @@ StaticNpc N(NpcData_Fuzzy_02) = {
             .detectSize = { 400 },
         }
     },
+    .init = &N(EVS_NpcInit_Fuzzy),
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
+    .flags = 0,
+    .drops = FOREST_FUZZY_DROPS,
     .animations = FOREST_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_JrTroopa) = {
+NpcData N(NpcData_JrTroopa) = {
     .id = NPC_JrTroopa,
-    .settings = &N(NpcSettings_JrTroopa),
     .pos = { -338.0f, 0.0f, 0.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_JrTroopa),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_JrTroopa),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_JrTroopa_Idle,
         .walk   = ANIM_JrTroopa_Walk,

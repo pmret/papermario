@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(AddPlayerHandsOffset)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AddPlayerHandsOffset)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 xVar = *args++;

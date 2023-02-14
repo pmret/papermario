@@ -5,6 +5,7 @@ extern EvtScript N(EVS_InitFakeBowser);
 extern EvtScript N(EVS_SetupFakeBowser);
 extern NpcGroupList N(DefaultNPCs);
 
+#define STAR_SPIRIT_DATA_VAR MV_Unk_01
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"
 
 API_CALLABLE(N(SetMapChangeFadeRate)) {

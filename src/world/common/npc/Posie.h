@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Posie.h"
 
-#define POSIE_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define POSIE_ANIMS \
 { \
     .idle   = ANIM_Posie_Idle, \

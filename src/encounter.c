@@ -2390,7 +2390,7 @@ void create_encounters(void) {
     s32 npcCount;
 
     NpcSettings* npcSettings;
-    StaticNpc* npcData;
+    NpcData* npcData;
     Enemy* enemy;
     Encounter* encounter;
     Evt* script;

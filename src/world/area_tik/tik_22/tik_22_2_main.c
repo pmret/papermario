@@ -1,7 +1,6 @@
 #include "tik_22.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 #include "world/common/entity/Pipe.inc.c"
 

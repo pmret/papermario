@@ -8,7 +8,7 @@
     Setting an event flags overries the normal music with the modified music until the outer
     distance is exceeded.
 */
-ApiStatus N(MonitorMusicProximityTrigger)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MonitorMusicProximityTrigger)) {
     Bytecode* args = script->ptrReadPos;
     MusicProximityTrigger* trigger;
     s32 cond = FALSE;

@@ -2,15 +2,12 @@
 
 #define AI_SENTINEL_FIRST_NPC NPC_Sentinel
 #define AI_SENTINEL_LAST_NPC  NPC_Sentinel
-#include "world/common/enemy/complete/Sentinel.inc.c"
+#include "world/common/enemy/Sentinel.inc.c"
 
-StaticNpc N(NpcData_Sentinel) = {
+NpcData N(NpcData_Sentinel) = {
     .id = NPC_Sentinel,
-    .settings = &N(NpcSettings_Sentinel),
     .pos = { 70.0f, -220.0f, 186.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = SENTINEL_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -23,6 +20,9 @@ StaticNpc N(NpcData_Sentinel) = {
             .detectSize = { 80, 150 },
         }
     },
+    .settings = &N(NpcSettings_Sentinel),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

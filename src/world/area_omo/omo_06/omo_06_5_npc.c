@@ -45,26 +45,26 @@ EvtScript N(EVS_NpcInit_TrainToad) = {
     EVT_END
 };
 
-StaticNpc N(NpcSettings_Toads)[] = {
+NpcData N(NpcSettings_Toads)[] = {
     {
         .id = NPC_Conductor,
-        .settings = &N(NpcSettings_TrainToad),
         .pos = { 50.0f, 50.0f, 45.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Conductor),
-        .drops = TRAIN_CONDUCTOR_DROPS,
+        .settings = &N(NpcSettings_TrainToad),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = TRAIN_CONDUCTOR_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,
     },
     {
         .id = NPC_TrainToad,
-        .settings = &N(NpcSettings_TrainToad),
         .pos = { 55.0f, 0.0f, 240.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_TrainToad),
-        .drops = TRAIN_CONDUCTOR_DROPS,
+        .settings = &N(NpcSettings_TrainToad),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = TRAIN_TOAD_PINK_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,
     },

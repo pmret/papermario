@@ -1,7 +1,6 @@
 #include "kpa_70.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_SetupChainDrive) = {
     EVT_CALL(LoadAnimatedModel, 0, EVT_PTR(N(ChainDriveSkeleton)))

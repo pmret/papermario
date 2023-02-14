@@ -564,7 +564,7 @@ void peach_force_disguise_action(s32 useParasol) {
     } else {
         playerStatus->animFlags &= ~PA_FLAG_INVISIBLE;
         gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_DISGUISED;
-        playerStatus->peachDisguise = 0;
+        playerStatus->peachDisguise = PEACH_DISGUISE_NONE;
         free_npc_by_index(PeachDisguiseNpcIndex);
         set_action_state(ACTION_STATE_IDLE);
         playerStatus->colliderHeight = 55;
@@ -622,7 +622,7 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
     Npc* npc;
     f32 yaw;
 
-    if (peachDisguise == 0) {
+    if (peachDisguise == PEACH_DISGUISE_NONE) {
         return NULL;
     }
 

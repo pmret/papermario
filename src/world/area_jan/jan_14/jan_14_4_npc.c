@@ -1,10 +1,10 @@
 #include "jan_14.h"
 
-#include "world/common/enemy/complete/JungleFuzzy.h"
+#include "world/common/enemy/JungleFuzzy.h"
 
 // uses base fuzzy includes instead of JungleFuzzy!
-#include "world/common/enemy/complete/Fuzzy_Wander.inc.c"
-#include "world/common/enemy/complete/Fuzzy.inc.c"
+#include "world/common/enemy/Fuzzy_Wander.inc.c"
+#include "world/common/enemy/Fuzzy.inc.c"
 
 EvtScript N(EVS_NpcIdle_JungleFuzzy) = {
     EVT_LABEL(0)
@@ -38,25 +38,25 @@ EvtScript N(EVS_NpcInit_JungleFuzzy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_JungleFuzzy_01) = {
+NpcData N(NpcData_JungleFuzzy_01) = {
     .id = NPC_JungleFuzzy_01,
-    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_JungleFuzzy),
+    .settings = &N(NpcSettings_Fuzzy),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_JungleFuzzy_02) = {
+NpcData N(NpcData_JungleFuzzy_02) = {
     .id = NPC_JungleFuzzy_02,
-    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_JungleFuzzy),
+    .settings = &N(NpcSettings_Fuzzy),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

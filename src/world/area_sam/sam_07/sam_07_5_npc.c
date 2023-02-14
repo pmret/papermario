@@ -1,16 +1,13 @@
 #include "sam_07.h"
 
-#include "world/common/enemy/complete/Gulpit.inc.c"
-#include "world/common/enemy/complete/FrostPiranha.inc.c"
+#include "world/common/enemy/Gulpit.inc.c"
+#include "world/common/enemy/FrostPiranha.inc.c"
 
-StaticNpc N(NpcData_Gulpit)[] = {
+NpcData N(NpcData_Gulpit)[] = {
     {
         .id = NPC_Gulpit,
-        .settings = &N(NpcSettings_Gulpit),
         .pos = { -500.0f, -150.0f, -75.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = GULPIT_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -23,20 +20,20 @@ StaticNpc N(NpcData_Gulpit)[] = {
                 .detectSize = { 200 },
             }
         },
+        .settings = &N(NpcSettings_Gulpit),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = GULPIT_DROPS,
         .animations = GULPIT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
     GULPIT_HITBOX(NPC_Gulpit_Hitbox),
 };
 
-StaticNpc N(NpcData_FrostPiranha_01)[] = {
+NpcData N(NpcData_FrostPiranha_01)[] = {
     {
         .id = NPC_FrostPiranha_01,
-        .settings = &N(NpcSettings_FrostPiranha),
         .pos = { 250.0f, 120.0f, -75.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400,
-        .drops = FROST_PIRANHA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -49,20 +46,20 @@ StaticNpc N(NpcData_FrostPiranha_01)[] = {
                 .detectSize = { 260, 65 },
             }
         },
+        .settings = &N(NpcSettings_FrostPiranha),
+        .flags = ENEMY_FLAG_400,
+        .drops = FROST_PIRANHA_DROPS,
         .animations = FROST_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
     FROST_PIRANHA_HITBOX(NPC_FrostPiranha_01_Hitbox),
 };
 
-StaticNpc N(NpcData_FrostPiranha_02)[] = {
+NpcData N(NpcData_FrostPiranha_02)[] = {
     {
         .id = NPC_FrostPiranha_02,
-        .settings = &N(NpcSettings_FrostPiranha),
         .pos = { 400.0f, 120.0f, -75.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400,
-        .drops = FROST_PIRANHA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -75,6 +72,9 @@ StaticNpc N(NpcData_FrostPiranha_02)[] = {
                 .detectSize = { 260, 65 },
             }
         },
+        .settings = &N(NpcSettings_FrostPiranha),
+        .flags = ENEMY_FLAG_400,
+        .drops = FROST_PIRANHA_DROPS,
         .animations = FROST_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },

@@ -1,8 +1,8 @@
 #include "flo_25.h"
 
 #include "world/common/npc/GateFlower.inc.c"
-#include "world/common/enemy/complete/TuffPuff.inc.c"
-#include "world/common/enemy/complete/Bzzap.inc.c"
+#include "world/common/enemy/TuffPuff.inc.c"
+#include "world/common/enemy/Bzzap.inc.c"
 
 #include "world/common/complete/NormalItemChoice.inc.c"
 
@@ -157,25 +157,22 @@ EvtScript N(EVS_NpcInit_GateFlower) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GateFlower) = {
+NpcData N(NpcData_GateFlower) = {
     .id = NPC_GateFlower,
-    .settings = &N(NpcSettings_GateFlower),
     .pos = { 505.0f, 0.0f, -25.0f },
     .yaw = 90,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_GateFlower),
-    .drops = GATE_FLOWER_DROPS,
+    .settings = &N(NpcSettings_GateFlower),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = GATE_FLOWER_RED_ANIMS,
     .tattle = MSG_NpcTattle_RedGateFlower,
 };
 
-StaticNpc N(NpcData_TuffPuff) = {
+NpcData N(NpcData_TuffPuff) = {
     .id = NPC_TuffPuff,
-    .settings = &N(NpcSettings_TuffPuff),
     .pos = { -200.0f, 45.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = TUFF_PUFF_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -188,17 +185,17 @@ StaticNpc N(NpcData_TuffPuff) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_TuffPuff),
+    .flags = ENEMY_FLAG_400,
+    .drops = TUFF_PUFF_DROPS,
     .animations = TUFF_PUFF_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Bzzap) = {
+NpcData N(NpcData_Bzzap) = {
     .id = NPC_Bzzap,
-    .settings = &N(NpcSettings_Bzzap),
     .pos = { 150.0f, 55.0f, 0.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = BZZAP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -211,6 +208,9 @@ StaticNpc N(NpcData_Bzzap) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_Bzzap),
+    .flags = ENEMY_FLAG_400,
+    .drops = BZZAP_DROPS,
     .animations = BZZAP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };

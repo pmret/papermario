@@ -1,7 +1,7 @@
 #include "common.h"
 #include "model.h"
 
-ApiStatus N(SetBackgroundAlpha)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetBackgroundAlpha)) {
     Bytecode* args = script->ptrReadPos;
 
     set_background_color_blend(0, 0, 0, evt_get_variable(script, *args++));

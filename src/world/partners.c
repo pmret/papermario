@@ -607,9 +607,9 @@ void partner_create_npc(void) {
 
     {
         Npc* npc = *partnerNpcPtr;
-        npc->pos.x = 0.0f;
-        npc->pos.y = -1000.0f;
-        npc->pos.z = 0.0f;
+        npc->pos.x = NPC_DISPOSE_POS_X;
+        npc->pos.y = NPC_DISPOSE_POS_Y;
+        npc->pos.z = NPC_DISPOSE_POS_Z;
         npc->scale.x = 0.0f;
         npc->scale.y = 0.0f;
         npc->scale.z = 0.0f;

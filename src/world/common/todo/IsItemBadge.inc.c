@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(IsItemBadge)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(IsItemBadge)) {
     Bytecode* args = script->ptrReadPos;
     s32 itemIndex = evt_get_variable(script, *args++);
 

@@ -1,7 +1,7 @@
 #include "jan_22.h"
 
 #include "world/common/npc/Kolorado.inc.c"
-#include "world/common/enemy/complete/SpearGuy_Patrol.inc.c"
+#include "world/common/enemy/SpearGuy_Patrol.inc.c"
 #include "world/common/npc/RaphaelRaven.inc.c"
 #include "world/common/npc/Raven.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
@@ -1079,9 +1079,9 @@ EvtScript N(EVS_NpcIdle_SpearGuy) = {
         EVT_IF_EQ(LVar9, 0)
             EVT_THREAD
                 EVT_WAIT(40)
-                EVT_CALL(ShowSweat, 0, 1, -45, 1, 0, 0, 0, 0, 20)
+                EVT_CALL(ShowSweat, NPC_Kolorado_01, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
             EVT_END_THREAD
-            EVT_CALL(ShowSweat, 0, 1, 45, 1, 0, 0, 0, 0, 20)
+            EVT_CALL(ShowSweat, NPC_Kolorado_01, 1, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
             EVT_SET(LVar9, 3)
         EVT_ELSE
             EVT_SUB(LVar9, 1)
@@ -1416,54 +1416,54 @@ EvtScript N(EVS_NpcInit_Misstar) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Kolorado)[] = {
+NpcData N(NpcData_Kolorado)[] = {
     {
         .id = NPC_Kolorado_01,
-        .settings = &N(NpcSettings_Kolorado),
         .pos = { -100.0f, 0.0f, 10.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
         .init = &N(EVS_NpcInit_Kolorado_HeldCaptive),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Kolorado),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
+        .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
     },
     {
         .id = NPC_Kolorado_02,
-        .settings = &N(NpcSettings_Kolorado),
         .pos = { -100.0f, 0.0f, 10.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Kolorado_WaitingToExplore),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Kolorado),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
     },
     {
         .id = NPC_ZiplineDummy1,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -100.0f, 0.0f, 10.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_ZiplineDummy),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
     },
     {
         .id = NPC_ZiplineDummy2,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -100.0f, 0.0f, 10.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
         .init = &N(EVS_NpcInit_ZiplineDummy),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
     },
 };
 
-StaticNpc N(NpcData_SpearGuy) = {
+NpcData N(NpcData_SpearGuy) = {
     .id = NPC_SpearGuy,
     .pos = { -70.0f, 0.0f, 10.0f },
     .yaw = 270,
@@ -1482,22 +1482,22 @@ StaticNpc N(NpcData_SpearGuy) = {
             .detectSize = { 100 },
         }
     },
+    .init = &N(EVS_NpcInit_SpearGuy),
     .settings = &N(NpcSettings_SpearGuy_Patrol),
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-    .init = &N(EVS_NpcInit_SpearGuy),
-    .drops = NPC_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = SPEAR_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_RaphaelRaven)[] = {
+NpcData N(NpcData_RaphaelRaven)[] = {
     {
         .id = NPC_RaphaelRaven,
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
+        .init = &N(EVS_NpcInit_RaphaelRaven),
         .settings = &N(NpcSettings_RaphaelRaven),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_RaphaelRaven),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RAPHAEL_RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RaphaelRaven,
     },
@@ -1505,10 +1505,10 @@ StaticNpc N(NpcData_RaphaelRaven)[] = {
         .id = NPC_Raven_01,
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
+        .init = &N(EVS_NpcInit_Raven),
         .settings = &N(NpcSettings_Raven),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
-        .init = &N(EVS_NpcInit_Raven),
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenA,
     },
@@ -1518,7 +1518,7 @@ StaticNpc N(NpcData_RaphaelRaven)[] = {
         .yaw = 270,
         .settings = &N(NpcSettings_Raven),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
     },
     {
@@ -1527,7 +1527,7 @@ StaticNpc N(NpcData_RaphaelRaven)[] = {
         .yaw = 270,
         .settings = &N(NpcSettings_Raven),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenC,
     },
@@ -1537,7 +1537,7 @@ StaticNpc N(NpcData_RaphaelRaven)[] = {
         .yaw = 270,
         .settings = &N(NpcSettings_Raven),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenD,
     },
@@ -1547,20 +1547,20 @@ StaticNpc N(NpcData_RaphaelRaven)[] = {
         .yaw = 270,
         .settings = &N(NpcSettings_Raven),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenE,
     },
 };
 
-StaticNpc N(NpcData_Misstar) = {
+NpcData N(NpcData_Misstar) = {
     .id = NPC_Misstar,
-    .settings = &N(NpcSettings_StarSpirit),
     .pos = { 1075.0f, 120.0f, 130.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Misstar),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_StarSpirit),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = MISSTAR_ANIMS,
 };
 

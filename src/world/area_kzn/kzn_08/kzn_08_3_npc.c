@@ -1,16 +1,13 @@
 #include "kzn_08.h"
 
-#include "world/common/enemy/complete/LavaBubble.inc.c"
-#include "world/common/enemy/complete/PutridPiranha.inc.c"
+#include "world/common/enemy/LavaBubble.inc.c"
+#include "world/common/enemy/PutridPiranha.inc.c"
 
-StaticNpc N(NpcData_PutridPiranha)[] = {
+NpcData N(NpcData_PutridPiranha)[] = {
     {
         .id = NPC_PutridPiranha,
-        .settings = &N(NpcSettings_PutridPiranha),
         .pos = { 80.0f, 0.0f, 135.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400,
-        .drops = PUTRID_PIRANHA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -23,6 +20,9 @@ StaticNpc N(NpcData_PutridPiranha)[] = {
                 .detectSize = { 130, 60 },
             }
         },
+        .settings = &N(NpcSettings_PutridPiranha),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .drops = PUTRID_PIRANHA_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },

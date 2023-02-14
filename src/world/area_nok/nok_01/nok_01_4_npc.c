@@ -18,7 +18,7 @@ NpcSettings N(NpcSettings_Unused3) = {
 };
 
 #include "world/common/npc/Koopa.inc.c"
-#include "world/common/enemy/complete/Fuzzy.inc.c"
+#include "world/common/enemy/Fuzzy.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/npc/Bobomb.inc.c"
 
@@ -422,15 +422,11 @@ EvtScript N(EVS_NpcInit_RelaxedKoopa) = {
 
 #include "npcs_normal.inc.c"
 
-StaticNpc N(NpcData_Crisis)[] = {
+NpcData N(NpcData_Crisis)[] = {
     {
         .id = NPC_Koover,
-        .settings = &N(NpcSettings_Koopa_Wander),
         .pos = { -233.0f, 0.0f, 256.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
-        .init = &N(EVS_NpcInit_Koover_Crisis),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -443,17 +439,17 @@ StaticNpc N(NpcData_Crisis)[] = {
                 .detectSize = { 500 },
             }
         },
+        .init = &N(EVS_NpcInit_Koover_Crisis),
+        .settings = &N(NpcSettings_Koopa_Wander),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_Greeter,
     },
     {
         .id = NPC_FuzzyWithShell,
-        .settings = &N(NpcSettings_Fuzzy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000,
-        .init = &N(EVS_NpcInit_FuzzyWithShell),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -466,26 +462,26 @@ StaticNpc N(NpcData_Crisis)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_FuzzyWithShell),
+        .settings = &N(NpcSettings_Fuzzy),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000,
+        .drops = NO_DROPS,
         .animations = FUZZY_ANIMS,
     },
     {
         .id = NPC_KooversShell,
-        .settings = &N(NpcSettings_Koopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_KooversShell),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Koopa),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
     },
     {
         .id = NPC_Koopa_02,
-        .settings = &N(NpcSettings_KoopaWithoutShell_Wander),
         .pos = { 50.0f, 0.0f, 300.0f },
         .yaw = 180,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Koopa_02_Crisis),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -498,27 +494,27 @@ StaticNpc N(NpcData_Crisis)[] = {
                 .detectSize = { 500 },
             }
         },
+        .init = &N(EVS_NpcInit_Koopa_02_Crisis),
+        .settings = &N(NpcSettings_KoopaWithoutShell_Wander),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = KOOPA_WITHOUT_SHELL_ANIMS,
         .tattle = MSG_NpcTattle_NOK_GenericKoopaA,
     },
     {
         .id = NPC_KoopaShell_02,
-        .settings = &N(NpcSettings_Koopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_KoopaShell_02),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Koopa),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
     },
     {
         .id = NPC_Koopa_03,
-        .settings = &N(NpcSettings_KoopaWithoutShell_Wander),
         .pos = { 150.0f, 0.0f, 217.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Koopa_03_Crisis),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -531,76 +527,76 @@ StaticNpc N(NpcData_Crisis)[] = {
                 .detectSize = { 500 },
             }
         },
+        .init = &N(EVS_NpcInit_Koopa_03_Crisis),
+        .settings = &N(NpcSettings_KoopaWithoutShell_Wander),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = KOOPA_WITHOUT_SHELL_ANIMS,
         .tattle = MSG_NpcTattle_NOK_GenericKoopaB,
     },
     {
         .id = NPC_KoopaShell_03,
-        .settings = &N(NpcSettings_Koopa),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_KoopaShell_03),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Koopa),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
     },
     {
         .id = NPC_Bobomb_01,
-        .settings = &N(NpcSettings_Bobomb),
         .pos = { 260.0f, 0.0f, -110.0f },
         .yaw = 82,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bobomb_01_Crisis),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bobomb),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = BOBOMB_RED_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombA,
     },
     {
         .id = NPC_Bobomb_02,
-        .settings = &N(NpcSettings_Bobomb),
         .pos = { 270.0f, 0.0f, -160.0f },
         .yaw = 82,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bobomb_02_Crisis),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bobomb),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = BOBOMB_RED_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombB,
     },
 };
 
 // just jumps around the map; can be hit for a coin
-StaticNpc N(NpcData_MiscFuzzy1) = {
+NpcData N(NpcData_MiscFuzzy1) = {
     .id = NPC_MiscFuzzy1,
-    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_MiscFuzzy1),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Fuzzy),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000,
+    .drops = NO_DROPS,
     .animations = FUZZY_ANIMS,
 };
 
 // just jumps around the map; can be hit for a coin
-StaticNpc N(NpcData_MiscFuzzy2) = {
+NpcData N(NpcData_MiscFuzzy2) = {
     .id = NPC_MiscFuzzy2,
-    .settings = &N(NpcSettings_Fuzzy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_MiscFuzzy2),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Fuzzy),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000,
+    .drops = NO_DROPS,
     .animations = FUZZY_ANIMS,
 };
 
-StaticNpc N(NpcData_Normal)[] = {
+NpcData N(NpcData_Normal)[] = {
     {
         .id = NPC_Koover,
-        .settings = &N(NpcSettings_Koopa_Wander),
         .pos = { -233.0f, 0.0f, 256.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Koover_Normal),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -613,17 +609,17 @@ StaticNpc N(NpcData_Normal)[] = {
                 .detectSize = { 500 },
             }
         },
+        .init = &N(EVS_NpcInit_Koover_Normal),
+        .settings = &N(NpcSettings_Koopa_Wander),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_Greeter,
     },
     {
         .id = NPC_Koopa_02,
-        .settings = &N(NpcSettings_Koopa_Wander),
         .pos = { 52.0f, 0.0f, 330.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Koopa_02_Normal),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -636,17 +632,17 @@ StaticNpc N(NpcData_Normal)[] = {
                 .detectSize = { 500 },
             }
         },
+        .init = &N(EVS_NpcInit_Koopa_02_Normal),
+        .settings = &N(NpcSettings_Koopa_Wander),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_GenericKoopaA,
     },
     {
         .id = NPC_Koopa_03,
-        .settings = &N(NpcSettings_Koopa_Wander),
         .pos = { 110.0f, 0.0f, 240.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Koopa_03_Normal),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -659,87 +655,91 @@ StaticNpc N(NpcData_Normal)[] = {
                 .detectSize = { 500 },
             }
         },
+        .init = &N(EVS_NpcInit_Koopa_03_Normal),
+        .settings = &N(NpcSettings_Koopa_Wander),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_GenericKoopaB,
     },
     {
         .id = NPC_Bobomb_01,
-        .settings = &N(NpcSettings_Bobomb),
         .pos = { 236.0f, 0.0f, 251.0f },
         .yaw = 82,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bobomb_01_Normal),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bobomb),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = BOBOMB_RED_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombA,
     },
     {
         .id = NPC_Bobomb_02,
-        .settings = &N(NpcSettings_Bobomb),
         .pos = { 224.0f, 0.0f, 309.0f },
         .yaw = 82,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bobomb_02_Normal),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bobomb),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = BOBOMB_RED_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombB,
     },
     {
         .id = NPC_Bobomb_03,
-        .settings = &N(NpcSettings_Bobomb),
         .pos = { 280.0f, 0.0f, 274.0f },
         .yaw = 262,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bobomb_03_Normal),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bobomb),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = BOBOMB_RED_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombC,
     },
 };
 
-StaticNpc N(NpcData_Shared)[] = {
+NpcData N(NpcData_Shared)[] = {
     {
         .id = NPC_MortT,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -268.0f, 10.0f, 68.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_MortT),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_NOK_ToadHouseToad,
     },
     {
         .id = NPC_Koopa_ShopOwner,
-        .settings = &N(NpcSettings_Koopa),
         .pos = { -73.0f, 0.0f, -338.0f },
         .yaw = 157,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Koopa_ShopOwner),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Koopa),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_ShopOwner,
     },
     {
         .id = NPC_RelaxedKoopa,
-        .settings = &N(NpcSettings_Koopa),
         .pos = { 337.0f, 17.0f, -162.0f },
         .yaw = 262,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_RelaxedKoopa),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Koopa),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_RadioLover,
     },
     {
         .id = NPC_ChuckQuizmo,
-        .settings = &N(NpcSettings_ChuckQuizmo),
         .pos = { 356.0f, 0.0f, 166.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .initVarCount = 1,
         .initVar = { .bytes = { 0, QUIZ_AREA_NOK, QUIZ_COUNT_NOK, QUIZ_MAP_NOK_01 }},
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_ChuckQuizmo),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = QUIZMO_ANIMS,
         .tattle = MSG_NpcTattle_ChuckQuizmo,
     },

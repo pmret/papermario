@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(GetDefeatedEnemyCount)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetDefeatedEnemyCount)) {
     Bytecode* args = script->ptrReadPos;
     EncounterStatus* encounterStatus = &gCurrentEncounter;
     s32 enemyCount = 0;

@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/WorldBow.h"
 
-#define BOW_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define BOW_ANIMS \
 { \
     .idle   = ANIM_WorldBow_Idle, \

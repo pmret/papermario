@@ -258,18 +258,14 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_JrTroopa) = {
+NpcData N(NpcData_JrTroopa) = {
     .id = NPC_JrTroopa,
-    .settings = &N(NpcSettings_JrTroopa),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
     .init = &N(EVS_NpcInit_JrTroopa),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_JrTroopa),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_JrTroopa_Idle,
         .walk   = ANIM_JrTroopa_Walk,
@@ -290,11 +286,11 @@ StaticNpc N(NpcData_JrTroopa) = {
     },
 };
 
-StaticNpc N(NpcData_GoombaFamily) = {
+NpcData N(NpcData_GoombaFamily) = {
     .id = NPC_Goompa,
-    .settings = &N(NpcSettings_Goompa),
     .pos = { -58.0f, 0.0f, 130.0f },
     .yaw = 0,
+    .settings = &N(NpcSettings_Goompa),
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200000,
     .animations = {
     },

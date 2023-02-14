@@ -1,7 +1,7 @@
 #include "kmr_12.h"
 #include "entity.h"
 
-#include "world/common/enemy/complete/Goomba_Wander.inc.c"
+#include "world/common/enemy/Goomba_Wander.inc.c"
 
 API_CALLABLE(N(GetAmbushEnemy)) {
     script->varTablePtr[0] = get_enemy_safe(NPC_Goomba_Ambush);
@@ -87,14 +87,10 @@ EvtScript N(EVS_NpcInit_Goomba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Goomba) = {
+NpcData N(NpcData_Goomba) = {
     .id = NPC_Goomba_Ambush,
-    .settings = &N(NpcSettings_Goomba_Wander),
     .pos = { -33.0f, 30.0f, -25.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_Goomba),
-    .drops = GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -107,6 +103,10 @@ StaticNpc N(NpcData_Goomba) = {
             .detectSize = { 400, 60 },
         }
     },
+    .init = &N(EVS_NpcInit_Goomba),
+    .settings = &N(NpcSettings_Goomba_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
 

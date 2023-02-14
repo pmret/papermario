@@ -164,7 +164,6 @@ EvtScript N(EVS_PressSwitch_Right) = {
 };
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_SetupSwitches) = {
     EVT_SET(MF_EitherSwitchPressed, FALSE)

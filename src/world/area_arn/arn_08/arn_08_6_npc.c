@@ -45,25 +45,25 @@ EvtScript N(EVS_NpcInit_Yakkey) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TubbasHeart) = {
+NpcData N(NpcData_TubbasHeart) = {
     .id = NPC_TubbasHeart,
-    .settings = &N(NpcSettings_TubbasHeart),
     .pos = { -23.0f, 75.0f, 31.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_TubbasHeart),
-    .drops = TUBBAS_HEART_DROPS,
+    .settings = &N(NpcSettings_TubbasHeart),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = TUBBAS_HEART_ANIMS,
 };
 
-StaticNpc N(NpcData_Yakkey) = {
+NpcData N(NpcData_Yakkey) = {
     .id = NPC_Yakkey,
-    .settings = &N(NpcSettings_Yakkey),
     .pos = { 38.0f, 0.0f, 97.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Yakkey),
-    .drops = YAKKEY_DROPS,
+    .settings = &N(NpcSettings_Yakkey),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = YAKKEY_ANIMS,
     .tattle = MSG_NpcTattle_Yakkey,
 };

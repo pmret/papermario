@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "battle/action_cmd.h"
 
-ApiStatus N(UnkMoveFunc1)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkMoveFunc1)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     f32 posX = playerActor->currentPos.x;

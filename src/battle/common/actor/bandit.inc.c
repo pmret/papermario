@@ -162,7 +162,7 @@ ActorBlueprint N(coin) = {
     .statusMessageOffset = { 10, 25 },
 };
 
-Vec3i N(coin_pos) = { 0, -1000, 0 };
+Vec3i N(coin_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_coin) = {
     { .actor = &N(coin), .home = { .vec = &N(coin_pos) }},

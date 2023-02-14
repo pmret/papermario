@@ -304,18 +304,14 @@ EvtScript N(EVS_NpcInit_Eldstar) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KoopaBros) = {
+NpcData N(NpcData_KoopaBros) = {
     .id = NPC_KoopaBros,
-    .settings = &N(NpcSettings_KoopaBros),
     .pos = { -469.0f, 0.0f, 101.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_KoopaBros),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_KoopaBros),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_KoopaBros_Green_Anim04,
         .walk   = ANIM_KoopaBros_Green_Anim02,
@@ -336,14 +332,10 @@ StaticNpc N(NpcData_KoopaBros) = {
     },
 };
 
-StaticNpc N(NpcData_Eldstar) = {
+NpcData N(NpcData_Eldstar) = {
     .id = NPC_Eldstar,
-    .settings = &N(NpcSettings_StarSpirit),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_800,
-    .init = &N(EVS_NpcInit_Eldstar),
-    .drops = ELDSTAR_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -356,6 +348,10 @@ StaticNpc N(NpcData_Eldstar) = {
             .detectSize = { 500 },
         }
     },
+    .init = &N(EVS_NpcInit_Eldstar),
+    .settings = &N(NpcSettings_StarSpirit),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = ELDSTAR_ANIMS,
 };
 

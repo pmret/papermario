@@ -1,16 +1,13 @@
 #include "sam_10.h"
 
 #define INCLUDE_FROST_CLUBBA_WANDER
-#include "world/common/enemy/complete/FrostClubba_Multi.inc.c"
+#include "world/common/enemy/FrostClubba_Multi.inc.c"
 
-StaticNpc N(NpcData_Clubba)[] = {
+NpcData N(NpcData_Clubba)[] = {
     {
         .id = NPC_FrostClubba,
-        .settings = &N(NpcSettings_FrostClubba_Wander),
         .pos = { 575.0f, 480.0f, -50.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .drops = FROST_CLUBBA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -23,6 +20,9 @@ StaticNpc N(NpcData_Clubba)[] = {
                 .detectSize = { 200 },
             }
         },
+        .settings = &N(NpcSettings_FrostClubba_Wander),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = FROST_CLUBBA_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },

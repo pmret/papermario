@@ -613,18 +613,14 @@ EvtScript N(EVS_NpcInit_Luigi_1) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Luigi_0) = {
+NpcData N(NpcData_Luigi_0) = {
     .id = NPC_Luigi_0,
-    .settings = &N(NpcSettings_Luigi),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Luigi_0),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Luigi),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Luigi_Still,
         .walk   = ANIM_Luigi_Still,
@@ -646,18 +642,14 @@ StaticNpc N(NpcData_Luigi_0) = {
     .tattle = MSG_NpcTattle_Luigi,
 };
 
-StaticNpc N(NpcData_Luigi_1) = {
+NpcData N(NpcData_Luigi_1) = {
     .id = NPC_Luigi_1,
-    .settings = &N(NpcSettings_Luigi),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Luigi_1),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Luigi),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Luigi_Still,
         .walk   = ANIM_Luigi_Still,
@@ -774,18 +766,14 @@ EvtScript N(EVS_NpcInit_ShyGuy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy) = {
+NpcData N(NpcData_ShyGuy) = {
     .id = NPC_ShyGuy,
-    .settings = &N(NpcSettings_ShyGuy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .init = &N(EVS_NpcInit_ShyGuy),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_ShyGuy),
+    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_ShyGuy_Red_Anim01,
         .walk   = ANIM_ShyGuy_Red_Anim02,

@@ -2,7 +2,7 @@
 
 #include "sprite/npc/WorldBow.h"
 
-#include "world/common/enemy/complete/TubbaBlubba.inc.c"
+#include "world/common/enemy/TubbaBlubba.inc.c"
 #include "world/common/npc/Boo_Patrol.inc.c"
 #include "world/common/npc/Boo.inc.c"
 
@@ -228,15 +228,11 @@ EvtScript N(EVS_NpcInit_Boo_05) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Boo_01)[] = {
+NpcData N(NpcData_Boo_01)[] = {
     {
         .id = NPC_Boo_01,
-        .settings = &N(NpcSettings_Boo_Patrol),
         .pos = { 55.0f, 195.0f, 160.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_Boo_01),
-        .drops = BOO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = FALSE,
@@ -251,50 +247,50 @@ StaticNpc N(NpcData_Boo_01)[] = {
                 .detectSize = { 50 },
             }
         },
+        .init = &N(EVS_NpcInit_Boo_01),
+        .settings = &N(NpcSettings_Boo_Patrol),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooD,
     },
     {
         .id = NPC_Boo_02,
-        .settings = &N(NpcSettings_Boo),
         .pos = { 160.0f, 191.0f, 250.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Boo_02),
-        .drops = BOO_DROPS,
+        .settings = &N(NpcSettings_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooE,
     },
     {
         .id = NPC_Boo_03,
-        .settings = &N(NpcSettings_Boo),
         .pos = { 390.0f, 190.0f, 255.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Boo_03),
-        .drops = BOO_DROPS,
+        .settings = &N(NpcSettings_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooF,
     },
     {
         .id = NPC_Boo_04,
-        .settings = &N(NpcSettings_Boo),
         .pos = { 503.0f, 206.0f, 210.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Boo_04),
-        .drops = BOO_DROPS,
+        .settings = &N(NpcSettings_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooG,
     },
     {
         .id = NPC_Boo_05,
-        .settings = &N(NpcSettings_Boo_Patrol),
         .pos = { 350.0f, 185.0f, 197.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_Boo_05),
-        .drops = BOO_DROPS,
         .territory = {
             .patrol = {
                 .isFlying = FALSE,
@@ -309,6 +305,10 @@ StaticNpc N(NpcData_Boo_01)[] = {
                 .detectSize = { 50 },
             }
         },
+        .init = &N(EVS_NpcInit_Boo_05),
+        .settings = &N(NpcSettings_Boo_Patrol),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooH,
     },
@@ -634,14 +634,14 @@ s32 N(extraAnimationList_80244390)[] = {
     -1
 };
 
-StaticNpc N(NpcData_Tubba) = {
+NpcData N(NpcData_Tubba) = {
     .id = NPC_Tubba,
-    .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Tubba),
-    .drops = TUBBA_DROPS,
+    .settings = &N(NpcSettings_TubbaBlubba),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = TUBBA_ANIMS,
     .extraAnimations = N(extraAnimationList_80244390),
 };
@@ -698,45 +698,45 @@ EvtScript N(EVS_NpcInit_Boo_09) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Boo_06)[] = {
+NpcData N(NpcData_Boo_06)[] = {
     {
         .id = NPC_Boo_06,
-        .settings = &N(NpcSettings_Boo),
         .pos = { 36.0f, 277.0f, 140.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Boo_06),
-        .drops = BOO_DROPS,
+        .settings = &N(NpcSettings_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
     },
     {
         .id = NPC_Boo_07,
-        .settings = &N(NpcSettings_Boo),
         .pos = { 200.0f, 275.0f, 182.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Boo_07),
-        .drops = BOO_DROPS,
+        .settings = &N(NpcSettings_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
     },
     {
         .id = NPC_Boo_08,
-        .settings = &N(NpcSettings_Boo),
         .pos = { 379.0f, 300.0f, 192.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Boo_08),
-        .drops = BOO_DROPS,
+        .settings = &N(NpcSettings_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
     },
     {
         .id = NPC_Boo_09,
-        .settings = &N(NpcSettings_Boo),
         .pos = { 525.0f, 286.0f, 178.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Boo_09),
-        .drops = BOO_DROPS,
+        .settings = &N(NpcSettings_Boo),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
     },
 };

@@ -1,7 +1,7 @@
 #include "pra_32.h"
 #include "effects.h"
 
-#include "world/common/enemy/complete/CrystalKing.inc.c"
+#include "world/common/enemy/CrystalKing.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
 
 EvtScript N(EVS_AnimateCam_CrystalKing) = {
@@ -131,7 +131,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
         EVT_WAIT(2)
         EVT_CALL(FadeOutMusic, 0, 500)
     EVT_END_THREAD
-    EVT_CALL(SetEncounterStatusFlags, 1, TRUE)
+    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_1, TRUE)
     EVT_CALL(SetPlayerPos, 475, 100, 116)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(GetNpcPos, NPC_CrystalKing_01, LVar0, LVar1, LVar2)
@@ -236,44 +236,44 @@ EvtScript N(EVS_NpcInit_Kalmar) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_CrystalKing_01)[] = {
+NpcData N(NpcData_CrystalKing_01)[] = {
     {
         .id = NPC_CrystalKing_01,
-        .settings = &N(NpcSettings_CrystalKing),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_CrystalKing_Aux),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_CrystalKing),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = CRYSTAL_KING_ANIMS,
     },
     {
         .id = NPC_CrystalKing_02,
-        .settings = &N(NpcSettings_CrystalKing),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
+        .settings = &N(NpcSettings_CrystalKing),
         .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = CRYSTAL_KING_ANIMS,
     },
     {
         .id = NPC_Kalmar,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Kalmar),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = KALMAR_ANIMS,
     },
     {
         .id = NPC_CrystalKing_03,
-        .settings = &N(NpcSettings_CrystalKing),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_CrystalKing),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_CrystalKing),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = CRYSTAL_KING_ANIMS,
     },
 };

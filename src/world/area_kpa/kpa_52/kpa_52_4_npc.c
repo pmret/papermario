@@ -1,16 +1,13 @@
 
 #include "kpa_52.h"
 
-#include "world/common/enemy/complete/HammerBros.inc.c"
+#include "world/common/enemy/HammerBros_Wander.inc.c"
 
-StaticNpc N(NpcData_HammerBros_01)[] = {
+NpcData N(NpcData_HammerBros_01)[] = {
     {
         .id = NPC_HammerBros_01,
-        .settings = &N(NpcSettings_HammerBros),
         .pos = { 190.0f, 0.0f, -27.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = HAMMER_BROS_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -23,6 +20,9 @@ StaticNpc N(NpcData_HammerBros_01)[] = {
                 .detectSize = { 300 },
             }
         },
+        .settings = &N(NpcSettings_HammerBros_Wander),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = HAMMER_BROS_DROPS,
         .animations = HAMMER_BROS_ANIMS,
     },
     HAMMER_BROS_HAMMER_HITBOX(NPC_HammerBros_01 + 1),
@@ -33,14 +33,11 @@ StaticNpc N(NpcData_HammerBros_01)[] = {
     HAMMER_BROS_HAMMER_HITBOX(NPC_HammerBros_01 + 6),
 };
 
-StaticNpc N(NpcData_HammerBros_02)[] = {
+NpcData N(NpcData_HammerBros_02)[] = {
     {
         .id = NPC_HammerBros_02,
-        .settings = &N(NpcSettings_HammerBros),
         .pos = { 190.0f, 120.0f, -145.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = HAMMER_BROS_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -53,6 +50,9 @@ StaticNpc N(NpcData_HammerBros_02)[] = {
                 .detectSize = { 140, 40 },
             }
         },
+        .settings = &N(NpcSettings_HammerBros_Wander),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = HAMMER_BROS_DROPS,
         .animations = HAMMER_BROS_ANIMS,
     },
     HAMMER_BROS_HAMMER_HITBOX(NPC_HammerBros_02 + 1),

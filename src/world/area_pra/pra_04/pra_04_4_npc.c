@@ -1,14 +1,11 @@
 #include "pra_04.h"
 
-#include "world/common/enemy/complete/Swooper.inc.c"
+#include "world/common/enemy/Swooper.inc.c"
 
-StaticNpc N(NpcData_Swoopula) = {
+NpcData N(NpcData_Swoopula) = {
     .id = NPC_Swoopula,
-    .settings = &N(NpcSettings_Swoopula),
     .pos = { 50.0f, 130.0f, 75.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
-    .drops = SWOOPULA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,6 +18,9 @@ StaticNpc N(NpcData_Swoopula) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_Swoopula),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .drops = SWOOPULA_DROPS,
     .animations = SWOOPULA_ANIMS,
 };
 

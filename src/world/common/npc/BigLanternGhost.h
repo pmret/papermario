@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/BigLanternGhost.h"
 
-#define BIG_LANTERN_GHOST_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define BIG_LANTERN_GHOST_ANIMS \
 { \
     .idle   = ANIM_BigLanternGhost_Anim01, \

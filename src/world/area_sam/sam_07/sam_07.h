@@ -13,12 +13,12 @@
 #include "sprite/npc/LargePiranha.h"
 
 enum {
-	NPC_Gulpit               	= 0,
-	NPC_Gulpit_Hitbox			= 1,
-	NPC_FrostPiranha_01        	= 2,
-	NPC_FrostPiranha_01_Hitbox	= 3,
-	NPC_FrostPiranha_02        	= 4,
-	NPC_FrostPiranha_02_Hitbox	= 5,
+    NPC_Gulpit                  = 0,
+    NPC_Gulpit_Hitbox           = 1,
+    NPC_FrostPiranha_01         = 2,
+    NPC_FrostPiranha_01_Hitbox  = 3,
+    NPC_FrostPiranha_02         = 4,
+    NPC_FrostPiranha_02_Hitbox  = 5,
 };
 
 enum {

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(ShouldMovesAutoSucceed)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ShouldMovesAutoSucceed)) {
     script->varTable[0] = FALSE;
 
     if (is_ability_active(ABILITY_RIGHT_ON)) {

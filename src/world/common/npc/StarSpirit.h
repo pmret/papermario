@@ -9,13 +9,6 @@
 #include "sprite/npc/StarMan.h"
 #include "sprite/npc/Twink.h"
 
-#define ELDSTAR_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define ELDSTAR_ANIMS \
 { \
     .idle   = ANIM_WorldEldstar_Idle, \
@@ -34,13 +27,6 @@
     .anim_D = ANIM_WorldEldstar_Idle, \
     .anim_E = ANIM_WorldEldstar_Idle, \
     .anim_F = ANIM_WorldEldstar_Idle, \
-}
-
-#define MAMAR_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
 }
 
 #define MAMAR_ANIMS \
@@ -63,13 +49,6 @@
     .anim_F = ANIM_WorldMamar_Idle, \
 }
 
-#define SKOLAR_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define SKOLAR_ANIMS \
 { \
     .idle   = ANIM_WorldSkolar_Idle, \
@@ -88,13 +67,6 @@
     .anim_D = ANIM_WorldSkolar_Idle, \
     .anim_E = ANIM_WorldSkolar_Idle, \
     .anim_F = ANIM_WorldSkolar_Idle, \
-}
-
-#define MUSKULAR_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
 }
 
 #define MUSKULAR_ANIMS \
@@ -117,13 +89,6 @@
     .anim_F = ANIM_WorldMuskular_Idle, \
 }
 
-#define MISSTAR_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define MISSTAR_ANIMS \
 { \
     .idle   = ANIM_WorldMisstar_Idle, \
@@ -142,13 +107,6 @@
     .anim_D = ANIM_WorldMisstar_Idle, \
     .anim_E = ANIM_WorldMisstar_Idle, \
     .anim_F = ANIM_WorldMisstar_Idle, \
-}
-
-#define KLEVAR_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
 }
 
 #define KLEVAR_ANIMS \
@@ -171,13 +129,6 @@
     .anim_F = ANIM_WorldKlevar_Idle, \
 }
 
-#define KALMAR_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define KALMAR_ANIMS \
 { \
     .idle   = ANIM_WorldKalmar_Idle, \
@@ -198,13 +149,6 @@
     .anim_F = ANIM_WorldKalmar_Idle, \
 }
 
-#define STAR_MAN_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define STAR_MAN_ANIMS \
 { \
     .idle   = ANIM_StarMan_Idle, \
@@ -223,13 +167,6 @@
     .anim_D = ANIM_StarMan_Idle, \
     .anim_E = ANIM_StarMan_Idle, \
     .anim_F = ANIM_StarMan_Idle, \
-}
-
-#define STAR_KID_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
 }
 
 #define STAR_KID_ANIMS \

@@ -170,18 +170,21 @@ ApiStatus SetModelCustomGfx(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetModelTexVariant(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode treeIndex = evt_get_variable(script, *args++);
-    Bytecode var2 = evt_get_variable(script, *args++);
+    Bytecode modelID = evt_get_variable(script, *args++);
+    Bytecode variation = evt_get_variable(script, *args++);
+    s32 modelIndex = get_model_list_index_from_tree_index(modelID);
+    Model* model = get_model_from_list_index(modelIndex);
 
-    get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex))->textureVariation = var2;
+    model->textureVariation = variation;
     return ApiStatus_DONE2;
 }
 
 ApiStatus EnableTexPanning(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 treeIndex = evt_get_variable(script, *args++);
+    s32 modelID = evt_get_variable(script, *args++);
     s32 flag = evt_get_variable(script, *args++);
-    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
+    s32 modelIndex = get_model_list_index_from_tree_index(modelID);
+    Model* model = get_model_from_list_index(modelIndex);
 
     if (flag) {
         model->flags |= MODEL_FLAG_HAS_TEX_PANNER;
@@ -193,9 +196,9 @@ ApiStatus EnableTexPanning(Evt* script, s32 isInitialCall) {
 
 ApiStatus EnableModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 listIndex = get_model_list_index_from_tree_index(evt_get_variable(script, *args++));
+    s32 modelIndex = get_model_list_index_from_tree_index(evt_get_variable(script, *args++));
     Bytecode flag = evt_get_variable(script, *args++);
-    Model* model = get_model_from_list_index(listIndex);
+    Model* model = get_model_from_list_index(modelIndex);
 
     if (flag != 0) {
         model->flags &= ~MODEL_FLAG_ENABLED;

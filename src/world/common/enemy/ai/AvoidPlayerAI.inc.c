@@ -159,7 +159,7 @@ void N(AvoidPlayerAI_LosePlayer)(Evt* script, MobileAISettings* npcAISettings, E
     }
 }
 
-ApiStatus N(AvoidPlayerAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AvoidPlayerAI_Main)) {
     #ifdef _DEAD_H_
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     #else

@@ -6,7 +6,7 @@ extern EvtScript N(EVS_ToadHouse_SetDialogue);
 extern EvtScript N(EVS_ToadHouse_ReturnFromRest);
 extern EvtScript N(EVS_ToadHouse_GetInBed);
 
-EvtScript N(8024AC14) = {
+EvtScript N(EVS_ToadHouse_Unk1) = {
     EVT_CALL(EnableModel, LVar4, FALSE)
     EVT_CALL(EnableModel, LVar5, TRUE)
     EVT_CALL(RotateModel, LVar6, 0, 0, 0, 1)
@@ -15,7 +15,7 @@ EvtScript N(8024AC14) = {
     EVT_END
 };
 
-EvtScript N(8024AC8C) = {
+EvtScript N(EVS_ToadHouse_Unk2) = {
     EVT_SET(LVar9, LVar7)
     EVT_SET(LVar8, LVar6)
     EVT_SET(LVar7, LVar5)
@@ -66,7 +66,7 @@ EvtScript N(EVS_NpcInteract_ToadHouseKeeper) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
     EVT_CALL(N(ToadHouse_DisableStatusMenu))
     EVT_IF_NE(LVar4, 0)
-        EVT_EXEC(N(8024AC8C))
+        EVT_EXEC(N(EVS_ToadHouse_Unk2))
     EVT_END_IF
     EVT_CALL(N(ToadHouse_PutPartnerAway), LVarA)
     EVT_WAIT(20)
@@ -83,7 +83,7 @@ EvtScript N(EVS_NpcInteract_ToadHouseKeeper) = {
         EVT_CALL(FullyRestoreHPandFP)
         EVT_CALL(FullyRestoreSP)
         EVT_IF_NE(LVar4, 0)
-            EVT_EXEC(N(8024AC14))
+            EVT_EXEC(N(EVS_ToadHouse_Unk1))
         EVT_END_IF
         EVT_CALL(N(ToadHouse_GetPartnerBackOut), LVarA)
         EVT_WAIT(45)

@@ -1,14 +1,11 @@
 #include "kpa_113.h"
 
-#include "world/common/enemy/complete/SpikeTop.inc.c"
+#include "world/common/enemy/SpikeTop.inc.c"
 
-StaticNpc N(NpcData_BonyBeetle) = {
+NpcData N(NpcData_BonyBeetle) = {
     .id = NPC_BonyBeetle,
-    .settings = &N(NpcSettings_BonyBeetle),
     .pos = { 100.0f, 0.0f, 83.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = BONY_BEETLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,6 +18,9 @@ StaticNpc N(NpcData_BonyBeetle) = {
             .detectSize = { 260, 100 },
         }
     },
+    .settings = &N(NpcSettings_BonyBeetle),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = BONY_BEETLE_DROPS,
     .animations = BONY_BEETLE_ANIMS,
 };
 

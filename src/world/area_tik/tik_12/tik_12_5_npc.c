@@ -1,14 +1,11 @@
 #include "tik_12.h"
 
-#include "world/common/enemy/complete/SpikeTop.inc.c"
+#include "world/common/enemy/SpikeTop.inc.c"
 
-StaticNpc N(NpcData_BuzzyBeetle) = {
+NpcData N(NpcData_BuzzyBeetle) = {
     .id = NPC_BuzzyBeetle,
-    .settings = &N(NpcSettings_BuzzyBeetle),
     .pos = { -6.0f, -135.0f, 75.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = TIK_BUZZY_BEETLE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,6 +18,9 @@ StaticNpc N(NpcData_BuzzyBeetle) = {
             .detectSize = { 150 },
         }
     },
+    .settings = &N(NpcSettings_BuzzyBeetle),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = TIK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

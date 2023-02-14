@@ -197,26 +197,26 @@ EvtScript N(EVS_NpcInit_Sun_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Sun)[] = {
+NpcData N(NpcData_Sun)[] = {
     {
         .id = NPC_Sun_01,
-        .settings = &N(NpcSettings_Sun),
         .pos = { 0.0f, 250.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Sun_01),
-        .drops = SUN_DROPS,
+        .settings = &N(NpcSettings_Sun),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = SUN_ANIMS,
         .tattle = MSG_NpcTattle_TheSun,
     },
     {
         .id = NPC_Sun_02,
-        .settings = &N(NpcSettings_Sun),
         .pos = { 0.0f, 250.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000,
         .init = &N(EVS_NpcInit_Sun_02),
-        .drops = SUN_DROPS,
+        .settings = &N(NpcSettings_Sun),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000,
+        .drops = NO_DROPS,
         .animations = SUN_ANIMS,
         .tattle = MSG_NpcTattle_TheSun,
     },

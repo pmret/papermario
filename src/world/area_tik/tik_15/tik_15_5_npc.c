@@ -126,18 +126,14 @@ EvtScript N(EVS_NpcInit_RipCheato) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_RipCheato) = {
+NpcData N(NpcData_RipCheato) = {
     .id = NPC_RipCheato,
-    .settings = &N(NpcSettings_RipCheato),
     .pos = { -80.0f, -10.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_RipCheato),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_RipCheato),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_RipCheato_Idle,
         .walk   = ANIM_RipCheato_Idle,

@@ -195,253 +195,253 @@ EvtScript N(EVS_NpcInit_ToadGuard_02) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_YoshiLeader)[] = {
+AnimID N(ExtraAnims_YoshiLeader)[] = {
     ANIM_VillageLeader_Still,
     ANIM_VillageLeader_Idle,
     ANIM_VillageLeader_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Yoshi)[] = {
+AnimID N(ExtraAnims_Yoshi)[] = {
     ANIM_Yoshi_Green_Still,
     ANIM_Yoshi_Green_Idle,
     ANIM_Yoshi_Green_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_YoshiKid)[] = {
+AnimID N(ExtraAnims_YoshiKid)[] = {
     ANIM_YoshiKid_Green_Still,
     ANIM_YoshiKid_Green_Idle,
     ANIM_YoshiKid_Green_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Yoshis)[] = {
+NpcData N(NpcData_Yoshis)[] = {
     {
         .id = NPC_YoshiLeader,
-        .settings = &N(NpcSettings_Yoshi),
         .pos = { 70.0f, 0.0f, -30.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_LeaderYoshi),
-        .drops = YOSHI_DROPS,
+        .settings = &N(NpcSettings_Yoshi),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_LEADER_ANIMS,
         .extraAnimations = N(ExtraAnims_YoshiLeader),
         .tattle = MSG_NpcTattle_VillageLeader,
     },
     {
         .id = NPC_Yoshi,
-        .settings = &N(NpcSettings_Yoshi),
         .pos = { 70.0f, 0.0f, 400.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Yoshi),
-        .drops = YOSHI_DROPS,
+        .settings = &N(NpcSettings_Yoshi),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_GREEN_ANIMS,
         .extraAnimations = N(ExtraAnims_Yoshi),
         .tattle = MSG_NpcTattle_GenericYoshi,
     },
     {
         .id = NPC_YoshiKid,
-        .settings = &N(NpcSettings_YoshiKid),
         .pos = { 160.0f, 0.0f, 540.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_YoshiKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_YoshiKid),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = YOSHI_KID_GREEN_ANIMS,
         .extraAnimations = N(ExtraAnims_YoshiKid),
         .tattle = MSG_NpcTattle_GreenYoshiKid,
     },
 };
 
-s32 N(ExtraAnims_MayorPenguin)[] = {
+AnimID N(ExtraAnims_MayorPenguin)[] = {
     ANIM_MayorPenguin_Still,
     ANIM_MayorPenguin_Idle,
     ANIM_MayorPenguin_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_MayorPenguinWife)[] = {
+AnimID N(ExtraAnims_MayorPenguinWife)[] = {
     ANIM_MayorPenguinWife_Still,
     ANIM_MayorPenguinWife_Idle,
     ANIM_MayorPenguinWife_Laugh,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Penguin)[] = {
+AnimID N(ExtraAnims_Penguin)[] = {
     ANIM_Penguin_Still,
     ANIM_Penguin_Idle,
     ANIM_Penguin_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Penguins)[] = {
+NpcData N(NpcData_Penguins)[] = {
     {
         .id = NPC_MayorPenguin,
-        .settings = &N(NpcSettings_Penguin),
         .pos = { 150.0f, 0.0f, 105.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_MayorPenguin),
-        .drops = PENGUIN_DROPS,
+        .settings = &N(NpcSettings_Penguin),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = MAYOR_PENGUIN_ANIMS,
         .extraAnimations = N(ExtraAnims_MayorPenguin),
         .tattle = MSG_NpcTattle_MayorPenguin,
     },
     {
         .id = NPC_MayorPenguinWife,
-        .settings = &N(NpcSettings_Penguin),
         .pos = { 200.0f, 0.0f, 105.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_MayorPenguinWife),
-        .drops = PENGUIN_DROPS,
+        .settings = &N(NpcSettings_Penguin),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = MAYOR_PENGUIN_WIFE_ANIMS,
         .extraAnimations = N(ExtraAnims_MayorPenguinWife),
         .tattle = MSG_NpcTattle_MayorPenguinWife,
     },
     {
         .id = NPC_Penguin_01,
-        .settings = &N(NpcSettings_Penguin),
         .pos = { 115.0f, 0.0f, 540.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Penguin_01),
-        .drops = PENGUIN_DROPS,
+        .settings = &N(NpcSettings_Penguin),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .extraAnimations = N(ExtraAnims_Penguin),
     },
     {
         .id = NPC_Penguin_02,
-        .settings = &N(NpcSettings_Penguin),
         .pos = { 208.0f, 0.0f, 540.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Penguin_02),
-        .drops = PENGUIN_DROPS,
+        .settings = &N(NpcSettings_Penguin),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .extraAnimations = N(ExtraAnims_Penguin),
     },
 };
 
-s32 N(ExtraAnims_Moustafa)[] = {
+AnimID N(ExtraAnims_Moustafa)[] = {
     ANIM_Moustafa_Still,
     ANIM_Moustafa_Idle,
     ANIM_Moustafa_Shout,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Mouser)[] = {
+AnimID N(ExtraAnims_Mouser)[] = {
     ANIM_Mouser_Blue_Still,
     ANIM_Mouser_Blue_Idle,
     ANIM_Mouser_Blue_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Mousers)[] = {
+NpcData N(NpcData_Mousers)[] = {
     {
         .id = NPC_Moustafa,
-        .settings = &N(NpcSettings_Mouser),
         .pos = { -60.0f, 0.0f, -20.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Moustafa),
-        .drops = MOUSER_DROPS,
+        .settings = &N(NpcSettings_Mouser),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = MOUSTAFA_ANIMS,
         .extraAnimations = N(ExtraAnims_Moustafa),
         .tattle = MSG_NpcTattle_Moustafa,
     },
     {
         .id = NPC_Mouser,
-        .settings = &N(NpcSettings_Mouser),
         .pos = { -100.0f, 0.0f, -50.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Mouser),
-        .drops = MOUSER_DROPS,
+        .settings = &N(NpcSettings_Mouser),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = MOUSER_PURPLE_ANIMS,
         .extraAnimations = N(ExtraAnims_Mouser),
     },
 };
 
-s32 N(ExtraAnims_Boos)[] = {
+AnimID N(ExtraAnims_Boos)[] = {
     ANIM_Boo_Still,
     ANIM_Boo_Idle,
     ANIM_Boo_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Boos)[] = {
+NpcData N(NpcData_Boos)[] = {
     {
         .id = NPC_Boo_01,
-        .settings = &N(NpcSettings_Boo),
         .pos = { 270.0f, 20.0f, 175.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS,
         .init = &N(EVS_NpcInit_Boo_01),
-        .drops = BOO_DROPS,
+        .settings = &N(NpcSettings_Boo),
+        .flags = COMMON_PASSIVE_FLAGS,
+        .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
         .extraAnimations = N(ExtraAnims_Boos),
     },
     {
         .id = NPC_Boo_02,
-        .settings = &N(NpcSettings_Boo),
         .pos = { 320.0f, 20.0f, 200.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS,
         .init = &N(EVS_NpcInit_Boo_02),
-        .drops = BOO_DROPS,
+        .settings = &N(NpcSettings_Boo),
+        .flags = COMMON_PASSIVE_FLAGS,
+        .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .extraAnimations = N(ExtraAnims_Boos),
     },
 };
 
-s32 N(ExtraAnims_Toad)[] = {
+AnimID N(ExtraAnims_Toad)[] = {
     ANIM_Toad_Red_Still,
     ANIM_Toad_Red_Idle,
     ANIM_Toad_Red_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_ToadGuard)[] = {
+AnimID N(ExtraAnims_ToadGuard)[] = {
     ANIM_ToadGuard_Red_Still,
     ANIM_ToadGuard_Red_Idle,
     ANIM_ToadGuard_Red_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Toads)[] = {
+NpcData N(NpcData_Toads)[] = {
     {
         .id = NPC_Toad,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -25.0f, 0.0f, 200.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Toad),
-        .drops = TOAD_DROPS,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
         .extraAnimations = N(ExtraAnims_Toad),
     },
     {
         .id = NPC_ToadGuard_01,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -50.0f, 0.0f, -200.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_ToadGuard_01),
-        .drops = TOAD_DROPS,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = TOAD_GUARD_RED_ANIMS,
         .extraAnimations = N(ExtraAnims_ToadGuard),
     },
     {
         .id = NPC_ToadGuard_02,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 560.0f, 20.0f, 100.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_ToadGuard_02),
-        .drops = TOAD_DROPS,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = TOAD_GUARD_YELLOW_ANIMS,
         .extraAnimations = N(ExtraAnims_ToadGuard),
     },

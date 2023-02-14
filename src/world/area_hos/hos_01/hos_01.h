@@ -12,24 +12,24 @@
 #include "sprite/npc/WorldGoombario.h"
 
 enum {
-	NPC_Eldstar                 = 0,
-	NPC_Mamar                   = 1,
-	NPC_Skolar                  = 2,
-	NPC_Muskular                = 3,
-	NPC_Misstar                 = 4,
-	NPC_Klevar                  = 5,
-	NPC_Kalmar                  = 6,
+    NPC_Eldstar                 = 0,
+    NPC_Mamar                   = 1,
+    NPC_Skolar                  = 2,
+    NPC_Muskular                = 3,
+    NPC_Misstar                 = 4,
+    NPC_Klevar                  = 5,
+    NPC_Kalmar                  = 6,
 };
 
 enum {
-    MV_AlphaAmt_Eldstar	= MapVar(0),
-    MV_AlphaAmt_Others	= MapVar(1),
-    MV_StarBeamFXPtr	= MapVar(10),
-    MV_StarBeamState	= MapVar(11),
+    MV_AlphaAmt_Eldstar = MapVar(0),
+    MV_AlphaAmt_Others  = MapVar(1),
+    MV_StarBeamFXPtr    = MapVar(10),
+    MV_StarBeamState    = MapVar(11),
 };
 
 enum {
-	MF_SpiritsGone		= MapFlag(0),
+    MF_SpiritsGone      = MapFlag(0),
 };
 
 #define NAMESPACE hos_01

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(StartRumbleWithParams)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StartRumbleWithParams)) {
     Bytecode* args = script->ptrReadPos;
 
     start_rumble(evt_get_variable(script, *args++), evt_get_variable(script, *args++));

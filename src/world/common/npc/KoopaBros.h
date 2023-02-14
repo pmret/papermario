@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/KoopaBros.h"
 
-#define KOOPA_BROS_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define BLACK_KOOPA_BROS_ANIMS \
 { \
     .idle   = ANIM_KoopaBros_Black_Anim04, \

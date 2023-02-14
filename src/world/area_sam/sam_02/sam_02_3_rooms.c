@@ -125,40 +125,40 @@ s32 N(InteriorNPCs_ToadHouse)[] = {
 EvtScript N(EVS_SetupRooms) = {
     // left house
     EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 0)
-	EVT_CALL(CreateMapRoom,
-		PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
-		EVT_PTR(N(EVS_SetDoorRot_LeftHouse)),
-		EVT_PTR(N(EVS_SetWallRot_LeftHouse)),
-		EVT_PTR(N(EVS_DropDoor_LeftHouse)),
-		EVT_PTR(N(EVS_RoomListener_LeftHouse)),
-		COLLIDER_c_doa,
-		COLLIDER_o470,
-		MODEL_min,
-		EVT_PTR(N(InteriorNPCs_LeftHouse)))
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
+        EVT_PTR(N(EVS_SetDoorRot_LeftHouse)),
+        EVT_PTR(N(EVS_SetWallRot_LeftHouse)),
+        EVT_PTR(N(EVS_DropDoor_LeftHouse)),
+        EVT_PTR(N(EVS_RoomListener_LeftHouse)),
+        COLLIDER_c_doa,
+        COLLIDER_o470,
+        MODEL_min,
+        EVT_PTR(N(InteriorNPCs_LeftHouse)))
     // shop
     EVT_CALL(SetGroupEnabled, MODEL_t_naiso, 0)
-	EVT_CALL(CreateMapRoom,
-		PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
-		EVT_PTR(N(EVS_SetDoorRot_Shop)),
-		EVT_PTR(N(EVS_SetWallRot_Shop)),
-		NULL,
-		EVT_PTR(N(EVS_RoomListener_Shop)),
-		COLLIDER_o382,
-		COLLIDER_o471,
-		MODEL_ten,
-		EVT_PTR(N(InteriorNPCs_Shop)))
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
+        EVT_PTR(N(EVS_SetDoorRot_Shop)),
+        EVT_PTR(N(EVS_SetWallRot_Shop)),
+        NULL,
+        EVT_PTR(N(EVS_RoomListener_Shop)),
+        COLLIDER_o382,
+        COLLIDER_o471,
+        MODEL_ten,
+        EVT_PTR(N(InteriorNPCs_Shop)))
     // toad house
     EVT_CALL(SetGroupEnabled, MODEL_k_naisou, 0)
-	EVT_CALL(CreateMapRoom,
-		PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
-		EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
-		EVT_PTR(N(EVS_SetWallRot_ToadHouse)),
-		NULL,
-		EVT_PTR(N(EVS_RoomListener_ToadHouse)),
-		COLLIDER_k_doa,
-		COLLIDER_o472,
-		MODEL_kino,
-		EVT_PTR(N(InteriorNPCs_ToadHouse)))
+    EVT_CALL(CreateMapRoom,
+        PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
+        EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
+        EVT_PTR(N(EVS_SetWallRot_ToadHouse)),
+        NULL,
+        EVT_PTR(N(EVS_RoomListener_ToadHouse)),
+        COLLIDER_k_doa,
+        COLLIDER_o472,
+        MODEL_kino,
+        EVT_PTR(N(InteriorNPCs_ToadHouse)))
     EVT_RETURN
     EVT_END
 };

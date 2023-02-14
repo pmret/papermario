@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/Bootler.h"
 
-#define BOOTLER_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define BOOTLER_ANIMS \
 { \
     .idle   = ANIM_Bootler_Idle, \

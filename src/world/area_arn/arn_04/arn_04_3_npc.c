@@ -1,16 +1,13 @@
 #include "arn_04.h"
 
-#include "world/common/enemy/complete/HyperGoomba_Patrol.inc.c"
-#include "world/common/enemy/complete/HyperParagoomba.inc.c"
-#include "world/common/enemy/complete/HyperCleft.inc.c"
+#include "world/common/enemy/HyperGoomba_Patrol.inc.c"
+#include "world/common/enemy/HyperParagoomba.inc.c"
+#include "world/common/enemy/HyperCleft.inc.c"
 
-StaticNpc N(NpcData_HyperParagoomba) = {
+NpcData N(NpcData_HyperParagoomba) = {
     .id = NPC_HyperParagoomba,
-    .settings = &N(NpcSettings_HyperParagoomba),
     .pos = { -350.0f, 180.0f, 150.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = HYPER_PARAGOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -23,17 +20,17 @@ StaticNpc N(NpcData_HyperParagoomba) = {
             .detectSize = { 150 },
         }
     },
+    .settings = &N(NpcSettings_HyperParagoomba),
+    .flags = ENEMY_FLAG_400,
+    .drops = HYPER_PARAGOOMBA_DROPS,
     .animations = HYPER_PARAGOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_HyperGoomba) = {
+NpcData N(NpcData_HyperGoomba) = {
     .id = NPC_HyperGoomba,
-    .settings = &N(NpcSettings_HyperGoomba_Patrol),
     .pos = { 360.0f, 208.0f, 100.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = HYPER_GOOMBA_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -46,17 +43,17 @@ StaticNpc N(NpcData_HyperGoomba) = {
             .detectSize = { 150 },
         }
     },
+    .settings = &N(NpcSettings_HyperGoomba_Patrol),
+    .flags = ENEMY_FLAG_400,
+    .drops = HYPER_GOOMBA_DROPS,
     .animations = HYPER_GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_HyperCleft_01) = {
+NpcData N(NpcData_HyperCleft_01) = {
     .id = NPC_HyperCleft_01,
-    .settings = &N(NpcSettings_HyperCleft),
     .pos = { 150.0f, 177.0f, 160.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = HYPER_CLEFT_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -69,17 +66,17 @@ StaticNpc N(NpcData_HyperCleft_01) = {
             .detectSize = { 150 },
         }
     },
+    .settings = &N(NpcSettings_HyperCleft),
+    .flags = ENEMY_FLAG_400,
+    .drops = HYPER_CLEFT_DROPS,
     .animations = HYPER_CLEFT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_HyperCleft_02) = {
+NpcData N(NpcData_HyperCleft_02) = {
     .id = NPC_HyperCleft_02,
-    .settings = &N(NpcSettings_HyperCleft),
     .pos = { 550.0f, 230.0f, 125.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400,
-    .drops = HYPER_CLEFT_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -92,6 +89,9 @@ StaticNpc N(NpcData_HyperCleft_02) = {
             .detectSize = { 150 },
         }
     },
+    .settings = &N(NpcSettings_HyperCleft),
+    .flags = ENEMY_FLAG_400,
+    .drops = HYPER_CLEFT_DROPS,
     .animations = HYPER_CLEFT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

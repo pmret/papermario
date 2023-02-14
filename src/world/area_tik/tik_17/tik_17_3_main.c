@@ -3,7 +3,6 @@
 #include "world/common/entity/Pipe.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_GotoMap_sam_02_2) = {
     EVT_IF_EQ(GF_StartedChapter7, FALSE)

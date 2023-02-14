@@ -17,7 +17,7 @@ void N(StoneChompAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyD
     npc->jumpScale = 1.5f;
 }
 
-ApiStatus N(StoneChompAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StoneChompAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);

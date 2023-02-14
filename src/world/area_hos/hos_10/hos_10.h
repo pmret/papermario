@@ -12,20 +12,20 @@
 #include "sprite/npc/Twink.h"
 
 enum {
-	NPC_Peach		= 0,
-	NPC_Twink      	= 1,
-	NPC_Eldstar    	= 2,
-	NPC_Mamar      	= 3,
-	NPC_Skolar     	= 4,
-	NPC_Muskular   	= 5,
-	NPC_Misstar    	= 6,
-	NPC_Klevar     	= 7,
-	NPC_Kalmar     	= 8,
+    NPC_Peach       = 0,
+    NPC_Twink       = 1,
+    NPC_Eldstar     = 2,
+    NPC_Mamar       = 3,
+    NPC_Skolar      = 4,
+    NPC_Muskular    = 5,
+    NPC_Misstar     = 6,
+    NPC_Klevar      = 7,
+    NPC_Kalmar      = 8,
 };
 
 enum {
-	MV_BubbleFXPtr	= MapVar(0),
-	MV_Unk_01	= MapVar(1),
+    MV_BubbleFXPtr  = MapVar(0),
+    MV_Unk_01   = MapVar(1),
 };
 
 #define NAMESPACE hos_10

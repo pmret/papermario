@@ -60,7 +60,7 @@ void reset_player_status(void) {
     playerStatus->alpha1 = 255;
     playerStatus->alpha2 = 255;
     gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_8;
-    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_HAS_INGREDIENT;
+    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_DEPRESSED;
 
     one = 1.0f;
 
@@ -76,7 +76,7 @@ void reset_player_status(void) {
     } else {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
-        gGameStatusPtr->peachCookingIngredient = 0;
+        gGameStatusPtr->peachBakingIngredient = 0;
     }
 
     // TODO required to match

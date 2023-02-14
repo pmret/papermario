@@ -1,6 +1,6 @@
 #include "omo_09.h"
 
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
 
 MobileAISettings N(AISettings_ShyGuy_Wander_NoReaction) = {
     .moveSpeed = 2.0f,
@@ -33,11 +33,11 @@ NpcSettings N(NpcSettings_ShyGuy_Wander_NoReaction) = {
     .actionFlags = 0,
 };
 
-#include "world/common/enemy/complete/ShyGuy_Patrol.inc.c"
-#include "world/common/enemy/complete/SpyGuy.inc.c"
-#include "world/common/enemy/complete/Koopatrol_Stationary.inc.c"
-#include "world/common/enemy/complete/Pokey.inc.c"
-#include "world/common/enemy/complete/Kammy.inc.c"
+#include "world/common/enemy/ShyGuy_Patrol.inc.c"
+#include "world/common/enemy/SpyGuy.inc.c"
+#include "world/common/enemy/Koopatrol_Stationary.inc.c"
+#include "world/common/enemy/Pokey.inc.c"
+#include "world/common/enemy/Kammy_Flying.inc.c"
 
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 #include "world/common/todo/UnsetCamera0Flag1000.inc.c"
@@ -209,36 +209,32 @@ EvtScript N(EVS_NpcInit_ShyGuy_Jackpot) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Pokey) = {
+NpcData N(NpcData_Pokey) = {
     .id = NPC_Pokey,
-    .settings = &N(NpcSettings_Pokey),
     .pos = { 1900.0f, 150.0f, -30.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Pokey),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Pokey),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = POKEY_ANIMS,
 };
 
-StaticNpc N(NpcData_Koopatrol) = {
+NpcData N(NpcData_Koopatrol) = {
     .id = NPC_Koopatrol,
-    .settings = &N(NpcSettings_Koopatrol_Stationary),
     .pos = { 1900.0f, 150.0f, -30.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Koopatrol),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Koopatrol_Stationary),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_01) = {
+NpcData N(NpcData_ShyGuy_01) = {
     .id = NPC_ShyGuy_Jackpot1,
-    .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
-    .drops = NPC_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -251,17 +247,17 @@ StaticNpc N(NpcData_ShyGuy_01) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
+    .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_02) = {
+NpcData N(NpcData_ShyGuy_02) = {
     .id = NPC_ShyGuy_Jackpot2,
-    .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
-    .drops = NPC_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -274,17 +270,17 @@ StaticNpc N(NpcData_ShyGuy_02) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
+    .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_03) = {
+NpcData N(NpcData_ShyGuy_03) = {
     .id = NPC_ShyGuy_Jackpot3,
-    .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
-    .drops = NPC_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -297,17 +293,17 @@ StaticNpc N(NpcData_ShyGuy_03) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
+    .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_04) = {
+NpcData N(NpcData_ShyGuy_04) = {
     .id = NPC_ShyGuy_Jackpot4,
-    .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
-    .drops = NPC_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -320,17 +316,17 @@ StaticNpc N(NpcData_ShyGuy_04) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
+    .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-StaticNpc N(NpcData_ShyGuy_05) = {
+NpcData N(NpcData_ShyGuy_05) = {
     .id = NPC_ShyGuy_Jackpot5,
-    .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
-    .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
-    .drops = NPC_NO_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -343,27 +339,31 @@ StaticNpc N(NpcData_ShyGuy_05) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
+    .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
+    .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
 
-s32 N(ExtraAnims_Kammy)[] = {
+AnimID N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim0E,
     ANIM_WorldKammy_Anim0F,
     ANIM_WorldKammy_Anim10,
     ANIM_WorldKammy_Anim13,
     ANIM_WorldKammy_Anim15,
     ANIM_WorldKammy_Anim16,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Kammy) = {
+NpcData N(NpcData_Kammy) = {
     .id = NPC_Kammy,
-    .settings = &N(NpcSettings_Kammy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Kammy),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Kammy_Flying),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),
 };
@@ -383,14 +383,10 @@ EvtScript N(EVS_ShyGuy_Thief) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_ShyGuy_Thief) = {
+NpcData N(NpcData_ShyGuy_Thief) = {
     .id = NPC_ShyGuy_Thief,
-    .settings = &N(NpcSettings_ShyGuy_Patrol),
     .pos = { 155.0f, 10.0f, -96.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .init = &N(EVS_ShyGuy_Thief),
-    .drops = SHY_GUY_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -405,19 +401,20 @@ StaticNpc N(NpcData_ShyGuy_Thief) = {
             .detectSize = { 105, 140 },
         }
     },
+    .init = &N(EVS_ShyGuy_Thief),
+    .settings = &N(NpcSettings_ShyGuy_Patrol),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = SHY_GUY_DROPS,
     .animations = YELLOW_SHY_GUY_ANIMS,
-    .aiDetectFlags = AI_DETECT_SIGHT,
     .aiFlags = ENEMY_AI_FLAG_1,
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_SpyGuy)[] = {
+NpcData N(NpcData_SpyGuy)[] = {
     {
         .id = NPC_SpyGuy,
-        .settings = &N(NpcSettings_SpyGuy),
         .pos = { 850.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = SPY_GUY_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -430,6 +427,9 @@ StaticNpc N(NpcData_SpyGuy)[] = {
                 .detectSize = { 200 },
             }
         },
+        .settings = &N(NpcSettings_SpyGuy),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = SPY_GUY_DROPS,
         .animations = SPY_GUY_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },

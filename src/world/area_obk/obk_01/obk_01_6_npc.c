@@ -188,47 +188,43 @@ EvtScript N(EVS_NpcInit_Franky) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_JumpScareBoo) = {
+NpcData N(NpcData_JumpScareBoo) = {
     .id = NPC_JumpScareBoo,
-    .settings = &N(NpcSettings_Boo),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
+    .settings = &N(NpcSettings_Boo),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-    .drops = BOO_DROPS,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_TrafficBoo1) = {
+NpcData N(NpcData_TrafficBoo1) = {
     .id = NPC_TrafficBoo1,
-    .settings = &N(NpcSettings_Boo),
     .pos = { 523.0f, -139.0f, 193.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_TrafficBoo1),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_TrafficBoo2) = {
+NpcData N(NpcData_TrafficBoo2) = {
     .id = NPC_TrafficBoo2,
-    .settings = &N(NpcSettings_Boo),
     .pos = { 473.0f, -122.0f, 247.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_TrafficBoo2),
-    .drops = BOO_DROPS,
+    .settings = &N(NpcSettings_Boo),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = NORMAL_BOO_ANIMS,
 };
 
-StaticNpc N(NpcData_Boos)[] = {
+NpcData N(NpcData_Boos)[] = {
     {
         .id = NPC_UpstairsBoo,
-        .settings = &N(NpcSettings_Boo_Wander),
         .pos = { 422.0f, -200.0f, 112.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_UpstairsBoo),
-        .drops = BOO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -241,17 +237,17 @@ StaticNpc N(NpcData_Boos)[] = {
                 .detectSize = { 30 },
             }
         },
+        .init = &N(EVS_NpcInit_UpstairsBoo),
+        .settings = &N(NpcSettings_Boo_Wander),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
         .tattle = MSG_NpcTattle_OBK_BooA,
     },
     {
         .id = NPC_Franky,
-        .settings = &N(NpcSettings_Boo_Wander),
         .pos = { 397.0f, -410.0f, 352.0f },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800,
-        .init = &N(EVS_NpcInit_Franky),
-        .drops = BOO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -264,6 +260,10 @@ StaticNpc N(NpcData_Boos)[] = {
                 .detectSize = { 80 },
             }
         },
+        .init = &N(EVS_NpcInit_Franky),
+        .settings = &N(NpcSettings_Boo_Wander),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = NORMAL_BOO_ANIMS,
         .tattle = MSG_NpcTattle_OBK_BooB,
     },

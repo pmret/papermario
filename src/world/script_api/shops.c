@@ -805,11 +805,11 @@ void draw_shop_items(void) {
     ShopItemEntity* shopItemEntities;
 
     if (shop->flags & SHOP_FLAG_1) {
-        set_window_update(WINDOW_ID_10, (s32) basic_window_update);
-        set_window_update(WINDOW_ID_11, (s32) basic_window_update);
+        set_window_update(WINDOW_ID_ITEM_INFO_NAME, (s32) basic_window_update);
+        set_window_update(WINDOW_ID_ITEM_INFO_DESC, (s32) basic_window_update);
     } else {
-        set_window_update(WINDOW_ID_10, (s32) basic_hidden_window_update);
-        set_window_update(WINDOW_ID_11, (s32) basic_hidden_window_update);
+        set_window_update(WINDOW_ID_ITEM_INFO_NAME, (s32) basic_hidden_window_update);
+        set_window_update(WINDOW_ID_ITEM_INFO_DESC, (s32) basic_hidden_window_update);
     }
 
     if (shop->flags & SHOP_FLAG_1) {

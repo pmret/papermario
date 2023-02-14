@@ -1,7 +1,7 @@
 #include "common.h"
 #include "model.h"
 
-ApiStatus N(UnkFunc56)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFunc56)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(evt_get_variable(script, *args++)));

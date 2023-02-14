@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 
-ApiStatus N(UnkFloatFunc005)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFloatFunc005)) {
     Bytecode* args = script->ptrReadPos;
     #ifdef AVOID_UB
     f32 vt0 = 0.0f;

@@ -197,7 +197,7 @@ void firework_rocket_update(EffectInstance* effect) {
         data->rocketZ[i] += data->rocketVelocityZ[i];
         data->rocketVelocityY[i] -= 0.15;
         if (lifeTime >= 27) {
-            data->rocketY[i] = -1000.0f;
+            data->rocketY[i] = NPC_DISPOSE_POS_Y;
         }
     }
 

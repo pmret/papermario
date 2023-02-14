@@ -1,8 +1,8 @@
 #include "flo_08.h"
 
-#include "world/common/enemy/complete/AmazyDayzee.inc.c"
+#include "world/common/enemy/AmazyDayzee.inc.c"
 #include "world/common/npc/GateFlower.inc.c"
-#include "world/common/enemy/complete/CrazyDayzee.inc.c"
+#include "world/common/enemy/CrazyDayzee.inc.c"
 
 #include "world/common/complete/NormalItemChoice.inc.c"
 
@@ -157,25 +157,22 @@ EvtScript N(EVS_NpcInit_GateFlower) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GateFlower) = {
+NpcData N(NpcData_GateFlower) = {
     .id = NPC_GateFlower,
-    .settings = &N(NpcSettings_GateFlower),
     .pos = { -695.0f, 0.0f, -30.0f },
     .yaw = 270,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_GateFlower),
-    .drops = GATE_FLOWER_DROPS,
+    .settings = &N(NpcSettings_GateFlower),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = GATE_FLOWER_YELLOW_ANIMS,
     .tattle = MSG_NpcTattle_YellowGateFlower,
 };
 
-StaticNpc N(NpcData_Dayzee_01) = {
+NpcData N(NpcData_Dayzee_01) = {
     .id = NPC_Dayzee_01,
-    .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { 205.0f, 0.0f, -80.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = CRAZY_DAYZEE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -188,17 +185,17 @@ StaticNpc N(NpcData_Dayzee_01) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_CrazyDayzee),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_02) = {
+NpcData N(NpcData_Dayzee_02) = {
     .id = NPC_Dayzee_02,
-    .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { 275.0f, 0.0f, -115.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = CRAZY_DAYZEE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -211,17 +208,17 @@ StaticNpc N(NpcData_Dayzee_02) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_CrazyDayzee),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_03) = {
+NpcData N(NpcData_Dayzee_03) = {
     .id = NPC_Dayzee_03,
-    .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { -230.0f, 60.0f, -110.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = CRAZY_DAYZEE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -234,17 +231,17 @@ StaticNpc N(NpcData_Dayzee_03) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_CrazyDayzee),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_04) = {
+NpcData N(NpcData_Dayzee_04) = {
     .id = NPC_Dayzee_04,
-    .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { -330.0f, 60.0f, -110.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = CRAZY_DAYZEE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -257,17 +254,17 @@ StaticNpc N(NpcData_Dayzee_04) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_CrazyDayzee),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_05) = {
+NpcData N(NpcData_Dayzee_05) = {
     .id = NPC_Dayzee_05,
-    .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { -430.0f, 60.0f, -110.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = CRAZY_DAYZEE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -280,17 +277,17 @@ StaticNpc N(NpcData_Dayzee_05) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_CrazyDayzee),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_06) = {
+NpcData N(NpcData_Dayzee_06) = {
     .id = NPC_Dayzee_06,
-    .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { -530.0f, 60.0f, -110.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = CRAZY_DAYZEE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -303,17 +300,17 @@ StaticNpc N(NpcData_Dayzee_06) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_CrazyDayzee),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_Dayzee_07) = {
+NpcData N(NpcData_Dayzee_07) = {
     .id = NPC_Dayzee_07,
-    .settings = &N(NpcSettings_CrazyDayzee),
     .pos = { -630.0f, 60.0f, -110.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = CRAZY_DAYZEE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -326,6 +323,9 @@ StaticNpc N(NpcData_Dayzee_07) = {
             .detectSize = { 150 },
         }
     },
+    .settings = &N(NpcSettings_CrazyDayzee),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
@@ -351,14 +351,10 @@ EvtScript N(EVS_NpcInit_AmazyDayzee) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_AmazyDayzee) = {
+NpcData N(NpcData_AmazyDayzee) = {
     .id = NPC_AmazyDayzee,
-    .settings = &N(NpcSettings_AmazyDayzee),
     .pos = { 240.0f, 0.0f, -90.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .init = &N(EVS_NpcInit_AmazyDayzee),
-    .drops = AMAZY_DAYZEE_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -371,6 +367,10 @@ StaticNpc N(NpcData_AmazyDayzee) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_AmazyDayzee),
+    .settings = &N(NpcSettings_AmazyDayzee),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = AMAZY_DAYZEE_DROPS,
     .animations = AMAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

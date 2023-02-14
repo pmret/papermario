@@ -2,6 +2,7 @@
 
 #include "../common/SmokeTexPanners.inc.c"
 
+#define STAR_SPIRIT_DATA_VAR MV_Unk_01
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"
 
 EvtScript N(EVS_TrySpawningStarCard) = {

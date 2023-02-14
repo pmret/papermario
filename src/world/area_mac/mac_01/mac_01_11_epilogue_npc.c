@@ -160,119 +160,115 @@ EvtScript N(EVS_NpcInit_Composer) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Kolorado)[] = {
+AnimID N(ExtraAnims_Kolorado)[] = {
     ANIM_Kolorado_Still,
     ANIM_Kolorado_Idle,
     ANIM_Kolorado_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_KoloradoWife)[] = {
+AnimID N(ExtraAnims_KoloradoWife)[] = {
     ANIM_KoloradoWife_Still,
     ANIM_KoloradoWife_Idle,
     ANIM_KoloradoWife_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_KoopaKoot)[] = {
+AnimID N(ExtraAnims_KoopaKoot)[] = {
     ANIM_KoopaKoot_Still,
     ANIM_KoopaKoot_Idle,
     ANIM_KoopaKoot_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Koopa)[] = {
+AnimID N(ExtraAnims_Koopa)[] = {
     ANIM_Koopa_Still,
     ANIM_Koopa_Idle,
     ANIM_Koopa_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Bobomb)[] = {
+AnimID N(ExtraAnims_Bobomb)[] = {
     ANIM_WorldBobomb_Green_Still,
     ANIM_WorldBobomb_Green_Idle,
     ANIM_WorldBobomb_Green_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Koopas)[] = {
+NpcData N(NpcData_Koopas)[] = {
     {
         .id = NPC_Kolorado,
-        .settings = &N(NpcSettings_Kolorado),
         .pos = { 60.0f, 0.0f, -120.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Kolorado),
-        .drops = KOLORADO_DROPS,
+        .settings = &N(NpcSettings_Kolorado),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .extraAnimations = N(ExtraAnims_Kolorado),
     },
     {
         .id = NPC_KoloradoWife,
-        .settings = &N(NpcSettings_KoloradoWife),
         .pos = { 100.0f, 0.0f, -110.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_KoloradoWife),
-        .drops = KOLORADO_WIFE_DROPS,
+        .settings = &N(NpcSettings_KoloradoWife),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = KOLORADO_WIFE_ANIMS,
         .extraAnimations = N(ExtraAnims_KoloradoWife),
     },
     {
         .id = NPC_KoopaKoot,
-        .settings = &N(NpcSettings_KoopaKoot),
         .pos = { -330.0f, 0.0f, 330.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_KoopaKoot),
-        .drops = KOOPA_KOOT_DROPS,
+        .settings = &N(NpcSettings_KoopaKoot),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = KOOPA_KOOT_ANIMS,
         .extraAnimations = N(ExtraAnims_KoopaKoot),
     },
     {
         .id = NPC_Koopa,
-        .settings = &N(NpcSettings_Koopa),
         .pos = { 300.0f, 20.0f, -100.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Koopa),
-        .drops = KOOPA_DROPS,
+        .settings = &N(NpcSettings_Koopa),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_Koopa),
     },
     {
         .id = NPC_Bobomb,
-        .settings = &N(NpcSettings_Bobomb),
         .pos = { 252.0f, 20.0f, -100.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Bobomb),
-        .drops = BOBOMB_DROPS,
+        .settings = &N(NpcSettings_Bobomb),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = BOBOMB_BLUE_ANIMS,
         .extraAnimations = N(ExtraAnims_Bobomb),
     },
 };
 
-s32 N(ExtraAnims_Rowf)[] = {
+AnimID N(ExtraAnims_Rowf)[] = {
     ANIM_Rowf_Still,
     ANIM_Rowf_Idle,
     ANIM_Rowf_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_RowfAndRhuff)[] = {
+NpcData N(NpcData_RowfAndRhuff)[] = {
     {
         .id = NPC_Rowf,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -213.0f, -54.0f, 256.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rowf),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Rowf_Idle,
         },
@@ -281,16 +277,12 @@ StaticNpc N(NpcData_RowfAndRhuff)[] = {
     },
     {
         .id = NPC_Rhuff,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { -250.0f, 0.0f, 263.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Rhuff),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Dummy),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Rowf_Idle,
         },
@@ -299,66 +291,62 @@ StaticNpc N(NpcData_RowfAndRhuff)[] = {
     },
 };
 
-s32 N(ExtraAnims_Dryite)[] = {
+AnimID N(ExtraAnims_Dryite)[] = {
     ANIM_Dryite_Green_Still,
     ANIM_Dryite_Green_Idle,
     ANIM_Dryite_Green_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Dryites)[] = {
+NpcData N(NpcData_Dryites)[] = {
     {
         .id = NPC_Dryite_01,
-        .settings = &N(NpcSettings_Dryite),
         .pos = { -10.0f, 0.0f, 360.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Dryite_01),
-        .drops = DRYITE_DROPS,
+        .settings = &N(NpcSettings_Dryite),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = DRYITE_GREEN_ANIMS,
         .extraAnimations = N(ExtraAnims_Dryite),
     },
     {
         .id = NPC_Dryite_02,
-        .settings = &N(NpcSettings_Dryite),
         .pos = { 25.0f, 0.0f, 300.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Dryite_02),
-        .drops = DRYITE_DROPS,
+        .settings = &N(NpcSettings_Dryite),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = DRYITE_GREEN_ANIMS,
         .extraAnimations = N(ExtraAnims_Dryite),
     },
 };
 
-s32 N(ExtraAnims_Chanterelle)[] = {
+AnimID N(ExtraAnims_Chanterelle)[] = {
     ANIM_Chanterelle_Still,
     ANIM_Chanterelle_Idle,
     ANIM_Chanterelle_Sing,
     ANIM_Chanterelle_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(ExtraAnims_Poet)[] = {
+AnimID N(ExtraAnims_Poet)[] = {
     ANIM_Musician_Poet_Still,
     ANIM_Musician_Poet_Idle,
     ANIM_Musician_Poet_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Artists)[] = {
+NpcData N(NpcData_Artists)[] = {
     {
         .id = NPC_Chanterelle,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 260.0f, 20.0f, 560.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Chanterelle),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Chanterelle_Idle,
             .walk   = ANIM_Chanterelle_Still,
@@ -382,16 +370,12 @@ StaticNpc N(NpcData_Artists)[] = {
     },
     {
         .id = NPC_Poet,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 230.0f, 20.0f, 500.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Poet),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Musician_Poet_Idle,
             .walk   = ANIM_Musician_Poet_Idle,
@@ -415,16 +399,12 @@ StaticNpc N(NpcData_Artists)[] = {
     },
     {
         .id = NPC_Composer,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { 300.0f, 20.0f, 500.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Composer),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Musician_Composer_Idle,
             .walk   = ANIM_Musician_Composer_Still,
@@ -449,7 +429,7 @@ StaticNpc N(NpcData_Artists)[] = {
 };
 
 #define NAME_SUFFIX
-extern StaticNpc N(NpcData_Townsfolk)[10];
+extern NpcData N(NpcData_Townsfolk)[10];
 
 NpcGroupList N(EpilogueNPCs) = {
     NPC_GROUP(N(NpcData_Koopas_Epilogue)),

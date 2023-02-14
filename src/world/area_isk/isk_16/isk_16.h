@@ -18,6 +18,10 @@ enum {
     NPC_ChainChomp              = 2,
 };
 
+enum {
+    MV_Unk_01               = MapVar(1),
+};
+
 #define NAMESPACE isk_16
 
 extern EvtScript N(EVS_Main);

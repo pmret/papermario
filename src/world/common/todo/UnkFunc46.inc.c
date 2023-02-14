@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(UnkFunc46)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkFunc46)) {
     f32 var1 = script->varTable[0];
     f32 var2 = script->varTable[2];
     f32 var3 = 0.0f;

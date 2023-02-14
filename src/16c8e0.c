@@ -1073,9 +1073,9 @@ void btl_save_world_cameras(void) {
     D_8029EFB0 = playerStatus->position.x;
     D_8029EFB4 = playerStatus->position.y;
     D_8029EFB8 = playerStatus->position.z;
-    playerStatus->position.x = 0.0f;
-    playerStatus->position.y = -1000.0f;
-    playerStatus->position.z = 0.0f;
+    playerStatus->position.x = NPC_DISPOSE_POS_X;
+    playerStatus->position.y = NPC_DISPOSE_POS_Y;
+    playerStatus->position.z = NPC_DISPOSE_POS_Z;
 }
 
 void btl_restore_world_cameras(void) {

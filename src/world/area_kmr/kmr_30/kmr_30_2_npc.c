@@ -6,17 +6,13 @@ NpcSettings N(NpcSettings_ParadePeach) = {
     .level = 99,
 };
 
-StaticNpc N(NpcData_ParadePeach) = {
+NpcData N(NpcData_ParadePeach) = {
     .id = NPC_ParadePeach,
-    .settings = &N(NpcSettings_ParadePeach),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
+    .settings = &N(NpcSettings_ParadePeach),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_ParadePeach_IdleRaisedArms,
         .walk   = ANIM_ParadePeach_IdleRaisedArms,

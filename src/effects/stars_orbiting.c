@@ -14,12 +14,12 @@ void func_E005E318(EffectInstance* effect);
 void func_E005E334(EffectInstance* effect);
 
 void stars_orbiting_main(
-    s32 arg0,
-    f32 arg1,
-    f32 arg2,
-    f32 arg3,
-    f32 arg4,
-    s32 arg5,
+    s32 type,
+    f32 posX,
+    f32 posY,
+    f32 posZ,
+    f32 radius,
+    s32 numStars,
     EffectInstance** outEffect
 ) {
     EffectBlueprint bp;
@@ -27,7 +27,7 @@ void stars_orbiting_main(
     StarsOrbitingFXData* part;
     s32 i;
 
-    arg5++;
+    numStars++;
 
     bp.init = stars_orbiting_init;
     bp.update = stars_orbiting_update;
@@ -37,30 +37,30 @@ void stars_orbiting_main(
     bp.effectID = EFFECT_STARS_ORBITING;
 
     effect = shim_create_effect_instance(&bp);
-    effect->numParts = arg5;
-    part = effect->data.starsOrbiting = shim_general_heap_malloc(arg5 * sizeof(*part));
+    effect->numParts = numStars;
+    part = effect->data.starsOrbiting = shim_general_heap_malloc(numStars * sizeof(*part));
     ASSERT(effect->data.starsOrbiting != NULL);
 
-    shim_mem_clear(part, arg5 * sizeof(*part));
+    shim_mem_clear(part, numStars * sizeof(*part));
 
-    part->unk_00 = arg0;
-    part->pos.x = arg1;
-    part->pos.y = arg2;
-    part->pos.z = arg3;
-    part->unk_10 = 0;
-    part->unk_24 = 0;
-    part->unk_14 = arg4;
-    part->unk_28 = 1;
+    part->type = type;
+    part->pos.x = posX;
+    part->pos.y = posY;
+    part->pos.z = posZ;
+    part->orbitRadius = 0;
+    part->yaw = 0;
+    part->targetRadius = radius;
+    part->enabled = TRUE;
 
     part++;
-    for (i = 1; i < arg5; i++, part++) {
+    for (i = 1; i < numStars; i++, part++) {
         part->pos.x = 0;
         part->pos.y = 0;
         part->pos.z = 0;
-        part->unk_18 = (i - 1) * 360 / (arg5 - 1);
-        part->unk_1C = 20.0f;
-        part->unk_20 = 0;
-        part->unk_24 = (i - 1) * 360 / (arg5 - 1);
+        part->roll = (i - 1) * 360 / (numStars - 1);
+        part->rollSpinRate = 20.0f;
+        part->pitch = 0;
+        part->yaw = (i - 1) * 360 / (numStars - 1);
     }
 
     *outEffect = effect;
@@ -71,24 +71,24 @@ void stars_orbiting_init(EffectInstance* effect) {
 
 void stars_orbiting_update(EffectInstance* effect) {
     StarsOrbitingFXData* part = effect->data.starsOrbiting;
-    f32 unk_10;
+    f32 radius;
     s32 i;
 
-    if (part->unk_28 != 0) {
-        part->unk_24++;
-        part->unk_10 += (part->unk_14 - part->unk_10) * 0.1;
-        unk_10 = part->unk_10;
+    if (part->enabled) {
+        part->yaw++;
+        part->orbitRadius += (part->targetRadius - part->orbitRadius) * 0.1;
+        radius = part->orbitRadius;
 
         part++;
         for (i = 1; i < effect->numParts; i++, part++) {
-            part->pos.x = unk_10 * shim_sin_deg(part->unk_24);
-            part->pos.z = unk_10 * shim_cos_deg(part->unk_24) * shim_cos_deg(part->unk_20);
-            part->pos.y = unk_10 * shim_cos_deg(part->unk_24) * shim_sin_deg(part->unk_20);
-            part->unk_18 += part->unk_1C;
-            part->unk_20 = 0.0f;
-            part->unk_24 += 16;
-            if (part->unk_24 > 360) {
-                part->unk_24 -= 360;
+            part->pos.x = radius * shim_sin_deg(part->yaw);
+            part->pos.z = radius * shim_cos_deg(part->yaw) * shim_cos_deg(part->pitch);
+            part->pos.y = radius * shim_cos_deg(part->yaw) * shim_sin_deg(part->pitch);
+            part->roll += part->rollSpinRate;
+            part->pitch = 0.0f;
+            part->yaw += 16;
+            if (part->yaw > 360) {
+                part->yaw -= 360;
             }
         }
     }
@@ -108,7 +108,7 @@ void func_E005E334(EffectInstance* effect) {
     Matrix4f sp98;
     s32 i;
 
-    if (part->unk_28 != 0) {
+    if (part->enabled) {
         Gfx* dlist = D_E005E670[0];
         Gfx* dlist2 = D_E005E674[0];
 
@@ -127,7 +127,7 @@ void func_E005E334(EffectInstance* effect) {
         part++;
         for (i = 1; i < effect->numParts; i++, part++) {
             shim_guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
-            shim_guRotateF(sp58, part->unk_18, 0.0f, 0.0f, 1.0f);
+            shim_guRotateF(sp58, part->roll, 0.0f, 0.0f, 1.0f);
             shim_guMtxCatF(sp58, sp18, sp18);
             shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 

@@ -1,7 +1,7 @@
 #include "pra_09.h"
 #include "effects.h"
 
-#include "world/common/enemy/complete/Duplighost.h"
+#include "world/common/enemy/Duplighost.h"
 
 NpcSettings N(NpcSettings_Duplighost) = {
     .height = 30,
@@ -9,7 +9,7 @@ NpcSettings N(NpcSettings_Duplighost) = {
     .level = 99,
 };
 
-#include "world/common/enemy/complete/Bombette.inc.c"
+#include "world/common/enemy/Bombette.inc.c"
 
 #include "world/common/complete/KeyItemChoice.inc.c"
 MAP_STATIC_PAD(1,key_item);
@@ -756,108 +756,108 @@ EvtScript N(EVS_NpcInit_Duplighost_04) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_InteractableBombettes)[] = {
+NpcData N(NpcData_InteractableBombettes)[] = {
     {
         .id = NPC_Bombette_01,
-        .settings = &N(NpcSettings_Bombette),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_Bombette_01),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bombette),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
     {
         .id = NPC_Bombette_02,
-        .settings = &N(NpcSettings_Bombette),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_Bombette_02),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bombette),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
     {
         .id = NPC_Bombette_03,
-        .settings = &N(NpcSettings_Bombette),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_Bombette_03),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bombette),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
     {
         .id = NPC_Bombette_04,
-        .settings = &N(NpcSettings_Bombette),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_Bombette_04),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bombette),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
     {
         .id = NPC_Bombette_05,
-        .settings = &N(NpcSettings_Bombette),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_Bombette_05),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bombette),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Duplighosts)[] = {
+NpcData N(NpcData_Duplighosts)[] = {
     {
         .id = NPC_Duplighost_01,
-        .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_01),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Duplighost),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = DUPLIGHOST_ANIMS,
     },
     {
         .id = NPC_Duplighost_02,
-        .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_02),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Duplighost),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = DUPLIGHOST_ANIMS,
     },
     {
         .id = NPC_Duplighost_03,
-        .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_03),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Duplighost),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = DUPLIGHOST_ANIMS,
     },
     {
         .id = NPC_Duplighost_04,
-        .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_04),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Duplighost),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = DUPLIGHOST_ANIMS,
     },
     {
         .id = NPC_Duplighost_05,
-        .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_05),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Duplighost),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = DUPLIGHOST_ANIMS,
     },
 };
@@ -1002,55 +1002,55 @@ EvtScript N(EVS_NpcInit_TargetBombette_05) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TargetBombettes)[] = {
+NpcData N(NpcData_TargetBombettes)[] = {
     {
         .id = NPC_Bombette_01_Target,
-        .settings = &N(NpcSettings_Bombette),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_TargetBombette_01),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bombette),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
     {
         .id = NPC_Bombette_02_Target,
-        .settings = &N(NpcSettings_Bombette),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_TargetBombette_02),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bombette),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
     {
         .id = NPC_Bombette_03_Target,
-        .settings = &N(NpcSettings_Bombette),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_TargetBombette_03),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bombette),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
     {
         .id = NPC_Bombette_04_Target,
-        .settings = &N(NpcSettings_Bombette),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_TargetBombette_04),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bombette),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
     {
         .id = NPC_Bombette_05_Target,
-        .settings = &N(NpcSettings_Bombette),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .init = &N(EVS_NpcInit_TargetBombette_05),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Bombette),
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
 };

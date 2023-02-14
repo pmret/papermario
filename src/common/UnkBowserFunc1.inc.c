@@ -7,7 +7,7 @@
 #define BOWSER_FLAG_TOCHECK ACTOR_EVENT_FLAG_80000
 #endif
 
-ApiStatus N(UnkBowserFunc1)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkBowserFunc1)) {
     Actor* actor = get_actor(script->owner1.actorID);
     ActorPart* part;
     s32 i, j;

@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(ItemEntityJumpToPos)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ItemEntityJumpToPos)) {
     struct {
         /* 0x00 */ Vec3f pos;
         /* 0x0C */ f32 moveAngle;

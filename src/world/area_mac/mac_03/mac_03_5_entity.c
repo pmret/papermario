@@ -25,7 +25,7 @@ EvtScript N(EVS_OnInspect_StreetSign) = {
 
 EvtScript N(EVS_MakeEntities) = {
     EVT_CALL(GetDemoState, LVar0)
-    EVT_IF_EQ(LVar0, 0)
+    EVT_IF_EQ(LVar0, DEMO_STATE_NONE)
         EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
             EVT_CALL(MakeEntity, EVT_PTR(Entity_BombableRock), -200, 0, 0, 0, MAKE_ENTITY_END)
             EVT_CALL(AssignScript, EVT_PTR(N(EVS_OnBlast_RailRock)))

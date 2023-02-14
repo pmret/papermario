@@ -14,7 +14,7 @@ ApiStatus N(UnkTattleEffectFunc1)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
 
-    effect->data.tattleWindow->pos.y = -1000.0f;
+    effect->data.tattleWindow->pos.y = NPC_DISPOSE_POS_Y;
     return ApiStatus_DONE2;
 }
 

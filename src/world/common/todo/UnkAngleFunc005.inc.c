@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(UnkAngleFunc005)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkAngleFunc005)) {
     Npc* npc = get_npc_safe(script->owner2.npcID);
 
     switch (script->functionTemp[1]) {

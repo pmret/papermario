@@ -1,14 +1,11 @@
 #include "sbk_25.h"
 
-#include "world/common/enemy/complete/Bandit.inc.c"
+#include "world/common/enemy/Bandit.inc.c"
 
-StaticNpc N(NpcData_Bandit_01) = {
+NpcData N(NpcData_Bandit_01) = {
     .id = NPC_Bandit_01,
-    .settings = &N(NpcSettings_Bandit),
     .pos = { -80.0f, 0.0f, -20.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = BANDIT_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,17 +18,17 @@ StaticNpc N(NpcData_Bandit_01) = {
             .detectSize = { 1000 },
         }
     },
+    .settings = &N(NpcSettings_Bandit),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = BANDIT_DROPS,
     .animations = BANDIT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Bandit_02) = {
+NpcData N(NpcData_Bandit_02) = {
     .id = NPC_Bandit_02,
-    .settings = &N(NpcSettings_Bandit),
     .pos = { 120.0f, 0.0f, 20.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = BANDIT_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -44,6 +41,9 @@ StaticNpc N(NpcData_Bandit_02) = {
             .detectSize = { 1000 },
         }
     },
+    .settings = &N(NpcSettings_Bandit),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = BANDIT_DROPS,
     .animations = BANDIT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

@@ -1,7 +1,6 @@
 #include "kpa_12.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_kpa_1X_Upper) = {
     EVT_SET_GROUP(EVT_GROUP_1B)

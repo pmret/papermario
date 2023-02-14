@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(UnkSfxFunc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkSfxFunc)) {
     Actor* actor = get_actor(script->owner1.actorID);
     f32 distX;
     f32 distY;

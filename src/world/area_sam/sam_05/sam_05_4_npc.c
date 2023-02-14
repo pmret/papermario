@@ -11,8 +11,8 @@ NpcSettings N(NpcSettings_Monstar) = {
 
 #include "world/common/npc/Twink.inc.c"
 
-#include "world/common/enemy/complete/Gulpit.inc.c"
-#include "world/common/enemy/complete/FrostPiranha.inc.c"
+#include "world/common/enemy/Gulpit.inc.c"
+#include "world/common/enemy/FrostPiranha.inc.c"
 
 EvtScript N(EVS_NpcAI_Monstar) = {
     EVT_LABEL(0)
@@ -150,7 +150,7 @@ EvtScript N(EVS_NpcInit_StarKid) = {
     EVT_END
 };
 
-s32 N(ExtraAnims_Monstar)[] = {
+AnimID N(ExtraAnims_Monstar)[] = {
     ANIM_Monstar_Still,
     ANIM_Monstar_Idle1,
     ANIM_Monstar_Hurt,
@@ -159,21 +159,17 @@ s32 N(ExtraAnims_Monstar)[] = {
     ANIM_Monstar_Flail,
     ANIM_Monstar_HappyRearUp,
     ANIM_Monstar_RearUp,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Monstar) = {
+NpcData N(NpcData_Monstar) = {
     .id = NPC_Monstar,
-    .settings = &N(NpcSettings_Monstar),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .init = &N(EVS_NpcInit_Monstar),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Monstar),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Monstar_Idle1,
         .walk   = ANIM_Monstar_Idle1,
@@ -195,201 +191,198 @@ StaticNpc N(NpcData_Monstar) = {
     .extraAnimations = N(ExtraAnims_Monstar),
 };
 
-s32 N(ExtraAnims_StarKid)[] = {
+AnimID N(ExtraAnims_StarKid)[] = {
     ANIM_Twink_Idle,
     ANIM_Twink_Fly,
     ANIM_Twink_Angry,
     ANIM_Twink_Shout,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_StarKids)[] = {
+NpcData N(NpcData_StarKids)[] = {
     {
         .id = NPC_StarKid_01,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_02,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_03,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_04,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_05,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_06,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_07,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_08,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_09,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_10,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_11,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_12,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_13,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_14,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_15,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
     {
         .id = NPC_StarKid_16,
-        .settings = &N(NpcSettings_Twink),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_StarKid),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Twink),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = TWINK_ANIMS,
         .extraAnimations = N(ExtraAnims_StarKid),
     },
 };
 
-StaticNpc N(NpcData_Gulpit)[] = {
+NpcData N(NpcData_Gulpit)[] = {
     {
         .id = NPC_Gulpit,
-        .settings = &N(NpcSettings_Gulpit),
         .pos = { -75.0f, 0.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400,
-        .drops = GULPIT_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -402,6 +395,9 @@ StaticNpc N(NpcData_Gulpit)[] = {
                 .detectSize = { 200 },
             }
         },
+        .settings = &N(NpcSettings_Gulpit),
+        .flags = ENEMY_FLAG_400,
+        .drops = GULPIT_DROPS,
         .animations = GULPIT_ANIMS,
         .extraAnimations = N(ExtraAnims_Gulpit),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -409,14 +405,11 @@ StaticNpc N(NpcData_Gulpit)[] = {
     GULPIT_HITBOX(NPC_Gulpit_Hitbox),
 };
 
-StaticNpc N(NpcData_FrostPiranha_01)[] = {
+NpcData N(NpcData_FrostPiranha_01)[] = {
     {
         .id = NPC_FrostPiranha_01,
-        .settings = &N(NpcSettings_FrostPiranha),
         .pos = { 100.0f, 0.0f, 50.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_400,
-        .drops = FROST_PIRANHA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -429,6 +422,9 @@ StaticNpc N(NpcData_FrostPiranha_01)[] = {
                 .detectSize = { 200 },
             }
         },
+        .settings = &N(NpcSettings_FrostPiranha),
+        .flags = ENEMY_FLAG_400,
+        .drops = FROST_PIRANHA_DROPS,
         .animations = FROST_PIRANHA_ANIMS,
         .extraAnimations = N(ExtraAnims_FrostPiranha),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -436,14 +432,11 @@ StaticNpc N(NpcData_FrostPiranha_01)[] = {
     FROST_PIRANHA_HITBOX(NPC_FrostPiranha_01_Hitbox),
 };
 
-StaticNpc N(NpcData_FrostPiranha_02)[] = {
+NpcData N(NpcData_FrostPiranha_02)[] = {
     {
         .id = NPC_FrostPiranha_02,
-        .settings = &N(NpcSettings_FrostPiranha),
         .pos = { -400.0f, 0.0f, 0.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_400,
-        .drops = FROST_PIRANHA_DROPS,
         .territory = {
             .wander = {
                 .isFlying = FALSE,
@@ -456,6 +449,9 @@ StaticNpc N(NpcData_FrostPiranha_02)[] = {
                 .detectSize = { 200 },
             }
         },
+        .settings = &N(NpcSettings_FrostPiranha),
+        .flags = ENEMY_FLAG_400,
+        .drops = FROST_PIRANHA_DROPS,
         .animations = FROST_PIRANHA_ANIMS,
         .extraAnimations = N(ExtraAnims_FrostPiranha),
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

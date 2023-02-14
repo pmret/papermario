@@ -1,8 +1,8 @@
 #include "pra_13.h"
 #include "sprite.h"
 
-#include "world/common/enemy/complete/Bombette.h"
-#include "world/common/enemy/complete/Duplighost.h"
+#include "world/common/enemy/Bombette.h"
+#include "world/common/enemy/Duplighost.h"
 
 NpcSettings N(NpcSettings_Player) = {
     .height = 30,
@@ -219,46 +219,46 @@ EvtScript N(EVS_NpcInit_Duplighost_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_FakeMario) = {
+NpcData N(NpcData_FakeMario) = {
     .id = NPC_FakeMario,
-    .settings = &N(NpcSettings_Player),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_FakeMario),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Player),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = BOMBETTE_ANIMS,
 };
 
-StaticNpc N(NpcData_Imposters)[] = {
+NpcData N(NpcData_Imposters)[] = {
     {
         .id = NPC_FakeBombette,
-        .settings = &N(NpcSettings_Player),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_FakeBombette),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Player),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
     {
         .id = NPC_Duplighost_01,
-        .settings = &N(NpcSettings_Player),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_01),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Player),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = DUPLIGHOST_ANIMS,
     },
     {
         .id = NPC_Duplighost_02,
-        .settings = &N(NpcSettings_Player),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost_02),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Player),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = DUPLIGHOST_ANIMS,
     },
 };

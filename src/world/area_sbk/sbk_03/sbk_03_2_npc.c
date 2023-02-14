@@ -1,14 +1,11 @@
 #include "sbk_03.h"
 
-#include "world/common/enemy/complete/Pokey.inc.c"
+#include "world/common/enemy/Pokey.inc.c"
 
-StaticNpc N(NpcData_Pokey_01) = {
+NpcData N(NpcData_Pokey_01) = {
     .id = NPC_Pokey_01,
-    .settings = &N(NpcSettings_Pokey),
     .pos = { -340.0f, 0.0f, -125.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = POKEY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,17 +18,17 @@ StaticNpc N(NpcData_Pokey_01) = {
             .detectSize = { 1000 },
         }
     },
+    .settings = &N(NpcSettings_Pokey),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = POKEY_DROPS,
     .animations = POKEY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Pokey_02) = {
+NpcData N(NpcData_Pokey_02) = {
     .id = NPC_Pokey_02,
-    .settings = &N(NpcSettings_Pokey),
     .pos = { 10.0f, 0.0f, 100.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = POKEY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -44,17 +41,17 @@ StaticNpc N(NpcData_Pokey_02) = {
             .detectSize = { 1000 },
         }
     },
+    .settings = &N(NpcSettings_Pokey),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = POKEY_DROPS,
     .animations = POKEY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Pokey_03) = {
+NpcData N(NpcData_Pokey_03) = {
     .id = NPC_Pokey_03,
-    .settings = &N(NpcSettings_Pokey),
     .pos = { -90.0f, 0.0f, 260.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = POKEY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -67,17 +64,17 @@ StaticNpc N(NpcData_Pokey_03) = {
             .detectSize = { 1000 },
         }
     },
+    .settings = &N(NpcSettings_Pokey),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = POKEY_DROPS,
     .animations = POKEY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Pokey_04) = {
+NpcData N(NpcData_Pokey_04) = {
     .id = NPC_Pokey_04,
-    .settings = &N(NpcSettings_Pokey),
     .pos = { 165.0f, 0.0f, 300.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = POKEY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -90,6 +87,9 @@ StaticNpc N(NpcData_Pokey_04) = {
             .detectSize = { 1000 },
         }
     },
+    .settings = &N(NpcSettings_Pokey),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = POKEY_DROPS,
     .animations = POKEY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

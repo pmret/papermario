@@ -2,9 +2,9 @@
 
 extern EvtScript N(EVS_80245198);
 
-#include "world/common/enemy/complete/KoopaTroopa_Wander.inc.c"
-#include "world/common/enemy/complete/KoopaTroopa_Patrol.inc.c"
-#include "world/common/enemy/complete/Paratroopa.inc.c"
+#include "world/common/enemy/KoopaTroopa_Wander.inc.c"
+#include "world/common/enemy/KoopaTroopa_Patrol.inc.c"
+#include "world/common/enemy/Paratroopa.inc.c"
 
 EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
     EVT_CALL(GetBattleOutcome, LVar0)
@@ -30,13 +30,10 @@ EvtScript N(EVS_NpcInit_KoopaTroopa) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_KoopaTroopa_Wander) = {
+NpcData N(NpcData_KoopaTroopa_Wander) = {
     .id = NPC_KoopaTroopa,
-    .settings = &N(NpcSettings_KoopaTroopa_Wander),
     .pos = { 0.0f, 0.0f, 125.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-    .drops = KOOPA_TROOPA_TRD_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -49,22 +46,17 @@ StaticNpc N(NpcData_KoopaTroopa_Wander) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_KoopaTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_KoopaTroopa_Patrol) = {
+NpcData N(NpcData_KoopaTroopa_Patrol) = {
     .id = NPC_KoopaTroopa,
-    .settings = &N(NpcSettings_KoopaTroopa_Patrol),
     .pos = { 220.0f, 0.0f, 30.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_NO_DROPS,
-    .init = &N(EVS_NpcInit_KoopaTroopa),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -79,17 +71,18 @@ StaticNpc N(NpcData_KoopaTroopa_Patrol) = {
             .detectSize = { 200 },
         }
     },
+    .init = &N(EVS_NpcInit_KoopaTroopa),
+    .settings = &N(NpcSettings_KoopaTroopa_Patrol),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_ParaTroopa) = {
+NpcData N(NpcData_ParaTroopa) = {
     .id = NPC_ParaTroopa,
-    .settings = &N(NpcSettings_ParaTroopa),
     .pos = { -5.0f, 237.0f, 157.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = PARATROOPA_DROPS,
     .territory = {
         .wander = {
             .isFlying = FALSE,
@@ -102,6 +95,9 @@ StaticNpc N(NpcData_ParaTroopa) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_ParaTroopa),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = PARATROOPA_DROPS,
     .animations = PARATROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

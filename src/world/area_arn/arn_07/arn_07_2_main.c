@@ -1,5 +1,6 @@
 #include "arn_07.h"
 
+#define STAR_SPIRIT_DATA_VAR MV_Unk_01
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"
 
 s32 N(KeyList)[] = {

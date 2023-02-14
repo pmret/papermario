@@ -46,7 +46,7 @@ Npc* parasol_get_npc(void) {
     f32 angle;
     Npc* ret = NULL;
     do {                // TODO fix this do...while
-        if (playerStatus->availableDisguiseType != 0) {
+        if (playerStatus->availableDisguiseType != PEACH_DISGUISE_NONE) {
             if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_8) {
                 gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_8;
             } else {

@@ -293,31 +293,31 @@ API_CALLABLE(IsEventForSourceRunning) {
 }
 
 EvtScript EVS_PushWall_PushBlock = {
-	EVT_SET(LVarA, LVar0) // grid system
-	EVT_SET(LVarB, LVar1) // block entity ID
+    EVT_SET(LVarA, LVar0) // grid system
+    EVT_SET(LVarB, LVar1) // block entity ID
     // check cell where the block will move to
-	EVT_CALL(func_80282E30)
-	EVT_CALL(FacePlayerTowardPoint, BLOCK_PROP_I, BLOCK_PROP_K, 0)
-	EVT_IF_NE(LVar9, PUSH_BLOCK_INVALID)
-		EVT_CALL(MovePlayerTowardBlock)
-	EVT_END_IF
+    EVT_CALL(func_80282E30)
+    EVT_CALL(FacePlayerTowardPoint, BLOCK_PROP_I, BLOCK_PROP_K, 0)
+    EVT_IF_NE(LVar9, PUSH_BLOCK_INVALID)
+        EVT_CALL(MovePlayerTowardBlock)
+    EVT_END_IF
     // try setting the player action state
-	EVT_SET(LVarC, 0)
-	EVT_CALL(CheckPlayerActionState, LVarD, ACTION_STATE_RUN)
-	EVT_IF_EQ(LVarD, FALSE)
-		EVT_CALL(CheckPlayerActionState, LVarD, ACTION_STATE_PUSHING_BLOCK)
-		EVT_IF_EQ(LVarD, FALSE)
-			EVT_RETURN
-		EVT_END_IF
-	EVT_END_IF
+    EVT_SET(LVarC, 0)
+    EVT_CALL(CheckPlayerActionState, LVarD, ACTION_STATE_RUN)
+    EVT_IF_EQ(LVarD, FALSE)
+        EVT_CALL(CheckPlayerActionState, LVarD, ACTION_STATE_PUSHING_BLOCK)
+        EVT_IF_EQ(LVarD, FALSE)
+            EVT_RETURN
+        EVT_END_IF
+    EVT_END_IF
     // cancel state change if the block can't be pushed
-	EVT_IF_NE(LVar9, PUSH_BLOCK_READY)
-		EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-		EVT_RETURN
-	EVT_END_IF
+    EVT_IF_NE(LVar9, PUSH_BLOCK_READY)
+        EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
+        EVT_RETURN
+    EVT_END_IF
     // wait for 8 frames of pushing
-	EVT_SET(LVarC, 0)
-	EVT_LABEL(0)
+    EVT_SET(LVarC, 0)
+    EVT_LABEL(0)
         EVT_ADD(LVarC, 1)
         EVT_CALL(CanPlayerPushBlock)
         EVT_IF_EQ(LVarD, TRUE)
@@ -337,24 +337,24 @@ EvtScript EVS_PushWall_PushBlock = {
             EVT_GOTO(0)
         EVT_END_IF
     // perform the push
-	EVT_CALL(ClearPushedBlockFromGrid)
-	EVT_CALL(PlaySound, SOUND_2088)
-	EVT_CALL(DisablePlayerPhysics, TRUE)
-	EVT_CALL(UpdatePushBlockMotion)
-	EVT_CALL(FinishPushBlockMotion)
-	EVT_THREAD
-		EVT_WAIT(2)
-		EVT_CALL(CheckPlayerActionState, LVarD, ACTION_STATE_PUSHING_BLOCK)
-		EVT_IF_NE(LVarD, FALSE)
-			EVT_CALL(IsEventForSourceRunning, LVarD, EVT_PTR(EVS_PushWall_PushBlock))
-			EVT_IF_EQ(LVarD, FALSE)
-				EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-			EVT_END_IF
-		EVT_END_IF
-	EVT_END_THREAD
-	EVT_CALL(DisablePlayerPhysics, FALSE)
-	EVT_RETURN
-	EVT_END
+    EVT_CALL(ClearPushedBlockFromGrid)
+    EVT_CALL(PlaySound, SOUND_2088)
+    EVT_CALL(DisablePlayerPhysics, TRUE)
+    EVT_CALL(UpdatePushBlockMotion)
+    EVT_CALL(FinishPushBlockMotion)
+    EVT_THREAD
+        EVT_WAIT(2)
+        EVT_CALL(CheckPlayerActionState, LVarD, ACTION_STATE_PUSHING_BLOCK)
+        EVT_IF_NE(LVarD, FALSE)
+            EVT_CALL(IsEventForSourceRunning, LVarD, EVT_PTR(EVS_PushWall_PushBlock))
+            EVT_IF_EQ(LVarD, FALSE)
+                EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
+            EVT_END_IF
+        EVT_END_IF
+    EVT_END_THREAD
+    EVT_CALL(DisablePlayerPhysics, FALSE)
+    EVT_RETURN
+    EVT_END
 };
 
 API_CALLABLE(CreatePushBlockGrid) {

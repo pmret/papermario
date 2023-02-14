@@ -394,8 +394,8 @@ EvtScript N(8021E118) = {
     EVT_CALL(HPBarToHome, LVarA)
     EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations_8021D360)))
     EVT_CALL(SetAnimation, LVarA, 1, 0xA40002)
-    EVT_CALL(SetActorPos, ACTOR_SELF, 0, -1000, 0)
-    EVT_CALL(ForceHomePos, ACTOR_SELF, 0, -1000, 0)
+    EVT_CALL(SetActorPos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
+    EVT_CALL(ForceHomePos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(RemoveActor, -127)
     EVT_RETURN
@@ -448,7 +448,7 @@ EvtScript N(8021E5DC) = {
     EVT_END
 };
 
-Vec3i N(vector3D_8021E940) = { 0, -1000, 0 };
+Vec3i N(vector3D_8021E940) = { NPC_DISPOSE_LOCATION };
 
 s32 N(idleAnimations_8021E94C)[] = {
     STATUS_NORMAL,    ANIM_BattleGoombario_Idle,
@@ -980,7 +980,7 @@ ApiStatus func_80218DF4_465284(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *args++);
 
-    tattleEffect->data.tattleWindow->pos.y = -1000.0f;
+    tattleEffect->data.tattleWindow->pos.y = NPC_DISPOSE_POS_Y;
     return ApiStatus_DONE2;
 }
 
@@ -4269,8 +4269,8 @@ EvtScript N(copyPartner) = {
     EVT_CALL(HPBarToHome, LVarA)
     EVT_CALL(ResetActorSounds, LVarA, 2)
     EVT_WAIT(20)
-    EVT_CALL(SetActorPos, ACTOR_SELF, 0, -1000, 0)
-    EVT_CALL(ForceHomePos, ACTOR_SELF, 0, -1000, 0)
+    EVT_CALL(SetActorPos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
+    EVT_CALL(ForceHomePos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(SetActorVar, -127, 8, 1)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

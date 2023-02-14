@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(GetLastEventType)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetLastEventType)) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
 

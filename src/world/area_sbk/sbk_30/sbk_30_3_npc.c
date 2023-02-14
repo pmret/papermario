@@ -293,26 +293,22 @@ EvtScript N(EVS_NpcInit_Archeologist_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Archeologist_02)[] = {
+NpcData N(NpcData_Archeologist_02)[] = {
     {
         .id = NPC_Kolorado,
-        .settings = &N(NpcSettings_Kolorado),
         .pos = { 200.0f, 0.0f, -100.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .init = &N(EVS_NpcInit_Kolorado),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_Kolorado),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_SBK_Kolorado,
     },
     {
         .id = NPC_Archeologist_01,
-        .settings = &N(NpcSettings_Archeologist_01),
         .pos = { 238.0f, 0.0f, -112.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Archeologist_01),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -325,17 +321,17 @@ StaticNpc N(NpcData_Archeologist_02)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_Archeologist_01),
+        .settings = &N(NpcSettings_Archeologist_01),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = ARCHEOLOGIST_ANIMS,
         .tattle = MSG_NpcTattle_SBK_ExcavatorA,
     },
     {
         .id = NPC_Archeologist_02,
-        .settings = &N(NpcSettings_Archeologist_01),
         .pos = { 170.0f, 0.0f, -190.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
-        .init = &N(EVS_NpcInit_Archeologist_02),
-        .drops = NPC_NO_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -348,6 +344,10 @@ StaticNpc N(NpcData_Archeologist_02)[] = {
                 .detectSize = { 0 },
             }
         },
+        .init = &N(EVS_NpcInit_Archeologist_02),
+        .settings = &N(NpcSettings_Archeologist_01),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .drops = NO_DROPS,
         .animations = ARCHEOLOGIST_ANIMS,
         .tattle = MSG_NpcTattle_SBK_ExcavatorB,
     },

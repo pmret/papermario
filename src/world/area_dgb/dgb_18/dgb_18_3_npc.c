@@ -4,8 +4,8 @@
 extern EvtScript N(EVS_NpcAI_Tubba_Chase);
 extern EvtScript N(EVS_NpcAI_Tubba_WakeUp);
 
-#include "world/common/enemy/complete/TubbaBlubba_Patrol.inc.c"
-#include "world/common/enemy/complete/TubbaBlubba.inc.c"
+#include "world/common/enemy/TubbaBlubba_Patrol.inc.c"
+#include "world/common/enemy/TubbaBlubba.inc.c"
 
 #include "world/common/todo/UnkFunc1.inc.c"
 
@@ -486,14 +486,10 @@ EvtScript N(EVS_NpcInit_Yakkey) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Tubba) = {
+NpcData N(NpcData_Tubba) = {
     .id = NPC_Tubba,
-    .settings = &N(NpcSettings_TubbaBlubba),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
-    .init = &N(EVS_NpcInit_Tubba),
-    .drops = TUBBA_DROPS,
     .territory = {
         .patrol = {
             .isFlying = TRUE,
@@ -511,17 +507,21 @@ StaticNpc N(NpcData_Tubba) = {
             .detectSize = { 1000, 250 },
         }
     },
+    .init = &N(EVS_NpcInit_Tubba),
+    .settings = &N(NpcSettings_TubbaBlubba),
+    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+    .drops = NO_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
 };
 
-StaticNpc N(NpcData_Yakkey) = {
+NpcData N(NpcData_Yakkey) = {
     .id = NPC_Yakkey,
-    .settings = &N(NpcSettings_Yakkey),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Yakkey),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Yakkey),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Yakkey_Idle,
         .walk   = ANIM_Yakkey_Idle,

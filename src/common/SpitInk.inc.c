@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-ApiStatus N(SpitInk)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpitInk)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect;
     f32 temp_f28;

@@ -130,59 +130,59 @@ EvtScript N(EVS_NpcInit_Bootler_Epilogue) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Default)[] = {
+NpcData N(NpcData_Default)[] = {
     {
         .id = NPC_Bow,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Bow),
-        .drops = BOW_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = BOW_ANIMS,
     },
     {
         .id = NPC_Bootler,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Bootler),
-        .drops = BOOTLER_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = BOOTLER_ANIMS,
         .tattle = MSG_NpcTattle_Bootler,
     },
     {
         .id = NPC_Skolar,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Skolar),
-        .drops = SKOLAR_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = SKOLAR_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Epilogue)[] = {
+NpcData N(NpcData_Epilogue)[] = {
     {
         .id = NPC_Bow,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Bow_Epilogue),
-        .drops = BOW_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = BOW_ANIMS,
     },
     {
         .id = NPC_Bootler,
-        .settings = &N(NpcSettings_Dummy),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Bootler_Epilogue),
-        .drops = BOOTLER_DROPS,
+        .settings = &N(NpcSettings_Dummy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = BOOTLER_ANIMS,
         .tattle = MSG_NpcTattle_Bootler,
     },

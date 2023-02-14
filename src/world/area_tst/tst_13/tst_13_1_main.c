@@ -174,93 +174,93 @@ NpcSettings N(NpcSettings_09) = {
     .flags = ENEMY_FLAG_PASSIVE,
 };
 
-StaticNpc N(NpcData_Testing)[] = {
+NpcData N(NpcData_Testing)[] = {
     {
         .id = NPC_00,
-        .settings = &N(NpcSettings_00),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 0,
+        .settings = &N(NpcSettings_00),
         .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
     {
         .id = NPC_01,
-        .settings = &N(NpcSettings_01),
         .pos = { 20.0f, 0.0f, 20.0f },
         .yaw = 0,
+        .settings = &N(NpcSettings_01),
         .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
     {
         .id = NPC_02,
-        .settings = &N(NpcSettings_02),
         .pos = { 40.0f, 0.0f, 40.0f },
         .yaw = 0,
+        .settings = &N(NpcSettings_02),
         .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
     {
         .id = NPC_03,
-        .settings = &N(NpcSettings_03),
         .pos = { 60.0f, 0.0f, 60.0f },
         .yaw = 0,
+        .settings = &N(NpcSettings_03),
         .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
     {
         .id = NPC_04,
-        .settings = &N(NpcSettings_04),
         .pos = { 80.0f, 0.0f, 80.0f },
         .yaw = 0,
+        .settings = &N(NpcSettings_04),
         .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
     {
         .id = NPC_05,
-        .settings = &N(NpcSettings_05),
         .pos = { 100.0f, 0.0f, 100.0f },
         .yaw = 0,
+        .settings = &N(NpcSettings_05),
         .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
     {
         .id = NPC_06,
-        .settings = &N(NpcSettings_06),
         .pos = { 120.0f, 0.0f, 120.0f },
         .yaw = 0,
+        .settings = &N(NpcSettings_06),
         .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
     {
         .id = NPC_07,
-        .settings = &N(NpcSettings_07),
         .pos = { 140.0f, 0.0f, 140.0f },
         .yaw = 0,
+        .settings = &N(NpcSettings_07),
         .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
     {
         .id = NPC_08,
-        .settings = &N(NpcSettings_08),
         .pos = { 160.0f, 0.0f, 160.0f },
         .yaw = 0,
+        .settings = &N(NpcSettings_08),
         .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },
     },
     {
         .id = NPC_09,
-        .settings = &N(NpcSettings_09),
         .pos = { 180.0f, 0.0f, 180.0f },
         .yaw = 0,
+        .settings = &N(NpcSettings_09),
         .flags = COMMON_PASSIVE_FLAGS,
         .animations = {
         },

@@ -1,14 +1,11 @@
 #include "tik_24.h"
 
-#include "world/common/enemy/complete/DarkTroopa_Wander.inc.c"
+#include "world/common/enemy/DarkTroopa_Wander.inc.c"
 
-StaticNpc N(NpcData_DarkTroopa_01) = {
+NpcData N(NpcData_DarkTroopa_01) = {
     .id = NPC_DarkTroopa_01,
-    .settings = &N(NpcSettings_DarkTroopa_Wander),
     .pos = { -75.0f, -10.0f, 50.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = DARK_TROOPA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -21,17 +18,17 @@ StaticNpc N(NpcData_DarkTroopa_01) = {
             .detectSize = { 250 },
         }
     },
+    .settings = &N(NpcSettings_DarkTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = DARK_TROOPA_DROPS,
     .animations = DARK_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };
 
-StaticNpc N(NpcData_DarkTroopa_02) = {
+NpcData N(NpcData_DarkTroopa_02) = {
     .id = NPC_DarkTroopa_02,
-    .settings = &N(NpcSettings_DarkTroopa_Wander),
     .pos = { 175.0f, -10.0f, -50.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = DARK_TROOPA_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -44,6 +41,9 @@ StaticNpc N(NpcData_DarkTroopa_02) = {
             .detectSize = { 250 },
         }
     },
+    .settings = &N(NpcSettings_DarkTroopa_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = DARK_TROOPA_DROPS,
     .animations = DARK_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
 };

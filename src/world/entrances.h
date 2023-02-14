@@ -258,6 +258,8 @@ enum {
     kkj_24_ENTRY_0   = 0,
     kkj_24_ENTRY_1   = 1,
     kkj_25_ENTRY_0   = 0,
+    kkj_25_ENTRY_1   = 1,
+    kkj_25_ENTRY_2   = 2,
     kkj_26_ENTRY_0   = 0,
     kkj_26_ENTRY_1   = 1,
     kkj_26_ENTRY_2   = 2,

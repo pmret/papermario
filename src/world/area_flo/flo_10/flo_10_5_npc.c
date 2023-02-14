@@ -198,14 +198,14 @@ EvtScript N(EVS_NpcInit_Lily) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Lily) = {
+NpcData N(NpcData_Lily) = {
     .id = NPC_Lily,
-    .settings = &N(NpcSettings_Lily),
     .pos = { 80.0f, -60.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Lily),
-    .drops = LILY_DROPS,
+    .settings = &N(NpcSettings_Lily),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = LILY_ANIMS,
     .tattle = MSG_NpcTattle_Lily,
 };

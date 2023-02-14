@@ -2,9 +2,9 @@
 
 #include "world/common/todo/GetPeachDisguise.inc.c"
 
-#include "world/common/enemy/complete/Clubba.inc.c"
+#include "world/common/enemy/Clubba.inc.c"
 
-s32 N(ExtraAnims_Clubba)[] = {
+AnimID N(ExtraAnims_Clubba)[] = {
     ANIM_WorldClubba_Anim00,
     ANIM_WorldClubba_Anim02,
     ANIM_WorldClubba_Anim03,
@@ -14,7 +14,7 @@ s32 N(ExtraAnims_Clubba)[] = {
     ANIM_WorldClubba_Anim07,
     ANIM_WorldClubba_Anim13,
     ANIM_WorldClubba_Anim14,
-    -1
+    ANIM_LIST_END
 };
 
 EvtScript N(EVS_NpcInteract_Clubba) = {
@@ -73,14 +73,14 @@ EvtScript N(EVS_NpcInit_Clubba) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Clubba) = {
+NpcData N(NpcData_Clubba) = {
     .id = NPC_Clubba,
-    .settings = &N(NpcSettings_Clubba),
     .pos = { -70.0f, 0.0f, -100.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Clubba),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Clubba),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = CLUBBA_ANIMS,
     .extraAnimations = N(ExtraAnims_Clubba),
 };

@@ -763,12 +763,12 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
     if (!(gBattleStatus.flags1 & ACTOR_PART_FLAG_4) && (actor->flags & ACTOR_FLAG_8000000)) {
         if (actor->disableDismissTimer != 0) {
             actor->disableDismissTimer--;
-            actor->disableEffect->data.disableX->pos.y = -1000.0f;
+            actor->disableEffect->data.disableX->pos.y = NPC_DISPOSE_POS_Y;
         } else {
             actor->disableEffect->data.disableX->scale = (actor->scalingFactor * 0.75);
         }
     } else {
-        actor->disableEffect->data.disableX->pos.y = -1000.0f;
+        actor->disableEffect->data.disableX->pos.y = NPC_DISPOSE_POS_Y;
         actor->disableDismissTimer = 10;
     }
     if (actor->debuff == STATUS_FROZEN) {
@@ -780,9 +780,9 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
                 effect->data.icePillar->pos.z = actorPosZ;
                 effect->data.icePillar->scale = actor->size.y / 24.0;
             } else {
-                effect->data.icePillar->pos.x = 0.0f;
-                effect->data.icePillar->pos.y = -1000.0f;
-                effect->data.icePillar->pos.z = 0.0f;
+                effect->data.icePillar->pos.x = NPC_DISPOSE_POS_X;
+                effect->data.icePillar->pos.y = NPC_DISPOSE_POS_Y;
+                effect->data.icePillar->pos.z = NPC_DISPOSE_POS_Z;
             }
         }
     } else {
@@ -1374,12 +1374,12 @@ void appendGfx_player_actor(void* arg0) {
     if (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)) {
         if (player->disableDismissTimer != 0) {
             player->disableDismissTimer--;
-            player->disableEffect->data.disableX->pos.y = -1000.0f;
+            player->disableEffect->data.disableX->pos.y = NPC_DISPOSE_POS_Y;
         } else {
             player->disableEffect->data.disableX->scale = player->scalingFactor * 0.75;
         }
     } else {
-        player->disableEffect->data.disableX->pos.y = -1000.0f;
+        player->disableEffect->data.disableX->pos.y = NPC_DISPOSE_POS_Y;
         player->disableDismissTimer = 10;
     }
 
@@ -1394,7 +1394,7 @@ void appendGfx_player_actor(void* arg0) {
         } else {
             effect = battleStatus->waterBlockEffect;
             effect->data.waterBlock->pos.x = playerPosX;
-            effect->data.waterBlock->pos.y = -1000.0f;
+            effect->data.waterBlock->pos.y = NPC_DISPOSE_POS_Y;
             effect->data.waterBlock->pos.z = playerPosZ;
         }
     }
@@ -1410,7 +1410,7 @@ void appendGfx_player_actor(void* arg0) {
         } else {
             effect = battleStatus->cloudNineEffect;
             effect->data.endingDecals->pos.x = playerPosX;
-            effect->data.endingDecals->pos.y = -1000.0f;
+            effect->data.endingDecals->pos.y = NPC_DISPOSE_POS_Y;
             effect->data.endingDecals->pos.z = playerPosZ;
         }
     }
@@ -1425,14 +1425,14 @@ void appendGfx_player_actor(void* arg0) {
                 effect->data.icePillar->pos.z = playerPosZ;
                 effect->data.icePillar->scale = player->size.y / 24.0;
             } else {
-                effect->data.icePillar->pos.x = 0.0f;
-                effect->data.icePillar->pos.y = -1000.0f;
-                effect->data.icePillar->pos.z = 0.0f;
+                effect->data.icePillar->pos.x = NPC_DISPOSE_POS_X;
+                effect->data.icePillar->pos.y = NPC_DISPOSE_POS_Y;
+                effect->data.icePillar->pos.z = NPC_DISPOSE_POS_Z;
             }
         } else {
-            effect->data.icePillar->pos.x = 0.0f;
-            effect->data.icePillar->pos.y = -1000.0f;
-            effect->data.icePillar->pos.z = 0.0f;
+            effect->data.icePillar->pos.x = NPC_DISPOSE_POS_X;
+            effect->data.icePillar->pos.y = NPC_DISPOSE_POS_Y;
+            effect->data.icePillar->pos.z = NPC_DISPOSE_POS_Z;
         }
     } else {
         effect = player->icePillarEffect;

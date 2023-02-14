@@ -134,7 +134,7 @@ EvtScript N(EVS_MonitorDemoState) = {
     EVT_WAIT(10)
     EVT_LOOP(0)
         EVT_CALL(GetDemoState, LVar0)
-        EVT_IF_EQ(LVar0, 2)
+        EVT_IF_EQ(LVar0, DEMO_STATE_CHANGE_MAP)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)

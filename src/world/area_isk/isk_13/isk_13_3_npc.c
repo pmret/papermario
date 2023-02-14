@@ -1,7 +1,7 @@
 #include "isk_13.h"
 #include "sprite.h"
 
-#include "world/common/enemy/complete/StoneChomp.inc.c"
+#include "world/common/enemy/StoneChomp.inc.c"
 
 typedef struct StoneChompAmbushIsk13 {
     /* 0x00 */ s32 useBitingAnim;
@@ -295,16 +295,10 @@ EvtScript N(EVS_NpcInit_StoneChomp) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_StoneChomp) = {
+NpcData N(NpcData_StoneChomp) = {
     .id = NPC_StoneChomp,
-    .settings = &N(NpcSettings_StoneChomp),
     .pos = { 440.0f, -470.0f, -300.0f },
     .yaw = 320,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000,
-    .init = &N(EVS_NpcInit_StoneChomp),
-    .initVarCount = 1,
-    .initVar = { .value = -650 },
-    .drops = STONE_CHOMP_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -317,6 +311,12 @@ StaticNpc N(NpcData_StoneChomp) = {
             .detectSize = { 400 },
         }
     },
+    .init = &N(EVS_NpcInit_StoneChomp),
+    .initVarCount = 1,
+    .initVar = { .value = -650 },
+    .settings = &N(NpcSettings_StoneChomp),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000,
+    .drops = STONE_CHOMP_DROPS,
     .animations = STONE_CHOMP_ANIMS,
 };
 

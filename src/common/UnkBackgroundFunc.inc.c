@@ -1,7 +1,7 @@
 #include "common.h"
 #include "model.h"
 
-ApiStatus N(UnkBackgroundFunc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkBackgroundFunc)) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
     }

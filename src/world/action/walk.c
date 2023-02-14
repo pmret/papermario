@@ -206,8 +206,8 @@ void action_update_run(void) {
 
 void func_802B6550_E23C30(void) {
     if (!(gPlayerStatus.animFlags & PA_FLAG_INVISIBLE)) {
-        if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
-            suggest_player_anim_clearUnkFlag(WalkPeachAnims[gGameStatusPtr->peachCookingIngredient]);
+        if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DEPRESSED)) {
+            suggest_player_anim_clearUnkFlag(WalkPeachAnims[gGameStatusPtr->peachBakingIngredient]);
             return;
         }
         suggest_player_anim_clearUnkFlag(ANIM_Peach_D000D);
@@ -244,7 +244,7 @@ static void action_update_walk_peach(void) {
     }
 
     playerStatus->targetYaw = angle;
-    if (gGameStatusPtr->peachCookingIngredient == 0 && sqrtf(SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1])) > 55.0f) {
+    if (gGameStatusPtr->peachBakingIngredient == 0 && sqrtf(SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1])) > 55.0f) {
         set_action_state(ACTION_STATE_RUN);
         return;
     }
@@ -267,11 +267,11 @@ static void action_update_run_peach(void) {
 
         if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
             gameStatus = gGameStatusPtr;
-            if (!(gameStatus->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
-                if (!gameStatus->peachCookingIngredient) {
+            if (!(gameStatus->peachFlags & PEACH_STATUS_FLAG_DEPRESSED)) {
+                if (!gameStatus->peachBakingIngredient) {
                     suggest_player_anim_clearUnkFlag(ANIM_Peach_A0003);
                 } else {
-                    suggest_player_anim_clearUnkFlag(WalkPeachAnims[gameStatus->peachCookingIngredient]);
+                    suggest_player_anim_clearUnkFlag(WalkPeachAnims[gameStatus->peachBakingIngredient]);
                 }
             } else {
                 suggest_player_anim_clearUnkFlag(ANIM_Peach_D000D);

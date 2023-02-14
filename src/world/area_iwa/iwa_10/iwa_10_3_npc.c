@@ -122,102 +122,98 @@ EvtScript N(EVS_NpcInit_ThreeSisters_01) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TrainToad)[] = {
+NpcData N(NpcData_TrainToad)[] = {
     {
         .id = NPC_TrainToad_01,
-        .settings = &N(NpcSettings_TrainToad),
         .pos = { -440.0f, 20.0f, 110.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_TrainToad_01),
-        .drops = TRAIN_CONDUCTOR_DROPS,
+        .settings = &N(NpcSettings_TrainToad),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = TRAIN_TOAD_WHITE_ANIMS,
         .tattle = MSG_NpcTattle_IWA_StationMaster,
     },
     {
         .id = NPC_TrainToad_02,
-        .settings = &N(NpcSettings_TrainToad),
         .pos = { -425.0f, 70.0f, -20.0f },
         .yaw = 0,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_TrainToad_02),
-        .drops = TRAIN_CONDUCTOR_DROPS,
+        .settings = &N(NpcSettings_TrainToad),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = TRAIN_CONDUCTOR_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Toad) = {
+NpcData N(NpcData_Toad) = {
     .id = NPC_Toad,
-    .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { -254.0f, 20.0f, 165.0f },
     .yaw = 270,
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Toad),
-    .drops = {
-        .dropFlags = NPC_DROP_FLAG_80,
-        .heartDrops  = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-    },
+    .settings = &N(NpcSettings_Toad_Stationary),
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_IWA_TravelAgent,
 };
 
-StaticNpc N(NpcData_ThreeSisters)[] = {
+NpcData N(NpcData_ThreeSisters)[] = {
     {
         .id = NPC_ThreeSisters_02,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -562.0f, 0.0f, 384.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_ThreeSisters_02),
-        .drops = TOADETTE_DROPS,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidA,
     },
     {
         .id = NPC_ThreeSisters_03,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -582.0f, 0.0f, 406.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_ThreeSisters_02),
-        .drops = TOADETTE_DROPS,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidB,
     },
     {
         .id = NPC_ThreeSisters_04,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -524.0f, 0.0f, 411.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_ThreeSisters_02),
-        .drops = TOADETTE_DROPS,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidC,
     },
 };
 
-StaticNpc N(NpcData_Dryite)[] = {
+NpcData N(NpcData_Dryite)[] = {
     {
         .id = NPC_Dryite,
-        .settings = &N(NpcSettings_Dryite),
         .pos = { -344.0f, 0.0f, 379.0f },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Dryite),
-        .drops = DRYITE_DROPS,
+        .settings = &N(NpcSettings_Dryite),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = DRYITE_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_IWA_StationLoiterer,
     },
     {
         .id = NPC_ThreeSisters_01,
-        .settings = &N(NpcSettings_Toad_Stationary),
         .pos = { -760.0f, 0.0f, 160.0f },
         .yaw = 90,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_ThreeSisters_01),
-        .drops = TOADETTE_DROPS,
+        .settings = &N(NpcSettings_Toad_Stationary),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = TOADETTE_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_IWA_Conservationist,
     },

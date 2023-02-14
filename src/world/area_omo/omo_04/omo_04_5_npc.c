@@ -1,9 +1,9 @@
 #include "omo_04.h"
 
-#include "world/common/enemy/complete/SkyGuy.inc.c"
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/SkyGuy.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
 
-#include "world/common/enemy/complete/Goomba.h"
+#include "world/common/enemy/Goomba.h"
 
 // level changed from 5 -> 14
 NpcSettings N(NpcSettings_Goomba) = {
@@ -15,8 +15,8 @@ NpcSettings N(NpcSettings_Goomba) = {
     .actionFlags = AI_ACTION_JUMP_WHEN_SEE_PLAYER,
 };
 
-#include "world/common/enemy/complete/Clubba.inc.c"
-#include "world/common/enemy/complete/Kammy.inc.c"
+#include "world/common/enemy/Clubba.inc.c"
+#include "world/common/enemy/Kammy_Flying.inc.c"
 
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 #include "world/common/todo/UnsetCamera0Flag1000.inc.c"
@@ -89,35 +89,32 @@ EvtScript N(EVS_NpcInit_Kammy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Goomba) = {
+NpcData N(NpcData_Goomba) = {
     .id = NPC_Goomba,
-    .settings = &N(NpcSettings_Goomba),
     .pos = { 1100.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Goomba),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Goomba),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = GOOMBA_ANIMS,
 };
 
-StaticNpc N(NpcData_Clubba) = {
+NpcData N(NpcData_Clubba) = {
     .id = NPC_Clubba,
-    .settings = &N(NpcSettings_Clubba),
     .pos = { 1100.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_Clubba),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Clubba),
+    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = CLUBBA_ANIMS_ALT,
 };
 
-StaticNpc N(NpcData_ShyGuy) = {
+NpcData N(NpcData_ShyGuy) = {
     .id = NPC_ShyGuy,
-    .settings = &N(NpcSettings_ShyGuy_Wander),
     .pos = { -770.0f, 0.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_800,
-    .drops = SHY_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -130,17 +127,17 @@ StaticNpc N(NpcData_ShyGuy) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_ShyGuy_Wander),
+    .flags = ENEMY_FLAG_800,
+    .drops = SHY_GUY_DROPS,
     .animations = PINK_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_SkyGuy) = {
+NpcData N(NpcData_SkyGuy) = {
     .id = NPC_SkyGuy,
-    .settings = &N(NpcSettings_SkyGuy),
     .pos = { -170.0f, 60.0f, 30.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_800,
-    .drops = SKY_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -153,28 +150,31 @@ StaticNpc N(NpcData_SkyGuy) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_SkyGuy),
+    .flags = ENEMY_FLAG_800,
+    .drops = SKY_GUY_DROPS,
     .animations = SKY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-s32 N(ExtraAnims_Kammy)[] = {
+AnimID N(ExtraAnims_Kammy)[] = {
     ANIM_WorldKammy_Anim0E,
     ANIM_WorldKammy_Anim0F,
     ANIM_WorldKammy_Anim10,
     ANIM_WorldKammy_Anim13,
     ANIM_WorldKammy_Anim15,
     ANIM_WorldKammy_Anim16,
-    -1
+    ANIM_LIST_END
 };
 
-StaticNpc N(NpcData_Kammy) = {
+NpcData N(NpcData_Kammy) = {
     .id = NPC_Kammy,
-    .settings = &N(NpcSettings_Kammy),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Kammy),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_Kammy_Flying),
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),
 };

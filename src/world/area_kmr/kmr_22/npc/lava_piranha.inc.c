@@ -1,5 +1,5 @@
 
-#include "world/common/enemy/complete/LavaPiranha.h"
+#include "world/common/enemy/LavaPiranha.h"
 
 #include "world/common/lava_piranha/part1.inc.c"
 

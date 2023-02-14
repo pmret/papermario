@@ -1,6 +1,6 @@
 #include "mim_04.h"
 
-#include "world/common/enemy/complete/ForestFuzzy_Wander.inc.c"
+#include "world/common/enemy/ForestFuzzy_Wander.inc.c"
 
 #include "world/common/npc/Bubulb.inc.c"
 
@@ -54,13 +54,10 @@ EvtScript N(EVS_NpcInit_Bubulb) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Fuzzy) = {
+NpcData N(NpcData_Fuzzy) = {
     .id = NPC_Fuzzy,
-    .settings = &N(NpcSettings_ForestFuzzy_Wander),
     .pos = { 240.0f, 0.0f, -240.0f },
     .yaw = 0,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
-    .drops = FOREST_FUZZY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -73,18 +70,21 @@ StaticNpc N(NpcData_Fuzzy) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_ForestFuzzy_Wander),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .drops = FOREST_FUZZY_DROPS,
     .animations = FOREST_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_Bubulb) = {
+NpcData N(NpcData_Bubulb) = {
     .id = NPC_Bubulb,
-    .settings = &N(NpcSettings_Bubulb),
     .pos = { 0.0f, 32.0f, 0.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .init = &N(EVS_NpcInit_Bubulb),
-    .drops = BUBULB_DROPS,
+    .settings = &N(NpcSettings_Bubulb),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .drops = NO_DROPS,
     .animations = BUBULB_GREEN_ANIMS,
     .tattle = MSG_NpcTattle_MIM_Bubulb_Revealed,
 };

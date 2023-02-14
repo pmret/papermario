@@ -1,14 +1,10 @@
 #include "omo_05.h"
 
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
-#include "world/common/enemy/complete/GrooveGuy.inc.c"
-#include "world/common/enemy/complete/SkyGuy.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/GrooveGuy.inc.c"
+#include "world/common/enemy/SkyGuy.inc.c"
 
-NpcSettings N(NpcSettings_GourmetGuy) = {
-    .height = 68,
-    .radius = 60,
-    .level = 99,
-};
+#include "world/common/npc/GourmetGuy.inc.c"
 
 #include "world/common/complete/NormalItemChoice.inc.c"
 
@@ -39,8 +35,9 @@ API_CALLABLE(N(SpinCameraAround)) {
 
     if (script->functionTempF[0] >= 360.0) {
         return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
     }
-    return ApiStatus_BLOCK;
 }
 
 BSS s32 N(AllConsumables)[ITEM_NUM_CONSUMABLES + 1];
@@ -392,110 +389,44 @@ EvtScript N(EVS_NpcInit_GourmetGuy) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_GourmetGuy)[] = {
+NpcData N(NpcData_GourmetGuy)[] = {
     {
         .id = NPC_GourmetGuy,
-        .settings = &N(NpcSettings_GourmetGuy),
         .pos = { -250.0f, 10.0f, 85.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_GourmetGuy),
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_GourmetGuy_Idle,
-            .walk   = ANIM_GourmetGuy_Idle,
-            .run    = ANIM_GourmetGuy_Idle,
-            .chase  = ANIM_GourmetGuy_Idle,
-            .anim_4 = ANIM_GourmetGuy_Idle,
-            .anim_5 = ANIM_GourmetGuy_Idle,
-            .death  = ANIM_GourmetGuy_Idle,
-            .hit    = ANIM_GourmetGuy_Idle,
-            .anim_8 = ANIM_GourmetGuy_Idle,
-            .anim_9 = ANIM_GourmetGuy_Idle,
-            .anim_A = ANIM_GourmetGuy_Idle,
-            .anim_B = ANIM_GourmetGuy_Idle,
-            .anim_C = ANIM_GourmetGuy_Idle,
-            .anim_D = ANIM_GourmetGuy_Idle,
-            .anim_E = ANIM_GourmetGuy_Idle,
-            .anim_F = ANIM_GourmetGuy_Idle,
-        },
+        .settings = &N(NpcSettings_GourmetGuy),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
+        .animations = GOURMET_GUY_ANIMS,
         .tattle = MSG_NpcTattle_GourmetGuy,
     },
     {
         .id = NPC_GourmetGuy_Knife,
-        .settings = &N(NpcSettings_GourmetGuy),
         .pos = { -250.0f, 10.0f, 85.0f },
         .yaw = 90,
+        .settings = &N(NpcSettings_GourmetGuy),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_GourmetGuy_Idle,
-            .walk   = ANIM_GourmetGuy_Idle,
-            .run    = ANIM_GourmetGuy_Idle,
-            .chase  = ANIM_GourmetGuy_Idle,
-            .anim_4 = ANIM_GourmetGuy_Idle,
-            .anim_5 = ANIM_GourmetGuy_Idle,
-            .death  = ANIM_GourmetGuy_Idle,
-            .hit    = ANIM_GourmetGuy_Idle,
-            .anim_8 = ANIM_GourmetGuy_Idle,
-            .anim_9 = ANIM_GourmetGuy_Idle,
-            .anim_A = ANIM_GourmetGuy_Idle,
-            .anim_B = ANIM_GourmetGuy_Idle,
-            .anim_C = ANIM_GourmetGuy_Idle,
-            .anim_D = ANIM_GourmetGuy_Idle,
-            .anim_E = ANIM_GourmetGuy_Idle,
-            .anim_F = ANIM_GourmetGuy_Idle,
-        },
+        .drops = NO_DROPS,
+        .animations = GOURMET_GUY_ANIMS,
         .tattle = MSG_NpcTattle_GourmetGuy,
     },
     {
         .id = NPC_GourmetGuy_Fork,
-        .settings = &N(NpcSettings_GourmetGuy),
         .pos = { -250.0f, 10.0f, 85.0f },
         .yaw = 90,
+        .settings = &N(NpcSettings_GourmetGuy),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
-        .animations = {
-            .idle   = ANIM_GourmetGuy_Idle,
-            .walk   = ANIM_GourmetGuy_Idle,
-            .run    = ANIM_GourmetGuy_Idle,
-            .chase  = ANIM_GourmetGuy_Idle,
-            .anim_4 = ANIM_GourmetGuy_Idle,
-            .anim_5 = ANIM_GourmetGuy_Idle,
-            .death  = ANIM_GourmetGuy_Idle,
-            .hit    = ANIM_GourmetGuy_Idle,
-            .anim_8 = ANIM_GourmetGuy_Idle,
-            .anim_9 = ANIM_GourmetGuy_Idle,
-            .anim_A = ANIM_GourmetGuy_Idle,
-            .anim_B = ANIM_GourmetGuy_Idle,
-            .anim_C = ANIM_GourmetGuy_Idle,
-            .anim_D = ANIM_GourmetGuy_Idle,
-            .anim_E = ANIM_GourmetGuy_Idle,
-            .anim_F = ANIM_GourmetGuy_Idle,
-        },
+        .drops = NO_DROPS,
+        .animations = GOURMET_GUY_ANIMS,
         .tattle = MSG_NpcTattle_GourmetGuy,
     },
 };
 
-StaticNpc N(NpcData_GrooveGuy) = {
+NpcData N(NpcData_GrooveGuy) = {
     .id = NPC_GrooveGuy,
-    .settings = &N(NpcSettings_GrooveGuy),
     .pos = { 320.0f, 10.0f, -145.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = GROOVE_GUY_DROPS_A,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -508,6 +439,9 @@ StaticNpc N(NpcData_GrooveGuy) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_GrooveGuy),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = GROOVE_GUY_DROPS_A,
     .animations = GROOVE_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

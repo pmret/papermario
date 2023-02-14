@@ -18,4 +18,8 @@ enum {
     NPC_KoopaBros_04            = 3,
 };
 
+enum {
+    MV_Unk_01               = MapVar(1),
+};
+
 #define NAMESPACE trd_10

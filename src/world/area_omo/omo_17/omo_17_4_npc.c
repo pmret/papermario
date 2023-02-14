@@ -1,10 +1,10 @@
 #include "omo_17.h"
 
-#include "world/common/enemy/complete/ShyGuy_Wander.inc.c"
-#include "world/common/enemy/complete/PyroGuy.inc.c"
-#include "world/common/enemy/complete/GrooveGuy.inc.c"
-#include "world/common/enemy/complete/SkyGuy.inc.c"
-#include "world/common/enemy/complete/SpyGuy.inc.c"
+#include "world/common/enemy/ShyGuy_Wander.inc.c"
+#include "world/common/enemy/PyroGuy.inc.c"
+#include "world/common/enemy/GrooveGuy.inc.c"
+#include "world/common/enemy/SkyGuy.inc.c"
+#include "world/common/enemy/SpyGuy.inc.c"
 
 EvtScript N(EVS_NpcAuxAI_Conductor) = {
     EVT_RETURN
@@ -31,24 +31,21 @@ NpcSettings N(NpcSettings_Conductor) = {
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
-StaticNpc N(NpcData_Conductor) = {
+NpcData N(NpcData_Conductor) = {
     .id = NPC_Conductor,
-    .settings = &N(NpcSettings_Conductor),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
-    .flags = ENEMY_FLAG_PASSIVE,
     .initVarCount = 1,
     .initVar = { .value = 0 },
+    .settings = &N(NpcSettings_Conductor),
+    .flags = ENEMY_FLAG_PASSIVE,
 };
 
-StaticNpc N(NpcData_SpyGuy)[] = {
+NpcData N(NpcData_SpyGuy)[] = {
     {
         .id = NPC_SpyGuy,
-        .settings = &N(NpcSettings_SpyGuy),
         .pos = { -305.0f, 0.0f, 135.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = SPY_GUY_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -61,6 +58,9 @@ StaticNpc N(NpcData_SpyGuy)[] = {
                 .detectSize = { 250 },
             }
         },
+        .settings = &N(NpcSettings_SpyGuy),
+        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = SPY_GUY_DROPS,
         .animations = SPY_GUY_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
     },
@@ -69,13 +69,10 @@ StaticNpc N(NpcData_SpyGuy)[] = {
     SPY_GUY_ROCK_HITBOX(NPC_SpyGuy_Rock3),
 };
 
-StaticNpc N(NpcData_PyroGuy) = {
+NpcData N(NpcData_PyroGuy) = {
     .id = NPC_PyroGuy,
-    .settings = &N(NpcSettings_PyroGuy),
     .pos = { 354.0f, 10.0f, -113.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = PYRO_GUY_DROPS,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -88,17 +85,17 @@ StaticNpc N(NpcData_PyroGuy) = {
             .detectSize = { 250 },
         }
     },
+    .settings = &N(NpcSettings_PyroGuy),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = PYRO_GUY_DROPS,
     .animations = PYRO_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
-StaticNpc N(NpcData_GrooveGuy) = {
+NpcData N(NpcData_GrooveGuy) = {
     .id = NPC_GrooveGuy,
-    .settings = &N(NpcSettings_GrooveGuy),
     .pos = { -150.0f, 10.0f, -125.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = GROOVE_GUY_DROPS_B,
     .territory = {
         .wander = {
             .isFlying = TRUE,
@@ -111,6 +108,9 @@ StaticNpc N(NpcData_GrooveGuy) = {
             .detectSize = { 200 },
         }
     },
+    .settings = &N(NpcSettings_GrooveGuy),
+    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .drops = GROOVE_GUY_DROPS_B,
     .animations = GROOVE_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };

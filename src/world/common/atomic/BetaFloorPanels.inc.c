@@ -25,7 +25,7 @@ API_CALLABLE(N(CheckShouldBreakFloor)) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(CheckShouldFlipFloor)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(CheckShouldFlipFloor)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 distance = dist2D(
         playerStatus->position.x, playerStatus->position.z,

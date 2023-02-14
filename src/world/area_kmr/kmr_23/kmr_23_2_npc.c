@@ -535,163 +535,163 @@ EvtScript N(EVS_NpcInit_Eldstar_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Eldstar)[] = {
+NpcData N(NpcData_Eldstar)[] = {
     {
         .id = NPC_StarSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = ELDSTAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
     },
     {
         .id = NPC_AuxSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = ELDSTAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Mamar)[] = {
+NpcData N(NpcData_Mamar)[] = {
     {
         .id = NPC_StarSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = MAMAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = MAMAR_ANIMS,
     },
     {
         .id = NPC_AuxSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = MAMAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = MAMAR_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Skolar)[] = {
+NpcData N(NpcData_Skolar)[] = {
     {
         .id = NPC_StarSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = SKOLAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = SKOLAR_ANIMS,
     },
     {
         .id = NPC_AuxSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = SKOLAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = SKOLAR_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Muskular)[] = {
+NpcData N(NpcData_Muskular)[] = {
     {
         .id = NPC_StarSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = MUSKULAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = MUSKULAR_ANIMS,
     },
     {
         .id = NPC_AuxSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = MUSKULAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = MUSKULAR_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Misstar)[] = {
+NpcData N(NpcData_Misstar)[] = {
     {
         .id = NPC_StarSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = MISSTAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = MISSTAR_ANIMS,
     },
     {
         .id = NPC_AuxSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = MISSTAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = MISSTAR_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Klevar)[] = {
+NpcData N(NpcData_Klevar)[] = {
     {
         .id = NPC_StarSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = KLEVAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = KLEVAR_ANIMS,
     },
     {
         .id = NPC_AuxSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = KLEVAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = KLEVAR_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_Kalmar)[] = {
+NpcData N(NpcData_Kalmar)[] = {
     {
         .id = NPC_StarSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_01),
-        .drops = KALMAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = KALMAR_ANIMS,
     },
     {
         .id = NPC_AuxSpirit,
-        .settings = &N(NpcSettings_StarSpirit),
         .pos = { -40.0f, 96.0f, 0.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_Eldstar_02),
-        .drops = KALMAR_DROPS,
+        .settings = &N(NpcSettings_StarSpirit),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = KALMAR_ANIMS,
     },
 };

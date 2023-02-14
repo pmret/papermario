@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(GetLeftRightPoints)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetLeftRightPoints)) {
     Bytecode* args = script->ptrReadPos;
     s32 posX = evt_get_variable(script, *args++);
     s32 posZ = evt_get_variable(script, *args++);

@@ -15,16 +15,16 @@
 #define MERLOW_BADGE_COUNT 15
 
 enum {
-	NPC_Merluvlee   = 0,
-	NPC_Merlow      = 1,
+    NPC_Merluvlee   = 0,
+    NPC_Merlow      = 1,
 };
 
 enum {
-	MV_RitualFXArrayPtr	= MapVar(10),
+    MV_RitualFXArrayPtr = MapVar(10),
 };
 
 enum {
-    MF_PurchasedBadge	= MapFlag(0),
+    MF_PurchasedBadge   = MapFlag(0),
 };
 
 #define NAMESPACE hos_06

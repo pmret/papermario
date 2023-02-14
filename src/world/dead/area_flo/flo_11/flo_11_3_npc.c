@@ -1,6 +1,6 @@
 #include "flo_11.h"
 
-#include "world/common/enemy/complete/Lakitu_Stationary.inc.c"
+#include "world/common/enemy/Lakitu_Stationary.inc.c"
 
 Vec3f N(FlightPath_Lakitu_01_Search)[] = {
     {  460.0,   200.0, -240.0 },
@@ -368,24 +368,24 @@ EvtScript N(EVS_NpcInit_Lakitu_02) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Lakitus)[] = {
+NpcData N(NpcData_Lakitus)[] = {
     {
         .id = NPC_Lakitu_01,
-        .settings = &N(NpcSettings_Lakitu),
         .pos = { 553.0f, 60.0f, 52.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_Lakitu_01),
+        .settings = &N(NpcSettings_Lakitu),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
         .drops = LAKITU_DROPS,
         .animations = LAKITU_ANIMS,
     },
     {
         .id = NPC_Lakitu_02,
-        .settings = &N(NpcSettings_Lakitu),
         .pos = { 553.0f, 60.0f, 52.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
         .init = &N(EVS_NpcInit_Lakitu_02),
+        .settings = &N(NpcSettings_Lakitu),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
         .drops = LAKITU_DROPS,
         .animations = LAKITU_ANIMS,
     },

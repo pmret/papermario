@@ -1,13 +1,6 @@
 #include "common.h"
 #include "sprite/npc/WorldBobomb.h"
 
-#define BOBOMB_DROPS \
-{ \
-    .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = NO_DROPS, \
-    .flowerDrops = NO_DROPS, \
-}
-
 #define BOBOMB_GREEN_ANIMS \
 { \
     .idle   = ANIM_WorldBobomb_Green_Idle, \

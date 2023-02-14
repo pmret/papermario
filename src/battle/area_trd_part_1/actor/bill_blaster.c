@@ -243,7 +243,7 @@ EvtScript N(8021A470) = {
 
 extern ActorBlueprint A(bullet_bill);
 
-Vec3i N(vector3D_8021A4DC) = { 0, -1000, 0, };
+Vec3i N(vector3D_8021A4DC) = { NPC_DISPOSE_LOCATION, };
 
 Formation N(specialFormation_8021A4E8) = {
     { .actor = &A(bullet_bill), .home = { .vec = &N(vector3D_8021A4DC) }, .priority = 100 },

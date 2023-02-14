@@ -3,7 +3,6 @@
 #include "world/common/entity/Pipe.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 EvtScript N(EVS_ExitWalk_tik_01_1) = EVT_EXIT_WALK(60, tik_03_ENTRY_0, "tik_01", tik_01_ENTRY_1);
 
@@ -76,7 +75,7 @@ EvtScript N(EVS_Main) = {
     EVT_END_THREAD
     EVT_EXEC(N(EVS_SetupPlatforms))
     EVT_CALL(GetDemoState, LVar0)
-    EVT_IF_NE(LVar0, 0)
+    EVT_IF_NE(LVar0, DEMO_STATE_NONE)
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitPipe_tik_04_2)), TRIGGER_WALL_PUSH, COLLIDER_o46, 1, 0)
         EVT_EXEC_WAIT(N(EVS_PlayDemoScene))
         EVT_RETURN

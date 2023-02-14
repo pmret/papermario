@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(GetPlayerCoins)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetPlayerCoins)) {
     script->varTable[0] = gPlayerData.coins;
     return ApiStatus_DONE2;
 }

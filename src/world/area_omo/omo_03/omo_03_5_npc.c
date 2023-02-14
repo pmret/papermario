@@ -3,7 +3,7 @@
 #include "world/common/npc/TrainToad.inc.c"
 #include "world/common/npc/Parakarry.inc.c"
 
-#include "world/common/enemy/complete/ShyGuy_Stationary.inc.c"
+#include "world/common/enemy/ShyGuy_Stationary.inc.c"
 
 EvtScript N(EVS_ItemPrompt_ToyTrain) = {
     EVT_CALL(DisablePlayerInput, TRUE)
@@ -121,48 +121,48 @@ EvtScript N(EVS_NpcInit_TrainToad) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_TrainToads)[] = {
+NpcData N(NpcData_TrainToads)[] = {
     {
         .id = NPC_Conductor,
-        .settings = &N(NpcSettings_TrainToad),
         .pos = { 170.0f, 50.0f, -115.0f },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_Conductor),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_TrainToad),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = TRAIN_CONDUCTOR_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,
     },
     {
         .id = NPC_TrainToad,
-        .settings = &N(NpcSettings_TrainToad),
         .pos = { 158.0f, 0.0f, 85.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .init = &N(EVS_NpcInit_TrainToad),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_TrainToad),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .drops = NO_DROPS,
         .animations = TRAIN_TOAD_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,
     }
 };
 
-StaticNpc N(NpcData_Epilogue)[] = {
+NpcData N(NpcData_Epilogue)[] = {
     {
         .id = NPC_Parakarry,
-        .settings = &N(NpcSettings_Parakarry),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 90,
+        .settings = &N(NpcSettings_Parakarry),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = PARAKARRY_ANIMS,
     },
     {
         .id = NPC_Watt,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { 50.0f, 15.0f, 160.0f },
         .yaw = 90,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldWatt_Idle,
             .walk   = ANIM_WorldWatt_Idle,
@@ -184,29 +184,29 @@ StaticNpc N(NpcData_Epilogue)[] = {
     },
     {
         .id = NPC_ShyGuy_01,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { 100.0f, 0.0f, 160.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ShyGuy_02,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { 115.0f, 0.0f, 200.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
     {
         .id = NPC_ShyGuy_03,
-        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .pos = { 145.0f, 0.0f, 150.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_ShyGuy_Stationary),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
 };

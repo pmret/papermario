@@ -335,18 +335,14 @@ NpcSettings N(NpcSettings_KoopaBros_04) = {
     .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
 };
 
-StaticNpc N(NpcData_KoopaBros_01)[] = {
+NpcData N(NpcData_KoopaBros_01)[] = {
     {
         .id = NPC_KoopaBros_01,
-        .settings = &N(NpcSettings_KoopaBros_01),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_KoopaBros_01),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Black_Anim04,
             .walk   = ANIM_KoopaBros_Black_Anim02,
@@ -368,15 +364,11 @@ StaticNpc N(NpcData_KoopaBros_01)[] = {
     },
     {
         .id = NPC_KoopaBros_02,
-        .settings = &N(NpcSettings_KoopaBros_02),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_KoopaBros_02),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Red_Anim04,
             .walk   = ANIM_KoopaBros_Red_Anim02,
@@ -398,15 +390,11 @@ StaticNpc N(NpcData_KoopaBros_01)[] = {
     },
     {
         .id = NPC_KoopaBros_03,
-        .settings = &N(NpcSettings_KoopaBros_03),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_KoopaBros_03),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Yellow_Anim04,
             .walk   = ANIM_KoopaBros_Yellow_Anim02,
@@ -428,15 +416,11 @@ StaticNpc N(NpcData_KoopaBros_01)[] = {
     },
     {
         .id = NPC_KoopaBros_04,
-        .settings = &N(NpcSettings_KoopaBros_04),
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_KoopaBros_04),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
-        .drops = {
-            .dropFlags = NPC_DROP_FLAG_80,
-            .heartDrops  = NO_DROPS,
-            .flowerDrops = NO_DROPS,
-        },
+        .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Green_Anim04,
             .walk   = ANIM_KoopaBros_Green_Anim02,

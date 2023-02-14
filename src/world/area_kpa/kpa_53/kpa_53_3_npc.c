@@ -26,11 +26,7 @@ API_CALLABLE(N(UpdateFollowerPosition)) {
     return ApiStatus_DONE2;
 }
 
-NpcSettings N(NpcSettings_Peach) = {
-    .height = 46,
-    .radius = 36,
-    .level = 99,
-};
+#include "world/common/npc/Peach.inc.c"
 
 NpcSettings N(NpcSettings_Duplighost) = {
     .height = 30,
@@ -343,70 +339,36 @@ EvtScript N(EVS_NpcInit_Guardian) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Imposter)[] = {
+NpcData N(NpcData_Imposter)[] = {
     {
         .id = NPC_Follower,
-        .settings = &N(NpcSettings_Peach),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_20000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Follower),
-        .drops = NPC_NO_DROPS,
-        .animations = {
-            .idle   = ANIM_Peach_A0000,
-            .walk   = ANIM_Peach_A0000,
-            .run    = ANIM_Peach_A0000,
-            .chase  = ANIM_Peach_A0000,
-            .anim_4 = ANIM_Peach_A0000,
-            .anim_5 = ANIM_Peach_A0000,
-            .death  = ANIM_Peach_A0000,
-            .hit    = ANIM_Peach_A0000,
-            .anim_8 = ANIM_Peach_A0000,
-            .anim_9 = ANIM_Peach_A0000,
-            .anim_A = ANIM_Peach_A0000,
-            .anim_B = ANIM_Peach_A0000,
-            .anim_C = ANIM_Peach_A0000,
-            .anim_D = ANIM_Peach_A0000,
-            .anim_E = ANIM_Peach_A0000,
-            .anim_F = ANIM_Peach_A0000,
-        },
+        .settings = &N(NpcSettings_Peach),
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_20000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
+        .animations = PEACH_ANIMS,
         .tattle = MSG_NpcTattle_KPA_FakePrincessPeach,
     },
     {
         .id = NPC_Guardian,
-        .settings = &N(NpcSettings_Peach),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH,
         .init = &N(EVS_NpcInit_Guardian),
-        .drops = NPC_NO_DROPS,
-        .animations = {
-            .idle   = ANIM_Peach_A0000,
-            .walk   = ANIM_Peach_A0000,
-            .run    = ANIM_Peach_A0000,
-            .chase  = ANIM_Peach_A0000,
-            .anim_4 = ANIM_Peach_A0000,
-            .anim_5 = ANIM_Peach_A0000,
-            .death  = ANIM_Peach_A0000,
-            .hit    = ANIM_Peach_A0000,
-            .anim_8 = ANIM_Peach_A0000,
-            .anim_9 = ANIM_Peach_A0000,
-            .anim_A = ANIM_Peach_A0000,
-            .anim_B = ANIM_Peach_A0000,
-            .anim_C = ANIM_Peach_A0000,
-            .anim_D = ANIM_Peach_A0000,
-            .anim_E = ANIM_Peach_A0000,
-            .anim_F = ANIM_Peach_A0000,
-        },
+        .settings = &N(NpcSettings_Peach),
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH,
+        .drops = NO_DROPS,
+        .animations = PEACH_ANIMS,
         .tattle = MSG_NpcTattle_KPA_FakePrincessPeach,
     },
     {
         .id = NPC_Duplighost,
-        .settings = &N(NpcSettings_Duplighost),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_Duplighost),
+        .settings = &N(NpcSettings_Duplighost),
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,

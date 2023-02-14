@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(Dist3D)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(Dist3D)) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);

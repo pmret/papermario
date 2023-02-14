@@ -28,7 +28,7 @@ enum {
     NPC_Misstar         = 4,
     NPC_Klevar          = 5,
     NPC_Kalmar          = 6,
-    NPC_Bowser_Main     = 7,
+    NPC_Bowser_Body     = 7,
     NPC_Bowser_Prop     = 8,
     NPC_Kammy           = 9,
     NPC_StarRod         = 10,

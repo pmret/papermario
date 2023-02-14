@@ -4,6 +4,20 @@
 enum {
     AB_KZN_LastZiplineNpc1      = AreaByte(0),
     AB_KZN_LastZiplineNpc2      = AreaByte(1),
+    AB_KZN_Unused_2             = AreaByte(2),
+    AB_KZN_Unused_3             = AreaByte(3),
+    AB_KZN_Unused_4             = AreaByte(4),
+    AB_KZN_Unused_5             = AreaByte(5),
+    AB_KZN_Unused_6             = AreaByte(6),
+    AB_KZN_Unused_7             = AreaByte(7),
+    AB_KZN_Unused_8             = AreaByte(8),
+    AB_KZN_Unused_9             = AreaByte(9),
+    AB_KZN_Unused_A             = AreaByte(10),
+    AB_KZN_Unused_B             = AreaByte(11),
+    AB_KZN_Unused_C             = AreaByte(12),
+    AB_KZN_Unused_D             = AreaByte(13),
+    AB_KZN_Unused_E             = AreaByte(14),
+    AB_KZN_Unused_F             = AreaByte(15),
 };
 
 enum {

@@ -11,7 +11,7 @@
 // prerequisites
 #include "world/common/enemy/ai/States_TackleAI.inc.c"
 
-ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(TackleAI_Main)) {
     #ifdef _DEAD_H_
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     #else

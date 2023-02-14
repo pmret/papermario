@@ -1013,14 +1013,14 @@ EvtScript N(EVS_NpcInit_Toad) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_Toad) = {
+NpcData N(NpcData_Toad) = {
     .id = NPC_Toad,
-    .settings = &N(NpcSettings_Toad_Stationary),
     .pos = { 0.0f, 0.0f, -20.0f },
     .yaw = 270,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .init = &N(EVS_NpcInit_Toad),
-    .drops = TOAD_DROPS,
+    .settings = &N(NpcSettings_Toad_Stationary),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_MGM_JumpAttackGuide,
 };

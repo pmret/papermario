@@ -835,15 +835,15 @@ typedef struct SteamBurstFXData {
 } SteamBurstFXData; // size = 0x34
 
 typedef struct StarsOrbitingFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
+    /* 0x10 */ f32 orbitRadius;
+    /* 0x14 */ f32 targetRadius;
+    /* 0x18 */ f32 roll;
+    /* 0x1C */ f32 rollSpinRate;
+    /* 0x20 */ f32 pitch;
+    /* 0x24 */ s32 yaw;
+    /* 0x28 */ s32 enabled;
 } StarsOrbitingFXData; // size = 0x2C
 
 typedef struct BigSnowflakesFXData {

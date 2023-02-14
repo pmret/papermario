@@ -1,15 +1,12 @@
 #include "kpa_09.h"
 
-#include "world/common/enemy/complete/DryBones.inc.c"
+#include "world/common/enemy/DryBones.inc.c"
 
-StaticNpc N(NpcData_DryBones)[] = {
+NpcData N(NpcData_DryBones)[] = {
     {
         .id = NPC_DryBones,
-        .settings = &N(NpcSettings_DryBones),
         .pos = { -73.0f, 0.0f, 0.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_800,
-        .drops = DRY_BONES_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -22,6 +19,9 @@ StaticNpc N(NpcData_DryBones)[] = {
                 .detectSize = { 200 },
             }
         },
+        .settings = &N(NpcSettings_DryBones),
+        .flags = ENEMY_FLAG_800,
+        .drops = DRY_BONES_DROPS,
         .animations = DRY_BONES_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },

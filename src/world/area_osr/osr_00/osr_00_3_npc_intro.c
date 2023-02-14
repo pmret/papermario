@@ -2,13 +2,13 @@
 
 #include "world/common/npc/Luigi.inc.c"
 
-StaticNpc N(NpcData_Luigi) = {
+NpcData N(NpcData_Luigi) = {
     .id = NPC_Luigi,
-    .settings = &N(NpcSettings_Luigi),
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 90,
+    .settings = &N(NpcSettings_Luigi),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-    .drops = LUIGI_DROPS,
+    .drops = NO_DROPS,
     .animations = LUIGI_ANIMS,
 };
 

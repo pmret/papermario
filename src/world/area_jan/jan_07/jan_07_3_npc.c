@@ -2,7 +2,7 @@
 
 #include "world/common/npc/YoshiKid.inc.c"
 
-#include "world/common/enemy/complete/PutridPiranha.h"
+#include "world/common/enemy/PutridPiranha.h"
 
 NpcSettings N(NpcSettings_PutridPiranha) = {
     .height = 24,
@@ -10,7 +10,7 @@ NpcSettings N(NpcSettings_PutridPiranha) = {
     .level = 99,
 };
 
-#include "world/common/enemy/complete/SpearGuy_Wander.inc.c"
+#include "world/common/enemy/SpearGuy_Wander.inc.c"
 
 EvtScript N(EVS_YoshiKid_CryForHelp) = {
     EVT_SET(AF_JAN_02, FALSE)
@@ -287,14 +287,11 @@ EvtScript N(EVS_NpcInit_SpearGuy_Hitbox) = {
     EVT_END
 };
 
-StaticNpc N(NpcData_SpearGuy)[] = {
+NpcData N(NpcData_SpearGuy)[] = {
     {
         .id = NPC_SpearGuy,
-        .settings = &N(NpcSettings_SpearGuy_Wander),
         .pos = { -28.0f, 0.0f, 13.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
-        .drops = SPEAR_GUY_DROPS,
         .territory = {
             .wander = {
                 .isFlying = TRUE,
@@ -307,51 +304,54 @@ StaticNpc N(NpcData_SpearGuy)[] = {
                 .detectSize = { 150 },
             }
         },
+        .settings = &N(NpcSettings_SpearGuy_Wander),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = SPEAR_GUY_DROPS,
         .animations = SPEAR_GUY_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_SpearGuy_Hitbox,
-        .settings = &N(NpcSettings_SpearGuy_Hitbox),
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 0,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
         .init = &N(EVS_NpcInit_SpearGuy_Hitbox),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_SpearGuy_Hitbox),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .drops = NO_DROPS,
         .animations = SPEAR_GUY_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_PutridPiranhas)[] = {
+NpcData N(NpcData_PutridPiranhas)[] = {
     {
         .id = NPC_PutridPiranha_01,
-        .settings = &N(NpcSettings_PutridPiranha),
         .pos = { -20.0f, 0.0f, 20.0f },
         .yaw = 90,
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .init = &N(EVS_NpcInit_PutridPiranha),
-        .drops = NPC_NO_DROPS,
+        .settings = &N(NpcSettings_PutridPiranha),
+        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
     },
     {
         .id = NPC_PutridPiranha_02,
-        .settings = &N(NpcSettings_PutridPiranha),
         .pos = { 80.0f, 0.0f, 20.0f },
         .yaw = 270,
+        .settings = &N(NpcSettings_PutridPiranha),
         .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
-        .drops = NPC_NO_DROPS,
+        .drops = NO_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
     },
 };
 
-StaticNpc N(NpcData_YoshiKid) = {
+NpcData N(NpcData_YoshiKid) = {
     .id = NPC_YoshiKid,
-    .settings = &N(NpcSettings_YoshiKid),
     .pos = { 30.0f, 0.0f, 20.0f },
     .yaw = 90,
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .init = &N(EVS_NpcInit_YoshiKid),
-    .drops = NPC_NO_DROPS,
+    .settings = &N(NpcSettings_YoshiKid),
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .drops = NO_DROPS,
     .animations = YOSHI_KID_YELLOW_ANIMS,
     .tattle = MSG_NpcTattle_YellowYoshiKid,
 };

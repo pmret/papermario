@@ -2,7 +2,6 @@
 #include "effects.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "world/common/atomic/TexturePan.data.inc.c"
 
 u16 N(HaloScalePhaseAngle) = 0;
 
