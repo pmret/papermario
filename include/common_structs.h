@@ -1860,7 +1860,7 @@ typedef struct Actor {
     /* 0x196 */ s8 unk_196;
     /* 0x197 */ s8 unk_197;
     /* 0x198 */ Vec2b unk_198;
-    /* 0x19A */ s8 unk_19A;
+    /* 0x19A */ s8 verticalRenderOffset; // visual only, does not affect target position
     /* 0x19B */ char unk_19B[1];
     /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound, 5 = attack sound */ // TODO: struct
     /* 0x1B4 */ s16 actorTypeData1b[2];

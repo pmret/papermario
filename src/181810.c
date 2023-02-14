@@ -179,12 +179,12 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
 
         msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
 
-        if (gSpeakingActorPrintCtx->stateFlags & 0x40) {
+        if (gSpeakingActorPrintCtx->stateFlags & MSG_STATE_FLAG_40) {
             decrement_status_menu_disabled();
             return ApiStatus_DONE1;
         }
 
-        if (gSpeakingActorPrintCtx->stateFlags & 0x80) { // "is talking" flag
+        if (gSpeakingActorPrintCtx->stateFlags & MSG_STATE_FLAG_80) { // "is talking" flag
             anim = gSpeakingActorTalkAnim;
         } else {
             anim = gSpeakingActorIdleAnim;

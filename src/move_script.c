@@ -50,6 +50,7 @@ extern EvtScript battle_move_mega_jump_main;
 extern EvtScript battle_move_d_down_jump_main;
 extern EvtScript battle_move_shrink_stomp_main;
 extern EvtScript battle_move_earthquake_jump_main;
+extern EvtScript battle_move_auto_smash_UseMove;
 
 // Some moves seem to have multiple entry point methods, in which case the _SCR macro is used
 #define BTL_MOVE_TABLE_ENTRY(name) { battle_move_##name##_ROM_START, battle_move_##name##_ROM_END, battle_move_##name##_VRAM, &battle_move_##name##_main }
@@ -75,7 +76,7 @@ BattleTableEntry gMoveScriptTable[] = {
     BTL_MOVE_TABLE_ENTRY_SCR(hammer_charge_1, battle_move_hammer_charge_1_802A32B4),
     BTL_MOVE_TABLE_ENTRY_SCR(hammer_charge_2, battle_move_hammer_charge_2_802A3944),
     BTL_MOVE_TABLE_ENTRY_SCR(hammer_charge_2, battle_move_hammer_charge_2_802A32B4),
-    BTL_MOVE_TABLE_ENTRY(auto_smash),
+    BTL_MOVE_TABLE_ENTRY_SCR(auto_smash, battle_move_auto_smash_UseMove),
     BTL_MOVE_TABLE_ENTRY(power_quake),
     BTL_MOVE_TABLE_ENTRY(power_smash),
     BTL_MOVE_TABLE_ENTRY(super_smash),

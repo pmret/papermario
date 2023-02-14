@@ -145,7 +145,7 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 mode) {
         get_screen_coords(gCurrentCameraID, speakerNpc->pos.x, speakerNpc->pos.y + speakerNpc->collisionHeight, speakerNpc->pos.z, &screenX, &screenY, &screenZ);
         animID = script->varTable[13];
         if (animID != -1) {
-            if (!(gCurrentPrintContext->stateFlags & 0x80)) {
+            if (!(gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_80)) {
                 animID = script->varTable[14];
             }
             set_npc_animation(speakerNpc, animID);
@@ -153,7 +153,7 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 mode) {
     } else {
         get_screen_coords(gCurrentCameraID, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, &screenX, &screenY, &screenZ);
         if (script->varTable[13] != -1) {
-            if (gCurrentPrintContext->stateFlags & 0x80) {
+            if (gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_80) {
                 playerStatus->anim = script->varTable[13];
             } else {
                 playerStatus->anim = script->varTable[14];
@@ -165,7 +165,7 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 mode) {
         msg_printer_set_origin_pos(gCurrentPrintContext, screenX + ShowMessageScreenOffsetX, screenY + ShowMessageScreenOffsetY);
     }
 
-    if (gCurrentPrintContext->stateFlags & 0x40) {
+    if (gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_40) {
         return TRUE;
     }
 
@@ -200,7 +200,7 @@ ApiStatus ShowMessageAtScreenPos(Evt* script, s32 isInitialCall) {
         msg_printer_set_origin_pos(gCurrentPrintContext, x, y);
     }
 
-    if (gCurrentPrintContext->stateFlags & 0x40) {
+    if (gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_40) {
         return ApiStatus_DONE1;
     }
 
@@ -234,7 +234,7 @@ ApiStatus ShowMessageAtWorldPos(Evt* script, s32 isInitialCall) {
         msg_printer_set_origin_pos(*currentPrintContext, x2, y2);
     }
 
-    if (gCurrentPrintContext->stateFlags & 0x40) {
+    if (gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_40) {
         return ApiStatus_DONE1;
     }
 
@@ -251,7 +251,7 @@ ApiStatus CloseMessage(Evt* script, s32 isInitialCall) {
         close_message(gCurrentPrintContext);
     }
 
-    if (gCurrentPrintContext->stateFlags & 0x40) {
+    if (gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_40) {
         return ApiStatus_DONE1;
     } else if (D_802DB264 != 1) {
         return ApiStatus_BLOCK;
@@ -268,7 +268,7 @@ ApiStatus SwitchMessage(Evt* script, s32 isInitialCall) {
         msg_printer_load_msg(evt_get_variable(script, *args), gCurrentPrintContext);
     }
 
-    if (gCurrentPrintContext->stateFlags & 0x40) {
+    if (gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_40) {
         return ApiStatus_DONE1;
     } else if (D_802DB264 != 1) {
         return ApiStatus_BLOCK;
@@ -292,7 +292,7 @@ ApiStatus ShowChoice(Evt* script, s32 isInitialCall) {
     temp802DB268 = &D_802DB268;
     script->varTable[0] = gCurrentPrintContext->currentOption = (*temp802DB268)->currentOption;
 
-    if ((*temp802DB268)->stateFlags & 0x40) {
+    if ((*temp802DB268)->stateFlags & MSG_STATE_FLAG_40) {
         return ApiStatus_DONE1;
     }
 

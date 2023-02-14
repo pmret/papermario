@@ -128,7 +128,7 @@ ApiStatus N(unknownFunction)(Evt* script, s32 isInitialCall) {
 
     N(unknownCounter) += 9;
     N(unknownCounter) = clamp_angle(N(unknownCounter));
-    actor->unk_19A = sin_rad(DEG_TO_RAD(N(unknownCounter))) * 3.0f;
+    actor->verticalRenderOffset = sin_rad(DEG_TO_RAD(N(unknownCounter))) * 3.0f;
 
     return ApiStatus_DONE2;
 }

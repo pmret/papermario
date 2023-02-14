@@ -68,7 +68,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
     hud_element_set_render_depth(id, 0);
-    hud_element_set_alpha(id, 0xFF);
+    hud_element_set_alpha(id, 255);
 
     return ApiStatus_DONE2;
 }

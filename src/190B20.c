@@ -1208,7 +1208,7 @@ void load_player_actor(void) {
     player->rotationPivotOffset.x = 0;
     player->rotationPivotOffset.y = 0;
     player->rotationPivotOffset.z = 0;
-    player->unk_19A = 0;
+    player->verticalRenderOffset = 0;
     player->yaw = 0.0f;
     player->renderMode = RENDER_MODE_ALPHATEST;
     player->scale.x = 1.0f;
@@ -1463,7 +1463,7 @@ void load_partner_actor(void) {
         partnerActor->scaleModifier.x = 1.0f;
         partnerActor->scaleModifier.y = 1.0f;
         partnerActor->scaleModifier.z = 1.0f;
-        partnerActor->unk_19A = 0;
+        partnerActor->verticalRenderOffset = 0;
         partnerActor->size.x = ActorBlueprint->size.x;
         partnerActor->size.y = ActorBlueprint->size.y;
         partnerActor->healthBarPosition.x = partnerActor->homePos.x;
@@ -1708,7 +1708,7 @@ Actor* create_actor(Formation formation) {
     actor->scaleModifier.x = 1.0f;
     actor->scaleModifier.y = 1.0f;
     actor->scaleModifier.z = 1.0f;
-    actor->unk_19A = 0;
+    actor->verticalRenderOffset = 0;
     actor->extraCoinBonus = 0;
     actor->size.x = formationActor->size.x;
     actor->size.y = formationActor->size.y;

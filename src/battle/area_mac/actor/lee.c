@@ -2890,7 +2890,7 @@ ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall) {
         wattEffectData->unk_0C = TRUE;
         wattEffectData->unk_10 = 0;
         wattEffectData->effect1 = fx_static_status(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
-        wattEffectData->effect2 = fx_static_status(1, actor->currentPos.x, -1000.0f, actor->currentPos.z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
+        wattEffectData->effect2 = fx_static_status(1, actor->currentPos.x, NPC_DISPOSE_POS_Y, actor->currentPos.z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
         wattEffectData->flags = TRUE;
         wattEffectData->debuff = actor->debuff;
     }
@@ -2901,10 +2901,10 @@ ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall) {
             wattEffectData->angle += 15;
             wattEffectData->angle = clamp_angle(wattEffectData->angle);
         }
-        actor->unk_19A = sin_rad(DEG_TO_RAD(wattEffectData->angle)) * 3.0f;
+        actor->verticalRenderOffset = sin_rad(DEG_TO_RAD(wattEffectData->angle)) * 3.0f;
 
         x = actor->currentPos.x + actor->headOffset.x;
-        y = actor->currentPos.y + actor->headOffset.y + actor->unk_19A + (actor->debuff != STATUS_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
+        y = actor->currentPos.y + actor->headOffset.y + actor->verticalRenderOffset + (actor->debuff != STATUS_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
         z = actor->currentPos.z + actor->headOffset.z;
         if (wattEffectData->unk_0C) {
             switch (wattEffectData->unk_10) {

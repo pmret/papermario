@@ -908,6 +908,10 @@ enum SoundIDs {
     SOUND_231                       = 0x00000231,
     SOUND_233                       = 0x00000233,
     SOUND_234                       = 0x00000234,
+    SOUND_235                       = 0x00000235,
+    SOUND_236                       = 0x00000236,
+    SOUND_237                       = 0x00000237,
+    SOUND_238                       = 0x00000238,
     SOUND_23D                       = 0x0000023D,
     SOUND_241                       = 0x00000241,
     SOUND_245                       = 0x00000245,
@@ -6272,6 +6276,8 @@ enum MsgChars {
     MSG_CHAR_SINGLE_QUOTE_OPEN      = 0xA4,
     MSG_CHAR_SINGLE_QUOTE_CLOSE     = 0xA5,
     // 0xA6 to 0xEF are unused
+
+    MSG_CHAR_UNK_C3                 = 0xC3,
 
     // special character codes used when reading from the source buffer
     MSG_CHAR_READ_ENDL              = 0xF0,

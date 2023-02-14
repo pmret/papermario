@@ -62,9 +62,9 @@ ApiStatus N(WattFXUpdate)(Evt* script, s32 isInitialCall) {
         sWattEffectData_bouncePhase = clamp_angle(sWattEffectData_bouncePhase);
     }
 
-    partner->unk_19A = sin_rad(DEG_TO_RAD(sWattEffectData_bouncePhase)) * 3.0f;
+    partner->verticalRenderOffset = sin_rad(DEG_TO_RAD(sWattEffectData_bouncePhase)) * 3.0f;
     x = partner->currentPos.x + partner->headOffset.x;
-    y = partner->currentPos.y + partner->headOffset.y + partner->unk_19A + 12.0f;
+    y = partner->currentPos.y + partner->headOffset.y + partner->verticalRenderOffset + 12.0f;
     z = partner->currentPos.z + partner->headOffset.z;
     if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_4)) == BS_FLAGS2_4) {
         y = NPC_DISPOSE_POS_Y;
@@ -192,7 +192,7 @@ ApiStatus N(PowerShockDischargeFX)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* partner = gBattleStatus.partnerActor;
     f32 x = partner->currentPos.x + partner->headOffset.x;
-    f32 y = partner->currentPos.y + partner->headOffset.y + partner->unk_19A + 12.0f;
+    f32 y = partner->currentPos.y + partner->headOffset.y + partner->verticalRenderOffset + 12.0f;
     f32 z = partner->currentPos.z + partner->headOffset.z;
 
     if (isInitialCall) {
