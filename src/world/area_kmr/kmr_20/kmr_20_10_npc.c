@@ -4,20 +4,8 @@
 
 extern AnimScript Entity_SimpleSpring_AnimLaunch;
 
-NpcSettings N(NpcSettings_Luigi) = {
-    .height = 24,
-    .radius = 24,
-    .level = 99,
-};
-
-NpcSettings N(NpcSettings_ShyGuy) = {
-    .height = 23,
-    .radius = 22,
-    .level = 14,
-    .onHit = &EnemyNpcHit,
-    .onDefeat = &EnemyNpcDefeat,
-    .actionFlags = AI_ACTION_JUMP_WHEN_SEE_PLAYER,
-};
+#include "world/common/npc/Luigi.inc.c"
+#include "world/common/enemy/ShyGuy_Stationary.inc.c"
 
 #include "world/common/complete/GiveReward.inc.c"
 
@@ -621,24 +609,7 @@ NpcData N(NpcData_Luigi_0) = {
     .settings = &N(NpcSettings_Luigi),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
-    .animations = {
-        .idle   = ANIM_Luigi_Still,
-        .walk   = ANIM_Luigi_Still,
-        .run    = ANIM_Luigi_Still,
-        .chase  = ANIM_Luigi_Still,
-        .anim_4 = ANIM_Luigi_Still,
-        .anim_5 = ANIM_Luigi_Still,
-        .death  = ANIM_Luigi_Still,
-        .hit    = ANIM_Luigi_Still,
-        .anim_8 = ANIM_Luigi_Still,
-        .anim_9 = ANIM_Luigi_Still,
-        .anim_A = ANIM_Luigi_Still,
-        .anim_B = ANIM_Luigi_Still,
-        .anim_C = ANIM_Luigi_Still,
-        .anim_D = ANIM_Luigi_Still,
-        .anim_E = ANIM_Luigi_Still,
-        .anim_F = ANIM_Luigi_Still,
-    },
+    .animations = LUIGI_ANIMS,
     .tattle = MSG_NpcTattle_Luigi,
 };
 
@@ -650,24 +621,7 @@ NpcData N(NpcData_Luigi_1) = {
     .settings = &N(NpcSettings_Luigi),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
-    .animations = {
-        .idle   = ANIM_Luigi_Still,
-        .walk   = ANIM_Luigi_Still,
-        .run    = ANIM_Luigi_Still,
-        .chase  = ANIM_Luigi_Still,
-        .anim_4 = ANIM_Luigi_Still,
-        .anim_5 = ANIM_Luigi_Still,
-        .death  = ANIM_Luigi_Still,
-        .hit    = ANIM_Luigi_Still,
-        .anim_8 = ANIM_Luigi_Still,
-        .anim_9 = ANIM_Luigi_Still,
-        .anim_A = ANIM_Luigi_Still,
-        .anim_B = ANIM_Luigi_Still,
-        .anim_C = ANIM_Luigi_Still,
-        .anim_D = ANIM_Luigi_Still,
-        .anim_E = ANIM_Luigi_Still,
-        .anim_F = ANIM_Luigi_Still,
-    },
+    .animations = LUIGI_ANIMS,
     .tattle = MSG_NpcTattle_Luigi,
 };
 
@@ -771,27 +725,10 @@ NpcData N(NpcData_ShyGuy) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
     .init = &N(EVS_NpcInit_ShyGuy),
-    .settings = &N(NpcSettings_ShyGuy),
+    .settings = &N(NpcSettings_ShyGuy_Stationary),
     .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .drops = NO_DROPS,
-    .animations = {
-        .idle   = ANIM_ShyGuy_Red_Anim01,
-        .walk   = ANIM_ShyGuy_Red_Anim02,
-        .run    = ANIM_ShyGuy_Red_Anim03,
-        .chase  = ANIM_ShyGuy_Red_Anim03,
-        .anim_4 = ANIM_ShyGuy_Red_Anim01,
-        .anim_5 = ANIM_ShyGuy_Red_Anim01,
-        .death  = ANIM_ShyGuy_Red_Anim0C,
-        .hit    = ANIM_ShyGuy_Red_Anim0C,
-        .anim_8 = ANIM_ShyGuy_Red_Anim15,
-        .anim_9 = ANIM_ShyGuy_Red_Anim12,
-        .anim_A = ANIM_ShyGuy_Red_Anim11,
-        .anim_B = ANIM_ShyGuy_Red_Anim10,
-        .anim_C = ANIM_ShyGuy_Red_Anim05,
-        .anim_D = ANIM_ShyGuy_Red_Anim01,
-        .anim_E = ANIM_ShyGuy_Red_Anim01,
-        .anim_F = ANIM_ShyGuy_Red_Anim01,
-    },
+    .animations = RED_SHY_GUY_ANIMS,
 };
 
 NpcGroupList N(DefaultNPCs) = {

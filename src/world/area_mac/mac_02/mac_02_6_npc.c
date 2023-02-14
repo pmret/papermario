@@ -5,9 +5,10 @@
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/npc/Bootler.inc.c"
 #include "world/common/npc/Bubulb.inc.c"
-
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
+
+#include "world/common/enemy/ShyGuy.h"
 
 MAP_STATIC_PAD(1,key_choice);
 #include "world/common/complete/KeyItemChoice.inc.c"
@@ -226,24 +227,7 @@ NpcData N(NpcData_ShyGuy) = {
     .settings = &N(NpcSettings_Toad_Stationary),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = NO_DROPS,
-    .animations = {
-        .idle   = ANIM_ShyGuy_Red_Anim01,
-        .walk   = ANIM_ShyGuy_Red_Anim02,
-        .run    = ANIM_ShyGuy_Red_Anim03,
-        .chase  = ANIM_ShyGuy_Red_Anim03,
-        .anim_4 = ANIM_ShyGuy_Red_Anim01,
-        .anim_5 = ANIM_ShyGuy_Red_Anim01,
-        .death  = ANIM_ShyGuy_Red_Anim0C,
-        .hit    = ANIM_ShyGuy_Red_Anim0C,
-        .anim_8 = ANIM_ShyGuy_Red_Anim15,
-        .anim_9 = ANIM_ShyGuy_Red_Anim12,
-        .anim_A = ANIM_ShyGuy_Red_Anim11,
-        .anim_B = ANIM_ShyGuy_Red_Anim10,
-        .anim_C = ANIM_ShyGuy_Red_Anim05,
-        .anim_D = ANIM_ShyGuy_Red_Anim01,
-        .anim_E = ANIM_ShyGuy_Red_Anim01,
-        .anim_F = ANIM_ShyGuy_Red_Anim01,
-    },
+    .animations = RED_SHY_GUY_ANIMS,
     .extraAnimations = N(ExtraAnims_ShyGuy),
 };
 
