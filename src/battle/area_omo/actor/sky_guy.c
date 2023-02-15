@@ -430,7 +430,7 @@ EvtScript N(handleEvent_8022A398) = {
             EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim0A)
             EVT_EXEC_WAIT(N(80229A34))
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_CALL(func_8026E914, LVar0, LVar1)
             EVT_IF_GE(LVar1, 3)
                 EVT_EXEC_WAIT(N(80229CB0))
@@ -575,7 +575,7 @@ EvtScript N(takeTurn_8022A9D0) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 55)
             EVT_SET(LVar1, 0)
@@ -699,7 +699,7 @@ EvtScript N(handleEvent_8022B310) = {
             EVT_SET_CONST(LVar1, ANIM_ShyGuy_Red_Anim0C)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
@@ -923,7 +923,7 @@ EvtScript N(8022BF14) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(MoveBattleCamOver, 15)
             EVT_THREAD

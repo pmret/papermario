@@ -1578,7 +1578,7 @@ typedef struct ActorPart {
     /* 0x77 */ char unk_77[1];
     /* 0x78 */ u32* defenseTable;
     /* 0x7C */ s32 eventFlags;
-    /* 0x80 */ s32 partFlags3;
+    /* 0x80 */ s32 elementalImmunities; // bits from Elements, i.e., ELEMENT_FIRE | ELEMENT_QUAKE
     /* 0x84 */ s32 spriteInstanceID;
     /* 0x88 */ u32 currentAnimation;
     /* 0x8C */ s32 animNotifyValue;

@@ -227,7 +227,7 @@ EvtScript N(handleEvent_80224038) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim03)
             EVT_EXEC_WAIT(N(802244DC))
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET(LVar1, 7077889)
@@ -449,7 +449,7 @@ EvtScript N(80224B3C) = {
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
         EVT_CASE_OR_EQ(HIT_RESULT_10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim01)

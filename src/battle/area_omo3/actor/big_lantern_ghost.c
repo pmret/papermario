@@ -422,7 +422,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(func_8026E914, LVar0, LVar1)
             EVT_IF_EQ(LVar1, 2)
@@ -601,7 +601,7 @@ EvtScript N(attackHeavyJump) = {
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_37D)
             EVT_CALL(ResetActorSounds, ACTOR_SELF, 2)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)

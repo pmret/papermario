@@ -285,7 +285,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(DoShockHit)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_EXEC_WAIT(DoShockHit)
-        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_IF_NOT_FLAG(LVarE, DAMAGE_TYPE_FIRE)
                 EVT_EXEC_WAIT(N(onHitCombo))
             EVT_END_IF
@@ -1055,7 +1055,7 @@ EvtScript N(attackPetitSpit) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar9, DAMAGE_TYPE_FIRE, SUPPRESS_EVENT_ALL, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar9)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
         EVT_CASE_OR_EQ(HIT_RESULT_10)
             EVT_CALL(SetPartFlagBits, LVar5, 1, ACTOR_PART_FLAG_INVISIBLE, 1)
             EVT_CALL(SetGoalToTarget, LVar5)

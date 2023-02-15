@@ -4070,14 +4070,14 @@ ApiStatus func_80251454(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-void func_80251474(Actor* actor) {
+void apply_shock_effect(Actor* actor) {
     ActorPart* part = actor->partsTable;
 
     while (part != NULL) {
-        if (!(part->flags & ACTOR_PART_FLAG_INVISIBLE) &&
-            part->idleAnimations != NULL &&
-            !(part->flags & ACTOR_PART_FLAG_40000000))
-        {
+        if (!(part->flags & ACTOR_PART_FLAG_INVISIBLE)
+            && part->idleAnimations != NULL
+            && !(part->flags & ACTOR_PART_FLAG_40000000)
+        ) {
             f32 x = part->currentPos.x;
             f32 y = part->currentPos.y + (actor->size.y / 10);
             f32 z = part->currentPos.z;

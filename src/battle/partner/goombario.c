@@ -583,7 +583,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(DoPartnerHit)
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
@@ -976,7 +976,7 @@ EvtScript N(headbonk1) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, 0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_EXEC_WAIT(N(returnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -1081,7 +1081,7 @@ EvtScript N(headbonk2) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, 0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_EXEC_WAIT(N(returnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -1188,7 +1188,7 @@ EvtScript N(headbonk3) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, 0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_EXEC_WAIT(N(returnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -1308,7 +1308,7 @@ EvtScript N(multibonk) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, 0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_EXEC_WAIT(N(returnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -1409,7 +1409,7 @@ EvtScript N(multibonk) = {
     EVT_CALL(func_80269550, LVarE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_EXEC_WAIT(N(returnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP

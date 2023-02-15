@@ -126,7 +126,7 @@ API_CALLABLE(SetAnimatorFlags);
 API_CALLABLE(GetAnimatedPositionByTreeIndex);
 API_CALLABLE(GetAnimatedRotationByTreeIndex);
 API_CALLABLE(GetAnimatedModelRootPosition);
-ApiStatus func_8026D5A4(Evt* script, s32 isInitialCall);
+ApiStatus SetPartImmunityBits(Evt* script, s32 isInitialCall);
 ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall);
 
 extern Formation N(formation_lava_bud_1);
@@ -985,7 +985,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_IF_NOT_FLAG(LVarE, DAMAGE_TYPE_FIRE)
                 EVT_EXEC_WAIT(N(onComboHit))
                 EVT_EXEC_WAIT(N(playHitAnimation))
@@ -1192,7 +1192,7 @@ EvtScript N(attackFlameSpew) = {
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
         EVT_CASE_OR_EQ(HIT_RESULT_10)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaPiranha_Anim03)
             EVT_WAIT(19)
@@ -1549,12 +1549,12 @@ EvtScript N(onDeath) = {
         EVT_CALL(SetDefenseTable, ACTOR_ENEMY1, 2, EVT_PTR(b_area_kzn2_lava_bud_defenseTable_fiery))
         EVT_CALL(SetDefenseTable, ACTOR_ENEMY2, 1, EVT_PTR(b_area_kzn2_lava_bud_defenseTable_fiery))
         EVT_CALL(SetDefenseTable, ACTOR_ENEMY2, 2, EVT_PTR(b_area_kzn2_lava_bud_defenseTable_fiery))
-        EVT_CALL(func_8026D5A4, ACTOR_SELF, 1, 2, 1)
-        EVT_CALL(func_8026D5A4, ACTOR_SELF, 2, 2, 1)
-        EVT_CALL(func_8026D5A4, ACTOR_ENEMY1, 1, 2, 1)
-        EVT_CALL(func_8026D5A4, ACTOR_ENEMY1, 2, 2, 1)
-        EVT_CALL(func_8026D5A4, ACTOR_ENEMY2, 1, 2, 1)
-        EVT_CALL(func_8026D5A4, ACTOR_ENEMY2, 2, 2, 1)
+        EVT_CALL(SetPartImmunityBits, ACTOR_SELF, 1, ELEMENT_FIRE, 1)
+        EVT_CALL(SetPartImmunityBits, ACTOR_SELF, 2, ELEMENT_FIRE, 1)
+        EVT_CALL(SetPartImmunityBits, ACTOR_ENEMY1, 1, ELEMENT_FIRE, 1)
+        EVT_CALL(SetPartImmunityBits, ACTOR_ENEMY1, 2, ELEMENT_FIRE, 1)
+        EVT_CALL(SetPartImmunityBits, ACTOR_ENEMY2, 1, ELEMENT_FIRE, 1)
+        EVT_CALL(SetPartImmunityBits, ACTOR_ENEMY2, 2, ELEMENT_FIRE, 1)
         EVT_CALL(SetPartFlagBits, ACTOR_ENEMY1, 2, ACTOR_PART_FLAG_2000, 0)
         EVT_CALL(SetPartFlagBits, ACTOR_ENEMY2, 2, ACTOR_PART_FLAG_2000, 0)
         EVT_SET(LVar0, ACTOR_ENEMY0)

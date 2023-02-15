@@ -27,7 +27,7 @@ ApiStatus WaitForMessageBoxDone(Evt* script, s32 isInitialCall);
 ApiStatus ForceCloseMessageBox(Evt* script, s32 isInitialCall);
 ApiStatus SetMessageBoxDuration(Evt* script, s32 isInitialCall);
 ApiStatus ItemDamageEnemy(Evt* script, s32 isInitialCall);
-ApiStatus ItemAfflictEnemy(Evt* script, s32 isInitialCall);
+ApiStatus ItemSpookEnemy(Evt* script, s32 isInitialCall);
 ApiStatus ItemCheckHit(Evt* script, s32 isInitialCall);
 ApiStatus ActorSpeak(Evt* script, s32 isInitialCall);
 ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall);

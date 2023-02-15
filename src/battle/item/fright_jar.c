@@ -64,7 +64,7 @@ EvtScript N(main) = {
         EVT_GOTO(1)
     EVT_END_IF
     EVT_CALL(func_80269EAC, 21)
-    EVT_CALL(ItemAfflictEnemy, LVar0, 1879052288, 0, 100, 0, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(ItemSpookEnemy, LVar0, 1879052288, 0, 100, 0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
     EVT_CALL(ChooseNextTarget, 0, LVar0)
     EVT_IF_NE(LVar0, -1)

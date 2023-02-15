@@ -1869,7 +1869,7 @@ ApiStatus GetPartEventFlags(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026D51C(Evt* script, s32 isInitialCall) {
+ApiStatus SetPartImmunityFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
@@ -1883,16 +1883,17 @@ ApiStatus func_8026D51C(Evt* script, s32 isInitialCall) {
     partIndex = evt_get_variable(script, *args++);
     flagBits = *args++;
 
-    get_actor_part(get_actor(actorID), partIndex)->partFlags3 = flagBits;
+    get_actor_part(get_actor(actorID), partIndex)->elementalImmunities = flagBits;
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026D5A4(Evt* script, s32 isInitialCall) {
+ApiStatus SetPartImmunityBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
+    Actor* actor;
     ActorPart* actorPart;
-    s32 partIndex;
+    s32 partIdx;
     s32 flagBits;
     s32 mode;
 
@@ -1900,16 +1901,17 @@ ApiStatus func_8026D5A4(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    partIndex = evt_get_variable(script, *args++);
+    partIdx = evt_get_variable(script, *args++);
     flagBits = *args++;
     mode = evt_get_variable(script, *args++);
 
-    actorPart = get_actor_part(get_actor(actorID), partIndex);
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partIdx);
 
     if (mode != 0) {
-        actorPart->partFlags3 |= flagBits;
+        actorPart->elementalImmunities |= flagBits;
     } else {
-        actorPart->partFlags3 &= ~flagBits;
+        actorPart->elementalImmunities &= ~flagBits;
     }
 
     return ApiStatus_DONE2;
@@ -3117,7 +3119,7 @@ ApiStatus ShowShockEffect(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    func_80251474(get_actor(actorID));
+    apply_shock_effect(get_actor(actorID));
     return ApiStatus_DONE2;
 }
 

@@ -994,7 +994,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(OnBurn))
             EVT_EXEC_WAIT(N(OnBurnDeath))
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_EXEC_WAIT(N(OnImmune))
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_EXEC_WAIT(N(OnImmune))
@@ -1602,7 +1602,7 @@ EvtScript N(attackBodySlam) = {
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_THREAD
                 EVT_CALL(ShakeCam, 1, 0, 20, EVT_FLOAT(1.0))
             EVT_END_THREAD
@@ -2197,7 +2197,7 @@ EvtScript N(attackWindBreath) = {
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HuffNPuff_Anim01)
             EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_HuffNPuff_Anim02)
             EVT_CALL(SetAnimation, ACTOR_SELF, 3, ANIM_HuffNPuff_Anim03)
@@ -2338,7 +2338,7 @@ EvtScript N(attackGroundLightning) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, 12, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar0)
             EVT_IF_GT(LVar0, 0)
                 EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LVar0)
@@ -3793,7 +3793,7 @@ EvtScript N(attackGroundSlam) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVarA, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_WAIT(50)
             EVT_SET(LVarA, 0)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)

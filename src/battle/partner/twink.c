@@ -153,7 +153,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach_A0002)
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach_C0005)
             EVT_SET_CONST(LVar0, 1)

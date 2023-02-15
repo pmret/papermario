@@ -215,6 +215,7 @@
 }
 
 #define STATUS_CHANCE_IGNORE_RES 0xFE
+#define STATUS_CHANCE_NEVER 0xFF
 #define DMG_STATUS_CHANCE(typeFlag, duration, chance) (STATUS_FLAG_80000000 | typeFlag | (duration << 8) | chance)
 #define DMG_STATUS_ALWAYS(typeFlag, duration) (STATUS_FLAG_80000000 | STATUS_FLAG_RIGHT_ON | typeFlag | (duration << 8))
 #define DMG_STATUS_IGNORE_RES(typeFlag, duration) (typeFlag | (duration << 8) | STATUS_CHANCE_IGNORE_RES)

@@ -128,7 +128,7 @@ EvtScript N(handleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_EXEC_WAIT(N(onHit))
-        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(func_8026E914, LVar0, LVar1)

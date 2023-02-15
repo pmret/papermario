@@ -1341,7 +1341,7 @@ EvtScript N(handleEvent_8021E6F0) = {
             EVT_SET(ArrayVar(0), 2)
             EVT_WAIT(20)
             EVT_SET(ArrayVar(0), 0)
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET(ArrayVar(0), 2)
             EVT_WAIT(20)
@@ -2844,7 +2844,7 @@ EvtScript N(handleEvent_802242FC) = {
                     EVT_WAIT(20)
                 EVT_END_IF
             EVT_END_IF
-        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_SET(LVarA, 4)
             EVT_EXEC_WAIT(N(80223870))
         EVT_CASE_EQ(EVENT_IMMUNE)

@@ -185,7 +185,7 @@ EvtScript N(lakilester_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Dead)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
@@ -362,7 +362,7 @@ EvtScript N(lakilester_takeTurn) = {
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)

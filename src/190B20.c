@@ -1309,7 +1309,7 @@ void load_player_actor(void) {
     }
 
     part->eventFlags = 0;
-    part->partFlags3 = 0;
+    part->elementalImmunities = 0;
     part->opacity = 255;
     part->size.y = player->size.y;
     part->size.x = player->size.x;
@@ -1537,7 +1537,7 @@ void load_partner_actor(void) {
             part->defenseTable = ActorPartBlueprint->defenseTable;
             part->idleAnimations = ActorPartBlueprint->idleAnimations;
             part->eventFlags = ActorPartBlueprint->eventFlags;
-            part->partFlags3 = ActorPartBlueprint->elementImmunityFlags;
+            part->elementalImmunities = ActorPartBlueprint->elementImmunityFlags;
             part->opacity = ActorPartBlueprint->opacity;
             part->size.y = partnerActor->size.y;
             part->size.x = partnerActor->size.x;
@@ -1798,7 +1798,7 @@ Actor* create_actor(Formation formation) {
         part->defenseTable = actorPartBP->defenseTable;
         part->idleAnimations = actorPartBP->idleAnimations;
         part->eventFlags = actorPartBP->eventFlags;
-        part->partFlags3 = actorPartBP->elementImmunityFlags;
+        part->elementalImmunities = actorPartBP->elementImmunityFlags;
         part->opacity = actorPartBP->opacity;
         if (part->opacity < 255) {
             actor->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
@@ -2185,7 +2185,7 @@ s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
     s32 minDefense = 255;
 
     if (defenseTable != NULL) {
-        
+
         #define CHECK_DEFENSE(element) \
         if (elementFlags & DAMAGE_TYPE_##element) { \
             defense = lookup_defense(defenseTable, ELEMENT_##element); \
@@ -2311,7 +2311,7 @@ void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage) {
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
             fx_ring_blast(0, x, y, z, 1.0f, 0x18);
         } else if (battleStatus->currentAttackElement & DAMAGE_TYPE_SHOCK) {
-            func_80251474(actor);
+            apply_shock_effect(actor);
         } else if (battleStatus->currentAttackElement & DAMAGE_TYPE_WATER) {
             fx_water_splash(0, x, y, z, 1.0f, 24);
         } else {
