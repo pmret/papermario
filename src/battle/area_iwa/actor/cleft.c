@@ -198,7 +198,7 @@ EvtScript N(handleEvent_80218C3C) = {
                 EVT_CASE_FLAG(DAMAGE_TYPE_BLAST)
                     EVT_EXEC_WAIT(N(80218944))
                 EVT_CASE_DEFAULT
-                    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLOSIVE, 1)
+                    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION, 1)
                     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
                     EVT_IF_EQ(LVar0, 1)
                         EVT_SET_CONST(LVar0, 1)
@@ -211,7 +211,7 @@ EvtScript N(handleEvent_80218C3C) = {
                         EVT_SET_CONST(LVar2, -1)
                         EVT_EXEC_WAIT(DoBurnHit)
                     EVT_END_IF
-                    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLOSIVE, 0)
+                    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION, 0)
             EVT_END_SWITCH
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)

@@ -492,7 +492,7 @@ void set_map_transition_effect(ScreenTransition transition) {
     D_8014C6F0 = transition;
 }
 
-s32 update_exit_map_screen_overlay(s16* progress) {
+s16 update_exit_map_screen_overlay(s16* progress) {
     u8 overlayColor;
     u8 type = 0;
     u8 r = 0;

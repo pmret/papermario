@@ -30,7 +30,7 @@ s32 N(defenseTable_8022CB4C)[] = {
     ELEMENT_ICE, -2,
     ELEMENT_FIRE, 99,
     ELEMENT_SHOCK, 0,
-    ELEMENT_HAMMER, 0,
+    ELEMENT_SMASH, 0,
     ELEMENT_BLAST, -1,
     ELEMENT_END,
 };

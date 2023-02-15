@@ -15,7 +15,7 @@ extern EvtScript N(handleEvent);
 
 s32 N(defenseTable)[] = {
     ELEMENT_NORMAL, 0,
-    ELEMENT_HAMMER, 0,
+    ELEMENT_SMASH, 0,
     ELEMENT_THROW, -3,
     ELEMENT_END,
 };

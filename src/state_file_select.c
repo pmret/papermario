@@ -370,7 +370,7 @@ void state_step_exit_file_select(void) {
             for (i = 44; i < ARRAY_COUNT(gWindows); i++) {
                 Window* window = &gWindows[i];
 
-                if (window->parent == 44 || window->parent == -1) {
+                if (window->parent == WINDOW_ID_FILEMENU_MAIN || window->parent == -1) {
                     flagSum += window->flags & WINDOW_FLAG_INITIAL_ANIMATION;
                 }
             }
@@ -380,7 +380,7 @@ void state_step_exit_file_select(void) {
             }
             break;
         case 1:
-            if (temp_s0 == 0 || (update_exit_map_screen_overlay(D_800A0932) << 0x10) != 0) {
+            if (temp_s0 == 0 || update_exit_map_screen_overlay(D_800A0932) != 0) {
                 D_800A0931 = 2;
             }
             break;

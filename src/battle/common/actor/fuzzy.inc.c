@@ -115,7 +115,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_CALL(GetLastElement, LVar0)
-            EVT_IF_FLAG(LVar0, DAMAGE_TYPE_ELECTRIC)
+            EVT_IF_FLAG(LVar0, DAMAGE_TYPE_SHOCK)
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Fuzzy_HurtShock)
             EVT_ELSE
@@ -180,7 +180,7 @@ EvtScript N(handleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_CALL(GetLastElement, LVar0)
-            EVT_IF_FLAG(LVar0, DAMAGE_TYPE_ELECTRIC)
+            EVT_IF_FLAG(LVar0, DAMAGE_TYPE_SHOCK)
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Fuzzy_HurtShock)
                 EVT_EXEC_WAIT(DoNormalHit)

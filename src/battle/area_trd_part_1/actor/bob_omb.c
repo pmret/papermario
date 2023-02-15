@@ -96,7 +96,7 @@ ActorPartBlueprint N(partsTable_8021A70C)[] = {
         .opacity = 255,
         .idleAnimations = N(idleAnimations_8021A510),
         .defenseTable = N(defenseTable_8021A5A8),
-        .eventFlags = ACTOR_EVENT_FLAG_EXPLOSIVE,
+        .eventFlags = ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION,
         .elementImmunityFlags = 0,
         .unk_1D = 247,
     },
@@ -157,7 +157,7 @@ EvtScript N(ignite) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021A55C)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021B4A8)))
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_8000, 1)
+    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT, 1)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_8021A660)))
     EVT_CALL(PlayLoopingSoundAtActor, ACTOR_SELF, 0, 0x80000001)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bobomb_Anim05)
@@ -178,7 +178,7 @@ EvtScript N(8021A9C8) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021ACE8)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021A510)))
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_8000, 0)
+    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT, 0)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_8021A5B4)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 2)
@@ -234,7 +234,7 @@ EvtScript N(handleEvent_8021ACE8) = {
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_CALL(GetLastElement, LVarE)
-            EVT_IF_FLAG(LVarE, DAMAGE_TYPE_ELECTRIC)
+            EVT_IF_FLAG(LVarE, DAMAGE_TYPE_SHOCK)
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim10)
                 EVT_SET_CONST(LVar2, ANIM_Bobomb_Anim11)
@@ -307,7 +307,7 @@ EvtScript N(handleEvent_8021ACE8) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_CALL(GetLastElement, LVarE)
-            EVT_IF_FLAG(LVarE, DAMAGE_TYPE_ELECTRIC)
+            EVT_IF_FLAG(LVarE, DAMAGE_TYPE_SHOCK)
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim10)
                 EVT_SET_CONST(LVar2, ANIM_Bobomb_Anim11)
@@ -392,7 +392,7 @@ EvtScript N(handleEvent_8021B4A8) = {
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
                     EVT_EXEC_WAIT(DoNormalHit)
-                EVT_CASE_FLAG(DAMAGE_TYPE_ELECTRIC)
+                EVT_CASE_FLAG(DAMAGE_TYPE_SHOCK)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim10)
                     EVT_EXEC_WAIT(DoNormalHit)

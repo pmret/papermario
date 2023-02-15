@@ -12,31 +12,38 @@ s32 calc_item_check_hit(void) {
     Actor* actor;
     ActorPart* actorPart;
 
-    currentTargetPart = currentTargetPartS8 = battleStatus->currentTargetPart;
     battleStatus->currentTargetID2 = battleStatus->currentTargetID;
+    currentTargetPart = currentTargetPartS8 = battleStatus->currentTargetPart;
     battleStatus->currentTargetPart2 = currentTargetPartS8;
 
     actor = get_actor(actorID);
-    if (actor != NULL) {
-        actorPart = get_actor_part(actor, currentTargetPart);
-        ASSERT(actorPart != NULL);
-
-        if (!(actorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
-            if (actor->transparentStatus == STATUS_TRANSPARENT) {
-                return HIT_RESULT_MISS;
-            }
-            if (actor->stoneStatus == STATUS_STONE) {
-                sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-                return HIT_RESULT_IMMUNE;
-            }
-            if ((battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP) && (actorPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP)) {
-                sfx_play_sound_at_position(SOUND_HIT_NORMAL, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-                return HIT_RESULT_LANDED_ON_SPIKE;
-            }
-        } else {
-            return HIT_RESULT_MISS;
-        }
+    if (actor == NULL) {
+         return HIT_RESULT_HIT;
     }
+
+    actorPart = get_actor_part(actor, currentTargetPart);
+    ASSERT(actorPart != NULL);
+
+    if (actorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
+        return HIT_RESULT_MISS;
+    }
+
+    if (actor->transparentStatus == STATUS_TRANSPARENT) {
+        return HIT_RESULT_MISS;
+    }
+
+    if (actor->stoneStatus == STATUS_STONE) {
+        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        return HIT_RESULT_IMMUNE;
+    }
+
+    if ((battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP)
+        && (actorPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP))
+    {
+        sfx_play_sound_at_position(SOUND_HIT_NORMAL, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        return HIT_RESULT_LANDED_ON_SPIKE;
+    }
+
     return HIT_RESULT_HIT;
 }
 
@@ -50,7 +57,8 @@ s32 calc_item_damage_enemy(void) {
     s32 sp1C = FALSE;
     s32 actorClass;
     s32 isFireDamage = FALSE;
-    s32 isElectricDamage = FALSE;
+    s32 isWaterDamage = FALSE;
+    s32 isShockDamage = FALSE;
     s32 isIceDamage = FALSE;
     Actor* target;
     ActorPart* targetPart;
@@ -72,14 +80,13 @@ s32 calc_item_damage_enemy(void) {
     wasStatusInflicted = FALSE;
 
     if (target == NULL) {
-        return 0;
+        return HIT_RESULT_HIT;
     }
 
     targetPart = get_actor_part(target, currentTargetPartID);
     if (targetPart == NULL) {
         PANIC();
     }
-
 
     target->lastDamageTaken = 0;
     actorClass = currentTargetID & ACTOR_CLASS_MASK;
@@ -93,12 +100,13 @@ s32 calc_item_damage_enemy(void) {
         fx_ring_blast(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 24);
         isFireDamage = TRUE;
     }
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_ELECTRIC) {
+    if (battleStatus->currentAttackElement & DAMAGE_TYPE_SHOCK) {
         func_80251474(target);
-        isElectricDamage = TRUE;
+        isShockDamage = TRUE;
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_WATER) {
         fx_water_splash(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 24);
+        isWaterDamage = TRUE;
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_ICE) {
         fx_big_snowflakes(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f);
@@ -106,10 +114,12 @@ s32 calc_item_damage_enemy(void) {
     }
 
     if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS)) {
-        if ((targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) ||
-            ((target->transparentStatus == STATUS_TRANSPARENT) || ((targetPart->eventFlags & ACTOR_EVENT_FLAG_800) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE))))
-        {
-            return 6;
+        if ((targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)
+            || (target->transparentStatus == STATUS_TRANSPARENT)
+            || (targetPart->eventFlags & ACTOR_EVENT_FLAG_800)
+            && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)
+        ) {
+            return HIT_RESULT_MISS;
         }
     }
 
@@ -442,7 +452,7 @@ s32 calc_item_damage_enemy(void) {
         func_80267018(target, 1);
         if (isFireDamage) {
             sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-        } else if (isElectricDamage) {
+        } else if (isShockDamage) {
             sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         } else if (isIceDamage) {
             sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);

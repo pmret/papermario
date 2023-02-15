@@ -132,7 +132,7 @@ EvtScript N(bombette_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(GetLastElement, LVar1)
-            EVT_IF_FLAG(LVar1, DAMAGE_TYPE_ELECTRIC)
+            EVT_IF_FLAG(LVar1, DAMAGE_TYPE_SHOCK)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_BurnHurt)
                 EVT_WAIT(20)
                 EVT_EXEC_WAIT(N(bombette_playEffects))

@@ -112,7 +112,7 @@ void state_step_change_map(void) {
             update_effects();
             update_cameras();
 
-            if ((update_exit_map_screen_overlay(&gMapTransitionAlpha) << 0x10) != 0) {
+            if (update_exit_map_screen_overlay(&gMapTransitionAlpha) != 0) {
                 gMapTransitionState++;
             }
             break;

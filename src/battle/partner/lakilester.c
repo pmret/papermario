@@ -871,7 +871,7 @@ EvtScript N(spinyFlip) = {
     EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_ThrowSpiny)
     EVT_WAIT(3)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, EVENT_SUPPRESS_FLAG_4 | EVENT_SUPPRESS_FLAG_10, 0, 2, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_SET(LVarF, -1)
     EVT_END_IF
@@ -1054,7 +1054,7 @@ EvtScript N(spinySurge) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, EVENT_SUPPRESS_FLAG_4 | EVENT_SUPPRESS_FLAG_10, 0, 2, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_GOTO(12)
     EVT_END_IF

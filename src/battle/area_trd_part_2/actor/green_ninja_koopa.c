@@ -425,7 +425,7 @@ EvtScript N(802257A8) = {
                         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
                         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                         EVT_CALL(GetActorVar, ACTOR_ENEMY4, 3, LVar1)
-                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
+                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, EVENT_SUPPRESS_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
                     EVT_END_THREAD
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_37C)
@@ -617,7 +617,7 @@ EvtScript N(802257A8) = {
                         EVT_END_IF
                         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
                         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
+                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, EVENT_SUPPRESS_ALL, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
                     EVT_END_THREAD
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_37C)

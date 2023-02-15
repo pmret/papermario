@@ -621,7 +621,7 @@ EvtScript N(OnBurn) = {
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_CALL(GetPartEventFlags, ACTOR_SELF, LVar0, LVar1)
-            EVT_IF_NOT_FLAG(LVar1, ACTOR_EVENT_FLAG_FIREY | ACTOR_EVENT_FLAG_EXPLOSIVE)
+            EVT_IF_NOT_FLAG(LVar1, ACTOR_EVENT_FLAG_FIREY | ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar5)

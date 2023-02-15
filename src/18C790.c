@@ -1122,8 +1122,8 @@ void btl_state_update_celebration(void) {
             width = get_msg_width(MSG_Menus_CantIncrease, 0) + 31;
             x = 160 - (width / 2);
             y = 80;
-            set_window_properties(WINDOW_ID_9, x, y, width, 28, 10, draw_content_cant_increase_popup, NULL, -1);
-            set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
+            set_window_properties(WINDOW_ID_BATTLE_POPUP, x, y, width, 28, 10, draw_content_cant_increase_popup, NULL, -1);
+            set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
             CelebrateSubstateTime = 60;
             gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_INVALID_DELAY;
             break;
@@ -1135,7 +1135,7 @@ void btl_state_update_celebration(void) {
                 CelebrateSubstateTime--;
                 break;
             }
-            set_window_update(WINDOW_ID_9, WINDOW_UPDATE_HIDE);
+            set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_HIDE);
             gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CHOOSE;
             break;
         case BTL_SUBSTATE_CELEBRATE_SKIPPABLE_END_DELAY:
