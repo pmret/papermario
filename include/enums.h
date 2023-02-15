@@ -2589,7 +2589,7 @@ enum SpeechFlags {
     SPEECH_FACE_EACH_OTHER      = 0,
 };
 
-enum HitResults {
+typedef enum HitResult {
     HIT_RESULT_BACKFIRE             = -1,
     HIT_RESULT_HIT                  = 0,
     HIT_RESULT_1                    = 1,    // KILL?
@@ -2601,7 +2601,7 @@ enum HitResults {
     HIT_RESULT_HIT_STATIC           = 7,
     HIT_RESULT_IMMUNE               = 8,
     HIT_RESULT_10                   = 10,
-};
+} HitResult;
 
 enum ActionRatings {
     ACTION_RATING_NICE              = 0, ///< sets nice hits = 1
@@ -3359,16 +3359,16 @@ enum PartnerIDs {
     PARTNER_TWINK               = 0x0000000B,
 };
 
-enum AttackEventFlags {
-    EVENT_SUPPRESS_FLAG_1       = 0x1,
-    EVENT_SUPPRESS_FLAG_2       = 0x2,
-    EVENT_SUPPRESS_FLAG_4       = 0x4,
-    EVENT_SUPPRESS_FLAG_SHOCK       = 0x8,
-    EVENT_SUPPRESS_FLAG_10      = 0x10,
-    EVENT_SUPPRESS_FLAG_80      = 0x80,
-    EVENT_SUPPRESS_FLAG_200     = 0x200,
-    EVENT_SUPPRESS_ALL    = 0xFFFF,
-    EVENT_SUPPRESS_FLAG_10000   = 0x10000, // usage is a bug?
+enum EventSupressFlags {
+    SUPPRESS_EVENT_SPIKY_TOP        = 0x1,
+    SUPPRESS_EVENT_EXPLODE_CONTACT  = 0x2,
+    SUPPRESS_EVENT_SPIKY_FRONT      = 0x4,
+    SUPPRESS_EVENT_SHOCK_CONTACT    = 0x8,
+    SUPPRESS_EVENT_BURN_CONTACT     = 0x10,
+    SUPPRESS_EVENT_FLAG_80          = 0x80,     // supresses events associated with ACTOR_EVENT_FLAG_200000 used by pokeys and spinies
+    SUPPRESS_EVENT_FLAG_200         = 0x200,    // unused?
+    SUPPRESS_EVENT_ALL              = 0xFFFF,
+    SUPPRESS_EVENT_FLAG_10000       = 0x10000,  // usage is a bug?
 };
 
 enum PartnerActions {
@@ -3667,7 +3667,7 @@ enum ActorFlags {
     ACTOR_FLAG_100               = 0x00000100,
     ACTOR_FLAG_FLYING            = 0x00000200, ///< Quake Hammer can't hit.
     ACTOR_FLAG_400               = 0x00000400,
-    ACTOR_FLAG_HP_OFFSET_BELOW   = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down). Is this just UPSIDE_DOWN?
+    ACTOR_FLAG_HP_OFFSET_BELOW   = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down). Is this just UPSIDE_DOWN? FLIPPED? TOPPLED?
     ACTOR_FLAG_1000              = 0x00001000,
     ACTOR_FLAG_2000              = 0x00002000,
     ACTOR_FLAG_TARGET_ONLY       = 0x00004000, ///< Battle ends even if undefeated. No turn.

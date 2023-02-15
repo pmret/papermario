@@ -175,33 +175,34 @@ void dispatch_event_player_continue_turn(s32 eventType) {
     }
 }
 
-s32 calc_player_test_enemy(void) {
+// Determines whether an attack from the player will hit an enemy or
+HitResult calc_player_test_enemy(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
-    s32 currentTargetID = battleStatus->currentTargetID;
-    s32 targetPart = battleStatus->currentTargetPart;
     ActorState* state = &player->state;
+    s32 targetActorID = battleStatus->currentTargetID;
+    s32 targetPartIdx = battleStatus->currentTargetPart;
     Actor* target;
-    ActorPart* part;
+    ActorPart* targetPart;
 
     battleStatus->currentTargetID2 = battleStatus->currentTargetID;
     battleStatus->currentTargetPart2 = battleStatus->currentTargetPart;
 
-    target = get_actor(currentTargetID);
+    target = get_actor(targetActorID);
     if (target == NULL) {
         return HIT_RESULT_HIT;
     }
 
-    part = get_actor_part(target, targetPart);
-    ASSERT(part != NULL);
+    targetPart = get_actor_part(target, targetPartIdx);
+    ASSERT(targetPart != NULL);
 
-    if (part->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
+    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
         return HIT_RESULT_MISS;
     }
 
     if (target->transparentStatus == STATUS_TRANSPARENT
-        || ((part->eventFlags & ACTOR_EVENT_FLAG_800)
-        && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)))
+        || (targetPart->eventFlags & ACTOR_EVENT_FLAG_800)
+        && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE))
     {
         return HIT_RESULT_MISS;
     }
@@ -212,7 +213,7 @@ s32 calc_player_test_enemy(void) {
     }
 
     if ((battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP)
-        && (part->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP)
+        && (targetPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP)
         && !player_team_is_ability_active(player, ABILITY_SPIKE_SHIELD))
     {
         sfx_play_sound_at_position(SOUND_108, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -220,8 +221,8 @@ s32 calc_player_test_enemy(void) {
     }
 
     if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_JUMP))
-        && (part->eventFlags & ACTOR_EVENT_FLAG_SPIKY_FRONT)
-        && (!(battleStatus->currentAttackEventSuppression & EVENT_SUPPRESS_FLAG_4)
+        && (targetPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_FRONT)
+        && (!(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SPIKY_FRONT)
         && !player_team_is_ability_active(player, ABILITY_SPIKE_SHIELD)))
     {
         sfx_play_sound_at_position(SOUND_108, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -237,7 +238,7 @@ s32 calc_player_test_enemy(void) {
     return HIT_RESULT_HIT;
 }
 
-s32 calc_player_damage_enemy(void) {
+HitResult calc_player_damage_enemy(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 currentTargetID = battleStatus->currentTargetID;
@@ -325,7 +326,7 @@ s32 calc_player_damage_enemy(void) {
             sfx_play_sound_at_position(SOUND_108, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_damage_event_player_1(1, EVENT_SPIKE_CONTACT);
             dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
-            return -1;
+            return HIT_RESULT_BACKFIRE;
         }
 
         if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_SMASH))) {
@@ -333,20 +334,25 @@ s32 calc_player_damage_enemy(void) {
                 sfx_play_sound_at_position(SOUND_HIT_PLAYER_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 dispatch_damage_event_player_1(1, EVENT_BURN_CONTACT);
                 dispatch_event_actor(target, EVENT_EXPLODE_TRIGGER);
-                return -1;
+                return HIT_RESULT_BACKFIRE;
             }
 
-            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_FIREY && !(battleStatus->currentAttackEventSuppression & EVENT_SUPPRESS_FLAG_10) &&
-                !(player_team_is_ability_active(player, ABILITY_FIRE_SHIELD)) && !(player_team_is_ability_active(player, ABILITY_ICE_POWER))) {
+            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_FIREY
+                && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_BURN_CONTACT)
+                && !(player_team_is_ability_active(player, ABILITY_FIRE_SHIELD))
+                && !(player_team_is_ability_active(player, ABILITY_ICE_POWER))
+            ) {
                 sfx_play_sound_at_position(SOUND_HIT_PLAYER_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 dispatch_damage_event_player_1(1, EVENT_BURN_CONTACT);
                 dispatch_event_actor(target, EVENT_BURN_TAUNT);
-                return -1;
+                return HIT_RESULT_BACKFIRE;
             }
         }
 
-        if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE && battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE &&
-            targetPart->eventFlags & (ACTOR_EVENT_FLAG_400 | ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)) {
+        if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
+            && battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE
+            && targetPart->eventFlags & (ACTOR_EVENT_FLAG_400 | ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)
+        ) {
             sfx_play_sound_at_position(SOUND_HIT_PLAYER_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_event_actor(target, EVENT_EXPLODE_TRIGGER);
             return (gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)) ? 1 : 0;
@@ -354,13 +360,13 @@ s32 calc_player_damage_enemy(void) {
 
         if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_SMASH))
             && targetPart->eventFlags & ACTOR_EVENT_FLAG_200000
-            && !(battleStatus->currentAttackEventSuppression & EVENT_SUPPRESS_FLAG_80)
+            && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_FLAG_80)
             && !player_team_is_ability_active(player, ABILITY_SPIKE_SHIELD)
         ) {
             sfx_play_sound_at_position(SOUND_108, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_damage_event_player_1(1, EVENT_SPIKE_CONTACT);
             dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
-            return -1;
+            return HIT_RESULT_BACKFIRE;
         }
 
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
@@ -414,7 +420,7 @@ s32 calc_player_damage_enemy(void) {
             && player->staticStatus != STATUS_STATIC
             && (target->staticStatus == STATUS_STATIC || targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED)
             && !(battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_SHOCK))
-            && !(battleStatus->currentAttackEventSuppression & EVENT_SUPPRESS_FLAG_SHOCK)
+            && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
         ) {
             gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
             sp20 = TRUE;
@@ -613,7 +619,7 @@ s32 calc_player_damage_enemy(void) {
                 && player->staticStatus != STATUS_STATIC
                 && (target->staticStatus == STATUS_STATIC || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED))
                 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
-                && !(battleStatus->currentAttackEventSuppression & EVENT_SUPPRESS_FLAG_SHOCK)
+                && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
                 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_SHOCK)
             ) {
                 sfx_play_sound_at_position(SOUND_HIT_PLAYER_SHOCK, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -978,7 +984,7 @@ s32 calc_player_damage_enemy(void) {
         if (player->staticStatus != STATUS_STATIC && (target->staticStatus == STATUS_STATIC ||
                 targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED) &&
             !(battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_SHOCK)) &&
-            !(battleStatus->currentAttackEventSuppression & EVENT_SUPPRESS_FLAG_SHOCK)) {
+            !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)) {
             sfx_play_sound_at_position(SOUND_HIT_PLAYER_SHOCK, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             func_80251474(player);
             dispatch_damage_event_player_1(1, EVENT_SHOCK_HIT);

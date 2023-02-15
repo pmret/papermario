@@ -130,9 +130,8 @@ s32 calc_item_damage_enemy(void) {
 
         if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
             return 1;
-        } else {
-            return 0;
         }
+        return 0;
     }
 
     if (targetPart->partFlags3 & battleStatus->currentAttackElement) {

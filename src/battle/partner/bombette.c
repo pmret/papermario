@@ -927,7 +927,7 @@ EvtScript N(bodySlam) = {
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
     EVT_WAIT(2)
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, EVENT_SUPPRESS_FLAG_1 | EVENT_SUPPRESS_FLAG_4 | EVENT_SUPPRESS_FLAG_10 | EVENT_SUPPRESS_FLAG_80, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_80, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2020)
         EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -993,9 +993,9 @@ EvtScript N(bodySlam) = {
     EVT_END_IF
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
-            EVT_CALL(PartnerDamageEnemy, LVar0, 0, EVENT_SUPPRESS_FLAG_1, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_TOP, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
         EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, 0, EVENT_SUPPRESS_FLAG_1, 0, LVarE, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_TOP, 0, LVarE, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -1093,7 +1093,7 @@ EvtScript N(bomb) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_BOMB)
-            EVT_CALL(PartnerTestEnemy, LVar0, 0, EVENT_SUPPRESS_FLAG_10, 0, 1, BS_FLAGS1_10)
+            EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_CALL(StopSound, SOUND_287)
     EVT_SWITCH(LVar2)
@@ -1230,7 +1230,7 @@ EvtScript N(bomb) = {
         EVT_CASE_EQ(MOVE_BOMB)
             EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_CANNON1)
-            EVT_CALL(PartnerTestEnemy, LVar0, 0, EVENT_SUPPRESS_FLAG_4 | EVENT_SUPPRESS_FLAG_10, 0, 1, BS_FLAGS1_10)
+            EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
             EVT_IF_EQ(LVar0, 6)
                 EVT_BREAK_SWITCH
             EVT_END_IF
@@ -1247,7 +1247,7 @@ EvtScript N(bomb) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_CANNON1)
             EVT_LABEL(5)
             EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-            EVT_CALL(PartnerTestEnemy, LVar0, 0, EVENT_SUPPRESS_FLAG_4 | EVENT_SUPPRESS_FLAG_10, 0, 1, BS_FLAGS1_10)
+            EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
             EVT_IF_EQ(LVar0, 6)
                 EVT_GOTO(6)
             EVT_END_IF
@@ -1269,7 +1269,7 @@ EvtScript N(bomb) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_CANNON3)
             EVT_LABEL(10)
             EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-            EVT_CALL(PartnerTestEnemy, LVar0, 0, EVENT_SUPPRESS_FLAG_4 | EVENT_SUPPRESS_FLAG_10, 0, 1, BS_FLAGS1_10)
+            EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
             EVT_IF_EQ(LVar0, 6)
                 EVT_GOTO(11)
             EVT_END_IF
@@ -1348,7 +1348,7 @@ EvtScript N(firstStrikeBodySlam) = {
     EVT_CALL(MoveBattleCamOver, 1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AboutToExplode)
     EVT_WAIT(5)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, EVENT_SUPPRESS_FLAG_10, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_WAIT(10)
     EVT_CALL(StopSound, SOUND_287)
     EVT_LOOP(7)
@@ -1377,7 +1377,7 @@ EvtScript N(firstStrikeBodySlam) = {
         EVT_CALL(ShakeCam, 1, 0, 8, EVT_FLOAT(0.15))
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_CANNON1)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, EVENT_SUPPRESS_FLAG_4 | EVENT_SUPPRESS_FLAG_10, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_GOTO(10)
     EVT_END_IF

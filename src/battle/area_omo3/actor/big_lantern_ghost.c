@@ -699,20 +699,20 @@ EvtScript N(attackLightBeam) = {
                     EVT_IF_EQ(LVar0, 1)
                         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, 0, EVENT_SUPPRESS_ALL, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
+                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, 0, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
                     EVT_END_IF
             EVT_END_SWITCH
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_WAIT(2)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarE, DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, EVENT_SUPPRESS_ALL, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarE, DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
             EVT_WAIT(2)
             EVT_CALL(ActorExists, ACTOR_PARTNER, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                 EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, EVENT_SUPPRESS_ALL, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
+                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_WAIT(40)

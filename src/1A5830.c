@@ -332,7 +332,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     if (!(attacker->staticStatus == STATUS_STATIC)
         && ((target->staticStatus == STATUS_STATIC) || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED))
         && !(battleStatus->currentAttackElement & (DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT))
-        && !(battleStatus->currentAttackEventSuppression & EVENT_SUPPRESS_FLAG_SHOCK)
+        && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
         && !has_enchanted_part(attacker)) // enchanted attacks ignore electrified defenders
     {
         madeElectricContact = TRUE;
@@ -790,7 +790,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     if (attacker->staticStatus != STATUS_STATIC
         && (target->staticStatus == STATUS_STATIC || targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED)
         && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
-        && !(battleStatus->currentAttackEventSuppression & EVENT_SUPPRESS_FLAG_SHOCK)
+        && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
         && (attacker->transparentStatus != STATUS_TRANSPARENT)
         && !has_enchanted_part(attacker))
     {
@@ -2687,46 +2687,46 @@ ApiStatus DropStarPoints(Evt* script, s32 isInitialCall) {
 ApiStatus SetDefenseTable(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 partIndex;
-    u32* var2;
+    s32 partIdx;
+    u32* table;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    partIndex = evt_get_variable(script, *args++);
-    var2 = (u32*) evt_get_variable(script, *args++);
-    get_actor_part(get_actor(actorID), partIndex)->defenseTable = var2;
+    partIdx = evt_get_variable(script, *args++);
+    table = (u32*) evt_get_variable(script, *args++);
+    get_actor_part(get_actor(actorID), partIdx)->defenseTable = table;
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetStatusTable(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    u32* var1;
+    u32* table;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    var1 = (u32*) evt_get_variable(script, *args++);
-    get_actor(actorID)->statusTable = var1;
+    table = (u32*) evt_get_variable(script, *args++);
+    get_actor(actorID)->statusTable = table;
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetIdleAnimations(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 partIndex;
+    s32 partIdx;
     u32* var2;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    partIndex = evt_get_variable(script, *args++);
+    partIdx = evt_get_variable(script, *args++);
     var2 = (u32*) evt_get_variable(script, *args++);
-    get_actor_part(get_actor(actorID), partIndex)->idleAnimations = var2;
+    get_actor_part(get_actor(actorID), partIdx)->idleAnimations = var2;
     return ApiStatus_DONE2;
 }
 
