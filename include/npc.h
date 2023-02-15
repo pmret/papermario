@@ -283,7 +283,7 @@ typedef struct NpcData {
     /* 0x1E2 */ s8 unk__1E2;
     /* 0x1E3 */ u8 aiDetectFlags;
     /* 0x1E4 */ u32 aiFlags;
-    /* 0x1E8 */ s32* extraAnimations;
+    /* 0x1E8 */ AnimID* extraAnimations;
     /* 0x1EC */ s32 tattle;
 } NpcData; // size = 0x1F0
 
@@ -434,13 +434,13 @@ void init_npc_list(void);
 /// Presumably did something once upon a time but got commented out.
 void npc_iter_no_op(void);
 
-s32 _create_npc(NpcBlueprint* blueprint, AnimID* animList, s32 skipLoadingAnims);
+s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 skipLoadingAnims);
 
-s32 _create_npc_basic(NpcBlueprint* blueprint);
+s32 create_basic_npc(NpcBlueprint* blueprint);
 
-s32 _create_npc_standard(NpcBlueprint* blueprint, AnimID* animList);
+s32 create_standard_npc(NpcBlueprint* blueprint, AnimID* animList);
 
-s32 _create_npc_partner(NpcBlueprint* blueprint);
+s32 create_peach_npc(NpcBlueprint* blueprint);
 
 void free_npc_by_index(s32 listIndex);
 

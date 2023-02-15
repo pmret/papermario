@@ -30,7 +30,7 @@ s32 N(defenseTable_8022CB4C)[] = {
     ELEMENT_ICE, -2,
     ELEMENT_FIRE, 99,
     ELEMENT_SHOCK, 0,
-    ELEMENT_HAMMER, 0,
+    ELEMENT_SMASH, 0,
     ELEMENT_BLAST, -1,
     ELEMENT_END,
 };
@@ -191,7 +191,7 @@ EvtScript N(handleEvent_8022CE60) = {
             EVT_SET_CONST(LVar1, ANIM_PyroGuy_Anim06)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
@@ -306,7 +306,7 @@ EvtScript N(takeTurn_8022D344) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_FIRE, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)

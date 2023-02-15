@@ -62,9 +62,9 @@ ApiStatus N(WattFXUpdate)(Evt* script, s32 isInitialCall) {
         sWattEffectData_bouncePhase = clamp_angle(sWattEffectData_bouncePhase);
     }
 
-    partner->unk_19A = sin_rad(DEG_TO_RAD(sWattEffectData_bouncePhase)) * 3.0f;
+    partner->verticalRenderOffset = sin_rad(DEG_TO_RAD(sWattEffectData_bouncePhase)) * 3.0f;
     x = partner->currentPos.x + partner->headOffset.x;
-    y = partner->currentPos.y + partner->headOffset.y + partner->unk_19A + 12.0f;
+    y = partner->currentPos.y + partner->headOffset.y + partner->verticalRenderOffset + 12.0f;
     z = partner->currentPos.z + partner->headOffset.z;
     if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_4)) == BS_FLAGS2_4) {
         y = NPC_DISPOSE_POS_Y;
@@ -192,7 +192,7 @@ ApiStatus N(PowerShockDischargeFX)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* partner = gBattleStatus.partnerActor;
     f32 x = partner->currentPos.x + partner->headOffset.x;
-    f32 y = partner->currentPos.y + partner->headOffset.y + partner->unk_19A + 12.0f;
+    f32 y = partner->currentPos.y + partner->headOffset.y + partner->verticalRenderOffset + 12.0f;
     f32 z = partner->currentPos.z + partner->headOffset.z;
 
     if (isInitialCall) {
@@ -552,7 +552,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1,  ANIM_BattleWatt_Hurt)
             EVT_EXEC_WAIT(DoPartnerHit)
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
@@ -800,7 +800,7 @@ EvtScript N(electroDash) = {
             EVT_KILL_THREAD(LVarA)
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4, 0, 1, BS_FLAGS1_10)
+        EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_10)
         EVT_SET(LocalFlag(0), 0)
         EVT_EXEC_GET_TID(N(charge), LVarA)
         EVT_LOOP(55)
@@ -853,7 +853,7 @@ EvtScript N(electroDash) = {
             EVT_KILL_THREAD(LVarA)
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4, 0, 1, BS_FLAGS1_10)
+        EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_10)
         EVT_SET(LocalFlag(0), 0)
         EVT_EXEC_GET_TID(N(charge), LVarA)
         EVT_LOOP(55)
@@ -907,7 +907,7 @@ EvtScript N(electroDash) = {
         EVT_WAIT(2)
         EVT_CALL(N(SetBackgroundAlpha), 0)
     EVT_END_THREAD
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_THREAD
             EVT_WAIT(5)
@@ -940,9 +940,9 @@ EvtScript N(electroDash) = {
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_IGNORE_DEFENSE, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_8 | ATTACK_EVENT_FLAG_80, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_SHOCK_CONTACT | SUPPRESS_EVENT_FLAG_80, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
         EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_IGNORE_DEFENSE, ATTACK_EVENT_FLAG_1 | ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_8 | ATTACK_EVENT_FLAG_80, 0, LVarE, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_SHOCK_CONTACT | SUPPRESS_EVENT_FLAG_80, 0, LVarE, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_CALL(PartnerYieldTurn)
     EVT_SWITCH(LVar0)
@@ -951,7 +951,7 @@ EvtScript N(electroDash) = {
             EVT_EXEC_WAIT(N(returnHome2))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_EXEC_WAIT(N(returnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -979,7 +979,7 @@ EvtScript N(powerShock) = {
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -15, -10, 0)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, 10)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Idle)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_10)
     EVT_CALL(AddBattleCamZoom, -100)
     EVT_CALL(MoveBattleCamOver, 80)
     EVT_CALL(N(WattFXDisable))
@@ -1045,7 +1045,7 @@ EvtScript N(powerShock) = {
         EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Idle)
     EVT_END_THREAD
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_WAIT(15)
         EVT_EXEC_WAIT(N(returnHome))
@@ -1055,9 +1055,9 @@ EvtScript N(powerShock) = {
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
-            EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_100 | STATUS_FLAG_200 | STATUS_FLAG_PARALYZE | STATUS_FLAG_RIGHT_ON | STATUS_FLAG_80000000, 254, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+            EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, DMG_STATUS_ALWAYS(STATUS_FLAG_PARALYZE, 3), 254, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
         EVT_CASE_DEFAULT
-            EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_100 | STATUS_FLAG_200 | STATUS_FLAG_PARALYZE | STATUS_FLAG_RIGHT_ON | STATUS_FLAG_80000000, 255, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, DMG_STATUS_ALWAYS(STATUS_FLAG_PARALYZE, 3), 255, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_CALL(PartnerYieldTurn)
     EVT_IF_NE(LocalFlag(15), 1)
@@ -1074,7 +1074,7 @@ EvtScript N(powerShock) = {
             EVT_EXEC_WAIT(N(returnHome2))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_EXEC_WAIT(N(returnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -1343,14 +1343,14 @@ EvtScript N(megaShock) = {
     EVT_LOOP(0)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(GetActionCommandResult, LVarF)
-        EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10, 0, 1, BS_FLAGS1_10)
+        EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
         EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
             EVT_GOTO(11)
         EVT_END_IF
         EVT_IF_EQ(LVarF, 100)
-            EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_100 | STATUS_FLAG_200 | STATUS_FLAG_PARALYZE | STATUS_FLAG_RIGHT_ON | STATUS_FLAG_80000000, 254, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+            EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, DMG_STATUS_ALWAYS(STATUS_FLAG_PARALYZE, 3), 254, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
         EVT_ELSE
-            EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_100 | STATUS_FLAG_200 | STATUS_FLAG_PARALYZE | STATUS_FLAG_RIGHT_ON | STATUS_FLAG_80000000, LVarF, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+            EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, DMG_STATUS_ALWAYS(STATUS_FLAG_PARALYZE, 3), LVarF, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
         EVT_END_IF
         EVT_LABEL(11)
         EVT_CALL(ChooseNextTarget, 0, LVar0)

@@ -56,7 +56,7 @@ ActorPartBlueprint N(partsTable_80218EE8)[] = {
         .idleAnimations = N(idleAnimations_80218FC4),
         .defenseTable = N(defenseTable_80218E10),
         .eventFlags = ACTOR_EVENT_FLAG_FIREY,
-        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAG_2,
+        .elementImmunityFlags = ELEMENT_FIRE,
         .unk_1C = 0xFD,
         .unk_1D = 0xF6,
     },
@@ -295,7 +295,7 @@ EvtScript N(handleEvent_80219500) = {
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Anim07)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
         EVT_CASE_OR_EQ(EVENT_BURN_TAUNT)
@@ -413,7 +413,7 @@ EvtScript N(fireTackle) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_FIRE, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_SET(LVar0, 1)
             EVT_SET(LVar1, 4587524)
@@ -536,7 +536,7 @@ EvtScript N(fireballs_Partner) = {
     EVT_WAIT(20)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_EXEC_WAIT(N(80219464))
         EVT_END_CASE_GROUP
@@ -625,7 +625,7 @@ EvtScript N(fireballs_Player) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_FIRE, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)

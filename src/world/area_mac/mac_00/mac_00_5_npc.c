@@ -285,28 +285,28 @@ NpcData N(NpcData_Toad_01)[] = {
     },
 };
 
-s32 N(D_8024CFFC_7F7D0C)[] = {
+AnimID N(ExtraAnims_TheMaster)[] = {
     ANIM_TheMaster_Still,
     ANIM_TheMaster_Idle,
     ANIM_TheMaster_Walk,
     ANIM_TheMaster_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(D_8024D010_7F7D20)[] = {
+AnimID N(ExtraAnims_Chan)[] = {
     ANIM_Chan_Still,
     ANIM_Chan_Idle,
     ANIM_Chan_Walk,
     ANIM_Chan_Run,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(D_8024D024_7F7D34)[] = {
+AnimID N(ExtraAnims_Lee)[] = {
     ANIM_Lee_Still,
     ANIM_Lee_Idle,
     ANIM_Lee_Walk,
     ANIM_Lee_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Toad_03)[] = {
@@ -336,7 +336,7 @@ NpcData N(NpcData_Toad_03)[] = {
             .anim_E = ANIM_TheMaster_Still,
             .anim_F = ANIM_TheMaster_Still,
         },
-        .extraAnimations = N(D_8024CFFC_7F7D0C),
+        .extraAnimations = N(ExtraAnims_TheMaster),
         .tattle = MSG_NpcTattle_TheMaster,
     },
     {
@@ -350,7 +350,7 @@ NpcData N(NpcData_Toad_03)[] = {
         .animations = {
             .idle   = ANIM_Chan_Idle,
         },
-        .extraAnimations = N(D_8024D010_7F7D20),
+        .extraAnimations = N(ExtraAnims_Chan),
         .tattle = MSG_NpcTattle_Chan,
     },
     {
@@ -364,7 +364,7 @@ NpcData N(NpcData_Toad_03)[] = {
         .animations = {
             .idle   = ANIM_Lee_Idle,
         },
-        .extraAnimations = N(D_8024D024_7F7D34),
+        .extraAnimations = N(ExtraAnims_Lee),
         .tattle = MSG_NpcTattle_Lee,
     },
 };

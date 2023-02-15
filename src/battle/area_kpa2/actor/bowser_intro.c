@@ -252,7 +252,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET(LVar1, ANIM_BattleBowser_Idle)
@@ -373,7 +373,7 @@ EvtScript N(attackClawSwipe) = {
     EVT_END_THREAD
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
         EVT_CASE_OR_EQ(HIT_RESULT_10)
             EVT_WAIT(30)
             EVT_IF_EQ(LVarF, HIT_RESULT_10)
@@ -428,10 +428,10 @@ EvtScript N(attackFireBreath) = {
     EVT_WAIT(30)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_FIRE, 65535, 0, 10, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_FIRE, SUPPRESS_EVENT_ALL, 0, 10, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
         EVT_CASE_OR_EQ(HIT_RESULT_10)
             EVT_THREAD
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_PostFireBreath)

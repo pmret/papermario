@@ -36,7 +36,7 @@ API_CALLABLE(N(CreateParadeNPC)) {
 
     spr_allocateBtlComponentsOnWorldHeap = TRUE;
 
-    npc = get_npc_by_index(_create_npc_standard(&bp, npcInfo->animList));
+    npc = get_npc_by_index(create_standard_npc(&bp, npcInfo->animList));
     npc->npcID = npcID;
     npc->flags &= ~NPC_FLAG_PARTICLE;
     npc->pos.x = npcInfo->pos.x;
@@ -165,49 +165,49 @@ EvtScript N(EVS_OffsetNpcScroll) = {
 
 AnimID N(ExtraAnims_Eldstar)[] = {
     ANIM_BattleEldstar_Idle,
-    -1
+    ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_Mamar)[] = {
     ANIM_BattleMamar_Idle,
-    -1
+    ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_Skolar)[] = {
     ANIM_BattleSkolar_Idle,
-    -1
+    ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_Muskular)[] = {
     ANIM_BattleMuskular_Idle,
-    -1
+    ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_Misstar)[] = {
     ANIM_BattleMisstar_Still,
-    -1
+    ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_Klevar)[] = {
     ANIM_BattleKlevar_Idle,
-    -1
+    ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_Kalmar)[] = {
     ANIM_BattleKalmar_Idle,
-    -1
+    ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_PyroGuy)[] = {
     ANIM_PyroGuy_Anim03,
-    -1
+    ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_ShyGuy)[] = {
     ANIM_ShyGuy_Red_Anim04,
     ANIM_ShyGuy_Red_Anim10,
     ANIM_ShyGuy_Red_Anim01,
-    -1
+    ANIM_LIST_END
 };
 
 ParadeNpcInfo N(ParadeNpcsTable)[] = {

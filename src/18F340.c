@@ -992,7 +992,7 @@ EvtScript HandleEvent_Player = {
             EVT_EXEC_WAIT(D_80298724)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208C)
             EVT_SET_CONST(LVar1, ANIM_Mario_10002)

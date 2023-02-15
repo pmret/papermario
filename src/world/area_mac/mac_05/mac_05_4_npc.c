@@ -2097,13 +2097,13 @@ NpcData N(NpcData_Fishmael) = {
     .tattle = MSG_NpcTattle_Fishmael,
 };
 
-AnimID N(Fuzzipede_ExtraAnims)[] = {
+AnimID N(ExtraAnims_Fuzzipede)[] = {
     ANIM_Fuzzipede_Anim00,
     ANIM_Fuzzipede_Anim04,
     ANIM_Fuzzipede_Anim08,
     ANIM_Fuzzipede_Anim0A,
     ANIM_Fuzzipede_Anim24,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Fuzzipede) = {
@@ -2117,11 +2117,11 @@ NpcData N(NpcData_Fuzzipede) = {
     .animations = {
         .idle   = ANIM_Fuzzipede_Anim04,
     },
-    .extraAnimations = N(Fuzzipede_ExtraAnims),
+    .extraAnimations = N(ExtraAnims_Fuzzipede),
     .tattle = MSG_NpcTattle_Fuzzipede,
 };
 
-AnimID N(JrTroopa_ExtraAnims)[] = {
+AnimID N(ExtraAnims_JrTroopa)[] = {
     ANIM_JrTroopa_Still,
     ANIM_JrTroopa_PointStill,
     ANIM_JrTroopa_Idle,
@@ -2134,7 +2134,7 @@ AnimID N(JrTroopa_ExtraAnims)[] = {
     ANIM_JrTroopa_Defeated,
     ANIM_JrTroopa_TiredTalk,
     ANIM_JrTroopa_PointTalk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_JrTroopa_01)[] = {
@@ -2164,7 +2164,7 @@ NpcData N(NpcData_JrTroopa_01)[] = {
             .anim_E = ANIM_JrTroopa_Idle,
             .anim_F = ANIM_JrTroopa_Idle,
         },
-        .extraAnimations = N(JrTroopa_ExtraAnims),
+        .extraAnimations = N(ExtraAnims_JrTroopa),
         .tattle = MSG_NpcTattle_JrTroopa,
     },
     {
@@ -2193,7 +2193,7 @@ NpcData N(NpcData_JrTroopa_01)[] = {
             .anim_E = ANIM_JrTroopa_Idle,
             .anim_F = ANIM_JrTroopa_Idle,
         },
-        .extraAnimations = N(JrTroopa_ExtraAnims),
+        .extraAnimations = N(ExtraAnims_JrTroopa),
         .tattle = MSG_NpcTattle_JrTroopa,
     },
 };

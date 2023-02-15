@@ -222,13 +222,13 @@ EvtScript N(EVS_NpcInit_LavaBud_01) = {
     EVT_END
 };
 
-s32 N(D_80243848_902EB8)[] = {
+AnimID N(D_80243848_902EB8)[] = {
     ANIM_LavaPiranha_Anim03,
     ANIM_LavaPiranha_Anim0E,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(D_80243854_902EC4)[] = {
+AnimID N(D_80243854_902EC4)[] = {
     ANIM_LavaBud_Anim03,
-    -1
+    ANIM_LIST_END
 };

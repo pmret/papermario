@@ -253,7 +253,7 @@ EvtScript N(80220DC0) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 8, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_THREAD
                 EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 16, 0)
@@ -461,7 +461,7 @@ EvtScript N(handleEvent_80222140) = {
                 EVT_CASE_FLAG(DAMAGE_TYPE_BLAST)
                     EVT_EXEC_WAIT(N(80221DE0))
                 EVT_CASE_DEFAULT
-                    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLOSIVE, 1)
+                    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION, 1)
                     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
                     EVT_IF_EQ(LVar0, 1)
                         EVT_SET_CONST(LVar0, 1)
@@ -474,7 +474,7 @@ EvtScript N(handleEvent_80222140) = {
                         EVT_SET_CONST(LVar2, -1)
                         EVT_EXEC_WAIT(DoBurnHit)
                     EVT_END_IF
-                    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLOSIVE, 0)
+                    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION, 0)
             EVT_END_SWITCH
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -591,7 +591,7 @@ EvtScript N(handleEvent_80222140) = {
             EVT_END_IF
             EVT_CALL(PlayEffect, EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT(20)
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -804,7 +804,7 @@ EvtScript N(80223310) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 15)

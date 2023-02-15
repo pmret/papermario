@@ -22,7 +22,7 @@ API_CALLABLE(N(StoneChompFXA)) {
     bp.onRender = NULL;
 
     for (i = 0; i < 8; i++, blurData++) {
-        blurData->npc = newNpc = get_npc_by_index(_create_npc_basic(bpPtr));
+        blurData->npc = newNpc = get_npc_by_index(create_basic_npc(bpPtr));
         newNpc->pos.x = npc->pos.x;
         newNpc->pos.y = npc->pos.y;
         newNpc->pos.z = npc->pos.z;

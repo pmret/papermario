@@ -206,7 +206,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
             EVT_EXEC_WAIT(DoPartnerHit)
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
@@ -871,7 +871,7 @@ EvtScript N(spinyFlip) = {
     EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_ThrowSpiny)
     EVT_WAIT(3)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 2, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_SET(LVarF, -1)
     EVT_END_IF
@@ -919,7 +919,7 @@ EvtScript N(spinyFlip) = {
         EVT_CASE_GT(0)
             EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVarE, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
         EVT_CASE_DEFAULT
-            EVT_SET(LVar0, HIT_RESULT_QUAKE_IMMUNE)
+            EVT_SET(LVar0, HIT_RESULT_NO_DAMAGE)
     EVT_END_SWITCH
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(1)
@@ -934,7 +934,7 @@ EvtScript N(spinyFlip) = {
             EVT_EXEC_WAIT(N(returnHome2))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_EXEC_WAIT(N(returnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -1054,7 +1054,7 @@ EvtScript N(spinySurge) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, ATTACK_EVENT_FLAG_4 | ATTACK_EVENT_FLAG_10, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 2, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_GOTO(12)
     EVT_END_IF
@@ -1086,7 +1086,7 @@ EvtScript N(spinySurge) = {
             EVT_EXEC_WAIT(N(returnHome2))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_EXEC_WAIT(N(returnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH

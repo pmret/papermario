@@ -208,7 +208,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(DoImmune)

@@ -122,6 +122,26 @@
     .anim_F = ANIM_ShyGuy_Yellow_Anim01, \
 }
 
+#define ANTI_GUY_ANIMS \
+{ \
+    .idle   = ANIM_ShyGuy_Black_Anim01, \
+    .walk   = ANIM_ShyGuy_Black_Anim02, \
+    .run    = ANIM_ShyGuy_Black_Anim03, \
+    .chase  = ANIM_ShyGuy_Black_Anim02, \
+    .anim_4 = ANIM_ShyGuy_Black_Anim01, \
+    .anim_5 = ANIM_ShyGuy_Black_Anim01, \
+    .death  = ANIM_ShyGuy_Black_Anim0C, \
+    .hit    = ANIM_ShyGuy_Black_Anim0C, \
+    .anim_8 = ANIM_ShyGuy_Black_Anim15, \
+    .anim_9 = ANIM_ShyGuy_Black_Anim12, \
+    .anim_A = ANIM_ShyGuy_Black_Anim11, \
+    .anim_B = ANIM_ShyGuy_Black_Anim10, \
+    .anim_C = ANIM_ShyGuy_Black_Anim05, \
+    .anim_D = ANIM_ShyGuy_Black_Anim01, \
+    .anim_E = ANIM_ShyGuy_Black_Anim01, \
+    .anim_F = ANIM_ShyGuy_Black_Anim01, \
+}
+
 // shy guys who avoid the player
 
 #define RED_AVOID_SHY_GUY_ANIMS \

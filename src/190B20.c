@@ -1208,7 +1208,7 @@ void load_player_actor(void) {
     player->rotationPivotOffset.x = 0;
     player->rotationPivotOffset.y = 0;
     player->rotationPivotOffset.z = 0;
-    player->unk_19A = 0;
+    player->verticalRenderOffset = 0;
     player->yaw = 0.0f;
     player->renderMode = RENDER_MODE_ALPHATEST;
     player->scale.x = 1.0f;
@@ -1309,7 +1309,7 @@ void load_player_actor(void) {
     }
 
     part->eventFlags = 0;
-    part->partFlags3 = 0;
+    part->elementalImmunities = 0;
     part->opacity = 255;
     part->size.y = player->size.y;
     part->size.x = player->size.x;
@@ -1463,7 +1463,7 @@ void load_partner_actor(void) {
         partnerActor->scaleModifier.x = 1.0f;
         partnerActor->scaleModifier.y = 1.0f;
         partnerActor->scaleModifier.z = 1.0f;
-        partnerActor->unk_19A = 0;
+        partnerActor->verticalRenderOffset = 0;
         partnerActor->size.x = ActorBlueprint->size.x;
         partnerActor->size.y = ActorBlueprint->size.y;
         partnerActor->healthBarPosition.x = partnerActor->homePos.x;
@@ -1537,7 +1537,7 @@ void load_partner_actor(void) {
             part->defenseTable = ActorPartBlueprint->defenseTable;
             part->idleAnimations = ActorPartBlueprint->idleAnimations;
             part->eventFlags = ActorPartBlueprint->eventFlags;
-            part->partFlags3 = ActorPartBlueprint->elementImmunityFlags;
+            part->elementalImmunities = ActorPartBlueprint->elementImmunityFlags;
             part->opacity = ActorPartBlueprint->opacity;
             part->size.y = partnerActor->size.y;
             part->size.x = partnerActor->size.x;
@@ -1708,7 +1708,7 @@ Actor* create_actor(Formation formation) {
     actor->scaleModifier.x = 1.0f;
     actor->scaleModifier.y = 1.0f;
     actor->scaleModifier.z = 1.0f;
-    actor->unk_19A = 0;
+    actor->verticalRenderOffset = 0;
     actor->extraCoinBonus = 0;
     actor->size.x = formationActor->size.x;
     actor->size.y = formationActor->size.y;
@@ -1798,7 +1798,7 @@ Actor* create_actor(Formation formation) {
         part->defenseTable = actorPartBP->defenseTable;
         part->idleAnimations = actorPartBP->idleAnimations;
         part->eventFlags = actorPartBP->eventFlags;
-        part->partFlags3 = actorPartBP->elementImmunityFlags;
+        part->elementalImmunities = actorPartBP->elementImmunityFlags;
         part->opacity = actorPartBP->opacity;
         if (part->opacity < 255) {
             actor->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
@@ -2185,72 +2185,28 @@ s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
     s32 minDefense = 255;
 
     if (defenseTable != NULL) {
-        if (elementFlags & DAMAGE_TYPE_FIRE) {
-            defense = lookup_defense(defenseTable, ELEMENT_FIRE);
-            if (defense < minDefense) {
-                minDefense = defense;
-            }
-        }
-        if (elementFlags & DAMAGE_TYPE_WATER) {
-            defense = lookup_defense(defenseTable, ELEMENT_WATER);
-            if (defense < minDefense) {
-                minDefense = defense;
-            }
-        }
-        if (elementFlags & DAMAGE_TYPE_ICE) {
-            defense = lookup_defense(defenseTable, ELEMENT_ICE);
-            if (defense < minDefense) {
-                minDefense = defense;
-            }
-        }
-        if (elementFlags & DAMAGE_TYPE_MAGIC) {
-            defense = lookup_defense(defenseTable, ELEMENT_MAGIC);
-            if (defense < minDefense) {
-                minDefense = defense;
-            }
-        }
-        if (elementFlags & DAMAGE_TYPE_SMASH) {
-            defense = lookup_defense(defenseTable, ELEMENT_HAMMER);
-            if (defense < minDefense) {
-                minDefense = defense;
-            }
-        }
-        if (elementFlags & DAMAGE_TYPE_JUMP) {
-            defense = lookup_defense(defenseTable, ELEMENT_JUMP);
-            if (defense < minDefense) {
-                minDefense = defense;
-            }
-        }
-        if (elementFlags & DAMAGE_TYPE_COSMIC) {
-            defense = lookup_defense(defenseTable, ELEMENT_COSMIC);
-            if (defense < minDefense) {
-                minDefense = defense;
-            }
-        }
-        if (elementFlags & DAMAGE_TYPE_BLAST) {
-            defense = lookup_defense(defenseTable, ELEMENT_BLAST);
-            if (defense < minDefense) {
-                minDefense = defense;
-            }
-        }
-        if (elementFlags & DAMAGE_TYPE_ELECTRIC) {
-            defense = lookup_defense(defenseTable, ELEMENT_SHOCK);
-            if (defense < minDefense) {
-                minDefense = defense;
-            }
-        }
-        if (elementFlags & DAMAGE_TYPE_QUAKE) {
-            defense = lookup_defense(defenseTable, ELEMENT_QUAKE);
-            if (defense < minDefense) {
-                minDefense = defense;
-            }
-        }
-        if (elementFlags & DAMAGE_TYPE_THROW) {
-            defense = lookup_defense(defenseTable, ELEMENT_THROW);
-            if (defense < minDefense) {
-                minDefense = defense;
-            }
-        }
+
+        #define CHECK_DEFENSE(element) \
+        if (elementFlags & DAMAGE_TYPE_##element) { \
+            defense = lookup_defense(defenseTable, ELEMENT_##element); \
+            if (defense < minDefense) { \
+                minDefense = defense; \
+            } \
+        } \
+
+        CHECK_DEFENSE(FIRE);
+        CHECK_DEFENSE(WATER);
+        CHECK_DEFENSE(ICE);
+        CHECK_DEFENSE(MAGIC);
+        CHECK_DEFENSE(SMASH);
+        CHECK_DEFENSE(JUMP);
+        CHECK_DEFENSE(COSMIC);
+        CHECK_DEFENSE(BLAST);
+        CHECK_DEFENSE(SHOCK);
+        CHECK_DEFENSE(QUAKE);
+        CHECK_DEFENSE(THROW);
+
+        #undef CHECK_DEFENSE
     }
 
     // If no element flags were set, fall back to normal defense.
@@ -2354,8 +2310,8 @@ void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage) {
     do {
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
             fx_ring_blast(0, x, y, z, 1.0f, 0x18);
-        } else if (battleStatus->currentAttackElement & DAMAGE_TYPE_ELECTRIC) {
-            func_80251474(actor);
+        } else if (battleStatus->currentAttackElement & DAMAGE_TYPE_SHOCK) {
+            apply_shock_effect(actor);
         } else if (battleStatus->currentAttackElement & DAMAGE_TYPE_WATER) {
             fx_water_splash(0, x, y, z, 1.0f, 24);
         } else {
@@ -2540,32 +2496,33 @@ void func_80266B14(void) {
 // TODO dumb label required to match, clean up
 s32 try_inflict_status(Actor* actor, s32 statusTypeKey, s32 statusKey) {
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 phi_s0;
+    s32 chance;
     s32 duration;
 
-    if (battleStatus->statusChance == 0xFE) {
+    if (battleStatus->statusChance == STATUS_CHANCE_IGNORE_RES) {
         duration = battleStatus->statusDuration;
-        return inflict_status_set_duration(actor, statusTypeKey, statusKey,
-                                           duration + lookup_status_duration_mod(actor->statusTable, statusKey));
+        duration += lookup_status_duration_mod(actor->statusTable, statusKey);
+        return inflict_status_set_duration(actor, statusTypeKey, statusKey, duration);
     }
 
     duration = 0;
 
     if (actor->statusTable != NULL) {
-        if (!(battleStatus->currentAttackStatus & 0x40000000)) {
-            phi_s0 = lookup_status_chance(actor->statusTable, statusTypeKey);
+        if (!(battleStatus->currentAttackStatus & STATUS_FLAG_RIGHT_ON)) {
+            chance = lookup_status_chance(actor->statusTable, statusTypeKey);
         } else {
             if (lookup_status_chance(actor->statusTable, statusTypeKey) != 0) {
-                phi_s0 = 100;
+                chance = 100;
             } else {
                 goto meow;
             }
         }
 
-        if (phi_s0 > 0) {
-            phi_s0 = (phi_s0 * battleStatus->statusChance) / 100;
-            if (phi_s0 > 0 && phi_s0 >= rand_int(100)) {
-                duration = lookup_status_duration_mod(actor->statusTable, statusKey) + 3;
+        if (chance > 0) {
+            chance = (chance * battleStatus->statusChance) / 100;
+            if (chance > 0 && chance >= rand_int(100)) {
+                duration = 3;
+                duration += lookup_status_duration_mod(actor->statusTable, statusKey);
             }
         }
     } else {

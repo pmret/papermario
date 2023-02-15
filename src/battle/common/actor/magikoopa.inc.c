@@ -559,7 +559,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim04)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim01)
             EVT_EXEC_WAIT(DoImmune)
@@ -698,7 +698,7 @@ EvtScript N(handleEvent_flying) = {
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim04)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_SET_CONST(LVar0, 2)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim01)
             EVT_EXEC_WAIT(DoImmune)

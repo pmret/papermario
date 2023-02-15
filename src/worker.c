@@ -51,7 +51,7 @@ s32 create_worker_world(void (*updateFunc)(void), void (*drawFunc)(void)) {
     }
 
     if (gGameStatusPtr->isBattle) {
-        i |= BATTLE_ENTITY_ID_MASK;
+        i |= BATTLE_ENTITY_ID_BIT;
     }
     return i;
 }
@@ -82,7 +82,7 @@ s32 create_worker_frontUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
     }
 
     if (gGameStatusPtr->isBattle) {
-        i |= BATTLE_ENTITY_ID_MASK;
+        i |= BATTLE_ENTITY_ID_BIT;
     }
     return i;
 }
@@ -113,7 +113,7 @@ s32 create_worker_backUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
     }
 
     if (gGameStatusPtr->isBattle) {
-        i |= BATTLE_ENTITY_ID_MASK;
+        i |= BATTLE_ENTITY_ID_BIT;
     }
     return i;
 }
@@ -170,8 +170,8 @@ void render_workers_backUI(void) {
 }
 
 void free_worker(s32 idx) {
-    if (!gGameStatusPtr->isBattle || (idx & BATTLE_ENTITY_ID_MASK)) {
-        idx &= ~BATTLE_ENTITY_ID_MASK;
+    if (!gGameStatusPtr->isBattle || (idx & BATTLE_ENTITY_ID_BIT)) {
+        idx &= ~BATTLE_ENTITY_ID_BIT;
         if ((*gCurrentWorkerListPtr)[idx] != NULL) {
             heap_free((*gCurrentWorkerListPtr)[idx]);
             (*gCurrentWorkerListPtr)[idx] = NULL;
@@ -180,5 +180,5 @@ void free_worker(s32 idx) {
 }
 
 Worker* get_worker(s32 idx) {
-    return (*gCurrentWorkerListPtr)[idx & ~BATTLE_ENTITY_ID_MASK];
+    return (*gCurrentWorkerListPtr)[idx & ~BATTLE_ENTITY_ID_BIT];
 }

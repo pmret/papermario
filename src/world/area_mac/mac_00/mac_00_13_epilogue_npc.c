@@ -292,25 +292,25 @@ NpcData N(NpcData_ChuckQuizmo_Epilogue)[] = {
     },
 };
 
-s32 N(D_80254944_7FF654_Epilogue)[] = {
+AnimID N(ExtraAnims_TheMaster_Epilogue)[] = {
     ANIM_TheMaster_Still,
     ANIM_TheMaster_Idle,
     ANIM_TheMaster_Talk,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(D_80254954_7FF664_Epilogue)[] = {
+AnimID N(ExtraAnims_Chan_Epilogue)[] = {
     ANIM_Chan_Still,
     ANIM_Chan_Idle,
     ANIM_Chan_Run,
-    -1
+    ANIM_LIST_END
 };
 
-s32 N(D_80254964_7FF674_Epilogue)[] = {
+AnimID N(ExtraAnims_Lee_Epilogue)[] = {
     ANIM_Lee_Still,
     ANIM_Lee_Idle,
     ANIM_Lee_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_DojoMembers_Epilogue)[] = {
@@ -340,7 +340,7 @@ NpcData N(NpcData_DojoMembers_Epilogue)[] = {
             .anim_E = ANIM_TheMaster_Still,
             .anim_F = ANIM_TheMaster_Still,
         },
-        .extraAnimations = N(D_80254944_7FF654_Epilogue),
+        .extraAnimations = N(ExtraAnims_TheMaster_Epilogue),
         .tattle = MSG_NpcTattle_TheMaster,
     },
     {
@@ -354,7 +354,7 @@ NpcData N(NpcData_DojoMembers_Epilogue)[] = {
         .animations = {
             .idle   = ANIM_Chan_Idle,
         },
-        .extraAnimations = N(D_80254954_7FF664_Epilogue),
+        .extraAnimations = N(ExtraAnims_Chan_Epilogue),
         .tattle = MSG_NpcTattle_Chan,
     },
     {
@@ -368,7 +368,7 @@ NpcData N(NpcData_DojoMembers_Epilogue)[] = {
         .animations = {
             .idle   = ANIM_Lee_Idle,
         },
-        .extraAnimations = N(D_80254964_7FF674_Epilogue),
+        .extraAnimations = N(ExtraAnims_Lee_Epilogue),
         .tattle = MSG_NpcTattle_Lee,
     },
 };

@@ -631,15 +631,15 @@ EvtScript N(D_802A2EC0) = {
     EVT_END_SWITCH
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x235)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_235)
         EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x236)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_236)
         EVT_CASE_EQ(2)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x237)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_237)
         EVT_CASE_EQ(3)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_238)
         EVT_CASE_DEFAULT
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_238)
     EVT_END_SWITCH
     EVT_CALL(func_80269550, LVarE)
     EVT_CALL(DidActionSucceed, LVar0)

@@ -578,7 +578,7 @@ void func_800EA5B8(Npc* partner) {
                           NPC_FLAG_JUMPING);
 }
 
-void partner_create_npc(void) {
+void partnercreate_npc_impl(void) {
     WorldPartner* partnerEntry = &wPartners[wCurrentPartnerId];
     Npc** partnerNpcPtr = &wPartnerNpc;
     WorldPartner** partner = &wPartner;
@@ -594,7 +594,7 @@ void partner_create_npc(void) {
     blueprint.initialAnim = (*partner)->idle;
     blueprint.onUpdate = NULL;
     blueprint.onRender = NULL;
-    wPartnerNpcIndex = npcIndex = _create_npc_basic(blueprintPtr);
+    wPartnerNpcIndex = npcIndex = create_basic_npc(blueprintPtr);
 
     *partnerNpcPtr = get_npc_by_index(npcIndex);
 
@@ -685,7 +685,7 @@ void _use_partner_ability(void) {
                     set_time_freeze_mode(TIME_FREEZE_NORMAL);
                     partner_free_npc();
                     playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
-                    partner_create_npc();
+                    partnercreate_npc_impl();
                     sfx_play_sound(SOUND_E);
                     wPartner->init(wPartnerNpc);
                     PartnerCommandState += 1;
@@ -721,7 +721,7 @@ void _use_partner_ability(void) {
                 case 1:
                     partner_free_npc();
                     playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
-                    partner_create_npc();
+                    partnercreate_npc_impl();
                     wPartnerNpc->pos.x = wSavedPartnerPosX;
                     wPartnerNpc->pos.y = wSavedPartnerPosY;
                     wPartnerNpc->pos.z = wSavedPartnerPosZ;
@@ -781,7 +781,7 @@ void _use_partner_ability(void) {
                 case 0: // create the new partner
                     disable_player_input();
                     playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
-                    partner_create_npc();
+                    partnercreate_npc_impl();
                     wPartner->init(wPartnerNpc);
                     PartnerCommandState += 1;
                     // fall through
@@ -811,7 +811,7 @@ void _use_partner_ability(void) {
                 case 0:
                     disable_player_input();
                     playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
-                    partner_create_npc();
+                    partnercreate_npc_impl();
                     wPartnerNpc->pos.x = wSavedPartnerPosX;
                     wPartnerNpc->pos.y = wSavedPartnerPosY;
                     wPartnerNpc->pos.z = wSavedPartnerPosZ;
@@ -1014,7 +1014,7 @@ void partner_reset_data(void) {
     if (wCurrentPartnerId == PARTNER_NONE) {
         NextPartnerCommand = PARTNER_CMD_INIT;
     } else {
-        partner_create_npc();
+        partnercreate_npc_impl();
         wPartnerNpc->scale.x = 1.0f;
         wPartnerNpc->scale.y = 1.0f;
         wPartnerNpc->scale.z = 1.0f;

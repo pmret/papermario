@@ -90,7 +90,7 @@ void npc_iter_no_op(void) {
     }
 }
 
-s32 _create_npc(NpcBlueprint* blueprint, AnimID* animList, s32 skipLoadingAnims) {
+s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     Npc* npc;
     s32 i;
     s32 j;
@@ -107,7 +107,7 @@ s32 _create_npc(NpcBlueprint* blueprint, AnimID* animList, s32 skipLoadingAnims)
     ASSERT(npc != NULL);
 
     npc->flags = blueprint->flags | (NPC_FLAG_400000 | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW | NPC_FLAG_1);
-    if (skipLoadingAnims) {
+    if (isPeachNpc) {
         npc->flags |= NPC_FLAG_NO_ANIMS_LOADED;
     }
 
@@ -170,7 +170,7 @@ s32 _create_npc(NpcBlueprint* blueprint, AnimID* animList, s32 skipLoadingAnims)
     if (npc->onRender == NULL) {
         npc->onRender = &STUB_npc_callback;
     }
-    if (!skipLoadingAnims) {
+    if (!isPeachNpc) {
         npc->extraAnimList = animList;
         if (!(npc->flags & NPC_FLAG_1000000)) {
             if (!(npc->flags & NPC_FLAG_PARTICLE)) {
@@ -187,28 +187,28 @@ s32 _create_npc(NpcBlueprint* blueprint, AnimID* animList, s32 skipLoadingAnims)
     npc->shadowScale = 1.0f;
 
     if (gGameStatusPtr->isBattle) {
-        i |= 0x800;
+        i |= BATTLE_NPC_ID_BIT;
     }
     return i;
 }
 
-s32 _create_npc_basic(NpcBlueprint* blueprint) {
-    return _create_npc(blueprint, NULL, FALSE);
+s32 create_basic_npc(NpcBlueprint* blueprint) {
+    return create_npc_impl(blueprint, NULL, FALSE);
 }
 
-s32 _create_npc_standard(NpcBlueprint* blueprint, AnimID* animList) {
-    return _create_npc(blueprint, animList, FALSE);
+s32 create_standard_npc(NpcBlueprint* blueprint, AnimID* animList) {
+    return create_npc_impl(blueprint, animList, FALSE);
 }
 
-s32 _create_npc_partner(NpcBlueprint* blueprint) {
-    return _create_npc(blueprint, NULL, TRUE);
+s32 create_peach_npc(NpcBlueprint* blueprint) {
+    return create_npc_impl(blueprint, NULL, TRUE);
 }
 
 void free_npc_by_index(s32 listIndex) {
     Npc* npc;
     s32 i;
 
-    listIndex &= ~0x800;
+    listIndex &= ~BATTLE_NPC_ID_BIT;
 
     npc = (*gCurrentNpcListPtr)[listIndex];
     if (npc != NULL) {
@@ -274,7 +274,7 @@ void free_npc(Npc* npc) {
 }
 
 Npc* get_npc_by_index(s32 listIndex) {
-    return (*gCurrentNpcListPtr)[listIndex & ~0x800];
+    return (*gCurrentNpcListPtr)[listIndex & ~BATTLE_NPC_ID_BIT];
 }
 
 void npc_do_world_collision(Npc* npc) {

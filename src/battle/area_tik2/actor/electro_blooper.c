@@ -430,7 +430,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
         EVT_CASE_OR_EQ(EVENT_1D)
@@ -670,7 +670,7 @@ EvtScript N(attackElectricDrop) = {
     EVT_SET(LVar1, 100)
     EVT_SET(LVar3, 15)
     EVT_EXEC_WAIT(N(FloatToPos))
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_ELECTRIC, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_SHOCK, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -721,7 +721,7 @@ EvtScript N(attackElectricDrop) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_ELECTRIC, 8, 0, 6, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK, 8, 0, 6, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_IF_NE(LVarF, HIT_RESULT_HIT_STATIC)
         EVT_EXEC_WAIT(N(discharge))
     EVT_END_IF

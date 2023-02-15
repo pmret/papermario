@@ -255,7 +255,7 @@ EvtScript N(handleEvent) = {
                 EVT_WAIT(1)
             EVT_END_LOOP
             EVT_WAIT(20)
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -464,7 +464,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)

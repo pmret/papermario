@@ -17,7 +17,7 @@ AnimID N(ExtraAnims_SpearGuy)[] = {
 
 AnimID N(ExtraAnims_SpearGuy_Hitbox)[] = {
     ANIM_SpearGuy_Anim00,
-    -1, 
+    ANIM_LIST_END, 
 };
 
 EvtScript N(EVS_NpcDefeat_SpearGuy_Hitbox) = {

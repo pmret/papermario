@@ -366,7 +366,7 @@ EvtScript N(handleEvent_802197FC) = {
             EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim04)
@@ -477,7 +477,7 @@ EvtScript N(handleEvent_80219ED4) = {
             EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim1B)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
@@ -648,7 +648,7 @@ EvtScript N(8021A6D8) = {
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim04)
             EVT_THREAD
@@ -822,7 +822,7 @@ EvtScript N(8021B22C) = {
     EVT_END_THREAD
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_SET(LocalFlag(0), 0)
             EVT_CALL(GetBattleFlags, LVar0)
             EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_ATK_BLOCKED)

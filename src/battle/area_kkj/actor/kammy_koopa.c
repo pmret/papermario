@@ -128,7 +128,7 @@ ApiStatus N(unknownFunction)(Evt* script, s32 isInitialCall) {
 
     N(unknownCounter) += 9;
     N(unknownCounter) = clamp_angle(N(unknownCounter));
-    actor->unk_19A = sin_rad(DEG_TO_RAD(N(unknownCounter))) * 3.0f;
+    actor->verticalRenderOffset = sin_rad(DEG_TO_RAD(N(unknownCounter))) * 3.0f;
 
     return ApiStatus_DONE2;
 }
@@ -154,7 +154,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_EXEC_WAIT(N(speakOnHit))
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleKammy_Anim05)
@@ -353,7 +353,7 @@ EvtScript N(takeTurn) = {
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_WAIT(19)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_END_CASE_GROUP

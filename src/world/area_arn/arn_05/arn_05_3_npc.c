@@ -624,14 +624,14 @@ EvtScript N(EVS_NpcInit_Tubba) = {
     EVT_END
 };
 
-s32 N(extraAnimationList_80244390)[] = {
+AnimID N(ExtraAnims_Tubba)[] = {
     ANIM_WorldTubba_Anim06,
     ANIM_WorldTubba_Anim09,
     ANIM_WorldTubba_Anim1E,
     ANIM_WorldTubba_Anim1F,
     ANIM_WorldTubba_Anim20,
     ANIM_WorldTubba_Anim21,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Tubba) = {
@@ -643,7 +643,7 @@ NpcData N(NpcData_Tubba) = {
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = TUBBA_ANIMS,
-    .extraAnimations = N(extraAnimationList_80244390),
+    .extraAnimations = N(ExtraAnims_Tubba),
 };
 
 EvtScript N(EVS_NpcIdle_Boo_06) = {

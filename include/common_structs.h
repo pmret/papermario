@@ -1578,7 +1578,7 @@ typedef struct ActorPart {
     /* 0x77 */ char unk_77[1];
     /* 0x78 */ u32* defenseTable;
     /* 0x7C */ s32 eventFlags;
-    /* 0x80 */ s32 partFlags3;
+    /* 0x80 */ s32 elementalImmunities; // bits from Elements, i.e., ELEMENT_FIRE | ELEMENT_QUAKE
     /* 0x84 */ s32 spriteInstanceID;
     /* 0x88 */ u32 currentAnimation;
     /* 0x8C */ s32 animNotifyValue;
@@ -1860,7 +1860,7 @@ typedef struct Actor {
     /* 0x196 */ s8 unk_196;
     /* 0x197 */ s8 unk_197;
     /* 0x198 */ Vec2b unk_198;
-    /* 0x19A */ s8 unk_19A;
+    /* 0x19A */ s8 verticalRenderOffset; // visual only, does not affect target position
     /* 0x19B */ char unk_19B[1];
     /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound, 5 = attack sound */ // TODO: struct
     /* 0x1B4 */ s16 actorTypeData1b[2];

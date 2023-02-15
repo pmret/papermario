@@ -6,7 +6,7 @@
 
 s32 N(defenseTable)[] = {
     ELEMENT_NORMAL, 1,
-    ELEMENT_HAMMER, 1,
+    ELEMENT_SMASH, 1,
     ELEMENT_JUMP, 1,
     ELEMENT_WATER, 1,
     ELEMENT_BLAST, 1,
@@ -334,7 +334,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)
@@ -573,10 +573,10 @@ EvtScript N(takeTurn) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 40)

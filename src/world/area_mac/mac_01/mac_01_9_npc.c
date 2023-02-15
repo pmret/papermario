@@ -2348,11 +2348,11 @@ NpcData N(NpcData_ShyGuys)[] = {
     },
 };
 
-s32 N(D_8025EBB8_81F438)[] = {
+AnimID N(ExtraAnims_Kolorado)[] = {
     ANIM_Kolorado_Still,
     ANIM_Kolorado_Idle,
     ANIM_Kolorado_Talk,
-    -1
+    ANIM_LIST_END
 };
 
 NpcData N(NpcData_Kolorado) = {
@@ -2364,7 +2364,7 @@ NpcData N(NpcData_Kolorado) = {
     .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
-    .extraAnimations = N(D_8025EBB8_81F438),
+    .extraAnimations = N(ExtraAnims_Kolorado),
     .tattle = MSG_NpcTattle_Kolorado,
 };
 

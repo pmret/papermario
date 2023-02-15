@@ -15,7 +15,7 @@ extern EvtScript N(handleEvent);
 
 s32 N(defenseTable)[] = {
     ELEMENT_NORMAL, 0,
-    ELEMENT_HAMMER, 0,
+    ELEMENT_SMASH, 0,
     ELEMENT_THROW, -3,
     ELEMENT_END,
 };
@@ -263,7 +263,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Dark_Anim0C)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(GetLastElement, LVar0)
             EVT_IF_FLAG(LVar0, DAMAGE_TYPE_SMASH)
@@ -417,7 +417,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 55)
             EVT_SET(LVar1, 0)

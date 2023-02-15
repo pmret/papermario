@@ -108,7 +108,7 @@ EvtScript N(sushie_handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_CALL(GetLastElement, LVar1)
-            EVT_IF_FLAG(LVar1, DAMAGE_TYPE_ELECTRIC)
+            EVT_IF_FLAG(LVar1, DAMAGE_TYPE_SHOCK)
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
                 EVT_EXEC_WAIT(N(OnHitElectric))
@@ -163,7 +163,7 @@ EvtScript N(sushie_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
@@ -415,7 +415,7 @@ EvtScript N(sushie_takeTurn) = {
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Fall)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 60)

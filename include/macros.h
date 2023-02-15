@@ -137,7 +137,8 @@
 
 #define SPRITE_ID(name, pal_anim) ((name) << 16 | (pal_anim))
 
-#define BATTLE_ENTITY_ID_MASK 0x800
+#define BATTLE_NPC_ID_BIT 0x800
+#define BATTLE_ENTITY_ID_BIT 0x800
 
 #define UNPACK_BTL_AREA(battleID) (((battleID) >> 8) & 0xFF)
 #define UNPACK_BTL_INDEX(battleID) ((battleID) & 0xFF)
@@ -212,6 +213,12 @@
     .count = __NARG__(names), \
     .models = {  names } \
 }
+
+#define STATUS_CHANCE_IGNORE_RES 0xFE
+#define STATUS_CHANCE_NEVER 0xFF
+#define DMG_STATUS_CHANCE(typeFlag, duration, chance) (STATUS_FLAG_80000000 | typeFlag | (duration << 8) | chance)
+#define DMG_STATUS_ALWAYS(typeFlag, duration) (STATUS_FLAG_80000000 | STATUS_FLAG_RIGHT_ON | typeFlag | (duration << 8))
+#define DMG_STATUS_IGNORE_RES(typeFlag, duration) (typeFlag | (duration << 8) | STATUS_CHANCE_IGNORE_RES)
 
 #ifdef OLD_GCC
 #define VLA 0

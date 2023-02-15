@@ -125,9 +125,9 @@ u8 gWindowDisappearFlags[] = { DRAW_FLAG_ROTSCALE, DRAW_FLAG_ROTSCALE, DRAW_FLAG
 
 WindowGroup gWindowGroups[] = {
     { WINDOW_ID_0, WINDOW_ID_FILEMENU_FILE3_TITLE }, // all windows
-    { WINDOW_ID_8, WINDOW_ID_9 }, // battle ?
+    { WINDOW_ID_8, WINDOW_ID_BATTLE_POPUP }, // battle ?
     { WINDOW_ID_PAUSE_MAIN, WINDOW_ID_PAUSE_TAB_INVIS }, // pause menu
-    { WINDOW_ID_PAUSE_CURSOR, WINDOW_ID_FILEMENU_FILE3_TITLE } // file menu
+    { WINDOW_ID_FILEMENU_MAIN, WINDOW_ID_FILEMENU_FILE3_TITLE } // file menu
 };
 
 void clear_windows(void) {

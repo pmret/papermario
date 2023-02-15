@@ -8611,8 +8611,8 @@ segments:
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x763540, c]
-    - [0x7635F0, data]
+    - [0x763540, c, auto_smash]
+    - [0x7635F0]
   - dir: battle/move/auto_jump
     type: code
     start: 0x765C20

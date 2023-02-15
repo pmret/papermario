@@ -320,13 +320,13 @@ s32 _update_message(MessagePrintState* printer) {
                     if ((buttons & gGameStatusPtr->pressedButtons[0]) || (gGameStatusPtr->currentButtons[0] & BUTTON_B)) {
                         printer->windowState = MSG_WINDOW_STATE_PRINTING;
                         printer->currentPrintDelay = 0;
-                        printer->stateFlags |= 4;
+                        printer->stateFlags |= MSG_STATE_FLAG_4;
                         if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_C_DOWN)) {
                             cond = TRUE;
                             sfx_play_sound_with_params(SOUND_MENU_NEXT, 0, 0, 0);
                         } else if (printer->srcBuffer[printer->srcBufferPos] != MSG_CHAR_READ_END) {
                             printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY | MSG_STATE_FLAG_4;
-                            if (printer->fontVariant != 0 || printer->srcBuffer[printer->srcBufferPos] != 0xC3) {
+                            if (printer->fontVariant != 0 || printer->srcBuffer[printer->srcBufferPos] != MSG_CHAR_UNK_C3) {
                                 printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY | MSG_STATE_FLAG_80 | MSG_STATE_FLAG_4;
                             }
                             sfx_play_sound_with_params(SOUND_CC, 0, 0, 0);
@@ -489,7 +489,7 @@ s32 _update_message(MessagePrintState* printer) {
 
                     if (printer->style == MSG_STYLE_SIGN ||
                         printer->style == MSG_STYLE_LAMPPOST ||
-                        printer->srcBuffer[printer->srcBufferPos] == 0xF1)
+                        printer->srcBuffer[printer->srcBufferPos] == MSG_CHAR_READ_WAIT)
                     {
                         printer->currentPrintDelay = 0;
                     } else {

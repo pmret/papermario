@@ -422,7 +422,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(func_8026E914, LVar0, LVar1)
             EVT_IF_EQ(LVar1, 2)
@@ -601,7 +601,7 @@ EvtScript N(attackHeavyJump) = {
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_37D)
             EVT_CALL(ResetActorSounds, ACTOR_SELF, 2)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
@@ -699,20 +699,20 @@ EvtScript N(attackLightBeam) = {
                     EVT_IF_EQ(LVar0, 1)
                         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, 0, 65535, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
+                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, 0, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
                     EVT_END_IF
             EVT_END_SWITCH
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_WAIT(2)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarE, DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 65535, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarE, DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
             EVT_WAIT(2)
             EVT_CALL(ActorExists, ACTOR_PARTNER, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                 EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 65535, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
+                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_WAIT(40)

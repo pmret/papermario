@@ -635,7 +635,7 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
     bpPtr->onUpdate = NULL;
     bpPtr->onRender = NULL;
 
-    PeachDisguiseNpcIndex = _create_npc_standard(bpPtr, PeachDisguiseExtraAnims[playerStatus->peachDisguise]);
+    PeachDisguiseNpcIndex = create_standard_npc(bpPtr, PeachDisguiseExtraAnims[playerStatus->peachDisguise]);
     npc = get_npc_by_index(PeachDisguiseNpcIndex);
 
     disable_npc_shadow(npc);

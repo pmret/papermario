@@ -185,7 +185,7 @@ EvtScript N(handleEvent_802193E8) = {
             EVT_EXEC_WAIT(DoShockHit)
             EVT_EXEC_WAIT(N(80219390))
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)

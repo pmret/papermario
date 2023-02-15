@@ -1341,7 +1341,7 @@ EvtScript N(handleEvent_8021E6F0) = {
             EVT_SET(ArrayVar(0), 2)
             EVT_WAIT(20)
             EVT_SET(ArrayVar(0), 0)
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET(ArrayVar(0), 2)
             EVT_WAIT(20)
@@ -1458,7 +1458,7 @@ EvtScript N(takeTurn_8021EC98) = {
     EVT_END_SWITCH
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 65535, 0, 1, BS_FLAGS1_40)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_40)
     EVT_CALL(GetBattleFlags, LVar0)
     EVT_IF_FLAG(LVar0, BS_FLAGS1_ATK_BLOCKED)
         EVT_CALL(GetPlayerHP, LVar0)
@@ -2741,7 +2741,7 @@ EvtScript N(handleEvent_802242FC) = {
             EVT_EXEC_WAIT(N(80223870))
             EVT_WAIT(30)
             EVT_CALL(GetLastElement, LVar0)
-            EVT_IF_FLAG(LVar0, DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_BLAST)
+            EVT_IF_FLAG(LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_BLAST)
                 EVT_CALL(GetActorVar, ACTOR_ENEMY4, 0, LVar0)
                 EVT_BITWISE_OR_CONST(LVar0, 0x40)
                 EVT_CALL(SetActorVar, ACTOR_ENEMY4, 0, LVar0)
@@ -2762,7 +2762,7 @@ EvtScript N(handleEvent_802242FC) = {
                 EVT_CALL(SetActorVar, ACTOR_ENEMY4, 0, LVar0)
             EVT_END_IF
             EVT_CALL(GetLastElement, LVar0)
-            EVT_IF_FLAG(LVar0, DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_BLAST)
+            EVT_IF_FLAG(LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_BLAST)
                 EVT_CALL(GetActorVar, ACTOR_ENEMY4, 0, LVar0)
                 EVT_BITWISE_OR_CONST(LVar0, 0x40)
                 EVT_CALL(SetActorVar, ACTOR_ENEMY4, 0, LVar0)
@@ -2809,7 +2809,7 @@ EvtScript N(handleEvent_802242FC) = {
                 EVT_CALL(SetActorVar, ACTOR_ENEMY4, 0, LVar0)
             EVT_END_IF
             EVT_CALL(GetLastElement, LVar0)
-            EVT_IF_FLAG(LVar0, DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_BLAST)
+            EVT_IF_FLAG(LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_BLAST)
                 EVT_CALL(GetActorVar, ACTOR_ENEMY4, 0, LVar0)
                 EVT_BITWISE_OR_CONST(LVar0, 0x40)
                 EVT_CALL(SetActorVar, ACTOR_ENEMY4, 0, LVar0)
@@ -2844,7 +2844,7 @@ EvtScript N(handleEvent_802242FC) = {
                     EVT_WAIT(20)
                 EVT_END_IF
             EVT_END_IF
-        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_SET(LVarA, 4)
             EVT_EXEC_WAIT(N(80223870))
         EVT_CASE_EQ(EVENT_IMMUNE)

@@ -170,7 +170,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim09)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
@@ -299,7 +299,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, STATUS_FLAG_8 | 0x00000010, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 40)

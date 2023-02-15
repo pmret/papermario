@@ -682,7 +682,7 @@ EvtScript N(shellToss_KentC) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
-            EVT_IF_NOT_FLAG(LVar3, 0x80000)
+            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
                 EVT_ADD(LVar0, 32)
             EVT_ELSE
                 EVT_ADD(LVar0, 12)
@@ -693,16 +693,16 @@ EvtScript N(shellToss_KentC) = {
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarE)
-            EVT_IF_NOT_FLAG(LVarE, 0x80000)
+            EVT_IF_NOT_FLAG(LVarE, STATUS_FLAG_SHRINK)
                 EVT_CALL(func_80269EAC, 24)
             EVT_END_IF
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 65535, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, SUPPRESS_EVENT_ALL, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
             EVT_SET(LVarA, 0)
-            EVT_IF_NOT_FLAG(LVarE, 0x80000)
+            EVT_IF_NOT_FLAG(LVarE, STATUS_FLAG_SHRINK)
                 EVT_CALL(GetBattleFlags, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_ATK_BLOCKED)
                     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
-                    EVT_IF_NOT_FLAG(LVar0, 0x100000)
+                    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_STONE)
                         EVT_SET(LVarA, 1)
                     EVT_END_IF
                 EVT_END_IF
@@ -718,7 +718,7 @@ EvtScript N(shellToss_KentC) = {
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(func_80269EAC, 25)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_CALL(GetBattleFlags, LVar0)
         EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_ATK_BLOCKED)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -916,7 +916,7 @@ EvtScript N(tackle_KentC) = {
     EVT_IF_NOT_FLAG(LVarF, 0x80000)
         EVT_CALL(func_80269EAC, 24)
     EVT_END_IF
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 65535, 0, 10, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, SUPPRESS_EVENT_ALL, 0, 10, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)

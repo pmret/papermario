@@ -29,10 +29,10 @@ ApiStatus N(UnkWattEffectFunc1)(Evt* script, s32 isInitialCall) {
             wattEffectData->angle += 15;
             wattEffectData->angle = clamp_angle(wattEffectData->angle);
         }
-        actor->unk_19A = sin_rad(DEG_TO_RAD(wattEffectData->angle)) * 3.0f;
+        actor->verticalRenderOffset = sin_rad(DEG_TO_RAD(wattEffectData->angle)) * 3.0f;
 
         x = actor->currentPos.x + actor->headOffset.x;
-        y = actor->currentPos.y + actor->headOffset.y + actor->unk_19A + (actor->debuff != STATUS_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
+        y = actor->currentPos.y + actor->headOffset.y + actor->verticalRenderOffset + (actor->debuff != STATUS_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
         z = actor->currentPos.z + actor->headOffset.z;
         if (wattEffectData->unk_0C) {
             switch (wattEffectData->unk_10) {
@@ -294,7 +294,7 @@ EvtScript N(watt_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleWatt_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
@@ -430,17 +430,17 @@ EvtScript N(watt_takeTurn) = {
     EVT_SWITCH(LVar9)
         EVT_CASE_EQ(0)
             EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_IGNORE_DEFENSE, 65535, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_ALL, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_CASE_EQ(1)
             EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_IGNORE_DEFENSE, 65535, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_ALL, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_CASE_EQ(2)
             EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_IGNORE_DEFENSE, 65535, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_ALL, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(N(UnkWattEffectFunc4), 1)
             EVT_CALL(N(UnkWattEffectFunc3), 1)

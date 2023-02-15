@@ -802,7 +802,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_SPIKE_TAUNT)
             EVT_SET_CONST(LVar0, 1)

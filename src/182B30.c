@@ -750,9 +750,9 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
     }
     actorPosX = actor->currentPos.x + actor->headOffset.x;
     if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
-        actorPosY = actor->currentPos.y + actor->headOffset.y + actor->unk_19A;
+        actorPosY = actor->currentPos.y + actor->headOffset.y + actor->verticalRenderOffset;
     } else {
-        actorPosY = actor->currentPos.y - actor->headOffset.y + actor->unk_19A;
+        actorPosY = actor->currentPos.y - actor->headOffset.y + actor->verticalRenderOffset;
     }
     actorPosZ = actor->currentPos.z + actor->headOffset.z;
 
@@ -1360,7 +1360,7 @@ void appendGfx_player_actor(void* arg0) {
     playerParts = player->partsTable;
 
     playerPosX = player->currentPos.x + player->headOffset.x;
-    playerPosY = player->currentPos.y + player->headOffset.y + player->unk_19A;
+    playerPosY = player->currentPos.y + player->headOffset.y + player->verticalRenderOffset;
     playerPosZ = player->currentPos.z + player->headOffset.z;
 
     playerYaw = playerParts->yaw = player->yaw;

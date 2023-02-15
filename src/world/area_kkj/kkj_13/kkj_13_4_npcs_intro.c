@@ -132,7 +132,7 @@ NpcData N(NpcData_Characters)[] = {
         .pos = { 670.0f, 0.0f, -12.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_Peach),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_20000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_USE_PLAYER_SPRITE,
         .drops = NO_DROPS,
         .animations = PEACH_ANIMS,
     },

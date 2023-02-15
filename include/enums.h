@@ -908,6 +908,10 @@ enum SoundIDs {
     SOUND_231                       = 0x00000231,
     SOUND_233                       = 0x00000233,
     SOUND_234                       = 0x00000234,
+    SOUND_235                       = 0x00000235,
+    SOUND_236                       = 0x00000236,
+    SOUND_237                       = 0x00000237,
+    SOUND_238                       = 0x00000238,
     SOUND_23D                       = 0x0000023D,
     SOUND_241                       = 0x00000241,
     SOUND_245                       = 0x00000245,
@@ -2585,19 +2589,19 @@ enum SpeechFlags {
     SPEECH_FACE_EACH_OTHER      = 0,
 };
 
-enum HitResults {
-    HIT_RESULT_TRIGGERED_EXPLODE           = -1,
-    HIT_RESULT_HIT                         = 0,
-    HIT_RESULT_1                           = 1,
-    HIT_RESULT_QUAKE_IMMUNE                = 2,
-    HIT_RESULT_3                           = 3,
-    HIT_RESULT_LANDED_ON_SPIKE             = 4,
-    HIT_RESULT_LUCKY                       = 5,
-    HIT_RESULT_MISS                        = 6,
-    HIT_RESULT_HIT_STATIC                  = 7,
-    HIT_RESULT_IMMUNE                      = 8,
-    HIT_RESULT_10                          = 10,
-};
+typedef enum HitResult {
+    HIT_RESULT_BACKFIRE             = -1,
+    HIT_RESULT_HIT                  = 0,
+    HIT_RESULT_1                    = 1,    // KILL?
+    HIT_RESULT_NO_DAMAGE            = 2,
+    HIT_RESULT_3                    = 3,
+    HIT_RESULT_LANDED_ON_SPIKE      = 4,
+    HIT_RESULT_LUCKY                = 5,
+    HIT_RESULT_MISS                 = 6,
+    HIT_RESULT_HIT_STATIC           = 7,
+    HIT_RESULT_IMMUNE               = 8,
+    HIT_RESULT_10                   = 10,
+} HitResult;
 
 enum ActionRatings {
     ACTION_RATING_NICE              = 0, ///< sets nice hits = 1
@@ -2703,7 +2707,7 @@ enum Elements {
     ELEMENT_ICE              = 0x00000004,
     ELEMENT_MYSTERY          = 0x00000005,
     ELEMENT_MAGIC            = 0x00000007,
-    ELEMENT_HAMMER           = 0x00000008,
+    ELEMENT_SMASH            = 0x00000008,
     ELEMENT_JUMP             = 0x00000009,
     ELEMENT_COSMIC           = 0x0000000A,
     ELEMENT_BLAST            = 0x0000000B,
@@ -2726,7 +2730,7 @@ enum Events {
     EVENT_PEACH_BEAM                  = 0x00000014,
     EVENT_POWER_BOUNCE_HIT            = 0x00000015,
     EVENT_BLOW_AWAY                   = 0x00000016,
-    EVENT_SCRIPTED_IMMUNE             = 0x00000017,
+    EVENT_ZERO_DAMAGE                 = 0x00000017,
     EVENT_18                          = 0x00000018,
     EVENT_IMMUNE                      = 0x00000019,
     EVENT_BLOCK                       = 0x0000001A,
@@ -3312,7 +3316,7 @@ enum DamageTypes {
     DAMAGE_TYPE_WATER                      = 0x00000004,
     DAMAGE_TYPE_ICE                        = 0x00000008,
     DAMAGE_TYPE_MAGIC                      = 0x00000010,
-    DAMAGE_TYPE_ELECTRIC                   = 0x00000020,
+    DAMAGE_TYPE_SHOCK                   = 0x00000020,
     DAMAGE_TYPE_SMASH                      = 0x00000040,
     DAMAGE_TYPE_JUMP                       = 0x00000080,
     DAMAGE_TYPE_COSMIC                     = 0x00000100,
@@ -3355,14 +3359,16 @@ enum PartnerIDs {
     PARTNER_TWINK               = 0x0000000B,
 };
 
-enum AttackEventFlags {
-    ATTACK_EVENT_FLAG_1       = 0x1,
-    ATTACK_EVENT_FLAG_2       = 0x2,
-    ATTACK_EVENT_FLAG_4       = 0x4,
-    ATTACK_EVENT_FLAG_8       = 0x8,
-    ATTACK_EVENT_FLAG_10      = 0x10,
-    ATTACK_EVENT_FLAG_80      = 0x80,
-    ATTACK_EVENT_FLAG_200     = 0x200,
+enum EventSupressFlags {
+    SUPPRESS_EVENT_SPIKY_TOP        = 0x1,
+    SUPPRESS_EVENT_EXPLODE_CONTACT  = 0x2,
+    SUPPRESS_EVENT_SPIKY_FRONT      = 0x4,
+    SUPPRESS_EVENT_SHOCK_CONTACT    = 0x8,
+    SUPPRESS_EVENT_BURN_CONTACT     = 0x10,
+    SUPPRESS_EVENT_FLAG_80          = 0x80,     // supresses events associated with ACTOR_EVENT_FLAG_200000 used by pokeys and spinies
+    SUPPRESS_EVENT_FLAG_200         = 0x200,    // unused?
+    SUPPRESS_EVENT_ALL              = 0xFFFF,
+    SUPPRESS_EVENT_FLAG_10000       = 0x10000,  // usage is a bug?
 };
 
 enum PartnerActions {
@@ -3661,7 +3667,7 @@ enum ActorFlags {
     ACTOR_FLAG_100               = 0x00000100,
     ACTOR_FLAG_FLYING            = 0x00000200, ///< Quake Hammer can't hit.
     ACTOR_FLAG_400               = 0x00000400,
-    ACTOR_FLAG_HP_OFFSET_BELOW   = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down). Is this just UPSIDE_DOWN?
+    ACTOR_FLAG_HP_OFFSET_BELOW   = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down). Is this just UPSIDE_DOWN? FLIPPED? TOPPLED?
     ACTOR_FLAG_1000              = 0x00001000,
     ACTOR_FLAG_2000              = 0x00002000,
     ACTOR_FLAG_TARGET_ONLY       = 0x00004000, ///< Battle ends even if undefeated. No turn.
@@ -3698,7 +3704,7 @@ enum ActorPartFlags {
     ACTOR_PART_FLAG_400                     = 0x00000400,
     ACTOR_PART_FLAG_800                     = 0x00000800,
     ACTOR_PART_FLAG_1000                    = 0x00001000,
-    ACTOR_PART_FLAG_2000                    = 0x00002000, ///< Plays extra hurt SFX?
+    ACTOR_PART_FLAG_2000                    = 0x00002000, ///< electrified Plays extra hurt SFX?
     ACTOR_PART_FLAG_4000                    = 0x00004000,
     ACTOR_PART_FLAG_8000                    = 0x00008000,
     ACTOR_PART_FLAG_10000                   = 0x00010000,
@@ -3720,39 +3726,39 @@ enum ActorPartFlags {
 };
 
 enum ActorEventFlags {
-    ACTOR_EVENT_FLAG_0                = 0x00000000,
-    ACTOR_EVENT_FLAG_1                = 0x00000001,
-    ACTOR_EVENT_FLAG_FIREY            = 0x00000002, ///< Player takes burn damage upon contact.
-    ACTOR_EVENT_FLAG_4                = 0x00000004,
-    ACTOR_EVENT_FLAG_ICY              = 0x00000008, ///< No known effect, but is used.
-    ACTOR_EVENT_FLAG_SPIKY_TOP        = 0x00000010, ///< Player takes spike damage from jump attacks.
-    ACTOR_EVENT_FLAG_ILLUSORY         = 0x00000020, ///< Player attacks pass through and miss.
-    ACTOR_EVENT_FLAG_40               = 0x00000040,
-    ACTOR_EVENT_FLAG_ELECTRIFIED      = 0x00000080, ///< Player takes shock damage upon contact.
-    ACTOR_EVENT_FLAG_100              = 0x00000100,
-    ACTOR_EVENT_FLAG_EXPLOSIVE        = 0x00000200, ///< Blast and fire attacks trigger an explosion.
-    ACTOR_EVENT_FLAG_400              = 0x00000400,
-    ACTOR_EVENT_FLAG_800              = 0x00000800,
-    ACTOR_EVENT_FLAG_FLIPABLE         = 0x00001000, ///< Actor can be flipped; triggered by jump and quake attacks.
-    ACTOR_EVENT_FLAG_2000             = 0x00002000,
-    ACTOR_EVENT_FLAG_GROUNDABLE       = 0x00004000, ///< Actor can be knocked down from flight; triggered by jump attacks.
-    ACTOR_EVENT_FLAG_8000             = 0x00008000,
-    ACTOR_EVENT_FLAG_SPIKY_FRONT      = 0x00010000, ///< Player takes spike damage from hammer attacks.
-    ACTOR_EVENT_FLAG_20000            = 0x00020000,
-    ACTOR_EVENT_FLAG_ENCHANTED        = 0x00040000, ///< Actor glows and listens for the Star Beam event.
-    ACTOR_EVENT_FLAG_80000            = 0x00080000,
-    ACTOR_EVENT_FLAG_POWER_BOUNCE     = 0x00100000, ///< Actor listens for Power Bounce events.
-    ACTOR_EVENT_FLAG_200000           = 0x00200000,
-    ACTOR_EVENT_FLAG_400000           = 0x00400000,
-    ACTOR_EVENT_FLAG_800000           = 0x00800000,
-    ACTOR_EVENT_FLAG_1000000          = 0x01000000,
-    ACTOR_EVENT_FLAG_2000000          = 0x02000000,
-    ACTOR_EVENT_FLAG_4000000          = 0x04000000,
-    ACTOR_EVENT_FLAG_8000000          = 0x08000000,
-    ACTOR_EVENT_FLAG_10000000         = 0x10000000,
-    ACTOR_EVENT_FLAG_20000000         = 0x20000000,
-    ACTOR_EVENT_FLAG_40000000         = 0x40000000,
-    ACTOR_EVENT_FLAG_80000000         = 0x80000000,
+    ACTOR_EVENT_FLAG_0                      = 0x00000000,
+    ACTOR_EVENT_FLAG_1                      = 0x00000001,
+    ACTOR_EVENT_FLAG_FIREY                  = 0x00000002, ///< Player takes burn damage upon contact.
+    ACTOR_EVENT_FLAG_4                      = 0x00000004,
+    ACTOR_EVENT_FLAG_ICY                    = 0x00000008, ///< No known effect, but is used.
+    ACTOR_EVENT_FLAG_SPIKY_TOP              = 0x00000010, ///< Player takes spike damage from jump attacks.
+    ACTOR_EVENT_FLAG_ILLUSORY               = 0x00000020, ///< Player attacks pass through and miss.
+    ACTOR_EVENT_FLAG_40                     = 0x00000040,
+    ACTOR_EVENT_FLAG_ELECTRIFIED            = 0x00000080, ///< Player takes shock damage upon contact.
+    ACTOR_EVENT_FLAG_100                    = 0x00000100,
+    ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION    = 0x00000200, ///< Blast and fire attacks trigger an explosion.
+    ACTOR_EVENT_FLAG_400                    = 0x00000400,
+    ACTOR_EVENT_FLAG_800                    = 0x00000800,
+    ACTOR_EVENT_FLAG_FLIPABLE               = 0x00001000, ///< Actor can be flipped; triggered by jump and quake attacks.
+    ACTOR_EVENT_FLAG_2000                   = 0x00002000,
+    ACTOR_EVENT_FLAG_GROUNDABLE             = 0x00004000, ///< Actor can be knocked down from flight; triggered by jump attacks.
+    ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT     = 0x00008000,
+    ACTOR_EVENT_FLAG_SPIKY_FRONT            = 0x00010000, ///< Player takes spike damage from hammer attacks.
+    ACTOR_EVENT_FLAG_20000                  = 0x00020000,
+    ACTOR_EVENT_FLAG_ENCHANTED              = 0x00040000, ///< Actor glows and listens for the Star Beam event.
+    ACTOR_EVENT_FLAG_80000                  = 0x00080000,
+    ACTOR_EVENT_FLAG_POWER_BOUNCE           = 0x00100000, ///< Actor listens for Power Bounce events.
+    ACTOR_EVENT_FLAG_200000                 = 0x00200000,
+    ACTOR_EVENT_FLAG_400000                 = 0x00400000,
+    ACTOR_EVENT_FLAG_800000                 = 0x00800000,
+    ACTOR_EVENT_FLAG_1000000                = 0x01000000,
+    ACTOR_EVENT_FLAG_2000000                = 0x02000000,
+    ACTOR_EVENT_FLAG_4000000                = 0x04000000,
+    ACTOR_EVENT_FLAG_8000000                = 0x08000000,
+    ACTOR_EVENT_FLAG_10000000               = 0x10000000,
+    ACTOR_EVENT_FLAG_20000000               = 0x20000000,
+    ACTOR_EVENT_FLAG_40000000               = 0x40000000,
+    ACTOR_EVENT_FLAG_80000000               = 0x80000000,
 };
 
 enum PartnerAnimIndices {
@@ -5014,7 +5020,7 @@ enum EnemyFlags {
     ENEMY_FLAG_4000                 = 0x00004000,
     ENEMY_FLAG_8000                 = 0x00008000,
     ENEMY_FLAG_10000                = 0x00010000,
-    ENEMY_FLAG_20000                = 0x00020000,
+    ENEMY_FLAG_USE_PLAYER_SPRITE    = 0x00020000, ///< Used for Peach NPCs
     ENEMY_FLAG_40000                = 0x00040000,
     ENEMY_FLAG_80000                = 0x00080000,
     ENEMY_FLAG_100000               = 0x00100000,
@@ -5731,41 +5737,6 @@ enum NpcDropFlags {
     NPC_DROP_FLAG_80                = 0x80,
 };
 
-enum ElementImmunityFlags {
-    ELEMENT_IMMUNITY_FLAG_1                 = 0x00000001,
-    ELEMENT_IMMUNITY_FLAG_2                 = 0x00000002,
-    ELEMENT_IMMUNITY_FLAG_4                 = 0x00000004,
-    ELEMENT_IMMUNITY_FLAG_8                 = 0x00000008,
-    ELEMENT_IMMUNITY_FLAG_10                = 0x00000010,
-    ELEMENT_IMMUNITY_FLAG_20                = 0x00000020,
-    ELEMENT_IMMUNITY_FLAG_40                = 0x00000040,
-    ELEMENT_IMMUNITY_FLAG_80                = 0x00000080,
-    ELEMENT_IMMUNITY_FLAG_100               = 0x00000100,
-    ELEMENT_IMMUNITY_FLAG_200               = 0x00000200,
-    ELEMENT_IMMUNITY_FLAG_400               = 0x00000400,
-    ELEMENT_IMMUNITY_FLAG_800               = 0x00000800,
-    ELEMENT_IMMUNITY_FLAG_1000              = 0x00001000,
-    ELEMENT_IMMUNITY_FLAG_2000              = 0x00002000,
-    ELEMENT_IMMUNITY_FLAG_4000              = 0x00004000,
-    ELEMENT_IMMUNITY_FLAG_8000              = 0x00008000,
-    ELEMENT_IMMUNITY_FLAG_10000             = 0x00010000,
-    ELEMENT_IMMUNITY_FLAG_20000             = 0x00020000,
-    ELEMENT_IMMUNITY_FLAG_40000             = 0x00040000,
-    ELEMENT_IMMUNITY_FLAG_80000             = 0x00080000,
-    ELEMENT_IMMUNITY_FLAG_100000            = 0x00100000,
-    ELEMENT_IMMUNITY_FLAG_200000            = 0x00200000,
-    ELEMENT_IMMUNITY_FLAG_400000            = 0x00400000,
-    ELEMENT_IMMUNITY_FLAG_800000            = 0x00800000,
-    ELEMENT_IMMUNITY_FLAG_1000000           = 0x01000000,
-    ELEMENT_IMMUNITY_FLAG_2000000           = 0x02000000,
-    ELEMENT_IMMUNITY_FLAG_4000000           = 0x04000000,
-    ELEMENT_IMMUNITY_FLAG_8000000           = 0x08000000,
-    ELEMENT_IMMUNITY_FLAG_10000000          = 0x10000000,
-    ELEMENT_IMMUNITY_FLAG_20000000          = 0x20000000,
-    ELEMENT_IMMUNITY_FLAG_40000000          = 0x40000000,
-    ELEMENT_IMMUNITY_FLAG_80000000          = 0x80000000,
-};
-
 enum FoldStateFlags {
     FOLD_STATE_FLAG_ENABLED           = 0x00000001,
     FOLD_STATE_FLAG_G_CULL_BACK       = 0x00000002,
@@ -5867,74 +5838,74 @@ enum DictionaryIndex {
 };
 
 enum WindowId {
-    WINDOW_ID_NONE = -1,
-    WINDOW_ID_0 = 0,
-    WINDOW_ID_1 = 1,
-    WINDOW_ID_2 = 2,
-    WINDOW_ID_3 = 3,
-    WINDOW_ID_4 = 4,
-    WINDOW_ID_5 = 5,
-    WINDOW_ID_6 = 6,
-    WINDOW_ID_7 = 7,
-    WINDOW_ID_8 = 8,
-    WINDOW_ID_9 = 9,
-    WINDOW_ID_ITEM_INFO_NAME = 10,
-    WINDOW_ID_ITEM_INFO_DESC = 11,
-    WINDOW_ID_12 = 12,
-    WINDOW_ID_13 = 13,
-    WINDOW_ID_14 = 14,
-    WINDOW_ID_15 = 15,
-    WINDOW_ID_16 = 16,
-    WINDOW_ID_17 = 17,
-    WINDOW_ID_18 = 18,
-    WINDOW_ID_19 = 19,
-    WINDOW_ID_20 = 20,
-    WINDOW_ID_21 = 21,
-    WINDOW_ID_PAUSE_MAIN = 22,
-    WINDOW_ID_PAUSE_DECRIPTION = 23,
-    WINDOW_ID_FILEMENU_CURSOR = 23, // same as previous
-    WINDOW_ID_PAUSE_TUTORIAL = 24,
-    WINDOW_ID_FILEMENU_COPYARROW = 24, // same as previous
-    WINDOW_ID_PAUSE_TAB_STATS = 25,
-    WINDOW_ID_PAUSE_TAB_BADGES = 26,
-    WINDOW_ID_PAUSE_TAB_ITEMS = 27,
-    WINDOW_ID_PAUSE_TAB_PARTY = 28,
-    WINDOW_ID_PAUSE_TAB_SPIRITS = 29,
-    WINDOW_ID_PAUSE_TAB_MAP = 30,
-    WINDOW_ID_PAUSE_STATS = 31,
-    WINDOW_ID_PAUSE_BADGES = 32,
-    WINDOW_ID_PAUSE_ITEMS = 33,
-    WINDOW_ID_PAUSE_PARTNERS = 34,
-    WINDOW_ID_PAUSE_PARTNERS_TITLE = 35,
-    WINDOW_ID_PAUSE_PARTNERS_MOVELIST = 36,
-    WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE = 37,
-    WINDOW_ID_PAUSE_PARTNERS_MOVELIST_FLOWER = 38,
-    WINDOW_ID_PAUSE_SPIRITS = 39,
-    WINDOW_ID_PAUSE_SPIRITS_TITLE = 40,
-    WINDOW_ID_PAUSE_MAP = 41,
-    WINDOW_ID_PAUSE_MAP_TITLE = 42,
-    WINDOW_ID_PAUSE_TAB_INVIS = 43,
-    WINDOW_ID_PAUSE_CURSOR = 44,
-    WINDOW_ID_FILEMENU_MAIN = 44, // same as previous
-    WINDOW_ID_FILEMENU_TITLE = 45,
-    WINDOW_ID_FILEMENU_YESNO_PROMPT = 46,
-    WINDOW_ID_FILEMENU_INFO = 47,
-    WINDOW_ID_FILEMENU_CREATEFILE_HEADER = 48,
-    WINDOW_ID_FILEMENU_KEYBOARD = 49,
-    WINDOW_ID_FILEMENU_YESNO_OPTIONS = 50,
-    WINDOW_ID_FILEMENU_STEREO = 51,
-    WINDOW_ID_FILEMENU_MONO = 52,
-    WINDOW_ID_FILEMENU_OPTION_LEFT = 53,
-    WINDOW_ID_FILEMENU_OPTION_CENTER = 54,
-    WINDOW_ID_FILEMENU_OPTION_RIGHT = 55,
-    WINDOW_ID_FILEMENU_FILE0_INFO = 56,
-    WINDOW_ID_FILEMENU_FILE1_INFO = 57,
-    WINDOW_ID_FILEMENU_FILE2_INFO = 58,
-    WINDOW_ID_FILEMENU_FILE3_INFO = 59,
-    WINDOW_ID_FILEMENU_FILE0_TITLE = 60,
-    WINDOW_ID_FILEMENU_FILE1_TITLE = 61,
-    WINDOW_ID_FILEMENU_FILE2_TITLE = 62,
-    WINDOW_ID_FILEMENU_FILE3_TITLE = 63,
+    WINDOW_ID_NONE                              = -1,
+    WINDOW_ID_0                                 = 0,
+    WINDOW_ID_1                                 = 1,
+    WINDOW_ID_2                                 = 2,
+    WINDOW_ID_3                                 = 3,
+    WINDOW_ID_4                                 = 4,
+    WINDOW_ID_5                                 = 5,
+    WINDOW_ID_6                                 = 6,
+    WINDOW_ID_7                                 = 7,
+    WINDOW_ID_8                                 = 8, // battle main?
+    WINDOW_ID_BATTLE_POPUP                      = 9,
+    WINDOW_ID_ITEM_INFO_NAME                    = 10,
+    WINDOW_ID_ITEM_INFO_DESC                    = 11,
+    WINDOW_ID_12                                = 12,
+    WINDOW_ID_13                                = 13,
+    WINDOW_ID_14                                = 14,
+    WINDOW_ID_15                                = 15,
+    WINDOW_ID_16                                = 16,
+    WINDOW_ID_17                                = 17,
+    WINDOW_ID_18                                = 18,
+    WINDOW_ID_19                                = 19,
+    WINDOW_ID_20                                = 20,
+    WINDOW_ID_21                                = 21,
+    WINDOW_ID_PAUSE_MAIN                        = 22,
+    WINDOW_ID_PAUSE_DECRIPTION                  = 23,
+    WINDOW_ID_FILEMENU_CURSOR                   = 23, // same as previous
+    WINDOW_ID_PAUSE_TUTORIAL                    = 24,
+    WINDOW_ID_FILEMENU_COPYARROW                = 24, // same as previous
+    WINDOW_ID_PAUSE_TAB_STATS                   = 25,
+    WINDOW_ID_PAUSE_TAB_BADGES                  = 26,
+    WINDOW_ID_PAUSE_TAB_ITEMS                   = 27,
+    WINDOW_ID_PAUSE_TAB_PARTY                   = 28,
+    WINDOW_ID_PAUSE_TAB_SPIRITS                 = 29,
+    WINDOW_ID_PAUSE_TAB_MAP                     = 30,
+    WINDOW_ID_PAUSE_STATS                       = 31,
+    WINDOW_ID_PAUSE_BADGES                      = 32,
+    WINDOW_ID_PAUSE_ITEMS                       = 33,
+    WINDOW_ID_PAUSE_PARTNERS                    = 34,
+    WINDOW_ID_PAUSE_PARTNERS_TITLE              = 35,
+    WINDOW_ID_PAUSE_PARTNERS_MOVELIST           = 36,
+    WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE     = 37,
+    WINDOW_ID_PAUSE_PARTNERS_MOVELIST_FLOWER    = 38,
+    WINDOW_ID_PAUSE_SPIRITS                     = 39,
+    WINDOW_ID_PAUSE_SPIRITS_TITLE               = 40,
+    WINDOW_ID_PAUSE_MAP                         = 41,
+    WINDOW_ID_PAUSE_MAP_TITLE                   = 42,
+    WINDOW_ID_PAUSE_TAB_INVIS                   = 43,
+    WINDOW_ID_PAUSE_CURSOR                      = 44,
+    WINDOW_ID_FILEMENU_MAIN                     = 44, // same as previous
+    WINDOW_ID_FILEMENU_TITLE                    = 45,
+    WINDOW_ID_FILEMENU_YESNO_PROMPT             = 46,
+    WINDOW_ID_FILEMENU_INFO                     = 47,
+    WINDOW_ID_FILEMENU_CREATEFILE_HEADER        = 48,
+    WINDOW_ID_FILEMENU_KEYBOARD                 = 49,
+    WINDOW_ID_FILEMENU_YESNO_OPTIONS            = 50,
+    WINDOW_ID_FILEMENU_STEREO                   = 51,
+    WINDOW_ID_FILEMENU_MONO                     = 52,
+    WINDOW_ID_FILEMENU_OPTION_LEFT              = 53,
+    WINDOW_ID_FILEMENU_OPTION_CENTER            = 54,
+    WINDOW_ID_FILEMENU_OPTION_RIGHT             = 55,
+    WINDOW_ID_FILEMENU_FILE0_INFO               = 56,
+    WINDOW_ID_FILEMENU_FILE1_INFO               = 57,
+    WINDOW_ID_FILEMENU_FILE2_INFO               = 58,
+    WINDOW_ID_FILEMENU_FILE3_INFO               = 59,
+    WINDOW_ID_FILEMENU_FILE0_TITLE              = 60,
+    WINDOW_ID_FILEMENU_FILE1_TITLE              = 61,
+    WINDOW_ID_FILEMENU_FILE2_TITLE              = 62,
+    WINDOW_ID_FILEMENU_FILE3_TITLE              = 63,
 };
 
 enum SimpleWindowUpdateId {
@@ -6272,6 +6243,8 @@ enum MsgChars {
     MSG_CHAR_SINGLE_QUOTE_OPEN      = 0xA4,
     MSG_CHAR_SINGLE_QUOTE_CLOSE     = 0xA5,
     // 0xA6 to 0xEF are unused
+
+    MSG_CHAR_UNK_C3                 = 0xC3,
 
     // special character codes used when reading from the source buffer
     MSG_CHAR_READ_ENDL              = 0xF0,

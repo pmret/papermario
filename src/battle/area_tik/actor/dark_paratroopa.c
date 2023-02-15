@@ -24,7 +24,7 @@ extern s32 N(idleAnimations3)[];
 
 s32 N(defenseTable)[] = {
     ELEMENT_NORMAL, 2,
-    ELEMENT_HAMMER, 2,
+    ELEMENT_SMASH, 2,
     ELEMENT_JUMP, 2,
     ELEMENT_WATER, 2,
     ELEMENT_BLAST, 2,
@@ -365,7 +365,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_HurtStill)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
             EVT_SET_CONST(LVar0, 2)
             EVT_SET_CONST(LVar1, ANIM_ParaTroopa_Dark_ShellEnter)
@@ -531,10 +531,10 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_ParaTroopa_Dark_ShellDive)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 40, 30, 0)
@@ -1000,7 +1000,7 @@ EvtScript N(handleEvent_koopa) = {
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_EXEC_WAIT(DoDeath)
             EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_SCRIPTED_IMMUNE)
+        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_SWITCH(LVar0)
@@ -1202,10 +1202,10 @@ EvtScript N(koopa_attackShellToss) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_STATUS_ALWAYS_HITS, 65535, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_STATUS_ALWAYS_HITS, SUPPRESS_EVENT_ALL, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 40)
@@ -1304,10 +1304,10 @@ EvtScript N(koopa_attackDizzyTornado) = {
     EVT_END_SWITCH
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 65535, STATUS_FLAG_4 | STATUS_FLAG_8 | 0x00000010 | STATUS_FLAG_20 | STATUS_FLAG_200 | STATUS_FLAG_DIZZY | STATUS_FLAG_80000000, 0, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_ALL, DMG_STATUS_CHANCE(STATUS_FLAG_DIZZY, 2, 60), 0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_THREAD
                 EVT_CALL(WasStatusInflicted, ACTOR_SELF, LVar0)
                 EVT_IF_EQ(LVar0, 1)

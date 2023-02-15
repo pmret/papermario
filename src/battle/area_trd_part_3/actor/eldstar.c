@@ -6,25 +6,25 @@
 
 #define NAMESPACE b_area_trd_part_3_eldstar
 
-extern EvtScript N(init_80218390);
-extern EvtScript N(takeTurn_80218414);
-extern EvtScript N(idle_802183E8);
-extern EvtScript N(handleEvent_80218404);
-extern EvtScript N(80218424);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_ManageTutorial);
 
 BSS s32 D_80219040;
 
-s32 N(idleAnimations_80218280)[] = {
+s32 N(IdleAnims)[] = {
     STATUS_NORMAL,    ANIM_WorldEldstar_Idle,
     STATUS_END,
 };
 
-s32 N(defenseTable_8021828C)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80218298)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -49,15 +49,15 @@ s32 N(statusTable_80218298)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80218344)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218280),
-        .defenseTable = N(defenseTable_8021828C),
+        .idleAnimations = N(IdleAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .unk_1D = 0,
@@ -69,10 +69,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_ELDSTAR,
     .level = 99,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(partsTable_80218344)),
-    .partsData = N(partsTable_80218344),
-    .takeTurnScript = &N(init_80218390),
-    .statusTable = N(statusTable_80218298),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
+    .takeTurnScript = &N(EVS_Init),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -87,16 +87,16 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-EvtScript N(init_80218390) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80218414)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802183E8)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80218404)))
-    EVT_EXEC(N(80218424))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_EXEC(N(EVS_ManageTutorial))
     EVT_RETURN
     EVT_END
 };
 
-ApiStatus func_80218000_4CF1B0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218000_4CF1B0) {
     Actor* actor = get_actor(script->owner1.actorID);
     s32* sym;
 
@@ -107,34 +107,34 @@ ApiStatus func_80218000_4CF1B0(Evt* script, s32 isInitialCall) {
     sym = &D_80219040;
     *sym += 15;
     *sym = clamp_angle(*sym);
-    actor->unk_19A = sin_rad(DEG_TO_RAD(*sym)) * 3.0f;
+    actor->verticalRenderOffset = sin_rad(DEG_TO_RAD(*sym)) * 3.0f;
 
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802180C8_4CF278(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802180C8_4CF278) {
     status_menu_start_blinking_sp();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802180E8_4CF298(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802180E8_4CF298) {
     status_menu_stop_blinking_sp();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80218108_4CF2B8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218108_4CF2B8) {
     status_menu_start_blinking_hp();
     status_menu_start_blinking_fp();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80218130_4CF2E0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218130_4CF2E0) {
     status_menu_stop_blinking_hp();
     status_menu_stop_blinking_fp();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80218158_4CF308(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218158_4CF308) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_MAIN] = 0;
@@ -143,7 +143,7 @@ ApiStatus func_80218158_4CF308(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80218170_4CF320(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80218170_4CF320)) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (isInitialCall) {
@@ -160,7 +160,7 @@ ApiStatus func_80218170_4CF320(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802181B4_4CF364(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802181B4_4CF364) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (isInitialCall) {
@@ -177,7 +177,7 @@ ApiStatus func_802181B4_4CF364(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802181F8_4CF3A8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802181F8_4CF3A8) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->specialBarsFilled += 32;
@@ -185,23 +185,23 @@ ApiStatus func_802181F8_4CF3A8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(idle_802183E8) = {
+EvtScript N(EVS_Idle) = {
     EVT_CALL(func_80218000_4CF1B0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent_80218404) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(takeTurn_80218414) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(80218424) = {
+EvtScript N(EVS_ManageTutorial) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, 1)
     EVT_CALL(func_80218158_4CF308)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
@@ -249,7 +249,7 @@ EvtScript N(80218424) = {
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 0)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
     EVT_THREAD
-        EVT_CALL(func_80218170_4CF320)
+        EVT_CALL(N(func_80218170_4CF320))
     EVT_END_THREAD
     EVT_CALL(WaitForState, BATTLE_STATE_END_PLAYER_TURN)
     EVT_SET(LVar0, 0)
@@ -317,7 +317,7 @@ EvtScript N(80218424) = {
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 0)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
     EVT_THREAD
-        EVT_CALL(func_80218170_4CF320)
+        EVT_CALL(N(func_80218170_4CF320))
     EVT_END_THREAD
     EVT_CALL(WaitForState, BATTLE_STATE_END_PLAYER_TURN)
     EVT_SET(LVar0, 0)
@@ -341,7 +341,7 @@ EvtScript N(80218424) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_CALL(ActorSpeak, MSG_CH1_011D, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_CALL(WaitForState, BATTLE_STATE_0)
-    EVT_CALL(SetBattleState, 30)
+    EVT_CALL(SetBattleState, BATTLE_STATE_END_TRAINING_BATTLE)
     EVT_WAIT(10000)
     EVT_RETURN
     EVT_END

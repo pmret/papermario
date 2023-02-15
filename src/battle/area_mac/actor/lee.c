@@ -1530,13 +1530,13 @@ EvtScript N(takeTurn_80221200) = {
     EVT_SWITCH(LVar9)
         EVT_CASE_EQ(0)
             EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_CASE_EQ(1)
             EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_CASE_EQ(2)
             EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 65535, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
@@ -2890,7 +2890,7 @@ ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall) {
         wattEffectData->unk_0C = TRUE;
         wattEffectData->unk_10 = 0;
         wattEffectData->effect1 = fx_static_status(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
-        wattEffectData->effect2 = fx_static_status(1, actor->currentPos.x, -1000.0f, actor->currentPos.z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
+        wattEffectData->effect2 = fx_static_status(1, actor->currentPos.x, NPC_DISPOSE_POS_Y, actor->currentPos.z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
         wattEffectData->flags = TRUE;
         wattEffectData->debuff = actor->debuff;
     }
@@ -2901,10 +2901,10 @@ ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall) {
             wattEffectData->angle += 15;
             wattEffectData->angle = clamp_angle(wattEffectData->angle);
         }
-        actor->unk_19A = sin_rad(DEG_TO_RAD(wattEffectData->angle)) * 3.0f;
+        actor->verticalRenderOffset = sin_rad(DEG_TO_RAD(wattEffectData->angle)) * 3.0f;
 
         x = actor->currentPos.x + actor->headOffset.x;
-        y = actor->currentPos.y + actor->headOffset.y + actor->unk_19A + (actor->debuff != STATUS_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
+        y = actor->currentPos.y + actor->headOffset.y + actor->verticalRenderOffset + (actor->debuff != STATUS_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
         z = actor->currentPos.z + actor->headOffset.z;
         if (wattEffectData->unk_0C) {
             switch (wattEffectData->unk_10) {
@@ -3191,13 +3191,13 @@ EvtScript N(takeTurn_80226004) = {
     EVT_SWITCH(LVar9)
         EVT_CASE_EQ(0)
             EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_IGNORE_DEFENSE), 65535, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE), SUPPRESS_EVENT_ALL, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_CASE_EQ(1)
             EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_IGNORE_DEFENSE), 65535, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE), SUPPRESS_EVENT_ALL, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_CASE_EQ(2)
             EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_IGNORE_DEFENSE), 65535, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE), SUPPRESS_EVENT_ALL, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
