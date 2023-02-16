@@ -42,7 +42,7 @@ segments:
     - [0x1370, c, main_pre]
     - [0x1370, c, main]
     - [0x1B10, c, main_loop]
-    - [0x2570, c, main_loop_2]
+    - [0x2570, c, background_gfx]
     - [0x3BC0, c, input]
     - [0x42B0, c, rumble]
     - [0x43B0, c, 43F0]
