@@ -295,8 +295,8 @@ void draw_merlee_message(void* data) {
                 width = get_msg_width(messageID, 0) + 23;
                 xPos = 160 - (width / 2);
                 height = 45;
-                set_window_properties(WINDOW_ID_9, xPos, 80, width, height, 0, draw_merlee_message_string, popup, -1);
-                set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
+                set_window_properties(WINDOW_ID_BATTLE_POPUP, xPos, 80, width, height, 0, draw_merlee_message_string, popup, -1);
+                set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
             }
             break;
 
@@ -307,8 +307,8 @@ void draw_merlee_message(void* data) {
                 width = get_msg_width(messageID, 0) + 23;
                 xPos = 160 - (width / 2);
                 height = 28;
-                set_window_properties(WINDOW_ID_9, xPos, 80, width, height, 0, draw_merlee_message_string, popup, -1);
-                set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
+                set_window_properties(WINDOW_ID_BATTLE_POPUP, xPos, 80, width, height, 0, draw_merlee_message_string, popup, -1);
+                set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
             }
             break;
     }

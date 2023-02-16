@@ -2202,9 +2202,9 @@ typedef struct {
 } Window; // size = 0x20
 
 #if VERSION_JP
-#define DISPLAYCONTEXT_GFX_COUNT 0x2080
-#else
 #define DISPLAYCONTEXT_GFX_COUNT 0x2000
+#else
+#define DISPLAYCONTEXT_GFX_COUNT 0x2080
 #endif
 
 typedef struct {
