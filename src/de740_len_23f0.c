@@ -2,10 +2,10 @@
 #include "sprite.h"
 #include "nu/nusys.h"
 
-extern SpriteShadingProfile D_801595C0;
-extern SpriteShadingProfile D_80159670;
-extern SpriteShadingProfile D_80159720;
-extern SpriteShadingProfile D_801597D0;
+extern SpriteShadingProfile wSpriteShadingProfile;
+extern SpriteShadingProfile bSpriteShadingProfile;
+extern SpriteShadingProfile wSpriteShadingProfileAux;
+extern SpriteShadingProfile bSpriteShadingProfileAux;
 extern s8 D_80159880[0x20];
 
 extern int ENVIRONMENT;
@@ -27,25 +27,25 @@ void clear_sprite_shading_data(void) {
 
     for (i = 0; i < ARRAY_COUNT(gSpriteShadingProfile->sources); i++) {
         gSpriteShadingProfile->sources[i].flags = LIGHT_SOURCE_DISABLED;
-        D_801512B0->sources[i].flags = LIGHT_SOURCE_DISABLED;
+        gAuxSpriteShadingProfile->sources[i].flags = LIGHT_SOURCE_DISABLED;
     }
 
     gSpriteShadingProfile->flags = 0;
     gSpriteShadingProfile->ambientColor.r = gSpriteShadingProfile->ambientColor.g = gSpriteShadingProfile->ambientColor.b = 50;
     gSpriteShadingProfile->ambientPower = 10;
 
-    D_801512B0->flags = 0;
-    D_801512B0->ambientColor.r = D_801512B0->ambientColor.g = D_801512B0->ambientColor.b = 50;
-    D_801512B0->ambientPower = 20;
+    gAuxSpriteShadingProfile->flags = 0;
+    gAuxSpriteShadingProfile->ambientColor.r = gAuxSpriteShadingProfile->ambientColor.g = gAuxSpriteShadingProfile->ambientColor.b = 50;
+    gAuxSpriteShadingProfile->ambientPower = 20;
 }
 
 void init_sprite_shading_data(void) {
     if (!gGameStatusPtr->isBattle) {
-        gSpriteShadingProfile = &D_801595C0;
-        D_801512B0 = &D_80159720;
+        gSpriteShadingProfile = &wSpriteShadingProfile;
+        gAuxSpriteShadingProfile = &wSpriteShadingProfileAux;
     } else {
-        gSpriteShadingProfile = &D_80159670;
-        D_801512B0 = &D_801597D0;
+        gSpriteShadingProfile = &bSpriteShadingProfile;
+        gAuxSpriteShadingProfile = &bSpriteShadingProfileAux;
     }
 }
 
