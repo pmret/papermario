@@ -110,7 +110,7 @@ void state_init_logos(void) {
 
 void state_step_logos(void) {
 #if VERSION_JP
-    int a0 = gGameStatusPtr->pressedButtons[0];
+    int pressedButtons = gGameStatusPtr->pressedButtons[0];
 #endif
 
     if (gGameStatusPtr->bSkipIntro) {
@@ -121,9 +121,19 @@ void state_step_logos(void) {
         }
     } else {
 #if VERSION_JP
-        // TODO: fix fake match
-        if (((u8) gGameStatusPtr->introState - 1 < 0xaU) && (a0 & 0xB000)) {
-            intro_logos_set_fade_color(0xD0);
+        if ((gGameStatusPtr->introState == INTRO_STATE_1 ||
+             gGameStatusPtr->introState == INTRO_STATE_2 ||
+             gGameStatusPtr->introState == INTRO_STATE_3 ||
+             gGameStatusPtr->introState == INTRO_STATE_4 ||
+             gGameStatusPtr->introState == INTRO_STATE_5 ||
+             gGameStatusPtr->introState == INTRO_STATE_6 ||
+             gGameStatusPtr->introState == INTRO_STATE_7 ||
+             gGameStatusPtr->introState == INTRO_STATE_8 ||
+             gGameStatusPtr->introState == INTRO_STATE_9 ||
+             gGameStatusPtr->introState == INTRO_STATE_A) &&
+            (pressedButtons & (BUTTON_START | BUTTON_Z | BUTTON_A)))
+        {
+            intro_logos_set_fade_color(208);
             gGameStatusPtr->bSkipIntro = 1;
         }
 #endif
