@@ -7,6 +7,7 @@
 #include "model.h"
 
 #if VERSION_JP
+// TODO: split the filemenu segment
 extern Addr filemenu_ROM_START;
 extern Addr filemenu_ROM_END;
 extern Addr filemenu_VRAM;

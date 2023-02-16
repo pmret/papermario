@@ -7,6 +7,7 @@ extern s8 obfuscated_obfuscation_shims_ROM_START[];
 extern s8 obfuscated_obfuscation_shims_VRAM[];
 
 #if VERSION_JP
+// TODO: split these segments
 extern Addr battle_heap_create_obfuscated_ROM_START;
 extern Addr battle_heap_create_obfuscated_ROM_END;
 extern Addr obfuscation_shims_ROM_START;

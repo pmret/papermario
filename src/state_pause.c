@@ -7,6 +7,7 @@
 #include "model.h"
 
 #if VERSION_JP
+// TODO: split this segment
 extern Addr pause_ROM_START;
 extern Addr pause_ROM_END;
 extern Addr pause_VRAM;
