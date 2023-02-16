@@ -292,7 +292,7 @@ segments:
     - [0x4F200, .data, main_pre]
     - [0x4F420, .data, main]
     - [0x4F420, .data, main_loop]
-    - [0x4F600, .data, main_loop_2]
+    - [0x4F600, .data, background_gfx]
     - [0x4F660, .data, rumble]
     - [0x4F670, .data, 43F0]
     - [0x4F9D0, .data, fio]

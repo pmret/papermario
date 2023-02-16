@@ -290,7 +290,7 @@ segments:
     - [0x4F1E0, .data, main_pre] # TODO: find data offset
     - [0x4F1E0, .data, main] # TODO: find data offset
     - [0x4F1E0, .data, main_loop] # TODO: find data offset
-    - [0x4F1E0, .data, main_loop_2] # TODO: find data offset
+    - [0x4F1E0, .data, background_gfx] # TODO: find data offset
     - [0x4F640, .data, rumble]
     - [0x4F650, .data, 43F0]
     - [0x4F9B0, .data, fio]
