@@ -281,11 +281,11 @@ void draw_merlee_message_string(PopupMessage* popup, s32 posX, s32 posY) {
 
 void draw_merlee_message(void* data) {
 #if VERSION_JP
+    PopupMessage* popup = data;
     s32 width;
     s32 height;
     s32 messageID;
     s32 xPos;
-    PopupMessage *popup = data;
 
     switch (popup->messageIndex) {
         case 0:
