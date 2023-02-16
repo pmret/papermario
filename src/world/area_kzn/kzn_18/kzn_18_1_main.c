@@ -77,7 +77,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_EnterMap))
     EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
-    EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA1)
+    EVT_CALL(PlayAmbientSounds, AMBIENT_LAVA_1)
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_OPENED_ESCAPE_ROUTE)
         EVT_CALL(EnableModel, MODEL_off1, FALSE)
         EVT_CALL(EnableModel, MODEL_o506, FALSE)

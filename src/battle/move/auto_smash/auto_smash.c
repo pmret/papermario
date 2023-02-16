@@ -14,7 +14,7 @@ EvtScript N(EVS_802A10B0) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 32)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(UseBattleCamPreset, 26)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
     EVT_CALL(PlayerRunToGoal, 0)
@@ -24,7 +24,7 @@ EvtScript N(EVS_802A10B0) = {
 
 EvtScript N(EVS_802A118C) = {
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, -33, 0, 0)
-    EVT_CALL(UseBattleCamPreset, 26)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
     EVT_CALL(PlayerRunToGoal, 0)
@@ -126,7 +126,7 @@ EvtScript N(EVS_802A150C) = {
 };
 
 EvtScript N(EVS_802A1690) = {
-    EVT_CALL(UseBattleCamPreset, 43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -151,22 +151,22 @@ EvtScript N(EVS_802A1690) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_WAIT(1)
+        EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
+        EVT_IF_EQ(LVar0, TRUE)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30011)
     EVT_WAIT(3)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30012)
-    EVT_CALL(UseBattleCamPreset, 44)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_802A18AC) = {
     EVT_CALL(func_80276EFC)
-    EVT_CALL(UseBattleCamPreset, 4)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_CALL(func_802693F0)
     EVT_WAIT(20)
@@ -198,9 +198,9 @@ EvtScript N(EVS_802A1998) = {
     EVT_END
 };
 
-EvtScript N(EVS_802A1A64) = {
+EvtScript N(EVS_PlayerReturnHome) = {
     EVT_CALL(func_80276EFC)
-    EVT_CALL(UseBattleCamPreset, 29)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_29)
     EVT_CALL(func_802693F0)
     EVT_WAIT(20)
     EVT_CALL(EnablePlayerBlur, -1)
@@ -215,7 +215,7 @@ EvtScript N(EVS_802A1A64) = {
     EVT_END
 };
 
-EvtScript N(EVS_802A1B40) = {
+EvtScript N(EVS_AutoSmashImpl_Hammer) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_init)
     EVT_EXEC_WAIT(N(EVS_802A10B0))
@@ -223,7 +223,7 @@ EvtScript N(EVS_802A1B40) = {
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(N(EVS_802A1204))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 0, 0, 0, 16)
-    EVT_CALL(UseBattleCamPreset, 43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -264,14 +264,14 @@ EvtScript N(EVS_802A1B40) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_LABEL(0)
-        EVT_CALL(GetActionCommandMode, LVar0)
-        EVT_IF_LT(LVar0, 2)
-            EVT_WAIT(1)
-            EVT_CALL(GetActionSuccess, LVar0)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_GOTO(0)
+            EVT_CALL(GetActionCommandMode, LVar0)
+            EVT_IF_LT(LVar0, 2)
+                EVT_WAIT(1)
+                EVT_CALL(GetActionSuccess, LVar0)
+                EVT_IF_EQ(LVar0, 0)
+                    EVT_GOTO(0)
+                EVT_END_IF
             EVT_END_IF
-        EVT_END_IF
     EVT_ELSE
         EVT_CALL(action_command_hammer_start, 0, LVar1, 3)
         EVT_CALL(SetActionResult, 0)
@@ -301,7 +301,7 @@ EvtScript N(EVS_802A1B40) = {
     EVT_END
 };
 
-EvtScript N(EVS_802A2000) = {
+EvtScript N(EVS_AutoSmashImpl_SuperHammer) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_init)
     EVT_EXEC_WAIT(N(EVS_802A10B0))
@@ -309,7 +309,7 @@ EvtScript N(EVS_802A2000) = {
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(N(EVS_802A1388))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 0, 0, 0, BS_FLAGS1_10)
-    EVT_CALL(UseBattleCamPreset, 43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -347,11 +347,11 @@ EvtScript N(EVS_802A2000) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_LABEL(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetActionSuccess, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_GOTO(0)
-        EVT_END_IF
+            EVT_WAIT(1)
+            EVT_CALL(GetActionSuccess, LVar0)
+            EVT_IF_EQ(LVar0, 0)
+                EVT_GOTO(0)
+            EVT_END_IF
     EVT_ELSE
         EVT_CALL(action_command_hammer_start, 0, LVar1, 3)
         EVT_CALL(SetActionResult, 0)
@@ -370,7 +370,7 @@ EvtScript N(EVS_802A2000) = {
     EVT_END
 };
 
-EvtScript N(EVS_802A23E8) = {
+EvtScript N(EVS_AutoSmashImpl_UltraHammer) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_init)
     EVT_EXEC_WAIT(N(EVS_802A10B0))
@@ -378,7 +378,7 @@ EvtScript N(EVS_802A23E8) = {
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(N(EVS_802A150C))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 0, 0, 0, BS_FLAGS1_10)
-    EVT_CALL(UseBattleCamPreset, 43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -416,11 +416,11 @@ EvtScript N(EVS_802A23E8) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_LABEL(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetActionSuccess, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_GOTO(0)
-        EVT_END_IF
+            EVT_WAIT(1)
+            EVT_CALL(GetActionSuccess, LVar0)
+            EVT_IF_EQ(LVar0, 0)
+                EVT_GOTO(0)
+            EVT_END_IF
     EVT_ELSE
         EVT_CALL(action_command_hammer_start, 0, LVar1, 3)
         EVT_CALL(SetActionResult, 0)
@@ -447,7 +447,7 @@ EvtScript N(EVS_802A27D0) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(N(EVS_802A1204))
-    EVT_CALL(UseBattleCamPreset, 43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -483,11 +483,11 @@ EvtScript N(EVS_802A27D0) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_CALL(GetActionSuccess, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_WAIT(1)
+        EVT_CALL(GetActionSuccess, LVar0)
+        EVT_IF_EQ(LVar0, 0)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2115)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30011)
     EVT_WAIT(3)
@@ -505,7 +505,7 @@ EvtScript N(EVS_802A2AFC) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(N(EVS_802A1388))
-    EVT_CALL(UseBattleCamPreset, 43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -532,11 +532,11 @@ EvtScript N(EVS_802A2AFC) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_CALL(GetActionSuccess, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_WAIT(1)
+        EVT_CALL(GetActionSuccess, LVar0)
+        EVT_IF_EQ(LVar0, 0)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2116)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30018)
     EVT_WAIT(3)
@@ -554,7 +554,7 @@ EvtScript N(EVS_802A2DA0) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(N(EVS_802A150C))
-    EVT_CALL(UseBattleCamPreset, 43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -581,11 +581,11 @@ EvtScript N(EVS_802A2DA0) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_CALL(GetActionSuccess, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_WAIT(1)
+        EVT_CALL(GetActionSuccess, LVar0)
+        EVT_IF_EQ(LVar0, 0)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2117)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001F)
     EVT_WAIT(3)
@@ -626,11 +626,11 @@ EvtScript N(UseMove_Impl) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
-            EVT_EXEC_WAIT(N(EVS_802A1B40))
+            EVT_EXEC_WAIT(N(EVS_AutoSmashImpl_Hammer))
         EVT_CASE_EQ(1)
-            EVT_EXEC_WAIT(N(EVS_802A2000))
+            EVT_EXEC_WAIT(N(EVS_AutoSmashImpl_SuperHammer))
         EVT_CASE_EQ(2)
-            EVT_EXEC_WAIT(N(EVS_802A23E8))
+            EVT_EXEC_WAIT(N(EVS_AutoSmashImpl_UltraHammer))
     EVT_END_SWITCH
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVar9, BS_FLAGS1_10)
     EVT_CALL(GetActionSuccessCopy, LVar0)
@@ -678,7 +678,7 @@ EvtScript N(UseMove_Impl) = {
     EVT_WAIT(1)
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_802A1A64))
+        EVT_EXEC_WAIT(N(EVS_PlayerReturnHome))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DidActionSucceed, LVar0)
@@ -713,7 +713,7 @@ EvtScript N(UseMove_Impl) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(EVS_802A1A64))
+            EVT_EXEC_WAIT(N(EVS_PlayerReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN

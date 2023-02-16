@@ -2529,22 +2529,21 @@ enum PlayerAnims {
 };
 
 enum AmbientSounds {
-    AMBIENT_SPOOKY             = 0,
-    AMBIENT_WIND               = 1,
-    AMBIENT_BEACH              = 2,
-    AMBIENT_JUNGLE             = 3,
-    // actually, 'undersea' are all lava-related. sort these out when map data is done
-    AMBIENT_UNDER_SEA1         = 4,
-    AMBIENT_UNDER_SEA2         = 5,
-    AMBIENT_SILENCE            = 6,
-    AMBIENT_UNDER_SEA3         = 7,
-    AMBIENT_UNDER_SEA4         = 8,
-    AMBIENT_EXIT_SEA           = 9,
-    AMBIENT_UNDER_SEA5         = 10,
-    AMBIENT_UNDER_SEA6         = 11,
-    AMBIENT_BIRDS              = 12,
-    AMBIENT_SEA                = 13,
-    AMBIENT_RADIO              = 16, // radio songs for nok
+    AMBIENT_SPOOKY          = 0,
+    AMBIENT_WIND            = 1,
+    AMBIENT_BEACH           = 2,
+    AMBIENT_JUNGLE          = 3,
+    AMBIENT_LAVA_1          = 4,
+    AMBIENT_LAVA_2          = 5,
+    AMBIENT_SILENCE         = 6,
+    AMBIENT_LAVA_3          = 7,
+    AMBIENT_LAVA_4          = 8,
+    AMBIENT_LAVA_5          = 9,
+    AMBIENT_LAVA_6          = 10,
+    AMBIENT_LAVA_7          = 11,
+    AMBIENT_BIRDS           = 12,
+    AMBIENT_SEA             = 13,
+    AMBIENT_RADIO           = 16, // radio songs for nok
     // the following 4 IDs are reserved for additional radio songs,
     // and no more are expected to follow after that
     // see: au_ambient_load

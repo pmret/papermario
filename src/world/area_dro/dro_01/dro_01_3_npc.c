@@ -126,16 +126,16 @@ EvtScript N(EVS_NpcInit_Dryite_02) = {
 #include "npc_composer.c"
 #include "npc_shop_owner.c"
 
-EvtScript N(EVS_NpcInteract_ThreeSisters) = {
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_008E)
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_008F)
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_0090)
+EvtScript N(EVS_NpcInteract_Toadette) = {
+    EVT_CALL(SpeakToPlayer, NPC_Toadette_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_008E)
+    EVT_CALL(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_008F)
+    EVT_CALL(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_0090)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_ThreeSisters) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters)))
+EvtScript N(EVS_NpcInit_Toadette) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette)))
     EVT_RETURN
     EVT_END
 };
@@ -377,10 +377,10 @@ NpcData N(PassiveNPCs)[] = {
 
 NpcData N(ThreeSisterNPCs)[] = {
     {
-        .id = NPC_ThreeSisters_01,
+        .id = NPC_Toadette_01,
         .pos = { -141.0f, 0.0f, -18.0f },
         .yaw = 62,
-        .init = &N(EVS_NpcInit_ThreeSisters),
+        .init = &N(EVS_NpcInit_Toadette),
         .settings = &N(NpcSettings_Toad_Stationary),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = NO_DROPS,
@@ -388,10 +388,10 @@ NpcData N(ThreeSisterNPCs)[] = {
         .tattle = MSG_NpcTattle_TravelingMaidA,
     },
     {
-        .id = NPC_ThreeSisters_02,
+        .id = NPC_Toadette_02,
         .pos = { -124.0f, 0.0f, -61.0f },
         .yaw = 63,
-        .init = &N(EVS_NpcInit_ThreeSisters),
+        .init = &N(EVS_NpcInit_Toadette),
         .settings = &N(NpcSettings_Toad_Stationary),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = NO_DROPS,
@@ -399,10 +399,10 @@ NpcData N(ThreeSisterNPCs)[] = {
         .tattle = MSG_NpcTattle_TravelingMaidB,
     },
     {
-        .id = NPC_ThreeSisters_03,
+        .id = NPC_Toadette_03,
         .pos = { -80.0f, 0.0f, -35.0f },
         .yaw = 244,
-        .init = &N(EVS_NpcInit_ThreeSisters),
+        .init = &N(EVS_NpcInit_Toadette),
         .settings = &N(NpcSettings_Toad_Stationary),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = NO_DROPS,

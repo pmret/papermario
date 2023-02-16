@@ -201,7 +201,7 @@ EvtScript N(EVS_NpcInit_Toad_01) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_ThreeSisters_01) = {
+EvtScript N(EVS_NpcInteract_Toadette_01) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
@@ -236,13 +236,13 @@ EvtScript N(EVS_NpcInteract_ThreeSisters_01) = {
         EVT_CASE_LT(STORY_EPILOGUE)
             EVT_SET(LVar0, MSG_MAC_Station_0023)
     EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_01, ANIM_Toadette_Purple_Talk, ANIM_Toadette_Purple_Idle, 0, LVar0)
+    EVT_CALL(SpeakToPlayer, NPC_Toadette_01, ANIM_Toadette_Purple_Talk, ANIM_Toadette_Purple_Idle, 0, LVar0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_ThreeSisters_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters_01)))
+EvtScript N(EVS_NpcInit_Toadette_01) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette_01)))
     EVT_RETURN
     EVT_END
 };
@@ -387,7 +387,7 @@ EvtScript N(EVS_NpcInit_ToadKid_02) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_ThreeSisters_02) = {
+EvtScript N(EVS_NpcInteract_Toadette_02) = {
     EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
         EVT_SET(LVar0, MSG_MAC_Station_0061)
         EVT_SET(LVar1, MSG_MAC_Station_0062)
@@ -397,16 +397,16 @@ EvtScript N(EVS_NpcInteract_ThreeSisters_02) = {
         EVT_SET(LVar1, MSG_MAC_Station_0065)
         EVT_SET(LVar2, MSG_MAC_Station_0066)
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, LVar0)
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, LVar1)
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_04, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, LVar2)
+    EVT_CALL(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, LVar0)
+    EVT_CALL(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, LVar1)
+    EVT_CALL(SpeakToPlayer, NPC_Toadette_04, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, LVar2)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_ThreeSisters_02) = {
+EvtScript N(EVS_NpcInit_Toadette_02) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters_02)))
+        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette_02)))
     EVT_ELSE
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -639,10 +639,10 @@ NpcData N(NpcData_Toads)[] = {
         .tattle = MSG_NpcTattle_MAC_TrainLover,
     },
     {
-        .id = NPC_ThreeSisters_01,
+        .id = NPC_Toadette_01,
         .pos = { 85.0f, 0.0f, 235.0f },
         .yaw = 270,
-        .init = &N(EVS_NpcInit_ThreeSisters_01),
+        .init = &N(EVS_NpcInit_Toadette_01),
         .settings = &N(NpcSettings_Toad_Stationary),
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
         .drops = NO_DROPS,
@@ -719,12 +719,12 @@ NpcData N(NpcData_Toads)[] = {
     },
 };
 
-NpcData N(NpcData_ThreeSisters)[] = {
+NpcData N(NpcData_Toadette)[] = {
     {
-        .id = NPC_ThreeSisters_02,
+        .id = NPC_Toadette_02,
         .pos = { -130.0f, 0.0f, 220.0f },
         .yaw = 0,
-        .init = &N(EVS_NpcInit_ThreeSisters_02),
+        .init = &N(EVS_NpcInit_Toadette_02),
         .settings = &N(NpcSettings_Toad_Stationary),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = NO_DROPS,
@@ -732,10 +732,10 @@ NpcData N(NpcData_ThreeSisters)[] = {
         .tattle = MSG_NpcTattle_TravelingMaidA,
     },
     {
-        .id = NPC_ThreeSisters_03,
+        .id = NPC_Toadette_03,
         .pos = { -100.0f, 0.0f, 220.0f },
         .yaw = 90,
-        .init = &N(EVS_NpcInit_ThreeSisters_02),
+        .init = &N(EVS_NpcInit_Toadette_02),
         .settings = &N(NpcSettings_Toad_Stationary),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = NO_DROPS,
@@ -743,10 +743,10 @@ NpcData N(NpcData_ThreeSisters)[] = {
         .tattle = MSG_NpcTattle_TravelingMaidB,
     },
     {
-        .id = NPC_ThreeSisters_04,
+        .id = NPC_Toadette_04,
         .pos = { -70.0f, 0.0f, 220.0f },
         .yaw = 180,
-        .init = &N(EVS_NpcInit_ThreeSisters_02),
+        .init = &N(EVS_NpcInit_Toadette_02),
         .settings = &N(NpcSettings_Toad_Stationary),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
         .drops = NO_DROPS,
@@ -1030,7 +1030,7 @@ NpcData N(NpcData_LilOinks)[] = {
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_Toads)),
-    NPC_GROUP(N(NpcData_ThreeSisters)),
+    NPC_GROUP(N(NpcData_Toadette)),
     NPC_GROUP(N(NpcData_ShyGuy)),
     NPC_GROUP(N(NpcData_LilOinks)),
     {}
