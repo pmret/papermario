@@ -33,8 +33,8 @@ ApiStatus N(SetSquirtAngle)(Evt* script, s32 isInitialCall) {
     set_goal_pos_to_part(&partner->state, partner->targetActorID, partner->targetPartIndex);
     targetPart = get_actor_part(get_actor(partner->targetActorID), partner->targetPartIndex);
 
-    partner->state.goalPos.x += targetPart->unk_75;
-    partner->state.goalPos.y += targetPart->unk_76;
+    partner->state.goalPos.x += targetPart->projectileTargetOffset.x;
+    partner->state.goalPos.y += targetPart->projectileTargetOffset.y;
     partner->state.goalPos.z = partner->state.goalPos.z; // required to match
 
     partner->state.currentPos.x = partner->currentPos.x + 8.0f;

@@ -189,7 +189,7 @@ EvtScript N(init) = {
         EVT_END_IF
     EVT_END_IF
 EVT_END_IF
-EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -8)
+EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
 EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
 EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, 0)
 EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
@@ -330,7 +330,7 @@ EvtScript N(handleEvent_normal) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_FLIPPED))
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -8)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
             EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_flipped)))
@@ -552,7 +552,7 @@ EvtScript N(handleEvent_spiky) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_SPIKY_FLIPPED))
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -8)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
             EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_flipped)))
@@ -866,7 +866,7 @@ EvtScript N(8021B7C8) = {
     EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_flipped)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_flipped)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, 0)
-    EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -8)
+    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim06)
@@ -928,7 +928,7 @@ EvtScript N(handleEvent_flipped) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_FLIPPED))
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -8)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
             EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
@@ -1060,7 +1060,7 @@ EvtScript N(handleEvent_spiky_flipped) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_SPIKY_FLIPPED))
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -8)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
             EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)

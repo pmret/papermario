@@ -109,11 +109,11 @@ EvtScript N(idle_8021DAE4) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_FLAG(STATUS_FLAG_SLEEP)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -6, 14)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -2, -5)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -2, -5)
             EVT_CALL(N(UnkBattleFunc1), -20, 8, 0, 14)
         EVT_CASE_DEFAULT
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -10, 24)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -8, -5)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -8, -5)
             EVT_CALL(N(UnkBattleFunc1), -18, 23, 1, 20)
     EVT_END_SWITCH
     EVT_WAIT(1)

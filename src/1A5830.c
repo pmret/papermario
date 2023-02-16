@@ -2997,7 +2997,7 @@ ApiStatus func_8027D32C(Evt* script, s32 isInitialCall) {
 ApiStatus SetTargetOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 partIndex;
+    s32 partID;
     ActorPart* part;
     s32 x;
     s32 y;
@@ -3006,8 +3006,8 @@ ApiStatus SetTargetOffset(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    partIndex = evt_get_variable(script, *args++);
-    part = get_actor_part(get_actor(actorID), partIndex);
+    partID = evt_get_variable(script, *args++);
+    part = get_actor_part(get_actor(actorID), partID);
 
     x = evt_get_variable(script, *args++);
     y = evt_get_variable(script, *args++);
@@ -3021,39 +3021,39 @@ ApiStatus SetTargetOffset(Evt* script, s32 isInitialCall) {
 ApiStatus func_8027D434(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 partIndex;
+    s32 partID;
     ActorPart* part;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    partIndex = evt_get_variable(script, *args++);
-    part = get_actor_part(get_actor(actorID), partIndex);
+    partID = evt_get_variable(script, *args++);
+    part = get_actor_part(get_actor(actorID), partID);
     part->unk_70 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8027D4C8(Evt* script, s32 isInitialCall) {
+ApiStatus SetProjectileTargetOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 partIndex;
+    s32 partID;
     ActorPart* part;
-    s32 temp;
-    s32 temp2;
+    s32 dx;
+    s32 dy;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    partIndex = evt_get_variable(script, *args++);
-    part = get_actor_part(get_actor(actorID), partIndex);
+    partID = evt_get_variable(script, *args++);
+    part = get_actor_part(get_actor(actorID), partID);
 
-    temp = evt_get_variable(script, *args++);
-    temp2 = evt_get_variable(script, *args++);
+    dx = evt_get_variable(script, *args++);
+    dy = evt_get_variable(script, *args++);
 
-    part->unk_75 = temp;
-    part->unk_76 = temp2;
+    part->projectileTargetOffset.x = dx;
+    part->projectileTargetOffset.y = dy;
 
     return ApiStatus_DONE2;
 }

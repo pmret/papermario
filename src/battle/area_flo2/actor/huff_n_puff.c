@@ -457,7 +457,7 @@ EvtScript N(UpdateSize) = {
     EVT_MUL(LVar1, -50)
     EVT_DIV(LVar0, 100)
     EVT_DIV(LVar1, 100)
-    EVT_CALL(func_8027D4C8, ACTOR_ENEMY0, 1, LVar0, LVar1)
+    EVT_CALL(SetProjectileTargetOffset, ACTOR_ENEMY0, 1, LVar0, LVar1)
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_SCALE_X), LVar0)
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_SCALE_Y), LVar1)
     EVT_MUL(LVar0, -17)

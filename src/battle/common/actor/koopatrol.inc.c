@@ -222,20 +222,20 @@ EvtScript N(update_unknown) = {
         EVT_CASE_EQ(N(STATE_NORMAL))
             EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_DIZZY)
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
-                EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+                EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
                 EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
             EVT_ELSE
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 32)
-                EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -1, -4)
+                EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -4)
                 EVT_CALL(N(UnkBattleFunc1), -15, 32, 5, 32)
             EVT_END_IF
         EVT_CASE_EQ(N(STATE_FLIPPED))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
             EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
         EVT_CASE_EQ(N(STATE_CHARGED))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 20)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -6)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -6)
             EVT_CALL(N(UnkBattleFunc1), -15, 22, 5, 22)
     EVT_END_SWITCH
     EVT_RETURN
@@ -404,7 +404,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_flipped)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_flipped)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, 0)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, 1)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Koopatrol_Anim0B)
@@ -680,7 +680,7 @@ EvtScript N(attackShellToss) = {
                 EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
                 EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable)))
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 32)
-                EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -1, -4)
+                EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -4)
                 EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, 1)
                 EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, 0)
             EVT_END_IF

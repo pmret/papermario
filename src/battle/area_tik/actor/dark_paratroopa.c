@@ -217,11 +217,11 @@ EvtScript N(init) = {
 EvtScript N(updateOffsets) = {
     EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_DIZZY)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 2, 0, 25)
-        EVT_CALL(func_8027D4C8, ACTOR_SELF, 2, 3, -6)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 2, 3, -6)
         EVT_CALL(N(UnkBattleFunc1), -19, 25, 4, 28)
     EVT_ELSE
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 2, -2, 36)
-        EVT_CALL(func_8027D4C8, ACTOR_SELF, 2, 0, -7)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 2, 0, -7)
         EVT_CALL(N(UnkBattleFunc1), -10, 29, 8, 30)
     EVT_END_IF
     EVT_RETURN
@@ -733,18 +733,18 @@ EvtScript N(updateOffsets_koopa) = {
         EVT_CASE_OR_EQ(1)
             EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_DIZZY)
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
-                EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+                EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
                 EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
             EVT_ELSE
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 32)
-                EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -1, -4)
+                EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -4)
                 EVT_CALL(N(UnkBattleFunc1), -15, 32, 5, 32)
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(3)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
             EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -951,7 +951,7 @@ EvtScript N(handleEvent_koopa) = {
             EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_koopa_flipped)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_flipped)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, 1)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
@@ -1383,7 +1383,7 @@ EvtScript N(koopa_standUp) = {
         EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
         EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable)))
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 32)
-        EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -1, -4)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -4)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, 0)
         EVT_CALL(ResetActorSounds, ACTOR_SELF, 2)
         EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)

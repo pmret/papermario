@@ -152,11 +152,11 @@ EvtScript N(kooper_idle) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -2, 38)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -3, -9)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -3, -9)
             EVT_CALL(N(UnkBattleFunc1), -10, 25, 10, 25)
         EVT_CASE_EQ(1)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 5, 15)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -6)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -6)
             EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
     EVT_END_SWITCH
     EVT_WAIT(1)
@@ -222,7 +222,7 @@ EvtScript N(kooper_handleEvent) = {
             EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(kooper_defenseTable2)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(kooper_idleAnimations2)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 5, 15)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -6)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -6)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Hurt)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
             EVT_THREAD
@@ -373,7 +373,7 @@ EvtScript N(kooper_takeTurn) = {
             EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(kooper_defenseTable)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(kooper_idleAnimations)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -2, 38)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -3, -9)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -3, -9)
         EVT_END_IF
         EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
         EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

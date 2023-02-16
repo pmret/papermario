@@ -1153,15 +1153,15 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
     }
 }
 
-ActorPart* get_actor_part(Actor* actor, s32 partIndex) {
+ActorPart* get_actor_part(Actor* actor, s32 partID) {
     ActorPart* part = &actor->partsTable[0];
 
-    if (partIndex < 0 || part->nextPart == NULL) {
+    if (partID < 0 || part->nextPart == NULL) {
         return part;
     }
 
     while (part != NULL) {
-        if (part->staticData->index == partIndex) {
+        if (part->staticData->index == partID) {
             return part;
         }
         part = part->nextPart;
@@ -1809,8 +1809,8 @@ Actor* create_actor(Formation formation) {
         part->targetOffset.x = actorPartBP->targetOffset.x;
         part->targetOffset.y = actorPartBP->targetOffset.y;
         part->unk_70 = 0;
-        part->unk_75 = actorPartBP->unk_1C;
-        part->unk_76 = actorPartBP->unk_1D;
+        part->projectileTargetOffset.x = actorPartBP->unk_1C;
+        part->projectileTargetOffset.y = actorPartBP->unk_1D;
         part->rotation.x = 0.0f;
         part->rotation.y = 0.0f;
         part->rotation.z = 0.0f;

@@ -190,11 +190,11 @@ EvtScript N(idle) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, STATUS_FLAG_SLEEP | STATUS_FLAG_DIZZY)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -7, 19)
-        EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 2, -6)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 2, -6)
         EVT_CALL(N(UnkBattleFunc1), -20, 20, 10, 27)
     EVT_ELSE
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -7, 33)
-        EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 2, -10)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 2, -10)
         EVT_CALL(N(UnkBattleFunc1), -16, 22, 4, 22)
     EVT_END_IF
     EVT_WAIT(1)

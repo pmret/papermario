@@ -243,7 +243,7 @@ ApiStatus DispatchDamageEvent(Evt* script, s32 isInitialCall);
 ApiStatus DispatchEvent(Evt* script, s32 isInitialCall);
 ApiStatus func_8027D2D8(Evt* script, s32 isInitialCall);
 ApiStatus SetTargetOffset(Evt* script, s32 isInitialCall);
-ApiStatus func_8027D4C8(Evt* script, s32 isInitialCall);
+ApiStatus SetProjectileTargetOffset(Evt* script, s32 isInitialCall);
 ApiStatus EnableActorBlur(Evt* script, s32 isInitialCall);
 ApiStatus AfflictActor(Evt* script, s32 isInitialCall);
 ApiStatus GetInstigatorValue(Evt* script, s32 isInitialCall);

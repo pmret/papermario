@@ -429,8 +429,8 @@ ApiStatus N(SpinyFlipActionCommand)(Evt* script, s32 isInitialCall) {
             set_goal_pos_to_part(partnerState, partner->targetActorID, partner->targetPartIndex);
             target = get_actor(partner->targetActorID);
             part = get_actor_part(target, partner->targetPartIndex);
-            partnerState->goalPos.x += part->unk_75;
-            partnerState->goalPos.y += part->unk_76;
+            partnerState->goalPos.x += part->projectileTargetOffset.x;
+            partnerState->goalPos.y += part->projectileTargetOffset.y;
             partnerState->goalPos.z = partnerState->goalPos.z; // required to match
             partnerState->distance = dist2D(partnerState->currentPos.x,
                                             partnerState->currentPos.y,

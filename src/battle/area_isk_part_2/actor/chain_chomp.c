@@ -400,13 +400,13 @@ EvtScript N(80218FCC) = {
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetPartPos, ACTOR_SELF, 2, LVar0, LVar1, LVar2)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 2, 0, 24)
-        EVT_CALL(func_8027D4C8, ACTOR_SELF, 2, 0, 0)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 2, 0, 0)
     EVT_ELSE
         EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
         EVT_CALL(GetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetPartPos, ACTOR_SELF, 2, LVar0, LVar1, LVar2)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 2, -13, 40)
-        EVT_CALL(func_8027D4C8, ACTOR_SELF, 2, 0, -14)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 2, 0, -14)
     EVT_END_IF
     EVT_RETURN
     EVT_END

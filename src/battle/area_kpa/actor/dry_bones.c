@@ -211,19 +211,19 @@ EvtScript N(idle) = {
             EVT_SWITCH(LVar1)
                 EVT_CASE_FLAG(STATUS_FLAG_SLEEP)
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -6, 24)
-                    EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 1, -5)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 1, -5)
                 EVT_CASE_DEFAULT
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -8, 30)
-                    EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -1, -10)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -10)
             EVT_END_SWITCH
         EVT_CASE_EQ(1)
             EVT_SWITCH(LVar1)
                 EVT_CASE_FLAG(STATUS_FLAG_SLEEP)
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -1, 10)
-                    EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
                 EVT_CASE_DEFAULT
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -1, 10)
-                    EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
             EVT_END_SWITCH
     EVT_END_SWITCH
     EVT_WAIT(1)
@@ -242,7 +242,7 @@ EvtScript N(reassemble) = {
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_dead)))
     EVT_CALL(ClearStatusEffects, ACTOR_SELF)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -1, 10)
-    EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
     EVT_CALL(RandInt, 0, LVar0)
     EVT_ADD(LVar0, 2)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
@@ -451,7 +451,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_2000, 0)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -8, 30)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -1, -10)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -10)
             EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar0)
             EVT_CALL(SetEnemyHP, ACTOR_SELF, LVar0)
         EVT_ELSE

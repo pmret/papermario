@@ -139,8 +139,8 @@ ApiStatus N(ShellShotActionCommand)(Evt* evt, s32 isInitialCall) {
             targetActor = get_actor(parakarry->targetActorID);
             targetActorPart = get_actor_part(targetActor, parakarry->targetPartIndex);
 
-            state->goalPos.x += targetActorPart->unk_75 * targetActor->scalingFactor;
-            state->goalPos.y += targetActorPart->unk_76 * targetActor->scalingFactor;
+            state->goalPos.x += targetActorPart->projectileTargetOffset.x * targetActor->scalingFactor;
+            state->goalPos.y += targetActorPart->projectileTargetOffset.y * targetActor->scalingFactor;
             state->goalPos.z = state->goalPos.z;
             state->unk_24 = (targetActorPart->size.y + targetActorPart->size.x) / 2 / 24.0;
             hud_element_set_scale(hudTarget, state->unk_24 * targetActor->scalingFactor);

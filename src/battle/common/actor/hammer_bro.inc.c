@@ -175,16 +175,16 @@ EvtScript N(idle) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_FLAG(STATUS_FLAG_SLEEP)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
         EVT_CASE_DEFAULT
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 35)
-                    EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -3, -10)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -3, -10)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
-                    EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
             EVT_END_SWITCH
     EVT_END_SWITCH
     EVT_WAIT(1)

@@ -798,69 +798,72 @@ HitResult calc_player_damage_enemy(void) {
         }
     }
 
-    if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-        if (battleStatus->currentAttackElement & DAMAGE_TYPE_SHELL_CRACK && targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE) {
-            if (dispatchEvent == EVENT_HIT) {
-                dispatchEvent = EVENT_SHELL_CRACK_HIT;
-            }
-
-            if (dispatchEvent == EVENT_IMMUNE) {
-                dispatchEvent = EVENT_SHELL_CRACK_HIT;
-            }
-            tempBinary = TRUE;
+    if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
+        && battleStatus->currentAttackElement & DAMAGE_TYPE_SHELL_CRACK
+        && targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE
+    ) {
+        if (dispatchEvent == EVENT_HIT) {
+            dispatchEvent = EVENT_SHELL_CRACK_HIT;
         }
 
-        if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-            if (battleStatus->currentAttackElement & (DAMAGE_TYPE_BLAST | DAMAGE_TYPE_FIRE)) {
-                if (dispatchEvent == EVENT_HIT) {
-                    dispatchEvent = EVENT_BURN_HIT;
-                }
-
-                if (dispatchEvent == EVENT_DEATH) {
-                    dispatchEvent = EVENT_BURN_DEATH;
-                }
-
-                isFireDamage = TRUE;
-            }
-
-            do {        // TODO remove this do while
-                if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE && battleStatus->lastAttackDamage >= 0 && dispatchEvent != EVENT_DEATH &&
-                    dispatchEvent != EVENT_SPIN_SMASH_DEATH && dispatchEvent != EVENT_EXPLODE_TRIGGER) {
-                    if (!(targetPart->targetFlags & ACTOR_PART_FLAG_4)) {
-
-                        #define INFLICT_STATUS(STATUS_TYPE) \
-                            if ((battleStatus->currentAttackStatus & STATUS_FLAG_##STATUS_TYPE) && \
-                                try_inflict_status(target, STATUS_##STATUS_TYPE, STATUS_##STATUS_TYPE##_TURN_MOD)) { \
-                                tempBinary = TRUE; \
-                                wasStatusInflicted = TRUE; \
-                            } \
-
-                        INFLICT_STATUS(SHRINK);
-                        INFLICT_STATUS(POISON);
-                        INFLICT_STATUS(STONE);
-                        INFLICT_STATUS(SLEEP);
-                        INFLICT_STATUS(STOP);
-                        INFLICT_STATUS(STATIC);
-                        INFLICT_STATUS(FEAR);
-                        INFLICT_STATUS(PARALYZE);
-                        INFLICT_STATUS(DIZZY);
-
-                        #undef INFLICT_STATUS
-
-                        if (wasStatusInflicted) {
-                            if (dispatchEvent == EVENT_ZERO_DAMAGE) {
-                                dispatchEvent = EVENT_HIT_COMBO;
-                            }
-
-                            if (dispatchEvent == EVENT_IMMUNE) {
-                                dispatchEvent = EVENT_HIT;
-                            }
-                        }
-                    }
-                }
-            } while (0);
+        if (dispatchEvent == EVENT_IMMUNE) {
+            dispatchEvent = EVENT_SHELL_CRACK_HIT;
         }
+        tempBinary = TRUE;
     }
+
+    if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
+        && (battleStatus->currentAttackElement & (DAMAGE_TYPE_BLAST | DAMAGE_TYPE_FIRE))
+    ) {
+        if (dispatchEvent == EVENT_HIT) {
+            dispatchEvent = EVENT_BURN_HIT;
+        }
+
+        if (dispatchEvent == EVENT_DEATH) {
+            dispatchEvent = EVENT_BURN_DEATH;
+        }
+
+        isFireDamage = TRUE;
+    }
+
+    do {        // TODO remove this do while
+        if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
+            && battleStatus->lastAttackDamage >= 0
+            && dispatchEvent != EVENT_DEATH
+            && dispatchEvent != EVENT_SPIN_SMASH_DEATH
+            && dispatchEvent != EVENT_EXPLODE_TRIGGER
+            && !(targetPart->targetFlags & ACTOR_PART_FLAG_4)
+        ) {
+            #define INFLICT_STATUS(STATUS_TYPE) \
+                if ((battleStatus->currentAttackStatus & STATUS_FLAG_##STATUS_TYPE) && \
+                    try_inflict_status(target, STATUS_##STATUS_TYPE, STATUS_##STATUS_TYPE##_TURN_MOD)) { \
+                    tempBinary = TRUE; \
+                    wasStatusInflicted = TRUE; \
+                } \
+
+            INFLICT_STATUS(SHRINK);
+            INFLICT_STATUS(POISON);
+            INFLICT_STATUS(STONE);
+            INFLICT_STATUS(SLEEP);
+            INFLICT_STATUS(STOP);
+            INFLICT_STATUS(STATIC);
+            INFLICT_STATUS(FEAR);
+            INFLICT_STATUS(PARALYZE);
+            INFLICT_STATUS(DIZZY);
+
+            #undef INFLICT_STATUS
+
+            if (wasStatusInflicted) {
+                if (dispatchEvent == EVENT_ZERO_DAMAGE) {
+                    dispatchEvent = EVENT_HIT_COMBO;
+                }
+
+                if (dispatchEvent == EVENT_IMMUNE) {
+                    dispatchEvent = EVENT_HIT;
+                }
+            }
+        }
+    } while (0);
 
     battleStatus->wasStatusInflicted = wasStatusInflicted;
     dispatch_event_actor(target, dispatchEvent);
