@@ -1338,7 +1338,7 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
         s32 alpha2;
 
         if (!(state->flags & FOLD_STATE_FLAG_20)) {
-            if ((D_80151328->flags & 1) &&
+            if ((gSpriteShadingProfile->flags & 1) &&
                 (state->arrayIdx != 0) &&
                 (state->flags & someFlags) &&
                 (state->renderType == FOLD_RENDER_TYPE_0
@@ -1374,7 +1374,7 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
                         break;
                 }
 
-                if ((D_80151328->flags & 2) && (D_80156954[0][0].arrayIdx != 0) && (state->flags & someFlags)) {
+                if ((gSpriteShadingProfile->flags & 2) && (D_80156954[0][0].arrayIdx != 0) && (state->flags & someFlags)) {
                     cam = &gCameras[gCurrentCamID];
 
                     if (gGameStatusPtr->isBattle == 2) {
@@ -1411,7 +1411,7 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
                     G_TX_NOLOD, G_TX_NOLOD, // shift,
                     0x100, 0x100); // scroll
 
-                if ((D_80151328->flags & 2) && state->arrayIdx != 0 && (state->flags & someFlags)) {
+                if ((gSpriteShadingProfile->flags & 2) && state->arrayIdx != 0 && (state->flags & someFlags)) {
                     alpha2 = 255;
                     cam = &gCameras[gCurrentCamID];
 
@@ -1467,7 +1467,7 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
             }
         }
 
-        if ((D_80151328->flags & 2) && D_80156954[0][0].arrayIdx != 0 && (state->flags & someFlags)) {
+        if ((gSpriteShadingProfile->flags & 2) && D_80156954[0][0].arrayIdx != 0 && (state->flags & someFlags)) {
             cam = &gCameras[gCurrentCamID];
             if (gGameStatusPtr->isBattle == 2) {
                 gSPViewport(gMasterGfxPos++, &D_8014EE40);
@@ -1506,7 +1506,7 @@ void func_8013DAB4(FoldState* state, Matrix4f mtx) {
             s32 llIdx = firstVtxIdx + (i + 1) * (state->subdivX + 1) + j;
             s32 lrIdx = firstVtxIdx + (i + 1) * (state->subdivX + 1) + j + 1;
             if (!(state->flags & FOLD_STATE_FLAG_20)) {
-                if ((D_80151328->flags & 1) &&
+                if ((gSpriteShadingProfile->flags & 1) &&
                     (*D_80156954)[0].arrayIdx != 0 &&
                     (state->flags & (FOLD_STATE_FLAG_100000 | FOLD_STATE_FLAG_80000)) &&
                     (state->renderType == FOLD_RENDER_TYPE_0
@@ -1575,7 +1575,7 @@ void func_8013E2F0(FoldState* state, Matrix4f mtx) {
     if (!(state->flags & FOLD_STATE_FLAG_20)) {
         gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
         gDPLoadTLUT_pal16(gMasterGfxPos++, 0, fold_currentImage->palette);
-        if ((D_80151328->flags & 1) && (state->flags & (FOLD_STATE_FLAG_100000 | FOLD_STATE_FLAG_80000)) &&
+        if ((gSpriteShadingProfile->flags & 1) && (state->flags & (FOLD_STATE_FLAG_100000 | FOLD_STATE_FLAG_80000)) &&
             (state->renderType == FOLD_RENDER_TYPE_0
             || state->renderType == FOLD_RENDER_TYPE_2
             || state->renderType == FOLD_RENDER_TYPE_7

@@ -25,14 +25,14 @@ void clear_sprite_shading_data(void) {
 
     init_sprite_shading_data();
 
-    for (i = 0; i < ARRAY_COUNT(D_80151328->sources); i++) {
-        D_80151328->sources[i].flags = LIGHT_SOURCE_DISABLED;
+    for (i = 0; i < ARRAY_COUNT(gSpriteShadingProfile->sources); i++) {
+        gSpriteShadingProfile->sources[i].flags = LIGHT_SOURCE_DISABLED;
         D_801512B0->sources[i].flags = LIGHT_SOURCE_DISABLED;
     }
 
-    D_80151328->flags = 0;
-    D_80151328->ambientColor.r = D_80151328->ambientColor.g = D_80151328->ambientColor.b = 50;
-    D_80151328->ambientPower = 10;
+    gSpriteShadingProfile->flags = 0;
+    gSpriteShadingProfile->ambientColor.r = gSpriteShadingProfile->ambientColor.g = gSpriteShadingProfile->ambientColor.b = 50;
+    gSpriteShadingProfile->ambientPower = 10;
 
     D_801512B0->flags = 0;
     D_801512B0->ambientColor.r = D_801512B0->ambientColor.g = D_801512B0->ambientColor.b = 50;
@@ -41,10 +41,10 @@ void clear_sprite_shading_data(void) {
 
 void init_sprite_shading_data(void) {
     if (!gGameStatusPtr->isBattle) {
-        D_80151328 = &D_801595C0;
+        gSpriteShadingProfile = &D_801595C0;
         D_801512B0 = &D_80159720;
     } else {
-        D_80151328 = &D_80159670;
+        gSpriteShadingProfile = &D_80159670;
         D_801512B0 = &D_801597D0;
     }
 }
@@ -52,8 +52,8 @@ void init_sprite_shading_data(void) {
 void sprite_shading_set_light_source(u32 idx, s8 flags, f32 x, f32 y, f32 z, u8 r, u8 g, u8 b, f32 falloff, s8 arg9) {
     SpriteShadingLightSource* lightSource;
 
-    if (idx < ARRAY_COUNT(D_80151328->sources)) {
-        lightSource = &D_80151328->sources[idx];
+    if (idx < ARRAY_COUNT(gSpriteShadingProfile->sources)) {
+        lightSource = &gSpriteShadingProfile->sources[idx];
         lightSource->flags = flags;
         lightSource->pos.x = x;
         lightSource->pos.y = y;
@@ -116,9 +116,9 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
     sp94 = 0.0f;
     sp98 = 0.0f;
 
-    shadowR = D_80151328->ambientColor.r;
-    shadowG = D_80151328->ambientColor.g;
-    shadowB = D_80151328->ambientColor.b;
+    shadowR = gSpriteShadingProfile->ambientColor.r;
+    shadowG = gSpriteShadingProfile->ambientColor.g;
+    shadowB = gSpriteShadingProfile->ambientColor.b;
 
     if (((-sp64 * camera->perspectiveMatrix[0][2]) + (sp68 * camera->perspectiveMatrix[2][2])) < 0.0f) {
         sp60 = 1.0f;
@@ -126,8 +126,8 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
         sp60 = -1.0f;
     }
 
-    for (i = 0; i < ARRAY_COUNT(D_80151328->sources); i++) {
-        lightSource = &D_80151328->sources[i];
+    for (i = 0; i < ARRAY_COUNT(gSpriteShadingProfile->sources); i++) {
+        lightSource = &gSpriteShadingProfile->sources[i];
         if (lightSource->flags & LIGHT_SOURCE_ENABLED) {
             dx = sp54 - lightSource->pos.x;
             dy = sp58 - lightSource->pos.y;
@@ -246,10 +246,10 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
             alpha,
             shadowX, shadowY, shadowZ,
             shadowR, shadowG, shadowB,
-            D_80151328->ambientColor.r + sp78 + sp84,
-            D_80151328->ambientColor.g + sp7C + sp88,
-            D_80151328->ambientColor.b + sp80 + sp8C,
-            D_80151328->ambientPower, otherModeLBits
+            gSpriteShadingProfile->ambientColor.r + sp78 + sp84,
+            gSpriteShadingProfile->ambientColor.g + sp7C + sp88,
+            gSpriteShadingProfile->ambientColor.b + sp80 + sp8C,
+            gSpriteShadingProfile->ambientPower, otherModeLBits
         );
     } else {
         appendGfx_shading_palette(
@@ -258,10 +258,10 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
             alpha,
             shadowX, shadowY, shadowZ,
             shadowR, shadowG, shadowB,
-            D_80151328->ambientColor.r + sp78 + sp90,
-            D_80151328->ambientColor.g + sp7C + sp94,
-            D_80151328->ambientColor.b + sp80 + sp98,
-            D_80151328->ambientPower, otherModeLBits
+            gSpriteShadingProfile->ambientColor.r + sp78 + sp90,
+            gSpriteShadingProfile->ambientColor.g + sp7C + sp94,
+            gSpriteShadingProfile->ambientColor.b + sp80 + sp98,
+            gSpriteShadingProfile->ambientPower, otherModeLBits
         );
     }
 }

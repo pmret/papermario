@@ -107,7 +107,7 @@ extern s8 D_800A0B94;
 extern s16 D_800A0BB8;
 
 extern SpriteShadingProfile* D_801512B0;
-extern SpriteShadingProfile* D_80151328;
+extern SpriteShadingProfile* gSpriteShadingProfile;
 
 extern Window gWindows[64];
 

@@ -103,7 +103,7 @@ dlabel D_80151320
 dlabel entity_numShadows
 .space 4
 
-dlabel D_80151328
+dlabel gSpriteShadingProfile
 .space 4
 
 dlabel entity_area_specific_data_is_loaded

@@ -3,8 +3,8 @@
 API_CALLABLE(N(DisableAllLightSources)) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_80151328->sources); i++) {
-        D_80151328->sources[i].flags = LIGHT_SOURCE_DISABLED;
+    for (i = 0; i < ARRAY_COUNT(gSpriteShadingProfile->sources); i++) {
+        gSpriteShadingProfile->sources[i].flags = LIGHT_SOURCE_DISABLED;
     }
 
     return ApiStatus_DONE2;

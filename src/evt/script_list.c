@@ -66,9 +66,9 @@ BSS s32 D_802DB828[2]; // unused?
 BSS PopupMenu D_802DB830;
 
 // demo_api
-BSS s32 D_802DBB60;
+BSS s32 gSpriteShadingHeader;
 BSS s32 D_802DBB64; // unused?
-BSS s32 D_802DBB68;
+BSS s32 gSpriteShadingData;
 BSS s32 D_802DB8B6C; // unused?
 BSS char D_802DBB70[0x100];
 
