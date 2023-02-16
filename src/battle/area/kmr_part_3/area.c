@@ -24,52 +24,52 @@ extern Stage N(sam_01);
 extern Stage N(mac_01);
 extern Stage N(kpa_01);
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { .actor = &N(spiked_goomba), .home = { .index = 2 }, .priority = 0 },
 };
 
-Formation N(formation_01) = {
+Formation N(Formation_01) = {
     { .actor = &N(paragoomba2), .home = { .index = 5 }, .priority = 10 },
     { .actor = &N(paragoomba1), .home = { .index = 6 }, .priority = 9 },
 };
 
-Formation N(formation_02) = {
+Formation N(Formation_02) = {
     { .actor = &N(jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
-Formation N(formation_03) = {
+Formation N(Formation_03) = {
     { .actor = &N(egg_jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
-Formation N(formation_04) = {
+Formation N(Formation_04) = {
     { .actor = &N(para_jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
-Formation N(formation_05) = {
+Formation N(Formation_05) = {
     { .actor = &N(spiked_para_jr_troopa), .home = { .index = 1 }, .priority = 0 },
 };
 
-Formation N(formation_06) = {
+Formation N(Formation_06) = {
     { .actor = &N(mage_jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
-Formation N(formation_07) = {
+Formation N(Formation_07) = {
     { .actor = &N(final_jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("トゲクリボー（レクチャー）", N(formation_00), &N(kmr_03)),
-    BATTLE("パタクリボー（レクチャー）", N(formation_01), &N(kmr_03)),
-    BATTLE("コワッパ１", N(formation_02), &N(kmr_05)),
-    BATTLE("コワッパ２", N(formation_03), &N(nok_01)),
-    BATTLE("コワッパ４", N(formation_04), &N(mim_01)),
-    BATTLE("コワッパ５", N(formation_05), &N(mac_01)),
-    BATTLE("コワッパ６", N(formation_06), &N(sam_01)),
-    BATTLE("コワッパ７", N(formation_07), &N(kpa_01)),
+BattleList N(Formations) = {
+    BATTLE("トゲクリボー（レクチャー）", N(Formation_00), &N(kmr_03)),
+    BATTLE("パタクリボー（レクチャー）", N(Formation_01), &N(kmr_03)),
+    BATTLE("コワッパ１", N(Formation_02), &N(kmr_05)),
+    BATTLE("コワッパ２", N(Formation_03), &N(nok_01)),
+    BATTLE("コワッパ４", N(Formation_04), &N(mim_01)),
+    BATTLE("コワッパ５", N(Formation_05), &N(mac_01)),
+    BATTLE("コワッパ６", N(Formation_06), &N(sam_01)),
+    BATTLE("コワッパ７", N(Formation_07), &N(kpa_01)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "kmr_02", &N(kmr_02) },
     { "kmr_03", &N(kmr_03) },
     { "kmr_04", &N(kmr_04) },

@@ -8,16 +8,16 @@ extern ActorBlueprint N(eldstar);
 
 extern Stage N(nok_01);
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { .actor = &N(eldstar), .home = { .index = 6 }, .priority = 10 },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("ほしのせい レクチャー",  N(formation_00), &N(nok_01)),
+BattleList N(Formations) = {
+    BATTLE("ほしのせい レクチャー",  N(Formation_00), &N(nok_01)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "nok_01", &N(nok_01) },
     {},
 };

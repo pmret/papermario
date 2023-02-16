@@ -7,16 +7,16 @@ extern ActorBlueprint N(fuzzipede);
 
 extern Stage N(kgr_01);
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { .actor = &N(fuzzipede), .home = { .index = 2 }, .priority = 10 },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("ケムシ", N(formation_00), &N(kgr_01)),
+BattleList N(Formations) = {
+    BATTLE("ケムシ", N(Formation_00), &N(kgr_01)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "kgr_01", &N(kgr_01) },
     {},
 };

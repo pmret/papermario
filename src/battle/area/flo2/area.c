@@ -20,47 +20,47 @@ extern Stage N(flo_06);
 
 Vec3i N(huff_n_puff_pos) = { 80, 80, 0 };
 
-Formation N(formation_01) = {
+Formation N(Formation_01) = {
     { .actor = &N(huff_n_puff), .home = { .vec = &N(huff_n_puff_pos) }, .priority = 10, },
 };
 
-Formation N(formation_02) = {
+Formation N(Formation_02) = {
     { .actor = &N(monty_mole_boss), .home = { .index = 1 }, .priority = 10, },
 };
 
-Formation N(formation_03) = {
+Formation N(Formation_03) = {
     { .actor = &N(monty_mole_boss), .home = { .index = 1 }, .priority = 10, },
     { .actor = &N(monty_mole_boss), .home = { .index = 2 }, .priority = 9, },
 };
 
-Formation N(formation_04) = {
+Formation N(Formation_04) = {
     { .actor = &N(monty_mole_boss), .home = { .index = 0 }, .priority = 10, },
     { .actor = &N(monty_mole_boss), .home = { .index = 1 }, .priority = 9, },
     { .actor = &N(monty_mole_boss), .home = { .index = 2 }, .priority = 8, },
 };
 
-Formation N(formation_05) = {
+Formation N(Formation_05) = {
     { .actor = &N(monty_mole_boss), .home = { .index = 0 }, .priority = 10, },
     { .actor = &N(monty_mole_boss), .home = { .index = 1 }, .priority = 9, },
     { .actor = &N(monty_mole_boss), .home = { .index = 2 }, .priority = 8, },
     { .actor = &N(monty_mole_boss), .home = { .index = 3 }, .priority = 7, },
 };
 
-Formation N(formation_06) = {
+Formation N(Formation_06) = {
     { .actor = &N(spike), .home = { .index = 5 }, .priority = 10, },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("オズモーン", N(formation_01), &N(flo_04)),
-    BATTLE("フラワーチョロプー", N(formation_02), &N(flo_01)),
-    BATTLE("フラワーチョロプーx２", N(formation_03), &N(flo_01)),
-    BATTLE("フラワーチョロプーx３", N(formation_04), &N(flo_01)),
-    BATTLE("フラワーチョロプーx４", N(formation_05), &N(flo_01)),
-    BATTLE("ジョナサン？", N(formation_06), &N(flo_01)),
+BattleList N(Formations) = {
+    BATTLE("オズモーン", N(Formation_01), &N(flo_04)),
+    BATTLE("フラワーチョロプー", N(Formation_02), &N(flo_01)),
+    BATTLE("フラワーチョロプーx２", N(Formation_03), &N(flo_01)),
+    BATTLE("フラワーチョロプーx３", N(Formation_04), &N(flo_01)),
+    BATTLE("フラワーチョロプーx４", N(Formation_05), &N(flo_01)),
+    BATTLE("ジョナサン？", N(Formation_06), &N(flo_01)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "flo_01", &N(flo_01) },
     { "flo_01b", &N(flo_01b) },
     { "flo_01c", &N(flo_01c) },

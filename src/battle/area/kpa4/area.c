@@ -23,12 +23,12 @@ extern Stage N(kpa_11);
 extern Stage N(kpa_13);
 extern Stage N(kpa_14);
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { .actor = &N(bombshell_bill), .home = { .index = 1 }, .priority = 10, },
     { .actor = &N(bombshell_bill), .home = { .index = 2 }, .priority = 9, },
 };
 
-Formation N(formation_01) = {
+Formation N(Formation_01) = {
     { .actor = &N(bombshell_bill), .home = { .index = 0 }, .priority = 10, },
     { .actor = &N(bombshell_bill), .home = { .index = 1 }, .priority = 9, },
     { .actor = &N(bombshell_bill), .home = { .index = 2 }, .priority = 8, },
@@ -38,35 +38,35 @@ Vec3i N(blaster_pos_1) = { 70, 0, -20 };
 
 Vec3i N(blaster_pos_2) = { 100, 0, 0 };
 
-Formation N(formation_02) = {
+Formation N(Formation_02) = {
     { .actor = &N(bombshell_bill_blaster), .home = { .vec = &N(blaster_pos_1) }, .priority = 10, },
     { .actor = &N(bombshell_bill_blaster), .home = { .vec = &N(blaster_pos_2) }, .priority = 9, },
 };
 
 Vec3i N(pos_3) = { 130, 0, 25 };
 
-Formation N(formation_03) = {
+Formation N(Formation_03) = {
     { .actor = &N(bombshell_bill_blaster), .home = { .vec = &N(blaster_pos_1) }, .priority = 10, },
     { .actor = &N(bombshell_bill_blaster), .home = { .vec = &N(blaster_pos_2) }, .priority = 9, },
     { .actor = &N(koopatrol), .home = { .vec = &N(pos_3) }, .priority = 8, },
 };
 
-Formation N(formation_04) = {
+Formation N(Formation_04) = {
     { .actor = &N(bombshell_bill_blaster), .home = { .vec = &N(blaster_pos_1) }, .priority = 10, },
     { .actor = &N(bombshell_bill_blaster), .home = { .vec = &N(blaster_pos_2) }, .priority = 9, },
     { .actor = &N(magikoopa), .home = { .vec = &N(pos_3) }, .priority = 8, },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("スーパーキラーx２", N(formation_00), &N(kpa_01)),
-    BATTLE("スーパーキラーx３", N(formation_01), &N(kpa_01)),
-    BATTLE("スーパーキラーたいほうx２", N(formation_02), &N(kpa_01)),
-    BATTLE("スーパーキラーたいほうx２,トゲノコ", N(formation_03), &N(kpa_01)),
-    BATTLE("スーパーキラーたいほうx２,カメック", N(formation_04), &N(kpa_01)),
+BattleList N(Formations) = {
+    BATTLE("スーパーキラーx２", N(Formation_00), &N(kpa_01)),
+    BATTLE("スーパーキラーx３", N(Formation_01), &N(kpa_01)),
+    BATTLE("スーパーキラーたいほうx２", N(Formation_02), &N(kpa_01)),
+    BATTLE("スーパーキラーたいほうx２,トゲノコ", N(Formation_03), &N(kpa_01)),
+    BATTLE("スーパーキラーたいほうx２,カメック", N(Formation_04), &N(kpa_01)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "kpa_01", &N(kpa_01) },
     { "kpa_01b", &N(kpa_01b) },
     { "kpa_02", &N(kpa_02) },

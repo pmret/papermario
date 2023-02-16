@@ -13,86 +13,86 @@ extern Stage N(kmr_04);
 extern Stage N(kmr_05);
 extern Stage N(kmr_06);
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { &N(goomba), .home = { .index = 1 }, .priority = 10 },
 };
 
-Formation N(formation_01) = {
+Formation N(Formation_01) = {
     { &N(goomba), .home = { .index = 1 }, .priority = 10 },
     { &N(goomba), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_02) = {
+Formation N(Formation_02) = {
     { &N(goomba), .home = { .index = 0 }, .priority = 10 },
     { &N(goomba), .home = { .index = 1 }, .priority = 9 },
     { &N(goomba), .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_03) = {
+Formation N(Formation_03) = {
     { &N(goomba), .home = { .index = 1 }, .priority = 10 },
     { &N(paragoomba), .home = { .index = 6 }, .priority = 9 },
 };
 
-Formation N(formation_04) = {
+Formation N(Formation_04) = {
     { &N(goomba), .home = { .index = 0 }, .priority = 10 },
     { &N(goomba), .home = { .index = 1 }, .priority = 9 },
     { &N(goomba), .home = { .index = 2 }, .priority = 8 },
     { &N(goomba), .home = { .index = 3 }, .priority = 7 },
 };
 
-Formation N(formation_05) = {
+Formation N(Formation_05) = {
     { &N(goomba), .home = { .index = 1 }, .priority = 10 },
     { &N(spiked_goomba), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_06) = {
+Formation N(Formation_06) = {
     { &N(goomba), .home = { .index = 0 }, .priority = 10 },
     { &N(paragoomba), .home = { .index = 5 }, .priority = 9 },
     { &N(goomba), .home = { .index = 2 }, .priority = 8 },
     { &N(paragoomba), .home = { .index = 7 }, .priority = 7 },
 };
 
-Formation N(formation_07) = {
+Formation N(Formation_07) = {
     { &N(paragoomba), .home = { .index = 5 }, .priority = 10 },
 };
 
-Formation N(formation_08) = {
+Formation N(Formation_08) = {
     { &N(paragoomba), .home = { .index = 5 }, .priority = 10 },
     { &N(paragoomba), .home = { .index = 6 }, .priority = 9 },
 };
 
-Formation N(formation_09) = {
+Formation N(Formation_09) = {
     { &N(paragoomba), .home = { .index = 4 }, .priority = 10 },
     { &N(paragoomba), .home = { .index = 5 }, .priority = 9 },
     { &N(paragoomba), .home = { .index = 6 }, .priority = 8 },
 };
 
-Formation N(formation_0A) = {
+Formation N(Formation_0A) = {
     { &N(spiked_goomba), .home = { .index = 1 }, .priority = 10 },
 };
 
-Formation N(formation_0B) = {
+Formation N(Formation_0B) = {
     { &N(spiked_goomba), .home = { .index = 1 }, .priority = 10 },
     { &N(goomba), .home = { .index = 2 }, .priority = 9 },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("クリボー", N(formation_00), &N(kmr_04)),
-    BATTLE("クリボーx２", N(formation_01), &N(kmr_04)),
-    BATTLE("クリボーx３", N(formation_02), &N(kmr_04)),
-    BATTLE("クリボー、パタクリボー", N(formation_03), &N(kmr_04)),
-    BATTLE("クリボーx４", N(formation_04), &N(kmr_04)),
-    BATTLE("クリボー,トゲクリボー", N(formation_05), &N(kmr_04)),
-    BATTLE("クリボー,パタクリボー,クリボー,パタクリボー", N(formation_06), &N(kmr_04)),
-    BATTLE("パタクリボー", N(formation_07), &N(kmr_04)),
-    BATTLE("パタクリボーx２", N(formation_08), &N(kmr_04)),
-    BATTLE("パタクリボーx３", N(formation_09), &N(kmr_04)),
-    BATTLE("トゲクリボー", N(formation_0A), &N(kmr_04)),
-    BATTLE("トゲクリボー、クリボー", N(formation_0B), &N(kmr_04)),
+BattleList N(Formations) = {
+    BATTLE("クリボー", N(Formation_00), &N(kmr_04)),
+    BATTLE("クリボーx２", N(Formation_01), &N(kmr_04)),
+    BATTLE("クリボーx３", N(Formation_02), &N(kmr_04)),
+    BATTLE("クリボー、パタクリボー", N(Formation_03), &N(kmr_04)),
+    BATTLE("クリボーx４", N(Formation_04), &N(kmr_04)),
+    BATTLE("クリボー,トゲクリボー", N(Formation_05), &N(kmr_04)),
+    BATTLE("クリボー,パタクリボー,クリボー,パタクリボー", N(Formation_06), &N(kmr_04)),
+    BATTLE("パタクリボー", N(Formation_07), &N(kmr_04)),
+    BATTLE("パタクリボーx２", N(Formation_08), &N(kmr_04)),
+    BATTLE("パタクリボーx３", N(Formation_09), &N(kmr_04)),
+    BATTLE("トゲクリボー", N(Formation_0A), &N(kmr_04)),
+    BATTLE("トゲクリボー、クリボー", N(Formation_0B), &N(kmr_04)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "kmr_02", &N(kmr_02) },
     { "kmr_03", &N(kmr_03) },
     { "kmr_04", &N(kmr_04) },

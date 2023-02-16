@@ -17,7 +17,7 @@ extern Stage N(kzn_05);
 
 Vec3i N(lava_piranha_pos) = { 60, 60, 0 };
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { .actor = &N(lava_piranha), .home = { .vec = &N(lava_piranha_pos) }, .priority = 60, },
 };
 
@@ -25,18 +25,18 @@ Vec3i N(petit_piranha_pos1) = { 40, 60, 0 };
 
 Vec3i N(petit_piranha_pos2) = { 80, 60, 0 };
 
-Formation N(formation_01) = {
+Formation N(Formation_01) = {
     { .actor = &N(petit_piranha), .home = { .vec = &N(petit_piranha_pos1) }, .priority = 10, },
     { .actor = &N(petit_piranha), .home = { .vec = &N(petit_piranha_pos2) }, .priority = 10, },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("ファイアパックン", N(formation_00), &N(kzn_05)),
-    BATTLE("プチパックン", N(formation_01), &N(kzn_05)),
+BattleList N(Formations) = {
+    BATTLE("ファイアパックン", N(Formation_00), &N(kzn_05)),
+    BATTLE("プチパックン", N(Formation_01), &N(kzn_05)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "kzn_01", &N(kzn_01) },
     { "kzn_01b", &N(kzn_01b) },
     { "kzn_02", &N(kzn_02) },

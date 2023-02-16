@@ -13,8 +13,8 @@ extern StageListRow* gCurrentStagePtr;
     .dmaStart = battle_area_##id##_ROM_START, \
     .dmaEnd = battle_area_##id##_ROM_END, \
     .dmaDest = battle_area_##id##_VRAM, \
-    .battles = &b_area_##id##_formationTable, \
-    .stages = &b_area_##id##_stageTable, \
+    .battles = &b_area_##id##_Formations, \
+    .stages = &b_area_##id##_Stages, \
     .name = jpName, \
 } \
 
@@ -23,8 +23,8 @@ extern StageListRow* gCurrentStagePtr;
     .dmaStart = battle_area_##id##_ROM_START, \
     .dmaEnd = battle_area_##id##_ROM_END, \
     .dmaDest = battle_area_##id##_VRAM, \
-    .battles = &b_area_##id##_formationTable, \
-    .stages = &b_area_##id##_stageTable, \
+    .battles = &b_area_##id##_Formations, \
+    .stages = &b_area_##id##_Stages, \
     .dmaTable = b_area_##id##_dmaTable, \
     .name = jpName, \
 } \

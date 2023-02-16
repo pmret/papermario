@@ -12,37 +12,37 @@ extern Stage N(tik_03);
 extern Stage N(tik_04);
 extern Stage N(tik_05);
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { .actor = &N(swooper), .home = { .index = 13 }, .priority = 10, },
     { .actor = &N(swooper), .home = { .index = 14 }, .priority = 9, },
 };
 
-Formation N(formation_01) = {
+Formation N(Formation_01) = {
     { .actor = &N(swooper), .home = { .index = 12 }, .priority = 10, },
     { .actor = &N(swooper), .home = { .index = 13 }, .priority = 9, },
     { .actor = &N(swooper), .home = { .index = 14 }, .priority = 8, },
 };
 
-Formation N(formation_02) = {
+Formation N(Formation_02) = {
     { .actor = &N(swoopula), .home = { .index = 13 }, .priority = 10, },
     { .actor = &N(swoopula), .home = { .index = 14 }, .priority = 9, },
 };
 
-Formation N(formation_03) = {
+Formation N(Formation_03) = {
     { .actor = &N(swoopula), .home = { .index = 12 }, .priority = 10, },
     { .actor = &N(swoopula), .home = { .index = 13 }, .priority = 9, },
     { .actor = &N(swoopula), .home = { .index = 14 }, .priority = 8, },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("バサバサx２", N(formation_00), &N(tik_01)),
-    BATTLE("バサバサx３", N(formation_01), &N(tik_01)),
-    BATTLE("バサバサチュルルx２", N(formation_02), &N(tik_01)),
-    BATTLE("バサバサチュルルx３", N(formation_03), &N(tik_01)),
+BattleList N(Formations) = {
+    BATTLE("バサバサx２", N(Formation_00), &N(tik_01)),
+    BATTLE("バサバサx３", N(Formation_01), &N(tik_01)),
+    BATTLE("バサバサチュルルx２", N(Formation_02), &N(tik_01)),
+    BATTLE("バサバサチュルルx３", N(Formation_03), &N(tik_01)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "tik_01", &N(tik_01) },
     { "tik_02", &N(tik_02) },
     { "tik_03", &N(tik_03) },

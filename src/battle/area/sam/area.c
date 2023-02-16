@@ -82,12 +82,12 @@ Vec3i N(pos_rocks_8)[] = {
     { -28, 0, -46 },
 };
 
-Formation N(formation_01) = {
+Formation N(Formation_01) = {
     { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_02) = {
+Formation N(Formation_02) = {
     { .actor = &N(gulpit), .home = { .index = 1 }, .priority = 20 },
     { .actor = &N(gulpit), .home = { .index = 2 }, .priority = 19 },
     { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_1)[0] }, .priority = 9 },
@@ -97,7 +97,7 @@ Formation N(formation_02) = {
     { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_1)[4] }, .priority = 5, .var0 = 1 },
 };
 
-Formation N(formation_03) = {
+Formation N(Formation_03) = {
     { .actor = &N(gulpit), .home = { .index = 0 }, .priority = 20 },
     { .actor = &N(gulpit), .home = { .index = 1 }, .priority = 19 },
     { .actor = &N(gulpit), .home = { .index = 2 }, .priority = 18 },
@@ -108,7 +108,7 @@ Formation N(formation_03) = {
     { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_2)[4] }, .priority = 5, .var0 = 1 },
 };
 
-Formation N(formation_04) = {
+Formation N(Formation_04) = {
     { .actor = &N(gulpit), .home = { .index = 0 }, .priority = 20 },
     { .actor = &N(gulpit), .home = { .index = 1 }, .priority = 19 },
     { .actor = &N(frost_piranha), .home = { .index = 2 }, .priority = 18 },
@@ -119,7 +119,7 @@ Formation N(formation_04) = {
     { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_3)[4] }, .priority = 5, .var0 = 1 },
 };
 
-Formation N(formation_05) = {
+Formation N(Formation_05) = {
     { .actor = &N(gulpit), .home = { .index = 0 }, .priority = 20 },
     { .actor = &N(frost_piranha), .home = { .index = 1 }, .priority = 19 },
     { .actor = &N(gulpit), .home = { .index = 2 }, .priority = 18 },
@@ -130,7 +130,7 @@ Formation N(formation_05) = {
     { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_4)[4] }, .priority = 5, .var0 = 1 },
 };
 
-Formation N(formation_06) = {
+Formation N(Formation_06) = {
     { .actor = &N(gulpit), .home = { .index = 0 }, .priority = 20 },
     { .actor = &N(frost_piranha), .home = { .index = 1 }, .priority = 19 },
     { .actor = &N(gulpit), .home = { .index = 2 }, .priority = 18 },
@@ -142,19 +142,19 @@ Formation N(formation_06) = {
     { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_5)[4] }, .priority = 5, .var0 = 1 },
 };
 
-Formation N(formation_07) = {
+Formation N(Formation_07) = {
     { .actor = &N(frost_piranha), .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(frost_piranha), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_08) = {
+Formation N(Formation_08) = {
     { .actor = &N(frost_piranha), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(frost_piranha), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(frost_piranha), .home = { .index = 2 }, .priority = 8 },
     { .actor = &N(frost_piranha), .home = { .index = 3 }, .priority = 7 },
 };
 
-Formation N(formation_09) = {
+Formation N(Formation_09) = {
     { .actor = &N(frost_piranha), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(frost_piranha), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(gulpit), .home = { .index = 2 }, .priority = 9 },
@@ -165,7 +165,7 @@ Formation N(formation_09) = {
     { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_6)[4] }, .priority = 5, .var0 = 1 },
 };
 
-Formation N(formation_0A) = {
+Formation N(Formation_0A) = {
     { .actor = &N(frost_piranha), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(gulpit), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(frost_piranha), .home = { .index = 2 }, .priority = 8 },
@@ -176,7 +176,7 @@ Formation N(formation_0A) = {
     { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_7)[4] }, .priority = 5, .var0 = 1 },
 };
 
-Formation N(formation_0B) = {
+Formation N(Formation_0B) = {
     { .actor = &N(frost_piranha), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(gulpit), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(frost_piranha), .home = { .index = 2 }, .priority = 8 },
@@ -188,44 +188,44 @@ Formation N(formation_0B) = {
     { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_8)[4] }, .priority = 5, .var0 = 1 },
 };
 
-Formation N(formation_0C) = {
+Formation N(Formation_0C) = {
     { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(white_clubba), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_0D) = {
+Formation N(Formation_0D) = {
     { .actor = &N(white_clubba), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(frost_piranha), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(white_clubba), .home = { .index = 2 }, .priority = 8 },
     { .actor = &N(frost_piranha), .home = { .index = 3 }, .priority = 7 },
 };
 
-Formation N(formation_0E) = {
+Formation N(Formation_0E) = {
     { .actor = &N(white_clubba), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(frost_piranha), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(white_clubba), .home = { .index = 2 }, .priority = 8 },
     { .actor = &N(gray_magikoopa), .home = { .index = 3 }, .priority = 7 },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("バケバケx2", N(formation_01), &N(sam_01)),
-    BATTLE("ゴックンx2", N(formation_02), &N(sam_01)),
-    BATTLE("ゴックンx3", N(formation_03), &N(sam_01)),
-    BATTLE("ゴックンx2,アイスパックン", N(formation_04), &N(sam_01)),
-    BATTLE("ゴックン,アイスパックン,ゴックン", N(formation_05), &N(sam_01)),
-    BATTLE("ゴックン,アイスパックン,ゴックン,アイスパックン", N(formation_06), &N(sam_01)),
-    BATTLE("アイスパックンx２", N(formation_07), &N(sam_01)),
-    BATTLE("アイスパックンx４", N(formation_08), &N(sam_01)),
-    BATTLE("アイスパックンx２,ゴックン", N(formation_09), &N(sam_01)),
-    BATTLE("アイスパックン,ゴックン,アイスパックン", N(formation_0A), &N(sam_01)),
-    BATTLE("アイスパックン,ゴックン,アイスパックン,ゴックン", N(formation_0B), &N(sam_01)),
-    BATTLE("ホワイトガボンx２", N(formation_0C), &N(sam_01)),
-    BATTLE("ホワイトガボン,パックン,ガボン,パックン", N(formation_0D), &N(sam_01)),
-    BATTLE("ホワイトガボン,パックン,ガボン,グレイカメック", N(formation_0E), &N(sam_01)),
+BattleList N(Formations) = {
+    BATTLE("バケバケx2", N(Formation_01), &N(sam_01)),
+    BATTLE("ゴックンx2", N(Formation_02), &N(sam_01)),
+    BATTLE("ゴックンx3", N(Formation_03), &N(sam_01)),
+    BATTLE("ゴックンx2,アイスパックン", N(Formation_04), &N(sam_01)),
+    BATTLE("ゴックン,アイスパックン,ゴックン", N(Formation_05), &N(sam_01)),
+    BATTLE("ゴックン,アイスパックン,ゴックン,アイスパックン", N(Formation_06), &N(sam_01)),
+    BATTLE("アイスパックンx２", N(Formation_07), &N(sam_01)),
+    BATTLE("アイスパックンx４", N(Formation_08), &N(sam_01)),
+    BATTLE("アイスパックンx２,ゴックン", N(Formation_09), &N(sam_01)),
+    BATTLE("アイスパックン,ゴックン,アイスパックン", N(Formation_0A), &N(sam_01)),
+    BATTLE("アイスパックン,ゴックン,アイスパックン,ゴックン", N(Formation_0B), &N(sam_01)),
+    BATTLE("ホワイトガボンx２", N(Formation_0C), &N(sam_01)),
+    BATTLE("ホワイトガボン,パックン,ガボン,パックン", N(Formation_0D), &N(sam_01)),
+    BATTLE("ホワイトガボン,パックン,ガボン,グレイカメック", N(Formation_0E), &N(sam_01)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "sam_01", &N(sam_01) },
     { "sam_02", &N(sam_02) },
     { "sam_02b", &N(sam_02b) },

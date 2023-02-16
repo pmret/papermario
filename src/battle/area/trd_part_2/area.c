@@ -23,7 +23,7 @@ extern Stage N(trd_05d);
 extern Stage N(trd_05e);
 extern Stage N(trd_05f);
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { .actor = &N(green_ninja_koopa), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(yellow_ninja_koopa), .home = { .index = 0 }, .priority = 9 },
     { .actor = &N(blue_ninja_koopa), .home = { .index = 0 }, .priority = 8 },
@@ -31,12 +31,12 @@ Formation N(formation_00) = {
     { .actor = &N(fake_bowser), .home = { .index = 3 }, .priority = 6 },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("ノコブロス", N(formation_00), &N(trd_00)),
+BattleList N(Formations) = {
+    BATTLE("ノコブロス", N(Formation_00), &N(trd_00)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "trd_00",  &N(trd_00) },
     { "trd_01",  &N(trd_01) },
     { "trd_02",  &N(trd_02) },

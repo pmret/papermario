@@ -23,46 +23,46 @@ extern EvtScript N(dig_03_script);
 extern EvtScript N(dig_04_script);
 extern EvtScript N(dig_05_script);
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { .actor = &N(fuzzy), .home = { .index = 0 }, .priority = 10, },
     { .actor = &N(fuzzy), .home = { .index = 1 }, .priority = 9, },
     { .actor = &N(fuzzy), .home = { .index = 2 }, .priority = 8, },
     { .actor = &N(fuzzy), .home = { .index = 3 }, .priority = 7, },
 };
 
-Formation N(formation_01) = {
+Formation N(Formation_01) = {
     { .actor = &N(monty_mole), .home = { .index = 1 }, .priority = 10, },
     { .actor = &N(monty_mole), .home = { .index = 2 }, .priority = 9, },
     { .actor = &N(monty_mole), .home = { .index = 3 }, .priority = 8, },
 };
 
-Formation N(formation_02) = {
+Formation N(Formation_02) = {
     { .actor = &N(pokey), .home = { .index = 1 }, .priority = 10, },
     { .actor = &N(bandit), .home = { .index = 2 }, .priority = 9, },
     { .actor = &N(pokey), .home = { .index = 3 }, .priority = 8, },
 };
 
-Formation N(formation_03) = {
+Formation N(Formation_03) = {
     { .actor = &N(red_shy_guy), .home = { .index = 0 }, .priority = 10, },
     { .actor = &N(red_shy_guy), .home = { .index = 1 }, .priority = 9, },
     { .actor = &N(red_shy_guy), .home = { .index = 2 }, .priority = 8, },
     { .actor = &N(red_shy_guy), .home = { .index = 3 }, .priority = 7, },
 };
 
-Formation N(formation_04) = {
+Formation N(Formation_04) = {
     { .actor = &N(tubba_blubba), .home = { .index = 2 }, .priority = 10, },
 };
 
-BattleList N(formationTable) = {
-    BATTLE_WITH_SCRIPT("ダイジェスト０１", N(formation_00), &N(dig_01), &N(dig_01_script)),
-    BATTLE_WITH_SCRIPT("ダイジェスト０２", N(formation_01), &N(dig_02), &N(dig_02_script)),
-    BATTLE_WITH_SCRIPT("ダイジェスト０３", N(formation_02), &N(dig_03), &N(dig_03_script)),
-    BATTLE_WITH_SCRIPT("ダイジェスト０４", N(formation_03), &N(dig_04), &N(dig_04_script)),
-    BATTLE_WITH_SCRIPT("ダイジェスト０５", N(formation_04), &N(dig_05), &N(dig_05_script)),
+BattleList N(Formations) = {
+    BATTLE_WITH_SCRIPT("ダイジェスト０１", N(Formation_00), &N(dig_01), &N(dig_01_script)),
+    BATTLE_WITH_SCRIPT("ダイジェスト０２", N(Formation_01), &N(dig_02), &N(dig_02_script)),
+    BATTLE_WITH_SCRIPT("ダイジェスト０３", N(Formation_02), &N(dig_03), &N(dig_03_script)),
+    BATTLE_WITH_SCRIPT("ダイジェスト０４", N(Formation_03), &N(dig_04), &N(dig_04_script)),
+    BATTLE_WITH_SCRIPT("ダイジェスト０５", N(Formation_04), &N(dig_05), &N(dig_05_script)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "dig_01", &N(dig_01) },
     { "dig_02", &N(dig_02) },
     { "dig_03", &N(dig_03) },

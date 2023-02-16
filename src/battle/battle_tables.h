@@ -4,125 +4,125 @@
 #include "common.h"
 #include "battle/battle.h"
 
-extern BattleList b_area_kmr_part_1_formationTable;
-extern StageList b_area_kmr_part_1_stageTable;
+extern BattleList b_area_kmr_part_1_Formations;
+extern StageList b_area_kmr_part_1_Stages;
 
-extern BattleList b_area_kmr_part_2_formationTable;
-extern StageList b_area_kmr_part_2_stageTable;
+extern BattleList b_area_kmr_part_2_Formations;
+extern StageList b_area_kmr_part_2_Stages;
 
-extern BattleList b_area_kmr_part_3_formationTable;
-extern StageList b_area_kmr_part_3_stageTable;
+extern BattleList b_area_kmr_part_3_Formations;
+extern StageList b_area_kmr_part_3_Stages;
 
-extern BattleList b_area_mac_formationTable;
-extern StageList b_area_mac_stageTable;
+extern BattleList b_area_mac_Formations;
+extern StageList b_area_mac_Stages;
 
-extern BattleList b_area_hos_formationTable;
-extern StageList b_area_hos_stageTable;
+extern BattleList b_area_hos_Formations;
+extern StageList b_area_hos_Stages;
 
-extern BattleList b_area_nok_formationTable;
-extern StageList b_area_nok_stageTable;
+extern BattleList b_area_nok_Formations;
+extern StageList b_area_nok_Stages;
 
-extern BattleList b_area_trd_part_1_formationTable;
-extern StageList b_area_trd_part_1_stageTable;
+extern BattleList b_area_trd_part_1_Formations;
+extern StageList b_area_trd_part_1_Stages;
 
-extern BattleList b_area_trd_part_2_formationTable;
-extern StageList b_area_trd_part_2_stageTable;
+extern BattleList b_area_trd_part_2_Formations;
+extern StageList b_area_trd_part_2_Stages;
 
-extern BattleList b_area_trd_part_3_formationTable;
-extern StageList b_area_trd_part_3_stageTable;
+extern BattleList b_area_trd_part_3_Formations;
+extern StageList b_area_trd_part_3_Stages;
 
-extern BattleList b_area_iwa_formationTable;
-extern StageList b_area_iwa_stageTable;
+extern BattleList b_area_iwa_Formations;
+extern StageList b_area_iwa_Stages;
 
-extern BattleList b_area_sbk_formationTable;
-extern StageList b_area_sbk_stageTable;
+extern BattleList b_area_sbk_Formations;
+extern StageList b_area_sbk_Stages;
 
-extern BattleList b_area_isk_part_1_formationTable;
-extern StageList b_area_isk_part_1_stageTable;
+extern BattleList b_area_isk_part_1_Formations;
+extern StageList b_area_isk_part_1_Stages;
 
-extern BattleList b_area_isk_part_2_formationTable;
-extern StageList b_area_isk_part_2_stageTable;
+extern BattleList b_area_isk_part_2_Formations;
+extern StageList b_area_isk_part_2_Stages;
 
-extern BattleList b_area_mim_formationTable;
-extern StageList b_area_mim_stageTable;
+extern BattleList b_area_mim_Formations;
+extern StageList b_area_mim_Stages;
 
-extern BattleList b_area_arn_formationTable;
-extern StageList b_area_arn_stageTable;
+extern BattleList b_area_arn_Formations;
+extern StageList b_area_arn_Stages;
 
-extern BattleList b_area_dgb_formationTable;
-extern StageList b_area_dgb_stageTable;
+extern BattleList b_area_dgb_Formations;
+extern StageList b_area_dgb_Stages;
 
-extern BattleList b_area_omo_formationTable;
-extern StageList b_area_omo_stageTable;
+extern BattleList b_area_omo_Formations;
+extern StageList b_area_omo_Stages;
 
-extern BattleList b_area_omo2_formationTable;
-extern StageList b_area_omo2_stageTable;
+extern BattleList b_area_omo2_Formations;
+extern StageList b_area_omo2_Stages;
 
-extern BattleList b_area_omo3_formationTable;
-extern StageList b_area_omo3_stageTable;
+extern BattleList b_area_omo3_Formations;
+extern StageList b_area_omo3_Stages;
 
-extern BattleList b_area_kgr_formationTable;
-extern StageList b_area_kgr_stageTable;
+extern BattleList b_area_kgr_Formations;
+extern StageList b_area_kgr_Stages;
 
-extern BattleList b_area_jan_formationTable;
-extern StageList b_area_jan_stageTable;
+extern BattleList b_area_jan_Formations;
+extern StageList b_area_jan_Stages;
 
-extern BattleList b_area_jan2_formationTable;
-extern StageList b_area_jan2_stageTable;
+extern BattleList b_area_jan2_Formations;
+extern StageList b_area_jan2_Stages;
 
-extern BattleList b_area_kzn_formationTable;
-extern StageList b_area_kzn_stageTable;
+extern BattleList b_area_kzn_Formations;
+extern StageList b_area_kzn_Stages;
 
-extern BattleList b_area_kzn2_formationTable;
-extern StageList b_area_kzn2_stageTable;
+extern BattleList b_area_kzn2_Formations;
+extern StageList b_area_kzn2_Stages;
 extern DmaTable b_area_kzn2_dmaTable[];
 
-extern BattleList b_area_flo_formationTable;
-extern StageList b_area_flo_stageTable;
+extern BattleList b_area_flo_Formations;
+extern StageList b_area_flo_Stages;
 
-extern BattleList b_area_flo2_formationTable;
-extern StageList b_area_flo2_stageTable;
+extern BattleList b_area_flo2_Formations;
+extern StageList b_area_flo2_Stages;
 
-extern BattleList b_area_tik_formationTable;
-extern StageList b_area_tik_stageTable;
+extern BattleList b_area_tik_Formations;
+extern StageList b_area_tik_Stages;
 
-extern BattleList b_area_tik2_formationTable;
-extern StageList b_area_tik2_stageTable;
+extern BattleList b_area_tik2_Formations;
+extern StageList b_area_tik2_Stages;
 
-extern BattleList b_area_tik3_formationTable;
-extern StageList b_area_tik3_stageTable;
+extern BattleList b_area_tik3_Formations;
+extern StageList b_area_tik3_Stages;
 
-extern BattleList b_area_sam_formationTable;
-extern StageList b_area_sam_stageTable;
+extern BattleList b_area_sam_Formations;
+extern StageList b_area_sam_Stages;
 
-extern BattleList b_area_sam2_formationTable;
-extern StageList b_area_sam2_stageTable;
+extern BattleList b_area_sam2_Formations;
+extern StageList b_area_sam2_Stages;
 
-extern BattleList b_area_pra_formationTable;
-extern StageList b_area_pra_stageTable;
+extern BattleList b_area_pra_Formations;
+extern StageList b_area_pra_Stages;
 
-extern BattleList b_area_pra2_formationTable;
-extern StageList b_area_pra2_stageTable;
+extern BattleList b_area_pra2_Formations;
+extern StageList b_area_pra2_Stages;
 
-extern BattleList b_area_pra3_formationTable;
-extern StageList b_area_pra3_stageTable;
+extern BattleList b_area_pra3_Formations;
+extern StageList b_area_pra3_Stages;
 
-extern BattleList b_area_kpa_formationTable;
-extern StageList b_area_kpa_stageTable;
+extern BattleList b_area_kpa_Formations;
+extern StageList b_area_kpa_Stages;
 
-extern BattleList b_area_kpa2_formationTable;
-extern StageList b_area_kpa2_stageTable;
+extern BattleList b_area_kpa2_Formations;
+extern StageList b_area_kpa2_Stages;
 
-extern BattleList b_area_kpa3_formationTable;
-extern StageList b_area_kpa3_stageTable;
+extern BattleList b_area_kpa3_Formations;
+extern StageList b_area_kpa3_Stages;
 
-extern BattleList b_area_kpa4_formationTable;
-extern StageList b_area_kpa4_stageTable;
+extern BattleList b_area_kpa4_Formations;
+extern StageList b_area_kpa4_Stages;
 
-extern BattleList b_area_kkj_formationTable;
-extern StageList b_area_kkj_stageTable;
+extern BattleList b_area_kkj_Formations;
+extern StageList b_area_kkj_Stages;
 
-extern BattleList b_area_dig_formationTable;
-extern StageList b_area_dig_stageTable;
+extern BattleList b_area_dig_Formations;
+extern StageList b_area_dig_Stages;
 
 #endif

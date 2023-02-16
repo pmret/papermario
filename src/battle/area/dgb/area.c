@@ -12,22 +12,22 @@ extern Stage N(dgb_03);
 extern Stage N(dgb_04);
 extern Stage N(dgb_05);
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { .actor = &N(clubba), .home = { .index = 1 }, .priority = 10 },
 };
 
-Formation N(formation_01) = {
+Formation N(Formation_01) = {
     { .actor = &N(clubba), .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(clubba), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_02) = {
+Formation N(Formation_02) = {
     { .actor = &N(clubba), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(clubba), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(clubba), .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_03) = {
+Formation N(Formation_03) = {
     { .actor = &N(clubba), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(clubba), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(clubba), .home = { .index = 2 }, .priority = 8 },
@@ -36,25 +36,25 @@ Formation N(formation_03) = {
 
 Vec3i N(vector3D_8021B348) = { 75, 0, 10 };
 
-Formation N(formation_04) = {
+Formation N(Formation_04) = {
     { .actor = &N(tubba_blubba), .home = { .vec = &N(vector3D_8021B348) }, .priority = 10 },
 };
 
-Formation N(formation_05) = {
+Formation N(Formation_05) = {
     { .actor = &N(tubba_blubba), .home = { .vec = &N(vector3D_8021B348) }, .priority = 10, .var0 = 1 },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("ガボンへい", N(formation_00), &N(dgb_01)),
-    BATTLE("ガボンへいx２", N(formation_01), &N(dgb_01)),
-    BATTLE("ガボンへいx３", N(formation_02), &N(dgb_01)),
-    BATTLE("ガボンへいx４", N(formation_03), &N(dgb_01)),
-    BATTLE("むてきドガボン", N(formation_04), &N(dgb_01)),
-    BATTLE("むてきドガボンせりふなし", N(formation_05), &N(dgb_01)),
+BattleList N(Formations) = {
+    BATTLE("ガボンへい", N(Formation_00), &N(dgb_01)),
+    BATTLE("ガボンへいx２", N(Formation_01), &N(dgb_01)),
+    BATTLE("ガボンへいx３", N(Formation_02), &N(dgb_01)),
+    BATTLE("ガボンへいx４", N(Formation_03), &N(dgb_01)),
+    BATTLE("むてきドガボン", N(Formation_04), &N(dgb_01)),
+    BATTLE("むてきドガボンせりふなし", N(Formation_05), &N(dgb_01)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "dgb_01", &N(dgb_01) },
     { "dgb_02", &N(dgb_02) },
     { "dgb_03", &N(dgb_03) },

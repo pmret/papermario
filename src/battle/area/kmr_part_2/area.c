@@ -20,7 +20,7 @@ extern Stage N(kmr_06);
 Vec3i N(pos00) = { 14, 0, -10 };
 Vec3i N(pos01) = { 54, 0,  32 };
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { .actor = &N(blue_goomba), .home = { .vec = &N(pos00) }, .priority = 10 },
     { .actor = &N(red_goomba),  .home = { .vec = &N(pos01) }, .priority = 10 },
 };
@@ -30,20 +30,20 @@ Vec3i N(pos03) = {  70, 0,  30 };
 Vec3i N(pos04) = { 125, 0,  20 };
 Vec3i N(pos05) = { -40, 0, -45 };
 
-Formation N(formation_01) = {
+Formation N(Formation_01) = {
     { .actor = &N(goomba_king),   .home = { .vec = &N(pos02) }, .priority = 10 },
     { .actor = &N(red_goomba_2),  .home = { .vec = &N(pos03) }, .priority = 10 },
     { .actor = &N(blue_goomba_2), .home = { .vec = &N(pos04) }, .priority = 10 },
     { .actor = &N(goomnut_tree),  .home = { .vec = &N(pos05) }, .priority = 10 },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("クリレッド,クリブルー",           N(formation_00), &N(kmr_03)),
-    BATTLE("クリキング,クリレッド,クリブルー", N(formation_01), &N(kmr_06)),
+BattleList N(Formations) = {
+    BATTLE("クリレッド,クリブルー",           N(Formation_00), &N(kmr_03)),
+    BATTLE("クリキング,クリレッド,クリブルー", N(Formation_01), &N(kmr_06)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "kmr_02", &N(kmr_02), },
     { "kmr_03", &N(kmr_03), },
     { "kmr_04", &N(kmr_04), },

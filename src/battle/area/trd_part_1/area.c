@@ -25,134 +25,134 @@ extern Stage N(trd_05d);
 extern Stage N(trd_05e);
 extern Stage N(trd_05f);
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { .actor = &N(koopa_troopa), .home = { .index = 1 }, .priority = 10 },
 };
 
-Formation N(formation_01) = {
+Formation N(Formation_01) = {
     { .actor = &N(koopa_troopa), .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(koopa_troopa), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_02) = {
+Formation N(Formation_02) = {
     { .actor = &N(koopa_troopa), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(koopa_troopa), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(koopa_troopa), .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_03) = {
+Formation N(Formation_03) = {
     { .actor = &N(koopa_troopa), .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(bob_omb),      .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_04) = {
+Formation N(Formation_04) = {
     { .actor = &N(koopa_troopa), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(bob_omb),      .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(bob_omb),      .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_05) = {
+Formation N(Formation_05) = {
     { .actor = &N(koopa_troopa), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(bob_omb),      .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(bob_omb),      .home = { .index = 2 }, .priority = 8 },
     { .actor = &N(bob_omb),      .home = { .index = 3 }, .priority = 7 },
 };
 
-Formation N(formation_06) = {
+Formation N(Formation_06) = {
     { .actor = &N(koopa_troopa), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(koopa_troopa), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(bob_omb),      .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_07) = {
+Formation N(Formation_07) = {
     { .actor = &N(koopa_troopa), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(koopa_troopa), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(bob_omb),      .home = { .index = 2 }, .priority = 8 },
     { .actor = &N(bob_omb),      .home = { .index = 3 }, .priority = 7 },
 };
 
-Formation N(formation_08) = {
+Formation N(Formation_08) = {
     { .actor = &N(paratroopa), .home = { .index = 5 }, .priority = 10 },
     { .actor = &N(paratroopa), .home = { .index = 6 }, .priority = 9 },
 };
 
-Formation N(formation_09) = {
+Formation N(Formation_09) = {
     { .actor = &N(paratroopa), .home = { .index = 4 }, .priority = 10 },
     { .actor = &N(paratroopa), .home = { .index = 5 }, .priority = 9 },
     { .actor = &N(paratroopa), .home = { .index = 6 }, .priority = 8 },
 };
 
-Formation N(formation_0A) = {
+Formation N(Formation_0A) = {
     { .actor = &N(paratroopa),   .home = { .index = 5 }, .priority = 10 },
     { .actor = &N(koopa_troopa), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_0B) = {
+Formation N(Formation_0B) = {
     { .actor = &N(paratroopa),   .home = { .index = 4 }, .priority = 10 },
     { .actor = &N(koopa_troopa), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(paratroopa),   .home = { .index = 6 }, .priority = 8 },
 };
 
-Formation N(formation_0C) = {
+Formation N(Formation_0C) = {
     { .actor = &N(paratroopa),   .home = { .index = 4 }, .priority = 10 },
     { .actor = &N(koopa_troopa), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(paratroopa),   .home = { .index = 6 }, .priority = 8 },
     { .actor = &N(koopa_troopa), .home = { .index = 3 }, .priority = 7 },
 };
 
-Formation N(formation_0D) = {
+Formation N(Formation_0D) = {
     { .actor = &N(paratroopa), .home = { .index = 4 }, .priority = 10 },
     { .actor = &N(bob_omb),    .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(bob_omb),    .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_0E) = {
+Formation N(Formation_0E) = {
     { .actor = &N(paratroopa), .home = { .index = 4 }, .priority = 10 },
     { .actor = &N(bob_omb),    .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(bob_omb),    .home = { .index = 2 }, .priority = 9 },
     { .actor = &N(bob_omb),    .home = { .index = 3 }, .priority = 8 },
 };
 
-Formation N(formation_0F) = {
+Formation N(Formation_0F) = {
     { .actor = &N(bob_omb), .home = { .index = 1 }, .priority = 10 },
 };
 
-Formation N(formation_10) = {
+Formation N(Formation_10) = {
     { .actor = &N(bob_omb), .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(bob_omb), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_11) = {
+Formation N(Formation_11) = {
     { .actor = &N(bob_omb), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(bob_omb), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(bob_omb), .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_12) = {
+Formation N(Formation_12) = {
     { .actor = &N(bob_omb), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(bob_omb), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(bob_omb), .home = { .index = 2 }, .priority = 8 },
     { .actor = &N(bob_omb), .home = { .index = 3 }, .priority = 7 },
 };
 
-Formation N(formation_13) = {
+Formation N(Formation_13) = {
     { .actor = &N(bob_omb),      .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(koopa_troopa), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_14) = {
+Formation N(Formation_14) = {
     { .actor = &N(bob_omb),      .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(bob_omb),      .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(koopa_troopa), .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_15) = {
+Formation N(Formation_15) = {
     { .actor = &N(bob_omb),      .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(koopa_troopa), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(koopa_troopa), .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_16) = {
+Formation N(Formation_16) = {
     { .actor = &N(koopa_troopa), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(bob_omb),      .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(bob_omb),      .home = { .index = 2 }, .priority = 8 },
@@ -164,59 +164,59 @@ Vec3i N(vector3D_80218B9C) = { 80, 0, 0, };
 
 Vec3i N(vector3D_80218BA8) = { 110, 0, 20, };
 
-Formation N(formation_17) = {
+Formation N(Formation_17) = {
     { .actor = &N(bill_blaster), .home = { .vec = &N(vector3D_80218B90) }, .priority = 10 },
     { .actor = &N(bill_blaster), .home = { .vec = &N(vector3D_80218B9C) }, .priority = 9 },
     { .actor = &N(bill_blaster), .home = { .vec = &N(vector3D_80218BA8) }, .priority = 9 },
 };
 
-Formation N(formation_18) = {
+Formation N(Formation_18) = {
     { .actor = &N(bullet_bill), .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(bullet_bill), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_19) = {
+Formation N(Formation_19) = {
     { .actor = &N(bullet_bill), .home = { .index = 1 }, .priority = 10 },
 };
 
-Formation N(formation_1A) = {
+Formation N(Formation_1A) = {
     { .actor = &N(bullet_bill), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(bullet_bill), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(bullet_bill), .home = { .index = 2 }, .priority = 8 },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("ノコノコ", N(formation_00), &N(trd_01)),
-    BATTLE("ノコノコx2", N(formation_01), &N(trd_01)),
-    BATTLE("ノコノコx3", N(formation_02), &N(trd_01)),
-    BATTLE("ノコノコ,ボムへい", N(formation_03), &N(trd_01)),
-    BATTLE("ノコノコ,ボムへいx2", N(formation_04), &N(trd_01)),
-    BATTLE("ノコノコ,ボムへいx3", N(formation_05), &N(trd_01)),
-    BATTLE("ノコノコx2,ボムへい", N(formation_06), &N(trd_01)),
-    BATTLE("ノコノコx2,ボムへいx2", N(formation_07), &N(trd_01)),
-    BATTLE("パタパタx２", N(formation_08), &N(trd_01)),
-    BATTLE("パタパタx３", N(formation_09), &N(trd_01)),
-    BATTLE("パタパタ,ノコノコ", N(formation_0A), &N(trd_01)),
-    BATTLE("パタパタ,ノコノコ,パタパタ", N(formation_0B), &N(trd_01)),
-    BATTLE("パタパタ,ノコノコ,パタパタ,ノコノコ", N(formation_0C), &N(trd_01)),
-    BATTLE("パタパタ,ボムヘイx２", N(formation_0D), &N(trd_01)),
-    BATTLE("パタパタ,ボムヘイx３", N(formation_0E), &N(trd_01)),
-    BATTLE("ボムへい", N(formation_0F), &N(trd_01)),
-    BATTLE("ボムへいx2", N(formation_10), &N(trd_01)),
-    BATTLE("ボムへいx3", N(formation_11), &N(trd_01)),
-    BATTLE("ボムへいx4", N(formation_12), &N(trd_01)),
-    BATTLE("ボムへい,ノコノコ", N(formation_13), &N(trd_01)),
-    BATTLE("ボムへいx2,ノコノコ", N(formation_14), &N(trd_01)),
-    BATTLE("ボムへい,ノコノコx2", N(formation_15), &N(trd_01)),
-    BATTLE("ノコノコ,ボムへいx2", N(formation_16), &N(trd_01)),
-    BATTLE("キラーたいほうx３", N(formation_17), &N(trd_01)),
-    BATTLE("キラーx２", N(formation_18), &N(trd_01)),
-    BATTLE("キラー", N(formation_19), &N(trd_01)),
-    BATTLE("キラーx３", N(formation_1A), &N(trd_01)),
+BattleList N(Formations) = {
+    BATTLE("ノコノコ", N(Formation_00), &N(trd_01)),
+    BATTLE("ノコノコx2", N(Formation_01), &N(trd_01)),
+    BATTLE("ノコノコx3", N(Formation_02), &N(trd_01)),
+    BATTLE("ノコノコ,ボムへい", N(Formation_03), &N(trd_01)),
+    BATTLE("ノコノコ,ボムへいx2", N(Formation_04), &N(trd_01)),
+    BATTLE("ノコノコ,ボムへいx3", N(Formation_05), &N(trd_01)),
+    BATTLE("ノコノコx2,ボムへい", N(Formation_06), &N(trd_01)),
+    BATTLE("ノコノコx2,ボムへいx2", N(Formation_07), &N(trd_01)),
+    BATTLE("パタパタx２", N(Formation_08), &N(trd_01)),
+    BATTLE("パタパタx３", N(Formation_09), &N(trd_01)),
+    BATTLE("パタパタ,ノコノコ", N(Formation_0A), &N(trd_01)),
+    BATTLE("パタパタ,ノコノコ,パタパタ", N(Formation_0B), &N(trd_01)),
+    BATTLE("パタパタ,ノコノコ,パタパタ,ノコノコ", N(Formation_0C), &N(trd_01)),
+    BATTLE("パタパタ,ボムヘイx２", N(Formation_0D), &N(trd_01)),
+    BATTLE("パタパタ,ボムヘイx３", N(Formation_0E), &N(trd_01)),
+    BATTLE("ボムへい", N(Formation_0F), &N(trd_01)),
+    BATTLE("ボムへいx2", N(Formation_10), &N(trd_01)),
+    BATTLE("ボムへいx3", N(Formation_11), &N(trd_01)),
+    BATTLE("ボムへいx4", N(Formation_12), &N(trd_01)),
+    BATTLE("ボムへい,ノコノコ", N(Formation_13), &N(trd_01)),
+    BATTLE("ボムへいx2,ノコノコ", N(Formation_14), &N(trd_01)),
+    BATTLE("ボムへい,ノコノコx2", N(Formation_15), &N(trd_01)),
+    BATTLE("ノコノコ,ボムへいx2", N(Formation_16), &N(trd_01)),
+    BATTLE("キラーたいほうx３", N(Formation_17), &N(trd_01)),
+    BATTLE("キラーx２", N(Formation_18), &N(trd_01)),
+    BATTLE("キラー", N(Formation_19), &N(trd_01)),
+    BATTLE("キラーx３", N(Formation_1A), &N(trd_01)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "trd_00",  &N(trd_00) },
     { "trd_01",  &N(trd_01) },
     { "trd_02",  &N(trd_02) },

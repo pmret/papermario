@@ -23,93 +23,93 @@ Vec3i N(pos_swoopula)[] = {
     { 135, 133, -25 },
 };
 
-Formation N(formation_01) = {
+Formation N(Formation_01) = {
     { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[0] }, .priority = 10 },
     { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[1] }, .priority = 9 },
     { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_02) = {
+Formation N(Formation_02) = {
     { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 10 },
 };
 
-Formation N(formation_03) = {
+Formation N(Formation_03) = {
     { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_04) = {
+Formation N(Formation_04) = {
     { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_05) = {
+Formation N(Formation_05) = {
     { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 8 },
     { .actor = &N(duplighost), .home = { .index = 3 }, .priority = 7 },
 };
 
-Formation N(formation_06) = {
+Formation N(Formation_06) = {
     { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[2] }, .priority = 8 },
 };
 
-Formation N(formation_07) = {
+Formation N(Formation_07) = {
     { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[1] }, .priority = 9 },
     { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_08) = {
+Formation N(Formation_08) = {
     { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(red_magikoopa), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_09) = {
+Formation N(Formation_09) = {
     { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(red_magikoopa), .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_0A) = {
+Formation N(Formation_0A) = {
     { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_0B) = {
+Formation N(Formation_0B) = {
     { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(gray_magikoopa), .home = { .index = 2 }, .priority = 8 },
     { .actor = &N(red_magikoopa), .home = { .index = 3 }, .priority = 7 },
 };
 
-Formation N(formation_0C) = {
+Formation N(Formation_0C) = {
     { .actor = &N(white_clubba), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 8 },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("バサバサチュルルx２,バケバケ", N(formation_01), &N(pra_01)),
-    BATTLE("バケバケ", N(formation_02), &N(pra_01)),
-    BATTLE("バケバケx2", N(formation_03), &N(pra_01)),
-    BATTLE("バケバケx3", N(formation_04), &N(pra_01)),
-    BATTLE("バケバケx4", N(formation_05), &N(pra_01)),
-    BATTLE("バケバケx２,バサバサチュルル", N(formation_06), &N(pra_01)),
-    BATTLE("バケバケ,バサバサチュルル,バケバケ", N(formation_07), &N(pra_01)),
-    BATTLE("バケバケ,レッドカメック", N(formation_08), &N(pra_01)),
-    BATTLE("バケバケx２,レッドカメック", N(formation_09), &N(pra_01)),
-    BATTLE("バケバケ,ホワイトガボン,バケバケ", N(formation_0A), &N(pra_01)),
-    BATTLE("バケバケx２,グレイカメック,レッドカメック", N(formation_0B), &N(pra_01)),
-    BATTLE("ホワイトガボンx２,バケバケ", N(formation_0C), &N(pra_01)),
+BattleList N(Formations) = {
+    BATTLE("バサバサチュルルx２,バケバケ", N(Formation_01), &N(pra_01)),
+    BATTLE("バケバケ", N(Formation_02), &N(pra_01)),
+    BATTLE("バケバケx2", N(Formation_03), &N(pra_01)),
+    BATTLE("バケバケx3", N(Formation_04), &N(pra_01)),
+    BATTLE("バケバケx4", N(Formation_05), &N(pra_01)),
+    BATTLE("バケバケx２,バサバサチュルル", N(Formation_06), &N(pra_01)),
+    BATTLE("バケバケ,バサバサチュルル,バケバケ", N(Formation_07), &N(pra_01)),
+    BATTLE("バケバケ,レッドカメック", N(Formation_08), &N(pra_01)),
+    BATTLE("バケバケx２,レッドカメック", N(Formation_09), &N(pra_01)),
+    BATTLE("バケバケ,ホワイトガボン,バケバケ", N(Formation_0A), &N(pra_01)),
+    BATTLE("バケバケx２,グレイカメック,レッドカメック", N(Formation_0B), &N(pra_01)),
+    BATTLE("ホワイトガボンx２,バケバケ", N(Formation_0C), &N(pra_01)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "pra_01", &N(pra_01) },
     { "pra_02", &N(pra_02) },
     { "pra_03", &N(pra_03) },

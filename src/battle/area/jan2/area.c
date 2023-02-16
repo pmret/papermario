@@ -15,37 +15,37 @@ extern Stage N(jan_03b);
 extern Stage N(jan_04);
 extern Stage N(jan_04b);
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { .actor = &N(putrid_piranha), .home = { .index = 1 }, .priority = 10 },
 };
 
-Formation N(formation_01) = {
+Formation N(Formation_01) = {
     { .actor = &N(putrid_piranha), .home = { .index = 1 }, .priority = 10 },
     { .actor = &N(putrid_piranha), .home = { .index = 2 }, .priority = 9 },
 };
 
-Formation N(formation_02) = {
+Formation N(Formation_02) = {
     { .actor = &N(putrid_piranha), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(putrid_piranha), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(putrid_piranha), .home = { .index = 2 }, .priority = 8 },
 };
 
-Formation N(formation_03) = {
+Formation N(Formation_03) = {
     { .actor = &N(putrid_piranha), .home = { .index = 0 }, .priority = 10 },
     { .actor = &N(putrid_piranha), .home = { .index = 1 }, .priority = 9 },
     { .actor = &N(putrid_piranha), .home = { .index = 2 }, .priority = 8 },
     { .actor = &N(white_magikoopa), .home = { .index = 3 }, .priority = 7 },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("ポイズンパックン", N(formation_00), &N(jan_01)),
-    BATTLE("ポイズンパックンx２", N(formation_01), &N(jan_01)),
-    BATTLE("ポイズンパックンx３", N(formation_02), &N(jan_01)),
-    BATTLE("ポイズンパックンx３,ホワイトカメック", N(formation_03), &N(jan_01)),
+BattleList N(Formations) = {
+    BATTLE("ポイズンパックン", N(Formation_00), &N(jan_01)),
+    BATTLE("ポイズンパックンx２", N(Formation_01), &N(jan_01)),
+    BATTLE("ポイズンパックンx３", N(Formation_02), &N(jan_01)),
+    BATTLE("ポイズンパックンx３,ホワイトカメック", N(Formation_03), &N(jan_01)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "jan_00", &N(jan_00) },
     { "jan_01", &N(jan_01) },
     { "jan_01b", &N(jan_01b) },

@@ -20,16 +20,16 @@ extern Stage N(isk_07);
 
 Vec3i N(vector3D_80220420) = { 97, 70, 17 };
 
-Formation N(formation_00) = {
+Formation N(Formation_00) = {
     { .actor = &N(tutankoopa), .home = { .vec = &N(vector3D_80220420) }, .priority = 10 },
 };
 
-BattleList N(formationTable) = {
-    BATTLE("カーメン　ワンワン", N(formation_00), &N(isk_01)),
+BattleList N(Formations) = {
+    BATTLE("カーメン　ワンワン", N(Formation_00), &N(isk_01)),
     {},
 };
 
-StageList N(stageTable) = {
+StageList N(Stages) = {
     { "isk_00", &N(isk_00) },
     { "isk_01", &N(isk_01) },
     { "isk_02", &N(isk_02) },
