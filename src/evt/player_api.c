@@ -440,9 +440,9 @@ ApiStatus SetPlayerFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode bits = *args++;
-    Bytecode a1 = *args;
+    Bytecode mode = evt_get_variable(script, *args++);
 
-    if (evt_get_variable(script, a1)) {
+    if (mode) {
         playerStatus->flags |= bits;
     } else {
         playerStatus->flags &= ~bits;

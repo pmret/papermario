@@ -688,8 +688,9 @@ ApiStatus SetSelfEnemyFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->owner1.enemy;
     s32 bits = *args++;
-
-    if (evt_get_variable(script, *args++)) {
+    s32 mode = evt_get_variable(script, *args++);
+    
+    if (mode) {
         owner->flags |= bits;
     } else {
         owner->flags &= ~bits;
@@ -735,7 +736,7 @@ ApiStatus SetEnemyFlagBits(Evt* script, s32 isInitialCall) {
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
     s32 bits = *args++;
-    s32 var2 = evt_get_variable(script, *args++);
+    s32 mode = evt_get_variable(script, *args++);
 
     if (npcID == NPC_SELF) {
         npcID = npc->npcID;
@@ -743,7 +744,7 @@ ApiStatus SetEnemyFlagBits(Evt* script, s32 isInitialCall) {
 
     npc = get_enemy(npcID);
 
-    if (var2) {
+    if (mode) {
         npc->flags |= bits;
     } else {
         npc->flags &= ~bits;

@@ -605,18 +605,18 @@ ApiStatus NpcFaceNpc(Evt* script, s32 isInitialCall) {
 ApiStatus SetNpcFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
-    s32 flagBits = *args++;
-    s32 enable = evt_get_variable(script, *args++);
+    s32 bits = *args++;
+    s32 mode = evt_get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcID);
 
     if (npc == NULL) {
         return ApiStatus_DONE2;
     }
 
-    if (enable) {
-        npc->flags |= flagBits;
+    if (mode) {
+        npc->flags |= bits;
     } else {
-        npc->flags &= ~flagBits;
+        npc->flags &= ~bits;
     }
 
     return ApiStatus_DONE2;
