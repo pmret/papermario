@@ -5753,11 +5753,11 @@ enum FoldStateFlags {
     FOLD_STATE_FLAG_2000              = 0x00002000,
     FOLD_STATE_FLAG_4000              = 0x00004000,
     FOLD_STATE_FLAG_8000              = 0x00008000,
-    FOLD_STATE_FLAG_10000             = 0x00010000,
+    FOLD_STATE_FLAG_NO_FILTERING             = 0x00010000,
     FOLD_STATE_FLAG_20000             = 0x00020000,
     FOLD_STATE_FLAG_40000             = 0x00040000,
     FOLD_STATE_FLAG_80000             = 0x00080000,
-    FOLD_STATE_FLAG_100000            = 0x00100000,
+    FOLD_STATE_FLAG_NO_FILTERING0            = 0x00100000,
 };
 
 typedef enum FoldType {

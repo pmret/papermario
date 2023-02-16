@@ -72,14 +72,14 @@ s32 can_pause(s32 currentButtons, s32 pressedButtons) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     s32 actionState = gPlayerStatus.actionState;
 
-    if (!(gPlayerStatus.animFlags & PA_FLAG_CHANGING_MAP) &&
-        !(gPlayerStatus.flags & PS_FLAG_PAUSE_DISABLED) &&
-        !(currentButtons & (BUTTON_Z | BUTTON_R)) &&
-        (pressedButtons & (BUTTON_START | BUTTON_C_LEFT | BUTTON_C_RIGHT)) &&
-        ((gGameStatusPtr->mapShop == NULL) || !(gGameStatusPtr->mapShop->flags & 1)) &&
-        !(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_MENUS) &&
-        !is_picking_up_item())
-    {
+    if (!(gPlayerStatus.animFlags & PA_FLAG_CHANGING_MAP)
+        && !(gPlayerStatus.flags & PS_FLAG_PAUSE_DISABLED)
+        && !(currentButtons & (BUTTON_Z | BUTTON_R))
+        && (pressedButtons & (BUTTON_START | BUTTON_C_LEFT | BUTTON_C_RIGHT))
+        && ((gGameStatusPtr->mapShop == NULL) || !(gGameStatusPtr->mapShop->flags & SHOP_FLAG_1))
+        && !(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_MENUS)
+        && !is_picking_up_item()
+    ) {
         if (!(gPlayerStatus.animFlags & PA_FLAG_8BIT_MARIO)) {
             if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) {
                 if (!(gPlayerStatus.flags & PS_FLAG_NO_STATIC_COLLISION)) {

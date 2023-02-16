@@ -979,7 +979,7 @@ ApiStatus func_802CFD30(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    func_8003D624(npc, foldType, var2, var3, var4, var5, npc->unk_A2);
+    func_8003D624(npc, foldType, var2, var3, var4, var5, npc->foldArg5);
     return ApiStatus_DONE2;
 }
 
@@ -993,7 +993,7 @@ ApiStatus func_802CFE2C(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc->unk_A2 = arg1;
+    npc->foldArg5 = arg1;
     return ApiStatus_DONE2;
 }
 

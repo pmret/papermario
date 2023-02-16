@@ -160,10 +160,10 @@ ApiStatus func_80218000_63D1E0(Evt* script, s32 isInitialCall) {
         script->functionTemp[1] = 0;
         script->functionTemp[2] = 0;
         script->functionTemp[0] = 0;
-        func_802DE780(part->spriteInstanceID, 0, 17, 20, 0, 0, 255, 0);
+        func_802DE780(part->spriteInstanceID, 0, FOLD_TYPE_11, 20, 0, 0, 255, 0);
     }
 
-    func_802DE780(part->spriteInstanceID, 1, 15, (s32)&D_8021A2B8_63F498, 255, 0, 255, 0);
+    func_802DE780(part->spriteInstanceID, 1, FOLD_TYPE_F, (s32)&D_8021A2B8_63F498, 255, 0, 255, 0);
     script->functionTemp[1] += 10;
     if (script->functionTemp[1] >= 360) {
         script->functionTemp[1] %= 360;
@@ -176,7 +176,7 @@ ApiStatus func_80218000_63D1E0(Evt* script, s32 isInitialCall) {
     }
 
     for (i = 0; i < 20; i++) {
-        func_802DE780(part->spriteInstanceID, 0, 12, i, sp20[i] << 0x18 | sp38[i] << 0x10 | sp50[i] << 8 | 0xFF, 0, 255, 0);
+        func_802DE780(part->spriteInstanceID, 0, FOLD_TYPE_C, i, sp20[i] << 0x18 | sp38[i] << 0x10 | sp50[i] << 8 | 0xFF, 0, 255, 0);
     }
 
     return ApiStatus_BLOCK;

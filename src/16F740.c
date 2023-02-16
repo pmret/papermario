@@ -37,11 +37,11 @@ void btl_merlee_on_start_turn(void) {
     PlayerData* playerData = &gPlayerData;
 
     do {
-        if (!(gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) &&
-            battleStatus->nextMerleeSpellType != MERLEE_SPELL_EXP_BOOST &&
-            battleStatus->nextMerleeSpellType != MERLEE_SPELL_COIN_BOOST &&
-            playerData->merleeCastsLeft > 0)
-        {
+        if (!(gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE)
+            && battleStatus->nextMerleeSpellType != MERLEE_SPELL_EXP_BOOST
+            && battleStatus->nextMerleeSpellType != MERLEE_SPELL_COIN_BOOST
+            && playerData->merleeCastsLeft > 0
+        ) {
             if (playerData->merleeTurnCount <= 0) {
                 s32 temp = rand_int(100);
 
@@ -94,10 +94,10 @@ void btl_merlee_on_first_strike(void) {
     PlayerData* playerData = &gPlayerData;
 
     do {
-        if (!(gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) &&
-            battleStatus->nextMerleeSpellType != MERLEE_SPELL_EXP_BOOST &&
-            battleStatus->nextMerleeSpellType != MERLEE_SPELL_COIN_BOOST &&
-            playerData->merleeCastsLeft > 0)
+        if (!(gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE)
+            && battleStatus->nextMerleeSpellType != MERLEE_SPELL_EXP_BOOST
+            && battleStatus->nextMerleeSpellType != MERLEE_SPELL_COIN_BOOST
+            && playerData->merleeCastsLeft > 0)
         {
             if (playerData->merleeTurnCount <= 0) {
                 s32 temp = rand_int(100);
@@ -456,10 +456,10 @@ void btl_state_update_normal_start(void) {
                         script->owner1.actorID = ACTOR_PLAYER;
                     }
 
-                    if (currentEncounter->currentEnemy != NULL &&
-                        currentEncounter->currentEnemy->encountered == ENCOUNTER_TRIGGER_SPIN &&
-                        is_ability_active(ABILITY_DIZZY_ATTACK))
-                    {
+                    if (currentEncounter->currentEnemy != NULL
+                        && currentEncounter->currentEnemy->encountered == ENCOUNTER_TRIGGER_SPIN
+                        && is_ability_active(ABILITY_DIZZY_ATTACK)
+                    ) {
                         actor = battleStatus->enemyActors[0];
                         script = start_script(&DoDizzyAttack, EVT_PRIORITY_A, 0);
                         actor->takeTurnScript = script;
@@ -2333,10 +2333,10 @@ void btl_state_update_run_away(void) {
                 D_8029F248--;
                 return;
             }
-            if (!does_script_exist(player->takeTurnScriptID) &&
-                (partner == NULL || !does_script_exist(partner->takeTurnScriptID)) &&
-                battleStatus->unk_8C == 0)
-            {
+            if (!does_script_exist(player->takeTurnScriptID)
+                && (partner == NULL || !does_script_exist(partner->takeTurnScriptID))
+                && battleStatus->unk_8C == 0
+            ) {
                 btl_set_state(BATTLE_STATE_9);
             }
             break;
@@ -2363,7 +2363,7 @@ void btl_state_update_defeat(void) {
             battleStatus->unk_8C = 0;
 
             if (player->debuff != 0) {
-                if (player->debuff == 7) {
+                if (player->debuff == STATUS_FROZEN) {
                     sfx_play_sound(SOUND_FROZEN_SHATTER);
                     player->icePillarEffect->flags |= EFFECT_INSTANCE_FLAG_10;
                     player->icePillarEffect = NULL;
@@ -2764,21 +2764,20 @@ void btl_state_update_player_move(void) {
                 return;
             }
 
-            if (battleStatus->moveCategory == BTL_MENU_TYPE_SMASH) {
-                if ((battleStatus->selectedMoveID != MOVE_SMASH_CHARGE0) &&
-                    (battleStatus->selectedMoveID != MOVE_SMASH_CHARGE) &&
-                    (battleStatus->selectedMoveID != MOVE_SUPER_SMASH_CHARGE))
-                {
-                    gBattleStatus.flags1 &= ~BS_FLAGS1_HAMMER_CHARGED;
-                }
+            if ((battleStatus->moveCategory == BTL_MENU_TYPE_SMASH)
+                && (battleStatus->selectedMoveID != MOVE_SMASH_CHARGE0)
+                && (battleStatus->selectedMoveID != MOVE_SMASH_CHARGE)
+                && (battleStatus->selectedMoveID != MOVE_SUPER_SMASH_CHARGE)
+            ) {
+                gBattleStatus.flags1 &= ~BS_FLAGS1_HAMMER_CHARGED;
             }
-            if (battleStatus->moveCategory == BTL_MENU_TYPE_JUMP) {
-                if ((battleStatus->selectedMoveID != MOVE_JUMP_CHARGE0) &&
-                    (battleStatus->selectedMoveID != MOVE_JUMP_CHARGE) &&
-                    (battleStatus->selectedMoveID != MOVE_SUPER_JUMP_CHARGE))
-                {
-                    gBattleStatus.flags1 &= ~BS_FLAGS1_JUMP_CHARGED;
-                }
+
+            if ((battleStatus->moveCategory == BTL_MENU_TYPE_JUMP)
+                && (battleStatus->selectedMoveID != MOVE_JUMP_CHARGE0)
+                && (battleStatus->selectedMoveID != MOVE_JUMP_CHARGE)
+                && (battleStatus->selectedMoveID != MOVE_SUPER_JUMP_CHARGE)
+            ) {
+                gBattleStatus.flags1 &= ~BS_FLAGS1_JUMP_CHARGED;
             }
 
             if (!(gBattleStatus.flags1 & BS_FLAGS1_JUMP_CHARGED)) {
@@ -2949,11 +2948,11 @@ void btl_state_update_end_player_turn(void) {
         if (battleStatus->moveCategory == BTL_MENU_TYPE_ITEMS && battleStatus->itemUsesLeft >= 2) {
             gBattleSubState = BTL_SUBSTATE_END_PLAYER_TURN_AWAIT_HAPPY;
         } else if (
-            !(gBattleStatus.flags2 & BS_FLAGS2_HAS_DRAINED_HP) &&
-            !is_ability_active(ABILITY_HAPPY_HEART) &&
-            !is_ability_active(ABILITY_CRAZY_HEART) &&
-            !is_ability_active(ABILITY_HAPPY_FLOWER))
-        {
+            !(gBattleStatus.flags2 & BS_FLAGS2_HAS_DRAINED_HP)
+            && !is_ability_active(ABILITY_HAPPY_HEART)
+            && !is_ability_active(ABILITY_CRAZY_HEART)
+            && !is_ability_active(ABILITY_HAPPY_FLOWER)
+        ) {
             gBattleSubState = BTL_SUBSTATE_END_PLAYER_TURN_AWAIT_HAPPY;
         } else if (player->stoneStatus == STATUS_STONE || battleStatus->outtaSightActive) {
             gBattleSubState = BTL_SUBSTATE_END_PLAYER_TURN_AWAIT_HAPPY;

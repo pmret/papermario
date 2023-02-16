@@ -245,7 +245,7 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     s32 x1, y1, x2, y2;
     f32 currentPos, angle, scale;
     f32 offsetX, offsetY, offsetZ;
-    s32 a2;
+    s32 color;
     s8 currentTab;
     s32 portraitScrollPos;
     s32 portraitScrollIndex;
@@ -296,11 +296,11 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         guMtxCatF(matrix2, matrix, matrix);
 
         if (offsetZ > 8.0f) {
-            a2 = 160;
+            color = 160;
         } else {
-            a2 = 255.0f - offsetZ * 95.0f * 0.125f;
+            color = 255.0f - offsetZ * 95.0f * 0.125f;
         }
-        func_802DE894(gPausePartnersSpriteIDs[gPausePartnersPartnerIdx[index]], 6, a2, a2, a2, 0xFF, 0x40);
+        func_802DE894(gPausePartnersSpriteIDs[gPausePartnersPartnerIdx[index]], FOLD_TYPE_6, color, color, color, 255, 0x40);
         spr_draw_npc_sprite(gPausePartnersSpriteIDs[gPausePartnersPartnerIdx[index]], 0, 0, NULL, matrix);
     }
 

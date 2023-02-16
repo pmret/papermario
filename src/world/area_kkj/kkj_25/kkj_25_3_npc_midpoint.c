@@ -109,7 +109,7 @@ EvtScript N(EVS_NpcInit_Twink) = {
 };
 
 EvtScript N(EVS_NpcInit_Eldstar) = {
-    EVT_CALL(func_802CFD30, 8, 7, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Eldstar, FOLD_TYPE_7, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Eldstar, FALSE)
     EVT_CALL(SetNpcPos, NPC_Eldstar, 100, 45, 0)
     EVT_RETURN
@@ -117,7 +117,7 @@ EvtScript N(EVS_NpcInit_Eldstar) = {
 };
 
 EvtScript N(EVS_NpcInit_Mamar) = {
-    EVT_CALL(func_802CFD30, 9, 7, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Mamar, FOLD_TYPE_7, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Mamar, FALSE)
     EVT_CALL(SetNpcPos, NPC_Mamar, 46, 45, -27)
     EVT_RETURN
@@ -125,7 +125,7 @@ EvtScript N(EVS_NpcInit_Mamar) = {
 };
 
 EvtScript N(EVS_NpcInit_Skolar) = {
-    EVT_CALL(func_802CFD30, 10, 7, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Skolar, FOLD_TYPE_7, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Skolar, FALSE)
     EVT_CALL(SetNpcPos, NPC_Skolar, 33, 45, -95)
     EVT_RETURN
@@ -133,7 +133,7 @@ EvtScript N(EVS_NpcInit_Skolar) = {
 };
 
 EvtScript N(EVS_NpcInit_Muskular) = {
-    EVT_CALL(func_802CFD30, 11, 7, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Muskular, FOLD_TYPE_7, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Muskular, FALSE)
     EVT_CALL(SetNpcPos, NPC_Muskular, 71, 45, -132)
     EVT_RETURN
@@ -141,7 +141,7 @@ EvtScript N(EVS_NpcInit_Muskular) = {
 };
 
 EvtScript N(EVS_NpcInit_Misstar) = {
-    EVT_CALL(func_802CFD30, 12, 7, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Misstar, FOLD_TYPE_7, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Misstar, FALSE)
     EVT_CALL(SetNpcPos, NPC_Misstar, 131, 45, -132)
     EVT_RETURN
@@ -149,7 +149,7 @@ EvtScript N(EVS_NpcInit_Misstar) = {
 };
 
 EvtScript N(EVS_NpcInit_Klevar) = {
-    EVT_CALL(func_802CFD30, 13, 7, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Klevar, FOLD_TYPE_7, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Klevar, FALSE)
     EVT_CALL(SetNpcPos, NPC_Klevar, 169, 45, -95)
     EVT_RETURN
@@ -157,7 +157,7 @@ EvtScript N(EVS_NpcInit_Klevar) = {
 };
 
 EvtScript N(EVS_NpcInit_Kalmar) = {
-    EVT_CALL(func_802CFD30, 14, 7, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Kalmar, FOLD_TYPE_7, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Kalmar, FALSE)
     EVT_CALL(SetNpcPos, NPC_Kalmar, 156, 45, -27)
     EVT_RETURN

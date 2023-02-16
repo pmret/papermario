@@ -127,7 +127,7 @@ void N(CharAnim_FadeIn_0)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40000 | FOLD_STATE_FLAG_10000 | FOLD_STATE_FLAG_40, transformMtx);
+    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40000 | FOLD_STATE_FLAG_NO_FILTERING | FOLD_STATE_FLAG_40, transformMtx);
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
@@ -172,7 +172,7 @@ void N(CharAnim_FadeIn_1)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40000 | FOLD_STATE_FLAG_10000 | FOLD_STATE_FLAG_40, transformMtx);
+    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40000 | FOLD_STATE_FLAG_NO_FILTERING | FOLD_STATE_FLAG_40, transformMtx);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -259,7 +259,7 @@ void N(CharAnim_FadeIn_3)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_10000 | FOLD_STATE_FLAG_40, transformMtx);
+    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_NO_FILTERING | FOLD_STATE_FLAG_40, transformMtx);
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
@@ -285,7 +285,7 @@ void N(CharAnim_FadeIn_4)(CreditsLine* line, CreditsChar* chr) {
 
     if (chr->fadeInTime == line->appearTime) {
         fold_update(0, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
-        foldFlags |= FOLD_STATE_FLAG_10000;
+        foldFlags |= FOLD_STATE_FLAG_NO_FILTERING;
     } else {
         f32 alpha = update_lerp(EASING_LINEAR, 16.0f, 300.0f, chr->fadeInTime, line->appearTime);
         if (alpha > 255.0f) {
@@ -355,7 +355,7 @@ void N(CharAnim_HoldClearFold)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40000 | FOLD_STATE_FLAG_10000 | FOLD_STATE_FLAG_40, transformMtx);
+    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40000 | FOLD_STATE_FLAG_NO_FILTERING | FOLD_STATE_FLAG_40, transformMtx);
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
@@ -400,7 +400,7 @@ void N(CharAnim_FadeOut_0)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_10000 | FOLD_STATE_FLAG_40, transformMtx);
+    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_NO_FILTERING | FOLD_STATE_FLAG_40, transformMtx);
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
@@ -470,7 +470,7 @@ void N(CharAnim_FadeOut_2)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_10000 | FOLD_STATE_FLAG_40, transformMtx);
+    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_NO_FILTERING | FOLD_STATE_FLAG_40, transformMtx);
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }

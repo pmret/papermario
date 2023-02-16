@@ -147,8 +147,8 @@ void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
     Matrix4f matrix1;
     Matrix4f matrix2;
     s32 i, j;
-    s32 s0;
-    s32 s1;
+    s32 color;
+    s32 alpha;
     s32 index;
     f32 x, y;
     f32 offsetY;
@@ -184,19 +184,19 @@ void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
         y = gPauseSpiritsPositions[index].y;
 
         if (playerData->maxStarPower < index + 1) {
-            s0 = 0;
-            s1 = 0x80;
+            color = 0;
+            alpha = 128;
             offsetY = 0.0f;
         } else {
-            s0 = 0xFF;
-            s1 = 0xFF;
+            color = 255;
+            alpha = 255;
             offsetY = sin_deg(index * index * index + frameCounter * 0.4321 + frameCounter * (index * 0.02 + 0.1324))
                   * 5.0f
                   * sin_deg(index * 0.25 + frameCounter + frameCounter * (0.0432 - index * 0.01));
 
         }
 
-        func_802DE894(gPauseSpiritsSpriteIDs[gPauseSpiritsIndexes[index]], 8, s0, s0, s0, s1, 0x40);
+        func_802DE894(gPauseSpiritsSpriteIDs[gPauseSpiritsIndexes[index]], FOLD_TYPE_8, color, color, color, alpha, 0x40);
         guTranslateF(matrix1, baseX + 22 + x, baseY + 77 + y + offsetY, 0.0f);
         guRotateF(matrix2, 180.0f, 0.0f, 0.0f, 1.0f);
         guMtxCatF(matrix2, matrix1, matrix1);

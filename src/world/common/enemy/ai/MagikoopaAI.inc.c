@@ -109,8 +109,8 @@ void N(MagikoopaAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     } else {
         alpha = (npc->duration * 15) + 30;
     }
-    if (alpha > 0xFF) {
-        alpha = 0xFF;
+    if (alpha > 255) {
+        alpha = 255;
     }
     npc->alpha = alpha;
     
@@ -128,15 +128,15 @@ void N(MagikoopaAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     }
     if (enemy->varTable[0] == 0) {
         if (npc->duration >= 20) {
-            func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
-            npc->alpha = 0xFF;
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
+            npc->alpha = 255;
             npc->scale.x = 1.0f;
             npc->scale.y = 1.0f;
             npc->scale.z = 1.0f;
             script->AI_TEMP_STATE = 20;
         }
     } else if (npc->duration >= 10) {
-        npc->alpha = 0xFF;
+        npc->alpha = 255;
         npc->scale.x = 1.0f;
         npc->scale.y = 1.0f;
         npc->scale.z = 1.0f;
@@ -311,7 +311,7 @@ API_CALLABLE(N(MagikoopaAI_OnPlayerWon)) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->alpha = 255;
-    func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
+    func_802DE894(npc->spriteInstanceID, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

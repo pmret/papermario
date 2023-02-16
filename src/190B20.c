@@ -2731,9 +2731,10 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationTyp
 void add_actor_decoration(Actor* actor, s32 decorationIndex, s32 decorationType) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) && part->idleAnimations &&
-            !(part->flags & ACTOR_PART_FLAG_2))
-        {
+        if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION))
+            && part->idleAnimations
+            && !(part->flags & ACTOR_PART_FLAG_2)
+        ) {
             add_part_decoration(part, decorationIndex, decorationType);
         }
     }
@@ -2747,9 +2748,10 @@ void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
     ActorPart* part;
 
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) && part->idleAnimations &&
-            !(part->flags & ACTOR_PART_FLAG_2))
-        {
+        if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION))
+            && part->idleAnimations
+            && !(part->flags & ACTOR_PART_FLAG_2)
+        ) {
             remove_part_decoration(part, decorationIndex);
         }
     }

@@ -142,8 +142,8 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->currentAnim = blueprint->initialAnim;
     npc->animationSpeed = 1.0f;
     npc->renderYaw = 0.0f;
-    npc->unk_98 = 0;
-    npc->unk_A2 = 0;
+    npc->foldType = 0;
+    npc->foldArg5 = 0;
     npc->collisionChannel = COLLISION_CHANNEL_20000;
     npc->isFacingAway = 0;
     npc->yawCamOffset = 0;
@@ -1060,7 +1060,7 @@ void appendGfx_npc_blur(void* data) {
             x = blur->x[index];
             y = blur->y[index];
             z = blur->z[index];
-            func_802DE894(npc->spriteInstanceID, 7, 255, 255, 255, 120 - (var_s5 * 20), 0);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_7, 255, 255, 255, 120 - (var_s5 * 20), 0);
             yaw = npc->renderYaw;
             guTranslateF(sp20, x, y, z);
 
@@ -1840,7 +1840,7 @@ void npc_update_decoration_charged(Npc* npc, s32 idx) {
     s32 temp3;
 
     if (!npc->decorationInitialised[idx]) {
-        func_802DE894(npc->spriteInstanceID, 17, 20, 0, 0, 255, 0);
+        func_802DE894(npc->spriteInstanceID, FOLD_TYPE_11, 20, 0, 0, 255, 0);
         npc->decorationInitialised[idx] = TRUE;
     }
     if (npc->decorationInitialised[idx] == TRUE) {
@@ -1856,7 +1856,7 @@ void npc_update_decoration_charged(Npc* npc, s32 idx) {
         }
 
         for (temp3 = 255, i = 0; i < 20; i++) {
-            func_802DE894(npc->spriteInstanceID, 12, i, (sp50[i] << 24) | (sp38[i] << 16) | (sp20[i] << 8) | temp3, 0, 255, 0);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_C, i, (sp50[i] << 24) | (sp38[i] << 16) | (sp20[i] << 8) | temp3, 0, 255, 0);
         }
     }
 }
@@ -1984,7 +1984,7 @@ s32 npc_get_collider_below(Npc* npc) {
     x = npc->pos.x;
     z = npc->pos.z;
 
-    if (npc_raycast_down_sides(0x38000, &x, &y, &z, &yaw)) {
+    if (npc_raycast_down_sides(COLLISION_CHANNEL_8000 | COLLISION_CHANNEL_10000 | COLLISION_CHANNEL_20000, &x, &y, &z, &yaw)) {
         if (yaw <= 16.0f) {
             return D_8010C978;
         }
@@ -1993,12 +1993,12 @@ s32 npc_get_collider_below(Npc* npc) {
 }
 
 void func_8003D3BC(Npc* npc) {
-    s32 foldType = npc->unk_98;
-    s32 foldArg1 = npc->unk_9A;
-    s32 foldArg2 = npc->unk_9C;
-    s32 foldArg3 = npc->unk_9E;
-    s32 foldArg4 = npc->unk_A0;
-    s32 foldArg5 = npc->unk_A2;
+    s32 foldType = npc->foldType;
+    s32 foldArg1 = npc->foldArg1;
+    s32 foldArg2 = npc->foldArg2;
+    s32 foldArg3 = npc->foldArg3;
+    s32 foldArg4 = npc->foldArg4;
+    s32 foldArg5 = npc->foldArg5;
 
     func_802DE894(npc->spriteInstanceID, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
 
@@ -2062,12 +2062,12 @@ void func_8003D3BC(Npc* npc) {
 }
 
 void func_8003D624(Npc* npc, s32 foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
-    npc->unk_98 = foldType;
-    npc->unk_9A = arg2;
-    npc->unk_9C = arg3;
-    npc->unk_9E = arg4;
-    npc->unk_A0 = arg5;
-    npc->unk_A2 = arg6;
+    npc->foldType = foldType;
+    npc->foldArg1 = arg2;
+    npc->foldArg2 = arg3;
+    npc->foldArg3 = arg4;
+    npc->foldArg4 = arg5;
+    npc->foldArg5 = arg6;
     func_8003D3BC(npc);
 }
 

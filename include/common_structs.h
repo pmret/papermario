@@ -245,12 +245,12 @@ typedef struct Npc {
     /* 0x08E */ s16 duration; // TODO: name less vaguely
     /* 0x090 */ Vec3s homePos;
     /* 0x096 */ s16 unk_96;
-    /* 0x098 */ s16 unk_98;
-    /* 0x09A */ s16 unk_9A;
-    /* 0x09C */ s16 unk_9C;
-    /* 0x09E */ s16 unk_9E;
-    /* 0x0A0 */ s16 unk_A0;
-    /* 0x0A2 */ u16 unk_A2;
+    /* 0x098 */ s16 foldType;
+    /* 0x09A */ s16 foldArg1;
+    /* 0x09C */ s16 foldArg2;
+    /* 0x09E */ s16 foldArg3;
+    /* 0x0A0 */ s16 foldArg4;
+    /* 0x0A2 */ u16 foldArg5;
     /* 0x0A4 */ s8 npcID;
     /* 0x0A5 */ char unk_A5;
     /* 0x0A6 */ s16 collisionRadius;

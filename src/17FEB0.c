@@ -287,42 +287,39 @@ HitResult calc_item_damage_enemy(void) {
         }
     }
 
-    if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-        if ((battleStatus->currentAttackElement & (DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POW)) &&
-            (targetPart->eventFlags & ACTOR_EVENT_FLAG_GROUNDABLE))
-        {
-            if (dispatchEvent == EVENT_HIT) {
-                dispatchEvent = EVENT_FALL_TRIGGER;
-            }
-            if (dispatchEvent == EVENT_IMMUNE) {
-                dispatchEvent = EVENT_FALL_TRIGGER;
-            }
+    if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
+        && (battleStatus->currentAttackElement & (DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POW))
+        && (targetPart->eventFlags & ACTOR_EVENT_FLAG_GROUNDABLE)
+    ) {
+        if (dispatchEvent == EVENT_HIT) {
+            dispatchEvent = EVENT_FALL_TRIGGER;
+        }
+        if (dispatchEvent == EVENT_IMMUNE) {
+            dispatchEvent = EVENT_FALL_TRIGGER;
         }
     }
 
-    if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-        if ((battleStatus->currentAttackElement & DAMAGE_TYPE_POW) &&
-            (targetPart->eventFlags & ACTOR_EVENT_FLAG_800000))
-        {
-            if (dispatchEvent == EVENT_HIT) {
-                dispatchEvent = EVENT_FALL_TRIGGER;
-            }
-            if (dispatchEvent == EVENT_IMMUNE) {
-                dispatchEvent = EVENT_FALL_TRIGGER;
-            }
+    if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
+        && (battleStatus->currentAttackElement & DAMAGE_TYPE_POW)
+        && (targetPart->eventFlags & ACTOR_EVENT_FLAG_800000)
+    ) {
+        if (dispatchEvent == EVENT_HIT) {
+            dispatchEvent = EVENT_FALL_TRIGGER;
+        }
+        if (dispatchEvent == EVENT_IMMUNE) {
+            dispatchEvent = EVENT_FALL_TRIGGER;
         }
     }
 
-    if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-        if ((battleStatus->currentAttackElement & (DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE)) &&
-            (targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE))
-        {
-            if (dispatchEvent == EVENT_HIT) {
-                dispatchEvent = EVENT_FLIP_TRIGGER;
-            }
-            if (dispatchEvent == EVENT_IMMUNE) {
-                dispatchEvent = EVENT_FLIP_TRIGGER;
-            }
+    if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
+        && (battleStatus->currentAttackElement & (DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE))
+        && (targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE)
+    ) {
+        if (dispatchEvent == EVENT_HIT) {
+            dispatchEvent = EVENT_FLIP_TRIGGER;
+        }
+        if (dispatchEvent == EVENT_IMMUNE) {
+            dispatchEvent = EVENT_FLIP_TRIGGER;
         }
     }
 
@@ -338,12 +335,12 @@ HitResult calc_item_damage_enemy(void) {
         }
     }
 
-    if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) &&
-            battleStatus->lastAttackDamage >= 0 &&
-            dispatchEvent != EVENT_DEATH &&
-            dispatchEvent != EVENT_SPIN_SMASH_DEATH &&
-            dispatchEvent != EVENT_EXPLODE_TRIGGER)
-    {
+    if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
+        && battleStatus->lastAttackDamage >= 0
+        && dispatchEvent != EVENT_DEATH
+        && dispatchEvent != EVENT_SPIN_SMASH_DEATH
+        && dispatchEvent != EVENT_EXPLODE_TRIGGER
+    ) {
         // Using this macro because it's nicer to look at, and it also is necessary to wrap the first 5 of these in a
         // do-while-0 OR to wrap each one individually. It's more likely that it's a macro instead, and much cleaner
         #define INFLICT_STATUS(STATUS_TYPE) \
@@ -381,14 +378,14 @@ HitResult calc_item_damage_enemy(void) {
     temp = (battleStatus->statusChance * temp) / 100;
 
     if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) && (battleStatus->currentAttackElement & DAMAGE_TYPE_FEAR)) {
-        if (rand_int(99) < temp &&
-            !(target->debuff == STATUS_FEAR ||
-              target->debuff == STATUS_DIZZY ||
-              target->debuff == STATUS_PARALYZE ||
-              target->debuff == STATUS_SLEEP ||
-              target->debuff == STATUS_FROZEN ||
-              target->debuff == STATUS_STOP) &&
-            !(target->flags & ACTOR_FLAG_400))
+        if (rand_int(99) < temp
+            && (target->debuff != STATUS_FEAR
+                && target->debuff != STATUS_DIZZY
+                && target->debuff != STATUS_PARALYZE
+                && target->debuff != STATUS_SLEEP
+                && target->debuff != STATUS_FROZEN
+                && target->debuff != STATUS_STOP)
+            && !(target->flags & ACTOR_FLAG_400))
         {
             dispatchEvent = EVENT_SCARE_AWAY;
             hitResult = HIT_RESULT_HIT;
@@ -405,9 +402,9 @@ HitResult calc_item_damage_enemy(void) {
 
     battleStatus->wasStatusInflicted = wasStatusInflicted;
 
-    if (
-        (sp1C && (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200))) ||
-        ((gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) && !(gBattleStatus.flags1 & BS_FLAGS1_80))
+    if ((sp1C
+        && (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)))
+        || ((gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) && !(gBattleStatus.flags1 & BS_FLAGS1_80))
     ) {
         if (battleStatus->lastAttackDamage > 0) {
             sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);

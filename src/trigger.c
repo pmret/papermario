@@ -282,10 +282,11 @@ s32 should_collider_allow_interact(s32 colliderID) {
     for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
         Trigger* trigger = (*gCurrentTriggerListPtr)[i];
 
-        if (trigger != NULL &&
-            trigger->hasPlayerInteractPrompt != 0 &&
-            trigger->location.colliderID == colliderID &&
-            trigger->flags.flags & TRIGGER_WALL_PRESS_A) {
+        if (trigger != NULL
+            && trigger->hasPlayerInteractPrompt != 0
+            && trigger->location.colliderID == colliderID
+            &&  trigger->flags.flags & TRIGGER_WALL_PRESS_A
+        ) {
             return TRUE;
         }
     }

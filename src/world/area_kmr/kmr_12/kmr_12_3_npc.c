@@ -62,7 +62,7 @@ EvtScript N(EVS_NpcIdle_Goomba) = {
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goomba_Idle)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_F8, SOUND_SPACE_MODE_0)
-    EVT_CALL(func_802CFE2C, NPC_SELF, 0x00002000)
+    EVT_CALL(func_802CFE2C, NPC_SELF, 0x2000)
     EVT_CALL(func_802CFD30, NPC_SELF, FOLD_TYPE_5, 6, 1, 1, 0)
     EVT_WAIT(12)
     EVT_WAIT(5)
