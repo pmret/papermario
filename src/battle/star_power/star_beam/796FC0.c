@@ -1,8 +1,9 @@
 #include "common.h"
 #include "script_api/battle.h"
+#include "effects.h"
 #include "model.h"
 
-#define NAMESPACE battle_star_peach_beam
+#define NAMESPACE battle_star_power_star_beam
 
 #include "../common/peach_star_beam.inc.c"
 
@@ -13,7 +14,7 @@ EvtScript N(usePower) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_THREAD
-        EVT_CALL(N(ProcessPeachStarBeam), 1)
+        EVT_CALL(N(ProcessPeachStarBeam), 0)
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_LOOP(0)
@@ -26,7 +27,7 @@ EvtScript N(usePower) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(ItemDamageEnemy, LVar0, 1082130432, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(ItemDamageEnemy, LVar0, 1077936128, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(ChooseNextTarget, 0, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)

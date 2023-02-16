@@ -1,73 +1,26 @@
 #include "common.h"
-#include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/BattleKalmar.h"
-#include "entity.h"
-#include "model.h"
+#include "sprite/npc/BattleMisstar.h"
 
-extern EntityModelScript D_80283EE8;
-
-#define NAMESPACE battle_star_up_and_away
+#define NAMESPACE battle_star_power_smooch
 
 #include "common/StarPower.inc.c"
 
-API_CALLABLE(func_802A1518_7957F8) {
-    if (isInitialCall) {
-        mdl_set_all_fog_mode(FOG_MODE_1);
-        *gBackgroundFogModePtr = FOG_MODE_1;
-        set_background_color_blend(0, 0, 0, 0);
-        script->functionTemp[0] = 200;
-    }
+#include "common/AddHP.inc.c"
 
-    set_background_color_blend(0, 0, 0, script->functionTemp[0]);
-    script->functionTemp[0] += 2;
+API_CALLABLE(func_802A156C_7922FC) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+    s32 var4 = evt_get_variable(script, *args++);
 
-    if (script->functionTemp[0] >= 254) {
-        set_background_color_blend(0, 0, 0, 254);
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-API_CALLABLE(func_802A15B4_795894) {
-    if (isInitialCall) {
-        script->functionTemp[0] = 254;
-    }
-
-    set_background_color_blend(0, 0, 0, script->functionTemp[0]);
-    script->functionTemp[0] -= 5;
-
-    if (script->functionTemp[0] <= 200) {
-        set_background_color_blend(0, 0, 0, 200);
-
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-API_CALLABLE(func_802A1628_795908) {
-    Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
-    u32 flags;
-
-    script->varTable[0] = 0;
-    flags = targetActor->flags;
-
-    if (!(flags & ACTOR_FLAG_TARGET_ONLY)) {
-        if (!(flags & ACTOR_FLAG_NO_DMG_APPLY)) {
-            if (!(flags & ACTOR_FLAG_2000) && targetActor->actorBlueprint->upAndAwayChance != 0 && rand_int(100) <= targetActor->actorBlueprint->upAndAwayChance) {
-                script->varTable[0] = 1;
-            }
-        } else {
-            return ApiStatus_DONE2;
-        }
-    }
+    fx_recover(0, var1, var2, var3, var4);
 
     return ApiStatus_DONE2;
 }
 
-EvtScript N(802A16D0) = {
+EvtScript N(802A1630) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
@@ -122,7 +75,7 @@ EvtScript N(802A16D0) = {
     EVT_END
 };
 
-EvtScript N(802A1A68) = {
+EvtScript N(802A19C8) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
@@ -177,7 +130,7 @@ EvtScript N(802A1A68) = {
     EVT_END
 };
 
-EvtScript N(802A1E00) = {
+EvtScript N(802A1D60) = {
     EVT_WAIT(8)
     EVT_CALL(SetForegroundModelsVisible, 0)
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_73)
@@ -211,7 +164,7 @@ EvtScript N(802A1E00) = {
     EVT_END
 };
 
-EvtScript N(802A200C) = {
+EvtScript N(802A1F6C) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -282,7 +235,7 @@ EvtScript N(802A200C) = {
     EVT_END
 };
 
-EvtScript N(802A245C) = {
+EvtScript N(802A23BC) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(N(UnkBackgroundFunc))
@@ -305,109 +258,151 @@ EvtScript N(802A245C) = {
     EVT_END
 };
 
+s32 N(intTable_802A24E8)[] = {
+    0x0000000F, 0x0000000F, 0xFFFFFFDF, 0x0000001B, 0xFFFFFFEA, 0xFFFFFFE6, 0x0000000A, 0xFFFFFFDD,
+    0x00000023, 0x00000000,
+};
+
 EvtScript N(usePower) = {
-    EVT_EXEC_WAIT(N(802A16D0))
-    EVT_SET_CONST(LVar0, ANIM_BattleKalmar_Idle)
-    EVT_EXEC_WAIT(N(802A1E00))
-    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleKalmar_Shout)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_WAIT(20)
-    EVT_CALL(SetMotionBlurParams, 0, 0, 0, 320, 240, 128, 10)
-    EVT_CALL(func_802A1518_7957F8)
-    EVT_CALL(PlaySound, SOUND_247)
-    EVT_PLAY_EFFECT(EFFECT_ENERGY_SHOCKWAVE, 0, 0, 20, 0, EVT_FLOAT(1.0), 90)
-    EVT_WAIT(30)
+    EVT_EXEC_WAIT(N(802A1630))
+    EVT_SET_CONST(LVar0, ANIM_BattleMisstar_Still)
+    EVT_EXEC_WAIT(N(802A1D60))
+    EVT_WAIT(16)
     EVT_THREAD
-        EVT_PLAY_EFFECT(EFFECT_SHIMMER_WAVE, 0, 0, 50, 0, 300, 100, 10, 40)
+        EVT_WAIT(10)
+        EVT_CALL(SetNpcRotation, 100, 0, 180, 0)
+        EVT_WAIT(1)
+        EVT_CALL(SetNpcRotation, 100, 0, 150, 0)
+        EVT_WAIT(1)
+        EVT_CALL(SetNpcRotation, 100, 0, 120, 0)
+        EVT_WAIT(1)
+        EVT_CALL(SetNpcRotation, 100, 0, 90, 0)
+        EVT_WAIT(1)
+        EVT_CALL(SetNpcRotation, 100, 0, 60, 0)
+        EVT_WAIT(1)
+        EVT_CALL(SetNpcRotation, 100, 0, 30, 0)
+        EVT_WAIT(1)
+        EVT_CALL(SetNpcRotation, 100, 0, 0, 0)
     EVT_END_THREAD
-    EVT_PLAY_EFFECT(EFFECT_ENERGY_SHOCKWAVE, 0, 0, 20, 0, EVT_FLOAT(1.0), 90)
-    EVT_WAIT(75)
-    EVT_CALL(SetMotionBlurParams, 0, 0, 0, 320, 240, 0, 10)
-    EVT_CALL(InitTargetIterator)
-    EVT_LABEL(0)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(func_802A1628_795908)
-    EVT_SET(LocalFlag(0), 0)
-    EVT_CALL(ItemCheckHit, LVar1, 0, 0, 0, 0)
-    EVT_IF_EQ(LVar1, 6)
-        EVT_SET(LVar0, 0)
-        EVT_SET(LocalFlag(0), 1)
-    EVT_END_IF
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(0)
-            EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-            EVT_CALL(DispatchEvent, LVar0, 61)
-            EVT_CALL(SetActorRotationOffset, LVar0, 0, 10, 0)
-            EVT_THREAD
-                EVT_CALL(GetOwnerTarget, LVarB, LVar1)
-                EVT_WAIT(10)
-                EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(D_80283EE8))
-                EVT_CALL(GetActorPos, LVarB, LVar0, LVar1, LVar2)
-                EVT_SET(LVarD, LVar0)
-                EVT_SET(LVarE, LVar1)
-                EVT_SET(LVarF, LVar2)
-                EVT_CALL(SetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
-                EVT_SETF(LVar0, EVT_FLOAT(0.2))
-                EVT_CALL(SetVirtualEntityScale, LVarA, LVar0, LVar0, LVar0)
-                EVT_LOOP(4)
-                    EVT_ADDF(LVar0, EVT_FLOAT(0.2))
-                    EVT_CALL(SetVirtualEntityScale, LVarA, LVar0, LVar0, LVar0)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-                EVT_SET(LVar0, 0)
-                EVT_LOOP(5)
-                    EVT_ADD(LVar0, 72)
-                    EVT_CALL(SetVirtualEntityRotation, LVarA, 0, LVar0, 0)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-                EVT_CALL(PlaySound, 0x2052)
-                EVT_SET(LVar0, LVarD)
-                EVT_SET(LVar1, LVarE)
-                EVT_SET(LVar2, LVarF)
-                EVT_SET(LVar3, 0)
-                EVT_LOOP(50)
-                    EVT_CALL(SetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
-                    EVT_CALL(SetVirtualEntityRotation, LVarA, 0, LVar3, 0)
-                    EVT_ADD(LVar1, 6)
-                    EVT_ADD(LVar3, 45)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-            EVT_END_THREAD
-            EVT_THREAD
-                EVT_CALL(PlaySound, 0x2071)
-                EVT_CALL(GetOwnerTarget, LVarA, LVar1)
-                EVT_CALL(SetActorFlagBits, LVarA, 4, 1)
-                EVT_SETF(LVar0, EVT_FLOAT(1.0))
-                EVT_LOOP(18)
-                    EVT_SUBF(LVar0, EVT_FLOAT(0.05))
-                    EVT_CALL(SetActorScale, LVarA, LVar0, LVar0, LVar0)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-                EVT_CALL(SetActorPos, LVarA, NPC_DISPOSE_LOCATION)
-                EVT_CALL(GetActorPos, LVarA, LVar0, LVar1, LVar2)
-                EVT_LOOP(10)
-                    EVT_CALL(PlayEffect, 0x11, 1, LVar0, LVar1, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)
-                    EVT_ADD(LVar1, 30)
-                    EVT_WAIT(5)
-                EVT_END_LOOP
-                EVT_CALL(SetBattleFlagBits, BS_FLAGS1_STAR_POINTS_DROPPED, 1)
-                EVT_CALL(RemoveActor, LVarA)
-            EVT_END_THREAD
-        EVT_CASE_DEFAULT
-            EVT_IF_EQ(LocalFlag(0), 0)
-                EVT_CALL(PlayerDamageEnemy, LVar0, 0, 65535, 0, 0, BS_FLAGS1_FORCE_HIT_IMMUNE | BS_FLAGS1_SP_EVT_ACTIVE)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_WAIT(5)
-    EVT_CALL(ChooseNextTarget, 0, LVar0)
-    EVT_IF_NE(LVar0, -1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_WAIT(70)
-    EVT_CALL(func_802A15B4_795894)
-    EVT_EXEC_WAIT(N(802A200C))
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 25)
+    EVT_ADD(LVar0, 30)
+    EVT_CALL(NpcFlyTo, 100, LVar0, LVar1, LVar2, 20, 0, 10)
+    EVT_WAIT(15)
+    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleMisstar_Idle)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar0, 15)
+    EVT_ADD(LVar1, 15)
+    EVT_ADD(LVar2, -5)
+    EVT_CALL(NpcFlyTo, 100, LVar0, LVar1, LVar2, 10, 0, 10)
+    EVT_CALL(PlaySound, SOUND_245)
+    EVT_THREAD
+        EVT_CALL(PlayEffect, 0x40, 2, LVar0, LVar1, LVar2, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_WAIT(2)
+        EVT_USE_BUF(EVT_PTR(N(intTable_802A24E8)))
+        EVT_LOOP(5)
+            EVT_BUF_READ2(LVar5, LVar6)
+            EVT_SET(LVar3, LVar0)
+            EVT_SET(LVar4, LVar1)
+            EVT_ADD(LVar3, LVar5)
+            EVT_ADD(LVar4, LVar6)
+            EVT_CALL(PlayEffect, 0x40, 2, LVar3, LVar4, LVar2, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_WAIT(2)
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_THREAD
+        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar1, 15)
+        EVT_ADD(LVar0, 5)
+        EVT_CALL(N(UnkStarFunc1), LVar0, LVar1, LVar2)
+        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar1, 20)
+        EVT_ADD(LVar0, 25)
+        EVT_CALL(NpcFlyTo, 100, LVar0, LVar1, LVar2, 10, 0, 10)
+    EVT_END_THREAD
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x01002E)
+    EVT_WAIT(12)
+    EVT_THREAD
+        EVT_EXEC_WAIT(N(802A1F6C))
+    EVT_END_THREAD
+    EVT_THREAD
+        EVT_LOOP(2)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+            EVT_WAIT(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+            EVT_WAIT(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.2), EVT_FLOAT(0.95), EVT_FLOAT(1.0))
+            EVT_WAIT(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
+            EVT_WAIT(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.35), EVT_FLOAT(0.85), EVT_FLOAT(1.0))
+            EVT_WAIT(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.38), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
+            EVT_WAIT(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.4), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
+            EVT_WAIT(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.85), EVT_FLOAT(1.0))
+            EVT_WAIT(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.2), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
+            EVT_WAIT(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.95), EVT_FLOAT(1.0))
+            EVT_WAIT(1)
+        EVT_END_LOOP
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+        EVT_WAIT(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+        EVT_WAIT(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.2), EVT_FLOAT(0.95), EVT_FLOAT(1.0))
+        EVT_WAIT(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
+        EVT_WAIT(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.35), EVT_FLOAT(0.85), EVT_FLOAT(1.0))
+        EVT_WAIT(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.38), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
+        EVT_WAIT(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.4), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
+        EVT_WAIT(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
+        EVT_WAIT(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
+        EVT_WAIT(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.95), EVT_FLOAT(1.1), EVT_FLOAT(1.0))
+        EVT_WAIT(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+        EVT_WAIT(1)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_END_THREAD
+    EVT_LOOP(10)
+        EVT_WAIT(3)
+    EVT_END_LOOP
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar0, 0)
+    EVT_ADD(LVar1, 35)
+    EVT_CALL(func_802A156C_7922FC, LVar0, LVar1, LVar2, 20)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 25)
+    EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, 20)
+    EVT_CALL(N(AddHP), 20)
+    EVT_THREAD
+        EVT_CALL(N(UnkBackgroundFunc))
+    EVT_END_THREAD
     EVT_CALL(func_80276EFC)
-    EVT_EXEC_WAIT(N(802A245C))
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x160)
+    EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
+    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(1.0))
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_10009)
+    EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_CALL(func_80273444, 20, 0, 0)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
+    EVT_WAIT(4)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
+    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+    EVT_CALL(PlayerRunToGoal, 0)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_RETURN
     EVT_END
 };

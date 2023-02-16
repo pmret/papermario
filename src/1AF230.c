@@ -17,32 +17,40 @@ typedef struct StarPowerEntry {
     /* 0x10 */ Bytecode* init;
 } StarPowerEntry; // size = 0x14
 
-extern EvtScript battle_star_focus_usePower;
-extern EvtScript battle_star_refresh_usePower;
-extern EvtScript battle_star_lullaby_usePower;
-extern EvtScript battle_star_star_storm_usePower;
-extern EvtScript battle_star_chill_out_usePower;
-extern EvtScript battle_star_smooch_usePower;
-extern EvtScript battle_star_time_out_usePower;
-extern EvtScript battle_star_up_and_away_usePower;
-extern EvtScript battle_star_star_beam_usePower;
-extern EvtScript battle_star_peach_beam_usePower;
-extern EvtScript battle_star_peach_focus_usePower;
-extern EvtScript battle_star_peach_dash_usePower;
+extern EvtScript battle_star_power_focus_usePower;
+extern EvtScript battle_star_power_refresh_usePower;
+extern EvtScript battle_star_power_lullaby_usePower;
+extern EvtScript battle_star_power_star_storm_usePower;
+extern EvtScript battle_star_power_chill_out_usePower;
+extern EvtScript battle_star_power_smooch_usePower;
+extern EvtScript battle_star_power_time_out_usePower;
+extern EvtScript battle_star_power_up_and_away_usePower;
+extern EvtScript battle_star_power_star_beam_usePower;
+extern EvtScript battle_star_power_peach_beam_usePower;
+extern EvtScript battle_star_power_peach_focus_usePower;
+extern EvtScript battle_star_power_peach_dash_usePower;
 
-StarPowerEntry D_8029C7D0[] = {
-    { battle_star_focus_ROM_START,       battle_star_focus_ROM_END,       battle_star_focus_VRAM,       battle_star_focus_usePower, },
-    { battle_star_refresh_ROM_START,     battle_star_refresh_ROM_END,     battle_star_refresh_VRAM,     battle_star_refresh_usePower, },
-    { battle_star_lullaby_ROM_START,     battle_star_lullaby_ROM_END,     battle_star_lullaby_VRAM,     battle_star_lullaby_usePower, },
-    { battle_star_star_storm_ROM_START,  battle_star_star_storm_ROM_END,  battle_star_star_storm_VRAM,  battle_star_star_storm_usePower, },
-    { battle_star_chill_out_ROM_START,   battle_star_chill_out_ROM_END,   battle_star_chill_out_VRAM,   battle_star_chill_out_usePower, },
-    { battle_star_smooch_ROM_START,      battle_star_smooch_ROM_END,      battle_star_smooch_VRAM,      battle_star_smooch_usePower, },
-    { battle_star_time_out_ROM_START,    battle_star_time_out_ROM_END,    battle_star_time_out_VRAM,    battle_star_time_out_usePower, },
-    { battle_star_up_and_away_ROM_START, battle_star_up_and_away_ROM_END, battle_star_up_and_away_VRAM, battle_star_up_and_away_usePower, },
-    { battle_star_star_beam_ROM_START,   battle_star_star_beam_ROM_END,   battle_star_star_beam_VRAM,   battle_star_star_beam_usePower, },
-    { battle_star_peach_beam_ROM_START,  battle_star_peach_beam_ROM_END,  battle_star_peach_beam_VRAM,  battle_star_peach_beam_usePower, },
-    { battle_star_peach_focus_ROM_START, battle_star_peach_focus_ROM_END, battle_star_peach_focus_VRAM, battle_star_peach_focus_usePower, },
-    { battle_star_peach_dash_ROM_START,  battle_star_peach_dash_ROM_END,  battle_star_peach_dash_VRAM,  battle_star_peach_dash_usePower, },
+#define STAR_POWER(name) \
+{ \
+    .dmaStart = battle_star_power_##name##_ROM_START, \
+    .dmaEnd   = battle_star_power_##name##_ROM_END, \
+    .dmaDest  = battle_star_power_##name##_VRAM, \
+    .init     = battle_star_power_##name##_usePower, \
+}
+
+StarPowerEntry StarPowersTable[] = {
+    STAR_POWER(focus),
+    STAR_POWER(refresh),
+    STAR_POWER(lullaby),
+    STAR_POWER(star_storm),
+    STAR_POWER(chill_out),
+    STAR_POWER(smooch),
+    STAR_POWER(time_out),
+    STAR_POWER(up_and_away),
+    STAR_POWER(star_beam),
+    STAR_POWER(peach_beam),
+    STAR_POWER(peach_focus),
+    STAR_POWER(peach_dash),
 };
 
 s32 D_8029C890[][5] = {
@@ -121,9 +129,10 @@ ApiStatus LoadStarPowerScript(Evt* script, s32 isInitialCall) {
 
     playerData->specialBarsFilled -= gMoveTable[battleStatus->selectedMoveID].costFP * 256;
     starPowerIdx = battleStatus->moveArgument;
-    dma_copy((&D_8029C7D0[starPowerIdx])->dmaStart, (&D_8029C7D0[starPowerIdx])->dmaEnd,
-             (&D_8029C7D0[starPowerIdx])->dmaDest);
-    script->varTable[0] = (s32) (&D_8029C7D0[starPowerIdx])->init;
+    dma_copy((&StarPowersTable[starPowerIdx])->dmaStart,
+             (&StarPowersTable[starPowerIdx])->dmaEnd,
+             (&StarPowersTable[starPowerIdx])->dmaDest);
+    script->varTable[0] = (s32) (&StarPowersTable[starPowerIdx])->init;
     return ApiStatus_DONE2;
 }
 

@@ -8733,7 +8733,7 @@ segments:
     subsegments:
     - [0x785B20, c]
     - [0x785C20, data]
-  - dir: battle/star/focus
+  - dir: battle/star_power/focus
     type: code
     start: 0x789E60
     vram: 0x802A1000
@@ -8741,7 +8741,7 @@ segments:
     subsegments:
     - [0x789E60, c]
     - [0x78A490]
-  - dir: battle/star/refresh
+  - dir: battle/star_power/refresh
     type: code
     start: 0x78B600
     vram: 0x802A1000
@@ -8749,7 +8749,7 @@ segments:
     subsegments:
     - [0x78B600, c]
     - [0x78C070]
-  - dir: battle/star/lullaby
+  - dir: battle/star_power/lullaby
     type: code
     start: 0x78D150
     vram: 0x802A1000
@@ -8757,7 +8757,7 @@ segments:
     subsegments:
     - [0x78D150, c]
     - [0x78D770]
-  - dir: battle/star/star_storm
+  - dir: battle/star_power/star_storm
     type: code
     start: 0x78E7D0
     vram: 0x802A1000
@@ -8765,7 +8765,7 @@ segments:
     subsegments:
     - [0x78E7D0, c]
     - [0x78EEC0]
-  - dir: battle/star/chill_out
+  - dir: battle/star_power/chill_out
     type: code
     start: 0x7900D0
     vram: 0x802A1000
@@ -8773,7 +8773,7 @@ segments:
     subsegments:
     - [0x7900D0, c]
     - [0x7909C0]
-  - dir: battle/star/smooch
+  - dir: battle/star_power/smooch
     type: code
     start: 0x791D90
     vram: 0x802A1000
@@ -8781,7 +8781,7 @@ segments:
     subsegments:
     - [0x791D90, c]
     - [0x7923C0]
-  - dir: battle/star/time_out
+  - dir: battle/star_power/time_out
     type: code
     start: 0x793D20
     vram: 0x802A1000
@@ -8789,7 +8789,7 @@ segments:
     subsegments:
     - [0x793D20, c]
     - [0x794240]
-  - dir: battle/star/up_and_away
+  - dir: battle/star_power/up_and_away
     type: code
     start: 0x7952E0
     vram: 0x802A1000
@@ -8797,7 +8797,7 @@ segments:
     subsegments:
     - [0x7952E0, c]
     - [0x7959B0]
-  - dir: battle/star/star_beam
+  - dir: battle/star_power/star_beam
     type: code
     start: 0x796FC0
     vram: 0x802A1000
@@ -8805,7 +8805,7 @@ segments:
     subsegments:
     - [0x796FC0, c]
     - [0x7984B0]
-  - dir: battle/star/peach_beam
+  - dir: battle/star_power/peach_beam
     type: code
     start: 0x7997B0
     vram: 0x802A1000
@@ -8813,7 +8813,7 @@ segments:
     subsegments:
     - [0x7997B0, c]
     - [0x79ACA0]
-  - dir: battle/star/peach_focus
+  - dir: battle/star_power/peach_focus
     type: code
     start: 0x79BFA0
     vram: 0x802A1000
@@ -8821,7 +8821,7 @@ segments:
     subsegments:
     - [0x79BFA0, c]
     - [0x79C4D0]
-  - dir: battle/star/peach_dash
+  - dir: battle/star_power/peach_dash
     type: code
     start: 0x79D8A0
     vram: 0x802A1000
