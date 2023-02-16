@@ -574,7 +574,7 @@ EvtScript N(hammerAttack) = {
                 EVT_WAIT(5)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 2)
                 EVT_SUB(LVar1, 7)
-                EVT_CALL(PlayEffect, EFFECT_FIREWORK, 0, LVar1, LVar2, LVar3, EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_FIREWORK, 0, LVar1, LVar2, LVar3, EVT_FLOAT(1.0), 0, 0)
                 EVT_WAIT(40)
             EVT_ELSE
                 EVT_WAIT(8)
@@ -588,7 +588,7 @@ EvtScript N(hammerAttack) = {
                 EVT_WAIT(10)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar1, 10)
-                EVT_CALL(PlayEffect, EFFECT_EMOTE, 2, 0, LVar0, LVar1, LVar2, 25, -45, 20, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_EMOTE, 2, 0, LVar0, LVar1, LVar2, 25, -45, 20, 0, 0)
                 EVT_WAIT(20)
             EVT_END_IF
             EVT_LABEL(100)
