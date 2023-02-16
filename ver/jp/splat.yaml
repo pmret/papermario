@@ -287,13 +287,13 @@ segments:
     - [0x4DF10, c, battle/battle]
     - [0x4E580, bin, n_aspMain_text]
 
-    - [0x4F1E0, .data, main_pre] # TODO: find data offset
-    - [0x4F1E0, .data, main] # TODO: find data offset
-    - [0x4F1E0, .data, main_loop] # TODO: find data offset
-    - [0x4F1E0, .data, background_gfx] # TODO: find data offset
-    - [0x4F640, .data, rumble]
-    - [0x4F650, .data, 43F0]
-    - [0x4F9B0, .data, fio]
+    - [0x4F1E0, .data, main_pre]
+    - [auto, .data, main]
+    - [auto, .data, main_loop]
+    - [auto, .data, background_gfx]
+    - [auto, .data, rumble]
+    - [auto, .data, 43F0]
+    - [auto, .data, fio]
     - start: 0x4F9C0
       type: .data
       name: curtains
@@ -315,109 +315,112 @@ segments:
         - [0x51240]
         - [0x51520, ia8, ui/no_controller, 128, 32]
         - [0x52520]
-    - [0x525F0, .data, crash_screen]
-    - [0x527D0, .data, os/nusys/nugfxtaskmgr]
-    - [0x527E0, .data, camera]
-    - [0x527E0, .data, game_modes]
-    - [0x52C70, .data, state_battle]
-    - [0x52C70, .data, state_logos]
-    - [0x52D20, .data, state_pause]
-    - [0x52D20, .data, state_file_select] # todo: find data offset
-    - [0x52D20, .data, state_title_screen] # todo: find data offset
-    - [0x52D20, .data, state_demo] # todo: find data offset
-    - [0x52D20, .data, npc] # todo: find data offset
-    - [0x52D20, .data, encounter] # todo: find data offset
-    - [0x52D20, .data, status_icons] # todo: find data offset
-    - [0x52D20, .data, audio/25f00_len_940] # todo: find data offset
-    - [0x52D20, .data, audio/sfx_player] # todo: find data offset
-    - [0x52D20, .data, audio/30450] # todo: find data offset
-    - [0x52D20, .data, audio/31650] # todo: find data offset
-    - [0x52D20, .data, audio/33450] # todo: find data offset
-    - [0x54330, .data, audio/tables]
-    - [0x5A3B0, .data, audio/reverb]
-    - [0x5A5E0, .data, effects]
-    - [0x5A5E0, .data, 5B320]
-    - [0x6B330, .data, world/world] # 8008FF30
-    - [0x6EA90, .data, 38F00]
-    - [0x6EF50, .data, os/nusys/nusched ]
-    - [0x6EF50, .data, os/nusys/nugfxinit ] # todo: find data offset
-    - [0x6EF50, .data, os/nusys/nucontpakmgr ] # todo: find data offset
-    - [0x6EF50, .data, os/nusys/nucontrmbmgr ] # todo: find data offset
-    - [0x6EF50, .data, os/nusys/nugfxfuncset ] # todo: find data offset
-    - [0x6EF50, .data, os/nusys/nusimgr]
-    - [0x6EF50, .data, os/nusys/nucontmgr ] # todo: find data offset
+    - [0x52520]
+    - [auto, .data, crash_screen]
+    - [auto, .data, os/nusys/nugfxtaskmgr]
+    - [auto, .data, camera]
+    - [auto, .data, game_modes]
+    - [auto, .data, state_battle]
+    - [auto, .data, state_logos]
+    - [auto, .data, state_pause]
+    - [auto, .data, state_file_select]
+    - [auto, .data, state_title_screen]
+    - [auto, .data, state_demo]
+    - [auto, .data, npc]
+    - [auto, .data, encounter]
+    - [auto, .data, status_icons]
+    - [auto, .data, audio/25f00_len_940]
+    - [auto, .data, audio/sfx_player]
+    - [auto, .data, audio/30450]
+    - [auto, .data, audio/31650]
+    - [auto, .data, audio/33450]
+    - [auto, .data, audio/tables]
+    - [auto, .data, audio/reverb]
+    - [auto, .data, effects]
+    - [auto, .data, 5B320]
+    - [auto, .data, world/world]
+    - [auto, .data, 38F00]
+    - [auto, .data, os/nusys/nusched]
+    - [auto, .data, os/nusys/nugfxinit]
+    - [auto, .data, os/nusys/nucontpakmgr]
+    - [auto, .data, os/nusys/nucontrmbmgr]
+    - [auto, .data, os/nusys/nugfxfuncset]
+    - [auto, .data, os/nusys/nusimgr]
+    - [auto, .data, os/nusys/nucontmgr]
 
-    - [0x6f130, .data, os/pimgr]
-    - [0x6f160, .data, os/cartrominit]
-    - [0x6f170, .data, os/piacs ]
-    - [0x6f180, .data, os/aisetnextbuf]
-    - [0x6F190, .data, os/controller]
-    - [0x6F1A0, .data, os/position]
-    - [0x6F1B0, .data, os/rotateRPY]
-    - [0x6F1C0, .data, os/sins]
-    - [0x6F9C0, .data, os/xprintf]
-    - [0x6FA10, .data, os/seteventmesg]
-    - [0x6FA20, .data, os/siacs]
-    - [0x6FA50, .data, os/setthreadpri]
-    - [0x6FA50, .data, os/timerintr]
-    - [0x6FA60, .data, os/vimgr]
-    - [0x6FA80, .data, os/vitbl]
-    - [0x70C50, .data, os/guRotate]
-    - [0x70C60, .data, os/contpfs]
-    - [0x70C70, .data, os/contramread]
-    - [0x70C70, .data, os/initialize]
-    - [0x70CD0, .data, os/xlitob]
-    - [0x70D00, .data, os/vi]
-    - [0x70DC0, .data, os/vimodempallan1]
-    - [0x70E10, .data, battle/battle]
+    - [auto, .data, os/pimgr]
+    - [auto, .data, os/cartrominit]
+    - [auto, .data, os/piacs ]
+    - [auto, .data, os/aisetnextbuf]
+    - [auto, .data, os/controller]
+    - [auto, .data, os/position]
+    - [auto, .data, os/rotateRPY]
+    - [auto, .data, os/sins]
+    - [auto, .data, os/xprintf]
+    - [auto, .data, os/seteventmesg]
+    - [auto, .data, os/siacs]
+    - [auto, .data, os/setthreadpri]
+    - [auto, .data, os/timerintr]
+    - [auto, .data, os/vimgr]
+    - [auto, .data, os/vitbl]
+    - [auto, .data, os/guRotate]
+    - [auto, .data, os/contpfs]
+    - [auto, .data, os/contramread]
+    - [auto, .data, os/initialize]
+    - [auto, .data, os/xlitob]
+    - [auto, .data, os/vi]
+    - [auto, .data, os/vimodempallan1]
+    - [auto, .data, battle/battle]
     - [0x71410, bin, gspF3DEX2kawase_fifo_text]
     - [0x72A40, bin, gspF3DEX2kawase_fifo_data]
     - [0x72E60, bin, n_aspMain_data]
-    - [0x73110, .rodata, is_debug]
-    - [0x73128, .rodata, main_loop]
-    - [0x73140, .rodata, 43F0]
-    - [0x73140, .rodata, curtains]
-    - [0x73210, .rodata, crash_screen]
-    - [0x735D0, .rodata, 8800]
-    - [0x735F0, .rodata, B0E0]
-    - [0x73660, .rodata, camera]
-    - [0x73670, .rodata, state_logos]
-    - [0x736C8, .rodata, state_file_select] # todo: find offset
-    - [0x736C8, .rodata, 111f0_len_860] # todo: find offset
-    - [0x736C8, .rodata, state_intro] # todo: find offset
-    - [0x736C8, .rodata, state_title_screen] # todo: find offset
-    - [0x736C8, .rodata, state_demo] # todo: find offset
-    - [0x736C8, .rodata, npc] # todo: find offset
-    - [0x736C8, .rodata, encounter] # todo: find offset
-    - [0x736C8, .rodata, status_icons] # todo: find offset
-    - [0x736C8, .rodata, 23680] # todo: find offset
-    - [0x736C8, .rodata, audio/28910_len_5090] # todo: find offset
-    - [0x736C8, .rodata, audio/2e230_len_2190] # todo: find offset
-    - [0x736C8, .rodata, audio/30450] # todo: find offset
-    - [0x736C8, .rodata, audio/33450] # todo: find offset
-    - [0x736C8, .rodata, audio/reverb] # todo: find offset
+    - [0x73110]
+    - [auto, .rodata, is_debug]
+    - [auto, .rodata, main_loop]
+    - [auto, .rodata, 43F0]
+    - [auto, .rodata, curtains]
+    - [auto, .rodata, crash_screen]
+    - [auto, .rodata, 8800]
+    - [auto, .rodata, B0E0]
+    - [auto, .rodata, camera]
+    - [auto, .rodata, state_logos]
+    - [auto, .rodata, state_file_select] 
+    - [auto, .rodata, 111f0_len_860] 
+    - [auto, .rodata, state_intro] 
+    - [auto, .rodata, state_title_screen] 
+    - [auto, .rodata, state_demo] 
+    - [auto, .rodata, npc] 
+    - [auto, .rodata, encounter] 
+    - [auto, .rodata, status_icons] 
+    - [auto, .rodata, 23680] 
+    - [auto, .rodata, audio/28910_len_5090] 
+    - [auto, .rodata, audio/2e230_len_2190] 
+    - [auto, .rodata, audio/30450] 
+    - [auto, .rodata, audio/33450] 
+    - [auto, .rodata, audio/reverb] 
 
-    - [0x73D80, .rodata, 5B320]
-    - [0x73D80, .rodata, world/world] # todo: find offset
-    - [0x74E80, rodata, os/osSetIntMask] # todo: doesn't get dumped
-    - [0x74F00, .rodata, os/devmgr]
-    - [0x74F20, .rodata, os/aisetfrequency]
-    - [0x74F30, .rodata, os/guLookAt]
-    - [0x74F50, .rodata, os/lookathil]
-    - [0x74F80, .rodata, os/lookatref]
-    - [0x74F80, .rodata, os/perspective]
-    - [0x74FD0, .rodata, os/xprintf]
-    - [0x75150, .rodata, os/viswapcontext]
+    - [auto, .rodata, 5B320]
+    - [auto, .rodata, world/world] 
+    - [0x74E80, rodata, os/osSetIntMask]
+    - [0x74F00]
+    - [auto, .rodata, os/devmgr]
+    - [auto, .rodata, os/aisetfrequency]
+    - [auto, .rodata, os/guLookAt]
+    - [auto, .rodata, os/lookathil]
+    - [auto, .rodata, os/lookatref]
+    - [auto, .rodata, os/perspective]
+    - [auto, .rodata, os/xprintf]
+    - [auto, .rodata, os/viswapcontext]
 
     - [0x75160, rodata, os/exceptasm]
-
-    - [0x751B0, .rodata, os/xlitob]
-    - [0x751B0, .rodata, os/xldtob]
-    - [0x75220, .rodata, gcc/divdi3]
-    - [0x75320, .rodata, gcc/moddi3]
-    - [0x75420, .rodata, gcc/udivdi3]
-    - [0x75520, .rodata, gcc/umoddi3]
-    - [0x75620, .rodata, battle/battle]
+    - [0x751B0]
+    - [auto, .rodata, os/xlitob]
+    - [auto, .rodata, os/xldtob]
+    - [auto, .rodata, gcc/divdi3]
+    - [auto, .rodata, gcc/moddi3]
+    - [auto, .rodata, gcc/udivdi3]
+    - [auto, .rodata, gcc/umoddi3]
+    - [auto, .rodata, battle/battle]
     - [0x75990]
 
   - name: engine1
@@ -3224,7 +3227,7 @@ segments:
 
   - start: 0x1D40000
     type: bin
-    name: pm_msg # message reading is broken
+    name: pm_msg # TODO: fix message dumping for JP
 
   - [0x1DDBE60, bin]
   - [0x1E00000, pm_map_data, mapfs]
