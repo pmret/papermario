@@ -94,18 +94,18 @@ Formation N(Formation_0C) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("バサバサチュルルx２,バケバケ", N(Formation_01), &N(pra_01)),
-    BATTLE("バケバケ", N(Formation_02), &N(pra_01)),
-    BATTLE("バケバケx2", N(Formation_03), &N(pra_01)),
-    BATTLE("バケバケx3", N(Formation_04), &N(pra_01)),
-    BATTLE("バケバケx4", N(Formation_05), &N(pra_01)),
-    BATTLE("バケバケx２,バサバサチュルル", N(Formation_06), &N(pra_01)),
-    BATTLE("バケバケ,バサバサチュルル,バケバケ", N(Formation_07), &N(pra_01)),
-    BATTLE("バケバケ,レッドカメック", N(Formation_08), &N(pra_01)),
-    BATTLE("バケバケx２,レッドカメック", N(Formation_09), &N(pra_01)),
-    BATTLE("バケバケ,ホワイトガボン,バケバケ", N(Formation_0A), &N(pra_01)),
-    BATTLE("バケバケx２,グレイカメック,レッドカメック", N(Formation_0B), &N(pra_01)),
-    BATTLE("ホワイトガボンx２,バケバケ", N(Formation_0C), &N(pra_01)),
+    BATTLE(N(Formation_01), &N(pra_01), "バサバサチュルルx２,バケバケ"),
+    BATTLE(N(Formation_02), &N(pra_01), "バケバケ"),
+    BATTLE(N(Formation_03), &N(pra_01), "バケバケx2"),
+    BATTLE(N(Formation_04), &N(pra_01), "バケバケx3"),
+    BATTLE(N(Formation_05), &N(pra_01), "バケバケx4"),
+    BATTLE(N(Formation_06), &N(pra_01), "バケバケx２,バサバサチュルル"),
+    BATTLE(N(Formation_07), &N(pra_01), "バケバケ,バサバサチュルル,バケバケ"),
+    BATTLE(N(Formation_08), &N(pra_01), "バケバケ,レッドカメック"),
+    BATTLE(N(Formation_09), &N(pra_01), "バケバケx２,レッドカメック"),
+    BATTLE(N(Formation_0A), &N(pra_01), "バケバケ,ホワイトガボン,バケバケ"),
+    BATTLE(N(Formation_0B), &N(pra_01), "バケバケx２,グレイカメック,レッドカメック"),
+    BATTLE(N(Formation_0C), &N(pra_01), "ホワイトガボンx２,バケバケ"),
     {},
 };
 

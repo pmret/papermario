@@ -375,8 +375,8 @@ typedef struct BattleArea {
 
 extern BattleArea gBattleAreas[0x30];
 
-#define BATTLE(name, formation, stage) { name, ARRAY_COUNT(formation), (Formation*) formation, stage }
-#define BATTLE_WITH_SCRIPT(name, formation, stage, script) { name, ARRAY_COUNT(formation), (Formation*) formation, stage, script }
+#define BATTLE(formation, stage, name) { name, ARRAY_COUNT(formation), (Formation*) formation, stage }
+#define BATTLE_WITH_SCRIPT(formation, stage, script, name) { name, ARRAY_COUNT(formation), (Formation*) formation, stage, script }
 
 // TODO: enum for home position (0..3 are floor, 4..7 are air, etc.)
 

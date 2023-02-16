@@ -32,7 +32,7 @@ Formation N(Formation_00) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("ノコブロス", N(Formation_00), &N(trd_00)),
+    BATTLE(N(Formation_00), &N(trd_00), "ノコブロス"),
     {},
 };
 

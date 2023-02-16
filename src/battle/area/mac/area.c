@@ -34,11 +34,11 @@ Formation N(Formation_04) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("チェン",         N(Formation_00), &N(mac_02)),
-    BATTLE("リー",           N(Formation_01), &N(mac_02)),
-    BATTLE("シショー その１", N(Formation_02), &N(mac_02)),
-    BATTLE("シショー その２", N(Formation_03), &N(mac_02)),
-    BATTLE("シショー その３", N(Formation_04), &N(mac_02)),
+    BATTLE(N(Formation_00), &N(mac_02), "チェン"),
+    BATTLE(N(Formation_01), &N(mac_02), "リー"),
+    BATTLE(N(Formation_02), &N(mac_02), "シショー その１"),
+    BATTLE(N(Formation_03), &N(mac_02), "シショー その２"),
+    BATTLE(N(Formation_04), &N(mac_02), "シショー その３"),
     {},
 };
 

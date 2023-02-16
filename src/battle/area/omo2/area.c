@@ -16,7 +16,7 @@ Formation N(Formation_01) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("しょうぐんヘイホー", N(Formation_01), &N(omo_07)),
+    BATTLE(N(Formation_01), &N(omo_07), "しょうぐんヘイホー"),
     {},
 };
 

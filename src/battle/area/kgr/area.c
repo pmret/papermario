@@ -12,7 +12,7 @@ Formation N(Formation_00) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("ケムシ", N(Formation_00), &N(kgr_01)),
+    BATTLE(N(Formation_00), &N(kgr_01), "ケムシ"),
     {},
 };
 

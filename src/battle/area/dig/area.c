@@ -54,11 +54,11 @@ Formation N(Formation_04) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE_WITH_SCRIPT("ダイジェスト０１", N(Formation_00), &N(dig_01), &N(dig_01_script)),
-    BATTLE_WITH_SCRIPT("ダイジェスト０２", N(Formation_01), &N(dig_02), &N(dig_02_script)),
-    BATTLE_WITH_SCRIPT("ダイジェスト０３", N(Formation_02), &N(dig_03), &N(dig_03_script)),
-    BATTLE_WITH_SCRIPT("ダイジェスト０４", N(Formation_03), &N(dig_04), &N(dig_04_script)),
-    BATTLE_WITH_SCRIPT("ダイジェスト０５", N(Formation_04), &N(dig_05), &N(dig_05_script)),
+    BATTLE_WITH_SCRIPT(N(Formation_00), &N(dig_01), &N(dig_01_script), "ダイジェスト０１"),
+    BATTLE_WITH_SCRIPT(N(Formation_01), &N(dig_02), &N(dig_02_script), "ダイジェスト０２"),
+    BATTLE_WITH_SCRIPT(N(Formation_02), &N(dig_03), &N(dig_03_script), "ダイジェスト０３"),
+    BATTLE_WITH_SCRIPT(N(Formation_03), &N(dig_04), &N(dig_04_script), "ダイジェスト０４"),
+    BATTLE_WITH_SCRIPT(N(Formation_04), &N(dig_05), &N(dig_05_script), "ダイジェスト０５"),
     {},
 };
 

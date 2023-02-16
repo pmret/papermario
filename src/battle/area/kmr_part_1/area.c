@@ -77,18 +77,18 @@ Formation N(Formation_0B) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("クリボー", N(Formation_00), &N(kmr_04)),
-    BATTLE("クリボーx２", N(Formation_01), &N(kmr_04)),
-    BATTLE("クリボーx３", N(Formation_02), &N(kmr_04)),
-    BATTLE("クリボー、パタクリボー", N(Formation_03), &N(kmr_04)),
-    BATTLE("クリボーx４", N(Formation_04), &N(kmr_04)),
-    BATTLE("クリボー,トゲクリボー", N(Formation_05), &N(kmr_04)),
-    BATTLE("クリボー,パタクリボー,クリボー,パタクリボー", N(Formation_06), &N(kmr_04)),
-    BATTLE("パタクリボー", N(Formation_07), &N(kmr_04)),
-    BATTLE("パタクリボーx２", N(Formation_08), &N(kmr_04)),
-    BATTLE("パタクリボーx３", N(Formation_09), &N(kmr_04)),
-    BATTLE("トゲクリボー", N(Formation_0A), &N(kmr_04)),
-    BATTLE("トゲクリボー、クリボー", N(Formation_0B), &N(kmr_04)),
+    BATTLE(N(Formation_00), &N(kmr_04), "クリボー"),
+    BATTLE(N(Formation_01), &N(kmr_04), "クリボーx２"),
+    BATTLE(N(Formation_02), &N(kmr_04), "クリボーx３"),
+    BATTLE(N(Formation_03), &N(kmr_04), "クリボー、パタクリボー"),
+    BATTLE(N(Formation_04), &N(kmr_04), "クリボーx４"),
+    BATTLE(N(Formation_05), &N(kmr_04), "クリボー,トゲクリボー"),
+    BATTLE(N(Formation_06), &N(kmr_04), "クリボー,パタクリボー,クリボー,パタクリボー"),
+    BATTLE(N(Formation_07), &N(kmr_04), "パタクリボー"),
+    BATTLE(N(Formation_08), &N(kmr_04), "パタクリボーx２"),
+    BATTLE(N(Formation_09), &N(kmr_04), "パタクリボーx３"),
+    BATTLE(N(Formation_0A), &N(kmr_04), "トゲクリボー"),
+    BATTLE(N(Formation_0B), &N(kmr_04), "トゲクリボー、クリボー"),
     {},
 };
 

@@ -27,9 +27,9 @@ Formation N(Formation_02) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("ブラックヘイホーx３", N(Formation_00), &N(kpa_01)),
-    BATTLE("バケバケx２", N(Formation_01), &N(kpa_01)),
-    BATTLE("バケバケx４", N(Formation_02), &N(kpa_01)),
+    BATTLE(N(Formation_00), &N(kpa_01), "ブラックヘイホーx３"),
+    BATTLE(N(Formation_01), &N(kpa_01), "バケバケx２"),
+    BATTLE(N(Formation_02), &N(kpa_01), "バケバケx４"),
     {},
 };
 

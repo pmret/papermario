@@ -12,7 +12,7 @@ Formation N(Formation_00) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("カメックばば（ピーチ、ティンクせん）", N(Formation_00), &N(kpa_05)),
+    BATTLE(N(Formation_00), &N(kpa_05), "カメックばば（ピーチ、ティンクせん）"),
     {},
 };
 

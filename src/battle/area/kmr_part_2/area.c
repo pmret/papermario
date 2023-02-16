@@ -38,8 +38,8 @@ Formation N(Formation_01) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("クリレッド,クリブルー",           N(Formation_00), &N(kmr_03)),
-    BATTLE("クリキング,クリレッド,クリブルー", N(Formation_01), &N(kmr_06)),
+    BATTLE(N(Formation_00), &N(kmr_03), "クリレッド,クリブルー"),
+    BATTLE(N(Formation_01), &N(kmr_06), "クリキング,クリレッド,クリブルー"),
     {},
 };
 

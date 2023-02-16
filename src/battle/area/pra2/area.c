@@ -26,7 +26,7 @@ Formation N(Formation_01) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("パラレラー", N(Formation_01), &N(sam_04)),
+    BATTLE(N(Formation_01), &N(sam_04), "パラレラー"),
     {},
 };
 

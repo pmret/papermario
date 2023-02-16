@@ -45,12 +45,12 @@ Formation N(Formation_05) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("ガボンへい", N(Formation_00), &N(dgb_01)),
-    BATTLE("ガボンへいx２", N(Formation_01), &N(dgb_01)),
-    BATTLE("ガボンへいx３", N(Formation_02), &N(dgb_01)),
-    BATTLE("ガボンへいx４", N(Formation_03), &N(dgb_01)),
-    BATTLE("むてきドガボン", N(Formation_04), &N(dgb_01)),
-    BATTLE("むてきドガボンせりふなし", N(Formation_05), &N(dgb_01)),
+    BATTLE(N(Formation_00), &N(dgb_01), "ガボンへい"),
+    BATTLE(N(Formation_01), &N(dgb_01), "ガボンへいx２"),
+    BATTLE(N(Formation_02), &N(dgb_01), "ガボンへいx３"),
+    BATTLE(N(Formation_03), &N(dgb_01), "ガボンへいx４"),
+    BATTLE(N(Formation_04), &N(dgb_01), "むてきドガボン"),
+    BATTLE(N(Formation_05), &N(dgb_01), "むてきドガボンせりふなし"),
     {},
 };
 

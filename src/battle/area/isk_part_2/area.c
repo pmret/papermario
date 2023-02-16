@@ -25,7 +25,7 @@ Formation N(Formation_00) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("カーメン　ワンワン", N(Formation_00), &N(isk_01)),
+    BATTLE(N(Formation_00), &N(isk_01), "カーメン　ワンワン"),
     {},
 };
 

@@ -58,11 +58,11 @@ Formation N(Formation_04) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("スーパーキラーx２", N(Formation_00), &N(kpa_01)),
-    BATTLE("スーパーキラーx３", N(Formation_01), &N(kpa_01)),
-    BATTLE("スーパーキラーたいほうx２", N(Formation_02), &N(kpa_01)),
-    BATTLE("スーパーキラーたいほうx２,トゲノコ", N(Formation_03), &N(kpa_01)),
-    BATTLE("スーパーキラーたいほうx２,カメック", N(Formation_04), &N(kpa_01)),
+    BATTLE(N(Formation_00), &N(kpa_01), "スーパーキラーx２"),
+    BATTLE(N(Formation_01), &N(kpa_01), "スーパーキラーx３"),
+    BATTLE(N(Formation_02), &N(kpa_01), "スーパーキラーたいほうx２"),
+    BATTLE(N(Formation_03), &N(kpa_01), "スーパーキラーたいほうx２,トゲノコ"),
+    BATTLE(N(Formation_04), &N(kpa_01), "スーパーキラーたいほうx２,カメック"),
     {},
 };
 

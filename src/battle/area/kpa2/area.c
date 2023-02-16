@@ -36,11 +36,11 @@ Formation N(Formation_04) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("クッパ", N(Formation_00), &N(kpa_01)),
-    BATTLE("クッパ(オープニング)", N(Formation_01), &N(kpa_02)),
-    BATTLE("クッパ(ラストバトル１)", N(Formation_02), &N(kpa_02)),
-    BATTLE("クッパ(ラストバトル２)", N(Formation_03), &N(kpa_03)),
-    BATTLE("クッパ(ラストバトル３)", N(Formation_04), &N(kpa_03)),
+    BATTLE(N(Formation_00), &N(kpa_01), "クッパ"),
+    BATTLE(N(Formation_01), &N(kpa_02), "クッパ(オープニング)"),
+    BATTLE(N(Formation_02), &N(kpa_02), "クッパ(ラストバトル１)"),
+    BATTLE(N(Formation_03), &N(kpa_03), "クッパ(ラストバトル２)"),
+    BATTLE(N(Formation_04), &N(kpa_03), "クッパ(ラストバトル３)"),
     {},
 };
 

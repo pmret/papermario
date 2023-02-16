@@ -58,14 +58,14 @@ Formation N(Formation_07) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("トゲクリボー（レクチャー）", N(Formation_00), &N(kmr_03)),
-    BATTLE("パタクリボー（レクチャー）", N(Formation_01), &N(kmr_03)),
-    BATTLE("コワッパ１", N(Formation_02), &N(kmr_05)),
-    BATTLE("コワッパ２", N(Formation_03), &N(nok_01)),
-    BATTLE("コワッパ４", N(Formation_04), &N(mim_01)),
-    BATTLE("コワッパ５", N(Formation_05), &N(mac_01)),
-    BATTLE("コワッパ６", N(Formation_06), &N(sam_01)),
-    BATTLE("コワッパ７", N(Formation_07), &N(kpa_01)),
+    BATTLE(N(Formation_00), &N(kmr_03), "トゲクリボー（レクチャー）"),
+    BATTLE(N(Formation_01), &N(kmr_03), "パタクリボー（レクチャー）"),
+    BATTLE(N(Formation_02), &N(kmr_05), "コワッパ１"),
+    BATTLE(N(Formation_03), &N(nok_01), "コワッパ２"),
+    BATTLE(N(Formation_04), &N(mim_01), "コワッパ４"),
+    BATTLE(N(Formation_05), &N(mac_01), "コワッパ５"),
+    BATTLE(N(Formation_06), &N(sam_01), "コワッパ６"),
+    BATTLE(N(Formation_07), &N(kpa_01), "コワッパ７"),
     {},
 };
 

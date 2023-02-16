@@ -79,17 +79,17 @@ Formation N(Formation_0A) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("ビッグカンテラくん", N(Formation_00), &N(omo_03)),
-    BATTLE("クリボー（ピーチへん）", N(Formation_01), &N(omo_04)),
-    BATTLE("クリボーx２（ピーチへん）", N(Formation_02), &N(omo_04)),
-    BATTLE("ガボンへいx２（ピーチへん）", N(Formation_03), &N(omo_04)),
-    BATTLE("チョロボンx２（ピーチへん）", N(Formation_04), &N(omo_04)),
-    BATTLE("チョロボンx４（ピーチへん）", N(Formation_05), &N(omo_04)),
-    BATTLE("ハンマーブロスx２（ピーチへん）", N(Formation_06), &N(omo_04)),
-    BATTLE("ハンマーブロス（ピーチへん）", N(Formation_07), &N(omo_04)),
-    BATTLE("サンボx２（ピーチへん）", N(Formation_08), &N(omo_04)),
-    BATTLE("トゲノコx２（ピーチへん）", N(Formation_09), &N(omo_04)),
-    BATTLE("ヘイホー", N(Formation_0A), &N(omo_01)),
+    BATTLE(N(Formation_00), &N(omo_03), "ビッグカンテラくん"),
+    BATTLE(N(Formation_01), &N(omo_04), "クリボー（ピーチへん）"),
+    BATTLE(N(Formation_02), &N(omo_04), "クリボーx２（ピーチへん）"),
+    BATTLE(N(Formation_03), &N(omo_04), "ガボンへいx２（ピーチへん）"),
+    BATTLE(N(Formation_04), &N(omo_04), "チョロボンx２（ピーチへん）"),
+    BATTLE(N(Formation_05), &N(omo_04), "チョロボンx４（ピーチへん）"),
+    BATTLE(N(Formation_06), &N(omo_04), "ハンマーブロスx２（ピーチへん）"),
+    BATTLE(N(Formation_07), &N(omo_04), "ハンマーブロス（ピーチへん）"),
+    BATTLE(N(Formation_08), &N(omo_04), "サンボx２（ピーチへん）"),
+    BATTLE(N(Formation_09), &N(omo_04), "トゲノコx２（ピーチへん）"),
+    BATTLE(N(Formation_0A), &N(omo_01), "ヘイホー"),
     {},
 };
 

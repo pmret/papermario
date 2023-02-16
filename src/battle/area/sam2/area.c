@@ -26,8 +26,8 @@ Formation N(Formation_02) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("かいぶつ", N(Formation_01), &N(sam_03)),
-    BATTLE("パタクリ,グレイカメック（チェックよう）", N(Formation_02), &N(sam_01)),
+    BATTLE(N(Formation_01), &N(sam_03), "かいぶつ"),
+    BATTLE(N(Formation_02), &N(sam_01), "パタクリ,グレイカメック（チェックよう）"),
     {},
 };
 

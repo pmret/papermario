@@ -35,10 +35,10 @@ Formation N(Formation_03) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("バサバサx２", N(Formation_00), &N(tik_01)),
-    BATTLE("バサバサx３", N(Formation_01), &N(tik_01)),
-    BATTLE("バサバサチュルルx２", N(Formation_02), &N(tik_01)),
-    BATTLE("バサバサチュルルx３", N(Formation_03), &N(tik_01)),
+    BATTLE(N(Formation_00), &N(tik_01), "バサバサx２"),
+    BATTLE(N(Formation_01), &N(tik_01), "バサバサx３"),
+    BATTLE(N(Formation_02), &N(tik_01), "バサバサチュルルx２"),
+    BATTLE(N(Formation_03), &N(tik_01), "バサバサチュルルx３"),
     {},
 };
 

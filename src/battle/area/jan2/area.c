@@ -38,10 +38,10 @@ Formation N(Formation_03) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("ポイズンパックン", N(Formation_00), &N(jan_01)),
-    BATTLE("ポイズンパックンx２", N(Formation_01), &N(jan_01)),
-    BATTLE("ポイズンパックンx３", N(Formation_02), &N(jan_01)),
-    BATTLE("ポイズンパックンx３,ホワイトカメック", N(Formation_03), &N(jan_01)),
+    BATTLE(N(Formation_00), &N(jan_01), "ポイズンパックン"),
+    BATTLE(N(Formation_01), &N(jan_01), "ポイズンパックンx２"),
+    BATTLE(N(Formation_02), &N(jan_01), "ポイズンパックンx３"),
+    BATTLE(N(Formation_03), &N(jan_01), "ポイズンパックンx３,ホワイトカメック"),
     {},
 };
 

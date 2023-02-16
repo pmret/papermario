@@ -31,8 +31,8 @@ Formation N(Formation_01) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE("ファイアパックン", N(Formation_00), &N(kzn_05)),
-    BATTLE("プチパックン", N(Formation_01), &N(kzn_05)),
+    BATTLE(N(Formation_00), &N(kzn_05), "ファイアパックン"),
+    BATTLE(N(Formation_01), &N(kzn_05), "プチパックン"),
     {},
 };
 
