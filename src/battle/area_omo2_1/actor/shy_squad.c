@@ -17,13 +17,13 @@ enum N(ActorVars) {
 ApiStatus N(GetActorPartSize)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 partIndex = evt_get_variable(script, *args++);
+    s32 partID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
-    actorPart = get_actor_part(get_actor(actorID), partIndex);
+    actorPart = get_actor_part(get_actor(actorID), partID);
     evt_set_variable(script, *args++, actorPart->size.y);
     evt_set_variable(script, *args++, actorPart->size.x);
 

@@ -1333,7 +1333,7 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
         s32 ult = (fold_vtxBuf[i + 0].v.tc[1] >> 0x5) - 0x100;
         s32 lrs = (fold_vtxBuf[i + 3].v.tc[0] >> 0x5) - 0x100;
         s32 lrt = (fold_vtxBuf[i + 3].v.tc[1] >> 0x5) - 0x100;
-        s32 someFlags = FOLD_STATE_FLAG_NO_FILTERING0 | FOLD_STATE_FLAG_80000;
+        s32 someFlags = FOLD_STATE_FLAG_100000 | FOLD_STATE_FLAG_80000;
         s32 alpha;
         s32 alpha2;
 
@@ -1508,7 +1508,7 @@ void func_8013DAB4(FoldState* state, Matrix4f mtx) {
             if (!(state->flags & FOLD_STATE_FLAG_20)) {
                 if ((D_80151328->flags & 1) &&
                     (*D_80156954)[0].arrayIdx != 0 &&
-                    (state->flags & (FOLD_STATE_FLAG_NO_FILTERING0 | FOLD_STATE_FLAG_80000)) &&
+                    (state->flags & (FOLD_STATE_FLAG_100000 | FOLD_STATE_FLAG_80000)) &&
                     (state->renderType == FOLD_RENDER_TYPE_0
                     || state->renderType == FOLD_RENDER_TYPE_2
                     || state->renderType == FOLD_RENDER_TYPE_7)) {
@@ -1576,7 +1576,7 @@ void func_8013E2F0(FoldState* state, Matrix4f mtx) {
         gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
         gDPLoadTLUT_pal16(gMasterGfxPos++, 0, fold_currentImage->palette);
         if ((D_80151328->flags & 1)
-            && (state->flags & (FOLD_STATE_FLAG_NO_FILTERING0 | FOLD_STATE_FLAG_80000))
+            && (state->flags & (FOLD_STATE_FLAG_100000 | FOLD_STATE_FLAG_80000))
             && (state->renderType == FOLD_RENDER_TYPE_0
                 || state->renderType == FOLD_RENDER_TYPE_2
                 || state->renderType == FOLD_RENDER_TYPE_7

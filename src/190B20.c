@@ -135,7 +135,7 @@ void create_target_list(Actor* actor, s32 arg1) {
         for (j = 0; j < numParts; targetPart = targetPart->nextPart, j++) {
             if (!(targetPart->flags & 0x20000)) {
                 ActorPartBlueprint* partBlueprint = targetPart->staticData;
-                s8 partIndex;
+                s8 partID;
                 if (!(targetPart->flags & 0x100000)) {
                     fp = !arg1; // TODO ??????
                     if (fp) {
@@ -173,12 +173,12 @@ void create_target_list(Actor* actor, s32 arg1) {
                 }
 
                 targetData->actorID = ACTOR_CLASS_ENEMY | i;
-                partIndex = partBlueprint->index;
+                partID = partBlueprint->index;
                 targetData->pos.x = f6;
                 targetData->pos.y = f8;
                 targetData->pos.z = f10;
                 targetData->unk_10 = 0;
-                targetData->partID = partIndex;
+                targetData->partID = partID;
 
                 if ((targetActor->flags & 0x4000) && !(targetActor->flags & 0x10)) {
                     targetData->unk_10 = 100;
@@ -967,7 +967,7 @@ void func_80263CC4(s32 arg0) {
     start_script(&D_80293820, 10, 0)->varTable[0] = arg0;
 }
 
-void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
+void set_animation(s32 actorID, s32 partID, s32 animationIndex) {
     if (animationIndex >= 0) {
         Actor* actor = get_actor(actorID);
         ActorPart* part;
@@ -981,8 +981,8 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
                 }
                 break;
             case ACTOR_CLASS_PARTNER:
-                if (partIdx != 0) {
-                    part = get_actor_part(actor, partIdx);
+                if (partID != 0) {
+                    part = get_actor_part(actor, partID);
 
                     if (part == NULL) {
                         part = &actor->partsTable[0];
@@ -998,7 +998,7 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
                 }
                 break;
             case ACTOR_CLASS_ENEMY:
-                part = get_actor_part(actor, partIdx);
+                part = get_actor_part(actor, partID);
                 if (part->currentAnimation != animationIndex) {
                     part->currentAnimation = animationIndex;
                     spr_update_sprite(part->spriteInstanceID, animationIndex, part->animationRate);
@@ -1030,14 +1030,14 @@ void func_80263E08(Actor* actor, ActorPart* part, s32 anim) {
     }
 }
 
-void set_animation_rate(s32 actorID, s32 partIndex, f32 rate) {
+void set_animation_rate(s32 actorID, s32 partID, f32 rate) {
     Actor* actor = get_actor(actorID);
     ActorPart* part;
 
     switch (actorID & ACTOR_CLASS_MASK) {
         case ACTOR_CLASS_PARTNER:
-            if (partIndex != 0) {
-                part = get_actor_part(actor, partIndex);
+            if (partID != 0) {
+                part = get_actor_part(actor, partID);
                 if (part != NULL) {
                     part->animationRate = rate;
                     return;
@@ -1047,7 +1047,7 @@ void set_animation_rate(s32 actorID, s32 partIndex, f32 rate) {
             break;
         case ACTOR_CLASS_PLAYER:
         case ACTOR_CLASS_ENEMY:
-            part = get_actor_part(actor, partIndex);
+            part = get_actor_part(actor, partID);
             part->animationRate = rate;
             break;
     }
@@ -1057,11 +1057,11 @@ void set_actor_yaw(s32 actorID, s32 yaw) {
     get_actor(actorID)->yaw = yaw;
 }
 
-void set_part_yaw(s32 actorID, s32 partIndex, s32 value) {
-    get_actor_part(get_actor(actorID), partIndex)->yaw = value;
+void set_part_yaw(s32 actorID, s32 partID, s32 value) {
+    get_actor_part(get_actor(actorID), partID)->yaw = value;
 }
 
-void set_part_flag_bits(s32 actorID, s32 partIndex, s32 flags) {
+void set_part_flag_bits(s32 actorID, s32 partID, s32 flags) {
     Actor* actor = get_actor(actorID);
     ActorPart* part;
 
@@ -1071,17 +1071,17 @@ void set_part_flag_bits(s32 actorID, s32 partIndex, s32 flags) {
             break;
         case ACTOR_CLASS_PARTNER:
         case ACTOR_CLASS_ENEMY:
-            if (partIndex == 0) {
+            if (partID == 0) {
                 actor->flags |= flags;
             } else {
-                part = get_actor_part(actor, partIndex);
+                part = get_actor_part(actor, partID);
                 part->flags |= flags;
             }
             break;
     }
 }
 
-void clear_part_flag_bits(s32 actorID, s32 partIndex, s32 flags) {
+void clear_part_flag_bits(s32 actorID, s32 partID, s32 flags) {
     Actor* actor = get_actor(actorID);
     ActorPart* part;
 
@@ -1091,10 +1091,10 @@ void clear_part_flag_bits(s32 actorID, s32 partIndex, s32 flags) {
             break;
         case ACTOR_CLASS_PARTNER:
         case ACTOR_CLASS_ENEMY:
-            if (partIndex == 0) {
+            if (partID == 0) {
                 actor->flags &= ~flags;
             } else {
-                part = get_actor_part(actor, partIndex);
+                part = get_actor_part(actor, partID);
                 part->flags &= ~flags;
             }
             break;
@@ -2777,16 +2777,16 @@ s32 player_team_is_ability_active(Actor* actor, s32 ability) {
     return hasAbility;
 }
 
-void create_part_shadow(s32 actorID, s32 partIndex) {
-    ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
+void create_part_shadow(s32 actorID, s32 partID) {
+    ActorPart* part = get_actor_part(get_actor(actorID), partID);
 
     part->flags &= ~ACTOR_PART_FLAG_4;
     part->shadowIndex = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
     part->shadowScale = part->size.x / 24.0;
 }
 
-void remove_part_shadow(s32 actorID, s32 partIndex) {
-    ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
+void remove_part_shadow(s32 actorID, s32 partID) {
+    ActorPart* part = get_actor_part(get_actor(actorID), partID);
 
     part->flags |= ACTOR_PART_FLAG_4;
     delete_shadow(part->shadowIndex);

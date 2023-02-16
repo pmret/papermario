@@ -1736,7 +1736,7 @@ ApiStatus JumpPartTo(Evt* script, s32 isInitialCall) {
     Actor* actor;
     ActorPart* part;
     ActorPartMovement* movement;
-    s32 actorID, partIndex;
+    s32 actorID, partID;
     f32 posX, posY, posZ;
     f32 goalX, goalY, goalZ;
     f32 deltaDist;
@@ -1750,10 +1750,10 @@ ApiStatus JumpPartTo(Evt* script, s32 isInitialCall) {
         if (actorID == ACTOR_SELF) {
             actorID = script->owner1.actorID;
         }
-        partIndex = evt_get_variable(script, *args++);
+        partID = evt_get_variable(script, *args++);
 
         actor = get_actor(actorID);
-        part = get_actor_part(actor, partIndex);
+        part = get_actor_part(actor, partID);
         script->functionTempPtr[1] = actor;
         script->functionTempPtr[2] = part;
         movement = part->movement;
@@ -1830,7 +1830,7 @@ ApiStatus FallPartTo(Evt* script, s32 isInitialCall) {
     Actor* actor;
     ActorPart* part;
     ActorPartMovement* movement;
-    s32 actorID, partIndex;
+    s32 actorID, partID;
     f32 posX, posY, posZ;
     f32 goalX, goalY, goalZ;
 
@@ -1843,10 +1843,10 @@ ApiStatus FallPartTo(Evt* script, s32 isInitialCall) {
         if (actorID == ACTOR_SELF) {
             actorID = script->owner1.actorID;
         }
-        partIndex = evt_get_variable(script, *args++);
+        partID = evt_get_variable(script, *args++);
 
         actor = get_actor(actorID);
-        part = get_actor_part(actor, partIndex);
+        part = get_actor_part(actor, partID);
         script->functionTempPtr[1] = actor;
         script->functionTempPtr[2] = part;
         movement = part->movement;
@@ -1926,14 +1926,14 @@ ApiStatus LandJumpPart(Evt* script, s32 isInitialCall) {
 
     if (script->functionTemp[0] == 0) {
         s32 actorID = evt_get_variable(script, *args++);
-        s32 partIndex = evt_get_variable(script, *args++);
+        s32 partID = evt_get_variable(script, *args++);
 
         if (actorID == ACTOR_SELF) {
             actorID = script->owner1.actorID;
         }
 
         actor = get_actor(actorID);
-        part = get_actor_part(actor, partIndex);
+        part = get_actor_part(actor, partID);
         script->functionTempPtr[1] = actor;
         script->functionTempPtr[2] = part;
         movement = part->movement;
@@ -1966,7 +1966,7 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
     Actor* actor;
     ActorPart* part;
     ActorPartMovement* movement;
-    s32 actorID, partIndex;
+    s32 actorID, partID;
     f32 posX, posY, posZ;
     f32 goalX, goalY, goalZ;
     f32 deltaDist;
@@ -1980,10 +1980,10 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
         if (actorID == ACTOR_SELF) {
             actorID = script->owner1.actorID;
         }
-        partIndex = evt_get_variable(script, *args++);
+        partID = evt_get_variable(script, *args++);
 
         actor = get_actor(actorID);
-        part = get_actor_part(actor, partIndex);
+        part = get_actor_part(actor, partID);
         script->functionTempPtr[1] = actor;
         script->functionTempPtr[2] = part;
         movement = part->movement;
@@ -2353,7 +2353,7 @@ ApiStatus FlyPartTo(Evt* script, s32 isInitialCall) {
     ActorPart* part;
     ActorPartMovement* partMovement;
     s32 actorID;
-    s32 partIndex;
+    s32 partID;
 
     f32 posX, posY, posZ;
     f32 goalX, goalY, goalZ;
@@ -2366,10 +2366,10 @@ ApiStatus FlyPartTo(Evt* script, s32 isInitialCall) {
         if (actorID == ACTOR_SELF) {
             actorID = script->owner1.actorID;
         }
-        partIndex = evt_get_variable(script, *args++);
+        partID = evt_get_variable(script, *args++);
 
         actor = get_actor(actorID);
-        part = get_actor_part(actor, partIndex);
+        part = get_actor_part(actor, partID);
         script->functionTempPtr[1] = actor;
         script->functionTempPtr[2] = part;
         partMovement = part->movement;
@@ -2695,16 +2695,16 @@ ApiStatus DropStarPoints(Evt* script, s32 isInitialCall) {
 ApiStatus SetDefenseTable(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 partIdx;
+    s32 partID;
     u32* table;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    partIdx = evt_get_variable(script, *args++);
+    partID = evt_get_variable(script, *args++);
     table = (u32*) evt_get_variable(script, *args++);
-    get_actor_part(get_actor(actorID), partIdx)->defenseTable = table;
+    get_actor_part(get_actor(actorID), partID)->defenseTable = table;
     return ApiStatus_DONE2;
 }
 
@@ -2725,35 +2725,35 @@ ApiStatus SetStatusTable(Evt* script, s32 isInitialCall) {
 ApiStatus SetIdleAnimations(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 partIdx;
-    u32* var2;
+    s32 partID;
+    AnimID* idleAnims;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    partIdx = evt_get_variable(script, *args++);
-    var2 = (u32*) evt_get_variable(script, *args++);
-    get_actor_part(get_actor(actorID), partIdx)->idleAnimations = var2;
+    partID = evt_get_variable(script, *args++);
+    idleAnims = (u32*) evt_get_variable(script, *args++);
+    get_actor_part(get_actor(actorID), partID)->idleAnimations = idleAnims;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_8027CC10(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 partIndex;
+    s32 partID;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    partIndex = evt_get_variable(script, *args++);
+    partID = evt_get_variable(script, *args++);
 
     // weirdly unused
     evt_get_variable(script, *args++);
     evt_get_variable(script, *args++);
 
-    get_actor_part(get_actor(actorID), partIndex);
+    get_actor_part(get_actor(actorID), partID);
     return ApiStatus_DONE2;
 }
 
@@ -3197,7 +3197,7 @@ ApiStatus GetActorSize(Evt* script, s32 isInitialCall) {
 ApiStatus SetPartSize(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 partIndex = evt_get_variable(script, *args++);
+    s32 partID = evt_get_variable(script, *args++);
     s32 sizeY = evt_get_variable(script, *args++);
     s32 sizeX = evt_get_variable(script, *args++);
     ActorPart* part;
@@ -3206,7 +3206,7 @@ ApiStatus SetPartSize(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    part = get_actor_part(get_actor(actorID), partIndex);
+    part = get_actor_part(get_actor(actorID), partID);
 
     if (sizeY != EVT_IGNORE_ARG) {
         part->size.y = sizeY;
