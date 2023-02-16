@@ -384,8 +384,8 @@ NpcData N(NpcData_GoombaKing) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_05), BTL_KMR_PART_1_FORMATION_08),
-    NPC_GROUP(N(NpcData_GoombaFamily), BTL_KMR_PART_1_FORMATION_08),
+    NPC_GROUP(N(NpcData_05), BTL_KMR_1_FORMATION_08),
+    NPC_GROUP(N(NpcData_GoombaFamily), BTL_KMR_1_FORMATION_08),
     NPC_GROUP(N(NpcData_Misstar)),
     {}
 };

@@ -595,6 +595,8 @@ EvtScript N(EVS_802A2DA0) = {
     EVT_END
 };
 
+// all above is shared for hammers!
+
 extern EvtScript N(UseMove_Impl);
 
 EvtScript N(UseMove) = {

@@ -443,6 +443,6 @@ NpcData N(NpcData_KoopaBros_01)[] = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_KoopaBros_01), BTL_TRD_PART_2_FORMATION_00),
+    NPC_GROUP(N(NpcData_KoopaBros_01), BTL_TRD_2_FORMATION_00),
     {}
 };

@@ -7138,7 +7138,7 @@ segments:
 ####################
 ### Battle Areas ###
 ####################
-  - dir: battle/area_kmr_part_1
+  - dir: battle/area/kmr_part_1
     type: code
     start: 0x4309A0
     vram: 0x80218000
@@ -7155,7 +7155,7 @@ segments:
     - [0x431660, c, stage/kmr_05]
     - [0x4318D0, c, stage/kmr_06]
     - [0x431B80]
-  - dir: battle/area_kmr_part_2
+  - dir: battle/area/kmr_part_2
     type: code
     start: 0x439A90
     vram: 0x80218000
@@ -7175,7 +7175,7 @@ segments:
     - [0x43ACC0, c, stage/kmr_05]
     - [0x43AF30, c, stage/kmr_06]
     - [0x43B1E0]
-  - dir: battle/area_kmr_part_3
+  - dir: battle/area/kmr_part_3
     type: code
     start: 0x447440
     vram: 0x80218000
@@ -7203,7 +7203,7 @@ segments:
     - [0x4491A0, c, stage/mac_01]
     - [0x4495F0, c, stage/kpa_01]
     - [0x4495F0]
-  - dir: battle/area_mac
+  - dir: battle/area/mac
     type: code
     start: 0x464490
     vram: 0x80218000
@@ -7218,7 +7218,7 @@ segments:
     - [0x4661E0, c, stage/mac_02]
     - [0x4661E0, c, area]
     - [0x4661E0]
-  - dir: battle/area_hos
+  - dir: battle/area/hos
     type: code
     start: 0x47F0B0
     vram: 0x80218000
@@ -7232,7 +7232,7 @@ segments:
     - [0x4800C0, c, stage/hos_02]
     - [0x4800C0, c, area]
     - [0x4800C0]
-  - dir: battle/area_nok
+  - dir: battle/area/nok
     type: code
     start: 0x48D1A0
     vram: 0x80218000
@@ -7252,7 +7252,7 @@ segments:
     - [0x48DFC0, c, stage/nok_03]
     - [0x48DFC0, c, stage/nok_04]
     - [0x48DFC0]
-  - dir: battle/area_trd_part_1
+  - dir: battle/area/trd_part_1
     type: code
     start: 0x4A10A0
     vram: 0x80218000
@@ -7279,7 +7279,7 @@ segments:
     - [0x4A1530, c, stage/trd_05e]
     - [0x4A1530, c, stage/trd_05f]
     - [0x4A1530]
-  - dir: battle/area_trd_part_2
+  - dir: battle/area/trd_part_2
     type: code
     start: 0x4B11F0
     vram: 0x80218000
@@ -7305,7 +7305,7 @@ segments:
     - [0x4B3740, c, stage/trd_05e]
     - [0x4B3740, c, stage/trd_05f]
     - [0x4B3740]
-  - dir: battle/area_trd_part_3
+  - dir: battle/area/trd_part_3
     type: code
     start: 0x4CF1B0
     vram: 0x80218000
@@ -7315,7 +7315,7 @@ segments:
     - [0x4CF1B0, c, actor/eldstar]
     - [0x4CF3D0, c, stage/nok_01]
     - [0x4CF3D0]
-  - dir: battle/area_iwa
+  - dir: battle/area/iwa
     type: code
     start: 0x4D01F0
     vram: 0x80218000
@@ -7331,7 +7331,7 @@ segments:
     - [0x4D03B0, c, stage/iwa_01b]
     - [0x4D03B0, c, stage/iwa_02]
     - [0x4D0400]
-  - dir: battle/area_sbk
+  - dir: battle/area/sbk
     type: code
     start: 0x4DA5E0
     vram: 0x80218000
@@ -7343,7 +7343,7 @@ segments:
     - [0x4DA6B0, c, stage/sbk_02]
     - [0x4DA860, c, area]
     - [0x4DA860]
-  - dir: battle/area_isk_part_1
+  - dir: battle/area/isk_part_1
     type: code
     start: 0x4E2740
     vram: 0x80218000
@@ -7369,7 +7369,7 @@ segments:
     - [0x4E32E0, c, stage/isk_08]
     - [0x4E3350, c, area]
     - [0x4E3350]
-  - dir: battle/area_isk_part_2
+  - dir: battle/area/isk_part_2
     type: code
     start: 0x4EF4A0
     vram: 0x80218000
@@ -7391,7 +7391,7 @@ segments:
     - [0x4EFF70, c, stage/isk_07]
     - [0x4EFFE0, c, area]
     - [0x4EFFE0]
-  - dir: battle/area_mim
+  - dir: battle/area/mim
     type: code
     start: 0x4F7BE0
     vram: 0x80218000
@@ -7403,7 +7403,7 @@ segments:
     - [0x4F7F40, c, stage/mim_01]
     - [0x4F7FA0, c, area]
     - [0x4F7FA0]
-  - dir: battle/area_arn
+  - dir: battle/area/arn
     type: code
     start: 0x4FEA50
     vram: 0x80218000
@@ -7422,7 +7422,7 @@ segments:
     - [0x4FF1C0, c, stage/arn_06]
     - [0x4FF1C0, c, area]
     - [0x4FF1C0]
-  - dir: battle/area_dgb
+  - dir: battle/area/dgb
     type: code
     start: 0x50F020
     vram: 0x80218000
@@ -7437,7 +7437,7 @@ segments:
     - [0x50F020, c, stage/dgb_05]
     - [0x50F020, c, area]
     - [0x50F020]
-  - dir: battle/area_omo
+  - dir: battle/area/omo
     type: code
     start: 0x5125D0
     vram: 0x80218000
@@ -7465,7 +7465,7 @@ segments:
     - [0x5137E0, c, stage/omo_07]
     - [0x5137E0, c, area]
     - [0x5137E0]
-  - dir: battle/area_omo2
+  - dir: battle/area/omo2
     type: code
     start: 0x52B6A0
     vram: 0x80218000
@@ -7476,49 +7476,49 @@ segments:
     - [0x52B8F0, c, actor/light_bulb]
     - [0x52B9D0, c, stage/omo_07]
     - [0x52B9D0, c, area]
-  - dir: battle/area_omo2_1
+  - dir: battle/area/omo2_1
     type: code
     start: 0x543570
     vram: 0x80231000
     vram_of_symbol: Vine1Base
     subsegments:
     - [0x543570, c, actor/shy_squad]
-  - dir: battle/area_omo2_2
+  - dir: battle/area/omo2_2
     type: code
     start: 0x5483E0
     vram: 0x80231000
     vram_of_symbol: Vine1Base
     subsegments:
     - [0x5483E0, c, actor/stilt_guy]
-  - dir: battle/area_omo2_3
+  - dir: battle/area/omo2_3
     type: code
     start: 0x54CC70
     vram: 0x80231000
     vram_of_symbol: Vine1Base
     subsegments:
     - [0x54CC70, c, actor/shy_stack]
-  - dir: battle/area_omo2_4
+  - dir: battle/area/omo2_4
     type: code
     start: 0x552440
     vram: 0x80231000
     vram_of_symbol: Vine1Base
     subsegments:
     - [0x552440, c, actor/signal_guy]
-  - dir: battle/area_omo2_5
+  - dir: battle/area/omo2_5
     type: code
     start: 0x552BB0
     vram: 0x80231000
     vram_of_symbol: Vine1Base
     subsegments:
     - [0x552BB0, c, actor/shy_squad_dup]
-  - dir: battle/area_omo2_6
+  - dir: battle/area/omo2_6
     type: code
     start: 0x556C90
     vram: 0x80231000
     vram_of_symbol: Vine1Base
     subsegments:
     - [0x556C90, c, actor/shy_guy_dup]
-  - dir: battle/area_omo3
+  - dir: battle/area/omo3
     type: code
     start: 0x5573E0
     vram: 0x80218000
@@ -7543,7 +7543,7 @@ segments:
     - [0x5580C0, c, actor/red_shy_guy]
     - [0x558190, c, area]
     - [0x558190]
-  - dir: battle/area_kgr
+  - dir: battle/area/kgr
     type: code
     start: 0x56E2A0
     vram: 0x80218000
@@ -7553,7 +7553,7 @@ segments:
     - [0x56E800, c, stage/kgr_01]
     - [0x56EC50, c, area]
     - [0x56EC50]
-  - dir: battle/area_jan
+  - dir: battle/area/jan
     type: code
     start: 0x573920
     vram: 0x80218000
@@ -7575,7 +7575,7 @@ segments:
     - [0x573EE0, c, stage/jan_04b]
     - [0x573EE0, c, area]
     - [0x573EE0]
-  - dir: battle/area_jan2
+  - dir: battle/area/jan2
     type: code
     start: 0x584940
     vram: 0x80218000
@@ -7593,7 +7593,7 @@ segments:
     - [0x585000, c, stage/jan_04b]
     - [0x585000, c, area]
     - [0x585000]
-  - dir: battle/area_kzn
+  - dir: battle/area/kzn
     type: code
     start: 0x58C2F0
     vram: 0x80218000
@@ -7614,7 +7614,7 @@ segments:
     - [0x58D100, c, stage/kzn_05]
     - [0x58D100, c, area]
     - [0x58D100]
-  - dir: battle/area_kzn2
+  - dir: battle/area/kzn2
     type: code
     start: 0x59E6E0
     vram: 0x80218000
@@ -7690,7 +7690,7 @@ segments:
     - [0x5B0720, .data, stage/kzn_05]
     - [0x5B1070, .data, area]
     - [0x5B1240]
-  - dir: battle/area_flo
+  - dir: battle/area/flo
     type: code
     start: 0x5B14B0
     vram: 0x80218000
@@ -7719,7 +7719,7 @@ segments:
     - [0x5B32B0, c, stage/flo_06]
     - [0x5B3370, c, area]
     - [0x5B3370]
-  - dir: battle/area_flo2
+  - dir: battle/area/flo2
     type: code
     start: 0x5CE690
     vram: 0x80218000
@@ -7741,7 +7741,7 @@ segments:
     - [0x5CFE40, c, stage/flo_06]
     - [0x5CFF00, c, area]
     - [0x5CFF00]
-  - dir: battle/area_tik
+  - dir: battle/area/tik
     type: code
     start: 0x5EC490
     vram: 0x80218000
@@ -7762,7 +7762,7 @@ segments:
     - [0x5EE240, c, stage/tik_05]
     - [0x5EE550, c, area]
     - [0x5EE550]
-  - dir: battle/area_tik2
+  - dir: battle/area/tik2
     type: code
     start: 0x608AB0
     vram: 0x80218000
@@ -7779,7 +7779,7 @@ segments:
     - [0x60A8C0, c, stage/tik_05]
     - [0x60ABD0, c, area]
     - [0x60ABD0]
-  - dir: battle/area_tik3
+  - dir: battle/area/tik3
     type: code
     start: 0x6186F0
     vram: 0x80218000
@@ -7794,7 +7794,7 @@ segments:
     - [0x619C30, c, stage/tik_05]
     - [0x619F40, c, area]
     - [0x619F40]
-  - dir: battle/area_sam
+  - dir: battle/area/sam
     type: code
     start: 0x623BA0
     vram: 0x80218000
@@ -7813,7 +7813,7 @@ segments:
     - [0x6263D0, c, stage/sam_02d]
     - [0x6266F0, c, stage/sam_03]
     - [0x626A30, c, area]
-  - dir: battle/area_sam2
+  - dir: battle/area/sam2
     type: code
     start: 0x63D1E0
     vram: 0x80218000
@@ -7854,7 +7854,7 @@ segments:
       subsegments:
       - [0x648860, vtx, monstar_bubbles]
     - [0x648C80]
-  - dir: battle/area_pra
+  - dir: battle/area/pra
     type: code
     start: 0x648E10
     vram: 0x80218000
@@ -7875,7 +7875,7 @@ segments:
     - [0x64A340, c, stage/pra_03c]
     - [0x64A340, c, stage/pra_04]
     - [0x64A340, c, area]
-  - dir: battle/area_pra2
+  - dir: battle/area/pra2
     type: code
     start: 0x660750
     vram: 0x80218000
@@ -7886,7 +7886,7 @@ segments:
     - [0x660D20, c, actor/crystal_bit]
     - [0x660E10, c, stage/sam_04]
     - [0x661150, c, area]
-  - dir: battle/area_pra3
+  - dir: battle/area/pra3
     type: code
     start: 0x669D80
     vram: 0x80218000
@@ -7904,7 +7904,7 @@ segments:
     - [0x66BC90, c, stage/pra_03c]
     - [0x66BC90, c, stage/pra_04]
     - [0x66BC90, c, area]
-  - dir: battle/area_kpa
+  - dir: battle/area/kpa
     type: code
     start: 0x684A30
     vram: 0x80218000
@@ -7932,7 +7932,7 @@ segments:
     - [0x685260, c, stage/kpa_14]
     - [0x685260, c, area]
     - [0x685260]
-  - dir: battle/area_kpa2
+  - dir: battle/area/kpa2
     type: code
     start: 0x69F200
     vram: 0x80218000
@@ -7948,7 +7948,7 @@ segments:
     - [0x6A4490, c, stage/kpa_03]
     - [0x6A44E0, c, area]
     - [0x6A44E0]
-  - dir: battle/area_kpa3
+  - dir: battle/area/kpa3
     type: code
     start: 0x6BBB90
     vram: 0x80218000
@@ -7959,7 +7959,7 @@ segments:
     - [0x6BD250, c, stage/kpa_01]
     - [0x6BD250, c, area]
     - [0x6BD250]
-  - dir: battle/area_kpa4
+  - dir: battle/area/kpa4
     type: code
     start: 0x6CC070
     vram: 0x80218000
@@ -7985,7 +7985,7 @@ segments:
     - [0x6CC6C0, c, stage/kpa_14]
     - [0x6CC6C0, c, area]
     - [0x6CC6C0]
-  - dir: battle/area_kkj
+  - dir: battle/area/kkj
     type: code
     start: 0x6DBDA0
     vram: 0x80218000
@@ -7995,7 +7995,7 @@ segments:
     - [0x6DBDA0, c, actor/kammy_koopa]
     - [0x6DC2F0, c, stage/kpa_05]
     - [0x6DC340]
-  - dir: battle/area_dig
+  - dir: battle/area/dig
     type: code
     start: 0x6DDDC0
     vram: 0x80218000

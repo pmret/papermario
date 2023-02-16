@@ -170,6 +170,6 @@ NpcData N(NpcData_JrTroopa)[] = {
 };
 
 NpcGroupList N(BeforeNPCs) = {
-    NPC_GROUP(N(NpcData_JrTroopa), BTL_KMR_PART_3_FORMATION_06),
+    NPC_GROUP(N(NpcData_JrTroopa), BTL_KMR_3_FORMATION_06),
     {}
 };

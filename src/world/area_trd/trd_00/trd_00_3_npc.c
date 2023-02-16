@@ -357,6 +357,6 @@ NpcData N(NpcData_Eldstar) = {
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_KoopaBros)),
-    NPC_GROUP(N(NpcData_Eldstar), BTL_TRD_PART_3_FORMATION_00),
+    NPC_GROUP(N(NpcData_Eldstar), BTL_TRD_3_FORMATION_00),
     {}
 };

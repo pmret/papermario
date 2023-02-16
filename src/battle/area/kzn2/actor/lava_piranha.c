@@ -89,9 +89,9 @@ EntityModelScript N(ModelScript4) = {
     ems_End
 };
 
-#include "battle/area_kzn2/lava_piranha_vine.png.inc.c"
-#include "battle/area_kzn2/lava_piranha_vine.pal.inc.c"
-#include "battle/area_kzn2/lava_piranha_vine.gfx.inc.c"
+#include "battle/area/kzn2/lava_piranha_vine.png.inc.c"
+#include "battle/area/kzn2/lava_piranha_vine.pal.inc.c"
+#include "battle/area/kzn2/lava_piranha_vine.gfx.inc.c"
 
 extern EvtScript N(init);
 extern EvtScript N(idle);

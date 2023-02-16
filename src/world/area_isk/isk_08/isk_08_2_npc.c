@@ -26,6 +26,6 @@ NpcData N(NpcData_BuzzyBeetle) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_BuzzyBeetle), BTL_ISK_PART_1_FORMATION_0A, BTL_ISK_PART_1_STAGE_03),
+    NPC_GROUP(N(NpcData_BuzzyBeetle), BTL_ISK_1_FORMATION_0A, BTL_ISK_1_STAGE_03),
     {}
 };

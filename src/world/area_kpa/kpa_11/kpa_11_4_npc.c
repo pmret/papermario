@@ -99,6 +99,6 @@ NpcData N(NpcData_Prisoners)[] = {
 
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_Koopatrol), BTL_KPA_FORMATION_18, BTL_KPA_STAGE_02),
-    NPC_GROUP(N(NpcData_Prisoners), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_02),
+    NPC_GROUP(N(NpcData_Prisoners), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_02),
     {}
 };

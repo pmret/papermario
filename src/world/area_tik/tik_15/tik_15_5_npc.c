@@ -156,6 +156,6 @@ NpcData N(NpcData_RipCheato) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_RipCheato), BTL_KMR_PART_1_FORMATION_06),
+    NPC_GROUP(N(NpcData_RipCheato), BTL_KMR_1_FORMATION_06),
     {}
 };

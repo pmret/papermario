@@ -5,19 +5,19 @@
 #include "message_ids.h"
 
 enum BattleAreaIDs {
-    BTL_AREA_KMR_PART_1         = 0x00,
-    BTL_AREA_KMR_PART_2         = 0x01,
-    BTL_AREA_KMR_PART_3         = 0x02,
+    BTL_AREA_KMR_1         = 0x00,
+    BTL_AREA_KMR_2         = 0x01,
+    BTL_AREA_KMR_3         = 0x02,
     BTL_AREA_MAC                = 0x03,
     BTL_AREA_HOS                = 0x04,
     BTL_AREA_NOK                = 0x05,
-    BTL_AREA_TRD_PART_1         = 0x06,
-    BTL_AREA_TRD_PART_2         = 0x07,
-    BTL_AREA_TRD_PART_3         = 0x08,
+    BTL_AREA_TRD_1         = 0x06,
+    BTL_AREA_TRD_2         = 0x07,
+    BTL_AREA_TRD_3         = 0x08,
     BTL_AREA_IWA                = 0x09,
     BTL_AREA_SBK                = 0x0A,
-    BTL_AREA_ISK_PART_1         = 0x0B,
-    BTL_AREA_ISK_PART_2         = 0x0C,
+    BTL_AREA_ISK_1         = 0x0B,
+    BTL_AREA_ISK_2         = 0x0C,
     BTL_AREA_MIM                = 0x0D,
     BTL_AREA_ARN                = 0x0E,
     BTL_AREA_DGB                = 0x0F,
@@ -277,11 +277,6 @@ typedef enum ActorType {
 } ActorType;
 
 extern s32 bActorNames[];
-
-#define BTL_AREA(id) \
-    .dmaStart = battle_##id##_ROM_START, \
-    .dmaEnd = battle_##id##_ROM_END, \
-    .dmaDest = battle_##id##_VRAM
 
 typedef struct ActorBlueprint {
     /* 0x00 */ s32 flags;

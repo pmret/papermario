@@ -111,6 +111,6 @@ NpcData N(NpcData_Goomba) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_Goomba), BTL_KMR_PART_1_FORMATION_01, BTL_KMR_PART_1_STAGE_02),
+    NPC_GROUP(N(NpcData_Goomba), BTL_KMR_1_FORMATION_01, BTL_KMR_1_STAGE_02),
     {}
 };

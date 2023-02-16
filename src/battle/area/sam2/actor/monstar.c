@@ -4,7 +4,7 @@
 #include "effects.h"
 #include "sprite.h"
 #include "sprite/npc/Monstar.h"
-#include "battle/area_sam2/actor/img.png.h"
+#include "battle/area/sam2/actor/img.png.h"
 
 #define NAMESPACE b_area_sam2_monstar
 
@@ -132,8 +132,8 @@ EvtScript N(init) = {
     EVT_END
 };
 
-#include "battle/area_sam2/actor/img.png.inc.c"
-#include "battle/area_sam2/actor/img.pal.inc.c"
+#include "battle/area/sam2/actor/img.png.inc.c"
+#include "battle/area/sam2/actor/img.pal.inc.c"
 
 FoldImageRecPart D_8021A2B8_63F498 = {
     .raster = battle_area_sam2_actor_img_png,

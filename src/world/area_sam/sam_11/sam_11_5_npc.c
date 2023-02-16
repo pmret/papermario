@@ -1082,30 +1082,30 @@ NpcData N(NpcData_ChuckQuizmo) = {
 };
 
 NpcGroupList N(BeforeNPCs) = {
-    NPC_GROUP(N(NpcData_Townsfolk), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
-    NPC_GROUP(N(NpcData_PondPenginsBefore), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
-    NPC_GROUP(N(NpcData_Tourists), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
+    NPC_GROUP(N(NpcData_Townsfolk), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
+    NPC_GROUP(N(NpcData_PondPenginsBefore), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
+    NPC_GROUP(N(NpcData_Tourists), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
     NPC_GROUP(N(NpcData_ChuckQuizmo)),
     {}
 };
 
 NpcGroupList N(MysteryNPCs) = {
     //@bug loads 7 NPCs when the group only has 6
-    NPC_GROUP_EXPLICIT_SIZE(N(NpcData_Townsfolk), NPC_PenguinPatrol, 7, BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
-    NPC_GROUP(N(NpcData_Tourists), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
+    NPC_GROUP_EXPLICIT_SIZE(N(NpcData_Townsfolk), NPC_PenguinPatrol, 7, BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
+    NPC_GROUP(N(NpcData_Tourists), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
     NPC_GROUP(N(NpcData_ChuckQuizmo)),
     {}
 };
 
 NpcGroupList N(AfterNPCs) = {
-    NPC_GROUP(N(NpcData_Townsfolk), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
-    NPC_GROUP(N(NpcData_PondPenginsAfter), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
-    NPC_GROUP(N(NpcData_Tourists), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
+    NPC_GROUP(N(NpcData_Townsfolk), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
+    NPC_GROUP(N(NpcData_PondPenginsAfter), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
+    NPC_GROUP(N(NpcData_Tourists), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
     NPC_GROUP(N(NpcData_ChuckQuizmo)),
     {}
 };
 
 NpcGroupList N(EpilogueNPCs) = {
-    NPC_GROUP(N(NpcData_Epilogue), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
+    NPC_GROUP(N(NpcData_Epilogue), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
     {}
 };
