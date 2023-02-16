@@ -1488,12 +1488,12 @@ void set_message_msg(s32 msgID, s32 index) {
     msgVars = gMessageMsgVars[index];
     while (TRUE) {
         msgVars[i] = ((u8*)msgID)[i];
-        if (((u8*)msgID)[i] == 0xFD) {
+        if (((u8*)msgID)[i] == MSG_CHAR_READ_END) {
             break;
         }
 
         if (++i >= 32) {
-            msgVars[i - 1] = 0xFD;
+            msgVars[i - 1] = MSG_CHAR_READ_END;
             break;
         }
     }
@@ -1516,7 +1516,7 @@ void set_message_value(s32 value, s32 index) {
         if (thisChar == 0) {
             break;
         }
-        gMessageMsgVars[index][i] = thisChar - 0x20;
+        gMessageMsgVars[index][i] = thisChar - '0' + MSG_CHAR_DIGIT_0;
     }
     gMessageMsgVars[index][i] = MSG_CHAR_READ_END;
 }
