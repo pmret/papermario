@@ -243,7 +243,7 @@ ActorBlueprint NAMESPACE = {
 
 #include "common/ChompChainUpdateHelperFunc2.inc.c"
 
-ApiStatus b_area_isk_part_1_ChompChainUpdate(Evt* script, s32 isInitialCall) {
+API_CALLABLE(b_area_isk_part_1_ChompChainUpdate) {
     f32 sp18;
     Actor* actor;
     ActorPart* part;

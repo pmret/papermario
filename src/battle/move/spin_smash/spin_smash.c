@@ -10,7 +10,7 @@ extern EvtScript D_802A3258_739AE8;
 extern EvtScript D_802A3920_73A1B0;
 extern EvtScript D_802A3FC4_73A854;
 
-ApiStatus func_802A1000_737890(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A1000_737890) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     f32 xPos = playerActor->currentPos.x + 20.0f;
@@ -22,7 +22,7 @@ ApiStatus func_802A1000_737890(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A1074_737904(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A1074_737904) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     f32 xPos = playerActor->currentPos.x + 20.0f;

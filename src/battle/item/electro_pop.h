@@ -7,10 +7,10 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_electro_pop
 
-ApiStatus N(func_802A123C_7307DC)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A14F0_730A90)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A133C_7308DC)(Evt* script, s32 isInitialCall);
-ApiStatus N(AddFP)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(func_802A123C_7307DC));
+API_CALLABLE(N(func_802A14F0_730A90));
+API_CALLABLE(N(func_802A133C_7308DC));
+API_CALLABLE(N(AddFP));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

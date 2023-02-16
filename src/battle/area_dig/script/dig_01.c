@@ -5,7 +5,7 @@
 
 #include "common/Set80218630_Var0.inc.c"
 
-ApiStatus func_80218644_6DE404(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218644_6DE404) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     SelectableTarget* selectableTarget;

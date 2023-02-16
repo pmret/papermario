@@ -6,7 +6,7 @@
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
-ApiStatus N(func_802A12D4_71B474)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A12D4_71B474)) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
     }
@@ -22,7 +22,7 @@ ApiStatus N(func_802A12D4_71B474)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802A1354_71B4F4)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1354_71B4F4)) {
     Actor* enemyTarget = get_actor(script->owner1.enemyID);
     Actor* actor = get_actor(enemyTarget->targetActorID);
     f32 posY, posX, posZ;

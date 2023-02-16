@@ -91,7 +91,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 30 },
 };
 
-ApiStatus N(IsHitEightTimes)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(IsHitEightTimes)) {
     script->varTable[0] = 0;
     if (evt_get_variable(NULL, GB_IWA00_Whacka_HitCount) >= 8) {
         script->varTable[0] = 1;

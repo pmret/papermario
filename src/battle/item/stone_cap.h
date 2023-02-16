@@ -7,7 +7,7 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_stone_cap
 
-ApiStatus N(func_802A123C_7217DC)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(func_802A123C_7217DC));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

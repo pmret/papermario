@@ -11,7 +11,7 @@ s32 D_802A9988_427358[6] = { 35, 35, 60, 80, 99, 200 };
 
 extern s32 actionCmdTableFireShell[];
 
-ApiStatus N(init)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(init)) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 id;

@@ -7,9 +7,9 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_thunder_bolt
 
-ApiStatus N(FadeBackgroundToBlack)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A123C_722D7C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A1420_722F60)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(FadeBackgroundToBlack));
+API_CALLABLE(N(func_802A123C_722D7C));
+API_CALLABLE(N(func_802A1420_722F60));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

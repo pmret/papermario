@@ -3,8 +3,8 @@
 
 #include "common_structs.h"
 
-ApiStatus action_command_power_shock_init(Evt* script, s32 isInitialCall);
-ApiStatus action_command_power_shock_start(Evt* script, s32 isInitialCall);
+API_CALLABLE(action_command_power_shock_init);
+API_CALLABLE(action_command_power_shock_start);
 void action_command_power_shock_update(void);
 void action_command_power_shock_draw(void);
 void action_command_power_shock_free(void);

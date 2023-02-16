@@ -2,7 +2,7 @@
 
 #include "ItemRefund.inc.c"
 
-ApiStatus N(func_802A123C_72619C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A123C_72619C)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
@@ -28,7 +28,7 @@ ApiStatus N(func_802A123C_72619C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A12C4_726224)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A12C4_726224)) {
     gBattleStatus.hustleTurns = 2;
 
     return ApiStatus_DONE2;

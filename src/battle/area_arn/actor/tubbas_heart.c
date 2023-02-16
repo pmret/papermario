@@ -142,7 +142,7 @@ EvtScript N(init_80223DA0) = {
     EVT_END
 };
 
-ApiStatus N(func_80218680_4FF0D0)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_80218680_4FF0D0)) {
     Bytecode *args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 

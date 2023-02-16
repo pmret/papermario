@@ -9,7 +9,7 @@ void func_802A123C_727B4C(void) {
     func_80138D88(0, 0, 0x140, 0xF0, 160.0f);
 }
 
-ApiStatus N(func_802A1270_727B80)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1270_727B80)) {
     Camera* camera = &gCameras[CAM_BATTLE];
     f32 a;
 

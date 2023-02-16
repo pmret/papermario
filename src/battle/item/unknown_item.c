@@ -3,7 +3,7 @@
 
 #include "ItemRefund.inc.c"
 
-ApiStatus N(func_802A123C_72447C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A123C_72447C)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -14,7 +14,7 @@ ApiStatus N(func_802A123C_72447C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A12FC_72453C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A12FC_72453C)) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->curHP += 20;

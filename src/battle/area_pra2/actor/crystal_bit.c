@@ -218,7 +218,7 @@ EvtScript N(init) = {
     EVT_END
 };
 
-ApiStatus UpdateCrystalBitEffect(Evt* script, s32 isInitialCall) {
+API_CALLABLE(UpdateCrystalBitEffect) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
     ActorPart* actorPart = get_actor_part(actor, 1);

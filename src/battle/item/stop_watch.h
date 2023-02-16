@@ -7,10 +7,10 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_stop_watch
 
-ApiStatus ItemAfflictEnemy(Evt* script, s32 isInitialCall);
+API_CALLABLE(ItemAfflictEnemy);
 
-ApiStatus N(FadeBackgroundToBlack)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A12D4_7270A4)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(FadeBackgroundToBlack));
+API_CALLABLE(N(func_802A12D4_7270A4));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

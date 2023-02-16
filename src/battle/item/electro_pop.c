@@ -3,7 +3,7 @@
 
 #include "ItemRefund.inc.c"
 
-ApiStatus N(func_802A123C_7307DC)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A123C_7307DC)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
@@ -12,7 +12,7 @@ ApiStatus N(func_802A123C_7307DC)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A127C_73081C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A127C_73081C)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -24,7 +24,7 @@ ApiStatus N(func_802A127C_73081C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A133C_7308DC)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A133C_7308DC)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -38,7 +38,7 @@ ApiStatus N(func_802A133C_7308DC)(Evt* script, s32 isInitialCall) {
 
 #include "common/AddHP.inc.c"
 
-ApiStatus N(func_802A1450_7309F0)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1450_7309F0)) {
     ItemData* item = &gItemTable[ITEM_ELECTRO_POP];
     PlayerData* playerData = &gPlayerData;
 
@@ -52,7 +52,7 @@ ApiStatus N(func_802A1450_7309F0)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(AddFP)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AddFP)) {
     PlayerData* playerData = &gPlayerData;
     s32 amt = evt_get_variable(script, *script->ptrReadPos);
 
@@ -68,7 +68,7 @@ ApiStatus N(AddFP)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A14F0_730A90)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A14F0_730A90)) {
     ItemData* item = &gItemTable[ITEM_ELECTRO_POP];
     PlayerData* playerData = &gPlayerData;
 

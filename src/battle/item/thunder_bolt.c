@@ -4,7 +4,7 @@
 
 #include "ItemRefund.inc.c"
 
-ApiStatus N(func_802A123C_722D7C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A123C_722D7C)) {
     Actor* enemyTarget = get_actor(script->owner1.enemyID);
     Actor* actor = get_actor(enemyTarget->targetActorID);
     f32 posY, posX, posZ;
@@ -34,7 +34,7 @@ ApiStatus N(func_802A123C_722D7C)(Evt* script, s32 isInitialCall) {
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
-ApiStatus N(func_802A1420_722F60)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1420_722F60)) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
     }

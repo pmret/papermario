@@ -7,8 +7,8 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_hustle_drink
 
-ApiStatus N(func_802A12C4_726224)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A123C_72619C)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(func_802A12C4_726224));
+API_CALLABLE(N(func_802A123C_72619C));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

@@ -27,7 +27,7 @@ enum {
     LF_MashStarted  = LocalFlag(2),
 };
 
-ApiStatus N(PlayExplosionFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(PlayExplosionFX)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
@@ -73,7 +73,7 @@ ApiStatus N(PlayExplosionFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SlowDown)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SlowDown)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     ActorState* partnerActorMovement = &partnerActor->state;
@@ -107,7 +107,7 @@ ApiStatus N(SlowDown)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(GetBombDamage)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetBombDamage)) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
@@ -168,7 +168,7 @@ ApiStatus N(GetBombDamage)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetPowerBombDamage)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetPowerBombDamage)) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
@@ -215,7 +215,7 @@ ApiStatus N(GetPowerBombDamage)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetMegaBombDamage)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetMegaBombDamage)) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;

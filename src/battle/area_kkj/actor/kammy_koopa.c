@@ -121,7 +121,7 @@ EvtScript N(init) = {
 
 s32 N(unknownCounter) = 0;
 
-ApiStatus N(unknownFunction)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(unknownFunction)) {
     Actor* actor = get_actor(script->owner1.actorID);
 
     N(unknownCounter) += 9;
@@ -177,7 +177,7 @@ EvtScript N(handleEvent) = {
 
 #include "world/common/todo/GetEntityPosition.inc.c"
 
-ApiStatus N(BlockAppear)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(BlockAppear)) {
     Entity* entity = get_entity_by_index(script->varTable[9]);
 
     if (isInitialCall) {
@@ -197,7 +197,7 @@ ApiStatus N(BlockAppear)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_8021833C_6DC0DC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8021833C_6DC0DC) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
         set_screen_overlay_center(1, 0, 0, 0);
@@ -215,7 +215,7 @@ ApiStatus func_8021833C_6DC0DC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802183EC_6DC18C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802183EC_6DC18C) {
     if (isInitialCall) {
         script->functionTemp[0] = 30;
         set_screen_overlay_center(1, 0, 0, 0);
@@ -233,7 +233,7 @@ ApiStatus func_802183EC_6DC18C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(DropBlock)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(DropBlock)) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 entityIndex = script->varTable[9];

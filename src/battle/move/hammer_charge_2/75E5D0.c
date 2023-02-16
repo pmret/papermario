@@ -11,7 +11,7 @@ BSS s32 D_802A4350;
 
 #include "world/common/todo/IsHammerMaxCharged.inc.c"
 
-ApiStatus func_802A10C8_75E698(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A10C8_75E698) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 var1 = evt_get_variable(script, *args++);
@@ -41,7 +41,7 @@ ApiStatus func_802A10C8_75E698(Evt* script, s32 isInitialCall) {
 
 #include "world/common/todo/UnkMoveFunc3.inc.c"
 
-ApiStatus func_802A12FC_75E8CC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A12FC_75E8CC) {
     if (D_802A4350 == 0) {
         script->varTable[0] = 4;
     } else {

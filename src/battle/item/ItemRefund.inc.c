@@ -4,7 +4,7 @@
 static s32 itemIcon;
 
 // Returns time to sleep for on $x.
-ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GiveRefund)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = gBattleStatus.playerActor;
     s32 sellValue = gItemTable[battleStatus->moveArgument].sellValue;
@@ -49,7 +49,7 @@ ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GiveRefundCleanup)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 sellValue = gItemTable[battleStatus->moveArgument].sellValue;
 

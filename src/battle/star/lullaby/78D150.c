@@ -6,7 +6,7 @@
 
 #include "common/StarPower.inc.c"
 
-ApiStatus func_802A1518_78D668(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A1518_78D668) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }

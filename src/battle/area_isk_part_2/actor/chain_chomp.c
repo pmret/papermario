@@ -254,7 +254,7 @@ ActorBlueprint NAMESPACE = {
 
 #include "common/ChompChainUpdateHelperFunc2.inc.c"
 
-ApiStatus b_area_isk_part_2_chain_chomp_ChompChainUpdate(Evt* script, s32 isInitialCall) {
+API_CALLABLE(b_area_isk_part_2_chain_chomp_ChompChainUpdate) {
     Bytecode* args = script->ptrReadPos;
     f32 sp18;
     Actor* actor;
@@ -368,7 +368,7 @@ ApiStatus b_area_isk_part_2_chain_chomp_ChompChainUpdate(Evt* script, s32 isInit
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8021866C_4EFB0C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8021866C_4EFB0C) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = *args++;
 

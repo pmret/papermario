@@ -7,7 +7,7 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_volt_shroom
 
-ApiStatus N(func_802A123C_71AA2C)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(func_802A123C_71AA2C));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

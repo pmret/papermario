@@ -9,7 +9,7 @@ BSS s32 D_802A2C50;
 
 #include "world/common/todo/IsJumpMaxCharged.inc.c"
 
-ApiStatus func_802A1108_75CA88(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A1108_75CA88) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 var1 = evt_get_variable(script, *args++);
@@ -39,7 +39,7 @@ ApiStatus func_802A1108_75CA88(Evt* script, s32 isInitialCall) {
 
 #include "world/common/todo/UnkMoveFunc2.inc.c"
 
-ApiStatus func_802A133C_75CCBC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A133C_75CCBC) {
     if (D_802A2C50 == 0) {
         script->varTable[0] = 6;
     } else {

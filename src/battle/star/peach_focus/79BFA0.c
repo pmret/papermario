@@ -5,7 +5,7 @@
 
 #include "common/StarPower.inc.c"
 
-ApiStatus func_802A1518_79C4B8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A1518_79C4B8) {
     // TODO: replace with actual struct when we know what it is
     // varTable[0] is Twink's actorVar[0]
     ((s32*)script->varTable[0])[1]++;

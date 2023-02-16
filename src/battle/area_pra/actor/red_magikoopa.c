@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_pra_red_magikoopa
 
-ApiStatus func_80218240_649050(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218240_649050) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
     f32 var1 = evt_get_variable(script, *args++);

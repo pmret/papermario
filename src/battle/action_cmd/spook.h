@@ -3,8 +3,8 @@
 
 #include "common_structs.h"
 
-ApiStatus action_command_spook_init(Evt* script, s32 isInitialCall);
-ApiStatus action_command_spook_start(Evt* script, s32 isInitialCall);
+API_CALLABLE(action_command_spook_init);
+API_CALLABLE(action_command_spook_start);
 void action_command_spook_update(void);
 void action_command_spook_draw(void);
 void action_command_spook_free(void);

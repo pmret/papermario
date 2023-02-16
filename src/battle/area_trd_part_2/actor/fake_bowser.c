@@ -1565,7 +1565,7 @@ EvtScript N(nextTurn_8021F410) = {
     EVT_END
 };
 
-ApiStatus func_80218350_4B1540(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218350_4B1540) {
     bgm_set_battle_song(8, 0);
     bgm_push_battle_song();
     return ApiStatus_DONE2;
@@ -1759,7 +1759,7 @@ EvtScript N(8021F630) = {
     EVT_END
 };
 
-ApiStatus func_8021837C_4B156C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8021837C_4B156C) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(evt_get_variable(script, *args++));
 

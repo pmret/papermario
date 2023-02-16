@@ -6,7 +6,7 @@
 
 #include "world/common/todo/ShouldMovesAutoSucceed.inc.c"
 
-ApiStatus func_802A10A4_756824(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A10A4_756824) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }

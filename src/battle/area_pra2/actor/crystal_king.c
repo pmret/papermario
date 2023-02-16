@@ -153,7 +153,7 @@ EvtScript N(init) = {
 #include "common/StartRumbleWithParams.inc.c"
 #include "common/CosInterpMinMax.inc.c"
 
-ApiStatus GetActorPartOpacity(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetActorPartOpacity) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);
@@ -166,7 +166,7 @@ ApiStatus GetActorPartOpacity(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80218280_6609D0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218280_6609D0) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args);
 
@@ -179,7 +179,7 @@ ApiStatus func_80218280_6609D0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802182E4_660A34(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802182E4_660A34) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args);
 
@@ -192,7 +192,7 @@ ApiStatus func_802182E4_660A34(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80218344_660A94(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218344_660A94) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 
@@ -205,7 +205,7 @@ ApiStatus func_80218344_660A94(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802183A4_660AF4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802183A4_660AF4) {
     Bytecode* args = script->ptrReadPos;
     Bytecode arg0 = *args++;
     f32 startX = evt_get_variable(script, *args++);
@@ -217,7 +217,7 @@ ApiStatus func_802183A4_660AF4(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8021848C_660BDC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8021848C_660BDC) {
     Bytecode* args = script->ptrReadPos;
     Vec3f* path = (Vec3f*)evt_get_variable(script, *args++);
 

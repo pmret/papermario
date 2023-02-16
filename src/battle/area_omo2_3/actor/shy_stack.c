@@ -10,7 +10,7 @@
 
 #define NAMESPACE b_area_omo2_3_shy_stack
 
-ApiStatus func_80231000_54CC70(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80231000_54CC70) {
     Bytecode* args = script->ptrReadPos;
 
     evt_get_variable(script, args[1]);

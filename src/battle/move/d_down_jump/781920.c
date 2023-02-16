@@ -5,7 +5,7 @@
 
 #include "world/common/todo/UnkMoveFunc1.inc.c"
 
-ApiStatus func_802A10E4_781A04(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A10E4_781A04) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = evt_get_variable(script, *args++);
     s32 var1 = evt_get_variable(script, *args++);

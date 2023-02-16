@@ -7,8 +7,8 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_fright_jar
 
-ApiStatus N(FadeBackgroundToBlack)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A12D4_72BBE4)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(FadeBackgroundToBlack));
+API_CALLABLE(N(func_802A12D4_72BBE4));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

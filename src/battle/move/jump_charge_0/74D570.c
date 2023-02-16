@@ -8,7 +8,7 @@
 
 #include "world/common/todo/IsJumpMaxCharged.inc.c"
 
-ApiStatus func_802A1108_74D678(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A1108_74D678) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 var1 = evt_get_variable(script, *args++);
@@ -29,7 +29,7 @@ ApiStatus func_802A1108_74D678(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A120C_74D77C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A120C_74D77C) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = evt_get_variable(script, *args++);
     s32 var1 = evt_get_variable(script, *args++);

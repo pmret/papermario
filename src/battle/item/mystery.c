@@ -160,7 +160,7 @@ s32 N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802A188C_72CE3C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A188C_72CE3C)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);

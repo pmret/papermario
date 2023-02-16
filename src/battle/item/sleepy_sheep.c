@@ -22,7 +22,7 @@ BSS s32 D_802A3F58[10];
 BSS s32 D_802A3F80[2]; // unused?
 BSS Vec3f D_802A3F88;
 
-ApiStatus N(func_802A123C_71E88C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A123C_71E88C)) {
     Vec3f* posPtr = &D_802A3F88;
     s32 entityID;
     f32 x, y, z;
@@ -99,7 +99,7 @@ ApiStatus N(func_802A123C_71E88C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802A1740_71ED90)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1740_71ED90)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 i;
@@ -129,7 +129,7 @@ ApiStatus N(func_802A1740_71ED90)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1848_71EE98)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1848_71EE98)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 i;

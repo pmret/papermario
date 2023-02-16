@@ -221,7 +221,7 @@ ActorBlueprint NAMESPACE = {
 
 #include "common/UnkBattleFunc1.inc.c"
 
-ApiStatus func_8021875C_4EFBFC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8021875C_4EFBFC) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);

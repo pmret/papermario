@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_dig_dig_03_script
 
-ApiStatus func_80218770_6DE530(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218770_6DE530) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     SelectableTarget* selectableTarget;

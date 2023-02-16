@@ -8,7 +8,7 @@
 
 #include "common/AddHP.inc.c"
 
-ApiStatus func_802A156C_7922FC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A156C_7922FC) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);

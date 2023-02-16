@@ -6,7 +6,7 @@ extern EntityModelScript D_80283EE8;
 
 #include "ItemRefund.inc.c"
 
-ApiStatus N(func_802A123C_724F1C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A123C_724F1C)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -20,7 +20,7 @@ ApiStatus N(func_802A123C_724F1C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A12EC_724FCC)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A12EC_724FCC)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     Bytecode* args = script->ptrReadPos;
@@ -44,7 +44,7 @@ ApiStatus N(func_802A12EC_724FCC)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1378_725058)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1378_725058)) {
     s32 actorId = evt_get_variable(script, *script->ptrReadPos);
     Actor* actor = get_actor(actorId);
     s32 actorClass = actor->actorID & ACTOR_CLASS_MASK;
@@ -75,7 +75,7 @@ ApiStatus N(func_802A1378_725058)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1418_7250F8)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1418_7250F8)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);

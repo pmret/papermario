@@ -14,7 +14,7 @@ enum N(ActorVars) {
     N(ACTOR_VAR_TOTAL_DAMAGE) = 4,
 };
 
-ApiStatus N(GetActorPartSize)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetActorPartSize)) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);

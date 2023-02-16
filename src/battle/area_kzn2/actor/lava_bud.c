@@ -21,7 +21,7 @@ extern EvtScript N(attackPetitSpit);
 extern EvtScript N(summonPetitPiranha);
 extern EvtScript N(8022630C);
 
-ApiStatus SetAnimatorFlags(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetAnimatorFlags);
 
 extern EvtScript b_area_kzn2_lava_piranha_ignite;
 
@@ -958,7 +958,7 @@ EvtScript N(onHit) = {
     EVT_END
 };
 
-ApiStatus func_80218DF0_59F4D0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218DF0_59F4D0) {
     Bytecode* args = script->ptrReadPos;
     FlameFXData* data = ((EffectInstance*) evt_get_variable(script, *args++))->data.flame;
     f32 temp_f0 = evt_get_float_variable(script, *args++);

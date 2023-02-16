@@ -4,7 +4,7 @@
 
 #include "world/common/todo/UnkMoveFunc1.inc.c"
 
-ApiStatus func_802A10E4_785C04(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A10E4_785C04) {
     script->varTable[0] = 3;
     return ApiStatus_DONE2;
 }

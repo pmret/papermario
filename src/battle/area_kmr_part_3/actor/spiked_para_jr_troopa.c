@@ -541,7 +541,7 @@ EvtScript N(takeTurn_8022936C) = {
     EVT_END
 };
 
-ApiStatus func_802189DC_447E1C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802189DC_447E1C) {
     Bytecode* args = script->ptrReadPos;
     f32 posX = evt_get_float_variable(script, *args++);
     f32 posY = evt_get_float_variable(script, *args++);

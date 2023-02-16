@@ -584,7 +584,7 @@ EvtScript N(802A30F4) = {
     EVT_END
 };
 
-ApiStatus N(GetJumpDamage)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetJumpDamage)) {
     script->varTable[15] = 1;
 
     switch (gPlayerData.bootsLevel) {

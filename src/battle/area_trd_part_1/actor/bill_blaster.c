@@ -200,7 +200,7 @@ EvtScript N(takeTurn_8021A200) = {
 
 extern Formation N(specialFormation_8021A4E8);
 
-ApiStatus func_80218000_4A10A0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218000_4A10A0) {
     N(specialFormation_8021A4E8)[0].var0 = 1;
     N(specialFormation_8021A4E8)[0].var1 = script->owner1.actorID;
 

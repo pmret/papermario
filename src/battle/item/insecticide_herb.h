@@ -9,8 +9,8 @@
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);
-ApiStatus N(func_802A12E0_72AA30)(Evt *script, s32 isInitialCall);
-ApiStatus N(func_802A123C_72A98C)(Evt *script, s32 isInitialCall);
-ApiStatus N(func_802A1280_72A9D0)(Evt *script, s32 isInitialCall);
+API_CALLABLE(N(func_802A12E0_72AA30));
+API_CALLABLE(N(func_802A123C_72A98C));
+API_CALLABLE(N(func_802A1280_72A9D0));
 
 #endif

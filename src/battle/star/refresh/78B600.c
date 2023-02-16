@@ -7,7 +7,7 @@
 
 #include "common/StarPower.inc.c"
 
-ApiStatus func_802A1518_78BB18(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A1518_78BB18) {
     Bytecode* args = script->ptrReadPos;
     Npc* npc;
 
@@ -74,7 +74,7 @@ ApiStatus func_802A1518_78BB18(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802A17D4_78BDD4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A17D4_78BDD4) {
     Actor* actor = gBattleStatus.playerActor;
 
     if (actor->debuff != STATUS_END) {
@@ -97,7 +97,7 @@ ApiStatus func_802A17D4_78BDD4(Evt* script, s32 isInitialCall) {
 
 #include "common/AddFP.inc.c"
 
-ApiStatus func_802A18E8_78BEE8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A18E8_78BEE8) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -109,7 +109,7 @@ ApiStatus func_802A18E8_78BEE8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A19A8_78BFA8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A19A8_78BFA8) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);

@@ -6,7 +6,7 @@
 
 #include "ItemRefund.inc.c"
 
-ApiStatus N(func_802A123C_72A98C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A123C_72A98C)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* enemy = get_actor(script->owner1.enemyID);
     Actor* target = get_actor(enemy->targetActorID);
@@ -16,7 +16,7 @@ ApiStatus N(func_802A123C_72A98C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1280_72A9D0)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1280_72A9D0)) {
     Actor* enemy = get_actor(script->owner1.enemyID);
     Actor* target;
 
@@ -27,7 +27,7 @@ ApiStatus N(func_802A1280_72A9D0)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A12E0_72AA30)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A12E0_72AA30)) {
     Bytecode* args = script->ptrReadPos;
     f32 a = evt_get_variable(script, *args++);
     f32 b = evt_get_variable(script, *args++);

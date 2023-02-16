@@ -142,7 +142,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-ApiStatus N(init_overlay)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(init_overlay)) {
     get_actor(script->owner1.actorID);
 
     set_screen_overlay_params_back(13, 220.0f);
@@ -164,7 +164,7 @@ s32 N(get_darkening)(ActorState* actorState, s32 targetDarkening) {
     return actorState->varTable[N(VAR_DARKENING)];
 }
 
-ApiStatus N(update_effect)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(update_effect)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
     Actor* actor = get_actor(script->owner1.actorID);

@@ -10,7 +10,7 @@
 
 #include "common/GetSelectedMoveID.inc.c"
 
-ApiStatus N(SetActorLevelToZero)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetActorLevelToZero)) {
     get_actor(script->owner1.actorID)->actorBlueprint->level = 0;
     return ApiStatus_DONE2;
 }

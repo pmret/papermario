@@ -2,7 +2,7 @@
 
 #include "ItemRefund.inc.c"
 
-ApiStatus N(func_802A123C_71AA2C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A123C_71AA2C)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 

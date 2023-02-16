@@ -4,7 +4,7 @@
 
 #include "ItemRefund.inc.c"
 
-ApiStatus battle_item_shooting_star_func_802A123C_71D9AC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(battle_item_shooting_star_func_802A123C_71D9AC) {
     s32 t1 = 200;
     s32 r1 = rand_int(t1) + 100; // 100-299
     s32 r2 = rand_int(40); // 0-39
@@ -20,7 +20,7 @@ ApiStatus battle_item_shooting_star_func_802A123C_71D9AC(Evt* script, s32 isInit
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1388_71DAF8)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1388_71DAF8)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -31,7 +31,7 @@ ApiStatus N(func_802A1388_71DAF8)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1444_71DBB4)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1444_71DBB4)) {
     s32 ret;
 
     if (isInitialCall) {
@@ -47,7 +47,7 @@ ApiStatus N(func_802A1444_71DBB4)(Evt* script, s32 isInitialCall) {
     return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A14D4_71DC44)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A14D4_71DC44)) {
     if (isInitialCall) {
         script->functionTemp[0] = 10;
     }

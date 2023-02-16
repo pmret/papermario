@@ -117,7 +117,7 @@ EvtScript N(kooper_init) = {
 #include "common/UnkBattleFunc1.inc.c"
 
 //TODO find the way to include it
-ApiStatus N(kooper_UnkActorPosFunc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(kooper_UnkActorPosFunc)) {
     Actor* actor = get_actor(script->owner1.actorID);
     ActorState* actorState = &actor->state;
 

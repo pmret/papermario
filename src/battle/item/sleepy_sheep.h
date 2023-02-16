@@ -7,13 +7,13 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_sleepy_sheep
 
-ApiStatus SetVirtualEntityMoveSpeed(Evt* script, s32 isInitialCall);
-ApiStatus VirtualEntityMoveTo(Evt* script, s32 isInitialCall);
-ApiStatus ItemAfflictEnemy(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetVirtualEntityMoveSpeed);
+API_CALLABLE(VirtualEntityMoveTo);
+API_CALLABLE(ItemAfflictEnemy);
 
-ApiStatus N(func_802A123C_71E88C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A1740_71ED90)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A1848_71EE98)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(func_802A123C_71E88C));
+API_CALLABLE(N(func_802A1740_71ED90));
+API_CALLABLE(N(func_802A1848_71EE98));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

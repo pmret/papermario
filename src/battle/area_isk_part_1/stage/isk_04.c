@@ -8,13 +8,13 @@
 BSS EffectInstance* N(D_80224D60);
 BSS EffectInstance* N(D_80224D64);
 
-ApiStatus N(CreateTorchFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(CreateTorchFX)) {
     fx_flame(1, -133.0f, 72.0f, -143.0f, 0.3f, &N(D_80224D60));
     fx_flame(1,  129.0f, 72.0f, -143.0f, 0.3f, &N(D_80224D64));
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(DeleteTorchFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(DeleteTorchFX)) {
     remove_effect(N(D_80224D60));
     remove_effect(N(D_80224D64));
     return ApiStatus_DONE2;

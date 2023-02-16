@@ -3,8 +3,8 @@
 
 #include "common/StarPower.inc.c"
 
-ApiStatus N(GetStage)(Evt* script, s32 isInitialCall);
-ApiStatus N(starBeam2)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(GetStage));
+API_CALLABLE(N(starBeam2));
 
 EvtScript N(802A24F0) = {
     EVT_CALL(GetOwnerID, LVarA)
@@ -296,7 +296,7 @@ static s32 N(miscParticlesTimeLeft)[8];
 static s32 N(spiritsMoveTime)[8];
 static s32 N(starBeamStage);
 
-ApiStatus N(ProcessPeachStarBeam)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ProcessPeachStarBeam)) {
     PeachStarBeamFXData* effectData;
     PeachStarBeamSpirit* spirit;
     Bytecode* args = script->ptrReadPos;
@@ -746,12 +746,12 @@ ApiStatus N(ProcessPeachStarBeam)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(GetStage)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetStage)) {
     script->varTable[0] = N(starBeamStage);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(unkStarBeamBgFunc)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(unkStarBeamBgFunc)) {
     if (isInitialCall) {
         script->functionTemp[0] = 230;
     }

@@ -1117,7 +1117,7 @@ EvtScript N(8022B2E8) = {
     EVT_END
 };
 
-ApiStatus func_80218C74_48DE14(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218C74_48DE14) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 z = evt_get_variable(script, *args++);
@@ -1139,7 +1139,7 @@ ApiStatus func_80218C74_48DE14(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80218DF8_48DF98(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218DF8_48DF98) {
     Bytecode* args = script->ptrReadPos;
     Bytecode var1 = *args++;
 

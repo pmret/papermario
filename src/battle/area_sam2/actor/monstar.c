@@ -146,7 +146,7 @@ FoldImageRecPart D_8021A2B8_63F498 = {
     .dlist = N(dlist),
 };
 
-ApiStatus func_80218000_63D1E0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218000_63D1E0) {
     ActorPart* part = get_actor_part(get_actor(script->owner1.actorID), 1);
     s32 i;
     u8 sp20[20];

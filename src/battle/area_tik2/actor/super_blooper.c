@@ -239,7 +239,7 @@ ActorBlueprint NAMESPACE = {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-ApiStatus N(unused_func)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(unused_func)) {
     Bytecode* args = script->ptrReadPos;
     Bytecode arg0 = *args++;
     f32 var0, var1;

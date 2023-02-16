@@ -25,14 +25,14 @@ extern EvtScript N(hidePlayer);
 
 extern s32 bMarioHideAnims[];
 
-ApiStatus N(IsOuttaSightActive)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(IsOuttaSightActive)) {
     BattleStatus* battleStatus = &gBattleStatus;
     script->varTable[0] = battleStatus->outtaSightActive;
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetBowSize)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetBowSize)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* partnerTargetActor = get_actor(partnerActor->targetActorID);
@@ -44,7 +44,7 @@ ApiStatus N(GetBowSize)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ApplyOuttaSight)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ApplyOuttaSight)) {
     ActorPart* playerActorPartTable = gBattleStatus.playerActor->partsTable;
 
     gBattleStatus.outtaSightActive = 1;
@@ -59,7 +59,7 @@ ApiStatus N(ApplyOuttaSight)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ModifyBowPos)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ModifyBowPos)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* playerActor = battleStatus->playerActor;
@@ -77,7 +77,7 @@ ApiStatus N(ModifyBowPos)(Evt* script, s32 isInitialCall) {
 }
 
 /// Duplicate of IsPartnerImmobile
-ApiStatus N(IsPartnerImmobile)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(IsPartnerImmobile)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     s32 isImmobile = playerActor->debuff == STATUS_FEAR
@@ -95,7 +95,7 @@ ApiStatus N(IsPartnerImmobile)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(RestorePlayerIdleAnimations)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(RestorePlayerIdleAnimations)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     ActorPart* playerActorPartTable = battleStatus->playerActor->partsTable;
@@ -104,7 +104,7 @@ ApiStatus N(RestorePlayerIdleAnimations)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(AverageSpookChance)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AverageSpookChance)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor;

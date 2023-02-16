@@ -10,6 +10,6 @@
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);
 
-ApiStatus N(func_802A123C_71CF1C)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(func_802A123C_71CF1C));
 
 #endif

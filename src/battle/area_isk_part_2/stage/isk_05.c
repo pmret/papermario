@@ -7,13 +7,13 @@
 BSS EffectInstance* D_80220750;
 BSS EffectInstance* D_80220754;
 
-ApiStatus func_80218920_4EFDC0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218920_4EFDC0) {
     fx_flame(1, -90.0f, 45.0f, -146.0f, 0.25f, &D_80220750);
     fx_flame(1, 80.0f, 45.0f, -146.0f, 0.25f, &D_80220754);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802189B0_4EFE50(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802189B0_4EFE50) {
     remove_effect(D_80220750);
     remove_effect(D_80220754);
     return ApiStatus_DONE2;

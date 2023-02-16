@@ -226,7 +226,7 @@ EvtScript N(recoverHP) = {
     EVT_END
 };
 
-ApiStatus N(SetFlameUnk2C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetFlameUnk2C)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
     FlameFXData* flame = effect->data.flame;
@@ -236,7 +236,7 @@ ApiStatus N(SetFlameUnk2C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SetFlameX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetFlameX)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
     FlameFXData* flame = effect->data.flame;

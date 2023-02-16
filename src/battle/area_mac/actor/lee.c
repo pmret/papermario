@@ -114,7 +114,7 @@ extern EvtScript N(copyPartner);
 BSS s32 D_80232C20[12];
 BSS s32 D_80232C50;
 
-ApiStatus func_802180D0_464560(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802180D0_464560) {
     s32 i;
 
     for (i = 0; i < 12; i++) {
@@ -748,7 +748,7 @@ EvtScript N(8021F5F8) = {
     EVT_END
 };
 
-ApiStatus func_80218100_464590(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218100_464590) {
     PlayerData* playerData = &gPlayerData;
     s32 currentPartner = script->varTable[5];
     s32 partnerId;
@@ -974,7 +974,7 @@ EvtScript N(8021F6E0) = {
 
 #include "common/UnkEffect6CFunc.inc.c"
 
-ApiStatus func_80218DF4_465284(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218DF4_465284) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *args++);
 
@@ -982,7 +982,7 @@ ApiStatus func_80218DF4_465284(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80218E2C_4652BC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218E2C_4652BC) {
     EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *script->ptrReadPos);
 
     tattleEffect->data.tattleWindow->pos.y = 144.0f;
@@ -2873,7 +2873,7 @@ EvtScript N(init_Watt) = {
     EVT_END
 };
 
-ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80219188_465618) {
     WattEffectData* wattEffectData;
     f32 x, y, z;
     Actor* actor = get_actor(script->owner1.enemyID);
@@ -2958,7 +2958,7 @@ ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80219604_465A94(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80219604_465A94) {
     WattEffectData* wattEffectData = (WattEffectData*)get_actor(script->owner1.actorID)->state.varTable[3];
 
     wattEffectData->flags = 0;
@@ -2981,7 +2981,7 @@ EvtScript N(idle_80225B68) = {
     EVT_END
 };
 
-ApiStatus func_80219658_465AE8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80219658_465AE8) {
     Bytecode* args = script->ptrReadPos;
     WattEffectData* wattEffects = (WattEffectData*)get_actor(script->owner1.enemyID)->state.varTable[3];
 
@@ -2989,7 +2989,7 @@ ApiStatus func_80219658_465AE8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802196A4_465B34(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802196A4_465B34) {
     Bytecode* args = script->ptrReadPos;
     WattEffectData* wattEffects = (WattEffectData*)get_actor(script->owner1.enemyID)->state.varTable[3];
 
@@ -2997,7 +2997,7 @@ ApiStatus func_802196A4_465B34(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802196F0_465B80(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802196F0_465B80) {
     Bytecode* args = script->ptrReadPos;
     WattEffectData* wattEffects = (WattEffectData*)get_actor(script->owner1.enemyID)->state.varTable[3];
 
@@ -4110,7 +4110,7 @@ Formation N(formation_lakilester) = {
     { .actor = &N(lakilester), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
-ApiStatus func_802197B8_465C48(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802197B8_465C48) {
     Bytecode* args = script->ptrReadPos;
 
     evt_set_variable(script, *args++, gPlayerData.currentPartner);
@@ -4118,7 +4118,7 @@ ApiStatus func_802197B8_465C48(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80219824_465CB4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80219824_465CB4) {
     Bytecode* args = script->ptrReadPos;
     s32 partnerID = evt_get_variable(script, *args++);
     Actor* actor = get_actor(script->owner1.enemyID);

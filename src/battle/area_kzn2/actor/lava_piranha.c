@@ -126,8 +126,8 @@ API_CALLABLE(SetAnimatorFlags);
 API_CALLABLE(GetAnimatedPositionByTreeIndex);
 API_CALLABLE(GetAnimatedRotationByTreeIndex);
 API_CALLABLE(GetAnimatedModelRootPosition);
-ApiStatus SetPartImmunityBits(Evt* script, s32 isInitialCall);
-ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetPartImmunityBits);
+API_CALLABLE(DeleteAnimatedModel);
 
 extern Formation N(formation_lava_bud_1);
 extern Formation N(formation_lava_bud_2);

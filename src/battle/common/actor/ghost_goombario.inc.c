@@ -10,7 +10,7 @@ extern EvtScript N(goombario_handleEvent);
 #include "common/UnkActorSizeFunc.inc.c"
 #include "common/UnkEffect6CFunc.inc.c"
 
-ApiStatus N(UnkTattleEffectFunc1)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkTattleEffectFunc1)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
 
@@ -18,7 +18,7 @@ ApiStatus N(UnkTattleEffectFunc1)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkTattleEffectFunc2)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkTattleEffectFunc2)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
 

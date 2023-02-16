@@ -7,7 +7,7 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_tasty_tonic
 
-ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(func_802A123C_72223C));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

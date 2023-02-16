@@ -7,8 +7,8 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_dried_shroom
 
-ApiStatus N(func_802A123C_71CF1C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A12FC_71CFDC)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(func_802A123C_71CF1C));
+API_CALLABLE(N(func_802A12FC_71CFDC));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

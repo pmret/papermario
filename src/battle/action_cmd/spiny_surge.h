@@ -3,8 +3,8 @@
 
 #include "common_structs.h"
 
-ApiStatus action_command_spiny_surge_init(Evt* script, s32 isInitialCall);
-ApiStatus action_command_spiny_surge_start(Evt* script, s32 isInitialCall);
+API_CALLABLE(action_command_spiny_surge_init);
+API_CALLABLE(action_command_spiny_surge_start);
 void action_command_spiny_surge_update(void);
 void action_command_spiny_surge_draw(void);
 void action_command_spiny_surge_free(void);

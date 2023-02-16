@@ -7,13 +7,13 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_food
 
-ApiStatus N(func_802A123C_73330C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A12EC_7333BC)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A15A0_733670)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A1378_733448)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A1438_733508)(Evt* script, s32 isInitialCall);
-ApiStatus N(AddHP)(Evt* script, s32 isInitialCall);
-ApiStatus N(AddFP)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(func_802A123C_73330C));
+API_CALLABLE(N(func_802A12EC_7333BC));
+API_CALLABLE(N(func_802A15A0_733670));
+API_CALLABLE(N(func_802A1378_733448));
+API_CALLABLE(N(func_802A1438_733508));
+API_CALLABLE(N(AddHP));
+API_CALLABLE(N(AddFP));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

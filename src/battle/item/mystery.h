@@ -7,8 +7,8 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_mystery
 
-ApiStatus N(func_802A13E4_72C994)(Evt *script, s32 isInitialCall);
-ApiStatus N(func_802A188C_72CE3C)(Evt *script, s32 isInitialCall);
+API_CALLABLE(N(func_802A13E4_72C994));
+API_CALLABLE(N(func_802A188C_72CE3C));
 
 typedef struct N(tempStc) {
     s32 iconId;

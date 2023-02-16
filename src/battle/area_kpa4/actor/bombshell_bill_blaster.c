@@ -187,7 +187,7 @@ EvtScript N(takeTurn) = {
 
 extern Formation N(formation_bill);
 
-ApiStatus ApplyBillSettings(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ApplyBillSettings) {
     N(formation_bill)[0].var0 = 1;
     N(formation_bill)[0].var1 = script->owner1.actorID;
 

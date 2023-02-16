@@ -276,7 +276,7 @@ EvtScript N(takeTurn_80219444) = {
     EVT_END
 };
 
-ApiStatus func_80218000_47F0B0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218000_47F0B0) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->currentPartner = PARTNER_GOOMBARIO;

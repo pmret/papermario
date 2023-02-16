@@ -5,7 +5,7 @@
 
 extern s32 actionCmdTableJump[];
 
-ApiStatus N(init)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(init)) {
     s32 hudElement;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
@@ -42,7 +42,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(start)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(start)) {
     s32 hudElement;
 
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

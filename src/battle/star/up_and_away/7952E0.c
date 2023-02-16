@@ -11,7 +11,7 @@ extern EntityModelScript D_80283EE8;
 
 #include "common/StarPower.inc.c"
 
-ApiStatus func_802A1518_7957F8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A1518_7957F8) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(FOG_MODE_1);
         *gBackgroundFogModePtr = FOG_MODE_1;
@@ -30,7 +30,7 @@ ApiStatus func_802A1518_7957F8(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802A15B4_795894(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A15B4_795894) {
     if (isInitialCall) {
         script->functionTemp[0] = 254;
     }
@@ -47,7 +47,7 @@ ApiStatus func_802A15B4_795894(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802A1628_795908(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A1628_795908) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
     u32 flags;
 

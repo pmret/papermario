@@ -18,7 +18,7 @@ typedef struct Omo01Struct {
     /* 0x14 */ s32 unk_14;
 } Omo01Struct; // size = 0x18
 
-ApiStatus N(update_model_uma)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(update_model_uma)) {
     Omo01Struct* ptr;
     Model* model;
     f32 rotZ;

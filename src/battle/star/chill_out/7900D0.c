@@ -8,17 +8,17 @@ BSS s32 D_802A2CC0;
 
 #include "common/StarPower.inc.c"
 
-ApiStatus func_802A1518_7905E8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A1518_7905E8) {
     D_802A2CC0 = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A1528_7905F8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A1528_7905F8) {
     script->varTable[0] = D_802A2CC0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A153C_79060C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A153C_79060C) {
     f32 a = rand_int(200) - 25;
     f32 b = rand_int(120) + 7;
     f32 c = rand_int(50) - 25;
@@ -33,7 +33,7 @@ ApiStatus func_802A153C_79060C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A163C_79070C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A163C_79070C) {
     Actor* actor = get_actor(script->owner1.actorID);
     Actor* target = get_actor(actor->targetActorID);
     ActorPart* part = get_actor_part(target, actor->targetPartIndex);
@@ -51,7 +51,7 @@ ApiStatus func_802A163C_79070C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A16F4_7907C4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A16F4_7907C4) {
     Actor* enemy = get_actor(script->owner1.enemyID);
     Actor* target = get_actor(enemy->targetActorID);
     ActorPart* targetPart = get_actor_part(target, enemy->targetPartIndex);

@@ -25,7 +25,7 @@ extern EvtScript N(dizzyShell);
 extern EvtScript N(fireShell);
 extern EvtScript N(shellTossOnFirstStrike);
 
-ApiStatus N(SlowDown)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SlowDown)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     ActorState* partnerActorMovement = &partnerActor->state;
@@ -59,7 +59,7 @@ ApiStatus N(SlowDown)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(SetTargetsYaw)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetTargetsYaw)) {
     SelectableTarget* target;
     Actor* actor = gBattleStatus.partnerActor;
     Actor* targetActor;
@@ -111,7 +111,7 @@ ApiStatus N(SetTargetsYaw)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(AverageTargetDizzyChance)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AverageTargetDizzyChance)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor;
@@ -149,7 +149,7 @@ ApiStatus N(AverageTargetDizzyChance)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetFireShellSpeedAndDamage)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetFireShellSpeedAndDamage)) {
     s32 mashResult = script->varTable[0];
     s32 damage;
     s32 speedRating;

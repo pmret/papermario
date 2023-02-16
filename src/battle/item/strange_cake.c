@@ -151,7 +151,7 @@ s32 N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802A1818_731B18)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1818_731B18)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -162,7 +162,7 @@ ApiStatus N(func_802A1818_731B18)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A18D8_731BD8)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A18D8_731BD8)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -177,7 +177,7 @@ ApiStatus N(func_802A18D8_731BD8)(Evt* script, s32 isInitialCall) {
 
 #include "common/AddFP.inc.c"
 
-ApiStatus N(func_802A1A40_731D40)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1A40_731D40)) {
     ItemData* item = &gItemTable[ITEM_KOOKY_COOKIE];
     PlayerData* playerData = &gPlayerData;
 
@@ -191,7 +191,7 @@ ApiStatus N(func_802A1A40_731D40)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1A8C_731D8C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1A8C_731D8C)) {
     ItemData* item = &gItemTable[ITEM_KOOKY_COOKIE];
     PlayerData* playerData = &gPlayerData;
 
@@ -205,7 +205,7 @@ ApiStatus N(func_802A1A8C_731D8C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1AD8_731DD8)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1AD8_731DD8)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
@@ -215,7 +215,7 @@ ApiStatus N(func_802A1AD8_731DD8)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1B14_731E14)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1B14_731E14)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     ActorPart* part = player->partsTable;
@@ -227,7 +227,7 @@ ApiStatus N(func_802A1B14_731E14)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1B68_731E68)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1B68_731E68)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 

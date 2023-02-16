@@ -5,7 +5,7 @@
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
-ApiStatus N(func_802A12D4_7270A4)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A12D4_7270A4)) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
     }

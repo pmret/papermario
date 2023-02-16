@@ -903,7 +903,7 @@ EvtScript N(8022ED10) = {
     EVT_END
 };
 
-ApiStatus N(CalculateArcsinDeg)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(CalculateArcsinDeg));
 
 EvtScript N(8022F468) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

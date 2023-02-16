@@ -30,7 +30,7 @@ extern EvtScript N(idle);
 extern EvtScript N(nextTurn);
 extern EvtScript N(takeTurn);
 
-ApiStatus N(GetReturnMoveTime)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetReturnMoveTime)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     f32 posX = partner->currentPos.x;
@@ -57,7 +57,7 @@ ApiStatus N(GetReturnMoveTime)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(AdjustPowerBounceChance)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AdjustPowerBounceChance)) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
 
     script->varTable[0] = 99;
@@ -70,7 +70,7 @@ ApiStatus N(AdjustPowerBounceChance)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(JumpOnTarget)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(JumpOnTarget)) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* actor = battleStatus->partnerActor;
@@ -245,7 +245,7 @@ ApiStatus N(JumpOnTarget)(Evt* script, s32 isInitialCall) {
 }
 
 
-ApiStatus N(OnMissHeadbonk)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(OnMissHeadbonk)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = gBattleStatus.partnerActor;
     Vec3f* pos = &partner->state.currentPos;
@@ -289,7 +289,7 @@ ApiStatus N(OnMissHeadbonk)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(GetTattleMessage)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetTattleMessage)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     Actor* target = get_actor(partner->targetActorID);
@@ -306,8 +306,7 @@ ApiStatus N(GetTattleMessage)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-
-ApiStatus N(GetTattleCamPos)(Evt* script, s32 isInitalCall) {
+API_CALLABLE(N(GetTattleCamPos)) {
     Actor* target = get_actor(gBattleStatus.partnerActor->targetActorID);
     s32 xSize;
 
@@ -337,13 +336,13 @@ ApiStatus N(GetTattleCamPos)(Evt* script, s32 isInitalCall) {
 }
 
 
-ApiStatus N(OpenTattleWindow)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(OpenTattleWindow)) {
     N(tattleEffect) = fx_tattle_window(0, 206, 144, 0, 1.0f, 0);
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(CloseTattleWindow)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(CloseTattleWindow)) {
     EffectInstance* effect = N(tattleEffect);
 
     effect->data.tattleWindow->pos.y = 144.0f;
@@ -352,7 +351,7 @@ ApiStatus N(CloseTattleWindow)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(CanChargeMore)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(CanChargeMore)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
 
@@ -379,7 +378,7 @@ ApiStatus N(CanChargeMore)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ChargeAtPos)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ChargeAtPos)) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
@@ -425,7 +424,7 @@ ApiStatus N(ChargeAtPos)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(StopCharge)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StopCharge)) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->partnerActor->isGlowing = 0;
@@ -434,7 +433,7 @@ ApiStatus N(StopCharge)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(StopChargeAndGet)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(StopChargeAndGet)) {
     Actor* partner = gBattleStatus.partnerActor;
 
     if (!(gBattleStatus.flags1 & BS_FLAGS1_40000000)) {
@@ -448,7 +447,7 @@ ApiStatus N(StopChargeAndGet)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetChargeAmount)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetChargeAmount)) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     script->varTable[0] = battleStatus->partnerActor->isGlowing;
@@ -456,7 +455,7 @@ ApiStatus N(GetChargeAmount)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(PlayChargeFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(PlayChargeFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -468,7 +467,7 @@ ApiStatus N(PlayChargeFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetChargeMessage)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetChargeMessage)) {
     if (N(isCharged) == 0) {
         script->varTable[0] = 36;
     } else {

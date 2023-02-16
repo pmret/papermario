@@ -7,9 +7,9 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_snowman_doll
 
-ApiStatus N(FadeBackgroundToBlack)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A123C_71C06C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A13B8_71C1E8)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(FadeBackgroundToBlack));
+API_CALLABLE(N(func_802A123C_71C06C));
+API_CALLABLE(N(func_802A13B8_71C1E8));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

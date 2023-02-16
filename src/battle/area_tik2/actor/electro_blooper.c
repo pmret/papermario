@@ -235,7 +235,7 @@ ActorBlueprint NAMESPACE = {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-ApiStatus N(unused_func)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(unused_func)) {
     Bytecode* args = script->ptrReadPos;
     Bytecode arg0 = *args++;
     f32 var0, var1;
@@ -252,7 +252,7 @@ ApiStatus N(unused_func)(Evt* script, s32 isInitialCall) {
 #include "common/FadeBackgroundToBlack.inc.c"
 #include "common/UnfadeBackgroundToBlack.inc.c"
 
-ApiStatus N(UpdateSnakingStatic)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UpdateSnakingStatic)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
     f32 x = evt_get_variable(script, *args++);

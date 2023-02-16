@@ -4,7 +4,7 @@
 
 #include "ItemRefund.inc.c"
 
-ApiStatus N(func_802A123C_71C06C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A123C_71C06C)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -18,7 +18,7 @@ ApiStatus N(func_802A123C_71C06C)(Evt* script, s32 isInitialCall) {
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
-ApiStatus N(func_802A13B8_71C1E8)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A13B8_71C1E8)) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
     }

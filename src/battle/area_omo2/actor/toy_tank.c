@@ -39,7 +39,7 @@ extern Formation N(formation_shy_stack_1);
 extern Formation N(formation_shy_stack_2);
 extern Formation N(formation_shy_squad_dup);
 
-ApiStatus N(UpdateBulbGlow)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UpdateBulbGlow)) {
     Bytecode *args = script->ptrReadPos;
 
     s32 x = evt_get_variable(script, *args++);
@@ -55,7 +55,7 @@ ApiStatus N(UpdateBulbGlow)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802181F4_52B894(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802181F4_52B894) {
     Bytecode* args = script->ptrReadPos;
     get_actor(script->owner1.actorID);
     set_screen_overlay_params_back(13, evt_get_variable(script, *args));

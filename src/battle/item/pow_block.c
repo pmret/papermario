@@ -2,7 +2,7 @@
 
 #include "ItemRefund.inc.c"
 
-ApiStatus N(func_802A123C_718A8C)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A123C_718A8C)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     CollisionStatus* collisionStatus = &gCollisionStatus;
@@ -22,7 +22,7 @@ ApiStatus N(func_802A123C_718A8C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A12E4_718B34)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A12E4_718B34)) {
     Entity* entity = get_entity_by_index(script->varTable[10]);
 
     entity->flags |= ENTITY_FLAG_PENDING_INSTANCE_DELETE;
@@ -30,7 +30,7 @@ ApiStatus N(func_802A12E4_718B34)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1318_718B68)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A1318_718B68)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     Entity* entity = get_entity_by_index(script->varTable[10]);

@@ -7,9 +7,9 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_thunder_rage
 
-ApiStatus N(FadeBackgroundToBlack)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A1354_71B4F4)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A12D4_71B474)(Evt* script, s32 isInitialCall);
+API_CALLABLE(N(FadeBackgroundToBlack));
+API_CALLABLE(N(func_802A1354_71B4F4));
+API_CALLABLE(N(func_802A12D4_71B474));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

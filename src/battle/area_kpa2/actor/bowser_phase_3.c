@@ -158,7 +158,7 @@ ActorBlueprint NAMESPACE = {
 #define BOWSER_LARGE
 #include "common/StartRumbleWithParams.inc.c"
 
-ApiStatus N(MakeLightnings)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MakeLightnings)) {
     Bytecode* args = script->ptrReadPos;
     s32 angles[] = { 90, 135, 225, 270, 315, 405 };
     Actor* actor = get_actor(script->owner1.actorID);

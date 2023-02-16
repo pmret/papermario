@@ -5,7 +5,7 @@
 
 #include "common/StarPower.inc.c"
 
-ApiStatus func_802A1518_78A378(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A1518_78A378) {
     PlayerData* playerData = &gPlayerData;
     s32 deepFocusSP;
     s32 superFocusSP;
@@ -29,7 +29,7 @@ ApiStatus func_802A1518_78A378(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A15B0_78A410(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802A15B0_78A410) {
     PlayerData* playerData = &gPlayerData;
 
     script->varTable[0] = 0;

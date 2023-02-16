@@ -8,7 +8,7 @@ HudScript* D_802A97CC_42CEBC[3] = { &HES_AButtonDown, &HES_BButtonHeld, &HES_CDo
 
 extern s32 actionCmdTableTidalWave[];
 
-ApiStatus N(init)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(init)) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 id;
@@ -49,7 +49,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus N(start)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(start)) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;

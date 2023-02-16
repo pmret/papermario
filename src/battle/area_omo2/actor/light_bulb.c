@@ -181,7 +181,7 @@ EvtScript N(shake_tank) = {
     EVT_END
 };
 
-ApiStatus func_80218250_52B8F0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218250_52B8F0) {
     s32 i;
     IceShardBlueprint bpArray[] = {
         {

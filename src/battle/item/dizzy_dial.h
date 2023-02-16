@@ -7,8 +7,8 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_dizzy_dial
 
-ApiStatus ItemAfflictEnemy(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802A1270_727B80)(Evt* script, s32 isInitialCall);
+API_CALLABLE(ItemAfflictEnemy);
+API_CALLABLE(N(func_802A1270_727B80));
 
 extern EvtScript N(UseItemWithEffect);
 extern EvtScript N(PlayerGoHome);

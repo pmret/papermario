@@ -61,7 +61,7 @@ static SuctionPath N(suctionPaths)[10];
 
 #include "common/StartRumbleWithParams.inc.c"
 
-ApiStatus SetHealthBarPos(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetHealthBarPos) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(ACTOR_ENEMY0);
 
@@ -73,7 +73,7 @@ ApiStatus SetHealthBarPos(Evt* script, s32 isInitialCall) {
 
 #include "common/CosInterpMinMax.inc.c"
 
-ApiStatus SetTuffPuffPos(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetTuffPuffPos) {
     Bytecode* args = script->ptrReadPos;
 
     Bytecode outVar1 = *args++;
@@ -98,7 +98,7 @@ ApiStatus SetTuffPuffPos(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus FindPlaceForTuffPuff(Evt* script, s32 isInitialCall) {
+API_CALLABLE(FindPlaceForTuffPuff) {
     Bytecode* args = script->ptrReadPos;
     s32 arr[10];
     s32 flags = evt_get_variable(script, *args++);
@@ -149,14 +149,14 @@ ApiStatus FindPlaceForTuffPuff(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetTuffPuffPriority(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetTuffPuffPriority) {
     s32* actorID = &script->owner1.actorID;
     N(formation_tuff_puff_small)[0].priority = get_actor(*actorID)->turnPriority;
     N(formation_tuff_puff_large)[0].priority = get_actor(*actorID)->turnPriority;
     return ApiStatus_DONE2;
 }
 
-ApiStatus MakeSuctionPath(Evt* script, s32 isInitialCall) {
+API_CALLABLE(MakeSuctionPath) {
     Bytecode* args = script->ptrReadPos;
     SuctionPath* path = &N(suctionPaths)[evt_get_variable(script, *args++)];
 
@@ -173,7 +173,7 @@ ApiStatus MakeSuctionPath(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus HuffPuffBreath(Evt* script, s32 isInitialCall) {
+API_CALLABLE(HuffPuffBreath) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     f32 var2 = evt_get_float_variable(script, *args++);
@@ -193,7 +193,7 @@ ApiStatus HuffPuffBreath(Evt* script, s32 isInitialCall) {
 
 #include "common/SetBackgroundAlpha.inc.c"
 
-ApiStatus SnakingStatic(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SnakingStatic) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -204,7 +204,7 @@ ApiStatus SnakingStatic(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetSnakingStaticPos(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetSnakingStaticPos) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
     f32 posX = evt_get_float_variable(script, *args++);
@@ -217,7 +217,7 @@ ApiStatus SetSnakingStaticPos(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Atan2)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(Atan2)) {
     Bytecode* args = script->ptrReadPos;
     Bytecode outVar = *args++;
     f32 startX = evt_get_float_variable(script, *args++);
@@ -229,7 +229,7 @@ ApiStatus N(Atan2)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UpdateLerp)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UpdateLerp)) {
     Bytecode* args = script->ptrReadPos;
     s32 easing = evt_get_variable(script, *args++);
     f32 start = evt_get_float_variable(script, *args++);

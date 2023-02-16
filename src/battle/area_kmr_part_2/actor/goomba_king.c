@@ -145,7 +145,7 @@ ActorBlueprint NAMESPACE = {
 };
 
 // Unused function
-ApiStatus func_80218A60_43A4F0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80218A60_43A4F0) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
