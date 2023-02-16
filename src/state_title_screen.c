@@ -3,7 +3,7 @@
 #include "hud_element.h"
 #include "sprite.h"
 
-#ifdef VERSION_JP
+#if VERSION_JP
 #define TITLE_WIDTH 272
 #define TITLE_TILE_HEIGHT 2
 #define TITLE_HEIGHT 88
@@ -73,7 +73,7 @@ extern TitleDataStruct* D_800A0974;
 extern s32* D_800A0978;
 extern s32* D_800A097C;
 extern s32* D_800A0980;
-#ifdef VERSION_JP
+#if VERSION_JP
 extern s32* JP_800A0980;
 #endif
 extern s16 D_800A0988;
@@ -109,7 +109,7 @@ void state_init_title_screen(void) {
     D_800A0978 = (s32*)(D_800A0974->unk_00 + (s32) D_800A0974);
     D_800A097C = (s32*)(D_800A0974->unk_04 + (s32) D_800A0974);
     D_800A0980 = (s32*)(D_800A0974->unk_08 + (s32) D_800A0974);
-#ifdef VERSION_JP
+#if VERSION_JP
     JP_800A0980 = (s32*)(D_800A0974->img2_pal + (s32) D_800A0974);
 #endif
 
@@ -451,7 +451,7 @@ void title_screen_draw_copyright(f32 arg0) {
     s32 i;
 
     gSPDisplayList(gMasterGfxPos++, &D_80077A50);
-#ifdef VERSION_JP
+#if VERSION_JP
     gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
 #endif
     gDPPipeSync(gMasterGfxPos++);
@@ -466,7 +466,7 @@ void title_screen_draw_copyright(f32 arg0) {
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha);
     }
 
-#ifdef VERSION_JP
+#if VERSION_JP
     gDPLoadTLUT_pal16(gMasterGfxPos++, 0, JP_800A0980);
     gDPLoadTextureTile_4b(gMasterGfxPos++, D_800A097C, G_IM_FMT_CI, 128, 0, 0, 0, 127, 31, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,

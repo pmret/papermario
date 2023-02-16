@@ -34,12 +34,10 @@ s32 pad_map_table[] = { 0, 0 };
 
 #ifdef SHIFT
 #define ASSET_TABLE_ROM_START mapfs_ROM_START
-#else
-#if defined(VERSION_JP)
+#elif VERSION_JP
 #define ASSET_TABLE_ROM_START 0x1E00000
 #else
 #define ASSET_TABLE_ROM_START 0x1E40000
-#endif
 #endif
 
 #define ASSET_TABLE_HEADER_SIZE 0x20
@@ -83,7 +81,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_MARIO_WORLD;
     load_obfuscation_shims();
     shim_general_heap_create_obfuscated();
-#if defined(VERSION_JP)
+#if VERSION_JP
     reset_max_rumble_duration();
 #endif
     clear_render_tasks();

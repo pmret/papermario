@@ -7,7 +7,7 @@
 
 void appendGfx_intro_logos(void);
 
-#ifdef VERSION_JP
+#if VERSION_JP
 #define LOGO_1_Y 54
 #define LOGO_2_Y 104
 #else
@@ -109,7 +109,7 @@ void state_init_logos(void) {
 }
 
 void state_step_logos(void) {
-#ifdef VERSION_JP
+#if VERSION_JP
     int a0 = gGameStatusPtr->pressedButtons[0];
 #endif
 
@@ -120,7 +120,7 @@ void state_step_logos(void) {
             set_game_mode(GAME_MODE_TITLE_SCREEN);
         }
     } else {
-#ifdef VERSION_JP
+#if VERSION_JP
         // TODO: fix fake match
         if (((u8) gGameStatusPtr->introState - 1 < 0xaU) && (a0 & 0xB000)) {
             intro_logos_set_fade_color(0xD0);
@@ -145,7 +145,7 @@ void state_step_logos(void) {
             case INTRO_STATE_2:
                 if (intro_logos_fade_out(10)) {
                     gGameStatusPtr->introState++;
-#ifdef VERSION_JP
+#if VERSION_JP
                     gGameStatusPtr->introState += 2;
 #endif
                 }
@@ -153,7 +153,7 @@ void state_step_logos(void) {
             case INTRO_STATE_3:
                 if (intro_logos_fade_in(10)) {
                     gGameStatusPtr->introState++;
-#ifdef VERSION_JP
+#if VERSION_JP
                     gGameStatusPtr->introCounter = 30;
 #else
                     gGameStatusPtr->introCounter = 40;
@@ -163,7 +163,7 @@ void state_step_logos(void) {
             case INTRO_STATE_4:
                 if (gGameStatusPtr->introCounter == 0) {
                     gGameStatusPtr->introState++;
-#ifdef VERSION_JP
+#if VERSION_JP
                     intro_logos_set_fade_color(0);
 #else
                     intro_logos_set_fade_color(208);
@@ -258,7 +258,7 @@ void appendGfx_intro_logos(void) {
         case INTRO_STATE_3:
         case INTRO_STATE_4:
         case INTRO_STATE_5:
-#if defined(VERSION_JP)
+#if VERSION_JP
             break;
         case INTRO_STATE_6:
         case INTRO_STATE_7:
@@ -277,7 +277,7 @@ void appendGfx_intro_logos(void) {
                         G_TX_RENDERTILE, 0, 0, 1024, 1024);
                 gDPPipeSync(gMasterGfxPos++);
             }
-#if !defined(VERSION_JP)
+#if !VERSION_JP
             break;
         case INTRO_STATE_6:
         case INTRO_STATE_7:

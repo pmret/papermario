@@ -70,7 +70,7 @@ typedef struct HudStatusIcon {
     /* 0xA8 */ HudSimpleStatusIcon danger;
 } HudStatusIcon; // size = 0xB0
 
-#if !defined(VERSION_JP)
+#if !VERSION_JP
 s16 D_80078160[] = { 28, 40 };
 s16 D_80078164[] = { 0, -2 };
 #endif
@@ -256,7 +256,7 @@ void update_merlee_message(void* data) {
 }
 
 void draw_merlee_message_string(PopupMessage* popup, s32 posX, s32 posY) {
-#if defined(VERSION_JP)
+#if VERSION_JP
     s32 messageID;
 
     posX += 11;
@@ -280,7 +280,7 @@ void draw_merlee_message_string(PopupMessage* popup, s32 posX, s32 posY) {
 }
 
 void draw_merlee_message(void* data) {
-#if defined(VERSION_JP)
+#if VERSION_JP
     s32 width;
     s32 height;
     s32 messageID;

@@ -3,7 +3,7 @@
 #include "item_entity.h"
 #include "world/world.h"
 
-#if !defined(VERSION_JP)
+#if !VERSION_JP
 #define MSG_FullDesc_32 0
 #define MSG_ItemFullDesc_AutoJump 0
 #define MSG_ItemFullDesc_AutoMultibounce 0
@@ -142,9 +142,7 @@
 #define MSG_PartnerDesc_Twink_Battle 0
 #define MSG_PartnerDesc_Twink_World 0
 #define MSG_ShortDesc_32 0
-#endif
 
-#if !defined(VERSION_JP)
 // Use generic names for the different levels of partner moves
 #define MSG_PartnerMoveName_BellyFlop1 MSG_PartnerMoveName_BellyFlop
 #define MSG_PartnerMoveName_BellyFlop2 MSG_PartnerMoveName_BellyFlop

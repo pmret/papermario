@@ -25,7 +25,7 @@ void load_engine_data(void);
 #endif
 
 void boot_main(void* data) {
-#ifdef VERSION_JP
+#if VERSION_JP
     if (osTvType == OS_TV_NTSC) {
         nuGfxDisplayOff();
         osViSetMode(&osViModeNtscLan1);

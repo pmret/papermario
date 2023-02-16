@@ -8,11 +8,10 @@
 #include "sprite.h"
 #include "model.h"
 
-#if !defined(VERSION_JP)
+#if !VERSION_JP
+// TODO: remove this conditional when more of the JP rom has been processed
 #include "sprite/npc/BattleMerlee.h"
-#endif
-
-#if defined(VERSION_JP)
+#else
 #define ANIM_BattleMerlee_Gather 0x00BB0001
 #define ANIM_BattleMerlee_Release 0x00BB0000
 #endif

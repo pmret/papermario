@@ -15,7 +15,7 @@ void poll_rumble(void) {
 void start_rumble(s32 freq, s32 nframes) {
     if (gGameStatusPtr->demoState == 0) {
         if (rumbleMaxDuration != 0) {
-#if !defined(VERSION_JP)
+#if !VERSION_JP
             s32 maxFrames = rumbleMaxDuration * 2;
 
             if (nframes > maxFrames) {
@@ -43,7 +43,7 @@ void update_max_rumble_duration(void) {
 }
 
 void reset_max_rumble_duration(void) {
-#if defined(VERSION_JP)
+#if VERSION_JP
     rumbleMaxDuration = 600;
 #else
     rumbleMaxDuration = 300;

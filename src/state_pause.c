@@ -6,7 +6,7 @@
 #include "sprite.h"
 #include "model.h"
 
-#ifdef VERSION_JP
+#if VERSION_JP
 extern Addr pause_ROM_START;
 extern Addr pause_ROM_END;
 extern Addr pause_VRAM;
