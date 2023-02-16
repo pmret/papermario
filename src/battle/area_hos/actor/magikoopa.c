@@ -79,7 +79,7 @@ ActorPartBlueprint N(partsTable_8021D5F0)[] = {
         .defenseTable = N(defenseTable_8021D480),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .projectileTargetOffset = { 0xFB, 0xF4 },
+        .projectileTargetOffset = { -5, -12 },
     },
 };
 
@@ -97,7 +97,7 @@ ActorPartBlueprint N(partsTable_8021D614)[] = {
         .defenseTable = N(defenseTable_8021D48C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .projectileTargetOffset = { 0xFB, 0xF4 },
+        .projectileTargetOffset = { -5, -12 },
     },
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
@@ -1275,7 +1275,7 @@ ActorPartBlueprint N(partsTable_80221624)[] = {
         .defenseTable = N(defenseTable_802214B4),
         .eventFlags = ACTOR_EVENT_FLAG_ILLUSORY,
         .elementImmunityFlags = 0,
-        .projectileTargetOffset = { 0xFB, 0xF4 },
+        .projectileTargetOffset = { -5, -12 },
     },
 };
 
