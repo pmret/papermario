@@ -89,7 +89,7 @@ ActorPartBlueprint N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279DC),
         .eventFlags = ACTOR_EVENT_FLAG_FLIPABLE,
         .elementImmunityFlags = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
@@ -101,7 +101,7 @@ ActorPartBlueprint N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279F0),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
@@ -113,7 +113,7 @@ ActorPartBlueprint N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -125,7 +125,7 @@ ActorPartBlueprint N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -137,7 +137,7 @@ ActorPartBlueprint N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -149,7 +149,7 @@ ActorPartBlueprint N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -161,7 +161,7 @@ ActorPartBlueprint N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -173,7 +173,7 @@ ActorPartBlueprint N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -185,7 +185,7 @@ ActorPartBlueprint N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
 };
 

@@ -81,8 +81,7 @@ ActorPartBlueprint N(goombario_parts)[] = {
         .defenseTable = N(goombario_defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = -1,
-        .unk_1D = -9,
+        .projectileTargetOffset = { -1, -9 },
     },
 };
 

@@ -1809,8 +1809,8 @@ Actor* create_actor(Formation formation) {
         part->targetOffset.x = actorPartBP->targetOffset.x;
         part->targetOffset.y = actorPartBP->targetOffset.y;
         part->unk_70 = 0;
-        part->projectileTargetOffset.x = actorPartBP->unk_1C;
-        part->projectileTargetOffset.y = actorPartBP->unk_1D;
+        part->projectileTargetOffset.x = actorPartBP->projectileTargetOffset.x;
+        part->projectileTargetOffset.y = actorPartBP->projectileTargetOffset.y;
         part->rotation.x = 0.0f;
         part->rotation.y = 0.0f;
         part->rotation.z = 0.0f;

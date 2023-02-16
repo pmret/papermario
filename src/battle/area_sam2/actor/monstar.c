@@ -62,8 +62,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_100,
         .elementImmunityFlags = 0,
-        .unk_1C = 1,
-        .unk_1D = -15,
+        .projectileTargetOffset = { 1, -15 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
@@ -75,8 +74,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_100,
         .elementImmunityFlags = 0,
-        .unk_1C = 1,
-        .unk_1D = -15,
+        .projectileTargetOffset = { 1, -15 },
     },
 };
 

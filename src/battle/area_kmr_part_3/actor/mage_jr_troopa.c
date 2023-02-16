@@ -89,8 +89,7 @@ ActorPartBlueprint N(partsTable_8022A6E0)[] = {
         .defenseTable = N(defenseTable_8022A628),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0xFE,
-        .unk_1D = 0xF9,
+        .projectileTargetOffset = { 0xFE, 0xF9 },
     },
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
@@ -102,7 +101,7 @@ ActorPartBlueprint N(partsTable_8022A6E0)[] = {
         .defenseTable = N(defenseTable_8022A628),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
 };
 

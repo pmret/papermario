@@ -195,8 +195,7 @@ ActorPartBlueprint N(watt_parts)[] = {
         .defenseTable = N(watt_defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ELECTRIFIED,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -8,
+        .projectileTargetOffset = { 0, -8 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
@@ -208,8 +207,7 @@ ActorPartBlueprint N(watt_parts)[] = {
         .defenseTable = N(watt_defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ELECTRIFIED,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -8,
+        .projectileTargetOffset = { 0, -8 },
     },
 };
 

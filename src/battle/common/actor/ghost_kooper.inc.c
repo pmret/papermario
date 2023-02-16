@@ -77,8 +77,7 @@ ActorPartBlueprint N(kooper_parts)[] = {
         .defenseTable = N(kooper_defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_FLIPABLE,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -16,
+        .projectileTargetOffset = { 0, -16 },
     },
 };
 

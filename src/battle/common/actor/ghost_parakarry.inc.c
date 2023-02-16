@@ -59,8 +59,7 @@ ActorPartBlueprint N(parakarry_parts)[] = {
         .defenseTable = N(parakarry_defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -16,
+        .projectileTargetOffset = { 0, -16 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
@@ -72,8 +71,7 @@ ActorPartBlueprint N(parakarry_parts)[] = {
         .defenseTable = N(parakarry_defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -16,
+        .projectileTargetOffset = { 0, -16 },
     },
 };
 

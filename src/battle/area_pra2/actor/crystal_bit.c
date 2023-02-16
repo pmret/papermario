@@ -70,8 +70,7 @@ ActorPartBlueprint N(parts_1)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -10,
+        .projectileTargetOffset = { 0, -10 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
@@ -83,8 +82,7 @@ ActorPartBlueprint N(parts_1)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -10,
+        .projectileTargetOffset = { 0, -10 },
     },
 };
 
@@ -99,8 +97,7 @@ ActorPartBlueprint N(parts_2)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -10,
+        .projectileTargetOffset = { 0, -10 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
@@ -112,8 +109,7 @@ ActorPartBlueprint N(parts_2)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -10,
+        .projectileTargetOffset = { 0, -10 },
     },
 };
 
@@ -128,8 +124,7 @@ ActorPartBlueprint N(parts_3)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -10,
+        .projectileTargetOffset = { 0, -10 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
@@ -141,8 +136,7 @@ ActorPartBlueprint N(parts_3)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -10,
+        .projectileTargetOffset = { 0, -10 },
     },
 };
 

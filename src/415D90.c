@@ -5157,7 +5157,7 @@ void btl_state_draw_select_target(void) {
             } else {
                 target = &actor->targetData[targetIndexList[selectedTargetIndex]];
                 anotherActor = get_actor(target->actorID);
-                msgID = get_actor_part(anotherActor, target->partID)->staticData->unk_20;
+                msgID = get_actor_part(anotherActor, target->partID)->staticData->overrideNameMsg;
                 if (msgID == MSG_NONE) {
                     msgID = bActorNames[anotherActor->actorType];
                 }
@@ -5189,7 +5189,7 @@ void btl_state_draw_select_target(void) {
             } else {
                 target = &actor->targetData[targetIndexList[selectedTargetIndex]];
                 anotherActor = get_actor(target->actorID);
-                msgID = get_actor_part(anotherActor, target->partID)->staticData->unk_20;
+                msgID = get_actor_part(anotherActor, target->partID)->staticData->overrideNameMsg;
                 if (msgID == MSG_NONE) {
                     msgID = bActorNames[anotherActor->actorType];
                 }

@@ -59,8 +59,7 @@ ActorPartBlueprint N(bombette_parts)[] = {
         .defenseTable = N(bombette_defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = -2,
-        .unk_1D = -7,
+        .projectileTargetOffset = { -2, -7 },
     },
 };
 

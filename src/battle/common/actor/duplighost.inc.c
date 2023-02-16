@@ -74,8 +74,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = -2,
-        .unk_1D = -10,
+        .projectileTargetOffset = { -2, -10 },
     },
 };
 

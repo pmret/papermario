@@ -88,8 +88,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = -5,
-        .unk_1D = -10,
+        .projectileTargetOffset = { -5, -10 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2000,
@@ -101,9 +100,8 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable2),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -9,
-        .unk_20 = 2687103,
+        .projectileTargetOffset = { 0, -9 },
+        .overrideNameMsg = MSG_EnemyName_Lantern,
     },
 };
 
