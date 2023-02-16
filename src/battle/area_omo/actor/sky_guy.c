@@ -155,7 +155,7 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .defenseTable = N(defenseTable_80229610),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .projectileTargetOffset = { 0, 246 },
+        .projectileTargetOffset = { 0, -10 },
     },
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,

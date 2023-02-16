@@ -98,7 +98,7 @@ ActorPartBlueprint N(partsTable_8021A70C)[] = {
         .defenseTable = N(defenseTable_8021A5A8),
         .eventFlags = ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION,
         .elementImmunityFlags = 0,
-        .projectileTargetOffset = { 0, 247 },
+        .projectileTargetOffset = { 0, -9 },
     },
 };
 

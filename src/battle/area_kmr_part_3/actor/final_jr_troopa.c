@@ -157,7 +157,7 @@ ActorPartBlueprint N(partsTable_8022C640)[] = {
         .defenseTable = N(defenseTable_8022C424),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP,
         .elementImmunityFlags = 0,
-        .projectileTargetOffset = { 0, 245 },
+        .projectileTargetOffset = { 0, -11 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
