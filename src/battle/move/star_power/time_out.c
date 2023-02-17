@@ -2,7 +2,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/BattleKlevar.h"
 
-#define NAMESPACE battle_star_power_time_out
+#define NAMESPACE battle_move_time_out
 
 #include "common/StarPower.inc.c"
 
@@ -244,7 +244,7 @@ EvtScript N(802A22AC) = {
     EVT_END
 };
 
-EvtScript N(usePower) = {
+EvtScript N(EVS_UsePower) = {
     EVT_EXEC_WAIT(N(802A1520))
     EVT_SET_CONST(LVar0, ANIM_BattleKlevar_Idle)
     EVT_EXEC_WAIT(N(802A1C50))

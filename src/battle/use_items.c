@@ -1,5 +1,6 @@
 #include "common.h"
 #include "ld_addrs.h"
+#include "battle.h"
 
 s32 D_80293B80[] = {
     -1,
@@ -66,48 +67,39 @@ extern EvtScript battle_item_coconut_main;
 extern EvtScript battle_item_electro_pop_main;
 extern EvtScript battle_item_strange_cake_main;
 
-#define BTL_ITEM_TABLE_ENTRY(name) { name##_ROM_START, name##_ROM_END, name##_VRAM, &battle_item_##name##_main }
-
-typedef struct BattleTableEntry {
-    /* 0x00 */ u8* romStart;
-    /* 0x04 */ u8* romEnd;
-    /* 0x08 */ u8* vramStart;
-    /* 0x0C */ EvtScript* mainScript;
-} BattleTableEntry; // size = 0x10
-
-BattleTableEntry gBattleItemTable[] = {
-    BTL_ITEM_TABLE_ENTRY(food),
-    BTL_ITEM_TABLE_ENTRY(mushroom),
-    BTL_ITEM_TABLE_ENTRY(fire_flower),
-    BTL_ITEM_TABLE_ENTRY(dusty_hammer),
-    BTL_ITEM_TABLE_ENTRY(pow_block),
-    BTL_ITEM_TABLE_ENTRY(pebble),
-    BTL_ITEM_TABLE_ENTRY(volt_shroom),
-    BTL_ITEM_TABLE_ENTRY(thunder_rage),
-    BTL_ITEM_TABLE_ENTRY(snowman_doll),
-    BTL_ITEM_TABLE_ENTRY(mushroom),
-    BTL_ITEM_TABLE_ENTRY(shooting_star),
-    BTL_ITEM_TABLE_ENTRY(sleepy_sheep),
-    BTL_ITEM_TABLE_ENTRY(stone_cap),
-    BTL_ITEM_TABLE_ENTRY(tasty_tonic),
-    BTL_ITEM_TABLE_ENTRY(thunder_bolt),
-    BTL_ITEM_TABLE_ENTRY(mushroom),
-    BTL_ITEM_TABLE_ENTRY(mushroom),
-    BTL_ITEM_TABLE_ENTRY(super_soda),
-    BTL_ITEM_TABLE_ENTRY(hustle_drink),
-    BTL_ITEM_TABLE_ENTRY(stop_watch),
-    BTL_ITEM_TABLE_ENTRY(dizzy_dial),
-    BTL_ITEM_TABLE_ENTRY(please_come_back),
-    BTL_ITEM_TABLE_ENTRY(egg_missile),
-    BTL_ITEM_TABLE_ENTRY(insecticide_herb),
-    BTL_ITEM_TABLE_ENTRY(fright_jar),
-    BTL_ITEM_TABLE_ENTRY(mystery),
-    BTL_ITEM_TABLE_ENTRY(repel_gel),
-    BTL_ITEM_TABLE_ENTRY(life_shroom),
-    BTL_ITEM_TABLE_ENTRY(coconut),
-    BTL_ITEM_TABLE_ENTRY(electro_pop),
-    BTL_ITEM_TABLE_ENTRY(strange_cake),
-    BTL_ITEM_TABLE_ENTRY(strange_cake),
+BattleMoveEntry gBattleItemTable[] = {
+    BTL_ITEM(food),
+    BTL_ITEM(mushroom),
+    BTL_ITEM(fire_flower),
+    BTL_ITEM(dusty_hammer),
+    BTL_ITEM(pow_block),
+    BTL_ITEM(pebble),
+    BTL_ITEM(volt_shroom),
+    BTL_ITEM(thunder_rage),
+    BTL_ITEM(snowman_doll),
+    BTL_ITEM(mushroom),
+    BTL_ITEM(shooting_star),
+    BTL_ITEM(sleepy_sheep),
+    BTL_ITEM(stone_cap),
+    BTL_ITEM(tasty_tonic),
+    BTL_ITEM(thunder_bolt),
+    BTL_ITEM(mushroom),
+    BTL_ITEM(mushroom),
+    BTL_ITEM(super_soda),
+    BTL_ITEM(hustle_drink),
+    BTL_ITEM(stop_watch),
+    BTL_ITEM(dizzy_dial),
+    BTL_ITEM(please_come_back),
+    BTL_ITEM(egg_missile),
+    BTL_ITEM(insecticide_herb),
+    BTL_ITEM(fright_jar),
+    BTL_ITEM(mystery),
+    BTL_ITEM(repel_gel),
+    BTL_ITEM(life_shroom),
+    BTL_ITEM(coconut),
+    BTL_ITEM(electro_pop),
+    BTL_ITEM(strange_cake),
+    BTL_ITEM(strange_cake),
 };
 
 // Offsets into gBattleItemTable?

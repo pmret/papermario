@@ -3,11 +3,11 @@
 #include "effects.h"
 #include "model.h"
 
-#define NAMESPACE battle_star_power_star_beam
+#define NAMESPACE battle_move_star_beam
 
-#include "../common/peach_star_beam.inc.c"
+#include "battle/common/move/StarBeamSupport.inc.c"
 
-EvtScript N(usePower) = {
+EvtScript N(EVS_UsePower) = {
     EVT_EXEC_WAIT(N(beforeUsePower))
     EVT_CALL(AddBattleCamZoom, 100)
     EVT_CALL(MoveBattleCamOver, 20)

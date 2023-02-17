@@ -1,5 +1,6 @@
 #include "common.h"
 #include "ld_addrs.h"
+#include "battle.h"
 
 extern EvtScript battle_move_hammer_attack_EVS_UseMove0;
 extern EvtScript battle_move_hammer_attack_EVS_UseMove1;
@@ -45,22 +46,7 @@ extern EvtScript battle_move_dizzy_stomp_EVS_UseMove;
 extern EvtScript battle_move_shrink_stomp_EVS_UseMove;
 extern EvtScript battle_move_earthquake_jump_EVS_UseMove;
 
-typedef struct BattleTableEntry {
-    /* 0x00 */ u8* romStart;
-    /* 0x04 */ u8* romEnd;
-    /* 0x08 */ u8* vramStart;
-    /* 0x0C */ EvtScript* mainScript;
-} BattleTableEntry; // size = 0x10
-
-#define BTL_MOVE(name, script) \
-{ \
-    .romStart   = battle_move_##name##_ROM_START, \
-    .romEnd     = battle_move_##name##_ROM_END, \
-    .vramStart  = battle_move_##name##_VRAM, \
-    .mainScript = &battle_move_##name##_##script \
-}
-
-BattleTableEntry gMoveScriptTable[] = {
+BattleMoveEntry gMoveScriptTable[] = {
     [MOVE_NONE]                {},
     [MOVE_UNUSED_01]           {},
     [MOVE_UNUSED_02]           {},
@@ -114,7 +100,7 @@ BattleTableEntry gMoveScriptTable[] = {
 
 ApiStatus LoadMoveScript(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    BattleTableEntry* moveTableEntry = &gMoveScriptTable[battleStatus->selectedMoveID];
+    BattleMoveEntry* moveTableEntry = &gMoveScriptTable[battleStatus->selectedMoveID];
 
     dma_copy(moveTableEntry->romStart, moveTableEntry->romEnd, moveTableEntry->vramStart);
     script->varTablePtr[0] = moveTableEntry->mainScript;

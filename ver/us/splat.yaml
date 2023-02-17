@@ -8784,101 +8784,113 @@ segments:
     subsegments:
     - [0x785B20, c, earthquake_jump]
     - [0x785C20]
-  - dir: battle/star_power/focus
+  - name: battle_move_focus
+    dir: battle/move/star_power
     type: code
     start: 0x789E60
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x789E60, c]
+    - [0x789E60, c, focus]
     - [0x78A490]
-  - dir: battle/star_power/refresh
+  - name: battle_move_refresh
+    dir: battle/move/star_power
     type: code
     start: 0x78B600
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x78B600, c]
+    - [0x78B600, c, refresh]
     - [0x78C070]
-  - dir: battle/star_power/lullaby
+  - name: battle_move_lullaby
+    dir: battle/move/star_power
     type: code
     start: 0x78D150
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x78D150, c]
+    - [0x78D150, c, lullaby]
     - [0x78D770]
-  - dir: battle/star_power/star_storm
+  - name: battle_move_star_storm
+    dir: battle/move/star_power
     type: code
     start: 0x78E7D0
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x78E7D0, c]
+    - [0x78E7D0, c, star_storm]
     - [0x78EEC0]
-  - dir: battle/star_power/chill_out
+  - name: battle_move_chill_out
+    dir: battle/move/star_power
     type: code
     start: 0x7900D0
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x7900D0, c]
+    - [0x7900D0, c, chill_out]
     - [0x7909C0]
-  - dir: battle/star_power/smooch
+  - name: battle_move_smooch
+    dir: battle/move/star_power
     type: code
     start: 0x791D90
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x791D90, c]
+    - [0x791D90, c, smooch]
     - [0x7923C0]
-  - dir: battle/star_power/time_out
+  - name: battle_move_time_out
+    dir: battle/move/star_power
     type: code
     start: 0x793D20
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x793D20, c]
+    - [0x793D20, c, time_out]
     - [0x794240]
-  - dir: battle/star_power/up_and_away
+  - name: battle_move_up_and_away
+    dir: battle/move/star_power
     type: code
     start: 0x7952E0
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x7952E0, c]
+    - [0x7952E0, c, up_and_away]
     - [0x7959B0]
-  - dir: battle/star_power/star_beam
+  - name: battle_move_star_beam
+    dir: battle/move/star_power
     type: code
     start: 0x796FC0
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x796FC0, c]
+    - [0x796FC0, c, star_beam]
     - [0x7984B0]
-  - dir: battle/star_power/peach_beam
+  - name: battle_move_peach_beam
+    dir: battle/move/star_power
     type: code
     start: 0x7997B0
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x7997B0, c]
+    - [0x7997B0, c, peach_beam]
     - [0x79ACA0]
-  - dir: battle/star_power/peach_focus
+  - name: battle_move_peach_focus
+    dir: battle/move/star_power
     type: code
     start: 0x79BFA0
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x79BFA0, c]
+    - [0x79BFA0, c, peach_focus]
     - [0x79C4D0]
-  - dir: battle/star_power/peach_dash
+  - name: battle_move_twink_dash
+    dir: battle/move/star_power
     type: code
     start: 0x79D8A0
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x79D8A0, c]
+    - [0x79D8A0, c, twink_dash]
     - [0x79DE50]
   - type: code
     name: level_up

@@ -1,31 +1,54 @@
 #include "common.h"
 #include "script_api/battle.h"
 
-#define NAMESPACE battle_star_power_peach_dash
+#define NAMESPACE battle_move_focus
 
 #include "common/StarPower.inc.c"
 
-API_CALLABLE(func_802A1518_79DDB8) {
+API_CALLABLE(func_802A1518_78A378) {
     PlayerData* playerData = &gPlayerData;
-    PlayerData* playerData2 = &gPlayerData;
+    s32 deepFocusSP;
+    s32 superFocusSP;
 
-    if (is_ability_active(ABILITY_DEEP_FOCUS)) {
-        playerData->specialBarsFilled += 128;
+    script->varTable[0] = 0;
+
+    if (playerData->specialBarsFilled >= playerData->maxStarPower * 256) {
+        script->varTable[0] = 1;
+        return ApiStatus_DONE2;
     }
-    if (is_ability_active(ABILITY_SUPER_FOCUS)) {
-        playerData->specialBarsFilled += 256;
-    }
 
-    playerData->specialBarsFilled += 128;
+    deepFocusSP = is_ability_active(ABILITY_DEEP_FOCUS) * 64;
+    superFocusSP = is_ability_active(ABILITY_SUPER_FOCUS) * 128;
 
-    if (playerData2->specialBarsFilled >= playerData2->maxStarPower * 256) {
-        playerData2->specialBarsFilled = playerData2->maxStarPower * 256;
+    add_SP(deepFocusSP + superFocusSP + 128);
+
+    if (playerData->specialBarsFilled == playerData->maxStarPower * 256) {
+        script->varTable[0] = 2;
     }
 
     return ApiStatus_DONE2;
 }
 
-EvtScript N(802A15B0) = {
+API_CALLABLE(func_802A15B0_78A410) {
+    PlayerData* playerData = &gPlayerData;
+
+    script->varTable[0] = 0;
+
+    if (playerData->specialBarsFilled >= playerData->maxStarPower * 256) {
+        script->varTable[0] = 1;
+        return ApiStatus_DONE2;
+    }
+
+    add_SP(128);
+
+    if (playerData->specialBarsFilled == playerData->maxStarPower * 256) {
+        script->varTable[0] = 2;
+    }
+
+    return ApiStatus_DONE2;
+}
+
+EvtScript N(802A1630) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
@@ -80,7 +103,7 @@ EvtScript N(802A15B0) = {
     EVT_END
 };
 
-EvtScript N(802A1948) = {
+EvtScript N(802A19C8) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
@@ -135,7 +158,7 @@ EvtScript N(802A1948) = {
     EVT_END
 };
 
-EvtScript N(802A1CE0) = {
+EvtScript N(802A1D60) = {
     EVT_WAIT(8)
     EVT_CALL(SetForegroundModelsVisible, 0)
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_73)
@@ -169,7 +192,7 @@ EvtScript N(802A1CE0) = {
     EVT_END
 };
 
-EvtScript N(802A1EEC) = {
+EvtScript N(802A1F6C) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -240,7 +263,7 @@ EvtScript N(802A1EEC) = {
     EVT_END
 };
 
-EvtScript N(802A233C) = {
+EvtScript N(802A23BC) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(N(UnkBackgroundFunc))
@@ -263,37 +286,53 @@ EvtScript N(802A233C) = {
     EVT_END
 };
 
-EvtScript N(usePower) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-    EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x0C0010)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 16)
-    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
-    EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_CALL(PlayerRunToGoal, 0)
-    EVT_WAIT(8)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 20)
-    EVT_CALL(N(UnkStarFunc1), LVar0, LVar1, LVar2)
-    EVT_CALL(N(FadeBackgroundToBlack))
-    EVT_WAIT(20)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x0D000F)
-    EVT_WAIT(10)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 20)
-    EVT_CALL(N(UnkStarFunc2), LVar0, LVar1, LVar2)
-    EVT_WAIT(30)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x0C000C)
-    EVT_CALL(func_802A1518_79DDB8)
-    EVT_WAIT(10)
-    EVT_CALL(N(UnkBackgroundFunc))
-    EVT_WAIT(15)
-    EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
-    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x0A0003)
-    EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x0A0001)
+EvtScript N(EVS_UsePower) = {
+    EVT_EXEC_WAIT(N(802A1630))
+    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(GetOwnerID, LVarA)
+    EVT_IF_EQ(LVarA, 0)
+        EVT_CALL(PlaySound, 0x2053)
+        EVT_CALL(func_802A1518_78A378)
+        EVT_WAIT(30)
+        EVT_CALL(N(UnkBackgroundFunc))
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_SWITCH(LVar0)
+            EVT_CASE_EQ(0)
+                EVT_CALL(ShowMessageBox, 26, 60)
+            EVT_CASE_EQ(1)
+                EVT_CALL(ShowMessageBox, 27, 60)
+            EVT_CASE_EQ(2)
+                EVT_CALL(ShowMessageBox, 28, 60)
+        EVT_END_SWITCH
+        EVT_CALL(WaitForMessageBoxDone)
+        EVT_CALL(func_80276EFC)
+        EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
+        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+        EVT_CALL(PlayerRunToGoal, 0)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_ELSE
+        EVT_CALL(PlaySound, 0x2053)
+        EVT_CALL(func_802A15B0_78A410)
+        EVT_WAIT(30)
+        EVT_CALL(N(UnkBackgroundFunc))
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_SWITCH(LVar0)
+            EVT_CASE_EQ(0)
+                EVT_CALL(ShowMessageBox, 26, 60)
+            EVT_CASE_EQ(1)
+                EVT_CALL(ShowMessageBox, 27, 60)
+            EVT_CASE_EQ(2)
+                EVT_CALL(ShowMessageBox, 28, 60)
+        EVT_END_SWITCH
+        EVT_CALL(WaitForMessageBoxDone)
+        EVT_CALL(PartnerYieldTurn)
+        EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
+        EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(8.0))
+        EVT_CALL(N(UnkStarFunc), 3)
+        EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
+        EVT_CALL(N(UnkStarFunc), 4)
+    EVT_END_IF
     EVT_RETURN
     EVT_END
 };

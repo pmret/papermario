@@ -1,5 +1,7 @@
 #include "common.h"
 #include "ld_addrs.h"
+#include "battle.h"
+
 #include "sprite/npc/WorldGoombario.h"
 #include "sprite/npc/BattleGoombario.h"
 #include "sprite/npc/BattleKooper.h"
@@ -10,47 +12,32 @@
 #include "sprite/npc/BattleLakilester.h"
 #include "sprite/npc/BattleBow.h"
 
-typedef struct StarPowerEntry {
-    /* 0x04 */ void* dmaStart;
-    /* 0x08 */ void* dmaEnd;
-    /* 0x0C */ void* dmaDest;
-    /* 0x10 */ Bytecode* init;
-} StarPowerEntry; // size = 0x14
+extern EvtScript battle_move_focus_EVS_UsePower;
+extern EvtScript battle_move_refresh_EVS_UsePower;
+extern EvtScript battle_move_lullaby_EVS_UsePower;
+extern EvtScript battle_move_star_storm_EVS_UsePower;
+extern EvtScript battle_move_chill_out_EVS_UsePower;
+extern EvtScript battle_move_smooch_EVS_UsePower;
+extern EvtScript battle_move_time_out_EVS_UsePower;
+extern EvtScript battle_move_up_and_away_EVS_UsePower;
+extern EvtScript battle_move_star_beam_EVS_UsePower;
+extern EvtScript battle_move_peach_beam_EVS_UsePower;
+extern EvtScript battle_move_peach_focus_EVS_UsePower;
+extern EvtScript battle_move_twink_dash_EVS_UsePower;
 
-extern EvtScript battle_star_power_focus_usePower;
-extern EvtScript battle_star_power_refresh_usePower;
-extern EvtScript battle_star_power_lullaby_usePower;
-extern EvtScript battle_star_power_star_storm_usePower;
-extern EvtScript battle_star_power_chill_out_usePower;
-extern EvtScript battle_star_power_smooch_usePower;
-extern EvtScript battle_star_power_time_out_usePower;
-extern EvtScript battle_star_power_up_and_away_usePower;
-extern EvtScript battle_star_power_star_beam_usePower;
-extern EvtScript battle_star_power_peach_beam_usePower;
-extern EvtScript battle_star_power_peach_focus_usePower;
-extern EvtScript battle_star_power_peach_dash_usePower;
-
-#define STAR_POWER(name) \
-{ \
-    .dmaStart = battle_star_power_##name##_ROM_START, \
-    .dmaEnd   = battle_star_power_##name##_ROM_END, \
-    .dmaDest  = battle_star_power_##name##_VRAM, \
-    .init     = battle_star_power_##name##_usePower, \
-}
-
-StarPowerEntry StarPowersTable[] = {
-    STAR_POWER(focus),
-    STAR_POWER(refresh),
-    STAR_POWER(lullaby),
-    STAR_POWER(star_storm),
-    STAR_POWER(chill_out),
-    STAR_POWER(smooch),
-    STAR_POWER(time_out),
-    STAR_POWER(up_and_away),
-    STAR_POWER(star_beam),
-    STAR_POWER(peach_beam),
-    STAR_POWER(peach_focus),
-    STAR_POWER(peach_dash),
+BattleMoveEntry StarPowersTable[] = {
+    BTL_MOVE(focus,           EVS_UsePower),
+    BTL_MOVE(refresh,         EVS_UsePower),
+    BTL_MOVE(lullaby,         EVS_UsePower),
+    BTL_MOVE(star_storm,      EVS_UsePower),
+    BTL_MOVE(chill_out,       EVS_UsePower),
+    BTL_MOVE(smooch,          EVS_UsePower),
+    BTL_MOVE(time_out,        EVS_UsePower),
+    BTL_MOVE(up_and_away,     EVS_UsePower),
+    BTL_MOVE(star_beam,       EVS_UsePower),
+    BTL_MOVE(peach_beam,      EVS_UsePower),
+    BTL_MOVE(peach_focus,     EVS_UsePower),
+    BTL_MOVE(twink_dash,      EVS_UsePower),
 };
 
 s32 D_8029C890[][5] = {
@@ -129,10 +116,10 @@ ApiStatus LoadStarPowerScript(Evt* script, s32 isInitialCall) {
 
     playerData->specialBarsFilled -= gMoveTable[battleStatus->selectedMoveID].costFP * 256;
     starPowerIdx = battleStatus->moveArgument;
-    dma_copy((&StarPowersTable[starPowerIdx])->dmaStart,
-             (&StarPowersTable[starPowerIdx])->dmaEnd,
-             (&StarPowersTable[starPowerIdx])->dmaDest);
-    script->varTable[0] = (s32) (&StarPowersTable[starPowerIdx])->init;
+    dma_copy((&StarPowersTable[starPowerIdx])->romStart,
+             (&StarPowersTable[starPowerIdx])->romEnd,
+             (&StarPowersTable[starPowerIdx])->vramStart);
+    script->varTable[0] = (s32) (&StarPowersTable[starPowerIdx])->mainScript;
     return ApiStatus_DONE2;
 }
 

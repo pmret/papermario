@@ -1,18 +1,127 @@
 #include "common.h"
+#include "hud_element.h"
 #include "script_api/battle.h"
+#include "sprite/npc/BattleEldstar.h"
 
-#define NAMESPACE battle_star_power_peach_focus
+#define NAMESPACE battle_move_refresh
 
 #include "common/StarPower.inc.c"
 
-API_CALLABLE(func_802A1518_79C4B8) {
-    // TODO: replace with actual struct when we know what it is
-    // varTable[0] is Twink's actorVar[0]
-    ((s32*)script->varTable[0])[1]++;
+API_CALLABLE(func_802A1518_78BB18) {
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    npc = script->functionTempPtr[1];
+
+    switch (script->functionTemp[0]) {
+        case 0:
+            script->functionTempPtr[1] = npc = get_npc_unsafe(evt_get_variable(script, *args++));
+            npc->planarFlyDist = 0;
+            npc->yaw = 0;
+            npc->duration = 0;
+            npc->jumpVelocity = -1.5f;
+            npc->jumpScale = 0.02f;
+            npc->moveSpeed = 1.0f;
+            npc->moveToPos.x = npc->pos.x;
+            npc->moveToPos.y = npc->pos.y;
+            npc->moveToPos.z = npc->pos.z;
+            script->functionTemp[0] = 1;
+            break;
+        case 1:
+            if (npc->jumpVelocity < 0.0f) {
+                npc->planarFlyDist += 3.0;
+                if (npc->planarFlyDist > 40.0f) {
+                    npc->planarFlyDist = 40.0f;
+                }
+            } else {
+                npc->planarFlyDist -= 2.0;
+                if (npc->planarFlyDist < 20.0f) {
+                    npc->planarFlyDist = 20.0f;
+                }
+            }
+
+            npc->moveSpeed += 0.75;
+            npc->jumpVelocity += npc->jumpScale;
+            npc->pos.y += npc->jumpVelocity;
+            if (npc->moveSpeed > 33.0f) {
+                npc->moveSpeed = 33.0f;
+            }
+
+            npc->yaw += npc->moveSpeed;
+            npc->pos.x = npc->moveToPos.x;
+            npc->pos.z = npc->moveToPos.z;
+            add_vec2D_polar(&npc->pos.x, &npc->pos.z, npc->planarFlyDist, npc->yaw);
+            if ((npc->duration % 14) == 0) {
+                fx_sparkles(0, npc->pos.x, npc->pos.y, npc->pos.z, 30.0f);
+            }
+
+            npc->duration++;
+            if (npc->duration > 40) {
+                npc->jumpScale = 0.5f;
+            }
+            if (npc->pos.y > 200.0f) {
+                script->functionTemp[0] = 2;
+            }
+            break;
+        case 2:
+            return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+API_CALLABLE(func_802A17D4_78BDD4) {
+    Actor* actor = gBattleStatus.playerActor;
+
+    if (actor->debuff != STATUS_END) {
+        actor->debuffDuration = 0;
+        actor->debuff = 0;
+        remove_status_debuff(actor->hudElementDataIndex);
+    }
+
+    if (actor->koStatus != 0) {
+        actor->koDuration = 0;
+        actor->koStatus = 0;
+        actor->disableEffect->data.disableX->koDuration = 0;
+    }
+
+    btl_update_ko_status();
     return ApiStatus_DONE2;
 }
 
-EvtScript N(802A1530) = {
+#include "common/AddHP.inc.c"
+
+#include "common/AddFP.inc.c"
+
+API_CALLABLE(func_802A18E8_78BEE8) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+    s32 var4 = evt_get_variable(script, *args++);
+
+    fx_recover(0, var1, var2, var3, var4);
+
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(func_802A19A8_78BFA8) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+    s32 var4 = evt_get_variable(script, *args++);
+
+    fx_recover(1, var1, var2, var3, var4);
+
+    return ApiStatus_DONE2;
+}
+
+EvtScript N(802A1A70) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
@@ -67,7 +176,7 @@ EvtScript N(802A1530) = {
     EVT_END
 };
 
-EvtScript N(802A18C8) = {
+EvtScript N(802A1E08) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
@@ -122,7 +231,7 @@ EvtScript N(802A18C8) = {
     EVT_END
 };
 
-EvtScript N(802A1C60) = {
+EvtScript N(802A21A0) = {
     EVT_WAIT(8)
     EVT_CALL(SetForegroundModelsVisible, 0)
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_73)
@@ -156,7 +265,7 @@ EvtScript N(802A1C60) = {
     EVT_END
 };
 
-EvtScript N(802A1E6C) = {
+EvtScript N(802A23AC) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -227,7 +336,7 @@ EvtScript N(802A1E6C) = {
     EVT_END
 };
 
-EvtScript N(802A22BC) = {
+EvtScript N(802A27FC) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(N(UnkBackgroundFunc))
@@ -250,78 +359,38 @@ EvtScript N(802A22BC) = {
     EVT_END
 };
 
-EvtScript N(usePower) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-    EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x0A0003)
+EvtScript N(EVS_UsePower) = {
+    EVT_EXEC_WAIT(N(802A1A70))
+    EVT_SET_CONST(LVar0, ANIM_BattleEldstar_Idle)
+    EVT_EXEC_WAIT(N(802A21A0))
+    EVT_CALL(SetNpcAnimation, 100, ANIM_BattleEldstar_Shout)
+    EVT_WAIT(16)
+    EVT_THREAD
+        EVT_WAIT(10)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_END_THREAD
+    EVT_CALL(PlaySound, 0x242)
+    EVT_CALL(EnableNpcBlur, 100, 1)
+    EVT_CALL(func_802A1518_78BB18, 100)
+    EVT_CALL(EnableNpcBlur, 100, 0)
+    EVT_CALL(DeleteNpc, 100)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 16)
-    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
-    EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x0C000D)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 90)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 120)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 150)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 180)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-    EVT_CALL(SetBattleCamTarget, -105, -7, 0)
-    EVT_CALL(SetBattleCamZoom, 213)
-    EVT_CALL(MoveBattleCamOver, 60)
-    EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x0D000F)
-    EVT_CALL(PlaySound, 0x241)
+    EVT_ADD(LVar0, 0)
+    EVT_ADD(LVar1, 35)
+    EVT_CALL(func_802A18E8_78BEE8, LVar0, LVar1, LVar2, 5)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 20)
-    EVT_CALL(N(UnkStarFunc1), LVar0, LVar1, LVar2)
-    EVT_CALL(N(FadeBackgroundToBlack))
-    EVT_CALL(GetActorVar, 256, 0, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ActorSpeak, 1245334, 0, 0, 851983, 851983)
-    EVT_END_IF
-    EVT_WAIT(20)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x0A0001)
-    EVT_WAIT(10)
-    EVT_CALL(PlaySound, 0x2051)
-    EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(N(UnkStarFunc2), LVar0, LVar1, LVar2)
+    EVT_ADD(LVar0, 20)
+    EVT_ADD(LVar1, 25)
+    EVT_CALL(func_802A19A8_78BFA8, LVar0, LVar1, LVar2, 5)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 25)
+    EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, 5)
+    EVT_CALL(N(AddHP), 5)
+    EVT_CALL(N(AddFP), 5)
+    EVT_CALL(func_802A17D4_78BDD4)
     EVT_WAIT(30)
-    EVT_CALL(PlaySound, 0x2053)
-    EVT_CALL(GetActorVar, ACTOR_PARTNER, 0, LVar0)
-    EVT_ADD(LVar0, 1)
-    EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, LVar0)
-    EVT_CALL(ModifyActorDecoration, 256, 1, 0, LVar0, 0, 0, 0)
-    EVT_CALL(GetActorVar, ACTOR_PARTNER, 1, LVar0)
-    EVT_CALL(func_802A1518_79C4B8)
-    EVT_WAIT(10)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_CALL(SetActorYaw, ACTOR_SELF, 150)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_SELF, 120)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_SELF, 90)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_SELF, 60)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_SELF, 30)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-    EVT_WAIT(1)
     EVT_CALL(func_80276EFC)
-    EVT_CALL(N(UnkBackgroundFunc))
-    EVT_WAIT(15)
-    EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
-    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x0A0003)
-    EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x0A0002)
+    EVT_EXEC_WAIT(N(802A27FC))
     EVT_RETURN
     EVT_END
 };
