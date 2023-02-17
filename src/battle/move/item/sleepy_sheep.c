@@ -2,9 +2,9 @@
 #include "entity.h"
 #include "ld_addrs.h"
 #include "effects.h"
-#include "battle/item/sleepy_sheep1.png.h"
-#include "battle/item/sleepy_sheep2.png.h"
-#include "battle/item/sleepy_sheep3.png.h"
+#include "battle/move/item/sleepy_sheep1.png.h"
+#include "battle/move/item/sleepy_sheep2.png.h"
+#include "battle/move/item/sleepy_sheep3.png.h"
 
 #include "ItemRefund.inc.c"
 
@@ -170,12 +170,12 @@ API_CALLABLE(N(func_802A1848_71EE98)) {
 
 static s32 _pad = 0;
 
-#include "battle/item/sleepy_sheep1.png.inc.c"
-#include "battle/item/sleepy_sheep1.pal.inc.c"
-#include "battle/item/sleepy_sheep2.png.inc.c"
-#include "battle/item/sleepy_sheep2.pal.inc.c"
-#include "battle/item/sleepy_sheep3.png.inc.c"
-#include "battle/item/sleepy_sheep3.pal.inc.c"
+#include "battle/move/item/sleepy_sheep1.png.inc.c"
+#include "battle/move/item/sleepy_sheep1.pal.inc.c"
+#include "battle/move/item/sleepy_sheep2.png.inc.c"
+#include "battle/move/item/sleepy_sheep2.pal.inc.c"
+#include "battle/move/item/sleepy_sheep3.png.inc.c"
+#include "battle/move/item/sleepy_sheep3.pal.inc.c"
 
 Vtx N(model)[] = {
     { .v = {{ -28,  0,  0 }, FALSE, { 0,    1536 }, { 0, 0, 0, 255 }}},

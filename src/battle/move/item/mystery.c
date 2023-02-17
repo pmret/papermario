@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "entity.h"
 #include "ld_addrs.h"
-#include "battle/item/mystery.png.h"
+#include "battle/move/item/mystery.png.h"
 
 #include "ItemRefund.inc.c"
 
@@ -175,8 +175,8 @@ API_CALLABLE(N(func_802A188C_72CE3C)) {
 
 static s32 _pad = 0;
 
-#include "battle/item/mystery.png.inc.c"
-#include "battle/item/mystery.pal.inc.c"
+#include "battle/move/item/mystery.png.inc.c"
+#include "battle/move/item/mystery.pal.inc.c"
 
 Vtx N(model)[] = {
     { .v = {{ -16, -16, 0 }, FALSE, { 0,    0    }, { 0, 0, 0, 255 }}},

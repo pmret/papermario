@@ -1,9 +1,9 @@
 #include "strange_cake.h"
 #include "effects.h"
 #include "hud_element.h"
-#include "battle/item/strange_cake1.png.h"
-#include "battle/item/strange_cake2.png.h"
-#include "battle/item/strange_cake3.png.h"
+#include "battle/move/item/strange_cake1.png.h"
+#include "battle/move/item/strange_cake2.png.h"
+#include "battle/move/item/strange_cake3.png.h"
 
 #include "ItemRefund.inc.c"
 
@@ -241,12 +241,12 @@ API_CALLABLE(N(func_802A1B68_731E68)) {
 
 static s32 _pad = 0; // XXX
 
-#include "battle/item/strange_cake1.png.inc.c"
-#include "battle/item/strange_cake1.pal.inc.c"
-#include "battle/item/strange_cake2.png.inc.c"
-#include "battle/item/strange_cake2.pal.inc.c"
-#include "battle/item/strange_cake3.png.inc.c"
-#include "battle/item/strange_cake3.pal.inc.c"
+#include "battle/move/item/strange_cake1.png.inc.c"
+#include "battle/move/item/strange_cake1.pal.inc.c"
+#include "battle/move/item/strange_cake2.png.inc.c"
+#include "battle/move/item/strange_cake2.pal.inc.c"
+#include "battle/move/item/strange_cake3.png.inc.c"
+#include "battle/move/item/strange_cake3.pal.inc.c"
 
 HudScript N(D_802A27D0) = HES_TEMPLATE_CI_ENUM_SIZE(battle_item_strange_cake1, 32, 32);
 HudScript N(D_802A27F8) = HES_TEMPLATE_CI_ENUM_SIZE(battle_item_strange_cake2, 32, 32);

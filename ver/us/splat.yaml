@@ -2493,9 +2493,9 @@ segments:
   - [0x1FA790, ci4,     icon/battle/ultra_boot, 32, 32]
   - [0x1FA990, palette, icon/battle/ultra_boot]
   - [0x1FA9B0, palette, icon/battle/ultra_boot.disabled]
-  - [0x1FA9D0, ci4,     icon/battle/items, 32, 32]
-  - [0x1FABD0, palette, icon/battle/items]
-  - [0x1FABF0, palette, icon/battle/items.disabled]
+  - [0x1FA9D0, ci4,     icon/battle/move/items, 32, 32]
+  - [0x1FABD0, palette, icon/battle/move/items]
+  - [0x1FABF0, palette, icon/battle/move/items.disabled]
   - [0x1FAC10, ci4,     icon/heart/heart_1, 32, 32]
   - [0x1FAE10, palette, icon/heart/heart_1]
   - [0x1FAE30, ci4,     icon/heart/heart_2, 32, 32]
@@ -8119,7 +8119,7 @@ segments:
 ### Battle Items ###
 ####################
   - name: mushroom
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x715850
     vram: 0x802A1000
@@ -8128,7 +8128,7 @@ segments:
     - [0x715850, c, mushroom]
     - [0x715E50]
   - name: fire_flower
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x716C60
     vram: 0x802A1000
@@ -8137,7 +8137,7 @@ segments:
     - [0x716C60, c, fire_flower]
     - [0x717060]
   - name: dusty_hammer
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x7179D0
     vram: 0x802A1000
@@ -8152,7 +8152,7 @@ segments:
       - [0x7183D0, palette, dusty_hammer]
       - [0x7183F0]
   - name: pow_block
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x718850
     vram: 0x802A1000
@@ -8161,7 +8161,7 @@ segments:
     - [0x718850, c, pow_block]
     - [0x718BF0]
   - name: pebble
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x719970
     vram: 0x802A1000
@@ -8176,7 +8176,7 @@ segments:
       - [0x71A370, palette, pebble]
       - [0x71A390]
   - name: volt_shroom
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x71A7F0
     vram: 0x802A1000
@@ -8185,7 +8185,7 @@ segments:
     - [0x71A7F0, c, volt_shroom]
     - [0x71AA70]
   - name: thunder_rage
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x71B1A0
     vram: 0x802A1000
@@ -8194,7 +8194,7 @@ segments:
     - [0x71B1A0, c, thunder_rage]
     - [0x71B640]
   - name: snowman_doll
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x71BE30
     vram: 0x802A1000
@@ -8203,7 +8203,7 @@ segments:
     - [0x71BE30, c, snowman_doll]
     - [0x71C270]
   - name: dried_shroom
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x71CCE0
     vram: 0x802A1000
@@ -8212,7 +8212,7 @@ segments:
     - [0x71CCE0, c, dried_shroom]
     - [0x71D010]
   - name: shooting_star
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x71D770
     vram: 0x802A1000
@@ -8221,7 +8221,7 @@ segments:
     - [0x71D770, c, shooting_star]
     - [0x71DCC0]
   - name: sleepy_sheep
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x71E650
     vram: 0x802A1000
@@ -8241,7 +8241,7 @@ segments:
       - [0x720580, palette, sleepy_sheep3]
       - [0x7205A0]
   - name: stone_cap
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x7215A0
     vram: 0x802A1000
@@ -8250,7 +8250,7 @@ segments:
     - [0x7215A0, c, stone_cap]
     - [0x721970]
   - name: tasty_tonic
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x722000
     vram: 0x802A1000
@@ -8259,7 +8259,7 @@ segments:
     - [0x722000, c, tasty_tonic]
     - [0x7222D0]
   - name: thunder_bolt
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x722B40
     vram: 0x802A1000
@@ -8268,7 +8268,7 @@ segments:
     - [0x722B40, c, thunder_bolt]
     - [0x722FE0]
   - name: ultra_shroom
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x723780
     vram: 0x802A1000
@@ -8277,7 +8277,7 @@ segments:
     - [0x723780, c, ultra_shroom]
     - [0x723AB0]
   - name: unknown_item
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x724240
     vram: 0x802A1000
@@ -8286,7 +8286,7 @@ segments:
     - [0x724240, c, unknown_item]
     - [0x724570]
   - name: super_soda
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x724CE0
     vram: 0x802A1000
@@ -8295,7 +8295,7 @@ segments:
     - [0x724CE0, c, super_soda]
     - [0x725210]
   - name: hustle_drink
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x725F60
     vram: 0x802A1000
@@ -8304,7 +8304,7 @@ segments:
     - [0x725F60, c, hustle_drink]
     - [0x726240]
   - name: stop_watch
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x726DD0
     vram: 0x802A1000
@@ -8313,7 +8313,7 @@ segments:
     - [0x726DD0, c, stop_watch]
     - [0x727120]
   - name: dizzy_dial
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x727910
     vram: 0x802A1000
@@ -8322,7 +8322,7 @@ segments:
     - [0x727910, c, dizzy_dial]
     - [0x727CE0]
   - name: please_come_back
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x7285E0
     vram: 0x802A1000
@@ -8331,7 +8331,7 @@ segments:
     - [0x7285E0, c, please_come_back]
     - [0x728820]
   - name: egg_missile
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x728EC0
     vram: 0x802A1000
@@ -8353,7 +8353,7 @@ segments:
       - [0x729FF0, palette, egg_missile4]
       - [0x72A010]
   - name: insecticide_herb
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x72A750
     vram: 0x802A1000
@@ -8369,7 +8369,7 @@ segments:
       - [0x72B330, palette, insecticide_herb]
       - [0x72B350]
   - name: fright_jar
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x72B910
     vram: 0x802A1000
@@ -8378,7 +8378,7 @@ segments:
     - [0x72B910, c, fright_jar]
     - [0x72BC60]
   - name: mystery
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x72C5B0
     vram: 0x802A1000
@@ -8394,7 +8394,7 @@ segments:
       - [0x72D6C0, palette, mystery]
       - [0x72D6E0]
   - name: repel_gel
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x72DB70
     vram: 0x802A1000
@@ -8403,7 +8403,7 @@ segments:
     - [0x72DB70, c, repel_gel]
     - [0x72DE00]
   - name: life_shroom
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x72E530
     vram: 0x802A1000
@@ -8412,7 +8412,7 @@ segments:
     - [0x72E530, c, life_shroom]
     - [0x72EA20]
   - name: coconut
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x72F720
     vram: 0x802A1000
@@ -8428,7 +8428,7 @@ segments:
       - [0x730120, palette, coconut]
       - [0x730140]
   - name: electro_pop
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x7305A0
     vram: 0x802A1000
@@ -8437,7 +8437,7 @@ segments:
     - [0x7305A0, c, electro_pop]
     - [0x730AE0]
   - name: strange_cake
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x731300
     vram: 0x802A1000
@@ -8457,7 +8457,7 @@ segments:
       - [0x732AB0, palette, strange_cake3]
       - [0x732AD0]
   - name: food
-    dir: battle/item
+    dir: battle/move/item
     type: code
     start: 0x7330D0
     vram: 0x802A1000

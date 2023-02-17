@@ -1,6 +1,6 @@
 #include "pebble.h"
 #include "ld_addrs.h"
-#include "battle/item/pebble.png.h"
+#include "battle/move/item/pebble.png.h"
 
 #include "ItemRefund.inc.c"
 
@@ -8,8 +8,8 @@
 
 static s32 _pad = 0;
 
-#include "battle/item/pebble.png.inc.c"
-#include "battle/item/pebble.pal.inc.c"
+#include "battle/move/item/pebble.png.inc.c"
+#include "battle/move/item/pebble.pal.inc.c"
 
 Vtx N(model)[] = {
     { .v = { { -16, -16, 0 }, FALSE, { 0,    0 },    { 0, 0, 0, 255 }, } },

@@ -2,10 +2,10 @@
 #include "effects.h"
 #include "entity.h"
 #include "ld_addrs.h"
-#include "battle/item/egg_missile1.png.h"
-#include "battle/item/egg_missile2.png.h"
-#include "battle/item/egg_missile3.png.h"
-#include "battle/item/egg_missile4.png.h"
+#include "battle/move/item/egg_missile1.png.h"
+#include "battle/move/item/egg_missile2.png.h"
+#include "battle/move/item/egg_missile3.png.h"
+#include "battle/move/item/egg_missile4.png.h"
 
 #include "ItemRefund.inc.c"
 
@@ -25,14 +25,14 @@ API_CALLABLE(N(func_802A123C_71CF1C)) {
 
 static s32 _pad = 0;
 
-#include "battle/item/egg_missile1.png.inc.c"
-#include "battle/item/egg_missile1.pal.inc.c"
-#include "battle/item/egg_missile2.png.inc.c"
-#include "battle/item/egg_missile2.pal.inc.c"
-#include "battle/item/egg_missile3.png.inc.c"
-#include "battle/item/egg_missile3.pal.inc.c"
-#include "battle/item/egg_missile4.png.inc.c"
-#include "battle/item/egg_missile4.pal.inc.c"
+#include "battle/move/item/egg_missile1.png.inc.c"
+#include "battle/move/item/egg_missile1.pal.inc.c"
+#include "battle/move/item/egg_missile2.png.inc.c"
+#include "battle/move/item/egg_missile2.pal.inc.c"
+#include "battle/move/item/egg_missile3.png.inc.c"
+#include "battle/move/item/egg_missile3.pal.inc.c"
+#include "battle/move/item/egg_missile4.png.inc.c"
+#include "battle/move/item/egg_missile4.pal.inc.c"
 
 Vtx N(model)[] = {
     { .v = {{ -16, -16, 0 }, FALSE, { 0,    0    }, { 0, 0, 0, 255 }}},
