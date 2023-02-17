@@ -5,9 +5,9 @@
 
 #include "battle/common/move/HammerSupport.inc.c"
 
-extern EvtScript N(UseMove_Impl);
+extern EvtScript N(EVS_UseMove_Impl);
 
-EvtScript N(UseMove) = {
+EvtScript N(EVS_UseMove) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_AUTO_SUCCEED_ACTION, TRUE)
     EVT_CALL(ShowActionHud, 1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -16,27 +16,27 @@ EvtScript N(UseMove) = {
             EVT_SET(LVarD, 45)
             EVT_SET(LVarE, 1)
             EVT_SET(LVarF, 2)
-            EVT_EXEC_WAIT(N(UseMove_Impl))
+            EVT_EXEC_WAIT(N(EVS_UseMove_Impl))
         EVT_CASE_EQ(1)
             EVT_SET(LVarD, 45)
             EVT_SET(LVarE, 2)
             EVT_SET(LVarF, 4)
-            EVT_EXEC_WAIT(N(UseMove_Impl))
+            EVT_EXEC_WAIT(N(EVS_UseMove_Impl))
         EVT_CASE_EQ(2)
             EVT_SET(LVarD, 45)
             EVT_SET(LVarE, 3)
             EVT_SET(LVarF, 6)
-            EVT_EXEC_WAIT(N(UseMove_Impl))
+            EVT_EXEC_WAIT(N(EVS_UseMove_Impl))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(UseMove_Impl) = {
+EvtScript N(EVS_UseMove_Impl) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
-            EVT_EXEC_WAIT(N(EVS_UseHammer))
+            EVT_EXEC_WAIT(N(EVS_UseBasicHammer))
         EVT_CASE_EQ(1)
             EVT_EXEC_WAIT(N(EVS_UseSuperHammer))
         EVT_CASE_EQ(2)

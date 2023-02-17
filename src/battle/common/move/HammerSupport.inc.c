@@ -5,7 +5,7 @@
 #include "world/common/todo/IsBerserkerEquipped.inc.c"
 #include "world/common/todo/ShouldMovesAutoSucceed.inc.c"
 
-EvtScript N(EVS_802A10B0) = {
+EvtScript N(EVS_HammerSupport_A) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
@@ -20,7 +20,7 @@ EvtScript N(EVS_802A10B0) = {
     EVT_END
 };
 
-EvtScript N(EVS_802A118C) = {
+EvtScript N(EVS_HammerSupport_B) = {
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, -33, 0, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
@@ -30,7 +30,7 @@ EvtScript N(EVS_802A118C) = {
     EVT_END
 };
 
-EvtScript N(EVS_802A1204) = {
+EvtScript N(EVS_HammerSupport_C) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_SET(LVar1, 0)
@@ -61,7 +61,7 @@ EvtScript N(EVS_802A1204) = {
     EVT_END
 };
 
-EvtScript N(EVS_802A1388) = {
+EvtScript N(EVS_HammerSupport_D) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_SET(LVar1, 0)
@@ -92,7 +92,7 @@ EvtScript N(EVS_802A1388) = {
     EVT_END
 };
 
-EvtScript N(EVS_802A150C) = {
+EvtScript N(EVS_HammerSupport_E) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_SET(LVar1, 0)
@@ -123,7 +123,7 @@ EvtScript N(EVS_802A150C) = {
     EVT_END
 };
 
-EvtScript N(EVS_802A1690) = {
+EvtScript N(EVS_HammerSupport_F) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
@@ -213,13 +213,13 @@ EvtScript N(EVS_Hammer_ReturnHome_C) = {
     EVT_END
 };
 
-EvtScript N(EVS_UseHammer) = {
+EvtScript N(EVS_UseBasicHammer) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_init)
-    EVT_EXEC_WAIT(N(EVS_802A10B0))
+    EVT_EXEC_WAIT(N(EVS_HammerSupport_A))
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_EXEC_WAIT(N(EVS_802A1204))
+    EVT_EXEC_WAIT(N(EVS_HammerSupport_C))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 0, 0, 0, 16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
@@ -302,10 +302,10 @@ EvtScript N(EVS_UseHammer) = {
 EvtScript N(EVS_UseSuperHammer) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_init)
-    EVT_EXEC_WAIT(N(EVS_802A10B0))
+    EVT_EXEC_WAIT(N(EVS_HammerSupport_A))
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_EXEC_WAIT(N(EVS_802A1388))
+    EVT_EXEC_WAIT(N(EVS_HammerSupport_D))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 0, 0, 0, BS_FLAGS1_10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
@@ -371,10 +371,10 @@ EvtScript N(EVS_UseSuperHammer) = {
 EvtScript N(EVS_UseUltraHammer) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_init)
-    EVT_EXEC_WAIT(N(EVS_802A10B0))
+    EVT_EXEC_WAIT(N(EVS_HammerSupport_A))
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_EXEC_WAIT(N(EVS_802A150C))
+    EVT_EXEC_WAIT(N(EVS_HammerSupport_E))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 0, 0, 0, BS_FLAGS1_10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
@@ -437,14 +437,14 @@ EvtScript N(EVS_UseUltraHammer) = {
     EVT_END
 };
 
-EvtScript N(EVS_802A27D0) = {
+EvtScript N(EVS_Hammer_UseBasicQuake) = {
     EVT_CALL(ChooseNextTarget, ITER_LAST, LVar0)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_init)
-    EVT_EXEC_WAIT(N(EVS_802A118C))
+    EVT_EXEC_WAIT(N(EVS_HammerSupport_B))
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_EXEC_WAIT(N(EVS_802A1204))
+    EVT_EXEC_WAIT(N(EVS_HammerSupport_C))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
@@ -495,14 +495,14 @@ EvtScript N(EVS_802A27D0) = {
     EVT_END
 };
 
-EvtScript N(EVS_802A2AFC) = {
+EvtScript N(EVS_Hammer_UseSuperQuake) = {
     EVT_CALL(ChooseNextTarget, ITER_LAST, LVar0)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_init)
-    EVT_EXEC_WAIT(N(EVS_802A118C))
+    EVT_EXEC_WAIT(N(EVS_HammerSupport_B))
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_EXEC_WAIT(N(EVS_802A1388))
+    EVT_EXEC_WAIT(N(EVS_HammerSupport_D))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
@@ -544,14 +544,14 @@ EvtScript N(EVS_802A2AFC) = {
     EVT_END
 };
 
-EvtScript N(EVS_802A2DA0) = {
+EvtScript N(EVS_Hammer_UseUltraQuake) = {
     EVT_CALL(ChooseNextTarget, ITER_LAST, LVar0)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_init)
-    EVT_EXEC_WAIT(N(EVS_802A118C))
+    EVT_EXEC_WAIT(N(EVS_HammerSupport_B))
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_EXEC_WAIT(N(EVS_802A150C))
+    EVT_EXEC_WAIT(N(EVS_HammerSupport_E))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)

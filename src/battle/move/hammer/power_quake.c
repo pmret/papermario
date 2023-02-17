@@ -35,11 +35,11 @@ EvtScript N(EVS_802A3168) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
-            EVT_EXEC_WAIT(N(EVS_802A27D0))
+            EVT_EXEC_WAIT(N(EVS_Hammer_UseBasicQuake))
         EVT_CASE_EQ(1)
-            EVT_EXEC_WAIT(N(EVS_802A2AFC))
+            EVT_EXEC_WAIT(N(EVS_Hammer_UseSuperQuake))
         EVT_CASE_EQ(2)
-            EVT_EXEC_WAIT(N(EVS_802A2DA0))
+            EVT_EXEC_WAIT(N(EVS_Hammer_UseUltraQuake))
     EVT_END_SWITCH
     EVT_THREAD
         EVT_WAIT(8)

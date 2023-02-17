@@ -8496,46 +8496,51 @@ segments:
     subsegments:
     - [0x73AED0, c, quake_hammer]
     - [0x73AF80]
-  - dir: battle/move/jump
+  - name: battle_move_jump_attack
+    dir: battle/move/jump
     type: code
     start: 0x73D860
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x73D860, c, jump]
+    - [0x73D860, c, attack]
     - [0x73D9A0]
-  - dir: battle/move/multibounce
+  - name: battle_move_multibounce
+    dir: battle/move/jump
     type: code
     start: 0x740CC0
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x740CC0, c]
-    - [0x740DB0, data]
-  - dir: battle/move/power_bounce
+    - [0x740CC0, c, multibounce]
+    - [0x740DB0]
+  - name: battle_move_power_bounce
+    dir: battle/move/jump
     type: code
     start: 0x743DF0
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x743DF0, c]
-    - [0x743FF0, data]
-  - dir: battle/move/sleep_stomp
+    - [0x743DF0, c, power_bounce]
+    - [0x743FF0]
+  - name: battle_move_sleep_stomp
+    dir: battle/move/jump
     type: code
     start: 0x746E10
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x746E10, c]
-    - [0x746F00, data]
-  - dir: battle/move/dizzy_stomp
+    - [0x746E10, c, sleep_stomp]
+    - [0x746F00]
+  - name: battle_move_dizzy_stomp
+    dir: battle/move/jump
     type: code
     start: 0x748DD0
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x748DD0, c]
-    - [0x748EC0, data]
+    - [0x748DD0, c, dizzy_stomp]
+    - [0x748EC0]
   - name: battle_move_d_down_pound
     dir: battle/move/hammer
     type: code
@@ -8545,14 +8550,15 @@ segments:
     subsegments:
     - [0x74AD90, c, d_down_pound]
     - [0x74AF40]
-  - dir: battle/move/jump_charge_0
+  - name: battle_move_jump_charge_0
+    dir: battle/move/jump
     type: code
     start: 0x74D570
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x74D570, c]
-    - [0x74D850, data]
+    - [0x74D570, c, jump_charge_0]
+    - [0x74D850]
   - name: battle_move_hammer_charge_0
     dir: battle/move/hammer
     type: code
@@ -8607,14 +8613,15 @@ segments:
     subsegments:
     - [0x7595B0, c, hammer_charge_1]
     - [0x7598D0]
-  - dir: battle/move/jump_charge_1
+  - name: battle_move_jump_charge_1
+    dir: battle/move/jump
     type: code
     start: 0x75C980
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x75C980, c]
-    - [0x75CCE0, data]
+    - [0x75C980, c, jump_charge_1]
+    - [0x75CCE0]
   - name: battle_move_hammer_charge_2
     dir: battle/move/hammer
     type: code
@@ -8624,14 +8631,15 @@ segments:
     subsegments:
     - [0x75E5D0, c, hammer_charge_2]
     - [0x75E8F0]
-  - dir: battle/move/jump_charge_2
+  - name: battle_move_jump_charge_2
+    dir: battle/move/jump
     type: code
     start: 0x761920
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x761920, c]
-    - [0x761C80, data]
+    - [0x761920, c, jump_charge_2]
+    - [0x761C80]
   - name: battle_move_auto_smash
     dir: battle/move/hammer
     type: code
@@ -8641,7 +8649,8 @@ segments:
     subsegments:
     - [0x763540, c, auto_smash]
     - [0x7635F0]
-  - dir: battle/move/auto_jump
+  - name: battle_move_auto_jump
+    dir: battle/move/jump
     type: code
     start: 0x765C20
     vram: 0x802A1000
@@ -8658,7 +8667,8 @@ segments:
     subsegments:
     - [0x767C90, c, power_quake]
     - [0x767D40]
-  - dir: battle/move/auto_multibounce
+  - name: battle_move_auto_multibounce
+    dir: battle/move/jump
     type: code
     start: 0x76A830
     vram: 0x802A1000
@@ -8666,30 +8676,33 @@ segments:
     subsegments:
     - [0x76A830, c, auto_multibounce]
     - [0x76A920]
-  - dir: battle/move/power_jump
+  - name: battle_move_power_jump
+    dir: battle/move/jump
     type: code
     start: 0x76D760
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x76D760, c]
-    - [0x76D850, data]
-  - dir: battle/move/super_jump
+    - [0x76D760, c, power_jump]
+    - [0x76D850]
+  - name: battle_move_super_jump
+    dir: battle/move/jump
     type: code
     start: 0x76F330
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x76F330, c]
-    - [0x76F420, data]
-  - dir: battle/move/mega_jump
+    - [0x76F330, c, super_jump]
+    - [0x76F420]
+  - name: battle_move_mega_jump
+    dir: battle/move/jump
     type: code
     start: 0x770F30
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x770F30, c]
-    - [0x771020, data]
+    - [0x770F30, c, mega_jump]
+    - [0x771020]
   - name: battle_move_power_smash
     dir: battle/move/hammer
     type: code
@@ -8717,14 +8730,15 @@ segments:
     subsegments:
     - [0x777690, c, mega_smash]
     - [0x777740]
-  - dir: battle/move/unknown_move
+  - name: battle_move_demo_power_bounce
+    dir: battle/move/jump
     type: code
     start: 0x779C90
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x779C90, c]
-    - [0x779E30, data]
+    - [0x779C90, c, demo_power_bounce]
+    - [0x779E30]
   - name: battle_move_shrink_smash
     dir: battle/move/hammer
     type: code
@@ -8743,30 +8757,33 @@ segments:
     subsegments:
     - [0x77F240, c, shell_crack]
     - [0x77F3D0]
-  - dir: battle/move/d_down_jump
+  - name: battle_move_d_down_jump
+    dir: battle/move/jump
     type: code
     start: 0x781920
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x781920, c]
-    - [0x781AF0, data]
-  - dir: battle/move/shrink_stomp
+    - [0x781920, c, d_down_jump]
+    - [0x781AF0]
+  - name: battle_move_shrink_stomp
+    dir: battle/move/jump
     type: code
     start: 0x783BA0
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x783BA0, c]
-    - [0x783C90, data]
-  - dir: battle/move/earthquake_jump
+    - [0x783BA0, c, shrink_stomp]
+    - [0x783C90]
+  - name: battle_move_earthquake_jump
+    dir: battle/move/jump
     type: code
     start: 0x785B20
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [0x785B20, c]
-    - [0x785C20, data]
+    - [0x785B20, c, earthquake_jump]
+    - [0x785C20]
   - dir: battle/star_power/focus
     type: code
     start: 0x789E60

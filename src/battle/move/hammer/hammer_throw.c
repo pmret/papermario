@@ -2,8 +2,6 @@
 #include "effects.h"
 #include "entity.h"
 
-API_CALLABLE(VirtualEntityLandJump);
-
 #define NAMESPACE battle_move_hammer_throw
 
 #include "battle/common/move/HammerSupport.inc.c"
