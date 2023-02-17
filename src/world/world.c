@@ -3,6 +3,7 @@
 #include "npc.h"
 #include "camera.h"
 #include "hud_element.h"
+#include "rumble.h"
 #include "sprite.h"
 #include "model.h"
 
@@ -33,6 +34,8 @@ s32 pad_map_table[] = { 0, 0 };
 
 #ifdef SHIFT
 #define ASSET_TABLE_ROM_START mapfs_ROM_START
+#elif VERSION_JP
+#define ASSET_TABLE_ROM_START 0x1E00000
 #else
 #define ASSET_TABLE_ROM_START 0x1E40000
 #endif
@@ -78,6 +81,9 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_MARIO_WORLD;
     load_obfuscation_shims();
     shim_general_heap_create_obfuscated();
+#if VERSION_JP
+    reset_max_rumble_duration();
+#endif
     clear_render_tasks();
     clear_worker_list();
     clear_script_list();

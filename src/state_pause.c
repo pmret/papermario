@@ -6,6 +6,19 @@
 #include "sprite.h"
 #include "model.h"
 
+#if VERSION_JP
+// TODO: split this segment
+extern Addr pause_ROM_START;
+extern Addr pause_ROM_END;
+extern Addr pause_VRAM;
+extern Addr pause_TEXT_START;
+extern Addr pause_TEXT_END;
+extern Addr pause_RODATA_END;
+extern Addr pause_BSS_START;
+extern Addr pause_BSS_END;
+extern Addr pause_DATA_START;
+#endif
+
 extern u16 gFrameBuf0[];
 extern u16 gFrameBuf1[];
 extern u16 gFrameBuf2[];
