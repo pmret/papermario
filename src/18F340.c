@@ -33,7 +33,7 @@ void func_80260A60(void) {
 
     if (battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE) {
         actorPart->idleAnimations = bPeachIdleAnims;
-        set_animation(0, 0, 0xA0002);
+        set_animation(0, 0, ANIM_Peach_A0002);
     } else if (!battleStatus->outtaSightActive) {
         actorPart->idleAnimations = bMarioIdleAnims;
     }
@@ -63,7 +63,7 @@ ApiStatus activate_defend_command(Evt* script, s32 isInitialCall) {
     deduct_current_move_fp();
     gBattleStatus.flags1 |= BS_FLAGS1_PLAYER_DEFENDING;
     actorPart->idleAnimations = bMarioDefendAnims;
-    set_animation(0, 0, 0x10014);
+    set_animation(0, 0, ANIM_Mario_Crouch);
     return ApiStatus_DONE2;
 }
 

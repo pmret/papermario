@@ -152,7 +152,7 @@ API_CALLABLE(N(ProjectileAI_Main)) {
             if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
                 script->functionTemp[0] = 0;
                 npc->duration = 0;
-                npc->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_2;
+                npc->flags |= NPC_FLAG_40000 | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_2;
                 disable_npc_shadow(npc);
                 npc->flags &= ~NPC_FLAG_JUMPING;
                 enemy->varTable[0] = 0;

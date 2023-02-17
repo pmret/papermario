@@ -25,13 +25,13 @@ EvtScript N(EVS_ItemPrompt_ToyTrain) = {
         EVT_IF_EQ(GF_OMO03_LearnedAboutTrainSwitches, FALSE)
             EVT_IF_EQ(AF_OMO_05, FALSE)
                 EVT_THREAD
-                    EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_100, TRUE)
+                    EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                     EVT_CALL(SetNpcJumpscale, NPC_Conductor, EVT_FLOAT(1.0))
                     EVT_CALL(GetNpcPos, NPC_Conductor, LVar0, LVar1, LVar2)
                     EVT_LOOP(2)
                         EVT_CALL(NpcJump1, NPC_Conductor, LVar0, LVar1, LVar2, 15)
                     EVT_END_LOOP
-                    EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_100, FALSE)
+                    EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
                 EVT_END_THREAD
                 EVT_WAIT(10)
                 EVT_IF_EQ(MF_EitherSwitchPressed, FALSE)
@@ -128,7 +128,7 @@ NpcData N(NpcData_TrainToads)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Conductor),
         .settings = &N(NpcSettings_TrainToad),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = TRAIN_CONDUCTOR_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,
@@ -139,7 +139,7 @@ NpcData N(NpcData_TrainToads)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_TrainToad),
         .settings = &N(NpcSettings_TrainToad),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = TRAIN_TOAD_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_OMO_TrainConductor,

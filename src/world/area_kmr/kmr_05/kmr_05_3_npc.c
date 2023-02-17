@@ -86,7 +86,7 @@ NpcData N(NpcData_Goomba_01) = {
         }
     },
     .settings = &N(NpcSettings_Goomba_Wander),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -109,7 +109,7 @@ NpcData N(NpcData_Goomba_02) = {
         }
     },
     .settings = &N(NpcSettings_Goomba_Wander),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -140,7 +140,7 @@ NpcData N(NpcData_SpikedGoomba) = {
     },
     .init = &N(EVS_NpcInit_SpikedGoomba),
     .settings = &N(NpcSettings_SpikedGoomba_Wander),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = SPIKED_GOOMBA_DROPS,
     .animations = SPIKED_GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -163,7 +163,7 @@ NpcData N(NpcData_Paragoomba) = {
         }
     },
     .settings = &N(NpcSettings_Paragoomba_Wander),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = PARAGOOMBA_DROPS,
     .animations = PARAGOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

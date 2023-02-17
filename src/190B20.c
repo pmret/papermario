@@ -967,17 +967,17 @@ void func_80263CC4(s32 arg0) {
     start_script(&D_80293820, 10, 0)->varTable[0] = arg0;
 }
 
-void set_animation(s32 actorID, s32 partID, s32 animationIndex) {
-    if (animationIndex >= 0) {
+void set_animation(s32 actorID, s32 partID, AnimID animID) {
+    if ((s32) animID >= 0) {
         Actor* actor = get_actor(actorID);
         ActorPart* part;
 
         switch (actorID & ACTOR_CLASS_MASK) {
             case ACTOR_CLASS_PLAYER:
                 part = &actor->partsTable[0];
-                if (part->currentAnimation != animationIndex) {
-                    part->currentAnimation = animationIndex;
-                    spr_update_player_sprite(PLAYER_SPRITE_MAIN, animationIndex, part->animationRate);
+                if (part->currentAnimation != animID) {
+                    part->currentAnimation = animID;
+                    spr_update_player_sprite(PLAYER_SPRITE_MAIN, animID, part->animationRate);
                 }
                 break;
             case ACTOR_CLASS_PARTNER:
@@ -991,17 +991,17 @@ void set_animation(s32 actorID, s32 partID, s32 animationIndex) {
                     part = &actor->partsTable[0];
                 }
 
-                if (part->currentAnimation != animationIndex) {
-                    part->currentAnimation = animationIndex;
-                    spr_update_sprite(part->spriteInstanceID, animationIndex, part->animationRate);
+                if (part->currentAnimation != animID) {
+                    part->currentAnimation = animID;
+                    spr_update_sprite(part->spriteInstanceID, animID, part->animationRate);
                     part->animNotifyValue = spr_get_notify_value(part->spriteInstanceID);
                 }
                 break;
             case ACTOR_CLASS_ENEMY:
                 part = get_actor_part(actor, partID);
-                if (part->currentAnimation != animationIndex) {
-                    part->currentAnimation = animationIndex;
-                    spr_update_sprite(part->spriteInstanceID, animationIndex, part->animationRate);
+                if (part->currentAnimation != animID) {
+                    part->currentAnimation = animID;
+                    spr_update_sprite(part->spriteInstanceID, animID, part->animationRate);
                     part->animNotifyValue = spr_get_notify_value(part->spriteInstanceID);
                 }
                 break;
@@ -1009,8 +1009,8 @@ void set_animation(s32 actorID, s32 partID, s32 animationIndex) {
     }
 }
 
-void func_80263E08(Actor* actor, ActorPart* part, s32 anim) {
-    if (anim >= 0) {
+void func_80263E08(Actor* actor, ActorPart* part, AnimID anim) {
+    if ((s32) anim >= 0) {
         switch (actor->actorID & ACTOR_CLASS_MASK) {
             case ACTOR_CLASS_PLAYER:
                 if (part->currentAnimation != anim) {

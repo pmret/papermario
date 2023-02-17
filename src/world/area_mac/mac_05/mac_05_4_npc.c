@@ -575,7 +575,7 @@ EvtScript N(EVS_802496FC) = {
     EVT_SET(LVar0, 1)
     EVT_EXEC_GET_TID(N(D_802484F8_85A668), LVarA)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_CALL(SetNpcYaw, NPC_PARTNER, 270)
@@ -627,7 +627,7 @@ EvtScript N(EVS_802496FC) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, FALSE)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_RANGE(STORY_CH5_SUSHIE_JOINED_PARTY, STORY_CH5_STAR_SPRIT_DEPARTED)
             EVT_IF_EQ(GF_MAC01_Defeated_JrTroopa4, FALSE)
@@ -654,7 +654,7 @@ EvtScript N(D_80249C34_85BDA4) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(DisablePartnerAI, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
         EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
         EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(1.0))
@@ -673,7 +673,7 @@ EvtScript N(D_80249D80_85BEF0) = {
     EVT_CALL(PlayerMoveTo, -310, 372, 20)
     EVT_CALL(PlayerFaceNpc, NPC_Whale, FALSE)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(NpcMoveTo, NPC_PARTNER, -345, 372, 30)
     EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Whale, EVT_FLOAT(1.0))
@@ -701,7 +701,7 @@ API_CALLABLE(N(func_802430B4_855224)) {
         if (npc_raycast_down_around(npc->collisionChannel, &x, &y, &z, &temp, npc->yaw, npc->collisionRadius) &&
             temp <= 12.0f)
         {
-            outVal = D_8010C978;
+            outVal = NpcHitQueryColliderID;
         }
     }
     evt_set_variable(script, *args++, outVal);
@@ -990,7 +990,7 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
     EVT_EXEC(N(D_802484F8_85A668))
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt9, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
@@ -1049,7 +1049,7 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
 
 EvtScript N(EVS_NpcInit_Toad_01) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_01)))
-    EVT_CALL(SetNpcFlagBits, NPC_Whale, NPC_FLAG_1000000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Whale, NPC_FLAG_HAS_NO_SPRITE, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_Whale, NPC_FLAG_HAS_SHADOW, FALSE)
     EVT_CALL(InterpNpcYaw, NPC_Whale, 270, 0)
     EVT_IF_LT(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
@@ -1098,7 +1098,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(1.5))
     EVT_CALL(NpcMoveTo, NPC_SELF, -335, 400, 10)
@@ -1814,7 +1814,7 @@ EvtScript N(EVS_NpcInteract_ArtistToad) = {
                 EVT_CALL(SpeakToPlayer, NPC_Chanterelle, ANIM_Chanterelle_Talk, ANIM_Chanterelle_Idle, 0, MSG_MAC_Port_007C)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Poet_Talk, ANIM_Musician_Poet_Idle, 0, MSG_MAC_Port_007D)
                 EVT_CALL(SpeakToPlayer, NPC_Chanterelle, ANIM_Chanterelle_Talk, ANIM_Chanterelle_Idle, 0, MSG_MAC_Port_007E)
-                EVT_CALL(SetNpcFlagBits, NPC_Chanterelle, NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_Chanterelle, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_THREAD
                     EVT_CALL(PlayerMoveTo, 167, -513, 20)
                     EVT_CALL(InterpPlayerYaw, 270, 0)
@@ -1880,7 +1880,7 @@ EvtScript N(EVS_NpcInteract_ArtistToad) = {
                     EVT_CALL(InterpPlayerYaw, 90, 0)
                     EVT_WAIT(10)
                     EVT_CALL(func_802CF56C, 2)
-                    EVT_CALL(SetNpcFlagBits, NPC_Chanterelle, NPC_FLAG_100, FALSE)
+                    EVT_CALL(SetNpcFlagBits, NPC_Chanterelle, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
                 EVT_END_THREAD
                 EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
                 EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
@@ -2065,7 +2065,7 @@ NpcData N(NpcData_Toad_01) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Toad_01),
     .settings = &N(NpcSettings_Whale),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_Whale,
@@ -2144,7 +2144,7 @@ NpcData N(NpcData_JrTroopa_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_JrTroopa_01),
         .settings = &N(NpcSettings_JrTroopa_01),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_JrTroopa_Idle,
@@ -2173,7 +2173,7 @@ NpcData N(NpcData_JrTroopa_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_JrTroopa_02),
         .settings = &N(NpcSettings_JrTroopa_01),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_JrTroopa_Idle,

@@ -558,8 +558,8 @@ void npc__reset_current_decoration(Npc* npc, s32 idx);
 
 /// Finds the closest NPC to a given point within a radius. Ignores Y position.
 ///
-/// NPCs with NPC_FLAG_PARTICLE set are ignored.
-/// See also npc_find_closest_simple(), which requires that NPC_FLAG_PARTICLE be set.
+/// NPCs with NPC_FLAG_PARTNER set are ignored.
+/// See also npc_find_closest_simple(), which requires that NPC_FLAG_PARTNER be set.
 ///
 /// @param x        X position
 /// @param y        Y position (unused)
@@ -571,8 +571,8 @@ Npc* npc_find_closest(f32 x, f32 y, f32 z, f32 radius);
 
 /// Finds the closest simple-hitbox NPC to a given point within a radius. Ignores Y position.
 ///
-/// Only NPCs with NPC_FLAG_PARTICLE set are considered.
-/// See also npc_find_closest(), which requires that NPC_FLAG_PARTICLE be unset.
+/// Only NPCs with NPC_FLAG_PARTNER set are considered.
+/// See also npc_find_closest(), which requires that NPC_FLAG_PARTNER be unset.
 ///
 /// @param x        X position
 /// @param y        Y position (unused)

@@ -51,7 +51,7 @@ API_CALLABLE(N(MagikoopaAI_SpellMain)) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         script->functionTemp[0] = 0;
         npc1->duration = 0;
-        npc1->flags |= NPC_FLAG_200000 | NPC_FLAG_40000 | NPC_FLAG_100 |  NPC_FLAG_2;
+        npc1->flags |= NPC_FLAG_200000 | NPC_FLAG_40000 | NPC_FLAG_IGNORE_PLAYER_COLLISION |  NPC_FLAG_2;
         enemy->flags |= ENEMY_FLAG_10000000 | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_JUMP |
                         ENEMY_FLAG_200000 | ENEMY_FLAG_40;
         npc1->scale.x = 0.4f;

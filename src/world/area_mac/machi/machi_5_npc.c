@@ -1,6 +1,6 @@
 #include "machi.h"
 
-s32 N(GoombariaAnims)[] = {
+FollowAnims N(GoombariaAnims) = {
     ANIM_Goombaria_Walk,
     ANIM_Goombaria_Jump,
     ANIM_Goombaria_Fall,
@@ -13,13 +13,17 @@ API_CALLABLE(N(func_802401B0_7E7550)) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     if (rand_int(1000) < 500) {
-        npc_follow_init(npc, NPC_SELF, N(GoombariaAnims),
+        npc_follow_init(npc,
+            NPC_SELF,
+            &N(GoombariaAnims),
             rand_int(4) + 1,
             rand_int(3) + 5,
             rand_int(50) + 50,
             rand_int(100) + 100);
     } else {
-        npc_follow_init(npc, rand_int(3) + NPC_Goompa, N(GoombariaAnims),
+        npc_follow_init(npc,
+            rand_int(3) + NPC_Goompa,
+             &N(GoombariaAnims),
             rand_int(4) + 1,
             rand_int(3) + 5,
             rand_int(50) + 50,
@@ -245,7 +249,7 @@ NpcSettings N(NpcSettings_Goompa) = {
     .otherAI = &N(EVS_NpcAuxAI_Goompa),
     .onInteract = &N(EVS_NpcInteract_Goompa),
     .onHit = &N(EVS_NpcHit_Goompa),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000,
 };
 
 NpcData N(NpcData_05)[] = {

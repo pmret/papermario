@@ -186,7 +186,7 @@ NpcData N(NpcData_TuffPuff) = {
         }
     },
     .settings = &N(NpcSettings_TuffPuff),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = TUFF_PUFF_DROPS,
     .animations = TUFF_PUFF_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -209,7 +209,7 @@ NpcData N(NpcData_Bzzap) = {
         }
     },
     .settings = &N(NpcSettings_Bzzap),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = BZZAP_DROPS,
     .animations = BZZAP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

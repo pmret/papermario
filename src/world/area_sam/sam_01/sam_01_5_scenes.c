@@ -75,8 +75,8 @@ EvtScript N(EVS_CloseMayorsOfficeDoor) = {
 
 EvtScript N(EVS_Scene_MysteryBegins) = {
     EVT_CALL(InterruptUsePartner)
-    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguin, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguinWife, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguin, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguinWife, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -329,8 +329,8 @@ EvtScript N(EVS_Scene_MysteryBegins) = {
     EVT_CALL(InterpNpcYaw, NPC_Penguin_07, 180, 0)
     EVT_CALL(SetNpcPos, NPC_Penguin_08, -120, 0, 30)
     EVT_CALL(InterpNpcYaw, NPC_Penguin_08, 0, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguin, NPC_FLAG_100, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguinWife, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguin, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguinWife, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(EnablePartnerAI)
     EVT_SET(GB_StoryProgress, STORY_CH7_MAYOR_MURDER_MYSTERY)
     EVT_SET(GB_SAM11_FrozenPondDamage, 0)
@@ -572,10 +572,10 @@ EvtScript N(EVS_Scene_MysterySolved) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetNpcFlagBits, NPC_Penguin_09, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Penguin_09, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcSpeed, NPC_MayorPenguin, EVT_FLOAT(3.0))
     EVT_CALL(SetNpcAnimation, NPC_MayorPenguin, ANIM_MayorPenguin_Walk)
-    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguin, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguin, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(NpcMoveTo, NPC_MayorPenguin, -320, -258, 0)
     EVT_CALL(InterpNpcYaw, NPC_MayorPenguin, 180, 0)
     EVT_CALL(SetNpcAnimation, NPC_MayorPenguin, ANIM_MayorPenguin_Idle)
@@ -626,7 +626,7 @@ EvtScript N(EVS_Scene_MysterySolved) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(30)
-    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguin, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguin, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SpeakToNpc, NPC_MayorPenguin, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, NPC_Herringway, MSG_CH7_002D)
     EVT_CALL(SetNpcAnimation, NPC_MayorPenguin, ANIM_MayorPenguin_Give)
@@ -655,7 +655,7 @@ EvtScript N(EVS_Scene_MysterySolved) = {
     EVT_THREAD
         EVT_WAIT(10)
         EVT_CALL(SetNpcSpeed, NPC_MayorPenguin, EVT_FLOAT(3.0))
-        EVT_CALL(SetNpcFlagBits, NPC_MayorPenguin, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_MayorPenguin, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_MayorPenguin, ANIM_MayorPenguin_Walk)
         EVT_CALL(NpcMoveTo, NPC_MayorPenguin, -249, -109, 0)
         EVT_CALL(SetNpcAnimation, NPC_MayorPenguin, ANIM_MayorPenguin_Idle)
@@ -673,13 +673,13 @@ EvtScript N(EVS_Scene_MysterySolved) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcSpeed, NPC_PenguinPatrol, EVT_FLOAT(3.0))
     EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Walk)
     EVT_CALL(NpcMoveTo, NPC_PenguinPatrol, -210, -80, 0)
     EVT_CALL(NpcMoveTo, NPC_PenguinPatrol, -250, -10, 0)
     EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Idle)
-    EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_EXEC_WAIT(N(EVS_OpenMayorsOfficeDoor))
     EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Walk)
     EVT_CALL(NpcMoveTo, NPC_PenguinPatrol, -250, 50, 0)
@@ -711,7 +711,7 @@ EvtScript N(EVS_Scene_MysterySolved) = {
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(1)
     EVT_CALL(SpeakToPlayer, NPC_MayorPenguin, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_0034)
-    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguin, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_MayorPenguin, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SetNpcPos, NPC_PenguinPatrol, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcPos, NPC_Herringway, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcFlagBits, NPC_Herringway, NPC_FLAG_4, TRUE)

@@ -61,7 +61,7 @@ EvtScript N(EVS_Scene_StarSpiritsPlea) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.5))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(func_802D2C14, 2)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_THREAD
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_ADD(LVar2, 30)
@@ -74,7 +74,7 @@ EvtScript N(EVS_Scene_StarSpiritsPlea) = {
     EVT_WAIT(10)
     EVT_WAIT(1)
     EVT_CALL(PlayerFaceNpc, NPC_Eldstar, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcJumpscale, NPC_Eldstar, 0)
     EVT_CALL(NpcJump0, NPC_Eldstar, 21, 260, -277, 30)
     EVT_CALL(EnableModel, MODEL_1, TRUE)
@@ -456,7 +456,7 @@ NpcData N(NpcData_StarSpirits)[] = {
         .pos = { 100.0f, 260.0f, -215.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = MAMAR_ANIMS,
     },
@@ -465,7 +465,7 @@ NpcData N(NpcData_StarSpirits)[] = {
         .pos = { -145.0f, 260.0f, -225.0f },
         .yaw = 90,
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = SKOLAR_ANIMS,
     },
@@ -474,7 +474,7 @@ NpcData N(NpcData_StarSpirits)[] = {
         .pos = { 20.0f, 260.0f, -45.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = MUSKULAR_ANIMS,
     },
@@ -483,7 +483,7 @@ NpcData N(NpcData_StarSpirits)[] = {
         .pos = { -155.0f, 260.0f, -125.0f },
         .yaw = 90,
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = MISSTAR_ANIMS,
     },
@@ -492,7 +492,7 @@ NpcData N(NpcData_StarSpirits)[] = {
         .pos = { 90.0f, 260.0f, -110.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = KLEVAR_ANIMS,
     },
@@ -501,7 +501,7 @@ NpcData N(NpcData_StarSpirits)[] = {
         .pos = { -75.0f, 260.0f, -290.0f },
         .yaw = 90,
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = KALMAR_ANIMS,
     },

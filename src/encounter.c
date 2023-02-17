@@ -32,7 +32,7 @@ EvtScript D_80077C44 = {
     EVT_CALL(FadeBackgroundToBlack)
     EVT_WAIT(10)
     EVT_CALL(CreateNpc, NPC_BTL_MERLEE, ANIM_BattleMerlee_Gather)
-    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcYaw, NPC_BTL_MERLEE, 0)
     EVT_CALL(GetCamLookAtObjVector)
     EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, LVar0, LVar1, LVar2)
@@ -2557,14 +2557,14 @@ void create_encounters(void) {
                     } else {
                         newNpc->shadowScale = 1.0f;
                     }
-                    if (enemy->flags & ENEMY_FLAG_100) {
+                    if (enemy->flags & ENEMY_FLAG_IGNORE_WORLD_COLLISION) {
                         newNpc->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
                     }
-                    if (enemy->flags & ENEMY_FLAG_200) {
-                        newNpc->flags |= NPC_FLAG_100;
+                    if (enemy->flags & ENEMY_FLAG_IGNORE_PLAYER_COLLISION) {
+                        newNpc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
                     }
-                    if (enemy->flags & ENEMY_FLAG_400) {
-                        newNpc->flags |= NPC_FLAG_8000;
+                    if (enemy->flags & ENEMY_FLAG_IGNORE_ENTITY_COLLISION) {
+                        newNpc->flags |= NPC_FLAG_IGNORE_ENTITY_COLLISION;
                     }
                     if (enemy->flags & ENEMY_FLAG_800) {
                         newNpc->flags |= NPC_FLAG_8;
@@ -2573,13 +2573,13 @@ void create_encounters(void) {
                         newNpc->flags |= NPC_FLAG_GRAVITY;
                     }
                     if (!(enemy->flags & ENEMY_FLAG_PASSIVE)) {
-                        newNpc->flags |= NPC_FLAG_100;
+                        newNpc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
                     }
                     if (enemy->flags & ENEMY_FLAG_4000) {
-                        newNpc->flags |= NPC_FLAG_1000000;
+                        newNpc->flags |= NPC_FLAG_HAS_NO_SPRITE;
                     }
                     if (enemy->flags & ENEMY_FLAG_2000) {
-                        newNpc->flags |= NPC_FLAG_20;
+                        newNpc->flags |= NPC_FLAG_NO_SHADOW_RAYCAST;
                     }
                     if (enemy->flags & ENEMY_FLAG_8000) {
                         newNpc->flags |= NPC_FLAG_10000000;
@@ -2588,7 +2588,7 @@ void create_encounters(void) {
                         newNpc->flags |= NPC_FLAG_20000000;
                     }
                     if (enemy->flags & ENEMY_FLAG_80) {
-                        newNpc->flags |= NPC_FLAG_LOCK_ANIMS;
+                        newNpc->flags |= NPC_FLAG_DONT_UPDATE_SHADOW_Y;
                     }
                     enemy->scriptGroup = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
                     if (enemy->flags & ENEMY_FLAG_PASSIVE) {

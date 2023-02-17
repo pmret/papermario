@@ -524,13 +524,13 @@ EvtScript N(EVS_MerlonBargeOut) = {
 EvtScript N(D_80250D14_811594) = {
     EVT_CALL(AwaitPlayerApproach, -130, -110, 150)
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 1)
-    EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_100 | NPC_FLAG_GRAVITY, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
     EVT_CALL(NpcMoveTo, NPC_Merlon, 0, 0, 0)
     EVT_CALL(NpcMoveTo, NPC_Merlon, 410, 0, 0)
     EVT_CALL(SetNpcPos, NPC_Merlon, 410, 0, 0)
     EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_100 | NPC_FLAG_GRAVITY, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -775,13 +775,13 @@ EvtScript N(EVS_NpcInteract_Merlon) = {
                         EVT_WAIT(1)
                     EVT_END_LOOP
                 EVT_END_CHILD_THREAD
-                EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
                 EVT_CALL(SetNpcSpeed, NPC_Merlon, EVT_FLOAT(4.0))
                 EVT_CALL(NpcMoveTo, NPC_Merlon, -350, -280, 0)
                 EVT_CALL(NpcMoveTo, NPC_Merlon, -230, -270, 0)
                 EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-                EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_100, FALSE)
+                EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
                 EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitud, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
                 EVT_CALL(MakeLerp, 0, -80, 15, EASING_LINEAR)
                 EVT_LOOP(0)
@@ -850,7 +850,7 @@ EvtScript N(EVS_NpcInteract_Merlon) = {
                         EVT_WAIT(1)
                     EVT_END_LOOP
                 EVT_END_THREAD
-                EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
                 EVT_CALL(SetNpcSpeed, NPC_Merlon, EVT_FLOAT(3.0))
                 EVT_CALL(NpcMoveTo, NPC_Merlon, -170, -225, 0)
@@ -866,7 +866,7 @@ EvtScript N(EVS_NpcInteract_Merlon) = {
                 EVT_SET(GF_MAC01_Merlon_HeardAboutDream, TRUE)
                 EVT_CALL(InterpNpcYaw, NPC_Merlon, 133, 0)
                 EVT_CALL(SetNpcPos, NPC_Merlon, -337, 20, -360)
-                EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_100, FALSE)
+                EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
                 EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
                 EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
                 EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -1129,7 +1129,7 @@ NpcData N(NpcData_KoopaBros)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Black_Anim04,
@@ -1156,7 +1156,7 @@ NpcData N(NpcData_KoopaBros)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Red_Anim04,
@@ -1183,7 +1183,7 @@ NpcData N(NpcData_KoopaBros)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Yellow_Anim04,
@@ -1210,7 +1210,7 @@ NpcData N(NpcData_KoopaBros)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Green_Anim04,
@@ -1239,7 +1239,7 @@ NpcData N(NpcData_Ninji) = {
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 0,
     .settings = &N(NpcSettings_Ninji),
-    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Ninji_Idle,
@@ -2312,7 +2312,7 @@ NpcData N(NpcData_ShyGuys)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_ShyGuy_01),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
@@ -2322,7 +2322,7 @@ NpcData N(NpcData_ShyGuys)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_ShyGuy_02),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
@@ -2332,7 +2332,7 @@ NpcData N(NpcData_ShyGuys)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_GardenShyGuy1),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
@@ -2342,7 +2342,7 @@ NpcData N(NpcData_ShyGuys)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_GardenShyGuy2),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },

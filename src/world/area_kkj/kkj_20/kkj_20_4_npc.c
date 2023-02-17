@@ -201,7 +201,7 @@ EvtScript N(EVS_MeetToadHouseKeeper) = {
     EVT_CALL(ContinueSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVarA)
     EVT_CALL(SetPlayerJumpscale, 1)
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Toad, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Toad, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(N(ToadHouse_DisableStatusMenu))
     EVT_IF_NE(LVar4, 0)
         EVT_EXEC(N(EVS_ToadHouse_Unk2))
@@ -241,7 +241,7 @@ EvtScript N(EVS_MeetToadHouseKeeper) = {
     EVT_EXEC_GET_TID(N(EVS_ToadHouse_ReturnFromRest), LVar9)
     EVT_CALL(N(ToadHouse_AwaitScriptComplete), LVar9)
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Toad, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Toad, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVarB)
     EVT_CALL(N(ToadHouse_ShowStatusMenu))
     EVT_RETURN
@@ -343,7 +343,7 @@ NpcData N(NpcData_Toad) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_Toad),
     .settings = &N(NpcSettings_Toad_Stationary),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_KKJ_ToadHouseToad,

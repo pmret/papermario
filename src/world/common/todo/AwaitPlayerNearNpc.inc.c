@@ -30,7 +30,7 @@ API_CALLABLE(N(func_802408B4_97BEE4)) {
         npc->verticalRenderOffset = 0;
     }
 
-    if (npc->flags & NPC_FLAG_1000) {
+    if (npc->flags & NPC_FLAG_FALLING) {
         currentEncounter->encounterList[enemy->encounterIndex]->battle = enemy->varTable[0];
         return ApiStatus_DONE2;
     }

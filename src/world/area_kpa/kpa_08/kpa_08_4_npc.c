@@ -20,7 +20,7 @@ NpcData N(NpcData_Magikoopa)[] = {
             }
         },
         .settings = &N(NpcSettings_Magikoopa),
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = MAGINO_DROPS,
         .animations = MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_Magikoopa),

@@ -62,12 +62,12 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_THREAD
         EVT_CALL(DisablePartnerAI, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100 | NPC_FLAG_8000, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
         EVT_CALL(NpcMoveTo, NPC_PARTNER, -55, 5, 30)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
         EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_SELF, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100 | NPC_FLAG_8000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, FALSE)
         EVT_CALL(EnablePartnerAI)
     EVT_END_THREAD
     EVT_CALL(PlayerMoveTo, -20, 10, 25)
@@ -94,7 +94,7 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
     EVT_END_IF
     EVT_CALL(EndSpeech, NPC_SELF, ANIM_YoshiKid_Yellow_Talk, ANIM_YoshiKid_Yellow_Idle, 0)
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Yellow_Run)
         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
         EVT_CALL(NpcMoveTo, NPC_SELF, -150, 15, 0)
@@ -305,7 +305,7 @@ NpcData N(NpcData_SpearGuy)[] = {
             }
         },
         .settings = &N(NpcSettings_SpearGuy_Wander),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = SPEAR_GUY_DROPS,
         .animations = SPEAR_GUY_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -316,7 +316,7 @@ NpcData N(NpcData_SpearGuy)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_SpearGuy_Hitbox),
         .settings = &N(NpcSettings_SpearGuy_Hitbox),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = SPEAR_GUY_ANIMS,
     },
@@ -329,7 +329,7 @@ NpcData N(NpcData_PutridPiranhas)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_PutridPiranha),
         .settings = &N(NpcSettings_PutridPiranha),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
     },
@@ -338,7 +338,7 @@ NpcData N(NpcData_PutridPiranhas)[] = {
         .pos = { 80.0f, 0.0f, 20.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_PutridPiranha),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
     },
@@ -350,7 +350,7 @@ NpcData N(NpcData_YoshiKid) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_YoshiKid),
     .settings = &N(NpcSettings_YoshiKid),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = YOSHI_KID_YELLOW_ANIMS,
     .tattle = MSG_NpcTattle_YellowYoshiKid,

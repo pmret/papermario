@@ -268,7 +268,7 @@ void entity_Tweester_idle(Entity* entity) {
     if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
         if (playerStatus->actionState == ACTION_STATE_USE_TWEESTER) {
             Npc* npc = npc_find_closest_simple(entity->position.x, entity->position.y, entity->position.z, 50.0f);
-            if (npc != NULL && (npc->flags & NPC_FLAG_PARTICLE)) {
+            if (npc != NULL && (npc->flags & NPC_FLAG_PARTNER)) {
                 TweesterTouchingPartner = entity;
             }
         }

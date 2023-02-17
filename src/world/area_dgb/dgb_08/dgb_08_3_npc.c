@@ -222,7 +222,7 @@ NpcData N(NpcData_Clubba_01)[] = {
             }
         },
         .settings = &N(NpcSettings_Clubba_Wander),
-        .flags = ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
@@ -249,7 +249,7 @@ NpcData N(NpcData_Clubba_02)[] = {
             }
         },
         .settings = &N(NpcSettings_Clubba_Wander),
-        .flags = ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
@@ -276,7 +276,7 @@ NpcData N(NpcData_Clubba_03)[] = {
             }
         },
         .settings = &N(NpcSettings_Clubba_Wander),
-        .flags = ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
@@ -302,7 +302,7 @@ NpcData N(NpcData_Sentinel_01) = {
         }
     },
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -324,7 +324,7 @@ NpcData N(NpcData_Sentinel_02) = {
         }
     },
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -412,7 +412,7 @@ NpcData N(NpcData_LastClubba) = {
     },
     .init = &N(EVS_NpcInit_LastClubba),
     .settings = &N(NpcSettings_LastClubba),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = CLUBBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -449,7 +449,7 @@ NpcData N(NpcData_Clubba_Unused) = {
     },
     .init = &N(EVS_NpcInit_Clubba_Unused),
     .settings = &N(NpcSettings_Clubba_Wander),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = CLUBBA_DROPS,
     .animations = CLUBBA_ANIMS,
     .extraAnimations = N(ExtraAnims_Clubba),

@@ -77,8 +77,8 @@ EvtScript N(EVS_MakeNpcsFaceKammy) = {
 
 EvtScript N(EVS_Scene_KammyStrikes) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Goompapa, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Goompapa, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(EnableNpcAI, NPC_Goombario, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_Goombario, ANIM_WorldGoombario_Idle)
@@ -344,8 +344,8 @@ EvtScript N(EVS_Scene_KammyStrikes) = {
     EVT_CALL(BindNpcAI, NPC_Goombario, EVT_PTR(N(EVS_NpcIdle_SwitchedWander_6)))
     EVT_CALL(N(SetWanderTerritory_6), NPC_Goombaria, 3)
     EVT_CALL(BindNpcAI, NPC_Goombaria, EVT_PTR(N(EVS_NpcIdle_SwitchedWander_6)))
-    EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_100, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Goompapa, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Goompapa, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_RETURN
     EVT_END
 };

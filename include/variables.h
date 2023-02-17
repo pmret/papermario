@@ -161,7 +161,7 @@ extern s32 PrevPlayerCamRelativeYaw;
 extern s32 D_800F7B44;
 extern f32 D_8010C938;
 extern f32 D_8010C990;
-extern s32 D_8010C978;
+extern s32 NpcHitQueryColliderID;
 extern Vec3s btl_actorHomePositions[];
 
 extern SaveData gCurrentSaveFile;

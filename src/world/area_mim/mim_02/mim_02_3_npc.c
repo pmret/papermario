@@ -22,7 +22,7 @@ EvtScript N(EVS_NpcInteract_Oaklie) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0007)
-    EVT_CALL(SetNpcFlagBits, NPC_Oaklie, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Oaklie, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_WAIT(5)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Jump)
@@ -162,7 +162,7 @@ NpcData N(NpcData_Oaklie) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Oaklie),
     .settings = &N(NpcSettings_Oaklie),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = OAKLIE_ANIMS,
     .tattle = MSG_NpcTattle_Oaklie,

@@ -545,7 +545,7 @@ API_CALLABLE(N(TayceT_MakeItemList)) {
 }
 
 EvtScript N(EVS_Scene_TayceTCooking) = {
-    EVT_CALL(SetNpcFlagBits, NPC_TayceT, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_TayceT, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_TayceT, ANIM_TayceT_Walk)
     EVT_CALL(NpcMoveTo, NPC_TayceT, -186, -381, 20)
     EVT_CALL(NpcMoveTo, NPC_TayceT, -220, -425, 30)
@@ -560,7 +560,7 @@ EvtScript N(EVS_Scene_TayceTCooking) = {
     EVT_CALL(NpcMoveTo, NPC_TayceT, -186, -381, 20)
     EVT_CALL(NpcMoveTo, NPC_TayceT, -236, -318, 20)
     EVT_CALL(SetNpcAnimation, NPC_TayceT, ANIM_TayceT_Idle)
-    EVT_CALL(SetNpcFlagBits, NPC_TayceT, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_TayceT, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_RETURN
     EVT_END
 };

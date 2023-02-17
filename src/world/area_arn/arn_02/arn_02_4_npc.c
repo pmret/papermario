@@ -20,7 +20,7 @@ NpcData N(NpcData_HyperCleft_01) = {
         }
     },
     .settings = &N(NpcSettings_HyperCleft),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = HYPER_CLEFT_DROPS,
     .animations = HYPER_CLEFT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -43,7 +43,7 @@ NpcData N(NpcData_HyperCleft_02) = {
         }
     },
     .settings = &N(NpcSettings_HyperCleft),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = HYPER_CLEFT_DROPS,
     .animations = HYPER_CLEFT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -66,7 +66,7 @@ NpcData N(NpcData_HyperGoomba) = {
         }
     },
     .settings = &N(NpcSettings_HyperGoomba),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = HYPER_GOOMBA_DROPS,
     .animations = HYPER_GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

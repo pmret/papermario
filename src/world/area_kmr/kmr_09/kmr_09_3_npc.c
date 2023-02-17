@@ -21,7 +21,7 @@ NpcData N(NpcData_Goomba_01) = {
         }
     },
     .settings = &N(NpcSettings_Goomba_Wander),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -43,7 +43,7 @@ NpcData N(NpcData_Goomba_02) = {
         }
     },
     .settings = &N(NpcSettings_Goomba_Wander),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -109,7 +109,7 @@ EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
     EVT_CALL(NpcJump0, NPC_SELF, -35, 0, 25, 23)
     EVT_CALL(func_802CFD30, NPC_SELF, FOLD_TYPE_NONE, 0, 0, 0, 0)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_20, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_NO_SHADOW_RAYCAST, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
@@ -145,7 +145,7 @@ NpcData N(NpcData_Goomba_Ambush) = {
     },
     .init = &N(EVS_NpcInit_Goomba_Ambush),
     .settings = &N(NpcSettings_Goomba_Wander),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -167,7 +167,7 @@ NpcData N(NpcData_Paragoomba) = {
         }
     },
     .settings = &N(NpcSettings_Paragoomba_Wander),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = PARAGOOMBA_DROPS,
     .animations = PARAGOOMBA_ANIMS,
 };

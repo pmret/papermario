@@ -73,11 +73,8 @@ dlabel D_8010C970
 dlabel D_8010C974
 .space 4
 
-dlabel D_8010C978
-.space 2
-
-dlabel D_8010C97A
-.space 2
+dlabel NpcHitQueryColliderID
+.space 4
 
 dlabel JumpedOnSwitchZ
 .space 4

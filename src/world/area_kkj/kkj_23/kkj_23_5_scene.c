@@ -190,7 +190,7 @@ EvtScript N(EVS_Scene_KammyUnmasksPeach) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetMusicTrack, 0, SONG_KAMMY_KOOPA_THEME, 0, 8)
     EVT_CALL(SetNpcVar, NPC_Koopatrol_01, 1, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_Koopatrol_01, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Koopatrol_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcPos, NPC_Kammy, -50, 0, -50)
     EVT_EXEC(N(EVS_OpenAndCloseTowerDoors))
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim02)

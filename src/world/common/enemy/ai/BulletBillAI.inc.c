@@ -71,7 +71,7 @@ API_CALLABLE(N(BulletBillAI_Main)) {
             npc->rotation.y = 0.0f;
             npc->duration = 0;
             npc->flags |= NPC_FLAG_2;
-            npc->flags &= ~NPC_FLAG_LOCK_ANIMS;
+            npc->flags &= ~NPC_FLAG_DONT_UPDATE_SHADOW_Y;
             disable_npc_shadow(npc);
             enemy->VAR_PROJECTILE_HITBOX_STATE = PROJECTILE_HITBOX_STATE_NONE;
             script->AI_TEMP_STATE = AI_STATE_BULLET_READY;
@@ -97,7 +97,7 @@ API_CALLABLE(N(BulletBillAI_Main)) {
             }
             npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_CHASE];
             npc->duration = 300;
-            npc->flags |= (NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_LOCK_ANIMS);
+            npc->flags |= (NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_DONT_UPDATE_SHADOW_Y);
             enable_npc_shadow(npc);
             script->AI_TEMP_STATE = AI_STATE_BULLET_FIRED;
             // fallthrough

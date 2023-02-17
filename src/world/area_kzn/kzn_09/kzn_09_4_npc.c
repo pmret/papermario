@@ -36,8 +36,8 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
         EVT_CALL(InterruptUsePartner)
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(3.0), 0, 400, EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
     EVT_CALL(SetSelfVar, 1, 1)
     EVT_THREAD
@@ -58,7 +58,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(2.0))
         EVT_ADD(LVar0, 20)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 0)
         EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
         EVT_CALL(EnablePartnerAI)
@@ -152,7 +152,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     EVT_CALL(NpcJump0, NPC_SELF, LVar3, 700, LVar5, 5)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_161, SOUND_SPACE_MODE_0)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 1, 0)
     EVT_WAIT(5)
@@ -232,7 +232,7 @@ NpcData N(NpcData_PassiveNPCs)[] = {
         .yaw = 90,
         .init = &N(EVS_Kolorado_Init),
         .settings = &N(NpcSettings_Kolorado),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -243,7 +243,7 @@ NpcData N(NpcData_PassiveNPCs)[] = {
         .yaw = 90,
         .init = &N(EVS_Dummy_Init),
         .settings = &N(NpcSettings_Zipline),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -267,7 +267,7 @@ NpcData N(NpcData_SpikeTop) = {
         }
     },
     .settings = &N(NpcSettings_SpikeTop),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = SPIKE_TOP_DROPS,
     .animations = SPIKE_TOP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -291,7 +291,7 @@ NpcData N(NpcData_PutridPiranha)[] = {
             }
         },
         .settings = &N(NpcSettings_PutridPiranha),
-        .flags = ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = PUTRID_PIRANHA_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

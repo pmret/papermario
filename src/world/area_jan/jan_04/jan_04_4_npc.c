@@ -14,7 +14,7 @@ EvtScript N(EVS_ShakeTree_Sushie) = {
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(AF_JAN_08, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Sushie, NPC_FLAG_8000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Sushie, NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
     EVT_IF_EQ(GF_JAN04_SushieTreeHitCounterB, FALSE)
         EVT_IF_EQ(GF_JAN04_SushieTreeHitCounterA, FALSE)
             EVT_CALL(SetNpcJumpscale, NPC_Sushie, EVT_FLOAT(1.0))
@@ -51,7 +51,7 @@ EvtScript N(EVS_ShakeTree_Sushie) = {
         EVT_CALL(SetNpcVar, NPC_Sushie, 0, 10)
         EVT_UNBIND
     EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, NPC_Sushie, NPC_FLAG_8000, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Sushie, NPC_FLAG_IGNORE_ENTITY_COLLISION, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -257,7 +257,7 @@ NpcData N(NpcData_Characters)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Sushie),
         .settings = &N(NpcSettings_Sushie),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = SUSHIE_ANIMS,
     },

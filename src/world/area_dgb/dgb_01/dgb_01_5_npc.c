@@ -261,7 +261,7 @@ NpcData N(NpcData_Sentinel_01) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_01),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -284,7 +284,7 @@ NpcData N(NpcData_Sentinel_02) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_02),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -307,7 +307,7 @@ NpcData N(NpcData_Sentinel_03) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_03),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -330,7 +330,7 @@ NpcData N(NpcData_Sentinel_04) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_04),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };

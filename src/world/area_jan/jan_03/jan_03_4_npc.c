@@ -674,7 +674,7 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
                         EVT_GIVE_KEY_REWARD(ITEM_MAGICAL_SEED4)
                         EVT_SET(GF_JAN03_Gift_MagicalSeed4, TRUE)
                         EVT_WAIT(20)
-                        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+                        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_001B)
                         EVT_WAIT(10)
                         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_001C)

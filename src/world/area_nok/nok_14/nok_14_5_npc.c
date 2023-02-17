@@ -70,7 +70,7 @@ NpcData N(NpcData_KoopaTroopa_01) = {
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_01),
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_2000,
     .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
 };
@@ -92,7 +92,7 @@ NpcData N(NpcData_ParaTroopa) = {
         }
     },
     .settings = &N(NpcSettings_ParaTroopa),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = PARATROOPA_DROPS,
     .animations = PARATROOPA_ANIMS,
 };
@@ -114,7 +114,7 @@ NpcData N(NpcData_SpikedGoomba) = {
         }
     },
     .settings = &N(NpcSettings_SpikedGoomba_Wander),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
     .drops = SPIKED_GOOMBA_DROPS,
     .animations = SPIKED_GOOMBA_ANIMS,
 };
@@ -125,7 +125,7 @@ NpcData N(NpcData_KoopaTroopa_02) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_KoopaTroopa_02),
     .settings = &N(NpcSettings_KoopaTroopa_Stationary),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_4000,
     .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
 };

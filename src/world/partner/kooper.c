@@ -2,8 +2,6 @@
 #include "../src/world/partners.h"
 #include "sprite/npc/WorldKooper.h"
 
-extern s16 D_8010C97A;
-
 s32 entity_interacts_with_current_partner(s32);
 s32 test_item_entity_position(f32, f32, f32, f32);
 s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
@@ -26,20 +24,20 @@ BSS s32 D_802BEC7C;
 s32 D_802BEB40_31CB60 = 0;
 
 s32 func_802BD100_31B120(Npc* npc) {
-    if (D_8010C978 < 0) {
+    if (NpcHitQueryColliderID < 0) {
         return 0;
     }
 
-    if (!(D_8010C978 & COLLISION_WITH_ENTITY_BIT)) {
+    if (!(NpcHitQueryColliderID & COLLISION_WITH_ENTITY_BIT)) {
         return 0;
     }
 
-    return entity_interacts_with_current_partner(D_8010C978 & ~COLLISION_WITH_ENTITY_BIT);
+    return entity_interacts_with_current_partner(NpcHitQueryColliderID & ~COLLISION_WITH_ENTITY_BIT);
 }
 
 void func_802BD144_31B164(Npc* kooper) {
-    if (D_8010C978 >= 0 && D_8010C978 & COLLISION_WITH_ENTITY_BIT) {
-        entity_interacts_with_current_partner(D_8010C978 & ~COLLISION_WITH_ENTITY_BIT);
+    if (NpcHitQueryColliderID >= 0 && NpcHitQueryColliderID & COLLISION_WITH_ENTITY_BIT) {
+        entity_interacts_with_current_partner(NpcHitQueryColliderID & ~COLLISION_WITH_ENTITY_BIT);
     }
 }
 
@@ -114,7 +112,7 @@ ApiStatus KooperUpdate(Evt* script, s32 isInitialCall) {
             KooperTweesterPhysicsPtr->angularVelocity = 6.0f;
             KooperTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             KooperTweesterPhysicsPtr->countdown = 120;
-            kooper->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            kooper->flags |= NPC_FLAG_40000 | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             kooper->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(KooperTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -224,14 +222,14 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
             case 20:
                 if (playerStatus->inputEnabledCounter == 0) {
                     if (playerStatus->timeInAir == 0) {
-                        if (kooper->flags & NPC_FLAG_1000) {
+                        if (kooper->flags & NPC_FLAG_FALLING) {
                             disable_player_input();
                             script->functionTemp[2] = playerStatus->inputEnabledCounter;
                             D_802BEC64 = 1;
                             D_802BEB40_31CB60 = 0;
                             D_802BEC6C = 0;
                             kooper->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING | NPC_FLAG_8);
-                            kooper->flags |= (NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION);
+                            kooper->flags |= (NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION);
                             partnerActionStatus->actingPartner = PARTNER_KOOPER;
                             partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_1;
                             D_802BEC58 = func_800EF4E0();
@@ -326,7 +324,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                     temp_f20_3 = sp2C;
 
                     if ((npc_raycast_up(0x10000, &sp20, &sp24, &sp28, &sp2C) != 0) && (sp2C < temp_f20_3)) {
-                        collisionStatus->currentCeiling = D_8010C97A;
+                        collisionStatus->currentCeiling = NpcHitQueryColliderID;
                         playerStatus->position.y = sp24 - playerStatus->colliderHeight;
                         func_802BD144_31B164(kooper);
                     }
@@ -411,7 +409,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 
                         npc_do_other_npc_collision(kooper);
 
-                        if (!(kooper->flags & NPC_FLAG_SIMPLIFIED_PHYSICS)) {
+                        if (!(kooper->flags & NPC_FLAG_COLLIDING_WITH_NPC)) {
                             if (func_802BD17C_31B19C(kooper) != 0) {
                                 sfx_play_sound_at_npc(SOUND_286, SOUND_SPACE_MODE_0, NPC_PARTNER);
                                 temp_f20_3 = sin_deg(kooper->yaw);
@@ -503,7 +501,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
             }
 
         if (script->functionTemp[0] == 7) {
-            kooper->flags |= NPC_FLAG_100;
+            kooper->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
             //TODO: make if statement less bad
             if (((u8)playerStatus->actionState - 0x15) < 2U) {
                 script->functionTemp[0] = 0;
@@ -572,7 +570,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
             }
 
             D_802BEB40_31CB60 = 0;
-            kooper->flags |= NPC_FLAG_100;
+            kooper->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
             kooper->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_IGNORE_WORLD_COLLISION);
             partnerActionStatus->actingPartner = PARTNER_NONE;
             partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;

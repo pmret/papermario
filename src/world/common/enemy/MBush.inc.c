@@ -41,7 +41,7 @@ EvtScript N(EVS_NpcAI_MBush) = {
         EVT_WAIT(6)
         EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_END_THREAD
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 25)
@@ -75,7 +75,7 @@ EvtScript N(EVS_NpcDefeat_MBush) = {
             EVT_CALL(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 8)
             EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim00)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_MBush)))
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
             EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
@@ -96,7 +96,7 @@ NpcSettings N(NpcSettings_MBush) = {
 
 #define MBUSH_NPC_DATA \
     .settings = &N(NpcSettings_MBush), \
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000, \
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000, \
     .drops = MBUSH_DROPS, \
     .animations = MBUSH_ANIMS, \
     .tattle = MSG_NpcTattle_MBush, \

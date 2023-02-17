@@ -56,8 +56,8 @@ EvtScript N(EVS_Scene_ImposterAppears) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_2, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kooper_01A, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kooper_02A, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kooper_01A, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kooper_02A, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_PARTNER, FALSE)
     EVT_CALL(GetNpcPos, NPC_PARTNER, LVar2, LVar3, LVar4)
     EVT_CALL(GetPlayerPos, LVar5, LVar6, LVar7)
@@ -184,8 +184,8 @@ EvtScript N(EVS_Scene_ImposterAppears) = {
     EVT_CALL(SpeakToPlayer, NPC_Kooper_02A, ANIM_WorldKooper_TalkHappy, ANIM_WorldKooper_Idle, 0, MSG_CH7_0128)
     EVT_CALL(PlayerFaceNpc, NPC_Kooper_01A, FALSE)
     EVT_CALL(SpeakToPlayer, NPC_Kooper_01A, ANIM_WorldKooper_TalkHappy, ANIM_WorldKooper_Idle, 0, MSG_CH7_0129)
-    EVT_CALL(SetNpcFlagBits, NPC_Kooper_01A, NPC_FLAG_100, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kooper_02A, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kooper_01A, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kooper_02A, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, TRUE)
     EVT_UNBIND
@@ -266,8 +266,8 @@ EvtScript N(EVS_Scene_HitTrueKooper) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.5))
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SpeakToPlayer, NPC_Kooper_02A, ANIM_WorldKooper_TalkHappy, ANIM_WorldKooper_Idle, 0, MSG_CH7_012F)
-    EVT_CALL(SetNpcFlagBits, NPC_Kooper_01A, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kooper_02A, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kooper_01A, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kooper_02A, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(GetNpcPos, NPC_Kooper_01A, LVar0, LVar1, LVar2)
     EVT_CALL(GetNpcPos, NPC_Kooper_02A, LVar3, LVar4, LVar5)
     EVT_CALL(GetAngleBetweenNPCs, NPC_Kooper_01A, NPC_Kooper_02A, LVar9)
@@ -492,8 +492,8 @@ EvtScript N(EVS_Scene_HitTrueKooper) = {
         EVT_CALL(PlayerFaceNpc, NPC_Kooper_01A, FALSE)
         EVT_CALL(SpeakToPlayer, NPC_Kooper_01A, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH7_0129)
     EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, NPC_Kooper_01A, NPC_FLAG_100, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kooper_02A, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kooper_01A, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kooper_02A, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, TRUE)
     EVT_RETURN
@@ -539,7 +539,7 @@ EvtScript N(EVS_Scene_HitFakeKooper) = {
         EVT_CALL(AddVectorPolar, LVar1, LVar3, EVT_FLOAT(40.0), LVar0)
         EVT_CALL(SetNpcSpeed, NPC_Kooper_01A, EVT_FLOAT(3.0))
         EVT_CALL(SetNpcAnimation, NPC_Kooper_01A, ANIM_WorldKooper_Run)
-        EVT_CALL(SetNpcFlagBits, NPC_Kooper_01A, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Kooper_01A, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(NpcMoveTo, NPC_Kooper_01A, LVar1, LVar3, 0)
         EVT_CALL(SetNpcAnimation, NPC_Kooper_01A, ANIM_WorldKooper_Idle)
         EVT_SET(MF_KooperDoneMoving, TRUE)

@@ -129,7 +129,7 @@ NpcData N(NpcData_Twink) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Twink),
     .settings = &N(NpcSettings_Twink),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = TWINK_ANIMS,
 };
@@ -140,7 +140,7 @@ NpcData N(NpcData_FlyingMagikoopa) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_FlyingMagikoopa),
     .settings = &N(NpcSettings_FlyingMagikoopa),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = FLYING_MAGIKOOPA_ANIMS,
 };

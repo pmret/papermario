@@ -149,7 +149,7 @@ EvtScript N(EVS_NpcIdle_AntiGuy) = {
                 EVT_END_IF
             EVT_GOTO(0)
         EVT_ELSE
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Anim02)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             EVT_IF_LT(LVar2, -60)
@@ -169,7 +169,7 @@ EvtScript N(EVS_NpcIdle_AntiGuy) = {
             EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, -100, 0)
             EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Anim15)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_LABEL(9)
                 EVT_WAIT(1)
                 EVT_GOTO(9)
@@ -214,7 +214,7 @@ NpcData N(NpcData_AntiGuy) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_AntiGuy),
     .settings = &N(NpcSettings_AntiGuy),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_ShyGuy_Black_Anim01,
@@ -254,7 +254,7 @@ NpcData N(NpcData_ShyGuy) = {
         }
     },
     .settings = &N(NpcSettings_ShyGuy_Wander),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = SHY_GUY_DROPS,
     .animations = YELLOW_SHY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -277,7 +277,7 @@ NpcData N(NpcData_GrooveGuy) = {
         }
     },
     .settings = &N(NpcSettings_GrooveGuy),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = GROOVE_GUY_DROPS_B,
     .animations = GROOVE_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

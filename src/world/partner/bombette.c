@@ -47,13 +47,13 @@ void func_802BD100_317E50(Npc* npc) {
         }
 
         if (!(angle >= 360.0f)) {
-            if (D_8010C978 >= 0 && (D_8010C978 & COLLISION_WITH_ENTITY_BIT) != 0) {
-                entity_interacts_with_current_partner(D_8010C978 & ~COLLISION_WITH_ENTITY_BIT);
+            if (NpcHitQueryColliderID >= 0 && (NpcHitQueryColliderID & COLLISION_WITH_ENTITY_BIT) != 0) {
+                entity_interacts_with_current_partner(NpcHitQueryColliderID & ~COLLISION_WITH_ENTITY_BIT);
             }
         }
     } else {
-        if (D_8010C978 >= 0 && (D_8010C978 & COLLISION_WITH_ENTITY_BIT) != 0) {
-            entity_interacts_with_current_partner(D_8010C978 & ~COLLISION_WITH_ENTITY_BIT);
+        if (NpcHitQueryColliderID >= 0 && (NpcHitQueryColliderID & COLLISION_WITH_ENTITY_BIT) != 0) {
+            entity_interacts_with_current_partner(NpcHitQueryColliderID & ~COLLISION_WITH_ENTITY_BIT);
         }
     }
 }
@@ -116,7 +116,7 @@ ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
             BombetteTweesterPhysicsPtr->angularVelocity = 6.0f;
             BombetteTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             BombetteTweesterPhysicsPtr->countdown = 120;
-            bombette->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            bombette->flags |= NPC_FLAG_40000 | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             bombette->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(BombetteTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -226,7 +226,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
 
     switch (evt->functionTemp[0]) {
         case 20:
-            if ((playerStatus->inputEnabledCounter != 0) || (playerStatus->flags & PS_FLAG_JUMPING) || !(npc->flags & NPC_FLAG_1000)) {
+            if ((playerStatus->inputEnabledCounter != 0) || (playerStatus->flags & PS_FLAG_JUMPING) || !(npc->flags & NPC_FLAG_FALLING)) {
                 return ApiStatus_DONE2;
             }
             disable_player_input();
@@ -304,7 +304,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             npc->jumpVelocity = 0.0f;
             D_802BE938 = 0;
             npc->flags |= NPC_FLAG_GRAVITY;
-            npc->flags &= ~NPC_FLAG_100;
+            npc->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
             npc->moveSpeed = 1.0f;
             evt->functionTemp[0] = 2;
             evt->functionTemp[1] = 50;
@@ -314,7 +314,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 break;
             }
             if (evt->functionTemp[1] < 45) {
-                if (!(npc->flags & NPC_FLAG_NO_PROJECT_SHADOW) && (D_802BE938 == 0)) {
+                if (!(npc->flags & NPC_FLAG_COLLDING_WITH_WORLD) && (D_802BE938 == 0)) {
                     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
                     func_8003D660(npc, 0);
                 } else {
@@ -325,7 +325,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             y = npc->pos.y + 14.0f;
             z = npc->pos.z;
             hitDepth = 16.0f;
-            if ((npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &hitDepth, npc->yaw, npc->collisionRadius) != 0) && (((u32) ((get_collider_flags(D_8010C978) & 0xFF) - 2)) < 2U)) {
+            if ((npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &hitDepth, npc->yaw, npc->collisionRadius) != 0) && (((u32) ((get_collider_flags(NpcHitQueryColliderID) & 0xFF) - 2)) < 2U)) {
                 if (playerStatus->actionState == ACTION_STATE_IDLE) {
                     suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
                 }
@@ -353,7 +353,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                     D_802BE92C = 0;
                 }
                 npc_do_other_npc_collision(npc);
-                if (npc->flags & NPC_FLAG_SIMPLIFIED_PHYSICS) {
+                if (npc->flags & NPC_FLAG_COLLIDING_WITH_NPC) {
                     if (D_802BE92C != 0) {
                         D_802BE92C = 0;
                         enable_player_input();

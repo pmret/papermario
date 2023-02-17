@@ -261,7 +261,7 @@ EvtScript N(EVS_FlyDownToGate) = {
 
 EvtScript N(EVS_HaveBoosOpenGate) = {
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_GateBoo_02, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_GateBoo_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_SET(LVar0, NPC_GateBoo_02)
         EVT_SET(LVar1, -66)
         EVT_SET(LVar2, -66)
@@ -270,7 +270,7 @@ EvtScript N(EVS_HaveBoosOpenGate) = {
         EVT_SET(LVar5, 30)
         EVT_CALL(N(MoveNpcAlongArc))
     EVT_END_THREAD
-    EVT_CALL(SetNpcFlagBits, NPC_GateBoo_01, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_GateBoo_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_SET(LVar0, NPC_GateBoo_01)
     EVT_SET(LVar1, -135)
     EVT_SET(LVar2, 59)
@@ -284,7 +284,7 @@ EvtScript N(EVS_HaveBoosOpenGate) = {
 
 EvtScript N(EVS_HaveBoosCloseGate) = {
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_GateBoo_02, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_GateBoo_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_SET(LVar0, NPC_GateBoo_02)
         EVT_SET(LVar1, -66)
         EVT_SET(LVar2, -66)
@@ -293,7 +293,7 @@ EvtScript N(EVS_HaveBoosCloseGate) = {
         EVT_SET(LVar5, 30)
         EVT_CALL(N(MoveNpcAlongArc))
     EVT_END_THREAD
-    EVT_CALL(SetNpcFlagBits, NPC_GateBoo_01, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_GateBoo_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_SET(LVar0, NPC_GateBoo_01)
     EVT_SET(LVar1, -135)
     EVT_SET(LVar2, 59)

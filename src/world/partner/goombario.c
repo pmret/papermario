@@ -137,7 +137,7 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
             GoombarioTweesterPhysicsPtr->angularVelocity = 6.0f;
             GoombarioTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             GoombarioTweesterPhysicsPtr->countdown = 120;
-            npc->flags |= NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100 | NPC_FLAG_40000;
+            npc->flags |= NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_40000;
             npc->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(GoombarioTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -213,7 +213,7 @@ s32 world_goombario_can_pause(Npc* goombario) {
         return FALSE;
     }
 
-    if ((goombario->flags & (NPC_FLAG_1000 | NPC_FLAG_JUMPING)) != NPC_FLAG_1000) {
+    if ((goombario->flags & (NPC_FLAG_FALLING | NPC_FLAG_JUMPING)) != NPC_FLAG_FALLING) {
         return new_var = 0;
         do { } while (new_var); // why though
     }
@@ -247,7 +247,7 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 40:
-            if (!(goombario->flags & NPC_FLAG_1000) || playerStatus->inputEnabledCounter != 0) {
+            if (!(goombario->flags & NPC_FLAG_FALLING) || playerStatus->inputEnabledCounter != 0) {
                 script->varTable[0] = -1;
                 return ApiStatus_DONE2;
             }

@@ -56,7 +56,7 @@ EvtScript N(EVS_GetPartnerInUseAnims) = {
 EvtScript N(EVS_CrushPlayer) = {
     EVT_THREAD
         EVT_CALL(DisablePartnerAI, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
         EVT_EXEC_WAIT(N(EVS_GetPartnerInUseAnims))
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, LVarA)
@@ -64,7 +64,7 @@ EvtScript N(EVS_CrushPlayer) = {
         EVT_EXEC_WAIT(N(EVS_GetPartnerInUseAnims))
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, LVarB)
         EVT_WAIT(15)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
     EVT_END_THREAD
     EVT_CALL(DisablePlayerPhysics, TRUE)

@@ -26,7 +26,7 @@ NpcData N(NpcData_Clubba_Wander)[] = {
             }
         },
         .settings = &N(NpcSettings_Clubba_Wander),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
@@ -64,7 +64,7 @@ NpcData N(NpcData_Clubba_Napping)[] = {
         },
         .init = &N(EVS_NpcInit_Clubba_Napping),
         .settings = &N(NpcSettings_Clubba_Napping),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = CLUBBA_DROPS,
         .animations = CLUBBA_ANIMS,
         .extraAnimations = N(ExtraAnims_Clubba),
@@ -90,7 +90,7 @@ NpcData N(NpcData_Sentinel) = {
         }
     },
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };

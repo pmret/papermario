@@ -43,13 +43,13 @@ EvtScript N(EVS_80246108) = {
         EVT_CALL(DisablePlayerPhysics, TRUE)
         EVT_CALL(DisablePartnerAI, 0)
         EVT_THREAD
-            EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_CALL(SetNpcJumpscale, NPC_Conductor, EVT_FLOAT(1.0))
             EVT_CALL(GetNpcPos, NPC_Conductor, LVar0, LVar1, LVar2)
             EVT_LOOP(2)
                 EVT_CALL(NpcJump1, NPC_Conductor, LVar0, LVar1, LVar2, 15)
             EVT_END_LOOP
-            EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_100, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_END_THREAD
         EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0015)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o939, COLLIDER_FLAGS_UPPER_MASK)

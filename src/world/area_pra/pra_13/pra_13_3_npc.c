@@ -100,12 +100,12 @@ EvtScript N(EVS_Scene_ImpostersCaught) = {
                 EVT_CALL(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
                 EVT_CALL(SetNpcPos, NPC_Duplighost_01, LVar0, LVar1, LVar2)
                 EVT_CALL(PlaySoundAtNpc, NPC_Duplighost_01, SOUND_SMOKE_BURST, 0)
-                EVT_CALL(SetNpcFlagBits, NPC_Duplighost_01, NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_Duplighost_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_SET(LVar4, 2)
                 EVT_CALL(SetNpcYaw, NPC_Duplighost_01, 90)
                 EVT_EXEC_WAIT(N(EVS_ImposterSpin))
                 EVT_CALL(SetNpcAnimation, NPC_Duplighost_01, ANIM_Duplighost_Anim04)
-                EVT_CALL(SetNpcFlagBits, NPC_Duplighost_01, NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_Duplighost_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_CALL(NpcMoveTo, NPC_Duplighost_01, 430, -70, 15)
             EVT_END_THREAD
             EVT_THREAD
@@ -114,13 +114,13 @@ EvtScript N(EVS_Scene_ImpostersCaught) = {
                 EVT_CALL(SetNpcPos, NPC_FakeBombette, 389, 0, -61)
                 EVT_CALL(SetNpcPos, NPC_Duplighost_02, LVar0, LVar1, LVar2)
                 EVT_CALL(PlaySoundAtNpc, NPC_Duplighost_02, SOUND_SMOKE_BURST, 0)
-                EVT_CALL(SetNpcFlagBits, NPC_FakeBombette, NPC_FLAG_100 | NPC_FLAG_1000000, TRUE)
-                EVT_CALL(SetNpcFlagBits, NPC_Duplighost_02, NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_FakeBombette, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_HAS_NO_SPRITE, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_Duplighost_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_SET(LVar4, 3)
                 EVT_CALL(SetNpcYaw, NPC_Duplighost_02, 90)
                 EVT_EXEC_WAIT(N(EVS_ImposterSpin))
                 EVT_CALL(SetNpcAnimation, NPC_Duplighost_02, ANIM_Duplighost_Anim04)
-                EVT_CALL(SetNpcFlagBits, NPC_Duplighost_02, NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_Duplighost_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_CALL(NpcMoveTo, NPC_Duplighost_02, 420, -70, 15)
             EVT_END_THREAD
             EVT_WAIT(35)
@@ -225,7 +225,7 @@ NpcData N(NpcData_FakeMario) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_FakeMario),
     .settings = &N(NpcSettings_Player),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = BOMBETTE_ANIMS,
 };
@@ -237,7 +237,7 @@ NpcData N(NpcData_Imposters)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_FakeBombette),
         .settings = &N(NpcSettings_Player),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },

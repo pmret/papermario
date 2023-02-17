@@ -59,7 +59,7 @@ EvtScript N(EVS_NpcInteract_YoshiKid) = {
     EVT_END_IF
     EVT_CALL(EndSpeech, NPC_SELF, ANIM_YoshiKid_Blue_Talk, ANIM_YoshiKid_Blue_Idle, 0)
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Blue_Run)
         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
         EVT_CALL(NpcMoveTo, NPC_SELF, -240, 10, 0)
@@ -110,7 +110,7 @@ NpcData N(NpcData_YoshiKid) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_YoshiKid),
     .settings = &N(NpcSettings_YoshiKid),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = YOSHI_KID_BLUE_ANIMS,
     .tattle = MSG_NpcTattle_BlueYoshiKid,
@@ -134,7 +134,7 @@ NpcData N(NpcData_JungleFuzzy) = {
     },
     .init = &N(EVS_NpcInit_JungleFuzzy),
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_400000,
     .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
 };

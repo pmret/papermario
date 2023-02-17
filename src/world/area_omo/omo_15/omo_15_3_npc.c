@@ -30,7 +30,7 @@ EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
             EVT_CALL(InterruptUsePartner)
             EVT_WAIT(30)
             EVT_CALL(func_802D2C14, 1)
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_WAIT(45)
             EVT_CALL(func_802D2C14, 0)
         EVT_END_IF
@@ -445,7 +445,7 @@ NpcData N(NpcData_GeneralGuy)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_GeneralGuy),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GeneralGuy_Anim02,
@@ -472,7 +472,7 @@ NpcData N(NpcData_GeneralGuy)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_ShyGuy),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
@@ -482,7 +482,7 @@ NpcData N(NpcData_GeneralGuy)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_ShyGuy),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
@@ -492,7 +492,7 @@ NpcData N(NpcData_GeneralGuy)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_ShyGuy),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
@@ -502,7 +502,7 @@ NpcData N(NpcData_GeneralGuy)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_ShyGuy),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
@@ -512,7 +512,7 @@ NpcData N(NpcData_GeneralGuy)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_ShyGuy),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
@@ -522,7 +522,7 @@ NpcData N(NpcData_GeneralGuy)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_ShyGuy),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
@@ -532,7 +532,7 @@ NpcData N(NpcData_GeneralGuy)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_ShyGuy),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
@@ -542,7 +542,7 @@ NpcData N(NpcData_GeneralGuy)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_ShyGuy),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },
@@ -552,7 +552,7 @@ NpcData N(NpcData_GeneralGuy)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_ShyGuy),
         .settings = &N(NpcSettings_ShyGuy_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_40000,
         .drops = NO_DROPS,
         .animations = RED_SHY_GUY_ANIMS,
     },

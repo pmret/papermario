@@ -126,7 +126,7 @@ EvtScript N(EVS_Sun_DescendFromSky) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(10)
     EVT_KILL_THREAD(LVar9)
-    EVT_CALL(SetNpcFlagBits, NPC_Sun_01, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Sun_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(GetNpcPos, NPC_Sun_01, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_Sun_01, LVar0, 450, LVar2, 30)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -204,7 +204,7 @@ NpcData N(NpcData_Sun)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Sun_01),
         .settings = &N(NpcSettings_Sun),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = SUN_ANIMS,
         .tattle = MSG_NpcTattle_TheSun,
@@ -215,7 +215,7 @@ NpcData N(NpcData_Sun)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Sun_02),
         .settings = &N(NpcSettings_Sun),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_8000,
         .drops = NO_DROPS,
         .animations = SUN_ANIMS,
         .tattle = MSG_NpcTattle_TheSun,

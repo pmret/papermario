@@ -87,7 +87,7 @@ EvtScript N(EVS_NpcInit_Raven) = {
 EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_Idle)
     EVT_CALL(NpcFacePlayer, NPC_SELF, 4)
     EVT_WAIT(5)
@@ -201,7 +201,7 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
 
 EvtScript N(EVS_NpcInit_RaphaelRaven) = {
     EVT_IF_EQ(GB_StoryProgress, STORY_CH5_RAFAEL_LEFT_NEST)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_CALL(SetNpcPos, NPC_SELF, 85, 0, 410)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_RaphaelRaven)))
         EVT_RETURN
@@ -224,7 +224,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_RaphaelRaven),
         .settings = &N(NpcSettings_RaphaelRaven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_GRAVITY | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_RaphaelRaven_Idle,
@@ -252,7 +252,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Raven),
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Raven_Idle,
@@ -280,7 +280,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Raven),
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Raven_Idle,
@@ -308,7 +308,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Raven),
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Raven_Idle,
@@ -336,7 +336,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Raven),
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Raven_Idle,
@@ -364,7 +364,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Raven),
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Raven_Idle,

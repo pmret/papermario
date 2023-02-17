@@ -20,7 +20,7 @@ NpcData N(NpcData_PiranhaPlant)[] = {
             }
         },
         .settings = &N(NpcSettings_PiranhaPlant),
-        .flags = ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,

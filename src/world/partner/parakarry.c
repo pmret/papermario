@@ -71,7 +71,7 @@ ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
             ParakarryTweesterPhysicsPtr->angularVelocity = 6.0f;
             ParakarryTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             ParakarryTweesterPhysicsPtr->countdown = 120;
-            parakarry->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            parakarry->flags |= NPC_FLAG_40000 | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             parakarry->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(ParakarryTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -186,8 +186,8 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         return ApiStatus_DONE2;
                     }
                     D_802BEBC0_31CBE0 = 0x28;
-                    parakarry->flags &= ~NPC_FLAG_4000;
-                    parakarry->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
+                    parakarry->flags &= ~NPC_FLAG_COLLDING_FORWARD_WITH_WORLD;
+                    parakarry->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
                 } else {
                     partnerActionStatus->partnerAction_unk_1 = 0;
                     set_action_state(ACTION_STATE_RIDE);
@@ -197,8 +197,8 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                     parakarry->currentAnim = ANIM_WorldParakarry_CarryLight;
                     partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
                     partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
-                    parakarry->flags &= ~NPC_FLAG_4000;
-                    parakarry->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
+                    parakarry->flags &= ~NPC_FLAG_COLLDING_FORWARD_WITH_WORLD;
+                    parakarry->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
                 }
             } else {
                 return ApiStatus_DONE2;
@@ -376,7 +376,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                         z = playerStatus->position.z;
                         sp2C = playerStatus->colliderHeight * 0.5f;
                         if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &sp2C, parakarry->yaw, parakarry->collisionRadius)) {
-                            s32 surfaceType = get_collider_flags(D_8010C978) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+                            s32 surfaceType = get_collider_flags(NpcHitQueryColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                             if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
                                 playerStatus->hazardType = HAZARD_TYPE_SPIKES;
                                 D_802BEBC0_31CBE0 = 0x15;
@@ -386,7 +386,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                             playerStatus->position.y += (y - playerStatus->position.y) * 0.25f;
                             parakarry->pos.y = playerStatus->position.y + 32.0f;
                         }
-                        if (!(parakarry->flags & NPC_FLAG_4000)) {
+                        if (!(parakarry->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) {
                             gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
                             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
                             gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
@@ -497,7 +497,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                                 gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
                                                 gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
                                                 gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
-                                                if (!(parakarry->flags & NPC_FLAG_4000)) {
+                                                if (!(parakarry->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) {
                                                     parakarry->duration++;
                                                     if (!(parakarry->planarFlyDist < 100.0f)) {
                                                         D_802BEBC4 = 5;

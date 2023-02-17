@@ -288,7 +288,7 @@ NpcSettings N(NpcSettings_Kammy) = {
     .otherAI = &N(EVS_NpcAuxAI_Kammy),
     .ai = &N(EVS_NpcAI_Kammy),
     .aux = &N(EVS_NpcAux_Kammy),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
 };
 
 NpcData N(NpcData_Enemies)[] = {
@@ -310,7 +310,7 @@ NpcData N(NpcData_Enemies)[] = {
         },
         .init = &N(EVS_NpcInit_GoombaBros_01),
         .settings = &N(NpcSettings_GoombaBros_Guard),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GoombaBros_Blue_Idle,
@@ -349,7 +349,7 @@ NpcData N(NpcData_Enemies)[] = {
         },
         .init = &N(EVS_NpcInit_GoombaBros_02),
         .settings = &N(NpcSettings_GoombaBros_Guard),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GoombaBros_Red_Idle,
@@ -388,7 +388,7 @@ NpcData N(NpcData_Enemies)[] = {
         },
         .init = &N(EVS_NpcInit_GoombaKing),
         .settings = &N(NpcSettings_GoombaBros_Guard),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GoombaKing_Idle,

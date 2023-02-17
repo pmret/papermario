@@ -5,8 +5,6 @@
 #include "sprite/npc/WorldSushie.h"
 #include "sprite.h"
 
-extern s16 D_8010C97A;
-
 BSS f32 OriginalPlayerY;
 BSS s32 bss_802BFEE4;
 BSS s32 bss_802BFEE8;
@@ -84,9 +82,9 @@ void func_802BD368_31E0D8(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
     sp20 = 200.0f;
 
     if (npc_raycast_down_around(arg0, &arg1, &arg2, &arg3, &sp20, arg4, arg5) == 0) {
-        collisionStatus->currentFloor = -1;
+        collisionStatus->currentFloor = NO_COLLIDER;
     } else {
-        collisionStatus->currentFloor = D_8010C97A;
+        collisionStatus->currentFloor = NpcHitQueryColliderID;
         OriginalPlayerY = arg2;
     }
 }
@@ -185,8 +183,8 @@ void func_802BD414_31E184(Npc* npc) {
         if (npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z, npc->moveSpeed, sp20, sp3C,
                                                npc->collisionRadius) != 0)
         {
-            collisionStatus->pushingAgainstWall = D_8010C978;
-            if ((get_collider_flags(D_8010C978) & COLLIDER_FLAGS_SURFACE_TYPE_MASK) == SURFACE_TYPE_DOCK_WALL) {
+            collisionStatus->pushingAgainstWall = NpcHitQueryColliderID;
+            if ((get_collider_flags(NpcHitQueryColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK) == SURFACE_TYPE_DOCK_WALL) {
                 bss_802BFEF0++;
             } else {
                 bss_802BFEF0 = 0;
@@ -373,7 +371,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             bss_802BFEEC = 1;
             npc->flags |= NPC_FLAG_8;
             npc->flags &= ~NPC_FLAG_GRAVITY;
-            npc->flags |= NPC_FLAG_100;
+            npc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
             suggest_player_anim_setUnkFlag(ANIM_Mario_8000F);
             disable_player_shadow();
             disable_npc_shadow(npc);
@@ -554,9 +552,9 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                     t = npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z, 10.0f, npc->yaw,
                                                            npc->collisionHeight, npc->collisionRadius);
                     if (t != 0) {
-                        collisionStatus->pushingAgainstWall = npc->currentWall = D_8010C97A;
+                        collisionStatus->pushingAgainstWall = npc->currentWall = NpcHitQueryColliderID;
                     } else {
-                        collisionStatus->pushingAgainstWall = -1;
+                        collisionStatus->pushingAgainstWall = NO_COLLIDER;
                     }
 
                     if (npc->currentWall < 0 || npc->currentWall & COLLISION_WITH_ENTITY_BIT) {
@@ -744,7 +742,7 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
             SushieTweesterPhysicsPtr->angularVelocity = 6.0f;
             SushieTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             SushieTweesterPhysicsPtr->countdown = 120;
-            sushie->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            sushie->flags |= NPC_FLAG_40000 | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             sushie->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(SushieTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -879,7 +877,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             partnerNPC->moveToPos.x = partnerNPC->pos.x;
             partnerNPC->moveToPos.y = partnerNPC->pos.y;
             partnerNPC->moveToPos.z = partnerNPC->pos.z;
-            partnerNPC->flags |= NPC_FLAG_100 | NPC_FLAG_8;
+            partnerNPC->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_8;
             partnerNPC->flags &= ~NPC_FLAG_GRAVITY;
             disable_npc_shadow(partnerNPC);
             disable_player_shadow();

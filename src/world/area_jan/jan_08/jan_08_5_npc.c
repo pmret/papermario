@@ -60,7 +60,7 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
     EVT_END_IF
     EVT_CALL(EndSpeech, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0)
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Red_Run)
         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
         EVT_CALL(NpcMoveTo, NPC_SELF, -418, -60, 0)
@@ -95,7 +95,7 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
 EvtScript N(EVS_NpcInit_YoshiKid) = {
     EVT_IF_EQ(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
         EVT_IF_EQ(GF_JAN08_SavedYoshi, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2 | NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2 | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Red_Cry)
             EVT_CALL(SetNpcYaw, NPC_SELF, 90)
@@ -123,7 +123,7 @@ EvtScript N(EVS_NpcDefeat_MBush_Copy) = {
             EVT_CALL(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 8)
             EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim00)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_MBush)))
         EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
             EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
@@ -157,7 +157,7 @@ NpcData N(NpcData_SpearGuy)[] = {
                 .detectSize = { 150 },
             }
         },
-        .flags = ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         SPEAR_GUY_WANDER_NPC_DATA
     },
     SPEAR_GUY_HITBOX(NPC_SpearGuy_Hitbox)
@@ -205,7 +205,7 @@ NpcData N(NpcData_YoshiKid) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_YoshiKid),
     .settings = &N(NpcSettings_YoshiKid),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = YOSHI_KID_RED_ANIMS,
     .tattle = MSG_NpcTattle_RedYoshiKid,

@@ -100,7 +100,7 @@ static void N(MontyMoleAI_Wander)(Evt* script, MobileAISettings* aiSettings, Ene
     if (npc_raycast_down_sides(0, &dummyNpc.pos.x, &dummyNpc.pos.y, &dummyNpc.pos.z, &hitDepth) && (hitDepth < 5.0f)) {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
-    if (npc->flags & NPC_FLAG_4000) {
+    if (npc->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD) {
         script->AI_TEMP_STATE = AI_STATE_MOLE_INIT;
     }
     if (aiSettings->playerSearchInterval >= 0) {
@@ -114,7 +114,7 @@ static void N(MontyMoleAI_Wander)(Evt* script, MobileAISettings* aiSettings, Ene
         }
         script->functionTemp[1]--;
     }
-    if (!(npc->flags & (NPC_FLAG_8 | NPC_FLAG_1000))) {
+    if (!(npc->flags & (NPC_FLAG_8 | NPC_FLAG_FALLING))) {
         npc->homePos.x = npc->pos.x;
         npc->homePos.z = npc->pos.z;
     }

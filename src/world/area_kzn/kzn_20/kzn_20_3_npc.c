@@ -181,7 +181,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_LABEL(10)
         EVT_SWITCH(MV_SceneState)
             EVT_CASE_EQ(SCENE_STATE_BEGIN)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
                 EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
                 EVT_CALL(SetNpcPos, NPC_SELF, -30, 100, 40)
@@ -306,7 +306,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                 EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
                 EVT_CALL(NpcMoveTo, NPC_SELF, 75, -30, 0)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_END_SWITCH
         EVT_WAIT(1)
         EVT_GOTO(10)
@@ -479,14 +479,14 @@ EvtScript N(EVS_Scene_Misstar) = {
     EVT_WAIT(40)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Panic)
         EVT_CALL(SetNpcSpeed, NPC_Kolorado, EVT_FLOAT(5.0))
         EVT_CALL(NpcMoveTo, NPC_Kolorado, 305, 0, 0)
         EVT_CALL(RemoveNpc, NPC_Kolorado)
     EVT_END_THREAD
     EVT_WAIT(30)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.5))
     EVT_CALL(NpcJump0, NPC_SELF, 145, 195, -10, 5)
     EVT_WAIT(5)
@@ -531,7 +531,7 @@ NpcData N(NpcData_Kolorado) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kolorado),
     .settings = &N(NpcSettings_Kolorado),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,

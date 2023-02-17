@@ -986,8 +986,8 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_EXEC_GET_TID(N(EVS_Quizmo_SetCharacterPositons), LVar1)
     EVT_CALL(ContinueSpeech, -1, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000B)
@@ -1162,7 +1162,7 @@ EvtScript N(EVS_Quizmo_NPC_OtherAI) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_1000000, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_NO_SPRITE, FALSE)
     EVT_CALL(SetNpcSprite, -1, ANIM_ChuckQuizmo_Idle)
     EVT_CALL(N(Quizmo_RenderInit))
     EVT_RETURN
@@ -1209,11 +1209,11 @@ NpcSettings N(NpcSettings_ChuckQuizmo) = {
     .otherAI = &N(EVS_Quizmo_NPC_OtherAI),
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .aux = &N(EVS_Quizmo_NPC_Aux),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .level = 99,
 };
 
-// alternate (unused?) variant of quizmo with AI and ENEMY_FLAG_100 unset
+// alternate (unused?) variant of quizmo with AI and ENEMY_FLAG_IGNORE_WORLD_COLLISION unset
 NpcSettings N(Quizmo_AltNpcSettings) = {
     .defaultAnim = ANIM_ChuckQuizmo_Idle,
     .height = 35,
@@ -1222,7 +1222,7 @@ NpcSettings N(Quizmo_AltNpcSettings) = {
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .ai = &N(EVS_Quizmo_Npc_AI),
     .aux = &N(EVS_Quizmo_NPC_Aux),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .level = 99,
     .actionFlags = 16,
 };
