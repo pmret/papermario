@@ -109,7 +109,7 @@ HudScript* D_802AB184_42C674[] = {
 
 extern s32 actionCmdTableWaterBlock[];
 
-ApiStatus N(init)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(init)) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
@@ -214,7 +214,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(start)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(start)) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;

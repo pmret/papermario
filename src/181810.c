@@ -116,7 +116,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
     ActorPart* part;
     s32 msgID;
     s32 actorID;
-    s32 partIndex;
+    s32 partID;
     s32 anim;
 
     f32 headX, headY, headZ;
@@ -126,7 +126,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         msgID = evt_get_variable(script, *args++);
         actorID = evt_get_variable(script, *args++);
-        partIndex = evt_get_variable(script, *args++);
+        partID = evt_get_variable(script, *args++);
         gSpeakingActorTalkAnim = evt_get_variable(script, *args++);
         gSpeakingActorIdleAnim = evt_get_variable(script, *args++);
         msgID2 = msgID;
@@ -136,7 +136,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         }
 
         actor = get_actor(actorID);
-        part = get_actor_part(actor, partIndex);
+        part = get_actor_part(actor, partID);
         gSpeakingActor = actor;
         gSpeakingActorPart = part;
 
@@ -212,7 +212,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         s32 actor = evt_get_variable(script, *args++);
-        s32 partIndex = evt_get_variable(script, *args++);
+        s32 partID = evt_get_variable(script, *args++);
         ActorPart* actorPart;
 
         gSpeakingActorTalkAnim = evt_get_variable(script, *args++);
@@ -222,7 +222,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
             actor = script->owner1.actorID;
         }
         actor = (s32) get_actor(actor);
-        actorPart = get_actor_part((Actor*)actor, partIndex);
+        actorPart = get_actor_part((Actor*)actor, partID);
         gSpeakingActor = (Actor*) actor;
         gSpeakingActorPart = actorPart;
         close_message(gSpeakingActorPrintCtx);
@@ -405,7 +405,7 @@ ApiStatus PlaySoundAtActor(Evt* script, s32 isInitialCall) {
 ApiStatus PlaySoundAtPart(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 partIndex = evt_get_variable(script, *args++);
+    s32 partID = evt_get_variable(script, *args++);
     Bytecode soundID = *args++;
     ActorPart* part;
 
@@ -413,7 +413,7 @@ ApiStatus PlaySoundAtPart(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    part = get_actor_part(get_actor(actorID), partIndex);
+    part = get_actor_part(get_actor(actorID), partID);
     sfx_play_sound_at_position(soundID, SOUND_SPACE_MODE_0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
 
     return ApiStatus_DONE2;

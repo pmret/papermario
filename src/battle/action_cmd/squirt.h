@@ -3,8 +3,8 @@
 
 #include "common_structs.h"
 
-ApiStatus action_command_squirt_init(Evt* script, s32 isInitialCall);
-ApiStatus action_command_squirt_start(Evt* script, s32 isInitialCall);
+API_CALLABLE(action_command_squirt_init);
+API_CALLABLE(action_command_squirt_start);
 void action_command_squirt_update(void);
 void action_command_squirt_draw(void);
 void action_command_squirt_free(void);

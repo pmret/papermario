@@ -261,6 +261,6 @@ NpcData N(NpcData_JrTroopa) = {
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_Fuzzy_01), BTL_MIM_FORMATION_02, BTL_MIM_STAGE_00),
     NPC_GROUP(N(NpcData_Fuzzy_02), BTL_MIM_FORMATION_06, BTL_MIM_STAGE_00),
-    NPC_GROUP(N(NpcData_JrTroopa), BTL_KMR_PART_3_FORMATION_04),
+    NPC_GROUP(N(NpcData_JrTroopa), BTL_KMR_3_FORMATION_04),
     {}
 };

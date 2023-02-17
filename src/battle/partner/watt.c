@@ -39,7 +39,7 @@ static s32 sWattEffectData_currentEffectIndex;
 static EffectInstance* sWattEffectData_effect1;
 static EffectInstance* sWattEffectData_effect2;
 
-ApiStatus N(WattFXUpdate)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(WattFXUpdate)) {
     Actor* partner = gBattleStatus.partnerActor;
     f32 x, y, z;
 
@@ -111,7 +111,7 @@ ApiStatus N(WattFXUpdate)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(WattFXRemove)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(WattFXRemove)) {
     sWattEffectData_initialized = 0;
     if (sWattEffectData_effect1 != NULL) {
         remove_effect(sWattEffectData_effect1);
@@ -123,27 +123,27 @@ ApiStatus N(WattFXRemove)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(WattFXBounce)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(WattFXBounce)) {
     sWattEffectData_isBouncing = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(WattFXDisableBounce)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(WattFXDisableBounce)) {
     sWattEffectData_isBouncing = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(WattFXEnable)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(WattFXEnable)) {
     sWattEffectData_isActive = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(WattFXDisable)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(WattFXDisable)) {
     sWattEffectData_isActive = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(WattFXSetEffect)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(WattFXSetEffect)) {
     sWattEffectData_currentEffectIndex = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
@@ -152,7 +152,7 @@ ApiStatus N(WattFXSetEffect)(Evt* script, s32 isInitialCall) {
 
 #include "common/SetBackgroundAlpha.inc.c"
 
-ApiStatus N(ElectroDashFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ElectroDashFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -163,7 +163,7 @@ ApiStatus N(ElectroDashFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ElectroDashFXDisable)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ElectroDashFXDisable)) {
     EffectInstance* effect = N(radialShimmer);
 
     if (effect != NULL) {
@@ -174,7 +174,7 @@ ApiStatus N(ElectroDashFXDisable)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(PowerShockFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(PowerShockFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -188,7 +188,7 @@ ApiStatus N(PowerShockFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(PowerShockDischargeFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(PowerShockDischargeFX)) {
     Bytecode* args = script->ptrReadPos;
     Actor* partner = gBattleStatus.partnerActor;
     f32 x = partner->currentPos.x + partner->headOffset.x;
@@ -209,7 +209,7 @@ ApiStatus N(PowerShockDischargeFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(TargetParalyzeChance)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(TargetParalyzeChance)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor = get_actor(partnerActor->targetActorID);
@@ -228,7 +228,7 @@ ApiStatus N(TargetParalyzeChance)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(TurboChargeUnwindWatt)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(TurboChargeUnwindWatt)) {
     Bytecode* args = script->ptrReadPos;
     Actor* partner = gBattleStatus.partnerActor;
     Actor* player = gBattleStatus.playerActor;
@@ -323,7 +323,7 @@ ApiStatus N(TurboChargeUnwindWatt)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(TurboChargeFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(TurboChargeFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -337,7 +337,7 @@ ApiStatus N(TurboChargeFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ApplyTurboCharge)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ApplyTurboCharge)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 actionCommandResult = script->varTable[0];
 
@@ -362,7 +362,7 @@ ApiStatus N(ApplyTurboCharge)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(MegaShockFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(MegaShockFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 x;
     s32 y;
@@ -401,7 +401,7 @@ ApiStatus N(MegaShockFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(AverageTargetParalyzeChance)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AverageTargetParalyzeChance)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor;
@@ -492,8 +492,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ELECTRIFIED,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
 };
 

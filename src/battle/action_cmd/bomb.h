@@ -3,8 +3,8 @@
 
 #include "common_structs.h"
 
-ApiStatus action_command_bomb_init(Evt* script, s32 isInitialCall);
-ApiStatus action_command_bomb_start(Evt* script, s32 isInitialCall);
+API_CALLABLE(action_command_bomb_init);
+API_CALLABLE(action_command_bomb_start);
 void action_command_bomb_update(void);
 void action_command_bomb_draw(void);
 void action_command_bomb_free(void);

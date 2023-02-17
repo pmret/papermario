@@ -254,6 +254,6 @@ NpcData N(NpcData_GoombaBros_Red)[] = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_GoombaBros_Red), BTL_KMR_PART_2_FORMATION_00, BTL_KMR_PART_2_STAGE_01),
+    NPC_GROUP(N(NpcData_GoombaBros_Red), BTL_KMR_2_FORMATION_00, BTL_KMR_2_STAGE_01),
     {}
 };

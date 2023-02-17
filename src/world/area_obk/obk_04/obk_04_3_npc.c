@@ -34,12 +34,12 @@ API_CALLABLE(N(InitHiddenBoo)) {
 void N(func_802400D0_BC7F30)(Npc* npc) {
     if (npc->yaw > 340.0f || npc->yaw < 20.0f) {
         npc->renderMode = RENDER_MODE_ALPHATEST;
-        npc->unk_A2 = 0;
-        func_8003D624(npc, FOLD_TYPE_NONE, 0, 0, 0, 0, npc->unk_A2);
+        npc->foldArg5 = 0;
+        func_8003D624(npc, FOLD_TYPE_NONE, 0, 0, 0, 0, npc->foldArg5);
     } else {
         npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-        func_8003D624(npc, FOLD_TYPE_7, gPlayerStatusPtr->alpha1, 255, 0, 0, npc->unk_A2);
-        npc->unk_9A = 255;
+        func_8003D624(npc, FOLD_TYPE_7, gPlayerStatusPtr->alpha1, 255, 0, 0, npc->foldArg5);
+        npc->foldArg1 = 255;
     }
 }
 
@@ -55,14 +55,14 @@ void N(func_80240198_BC7FF8)(void) {
 }
 
 void N(func_8024022C_BC808C)(void) {
-    get_npc_unsafe(NPC_KeepAwayBoo1)->unk_A2 = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo2)->unk_A2 = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo3)->unk_A2 = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo4)->unk_A2 = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo5)->unk_A2 = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo6)->unk_A2 = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo7)->unk_A2 = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo8)->unk_A2 = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo1)->foldArg5 = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo2)->foldArg5 = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo3)->foldArg5 = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo4)->foldArg5 = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo5)->foldArg5 = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo6)->foldArg5 = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo7)->foldArg5 = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo8)->foldArg5 = 0;
 }
 
 s32 N(SetRingMovement)(s32 arg0) {

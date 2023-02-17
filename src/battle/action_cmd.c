@@ -90,7 +90,7 @@ BSS s32 D_8029FBD8_pad[2];
 
 BSS ActionCommandStatus gActionCommandStatus;
 
-ApiStatus LoadActionCommand(Evt* script, s32 isInitialCall) {
+API_CALLABLE(LoadActionCommand) {
     Bytecode* args = script->ptrReadPos;
     s32 cmd = evt_get_variable(script, *args++);
 
@@ -660,12 +660,12 @@ void func_80269160(void) {
     }
 }
 
-ApiStatus SetActionDifficultyTable(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetActionDifficultyTable) {
     gBattleStatus.actionCmdDifficultyTable = (s32*) evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetupMashMeter(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetupMashMeter) {
     Bytecode* args = script->ptrReadPos;
     gActionCommandStatus.mashMeterIntervals = evt_get_variable(script, *args++);
     gActionCommandStatus.mashMeterCutoffs[1] = evt_get_variable(script, *args++);
@@ -677,37 +677,37 @@ ApiStatus SetupMashMeter(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetActionSuccess(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetActionSuccess) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionSuccess);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetActionSuccess(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetActionSuccess) {
     gBattleStatus.actionSuccess = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetActionCommandMode(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetActionCommandMode) {
     gBattleStatus.actionCommandMode = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetActionCommandMode(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetActionCommandMode) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionCommandMode);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetActionHudPrepareTime(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetActionHudPrepareTime) {
     gActionCommandStatus.hudPrepareTime = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetCommandAutoSuccess(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetCommandAutoSuccess) {
     evt_set_variable(script, *script->ptrReadPos, gActionCommandStatus.autoSucceed);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCommandAutoSuccess(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCommandAutoSuccess) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
     if (evt_get_variable(script, *script->ptrReadPos) != 0) {
@@ -718,12 +718,12 @@ ApiStatus SetCommandAutoSuccess(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802693F0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802693F0) {
     gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
     return ApiStatus_DONE2;
 }
 
-ApiStatus CloseActionCommandInfo(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CloseActionCommandInfo) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
     if (isInitialCall) {
@@ -743,7 +743,7 @@ ApiStatus CloseActionCommandInfo(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269470(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80269470) {
     if (isInitialCall) {
         action_command_free();
         return ApiStatus_BLOCK;
@@ -753,7 +753,7 @@ ApiStatus func_80269470(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ShowActionHud(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ShowActionHud) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
     if (evt_get_variable(script, *script->ptrReadPos) == 0) {
@@ -764,42 +764,42 @@ ApiStatus ShowActionHud(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetActionSuccessCopy(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetActionSuccessCopy) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionSuccess);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269524(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80269524) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.unk_86);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269550(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80269550) {
     gBattleStatus.unk_86 = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetBlockResult(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetBlockResult) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.blockResult);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetActionResult(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetActionResult) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionResult);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetActionResult(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetActionResult) {
     gBattleStatus.actionResult = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269600(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80269600) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.unk_85);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026962C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8026962C) {
     gBattleStatus.unk_85 = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }

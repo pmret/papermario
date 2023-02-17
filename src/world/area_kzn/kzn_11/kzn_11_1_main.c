@@ -58,7 +58,7 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
-    EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA1)
+    EVT_CALL(PlayAmbientSounds, AMBIENT_LAVA_1)
     EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)

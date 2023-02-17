@@ -53,7 +53,7 @@ extern EvtScript N(shellShot);
 extern EvtScript N(airLift);
 extern EvtScript N(airRaid);
 
-ApiStatus N(ShellShotActionCommand)(Evt* evt, s32 isInitialCall) {
+API_CALLABLE(N(ShellShotActionCommand)) {
     BattleStatus* battleStatus = &gBattleStatus;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     Actor* parakarry = battleStatus->partnerActor;
@@ -67,10 +67,10 @@ ApiStatus N(ShellShotActionCommand)(Evt* evt, s32 isInitialCall) {
     s32 hudID, i;
 
     if (isInitialCall) {
-        evt->functionTemp[0] = 0;
+        script->functionTemp[0] = 0;
     }
 
-    switch (evt->functionTemp[0]) {
+    switch (script->functionTemp[0]) {
         case 0:
             hudMarkers[0] = hudID = hud_element_create(&HES_AimMarkerF);
             hud_element_set_render_depth(hudID, 10);
@@ -139,8 +139,8 @@ ApiStatus N(ShellShotActionCommand)(Evt* evt, s32 isInitialCall) {
             targetActor = get_actor(parakarry->targetActorID);
             targetActorPart = get_actor_part(targetActor, parakarry->targetPartIndex);
 
-            state->goalPos.x += targetActorPart->unk_75 * targetActor->scalingFactor;
-            state->goalPos.y += targetActorPart->unk_76 * targetActor->scalingFactor;
+            state->goalPos.x += targetActorPart->projectileTargetOffset.x * targetActor->scalingFactor;
+            state->goalPos.y += targetActorPart->projectileTargetOffset.y * targetActor->scalingFactor;
             state->goalPos.z = state->goalPos.z;
             state->unk_24 = (targetActorPart->size.y + targetActorPart->size.x) / 2 / 24.0;
             hud_element_set_scale(hudTarget, state->unk_24 * targetActor->scalingFactor);
@@ -191,7 +191,7 @@ ApiStatus N(ShellShotActionCommand)(Evt* evt, s32 isInitialCall) {
             battleStatus->unk_86 = 0;
             action_command_init_status();
             func_80269118();
-            evt->functionTemp[0] = 1;
+            script->functionTemp[0] = 1;
             break;
         case 1:
             if (gActionCommandStatus.autoSucceed || battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) {
@@ -213,12 +213,12 @@ ApiStatus N(ShellShotActionCommand)(Evt* evt, s32 isInitialCall) {
 
             sfx_play_sound(SOUND_311);
             shellShotTimer = 60;
-            evt->functionTemp[0] = 2;
+            script->functionTemp[0] = 2;
             break;
         case 2:
             if (!(gActionCommandStatus.autoSucceed)) {
                 if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT)) {
-                    evt->functionTemp[0] = 3;
+                    script->functionTemp[0] = 3;
                     break;
                 }
             } else {
@@ -227,7 +227,7 @@ ApiStatus N(ShellShotActionCommand)(Evt* evt, s32 isInitialCall) {
                     aimAngle = fabsf(get_clamped_angle_diff(state->angle, state->bounceDivisor)) / state->unk_24 * targetActor->scalingFactor;
 
                     if (aimAngle < 3.0f) {
-                        evt->functionTemp[0] = 3;
+                        script->functionTemp[0] = 3;
                         break;
                     }
                 } else {
@@ -287,8 +287,8 @@ ApiStatus N(ShellShotActionCommand)(Evt* evt, s32 isInitialCall) {
             return ApiStatus_DONE2;
     }
 
-    if (evt->functionTemp[0] < 3) {
-        if (evt->functionTemp[0] > 0) {
+    if (script->functionTemp[0] < 3) {
+        if (script->functionTemp[0] > 0) {
             hudID = hudStick;
             targetActor = get_actor(parakarry->targetActorID);
             clampedAngleDiff = get_clamped_angle_diff(state->angle, state->bounceDivisor);
@@ -315,8 +315,8 @@ ApiStatus N(ShellShotActionCommand)(Evt* evt, s32 isInitialCall) {
     hudTargetRotation -= 10;
     hudTargetRotation = clamp_angle(hudTargetRotation);
 
-    if (evt->functionTemp[0] >= 2) {
-        if (evt->functionTemp[0] < 3) {
+    if (script->functionTemp[0] >= 2) {
+        if (script->functionTemp[0] < 3) {
             aimAngle = clamp_angle(state->angle);
             aimX = state->currentPos.x;
             aimY = state->currentPos.y;
@@ -344,7 +344,7 @@ ApiStatus N(ShellShotActionCommand)(Evt* evt, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(GetShellShotDamage)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetShellShotDamage)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 damage = 0;
 
@@ -364,7 +364,7 @@ ApiStatus N(GetShellShotDamage)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(AirLiftChance)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AirLiftChance)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor = get_actor(partnerActor->targetActorID);
@@ -401,7 +401,7 @@ ApiStatus N(AirLiftChance)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(CarryAway)(Evt* evt, s32 isInitialCall) {
+API_CALLABLE(N(CarryAway)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* parakarry = battleStatus->partnerActor;
     ActorState* actorState = &parakarry->state;
@@ -411,21 +411,21 @@ ApiStatus N(CarryAway)(Evt* evt, s32 isInitialCall) {
     u32 temp_s4;
 
     if (isInitialCall) {
-        evt->functionTempPtr[1] = get_actor(parakarry->targetActorID);
-        evt->functionTemp[0] = 0;
+        script->functionTempPtr[1] = get_actor(parakarry->targetActorID);
+        script->functionTemp[0] = 0;
     }
 
-    temp_s4 = evt->functionTemp[0];
-    targetActor = evt->functionTempPtr[1];
+    temp_s4 = script->functionTemp[0];
+    targetActor = script->functionTempPtr[1];
 
-    switch (evt->functionTemp[0]) {
+    switch (script->functionTemp[0]) {
         case 0:
             parakarry->state.goalPos.x = targetActor->currentPos.x - parakarry->currentPos.x;
             parakarry->state.goalPos.y = targetActor->currentPos.y - parakarry->currentPos.y;
             parakarry->state.goalPos.z = targetActor->currentPos.z - parakarry->currentPos.z;
             parakarry->state.speed = 2.0f;
             parakarry->state.moveTime = 0;
-            evt->functionTemp[0] = 1;
+            script->functionTemp[0] = 1;
             break;
         case 1:
             parakarry->state.currentPos.x += parakarry->state.speed;
@@ -456,7 +456,7 @@ ApiStatus N(CarryAway)(Evt* evt, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(FlyAround)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(FlyAround)) {
     Actor* partner = gBattleStatus.partnerActor;
     ActorState* state = &partner->state;
 
@@ -603,7 +603,7 @@ ApiStatus N(FlyAround)(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus N(GetAirRaidDamage)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetAirRaidDamage)) {
     script->varTable[15] = ((script->varTable[0] * 100) / 2499) + 2;
 
     return ApiStatus_DONE2;
@@ -661,8 +661,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_GROUNDABLE,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
 };
 

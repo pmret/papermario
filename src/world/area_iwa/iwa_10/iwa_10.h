@@ -13,15 +13,15 @@
 #include "sprite/npc/WorldParakarry.h"
 
 enum {
-    NPC_TrainToad_01     = 0,
-    NPC_TrainToad_02     = 1,
-    NPC_Dryite                  = 2,
-    NPC_ThreeSisters_01         = 3,
-    NPC_Parakarry               = 4,
-    NPC_Toad                    = 5,
-    NPC_ThreeSisters_02         = 6,
-    NPC_ThreeSisters_03         = 7,
-    NPC_ThreeSisters_04         = 8,
+    NPC_TrainToad_01        = 0,
+    NPC_TrainToad_02        = 1,
+    NPC_Dryite              = 2,
+    NPC_Toadette_01         = 3,
+    NPC_Parakarry           = 4,
+    NPC_Toad                = 5,
+    NPC_Toadette_02         = 6,
+    NPC_Toadette_03         = 7,
+    NPC_Toadette_04         = 8,
 };
 
 enum {

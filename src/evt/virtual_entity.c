@@ -474,14 +474,14 @@ ApiStatus SetVirtualEntityFlags(Evt* script, s32 isInitialCall) {
 ApiStatus SetVirtualEntityFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
-    s32 flags = *args++;
+    s32 bits = *args++;
     s32 mode = evt_get_variable(script, *args++);
     VirtualEntity* virtualEntity = (*gCurrentVirtualEntityListPtr)[index];
 
     if (mode) {
-        set_entity_model_flags(virtualEntity->entityModelIndex, flags);
+        set_entity_model_flags(virtualEntity->entityModelIndex, bits);
     } else {
-        clear_entity_model_flags(virtualEntity->entityModelIndex, flags);
+        clear_entity_model_flags(virtualEntity->entityModelIndex, bits);
     }
 
     return ApiStatus_DONE2;

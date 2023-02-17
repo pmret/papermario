@@ -1512,9 +1512,9 @@ void render_hud_element(HudElement* hudElement) {
                 }
             } else {
                 if (hudElement->flags & HUD_ELEMENT_FLAG_TRANSPARENT) {
-                    fold_update(transform->foldIdx, 7, 255, 255, 255, hudElement->opacity, 0);
+                    fold_update(transform->foldIdx, FOLD_TYPE_7, 255, 255, 255, hudElement->opacity, 0);
                 } else {
-                    fold_update(transform->foldIdx, 0, 0, 0, 0, 0, 0);
+                    fold_update(transform->foldIdx, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
                 }
             }
 

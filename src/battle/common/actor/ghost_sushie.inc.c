@@ -59,8 +59,7 @@ ActorPartBlueprint N(sushie_parts)[] = {
         .defenseTable = N(sushie_defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -12,
+        .projectileTargetOffset = { 0, -12 },
     },
 };
 

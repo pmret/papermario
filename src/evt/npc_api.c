@@ -605,18 +605,18 @@ ApiStatus NpcFaceNpc(Evt* script, s32 isInitialCall) {
 ApiStatus SetNpcFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
-    s32 flagBits = *args++;
-    s32 enable = evt_get_variable(script, *args++);
+    s32 bits = *args++;
+    s32 mode = evt_get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcID);
 
     if (npc == NULL) {
         return ApiStatus_DONE2;
     }
 
-    if (enable) {
-        npc->flags |= flagBits;
+    if (mode) {
+        npc->flags |= bits;
     } else {
-        npc->flags &= ~flagBits;
+        npc->flags &= ~bits;
     }
 
     return ApiStatus_DONE2;
@@ -979,7 +979,7 @@ ApiStatus func_802CFD30(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    func_8003D624(npc, foldType, var2, var3, var4, var5, npc->unk_A2);
+    func_8003D624(npc, foldType, var2, var3, var4, var5, npc->foldArg5);
     return ApiStatus_DONE2;
 }
 
@@ -993,7 +993,7 @@ ApiStatus func_802CFE2C(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc->unk_A2 = arg1;
+    npc->foldArg5 = arg1;
     return ApiStatus_DONE2;
 }
 

@@ -423,7 +423,7 @@ NpcData N(NpcData_Kammy) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_Enemies), BTL_KMR_PART_2_FORMATION_01),
+    NPC_GROUP(N(NpcData_Enemies), BTL_KMR_2_FORMATION_01),
     NPC_GROUP(N(NpcData_Kammy)),
     {}
 };

@@ -64,8 +64,7 @@ ActorPartBlueprint N(lakilester_parts)[] = {
         .defenseTable = N(lakilester_defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = -2,
-        .unk_1D = -10,
+        .projectileTargetOffset = { -2, -10 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -77,8 +76,7 @@ ActorPartBlueprint N(lakilester_parts)[] = {
         .defenseTable = N(lakilester_defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
 };
 

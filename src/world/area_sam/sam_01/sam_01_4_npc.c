@@ -836,23 +836,23 @@ NpcData N(NpcData_ChuckQuizmo) = {
 };
 
 NpcGroupList N(BeforeNPCs) = {
-    NPC_GROUP(N(NpcData_MayorPenguin), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
-    NPC_GROUP(N(NpcData_Penguin_05), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
-    NPC_GROUP(N(NpcData_Penguin_09), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
+    NPC_GROUP(N(NpcData_MayorPenguin), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
+    NPC_GROUP(N(NpcData_Penguin_05), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
+    NPC_GROUP(N(NpcData_Penguin_09), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
     NPC_GROUP(N(NpcData_ChuckQuizmo)),
     {}
 };
 
 NpcGroupList N(MysteryNPCs) = {
-    NPC_GROUP(N(NpcData_MayorPenguin), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
-    NPC_GROUP(N(NpcData_Penguin_05), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
-    NPC_GROUP(N(NpcData_Penguin_09), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
+    NPC_GROUP(N(NpcData_MayorPenguin), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
+    NPC_GROUP(N(NpcData_Penguin_05), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
+    NPC_GROUP(N(NpcData_Penguin_09), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
     NPC_GROUP(N(NpcData_ChuckQuizmo)),
     {}
 };
 
 NpcGroupList N(AfterNPCs) = {
-    NPC_GROUP(N(NpcData_MayorPenguin), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
+    NPC_GROUP(N(NpcData_MayorPenguin), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
     NPC_GROUP(N(NpcData_ChuckQuizmo)),
     {}
 };

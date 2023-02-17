@@ -1,4 +1,4 @@
-ApiStatus N(start)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(start)) {
     u8 mashMeterCutoff;
 
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

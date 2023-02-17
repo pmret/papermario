@@ -50,8 +50,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 1,
-        .unk_1D = 15,
+        .projectileTargetOffset = { 1, 15 },
     },
 };
 
@@ -267,7 +266,7 @@ EvtScript N(knockDown) = {
         EVT_CALL(SetGoalToHome, ACTOR_SELF)
         EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
     EVT_END_IF
-    EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -10)
+    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -10)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 22)
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_flying)))

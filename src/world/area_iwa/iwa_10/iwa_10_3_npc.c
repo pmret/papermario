@@ -58,16 +58,16 @@ EvtScript N(EVS_NpcInit_Toad) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_ThreeSisters_02) = {
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_000B)
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_000C)
-    EVT_CALL(SpeakToPlayer, NPC_ThreeSisters_04, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_000D)
+EvtScript N(EVS_NpcInteract_Toadette_02) = {
+    EVT_CALL(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_000B)
+    EVT_CALL(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_000C)
+    EVT_CALL(SpeakToPlayer, NPC_Toadette_04, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_000D)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_ThreeSisters_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters_02)))
+EvtScript N(EVS_NpcInit_Toadette_02) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette_02)))
     EVT_IF_LT(GB_StoryProgress, STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
         EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_RETURN
@@ -105,7 +105,7 @@ EvtScript N(EVS_NpcInit_Dryite) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_ThreeSisters_01) = {
+EvtScript N(EVS_NpcInteract_Toadette_01) = {
     EVT_IF_LT(GB_IWA00_Whacka_HitCount, 8)
         EVT_SET(LVar0, MSG_CH2_0009)
     EVT_ELSE
@@ -116,8 +116,8 @@ EvtScript N(EVS_NpcInteract_ThreeSisters_01) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInit_ThreeSisters_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters_01)))
+EvtScript N(EVS_NpcInit_Toadette_01) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette_01)))
     EVT_RETURN
     EVT_END
 };
@@ -158,12 +158,12 @@ NpcData N(NpcData_Toad) = {
     .tattle = MSG_NpcTattle_IWA_TravelAgent,
 };
 
-NpcData N(NpcData_ThreeSisters)[] = {
+NpcData N(NpcData_Toadette)[] = {
     {
-        .id = NPC_ThreeSisters_02,
+        .id = NPC_Toadette_02,
         .pos = { -562.0f, 0.0f, 384.0f },
         .yaw = 90,
-        .init = &N(EVS_NpcInit_ThreeSisters_02),
+        .init = &N(EVS_NpcInit_Toadette_02),
         .settings = &N(NpcSettings_Toad_Stationary),
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
@@ -171,10 +171,10 @@ NpcData N(NpcData_ThreeSisters)[] = {
         .tattle = MSG_NpcTattle_TravelingMaidA,
     },
     {
-        .id = NPC_ThreeSisters_03,
+        .id = NPC_Toadette_03,
         .pos = { -582.0f, 0.0f, 406.0f },
         .yaw = 90,
-        .init = &N(EVS_NpcInit_ThreeSisters_02),
+        .init = &N(EVS_NpcInit_Toadette_02),
         .settings = &N(NpcSettings_Toad_Stationary),
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
@@ -182,10 +182,10 @@ NpcData N(NpcData_ThreeSisters)[] = {
         .tattle = MSG_NpcTattle_TravelingMaidB,
     },
     {
-        .id = NPC_ThreeSisters_04,
+        .id = NPC_Toadette_04,
         .pos = { -524.0f, 0.0f, 411.0f },
         .yaw = 270,
-        .init = &N(EVS_NpcInit_ThreeSisters_02),
+        .init = &N(EVS_NpcInit_Toadette_02),
         .settings = &N(NpcSettings_Toad_Stationary),
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
@@ -207,10 +207,10 @@ NpcData N(NpcData_Dryite)[] = {
         .tattle = MSG_NpcTattle_IWA_StationLoiterer,
     },
     {
-        .id = NPC_ThreeSisters_01,
+        .id = NPC_Toadette_01,
         .pos = { -760.0f, 0.0f, 160.0f },
         .yaw = 90,
-        .init = &N(EVS_NpcInit_ThreeSisters_01),
+        .init = &N(EVS_NpcInit_Toadette_01),
         .settings = &N(NpcSettings_Toad_Stationary),
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
@@ -222,7 +222,7 @@ NpcData N(NpcData_Dryite)[] = {
 NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_TrainToad)),
     NPC_GROUP(N(NpcData_Toad)),
-    NPC_GROUP(N(NpcData_ThreeSisters)),
+    NPC_GROUP(N(NpcData_Toadette)),
     NPC_GROUP(N(NpcData_Dryite)),
     NPC_GROUP(N(NpcData_Parakarry)),
     {}

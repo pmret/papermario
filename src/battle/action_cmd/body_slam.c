@@ -5,7 +5,7 @@
 
 extern s32 actionCmdTableBodySlam[];
 
-ApiStatus N(init)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(init)) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 id;

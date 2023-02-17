@@ -5,53 +5,53 @@
 #include "message_ids.h"
 
 enum BattleAreaIDs {
-    BTL_AREA_KMR_PART_1         = 0x00,
-    BTL_AREA_KMR_PART_2         = 0x01,
-    BTL_AREA_KMR_PART_3         = 0x02,
-    BTL_AREA_MAC                = 0x03,
-    BTL_AREA_HOS                = 0x04,
-    BTL_AREA_NOK                = 0x05,
-    BTL_AREA_TRD_PART_1         = 0x06,
-    BTL_AREA_TRD_PART_2         = 0x07,
-    BTL_AREA_TRD_PART_3         = 0x08,
-    BTL_AREA_IWA                = 0x09,
-    BTL_AREA_SBK                = 0x0A,
-    BTL_AREA_ISK_PART_1         = 0x0B,
-    BTL_AREA_ISK_PART_2         = 0x0C,
-    BTL_AREA_MIM                = 0x0D,
-    BTL_AREA_ARN                = 0x0E,
-    BTL_AREA_DGB                = 0x0F,
-    BTL_AREA_OMO                = 0x10,
-    BTL_AREA_OMO2               = 0x11,
-    BTL_AREA_OMO3               = 0x12,
-    BTL_AREA_KGR                = 0x13,
-    BTL_AREA_JAN                = 0x14,
-    BTL_AREA_JAN2               = 0x15,
-    BTL_AREA_KZN                = 0x16,
-    BTL_AREA_KZN2               = 0x17,
-    BTL_AREA_FLO                = 0x18,
-    BTL_AREA_FLO2               = 0x19,
-    BTL_AREA_TIK                = 0x1A,
-    BTL_AREA_TIK2               = 0x1B,
-    BTL_AREA_TIK3               = 0x1C,
-    BTL_AREA_SAM                = 0x1D,
-    BTL_AREA_SAM2               = 0x1E,
-    BTL_AREA_PRA                = 0x1F,
-    BTL_AREA_PRA2               = 0x20,
-    BTL_AREA_PRA3               = 0x21,
-    BTL_AREA_KPA                = 0x22,
-    BTL_AREA_KPA2               = 0x23,
-    BTL_AREA_KPA3               = 0x24,
-    BTL_AREA_KPA4               = 0x25,
-    BTL_AREA_KKJ                = 0x26,
-    BTL_AREA_DIG                = 0x27,
-    BTL_AREA_UNUSED_28          = 0x28,
-    BTL_AREA_OMO2_1             = 0x29,
-    BTL_AREA_OMO2_2             = 0x2A,
-    BTL_AREA_OMO2_3             = 0x2B,
-    BTL_AREA_OMO2_4             = 0x2C,
-    BTL_AREA_OMO2_5             = 0x2D,
-    BTL_AREA_OMO2_6             = 0x2E,
+    BTL_AREA_KMR_1         = 0x00,
+    BTL_AREA_KMR_2         = 0x01,
+    BTL_AREA_KMR_3         = 0x02,
+    BTL_AREA_MAC           = 0x03,
+    BTL_AREA_HOS           = 0x04,
+    BTL_AREA_NOK           = 0x05,
+    BTL_AREA_TRD_1         = 0x06,
+    BTL_AREA_TRD_2         = 0x07,
+    BTL_AREA_TRD_3         = 0x08,
+    BTL_AREA_IWA           = 0x09,
+    BTL_AREA_SBK           = 0x0A,
+    BTL_AREA_ISK_1         = 0x0B,
+    BTL_AREA_ISK_2         = 0x0C,
+    BTL_AREA_MIM           = 0x0D,
+    BTL_AREA_ARN           = 0x0E,
+    BTL_AREA_DGB           = 0x0F,
+    BTL_AREA_OMO           = 0x10,
+    BTL_AREA_OMO2          = 0x11,
+    BTL_AREA_OMO3          = 0x12,
+    BTL_AREA_KGR           = 0x13,
+    BTL_AREA_JAN           = 0x14,
+    BTL_AREA_JAN2          = 0x15,
+    BTL_AREA_KZN           = 0x16,
+    BTL_AREA_KZN2          = 0x17,
+    BTL_AREA_FLO           = 0x18,
+    BTL_AREA_FLO2          = 0x19,
+    BTL_AREA_TIK           = 0x1A,
+    BTL_AREA_TIK2          = 0x1B,
+    BTL_AREA_TIK3          = 0x1C,
+    BTL_AREA_SAM           = 0x1D,
+    BTL_AREA_SAM2          = 0x1E,
+    BTL_AREA_PRA           = 0x1F,
+    BTL_AREA_PRA2          = 0x20,
+    BTL_AREA_PRA3          = 0x21,
+    BTL_AREA_KPA           = 0x22,
+    BTL_AREA_KPA2          = 0x23,
+    BTL_AREA_KPA3          = 0x24,
+    BTL_AREA_KPA4          = 0x25,
+    BTL_AREA_KKJ           = 0x26,
+    BTL_AREA_DIG           = 0x27,
+    BTL_AREA_UNUSED_28     = 0x28,
+    BTL_AREA_OMO2_1        = 0x29,
+    BTL_AREA_OMO2_2        = 0x2A,
+    BTL_AREA_OMO2_3        = 0x2B,
+    BTL_AREA_OMO2_4        = 0x2C,
+    BTL_AREA_OMO2_5        = 0x2D,
+    BTL_AREA_OMO2_6        = 0x2E,
 };
 
 typedef enum ActorType {
@@ -278,10 +278,28 @@ typedef enum ActorType {
 
 extern s32 bActorNames[];
 
-#define BTL_AREA(id) \
-    .dmaStart = battle_##id##_ROM_START, \
-    .dmaEnd = battle_##id##_ROM_END, \
-    .dmaDest = battle_##id##_VRAM
+typedef struct BattleMoveEntry {
+    /* 0x00 */ u8* romStart;
+    /* 0x04 */ u8* romEnd;
+    /* 0x08 */ u8* vramStart;
+    /* 0x0C */ EvtScript* mainScript;
+} BattleMoveEntry; // size = 0x10
+
+#define BTL_MOVE(name, script) \
+{ \
+    .romStart   = battle_move_##name##_ROM_START, \
+    .romEnd     = battle_move_##name##_ROM_END, \
+    .vramStart  = battle_move_##name##_VRAM, \
+    .mainScript = &battle_move_##name##_##script \
+}
+
+#define BTL_ITEM(name) \
+{ \
+    .romStart   = name##_ROM_START, \
+    .romEnd     = name##_ROM_END, \
+    .vramStart  = name##_VRAM, \
+    .mainScript = &battle_item_##name##_##main \
+}
 
 typedef struct ActorBlueprint {
     /* 0x00 */ s32 flags;
@@ -380,8 +398,8 @@ typedef struct BattleArea {
 
 extern BattleArea gBattleAreas[0x30];
 
-#define BATTLE(name, formation, stage) { name, ARRAY_COUNT(formation), (Formation*) formation, stage }
-#define BATTLE_WITH_SCRIPT(name, formation, stage, script) { name, ARRAY_COUNT(formation), (Formation*) formation, stage, script }
+#define BATTLE(formation, stage, name) { name, ARRAY_COUNT(formation), (Formation*) formation, stage }
+#define BATTLE_WITH_SCRIPT(formation, stage, script, name) { name, ARRAY_COUNT(formation), (Formation*) formation, stage, script }
 
 // TODO: enum for home position (0..3 are floor, 4..7 are air, etc.)
 

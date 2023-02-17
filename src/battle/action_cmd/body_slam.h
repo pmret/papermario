@@ -3,8 +3,8 @@
 
 #include "common_structs.h"
 
-ApiStatus action_command_body_slam_init(Evt* script, s32 isInitialCall);
-ApiStatus action_command_body_slam_start(Evt* script, s32 isInitialCall);
+API_CALLABLE(action_command_body_slam_init);
+API_CALLABLE(action_command_body_slam_start);
 void action_command_body_slam_update(void);
 void action_command_body_slam_draw(void);
 void action_command_body_slam_free(void);

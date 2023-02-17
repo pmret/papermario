@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_SetupMusic) = {
     EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
-    EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA1)
+    EVT_CALL(PlayAmbientSounds, AMBIENT_LAVA_1)
     EVT_RETURN
     EVT_END
 };

@@ -240,7 +240,7 @@ EvtScript N(EVS_Scene_KammyStrikes) = {
         EVT_CALL(GetNpcPos, NPC_Goombaria, LVar0, LVar1, LVar2)
         EVT_CALL(NpcJump0, NPC_Goombaria, LVar0, LVar1, LVar2, 25)
         EVT_CALL(SetNpcAnimation, NPC_Goombaria, ANIM_Goombaria_LookUp)
-        EVT_CALL(func_802CFD30, NPC_Goombaria, 0, 0, 0, 0, 0)
+        EVT_CALL(func_802CFD30, NPC_Goombaria, FOLD_TYPE_NONE, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(func_802CFE2C, NPC_Goompapa, 0x100)
     EVT_CALL(func_802CFD30, NPC_Goompapa, FOLD_TYPE_5, 0, 1, 1, 0)
@@ -249,7 +249,7 @@ EvtScript N(EVS_Scene_KammyStrikes) = {
     EVT_CALL(GetNpcPos, NPC_Goompapa, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_Goompapa, LVar0, LVar1, LVar2, 25)
     EVT_CALL(SetNpcAnimation, NPC_Goompapa, ANIM_Goompapa_LookUp)
-    EVT_CALL(func_802CFD30, NPC_Goompapa, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_Goompapa, FOLD_TYPE_NONE, 0, 0, 0, 0)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim13)
     EVT_CALL(SetCamType, CAM_DEFAULT, 4, FALSE)

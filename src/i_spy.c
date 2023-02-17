@@ -1,16 +1,23 @@
 #include "common.h"
 
-typedef struct struct802B7C78 {
+typedef struct ISoyData {
     /* 0x00 */ Vec3f pos;
     /* 0x0C */ f32 scale;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
+    /* 0x18 */ s32 time;
     /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-} struct802B7C78;
+    /* 0x20 */ s32 flashCount;
+    /* 0x24 */ s32 state;
+    /* 0x28 */ s32 alpha;
+} ISoyData;
+
+enum {
+    I_SPY_DELAY     = 0,
+    I_SPY_1  = 1,
+    I_SPY_2  = 2,
+    I_SPY_FADE_OUT  = 3,
+};
 
 #include "i_spy.png.h"
 #include "i_spy.png.inc.c"
@@ -19,9 +26,9 @@ typedef struct struct802B7C78 {
 #include "i_spy.flash.pal.inc.c"
 #include "i_spy_dlist.gfx.inc.c"
 
-BSS struct802B7C78 D_802B7CB0;
+BSS ISoyData D_802B7CB0;
 
-struct802B7C78* D_802B7C78_E23228 = &D_802B7CB0;
+ISoyData* D_802B7C78_E23228 = &D_802B7CB0;
 
 extern void (*ISpyNotificationCallback)(void);
 
@@ -44,11 +51,11 @@ void func_802B7000_E225B0(void) {
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 3);
         gSPDisplayList(gMasterGfxPos++, D_802B7C00_E231B0);
 
-        if (D_802B7C78_E23228->unk_18 < 47) {
-            D_802B7C78_E23228->unk_20 += 1;
+        if (D_802B7C78_E23228->time < 47) {
+            D_802B7C78_E23228->flashCount++;
         }
 
-        temp = D_802B7C78_E23228->unk_20;
+        temp = D_802B7C78_E23228->flashCount;
         temp = temp - (temp / 12) * 12;
         switch (temp) {
             case 0:
@@ -70,7 +77,7 @@ void func_802B7000_E225B0(void) {
                 foldImage.palette = D_802B7BE0_E23190;
                 break;
         }
-        fold_update(0, FOLD_TYPE_7, 0xFF, 0xFF, 0xFF, D_802B7C78_E23228->unk_28, 0);
+        fold_update(0, FOLD_TYPE_7, 255, 255, 255, D_802B7C78_E23228->alpha, 0);
 
         foldImage.raster = D_802B7580_E22B30;
         foldImage.width = 56;
@@ -84,7 +91,6 @@ void func_802B7000_E225B0(void) {
     }
 }
 
-
 void func_802B72C0_E22870(void) {
     mem_clear(D_802B7C78_E23228, sizeof(*D_802B7C78_E23228));
 
@@ -92,7 +98,7 @@ void func_802B72C0_E22870(void) {
     D_802B7C78_E23228->pos.y = gPlayerStatus.position.y + gPlayerStatus.colliderHeight + 8.0f;
     D_802B7C78_E23228->pos.z = gPlayerStatus.position.z;
 
-    D_802B7C78_E23228->unk_28 = 0xFF;
+    D_802B7C78_E23228->alpha = 255;
 
     gPlayerStatus.animFlags |= PA_FLAG_100;
     ISpyNotificationCallback = &func_802B735C_E2290C;
@@ -108,8 +114,8 @@ void func_802B735C_E2290C(void) {
     D_802B7C78_E23228->pos.x = playerStatus->position.x;
     D_802B7C78_E23228->pos.z = playerStatus->position.z;
 
-    switch (D_802B7C78_E23228->unk_24) {
-        case 0:
+    switch (D_802B7C78_E23228->state) {
+        case I_SPY_DELAY:
             if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE &&
                 partnerActionStatus->actingPartner == PARTNER_LAKILESTER)
             {
@@ -119,36 +125,36 @@ void func_802B735C_E2290C(void) {
             }
 
             if (!cond) {
-                D_802B7C78_E23228->unk_24++;
+                D_802B7C78_E23228->state++;
             }
             break;
-        case 1:
+        case I_SPY_1:
             if (playerStatus->flags & PS_FLAG_PAUSED) {
-                D_802B7C78_E23228->unk_24 = 3;
+                D_802B7C78_E23228->state = I_SPY_FADE_OUT;
                 return;
             }
 
-            if (D_802B7C78_E23228->unk_18++ >= 16) {
+            if (D_802B7C78_E23228->time++ >= 16) {
                 D_802B7C78_E23228->scale = 0.36f;
-                D_802B7C78_E23228->unk_24++;
+                D_802B7C78_E23228->state++;
             }
             break;
-        case 2:
+        case I_SPY_2:
             D_802B7C78_E23228->scale = 0.57f;
-            D_802B7C78_E23228->unk_24++;
+            D_802B7C78_E23228->state++;
             sfx_play_sound_at_player(SOUND_17B, SOUND_SPACE_MODE_0);
             break;
-        case 3:
+        case I_SPY_FADE_OUT:
             D_802B7C78_E23228->scale = 0.53f;
-            if (D_802B7C78_E23228->unk_18 >= 47 || playerStatus->flags & PS_FLAG_PAUSED) {
-                D_802B7C78_E23228->unk_28 -= 64;
-                if (D_802B7C78_E23228->unk_28 < 0) {
-                    D_802B7C78_E23228->unk_28 = 0;
-                    D_802B7C78_E23228->unk_18 = 51;
+            if (D_802B7C78_E23228->time >= 47 || playerStatus->flags & PS_FLAG_PAUSED) {
+                D_802B7C78_E23228->alpha -= 64;
+                if (D_802B7C78_E23228->alpha < 0) {
+                    D_802B7C78_E23228->alpha = 0;
+                    D_802B7C78_E23228->time = 51;
                 }
             }
 
-            if (D_802B7C78_E23228->unk_18++ > 50) {
+            if (D_802B7C78_E23228->time++ > 50) {
                 gCurrentHiddenPanels.activateISpy = FALSE;
                 ISpyNotificationCallback = NULL;
                 playerStatus->animFlags &= ~PA_FLAG_100;

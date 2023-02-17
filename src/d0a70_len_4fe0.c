@@ -8,8 +8,8 @@ typedef struct {
     /* 0x02 */ u8 renderType;
     /* 0x03 */ u8 subdivX;
     /* 0x04 */ u8 subdivY;
-    /* 0x05 */ s8 unk_05;
-    /* 0x06 */ s8 unk_06;
+    /* 0x05 */ s8 savedType1;
+    /* 0x06 */ s8 savedType2;
     /* 0x07 */ char unk_07[0x1];
     /* 0x08 */ u16 firstVtxIdx;
     /* 0x0A */ u16 lastVtxIdx;
@@ -106,7 +106,7 @@ Vp D_8014EE50 = {
 
 u16 D_8014EE60 = 300;
 
-Gfx D_8014EE68[] = {
+Gfx DefaultFoldSetupGfx[] = {
     gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
     gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
@@ -206,16 +206,16 @@ void func_8013A4D0(void) {
     (*D_80156954)[0].flags |= FOLD_STATE_FLAG_ENABLED;
 
     for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
-        if (((*D_80156954)[i].flags & FOLD_STATE_FLAG_ENABLED) && (*D_80156954)[i].unk_05 != 5) {
+        if (((*D_80156954)[i].flags & FOLD_STATE_FLAG_ENABLED) && (*D_80156954)[i].savedType1 != FOLD_TYPE_5) {
             fold_clear_state_gfx(&(*D_80156954)[i]);
         }
     }
 
     for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
         if ((*D_80156954)[i].flags & FOLD_STATE_FLAG_ENABLED && (*D_80156954)[i].buf != NULL) {
-            s32 temp = (*D_80156954)[i].unk_06; // TODO find a better way to match
+            s32 temp = (*D_80156954)[i].savedType2; // TODO find a better way to match
 
-            if (temp == 11 || (*D_80156954)[i].unk_06 == 12) {
+            if (temp == FOLD_TYPE_B || (*D_80156954)[i].savedType2 == FOLD_TYPE_C) {
                 continue;
             }
 
@@ -385,10 +385,10 @@ void fold_init_state(FoldState* state) {
     s32 j;
 
     state->unk_10 = -1;
-    state->unk_05 = 0;
-    state->unk_06 = 0;
+    state->savedType1 = FOLD_TYPE_NONE;
+    state->savedType2 = FOLD_TYPE_NONE;
     state->flags = 0;
-    state->meshType = 0;
+    state->meshType = FOLD_MESH_TYPE_0;
     state->renderType = FOLD_RENDER_TYPE_0;
     state->firstVtxIdx = 0;
     state->lastVtxIdx = 0;
@@ -414,7 +414,7 @@ void fold_init_state(FoldState* state) {
     }
 }
 
-void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 flags) {
     FoldState* state = &(*D_80156954)[idx];
     s32 oldFlags;
     s32 t1;
@@ -430,28 +430,28 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             fold_clear_state_gfx(state);
             fold_init_state(state);
             state->flags = oldFlags;
-            state->unk_05 = 0;
-            state->unk_06 = 0;
-            state->meshType = 0;
+            state->savedType1 = FOLD_TYPE_NONE;
+            state->savedType2 = FOLD_TYPE_NONE;
+            state->meshType = FOLD_MESH_TYPE_0;
             state->renderType = FOLD_RENDER_TYPE_0;
             state->unk_1C[0][0] = -1;
             state->unk_1C[1][0] = -1;
-            state->flags &= FOLD_STATE_FLAG_ENABLED;
 
-            if (arg6 != 0) {
-                state->flags |= arg6;
+            state->flags &= FOLD_STATE_FLAG_ENABLED;
+            if (flags != 0) {
+                state->flags |= flags;
             } else {
-                state->flags |= arg6; // required to match
+                state->flags |= flags; // required to match
             }
             return;
         case FOLD_TYPE_1:
-            state->unk_05 = 0;
+            state->savedType1 = FOLD_TYPE_NONE;
             state->renderType = FOLD_RENDER_TYPE_0;
             state->unk_1C[0][0] = -1;
             return;
         case FOLD_TYPE_2:
-            state->unk_06 = 0;
-            state->meshType = 0;
+            state->savedType2 = FOLD_TYPE_NONE;
+            state->meshType = FOLD_MESH_TYPE_0;
             state->unk_1C[1][0] = -1;
             return;
         case FOLD_TYPE_11:
@@ -463,38 +463,38 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             return;
         case FOLD_TYPE_F:
         case FOLD_TYPE_10:
-            if (type == state->unk_06 && arg2 == state->unk_1C[1][0] && arg3 == state->unk_1C[1][1]) {
+            if (type == state->savedType2 && arg2 == state->unk_1C[1][0] && arg3 == state->unk_1C[1][1]) {
                 return;
             }
             break;
         case FOLD_TYPE_5:
-            if (state->unk_05 == type && state->unk_1C[0][0] == arg2 && state->unk_1C[0][1] == arg3 &&
+            if (state->savedType1 == type && state->unk_1C[0][0] == arg2 && state->unk_1C[0][1] == arg3 &&
                 state->unk_1C[0][2] == arg4)
             {
                 return;
             }
             break;
         default:
-            if (type != FOLD_TYPE_D && state->unk_06 == 0xD) {
-                state->meshType = 0;
+            if (type != FOLD_TYPE_D && state->savedType2 == FOLD_TYPE_D) {
+                state->meshType = FOLD_MESH_TYPE_0;
                 state->subdivX = 1;
                 state->subdivY = 1;
             }
             break;
     }
 
-    if (type != FOLD_TYPE_5 && state->unk_05 == 5) {
-        state->unk_05 = 0;
+    if (type != FOLD_TYPE_5 && state->savedType1 == FOLD_TYPE_5) {
+        state->savedType1 = FOLD_TYPE_NONE;
     }
 
     if (type == FOLD_TYPE_4 || type == FOLD_TYPE_5) {
-        state->unk_05 = type;
+        state->savedType1 = type;
         state->unk_1C[0][0] = arg2;
         state->unk_1C[0][1] = arg3;
         state->unk_1C[0][2] = arg4;
         state->unk_1C[0][3] = arg5;
     } else if (type >= FOLD_TYPE_6 && type <= FOLD_TYPE_10) {
-        state->unk_06 = type;
+        state->savedType2 = type;
         state->unk_1C[1][0] = arg2;
         state->unk_1C[1][1] = arg3;
         state->unk_1C[1][2] = arg4;
@@ -502,24 +502,24 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     }
 
     state->flags &= FOLD_STATE_FLAG_ENABLED;
-    if (arg6 != 0) {
-        state->flags |= arg6;
+    if (flags != 0) {
+        state->flags |= flags;
     }
-    state->meshType = 0;
+    state->meshType = FOLD_MESH_TYPE_0;
 
     switch (type) {
         case FOLD_TYPE_3:
-            state->meshType = 0;
+            state->meshType = FOLD_MESH_TYPE_0;
             state->renderType = FOLD_RENDER_TYPE_0;
             break;
         case FOLD_TYPE_4:
             state->subdivX = 4;
             state->subdivY = 4;
-            state->meshType = 1;
+            state->meshType = FOLD_MESH_TYPE_1;
             func_8013EE48(state);
             break;
         case FOLD_TYPE_5:
-            state->meshType = 2;
+            state->meshType = FOLD_MESH_TYPE_2;
             state->renderType = FOLD_RENDER_TYPE_B;
             state->unk_3C[0][0] = 0.0f;
             state->unk_3C[0][1] = 0.0f;
@@ -556,7 +556,7 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                     state->buf[arg2 * 4 + 3] = arg3;
                 } while (0); // required to match
 
-                state->meshType = 0;
+                state->meshType = FOLD_MESH_TYPE_0;
 
                 if ((arg3 & 0xFF) == 0xFF) {
                     state->renderType = FOLD_RENDER_TYPE_6;
@@ -575,7 +575,7 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                     state->buf[arg2 * 4 + 3] = arg3;
                 } while (0); // required to match
 
-                state->meshType = 0;
+                state->meshType = FOLD_MESH_TYPE_0;
 
                 if ((arg3 & 0xFF) == 0xFF) {
                     state->renderType = FOLD_RENDER_TYPE_9;
@@ -592,7 +592,7 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             break;
         case FOLD_TYPE_F:
         case FOLD_TYPE_10:
-            state->meshType = 4;
+            state->meshType = FOLD_MESH_TYPE_4;
             if (arg3 >= 0xFF) {
                 state->renderType = FOLD_RENDER_TYPE_E;
             } else {
@@ -648,7 +648,7 @@ s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Mat
     if (state->flags & FOLD_STATE_FLAG_1000) {
         state->unk_1C[0][0] = -1;
         state->unk_1C[1][0] = -1;
-        state->unk_05 = 0;
+        state->savedType1 = FOLD_TYPE_NONE;
         state->meshType = 0;
         state->renderType = FOLD_RENDER_TYPE_0;
         state->flags &= ~(FOLD_STATE_FLAG_1000 | FOLD_STATE_FLAG_800 | FOLD_STATE_FLAG_100 | FOLD_STATE_FLAG_80);
@@ -657,9 +657,9 @@ s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Mat
     } else if (state->flags & FOLD_STATE_FLAG_4000) {
         ret = 2;
     } else if (state->flags & FOLD_STATE_FLAG_20000) {
-        state->unk_05 = 0;
-        state->unk_06 = 0;
-        state->meshType = 0;
+        state->savedType1 = FOLD_TYPE_NONE;
+        state->savedType2 = FOLD_TYPE_NONE;
+        state->meshType = FOLD_MESH_TYPE_0;
         state->renderType = FOLD_RENDER_TYPE_0;
         state->unk_1C[0][0] = -1;
         state->unk_1C[1][0] = -1;
@@ -671,7 +671,7 @@ s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Mat
 
 void func_8013B0EC(FoldState* state) {
     switch (state->meshType) {
-        case 3:
+        case FOLD_MESH_TYPE_3:
             if (state->unk_1C[1][2] == 0) {
                 state->subdivX = 1;
                 state->subdivY = 16;
@@ -679,27 +679,27 @@ void func_8013B0EC(FoldState* state) {
                 state->subdivX = 1;
                 state->subdivY = 1;
             }
-        case 1:
+        case FOLD_MESH_TYPE_1:
             func_8013C048(state);
             break;
-        case 2:
+        case FOLD_MESH_TYPE_2:
             func_8013C3F0(state);
             break;
-        case 0:
-        case 4:
+        case FOLD_MESH_TYPE_0:
+        case FOLD_MESH_TYPE_4:
             func_8013BC88(state);
             break;
         default:
             return;
     }
 
-    if (state->unk_05 == 4) {
+    if (state->savedType1 == FOLD_TYPE_4) {
         func_8013EE68(state);
     }
 
-    switch (state->unk_06) {
-        case 11:
-        case 12:
+    switch (state->savedType2) {
+        case FOLD_TYPE_B:
+        case FOLD_TYPE_C:
             func_8013F1F8(state);
             break;
     }
@@ -713,7 +713,7 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
     s8 angle2;
     f32 alphaComp;
     s32 blendColor;
-    FoldRenderMode* foldC;
+    FoldRenderMode* fold;
     s32 mode1;
     s32 mode2;
     s32 t1;
@@ -722,8 +722,8 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
     gDPPipeSync(gMasterGfxPos++);
 
     if (!(state->flags & FOLD_STATE_FLAG_10)) {
-        gSPDisplayList(gMasterGfxPos++, D_8014EE68);
-        if (state->flags & FOLD_STATE_FLAG_10000) {
+        gSPDisplayList(gMasterGfxPos++, DefaultFoldSetupGfx);
+        if (state->flags & FOLD_STATE_FLAG_NO_FILTERING) {
             gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
         }
         if (state->flags & FOLD_STATE_FLAG_G_CULL_BACK) {
@@ -733,11 +733,11 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
             gSPSetGeometryMode(gMasterGfxPos++, G_CULL_FRONT);
         }
 
-        foldC = &D_8014EE98[state->renderType];
+        fold = &D_8014EE98[state->renderType];
 
-        mode1 = foldC->mode1;
-        mode2 = foldC->mode2;
-        if (foldC->flags & FOLD_STATE_FLAG_ENABLED) {
+        mode1 = fold->mode1;
+        mode2 = fold->mode2;
+        if (fold->flags & FOLD_STATE_FLAG_ENABLED) {
             cond = TRUE;
         }
 
@@ -1183,7 +1183,7 @@ void func_8013C3F0(FoldState* state) {
 
     lerpAlpha = (f32) currentFrame / (f32) animationPeriod;
     for (i = 0; i < descriptor->vtxCount; i++) {
-        if (state->meshType != 2) {
+        if (state->meshType != FOLD_MESH_TYPE_2) {
             return;
         }
 
@@ -1338,14 +1338,14 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
         s32 alpha2;
 
         if (!(state->flags & FOLD_STATE_FLAG_20)) {
-            if ((gSpriteShadingProfile->flags & 1) &&
-                (state->arrayIdx != 0) &&
-                (state->flags & someFlags) &&
-                (state->renderType == FOLD_RENDER_TYPE_0
-                || state->renderType == FOLD_RENDER_TYPE_2
-                || state->renderType == FOLD_RENDER_TYPE_F
-                || state->renderType == FOLD_RENDER_TYPE_7))
-            {
+            if ((gSpriteShadingProfile->flags & 1)
+                && (state->arrayIdx != 0)
+                && (state->flags & someFlags)
+                && (   state->renderType == FOLD_RENDER_TYPE_0
+                    || state->renderType == FOLD_RENDER_TYPE_2
+                    || state->renderType == FOLD_RENDER_TYPE_F
+                    || state->renderType == FOLD_RENDER_TYPE_7)
+            ) {
                 gDPScrollMultiTile2_4b(gMasterGfxPos++,
                     fold_currentImage->raster, G_IM_FMT_CI,
                     fold_currentImage->width, fold_currentImage->height, // img size
@@ -1575,11 +1575,13 @@ void func_8013E2F0(FoldState* state, Matrix4f mtx) {
     if (!(state->flags & FOLD_STATE_FLAG_20)) {
         gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
         gDPLoadTLUT_pal16(gMasterGfxPos++, 0, fold_currentImage->palette);
-        if ((gSpriteShadingProfile->flags & 1) && (state->flags & (FOLD_STATE_FLAG_100000 | FOLD_STATE_FLAG_80000)) &&
-            (state->renderType == FOLD_RENDER_TYPE_0
-            || state->renderType == FOLD_RENDER_TYPE_2
-            || state->renderType == FOLD_RENDER_TYPE_7
-            || state->renderType == FOLD_RENDER_TYPE_B)) {
+        if ((gSpriteShadingProfile->flags & 1)
+            && (state->flags & (FOLD_STATE_FLAG_100000 | FOLD_STATE_FLAG_80000))
+            && (state->renderType == FOLD_RENDER_TYPE_0
+                || state->renderType == FOLD_RENDER_TYPE_2
+                || state->renderType == FOLD_RENDER_TYPE_7
+                || state->renderType == FOLD_RENDER_TYPE_B)
+        ) {
             s32 alpha = 255;
             gDPScrollMultiTile2_4b(gMasterGfxPos++, fold_currentImage->raster, G_IM_FMT_CI,
                                     fold_currentImage->width, fold_currentImage->height,

@@ -90,10 +90,10 @@ s32 collision_main_above(void) {
     collisionStatus->currentCeiling = hitResult;
 
     if (hitResult >= 0) {
-        if (playerStatus->actionState != ACTION_STATE_FALLING &&
-            playerStatus->actionState != ACTION_STATE_STEP_DOWN &&
-            collisionStatus->currentFloor < 0)
-        {
+        if (playerStatus->actionState != ACTION_STATE_FALLING
+            && playerStatus->actionState != ACTION_STATE_STEP_DOWN
+            && collisionStatus->currentFloor < 0
+        ) {
             if (sp2C <= fabsf(new_var + playerStatus->gravityIntegrator[0])) {
                 do {
                     if ((hitResult & COLLISION_WITH_ENTITY_BIT) && get_entity_type(hitResult) == ENTITY_TYPE_BRICK_BLOCK) {
@@ -102,9 +102,9 @@ s32 collision_main_above(void) {
                 } while (0);
 
                 playerStatus->position.y = y - ((playerStatus->colliderHeight / 5.0f) * 3.0f);
-                if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP &&
-                    playerStatus->actionState != ACTION_STATE_SPIN_JUMP)
-                    {
+                if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP
+                    && playerStatus->actionState != ACTION_STATE_SPIN_JUMP
+                ) {
                     playerStatus->gravityIntegrator[0] = 0.0f;
                     playerStatus->gravityIntegrator[1] = 0.0f;
                     playerStatus->gravityIntegrator[2] = 0.0f;
@@ -323,9 +323,9 @@ void gravity_use_fall_parms(void) {
 }
 
 void phys_update_falling(void) {
-    if (gPlayerStatus.actionState != ACTION_STATE_LANDING_ON_SWITCH &&
-        gPlayerStatus.actionState != ACTION_STATE_BOUNCE)
-    {
+    if (gPlayerStatus.actionState != ACTION_STATE_LANDING_ON_SWITCH
+    && gPlayerStatus.actionState != ACTION_STATE_BOUNCE
+    ) {
         s32 colliderID;
         gPlayerStatus.position.y = player_check_collision_below(player_fall_distance(), &colliderID);
         player_handle_floor_collider_type(colliderID);
@@ -401,11 +401,11 @@ void phys_player_land(void) {
                 Entity* entity = get_entity_by_index(collisionStatus->currentFloor);
 
                 entity->collisionFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
-                if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP &&
-                    playerStatus->actionState != ACTION_STATE_TORNADO_POUND &&
-                    playerStatus->actionState != ACTION_STATE_SPIN_JUMP &&
-                    playerStatus->actionState != ACTION_STATE_SPIN_POUND)
-                {
+                if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP
+                    && playerStatus->actionState != ACTION_STATE_TORNADO_POUND
+                    && playerStatus->actionState != ACTION_STATE_SPIN_JUMP
+                    && playerStatus->actionState != ACTION_STATE_SPIN_POUND
+                ) {
                     set_action_state(ACTION_STATE_LANDING_ON_SWITCH);
                 } else {
                     disable_player_input();
@@ -971,9 +971,9 @@ void phys_main_collision_below(void) {
                     }
                     break;
             }
-        } else if (!(playerStatus->flags & PS_FLAG_FLYING) &&
-                    playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER)
-        {
+        } else if (!(playerStatus->flags & PS_FLAG_FLYING)
+             && playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER
+        ) {
             if (outLength <= collHeightHalf + temp_f24 && hitDirX == 0.0f && hitDirZ == 0.0f) {
                 set_action_state(ACTION_STATE_STEP_DOWN);
             } else {
@@ -1076,22 +1076,22 @@ void collision_lateral_peach(void) {
     playerStatus->position.z = z;
 
     // If there was a climbable step in this direction, but no wall, we can climb up it
-    if (climbableStep &&
-        wall < 0 &&
-        playerStatus->actionState != ACTION_STATE_STEP_UP_PEACH &&
-        playerStatus->currentSpeed != 0.0f)
-    {
+    if (climbableStep
+        && wall < 0
+        && playerStatus->actionState != ACTION_STATE_STEP_UP_PEACH
+        &&  playerStatus->currentSpeed != 0.0f
+    ) {
         set_action_state(ACTION_STATE_STEP_UP_PEACH);
     }
 }
 
 void check_input_midair_jump(void) {
-    if (!(gPlayerStatus.flags & (PS_FLAG_SCRIPTED_FALL | PS_FLAG_SLIDING | PS_FLAG_FLYING)) &&
-        !(gPlayerStatus.animFlags & (PA_FLAG_8BIT_MARIO | PA_FLAG_USING_WATT)) &&
-        gPlayerStatus.peakJumpTime >= 6 &&
-        gPlayerStatus.timeInAir < 18 &&
-        gPlayerStatus.pressedButtons & BUTTON_A) {
-
+    if (!(gPlayerStatus.flags & (PS_FLAG_SCRIPTED_FALL | PS_FLAG_SLIDING | PS_FLAG_FLYING))
+        && !(gPlayerStatus.animFlags & (PA_FLAG_8BIT_MARIO | PA_FLAG_USING_WATT))
+        && gPlayerStatus.peakJumpTime >= 6
+        && gPlayerStatus.timeInAir < 18
+        && gPlayerStatus.pressedButtons & BUTTON_A
+    ) {
         switch (gPlayerData.bootsLevel) {
             case 0:
                 break;

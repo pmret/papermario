@@ -61,7 +61,7 @@ s32 D_802AA8B4_425524[] = { 3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1 };
 
 extern s32 actionCmdTableWhirlwind[];
 
-ApiStatus N(init)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(init)) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
@@ -117,7 +117,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(start)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(start)) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;

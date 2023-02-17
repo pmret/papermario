@@ -51,8 +51,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0xFF,
-        .unk_1D = 0xF6,
+        .projectileTargetOffset = { -1, -10 },
     },
 };
 
@@ -107,11 +106,11 @@ EvtScript N(idle) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 14)
-        EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
         EVT_CALL(N(UnkBattleFunc1), -10, 13, 10, 13)
     EVT_ELSE
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 24)
-        EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -1, -10)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -10)
         EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
     EVT_END_IF
     EVT_WAIT(1)

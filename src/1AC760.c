@@ -134,10 +134,10 @@ HitResult calc_partner_test_enemy(void) {
         }
 
         // check partner airlifting electrified enemy
-        if (partner->staticStatus != STATUS_STATIC &&
-            (target->staticStatus == STATUS_STATIC || (part->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED)) &&
-            !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT) &&
-            !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT))
+        if (partner->staticStatus != STATUS_STATIC
+            && (target->staticStatus == STATUS_STATIC || (part->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED))
+            && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
+            && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT))
         {
             sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             apply_shock_effect(partner);
@@ -146,9 +146,9 @@ HitResult calc_partner_test_enemy(void) {
         }
 
         // check partner airlifting fiery enemy
-        if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_SMASH)) &&
-            (part->eventFlags & ACTOR_EVENT_FLAG_FIREY) &&
-            !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_BURN_CONTACT))
+        if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_SMASH))
+            && (part->eventFlags & ACTOR_EVENT_FLAG_FIREY)
+            && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_BURN_CONTACT))
         {
             sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_damage_event_partner_1(1, EVENT_BURN_CONTACT);
@@ -752,8 +752,11 @@ HitResult calc_partner_damage_enemy(void) {
         }
     }
 
-    if (tempBinary && gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40) || gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40) &&
-        !(gBattleStatus.flags1 & BS_FLAGS1_80)) {
+    if (tempBinary
+        && gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)
+        || gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)
+        && !(gBattleStatus.flags1 & BS_FLAGS1_80)
+    ) {
         if ((battleStatus->lastAttackDamage > 0 &&
              ((sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y,
                                           state->goalPos.z),                    //TODO remove sfx_play from conditional

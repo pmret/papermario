@@ -4,7 +4,7 @@
 #include "sprite/npc/BattleWatt.h"
 #include "effects.h"
 
-ApiStatus N(UnkWattEffectFunc1)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkWattEffectFunc1)) {
     WattEffectData* wattEffectData;
     f32 x, y, z;
     Actor* actor = get_actor(script->owner1.enemyID);
@@ -91,7 +91,7 @@ ApiStatus N(UnkWattEffectFunc1)(Evt* script, s32 isInitialCall) {
 
 
 
-ApiStatus N(UnkWattEffectFunc2)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkWattEffectFunc2)) {
     WattEffectData* wattEffectData = get_actor(script->owner1.enemyID)->state.varTablePtr[2];
 
     wattEffectData->flags = FALSE;
@@ -107,7 +107,7 @@ ApiStatus N(UnkWattEffectFunc2)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkWattEffectFunc3)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkWattEffectFunc3)) {
     Bytecode* args = script->ptrReadPos;
     WattEffectData* wattEffectData = get_actor(script->owner1.enemyID)->state.varTablePtr[2];
 
@@ -115,7 +115,7 @@ ApiStatus N(UnkWattEffectFunc3)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkWattEffectFunc4)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkWattEffectFunc4)) {
     Bytecode* args = script->ptrReadPos;
     WattEffectData* wattEffectData = get_actor(script->owner1.enemyID)->state.varTablePtr[2];
 
@@ -123,7 +123,7 @@ ApiStatus N(UnkWattEffectFunc4)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkWattEffectFunc5)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UnkWattEffectFunc5)) {
     Bytecode* args = script->ptrReadPos;
     WattEffectData* wattEffectData = get_actor(script->owner1.enemyID)->state.varTablePtr[2];
 
@@ -195,8 +195,7 @@ ActorPartBlueprint N(watt_parts)[] = {
         .defenseTable = N(watt_defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ELECTRIFIED,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -8,
+        .projectileTargetOffset = { 0, -8 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
@@ -208,8 +207,7 @@ ActorPartBlueprint N(watt_parts)[] = {
         .defenseTable = N(watt_defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ELECTRIFIED,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = -8,
+        .projectileTargetOffset = { 0, -8 },
     },
 };
 

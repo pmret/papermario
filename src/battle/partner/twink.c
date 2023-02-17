@@ -15,7 +15,7 @@ extern EvtScript N(celebrate);
 extern EvtScript N(runAway);
 extern EvtScript N(runAwayFail);
 
-ApiStatus func_80238000_714CF0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80238000_714CF0) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE) {
@@ -74,8 +74,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
 };
 
@@ -121,7 +120,7 @@ EvtScript N(init) = {
 
 s32 D_802382F8_714FE8 = 0;
 
-ApiStatus func_80238028_714D18(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80238028_714D18) {
     Actor* actor = get_actor(script->owner1.actorID);
 
     D_802382F8_714FE8 += 18;

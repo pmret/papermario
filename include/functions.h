@@ -241,7 +241,7 @@ s32 evt_trigger_on_activate_exec_script(Trigger* trigger);
 Trigger* get_trigger_by_id(s32 triggerID);
 
 Actor* get_actor(s32 actorID);
-ActorPart* get_actor_part(Actor* actor, s32 partIndex);
+ActorPart* get_actor_part(Actor* actor, s32 partID);
 s32 add_coins(s32 amt);
 s32 is_partner_ability_active(s32);
 s32 count_power_plus(s32);
@@ -447,7 +447,7 @@ void set_npc_animation(Npc* npc, u32 animID);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale);
 s32 is_block_on_ground(Entity* block);
 void set_animation(s32 actorID, s32, s32 animationIndex);
-void set_animation_rate(s32 actorID, s32 partIndex, f32 rate);
+void set_animation_rate(s32 actorID, s32 partID, f32 rate);
 void set_model_flags(u16, s32, s32);
 void init_enter_world_shared(void);
 s16 update_enter_map_screen_overlay(s16* progress);
@@ -549,7 +549,7 @@ void player_create_target_list(Actor* actor);
 void enemy_create_target_list(Actor* actor);
 
 void set_actor_yaw(s32 actorID, s32 yaw);
-void set_part_yaw(s32 actorID, s32 partIndex, s32 value);
+void set_part_yaw(s32 actorID, s32 partID, s32 value);
 
 void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationType);
 void add_actor_decoration(Actor* actor, s32 decorationIndex, s32 decorationType);
@@ -558,8 +558,8 @@ void remove_actor_decoration(Actor* actor, s32 decorationIndex);
 
 s32 player_team_is_ability_active(Actor* actor, s32 ability);
 
-void create_part_shadow(s32 actorID, s32 partIndex);
-void remove_part_shadow(s32 actorID, s32 partIndex);
+void create_part_shadow(s32 actorID, s32 partID);
+void remove_part_shadow(s32 actorID, s32 partID);
 void create_part_shadow_by_ref(s32 arg0, ActorPart* part);
 
 void spawn_drops(Enemy* enemy);
@@ -996,7 +996,7 @@ void func_802549C0(void);
 void func_8023E104(void);
 void func_8023E11C(void);
 
-void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partIndex);
+void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partID);
 
 void init_encounters_ui(void);
 void initialize_collision(void);

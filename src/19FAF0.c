@@ -551,8 +551,10 @@ HitResult calc_player_damage_enemy(void) {
             }
         }
 
-        if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE && battleStatus->currentAttackElement & DAMAGE_TYPE_BLAST &&
-            targetPart->eventFlags & ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION) {
+        if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
+            && battleStatus->currentAttackElement & DAMAGE_TYPE_BLAST
+            && targetPart->eventFlags & ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION
+        ) {
             targetDefense = 0;
             currentAttackDamage = target->currentHP;
         }
@@ -654,12 +656,12 @@ HitResult calc_player_damage_enemy(void) {
         if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
             if (battleStatus->currentAttackElement & DAMAGE_TYPE_FEAR
                 && rand_int(99) < (target->actorBlueprint->escapeChance * battleStatus->statusChance) / 100
-                && !(target->debuff == STATUS_FEAR
-                    || target->debuff == STATUS_DIZZY
-                    || target->debuff == STATUS_PARALYZE
-                    || target->debuff == STATUS_SLEEP
-                    || target->debuff == STATUS_FROZEN
-                    || target->debuff == STATUS_STOP)
+                && (target->debuff != STATUS_FEAR
+                    && target->debuff != STATUS_DIZZY
+                    && target->debuff != STATUS_PARALYZE
+                    && target->debuff != STATUS_SLEEP
+                    && target->debuff != STATUS_FROZEN
+                    && target->debuff != STATUS_STOP)
                 && !(target->flags & ACTOR_FLAG_400)
             ) {
                 dispatch_event_actor(target, EVENT_SCARE_AWAY);
@@ -721,65 +723,68 @@ HitResult calc_player_damage_enemy(void) {
             }
         }
 
-        if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-            if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT) && targetPart->eventFlags & ACTOR_EVENT_FLAG_POWER_BOUNCE) {
-                if (dispatchEvent == EVENT_HIT_COMBO) {
-                    dispatchEvent = EVENT_POWER_BOUNCE_HIT;
-                }
-
-                if (dispatchEvent == EVENT_HIT) {
-                    dispatchEvent = EVENT_POWER_BOUNCE_HIT;
-                }
-
-                if (dispatchEvent == EVENT_ZERO_DAMAGE) {
-                    dispatchEvent = EVENT_POWER_BOUNCE_HIT;
-                }
-
-                if (dispatchEvent == EVENT_IMMUNE) {
-                    dispatchEvent = EVENT_POWER_BOUNCE_HIT;
-                }
-
-                if (dispatchEvent == EVENT_DEATH) {
-                    dispatchEvent = EVENT_POWER_BOUNCE_DEATH;
-                }
+        if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
+            && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
+            && targetPart->eventFlags & ACTOR_EVENT_FLAG_POWER_BOUNCE
+        ) {
+            if (dispatchEvent == EVENT_HIT_COMBO) {
+                dispatchEvent = EVENT_POWER_BOUNCE_HIT;
             }
 
-            if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-                if (battleStatus->currentAttackElement & (DAMAGE_TYPE_POW | DAMAGE_TYPE_JUMP) && targetPart->eventFlags & ACTOR_EVENT_FLAG_GROUNDABLE) {
-                    if (dispatchEvent == EVENT_HIT) {
-                        dispatchEvent = EVENT_FALL_TRIGGER;
-                    }
+            if (dispatchEvent == EVENT_HIT) {
+                dispatchEvent = EVENT_POWER_BOUNCE_HIT;
+            }
 
-                    if (dispatchEvent == EVENT_IMMUNE) {
-                        dispatchEvent = EVENT_FALL_TRIGGER;
-                    }
+            if (dispatchEvent == EVENT_ZERO_DAMAGE) {
+                dispatchEvent = EVENT_POWER_BOUNCE_HIT;
+            }
 
-                    tempBinary = TRUE;
-                }
+            if (dispatchEvent == EVENT_IMMUNE) {
+                dispatchEvent = EVENT_POWER_BOUNCE_HIT;
+            }
 
-                if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-                    if (battleStatus->currentAttackElement & (DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_POW | DAMAGE_TYPE_JUMP) &&
-                        targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE) {
-                        if (dispatchEvent == EVENT_HIT) {
-                            dispatchEvent = EVENT_FLIP_TRIGGER;
-                        }
+            if (dispatchEvent == EVENT_DEATH) {
+                dispatchEvent = EVENT_POWER_BOUNCE_DEATH;
+            }
+        }
 
-                        if (dispatchEvent == EVENT_IMMUNE) {
-                            dispatchEvent = EVENT_FLIP_TRIGGER;
-                        }
+        if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
+            && (battleStatus->currentAttackElement & (DAMAGE_TYPE_POW | DAMAGE_TYPE_JUMP))
+            && targetPart->eventFlags & ACTOR_EVENT_FLAG_GROUNDABLE
+        ) {
+            if (dispatchEvent == EVENT_HIT) {
+                dispatchEvent = EVENT_FALL_TRIGGER;
+            }
 
-                        if (!(target->flags & ACTOR_FLAG_400)) {
-                            tempBinary = TRUE;
-                        }
-                    }
-                }
+            if (dispatchEvent == EVENT_IMMUNE) {
+                dispatchEvent = EVENT_FALL_TRIGGER;
+            }
+
+            tempBinary = TRUE;
+        }
+
+        if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) 
+            && (battleStatus->currentAttackElement & (DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_POW | DAMAGE_TYPE_JUMP))
+            && targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE
+        ) {
+            if (dispatchEvent == EVENT_HIT) {
+                dispatchEvent = EVENT_FLIP_TRIGGER;
+            }
+
+            if (dispatchEvent == EVENT_IMMUNE) {
+                dispatchEvent = EVENT_FLIP_TRIGGER;
+            }
+
+            if (!(target->flags & ACTOR_FLAG_400)) {
+                tempBinary = TRUE;
             }
         }
     }
 
-    if (!(gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) &&
-        battleStatus->currentAttackElement & (DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_POW | DAMAGE_TYPE_JUMP) &&
-        targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
+        && battleStatus->currentAttackElement & (DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_POW | DAMAGE_TYPE_JUMP)
+        && targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE
+    ) {
         if (dispatchEvent == EVENT_HIT_COMBO) {
             dispatchEvent = EVENT_FLIP_TRIGGER;
         }
@@ -793,69 +798,72 @@ HitResult calc_player_damage_enemy(void) {
         }
     }
 
-    if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-        if (battleStatus->currentAttackElement & DAMAGE_TYPE_SHELL_CRACK && targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE) {
-            if (dispatchEvent == EVENT_HIT) {
-                dispatchEvent = EVENT_SHELL_CRACK_HIT;
-            }
-
-            if (dispatchEvent == EVENT_IMMUNE) {
-                dispatchEvent = EVENT_SHELL_CRACK_HIT;
-            }
-            tempBinary = TRUE;
+    if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
+        && battleStatus->currentAttackElement & DAMAGE_TYPE_SHELL_CRACK
+        && targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE
+    ) {
+        if (dispatchEvent == EVENT_HIT) {
+            dispatchEvent = EVENT_SHELL_CRACK_HIT;
         }
 
-        if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-            if (battleStatus->currentAttackElement & (DAMAGE_TYPE_BLAST | DAMAGE_TYPE_FIRE)) {
-                if (dispatchEvent == EVENT_HIT) {
-                    dispatchEvent = EVENT_BURN_HIT;
-                }
-
-                if (dispatchEvent == EVENT_DEATH) {
-                    dispatchEvent = EVENT_BURN_DEATH;
-                }
-
-                isFireDamage = TRUE;
-            }
-
-            do {        // TODO remove this do while
-                if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE && battleStatus->lastAttackDamage >= 0 && dispatchEvent != EVENT_DEATH &&
-                    dispatchEvent != EVENT_SPIN_SMASH_DEATH && dispatchEvent != EVENT_EXPLODE_TRIGGER) {
-                    if (!(targetPart->targetFlags & ACTOR_PART_FLAG_4)) {
-
-                        #define INFLICT_STATUS(STATUS_TYPE) \
-                            if ((battleStatus->currentAttackStatus & STATUS_FLAG_##STATUS_TYPE) && \
-                                try_inflict_status(target, STATUS_##STATUS_TYPE, STATUS_##STATUS_TYPE##_TURN_MOD)) { \
-                                tempBinary = TRUE; \
-                                wasStatusInflicted = TRUE; \
-                            } \
-
-                        INFLICT_STATUS(SHRINK);
-                        INFLICT_STATUS(POISON);
-                        INFLICT_STATUS(STONE);
-                        INFLICT_STATUS(SLEEP);
-                        INFLICT_STATUS(STOP);
-                        INFLICT_STATUS(STATIC);
-                        INFLICT_STATUS(FEAR);
-                        INFLICT_STATUS(PARALYZE);
-                        INFLICT_STATUS(DIZZY);
-
-                        #undef INFLICT_STATUS
-
-                        if (wasStatusInflicted) {
-                            if (dispatchEvent == EVENT_ZERO_DAMAGE) {
-                                dispatchEvent = EVENT_HIT_COMBO;
-                            }
-
-                            if (dispatchEvent == EVENT_IMMUNE) {
-                                dispatchEvent = EVENT_HIT;
-                            }
-                        }
-                    }
-                }
-            } while (0);
+        if (dispatchEvent == EVENT_IMMUNE) {
+            dispatchEvent = EVENT_SHELL_CRACK_HIT;
         }
+        tempBinary = TRUE;
     }
+
+    if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
+        && (battleStatus->currentAttackElement & (DAMAGE_TYPE_BLAST | DAMAGE_TYPE_FIRE))
+    ) {
+        if (dispatchEvent == EVENT_HIT) {
+            dispatchEvent = EVENT_BURN_HIT;
+        }
+
+        if (dispatchEvent == EVENT_DEATH) {
+            dispatchEvent = EVENT_BURN_DEATH;
+        }
+
+        isFireDamage = TRUE;
+    }
+
+    do {        // TODO remove this do while
+        if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
+            && battleStatus->lastAttackDamage >= 0
+            && dispatchEvent != EVENT_DEATH
+            && dispatchEvent != EVENT_SPIN_SMASH_DEATH
+            && dispatchEvent != EVENT_EXPLODE_TRIGGER
+            && !(targetPart->targetFlags & ACTOR_PART_FLAG_4)
+        ) {
+            #define INFLICT_STATUS(STATUS_TYPE) \
+                if ((battleStatus->currentAttackStatus & STATUS_FLAG_##STATUS_TYPE) && \
+                    try_inflict_status(target, STATUS_##STATUS_TYPE, STATUS_##STATUS_TYPE##_TURN_MOD)) { \
+                    tempBinary = TRUE; \
+                    wasStatusInflicted = TRUE; \
+                } \
+
+            INFLICT_STATUS(SHRINK);
+            INFLICT_STATUS(POISON);
+            INFLICT_STATUS(STONE);
+            INFLICT_STATUS(SLEEP);
+            INFLICT_STATUS(STOP);
+            INFLICT_STATUS(STATIC);
+            INFLICT_STATUS(FEAR);
+            INFLICT_STATUS(PARALYZE);
+            INFLICT_STATUS(DIZZY);
+
+            #undef INFLICT_STATUS
+
+            if (wasStatusInflicted) {
+                if (dispatchEvent == EVENT_ZERO_DAMAGE) {
+                    dispatchEvent = EVENT_HIT_COMBO;
+                }
+
+                if (dispatchEvent == EVENT_IMMUNE) {
+                    dispatchEvent = EVENT_HIT;
+                }
+            }
+        }
+    } while (0);
 
     battleStatus->wasStatusInflicted = wasStatusInflicted;
     dispatch_event_actor(target, dispatchEvent);

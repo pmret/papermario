@@ -5,7 +5,7 @@ EvtScript N(EVS_SetupMusic) = {
         EVT_CALL(PlaySound, SOUND_8000006B)
     EVT_END_IF
     EVT_CALL(SetMusicTrack, 0, SONG_VOLCANO_ESCAPE, 0, 8)
-    EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA4)
+    EVT_CALL(PlayAmbientSounds, AMBIENT_LAVA_4)
     EVT_RETURN
     EVT_END
 };

@@ -57,9 +57,9 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)
-        EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA2)
+        EVT_CALL(PlayAmbientSounds, AMBIENT_LAVA_2)
     EVT_ELSE
-        EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA1)
+        EVT_CALL(PlayAmbientSounds, AMBIENT_LAVA_1)
     EVT_END_IF
     EVT_SET(LVar0, N(EVS_BindExitTriggers))
     EVT_EXEC(EnterWalk)

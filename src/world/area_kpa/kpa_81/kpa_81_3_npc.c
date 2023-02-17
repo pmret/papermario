@@ -225,6 +225,6 @@ NpcData N(NpcData_Door) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_Door), BTL_KMR_PART_1_FORMATION_00, BTL_KMR_PART_1_STAGE_00),
+    NPC_GROUP(N(NpcData_Door), BTL_KMR_1_FORMATION_00, BTL_KMR_1_STAGE_00),
     {}
 };

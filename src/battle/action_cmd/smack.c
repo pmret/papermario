@@ -35,7 +35,7 @@ s32 D_802A9A20_42EDC0[] = {
 
 extern s32 actionCmdTableSmack[];
 
-ApiStatus N(init)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(init)) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hudElement;

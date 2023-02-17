@@ -48,7 +48,7 @@ NpcData N(NpcData_Paragoomba) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_SpikedGoomba), BTL_KMR_PART_1_FORMATION_0B, BTL_KMR_PART_1_STAGE_02),
-    NPC_GROUP(N(NpcData_Paragoomba), BTL_KMR_PART_1_FORMATION_09, BTL_KMR_PART_1_STAGE_02),
+    NPC_GROUP(N(NpcData_SpikedGoomba), BTL_KMR_1_FORMATION_0B, BTL_KMR_1_STAGE_02),
+    NPC_GROUP(N(NpcData_Paragoomba), BTL_KMR_1_FORMATION_09, BTL_KMR_1_STAGE_02),
     {}
 };

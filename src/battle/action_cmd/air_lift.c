@@ -10,7 +10,7 @@ BSS s32 air_lift_bss_0;
 
 extern s32 actionCmdTableAirLift[];
 
-ApiStatus N(init)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(init)) {
     s32 *args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -56,7 +56,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(start)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(start)) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;

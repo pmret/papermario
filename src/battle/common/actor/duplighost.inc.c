@@ -74,8 +74,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = -2,
-        .unk_1D = -10,
+        .projectileTargetOffset = { -2, -10 },
     },
 };
 
@@ -559,7 +558,7 @@ Formation N(formation_lakilester) = {
     { .actor = &N(lakilester), .home = { .vec = &N(pos_summon) }, .priority = 0 },
 };
 
-ApiStatus N(GetPartnerAndLevel)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetPartnerAndLevel)) {
     Bytecode* args = script->ptrReadPos;
 
     evt_set_variable(script, *args++, gPlayerData.currentPartner);
@@ -567,7 +566,7 @@ ApiStatus N(GetPartnerAndLevel)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(CopyPriority)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(CopyPriority)) {
     s32 partnerID = evt_get_variable(script, *script->ptrReadPos);
     Actor* actor = get_actor(script->owner1.actorID);
     FormationRow* formation = NULL;

@@ -3,8 +3,8 @@
 
 #include "common_structs.h"
 
-ApiStatus action_command_fire_shell_init(Evt* script, s32 isInitialCall);
-ApiStatus action_command_fire_shell_start(Evt* script, s32 isInitialCall);
+API_CALLABLE(action_command_fire_shell_init);
+API_CALLABLE(action_command_fire_shell_start);
 void action_command_fire_shell_update(void);
 void action_command_fire_shell_draw(void);
 void action_command_fire_shell_free(void);

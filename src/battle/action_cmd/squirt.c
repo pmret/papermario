@@ -8,7 +8,7 @@ s32 D_802A9778_42A498[] = { 300, 300, 265, 220, 175, 175, };
 
 extern s32 actionCmdTableSquirt[];
 
-ApiStatus N(init)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(init)) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 id;
@@ -46,7 +46,7 @@ ApiStatus N(init)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(start)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(start)) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;

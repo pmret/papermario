@@ -67,8 +67,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = -3,
-        .unk_1D = -10,
+        .projectileTargetOffset = { -3, -10 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -80,8 +79,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -93,8 +91,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -106,8 +103,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -119,8 +115,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -132,8 +127,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
 };
 
@@ -175,16 +169,16 @@ EvtScript N(idle) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_FLAG(STATUS_FLAG_SLEEP)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
         EVT_CASE_DEFAULT
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 35)
-                    EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -3, -10)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -3, -10)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
-                    EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, 0)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
             EVT_END_SWITCH
     EVT_END_SWITCH
     EVT_WAIT(1)

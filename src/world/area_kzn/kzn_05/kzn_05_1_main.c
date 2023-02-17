@@ -20,7 +20,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_CALL(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
-    EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA1)
+    EVT_CALL(PlayAmbientSounds, AMBIENT_LAVA_1)
     EVT_SET(LVar0, MODEL_kem1)
     EVT_EXEC(N(EVS_StartTexPanner_SmokeLeft))
     EVT_RETURN

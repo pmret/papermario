@@ -7,7 +7,7 @@ s32 D_802A9810_428280[] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 
 extern s32 actionCmdTableBomb[];
 
-ApiStatus N(init)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(init)) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hudElement;

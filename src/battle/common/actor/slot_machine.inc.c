@@ -54,7 +54,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
 };
 
@@ -104,7 +104,7 @@ ActorBlueprint N(slot_machine_start) = {
     .statusMessageOffset = { 10, 20 },
 };
 
-ApiStatus N(IsDemoBattle)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(IsDemoBattle)) {
     script->varTable[0] = 0;
     if (gGameStatusPtr->demoFlags & 1) {
         script->varTable[0] = 1;
@@ -113,7 +113,7 @@ ApiStatus N(IsDemoBattle)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Add1Coin)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(Add1Coin)) {
     add_coins(1);
     return ApiStatus_DONE2;
 }

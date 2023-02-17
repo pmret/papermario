@@ -595,6 +595,6 @@ NpcData N(NpcData_Enemies)[] = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_Enemies), BTL_KMR_PART_3_FORMATION_07),
+    NPC_GROUP(N(NpcData_Enemies), BTL_KMR_3_FORMATION_07),
     {}
 };

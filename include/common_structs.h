@@ -245,12 +245,12 @@ typedef struct Npc {
     /* 0x08E */ s16 duration; // TODO: name less vaguely
     /* 0x090 */ Vec3s homePos;
     /* 0x096 */ s16 unk_96;
-    /* 0x098 */ s16 unk_98;
-    /* 0x09A */ s16 unk_9A;
-    /* 0x09C */ s16 unk_9C;
-    /* 0x09E */ s16 unk_9E;
-    /* 0x0A0 */ s16 unk_A0;
-    /* 0x0A2 */ u16 unk_A2;
+    /* 0x098 */ s16 foldType;
+    /* 0x09A */ s16 foldArg1;
+    /* 0x09C */ s16 foldArg2;
+    /* 0x09E */ s16 foldArg3;
+    /* 0x0A0 */ s16 foldArg4;
+    /* 0x0A2 */ u16 foldArg5;
     /* 0x0A4 */ s8 npcID;
     /* 0x0A5 */ char unk_A5;
     /* 0x0A6 */ s16 collisionRadius;
@@ -1546,10 +1546,9 @@ typedef struct ActorPartBlueprint {
     /* 0x10 */ s32* defenseTable;
     /* 0x14 */ s32 eventFlags;
     /* 0x18 */ s32 elementImmunityFlags;
-    /* 0x1C */ s8 unk_1C;
-    /* 0x1D */ s8 unk_1D;
+    /* 0x1C */ Vec2b projectileTargetOffset;
     /* 0x1E */ char unk_1E[2];
-    /* 0x20 */ s32 unk_20;
+    /* 0x20 */ s32 overrideNameMsg; // name when this part is targeted; overrides name from actor type
 } ActorPartBlueprint; // size = 0x24
 
 typedef struct ActorPart {
@@ -1573,8 +1572,7 @@ typedef struct ActorPart {
     /* 0x70 */ s16 unk_70;
     /* 0x72 */ Vec2bu size;
     /* 0x74 */ s8 verticalStretch;
-    /* 0x75 */ s8 unk_75;
-    /* 0x76 */ s8 unk_76;
+    /* 0x75 */ Vec2b projectileTargetOffset;
     /* 0x77 */ char unk_77[1];
     /* 0x78 */ u32* defenseTable;
     /* 0x7C */ s32 eventFlags;

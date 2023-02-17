@@ -295,7 +295,7 @@ EvtScript N(EVS_NpcInteract_Lovers) = {
     EVT_END
 };
 
-EvtScript N(EVS_NpcInteract_ThreeSisters) = {
+EvtScript N(EVS_NpcInteract_Toadette) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
             EVT_SET(LVar0, MSG_MAC_Gate_00CF)
@@ -378,7 +378,7 @@ EvtScript N(EVS_NpcInteract_ThreeSisters) = {
 };
 
 EvtScript N(EVS_NpcInteract_MissT) = {
-    EVT_EXEC_WAIT(N(EVS_NpcInteract_ThreeSisters))
+    EVT_EXEC_WAIT(N(EVS_NpcInteract_Toadette))
     EVT_EXEC_WAIT(N(EVS_LetterPrompt_MissT))
     EVT_IF_NE(LVarC, 0)
         EVT_RETURN
@@ -537,7 +537,7 @@ EvtScript N(EVS_NpcInit_ShamelessLover) = {
 };
 
 EvtScript N(EVS_NpcInit_KrisT) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette)))
     EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_KrisT)))
     EVT_RETURN
     EVT_END
@@ -551,7 +551,7 @@ EvtScript N(EVS_NpcInit_MissT) = {
 };
 
 EvtScript N(EVS_NpcInit_FelissaT) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ThreeSisters)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette)))
     EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_FelissaT)))
     EVT_RETURN
     EVT_END

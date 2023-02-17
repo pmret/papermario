@@ -60,7 +60,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_FLIPABLE,
         .elementImmunityFlags = 0,
-        .unk_1D = 14,
+        .projectileTargetOffset = { 0, 14 },
     },
 };
 
@@ -139,7 +139,7 @@ EvtScript N(init) = {
     EVT_ELSE
         EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 24)
-        EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -1, -9)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
         EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(spikeTop_TakeTurn_Floor)))
         EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(spikeTop_HandleEvent_Floor)))
         EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021C9D0)))
@@ -162,7 +162,7 @@ EvtScript N(spikeTop_FallDown) = {
     EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 2)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 1, 20)
-    EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -3, -8)
+    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -3, -8)
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(spikeTop_TakeTurn_Floor)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(spikeTop_HandleEvent_Floor)))
@@ -371,7 +371,7 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 2)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 1, 20)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -3, -8)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -3, -8)
             EVT_CALL(SetActorVar, ACTOR_SELF, 9, 1)
             EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_8021C8CC)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021CA68)))
@@ -551,7 +551,7 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 24)
-    EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -1, -9)
+    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(spikeTop_TakeTurn_Floor)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(spikeTop_HandleEvent_Floor)))
@@ -710,7 +710,7 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 24)
-            EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -1, -9)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
             EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021C9D0)))
             EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))

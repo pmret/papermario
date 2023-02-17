@@ -71,7 +71,7 @@ extern HudScript HES_AimReticle;
 extern HudScript HES_AimTarget;
 extern HudScript HES_StickTapRight;
 
-ApiStatus N(SpinyFlipUpdatePopup)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpinyFlipUpdatePopup)) {
     if (isInitialCall) {
         sSpinyFlipStarted = 0;
     }
@@ -138,8 +138,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
@@ -151,8 +150,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
 };
 
@@ -368,7 +366,7 @@ EvtScript N(returnHome) = {
 
 HudScript* N(aimHudScripts)[] = { &HES_AimBlinkA };
 
-ApiStatus N(SpinyFlipActionCommand)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpinyFlipActionCommand)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 screenX, screenY, screenZ;
     Actor* partner = battleStatus->partnerActor;
@@ -429,8 +427,8 @@ ApiStatus N(SpinyFlipActionCommand)(Evt* script, s32 isInitialCall) {
             set_goal_pos_to_part(partnerState, partner->targetActorID, partner->targetPartIndex);
             target = get_actor(partner->targetActorID);
             part = get_actor_part(target, partner->targetPartIndex);
-            partnerState->goalPos.x += part->unk_75;
-            partnerState->goalPos.y += part->unk_76;
+            partnerState->goalPos.x += part->projectileTargetOffset.x;
+            partnerState->goalPos.y += part->projectileTargetOffset.y;
             partnerState->goalPos.z = partnerState->goalPos.z; // required to match
             partnerState->distance = dist2D(partnerState->currentPos.x,
                                             partnerState->currentPos.y,
@@ -601,7 +599,7 @@ ApiStatus N(SpinyFlipActionCommand)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(ThrowSpinyFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ThrowSpinyFX)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     f32 xPos = partnerActor->currentPos.x + 5;
@@ -615,7 +613,7 @@ ApiStatus N(ThrowSpinyFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetSpinySurgeDamage)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetSpinySurgeDamage)) {
     s32 partnerLevel = gBattleStatus.partnerActor->actorBlueprint->level;
     s32 actionCommandResult = script->varTable[10];
     s32 damage = 0;
@@ -660,7 +658,7 @@ ApiStatus N(GetSpinySurgeDamage)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(RemoveCloudNineFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(RemoveCloudNineFX)) {
     EffectInstance* effect = gBattleStatus.cloudNineEffect;
 
     if (effect != NULL) {
@@ -673,7 +671,7 @@ ApiStatus N(RemoveCloudNineFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(CloudNineFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(CloudNineFX)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* actor = battleStatus->playerActor;
 
@@ -700,7 +698,7 @@ ApiStatus N(CloudNineFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(ApplyCloudNine)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ApplyCloudNine)) {
     if (gBattleStatus.cloudNineTurnsLeft < script->varTable[10]) {
         gBattleStatus.cloudNineTurnsLeft = script->varTable[10];
         gBattleStatus.cloudNineDodgeChance = 50;
@@ -710,7 +708,7 @@ ApiStatus N(ApplyCloudNine)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(InitHurricane)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(InitHurricane)) {
     Actor* partner = gBattleStatus.partnerActor;
     s32 totalChance;
     s32 affectedTargets;
@@ -784,7 +782,7 @@ ApiStatus N(InitHurricane)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(CanTargetBeBlown)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(CanTargetBeBlown)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     s32 targetIdx = partner->targetIndexList[partner->selectedTargetIndex];
@@ -1338,7 +1336,7 @@ enum {
     STATE_EXHALE   =  1,
 };
 
-ApiStatus N(ProcessHurricane)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ProcessHurricane)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     ActorState* partnerState = &partner->state;
@@ -1625,7 +1623,7 @@ RESTART:
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(BlowTargetAway)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(BlowTargetAway)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* target;
     ActorState* state;
@@ -1671,14 +1669,14 @@ ApiStatus N(BlowTargetAway)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(AllEnemiesBlownAway)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(AllEnemiesBlownAway)) {
     if (sNumEnemiesBeingBlown == 0) {
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(IsHurricaneActive)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(IsHurricaneActive)) {
     script->varTable[0] = sIsHurricaneActive;
     return ApiStatus_DONE2;
 }

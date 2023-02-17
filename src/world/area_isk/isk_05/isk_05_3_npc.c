@@ -218,7 +218,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
     EVT_WAIT(1)
     EVT_CALL(N(DestroyAmbushWorker))
-    EVT_CALL(func_802CFD30, NPC_SELF, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802CFD30, NPC_SELF, FOLD_TYPE_NONE, 0, 0, 0, 0)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_StoneChomp)))
     EVT_RETURN
@@ -293,6 +293,6 @@ NpcData N(NpcData_StoneChomp) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_StoneChomp), BTL_ISK_PART_1_FORMATION_07, BTL_ISK_PART_1_STAGE_09),
+    NPC_GROUP(N(NpcData_StoneChomp), BTL_ISK_1_FORMATION_07, BTL_ISK_1_STAGE_09),
     {}
 };

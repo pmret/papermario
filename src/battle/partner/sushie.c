@@ -26,15 +26,15 @@ extern EvtScript N(tidalWave);
 
 static EffectInstance* sEffect;
 
-ApiStatus N(SetSquirtAngle)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetSquirtAngle)) {
     ActorPart* targetPart;
     Actor* partner = gBattleStatus.partnerActor;
 
     set_goal_pos_to_part(&partner->state, partner->targetActorID, partner->targetPartIndex);
     targetPart = get_actor_part(get_actor(partner->targetActorID), partner->targetPartIndex);
 
-    partner->state.goalPos.x += targetPart->unk_75;
-    partner->state.goalPos.y += targetPart->unk_76;
+    partner->state.goalPos.x += targetPart->projectileTargetOffset.x;
+    partner->state.goalPos.y += targetPart->projectileTargetOffset.y;
     partner->state.goalPos.z = partner->state.goalPos.z; // required to match
 
     partner->state.currentPos.x = partner->currentPos.x + 8.0f;
@@ -55,7 +55,7 @@ ApiStatus N(SetSquirtAngle)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetSquirtDamage)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetSquirtDamage)) {
     Actor* partner = gBattleStatus.partnerActor;
     s32 actionCmdResult = script->varTable[0];
     s32 damage = 0;
@@ -105,7 +105,7 @@ ApiStatus N(GetSquirtDamage)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(InflateSushie)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(InflateSushie)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     f32 xScale;
@@ -135,7 +135,7 @@ ApiStatus N(InflateSushie)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetSquirtTargetPos)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(GetSquirtTargetPos)) {
     f32 posX = script->varTable[0];
     f32 posY = script->varTable[1];
 
@@ -147,7 +147,7 @@ ApiStatus N(GetSquirtTargetPos)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ApplyWaterBlock)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ApplyWaterBlock)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 var = script->varTable[0];
 
@@ -168,7 +168,7 @@ ApiStatus N(ApplyWaterBlock)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(PlaySquirtFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(PlaySquirtFX)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* playerActor = battleStatus->playerActor;
@@ -178,7 +178,7 @@ ApiStatus N(PlaySquirtFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(PlayWaterBlockFX)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(PlayWaterBlockFX)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     f32 posX = evt_get_float_variable(script, *args++);
@@ -195,7 +195,7 @@ ApiStatus N(PlayWaterBlockFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(ProcessTidalWave)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ProcessTidalWave)) {
     Actor* partner = gBattleStatus.partnerActor;
     ActorState* state = &partner->state;
     f32 x, y;
@@ -368,7 +368,7 @@ ApiStatus N(ProcessTidalWave)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(SetScaleTidalWaveCharge)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SetScaleTidalWaveCharge)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     f32 var = script->varTable[0] * 3.0 / 100.0 + 1.0;
@@ -435,8 +435,7 @@ ActorPartBlueprint N(parts)[] = {
         .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
-        .unk_1D = 0,
+        .projectileTargetOffset = { 0, 0 },
     },
 };
 

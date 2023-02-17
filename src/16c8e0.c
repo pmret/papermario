@@ -885,10 +885,10 @@ void btl_draw_enemy_health_bars(void) {
                         }
                     }
 
-                    if (!(enemy->flags & (ACTOR_FLAG_40000 | ACTOR_FLAG_TARGET_ONLY)) &&
-                        ((gBattleStatus.flags1 & BS_FLAGS1_MENU_OPEN) || (enemy->flags & ACTOR_FLAG_80000)) &&
-                        is_actor_hp_bar_visible(enemy))
-                    {
+                    if (!(enemy->flags & (ACTOR_FLAG_40000 | ACTOR_FLAG_TARGET_ONLY))
+                        && ((gBattleStatus.flags1 & BS_FLAGS1_MENU_OPEN) || (enemy->flags & ACTOR_FLAG_80000))
+                        && is_actor_hp_bar_visible(enemy)
+                    ) {
                         f32 x = enemy->healthBarPosition.x;
                         f32 y = enemy->healthBarPosition.y;
                         f32 z = enemy->healthBarPosition.z;
@@ -1104,7 +1104,7 @@ void btl_restore_world_cameras(void) {
 }
 
 void btl_delete_actor(Actor* actor) {
-    ActorPart* partsTable;
+    ActorPart* part;
     ActorPart* actorPartTemp;
     BattleStatus* battleStatus;
     s32 i;
@@ -1124,29 +1124,29 @@ void btl_delete_actor(Actor* actor) {
     }
     func_80266EE8(actor, 0);
 
-    partsTable = actor->partsTable;
+    part = actor->partsTable;
 
-    while (partsTable != NULL) {
-        if (!(partsTable->flags & 0x4)) {
-            delete_shadow(partsTable->shadowIndex);
+    while (part != NULL) {
+        if (!(part->flags & ACTOR_PART_FLAG_4)) {
+            delete_shadow(part->shadowIndex);
         }
 
-        if (partsTable->idleAnimations != NULL) {
-            func_802DE894(partsTable->spriteInstanceID, 0, 0, 0, 0, 0, 0);
+        if (part->idleAnimations != NULL) {
+            func_802DE894(part->spriteInstanceID, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
 
-            ASSERT(spr_free_sprite(partsTable->spriteInstanceID) == 0);
+            ASSERT(spr_free_sprite(part->spriteInstanceID) == 0);
 
-            if (!(partsTable->flags & 0x80000000)) {
-                heap_free(partsTable->movement);
+            if (!(part->flags & ACTOR_PART_FLAG_80000000)) {
+                heap_free(part->movement);
             }
 
-            if (!(partsTable->flags & 0x2)) {
-                heap_free(partsTable->decorationTable);
+            if (!(part->flags & 0x2)) {
+                heap_free(part->decorationTable);
             }
         }
-        actorPartTemp = partsTable->nextPart;
-        heap_free(partsTable);
-        partsTable = actorPartTemp;
+        actorPartTemp = part->nextPart;
+        heap_free(part);
+        part = actorPartTemp;
     }
 
     delete_shadow(actor->shadow.id);

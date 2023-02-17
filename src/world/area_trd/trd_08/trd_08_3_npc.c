@@ -217,7 +217,7 @@ NpcData N(NpcData_05)[] = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_00), BTL_KMR_PART_1_FORMATION_06),
-    NPC_GROUP(N(NpcData_05), BTL_KMR_PART_1_FORMATION_06),
+    NPC_GROUP(N(NpcData_00), BTL_KMR_1_FORMATION_06),
+    NPC_GROUP(N(NpcData_05), BTL_KMR_1_FORMATION_06),
     {}
 };

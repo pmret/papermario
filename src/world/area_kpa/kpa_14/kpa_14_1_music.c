@@ -3,7 +3,7 @@
 EvtScript N(EVS_SetupMusic) = {
     EVT_CALL(SetMusicTrack, 0, SONG_BOWSERS_CASTLE, 0, 8)
     EVT_IF_EQ(GF_KPA16_ShutOffLava, FALSE)
-        EVT_CALL(PlayAmbientSounds, AMBIENT_UNDER_SEA1)
+        EVT_CALL(PlayAmbientSounds, AMBIENT_LAVA_1)
     EVT_ELSE
         EVT_CALL(ClearAmbientSounds, 250)
     EVT_END_IF

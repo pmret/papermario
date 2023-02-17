@@ -1515,25 +1515,25 @@ void appendGfx_player_actor(void* arg0) {
         lastAnim = playerParts->currentAnimation;
     } while (0); // required to match
 
-    if (((((gBattleStatus.flags2 & (BS_FLAGS2_8 | BS_FLAGS2_2)) == BS_FLAGS2_2) && (partner != NULL)) || (battleStatus->outtaSightActive > 0)) &&
-        !(player->flags & ACTOR_FLAG_20000000) &&
-        ((partner == NULL) || !(partner->flags & ACTOR_FLAG_NO_ATTACK)))
+    if (((((gBattleStatus.flags2 & (BS_FLAGS2_8 | BS_FLAGS2_2)) == BS_FLAGS2_2) && (partner != NULL)) || (battleStatus->outtaSightActive > 0))
+        && !(player->flags & ACTOR_FLAG_20000000)
+        && ((partner == NULL) || !(partner->flags & ACTOR_FLAG_NO_ATTACK)))
     {
         if (!(gBattleStatus.flags2 & BS_FLAGS2_100000)) {
-            if ((player->debuff != STATUS_FEAR) &&
-                (player->debuff != STATUS_PARALYZE) &&
-                (player->debuff != STATUS_FROZEN) &&
-                (player->debuff != STATUS_STOP))
-            {
+            if ((player->debuff != STATUS_FEAR)
+                && (player->debuff != STATUS_PARALYZE)
+                && (player->debuff != STATUS_FROZEN)
+                && (player->debuff != STATUS_STOP)
+            ) {
                 if ((player->transparentStatus != STATUS_TRANSPARENT) &&
                     (player->stoneStatus != STATUS_STONE) &&
                     ((battleStatus->outtaSightActive > 0) || (gBattleStatus.flags2 & BS_FLAGS2_2)))
                 {
                     if (is_ability_active(ABILITY_BERSERKER)) {
                         playerParts->currentAnimation = func_80265D44(0x13);
-                    } else  if (player->debuff == 6) {
+                    } else  if (player->debuff == STATUS_SLEEP) {
                         playerParts->currentAnimation = func_80265D44(0x15);
-                    } else if (player->debuff == 4) {
+                    } else if (player->debuff == STATUS_DIZZY) {
                         playerParts->currentAnimation = func_80265D44(0x18);
                     } else {
                         playerParts->currentAnimation = func_80265D44(0x12);
@@ -3223,9 +3223,9 @@ void func_8025C8A0(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
     if (part->decorationTable->unk_751 != 0) {
         part->decorationTable->unk_751 = 0;
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            func_802DDFF8(PLAYER_SPRITE_MAIN, 0, 0, 0, 0, 0, 0);
+            func_802DDFF8(PLAYER_SPRITE_MAIN, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
         } else {
-            func_802DE894(part->spriteInstanceID, 0, 0, 0, 0, 0, 0);
+            func_802DE894(part->spriteInstanceID, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
         }
     }
 }
@@ -3246,9 +3246,9 @@ void func_8025C918(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
         decor->unk_751 = 0;
         decor->unk758 = 0;
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            func_802DDFF8(0, FOLD_TYPE_11, 0x14, 0, 0, 0xFF, 0);
+            func_802DDFF8(0, FOLD_TYPE_11, 20, 0, 0, 255, 0);
         } else {
-            func_802DE894(part->spriteInstanceID, FOLD_TYPE_11, 0x14, 0, 0, 0xFF, 0);
+            func_802DE894(part->spriteInstanceID, FOLD_TYPE_11, 20, 0, 0, 255, 0);
         }
     }
 
@@ -3276,9 +3276,9 @@ void func_8025C918(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
     for (i = 0; i < ARRAY_COUNT(rbuf); i++) {
         color = (rbuf[i] << 0x18) | (gbuf[i] << 0x10) | (bbuf[i] << 8) | alpha;
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            func_802DDFF8(PLAYER_SPRITE_MAIN, 0xC, i, color, 0, 0xFF, 0);
+            func_802DDFF8(PLAYER_SPRITE_MAIN, FOLD_TYPE_C, i, color, 0, 0xFF, 0);
         } else {
-            func_802DE894(part->spriteInstanceID, 0xC, i, color, 0, 0xFF, 0);
+            func_802DE894(part->spriteInstanceID, FOLD_TYPE_C, i, color, 0, 0xFF, 0);
         }
     }
 
