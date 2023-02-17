@@ -10,24 +10,24 @@ API_CALLABLE(VirtualEntityLandJump);
 
 static s32 pad_images = 0;
 
-#include "battle/move/dusty_hammer.png.inc.c"
-#include "battle/move/dusty_hammer.pal.inc.c"
+#include "battle/move/hammer/dusty_hammer.png.inc.c"
+#include "battle/move/hammer/dusty_hammer.pal.inc.c"
 
-#include "battle/move/basic_hammer.png.inc.c"
-#include "battle/move/basic_hammer.pal.inc.c"
+#include "battle/move/hammer/basic_hammer.png.inc.c"
+#include "battle/move/hammer/basic_hammer.pal.inc.c"
 
-#include "battle/move/super_hammer.png.inc.c"
-#include "battle/move/super_hammer.pal.inc.c"
+#include "battle/move/hammer/super_hammer.png.inc.c"
+#include "battle/move/hammer/super_hammer.pal.inc.c"
 
-#include "battle/move/ultra_hammer.png.inc.c"
-#include "battle/move/ultra_hammer.pal.inc.c"
+#include "battle/move/hammer/ultra_hammer.png.inc.c"
+#include "battle/move/hammer/ultra_hammer.pal.inc.c"
 
-#include "battle/move/hammer_throw.vtx.inc.c"
+#include "battle/move/hammer/hammer_throw.vtx.inc.c"
 
-#include "battle/move/dusty_hammer.gfx.inc.c"
-#include "battle/move/basic_hammer.gfx.inc.c"
-#include "battle/move/super_hammer.gfx.inc.c"
-#include "battle/move/ultra_hammer.gfx.inc.c"
+#include "battle/move/hammer/dusty_hammer.gfx.inc.c"
+#include "battle/move/hammer/basic_hammer.gfx.inc.c"
+#include "battle/move/hammer/super_hammer.gfx.inc.c"
+#include "battle/move/hammer/ultra_hammer.gfx.inc.c"
 
 EntityModelScript N(EMS_DustyHammer) = STANDARD_ENTITY_MODEL_SCRIPT(N(dusty_hammer_gfx), RENDER_MODE_ALPHATEST);
 EntityModelScript N(EMS_BasicHammer) = STANDARD_ENTITY_MODEL_SCRIPT(N(basic_hammer_gfx), RENDER_MODE_ALPHATEST);

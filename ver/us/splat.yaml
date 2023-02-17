@@ -8470,7 +8470,7 @@ segments:
 ### Battle Moves ###
 ####################
   - name: battle_move_hammer_attack
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x7345A0
     vram: 0x802A1000
@@ -8479,7 +8479,7 @@ segments:
     - [0x7345A0, c, attack]
     - [0x734650]
   - name: battle_move_spin_smash
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x737890
     vram: 0x802A1000
@@ -8488,7 +8488,7 @@ segments:
     - [0x737890, c, spin_smash]
     - [0x737A20]
   - name: battle_move_quake_hammer
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x73AED0
     vram: 0x802A1000
@@ -8537,7 +8537,7 @@ segments:
     - [0x748DD0, c]
     - [0x748EC0, data]
   - name: battle_move_d_down_pound
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x74AD90
     vram: 0x802A1000
@@ -8554,7 +8554,7 @@ segments:
     - [0x74D570, c]
     - [0x74D850, data]
   - name: battle_move_hammer_charge_0
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x74F130
     vram: 0x802A1000
@@ -8563,7 +8563,7 @@ segments:
     - [0x74F130, c, hammer_charge_0]
     - [0x74F3D0]
   - name: battle_move_hammer_throw
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x752450
     vram: 0x802A1000
@@ -8590,7 +8590,7 @@ segments:
       - [0x755028, gfx, ultra_hammer]
       - [0x755118]
   - name: battle_move_mega_quake
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x756780
     vram: 0x802A1000
@@ -8599,7 +8599,7 @@ segments:
     - [0x756780, c, mega_quake]
     - [0x756900]
   - name: battle_move_hammer_charge_1
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x7595B0
     vram: 0x802A1000
@@ -8616,7 +8616,7 @@ segments:
     - [0x75C980, c]
     - [0x75CCE0, data]
   - name: battle_move_hammer_charge_2
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x75E5D0
     vram: 0x802A1000
@@ -8633,7 +8633,7 @@ segments:
     - [0x761920, c]
     - [0x761C80, data]
   - name: battle_move_auto_smash
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x763540
     vram: 0x802A1000
@@ -8650,7 +8650,7 @@ segments:
     - [0x765C20, c, auto_jump]
     - [0x765D10]
   - name: battle_move_power_quake
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x767C90
     vram: 0x802A1000
@@ -8691,7 +8691,7 @@ segments:
     - [0x770F30, c]
     - [0x771020, data]
   - name: battle_move_power_smash
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x772BA0
     vram: 0x802A1000
@@ -8700,7 +8700,7 @@ segments:
     - [0x772BA0, c, power_smash]
     - [0x772C50]
   - name: battle_move_super_smash
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x775100
     vram: 0x802A1000
@@ -8709,7 +8709,7 @@ segments:
     - [0x775100, c, super_smash]
     - [0x7751B0]
   - name: battle_move_mega_smash
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x777690
     vram: 0x802A1000
@@ -8726,7 +8726,7 @@ segments:
     - [0x779C90, c]
     - [0x779E30, data]
   - name: battle_move_shrink_smash
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x77CB80
     vram: 0x802A1000
@@ -8735,7 +8735,7 @@ segments:
     - [0x77CB80, c, shrink_smash]
     - [0x77CC30]
   - name: battle_move_shell_crack
-    dir: battle/move
+    dir: battle/move/hammer
     type: code
     start: 0x77F240
     vram: 0x802A1000
