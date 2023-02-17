@@ -2,6 +2,7 @@
 #include "include_asm.h"
 #include "macros.h"
 #include "PR/os_internal.h"
+#include "PR/os_vi.h"
 #include "PR/R4300.h"
 #include "PR/rcp.h"
 #include "PR/viint.h"

@@ -7,6 +7,15 @@
 
 void appendGfx_intro_logos(void);
 
+#if VERSION_JP
+#define LOGO_1_Y 54
+#define LOGO_2_Y 104
+#else
+#define LOGO_1_Y 89
+#define LOGO_2_Y 59
+#endif
+
+
 s32 D_800778C0[] = { 0, 0 };
 
 Gfx D_800778C8[] = {
@@ -100,6 +109,10 @@ void state_init_logos(void) {
 }
 
 void state_step_logos(void) {
+#if VERSION_JP
+    int pressedButtons = gGameStatusPtr->pressedButtons[0];
+#endif
+
     if (gGameStatusPtr->bSkipIntro) {
         if (intro_logos_fade_out(10)) {
             set_curtain_scale(1.0f);
@@ -107,6 +120,24 @@ void state_step_logos(void) {
             set_game_mode(GAME_MODE_TITLE_SCREEN);
         }
     } else {
+#if VERSION_JP
+        if ((gGameStatusPtr->introState == INTRO_STATE_1 ||
+             gGameStatusPtr->introState == INTRO_STATE_2 ||
+             gGameStatusPtr->introState == INTRO_STATE_3 ||
+             gGameStatusPtr->introState == INTRO_STATE_4 ||
+             gGameStatusPtr->introState == INTRO_STATE_5 ||
+             gGameStatusPtr->introState == INTRO_STATE_6 ||
+             gGameStatusPtr->introState == INTRO_STATE_7 ||
+             gGameStatusPtr->introState == INTRO_STATE_8 ||
+             gGameStatusPtr->introState == INTRO_STATE_9 ||
+             gGameStatusPtr->introState == INTRO_STATE_A) &&
+            (pressedButtons & (BUTTON_START | BUTTON_Z | BUTTON_A)))
+        {
+            intro_logos_set_fade_color(208);
+            gGameStatusPtr->bSkipIntro = 1;
+        }
+#endif
+
         switch (gGameStatusPtr->introState) {
             case INTRO_STATE_0:
                 if (intro_logos_fade_in(10)) {
@@ -124,18 +155,29 @@ void state_step_logos(void) {
             case INTRO_STATE_2:
                 if (intro_logos_fade_out(10)) {
                     gGameStatusPtr->introState++;
+#if VERSION_JP
+                    gGameStatusPtr->introState += 2;
+#endif
                 }
                 break;
             case INTRO_STATE_3:
                 if (intro_logos_fade_in(10)) {
                     gGameStatusPtr->introState++;
+#if VERSION_JP
+                    gGameStatusPtr->introCounter = 30;
+#else
                     gGameStatusPtr->introCounter = 40;
+#endif
                 }
                 break;
             case INTRO_STATE_4:
                 if (gGameStatusPtr->introCounter == 0) {
                     gGameStatusPtr->introState++;
+#if VERSION_JP
+                    intro_logos_set_fade_color(0);
+#else
                     intro_logos_set_fade_color(208);
+#endif
                 }
                 gGameStatusPtr->introCounter--;
                 break;
@@ -226,25 +268,41 @@ void appendGfx_intro_logos(void) {
         case INTRO_STATE_3:
         case INTRO_STATE_4:
         case INTRO_STATE_5:
+#if VERSION_JP
+            break;
+        case INTRO_STATE_6:
+        case INTRO_STATE_7:
+        case INTRO_STATE_8:
+        case INTRO_STATE_9:
+#endif
             gSPDisplayList(gMasterGfxPos++, D_80077908);
             for (i = 0; i < 6; i++) {
                 gDPLoadTextureTile(gMasterGfxPos++, gLogosImage2 + i * 0x1000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, 48,
                                    0, 0, 255, 7, 0,
                                    G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-                gSPTextureRectangle(gMasterGfxPos++, 32 * 4, (89 + i * 8) * 4, 288 * 4, (97 + i * 8) * 4, G_TX_RENDERTILE, 0, 0, 1024, 1024);
+                gSPTextureRectangle(
+                        gMasterGfxPos++,
+                        32 * 4, (LOGO_1_Y + i * 8) * 4,
+                        288 * 4, (LOGO_1_Y + 8 + i * 8) * 4,
+                        G_TX_RENDERTILE, 0, 0, 1024, 1024);
                 gDPPipeSync(gMasterGfxPos++);
             }
+#if !VERSION_JP
             break;
         case INTRO_STATE_6:
         case INTRO_STATE_7:
         case INTRO_STATE_8:
         case INTRO_STATE_9:
             gSPDisplayList(gMasterGfxPos++, D_80077908);
+#endif
             for (i = 0; i < 14; i++) {
                 gDPLoadTextureTile(gMasterGfxPos++, gLogosImage3 + i * 0x1000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, 112,
                                    0, 0, 255, 7, 0,
                                    G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-                gSPTextureRectangle(gMasterGfxPos++, 32 * 4, (59 + i * 8) * 4, 288 * 4, (67 + i * 8) * 4, G_TX_RENDERTILE, 0, 0, 1024, 1024);
+                gSPTextureRectangle(gMasterGfxPos++,
+                                    32 * 4, (LOGO_2_Y + i * 8) * 4,
+                                    288 * 4, (LOGO_2_Y + 8 + i * 8) * 4,
+                                    G_TX_RENDERTILE, 0, 0, 1024, 1024);
                 gDPPipeSync(gMasterGfxPos++);
             }
             break;

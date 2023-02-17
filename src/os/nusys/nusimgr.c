@@ -11,6 +11,7 @@ static void nuSiMgrThread(void* arg);
 
 extern u64 siMgrStack[NU_SI_STACK_SIZE/sizeof(u64)];
 
+#if !VERSION_JP
 u8 nuSiMgrInit(void) {
     u8 pattern;
     OSContStatus status[NU_CONT_MAXCONTROLLERS];
@@ -55,6 +56,7 @@ void nuSiMgrStop(void) {
 void nuSiMgrRestart(void) {
     osStartThread(&siMgrThread);
 }
+#endif
 
 void nuSiMgrThread(void* arg) {
     NUScClient siClient;
@@ -111,3 +113,54 @@ void nuSiMgrThread(void* arg) {
         }
     }
 }
+
+#if VERSION_JP
+u8 nuSiMgrInit(void) {
+    u8 pattern;
+    OSContStatus status[NU_CONT_MAXCONTROLLERS];
+
+    osCreateMesgQueue(&nuSiMesgQ, nuSiMesgBuf, ARRAY_COUNT(nuSiMesgBuf));
+    osSetEventMesg(OS_EVENT_SI, &nuSiMesgQ, NULL);
+    osContInit(&nuSiMesgQ, &pattern, &status[0]);
+
+    osCreateThread(&siMgrThread, NU_SI_THREAD_ID, nuSiMgrThread, NULL, (siMgrStack + NU_SI_STACK_SIZE/sizeof(u64)), NU_SI_THREAD_PRI);
+    osStartThread(&siMgrThread);
+    return pattern;
+}
+
+s32 nuSiSendMesg(NUScMsg mesg, void* dataPtr) {
+    OSMesg rtnMesgBuf;
+    OSMesgQueue rtnMesgQ;
+    NUSiCommonMesg siCommonMesg;
+
+    siCommonMesg.mesg = mesg;
+    siCommonMesg.dataPtr = dataPtr;
+    siCommonMesg.rtnMesgQ = &rtnMesgQ;
+
+    osCreateMesgQueue(&rtnMesgQ, &rtnMesgBuf, 1);
+
+    osSendMesg(&nuSiMgrMesgQ, &siCommonMesg, OS_MESG_BLOCK);
+    osRecvMesg(&rtnMesgQ, NULL, OS_MESG_BLOCK);
+
+    return siCommonMesg.error;
+}
+
+void nuSiMgrStop(void) {
+    OSMesg rtnMesgBuf;
+    OSMesgQueue rtnMesgQ;
+    NUSiCommonMesg siCommonMesg;
+
+    siCommonMesg.mesg = 0x7F00;
+    siCommonMesg.dataPtr = NULL;
+    siCommonMesg.rtnMesgQ = &rtnMesgQ;
+
+    osCreateMesgQueue(&rtnMesgQ, &rtnMesgBuf, 1);
+
+    osSendMesg(&nuSiMgrMesgQ, &siCommonMesg, OS_MESG_BLOCK);
+    osRecvMesg(&rtnMesgQ, NULL, OS_MESG_BLOCK);
+}
+
+void nuSiMgrRestart(void) {
+    osStartThread(&siMgrThread);
+}
+#endif

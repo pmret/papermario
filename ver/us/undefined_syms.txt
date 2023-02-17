@@ -8,6 +8,8 @@ D_804DC500 = 0x804DC500;
 
 fx_sun_undeclared = fx_sun;
 
+sprite_shading_profiles_data_ROM_START = sprite_shading_profiles_ROM_START + 0x1D0;
+
 battle_move_end = mushroom_VRAM_END;
 battle_move_end = MAX(battle_move_end, fire_flower_VRAM_END);
 battle_move_end = MAX(battle_move_end, dusty_hammer_VRAM_END);

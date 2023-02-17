@@ -7,7 +7,7 @@
 
 .section .bss
 
-dlabel D_801512B0
+dlabel gAuxSpriteShadingProfile
 .space 4
 
 dlabel gHudElementsNumber
@@ -103,7 +103,7 @@ dlabel D_80151320
 dlabel entity_numShadows
 .space 4
 
-dlabel D_80151328
+dlabel gSpriteShadingProfile
 .space 4
 
 dlabel entity_area_specific_data_is_loaded
@@ -643,16 +643,16 @@ dlabel D_8015959E
 dlabel gBackroundLastScrollValue
 .space 0x00000020
 
-dlabel D_801595C0
+dlabel wSpriteShadingProfile
 .space 0x000000b0
 
-dlabel D_80159670
+dlabel bSpriteShadingProfile
 .space 0x000000b0
 
-dlabel D_80159720
+dlabel wSpriteShadingProfileAux
 .space 0x000000b0
 
-dlabel D_801597D0
+dlabel bSpriteShadingProfileAux
 .space 0x000000b0
 
 dlabel D_80159880

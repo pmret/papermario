@@ -4,7 +4,7 @@ API_CALLABLE(N(DisableSpotlightSources)) {
     s32 i;
 
     for (i = 0; i < 2; i++) {
-        D_80151328->sources[i].flags = LIGHT_SOURCE_DISABLED;
+        gSpriteShadingProfile->sources[i].flags = LIGHT_SOURCE_DISABLED;
     }
 
     return ApiStatus_DONE2;

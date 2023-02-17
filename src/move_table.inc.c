@@ -70,9 +70,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 7: Unused_Hammer5
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_Berserker,
+    .fullDescMsg = MSG_ItemFullDesc_Berserker,
+    .shortDescMsg = MSG_ItemShortDesc_Berserker,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -110,9 +110,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move B: SmashCharge0
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_SmashCharge0,
+    .fullDescMsg = MSG_ItemFullDesc_SmashCharge0,
+    .shortDescMsg = MSG_ItemShortDesc_SmashCharge0,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -121,8 +121,8 @@ MoveData gMoveTable[] = {
 },
 {   // move C: Unused_Hammer_0C
     .nameMsg = MSG_Menus_Hammer,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .fullDescMsg = MSG_ItemFullDesc_SmashCharge0,
+    .shortDescMsg = MSG_ItemShortDesc_SmashCharge0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -190,9 +190,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 13: AutoSmash
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_AutoSmash,
+    .fullDescMsg = MSG_ItemFullDesc_AutoSmash,
+    .shortDescMsg = MSG_ItemShortDesc_AutoSmash,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -220,9 +220,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 16: SuperSmash
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_SuperSmash,
+    .fullDescMsg = MSG_ItemFullDesc_SuperSmash,
+    .shortDescMsg = MSG_ItemShortDesc_SuperSmash,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -250,9 +250,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 19: ShellCrack
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_ItemName_ShellCrack,
+    .fullDescMsg = MSG_ItemFullDesc_ShellCrack,
+    .shortDescMsg = MSG_ItemShortDesc_ShellCrack,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
     .category = MOVE_TYPE_HAMMER,
     .actionTip = MOVE_ACTION_TIP_1,
@@ -301,8 +301,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 1E: Unused_Jump5
     .nameMsg = MSG_Menus_Jump,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .fullDescMsg = MSG_ItemFullDesc_Berserker,
+    .shortDescMsg = MSG_ItemShortDesc_Berserker,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -350,9 +350,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 23: JumpCharge0
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_JumpCharge0,
+    .fullDescMsg = MSG_ItemFullDesc_JumpCharge0,
+    .shortDescMsg = MSG_ItemShortDesc_JumpCharge0,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER | MOVE_DATA_FLAG_800,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -361,8 +361,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 24: Unused_24
     .nameMsg = MSG_Menus_Jump,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .fullDescMsg = MSG_ItemFullDesc_JumpCharge0,
+    .shortDescMsg = MSG_ItemShortDesc_JumpCharge0,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -410,9 +410,9 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 29: AutoJump
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_AutoJump,
+    .fullDescMsg = MSG_ItemFullDesc_AutoJump,
+    .shortDescMsg = MSG_ItemShortDesc_AutoJump,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -420,9 +420,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 2A: AutoMultibounce
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_AutoMultibounce,
+    .fullDescMsg = MSG_ItemFullDesc_AutoMultibounce,
+    .shortDescMsg = MSG_ItemShortDesc_AutoMultibounce,
     .flags = MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_8000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -440,9 +440,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 2C: SuperJump
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_SuperJump,
+    .fullDescMsg = MSG_ItemFullDesc_SuperJump,
+    .shortDescMsg = MSG_ItemShortDesc_SuperJump,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -480,9 +480,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 30: EarthquakeJump
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_EarthquakeJump,
+    .fullDescMsg = MSG_ItemFullDesc_EarthquakeJump,
+    .shortDescMsg = MSG_ItemShortDesc_EarthquakeJump,
     .flags = MOVE_DATA_FLAG_20 | MOVE_DATA_FLAG_8000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_20,
@@ -490,7 +490,7 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 31: Unused_DefendPlus
-    .nameMsg = 0,
+    .nameMsg = MSG_MoveName_DefendPlus,
     .fullDescMsg = MSG_ItemFullDesc_DefendPlus,
     .shortDescMsg = MSG_ItemShortDesc_DefendPlus,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_10000,
@@ -500,9 +500,9 @@ MoveData gMoveTable[] = {
     .costBP = 6
 },
 {   // move 32: Unused_32
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_32,
+    .fullDescMsg = MSG_FullDesc_32,
+    .shortDescMsg = MSG_ShortDesc_32,
     .flags = MOVE_DATA_FLAG_TARGET_PLAYER,
     .category = MOVE_TYPE_3,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -700,7 +700,7 @@ MoveData gMoveTable[] = {
     .costBP = 6
 },
 {   // move 46: LastStand
-    .nameMsg = 0,
+    .nameMsg = MSG_MoveName_LastStand,
     .fullDescMsg = MSG_ItemFullDesc_LastStand,
     .shortDescMsg = MSG_ItemShortDesc_LastStand,
     .flags = 0,
@@ -710,7 +710,7 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 47: CloseCall
-    .nameMsg = 0,
+    .nameMsg = MSG_MoveName_CloseCall,
     .fullDescMsg = MSG_ItemFullDesc_CloseCall,
     .shortDescMsg = MSG_ItemShortDesc_CloseCall,
     .flags = 0,
@@ -720,7 +720,7 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 48: LuckyDay
-    .nameMsg = 0,
+    .nameMsg = MSG_MoveName_LuckyDay,
     .fullDescMsg = MSG_ItemFullDesc_LuckyDay,
     .shortDescMsg = MSG_ItemShortDesc_LuckyDay,
     .flags = 0,
@@ -740,9 +740,9 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 4A: HealthyHealthy
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_HealthyHealthy,
+    .fullDescMsg = MSG_ItemFullDesc_HealthyHealthy,
+    .shortDescMsg = MSG_ItemShortDesc_HealthyHealthy,
     .flags = 0,
     .category = MOVE_TYPE_DEFENSE_UP,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -800,7 +800,7 @@ MoveData gMoveTable[] = {
     .costBP = 8
 },
 {   // move 50: BumpAttack
-    .nameMsg = 0,
+    .nameMsg = MSG_MoveName_BumpAttack,
     .fullDescMsg = MSG_ItemFullDesc_BumpAttack,
     .shortDescMsg = MSG_ItemShortDesc_BumpAttack,
     .flags = 0,
@@ -830,9 +830,9 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 53: MysteryScroll
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_ItemName_MysteryScroll,
+    .fullDescMsg = MSG_ItemFullDesc_MysteryScroll,
+    .shortDescMsg = MSG_ItemShortDesc_MysteryScroll,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -960,9 +960,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 60: Berserker
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_ItemName_Berserker,
+    .fullDescMsg = MSG_ItemFullDesc_Berserker,
+    .shortDescMsg = MSG_ItemShortDesc_Berserker,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1000,7 +1000,7 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 64: PowerRush
-    .nameMsg = 0,
+    .nameMsg = MSG_MoveName_PowerRush,
     .fullDescMsg = MSG_ItemFullDesc_PowerRush,
     .shortDescMsg = MSG_ItemShortDesc_PowerRush,
     .flags = MOVE_DATA_FLAG_2,
@@ -1010,9 +1010,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 65: CrazyHeart
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_CrazyHeart,
+    .fullDescMsg = MSG_ItemFullDesc_CrazyHeart,
+    .shortDescMsg = MSG_ItemShortDesc_CrazyHeart,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1020,9 +1020,9 @@ MoveData gMoveTable[] = {
     .costBP = 10
 },
 {   // move 66: MegaHPDrain
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_MegaHPDrain,
+    .fullDescMsg = MSG_ItemFullDesc_MegaHPDrain,
+    .shortDescMsg = MSG_ItemShortDesc_MegaHPDrain,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1030,9 +1030,9 @@ MoveData gMoveTable[] = {
     .costBP = 10
 },
 {   // move 67: FlowerFanatic
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_MoveName_FlowerFanatic,
+    .fullDescMsg = MSG_ItemFullDesc_FlowerFanatic,
+    .shortDescMsg = MSG_ItemShortDesc_FlowerFanatic,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1040,7 +1040,7 @@ MoveData gMoveTable[] = {
     .costBP = 10
 },
 {   // move 68: HeartFinder
-    .nameMsg = 0,
+    .nameMsg = MSG_MoveName_HeartFinder,
     .fullDescMsg = MSG_ItemFullDesc_HeartFinder,
     .shortDescMsg = MSG_ItemShortDesc_HeartFinder,
     .flags = MOVE_DATA_FLAG_2,
@@ -1050,7 +1050,7 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 69: FlowerFinder
-    .nameMsg = 0,
+    .nameMsg = MSG_MoveName_FlowerFinder,
     .fullDescMsg = MSG_ItemFullDesc_FlowerFinder,
     .shortDescMsg = MSG_ItemShortDesc_FlowerFinder,
     .flags = MOVE_DATA_FLAG_2,
@@ -1060,7 +1060,7 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 6A: SpinAttack
-    .nameMsg = 0,
+    .nameMsg = MSG_MoveName_SpinAttack,
     .fullDescMsg = MSG_ItemFullDesc_SpinAttack,
     .shortDescMsg = MSG_ItemShortDesc_SpinAttack,
     .flags = MOVE_DATA_FLAG_2,
@@ -1070,7 +1070,7 @@ MoveData gMoveTable[] = {
     .costBP = 3
 },
 {   // move 6B: DizzyAttack
-    .nameMsg = 0,
+    .nameMsg = MSG_MoveName_DizzyAttack,
     .fullDescMsg = MSG_ItemFullDesc_DizzyAttack,
     .shortDescMsg = MSG_ItemShortDesc_DizzyAttack,
     .flags = MOVE_DATA_FLAG_2,
@@ -1080,7 +1080,7 @@ MoveData gMoveTable[] = {
     .costBP = 2
 },
 {   // move 6C: ISpy
-    .nameMsg = 0,
+    .nameMsg = MSG_MoveName_ISpy,
     .fullDescMsg = MSG_ItemFullDesc_ISpy,
     .shortDescMsg = MSG_ItemShortDesc_ISpy,
     .flags = MOVE_DATA_FLAG_2,
@@ -1090,7 +1090,7 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 6D: SpeedySpin
-    .nameMsg = 0,
+    .nameMsg = MSG_MoveName_SpeedySpin,
     .fullDescMsg = MSG_ItemFullDesc_SpeedySpin,
     .shortDescMsg = MSG_ItemShortDesc_SpeedySpin,
     .flags = MOVE_DATA_FLAG_2,
@@ -1140,9 +1140,9 @@ MoveData gMoveTable[] = {
     .costBP = 1
 },
 {   // move 72: SuperFocus
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_ItemName_SuperFocus,
+    .fullDescMsg = MSG_ItemFullDesc_SuperFocus,
+    .shortDescMsg = MSG_ItemShortDesc_SuperFocus,
     .flags = MOVE_DATA_FLAG_2,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1150,9 +1150,9 @@ MoveData gMoveTable[] = {
     .costBP = 5
 },
 {   // move 73: Kaiden
-    .nameMsg = 0,
-    .fullDescMsg = 0,
-    .shortDescMsg = 0,
+    .nameMsg = MSG_ItemName_Kaiden,
+    .fullDescMsg = MSG_ItemFullDesc_Kaiden,
+    .shortDescMsg = MSG_ItemShortDesc_Kaiden,
     .flags = MOVE_DATA_FLAG_80000000,
     .category = MOVE_TYPE_NONE,
     .actionTip = MOVE_ACTION_TIP_NONE,
@@ -1310,7 +1310,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 83: Headbonk1
-    .nameMsg = MSG_PartnerMoveName_Headbonk,
+    .nameMsg = MSG_PartnerMoveName_Headbonk1,
     .fullDescMsg = MSG_PartnerDesc_Goombario_Pause_Headbonk1,
     .shortDescMsg = MSG_PartnerDesc_Goombario_Battle_Headbonk,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
@@ -1320,7 +1320,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 84: Headbonk2
-    .nameMsg = MSG_PartnerMoveName_Headbonk,
+    .nameMsg = MSG_PartnerMoveName_Headbonk2,
     .fullDescMsg = MSG_PartnerDesc_Goombario_Pause_Headbonk2,
     .shortDescMsg = MSG_PartnerDesc_Goombario_Battle_Headbonk,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
@@ -1330,7 +1330,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 85: Headbonk3
-    .nameMsg = MSG_PartnerMoveName_Headbonk,
+    .nameMsg = MSG_PartnerMoveName_Headbonk3,
     .fullDescMsg = MSG_PartnerDesc_Goombario_Pause_Headbonk3,
     .shortDescMsg = MSG_PartnerDesc_Goombario_Battle_Headbonk,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
@@ -1370,7 +1370,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 89: ShellToss1
-    .nameMsg = MSG_PartnerMoveName_ShellToss,
+    .nameMsg = MSG_PartnerMoveName_ShellToss1,
     .fullDescMsg = MSG_PartnerDesc_Kooper_Pause_ShellToss1,
     .shortDescMsg = MSG_PartnerDesc_Kooper_Battle_ShellToss,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
@@ -1380,7 +1380,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 8A: ShellToss2
-    .nameMsg = MSG_PartnerMoveName_ShellToss,
+    .nameMsg = MSG_PartnerMoveName_ShellToss2,
     .fullDescMsg = MSG_PartnerDesc_Kooper_Pause_ShellToss2,
     .shortDescMsg = MSG_PartnerDesc_Kooper_Battle_ShellToss,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
@@ -1390,7 +1390,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 8B: ShellToss3
-    .nameMsg = MSG_PartnerMoveName_ShellToss,
+    .nameMsg = MSG_PartnerMoveName_ShellToss3,
     .fullDescMsg = MSG_PartnerDesc_Kooper_Pause_ShellToss3,
     .shortDescMsg = MSG_PartnerDesc_Kooper_Battle_ShellToss,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
@@ -1430,7 +1430,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 8F: BodySlam1
-    .nameMsg = MSG_PartnerMoveName_BodySlam,
+    .nameMsg = MSG_PartnerMoveName_BodySlam1,
     .fullDescMsg = MSG_PartnerDesc_Bombette_Pause_BodySlam1,
     .shortDescMsg = MSG_PartnerDesc_Bombette_Battle_BodySlam,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
@@ -1440,7 +1440,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 90: BodySlam2
-    .nameMsg = MSG_PartnerMoveName_BodySlam,
+    .nameMsg = MSG_PartnerMoveName_BodySlam2,
     .fullDescMsg = MSG_PartnerDesc_Bombette_Pause_BodySlam2,
     .shortDescMsg = MSG_PartnerDesc_Bombette_Battle_BodySlam,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
@@ -1450,7 +1450,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 91: BodySlam3
-    .nameMsg = MSG_PartnerMoveName_BodySlam,
+    .nameMsg = MSG_PartnerMoveName_BodySlam3,
     .fullDescMsg = MSG_PartnerDesc_Bombette_Pause_BodySlam3,
     .shortDescMsg = MSG_PartnerDesc_Bombette_Battle_BodySlam,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
@@ -1490,7 +1490,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 95: SkyDive1
-    .nameMsg = MSG_PartnerMoveName_SkyDive,
+    .nameMsg = MSG_PartnerMoveName_SkyDive1,
     .fullDescMsg = MSG_PartnerDesc_Parakarry_Pause_SkyDive1,
     .shortDescMsg = MSG_PartnerDesc_Parakarry_Battle_SkyDive,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_10000,
@@ -1500,7 +1500,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 96: SkyDive2
-    .nameMsg = MSG_PartnerMoveName_SkyDive,
+    .nameMsg = MSG_PartnerMoveName_SkyDive2,
     .fullDescMsg = MSG_PartnerDesc_Parakarry_Pause_SkyDive2,
     .shortDescMsg = MSG_PartnerDesc_Parakarry_Battle_SkyDive,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_10000,
@@ -1510,7 +1510,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move 97: SkyDive3
-    .nameMsg = MSG_PartnerMoveName_SkyDive,
+    .nameMsg = MSG_PartnerMoveName_SkyDive3,
     .fullDescMsg = MSG_PartnerDesc_Parakarry_Pause_SkyDive3,
     .shortDescMsg = MSG_PartnerDesc_Parakarry_Battle_SkyDive,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_10000,
@@ -1610,7 +1610,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A1: ElectroDash1
-    .nameMsg = MSG_PartnerMoveName_ElectroDash,
+    .nameMsg = MSG_PartnerMoveName_ElectroDash1,
     .fullDescMsg = MSG_PartnerDesc_Watt_Pause_ElectroDash1,
     .shortDescMsg = MSG_PartnerDesc_Watt_Battle_ElectroDash,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
@@ -1620,7 +1620,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A2: ElectroDash2
-    .nameMsg = MSG_PartnerMoveName_ElectroDash,
+    .nameMsg = MSG_PartnerMoveName_ElectroDash2,
     .fullDescMsg = MSG_PartnerDesc_Watt_Pause_ElectroDash2,
     .shortDescMsg = MSG_PartnerDesc_Watt_Battle_ElectroDash,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
@@ -1630,7 +1630,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A3: ElectroDash3
-    .nameMsg = MSG_PartnerMoveName_ElectroDash,
+    .nameMsg = MSG_PartnerMoveName_ElectroDash3,
     .fullDescMsg = MSG_PartnerDesc_Watt_Pause_ElectroDash3,
     .shortDescMsg = MSG_PartnerDesc_Watt_Battle_ElectroDash,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
@@ -1670,7 +1670,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A7: BellyFlop1
-    .nameMsg = MSG_PartnerMoveName_BellyFlop,
+    .nameMsg = MSG_PartnerMoveName_BellyFlop1,
     .fullDescMsg = MSG_PartnerDesc_Sushie_Pause_BellyFlop1,
     .shortDescMsg = MSG_PartnerDesc_Sushie_Battle_BellyFlop,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
@@ -1680,7 +1680,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A8: BellyFlop2
-    .nameMsg = MSG_PartnerMoveName_BellyFlop,
+    .nameMsg = MSG_PartnerMoveName_BellyFlop2,
     .fullDescMsg = MSG_PartnerDesc_Sushie_Pause_BellyFlop2,
     .shortDescMsg = MSG_PartnerDesc_Sushie_Battle_BellyFlop,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
@@ -1690,7 +1690,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move A9: BellyFlop3
-    .nameMsg = MSG_PartnerMoveName_BellyFlop,
+    .nameMsg = MSG_PartnerMoveName_BellyFlop3,
     .fullDescMsg = MSG_PartnerDesc_Sushie_Pause_BellyFlop3,
     .shortDescMsg = MSG_PartnerDesc_Sushie_Battle_BellyFlop,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
@@ -1730,7 +1730,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move AD: SpinyFlip1
-    .nameMsg = MSG_PartnerMoveName_SpinyFlip,
+    .nameMsg = MSG_PartnerMoveName_SpinyFlip1,
     .fullDescMsg = MSG_PartnerDesc_Lakilester_Pause_SpinyFlip1,
     .shortDescMsg = MSG_PartnerDesc_Lakilester_Battle_SpinyFlip,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
@@ -1740,7 +1740,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move AE: SpinyFlip2
-    .nameMsg = MSG_PartnerMoveName_SpinyFlip,
+    .nameMsg = MSG_PartnerMoveName_SpinyFlip2,
     .fullDescMsg = MSG_PartnerDesc_Lakilester_Pause_SpinyFlip2,
     .shortDescMsg = MSG_PartnerDesc_Lakilester_Battle_SpinyFlip,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
@@ -1750,7 +1750,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move AF: SpinyFlip3
-    .nameMsg = MSG_PartnerMoveName_SpinyFlip,
+    .nameMsg = MSG_PartnerMoveName_SpinyFlip3,
     .fullDescMsg = MSG_PartnerDesc_Lakilester_Pause_SpinyFlip3,
     .shortDescMsg = MSG_PartnerDesc_Lakilester_Battle_SpinyFlip,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
@@ -1790,7 +1790,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move B3: Smack1
-    .nameMsg = MSG_PartnerMoveName_Smack,
+    .nameMsg = MSG_PartnerMoveName_Smack1,
     .fullDescMsg = MSG_PartnerDesc_Bow_Pause_Smack1,
     .shortDescMsg = MSG_PartnerDesc_Bow_Battle_Smack,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
@@ -1800,7 +1800,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move B4: Smack2
-    .nameMsg = MSG_PartnerMoveName_Smack,
+    .nameMsg = MSG_PartnerMoveName_Smack2,
     .fullDescMsg = MSG_PartnerDesc_Bow_Pause_Smack2,
     .shortDescMsg = MSG_PartnerDesc_Bow_Battle_Smack,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
@@ -1810,7 +1810,7 @@ MoveData gMoveTable[] = {
     .costBP = 0
 },
 {   // move B5: Smack3
-    .nameMsg = MSG_PartnerMoveName_Smack,
+    .nameMsg = MSG_PartnerMoveName_Smack3,
     .fullDescMsg = MSG_PartnerDesc_Bow_Pause_Smack3,
     .shortDescMsg = MSG_PartnerDesc_Bow_Battle_Smack,
     .flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,

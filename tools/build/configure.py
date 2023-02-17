@@ -59,12 +59,12 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     cc_272 = f"{cc_272_dir}/gcc"
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
 
-    CPPFLAGS_COMMON = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
+    CPPFLAGS_COMMON = "-Iver/$version/include -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
     CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
 
-    CPPFLAGS_272 = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
+    CPPFLAGS_272 = "-Iver/$version/include -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
     cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"

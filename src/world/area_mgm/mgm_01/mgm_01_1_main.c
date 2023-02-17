@@ -22,13 +22,13 @@ API_CALLABLE(N(GetSpotlightPos)) {
 
     lightBeamRotX = spotLightPosZ * -0.35 * 0.3;
     lightBeamRotZ = spotLightPosX * 0.35;
-    
+
     evt_set_float_variable(script, LVar0, spotLightPosX);
     evt_set_float_variable(script, LVar1, spotLightPosZ);
     evt_set_float_variable(script, LVar2, lightBeamRotX);
     evt_set_float_variable(script, LVar3, lightBeamRotZ);
-    
-    shading = D_80151328;
+
+    shading = gSpriteShadingProfile;
     shading->sources[0].pos.x = gPlayerStatusPtr->position.x * 0.8;
     shading->sources[0].pos.y = 80.0f;
     shading->sources[0].pos.z = gPlayerStatusPtr->position.z + 50.0f;

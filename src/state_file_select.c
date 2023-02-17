@@ -6,6 +6,19 @@
 #include "sprite.h"
 #include "model.h"
 
+#if VERSION_JP
+// TODO: split the filemenu segment
+extern Addr filemenu_ROM_START;
+extern Addr filemenu_ROM_END;
+extern Addr filemenu_VRAM;
+extern Addr filemenu_TEXT_START;
+extern Addr filemenu_TEXT_END;
+extern Addr filemenu_DATA_START;
+extern Addr filemenu_RODATA_END;
+extern Addr filemenu_BSS_START;
+extern Addr filemenu_BSS_END;
+#endif
+
 extern u16 gFrameBuf0[];
 extern u16 gFrameBuf1[];
 extern u16 gFrameBuf2[];

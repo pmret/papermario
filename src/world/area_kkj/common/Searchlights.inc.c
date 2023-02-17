@@ -91,7 +91,7 @@ API_CALLABLE(N(UpdateSearchlight)) {
     // place light source 30 units ahead of the flashlight
     add_vec2D_polar(&x, &z, 30.0f, npc->yaw);
 
-    lightSource = &D_80151328->sources[lightSourceIdx];
+    lightSource = &gSpriteShadingProfile->sources[lightSourceIdx];
     lightSource->pos.x = x;
     lightSource->pos.y = npc->pos.y + 20.0f;
     lightSource->pos.z = z;

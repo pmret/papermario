@@ -10,6 +10,8 @@ extern f32 AlTuneScaling[];
 
 #ifdef SHIFT
 #define SBN_ROM_OFFSET SBN_ROM_START
+#elif VERSION_JP
+#define SBN_ROM_OFFSET 0xFC0000
 #else
 #define SBN_ROM_OFFSET 0xF00000
 #endif
