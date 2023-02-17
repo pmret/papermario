@@ -230,14 +230,14 @@ void spr_appendGfx_component_flat(
     s32 alpha
 ) {
     gDPLoadTLUT_pal16(gMasterGfxPos++, 0, palette);
-    if (D_80151328->flags & 1) {
+    if (gSpriteShadingProfile->flags & 1) {
         gDPScrollMultiTile2_4b(gMasterGfxPos++, raster, G_IM_FMT_CI, width, height,
                               0, 0, width - 1, height - 1, 0,
                               G_TX_CLAMP, G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD,
                               256, 256);
         gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
         gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 63 << 2, 0);
-        if (D_80151328->flags & 2) {
+        if (gSpriteShadingProfile->flags & 2) {
             Camera* camera = &gCameras[gCurrentCamID];
             if (gGameStatusPtr->isBattle == 2) {
                 gSPViewport(gMasterGfxPos++, &D_802DF3E0);
@@ -264,7 +264,7 @@ void spr_appendGfx_component_flat(
         gDPScrollTextureBlock_4b(gMasterGfxPos++, raster, G_IM_FMT_CI, width, height, 0,
                                  G_TX_CLAMP, G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD,
                                  256, 256);
-        if (D_80151328->flags & 2) {
+        if (gSpriteShadingProfile->flags & 2) {
             Camera* camera =  &gCameras[gCurrentCamID];
             if (gGameStatusPtr->isBattle == 2) {
                 gSPViewport(gMasterGfxPos++, &D_802DF3E0);
@@ -301,7 +301,7 @@ void spr_appendGfx_component_flat(
         }
     }
 
-    if (D_80151328->flags & 2) {
+    if (gSpriteShadingProfile->flags & 2) {
         Camera* camera =  &gCameras[gCurrentCamID];
 
         if (gGameStatusPtr->isBattle == 2) {
@@ -358,7 +358,7 @@ void spr_appendGfx_component(
     gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    if (D_80151328->flags & 1) {
+    if (gSpriteShadingProfile->flags & 1) {
         if ((u8) opacity == 255) {
             gSPDisplayList(gMasterGfxPos++, D_802DF460);
         } else {

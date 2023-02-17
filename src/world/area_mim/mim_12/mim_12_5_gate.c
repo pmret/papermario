@@ -80,7 +80,7 @@ API_CALLABLE(N(InterpBackgroundDarkness)) {
 }
 
 API_CALLABLE(N(InterpSpriteShadingColor)) {
-    SpriteShadingProfile* shadingProfile = D_80151328;
+    SpriteShadingProfile* shadingProfile = gSpriteShadingProfile;
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -91,7 +91,7 @@ API_CALLABLE(N(InterpSpriteShadingColor)) {
         script->varTable[4] = shadingProfile->ambientColor.g;
         script->varTable[5] = shadingProfile->ambientColor.b;
         script->varTable[6] = 0;
-        D_80151328->flags |= 1;
+        gSpriteShadingProfile->flags |= 1;
     }
 
     script->varTable[6]++;
@@ -101,7 +101,7 @@ API_CALLABLE(N(InterpSpriteShadingColor)) {
 
     if (script->varTable[6] == 20) {
         if (script->varTable[0] == 255) {
-            D_80151328->flags &= ~1;
+            gSpriteShadingProfile->flags &= ~1;
         }
         return ApiStatus_DONE2;
     }

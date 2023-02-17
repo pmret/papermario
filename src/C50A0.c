@@ -1406,7 +1406,7 @@ void appendGfx_item_entity(void* data) {
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    if (D_80151328->flags != 0) {
+    if (gSpriteShadingProfile->flags != 0) {
         gSPDisplayList(gMasterGfxPos++, D_8014BBD8);
     } else {
         gSPDisplayList(gMasterGfxPos++, D_8014B870);
@@ -1415,7 +1415,7 @@ void appendGfx_item_entity(void* data) {
     gSPDisplayList(gMasterGfxPos++, D_8014C620);
 
     if (itemEntity->flags & (ITEM_ENTITY_FLAG_8000000 | ITEM_ENTITY_FLAG_TRANSPARENT)) {
-        if (D_80151328->flags != 0) {
+        if (gSpriteShadingProfile->flags != 0) {
             gDPSetRenderMode(gMasterGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS,
                              AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
                              GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
@@ -1432,7 +1432,7 @@ void appendGfx_item_entity(void* data) {
 
     if (!(itemEntity->flags & ITEM_ENTITY_FLAG_40000)) {
         gDPLoadTLUT_pal16(gMasterGfxPos++, 0, gHudElementCacheTablePalette[itemEntity->lookupPaletteIndex].data);
-        if (D_80151328->flags != 0) {
+        if (gSpriteShadingProfile->flags != 0) {
             gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
             gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR |
                        G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
@@ -1467,7 +1467,7 @@ void appendGfx_item_entity(void* data) {
         gSPDisplayList(gMasterGfxPos++, D_8014C678);
     } else {
         gDPLoadTLUT_pal16(gMasterGfxPos++, 0, gHudElementCacheTablePalette[itemEntity->lookupPaletteIndex].data);
-        if (D_80151328->flags != 0) {
+        if (gSpriteShadingProfile->flags != 0) {
             gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
             gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0,
                        G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
@@ -1614,7 +1614,7 @@ void render_item_entities(void) {
                         gDisplayContext->matrixStack[gMatrixListPos] = sp18;
                         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-                        if (D_80151328->flags != 0) {
+                        if (gSpriteShadingProfile->flags != 0) {
                             gSPDisplayList(gMasterGfxPos++, D_8014BBD8);
                         } else {
                             gSPDisplayList(gMasterGfxPos++, D_8014B870);
@@ -1632,7 +1632,7 @@ void render_item_entities(void) {
                                 alpha = alpha * (255 - a1) / 255;
                             }
                             if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_8000000)) {
-                                if (D_80151328->flags) {
+                                if (gSpriteShadingProfile->flags) {
                                     gDPSetRenderMode(gMasterGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS,
                                         AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
                                 } else {
@@ -1646,7 +1646,7 @@ void render_item_entities(void) {
 
                         if (!(item->flags & ITEM_ENTITY_FLAG_40000)) {
                             gDPLoadTLUT_pal16(gMasterGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
-                            if (D_80151328->flags) {
+                            if (gSpriteShadingProfile->flags) {
                                 gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
                                 gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
                                 gDPLoadSync(gMasterGfxPos++);
@@ -1674,7 +1674,7 @@ void render_item_entities(void) {
                             gSPDisplayList(gMasterGfxPos++, D_8014C678);
                         } else {
                             gDPLoadTLUT_pal16(gMasterGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
-                            if (D_80151328->flags) {
+                            if (gSpriteShadingProfile->flags) {
                                 gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
                                 gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
                                 gDPLoadSync(gMasterGfxPos++);
