@@ -27343,3 +27343,17 @@ map_vram_end = 0x80267FF0; // type:data appears_after_overlays_addr:0x80240000
 world_misc_vram_end = 0x802B7E00; // type:data appears_after_overlays_addr:0x802B7000
 //entity_data_vram_end = 0x802BD100; // type:data appears_after_overlays_addr:0x802BAE00
 world_partner_vram_end = 0x802C3000; // type:data appears_after_overlays_addr:0x802BD100
+
+battle_move_hammer_throw_dusty_hammer_png = 0x802A3048; // type:data rom:0x754498
+battle_move_hammer_throw_dusty_hammer_pal = 0x802A3248; // type:data rom:0x754698
+battle_move_hammer_throw_basic_hammer_png = 0x802A3268; // type:data rom:0x7546B8
+battle_move_hammer_throw_basic_hammer_pal = 0x802A3468; // type:data rom:0x7548B8
+battle_move_hammer_throw_super_hammer_png = 0x802A3488; // type:data rom:0x7548D8
+battle_move_hammer_throw_super_hammer_pal = 0x802A3688; // type:data rom:0x754AD8
+battle_move_hammer_throw_ultra_hammer_png = 0x802A36A8; // type:data rom:0x754AF8
+battle_move_hammer_throw_ultra_hammer_pal = 0x802A38A8; // type:data rom:0x754CF8
+battle_move_hammer_throw_vtx = 0x802A38C8;              // type:data rom:0x754D18 size:0x40
+battle_move_hammer_throw_dusty_hammer_gfx = 0x802A3908; // type:data rom:0x754D58
+battle_move_hammer_throw_basic_hammer_gfx = 0x802A39F8; // type:data rom:0x754E48
+battle_move_hammer_throw_super_hammer_gfx = 0x802A3AE8; // type:data rom:0x754F38
+battle_move_hammer_throw_ultra_hammer_gfx = 0x802A3BD8; // type:data rom:0x755028

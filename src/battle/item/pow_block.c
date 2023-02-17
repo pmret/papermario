@@ -48,7 +48,7 @@ API_CALLABLE(N(func_802A1318_718B68)) {
 #include "UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x00000090)
+    EVT_SET_CONST(LVarA, ITEM_POW_BLOCK)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_WAIT(10)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_PowBlock), -40, 60, 0, 0, MAKE_ENTITY_END)

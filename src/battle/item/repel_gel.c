@@ -17,7 +17,7 @@ API_CALLABLE(N(func_802A123C_72DDAC)) {
 #include "UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x00000097)
+    EVT_SET_CONST(LVarA, ITEM_REPEL_GEL)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_375)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30008)

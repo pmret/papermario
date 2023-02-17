@@ -65,7 +65,7 @@ API_CALLABLE(N(func_802A14D4_71DC44)) {
 #include "UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x00000083)
+    EVT_SET_CONST(LVarA, ITEM_SHOOTING_STAR)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD
         EVT_WAIT(5)

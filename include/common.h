@@ -11,8 +11,8 @@
 #include "enums.h"
 #include "evt.h"
 #include "messages.h"
-#include "battle/battle_formation_names.h"
-#include "battle/battle_stage_names.h"
+#include "battle/formation_names.h"
+#include "battle/stage_names.h"
 
 #ifdef PERMUTER
 extern int TEXEL0, TEXEL1, PRIMITIVE, PRIMITIVE_ALPHA;
