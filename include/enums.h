@@ -3064,6 +3064,7 @@ enum NpcIDs {
     NPC_PLAYER       = -2,
     NPC_PARTNER      = -4,
     NPC_BTL_MERLEE   = -10,
+    NPC_BTL_SPIRIT   = 100,
 };
 
 enum EntityTypes {

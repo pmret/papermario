@@ -130,7 +130,7 @@ EvtScript N(802A1C60) = {
     EVT_CALL(PlaySound, 0x2041)
     EVT_CALL(CreateNpc, 100, LVar0)
     EVT_CALL(N(SetNpcCollision32))
-    EVT_CALL(SetNpcFlagBits, 100, ((NPC_FLAG_IGNORE_CAMERA_FOR_YAW)), TRUE)
+    EVT_CALL(SetNpcFlagBits, 100, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_CALL(SetNpcPos, 100, -75, 150, 0)
     EVT_CALL(SetNpcDecoration, 100, 0, 5)
     EVT_CALL(N(UnkStarFunc3), -75, 167, 0)
