@@ -5,7 +5,7 @@
 
 #include "common/UnkModelStuff.inc.c"
 
-EvtScript N(beforeBattle_80233998) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_EXEC(N(UnkModelStuffScript1))
     EVT_THREAD
@@ -29,12 +29,12 @@ EvtScript N(beforeBattle_80233998) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80233AA8) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_80233AB8)[] = {
+s32 N(ForegroundModels)[] = {
     0xFFFFFFFF, 0x0000001A, 0x00000000,
 };
 
@@ -43,7 +43,7 @@ Stage NAMESPACE = {
     .shape = "sam_bt01_shape",
     .hit = "sam_bt01_hit",
     .bg = "yki_bg",
-    .preBattle = &N(beforeBattle_80233998),
-    .postBattle = &N(afterBattle_80233AA8),
-    .foregroundModelList = N(foregroundModelList_80233AB8),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

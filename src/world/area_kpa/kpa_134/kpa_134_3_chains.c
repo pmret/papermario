@@ -16,7 +16,7 @@ EvtScript N(EVS_SetupChains) = {
     EVT_CALL(TranslateModel, MODEL_o505, 0, 0, 0)
     EVT_SWITCH(GB_KPA_WaterLevel)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetGroupEnabled, MODEL_suimen, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_suimen, 0)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_hidari, COLLIDER_FLAGS_UPPER_MASK)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deiliaw, COLLIDER_FLAGS_UPPER_MASK)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tte, COLLIDER_FLAGS_UPPER_MASK)
@@ -146,7 +146,7 @@ EvtScript N(EVS_LowerWaterLevel0) = {
             EVT_GOTO(15)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(SetGroupEnabled, MODEL_sui1, 1)
+    EVT_CALL(SetGroupVisibility, MODEL_sui1, 1)
     EVT_CALL(EnableModel, MODEL_o385, TRUE)
     EVT_CALL(PlaySound, SOUND_80000053)
     EVT_CALL(MakeLerp, 120, 20, 120, EASING_LINEAR)
@@ -160,7 +160,7 @@ EvtScript N(EVS_LowerWaterLevel0) = {
     EVT_END_IF
     EVT_CALL(PlaySound, SOUND_22B | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_CALL(func_802D62E4, SOUND_22B)
-    EVT_CALL(SetGroupEnabled, MODEL_sui1, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_sui1, 0)
     EVT_CALL(EnableModel, MODEL_s_sui, FALSE)
     EVT_CALL(EnableModel, MODEL_o385, FALSE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_hidari, COLLIDER_FLAGS_UPPER_MASK)
@@ -238,7 +238,7 @@ EvtScript N(EVS_RaiseWaterLevel1) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(20)
         EVT_END_IF
-        EVT_CALL(SetGroupEnabled, MODEL_sui1, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_sui1, 1)
         EVT_CALL(EnableModel, MODEL_o385, TRUE)
         EVT_CALL(EnableModel, MODEL_o389, TRUE)
         EVT_CALL(MakeLerp, 20, 120, 180, EASING_LINEAR)
@@ -395,7 +395,7 @@ EvtScript N(EVS_LowerWaterLevel1) = {
             EVT_GOTO(15)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(SetGroupEnabled, MODEL_sui1, 1)
+    EVT_CALL(SetGroupVisibility, MODEL_sui1, 1)
     EVT_CALL(PlaySound, SOUND_80000053)
     EVT_CALL(MakeLerp, 220, 120, 120, EASING_LINEAR)
     EVT_LABEL(30)
@@ -482,7 +482,7 @@ EvtScript N(EVS_RaiseWaterLevel2) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(20)
         EVT_END_IF
-        EVT_CALL(SetGroupEnabled, MODEL_sui1, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_sui1, 1)
         EVT_CALL(EnableModel, MODEL_o389, TRUE)
         EVT_CALL(MakeLerp, 120, 220, 180, EASING_LINEAR)
         EVT_LABEL(30)

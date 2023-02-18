@@ -21,7 +21,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_SetupGizmos))
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    EVT_CALL(SetGroupEnabled, MODEL_popo, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_popo, 0)
     EVT_IF_GE(GB_StoryProgress, STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY)
         EVT_CALL(RotateModel, MODEL_o331, 105, 0, 1, 0)
         EVT_CALL(RotateModel, MODEL_o332, 105, 0, 1, 0)

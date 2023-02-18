@@ -16,7 +16,7 @@ API_CALLABLE(func_80218B08_4E3248) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(beforeBattle_80223C80) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(func_80218AC0_4E3200)
@@ -24,7 +24,7 @@ EvtScript N(beforeBattle_80223C80) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80223CC8) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_CALL(func_80218B08_4E3248)
     EVT_RETURN
     EVT_END
@@ -34,6 +34,6 @@ Stage NAMESPACE = {
     .texture = "isk_tex",
     .shape = "isk_bt07_shape",
     .hit = "isk_bt07_hit",
-    .preBattle = &N(beforeBattle_80223C80),
-    .postBattle = &N(afterBattle_80223CC8),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
 };

@@ -4,7 +4,7 @@
 
 #define NAMESPACE b_area_isk_part_2_isk_02c
 
-EvtScript N(beforeBattle_8021FF80) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(EnableModel, MODEL_kai2, FALSE)
@@ -13,12 +13,12 @@ EvtScript N(beforeBattle_8021FF80) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_8021FFE4) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_8021FFF4)[] = {
+s32 N(ForegroundModels)[] = {
     MODEL_o398, MODEL_o397, MODEL_o399, 0,
 };
 
@@ -26,7 +26,7 @@ Stage NAMESPACE = {
     .texture = "isk_tex",
     .shape = "isk_bt02_shape",
     .hit = "isk_bt02_hit",
-    .preBattle = &N(beforeBattle_8021FF80),
-    .postBattle = &N(afterBattle_8021FFE4),
-    .foregroundModelList = N(foregroundModelList_8021FFF4),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

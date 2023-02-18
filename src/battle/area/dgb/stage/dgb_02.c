@@ -3,13 +3,13 @@
 
 #define NAMESPACE b_area_dgb_dgb_02
 
-EvtScript N(beforeBattle_8021B0B0) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle_8021B0D0) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
@@ -18,6 +18,6 @@ Stage NAMESPACE = {
     .texture = "dgb_tex",
     .shape = "dgb_bt02_shape",
     .hit = "dgb_bt02_hit",
-    .preBattle = &N(beforeBattle_8021B0B0),
-    .postBattle = &N(afterBattle_8021B0D0),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
 };

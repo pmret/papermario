@@ -408,7 +408,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(GetModelCenter, MODEL_b1_1)
-        EVT_CALL(SetGroupEnabled, MODEL_b1, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_b1, 0)
         EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_2098, SOUND_SPACE_MODE_0)
         EVT_LOOP(4)
             EVT_SET(LVar3, 20)
@@ -430,7 +430,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     EVT_WAIT(30)
     EVT_THREAD
         EVT_CALL(GetModelCenter, MODEL_b2_1)
-        EVT_CALL(SetGroupEnabled, MODEL_b2, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_b2, 0)
         EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_2098, SOUND_SPACE_MODE_0)
         EVT_LOOP(4)
             EVT_SET(LVar3, 20)
@@ -452,7 +452,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     EVT_WAIT(30)
     EVT_THREAD
         EVT_CALL(GetModelCenter, MODEL_b3_1)
-        EVT_CALL(SetGroupEnabled, MODEL_b3, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_b3, 0)
         EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_2098, SOUND_SPACE_MODE_0)
         EVT_LOOP(4)
             EVT_SET(LVar3, 20)
@@ -474,7 +474,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     EVT_WAIT(30)
     EVT_THREAD
         EVT_CALL(GetModelCenter, MODEL_b4_1)
-        EVT_CALL(SetGroupEnabled, MODEL_b4, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_b4, 0)
         EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_2098, SOUND_SPACE_MODE_0)
         EVT_LOOP(4)
             EVT_SET(LVar3, 20)
@@ -724,7 +724,7 @@ EvtScript N(EVS_SetupBoxes) = {
         EVT_SET(LVar0, EVT_PTR(N(BlueBoxInfo)))
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_HitBox)), TRIGGER_WALL_HAMMER, COLLIDER_o918, 1, 0)
     EVT_ELSE
-        EVT_CALL(SetGroupEnabled, MODEL_box, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_box, 0)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o907, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o911, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o915, COLLIDER_FLAGS_UPPER_MASK)

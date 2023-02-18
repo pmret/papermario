@@ -95,7 +95,7 @@ EvtScript N(EVS_Scene_BuildBridge) = {
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_SET(GB_StoryProgress, STORY_CH1_MADE_FIRST_BRIDGE)
-    EVT_CALL(SetGroupEnabled, MODEL_off, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_off, 0)
     EVT_UNBIND
     EVT_RETURN
     EVT_END
@@ -108,7 +108,7 @@ EvtScript N(EVS_SetupBridge) = {
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o204, COLLIDER_FLAGS_UPPER_MASK)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetGroupEnabled, MODEL_off, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_off, 0)
     EVT_CALL(RotateModel, MODEL_o97, 90, -1, 0, 0)
     EVT_CALL(RotateModel, MODEL_o95, 90, -1, 0, 0)
     EVT_CALL(RotateModel, MODEL_o94, 90, -1, 0, 0)

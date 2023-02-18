@@ -6,7 +6,7 @@
 #include "world/common/todo/clouds.inc.c"
 #include "common/UnkFogFunc.inc.c"
 
-EvtScript N(beforeBattle_80220E28) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(N(UnkFogFunc))
     EVT_SET(LVar0, 1)
@@ -19,12 +19,12 @@ EvtScript N(beforeBattle_80220E28) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80220EAC) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_80220EBC)[] = {
+s32 N(ForegroundModels)[] = {
     0x0000001D, 0x00000022, 0x00000021, 0x00000000,
 };
 
@@ -33,7 +33,7 @@ Stage NAMESPACE = {
     .shape = "kmr_bt06_shape",
     .hit = "kmr_bt06_hit",
     .bg = "kmr_bg",
-    .preBattle = &N(beforeBattle_80220E28),
-    .postBattle = &N(afterBattle_80220EAC),
-    .foregroundModelList = N(foregroundModelList_80220EBC),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

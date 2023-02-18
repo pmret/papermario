@@ -4380,7 +4380,7 @@ void render_models(void) {
         if (model->flags & MODEL_FLAG_FLAG_4) {
             continue;
         }
-        if (model->flags & MODEL_FLAG_ENABLED) {
+        if (model->flags & MODEL_FLAG_HIDDEN) {
             continue;
         }
         if (model->flags & MODEL_FLAG_FLAG_20) {
@@ -4592,7 +4592,7 @@ void render_transform_group_node(ModelNode* node) {
 
             if (groupTypeProp != NULL && groupTypeProp->data.s != 0) {
                 model = get_model_from_list_index(mdl_currentTransformGroupChildIndex);
-                if (!(model->flags & MODEL_FLAG_ENABLED)) {
+                if (!(model->flags & MODEL_FLAG_HIDDEN)) {
                     appendGfx_model_group(model);
                 }
                 mdl_currentTransformGroupChildIndex++;
@@ -4624,7 +4624,7 @@ void render_transform_group_node(ModelNode* node) {
         }
 
         model = get_model_from_list_index(mdl_currentTransformGroupChildIndex);
-        if (!(model->flags & MODEL_FLAG_ENABLED)) {
+        if (!(model->flags & MODEL_FLAG_HIDDEN)) {
             appendGfx_model(model);
         }
         mdl_currentTransformGroupChildIndex++;
@@ -5220,14 +5220,14 @@ void clone_model(u16 srcModelID, u16 newModelID) {
     newModel->modelID = newModelID;
 }
 
-void set_model_flags(u16 treeIndex, s32 flags, s32 mode) {
+void set_model_group_visibility(u16 treeIndex, s32 flags, s32 mode) {
     s32 maxGroupIndex = -1;
     s32 minGroupIndex;
     s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[treeIndex].modelIndex;
     s32 siblingIndex;
     s32 i;
 
-    if (modelIndex < 255) {
+    if (modelIndex < MAX_MODELS - 1) {
         minGroupIndex = maxGroupIndex = modelIndex;
     } else {
         s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[treeIndex].treeDepth;
@@ -5238,7 +5238,7 @@ void set_model_flags(u16 treeIndex, s32 flags, s32 mode) {
 
             siblingIndex = (*mdl_currentModelTreeNodeInfo)[i].modelIndex;
 
-            if (siblingIndex < 255) {
+            if (siblingIndex < MAX_MODELS - 1) {
                 if (maxGroupIndex == -1) {
                     maxGroupIndex = siblingIndex;
                 }
@@ -5250,7 +5250,7 @@ void set_model_flags(u16 treeIndex, s32 flags, s32 mode) {
     if (mode < 2) {
         for (i = minGroupIndex; i <= maxGroupIndex; i++) {
             Model* model = (*gCurrentModels)[i];
-            if (mode != 0) {
+            if (mode != MODEL_GROUP_HIDDEN) {
                 model->flags &= ~flags;
             } else {
                 model->flags |= flags;
@@ -5259,16 +5259,16 @@ void set_model_flags(u16 treeIndex, s32 flags, s32 mode) {
     } else {
         for (i = 0; i < minGroupIndex; i++) {
             Model* model = (*gCurrentModels)[i];
-            if (mode == 3) {
+            if (mode == MODEL_GROUP_OTHERS_VISIBLE) {
                 model->flags &= ~flags;
             } else {
                 model->flags |= flags;
             }
         }
-        for (i = maxGroupIndex + 1; i < 256; i++) {
+        for (i = maxGroupIndex + 1; i < MAX_MODELS; i++) {
             Model* model = (*gCurrentModels)[i];
             if (model != NULL) {
-                if (mode == 3) {
+                if (mode == MODEL_GROUP_OTHERS_VISIBLE) {
                     model->flags &= ~flags;
                 } else {
                     model->flags |= flags;
@@ -5286,7 +5286,7 @@ void func_8011B950(u16 treeIndex, s32 customGfxIndex, s32 fogType, s32 arg3) {
     s32 siblingIndex;
     s32 maskLow, maskHigh, newIndex;
 
-    if (modelIndex < 255) {
+    if (modelIndex < MAX_MODELS - 1) {
         minGroupIndex = maxGroupIndex = modelIndex;
     } else {
         s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[treeIndex].treeDepth;
@@ -5297,7 +5297,7 @@ void func_8011B950(u16 treeIndex, s32 customGfxIndex, s32 fogType, s32 arg3) {
 
             siblingIndex = (*mdl_currentModelTreeNodeInfo)[i].modelIndex;
 
-            if (siblingIndex < 255) {
+            if (siblingIndex < MAX_MODELS - 1) {
                 if (maxGroupIndex == -1) {
                     maxGroupIndex = siblingIndex;
                 }
@@ -5330,7 +5330,7 @@ void func_8011B950(u16 treeIndex, s32 customGfxIndex, s32 fogType, s32 arg3) {
             Model* model = (*gCurrentModels)[i];
             model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
         }
-        for (i = maxGroupIndex + 1; i < 256; i++) {
+        for (i = maxGroupIndex + 1; i < MAX_MODELS; i++) {
             Model* model = (*gCurrentModels)[i];
             if (model != NULL) {
                 model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
@@ -5651,7 +5651,7 @@ void mdl_make_local_vertex_copy(s32 copyIndex, u16 modelID, s32 isMakingCopy) {
             copy->gfxCopy[i] = NULL;
             copy->vtxCopy[i] = NULL;
         }
-        model->flags |= MODEL_FLAG_ENABLED;
+        model->flags |= MODEL_FLAG_HIDDEN;
     }
 
     copy->selector = 0;

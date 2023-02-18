@@ -100,7 +100,7 @@ EvtScript N(80224478) = {
     EVT_END
 };
 
-EvtScript N(beforeBattle_80224A24) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_THREAD
@@ -124,7 +124,7 @@ EvtScript N(beforeBattle_80224A24) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80224B30) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
@@ -134,6 +134,6 @@ Stage NAMESPACE = {
     .shape = "trd_bt05_shape",
     .hit = "trd_bt05_hit",
     .bg = "nok_bg",
-    .preBattle = &N(beforeBattle_80224A24),
-    .postBattle = &N(afterBattle_80224B30),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
 };

@@ -90,10 +90,10 @@ EvtScript N(EVS_SetupCamSpeed) = {
 EvtScript N(EVS_RoomListener_ToadHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_ie4_naka, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_ie4_naka, 1)
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_ie4_naka, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_ie4_naka, 0)
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.334))
     EVT_END_SWITCH
     EVT_RETURN
@@ -103,7 +103,7 @@ EvtScript N(EVS_RoomListener_ToadHouse) = {
 EvtScript N(EVS_RoomListener_Hideout) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_ie5_naka, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_ie5_naka, 1)
             EVT_CALL(SetCamType, CAM_DEFAULT, 0, FALSE)
             EVT_CALL(SetCamDistance, CAM_DEFAULT, 260)
             EVT_CALL(SetCamPitch, CAM_DEFAULT, 22, -13)
@@ -120,7 +120,7 @@ EvtScript N(EVS_RoomListener_Hideout) = {
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
             EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_ie5_naka, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_ie5_naka, 0)
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.334))
     EVT_END_SWITCH

@@ -9,19 +9,19 @@
 extern ActorBlueprint N(whacka);
 extern Formation N(specialFormation_802208E4);
 
-EvtScript N(beforeBattle_80220860) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetGroupEnabled, MODEL_b, FALSE)
+    EVT_CALL(SetGroupVisibility, MODEL_b, MODEL_GROUP_HIDDEN)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle_80220894) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_802208A4)[] = {
+s32 N(ForegroundModels)[] = {
     MODEL_iwa1, MODEL_o331, 0,
 };
 
@@ -30,9 +30,9 @@ Stage NAMESPACE = {
     .shape = "iwa_bt01_shape",
     .hit = "iwa_bt01_hit",
     .bg = "iwa_bg\0",
-    .preBattle = &N(beforeBattle_80220860),
-    .postBattle = &N(afterBattle_80220894),
-    .foregroundModelList = N(foregroundModelList_802208A4),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
     .stageEnemyCount = 1,
     .stageFormation = &N(specialFormation_802208E4),
     .stageEnemyChance = 512,

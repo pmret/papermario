@@ -3,20 +3,20 @@
 
 #define NAMESPACE b_area_jan_jan_04b
 
-EvtScript N(beforeBattle_802284F0) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupEnabled, 33, 0)
+    EVT_CALL(SetGroupVisibility, 33, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle_80228540) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_80228550)[] = {
+s32 N(ForegroundModels)[] = {
     0x00000025, 0x00000000,
 };
 
@@ -25,7 +25,7 @@ Stage NAMESPACE = {
     .shape = "jan_bt04_shape",
     .hit = "jan_bt04_hit",
     .bg = "jan_bg",
-    .preBattle = &N(beforeBattle_802284F0),
-    .postBattle = &N(afterBattle_80228540),
-    .foregroundModelList = N(foregroundModelList_80228550),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

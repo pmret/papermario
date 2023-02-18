@@ -7,7 +7,7 @@
 
 #include "common/UnkFogFunc.inc.c"
 
-EvtScript N(beforeBattle_80225788) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(N(UnkFogFunc))
     EVT_SET(LVar0, 1)
@@ -20,12 +20,12 @@ EvtScript N(beforeBattle_80225788) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_8022580C) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_8022581C)[] = {
+s32 N(ForegroundModels)[] = {
     0x0000001D, 0x00000022, 0x00000021, 0x00000000,
 };
 
@@ -34,7 +34,7 @@ Stage NAMESPACE = {
     .shape = "kmr_bt06_shape",
     .hit = "kmr_bt06_hit",
     .bg = "kmr_bg",
-    .preBattle = &N(beforeBattle_80225788),
-    .postBattle = &N(afterBattle_8022580C),
-    .foregroundModelList = N(foregroundModelList_8022581C),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

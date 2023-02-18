@@ -3,14 +3,14 @@
 
 #define NAMESPACE b_area_isk_part_2_isk_03b
 
-EvtScript N(beforeBattle_802200B0) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle_802200EC) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
@@ -19,6 +19,6 @@ Stage NAMESPACE = {
     .texture = "isk_tex",
     .shape = "isk_bt03_shape",
     .hit = "isk_bt03_hit",
-    .preBattle = &N(beforeBattle_802200B0),
-    .postBattle = &N(afterBattle_802200EC),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
 };

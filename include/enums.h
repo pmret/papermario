@@ -4889,7 +4889,7 @@ enum GlobalOverrides {
 
 enum ModelFlags {
     MODEL_FLAG_FLAG_1                  = 0x0001,
-    MODEL_FLAG_ENABLED                 = 0x0002,
+    MODEL_FLAG_HIDDEN                  = 0x0002,
     MODEL_FLAG_FLAG_4                  = 0x0004,
     MODEL_FLAG_TRANSFORM_GROUP_MEMBER  = 0x0008,
     MODEL_FLAG_USES_CUSTOM_GFX         = 0x0010,
@@ -4904,6 +4904,13 @@ enum ModelFlags {
     MODEL_FLAG_FLAG_2000               = 0x2000,
     MODEL_FLAG_FLAG_4000               = 0x4000,
     MODEL_FLAG_FLAG_8000               = 0x8000,
+};
+
+enum ModelGroupVisibility {
+    MODEL_GROUP_HIDDEN          = 0,
+    MODEL_GROUP_VISIBLE         = 1,
+    MODEL_GROUP_OTHERS_HIDDEN   = 2,
+    MODEL_GROUP_OTHERS_VISIBLE  = 3,
 };
 
 enum TexPanner {

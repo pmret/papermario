@@ -100,10 +100,10 @@ EvtScript N(8021E418) = {
     EVT_END
 };
 
-EvtScript N(beforeBattle_8021E9C4) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupEnabled, 63, 0)
+    EVT_CALL(SetGroupVisibility, 63, 0)
     EVT_THREAD
         EVT_WAIT(5)
         EVT_SET(LVar0, 9)
@@ -119,12 +119,12 @@ EvtScript N(beforeBattle_8021E9C4) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_8021EA9C) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_8021EAAC)[] = {
+s32 N(ForegroundModels)[] = {
     0x00000012, 0x00000000,
 };
 
@@ -133,7 +133,7 @@ Stage NAMESPACE = {
     .shape = "jan_bt01_shape",
     .hit = "jan_bt01_hit",
     .bg = "yos_bg",
-    .preBattle = &N(beforeBattle_8021E9C4),
-    .postBattle = &N(afterBattle_8021EA9C),
-    .foregroundModelList = N(foregroundModelList_8021EAAC),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

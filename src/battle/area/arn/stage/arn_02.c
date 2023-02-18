@@ -19,7 +19,7 @@ EvtScript N(80227960) = {
     EVT_END
 };
 
-EvtScript N(beforeBattle_80227A0C) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SET(LVar0, 8)
     EVT_EXEC_WAIT(N(80227960))
@@ -27,12 +27,12 @@ EvtScript N(beforeBattle_80227A0C) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80227A48) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_80227A58)[] = {
+s32 N(ForegroundModels)[] = {
     -1, MODEL_iwa4, 0,
 };
 
@@ -41,7 +41,7 @@ Stage NAMESPACE = {
     .shape = "arn_bt02_shape",
     .hit = "arn_bt02_hit",
     .bg = "arn_bg",
-    .preBattle = &N(beforeBattle_80227A0C),
-    .postBattle = &N(afterBattle_80227A48),
-    .foregroundModelList = N(foregroundModelList_80227A58),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

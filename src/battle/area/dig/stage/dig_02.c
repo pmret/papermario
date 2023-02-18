@@ -7,7 +7,7 @@
 
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetGroupEnabled, MODEL_a, FALSE)
+    EVT_CALL(SetGroupVisibility, MODEL_a, MODEL_GROUP_HIDDEN)
     EVT_RETURN
     EVT_END
 };

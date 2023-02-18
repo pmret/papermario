@@ -54,7 +54,7 @@ EvtScript N(EVS_NpcAI_Goombario) = {
 EvtScript N(EVS_RoomListener_House) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_of, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_of, 1)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
             // do nothing
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
@@ -68,7 +68,7 @@ EvtScript N(EVS_RoomListener_House) = {
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_of, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_of, 0)
             EVT_IF_EQ(GB_StoryProgress, STORY_CH0_MET_GOOMPA)
                 EVT_IF_EQ(GF_KMR02_Met_Goompapa, TRUE)
                     EVT_IF_EQ(GF_KMR02_Goombario_RelayedMessage, FALSE)
@@ -103,7 +103,7 @@ EvtScript N(EVS_RoomListener_Verdana) = {
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
             EVT_WAIT(30)
-            EVT_CALL(SetGroupEnabled, MODEL_monohoshi, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_monohoshi, 0)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_IF_GT(GB_StoryProgress, STORY_CH0_GATE_CRUSHED)
                 EVT_IF_LT(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
@@ -112,7 +112,7 @@ EvtScript N(EVS_RoomListener_Verdana) = {
                     EVT_RETURN
                 EVT_END_IF
             EVT_END_IF
-            EVT_CALL(SetGroupEnabled, MODEL_monohoshi, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_monohoshi, 1)
             EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 499, 0, -378)
             EVT_CALL(SetPanTarget, CAM_DEFAULT, 499, 70, -378)
             EVT_CALL(SetCamDistance, CAM_DEFAULT, 370)
@@ -121,10 +121,10 @@ EvtScript N(EVS_RoomListener_Verdana) = {
             EVT_SWITCH(GB_StoryProgress)
                 EVT_CASE_LT(STORY_CH0_GATE_CRUSHED)
                 EVT_CASE_LT(STORY_CH0_FELL_OFF_CLIFF)
-                    EVT_CALL(SetGroupEnabled, MODEL_monohoshi, 0)
+                    EVT_CALL(SetGroupVisibility, MODEL_monohoshi, 0)
                     EVT_CALL(DisablePlayerInput, TRUE)
                 EVT_CASE_LT(STORY_CH0_TWINK_GAVE_LUCKY_STAR)
-                    EVT_CALL(SetGroupEnabled, MODEL_monohoshi, 0)
+                    EVT_CALL(SetGroupVisibility, MODEL_monohoshi, 0)
                 EVT_CASE_GE(STORY_CH0_TWINK_GAVE_LUCKY_STAR)
                     EVT_CALL(EnableModel, MODEL_o437, FALSE)
                     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o625, COLLIDER_FLAGS_UPPER_MASK)
@@ -136,9 +136,9 @@ EvtScript N(EVS_RoomListener_Verdana) = {
                     EVT_IF_EQ(GB_StoryProgress, STORY_CH0_GATE_CRUSHED)
                         EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
                         EVT_LOOP(3)
-                            EVT_CALL(SetGroupEnabled, MODEL_monohoshi, 1)
+                            EVT_CALL(SetGroupVisibility, MODEL_monohoshi, 1)
                             EVT_WAIT(10)
-                            EVT_CALL(SetGroupEnabled, MODEL_monohoshi, 0)
+                            EVT_CALL(SetGroupVisibility, MODEL_monohoshi, 0)
                             EVT_WAIT(10)
                         EVT_END_LOOP
                         EVT_CALL(FadeOutMusic, 0, 0)
@@ -229,7 +229,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_PTR(N(InsideNPCs_House)))
     EVT_SET(LVar0, ROOM_UPDATE_EXIT_END)
     EVT_EXEC(N(EVS_RoomListener_House))
-    EVT_CALL(SetGroupEnabled, MODEL_monohoshi, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_monohoshi, 0)
     EVT_RETURN
     EVT_END
 };

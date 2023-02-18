@@ -48,7 +48,7 @@ EvtScript N(EVS_SpinyTromp_ShakeCam) = {
 EvtScript N(EVS_SetupSpinyTromp) = {
     EVT_SET_GROUP(EVT_GROUP_EF)
     EVT_IF_GE(GB_StoryProgress, STORY_CH5_HIDDEN_PASSAGE_OPEN)
-        EVT_CALL(SetGroupEnabled, MODEL_goron, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_goron, 0)
         EVT_CALL(EnableModel, MODEL_me, FALSE)
         EVT_CALL(EnableModel, MODEL_mae, FALSE)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_gogo, COLLIDER_FLAGS_UPPER_MASK)
@@ -144,7 +144,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
     EVT_SET(GB_StoryProgress, STORY_CH5_HIDDEN_PASSAGE_OPEN)
     EVT_WAIT(50)
     EVT_CALL(StopSound, SOUND_8000001B)
-    EVT_CALL(SetGroupEnabled, MODEL_goron, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_goron, 0)
     EVT_CALL(EnableModel, MODEL_me, FALSE)
     EVT_KILL_THREAD(LVarA)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))

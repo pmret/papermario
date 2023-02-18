@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_trd_part_1_trd_02c
 
-EvtScript N(beforeBattle_80224BF0) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(EnableModel, 26, FALSE)
@@ -12,12 +12,12 @@ EvtScript N(beforeBattle_80224BF0) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80224C54) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_80224C64)[] = {
+s32 N(ForegroundModels)[] = {
     0x00000016, 0x00000000,
 };
 
@@ -25,7 +25,7 @@ Stage NAMESPACE = {
     .texture = "trd_tex",
     .shape = "trd_bt02_shape",
     .hit = "trd_bt02_hit",
-    .preBattle = &N(beforeBattle_80224BF0),
-    .postBattle = &N(afterBattle_80224C54),
-    .foregroundModelList = N(foregroundModelList_80224C64),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

@@ -98,8 +98,8 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
     EVT_THREAD
         EVT_CALL(DisablePlayerPhysics, TRUE)
         EVT_WAIT(1)
-        EVT_CALL(SetGroupEnabled, MODEL_g96, 0)
-        EVT_CALL(SetGroupEnabled, MODEL_g87, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_g96, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_g87, 0)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_80013)
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.5))
         EVT_CALL(PlayerJump1, 121, 210, 0, 60)
@@ -148,7 +148,7 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_SET(GB_StoryProgress, STORY_CH3_TUBBA_SMASHED_THE_BRIDGES)
-    EVT_CALL(SetGroupEnabled, MODEL_g240, 1)
+    EVT_CALL(SetGroupVisibility, MODEL_g240, 1)
     EVT_CALL(DeleteAnimatedModel, 0)
     EVT_THREAD
         EVT_WAIT(30)
@@ -179,17 +179,17 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
 EvtScript N(EVS_SetupBridges) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH3_TUBBA_WOKE_UP)
-            EVT_CALL(SetGroupEnabled, MODEL_g240, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g240, 0)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_after, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CASE_EQ(STORY_CH3_TUBBA_WOKE_UP)
-            EVT_CALL(SetGroupEnabled, MODEL_g240, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g240, 0)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_after, COLLIDER_FLAGS_UPPER_MASK)
             EVT_EXEC(N(EVS_Scene_TubbaSmashBridges))
         EVT_CASE_LT(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
-            EVT_CALL(SetGroupEnabled, MODEL_g340, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g340, 0)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_before, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetGroupEnabled, MODEL_g240, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g240, 0)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_after, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_SWITCH
     EVT_RETURN

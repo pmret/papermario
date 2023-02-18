@@ -101,7 +101,7 @@ EvtScript N(80226C18) = {
     EVT_END
 };
 
-EvtScript N(beforeBattle_802271C4) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_SET(LVar0, 32)
@@ -115,7 +115,7 @@ EvtScript N(beforeBattle_802271C4) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80227298) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
@@ -125,6 +125,6 @@ Stage NAMESPACE = {
     .shape = "jan_bt00_shape",
     .hit = "jan_bt00_hit",
     .bg = "yos_bg",
-    .preBattle = &N(beforeBattle_802271C4),
-    .postBattle = &N(afterBattle_80227298),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
 };

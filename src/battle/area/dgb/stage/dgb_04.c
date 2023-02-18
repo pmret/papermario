@@ -4,18 +4,18 @@
 
 #define NAMESPACE b_area_dgb_dgb_04
 
-EvtScript N(beforeBattle_8021B170) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle_8021B190) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_8021B1A0)[] = {
+s32 N(ForegroundModels)[] = {
     MODEL_kumo1, 0,
 };
 
@@ -23,7 +23,7 @@ Stage NAMESPACE = {
     .texture = "dgb_tex",
     .shape = "dgb_bt04_shape",
     .hit = "dgb_bt04_hit",
-    .preBattle = &N(beforeBattle_8021B170),
-    .postBattle = &N(afterBattle_8021B190),
-    .foregroundModelList = N(foregroundModelList_8021B1A0),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

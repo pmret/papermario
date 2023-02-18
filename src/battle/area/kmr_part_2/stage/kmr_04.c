@@ -5,7 +5,7 @@
 
 #include "world/common/todo/clouds.inc.c"
 
-EvtScript N(beforeBattle_80224F38) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SET(LVar0, 1)
     EVT_SET(LVar2, 0)
@@ -17,12 +17,12 @@ EvtScript N(beforeBattle_80224F38) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80224FB0) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_80224FC0)[] = {
+s32 N(ForegroundModels)[] = {
     0x00000024, 0x00000020, 0x00000000,
 };
 
@@ -31,7 +31,7 @@ Stage NAMESPACE = {
     .shape = "kmr_bt04_shape",
     .hit = "kmr_bt04_hit",
     .bg = "kmr_bg",
-    .preBattle = &N(beforeBattle_80224F38),
-    .postBattle = &N(afterBattle_80224FB0),
-    .foregroundModelList = N(foregroundModelList_80224FC0),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

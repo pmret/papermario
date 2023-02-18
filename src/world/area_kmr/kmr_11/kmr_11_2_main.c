@@ -109,9 +109,9 @@ EvtScript N(EVS_Main) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH0_HIT_GATEHOUSE_SWITCH)
         EVT_CALL(EnableModel, MODEL_bb, FALSE)
     EVT_ELSE
-        EVT_CALL(SetGroupEnabled, MODEL_ue, 0)
-        EVT_CALL(SetGroupEnabled, MODEL_sotokabe, 0)
-        EVT_CALL(SetGroupEnabled, MODEL_tobira, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_ue, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_sotokabe, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_tobira, 0)
         EVT_CALL(EnableModel, MODEL_b1, FALSE)
         EVT_CALL(EnableModel, MODEL_b2, FALSE)
         EVT_CALL(EnableModel, MODEL_b3, FALSE)
@@ -139,7 +139,7 @@ EvtScript N(EVS_Main) = {
     EVT_END_IF
     EVT_SET(LVar0, EVT_PTR(N(SearchBush_SwitchBush)))
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Scripted)), TRIGGER_WALL_PRESS_A, COLLIDER_kusa4, 1, 0)
-    EVT_CALL(SetGroupEnabled, MODEL_event_cam, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_event_cam, 0)
     EVT_CALL(TranslateGroup, MODEL_g172, NPC_DISPOSE_LOCATION)
     EVT_CALL(TranslateGroup, MODEL_g173, NPC_DISPOSE_LOCATION)
     EVT_IF_GE(GB_StoryProgress, STORY_CH0_HIT_GATEHOUSE_SWITCH)

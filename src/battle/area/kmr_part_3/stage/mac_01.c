@@ -5,7 +5,7 @@
 
 #include "common/UnkModelStuff2.inc.c"
 
-EvtScript N(beforeBattle_80234B74) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_THREAD
@@ -27,7 +27,7 @@ EvtScript N(beforeBattle_80234B74) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80234C70) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
@@ -37,6 +37,6 @@ Stage NAMESPACE = {
     .shape = "mac_bt01_shape",
     .hit = "mac_bt01_hit",
     .bg = "nok_bg",
-    .preBattle = &N(beforeBattle_80234B74),
-    .postBattle = &N(afterBattle_80234C70),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
 };

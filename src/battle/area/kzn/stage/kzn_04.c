@@ -67,11 +67,11 @@ EvtScript N(80227F5C) = {
     EVT_END
 };
 
-EvtScript N(beforeBattle_8022810C) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupEnabled, 30, 0)
-    EVT_CALL(SetGroupEnabled, 44, 0)
+    EVT_CALL(SetGroupVisibility, 30, 0)
+    EVT_CALL(SetGroupVisibility, 44, 0)
     EVT_SET(LVar0, 4)
     EVT_SET(LVar1, 0)
     EVT_EXEC(N(80227DE0))
@@ -106,12 +106,12 @@ EvtScript N(beforeBattle_8022810C) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80228328) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_80228338)[] = {
+s32 N(ForegroundModels)[] = {
     0x00000014, 0x00000015, 0x00000016, 0x00000000,
 };
 
@@ -119,7 +119,7 @@ Stage NAMESPACE = {
     .texture = "kzn_tex",
     .shape = "kzn_bt04_shape",
     .hit = "kzn_bt04_hit",
-    .preBattle = &N(beforeBattle_8022810C),
-    .postBattle = &N(afterBattle_80228328),
-    .foregroundModelList = N(foregroundModelList_80228338),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

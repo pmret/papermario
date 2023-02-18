@@ -40,10 +40,10 @@ EvtScript N(EVS_DropDoor_RussHouse) = {
 EvtScript N(EVS_RoomListener_RussHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_intel_inn, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_intel_inn, 1)
             EVT_SET(MF_MusicMixTrigger1, TRUE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_intel_inn, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_intel_inn, 0)
             EVT_SET(MF_MusicMixTrigger1, FALSE)
     EVT_END_SWITCH
     EVT_RETURN
@@ -74,12 +74,12 @@ EvtScript N(EVS_SetWallRot_Shop) = {
 EvtScript N(EVS_RoomListener_Shop) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_shop_in, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_shop_in, 1)
             EVT_CALL(EnableModel, MODEL_o375, FALSE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             // do nothing
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_shop_in, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_shop_in, 0)
             EVT_CALL(EnableModel, MODEL_o375, TRUE)
     EVT_END_SWITCH
     EVT_RETURN
@@ -112,10 +112,10 @@ EvtScript N(EVS_DropDoor_Dojo) = {
 EvtScript N(EVS_RoomListener_Dojo) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_minka_inn, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_minka_inn, 1)
             EVT_SET(MF_MusicMixTrigger2, TRUE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_minka_inn, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_minka_inn, 0)
             EVT_CALL(EnableMusicProximityMix, 0)
             EVT_SET(MF_MusicMixTrigger2, FALSE)
     EVT_END_SWITCH
@@ -152,10 +152,10 @@ EvtScript N(EVS_RoomListener_Waterfront) = {
                     EVT_EXEC(N(EVS_WaterfrontHouse_DoorLocked))
                     EVT_SET(LVar0, -1)
                 EVT_CASE_DEFAULT
-                    EVT_CALL(SetGroupEnabled, MODEL_minka2_inn, 1)
+                    EVT_CALL(SetGroupVisibility, MODEL_minka2_inn, 1)
             EVT_END_SWITCH
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_minka2_inn, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_minka2_inn, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

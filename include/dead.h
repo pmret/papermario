@@ -323,7 +323,7 @@
 #define EVS_NpcHitRecoil dead_EVS_NpcHitRecoil
 #define SelfEnemyOverrideSyncPos dead_SelfEnemyOverrideSyncPos
 #define func_802CFD30 dead_func_802CFD30
-#define SetGroupEnabled dead_SetGroupEnabled
+#define SetGroupVisibility dead_SetGroupVisibility
 #define Entity_HeartBlock dead_Entity_HeartBlock
 #define GetCamDistance dead_GetCamDistance
 #define GetCamPitch dead_GetCamPitch

@@ -51,7 +51,7 @@ EvtScript N(EVS_Main) = {
     EVT_IF_EQ(GF_KPA17_BombedWall, FALSE)
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_BlastWall)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Wall)), 1, 0)
     EVT_ELSE
-        EVT_CALL(SetGroupEnabled, MODEL_g296, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_g296, 0)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitte, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_IF
     EVT_EXEC(N(EVS_SetupMusic))

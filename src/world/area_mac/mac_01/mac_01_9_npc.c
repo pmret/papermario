@@ -389,7 +389,7 @@ EvtScript N(EVS_MerlonShooAway) = {
 
 EvtScript N(EVS_MerlonBargeOut) = {
     EVT_CALL(ShowMessageAtScreenPos, MSG_MAC_Plaza_0020, 160, 40)
-    EVT_CALL(SetGroupEnabled, MODEL_dr_in, 1)
+    EVT_CALL(SetGroupVisibility, MODEL_dr_in, 1)
     EVT_THREAD
         EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitd, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
         EVT_CALL(MakeLerp, 0, -80, 15, EASING_COS_FAST_OVERSHOOT)
@@ -855,14 +855,14 @@ EvtScript N(EVS_NpcInteract_Merlon) = {
                 EVT_CALL(SetNpcSpeed, NPC_Merlon, EVT_FLOAT(3.0))
                 EVT_CALL(NpcMoveTo, NPC_Merlon, -170, -225, 0)
                 EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-                EVT_CALL(SetGroupEnabled, MODEL_dr_in, 1)
+                EVT_CALL(SetGroupVisibility, MODEL_dr_in, 1)
                 EVT_EXEC_WAIT(N(D_8024E740_80EFC0))
                 EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
                 EVT_CALL(SetNpcSpeed, NPC_Merlon, EVT_FLOAT(3.0))
                 EVT_CALL(NpcMoveTo, NPC_Merlon, -265, -300, 0)
                 EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
                 EVT_EXEC_WAIT(N(D_8024E7F0_80F070))
-                EVT_CALL(SetGroupEnabled, MODEL_dr_in, 0)
+                EVT_CALL(SetGroupVisibility, MODEL_dr_in, 0)
                 EVT_SET(GF_MAC01_Merlon_HeardAboutDream, TRUE)
                 EVT_CALL(InterpNpcYaw, NPC_Merlon, 133, 0)
                 EVT_CALL(SetNpcPos, NPC_Merlon, -337, 20, -360)

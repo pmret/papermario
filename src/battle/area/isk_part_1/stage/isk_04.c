@@ -20,7 +20,7 @@ API_CALLABLE(N(DeleteTorchFX)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(beforeBattle_80223AC0) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(N(CreateTorchFX))
@@ -28,13 +28,13 @@ EvtScript N(beforeBattle_80223AC0) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80223B08) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_CALL(N(DeleteTorchFX))
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_80223B24)[] = {
+s32 N(ForegroundModels)[] = {
     MODEL_o500, MODEL_o501, 0,
 };
 
@@ -42,7 +42,7 @@ Stage NAMESPACE = {
     .texture = "isk_tex",
     .shape = "isk_bt04_shape",
     .hit = "isk_bt04_hit",
-    .preBattle = &N(beforeBattle_80223AC0),
-    .postBattle = &N(afterBattle_80223B08),
-    .foregroundModelList = N(foregroundModelList_80223B24),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

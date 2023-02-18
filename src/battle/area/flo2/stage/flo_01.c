@@ -64,9 +64,9 @@ EvtScript N(802310C0) = {
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupEnabled, 37, 1)
-    EVT_CALL(SetGroupEnabled, 28, 0)
-    EVT_CALL(SetGroupEnabled, 22, 0)
+    EVT_CALL(SetGroupVisibility, 37, 1)
+    EVT_CALL(SetGroupVisibility, 28, 0)
+    EVT_CALL(SetGroupVisibility, 22, 0)
     EVT_EXEC(N(80230E90))
     EVT_EXEC_WAIT(N(MakeSun))
     EVT_RETURN

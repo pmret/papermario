@@ -255,7 +255,7 @@ EvtScript N(EVS_SetupRooms) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_RANGE(mac_04_ENTRY_2, mac_04_ENTRY_3)
-            EVT_CALL(SetGroupEnabled, MODEL_heiho_in, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_heiho_in, 1)
             EVT_CALL(N(InitEntryFromToybox))
             EVT_SET(LVar0, 90)
             EVT_CALL(RotateModel, MODEL_hk1, LVar0, 0, 0, -1)

@@ -9,9 +9,9 @@
 
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetGroupEnabled, 3, 0)
-    EVT_CALL(SetGroupEnabled, 10, 0)
-    EVT_CALL(SetGroupEnabled, 26, 0)
+    EVT_CALL(SetGroupVisibility, 3, 0)
+    EVT_CALL(SetGroupVisibility, 10, 0)
+    EVT_CALL(SetGroupVisibility, 26, 0)
     EVT_EXEC(N(UnkModelStuffScript1))
     EVT_RETURN
     EVT_END

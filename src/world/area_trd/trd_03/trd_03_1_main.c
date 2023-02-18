@@ -88,9 +88,9 @@ EvtScript N(EVS_BombWall_MiddleCell) = {
     EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 40, 10, 1, 10, 30)
     EVT_CALL(EnableModel, MODEL_nk2, TRUE)
     EVT_LOOP(10)
-        EVT_CALL(SetGroupEnabled, MODEL_ana2, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_ana2, 1)
         EVT_WAIT(1)
-        EVT_CALL(SetGroupEnabled, MODEL_ana2, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_ana2, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilit2, COLLIDER_FLAGS_UPPER_MASK)
@@ -105,9 +105,9 @@ EvtScript N(EVS_BombWall_RightCell) = {
     EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 43, 10, 1, 10, 30)
     EVT_CALL(EnableModel, MODEL_nk3, TRUE)
     EVT_LOOP(10)
-        EVT_CALL(SetGroupEnabled, MODEL_ana3, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_ana3, 1)
         EVT_WAIT(1)
-        EVT_CALL(SetGroupEnabled, MODEL_ana3, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_ana3, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilit3, COLLIDER_FLAGS_UPPER_MASK)
@@ -210,7 +210,7 @@ EvtScript N(EVS_Main) = {
     EVT_IF_EQ(GF_TRD02_BombedWall, FALSE)
         EVT_CALL(EnableModel, MODEL_nk1, FALSE)
     EVT_ELSE
-        EVT_CALL(SetGroupEnabled, MODEL_ana1, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_ana1, 0)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilit1, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_IF
@@ -218,7 +218,7 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(EnableModel, MODEL_nk2, FALSE)
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_BombWall_MiddleCell)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_MiddleCell)), 1, 0)
     EVT_ELSE
-        EVT_CALL(SetGroupEnabled, MODEL_ana2, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_ana2, 0)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilit2, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt2, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_IF
@@ -226,7 +226,7 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(EnableModel, MODEL_nk3, FALSE)
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_BombWall_RightCell)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_RightCell)), 1, 0)
     EVT_ELSE
-        EVT_CALL(SetGroupEnabled, MODEL_ana3, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_ana3, 0)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilit3, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt3, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_IF

@@ -58,7 +58,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(30)
-    EVT_CALL(SetGroupEnabled, MODEL_move_saku, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_move_saku, 0)
     EVT_CALL(PlaySound, SOUND_80000004)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(0.7))
@@ -129,9 +129,9 @@ EvtScript N(D_8024241C_9A33FC) = {
     EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 17, 11, 1, 10, 30)
     EVT_CALL(EnableModel, MODEL_anaaki, TRUE)
     EVT_LOOP(10)
-        EVT_CALL(SetGroupEnabled, MODEL_g14, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_g14, 1)
         EVT_WAIT(1)
-        EVT_CALL(SetGroupEnabled, MODEL_g14, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_g14, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tta, COLLIDER_FLAGS_UPPER_MASK)
@@ -165,7 +165,7 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(EnableModel, MODEL_anaaki, FALSE)
         EVT_BIND_TRIGGER(EVT_PTR(N(D_8024241C_9A33FC)), TRIGGER_POINT_BOMB, EVT_PTR(N(D_8024240C_9A33EC)), 1, 0)
     EVT_ELSE
-        EVT_CALL(SetGroupEnabled, MODEL_g14, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_g14, 0)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tta, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_IF
     EVT_EXEC(N(EVS_SetupMusic))
@@ -185,7 +185,7 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(UpdateColliderTransform, COLLIDER_o55)
         EVT_CALL(UpdateColliderTransform, COLLIDER_o54)
         EVT_CALL(UpdateColliderTransform, COLLIDER_o65)
-        EVT_CALL(SetGroupEnabled, MODEL_move_saku, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_move_saku, 0)
     EVT_END_IF
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)

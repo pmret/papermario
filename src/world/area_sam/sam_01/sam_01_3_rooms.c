@@ -9,10 +9,10 @@ EvtScript N(EVS_SetDoorRot_MayorFoyer) = {
 EvtScript N(EVS_SetWallRot_MayorFoyer) = {
     EVT_CALL(RotateGroup, MODEL_s_mae, LVar0, 1, 0, 0)
     EVT_IF_GT(LVar0, 89)
-        EVT_CALL(SetGroupEnabled, MODEL_s_mae, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_s_mae, 0)
     EVT_END_IF
     EVT_IF_LT(LVar0, 89)
-        EVT_CALL(SetGroupEnabled, MODEL_s_mae, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_s_mae, 1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -30,7 +30,7 @@ EvtScript N(EVS_RoomListener_MayorFoyer) = {
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_04, TRUE)
             EVT_SET(AF_SAM_Snowing, FALSE)
-            EVT_CALL(SetGroupEnabled, MODEL_s_naisou, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_s_naisou, 1)
             EVT_IF_GE(GB_StoryProgress, STORY_CH7_MAYOR_MURDER_SOLVED)
                 EVT_CALL(SetNpcPos, NPC_MayorPenguin, -275, 0, -200)
                 EVT_CALL(InterpNpcYaw, NPC_MayorPenguin, 180, 0)
@@ -40,7 +40,7 @@ EvtScript N(EVS_RoomListener_MayorFoyer) = {
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_04, FALSE)
             EVT_SET(AF_SAM_Snowing, TRUE)
-            EVT_CALL(SetGroupEnabled, MODEL_s_naisou, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_s_naisou, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -113,10 +113,10 @@ EvtScript N(EVS_SetWallRot_MiddleHouse) = {
     EVT_CALL(RotateGroup, MODEL_f_ue, LVar0, 0, 0, -1)
     EVT_CALL(RotateGroup, MODEL_f_sita, LVar0, 0, 0, 1)
     EVT_IF_GT(LVar0, 89)
-        EVT_CALL(SetGroupEnabled, MODEL_f_sita, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_f_sita, 0)
     EVT_END_IF
     EVT_IF_LT(LVar0, 89)
-        EVT_CALL(SetGroupEnabled, MODEL_f_sita, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_f_sita, 1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -127,14 +127,14 @@ EvtScript N(EVS_RoomListener_MiddleHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
-            EVT_CALL(SetGroupEnabled, MODEL_f_naiso, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_f_naiso, 1)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
             // do nothing
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             // do nothing
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
-            EVT_CALL(SetGroupEnabled, MODEL_f_naiso, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_f_naiso, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -156,10 +156,10 @@ EvtScript N(EVS_SetWallRot_RightHouse) = {
     EVT_CALL(RotateGroup, MODEL_m_ue, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_m_mae, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
-        EVT_CALL(SetGroupEnabled, MODEL_m_mae, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_m_mae, 0)
     EVT_END_IF
     EVT_IF_LT(LVar0, 89)
-        EVT_CALL(SetGroupEnabled, MODEL_m_mae, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_m_mae, 1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -170,10 +170,10 @@ EvtScript N(EVS_RoomListener_UpperRightHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
-            EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_m_naiso, 1)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
-            EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_m_naiso, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -184,10 +184,10 @@ EvtScript N(EVS_RoomListener_LowerRightHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
-            EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_m_naiso, 1)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
-            EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_m_naiso, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -258,12 +258,12 @@ EvtScript N(EVS_SetupMayorRooms) = {
 };
 
 EvtScript N(EVS_SetupRooms) = {
-    EVT_CALL(SetGroupEnabled, MODEL_s_naisou, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_s_naisou, 0)
     EVT_IF_NE(GB_StoryProgress, STORY_CH7_SPOKE_WITH_HERRINGWAY)
         EVT_EXEC_WAIT(N(EVS_SetupMayorRooms))
     EVT_END_IF
     // upper middle house
-    EVT_CALL(SetGroupEnabled, MODEL_f_naiso, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_f_naiso, 0)
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_MiddleHouse)),
@@ -275,7 +275,7 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_f2,
         EVT_PTR(N(InteriorNPCs_MiddleHouse)))
     // lower right house
-    EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_m_naiso, 0)
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_UpperRightHouse)),
@@ -287,7 +287,7 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_min,
         EVT_PTR(N(InteriorNPCs_RightHouse)))
     // upper right house
-    EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_m_naiso, 0)
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_LowerRightHouse)),

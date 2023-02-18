@@ -5,7 +5,7 @@
 
 #include "common/UnkModelStuff2.inc.c"
 
-EvtScript N(beforeBattle_8021D3B4) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_THREAD
@@ -45,12 +45,12 @@ EvtScript N(beforeBattle_8021D3B4) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_8021D598) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_8021D5A8)[] = {
+s32 N(ForegroundModels)[] = {
     0x00000009, 0x00000010, 0x00000000,
 };
 
@@ -58,7 +58,7 @@ Stage NAMESPACE = {
     .texture = "kgr_tex",
     .shape = "kgr_bt01_shape",
     .hit = "kgr_bt01_hit",
-    .preBattle = &N(beforeBattle_8021D3B4),
-    .postBattle = &N(afterBattle_8021D598),
-    .foregroundModelList = N(foregroundModelList_8021D5A8),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

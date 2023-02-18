@@ -9,10 +9,10 @@ EvtScript N(EVS_SetDoorRot_LeftHouse) = {
 EvtScript N(EVS_SetWallRot_LeftHouse) = {
     EVT_CALL(RotateGroup, MODEL_mc_sita, LVar0, 1, 0, 0)
     EVT_IF_GT(LVar0, 89)
-        EVT_CALL(SetGroupEnabled, MODEL_mc_sita, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_mc_sita, 0)
     EVT_END_IF
     EVT_IF_LT(LVar0, 89)
-        EVT_CALL(SetGroupEnabled, MODEL_mc_sita, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_mc_sita, 1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -28,10 +28,10 @@ EvtScript N(EVS_RoomListener_LeftHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
-            EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_m_naiso, 1)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
-            EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_m_naiso, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -47,10 +47,10 @@ EvtScript N(EVS_SetWallRot_Shop) = {
     EVT_CALL(RotateGroup, MODEL_t_ue, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_t_sita, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
-        EVT_CALL(SetGroupEnabled, MODEL_t_sita, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_t_sita, 0)
     EVT_END_IF
     EVT_IF_LT(LVar0, 89)
-        EVT_CALL(SetGroupEnabled, MODEL_t_sita, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_t_sita, 1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -60,7 +60,7 @@ EvtScript N(EVS_RoomListener_Shop) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
-            EVT_CALL(SetGroupEnabled, MODEL_t_naiso, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_t_naiso, 1)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_SWITCH(GB_StoryProgress)
                 EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
@@ -69,7 +69,7 @@ EvtScript N(EVS_RoomListener_Shop) = {
             EVT_END_SWITCH
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
-            EVT_CALL(SetGroupEnabled, MODEL_t_naiso, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_t_naiso, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -85,10 +85,10 @@ EvtScript N(EVS_SetWallRot_ToadHouse) = {
     EVT_CALL(RotateGroup, MODEL_mk_ue, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_mk_sita, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
-        EVT_CALL(SetGroupEnabled, MODEL_mk_sita, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_mk_sita, 0)
     EVT_END_IF
     EVT_IF_LT(LVar0, 89)
-        EVT_CALL(SetGroupEnabled, MODEL_mk_sita, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_mk_sita, 1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -98,10 +98,10 @@ EvtScript N(EVS_RoomListener_ToadHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
-            EVT_CALL(SetGroupEnabled, MODEL_k_naisou, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_k_naisou, 1)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
-            EVT_CALL(SetGroupEnabled, MODEL_k_naisou, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_k_naisou, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -124,7 +124,7 @@ s32 N(InteriorNPCs_ToadHouse)[] = {
 
 EvtScript N(EVS_SetupRooms) = {
     // left house
-    EVT_CALL(SetGroupEnabled, MODEL_m_naiso, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_m_naiso, 0)
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_LeftHouse)),
@@ -136,7 +136,7 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_min,
         EVT_PTR(N(InteriorNPCs_LeftHouse)))
     // shop
-    EVT_CALL(SetGroupEnabled, MODEL_t_naiso, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_t_naiso, 0)
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_Shop)),
@@ -148,7 +148,7 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_ten,
         EVT_PTR(N(InteriorNPCs_Shop)))
     // toad house
-    EVT_CALL(SetGroupEnabled, MODEL_k_naisou, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_k_naisou, 0)
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),

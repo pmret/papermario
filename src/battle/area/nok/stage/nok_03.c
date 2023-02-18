@@ -3,18 +3,18 @@
 
 #define NAMESPACE b_area_nok_nok_03
 
-EvtScript N(beforeBattle_8022BB20) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle_8022BB40) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_8022BB50)[] = {
+s32 N(ForegroundModels)[] = {
     0x0000000E, 0x0000000F, 0x00000000,
 };
 
@@ -23,7 +23,7 @@ Stage NAMESPACE = {
     .shape = "nok_bt03_shape",
     .hit = "nok_bt03_hit",
     .bg = "nok_bg",
-    .preBattle = &N(beforeBattle_8022BB20),
-    .postBattle = &N(afterBattle_8022BB40),
-    .foregroundModelList = N(foregroundModelList_8022BB50),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

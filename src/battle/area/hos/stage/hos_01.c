@@ -103,7 +103,7 @@ void func_80218CEC_47FD9C(s32 arg0) {
     D_80224BB0_48BC60[arg0] += 0x253;
 }
 
-EvtScript N(beforeBattle_80224BD0) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
 
     EVT_CALL(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o345, TRUE)
@@ -247,12 +247,12 @@ EvtScript N(beforeBattle_80224BD0) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80225598) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_802255A8)[] = {
+s32 N(ForegroundModels)[] = {
     MODEL_o345, 0,
 };
 
@@ -261,7 +261,7 @@ Stage NAMESPACE = {
     .shape = "hos_bt01_shape",
     .hit = "hos_bt01_hit",
     .bg = "hos_bg",
-    .preBattle = &N(beforeBattle_80224BD0),
-    .postBattle = &N(afterBattle_80225598),
-    .foregroundModelList = N(foregroundModelList_802255A8),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };
