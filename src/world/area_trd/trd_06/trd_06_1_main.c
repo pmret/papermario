@@ -47,11 +47,11 @@ BombTrigger N(BombPos_CellWall) = {
 EvtScript N(EVS_BombWall_Cell) = {
     EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, TRUE)
     EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 19, 19, 1, 10, 30)
-    EVT_CALL(SetGroupVisibility, MODEL_ana, 1)
+    EVT_CALL(SetGroupVisibility, MODEL_ana, MODEL_GROUP_VISIBLE)
     EVT_LOOP(10)
-        EVT_CALL(SetGroupVisibility, MODEL_ana2, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_ana2, MODEL_GROUP_VISIBLE)
         EVT_WAIT(1)
-        EVT_CALL(SetGroupVisibility, MODEL_ana2, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_ana2, MODEL_GROUP_HIDDEN)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitse, COLLIDER_FLAGS_UPPER_MASK)
@@ -143,7 +143,7 @@ EvtScript N(EVS_Main) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH1_DEFEATED_KOOPA_BROS)
             EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(NpcGroup_Prisoners)))
-            EVT_CALL(SetGroupVisibility, MODEL_g27, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g27, MODEL_GROUP_HIDDEN)
         EVT_CASE_LT(STORY_CH1_DEFEATED_JR_TROOPA)
             EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(NpcGroup_KoopaBros)))
     EVT_END_SWITCH
@@ -155,14 +155,14 @@ EvtScript N(EVS_Main) = {
     EVT_IF_LE(LVar0, trd_06_ENTRY_1)
         EVT_IF_EQ(GF_TRD06_BombedWall, FALSE)
             EVT_BIND_TRIGGER(EVT_PTR(N(EVS_BombWall_Cell)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_CellWall)), 1, 0)
-            EVT_CALL(SetGroupVisibility, MODEL_ana, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_ana, MODEL_GROUP_HIDDEN)
         EVT_ELSE
-            EVT_CALL(SetGroupVisibility, MODEL_ana2, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_ana2, MODEL_GROUP_HIDDEN)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitse, COLLIDER_FLAGS_UPPER_MASK)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ttse, COLLIDER_FLAGS_UPPER_MASK)
         EVT_END_IF
     EVT_ELSE
-        EVT_CALL(SetGroupVisibility, MODEL_ana, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_ana, MODEL_GROUP_HIDDEN)
     EVT_END_IF
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_EXEC(N(EVS_TexPan_Water))

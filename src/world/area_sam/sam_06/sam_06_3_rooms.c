@@ -10,10 +10,10 @@ EvtScript N(EVS_SetWallRot_ToadHouse) = {
     EVT_CALL(RotateGroup, MODEL_khm_yane, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_khm_sita, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
-        EVT_CALL(SetGroupVisibility, MODEL_khm_sita, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_khm_sita, MODEL_GROUP_HIDDEN)
     EVT_END_IF
     EVT_IF_LT(LVar0, 89)
-        EVT_CALL(SetGroupVisibility, MODEL_khm_sita, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_khm_sita, MODEL_GROUP_VISIBLE)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -23,10 +23,10 @@ EvtScript N(EVS_RoomListener_ToadHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
-            EVT_CALL(SetGroupVisibility, MODEL_kh_naiso, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_kh_naiso, MODEL_GROUP_VISIBLE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
-            EVT_CALL(SetGroupVisibility, MODEL_kh_naiso, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_kh_naiso, MODEL_GROUP_HIDDEN)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -42,10 +42,10 @@ EvtScript N(EVS_SetWallRot_MerleHouse) = {
     EVT_CALL(RotateGroup, MODEL_km_yane, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_km_sita, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
-        EVT_CALL(SetGroupVisibility, MODEL_km_sita, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_km_sita, MODEL_GROUP_HIDDEN)
     EVT_END_IF
     EVT_IF_LT(LVar0, 89)
-        EVT_CALL(SetGroupVisibility, MODEL_km_sita, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_km_sita, MODEL_GROUP_VISIBLE)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -55,7 +55,7 @@ EvtScript N(EVS_RoomListener_MerleHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
-            EVT_CALL(SetGroupVisibility, MODEL_k_naiso, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_VISIBLE)
             EVT_CALL(EnableModel, MODEL_k_naiso, TRUE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_IF_LT(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_SCARF)
@@ -63,7 +63,7 @@ EvtScript N(EVS_RoomListener_MerleHouse) = {
             EVT_END_IF
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
-            EVT_CALL(SetGroupVisibility, MODEL_k_naiso, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_HIDDEN)
             EVT_IF_LT(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_SCARF)
                 EVT_EXEC_WAIT(N(EVS_Scene_Merle_OneLastThing))
             EVT_END_IF
@@ -82,16 +82,16 @@ EvtScript N(EVS_SetWallRot_CookHouse) = {
     EVT_CALL(RotateGroup, MODEL_hm_yane, LVar0, 0, 0, 1)
     EVT_CALL(RotateGroup, MODEL_hm_sita, LVar0, 0, 0, -1)
     EVT_IF_GT(LVar0, 89)
-        EVT_CALL(SetGroupVisibility, MODEL_hm_sita, 0)
-        EVT_CALL(SetGroupVisibility, MODEL_hm_yane, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_hm_sita, MODEL_GROUP_HIDDEN)
+        EVT_CALL(SetGroupVisibility, MODEL_hm_yane, MODEL_GROUP_HIDDEN)
         EVT_CALL(EnableModel, MODEL_h_yuki1, FALSE)
         EVT_CALL(EnableModel, MODEL_h_yuki2, FALSE)
         EVT_CALL(EnableModel, MODEL_hm_entotu, FALSE)
         EVT_CALL(EnableModel, MODEL_hm_ento2, FALSE)
     EVT_END_IF
     EVT_IF_LT(LVar0, 89)
-        EVT_CALL(SetGroupVisibility, MODEL_hm_sita, 1)
-        EVT_CALL(SetGroupVisibility, MODEL_hm_yane, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_hm_sita, MODEL_GROUP_VISIBLE)
+        EVT_CALL(SetGroupVisibility, MODEL_hm_yane, MODEL_GROUP_VISIBLE)
         EVT_CALL(EnableModel, MODEL_h_yuki1, TRUE)
         EVT_CALL(EnableModel, MODEL_h_yuki2, TRUE)
         EVT_CALL(EnableModel, MODEL_hm_entotu, TRUE)
@@ -105,10 +105,10 @@ EvtScript N(EVS_RoomListener_CookHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_SET(AF_SAM_Snowing, FALSE)
-            EVT_CALL(SetGroupVisibility, MODEL_h_naiso, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_h_naiso, MODEL_GROUP_VISIBLE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_SAM_Snowing, TRUE)
-            EVT_CALL(SetGroupVisibility, MODEL_h_naiso, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_h_naiso, MODEL_GROUP_HIDDEN)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -134,7 +134,7 @@ s32 N(InteriorNPCs_CookHouse)[] = {
 
 EvtScript N(EVS_SetupRooms) = {
     // toad house
-    EVT_CALL(SetGroupVisibility, MODEL_kh_naiso, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_kh_naiso, MODEL_GROUP_HIDDEN)
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_ToadHouse)),
@@ -146,7 +146,7 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_kinohuse,
         EVT_PTR(N(InteriorNPCs_ToadHouse)))
     // merle's house
-    EVT_CALL(SetGroupVisibility, MODEL_k_naiso, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_HIDDEN)
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_MerleHouse)),
@@ -158,7 +158,7 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_k,
         EVT_PTR(N(InteriorNPCs_MerleHouse)))
     // cooking house
-    EVT_CALL(SetGroupVisibility, MODEL_h_naiso, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_h_naiso, MODEL_GROUP_HIDDEN)
     EVT_CALL(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         EVT_PTR(N(EVS_SetDoorRot_CookHouse)),

@@ -9,10 +9,10 @@
 
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetGroupVisibility, 3, 0)
-    EVT_CALL(SetGroupVisibility, 10, 0)
-    EVT_CALL(SetGroupVisibility, 12, 0)
-    EVT_CALL(SetGroupVisibility, 26, 0)
+    EVT_CALL(SetGroupVisibility, 3, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, 10, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, 12, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, 26, MODEL_GROUP_HIDDEN)
     EVT_EXEC(N(UnkModelStuffScript1))
     EVT_RETURN
     EVT_END

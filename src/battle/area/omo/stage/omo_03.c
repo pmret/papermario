@@ -6,7 +6,7 @@
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupVisibility, 18, 0)
+    EVT_CALL(SetGroupVisibility, 18, MODEL_GROUP_HIDDEN)
     EVT_RETURN
     EVT_END
 };

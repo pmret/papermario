@@ -121,12 +121,12 @@ EvtScript N(EVS_ManagePoundableSwitch) = {
         EVT_END_IF
     EVT_WAIT(10)
     EVT_IF_EQ(GF_PRA02_DoorColorToggle, TRUE)
-        EVT_CALL(SetGroupVisibility, MODEL_g307, 0)
-        EVT_CALL(SetGroupVisibility, MODEL_g308, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_g307, MODEL_GROUP_HIDDEN)
+        EVT_CALL(SetGroupVisibility, MODEL_g308, MODEL_GROUP_VISIBLE)
         EVT_EXEC_WAIT(N(EVS_RaisePoundableSwitch))
     EVT_ELSE
-        EVT_CALL(SetGroupVisibility, MODEL_g307, 1)
-        EVT_CALL(SetGroupVisibility, MODEL_g308, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_g307, MODEL_GROUP_VISIBLE)
+        EVT_CALL(SetGroupVisibility, MODEL_g308, MODEL_GROUP_HIDDEN)
         EVT_EXEC_WAIT(N(EVS_RaisePoundableSwitch))
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)

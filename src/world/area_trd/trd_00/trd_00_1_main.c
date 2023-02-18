@@ -134,10 +134,10 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_WAIT(1)
     EVT_IF_EQ(GF_TRD05_BombedWall, FALSE)
-        EVT_CALL(SetGroupVisibility, MODEL_g21, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_g21, MODEL_GROUP_HIDDEN)
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt5, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(SetGroupVisibility, MODEL_ana, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_ana, MODEL_GROUP_HIDDEN)
     EVT_END_IF
     EVT_EXEC(N(EVS_EnterMap))
     EVT_CALL(GetEntryID, LVar0)

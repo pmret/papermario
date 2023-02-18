@@ -81,9 +81,9 @@ LavaReset N(SafeFloorColliders)[] = {
 
 EvtScript N(D_8024202C_B861AC) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_ZIP_LINE_READY)
-        EVT_CALL(SetGroupVisibility, MODEL_g39, 0)
-        EVT_CALL(SetGroupVisibility, MODEL_g52, 0)
-        EVT_CALL(SetGroupVisibility, MODEL_g58, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_g39, MODEL_GROUP_HIDDEN)
+        EVT_CALL(SetGroupVisibility, MODEL_g52, MODEL_GROUP_HIDDEN)
+        EVT_CALL(SetGroupVisibility, MODEL_g58, MODEL_GROUP_HIDDEN)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_g29, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_g39, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_g86, COLLIDER_FLAGS_UPPER_MASK)

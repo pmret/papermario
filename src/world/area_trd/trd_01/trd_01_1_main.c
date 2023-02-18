@@ -59,7 +59,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o162, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(SetGroupVisibility, MODEL_move_saku, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_move_saku, MODEL_GROUP_HIDDEN)
     EVT_CALL(PlaySound, SOUND_80000006)
     EVT_CHILD_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
@@ -325,7 +325,7 @@ EvtScript N(EVS_Main) = {
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_RaiseStairs)), TRIGGER_AREA_FLAG_SET, AF_TRD01_RaiseStairs, 0, 0)
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o162, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(SetGroupVisibility, MODEL_move_saku, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_move_saku, MODEL_GROUP_HIDDEN)
     EVT_END_IF
     EVT_CALL(EnableModel, MODEL_sui1, FALSE)
     EVT_CALL(EnableModel, MODEL_sui2, FALSE)

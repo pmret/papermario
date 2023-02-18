@@ -34,11 +34,11 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(TranslateGroup, MODEL_g304, 0, 65, 0)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
     EVT_IF_EQ(GF_ISK05_Hammer2Block, FALSE)
-        EVT_CALL(SetGroupVisibility, MODEL_wan1, 1)
-        EVT_CALL(SetGroupVisibility, MODEL_wan2, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_wan1, MODEL_GROUP_VISIBLE)
+        EVT_CALL(SetGroupVisibility, MODEL_wan2, MODEL_GROUP_HIDDEN)
     EVT_ELSE
-        EVT_CALL(SetGroupVisibility, MODEL_wan1, 0)
-        EVT_CALL(SetGroupVisibility, MODEL_wan2, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_wan1, MODEL_GROUP_HIDDEN)
+        EVT_CALL(SetGroupVisibility, MODEL_wan2, MODEL_GROUP_VISIBLE)
     EVT_END_IF
     EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
     EVT_EXEC(EnterWalk)

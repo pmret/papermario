@@ -58,7 +58,7 @@ EvtScript N(EVS_FlowersGentleRocking) = {
 EvtScript N(EVS_InspectBush) = {
     EVT_IF_EQ(MV_FoundHint, FALSE)
         EVT_SET(MV_FoundHint, TRUE)
-        EVT_CALL(SetGroupVisibility, MODEL_hana, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_hana, MODEL_GROUP_VISIBLE)
         EVT_CALL(PlaySound, SOUND_205D)
         EVT_CALL(MakeLerp, 10, 100, 30, EASING_LINEAR)
         EVT_LABEL(0)
@@ -85,7 +85,7 @@ EvtScript N(EVS_InspectBush) = {
 
 EvtScript N(EVS_SetupExitHint) = {
     EVT_SET(MV_FoundHint, 0)
-    EVT_CALL(SetGroupVisibility, MODEL_hana, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_hana, MODEL_GROUP_HIDDEN)
     EVT_CALL(SetTexPanner, MODEL_o465, TEX_PANNER_0)
     EVT_CALL(SetTexPanner, MODEL_o467, TEX_PANNER_0)
     EVT_CALL(SetTexPanner, MODEL_o469, TEX_PANNER_0)

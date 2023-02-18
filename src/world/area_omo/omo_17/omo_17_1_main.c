@@ -28,7 +28,7 @@ EvtScript N(EVS_Main) = {
             EVT_EXEC_WAIT(N(EVS_EnterTrain))
             EVT_WAIT(3)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetGroupVisibility, MODEL_popo, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_popo, MODEL_GROUP_HIDDEN)
             EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
             EVT_EXEC(EnterWalk)
             EVT_WAIT(1)

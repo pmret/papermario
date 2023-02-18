@@ -217,7 +217,7 @@ EvtScript N(EVS_RoomListener_KooperHouse) = {
                 EVT_SET(LVar0, ROOM_UPDATE_REQUEST_CANCEL)
                 EVT_RETURN
             EVT_END_IF
-            EVT_CALL(SetGroupVisibility, MODEL_g111, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_g111, MODEL_GROUP_VISIBLE)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
             EVT_EXEC(N(EVS_FuzzyBoss_PlayerEntersKoopersHouse))
             EVT_SET(AF_NOK_10, TRUE)
@@ -225,7 +225,7 @@ EvtScript N(EVS_RoomListener_KooperHouse) = {
             EVT_SET(AF_NOK_10, FALSE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_SET(AF_NOK_12, FALSE)
-            EVT_CALL(SetGroupVisibility, MODEL_g111, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g111, MODEL_GROUP_HIDDEN)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -234,13 +234,13 @@ EvtScript N(EVS_RoomListener_KooperHouse) = {
 EvtScript N(EVS_RoomListener_KoloradoHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupVisibility, MODEL_g45, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_g45, MODEL_GROUP_VISIBLE)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
             // do nothing
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             // do nothing
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupVisibility, MODEL_g45, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g45, MODEL_GROUP_HIDDEN)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -249,13 +249,13 @@ EvtScript N(EVS_RoomListener_KoloradoHouse) = {
 EvtScript N(EVS_RoomListener_KootHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupVisibility, MODEL_g63, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_g63, MODEL_GROUP_VISIBLE)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
             // do nothing
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             // do nothing
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupVisibility, MODEL_g63, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g63, MODEL_GROUP_HIDDEN)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

@@ -65,10 +65,10 @@ EvtScript N(EVS_DropDoor_PostOffice) = {
 EvtScript N(EVS_RoomListener_PostOffice) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupVisibility, MODEL_yubin_in, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_yubin_in, MODEL_GROUP_VISIBLE)
             EVT_EXEC_WAIT(N(EVS_Scene_MailbagTheft))
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupVisibility, MODEL_yubin_in, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_yubin_in, MODEL_GROUP_HIDDEN)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -113,10 +113,10 @@ EvtScript N(EVS_SetWallRot_ToadHouse) = {
 EvtScript N(EVS_RoomListener_ToadHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupVisibility, MODEL_kino_in, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_kino_in, MODEL_GROUP_VISIBLE)
             EVT_SET(MF_InsideToadHouse, TRUE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupVisibility, MODEL_kino_in, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_kino_in, MODEL_GROUP_HIDDEN)
             EVT_SET(MF_InsideToadHouse, FALSE)
     EVT_END_SWITCH
     EVT_RETURN
@@ -161,14 +161,14 @@ EvtScript N(EVS_RoomListener_MerlonHouse) = {
                     EVT_SET(LVar0, -1)
                     EVT_RETURN
             EVT_END_SWITCH
-            EVT_CALL(SetGroupVisibility, MODEL_dr_in, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_dr_in, MODEL_GROUP_VISIBLE)
             EVT_SET(MF_MusicMixTrigger1, TRUE)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
             // do nothing
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             // do nothing
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupVisibility, MODEL_dr_in, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_dr_in, MODEL_GROUP_HIDDEN)
             EVT_SET(MF_MusicMixTrigger1, FALSE)
     EVT_END_SWITCH
     EVT_RETURN

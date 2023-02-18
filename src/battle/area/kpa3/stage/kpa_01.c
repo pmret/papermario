@@ -22,7 +22,7 @@ EvtScript N(8022EFE0) = {
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupVisibility, 36, 0)
+    EVT_CALL(SetGroupVisibility, 36, MODEL_GROUP_HIDDEN)
     EVT_THREAD
         EVT_SET(LVar0, 37)
         EVT_EXEC(N(8022EFE0))
