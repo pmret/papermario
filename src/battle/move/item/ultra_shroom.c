@@ -1,7 +1,10 @@
-#include "ultra_shroom.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_ultra_shroom
+
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_7239BC)) {
     Bytecode* args = script->ptrReadPos;
@@ -24,10 +27,10 @@ API_CALLABLE(N(func_802A12FC_723A7C)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x0000008C)
+    EVT_SET_CONST(LVarA, ITEM_SUPER_SHROOM)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(AddBattleCamZoom, 50)
     EVT_CALL(MoveBattleCamOver, 20)

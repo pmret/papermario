@@ -1,6 +1,9 @@
-#include "volt_shroom.h"
+#include "common.h"
+#include "script_api/battle.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_volt_shroom
+
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_71AA2C)) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -11,10 +14,10 @@ API_CALLABLE(N(func_802A123C_71AA2C)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x0000008B)
+    EVT_SET_CONST(LVarA, ITEM_VOLT_SHROOM)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(EatItem))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)

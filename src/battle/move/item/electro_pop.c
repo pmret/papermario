@@ -1,7 +1,11 @@
-#include "electro_pop.h"
+#include "common.h"
+#include "script_api/battle.h"
+
 #include "effects.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_electro_pop
+
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_7307DC)) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -82,15 +86,15 @@ API_CALLABLE(N(func_802A14F0_730A90)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x000000CC)
+    EVT_SET_CONST(LVarA, ITEM_ELECTRO_POP)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(EatItem))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
-    EVT_CALL(PlayEffect, 0x57, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySound, SOUND_379)
     EVT_CALL(GetItemPower, ITEM_VOLT_SHROOM, LVar0, LVar1)
     EVT_CALL(N(func_802A123C_7307DC))

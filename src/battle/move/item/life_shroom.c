@@ -1,10 +1,13 @@
-#include "life_shroom.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 #include "entity.h"
 
+#define NAMESPACE battle_item_life_shroom
+
 extern EntityModelScript D_80283EE8;
 
-#include "ItemRefund.inc.c"
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_72E76C)) {
     Bytecode* args = script->ptrReadPos;
@@ -85,7 +88,7 @@ API_CALLABLE(N(func_802A1484_72E9B4)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(script6) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
@@ -176,7 +179,7 @@ EvtScript N(main) = {
         EVT_EXEC_WAIT(N(script6))
         EVT_RETURN
     EVT_END_IF
-    EVT_SET_CONST(LVarA, 0x00000095)
+    EVT_SET_CONST(LVarA, ITEM_LIFE_SHROOM)
     EVT_SET(LVar1, LVarF)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(EatItem))

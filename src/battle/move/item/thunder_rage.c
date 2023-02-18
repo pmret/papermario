@@ -1,9 +1,11 @@
-#include "thunder_rage.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 #include "model.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_thunder_rage
 
+#include "battle/common/move/ItemRefund.inc.c"
 #include "common/FadeBackgroundToBlack.inc.c"
 
 API_CALLABLE(N(func_802A12D4_71B474)) {
@@ -50,7 +52,7 @@ API_CALLABLE(N(func_802A1354_71B4F4)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(main) = {
     EVT_SET_CONST(LVarA, ITEM_THUNDER_RAGE)

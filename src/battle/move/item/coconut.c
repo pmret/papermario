@@ -1,14 +1,16 @@
-#include "coconut.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "entity.h"
 #include "ld_addrs.h"
-#include "battle/move/item/coconut.png.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_coconut
 
-#include "UseItem.inc.c"
+#include "battle/common/move/ItemRefund.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 static s32 _pad = 0;
 
+#include "battle/move/item/coconut.png.h"
 #include "battle/move/item/coconut.png.inc.c"
 #include "battle/move/item/coconut.pal.inc.c"
 

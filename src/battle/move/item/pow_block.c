@@ -1,6 +1,10 @@
-#include "pow_block.h"
+#include "common.h"
+#include "script_api/battle.h"
+#include "entity.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_pow_block
+
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_718A8C)) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -45,7 +49,7 @@ API_CALLABLE(N(func_802A1318_718B68)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(main) = {
     EVT_SET_CONST(LVarA, ITEM_POW_BLOCK)

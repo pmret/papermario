@@ -1,10 +1,13 @@
-#include "mushroom.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 #include "entity.h"
 
+#define NAMESPACE battle_item_mushroom
+
 extern EntityModelScript D_80283EE8;
 
-#include "ItemRefund.inc.c"
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_715A8C)) {
     Bytecode* args = script->ptrReadPos;
@@ -84,7 +87,7 @@ API_CALLABLE(N(func_802A15A0_715DF0)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(script6) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)

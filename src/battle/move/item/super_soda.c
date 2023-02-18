@@ -1,10 +1,13 @@
-#include "super_soda.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 #include "entity.h"
 
+#define NAMESPACE battle_item_super_soda
+
 extern EntityModelScript D_80283EE8;
 
-#include "ItemRefund.inc.c"
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_724F1C)) {
     Bytecode* args = script->ptrReadPos;
@@ -88,7 +91,7 @@ API_CALLABLE(N(func_802A1418_7250F8)) {
 
 #include "common/AddFP.inc.c"
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(script6) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
@@ -169,7 +172,7 @@ EvtScript N(script6) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x0000009B)
+    EVT_SET_CONST(LVarA, ITEM_SUPER_SODA)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(InitTargetIterator)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)

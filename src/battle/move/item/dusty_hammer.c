@@ -1,25 +1,27 @@
-#include "dusty_hammer.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "entity.h"
 #include "ld_addrs.h"
-#include "battle/move/item/dusty_hammer.png.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_dusty_hammer
 
-#include "UseItem.inc.c"
+#include "battle/common/move/ItemRefund.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 static s32 _pad = 0; // XXX
 
+#include "battle/move/item/dusty_hammer.png.h"
 #include "battle/move/item/dusty_hammer.png.inc.c"
 #include "battle/move/item/dusty_hammer.pal.inc.c"
 
-Vtx N(model)[] = {
+Vtx N(DustyHammerVtx)[] = {
     { .v = {{ -16, -16, 0 }, FALSE, { 0,    0    }, { 0, 0, 0, 255 }}},
     { .v = {{ 15,  -16, 0 }, FALSE, { 1024, 0    }, { 0, 0, 0, 255 }}},
     { .v = {{ 15,  15,  0 }, FALSE, { 1024, 1024 }, { 0, 0, 0, 255 }}},
     { .v = {{ -16, 15,  0 }, FALSE, { 0,    1024 }, { 0, 0, 0, 255 }}},
 };
 
-Gfx N(displayList)[] = {
+Gfx N(DustyHammerGfx)[] = {
     gsDPPipeSync(),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
@@ -34,14 +36,14 @@ Gfx N(displayList)[] = {
     gsDPLoadTextureTile_4b(battle_item_dusty_hammer_png, G_IM_FMT_CI, battle_item_dusty_hammer_png_width, battle_item_dusty_hammer_png_height, 0, 0, battle_item_dusty_hammer_png_width - 1, battle_item_dusty_hammer_png_height - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(N(model), ARRAY_COUNT(N(model)), 0),
+    gsSPVertex(N(DustyHammerVtx), ARRAY_COUNT(N(DustyHammerVtx)), 0),
     gsSP1Triangle(0, 1, 2, 0),
     gsSP1Triangle(0, 2, 3, 0),
     gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
-EntityModelScript N(modelCommandList) = STANDARD_ENTITY_MODEL_SCRIPT(N(displayList), RENDER_MODE_ALPHATEST);
+EntityModelScript N(EMS_DustyHammer) = STANDARD_ENTITY_MODEL_SCRIPT(N(DustyHammerGfx), RENDER_MODE_ALPHATEST);
 
 EvtScript N(main) = {
     EVT_SET_CONST(LVarA, ITEM_DUSTY_HAMMER)
@@ -51,7 +53,7 @@ EvtScript N(main) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Throw)
     EVT_CALL(PlaySound, SOUND_THROW)
     EVT_WAIT(3)
-    EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(N(modelCommandList)))
+    EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(N(EMS_DustyHammer)))
     EVT_SETF(LVar0, EVT_FLOAT(1.0))
     EVT_CALL(MultiplyByActorScale, LVar0)
     EVT_CALL(SetVirtualEntityScale, LVarA, LVar0, LVar0, LVar0)

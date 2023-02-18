@@ -1,10 +1,13 @@
-#include "food.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 #include "entity.h"
 
+#define NAMESPACE battle_item_food
+
 extern EntityModelScript D_80283EE8;
 
-#include "ItemRefund.inc.c"
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_73330C)) {
     Bytecode* args = script->ptrReadPos;
@@ -69,7 +72,6 @@ API_CALLABLE(N(func_802A1438_733508)) {
 }
 
 #include "common/AddHP.inc.c"
-
 #include "common/AddFP.inc.c"
 
 API_CALLABLE(N(func_802A15A0_733670)) {
@@ -96,9 +98,9 @@ API_CALLABLE(N(func_802A15A0_733670)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(script6) = {
+EvtScript N(EVS_FeedPartner) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
@@ -183,8 +185,8 @@ EvtScript N(main) = {
     EVT_CALL(N(func_802A15A0_733670), LVarA)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-    EVT_IF_EQ(LVar0, 256)
-        EVT_EXEC_WAIT(N(script6))
+    EVT_IF_EQ(LVar0, ACTOR_PARTNER)
+        EVT_EXEC_WAIT(N(EVS_FeedPartner))
         EVT_RETURN
     EVT_END_IF
     EVT_SET(LVar1, LVarE)

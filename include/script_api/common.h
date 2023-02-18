@@ -306,8 +306,11 @@ ApiStatus SetVirtualEntityRotation(Evt* script, s32 isInitialCall);
 ApiStatus SetVirtualEntityJumpGravity(Evt* script, s32 isInitialCall);
 ApiStatus SetVirtualEntityFlags(Evt* script, s32 isInitialCall);
 ApiStatus GetVirtualEntityPosition(Evt* script, s32 isInitialCall);
+ApiStatus SetVirtualEntityMoveSpeed(Evt* script, s32 isInitialCall);
+ApiStatus VirtualEntityMoveTo(Evt* script, s32 isInitialCall);
 ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall);
 ApiStatus VirtualEntityLandJump(Evt* script, s32 isInitialCall);
+
 ApiStatus FacePlayerTowardPoint(Evt* script, s32 isInitialCall);
 ApiStatus func_802D2C14(Evt* script, s32 isInitialCall);
 ApiStatus ShowConsumableChoicePopup(Evt* script, s32 isInitialCall);

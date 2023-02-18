@@ -1,7 +1,10 @@
-#include "fright_jar.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "model.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_fright_jar
+
+#include "battle/common/move/ItemRefund.inc.c"
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
@@ -21,10 +24,10 @@ API_CALLABLE(N(func_802A12D4_72BBE4)) {
     return ApiStatus_BLOCK;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x00000098)
+    EVT_SET_CONST(LVarA, ITEM_FRIGHT_JAR)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(N(FadeBackgroundToBlack))
     EVT_THREAD

@@ -2,8 +2,40 @@
 #include "ld_addrs.h"
 #include "battle.h"
 
-s32 D_80293B80[] = {
-    -1,
+extern EvtScript battle_item_food_main;
+extern EvtScript battle_item_mushroom_main;
+extern EvtScript battle_item_fire_flower_main;
+extern EvtScript battle_item_dusty_hammer_main;
+extern EvtScript battle_item_pow_block_main;
+extern EvtScript battle_item_pebble_main;
+extern EvtScript battle_item_volt_shroom_main;
+extern EvtScript battle_item_thunder_rage_main;
+extern EvtScript battle_item_snowman_doll_main;
+extern EvtScript battle_item_shooting_star_main;
+extern EvtScript battle_item_sleepy_sheep_main;
+extern EvtScript battle_item_stone_cap_main;
+extern EvtScript battle_item_tasty_tonic_main;
+extern EvtScript battle_item_thunder_bolt_main;
+extern EvtScript battle_item_super_soda_main;
+extern EvtScript battle_item_hustle_drink_main;
+extern EvtScript battle_item_stop_watch_main;
+extern EvtScript battle_item_dizzy_dial_main;
+extern EvtScript battle_item_please_come_back_main;
+extern EvtScript battle_item_egg_missile_main;
+extern EvtScript battle_item_insecticide_herb_main;
+extern EvtScript battle_item_fright_jar_main;
+extern EvtScript battle_item_mystery_main;
+extern EvtScript battle_item_repel_gel_main;
+extern EvtScript battle_item_life_shroom_main;
+extern EvtScript battle_item_coconut_main;
+extern EvtScript battle_item_electro_pop_main;
+extern EvtScript battle_item_strange_cake_main;
+
+#define GENERIC_FOOD_ITEM -1
+
+// items in this list must correspond with BattleMoveEntry in gBattleItemTable
+s32 ItemKeys[] = {
+    GENERIC_FOOD_ITEM,
     ITEM_MUSHROOM,
     ITEM_FIRE_FLOWER,
     ITEM_DUSTY_HAMMER,
@@ -37,35 +69,6 @@ s32 D_80293B80[] = {
     ITEM_KOOKY_COOKIE,
     ITEM_NONE
 };
-
-extern EvtScript battle_item_food_main;
-extern EvtScript battle_item_mushroom_main;
-extern EvtScript battle_item_fire_flower_main;
-extern EvtScript battle_item_dusty_hammer_main;
-extern EvtScript battle_item_pow_block_main;
-extern EvtScript battle_item_pebble_main;
-extern EvtScript battle_item_volt_shroom_main;
-extern EvtScript battle_item_thunder_rage_main;
-extern EvtScript battle_item_snowman_doll_main;
-extern EvtScript battle_item_shooting_star_main;
-extern EvtScript battle_item_sleepy_sheep_main;
-extern EvtScript battle_item_stone_cap_main;
-extern EvtScript battle_item_tasty_tonic_main;
-extern EvtScript battle_item_thunder_bolt_main;
-extern EvtScript battle_item_super_soda_main;
-extern EvtScript battle_item_hustle_drink_main;
-extern EvtScript battle_item_stop_watch_main;
-extern EvtScript battle_item_dizzy_dial_main;
-extern EvtScript battle_item_please_come_back_main;
-extern EvtScript battle_item_egg_missile_main;
-extern EvtScript battle_item_insecticide_herb_main;
-extern EvtScript battle_item_fright_jar_main;
-extern EvtScript battle_item_mystery_main;
-extern EvtScript battle_item_repel_gel_main;
-extern EvtScript battle_item_life_shroom_main;
-extern EvtScript battle_item_coconut_main;
-extern EvtScript battle_item_electro_pop_main;
-extern EvtScript battle_item_strange_cake_main;
 
 BattleMoveEntry gBattleItemTable[] = {
     BTL_ITEM(food),
@@ -107,7 +110,7 @@ u16 D_80293E04[] = {
     1, 31, 1, 5, 1, 2, 9, 3, 9, 3, 9, 1, 10, 6, 10, 6, 10, 4, 11, 8, 11, 8, 11, 4, 12, 3, 12, 3, 12, 1,
 };
 
-ApiStatus LoadItemScript(Evt* script, s32 isInitialCall) {
+API_CALLABLE(LoadItemScript) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
     s16 itemID = battleStatus->moveArgument;
@@ -136,7 +139,7 @@ ApiStatus LoadItemScript(Evt* script, s32 isInitialCall) {
         }
     }
 
-    itemPtr = &D_80293B80[0];
+    itemPtr = &ItemKeys[0];
     for (i = 0; *itemPtr != ITEM_NONE; i++, itemPtr++) {
         if (*itemPtr == battleStatus->moveArgument) {
             break;
@@ -159,7 +162,7 @@ ApiStatus LoadItemScript(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus LoadFreeItemScript(Evt* script, s32 isInitialCall) {
+API_CALLABLE(LoadMysteryItemScript) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* actor = battleStatus->playerActor;
     ItemData* item = &gItemTable[battleStatus->moveArgument];
@@ -176,7 +179,7 @@ ApiStatus LoadFreeItemScript(Evt* script, s32 isInitialCall) {
     battleStatus->currentTargetID = target->actorID;
     battleStatus->currentTargetPart = target->partID;
 
-    itemPtr = &D_80293B80[0];
+    itemPtr = &ItemKeys[0];
     for (i = 0; *itemPtr != ITEM_NONE; i++, itemPtr++) {
         if (*itemPtr == battleStatus->moveArgument){
             break;
@@ -199,7 +202,7 @@ ApiStatus LoadFreeItemScript(Evt* script, s32 isInitialCall) {
 
 EvtScript UseMystery = {
     EVT_WAIT(2)
-    EVT_CALL(LoadFreeItemScript)
+    EVT_CALL(LoadMysteryItemScript)
     EVT_EXEC_WAIT(LVar0)
     EVT_RETURN
     EVT_END

@@ -1,8 +1,10 @@
-#include "please_come_back.h"
+#include "common.h"
+#include "script_api/battle.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_please_come_back
 
-#include "UseItem.inc.c"
+#include "battle/common/move/ItemRefund.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(main) = {
     EVT_SET_CONST(LVarA, ITEM_DIZZY_DIAL) //@bug should be ITEM_PLEASE_COME_BACK
@@ -18,4 +20,3 @@ EvtScript N(main) = {
     EVT_RETURN
     EVT_END
 };
-

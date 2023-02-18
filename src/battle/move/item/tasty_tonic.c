@@ -1,7 +1,10 @@
-#include "tasty_tonic.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_tasty_tonic
+
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_72223C)) {
     s32 actorId = evt_get_variable(script, *script->ptrReadPos);
@@ -30,10 +33,10 @@ API_CALLABLE(N(func_802A123C_72223C)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x89)
+    EVT_SET_CONST(LVarA, ITEM_TASTY_TONIC)
     EVT_EXEC_WAIT(battle_item_tasty_tonic_UseItemWithEffect)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)

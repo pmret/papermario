@@ -1,7 +1,10 @@
-#include "dried_shroom.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_dried_shroom
+
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_71CF1C)) {
     Bytecode* args = script->ptrReadPos;
@@ -25,10 +28,10 @@ API_CALLABLE(N(func_802A12FC_71CFDC)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x0000008D)
+    EVT_SET_CONST(LVarA, ITEM_DRIED_SHROOM)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(EatItem))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_StickOutTongue)

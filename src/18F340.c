@@ -1568,7 +1568,7 @@ EvtScript MerleeRunOut = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(15)
-    EVT_CALL(ShowMessageBox, 3, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_03, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
     EVT_END

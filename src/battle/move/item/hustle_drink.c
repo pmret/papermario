@@ -1,6 +1,9 @@
-#include "hustle_drink.h"
+#include "common.h"
+#include "script_api/battle.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_hustle_drink
+
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_72619C)) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -34,7 +37,7 @@ API_CALLABLE(N(func_802A12C4_726224)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(main) = {
     EVT_SET_CONST(LVarA, ITEM_HUSTLE_DRINK)
