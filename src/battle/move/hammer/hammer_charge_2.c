@@ -230,7 +230,7 @@ EvtScript N(EVS_802A39C8) = {
         EVT_CALL(func_802A12FC_75E8CC)
         EVT_CALL(ShowVariableMessageBox, LVar0, 60, 3)
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, 8, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_08, 60)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_WAIT(1)
@@ -280,7 +280,7 @@ EvtScript N(EVS_802A3CF4) = {
         EVT_CALL(func_802A12FC_75E8CC)
         EVT_CALL(ShowVariableMessageBox, LVar0, 60, 3)
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, 8, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_08, 60)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_WAIT(1)
@@ -330,7 +330,7 @@ EvtScript N(EVS_802A4020) = {
         EVT_CALL(func_802A12FC_75E8CC)
         EVT_CALL(ShowVariableMessageBox, LVar0, 60, 3)
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, 8, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_08, 60)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_WAIT(1)

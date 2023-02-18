@@ -84,9 +84,9 @@ EvtScript N(EVS_UseMove0) = {
         EVT_WAIT(4)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-        EVT_CALL(ShowVariableMessageBox, 6, 60, 1)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_06, 60, 1)
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, 8, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_08, 60)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_WAIT(1)
