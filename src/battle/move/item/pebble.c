@@ -1,13 +1,16 @@
-#include "pebble.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "ld_addrs.h"
-#include "battle/move/item/pebble.png.h"
+#include "entity.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_pebble
 
-#include "UseItem.inc.c"
+#include "battle/common/move/ItemRefund.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 static s32 _pad = 0;
 
+#include "battle/move/item/pebble.png.h"
 #include "battle/move/item/pebble.png.inc.c"
 #include "battle/move/item/pebble.pal.inc.c"
 
@@ -40,11 +43,9 @@ Gfx N(displayList)[] = {
     gsSPEndDisplayList(),
 };
 
-s32 N(modelCommandList)[] = {
-    0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), (s32) &N(displayList), 0x00000002, 0x00000000,
-};
+EntityModelScript N(modelCommandList) = STANDARD_ENTITY_MODEL_SCRIPT(N(displayList), RENDER_MODE_ALPHATEST);
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_PEBBLE)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)

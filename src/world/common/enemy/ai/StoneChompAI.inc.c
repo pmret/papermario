@@ -41,9 +41,9 @@ API_CALLABLE(N(StoneChompAI_Main)) {
         npc->flags |= NPC_FLAG_8;
         script->functionTemp[1] = 0;
         script->AI_TEMP_STATE = AI_STATE_HOP_INIT;
-        if (enemy->flags & ENEMY_FLAG_40000000) {
+        if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
-            enemy->flags &= ~ENEMY_FLAG_40000000;
+            enemy->flags &= ~ENEMY_FLAG_BEGIN_WITH_CHASING;
         }
     }
 

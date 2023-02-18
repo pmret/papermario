@@ -90,11 +90,11 @@ EvtScript N(EVS_NpcInteract_Bombette) = {
         EVT_END_IF
     EVT_END_IF
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 15)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_00DE)
         EVT_CALL(N(ChangeNpcToPartner), NPC_Bombette, PARTNER_BOMBETTE)
         EVT_SET(GB_StoryProgress, STORY_CH1_BOMBETTE_JOINED_PARTY)
@@ -158,9 +158,9 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa) = {
     EVT_CALL(SetNpcAnimation, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Run)
     EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Anim06)
     EVT_CALL(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Anim06)
-    EVT_CALL(SetNpcFlagBits, NPC_Jailer_KoopaTroopa, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Jailer_Bobomb_01, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Jailer_Bobomb_02, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Jailer_KoopaTroopa, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Jailer_Bobomb_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Jailer_Bobomb_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_THREAD
         EVT_CALL(NpcMoveTo, NPC_Jailer_KoopaTroopa, -237, 0, 0)
     EVT_END_THREAD
@@ -344,7 +344,7 @@ NpcData N(NpcData_Bombette) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_Bombette),
     .settings = &N(NpcSettings_Bobomb),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_WorldBombette_Idle,

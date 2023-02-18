@@ -295,7 +295,7 @@ EvtScript N(D_80242FA8_B234E8) = {
     EVT_WAIT(1)
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
         EVT_CALL(func_80240B4C_B2108C, 3, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcFlagBits, NPC_Kolorado_02, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Kolorado_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_Kolorado_02, ANIM_Kolorado_Walk)
         EVT_CALL(NpcMoveTo, NPC_Kolorado_02, LVar0, LVar2, 10)
         EVT_CALL(SetNpcAnimation, NPC_Kolorado_02, ANIM_Kolorado_Thrown)
@@ -305,7 +305,7 @@ EvtScript N(D_80242FA8_B234E8) = {
         EVT_CALL(SetNpcAnimation, NPC_Kolorado_02, ANIM_Kolorado_Walk)
         EVT_CALL(NpcMoveTo, NPC_Kolorado_02, 290, 20, 20)
         EVT_CALL(SetNpcAnimation, NPC_Kolorado_02, ANIM_Kolorado_Idle)
-        EVT_CALL(SetNpcFlagBits, NPC_Kolorado_02, NPC_FLAG_100, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Kolorado_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_CALL(InterpNpcYaw, NPC_Kolorado_02, 270, 0)
     EVT_END_IF
     EVT_CALL(func_80240B4C_B2108C, 3, LVar0, LVar1, LVar2)
@@ -410,7 +410,7 @@ EvtScript N(EVS_NpcInteract_Kolorado_01) = {
         EVT_CALL(DisablePlayerPhysics, FALSE)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(EndSpeech, NPC_SELF, 0xFFFFFFFF, 0xFFFFFFFF, 5)
+    EVT_CALL(EndSpeech, NPC_SELF, -1, -1, 5)
     EVT_IF_EQ(GB_StoryProgress, STORY_CH5_TRADED_VASE_FOR_SEED)
         EVT_CALL(NpcFacePlayer, NPC_Kolorado_02, 0)
     EVT_END_IF
@@ -420,7 +420,7 @@ EvtScript N(EVS_NpcInteract_Kolorado_01) = {
     EVT_SET(LVar0, 0)
     EVT_EXEC(N(D_80242DB0_B232F0))
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
@@ -497,7 +497,7 @@ EvtScript N(EVS_NpcInteract_Kolorado_01) = {
 };
 
 EvtScript N(EVS_NpcInit_Kolorado_01) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_1000000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_NO_SPRITE, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Still)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
@@ -506,7 +506,7 @@ EvtScript N(EVS_NpcInit_Kolorado_01) = {
         EVT_CALL(DisablePlayerPhysics, TRUE)
         EVT_CALL(InterpPlayerYaw, 90, 0)
         EVT_CALL(DisablePartnerAI, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8000, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
         EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
         EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
@@ -521,7 +521,7 @@ EvtScript N(EVS_NpcInit_Kolorado_01) = {
 };
 
 EvtScript N(EVS_NpcInteract_Kolorado_02) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0006)
     EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado))
     EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
@@ -645,7 +645,7 @@ NpcData N(NpcData_Characters)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Kolorado_01),
         .settings = &N(NpcSettings_Kolorado_01),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Whale,
@@ -656,7 +656,7 @@ NpcData N(NpcData_Characters)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Kolorado_02),
         .settings = &N(NpcSettings_Kolorado),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -667,7 +667,7 @@ NpcData N(NpcData_Characters)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_JrTroopa),
         .settings = &N(NpcSettings_JrTroopa),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = JR_TROOPA_ANIMS,
     },
@@ -678,7 +678,7 @@ NpcData N(NpcData_HeartPlant_01) = {
     .pos = { 455.0f, 0.0f, 115.0f },
     .yaw = 270,
     .settings = &N(NpcSettings_HeartPlant),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
@@ -689,7 +689,7 @@ NpcData N(NpcData_HeartPlant_02) = {
     .pos = { 167.0f, 0.0f, 404.0f },
     .yaw = 270,
     .settings = &N(NpcSettings_HeartPlant),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
@@ -700,7 +700,7 @@ NpcData N(NpcData_HeartPlant_03) = {
     .pos = { 90.0f, 0.0f, 316.0f },
     .yaw = 270,
     .settings = &N(NpcSettings_HeartPlant),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
@@ -711,7 +711,7 @@ NpcData N(NpcData_HeartPlant_04) = {
     .pos = { 424.0f, 0.0f, 182.0f },
     .yaw = 270,
     .settings = &N(NpcSettings_HeartPlant),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
@@ -722,7 +722,7 @@ NpcData N(NpcData_HeartPlant_05) = {
     .pos = { 143.0f, 0.0f, 260.0f },
     .yaw = 270,
     .settings = &N(NpcSettings_HeartPlant),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,

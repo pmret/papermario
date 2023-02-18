@@ -155,7 +155,7 @@ NpcData N(NpcData_TubbasHeart) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_TubbasHeart),
     .settings = &N(NpcSettings_TubbasHeart),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .drops = NO_DROPS,
     .animations = TUBBAS_HEART_ANIMS,
 };

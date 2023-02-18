@@ -163,7 +163,7 @@ NpcData N(NpcData_GateFlower) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_GateFlower),
     .settings = &N(NpcSettings_GateFlower),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = GATE_FLOWER_RED_ANIMS,
     .tattle = MSG_NpcTattle_RedGateFlower,
@@ -186,7 +186,7 @@ NpcData N(NpcData_TuffPuff) = {
         }
     },
     .settings = &N(NpcSettings_TuffPuff),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = TUFF_PUFF_DROPS,
     .animations = TUFF_PUFF_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -209,7 +209,7 @@ NpcData N(NpcData_Bzzap) = {
         }
     },
     .settings = &N(NpcSettings_Bzzap),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = BZZAP_DROPS,
     .animations = BZZAP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

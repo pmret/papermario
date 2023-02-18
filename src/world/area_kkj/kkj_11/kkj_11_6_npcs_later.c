@@ -96,7 +96,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_01) = {
     EVT_EXEC(N(EVS_CheckForPeach_Koopatrol_01))
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, kkj_11_ENTRY_1)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 1)
+        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
         EVT_CALL(WaitForPlayerInputEnabled)
         EVT_THREAD
             EVT_CALL(DisablePlayerInput, TRUE)
@@ -109,7 +109,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_01) = {
         EVT_CALL(NpcMoveTo, NPC_SELF, 0, -350, 0)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim01)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 220, 5)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 0)
+        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
     EVT_END_IF
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -122,7 +122,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_04) = {
     EVT_EXEC(N(EVS_CheckForPeach_Koopatrol_01))
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, kkj_11_ENTRY_4)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 1)
+        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
         EVT_CALL(WaitForPlayerInputEnabled)
         EVT_THREAD
             EVT_CALL(DisablePlayerInput, TRUE)
@@ -135,7 +135,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_04) = {
         EVT_CALL(NpcMoveTo, NPC_SELF, 0, -240, 0)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim01)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 220, 5)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 0)
+        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
     EVT_END_IF
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -320,7 +320,7 @@ NpcData N(NpcData_Minions_Later)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Koopatrol_01),
         .settings = &N(NpcSettings_Koopatrol_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = KOOPATROL_ANIMS,
         .extraAnimations = N(ExtraAnims_Koopatrol),
@@ -331,7 +331,7 @@ NpcData N(NpcData_Minions_Later)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Koopatrol_02),
         .settings = &N(NpcSettings_Koopatrol_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = KOOPATROL_ANIMS,
         .extraAnimations = N(ExtraAnims_Koopatrol),
@@ -342,7 +342,7 @@ NpcData N(NpcData_Minions_Later)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Koopatrol_03),
         .settings = &N(NpcSettings_Koopatrol_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = KOOPATROL_ANIMS,
         .extraAnimations = N(ExtraAnims_Koopatrol),
@@ -353,7 +353,7 @@ NpcData N(NpcData_Minions_Later)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Koopatrol_04),
         .settings = &N(NpcSettings_Koopatrol_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = KOOPATROL_ANIMS,
         .extraAnimations = N(ExtraAnims_Koopatrol),

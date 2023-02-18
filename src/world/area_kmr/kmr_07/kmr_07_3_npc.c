@@ -166,7 +166,7 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Red) = {
 EvtScript N(EVS_NpcInit_GoombaBros_Red) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_GoombaBros_Red)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_GoombaBros_Red)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_SET(MV_GoombaBrosDefeated, FALSE)
     EVT_IF_GE(GB_StoryProgress, STORY_CH0_DEFEATED_GOOMBA_BROS)
         EVT_CALL(RemoveNpc, NPC_SELF)
@@ -197,7 +197,7 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Blue) = {
 EvtScript N(EVS_NpcInit_GoombaBros_Blue) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_GoombaBros_Blue)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_GoombaBros_Blue)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_IF_GE(GB_StoryProgress, STORY_CH0_DEFEATED_GOOMBA_BROS)
         EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_RETURN
@@ -225,7 +225,7 @@ NpcData N(NpcData_GoombaBros_Red)[] = {
         },
         .init = &N(EVS_NpcInit_GoombaBros_Red),
         .settings = &N(NpcSettings_GoombaBros_Guard),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = GOOMBA_BROS_RED_ANIMS,
     },
@@ -247,7 +247,7 @@ NpcData N(NpcData_GoombaBros_Red)[] = {
         },
         .init = &N(EVS_NpcInit_GoombaBros_Blue),
         .settings = &N(NpcSettings_GoombaBros_Guard),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = GOOMBA_BROS_BLUE_ANIMS,
     },

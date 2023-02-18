@@ -806,7 +806,7 @@ s32 BringPartnerOut(Evt *script, s32 isInitialCall) {
         partner = get_npc_unsafe(NPC_PARTNER);
         partner->npcID = -5;
 
-        bpPointer->flags = NPC_FLAG_100;
+        bpPointer->flags = NPC_FLAG_IGNORE_PLAYER_COLLISION;
         bpPointer->initialAnim = gPartnerAnimations[wExtraPartnerID].fly;
         bpPointer->onUpdate = NULL;
         bpPointer->onRender = NULL;

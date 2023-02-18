@@ -97,7 +97,7 @@ EvtScript N(D_802448C4_856A34) = {
             EVT_CALL(DisablePlayerPhysics, TRUE)
             EVT_CALL(SetPlayerPos, -160, -10, 371)
             EVT_CALL(SetNpcPos, NPC_PARTNER, -160, -10, 371)
-            EVT_CALL(SetEnemyFlagBits, NPC_Whale, ENEMY_FLAG_8000000, 1)
+            EVT_CALL(SetEnemyFlagBits, NPC_Whale, ENEMY_FLAG_CANT_INTERACT, 1)
             EVT_CALL(DisablePartnerAI, 0)
             EVT_CALL(InterruptUsePartner)
             EVT_WAIT(10)
@@ -122,7 +122,7 @@ EvtScript N(D_802448C4_856A34) = {
             EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
             EVT_EXEC_WAIT(EnterWalk)
             EVT_CALL(SetNpcPos, NPC_Whale, -220, 10, 372)
-            EVT_CALL(SetEnemyFlagBits, NPC_Whale, ENEMY_FLAG_8000000, 0)
+            EVT_CALL(SetEnemyFlagBits, NPC_Whale, ENEMY_FLAG_CANT_INTERACT, 0)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

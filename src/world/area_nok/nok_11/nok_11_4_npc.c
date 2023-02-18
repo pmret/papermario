@@ -199,7 +199,7 @@ EvtScript N(EVS_NpcDefeat_JrTroopa_01) = {
         EVT_EXEC(N(EVS_SetupMusic))
     EVT_END_THREAD
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_JrTroopa_01)))
-    EVT_CALL(SetNpcFlagBits, NPC_JrTroopa_02, NPC_FLAG_2, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_JrTroopa_02, NPC_FLAG_INVISIBLE, TRUE)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
@@ -336,7 +336,7 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim03)
     EVT_CALL(NpcMoveTo, NPC_KentCKoopa_02, -167, -100, 20)
-    EVT_CALL(SetNpcFlagBits, NPC_KentCKoopa_02, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_KentCKoopa_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(BindNpcInteract, NPC_KentCKoopa_02, EVT_PTR(N(EVS_NpcInteract_KentCKoopa_02)))
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim01)
@@ -466,7 +466,7 @@ NpcData N(NpcData_KoopaTroopa) = {
         }
     },
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
 };
@@ -488,7 +488,7 @@ NpcData N(NpcData_Paragoomba) = {
         }
     },
     .settings = &N(NpcSettings_Paragoomba_Wander),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = PARAGOOMBA_DROPS,
     .animations = PARAGOOMBA_ANIMS,
 };
@@ -510,7 +510,7 @@ NpcData N(NpcData_SpikedGoomba) = {
         }
     },
     .settings = &N(NpcSettings_SpikedGoomba_Wander),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = SPIKED_GOOMBA_DROPS,
     .animations = SPIKED_GOOMBA_ANIMS,
 };
@@ -527,7 +527,7 @@ EvtScript N(EVS_NpcInit_JrTroopa_02) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_JrTroopa_02)))
     EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_JrTroopa_02)))
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -539,7 +539,7 @@ NpcData N(NpcData_JrTroopa)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_JrTroopa_01),
         .settings = &N(NpcSettings_JrTroopa),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = JR_TROOPA_ANIMS,
         .tattle = MSG_NpcTattle_JrTroopa,
@@ -550,7 +550,7 @@ NpcData N(NpcData_JrTroopa)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_JrTroopa_02),
         .settings = &N(NpcSettings_JrTroopa),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_SPIN,
         .drops = NO_DROPS,
         .animations = JR_TROOPA_ANIMS,
         .tattle = MSG_NpcTattle_JrTroopa,
@@ -561,7 +561,7 @@ EvtScript N(EVS_NpcInit_KentCKoopa_01) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KentCKoopa_01)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_KentCKoopa_01)))
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(GetEntryID, AB_NOK_2)
     EVT_RETURN
     EVT_END
@@ -569,7 +569,7 @@ EvtScript N(EVS_NpcInit_KentCKoopa_01) = {
 
 EvtScript N(EVS_NpcInit_KentCKoopa_02) = {
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_KentCKoopa_02)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(GetEntryID, LVar3)
     EVT_IF_EQ(LVar3, nok_11_ENTRY_0)
         EVT_CALL(SetNpcYaw, NPC_SELF, 270)
@@ -587,7 +587,7 @@ NpcData N(NpcData_KentCKoopa)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_KentCKoopa_01),
         .settings = &N(NpcSettings_KentCKoopa),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = KENT_C_KOOPA_ANIMS,
     },
@@ -597,7 +597,7 @@ NpcData N(NpcData_KentCKoopa)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_KentCKoopa_02),
         .settings = &N(NpcSettings_KentCKoopa),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = KENT_C_KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_KentCKoopa,

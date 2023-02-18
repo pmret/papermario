@@ -84,12 +84,12 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00F7, 160, 40)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcPos, NPC_SELF, 290, 0, 30)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
     EVT_CALL(NpcMoveTo, NPC_SELF, 640, 80, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Yell)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00F8)
     EVT_SET(GB_StoryProgress, STORY_CH5_KOLORADO_AT_DEAD_END)
@@ -139,7 +139,7 @@ NpcData N(NpcData_Kolorado) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kolorado),
     .settings = &N(NpcSettings_Kolorado),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
@@ -163,7 +163,7 @@ NpcData N(NpcData_Piranha)[] = {
             }
         },
         .settings = &N(NpcSettings_PutridPiranha),
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = PUTRID_PIRANHA_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -188,7 +188,7 @@ NpcData N(NpcData_SpikeTop) = {
         }
     },
     .settings = &N(NpcSettings_SpikeTop),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = SPIKE_TOP_DROPS,
     .animations = SPIKE_TOP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

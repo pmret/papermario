@@ -86,7 +86,7 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
             EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Kooper, 0)
             EVT_CALL(EnablePartnerAI)
         EVT_END_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcPos, NPC_Kooper, 0, 0, -207)
         EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
         EVT_WAIT(35)
@@ -113,7 +113,7 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
         EVT_CALL(NpcMoveTo, NPC_Kooper, 25, -130, 10)
         EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
         EVT_CALL(NpcFacePlayer, NPC_Kooper, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_100, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_WAIT(10)
         EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Celebrate, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00B5)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
@@ -321,7 +321,7 @@ EvtScript N(EVS_MiscFuzzyFlee) = {
 
 EvtScript N(EVS_NpcHit_MiscFuzzy1) = {
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_MiscFuzzyFlee)))
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
     EVT_RETURN
     EVT_END
 };
@@ -361,7 +361,7 @@ EvtScript N(EVS_NpcIdle_MiscFuzzy2) = {
 
 EvtScript N(EVS_NpcHit_MiscFuzzy2) = {
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_MiscFuzzyFlee)))
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
     EVT_RETURN
     EVT_END
 };
@@ -398,7 +398,7 @@ EvtScript N(EVS_BreakBlock_DropShell) = {
     EVT_CALL(PlaySoundAtNpc, NPC_KoopaShell_02, SOUND_21A, 0)
     EVT_CALL(PlayerFaceNpc, NPC_KoopaShell_02, FALSE)
     EVT_CALL(NpcFaceNpc, NPC_Koopa_02, NPC_KoopaShell_02, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_Koopa_02, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Koopa_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_ADD(LVar0, -1)
     EVT_ADD(LVar2, -1)
     EVT_CALL(GetNpcPos, NPC_Koopa_02, LVar0, LVar1, LVar2)
@@ -431,7 +431,7 @@ EvtScript N(EVS_BreakBlock_DropShell) = {
     EVT_CALL(NpcJump0, NPC_KoopaShell_02, LVar0, LVar1, LVar2, 30)
     EVT_CALL(SetNpcPos, NPC_KoopaShell_02, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcSprite, NPC_Koopa_02, ANIM_Koopa_Idle)
-    EVT_CALL(SetNpcFlagBits, NPC_Koopa_02, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Koopa_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_Koopa_02, ANIM_Koopa_Still)
     EVT_WAIT(4)
     EVT_CALL(EnableNpcBlur, NPC_KoopaShell_02, TRUE)
@@ -520,7 +520,7 @@ EvtScript N(EVS_KoloradoWife_FetchFromOffice) = {
 };
 
 EvtScript N(EVS_KoloradoWife_FetchKoopaLegends) = {
-    EVT_CALL(SetNpcFlagBits, NPC_KoloradoWife, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_KoloradoWife, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0090)
     EVT_CALL(SetNpcAnimation, NPC_KoloradoWife, ANIM_KoloradoWife_Walk)
     EVT_IF_GE(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
@@ -535,7 +535,7 @@ EvtScript N(EVS_KoloradoWife_FetchKoopaLegends) = {
     EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0091)
     EVT_GIVE_KEY_REWARD(ITEM_KOOT_KOOPA_LEGENDS)
     EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0092)
-    EVT_CALL(SetNpcFlagBits, NPC_KoloradoWife, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_KoloradoWife, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -638,7 +638,7 @@ NpcData N(NpcData_Crisis)[] = {
         },
         .init = &N(EVS_NpcInit_Koopa_01_Crisis),
         .settings = &N(NpcSettings_Koopa_Wander),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_GenericKoopaC,
@@ -649,7 +649,7 @@ NpcData N(NpcData_Crisis)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Fuzzy_Thief),
         .settings = &N(NpcSettings_Fuzzy),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH,
         .drops = NO_DROPS,
         .animations = FUZZY_ANIMS,
     },
@@ -659,7 +659,7 @@ NpcData N(NpcData_Crisis)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_KoopaShell_01_Crisis),
         .settings = &N(NpcSettings_Koopa),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
     },
@@ -683,7 +683,7 @@ NpcData N(NpcData_Crisis)[] = {
         },
         .init = &N(EVS_NpcInit_Koopa_02_Crisis),
         .settings = &N(NpcSettings_KoopaWithoutShell_Patrol),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = KOOPA_WITHOUT_SHELL_ANIMS,
         .tattle = MSG_NpcTattle_NOK_GenericKoopaD,
@@ -694,7 +694,7 @@ NpcData N(NpcData_Crisis)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_KoopaShell_02_Crisis),
         .settings = &N(NpcSettings_Koopa),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
     },
@@ -715,7 +715,7 @@ NpcData N(NpcData_Crisis)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_FuzzyBoss),
         .settings = &N(NpcSettings_Fuzzy),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = FUZZY_ANIMS,
     },
@@ -725,7 +725,7 @@ NpcData N(NpcData_Crisis)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_KoopersShell),
         .settings = &N(NpcSettings_Koopa),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = KOOPER_ANIMS,
     },
@@ -737,7 +737,7 @@ NpcData N(NpcData_Fuzzy_01) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_MiscFuzzy1),
     .settings = &N(NpcSettings_Fuzzy),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_PARTNER,
     .drops = NO_DROPS,
     .animations = FUZZY_ANIMS,
 };
@@ -748,7 +748,7 @@ NpcData N(NpcData_Fuzzy_02) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_MiscFuzzy2),
     .settings = &N(NpcSettings_Fuzzy),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_PARTNER,
     .drops = NO_DROPS,
     .animations = FUZZY_ANIMS,
 };
@@ -772,7 +772,7 @@ NpcData N(NpcData_Normal)[] = {
         },
         .init = &N(EVS_NpcInit_Koopa_01_Normal),
         .settings = &N(NpcSettings_Koopa_Wander),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_GenericKoopaC,
@@ -795,7 +795,7 @@ NpcData N(NpcData_Normal)[] = {
         },
         .init = &N(EVS_NpcInit_Koopa_02_Normal),
         .settings = &N(NpcSettings_Koopa_Wander),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_GenericKoopaD,
@@ -806,7 +806,7 @@ NpcData N(NpcData_Normal)[] = {
         .yaw = 180,
         .init = &N(EVS_NpcInit_Bobomb_01),
         .settings = &N(NpcSettings_Bobomb),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = BOBOMB_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombD,
@@ -817,7 +817,7 @@ NpcData N(NpcData_Normal)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Bobomb_02),
         .settings = &N(NpcSettings_Bobomb),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = BOBOMB_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombE,
@@ -828,7 +828,7 @@ NpcData N(NpcData_Normal)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Bobomb_03),
         .settings = &N(NpcSettings_Bobomb),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = BOBOMB_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_NOK_BobombF,
@@ -839,7 +839,7 @@ NpcData N(NpcData_Normal)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Kolorado),
         .settings = &N(NpcSettings_Kolorado),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -852,7 +852,7 @@ NpcData N(NpcData_Fuzzy_Later) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_Fuzzy_Later),
     .settings = &N(NpcSettings_Fuzzy),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_PARTNER,
     .drops = NO_DROPS,
     .animations = FUZZY_ANIMS,
 };
@@ -864,7 +864,7 @@ NpcData N(NpcData_Shared)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_KoopaKoot),
         .settings = &N(NpcSettings_KoopaKoot),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = KOOPA_KOOT_ANIMS,
         .tattle = MSG_NpcTattle_KoopaKoot,
@@ -875,7 +875,7 @@ NpcData N(NpcData_Shared)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_KoloradoWife),
         .settings = &N(NpcSettings_KoloradoWife),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = KOLORADO_WIFE_ANIMS,
         .tattle = MSG_NpcTattle_KoloradoWife,
@@ -886,7 +886,7 @@ NpcData N(NpcData_Shared)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Koopa_03),
         .settings = &N(NpcSettings_Koopa),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_SenseOfJustice,
@@ -911,7 +911,7 @@ NpcData N(NpcData_Shared)[] = {
         },
         .init = &N(EVS_NpcInit_Koopa_04),
         .settings = &N(NpcSettings_KoopaWithoutShell_Patrol),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = KOOPA_ANIMS,
         .tattle = MSG_NpcTattle_NOK_PrettyMellow,
@@ -993,7 +993,7 @@ NpcData N(NpcData_ChuckQuizmo) = {
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_NOK, QUIZ_COUNT_NOK, QUIZ_MAP_NOK_02 }},
     .settings = &N(NpcSettings_ChuckQuizmo),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = NO_DROPS,
     .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,

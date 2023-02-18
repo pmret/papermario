@@ -328,11 +328,11 @@ EvtScript N(EVS_ParadePhase_HuffNPuff) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_WAIT(10)
-        EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffBody, NPC_FLAG_400000, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffFace, NPC_FLAG_400000, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffArms, NPC_FLAG_400000, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_TuffPuff1, NPC_FLAG_400000, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_TuffPuff2, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffBody, NPC_FLAG_TOUCHES_GROUND, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffFace, NPC_FLAG_TOUCHES_GROUND, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffArms, NPC_FLAG_TOUCHES_GROUND, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_TuffPuff1, NPC_FLAG_TOUCHES_GROUND, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_TuffPuff2, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcScale, NPC_HuffNPuffBody, EVT_FLOAT(0.75), EVT_FLOAT(0.75), 1)
         EVT_CALL(SetNpcScale, NPC_HuffNPuffFace, EVT_FLOAT(0.75), EVT_FLOAT(0.75), 1)
         EVT_CALL(SetNpcScale, NPC_HuffNPuffArms, EVT_FLOAT(0.75), EVT_FLOAT(0.75), 1)

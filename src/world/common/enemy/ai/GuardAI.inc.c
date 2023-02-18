@@ -224,9 +224,9 @@ API_CALLABLE(N(GuardAI_Main)) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = 15;
             enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
-        } else if (enemy->flags & ENEMY_FLAG_40000000) {
+        } else if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
-            enemy->flags &= ~ENEMY_FLAG_40000000;
+            enemy->flags &= ~ENEMY_FLAG_BEGIN_WITH_CHASING;
         }
     }
 

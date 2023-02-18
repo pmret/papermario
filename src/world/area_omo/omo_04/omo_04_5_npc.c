@@ -95,7 +95,7 @@ NpcData N(NpcData_Goomba) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Goomba),
     .settings = &N(NpcSettings_Goomba),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -106,7 +106,7 @@ NpcData N(NpcData_Clubba) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Clubba),
     .settings = &N(NpcSettings_Clubba),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = CLUBBA_ANIMS_ALT,
 };
@@ -173,7 +173,7 @@ NpcData N(NpcData_Kammy) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kammy),
     .settings = &N(NpcSettings_Kammy_Flying),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),

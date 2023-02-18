@@ -108,7 +108,7 @@ EvtScript N(EVS_NpcInteract_MayorPenguin) = {
                 EVT_SET(MV_PlayerLeftOfMayor, 1)
             EVT_END_IF
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003A)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MayorPenguin_Walk)
             EVT_CALL(NpcMoveTo, NPC_SELF, -338, -247, 20)
             EVT_CALL(PlaySoundAtCollider, COLLIDER_yana, SOUND_1CF, 0)
@@ -159,7 +159,7 @@ EvtScript N(EVS_NpcInteract_MayorPenguin) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003D)
             EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0))
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_SET(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_BUCKET)
         EVT_CASE_LT(STORY_CH7_UNLOCKED_SHIVER_MOUNTAIN)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003E)
@@ -384,10 +384,10 @@ EvtScript N(EVS_NpcInteract_Penguin_04) = {
 };
 
 EvtScript N(EVS_PenguinCrowd_Leave) = {
-    EVT_CALL(SetNpcFlagBits, NPC_Penguin_05, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Penguin_06, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Penguin_07, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Penguin_08, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Penguin_05, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Penguin_06, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Penguin_07, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Penguin_08, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(BindNpcInteract, NPC_Penguin_05, 0)
     EVT_CALL(BindNpcInteract, NPC_Penguin_06, 0)
     EVT_CALL(BindNpcInteract, NPC_Penguin_07, 0)
@@ -527,7 +527,7 @@ EvtScript N(EVS_NpcInit_PenguinPatrol) = {
 EvtScript N(EVS_NpcInit_Herringway) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_SPOKE_WITH_HERRINGWAY)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_4, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         EVT_CASE_LT(STORY_CH7_HERRINGWAY_AT_MAYORS_HOUSE)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
@@ -537,7 +537,7 @@ EvtScript N(EVS_NpcInit_Herringway) = {
             EVT_CALL(SetNpcPos, NPC_SELF, -228, 0, 91)
             EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
         EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_4, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_SWITCH
     EVT_RETURN
@@ -618,7 +618,7 @@ EvtScript N(EVS_NpcInit_Penguin_08) = {
 
 EvtScript N(EVS_NpcInit_Penguin_09) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH7_MAYOR_MURDER_SOLVED)
-        EVT_CALL(SetNpcFlagBits, NPC_Penguin_09, NPC_FLAG_2 | NPC_FLAG_10000000, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Penguin_09, NPC_FLAG_INVISIBLE | NPC_FLAG_10000000, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_Penguin_09, FALSE)
         EVT_CALL(SetNpcPos, NPC_Penguin_09, -325, 0, -240)
     EVT_END_IF
@@ -633,7 +633,7 @@ NpcData N(NpcData_MayorPenguin)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_MayorPenguin),
         .settings = &N(NpcSettings_Penguin),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = MAYOR_PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_MayorPenguin,
@@ -644,7 +644,7 @@ NpcData N(NpcData_MayorPenguin)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_MayorDummy),
         .settings = &N(NpcSettings_Penguin),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = MAYOR_PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_MayorPenguin,
@@ -655,7 +655,7 @@ NpcData N(NpcData_MayorPenguin)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_MayorPenguinWife),
         .settings = &N(NpcSettings_Penguin),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = MAYOR_PENGUIN_WIFE_ANIMS,
         .tattle = MSG_NpcTattle_MayorPenguinWife,
@@ -700,7 +700,7 @@ NpcData N(NpcData_MayorPenguin)[] = {
         },
         .init = &N(EVS_NpcInit_Penguin_01),
         .settings = &N(NpcSettings_Penguin_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_GossipPenguin,
@@ -723,7 +723,7 @@ NpcData N(NpcData_MayorPenguin)[] = {
         },
         .init = &N(EVS_NpcInit_Penguin_02),
         .settings = &N(NpcSettings_Penguin_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_FriendlyPenguin,
@@ -746,7 +746,7 @@ NpcData N(NpcData_MayorPenguin)[] = {
         },
         .init = &N(EVS_NpcInit_Penguin_03),
         .settings = &N(NpcSettings_Penguin_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_CheerfulPenguin,
@@ -757,7 +757,7 @@ NpcData N(NpcData_MayorPenguin)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Penguin_04),
         .settings = &N(NpcSettings_Penguin),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_GenericPenguin,
@@ -771,7 +771,7 @@ NpcData N(NpcData_Penguin_05)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Penguin_05),
         .settings = &N(NpcSettings_Penguin),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_RumorLovingPenguins,
@@ -782,7 +782,7 @@ NpcData N(NpcData_Penguin_05)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Penguin_06),
         .settings = &N(NpcSettings_Penguin),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_NotAdventurous,
@@ -793,7 +793,7 @@ NpcData N(NpcData_Penguin_05)[] = {
         .yaw = 180,
         .init = &N(EVS_NpcInit_Penguin_07),
         .settings = &N(NpcSettings_Penguin),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_GenericPenguin,
@@ -804,7 +804,7 @@ NpcData N(NpcData_Penguin_05)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Penguin_08),
         .settings = &N(NpcSettings_Penguin),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_GenericPenguin,
@@ -829,7 +829,7 @@ NpcData N(NpcData_ChuckQuizmo) = {
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_SAM, QUIZ_COUNT_SAM, QUIZ_MAP_SAM_01 }},
     .settings = &N(NpcSettings_ChuckQuizmo),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = NO_DROPS,
     .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,

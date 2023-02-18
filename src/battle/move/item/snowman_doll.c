@@ -1,8 +1,11 @@
-#include "snowman_doll.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 #include "model.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_snowman_doll
+
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_71C06C)) {
     Bytecode* args = script->ptrReadPos;
@@ -34,10 +37,10 @@ API_CALLABLE(N(func_802A13B8_71C1E8)) {
     return ApiStatus_BLOCK;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x00000081)
+EvtScript N(EVS_UseItem) = {
+    EVT_SET_CONST(LVarA, ITEM_SNOWMAN_DOLL)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(N(FadeBackgroundToBlack))
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_363)

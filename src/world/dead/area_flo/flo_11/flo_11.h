@@ -2,7 +2,6 @@
 
 #include "dead.h"
 #include "common.h"
-#include "dead_structs.h"
 #include "message_ids.h"
 #include "map.h"
 

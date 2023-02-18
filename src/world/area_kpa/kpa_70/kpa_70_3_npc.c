@@ -19,7 +19,7 @@ NpcData N(NpcData_Koopatrol_01) = {
         }
     },
     .settings = &N(NpcSettings_Koopatrol_Wander),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
@@ -41,7 +41,7 @@ NpcData N(NpcData_Koopatrol_02) = {
         }
     },
     .settings = &N(NpcSettings_Koopatrol_Wander),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };

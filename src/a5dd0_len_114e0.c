@@ -484,7 +484,7 @@ DepthFloatFactors depthFloatLookupTable[] = {
 // The multiplication by 32 comes from scaling the RSP does to increase depth precision.
 #define MAX_VIEWPORT_DEPTH (2 * 32 * ((G_MAXZ / 2)))
 
-s32 D_8014B7F0 = 0;
+s32 gLastRenderTaskCount = 0;
 
 // padding?
 s32 D_8014B7F4 = 0;
@@ -6231,7 +6231,7 @@ void execute_render_tasks(void) {
         }
     }
 
-    D_8014B7F0 = taskCount;
+    gLastRenderTaskCount = taskCount;
     taskList = mdl_renderTaskLists[mdl_renderTaskQueueIdx];
     if (gOverrideFlags & GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION) {
         Mtx* dispMtx;

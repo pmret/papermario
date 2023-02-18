@@ -246,9 +246,9 @@ API_CALLABLE(N(HoppingAI_Main)) {
         npc->flags |= NPC_FLAG_8;
 
         enemy->aiFlags |= (ENEMY_AI_FLAG_8 | ENEMY_AI_FLAG_10);
-        if (enemy->flags & ENEMY_FLAG_40000000) {
+        if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
-            enemy->flags &= ~ENEMY_FLAG_40000000;
+            enemy->flags &= ~ENEMY_FLAG_BEGIN_WITH_CHASING;
         }
     }
 

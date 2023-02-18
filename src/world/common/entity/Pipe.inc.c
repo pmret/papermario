@@ -144,7 +144,7 @@ EvtScript N(EVS_Pipe_EnterVertical) = {
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_SUB(LVar2, 3)
             EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_2, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_INVISIBLE, FALSE)
             EVT_CALL(EnablePartnerAI)
             EVT_CALL(EnableNpcShadow, NPC_PARTNER, TRUE)
         EVT_END_THREAD

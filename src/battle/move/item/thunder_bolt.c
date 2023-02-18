@@ -1,8 +1,11 @@
-#include "thunder_bolt.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 #include "model.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_thunder_bolt
+
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_722D7C)) {
     Actor* enemyTarget = get_actor(script->owner1.enemyID);
@@ -50,10 +53,10 @@ API_CALLABLE(N(func_802A1420_722F60)) {
     return ApiStatus_BLOCK;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x84)
+EvtScript N(EVS_UseItem) = {
+    EVT_SET_CONST(LVarA, ITEM_THUNDER_BOLT)
     EVT_EXEC_WAIT(battle_item_thunder_bolt_UseItemWithEffect)
     EVT_THREAD
         EVT_WAIT(5)

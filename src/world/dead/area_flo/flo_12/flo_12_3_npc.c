@@ -37,9 +37,9 @@ EvtScript N(EVS_Scene_SunReturns) = {
 
 EvtScript N(EVS_PlayerApproachRosie) = {
     EVT_WAIT(10)
-    EVT_CALL(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(PlayerMoveTo, -5, 20, 20)
-    EVT_CALL(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(PlayerFaceNpc, NPC_Rosie, TRUE)
     EVT_RETURN
     EVT_END
@@ -47,11 +47,11 @@ EvtScript N(EVS_PlayerApproachRosie) = {
 
 EvtScript N(EVS_PlayerApproachRosieAndItem) = {
     EVT_WAIT(10)
-    EVT_CALL(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(PlayerMoveTo, -5, 20, 20)
-    EVT_CALL(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_100, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(PlayerFaceNpc, NPC_Rosie, TRUE)
     EVT_RETURN
     EVT_END
@@ -76,7 +76,7 @@ EvtScript N(EVS_NpcInteract_Rosie) = {
                         EVT_CASE_EQ(1)
                             EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_Rosie_Talk, ANIM_Rosie_Idle, 5, MSG_CH6_008E)
                     EVT_END_SWITCH
-                    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_100, FALSE)
+                    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
                     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rosie_TakeOut)
                     EVT_WAIT(10)
                     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
@@ -163,23 +163,23 @@ EvtScript N(EVS_NpcInit_Rosie) = {
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 35)
     EVT_CALL(SetNpcPos, NPC_Dummy, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_2, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_HAS_SHADOW, TRUE)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH6_GOT_CRYSTAL_BERRY)
             EVT_IF_EQ(GF_FLO12_Met_Rosie, TRUE)
-                EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_100, FALSE)
+                EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
                 EVT_CALL(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
                 EVT_SET(LVarA, LVar0)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH6_GOT_WATER_STONE)
-            EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_100, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
             EVT_CALL(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
             EVT_SET(LVarA, LVar0)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_100, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
             EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
             EVT_SET(LVarA, LVar0)
@@ -195,7 +195,7 @@ NpcData N(NpcData_Rosie)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Rosie),
         .settings = &N(NpcSettings_Rosie),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = ROSIE_ANIMS,
         .tattle = MSG_NpcTattle_Rosie,
@@ -205,7 +205,7 @@ NpcData N(NpcData_Rosie)[] = {
         .pos = { -70.0f, 0.0f, 20.0f },
         .yaw = 90,
         .settings = &N(NpcSettings_Dummy),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION,
         .drops = NO_DROPS,
         .animations = ROSIE_ANIMS,
     },

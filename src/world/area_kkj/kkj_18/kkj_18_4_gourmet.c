@@ -194,7 +194,7 @@ EvtScript N(EVS_OpenAndCloseWindow) = {
 };
 
 EvtScript N(EVS_DropFork) = {
-    EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_2, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_INVISIBLE, FALSE)
     EVT_CALL(GetNpcPos, NPC_GourmetGuy_Fork, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcJumpscale, NPC_GourmetGuy_Fork, EVT_FLOAT(0.05))
     EVT_CALL(NpcJump0, NPC_GourmetGuy_Fork, LVar0, -8, LVar2, 8)
@@ -215,7 +215,7 @@ EvtScript N(EVS_DropFork) = {
 };
 
 EvtScript N(EVS_DropKnife) = {
-    EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_2, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_INVISIBLE, FALSE)
     EVT_CALL(GetNpcPos, NPC_GourmetGuy_Knife, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcRotation, NPC_GourmetGuy_Knife, 0, 0, -25)
     EVT_CALL(SetNpcJumpscale, NPC_GourmetGuy_Knife, EVT_FLOAT(0.05))
@@ -297,7 +297,7 @@ EvtScript N(EVS_GourmetGuy_RunAround) = {
     EVT_CALL(GetNpcPos, NPC_GourmetGuy, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_GourmetGuy, LVar0, 200, LVar2, 15)
     EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_Panic)
-    EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcSpeed, NPC_GourmetGuy, EVT_FLOAT(20.0))
     EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_384, 0)
     EVT_CALL(SetNpcRotation, NPC_GourmetGuy, 0, 0, -45)
@@ -527,7 +527,7 @@ EvtScript N(EVS_Scene_JudgeCake) = {
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetEnemyFlagBits, NPC_GourmetGuy, ENEMY_FLAG_8000000, 1)
+    EVT_CALL(SetEnemyFlagBits, NPC_GourmetGuy, ENEMY_FLAG_CANT_INTERACT, 1)
     EVT_EXEC_WAIT(N(EVS_GourmetGuy_LovesCake))
     EVT_CALL(SetNpcVar, NPC_GourmetGuy, 0, 1)
     EVT_EXEC(N(EVS_GourmetGuy_RunAround))

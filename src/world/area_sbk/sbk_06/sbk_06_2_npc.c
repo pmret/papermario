@@ -19,7 +19,7 @@ NpcData N(NpcData_Bandit) = {
         }
     },
     .settings = &N(NpcSettings_Bandit),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = BANDIT_DROPS,
     .animations = BANDIT_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

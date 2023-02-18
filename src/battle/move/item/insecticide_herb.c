@@ -1,10 +1,12 @@
-#include "insecticide_herb.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 #include "entity.h"
 #include "ld_addrs.h"
-#include "battle/move/item/insecticide_herb.png.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_insecticide_herb
+
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_72A98C)) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -49,10 +51,11 @@ API_CALLABLE(N(func_802A12E0_72AA30)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 static s32 _pad = 0; // XXX
 
+#include "battle/move/item/insecticide_herb.png.h"
 #include "battle/move/item/insecticide_herb.png.inc.c"
 #include "battle/move/item/insecticide_herb.pal.inc.c"
 
@@ -88,7 +91,7 @@ Gfx N(displayList)[] = {
 EntityModelScript N(modelCommandList) = STANDARD_ENTITY_MODEL_SCRIPT(N(displayList), RENDER_MODE_ALPHATEST);
 
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_INSECTICIDE_HERB)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)

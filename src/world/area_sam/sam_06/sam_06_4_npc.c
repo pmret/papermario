@@ -196,7 +196,7 @@ EvtScript N(EVS_Scene_Merle_Greeting) = {
     EVT_SET(MF_MerleReady, FALSE)
     EVT_THREAD
         EVT_CALL(BindNpcInteract, NPC_Merle, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Merle, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Merle, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
         EVT_CALL(SetNpcSpeed, NPC_Merle, EVT_FLOAT(2.0))
         EVT_CALL(NpcMoveTo, NPC_Merle, -78, 287, 0)
@@ -446,7 +446,7 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(BindNpcInteract, NPC_Merle, EVT_PTR(N(EVS_NpcInteract_Merle)))
-    EVT_CALL(SetNpcFlagBits, NPC_Merle, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Merle, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -922,7 +922,7 @@ NpcData N(NpcData_Merle)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_ShiverToad_01),
         .settings = &N(NpcSettings_ShiverToad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShiverToad_Red_Idle,
@@ -962,7 +962,7 @@ NpcData N(NpcData_Merle)[] = {
         },
         .init = &N(EVS_NpcInit_ShiverToad_02),
         .settings = &N(NpcSettings_ShiverToad_Wander),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShiverToad_Blue_Idle,
@@ -990,7 +990,7 @@ NpcData N(NpcData_Merle)[] = {
         .yaw = 180,
         .init = &N(EVS_NpcInit_ShiverToad_03),
         .settings = &N(NpcSettings_ShiverToad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShiverToad_Green_Idle,
@@ -1030,7 +1030,7 @@ NpcData N(NpcData_Merle)[] = {
         },
         .init = &N(EVS_NpcInit_Ninji_01),
         .settings = &N(NpcSettings_Ninji_Wander),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Ninji_Idle,
@@ -1070,7 +1070,7 @@ NpcData N(NpcData_Merle)[] = {
         },
         .init = &N(EVS_NpcInit_Ninji_02),
         .settings = &N(NpcSettings_Ninji_Wander),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Ninji_Idle,
@@ -1098,7 +1098,7 @@ NpcData N(NpcData_Merle)[] = {
         .yaw = 180,
         .init = &N(EVS_NpcInit_Ninji_03),
         .settings = &N(NpcSettings_Ninji_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Ninji_Idle,
@@ -1126,7 +1126,7 @@ NpcData N(NpcData_Merle)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Ninji_04),
         .settings = &N(NpcSettings_Ninji_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Ninji_Idle,
@@ -1232,7 +1232,7 @@ NpcData N(NpcData_Merle)[] = {
         .yaw = 180,
         .init = &N(EVS_NpcInit_ShiverToad_04),
         .settings = &N(NpcSettings_ShiverToad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShiverToad_Red_Idle,

@@ -161,7 +161,7 @@ EvtScript N(EVS_NpcInit_Snowman_01) = {
 EVT_END_IF
 EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Snowman_01)))
 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Snowman_01)))
-EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2 | NPC_FLAG_10000000, TRUE)
+EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_10000000, TRUE)
 EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
 EVT_RETURN
 EVT_END
@@ -170,7 +170,7 @@ EVT_END
 EvtScript N(EVS_NpcInit_Snowman_02) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Snowman_02)))
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Snowman_02)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2 | NPC_FLAG_10000000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_10000000, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
     EVT_END
@@ -179,7 +179,7 @@ EvtScript N(EVS_NpcInit_Snowman_02) = {
 EvtScript N(EVS_NpcInit_Snowman_03) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Snowman_03)))
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Snowman_03)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2 | NPC_FLAG_10000000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_10000000, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
     EVT_END
@@ -188,7 +188,7 @@ EvtScript N(EVS_NpcInit_Snowman_03) = {
 EvtScript N(EVS_NpcInit_Snowman_04) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Snowman_04)))
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Snowman_04)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2 | NPC_FLAG_10000000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_10000000, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
     EVT_END
@@ -197,7 +197,7 @@ EvtScript N(EVS_NpcInit_Snowman_04) = {
 EvtScript N(EVS_NpcInit_Snowman_05) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Snowman_05)))
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Snowman_05)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2 | NPC_FLAG_10000000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_10000000, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
     EVT_END
@@ -206,14 +206,14 @@ EvtScript N(EVS_NpcInit_Snowman_05) = {
 EvtScript N(EVS_NpcInit_Snowman_06) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Snowman_06)))
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Snowman_06)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2 | NPC_FLAG_10000000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_10000000, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcInit_Dummy) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2 | NPC_FLAG_10000000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_10000000, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
     EVT_END
@@ -294,7 +294,7 @@ NpcData N(NpcData_Dummy) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_Dummy),
     .settings = &N(NpcSettings_Snowman),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = PENGUIN_ANIMS,
 };

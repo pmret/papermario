@@ -33,7 +33,7 @@ API_CALLABLE(N(CreateParadeNPC)) {
     NpcBlueprint bp;
     Npc* npc;
 
-    bp.flags = NPC_FLAG_100;
+    bp.flags = NPC_FLAG_IGNORE_PLAYER_COLLISION;
     bp.initialAnim = npcInfo->initialAnim;
     bp.onUpdate = NULL;
     bp.onRender = NULL;
@@ -42,7 +42,7 @@ API_CALLABLE(N(CreateParadeNPC)) {
 
     npc = get_npc_by_index(create_standard_npc(&bp, npcInfo->animList));
     npc->npcID = npcID;
-    npc->flags &= ~NPC_FLAG_PARTICLE;
+    npc->flags &= ~NPC_FLAG_PARTNER;
     npc->pos.x = npcInfo->pos.x;
     npc->pos.y = npcInfo->pos.y;
     npc->pos.z = npcInfo->pos.z;

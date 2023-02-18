@@ -1,10 +1,13 @@
-#include "food.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 #include "entity.h"
 
+#define NAMESPACE battle_item_food
+
 extern EntityModelScript D_80283EE8;
 
-#include "ItemRefund.inc.c"
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_73330C)) {
     Bytecode* args = script->ptrReadPos;
@@ -44,7 +47,7 @@ API_CALLABLE(N(func_802A12EC_7333BC)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802A1378_733448)) {
+API_CALLABLE(N(ShowHeartRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -56,7 +59,7 @@ API_CALLABLE(N(func_802A1378_733448)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802A1438_733508)) {
+API_CALLABLE(N(ShowFlowerRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -69,7 +72,6 @@ API_CALLABLE(N(func_802A1438_733508)) {
 }
 
 #include "common/AddHP.inc.c"
-
 #include "common/AddFP.inc.c"
 
 API_CALLABLE(N(func_802A15A0_733670)) {
@@ -96,9 +98,9 @@ API_CALLABLE(N(func_802A15A0_733670)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(script6) = {
+EvtScript N(EVS_FeedPartner) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
@@ -176,15 +178,15 @@ EvtScript N(script6) = {
     EVT_END
 };
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET(LVarE, LVar1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SET(LVarA, LVar1)
     EVT_CALL(N(func_802A15A0_733670), LVarA)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-    EVT_IF_EQ(LVar0, 256)
-        EVT_EXEC_WAIT(N(script6))
+    EVT_IF_EQ(LVar0, ACTOR_PARTNER)
+        EVT_EXEC_WAIT(N(EVS_FeedPartner))
         EVT_RETURN
     EVT_END_IF
     EVT_SET(LVar1, LVarE)
@@ -201,19 +203,19 @@ EvtScript N(main) = {
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 0)
         EVT_ADD(LVar1, 35)
-        EVT_CALL(N(func_802A1378_733448), LVar0, LVar1, LVar2, LVarB)
+        EVT_CALL(N(ShowHeartRecoveryFX), LVar0, LVar1, LVar2, LVarB)
     EVT_END_IF
     EVT_IF_LT(LVarB, 0)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 0)
         EVT_ADD(LVar1, 35)
-        EVT_CALL(N(func_802A1378_733448), LVar0, LVar1, LVar2, LVarB)
+        EVT_CALL(N(ShowHeartRecoveryFX), LVar0, LVar1, LVar2, LVarB)
     EVT_END_IF
     EVT_IF_GT(LVarC, 0)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 20)
         EVT_ADD(LVar1, 25)
-        EVT_CALL(N(func_802A1438_733508), LVar0, LVar1, LVar2, LVarC)
+        EVT_CALL(N(ShowFlowerRecoveryFX), LVar0, LVar1, LVar2, LVarC)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 25)

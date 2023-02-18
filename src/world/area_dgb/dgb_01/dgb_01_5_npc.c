@@ -94,12 +94,12 @@ EvtScript N(EVS_NpcDefeat_Tubba_Floor2) = {
 EvtScript N(EVS_NpcInit_Tubba_Floor2) = {
     EVT_IF_NE(GB_ARN_Tubba_MapID, 1)
         EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_4, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_GE(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_HALL)
         EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_4, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetNpcPos, NPC_Tubba, 137, 244, 35)
@@ -261,7 +261,7 @@ NpcData N(NpcData_Sentinel_01) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_01),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -284,7 +284,7 @@ NpcData N(NpcData_Sentinel_02) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_02),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -307,7 +307,7 @@ NpcData N(NpcData_Sentinel_03) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_03),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -330,7 +330,7 @@ NpcData N(NpcData_Sentinel_04) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_04),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -356,7 +356,7 @@ NpcData N(NpcData_Tubba_Floor3) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Tubba_Floor3),
     .settings = &N(NpcSettings_TubbaBlubba),
-    .flags = ENEMY_FLAG_200000,
+    .flags = ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = TUBBA_ANIMS,
     .extraAnimations = N(ExtraAnims_Tubba),
@@ -382,7 +382,7 @@ NpcData N(NpcData_Tubba_Floor2) = {
     },
     .init = &N(EVS_NpcInit_Tubba_Floor2),
     .settings = &N(NpcSettings_TubbaBlubba_Patrol),
-    .flags = ENEMY_FLAG_200000,
+    .flags = ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = CLUBBA_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
     .extraAnimations = N(ExtraAnims_Tubba),
@@ -415,7 +415,7 @@ NpcData N(NpcData_Tubba_Floor1) = {
     },
     .init = &N(EVS_NpcInit_Tubba_Floor1),
     .settings = &N(NpcSettings_TubbaBlubba_Patrol),
-    .flags = ENEMY_FLAG_200000,
+    .flags = ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = CLUBBA_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
     .extraAnimations = N(ExtraAnims_Tubba),

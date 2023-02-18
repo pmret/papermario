@@ -19,7 +19,7 @@ NpcData N(NpcData_Pokey) = {
         }
     },
     .settings = &N(NpcSettings_Pokey),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = POKEY_DROPS,
     .animations = POKEY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

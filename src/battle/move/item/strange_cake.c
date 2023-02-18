@@ -1,14 +1,39 @@
-#include "strange_cake.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 #include "hud_element.h"
+
+#define NAMESPACE battle_item_strange_cake
+
+#include "battle/common/move/ItemRefund.inc.c"
+#include "battle/common/move/UseItem.inc.c"
+
+static s32 _pad = 0; // XXX
+
 #include "battle/move/item/strange_cake1.png.h"
+#include "battle/move/item/strange_cake1.png.inc.c"
+#include "battle/move/item/strange_cake1.pal.inc.c"
+
 #include "battle/move/item/strange_cake2.png.h"
+#include "battle/move/item/strange_cake2.png.inc.c"
+#include "battle/move/item/strange_cake2.pal.inc.c"
+
 #include "battle/move/item/strange_cake3.png.h"
+#include "battle/move/item/strange_cake3.png.inc.c"
+#include "battle/move/item/strange_cake3.pal.inc.c"
 
-#include "ItemRefund.inc.c"
+HudScript N(D_802A27D0) = HES_TEMPLATE_CI_ENUM_SIZE(battle_item_strange_cake1, 32, 32);
+HudScript N(D_802A27F8) = HES_TEMPLATE_CI_ENUM_SIZE(battle_item_strange_cake2, 32, 32);
+HudScript N(D_802A2820) = HES_TEMPLATE_CI_ENUM_SIZE(battle_item_strange_cake3, 32, 32);
 
-extern HudScript* N(D_802A2848_732B48)[];
-extern s32 N(D_802A2858_732B58)[];
+HudScript* N(D_802A2848_732B48)[] = {
+    &N(D_802A27F8), &N(D_802A2820), &N(D_802A27D0), &N(D_802A27F8)
+};
+
+// indexes into D_802A2848_732B48
+s32 N(D_802A2858_732B58)[] = {
+    0, 1, 2, 0, 1, 0
+};
 
 BSS s32 D_802A2DD4; // unused?
 BSS s32 D_802A2DD8[5];
@@ -151,7 +176,7 @@ s32 N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(N(func_802A1818_731B18)) {
+API_CALLABLE(N(ShowHeartRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -162,7 +187,7 @@ API_CALLABLE(N(func_802A1818_731B18)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802A18D8_731BD8)) {
+API_CALLABLE(N(ShowFlowerRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -174,7 +199,6 @@ API_CALLABLE(N(func_802A18D8_731BD8)) {
 }
 
 #include "common/AddHP.inc.c"
-
 #include "common/AddFP.inc.c"
 
 API_CALLABLE(N(func_802A1A40_731D40)) {
@@ -237,31 +261,11 @@ API_CALLABLE(N(func_802A1B68_731E68)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+extern EvtScript N(script7);
+extern EvtScript N(script8);
+extern EvtScript N(script9);
 
-static s32 _pad = 0; // XXX
-
-#include "battle/move/item/strange_cake1.png.inc.c"
-#include "battle/move/item/strange_cake1.pal.inc.c"
-#include "battle/move/item/strange_cake2.png.inc.c"
-#include "battle/move/item/strange_cake2.pal.inc.c"
-#include "battle/move/item/strange_cake3.png.inc.c"
-#include "battle/move/item/strange_cake3.pal.inc.c"
-
-HudScript N(D_802A27D0) = HES_TEMPLATE_CI_ENUM_SIZE(battle_item_strange_cake1, 32, 32);
-HudScript N(D_802A27F8) = HES_TEMPLATE_CI_ENUM_SIZE(battle_item_strange_cake2, 32, 32);
-HudScript N(D_802A2820) = HES_TEMPLATE_CI_ENUM_SIZE(battle_item_strange_cake3, 32, 32);
-
-HudScript* N(D_802A2848_732B48)[] = {
-    &N(D_802A27F8), &N(D_802A2820), &N(D_802A27D0), &N(D_802A27F8)
-};
-
-// indexes into D_802A2848_732B48
-s32 N(D_802A2858_732B58)[] = {
-    0, 1, 2, 0, 1, 0
-};
-
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_IF_EQ(LVar1, ITEM_KOOKY_COOKIE)
         EVT_SET_CONST(LVarA, ITEM_KOOKY_COOKIE)
@@ -272,7 +276,7 @@ EvtScript N(main) = {
         EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 20)
         EVT_ADD(LVar1, 25)
-        EVT_CALL(N(func_802A18D8_731BD8), LVar0, LVar1, LVar2, LVar3)
+        EVT_CALL(N(ShowFlowerRecoveryFX), LVar0, LVar1, LVar2, LVar3)
         EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 25)
         EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
@@ -317,7 +321,7 @@ EvtScript N(script7) = {
     EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_10002)
     EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
-    EVT_CALL(PlayEffect, 87, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(N(func_802A1AD8_731DD8))
     EVT_WAIT(20)
     EVT_CALL(ShowMessageBox, 16, 60)
@@ -330,7 +334,7 @@ EvtScript N(script8) = {
     EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_10002)
     EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
-    EVT_CALL(PlayEffect, 51, 6, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 6, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(N(func_802A1B14_731E14))
     EVT_WAIT(20)
     EVT_CALL(ShowMessageBox, 17, 60)

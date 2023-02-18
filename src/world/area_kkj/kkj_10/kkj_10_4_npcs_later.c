@@ -63,13 +63,13 @@ EvtScript N(EVS_NpcIdle_Koopatrol_01) = {
             EVT_IF_EQ(LVar2, 0)
                 EVT_CALL(N(GetPeachDisguise), LVar1)
                 EVT_IF_EQ(LVar1, PEACH_DISGUISE_NONE)
-                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 1)
+                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
                     EVT_IF_NE(LVar0, 0)
                         EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_CapturePeach)))
                         EVT_SET(LVar2, 1)
                     EVT_END_IF
                 EVT_ELSE
-                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 0)
+                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
                 EVT_END_IF
             EVT_END_IF
             EVT_WAIT(1)
@@ -102,13 +102,13 @@ EvtScript N(EVS_NpcIdle_Koopatrol_02) = {
             EVT_IF_EQ(LVar2, 0)
                 EVT_CALL(N(GetPeachDisguise), LVar1)
                 EVT_IF_EQ(LVar1, PEACH_DISGUISE_NONE)
-                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 0)
+                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
                     EVT_IF_NE(LVar0, 0)
                         EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_CapturePeach)))
                         EVT_SET(LVar2, 1)
                     EVT_END_IF
                 EVT_ELSE
-                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 0)
+                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
                 EVT_END_IF
             EVT_END_IF
             EVT_WAIT(1)
@@ -194,7 +194,7 @@ NpcData N(NpcData_Koopatrol)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Koopatrol_01),
         .settings = &N(NpcSettings_Koopatrol_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = KOOPATROL_ANIMS,
         .extraAnimations = N(ExtraAnims_Koopatrol),
@@ -205,7 +205,7 @@ NpcData N(NpcData_Koopatrol)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Koopatrol_02),
         .settings = &N(NpcSettings_Koopatrol_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = KOOPATROL_ANIMS,
         .extraAnimations = N(ExtraAnims_Koopatrol),

@@ -95,10 +95,10 @@ EvtScript N(EVS_MovePlayerToTalk) = {
                 EVT_ELSE
                     EVT_ADD(LVar0, 40)
                 EVT_END_IF
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_CALL(PlayerMoveTo, LVar0, LVar5, 15)
                 EVT_CALL(PlayerFaceNpc, NPC_Lily, TRUE)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_END_THREAD
     EVT_END_SWITCH
     EVT_RETURN
@@ -204,7 +204,7 @@ NpcData N(NpcData_Lily) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Lily),
     .settings = &N(NpcSettings_Lily),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = LILY_ANIMS,
     .tattle = MSG_NpcTattle_Lily,

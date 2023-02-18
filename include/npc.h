@@ -305,10 +305,10 @@ typedef struct Enemy {
     /* 0x04 */ s8 encounterIndex;
     /* 0x05 */ s8 encountered;
     /* 0x06 */ u8 scriptGroup; /* scripts launched for this npc controller will be assigned this group */
-    /* 0x07 */ s8 unk_07;
+    /* 0x07 */ s8 hitboxIsActive; // when set, contact will trigger a first strike
     /* 0x08 */ s16 npcID;
     /* 0x0A */ s16 spawnPos[3];
-    /* 0x10 */ Vec3s unk_10;
+    /* 0x10 */ Vec3s unk_10;    //TODO hitbox pos?
     /* 0x16 */ char unk_16[2];
     /* 0x18 */ NpcSettings* npcSettings;
     /* 0x1C */ EvtScript* initBytecode;
@@ -352,9 +352,15 @@ typedef struct Enemy {
     /* 0xD4 */ EnemyDrops* drops;
     /* 0xD8 */ u32 tattleMsg;
     /* 0xDC */ s32 unk_DC;
-    /* 0xE0 */ s16 unk_E0;
+    /* 0xE0 */ s16 savedNpcYaw;
     /* 0xE2 */ char unk_E2[6];
-} Enemy; // size = 0xE8
+    #ifdef _DEAD_H_
+    /* 0x0DC */ char unk_E8[32];
+    /* 0x108 */ Vec3f unk_108; // Associated NPC Pos?
+    /* 0x114 */ f32 unk_114;
+    /* 0x118 */ f32 unk_118;
+    #endif
+} Enemy; // size = 0xE8, dead size = 0x11C
 
 typedef struct Encounter {
     /* 0x00 */ s32 count;
@@ -457,7 +463,7 @@ s32 npc_do_player_collision(Npc* npc);
 
 void npc_do_gravity(Npc* npc);
 
-s32 func_800397E8(Npc* npc, f32 arg1);
+s32 func_800397E8(Npc* npc, f32 velocity);
 
 /// Updates all NPCs.
 void update_npcs(void);
@@ -558,8 +564,8 @@ void npc__reset_current_decoration(Npc* npc, s32 idx);
 
 /// Finds the closest NPC to a given point within a radius. Ignores Y position.
 ///
-/// NPCs with NPC_FLAG_PARTICLE set are ignored.
-/// See also npc_find_closest_simple(), which requires that NPC_FLAG_PARTICLE be set.
+/// NPCs with NPC_FLAG_PARTNER set are ignored.
+/// See also npc_find_closest_simple(), which requires that NPC_FLAG_PARTNER be set.
 ///
 /// @param x        X position
 /// @param y        Y position (unused)
@@ -571,8 +577,8 @@ Npc* npc_find_closest(f32 x, f32 y, f32 z, f32 radius);
 
 /// Finds the closest simple-hitbox NPC to a given point within a radius. Ignores Y position.
 ///
-/// Only NPCs with NPC_FLAG_PARTICLE set are considered.
-/// See also npc_find_closest(), which requires that NPC_FLAG_PARTICLE be unset.
+/// Only NPCs with NPC_FLAG_PARTNER set are considered.
+/// See also npc_find_closest(), which requires that NPC_FLAG_PARTNER be unset.
 ///
 /// @param x        X position
 /// @param y        Y position (unused)

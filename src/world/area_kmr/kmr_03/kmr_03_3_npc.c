@@ -140,7 +140,7 @@ EvtScript N(EVS_NpcHit_Goompa) = {
         EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
         EVT_CALL(SetNpcPos, NPC_Goompa, NPC_DISPOSE_LOCATION)
-        EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_100, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_CALL(EnablePartnerAI)
         EVT_CALL(SetNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Goompa)))
         EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Goompa)))
@@ -169,7 +169,7 @@ NpcData N(NpcData_GoombaFamily) = {
     .yaw = 45,
     .init = &N(EVS_NpcInit_Goompa),
     .settings = &N(NpcSettings_Goompa),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Goompa_Idle,

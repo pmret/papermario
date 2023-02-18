@@ -34,7 +34,7 @@ MobileAISettings N(AISettings_MontyMole_StoneThrower) = {
 };
 
 EvtScript N(EVS_NpcAI_MontyMole_StoneThrower) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2 | NPC_FLAG_200000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_200000, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_LABEL(0)
     EVT_CALL(RandInt, 15, LVar0)
@@ -83,7 +83,7 @@ EvtScript N(EVS_NpcHit_MontyMole_Stone) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcHit_MontyMole_Stone_DoNothing)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(GetOwnerEncounterTrigger, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
@@ -125,7 +125,7 @@ NpcSettings N(NpcSettings_MontyMole_Stone) = {
     .settings = &N(NpcSettings_MontyMole_Stone), \
     .pos = { NPC_DISPOSE_LOCATION }, \
     .yaw = 90, \
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_NO_DROPS, \
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_DROPS, \
     .drops = NO_DROPS, \
     .territory = { \
         .wander = { \

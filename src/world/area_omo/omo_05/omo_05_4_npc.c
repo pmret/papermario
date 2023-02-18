@@ -188,7 +188,7 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
             EVT_CALL(DisablePartnerAI, 0)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GourmetGuy_Surprise)
             EVT_THREAD
-                EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_2, FALSE)
+                EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_INVISIBLE, FALSE)
                 EVT_CALL(GetNpcPos, NPC_GourmetGuy_Fork, LVar0, LVar1, LVar2)
                 EVT_CALL(SetNpcJumpscale, NPC_GourmetGuy_Fork, EVT_FLOAT(0.05))
                 EVT_CALL(NpcJump0, NPC_GourmetGuy_Fork, LVar0, 2, LVar2, 8)
@@ -206,7 +206,7 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
                 EVT_CALL(RemoveNpc, NPC_GourmetGuy_Fork)
             EVT_END_THREAD
             EVT_THREAD
-                EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_2, FALSE)
+                EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_INVISIBLE, FALSE)
                 EVT_CALL(GetNpcPos, NPC_GourmetGuy_Knife, LVar0, LVar1, LVar2)
                 EVT_CALL(SetNpcJumpscale, NPC_GourmetGuy_Knife, EVT_FLOAT(0.05))
                 EVT_CALL(NpcJump0, NPC_GourmetGuy_Knife, LVar0, 2, LVar2, 8)
@@ -288,7 +288,7 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
             EVT_END_THREAD
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_384, SOUND_SPACE_MODE_0)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GourmetGuy_Panic)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(20.0))
             EVT_CALL(NpcMoveTo, NPC_SELF, 0, 110, 0)
             EVT_WAIT(20)
@@ -378,10 +378,10 @@ EvtScript N(EVS_NpcInit_GourmetGuy) = {
     EVT_ELSE
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GourmetGuy_SitIdle)
         EVT_CALL(SetNpcAnimation, NPC_GourmetGuy_Fork, ANIM_GourmetGuy_Fork)
-        EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_INVISIBLE, TRUE)
         EVT_CALL(SetNpcPos, NPC_GourmetGuy_Fork, -285, 50, 90)
         EVT_CALL(SetNpcAnimation, NPC_GourmetGuy_Knife, ANIM_GourmetGuy_Knife)
-        EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_INVISIBLE, TRUE)
         EVT_CALL(SetNpcPos, NPC_GourmetGuy_Knife, -210, 50, 90)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_GourmetGuy)))
     EVT_END_IF
@@ -396,7 +396,7 @@ NpcData N(NpcData_GourmetGuy)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_GourmetGuy),
         .settings = &N(NpcSettings_GourmetGuy),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = GOURMET_GUY_ANIMS,
         .tattle = MSG_NpcTattle_GourmetGuy,
@@ -406,7 +406,7 @@ NpcData N(NpcData_GourmetGuy)[] = {
         .pos = { -250.0f, 10.0f, 85.0f },
         .yaw = 90,
         .settings = &N(NpcSettings_GourmetGuy),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = GOURMET_GUY_ANIMS,
         .tattle = MSG_NpcTattle_GourmetGuy,
@@ -416,7 +416,7 @@ NpcData N(NpcData_GourmetGuy)[] = {
         .pos = { -250.0f, 10.0f, 85.0f },
         .yaw = 90,
         .settings = &N(NpcSettings_GourmetGuy),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = GOURMET_GUY_ANIMS,
         .tattle = MSG_NpcTattle_GourmetGuy,
@@ -440,7 +440,7 @@ NpcData N(NpcData_GrooveGuy) = {
         }
     },
     .settings = &N(NpcSettings_GrooveGuy),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = GROOVE_GUY_DROPS_A,
     .animations = GROOVE_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

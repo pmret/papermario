@@ -99,14 +99,14 @@ EvtScript N(EVS_WatchForPlayer) = {
     EVT_LOOP(0)
         EVT_CALL(N(GetPeachDisguise), LVar1)
         EVT_IF_EQ(LVar1, PEACH_DISGUISE_NONE)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 1)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
             EVT_CALL(N(UnkPhysicsFunc), LVar0, 85, 60, 38)
             EVT_IF_NE(LVar0, 0)
                 EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_CapturePeach)))
                 EVT_RETURN
             EVT_END_IF
         EVT_ELSE
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 0)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -192,7 +192,7 @@ NpcData N(NpcData_Minions)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_HammerBros_01),
         .settings = &N(NpcSettings_HammerBros),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = HAMMER_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_HammerBros),
@@ -203,7 +203,7 @@ NpcData N(NpcData_Minions)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_HammerBros_02),
         .settings = &N(NpcSettings_HammerBros),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = HAMMER_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_HammerBros),
@@ -214,7 +214,7 @@ NpcData N(NpcData_Minions)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_HammerBros_03),
         .settings = &N(NpcSettings_HammerBros),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = HAMMER_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_HammerBros),

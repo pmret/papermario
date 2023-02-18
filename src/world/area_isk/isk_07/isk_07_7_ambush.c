@@ -21,9 +21,9 @@ EvtScript N(EVS_SetupSarcophagi) = {
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 30, EVT_FLOAT(1.0))
         EVT_CALL(SetNpcYaw, NPC_Pokey_01, 105)
-        EVT_CALL(SetNpcFlagBits, NPC_Pokey_01, NPC_FLAG_2, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_Pokey_02, NPC_FLAG_2, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_Pokey_03, NPC_FLAG_2, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Pokey_01, NPC_FLAG_INVISIBLE, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Pokey_02, NPC_FLAG_INVISIBLE, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Pokey_03, NPC_FLAG_INVISIBLE, FALSE)
         EVT_THREAD
             EVT_WAIT(12)
             EVT_CALL(InterpPlayerYaw, 109, 0)

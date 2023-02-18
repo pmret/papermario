@@ -291,9 +291,9 @@ EvtScript N(EVS_NpcIdle_Luigi_InBedroom) = {
     EVT_LABEL(10)
         EVT_SET(LVar0, MF_Unk_0C)
         EVT_IF_EQ(LVar0, 1)
-            EVT_CALL(SetNpcFlagBits, NPC_Luigi_0, NPC_FLAG_2, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_Luigi_0, NPC_FLAG_INVISIBLE, FALSE)
         EVT_ELSE
-            EVT_CALL(SetNpcFlagBits, NPC_Luigi_0, NPC_FLAG_2, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_Luigi_0, NPC_FLAG_INVISIBLE, TRUE)
         EVT_END_IF
         EVT_WAIT(3)
         EVT_GOTO(10)
@@ -362,7 +362,7 @@ EvtScript N(EVS_Scene_CaughtLuigiInBasement) = {
     EVT_WAIT(5)
     EVT_CALL(SpeakToPlayer, NPC_Luigi_0, ANIM_Luigi_Talk, ANIM_Luigi_Idle, 5, MSG_CH0_00EB)
     EVT_WAIT(3)
-    EVT_CALL(SetNpcFlagBits, NPC_Luigi_0, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Luigi_0, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_Luigi_0, ANIM_Luigi_Run)
     EVT_CALL(NpcMoveTo, NPC_Luigi_0, -130, -17, 15)
     EVT_CALL(NpcJump0, NPC_Luigi_0, -145, -54, -45, 10)
@@ -374,7 +374,7 @@ EvtScript N(EVS_Scene_CaughtLuigiInBasement) = {
     EVT_END_THREAD
     EVT_CALL(NpcJump0, NPC_Luigi_0, -145, 30, -45, 20)
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_Luigi_0, NPC_FLAG_100, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Luigi_0, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_CALL(NpcMoveTo, NPC_Luigi_0, 20, -80, 15)
         EVT_CALL(SetNpcAnimation, NPC_Luigi_0, ANIM_Luigi_Idle)
         EVT_CALL(SetNpcPos, NPC_Luigi_0, 48, 30, -5)
@@ -396,11 +396,11 @@ EvtScript N(EVS_Scene_CaughtLuigiInBasement) = {
 EvtScript N(EVS_NpcIdle_Luigi_ReadingMail) = {
     EVT_LABEL(10)
     EVT_IF_EQ(MF_Unk_0C, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
         EVT_WAIT(1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_IF_GT(LVar0, 0)
         EVT_WAIT(1)
@@ -414,7 +414,7 @@ EvtScript N(EVS_NpcIdle_Luigi_ReadingMail) = {
     EVT_WAIT(15)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Luigi_Idle)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Luigi_Run)
     EVT_CALL(NpcMoveTo, NPC_SELF, 37, -72, 16)
     EVT_CALL(InterpPlayerYaw, 90, 0)
@@ -422,7 +422,7 @@ EvtScript N(EVS_NpcIdle_Luigi_ReadingMail) = {
     EVT_CALL(NpcMoveTo, NPC_SELF, 42, -6, 10)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Luigi_Idle)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -607,7 +607,7 @@ NpcData N(NpcData_Luigi_0) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Luigi_0),
     .settings = &N(NpcSettings_Luigi),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = LUIGI_ANIMS,
     .tattle = MSG_NpcTattle_Luigi,
@@ -619,7 +619,7 @@ NpcData N(NpcData_Luigi_1) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Luigi_1),
     .settings = &N(NpcSettings_Luigi),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = LUIGI_ANIMS,
     .tattle = MSG_NpcTattle_Luigi,
@@ -695,7 +695,7 @@ EvtScript N(EVS_NpcHit_ShyGuy) = {
     EVT_SET(GF_KMR20_ChasedOffShyGuy, TRUE)
     EVT_CALL(SetNpcVar, NPC_Luigi_1, 0, 1)
     EVT_WAIT(2)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_ShyGuy)))
     EVT_RETURN
     EVT_END
@@ -726,7 +726,7 @@ NpcData N(NpcData_ShyGuy) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_ShyGuy),
     .settings = &N(NpcSettings_ShyGuy_Stationary),
-    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_10000000,
+    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_PARTNER,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };

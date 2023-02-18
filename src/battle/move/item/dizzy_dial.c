@@ -1,9 +1,12 @@
-#include "dizzy_dial.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "camera.h"
+
+#define NAMESPACE battle_item_dizzy_dial
 
 static s32 D_802A1CD0;
 
-#include "ItemRefund.inc.c"
+#include "battle/common/move/ItemRefund.inc.c"
 
 void func_802A123C_727B4C(void) {
     func_80138D88(0, 0, 0x140, 0xF0, 160.0f);
@@ -43,10 +46,10 @@ API_CALLABLE(N(func_802A1270_727B80)) {
     return ApiStatus_BLOCK;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x0000009A)
+EvtScript N(EVS_UseItem) = {
+    EVT_SET_CONST(LVarA, ITEM_DIZZY_DIAL)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)

@@ -10,9 +10,6 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
-#ifdef _DEAD_H_
-#include "dead_structs.h"
-#endif
 
 f32 N(FlyingAI_JumpVels)[] = {
     4.5, 3.5, 2.6, 2.0, 1.5, 20.0,
@@ -305,7 +302,7 @@ void N(FlyingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
         enemy->unk_10.x = npc->pos.x;
         enemy->unk_10.y = npc->pos.y;
         enemy->unk_10.z = npc->pos.z;
-        enemy->unk_07 = 1;
+        enemy->hitboxIsActive = TRUE;
     }
 }
 
@@ -341,7 +338,7 @@ void N(FlyingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     if (npc->jumpVelocity >= 0.0) {
         npc->pos.y += npc->jumpVelocity;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
-        enemy->unk_07 = 0;
+        enemy->hitboxIsActive = FALSE;
         if (!(npc->flags & NPC_FLAG_8)) {
             posX = npc->pos.x;
             posY = npc->pos.y;
@@ -435,11 +432,7 @@ void N(FlyingAI_Init)(Npc* npc, Enemy* enemy, Evt* script, MobileAISettings* aiS
 }
 
 API_CALLABLE(N(FlyingAI_Main)) {
-    #ifdef _DEAD_H_
-    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
-    #else
     Enemy* enemy = script->owner1.enemy;
-    #endif
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;

@@ -192,13 +192,22 @@ typedef struct NpcHistoryPoint {
     /* 0x04 */ Vec3f pos;
 } NpcHistoryPoint; // size = 0x10
 
+typedef struct FollowAnims {
+    /* 0x00 */ AnimID walk;
+    /* 0x04 */ AnimID jump;
+    /* 0x08 */ AnimID fall;
+    /* 0x0C */ AnimID land;
+    /* 0x10 */ AnimID idle;
+    /* 0x14 */ AnimID run;
+} FollowAnims; // size = 0x18
+
 typedef struct NpcFollowData {
     /* 0x000 */ NpcHistoryPoint moveHistory[40];
     /* 0x280 */ s32 lastPointIdx;
     /* 0x284 */ s32 targetPointIdx;
     /* 0x288 */ s32 followState;
     /* 0x28C */ s32 targetNpcID;
-    /* 0x290 */ s32* animIDs;
+    /* 0x290 */ FollowAnims* anims;
     /* 0x294 */ f32 walkSpeed;
     /* 0x298 */ f32 runSpeed;
     /* 0x29C */ f32 idleRadius;

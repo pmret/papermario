@@ -214,7 +214,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
     EVT_END_IF
     EVT_CALL(N(func_80241E24_97F8F4))
     EVT_WAIT(5)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
     EVT_WAIT(1)
     EVT_CALL(N(DestroyAmbushWorker))
@@ -261,7 +261,7 @@ EvtScript N(EVS_NpcInit_StoneChomp) = {
     EVT_END_IF
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_StoneChomp)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_StoneChomp_Override)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
     EVT_END
@@ -287,7 +287,7 @@ NpcData N(NpcData_StoneChomp) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_StoneChomp),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .drops = STONE_CHOMP_DROPS,
     .animations = STONE_CHOMP_ANIMS,
 };

@@ -312,7 +312,7 @@ EvtScript N(EVS_Lakilulu_FlyAway) = {
     EVT_THREAD
         EVT_CALL(N(PlayLakiluluFlightSounds), 55)
     EVT_END_THREAD
-    EVT_CALL(SetNpcFlagBits, NPC_Lakilulu, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Lakilulu, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_EXEC_GET_TID(N(EVS_Laklilulu_ManageYaw), LVar9)
     EVT_CALL(LoadPath, 55, EVT_PTR(N(FlightPath_LakiluluDeparts)), ARRAY_COUNT(N(FlightPath_LakiluluDeparts)), EASING_LINEAR)
     EVT_LABEL(20)
@@ -598,7 +598,7 @@ NpcData N(NpcData_Lakilester) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Lakilester),
     .settings = &N(NpcSettings_Lakilester),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_WorldLakilester_Idle,
@@ -626,7 +626,7 @@ NpcData N(NpcData_Lakilulu) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Lakilulu),
     .settings = &N(NpcSettings_Lakilester),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Lakilulu_Idle,
@@ -655,7 +655,7 @@ NpcData N(NpcData_Lakilulu_Spiny) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Lakilulu_Spiny),
     .settings = &N(NpcSettings_Lakilester),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Lakilulu_Idle,
@@ -695,7 +695,7 @@ NpcData N(NpcData_Lakitu_01) = {
     },
     .init = &N(EVS_NpcInit_Lakitu),
     .settings = &N(NpcSettings_Lakitu_SpinySpawner),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = LAKITU_DROPS,
     .animations = LAKITU_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -719,7 +719,7 @@ NpcData N(NpcData_Lakitu_02) = {
     },
     .init = &N(EVS_NpcInit_Lakitu),
     .settings = &N(NpcSettings_Lakitu_SpinySpawner),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = LAKITU_DROPS,
     .animations = LAKITU_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -743,7 +743,7 @@ NpcData N(NpcData_Spiny_01) = {
     },
     .init = &N(EVS_NpcInit_Spiny),
     .settings = &N(NpcSettings_SpawnedSpiny),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -767,7 +767,7 @@ NpcData N(NpcData_Spiny_02) = {
     },
     .init = &N(EVS_NpcInit_Spiny),
     .settings = &N(NpcSettings_SpawnedSpiny),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -791,7 +791,7 @@ NpcData N(NpcData_Spiny_03) = {
     },
     .init = &N(EVS_NpcInit_Spiny),
     .settings = &N(NpcSettings_SpawnedSpiny),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -815,7 +815,7 @@ NpcData N(NpcData_Spiny_04) = {
     },
     .init = &N(EVS_NpcInit_Spiny),
     .settings = &N(NpcSettings_SpawnedSpiny),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -839,7 +839,7 @@ NpcData N(NpcData_Spiny_05) = {
     },
     .init = &N(EVS_NpcInit_Spiny),
     .settings = &N(NpcSettings_SpawnedSpiny),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -863,7 +863,7 @@ NpcData N(NpcData_Spiny_06) = {
     },
     .init = &N(EVS_NpcInit_Spiny),
     .settings = &N(NpcSettings_SpawnedSpiny),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

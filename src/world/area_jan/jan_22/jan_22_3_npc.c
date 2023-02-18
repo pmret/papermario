@@ -66,7 +66,7 @@ EvtScript N(EVS_UseBasketElevator) = {
     EVT_WAIT(7)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
     EVT_CALL(GetPartnerInUse, LVar0)
     EVT_IF_EQ(LVar0, 0)
@@ -176,34 +176,34 @@ EvtScript N(EVS_GatherRavensNearRaphael) = {
 EvtScript N(EVS_Ravens_LeapIntoTree) = {
     EVT_CHILD_THREAD
         EVT_CALL(PlaySoundAtNpc, NPC_Raven_02, SOUND_2A6, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Raven_02, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Raven_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_Raven_02, ANIM_Raven_Flail)
         EVT_CALL(NpcJump0, NPC_Raven_02, 271, 325, -17, 30)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
         EVT_WAIT(3)
         EVT_CALL(PlaySoundAtNpc, NPC_Raven_05, SOUND_2A7, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Raven_05, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Raven_05, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_Raven_05, ANIM_Raven_Flail)
         EVT_CALL(NpcJump0, NPC_Raven_05, 400, 215, -23, 30)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
         EVT_WAIT(6)
         EVT_CALL(PlaySoundAtNpc, NPC_Raven_01, SOUND_2A6, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_Raven_01, ANIM_Raven_Flail)
         EVT_CALL(NpcJump0, NPC_Raven_01, 208, 335, -17, 30)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
         EVT_WAIT(9)
         EVT_CALL(PlaySoundAtNpc, NPC_Raven_03, SOUND_2A7, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Raven_03, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Raven_03, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_Raven_03, ANIM_Raven_Flail)
         EVT_CALL(NpcJump0, NPC_Raven_03, 327, 200, -8, 30)
     EVT_END_CHILD_THREAD
     EVT_WAIT(30)
     EVT_CALL(PlaySoundAtNpc, NPC_Raven_04, SOUND_2A6, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_Raven_04, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Raven_04, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_Raven_04, ANIM_Raven_Flail)
     EVT_CALL(NpcJump0, NPC_Raven_04, 222, 284, -13, 15)
     EVT_RETURN
@@ -220,7 +220,7 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
     EVT_CALL(N(SetCamera0Flag1000))
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10)
-    EVT_CALL(SetNpcFlagBits, NPC_RaphaelRaven, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_RaphaelRaven, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RaphaelRaven_Talk, ANIM_RaphaelRaven_Idle, 0, MSG_CH5_00C7)
     EVT_WAIT(10)
@@ -248,7 +248,7 @@ EvtScript N(EVS_NpcInit_RaphaelRaven) = {
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_RaphaelRaven)))
         EVT_CASE_EQ(STORY_CH5_RAFAEL_WAITING_FOR_MARIO)
             EVT_CALL(SetNpcPos, NPC_SELF, 125, 0, -40)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_RaphaelRaven)))
         EVT_CASE_DEFAULT
             EVT_CALL(RemoveNpc, NPC_SELF)
@@ -554,7 +554,7 @@ EvtScript N(EVS_ManageRavens) = {
                     EVT_CALL(SetNpcPos, NPC_RaphaelRaven, NPC_DISPOSE_LOCATION)
                     EVT_WAIT(40)
                     EVT_CALL(BindNpcInteract, NPC_Raven_01, EVT_PTR(N(EVS_NpcInteract_Raven)))
-                    EVT_CALL(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_100, FALSE)
+                    EVT_CALL(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
                     EVT_CALL(N(UnsetCamera0Flag1000))
                     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(1.5))
                     EVT_SET(GB_StoryProgress, STORY_CH5_ZIP_LINE_READY)
@@ -578,7 +578,7 @@ EvtScript N(EVS_NpcInit_Raven) = {
         EVT_CASE_RANGE(STORY_CH5_ZIP_LINE_READY, STORY_CH5_OPENED_ESCAPE_ROUTE)
             EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Raven)))
             EVT_CALL(SetNpcPos, NPC_Raven_01, 260, 205, -25)
-            EVT_CALL(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_100, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_GOTO(30)
         EVT_CASE_DEFAULT
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o346, COLLIDER_FLAGS_UPPER_MASK)
@@ -612,7 +612,7 @@ EvtScript N(EVS_Scene_RaphaelComingThrough) = {
     EVT_THREAD
         EVT_CALL(NpcMoveTo, NPC_RaphaelRaven, 125, -40, 0)
         EVT_CALL(SetNpcAnimation, NPC_RaphaelRaven, ANIM_RaphaelRaven_Idle)
-        EVT_CALL(SetNpcFlagBits, NPC_RaphaelRaven, NPC_FLAG_100, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_RaphaelRaven, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_CALL(InterpNpcYaw, NPC_RaphaelRaven, 270, 0)
     EVT_END_THREAD
     EVT_WAIT(15)
@@ -681,7 +681,7 @@ EvtScript N(D_8024511C_B8929C) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 150)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Run)
@@ -720,9 +720,9 @@ EvtScript N(EVS_NpcIdle_Kolorado_HeldCaptive) = {
                 EVT_END_IF
                 EVT_CALL(DisablePlayerInput, TRUE)
                 EVT_CALL(func_802D2C14, 1)
-                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_CALL(RemoveNpc, NPC_SpearGuy)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00C0, 0, 60)
                 EVT_CALL(InterpPlayerYaw, 270, 4)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
@@ -859,7 +859,7 @@ EvtScript N(EVS_NpcIdle_Kolorado_After) = {
                     EVT_GOTO(20)
                 EVT_END_IF
             EVT_END_THREAD
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
             EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
             EVT_CALL(NpcMoveTo, NPC_SELF, 190, 60, 0)
@@ -953,11 +953,11 @@ EvtScript N(EVS_NpcInteract_Kolorado_Before) = {
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00C4)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Run)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
     EVT_CALL(NpcMoveTo, NPC_SELF, 500, 0, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SetNpcPos, NPC_SELF, -300, 0, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 4)
@@ -997,7 +997,7 @@ EvtScript N(EVS_NpcHit_Kolorado_HeldCaptive) = {
 
 EvtScript N(EVS_NpcInit_Kolorado_HeldCaptive) = {
     EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_KOLORADO_ESCAPED_SPEAR_GUYS)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Fallen)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado_HeldCaptive)))
@@ -1047,7 +1047,7 @@ EvtScript N(EVS_SyncZiplineDummyNPC2) = {
 };
 
 EvtScript N(EVS_NpcInit_ZiplineDummy) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(0.3), 1, EVT_FLOAT(0.3))
     EVT_RETURN
     EVT_END
@@ -1064,10 +1064,10 @@ EvtScript N(EVS_NpcIdle_SpearGuy) = {
             EVT_SWITCH(LVar0)
                 EVT_CASE_RANGE(LVar3, LVar4)
                     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 0)
-                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_10000000, 0)
+                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 0)
                 EVT_CASE_DEFAULT
                     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 1)
-                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_10000000, 1)
+                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 1)
             EVT_END_SWITCH
             EVT_WAIT(1)
         EVT_END_LOOP
@@ -1134,7 +1134,7 @@ EvtScript N(EVS_NpcDefeat_SpearGuy) = {
                 EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
                 EVT_CALL(N(SetCamera0Flag1000))
                 EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-                EVT_CALL(SetNpcFlagBits, NPC_Kolorado_01, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_Kolorado_01, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_CALL(SetNpcAnimation, NPC_Kolorado_01, ANIM_Kolorado_Run)
                 EVT_CALL(SetNpcSpeed, NPC_Kolorado_01, EVT_FLOAT(2.5))
                 EVT_CALL(NpcMoveTo, NPC_Kolorado_01, LVar4, LVar2, 0)
@@ -1330,7 +1330,7 @@ EvtScript N(EVS_Scene_Misstar) = {
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMisstar_Talk, ANIM_WorldMisstar_Idle, 512, MSG_CH5_00D8)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_THREAD
         EVT_LOOP(25)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -1423,7 +1423,7 @@ NpcData N(NpcData_Kolorado)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Kolorado_HeldCaptive),
         .settings = &N(NpcSettings_Kolorado),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_SPIN,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -1434,7 +1434,7 @@ NpcData N(NpcData_Kolorado)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Kolorado_WaitingToExplore),
         .settings = &N(NpcSettings_Kolorado),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -1445,7 +1445,7 @@ NpcData N(NpcData_Kolorado)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_ZiplineDummy),
         .settings = &N(NpcSettings_Dummy),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -1456,7 +1456,7 @@ NpcData N(NpcData_Kolorado)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_ZiplineDummy),
         .settings = &N(NpcSettings_Dummy),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_200000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -1484,7 +1484,7 @@ NpcData N(NpcData_SpearGuy) = {
     },
     .init = &N(EVS_NpcInit_SpearGuy),
     .settings = &N(NpcSettings_SpearGuy_Patrol),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = SPEAR_GUY_ANIMS,
 };
@@ -1496,7 +1496,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_RaphaelRaven),
         .settings = &N(NpcSettings_RaphaelRaven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = RAPHAEL_RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RaphaelRaven,
@@ -1507,7 +1507,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Raven),
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenA,
@@ -1517,7 +1517,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
     },
@@ -1526,7 +1526,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenC,
@@ -1536,7 +1536,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenD,
@@ -1546,7 +1546,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenE,
@@ -1559,7 +1559,7 @@ NpcData N(NpcData_Misstar) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Misstar),
     .settings = &N(NpcSettings_StarSpirit),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = MISSTAR_ANIMS,
 };

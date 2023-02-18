@@ -40,9 +40,9 @@ EvtScript N(EVS_NpcInteract_BubbleFlower) = {
         EVT_ELSE
             EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH6_0061)
             EVT_SET(AF_FLO_BlowingBigBubble, TRUE)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_CALL(PlayerMoveTo, 555, 110, 20)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_CALL(InterpPlayerYaw, 90, 0)
             EVT_CALL(func_802CF56C, 2)
             EVT_WAIT(5)
@@ -84,7 +84,7 @@ NpcData N(NpcData_BubbleFlower) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_BubbleFlower),
     .settings = &N(NpcSettings_BubbleFlower),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE,
     .drops = NO_DROPS,
     .animations = BUBULB_PINK_ANIMS,
     .tattle = MSG_NpcTattle_BubblePlant,
@@ -107,7 +107,7 @@ NpcData N(NpcData_Bzzap) = {
         }
     },
     .settings = &N(NpcSettings_Bzzap),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = BZZAP_DROPS,
     .animations = BZZAP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

@@ -227,10 +227,10 @@ EvtScript N(EVS_FuzzyThief_AvoidCapture) = {
         EVT_IF_NE(LVar0, 0)
             EVT_LABEL(1)
             EVT_CALL(N(ChooseSafeJumpLocation), LVarF, LVarE)
-            EVT_CALL(SetNpcFlagBits, NPC_FuzzyThief, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_FuzzyThief, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_331, 0)
             EVT_CALL(NpcJump0, NPC_FuzzyThief, LVarA, 0, LVarB, LVarC)
-            EVT_CALL(SetNpcFlagBits, NPC_FuzzyThief, NPC_FLAG_100, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_FuzzyThief, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_CALL(N(IsPlayerOrKoopaNearby), LVarF, LVarE)
             EVT_SET(MV_IsPlayerNearbyThief, LVar0)
             EVT_IF_NE(LVar0, 0)
@@ -338,7 +338,7 @@ EvtScript N(EVS_NpcIdle_Koopa_01_Crisis) = {
         EVT_END_IF
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_THREAD
-            EVT_CALL(SetNpcFlagBits, NPC_FuzzyThief, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_FuzzyThief, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_CALL(GetNpcPos, NPC_KoopaShell_01, LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcAnimation, NPC_FuzzyThief, ANIM_Fuzzy_Hurt)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_331, 0)
@@ -408,7 +408,7 @@ EvtScript N(EVS_NpcIdle_Koopa_01_Crisis) = {
         EVT_CALL(NpcJump0, NPC_KoopaShell_01, LVar0, LVar1, LVar2, 30)
         EVT_CALL(SetNpcPos, NPC_KoopaShell_01, NPC_DISPOSE_LOCATION)
         EVT_CALL(SetNpcSprite, NPC_Koopa_01, ANIM_Koopa_Idle)
-        EVT_CALL(SetNpcFlagBits, NPC_Koopa_01, NPC_FLAG_100, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Koopa_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_Koopa_01, ANIM_Koopa_Still)
         EVT_WAIT(4)
         EVT_CALL(EnableNpcBlur, NPC_KoopaShell_01, TRUE)
@@ -448,7 +448,7 @@ EvtScript N(EVS_NpcInit_Koopa_01_Crisis) = {
     EVT_IF_EQ(GF_NOK02_RecoveredShellA, TRUE)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcSprite, NPC_SELF, ANIM_KoopaWithoutShell_CryIdle)
     EVT_RETURN
     EVT_END

@@ -21,7 +21,7 @@ NpcData N(NpcData_PutridPiranha)[] = {
             }
         },
         .settings = &N(NpcSettings_PutridPiranha),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = PUTRID_PIRANHA_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

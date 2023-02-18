@@ -1,14 +1,16 @@
-#include "coconut.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "entity.h"
 #include "ld_addrs.h"
-#include "battle/move/item/coconut.png.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_coconut
 
-#include "UseItem.inc.c"
+#include "battle/common/move/ItemRefund.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
 static s32 _pad = 0;
 
+#include "battle/move/item/coconut.png.h"
 #include "battle/move/item/coconut.png.inc.c"
 #include "battle/move/item/coconut.pal.inc.c"
 
@@ -44,7 +46,7 @@ Gfx N(displayList)[] = {
 
 EntityModelScript N(modelCommandList) = STANDARD_ENTITY_MODEL_SCRIPT(N(displayList), RENDER_MODE_ALPHATEST);
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_COCONUT)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)

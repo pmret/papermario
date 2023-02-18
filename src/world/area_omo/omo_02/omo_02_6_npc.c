@@ -220,7 +220,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Crowd) = {
                 EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
                 EVT_WAIT(2)
             EVT_CASE_EQ(CROWD_STATE_RUN_AWAY)
-                EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100, 1)
+                EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_WORLD_COLLISION, 1)
                 EVT_CALL(GetSelfNpcID, LVar0)
                 EVT_USE_BUF(EVT_PTR(N(CrowdFleeScripts)))
                 EVT_LOOP(LVar0)
@@ -289,7 +289,7 @@ NpcData N(NpcData_ShyGuy_Loner) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_ShyGuy_Loner),
     .settings = &N(NpcSettings_ShyGuy_Stationary),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -415,7 +415,7 @@ NpcData N(NpcData_SpyGuy)[] = {
             }
         },
         .settings = &N(NpcSettings_SpyGuy),
-        .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = SPY_GUY_DROPS,
         .animations = SPY_GUY_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,

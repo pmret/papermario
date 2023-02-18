@@ -1,9 +1,6 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
-#ifdef _DEAD_H_
-#include "dead_structs.h"
-#endif
 
 // This AI is used by:
 // - Lava Bubble
@@ -95,11 +92,7 @@ void N(FlyingNoAttackAI_20)(Evt* script, MobileAISettings* aiSettings, EnemyDete
 }
 
 API_CALLABLE(N(FlyingNoAttackAI_Main)) {
-    #ifdef _DEAD_H_
-    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
-    #else
     Enemy* enemy = script->owner1.enemy;
-    #endif
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;

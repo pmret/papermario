@@ -47,7 +47,7 @@ EvtScript N(EVS_Interact_SwitchBush) = {
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcPos, NPC_BlueGoombaBro, -377, -8, 81)
-    EVT_CALL(SetNpcFlagBits, NPC_BlueGoombaBro, NPC_FLAG_1000000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_BlueGoombaBro, NPC_FLAG_HAS_NO_SPRITE, TRUE)
     EVT_EXEC_GET_TID(N(EVS_TetherSwitchToBlueGoomba), LVarB)
     EVT_CALL(SetNpcJumpscale, NPC_BlueGoombaBro, EVT_FLOAT(2.0))
     EVT_CALL(NpcJump0, NPC_BlueGoombaBro, -445, 0, 92, 15)

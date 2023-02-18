@@ -186,12 +186,12 @@ EvtScript N(EVS_NpcInteract_Herringway) = {
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Walk)
             EVT_CALL(NpcMoveTo, NPC_SELF, -235, -355, 0)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Idle)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_WAIT(20)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D1)
             EVT_WAIT(15)
@@ -458,7 +458,7 @@ EvtScript N(EVS_NpcInit_Herringway) = {
         EVT_CASE_LT(STORY_CH7_SPOKE_WITH_HERRINGWAY)
             EVT_CALL(SetNpcPos, NPC_SELF, -110, 150, -323)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_4, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
             EVT_CALL(SetNpcPos, NPC_SELF, -110, 150, -323)
@@ -548,7 +548,7 @@ NpcData N(NpcData_Townsfolk)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_PenguinPatrol),
         .settings = &N(NpcSettings_Penguin),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_PATROL_ANIMS,
         .tattle = MSG_NpcTattle_SAM_Patrol,
@@ -592,7 +592,7 @@ NpcData N(NpcData_Townsfolk)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Penguin_05),
         .settings = &N(NpcSettings_Penguin),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_HerringwayLoiterer,
@@ -615,7 +615,7 @@ NpcData N(NpcData_Townsfolk)[] = {
         },
         .init = &N(EVS_NpcInit_Penguin_06),
         .settings = &N(NpcSettings_Penguin_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_TimidPenguin,
@@ -641,7 +641,7 @@ NpcData N(NpcData_PondPenginsBefore)[] = {
         },
         .init = &N(EVS_NpcInit_Penguin_02),
         .settings = &N(NpcSettings_Penguin_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_SnowMaster,
@@ -664,7 +664,7 @@ NpcData N(NpcData_PondPenginsBefore)[] = {
         },
         .init = &N(EVS_NpcInit_Penguin_03),
         .settings = &N(NpcSettings_Penguin_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_Skater,
@@ -690,7 +690,7 @@ NpcData N(NpcData_PondPenginsAfter)[] = {
         },
         .init = &N(EVS_NpcInit_Penguin_02),
         .settings = &N(NpcSettings_Penguin_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_SnowMaster,
@@ -713,7 +713,7 @@ NpcData N(NpcData_PondPenginsAfter)[] = {
         },
         .init = &N(EVS_NpcInit_Penguin_03),
         .settings = &N(NpcSettings_Penguin_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_SAM_Skater,
@@ -727,7 +727,7 @@ NpcData N(NpcData_Tourists)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Toadette_01),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidA,
@@ -738,7 +738,7 @@ NpcData N(NpcData_Tourists)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Toadette_02),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidB,
@@ -749,7 +749,7 @@ NpcData N(NpcData_Tourists)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Toadette_03),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = TOADETTE_PINK_ANIMS,
         .tattle = MSG_NpcTattle_TravelingMaidC,
@@ -958,11 +958,11 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_CALL(SetNpcPos, NPC_Kolorado, 120, 0, 70)
     EVT_CALL(SetNpcPos, NPC_Archeologist_01, 120, 0, 70)
     EVT_CALL(SetNpcPos, NPC_Archeologist_02, 120, 0, 70)
-    EVT_CALL(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Archeologist_01, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Archeologist_02, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Archeologist_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Archeologist_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_GRAVITY, FALSE)
@@ -988,7 +988,7 @@ NpcData N(NpcData_Epilogue)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Kolorado),
         .settings = &N(NpcSettings_Kolorado),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
     },
@@ -998,7 +998,7 @@ NpcData N(NpcData_Epilogue)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Archeologist_01),
         .settings = &N(NpcSettings_Kolorado),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = ARCHEOLOGIST_ANIMS,
     },
@@ -1008,7 +1008,7 @@ NpcData N(NpcData_Epilogue)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Archeologist_01),
         .settings = &N(NpcSettings_Kolorado),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = ARCHEOLOGIST_ANIMS,
     },
@@ -1018,7 +1018,7 @@ NpcData N(NpcData_Epilogue)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Archeologist_01),
         .settings = &N(NpcSettings_Kooper),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
@@ -1045,7 +1045,7 @@ NpcData N(NpcData_Epilogue)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Archeologist_01),
         .settings = &N(NpcSettings_Kooper),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldParakarry_Idle,
@@ -1075,7 +1075,7 @@ NpcData N(NpcData_ChuckQuizmo) = {
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_SAM, QUIZ_COUNT_SAM, QUIZ_MAP_SAM_11 }},
     .settings = &N(NpcSettings_ChuckQuizmo),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = NO_DROPS,
     .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,

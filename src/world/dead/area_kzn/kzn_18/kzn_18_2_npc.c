@@ -149,7 +149,7 @@ NpcData N(NpcData_Kolorado) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kolorado),
     .settings = &N(NpcSettings_Kolorado),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
@@ -161,7 +161,7 @@ NpcData N(NpcData_Piranha) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Piranha),
     .settings = &N(NpcSettings_PutridPiranhaSentinel),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_200000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = PIRANHA_NO_DROPS,
     .animations = PIRANHA_SENTINEL_ANIMS,
 };

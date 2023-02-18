@@ -17,9 +17,9 @@ API_CALLABLE(N(func_80240118_90CD58)) {
         script->functionTemp[1] = 20;
     }
     if (script->functionTemp[1] & 1) {
-        npc->flags &= ~NPC_FLAG_2;
+        npc->flags &= ~NPC_FLAG_INVISIBLE;
     } else {
-        npc->flags |= NPC_FLAG_2;
+        npc->flags |= NPC_FLAG_INVISIBLE;
     }
     if (script->functionTemp[1] == 15) {
         sfx_play_sound_at_position(SOUND_DEATH, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z);
@@ -61,7 +61,7 @@ NpcData N(NpcData_MontyMole_GroundAmbush)[] = {
             }
         },
         .settings = &N(NpcSettings_MontyMole_GroundAmbush),
-        .flags = ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -83,7 +83,7 @@ NpcData N(NpcData_MontyMole_GroundAmbush)[] = {
             }
         },
         .settings = &N(NpcSettings_MontyMole_GroundAmbush_Hole),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
     },
@@ -107,7 +107,7 @@ NpcData N(NpcData_MontyMole_WallAmbush)[] = {
             }
         },
         .settings = &N(NpcSettings_MontyMole_WallAmbush),
-        .flags = ENEMY_FLAG_400,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -129,7 +129,7 @@ NpcData N(NpcData_MontyMole_WallAmbush)[] = {
             }
         },
         .settings = &N(NpcSettings_MontyMole_WallAmbush_Hole),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
     },
@@ -341,7 +341,7 @@ NpcData N(NpcData_Whacka)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Whacka_01),
         .settings = &N(NpcSettings_Whacka),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = WHACKA_ANIMS,
         .tattle = MSG_NpcTattle_Whacka,
@@ -352,7 +352,7 @@ NpcData N(NpcData_Whacka)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Whacka_02),
         .settings = &N(NpcSettings_Whacka),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_4000 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = WHACKA_ANIMS,
         .tattle = MSG_NpcTattle_Whacka,

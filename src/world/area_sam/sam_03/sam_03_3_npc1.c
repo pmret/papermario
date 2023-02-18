@@ -110,7 +110,7 @@ EvtScript N(EVS_NpcDefeat_JrTroopa) = {
             EVT_CALL(SetNpcPos, NPC_JrTroopa_Hitbox, LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcCollisionSize, NPC_JrTroopa, 26, 24)
             EVT_CALL(SetNpcCollisionSize, NPC_JrTroopa_Hitbox, 26, 24)
-            EVT_CALL(SetNpcFlagBits, NPC_JrTroopa_Hitbox, NPC_FLAG_2, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_JrTroopa_Hitbox, NPC_FLAG_INVISIBLE, TRUE)
             EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_JrTroopa)))
             EVT_CALL(BindNpcHit, NPC_JrTroopa_Hitbox, EVT_PTR(N(EVS_NpcHit_JrTroopaHitbox)))
             EVT_EXEC(N(EVS_SetupMusic))
@@ -151,7 +151,7 @@ NpcData N(NpcData_JrTroopa)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_JrTroopa),
         .settings = &N(NpcSettings_JrTroopa),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = JR_TROOPA_ANIMS,
         .tattle = MSG_NpcTattle_JrTroopa,
@@ -162,7 +162,7 @@ NpcData N(NpcData_JrTroopa)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_JrTroopaHitbox),
         .settings = &N(NpcSettings_JrTroopa),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_SPIN,
         .drops = NO_DROPS,
         .animations = JR_TROOPA_ANIMS,
         .tattle = MSG_NpcTattle_JrTroopa,

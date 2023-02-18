@@ -118,7 +118,7 @@ void N(gfx_build_set_spotlight_alpha)(void) {
 }
 
 EvtScript N(EVS_MakeSpiritAppear) = {
-    EVT_CALL(SetNpcFlagBits, NPC_PenguinSkater1, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PenguinSkater1, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_CALL(GetNpcPos, LVarA, LVar2, LVar3, LVar4)
     EVT_SUB(LVar3, 120)
     EVT_SET(LVar5, LVar3)
@@ -161,7 +161,7 @@ EvtScript N(EVS_ParadePhase_StarSpirits) = {
 };
 
 EvtScript N(EVS_SkatingPenguin1) = {
-    EVT_CALL(SetNpcFlagBits, NPC_PenguinSkater1, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PenguinSkater1, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_CHILD_THREAD
         EVT_LOOP(0)
             EVT_CALL(SetNpcAnimation, NPC_PenguinSkater1, ANIM_ParadeIceShow_Violin_SkateKickLeft)
@@ -182,7 +182,7 @@ EvtScript N(EVS_SkatingPenguin1) = {
 };
 
 EvtScript N(EVS_SkatingPenguin2) = {
-    EVT_CALL(SetNpcFlagBits, NPC_PenguinSkater2, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PenguinSkater2, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_CHILD_THREAD
         EVT_LOOP(0)
             EVT_CALL(SetNpcAnimation, NPC_PenguinSkater2, ANIM_ParadeIceShow_Violin_SkateKickLeft)

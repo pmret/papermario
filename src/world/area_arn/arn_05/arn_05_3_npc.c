@@ -185,7 +185,7 @@ EvtScript N(EVS_NpcInit_Boo_03) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Boo_03)))
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH3_SAW_TUBBA_EAT_BOO)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CASE_LT(STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
             EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_CASE_LT(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
@@ -249,7 +249,7 @@ NpcData N(NpcData_Boo_01)[] = {
         },
         .init = &N(EVS_NpcInit_Boo_01),
         .settings = &N(NpcSettings_Boo_Patrol),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooD,
@@ -260,7 +260,7 @@ NpcData N(NpcData_Boo_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Boo_02),
         .settings = &N(NpcSettings_Boo),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooE,
@@ -271,7 +271,7 @@ NpcData N(NpcData_Boo_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Boo_03),
         .settings = &N(NpcSettings_Boo),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooF,
@@ -282,7 +282,7 @@ NpcData N(NpcData_Boo_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Boo_04),
         .settings = &N(NpcSettings_Boo),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooG,
@@ -307,7 +307,7 @@ NpcData N(NpcData_Boo_01)[] = {
         },
         .init = &N(EVS_NpcInit_Boo_05),
         .settings = &N(NpcSettings_Boo_Patrol),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooH,
@@ -640,7 +640,7 @@ NpcData N(NpcData_Tubba) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Tubba),
     .settings = &N(NpcSettings_TubbaBlubba),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = TUBBA_ANIMS,
     .extraAnimations = N(ExtraAnims_Tubba),
@@ -705,7 +705,7 @@ NpcData N(NpcData_Boo_06)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Boo_06),
         .settings = &N(NpcSettings_Boo),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
     },
@@ -715,7 +715,7 @@ NpcData N(NpcData_Boo_06)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Boo_07),
         .settings = &N(NpcSettings_Boo),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
     },
@@ -725,7 +725,7 @@ NpcData N(NpcData_Boo_06)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Boo_08),
         .settings = &N(NpcSettings_Boo),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
     },
@@ -735,7 +735,7 @@ NpcData N(NpcData_Boo_06)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Boo_09),
         .settings = &N(NpcSettings_Boo),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
     },

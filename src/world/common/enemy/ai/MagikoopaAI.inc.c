@@ -8,7 +8,7 @@ typedef struct MagikoopaTeleportAnim {
     u8 alpha;
 } MagikoopaTeleportAnim;
 
-#define ENEMY_FLAG_COMBINATION (ENEMY_FLAG_10000000 | ENEMY_FLAG_8000000 | \
+#define ENEMY_FLAG_COMBINATION (ENEMY_FLAG_IGNORE_PARTNER | ENEMY_FLAG_CANT_INTERACT | \
     ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_100000)
 
 extern MagikoopaTeleportAnim N(MagikoopaAI_TeleportAnim)[];
@@ -22,7 +22,7 @@ void N(MagikoopaAI_00)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     npc->duration--;
     if (npc->duration <= 0) {
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
-        npc->flags &= ~NPC_FLAG_2;
+        npc->flags &= ~NPC_FLAG_INVISIBLE;
         npc->duration = 0;
         script->AI_TEMP_STATE = 1;
     }
@@ -46,7 +46,7 @@ void N(MagikoopaAI_01)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
         npc->scale.x = 1.0f;
         npc->scale.y = 1.0f;
         npc->scale.z = 1.0f;
-        npc->flags |= NPC_FLAG_2;
+        npc->flags |= NPC_FLAG_INVISIBLE;
         script->AI_TEMP_STATE = 5;
     }
 }
@@ -81,7 +81,7 @@ void N(MagikoopaAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     enemy->varTable[0] = 1;
     npc->currentAnim = enemy->animList[8];
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-    npc->flags &= ~NPC_FLAG_2;
+    npc->flags &= ~NPC_FLAG_INVISIBLE;
     npc->scale.x = 0.1f;
     npc->scale.y = 0.1f;
     npc->scale.z = 0.1f;
@@ -252,7 +252,7 @@ API_CALLABLE(N(MagikoopaAI_Main)) {
         npc->currentAnim = enemy->animList[0];
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->flags |= NPC_FLAG_200000;
-        enemy->flags |= ENEMY_FLAG_200000;
+        enemy->flags |= ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN;
         npc->duration = 0;
         if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
             enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;

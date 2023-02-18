@@ -27,7 +27,7 @@ EvtScript N(EVS_NpcDefeat_Bzzap) = {
             EVT_THREAD
                 EVT_WAIT(25)
                 EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
             EVT_END_THREAD
             EVT_CALL(DoNpcDefeat)
         EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
@@ -74,7 +74,7 @@ EvtScript N(EVS_NpcDefeat_Dayzee) = {
             EVT_THREAD
                 EVT_WAIT(25)
                 EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
             EVT_END_THREAD
             EVT_CALL(DoNpcDefeat)
         EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
@@ -109,7 +109,7 @@ NpcData N(NpcData_Bzzap) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Bzzap),
     .settings = &N(NpcSettings_Dummy),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = BZZAP_ANIMS,
 };
@@ -120,7 +120,7 @@ NpcData N(NpcData_Dayzee) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Dayzee),
     .settings = &N(NpcSettings_Dummy),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

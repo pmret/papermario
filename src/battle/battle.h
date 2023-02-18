@@ -298,7 +298,7 @@ typedef struct BattleMoveEntry {
     .romStart   = name##_ROM_START, \
     .romEnd     = name##_ROM_END, \
     .vramStart  = name##_VRAM, \
-    .mainScript = &battle_item_##name##_##main \
+    .mainScript = &battle_item_##name##_##EVS_UseItem \
 }
 
 typedef struct ActorBlueprint {

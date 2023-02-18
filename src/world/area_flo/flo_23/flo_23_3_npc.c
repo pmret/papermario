@@ -163,7 +163,7 @@ NpcData N(NpcData_GateFlower) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_GateFlower),
     .settings = &N(NpcSettings_GateFlower),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = GATE_FLOWER_BLUE_ANIMS,
     .tattle = MSG_NpcTattle_BlueGateFlower,
@@ -186,7 +186,7 @@ NpcData N(NpcData_Spiny_01) = {
         }
     },
     .settings = &N(NpcSettings_Spiny),
-    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
 };
@@ -208,7 +208,7 @@ NpcData N(NpcData_Spiny_02) = {
         }
     },
     .settings = &N(NpcSettings_Spiny),
-    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
 };

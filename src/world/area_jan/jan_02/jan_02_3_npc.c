@@ -30,10 +30,10 @@ EvtScript N(EVS_Scene_GetJadeRaven) = {
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_VillageLeader_Talk, ANIM_VillageLeader_Idle, 0, MSG_CH5_0024)
     EVT_END_IF
     EVT_WAIT(5)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_VillageLeader_Walk)
     EVT_CALL(NpcMoveTo, NPC_SELF, 8, -140, 25)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_VillageLeader_Idle)
     EVT_WAIT(5)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 25, 15, -150)
@@ -46,7 +46,7 @@ EvtScript N(EVS_Scene_GetJadeRaven) = {
     EVT_CALL(PlayerMoveTo, 58, -140, 25)
     EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
     EVT_CALL(func_802D2C14, 1)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_WAIT(30)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_VillageLeader_Rummage)
     EVT_WAIT(30)
@@ -77,7 +77,7 @@ EvtScript N(EVS_Scene_GetJadeRaven) = {
     EVT_ELSE
         EVT_CALL(N(SwitchToPartner), PARTNER_SUSHIE)
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, -1, -1, 5, MSG_CH5_0029)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_WAIT(15)
         EVT_CALL(GetNpcPos, NPC_PARTNER, LVar2, LVar3, LVar4)
         EVT_CALL(MakeLerp, LVar2, 85, 10, EASING_LINEAR)
@@ -395,7 +395,7 @@ NpcData N(NpcData_Townsfolk)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_VillageLeader),
         .settings = &N(NpcSettings_Yoshi),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = YOSHI_LEADER_ANIMS,
         .tattle = MSG_NpcTattle_VillageLeader,
@@ -406,7 +406,7 @@ NpcData N(NpcData_Townsfolk)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Councillor),
         .settings = &N(NpcSettings_Yoshi),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = YOSHI_COUNCILLOR_ANIMS,
         .extraAnimations = N(ExtraAnims_Councillor),
@@ -432,7 +432,7 @@ NpcData N(NpcData_Townsfolk)[] = {
         },
         .init = &N(EVS_NpcInit_Yoshi_01),
         .settings = &N(NpcSettings_Yoshi_Patrol),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = YOSHI_RED_ANIMS,
         .tattle = MSG_NpcTattle_EntranceYoshi,
@@ -458,7 +458,7 @@ NpcData N(NpcData_Townsfolk)[] = {
         },
         .init = &N(EVS_NpcInit_Yoshi_02),
         .settings = &N(NpcSettings_Yoshi_Patrol),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = YOSHI_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_BlueYoshi,
@@ -483,7 +483,7 @@ NpcData N(NpcData_Townsfolk)[] = {
         },
         .init = &N(EVS_NpcInit_Yoshi_03),
         .settings = &N(NpcSettings_Yoshi_Patrol),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = YOSHI_PURPLE_ANIMS,
         .tattle = MSG_NpcTattle_LikeableYoshi,
@@ -497,7 +497,7 @@ NpcData N(NpcData_ChuckQuizmo) = {
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_JAN, QUIZ_COUNT_JAN, QUIZ_MAP_JAN_02 }},
     .settings = &N(NpcSettings_ChuckQuizmo),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = NO_DROPS,
     .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,

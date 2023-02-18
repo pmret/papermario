@@ -9,11 +9,7 @@
 #include "world/common/enemy/ai/TackleAI.inc.c"
 
 API_CALLABLE(N(SpinyAI_Main)) {
-    #ifdef _DEAD_H_
-    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
-    #else
     Enemy* enemy = script->owner1.enemy;
-    #endif
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;
@@ -50,7 +46,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
         npc->duration = 0;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
-        enemy->flags |= ENEMY_FLAG_200000;
+        enemy->flags |= ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN;
         npc->flags &= ~NPC_FLAG_GRAVITY;
         npc->flags |= NPC_FLAG_8;
         enemy->varTable[10] = 0;
@@ -132,7 +128,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
             npc->pos.z = npc2->pos.z + 1.0;
             npc->rotation.y = 0.0f;
             npc->flags |= NPC_FLAG_8;
-            npc->flags &= ~NPC_FLAG_2;
+            npc->flags &= ~NPC_FLAG_INVISIBLE;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->renderYaw = 0.0f;
             npc->currentAnim = ANIM_Spiny_Anim18;
@@ -189,7 +185,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
                         npc->flags &= ~NPC_FLAG_GRAVITY;
                         npc->flags |= NPC_FLAG_8;
                     }
-                    npc->flags |= NPC_FLAG_40000;
+                    npc->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
                     npc->flags &= ~NPC_FLAG_JUMPING;
                     npc->jumpVelocity = 0.0f;
                     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
@@ -205,7 +201,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
         case 103:
             npc->duration--;
             if (npc->duration <= 0) {
-                npc->flags &= ~NPC_FLAG_40000;
+                npc->flags &= ~NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
                 npc->currentAnim = ANIM_Spiny_Anim01;
                 script->AI_TEMP_STATE = 0;
             }
@@ -215,7 +211,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
             npc->pos.x = NPC_DISPOSE_POS_X;
             npc->pos.y = NPC_DISPOSE_POS_Y;
             npc->pos.z = NPC_DISPOSE_POS_Z;
-            npc->flags |= NPC_FLAG_8 | NPC_FLAG_2;
+            npc->flags |= NPC_FLAG_8 | NPC_FLAG_INVISIBLE;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             script->AI_TEMP_STATE = 111;
         case 111:

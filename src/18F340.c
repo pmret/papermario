@@ -33,7 +33,7 @@ void func_80260A60(void) {
 
     if (battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE) {
         actorPart->idleAnimations = bPeachIdleAnims;
-        set_animation(0, 0, 0xA0002);
+        set_animation(0, 0, ANIM_Peach_A0002);
     } else if (!battleStatus->outtaSightActive) {
         actorPart->idleAnimations = bMarioIdleAnims;
     }
@@ -63,7 +63,7 @@ ApiStatus activate_defend_command(Evt* script, s32 isInitialCall) {
     deduct_current_move_fp();
     gBattleStatus.flags1 |= BS_FLAGS1_PLAYER_DEFENDING;
     actorPart->idleAnimations = bMarioDefendAnims;
-    set_animation(0, 0, 0x10014);
+    set_animation(0, 0, ANIM_Mario_Crouch);
     return ApiStatus_DONE2;
 }
 
@@ -1568,7 +1568,7 @@ EvtScript MerleeRunOut = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(15)
-    EVT_CALL(ShowMessageBox, 3, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_03, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
     EVT_END
@@ -1585,7 +1585,7 @@ EvtScript MerleeAttackBonus = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(10)
     EVT_CALL(CreateNpc, -10, ANIM_BattleMerlee_Gather)
-    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_CALL(SetNpcRenderMode, -10, 34)
     EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, 0, 65, 20)
     EVT_CHILD_THREAD
@@ -1634,7 +1634,7 @@ EvtScript MerleeDefenseBonus = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(10)
     EVT_CALL(CreateNpc, -10, ANIM_BattleMerlee_Gather)
-    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_CALL(SetNpcRenderMode, -10, 34)
     EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, 0, 65, 20)
     EVT_CHILD_THREAD
@@ -1688,7 +1688,7 @@ EvtScript MerleeExpBonus = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(10)
     EVT_CALL(CreateNpc, -10, ANIM_BattleMerlee_Gather)
-    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_CALL(SetNpcRenderMode, -10, 34)
     EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, 0, 65, 20)
     EVT_CHILD_THREAD

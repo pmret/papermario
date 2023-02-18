@@ -145,7 +145,7 @@ EvtScript N(EVS_TetherItemToNpcWithOffset) = {
 };
 
 EvtScript N(EVS_BooSpookAndVanish) = {
-    EVT_CALL(SetNpcFlagBits, LVarA, NPC_FLAG_40000, FALSE)
+    EVT_CALL(SetNpcFlagBits, LVarA, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, FALSE)
     EVT_CALL(NpcFacePlayer, LVarA, 0)
     EVT_WAIT(5)
     EVT_CALL(SetNpcAnimation, LVarA, ANIM_Boo_Spook)
@@ -380,7 +380,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
         EVT_ELSE
             EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(2.0), 0, 0, 0, EVT_FLOAT(450.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
             EVT_WAIT(30)
-            EVT_CALL(SetNpcFlagBits, MV_ItemCarrierNpc, NPC_FLAG_40000, FALSE)
+            EVT_CALL(SetNpcFlagBits, MV_ItemCarrierNpc, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, FALSE)
             EVT_CALL(GetNpcPos, MV_ItemCarrierNpc, LVar3, LVar4, LVar5)
             EVT_CALL(GetAngleBetweenNPCs, MV_ItemCarrierNpc, NPC_Boo_01, LVar0)
             EVT_CALL(InterpNpcYaw, MV_ItemCarrierNpc, LVar0, 0)
@@ -427,7 +427,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_LOOP
-            EVT_CALL(SetNpcFlagBits, MV_ItemCarrierNpc, NPC_FLAG_40000, TRUE)
+            EVT_CALL(SetNpcFlagBits, MV_ItemCarrierNpc, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
             EVT_SET(MV_KeepAwayResult, KEEP_AWAY_WAITING)
             EVT_SET(MV_Unk_02, 0)
             EVT_CALL(N(GetPlayerPosOutsideKeepAwayRing))

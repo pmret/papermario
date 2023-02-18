@@ -20,7 +20,7 @@ NpcData N(NpcData_PiranhaPlant_01)[] = {
             }
         },
         .settings = &N(NpcSettings_PiranhaPlant),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -46,7 +46,7 @@ NpcData N(NpcData_PiranhaPlant_02)[] = {
             }
         },
         .settings = &N(NpcSettings_PiranhaPlant),
-        .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = PIRANHA_PLANT_DROPS,
         .animations = PIRANHA_PLANT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,

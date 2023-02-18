@@ -14,11 +14,7 @@
 #include "world/common/enemy/ai/MeleeHitbox.inc.c"
 
 ApiStatus N(WanderMeleeAI_Main)(Evt *script, s32 isInitialCall) {
-    #ifdef _DEAD_H_
-    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
-    #else
     Enemy* enemy = script->owner1.enemy;
-    #endif
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;

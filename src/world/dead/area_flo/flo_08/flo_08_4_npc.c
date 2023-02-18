@@ -163,7 +163,7 @@ NpcData N(NpcData_GateFlower) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_GateFlower),
     .settings = &N(NpcSettings_GateFlower),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = GATE_FLOWER_YELLOW_ANIMS,
     .tattle = MSG_NpcTattle_YellowGateFlower,
@@ -186,7 +186,7 @@ NpcData N(NpcData_Dayzee_01) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -209,7 +209,7 @@ NpcData N(NpcData_Dayzee_02) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -232,7 +232,7 @@ NpcData N(NpcData_Dayzee_03) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -255,7 +255,7 @@ NpcData N(NpcData_Dayzee_04) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -278,7 +278,7 @@ NpcData N(NpcData_Dayzee_05) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -301,7 +301,7 @@ NpcData N(NpcData_Dayzee_06) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -324,7 +324,7 @@ NpcData N(NpcData_Dayzee_07) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -340,10 +340,10 @@ EvtScript N(EVS_NpcInit_AmazyDayzee) = {
         EVT_END_IF
         EVT_CALL(RandInt, 100, LVar0)
         EVT_IF_LT(LVar0, 30)
-            EVT_CALL(SetNpcFlagBits, NPC_Dayzee_02, NPC_FLAG_2 | NPC_FLAG_4, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_Dayzee_02, NPC_FLAG_INVISIBLE | NPC_FLAG_INACTIVE, TRUE)
             EVT_CALL(SetNpcPos, NPC_Dayzee_02, NPC_DISPOSE_LOCATION)
         EVT_ELSE
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2 | NPC_FLAG_4, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_INACTIVE, TRUE)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         EVT_END_IF
     EVT_END_THREAD
@@ -369,7 +369,7 @@ NpcData N(NpcData_AmazyDayzee) = {
     },
     .init = &N(EVS_NpcInit_AmazyDayzee),
     .settings = &N(NpcSettings_AmazyDayzee),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = AMAZY_DAYZEE_DROPS,
     .animations = AMAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

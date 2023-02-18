@@ -78,7 +78,7 @@ API_CALLABLE(N(GetBombetteExplodeGround)) {
         if (npc_raycast_down_around(partner->collisionChannel, &x, &y, &z, &depth,
             partner->yaw, partner->collisionRadius) && depth <= 12.0f)
         {
-            colliderID = D_8010C978;
+            colliderID = NpcHitQueryColliderID;
         }
     }
     evt_set_variable(script, *args++, colliderID);
@@ -139,7 +139,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             EVT_CALL(PlaySoundAtCollider, COLLIDER_suimen, SOUND_389, 0)
             EVT_CALL(EnableModel, MODEL_ice01, FALSE)
             EVT_CALL(EnableModel, MODEL_ice02, TRUE)
-            EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_100 | NPC_FLAG_GRAVITY, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
             EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Run)
             EVT_CALL(GetNpcPos, NPC_PenguinPatrol, LVar7, LVar8, LVar9)
             EVT_CALL(SetNpcSpeed, NPC_PenguinPatrol, EVT_FLOAT(9.0))
@@ -153,7 +153,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             EVT_CALL(NpcMoveTo, NPC_PenguinPatrol, -207, 110, 0)
             EVT_CALL(NpcMoveTo, NPC_PenguinPatrol, LVar7, LVar9, 0)
             EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Idle)
-            EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_100 | NPC_FLAG_GRAVITY, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, FALSE)
             EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CASE_EQ(2)
             EVT_CALL(DisablePlayerInput, TRUE)
@@ -165,7 +165,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
                 EVT_WAIT(10)
                 EVT_CALL(PlaySoundAtNpc, NPC_PenguinPatrol, SOUND_397, 0)
             EVT_END_THREAD
-            EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_100 | NPC_FLAG_GRAVITY, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
             EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Run)
             EVT_CALL(GetNpcPos, NPC_PenguinPatrol, LVar7, LVar8, LVar9)
             EVT_CALL(SetNpcSpeed, NPC_PenguinPatrol, EVT_FLOAT(9.0))
@@ -177,7 +177,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Idle)
             EVT_CALL(PlayerFaceNpc, NPC_PenguinPatrol, FALSE)
             EVT_CALL(SpeakToPlayer, NPC_PenguinPatrol, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00B7)
-            EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_100 | NPC_FLAG_GRAVITY, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
             EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Walk)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 20)
@@ -227,7 +227,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
                 EVT_CALL(PlayerJump1, -680, 50, 0, 30)
             EVT_END_THREAD
             EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Idle)
-            EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_100 | NPC_FLAG_GRAVITY, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, FALSE)
             EVT_WAIT(15)
             EVT_SET(GB_SAM11_FrozenPondDamage, 0)
             EVT_CALL(GotoMap, EVT_PTR("sam_02"), sam_02_ENTRY_3)

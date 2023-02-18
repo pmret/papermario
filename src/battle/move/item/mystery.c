@@ -1,10 +1,73 @@
-#include "mystery.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 #include "entity.h"
 #include "ld_addrs.h"
-#include "battle/move/item/mystery.png.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_mystery
+
+#include "battle/common/move/ItemRefund.inc.c"
+
+#include "battle/common/move/UseItem.inc.c"
+
+static s32 _pad = 0;
+
+#include "battle/move/item/mystery.png.h"
+#include "battle/move/item/mystery.png.inc.c"
+#include "battle/move/item/mystery.pal.inc.c"
+
+Vtx N(model)[] = {
+    { .v = {{ -16, -16, 0 }, FALSE, { 0,    0    }, { 0, 0, 0, 255 }}},
+    { .v = {{ 15,  -16, 0 }, FALSE, { 1024, 0    }, { 0, 0, 0, 255 }}},
+    { .v = {{ 15,  15,  0 }, FALSE, { 1024, 1024 }, { 0, 0, 0, 255 }}},
+    { .v = {{ -16, 15,  0 }, FALSE, { 0,    1024 }, { 0, 0, 0, 255 }}},
+};
+
+Gfx N(displayList)[] = {
+    gsDPPipeSync(),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
+    gsDPSetTexturePersp(G_TP_PERSP),
+    gsDPSetTextureDetail(G_TD_CLAMP),
+    gsDPSetTextureLOD(G_TL_TILE),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetTextureFilter(G_TF_AVERAGE),
+    gsDPSetTextureConvert(G_TC_FILT),
+    gsDPSetTextureLUT(G_TT_RGBA16),
+    gsDPLoadTLUT_pal16(0, battle_item_mystery_pal),
+    gsDPLoadTextureTile_4b(battle_item_mystery_png, G_IM_FMT_CI, battle_item_mystery_png_width, battle_item_mystery_png_height, 0, 0, battle_item_mystery_png_width - 1, battle_item_mystery_png_height - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPClearGeometryMode(G_LIGHTING),
+    gsSPClearGeometryMode(G_SHADING_SMOOTH),
+    gsSPVertex(N(model), ARRAY_COUNT(N(model)), 0),
+    gsSP1Triangle(0, 1, 2, 0),
+    gsSP1Triangle(0, 2, 3, 0),
+    gsDPPipeSync(),
+    gsSPEndDisplayList(),
+};
+
+EntityModelScript N(modelCommandList) = STANDARD_ENTITY_MODEL_SCRIPT(N(displayList), RENDER_MODE_ALPHATEST);
+
+s32 N(D_802A227C_72D82C)[8] = {
+    ITEM_MUSHROOM,
+    ITEM_SUPER_SHROOM,
+    ITEM_FIRE_FLOWER,
+    ITEM_STONE_CAP,
+    ITEM_DIZZY_DIAL,
+    ITEM_THUNDER_RAGE,
+    ITEM_PEBBLE,
+    ITEM_MUSHROOM
+};
+
+s32 N(D_802A229C_72D84C)[8] = {
+    ITEM_MUSHROOM,
+    ITEM_SUPER_SHROOM,
+    ITEM_PEBBLE,
+    ITEM_STONE_CAP,
+    ITEM_MUSHROOM,
+    ITEM_SUPER_SHROOM,
+    ITEM_PEBBLE,
+    ITEM_MUSHROOM
+};
 
 extern IconHudScriptPair gItemHudScripts[];
 
@@ -171,67 +234,7 @@ API_CALLABLE(N(func_802A188C_72CE3C)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
-
-static s32 _pad = 0;
-
-#include "battle/move/item/mystery.png.inc.c"
-#include "battle/move/item/mystery.pal.inc.c"
-
-Vtx N(model)[] = {
-    { .v = {{ -16, -16, 0 }, FALSE, { 0,    0    }, { 0, 0, 0, 255 }}},
-    { .v = {{ 15,  -16, 0 }, FALSE, { 1024, 0    }, { 0, 0, 0, 255 }}},
-    { .v = {{ 15,  15,  0 }, FALSE, { 1024, 1024 }, { 0, 0, 0, 255 }}},
-    { .v = {{ -16, 15,  0 }, FALSE, { 0,    1024 }, { 0, 0, 0, 255 }}},
-};
-
-Gfx N(displayList)[] = {
-    gsDPPipeSync(),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
-    gsDPSetTexturePersp(G_TP_PERSP),
-    gsDPSetTextureDetail(G_TD_CLAMP),
-    gsDPSetTextureLOD(G_TL_TILE),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPSetTextureFilter(G_TF_AVERAGE),
-    gsDPSetTextureConvert(G_TC_FILT),
-    gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal16(0, battle_item_mystery_pal),
-    gsDPLoadTextureTile_4b(battle_item_mystery_png, G_IM_FMT_CI, battle_item_mystery_png_width, battle_item_mystery_png_height, 0, 0, battle_item_mystery_png_width - 1, battle_item_mystery_png_height - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPClearGeometryMode(G_LIGHTING),
-    gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(N(model), ARRAY_COUNT(N(model)), 0),
-    gsSP1Triangle(0, 1, 2, 0),
-    gsSP1Triangle(0, 2, 3, 0),
-    gsDPPipeSync(),
-    gsSPEndDisplayList(),
-};
-
-EntityModelScript N(modelCommandList) = STANDARD_ENTITY_MODEL_SCRIPT(N(displayList), RENDER_MODE_ALPHATEST);
-
-s32 N(D_802A227C_72D82C)[8] = {
-    ITEM_MUSHROOM,
-    ITEM_SUPER_SHROOM,
-    ITEM_FIRE_FLOWER,
-    ITEM_STONE_CAP,
-    ITEM_DIZZY_DIAL,
-    ITEM_THUNDER_RAGE,
-    ITEM_PEBBLE,
-    ITEM_MUSHROOM
-};
-
-s32 N(D_802A229C_72D84C)[8] = {
-    ITEM_MUSHROOM,
-    ITEM_SUPER_SHROOM,
-    ITEM_PEBBLE,
-    ITEM_STONE_CAP,
-    ITEM_MUSHROOM,
-    ITEM_SUPER_SHROOM,
-    ITEM_PEBBLE,
-    ITEM_MUSHROOM
-};
-
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_MYSTERY)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD

@@ -50,8 +50,8 @@ API_CALLABLE(N(BulletBillAI_Main)) {
         script->AI_TEMP_STATE = AI_STATE_BULLET_INIT;
         npc->duration = 0;
         enemy->aiFlags |= ENEMY_AI_FLAG_8;
-        enemy->flags |= ENEMY_FLAG_200000;
-        npc->flags |= NPC_FLAG_40000;
+        enemy->flags |= ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN;
+        npc->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
         enemy->VAR_PROJECTILE_HITBOX_STATE = PROJECTILE_HITBOX_STATE_NONE;
         enemy->AI_VAR_BULLET_BLASTER = -1;
     }
@@ -70,8 +70,8 @@ API_CALLABLE(N(BulletBillAI_Main)) {
             npc->pos.z = NPC_DISPOSE_POS_Z;
             npc->rotation.y = 0.0f;
             npc->duration = 0;
-            npc->flags |= NPC_FLAG_2;
-            npc->flags &= ~NPC_FLAG_LOCK_ANIMS;
+            npc->flags |= NPC_FLAG_INVISIBLE;
+            npc->flags &= ~NPC_FLAG_DONT_UPDATE_SHADOW_Y;
             disable_npc_shadow(npc);
             enemy->VAR_PROJECTILE_HITBOX_STATE = PROJECTILE_HITBOX_STATE_NONE;
             script->AI_TEMP_STATE = AI_STATE_BULLET_READY;
@@ -82,7 +82,7 @@ API_CALLABLE(N(BulletBillAI_Main)) {
             }
             enemy->VAR_PROJECTILE_HITBOX_STATE = PROJECTILE_HITBOX_STATE_ACTIVE;
             blasterNpc = get_npc_unsafe(get_enemy(enemy->AI_VAR_BULLET_BLASTER)->npcID);
-            npc->flags &= ~NPC_FLAG_2;
+            npc->flags &= ~NPC_FLAG_INVISIBLE;
             npc->pos.x = blasterNpc->pos.x;
             npc->pos.y = blasterNpc->pos.y + 11.0;
             npc->pos.z = blasterNpc->pos.z + 1.0;
@@ -97,7 +97,7 @@ API_CALLABLE(N(BulletBillAI_Main)) {
             }
             npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_CHASE];
             npc->duration = 300;
-            npc->flags |= (NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_LOCK_ANIMS);
+            npc->flags |= (NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_DONT_UPDATE_SHADOW_Y);
             enable_npc_shadow(npc);
             script->AI_TEMP_STATE = AI_STATE_BULLET_FIRED;
             // fallthrough
@@ -163,7 +163,7 @@ API_CALLABLE(N(BillBlasterAI_Main)) {
         script->AI_TEMP_STATE = AI_STATE_BLASTER_INIT;
         npc->duration = 30;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
-        enemy->flags |= ENEMY_FLAG_200000;
+        enemy->flags |= ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN;
         disable_npc_shadow(npc);
     }
     

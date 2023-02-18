@@ -62,7 +62,7 @@ EvtScript N(EVS_Kolorado_Escape) = {
         EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(60)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcPos, NPC_SELF, 70, 25, 60)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
@@ -619,7 +619,7 @@ NpcData N(NpcData_Kolorado) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kolorado),
     .settings = &N(NpcSettings_Kolorado),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,

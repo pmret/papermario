@@ -63,7 +63,7 @@ EvtScript N(EVS_NpcInteract_ToadHouseKeeper) = {
     EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVarA)
     EVT_CALL(SetPlayerJumpscale, 1)
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(N(ToadHouse_DisableStatusMenu))
     EVT_IF_NE(LVar4, 0)
         EVT_EXEC(N(8024AC8C))
@@ -99,7 +99,7 @@ EvtScript N(EVS_NpcInteract_ToadHouseKeeper) = {
     EVT_WAIT(105)
     EVT_EXEC_WAIT(N(EVS_ToadHouse_ReturnFromRest))
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVarB)
     EVT_CALL(N(ToadHouse_ShowStatusMenu))
     EVT_RETURN

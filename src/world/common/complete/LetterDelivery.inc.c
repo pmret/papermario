@@ -94,7 +94,7 @@ EvtScript N(EVS_LetterDelivery_ItemPrompt) = {
             EVT_CALL(GetAngleBetweenNPCs, LVar9, NPC_PARTNER, LVarB)
             EVT_CALL(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
             EVT_CALL(GetNpcPos, LVar9, LVar6, LVar7, LVar8)
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_IF_LE(LVarB, 180)
                 EVT_ADD(LVar6, 20)
             EVT_ELSE
@@ -114,7 +114,7 @@ EvtScript N(EVS_LetterDelivery_ItemPrompt) = {
             EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldParakarry_Idle)
             EVT_CALL(NpcFaceNpc, NPC_PARTNER, LVar9, 0)
             EVT_WAIT(5)
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_CALL(EnablePartnerAI)
             EVT_WAIT(5)
     EVT_END_SWITCH

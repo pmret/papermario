@@ -18,7 +18,7 @@ EvtScript N(EVS_PlayerWatchKolorado) = {
 
 EvtScript N(EVS_Kolorado_RunToVillage) = {
     EVT_EXEC_GET_TID(N(EVS_PlayerWatchKolorado), LVar9)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Run)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.5))
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -142,7 +142,7 @@ EvtScript N(EVS_NpcHit_Kolorado) = {
 
 EvtScript N(EVS_NpcInit_Kolorado) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH5_KOLORADO_ESCAPED_FUZZIES)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado)))
         EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_Kolorado)))
     EVT_ELSE
@@ -163,10 +163,10 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy_01) = {
             EVT_SWITCH(LVar0)
                 EVT_CASE_RANGE(LVar3, LVar4)
                     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 0)
-                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_10000000, 0)
+                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 0)
                 EVT_CASE_DEFAULT
                     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 1)
-                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_10000000, 1)
+                    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 1)
             EVT_END_SWITCH
             EVT_WAIT(1)
         EVT_END_LOOP
@@ -216,7 +216,7 @@ EvtScript N(EVS_NpcDefeat_JungleFuzzyBoss) = {
             EVT_IF_NE(LVar0, PARTNER_NONE)
                 EVT_CALL(InterruptUsePartner)
             EVT_END_IF
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_THREAD
                 EVT_WAIT(30)
                 EVT_CALL(GetNpcPos, NPC_Kolorado, LVar3, LVar1, LVar2)
@@ -237,7 +237,7 @@ EvtScript N(EVS_NpcDefeat_JungleFuzzyBoss) = {
                 EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
                 EVT_CALL(N(SetCamera0Flag1000))
                 EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-                EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_100, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Run)
                 EVT_CALL(SetNpcSpeed, NPC_Kolorado, EVT_FLOAT(3.0))
                 EVT_IF_LT(LVar2, -45)
@@ -275,7 +275,7 @@ NpcData N(NpcData_Kolorado) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kolorado),
     .settings = &N(NpcSettings_Kolorado),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_SPIN,
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
@@ -287,7 +287,7 @@ NpcData N(NpcData_JungleFuzzy_01) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_JungleFuzzy_01),
     .settings = &N(NpcSettings_JungleFuzzy),
-    .flags = ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
 };
@@ -318,7 +318,7 @@ NpcData N(NpcData_JungleFuzzy_02) = {
     },
     .init = &N(EVS_NpcInit_JungleFuzzy_02),
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_400000,
     .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -342,7 +342,7 @@ NpcData N(NpcData_JungleFuzzy_03) = {
     },
     .init = &N(EVS_NpcInit_JungleFuzzy_02),
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_400000,
     .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -366,7 +366,7 @@ NpcData N(NpcData_JungleFuzzy_04) = {
     },
     .init = &N(EVS_NpcInit_JungleFuzzy_02),
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_400000,
     .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

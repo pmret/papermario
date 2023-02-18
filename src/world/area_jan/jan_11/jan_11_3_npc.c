@@ -67,7 +67,7 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Green_SadTalk, ANIM_YoshiKid_Green_SadIdle, 0, MSG_CH5_00AE)
     EVT_CALL(EndSpeech, NPC_SELF, ANIM_YoshiKid_Green_Talk, ANIM_YoshiKid_Green_Idle, 0)
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100 | NPC_FLAG_GRAVITY, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Green_Run)
         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
         EVT_CALL(NpcMoveTo, NPC_SELF, -100, 50, 0)
@@ -126,7 +126,7 @@ NpcData N(NpcData_YoshiKid) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_YoshiKid),
     .settings = &N(NpcSettings_YoshiKid),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = YOSHI_KID_GREEN_ANIMS,
     .tattle = MSG_NpcTattle_GreenYoshiKid,

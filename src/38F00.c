@@ -63,7 +63,7 @@ EvtScript D_800939B4 = {
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetSelfVar, 0, 1)
         EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(D_800939A4))
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY | NPC_FLAG_40000, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_JUMPING, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, LVar2)
         EVT_SET(LVar0, 0)
@@ -76,7 +76,7 @@ EvtScript D_800939B4 = {
         EVT_END_LOOP
         EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
         EVT_CALL(func_802CFD30, NPC_SELF, FOLD_TYPE_6, 255, 255, 255, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, FALSE)
         EVT_CALL(SetSelfVar, 0, 0)
         EVT_CALL(func_8005DDF0)
         EVT_CALL(BindNpcAI, NPC_SELF, LVar1)

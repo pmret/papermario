@@ -24,7 +24,7 @@ EvtScript N(EVS_NpcIdle_Twink) = {
 };
 
 EvtScript N(EVS_NpcInit_Twink) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -42,7 +42,7 @@ NpcData N(NpcData_Twink) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_Twink),
     .settings = &N(NpcSettings_StarSpirit),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_100 | ENEMY_FLAG_200 | ENEMY_FLAG_400 | ENEMY_FLAG_800 | ENEMY_FLAG_8000000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_CANT_INTERACT,
     .drops = NO_DROPS,
     .animations = TWINK_ANIMS,
 };

@@ -1,7 +1,10 @@
-#include "stone_cap.h"
+#include "common.h"
+#include "script_api/battle.h"
 #include "effects.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_stone_cap
+
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_7217DC)) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -45,10 +48,10 @@ API_CALLABLE(N(func_802A123C_7217DC)) {
     return ApiStatus_BLOCK;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(main) = {
-    EVT_SET_CONST(LVarA, 0x00000088)
+EvtScript N(EVS_UseItem) = {
+    EVT_SET_CONST(LVarA, ITEM_STONE_CAP)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(PlaySound, SOUND_361)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30009)

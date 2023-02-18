@@ -28,16 +28,16 @@ API_CALLABLE(N(RhuffUnravelUpdate)) {
 
     if (rugRotAngle == 0) {
         npc->currentAnim = ANIM_Rowf_Idle;
-        enemy->flags &= ~ENEMY_FLAG_8000000;
+        enemy->flags &= ~ENEMY_FLAG_CANT_INTERACT;
     } else {
         npc->currentAnim = ANIM_Rowf_Walk;
-        enemy->flags |= ENEMY_FLAG_8000000;
+        enemy->flags |= ENEMY_FLAG_CANT_INTERACT;
     }
 
     if (rugRotAngle == -60) {
-        npc->flags |= NPC_FLAG_2;
+        npc->flags |= NPC_FLAG_INVISIBLE;
     } else {
-        npc->flags &= ~NPC_FLAG_2;
+        npc->flags &= ~NPC_FLAG_INVISIBLE;
     }
 
     if (rugRippleAmt != 0) {
@@ -725,7 +725,7 @@ NpcData N(NpcData_RowfAndRhuff)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Rowf),
         .settings = &N(NpcSettings_Rowf),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Rowf_Idle,
@@ -739,7 +739,7 @@ NpcData N(NpcData_RowfAndRhuff)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Rhuff),
         .settings = &N(NpcSettings_Rhuff),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Rowf_Idle,

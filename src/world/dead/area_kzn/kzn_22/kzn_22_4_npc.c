@@ -174,8 +174,8 @@ EvtScript N(EVS_Scene_Misstar) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_EXEC(N(EVS_ControlCamera))
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(3.0))
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -268,7 +268,7 @@ NpcData N(NpcData_Kolorado) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kolorado),
     .settings = &N(NpcSettings_Kolorado),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
@@ -280,7 +280,7 @@ NpcData N(NpcData_Misstar) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Misstar),
     .settings = &N(NpcSettings_StarSpirit),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_100 | ENEMY_FLAG_400 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
     .drops = NO_DROPS,
     .animations = MISSTAR_ANIMS,
     .tattle = MSG_NpcTattle_Misstar,

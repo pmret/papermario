@@ -1,6 +1,9 @@
-#include "repel_gel.h"
+#include "common.h"
+#include "script_api/battle.h"
 
-#include "ItemRefund.inc.c"
+#define NAMESPACE battle_item_repel_gel
+
+#include "battle/common/move/ItemRefund.inc.c"
 
 API_CALLABLE(N(func_802A123C_72DDAC)) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -14,9 +17,9 @@ API_CALLABLE(N(func_802A123C_72DDAC)) {
     return ApiStatus_DONE2;
 }
 
-#include "UseItem.inc.c"
+#include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_REPEL_GEL)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_375)

@@ -810,17 +810,17 @@ ApiStatus SetAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
-    s32 a1;
-    s32 animationIndex;
+    s32 partID;
+    AnimID animID;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    a1 = evt_get_variable(script, *args++);
-    animationIndex = evt_get_variable(script, *args++);
+    partID = evt_get_variable(script, *args++);
+    animID = evt_get_variable(script, *args++);
 
-    set_animation(actorID, a1, animationIndex);
+    set_animation(actorID, partID, animID);
 
     return ApiStatus_DONE2;
 }

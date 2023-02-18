@@ -19,7 +19,7 @@ NpcData N(NpcData_BuzzyBeetle_01) = {
         }
     },
     .settings = &N(NpcSettings_BuzzyBeetle),
-    .flags = ENEMY_FLAG_400,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
     .drops = ISK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
 };
@@ -41,7 +41,7 @@ NpcData N(NpcData_BuzzyBeetle_02) = {
         }
     },
     .settings = &N(NpcSettings_BuzzyBeetle),
-    .flags = ENEMY_FLAG_400 | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
     .drops = ISK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
 };

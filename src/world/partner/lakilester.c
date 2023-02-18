@@ -3,8 +3,6 @@
 #include "effects.h"
 #include "sprite/npc/WorldLakilester.h"
 
-extern s16 D_8010C97A;
-
 BSS s32 D_802BFF00;
 BSS s32 D_802BFF04;
 BSS s32 D_802BFF08;
@@ -112,7 +110,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
             LakilesterTweesterPhysicsPtr->angularVelocity = 6.0f;
             LakilesterTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             LakilesterTweesterPhysicsPtr->countdown = 120;
-            lakilester->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            lakilester->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             lakilester->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(LakilesterTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -279,12 +277,12 @@ void func_802BDA90_3215E0(Npc* lakilester) {
     f32 z = lakilester->pos.z;
 
     if (npc_test_move_complex_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
-        lakilester->flags |= (NPC_FLAG_4000 | NPC_FLAG_NO_PROJECT_SHADOW);
-        lakilester->currentWall = D_8010C97A;
+        lakilester->flags |= (NPC_FLAG_COLLDING_FORWARD_WITH_WORLD | NPC_FLAG_COLLDING_WITH_WORLD);
+        lakilester->currentWall = NpcHitQueryColliderID;
         lakilester->pos.x = x;
         lakilester->pos.z = z;
     } else {
-        lakilester->flags &= ~(NPC_FLAG_4000 | NPC_FLAG_NO_PROJECT_SHADOW);
+        lakilester->flags &= ~(NPC_FLAG_COLLDING_FORWARD_WITH_WORLD | NPC_FLAG_COLLDING_WITH_WORLD);
     }
 
     temp_f0 = clamp_angle(lakilester->yaw + 45.0f);
@@ -295,9 +293,9 @@ void func_802BDA90_3215E0(Npc* lakilester) {
     if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
         lakilester->pos.x = x;
         lakilester->pos.z = z;
-        lakilester->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
+        lakilester->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
     } else {
-        lakilester->flags &= ~NPC_FLAG_NO_PROJECT_SHADOW;
+        lakilester->flags &= ~NPC_FLAG_COLLDING_WITH_WORLD;
     }
 
     temp_f0 = clamp_angle(lakilester->yaw - 45.0f);
@@ -308,9 +306,9 @@ void func_802BDA90_3215E0(Npc* lakilester) {
     if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
         lakilester->pos.x = x;
         lakilester->pos.z = z;
-        lakilester->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
+        lakilester->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
     } else {
-        lakilester->flags &= ~NPC_FLAG_NO_PROJECT_SHADOW;
+        lakilester->flags &= ~NPC_FLAG_COLLDING_WITH_WORLD;
     }
 
     temp_f0 = clamp_angle(lakilester->yaw + 45.0f + 180.0f);
@@ -319,11 +317,11 @@ void func_802BDA90_3215E0(Npc* lakilester) {
     z = lakilester->pos.z;
 
     if (npc_test_move_simple_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
-        lakilester->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
+        lakilester->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
         lakilester->pos.x = x;
         lakilester->pos.z = z;
     } else {
-        lakilester->flags &= ~NPC_FLAG_NO_PROJECT_SHADOW;
+        lakilester->flags &= ~NPC_FLAG_COLLDING_WITH_WORLD;
     }
 
     temp_f0 = clamp_angle(lakilester->yaw - 45.0f + 180.0f);
@@ -332,11 +330,11 @@ void func_802BDA90_3215E0(Npc* lakilester) {
     z = lakilester->pos.z;
 
     if (npc_test_move_simple_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
-        lakilester->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
+        lakilester->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
         lakilester->pos.x = x;
         lakilester->pos.z = z;
     } else {
-        lakilester->flags &= ~NPC_FLAG_NO_PROJECT_SHADOW;
+        lakilester->flags &= ~NPC_FLAG_COLLDING_WITH_WORLD;
     }
 }
 
@@ -393,7 +391,7 @@ void func_802BDDD8_321928(Npc* npc) {
     if (npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z, npc->collisionRadius, npc->yaw,
         npc->collisionHeight, npc->collisionRadius) != 0) {
 
-        collisionStatus->currentInspect = (partnerActionStatus->pressedButtons & BUTTON_A) ? D_8010C97A : -1;
+        collisionStatus->currentInspect = (partnerActionStatus->pressedButtons & BUTTON_A) ? NpcHitQueryColliderID : NO_COLLIDER;
     }
 
     if (moveSpeed != 0.0f) {
@@ -406,14 +404,14 @@ void func_802BDDD8_321928(Npc* npc) {
             npc->collisionHeight, npc->collisionRadius) != 0) {
 
             if (D_802BFF10) {
-                collisionStatus->pushingAgainstWall = D_8010C97A;
+                collisionStatus->pushingAgainstWall = NpcHitQueryColliderID;
             }
             npc->pos.x += (x - npc->pos.x) / 5.0f;
             npc->pos.z += (z - npc->pos.z) / 5.0f;
         } else {
             npc_move_heading(npc, npc->moveSpeed, yaw);
             if (D_802BFF10) {
-                collisionStatus->pushingAgainstWall = -1;
+                collisionStatus->pushingAgainstWall = NO_COLLIDER;
             }
         }
 
@@ -513,9 +511,9 @@ void func_802BDDD8_321928(Npc* npc) {
         return;
     }
 
-    collisionStatus->currentFloor = -1;
+    collisionStatus->currentFloor = NO_COLLIDER;
     playerStatus->timeInAir++;
-    npc->currentFloor = -1;
+    npc->currentFloor = NO_COLLIDER;
     npc->jumpScale += 1.8;
 
     if (npc->jumpScale > 12.0f) {
@@ -584,13 +582,13 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 partnerActionStatus->partnerAction_unk_1 = 0;
                 playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                 npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
-                npc->flags |= NPC_FLAG_100;
+                npc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
                 set_action_state(ACTION_STATE_RIDE);
                 suggest_player_anim_setUnkFlag(ANIM_Mario_8000E);
                 npc->currentAnim = ANIM_WorldLakilester_Walk;
                 D_802BFF0C = 1;
                 npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
-                npc->flags |= (NPC_FLAG_100 | NPC_FLAG_400000);
+                npc->flags |= (NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_TOUCHES_GROUND);
                 partnerActionStatus->actingPartner = PARTNER_LAKILESTER;
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_LAKILESTER_1;
                 gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
@@ -678,7 +676,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             }
 
             npc->flags &= ~NPC_FLAG_8;
-            npc->flags |= (NPC_FLAG_400000 | NPC_FLAG_100);
+            npc->flags |= (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_IGNORE_PLAYER_COLLISION);
             set_action_state(ACTION_STATE_RIDE);
             D_802BFF0C = 1;
             func_800EF4E0();
@@ -871,7 +869,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
 
         if (D_802BFF14 == 10) {
             D_802BFF0C = 0;
-            npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_400000 | NPC_FLAG_8);
+            npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_8);
 
             if (D_802BFF08 != 0) {
                 D_802BFF08 = 0;
@@ -903,7 +901,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
         }
 
         if (D_802BFF14 == 11) {
-            npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_400000 | NPC_FLAG_8);
+            npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_8);
             partnerActionStatus->actingPartner = PARTNER_NONE;
             partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
             playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
@@ -1158,7 +1156,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
             playerStatus->flags |= PS_FLAG_FACE_FORWARDS;
             func_802BFB44_323694(2.0f);
             gGameStatusPtr->keepUsingPartnerOnMapChange = 1;
-            npc->flags |= NPC_FLAG_100;
+            npc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
             npc->moveSpeed = *temp_s0_2;
             npc->jumpScale = 0.0f;
             D_802BFF10 = 0;

@@ -373,7 +373,7 @@ EvtScript N(EVS_Scene_YakkeyShouts) = {
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(40)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcPos, NPC_SELF, 845, 0, 140)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
     EVT_CALL(NpcJump1, NPC_SELF, 845, 35, 145, 15)
@@ -469,7 +469,7 @@ EvtScript N(EVS_Scene_YakkeyShouts) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_SUB(LVar1, 10)
     EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10)
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
@@ -509,7 +509,7 @@ NpcData N(NpcData_Tubba) = {
     },
     .init = &N(EVS_NpcInit_Tubba),
     .settings = &N(NpcSettings_TubbaBlubba),
-    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000 | ENEMY_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
 };

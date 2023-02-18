@@ -66,7 +66,7 @@ EvtScript N(D_80248298_84AE68) = {
 
 EvtScript N(D_802483B8_84AF88) = {
     EVT_WAIT(20)
-    EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_01, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_ShyGuy_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SpeakToPlayer, NPC_ShyGuy_01, ANIM_ShyGuy_Pink_Anim11, ANIM_ShyGuy_Pink_Anim01, 5, MSG_MAC_Housing_00B3)
     EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Pink_Anim02)
     EVT_WAIT(4)
