@@ -78,7 +78,7 @@ API_CALLABLE(N(func_802A1378_725058)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802A1418_7250F8)) {
+API_CALLABLE(N(ShowFlowerRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -171,7 +171,7 @@ EvtScript N(script6) = {
     EVT_END
 };
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_SUPER_SODA)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(InitTargetIterator)
@@ -183,7 +183,7 @@ EvtScript N(main) = {
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 0)
         EVT_ADD(LVar1, 35)
-        EVT_CALL(N(func_802A1418_7250F8), LVar0, LVar1, LVar2, 5)
+        EVT_CALL(N(ShowFlowerRecoveryFX), LVar0, LVar1, LVar2, 5)
         EVT_CALL(N(AddFP), 5)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 25)

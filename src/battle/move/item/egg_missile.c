@@ -147,7 +147,7 @@ EntityModelScript N(EMS_EggMissile) = {
 EntityModelScript unusedModelScript = STANDARD_ENTITY_MODEL_SCRIPT(
     N(Frame4Gfx), RENDER_MODE_ALPHATEST);
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_EGG_MISSILE)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)

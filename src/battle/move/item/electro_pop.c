@@ -16,7 +16,7 @@ API_CALLABLE(N(func_802A123C_7307DC)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802A127C_73081C)) {
+API_CALLABLE(N(ShowHeartRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -28,7 +28,7 @@ API_CALLABLE(N(func_802A127C_73081C)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802A133C_7308DC)) {
+API_CALLABLE(N(ShowFlowerRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -88,7 +88,7 @@ API_CALLABLE(N(func_802A14F0_730A90)) {
 
 #include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_ELECTRO_POP)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(EatItem))
@@ -103,7 +103,7 @@ EvtScript N(main) = {
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
     EVT_ADD(LVar1, 25)
-    EVT_CALL(N(func_802A133C_7308DC), LVar0, LVar1, LVar2, LVar3)
+    EVT_CALL(N(ShowFlowerRecoveryFX), LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 25)
     EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)

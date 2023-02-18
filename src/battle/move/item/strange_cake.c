@@ -176,7 +176,7 @@ s32 N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(N(func_802A1818_731B18)) {
+API_CALLABLE(N(ShowHeartRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -187,7 +187,7 @@ API_CALLABLE(N(func_802A1818_731B18)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802A18D8_731BD8)) {
+API_CALLABLE(N(ShowFlowerRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -265,7 +265,7 @@ extern EvtScript N(script7);
 extern EvtScript N(script8);
 extern EvtScript N(script9);
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_IF_EQ(LVar1, ITEM_KOOKY_COOKIE)
         EVT_SET_CONST(LVarA, ITEM_KOOKY_COOKIE)
@@ -276,7 +276,7 @@ EvtScript N(main) = {
         EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 20)
         EVT_ADD(LVar1, 25)
-        EVT_CALL(N(func_802A18D8_731BD8), LVar0, LVar1, LVar2, LVar3)
+        EVT_CALL(N(ShowFlowerRecoveryFX), LVar0, LVar1, LVar2, LVar3)
         EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 25)
         EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)

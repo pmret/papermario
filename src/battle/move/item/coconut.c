@@ -46,7 +46,7 @@ Gfx N(displayList)[] = {
 
 EntityModelScript N(modelCommandList) = STANDARD_ENTITY_MODEL_SCRIPT(N(displayList), RENDER_MODE_ALPHATEST);
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_COCONUT)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)

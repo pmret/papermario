@@ -47,7 +47,7 @@ API_CALLABLE(N(func_802A12EC_7333BC)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802A1378_733448)) {
+API_CALLABLE(N(ShowHeartRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -59,7 +59,7 @@ API_CALLABLE(N(func_802A1378_733448)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802A1438_733508)) {
+API_CALLABLE(N(ShowFlowerRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -178,7 +178,7 @@ EvtScript N(EVS_FeedPartner) = {
     EVT_END
 };
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET(LVarE, LVar1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SET(LVarA, LVar1)
@@ -203,19 +203,19 @@ EvtScript N(main) = {
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 0)
         EVT_ADD(LVar1, 35)
-        EVT_CALL(N(func_802A1378_733448), LVar0, LVar1, LVar2, LVarB)
+        EVT_CALL(N(ShowHeartRecoveryFX), LVar0, LVar1, LVar2, LVarB)
     EVT_END_IF
     EVT_IF_LT(LVarB, 0)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 0)
         EVT_ADD(LVar1, 35)
-        EVT_CALL(N(func_802A1378_733448), LVar0, LVar1, LVar2, LVarB)
+        EVT_CALL(N(ShowHeartRecoveryFX), LVar0, LVar1, LVar2, LVarB)
     EVT_END_IF
     EVT_IF_GT(LVarC, 0)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 20)
         EVT_ADD(LVar1, 25)
-        EVT_CALL(N(func_802A1438_733508), LVar0, LVar1, LVar2, LVarC)
+        EVT_CALL(N(ShowFlowerRecoveryFX), LVar0, LVar1, LVar2, LVarC)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 25)

@@ -19,7 +19,7 @@ API_CALLABLE(N(func_802A123C_72DDAC)) {
 
 #include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_REPEL_GEL)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_375)

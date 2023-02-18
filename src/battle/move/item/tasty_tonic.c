@@ -35,7 +35,7 @@ API_CALLABLE(N(func_802A123C_72223C)) {
 
 #include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_TASTY_TONIC)
     EVT_EXEC_WAIT(battle_item_tasty_tonic_UseItemWithEffect)
     EVT_CALL(InitTargetIterator)

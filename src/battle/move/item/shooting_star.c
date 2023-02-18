@@ -68,7 +68,7 @@ API_CALLABLE(N(func_802A14D4_71DC44)) {
 
 #include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_SHOOTING_STAR)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD

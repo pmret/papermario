@@ -47,7 +47,7 @@ API_CALLABLE(N(func_802A12EC_72E81C)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802A1378_72E8A8)) {
+API_CALLABLE(N(ShowHeartRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -168,7 +168,7 @@ EvtScript N(script6) = {
     EVT_END
 };
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET(LVarF, LVar1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SET(LVarA, LVar1)
@@ -187,7 +187,7 @@ EvtScript N(main) = {
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 0)
     EVT_ADD(LVar1, 35)
-    EVT_CALL(N(func_802A1378_72E8A8), LVar0, LVar1, LVar2, LVar3)
+    EVT_CALL(N(ShowHeartRecoveryFX), LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 25)
     EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)

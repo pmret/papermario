@@ -45,7 +45,7 @@ Gfx N(DustyHammerGfx)[] = {
 
 EntityModelScript N(EMS_DustyHammer) = STANDARD_ENTITY_MODEL_SCRIPT(N(DustyHammerGfx), RENDER_MODE_ALPHATEST);
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_DUSTY_HAMMER)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)

@@ -285,7 +285,7 @@ EntityModelScript N(modelCommandList3) = {
     ems_End
 };
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_SLEEPY_SHEEP)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)

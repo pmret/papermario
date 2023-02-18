@@ -51,7 +51,7 @@ API_CALLABLE(N(func_802A1318_718B68)) {
 
 #include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_POW_BLOCK)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_WAIT(10)

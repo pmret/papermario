@@ -234,7 +234,7 @@ API_CALLABLE(N(func_802A188C_72CE3C)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_MYSTERY)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD

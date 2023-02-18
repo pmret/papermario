@@ -54,7 +54,7 @@ API_CALLABLE(N(func_802A1354_71B4F4)) {
 
 #include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_THUNDER_RAGE)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CHILD_THREAD

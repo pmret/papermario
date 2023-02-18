@@ -2,34 +2,34 @@
 #include "ld_addrs.h"
 #include "battle.h"
 
-extern EvtScript battle_item_food_main;
-extern EvtScript battle_item_mushroom_main;
-extern EvtScript battle_item_fire_flower_main;
-extern EvtScript battle_item_dusty_hammer_main;
-extern EvtScript battle_item_pow_block_main;
-extern EvtScript battle_item_pebble_main;
-extern EvtScript battle_item_volt_shroom_main;
-extern EvtScript battle_item_thunder_rage_main;
-extern EvtScript battle_item_snowman_doll_main;
-extern EvtScript battle_item_shooting_star_main;
-extern EvtScript battle_item_sleepy_sheep_main;
-extern EvtScript battle_item_stone_cap_main;
-extern EvtScript battle_item_tasty_tonic_main;
-extern EvtScript battle_item_thunder_bolt_main;
-extern EvtScript battle_item_super_soda_main;
-extern EvtScript battle_item_hustle_drink_main;
-extern EvtScript battle_item_stop_watch_main;
-extern EvtScript battle_item_dizzy_dial_main;
-extern EvtScript battle_item_please_come_back_main;
-extern EvtScript battle_item_egg_missile_main;
-extern EvtScript battle_item_insecticide_herb_main;
-extern EvtScript battle_item_fright_jar_main;
-extern EvtScript battle_item_mystery_main;
-extern EvtScript battle_item_repel_gel_main;
-extern EvtScript battle_item_life_shroom_main;
-extern EvtScript battle_item_coconut_main;
-extern EvtScript battle_item_electro_pop_main;
-extern EvtScript battle_item_strange_cake_main;
+extern EvtScript battle_item_food_EVS_UseItem;
+extern EvtScript battle_item_mushroom_EVS_UseItem;
+extern EvtScript battle_item_fire_flower_EVS_UseItem;
+extern EvtScript battle_item_dusty_hammer_EVS_UseItem;
+extern EvtScript battle_item_pow_block_EVS_UseItem;
+extern EvtScript battle_item_pebble_EVS_UseItem;
+extern EvtScript battle_item_volt_shroom_EVS_UseItem;
+extern EvtScript battle_item_thunder_rage_EVS_UseItem;
+extern EvtScript battle_item_snowman_doll_EVS_UseItem;
+extern EvtScript battle_item_shooting_star_EVS_UseItem;
+extern EvtScript battle_item_sleepy_sheep_EVS_UseItem;
+extern EvtScript battle_item_stone_cap_EVS_UseItem;
+extern EvtScript battle_item_tasty_tonic_EVS_UseItem;
+extern EvtScript battle_item_thunder_bolt_EVS_UseItem;
+extern EvtScript battle_item_super_soda_EVS_UseItem;
+extern EvtScript battle_item_hustle_drink_EVS_UseItem;
+extern EvtScript battle_item_stop_watch_EVS_UseItem;
+extern EvtScript battle_item_dizzy_dial_EVS_UseItem;
+extern EvtScript battle_item_please_come_back_EVS_UseItem;
+extern EvtScript battle_item_egg_missile_EVS_UseItem;
+extern EvtScript battle_item_insecticide_herb_EVS_UseItem;
+extern EvtScript battle_item_fright_jar_EVS_UseItem;
+extern EvtScript battle_item_mystery_EVS_UseItem;
+extern EvtScript battle_item_repel_gel_EVS_UseItem;
+extern EvtScript battle_item_life_shroom_EVS_UseItem;
+extern EvtScript battle_item_coconut_EVS_UseItem;
+extern EvtScript battle_item_electro_pop_EVS_UseItem;
+extern EvtScript battle_item_strange_cake_EVS_UseItem;
 
 #define GENERIC_FOOD_ITEM -1
 

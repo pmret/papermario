@@ -50,7 +50,7 @@ API_CALLABLE(N(func_802A123C_7217DC)) {
 
 #include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_STONE_CAP)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(PlaySound, SOUND_361)

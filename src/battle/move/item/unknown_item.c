@@ -6,7 +6,7 @@
 
 #include "battle/common/move/ItemRefund.inc.c"
 
-API_CALLABLE(N(func_802A123C_72447C)) {
+API_CALLABLE(N(ShowHeartRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -17,7 +17,7 @@ API_CALLABLE(N(func_802A123C_72447C)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802A12FC_72453C)) {
+API_CALLABLE(N(HealPlayer20)) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->curHP += 20;
@@ -29,19 +29,19 @@ API_CALLABLE(N(func_802A12FC_72453C)) {
 
 #include "battle/common/move/UseItem.inc.c"
 
-EvtScript N(main) = {
+EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_ULTRA_SHROOM)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(EatItem))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 0)
     EVT_ADD(LVar1, 35)
-    EVT_CALL(N(func_802A123C_72447C), LVar0, LVar1, LVar2, 20)
+    EVT_CALL(N(ShowHeartRecoveryFX), LVar0, LVar1, LVar2, 20)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 25)
     EVT_ADD(LVar2, 5)
     EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, 20)
-    EVT_CALL(N(func_802A12FC_72453C))
+    EVT_CALL(N(HealPlayer20))
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_ThumbsUp)
     EVT_WAIT(30)
