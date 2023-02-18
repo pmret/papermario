@@ -222,4 +222,8 @@
 #define VLA
 #endif
 
+#ifdef M2CTX
+#define VLA 0
+#endif
+
 #endif

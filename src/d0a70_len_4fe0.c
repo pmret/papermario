@@ -1061,7 +1061,7 @@ void func_8013C048(FoldState* state) {
 }
 
 FoldGfxDescriptor* fold_load_gfx(FoldState* state) {
-    u8* romStart = fold_groupOffsets[state->unk_1C[0][0]] + _24B7F0_ROM_START;
+    u8* romStart = fold_groupOffsets[state->unk_1C[0][0]] + fold_gfx_data_ROM_START;
     FoldGfxDescriptor* descriptor = &fold_groupDescriptors[state->arrayIdx];
 
     if (state->unk_64 != romStart) {
@@ -1095,7 +1095,7 @@ FoldGfxDescriptor* fold_load_gfx(FoldState* state) {
         state->gfxBufs[0] = heap_malloc(descriptor->gfxCount * 8);
         state->gfxBufs[1] = heap_malloc(descriptor->gfxCount * 8);
 
-        romStart = (s32)descriptor->gfx + _24B7F0_ROM_START;
+        romStart = (s32)descriptor->gfx + fold_gfx_data_ROM_START;
         romEnd = &romStart[descriptor->gfxCount * sizeof(*descriptor->gfx)];
         dma_copy(romStart, romEnd, state->gfxBufs[0]);
         dma_copy(romStart, romEnd, state->gfxBufs[1]);
@@ -1173,11 +1173,11 @@ void func_8013C3F0(FoldState* state) {
     }
 
     currentAnimState = heap_malloc(descriptor->vtxCount * sizeof(*currentAnimState));
-    romStart = (u8*)((s32)_24B7F0_ROM_START + (s32)descriptor->vtx + currentStateIdx * descriptor->vtxCount * sizeof(*currentAnimState));
+    romStart = (u8*)((s32)fold_gfx_data_ROM_START + (s32)descriptor->vtx + currentStateIdx * descriptor->vtxCount * sizeof(*currentAnimState));
     dma_copy(romStart, romStart + descriptor->vtxCount * sizeof(*currentAnimState), currentAnimState);
     if (animationPeriod >= 2) {
         nextAnimState = heap_malloc(descriptor->vtxCount * sizeof(*nextAnimState));
-        romStart = (u8*)((s32)_24B7F0_ROM_START + (s32)descriptor->vtx + nextStateIdx * descriptor->vtxCount * sizeof(*currentAnimState));
+        romStart = (u8*)((s32)fold_gfx_data_ROM_START + (s32)descriptor->vtx + nextStateIdx * descriptor->vtxCount * sizeof(*currentAnimState));
         dma_copy(romStart, romStart + descriptor->vtxCount * sizeof(*nextAnimState), nextAnimState);
     }
 
