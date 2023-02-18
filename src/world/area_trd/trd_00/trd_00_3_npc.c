@@ -24,9 +24,9 @@ NpcSettings N(NpcSettings_KoopaBros) = {
 #include "world/common/npc/StarSpirit.inc.c"
 
 EvtScript N(EVS_NpcIdle_KoopaBros) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
     EVT_CALL(AwaitPlayerApproach, -580, 276, 50)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
     EVT_THREAD
         EVT_CALL(PlaySoundAtCollider, COLLIDER_tt2, SOUND_METAL_DOOR_OPEN, SOUND_SPACE_MODE_0)
         EVT_CALL(MakeLerp, 0, 100, 10, EASING_COS_IN_OUT)
@@ -232,7 +232,7 @@ EvtScript N(D_80241DA4_99BA14) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_Eldstar, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 512, MSG_CH1_0113)
-    EVT_CALL(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_THREAD
         EVT_LOOP(25)
             EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)

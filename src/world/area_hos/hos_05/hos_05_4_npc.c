@@ -149,7 +149,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
     EVT_END_LOOP
     EVT_CALL(GetPlayerPos, LVar6, LVar7, LVar8)
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Leap)
         EVT_CALL(SetNpcJumpscale, NPC_Eldstar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
@@ -160,7 +160,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar6, LVar7, LVar8, 10)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Leap)
         EVT_CALL(SetNpcJumpscale, NPC_Mamar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
@@ -168,7 +168,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
         EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Idle)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Leap)
         EVT_CALL(SetNpcJumpscale, NPC_Skolar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)
@@ -176,7 +176,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
         EVT_CALL(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Idle)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_Muskular, ANIM_WorldMuskular_Leap)
         EVT_CALL(SetNpcJumpscale, NPC_Muskular, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Muskular, LVar0, LVar1, LVar2)
@@ -184,7 +184,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
         EVT_CALL(SetNpcAnimation, NPC_Muskular, ANIM_WorldMuskular_Idle)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_Misstar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Misstar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_Misstar, ANIM_WorldMisstar_Leap)
         EVT_CALL(SetNpcJumpscale, NPC_Misstar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Misstar, LVar0, LVar1, LVar2)
@@ -192,14 +192,14 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
         EVT_CALL(SetNpcAnimation, NPC_Misstar, ANIM_WorldMisstar_Idle)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Leap)
         EVT_CALL(SetNpcJumpscale, NPC_Klevar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Klevar, LVar0, LVar1, LVar2)
         EVT_CALL(NpcJump0, NPC_Klevar, LVar0, LVar1, LVar2, 5)
         EVT_CALL(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Idle)
     EVT_END_THREAD
-    EVT_CALL(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_400000, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_TOUCHES_GROUND, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_Kalmar, ANIM_WorldKalmar_Leap)
     EVT_CALL(SetNpcJumpscale, NPC_Kalmar, EVT_FLOAT(3.2))
     EVT_CALL(GetNpcPos, NPC_Kalmar, LVar0, LVar1, LVar2)

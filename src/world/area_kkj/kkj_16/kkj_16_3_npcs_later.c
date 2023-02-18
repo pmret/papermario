@@ -99,14 +99,14 @@ EvtScript N(EVS_WatchForPlayer) = {
     EVT_LOOP(0)
         EVT_CALL(N(GetPeachDisguise), LVar1)
         EVT_IF_EQ(LVar1, PEACH_DISGUISE_NONE)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 1)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
             EVT_CALL(N(UnkPhysicsFunc), LVar0, 85, 60, 38)
             EVT_IF_NE(LVar0, 0)
                 EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_CapturePeach)))
                 EVT_RETURN
             EVT_END_IF
         EVT_ELSE
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 0)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP

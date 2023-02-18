@@ -1361,7 +1361,7 @@ EvtScript N(EVS_NpcInit_JrTroopa_01) = {
 
 EvtScript N(EVS_NpcInit_JrTroopa_02) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_JrTroopa_02)))
     EVT_RETURN
@@ -1920,7 +1920,7 @@ API_CALLABLE(N(func_8024335C_8554CC)) {
 
 EvtScript N(D_8024E23C_8603AC) = {
     EVT_SET(AF_JAN01_TreeDrop_StarPiece, TRUE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_400000 | ENEMY_FLAG_8000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_400000 | ENEMY_FLAG_CANT_INTERACT, 1)
     EVT_CALL(InterpNpcYaw, NPC_Chanterelle, 270, 0)
     EVT_CALL(SetMusicTrack, 0, SONG_POP_DIVA_SONG, 1, 8)
     EVT_CHILD_THREAD
@@ -1942,7 +1942,7 @@ EvtScript N(D_8024E23C_8603AC) = {
     EVT_END_LOOP
     EVT_EXEC(N(EVS_802442E8))
     EVT_CALL(SetNpcAnimation, NPC_Chanterelle, ANIM_Chanterelle_Idle)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_400000 | ENEMY_FLAG_8000000, 0)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_400000 | ENEMY_FLAG_CANT_INTERACT, 0)
     EVT_RETURN
     EVT_END
 };
@@ -2173,7 +2173,7 @@ NpcData N(NpcData_JrTroopa_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_JrTroopa_02),
         .settings = &N(NpcSettings_JrTroopa_01),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_20000000,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_SPIN,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_JrTroopa_Idle,
@@ -2205,7 +2205,7 @@ NpcData N(NpcData_Toad_04)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Toad_04),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Toad_Blue_Idle,
@@ -2233,7 +2233,7 @@ NpcData N(NpcData_Toad_04)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Toad_05),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Toad_Blue_Idle,
@@ -2261,7 +2261,7 @@ NpcData N(NpcData_Toad_04)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Toad_06),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Toad_Red_Idle,
@@ -2303,7 +2303,7 @@ NpcData N(NpcData_Toad_04)[] = {
         },
         .init = &N(EVS_NpcInit_Toad_07),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Toad_Yellow_Idle,
@@ -2334,7 +2334,7 @@ NpcData N(NpcData_Bartender)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Bartender),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Bartender_Idle,
@@ -2362,7 +2362,7 @@ NpcData N(NpcData_Bartender)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Toad_02),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Toad_Red_Idle,
@@ -2390,7 +2390,7 @@ NpcData N(NpcData_Bartender)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Chanterelle),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Chanterelle_Idle,
@@ -2418,7 +2418,7 @@ NpcData N(NpcData_Bartender)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_ArtistToad),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Musician_Poet_Idle,
@@ -2446,7 +2446,7 @@ NpcData N(NpcData_Bartender)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_TradeEventToad),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Toad_Pink_Idle,
@@ -2477,7 +2477,7 @@ NpcData N(NpcData_ChuckQuizmo) = {
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_MAC, QUIZ_COUNT_MAC, QUIZ_MAP_MAC_05 }},
     .settings = &N(NpcSettings_ChuckQuizmo),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_4000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_HAS_NO_SPRITE,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_ChuckQuizmo_Idle,

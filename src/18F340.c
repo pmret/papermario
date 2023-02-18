@@ -1585,7 +1585,7 @@ EvtScript MerleeAttackBonus = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(10)
     EVT_CALL(CreateNpc, -10, ANIM_BattleMerlee_Gather)
-    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_CALL(SetNpcRenderMode, -10, 34)
     EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, 0, 65, 20)
     EVT_CHILD_THREAD
@@ -1634,7 +1634,7 @@ EvtScript MerleeDefenseBonus = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(10)
     EVT_CALL(CreateNpc, -10, ANIM_BattleMerlee_Gather)
-    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_CALL(SetNpcRenderMode, -10, 34)
     EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, 0, 65, 20)
     EVT_CHILD_THREAD
@@ -1688,7 +1688,7 @@ EvtScript MerleeExpBonus = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(10)
     EVT_CALL(CreateNpc, -10, ANIM_BattleMerlee_Gather)
-    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_CALL(SetNpcRenderMode, -10, 34)
     EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, 0, 65, 20)
     EVT_CHILD_THREAD

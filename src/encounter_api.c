@@ -211,21 +211,21 @@ void start_battle(Evt* script, s32 songID) {
     encounter = currentEncounter->currentEncounter;
     for (i = 0; i < encounter->count; i++) {
         enemy = encounter->enemy[i];
-        if ((enemy != NULL && (
-            !(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || enemy == currentEncounter->currentEnemy)
-            ) && enemy->hitBytecode != NULL) {
-            Evt* hitEvtInstance;
-            enemy->encountered = TRUE;
+        if (enemy != NULL && (!(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || enemy == currentEncounter->currentEnemy)) {
+            if (enemy->hitBytecode != NULL) {
+                Evt* hitEvtInstance;
+                enemy->encountered = TRUE;
 
-            hitEvtInstance = start_script(enemy->hitBytecode, EVT_PRIORITY_A, 0);
+                hitEvtInstance = start_script(enemy->hitBytecode, EVT_PRIORITY_A, 0);
 
-            enemy->hitScript = hitEvtInstance;
-            enemy->hitScriptID = hitEvtInstance->id;
+                enemy->hitScript = hitEvtInstance;
+                enemy->hitScriptID = hitEvtInstance->id;
 
-            hitEvtInstance = enemy->hitScript;
-            hitEvtInstance->owner1.enemy = enemy;
-            hitEvtInstance->owner2.npcID = enemy->npcID;
-            hitEvtInstance->groupFlags = enemy->scriptGroup;
+                hitEvtInstance = enemy->hitScript;
+                hitEvtInstance->owner1.enemy = enemy;
+                hitEvtInstance->owner2.npcID = enemy->npcID;
+                hitEvtInstance->groupFlags = enemy->scriptGroup;
+            }
         }
     }
 
@@ -712,7 +712,7 @@ ApiStatus SelfEnemyOverrideSyncPos(Evt* script, s32 isInitialCall) {
     Enemy* owner = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
 
-    owner->unk_07 = evt_get_variable(script, *args++);
+    owner->hitboxIsActive = evt_get_variable(script, *args++);
     owner->unk_10.x = npc->pos.x;
     owner->unk_10.y = npc->pos.y;
     owner->unk_10.z = npc->pos.z;

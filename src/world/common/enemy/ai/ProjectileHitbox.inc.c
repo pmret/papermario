@@ -152,13 +152,13 @@ API_CALLABLE(N(ProjectileAI_Main)) {
             if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
                 script->functionTemp[0] = 0;
                 npc->duration = 0;
-                npc->flags |= NPC_FLAG_40000 | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_2;
+                npc->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_INVISIBLE;
                 disable_npc_shadow(npc);
                 npc->flags &= ~NPC_FLAG_JUMPING;
                 enemy->varTable[0] = 0;
-                enemy->flags |= ENEMY_FLAG_10000000 | ENEMY_FLAG_8000000 | ENEMY_FLAG_IGNORE_HAMMER |
-                                ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_200000 |
-                                ENEMY_FLAG_100000 | ENEMY_FLAG_40;
+                enemy->flags |= ENEMY_FLAG_IGNORE_PARTNER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_HAMMER |
+                                ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN |
+                                ENEMY_FLAG_100000 | ENEMY_FLAG_PROJECTILE;
                 if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
                     enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
                 }
@@ -168,7 +168,7 @@ API_CALLABLE(N(ProjectileAI_Main)) {
                 default:
                     return 0;
                 case 0:
-                    npc->flags |= NPC_FLAG_2;
+                    npc->flags |= NPC_FLAG_INVISIBLE;
                     disable_npc_shadow(npc);
                     enemy->varTable[0] = 0;
                     script->functionTemp[0] = 1;
@@ -183,7 +183,7 @@ API_CALLABLE(N(ProjectileAI_Main)) {
                         npc->pos.z = npc2->pos.z;
                         add_vec2D_polar(&npc->pos.x, &npc->pos.z, enemy->varTable[3], 270.0f - npc2->renderYaw);
                         npc->pos.y = npc2->pos.y + enemy->varTable[2];
-                        enemy->unk_07 = vt0;
+                        enemy->hitboxIsActive = vt0;
                         enemy->unk_10.x = npc->pos.x;
                         enemy->unk_10.y = npc->pos.y;
                         enemy->unk_10.z = npc->pos.z;
@@ -195,10 +195,10 @@ API_CALLABLE(N(ProjectileAI_Main)) {
                         npc->jumpVelocity = aiSettings->alertRadius;
                         npc->jumpScale = aiSettings->alertOffsetDist;
                         npc->moveToPos.y = npc2->pos.y;
-                        npc->flags &= ~NPC_FLAG_2;
+                        npc->flags &= ~NPC_FLAG_INVISIBLE;
                         enable_npc_shadow(npc);
                         npc->flags |= NPC_FLAG_JUMPING;
-                        enemy->flags &= ~(ENEMY_FLAG_10000000 | ENEMY_FLAG_8000000 | ENEMY_FLAG_IGNORE_HAMMER |
+                        enemy->flags &= ~(ENEMY_FLAG_IGNORE_PARTNER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_HAMMER |
                                           ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH);
                         npc->duration = 90;
                         script->functionTemp[0] = 2;
@@ -253,10 +253,10 @@ API_CALLABLE(N(ProjectileAI_Main)) {
                 npc->pos.y = NPC_DISPOSE_POS_Y;
                 npc->pos.z = NPC_DISPOSE_POS_Z;
                 npc->jumpVelocity = 0.0f;
-                npc->flags |= NPC_FLAG_2;
+                npc->flags |= NPC_FLAG_INVISIBLE;
                 disable_npc_shadow(npc);
                 npc->flags &= ~NPC_FLAG_JUMPING;
-                enemy->flags |= ENEMY_FLAG_10000000 | ENEMY_FLAG_8000000 | ENEMY_FLAG_IGNORE_HAMMER |
+                enemy->flags |= ENEMY_FLAG_IGNORE_PARTNER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_HAMMER |
                                 ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH;
                 script->functionTemp[0] = 0;
             }
@@ -357,10 +357,10 @@ API_CALLABLE(N(ProjectileAI_Reflect)) {
                 npc->pos.x = NPC_DISPOSE_POS_X;
                 npc->pos.y = NPC_DISPOSE_POS_Y;
                 npc->pos.z = NPC_DISPOSE_POS_Z;
-                npc->flags |= NPC_FLAG_2;
+                npc->flags |= NPC_FLAG_INVISIBLE;
                 disable_npc_shadow(npc);
                 npc->flags &= ~NPC_FLAG_JUMPING;
-                enemy->flags |= ENEMY_FLAG_10000000 | ENEMY_FLAG_8000000 | ENEMY_FLAG_IGNORE_HAMMER |
+                enemy->flags |= ENEMY_FLAG_IGNORE_PARTNER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_HAMMER |
                                 ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH;
                 script->functionTemp[0] = 0;
                 evt_set_variable(script, LVar0, 1);

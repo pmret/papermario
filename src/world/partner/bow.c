@@ -69,7 +69,7 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
             BowTweesterPhysicsPtr->angularVelocity = 6.0f;
             BowTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             BowTweesterPhysicsPtr->countdown = 120;
-            bow->flags |= NPC_FLAG_40000 | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            bow->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             bow->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(BowTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -358,7 +358,7 @@ void func_802BDDF0_324740(Npc* bow) {
     }
 
     playerStatus->flags &= ~(PS_FLAG_HAZARD_INVINCIBILITY | PS_FLAG_JUMPING);
-    bow->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_2);
+    bow->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_INVISIBLE);
     D_802BE0C4 = FALSE;
     actionState = ACTION_STATE_IDLE;
 
@@ -404,6 +404,6 @@ void world_bow_pre_battle(Npc* bow) {
         partnerActionStatus->partnerActionState = 0;
         partnerActionStatus->actingPartner = 0;
         D_802BE0C0 = FALSE;
-        bow->flags &= ~NPC_FLAG_2;
+        bow->flags &= ~NPC_FLAG_INVISIBLE;
     }
 }

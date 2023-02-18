@@ -29,7 +29,7 @@ Vec3f N(FlightPath_TwinkDepart)[] = {
 };
 
 EvtScript N(EVS_StarSpirit_FlyAway) = {
-    EVT_CALL(SetNpcFlagBits, LVar4, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, LVar4, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_THREAD
         EVT_LOOP(30)
             EVT_CALL(GetNpcPos, LVar4, LVar0, LVar1, LVar2)

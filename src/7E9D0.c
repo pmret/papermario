@@ -586,7 +586,7 @@ void peach_check_for_parasol_input(void) {
 
                     disguiseNpc = peach_make_disguise_npc(gGameStatusPtr->peachDisguise);
                     if (disguiseNpc != NULL) {
-                        disguiseNpc->flags &= ~NPC_FLAG_40000;
+                        disguiseNpc->flags &= ~NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
                     }
                 }
             }
@@ -602,7 +602,7 @@ void peach_sync_disguise_npc(void) {
     if (PeachDisguiseNpcIndex >= 0) {
         Npc* npc = get_npc_by_index(PeachDisguiseNpcIndex);
 
-        if (npc->flags & NPC_FLAG_40000) {
+        if (npc->flags & NPC_FLAG_IGNORE_CAMERA_FOR_YAW) {
             npc->renderYaw = playerStatus->spriteFacingAngle;
         } else {
             npc->yaw = playerStatus->targetYaw;
@@ -630,7 +630,7 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
     playerStatus->peachDisguise = peachDisguise;
     gGameStatusPtr->peachDisguise = peachDisguise;
 
-    bpPtr->flags = NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_40000;
+    bpPtr->flags = NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
     bpPtr->initialAnim = BasicPeachDisguiseAnims[playerStatus->peachDisguise].idle;
     bpPtr->onUpdate = NULL;
     bpPtr->onRender = NULL;

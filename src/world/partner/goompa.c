@@ -60,7 +60,7 @@ ApiStatus func_802BD14C_324A5C(Evt* script, s32 isInitialCall) {
             GoompaTweesterPhysicsPtr->angularVelocity = 6.0f;
             GoompaTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             GoompaTweesterPhysicsPtr->countdown = 120;
-            goompa->flags |= NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_40000;
+            goompa->flags |= NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
             goompa->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(GoompaTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);

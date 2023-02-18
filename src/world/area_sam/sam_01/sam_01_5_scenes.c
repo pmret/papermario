@@ -714,7 +714,7 @@ EvtScript N(EVS_Scene_MysterySolved) = {
     EVT_CALL(SetNpcFlagBits, NPC_MayorPenguin, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SetNpcPos, NPC_PenguinPatrol, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcPos, NPC_Herringway, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcFlagBits, NPC_Herringway, NPC_FLAG_4, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Herringway, NPC_FLAG_INACTIVE, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_Herringway, FALSE)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)

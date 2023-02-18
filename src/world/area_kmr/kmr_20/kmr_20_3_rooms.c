@@ -22,14 +22,14 @@ EvtScript N(EVS_SetWallRot_House) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(90)
             EVT_SET(MF_Unk_0C, TRUE)
-            EVT_CALL(SetNpcFlagBits, NPC_Luigi_0, NPC_FLAG_2, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_Luigi_0, NPC_FLAG_INVISIBLE, FALSE)
             EVT_CALL(EnableGroup, MODEL_g60, FALSE)
             EVT_CALL(EnableGroup, MODEL_g34, FALSE)
         EVT_CASE_EQ(0)
             EVT_IF_EQ(MF_Unk_0C, TRUE)
                 EVT_CALL(EnableGroup, MODEL_g72, TRUE)
                 EVT_SET(MF_Unk_0C, FALSE)
-                EVT_CALL(SetNpcFlagBits, NPC_Luigi_0, NPC_FLAG_2, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_Luigi_0, NPC_FLAG_INVISIBLE, TRUE)
             EVT_END_IF
         EVT_CASE_DEFAULT
             EVT_CALL(EnableGroup, MODEL_g60, TRUE)

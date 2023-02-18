@@ -742,7 +742,7 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
             SushieTweesterPhysicsPtr->angularVelocity = 6.0f;
             SushieTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             SushieTweesterPhysicsPtr->countdown = 120;
-            sushie->flags |= NPC_FLAG_40000 | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            sushie->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             sushie->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(SushieTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);

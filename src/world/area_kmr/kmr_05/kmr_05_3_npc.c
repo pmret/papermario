@@ -57,7 +57,7 @@ EvtScript N(EVS_NpcIdle_SpikedGoomba) = {
             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
             EVT_CALL(NpcJump0, NPC_SELF, 685, 100, -35, 0)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_40000000, 1)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
             EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_SpikedGoomba_Wander)))
         EVT_CASE_OR_EQ(102)
         EVT_CASE_OR_EQ(3)

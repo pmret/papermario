@@ -67,7 +67,7 @@ EvtScript N(EVS_ManageSarcophagus1) = {
             EVT_END_IF
     EVT_END_IF
     EVT_SET(AF_ISK02_OpeningSarcophagus1, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Pokey_01, NPC_FLAG_2, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Pokey_01, NPC_FLAG_INVISIBLE, FALSE)
     EVT_SET(LVar0, AF_ISK02_Sarcophagus1Opened)
     EVT_SET(LVar3, MODEL_g346)
     EVT_EXEC_WAIT(N(EVS_OpenSarcophagus))
@@ -90,7 +90,7 @@ EvtScript N(EVS_ManageSarcophagus2) = {
     EVT_END_IF
     EVT_CALL(MakeItemEntity, ITEM_SPIKE_SHIELD, -133, 1, 500, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_ISK02_Item_SpikeShield)
     EVT_SET(AF_ISK02_OpeningSarcophagus2, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Pokey_02, NPC_FLAG_2, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Pokey_02, NPC_FLAG_INVISIBLE, FALSE)
     EVT_SET(LVar0, AF_ISK02_Sarcophagus2Opened)
     EVT_SET(LVar3, MODEL_g348)
     EVT_EXEC_WAIT(N(EVS_OpenSarcophagus))
@@ -112,7 +112,7 @@ EvtScript N(EVS_ManageSarcophagus3) = {
             EVT_END_IF
     EVT_END_IF
     EVT_SET(AF_ISK02_OpeningSarcophagus3, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Pokey_03, NPC_FLAG_2, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Pokey_03, NPC_FLAG_INVISIBLE, FALSE)
     EVT_SET(LVar0, AF_ISK02_Sarcophagus3Opened)
     EVT_SET(LVar3, MODEL_g350)
     EVT_EXEC_WAIT(N(EVS_OpenSarcophagus))

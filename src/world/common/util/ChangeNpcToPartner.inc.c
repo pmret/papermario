@@ -40,7 +40,7 @@ API_CALLABLE(N(ChangeNpcToPartner)) {
             break;
         case 3:
             set_npc_yaw(get_npc_safe(NPC_PARTNER), npc->yaw);
-            npc->flags &= ~NPC_FLAG_4;
+            npc->flags &= ~NPC_FLAG_INACTIVE;
             disable_npc_shadow(npc);
             npc->pos.y = NPC_DISPOSE_POS_Y;
             return ApiStatus_DONE2;

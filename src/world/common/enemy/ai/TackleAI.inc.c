@@ -12,11 +12,7 @@
 #include "world/common/enemy/ai/States_TackleAI.inc.c"
 
 API_CALLABLE(N(TackleAI_Main)) {
-    #ifdef _DEAD_H_
-    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
-    #else
     Enemy* enemy = script->owner1.enemy;
-    #endif
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;
@@ -50,7 +46,7 @@ API_CALLABLE(N(TackleAI_Main)) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = 0;
         npc->duration = 0;
-        enemy->unk_07 = 0;
+        enemy->hitboxIsActive = FALSE;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->collisionHeight = enemy->varTable[6];
@@ -71,9 +67,9 @@ API_CALLABLE(N(TackleAI_Main)) {
             script->functionTemp[1] = 0;
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 40, &emoteTemp);
             enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
-        } else if (enemy->flags & ENEMY_FLAG_40000000) {
+        } else if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {
             script->AI_TEMP_STATE = 12;
-            enemy->flags &= ~ENEMY_FLAG_40000000;
+            enemy->flags &= ~ENEMY_FLAG_BEGIN_WITH_CHASING;
         }
     }
 

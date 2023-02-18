@@ -116,7 +116,7 @@ EvtScript N(EVS_Scene_RescuedKalmar) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_Kalmar, ANIM_WorldKalmar_Talk, ANIM_WorldKalmar_Idle, 512, MSG_CH7_016F)
-    EVT_CALL(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_THREAD
         EVT_LOOP(25)
             EVT_CALL(GetNpcPos, NPC_Kalmar, LVar0, LVar1, LVar2)
@@ -183,7 +183,7 @@ NpcData N(NpcData_Kalmar) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kalmar),
     .settings = &N(NpcSettings_StarSpirit),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_200000 | ENEMY_FLAG_400000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = KALMAR_ANIMS,
 };

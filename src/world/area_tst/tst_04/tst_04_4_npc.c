@@ -7,7 +7,7 @@ API_CALLABLE(N(DisableOwnerShadow)) {
 
 EvtScript N(EVS_NpcAuxAI_Goompa) = {
     EVT_CALL(N(DisableOwnerShadow))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_RETURN
     EVT_END
 };

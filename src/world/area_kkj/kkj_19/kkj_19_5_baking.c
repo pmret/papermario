@@ -702,7 +702,7 @@ EvtScript N(EVS_FocusCam_Table) = {
 };
 
 EvtScript N(EVS_Twink_FlyToPlayer) = {
-    EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_8000000, 1)
+    EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 1)
     EVT_CALL(SetNpcVar, NPC_Twink, 1, 0)
     EVT_CALL(GetNpcPos, NPC_PARTNER, LVar3, LVar1, LVar2)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -898,7 +898,7 @@ EvtScript N(EVS_ManageBaking) = {
     EVT_SET(AF_KKJ_FinishedBakingCake, FALSE)
     EVT_SET(AF_KKJ19_FailedBakingTask, FALSE)
     EVT_SET(AB_KKJ19_HeldIngredient, PEACH_BAKING_NONE)
-    EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_8000000, 1)
+    EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 1)
     EVT_CALL(SetNpcVar, NPC_Twink, 1, 0)
     EVT_IF_EQ(AB_KKJ_CompletedBakeStep, CAKE_TYPE_READY_TO_MIX)
         // resume mixing
@@ -961,7 +961,7 @@ EvtScript N(EVS_ManageBaking) = {
         EVT_WAIT(20)
         EVT_THREAD
             EVT_EXEC_WAIT(N(EVS_Twink_FlyToHighPos))
-            EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_8000000, 0)
+            EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 0)
             EVT_CALL(SetNpcVar, NPC_Twink, 1, 1)
         EVT_END_THREAD
         EVT_SET(LVarA, 1)
@@ -984,14 +984,14 @@ EvtScript N(EVS_ManageBaking) = {
     EVT_SET(LVarA, 1)
     EVT_THREAD
         EVT_EXEC_WAIT(N(EVS_Twink_FlyToHighPos))
-        EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_8000000, 0)
+        EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 0)
         EVT_CALL(SetNpcVar, NPC_Twink, 1, 1)
     EVT_END_THREAD
     // wait for peach to tell twink shes done
     EVT_LABEL(LBL_ADD_SUGAR_EGGS_WAITING)
         EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
         EVT_IF_EQ(LVarA, 0)
-            EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_8000000, 0)
+            EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 0)
             EVT_CALL(SetNpcVar, NPC_Twink, 1, 1)
         EVT_END_IF
         EVT_CALL(DisablePlayerInput, FALSE)
@@ -1125,14 +1125,14 @@ EvtScript N(EVS_ManageBaking) = {
     EVT_SET(LVarA, 1)
     EVT_THREAD
         EVT_EXEC_WAIT(N(EVS_Twink_FlyToHighPos))
-        EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_8000000, 0)
+        EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 0)
         EVT_CALL(SetNpcVar, NPC_Twink, 1, 1)
     EVT_END_THREAD
     // wait for peach to tell twink shes done
     EVT_LABEL(LBL_ADD_FLOUR_BUTTER_WAITING)
         EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
         EVT_IF_EQ(LVarA, 0)
-            EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_8000000, 0)
+            EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 0)
             EVT_CALL(SetNpcVar, NPC_Twink, 1, 1)
         EVT_END_IF
         EVT_CALL(DisablePlayerInput, FALSE)
@@ -1342,7 +1342,7 @@ EvtScript N(EVS_ManageBaking) = {
     EVT_LABEL(LBL_DECORATE_WAITING)
         EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
         EVT_IF_EQ(LVarA, 0)
-            EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_8000000, 0)
+            EVT_CALL(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 0)
             EVT_CALL(SetNpcVar, NPC_Twink, 1, 1)
         EVT_END_IF
         EVT_CALL(DisablePlayerInput, FALSE)

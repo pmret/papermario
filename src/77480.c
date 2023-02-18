@@ -41,7 +41,7 @@ void check_for_interactables(void);
 void func_800E0AD0(void);
 void func_800E0B14(void);
 void update_partner_timers(void);
-void player_sprite_behaviour(void);
+void player_update_sprite(void);
 s32 get_player_back_anim(s32 arg0);
 void appendGfx_player(void* data);
 void appendGfx_player_spin(void* data);
@@ -655,7 +655,7 @@ void update_player(void) {
         handle_floor_behavior();
     }
 
-    player_sprite_behaviour();
+    player_update_sprite();
 
     gameStatus = gGameStatusPtr;
     gameStatus->playerPos.x = playerStatus->position.x;
@@ -1071,8 +1071,7 @@ s32 has_valid_conversation_npc(void) {
     s32 cond;
 
     if (npc != NULL && !(npc->flags & NPC_FLAG_10000000)) {
-        cond = (playerStatus->flags & (PS_FLAG_HAS_CONVERSATION_NPC | PS_FLAG_INPUT_DISABLED))
-        == PS_FLAG_HAS_CONVERSATION_NPC;
+        cond = (playerStatus->flags & (PS_FLAG_HAS_CONVERSATION_NPC | PS_FLAG_INPUT_DISABLED)) == PS_FLAG_HAS_CONVERSATION_NPC;
         ret = cond;
     }
     return ret;
@@ -1202,8 +1201,11 @@ void check_for_interactables(void) {
                         curInteraction = -1;
                         break;
                 }
-            } else if (((playerStatus->flags & (PS_FLAG_HAS_CONVERSATION_NPC | PS_FLAG_INPUT_DISABLED)) == PS_FLAG_HAS_CONVERSATION_NPC)
-                         && (npc != NULL) && (npc->flags & NPC_FLAG_10000000)) {
+            } else if (
+                ((playerStatus->flags & (PS_FLAG_HAS_CONVERSATION_NPC | PS_FLAG_INPUT_DISABLED)) == PS_FLAG_HAS_CONVERSATION_NPC)
+                && (npc != NULL)
+                && (npc->flags & NPC_FLAG_10000000)
+            ) {
                 curInteraction = npc->npcID | COLLISION_WITH_NPC_BIT;
                 if (playerStatus->interactingWithID == curInteraction) {
                     return;
@@ -1295,7 +1297,7 @@ void update_partner_timers(void) {
     }
 }
 
-void player_sprite_behaviour(void) {
+void player_update_sprite(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 cameraYaw = gCameras[gCurrentCameraID].currentYaw;
     f32 camRelativeYaw = get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw);

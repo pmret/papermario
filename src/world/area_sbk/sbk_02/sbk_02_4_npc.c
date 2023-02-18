@@ -121,7 +121,7 @@ EvtScript N(EVS_Scene_RescuedMamar) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, SPEECH_FLAG_200, MSG_CH2_00ED)
-    EVT_CALL(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_THREAD
         EVT_LOOP(25)
             EVT_CALL(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
@@ -268,7 +268,7 @@ NpcData N(NpcData_TradingToad) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_TradingToad),
     .settings = &N(NpcSettings_Toad_Stationary),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_2000 | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Toad_Pink_Idle,

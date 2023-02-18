@@ -110,7 +110,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
             LakilesterTweesterPhysicsPtr->angularVelocity = 6.0f;
             LakilesterTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             LakilesterTweesterPhysicsPtr->countdown = 120;
-            lakilester->flags |= NPC_FLAG_40000 | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            lakilester->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             lakilester->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(LakilesterTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
@@ -588,7 +588,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 npc->currentAnim = ANIM_WorldLakilester_Walk;
                 D_802BFF0C = 1;
                 npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
-                npc->flags |= (NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_400000);
+                npc->flags |= (NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_TOUCHES_GROUND);
                 partnerActionStatus->actingPartner = PARTNER_LAKILESTER;
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_LAKILESTER_1;
                 gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
@@ -676,7 +676,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             }
 
             npc->flags &= ~NPC_FLAG_8;
-            npc->flags |= (NPC_FLAG_400000 | NPC_FLAG_IGNORE_PLAYER_COLLISION);
+            npc->flags |= (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_IGNORE_PLAYER_COLLISION);
             set_action_state(ACTION_STATE_RIDE);
             D_802BFF0C = 1;
             func_800EF4E0();
@@ -869,7 +869,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
 
         if (D_802BFF14 == 10) {
             D_802BFF0C = 0;
-            npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_400000 | NPC_FLAG_8);
+            npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_8);
 
             if (D_802BFF08 != 0) {
                 D_802BFF08 = 0;
@@ -901,7 +901,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
         }
 
         if (D_802BFF14 == 11) {
-            npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_400000 | NPC_FLAG_8);
+            npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_8);
             partnerActionStatus->actingPartner = PARTNER_NONE;
             partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
             playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;

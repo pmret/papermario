@@ -126,7 +126,7 @@ EvtScript N(EVS_Scene_RescuedMuskular) = {
     EVT_CALL(SetCamDistance, CAM_DEFAULT, -400)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_THREAD
         EVT_LOOP(25)
             EVT_CALL(GetNpcPos, NPC_Muskular, LVar0, LVar1, LVar2)

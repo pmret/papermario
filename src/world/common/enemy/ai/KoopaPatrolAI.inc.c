@@ -31,7 +31,7 @@ API_CALLABLE(N(KoopaPatrolAI_Main)) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         npc->duration = 0;
         script->functionTemp[0] = 0;
-        enemy->unk_07 = 0;
+        enemy->hitboxIsActive = FALSE;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->collisionHeight = enemy->varTable[6];
@@ -53,9 +53,9 @@ API_CALLABLE(N(KoopaPatrolAI_Main)) {
             script->functionTemp[1] = 0;
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 40, &emoteTemp);
             enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
-        } else if (enemy->flags & ENEMY_FLAG_40000000) {
-            script->functionTemp[0] = 12;
-            enemy->flags &= ~ENEMY_FLAG_40000000;
+        } else if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {
+            script->functionTemp[0] = AI_STATE_CHASE_INIT;
+            enemy->flags &= ~ENEMY_FLAG_BEGIN_WITH_CHASING;
         }
     }
 

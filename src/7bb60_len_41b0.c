@@ -681,7 +681,6 @@ void collision_main_lateral(void) {
                 }
                 collisionStatus->currentWall = result;
                 if (!(playerStatus->flags & PS_FLAG_MOVEMENT_LOCKED) && playerStatus->actionState != ACTION_STATE_HAMMER) {
-
                     if (speed == 0.0f) {
                         collision_check_player_intersecting_world(0, 0,
                             playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw);

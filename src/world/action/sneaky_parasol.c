@@ -109,7 +109,7 @@ void action_update_parasol(void) {
             transformation->reverted = 1;
             transformation->revertTime = 12;
             disguiseNpc = get_npc_by_index(PeachDisguiseNpcIndex);
-            disguiseNpc->flags |= NPC_FLAG_40000;
+            disguiseNpc->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
             playerStatus->flags |= PS_FLAG_ROTATION_LOCKED;
             sfx_play_sound_at_player(SOUND_FD, SOUND_SPACE_MODE_0);
         }
@@ -229,7 +229,7 @@ void action_update_parasol(void) {
             if (--playerStatus->currentStateTime == 0) {
                 set_time_freeze_mode(TIME_FREEZE_NORMAL);
                 disguiseNpc = get_npc_by_index(PeachDisguiseNpcIndex);
-                disguiseNpc->flags &= ~NPC_FLAG_40000;
+                disguiseNpc->flags &= ~NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
                 playerStatus->flags &= ~PS_FLAG_ROTATION_LOCKED;
                 set_action_state(ACTION_STATE_IDLE);
                 enable_player_static_collisions();

@@ -104,7 +104,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     gNpcCount++;
     ASSERT(npc != NULL);
 
-    npc->flags = blueprint->flags | (NPC_FLAG_400000 | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW | NPC_FLAG_1);
+    npc->flags = blueprint->flags | (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW | NPC_FLAG_ENABLED);
     if (isPeachNpc) {
         npc->flags |= NPC_FLAG_NO_ANIMS_LOADED;
     }
@@ -177,7 +177,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
                 npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim | SPRITE_ID_TAIL_ALLOCATE, animList);
             }
         } else {
-            npc->flags |= NPC_FLAG_2;
+            npc->flags |= NPC_FLAG_INVISIBLE;
         }
     }
 
@@ -409,7 +409,7 @@ void npc_do_other_npc_collision(Npc* npc) {
         for (i = 0; i < 0x40; i++) {
             otherNpc = get_npc_by_index(i);
             if (otherNpc != NULL && npc != otherNpc) {
-                if (otherNpc->flags != 0 && !(otherNpc->flags & (NPC_FLAG_80000000 | NPC_FLAG_IGNORE_PLAYER_COLLISION))) {
+                if (otherNpc->flags != 0 && !(otherNpc->flags & (NPC_FLAG_SUSPENDED | NPC_FLAG_IGNORE_PLAYER_COLLISION))) {
                     if (!(otherNpc->pos.y + otherNpc->collisionHeight < thisY) &&
                         !(thisY + npc->collisionHeight < otherNpc->pos.y))
                     {
@@ -492,13 +492,13 @@ void npc_do_gravity(Npc* npc) {
     }
 }
 
-s32 func_800397E8(Npc* npc, f32 arg1) {
+s32 func_800397E8(Npc* npc, f32 velocity) {
     if (!(npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_8))) {
         f32 x;
         f32 y;
         f32 z;
         f32 length;
-        f32 oldLength;
+        f32 testLength;
         s32 phi_v0;
 
         if (npc->flags & NPC_FLAG_JUMPING) {
@@ -506,7 +506,7 @@ s32 func_800397E8(Npc* npc, f32 arg1) {
             return FALSE;
         }
 
-        length = oldLength = fabsf(arg1) + 16;
+        length = testLength = fabsf(velocity) + 16;
         x = npc->pos.x;
         y = npc->pos.y + 13;
         z = npc->pos.z;
@@ -517,7 +517,7 @@ s32 func_800397E8(Npc* npc, f32 arg1) {
             phi_v0 = npc_raycast_down_around(npc->collisionChannel, &x, &y, &z, &length, npc->yaw, npc->collisionRadius);
         }
 
-        if (phi_v0 != 0 && length <= oldLength) {
+        if (phi_v0 != 0 && length <= testLength) {
             npc->pos.y = y;
             npc->currentFloor = NpcHitQueryColliderID;
             npc->flags |= NPC_FLAG_FALLING;
@@ -545,7 +545,7 @@ void update_npcs(void) {
 
             if (npc != NULL) {
                 if (npc->flags != 0) {
-                    if (npc->flags & (NPC_FLAG_80000000 | NPC_FLAG_4)) {
+                    if (npc->flags & (NPC_FLAG_SUSPENDED | NPC_FLAG_INACTIVE)) {
                         npc_do_world_collision(npc);
                         continue;
                     }
@@ -659,34 +659,34 @@ void update_npcs(void) {
     }
 }
 
-// float regalloc, issue at the bottom with a mov.s
-#ifdef NON_MATCHING
 f32 npc_get_render_yaw(Npc* npc) {
     Camera* camera = &gCameras[gCurrentCamID];
     f32 cameraYaw;
-    f32 temp;
-    s32 phi_s0;
+    f32 camRelativeYaw;
+    f32 yaw;
+    s32 direction;
 
     if (!(gOverrideFlags & (GLOBAL_OVERRIDES_8000 | GLOBAL_OVERRIDES_4000))) {
         cameraYaw = camera->currentYaw;
-        temp = get_clamped_angle_diff(cameraYaw, npc->yaw);
+        camRelativeYaw = get_clamped_angle_diff(cameraYaw, npc->yaw);
 
-        if (temp < -5.0f && temp > -175.0f) {
-            phi_s0 = 0;
-            temp = clamp_angle(0.0f);
-        } else if (temp > 5.0f && temp < 175.0f) {
-            phi_s0 = 1;
-            temp = clamp_angle(180.0f);
+        if (camRelativeYaw < -5.0f && camRelativeYaw > -175.0f) {
+            direction = 0;
+            camRelativeYaw = 0.0f;
+        } else if (camRelativeYaw > 5.0f && camRelativeYaw < 175.0f) {
+            direction = 1;
+            camRelativeYaw = 180.0f;
         } else {
-            phi_s0 = 2;
-            temp = clamp_angle(npc->yawCamOffset);
+            // direction is close to flipping, use saved value
+            direction = 2;
+            camRelativeYaw = npc->yawCamOffset;
         }
 
-        npc->yawCamOffset = temp;
+        npc->yawCamOffset = yaw = clamp_angle(camRelativeYaw);
 
-        if (!(npc->flags & NPC_FLAG_40000)) {
-            if (npc->isFacingAway != phi_s0 && phi_s0 != 2) {
-                npc->isFacingAway = phi_s0;
+        if (!(npc->flags & NPC_FLAG_IGNORE_CAMERA_FOR_YAW)) {
+            if (npc->isFacingAway != direction && direction != 2) {
+                npc->isFacingAway = direction;
 
                 if (npc->isFacingAway) {
                     npc->turnAroundYawAdjustment = 180;
@@ -712,16 +712,16 @@ f32 npc_get_render_yaw(Npc* npc) {
                 npc->turnAroundYawAdjustment = 0;
             }
 
-            temp = clamp_angle(clamp_angle(npc->turnAroundYawAdjustment + temp) - cameraYaw);
-            npc->renderYaw = temp;
-            return temp;
+            npc->renderYaw = clamp_angle(clamp_angle(npc->turnAroundYawAdjustment + yaw) - cameraYaw);
+            yaw = npc->renderYaw;
+        } else {
+            yaw = npc->renderYaw;
         }
+    } else {
+        yaw = npc->renderYaw;
     }
-    return npc->renderYaw;
+    return yaw;
 }
-#else
-INCLUDE_ASM(f32, "npc", npc_get_render_yaw);
-#endif
 
 void appendGfx_npc(void* data) {
     Npc* npc = data;
@@ -847,56 +847,52 @@ void appendGfx_npc(void* data) {
 }
 
 void render_npcs(void) {
-    f32 temp_f20;
     Npc* npc;
-    f32 phi_f20;
-    s32 i;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
-    f32 x;
-    f32 y;
-    f32 z;
-    f32 s;
     Camera* cam = &gCameras[gCurrentCamID];
+    f32 x, y, z, s;
+    f32 renderDist;
+    s32 i;
 
     for (i = 0; i < MAX_NPCS; i++) {
-
         Npc* npc = (*gCurrentNpcListPtr)[i];
-        if (npc != NULL) {
-            if (npc->flags && !(npc->flags & (NPC_FLAG_80000000 | NPC_FLAG_HAS_NO_SPRITE | NPC_FLAG_4 | NPC_FLAG_2))) {
-                transform_point(cam->perspectiveMatrix, npc->pos.x, npc->pos.y, npc->pos.z, 1.0f, &x, &y, &z, &s);
-                if (!(s < 0.01) || !(s > -0.01)) {
-                    phi_f20 = ((z * 5000.0f) / s) + 5000.0f;
-                    if (phi_f20 < 0.0f) {
-                        phi_f20 = 0.0f;
-                    } else if (phi_f20 > 10000.0f) {
-                        phi_f20 = 10000.0f;
-                    }
+        if ((npc != NULL) 
+            && (npc->flags != 0)
+            && !(npc->flags & (NPC_FLAG_SUSPENDED | NPC_FLAG_HAS_NO_SPRITE | NPC_FLAG_INACTIVE | NPC_FLAG_INVISIBLE))
+        ) {
+            transform_point(cam->perspectiveMatrix, npc->pos.x, npc->pos.y, npc->pos.z, 1.0f, &x, &y, &z, &s);
+            if (!(s < 0.01) || !(s > -0.01)) {
+                renderDist = ((z * 5000.0f) / s) + 5000.0f;
+                if (renderDist < 0.0f) {
+                    renderDist = 0.0f;
+                } else if (renderDist > 10000.0f) {
+                    renderDist = 10000.0f;
+                }
 
-                    renderTaskPtr->distance = -phi_f20;
+                renderTaskPtr->distance = -renderDist;
+                renderTaskPtr->appendGfxArg = npc;
+                renderTaskPtr->appendGfx = appendGfx_npc;
+                renderTaskPtr->renderMode = npc->renderMode;
+
+                if (npc->flags & NPC_FLAG_HIDING) {
+                    u8 r, g, b, a;
+                    get_background_color_blend(&r, &g, &b, &a);
+                    npc->alpha2 = 255 - a;
+                } else {
+                    npc->alpha2 = 255;
+                }
+
+                if (npc->alpha2 != 0) {
+                    queue_render_task(renderTaskPtr);
+                }
+
+                if (npc->flags & NPC_FLAG_MOTION_BLUR) {
+                    renderTaskPtr->distance = -renderDist;
+                    renderTaskPtr->appendGfx = appendGfx_npc_blur;
                     renderTaskPtr->appendGfxArg = npc;
-                    renderTaskPtr->appendGfx = appendGfx_npc;
-                    renderTaskPtr->renderMode = npc->renderMode;
-
-                    if (npc->flags & NPC_FLAG_HIDING) {
-                        u8 r, g, b, a;
-                        get_background_color_blend(&r, &g, &b, &a);
-                        npc->alpha2 = 255 - a;
-                    } else {
-                        npc->alpha2 = 255;
-                    }
-
-                    if (npc->alpha2 != 0) {
-                        queue_render_task(renderTaskPtr);
-                    }
-
-                    if (npc->flags & NPC_FLAG_MOTION_BLUR) {
-                        renderTaskPtr->distance = -phi_f20;
-                        renderTaskPtr->appendGfx = appendGfx_npc_blur;
-                        renderTaskPtr->appendGfxArg = npc;
-                        renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-                        queue_render_task(renderTaskPtr);
-                    }
+                    renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
+                    queue_render_task(renderTaskPtr);
                 }
             }
         }
@@ -1883,7 +1879,7 @@ Npc* npc_find_closest(f32 x, f32 y, f32 z, f32 radius) {
         Npc* npc = (*gCurrentNpcListPtr)[i];
 
         if (npc != NULL && npc->flags != 0 && !(npc->flags & NPC_FLAG_PARTNER)) {
-            if (!(npc->flags & (NPC_FLAG_80000000 | NPC_FLAG_4))) {
+            if (!(npc->flags & (NPC_FLAG_SUSPENDED | NPC_FLAG_INACTIVE))) {
                 f32 distance = fabsf(dist2D(npc->pos.x, npc->pos.z, x, z));
 
                 if (distance <= maxDist) {
@@ -1909,7 +1905,7 @@ Npc* npc_find_closest_simple(f32 x, f32 y, f32 z, f32 radius) {
         Npc* npc = (*gCurrentNpcListPtr)[i];
 
         if (npc != NULL && npc->flags != 0 && (npc->flags & NPC_FLAG_PARTNER)) {
-            if (!(npc->flags & (NPC_FLAG_80000000 | NPC_FLAG_4))) {
+            if (!(npc->flags & (NPC_FLAG_SUSPENDED | NPC_FLAG_INACTIVE))) {
                 f32 distance = fabsf(dist2D(npc->pos.x, npc->pos.z, x, z));
 
                 if (distance <= maxDist) {
@@ -1943,7 +1939,7 @@ s32 npc_find_standing_on_entity(s32 entityIndex) {
         if (npc->flags == 0) {
             continue;
         }
-        if (npc->flags & (NPC_FLAG_80000000 | NPC_FLAG_4)) {
+        if (npc->flags & (NPC_FLAG_SUSPENDED | NPC_FLAG_INACTIVE)) {
             continue;
         }
         if (npc->flags & NPC_FLAG_PARTNER) {
@@ -2079,7 +2075,7 @@ void func_8003D624(Npc* npc, s32 foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg
 void func_8003D660(Npc* npc, s32 arg1) {
     PartnerActionStatus* temp = &gPartnerActionStatus;
 
-    if ((npc->flags & (NPC_FLAG_400000 | NPC_FLAG_2)) == NPC_FLAG_400000) {
+    if ((npc->flags & (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_INVISIBLE)) == NPC_FLAG_TOUCHES_GROUND) {
         if (npc->moveSpeed != 0.0f) {
             s32 surfaceType = get_collider_flags((u16)npc->currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
             switch (surfaceType) {
@@ -2539,13 +2535,12 @@ void kill_enemy(Enemy* enemy) {
     }
 
     do {
-        if (!(enemy->flags & ENEMY_FLAG_4)) {
-            if (!(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || (enemy == encounterStatus->currentEnemy)) {
-                if (!(enemy->flags & ENEMY_FLAG_PASSIVE)) {
-                    if (!(enemy->flags & ENEMY_FLAG_FLED)) {
-                        COPY_set_defeated(encounterStatus->mapID, encounter->encounterID + i);
-                    }
-                }
+        if (!(enemy->flags & ENEMY_FLAG_4)
+            && (!(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || (enemy == encounterStatus->currentEnemy))
+            && !(enemy->flags & ENEMY_FLAG_PASSIVE)
+        ) {
+            if (!(enemy->flags & ENEMY_FLAG_FLED)) {
+                COPY_set_defeated(encounterStatus->mapID, encounter->encounterID + i);
             }
         }
     } while (0); // required to match

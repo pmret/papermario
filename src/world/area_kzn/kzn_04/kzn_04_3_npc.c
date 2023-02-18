@@ -15,14 +15,14 @@ EvtScript N(EVS_FireBar_Defeated) = {
     EVT_SET(LVarB, LVar1)
     EVT_LOOP(15)
         EVT_LOOP(LVar1)
-            EVT_CALL(SetNpcFlagBits, LVar0, NPC_FLAG_2, TRUE)
+            EVT_CALL(SetNpcFlagBits, LVar0, NPC_FLAG_INVISIBLE, TRUE)
             EVT_ADD(LVar0, 1)
         EVT_END_LOOP
         EVT_WAIT(1)
         EVT_SET(LVar0, LVarA)
         EVT_SET(LVar1, LVarB)
         EVT_LOOP(LVar1)
-            EVT_CALL(SetNpcFlagBits, LVar0, NPC_FLAG_2, FALSE)
+            EVT_CALL(SetNpcFlagBits, LVar0, NPC_FLAG_INVISIBLE, FALSE)
             EVT_ADD(LVar0, 1)
         EVT_END_LOOP
         EVT_WAIT(1)

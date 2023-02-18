@@ -293,7 +293,7 @@ NpcData N(NpcData_Misstar) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Misstar),
     .settings = &N(NpcSettings_StarSpirit),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER,
     .drops = NO_DROPS,
     .animations = MISSTAR_ANIMS,
 };

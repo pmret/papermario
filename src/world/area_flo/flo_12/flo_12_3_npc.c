@@ -163,7 +163,7 @@ EvtScript N(EVS_NpcInit_Rosie) = {
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 35)
     EVT_CALL(SetNpcPos, NPC_Dummy, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_2, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_HAS_SHADOW, TRUE)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH6_GOT_CRYSTAL_BERRY)

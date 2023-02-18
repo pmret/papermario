@@ -199,7 +199,7 @@ EvtScript N(EVS_NpcInit_Wisterwood) = {
     EVT_CALL(EnableGroup, MODEL_tuta, FALSE)
     EVT_CALL(EnableGroup, MODEL_g54, FALSE)
     EVT_CALL(SetNpcPos, NPC_SELF, 50, 70, -230)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_IF_LT(GB_StoryProgress, STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
         EVT_EXEC(N(EVS_Wisterwood_Introduction))
@@ -518,7 +518,7 @@ EvtScript N(EVS_Scene_RescuedKlevar) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_Klevar, ANIM_WorldKlevar_Talk, ANIM_WorldKlevar_Idle, SPEECH_FLAG_200, MSG_CH6_00DA)
-    EVT_CALL(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_THREAD
         EVT_LOOP(25)
             EVT_CALL(GetNpcPos, NPC_Klevar, LVar0, LVar1, LVar2)
@@ -650,7 +650,7 @@ NpcData N(NpcData_Bubulbs)[] = {
         },
         .init = &N(EVS_NpcInit_Bubulb_01),
         .settings = &N(NpcSettings_Bubulb_Patrol),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = BUBULB_PINK_ANIMS,
         .tattle = MSG_NpcTattle_FLO_BubulbA,
@@ -675,7 +675,7 @@ NpcData N(NpcData_Bubulbs)[] = {
         },
         .init = &N(EVS_NpcInit_Bubulb_02),
         .settings = &N(NpcSettings_Bubulb_Patrol),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = BUBULB_PURPLE_ANIMS,
         .tattle = MSG_NpcTattle_FLO_BubulbB,
@@ -700,7 +700,7 @@ NpcData N(NpcData_Bubulbs)[] = {
         },
         .init = &N(EVS_NpcInit_Bubulb_03),
         .settings = &N(NpcSettings_Bubulb_Patrol),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = BUBULB_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_FLO_BubulbC,
@@ -725,7 +725,7 @@ NpcData N(NpcData_Bubulbs)[] = {
         },
         .init = &N(EVS_NpcInit_Bubulb_04),
         .settings = &N(NpcSettings_Bubulb_Patrol),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_2000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = BUBULB_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_FLO_BubulbD,
@@ -738,7 +738,7 @@ NpcData N(NpcData_Tolielup) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Tolielup),
     .settings = &N(NpcSettings_Tolielup),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = TOLIELUP_ANIMS,
     .tattle = MSG_NpcTattle_Tolielup,

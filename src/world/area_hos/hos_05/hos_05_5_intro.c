@@ -1084,7 +1084,7 @@ EvtScript N(EVS_CaptureSpirits) = {
         EVT_CALL(N(SetCardCaptureState1))
         EVT_CALL(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Panic)
         EVT_CALL(func_802CFD30, NPC_Klevar, FOLD_TYPE_NONE, 0, 0, 0, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_INVISIBLE, TRUE)
         EVT_CALL(func_802D7B10, ArrayVar(13))
     EVT_END_THREAD
     EVT_WAIT(20)
@@ -1112,7 +1112,7 @@ EvtScript N(EVS_CaptureSpirits) = {
         EVT_CALL(N(SetCardCaptureState1))
         EVT_CALL(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_IdleSad)
         EVT_CALL(func_802CFD30, NPC_Skolar, FOLD_TYPE_NONE, 0, 0, 0, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_INVISIBLE, TRUE)
         EVT_CALL(func_802D7B10, ArrayVar(10))
     EVT_END_THREAD
     EVT_WAIT(20)
@@ -1140,7 +1140,7 @@ EvtScript N(EVS_CaptureSpirits) = {
         EVT_CALL(N(SetCardCaptureState1))
         EVT_CALL(SetNpcAnimation, NPC_Muskular, ANIM_WorldMuskular_Panic)
         EVT_CALL(func_802CFD30, NPC_Muskular, FOLD_TYPE_NONE, 0, 0, 0, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_INVISIBLE, TRUE)
         EVT_CALL(func_802D7B10, ArrayVar(11))
     EVT_END_THREAD
     EVT_WAIT(20)
@@ -1168,7 +1168,7 @@ EvtScript N(EVS_CaptureSpirits) = {
         EVT_CALL(N(SetCardCaptureState1))
         EVT_CALL(SetNpcAnimation, NPC_Kalmar, ANIM_WorldKalmar_Panic)
         EVT_CALL(func_802CFD30, NPC_Kalmar, FOLD_TYPE_NONE, 0, 0, 0, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_INVISIBLE, TRUE)
         EVT_CALL(func_802D7B10, ArrayVar(14))
     EVT_END_THREAD
     EVT_WAIT(20)
@@ -1196,7 +1196,7 @@ EvtScript N(EVS_CaptureSpirits) = {
         EVT_CALL(N(SetCardCaptureState1))
         EVT_CALL(SetNpcAnimation, NPC_Misstar, ANIM_WorldMisstar_Panic)
         EVT_CALL(func_802CFD30, NPC_Misstar, FOLD_TYPE_NONE, 0, 0, 0, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Misstar, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Misstar, NPC_FLAG_INVISIBLE, TRUE)
         EVT_CALL(func_802D7B10, ArrayVar(12))
     EVT_END_THREAD
     EVT_WAIT(20)
@@ -1224,7 +1224,7 @@ EvtScript N(EVS_CaptureSpirits) = {
         EVT_CALL(N(SetCardCaptureState1))
         EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Panic)
         EVT_CALL(func_802CFD30, NPC_Mamar, FOLD_TYPE_NONE, 0, 0, 0, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_INVISIBLE, TRUE)
         EVT_CALL(func_802D7B10, ArrayVar(9))
     EVT_END_THREAD
     EVT_WAIT(20)
@@ -1946,7 +1946,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_CALL(SetNpcPaletteSwapping, NPC_Misstar, 0, 1, 25, 12, 4, 18, 0, 0)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Klevar, 0, 1, 25, 12, 4, 18, 0, 0)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Kalmar, 0, 1, 25, 12, 4, 18, 0, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_StarRod, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_StarRod, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarStill)
     EVT_CALL(SetNpcAnimation, NPC_Bowser_Prop, ANIM_WorldBowser_ClownCarPropeller)
     EVT_CALL(EnableNpcShadow, NPC_Bowser_Body, FALSE)
@@ -2408,7 +2408,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
         EVT_CALL(N(SetCardCaptureState1))
         EVT_CALL(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Panic)
         EVT_CALL(func_802CFD30, NPC_Eldstar, FOLD_TYPE_NONE, 0, 0, 0, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_INVISIBLE, TRUE)
         EVT_CALL(func_802D7B10, ArrayVar(8))
     EVT_END_THREAD
     EVT_WAIT(15)

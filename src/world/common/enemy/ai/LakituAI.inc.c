@@ -156,16 +156,8 @@ void N(LakituAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     }
 }
 
-#ifdef _DEAD_H_
-#include "dead_structs.h"
-#endif
-
 s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
-    #ifdef _DEAD_H_
-    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
-    #else
     Enemy* enemy = script->owner1.enemy;
-    #endif
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;

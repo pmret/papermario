@@ -168,7 +168,7 @@ void N(CleftAI_RevUp)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
         enemy->unk_10.x = npc->pos.x;
         enemy->unk_10.y = npc->pos.y;
         enemy->unk_10.z = npc->pos.z;
-        enemy->unk_07 = 1;
+        enemy->hitboxIsActive = TRUE;
         npc->moveSpeed = aiSettings->chaseSpeed;
         npc->duration = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
                                gPlayerStatusPtr->position.z) / npc->moveSpeed + 0.9;
@@ -210,7 +210,7 @@ void N(CleftAI_Tackle)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     }
     if (phi_s1) {
         script->AI_TEMP_STATE = AI_STATE_CLEFT_FIND_PLAYER_INIT;
-        enemy->unk_07 = 0;
+        enemy->hitboxIsActive = FALSE;
     }
 }
 

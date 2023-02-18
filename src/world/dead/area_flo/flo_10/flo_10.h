@@ -2,7 +2,6 @@
 
 #include "dead.h"
 #include "common.h"
-#include "dead_structs.h"
 #include "message_ids.h"
 #include "map.h"
 
@@ -11,7 +10,7 @@
 #include "mapfs/flo_10_hit.h"
 
 enum {
-    NPC_Lily                    = 0,
+    NPC_Lily        = 0,
 };
 
 #define NAMESPACE dead_flo_10

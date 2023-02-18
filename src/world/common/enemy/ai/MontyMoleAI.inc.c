@@ -75,7 +75,7 @@ static void N(MontyMoleAI_Init)(Evt* script, MobileAISettings* aiSettings, Enemy
         npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
     }
     enemy->flags |= MONTY_MOLE_UNK_NPC_FLAGS;
-    npc->flags |= NPC_FLAG_2;
+    npc->flags |= NPC_FLAG_INVISIBLE;
     script->functionTemp[1] = 0;
     script->AI_TEMP_STATE = AI_STATE_MOLE_WANDER;
 }
@@ -128,7 +128,7 @@ static void N(MontyMoleAI_PreSurface)(Evt* script, MobileAISettings* aiSettings,
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
-    npc->flags &= ~NPC_FLAG_2;
+    npc->flags &= ~NPC_FLAG_INVISIBLE;
     ai_enemy_play_sound(npc, SOUND_BURROW_SURFACE, 0);
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     npc->currentAnim = ANIM_MontyMole_Anim10; // emerge from ground
@@ -220,7 +220,7 @@ static void N(MontyMoleAI_Burrow)(Evt* script, MobileAISettings* aiSettings, Ene
         enemy->flags |= MONTY_MOLE_UNK_NPC_FLAGS;
     }
     if (npc->duration <= 0) {
-        npc->flags |= NPC_FLAG_2;
+        npc->flags |= NPC_FLAG_INVISIBLE;
         script->AI_TEMP_STATE = AI_STATE_MOLE_INIT;
     }
 }

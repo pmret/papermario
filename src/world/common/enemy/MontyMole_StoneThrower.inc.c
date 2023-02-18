@@ -34,7 +34,7 @@ MobileAISettings N(AISettings_MontyMole_StoneThrower) = {
 };
 
 EvtScript N(EVS_NpcAI_MontyMole_StoneThrower) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2 | NPC_FLAG_200000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_200000, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_LABEL(0)
     EVT_CALL(RandInt, 15, LVar0)

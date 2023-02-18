@@ -222,20 +222,20 @@ EvtScript N(EVS_Scene_ReleaseWatt) = {
     EVT_CALL(PlaySound, SOUND_1F5)
     EVT_SET(AF_OMO_10, FALSE)
     EVT_LOOP(8)
-        EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, TRUE)
         EVT_WAIT(3)
-        EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_2, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, FALSE)
         EVT_WAIT(3)
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_LaternTop, ANIM_BigLanternGhost_Anim03)
     EVT_CALL(SetNpcAnimation, NPC_LaternBottom, ANIM_BigLanternGhost_Anim04)
     EVT_THREAD
         EVT_LABEL(10)
-            EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_2, TRUE)
-            EVT_CALL(SetNpcFlagBits, NPC_LaternBottom, NPC_FLAG_2, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_LaternBottom, NPC_FLAG_INVISIBLE, TRUE)
             EVT_WAIT(2)
-            EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_2, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_LaternBottom, NPC_FLAG_2, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_LaternBottom, NPC_FLAG_INVISIBLE, FALSE)
             EVT_WAIT(2)
             EVT_IF_EQ(AF_OMO_10, FALSE)
                 EVT_GOTO(10)
@@ -264,9 +264,9 @@ EvtScript N(EVS_Scene_ReleaseWatt) = {
         EVT_CALL(GetNpcPos, NPC_LaternTop, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcPos, NPC_Watt, LVar0, 6, LVar2)
         EVT_LOOP(7)
-            EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_2, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, TRUE)
             EVT_WAIT(1)
-            EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_2, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, FALSE)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -590,7 +590,7 @@ EvtScript N(EVS_NpcInit_LanternBottom) = {
             EVT_RETURN
     EVT_END_SWITCH
     EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_Scene_ReleaseWatt)))
-    EVT_CALL(SetNpcFlagBits, NPC_LaternBottom, NPC_FLAG_2, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_LaternBottom, NPC_FLAG_INVISIBLE, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -689,7 +689,7 @@ NpcData N(NpcData_LanternBottom) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_Watt),
-    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_8000000,
+    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_CANT_INTERACT,
     .drops = NO_DROPS,
     .animations = BIG_LANTERN_GHOST_ANIMS,
     .extraAnimations = N(ExtraAnims_LanternGhost),

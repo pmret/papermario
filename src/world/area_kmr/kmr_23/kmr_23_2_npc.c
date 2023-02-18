@@ -519,7 +519,7 @@ EvtScript N(EVS_Scene_EndOfChapter) = {
 EvtScript N(EVS_NpcInit_Eldstar_01) = {
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(0.85), EVT_FLOAT(0.85), EVT_FLOAT(0.85))
     EVT_CALL(SetNpcPos, NPC_SELF, 0, 0, 20)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40000, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_EXEC(N(EVS_Scene_EndOfChapter))
     EVT_RETURN

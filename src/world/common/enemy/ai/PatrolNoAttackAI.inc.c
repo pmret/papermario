@@ -4,19 +4,11 @@
 #include "common.h"
 #include "npc.h"
 
-#ifdef _DEAD_H_
-#include "dead_structs.h"
-#endif
-
 // prerequisites
 #include "world/common/enemy/ai/States_PatrolAI.inc.c"
 
 API_CALLABLE(N(PatrolNoAttackAI_Main)) {
-    #ifdef _DEAD_H_
-    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
-    #else
     Enemy* enemy = script->owner1.enemy;
-    #endif
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;
@@ -59,9 +51,9 @@ API_CALLABLE(N(PatrolNoAttackAI_Main)) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = 0;
             enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
-        } else if (enemy->flags & ENEMY_FLAG_40000000) {
+        } else if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
-            enemy->flags &= ~ENEMY_FLAG_40000000;
+            enemy->flags &= ~ENEMY_FLAG_BEGIN_WITH_CHASING;
         }
 
         posX = npc->pos.x;

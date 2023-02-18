@@ -25,7 +25,7 @@ API_CALLABLE(N(func_80240000_9BD660)) {
 }
 
 EvtScript N(EVS_NpcAuxAI_BillBlaster) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_200000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, 1)
     EVT_RETURN
     EVT_END
 };
@@ -389,12 +389,12 @@ EvtScript N(EVS_NpcAI_BillBlaster) = {
 };
 
 EvtScript N(EVS_NpcAI_BulletBill) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_200000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, 1)
     EVT_LABEL(1)
         EVT_CALL(SetSelfVar, 0, 0)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CALL(SelfEnemyOverrideSyncPos, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
         EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         EVT_LABEL(2)
             EVT_CALL(GetSelfVar, 0, LVar0)
@@ -405,7 +405,7 @@ EvtScript N(EVS_NpcAI_BulletBill) = {
         EVT_WAIT(15)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BulletBill_Anim04)
         EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
         EVT_CALL(SelfEnemyOverrideSyncPos, 1)
         EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
         EVT_CALL(GetNpcYaw, LVar0, LVar4)
@@ -451,7 +451,7 @@ EvtScript N(EVS_NpcDefeat_BulletBill) = {
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
             EVT_THREAD
                 EVT_WAIT(20)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
                 EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
                 EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_BulletBill)))
             EVT_END_THREAD
@@ -561,7 +561,7 @@ NpcData N(NpcData_BillBlasters)[] = {
         },
         .init = &N(EVS_NpcInit_BillBlaster),
         .settings = &N(NpcSettings_BillBlaster),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = BILL_BLASTER_ANIMS,
     },
@@ -582,7 +582,7 @@ NpcData N(NpcData_BillBlasters)[] = {
             }
         },
         .settings = &N(NpcSettings_BillBlaster),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = BILL_BLASTER_DROPS,
         .animations = BILL_BLASTER_ANIMS,
     },
@@ -603,7 +603,7 @@ NpcData N(NpcData_BillBlasters)[] = {
             }
         },
         .settings = &N(NpcSettings_BillBlaster),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_2000 | ENEMY_FLAG_40000 | ENEMY_FLAG_200000,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = BILL_BLASTER_ANIMS,
     },

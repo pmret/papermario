@@ -75,11 +75,11 @@ EvtScript N(EVS_Koopatrol_WatchForPeach) = {
     EVT_LOOP(0)
         EVT_CALL(N(GetPeachDisguise), LVar1)
         EVT_IF_EQ(LVar1, PEACH_DISGUISE_NONE)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 1)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
             EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_CapturePeach)))
             EVT_RETURN
         EVT_ELSE
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 0)
+            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -98,7 +98,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_01) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_8000000, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
     EVT_RETURN
     EVT_END
 };

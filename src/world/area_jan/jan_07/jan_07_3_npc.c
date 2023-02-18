@@ -148,10 +148,10 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_IF_LT(LVar0, -190)
                 EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 1)
-                EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_10000000, 1)
+                EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 1)
             EVT_ELSE
                 EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 0)
-                EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_10000000, 0)
+                EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 0)
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP

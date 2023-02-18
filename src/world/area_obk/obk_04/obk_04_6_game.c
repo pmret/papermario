@@ -213,7 +213,7 @@ EvtScript N(EVS_BooAppear) = {
 };
 
 EvtScript N(EVS_BooSpookAndVanish) = {
-    EVT_CALL(SetNpcFlagBits, LVarA, NPC_FLAG_40000, FALSE)
+    EVT_CALL(SetNpcFlagBits, LVarA, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, FALSE)
     EVT_CALL(NpcFacePlayer, LVarA, 0)
     EVT_WAIT(5)
     EVT_CALL(SetNpcAnimation, LVarA, ANIM_Boo_Spook)

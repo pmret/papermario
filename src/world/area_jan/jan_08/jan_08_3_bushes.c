@@ -66,7 +66,7 @@ EvtScript N(EVS_Inspect_FlipBush) = {
             EVT_SET(LVar4, 270)
             EVT_CALL(SetNpcRotation, NPC_YoshiKid, 0, LVar4, 0)
             EVT_CALL(SetNpcPos, NPC_YoshiKid, -391, 0, -144)
-            EVT_CALL(SetNpcFlagBits, NPC_YoshiKid, NPC_FLAG_2 | NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            EVT_CALL(SetNpcFlagBits, NPC_YoshiKid, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_LOOP(10)
                 EVT_ADD(LVar3, 9)
                 EVT_CALL(RotateModel, LVar1, LVar3, 0, 1, 0)

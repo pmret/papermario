@@ -280,7 +280,7 @@ EvtScript N(EVS_Scene_KammyDefeated) = {
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
     EVT_WAIT(5)
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Eldstar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Eldstar, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Eldstar, LVar6, LVar7, LVar8, 5)
@@ -291,49 +291,49 @@ EvtScript N(EVS_Scene_KammyDefeated) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(20)
-        EVT_CALL(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Mamar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Mamar, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Mamar, LVar6, LVar7, LVar8, 5)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(21)
-        EVT_CALL(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Skolar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Skolar, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Skolar, LVar6, LVar7, LVar8, 5)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(22)
-        EVT_CALL(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Muskular, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Muskular, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Muskular, LVar6, LVar7, LVar8, 5)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(20)
-        EVT_CALL(SetNpcFlagBits, NPC_Misstar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Misstar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Misstar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Misstar, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Misstar, LVar6, LVar7, LVar8, 5)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(21)
-        EVT_CALL(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Klevar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Klevar, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Klevar, LVar6, LVar7, LVar8, 5)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(22)
-        EVT_CALL(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Kalmar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Kalmar, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Kalmar, LVar6, LVar7, LVar8, 5)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(23)
-        EVT_CALL(SetNpcFlagBits, NPC_Twink_01, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Twink_01, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Twink_01, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Twink_01, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Twink_01, LVar6, LVar7, LVar8, 5)

@@ -16,7 +16,7 @@ API_CALLABLE(N(StoneChompFXA)) {
     npc->blur.chomp = blurData;
 
     bp.flags = NPC_FLAG_IGNORE_ENTITY_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION
-        | NPC_FLAG_8 | NPC_FLAG_2;
+        | NPC_FLAG_8 | NPC_FLAG_INVISIBLE;
     bp.initialAnim = ANIM_StoneChomp_Anim02;
     bp.onUpdate = NULL;
     bp.onRender = NULL;
@@ -54,7 +54,7 @@ API_CALLABLE(N(StoneChompFXB)) {
     posZ = ownerNpc->pos.z;
     add_vec2D_polar(&posX, &posZ, ownerNpc->collisionRadius * 0.3f, clamp_angle(ownerNpc->renderYaw + 180.0f));
     
-    if (ownerNpc->flags & NPC_FLAG_2) {
+    if (ownerNpc->flags & NPC_FLAG_INVISIBLE) {
         for (i = 0; i < 8; i++, blurData++) {
             childNpc = blurData->npc;
             childNpc->pos.x = posX;

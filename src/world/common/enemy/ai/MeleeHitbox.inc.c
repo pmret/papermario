@@ -4,10 +4,6 @@
 #include "common.h"
 #include "effects.h"
 
-#ifdef _DEAD_H_
-#include "dead_structs.h"
-#endif
-
 void N(MeleeHitbox_30)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -102,11 +98,7 @@ s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
 }
 
 API_CALLABLE(N(MeleeHitbox_Main)) {
-    #ifdef _DEAD_H_
-    DeadEnemy* hitboxEnemy = (DeadEnemy*)script->owner1.enemy;
-    #else
     Enemy* hitboxEnemy = script->owner1.enemy;
-    #endif
     Npc* hitboxNpc = get_npc_unsafe(hitboxEnemy->npcID);
     Enemy* baseEnemy;
     Npc* baseNpc;
@@ -123,8 +115,8 @@ API_CALLABLE(N(MeleeHitbox_Main)) {
     if (isInitialCall || (hitboxEnemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         script->functionTemp[0] = 0;
         hitboxNpc->duration = 0;
-        hitboxNpc->flags |= (NPC_FLAG_2 | NPC_FLAG_IGNORE_PLAYER_COLLISION);
-        hitboxEnemy->flags |= ENEMY_FLAG_100000 | ENEMY_FLAG_200000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000;
+        hitboxNpc->flags |= (NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION);
+        hitboxEnemy->flags |= ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER;
         hitboxNpc->pos.x = NPC_DISPOSE_POS_X;
         hitboxNpc->pos.y = NPC_DISPOSE_POS_Y;
         hitboxNpc->pos.z = NPC_DISPOSE_POS_Z;
@@ -137,7 +129,7 @@ API_CALLABLE(N(MeleeHitbox_Main)) {
         case 0:
             baseEnemy = get_enemy(hitboxEnemy->npcID - 1);
             baseNpc = get_npc_unsafe(baseEnemy->npcID);
-            hitboxEnemy->unk_07 = 1;
+            hitboxEnemy->hitboxIsActive = TRUE;
             if (baseEnemy->AI_VAR_ATTACK_STATE == MELEE_HITBOX_STATE_ACTIVE) {
                 if (hitboxEnemy->AI_VAR_HITNPC_SOUND != 0) {
                     ai_enemy_play_sound(baseNpc, hitboxEnemy->AI_VAR_HITNPC_SOUND, 0);
@@ -156,7 +148,7 @@ API_CALLABLE(N(MeleeHitbox_Main)) {
                 hitboxEnemy->unk_10.z = hitboxNpc->pos.z;
 
                 hitboxNpc->yaw = atan2(hitboxNpc->pos.x, hitboxNpc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-                hitboxEnemy->flags &= ~(ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000);
+                hitboxEnemy->flags &= ~(ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER);
                 hitboxNpc->duration = 0;
                 script->functionTemp[0] = 1;
             }
@@ -166,21 +158,21 @@ API_CALLABLE(N(MeleeHitbox_Main)) {
             get_npc_unsafe(baseEnemy->npcID);
             hitboxNpc->duration++;
             if (hitboxNpc->duration >= hitboxEnemy->AI_VAR_HITNPC_4) {
-                hitboxEnemy->unk_07 = 0;
+                hitboxEnemy->hitboxIsActive = FALSE;
             }
             if (baseEnemy->AI_VAR_ATTACK_STATE == MELEE_HITBOX_STATE_POST) {
-                hitboxEnemy->flags |= ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_8000000 | ENEMY_FLAG_10000000;
+                hitboxEnemy->flags |= ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER;
                 hitboxNpc->pos.x = NPC_DISPOSE_POS_X;
                 hitboxNpc->pos.y = NPC_DISPOSE_POS_Y;
                 hitboxNpc->pos.z = NPC_DISPOSE_POS_Z;
-                hitboxEnemy->unk_07 = 1;
+                hitboxEnemy->hitboxIsActive = TRUE;
                 script->functionTemp[0] = 0;
             }
             break;
     }
 
     #ifdef _DEAD_H_
-    if (hitboxEnemy->unk_07 != 0) {
+    if (hitboxEnemy->hitboxIsActive != 0) {
         hitboxEnemy->unk_114 = 7.0f;
         hitboxEnemy->unk_118 = 1.0f;
     }

@@ -95,11 +95,11 @@ API_CALLABLE(N(ShyGuyWanderAI_Main)) {
         if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-        } else if (enemy->flags & ENEMY_FLAG_40000000) {
+        } else if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {
             script->functionTemp[0] = 12;
         }
         enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
-        enemy->flags &= ~ENEMY_FLAG_40000000;
+        enemy->flags &= ~ENEMY_FLAG_BEGIN_WITH_CHASING;
 
         hitDepth = 100.0f;
         posX = npc->pos.x;

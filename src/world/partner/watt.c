@@ -19,7 +19,7 @@ BSS s32 D_802BE314;
 BSS TweesterPhysics WattTweesterPhysics;
 
 void func_802BD100_31CC70(Npc* npc) {
-    if (!(npc->flags & NPC_FLAG_2)) {
+    if (!(npc->flags & NPC_FLAG_INVISIBLE)) {
         if (WattStaticEffect == NULL) {
             WattStaticEffect = fx_static_status(0, npc->pos.x, npc->pos.y + 13.0f, npc->pos.z, 0.9f, 5, 0);
         }
@@ -136,7 +136,7 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                 WattTweesterPhysicsPtr->angularVelocity = 6.0f;
                 WattTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
                 WattTweesterPhysicsPtr->countdown = 120;
-                watt->flags |= NPC_FLAG_40000 | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+                watt->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
                 watt->flags &= ~NPC_FLAG_GRAVITY;
             case 1:
                 sin_cos_rad(DEG_TO_RAD(WattTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);

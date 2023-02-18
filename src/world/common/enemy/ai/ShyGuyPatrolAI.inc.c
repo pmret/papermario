@@ -98,9 +98,9 @@ API_CALLABLE(N(ShyGuyPatrolAI_Main)) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
             enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
-        } else if (enemy->flags & ENEMY_FLAG_40000000) {
+        } else if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {
             script->functionTemp[0] = 12;
-            enemy->flags &= ~ENEMY_FLAG_40000000;
+            enemy->flags &= ~ENEMY_FLAG_BEGIN_WITH_CHASING;
         }
 
         posX = npc->pos.x;

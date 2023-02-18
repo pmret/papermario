@@ -410,7 +410,7 @@ EvtScript N(EVS_NpcInteract_Kolorado_01) = {
         EVT_CALL(DisablePlayerPhysics, FALSE)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(EndSpeech, NPC_SELF, 0xFFFFFFFF, 0xFFFFFFFF, 5)
+    EVT_CALL(EndSpeech, NPC_SELF, -1, -1, 5)
     EVT_IF_EQ(GB_StoryProgress, STORY_CH5_TRADED_VASE_FOR_SEED)
         EVT_CALL(NpcFacePlayer, NPC_Kolorado_02, 0)
     EVT_END_IF

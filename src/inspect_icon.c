@@ -106,8 +106,11 @@ s32 func_802B7450_E20560(void) {
                     curInteraction = -1;
                     break;
             }
-        } else if (((playerStatus->flags & (PS_FLAG_HAS_CONVERSATION_NPC | PS_FLAG_INPUT_DISABLED)) == PS_FLAG_HAS_CONVERSATION_NPC)
-                        && (npc != NULL) && (npc->flags & NPC_FLAG_10000000)) {
+        } else if (
+            ((playerStatus->flags & (PS_FLAG_HAS_CONVERSATION_NPC | PS_FLAG_INPUT_DISABLED)) == PS_FLAG_HAS_CONVERSATION_NPC)
+            && (npc != NULL)
+            && (npc->flags & NPC_FLAG_10000000)
+        ) {
             curInteraction = npc->npcID | COLLISION_WITH_NPC_BIT;
             if (playerStatus->interactingWithID == curInteraction) {
                 return TRUE;

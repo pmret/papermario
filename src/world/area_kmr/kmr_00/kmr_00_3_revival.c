@@ -407,7 +407,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_CALL(SpeakToPlayer, NPC_Eldstar, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Wave, 5, MSG_CH0_0002)
     EVT_WAIT(15)
     EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Leap)
         EVT_CALL(SetNpcJumpscale, NPC_Eldstar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Eldstar, LVar6, LVar7, LVar8)
@@ -419,7 +419,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_THREAD
         EVT_WAIT(20)
         EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Leap)
-        EVT_CALL(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Mamar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Mamar, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Mamar, LVar6, LVar7, LVar8, 5)
@@ -428,7 +428,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_THREAD
         EVT_WAIT(21)
         EVT_CALL(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Leap)
-        EVT_CALL(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Skolar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Skolar, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Skolar, LVar6, LVar7, LVar8, 5)
@@ -437,7 +437,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_THREAD
         EVT_WAIT(22)
         EVT_CALL(SetNpcAnimation, NPC_Muskular, ANIM_WorldMuskular_Leap)
-        EVT_CALL(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Muskular, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Muskular, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Muskular, LVar6, LVar7, LVar8, 5)
@@ -446,7 +446,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_THREAD
         EVT_WAIT(20)
         EVT_CALL(SetNpcAnimation, NPC_Misstar, ANIM_WorldMisstar_Leap)
-        EVT_CALL(SetNpcFlagBits, NPC_Misstar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Misstar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Misstar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Misstar, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Misstar, LVar6, LVar7, LVar8, 5)
@@ -455,7 +455,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_THREAD
         EVT_WAIT(21)
         EVT_CALL(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Leap)
-        EVT_CALL(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Klevar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Klevar, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Klevar, LVar6, LVar7, LVar8, 5)
@@ -464,7 +464,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_THREAD
         EVT_WAIT(22)
         EVT_CALL(SetNpcAnimation, NPC_Kalmar, ANIM_WorldKalmar_Leap)
-        EVT_CALL(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_400000, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcJumpscale, NPC_Kalmar, EVT_FLOAT(3.2))
         EVT_CALL(GetNpcPos, NPC_Kalmar, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Kalmar, LVar6, LVar7, LVar8, 5)

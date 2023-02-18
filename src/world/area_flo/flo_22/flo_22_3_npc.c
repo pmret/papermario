@@ -27,7 +27,7 @@ EvtScript N(EVS_NpcDefeat_Bzzap) = {
             EVT_THREAD
                 EVT_WAIT(25)
                 EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
             EVT_END_THREAD
             EVT_CALL(DoNpcDefeat)
         EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
@@ -74,7 +74,7 @@ EvtScript N(EVS_NpcDefeat_Dayzee) = {
             EVT_THREAD
                 EVT_WAIT(25)
                 EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, FALSE)
+                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
             EVT_END_THREAD
             EVT_CALL(DoNpcDefeat)
         EVT_CASE_EQ(OUTCOME_PLAYER_LOST)

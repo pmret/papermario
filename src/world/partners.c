@@ -1161,7 +1161,7 @@ void partner_walking_enable(Npc* partner, s32 val) {
     func_800EA5B8(partner);
     partner->collisionChannel = COLLISION_CHANNEL_10000;
     partner->jumpVelocity = 0.0f;
-    partner->flags |= NPC_FLAG_400000 | NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_PLAYER_COLLISION;
+    partner->flags |= NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_PLAYER_COLLISION;
     partner->jumpScale = 1.8f;
 }
 

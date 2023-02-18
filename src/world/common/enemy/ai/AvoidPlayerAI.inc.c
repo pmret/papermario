@@ -1,9 +1,6 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
-#ifdef _DEAD_H_
-#include "dead_structs.h"
-#endif
 
 void N(AvoidPlayerAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -160,11 +157,7 @@ void N(AvoidPlayerAI_LosePlayer)(Evt* script, MobileAISettings* npcAISettings, E
 }
 
 API_CALLABLE(N(AvoidPlayerAI_Main)) {
-    #ifdef _DEAD_H_
-    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
-    #else
     Enemy* enemy = script->owner1.enemy;
-    #endif
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;

@@ -71,7 +71,7 @@ EvtScript N(EVS_OnInteract_Well) = {
                 EVT_SET(GF_FLO22_ThrewBlueBerryDownWell, TRUE)
                 EVT_CALL(MakeItemEntity, ITEM_FLOWER_SAVER_B, -35, 0, 0, ITEM_SPAWN_MODE_KEY, GF_FLO22_Item_FlowerSaverB)
                 EVT_SET(LVar7, LVar0)
-                EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_2, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_INVISIBLE, TRUE)
                 EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_HAS_SHADOW, FALSE)
                 EVT_CALL(SetNpcPos, NPC_Dummy, 35, 0, 0)
                 EVT_CALL(SetNpcJumpscale, NPC_Dummy, EVT_FLOAT(1.0))
@@ -86,7 +86,7 @@ EvtScript N(EVS_OnInteract_Well) = {
                     EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_CALL(SetNpcPos, NPC_Dummy, NPC_DISPOSE_LOCATION)
-                EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_2, FALSE)
+                EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_INVISIBLE, FALSE)
                 EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_HAS_SHADOW, TRUE)
             EVT_ELSE
                 EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_00DE, 35, 35, 0)

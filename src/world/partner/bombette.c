@@ -116,7 +116,7 @@ ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
             BombetteTweesterPhysicsPtr->angularVelocity = 6.0f;
             BombetteTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
             BombetteTweesterPhysicsPtr->countdown = 120;
-            bombette->flags |= NPC_FLAG_40000 | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            bombette->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             bombette->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad(DEG_TO_RAD(BombetteTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);

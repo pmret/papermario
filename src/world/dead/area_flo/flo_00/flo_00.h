@@ -3,7 +3,6 @@
 #include "dead.h"
 #include "common.h"
 #include "message_ids.h"
-#include "dead_structs.h"
 
 #include "../flo.h"
 #include "mapfs/flo_00_shape.h"

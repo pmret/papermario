@@ -3450,9 +3450,9 @@ enum NpcPalSwapState {
 };
 
 enum NpcFlags {
-    NPC_FLAG_1                              = 0x00000001,
-    NPC_FLAG_2                              = 0x00000002,
-    NPC_FLAG_4                              = 0x00000004,
+    NPC_FLAG_ENABLED                        = 0x00000001, // Does nothing aside from making npc->flags !=
+    NPC_FLAG_INVISIBLE                      = 0x00000002, // NPC will not be drawn or cause surface effects while moving
+    NPC_FLAG_INACTIVE                       = 0x00000004, // NPC will not render, move, or have collisions with other NPCs. They may still be interacted with.
     NPC_FLAG_8                              = 0x00000008,
     NPC_FLAG_HAS_SHADOW                     = 0x00000010, // Set by default and by enable_npc_shadow
     NPC_FLAG_NO_SHADOW_RAYCAST              = 0x00000020, // Shadows are tied to NPC position instead of raycasting below the NPC
@@ -3468,11 +3468,11 @@ enum NpcFlags {
     NPC_FLAG_IGNORE_ENTITY_COLLISION        = 0x00008000,
     NPC_FLAG_DIRTY_SHADOW                   = 0x00010000, // Set if shadow is dirty (needs to be repositioned etc.)
     NPC_FLAG_REFLECT_WALL                   = 0x00020000, // Mirror rendering across z=0
-    NPC_FLAG_40000                          = 0x00040000, // Yaw?
+    NPC_FLAG_IGNORE_CAMERA_FOR_YAW          = 0x00040000, // Do not adjust renderYaw to face the camera
     NPC_FLAG_REFLECT_FLOOR                  = 0x00080000, // Mirror rendering across y=0
     NPC_FLAG_MOTION_BLUR                    = 0x00100000, // Gives motion blur effect as NPC moves. Set by enable_npc_blur
     NPC_FLAG_200000                         = 0x00200000,
-    NPC_FLAG_400000                         = 0x00400000,
+    NPC_FLAG_TOUCHES_GROUND                 = 0x00400000, // Can cause effects to play when touching special surface types
     NPC_FLAG_HIDING                         = 0x00800000,
     NPC_FLAG_HAS_NO_SPRITE                  = 0x01000000,
     NPC_FLAG_COLLIDING_WITH_NPC             = 0x02000000,
@@ -3481,7 +3481,7 @@ enum NpcFlags {
     NPC_FLAG_10000000                       = 0x10000000,
     NPC_FLAG_20000000                       = 0x20000000,
     NPC_FLAG_NO_ANIMS_LOADED                = 0x40000000, // Npc has no animations loaded
-    NPC_FLAG_80000000                       = 0x80000000,
+    NPC_FLAG_SUSPENDED                      = 0x80000000,
 };
 
 enum PlayerStatusFlags {
@@ -3521,7 +3521,7 @@ enum PlayerStatusFlags {
     /* Forces Mario's sprite to either face exactly left or right, without transitioning. */
     PS_FLAG_NO_FLIPPING                      = 0x00200000,
     /* Prevents Mario from moving laterally */
-    PS_FLAG_MOVEMENT_LOCKED                  = 0x00400000,
+    PS_FLAG_MOVEMENT_LOCKED                  = 0x00400000, //TODO misnamed
     /* Stops Mario from air steering or using a special jump during a scripted fall */
     PS_FLAG_SCRIPTED_FALL                    = 0x00800000,
     /* Not fully sure about this one, but appears to mark the frame that the check for what to hammer occurs */
@@ -5012,38 +5012,38 @@ enum MapRoomNotifications {
 };
 
 enum EnemyFlags {
-    ENEMY_FLAG_PASSIVE                  = 0x00000001, ///< Collision does not trigger battle
-    ENEMY_FLAG_2                        = 0x00000002,
+    ENEMY_FLAG_PASSIVE                  = 0x00000001, // Not hostile; collision does not trigger battle
+    ENEMY_FLAG_2                        = 0x00000002, // Unused
     ENEMY_FLAG_4                        = 0x00000004,
     ENEMY_FLAG_ENABLE_HIT_SCRIPT        = 0x00000008,
     ENEMY_FLAG_FLED                     = 0x00000010,
-    ENEMY_FLAG_DISABLE_AI               = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
-    ENEMY_FLAG_40                       = 0x00000040,
-    ENEMY_FLAG_80                       = 0x00000080,
+    ENEMY_FLAG_DISABLE_AI               = 0x00000020, // Disable movement AI and collision (idle animation plays)
+    ENEMY_FLAG_PROJECTILE               = 0x00000040,
+    ENEMY_FLAG_DONT_UPDATE_SHADOW_Y     = 0x00000080,
     ENEMY_FLAG_IGNORE_WORLD_COLLISION   = 0x00000100,
     ENEMY_FLAG_IGNORE_PLAYER_COLLISION  = 0x00000200,
     ENEMY_FLAG_IGNORE_ENTITY_COLLISION  = 0x00000400,
-    ENEMY_FLAG_800                      = 0x00000800,
+    ENEMY_FLAG_800                      = 0x00000800, // Corresponds with NPC_FLAG_8
     ENEMY_FLAG_GRAVITY                  = 0x00001000,
-    ENEMY_FLAG_2000                     = 0x00002000,
-    ENEMY_FLAG_4000                     = 0x00004000,
-    ENEMY_FLAG_8000                     = 0x00008000,
-    ENEMY_FLAG_10000                    = 0x00010000,
-    ENEMY_FLAG_USE_PLAYER_SPRITE        = 0x00020000, ///< Used for Peach NPCs
+    ENEMY_FLAG_NO_SHADOW_RAYCAST        = 0x00002000,
+    ENEMY_FLAG_HAS_NO_SPRITE            = 0x00004000,
+    ENEMY_FLAG_8000                     = 0x00008000, // Corresponds with NPC_FLAG_10000000
+    ENEMY_FLAG_10000                    = 0x00010000, // Corresponds with NPC_FLAG_20000000
+    ENEMY_FLAG_USE_PLAYER_SPRITE        = 0x00020000, // Used for Peach NPCs
     ENEMY_FLAG_40000                    = 0x00040000,
     ENEMY_FLAG_80000                    = 0x00080000,
     ENEMY_FLAG_100000                   = 0x00100000,
-    ENEMY_FLAG_200000                   = 0x00200000,
+    ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN   = 0x00200000,
     ENEMY_FLAG_400000                   = 0x00400000,
-    ENEMY_FLAG_NO_DROPS                 = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
+    ENEMY_FLAG_NO_DROPS                 = 0x00800000, // Do not drop hearts, flowers, or coins on defeat
     ENEMY_FLAG_IGNORE_TOUCH             = 0x01000000,
     ENEMY_FLAG_IGNORE_JUMP              = 0x02000000,
     ENEMY_FLAG_IGNORE_HAMMER            = 0x04000000,
-    ENEMY_FLAG_8000000                  = 0x08000000,
-    ENEMY_FLAG_10000000                 = 0x10000000,
-    ENEMY_FLAG_20000000                 = 0x20000000,
-    ENEMY_FLAG_40000000                 = 0x40000000, // spawn in AI_STATE_CHASE_INIT
-    ENEMY_FLAG_80000000                 = 0x80000000,
+    ENEMY_FLAG_CANT_INTERACT            = 0x08000000, // Makes passive NPCs non-interactable. Hostile NPCs are always non-interactible.
+    ENEMY_FLAG_IGNORE_PARTNER           = 0x10000000,
+    ENEMY_FLAG_IGNORE_SPIN              = 0x20000000,
+    ENEMY_FLAG_BEGIN_WITH_CHASING       = 0x40000000, // Starts in state AI_STATE_CHASE_INIT instead of AI_STATE_WANDER_INIT on spawn or AI resume
+    ENEMY_FLAG_SUSPENDED                = 0x80000000,
 };
 
 #define COMMON_PASSIVE_FLAGS \

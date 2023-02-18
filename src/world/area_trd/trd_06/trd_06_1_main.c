@@ -31,7 +31,7 @@ EvtScript N(EVS_EnterMap) = {
             EVT_CALL(DisablePartnerAI, 0)
             EVT_CALL(SetPlayerPos, NPC_DISPOSE_LOCATION)
             EVT_CALL(SetNpcPos, NPC_PARTNER, NPC_DISPOSE_LOCATION)
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_4, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_INACTIVE, TRUE)
             EVT_CALL(EnableNpcShadow, NPC_PARTNER, FALSE)
             EVT_EXEC(N(EVS_Scene_ImprisonedKoopaBros))
     EVT_END_SWITCH

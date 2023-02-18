@@ -95,7 +95,7 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
 EvtScript N(EVS_NpcInit_YoshiKid) = {
     EVT_IF_EQ(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
         EVT_IF_EQ(GF_JAN08_SavedYoshi, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2 | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Red_Cry)
             EVT_CALL(SetNpcYaw, NPC_SELF, 90)

@@ -47,11 +47,11 @@ API_CALLABLE(N(RangedAttackAI_Main)) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = 0;
             enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
-        } else if (enemy->flags & ENEMY_FLAG_40000000) {
+        } else if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         }
         enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
-        enemy->flags &= ~ENEMY_FLAG_40000000;
+        enemy->flags &= ~ENEMY_FLAG_BEGIN_WITH_CHASING;
     }
 
     switch (script->AI_TEMP_STATE) {
