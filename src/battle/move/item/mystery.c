@@ -252,7 +252,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 150)
     EVT_CALL(SetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(SetOwnerTarget, 0, 0)
+    EVT_CALL(SetOwnerTarget, ACTOR_PLAYER, 0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_THREAD
@@ -276,7 +276,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(N(func_802A188C_72CE3C), LVar0, LVar1, LVar2)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_SP_EVT_ACTIVE, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_SP_EVT_ACTIVE, TRUE)
     EVT_CALL(DispatchDamagePlayerEvent, 1, EVENT_HIT)
     EVT_RETURN
     EVT_END

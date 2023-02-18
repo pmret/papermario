@@ -273,28 +273,28 @@ EvtScript N(EVS_UseItem) = {
         EVT_EXEC_WAIT(N(UseItemWithEffect))
         EVT_EXEC_WAIT(N(EatItem))
         EVT_CALL(N(func_802A1A8C_731D8C))
-        EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 20)
         EVT_ADD(LVar1, 25)
         EVT_CALL(N(ShowFlowerRecoveryFX), LVar0, LVar1, LVar2, LVar3)
-        EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 25)
         EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
         EVT_CALL(N(AddFP), LVar3)
         EVT_WAIT(10)
-        EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_ThumbsUp)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_ThumbsUp)
         EVT_WAIT(30)
-        EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
-        EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_10002)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_GotItem)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GotItem)
     EVT_ELSE
         EVT_SET_CONST(LVarA, ITEM_STRANGE_CAKE)
         EVT_SET(LVar1, 0)
         EVT_EXEC_WAIT(N(UseItemWithEffect))
         EVT_EXEC_WAIT(N(EatItem))
-        EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_GotItem)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GotItem)
     EVT_END_IF
     EVT_WAIT(10)
     EVT_THREAD
@@ -318,39 +318,39 @@ EvtScript N(EVS_UseItem) = {
 };
 
 EvtScript N(script7) = {
-    EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_10002)
-    EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
-    EVT_CALL(PlayEffect, EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0)
     EVT_CALL(N(func_802A1AD8_731DD8))
     EVT_WAIT(20)
-    EVT_CALL(ShowMessageBox, 16, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_10, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(script8) = {
-    EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_10002)
-    EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
-    EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 6, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 6, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0)
     EVT_CALL(N(func_802A1B14_731E14))
     EVT_WAIT(20)
-    EVT_CALL(ShowMessageBox, 17, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_11, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(script9) = {
-    EVT_CALL(SetAnimation, 0, 0, ANIM_Mario_30004)
-    EVT_CALL(SetGoalToTarget, 0)
-    EVT_CALL(GetGoalPos, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30004)
+    EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
+    EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_EXEC(DoSleepHit)
     EVT_CALL(N(func_802A1B68_731E68))
     EVT_WAIT(20)
-    EVT_CALL(ShowMessageBox, 11, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_0B, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
     EVT_END

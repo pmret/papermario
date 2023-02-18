@@ -1,5 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
+#include "effects.h"
 
 #define NAMESPACE battle_item_hustle_drink
 
@@ -105,8 +106,8 @@ EvtScript N(EVS_UseItem) = {
     EVT_END_THREAD
     EVT_LOOP(10)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_369)
-        EVT_CALL(PlayEffect, 0x6, 0, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-        EVT_CALL(PlayEffect, 0x6, 1, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 0, LVar0, LVar1, LVar2, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0)
         EVT_WAIT(4)
     EVT_END_LOOP
     EVT_WAIT(10)

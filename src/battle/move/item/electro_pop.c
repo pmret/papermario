@@ -94,7 +94,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_EXEC_WAIT(N(EatItem))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
-    EVT_CALL(PlayEffect, EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0)
     EVT_CALL(PlaySound, SOUND_379)
     EVT_CALL(GetItemPower, ITEM_VOLT_SHROOM, LVar0, LVar1)
     EVT_CALL(N(func_802A123C_7307DC))
@@ -115,7 +115,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_WAIT(20)
-    EVT_CALL(ShowMessageBox, 16, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_10, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN

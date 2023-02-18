@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "model.h"
+#include "effects.h"
 
 #define NAMESPACE battle_item_fright_jar
 
@@ -42,12 +43,12 @@ EvtScript N(EVS_UseItem) = {
     EVT_ADD(LVar1, 5)
     EVT_SETF(LVar3, EVT_FLOAT(0.7))
     EVT_LOOP(5)
-        EVT_CALL(PlayEffect, 0x61, 0, LVar0, LVar1, LVar2, LVar3, 25, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_FRIGHT_JAR, 0, LVar0, LVar1, LVar2, LVar3, 25, 0)
         EVT_ADD(LVar0, 5)
         EVT_ADDF(LVar3, EVT_FLOAT(0.15))
         EVT_WAIT(7)
     EVT_END_LOOP
-    EVT_CALL(PlayEffect, 0x61, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 60, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_FRIGHT_JAR, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 60, 0)
     EVT_WAIT(20)
     EVT_LOOP(4)
         EVT_CALL(AddBattleCamZoom, -100)
@@ -62,14 +63,14 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(ItemCheckHit, LVar0, 268435456, 0, LVar0, 0)
+    EVT_CALL(ItemCheckHit, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, LVar0, 0)
     EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(1)
     EVT_END_IF
     EVT_CALL(func_80269EAC, 21)
     EVT_CALL(ItemSpookEnemy, LVar0, 1879052288, 0, 100, 0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
-    EVT_CALL(ChooseNextTarget, 0, LVar0)
+    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
