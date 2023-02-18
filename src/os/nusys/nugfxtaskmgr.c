@@ -69,9 +69,14 @@ void nuGfxTaskMgrInit(void) {
         nuGfxTask[i].msgQ = &D_800DAC90;
         nuGfxTask[i].list.t.type = M_GFXTASK;
         nuGfxTask[i].list.t.flags = 0;
+#if VERSION_CN
+        nuGfxTask[i].list.t.ucode_boot = (u64*) rspbootTextStart;
+        nuGfxTask[i].list.t.ucode_boot_size = (u32) rspbootTextEnd - (u32) rspbootTextStart;
+#else
         dma_copy((u8* )0xB0000B70, (u8* )0xB0000C70, rspbootUcodeBuffer);
         nuGfxTask[i].list.t.ucode_boot = (u64*) rspbootUcodeBuffer;
         nuGfxTask[i].list.t.ucode_boot_size = 0x100;
+#endif
         nuGfxTask[i].list.t.ucode_size = SP_UCODE_SIZE;
         nuGfxTask[i].list.t.ucode_data_size = SP_UCODE_DATA_SIZE;
         nuGfxTask[i].list.t.dram_stack = (u64*) &D_800DA040;

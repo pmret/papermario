@@ -357,3 +357,7 @@ void set_time_freeze_mode(s32 mode) {
 s32 get_time_freeze_mode(void) {
     return timeFreezeMode;
 }
+
+#if VERSION_CN
+static const f32 rodata_padding[] = {0.0f, 0.0f};
+#endif

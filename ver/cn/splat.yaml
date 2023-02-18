@@ -1,0 +1,3199 @@
+name: Mario Story
+options:
+  basename: papermario
+  find_file_boundaries: True
+  compiler: GCC
+  mnemonic_ljust: 10
+  platform: n64
+
+  base_path: ../..
+  target_path: ver/cn/baserom.z64
+  extensions_path: tools/splat_ext
+  symbol_addrs_path: ver/cn/symbol_addrs.txt
+  ld_script_path: ver/cn/papermario.ld
+  ld_symbol_header_path: ver/cn/build/include/ld_addrs.h
+  src_path: src
+  asm_path: ver/cn/asm
+  asset_path: assets/cn
+  build_path: ver/cn/build
+  cache_path: ver/cn/.splat_cache
+  create_undefined_funcs_auto: False
+  undefined_funcs_auto_path: ver/cn/undefined_funcs_auto.txt
+  create_undefined_syms_auto: False
+  undefined_syms_auto_path: ver/cn/undefined_syms_auto.txt
+  symbol_name_format: IQUE_$VRAM
+  symbol_name_format_no_rom: IQUE_$VRAM_$SEG
+asset_stack:
+  - cn
+segments:
+  - name: header
+    type: header
+    start: 0
+  - [0x40, bin]
+  - [0xB70, bin, rspboot_font]
+  - name: main
+    type: code
+    start: 0x1000
+    vram: 0x80025C00
+    subalign: 8
+    subsegments:
+    - [0x1000, hasm, bss]
+    - [0x1000, hasm, entry_point]
+    - [0x1060, c, main_pre]
+    - [0x1060, c, main]
+    - [0x1810, c, main_loop]
+    - [0x1B40, c, background_gfx]
+    - [0x38C0, c, input]
+    - [0x3FB0, c, rumble]
+    - [0x40C0, c, 43F0]
+    - [0x5CD0, c, heap]
+    - [0x5F10, c, fio]
+    - [0x6B10, c, curtains]
+    - [0x7010, c, crash_screen]
+    - [0x7B10, c, os/nusys/nugfxtaskmgr, -fforce-addr]
+    - [0x7EB0, c, 8800]
+    - [0x93C0, c, 9d10_len_1080]
+    - [0xA440, c, ad90_len_2880]
+    - [0xA790, c, B0E0]
+    - [0xCCC0, c, camera]
+    - [0xDFA0, c, game_modes]
+    - [0xDFF0, c, state_startup]
+    - [0xE280, c, intro_logos]
+    - [0xE380, c, state_battle]
+    - [0xE920, c, state_logos]
+    - [0xF3F0, c, state_pause]
+    - [0xFAB0, c, state_file_select]
+    - [0x107E0, c, state_world]
+    - [0x108A0, c, 111f0_len_860]
+    - [0x11100, c, state_intro]
+    - [0x118A0, c, state_title_screen]
+    - [0x12B30, c, state_demo]
+    - [0x12F20, c, npc]
+    - [0x198A0, c, encounter]
+    - [0x1EC30, c, encounter_api]
+    - [0x20570, c, status_icons]
+    - [0x22D30, c, 23680]
+    - [0x251A0, c, 25AF0]
+    - [0x255B0, c, audio/25f00_len_940]
+    - [0x25F00, c, audio/sfx_player]
+    - [0x27FD0, c, audio/28910_len_5090]
+    - [0x2B650, c, audio/2BF90]
+    - [0x2D060, c, audio/2d9a0_len_890]
+    - [0x2D8F0, c, audio/2e230_len_2190]
+    - [0x2FA80, c, audio/303c0_len_3e10]
+    - [0x2FB10, c, audio/30450]
+    - [0x30D10, c, audio/31650]
+    - [0x32B10, c, audio/33450]
+    - [0x33890, c, audio/tables]
+    - [0x33890, c, audio/reverb]
+    - [0x34740, c, 5B320]
+    - [0x34740, c, effects]
+    - [0x35180, c, world/world]
+    - [0x35950, c, collision]
+    - [0x385B0, c, 38F00]
+    - [0x388C0, c, 39210_len_aa0]
+    - [0x39360, c, os/nusys/nuboot]
+    - [0x39460, c, os/nusys/nusched]
+    - [0x39D00, c, os/nusys/nugfxfuncset]
+    - [0x39D40, c, os/nusys/nugfxprenmifuncset]
+    - [0x39D80, c, os/nusys/nugfxtaskallendwait]
+    - [0x39DA0, c, os/nusys/nugfxsetcfb]
+    - [0x39EB0, c, os/nusys/nugfxdisplayoff]
+    - [0x39EE0, c, os/nusys/nugfxdisplayon]
+    - [0x39F00, c, os/nusys/nupiinit]
+    - [0x39F40, c, os/nusys/nupireadrom]
+    - [0x3A010, c, os/nusys/nugfxinit]
+    - [0x3A0C0, c, os/nusys/nucontinit]
+    - [0x3A100, c, os/nusys/nucontdataget]
+    - [0x3A160, c, os/nusys/nucontpakmgr]
+    - [0x3A3D0, c, os/nusys/nucontrmbmgr]
+    - [0x3A940, c, os/nusys/nucontrmbstart]
+    - [0x3A9A0, c, os/nusys/nucontrmbcheck]
+    - [0x3AA40, c, os/nusys/nucontrmbmodeset]
+    - [0x3AB50, c, os/nusys/nucontrmbforcestop]
+    - [0x3AB70, c, os/nusys/nucontrmbforcestopend]
+    - [0x3AB90, c, os/nusys/nupireadromoverlay]
+    - [0x3ACA0, c, os/nusys/nugfxthread]
+    - [0x3ADC0, c, os/nusys/nugfxswapcfbfuncset]
+    - [0x3AE00, c, os/nusys/nugfxswapcfb]
+    - [0x3AE20, c, os/nusys/nugfxretracewait]
+    - [0x3AEA0, c, os/nusys/nusimgr]
+    - [0x3B1C0, c, os/nusys/nusicallbackadd]
+    - [0x3B260, c, os/nusys/nusicallbackremove]
+    - [0x3B2E0, c, os/nusys/nucontmgr]
+    - [0x3B690, c, os/nusys/nucontdatalock]
+    - [0x3B6F0, c, os/nusys/nucontqueryread]
+
+    - [0x3B710, hasm, libultra/monegi/ai/aigetlen]
+    - [0x3B720, hasm, libultra/monegi/ai/aigetstat]
+    - [0x3B730, hasm, libultra/monegi/ai/aisetfreq]
+    - [0x3B830, hasm, libultra/monegi/ai/aisetnextbuf]
+    - [0x3B8D0, hasm, libultra/monegi/cache/invaldcache]
+    - [0x3B980, hasm, libultra/monegi/cache/invalicache]
+    - [0x3BA00, hasm, libultra/monegi/cache/writebackdcache]
+    - [0x3BA80, hasm, libultra/monegi/cache/writebackdcacheall]
+    - [0x3BAB0, hasm, libultra/monegi/cont/contquery]
+    - [0x3BB60, hasm, libultra/monegi/cont/contreaddata]
+    - [0x3BDE0, hasm, libultra/monegi/cont/controller]
+    - [0x3C1B0, hasm, libultra/monegi/convert/virtualtophysical]
+    - [0x3C280, hasm, libultra/monegi/gu/sqrtf]
+    - [0x3C290, hasm, libultra/monegi/gu/frustum]
+    - [0x3C420, hasm, libultra/monegi/gu/lookat]
+    - [0x3C750, hasm, libultra/monegi/gu/lookathil]
+    - [0x3D020, hasm, libultra/monegi/gu/lookatref]
+    - [0x3D4F0, hasm, libultra/monegi/gu/ortho]
+    - [0x3D660, hasm, libultra/monegi/gu/perspective]
+    - [0x3D860, hasm, libultra/monegi/gu/position]
+    - [0x3DA40, hasm, libultra/monegi/gu/rotateRPY]
+    - [0x3DBC0, hasm, libultra/monegi/gu/sins]
+    - [0x3DC10, hasm, libultra/monegi/libc/bcopy]
+    - [0x3DF30, hasm, libultra/monegi/libc/bzero]
+    - [0x3DFD0, hasm, libultra/monegi/libc/string]
+    - [0x3E050, hasm, libultra/monegi/libc/xprintf]
+    - [0x3EAC0, hasm, libultra/monegi/message/createmesgqueue]
+    - [0x3EB30, hasm, libultra/monegi/message/recvmesg]
+    - [0x3ECA0, hasm, libultra/monegi/message/sendmesg.]
+    - [0x3EE10, hasm, libultra/monegi/message/seteventmesg]
+    - [0x3EEE0, hasm, libultra/monegi/reg/_getcount]
+    - [0x3EFE0, hasm, libultra/monegi/rsp/sptask]
+    - [0x3F1F0, hasm, libultra/monegi/rsp/sptaskyield]
+    - [0x3F210, hasm, libultra/monegi/rsp/sptaskyielded]
+    - [0x3F260, hasm, libultra/monegi/si/sirawdma]
+    - [0x3F340, hasm, libultra/monegi/si/siacs]
+    - [0x3F400, hasm, libultra/monegi/thread/createthread]
+    - [0x3F570, hasm, libultra/monegi/thread/setthreadpri]
+    - [0x3F680, hasm, libultra/monegi/thread/startthread]
+    - [0x3F810, hasm, libultra/monegi/thread/stopthread]
+    - [0x3F900, hasm, libultra/monegi/thread/thread]
+    - [0x3F960, hasm, libultra/monegi/thread/getactivequeue]
+    - [0x3F990, hasm, libultra/monegi/time/gettime]
+    - [0x3FA40, hasm, libultra/monegi/time/settime]
+    - [0x3FA80, hasm, libultra/monegi/time/settimer]
+    - [0x3FC40, hasm, libultra/monegi/time/timerintr]
+    - [0x40160, hasm, libultra/monegi/tlb/maptlb]
+    - [0x40220, hasm, libultra/monegi/tlb/probetlb]
+    - [0x402E0, hasm, libultra/monegi/tlb/unmaptlb]
+    - [0x40320, hasm, libultra/monegi/tlb/unmaptlball]
+    - [0x40370, hasm, libultra/monegi/vi/vigetcurrframebuf]
+    - [0x403B0, hasm, libultra/monegi/vi/vigetnextframebuf]
+    - [0x403F0, hasm, libultra/monegi/vi/vigetmode]
+    - [0x40430, hasm, libultra/monegi/vi/vimgr]
+    - [0x40730, hasm, libultra/monegi/vi/visetevent]
+    - [0x40790, hasm, libultra/monegi/vi/visetmode]
+    - [0x40810, hasm, libultra/monegi/vi/visetspecial]
+    - [0x40990, hasm, libultra/monegi/vi/visetyscale]
+    - [0x409E0, hasm, libultra/monegi/vi/viswapbuf]
+    - [0x40A30, hasm, libultra/monegi/vi/viswapcontext]
+    - [0x40D40, hasm, libultra/monegi/vi/viblack]
+    - [0x40DA0, hasm, libultra/monegi/vi/virepeatline]
+    - [0x40E00, hasm, libultra/monegi/mgu/mtxident]
+    - [0x40E60, hasm, libultra/monegi/mgu/mtxidentf]
+    - [0x40EC0, hasm, libultra/monegi/mgu/mtxf2l]
+    - [0x40F40, hasm, libultra/monegi/mgu/mtxl2f]
+    - [0x40FC0, hasm, libultra/monegi/mgu/mtxcatf]
+    - [0x410C0, hasm, libultra/monegi/mgu/scale]
+    - [0x41160, hasm, libultra/monegi/mgu/scalef]
+    - [0x411C0, hasm, libultra/monegi/mgu/translate]
+    - [0x412A0, hasm, libultra/monegi/mgu/translatef]
+    - [0x412F0, hasm, libultra/monegi/mgu/mtxcatl]
+    - [0x41370, hasm, libultra/monegi/mgu/mtxxfml]
+    - [0x41400, hasm, libultra/monegi/mgu/mtxxfmf]
+    - [0x414A0, hasm, libultra/monegi/mgu/rotate]
+    - [0x41630, hasm, libultra/nintendo/exception/exceptasm]
+    - [0x42100, hasm, libultra/nintendo/exception/interrupt]
+    - [0x42190, hasm, libultra/nintendo/exception/setintmask]
+    - [0x42240, hasm, libultra/nintendo/pi/pimgr]
+    - [0x423C0, hasm, libultra/nintendo/pi/epirawdma]
+    - [0x42780, hasm, libultra/nintendo/pi/epiwrite]
+    - [0x427E0, hasm, libultra/nintendo/pi/epiread]
+    - [0x42840, hasm, libultra/nintendo/pi/epidma]
+    - [0x428E0, hasm, libultra/nintendo/pi/epilinkhandle]
+    - [0x42930, hasm, libultra/nintendo/pi/cartrominit]
+    - [0x42A90, hasm, libultra/nintendo/pi/devmgr]
+    - [0x42F30, hasm, libultra/nintendo/pi/piacs]
+    - [0x42FF0, hasm, libultra/nintendo/flash/flashinit]
+    - [0x430A0, hasm, libultra/nintendo/flash/flashsectorerase]
+    - [0x430F0, hasm, libultra/nintendo/flash/flashwritebuffer]
+    - [0x43150, hasm, libultra/nintendo/flash/flashwritearray]
+    - [0x431B0, hasm, libultra/nintendo/flash/flashreadarray]
+    - [0x43240, hasm, libultra/bb/sk/skapi]
+    - [0x43490, hasm, libultra/bb/sa/strcmp]
+    - [0x434E0, hasm, libultra/bb/sa/common]
+    - [0x435C0, hasm, libultra/shared/motor/motor]
+    - [0x435D0, hasm, libultra/shared/pfs/pfsallocatefile]
+    - [0x43A00, hasm, libultra/shared/pfs/pfsdeletefile]
+    - [0x43C00, hasm, libultra/shared/pfs/pfsreadwritefile]
+    - [0x43FD0, hasm, libultra/shared/pfs/pfsfilestate]
+    - [0x44170, hasm, libultra/shared/pfs/pfssearchfile]
+    - [0x44310, hasm, libultra/shared/pfs/pfsfreeblocks]
+    - [0x44410, hasm, libultra/shared/pfs/pfsnumfiles]
+    - [0x44510, hasm, libultra/shared/pfs/pfsinitpak]
+    - [0x44800, hasm, libultra/shared/pfs/pfsrepairid]
+    - [0x44860, hasm, libultra/shared/pfs/pfsgetstatus]
+    - [0x449A0, hasm, libultra/shared/pfs/pfsselectbank]
+    - [0x44A10, hasm, libultra/shared/pfs/contpfs]
+    - [0x45360, hasm, libultra/shared/pfs/contramread]
+    - [0x45420, hasm, libultra/shared/pfs/contramwrite]
+    - [0x45510, hasm, os/parameters]
+    - [0x45580, hasm, libultra/shared/system/afterprenmi]
+    - [0x455C0, hasm, libultra/shared/system/initialize]
+    - [0x45B40, hasm, libultra/monegi/ai/ai]
+    - [0x45B70, hasm, libultra/monegi/libc/bcmp]
+    - [0x45C80, hasm, libultra/monegi/libc/xlitob]
+    - [0x45EB0, hasm, libultra/monegi/libc/xldtob]
+    - [0x468B0, hasm, libultra/monegi/message/jammesg]
+    - [0x46A30, hasm, libultra/monegi/reg/getcause]
+    - [0x46A40, hasm, libultra/monegi/reg/getsr]
+    - [0x46A50, hasm, libultra/monegi/reg/setfpccsr]
+    - [0x46A60, hasm, libultra/monegi/reg/setsr]
+    - [0x46A70, hasm, libultra/monegi/reg/setwatchlo]
+    - [0x46A80, hasm, libultra/monegi/reg/_setcompare]
+    - [0x46B30, hasm, libultra/monegi/rsp/sp]
+    - [0x46B60, hasm, libultra/monegi/rsp/spgetstat]
+    - [0x46B70, hasm, libultra/monegi/rsp/spsetstat]
+    - [0x46B80, hasm, libultra/monegi/rsp/spsetpc]
+    - [0x46BB0, hasm, libultra/monegi/rsp/sprawdma]
+    - [0x46C40, hasm, libultra/monegi/si/sirawread]
+    - [0x46C90, hasm, libultra/monegi/si/sirawwrite]
+    - [0x46CE0, hasm, libultra/monegi/thread/destroythread]
+    - [0x46E10, hasm, libultra/monegi/thread/getthreadpri]
+    - [0x46E60, hasm, libultra/monegi/thread/yieldthread]
+    - [0x46EC0, hasm, libultra/monegi/tlb/maptlbrdb]
+    - [0x46F20, hasm, libultra/monegi/vi/vi]
+    - [0x47020, hasm, libultra/monegi/vi/vigetcurrcontext]
+    - [0x47040, hasm, libultra/monegi/mgu/normalize]
+    - [0x470A0, hasm, libultra/nintendo/exception/setglobalintmask]
+    - [0x47100, hasm, libultra/nintendo/exception/resetglobalintmask]
+    - [0x47170, hasm, libultra/nintendo/pi/pirawdma]
+    - [0x47250, hasm, libultra/nintendo/pi/pigetcmdq]
+    - [0x47280, hasm, libultra/nintendo/pi/epirawread]
+    - [0x47400, hasm, libultra/nintendo/pi/epirawwrite]
+    - [0x47580, hasm, libultra/shared/pfs/pfschecker]
+    - [0x47CA0, hasm, libultra/shared/pfs/pfsisplug]
+    - [0x48020, hasm, libultra/monegi/libc/ldiv]
+    - [0x481E0, hasm, libultra/monegi/si/si]
+
+    - [0x48210, c, gcc/divdi3, -g2]
+    - [0x487D0, c, gcc/moddi3, -g2]
+    - [0x48D20, c, gcc/udivdi3, -g2]
+    - [0x49280, c, gcc/umoddi3, -g2]
+    - [0x49750, c, os/strcpy, gcc_272 -O1]
+    - [0x49780, hasm, os/decode_yay0]
+    - [0x49830, pm_effect_loads, effect_loads]
+    - [0x4CAD0, c, battle/battle]
+    - [0x4D140, bin, rspboot]
+    - [0x4D210, bin, n_aspMain_text]
+    - [0x4DE70, .data, main_pre]
+    - [0x4E080, .data, main]
+    - [0x4E090, .data, main_loop]
+    - [auto, .data, background_gfx]
+    - [0x4E2D0, .data, rumble]
+    - [0x4E2E0, .data, 43F0]
+    - [0x4E640, .data, fio]
+    - [0x4E650, .data, curtains]
+    - start: 0x4E650
+      type: .data
+      name: curtains
+      subsegments:
+        - [0x4E650, i4, sprite/unk_checkers, 16, 32]
+        - [0x4E750]
+        - [0x4E7A0, rgba32, sprite/curtains, 32, 32]
+        - [0x4F7A0]
+        - [0x4F7F0, ci4, sprite/checkers, 32, 16]
+        - [0x4F8F0, palette, sprite/checkers]
+        - [0x4F910]
+        - [0x4F990, vtx, vtx/curtains1]
+        - [0x4F9F0, vtx, vtx/curtains2]
+        - [0x4FA50, vtx, vtx/curtains3]
+        - [0x4FBE0, vtx, vtx/curtains4]
+        - [0x4FC20, vtx, vtx/curtains5]
+        - [0x4FC60, vtx, vtx/curtains6]
+        - [0x4FE50, vtx, vtx/curtains7]
+        - [0x4FED0]
+        - [0x501B0, ia8, ui/no_controller, 128, 32]
+        - [0x511B0]
+    - [0x51280, .data, crash_screen]
+    - [0x51460, .data, os/nusys/nugfxtaskmgr]
+    - [0x51470, .data, camera]
+    - [0x51480, .data, game_modes]
+    - [0x51900, .data, state_battle]
+    - [0x51920, .data, state_logos]
+    - [0x519B0, .data, state_pause]
+    - [0x519E0, .data, state_file_select]
+    - [0x51A20, .data, state_title_screen]
+    - [0x51B40, .data, state_demo]
+    - [0x51C50, .data, npc]
+    - [0x51CA0, .data, encounter]
+    - [0x521C0, .data, status_icons]
+    - [0x521D0, .data, audio/25f00_len_940]
+    - [0x521F0, .data, audio/sfx_player]
+    - [0x52E10, .data, audio/30450]
+    - [0x52EB0, .data, audio/31650]
+    - [0x52EC0, .data, audio/33450]
+    - [0x52FC0, .data, audio/tables]
+    - [0x59040, .data, audio/reverb]
+    - [0x59270, .data, effects]
+    - [0x59F80, .data, 5B320]
+    - [0x69FC0, .data, world/world]
+    - [0x6D720, .data, 38F00]
+    - [0x6DBE0, .data, os/nusys/nusched]
+    - [0x6DC00, .data, os/nusys/nugfxinit]
+    - [0x6DD00, .data, os/nusys/nucontpakmgr]
+    - [0x6DD40, .data, os/nusys/nucontrmbmgr]
+    - [0x6DD70, .data, os/nusys/nugfxfuncset]
+    - [0x6DD80, .data, os/nusys/nusimgr]
+    - [0x6DD90, .data, os/nusys/nucontmgr]
+    - [0x6DDC0, data, libultra]
+    - [0x6FAB0, .data, battle/battle]
+    - [0x700B0, bin, gspF3DEX2kawase_fifo_text]
+    - [0x716E0, bin, gspF3DEX2kawase_fifo_data]
+    - [0x71B00, bin, n_aspMain_data]
+
+    - [0x71DB0, .rodata, main_loop]
+    - [0x71DD0, .rodata, 43F0]
+    - [0x71E70, .rodata, curtains]
+    - [0x71EA0, .rodata, crash_screen]
+    - [0x72250, .rodata, 8800]
+    - [0x72280, .rodata, B0E0]
+    - [0x722F0, .rodata, camera]
+    - [0x72300, .rodata, state_logos]
+    - [0x72358, .rodata, state_file_select]
+    - [0x72390, .rodata, 111f0_len_860]
+    - [0x723A8, .rodata, state_intro]
+    - [0x72400, .rodata, state_title_screen]
+    - [0x72468, .rodata, state_demo]
+    - [0x724F0, .rodata, npc]
+    - [0x72660, .rodata, encounter]
+    - [0x72720, .rodata, status_icons]
+    - [0x72780, .rodata, 23680]
+    - [0x72930, .rodata, audio/28910_len_5090]
+    - [0x72960, .rodata, audio/2e230_len_2190]
+    - [0x72978, .rodata, audio/30450]
+    - [0x729A0, .rodata, audio/33450]
+    - [0x729B0, .rodata, audio/reverb]
+    - [0x72A10, .rodata, 5B320]
+    - [0x72A80, .rodata, world/world]
+    - [0x73B10, rodata, libultra]
+    - [0x73E00, .rodata, gcc/divdi3]
+    - [0x73F00, .rodata, gcc/moddi3]
+    - [0x74000, .rodata, gcc/udivdi3]
+    - [0x74100, .rodata, gcc/umoddi3]
+    - [0x74200, .rodata, battle/battle]
+    - [0x74570]
+
+
+  - name: engine1
+    dir: engine1
+    type: code
+    start: 0x74570
+    vram: 0x800da8e0
+    subsegments:
+      - [0x74570, bin]
+      - [0xa4990]
+
+  - name: engine2
+    dir: engine2
+    type: code
+    start: 0xa4990
+    vram: 0x8010dab0
+    subsegments:
+      - [0xa4990, bin]
+      - [0xe6920]
+
+  - name: evt
+    dir: evt
+    type: code
+    start: 0xe6920
+    vram: 0x802c3000
+    subsegments:
+      - [0xe6920, bin]
+      - [0xfdda0]
+
+  - name: engine4
+    dir: engine4
+    type: code
+    start: 0xfdda0
+    vram: 0x802dbd40
+    subsegments:
+      - [0xfdda0, bin]
+      - [0x101580]
+
+  - name: entity
+    type: code
+    start: 0x101580
+    vram: 0x802e0d90
+    subsegments:
+      - [0x101580, bin]
+      - [0x10bb80]
+
+  - name: font_width
+    type: code
+    start: 0x10bb80
+    vram: 0x802eb3d0
+    subsegments:
+      - [0x10bb80, bin]
+      - [0x10e120]
+
+  - [0x10e120, bin]
+
+  - name: battle_code
+    type: code
+    start: 0x1b59a0
+    vram: 0x8023e000
+    subsegments:
+      - [0x1b59a0, bin]
+      - [0x215390]
+
+  - [0x215390, bin]
+
+
+  - name: logos
+    type: code
+    start: 0x247230
+    vram: 0x802d2e60
+    subsegments:
+      - [0x247230, bin]
+      - [0x262230]
+
+  - [0x262230, bin]
+
+  ###############
+  ### Effects ###
+  ###############
+  - name: 325AD0
+    type: bin
+    start: 0x36e520
+    vram: 0xe0200000
+  - name: effect_gfx_big_smoke_puff
+    type: bin
+    start: 0x36EE60
+  - name: effect_big_smoke_puff
+    type: bin
+    start: 0x370340
+    vram: 0xE0002000
+  - name: effect_landing_dust
+    type: bin
+    start: 0x370B60
+    vram: 0xE000C000
+  - name: effect_gfx_landing_dust
+    type: bin
+    start: 0x3718F0
+  - name: effect_walking_dust
+    type: bin
+    start: 0x374B60
+    vram: 0xE000E000
+  - name: effect_flower_splash
+    type: bin
+    start: 0x3751F0
+    vram: 0xE0010000
+  - name: effect_gfx_flower_splash_trail
+    type: bin
+    start: 0x375910
+  - name: effect_flower_trail
+    type: bin
+    start: 0x376760
+    vram: 0xE0012000
+  - name: effect_cloud_puff
+    type: bin
+    start: 0x376EE0
+    vram: 0xE0014000
+  - name: effect_gfx_cloud_puff_trail
+    type: bin
+    start: 0x3776A0
+  - name: effect_cloud_trail
+    type: bin
+    start: 0x377880
+    vram: 0xE0016000
+  - name: effect_footprint
+    type: bin
+    start: 0x377FD0
+    vram: 0xE0018000
+  - name: effect_gfx_footprint
+    type: bin
+    start: 0x3785A0
+  - name: effect_floating_flower
+    type: bin
+    start: 0x378880
+    vram: 0xE001A000
+  - name: effect_gfx_floating_flower
+    type: bin
+    start: 0x378EB0
+  - name: effect_snowflake
+    type: bin
+    start: 0x379360
+    vram: 0xE001C000
+  - name: effect_gfx_snowflake
+    type: bin
+    start: 0x379950
+  - name: effect_star
+    type: bin
+    start: 0x37A390
+    vram: 0xE001E000
+  - name: effect_gfx_star
+    type: bin
+    start: 0x37B0F0
+  - name: effect_emote
+    type: bin
+    start: 0x37C910
+    vram: 0xE0020000
+  - name: effect_gfx_emote
+    type: bin
+    start: 0x37D6C0
+  - name: effect_sparkles
+    type: bin
+    start: 0x37FC90
+    vram: 0xE0022000
+  - name: effect_gfx_sparkles
+    type: bin
+    start: 0x380A10
+  - name: effect_shape_spell
+    type: bin
+    start: 0x381CA0
+    vram: 0xE0024000
+  - name: effect_gfx_shape_spell
+    type: bin
+    start: 0x3829B0
+  - name: effect_gather_energy_pink
+    type: bin
+    start: 0x383BD0
+    vram: 0xE0026000
+  - name: effect_gfx_gather_energy_pink
+    type: bin
+    start: 0x384620
+  - name: effect_drop_leaves
+    type: bin
+    start: 0x385840
+    vram: 0xE0028000
+  - name: effect_gfx_drop_leaves
+    type: bin
+    start: 0x386060
+  - name: effect_dust
+    type: bin
+    start: 0x387310
+    vram: 0xE002A000
+  - name: effect_gfx_dust
+    type: bin
+    start: 0x387A50
+  - name: effect_shattering_stones
+    type: bin
+    start: 0x3888D0
+    vram: 0xE002C000
+  - name: effect_gfx_shattering_stones
+    type: bin
+    start: 0x3892D0
+  - name: effect_smoke_ring
+    type: bin
+    start: 0x38A430
+    vram: 0xE002E000
+  - name: effect_damage_stars
+    type: bin
+    start: 0x38AB90
+    vram: 0xE0030000
+  - name: effect_gfx_damage_stars
+    type: bin
+    start: 0x38BA90
+  - name: effect_explosion
+    type: bin
+    start: 0x38C0D0
+    vram: 0xE0032000
+  - name: effect_gfx_explosion
+    type: bin
+    start: 0x38C9C0
+  - name: effect_lens_flare
+    type: bin
+    start: 0x38D460
+    vram: 0xE0034000
+  - name: effect_gfx_lens_flare
+    type: bin
+    start: 0x38DC30
+  - name: effect_got_item_outline
+    type: bin
+    start: 0x38DF30
+    vram: 0xE0036000
+  - name: effect_gfx_got_item_outline
+    type: bin
+    start: 0x38E590
+  - name: effect_spiky_white_aura
+    type: bin
+    start: 0x396770
+    vram: 0xE0038000
+  - name: effect_gfx_spiky_white_aura
+    type: bin
+    start: 0x3971C0
+  - name: effect_smoke_impact
+    type: bin
+    start: 0x3976D0
+    vram: 0xE003A000
+  - name: effect_damage_indicator
+    type: bin
+    start: 0x397F10
+    vram: 0xE003C000
+  - name: effect_gfx_damage_indicator
+    type: bin
+    start: 0x398C70
+  - name: effect_purple_ring
+    type: bin
+    start: 0x39AE90
+    vram: 0xE003E000
+  - name: effect_gfx_purple_ring
+    type: bin
+    start: 0x39B730
+  - name: effect_flame
+    type: bin
+    start: 0x39BD50
+    vram: 0xE0040000
+  - name: effect_gfx_flame
+    type: bin
+    start: 0x39C600
+  - name: effect_stars_burst
+    type: bin
+    start: 0x39D1F0
+    vram: 0xE0042000
+  - name: effect_stars_shimmer
+    type: bin
+    start: 0x39D9B0
+    vram: 0xE0044000
+  - name: effect_rising_bubble
+    type: bin
+    start: 0x39E930
+    vram: 0xE0046000
+  - name: effect_gfx_rising_bubble
+    type: bin
+    start: 0x39EF80
+  - name: effect_ring_blast
+    type: bin
+    start: 0x39F3D0
+    vram: 0xE0048000
+  - name: effect_gfx_ring_blast
+    type: bin
+    start: 0x39FDF0
+  - name: effect_shockwave
+    type: bin
+    start: 0x3A0F10
+    vram: 0xE004A000
+  - name: effect_gfx_shockwave
+    type: bin
+    start: 0x3A1E00
+  - name: effect_music_note
+    type: bin
+    start: 0x3A2970
+    vram: 0xE004C000
+  - name: effect_gfx_music_note
+    type: bin
+    start: 0x3A3030
+  - name: effect_smoke_burst
+    type: bin
+    start: 0x3A4420
+    vram: 0xE004E000
+  - name: effect_sweat
+    type: bin
+    start: 0x3A4A20
+    vram: 0xE0050000
+  - name: effect_gfx_sweat
+    type: bin
+    start: 0x3A4FA0
+  - name: effect_sleep_bubble
+    type: bin
+    start: 0x3A54D0
+    vram: 0xE0052000
+  - name: effect_gfx_sleep_bubble
+    type: bin
+    start: 0x3A5F60
+  - name: effect_windy_leaves
+    type: bin
+    start: 0x3A6450
+    vram: 0xE0056000
+  - name: effect_falling_leaves
+    type: bin
+    start: 0x3A7370
+    vram: 0xE0058000
+  - name: effect_gfx_falling_leaves
+    type: bin
+    start: 0x3A7B30
+  - name: effect_stars_spread
+    type: bin
+    start: 0x3A8D10
+    vram: 0xE005A000
+  - name: effect_gfx_stars_spread
+    type: bin
+    start: 0x3A9480
+  - name: effect_steam_burst
+    type: bin
+    start: 0x3A9990
+    vram: 0xE005C000
+  - name: effect_gfx_steam_burst
+    type: bin
+    start: 0x3AA0C0
+  - name: effect_stars_orbiting
+    type: bin
+    start: 0x3AB010
+    vram: 0xE005E000
+  - name: effect_gfx_stars_orbiting
+    type: bin
+    start: 0x3AB6A0
+  - name: effect_big_snowflakes
+    type: bin
+    start: 0x3ABBB0
+    vram: 0xE0060000
+  - name: effect_gfx_big_snowflakes
+    type: bin
+    start: 0x3AC310
+  - name: effect_debuff
+    type: bin
+    start: 0x3ACD50
+    vram: 0xE0062000
+  - name: effect_gfx_debuff
+    type: bin
+    start: 0x3AD650
+  - name: effect_green_impact
+    type: bin
+    start: 0x3AD960
+    vram: 0xE0064000
+  - name: effect_gfx_green_impact
+    type: bin
+    start: 0x3AE400
+  - name: effect_radial_shimmer
+    type: bin
+    start: 0x3AEA80
+    vram: 0xE0066000
+  - name: effect_gfx_radial_shimmer
+    type: bin
+    start: 0x3AF7B0
+  - name: effect_ending_decals
+    type: bin
+    start: 0x3B3320
+    vram: 0xE0068000
+  - name: effect_gfx_ending_decals
+    type: bin
+    start: 0x3B3930
+  - name: effect_light_rays
+    type: bin
+    start: 0x3B5A70
+    vram: 0xE006A000
+  - name: effect_gfx_light_rays
+    type: bin
+    start: 0x3B69E0
+  - name: effect_lightning
+    type: bin
+    start: 0x3B6C20
+    vram: 0xE006C000
+  - name: effect_gfx_lightning
+    type: bin
+    start: 0x3B77B0
+  - name: effect_fire_breath
+    type: bin
+    start: 0x3BB1E0
+    vram: 0xE006E000
+  - name: effect_gfx_fire_breath
+    type: bin
+    start: 0x3BBE30
+  - name: effect_shimmer_burst
+    type: bin
+    start: 0x3BCB00
+    vram: 0xE0070000
+  - name: effect_energy_shockwave
+    type: bin
+    start: 0x3BD8A0
+    vram: 0xE0072000
+  - name: effect_gfx_energy_shockwave
+    type: bin
+    start: 0x3BDF60
+  - name: effect_shimmer_wave
+    type: bin
+    start: 0x3BEEB0
+    vram: 0xE0074000
+  - name: effect_aura
+    type: bin
+    start: 0x3BFAC0
+    vram: 0xE0076000
+  - name: effect_gfx_aura
+    type: bin
+    start: 0x3C09D0
+  - name: effect_bulb_glow
+    type: bin
+    start: 0x3C2E40
+    vram: 0xE0078000
+  - name: effect_gfx_bulb_glow
+    type: bin
+    start: 0x3C3820
+  - name: effect_effect_3D
+    type: bin
+    start: 0x3C4F90
+    vram: 0xE007A000
+  - name: effect_gfx_effect_3D
+    type: bin
+    start: 0x3C5BD0
+  - name: effect_blast
+    type: bin
+    start: 0x3C5EE0
+    vram: 0xE007C000
+  - name: effect_gfx_blast
+    type: bin
+    start: 0x3C6420
+  - name: effect_fire_flower
+    type: bin
+    start: 0x3C8170
+    vram: 0xE007E000
+  - name: effect_gfx_fire_flower
+    type: bin
+    start: 0x3C8DF0
+  - name: effect_recover
+    type: bin
+    start: 0x3C9D10
+    vram: 0xE0080000
+  - name: effect_gfx_recover
+    type: bin
+    start: 0x3CA850
+  - name: effect_disable_x
+    type: bin
+    start: 0x3CE090
+    vram: 0xE0082000
+  - name: effect_gfx_disable_x
+    type: bin
+    start: 0x3CEE00
+  - name: effect_bombette_breaking
+    type: bin
+    start: 0x3D1420
+    vram: 0xE0084000
+  - name: effect_firework
+    type: bin
+    start: 0x3D22A0
+    vram: 0xE0086000
+  - name: effect_gfx_firework
+    type: bin
+    start: 0x3D2DA0
+  - name: effect_confetti
+    type: bin
+    start: 0x3D3840
+    vram: 0xE0088000
+  - name: effect_gfx_confetti
+    type: bin
+    start: 0x3D45F0
+  - name: effect_snowfall
+    type: bin
+    start: 0x3D5040
+    vram: 0xE008A000
+  - name: effect_gfx_snowfall
+    type: bin
+    start: 0x3D5AC0
+  - name: effect_effect_46
+    type: bin
+    start: 0x3D6850
+    vram: 0xE008C000
+  - name: effect_gfx_effect_46
+    type: bin
+    start: 0x3D73E0
+  - name: effect_gather_magic
+    type: bin
+    start: 0x3D78B0
+    vram: 0xE008E000
+  - name: effect_gfx_gather_magic
+    type: bin
+    start: 0x3D8160
+  - name: effect_attack_result_text
+    type: bin
+    start: 0x3D8350
+    vram: 0xE0090000
+  - name: effect_gfx_attack_result_text
+    type: bin
+    start: 0x3D8E20
+  - name: effect_small_gold_sparkle
+    type: bin
+    start: 0x3DA780
+    vram: 0xE0092000
+  - name: effect_gfx_small_gold_sparkle
+    type: bin
+    start: 0x3DAE90
+  - name: effect_flashing_box_shockwave
+    type: bin
+    start: 0x3DB320
+    vram: 0xE0094000
+  - name: effect_gfx_flashing_box_shockwave
+    type: bin
+    start: 0x3DBAF0
+  - name: effect_balloon
+    type: bin
+    start: 0x3DCCD0
+    vram: 0xE0096000
+  - name: effect_gfx_balloon
+    type: bin
+    start: 0x3DD0C0
+  - name: effect_floating_rock
+    type: bin
+    start: 0x3DE600
+    vram: 0xE0098000
+  - name: effect_gfx_floating_rock
+    type: bin
+    start: 0x3DEB40
+  - name: effect_chomp_drop
+    type: bin
+    start: 0x3DF000
+    vram: 0xE009A000
+  - name: effect_gfx_chomp_drop
+    type: bin
+    start: 0x3DFA90
+  - name: effect_quizmo_stage
+    type: bin
+    start: 0x3E0C40
+    vram: 0xE009C000
+  - name: effect_gfx_quizmo_stage
+    type: bin
+    start: 0x3E1610
+  - name: effect_radiating_energy_orb
+    type: bin
+    start: 0x3E8970
+    vram: 0xE009E000
+  - name: effect_gfx_radiating_energy_orb
+    type: bin
+    start: 0x3E97B0
+  - name: effect_quizmo_answer
+    type: bin
+    start: 0x3EACE0
+    vram: 0xE00A0000
+  - name: effect_gfx_quizmo_answer
+    type: bin
+    start: 0x3EAE90
+  - name: effect_motion_blur_flame
+    type: bin
+    start: 0x3EB3E0
+    vram: 0xE00A2000
+  - name: _3A33D0
+    type: bin
+    start: 0x3EBE20
+  - name: effect_energy_orb_wave
+    type: bin
+    start: 0x3EC230
+    vram: 0xE00A4000
+  - name: effect_gfx_energy_orb_wave
+    type: bin
+    start: 0x3ECD70
+  - name: effect_merlin_house_stars
+    type: bin
+    start: 0x3EDFA0
+    vram: 0xE00A6000
+  - name: effect_gfx_merlin_house_stars
+    type: bin
+    start: 0x3EE630
+  - name: effect_quizmo_audience
+    type: bin
+    start: 0x3EFB40
+    vram: 0xE00A8000
+  - name: effect_gfx_quizmo_audience
+    type: bin
+    start: 0x3F01F0
+  - name: effect_butterflies
+    type: bin
+    start: 0x3F3370
+    vram: 0xE00AA000
+  - name: effect_gfx_butterflies
+    type: bin
+    start: 0x3F3A80
+  - name: effect_stat_change
+    type: bin
+    start: 0x3F7870
+    vram: 0xE00AC000
+  - name: effect_gfx_stat_change
+    type: bin
+    start: 0x3F8150
+  - name: effect_snaking_static
+    type: bin
+    start: 0x3FADA0
+    vram: 0xE00AE000
+  - name: effect_gfx_snaking_static
+    type: bin
+    start: 0x3FB7E0
+  - name: effect_thunderbolt_ring
+    type: bin
+    start: 0x3FC900
+    vram: 0xE00B0000
+  - name: effect_gfx_thunderbolt_ring
+    type: bin
+    start: 0x3FD0F0
+  - name: effect_squirt
+    type: bin
+    start: 0x3FD1E0
+    vram: 0xE00B2000
+  - name: effect_gfx_squirt
+    type: bin
+    start: 0x3FDD90
+  - name: effect_water_block
+    type: bin
+    start: 0x3FE740
+    vram: 0xE00B4000
+  - name: effect_gfx_water_block
+    type: bin
+    start: 0x3FF640
+  - name: effect_waterfall
+    type: bin
+    start: 0x3FFBB0
+    vram: 0xE00B6000
+  - name: effect_gfx_waterfall
+    type: bin
+    start: 0x400320
+  - name: effect_water_fountain
+    type: bin
+    start: 0x4005D0
+    vram: 0xE00B8000
+  - name: effect_gfx_water_fountain
+    type: bin
+    start: 0x4012B0
+  - name: effect_underwater
+    type: bin
+    start: 0x401620
+    vram: 0xE00BA000
+  - name: _3B9A70
+    type: bin
+    start: 0x4024C0
+  - name: effect_lightning_bolt
+    type: bin
+    start: 0x402A80
+    vram: 0xE00BC000
+  - name: effect_gfx_lightning_bolt
+    type: bin
+    start: 0x4038F0
+  - name: effect_water_splash
+    type: bin
+    start: 0x4049B0
+    vram: 0xE00BE000
+  - name: effect_gfx_water_splash
+    type: bin
+    start: 0x4054E0
+  - name: effect_snowman_doll
+    type: bin
+    start: 0x4057B0
+    vram: 0xE00C0000
+  - name: effect_gfx_snowman_doll
+    type: bin
+    start: 0x4063F0
+  - name: effect_fright_jar
+    type: bin
+    start: 0x409C20
+    vram: 0xE00C2000
+  - name: effect_gfx_fright_jar
+    type: bin
+    start: 0x40A5F0
+  - name: effect_stop_watch
+    type: bin
+    start: 0x413840
+    vram: 0xE00C4000
+  - name: effect_gfx_stop_watch
+    type: bin
+    start: 0x4142E0
+  - name: effect_effect_63
+    type: bin
+    start: 0x415430
+    vram: 0xE00C6000
+  - name: effect_gfx_effect_63
+    type: bin
+    start: 0x416130
+  - name: effect_throw_spiny
+    type: bin
+    start: 0x417DF0
+    vram: 0xE00C8000
+  - name: effect_gfx_throw_spiny
+    type: bin
+    start: 0x418540
+  - name: effect_effect_65
+    type: bin
+    start: 0x418F50
+    vram: 0xE00CA000
+  - name: effect_gfx_effect_65
+    type: bin
+    start: 0x419C30
+  - name: effect_tubba_heart_attack
+    type: bin
+    start: 0x41A0E0
+    vram: 0xE00CC000
+  - name: effect_gfx_tubba_heart_attack
+    type: bin
+    start: 0x41AFD0
+  - name: effect_whirlwind
+    type: bin
+    start: 0x41B510
+    vram: 0xE00CE000
+  - name: effect_gfx_whirlwind
+    type: bin
+    start: 0x41C380
+  - name: effect_red_impact
+    type: bin
+    start: 0x41C870
+    vram: 0xE00D0000
+  - name: effect_floating_cloud_puff
+    type: bin
+    start: 0x41D3C0
+    vram: 0xE00D2000
+  - name: effect_gfx_floating_cloud_puff
+    type: bin
+    start: 0x41D8E0
+  - name: effect_energy_in_out
+    type: bin
+    start: 0x41DA70
+    vram: 0xE00D6000
+  - name: effect_gfx_energy_in_out
+    type: bin
+    start: 0x41E980
+  - name: effect_tattle_window
+    type: bin
+    start: 0x41F210
+    vram: 0xE00D8000
+  - name: effect_gfx_tattle_window
+    type: bin
+    start: 0x41FA90
+  - name: effect_shiny_flare
+    type: bin
+    start: 0x41FC90
+    vram: 0xE00DA000
+  - name: effect_gfx_shiny_flare
+    type: bin
+    start: 0x4201C0
+  - name: effect_huff_puff_breath
+    type: bin
+    start: 0x4204C0
+    vram: 0xE00DC000
+  - name: effect_gfx_huff_puff_breath
+    type: bin
+    start: 0x420B10
+  - name: effect_cold_breath
+    type: bin
+    start: 0x421170
+    vram: 0xE00DE000
+  - name: effect_gfx_cold_breath
+    type: bin
+    start: 0x421B50
+  - name: effect_embers
+    type: bin
+    start: 0x423EB0
+    vram: 0xE00E0000
+  - name: effect_gfx_embers
+    type: bin
+    start: 0x424990
+  - name: effect_hieroglyphs
+    type: bin
+    start: 0x424D60
+    vram: 0xE00E2000
+  - name: effect_gfx_hieroglyphs
+    type: bin
+    start: 0x4257A0
+  - name: effect_misc_particles
+    type: bin
+    start: 0x426A50
+    vram: 0xE00E4000
+  - name: effect_gfx_misc_particles
+    type: bin
+    start: 0x4278B0
+  - name: effect_static_status
+    type: bin
+    start: 0x429380
+    vram: 0xE00E6000
+  - name: effect_gfx_static_status
+    type: bin
+    start: 0x429D20
+  - name: effect_moving_cloud
+    type: bin
+    start: 0x42A0E0
+    vram: 0xE00E8000
+  - name: effect_gfx_moving_cloud
+    type: bin
+    start: 0x42A720
+  - name: effect_effect_75
+    type: bin
+    start: 0x42A930
+    vram: 0xE00EA000
+  - name: effect_gfx_effect_75
+    type: bin
+    start: 0x42B3B0
+  - name: effect_firework_rocket
+    type: bin
+    start: 0x42CDF0
+    vram: 0xE010A000
+  - name: effect_gfx_firework_rocket
+    type: bin
+    start: 0x42DDA0
+  - name: effect_peach_star_beam
+    type: bin
+    start: 0x42DF10
+    vram: 0xE010C000
+  - name: effect_gfx_peach_star_beam
+    type: bin
+    start: 0x42E980
+  - name: effect_chapter_change
+    type: bin
+    start: 0x433F30
+    vram: 0xE010E000
+  - name: effect_gfx_chapter_change
+    type: bin
+    start: 0x4348B0
+  - name: effect_ice_shard
+    type: bin
+    start: 0x440E40
+    vram: 0xE0110000
+  - name: effect_gfx_ice_shard
+    type: bin
+    start: 0x441710
+  - name: effect_spirit_card
+    type: bin
+    start: 0x4428A0
+    vram: 0xE0112000
+  - name: effect_gfx_spirit_card
+    type: bin
+    start: 0x442F00
+  - name: effect_lil_oink
+    type: bin
+    start: 0x447530
+    vram: 0xE0114000
+  - name: effect_gfx_lil_oink
+    type: bin
+    start: 0x447CA0
+  - name: effect_something_rotating
+    type: bin
+    start: 0x44B090
+    vram: 0xE0116000
+  - name: effect_breaking_junk
+    type: bin
+    start: 0x44BE50
+    vram: 0xE0118000
+  - name: effect_gfx_breaking_junk
+    type: bin
+    start: 0x44C640
+  - name: effect_partner_buff
+    type: bin
+    start: 0x44CC70
+    vram: 0xE011A000
+  - name: effect_gfx_partner_buff
+    type: bin
+    start: 0x44D990
+  - name: effect_quizmo_assistant
+    type: bin
+    start: 0x44F590
+    vram: 0xE011C000
+  - name: effect_gfx_quizmo_assistant
+    type: bin
+    start: 0x44FAD0
+  - name: effect_ice_pillar
+    type: bin
+    start: 0x4523E0
+    vram: 0xE011E000
+  - name: effect_gfx_ice_pillar
+    type: bin
+    start: 0x452C10
+  - name: effect_sun
+    type: bin
+    start: 0x453E40
+    vram: 0xE0120000
+  - name: effect_gfx_sun
+    type: bin
+    start: 0x4545F0
+  - name: effect_star_spirits_energy
+    type: bin
+    start: 0x454FF0
+    vram: 0xE0122000
+  - name: effect_gfx_star_spirits_energy
+    type: bin
+    start: 0x455CE0
+  - name: effect_pink_sparkles
+    type: bin
+    start: 0x45B180
+    vram: 0xE0124000
+  - name: effect_star_outline
+    type: bin
+    start: 0x45BDB0
+    vram: 0xE0126000
+  - name: effect_gfx_star_outline
+    type: bin
+    start: 0x45C9F0
+  - name: effect_effect_86
+    type: bin
+    start: 0x45D5F0
+    vram: 0xE0128000
+  - name: effect_gfx_effect_86
+    type: bin
+    start: 0x45DAB0
+  - [0x45E7E0, bin]
+
+
+  ####################
+  ### Battle Areas ###
+  ####################
+  - name: battle_area_kmr_part_1
+    type: bin
+    start: 0x4793F0
+    vram: 0x80218000
+  - name: battle_area_kmr_part_2
+    type: bin
+    start: 0x4824E0
+    vram: 0x80218000
+  - name: battle_area_kmr_part_3
+    type: bin
+    start: 0x48FE90
+    vram: 0x80218000
+  - name: battle_area_mac
+    type: bin
+    start: 0x4ACEE0
+    vram: 0x80218000
+  - name: battle_area_hos
+    type: bin
+    start: 0x4C7B00
+    vram: 0x80218000
+  - name: battle_area_nok
+    type: bin
+    start: 0x4D5BF0
+    vram: 0x80218000
+  - name: battle_area_trd_part_1
+    type: bin
+    start: 0x4E9AF0
+    vram: 0x80218000
+  - name: battle_area_trd_part_2
+    type: bin
+    start: 0x4F9C40
+    vram: 0x80218000
+  - name: battle_area_trd_part_3
+    type: bin
+    start: 0x517C00
+    vram: 0x80218000
+  - name: battle_area_iwa
+    type: bin
+    start: 0x518C40
+    vram: 0x80218000
+  - name: battle_area_sbk
+    type: bin
+    start: 0x523030
+    vram: 0x80218000
+  - name: battle_area_isk_part_1
+    type: bin
+    start: 0x52B190
+    vram: 0x80218000
+  - name: battle_area_isk_part_2
+    type: bin
+    start: 0x537EF0
+    vram: 0x80218000
+  - name: battle_area_mim
+    type: bin
+    start: 0x540630
+    vram: 0x80218000
+  - name: battle_area_arn
+    type: bin
+    start: 0x5474A0
+    vram: 0x80218000
+  - name: battle_area_dgb
+    type: bin
+    start: 0x557A70
+    vram: 0x80218000
+  - name: battle_area_omo
+    type: bin
+    start: 0x55B020
+    vram: 0x80218000
+  - name: battle_area_omo2
+    type: bin
+    start: 0x5740F0
+    vram: 0x80218000
+  - name: battle_area_omo2_1
+    type: bin
+    start: 0x58BFC0
+    vram: 0x80231000
+  - name: battle_area_omo2_2
+    type: bin
+    start: 0x590E30
+    vram: 0x80231000
+  - name: battle_area_omo2_3
+    type: bin
+    start: 0x5956C0
+    vram: 0x80231000
+  - name: battle_area_omo2_4
+    type: bin
+    start: 0x59AE90
+    vram: 0x80231000
+  - name: battle_area_omo2_5
+    type: bin
+    start: 0x59B600
+    vram: 0x80231000
+  - name: battle_area_omo2_6
+    type: bin
+    start: 0x59F6E0
+    vram: 0x80231000
+  - name: battle_area_omo3
+    type: bin
+    start: 0x59FE30
+    vram: 0x80218000
+  - name: battle_area_kgr
+    type: bin
+    start: 0x5B6CF0
+    vram: 0x80218000
+  - name: battle_area_jan
+    type: bin
+    start: 0x5BC370
+    vram: 0x80218000
+  - name: battle_area_jan2
+    type: bin
+    start: 0x5CD390
+    vram: 0x80218000
+  - name: battle_area_kzn
+    type: bin
+    start: 0x5D4D40
+    vram: 0x80218000
+  - name: battle_area_kzn2
+    type: bin
+    start: 0x5E7130
+    vram: 0x80218000
+  - name: battle_area_flo
+    type: bin
+    start: 0x5F9F00
+    vram: 0x80218000
+  - name: battle_area_flo2
+    type: bin
+    start: 0x6170E0
+    vram: 0x80218000
+  - name: battle_area_tik
+    type: bin
+    start: 0x634EE0
+    vram: 0x80218000
+  - name: battle_area_tik2
+    type: bin
+    start: 0x651500
+    vram: 0x80218000
+  - name: battle_area_tik3
+    type: bin
+    start: 0x661140
+    vram: 0x80218000
+  - name: battle_area_sam
+    type: bin
+    start: 0x66C5F0
+    vram: 0x80218000
+  - name: battle_area_sam2
+    type: bin
+    start: 0x685C30
+    vram: 0x80218000
+  - name: battle_area_pra
+    type: bin
+    start: 0x691860
+    vram: 0x80218000
+  - name: battle_area_pra2
+    type: bin
+    start: 0x6A91A0
+    vram: 0x80218000
+  - name: battle_area_pra3
+    type: bin
+    start: 0x6B27D0
+    vram: 0x80218000
+  - name: battle_area_kpa
+    type: bin
+    start: 0x6CD480
+    vram: 0x80218000
+  - name: battle_area_kpa2
+    type: bin
+    start: 0x6E7C50
+    vram: 0x80218000
+  - name: battle_area_kpa3
+    type: bin
+    start: 0x7045E0
+    vram: 0x80218000
+  - name: battle_area_kpa4
+    type: bin
+    start: 0x714AC0
+    vram: 0x80218000
+  - name: battle_area_kkj
+    type: bin
+    start: 0x7247F0
+    vram: 0x80218000
+  - name: battle_area_dig
+    type: bin
+    start: 0x726810
+    vram: 0x80218000
+
+  - [0x739580, bin]
+
+  - name: world_script_api
+    type: bin
+    start: 0x8298b0
+    vram: 0x80280000
+    subsegments:
+      - [0x8298b0, bin]
+      - [0x82fdd0]
+
+############
+### Maps ###
+############
+  - name: machi
+    type: bin
+    start: 0x82FDD0
+    vram: 0x80240000
+  - name: mac_00
+    type: bin
+    start: 0x833740
+    vram: 0x80240000
+  - name: mac_01
+    type: bin
+    start: 0x8492B0
+    vram: 0x80240000
+  - name: mac_02
+    type: bin
+    start: 0x86BCF0
+    vram: 0x80240000
+  - name: mac_03
+    type: bin
+    start: 0x87A230
+    vram: 0x80240000
+  - name: mac_04
+    type: bin
+    start: 0x88B600
+    vram: 0x80240000
+  - name: mac_05
+    type: bin
+    start: 0x89ABA0
+    vram: 0x80240000
+  - name: mac_06
+    type: bin
+    start: 0x8AD570
+    vram: 0x80240000
+  - name: tik_01
+    type: bin
+    start: 0x8B1EE0
+    vram: 0x80240000
+  - name: tik_02
+    type: bin
+    start: 0x8B5170
+    vram: 0x80240000
+  - name: tik_03
+    type: bin
+    start: 0x8B7530
+    vram: 0x80240000
+  - name: tik_04
+    type: bin
+    start: 0x8BA460
+    vram: 0x80240000
+  - name: tik_05
+    type: bin
+    start: 0x8BD7F0
+    vram: 0x80240000
+  - name: tik_06
+    type: bin
+    start: 0x8BF910
+    vram: 0x80240000
+  - name: tik_07
+    type: bin
+    start: 0x8C2610
+    vram: 0x80240000
+  - name: tik_08
+    type: bin
+    start: 0x8C7820
+    vram: 0x80240000
+  - name: tik_09
+    type: bin
+    start: 0x8CABF0
+    vram: 0x80240000
+  - name: tik_10
+    type: bin
+    start: 0x8CEDF0
+    vram: 0x80240000
+  - name: tik_12
+    type: bin
+    start: 0x8D1600
+    vram: 0x80240000
+  - name: tik_14
+    type: bin
+    start: 0x8D6030
+    vram: 0x80240000
+  - name: tik_15
+    type: bin
+    start: 0x8D85D0
+    vram: 0x80240000
+  - name: tik_17
+    type: bin
+    start: 0x8DB450
+    vram: 0x80240000
+  - name: tik_18
+    type: bin
+    start: 0x8DE110
+    vram: 0x80240000
+  - name: tik_19
+    type: bin
+    start: 0x8E0010
+    vram: 0x80240000
+  - name: tik_20
+    type: bin
+    start: 0x8E2D80
+    vram: 0x80240000
+  - name: tik_21
+    type: bin
+    start: 0x8E61D0
+    vram: 0x80240000
+  - name: tik_22
+    type: bin
+    start: 0x8E88F0
+    vram: 0x80240000
+  - name: tik_23
+    type: bin
+    start: 0x8EAE00
+    vram: 0x80240000
+  - name: tik_24
+    type: bin
+    start: 0x8EE4B0
+    vram: 0x80240000
+  - name: tik_25
+    type: bin
+    start: 0x8F09B0
+    vram: 0x80240000
+  - name: kgr_01
+    type: bin
+    start: 0x8F2440
+    vram: 0x80240000
+  - name: kgr_02
+    type: bin
+    start: 0x8F2E80
+    vram: 0x80240000
+  - name: kmr_00
+    type: bin
+    start: 0x8F49C0
+    vram: 0x80240000
+  - name: kmr_02
+    type: bin
+    start: 0x8F8AA0
+    vram: 0x80240000
+  - name: kmr_03
+    type: bin
+    start: 0x9109C0
+    vram: 0x80240000
+  - name: kmr_04
+    type: bin
+    start: 0x913330
+    vram: 0x80240000
+  - name: kmr_05
+    type: bin
+    start: 0x916AA0
+    vram: 0x80240000
+  - name: kmr_06
+    type: bin
+    start: 0x919F40
+    vram: 0x80240000
+  - name: kmr_07
+    type: bin
+    start: 0x91C7F0
+    vram: 0x80240000
+  - name: kmr_09
+    type: bin
+    start: 0x91E830
+    vram: 0x80240000
+  - name: kmr_10
+    type: bin
+    start: 0x920F00
+    vram: 0x80240000
+  - name: kmr_11
+    type: bin
+    start: 0x922B30
+    vram: 0x80240000
+  - name: kmr_12
+    type: bin
+    start: 0x933D90
+    vram: 0x80240000
+  - name: kmr_20
+    type: bin
+    start: 0x934850
+    vram: 0x80240000
+  - name: kmr_21
+    type: bin
+    start: 0x9478B0
+    vram: 0x80240000
+  - name: kmr_22
+    type: bin
+    start: 0x9480A0
+    vram: 0x80240000
+  - name: kmr_23
+    type: bin
+    start: 0x950460
+    vram: 0x80240000
+  - name: kmr_24
+    type: bin
+    start: 0x953C70
+    vram: 0x80240000
+  - name: kmr_30
+    type: bin
+    start: 0x954100
+    vram: 0x80240000
+  - name: iwa_00
+    type: bin
+    start: 0x955670
+    vram: 0x80240000
+  - name: iwa_01
+    type: bin
+    start: 0x9580E0
+    vram: 0x80240000
+  - name: iwa_02
+    type: bin
+    start: 0x95E7A0
+    vram: 0x80240000
+  - name: iwa_03
+    type: bin
+    start: 0x9615E0
+    vram: 0x80240000
+  - name: iwa_04
+    type: bin
+    start: 0x964310
+    vram: 0x80240000
+  - name: iwa_10
+    type: bin
+    start: 0x966FA0
+    vram: 0x80240000
+  - name: iwa_11
+    type: bin
+    start: 0x96F420
+    vram: 0x80240000
+  - name: sbk_00
+    type: bin
+    start: 0x971CA0
+    vram: 0x80240000
+  - name: sbk_01
+    type: bin
+    start: 0x9724C0
+    vram: 0x80240000
+  - name: sbk_02
+    type: bin
+    start: 0x972CE0
+    vram: 0x80240000
+  - name: sbk_03
+    type: bin
+    start: 0x9782E0
+    vram: 0x80240000
+  - name: sbk_04
+    type: bin
+    start: 0x978F00
+    vram: 0x80240000
+  - name: sbk_05
+    type: bin
+    start: 0x979720
+    vram: 0x80240000
+  - name: sbk_06
+    type: bin
+    start: 0x97AFF0
+    vram: 0x80240000
+  - name: sbk_10
+    type: bin
+    start: 0x97C6B0
+    vram: 0x80240000
+  - name: sbk_11
+    type: bin
+    start: 0x97CA70
+    vram: 0x80240000
+  - name: sbk_12
+    type: bin
+    start: 0x97D770
+    vram: 0x80240000
+  - name: sbk_13
+    type: bin
+    start: 0x97E210
+    vram: 0x80240000
+  - name: sbk_14
+    type: bin
+    start: 0x97F110
+    vram: 0x80240000
+  - name: sbk_15
+    type: bin
+    start: 0x97F700
+    vram: 0x80240000
+  - name: sbk_16
+    type: bin
+    start: 0x97FFA0
+    vram: 0x80240000
+  - name: sbk_20
+    type: bin
+    start: 0x980FC0
+    vram: 0x80240000
+  - name: sbk_21
+    type: bin
+    start: 0x981F90
+    vram: 0x80240000
+  - name: sbk_22
+    type: bin
+    start: 0x982360
+    vram: 0x80240000
+  - name: sbk_23
+    type: bin
+    start: 0x983190
+    vram: 0x80240000
+  - name: sbk_24
+    type: bin
+    start: 0x983660
+    vram: 0x80240000
+  - name: sbk_25
+    type: bin
+    start: 0x984CB0
+    vram: 0x80240000
+  - name: sbk_26
+    type: bin
+    start: 0x986700
+    vram: 0x80240000
+  - name: sbk_30
+    type: bin
+    start: 0x987FE0
+    vram: 0x80240000
+  - name: sbk_31
+    type: bin
+    start: 0x98CA30
+    vram: 0x80240000
+  - name: sbk_32
+    type: bin
+    start: 0x98D490
+    vram: 0x80240000
+  - name: sbk_33
+    type: bin
+    start: 0x98E400
+    vram: 0x80240000
+  - name: sbk_34
+    type: bin
+    start: 0x98E900
+    vram: 0x80240000
+  - name: sbk_35
+    type: bin
+    start: 0x9910E0
+    vram: 0x80240000
+  - name: sbk_36
+    type: bin
+    start: 0x992890
+    vram: 0x80240000
+  - name: sbk_40
+    type: bin
+    start: 0x993DD0
+    vram: 0x80240000
+  - name: sbk_41
+    type: bin
+    start: 0x994A70
+    vram: 0x80240000
+  - name: sbk_42
+    type: bin
+    start: 0x994F40
+    vram: 0x80240000
+  - name: sbk_43
+    type: bin
+    start: 0x995BA0
+    vram: 0x80240000
+  - name: sbk_44
+    type: bin
+    start: 0x995FD0
+    vram: 0x80240000
+  - name: sbk_45
+    type: bin
+    start: 0x996ED0
+    vram: 0x80240000
+  - name: sbk_46
+    type: bin
+    start: 0x9973D0
+    vram: 0x80240000
+  - name: sbk_50
+    type: bin
+    start: 0x999040
+    vram: 0x80240000
+  - name: sbk_51
+    type: bin
+    start: 0x9993A0
+    vram: 0x80240000
+  - name: sbk_52
+    type: bin
+    start: 0x99A0A0
+    vram: 0x80240000
+  - name: sbk_53
+    type: bin
+    start: 0x99A510
+    vram: 0x80240000
+  - name: sbk_54
+    type: bin
+    start: 0x99AFB0
+    vram: 0x80240000
+  - name: sbk_55
+    type: bin
+    start: 0x99B480
+    vram: 0x80240000
+  - name: sbk_56
+    type: bin
+    start: 0x99C9F0
+    vram: 0x80240000
+  - name: sbk_60
+    type: bin
+    start: 0x99F420
+    vram: 0x80240000
+  - name: sbk_61
+    type: bin
+    start: 0x99F9C0
+    vram: 0x80240000
+  - name: sbk_62
+    type: bin
+    start: 0x99FD80
+    vram: 0x80240000
+  - name: sbk_63
+    type: bin
+    start: 0x9A07A0
+    vram: 0x80240000
+  - name: sbk_64
+    type: bin
+    start: 0x9A0FC0
+    vram: 0x80240000
+  - name: sbk_65
+    type: bin
+    start: 0x9A1380
+    vram: 0x80240000
+  - name: sbk_66
+    type: bin
+    start: 0x9A16E0
+    vram: 0x80240000
+  - name: sbk_99
+    type: bin
+    start: 0x9A38E0
+    vram: 0x80240000
+  - name: dro_01
+    type: bin
+    start: 0x9A3C30
+    vram: 0x80240000
+  - name: dro_02
+    type: bin
+    start: 0x9B1BF0
+    vram: 0x80240000
+  - name: isk_01
+    type: bin
+    start: 0x9C0B70
+    vram: 0x80240000
+  - name: isk_02
+    type: bin
+    start: 0x9C1140
+    vram: 0x80240000
+  - name: isk_03
+    type: bin
+    start: 0x9C2880
+    vram: 0x80240000
+  - name: isk_04
+    type: bin
+    start: 0x9C4060
+    vram: 0x80240000
+  - name: isk_05
+    type: bin
+    start: 0x9C6500
+    vram: 0x80240000
+  - name: isk_06
+    type: bin
+    start: 0x9C9450
+    vram: 0x80240000
+  - name: isk_07
+    type: bin
+    start: 0x9CAE70
+    vram: 0x80240000
+  - name: isk_08
+    type: bin
+    start: 0x9CD860
+    vram: 0x80240000
+  - name: isk_09
+    type: bin
+    start: 0x9CEF10
+    vram: 0x80240000
+  - name: isk_10
+    type: bin
+    start: 0x9D1590
+    vram: 0x80240000
+  - name: isk_11
+    type: bin
+    start: 0x9D3440
+    vram: 0x80240000
+  - name: isk_12
+    type: bin
+    start: 0x9D6070
+    vram: 0x80240000
+  - name: isk_13
+    type: bin
+    start: 0x9D8210
+    vram: 0x80240000
+  - name: isk_14
+    type: bin
+    start: 0x9DB160
+    vram: 0x80240000
+  - name: isk_16
+    type: bin
+    start: 0x9DDC20
+    vram: 0x80240000
+  - name: isk_18
+    type: bin
+    start: 0x9E09A0
+    vram: 0x80240000
+  - name: isk_19
+    type: bin
+    start: 0x9E2170
+    vram: 0x80240000
+  - name: trd_00
+    type: bin
+    start: 0x9E26A0
+    vram: 0x80240000
+  - name: trd_01
+    type: bin
+    start: 0x9E53C0
+    vram: 0x80240000
+  - name: trd_02
+    type: bin
+    start: 0x9E9A10
+    vram: 0x80240000
+  - name: trd_03
+    type: bin
+    start: 0x9ED080
+    vram: 0x80240000
+  - name: trd_04
+    type: bin
+    start: 0x9F0E20
+    vram: 0x80240000
+  - name: trd_05
+    type: bin
+    start: 0x9F7130
+    vram: 0x80240000
+  - name: trd_06
+    type: bin
+    start: 0x9FA1C0
+    vram: 0x80240000
+  - name: trd_07
+    type: bin
+    start: 0x9FF3B0
+    vram: 0x80240000
+  - name: trd_08
+    type: bin
+    start: 0xA03CD0
+    vram: 0x80240000
+  - name: trd_09
+    type: bin
+    start: 0xA06090
+    vram: 0x80240000
+  - name: trd_10
+    type: bin
+    start: 0xA0B340
+    vram: 0x80240000
+  - name: nok_01
+    type: bin
+    start: 0xA0DE10
+    vram: 0x80240000
+  - name: nok_02
+    type: bin
+    start: 0xA1FA50
+    vram: 0x80240000
+  - name: nok_03
+    type: bin
+    start: 0xA34220
+    vram: 0x80240000
+  - name: nok_04
+    type: bin
+    start: 0xA36620
+    vram: 0x80240000
+  - name: nok_11
+    type: bin
+    start: 0xA3D470
+    vram: 0x80240000
+  - name: nok_12
+    type: bin
+    start: 0xA43220
+    vram: 0x80240000
+  - name: nok_13
+    type: bin
+    start: 0xA49030
+    vram: 0x80240000
+  - name: nok_14
+    type: bin
+    start: 0xA4B270
+    vram: 0x80240000
+  - name: nok_15
+    type: bin
+    start: 0xA4F930
+    vram: 0x80240000
+  - name: hos_00
+    type: bin
+    start: 0xA54720
+    vram: 0x80240000
+  - name: hos_01
+    type: bin
+    start: 0xA592B0
+    vram: 0x80240000
+  - name: hos_02
+    type: bin
+    start: 0xA5EC50
+    vram: 0x80240000
+  - name: hos_03
+    type: bin
+    start: 0xA63B30
+    vram: 0x80240000
+  - name: hos_04
+    type: bin
+    start: 0xA6F900
+    vram: 0x80240000
+  - name: hos_05
+    type: bin
+    start: 0xA72C70
+    vram: 0x80240000
+  - name: hos_06
+    type: bin
+    start: 0xA81F10
+    vram: 0x80240000
+  - name: hos_10
+    type: bin
+    start: 0xA88170
+    vram: 0x80240000
+  - name: hos_20
+    type: bin
+    start: 0xA8E360
+    vram: 0x80240000
+  - name: kpa_01
+    type: bin
+    start: 0xA8F990
+    vram: 0x80240000
+  - name: kpa_03
+    type: bin
+    start: 0xA90FF0
+    vram: 0x80240000
+  - name: kpa_04
+    type: bin
+    start: 0xA94990
+    vram: 0x80240000
+  - name: kpa_08
+    type: bin
+    start: 0xA95450
+    vram: 0x80240000
+  - name: kpa_09
+    type: bin
+    start: 0xA97A30
+    vram: 0x80240000
+  - name: kpa_10
+    type: bin
+    start: 0xA9A3B0
+    vram: 0x80240000
+  - name: kpa_11
+    type: bin
+    start: 0xA9B2F0
+    vram: 0x80240000
+  - name: kpa_12
+    type: bin
+    start: 0xA9D380
+    vram: 0x80240000
+  - name: kpa_13
+    type: bin
+    start: 0xA9E950
+    vram: 0x80240000
+  - name: kpa_14
+    type: bin
+    start: 0xA9FEE0
+    vram: 0x80240000
+  - name: kpa_15
+    type: bin
+    start: 0xAA1DC0
+    vram: 0x80240000
+  - name: kpa_16
+    type: bin
+    start: 0xAA2A60
+    vram: 0x80240000
+  - name: kpa_17
+    type: bin
+    start: 0xAA5450
+    vram: 0x80240000
+  - name: kpa_32
+    type: bin
+    start: 0xAA6AF0
+    vram: 0x80240000
+  - name: kpa_33
+    type: bin
+    start: 0xAA7AB0
+    vram: 0x80240000
+  - name: kpa_40
+    type: bin
+    start: 0xAA8A70
+    vram: 0x80240000
+  - name: kpa_41
+    type: bin
+    start: 0xAA8EA0
+    vram: 0x80240000
+  - name: kpa_50
+    type: bin
+    start: 0xAA9400
+    vram: 0x80240000
+  - name: kpa_51
+    type: bin
+    start: 0xAACAC0
+    vram: 0x80240000
+  - name: kpa_52
+    type: bin
+    start: 0xAAFB30
+    vram: 0x80240000
+  - name: kpa_53
+    type: bin
+    start: 0xAB36D0
+    vram: 0x80240000
+  - name: kpa_60
+    type: bin
+    start: 0xAB5530
+    vram: 0x80240000
+  - name: kpa_61
+    type: bin
+    start: 0xAB6E10
+    vram: 0x80240000
+  - name: kpa_62
+    type: bin
+    start: 0xABAC50
+    vram: 0x80240000
+  - name: kpa_63
+    type: bin
+    start: 0xABBFE0
+    vram: 0x80240000
+  - name: kpa_70
+    type: bin
+    start: 0xABD2A0
+    vram: 0x80240000
+  - name: kpa_81
+    type: bin
+    start: 0xAC0EF0
+    vram: 0x80240000
+  - name: kpa_82
+    type: bin
+    start: 0xAC2F30
+    vram: 0x80240000
+  - name: kpa_83
+    type: bin
+    start: 0xACBEC0
+    vram: 0x80240000
+  - name: kpa_90
+    type: bin
+    start: 0xACF1E0
+    vram: 0x80240000
+  - name: kpa_91
+    type: bin
+    start: 0xACF480
+    vram: 0x80240000
+  - name: kpa_94
+    type: bin
+    start: 0xAD51F0
+    vram: 0x80240000
+  - name: kpa_95
+    type: bin
+    start: 0xAD54B0
+    vram: 0x80240000
+  - name: kpa_96
+    type: bin
+    start: 0xADB1F0
+    vram: 0x80240000
+  - name: kpa_100
+    type: bin
+    start: 0xADBB90
+    vram: 0x80240000
+  - name: kpa_101
+    type: bin
+    start: 0xADBE70
+    vram: 0x80240000
+  - name: kpa_102
+    type: bin
+    start: 0xADC170
+    vram: 0x80240000
+  - name: kpa_111
+    type: bin
+    start: 0xAE1FC0
+    vram: 0x80240000
+  - name: kpa_112
+    type: bin
+    start: 0xAE53C0
+    vram: 0x80240000
+  - name: kpa_113
+    type: bin
+    start: 0xAE5660
+    vram: 0x80240000
+  - name: kpa_114
+    type: bin
+    start: 0xAE73B0
+    vram: 0x80240000
+  - name: kpa_115
+    type: bin
+    start: 0xAE7770
+    vram: 0x80240000
+  - name: kpa_116
+    type: bin
+    start: 0xAEA910
+    vram: 0x80240000
+  - name: kpa_117
+    type: bin
+    start: 0xAEABB0
+    vram: 0x80240000
+  - name: kpa_118
+    type: bin
+    start: 0xAEADF0
+    vram: 0x80240000
+  - name: kpa_119
+    type: bin
+    start: 0xAEB090
+    vram: 0x80240000
+  - name: kpa_121
+    type: bin
+    start: 0xAEB320
+    vram: 0x80240000
+  - name: kpa_130
+    type: bin
+    start: 0xAEB750
+    vram: 0x80240000
+  - name: kpa_133
+    type: bin
+    start: 0xAEFEB0
+    vram: 0x80240000
+  - name: kpa_134
+    type: bin
+    start: 0xAF19D0
+    vram: 0x80240000
+  - name: osr_00
+    type: bin
+    start: 0xAF5260
+    vram: 0x80240000
+  - name: osr_01
+    type: bin
+    start: 0xAF8A20
+    vram: 0x80240000
+  - name: osr_02
+    type: bin
+    start: 0xAFABA0
+    vram: 0x80240000
+  - name: osr_03
+    type: bin
+    start: 0xAFECC0
+    vram: 0x80240000
+  - name: osr_04
+    type: bin
+    start: 0xB01CE0
+    vram: 0x80240000
+  - name: kkj_00
+    type: bin
+    start: 0xB03CC0
+    vram: 0x80240000
+  - name: kkj_01
+    type: bin
+    start: 0xB0DBA0
+    vram: 0x80240000
+  - name: kkj_02
+    type: bin
+    start: 0xB11750
+    vram: 0x80240000
+  - name: kkj_03
+    type: bin
+    start: 0xB12140
+    vram: 0x80240000
+  - name: kkj_10
+    type: bin
+    start: 0xB13550
+    vram: 0x80240000
+  - name: kkj_11
+    type: bin
+    start: 0xB16B70
+    vram: 0x80240000
+  - name: kkj_12
+    type: bin
+    start: 0xB1CAC0
+    vram: 0x80240000
+  - name: kkj_13
+    type: bin
+    start: 0xB1E900
+    vram: 0x80240000
+  - name: kkj_14
+    type: bin
+    start: 0xB238D0
+    vram: 0x80240000
+  - name: kkj_15
+    type: bin
+    start: 0xB2DFC0
+    vram: 0x80240000
+  - name: kkj_16
+    type: bin
+    start: 0xB35E40
+    vram: 0x80240000
+  - name: kkj_17
+    type: bin
+    start: 0xB3A690
+    vram: 0x80240000
+  - name: kkj_18
+    type: bin
+    start: 0xB3B6D0
+    vram: 0x80240000
+  - name: kkj_19
+    type: bin
+    start: 0xB40380
+    vram: 0x80240000
+  - name: kkj_20
+    type: bin
+    start: 0xB46570
+    vram: 0x80240000
+  - name: kkj_21
+    type: bin
+    start: 0xB4ACD0
+    vram: 0x80240000
+  - name: kkj_22
+    type: bin
+    start: 0xB4AF20
+    vram: 0x80240000
+  - name: kkj_23
+    type: bin
+    start: 0xB4B2B0
+    vram: 0x80240000
+  - name: kkj_24
+    type: bin
+    start: 0xB4EFA0
+    vram: 0x80240000
+  - name: kkj_25
+    type: bin
+    start: 0xB4F430
+    vram: 0x80240000
+  - name: kkj_26
+    type: bin
+    start: 0xB5BB50
+    vram: 0x80240000
+  - name: kkj_27
+    type: bin
+    start: 0xB5C7A0
+    vram: 0x80240000
+  - name: kkj_28
+    type: bin
+    start: 0xB5D8D0
+    vram: 0x80240000
+  - name: kkj_29
+    type: bin
+    start: 0xB5DAE0
+    vram: 0x80240000
+  - name: tst_01
+    type: bin
+    start: 0xB63330
+    vram: 0x80240000
+  - name: tst_02
+    type: bin
+    start: 0xB63660
+    vram: 0x80240000
+  - name: tst_03
+    type: bin
+    start: 0xB639B0
+    vram: 0x80240000
+  - name: tst_04
+    type: bin
+    start: 0xB63FA0
+    vram: 0x80240000
+  - name: tst_10
+    type: bin
+    start: 0xB64F70
+    vram: 0x80240000
+  - name: tst_11
+    type: bin
+    start: 0xB65480
+    vram: 0x80240000
+  - name: tst_12
+    type: bin
+    start: 0xB65D20
+    vram: 0x80240000
+  - name: tst_13
+    type: bin
+    start: 0xB66190
+    vram: 0x80240000
+  - name: tst_20
+    type: bin
+    start: 0xB68EA0
+    vram: 0x80240000
+  - name: jan_00
+    type: bin
+    start: 0xB68F70
+    vram: 0x80240000
+  - name: jan_01
+    type: bin
+    start: 0xB70A60
+    vram: 0x80240000
+  - name: jan_02
+    type: bin
+    start: 0xB74EA0
+    vram: 0x80240000
+  - name: jan_03
+    type: bin
+    start: 0xB7D600
+    vram: 0x80240000
+  - name: jan_04
+    type: bin
+    start: 0xB8D1A0
+    vram: 0x80240000
+  - name: jan_05
+    type: bin
+    start: 0xB934A0
+    vram: 0x80240000
+  - name: jan_06
+    type: bin
+    start: 0xB9B260
+    vram: 0x80240000
+  - name: jan_07
+    type: bin
+    start: 0xBA22A0
+    vram: 0x80240000
+  - name: jan_08
+    type: bin
+    start: 0xBA6CE0
+    vram: 0x80240000
+  - name: jan_09
+    type: bin
+    start: 0xBAE4E0
+    vram: 0x80240000
+  - name: jan_10
+    type: bin
+    start: 0xBB4DC0
+    vram: 0x80240000
+  - name: jan_11
+    type: bin
+    start: 0xBB9290
+    vram: 0x80240000
+  - name: jan_12
+    type: bin
+    start: 0xBBBAE0
+    vram: 0x80240000
+  - name: jan_13
+    type: bin
+    start: 0xBBF1E0
+    vram: 0x80240000
+  - name: jan_14
+    type: bin
+    start: 0xBC2A80
+    vram: 0x80240000
+  - name: jan_15
+    type: bin
+    start: 0xBC6350
+    vram: 0x80240000
+  - name: jan_16
+    type: bin
+    start: 0xBC8A30
+    vram: 0x80240000
+  - name: jan_17
+    type: bin
+    start: 0xBCC1F0
+    vram: 0x80240000
+  - name: jan_18
+    type: bin
+    start: 0xBCC5C0
+    vram: 0x80240000
+  - name: jan_19
+    type: bin
+    start: 0xBCC890
+    vram: 0x80240000
+  - name: jan_22
+    type: bin
+    start: 0xBCCBB0
+    vram: 0x80240000
+  - name: jan_23
+    type: bin
+    start: 0xBD8700
+    vram: 0x80240000
+  - name: mim_01
+    type: bin
+    start: 0xBDBE70
+    vram: 0x80240000
+  - name: mim_02
+    type: bin
+    start: 0xBE0630
+    vram: 0x80240000
+  - name: mim_03
+    type: bin
+    start: 0xBE3EB0
+    vram: 0x80240000
+  - name: mim_04
+    type: bin
+    start: 0xBE6390
+    vram: 0x80240000
+  - name: mim_05
+    type: bin
+    start: 0xBE9160
+    vram: 0x80240000
+  - name: mim_06
+    type: bin
+    start: 0xBED1B0
+    vram: 0x80240000
+  - name: mim_07
+    type: bin
+    start: 0xBF2B70
+    vram: 0x80240000
+  - name: mim_08
+    type: bin
+    start: 0xBF6370
+    vram: 0x80240000
+  - name: mim_09
+    type: bin
+    start: 0xBFB830
+    vram: 0x80240000
+  - name: mim_10
+    type: bin
+    start: 0xBFE410
+    vram: 0x80240000
+  - name: mim_11
+    type: bin
+    start: 0xBFFAA0
+    vram: 0x80240000
+  - name: mim_12
+    type: bin
+    start: 0xC03DB0
+    vram: 0x80240000
+  - name: obk_01
+    type: bin
+    start: 0xC05BD0
+    vram: 0x80240000
+  - name: obk_02
+    type: bin
+    start: 0xC0B4C0
+    vram: 0x80240000
+  - name: obk_03
+    type: bin
+    start: 0xC0CCB0
+    vram: 0x80240000
+  - name: obk_04
+    type: bin
+    start: 0xC10890
+    vram: 0x80240000
+  - name: obk_05
+    type: bin
+    start: 0xC15A90
+    vram: 0x80240000
+  - name: obk_06
+    type: bin
+    start: 0xC170C0
+    vram: 0x80240000
+  - name: obk_07
+    type: bin
+    start: 0xC17620
+    vram: 0x80240000
+  - name: obk_08
+    type: bin
+    start: 0xC1C2A0
+    vram: 0x80240000
+  - name: obk_09
+    type: bin
+    start: 0xC231E0
+    vram: 0x80240000
+  - name: arn_02
+    type: bin
+    start: 0xC25BE0
+    vram: 0x80240000
+  - name: arn_03
+    type: bin
+    start: 0xC277C0
+    vram: 0x80240000
+  - name: arn_04
+    type: bin
+    start: 0xC2C1E0
+    vram: 0x80240000
+  - name: arn_05
+    type: bin
+    start: 0xC30610
+    vram: 0x80240000
+  - name: arn_07
+    type: bin
+    start: 0xC35820
+    vram: 0x80240000
+  - name: arn_08
+    type: bin
+    start: 0xC3D1D0
+    vram: 0x80240000
+  - name: arn_09
+    type: bin
+    start: 0xC3EA90
+    vram: 0x80240000
+  - name: arn_10
+    type: bin
+    start: 0xC3F430
+    vram: 0x80240000
+  - name: arn_11
+    type: bin
+    start: 0xC400B0
+    vram: 0x80240000
+  - name: arn_12
+    type: bin
+    start: 0xC411C0
+    vram: 0x80240000
+  - name: arn_13
+    type: bin
+    start: 0xC41E40
+    vram: 0x80240000
+  - name: dgb_00
+    type: bin
+    start: 0xC42AD0
+    vram: 0x80240000
+  - name: dgb_01
+    type: bin
+    start: 0xC462B0
+    vram: 0x80240000
+  - [ 0xC69970, bin ]
+  - name: dgb_02
+    type: bin
+    start: 0xC775D0
+    vram: 0x80240000
+  - name: dgb_03
+    type: bin
+    start: 0xC79F10
+    vram: 0x80240000
+  - name: dgb_04
+    type: bin
+    start: 0xC7EF60
+    vram: 0x80240000
+  - name: dgb_05
+    type: bin
+    start: 0xC83440
+    vram: 0x80240000
+  - name: dgb_06
+    type: bin
+    start: 0xC85AB0
+    vram: 0x80240000
+  - name: dgb_07
+    type: bin
+    start: 0xC86620
+    vram: 0x80240000
+  - name: dgb_08
+    type: bin
+    start: 0xC887E0
+    vram: 0x80240000
+  - name: dgb_09
+    type: bin
+    start: 0xC8F610
+    vram: 0x80240000
+  - name: dgb_10
+    type: bin
+    start: 0xC94DC0
+    vram: 0x80240000
+  - name: dgb_11
+    type: bin
+    start: 0xC95E10
+    vram: 0x80240000
+  - name: dgb_12
+    type: bin
+    start: 0xC96920
+    vram: 0x80240000
+  - name: dgb_13
+    type: bin
+    start: 0xC97390
+    vram: 0x80240000
+  - name: dgb_14
+    type: bin
+    start: 0xC97A60
+    vram: 0x80240000
+  - name: dgb_15
+    type: bin
+    start: 0xC97F40
+    vram: 0x80240000
+  - name: dgb_16
+    type: bin
+    start: 0xC9AF70
+    vram: 0x80240000
+  - name: dgb_17
+    type: bin
+    start: 0xC9E490
+    vram: 0x80240000
+  - name: dgb_18
+    type: bin
+    start: 0xC9E970
+    vram: 0x80240000
+  - name: kzn_01
+    type: bin
+    start: 0xCA2400
+    vram: 0x80240000
+  - name: kzn_02
+    type: bin
+    start: 0xCA3170
+    vram: 0x80240000
+  - name: kzn_03
+    type: bin
+    start: 0xCA9740
+    vram: 0x80240000
+  - name: kzn_04
+    type: bin
+    start: 0xCB0B60
+    vram: 0x80240000
+  - name: kzn_05
+    type: bin
+    start: 0xCB4B00
+    vram: 0x80240000
+  - name: kzn_06
+    type: bin
+    start: 0xCB5350
+    vram: 0x80240000
+  - name: kzn_07
+    type: bin
+    start: 0xCB6D60
+    vram: 0x80240000
+  - name: kzn_08
+    type: bin
+    start: 0xCB9EB0
+    vram: 0x80240000
+  - name: kzn_09
+    type: bin
+    start: 0xCBF710
+    vram: 0x80240000
+  - name: kzn_10
+    type: bin
+    start: 0xCC6BB0
+    vram: 0x80240000
+  - name: kzn_11
+    type: bin
+    start: 0xCC8BD0
+    vram: 0x80240000
+  - name: kzn_17
+    type: bin
+    start: 0xCCE4E0
+    vram: 0x80240000
+  - name: kzn_18
+    type: bin
+    start: 0xCD4AD0
+    vram: 0x80240000
+  - name: kzn_19
+    type: bin
+    start: 0xCD65E0
+    vram: 0x80240000
+  - name: kzn_20
+    type: bin
+    start: 0xCDE960
+    vram: 0x80240000
+  - name: kzn_22
+    type: bin
+    start: 0xCE2C30
+    vram: 0x80240000
+  - name: kzn_23
+    type: bin
+    start: 0xCE4D30
+    vram: 0x80240000
+  - name: flo_00
+    type: bin
+    start: 0xCE6950
+    vram: 0x80240000
+  - name: flo_03
+    type: bin
+    start: 0xCEFCD0
+    vram: 0x80240000
+  - name: flo_07
+    type: bin
+    start: 0xCF4C20
+    vram: 0x80240000
+  - name: flo_08
+    type: bin
+    start: 0xCF7770
+    vram: 0x80240000
+  - name: flo_09
+    type: bin
+    start: 0xCFDA30
+    vram: 0x80240000
+  - name: flo_10
+    type: bin
+    start: 0xD01C30
+    vram: 0x80240000
+  - name: flo_11
+    type: bin
+    start: 0xD06700
+    vram: 0x80240000
+  - name: flo_12
+    type: bin
+    start: 0xD09860
+    vram: 0x80240000
+  - name: flo_13
+    type: bin
+    start: 0xD0C240
+    vram: 0x80240000
+  - name: flo_14
+    type: bin
+    start: 0xD13D40
+    vram: 0x80240000
+  - name: flo_15
+    type: bin
+    start: 0xD190F0
+    vram: 0x80240000
+  - name: flo_16
+    type: bin
+    start: 0xD1A860
+    vram: 0x80240000
+  - name: flo_17
+    type: bin
+    start: 0xD1FD10
+    vram: 0x80240000
+  - name: flo_18
+    type: bin
+    start: 0xD250D0
+    vram: 0x80240000
+  - name: flo_19
+    type: bin
+    start: 0xD2C120
+    vram: 0x80240000
+  - name: flo_21
+    type: bin
+    start: 0xD2F130
+    vram: 0x80240000
+  - name: flo_22
+    type: bin
+    start: 0xD34C70
+    vram: 0x80240000
+  - name: flo_23
+    type: bin
+    start: 0xD36C90
+    vram: 0x80240000
+  - name: flo_24
+    type: bin
+    start: 0xD39370
+    vram: 0x80240000
+  - name: flo_25
+    type: bin
+    start: 0xD3B600
+    vram: 0x80240000
+  - name: sam_01
+    type: bin
+    start: 0xD405A0
+    vram: 0x80240000
+  - name: sam_02
+    type: bin
+    start: 0xD4E160
+    vram: 0x80240000
+  - name: sam_03
+    type: bin
+    start: 0xD59AF0
+    vram: 0x80240000
+  - name: sam_04
+    type: bin
+    start: 0xD5C000
+    vram: 0x80240000
+  - name: sam_05
+    type: bin
+    start: 0xD61210
+    vram: 0x80240000
+  - name: sam_06
+    type: bin
+    start: 0xD688C0
+    vram: 0x80240000
+  - name: sam_07
+    type: bin
+    start: 0xD74760
+    vram: 0x80240000
+  - name: sam_08
+    type: bin
+    start: 0xD786B0
+    vram: 0x80240000
+  - name: sam_09
+    type: bin
+    start: 0xD7ED20
+    vram: 0x80240000
+  - name: sam_10
+    type: bin
+    start: 0xD80230
+    vram: 0x80240000
+  - name: sam_11
+    type: bin
+    start: 0xD83000
+    vram: 0x80240000
+  - name: sam_12
+    type: bin
+    start: 0xD94450
+    vram: 0x80240000
+  - name: pra_01
+    type: bin
+    start: 0xD95A70
+    vram: 0x80240000
+  - name: pra_02
+    type: bin
+    start: 0xD98A20
+    vram: 0x80240000
+  - name: pra_03
+    type: bin
+    start: 0xD9C6E0
+    vram: 0x80240000
+  - name: pra_04
+    type: bin
+    start: 0xD9D0C0
+    vram: 0x80240000
+  - name: pra_05
+    type: bin
+    start: 0xD9E5E0
+    vram: 0x80240000
+  - name: pra_06
+    type: bin
+    start: 0xD9FE60
+    vram: 0x80240000
+  - name: pra_09
+    type: bin
+    start: 0xDA12C0
+    vram: 0x80240000
+  - name: pra_10
+    type: bin
+    start: 0xDA7CE0
+    vram: 0x80240000
+  - name: pra_11
+    type: bin
+    start: 0xDA9F30
+    vram: 0x80240000
+  - name: pra_12
+    type: bin
+    start: 0xDAB740
+    vram: 0x80240000
+  - name: pra_13
+    type: bin
+    start: 0xDAD010
+    vram: 0x80240000
+  - name: pra_14
+    type: bin
+    start: 0xDB0730
+    vram: 0x80240000
+  - name: pra_15
+    type: bin
+    start: 0xDB2240
+    vram: 0x80240000
+  - name: pra_16
+    type: bin
+    start: 0xDB2550
+    vram: 0x80240000
+  - name: pra_18
+    type: bin
+    start: 0xDB4050
+    vram: 0x80240000
+  - name: pra_19
+    type: bin
+    start: 0xDB73E0
+    vram: 0x80240000
+  - name: pra_20
+    type: bin
+    start: 0xDBEDD0
+    vram: 0x80240000
+  - name: pra_21
+    type: bin
+    start: 0xDC0950
+    vram: 0x80240000
+  - name: pra_22
+    type: bin
+    start: 0xDC12B0
+    vram: 0x80240000
+  - name: pra_27
+    type: bin
+    start: 0xDC2420
+    vram: 0x80240000
+  - name: pra_28
+    type: bin
+    start: 0xDC3CD0
+    vram: 0x80240000
+  - name: pra_29
+    type: bin
+    start: 0xDC5580
+    vram: 0x80240000
+  - name: pra_31
+    type: bin
+    start: 0xDC7790
+    vram: 0x80240000
+  - name: pra_32
+    type: bin
+    start: 0xDCF430
+    vram: 0x80240000
+  - name: pra_33
+    type: bin
+    start: 0xDD2110
+    vram: 0x80240000
+  - name: pra_34
+    type: bin
+    start: 0xDD3DE0
+    vram: 0x80240000
+  - name: pra_35
+    type: bin
+    start: 0xDD5C80
+    vram: 0x80240000
+  - name: pra_36
+    type: bin
+    start: 0xDDA130
+    vram: 0x80240000
+  - name: pra_37
+    type: bin
+    start: 0xDDB970
+    vram: 0x80240000
+  - name: pra_38
+    type: bin
+    start: 0xDDE020
+    vram: 0x80240000
+  - name: pra_39
+    type: bin
+    start: 0xDE02C0
+    vram: 0x80240000
+  - name: pra_40
+    type: bin
+    start: 0xDE23E0
+    vram: 0x80240000
+  - name: omo_01
+    type: bin
+    start: 0xDE3920
+    vram: 0x80240000
+  - name: omo_02
+    type: bin
+    start: 0xDE5F00
+    vram: 0x80240000
+  - name: omo_03
+    type: bin
+    start: 0xDEDC70
+    vram: 0x80240000
+  - name: omo_04
+    type: bin
+    start: 0xDF5E30
+    vram: 0x80240000
+  - name: omo_05
+    type: bin
+    start: 0xDFACF0
+    vram: 0x80240000
+  - name: omo_06
+    type: bin
+    start: 0xE00340
+    vram: 0x80240000
+  - name: omo_07
+    type: bin
+    start: 0xE05CE0
+    vram: 0x80240000
+  - name: omo_08
+    type: bin
+    start: 0xE0CE00
+    vram: 0x80240000
+  - name: omo_09
+    type: bin
+    start: 0xE15700
+    vram: 0x80240000
+  - name: omo_10
+    type: bin
+    start: 0xE203E0
+    vram: 0x80240000
+  - name: omo_11
+    type: bin
+    start: 0xE25260
+    vram: 0x80240000
+  - name: omo_12
+    type: bin
+    start: 0xE27D40
+    vram: 0x80240000
+  - name: omo_13
+    type: bin
+    start: 0xE2AEC0
+    vram: 0x80240000
+  - name: omo_14
+    type: bin
+    start: 0xE2E0E0
+    vram: 0x80240000
+  - name: omo_15
+    type: bin
+    start: 0xE311A0
+    vram: 0x80240000
+  - name: omo_16
+    type: bin
+    start: 0xE34900
+    vram: 0x80240000
+  - name: omo_17
+    type: bin
+    start: 0xE378D0
+    vram: 0x80240000
+  - name: end_00
+    type: bin
+    start: 0xE3F430
+    vram: 0x80240000
+  - name: end_01
+    type: bin
+    start: 0xE4DD90
+    vram: 0x80240000
+  - name: mgm_00
+    type: bin
+    start: 0xE57280
+    vram: 0x80240000
+  - name: mgm_01
+    type: bin
+    start: 0xE5B240
+    vram: 0x80240000
+  - name: mgm_02
+    type: bin
+    start: 0xE5E860
+    vram: 0x80240000
+  - name: mgm_03
+    type: bin
+    start: 0xE66E60
+    vram: 0x80240000
+  - name: gv_01
+    type: bin
+    start: 0xE66F40
+    vram: 0x80240000
+
+  - [ 0xE68B50, bin ]
+  
+  - [0x2800000]
