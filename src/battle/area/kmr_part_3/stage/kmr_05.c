@@ -7,8 +7,8 @@
 
 EvtScript N(beforeBattle_80232F58) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(EnableModel, 26, 0)
-    EVT_CALL(EnableModel, 29, 0)
+    EVT_CALL(EnableModel, 26, FALSE)
+    EVT_CALL(EnableModel, 29, FALSE)
     EVT_RETURN
     EVT_END
 };

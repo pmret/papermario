@@ -18,7 +18,7 @@ API_CALLABLE(func_80218BE8_4E3328) {
 
 EvtScript N(beforeBattle_80223FE0) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(func_80218BA0_4E32E0)
     EVT_RETURN
     EVT_END

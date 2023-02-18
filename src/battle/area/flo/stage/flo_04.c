@@ -27,7 +27,7 @@ EvtScript N(80233470) = {
 
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_SET(LVar0, 14)
     EVT_EXEC(N(80233470))
     EVT_SET(LVar0, 16)
@@ -61,10 +61,10 @@ EvtScript N(beforeBattle) = {
         EVT_SET(LVar0, 34)
         EVT_EXEC(N(80233470))
     EVT_END_THREAD
-    EVT_CALL(CloneModel, 27, 10000)
-    EVT_CALL(EnableModel, 10000, 0)
-    EVT_CALL(TranslateModel, 10000, 0, 9, 0)
-    EVT_CALL(ParentColliderToModel, 0, 10000)
+    EVT_CALL(CloneModel, 27, 0x00002710)
+    EVT_CALL(EnableModel, 0x00002710, FALSE)
+    EVT_CALL(TranslateModel, 0x00002710, 0, 9, 0)
+    EVT_CALL(ParentColliderToModel, 0, 0x00002710)
     EVT_EXEC_WAIT(N(MakeSun))
     EVT_RETURN
     EVT_END

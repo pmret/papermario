@@ -677,7 +677,7 @@ EvtScript N(displace_guy_2) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_CALL(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(GetActorSize, ACTOR_SELF, LVar4, LVar5)
-    EVT_CALL(PlayEffect, EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LVar1, LVar2, LVar3, LVar5, LVar4, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LVar1, LVar2, LVar3, LVar5, LVar4, 0)
     EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 0, 0)
     EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 1, 0)
     EVT_WAIT(1)
@@ -843,14 +843,14 @@ EvtScript N(onHit) = {
     EVT_ADD(LVar0, LVar1)
     EVT_IF_NE(LVar0, 16)
         EVT_THREAD
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_20000000, 1)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_20000000, TRUE)
             EVT_CALL(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
             EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, 2, LVar7)
             EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, 3, LVar8)
             EVT_ADD(LVar1, LVar7)
             EVT_ADD(LVar3, LVar8)
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, LVar0, EVT_FLOAT(0.5))
-            EVT_CALL(JumpPartTo, ACTOR_SELF, LVar0, LVar1, 0, LVar3, 15, 1)
+            EVT_CALL(JumpPartTo, ACTOR_SELF, LVar0, LVar1, 0, LVar3, 15, TRUE)
             EVT_CALL(func_80269E80, LVar5)
             EVT_SWITCH(LVar5)
                 EVT_CASE_OR_EQ(10)
@@ -871,14 +871,14 @@ EvtScript N(onHit) = {
                         EVT_WAIT(1)
                     EVT_END_LOOP
             EVT_END_SWITCH
-            EVT_CALL(PlayEffect, EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0)
             EVT_SET(LVar8, 0)
             EVT_LOOP(12)
                 EVT_CALL(SetPartRotation, ACTOR_SELF, LVar0, LVar8, 0, 0)
                 EVT_ADD(LVar8, 8)
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, 1)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(RemovePartShadow, ACTOR_SELF, LVar0)
         EVT_END_THREAD
     EVT_END_IF
@@ -939,7 +939,7 @@ EvtScript N(80233E48) = {
         EVT_ADD(LVar3, 8)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, 1)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(RemovePartShadow, ACTOR_SELF, LVar0)
     EVT_RETURN
     EVT_END
@@ -968,7 +968,7 @@ EvtScript N(onDeath) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(PlayEffect, EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0)
     EVT_CALL(DropStarPoints, ACTOR_SELF)
     EVT_SET(LVar3, 0)
     EVT_LOOP(12)
@@ -976,7 +976,7 @@ EvtScript N(onDeath) = {
         EVT_ADD(LVar3, 8)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, 1)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(RemovePartShadow, ACTOR_SELF, LVar0)
     EVT_WAIT(30)
     EVT_EXEC_WAIT(N(next_phase))
@@ -1114,12 +1114,12 @@ EvtScript N(attack) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
             EVT_IF_LT(LVar0, 14)
                 EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-                EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0)
                 EVT_THREAD
                     EVT_LOOP(7)
-                        EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 0, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 0, LVar0, LVar1, LVar2, 0, 0)
                         EVT_WAIT(2)
-                        EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0)
                         EVT_WAIT(2)
                     EVT_END_LOOP
                 EVT_END_THREAD
@@ -1151,9 +1151,9 @@ EvtScript N(attack) = {
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, 1, LVar0)
         EVT_THREAD
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar1, LVar2, LVar3)
-            EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 0, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 0, LVar1, LVar2, LVar3, 0, 0)
             EVT_WAIT(2)
-            EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar1, LVar2, LVar3, 0, 0)
             EVT_WAIT(2)
         EVT_END_THREAD
         EVT_CALL(GetPlayerHP, LVar0)

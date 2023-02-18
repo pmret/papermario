@@ -5,7 +5,7 @@
 #define NAMESPACE b_area_isk_part_1_isk_02
 
 EvtScript N(beforeBattle_802239B0) = {
-    EVT_CALL(SetSpriteShading, 786432)
+    EVT_CALL(SetSpriteShading, SHADING_BTL_ISK)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_RETURN
     EVT_END

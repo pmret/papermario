@@ -5,7 +5,7 @@
 
 EvtScript N(beforeBattle_8021F2C0) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };

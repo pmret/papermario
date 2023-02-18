@@ -103,14 +103,14 @@ EvtScript N(8021DC48) = {
 
 EvtScript N(beforeBattle_8021E1F4) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_SET(LVar0, 32)
     EVT_EXEC(N(8021DB30))
     EVT_SET(LVar0, 43)
     EVT_EXEC(N(8021DB30))
     EVT_SET(LVar0, 53)
     EVT_EXEC(N(8021DC48))
-    EVT_CALL(PlayEffect, EFFECT_SUN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SUN, 0, 0, 0, 0, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };

@@ -212,7 +212,7 @@ EvtScript N(8021A2BC) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BillBlaster_Anim02)
     EVT_WAIT(13)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.0))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_CALL(StartRumble, 9)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2C8)
@@ -220,8 +220,8 @@ EvtScript N(8021A2BC) = {
     EVT_SUB(LVar0, 33)
     EVT_ADD(LVar1, 19)
     EVT_ADD(LVar2, 3)
-    EVT_CALL(PlayEffect, EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 0, 2, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlayEffect, EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 2, 2, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 0, 2, 0)
+    EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 2, 2, 0)
     EVT_WAIT(2)
     EVT_CALL(func_80218000_4A10A0)
     EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A4E8)), 0)

@@ -7,6 +7,8 @@
 #include "script_api/common.h"
 #include "battle/action_cmd.h"
 
+#include "effects.h"
+
 ApiStatus EnablePartnerBlur(Evt* script, s32 isInitialCall);
 ApiStatus DisablePartnerBlur(Evt* script, s32 isInitialCall);
 ApiStatus UseBattleCamPreset(Evt* script, s32 isInitialCall);

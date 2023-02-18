@@ -7,7 +7,7 @@
 
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_THREAD
         EVT_SET(LVar0, 15)
         EVT_EXEC(N(script2))

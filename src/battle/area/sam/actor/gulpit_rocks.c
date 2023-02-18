@@ -157,7 +157,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar2, ANIM_Gulpit_Anim12)
             EVT_EXEC_WAIT(N(setAnim))
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
+            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
@@ -166,7 +166,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim13)
             EVT_END_SWITCH
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0)
             EVT_WAIT(30)
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN

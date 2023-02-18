@@ -102,13 +102,13 @@ EvtScript N(80225D78) = {
 
 EvtScript N(beforeBattle_80226324) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_CALL(EnableModel, 10, 0)
-    EVT_CALL(EnableModel, 15, 0)
-    EVT_CALL(EnableModel, 20, 0)
-    EVT_CALL(EnableModel, 18, 0)
-    EVT_CALL(EnableModel, 19, 0)
-    EVT_CALL(EnableModel, 25, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    EVT_CALL(EnableModel, 10, FALSE)
+    EVT_CALL(EnableModel, 15, FALSE)
+    EVT_CALL(EnableModel, 20, FALSE)
+    EVT_CALL(EnableModel, 18, FALSE)
+    EVT_CALL(EnableModel, 19, FALSE)
+    EVT_CALL(EnableModel, 25, FALSE)
     EVT_SET(LVar0, 27)
     EVT_EXEC(N(80225D78))
     EVT_THREAD

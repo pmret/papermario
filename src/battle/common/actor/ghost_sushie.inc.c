@@ -293,7 +293,7 @@ EvtScript N(sushie_takeTurn) = {
                         EVT_CALL(SetPartScale, ACTOR_SELF, 1, EVT_FLOAT(1.5), EVT_FLOAT(1.5), EVT_FLOAT(1.5))
                 EVT_END_SWITCH
             EVT_END_THREAD
-            EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0, 0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2034)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_THREAD
@@ -383,7 +383,7 @@ EvtScript N(sushie_takeTurn) = {
                 EVT_CALL(SetPartScale, ACTOR_SELF, 1, EVT_FLOAT(1.8), EVT_FLOAT(1.8), EVT_FLOAT(1.8))
         EVT_END_SWITCH
     EVT_END_THREAD
-    EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2034)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_THREAD

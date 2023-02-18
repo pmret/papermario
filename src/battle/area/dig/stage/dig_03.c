@@ -39,7 +39,7 @@ EvtScript N(beforeBattle) = {
     EVT_SET(LVar0, MODEL_g62)
     EVT_SET(LVar1, 240)
     EVT_EXEC(N(updateModels))
-    EVT_CALL(PlayEffect, EFFECT_SUN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SUN, 0, 0, 0, 0, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };

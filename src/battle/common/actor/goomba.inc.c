@@ -369,7 +369,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(2.0))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))

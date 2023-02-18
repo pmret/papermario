@@ -21,7 +21,7 @@ EvtScript N(8022F180) = {
 
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(SetGroupEnabled, 25, 0)
     EVT_SET(LVar0, 37)
     EVT_EXEC(N(8022F180))

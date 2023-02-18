@@ -102,7 +102,7 @@ EvtScript N(802273E8) = {
 
 EvtScript N(beforeBattle_80227994) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(SetGroupEnabled, 63, 0)
     EVT_THREAD
         EVT_WAIT(5)

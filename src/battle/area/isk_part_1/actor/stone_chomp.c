@@ -625,7 +625,7 @@ EvtScript N(handleEvent_80222364) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3F9)
             EVT_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
             EVT_END_THREAD
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -772,7 +772,7 @@ EvtScript N(takeTurn_80222ED0) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))

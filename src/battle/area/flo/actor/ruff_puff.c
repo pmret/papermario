@@ -122,7 +122,7 @@ EvtScript N(returnHome) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TuffPuff_Run)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 11)
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_SIN_OUT)
     EVT_RETURN
     EVT_END
 };
@@ -240,7 +240,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 11)
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_SIN_OUT)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TuffPuff_Idle)
     EVT_WAIT(5)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TuffPuff_Grin)
@@ -289,7 +289,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_EXEC_WAIT(N(returnHome))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)

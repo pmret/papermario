@@ -137,7 +137,7 @@ EvtScript N(init_80223DA0) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802245C8)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223E98)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80224038)))
-    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, 2, 2, 1)
+    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, 2, 2, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -278,8 +278,8 @@ EvtScript N(80224414) = {
     EVT_CALL(ActorSpeak, MSG_CH3_00C6, ACTOR_SELF, 1, ANIM_TubbasHeart_Anim0D, ANIM_TubbasHeart_Anim0D)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 25)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, 1)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, 1)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, TRUE)
     EVT_CALL(func_8026F60C, 20)
     EVT_RETURN
     EVT_END
@@ -500,8 +500,8 @@ EvtScript N(80225258) = {
         EVT_ADD(LVar1, 6)
         EVT_SETF(LVar3, EVT_FLOAT(0.4))
     EVT_END_IF
-    EVT_CALL(PlayEffect, EFFECT_GATHER_MAGIC, 1, LVar0, LVar1, LVar2, LVar3, 60, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 6, LVar0, LVar1, LVar2, LVar3, 60, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_GATHER_MAGIC, 1, LVar0, LVar1, LVar2, LVar3, 60, 0)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 6, LVar0, LVar1, LVar2, LVar3, 60, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F7)
     EVT_WAIT(60)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -520,7 +520,7 @@ EvtScript N(80225258) = {
         EVT_ADD(LVar1, 6)
         EVT_SETF(LVar3, EVT_FLOAT(0.4))
     EVT_END_IF
-    EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 3, LVar0, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 3, LVar0, LVar1, LVar2, LVar3, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 4, LVarF)
     EVT_CALL(EnableActorGlow, ACTOR_SELF, TRUE)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80223C1C)))
@@ -545,7 +545,7 @@ EvtScript N(802255D8) = {
     EVT_ELSE
         EVT_ADD(LVar1, 6)
     EVT_END_IF
-    EVT_CALL(PlayEffect, EFFECT_GATHER_ENERGY_PINK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 45, 0)
     EVT_WAIT(60)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
@@ -566,7 +566,7 @@ EvtScript N(802255D8) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
         EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80223BC0)))
     EVT_END_IF
-    EVT_CALL(PlaySound, 0x20F9)
+    EVT_CALL(PlaySound, SOUND_20F9)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
@@ -574,7 +574,7 @@ EvtScript N(802255D8) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 5)
-            EVT_CALL(PlayEffect, EFFECT_TUBBA_HEART_ATTACK, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 200, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_TUBBA_HEART_ATTACK, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 200, 0)
             EVT_WAIT(145)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -585,10 +585,10 @@ EvtScript N(802255D8) = {
     EVT_END_SWITCH
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 5)
-    EVT_CALL(PlayEffect, EFFECT_TUBBA_HEART_ATTACK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 200, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_TUBBA_HEART_ATTACK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 200, 0)
     EVT_THREAD
         EVT_WAIT(160)
-        EVT_CALL(PlaySound, 0x20FC)
+        EVT_CALL(PlaySound, SOUND_20FC)
     EVT_END_THREAD
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002B)
@@ -600,14 +600,14 @@ EvtScript N(802255D8) = {
     EVT_CALL(SetBattleCamOffsetZ, 35)
     EVT_CALL(MoveBattleCamOver, 50)
     EVT_WAIT(56)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x3DB)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x03000C)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_3DB)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000C)
     EVT_WAIT(37)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x3DB)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_3DB)
     EVT_WAIT(22)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x20FB)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_20FB)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)

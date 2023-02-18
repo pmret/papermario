@@ -202,7 +202,7 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 EvtScript N(EVS_ManageTutorial) = {
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, TRUE)
     EVT_CALL(func_80218158_4CF308)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
@@ -212,7 +212,7 @@ EvtScript N(EVS_ManageTutorial) = {
     EVT_THREAD
         EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
         EVT_CALL(SetGoalPos, ACTOR_SELF, -110, 100, 0)
-        EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, 10)
+        EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, EASING_COS_IN_OUT)
         EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002A)
     EVT_END_THREAD
@@ -223,7 +223,7 @@ EvtScript N(EVS_ManageTutorial) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, 10)
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, EASING_COS_IN_OUT)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
     EVT_CALL(ActorSpeak, MSG_CH1_0115, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_WAIT(10)
@@ -247,7 +247,7 @@ EvtScript N(EVS_ManageTutorial) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 0)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_THREAD
         EVT_CALL(N(func_80218170_4CF320))
     EVT_END_THREAD
@@ -262,7 +262,7 @@ EvtScript N(EVS_ManageTutorial) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 255)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 0)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
     EVT_CALL(ActorSpeak, MSG_CH1_0117, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_WAIT(10)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
@@ -273,7 +273,7 @@ EvtScript N(EVS_ManageTutorial) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_CALL(ActorSpeak, MSG_CH1_0118, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_WAIT(10)
-    EVT_CALL(SetBattleState, 6)
+    EVT_CALL(SetBattleState, BATTLE_STATE_END_TURN)
     EVT_CALL(WaitForState, BATTLE_STATE_BEGIN_TURN)
     EVT_WAIT(20)
     EVT_CALL(ActorSpeak, MSG_CH1_0119, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
@@ -282,7 +282,7 @@ EvtScript N(EVS_ManageTutorial) = {
     EVT_THREAD
         EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
         EVT_CALL(SetGoalPos, ACTOR_SELF, -110, 100, 0)
-        EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, 10)
+        EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, EASING_COS_IN_OUT)
         EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002A)
     EVT_END_THREAD
@@ -295,7 +295,7 @@ EvtScript N(EVS_ManageTutorial) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, 10)
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, EASING_COS_IN_OUT)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
     EVT_CALL(ActorSpeak, MSG_CH1_011A, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_WAIT(10)
@@ -315,7 +315,7 @@ EvtScript N(EVS_ManageTutorial) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 0)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_THREAD
         EVT_CALL(N(func_80218170_4CF320))
     EVT_END_THREAD
@@ -330,7 +330,7 @@ EvtScript N(EVS_ManageTutorial) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 255)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 0)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
     EVT_CALL(ActorSpeak, MSG_CH1_011C, ACTOR_SELF, 1, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_WAIT(10)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)

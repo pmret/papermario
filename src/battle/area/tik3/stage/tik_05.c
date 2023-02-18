@@ -8,7 +8,7 @@
 
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(SetTexPanner, MODEL_taki1, TEX_PANNER_1)
     EVT_CALL(EnableTexPanning, MODEL_taki1, TRUE)
     EVT_THREAD

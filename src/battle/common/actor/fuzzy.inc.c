@@ -295,7 +295,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -355,7 +355,7 @@ EvtScript N(takeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-            EVT_CALL(GetLastDamage, 0, LVar3)
+            EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
             EVT_IF_NE(LVar3, 0)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_214)
@@ -369,14 +369,14 @@ EvtScript N(takeTurn) = {
                 EVT_END_THREAD
                 EVT_ADD(LVar0, 20)
                 EVT_ADD(LVar1, 20)
-                EVT_CALL(PlayEffect, EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3, 0)
                 EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
                 EVT_ADD(LVar0, LVar3)
                 EVT_CALL(SetEnemyHP, ACTOR_SELF, LVar0)
             EVT_END_IF
             EVT_THREAD
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.6), EVT_FLOAT(0.6), EVT_FLOAT(1.0))
-                EVT_CALL(SetActorRotationOffset, -127, 0, 10, 0)
+                EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 10, 0)
                 EVT_WAIT(1)
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 330)
                 EVT_WAIT(1)
@@ -420,7 +420,7 @@ EvtScript N(takeTurn) = {
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 30)
                 EVT_WAIT(1)
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-                EVT_CALL(SetActorRotationOffset, -127, 0, 0, 0)
+                EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_END_THREAD
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 30)

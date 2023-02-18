@@ -296,10 +296,10 @@ EvtScript N(runAwayFail) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Run)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Run)
     EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
     EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Walk)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Walk)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_RETURN
     EVT_END
@@ -312,7 +312,7 @@ EvtScript N(nextTurn) = {
 
 EvtScript N(executeAction) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_CALL(ShowActionHud, 1)
+    EVT_CALL(ShowActionHud, TRUE)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(8)
             EVT_CALL(LoadStarPowerScript)
@@ -322,18 +322,18 @@ EvtScript N(executeAction) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_SPINY_FLIP1)
-            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
+            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
             EVT_EXEC_WAIT(N(spinyFlip))
         EVT_CASE_EQ(MOVE_SPINY_FLIP2)
-            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
+            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
             EVT_EXEC_WAIT(N(spinyFlip))
         EVT_CASE_EQ(MOVE_SPINY_FLIP3)
-            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
+            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
             EVT_EXEC_WAIT(N(spinyFlip))
         EVT_CASE_EQ(MOVE_SPINY_SURGE)
             EVT_EXEC_WAIT(N(spinySurge))
         EVT_CASE_EQ(MOVE_CLOUD_NINE)
-            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
+            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
             EVT_EXEC_WAIT(N(cloudNine))
         EVT_CASE_EQ(MOVE_HURRICANE)
             EVT_EXEC_WAIT(N(hurricane))
@@ -346,9 +346,9 @@ EvtScript N(returnHome2) = {
     EVT_CALL(PartnerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Run)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, 0, 10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Walk)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Run)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, 0, EASING_COS_IN_OUT)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Walk)
     EVT_RETURN
     EVT_END
 };
@@ -357,9 +357,9 @@ EvtScript N(returnHome) = {
     EVT_CALL(PartnerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Run)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, 0, 10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Walk)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Run)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, 0, EASING_COS_IN_OUT)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Walk)
     EVT_RETURN
     EVT_END
 };
@@ -814,13 +814,13 @@ EvtScript N(spinyFlip) = {
     EVT_THREAD
         EVT_CALL(N(SpinyFlipUpdatePopup))
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Run)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Run)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 40)
     EVT_ADD(LVar1, 20)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, 10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Idle)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -834,9 +834,9 @@ EvtScript N(spinyFlip) = {
     EVT_ADD(LVar2, 5)
     EVT_CALL(SetPartPos, ACTOR_PARTNER, 2, LVar0, LVar1, LVar2)
     EVT_WAIT(1)
-    EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2,  ANIM_BattleLakilester_Spiny)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_LiftSpiny)
+    EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_BattleLakilester_Spiny)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_LiftSpiny)
     EVT_LOOP(4)
         EVT_ADD(LVar1, 6)
         EVT_CALL(SetPartPos, ACTOR_PARTNER, 2, LVar0, LVar1, LVar2)
@@ -846,7 +846,7 @@ EvtScript N(spinyFlip) = {
     EVT_ADD(LVar0, 8)
     EVT_ADD(LVar1, 40)
     EVT_ADD(LVar2, 5)
-    EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 80, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 80, 0)
     EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, 1)
     EVT_THREAD
         EVT_LOOP(40)
@@ -876,23 +876,23 @@ EvtScript N(spinyFlip) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201B)
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(-1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2,  ANIM_BattleLakilester_SpinySpin)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_BattleLakilester_SpinySpin)
             EVT_CALL(SetPartJumpGravity, ACTOR_PARTNER, 2, EVT_FLOAT(1.5))
             EVT_SET(LVar0, LVar7)
             EVT_SET(LVar1, LVar8)
             EVT_SET(LVar2, LVar9)
             EVT_CALL(JumpPartTo, ACTOR_PARTNER, 2, LVar7, LVar8, LVar9, 20)
-            EVT_CALL(LandJumpPart, 256, 2)
+            EVT_CALL(LandJumpPart, ACTOR_PARTNER, 2)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2,  ANIM_BattleLakilester_SpinySpin)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_BattleLakilester_SpinySpin)
             EVT_CALL(SetPartJumpGravity, ACTOR_PARTNER, 2, EVT_FLOAT(1.5))
             EVT_SET(LVar0, LVar7)
             EVT_SET(LVar1, LVar8)
             EVT_SET(LVar2, LVar9)
             EVT_CALL(JumpPartTo, ACTOR_PARTNER, 2, LVar7, LVar8, LVar9, 20)
-            EVT_CALL(LandJumpPart, 256, 2)
+            EVT_CALL(LandJumpPart, ACTOR_PARTNER, 2)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2,  ANIM_BattleLakilester_SpinySpin)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_BattleLakilester_SpinySpin)
             EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             EVT_CALL(SetPartJumpGravity, ACTOR_PARTNER, 2, EVT_FLOAT(1.5))
             EVT_CALL(JumpPartTo, ACTOR_PARTNER, 2, LVar0, LVar1, LVar2, 20)
@@ -902,7 +902,7 @@ EvtScript N(spinyFlip) = {
         EVT_SET(LVar1, 0)
         EVT_CALL(SetPartJumpGravity, ACTOR_PARTNER, 2, EVT_FLOAT(1.5))
         EVT_CALL(JumpPartTo, ACTOR_PARTNER, 2, LVar0, LVar1, LVar2, 15)
-        EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, 1)
+        EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_END_THREAD
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar2)
@@ -960,10 +960,10 @@ EvtScript N(spinySurge) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Run)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Run)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, 60, 20, 0)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, 10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Idle)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
     EVT_WAIT(10)
     EVT_CALL(GetActorLevel, ACTOR_PARTNER, LVar0)
     EVT_SWITCH(LVar0)
@@ -977,7 +977,7 @@ EvtScript N(spinySurge) = {
     EVT_SET(LVarB, LVarA)
     EVT_ADD(LVarB, -3)
     EVT_CALL(action_command_spiny_surge_start, 0, LVarB, 3)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, 0)
     EVT_SET(LVar9, 0)
@@ -991,19 +991,19 @@ EvtScript N(spinySurge) = {
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(-1)
                 EVT_SET(LVar9, 0)
-                EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, 1)
-                EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Idle)
+                EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
             EVT_CASE_EQ(1)
                 EVT_IF_EQ(LVar9, 1)
                     EVT_BREAK_SWITCH
                 EVT_END_IF
-                EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, 0)
+                EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
                 EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar0, 3)
                 EVT_ADD(LVar1, 34)
                 EVT_ADD(LVar2, 5)
                 EVT_CALL(SetPartPos, ACTOR_PARTNER, 2, LVar0, LVar1, LVar2)
-                EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_LiftSpiny)
+                EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_LiftSpiny)
                 EVT_SET(LVar9, 1)
             EVT_CASE_EQ(2)
                 EVT_IF_EQ(LVar9, 0)
@@ -1018,7 +1018,7 @@ EvtScript N(spinySurge) = {
                 EVT_END_IF
                 EVT_CALL(N(ThrowSpinyFX))
                 EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_ThrowSpinyAlt)
-                EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, 1)
+                EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                 EVT_CHILD_THREAD
                     EVT_CALL(GetActorVar, ACTOR_PARTNER, 0, LVar0)
                     EVT_ADD(LVar0, 1)
@@ -1033,8 +1033,8 @@ EvtScript N(spinySurge) = {
         EVT_END_SWITCH
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, 1)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Idle)
+    EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
     EVT_LOOP(0)
         EVT_CALL(GetActorVar, ACTOR_PARTNER, 0, LVar0)
         EVT_IF_EQ(LVar0, 0)
@@ -1072,7 +1072,7 @@ EvtScript N(spinySurge) = {
     EVT_END_SWITCH
     EVT_WAIT(6)
     EVT_LABEL(12)
-    EVT_CALL(ChooseNextTarget, 0, LVar1)
+    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar1)
     EVT_IF_NE(LVar1, -1)
         EVT_GOTO(0)
     EVT_END_IF
@@ -1094,8 +1094,8 @@ EvtScript N(spinySurge) = {
 
 EvtScript N(cloudNine_normal) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_8, 0)
-    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_8, FALSE)
+    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, TRUE)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
     EVT_CALL(action_command_water_block_init, 2)
     EVT_CALL(SetActionHudPrepareTime, 50)
@@ -1112,7 +1112,7 @@ EvtScript N(cloudNine_normal) = {
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 40)
         EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, 10)
+        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_SET(LVar0, 0)
@@ -1122,7 +1122,7 @@ EvtScript N(cloudNine_normal) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_CloudNineBegin)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_CloudNineBegin)
     EVT_WAIT(5)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_CloudNineIdle)
     EVT_WAIT(15)
@@ -1152,10 +1152,10 @@ EvtScript N(cloudNine_normal) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201D)
         EVT_CALL(N(CloudNineFX))
         EVT_CALL(N(ApplyCloudNine))
-        EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_8000000, 1)
+        EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_8000000, TRUE)
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_CloudNineEnd)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_CloudNineEnd)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
         EVT_LOOP(10)
@@ -1168,7 +1168,7 @@ EvtScript N(cloudNine_normal) = {
             EVT_CALL(RandInt, 30, LVar6)
             EVT_SUB(LVar6, 15)
             EVT_ADD(LVar1, LVar6)
-            EVT_CALL(PlayEffect, EFFECT_FLOATING_CLOUD_PUFF, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 20, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_FLOATING_CLOUD_PUFF, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 20, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -1176,7 +1176,7 @@ EvtScript N(cloudNine_normal) = {
     EVT_SET(LVar1, 0)
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(PlayerFallToGoal, 10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Walk)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Walk)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_ReadyJump)
     EVT_WAIT(7)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
@@ -1186,13 +1186,13 @@ EvtScript N(cloudNine_normal) = {
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
         EVT_CALL(PlayerRunToGoal, 0)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
-        EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, 0)
+        EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, FALSE)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_SUB(LVar1, 40)
         EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, 10)
+        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_SET(LVar0, 180)
@@ -1205,10 +1205,10 @@ EvtScript N(cloudNine_normal) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(10)
     EVT_IF_GT(LVarA, 0)
-        EVT_CALL(ShowMessageBox, 40, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_28, 60)
         EVT_CALL(WaitForMessageBoxDone)
     EVT_END_IF
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_8, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_8, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -1235,24 +1235,24 @@ EvtScript N(cloudNine_immobile) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_CloudNineBegin)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_CloudNineBegin)
     EVT_WAIT(20)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 12)
     EVT_ADD(LVar1, -7)
     EVT_ADD(LVar2, 5)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, -10, 10)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, -10, EASING_COS_IN_OUT)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 40)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(FlyToGoal, ACTOR_PLAYER, 20, 0, 10)
+        EVT_CALL(FlyToGoal, ACTOR_PLAYER, 20, 0, EASING_COS_IN_OUT)
     EVT_END_THREAD
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 40)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 0, 10)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 0, EASING_COS_IN_OUT)
     EVT_CALL(action_command_water_block_start, 0, 97, 3)
     EVT_CALL(AddBattleCamZoom, -75)
     EVT_CALL(MoveBattleCamOver, 100)
@@ -1268,7 +1268,7 @@ EvtScript N(cloudNine_immobile) = {
         EVT_CALL(N(ApplyCloudNine))
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_CloudNineEnd)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_CloudNineEnd)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
         EVT_LOOP(10)
@@ -1281,7 +1281,7 @@ EvtScript N(cloudNine_immobile) = {
             EVT_CALL(RandInt, 30, LVar6)
             EVT_SUB(LVar6, 15)
             EVT_ADD(LVar1, LVar6)
-            EVT_CALL(PlayEffect, EFFECT_FLOATING_CLOUD_PUFF, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 20, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_FLOATING_CLOUD_PUFF, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 20, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -1289,7 +1289,7 @@ EvtScript N(cloudNine_immobile) = {
     EVT_SET(LVar1, 0)
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(FallToGoal, ACTOR_PLAYER, 10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Walk)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Walk)
     EVT_THREAD
         EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
@@ -1299,7 +1299,7 @@ EvtScript N(cloudNine_immobile) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 0, 10)
+        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 0, EASING_COS_IN_OUT)
     EVT_END_THREAD
     EVT_SET(LVar0, 180)
     EVT_LOOP(10)
@@ -1312,7 +1312,7 @@ EvtScript N(cloudNine_immobile) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(10)
     EVT_IF_GT(LVarA, 0)
-        EVT_CALL(ShowMessageBox, 40, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_28, 60)
         EVT_CALL(WaitForMessageBoxDone)
     EVT_END_IF
     EVT_RETURN
@@ -1694,14 +1694,14 @@ EvtScript N(hurricane) = {
     EVT_CALL(MoveBattleCamOver, 40)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Run)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Run)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, 40, 20, 0)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, 10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Idle)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
     EVT_WAIT(15)
     EVT_CALL(N(InitHurricane))
     EVT_CALL(action_command_hurricane_start, 0, 147, 3, LVar0)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(SetActorRotationOffset, ACTOR_PARTNER, 0, 20, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, 35, 54, 0)
@@ -1741,7 +1741,7 @@ EvtScript N(hurricane) = {
         EVT_SET(LVarA, LVar0)
         EVT_THREAD
             EVT_CALL(N(BlowTargetAway))
-            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_STAR_POINTS_DROPPED, 1)
+            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_STAR_POINTS_DROPPED, TRUE)
             EVT_CALL(RemoveActor, LVarA)
         EVT_END_THREAD
     EVT_ELSE
@@ -1750,7 +1750,7 @@ EvtScript N(hurricane) = {
         EVT_END_IF
     EVT_END_IF
     EVT_LABEL(11)
-    EVT_CALL(ChooseNextTarget, 0, LVar0)
+    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(10)
     EVT_END_IF
@@ -1758,7 +1758,7 @@ EvtScript N(hurricane) = {
     EVT_CALL(SetActorRotation, ACTOR_PARTNER, 0, 0, 0)
     EVT_CALL(SetActorRotationOffset, ACTOR_PARTNER, 0, 0, 0)
     EVT_EXEC_WAIT(N(returnHome))
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleLakilester_Walk)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Walk)
     EVT_CALL(N(AllEnemiesBlownAway))
     EVT_CALL(PartnerYieldTurn)
     EVT_RETURN

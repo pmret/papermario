@@ -9,7 +9,7 @@ EvtScript N(updateModels) = {
     EVT_SET(LVar9, LVar1)
     EVT_SET(LVar8, LVar2)
     EVT_LABEL(0)
-    EVT_CALL(MakeLerp, 0, LVar9, LVar8, 10)
+    EVT_CALL(MakeLerp, 0, LVar9, LVar8, EASING_COS_IN_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, LVarA, 0, LVar0, 0)
@@ -18,7 +18,7 @@ EvtScript N(updateModels) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(MakeLerp, LVar9, 0, LVar8, 10)
+    EVT_CALL(MakeLerp, LVar9, 0, LVar8, EASING_COS_IN_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, LVarA, 0, LVar0, 0)
@@ -34,7 +34,7 @@ EvtScript N(updateModels) = {
 
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_THREAD
         EVT_SET(LVar0, 26)
         EVT_SET(LVar1, -50)

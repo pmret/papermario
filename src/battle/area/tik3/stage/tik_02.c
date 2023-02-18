@@ -75,10 +75,10 @@ EvtScript N(80231098) = {
     EVT_ADD(LVarA, 4)
     EVT_SET(LVarB, ArrayVar(0))
     EVT_SET(LVarC, ArrayVar(1))
-    EVT_CALL(EnableModel, LVar1, 1)
-    EVT_CALL(EnableModel, LVar4, 1)
-    EVT_CALL(EnableModel, LVar7, 1)
-    EVT_CALL(EnableModel, LVarA, 1)
+    EVT_CALL(EnableModel, LVar1, TRUE)
+    EVT_CALL(EnableModel, LVar4, TRUE)
+    EVT_CALL(EnableModel, LVar7, TRUE)
+    EVT_CALL(EnableModel, LVarA, TRUE)
     EVT_LOOP(5)
         EVT_ADD(LVar0, 1)
         EVT_ADD(LVar2, 1)
@@ -119,10 +119,10 @@ EvtScript N(80231098) = {
         EVT_CALL(ScaleModel, LVarA, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(EnableModel, LVar1, 0)
-    EVT_CALL(EnableModel, LVar4, 0)
-    EVT_CALL(EnableModel, LVar7, 0)
-    EVT_CALL(EnableModel, LVarA, 0)
+    EVT_CALL(EnableModel, LVar1, FALSE)
+    EVT_CALL(EnableModel, LVar4, FALSE)
+    EVT_CALL(EnableModel, LVar7, FALSE)
+    EVT_CALL(EnableModel, LVarA, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -140,8 +140,8 @@ EvtScript N(80231568) = {
     EVT_CALL(RandInt, 200, LVar0)
     EVT_ADD(LVar0, 50)
     EVT_WAIT(LVar0)
-    EVT_CALL(EnableModel, ArrayVar(5), 1)
-    EVT_CALL(MakeLerp, ArrayVar(2), ArrayVar(3), ArrayVar(4), 1)
+    EVT_CALL(EnableModel, ArrayVar(5), TRUE)
+    EVT_CALL(MakeLerp, ArrayVar(2), ArrayVar(3), ArrayVar(4), EASING_QUADRATIC_IN)
     EVT_LABEL(1)
     EVT_CALL(UpdateLerp)
     EVT_CALL(TranslateModel, ArrayVar(5), ArrayVar(0), LVar0, ArrayVar(1))
@@ -154,7 +154,7 @@ EvtScript N(80231568) = {
         EVT_GOTO(1)
     EVT_END_IF
     EVT_LABEL(10)
-    EVT_CALL(EnableModel, ArrayVar(5), 0)
+    EVT_CALL(EnableModel, ArrayVar(5), FALSE)
     EVT_EXEC_WAIT(N(80231098))
     EVT_GOTO(0)
     EVT_RETURN
@@ -190,7 +190,7 @@ EvtScript N(80231730) = {
             EVT_ADD(LVarF, 5)
         EVT_END_LOOP
     EVT_END_LOOP
-    EVT_CALL(EnableModel, 16, 0)
+    EVT_CALL(EnableModel, 16, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -201,7 +201,7 @@ s32 N(802318EC)[] = {
 
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_SET(LVar0, N(802318EC))
     EVT_EXEC(N(80231730))
     EVT_SET(LVar0, 14)

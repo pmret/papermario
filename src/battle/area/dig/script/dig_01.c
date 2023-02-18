@@ -26,7 +26,7 @@ API_CALLABLE(func_80218644_6DE404) {
 
 EvtScript NAMESPACE = {
     EVT_WAIT(3)
-    EVT_CALL(SetCamViewport, 1, 29, 20, 262, 177)
+    EVT_CALL(SetCamViewport, CAM_BATTLE, 29, 20, 262, 177)
     EVT_CALL(func_802535B4, 0)
     EVT_SET(LVar0, 15)
     EVT_CALL(N(Set80218630_Var0))

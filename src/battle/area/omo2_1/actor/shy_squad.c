@@ -949,14 +949,14 @@ EvtScript N(onHit) = {
     EVT_ADD(LVar0, LVar1)
     EVT_IF_NE(LVar0, 16)
         EVT_THREAD
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_20000000, 1)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_20000000, TRUE)
             EVT_CALL(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
             EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, 2, LVar7)
             EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, 3, LVar8)
             EVT_ADD(LVar1, LVar7)
             EVT_ADD(LVar3, LVar8)
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, LVar0, EVT_FLOAT(0.5))
-            EVT_CALL(JumpPartTo, ACTOR_SELF, LVar0, LVar1, 0, LVar3, 15, 1)
+            EVT_CALL(JumpPartTo, ACTOR_SELF, LVar0, LVar1, 0, LVar3, 15, TRUE)
             EVT_CALL(func_80269E80, LVar5)
             EVT_SWITCH(LVar5)
                 EVT_CASE_OR_EQ(10)
@@ -978,14 +978,14 @@ EvtScript N(onHit) = {
                     EVT_END_LOOP
             EVT_END_SWITCH
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
-            EVT_CALL(PlayEffect, EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0)
             EVT_SET(LVar8, 0)
             EVT_LOOP(12)
                 EVT_CALL(SetPartRotation, ACTOR_SELF, LVar0, LVar8, 0, 0)
                 EVT_ADD(LVar8, 8)
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, 1)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(RemovePartShadow, ACTOR_SELF, LVar0)
         EVT_END_THREAD
     EVT_END_IF
@@ -1046,7 +1046,7 @@ EvtScript N(kill_guy) = {
         EVT_ADD(LVar3, 8)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, 1)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(RemovePartShadow, ACTOR_SELF, LVar0)
     EVT_RETURN
     EVT_END
@@ -1075,7 +1075,7 @@ EvtScript N(onDeath) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(PlayEffect, EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
     EVT_CALL(DropStarPoints, ACTOR_SELF)
     EVT_SET(LVar3, 0)
@@ -1084,7 +1084,7 @@ EvtScript N(onDeath) = {
         EVT_ADD(LVar3, 8)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, 1)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(RemovePartShadow, ACTOR_SELF, LVar0)
     EVT_EXEC_WAIT(N(next_phase))
     EVT_CALL(RemoveActor, ACTOR_SELF)
@@ -1108,7 +1108,7 @@ EvtScript N(attack) = {
     EVT_SUB(LVar0, LVar1)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, 0, SOUND_20BA, SOUND_3B4)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_3B4)
         EVT_CASE_LT(5)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3EB)
         EVT_CASE_DEFAULT
@@ -1165,12 +1165,12 @@ EvtScript N(attack) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VARS_GUYS_KILLED), LVar0)
             EVT_IF_LT(LVar0, 14)
                 EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-                EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0)
                 EVT_THREAD
                     EVT_LOOP(7)
-                        EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 0, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 0, LVar0, LVar1, LVar2, 0, 0)
                         EVT_WAIT(2)
-                        EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0)
                         EVT_WAIT(2)
                     EVT_END_LOOP
                 EVT_END_THREAD
@@ -1183,8 +1183,8 @@ EvtScript N(attack) = {
             EVT_SUB(LVar0, LVar1)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SetActorSounds, ACTOR_SELF, 0, SOUND_20BA, SOUND_3B4)
-                    EVT_CALL(SetActorSounds, ACTOR_SELF, 4, 10, 0)
+                    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_3B4)
+                    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
                 EVT_CASE_LT(5)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3EB)
                 EVT_CASE_DEFAULT
@@ -1218,9 +1218,9 @@ EvtScript N(attack) = {
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, 1, LVar0)
         EVT_THREAD
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar1, LVar2, LVar3)
-            EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 0, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 0, LVar1, LVar2, LVar3, 0, 0)
             EVT_WAIT(2)
-            EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar1, LVar2, LVar3, 0, 0)
             EVT_WAIT(2)
         EVT_END_THREAD
         EVT_CALL(GetPlayerHP, LVar0)
@@ -1242,8 +1242,8 @@ EvtScript N(attack) = {
     EVT_SUB(LVar0, LVar1)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, 0, SOUND_20BA, SOUND_3B4)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, 4, 10, 0)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_3B4)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
         EVT_CASE_LT(5)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3EB)
         EVT_CASE_DEFAULT
@@ -1308,8 +1308,8 @@ EvtScript N(flee) = {
     EVT_SUB(LVar0, LVar1)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, 0, SOUND_20BA, SOUND_3B4)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, 4, 10, 0)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_3B4)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
         EVT_CASE_LT(4)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SHY_GUY_SCREAMS3)
         EVT_CASE_DEFAULT
@@ -1321,7 +1321,7 @@ EvtScript N(flee) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, TRUE)
     EVT_WAIT(30)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_1E2)
-    EVT_CALL(ShakeCam, 1, 0, 6, EVT_FLOAT(2.5))
+    EVT_CALL(ShakeCam, CAM_BATTLE, 0, 6, EVT_FLOAT(2.5))
     EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VARS_GUYS_KILLED), LVar0)
     EVT_IF_LT(LVar0, 14)
         EVT_CALL(ActorSpeak, MSG_CH4_0067, ACTOR_ENEMY0, 1, -1, -1)
@@ -1330,13 +1330,13 @@ EvtScript N(flee) = {
     EVT_END_IF
     EVT_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_1E2)
-        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(2.0))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(2.0))
         EVT_WAIT(12)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_1E2)
-        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(2.0))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(2.0))
     EVT_END_THREAD
     EVT_CALL(EndActorSpeech, ACTOR_ENEMY0, 1, -1, -1)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, 0, 0, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
     EVT_WAIT(40)
     EVT_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_173)

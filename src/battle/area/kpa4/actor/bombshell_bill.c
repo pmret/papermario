@@ -117,7 +117,7 @@ EvtScript N(init) = {
         EVT_CALL(SetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
         EVT_CALL(CopyStatusEffects, LVar0, ACTOR_SELF)
         EVT_CALL(CopyBuffs, LVar0, ACTOR_SELF)
-        EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
+        EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0, 0)
         EVT_CALL(GetActorPos, LVar0, LVar1, LVarB, LVarC)
         EVT_SUB(LVar1, 90)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.01))
@@ -290,14 +290,14 @@ EvtScript N(takeTurn) = {
 EvtScript N(playExplosionEffects) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 2)
-    EVT_CALL(PlayEffect, EFFECT_SMOKE_RING, 0, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SMOKE_RING, 0, LVar0, LVar1, LVar2, 0)
     EVT_ADD(LVar1, 16)
     EVT_ADD(LVar2, 2)
-    EVT_CALL(PlayEffect, EFFECT_BLAST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(3.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_BLAST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(3.0), 30, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2078)
     EVT_CALL(StartRumble, 11)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_RETURN
     EVT_END

@@ -44,7 +44,7 @@ EvtScript N(80232A30) = {
 #include "common/CosInterpMinMax.inc.c"
 
 EvtScript N(80232C48) = {
-    EVT_CALL(EnableModel, LVarF, 1)
+    EVT_CALL(EnableModel, LVarF, TRUE)
     EVT_SET(LVarE, 159)
     EVT_LOOP(LVarE)
         EVT_ADDF(LVar3, 0)
@@ -68,7 +68,7 @@ EvtScript N(80232C48) = {
         EVT_CALL(RotateModel, LVarF, LVarA, 0, 0, 1)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(EnableModel, LVarF, 0)
+    EVT_CALL(EnableModel, LVarF, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -79,7 +79,7 @@ s32 N(modelList)[] = {
 
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_SET(LVar0, N(modelList))
     EVT_EXEC(N(80232A30))
     EVT_CALL(SetTexPanner, 36, TEX_PANNER_1)
@@ -142,9 +142,9 @@ EvtScript N(beforeBattle) = {
             EVT_ADD(LVar1, 10000)
             EVT_ADD(LVar0, 1)
             EVT_CALL(CloneModel, 44, LVar1)
-            EVT_CALL(EnableModel, LVar1, 0)
+            EVT_CALL(EnableModel, LVar1, FALSE)
         EVT_END_LOOP
-        EVT_CALL(EnableModel, 44, 0)
+        EVT_CALL(EnableModel, 44, FALSE)
         EVT_SET(LVarE, 0)
         EVT_LOOP(0)
             EVT_SETF(LVar0, EVT_FLOAT(106.0))

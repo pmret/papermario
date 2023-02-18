@@ -42,7 +42,7 @@ EvtScript N(80227A2C) = {
     EVT_LABEL(0)
     EVT_SET(LVar2, LVar8)
     EVT_ADD(LVar2, LVar9)
-    EVT_CALL(MakeLerp, LVar8, LVar2, LVar7, 0)
+    EVT_CALL(MakeLerp, LVar8, LVar2, LVar7, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, LVarA, LVar0, 0, 0)
@@ -53,7 +53,7 @@ EvtScript N(80227A2C) = {
     EVT_END_LOOP
     EVT_SET(LVar2, LVar8)
     EVT_ADD(LVar2, LVar9)
-    EVT_CALL(MakeLerp, LVar2, LVar8, LVar7, 0)
+    EVT_CALL(MakeLerp, LVar2, LVar8, LVar7, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, LVarA, LVar0, 0, 0)
@@ -69,7 +69,7 @@ EvtScript N(80227A2C) = {
 
 EvtScript N(beforeBattle_80227BDC) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_SET(LVar0, 25)
     EVT_SET(LVar1, 0)
     EVT_EXEC(N(802278B0))

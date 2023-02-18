@@ -7,8 +7,8 @@
 EvtScript N(beforeBattle_80223E90) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(EnableModel, MODEL_kai2, 0)
-    EVT_CALL(EnableModel, MODEL_kai1, 0)
+    EVT_CALL(EnableModel, MODEL_kai2, FALSE)
+    EVT_CALL(EnableModel, MODEL_kai1, FALSE)
     EVT_RETURN
     EVT_END
 };
