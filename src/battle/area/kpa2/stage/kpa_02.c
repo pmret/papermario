@@ -4,18 +4,18 @@
 
 #define NAMESPACE b_area_kpa2_kpa_02
 
-EvtScript N(beforeBattle) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList)[] = {
+s32 N(ForegroundModels)[] = {
     MODEL_hana, MODEL_ha1, MODEL_ha2, 0,
 };
 
@@ -24,7 +24,7 @@ Stage NAMESPACE = {
     .shape = "kkj_bt01_shape",
     .hit = "kkj_bt01_hit",
     .bg = "kpa_bg",
-    .preBattle = &N(beforeBattle),
-    .postBattle = &N(afterBattle),
-    .foregroundModelList = N(foregroundModelList),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

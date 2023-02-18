@@ -51,7 +51,7 @@ EvtScript N(createLightnings2) = {
     EVT_END
 };
 
-EvtScript N(beforeBattle) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_EXEC(N(createLightnings1))
     EVT_EXEC(N(createLightnings2))
@@ -59,7 +59,7 @@ EvtScript N(beforeBattle) = {
     EVT_END
 };
 
-EvtScript N(afterBattle) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
@@ -69,6 +69,6 @@ Stage NAMESPACE = {
     .shape = "kkj_bt02_shape",
     .hit = "kkj_bt02_hit",
     .bg = "kpa_bg",
-    .preBattle = &N(beforeBattle),
-    .postBattle = &N(afterBattle),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
 };

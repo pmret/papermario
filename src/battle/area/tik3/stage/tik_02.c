@@ -199,7 +199,7 @@ s32 N(802318EC)[] = {
     1, -100, -50, 200, 100, 200, 0, 60, 4,
 };
 
-EvtScript N(beforeBattle) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_SET(LVar0, N(802318EC))
@@ -213,7 +213,7 @@ EvtScript N(beforeBattle) = {
     EVT_END
 };
 
-EvtScript N(afterBattle) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
@@ -222,6 +222,6 @@ Stage NAMESPACE = {
     .texture = "tik_tex",
     .shape = "tik_bt02_shape",
     .hit = "tik_bt02_hit",
-    .preBattle = &N(beforeBattle),
-    .postBattle = &N(afterBattle),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
 };

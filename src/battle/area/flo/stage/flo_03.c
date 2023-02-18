@@ -77,7 +77,7 @@ s32 N(modelList)[] = {
     MODEL_o419, MODEL_o420, MODEL_o422, 0,
 };
 
-EvtScript N(beforeBattle) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_SET(LVar0, N(modelList))
@@ -172,12 +172,12 @@ EvtScript N(beforeBattle) = {
     EVT_END
 };
 
-EvtScript N(afterBattle) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList)[] = {
+s32 N(ForegroundModels)[] = {
     -1, MODEL_o411, MODEL_o415, 0,
 };
 
@@ -186,7 +186,7 @@ Stage NAMESPACE = {
     .shape = "flo_bt03_shape",
     .hit = "flo_bt03_hit",
     .bg = "fla_bg",
-    .preBattle = &N(beforeBattle),
-    .postBattle = &N(afterBattle),
-    .foregroundModelList = N(foregroundModelList),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

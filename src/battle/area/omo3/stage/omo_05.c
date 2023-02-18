@@ -4,7 +4,7 @@
 
 #define NAMESPACE b_area_omo3_omo_05
 
-EvtScript N(beforeBattle) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(SetGroupVisibility, 24, MODEL_GROUP_HIDDEN)
@@ -13,12 +13,12 @@ EvtScript N(beforeBattle) = {
     EVT_END
 };
 
-EvtScript N(afterBattle) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList)[] = {
+s32 N(ForegroundModels)[] = {
     MODEL_itigo, MODEL_kisya, 0,
 };
 
@@ -27,7 +27,7 @@ Stage NAMESPACE = {
     .shape = "omo_bt05_shape",
     .hit = "omo_bt05_hit",
     .bg = "omo_bg",
-    .preBattle = &N(beforeBattle),
-    .postBattle = &N(afterBattle),
-    .foregroundModelList = N(foregroundModelList),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

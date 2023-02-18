@@ -5,7 +5,7 @@
 
 #define NAMESPACE b_area_sbk_sbk_02
 
-#include "common/UnkFloatFunc3.inc.c"
+#include "common/UpdateSunPos.inc.c"
 
 #include "common/GetModelPos.inc.c"
 
@@ -19,7 +19,7 @@ EvtScript N(8021F720) = {
     EVT_IF_GT(LVar7, 3599)
         EVT_SUB(LVar7, 3600)
     EVT_END_IF
-    EVT_CALL(N(UnkFloatFunc3), LVar7, LVar0, LVar1, LVar2)
+    EVT_CALL(N(UpdateSunPos), LVar7, LVar0, LVar1, LVar2)
     EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
     EVT_WAIT(1)
     EVT_GOTO(0)

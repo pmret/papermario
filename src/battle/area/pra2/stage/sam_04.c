@@ -10,14 +10,14 @@ void func_802189E0_661130(void) {
 }
 
 
-EvtScript N(beforeBattle) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_EXEC(N(UnkModelStuffScript1))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
@@ -27,6 +27,6 @@ Stage NAMESPACE = {
     .shape = "sam_bt04_shape",
     .hit = "sam_bt04_hit",
     .bg = "sam_bg",
-    .preBattle = &N(beforeBattle),
-    .postBattle = &N(afterBattle),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
 };

@@ -61,7 +61,7 @@ EvtScript N(80231560) = {
 
 #include "common/MakeSun.inc.c"
 
-EvtScript N(beforeBattle) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(SetGroupVisibility, 37, MODEL_GROUP_HIDDEN)
@@ -73,12 +73,12 @@ EvtScript N(beforeBattle) = {
     EVT_END
 };
 
-EvtScript N(afterBattle) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList)[] = {
+s32 N(ForegroundModels)[] = {
     -1, MODEL_kuki, MODEL_hana1, MODEL_mae1, MODEL_mae2, MODEL_mae3, 0,
 };
 
@@ -87,7 +87,7 @@ Stage NAMESPACE = {
     .shape = "flo_bt01_shape",
     .hit = "flo_bt01_hit",
     .bg = "fla_bg",
-    .preBattle = &N(beforeBattle),
-    .postBattle = &N(afterBattle),
-    .foregroundModelList = N(foregroundModelList),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

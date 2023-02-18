@@ -5,7 +5,7 @@
 
 #include "common/MakeSun.inc.c"
 
-EvtScript N(beforeBattle) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_EXEC_WAIT(N(MakeSun))
@@ -13,7 +13,7 @@ EvtScript N(beforeBattle) = {
     EVT_END
 };
 
-EvtScript N(afterBattle) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
@@ -23,6 +23,6 @@ Stage NAMESPACE = {
     .shape = "flo_bt06_shape",
     .hit = "flo_bt06_hit",
     .bg = "fla_bg",
-    .preBattle = &N(beforeBattle),
-    .postBattle = &N(afterBattle),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
 };
