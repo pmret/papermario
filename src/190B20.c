@@ -2956,11 +2956,11 @@ void reset_all_actor_sounds(Actor* actor) {
 }
 
 void hide_foreground_models_unchecked(void) {
-    Stage* data = gBattleStatus.currentStage;
+    Stage* stage = gBattleStatus.currentStage;
 
-    if (data != NULL && data->foregroundModelList != NULL) {
-        s32* idList = data->foregroundModelList;
-        while (*idList != 0) {
+    if (stage != NULL && stage->foregroundModelList != NULL) {
+        s32* idList = stage->foregroundModelList;
+        while (*idList != STAGE_MODEL_LIST_END) {
             s32 id = *idList++;
             if (id >= 0) {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
@@ -2971,11 +2971,11 @@ void hide_foreground_models_unchecked(void) {
 }
 
 void show_foreground_models_unchecked(void) {
-    Stage* data = gBattleStatus.currentStage;
+    Stage* stage = gBattleStatus.currentStage;
 
-    if (data != NULL && data->foregroundModelList != NULL) {
-        s32* idList = data->foregroundModelList;
-        while (*idList != 0) {
+    if (stage != NULL && stage->foregroundModelList != NULL) {
+        s32* idList = stage->foregroundModelList;
+        while (*idList != STAGE_MODEL_LIST_END) {
             s32 id = *idList++;
             if (id >= 0) {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
@@ -2986,11 +2986,11 @@ void show_foreground_models_unchecked(void) {
 }
 
 void hide_foreground_models(void) {
-    Stage* data = gBattleStatus.currentStage;
+    Stage* stage = gBattleStatus.currentStage;
 
-    if (data != NULL && data->foregroundModelList != NULL) {
-        s32* idList = data->foregroundModelList;
-        while (*idList != 0) {
+    if (stage != NULL && stage->foregroundModelList != NULL) {
+        s32* idList = stage->foregroundModelList;
+        while (*idList != STAGE_MODEL_LIST_END) {
             s32 id = *idList++;
             if (id < 0) {
                 break;
@@ -3004,11 +3004,11 @@ void hide_foreground_models(void) {
 }
 
 void show_foreground_models(void) {
-    Stage* data = gBattleStatus.currentStage;
+    Stage* stage = gBattleStatus.currentStage;
 
-    if (data != NULL && data->foregroundModelList != NULL) {
-        s32* idList = data->foregroundModelList;
-        while (*idList != 0) {
+    if (stage != NULL && stage->foregroundModelList != NULL) {
+        s32* idList = stage->foregroundModelList;
+        while (*idList != STAGE_MODEL_LIST_END) {
             s32 id = *idList++;
             if (id < 0) {
                 break;
@@ -3019,7 +3019,6 @@ void show_foreground_models(void) {
         }
     }
 }
-
 
 #include "common/StartRumbleWithParams.inc.c"
 

@@ -4,6 +4,9 @@
 #include "common.h"
 #include "message_ids.h"
 
+// Terminates foreground model lists
+#define STAGE_MODEL_LIST_END 0
+
 enum BattleAreaIDs {
     BTL_AREA_KMR_1         = 0x00,
     BTL_AREA_KMR_2         = 0x01,

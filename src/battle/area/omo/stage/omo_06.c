@@ -56,7 +56,9 @@ EvtScript N(EVS_PostBattle) = {
 };
 
 s32 N(ForegroundModels)[] = {
-    MODEL_kuruma, MODEL_hosi, 0,
+    MODEL_kuruma,
+    MODEL_hosi,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {

@@ -79,7 +79,13 @@ EvtScript N(EVS_PostBattle) = {
 };
 
 s32 N(ForegroundModels)[] = {
-    -1, MODEL_kuki, MODEL_hana1, MODEL_mae1, MODEL_mae2, MODEL_mae3, 0,
+    -1,
+    MODEL_kuki,
+    MODEL_hana1,
+    MODEL_mae1,
+    MODEL_mae2,
+    MODEL_mae3,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {

@@ -16,7 +16,12 @@ EvtScript N(EVS_PostBattle) = {
 };
 
 s32 N(ForegroundModels)[] = {
-    0x0000000E, 0x0000000F, 0x00000018, 0x00000019, 0x0000001A, 0x00000000,
+    0x0000000E,
+    0x0000000F,
+    0x00000018,
+    0x00000019,
+    0x0000001A,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {
