@@ -108,7 +108,7 @@ def parse_map() -> OrderedDict[str, Symbol]:
             sect = sect_re.search(line)
             if sect:
                 sect_str = sect.group(0)
-                if sect_str in ["(.text)", "(.data)", "(.rodata)", "(.bss)"]:
+                if sect_str in ["(.text*)", "(.data*)", "(.rodata*)", "(.bss*)"]:
                     cur_sect = sect_str
 
             if "load address" in line:
@@ -136,7 +136,7 @@ def parse_map() -> OrderedDict[str, Symbol]:
             elif "/" in fn:
                 cur_file = fn
             else:
-                if cur_sect != "(.text)":
+                if cur_sect != "(.text*)":
                     continue
                 new_sym = Symbol(
                     name=fn,

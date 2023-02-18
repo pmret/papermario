@@ -106,6 +106,9 @@ def main(args):
 
     sizes, vrams = get_func_info()
     total_size = sum(sizes.values())
+    # TODO hack for now since non-jp roms aren't mapped out
+    if args.version != "us":
+        total_size = 3718668
     all_funcs = set(sizes.keys())
 
     nonmatching_funcs = get_nonmatching_funcs()
