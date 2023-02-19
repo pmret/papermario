@@ -8013,4 +8013,9 @@
 #define MSG_Credits_0086 MESSAGE_ID(0x2E, 0x086)
 #define MSG_Credits_0087 MESSAGE_ID(0x2E, 0x087)
 
+// New for iQue
+#define MSG_Credits_0088 MESSAGE_ID(0x2E, 0x088)
+#define MSG_Credits_0089 MESSAGE_ID(0x2E, 0x089)
+#define MSG_Credits_008A MESSAGE_ID(0x2E, 0x08A)
+
 #endif

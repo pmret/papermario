@@ -5,6 +5,7 @@ options:
   compiler: GCC
   mnemonic_ljust: 10
   platform: n64
+  subalign: 8
 
   base_path: ../..
   target_path: ver/cn/baserom.z64
@@ -35,7 +36,6 @@ segments:
     type: code
     start: 0x1000
     vram: 0x80025C00
-    subalign: 8
     subsegments:
     - [0x1000, hasm, bss]
     - [0x1000, hasm, entry_point]
@@ -3232,13 +3232,37 @@ segments:
     start: 0xE378D0
     vram: 0x80240000
   - name: end_00
-    type: bin
+    dir: world/area_end/end_00
+    type: code
     start: 0xE3F430
     vram: 0x80240000
+    subsegments:
+    - [auto, c, end_00_0_header]
+    - [auto, c, end_00_1_main]
+    - [auto, c, end_00_2_credits]
+    - [auto, c, end_00_3_parade_setup]
+    - [auto, c, end_00_4_allies]
+    - [auto, c, end_00_5_koopas]
+    - [auto, c, end_00_6_caravan]
+    - [auto, c, end_00_7_boos]
+    - [auto, c, end_00_8_yoshis]
+    - [auto, c, end_00_9_huff_n_puff]
+    - [auto, c, end_00_A_crystal_king]
+    - [auto, c, end_00_B_bowser]
   - name: end_01
-    type: bin
+    dir: world/area_end/end_01
+    type: code
     start: 0xE4DD90
     vram: 0x80240000
+    subsegments:
+    - [auto, c, end_01_0_header]
+    - [auto, c, end_01_1_main]
+    - [auto, c, end_01_2_credits]
+    - [auto, c, end_01_3_parade_setup]
+    - [auto, c, end_01_4_opera_float]
+    - [auto, c, end_01_5_flower_float]
+    - [auto, c, end_01_6_shyguy_float]
+    - [auto, c, end_01_7_peach_float]
   - name: mgm_00
     type: bin
     start: 0xE57280
