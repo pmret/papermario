@@ -276,9 +276,6 @@ u8* filemenu_get_menu_message(s32 idx) {
     return (u8*)gFileMenuMessages[idx];
 }
 
-#if VERSION_CN
-INCLUDE_ASM(s32, "filemenu/filemenu_msg", filemenu_draw_file_name);
-#else
 void filemenu_draw_file_name(u8* filename, s32 length, s32 x, s32 y, s32 alpha, s32 arg5, s32 arg6, s32 charWidth) {
     s32 i;
 
@@ -286,8 +283,16 @@ void filemenu_draw_file_name(u8* filename, s32 length, s32 x, s32 y, s32 alpha, 
         u32 c = filename[i];
 
         if (c != 0xF7) {
+#if VERSION_CN
+            // Numerals get drawn one pixel lower than other characters
+            if (c >= 16 && c <= 25) {
+                filemenu_draw_message((u8*)c, x + (i * charWidth), y + 1, alpha, arg5, arg6);
+            } else {
+                filemenu_draw_message((u8*)c, x + (i * charWidth), y, alpha, arg5, arg6);
+            }
+#else
             filemenu_draw_message((u8*)c, x + (i * charWidth), y, alpha, arg5, arg6);
+#endif
         }
     }
 }
-#endif
