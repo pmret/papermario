@@ -15,17 +15,17 @@ extern EvtScript N(shakeCam);
 extern EvtScript N(attackBodyCrush);
 
 s32 N(idleAnimations)[] = {
-    STATUS_NORMAL, ANIM_BattleTubba_Anim02,
-    STATUS_STONE, ANIM_BattleTubba_Anim00,
-    STATUS_SLEEP, ANIM_BattleTubba_Anim00,
-    STATUS_POISON, ANIM_BattleTubba_Anim02,
-    STATUS_STOP, ANIM_BattleTubba_Anim00,
-    STATUS_STATIC, ANIM_BattleTubba_Anim00,
-    STATUS_PARALYZE, ANIM_BattleTubba_Anim00,
-    STATUS_PARALYZE, ANIM_BattleTubba_Anim00,
-    STATUS_DIZZY, ANIM_BattleTubba_Anim00,
-    STATUS_DIZZY, ANIM_BattleTubba_Anim00,
-    STATUS_FEAR, ANIM_BattleTubba_Anim00,
+    STATUS_NORMAL,    ANIM_BattleTubba_Anim02,
+    STATUS_STONE,     ANIM_BattleTubba_Anim00,
+    STATUS_SLEEP,     ANIM_BattleTubba_Anim00,
+    STATUS_POISON,    ANIM_BattleTubba_Anim02,
+    STATUS_STOP,      ANIM_BattleTubba_Anim00,
+    STATUS_STATIC,    ANIM_BattleTubba_Anim00,
+    STATUS_PARALYZE,  ANIM_BattleTubba_Anim00,
+    STATUS_PARALYZE,  ANIM_BattleTubba_Anim00,
+    STATUS_DIZZY,     ANIM_BattleTubba_Anim00,
+    STATUS_DIZZY,     ANIM_BattleTubba_Anim00,
+    STATUS_FEAR,      ANIM_BattleTubba_Anim00,
     STATUS_END,
 };
 
@@ -81,7 +81,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 10,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,

@@ -6,7 +6,7 @@
 
 #define NAMESPACE b_area_dgb_tubba_blubba
 
-extern EvtScript N(init_80218D70);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn_80219750);
 extern EvtScript N(idle_80219204);
 extern EvtScript N(handleEvent_80219338);
@@ -15,7 +15,7 @@ extern EvtScript N(80218E60);
 extern EvtScript N(80219D88);
 extern EvtScript N(8021A36C);
 
-s32 N(idleAnimations_80218C10)[] = {
+s32 N(IdleAnims)[] = {
     STATUS_NORMAL,    ANIM_BattleTubba_Anim02,
     STATUS_STONE,     ANIM_BattleTubba_Anim00,
     STATUS_SLEEP,     ANIM_BattleTubba_Anim00,
@@ -30,12 +30,12 @@ s32 N(idleAnimations_80218C10)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_80218C6C)[] = {
-    ELEMENT_NORMAL, 99,
+s32 N(DefenseTable)[] = {
+    ELEMENT_NORMAL,   99,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80218C78)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -60,15 +60,15 @@ s32 N(statusTable_80218C78)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80218D24)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -15, 75 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218C10),
-        .defenseTable = N(defenseTable_80218C6C),
+        .idleAnimations = N(IdleAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -80,10 +80,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_TUBBA_BLUBBA,
     .level = 0,
     .maxHP = 10,
-    .partCount = ARRAY_COUNT(N(partsTable_80218D24)),
-    .partsData = N(partsTable_80218D24),
-    .takeTurnScript = &N(init_80218D70),
-    .statusTable = N(statusTable_80218C78),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
+    .initScript = &N(EVS_Init),
+    .statusTable = N(StatusTable),
     .escapeChance = 15,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -98,7 +98,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 75 },
 };
 
-EvtScript N(init_80218D70) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80219750)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80219204)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219338)))

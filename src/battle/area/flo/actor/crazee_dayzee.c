@@ -6,7 +6,7 @@
 
 #define NAMESPACE b_area_flo_crazee_dayzee
 
-extern EvtScript N(init);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
@@ -64,7 +64,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 8,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(statusTable),
     .escapeChance = 50,
     .airLiftChance = 85,
@@ -93,7 +93,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-EvtScript N(init) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))

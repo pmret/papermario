@@ -3342,6 +3342,15 @@ enum StatusFlags {
     STATUS_FLAG_80000000        = 0x80000000,
 };
 
+#define STATUS_FLAGS_IMMOBILIZED \
+     (STATUS_FLAG_STONE \
+    | STATUS_FLAG_STOP \
+    | STATUS_FLAG_DIZZY \
+    | STATUS_FLAG_PARALYZE \
+    | STATUS_FLAG_FEAR \
+    | STATUS_FLAG_FROZEN \
+    | STATUS_FLAG_SLEEP)
+
 enum DamageTypes {
     DAMAGE_TYPE_FIRE                       = 0x00000002,
     DAMAGE_TYPE_WATER                      = 0x00000004,

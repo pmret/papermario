@@ -7,7 +7,7 @@
 #define NAMESPACE b_area_arn_hyper_cleft
 
 extern s32 N(idleAnimations_80221CD4)[];
-extern EvtScript N(init_80220CAC);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(idle_80221DD0);
 extern EvtScript N(handleEvent_80222140);
 extern EvtScript N(takeTurn_80221A58);
@@ -28,7 +28,7 @@ s32 N(defenseTable_80220B54)[] = {
     ELEMENT_END,
 };
 
-s32 N(statusTable_80220B68)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 40,
@@ -53,7 +53,7 @@ s32 N(statusTable_80220B68)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80220C14)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -73,10 +73,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_HYPER_CLEFT,
     .level = 15,
     .maxHP = 4,
-    .partCount = ARRAY_COUNT(N(partsTable_80220C14)),
-    .partsData = N(partsTable_80220C14),
-    .takeTurnScript = &N(init_80220CAC),
-    .statusTable = N(statusTable_80220B68),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
+    .initScript = &N(EVS_Init),
+    .statusTable = N(StatusTable),
     .escapeChance = 70,
     .airLiftChance = 30,
     .hurricaneChance = 30,
@@ -104,7 +104,7 @@ s32 N(idleAnimations_80220C60)[] = {
     STATUS_END,
 };
 
-EvtScript N(init_80220CAC) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80221DD0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80222140)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80221A58)))

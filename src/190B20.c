@@ -1388,7 +1388,7 @@ void load_partner_actor(void) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor;
-    ActorBlueprint* ActorBlueprint;
+    ActorBlueprint* actorBP;
     Evt* takeTurnScript;
     s32 partCount;
     s32 currentPartner;
@@ -1405,9 +1405,9 @@ void load_partner_actor(void) {
 
     if (currentPartner != PARTNER_NONE) {
         partnerData = &bPartnerDmaTable[currentPartner];
-        ActorBlueprint = partnerData->ActorBlueprint;
+        actorBP = partnerData->ActorBlueprint;
 
-        ASSERT(ActorBlueprint != NULL);
+        ASSERT(actorBP != NULL);
 
         nuPiReadRom(partnerData->dmaStart, partnerData->dmaDest, partnerData->dmaEnd - partnerData->dmaStart);
         if ((gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) || (gGameStatusPtr->demoFlags & 2)) {
@@ -1420,28 +1420,28 @@ void load_partner_actor(void) {
             y = partnerData->y;
             z = -10.0f;
         }
-        partCount = ActorBlueprint->partCount;
+        partCount = actorBP->partCount;
         battleStatus->partnerActor = heap_malloc(sizeof(*partnerActor));
         partnerActor = battleStatus->partnerActor;
 
         ASSERT(partnerActor != NULL);
 
-        ActorBlueprint->level = playerData->partners[playerData->currentPartner].level;
+        actorBP->level = playerData->partners[playerData->currentPartner].level;
         partnerActor->unk_134 = battleStatus->unk_93++;
         partnerActor->footStepCounter = 0;
-        partnerActor->actorBlueprint = ActorBlueprint;
-        partnerActor->actorType = ActorBlueprint->type;
-        partnerActor->flags = ActorBlueprint->flags;
+        partnerActor->actorBlueprint = actorBP;
+        partnerActor->actorType = actorBP->type;
+        partnerActor->flags = actorBP->flags;
         partnerActor->homePos.x = partnerActor->currentPos.x = x;
         partnerActor->homePos.y = partnerActor->currentPos.y = y;
         partnerActor->homePos.z = partnerActor->currentPos.z = z;
         partnerActor->headOffset.x = 0;
         partnerActor->headOffset.y = 0;
         partnerActor->headOffset.z = 0;
-        partnerActor->currentHP = ActorBlueprint->maxHP;
+        partnerActor->currentHP = actorBP->maxHP;
         partnerActor->numParts = partCount;
         partnerActor->idleSource = NULL;
-        partnerActor->takeTurnSource = ActorBlueprint->takeTurnScript;
+        partnerActor->takeTurnSource = actorBP->initScript;
         partnerActor->handleEventSource = NULL;
         partnerActor->handlePhaseSource = NULL;
         partnerActor->idleScript = NULL;
@@ -1464,8 +1464,8 @@ void load_partner_actor(void) {
         partnerActor->scaleModifier.y = 1.0f;
         partnerActor->scaleModifier.z = 1.0f;
         partnerActor->verticalRenderOffset = 0;
-        partnerActor->size.x = ActorBlueprint->size.x;
-        partnerActor->size.y = ActorBlueprint->size.y;
+        partnerActor->size.x = actorBP->size.x;
+        partnerActor->size.y = actorBP->size.y;
         partnerActor->healthBarPosition.x = partnerActor->homePos.x;
         partnerActor->healthBarPosition.y = partnerActor->homePos.y;
         partnerActor->healthBarPosition.z = partnerActor->homePos.z;
@@ -1479,7 +1479,7 @@ void load_partner_actor(void) {
         partnerActor->unk_197 = 0;
         partnerActor->renderMode = RENDER_MODE_ALPHATEST;
         partnerActor->actorID = ACTOR_PARTNER;
-        partnerActor->statusTable = ActorBlueprint->statusTable;
+        partnerActor->statusTable = actorBP->statusTable;
         partnerActor->debuff = 0;
         partnerActor->debuffDuration = 0;
         partnerActor->staticStatus = 0;
@@ -1517,7 +1517,7 @@ void load_partner_actor(void) {
         ASSERT(part != NULL);
 
         for (i = 0; i < partCount; i++) {
-            ActorPartBlueprint* ActorPartBlueprint = &ActorBlueprint->partsData[i];
+            ActorPartBlueprint* ActorPartBlueprint = &actorBP->partsData[i];
             part->decorationTable = NULL;
             part->staticData = ActorPartBlueprint;
 
@@ -1687,7 +1687,7 @@ Actor* create_actor(Formation formation) {
     actor->maxHP = actor->currentHP = formationActor->maxHP;
     actor->numParts = partCount;
     actor->idleSource = NULL;
-    actor->takeTurnSource = formationActor->takeTurnScript;
+    actor->takeTurnSource = formationActor->initScript;
     actor->handleEventSource = NULL;
     actor->handlePhaseSource = NULL;
     actor->idleScript = NULL;

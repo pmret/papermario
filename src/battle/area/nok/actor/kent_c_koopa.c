@@ -198,7 +198,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 70,
     .partCount = ARRAY_COUNT(N(partsTable_80227AB4)),
     .partsData = N(partsTable_80227AB4),
-    .takeTurnScript = &N(init_80227C20),
+    .initScript = &N(init_80227C20),
     .statusTable = N(statusTable_80227A08),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -640,7 +640,7 @@ EvtScript N(shellToss_KentC) = {
                     EVT_RETURN
                 EVT_CASE_DEFAULT
                     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
-                    EVT_IF_NOT_FLAG(LVar0, 0x435D000)
+                    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_TRANSPARENT | STATUS_FLAGS_IMMOBILIZED)
                         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
                         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002B)
                     EVT_END_IF
@@ -653,7 +653,7 @@ EvtScript N(shellToss_KentC) = {
                     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
-                    EVT_IF_NOT_FLAG(LVar3, 0x80000)
+                    EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
                         EVT_ADD(LVar0, 32)
                     EVT_ELSE
                         EVT_ADD(LVar0, 12)
@@ -676,7 +676,7 @@ EvtScript N(shellToss_KentC) = {
             EVT_CALL(MoveBattleCamOver, 50)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
             EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, 0x435D000)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_TRANSPARENT | STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002B)
             EVT_END_IF
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)

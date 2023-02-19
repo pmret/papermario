@@ -27,7 +27,7 @@ API_CALLABLE(N(GiveRefund)) {
             posX = player->currentPos.x;
             posZ = player->currentPos.z;
 
-            make_item_entity(ITEM_COIN, posX, posY, posZ, 0x17, 1 + 3 * i, facingAngleSign, 0);
+            make_item_entity(ITEM_COIN, posX, posY, posZ, ITEM_SPAWN_MODE_TOSS_FADE1, 1 + 3 * i, facingAngleSign, 0);
             add_coins(1);
 
             facingAngleSign += 30.0f;

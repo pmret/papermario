@@ -2680,8 +2680,8 @@ ApiStatus DropStarPoints(Evt* script, s32 isInitialCall) {
         }
 
         for (i = 0; i < numToDrop; i++) {
-            make_item_entity_delayed(ITEM_STAR_POINT, dropper->currentPos.x, dropper->currentPos.y,
-                                     dropper->currentPos.z, spawnMode, i, 0);
+            make_item_entity_delayed(ITEM_STAR_POINT,
+                dropper->currentPos.x, dropper->currentPos.y, dropper->currentPos.z, spawnMode, i, 0);
         }
 
         battleStatus->incrementStarPointDelay = 40;

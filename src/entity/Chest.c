@@ -385,7 +385,9 @@ void entity_GiantChest_give_equipment(Entity* entity) {
         data->itemEntityPos.x = entity->position.x + (sin_rad(angle) * 10.0f);
         data->itemEntityPos.y = entity->position.y;
         data->itemEntityPos.z = entity->position.z + (cos_rad(angle) * 10.0f);
-        data->itemEntityIndex = make_item_entity_nodelay(data->itemID, data->itemEntityPos.x, data->itemEntityPos.y, data->itemEntityPos.z, 1, -1);
+        data->itemEntityIndex = make_item_entity_nodelay(data->itemID,
+            data->itemEntityPos.x, data->itemEntityPos.y, data->itemEntityPos.z,
+            ITEM_SPAWN_MODE_DECORATION, -1);
     }
 
     flagIndex = data->gameFlagIndex;

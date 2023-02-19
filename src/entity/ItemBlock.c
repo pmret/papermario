@@ -67,12 +67,12 @@ void entity_ItemBlock_spawn_item(Entity* entity) {
 
     if (data->item == ITEM_COIN) {
         make_item_entity(ITEM_COIN, entity->position.x, entity->position.y + 28.0, entity->position.z,
-                         ITEM_SPAWN_MODE_ITEM_BLOCK_COIN, 0, facingAngle, data->gameFlagIndex);
+            ITEM_SPAWN_MODE_ITEM_BLOCK_COIN, 0, facingAngle, data->gameFlagIndex);
     } else {
         facingAngle += 360;
         make_item_entity(data->item, entity->position.x, entity->position.y + 20.0, entity->position.z,
-                         (gItemTable[data->item].typeFlags & ITEM_TYPE_FLAG_BADGE) ? ITEM_SPAWN_MODE_ITEM_BLOCK_BADGE : ITEM_SPAWN_MODE_ITEM_BLOCK_ITEM,
-                         0, facingAngle, data->gameFlagIndex);
+            (gItemTable[data->item].typeFlags & ITEM_TYPE_FLAG_BADGE) ? ITEM_SPAWN_MODE_ITEM_BLOCK_BADGE : ITEM_SPAWN_MODE_ITEM_BLOCK_ITEM,
+            0, facingAngle, data->gameFlagIndex);
     }
 
 }

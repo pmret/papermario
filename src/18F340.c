@@ -11,11 +11,12 @@
 extern HudScript HES_Happy;
 extern HudScript HES_HPDrain;
 
-extern EvtScript PlayerCelebrate;
+extern EvtScript EVS_PlayerCelebrate;
 extern EvtScript D_802988F0;
 extern EvtScript D_80298724;
 extern EvtScript D_80298948;
-ApiStatus func_802749F8(Evt* script, s32 isInitialCall);
+
+extern PlayerCelebrationAnimOptions D_80280FC0;
 
 BSS s32 D_8029FB90;
 BSS f32 D_8029FB94;
@@ -26,6 +27,8 @@ BSS s16 D_8029FBA4;
 BSS s32 D_8029FBA8;
 BSS s32 D_8029FBAC;
 BSS s32 D_8029FBB0[3];
+
+API_CALLABLE(func_802749F8);
 
 void func_80260A60(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -39,7 +42,7 @@ void func_80260A60(void) {
     }
 }
 
-ApiStatus IsPartnerImmobile(Evt* script, s32 isInitialCall) {
+API_CALLABLE(IsPartnerImmobile) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     s32 isImmobile = playerActor->debuff == STATUS_FEAR
@@ -57,7 +60,7 @@ ApiStatus IsPartnerImmobile(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus activate_defend_command(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ActivateDefend) {
     ActorPart* actorPart = &gBattleStatus.playerActor->partsTable[0];
 
     deduct_current_move_fp();
@@ -67,7 +70,7 @@ ApiStatus activate_defend_command(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80260B70(Evt* script, s32 isInitialCall) {
+API_CALLABLE(DoesMarioStatusPreventHappyAnimation) {
     Actor* player = gBattleStatus.playerActor;
 
     func_802667F0(2, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
@@ -80,9 +83,7 @@ ApiStatus func_80260B70(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-extern PlayerCelebrationAnimOptions D_80280FC0;
-
-ApiStatus ChoosePlayerCelebrationAnim(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ChoosePlayerCelebrationAnim) {
     PlayerCelebrationAnimOptions* pcao = &D_80280FC0;
     PlayerData* playerData = &gPlayerData;
     s32 temp;
@@ -132,12 +133,12 @@ ApiStatus ChoosePlayerCelebrationAnim(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetFledBattleFlag(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetFledBattleFlag) {
     gBattleStatus.flags1 |= BS_FLAGS1_BATTLE_FLED;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80260DD8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80260DD8) {
     Actor* player = gBattleStatus.playerActor;
     s32 var;
 
@@ -154,20 +155,19 @@ ApiStatus func_80260DD8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80260E38(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80260E38) {
     btl_show_battle_message(BTL_MSG_31, 60);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80260E5C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80260E5C) {
     gBattleStatus.flags1 &= ~BS_FLAGS1_8000;
     gBattleStatus.flags1 &= ~BS_FLAGS1_2000;
     gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
     return ApiStatus_DONE2;
 }
 
-#define NAMESPACE base
-ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GiveRefund) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->moveArgument].sellValue;
@@ -186,7 +186,7 @@ ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
             posX = player->currentPos.x;
             posZ = player->currentPos.z;
 
-            make_item_entity(ITEM_COIN, posX, posY, posZ, 0x17, (i * 3) + 1, facingAngleSign, 0);
+            make_item_entity(ITEM_COIN, posX, posY, posZ, ITEM_SPAWN_MODE_TOSS_FADE1, (i * 3) + 1, facingAngleSign, 0);
             add_coins(1);
             facingAngleSign += 30.0f;
         }
@@ -206,7 +206,7 @@ ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GiveRefundCleanup) {
     s32 sellValue = gItemTable[gBattleStatus.moveArgument].sellValue;
 
     if (player_team_is_ability_active(gBattleStatus.playerActor, ABILITY_REFUND) && sellValue > 0) {
@@ -216,7 +216,7 @@ ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802610CC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802610CC) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(FOG_MODE_1);
         *gBackgroundFogModePtr = FOG_MODE_1;
@@ -231,7 +231,7 @@ ApiStatus func_802610CC(Evt* script, s32 isInitialCall) {
     return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus func_80261164(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80261164) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
         btl_cam_unfreeze();
@@ -248,7 +248,7 @@ ApiStatus func_80261164(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus ConsumeLifeShroom(Evt *script, s32 isInitialCall) {
+API_CALLABLE(ConsumeLifeShroom) {
     PlayerData* playerData = &gPlayerData;
     ItemData* item = &gItemTable[ITEM_LIFE_SHROOM];
 
@@ -263,7 +263,7 @@ ApiStatus ConsumeLifeShroom(Evt *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus RestorePreDefeatState(Evt* script, s32 isInitialCall) {
+API_CALLABLE(RestorePreDefeatState) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
 
@@ -288,7 +288,7 @@ ApiStatus RestorePreDefeatState(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261388(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80261388) {
     s32 partnerActorExists = gBattleStatus.partnerActor != NULL;
 
     script->varTable[0] = FALSE;
@@ -298,12 +298,12 @@ ApiStatus func_80261388(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetItemAsLifeShroom(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetItemAsLifeShroom) {
     gBattleStatus.moveArgument = ITEM_LIFE_SHROOM;
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayBattleMerleeGatherFX(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayBattleMerleeGatherFX) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -313,7 +313,7 @@ ApiStatus PlayBattleMerleeGatherFX(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayBattleMerleeOrbFX(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayBattleMerleeOrbFX) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -323,7 +323,7 @@ ApiStatus PlayBattleMerleeOrbFX(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus BattleMerleeFadeStageToBlack(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BattleMerleeFadeStageToBlack) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(FOG_MODE_1);
         *gBackgroundFogModePtr = FOG_MODE_1;
@@ -341,7 +341,7 @@ ApiStatus BattleMerleeFadeStageToBlack(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus BattleMerleeFadeStageFromBlack(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BattleMerleeFadeStageFromBlack) {
     if (isInitialCall) {
         script->functionTemp[0] = 25;
     }
@@ -357,7 +357,7 @@ ApiStatus BattleMerleeFadeStageFromBlack(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus BattleFadeInMerlee(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BattleFadeInMerlee) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
@@ -374,7 +374,7 @@ ApiStatus BattleFadeInMerlee(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus BattleFadeOutMerlee(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BattleFadeOutMerlee) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
 
     merlee->alpha -= 17;
@@ -386,7 +386,7 @@ ApiStatus BattleFadeOutMerlee(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus BattleMerleeUpdateFX(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BattleMerleeUpdateFX) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
     EnergyOrbWaveFXData* data;
 
@@ -442,12 +442,12 @@ ApiStatus BattleMerleeUpdateFX(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802619B4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802619B4) {
     D_8029FBA4 = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus HasMerleeCastsLeft(Evt* script, s32 isInitialCall) {
+API_CALLABLE(HasMerleeCastsLeft) {
     PlayerData* playerData = &gPlayerData;
 
     script->varTable[0] = FALSE;
@@ -457,7 +457,7 @@ ApiStatus HasMerleeCastsLeft(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802619E8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802619E8) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -484,7 +484,7 @@ ApiStatus func_802619E8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261B40(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80261B40) {
     if (script->varTable[10] > 0) {
         hud_element_free(D_8029FBAC);
     }
@@ -494,7 +494,7 @@ ApiStatus func_80261B40(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus FXRecoverHP(Evt* script, s32 isInitialCall) {
+API_CALLABLE(FXRecoverHP) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -505,7 +505,7 @@ ApiStatus FXRecoverHP(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus FXRecoverFP(Evt* script, s32 isInitialCall) {
+API_CALLABLE(FXRecoverFP) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -516,7 +516,7 @@ ApiStatus FXRecoverFP(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus IncrementPlayerHP(Evt* script, s32 isInitialCall) {
+API_CALLABLE(IncrementPlayerHP) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->curHP++;
@@ -526,7 +526,7 @@ ApiStatus IncrementPlayerHP(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus IncrementPlayerFP(Evt* script, s32 isInitialCall) {
+API_CALLABLE(IncrementPlayerFP) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->curFP++;
@@ -536,13 +536,13 @@ ApiStatus IncrementPlayerFP(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261D98(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80261D98) {
     inflict_status_set_duration(get_actor(script->owner1.actorID), 4, 0, 1);
     btl_update_ko_status();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261DD4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetLostHammerAndBootsLevel) {
     PlayerData* playerData = &gPlayerData;
 
     script->varTable[11] = playerData->bootsLevel;
@@ -550,7 +550,7 @@ ApiStatus func_80261DD4(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261DF4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80261DF4) {
     ItemEntity* item = get_item_entity(script->varTable[10]);
 
     if (isInitialCall) {
@@ -596,7 +596,7 @@ ApiStatus func_80261DF4(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80261FB4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80261FB4) {
     ItemEntity* item = get_item_entity(script->varTable[10]);
     Actor* player = gBattleStatus.playerActor;
     s32 ft1;
@@ -635,7 +635,7 @@ ApiStatus func_80261FB4(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802620F8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802620F8) {
     // TODO get type correct
     s32* temp_v1 = &D_8029FBB0[script->varTable[14]];
 
@@ -657,7 +657,7 @@ EvtScript EVS_Peach_OnActorCreate = {
     EVT_END
 };
 
-EvtScript MarioEnterStage = {
+EvtScript EVS_MarioEnterStage = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_22)
     EVT_CALL(SetBattleCamTarget, -80, 35, 8)
     EVT_CALL(BattleCamTargetActor, ACTOR_PLAYER)
@@ -699,7 +699,7 @@ EvtScript MarioEnterStage = {
     EVT_END
 };
 
-EvtScript PeachEnterStage = {
+EvtScript EVS_PeachEnterStage = {
     EVT_CALL(func_8026BF48, 1)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_22)
     EVT_CALL(SetBattleCamTarget, -80, 35, 8)
@@ -726,49 +726,49 @@ EvtScript PeachEnterStage = {
     EVT_END
 };
 
-EvtScript PlayerScriptDispatcher = {
+EvtScript EVS_Mario_HandlePhase = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
-            EVT_EXEC_WAIT(ExecutePlayerAction)
+            EVT_EXEC_WAIT(EVS_ExecuteMarioAction)
         EVT_CASE_EQ(PHASE_FIRST_STRIKE)
-            EVT_EXEC_WAIT(PlayerFirstStrike)
+            EVT_EXEC_WAIT(EVS_PlayerFirstStrike)
         EVT_CASE_EQ(PHASE_CELEBRATE)
-            EVT_EXEC_WAIT(PlayerCelebrate)
+            EVT_EXEC_WAIT(EVS_PlayerCelebrate)
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
-            EVT_EXEC_WAIT(RunAwayStart)
+            EVT_EXEC_WAIT(EVS_RunAwayStart)
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
-            EVT_EXEC_WAIT(RunAwayFail)
+            EVT_EXEC_WAIT(EVS_RunAwayFail)
         EVT_CASE_EQ(PHASE_RUN_AWAY_RESET)
-            EVT_EXEC_WAIT(RunAwayReset)
+            EVT_EXEC_WAIT(EVS_RunAwayReset)
         EVT_CASE_EQ(PHASE_USE_LIFE_SHROOM)
-            EVT_EXEC_WAIT(UseLifeShroom)
+            EVT_EXEC_WAIT(EVS_UseLifeShroom)
         EVT_CASE_EQ(PHASE_USE_DEFEND)
-            EVT_EXEC_WAIT(StartDefend)
+            EVT_EXEC_WAIT(EVS_StartDefend)
         EVT_CASE_EQ(PHASE_MERLEE_ATTACK_BONUS)
-            EVT_EXEC_WAIT(MerleeAttackBonus)
+            EVT_EXEC_WAIT(EVS_MerleeAttackBonus)
         EVT_CASE_EQ(PHASE_MERLEE_DEFENSE_BONUS)
-            EVT_EXEC_WAIT(MerleeDefenseBonus)
+            EVT_EXEC_WAIT(EVS_MerleeDefenseBonus)
         EVT_CASE_EQ(PHASE_MERLEE_EXP_BONUS)
-            EVT_EXEC_WAIT(MerleeExpBonus)
+            EVT_EXEC_WAIT(EVS_MerleeExpBonus)
         EVT_CASE_EQ(PHASE_PLAYER_HAPPY)
-            EVT_EXEC_WAIT(PlayerHappy)
+            EVT_EXEC_WAIT(EVS_PlayerHappy)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript PeachScriptDispatcher = {
+EvtScript EVS_Peach_HandlePhase = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
-            EVT_EXEC_WAIT(ExecutePeachAction)
+            EVT_EXEC_WAIT(EVS_ExecutePeachAction)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript ExecutePlayerAction = {
+EvtScript EVS_ExecuteMarioAction = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -792,7 +792,7 @@ EvtScript ExecutePlayerAction = {
     EVT_END
 };
 
-EvtScript ExecutePeachAction = {
+EvtScript EVS_ExecutePeachAction = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
@@ -805,7 +805,7 @@ EvtScript ExecutePeachAction = {
     EVT_END
 };
 
-EvtScript PlayerFirstStrike = {
+EvtScript EVS_PlayerFirstStrike = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
@@ -822,13 +822,13 @@ EvtScript PlayerFirstStrike = {
     EVT_END
 };
 
-EvtScript StartDefend = {
-    EVT_CALL(activate_defend_command)
+EvtScript EVS_StartDefend = {
+    EVT_CALL(ActivateDefend)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript HandleEvent_Player = {
+EvtScript EVS_Player_HandleEvent = {
     EVT_CALL(GetLastEvent, ACTOR_PLAYER, LVarF)
     EVT_SWITCH(LVarF)
         EVT_CASE_NE(EVENT_32)
@@ -951,8 +951,8 @@ EvtScript HandleEvent_Player = {
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_LUCKY)
-            EVT_CALL(func_80260B70)
-            EVT_IF_EQ(LVar0, 0)
+            EVT_CALL(DoesMarioStatusPreventHappyAnimation)
+            EVT_IF_EQ(LVar0, FALSE)
                 EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30009)
                 EVT_WAIT(30)
                 EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
@@ -1036,7 +1036,7 @@ EvtScript HandleEvent_Player = {
     EVT_END
 };
 
-EvtScript PlayerCelebrate = {
+EvtScript EVS_PlayerCelebrate = {
     EVT_SET(LVar0, 0)
     EVT_LOOP(5)
         EVT_ADD(LVar0, 72)
@@ -1050,7 +1050,7 @@ EvtScript PlayerCelebrate = {
     EVT_END
 };
 
-EvtScript D_80286228 = {
+EvtScript EVS_RunAwayNoCommand = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_50000)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_15D)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
@@ -1146,11 +1146,11 @@ EvtScript D_80286228 = {
     EVT_END
 };
 
-EvtScript RunAwayStart = {
+EvtScript EVS_RunAwayStart = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(GetActionCommandMode, LVar2)
     EVT_IF_EQ(LVar2, ACTION_COMMAND_MODE_NOT_LEARNED)
-        EVT_EXEC_WAIT(D_80286228)
+        EVT_EXEC_WAIT(EVS_RunAwayNoCommand)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
         EVT_RETURN
     EVT_END_IF
@@ -1260,7 +1260,7 @@ EvtScript RunAwayStart = {
     EVT_END
 };
 
-EvtScript RunAwayFail = {
+EvtScript EVS_RunAwayFail = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
@@ -1273,7 +1273,7 @@ EvtScript RunAwayFail = {
     EVT_END
 };
 
-EvtScript RunAwayReset = {
+EvtScript EVS_RunAwayReset = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30002)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_24)
@@ -1338,10 +1338,10 @@ EvtScript D_80287404 = {
         EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
         EVT_SET(LVarA, LVar0)
-        EVT_CALL(base_GiveRefund)
+        EVT_CALL(GiveRefund)
         EVT_WAIT(LVar0)
         EVT_WAIT(15)
-        EVT_CALL(base_GiveRefundCleanup)
+        EVT_CALL(GiveRefundCleanup)
         EVT_CALL(RemoveItemEntity, LVarA)
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1374,10 +1374,10 @@ EvtScript D_80287708 = {
     EVT_ADD(LVar1, 45)
     EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
     EVT_SET(LVarE, LVar0)
-    EVT_CALL(base_GiveRefund)
+    EVT_CALL(GiveRefund)
     EVT_WAIT(LVar0)
     EVT_WAIT(15)
-    EVT_CALL(base_GiveRefundCleanup)
+    EVT_CALL(GiveRefundCleanup)
     EVT_CALL(RemoveItemEntity, LVarE)
     EVT_RETURN
     EVT_END
@@ -1395,7 +1395,7 @@ EvtScript D_80287834 = {
     EVT_END
 };
 
-EvtScript PlayEatFX = {
+EvtScript EVS_PlayEatFX = {
     EVT_THREAD
         EVT_LOOP(4)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
@@ -1408,7 +1408,7 @@ EvtScript PlayEatFX = {
     EVT_END
 };
 
-EvtScript PlayDrinkFX = {
+EvtScript EVS_PlayDrinkFX = {
     EVT_THREAD
         EVT_LOOP(4)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
@@ -1421,7 +1421,7 @@ EvtScript PlayDrinkFX = {
     EVT_END
 };
 
-EvtScript UseLifeShroom = {
+EvtScript EVS_UseLifeShroom = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CHILD_THREAD
         EVT_CALL(func_80261388)
@@ -1460,11 +1460,11 @@ EvtScript UseLifeShroom = {
     EVT_SET(LVar4, LVar1)
     EVT_SET(LVar5, LVar2)
     EVT_CALL(SetItemAsLifeShroom)
-    EVT_CALL(base_GiveRefund)
+    EVT_CALL(GiveRefund)
     EVT_IF_GT(LVar0, 0)
         EVT_WAIT(LVar0)
         EVT_WAIT(15)
-        EVT_CALL(base_GiveRefundCleanup)
+        EVT_CALL(GiveRefundCleanup)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_372)
     EVT_ADD(LVar4, 15)
@@ -1562,7 +1562,7 @@ EvtScript UseLifeShroom = {
     EVT_END
 };
 
-EvtScript MerleeRunOut = {
+EvtScript EVS_MerleeRunOut = {
     EVT_CALL(HasMerleeCastsLeft)
     EVT_IF_EQ(LVar0, 1)
         EVT_RETURN
@@ -1574,7 +1574,7 @@ EvtScript MerleeRunOut = {
     EVT_END
 };
 
-EvtScript MerleeAttackBonus = {
+EvtScript EVS_MerleeAttackBonus = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(BattleMerleeFadeStageToBlack)
     EVT_WAIT(10)
@@ -1584,9 +1584,9 @@ EvtScript MerleeAttackBonus = {
     EVT_CALL(SetBattleCamZoom, 246)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(10)
-    EVT_CALL(CreateNpc, -10, ANIM_BattleMerlee_Gather)
+    EVT_CALL(CreateNpc, NPC_BTL_MERLEE, ANIM_BattleMerlee_Gather)
     EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    EVT_CALL(SetNpcRenderMode, -10, 34)
+    EVT_CALL(SetNpcRenderMode, NPC_BTL_MERLEE, 34)
     EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, 0, 65, 20)
     EVT_CHILD_THREAD
         EVT_CALL(BattleMerleeUpdateFX)
@@ -1601,7 +1601,7 @@ EvtScript MerleeAttackBonus = {
     EVT_WAIT(20)
     EVT_CHILD_THREAD
         EVT_CALL(BattleFadeOutMerlee)
-        EVT_CALL(DeleteNpc, -10)
+        EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_CHILD_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1618,12 +1618,12 @@ EvtScript MerleeAttackBonus = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Mario_10002)
     EVT_CALL(ShowMessageBox, 0, 60)
     EVT_CALL(WaitForMessageBoxDone)
-    EVT_EXEC_WAIT(MerleeRunOut)
+    EVT_EXEC_WAIT(EVS_MerleeRunOut)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript MerleeDefenseBonus = {
+EvtScript EVS_MerleeDefenseBonus = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(BattleMerleeFadeStageToBlack)
     EVT_WAIT(10)
@@ -1633,9 +1633,9 @@ EvtScript MerleeDefenseBonus = {
     EVT_CALL(SetBattleCamZoom, 246)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(10)
-    EVT_CALL(CreateNpc, -10, ANIM_BattleMerlee_Gather)
+    EVT_CALL(CreateNpc, NPC_BTL_MERLEE, ANIM_BattleMerlee_Gather)
     EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    EVT_CALL(SetNpcRenderMode, -10, 34)
+    EVT_CALL(SetNpcRenderMode, NPC_BTL_MERLEE, 34)
     EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, 0, 65, 20)
     EVT_CHILD_THREAD
         EVT_CALL(BattleMerleeUpdateFX)
@@ -1650,7 +1650,7 @@ EvtScript MerleeDefenseBonus = {
     EVT_WAIT(20)
     EVT_CHILD_THREAD
         EVT_CALL(BattleFadeOutMerlee)
-        EVT_CALL(DeleteNpc, -10)
+        EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_CHILD_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1658,7 +1658,7 @@ EvtScript MerleeDefenseBonus = {
     EVT_CALL(PlayBattleMerleeOrbFX, LVar0, LVar1, LVar2)
     EVT_WAIT(15)
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
-    EVT_IF_FLAG(LVar0, 0x0035D000)
+    EVT_IF_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
         EVT_WAIT(22)
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1672,12 +1672,12 @@ EvtScript MerleeDefenseBonus = {
     EVT_END_IF
     EVT_CALL(ShowMessageBox, 1, 60)
     EVT_CALL(WaitForMessageBoxDone)
-    EVT_EXEC_WAIT(MerleeRunOut)
+    EVT_EXEC_WAIT(EVS_MerleeRunOut)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript MerleeExpBonus = {
+EvtScript EVS_MerleeExpBonus = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(BattleMerleeFadeStageToBlack)
     EVT_WAIT(10)
@@ -1687,9 +1687,9 @@ EvtScript MerleeExpBonus = {
     EVT_CALL(SetBattleCamZoom, 246)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(10)
-    EVT_CALL(CreateNpc, -10, ANIM_BattleMerlee_Gather)
+    EVT_CALL(CreateNpc, NPC_BTL_MERLEE, ANIM_BattleMerlee_Gather)
     EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    EVT_CALL(SetNpcRenderMode, -10, 34)
+    EVT_CALL(SetNpcRenderMode, NPC_BTL_MERLEE, 34)
     EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, 0, 65, 20)
     EVT_CHILD_THREAD
         EVT_CALL(BattleMerleeUpdateFX)
@@ -1704,7 +1704,7 @@ EvtScript MerleeExpBonus = {
     EVT_WAIT(20)
     EVT_CHILD_THREAD
         EVT_CALL(BattleFadeOutMerlee)
-        EVT_CALL(DeleteNpc, -10)
+        EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_CHILD_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1721,12 +1721,12 @@ EvtScript MerleeExpBonus = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Mario_10002)
     EVT_CALL(ShowMessageBox, 2, 60)
     EVT_CALL(WaitForMessageBoxDone)
-    EVT_EXEC_WAIT(MerleeRunOut)
+    EVT_EXEC_WAIT(EVS_MerleeRunOut)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript PlayerHappy = {
+EvtScript EVS_PlayerHappy = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(UseBattleCamPresetWait, BTL_CAM_PRESET_C)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_ThumbsUp)
@@ -1780,7 +1780,7 @@ EvtScript PlayerHappy = {
     EVT_END
 };
 
-EvtScript DoDizzyAttack = {
+EvtScript EVS_ApplyDizzyAttack = {
     EVT_SET(LVar0, 0)
     EVT_LOOP(40)
         EVT_ADD(LVar0, 72)
@@ -1794,14 +1794,14 @@ EvtScript DoDizzyAttack = {
 };
 
 
-EvtScript RegainAbility = {
+EvtScript EVS_PlayerRegainAbility = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVarF, LVar1, LVar2)
     EVT_LOOP(LVar0)
         EVT_ADD(LVarF, 3)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(func_80261DD4)
+    EVT_CALL(GetLostHammerAndBootsLevel)
     EVT_SWITCH(LVarA)
         EVT_CASE_EQ(2)
             EVT_SET(LVarE, 0)

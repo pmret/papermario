@@ -1,5 +1,6 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/dgb_bt02_shape.h"
 
 #define NAMESPACE b_area_dgb_dgb_02
 
