@@ -306,7 +306,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         clear_saved_variables();
                         //TODO hardcoded area/map IDs
                         gGameStatusPtr->areaID = 0;
-                        gGameStatusPtr->mapID = 11;
+                        gGameStatusPtr->mapID = 6;
                         gGameStatusPtr->entryID = 0;
                         evt_set_variable(NULL, GB_StoryProgress, STORY_INTRO);
 
