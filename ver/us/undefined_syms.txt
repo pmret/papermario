@@ -4,7 +4,7 @@ gMapShapeData = 0x80210000; // needs to be hard-coded atm due to pointers in sha
 
 heap_battleHead = gFrameBuf2;
 
-D_804DC500 = 0x804DC500;
+overlays_start = 0x802DC500;
 
 fx_sun_undeclared = fx_sun;
 

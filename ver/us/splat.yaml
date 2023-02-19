@@ -380,7 +380,7 @@ segments:
     type: code
     start: 0x759B0
     vram: 0x800DC500
-    vram_of_symbol: D_804DC500
+    vram_of_symbol: overlays_start
     #follows_vram: main
     subsegments:
     - [0x759B0, hasm, bss2]

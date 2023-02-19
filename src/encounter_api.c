@@ -18,19 +18,24 @@ ApiStatus SetEncounterStatusFlags(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus IsStartingConversation(Evt* script, s32 isInitialCall) {
-    Bytecode arg1 = *script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
+    s32 outVar = *args++;
 
-    evt_set_variable(script, arg1, is_starting_conversation());
+    evt_set_variable(script, outVar, is_starting_conversation());
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80044238(Evt* script, s32 isInitialCall) {
-    func_80072BCC(evt_get_variable(script, *script->ptrReadPos));
+    Bytecode* args = script->ptrReadPos;
+
+    func_80072BCC(evt_get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
 ApiStatus LoadDemoBattle(Evt* script, s32 isInitialCall) {
-    load_demo_battle(evt_get_variable(script, *script->ptrReadPos));
+    Bytecode* args = script->ptrReadPos;
+
+    load_demo_battle(evt_get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
@@ -144,22 +149,30 @@ ApiStatus RemoveEncounter(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus GetBattleOutcome(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, gCurrentEncounter.battleOutcome);
+    Bytecode* args = script->ptrReadPos;
+
+    evt_set_variable(script, *args++, gCurrentEncounter.battleOutcome);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_800445A8(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, script->owner1.enemy->unk_C4);
+    Bytecode* args = script->ptrReadPos;
+
+    evt_set_variable(script, *args++, script->owner1.enemy->unk_C4);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_800445D4(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, script->owner1.enemy->unk_C8);
+    Bytecode* args = script->ptrReadPos;
+
+    evt_set_variable(script, *args++, script->owner1.enemy->unk_C8);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetOwnerEncounterTrigger(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, script->owner1.enemy->encountered);
+    Bytecode* args = script->ptrReadPos;
+
+    evt_set_variable(script, *args++, script->owner1.enemy->encountered);
     return ApiStatus_DONE2;
 }
 
@@ -243,14 +256,17 @@ ApiStatus StartBattle(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus StartBattleWith(Evt* script, s32 isInitialCall) {
-    start_battle(script, evt_get_variable(script, *script->ptrReadPos));
+    Bytecode* args = script->ptrReadPos;
+
+    start_battle(script, evt_get_variable(script, *args++));
     return ApiStatus_DONE1;
 }
 
 ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     Enemy* enemy = script->owner1.enemy;
-    s32 songID = evt_get_variable(script, *script->ptrReadPos);
+    s32 songID = evt_get_variable(script, *args++);
     Encounter* encounter;
     s32 i;
 
@@ -306,7 +322,8 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetBattleMusic(Evt* script, s32 isInitialCall) {
-    Bytecode songID = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    Bytecode songID = evt_get_variable(script, *args++);
     EncounterStatus* currentEncounter = &gCurrentEncounter;
 
     currentEncounter->allowFleeing = TRUE;
@@ -689,7 +706,8 @@ ApiStatus SetSelfRotation(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetSelfEnemyFlags(Evt* script, s32 isInitialCall) {
-    script->owner1.enemy->flags = *script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
+    script->owner1.enemy->flags = *args++;
     return ApiStatus_DONE2;
 }
 
@@ -698,7 +716,7 @@ ApiStatus SetSelfEnemyFlagBits(Evt* script, s32 isInitialCall) {
     Enemy* owner = script->owner1.enemy;
     s32 bits = *args++;
     s32 mode = evt_get_variable(script, *args++);
-    
+
     if (mode) {
         owner->flags |= bits;
     } else {
@@ -769,20 +787,24 @@ ApiStatus func_8004572C(Evt* script, s32 isInitialCall) {
 ApiStatus GetSelfAnimationFromTable(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->owner1.enemy;
+    s32 animIdx = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, *args++, owner->animList[evt_get_variable(script, *args++)]);
+    evt_set_variable(script, *args++, owner->animList[animIdx]);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80045798(Evt* script, s32 isInitialCall) {
-    gPartnerActionStatus.unk_358 = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    gPartnerActionStatus.unk_358 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetOwnerInstigatorValue(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
 
-    enemy->instigatorValue = evt_get_variable(script, *script->ptrReadPos);
+    enemy->instigatorValue = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -792,7 +814,9 @@ ApiStatus SetBattleAsScripted(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus GetEncounterTriggerHitTier(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, gCurrentEncounter.hitTier);
+    Bytecode* args = script->ptrReadPos;
+
+    evt_set_variable(script, *args++, gCurrentEncounter.hitTier);
     return ApiStatus_DONE2;
 }
 
@@ -812,7 +836,9 @@ ApiStatus func_80045838(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_800458CC(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, script->owner1.enemy->npcSettings->actionFlags & AI_ACTION_08);
+    Bytecode* args = script->ptrReadPos;
+
+    evt_set_variable(script, *args++, script->owner1.enemy->npcSettings->actionFlags & AI_ACTION_08);
     return ApiStatus_DONE2;
 }
 

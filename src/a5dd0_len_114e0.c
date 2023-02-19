@@ -11,8 +11,9 @@
 extern Addr MapTextureMemory;
 
 #ifdef SHIFT
+extern Addr WorldEntityHeapBottom;
 extern Addr WorldEntityHeapBase;
-#define WORLD_ENTITY_HEAP_BOTTOM 0x80650000 // TODO shiftability (used only for munchlesia, hacky as hell)
+#define WORLD_ENTITY_HEAP_BOTTOM (s32) WorldEntityHeapBottom
 #define WORLD_ENTITY_HEAP_BASE (s32) WorldEntityHeapBase
 // TODO this only refers to one of 3 overlays which happen to share the same address space
 // but don't necessarily have to
@@ -1890,7 +1891,7 @@ void clear_entity_data(s32 arg0) {
         gEntityHeapBottom = WORLD_ENTITY_HEAP_BOTTOM;
         gEntityHeapBase = WORLD_ENTITY_HEAP_BASE;
     } else {
-        gEntityHeapBottom = (s32)BattleEntityHeapBottom;
+        gEntityHeapBottom = (s32) BattleEntityHeapBottom;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
 
@@ -1917,7 +1918,7 @@ void init_entity_data(void) {
         for (i = 0; i < 4; i++) {
             bEntityBlueprint[i] = 0;
         }
-        gEntityHeapBottom = (s32)BattleEntityHeapBottom;
+        gEntityHeapBottom = (s32) BattleEntityHeapBottom;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
     gCurrentEntityListPtr = get_entity_list();

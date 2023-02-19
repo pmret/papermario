@@ -113,7 +113,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc",
         description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cc} {cflags} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -DOLD_GCC $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cc} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -835,9 +835,6 @@ if __name__ == "__main__":
 
     if args.shift:
         cppflags += " -DSHIFT"
-
-    if not args.modern_gcc:
-        cppflags += " -DOLD_GCC"
 
     if not args.no_warn:
         cflags += " -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
