@@ -500,7 +500,34 @@ segments:
     - [0x1AB940, .data, pause_styles]
     - [0x1ac100]
 
-  - [0x1ac100, bin]
+  - type: code
+    dir: filemenu
+    start: 0x1AC100
+    vram: 0x80242ba0
+    follows_vram: ui_images
+    subsegments:
+      - [0x1AC100, c, filemenu_common]
+      - [0x1AE190, c, filemenu_main]
+      - [0x1B0270, c, filemenu_yesno]
+      - [0x1B1290, c, filemenu_info]
+      - [0x1B16F0, c, filemenu_createfile]
+      - [0x1B2900, c, filemenu_msg]
+      - [0x1B34C0, .data, filemenu_common]
+      - [0x1B3760, .data, filemenu_main]
+      - [0x1B3A00, .data, filemenu_yesno]
+      - [0x1B3A70, .data, filemenu_info]
+      - [0x1B3AC0, .data, filemenu_createfile]
+      - start: 0x1B3B40
+        type: .data
+        name: filemenu_gfx
+        subsegments:
+          - [0x1B3B40, ia4, copyarrow, 64, 16]
+          - [0x1B3D40, rgba32, corners_yellow, 16, 64]
+          - [0x1B4D40, ia8, corners_gray, 16, 32]
+          - [0x1B4F40, .data, filemenu_gfx]
+      - [0x1B5070, .data, filemenu_msg]
+      - [0x1B5380, .data, filemenu_styles]
+      - [0x1b59a0]
 
   - name: battle_code
     type: code

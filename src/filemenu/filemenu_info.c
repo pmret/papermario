@@ -39,6 +39,9 @@ MenuPanel filemenu_info_menuBP = {
     .fpCleanup = &filemenu_info_cleanup
 };
 
+#if VERSION_CN
+INCLUDE_ASM(void, "filemenu/filemenu_info", filemenu_info_draw_message_contents)
+#else
 void filemenu_info_draw_message_contents(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -71,6 +74,7 @@ void filemenu_info_draw_message_contents(
     }
     filemenu_set_cursor_alpha(0);
 }
+#endif
 
 void filemenu_info_init(MenuPanel* tab) {
     s32 i;

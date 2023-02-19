@@ -6,7 +6,7 @@
 #include "sprite.h"
 #include "model.h"
 
-#if VERSION_JP || VERSION_CN
+#if VERSION_JP
 // TODO: split the filemenu segment
 extern Addr filemenu_ROM_START;
 extern Addr filemenu_ROM_END;
