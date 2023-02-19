@@ -1,5 +1,6 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/nok_bt04_shape.h"
 
 #define NAMESPACE b_area_nok_nok_04
 
@@ -15,11 +16,11 @@ EvtScript N(EVS_PostBattle) = {
 };
 
 s32 N(ForegroundModels)[] = {
-    0x0000001B,
-    0x0000001A,
-    0x0000001D,
-    0x0000001C,
-    0x00000019,
+    MODEL_ueki2,
+    MODEL_ueki1,
+    MODEL_kabu2,
+    MODEL_kabu1,
+    MODEL_kusa3,
     STAGE_MODEL_LIST_END
 };
 

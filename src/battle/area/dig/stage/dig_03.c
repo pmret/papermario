@@ -53,7 +53,7 @@ s32 N(ForegroundModels)[] = {
     MODEL_o321,
     MODEL_o320,
     MODEL_o319,
-    0,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {

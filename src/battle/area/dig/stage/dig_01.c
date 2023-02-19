@@ -21,7 +21,7 @@ s32 N(ForegroundModels)[] = {
     MODEL_kabu2,
     MODEL_kabu1,
     MODEL_kusa3,
-    0,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {

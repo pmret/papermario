@@ -10,19 +10,19 @@ EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_THREAD
         EVT_SET(LVar0, 44)
-        EVT_EXEC(N(script2))
+        EVT_EXEC(N(EVS_AnimateWaveModel))
         EVT_WAIT(5)
         EVT_SET(LVar0, 47)
-        EVT_EXEC(N(script2))
+        EVT_EXEC(N(EVS_AnimateWaveModel))
         EVT_WAIT(5)
         EVT_SET(LVar0, 46)
-        EVT_EXEC(N(script2))
+        EVT_EXEC(N(EVS_AnimateWaveModel))
         EVT_WAIT(5)
         EVT_SET(LVar0, 45)
-        EVT_EXEC(N(script2))
+        EVT_EXEC(N(EVS_AnimateWaveModel))
     EVT_END_THREAD
     EVT_SET(LVar0, 40)
-    EVT_EXEC(N(script1))
+    EVT_EXEC(N(EVS_AnimateFishModel))
     EVT_RETURN
     EVT_END
 };

@@ -1,41 +1,42 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/nok_bt01_shape.h"
 
 #define NAMESPACE b_area_nok_nok_01
 
-EvtScript N(8022B5F0) = {
+EvtScript N(EVS_AnimateFlower) = {
     EVT_SET(LVarA, LVar0)
     EVT_LABEL(0)
-    EVT_CALL(TranslateModel, LVarA, 0, 2, 0)
-    EVT_WAIT(5)
-    EVT_CALL(TranslateModel, LVarA, 0, 0, 0)
-    EVT_WAIT(5)
-    EVT_CALL(TranslateModel, LVarA, 0, 2, 0)
-    EVT_WAIT(5)
-    EVT_CALL(TranslateModel, LVarA, 0, 0, 0)
-    EVT_WAIT(5)
-    EVT_CALL(RandInt, 30, LVar0)
-    EVT_ADD(LVar0, 30)
-    EVT_WAIT(LVar0)
-    EVT_GOTO(0)
+        EVT_CALL(TranslateModel, LVarA, 0, 2, 0)
+        EVT_WAIT(5)
+        EVT_CALL(TranslateModel, LVarA, 0, 0, 0)
+        EVT_WAIT(5)
+        EVT_CALL(TranslateModel, LVarA, 0, 2, 0)
+        EVT_WAIT(5)
+        EVT_CALL(TranslateModel, LVarA, 0, 0, 0)
+        EVT_WAIT(5)
+        EVT_CALL(RandInt, 30, LVar0)
+        EVT_ADD(LVar0, 30)
+        EVT_WAIT(LVar0)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SET(LVar0, 19)
-    EVT_EXEC(N(8022B5F0))
-    EVT_SET(LVar0, 20)
-    EVT_EXEC(N(8022B5F0))
-    EVT_SET(LVar0, 21)
-    EVT_EXEC(N(8022B5F0))
-    EVT_SET(LVar0, 22)
-    EVT_EXEC(N(8022B5F0))
-    EVT_SET(LVar0, 23)
-    EVT_EXEC(N(8022B5F0))
-    EVT_SET(LVar0, 24)
-    EVT_EXEC(N(8022B5F0))
+    EVT_SET(LVar0, MODEL_h1)
+    EVT_EXEC(N(EVS_AnimateFlower))
+    EVT_SET(LVar0, MODEL_h2)
+    EVT_EXEC(N(EVS_AnimateFlower))
+    EVT_SET(LVar0, MODEL_h3)
+    EVT_EXEC(N(EVS_AnimateFlower))
+    EVT_SET(LVar0, MODEL_h5)
+    EVT_EXEC(N(EVS_AnimateFlower))
+    EVT_SET(LVar0, MODEL_h7)
+    EVT_EXEC(N(EVS_AnimateFlower))
+    EVT_SET(LVar0, MODEL_h8)
+    EVT_EXEC(N(EVS_AnimateFlower))
     EVT_RETURN
     EVT_END
 };
@@ -46,9 +47,9 @@ EvtScript N(EVS_PostBattle) = {
 };
 
 s32 N(ForegroundModels)[] = {
-    0x0000001E,
-    0x0000001D,
-    0x0000001C,
+    MODEL_ha3,
+    MODEL_hap,
+    MODEL_kusa3,
     STAGE_MODEL_LIST_END
 };
 

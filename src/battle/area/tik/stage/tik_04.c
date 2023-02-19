@@ -10,13 +10,13 @@ EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_THREAD
         EVT_SET(LVar0, 15)
-        EVT_EXEC(N(script2))
+        EVT_EXEC(N(EVS_AnimateWaveModel))
         EVT_WAIT(5)
         EVT_SET(LVar0, 16)
-        EVT_EXEC(N(script2))
+        EVT_EXEC(N(EVS_AnimateWaveModel))
         EVT_WAIT(5)
         EVT_SET(LVar0, 17)
-        EVT_EXEC(N(script2))
+        EVT_EXEC(N(EVS_AnimateWaveModel))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(5)

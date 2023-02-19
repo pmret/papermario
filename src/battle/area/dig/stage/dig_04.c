@@ -34,7 +34,7 @@ s32 N(ForegroundModels)[] = {
     MODEL_itigo,
     MODEL_kisya,
     MODEL_kusari,
-    0,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {

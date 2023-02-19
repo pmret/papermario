@@ -99,7 +99,7 @@ API_CALLABLE(N(UnkFloatFunc005)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(script1) = {
+EvtScript N(EVS_AnimateFishModel) = {
     EVT_SET(LVarA, LVar0)
     EVT_LABEL(0)
     EVT_CALL(N(UnkFloatFunc005), 0)
@@ -193,7 +193,7 @@ EvtScript N(script1) = {
     EVT_END
 };
 
-EvtScript N(script2) = {
+EvtScript N(EVS_AnimateWaveModel) = {
     EVT_SET(LVarA, LVar0)
     EVT_LOOP(0)
         EVT_CALL(TranslateModel, LVarA, 1, 0, 0)
