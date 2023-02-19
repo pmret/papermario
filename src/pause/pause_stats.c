@@ -92,6 +92,9 @@ MenuPanel gPausePanelStats = {
     .fpCleanup = &pause_stats_cleanup
 };
 
+#if VERSION_CN
+INCLUDE_ASM(void, "pause/pause_stats", pause_stats_draw_contents);
+#else
 void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     StatsEntryData* statsEntryData;
     PlayerData* playerData;
@@ -484,6 +487,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         pause_set_cursor_pos(0x1F, baseX + entry->cursorX, baseY + entry->cursorY);
     }
 }
+#endif
 
 void pause_stats_init(MenuPanel* panel) {
     s32 i;

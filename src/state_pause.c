@@ -6,7 +6,7 @@
 #include "sprite.h"
 #include "model.h"
 
-#if VERSION_JP || VERSION_CN
+#if VERSION_JP
 // TODO: split this segment
 extern Addr pause_ROM_START;
 extern Addr pause_ROM_END;

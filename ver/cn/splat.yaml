@@ -436,6 +436,72 @@ segments:
 
   - [0x10e120, bin]
 
+  - name: ui_images
+    type: bin
+    start: 0x0000000000179fc0
+    vram: 0x8023E000
+
+  - type: code
+    dir: pause
+    start: 0x0017eb60
+    vram: 0x80242ba0
+    subsegments:
+    - [0x17eb60, c, pause_main]
+    - [0x180B50, c, pause_tabs]
+    - [0x181940, c, pause_stats]
+    - [0x182FB0, c, pause_badges]
+    - [0x185780, c, pause_items]
+    - [0x186DB0, c, pause_partners]
+    - [0x1889D0, c, pause_spirits]
+    - [0x189900, c, pause_map]
+    - [0x18AE50, c, pause_gfx]
+    - [0x18AF30, .data, pause_main]
+    - [0x18B180, .data, pause_tabs]
+    - [0x18B300, .data, pause_stats]
+    - [0x18B4A0, .data, pause_badges]
+    - [0x18B540, .data, pause_items]
+    - [0x18B5D0, .data, pause_partners]
+    - [0x18B880, .data, pause_spirits]
+    - [0x18BA00, .data, pause_map]
+    - start: 0x18C680
+      type: .data
+      name: pause_gfx
+      subsegments:
+      - [0x18C680, ia8,        image_1439F0, 16, 32]
+      - [0x18C880, ia8,        image_143BF0, 16, 64]
+      - [0x18CC80, ia8,        image_143FF0, 16, 64]
+      - [0x18D080, ci8,        world_map, 320, 320]
+      - [0x1A6080, palette,    world_map]
+      - [0x1A6280, ci4,        spirits_bg, 128, 110]
+      - [0x1A7E00, palette,    spirits_bg]
+      - [0x1A8000, rgba16,     orbs, 8, 32]
+      - [0x1A8200, ia8,        map_location, 16, 16]
+      - [0x1A8300, ia8,        map_path_marker, 16, 16]
+      - [0x1A8400, ia4,        map_arrows, 16, 64]
+      - [0x1A8600, ci4,        banner_hp, 64, 16]
+      - [0x1A8800, palette,    banner_hp]
+      - [0x1A8A00, ci4,        banner_fp, 64, 16]
+      - [0x1A8C00, palette,    banner_fp]
+      - [0x1A8E00, ci4,        banner_bp, 64, 16]
+      - [0x1A9000, palette,    banner_bp]
+      - [0x1A9200, ci4,        banner_boots, 48, 16]
+      - [0x1A9380, palette,    banner_boots]
+      - [0x1A9580, ci4,        banner_hammer, 48, 16]
+      - [0x1A9700, palette,    banner_hammer]
+      - [0x1A9900, ci4,        banner_star_energy, 48, 16]
+      - [0x1A9A80, palette,    banner_star_energy]
+      - [0x1A9C80, ci4,        available, 64, 16]
+      - [0x1A9E80, palette,    available]
+      - [0x1AA080, ci4,        prompt_check_abilities, 128, 18]
+      - [0x1AA500, palette,    prompt_check_abilities]
+      - [0x1AA700, ci4,        stats_bar, 160, 8]
+      - [0x1AA980, palette,    stats_bar]
+      - [0x1AAB80, .data,      pause_gfx]
+    - [0x1AB940, .data, pause_styles]
+    - [0x1ac100]
+
+  - [0x1ac100, bin]
+
   - name: battle_code
     type: code
     start: 0x1b59a0
@@ -3195,5 +3261,246 @@ segments:
     vram: 0x80240000
 
   - [ 0xE68B50, bin ]
-  
+
+  - start: 0x19E67B8
+    align: 8
+    type: pm_npc_sprites
+    dir: sprite
+    name: npc
+    files:
+      - WorldGoombario
+      - WorldKooper
+      - WorldBombette
+      - WorldParakarry
+      - WorldBow
+      - WorldWatt
+      - WorldSushie
+      - WorldLakilester
+      - BattleGoombario
+      - BattleKooper
+      - BattleBombette
+      - BattleParakarry
+      - BattleBow
+      - BattleWatt
+      - BattleSushie
+      - BattleLakilester
+      - KooperWithoutShell
+      - WorldEldstar
+      - WorldMamar
+      - WorldSkolar
+      - WorldMuskular
+      - WorldMisstar
+      - WorldKlevar
+      - WorldKalmar
+      - BattleEldstar
+      - BattleMamar
+      - BattleSkolar
+      - BattleMuskular
+      - BattleMisstar
+      - BattleKlevar
+      - BattleKalmar
+      - Twink
+      - JrTroopa
+      - SpikedJrTroopa
+      - SpikedParaJrTroopa
+      - MageJrTroopa
+      - ParaJrTroopa
+      - Goomba
+      - SpikedGoomba
+      - Paragoomba
+      - KoopaTroopa
+      - ParaTroopa
+      - Fuzzy
+      - Bobomb
+      - BulletBill
+      - BillBlaster
+      - MontyMole
+      - Cleft
+      - Pokey
+      - Bandit
+      - BuzzyBeetle
+      - Swooper
+      - StoneChomp
+      - LargePiranha
+      - SmallPiranha
+      - Sentinel
+      - WorldClubba
+      - BattleClubba
+      - ShyGuy
+      - GrooveGuy
+      - SkyGuy
+      - PyroGuy
+      - SpyGuy
+      - MediGuy
+      - Fuzzipede
+      - SpearGuy
+      - HeartPlant
+      - HurtPlant
+      - MBush
+      - LavaBubble
+      - KentCKoopa
+      - Dayzee
+      - Lakitu
+      - Spiny
+      - Bzzap
+      - RuffPuff
+      - SpikeTop
+      - Duplighost
+      - AlbinoDino
+      - Blooper
+      - BabyBlooper
+      - Gulpit
+      - DryBones
+      - ThrownBone
+      - BonyBeetle
+      - Magikoopa
+      - FlyingMagikoopa
+      - WorldKoopatrol
+      - Koopatrol
+      - HammerBros
+      - BushBasic
+      - BushBlocky
+      - BushDry
+      - BushLeafy
+      - BushMatted
+      - WorldKammy
+      - BattleKammy
+      - GoombaBros
+      - GoombaKing
+      - SpikyGoomnut
+      - DarkToad
+      - KoopaBros
+      - Buzzar
+      - Tutankoopa
+      - ChainChomp
+      - WorldTubba
+      - BattleTubba
+      - TubbasHeart
+      - BigLanternGhost
+      - ShySquadGuy
+      - MarshalGuy
+      - StiltGuy
+      - StiltGuyUnfold
+      - ShyStackGuy
+      - ShyStackUnfold
+      - ShyStackDamage
+      - ShyStackRock
+      - GeneralGuy
+      - GeneralGuyBomb
+      - TankGuy
+      - LavaPiranha
+      - PetitPiranha
+      - LavaBud
+      - HuffNPuff
+      - TuffPuff
+      - Monstar
+      - CrystalKing
+      - WorldBowser
+      - BattleBowser
+      - Luigi
+      - Toad
+      - Toadette
+      - VannaT
+      - ToadKid
+      - ToadGuard
+      - HarryT
+      - ToadMinister
+      - Postmaster
+      - ConductorToad
+      - TrainToad
+      - Fishmael
+      - Musician
+      - Koopa
+      - KoopaWithoutShell
+      - WorldBobomb
+      - Whacka
+      - Dryite
+      - Mouser
+      - Boo
+      - Yoshi
+      - YoshiKid
+      - Raven
+      - Bubulb
+      - Penguin
+      - ShiverToad
+      - AltBandit
+      - Goompa
+      - Goombaria
+      - Gooma
+      - Goompapa
+      - Goomama
+      - TheMaster
+      - Chan
+      - Lee
+      - Merlon
+      - ChetRippo
+      - Rowf
+      - MinhT
+      - RussT
+      - TayceT
+      - FiceT
+      - Bartender
+      - Chanterelle
+      - RipCheato
+      - ChuckQuizmo
+      - Merluvlee
+      - Merlar
+      - Merlow
+      - StarMan
+      - KoloradoWife
+      - KoopaKoot
+      - Kolorado
+      - BattleKolorado
+      - Archeologist
+      - Nomadimouse
+      - WorldMerlee
+      - BattleMerlee
+      - DisguisedMoustafa
+      - Moustafa
+      - Oaklie
+      - Bootler
+      - Yakkey
+      - GourmetGuy
+      - VillageLeader
+      - LeadersFriend
+      - RaphaelRaven
+      - Tolielup
+      - GateFlower
+      - Petunia
+      - Posie
+      - Lily
+      - Rosie
+      - Sun
+      - Lakilulu
+      - Ninji
+      - MayorPenguin
+      - MayorPenguinWife
+      - PenguinPatrol
+      - Herringway
+      - Merle
+      - StarRod
+      - Fire
+      - Coin
+      - ParadePeach
+      - ParadeKoopas
+      - ParadeBurntBowser
+      - ParadeLuigi
+      - ParadePartner
+      - ParadeYoshi
+      - ParadeKolorado
+      - ParadeChick
+      - ParadeIceShow
+      - ParadeToad
+      - ParadeTwirler
+      - ParadeDrummer
+      - ParadeBanner
+      - ParadeHorn
+      - ParadeTubba
+      - ParadeWizard
+      - ParadeMario
+      - ParadeShyGuy
+      - ParadeTwink
+      - Leaf
+  - [0x1B82208, bin] # end of sprite data - todo: figure out what this is
+
   - [0x2800000]
