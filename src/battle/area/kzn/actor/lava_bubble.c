@@ -116,7 +116,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 9,
     .partCount = ARRAY_COUNT(N(partsTable_80218EE8)),
     .partsData = N(partsTable_80218EE8),
-    .takeTurnScript = &N(init_8021901C),
+    .initScript = &N(init_8021901C),
     .statusTable = N(statusTable_80218E3C),
     .escapeChance = 50,
     .airLiftChance = 90,
@@ -177,7 +177,7 @@ EvtScript N(init_8021901C) = {
 
 EvtScript N(idle_802191E4) = {
     EVT_LABEL(0)
-    EVT_CALL(MakeLerp, 0, 10, 25, 10)
+    EVT_CALL(MakeLerp, 0, 10, 25, EASING_COS_IN_OUT)
     EVT_LABEL(1)
     EVT_CALL(UpdateLerp)
     EVT_CALL(GetHomePos, ACTOR_SELF, LVar2, LVar3, LVar4)
@@ -196,7 +196,7 @@ EvtScript N(idle_802191E4) = {
         EVT_END_IF
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(MakeLerp, 10, 0, 25, 10)
+    EVT_CALL(MakeLerp, 10, 0, 25, EASING_COS_IN_OUT)
     EVT_LABEL(2)
     EVT_CALL(UpdateLerp)
     EVT_CALL(GetHomePos, ACTOR_SELF, LVar2, LVar3, LVar4)
@@ -229,7 +229,7 @@ EvtScript N(80219464) = {
     EVT_THREAD
         EVT_CALL(N(UnkSfxFunc))
     EVT_END_THREAD
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, 11)
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, EASING_SIN_OUT)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim01)
     EVT_RETURN
     EVT_END
@@ -357,7 +357,7 @@ EvtScript N(fireTackle) = {
     EVT_THREAD
         EVT_CALL(N(UnkSfxFunc))
     EVT_END_THREAD
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, 11)
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, EASING_SIN_OUT)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim01)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -387,7 +387,7 @@ EvtScript N(fireTackle) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 3, FALSE, TRUE, FALSE)
             EVT_WAIT(14)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_EXEC_WAIT(N(80219464))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -434,12 +434,12 @@ EvtScript N(8021A074) = {
                 EVT_CALL(SetPartScale, ACTOR_SELF, LVar6, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
             EVT_END_IF
             EVT_CALL(SetPartPos, ACTOR_SELF, LVar6, LVar0, LVar1, LVar2)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar6, ACTOR_PART_FLAG_INVISIBLE, 0)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar6, ACTOR_PART_FLAG_INVISIBLE, FALSE)
             EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, LVar6, EVT_FLOAT(8.0))
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, LVar6, EVT_FLOAT(0.01))
-            EVT_CALL(SetPartSounds, ACTOR_SELF, LVar6, 2, 720, 0)
-            EVT_CALL(JumpPartTo, ACTOR_SELF, LVar6, LVar3, LVar4, LVar5, 0, 0)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar6, ACTOR_PART_FLAG_INVISIBLE, 1)
+            EVT_CALL(SetPartSounds, ACTOR_SELF, LVar6, ACTOR_SOUND_JUMP, 720, 0)
+            EVT_CALL(JumpPartTo, ACTOR_SELF, LVar6, LVar3, LVar4, LVar5, 0, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar6, ACTOR_PART_FLAG_INVISIBLE, TRUE)
         EVT_END_THREAD
         EVT_WAIT(3)
         EVT_ADD(LVar6, 1)
@@ -480,7 +480,7 @@ EvtScript N(fireballs_Partner) = {
     EVT_THREAD
         EVT_CALL(N(UnkSfxFunc))
     EVT_END_THREAD
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -4, 11)
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -4, EASING_SIN_OUT)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim01)
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim05)
@@ -505,7 +505,7 @@ EvtScript N(fireballs_Partner) = {
             EVT_END_IF
             EVT_WAIT(20)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_EXEC_WAIT(N(80219464))
             EVT_WAIT(20)
@@ -556,14 +556,14 @@ EvtScript N(fireballs_Player) = {
     EVT_THREAD
         EVT_CALL(N(UnkSfxFunc))
     EVT_END_THREAD
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -4, 11)
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -4, EASING_SIN_OUT)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_WAIT(10)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0, 0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2CF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
@@ -571,7 +571,7 @@ EvtScript N(fireballs_Player) = {
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
-            EVT_CALL(ResetActorSounds, ACTOR_SELF, 2)
+            EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2EF)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -580,13 +580,13 @@ EvtScript N(fireballs_Player) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBubble_Anim04)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 4)
+            EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_QUADRATIC_OUT)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(30)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_EXEC_WAIT(N(80219464))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -597,7 +597,7 @@ EvtScript N(fireballs_Player) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_WAIT(5)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2CF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
@@ -605,7 +605,7 @@ EvtScript N(fireballs_Player) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
-    EVT_CALL(ResetActorSounds, ACTOR_SELF, 2)
+    EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarB, LVar1)
     EVT_SET(LVarC, LVar2)
@@ -615,7 +615,7 @@ EvtScript N(fireballs_Player) = {
     EVT_ADD(LVar2, 2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 4)
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_QUADRATIC_OUT)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_FIRE, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
@@ -623,7 +623,7 @@ EvtScript N(fireballs_Player) = {
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
+            EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
             EVT_WAIT(20)
             EVT_EXEC_WAIT(N(80219464))
         EVT_END_CASE_GROUP

@@ -503,7 +503,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -660,10 +660,10 @@ EvtScript N(runAwayFail) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Run)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
     EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
     EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Idle)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(N(WattFXSetEffect), 0)
     EVT_RETURN
@@ -676,8 +676,8 @@ EvtScript N(nextTurn) = {
 };
 
 EvtScript N(executeAction) = {
-    EVT_CALL(ShowActionHud, 1)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
+    EVT_CALL(ShowActionHud, TRUE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(8)
@@ -707,9 +707,9 @@ EvtScript N(executeAction) = {
 EvtScript N(returnHome2) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Run)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, 10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Idle)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -717,9 +717,9 @@ EvtScript N(returnHome2) = {
 EvtScript N(returnHome) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Run)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, 10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Idle)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -727,14 +727,14 @@ EvtScript N(returnHome) = {
 EffectInstance* N(radialShimmer) = NULL;
 
 EvtScript N(dashToTarget) = {
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Run)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 0, 0)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 0, EASING_LINEAR)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(charge) = {
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Strain)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
     EVT_CALL(N(WattFXDisable))
     EVT_CALL(PlayLoopingSoundAtActor, ACTOR_PARTNER, 0, SOUND_289)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -742,7 +742,7 @@ EvtScript N(charge) = {
     EVT_CALL(N(ElectroDashFX), LVar0, LVar1, LVar2)
     EVT_CALL(N(UnkBackgroundFunc3))
     EVT_SET(LVar9, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_StrainBigger)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
     EVT_LOOP(55)
         EVT_ADD(LVar9, 30)
         EVT_IF_GT(LVar9, 200)
@@ -897,11 +897,11 @@ EvtScript N(electroDash) = {
     EVT_CALL(N(ElectroDashFXDisable))
     EVT_CALL(StopLoopingSoundAtActor, ACTOR_PARTNER, 0)
     EVT_CALL(func_80269EAC, 19)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Strain)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
     EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 10)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -5, 0, 0)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 5, 0, 0)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 5, 0, EASING_LINEAR)
     EVT_THREAD
         EVT_WAIT(2)
         EVT_CALL(N(SetBackgroundAlpha), 0)
@@ -910,16 +910,16 @@ EvtScript N(electroDash) = {
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_THREAD
             EVT_WAIT(5)
-            EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Idle)
+            EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
         EVT_END_THREAD
         EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
         EVT_CALL(AddGoalPos, ACTOR_PARTNER, 40, 10, 0)
-        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, -20, 4)
+        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, -20, EASING_QUADRATIC_OUT)
         EVT_WAIT(20)
         EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Run)
-        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, 10)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Idle)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
+        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(N(WattFXEnable))
@@ -973,11 +973,11 @@ EvtScript N(powerShock) = {
     EVT_CALL(MoveBattleCamOver, 40)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Run)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
     EVT_CALL(N(WattFXSetEffect), 1)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -15, -10, 0)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, 10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Idle)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
     EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_10)
     EVT_CALL(AddBattleCamZoom, -100)
     EVT_CALL(MoveBattleCamOver, 80)
@@ -987,10 +987,10 @@ EvtScript N(powerShock) = {
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 15)
     EVT_ADD(LVar2, 5)
-    EVT_CALL(PlayEffect, EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 75, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 75, 0)
     EVT_CALL(N(UnkBackgroundFunc3))
     EVT_SET(LVar9, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_StrainBigger)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
     EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 10)
     EVT_THREAD
         EVT_LOOP(75)
@@ -1011,7 +1011,7 @@ EvtScript N(powerShock) = {
         EVT_END_LOOP
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 8)
-        EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 6, LVar0, LVar1, LVar2, EVT_FLOAT(1.8), 30, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 6, LVar0, LVar1, LVar2, EVT_FLOAT(1.8), 30, 0)
     EVT_END_THREAD
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
@@ -1042,7 +1042,7 @@ EvtScript N(powerShock) = {
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Idle)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
     EVT_END_THREAD
     EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
@@ -1061,10 +1061,10 @@ EvtScript N(powerShock) = {
     EVT_CALL(PartnerYieldTurn)
     EVT_IF_NE(LocalFlag(15), 1)
         EVT_CALL(AddGoalPos, ACTOR_PARTNER, -25, 10, 0)
-        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, -10, 10)
+        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, -10, EASING_COS_IN_OUT)
     EVT_ELSE
         EVT_CALL(AddGoalPos, ACTOR_PARTNER, -25, -10, 0)
-        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, -10, 10)
+        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, -10, EASING_COS_IN_OUT)
     EVT_END_IF
     EVT_WAIT(30)
     EVT_SWITCH(LVar0)
@@ -1085,7 +1085,7 @@ EvtScript N(8023AE8C) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
     EVT_CALL(action_command_water_block_init, 1)
     EVT_CALL(SetActionHudPrepareTime, 0)
-    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, 1)
+    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, TRUE)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GotItem)
     EVT_WAIT(5)
@@ -1112,12 +1112,12 @@ EvtScript N(8023AE8C) = {
     EVT_CALL(func_8024ECF8, 0, 0, 1)
     EVT_THREAD
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 1)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Strain)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
         EVT_CALL(N(TurboChargeUnwindWatt), 0)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Run)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
         EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, -10, 5)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Idle)
+        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, -10, EASING_CUBIC_OUT)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
         EVT_WAIT(10)
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 0)
     EVT_END_THREAD
@@ -1153,15 +1153,15 @@ EvtScript N(8023AE8C) = {
         EVT_ADD(LVar0, 15)
         EVT_ADD(LVar1, 35)
         EVT_ADD(LVarF, 0)
-        EVT_CALL(PlayEffect, EFFECT_STAT_CHANGE, LVarF, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 60, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_STAT_CHANGE, LVarF, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 60, 0)
         EVT_WAIT(4)
     EVT_END_IF
     EVT_IF_EQ(LVar0, 0)
     EVT_ELSE
-        EVT_CALL(ShowVariableMessageBox, 42, 60, LVarA)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_2A, 60, LVarA)
     EVT_END_IF
     EVT_CALL(WaitForMessageBoxDone)
-    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, 0)
+    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -1195,12 +1195,12 @@ EvtScript N(8023B450) = {
     EVT_CALL(func_8024ECF8, 0, 0, 1)
     EVT_THREAD
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 1)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Strain)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
         EVT_CALL(N(TurboChargeUnwindWatt), 1)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Run)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
         EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, -10, 5)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Idle)
+        EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, -10, EASING_CUBIC_OUT)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
         EVT_WAIT(10)
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 0)
     EVT_END_THREAD
@@ -1224,15 +1224,15 @@ EvtScript N(8023B450) = {
         EVT_ADD(LVar0, 15)
         EVT_ADD(LVar1, 35)
         EVT_ADD(LVarF, 0)
-        EVT_CALL(PlayEffect, EFFECT_STAT_CHANGE, LVarF, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 60, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_STAT_CHANGE, LVarF, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 60, 0)
         EVT_WAIT(4)
     EVT_END_IF
     EVT_IF_EQ(LVar0, 0)
     EVT_ELSE
-        EVT_CALL(ShowVariableMessageBox, 42, 60, LVarA)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_2A, 60, LVarA)
     EVT_END_IF
     EVT_CALL(WaitForMessageBoxDone)
-    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, 0)
+    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -1263,10 +1263,10 @@ EvtScript N(megaShock) = {
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 40)
     EVT_ADD(LVar1, 30)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Run)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 0, 10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Idle)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 0, EASING_COS_IN_OUT)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
     EVT_CALL(N(UnkBackgroundFunc3))
     EVT_SET(LVar9, 0)
     EVT_THREAD
@@ -1281,14 +1281,14 @@ EvtScript N(megaShock) = {
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 15)
     EVT_ADD(LVar2, 5)
-    EVT_CALL(PlayEffect, EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 90, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 90, 0)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 12)
-    EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 8, LVar0, LVar1, LVar2, EVT_FLOAT(1.3), 90, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 8, LVar0, LVar1, LVar2, EVT_FLOAT(1.3), 90, 0)
     EVT_CALL(AddBattleCamZoom, -100)
     EVT_CALL(MoveBattleCamOver, 90)
     EVT_CALL(func_8024ECF8, 0, 0, 1)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_StrainBigger)
+    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
     EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 10)
     EVT_CALL(N(WattFXDisable))
     EVT_CALL(GetActionResult, LVar1)
@@ -1308,17 +1308,17 @@ EvtScript N(megaShock) = {
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 12)
         EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_28C)
-        EVT_CALL(PlayEffect, EFFECT_FLASHING_BOX_SHOCKWAVE, 2, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_FLASHING_BOX_SHOCKWAVE, 2, LVar0, LVar1, LVar2, 0, 0, 0)
         EVT_WAIT(10)
         EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2024)
-        EVT_CALL(PlayEffect, EFFECT_FLASHING_BOX_SHOCKWAVE, 2, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_FLASHING_BOX_SHOCKWAVE, 2, LVar0, LVar1, LVar2, 0, 0, 0)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBiggest)
         EVT_WAIT(5)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Strain)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
         EVT_WAIT(30)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1,  ANIM_BattleWatt_Idle)
+        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetBattleCamZoom, 420)
@@ -1352,7 +1352,7 @@ EvtScript N(megaShock) = {
             EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, DMG_STATUS_ALWAYS(STATUS_FLAG_PARALYZE, 3), LVarF, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
         EVT_END_IF
         EVT_LABEL(11)
-        EVT_CALL(ChooseNextTarget, 0, LVar0)
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
         EVT_IF_EQ(LVar0, -1)
             EVT_BREAK_LOOP
         EVT_END_IF

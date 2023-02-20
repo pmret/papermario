@@ -197,23 +197,23 @@ ApiStatus EnableTexPanning(Evt* script, s32 isInitialCall) {
 ApiStatus EnableModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 modelIndex = get_model_list_index_from_tree_index(evt_get_variable(script, *args++));
-    Bytecode flag = evt_get_variable(script, *args++);
+    Bytecode enabled = evt_get_variable(script, *args++);
     Model* model = get_model_from_list_index(modelIndex);
 
-    if (flag != 0) {
-        model->flags &= ~MODEL_FLAG_ENABLED;
+    if (enabled) {
+        model->flags &= ~MODEL_FLAG_HIDDEN;
     } else {
-        model->flags |= MODEL_FLAG_ENABLED;
+        model->flags |= MODEL_FLAG_HIDDEN;
     }
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetGroupEnabled(Evt* script, s32 isInitialCall) {
+ApiStatus SetGroupVisibility(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode var1 = evt_get_variable(script, *args++);
-    Bytecode var2 = evt_get_variable(script, *args++);
+    Bytecode groupModelID = evt_get_variable(script, *args++);
+    Bytecode enabled = evt_get_variable(script, *args++);
 
-    set_model_flags(var1, MODEL_FLAG_ENABLED, var2);
+    set_model_group_visibility(groupModelID, MODEL_FLAG_HIDDEN, enabled);
     return ApiStatus_DONE2;
 }
 
@@ -483,9 +483,9 @@ ApiStatus EnableGroup(Evt* script, s32 isInitialCall) {
     for (index = transformGroup->minChildModelIndex; index <= transformGroup->maxChildModelIndex; index++) {
         Model* model = get_model_from_list_index(index);
         if (flagUnset) {
-            model->flags &= ~MODEL_FLAG_ENABLED;
+            model->flags &= ~MODEL_FLAG_HIDDEN;
         } else {
-            model->flags |= MODEL_FLAG_ENABLED;
+            model->flags |= MODEL_FLAG_HIDDEN;
         }
     }
 

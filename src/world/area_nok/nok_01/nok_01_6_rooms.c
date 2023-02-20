@@ -179,9 +179,9 @@ EvtScript N(EVS_DropDoor_BeachHouse) = {
 EvtScript N(EVS_RoomListener_ToadHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_g111, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_g111, MODEL_GROUP_VISIBLE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_g111, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g111, MODEL_GROUP_HIDDEN)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -190,10 +190,10 @@ EvtScript N(EVS_RoomListener_ToadHouse) = {
 EvtScript N(EVS_RoomListener_Shop) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_g114, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_g114, MODEL_GROUP_VISIBLE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_g114, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g114, MODEL_GROUP_HIDDEN)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -202,7 +202,7 @@ EvtScript N(EVS_RoomListener_Shop) = {
 EvtScript N(EVS_RoomListener_BeachHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_g79, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_g79, MODEL_GROUP_VISIBLE)
             EVT_CALL(N(SetRadioVolumeMax), AB_NOK_0)
             EVT_EXEC(N(EVS_80242C38))
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
@@ -211,7 +211,7 @@ EvtScript N(EVS_RoomListener_BeachHouse) = {
             EVT_CALL(N(SetRadioVolumeMute), AB_NOK_0)
             EVT_EXEC(N(EVS_80242DE0))
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_g79, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g79, MODEL_GROUP_HIDDEN)
             EVT_CALL(N(func_80242898_9C7C78))
     EVT_END_SWITCH
     EVT_RETURN

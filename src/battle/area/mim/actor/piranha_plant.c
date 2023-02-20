@@ -86,7 +86,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 5,
     .partCount = ARRAY_COUNT(N(partsTable_8021D44C)),
     .partsData = N(partsTable_8021D44C),
-    .takeTurnScript = &N(init_8021D498),
+    .initScript = &N(init_8021D498),
     .statusTable = N(statusTable_8021D3A0),
     .escapeChance = 70,
     .airLiftChance = 20,
@@ -118,7 +118,7 @@ EvtScript N(idle_8021D4E4) = {
 EvtScript N(8021D4F4) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim04)
     EVT_WAIT(10)
@@ -128,7 +128,7 @@ EvtScript N(8021D4F4) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim03)
     EVT_WAIT(10)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 0)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -203,7 +203,7 @@ EvtScript N(handleEvent_8021D60C) = {
                     EVT_ADD(LVar0, 0)
                     EVT_ADD(LVar1, 35)
                 EVT_END_IF
-                EVT_CALL(PlayEffect, EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 20, 0)
                 EVT_WAIT(20)
             EVT_END_THREAD
             EVT_LOOP(40)
@@ -232,7 +232,7 @@ EvtScript N(handleEvent_8021D60C) = {
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim04)
-            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
+            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
             EVT_WAIT(8)
             EVT_CALL(func_8027D32C, ACTOR_SELF)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -262,7 +262,7 @@ EvtScript N(takeTurn_8021DCD4) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim04)
-        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
+        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(func_8024ECF8, -1, 1, 0)
@@ -277,7 +277,7 @@ EvtScript N(takeTurn_8021DCD4) = {
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim04)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_WAIT(8)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -300,13 +300,13 @@ EvtScript N(takeTurn_8021DCD4) = {
     EVT_END_IF
     EVT_SET(LVar1, 0)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0, 0)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, FALSE, FALSE)
     EVT_LABEL(123)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 0)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim03)
     EVT_WAIT(8)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim05)

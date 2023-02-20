@@ -110,7 +110,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 12,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 60,
     .airLiftChance = 50,
@@ -288,7 +288,7 @@ EvtScript N(attack_lick) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_EXEC_WAIT(N(returnHome))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -354,14 +354,14 @@ EvtScript N(attack_rock) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim0A)
             EVT_SET(LVarA, 3)
     EVT_END_SWITCH
-    EVT_CALL(SetPartSounds, ACTOR_SELF, LVarA, 2, 985, 0)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, LVarA, ACTOR_SOUND_JUMP, 985, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVar9, LVar0)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, 0)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, FALSE)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 20)
             EVT_ADD(LVar2, 2)
@@ -371,14 +371,14 @@ EvtScript N(attack_rock) = {
             EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, LVarA, EVT_FLOAT(14.0))
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, LVarA, EVT_FLOAT(0.01))
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(JumpPartTo, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2, 0, 1)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, 1)
+            EVT_CALL(JumpPartTo, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2, 0, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_IF_EQ(LVar9, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_EXEC_WAIT(N(returnHome))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -386,7 +386,7 @@ EvtScript N(attack_rock) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, 0)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_ADD(LVar2, 2)
@@ -395,7 +395,7 @@ EvtScript N(attack_rock) = {
     EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, LVarA, EVT_FLOAT(14.0))
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, LVarA, EVT_FLOAT(0.01))
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpPartTo, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2, 0, 1)
+    EVT_CALL(JumpPartTo, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2, 0, TRUE)
     EVT_SWITCH(LVarA)
         EVT_CASE_EQ(2)
             EVT_WAIT(2)
@@ -412,8 +412,8 @@ EvtScript N(attack_rock) = {
             EVT_CALL(GetPartOffset, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, -100)
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, LVarA, EVT_FLOAT(1.0))
-            EVT_CALL(JumpPartTo, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2, 25, 1)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, 1)
+            EVT_CALL(JumpPartTo, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2, 25, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_WAIT(10)
             EVT_CALL(YieldTurn)
             EVT_EXEC_WAIT(N(returnHome))
@@ -437,7 +437,7 @@ EvtScript N(takeTurn) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(LVarA, 0)
-    EVT_CALL(EnemyCreateTargetList, 65538)
+    EVT_CALL(EnemyCreateTargetList, 0x00010002)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -453,7 +453,7 @@ EvtScript N(takeTurn) = {
                 EVT_SET(LVarD, LVar0)
         EVT_END_SWITCH
     EVT_END_IF
-    EVT_CALL(ChooseNextTarget, 0, LVar0)
+    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF

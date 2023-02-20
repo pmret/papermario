@@ -20,7 +20,7 @@ EvtScript N(EVS_SetWallRot_ToadHouse) = {
 EvtScript N(EVS_RoomListener_ToadHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_kino_in, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_kino_in, MODEL_GROUP_VISIBLE)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o767, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
             // do nothing
@@ -33,7 +33,7 @@ EvtScript N(EVS_RoomListener_ToadHouse) = {
             EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_kino_in, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_kino_in, MODEL_GROUP_HIDDEN)
             EVT_CALL(EnableModel, MODEL_o422, TRUE)
             EVT_CALL(EnableModel, MODEL_o424, TRUE)
     EVT_END_SWITCH
@@ -42,7 +42,7 @@ EvtScript N(EVS_RoomListener_ToadHouse) = {
 };
 
 EvtScript N(EVS_SetWallsDown_ToadHouse) = {
-    EVT_CALL(SetGroupEnabled, MODEL_kino_in, 1)
+    EVT_CALL(SetGroupVisibility, MODEL_kino_in, MODEL_GROUP_VISIBLE)
     EVT_CALL(RotateModel, MODEL_k_k_1, 180, 0, 1, 0)
     EVT_CALL(RotateModel, MODEL_k_k_2, 180, 0, 1, 0)
     EVT_CALL(RotateModel, MODEL_k_k_3, 180, 0, 1, 0)
@@ -85,7 +85,7 @@ EvtScript N(EVS_SetupToadHouse) = {
     EVT_CALL(RotateModel, MODEL_o320, 180, 0, 1, 0)
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_NE(LVar0, kmr_02_ENTRY_5)
-        EVT_CALL(SetGroupEnabled, MODEL_kino_in, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_kino_in, MODEL_GROUP_HIDDEN)
     EVT_END_IF
     // toad house
     EVT_CALL(CreateMapRoom,

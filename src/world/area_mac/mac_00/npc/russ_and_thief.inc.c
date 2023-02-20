@@ -193,7 +193,7 @@ EvtScript N(EVS_ShyGuy_StealDictionary) = {
     EVT_CALL(ShowMessageAtScreenPos, MSG_MAC_Gate_0009, 160, 40)
     EVT_EXEC(N(EVS_ManageCarriedDictionary))
     EVT_THREAD
-        EVT_CALL(SetGroupEnabled, MODEL_intel_inn, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_intel_inn, MODEL_GROUP_VISIBLE)
         EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
         EVT_SET(LVar0, 0)
         EVT_LOOP(10)
@@ -207,7 +207,7 @@ EvtScript N(EVS_ShyGuy_StealDictionary) = {
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
-        EVT_CALL(SetGroupEnabled, MODEL_intel_inn, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_intel_inn, MODEL_GROUP_HIDDEN)
     EVT_END_THREAD
     EVT_WAIT(5)
     EVT_CALL(SetNpcSpeed, NPC_ShyGuyThief, 10)

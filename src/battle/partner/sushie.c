@@ -446,7 +446,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -594,8 +594,8 @@ EvtScript N(nextTurn) = {
 };
 
 EvtScript N(executeAction) = {
-    EVT_CALL(ShowActionHud, 1)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
+    EVT_CALL(ShowActionHud, TRUE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(8)
@@ -680,7 +680,7 @@ EvtScript N(restoreFromSquirt2) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, 10)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
     EVT_RETURN
     EVT_END
@@ -691,7 +691,7 @@ EvtScript N(restoreFromSquirt) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, 10)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
     EVT_RETURN
     EVT_END
@@ -990,7 +990,7 @@ EvtScript N(squirt) = {
         EVT_ADD(LVar1, 11)
         EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar3, LVar4, LVar5)
         EVT_CALL(N(GetSquirtTargetPos))
-        EVT_CALL(PlayEffect, EFFECT_SQUIRT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, LVarE, 10, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SQUIRT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, LVarE, 10, 0)
         EVT_WAIT(20)
         EVT_EXEC_WAIT(N(restoreFromSquirt))
         EVT_RETURN
@@ -1003,7 +1003,7 @@ EvtScript N(squirt) = {
     EVT_ADD(LVar0, 10)
     EVT_ADD(LVar1, 11)
     EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar3, LVar4, LVar5)
-    EVT_CALL(PlayEffect, EFFECT_SQUIRT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, LVarE, 10, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SQUIRT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, LVarE, 10, 0)
     EVT_WAIT(10)
     EVT_CALL(GetActionResult, LVar0)
     EVT_CALL(N(GetSquirtDamage))
@@ -1077,25 +1077,25 @@ EvtScript N(waterBlock) = {
     EVT_WAIT(45)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 83)
-    EVT_CALL(PlayEffect, EFFECT_WATERFALL, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 50, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_WATERFALL, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 50, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2035)
     EVT_THREAD
         EVT_WAIT(20)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 100)
-        EVT_CALL(PlayEffect, EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
         EVT_WAIT(5)
         EVT_SUB(LVar1, 20)
-        EVT_CALL(PlayEffect, EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
         EVT_WAIT(5)
         EVT_SUB(LVar1, 20)
-        EVT_CALL(PlayEffect, EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
         EVT_WAIT(5)
         EVT_SUB(LVar1, 20)
-        EVT_CALL(PlayEffect, EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
         EVT_WAIT(5)
         EVT_SUB(LVar1, 20)
-        EVT_CALL(PlayEffect, EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
     EVT_END_THREAD
     EVT_WAIT(40)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1108,7 +1108,7 @@ EvtScript N(waterBlock) = {
     EVT_ADD(LVar0, 15)
     EVT_ADD(LVar1, 35)
     EVT_ADD(LVarF, 6)
-    EVT_CALL(PlayEffect, EFFECT_STAT_CHANGE, LVarF, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 60, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_STAT_CHANGE, LVarF, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 60, 0)
     EVT_WAIT(4)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
@@ -1126,7 +1126,7 @@ EvtScript N(waterBlock) = {
     EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
     EVT_IF_EQ(LVarA, 0)
     EVT_ELSE
-        EVT_CALL(ShowVariableMessageBox, 38, 60, LVarA)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_26, 60, LVarA)
     EVT_END_IF
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
@@ -1211,7 +1211,7 @@ EvtScript N(tidalWave) = {
         EVT_END_SWITCH
         EVT_WAIT(5)
         EVT_LABEL(10)
-        EVT_CALL(ChooseNextTarget, 0, LVar0)
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
         EVT_IF_EQ(LVar0, -1)
             EVT_BREAK_LOOP
         EVT_END_IF

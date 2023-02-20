@@ -9,9 +9,9 @@ extern Formation N(fromation_slot_machine);
 extern ActorBlueprint N(slot_machine_stop);
 extern ActorBlueprint N(slot_machine_start);
 
-EvtScript N(beforeBattle) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(SetTexPanner, 29, TEX_PANNER_A)
     EVT_THREAD
         EVT_SET(LVarE, 0)
@@ -25,13 +25,16 @@ EvtScript N(beforeBattle) = {
     EVT_END
 };
 
-EvtScript N(afterBattle) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList)[] = {
-    MODEL_itigo, MODEL_kisya, MODEL_kusari, 0,
+s32 N(ForegroundModels)[] = {
+    MODEL_itigo,
+    MODEL_kisya,
+    MODEL_kusari,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {
@@ -39,9 +42,9 @@ Stage NAMESPACE = {
     .shape = "omo_bt04_shape",
     .hit = "omo_bt04_hit",
     .bg = "omo_bg",
-    .preBattle = &N(beforeBattle),
-    .postBattle = &N(afterBattle),
-    .foregroundModelList = N(foregroundModelList),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
     .stageEnemyCount = 4,
     .stageFormation = &N(fromation_slot_machine),
 };

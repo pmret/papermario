@@ -73,7 +73,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 8,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 60,
     .airLiftChance = 60,
@@ -245,7 +245,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim02)
             EVT_EXEC_WAIT(DoReturnHome)
@@ -268,7 +268,7 @@ EvtScript N(takeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.5))
+                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.5))
             EVT_END_THREAD
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_WAIT(19)

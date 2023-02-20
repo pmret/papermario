@@ -57,9 +57,9 @@ EvtScript N(8023006C) = {
     EVT_END
 };
 
-EvtScript N(beforeBattle) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_SET(LVar0, 16)
     EVT_SET(LVar1, 0)
     EVT_SET(LVar2, -200)
@@ -79,20 +79,21 @@ EvtScript N(beforeBattle) = {
     EVT_END
 };
 
-EvtScript N(afterBattle) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList)[] = {
-    MODEL_kemu1, 0,
+s32 N(ForegroundModels)[] = {
+    MODEL_kemu1,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {
     .texture = "kpa_tex",
     .shape = "kpa_bt07_shape",
     .hit = "kpa_bt07_hit",
-    .preBattle = &N(beforeBattle),
-    .postBattle = &N(afterBattle),
-    .foregroundModelList = N(foregroundModelList),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

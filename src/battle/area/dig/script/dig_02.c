@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_dig_dig_02_script
 
-API_CALLABLE(func_802186E0_6DE4A0) {
+API_CALLABLE(N(SetupDemoPlayerMove)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     SelectableTarget* selectableTarget;
@@ -26,14 +26,14 @@ EvtScript NAMESPACE = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 1)
     EVT_WAIT(3)
-    EVT_CALL(SetCamViewport, 1, 29, 20, 262, 177)
+    EVT_CALL(SetCamViewport, CAM_BATTLE, 29, 20, 262, 177)
     EVT_CALL(func_802535B4, 0)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
-    EVT_CALL(func_802186E0_6DE4A0)
+    EVT_CALL(N(SetupDemoPlayerMove))
     EVT_CALL(SetBattleState, BATTLE_STATE_PLAYER_MOVE)
     EVT_WAIT(130)
     EVT_LOOP(30)
-        EVT_CALL(SetCommandAutoSuccess, 0)
+        EVT_CALL(SetCommandAutoSuccess, FALSE)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN

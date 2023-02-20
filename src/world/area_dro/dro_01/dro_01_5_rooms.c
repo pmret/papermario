@@ -91,9 +91,9 @@ EvtScript N(EVS_SetWallRot_RightHouse) = {
 EvtScript N(EVS_RoomListener_LeftHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_ie_naka, TRUE)
+            EVT_CALL(SetGroupVisibility, MODEL_ie_naka, TRUE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_ie_naka, FALSE)
+            EVT_CALL(SetGroupVisibility, MODEL_ie_naka, FALSE)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -111,7 +111,7 @@ EvtScript N(EVS_RoomListener_Shop) = {
                     EVT_SET(LVar0, -1)
                     EVT_RETURN
             EVT_END_SWITCH
-            EVT_CALL(SetGroupEnabled, MODEL_mise_naka, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_mise_naka, MODEL_GROUP_VISIBLE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_THREAD
                 EVT_WAIT(45)
@@ -119,7 +119,7 @@ EvtScript N(EVS_RoomListener_Shop) = {
                 EVT_CALL(SetNpcYaw, NPC_Mouser_ShopOwner, 180)
             EVT_END_THREAD
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_mise_naka, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_mise_naka, MODEL_GROUP_HIDDEN)
             EVT_SET(AB_DRO_SHOP_PREV1, 0)
             EVT_SET(AB_DRO_SHOP_PREV2, 0)
     EVT_END_SWITCH
@@ -130,11 +130,11 @@ EvtScript N(EVS_RoomListener_Shop) = {
 EvtScript N(EVS_RoomListener_RightHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_ie2_naka, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_ie2_naka, MODEL_GROUP_VISIBLE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             // do nothing
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_ie2_naka, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_ie2_naka, MODEL_GROUP_HIDDEN)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -218,7 +218,7 @@ EvtScript N(EVS_SwingSign_Shop) = {
 };
 
 EvtScript N(EVS_OpenShopDoor) = {
-    EVT_CALL(SetGroupEnabled, MODEL_mise_naka, 1)
+    EVT_CALL(SetGroupVisibility, MODEL_mise_naka, MODEL_GROUP_VISIBLE)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_em_1, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 100, 15, EASING_QUADRATIC_OUT)
     EVT_LABEL(10)
@@ -242,7 +242,7 @@ EvtScript N(EVS_CloseShopDoor) = {
             EVT_GOTO(10)
         EVT_END_IF
     EVT_CALL(PlaySoundAtCollider, COLLIDER_em_1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
-    EVT_CALL(SetGroupEnabled, MODEL_mise_naka, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_mise_naka, MODEL_GROUP_HIDDEN)
     EVT_RETURN
     EVT_END
 };

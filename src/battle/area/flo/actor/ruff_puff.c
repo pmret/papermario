@@ -5,7 +5,7 @@
 
 #define NAMESPACE b_area_flo_ruff_puff
 
-extern EvtScript N(init);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
@@ -75,7 +75,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 10,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(statusTable),
     .escapeChance = 50,
     .airLiftChance = 90,
@@ -91,7 +91,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-EvtScript N(init) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
@@ -122,7 +122,7 @@ EvtScript N(returnHome) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TuffPuff_Run)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 11)
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_SIN_OUT)
     EVT_RETURN
     EVT_END
 };
@@ -240,7 +240,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 11)
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_SIN_OUT)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TuffPuff_Idle)
     EVT_WAIT(5)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TuffPuff_Grin)
@@ -289,7 +289,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_EXEC_WAIT(N(returnHome))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)

@@ -66,7 +66,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 7,
     .partCount = ARRAY_COUNT(N(partsTable_80218828)),
     .partsData = N(partsTable_80218828),
-    .takeTurnScript = &N(init_802188C0),
+    .initScript = &N(init_802188C0),
     .statusTable = N(statusTable_8021877C),
     .escapeChance = 60,
     .airLiftChance = 90,
@@ -135,7 +135,7 @@ EvtScript N(802189D4) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_POWER_UP)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 10)
-        EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 6, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 6, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 45, 0)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Run)
         EVT_WAIT(30)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -147,13 +147,13 @@ EvtScript N(802189D4) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DD)
         EVT_CALL(N(StartRumbleWithParams), 128, 10)
         EVT_THREAD
-            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.5))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(0.5))
         EVT_END_THREAD
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
         EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80218874)))
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Idle)
         EVT_CALL(EnableActorGlow, ACTOR_SELF, TRUE)
-        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 1)
+        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, TRUE)
         EVT_WAIT(2)
         EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
         EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -193,7 +193,7 @@ EvtScript N(802189D4) = {
             EVT_END_THREAD
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 80)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 271, 0)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_10F, 0)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -200, 0, 0)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.01))
@@ -206,10 +206,10 @@ EvtScript N(802189D4) = {
             EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, 0, LVar2)
             EVT_WAIT(20)
             EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 0)
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, FALSE)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorPos, ACTOR_SELF, 300, 0, 0)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Run)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
@@ -223,7 +223,7 @@ EvtScript N(802189D4) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 271, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_10F, 0)
     EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 80)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -262,7 +262,7 @@ EvtScript N(802189D4) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_WAIT(10)
             EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 0)
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, FALSE)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Run)
@@ -451,7 +451,7 @@ EvtScript N(handleEvent_80219BD8) = {
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 0)
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, FALSE)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
             EVT_SET_CONST(LVar0, 1)
@@ -475,7 +475,7 @@ EvtScript N(handleEvent_80219BD8) = {
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 0)
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, FALSE)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
             EVT_SET_CONST(LVar0, 1)
@@ -491,7 +491,7 @@ EvtScript N(handleEvent_80219BD8) = {
                 EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
                 EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
-                EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 0)
+                EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, FALSE)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
                 EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
             EVT_END_IF
@@ -640,7 +640,7 @@ EvtScript N(takeTurn_8021A628) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(2.0))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))

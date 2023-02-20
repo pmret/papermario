@@ -42,7 +42,7 @@ EvtScript N(802284EC) = {
     EVT_LABEL(0)
     EVT_SET(LVar2, LVar8)
     EVT_ADD(LVar2, LVar9)
-    EVT_CALL(MakeLerp, LVar8, LVar2, LVar7, 0)
+    EVT_CALL(MakeLerp, LVar8, LVar2, LVar7, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, LVarA, LVar0, 0, 0)
@@ -53,7 +53,7 @@ EvtScript N(802284EC) = {
     EVT_END_LOOP
     EVT_SET(LVar2, LVar8)
     EVT_ADD(LVar2, LVar9)
-    EVT_CALL(MakeLerp, LVar2, LVar8, LVar7, 0)
+    EVT_CALL(MakeLerp, LVar2, LVar8, LVar7, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, LVarA, LVar0, 0, 0)
@@ -67,11 +67,11 @@ EvtScript N(802284EC) = {
     EVT_END
 };
 
-EvtScript N(beforeBattle_8022869C) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_CALL(SetGroupEnabled, 39, 0)
-    EVT_CALL(SetGroupEnabled, 44, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    EVT_CALL(SetGroupVisibility, 39, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, 44, MODEL_GROUP_HIDDEN)
     EVT_SET(LVar0, 4)
     EVT_SET(LVar1, 0)
     EVT_EXEC(N(80228370))
@@ -106,20 +106,23 @@ EvtScript N(beforeBattle_8022869C) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_802288B8) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_802288C8)[] = {
-    0x00000014, 0x00000015, 0x00000016, 0x00000000,
+s32 N(ForegroundModels)[] = {
+    0x00000014,
+    0x00000015,
+    0x00000016,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {
     .texture = "kzn_tex",
     .shape = "kzn_bt04_shape",
     .hit = "kzn_bt04_hit",
-    .preBattle = &N(beforeBattle_8022869C),
-    .postBattle = &N(afterBattle_802288B8),
-    .foregroundModelList = N(foregroundModelList_802288C8),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

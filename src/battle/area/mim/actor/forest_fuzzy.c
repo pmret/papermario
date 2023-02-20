@@ -65,7 +65,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 6,
     .partCount = ARRAY_COUNT(N(partsTable_80218478)),
     .partsData = N(partsTable_80218478),
-    .takeTurnScript = &N(init_80218510),
+    .initScript = &N(init_80218510),
     .statusTable = N(statusTable_802183CC),
     .escapeChance = 40,
     .airLiftChance = 90,
@@ -362,7 +362,7 @@ EvtScript N(80219054) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -394,7 +394,7 @@ EvtScript N(80219054) = {
     EVT_END_IF
     EVT_WAIT(10)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x03000C)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000C)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Bite)
     EVT_WAIT(21)
@@ -434,7 +434,7 @@ EvtScript N(80219054) = {
         EVT_END_THREAD
         EVT_ADD(LVar0, 20)
         EVT_ADD(LVar1, 20)
-        EVT_CALL(PlayEffect, EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3, 0)
         EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
         EVT_ADD(LVar0, LVar3)
         EVT_CALL(SetEnemyHP, ACTOR_SELF, LVar0)
@@ -512,7 +512,7 @@ EvtScript N(8021A0D4) = {
     EVT_SET(LocalFlag(2), 0)
     EVT_SET(LocalFlag(3), 0)
     EVT_SET(LocalFlag(4), 0)
-    EVT_CALL(EnemyCreateTargetList, 32770)
+    EVT_CALL(EnemyCreateTargetList, 0x00008002)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar5)
@@ -528,7 +528,7 @@ EvtScript N(8021A0D4) = {
         EVT_CASE_EQ(3)
             EVT_SET(LocalFlag(4), 1)
     EVT_END_SWITCH
-    EVT_CALL(ChooseNextTarget, 0, LVar0)
+    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
@@ -579,7 +579,7 @@ EvtScript N(8021A0D4) = {
 
 EvtScript N(8021A45C) = {
     EVT_SET(LVar9, 0)
-    EVT_CALL(EnemyCreateTargetList, 32770)
+    EVT_CALL(EnemyCreateTargetList, 0x00008002)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -604,7 +604,7 @@ EvtScript N(8021A45C) = {
                 EVT_END_IF
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_CALL(ChooseNextTarget, 0, LVar0)
+    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF

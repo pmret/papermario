@@ -7,6 +7,8 @@
 #include "script_api/common.h"
 #include "battle/action_cmd.h"
 
+#include "effects.h"
+
 ApiStatus EnablePartnerBlur(Evt* script, s32 isInitialCall);
 ApiStatus DisablePartnerBlur(Evt* script, s32 isInitialCall);
 ApiStatus UseBattleCamPreset(Evt* script, s32 isInitialCall);
@@ -317,30 +319,30 @@ ApiStatus GetAnimatedNodeRotation(Evt* script, s32 isInitialCall);
 ApiStatus GetAnimatedNodePosition(Evt* script, s32 isInitialCall);
 ApiStatus DispatchEventPlayer(Evt* script, s32 isInitialCall);
 
-extern EvtScript PlayerScriptDispatcher;
-extern EvtScript PeachScriptDispatcher;
-extern EvtScript ExecutePlayerAction;
-extern EvtScript ExecutePeachAction;
-extern EvtScript HandleEvent_Player;
+extern EvtScript EVS_Mario_HandlePhase;
+extern EvtScript EVS_Peach_HandlePhase;
+extern EvtScript EVS_ExecuteMarioAction;
+extern EvtScript EVS_ExecutePeachAction;
+extern EvtScript EVS_Player_HandleEvent;
 extern EvtScript BtlPutPartnerAway;
 extern EvtScript BtlBringPartnerOut;
-extern EvtScript MarioEnterStage;
-extern EvtScript PeachEnterStage;
-extern EvtScript PlayerFirstStrike;
-extern EvtScript StartDefend;
-extern EvtScript RunAwayStart;
-extern EvtScript RunAwayFail;
-extern EvtScript RunAwayReset;
-extern EvtScript PlayEatFX;
-extern EvtScript PlayDrinkFX;
-extern EvtScript UseLifeShroom;
-extern EvtScript MerleeRunOut;
-extern EvtScript MerleeAttackBonus;
-extern EvtScript MerleeDefenseBonus;
-extern EvtScript MerleeExpBonus;
-extern EvtScript PlayerHappy;
-extern EvtScript DoDizzyAttack;
-extern EvtScript RegainAbility;
+extern EvtScript EVS_MarioEnterStage;
+extern EvtScript EVS_PeachEnterStage;
+extern EvtScript EVS_PlayerFirstStrike;
+extern EvtScript EVS_StartDefend;
+extern EvtScript EVS_RunAwayStart;
+extern EvtScript EVS_RunAwayFail;
+extern EvtScript EVS_RunAwayReset;
+extern EvtScript EVS_PlayEatFX;
+extern EvtScript EVS_PlayDrinkFX;
+extern EvtScript EVS_UseLifeShroom;
+extern EvtScript EVS_MerleeRunOut;
+extern EvtScript EVS_MerleeAttackBonus;
+extern EvtScript EVS_MerleeDefenseBonus;
+extern EvtScript EVS_MerleeExpBonus;
+extern EvtScript EVS_PlayerHappy;
+extern EvtScript EVS_ApplyDizzyAttack;
+extern EvtScript EVS_PlayerRegainAbility;
 extern EvtScript UseMystery;
 extern EvtScript DoSleepHit;
 extern EvtScript DoDizzyHit;

@@ -3,20 +3,20 @@
 
 #define NAMESPACE b_area_tik_tik_04
 
-#include "common/UnkModelStuff2.inc.c"
+#include "battle/common/stage/WaterEffects.inc.c"
 
-EvtScript N(beforeBattle) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_THREAD
         EVT_SET(LVar0, 15)
-        EVT_EXEC(N(script2))
+        EVT_EXEC(N(EVS_AnimateWaveModel))
         EVT_WAIT(5)
         EVT_SET(LVar0, 16)
-        EVT_EXEC(N(script2))
+        EVT_EXEC(N(EVS_AnimateWaveModel))
         EVT_WAIT(5)
         EVT_SET(LVar0, 17)
-        EVT_EXEC(N(script2))
+        EVT_EXEC(N(EVS_AnimateWaveModel))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(5)
@@ -37,7 +37,7 @@ EvtScript N(beforeBattle) = {
     EVT_END
 };
 
-EvtScript N(afterBattle) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
@@ -46,8 +46,8 @@ Stage NAMESPACE = {
     .texture = "tik_tex",
     .shape = "tik_bt04_shape",
     .hit = "tik_bt04_hit",
-    .preBattle = &N(beforeBattle),
-    .postBattle = &N(afterBattle),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
 };
 
 

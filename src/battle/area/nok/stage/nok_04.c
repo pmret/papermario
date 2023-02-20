@@ -1,21 +1,27 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/nok_bt04_shape.h"
 
 #define NAMESPACE b_area_nok_nok_04
 
-EvtScript N(beforeBattle_8022BB90) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle_8022BBB0) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_8022BBC0)[] = {
-    0x0000001B, 0x0000001A, 0x0000001D, 0x0000001C, 0x00000019, 0x00000000,
+s32 N(ForegroundModels)[] = {
+    MODEL_ueki2,
+    MODEL_ueki1,
+    MODEL_kabu2,
+    MODEL_kabu1,
+    MODEL_kusa3,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {
@@ -23,7 +29,7 @@ Stage NAMESPACE = {
     .shape = "nok_bt04_shape",
     .hit = "nok_bt04_hit",
     .bg = "nok_bg",
-    .preBattle = &N(beforeBattle_8022BB90),
-    .postBattle = &N(afterBattle_8022BBB0),
-    .foregroundModelList = N(foregroundModelList_8022BBC0),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

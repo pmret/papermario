@@ -84,7 +84,7 @@ API_CALLABLE(N(func_802A15A0_733670)) {
     script->varTable[12] = item->potencyB;
     script->varTable[13] = 0;
 
-    if (item->typeFlags & 0x100) {
+    if (item->typeFlags & ITEM_TYPE_FLAG_USE_DRINK_ANIMATION) {
         script->varTable[13] = 1;
     }
 
@@ -131,7 +131,7 @@ EvtScript N(EVS_FeedPartner) = {
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 45)
-        EVT_CALL(MakeItemEntity, LVarE, LVar0, LVar1, LVar2, 1, 0)
+        EVT_CALL(MakeItemEntity, LVarE, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_DECORATION, 0)
         EVT_SET(LVarE, LVar0)
         EVT_LOOP(25)
             EVT_CALL(GetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)

@@ -124,7 +124,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 10,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -154,18 +154,18 @@ EvtScript N(init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_PEACH_SPOKE), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 14, 0)
     EVT_CALL(SetBattleMenuDisableFlags, BTL_MENU_DISABLED_JUMP)
-    EVT_CALL(CreateNpc, 0, ANIM_ParadePeach_IdleRaisedArms)
-    EVT_CALL(SetNpcYaw, 0, 90)
-    EVT_CALL(SetNpcPos, 0, -130, 0, -12)
-    EVT_CALL(EnableNpcShadow, 0, TRUE)
+    EVT_CALL(CreateNpc, 0x00000000, ANIM_ParadePeach_IdleRaisedArms)
+    EVT_CALL(SetNpcYaw, 0x00000000, 90)
+    EVT_CALL(SetNpcPos, 0x00000000, -130, 0, -12)
+    EVT_CALL(EnableNpcShadow, 0x00000000, TRUE)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
     EVT_CALL(ModifyActorDecoration, ACTOR_SELF, 1, 1, 100, 0, 0, 0)
     EVT_EXEC(N(unkDecorationScript))
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_NO_GAME_OVER, 1)
-    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_DONT_STOP_MUSIC, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_NO_GAME_OVER, TRUE)
+    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_DONT_STOP_MUSIC, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -198,7 +198,7 @@ EvtScript N(nextTurn) = {
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
                 EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
                 EVT_CALL(SetActorYaw, ACTOR_PLAYER, 180)
-                EVT_CALL(SpeakToPlayer, 0, ANIM_ParadePeach_Talk, ANIM_ParadePeach_IdleRaisedArms, 5, MSG_Intro_0057)
+                EVT_CALL(SpeakToPlayer, 0x00000000, ANIM_ParadePeach_Talk, ANIM_ParadePeach_IdleRaisedArms, 5, MSG_Intro_0057)
                 EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair)
                 EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
                 EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.5))
@@ -272,7 +272,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Jump)
             EVT_EXEC_WAIT(DoRecover)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_PostJump)
-            EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(3.0))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(3.0))
         EVT_CASE_EQ(EVENT_30)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
@@ -363,12 +363,12 @@ EvtScript N(attackClawSwipe) = {
     EVT_THREAD
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TURN_COUNTER), LVar0)
         EVT_IF_GE(LVar0, 3)
-            EVT_CALL(SetNpcAnimation, 0, ANIM_ParadePeach_Weep)
+            EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_Weep)
         EVT_ELSE
-            EVT_CALL(SetNpcAnimation, 0, ANIM_ParadePeach_HorrorLoop)
+            EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_HorrorLoop)
         EVT_END_IF
         EVT_WAIT(45)
-        EVT_CALL(SetNpcAnimation, 0, ANIM_ParadePeach_IdleRaisedArms)
+        EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_IdleRaisedArms)
     EVT_END_THREAD
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -411,7 +411,7 @@ EvtScript N(attackFireBreath) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
     EVT_SUB(LVar3, 40)
     EVT_SET(LVar4, 20)
-    EVT_CALL(PlayEffect, EFFECT_FIRE_BREATH, 2, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 50, 1, 24, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_FIRE_BREATH, 2, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 50, 1, 24, 0)
     EVT_CALL(N(UnkFireBreathFXFunc), LVarF)
     EVT_THREAD
         EVT_CALL(N(StartRumbleWithParams), 50, 148)
@@ -419,7 +419,7 @@ EvtScript N(attackFireBreath) = {
         EVT_WAIT(70)
         EVT_CALL(PlaySound, SOUND_3BD | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, 0, ANIM_ParadePeach_Weep)
+    EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_Weep)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 55)
     EVT_WAIT(20)
@@ -438,7 +438,7 @@ EvtScript N(attackFireBreath) = {
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Idle)
             EVT_END_THREAD
             EVT_WAIT(60)
-            EVT_CALL(SetNpcAnimation, 0, ANIM_ParadePeach_HorrorLoop)
+            EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_HorrorLoop)
             EVT_LOOP(68)
                 EVT_CALL(GetAnimation, ACTOR_PLAYER, 0, LVar0)
                 EVT_IF_EQ(LVar0, ANIM_Mario_FallDown)
@@ -446,7 +446,7 @@ EvtScript N(attackFireBreath) = {
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(SetNpcAnimation, 0, ANIM_ParadePeach_Bow)
+            EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_Bow)
             EVT_WAIT(30)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -475,7 +475,7 @@ EvtScript N(powerUp) = {
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 20)
         EVT_ADD(LVar1, 90)
-        EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 3, LVar0, LVar1, LVar2, 30, 30, 7, 30, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 3, LVar0, LVar1, LVar2, 30, 30, 7, 30, 0)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Brandish)
     EVT_WAIT(30)
@@ -554,25 +554,25 @@ EvtScript N(useStarRod) = {
     EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
         EVT_ADD(LVar0, 15)
         EVT_SUB(LVar2, 3)
-        EVT_CALL(PlayEffect, EFFECT_LIGHT_RAYS, 2, LVar0, 90, LVar2, EVT_FLOAT(1.0), LVarF, 0, 0, 0, 0, 0, 0, 0)
-        EVT_CALL(PlayEffect, EFFECT_BULB_GLOW, 2, LVar0, 90, LVar2, EVT_FLOAT(1.0), LVarE, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, LVar0, 90, LVar2, EVT_FLOAT(1.0), LVarF, 0)
+        EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 90, LVar2, EVT_FLOAT(1.0), LVarE, 0)
         EVT_SUB(LVar2, 3)
-        EVT_CALL(PlayEffect, EFFECT_BULB_GLOW, 2, LVar0, 90, LVar2, EVT_FLOAT(1.0), LVarD, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 90, LVar2, EVT_FLOAT(1.0), LVarD, 0)
     EVT_ELSE
         EVT_ADD(LVar0, 6)
         EVT_SUB(LVar2, 3)
-        EVT_CALL(PlayEffect, EFFECT_LIGHT_RAYS, 2, LVar0, 36, LVar2, EVT_FLOAT(0.4), LVarF, 0, 0, 0, 0, 0, 0, 0)
-        EVT_CALL(PlayEffect, EFFECT_BULB_GLOW, 2, LVar0, 36, LVar2, EVT_FLOAT(0.4), LVarE, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, LVar0, 36, LVar2, EVT_FLOAT(0.4), LVarF, 0)
+        EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 36, LVar2, EVT_FLOAT(0.4), LVarE, 0)
         EVT_SUB(LVar2, 3)
-        EVT_CALL(PlayEffect, EFFECT_BULB_GLOW, 2, LVar0, 36, LVar2, EVT_FLOAT(0.4), LVarD, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 36, LVar2, EVT_FLOAT(0.4), LVarD, 0)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2121)
     EVT_WAIT(30)
     EVT_CALL(RemoveEffect, LVarF)
     EVT_CALL(RemoveEffect, LVarE)
     EVT_CALL(RemoveEffect, LVarD)
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ENCHANTED, 1)
-    EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 1, 11)
+    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ENCHANTED, TRUE)
+    EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 1, ACTOR_DECORATION_RADIAL_STAR_EMITTER)
     EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_boosted)))
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_boosted)))
     EVT_CALL(N(RemoveChillOut))
@@ -582,12 +582,12 @@ EvtScript N(useStarRod) = {
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 40)
         EVT_ADD(LVar2, 12)
-        EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 3, LVar0, LVar1, LVar2, 70, 80, 25, 60, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 3, LVar0, LVar1, LVar2, 70, 80, 25, 60, 0)
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 16)
         EVT_ADD(LVar2, 12)
-        EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 3, LVar0, LVar1, LVar2, 28, 32, 10, 60, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 3, LVar0, LVar1, LVar2, 28, 32, 10, 60, 0)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2125)
     EVT_THREAD
@@ -606,7 +606,7 @@ EvtScript N(useStarRod) = {
     EVT_ELSE
         EVT_ADD(LVar1, 16)
     EVT_END_IF
-    EVT_CALL(PlayEffect, EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 15, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 15, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2124)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

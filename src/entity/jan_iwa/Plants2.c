@@ -87,7 +87,8 @@ void entity_TrumpetPlant_spawn_coin(Entity* entity) {
 }
 
 void entity_Munchlesia_init(Entity* entity) {
-    make_item_entity_nodelay(ITEM_COIN, entity->position.x, entity->position.y + 30.0f, entity->position.z, ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS_NEVER_VANISH, 0);
+    make_item_entity_nodelay(ITEM_COIN, entity->position.x, entity->position.y + 30.0f, entity->position.z,
+        ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS_NEVER_VANISH, 0);
 }
 
 void func_802BC050_E2E980(Entity* entity) {

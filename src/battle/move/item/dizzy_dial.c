@@ -9,7 +9,7 @@ static s32 D_802A1CD0;
 #include "battle/common/move/ItemRefund.inc.c"
 
 void func_802A123C_727B4C(void) {
-    func_80138D88(0, 0, 0x140, 0xF0, 160.0f);
+    func_80138D88(0, 0, 320, 240, 160.0f);
 }
 
 API_CALLABLE(N(func_802A1270_727B80)) {
@@ -67,12 +67,12 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(N(func_802A1270_727B80))
     EVT_THREAD
         EVT_CALL(StartRumble, 8)
-        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.0))
-        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(4.0))
-        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(3.0))
-        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(2.0))
-        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.0))
-        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.5))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(4.0))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(3.0))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(2.0))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
         EVT_WAIT(10)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
         EVT_CALL(MoveBattleCamOver, 10)
@@ -81,16 +81,16 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(ItemCheckHit, LVar0, 268435456, 0, LVar0, 0)
+    EVT_CALL(ItemCheckHit, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, LVar0, 0)
     EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(1)
     EVT_END_IF
     EVT_CALL(GetItemPower, ITEM_DIZZY_DIAL, LVar0, LVar1)
-    EVT_CALL(MakeStatusField, LVar0, 262144, 100, LVar0)
-    EVT_CALL(ItemAfflictEnemy, LVar0, 1342177280, LVar0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(MakeStatusField, LVar0, STATUS_FLAG_DIZZY, 100, LVar0)
+    EVT_CALL(ItemAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_STATUS_ALWAYS_HITS, LVar0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
     EVT_WAIT(5)
-    EVT_CALL(ChooseNextTarget, 0, LVar0)
+    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF

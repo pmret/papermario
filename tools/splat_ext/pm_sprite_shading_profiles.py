@@ -25,8 +25,8 @@ GROUPS = [
     SpriteShadingGroup("ARN"),
     SpriteShadingGroup("DGB"),
     SpriteShadingGroup("KZN"),
-    SpriteShadingGroup("unused1"),
-    SpriteShadingGroup("unused2"),
+    SpriteShadingGroup("unused"),
+    SpriteShadingGroup("ISK_BTL"),
 ]
 
 
@@ -124,8 +124,8 @@ def extract(input_data: bytes, endian: Literal["big", "little"] = "big") -> str:
             "KZN_22",
             "KZN_23",
         ],
-        ["UNUSED1_01"],
-        ["UNUSED2_01"],
+        ["UNUSED"],
+        ["BTL_ISK"],
     ]
 
     END = ">" if endian == "big" else "<"

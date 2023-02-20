@@ -85,7 +85,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 20,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -194,7 +194,7 @@ EvtScript N(idle) = {
     EVT_END_CHILD_THREAD
     EVT_LABEL(0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
-    EVT_CALL(MakeLerp, 0, 10, 30, 10)
+    EVT_CALL(MakeLerp, 0, 10, 30, EASING_COS_IN_OUT)
     EVT_LABEL(1)
     EVT_CALL(UpdateLerp)
     EVT_ADD(LVar0, LVar3)
@@ -209,7 +209,7 @@ EvtScript N(idle) = {
         EVT_GOTO(1)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
-    EVT_CALL(MakeLerp, 0, -10, 30, 10)
+    EVT_CALL(MakeLerp, 0, -10, 30, EASING_COS_IN_OUT)
     EVT_LABEL(3)
     EVT_CALL(UpdateLerp)
     EVT_ADD(LVar0, LVar3)
@@ -331,7 +331,7 @@ EvtScript N(unused) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 40)
     EVT_SUB(LVar2, 5)
-    EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 10, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 300, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 10, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 300, 0)
     EVT_WAIT(75)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
@@ -362,7 +362,7 @@ EvtScript N(attack) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(N(UnkBackgroundFunc3))
-        EVT_CALL(MakeLerp, 0, 200, 60, 1)
+        EVT_CALL(MakeLerp, 0, 200, 60, EASING_QUADRATIC_IN)
         EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(N(SetBackgroundAlpha), LVar0)
@@ -405,7 +405,7 @@ EvtScript N(attack) = {
             EVT_SET(LVar4, LVar2)
             EVT_CALL(RandInt, 10, LVar5)
             EVT_ADD(LVar5, 10)
-            EVT_CALL(PlayEffect, EFFECT_STAR, LVar0, LVar1, 240, LVar2, LVar3, 0, LVar4, LVar5, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_STAR, LVar0, LVar1, 240, LVar2, LVar3, 0, LVar4, LVar5, 0)
             EVT_WAIT(3)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -415,7 +415,7 @@ EvtScript N(attack) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 50)
     EVT_ADD(LVar2, 5)
-    EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 11, LVar0, LVar1, LVar2, EVT_FLOAT(0.8), 160, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 11, LVar0, LVar1, LVar2, EVT_FLOAT(0.8), 160, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Release)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 0, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -425,7 +425,7 @@ EvtScript N(attack) = {
             EVT_WAIT(170)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Idle1)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
-            EVT_CALL(MakeLerp, 200, 0, 60, 0)
+            EVT_CALL(MakeLerp, 200, 0, 60, EASING_LINEAR)
             EVT_LABEL(1)
             EVT_CALL(UpdateLerp)
             EVT_CALL(N(SetBackgroundAlpha), LVar0)
@@ -451,7 +451,7 @@ EvtScript N(attack) = {
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Idle1)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
-            EVT_CALL(MakeLerp, 200, 0, 60, 0)
+            EVT_CALL(MakeLerp, 200, 0, 60, EASING_LINEAR)
             EVT_LABEL(2)
             EVT_CALL(UpdateLerp)
             EVT_CALL(N(SetBackgroundAlpha), LVar0)
@@ -543,7 +543,7 @@ EvtScript N(OnDeath) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 10)
     EVT_ADD(LVar2, 10)
-    EVT_CALL(PlayEffect, EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
     EVT_CALL(DropStarPoints, ACTOR_SELF)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -643,7 +643,7 @@ EvtScript N(OnBurn) = {
                         EVT_SETF(LVar3, EVT_FLOAT(1.0))
                     EVT_END_IF
                 EVT_END_IF
-                EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BURN_DEATH)
     EVT_END_SWITCH

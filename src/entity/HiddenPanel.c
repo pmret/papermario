@@ -128,7 +128,9 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             gPlayerStatusPtr->animFlags |= PA_FLAG_OPENED_HIDDEN_PANEL;
             if (data->needSpawnItem) {
                 data->needSpawnItem = FALSE;
-                data->spawnedItemIndex = make_item_entity_nodelay(data->itemID, entity->position.x, entity->position.y + 2.0, entity->position.z, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, data->pickupVar);
+                data->spawnedItemIndex = make_item_entity_nodelay(data->itemID,
+                    entity->position.x, entity->position.y + 2.0, entity->position.z,
+                    ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, data->pickupVar);
             }
             entity->flags &= ~ENTITY_FLAG_HIDDEN;
             break;

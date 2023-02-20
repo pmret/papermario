@@ -114,7 +114,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 50,
     .partCount = ARRAY_COUNT(N(partsTable_8022A6E0)),
     .partsData = N(partsTable_8022A6E0),
-    .takeTurnScript = &N(init_8022ACE4),
+    .initScript = &N(init_8022ACE4),
     .statusTable = N(statusTable_8022A634),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -139,11 +139,11 @@ EvtScript N(8022A750) = {
     EVT_IF_FLAG(LVar2, BS_FLAGS1_PARTNER_ACTING)
         EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
         EVT_IF_EQ(LVar2, MOVE_SPOOK)
-            EVT_CALL(SetActorVar, -127, 3, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, 3, 1)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_263)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 30)
-            EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, -45, 30, EMOTER_POS, LVar0, LVar1, LVar2, 5)
+            EVT_CALL(ShowEmote, 0x00000000, EMOTE_QUESTION, -45, 30, EMOTER_POS, LVar0, LVar1, LVar2, 5)
             EVT_WAIT(30)
         EVT_END_IF
     EVT_END_IF
@@ -160,8 +160,8 @@ EvtScript N(8022A880) = {
     EVT_ELSE
         EVT_ADD(LVar1, 6)
     EVT_END_IF
-    EVT_CALL(PlayEffect, 0x13, 0, LVar0, LVar1, LVar2, 1, 30, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlayEffect, 0x13, 1, LVar0, LVar1, LVar2, 1, 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, LVar0, LVar1, LVar2, 1, 30, 0)
+    EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 1, LVar0, LVar1, LVar2, 1, 30, 0)
     EVT_THREAD
         EVT_SET(LVar0, 0)
         EVT_LOOP(32)
@@ -174,11 +174,11 @@ EvtScript N(8022A880) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_300)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 15)
-    EVT_CALL(PlayEffect, 0x52, 4, LVar0, LVar1, LVar2, 1, 40, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlayEffect, 0x7, 0, LVar0, LVar1, LVar2, -4, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlayEffect, 0x7, 0, LVar0, LVar1, LVar2, -4, 4, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlayEffect, 0x7, 0, LVar0, LVar1, LVar2, 4, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlayEffect, 0x7, 0, LVar0, LVar1, LVar2, 4, 4, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 40, 0)
+    EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, -4, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, -4, 4, 0)
+    EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, 4, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, 4, 4, 0)
     EVT_RETURN
     EVT_END
 };
@@ -222,11 +222,11 @@ EvtScript N(init_8022ACE4) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8022B4F0)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8022ADA4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022ADD8)))
-    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_8022BB44)))
-    EVT_CALL(SetActorVar, -127, 0, 0)
-    EVT_CALL(SetActorVar, -127, 1, 0)
-    EVT_CALL(SetActorVar, -127, 2, 0)
-    EVT_CALL(SetActorVar, -127, 3, 0)
+    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_8022BB44)))
+    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
     EVT_RETURN
     EVT_END
 };
@@ -338,7 +338,7 @@ EvtScript N(handleEvent_8022ADD8) = {
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Flail)
                 EVT_WAIT(20)
                 EVT_EXEC_WAIT(N(8022ABA8))
-                EVT_CALL(ActorSpeak, 1900955, -127, 1, 2359310, 2359299)
+                EVT_CALL(ActorSpeak, MSG_Menus_019B, ACTOR_SELF, 1, 0x0024000E, 0x00240003)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Idle)
                 EVT_EXEC_WAIT(N(8022AC40))
             EVT_END_IF
@@ -388,7 +388,7 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, LVar3)
     EVT_ADD(LVar1, LVar4)
-    EVT_CALL(PlayEffect, 0x13, 0, LVar0, LVar1, LVar2, LVar5, 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, LVar0, LVar1, LVar2, LVar5, 30, 0)
     EVT_WAIT(30)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_SwingStaff)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -413,7 +413,7 @@ EvtScript N(takeTurn_8022B4F0) = {
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, LVar6)
             EVT_ADD(LVar1, LVar7)
-            EVT_CALL(PlayEffect, 0x12, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 30, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SHAPE_SPELL, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 30, 0)
             EVT_WAIT(35)
             EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -439,16 +439,16 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, LVar6)
     EVT_ADD(LVar1, LVar7)
-    EVT_CALL(PlayEffect, 0x12, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 15, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SHAPE_SPELL, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 15, 0)
     EVT_WAIT(15)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT), 0, 0, 8, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(GetActorVar, -127, 1, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
             EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(GetLastDamage, 0, LVar1)
+                EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar1)
                 EVT_IF_NE(LVar1, 0)
-                    EVT_CALL(SetActorVar, -127, 1, 1)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
                 EVT_END_IF
             EVT_END_IF
     EVT_END_SWITCH
@@ -464,17 +464,17 @@ EvtScript N(nextTurn_8022BB44) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(12)
-            EVT_CALL(GetActorVar, -127, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
                 EVT_IF_NOT_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
-                    EVT_CALL(SetActorVar, -127, 0, 2)
-                    EVT_CALL(GetActorVar, -127, 3, LVar0)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 2)
+                    EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
                     EVT_IF_EQ(LVar0, 0)
                         EVT_EXEC_WAIT(N(8022ABA8))
                         EVT_WAIT(20)
                     EVT_END_IF
-                    EVT_CALL(ActorSpeak, 1179869, -127, 1, 2359310, 2359299)
+                    EVT_CALL(ActorSpeak, MSG_CH7_00DD, ACTOR_SELF, 1, 0x0024000E, 0x00240003)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Idle)
                     EVT_EXEC_WAIT(N(8022AC40))
                     EVT_WAIT(20)
@@ -482,34 +482,34 @@ EvtScript N(nextTurn_8022BB44) = {
             EVT_ELSE
                 EVT_WAIT(20)
             EVT_END_IF
-            EVT_CALL(SetActorVar, -127, 3, 0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
             EVT_RETURN
         EVT_CASE_EQ(11)
-            EVT_CALL(GetActorVar, -127, 1, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
             EVT_IF_EQ(LVar0, 1)
-                EVT_CALL(SetActorVar, -127, 1, 2)
+                EVT_CALL(SetActorVar, ACTOR_SELF, 1, 2)
                 EVT_EXEC_WAIT(N(8022ABA8))
                 EVT_WAIT(20)
-                EVT_CALL(ActorSpeak, 1179870, -127, 1, 2359310, 2359299)
+                EVT_CALL(ActorSpeak, MSG_CH7_00DE, ACTOR_SELF, 1, 0x0024000E, 0x00240003)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Idle)
                 EVT_EXEC_WAIT(N(8022AC40))
                 EVT_WAIT(10)
             EVT_END_IF
             EVT_RETURN
         EVT_CASE_EQ(10)
-            EVT_CALL(GetActorVar, -127, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(SetActorVar, -127, 0, 1)
+                EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
                 EVT_WAIT(15)
                 EVT_EXEC_WAIT(N(8022ABA8))
                 EVT_WAIT(10)
-                EVT_CALL(ActorSpeak, 1179867, -127, 2, 2162714, 2162715)
+                EVT_CALL(ActorSpeak, MSG_CH7_00DB, ACTOR_SELF, 2, 0x0021001A, 0x0021001B)
                 EVT_WAIT(8)
                 EVT_EXEC_WAIT(N(8022A880))
-                EVT_CALL(SetPartFlagBits, -127, 2, 1, 1)
-                EVT_CALL(SetPartFlagBits, -127, 1, 1, 0)
+                EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, 1, TRUE)
+                EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, 1, FALSE)
                 EVT_WAIT(15)
-                EVT_CALL(ActorSpeak, 1179868, -127, 1, 2359310, 2359299)
+                EVT_CALL(ActorSpeak, MSG_CH7_00DC, ACTOR_SELF, 1, 0x0024000E, 0x00240003)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Idle)
                 EVT_WAIT(10)
                 EVT_EXEC_WAIT(N(8022AC40))
@@ -551,19 +551,19 @@ EvtScript N(8022BF1C) = {
         EVT_ADD(LVar1, 10)
         EVT_ADD(LVar2, 10)
         EVT_LOOP(3)
-            EVT_CALL(PlayEffect, 0x1, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0)
             EVT_WAIT(3)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetPartFlagBits, -127, 1, 1, 1)
-    EVT_CALL(SetPartFlagBits, -127, 2, 1, 0)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, 1, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, 1, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_JrTroopa_DefeatedBegin)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 5)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_WAIT(15)
     EVT_CALL(PlaySound, SOUND_DEATH)
-    EVT_CALL(DropStarPoints, -127)
+    EVT_CALL(DropStarPoints, ACTOR_SELF)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(SetBattleCamZoom, 260)
@@ -574,19 +574,19 @@ EvtScript N(8022BF1C) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_JrTroopa_Defeated)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8022A61C)))
     EVT_WAIT(60)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, 1)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(8022C2A4) = {
-    EVT_CALL(GetActorVar, -127, 3, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_WAIT(10)
         EVT_EXEC_WAIT(N(8022ABA8))
-        EVT_CALL(ActorSpeak, 1900954, -127, 1, 2359310, 2359299)
+        EVT_CALL(ActorSpeak, MSG_Menus_019A, ACTOR_SELF, 1, 0x0024000E, 0x00240003)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Idle)
-        EVT_CALL(GetActorVar, -127, 0, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
         EVT_IF_NE(LVar0, 1)
             EVT_EXEC_WAIT(N(8022AC40))
         EVT_END_IF

@@ -75,7 +75,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(partsTable_80219114)),
     .partsData = N(partsTable_80219114),
-    .takeTurnScript = &N(init_80219160),
+    .initScript = &N(init_80219160),
     .statusTable = N(statusTable_80219068),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -118,14 +118,14 @@ EvtScript N(handleEvent_802191E0) = {
         EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(10)
-                EVT_CALL(GetActorVar, -127, 0, LVar0)
+                EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
                 EVT_IF_EQ(LVar0, 0)
                     EVT_CALL(RandInt, 2, LVar0)
                     EVT_SWITCH(LVar0)
                         EVT_CASE_EQ(0)
-                            EVT_CALL(ActorSpeak, MSG_HOS_002D, -127, 1, 589834, 589826)
+                            EVT_CALL(ActorSpeak, MSG_HOS_002D, ACTOR_SELF, 1, 0x0009000A, 0x00090002)
                         EVT_CASE_EQ(1)
-                            EVT_CALL(ActorSpeak, MSG_HOS_002E, -127, 1, 589834, 589826)
+                            EVT_CALL(ActorSpeak, MSG_HOS_002E, ACTOR_SELF, 1, 0x0009000A, 0x00090002)
                         EVT_CASE_EQ(2)
                     EVT_END_SWITCH
                 EVT_END_IF
@@ -203,7 +203,7 @@ EvtScript N(takeTurn_80219444) = {
     EVT_THREAD
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
         EVT_CALL(action_command_jump_init)
-        EVT_CALL(ShowActionHud, 1)
+        EVT_CALL(ShowActionHud, TRUE)
         EVT_WAIT(10)
         EVT_CALL(action_command_jump_start, 12, 3)
     EVT_END_THREAD
@@ -225,7 +225,7 @@ EvtScript N(takeTurn_80219444) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_IF
-    EVT_CALL(GetActorVar, -127, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(func_80269EAC, 5)
     EVT_END_IF
@@ -284,7 +284,7 @@ API_CALLABLE(func_80218000_47F0B0) {
 }
 
 EvtScript N(80219C74) = {
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, TRUE)
     EVT_CALL(func_802535B4, 0)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
     EVT_WAIT(15)
@@ -303,12 +303,12 @@ EvtScript N(80219C74) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_WAIT(15)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, -73, 40, 202)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 20, 10)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 20, EASING_COS_IN_OUT)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(ActorSpeak, MSG_HOS_001A, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(SetMessageBoxDuration, -1)
     EVT_THREAD
         EVT_LOOP(15)
@@ -318,10 +318,10 @@ EvtScript N(80219C74) = {
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 20, 10)
+    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 20, EASING_COS_IN_OUT)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
     EVT_CALL(WaitForState, BATTLE_STATE_0)
-    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_200, 1)
+    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_200, TRUE)
     EVT_LOOP(0)
         EVT_CALL(GetActionCommandMode, LVar0)
         EVT_IF_NE(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
@@ -345,7 +345,7 @@ EvtScript N(80219C74) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(EndActorSpeech, 256, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(SetActionSuccess, 1)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
@@ -353,7 +353,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_WAIT(15)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_001D, 256, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    EVT_CALL(ActorSpeak, MSG_HOS_001D, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(WaitForState, BATTLE_STATE_9)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -404,14 +404,14 @@ EvtScript N(80219C74) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(ActorSpeak, MSG_HOS_0022, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_LOOP(0)
-        EVT_CALL(CheckButtonDown, 262144, LVar0)
+        EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_LOOP(0)
-        EVT_CALL(CheckButtonPress, 262144, LVar0)
+        EVT_CALL(CheckButtonPress, BUTTON_STICK_LEFT, LVar0)
         EVT_IF_EQ(LVar0, 1)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -428,14 +428,14 @@ EvtScript N(80219C74) = {
         EVT_IF_NE(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_CALL(CheckButtonDown, 262144, LVar0)
+        EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_BLOCK)
-            EVT_CALL(PauseTakeTurn, 0)
+            EVT_CALL(PauseTakeTurn, ACTOR_PLAYER)
             EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
             EVT_CALL(ActorSpeak, MSG_HOS_0023, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
             EVT_LOOP(0)
-                EVT_CALL(CheckButtonPress, 262144, LVar0)
+                EVT_CALL(CheckButtonPress, BUTTON_STICK_LEFT, LVar0)
                 EVT_IF_EQ(LVar0, 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -444,7 +444,7 @@ EvtScript N(80219C74) = {
             EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
             EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
             EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
-            EVT_CALL(ResumeTakeTurn, 0)
+            EVT_CALL(ResumeTakeTurn, ACTOR_PLAYER)
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -458,7 +458,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(ActorSpeak, MSG_HOS_0024, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_LOOP(0)
-        EVT_CALL(CheckButtonDown, 262144, LVar0)
+        EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -474,7 +474,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(ActorSpeak, MSG_HOS_0025, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_NO_ATTACK, 1)
+    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_NO_ATTACK, TRUE)
     EVT_CALL(WaitForState, BATTLE_STATE_0)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
     EVT_CALL(ShowBattleChoice, MSG_Choice_001D)
@@ -487,7 +487,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(ActorSpeak, MSG_HOS_0028, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_200, 0)
+    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_200, FALSE)
     EVT_LABEL(10)
     EVT_CALL(SetBattleMenuDisableFlags, BTL_MENU_DISABLED_JUMP | BTL_MENU_DISABLED_SMASH | BTL_MENU_DISABLED_STRATEGIES)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
@@ -510,7 +510,7 @@ EvtScript N(80219C74) = {
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(SetEnemyHP, ACTOR_ENEMY0, 99)
-    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_NO_ATTACK, 0)
+    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_NO_ATTACK, FALSE)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
     EVT_CALL(WaitForState, BATTLE_STATE_END_TURN)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
@@ -531,7 +531,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(ActorSpeak, MSG_HOS_002C, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_LABEL(100)
     EVT_CALL(WaitForState, BATTLE_STATE_0)
-    EVT_CALL(SetBattleState, 30)
+    EVT_CALL(SetBattleState, BATTLE_STATE_END_TRAINING_BATTLE)
     EVT_CALL(func_80218000_47F0B0)
     EVT_WAIT(10000)
     EVT_RETURN

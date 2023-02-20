@@ -75,7 +75,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 12,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 50,
     .airLiftChance = 50,
@@ -246,7 +246,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleClubba_Frost_Anim02)
             EVT_EXEC_WAIT(DoReturnHome)
@@ -282,7 +282,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.5))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.5))
     EVT_END_THREAD
     EVT_GOTO(100)
     EVT_LABEL(50) // swift club attack
@@ -295,7 +295,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_10)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.5))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.5))
     EVT_END_THREAD
     EVT_CALL(GetActorHP, ACTOR_PLAYER, LVar0)
     EVT_IF_EQ(LVar0, 0)
@@ -310,7 +310,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_40)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.5))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.5))
     EVT_END_THREAD
     EVT_CALL(GetActorHP, ACTOR_PLAYER, LVar0)
     EVT_IF_EQ(LVar0, 0)
@@ -325,7 +325,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.5))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.5))
     EVT_END_THREAD
     EVT_LABEL(100)
     EVT_SWITCH(LVar0)

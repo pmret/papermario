@@ -76,7 +76,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 8,
     .partCount = ARRAY_COUNT(N(partsTable_8022193C)),
     .partsData = N(partsTable_8022193C),
-    .takeTurnScript = &N(init_80221988),
+    .initScript = &N(init_80221988),
     .statusTable = N(statusTable_80221890),
     .escapeChance = 70,
     .airLiftChance = 85,
@@ -228,7 +228,7 @@ EvtScript N(takeTurn_80221F78) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 8393, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_20C9, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -254,7 +254,7 @@ EvtScript N(takeTurn_80221F78) = {
             EVT_WAIT(15)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_EXEC_WAIT(N(802219E4))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)

@@ -27,8 +27,8 @@ EvtScript N(EVS_UsePower) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(ItemDamageEnemy, LVar0, 1077936128, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
-    EVT_CALL(ChooseNextTarget, 0, LVar0)
+    EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_REMOVE_BUFFS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF

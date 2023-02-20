@@ -18,17 +18,17 @@ EvtScript N(8022F7F0) = {
     EVT_END
 };
 
-EvtScript N(beforeBattle) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_CALL(SetGroupEnabled, 15, 0)
-    EVT_CALL(SetGroupEnabled, 17, 0)
-    EVT_CALL(SetGroupEnabled, 16, 0)
-    EVT_CALL(SetGroupEnabled, 26, 0)
-    EVT_CALL(SetGroupEnabled, 18, 0)
-    EVT_CALL(SetGroupEnabled, 20, 0)
-    EVT_CALL(SetGroupEnabled, 22, 0)
-    EVT_CALL(SetGroupEnabled, 24, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    EVT_CALL(SetGroupVisibility, 15, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, 17, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, 16, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, 26, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, 18, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, 20, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, 22, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, 24, MODEL_GROUP_HIDDEN)
     EVT_SET(LVar0, 32)
     EVT_EXEC(N(8022F7F0))
     EVT_SET(LVar0, 34)
@@ -39,7 +39,7 @@ EvtScript N(beforeBattle) = {
     EVT_END
 };
 
-EvtScript N(afterBattle) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
@@ -48,6 +48,6 @@ Stage NAMESPACE = {
     .texture = "kpa_tex",
     .shape = "kpa_bt04_shape",
     .hit = "kpa_bt04_hit",
-    .preBattle = &N(beforeBattle),
-    .postBattle = &N(afterBattle),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
 };

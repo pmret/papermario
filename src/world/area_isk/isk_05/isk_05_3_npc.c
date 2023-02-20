@@ -188,8 +188,8 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(SetGroupEnabled, MODEL_wan1, 0)
-    EVT_CALL(SetGroupEnabled, MODEL_wan2, 1)
+    EVT_CALL(SetGroupVisibility, MODEL_wan1, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_wan2, MODEL_GROUP_VISIBLE)
     EVT_THREAD
         EVT_WAIT(15)
         EVT_CALL(MakeLerp, 0, 360, 15, EASING_LINEAR)

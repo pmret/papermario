@@ -459,8 +459,9 @@ ApiStatus OnFleeBattleDrops(Evt* script, s32 isInitialCall) {
         if (rand_int(100) < 50) {
             if (playerData->coins != 0) {
                 playerData->coins--;
-                make_item_entity_delayed(ITEM_COIN, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight,
-                                         playerStatus->position.z, 3, 0, 0);
+                make_item_entity_delayed(ITEM_COIN, playerStatus->position.x,
+                    playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z,
+                    ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0, 0);
             }
         }
         script->functionTemp[2] = 0;

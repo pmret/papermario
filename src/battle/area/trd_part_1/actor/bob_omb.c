@@ -111,7 +111,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 3,
     .partCount = ARRAY_COUNT(N(partsTable_8021A70C)),
     .partsData = N(partsTable_8021A70C),
-    .takeTurnScript = &N(init_8021A758),
+    .initScript = &N(init_8021A758),
     .statusTable = N(statusTable_8021A5B4),
     .escapeChance = 70,
     .airLiftChance = 90,
@@ -157,7 +157,7 @@ EvtScript N(ignite) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021A55C)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021B4A8)))
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT, 1)
+    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT, TRUE)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_8021A660)))
     EVT_CALL(PlayLoopingSoundAtActor, ACTOR_SELF, 0, 0x80000001)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bobomb_Anim05)
@@ -178,11 +178,11 @@ EvtScript N(8021A9C8) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021ACE8)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021A510)))
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT, 0)
+    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT, FALSE)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_8021A5B4)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 2)
-    EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0)
     EVT_CALL(StopLoopingSoundAtActor, ACTOR_SELF, 0)
     EVT_CALL(func_8026ED20, ACTOR_SELF, 1, 0)
     EVT_RETURN
@@ -203,17 +203,17 @@ EvtScript N(8021AB54) = {
     EVT_EXEC_WAIT(N(8021AAE8))
     EVT_CALL(StartRumble, 11)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.75))
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
-        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(4.5))
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.75))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(4.5))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))
     EVT_END_THREAD
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 2)
-    EVT_CALL(PlayEffect, EFFECT_SMOKE_RING, 0, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SMOKE_RING, 0, LVar0, LVar1, LVar2, 0)
     EVT_ADD(LVar1, 20)
     EVT_ADD(LVar2, 2)
-    EVT_CALL(PlayEffect, EFFECT_EXPLOSION, 0, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_EXPLOSION, 0, LVar0, LVar1, LVar2, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOMB_BLAST)
     EVT_RETURN
     EVT_END
@@ -550,7 +550,7 @@ EvtScript N(tackleAttack) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bobomb_Anim06)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
@@ -567,7 +567,7 @@ EvtScript N(tackleAttack) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bobomb_Anim14)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
-            EVT_CALL(PlayEffect, EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LVar0, LVar1, LVar2, LVar4, LVar3, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LVar0, LVar1, LVar2, LVar4, LVar3, 0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_SHOCK)
             EVT_WAIT(20)
             EVT_EXEC_WAIT(N(8021AB54))

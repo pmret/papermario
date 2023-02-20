@@ -74,7 +74,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 8,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 60,
     .airLiftChance = 85,
@@ -311,7 +311,7 @@ EvtScript N(idle) = {
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
             EVT_THREAD
-                EVT_CALL(MakeLerp, 720, 0, 30, 10)
+                EVT_CALL(MakeLerp, 720, 0, 30, EASING_COS_IN_OUT)
                 EVT_LABEL(10)
                 EVT_CALL(UpdateLerp)
                 EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
@@ -326,7 +326,7 @@ EvtScript N(idle) = {
                 EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_END_THREAD
             EVT_WAIT(8)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 1, 7)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 1, ACTOR_DECORATION_WHIRLWIND)
             EVT_WAIT(15)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 1)
             EVT_WAIT(8)
@@ -399,7 +399,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_flipped)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
-            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, 1)
+            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, TRUE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
             EVT_THREAD
@@ -584,11 +584,11 @@ EvtScript N(attackShellToss) = {
         EVT_THREAD
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 4)
-            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
             EVT_WAIT(3)
-            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
             EVT_WAIT(2)
-            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2021)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ShellSpin)
@@ -596,7 +596,7 @@ EvtScript N(attackShellToss) = {
         EVT_CALL(func_8024ECF8, -1, 1, 0)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20D3)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, 0, 0, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, 3, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -631,7 +631,7 @@ EvtScript N(attackShellToss) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Panic)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
@@ -711,17 +711,17 @@ EvtScript N(attackDizzyTornado) = {
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 4)
-        EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
         EVT_WAIT(3)
-        EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
         EVT_WAIT(2)
-        EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2021)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ShellSpin)
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2026)
-    EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 1, 7)
+    EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 1, ACTOR_DECORATION_WHIRLWIND)
     EVT_WAIT(40)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, 0, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -738,7 +738,7 @@ EvtScript N(attackDizzyTornado) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Panic)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
@@ -758,7 +758,7 @@ EvtScript N(attackDizzyTornado) = {
             EVT_THREAD
                 EVT_CALL(WasStatusInflicted, ACTOR_SELF, LVar0)
                 EVT_IF_EQ(LVar0, 1)
-                    EVT_CALL(MakeLerp, 0, 1080, 30, 10)
+                    EVT_CALL(MakeLerp, 0, 0x00000438, 30, EASING_COS_IN_OUT)
                     EVT_LABEL(0)
                     EVT_CALL(UpdateLerp)
                     EVT_CALL(SetActorYaw, ACTOR_PLAYER, LVar0)
@@ -796,18 +796,18 @@ EvtScript N(standUp) = {
     EVT_SUB(LVar0, 1)
     EVT_IF_GT(LVar0, 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, 9, LVar0)
-        EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+        EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
         EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(2.0))
         EVT_WAIT(30)
         EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(0.5))
         EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
     EVT_ELSE
-        EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+        EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
         EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(2.0))
         EVT_WAIT(20)
         EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(0.5))
         EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
-        EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
+        EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0, 0)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_JUMP_3E2)
         EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ToppleStruggle)
@@ -831,8 +831,8 @@ EvtScript N(standUp) = {
         EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable)))
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 32)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -4)
-        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, 0)
-        EVT_CALL(ResetActorSounds, ACTOR_SELF, 2)
+        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, FALSE)
+        EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
         EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(2)

@@ -65,7 +65,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 8,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -148,14 +148,14 @@ EvtScript N(handleEvent) = {
             EVT_ADD(LVar0, 5)
             EVT_ADD(LVar1, 10)
             EVT_LOOP(4)
-                EVT_CALL(PlayEffect, EFFECT_SWEAT, 0, LVar0, LVar1, LVar2, 10, 45, 4, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_SWEAT, 0, LVar0, LVar1, LVar2, 10, 45, 4, 0)
                 EVT_WAIT(6)
             EVT_END_LOOP
-            EVT_CALL(SetActorSounds, ACTOR_SELF, 0, SOUND_20BA, SOUND_3B4)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, 4, 10, 0)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_3B4)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MarshalGuy_Anim0C)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 8)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_STEAM_EMITTER)
             EVT_CALL(SetGoalPos, ACTOR_SELF, -200, 0, 20)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, LVar0, 0)

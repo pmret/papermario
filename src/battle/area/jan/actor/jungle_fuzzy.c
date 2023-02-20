@@ -67,7 +67,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 7,
     .partCount = ARRAY_COUNT(N(partsTable_8021EA90)),
     .partsData = N(partsTable_8021EA90),
-    .takeTurnScript = &N(init_8021EB28),
+    .initScript = &N(init_8021EB28),
     .statusTable = N(statusTable_8021E9E4),
     .escapeChance = 30,
     .airLiftChance = 85,
@@ -364,7 +364,7 @@ EvtScript N(leechAttack) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Jungle_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -426,13 +426,13 @@ EvtScript N(leechAttack) = {
             EVT_WAIT(30)
         EVT_END_LOOP
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_31, 32767)
-        EVT_CALL(ShowActionHud, 1)
+        EVT_CALL(ShowMessageBox, BTL_MSG_31, 0x00007FFF)
+        EVT_CALL(ShowActionHud, TRUE)
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
         EVT_CALL(action_command_stop_leech_init)
         EVT_CALL(SetupMashMeter, 1, 23, 0, 0, 0, 0)
         EVT_WAIT(10)
-        EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
+        EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
         EVT_CALL(action_command_stop_leech_start, 0, 32767, 3)
         EVT_SET(LVarD, 0)
         EVT_LOOP(5)
@@ -570,7 +570,7 @@ EvtScript N(leechAttack) = {
                 EVT_END_THREAD
                 EVT_ADD(LVar0, 20)
                 EVT_ADD(LVar1, 20)
-                EVT_CALL(PlayEffect, EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3, 0)
                 EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
                 EVT_ADD(LVar0, LVar3)
                 EVT_CALL(SetEnemyHP, ACTOR_SELF, LVar0)
@@ -685,7 +685,7 @@ EvtScript N(802210E0) = {
     EVT_SET(LocalFlag(2), 0)
     EVT_SET(LocalFlag(3), 0)
     EVT_SET(LocalFlag(4), 0)
-    EVT_CALL(EnemyCreateTargetList, 32770)
+    EVT_CALL(EnemyCreateTargetList, 0x00008002)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar5)
@@ -701,7 +701,7 @@ EvtScript N(802210E0) = {
         EVT_CASE_EQ(3)
             EVT_SET(LocalFlag(4), 1)
     EVT_END_SWITCH
-    EVT_CALL(ChooseNextTarget, 0, LVar0)
+    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
@@ -752,7 +752,7 @@ EvtScript N(802210E0) = {
 
 EvtScript N(80221468) = {
     EVT_SET(LVar9, 0)
-    EVT_CALL(EnemyCreateTargetList, 32770)
+    EVT_CALL(EnemyCreateTargetList, 0x00008002)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -777,7 +777,7 @@ EvtScript N(80221468) = {
                 EVT_END_IF
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_CALL(ChooseNextTarget, 0, LVar0)
+    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF

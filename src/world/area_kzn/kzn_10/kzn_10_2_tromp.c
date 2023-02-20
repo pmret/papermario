@@ -85,7 +85,7 @@ EvtScript N(EVS_SpinyTromp_ShakeCam) = {
 
 EvtScript N(EVS_SetupSpinyTromp) = {
     EVT_SET_GROUP(EVT_GROUP_EF)
-    EVT_CALL(SetGroupEnabled, MODEL_goron, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_goron, MODEL_GROUP_HIDDEN)
     EVT_CALL(EnableModel, MODEL_me, FALSE)
     EVT_CALL(TranslateGroup, MODEL_goron, 0, 0, 0)
     EVT_CALL(RotateGroup, MODEL_goron, 0, 0, 0, 1)
@@ -107,7 +107,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(InterruptUsePartner)
-    EVT_CALL(SetGroupEnabled, MODEL_goron, 1)
+    EVT_CALL(SetGroupVisibility, MODEL_goron, MODEL_GROUP_VISIBLE)
     EVT_CALL(EnableModel, MODEL_me, TRUE)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(LVar0, UNK_FUNC_50_LVar1)
@@ -243,7 +243,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
         EVT_ADD(LVar7, 7)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetGroupEnabled, MODEL_goron, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_goron, MODEL_GROUP_HIDDEN)
     EVT_CALL(EnableModel, MODEL_me, FALSE)
     EVT_WAIT(10)
     EVT_IF_EQ(AF_KZN_TrompHitPlayer, FALSE)

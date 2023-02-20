@@ -47,15 +47,15 @@ EvtScript N(EVS_SetWallRot_ToadHouse) = {
 EvtScript N(EVS_RoomListener_ToadHouse) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_g73, 0)
-            EVT_CALL(SetGroupEnabled, MODEL_g97, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g73, MODEL_GROUP_HIDDEN)
+            EVT_CALL(SetGroupVisibility, MODEL_g97, MODEL_GROUP_HIDDEN)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
             // do nothing
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             // do nothing
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_g73, 1)
-            EVT_CALL(SetGroupEnabled, MODEL_g97, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_g73, MODEL_GROUP_VISIBLE)
+            EVT_CALL(SetGroupVisibility, MODEL_g97, MODEL_GROUP_VISIBLE)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

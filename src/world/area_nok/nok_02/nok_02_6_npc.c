@@ -62,7 +62,7 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
         EVT_CALL(SetCamPitch, CAM_DEFAULT, 17, EVT_FLOAT(-5.5))
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, 4)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(SetGroupEnabled, MODEL_g111, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_g111, MODEL_GROUP_VISIBLE)
         EVT_THREAD
             EVT_WAIT(10)
             EVT_CALL(PlaySoundAt, SOUND_BASIC_DOOR_OPEN, 0, 0, 0, -180)
@@ -108,7 +108,7 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
                     EVT_GOTO(20)
                 EVT_END_IF
             EVT_CALL(PlaySoundAt, SOUND_BASIC_DOOR_CLOSE, 0, 0, 0, -180)
-            EVT_CALL(SetGroupEnabled, MODEL_g111, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g111, MODEL_GROUP_HIDDEN)
         EVT_END_THREAD
         EVT_CALL(NpcMoveTo, NPC_Kooper, 25, -130, 10)
         EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)

@@ -82,7 +82,7 @@ ActorBlueprint N(bow) = {
     .maxHP = 15,
     .partCount = ARRAY_COUNT(N(bow_parts)),
     .partsData = N(bow_parts),
-    .takeTurnScript = &N(bow_init),
+    .initScript = &N(bow_init),
     .statusTable = N(bow_statusTable),
     .escapeChance = 50,
     .airLiftChance = 80,
@@ -245,7 +245,7 @@ EvtScript N(bow_takeTurn) = {
         EVT_ELSE
             EVT_CALL(AddGoalPos, ACTOR_SELF, 10, -10, 0)
         EVT_END_IF
-        EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
+        EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, EASING_COS_IN_OUT)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Idle)
     EVT_END_THREAD
     EVT_WAIT(15)
@@ -286,7 +286,7 @@ EvtScript N(bow_takeTurn) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Injured)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 3)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SEEING_STARS)
             EVT_WAIT(30)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Idle)
@@ -304,7 +304,7 @@ EvtScript N(bow_takeTurn) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Run)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
+            EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, EASING_COS_IN_OUT)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Idle)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOO_VANISH)
             EVT_CALL(YieldTurn)
@@ -355,10 +355,10 @@ EvtScript N(bow_takeTurn) = {
         EVT_WAIT(2)
         EVT_CALL(SetPartScale, ACTOR_SELF, 1, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
         EVT_THREAD
-            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.5))
-            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.5))
-            EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
-            EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.2))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.5))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.2))
         EVT_END_THREAD
         EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar9)
         EVT_SWITCH(LVar9)
@@ -396,7 +396,7 @@ EvtScript N(bow_takeTurn) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Run)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, 10)
+            EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, EASING_COS_IN_OUT)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_Idle)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOO_VANISH)
             EVT_CALL(YieldTurn)

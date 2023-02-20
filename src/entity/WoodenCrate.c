@@ -251,8 +251,8 @@ void entity_WoodenCrate_shatter(Entity* entity, f32 arg1) {
         }
 
         if (flag) {
-            make_item_entity(data->itemID, entity->position.x, entity->position.y + 33.0, entity->position.z, 0xA, 0,
-                             player_get_camera_facing_angle(), data->globalFlagIndex);
+            make_item_entity(data->itemID, entity->position.x, entity->position.y + 33.0, entity->position.z,
+                ITEM_SPAWN_MODE_ITEM_BLOCK_ITEM, 0, player_get_camera_facing_angle(), data->globalFlagIndex);
         }
     }
 }

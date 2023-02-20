@@ -10,7 +10,7 @@ void floating_flower_update(EffectInstance* effect);
 void floating_flower_render(EffectInstance* effect);
 void floating_flower_appendGfx(void* effect);
 
-void floating_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
+void floating_flower_main(s32 type, f32 posX, f32 posY, f32 posZ, s32 duration) {
     EffectBlueprint bp;
     EffectInstance* effect;
     FloatingFlowerFXData* part;
@@ -30,44 +30,44 @@ void floating_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
 
     ASSERT(effect->data.floatingFlower != NULL);
 
-    part->unk_00 = arg0;
-    part->unk_04 = arg1;
-    part->unk_0C = arg3;
-    part->unk_10 = 0.0f;
-    part->unk_14 = 0.0f;
-    part->unk_18 = 0;
-    part->unk_08 = arg2 + 10.0f;
+    part->type = type;
+    part->pos.x = posX;
+    part->pos.y = posY + 10.0f;
+    part->pos.z = posZ;
+    part->vel.x = 0.0f;
+    part->vel.y = 0.0f;
+    part->vel.z = 0.0f;
 
-    if (arg0 == 0) {
-        part->unk_18 = 0;
-        part->unk_24 = 0.0f;
-        part->unk_28 = 0.0f;
-        part->unk_1C = 0.12f;
-        part->unk_20 = -0.0152f;
-        part->unk_2C = 3.0f;
+    if (type == 0) {
+        part->vel.z = 0;
+        part->rot.x = 0.0f;
+        part->rot.y = 0.0f;
+        part->accelY = 0.12f;
+        part->jerkY = -0.0152f;
+        part->angularVel.x = 3.0f;
         if (D_E001A610 != 0) {
             phi_f6 = -10.0f;
         } else {
             phi_f6 = 10.0f;
         }
-        part->unk_30 = phi_f6;
-        part->unk_34 = arg4;
+        part->angularVel.y = phi_f6;
+        part->timeLeft = duration;
     } else {
-        part->unk_1C = 0.12f;
-        part->unk_20 = -0.0152f;
-        part->unk_24 = (shim_rand_int(1) * 30) - 15;
-        part->unk_28 = shim_rand_int(360);
-        part->unk_2C = 0;
-        part->unk_30 = (shim_rand_int(1) * 8) - 4;
-        part->unk_34 = arg4;
-        part->unk_38 = 0;
+        part->accelY = 0.12f;
+        part->jerkY = -0.0152f;
+        part->rot.x = (shim_rand_int(1) * 30) - 15;
+        part->rot.y = shim_rand_int(360);
+        part->angularVel.x = 0;
+        part->angularVel.y = (shim_rand_int(1) * 8) - 4;
+        part->timeLeft = duration;
+        part->lifetime = 0;
         part->unk_44 = shim_rand_int(10);
         part->unk_40 = shim_rand_int(20);
         part->unk_3C = (shim_rand_int(1) * 2) - 1;
     }
 
     D_E001A610++;
-    if (D_E001A610 >= 2) {
+    if (D_E001A610 > 1) {
         D_E001A610 = 0;
     }
 }
@@ -77,52 +77,52 @@ void floating_flower_init(EffectInstance* effect) {
 
 void floating_flower_update(EffectInstance* effect) {
     FloatingFlowerFXData* data = effect->data.floatingFlower;
-    s32 unk_00 = data->unk_00;
+    s32 type = data->type;
 
-    if (data->unk_34 < 150) {
-        data->unk_10 -= 0.001;
-        data->unk_04 += data->unk_10;
-        data->unk_0C += data->unk_18;
-        data->unk_24 += data->unk_2C;
-        if (unk_00 == 0) {
-            if (data->unk_24 < 10.0f) {
-                data->unk_24 = 10.0f;
-                data->unk_2C = -data->unk_2C;
+    if (data->timeLeft < 150) {
+        data->vel.x -= 0.001;
+        data->pos.x += data->vel.x;
+        data->pos.z += data->vel.z;
+        data->rot.x += data->angularVel.x;
+        if (type == 0) {
+            if (data->rot.x < 10.0f) {
+                data->rot.x = 10.0f;
+                data->angularVel.x = -data->angularVel.x;
             }
-            if (data->unk_24 > 45.0f) {
-                data->unk_24 = 45.0f;
-                data->unk_2C = -data->unk_2C;
+            if (data->rot.x > 45.0f) {
+                data->rot.x = 45.0f;
+                data->angularVel.x = -data->angularVel.x;
             }
         }
-        data->unk_28 += data->unk_30;
-        if (unk_00 == 0) {
-            data->unk_14 = 1.4f;
+        data->rot.y += data->angularVel.y;
+        if (type == 0) {
+            data->vel.y = 1.4f;
         } else {
-            data->unk_14 = 1.0f;
+            data->vel.y = 1.0f;
         }
     } else {
-        data->unk_20 += 0.0007;
-        data->unk_1C += data->unk_20;
-        data->unk_14 += data->unk_1C;
-        if (data->unk_14 > 1.0f) {
-            data->unk_14 = 1.0f;
+        data->jerkY += 0.0007;
+        data->accelY += data->jerkY;
+        data->vel.y += data->accelY;
+        if (data->vel.y > 1.0f) {
+            data->vel.y = 1.0f;
         }
     }
 
-    if (unk_00 == 1) {
+    if (type == 1) {
         data->unk_40 += data->unk_3C;
         if (data->unk_40 >= 20) {
             data->unk_40 = 20;
             data->unk_3C = -1;
         } else if (data->unk_40 <= 0) {
             data->unk_40 = 0;
-            data->unk_3C = unk_00;
+            data->unk_3C = type;
         }
     }
-    data->unk_08 += data->unk_14;
-    data->unk_34 += -1;
-    data->unk_38 += 1;
-    if (data->unk_34 < 0) {
+    data->pos.y += data->vel.y;
+    data->timeLeft--;
+    data->lifetime++;
+    if (data->timeLeft < 0) {
         shim_remove_effect(effect);
     }
 }
@@ -141,7 +141,7 @@ void floating_flower_render(EffectInstance* effect) {
 }
 
 void floating_flower_appendGfx(void* effect) {
-    Matrix4f sp20, other;
+    Matrix4f mtxTransform, mtxUnused;
     EffectInstance* effectTemp = effect;
     FloatingFlowerFXData* part = effectTemp->data.floatingFlower;
     u32 alpha;
@@ -150,8 +150,8 @@ void floating_flower_appendGfx(void* effect) {
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
 
-    shim_guPositionF(sp20, part->unk_24, part->unk_28, 0.0f, 1.0f, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    shim_guPositionF(mtxTransform, part->rot.x, part->rot.y, 0.0f, 1.0f, part->pos.x, part->pos.y, part->pos.z);
+    shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     a = alpha = 255;
 

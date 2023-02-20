@@ -448,7 +448,7 @@ void set_peach_shadow_scale(Shadow* shadow, f32 scale);
 s32 is_block_on_ground(Entity* block);
 void set_animation(s32 actorID, s32 partID, AnimID animID);
 void set_animation_rate(s32 actorID, s32 partID, f32 rate);
-void set_model_flags(u16, s32, s32);
+void set_model_group_visibility(u16, s32, s32);
 void init_enter_world_shared(void);
 s16 update_enter_map_screen_overlay(s16* progress);
 s16 update_exit_map_screen_overlay(s16* progress);

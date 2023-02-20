@@ -63,7 +63,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 7,
     .partCount = ARRAY_COUNT(N(partsTable_8021EEB8)),
     .partsData = N(partsTable_8021EEB8),
-    .takeTurnScript = &N(init_802207B8),
+    .initScript = &N(init_802207B8),
     .statusTable = N(statusTable_8021EE0C),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -131,7 +131,7 @@ EvtScript N(idle_8021EFE8) = {
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021EF50)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(IdleRunToGoal, -127, 0)
+    EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021EF04)))
     EVT_LOOP(20)
         EVT_LABEL(1)
@@ -147,7 +147,7 @@ EvtScript N(idle_8021EFE8) = {
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021EF50)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(IdleRunToGoal, -127, 0)
+    EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021EF04)))
     EVT_LOOP(80)
         EVT_LABEL(2)
@@ -370,7 +370,7 @@ EvtScript N(takeTurn_8021FAF0) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(2.0))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
@@ -458,7 +458,7 @@ EvtScript N(takeTurn_8021FAF0) = {
 
 EvtScript N(init_802207B8) = {
     EVT_EXEC_WAIT(N(init_8021EF9C))
-    EVT_CALL(SetEnemyHP, -127, 2)
+    EVT_CALL(SetEnemyHP, ACTOR_SELF, 2)
     EVT_CALL(N(DivActorLevel4))
     EVT_RETURN
     EVT_END

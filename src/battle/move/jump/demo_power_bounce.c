@@ -13,12 +13,6 @@ s32 N(DifficultyTable)[] = {
 
 s32 N(BaseHitChance) = 200;
 
-/*
-s32 N(D_802A26D0)[] = {
-    36, 2, 0xFBD3E28A, 0 
-};
-*/
-
 API_CALLABLE(N(GetHitChance)) {
     Actor* enemyTargetActor = get_actor(get_actor(script->owner1.enemyID)->targetActorID);
     u32 enemyTargetPowerBounceChance;

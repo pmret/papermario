@@ -874,7 +874,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             out += INDENT + f".maxHP = {d[3]},\n"
             out += INDENT + f".partCount = ARRAY_COUNT({read_ptr(d[5], symbol_map)}),\n"
             out += INDENT + f".partsData = {read_ptr(d[5], symbol_map)},\n"
-            out += INDENT + f".takeTurnScript = {read_ptr(d[6], symbol_map)},\n"
+            out += INDENT + f".initScript = {read_ptr(d[6], symbol_map)},\n"
             out += INDENT + f".statusTable = {read_ptr(d[7], symbol_map)},\n"
             out += INDENT + f".escapeChance = {d[8]},\n"
             out += INDENT + f".airLiftChance = {d[9]},\n"

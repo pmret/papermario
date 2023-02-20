@@ -232,7 +232,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 4,
     .partCount = ARRAY_COUNT(N(partsTable_80218D34)),
     .partsData = N(partsTable_80218D34),
-    .takeTurnScript = &N(init_80218EC4),
+    .initScript = &N(init_80218EC4),
     .statusTable = N(statusTable_80218C88),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -594,7 +594,7 @@ EvtScript N(handleEvent_802197C4) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2062)
             EVT_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
             EVT_END_THREAD
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -706,7 +706,7 @@ EvtScript N(8021A200) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.0))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
@@ -718,7 +718,7 @@ EvtScript N(8021A200) = {
     EVT_THREAD
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
         EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-            EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
         EVT_END_IF
     EVT_END_THREAD
     EVT_SET(LVar1, 0)
@@ -729,7 +729,7 @@ EvtScript N(8021A200) = {
     EVT_THREAD
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
         EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-            EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
@@ -745,7 +745,7 @@ EvtScript N(8021A200) = {
     EVT_THREAD
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
         EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-            EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
         EVT_END_IF
     EVT_END_THREAD
     EVT_SET(LVar1, 0)
@@ -756,7 +756,7 @@ EvtScript N(8021A200) = {
     EVT_THREAD
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
         EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-            EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
@@ -788,7 +788,7 @@ EvtScript N(takeTurn_8021A7C4) = {
     EVT_THREAD
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
         EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-            EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim05)
@@ -799,7 +799,7 @@ EvtScript N(takeTurn_8021A7C4) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(PlaySound, 0x10F)
+            EVT_CALL(PlaySound, SOUND_10F)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim01)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -812,7 +812,7 @@ EvtScript N(takeTurn_8021A7C4) = {
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                    EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+                    EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
                 EVT_END_IF
             EVT_END_THREAD
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
@@ -824,7 +824,7 @@ EvtScript N(takeTurn_8021A7C4) = {
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                    EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+                    EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
                 EVT_END_IF
             EVT_END_THREAD
             EVT_SUB(LVar0, 15)
@@ -834,7 +834,7 @@ EvtScript N(takeTurn_8021A7C4) = {
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                    EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+                    EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
                 EVT_END_IF
             EVT_END_THREAD
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim04)
@@ -845,7 +845,7 @@ EvtScript N(takeTurn_8021A7C4) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim01)
             EVT_EXEC_WAIT(N(8021B41C))
@@ -890,7 +890,7 @@ EvtScript N(takeTurn_8021A7C4) = {
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                    EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+                    EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
                 EVT_END_IF
             EVT_END_THREAD
             EVT_ADD(LVar0, 30)
@@ -900,7 +900,7 @@ EvtScript N(takeTurn_8021A7C4) = {
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                    EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+                    EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
                 EVT_END_IF
             EVT_END_THREAD
             EVT_ADD(LVar0, 20)
@@ -910,7 +910,7 @@ EvtScript N(takeTurn_8021A7C4) = {
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                    EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+                    EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
                 EVT_END_IF
             EVT_END_THREAD
             EVT_SUB(LVar0, 10)
@@ -919,7 +919,7 @@ EvtScript N(takeTurn_8021A7C4) = {
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                    EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+                    EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
                 EVT_END_IF
             EVT_END_THREAD
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Anim01)
@@ -981,7 +981,7 @@ EvtScript N(8021B50C) = {
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                    EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+                    EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
                 EVT_END_IF
             EVT_END_THREAD
         EVT_ELSE
@@ -993,7 +993,7 @@ EvtScript N(8021B50C) = {
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                    EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+                    EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
                 EVT_END_IF
             EVT_END_THREAD
         EVT_END_IF
@@ -1007,7 +1007,7 @@ EvtScript N(8021B50C) = {
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                    EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+                    EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
                 EVT_END_IF
             EVT_END_THREAD
         EVT_ELSE
@@ -1018,7 +1018,7 @@ EvtScript N(8021B50C) = {
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                    EVT_CALL(ShakeCam, 1, 0, 1, EVT_FLOAT(0.5))
+                    EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
                 EVT_END_IF
             EVT_END_THREAD
         EVT_END_IF

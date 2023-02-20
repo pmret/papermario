@@ -10,7 +10,7 @@ f32 D_802809F0 = 0.0f;
 s8 D_802809F4 = 0;
 s8 D_802809F5 = 0;
 s16 D_802809F6 = -1;
-s16 D_802809F8 = 0;
+s16 DemoBattleBeginDelay = 0;
 u16 gTattleBgTextureYOffset = 0;
 
 BSS s32 bSavedPartner;

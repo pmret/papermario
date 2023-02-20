@@ -112,7 +112,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 40,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -292,7 +292,7 @@ EvtScript N(init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_SPEAK_FLAGS), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_HEAVY_JUMP))
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_LIGHT_BEAM_COUNTER), 0)
-    EVT_CALL(PlayEffect, EFFECT_BULB_GLOW, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), LVar0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), LVar0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_EFFECT), LVar0)
     EVT_CALL(N(init_overlay))
     EVT_EXEC(N(updateEffectThread))
@@ -546,7 +546,7 @@ EvtScript N(attackHeavyJump) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BigLanternGhost_Anim01)
     EVT_WAIT(8)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 999, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_3E7, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(6)
@@ -564,7 +564,7 @@ EvtScript N(attackHeavyJump) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_37D)
-            EVT_CALL(ResetActorSounds, ACTOR_SELF, 2)
+            EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
             EVT_SUB(LVar0, 15)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -601,7 +601,7 @@ EvtScript N(attackHeavyJump) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_37D)
-            EVT_CALL(ResetActorSounds, ACTOR_SELF, 2)
+            EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
             EVT_CALL(SetBattleCamZoom, 320)
             EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -672,13 +672,13 @@ EvtScript N(attackLightBeam) = {
     EVT_ADD(LVar2, 2)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlayEffect, EFFECT_LIGHT_RAYS, 2, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), LVarB, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), LVarB, 0)
         EVT_WAIT(30)
         EVT_CALL(RemoveEffect, LVarB)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlayEffect, EFFECT_RADIATING_ENERGY_ORB, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 30, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_RADIATING_ENERGY_ORB, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 30, 0)
     EVT_END_THREAD
     EVT_WAIT(5)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
@@ -853,11 +853,11 @@ EvtScript N(setGhostNoTarget) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_LT(5)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, 1)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
         EVT_CASE_LT(8)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, 0)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, 0)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

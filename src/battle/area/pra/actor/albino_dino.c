@@ -77,7 +77,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 8,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 40,
     .airLiftChance = 15,
@@ -221,9 +221,9 @@ EvtScript N(stamp) = {
     EVT_ELSE
         EVT_ADD(LVar0, -20)
     EVT_END_IF
-    EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 25, 8, 45, 20, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 25, 8, 45, 20, 0)
     EVT_IF_GT(LVarA, 3)
-        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.2))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.2))
         EVT_SET(LVarA, 0)
     EVT_END_IF
     EVT_ADD(LVarA, 1)
@@ -270,7 +270,7 @@ EvtScript N(takeTurn) = {
             EVT_END_IF
             EVT_WAIT(40)
             EVT_CALL(YieldTurn)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_EXEC_WAIT(N(returnHome))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -290,7 +290,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(12.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(1.5))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(1.5))
     EVT_END_THREAD
     EVT_KILL_THREAD(LVar9)
     EVT_WAIT(2)
@@ -307,7 +307,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2FD)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Anim03)
-            EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(1.0))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(1.0))
             EVT_WAIT(10)
             EVT_CALL(YieldTurn)
             EVT_EXEC_WAIT(N(returnHome))

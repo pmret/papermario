@@ -577,7 +577,7 @@ void btl_state_update_celebration(void) {
                             partner->flags &= ~(ACTOR_FLAG_4000000 | ACTOR_FLAG_8000000);
                         }
                         battleStatus->battlePhase = PHASE_CELEBRATE;
-                        script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+                        script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
                         player->takeTurnScript = script;
                         player->takeTurnScriptID = script->id;
                         script->owner1.actorID = ACTOR_PLAYER;

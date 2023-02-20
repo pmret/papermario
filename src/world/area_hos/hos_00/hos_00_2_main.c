@@ -50,7 +50,7 @@ EvtScript N(EVS_EnterMap) = {
     EVT_END_IF
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, hos_00_ENTRY_3)
-        EVT_CALL(SetGroupEnabled, MODEL_g107, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_g107, MODEL_GROUP_HIDDEN)
         EVT_EXEC(N(EVS_Scene_Wishing))
         EVT_RETURN
     EVT_ELSE

@@ -5,20 +5,22 @@
 
 #define NAMESPACE b_area_iwa_iwa_01b
 
-EvtScript N(beforeBattle_80221510) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetGroupEnabled, MODEL_a, FALSE)
+    EVT_CALL(SetGroupVisibility, MODEL_a, MODEL_GROUP_HIDDEN)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle_80221544) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_80221554)[] = {
-    MODEL_iwa1, MODEL_o331, 0,
+s32 N(ForegroundModels)[] = {
+    MODEL_iwa1,
+    MODEL_o331,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {
@@ -26,7 +28,7 @@ Stage NAMESPACE = {
     .shape = "iwa_bt01_shape",
     .hit = "iwa_bt01_hit",
     .bg = "iwa_bg",
-    .preBattle = &N(beforeBattle_80221510),
-    .postBattle = &N(afterBattle_80221544),
-    .foregroundModelList = N(foregroundModelList_80221554),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

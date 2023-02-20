@@ -3,28 +3,33 @@
 
 #define NAMESPACE b_area_kzn2_kzn_01
 
-EvtScript N(beforeBattle_80227780) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_CALL(SetGroupEnabled, 17, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    EVT_CALL(SetGroupVisibility, 17, MODEL_GROUP_HIDDEN)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle_802277D0) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_802277E0)[] = {
-    0x0000000E, 0x0000000F, 0x00000018, 0x00000019, 0x0000001A, 0x00000000,
+s32 N(ForegroundModels)[] = {
+    0x0000000E,
+    0x0000000F,
+    0x00000018,
+    0x00000019,
+    0x0000001A,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {
     .texture = "kzn_tex",
     .shape = "kzn_bt01_shape",
     .hit = "kzn_bt01_hit",
-    .preBattle = &N(beforeBattle_80227780),
-    .postBattle = &N(afterBattle_802277D0),
-    .foregroundModelList = N(foregroundModelList_802277E0),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

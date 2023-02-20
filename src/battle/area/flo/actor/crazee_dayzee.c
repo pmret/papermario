@@ -6,7 +6,7 @@
 
 #define NAMESPACE b_area_flo_crazee_dayzee
 
-extern EvtScript N(init);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
@@ -64,7 +64,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 8,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(statusTable),
     .escapeChance = 50,
     .airLiftChance = 85,
@@ -93,7 +93,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-EvtScript N(init) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
@@ -274,7 +274,7 @@ EvtScript N(attackPainfulSong) = {
         EVT_CALL(RandInt, 30, LVar3)
         EVT_SUB(LVar3, 15)
         EVT_ADD(LVar3, LVar0)
-        EVT_CALL(PlayEffect, EFFECT_MUSIC_NOTE, 1, LVar3, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_MUSIC_NOTE, 1, LVar3, LVar1, LVar2, 0)
         EVT_WAIT(10)
     EVT_END_LOOP
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Anim01)
@@ -291,7 +291,7 @@ EvtScript N(attackPainfulSong) = {
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_EXEC_WAIT(N(returnHome))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -344,7 +344,7 @@ EvtScript N(flee) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_BATTLE_FLED, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_BATTLE_FLED, TRUE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN

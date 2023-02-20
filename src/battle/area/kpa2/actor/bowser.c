@@ -92,7 +92,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 50,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -353,13 +353,13 @@ EvtScript N(attackHeavyJump) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 28, FALSE, TRUE, FALSE)
             EVT_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(3.0))
+                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(3.0))
             EVT_END_THREAD
             EVT_SUB(LVar0, 35)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 14, FALSE, TRUE, FALSE)
             EVT_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(2.0))
+                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(2.0))
             EVT_END_THREAD
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_PostJump)
             EVT_WAIT(3)
@@ -380,7 +380,7 @@ EvtScript N(attackHeavyJump) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 24, FALSE, TRUE, FALSE)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(3.0))
+        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(3.0))
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Land)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_3), LVar0)
@@ -396,7 +396,7 @@ EvtScript N(attackHeavyJump) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
             EVT_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(3.0))
+                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(3.0))
             EVT_END_THREAD
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_PostJump)
             EVT_WAIT(3)
@@ -437,7 +437,7 @@ EvtScript N(attackFlameBreath) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
     EVT_SUB(LVar3, 40)
     EVT_SET(LVar4, 20)
-    EVT_CALL(PlayEffect, EFFECT_FIRE_BREATH, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 50, 1, 24, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_FIRE_BREATH, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 50, 1, 24, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 100)
     EVT_WAIT(20)
@@ -498,9 +498,9 @@ EvtScript N(attackShockwaveDrain) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 15)
     EVT_SUB(LVar2, 3)
-    EVT_CALL(PlayEffect, EFFECT_LIGHT_RAYS, 2, LVar0, 90, LVar2, EVT_FLOAT(1.0), LVarF, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, LVar0, 90, LVar2, EVT_FLOAT(1.0), LVarF, 0)
     EVT_SUB(LVar2, 3)
-    EVT_CALL(PlayEffect, EFFECT_BULB_GLOW, 2, LVar0, 90, LVar2, EVT_FLOAT(1.0), LVarE, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 90, LVar2, EVT_FLOAT(1.0), LVarE, 0)
     EVT_WAIT(16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 45)
@@ -510,7 +510,7 @@ EvtScript N(attackShockwaveDrain) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 13)
     EVT_SET(LVar1, 55)
-    EVT_CALL(PlayEffect, EFFECT_ENERGY_SHOCKWAVE, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 60, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_SHOCKWAVE, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 60, 0)
     EVT_THREAD
         EVT_CALL(N(UnfadeBackgroundToBlack))
     EVT_END_THREAD
@@ -554,7 +554,7 @@ EvtScript N(attackShockwaveDrain) = {
     EVT_END_THREAD
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC, 0, STATUS_FLAG_POISON, 4, BS_FLAGS1_SP_EVT_ACTIVE)
-    EVT_CALL(RemovePlayerBuffs, 268435455)
+    EVT_CALL(RemovePlayerBuffs, PLAYER_BUFF_JUMP_CHARGE | PLAYER_BUFF_HAMMER_CHARGE | PLAYER_BUFF_STONE | PLAYER_BUFF_HUSTLE | PLAYER_BUFF_STATIC | PLAYER_BUFF_TRANSPARENT | PLAYER_BUFF_CLOUD_NINE | PLAYER_BUFF_TURBO_CHARGE | PLAYER_BUFF_WATER_BLOCK | PLAYER_BUFF_PARTNER_GLOWING | 0xFFEFC04)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -595,10 +595,10 @@ EvtScript N(returnHome) = {
 EvtScript N(recover) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_ADD(LVar2, 60)
-    EVT_CALL(PlayEffect, EFFECT_SPARKLES, 0, LVar1, LVar2, LVar3, EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar1, LVar2, LVar3, EVT_FLOAT(1.0), 0)
     EVT_ADD(LVar1, 30)
     EVT_ADD(LVar2, 20)
-    EVT_CALL(PlayEffect, EFFECT_RECOVER, 0, LVar1, LVar2, LVar3, 10, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_RECOVER, 0, LVar1, LVar2, LVar3, 10, 0)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
     EVT_ADD(LVar0, 10)
     EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar1)

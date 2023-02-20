@@ -676,7 +676,7 @@ API_CALLABLE(N(RunMinigame)) {
                         npc->jumpScale = 1.1f;
                         data->box[i].stateTimer = 0;
                         model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
-                        model->flags &= ~MODEL_FLAG_ENABLED;
+                        model->flags &= ~MODEL_FLAG_HIDDEN;
                         if (!(model->flags & MODEL_FLAG_HAS_TRANSFORM_APPLIED)) {
                             guTranslateF(model->transformMatrix, npc->pos.x, npc->pos.y, npc->pos.z);
                             model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
@@ -708,7 +708,7 @@ API_CALLABLE(N(RunMinigame)) {
                         data->box[i].state = BOX_STATE_PEACH_IDLE;
                         data->box[i].stateTimer = rand_int(330) + 90;
                         disable_npc_shadow(npc);
-                        model->flags |= MODEL_FLAG_ENABLED;
+                        model->flags |= MODEL_FLAG_HIDDEN;
                     }
                     break;
                 case BOX_STATE_PEACH_HIT:
@@ -717,7 +717,7 @@ API_CALLABLE(N(RunMinigame)) {
                     enable_npc_shadow(npc);
                     npc->duration = 0;
                     data->box[i].state = BOX_STATE_PEACH_EMERGE;
-                    model->flags &= ~MODEL_FLAG_ENABLED;
+                    model->flags &= ~MODEL_FLAG_HIDDEN;
                     // fallthrough
                 case BOX_STATE_PEACH_EMERGE:
                     hittingPeachBlock = TRUE;
@@ -734,7 +734,7 @@ API_CALLABLE(N(RunMinigame)) {
                     if (npc->duration >= 30) {
                         data->box[i].state = BOX_STATE_PEACH_DONE;
                         disable_npc_shadow(npc);
-                        model->flags |= MODEL_FLAG_ENABLED;
+                        model->flags |= MODEL_FLAG_HIDDEN;
                     }
                     break;
                 case BOX_STATE_PEACH_DONE:

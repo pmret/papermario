@@ -69,7 +69,7 @@ ApiStatus SetTexPanner(Evt* script, s32 isInitialCall);
 ApiStatus SetCustomGfxEnabled(Evt* script, s32 isInitialCall);
 ApiStatus EnableTexPanning(Evt* script, s32 isInitialCall);
 ApiStatus EnableModel(Evt* script, s32 isInitialCall);
-ApiStatus SetGroupEnabled(Evt* script, s32 isInitialCall);
+ApiStatus SetGroupVisibility(Evt* script, s32 isInitialCall);
 ApiStatus SetTexPanOffset(Evt* script, s32 isInitialCall);
 ApiStatus SetModelFlags(Evt* script, s32 isInitialCall);
 ApiStatus TranslateGroup(Evt* script, s32 isInitialCall);

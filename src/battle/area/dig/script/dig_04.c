@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_dig_dig_04_script
 
-API_CALLABLE(func_802187F0_6DE5B0) {
+API_CALLABLE(N(SetupDemoPlayerMove)) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     s32 selectedItemID;
@@ -16,7 +16,7 @@ API_CALLABLE(func_802187F0_6DE5B0) {
     battleStatus->selectedMoveID = 0;
     battleStatus->currentAttackElement = 0;
     playerData->invItems[0] = selectedItemID;
-    battleStatus->currentTargetListFlags = gItemTable[playerData->invItems[0]].targetFlags | 0x8000;
+    battleStatus->currentTargetListFlags = gItemTable[playerData->invItems[0]].targetFlags | ITEM_TARGET_FLAG_8000;
 
     player_create_target_list(player);
     player->selectedTargetIndex = 0;
@@ -31,10 +31,10 @@ EvtScript NAMESPACE = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 1)
     EVT_WAIT(3)
-    EVT_CALL(SetCamViewport, 1, 29, 20, 262, 177)
+    EVT_CALL(SetCamViewport, CAM_BATTLE, 29, 20, 262, 177)
     EVT_CALL(func_802535B4, 0)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
-    EVT_CALL(func_802187F0_6DE5B0)
+    EVT_CALL(N(SetupDemoPlayerMove))
     EVT_CALL(SetBattleState, BATTLE_STATE_PLAYER_MOVE)
     EVT_RETURN
     EVT_END

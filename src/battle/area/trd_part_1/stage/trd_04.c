@@ -56,9 +56,9 @@ EvtScript N(802241AC) = {
     EVT_END
 };
 
-EvtScript N(beforeBattle_80224298) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_SET(LVar0, 13)
     EVT_SET(LVar1, 0)
     EVT_SET(LVar2, 40)
@@ -68,20 +68,21 @@ EvtScript N(beforeBattle_80224298) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80224320) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_80224330)[] = {
-    0x0000000D, 0x00000000,
+s32 N(ForegroundModels)[] = {
+    0x0000000D,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {
     .texture = "trd_tex",
     .shape = "trd_bt04_shape",
     .hit = "trd_bt04_hit",
-    .preBattle = &N(beforeBattle_80224298),
-    .postBattle = &N(afterBattle_80224320),
-    .foregroundModelList = N(foregroundModelList_80224330),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

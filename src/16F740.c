@@ -9,7 +9,7 @@
 extern StageListRow* gCurrentStagePtr;
 
 extern s16 D_802809F6;
-extern s16 D_802809F8;
+extern s16 DemoBattleBeginDelay;
 extern s32 BattleScreenFadeAmt;
 extern EvtScript EVS_OnBattleInit;
 extern s32 D_80281454[];
@@ -447,9 +447,9 @@ void btl_state_update_normal_start(void) {
                     if (!(gGameStatusPtr->demoFlags & 1)) {
                         actor = battleStatus->playerActor;
                         if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
-                            script = start_script(&PeachEnterStage, EVT_PRIORITY_A, 0);
+                            script = start_script(&EVS_PeachEnterStage, EVT_PRIORITY_A, 0);
                         } else {
-                            script = start_script(&MarioEnterStage, EVT_PRIORITY_A, 0);
+                            script = start_script(&EVS_MarioEnterStage, EVT_PRIORITY_A, 0);
                         }
                         actor->takeTurnScript = script;
                         actor->takeTurnScriptID = script->id;
@@ -461,7 +461,7 @@ void btl_state_update_normal_start(void) {
                         && is_ability_active(ABILITY_DIZZY_ATTACK)
                     ) {
                         actor = battleStatus->enemyActors[0];
-                        script = start_script(&DoDizzyAttack, EVT_PRIORITY_A, 0);
+                        script = start_script(&EVS_ApplyDizzyAttack, EVT_PRIORITY_A, 0);
                         actor->takeTurnScript = script;
                         actor->takeTurnScriptID = script->id;
                         script->owner1.enemyID = ACTOR_ENEMY0;
@@ -979,7 +979,7 @@ back:
         if (battleStatus->hammerLossTurns >= 0) {
             battleStatus->hammerLossTurns--;
             if (battleStatus->hammerLossTurns == -1) {
-                script = start_script(&RegainAbility, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_PlayerRegainAbility, EVT_PRIORITY_A, 0);
                 player->takeTurnScript = script;
                 player->takeTurnScriptID = script->id;
                 script->owner1.actorID = ACTOR_PLAYER;
@@ -993,7 +993,7 @@ back:
         if (battleStatus->jumpLossTurns >= 0) {
             battleStatus->jumpLossTurns--;
             if (battleStatus->jumpLossTurns == -1) {
-                script = start_script(&RegainAbility, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_PlayerRegainAbility, EVT_PRIORITY_A, 0);
                 player->takeTurnScript = script;
                 player->takeTurnScriptID = script->id;
                 script->owner1.actorID = ACTOR_PLAYER;
@@ -1007,7 +1007,7 @@ back:
         if (battleStatus->itemLossTurns >= 0) {
             battleStatus->itemLossTurns--;
             if (battleStatus->itemLossTurns == -1) {
-                script = start_script(&RegainAbility, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_PlayerRegainAbility, EVT_PRIORITY_A, 0);
                 player->takeTurnScript = script;
                 player->takeTurnScriptID = script->id;
                 script->owner1.actorID = ACTOR_PLAYER;
@@ -1452,7 +1452,7 @@ void btl_state_update_9(void) {
                 battleStatus->merleeDefenseBoost = 3;
                 battleStatus->nextMerleeSpellType = MERLEE_SPELL_0;
                 battleStatus->battlePhase = PHASE_MERLEE_DEFENSE_BONUS;
-                script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
                 player->takeTurnScript = script;
                 player->takeTurnScriptID = script->id;
                 script->owner1.actorID = ACTOR_PLAYER;
@@ -1862,7 +1862,7 @@ void btl_state_update_victory(void) {
                 playerData->merleeCastsLeft++;
             } else {
                 battleStatus->battlePhase = PHASE_MERLEE_EXP_BONUS;
-                script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
                 player->takeTurnScript = script;
                 player->takeTurnScriptID = script->id;
                 script->owner1.actorID = ACTOR_PLAYER;
@@ -2163,7 +2163,7 @@ void btl_state_update_defend(void) {
         case BTL_SUBSTATE_DEFEND_INIT:
             gBattleStatus.unk_8C = 0;
             gBattleStatus.battlePhase = PHASE_USE_DEFEND;
-            player->takeTurnScript = script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+            player->takeTurnScript = script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
             player->takeTurnScriptID = script->id;
             gBattleSubState = BTL_SUBSTATE_DEFEND_AWAIT_SCRIPT;
             script->owner1.actorID = ACTOR_PLAYER;
@@ -2234,7 +2234,7 @@ void btl_state_update_run_away(void) {
             }
 
             battleStatus->battlePhase = PHASE_RUN_AWAY_START;
-            script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+            script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
             player->takeTurnScript = script;
             player->takeTurnScriptID = script->id;
             script->owner1.actorID = ACTOR_PLAYER;
@@ -2316,7 +2316,7 @@ void btl_state_update_run_away(void) {
     switch (gBattleSubState) {
         case BTL_SUBSTATE_RUN_AWAY_EXEC_POST_FAILURE:
             battleStatus->battlePhase = PHASE_RUN_AWAY_FAIL;
-            script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+            script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
             player->takeTurnScript = script;
             player->takeTurnScriptID = script->id;
             script->owner1.actorID = ACTOR_PLAYER;
@@ -2379,7 +2379,7 @@ void btl_state_update_defeat(void) {
             btl_cam_use_preset(BTL_CAM_PRESET_25);
             btl_cam_target_actor(ACTOR_PLAYER);
             battleStatus->battlePhase = PHASE_RUN_AWAY_RESET;
-            script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+            script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
             player->takeTurnScript = script;
             player->takeTurnScriptID = script->id;
             script->owner1.actorID = ACTOR_PLAYER;
@@ -2398,7 +2398,7 @@ void btl_state_update_defeat(void) {
             }
             if (find_item(ITEM_LIFE_SHROOM) >= 0) {
                 battleStatus->battlePhase = PHASE_USE_LIFE_SHROOM;
-                script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
                 player->takeTurnScript = script;
                 player->takeTurnScriptID = script->id;
                 script->owner1.actorID = ACTOR_PLAYER;
@@ -2623,7 +2623,7 @@ void btl_state_update_player_move(void) {
                 battleStatus->merleeAttackBoost = 3;
                 battleStatus->nextMerleeSpellType = MERLEE_SPELL_0;
                 battleStatus->battlePhase = PHASE_MERLEE_ATTACK_BONUS;
-                script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
                 player->takeTurnScript = script;
                 player->takeTurnScriptID = script->id;
                 script->owner1.actorID = ACTOR_PLAYER;
@@ -2675,9 +2675,9 @@ void btl_state_update_player_move(void) {
             reset_all_actor_sounds(player);
             battleStatus->battlePhase = PHASE_EXECUTE_ACTION;
             if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
-                script = start_script(&PeachScriptDispatcher, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_Peach_HandlePhase, EVT_PRIORITY_A, 0);
             } else {
-                script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
             }
             player->takeTurnScript = script;
             gBattleSubState = BTL_SUBSTATE_PLAYER_MOVE_HANDLE_RESULTS;
@@ -2980,7 +2980,7 @@ void btl_state_update_end_player_turn(void) {
                 gBattleSubState = BTL_SUBSTATE_END_PLAYER_TURN_AWAIT_HAPPY;
             } else {
                 battleStatus->battlePhase = PHASE_PLAYER_HAPPY;
-                script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+                script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
                 player->takeTurnScript = script;
                 player->takeTurnScriptID = script->id;
                 script->owner1.actorID = ACTOR_PLAYER;
@@ -3859,7 +3859,7 @@ void btl_state_update_first_strike(void) {
             reset_actor_turn_info();
             // begin the partner turn script
             battleStatus->battlePhase = PHASE_FIRST_STRIKE;
-            script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+            script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
             player->takeTurnScript = script;
             player->takeTurnScriptID = script->id;
             script->owner1.actorID = ACTOR_PLAYER;
@@ -4370,8 +4370,8 @@ void btl_state_update_end_demo_battle(void) {
         case BTL_SUBSTATE_END_DEMO_BATTLE_INIT:
             BattleScreenFadeAmt = 0;
             if (D_802809F6 == -1) {
-                if (D_802809F8 != 0) {
-                    D_802809F8--;
+                if (DemoBattleBeginDelay != 0) {
+                    DemoBattleBeginDelay--;
                     break;
                 }
             }

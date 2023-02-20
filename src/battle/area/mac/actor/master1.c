@@ -72,7 +72,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 50,
     .partCount = ARRAY_COUNT(N(partsTable_8022A364)),
     .partsData = N(partsTable_8022A364),
-    .takeTurnScript = &N(init_8022A3B0),
+    .initScript = &N(init_8022A3B0),
     .statusTable = N(statusTable_8022A2B8),
     .escapeChance = 100,
     .airLiftChance = 0,
@@ -97,13 +97,13 @@ EvtScript N(init_8022A3B0) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8022AA54)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8022A494)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022B2CC)))
-    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_8022B06C)))
-    EVT_CALL(SetActorVar, -127, 0, 0)
-    EVT_CALL(SetActorVar, -127, 1, 0)
-    EVT_CALL(SetActorVar, -127, 2, 0)
-    EVT_CALL(SetActorVar, -127, 3, 2)
+    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_8022B06C)))
+    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, 3, 2)
     EVT_SET(GF_FoughtTheMaster, 1)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_NO_GAME_OVER, 1)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_NO_GAME_OVER, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -309,32 +309,32 @@ EvtScript N(nextTurn_8022B06C) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(10)
-            EVT_CALL(GetActorVar, -127, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, 131118, -127, 1, 10616841, 10616837)
-                EVT_CALL(SetActorVar, -127, 0, 1)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_002E, ACTOR_SELF, 1, 0x00A20009, 0x00A20005)
+                EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
             EVT_END_IF
         EVT_CASE_EQ(12)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_FLAG(LVar0, 0x351000)
                 EVT_BREAK_SWITCH
             EVT_END_IF
-            EVT_CALL(GetActorHP, -127, LVar0)
-            EVT_CALL(GetEnemyMaxHP, -127, LVar1)
+            EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
+            EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar1)
             EVT_DIV(LVar1, 2)
             EVT_IF_LE(LVar0, LVar1)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, 131121, -127, 1, 10616841, 10616837)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_0031, ACTOR_SELF, 1, 0x00A20009, 0x00A20005)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_CALL(GetPlayerHP, LVar0)
             EVT_IF_LE(LVar0, 5)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, 131122, -127, 1, 10616841, 10616837)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_0032, ACTOR_SELF, 1, 0x00A20009, 0x00A20005)
                 EVT_BREAK_SWITCH
             EVT_END_IF
     EVT_END_SWITCH
@@ -352,10 +352,10 @@ EvtScript N(handleEvent_8022B2CC) = {
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar0)
     EVT_IF_FLAG(LVar0, BS_FLAGS1_200 | BS_FLAGS1_40)
-        EVT_CALL(GetLastDamage, -127, LVar0)
+        EVT_CALL(GetLastDamage, ACTOR_SELF, LVar0)
         EVT_IF_GT(LVar0, 0)
-            EVT_CALL(SetActorVar, -127, 2, 1)
-            EVT_CALL(AddActorVar, -127, 3, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
+            EVT_CALL(AddActorVar, ACTOR_SELF, 3, 1)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -365,9 +365,9 @@ EvtScript N(handleEvent_8022B2CC) = {
         EVT_CASE_OR_EQ(11)
         EVT_CASE_OR_EQ(25)
         EVT_CASE_OR_EQ(31)
-            EVT_CALL(GetActorVar, -127, 2, LVarA)
-            EVT_CALL(GetActorVar, -127, 3, LVarB)
-            EVT_CALL(SetActorVar, -127, 2, 0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVarA)
+            EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVarB)
+            EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_FLAG(LVar0, 0x3F1000)
                 EVT_BREAK_SWITCH
@@ -389,13 +389,13 @@ EvtScript N(handleEvent_8022B2CC) = {
                 EVT_IF_GT(LVarB, 2)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
                     EVT_CALL(MoveBattleCamOver, 10)
-                    EVT_CALL(ActorSpeak, 131120, -127, 1, 10616841, 10616837)
-                    EVT_CALL(SetActorVar, -127, 3, 0)
+                    EVT_CALL(ActorSpeak, MSG_MAC_Gate_0030, ACTOR_SELF, 1, 0x00A20009, 0x00A20005)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
                 EVT_END_IF
             EVT_ELSE
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, 131119, -127, 1, 10616841, 10616837)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_002F, ACTOR_SELF, 1, 0x00A20009, 0x00A20005)
             EVT_END_IF
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

@@ -120,7 +120,7 @@ EvtScript N(script6) = {
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 45)
-        EVT_CALL(MakeItemEntity, LVarE, LVar0, LVar1, LVar2, 1, 0)
+        EVT_CALL(MakeItemEntity, LVarE, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_DECORATION, 0)
         EVT_SET(LVarE, LVar0)
         EVT_LOOP(25)
             EVT_CALL(GetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)

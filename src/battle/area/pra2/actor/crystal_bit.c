@@ -147,7 +147,7 @@ ActorBlueprint N(1) = {
     .maxHP = 1,
     .partCount = ARRAY_COUNT(N(parts_1)),
     .partsData = N(parts_1),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -170,7 +170,7 @@ ActorBlueprint N(2) = {
     .maxHP = 1,
     .partCount = ARRAY_COUNT(N(parts_2)),
     .partsData = N(parts_2),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -193,7 +193,7 @@ ActorBlueprint N(3) = {
     .maxHP = 1,
     .partCount = ARRAY_COUNT(N(parts_3)),
     .partsData = N(parts_3),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -240,7 +240,7 @@ API_CALLABLE(UpdateCrystalBitEffect) {
 }
 
 EvtScript N(idle) = {
-    EVT_CALL(PlayEffect, EFFECT_MISC_PARTICLES, 1, NPC_DISPOSE_LOCATION, 24, 24, EVT_FLOAT(1.0), 5, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_MISC_PARTICLES, 1, NPC_DISPOSE_LOCATION, 24, 24, EVT_FLOAT(1.0), 5, 0, 0, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVarF)
     EVT_CHILD_THREAD
         EVT_CALL(UpdateCrystalBitEffect, LVarF)

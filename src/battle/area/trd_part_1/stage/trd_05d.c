@@ -100,16 +100,16 @@ EvtScript N(802265C8) = {
     EVT_END
 };
 
-EvtScript N(beforeBattle_80226B74) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_CALL(EnableModel, 10, 0)
-    EVT_CALL(EnableModel, 15, 0)
-    EVT_CALL(EnableModel, 16, 0)
-    EVT_CALL(EnableModel, 17, 0)
-    EVT_CALL(EnableModel, 25, 0)
-    EVT_CALL(EnableModel, 14, 0)
-    EVT_CALL(EnableModel, 27, 0)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    EVT_CALL(EnableModel, 10, FALSE)
+    EVT_CALL(EnableModel, 15, FALSE)
+    EVT_CALL(EnableModel, 16, FALSE)
+    EVT_CALL(EnableModel, 17, FALSE)
+    EVT_CALL(EnableModel, 25, FALSE)
+    EVT_CALL(EnableModel, 14, FALSE)
+    EVT_CALL(EnableModel, 27, FALSE)
     EVT_THREAD
         EVT_SET(LVar0, 6)
         EVT_EXEC(N(802265C8))
@@ -124,7 +124,7 @@ EvtScript N(beforeBattle_80226B74) = {
     EVT_END
 };
 
-EvtScript N(afterBattle_80226CB8) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
@@ -133,6 +133,6 @@ Stage NAMESPACE = {
     .texture = "trd_tex",
     .shape = "trd_bt05_shape",
     .hit = "trd_bt05_hit",
-    .preBattle = &N(beforeBattle_80226B74),
-    .postBattle = &N(afterBattle_80226CB8),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
 };

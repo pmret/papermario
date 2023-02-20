@@ -331,10 +331,10 @@ EvtScript N(EVS_Scene_PuzzleSolved) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_THREAD
         EVT_WAIT(45)
-        EVT_CALL(SetGroupEnabled, MODEL_g255, 1)
-        EVT_CALL(SetGroupEnabled, MODEL_g262, 1)
-        EVT_CALL(SetGroupEnabled, MODEL_g264, 1)
-        EVT_CALL(SetGroupEnabled, MODEL_g265, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_g255, MODEL_GROUP_VISIBLE)
+        EVT_CALL(SetGroupVisibility, MODEL_g262, MODEL_GROUP_VISIBLE)
+        EVT_CALL(SetGroupVisibility, MODEL_g264, MODEL_GROUP_VISIBLE)
+        EVT_CALL(SetGroupVisibility, MODEL_g265, MODEL_GROUP_VISIBLE)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o1071, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_THREAD
     EVT_THREAD
@@ -565,17 +565,17 @@ EvtScript N(EVS_SetupPuzzle) = {
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_PushStatue_03)), TRIGGER_WALL_PUSH, COLLIDER_s03e, 1, 0)
     EVT_IF_GE(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
         EVT_CALL(PlayModelAnimation, MDL_ANIMATOR_0, EVT_PTR(N(AS_Stairs_InitializeAfter)))
-        EVT_CALL(SetGroupEnabled, MODEL_no, 0)
-        EVT_CALL(SetGroupEnabled, MODEL_kage_yuka, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_no, MODEL_GROUP_HIDDEN)
+        EVT_CALL(SetGroupVisibility, MODEL_kage_yuka, MODEL_GROUP_VISIBLE)
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1071, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(PlayModelAnimation, MDL_ANIMATOR_0, EVT_PTR(N(AS_Stairs_InitializeBefore)))
-        EVT_CALL(SetGroupEnabled, MODEL_g255, 0)
-        EVT_CALL(SetGroupEnabled, MODEL_g262, 0)
-        EVT_CALL(SetGroupEnabled, MODEL_g264, 0)
-        EVT_CALL(SetGroupEnabled, MODEL_g265, 0)
-        EVT_CALL(SetGroupEnabled, MODEL_no, 1)
-        EVT_CALL(SetGroupEnabled, MODEL_kage_yuka, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_g255, MODEL_GROUP_HIDDEN)
+        EVT_CALL(SetGroupVisibility, MODEL_g262, MODEL_GROUP_HIDDEN)
+        EVT_CALL(SetGroupVisibility, MODEL_g264, MODEL_GROUP_HIDDEN)
+        EVT_CALL(SetGroupVisibility, MODEL_g265, MODEL_GROUP_HIDDEN)
+        EVT_CALL(SetGroupVisibility, MODEL_no, MODEL_GROUP_VISIBLE)
+        EVT_CALL(SetGroupVisibility, MODEL_kage_yuka, MODEL_GROUP_HIDDEN)
         EVT_EXEC(N(EVS_Scene_PuzzleSolved))
     EVT_END_IF
     EVT_RETURN

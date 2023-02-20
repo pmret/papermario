@@ -4,19 +4,21 @@
 
 #define NAMESPACE b_area_arn_arn_01
 
-EvtScript N(beforeBattle_802278F0) = {
+EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(afterBattle_80227910) = {
+EvtScript N(EVS_PostBattle) = {
     EVT_RETURN
     EVT_END
 };
 
-s32 N(foregroundModelList_80227920)[] = {
-    -1, MODEL_iwa4, 0,
+s32 N(ForegroundModels)[] = {
+    -1,
+    MODEL_iwa4,
+    STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {
@@ -24,7 +26,7 @@ Stage NAMESPACE = {
     .shape = "arn_bt01_shape",
     .hit = "arn_bt01_hit",
     .bg = "arn_bg",
-    .preBattle = &N(beforeBattle_802278F0),
-    .postBattle = &N(afterBattle_80227910),
-    .foregroundModelList = N(foregroundModelList_80227920),
+    .preBattle = &N(EVS_PreBattle),
+    .postBattle = &N(EVS_PostBattle),
+    .foregroundModelList = N(ForegroundModels),
 };

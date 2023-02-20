@@ -47,20 +47,20 @@ EvtScript N(EVS_DropDoor_House) = {
 EvtScript N(EVS_RoomListener_House) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_g29, 1)
-            EVT_CALL(SetGroupEnabled, MODEL_g81, 1)
-            EVT_CALL(SetGroupEnabled, MODEL_g51, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_g29, MODEL_GROUP_VISIBLE)
+            EVT_CALL(SetGroupVisibility, MODEL_g81, MODEL_GROUP_VISIBLE)
+            EVT_CALL(SetGroupVisibility, MODEL_g51, MODEL_GROUP_VISIBLE)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
-            EVT_CALL(SetGroupEnabled, MODEL_g1, 0)
-            EVT_CALL(SetGroupEnabled, MODEL_g35, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g1, MODEL_GROUP_HIDDEN)
+            EVT_CALL(SetGroupVisibility, MODEL_g35, MODEL_GROUP_HIDDEN)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
-            EVT_CALL(SetGroupEnabled, MODEL_g1, 1)
-            EVT_CALL(SetGroupEnabled, MODEL_g35, 1)
+            EVT_CALL(SetGroupVisibility, MODEL_g1, MODEL_GROUP_VISIBLE)
+            EVT_CALL(SetGroupVisibility, MODEL_g35, MODEL_GROUP_VISIBLE)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
-            EVT_CALL(SetGroupEnabled, MODEL_g29, 0)
-            EVT_CALL(SetGroupEnabled, MODEL_g81, 0)
-            EVT_CALL(SetGroupEnabled, MODEL_g31, 0)
-            EVT_CALL(SetGroupEnabled, MODEL_g51, 0)
+            EVT_CALL(SetGroupVisibility, MODEL_g29, MODEL_GROUP_HIDDEN)
+            EVT_CALL(SetGroupVisibility, MODEL_g81, MODEL_GROUP_HIDDEN)
+            EVT_CALL(SetGroupVisibility, MODEL_g31, MODEL_GROUP_HIDDEN)
+            EVT_CALL(SetGroupVisibility, MODEL_g51, MODEL_GROUP_HIDDEN)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -81,21 +81,21 @@ EvtScript N(EVS_SetDoorRot_Upstairs) = {
 EvtScript N(EVS_ManageUpstairsVisibility) = {
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_IF_LT(LVar1, 100)
-        EVT_CALL(SetGroupEnabled, MODEL_g31, 0)
-        EVT_CALL(SetGroupEnabled, MODEL_g50, 1)
+        EVT_CALL(SetGroupVisibility, MODEL_g31, MODEL_GROUP_HIDDEN)
+        EVT_CALL(SetGroupVisibility, MODEL_g50, MODEL_GROUP_VISIBLE)
     EVT_ELSE
-        EVT_CALL(SetGroupEnabled, MODEL_g31, 1)
-        EVT_CALL(SetGroupEnabled, MODEL_g50, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_g31, MODEL_GROUP_VISIBLE)
+        EVT_CALL(SetGroupVisibility, MODEL_g50, MODEL_GROUP_HIDDEN)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_SetupRooms) = {
-    EVT_CALL(SetGroupEnabled, MODEL_g29, 0)
-    EVT_CALL(SetGroupEnabled, MODEL_g81, 0)
-    EVT_CALL(SetGroupEnabled, MODEL_g31, 0)
-    EVT_CALL(SetGroupEnabled, MODEL_g51, 0)
+    EVT_CALL(SetGroupVisibility, MODEL_g29, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_g81, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_g31, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_g51, MODEL_GROUP_HIDDEN)
     EVT_BIND_PADLOCK(EVT_PTR(N(EVS_ManageUpstairsVisibility)), TRIGGER_FLOOR_TOUCH, COLLIDER_o92, 0, 0, 1)
     // front door
     EVT_CALL(CreateMapRoom,

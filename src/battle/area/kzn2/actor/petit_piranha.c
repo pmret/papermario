@@ -82,7 +82,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 1,
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
-    .takeTurnScript = &N(init),
+    .initScript = &N(init),
     .statusTable = N(statusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -211,10 +211,10 @@ EvtScript N(handleEvent) = {
 
 EvtScript N(recoverHP) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(PlayEffect, EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 0)
     EVT_ADD(LVar0, 20)
     EVT_CALL(GetLastDamage, ACTOR_SELF, LVar3)
-    EVT_CALL(PlayEffect, EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3, 0)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
     EVT_ADD(LVar0, LVar3)
     EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar1)
@@ -265,7 +265,7 @@ EvtScript N(takeTurn) = {
         EVT_ADD(LVar0, 15)
         EVT_ADD(LVar1, 15)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(FlyToGoal, ACTOR_SELF, 20, -12, 0)
+        EVT_CALL(FlyToGoal, ACTOR_SELF, 20, -12, EASING_LINEAR)
     EVT_ELSE
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
         EVT_CALL(SetBattleCamZoom, 380)
@@ -276,16 +276,16 @@ EvtScript N(takeTurn) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_PetitPiranha_Anim03)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(2.0))
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3CA)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3CA)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 20)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, 0)
+        EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, EASING_LINEAR)
         EVT_WAIT(10)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3CB)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3CB)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -294,19 +294,19 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_PetitPiranha_Anim05)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -16, 3)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_INVISIBLE, 1)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -16, EASING_QUARTIC_IN)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 10)
     EVT_SET(LVar1, 0)
     EVT_ADD(LVar2, 2)
-    EVT_CALL(PlayEffect, EFFECT_FLAME, 1, LVar0, LVar1, LVar2, EVT_FLOAT(0.3), LVarA, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_FLAME, 1, LVar0, LVar1, LVar2, EVT_FLOAT(0.3), LVarA, 0)
     EVT_THREAD
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
-        EVT_CALL(MakeLerp, 0, 30, 21, 0)
+        EVT_CALL(MakeLerp, 0, 30, 21, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
             EVT_SET(LVar4, LVar3)
@@ -318,7 +318,7 @@ EvtScript N(takeTurn) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(MakeLerp, 140, 160, 2, 1)
+    EVT_CALL(MakeLerp, 140, 160, 2, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_MULF(LVar0, EVT_FLOAT(0.01))
@@ -332,7 +332,7 @@ EvtScript N(takeTurn) = {
     EVT_SWITCH(LVar9)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_CALL(MakeLerp, 160, 10, 20, 1)
+            EVT_CALL(MakeLerp, 160, 10, 20, EASING_QUADRATIC_IN)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
                 EVT_MULF(LVar0, EVT_FLOAT(0.01))
@@ -361,7 +361,7 @@ EvtScript N(takeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
         EVT_CASE_OR_EQ(HIT_RESULT_10)
-            EVT_CALL(MakeLerp, 160, 10, 20, 1)
+            EVT_CALL(MakeLerp, 160, 10, 20, EASING_QUADRATIC_IN)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
                 EVT_MULF(LVar0, EVT_FLOAT(0.01))

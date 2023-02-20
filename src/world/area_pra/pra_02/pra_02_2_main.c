@@ -328,10 +328,10 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_IF_EQ(GF_PRA02_DoorColorToggle, FALSE)
         EVT_SET(MV_WallPosOffset, 0)
-        EVT_CALL(SetGroupEnabled, MODEL_g308, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_g308, MODEL_GROUP_HIDDEN)
     EVT_ELSE
         EVT_SET(MV_WallPosOffset, -250)
-        EVT_CALL(SetGroupEnabled, MODEL_g307, 0)
+        EVT_CALL(SetGroupVisibility, MODEL_g307, MODEL_GROUP_HIDDEN)
     EVT_END_IF
     EVT_EXEC(N(EVS_UpdateShiftingWallPos))
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ManagePoundableSwitch)), TRIGGER_FLOOR_TOUCH, COLLIDER_o1342, 1, 0)

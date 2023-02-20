@@ -918,6 +918,8 @@ enum SoundIDs {
     SOUND_238                       = 0x00000238,
     SOUND_23D                       = 0x0000023D,
     SOUND_241                       = 0x00000241,
+    SOUND_242                       = 0x00000242,
+    SOUND_244                       = 0x00000244,
     SOUND_245                       = 0x00000245,
     SOUND_246                       = 0x00000246,
     SOUND_247                       = 0x00000247,
@@ -1018,6 +1020,7 @@ enum SoundIDs {
     SOUND_2E9                       = 0x000002E9,
     SOUND_2EA                       = 0x000002EA,
     SOUND_2EB                       = 0x000002EB,
+    SOUND_2EC                       = 0x000002EC,
     SOUND_2ED                       = 0x000002ED,
     SOUND_2EE                       = 0x000002EE,
     SOUND_2EF                       = 0x000002EF,
@@ -1033,6 +1036,7 @@ enum SoundIDs {
     SOUND_2F9                       = 0x000002F9,
     SOUND_2FA                       = 0x000002FA,
     SOUND_2FB                       = 0x000002FB,
+    SOUND_2FC                       = 0x000002FC,
     SOUND_2FD                       = 0x000002FD,
     SOUND_CLOSE_SHELL               = 0x000002FF,
     SOUND_300                       = 0x00000300,
@@ -1042,6 +1046,7 @@ enum SoundIDs {
     SOUND_305                       = 0x00000305,
     SOUND_306                       = 0x00000306,
     SOUND_309                       = 0x00000309,
+    SOUND_30A                       = 0x0000030A,
     SOUND_30B                       = 0x0000030B,
     SOUND_SHY_GUY_SCREAMS1          = 0x0000030C,
     SOUND_SHY_GUY_SCREAMS2          = 0x0000030D,
@@ -1206,6 +1211,7 @@ enum SoundIDs {
     SOUND_3C7                       = 0x000003C7,
     SOUND_3C8                       = 0x000003C8,
     SOUND_3C9                       = 0x000003C9,
+    SOUND_3CA                       = 0x000003CA,
     SOUND_3CB                       = 0x000003CB,
     SOUND_3CC                       = 0x000003CC,
     SOUND_3CD                       = 0x000003CD,
@@ -1242,6 +1248,7 @@ enum SoundIDs {
     SOUND_DANGER                    = 0x000003F1,
     SOUND_PERIL                     = 0x000003F2,
     SOUND_3F3                       = 0x000003F3,
+    SOUND_3F4                       = 0x000003F4,
     SOUND_3F6                       = 0x000003F6,
     SOUND_3F9                       = 0x000003F9,
     SOUND_THROW                     = 0x000003FA,
@@ -1268,6 +1275,7 @@ enum SoundIDs {
     SOUND_CANNON2                   = 0x00002017,
     SOUND_CANNON3                   = 0x00002018,
     SOUND_2019                      = 0x00002019,
+    SOUND_201A                      = 0x0000201A,
     SOUND_201B                      = 0x0000201B,
     SOUND_201C                      = 0x0000201C,
     SOUND_201D                      = 0x0000201D,
@@ -1314,6 +1322,8 @@ enum SoundIDs {
     SOUND_204B                      = 0x0000204B,
     SOUND_204D                      = 0x0000204D,
     SOUND_2051                      = 0x00002051,
+    SOUND_2052                      = 0x00002052,
+    SOUND_2053                      = 0x00002053,
     SOUND_2055                      = 0x00002055,
     SOUND_2056                      = 0x00002056,
     SOUND_2059                      = 0x00002059,
@@ -1338,6 +1348,7 @@ enum SoundIDs {
     SOUND_206E                      = 0x0000206E,
     SOUND_206F                      = 0x0000206F,
     SOUND_2070                      = 0x00002070,
+    SOUND_2071                      = 0x00002071,
     SOUND_2072                      = 0x00002072,
     SOUND_2073                      = 0x00002073,
     SOUND_2074                      = 0x00002074,
@@ -1412,6 +1423,7 @@ enum SoundIDs {
     SOUND_20C5                      = 0x000020C5,
     SOUND_20C6                      = 0x000020C6,
     SOUND_20C8                      = 0x000020C8,
+    SOUND_20C9                      = 0x000020C9,
     SOUND_20CA                      = 0x000020CA,
     SOUND_20CB                      = 0x000020CB,
     SOUND_20CC                      = 0x000020CC,
@@ -1436,13 +1448,16 @@ enum SoundIDs {
     SOUND_20DF                      = 0x000020DF,
     SOUND_20E0                      = 0x000020E0,
     SOUND_20E1                      = 0x000020E1,
+    SOUND_20E2                      = 0x000020E2,
     SOUND_20E3                      = 0x000020E3,
     SOUND_20E4                      = 0x000020E4,
     SOUND_20E5                      = 0x000020E5,
     SOUND_20E6                      = 0x000020E6,
     SOUND_20E7                      = 0x000020E7,
+    SOUND_20E8                      = 0x000020E8,
     SOUND_20E9                      = 0x000020E9,
     SOUND_20EA                      = 0x000020EA,
+    SOUND_20EB                      = 0x000020EB,
     SOUND_20EC                      = 0x000020EC,
     SOUND_20ED                      = 0x000020ED,
     SOUND_20EE                      = 0x000020EE,
@@ -1455,6 +1470,9 @@ enum SoundIDs {
     SOUND_20F5                      = 0x000020F5,
     SOUND_20F6                      = 0x000020F6,
     SOUND_20F7                      = 0x000020F7,
+    SOUND_20F9                      = 0x000020F9,
+    SOUND_20FB                      = 0x000020FB,
+    SOUND_20FC                      = 0x000020FC,
     SOUND_20FD                      = 0x000020FD,
     SOUND_20FE                      = 0x000020FE,
     SOUND_2101                      = 0x00002101,
@@ -3064,6 +3082,7 @@ enum NpcIDs {
     NPC_PLAYER       = -2,
     NPC_PARTNER      = -4,
     NPC_BTL_MERLEE   = -10,
+    NPC_BTL_SPIRIT   = 100,
 };
 
 enum EntityTypes {
@@ -3322,6 +3341,15 @@ enum StatusFlags {
     STATUS_FLAG_RIGHT_ON        = 0x40000000,
     STATUS_FLAG_80000000        = 0x80000000,
 };
+
+#define STATUS_FLAGS_IMMOBILIZED \
+     (STATUS_FLAG_STONE \
+    | STATUS_FLAG_STOP \
+    | STATUS_FLAG_DIZZY \
+    | STATUS_FLAG_PARALYZE \
+    | STATUS_FLAG_FEAR \
+    | STATUS_FLAG_FROZEN \
+    | STATUS_FLAG_SLEEP)
 
 enum DamageTypes {
     DAMAGE_TYPE_FIRE                       = 0x00000002,
@@ -4870,7 +4898,7 @@ enum GlobalOverrides {
 
 enum ModelFlags {
     MODEL_FLAG_FLAG_1                  = 0x0001,
-    MODEL_FLAG_ENABLED                 = 0x0002,
+    MODEL_FLAG_HIDDEN                  = 0x0002,
     MODEL_FLAG_FLAG_4                  = 0x0004,
     MODEL_FLAG_TRANSFORM_GROUP_MEMBER  = 0x0008,
     MODEL_FLAG_USES_CUSTOM_GFX         = 0x0010,
@@ -4885,6 +4913,13 @@ enum ModelFlags {
     MODEL_FLAG_FLAG_2000               = 0x2000,
     MODEL_FLAG_FLAG_4000               = 0x4000,
     MODEL_FLAG_FLAG_8000               = 0x8000,
+};
+
+enum ModelGroupVisibility {
+    MODEL_GROUP_HIDDEN          = 0,
+    MODEL_GROUP_VISIBLE         = 1,
+    MODEL_GROUP_OTHERS_HIDDEN   = 2,
+    MODEL_GROUP_OTHERS_VISIBLE  = 3,
 };
 
 enum TexPanner {
