@@ -412,15 +412,6 @@ void filemenu_draw_contents_option_right(
     }
 }
 
-#if VERSION_CN
-void filemenu_draw_contents_file_info(s32 fileIdx,
-                                      MenuPanel* menu,
-                                      s32 baseX, s32 baseY,
-                                      s32 width, s32 height,
-                                      s32 opacity, s32 darkening
-);
-INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_draw_contents_file_info);
-#else
 void filemenu_draw_contents_file_info(s32 fileIdx,
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -450,8 +441,8 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_LEVEL), baseX + 0x22, baseY + 10, 0xFF, 0xA, 1);
     temp_s3_2 = save->level;
     temp_s3 = temp_s3_2;
-    draw_number(temp_s3 / 10, baseX + 79, baseY + 10, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
-    draw_number(temp_s3 % 10, baseX + 88, baseY + 10, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number(temp_s3 / 10, baseX + 79, baseY + 10 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number(temp_s3 % 10, baseX + 88, baseY + 10 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PLAY_TIME), baseX + 11, baseY + 24, 0xFF, 0xA, 1);
 
     temp_s3_2 = save->timePlayed;
@@ -459,14 +450,14 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
         temp_s3_2 = MAX_DISPLAYED_TIME;
     }
 
-    draw_number((temp_s3_2 / 2160000) % 10, baseX + 76, baseY + 24, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number((temp_s3_2 / 2160000) % 10, baseX + 76, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
     temp_s1_2 = temp_s3_2 / 216000;
-    draw_number(temp_s1_2 - ((temp_s3_2 / 2160000) * 10), baseX + 85, baseY + 24, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number(temp_s1_2 - ((temp_s3_2 / 2160000) * 10), baseX + 85, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 95, baseY + 23, 0xFF, 0xA, 1);
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 95, baseY + 18, 0xFF, 0xA, 1);
     temp_s0_3 = temp_s3_2 / 36000;
-    draw_number(temp_s0_3 - (temp_s1_2 * 6), baseX + 100, baseY + 24, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
-    draw_number((temp_s3_2 / 3600) - (temp_s0_3 * 10), baseX + 109, baseY + 24, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number(temp_s0_3 - (temp_s1_2 * 6), baseX + 100, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number((temp_s3_2 / 3600) - (temp_s0_3 * 10), baseX + 109, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
 
     for (i = 0; i < 7; i++) {
         if (i < gSaveSlotMetadata[fileIdx].spiritsRescued) {
@@ -482,7 +473,6 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
         }
     }
 }
-#endif
 
 void filemenu_draw_contents_file_title(
     s32 fileIdx,
