@@ -1,5 +1,6 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/kmr_bt05_shape.h"
 
 #define NAMESPACE b_area_kmr_part_3_kmr_05
 
@@ -7,8 +8,8 @@
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(EnableModel, 26, FALSE)
-    EVT_CALL(EnableModel, 29, FALSE)
+    EVT_CALL(EnableModel, MODEL_yuka, FALSE)
+    EVT_CALL(EnableModel, MODEL_o303, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -19,8 +20,8 @@ EvtScript N(EVS_PostBattle) = {
 };
 
 s32 N(ForegroundModels)[] = {
-    0x00000020,
-    0x00000024,
+    MODEL_n2,
+    MODEL_m4,
     STAGE_MODEL_LIST_END
 };
 

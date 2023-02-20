@@ -1,5 +1,6 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/mim_bt01_shape.h"
 
 #define NAMESPACE b_area_kmr_part_3_mim_01
 

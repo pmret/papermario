@@ -1,6 +1,13 @@
 #include "common.h"
 
-API_CALLABLE(N(UnkFloatFunc005)) {
+enum {
+    FISH_STATE_INIT     = 0,
+    FISH_STATE_1        = 1,
+    FISH_STATE_2        = 2,
+    FISH_STATE_3        = 3,
+};
+
+API_CALLABLE(N(UpdateAnimatedFish)) {
     Bytecode* args = script->ptrReadPos;
     #ifdef AVOID_UB
     f32 vt0 = 0.0f;
@@ -21,12 +28,12 @@ API_CALLABLE(N(UnkFloatFunc005)) {
     f64 temp_f20_2;
     f64 temp_f20_3;
     f64 temp_f20_4;
-    s32 temp_s1;
+    s32 state;
 
-    script->functionTemp[0] = temp_s1 = evt_get_variable(script, *args++);
+    script->functionTemp[0] = state = evt_get_variable(script, *args++);
 
-    switch (temp_s1) {
-        case 0:
+    switch (state) {
+        case FISH_STATE_INIT:
             vt0 = 142.0f;
             vt1 = 0.0f;
             vt2 = -118.0f;
@@ -38,9 +45,9 @@ API_CALLABLE(N(UnkFloatFunc005)) {
             script->varTable[8] = 3;
             script->varTable[9] = 0;
             script->varTable[11] = 0;
-            script->functionTemp[0] = 1;
+            script->functionTemp[0] = FISH_STATE_1;
             break;
-        case 3:
+        case FISH_STATE_3:
             vt0 = 91.0f;
             vt1 = 0.0f;
             vt2 = -118.0f;
@@ -52,9 +59,9 @@ API_CALLABLE(N(UnkFloatFunc005)) {
             script->varTable[8] = 3;
             script->varTable[9] = 0;
             script->varTable[11] = 0;
-            script->functionTemp[0] = 1;
+            script->functionTemp[0] = FISH_STATE_1;
             break;
-        case 1:
+        case FISH_STATE_1:
             script->varTable[9] += script->varTable[8];
             if (script->varTable[9] > 45) {
                 script->varTable[9] = 45;
@@ -73,7 +80,7 @@ API_CALLABLE(N(UnkFloatFunc005)) {
                 script->varTable[11] = 1;
             }
             break;
-        case 2:
+        case FISH_STATE_2:
             script->varTable[9] += script->varTable[8];
             if (script->varTable[9] > 90) {
                 script->varTable[9] = 90;
@@ -102,93 +109,93 @@ API_CALLABLE(N(UnkFloatFunc005)) {
 EvtScript N(EVS_AnimateFishModel) = {
     EVT_SET(LVarA, LVar0)
     EVT_LABEL(0)
-    EVT_CALL(N(UnkFloatFunc005), 0)
-    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
-    EVT_WAIT(1)
-    EVT_LOOP(0)
-        EVT_CALL(N(UnkFloatFunc005), 1)
+        EVT_CALL(N(UpdateAnimatedFish), FISH_STATE_INIT)
         EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
         EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
         EVT_WAIT(1)
-        EVT_IF_EQ(LVarB, 1)
-            EVT_BREAK_LOOP
+        EVT_LOOP(0)
+            EVT_CALL(N(UpdateAnimatedFish), FISH_STATE_1)
+            EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+            EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVarB, 1)
+                EVT_BREAK_LOOP
+            EVT_END_IF
+        EVT_END_LOOP
+        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+        EVT_CALL(RotateModel, LVarA, -7, 0, 0, 1)
+        EVT_WAIT(5)
+        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+        EVT_CALL(RotateModel, LVarA, -27, 0, 0, 1)
+        EVT_WAIT(2)
+        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+        EVT_CALL(RotateModel, LVarA, -5, 0, 0, 1)
+        EVT_WAIT(3)
+        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+        EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
+        EVT_WAIT(5)
+        EVT_LOOP(0)
+            EVT_CALL(N(UpdateAnimatedFish), FISH_STATE_2)
+            EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+            EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVarB, 2)
+                EVT_BREAK_LOOP
+            EVT_END_IF
+        EVT_END_LOOP
+        EVT_CALL(RandInt, 80, LVarB)
+        EVT_ADD(LVarB, 30)
+        EVT_LOOP(LVarB)
+            EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+            EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
+            EVT_WAIT(1)
+        EVT_END_LOOP
+        EVT_CALL(RandInt, 5, LVar0)
+        EVT_IF_NE(LVar0, 0)
+            EVT_GOTO(0)
         EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(RotateModel, LVarA, -7, 0, 0, 1)
-    EVT_WAIT(5)
-    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(RotateModel, LVarA, -27, 0, 0, 1)
-    EVT_WAIT(2)
-    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(RotateModel, LVarA, -5, 0, 0, 1)
-    EVT_WAIT(3)
-    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
-    EVT_WAIT(5)
-    EVT_LOOP(0)
-        EVT_CALL(N(UnkFloatFunc005), 2)
+        EVT_CALL(N(UpdateAnimatedFish), FISH_STATE_3)
         EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
         EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
         EVT_WAIT(1)
-        EVT_IF_EQ(LVarB, 2)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(RandInt, 80, LVarB)
-    EVT_ADD(LVarB, 30)
-    EVT_LOOP(LVarB)
+        EVT_LOOP(0)
+            EVT_CALL(N(UpdateAnimatedFish), FISH_STATE_1)
+            EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+            EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVarB, 1)
+                EVT_BREAK_LOOP
+            EVT_END_IF
+        EVT_END_LOOP
+        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+        EVT_CALL(RotateModel, LVarA, -7, 0, 0, 1)
+        EVT_WAIT(5)
+        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+        EVT_CALL(RotateModel, LVarA, -27, 0, 0, 1)
+        EVT_WAIT(2)
+        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+        EVT_CALL(RotateModel, LVarA, -5, 0, 0, 1)
+        EVT_WAIT(3)
         EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
         EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(RandInt, 5, LVar0)
-    EVT_IF_NE(LVar0, 0)
+        EVT_WAIT(5)
+        EVT_LOOP(0)
+            EVT_CALL(N(UpdateAnimatedFish), FISH_STATE_2)
+            EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+            EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVarB, 2)
+                EVT_BREAK_LOOP
+            EVT_END_IF
+        EVT_END_LOOP
+        EVT_CALL(RandInt, 80, LVarB)
+        EVT_ADD(LVarB, 30)
+        EVT_LOOP(LVarB)
+            EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+            EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
+            EVT_WAIT(1)
+        EVT_END_LOOP
         EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(N(UnkFloatFunc005), 3)
-    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
-    EVT_WAIT(1)
-    EVT_LOOP(0)
-        EVT_CALL(N(UnkFloatFunc005), 1)
-        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVarB, 1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(RotateModel, LVarA, -7, 0, 0, 1)
-    EVT_WAIT(5)
-    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(RotateModel, LVarA, -27, 0, 0, 1)
-    EVT_WAIT(2)
-    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(RotateModel, LVarA, -5, 0, 0, 1)
-    EVT_WAIT(3)
-    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
-    EVT_WAIT(5)
-    EVT_LOOP(0)
-        EVT_CALL(N(UnkFloatFunc005), 2)
-        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVarB, 2)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(RandInt, 80, LVarB)
-    EVT_ADD(LVarB, 30)
-    EVT_LOOP(LVarB)
-        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateModel, LVarA, -20, 0, 0, 1)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -256,47 +263,47 @@ EvtScript N(script3) = {
     EVT_SET(LVar5, 5)
     EVT_USE_BUF(EVT_PTR(N(intTable_8021CD64)))
     EVT_LABEL(0)
-    EVT_BUF_READ1(LVar1)
-    EVT_IF_EQ(LVar1, 255)
-        EVT_USE_BUF(EVT_PTR(N(intTable_8021CD64)))
         EVT_BUF_READ1(LVar1)
-    EVT_END_IF
-    EVT_SET(LVar0, LVar5)
-    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, 0)
-    EVT_WAIT(1)
-    EVT_ADD(LVar5, 1)
-    EVT_SET(LVarC, LVarB)
-    EVT_SUB(LVarC, 20)
-    EVT_IF_GT(LVar5, LVarC)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_SET(LVar0, LVar5)
-    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, 0)
-    EVT_WAIT(1)
-    EVT_ADD(LVar5, 1)
-    EVT_SET(LVarC, LVarB)
-    EVT_SUB(LVarC, 20)
-    EVT_IF_GT(LVar5, LVarC)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_GOTO(0)
-    EVT_LABEL(1)
-    EVT_SET(LVar2, 0)
-    EVT_LOOP(20)
-        EVT_ADD(LVar5, 1)
-        EVT_SUB(LVar1, 2)
+        EVT_IF_EQ(LVar1, 255)
+            EVT_USE_BUF(EVT_PTR(N(intTable_8021CD64)))
+            EVT_BUF_READ1(LVar1)
+        EVT_END_IF
         EVT_SET(LVar0, LVar5)
         EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, 0)
         EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_SUB(LVar5, 280)
-    EVT_SET(LVar1, 0)
-    EVT_GOTO(0)
+        EVT_ADD(LVar5, 1)
+        EVT_SET(LVarC, LVarB)
+        EVT_SUB(LVarC, 20)
+        EVT_IF_GT(LVar5, LVarC)
+            EVT_GOTO(1)
+        EVT_END_IF
+        EVT_SET(LVar0, LVar5)
+        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, 0)
+        EVT_WAIT(1)
+        EVT_ADD(LVar5, 1)
+        EVT_SET(LVarC, LVarB)
+        EVT_SUB(LVarC, 20)
+        EVT_IF_GT(LVar5, LVarC)
+            EVT_GOTO(1)
+        EVT_END_IF
+        EVT_GOTO(0)
+    EVT_LABEL(1)
+        EVT_SET(LVar2, 0)
+        EVT_LOOP(20)
+            EVT_ADD(LVar5, 1)
+            EVT_SUB(LVar1, 2)
+            EVT_SET(LVar0, LVar5)
+            EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, 0)
+            EVT_WAIT(1)
+        EVT_END_LOOP
+        EVT_SUB(LVar5, 280)
+        EVT_SET(LVar1, 0)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(script4) = {
+EvtScript N(EVS_AnimateFlotsam) = {
     EVT_SET(LVarA, LVar0)
     EVT_LOOP(0)
         EVT_CALL(TranslateModel, LVarA, 0, 0, 0)

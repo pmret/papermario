@@ -3,32 +3,4 @@
 
 #define NAMESPACE b_area_kmr_part_2_kmr_05
 
-#include "world/common/todo/clouds.inc.c"
-
-EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(EnableModel, 27, FALSE)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(ForegroundModels)[] = {
-    0x00000020,
-    0x00000024,
-    STAGE_MODEL_LIST_END
-};
-
-Stage NAMESPACE = {
-    .texture = "kmr_tex",
-    .shape = "kmr_bt05_shape",
-    .hit = "kmr_bt05_hit",
-    .bg = "kmr_bg",
-    .preBattle = &N(EVS_PreBattle),
-    .postBattle = &N(EVS_PostBattle),
-    .foregroundModelList = N(ForegroundModels),
-};
+#include "battle/common/stage/kmr_05.inc.c"

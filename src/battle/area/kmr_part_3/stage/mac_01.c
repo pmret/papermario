@@ -1,27 +1,28 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/mac_bt01_shape.h"
 
 #define NAMESPACE b_area_kmr_part_3_mac_01
 
-#include "common/UnkModelStuff2.inc.c"
+#include "battle/common/stage/WaterEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_THREAD
-        EVT_SET(LVar0, 44)
+        EVT_SET(LVar0, MODEL_nami4)
         EVT_EXEC(N(EVS_AnimateWaveModel))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 47)
+        EVT_SET(LVar0, MODEL_nami3)
         EVT_EXEC(N(EVS_AnimateWaveModel))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 46)
+        EVT_SET(LVar0, MODEL_nami2)
         EVT_EXEC(N(EVS_AnimateWaveModel))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 45)
+        EVT_SET(LVar0, MODEL_nami1)
         EVT_EXEC(N(EVS_AnimateWaveModel))
     EVT_END_THREAD
-    EVT_SET(LVar0, 40)
+    EVT_SET(LVar0, MODEL_o391)
     EVT_EXEC(N(EVS_AnimateFishModel))
     EVT_RETURN
     EVT_END

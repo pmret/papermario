@@ -1,46 +1,47 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/kgr_bt01_shape.h"
 
 #define NAMESPACE b_area_kgr_kgr_01
 
-#include "common/UnkModelStuff2.inc.c"
+#include "battle/common/stage/WaterEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_THREAD
-        EVT_SET(LVar0, 19)
-        EVT_EXEC(N(script4))
+        EVT_SET(LVar0, MODEL_bin1)
+        EVT_EXEC(N(EVS_AnimateFlotsam))
         EVT_WAIT(4)
-        EVT_SET(LVar0, 20)
-        EVT_EXEC(N(script4))
+        EVT_SET(LVar0, MODEL_bin2)
+        EVT_EXEC(N(EVS_AnimateFlotsam))
         EVT_WAIT(4)
-        EVT_SET(LVar0, 21)
-        EVT_EXEC(N(script4))
+        EVT_SET(LVar0, MODEL_bin3)
+        EVT_EXEC(N(EVS_AnimateFlotsam))
         EVT_WAIT(4)
-        EVT_SET(LVar0, 22)
-        EVT_EXEC(N(script4))
+        EVT_SET(LVar0, MODEL_bin4)
+        EVT_EXEC(N(EVS_AnimateFlotsam))
     EVT_END_THREAD
     EVT_THREAD
-        EVT_SET(LVar0, 14)
-        EVT_EXEC(N(script4))
+        EVT_SET(LVar0, MODEL_hako1)
+        EVT_EXEC(N(EVS_AnimateFlotsam))
         EVT_WAIT(4)
-        EVT_SET(LVar0, 15)
-        EVT_EXEC(N(script4))
+        EVT_SET(LVar0, MODEL_hako2)
+        EVT_EXEC(N(EVS_AnimateFlotsam))
         EVT_WAIT(4)
-        EVT_SET(LVar0, 16)
-        EVT_EXEC(N(script4))
+        EVT_SET(LVar0, MODEL_hako4)
+        EVT_EXEC(N(EVS_AnimateFlotsam))
         EVT_WAIT(4)
-        EVT_SET(LVar0, 17)
-        EVT_EXEC(N(script4))
+        EVT_SET(LVar0, MODEL_hako5)
+        EVT_EXEC(N(EVS_AnimateFlotsam))
         EVT_WAIT(4)
-        EVT_SET(LVar0, 18)
-        EVT_EXEC(N(script4))
+        EVT_SET(LVar0, MODEL_hako6)
+        EVT_EXEC(N(EVS_AnimateFlotsam))
     EVT_END_THREAD
-    EVT_SET(LVar0, 11)
-    EVT_EXEC(N(script4))
-    EVT_SET(LVar0, 12)
-    EVT_EXEC(N(script4))
+    EVT_SET(LVar0, MODEL_fune2)
+    EVT_EXEC(N(EVS_AnimateFlotsam))
+    EVT_SET(LVar0, MODEL_fune1)
+    EVT_EXEC(N(EVS_AnimateFlotsam))
     EVT_RETURN
     EVT_END
 };
@@ -51,8 +52,8 @@ EvtScript N(EVS_PostBattle) = {
 };
 
 s32 N(ForegroundModels)[] = {
-    0x00000009,
-    0x00000010,
+    MODEL_hone,
+    MODEL_hako4,
     STAGE_MODEL_LIST_END
 };
 

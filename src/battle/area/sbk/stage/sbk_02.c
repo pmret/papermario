@@ -38,7 +38,7 @@ EvtScript N(EVS_PreBattle) = {
     EVT_SET(LVar0, 5)
     EVT_SET(LVar1, 240)
     EVT_EXEC(N(8021F720))
-    EVT_PLAY_EFFECT(EFFECT_SUN)
+    EVT_PLAY_EFFECT(EFFECT_SUN, 0, 0, 0, 0, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };

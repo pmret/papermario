@@ -5,7 +5,7 @@
 
 #define NAMESPACE b_area_sam2_sam_02d
 
-#include "common/UnkModelStuff.inc.c"
+#include "battle/common/stage/sam_Snowflakes.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
@@ -13,7 +13,7 @@ EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetGroupVisibility, 10, MODEL_GROUP_HIDDEN)
     EVT_CALL(SetGroupVisibility, 12, MODEL_GROUP_HIDDEN)
     EVT_CALL(SetGroupVisibility, 26, MODEL_GROUP_HIDDEN)
-    EVT_EXEC(N(UnkModelStuffScript1))
+    EVT_EXEC(N(EVS_SpawnSnowfall))
     EVT_RETURN
     EVT_END
 };

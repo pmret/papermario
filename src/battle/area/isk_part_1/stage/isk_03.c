@@ -3,23 +3,4 @@
 
 #define NAMESPACE b_area_isk_part_1_isk_03
 
-EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
-};
-
-Stage NAMESPACE = {
-    .texture = "isk_tex",
-    .shape = "isk_bt03_shape",
-    .hit = "isk_bt03_hit",
-    .bg = "sbk3_bg",
-    .preBattle = &N(EVS_PreBattle),
-    .postBattle = &N(EVS_PostBattle),
-};
+#include "battle/common/stage/isk_03.inc.c"

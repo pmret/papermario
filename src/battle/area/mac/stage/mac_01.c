@@ -4,7 +4,7 @@
 
 #define NAMESPACE b_area_mac_mac_01
 
-#include "common/UnkModelStuff2.inc.c"
+#include "battle/common/stage/WaterEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)

@@ -1,13 +1,14 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/Whacka.h"
 #include "mapfs/iwa_bt01_shape.h"
+
+#include "sprite/npc/Whacka.h"
 
 #define NAMESPACE b_area_iwa_iwa_01
 
 extern ActorBlueprint N(whacka);
-extern Formation N(specialFormation_802208E4);
+extern Formation N(WhackaFormation);
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
@@ -36,14 +37,14 @@ Stage NAMESPACE = {
     .postBattle = &N(EVS_PostBattle),
     .foregroundModelList = N(ForegroundModels),
     .stageEnemyCount = 1,
-    .stageFormation = &N(specialFormation_802208E4),
+    .stageFormation = &N(WhackaFormation),
     .stageEnemyChance = 512,
 };
 
-Vec3i N(vector3D_802208D8) = { 116, 0, -30 };
+Vec3i N(WhackaPos) = { 116, 0, -30 };
 
-Formation N(specialFormation_802208E4) = {
-    { .actor = &N(whacka), .home = { .vec = &N(vector3D_802208D8) }},
+Formation N(WhackaFormation) = {
+    { .actor = &N(whacka), .home = { .vec = &N(WhackaPos) }},
 };
 
 #define NAMESPACE b_area_iwa_iwa_01_whacka

@@ -1,8 +1,9 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/Whacka.h"
 #include "mapfs/iwa_bt02_shape.h"
+
+#include "sprite/npc/Whacka.h"
 
 #define NAMESPACE b_area_iwa_iwa_02
 
@@ -35,10 +36,10 @@ Stage NAMESPACE = {
     .foregroundModelList = N(ForegroundModels),
 };
 
-Vec3i N(D_802215F4_4B17E4) = { 0, 0, 0 };
+Vec3i N(WHACKAPOS) = { 0, 0, 0 };
 
-Formation N(specialFormation_whacka) = {
-    { .actor = &N(whacka), .home = { .vec = &N(D_802215F4_4B17E4) }},
+Formation N(WhackaFormation) = {
+    { .actor = &N(whacka), .home = { .vec = &N(WHACKAPOS) }},
 };
 
 #define NAMESPACE b_area_iwa_iwa_02_whacka

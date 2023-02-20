@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_tik2_tik_04
 
-#include "common/UnkModelStuff2.inc.c"
+#include "battle/common/stage/WaterEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
