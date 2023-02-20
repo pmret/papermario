@@ -66,8 +66,8 @@ void filemenu_info_draw_message_contents(
             draw_number(filemenu_loadedFileIdx + 1, baseX + 84, baseY + 10, DRAW_NUMBER_CHARSET_NORMAL, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_TO), baseX + 84, baseY + 7, 255, 0, 0);
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 100, baseY + 7, 255, 0, 0);
-            draw_number(filemenu_iterFileIdx + 1, baseX + 0x8C, baseY + 10, DRAW_NUMBER_CHARSET_NORMAL, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
-            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_34), baseX + 0x8C, baseY + 7, 255, 0, 0);
+            draw_number(filemenu_iterFileIdx + 1, baseX + 140, baseY + 10, DRAW_NUMBER_CHARSET_NORMAL, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_34), baseX + 140, baseY + 7, 255, 0, 0);
 #else
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_COPY_FROM), baseX + 10, baseY + 4, 255, 0, 0);
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 84, baseY + 4, 255, 0, 0);
