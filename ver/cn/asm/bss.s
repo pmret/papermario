@@ -28,7 +28,7 @@ dlabel gSoundGlobals
 dlabel D_8009A5C4
 .space 4
 
-dlabel __osBaseCounter # goal: 8009918c
+dlabel __osBaseCounter
 .space 4
 
 dlabel gBGMPlayerC
@@ -37,7 +37,7 @@ dlabel gBGMPlayerC
 dlabel gEncounterSubState
 .space 4
 
-dlabel __osBbRCountWraps # goal: 80099198
+dlabel __osBbRCountWraps
 .space 4
 
 dlabel CurrentSefCmdHandler
@@ -46,7 +46,7 @@ dlabel CurrentSefCmdHandler
 dlabel timeFreezeMode
 .space 4
 
-dlabel __osBbLastRCount # goal: 0x800991A4
+dlabel __osBbLastRCount
 .space 4
 
 dlabel nuGfxZBuffer
@@ -55,7 +55,7 @@ dlabel nuGfxZBuffer
 dlabel nuContDataLockKey
 .space 4
 
-dlabel __osViIntrCount # goal : 800991b0
+dlabel __osViIntrCount
 .space 4
 
 dlabel BeginSoundUpdateCallback
@@ -82,18 +82,14 @@ dlabel gEncounterState
 dlabel gNpcCount
 .space 2
 
-dlabel __osMaxControllers   # goal: 800991d2
+dlabel __osMaxControllers
 .space 2
 
-dlabel __osFlashMsgBuf # goal: 0x800991D4
+dlabel __osFlashMsgBuf
 .space 4
 
-# TODO: u64
-dlabel __osCurrentTime # goal: 800991D8
-.space 4
-
-dlabel D_8009A60C
-.space 4
+dlabel __osCurrentTime
+.space 8
 
 dlabel nuGfxUcode
 .space 4
@@ -101,13 +97,13 @@ dlabel nuGfxUcode
 dlabel nuContNum
 .space 4
 
-dlabel __osBbLastVCount # 0x800991E8;
+dlabel __osBbLastVCount
 .space 4
 
 dlabel nuGfxTaskSpool
 .space 4
 
-dlabel __osContLastCmd # 800991f0
+dlabel __osContLastCmd
 .space 4
 
 dlabel __osEepromTimerMsg
@@ -131,7 +127,7 @@ dlabel gCurrentCamID
 dlabel nuPiCartHandle
 .space 4
 
-dlabel __osBbVCountWraps # 80099210
+dlabel __osBbVCountWraps
 .space 4
 
 dlabel D_8009A63C
@@ -146,7 +142,7 @@ dlabel D_8009A644
 dlabel nuGfxCfb_ptr
 .space 4
 
-dlabel gOverrideFlags # 80099228
+dlabel gOverrideFlags
 .space 4
 
 dlabel D_8009A654
@@ -158,7 +154,7 @@ dlabel nuGfxCfb
 dlabel D_8009A65C
 .space 4
 
-dlabel __osFinalrom # 80099238
+dlabel __osFinalrom
 .space 4
 
 dlabel gBGMPlayerA
@@ -167,25 +163,24 @@ dlabel gBGMPlayerA
 dlabel gFirstStrikeMessagePos
 .space 4
 
-dlabel gMasterGfxPos # goal: 80099244
+dlabel gMasterGfxPos
 .space 4
 
 dlabel D_8009A670
 .space 4
 
-dlabel gDisplayContext # 8009924c
+dlabel gDisplayContext
 .space 4
 
-dlabel D_8009A678 # 80099250
+dlabel D_8009A678
 .space 4
 
 dlabel D_8009A67C
 .space 4
 
-# TODO: find if it should be before or after previous
 .space 8
 
-dlabel D_8009A680 # goal: 80099260
+dlabel D_8009A680
 .space 4
 
 dlabel D_8009A684
@@ -212,10 +207,10 @@ dlabel D_8009A6A6
 dlabel D_8009A6A8
 .space 8
 
-dlabel D_8009A6B0 # 80099290
+dlabel D_8009A6B0
 .space 0x00001380
 
-dlabel logicalSaveInfo # 8009a610
+dlabel logicalSaveInfo
 .space 0x00000020
 
 dlabel physicalSaveInfo
@@ -254,7 +249,7 @@ dlabel D_8009BA28
 dlabel gCrashScreen
 .space 0x000009e0
 
-dlabel nuGfxTask_ptr # 8009b0f0
+dlabel nuGfxTask_ptr
 .space 4
 
 dlabel taskDoneMsg
@@ -263,14 +258,14 @@ dlabel taskDoneMsg
 dlabel swapBufMsg
 .space 2
 
-dlabel GfxTaskMgrThread # 8009b0f8
+dlabel GfxTaskMgrThread
 .space 0x000001b0
 
 .align 4
 dlabel GfxTaskMgrStack
 .space 0x00002000
 
-dlabel D_8009E6D0 # 8009d2b0
+dlabel D_8009E6D0
 .space 0x00000020
 
 dlabel blendedCamSettings
@@ -291,7 +286,7 @@ dlabel D_800A08E8
 dlabel D_800A08EC
 .space 4
 
-dlabel gameMode # 8009d300
+dlabel gameMode
 .space 4
 
 dlabel D_800A08F4
@@ -315,7 +310,7 @@ dlabel gLogosImages
 dlabel gLogosImage3
 .space 4
 
-dlabel gLogosImage1 # 8009d328
+dlabel gLogosImage1
 .space 4
 
 dlabel gLogosImage2
@@ -489,10 +484,10 @@ dlabel AuInitialGlobalVolume
 dlabel D_800A0F54
 .space 4
 
-dlabel nuAuMgrThread # 8009d968
+dlabel nuAuMgrThread
 .space 0x000001b0
 
-# TODO: figure out what extra space is used for
+# TODO: figure out what this extra space is used for
 .space 0x00000408
 
 dlabel AuStack
@@ -519,13 +514,13 @@ dlabel AlMinFrameSize
 dlabel D_800A363C
 .space 4
 
-dlabel nuAuDmaMesgQ # 800a0050
+dlabel nuAuDmaMesgQ
 .space 4
 
 dlabel D_800A3644
 .space 0x00000014
 
-dlabel nuAuDmaMesgBuf # 800a0068
+dlabel nuAuDmaMesgBuf
 .space 0x000000c8
 
 dlabel nuAuDmaIOMesgBuf
@@ -534,19 +529,19 @@ dlabel nuAuDmaIOMesgBuf
 dlabel nuAuDmaState
 .space 4
 
-dlabel D_800A3BD4 # 800a05e4
+dlabel D_800A3BD4
 .space 4
 
 dlabel D_800A3BD8
 .space 8
 
-dlabel nuAuDmaBufList # 800a05f0
+dlabel nuAuDmaBufList
 .space 0x000003e8
 
 dlabel D_800A3FC8
 .space 8
 
-dlabel CurrentSeqCmdHandler # 800a09e0
+dlabel CurrentSeqCmdHandler
 .space 4
 
 dlabel D_800A3FD4
@@ -585,7 +580,7 @@ dlabel D_800A41C0
 dlabel D_800A41C4
 .space 0x0000001c
 
-dlabel gMapConfig # 800a0bf0
+dlabel gMapConfig
 .space 4
 
 dlabel D_800A41E4
@@ -648,13 +643,13 @@ dlabel D_800A426C
 dlabel IdleThread
 .space 0x000001b0
 
-dlabel MainThread # 800a0e30
+dlabel MainThread
 .space 0x000001b0
 
 dlabel IdleStack
 .space 0x00002000
 
-dlabel nuScStack # 800a2fe0
+dlabel nuScStack
 .space 0x00002000
 
 dlabel nuScAudioStack
@@ -669,7 +664,7 @@ dlabel D_800AC5D0
 dlabel D_800AC5D4
 .space 0x00000014
 
-dlabel D_800AC5E8 # 800a8ff8
+dlabel D_800AC5E8
 .space 0x000000c8
 
 dlabel nuGfxMesgBuf
@@ -678,10 +673,10 @@ dlabel nuGfxMesgBuf
 dlabel GfxStack
 .space 0x00002000
 
-dlabel nuSiMesgBuf # 800ab0e0
+dlabel nuSiMesgBuf
 .space 0x00000020
 
-dlabel siMgrThread # 800ab100
+dlabel siMgrThread
 .space 0x1b0
 
 dlabel siMgrStack
@@ -694,7 +689,7 @@ dlabel nuContDataMutexBuf
 .space 4
 
 .align 4
-dlabel tmp_task # 800ad2c0
+dlabel tmp_task
 .space 0x00000040
 
 dlabel siAccessBuf
@@ -705,24 +700,24 @@ dlabel D_800AC6D8
 
 .space 4
 
-dlabel retrace # 800ad310
+dlabel retrace
 .space 4
 
 .space 4
 
-dlabel viThread # 800ad318
+dlabel viThread
 .space 0x1B0
 
-dlabel viThreadStack # 800ad4c8
+dlabel viThreadStack
 .space 0x1000
 
-dlabel viEventQueue # 800ae4c8
+dlabel viEventQueue
 .space 0x18
 
 dlabel viEventBuf
 .space 4 * 5
 
-dlabel viRetraceMsg # 800ae4f4
+dlabel viRetraceMsg
 .space 0x00000018
 
 dlabel viCounterMsg
@@ -730,10 +725,10 @@ dlabel viCounterMsg
 
 .align 4
 
-dlabel piThread # 800ae530
+dlabel piThread
 .space 0x1B0
 
-dlabel piThreadStack # 800ae6e0
+dlabel piThreadStack
 .space 0x1000
 
 dlabel piEventQueue
@@ -745,52 +740,51 @@ dlabel piEventBuf
 dlabel D_800AF8AC
 .space 4
 
-dlabel piAccessBuf # 800af700
+dlabel piAccessBuf
 .space 4
 
 .space 0x24
 
-dlabel wMapTexName # 800af728
+dlabel wMapTexName
 .space 4
 
 dlabel D_800B0CF4
 .space 0x00000014
 
 dlabel D_800B0D08
-dlabel __osThreadSave # 800af740
+dlabel __osThreadSave
 .space 0x1b0
 
-dlabel nuContWaitMesgQ # 800af8f0
+dlabel nuContWaitMesgQ
 .space 0x18
 
 .align 4
 dlabel __osContPifRam
 .space 0x40
 
-dlabel gCurrentEncounter # 800af950
+dlabel gCurrentEncounter
 .space 0x00000bf4
 
-dlabel __Dom2SpeedParam # 800b0544
+dlabel __Dom2SpeedParam
 .space 0x74
 
-dlabel nuContStatus # 800b05b8
+dlabel nuContStatus
 .space 0x4 * 4
 
 dlabel D_800B1B90
 .space 0x000001b0
 
 dlabel nuContRmbCtl
-.space 0x7*4
+.space 0xA * 4
 
-# TODO wht is max controllers?
-.space 0x7*2
+.space 2
 
     .align 4
-dlabel nuContData # 800b07b0
+dlabel nuContData
 .space 6 * 4
 
     .align 4
-dlabel gCameras # 800b07d0
+dlabel gCameras
 .space 0x00001560
 
 dlabel D_800B32E0
@@ -808,7 +802,7 @@ dlabel nuGfxMesgQ
 dlabel __CartRomHandle
 .space 0x74
 
-dlabel __osPiAccessQueue # 800b2dcc
+dlabel __osPiAccessQueue
 .space 0x18
 
     .align 3
@@ -834,53 +828,53 @@ dlabel auSynDriver
 dlabel D_800B91D0
 .space 0x00020000
 
-dlabel __osFlashHandler # 800d7c20
+dlabel __osFlashHandler
 .space 0x00000074
 
 .align 3
-dlabel gZoneCollisionData # 800d7c98
+dlabel gZoneCollisionData
 .space 0x00000010
 
 dlabel wMapHitName
 .space 0x00000014
 
-dlabel nuSiMgrMesgQ # 0x00000000800d7cbc
+dlabel nuSiMgrMesgQ
 .space 0x00000018
 
     .align 3
 dlabel __osBaseTimer
 .space 0x20
 
-dlabel wMapShapeName # 800d7cf8
+dlabel wMapShapeName
 .space 0x00000018
 
 dlabel nuAuHeap
 .space 0x00000010
 
-dlabel __osFlashMessageQ # 800d7d20
+dlabel __osFlashMessageQ
 .space 0x18
 
-# TODO: wtf
+# TODO: figure out where this space comes from
 .space 0x20
 
-dlabel nuGfxTask # 800d7d58
+dlabel nuGfxTask
 .space 0x58*10
 
 dlabel D_800D95E8
-.space 0x80 # SaveDataHeader
+.space 0x80
 
 dlabel wMapBgName
 .space 0x00000014
 
-dlabel __osPfsInodeCache # 0x800d815c
+dlabel __osPfsInodeCache
 .space 0x00000100
 
-dlabel __osEventStateTab # 800d825c
+dlabel __osEventStateTab
 .space 0x00000100
 
     .align 4
 
-dlabel __osPfsPifRam # 800d8360
+dlabel __osPfsPifRam
 .space 0x0000003c
 
 .space 4
@@ -902,9 +896,7 @@ dlabel nuContPfs
 dlabel nuSiMesgQ
 .space 0x00000018
 
-# TODO: nuGfxTaskMgrMesgQ
-dlabel nuGfxTaskMgrMesgQ
-dlabel D_800DAC90 # 800d8ff0
+dlabel D_800DAC90
 .space 0x00000018
 
 dlabel __osSiAccessQueue
@@ -913,7 +905,7 @@ dlabel __osSiAccessQueue
 dlabel __osBbFlashBuffer
 .space 0x80
 
-dlabel gCurrentSaveFile # 800d90a0
+dlabel gCurrentSaveFile
 .space 0x00001380
 
 dlabel nuContDataMutexQ
