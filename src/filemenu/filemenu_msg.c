@@ -308,7 +308,7 @@ void filemenu_draw_message(u8* message, s32 x, s32 y, s32 alpha, s32 color, u32 
         while (*tmp != 0xFD) {
 #if VERSION_CN
             int ord = *tmp;
-            if (ord >= 0x5F && ord <= 0x8F) {
+            if (ord >= MSG_CHAR_MULTIBYTE_FIRST && ord <= MSG_CHAR_MULTIBYTE_LAST) {
                 tmp++;
                 ord = (*tmp << 8) + ord;
                 x += filemenu_draw_char(ord, x, y + 1, flag1, color, flag2);
