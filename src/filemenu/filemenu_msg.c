@@ -338,7 +338,7 @@ void filemenu_draw_file_name(u8* filename, s32 length, s32 x, s32 y, s32 alpha, 
         if (c != 0xF7) {
 #if VERSION_CN
             // Numerals get drawn one pixel lower than other characters
-            if (c >= 16 && c <= 25) {
+            if (c >= MSG_CHAR_DIGIT_0 && c <= MSG_CHAR_DIGIT_9) {
                 filemenu_draw_message((u8*)c, x + (i * charWidth), y + 1, alpha, arg5, arg6);
             } else {
                 filemenu_draw_message((u8*)c, x + (i * charWidth), y, alpha, arg5, arg6);
