@@ -2,6 +2,11 @@
 #include "ld_addrs.h"
 #include "sprite.h"
 
+#if VERSION_CN
+// TODO: remove if section is split in iQue release
+extern Addr _24B7F0_ROM_START;
+#endif
+
 typedef struct {
     /* 0x00 */ u8 arrayIdx;
     /* 0x01 */ u8 meshType;

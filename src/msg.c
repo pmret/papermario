@@ -5,6 +5,16 @@
 #include "charset/postcard.png.h"
 #include "charset/letter_content_1.png.h"
 
+#if VERSION_CN
+// TODO: remove if section is split in iQue release
+extern Addr charset_ROM_START;
+extern Addr charset_standard_OFFSET;
+extern Addr charset_standard_pal_OFFSET;
+extern Addr charset_title_OFFSET;
+extern Addr charset_credits_pal_OFFSET;
+extern Addr charset_subtitle_OFFSET;
+#endif
+
 enum RewindArrowStates {
     REWIND_ARROW_STATE_INIT = 0,
     REWIND_ARROW_STATE_GROW = 1,
@@ -197,7 +207,12 @@ Gfx D_8014C500[] = {
 };
 
 u8 D_8014C580[] = { 50, 80, 100, 105, 100, 0, 0, 0 };
-u8 D_8014C588[] = { 105, 100, 77, 57, 40, 27, 16, 8, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+u8 D_8014C588[] = { 105, 100, 77, 57, 40, 27, 16, 8, 3, 0, 0, 0};
+#if VERSION_CN
+u32 D_8014AD24 = 2;
+#else
+u8 D_8014C594[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+#endif
 
 s32 draw_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
                              u16 clipULy, u16 clipLRx, u16 clipRLy);
@@ -244,7 +259,11 @@ void clear_printers(void) {
     load_font(0);
 }
 
+#if VERSION_CN
+void load_font_data(Addr offset, u32 size, void* dest) {
+#else
 void load_font_data(Addr offset, u16 size, void* dest) {
+#endif
     u8* base = charset_ROM_START + (s32) offset;
 
     dma_copy(base, base + size, dest);
@@ -1540,6 +1559,10 @@ void close_message(MessagePrintState* msgPrintState) {
     msgPrintState->stateFlags &= ~MSG_STATE_FLAG_40;
 }
 
+#if VERSION_CN
+s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
+INCLUDE_ASM(s32, "msg", msg_get_print_char_width);
+#else
 s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags) {
     f32 charWidth;
 
@@ -1582,6 +1605,7 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgS
     }
     return charWidth * msgScale;
 }
+#endif
 
 s32 msg_get_draw_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u16 flags) {
     f32 baseWidth;
@@ -1626,6 +1650,9 @@ s32 msg_get_draw_char_width(s32 character, s32 charset, s32 variation, f32 msgSc
     return baseWidth * msgScale;
 }
 
+#if VERSION_CN
+INCLUDE_ASM(void, "msg", get_msg_properties);
+#else
 void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines, s32* maxLinesPerPage, s32* numSpaces, u16 charset) {
     u8* message;
     s32 i;
@@ -1913,6 +1940,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
         *numSpaces = spaceCount;
     }
 }
+#endif
 
 static const f32 padding = 0.0f;
 
@@ -2294,6 +2322,9 @@ void draw_message_window(MessagePrintState* printer) {
     }
 }
 
+#if VERSION_CN
+INCLUDE_ASM(s32, "msg", appendGfx_message);
+#else
 void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 additionalOffsetX, u16 additionalOffsetY,
                        u16 flag, u8 alpha) {
     SpriteRasterInfo sprRasterInfo;
@@ -3614,12 +3645,16 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
     gDPPipeSync(gMasterGfxPos++);
     D_80151338 = gMasterGfxPos;
 }
+#endif
 
 void msg_reset_gfx_state(void) {
     gDPPipeSync(gMasterGfxPos++);
     gSPDisplayList(gMasterGfxPos++, D_8014C500);
 }
 
+#if VERSION_CN
+INCLUDE_ASM(s32, "msg", msg_draw_char);
+#else
 void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 charIndex, s32 palette, s32 posX, s32 posY) {
     MessageCharset* messageCharset = gMsgCharsets[drawState->font];
     s32 fontVariant = drawState->fontVariant;
@@ -3696,6 +3731,7 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
     gSPTextureRectangle(gMasterGfxPos++, ulx * 4, uly * 4, lrx * 4, lry * 4, G_TX_RENDERTILE, texOffsetX, texOffsetY,
                         dsdx, dtdy);
 }
+#endif
 
 void msg_draw_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 posX, u16 posY, u16 sizeX, u16 sizeY) {
     u16 lrX = posX + sizeX;
