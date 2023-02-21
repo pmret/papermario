@@ -1652,9 +1652,6 @@ s32 msg_get_draw_char_width(s32 character, s32 charset, s32 variation, f32 msgSc
     return baseWidth * msgScale;
 }
 
-#if VERSION_CN
-INCLUDE_ASM(void, "msg", get_msg_properties);
-#else
 void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines, s32* maxLinesPerPage, s32* numSpaces, u16 charset) {
     u8* message;
     s32 i;
@@ -1664,7 +1661,6 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
     s32 lineWidth;
     s32 charCount;
     u16 lineIndex;
-    u16 endl;
     s32 msgStyle;
     s32 functionCode;
     u8 packedScaleY;
@@ -1682,8 +1678,13 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
     u16 maxCharsPerLine;
     u16 maxLinesOnPage;
     u16 spaceCount;
+    u16 endl;
+
+    u8 c;
+    u8 prevChar;
 
     scale = 1.0f;
+    c = 0;
     lineIndex = 0;
     pageCount = 0;
     varIndex = 0;
@@ -1719,7 +1720,8 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
     lineCount = 0;
 
     do {
-        u8 c = message[i++];
+        prevChar = c;
+        c = message[i++];
         switch (c) {
             case MSG_CHAR_READ_VARIANT0:
             case MSG_CHAR_READ_VARIANT1:
@@ -1894,6 +1896,13 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                     linesOnPage++;
                     endl = FALSE;
                 }
+
+#if VERSION_CN
+                if (prevChar >= 0x5f && prevChar <= 0x8F) {
+                    break;
+                }
+#endif
+
                 lineWidth += msg_get_print_char_width(c, font, varIndex, scale, 0, 1);
                 charCount++;
                 break;
@@ -1942,7 +1951,6 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
         *numSpaces = spaceCount;
     }
 }
-#endif
 
 static const f32 padding = 0.0f;
 
