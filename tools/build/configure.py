@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import shutil
 from typing import TYPE_CHECKING, List, Dict, Set, Union
 from pathlib import Path
@@ -810,7 +811,7 @@ if __name__ == "__main__":
             shutil.rmtree(ROOT / f"assets/{version}", ignore_errors=True)
             shutil.rmtree(ROOT / f"ver/{version}/assets", ignore_errors=True)
             shutil.rmtree(ROOT / f"ver/{version}/build", ignore_errors=True)
-            shutil.rmtree(ROOT / f"ver/{version}/.splat_cache", ignore_errors=True)
+            os.remove(ROOT / f"ver/{version}/.splat_cache")
 
     extra_cflags = ""
     extra_cppflags = ""
