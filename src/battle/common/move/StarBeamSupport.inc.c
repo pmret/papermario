@@ -585,7 +585,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             if (script->functionTemp[1] == 0) {
                 N(starBeamStage) = 1;
                 if (script->functionTemp[2] == 0 && player->targetListLength == 1) {
-                    if (get_actor_part(get_actor(player->targetActorID), player->targetPartIndex)->eventFlags & ACTOR_EVENT_FLAG_80000) {
+                    if (get_actor_part(get_actor(player->targetActorID), player->targetPartIndex)->eventFlags & ACTOR_EVENT_FLAG_GIANT_BOWSER_ENCHANTED) {
                         script->functionTemp[0] = PEACH_STAR_BEAM_IMMUNE;
                     } else {
                         script->functionTemp[1] = 15;

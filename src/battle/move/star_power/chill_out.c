@@ -38,7 +38,7 @@ API_CALLABLE(func_802A163C_79070C) {
     Actor* target = get_actor(actor->targetActorID);
     ActorPart* part = get_actor_part(target, actor->targetPartIndex);
     s32 flag1 = ACTOR_FLAG_NO_DMG_APPLY; // these manual flag ones are necessary to match. once we figure out flags, we can add more
-    s32 flag2 = ACTOR_EVENT_FLAG_80000;
+    s32 flag2 = ACTOR_EVENT_FLAG_GIANT_BOWSER_ENCHANTED;
 
     script->varTable[0] = 0;
 

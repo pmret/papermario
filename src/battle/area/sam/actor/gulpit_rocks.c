@@ -67,7 +67,7 @@ ActorPartBlueprint N(parts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_40000 | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_GULPIT_ROCKS,
     .level = 0,
     .maxHP = 1,

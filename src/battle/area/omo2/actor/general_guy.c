@@ -84,7 +84,7 @@ ActorPartBlueprint N(parts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_40000,
+    .flags = ACTOR_FLAG_HIDE_HP_BAR,
     .type = ACTOR_TYPE_GENERAL_GUY,
     .level = 73,
     .maxHP = 10,

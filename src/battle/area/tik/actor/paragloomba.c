@@ -544,7 +544,7 @@ EvtScript N(fall) = {
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_gloomba)))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_GLOOMBA)
     EVT_EXEC_WAIT(N(init_gloomba))
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_1000, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_RETURN

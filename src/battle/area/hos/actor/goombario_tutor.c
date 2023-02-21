@@ -69,7 +69,7 @@ ActorPartBlueprint N(partsTable_80219114)[] = {
 extern EvtScript N(init_80219160);
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_40000,
+    .flags = ACTOR_FLAG_HIDE_HP_BAR,
     .type = ACTOR_TYPE_GOOMBARIO_TUTOR1,
     .level = 99,
     .maxHP = 99,

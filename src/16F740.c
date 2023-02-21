@@ -46,7 +46,7 @@ void btl_merlee_on_start_turn(void) {
                 s32 temp = rand_int(100);
 
                 if (currentEncounter->currentEnemy != NULL) {
-                    if (currentEncounter->currentEnemy->flags & ACTOR_FLAG_40000) {
+                    if (currentEncounter->currentEnemy->flags & ACTOR_FLAG_HIDE_HP_BAR) {
                         if (temp <= 45) {
                             playerData->merleeSpellType = MERLEE_SPELL_1;
                         } else if (temp <= 90) {
@@ -103,7 +103,7 @@ void btl_merlee_on_first_strike(void) {
                 s32 temp = rand_int(100);
 
                 if (currentEncounter->currentEnemy != NULL) {
-                    if (currentEncounter->currentEnemy->flags & ACTOR_FLAG_40000) {
+                    if (currentEncounter->currentEnemy->flags & ACTOR_FLAG_HIDE_HP_BAR) {
                         if (temp <= 45) {
                             playerData->merleeSpellType = MERLEE_SPELL_1;
                         } else if (temp <= 90) {

@@ -307,7 +307,7 @@ EvtScript N(8021D890) = {
     EVT_CALL(SetActorType, ACTOR_SELF, 149)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_8021D498)))
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 32)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_1000, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(GetIndexFromPos, ACTOR_SELF, LVar0)
     EVT_MOD(LVar0, 4)

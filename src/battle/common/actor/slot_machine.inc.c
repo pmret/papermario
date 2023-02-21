@@ -59,7 +59,7 @@ ActorPartBlueprint N(parts)[] = {
 };
 
 ActorBlueprint N(slot_machine_stop) = {
-    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_40000 | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_SLOT_MACHINE_STOP,
     .level = 99,
     .maxHP = 99,
@@ -82,7 +82,7 @@ ActorBlueprint N(slot_machine_stop) = {
 };
 
 ActorBlueprint N(slot_machine_start) = {
-    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_40000 | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_SLOT_MACHINE_START,
     .level = 99,
     .maxHP = 99,

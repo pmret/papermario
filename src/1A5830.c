@@ -12,7 +12,7 @@ s32 has_enchanted_part(Actor* actor) {
     s32 ret = FALSE;
 
     while (partIt != NULL) {
-        if (partIt->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_80000)) {
+        if (partIt->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_GIANT_BOWSER_ENCHANTED)) {
             ret = TRUE;
             break;
         } else {
@@ -588,7 +588,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
         && battleStatus->lastAttackDamage >= 0
         && event != EVENT_DEATH
-        && event != EVENT_SPIN_SMASH_DEATH 
+        && event != EVENT_SPIN_SMASH_DEATH
         && event != EVENT_EXPLODE_TRIGGER
         && !(gBattleStatus.flags1 & BS_FLAGS1_ATK_BLOCKED)
         && !(gBattleStatus.flags2 & BS_FLAGS2_1000000)
@@ -679,7 +679,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     {
         inflict_partner_ko(target, STATUS_DAZE, battleStatus->lastAttackDamage);
     }
-    
+
     if (!(target->flags & ACTOR_FLAG_NO_DMG_POPUP)) {
         switch (actorClass) {
             case ACTOR_CLASS_PLAYER:
