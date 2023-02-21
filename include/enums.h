@@ -2353,7 +2353,7 @@ enum PlayerAnims {
     ANIM_MarioW1_FallWatt                   = 0x0006000A,
     ANIM_MarioW1_LandWatt                   = 0x0006000B,
     ANIM_MarioW1_Lift                       = 0x0006000C,
-    ANIM_MarioW1_Lift_Back                   = 0x0006000D,
+    ANIM_MarioW1_Lift_Back                  = 0x0006000D,
     ANIM_MarioW1_Toss                       = 0x0006000E,
     ANIM_MarioW1_Toss_Back                  = 0x0006000F,
     ANIM_MarioW1_Smash1_Miss                = 0x00060010,
