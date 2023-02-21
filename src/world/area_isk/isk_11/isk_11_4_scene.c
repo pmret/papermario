@@ -142,14 +142,14 @@ EvtScript N(EVS_ManageSecretPassage) = {
     EVT_THREAD
         EVT_WAIT(20)
         EVT_LABEL(20)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_60002)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_CarryRun)
         EVT_WAIT(8)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_60003)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_CarryAboveRun)
         EVT_WAIT(8)
         EVT_IF_FALSE(MV_PlayerPanicDone)
             EVT_GOTO(20)
         EVT_END_IF
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(20)

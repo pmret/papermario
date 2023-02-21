@@ -642,7 +642,7 @@ EvtScript N(shellToss_KentC) = {
                     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
                     EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_TRANSPARENT | STATUS_FLAGS_IMMOBILIZED)
                         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-                        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002B)
+                        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Flail)
                     EVT_END_IF
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
                     EVT_CALL(SetBattleCamTarget, -25, 60, 0)
@@ -677,7 +677,7 @@ EvtScript N(shellToss_KentC) = {
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
             EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_TRANSPARENT | STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002B)
+                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Flail)
             EVT_END_IF
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)

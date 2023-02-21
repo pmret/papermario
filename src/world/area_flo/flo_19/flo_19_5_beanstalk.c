@@ -134,7 +134,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Walk)
         EVT_SWITCH(AF_FLO_BeanstalkFacingRight)
             EVT_CASE_EQ(0)
                 EVT_CALL(InterpPlayerYaw, 90, 0)
@@ -148,7 +148,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
     EVT_CALL(UpdateColliderTransform, COLLIDER_o117)
     EVT_THREAD
         EVT_SET(AF_FLO_BeanstalkFadedOut, FALSE)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Walk)
         EVT_WAIT(200)
         EVT_EXEC_WAIT(N(EVS_FadeOutToBlack))
         EVT_SET(AF_FLO_BeanstalkFadedOut, TRUE)
@@ -230,7 +230,7 @@ EvtScript N(EVS_Exit_Beanstalk) = {
         EVT_CALL(PlaySound, SOUND_19D)
         EVT_CALL(SetMusicTrack, 0, SONG_MAGIC_BEANSTALK, 1, 8)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Walk)
         EVT_CALL(N(GetPlayerAngles), LVar3, LVar4)
         EVT_SWITCH(LVar4)
             EVT_CASE_LT(90)

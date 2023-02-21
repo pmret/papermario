@@ -139,7 +139,7 @@ EvtScript N(EVS_NpcAI_Buzzar) = {
         EVT_CALL(func_802CF56C, 2)
     EVT_END_THREAD
     EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
     EVT_CALL(GetNpcPos, NPC_SELF, LVar2, LVar3, LVar4)
     EVT_SET(LVar5, LVar3)
@@ -225,7 +225,7 @@ EvtScript N(EVS_NpcAI_Buzzar) = {
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Buzzar_Anim05)
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_ELSE
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)

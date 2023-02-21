@@ -18,7 +18,7 @@ void action_update_hit_fire(void) {
         playerStatus->animFlags |= PA_FLAG_INTERRUPT_USE_PARTNER;
         playerStatus->flags |= (PS_FLAG_HIT_FIRE | PS_FLAG_FLYING);
 
-        suggest_player_anim_setUnkFlag(ANIM_Mario_Scared);
+        suggest_player_anim_always_forward(ANIM_Mario1_TouchedFire);
 
         playerStatus->actionSubstate = SUBSTATE_FLYING;
         playerStatus->gravityIntegrator[0] = 18.3473f;

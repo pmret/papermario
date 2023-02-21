@@ -75,9 +75,9 @@ EvtScript N(EVS_SecretPurcahseOrder_Moustafa) = {
     EVT_EXEC_WAIT(N(EVS_JumpToPlayer))
     EVT_IF_LT(GB_StoryProgress, STORY_CH2_BOUGHT_SECRET_ITEMS)
         EVT_CALL(SpeakToPlayer, NPC_Mouser_ShopOwner, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle, 0, MSG_CH2_0087)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
         EVT_WAIT(30)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_Mouser_ShopOwner, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle, 0, MSG_CH2_0088)

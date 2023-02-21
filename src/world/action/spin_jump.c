@@ -35,7 +35,7 @@ void action_update_spin_jump(void) {
         playerStatus->currentSpeed = 0.0f;
         RotationRate = 0.0f;
         playerStatus->gravityIntegrator[0] = 5.2f;
-        suggest_player_anim_clearUnkFlag(ANIM_Mario_1000A);
+        suggest_player_anim_allow_backward(ANIM_Mario1_Sit);
         disable_player_input();
         playerStatus->flags |= PS_FLAG_SPECIAL_JUMP;
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
@@ -92,7 +92,7 @@ void action_update_spin_jump(void) {
                 playerStatus->gravityIntegrator[2] = 0.4704f;
                 playerStatus->gravityIntegrator[3] = -1.1904f;
                 playerStatus->gravityIntegrator[0] = playerStatus->gravityIntegrator[1];
-                suggest_player_anim_clearUnkFlag(ANIM_Mario_1000B);
+                suggest_player_anim_allow_backward(ANIM_Mario1_SpinJump);
             }
             break;
         case SUBSTATE_DESCEND:
@@ -128,7 +128,7 @@ void action_update_spin_jump(void) {
                         playerStatus->gravityIntegrator[2] = 0.4704f;
                         playerStatus->gravityIntegrator[3] = -1.1904f;
                         playerStatus->gravityIntegrator[0] = 10.0f;
-                        suggest_player_anim_clearUnkFlag(ANIM_Mario_1000B);
+                        suggest_player_anim_allow_backward(ANIM_Mario1_SpinJump);
                         playerStatus->actionState = ACTION_STATE_SPIN_POUND;
                         playerStatus->timeInAir = 0;
                         playerStatus->poundImpactDelay = 12;

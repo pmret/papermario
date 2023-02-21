@@ -47,7 +47,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_000D, 320, 60)
     EVT_CALL(PlaySoundAtPlayer, SOUND_262, 0)
-    EVT_CALL(ShowEmote, NPC_Kolorado, EMOTE_EXCLAMATION, 0, 25, FALSE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 25, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_262, 0)
     EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 25, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(25)

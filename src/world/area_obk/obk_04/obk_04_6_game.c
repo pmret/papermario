@@ -235,7 +235,7 @@ EvtScript N(EVS_ShowGotSuperBootsFX) = {
     EVT_THREAD
         EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(8.0), 0, EVT_FLOAT(300.0), EVT_FLOAT(17.5), EVT_FLOAT(-9.5))
     EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_6000C)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_Lift)
     EVT_CALL(GetPlayerPos, LVar5, LVar6, LVar7)
     EVT_ADD(LVar6, 40)
     EVT_CALL(MakeItemEntity, ITEM_SUPER_BOOTS, LVar5, LVar6, LVar7, ITEM_SPAWN_MODE_DECORATION, 0)
@@ -261,7 +261,7 @@ EvtScript N(EVS_ShowGotSuperBootsFX) = {
     EVT_END_LOOP
     EVT_CALL(func_802D7B44, LVar8)
     EVT_CALL(RemoveItemEntity, LVarC)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_THREAD
         EVT_CALL(ResetCam, CAM_DEFAULT, 3)
     EVT_END_THREAD
@@ -277,9 +277,9 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
     EVT_EXEC(N(EVS_IntroduceAndHideBoots))
     EVT_SET(MV_KeepAwayStarted, TRUE)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(InterpPlayerYaw, 270, 0)
     EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(2.0), 0, 0, 0, EVT_FLOAT(400.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
     EVT_WAIT(60)
@@ -438,7 +438,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
     EVT_CALL(GetNpcPos, MV_ItemCarrierNpc, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_CALL(SetNpcPos, NPC_DummyBoo, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(1)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 30)

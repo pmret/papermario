@@ -886,9 +886,9 @@ EvtScript N(EVS_Inspect_Phonograph) = {
     EVT_CALL(RemoveKeyItemAt, LVar1)
     EVT_SET(GB_StoryProgress, STORY_CH3_PLAYED_THE_RECORD)
     EVT_CALL(EnableModel, MODEL_reco, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_60007)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_PlaceRecord)
     EVT_WAIT(15)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(15)
     EVT_CALL(CloseChoicePopup)
     // try playing

@@ -485,7 +485,7 @@ EvtScript N(EVS_Misstar_Escape) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
     EVT_CALL(GetNpcPos, NPC_Misstar, LVar0, LVar1, LVar2)

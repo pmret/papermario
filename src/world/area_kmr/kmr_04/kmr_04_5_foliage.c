@@ -38,7 +38,7 @@ API_CALLABLE(N(func_80240444_8CAD44)) {
 }
 
 EvtScript N(EVS_GotHammer) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_6000C)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_Lift)
     EVT_CALL(GetPlayerPos, LVar5, LVar6, LVar7)
     EVT_ADD(LVar6, 40)
     EVT_CALL(MakeItemEntity, ITEM_HAMMER, LVar5, LVar6, LVar7, ITEM_SPAWN_MODE_DECORATION, 0)
@@ -65,7 +65,7 @@ EvtScript N(EVS_GotHammer) = {
     EVT_END_LOOP
     EVT_CALL(func_802D7B44, LVar8)
     EVT_CALL(RemoveItemEntity, LVarC)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_RETURN
     EVT_END
 };

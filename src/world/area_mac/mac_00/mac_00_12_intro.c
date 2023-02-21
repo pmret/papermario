@@ -8,14 +8,14 @@ EvtScript N(EVS_PlayerExitPipe_Intro) = {
     EVT_WAIT(2)
     EVT_CALL(PlaySoundAtPlayer, SOUND_ENTER_PIPE, SOUND_SPACE_MODE_0)
     EVT_CALL(func_802D286C, 0x100)
-    EVT_CALL(func_802D2520, ANIM_Mario_10002, 5, 2, 1, 1, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario1_Idle, 5, 2, 1, 1, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_LOOP(40)
         EVT_ADD(LVar1, 1)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(func_802D2520, ANIM_Mario_10002, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario1_Idle, 0, 0, 0, 0, 0)
     EVT_CALL(HidePlayerShadow, FALSE)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_RETURN

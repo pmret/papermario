@@ -202,7 +202,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
     EVT_ADD(LVar0, -10)
     EVT_CALL(NpcJump0, NPC_Twink, LVar0, 20, LVar2, 15)
     EVT_CALL(PlaySoundAtPlayer, SOUND_HIT_PLAYER_NORMAL, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_ShockStill)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_VacantStare)
     EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Cringe)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Disappointed)
@@ -210,7 +210,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
         EVT_CALL(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, -100)
         EVT_CALL(NpcJump0, NPC_Twink, LVar0, 10, LVar2, 20)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(2.0))
@@ -236,7 +236,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
     EVT_END_THREAD
     EVT_CALL(ShowMessageAtScreenPos, MSG_HOS_000D, 160, 40)
     EVT_CALL(SetMusicTrack, 0, SONG_TWINK_THEME, 0, 8)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Idle)
     EVT_CALL(NpcFacePlayer, NPC_Twink, 0)
     EVT_CALL(SpeakToPlayer, NPC_Twink, ANIM_Twink_Shout, ANIM_Twink_Idle, 0, MSG_HOS_000E)
@@ -355,7 +355,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
         EVT_CALL(ContinueSpeech, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_HOS_0016)
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_HOS_0017)
         EVT_CALL(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_HOS_0018)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
         EVT_CALL(SetNpcVar, NPC_Twink, 0, 1)
         EVT_LOOP(0)
             EVT_CALL(GetNpcVar, NPC_Twink, 0, LVar0)
@@ -566,9 +566,9 @@ EvtScript N(EVS_Scene_TwinkDeparts) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_HOS_0037)
     EVT_CALL(EnablePartnerAI)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_THREAD
         EVT_SET(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
         EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)

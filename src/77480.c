@@ -797,27 +797,32 @@ s32 get_overriding_player_anim(s32 anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-    if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER && anim != ANIM_Mario_1002B && anim != ANIM_Mario_AnimMidairStill) {
+    if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER
+        && anim != ANIM_Mario1_Flail
+        && anim != ANIM_Mario1_Jump
+    ) {
         return -1;
     }
 
     if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
-        if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER && anim == ANIM_Mario_10002) {
-            anim = ANIM_Mario_8000E;
+        if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER && anim == ANIM_Mario1_Idle) {
+            anim = ANIM_MarioW2_RideLaki;
         }
 
-        if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_BOW) {
-            if (anim != ANIM_Mario_Crouch && anim != ANIM_Mario_10002) {
-                    return -1;
-            }
+        if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE
+            && partnerActionStatus->actingPartner == PARTNER_BOW
+            && anim != ANIM_Mario1_Crouch
+            && anim != ANIM_Mario1_Idle
+        ) {
+            return -1;
         }
     }
 
-    if (anim == ANIM_Mario_ThumbsUp && partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
+    if (anim == ANIM_Mario1_ThumbsUp && partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
         return -1;
     }
 
-    if (anim == ANIM_Mario_6000C || anim == ANIM_Peach_C0010 || anim == ANIM_Mario_10002) {
+    if (anim == ANIM_MarioW1_Lift || anim == ANIM_Peach_C0010 || anim == ANIM_Mario1_Idle) {
         if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
             if (!func_800DFCF4()) {
                 return -1;
@@ -835,14 +840,14 @@ s32 get_overriding_player_anim(s32 anim) {
         }
     }
 
-    if (anim == ANIM_Mario_80003) {
+    if (anim == ANIM_MarioW2_Collapse) {
         exec_ShakeCam1(0, 0, 2);
     }
 
     return anim;
 }
 
-void suggest_player_anim_clearUnkFlag(AnimID anim) {
+void suggest_player_anim_allow_backward(AnimID anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     AnimID newAnim = get_overriding_player_anim(anim);
 
@@ -861,7 +866,7 @@ void force_player_anim(AnimID anim) {
     playerStatus->flags &= ~PS_FLAG_FACE_FORWARDS;
 }
 
-void suggest_player_anim_setUnkFlag(AnimID anim) {
+void suggest_player_anim_always_forward(AnimID anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     AnimID newAnim = get_overriding_player_anim(anim);
 
@@ -1366,20 +1371,20 @@ void player_update_sprite(void) {
         if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP && !(playerStatus->flags & PS_FLAG_ROTATION_LOCKED)) {
             playerStatus->spriteFacingAngle = angle + D_800F7B48;
             trueAnim = playerStatus->anim;
-            if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS) &&
-                (sprIndex == SPR_Mario_1 || sprIndex == SPR_Mario_6 || sprIndex == SPR_Peach_A) &&
-                fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) < 60.0f)
-            {
+            if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS)
+                && (sprIndex == SPR_Mario1 || sprIndex == SPR_MarioW1 || sprIndex == SPR_Peach1)
+                && fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) < 60.0f
+            ) {
                 trueAnim = get_player_back_anim(trueAnim);
             }
             playerStatus->trueAnimation = trueAnim;
             playerStatus->currentYaw = playerStatus->targetYaw;
         } else {
             trueAnim = playerStatus->anim;
-            if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS) &&
-                (sprIndex == SPR_Mario_1 || sprIndex == SPR_Mario_6 || sprIndex == SPR_Peach_A) &&
-                playerStatus->spriteFacingAngle < 350.0f && playerStatus->spriteFacingAngle > 190.0f)
-            {
+            if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS)
+                && (sprIndex == SPR_Mario1 || sprIndex == SPR_MarioW1 || sprIndex == SPR_Peach1)
+                && playerStatus->spriteFacingAngle < 350.0f && playerStatus->spriteFacingAngle > 190.0f
+            ) {
                 trueAnim = get_player_back_anim(trueAnim);
             }
             playerStatus->trueAnimation = trueAnim;
@@ -1401,39 +1406,39 @@ s32 get_player_back_anim(s32 anim) {
     s32 sprIndex = (anim >> 16) & 0xff;
     s32 outAnim = 0;
 
-    if (sprIndex != SPR_Mario_1) {
-        if (sprIndex != SPR_Mario_6 && sprIndex != SPR_Peach_A) {
+    if (sprIndex != SPR_Mario1) {
+        if (sprIndex != SPR_MarioW1 && sprIndex != SPR_Peach1) {
             return anim;
         }
 
-        if (sprIndex == SPR_Mario_1) {
-            if (anim > ANIM_Mario_1000C) {
+        if (sprIndex == SPR_Mario1) {
+            if (anim > ANIM_Mario1_SpinFall) {
                 return anim;
             }
-        } else if (sprIndex == SPR_Mario_6) {
-            if (anim == ANIM_Mario_6000C) {
-                outAnim = ANIM_Mario_6000D;
-            } else if (anim == ANIM_Mario_6000E) {
-                outAnim = ANIM_Mario_6000F;
-            } else if (anim == ANIM_Mario_60010) {
-                outAnim = ANIM_Mario_60011;
-            } else if (anim == ANIM_Mario_60012) {
-                outAnim = ANIM_Mario_60013;
-            } else if (anim == ANIM_Mario_60014) {
-                outAnim = ANIM_Mario_60015;
-            } else if (anim == ANIM_Mario_60016) {
-                outAnim = ANIM_Mario_60017;
-            } else if (anim == ANIM_Mario_60018) {
-                outAnim = ANIM_Mario_60019;
-            } else if (anim == ANIM_Mario_6001A) {
-                outAnim = ANIM_Mario_6001B;
+        } else if (sprIndex == SPR_MarioW1) {
+            if (anim == ANIM_MarioW1_Lift) {
+                outAnim = ANIM_MarioW1_Lift_Back;
+            } else if (anim == ANIM_MarioW1_Toss) {
+                outAnim = ANIM_MarioW1_Toss_Back;
+            } else if (anim == ANIM_MarioW1_Smash1_Miss) {
+                outAnim = ANIM_MarioW1_Smash1_Miss_Back;
+            } else if (anim == ANIM_MarioW1_Smash1_Hit) {
+                outAnim = ANIM_MarioW1_Smash1_Hit_Back;
+            } else if (anim == ANIM_MarioW1_Smash2_Miss) {
+                outAnim = ANIM_MarioW1_Smash2_Miss_Back;
+            } else if (anim == ANIM_MarioW1_Smash2_Hit) {
+                outAnim = ANIM_MarioW1_Smash2_Hit_Back;
+            } else if (anim == ANIM_MarioW1_Smash3_Miss) {
+                outAnim = ANIM_MarioW1_Smash3_Miss_Back;
+            } else if (anim == ANIM_MarioW1_Smash3_Hit) {
+                outAnim = ANIM_MarioW1_Smash3_Hit_Back;
             }
-        } else if (sprIndex == SPR_Peach_A) {
+        } else if (sprIndex == SPR_Peach1) {
             if (anim > ANIM_Peach_A0006) {
                 outAnim = anim + 1;
             }
         }
-    } else if (anim > ANIM_Mario_1000C) {
+    } else if (anim > ANIM_Mario1_SpinFall) {
         return anim;
     }
 

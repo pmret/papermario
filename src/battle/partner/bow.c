@@ -696,7 +696,7 @@ EvtScript N(outtaSight) = {
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 0, EASING_LINEAR)
     EVT_CALL(N(IsPartnerImmobile))
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Crouch)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Crouch)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOW_VANISH)
     EVT_SET(LVar0, 255)

@@ -91,31 +91,30 @@ Gfx D_802DF490[] = {
 f32 spr_animUpdateTimeScale = 1.0f;
 
 #define MARIO_SPRITE_COMMON_BITS \
-      1 << SPR_Mario_1 \
-    | 1 << SPR_Mario_2 \
+      1 << SPR_Mario1 \
+    | 1 << SPR_Mario1_Back \
 
 #define MARIO_SPRITE_WORLD_BITS \
     MARIO_SPRITE_COMMON_BITS \
-    | 1 << SPR_Mario_6 \
-    | 1 << SPR_Mario_7 \
-    | 1 << SPR_Mario_8 \
-    | 1 << SPR_Mario_9
+    | 1 << SPR_MarioW1 \
+    | 1 << SPR_MarioW1_Back \
+    | 1 << SPR_MarioW2 \
+    | 1 << SPR_MarioW3
 
 #define MARIO_SPRITE_BATTLE_BITS \
     MARIO_SPRITE_COMMON_BITS \
-    | 1 << SPR_Mario_3 \
-    | 1 << SPR_Mario_4 \
-    | 1 << SPR_Mario_5
+    | 1 << SPR_MarioB1 \
+    | 1 << SPR_MarioB2 \
+    | 1 << SPR_MarioB3
 
 #define PEACH_SPRITE_BITS \
-      1 << SPR_Peach_A \
-    | 1 << SPR_Peach_B \
-    | 1 << SPR_Peach_C \
-    | 1 << SPR_Peach_D \
+      1 << SPR_Peach1 \
+    | 1 << SPR_Peach1_Back \
+    | 1 << SPR_Peach2 \
+    | 1 << SPR_Peach3 \
 
 // TODO(player raster splat header generation):
 // - macroify rasterSize based on the biggest raster
-// - OR values of a generated player raster name enum together for initiallyLoaded bits
 PlayerSpriteSet spr_playerSpriteSets[] = {
     [PLAYER_SPRITES_MARIO_WORLD]            {  6, 0x700, MARIO_SPRITE_WORLD_BITS },
     [PLAYER_SPRITES_MARIO_REFLECT_FLOOR]    { 18, 0x700, MARIO_SPRITE_WORLD_BITS },
@@ -792,7 +791,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
     spr_init_player_raster_cache((&spr_playerSpriteSets[playerSpriteSet])->cacheSize,
                   (&spr_playerSpriteSets[playerSpriteSet])->rasterSize);
 
-    for (i = 1; i <= SPR_Peach_D; i++) {
+    for (i = 1; i <= SPR_Peach3; i++) {
         if ((loadedFlags >> i) & 1) {
             spr_load_player_sprite(i);
         }

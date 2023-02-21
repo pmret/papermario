@@ -231,7 +231,7 @@ HitResult calc_item_damage_enemy(void) {
                 wasStatusInflicted = TRUE;
             }
             if (targetPart->eventFlags & ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED) {
-                dispatchEvent = EVENT_1D;
+                dispatchEvent = EVENT_INVUNERABLE_TAUNT;
             }
             hitResult = HIT_RESULT_HIT;
         }

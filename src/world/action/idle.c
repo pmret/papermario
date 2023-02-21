@@ -60,15 +60,15 @@ void action_update_idle(void) {
         playerStatus->pitch = 0.0f;
 
         if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
-            anim = ANIM_Mario_90002;
+            anim = ANIM_MarioW3_8bit_Still;
         } else if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
-            anim = ANIM_Mario_10002;
+            anim = ANIM_Mario1_Idle;
         } else if (playerStatus->prevActionState == ACTION_STATE_IDLE) {
-            anim = ANIM_Mario_60005;
+            anim = ANIM_MarioW1_TakeItem;
         } else {
-            anim = ANIM_Mario_60007;
+            anim = ANIM_MarioW1_PlaceRecord;
         }
-        suggest_player_anim_clearUnkFlag(anim);
+        suggest_player_anim_allow_backward(anim);
     }
 
     if (playerStatus->animFlags & PA_FLAG_RAISED_ARMS) {
@@ -112,9 +112,9 @@ void action_update_idle_peach(void) {
 
         if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
             if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DEPRESSED)) {
-                suggest_player_anim_clearUnkFlag(IdlePeachAnims[gGameStatusPtr->peachBakingIngredient]);
+                suggest_player_anim_allow_backward(IdlePeachAnims[gGameStatusPtr->peachBakingIngredient]);
             } else {
-                suggest_player_anim_clearUnkFlag(ANIM_Peach_C000E);
+                suggest_player_anim_allow_backward(ANIM_Peach_C000E);
             }
         } else {
             peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].idle);
@@ -129,7 +129,7 @@ void action_update_idle_peach(void) {
                     if (playerStatus->currentStateTime > 1800) {
                         // begin first yawm
                         playerStatus->actionSubstate++;
-                        suggest_player_anim_clearUnkFlag(ANIM_Peach_C0003);
+                        suggest_player_anim_allow_backward(ANIM_Peach_C0003);
                         return;
                     }
                     playerStatus->currentStateTime++;
@@ -140,7 +140,7 @@ void action_update_idle_peach(void) {
                 if (playerStatus->animNotifyValue != 0) {
                     playerStatus->actionSubstate++;
                     playerStatus->currentStateTime = 0;
-                    suggest_player_anim_clearUnkFlag(ANIM_Peach_A0001);
+                    suggest_player_anim_allow_backward(ANIM_Peach_A0001);
                 }
                 break;
             case SUBSTATE_DELAY_SLEEP:
@@ -148,16 +148,16 @@ void action_update_idle_peach(void) {
                 playerStatus->currentStateTime++;
                 if (playerStatus->currentStateTime > 200) {
                     playerStatus->actionSubstate++;
-                    suggest_player_anim_clearUnkFlag(ANIM_Peach_C0003);
+                    suggest_player_anim_allow_backward(ANIM_Peach_C0003);
                 }
                 break;
             case SUBSTATE_IDLE_SLEEP:
                 // peach is asleep
                 if (playerStatus->flags & (PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_INPUT_DISABLED)) {
-                    suggest_player_anim_clearUnkFlag(ANIM_Peach_A0001);
+                    suggest_player_anim_allow_backward(ANIM_Peach_A0001);
                     playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
                 } else if (playerStatus->animNotifyValue != 0) {
-                    suggest_player_anim_clearUnkFlag(ANIM_Peach_C0004);
+                    suggest_player_anim_allow_backward(ANIM_Peach_C0004);
                 }
                 break;
         }

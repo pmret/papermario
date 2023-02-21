@@ -15,9 +15,9 @@ EvtScript N(EVS_NpcInteract_Composer) = {
             EVT_IF_EQ(GF_DRO01_Gift_ToldComposerAboutMelody, FALSE)
                 EVT_IF_LT(GB_StoryProgress, STORY_CH7_BEGAN_PEACH_MISSION)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_0085)
-                    EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
+                    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
                     EVT_WAIT(30)
-                    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+                    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 0, MSG_CH2_0086)
                     EVT_SET(GF_DRO01_Gift_ToldComposerAboutMelody, TRUE)
                     EVT_RETURN

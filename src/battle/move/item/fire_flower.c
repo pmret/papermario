@@ -43,10 +43,10 @@ EvtScript N(EVS_UseItem) = {
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(N(FadeBackgroundToBlack))
     EVT_CALL(PlaySound, SOUND_377)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_AnimPlant)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_PlantFireFlower)
     EVT_THREAD
         EVT_WAIT(50)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_WAIT(35)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -60,10 +60,10 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_SUB(LVar0, 10)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(2.0))
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(PlayerRunToGoal, 0)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(N(func_802A123C_716E9C), LVar3, LVar4, LVar5)

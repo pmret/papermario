@@ -31,7 +31,7 @@ EvtScript N(EVS_SpawnStarCard) = {
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(12)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(50)
@@ -41,7 +41,7 @@ EvtScript N(EVS_SpawnStarCard) = {
         EVT_CALL(N(StarSpiritEffectFunc4), 1)
         EVT_THREAD
             EVT_WAIT(80)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_END_THREAD
         EVT_ADD(LVar1, 100)
         EVT_CALL(SetCamDistance, CAM_DEFAULT, LVar1)
@@ -93,7 +93,7 @@ EvtScript N(EVS_RespawnStarCard) = {
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(12)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(50)
@@ -103,7 +103,7 @@ EvtScript N(EVS_RespawnStarCard) = {
         EVT_CALL(N(StarSpiritEffectFunc4), 1)
         EVT_THREAD
             EVT_WAIT(80)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_END_THREAD
         EVT_ADD(LVar1, 100)
         EVT_CALL(SetCamDistance, CAM_DEFAULT, LVar1)

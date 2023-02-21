@@ -61,7 +61,7 @@ EvtScript N(EVS_Scene_CrystalKingAppears) = {
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(400.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_BeforeJump)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
     EVT_CALL(SetPlayerPos, 475, 100, 116)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(PartnerIsFlying, LVar4)
@@ -114,7 +114,7 @@ EvtScript N(EVS_Scene_CrystalKingAppears) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SpeakToPlayer, NPC_CrystalKing_01, ANIM_CrystalKing_Anim09, ANIM_CrystalKing_Anim09, 0, MSG_CH7_016B)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Running)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Run)
     EVT_CALL(SetPlayerSpeed, EVT_FLOAT(2.5))
     EVT_THREAD
         EVT_WAIT(10)

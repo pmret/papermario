@@ -74,7 +74,7 @@ EvtScript N(EVS_NpcInteract_Bootler) = {
             EVT_CASE_GE(STORY_CH5_STAR_SPRIT_DEPARTED)
                 EVT_CALL(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Dejected, ANIM_Bootler_Quaver, 0, MSG_CH3_005A)
                 EVT_WAIT(20)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
                 EVT_WAIT(20)
                 EVT_CALL(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Flail, ANIM_Bootler_Flail, 0, MSG_CH3_005B)
         EVT_END_SWITCH

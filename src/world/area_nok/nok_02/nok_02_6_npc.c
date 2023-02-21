@@ -116,7 +116,7 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
         EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_WAIT(10)
         EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Celebrate, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00B5)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
         EVT_WAIT(15)
         EVT_CALL(EndSpeech, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0)
         EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Celebrate)

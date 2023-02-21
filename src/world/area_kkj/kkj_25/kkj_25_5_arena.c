@@ -298,11 +298,11 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     EVT_THREAD
         EVT_CALL(InterpPlayerYaw, 270, 0)
         EVT_WAIT(30)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000A)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Shocked)
     EVT_END_THREAD
     EVT_SET(MV_Unk_0A, 10)
     EVT_EXEC_WAIT(N(EVS_AnimateBridgeCollapsing))
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(SetPlayerPos, 100, 0, 0)
     EVT_CALL(PartnerIsFlying, LVar0)
     EVT_IF_EQ(LVar0, FALSE)
@@ -417,7 +417,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     EVT_CALL(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_Idle)
     EVT_CALL(SpeakToPlayer, NPC_Bowser_01, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, MSG_CH8_0082)
     EVT_WAIT(40)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_BeforeJump)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 50)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)

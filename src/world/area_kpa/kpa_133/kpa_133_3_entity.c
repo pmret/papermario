@@ -69,9 +69,9 @@ EvtScript N(EVS_SetupHiddenSpring) = {
                 EVT_CALL(InterpPlayerYaw, LVar4, 0)
                 EVT_WAIT(2)
                 EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(2.0))
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
                 EVT_CALL(PlayerJump1, LVar3, LVar1, LVar2, 10)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
                 EVT_WAIT(5)
             EVT_END_THREAD
         EVT_END_IF

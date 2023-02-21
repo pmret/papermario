@@ -327,7 +327,7 @@ EvtScript N(takeTurn) = {
     EVT_END_IF
     EVT_WAIT(10)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000C)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Leeching)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Bite)
     EVT_WAIT(21)

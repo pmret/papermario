@@ -100,7 +100,7 @@ EvtScript N(EVS_Scene_GetJadeRaven) = {
         EVT_WAIT(10)
     EVT_END_IF
     EVT_CALL(ContinueSpeech, NPC_PARTNER, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 5, MSG_CH5_002B)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
     EVT_WAIT(30)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 5, MSG_CH5_002C)
     EVT_WAIT(10)

@@ -332,12 +332,12 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
     EVT_WAIT(1)
     EVT_CALL(InterpPlayerYaw, 160, 1)
     EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
     EVT_CALL(func_802D286C, 0x800)
-    EVT_CALL(func_802D2520, ANIM_Mario_10002, 5, 7, 1, 1, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario1_Idle, 5, 7, 1, 1, 0)
     EVT_THREAD
         EVT_WAIT(60)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001D)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
     EVT_END_THREAD
     EVT_WAIT(20)
     EVT_THREAD
@@ -354,7 +354,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
 
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
     EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_CALL(func_802D2520, ANIM_Mario_10002, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario1_Idle, 0, 0, 0, 0, 0)
     EVT_CALL(SetPlayerPos, -380, 0, 5)
     EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
     EVT_CALL(PlayerMoveTo, -325, 79, 0)

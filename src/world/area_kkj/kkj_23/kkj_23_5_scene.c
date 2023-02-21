@@ -280,7 +280,7 @@ EvtScript N(EVS_Scene_KammyUnmasksPeach) = {
     EVT_WAIT(10)
     EVT_CALL(NpcMoveTo, NPC_Kammy, 280, -50, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_262, 0)
-    EVT_CALL(ShowEmote, NPC_Kammy, EMOTE_EXCLAMATION, -45, 15, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_Kammy, EMOTE_EXCLAMATION, -45, 15, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20)
     EVT_CALL(InterpNpcYaw, NPC_Kammy, 270, 5)
     EVT_CALL(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 5, MSG_Peach_0153)

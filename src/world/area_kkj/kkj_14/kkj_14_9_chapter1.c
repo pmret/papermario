@@ -28,7 +28,7 @@ EvtScript N(EVS_Scene_Chapter1) = {
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0036)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach_C000D)
     EVT_CALL(PlaySoundAtPlayer, SOUND_262, 0)
-    EVT_CALL(ShowEmote, NPC_Bowser, EMOTE_EXCLAMATION, 0, 30, FALSE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach_A0001)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0000)

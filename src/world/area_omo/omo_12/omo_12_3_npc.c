@@ -145,7 +145,7 @@ EvtScript N(EVS_EnterScene) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_BigLanternGhost, ANIM_BigLanternGhost_Anim0F)
     EVT_WAIT(5)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000A)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Shocked)
     EVT_WAIT(15)
     EVT_THREAD
         EVT_WAIT(20)
@@ -293,14 +293,14 @@ EvtScript N(EVS_Scene_ReleaseWatt) = {
         EVT_CALL(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Strain, ANIM_WorldWatt_Hurt, 0, MSG_CH4_0058)
         EVT_THREAD
             EVT_WAIT(10)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimPray)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Pray)
             EVT_WAIT(15)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_END_THREAD
         EVT_CALL(EndSpeech, NPC_Watt, ANIM_WorldWatt_Strain, ANIM_WorldWatt_Hurt, 0)
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Celebrate, ANIM_WorldWatt_Idle, 0, MSG_CH4_0057)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
     EVT_END_IF
     EVT_CALL(func_802D2C14, 0)
     EVT_WAIT(20)
@@ -309,9 +309,9 @@ EvtScript N(EVS_Scene_ReleaseWatt) = {
     EVT_CALL(ShowEmote, NPC_Watt, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(40)
     EVT_CALL(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_0059)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80011)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_TouchNose)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
     EVT_WAIT(20)
     EVT_CALL(EndSpeech, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0)
     EVT_WAIT(20)
@@ -360,9 +360,9 @@ EvtScript N(EVS_Scene_ReleaseWatt) = {
     EVT_CALL(NpcFacePlayer, NPC_Watt, 3)
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_005A)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(5)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
     EVT_WAIT(20)
     EVT_CALL(EndSpeech, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0)
     EVT_SET(AB_OMO12_LightSource, LIGHT_FROM_NO_CHANGE)

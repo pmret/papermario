@@ -119,11 +119,11 @@ void action_update_parasol(void) {
         case SUBSTATE_DISGUISE_INIT:
             if (playerStatus->flipYaw[CAM_DEFAULT] == 0) {
                 if (peach_disguise_check_overlaps() < 0) {
-                    suggest_player_anim_clearUnkFlag(ANIM_Peach_C0024);
+                    suggest_player_anim_allow_backward(ANIM_Peach_C0024);
                     sfx_play_sound_at_player(SOUND_92, SOUND_SPACE_MODE_0);
                     playerStatus->actionSubstate++; // SUBSTATE_USE_PARASOL
                 } else {
-                    suggest_player_anim_clearUnkFlag(ANIM_Peach_C0027);
+                    suggest_player_anim_allow_backward(ANIM_Peach_C0027);
                     playerStatus->actionSubstate = SUBSTATE_BLOCKED;
                     playerStatus->currentStateTime = 10;
                     transformation->disguiseTime = 0;
@@ -131,7 +131,7 @@ void action_update_parasol(void) {
             }
         case SUBSTATE_USE_PARASOL:
             if (--playerStatus->currentStateTime == 0) {
-                suggest_player_anim_clearUnkFlag(ANIM_Peach_C0025);
+                suggest_player_anim_allow_backward(ANIM_Peach_C0025);
                 playerStatus->actionSubstate = SUBSTATE_PUT_AWAY;
                 if (transformation->npc == NULL) {
                     playerStatus->actionSubstate = SUBSTATE_FAILED;

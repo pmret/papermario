@@ -238,7 +238,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_WAIT(1)
     EVT_CALL(func_802D4D14, 180)
     EVT_CALL(SetPlayerPos, 0, 2, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_DeadStill)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Fallen)
     EVT_WAIT(60)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.7))
     EVT_CALL(SetCamDistance, CAM_DEFAULT, -350)

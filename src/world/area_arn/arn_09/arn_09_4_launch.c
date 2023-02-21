@@ -11,7 +11,7 @@ EvtScript N(EVS_LaunchPlayer) = {
     EVT_CALL(SetPlayerActionState, ACTION_STATE_LAUNCH)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.5))
     EVT_CALL(PlayerJump, 50, 0, 0, 16)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_SET(AF_ARN_01, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN

@@ -249,7 +249,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
         EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
         EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 20)
         EVT_LOOP(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_80013)
+            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicHover)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD

@@ -174,7 +174,7 @@ EvtScript N(EVS_SetupLavaFall) = {
                                     EVT_BREAK_LOOP
                                 EVT_END_IF
                             EVT_END_LOOP
-                            EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001A)
+                            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Thrown)
                             EVT_CALL(MakeLerp, 30, 60, 5, EASING_QUADRATIC_IN)
                             EVT_LOOP(0)
                                 EVT_CALL(UpdateLerp)
@@ -195,7 +195,7 @@ EvtScript N(EVS_SetupLavaFall) = {
                                 EVT_END_IF
                             EVT_END_LOOP
                             EVT_WAIT(5)
-                            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+                            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
                             EVT_CALL(DisablePlayerPhysics, FALSE)
                             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
                             EVT_CALL(DisablePlayerInput, FALSE)

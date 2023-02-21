@@ -74,7 +74,7 @@ EvtScript N(EVS_NpcDefeat_Chan) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_CALL(SetNpcVar, NPC_TheMaster, 1, LVar0)
     EVT_CALL(SetNpcVar, NPC_TheMaster, 0, 1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -142,7 +142,7 @@ EvtScript N(EVS_NpcDefeat_Lee) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_CALL(SetNpcVar, NPC_TheMaster, 1, LVar0)
     EVT_CALL(SetNpcVar, NPC_TheMaster, 0, 1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -248,7 +248,7 @@ EvtScript N(EVS_NpcDefeat_Dojo) = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_CALL(SetSelfVar, VAR_BATTLE_OUTCOME, LVar0)
     EVT_CALL(SetSelfVar, VAR_FINISHED_BATTLE, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_RETURN
     EVT_END
 };

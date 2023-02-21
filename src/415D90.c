@@ -2415,7 +2415,7 @@ void btl_state_update_player_menu(void) {
             break;
         case BTL_SUBSTATE_PLAYER_MENU_CHOOSE_CATEGORY:
             if (battleStatus->hustleTurns != 0) {
-                set_animation(ACTOR_PLAYER, 0, ANIM_Mario_RunThinking);
+                set_animation(ACTOR_PLAYER, 0, ANIM_Mario1_ThinkingRun);
             } else {
                 set_animation(ACTOR_PLAYER, 0, func_80265D44(STATUS_THINKING));
             }
@@ -2438,7 +2438,7 @@ void btl_state_update_player_menu(void) {
             if (D_802ACC60 != 0) {
                 D_802ACC60--;
             } else if (submenuResult != 0) {
-                set_animation(ACTOR_PLAYER, 0, ANIM_Mario_Walking);
+                set_animation(ACTOR_PLAYER, 0, ANIM_Mario1_Walk);
                 battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_MAIN] = battleStatus->currentSubmenu = battle_menu_submenuIDs[submenuResult - 1];
                 for (i = 0; i < ARRAY_COUNT(battleStatus->submenuMoves); i++) {
                     battleStatus->submenuMoves[i] = 0;

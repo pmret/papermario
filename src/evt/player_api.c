@@ -110,7 +110,7 @@ ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall) {
 
     gPlayerStatus.anim = playerNpc->currentAnim = anim;
 
-    if (gPlayerStatus.anim == ANIM_Mario_80003) {
+    if (gPlayerStatus.anim == ANIM_MarioW2_Collapse) {
         exec_ShakeCam1(0, 0, 2);
     }
 
@@ -258,14 +258,14 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
         if (mode == 0) {
             if (!(playerStatus->animFlags & PA_FLAG_8BIT_MARIO)) {
                 if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
-                    anim = ANIM_Mario_AnimMidairStill;
+                    anim = ANIM_Mario1_Jump;
                 } else {
-                    anim = ANIM_Mario_60009;
+                    anim = ANIM_MarioW1_JumpWatt;
                 }
             } else {
-                anim = ANIM_Mario_90005;
+                anim = ANIM_MarioW3_8bit_Jump;
             }
-            suggest_player_anim_clearUnkFlag(anim);
+            suggest_player_anim_allow_backward(anim);
             sfx_play_sound_at_player(SOUND_JUMP_2081, SOUND_SPACE_MODE_0);
         }
         script->functionTemp[0] = 1;
@@ -279,14 +279,14 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
     if (mode == 0 && jumpVelocity > 0.0f && playerNpc->jumpVelocity <= 0.0f) {
         if (!(playerStatus->animFlags & PA_FLAG_8BIT_MARIO)) {
             if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
-                anim = ANIM_Mario_AnimMidair;
+                anim = ANIM_Mario1_Fall;
             } else {
-                anim = ANIM_Mario_6000A;
+                anim = ANIM_MarioW1_FallWatt;
             }
         } else {
-            anim = ANIM_Mario_90005;
+            anim = ANIM_MarioW3_8bit_Jump;
         }
-        suggest_player_anim_clearUnkFlag(anim);
+        suggest_player_anim_allow_backward(anim);
     }
 
     playerStatus->position.x = playerNpc->pos.x;
@@ -305,14 +305,14 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
         if (mode == 0) {
             if (!(playerStatus->animFlags & PA_FLAG_8BIT_MARIO)) {
                 if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
-                    anim = ANIM_Mario_10009;
+                    anim = ANIM_Mario1_Land;
                 } else {
-                    anim = ANIM_Mario_6000B;
+                    anim = ANIM_MarioW1_LandWatt;
                 }
             } else {
-                anim = ANIM_Mario_AnimPanting;
+                anim = ANIM_Mario1_TiredIdle;
             }
-            suggest_player_anim_clearUnkFlag(anim);
+            suggest_player_anim_allow_backward(anim);
             func_8003D660(playerNpc, 2);
         }
 

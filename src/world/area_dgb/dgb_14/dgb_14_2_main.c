@@ -47,9 +47,9 @@ EvtScript N(EVS_EnterMap) = {
             EVT_EXEC_WAIT(EnterDoubleDoor)
             EVT_IF_EQ(AF_DGB_01, TRUE)
                 EVT_WAIT(5)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001D)
+                EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
                 EVT_WAIT(20)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
             EVT_END_IF
             EVT_CALL(DisablePlayerInput, FALSE)
     EVT_END_SWITCH

@@ -2378,7 +2378,7 @@ void btl_state_update_defeat(void) {
 
             btl_cam_use_preset(BTL_CAM_PRESET_25);
             btl_cam_target_actor(ACTOR_PLAYER);
-            battleStatus->battlePhase = PHASE_RUN_AWAY_RESET;
+            battleStatus->battlePhase = PHASE_DEATH;
             script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
             player->takeTurnScript = script;
             player->takeTurnScriptID = script->id;
