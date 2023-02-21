@@ -366,11 +366,11 @@ EvtScript N(EVS_UseMove3_Impl) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_CALL(GetActionSuccess, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_WAIT(1)
+        EVT_CALL(GetActionSuccess, LVar0)
+        EVT_IF_EQ(LVar0, 0)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40010)
     EVT_WAIT(3)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40011)

@@ -22,7 +22,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_THREAD
         EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
         EVT_CALL(PlaySoundAtPlayer, SOUND_263, SOUND_SPACE_MODE_0)
-        EVT_CALL(ShowEmote, NPC_TrainToad_01, EMOTE_QUESTION, 0, 20, FALSE, 0, 0, 0, 0)
+        EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(3.0), 30, 300, EVT_FLOAT(15.0), EVT_FLOAT(-9.5))
     EVT_THREAD

@@ -41,12 +41,12 @@ s32 N(reflection_unk_change_anim_facing)(s32 playerAnim) {
     u32 temp;
 
     switch (sprIndex) {
-        case SPR_Mario_1:
+        case SPR_Mario1:
             if (playerAnim > ANIM_Mario_1000C) {
                 return playerAnim;
             }
             break;
-        case SPR_Mario_6:
+        case SPR_MarioW1:
             temp = playerAnim + ~ANIM_Mario_6000B;
             if (temp < 16) {
                 if (temp & 1) {
@@ -56,8 +56,8 @@ s32 N(reflection_unk_change_anim_facing)(s32 playerAnim) {
                 }
             }
             break;
-        case SPR_Mario_8:
-        case SPR_Mario_9:
+        case SPR_MarioW2:
+        case SPR_MarioW3:
             return playerAnim;
     }
 

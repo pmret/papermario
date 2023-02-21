@@ -162,7 +162,7 @@ EvtScript N(EVS_ManageSneakingScenes) = {
     EVT_END_THREAD
     EVT_CALL(SetPlayerAnimation, ANIM_Peach_C000D)
     EVT_CALL(PlaySoundAtPlayer, SOUND_262, 0)
-    EVT_CALL(ShowEmote, NPC_HammerBros, EMOTE_EXCLAMATION, 0, 30, FALSE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach_A0001)
     EVT_THREAD

@@ -52,7 +52,7 @@ void N(appendGfx_FallingSprite)(void) {
     
     //TODO use SPR_RASTER_Mario8_XYZ here once they are defined
     if (!falling->animationEnabled) {
-        falling->playerSpriteID = SPR_Mario_8;
+        falling->playerSpriteID = SPR_MarioW2;
         animFrame = gGameStatusPtr->frameCounter % 4;
         if (animFrame == 0) {
             falling->rasterID = 37;
@@ -153,7 +153,7 @@ API_CALLABLE(N(InitializeFallingPartner)) {
 API_CALLABLE(N(InitializeGetUp)) {
     FallingSprite* falling = &N(Falling);
     
-    falling->playerSpriteID = SPR_Mario_1;
+    falling->playerSpriteID = SPR_Mario1;
     falling->rasterID = 0;
     return ApiStatus_DONE2;
 }

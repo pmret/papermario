@@ -1367,7 +1367,7 @@ void player_update_sprite(void) {
             playerStatus->spriteFacingAngle = angle + D_800F7B48;
             trueAnim = playerStatus->anim;
             if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS) &&
-                (sprIndex == SPR_Mario_1 || sprIndex == SPR_Mario_6 || sprIndex == SPR_Peach_A) &&
+                (sprIndex == SPR_Mario1 || sprIndex == SPR_MarioW1 || sprIndex == SPR_Peach1) &&
                 fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) < 60.0f)
             {
                 trueAnim = get_player_back_anim(trueAnim);
@@ -1377,7 +1377,7 @@ void player_update_sprite(void) {
         } else {
             trueAnim = playerStatus->anim;
             if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS) &&
-                (sprIndex == SPR_Mario_1 || sprIndex == SPR_Mario_6 || sprIndex == SPR_Peach_A) &&
+                (sprIndex == SPR_Mario1 || sprIndex == SPR_MarioW1 || sprIndex == SPR_Peach1) &&
                 playerStatus->spriteFacingAngle < 350.0f && playerStatus->spriteFacingAngle > 190.0f)
             {
                 trueAnim = get_player_back_anim(trueAnim);
@@ -1401,16 +1401,16 @@ s32 get_player_back_anim(s32 anim) {
     s32 sprIndex = (anim >> 16) & 0xff;
     s32 outAnim = 0;
 
-    if (sprIndex != SPR_Mario_1) {
-        if (sprIndex != SPR_Mario_6 && sprIndex != SPR_Peach_A) {
+    if (sprIndex != SPR_Mario1) {
+        if (sprIndex != SPR_MarioW1 && sprIndex != SPR_Peach1) {
             return anim;
         }
 
-        if (sprIndex == SPR_Mario_1) {
+        if (sprIndex == SPR_Mario1) {
             if (anim > ANIM_Mario_1000C) {
                 return anim;
             }
-        } else if (sprIndex == SPR_Mario_6) {
+        } else if (sprIndex == SPR_MarioW1) {
             if (anim == ANIM_Mario_6000C) {
                 outAnim = ANIM_Mario_6000D;
             } else if (anim == ANIM_Mario_6000E) {
@@ -1428,7 +1428,7 @@ s32 get_player_back_anim(s32 anim) {
             } else if (anim == ANIM_Mario_6001A) {
                 outAnim = ANIM_Mario_6001B;
             }
-        } else if (sprIndex == SPR_Peach_A) {
+        } else if (sprIndex == SPR_Peach1) {
             if (anim > ANIM_Peach_A0006) {
                 outAnim = anim + 1;
             }

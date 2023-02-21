@@ -332,7 +332,7 @@ extern EvtScript EVS_PlayerFirstStrike;
 extern EvtScript EVS_StartDefend;
 extern EvtScript EVS_RunAwayStart;
 extern EvtScript EVS_RunAwayFail;
-extern EvtScript EVS_RunAwayReset;
+extern EvtScript EVS_PlayerDies;
 extern EvtScript EVS_PlayEatFX;
 extern EvtScript EVS_PlayDrinkFX;
 extern EvtScript EVS_UseLifeShroom;

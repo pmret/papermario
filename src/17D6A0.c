@@ -26,7 +26,7 @@ extern ActorBlueprint battle_partner_twink;
 PlayerCelebrationAnimOptions D_80280FC0 = {
     10, 90,
     {
-        50, 196619,
+        50, ANIM_Mario_3000B,
         50, ANIM_Mario_1002D,
         0, 0,
         0, 0,

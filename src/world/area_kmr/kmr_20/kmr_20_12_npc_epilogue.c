@@ -222,7 +222,7 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     EVT_CALL(PlaySoundAt, SOUND_E0, SOUND_SPACE_MODE_0, 430, 0, -185)
     EVT_WAIT(25)
     EVT_CALL(PlaySoundAtPlayer, SOUND_263, SOUND_SPACE_MODE_0)
-    EVT_CALL(ShowEmote, NPC_Luigi_0, EMOTE_QUESTION, 0, 20, FALSE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_Luigi_1, SOUND_263, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_Luigi_1, EMOTE_QUESTION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(30)

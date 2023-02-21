@@ -198,7 +198,7 @@ EvtScript N(nextTurn) = {
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
                 EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
                 EVT_CALL(SetActorYaw, ACTOR_PLAYER, 180)
-                EVT_CALL(SpeakToPlayer, 0x00000000, ANIM_ParadePeach_Talk, ANIM_ParadePeach_IdleRaisedArms, 5, MSG_Intro_0057)
+                EVT_CALL(SpeakToPlayer, ACTOR_PLAYER, ANIM_ParadePeach_Talk, ANIM_ParadePeach_IdleRaisedArms, 5, MSG_Intro_0057)
                 EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair)
                 EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
                 EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.5))

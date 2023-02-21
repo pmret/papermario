@@ -174,7 +174,7 @@ EvtScript N(EVS_Scene_Chapter3) = {
         EVT_EXEC_WAIT(N(EVS_AnimateRotatingWall_AlmostCaught))
         EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0005)
         EVT_CALL(PlaySoundAtPlayer, SOUND_262, 0)
-        EVT_CALL(ShowEmote, NPC_Bowser, EMOTE_EXCLAMATION, 0, 30, FALSE, 0, 0, 0, 0)
+        EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
         EVT_WAIT(30)
         EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0011)
     EVT_END_THREAD
@@ -214,9 +214,9 @@ EvtScript N(EVS_Scene_Chapter3) = {
     EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0009)
     EVT_WAIT(1)
     EVT_CALL(PlaySoundAtNpc, NPC_Bowser, SOUND_262, 0)
-    EVT_CALL(ShowEmote, NPC_Bowser, EMOTE_EXCLAMATION, -45, 30, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_Bowser, EMOTE_EXCLAMATION, -45, 30, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_262, 0)
-    EVT_CALL(ShowEmote, NPC_Kammy, EMOTE_EXCLAMATION, -45, 30, TRUE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, NPC_Kammy, EMOTE_EXCLAMATION, -45, 30, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(30)
     EVT_CALL(SetNpcVar, NPC_Bowser, 0, 1)
     EVT_THREAD

@@ -739,8 +739,8 @@ EvtScript EVS_Mario_HandlePhase = {
             EVT_EXEC_WAIT(EVS_RunAwayStart)
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
             EVT_EXEC_WAIT(EVS_RunAwayFail)
-        EVT_CASE_EQ(PHASE_RUN_AWAY_RESET)
-            EVT_EXEC_WAIT(EVS_RunAwayReset)
+        EVT_CASE_EQ(PHASE_DEATH)
+            EVT_EXEC_WAIT(EVS_PlayerDies)
         EVT_CASE_EQ(PHASE_USE_LIFE_SHROOM)
             EVT_EXEC_WAIT(EVS_UseLifeShroom)
         EVT_CASE_EQ(PHASE_USE_DEFEND)
@@ -1273,7 +1273,7 @@ EvtScript EVS_RunAwayFail = {
     EVT_END
 };
 
-EvtScript EVS_RunAwayReset = {
+EvtScript EVS_PlayerDies = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30002)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_24)

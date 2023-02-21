@@ -100,7 +100,7 @@ EvtScript N(EVS_Scene_ImposterAppears) = {
     EVT_CALL(ShowEmote, NPC_Kooper_01A, EMOTE_QUESTION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(15)
     EVT_CALL(PlaySoundAtPlayer, SOUND_263, 0)
-    EVT_CALL(ShowEmote, NPC_Kooper_01A, EMOTE_QUESTION, -45, 20, FALSE, 0, 0, 0, 0)
+    EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, -45, 20, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(15)
     EVT_CALL(PlaySoundAtNpc, NPC_Kooper_02A, SOUND_263, 0)
     EVT_CALL(ShowEmote, NPC_Kooper_02A, EMOTE_QUESTION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
