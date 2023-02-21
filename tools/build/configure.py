@@ -68,7 +68,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
     cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
-    cflags_modern = f"-c -G0 -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mabi=32 -mgp32 -mfp32 -mno-gpopt -mabi=32 -mfix4300 -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -O2 -march=vr4300 -Wno-builtin-declaration-mismatch -gdwarf-2 -x c {extra_cflags}"
+    cflags_modern = f"-c -G0 -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mabi=32 -mgp32 -mfp32 -mno-gpopt -mabi=32 -mfix4300 -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -O3 -march=vr4300 -Wno-builtin-declaration-mismatch -gdwarf-2 -x c {extra_cflags}"
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3","-g1")
 

@@ -615,22 +615,19 @@ void update_scripts(void) {
     }
 }
 
-// this function is evil
-#ifdef NON_MATCHING
+// Does nothing, is cursed
 void func_802C3EE4(void) {
+    s32 temp;
     s32 i;
 
     for (i = 0; i < gScriptListCount; i++) {
-        do {
-            if ((*gCurrentScriptListPtr)[gScriptIndexList[i]] == gScriptIdList[i]) {
-                (*gCurrentScriptListPtr)[gScriptIndexList[i]] = gScriptIdList[i];
-            }
-        } while (0);
+        temp = (s32) (*gCurrentScriptListPtr)[gScriptIndexList[i]];
+        temp = *((s32*) temp);
+        if (temp == gScriptIdList[i]) {
+            temp = 1;
+        }
     }
 }
-#else
-INCLUDE_ASM(s32, "evt/script_list", func_802C3EE4);
-#endif
 
 void kill_script(Evt* instanceToKill) {
     Evt* childScript;

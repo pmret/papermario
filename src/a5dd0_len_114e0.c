@@ -3651,6 +3651,8 @@ void appendGfx_model(void* data) {
 }
 
 void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, s32 mainSize, s32 mainPalSize, s32 auxSize, s32 auxPalSize) {
+    Gfx** temp;
+
     handle->raster = (IMG_PTR) mdl_nextTextureAddress;
     if (mainPalSize != 0) {
         handle->palette = (PAL_PTR) (mdl_nextTextureAddress + mainSize);
@@ -3678,12 +3680,8 @@ void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, 
     memcpy(&handle->header, header, sizeof(*header));
     func_801180E8(header, (Gfx**)&mdl_nextTextureAddress, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
 
-    #ifndef OLD_GCC
-    gSPEndDisplayList(mdl_nextTextureAddress);
-    mdl_nextTextureAddress += 8;
-    #else
-    gSPEndDisplayList(((Gfx*)mdl_nextTextureAddress)++);
-    #endif
+    temp = (Gfx**) &mdl_nextTextureAddress;
+    gSPEndDisplayList((*temp)++);
 }
 
 void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) {
