@@ -124,7 +124,11 @@ def main(args):
         matching_ratio = (matching_size / total_size) * 100
 
     old_all_funcs, old_nonmatching_funcs, old_matching_funcs, old_total_size, old_nonmatching_size, old_matching_size = load_latest_progress(args.version)
-    old_matching_ratio = (old_matching_size / old_total_size) * 100
+
+    if old_total_size == 0:
+        old_matching_ratio = 0.0
+    else:
+        old_matching_ratio = (old_matching_size / old_total_size) * 100
 
     ratio_delta = matching_ratio - old_matching_ratio
     funcs_delta = len(matching_funcs) - old_matching_funcs
