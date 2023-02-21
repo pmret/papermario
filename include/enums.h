@@ -6288,6 +6288,12 @@ enum MsgChars {
     MSG_CHAR_SINGLE_QUOTE_CLOSE     = 0xA5,
     // 0xA6 to 0xEF are unused
 
+#if VERSION_CN
+    // All US characters are in the rom, but their range is used for multibyte characters
+    MSG_CHAR_MULTIBYTE_FIRST        = 0x5F,
+    MSG_CHAR_MULTIBYTE_LAST         = 0x8F,
+#endif
+
     MSG_CHAR_UNK_C3                 = 0xC3,
 
     // special character codes used when reading from the source buffer

@@ -815,6 +815,7 @@ s32 is_actor_hp_bar_visible(Actor*);
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
 void load_font(s32 font);
+void load_font_data(Addr offset, u16 size, void* dest);
 
 void* load_asset_by_name(const char* assetName, u32* decompressedSize);
 

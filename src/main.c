@@ -10,6 +10,9 @@ void gfx_task_main(void);
 void gfx_draw_frame(void);
 void gfx_init_state(void);
 
+void create_audio_system(void);
+void load_engine_data(void);
+
 extern s32 D_80073E00;
 extern u16* D_80073E04;
 extern s16 D_80073E08;
@@ -49,13 +52,20 @@ void boot_main(void* data) {
     crash_screen_init();
 #endif
 
+#if !VERSION_CN
     is_debug_init();
+#endif
     nuGfxInit();
     gGameStatusPtr->contBitPattern = nuContInit();
 
+#if VERSION_CN
+    create_audio_system();
+    load_engine_data();
+#else
     load_obfuscation_shims();
     shim_create_audio_system_obfuscated();
     shim_load_engine_data_obfuscated();
+#endif
 
     nuGfxFuncSet((NUGfxFunc) gfxRetrace_Callback);
     nuGfxPreNMIFuncSet(gfxPreNMI_Callback);
@@ -170,6 +180,10 @@ void gfx_task_main(void) {
     nuGfxTaskStart(gDisplayContext->mainGfx, (u32)(gMasterGfxPos - gDisplayContext->mainGfx) * 8, NU_GFX_UCODE_F3DEX, NU_SC_TASK_LODABLE);
     gCurrentDisplayContextIndex ^= 1;
 }
+
+#if VERSION_CN
+NOP_FIX
+#endif
 
 void gfxPreNMI_Callback(void) {
     D_80073E00 = 1;

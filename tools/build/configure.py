@@ -8,7 +8,7 @@ import ninja_syntax
 from glob import glob
 
 # Configuration:
-VERSIONS = ["us", "jp"]
+VERSIONS = ["us", "jp", "cn"]
 DO_SHA1_CHECK = True
 
 # Paths:
@@ -36,9 +36,9 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
                       non_matching: bool, shift: bool, debug: bool):
     # platform-specific
     if sys.platform  == "darwin":
-        iconv = "tools/iconv.py UTF-8 SHIFT-JIS"
+        iconv = "tools/iconv.py UTF-8 $encoding"
     elif sys.platform == "linux":
-        iconv = "iconv --from UTF-8 --to SHIFT-JIS"
+        iconv = "iconv --from UTF-8 --to $encoding"
     else:
         raise Exception(f"unsupported platform {sys.platform}")
 
@@ -94,6 +94,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     ninja.rule("z64",
         description="rom $out",
         command=f"{cross}objcopy $in $out -O binary {Z64_DEBUG} && {BUILD_TOOLS}/rom/n64crc $out",
+    )
+
+    ninja.rule("z64_ique",
+        description="rom $out",
+        command=f"{cross}objcopy $in $out -O binary {Z64_DEBUG}",
     )
 
     ninja.rule("sha1sum",
@@ -417,6 +422,10 @@ class Configure:
 
                 cflags = cflags.replace("gcc_272", "")
 
+                encoding = "SHIFT-JIS"
+                if version == "cn":
+                    encoding = "EUC-JP"
+
                 # Dead cod
                 if isinstance(seg, segtypes.common.c.CommonSegC) and isinstance(seg.rom_start, int) and seg.rom_start >= 0xEA0900:
                     obj_path = str(entry.object_path)
@@ -424,6 +433,7 @@ class Configure:
                     build(init_obj_path, entry.src_paths, task, variables={
                         "cflags": cflags,
                         "cppflags": f"-DVERSION_{self.version.upper()}",
+                        "encoding": encoding,
                     })
                     build(
                         entry.object_path,
@@ -437,6 +447,7 @@ class Configure:
                     build(entry.object_path, entry.src_paths, task, variables={
                         "cflags": cflags,
                         "cppflags": f"-DVERSION_{self.version.upper()}",
+                        "encoding": encoding,
                     })
 
                 # images embedded inside data aren't linked, but they do need to be built into .inc.c files
@@ -708,13 +719,22 @@ class Configure:
             implicit=[str(obj) for obj in built_objects] +  additional_objects,
             variables={ "version": self.version, "mapfile": str(self.map_path()) },
         )
-        ninja.build(
-            str(self.rom_path()),
-            "z64",
-            str(self.elf_path()),
-            implicit=[CRC_TOOL],
-            variables={ "version": self.version },
-        )
+
+        if self.version == "cn":
+            ninja.build(
+                str(self.rom_path()),
+                "z64_ique",
+                str(self.elf_path()),
+                variables={ "version": self.version },
+            )
+        else:
+            ninja.build(
+                str(self.rom_path()),
+                "z64",
+                str(self.elf_path()),
+                implicit=[CRC_TOOL],
+                variables={ "version": self.version },
+            )
 
         if not non_matching:
             ninja.build(

@@ -90,6 +90,21 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(TranslateGroup, MODEL_e2, 0, 200, 0)
     EVT_CALL(TranslateGroup, MODEL_r,  0, 200, 0)
     EVT_THREAD
+#if VERSION_CN
+        EVT_WAIT(6)
+        EVT_SET(LVar0, MODEL_g)
+        EVT_EXEC(N(EVS_DropLetter))
+        EVT_WAIT(6)
+        EVT_SET(LVar0, MODEL_m)
+        EVT_EXEC(N(EVS_DropLetter))
+        EVT_WAIT(6)
+        EVT_SET(LVar0, MODEL_o)
+        EVT_EXEC(N(EVS_DropLetter))
+        EVT_WAIT(6)
+        EVT_SET(LVar0, MODEL_e2)
+        EVT_EXEC(N(EVS_DropLetter))
+        EVT_WAIT(18)
+#else
         EVT_WAIT(6)
         EVT_SET(LVar0, MODEL_g)
         EVT_EXEC(N(EVS_DropLetter))
@@ -114,6 +129,7 @@ EvtScript N(EVS_Main) = {
         EVT_WAIT(18)
         EVT_SET(LVar0, MODEL_r)
         EVT_EXEC(N(EVS_DropLastLetter))
+#endif
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 10, 0)

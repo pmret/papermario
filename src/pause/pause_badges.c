@@ -10,7 +10,9 @@ void pause_badges_cleanup(MenuPanel* panel);
 
 static s16 gPauseBadgesItemIds[128];
 static s32 gPauseBadgesCurrentPage;
+#if !VERSION_CN
 static s32 D_80270284;
+#endif
 static PauseItemPage gPauseBadgesPages[20];
 static s32 gPauseBadgesSelectedIndex;
 static s32 D_8027037C;
@@ -23,13 +25,29 @@ static s32 gPauseBadgesTargetScrollIndex;
 static s32 gPauseBadgesLevel;
 static s32 gPauseBadgesCurrentTab;
 static s32 gPauseBadgesShowNotEnoughBP;
+#if !VERSION_CN
 static s32 D_802703A4;
+#endif
 static s32 gPauseBadgesIconIDs[22];
 
 // Fake "badge" for the None entry that appears on the equipped badges page when nothing is equipped
 #define BADGE_NONE_STANDIN 0x7FFE
 // Invalid badge ID filled in unused slots of gPauseBadgesItemIds
 #define BADGE_INVALID 0x7FFF
+
+#if VERSION_CN
+#define OFFSET_1_X 47
+#define OFFSET_1_Y 82
+#define OFFSET_2_X 10
+#define OFFSET_3_X 73
+#define OFFSET_3_Y 76
+#else
+#define OFFSET_1_X 43
+#define OFFSET_1_Y 81
+#define OFFSET_2_X 16
+#define OFFSET_3_X 69
+#define OFFSET_3_Y 74
+#endif
 
 HudScript* gPauseBadgesElements[] = {
     &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
@@ -560,10 +578,10 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
         }
     }
 
-    hud_element_set_render_pos(gPauseBadgesIconIDs[16], baseX + 43, baseY + 81);
+    hud_element_set_render_pos(gPauseBadgesIconIDs[16], baseX + OFFSET_1_X, baseY + OFFSET_1_Y);
     hud_element_draw_without_clipping(gPauseBadgesIconIDs[16]);
-    draw_msg(pause_get_menu_msg(70), baseX + 16, baseY + 74, 255, MSG_PAL_STANDARD, DRAW_MSG_STYLE_MENU);
-    draw_number(playerData->maxBP, baseX + 69, baseY + 74, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+    draw_msg(pause_get_menu_msg(70), baseX + OFFSET_2_X, baseY + 74, 255, MSG_PAL_STANDARD, DRAW_MSG_STYLE_MENU);
+    draw_number(playerData->maxBP, baseX + OFFSET_3_X, baseY + OFFSET_3_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
     bpAmount = playerData->maxBP - pause_get_total_equipped_bp_cost();
     bpAvailOffsetX = 0;
     bpAvailOffsetY = (playerData->maxBP - 1) / 10 * 8;
