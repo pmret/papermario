@@ -2232,7 +2232,7 @@ enum PlayerAnims {
     ANIM_Mario1_StickOutTongue              = 0x0001001D,
     ANIM_Mario1_PlantFireFlower             = 0x0001001E,
     ANIM_Mario1_UsePower                    = 0x0001001F,
-    ANIM_Mario1_JumpStance                  = 0x00010020,
+    ANIM_Mario1_FightingStance              = 0x00010020,
     ANIM_Mario1_Thinking                    = 0x00010021,
     ANIM_Mario1_Dizzy                       = 0x00010022,
     ANIM_Mario1_VacantStare                 = 0x00010023,

@@ -65,7 +65,7 @@ EvtScript N(EVS_UseMove0) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_156)
         EVT_WAIT(8)
     EVT_END_CHILD_THREAD
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_JumpStance)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_FightingStance)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(N(UnkMoveFunc2), LVar0, LVar1, LVar2, EVT_FLOAT(1.2))
     EVT_WAIT(3)
