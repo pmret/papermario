@@ -15,6 +15,7 @@ CPP_FLAGS = [
     "-Iinclude",
     "-Isrc",
     "-Iassets/us",
+    "-Iver/current/include",
     "-Iver/current/build/include",
     "-D_LANGUAGE_C",
     "-DF3DEX_GBI_2",
