@@ -405,7 +405,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
-            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, TRUE)
+            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Koopatrol_Anim0B)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
             EVT_THREAD
@@ -463,7 +463,7 @@ EvtScript N(handleEvent) = {
                 EVT_IF_NOT_FLAG(LVarA, STATUS_FLAG_DEFENSE_BOOST | STATUS_FLAG_ATTACK_BOOST)
                     EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
                 EVT_END_IF
-                EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, FALSE)
+                EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Koopatrol_Anim08)
                 EVT_EXEC_WAIT(DoImmune)
@@ -681,7 +681,7 @@ EvtScript N(attackShellToss) = {
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 32)
                 EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -4)
                 EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
-                EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, FALSE)
+                EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
             EVT_END_IF
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -839,7 +839,7 @@ EvtScript N(attackShellMissile) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_CHARGED))
         EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_charged)))
         EVT_CALL(EnableActorGlow, ACTOR_SELF, TRUE)
-        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, TRUE)
+        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ATTACK_CHARGED, TRUE)
         EVT_WAIT(10)
         EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
         EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -895,7 +895,7 @@ EvtScript N(attackShellMissile) = {
             EVT_IF_NOT_FLAG(LVarA, STATUS_FLAG_DEFENSE_BOOST | STATUS_FLAG_ATTACK_BOOST)
                 EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
             EVT_END_IF
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, FALSE)
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
             EVT_CALL(YieldTurn)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_CALL(SetActorPos, ACTOR_SELF, 300, 0, 0)
@@ -960,7 +960,7 @@ EvtScript N(attackShellMissile) = {
             EVT_IF_NOT_FLAG(LVarA, STATUS_FLAG_DEFENSE_BOOST | STATUS_FLAG_ATTACK_BOOST)
                 EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
             EVT_END_IF
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, FALSE)
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_CALL(SetActorPos, ACTOR_SELF, 300, 0, 0)
             EVT_SET_CONST(LVar0, 1)

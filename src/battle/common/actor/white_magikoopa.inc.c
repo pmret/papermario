@@ -108,7 +108,7 @@ ActorPartBlueprint N(partsTable_80223CB4)[] = {
         .opacity = 255,
         .idleAnimations = N(idleAnimations_80223DBC),
         .defenseTable = N(defenseTable_80223B2C),
-        .eventFlags = ACTOR_EVENT_FLAG_800000,
+        .eventFlags = ACTOR_EVENT_FLAG_RIDING_BROOMSTICK,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
     },
@@ -400,7 +400,7 @@ EvtScript N(knockOff) = {
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_WHITE_MAGIKOOPA)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_80223B38)))
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 32)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_1000, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(GetIndexFromPos, ACTOR_SELF, LVar0)
     EVT_MOD(LVar0, 4)

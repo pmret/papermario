@@ -139,7 +139,7 @@ HitResult calc_item_damage_enemy(void) {
         partImmuneToElement = FALSE;
     }
 
-    if (targetPart->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_80000)) {
+    if (targetPart->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)) {
         battleStatus->currentAttackElement &= ~DAMAGE_TYPE_IGNORE_DEFENSE;
     }
 
@@ -226,11 +226,11 @@ HitResult calc_item_damage_enemy(void) {
                 dispatchEvent = EVENT_STAR_BEAM;
                 wasStatusInflicted = TRUE;
             }
-            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_400000) {
+            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ATTACK_CHARGED) {
                 dispatchEvent = EVENT_STAR_BEAM;
                 wasStatusInflicted = TRUE;
             }
-            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_80000) {
+            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED) {
                 dispatchEvent = EVENT_INVUNERABLE_TAUNT;
             }
             hitResult = HIT_RESULT_HIT;
@@ -269,7 +269,7 @@ HitResult calc_item_damage_enemy(void) {
                 dispatchEvent = EVENT_PEACH_BEAM;
                 wasStatusInflicted = TRUE;
             }
-            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_80000) {
+            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED) {
                 dispatchEvent = EVENT_PEACH_BEAM;
                 wasStatusInflicted = TRUE;
             }
@@ -301,7 +301,7 @@ HitResult calc_item_damage_enemy(void) {
 
     if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
         && (battleStatus->currentAttackElement & DAMAGE_TYPE_POW)
-        && (targetPart->eventFlags & ACTOR_EVENT_FLAG_800000)
+        && (targetPart->eventFlags & ACTOR_EVENT_FLAG_RIDING_BROOMSTICK)
     ) {
         if (dispatchEvent == EVENT_HIT) {
             dispatchEvent = EVENT_FALL_TRIGGER;
@@ -385,7 +385,7 @@ HitResult calc_item_damage_enemy(void) {
                 && target->debuff != STATUS_SLEEP
                 && target->debuff != STATUS_FROZEN
                 && target->debuff != STATUS_STOP)
-            && !(target->flags & ACTOR_FLAG_400))
+            && !(target->flags & ACTOR_FLAG_FLIPPED))
         {
             dispatchEvent = EVENT_SCARE_AWAY;
             hitResult = HIT_RESULT_HIT;

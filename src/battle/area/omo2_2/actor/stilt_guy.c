@@ -785,7 +785,7 @@ EvtScript N(fallOff) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(shy_guy_idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(shy_guy_handleEvent)))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_SHY_GUY)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_1000, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(GetActorSize, ACTOR_SELF, LVar0, LVar1)

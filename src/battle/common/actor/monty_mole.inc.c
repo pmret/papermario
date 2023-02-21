@@ -156,7 +156,7 @@ EvtScript N(init_hole) = {
 };
 
 ActorBlueprint N(hole) = {
-    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_40000 | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY,
+    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY,
     .type = ACTOR_TYPE_MONTY_HOLE,
     .level = 9,
     .maxHP = 5,

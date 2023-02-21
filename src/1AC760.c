@@ -63,7 +63,7 @@ HitResult calc_partner_test_enemy(void) {
     if (target == NULL) {
         return HIT_RESULT_HIT;
     }
-    
+
     part = get_actor_part(target, currentTargetPart);
     ASSERT(part != NULL);
 
@@ -234,7 +234,7 @@ HitResult calc_partner_damage_enemy(void) {
             dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
             return HIT_RESULT_BACKFIRE;
         }
-        
+
         // check explode on contact
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
             && targetPart->eventFlags & ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT
@@ -253,7 +253,7 @@ HitResult calc_partner_damage_enemy(void) {
             }
             return HIT_RESULT_HIT;
         }
-        
+
         // check touching fiery enemy
         if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_SMASH))
             && targetPart->eventFlags & ACTOR_EVENT_FLAG_FIREY
@@ -264,7 +264,7 @@ HitResult calc_partner_damage_enemy(void) {
             dispatch_event_actor(target, EVENT_BURN_TAUNT);
             return HIT_RESULT_BACKFIRE;
         }
-        
+
         // check touching spiky-front enemy
         if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_JUMP))
             && targetPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_FRONT
@@ -275,11 +275,11 @@ HitResult calc_partner_damage_enemy(void) {
             dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
             return HIT_RESULT_BACKFIRE;
         }
-        
+
         // check explode on ignition
         if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
             && battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE
-            && targetPart->eventFlags & (ACTOR_EVENT_FLAG_400 | ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)
+            && targetPart->eventFlags & (ACTOR_EVENT_FLAG_FIRE_EXPLODE | ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)
         ) {
             sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_event_actor(target, EVENT_EXPLODE_TRIGGER);
@@ -288,7 +288,7 @@ HitResult calc_partner_damage_enemy(void) {
             }
             return HIT_RESULT_HIT;
         }
-        
+
         // unknown alternate spiky #1
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
             && targetPart->eventFlags & ACTOR_EVENT_FLAG_200000
@@ -300,7 +300,7 @@ HitResult calc_partner_damage_enemy(void) {
             dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
             return HIT_RESULT_BACKFIRE;
         }
-        
+
         // unknown alternate spiky top
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
             && targetPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP
@@ -312,11 +312,11 @@ HitResult calc_partner_damage_enemy(void) {
             dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
             return HIT_RESULT_BACKFIRE;
         }
-        
+
          // check explode on ignition (duplicate of previous check)
         if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
             && battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE
-            && targetPart->eventFlags & (ACTOR_EVENT_FLAG_400 | ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)
+            && targetPart->eventFlags & (ACTOR_EVENT_FLAG_FIRE_EXPLODE | ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)
         ) {
             sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_event_actor(target, EVENT_EXPLODE_TRIGGER);
@@ -369,7 +369,7 @@ HitResult calc_partner_damage_enemy(void) {
             gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
         }
 
-        if (targetPart->eventFlags & (ACTOR_EVENT_FLAG_80000 | ACTOR_EVENT_FLAG_ENCHANTED)) {
+        if (targetPart->eventFlags & (ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED | ACTOR_EVENT_FLAG_ENCHANTED)) {
             battleStatus->currentAttackElement &= ~DAMAGE_TYPE_IGNORE_DEFENSE;
         }
 
@@ -569,7 +569,7 @@ HitResult calc_partner_damage_enemy(void) {
                             dispatchEvent = EVENT_FLIP_TRIGGER;
                         }
 
-                        if (!(target->flags & ACTOR_FLAG_400)) {
+                        if (!(target->flags & ACTOR_FLAG_FLIPPED)) {
                             tempBinary = TRUE;
                         }
                     }
@@ -590,7 +590,7 @@ HitResult calc_partner_damage_enemy(void) {
             dispatchEvent = EVENT_FLIP_TRIGGER;
         }
 
-        if (!(target->flags & ACTOR_FLAG_400)) {
+        if (!(target->flags & ACTOR_FLAG_FLIPPED)) {
             tempBinary = TRUE;
         }
     }
@@ -671,7 +671,7 @@ HitResult calc_partner_damage_enemy(void) {
                             || target->debuff == STATUS_SLEEP
                             || target->debuff == STATUS_FROZEN
                             || target->debuff == STATUS_STOP)
-                            && !(target->flags & ACTOR_FLAG_400)
+                            && !(target->flags & ACTOR_FLAG_FLIPPED)
                         ) {
                             dispatchEvent = EVENT_SCARE_AWAY;
                             wasStatusInflicted = TRUE;
@@ -713,7 +713,7 @@ HitResult calc_partner_damage_enemy(void) {
                       target->debuff == STATUS_PARALYZE ||
                       target->debuff == STATUS_SLEEP ||
                       target->debuff == STATUS_FROZEN ||
-                      target->debuff == STATUS_STOP) && !(target->flags & ACTOR_FLAG_400)) {
+                      target->debuff == STATUS_STOP) && !(target->flags & ACTOR_FLAG_FLIPPED)) {
                     dispatchEvent = EVENT_SCARE_AWAY;
                     wasStatusInflicted = TRUE;
                     retVal = 0;

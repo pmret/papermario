@@ -165,7 +165,7 @@ EvtScript N(80218944) = {
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -7)
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
     EVT_CALL(N(SetSpinSmashable), 0)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -420,7 +420,7 @@ EvtScript N(802197AC) = {
         EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
         EVT_WAIT(1)
         EVT_CALL(N(SetSpinSmashable), 1)
-        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, FALSE)
+        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
     EVT_END_IF
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

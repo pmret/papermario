@@ -387,7 +387,7 @@ EvtScript N(80229F08) = {
         EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8022B19C)))
         EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022B310)))
         EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_SHY_GUY)
-        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_1000, TRUE)
+        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
         EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_ELSE

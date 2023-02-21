@@ -230,7 +230,7 @@ HitResult calc_player_test_enemy(void) {
         dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
         return HIT_RESULT_BACKFIRE;
     }
-    
+
     if (player->staticStatus != STATUS_STATIC && target->staticStatus == STATUS_STATIC) {
         return HIT_RESULT_HIT_STATIC;
     }
@@ -354,7 +354,7 @@ HitResult calc_player_damage_enemy(void) {
 
         if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
             && battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE
-            && targetPart->eventFlags & (ACTOR_EVENT_FLAG_400 | ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)
+            && targetPart->eventFlags & (ACTOR_EVENT_FLAG_FIRE_EXPLODE | ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)
         ) {
             sfx_play_sound_at_position(SOUND_HIT_PLAYER_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_event_actor(target, EVENT_EXPLODE_TRIGGER);
@@ -432,7 +432,7 @@ HitResult calc_player_damage_enemy(void) {
             sp20 = TRUE;
         }
 
-        if (targetPart->eventFlags & (ACTOR_EVENT_FLAG_80000 | ACTOR_EVENT_FLAG_ENCHANTED)) {
+        if (targetPart->eventFlags & (ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED | ACTOR_EVENT_FLAG_ENCHANTED)) {
             battleStatus->currentAttackElement &= ~DAMAGE_TYPE_IGNORE_DEFENSE;
         }
 
@@ -662,7 +662,7 @@ HitResult calc_player_damage_enemy(void) {
                     && target->debuff != STATUS_SLEEP
                     && target->debuff != STATUS_FROZEN
                     && target->debuff != STATUS_STOP)
-                && !(target->flags & ACTOR_FLAG_400)
+                && !(target->flags & ACTOR_FLAG_FLIPPED)
             ) {
                 dispatch_event_actor(target, EVENT_SCARE_AWAY);
                 if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
@@ -763,7 +763,7 @@ HitResult calc_player_damage_enemy(void) {
             tempBinary = TRUE;
         }
 
-        if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) 
+        if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
             && (battleStatus->currentAttackElement & (DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_POW | DAMAGE_TYPE_JUMP))
             && targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE
         ) {
@@ -775,7 +775,7 @@ HitResult calc_player_damage_enemy(void) {
                 dispatchEvent = EVENT_FLIP_TRIGGER;
             }
 
-            if (!(target->flags & ACTOR_FLAG_400)) {
+            if (!(target->flags & ACTOR_FLAG_FLIPPED)) {
                 tempBinary = TRUE;
             }
         }
@@ -793,7 +793,7 @@ HitResult calc_player_damage_enemy(void) {
             dispatchEvent = EVENT_FLIP_TRIGGER;
         }
 
-        if (!(target->flags & ACTOR_FLAG_400)) {
+        if (!(target->flags & ACTOR_FLAG_FLIPPED)) {
             tempBinary = TRUE;
         }
     }

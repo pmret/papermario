@@ -1567,9 +1567,9 @@ EvtScript N(onDeath) = {
         EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_LAVA_PIRANHA_PHASE_2)
         EVT_CALL(SetActorType, ACTOR_ENEMY1, ACTOR_TYPE_LAVA_BUD_PHASE_2)
         EVT_CALL(SetActorType, ACTOR_ENEMY2, ACTOR_TYPE_LAVA_BUD_PHASE_2)
-        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_1000, TRUE)
-        EVT_CALL(SetActorFlagBits, ACTOR_ENEMY1, ACTOR_FLAG_1000, TRUE)
-        EVT_CALL(SetActorFlagBits, ACTOR_ENEMY2, ACTOR_FLAG_1000, TRUE)
+        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
+        EVT_CALL(SetActorFlagBits, ACTOR_ENEMY1, ACTOR_FLAG_TYPE_CHANGED, TRUE)
+        EVT_CALL(SetActorFlagBits, ACTOR_ENEMY2, ACTOR_FLAG_TYPE_CHANGED, TRUE)
         EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar0)
         EVT_CALL(SetEnemyHP, ACTOR_SELF, LVar0)
         EVT_CALL(GetEnemyMaxHP, ACTOR_ENEMY1, LVar0)
@@ -1897,7 +1897,7 @@ EvtScript N(ignite) = {
             EVT_CALL(SetActorVar, ACTOR_ENEMY1, 8, ANIM_LavaBud_Anim0B)
             EVT_CALL(SetActorVar, ACTOR_ENEMY1, 5, 1)
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY1, 2, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-            EVT_CALL(SetActorFlagBits, ACTOR_ENEMY1, ACTOR_FLAG_40000, FALSE)
+            EVT_CALL(SetActorFlagBits, ACTOR_ENEMY1, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
         EVT_CASE_EQ(ACTOR_ENEMY2)
             EVT_CALL(SetActorVar, ACTOR_ENEMY2, 10, 35)
             EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 8, LVar1, LVar2, LVar3)
@@ -1918,7 +1918,7 @@ EvtScript N(ignite) = {
             EVT_CALL(SetActorVar, ACTOR_ENEMY2, 8, ANIM_LavaBud_Anim0B)
             EVT_CALL(SetActorVar, ACTOR_ENEMY2, 5, 1)
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY2, 2, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-            EVT_CALL(SetActorFlagBits, ACTOR_ENEMY2, ACTOR_FLAG_40000, FALSE)
+            EVT_CALL(SetActorFlagBits, ACTOR_ENEMY2, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 10, 70)
             EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 10, LVar1, LVar2, LVar3)
@@ -1939,7 +1939,7 @@ EvtScript N(ignite) = {
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 8, ANIM_LavaPiranha_Anim0A)
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 5, 1)
             EVT_CALL(ForceHomePos, ACTOR_SELF, 61, 61, 0)
-            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_40000, FALSE)
+            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

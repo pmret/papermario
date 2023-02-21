@@ -875,7 +875,7 @@ EvtScript N(enrage) = {
     EVT_CALL(func_8026EBF8, ACTOR_SELF, 1, 0, 2, 0, 6, 12, 6, 0, 0)
     EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 15)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_enraged)))
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_400000, TRUE)
+    EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_ATTACK_CHARGED, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -884,7 +884,7 @@ EvtScript N(unEnrage) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(func_8026ED20, ACTOR_SELF, 1, 0)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable)))
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_400000, FALSE)
+    EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
     EVT_RETURN
     EVT_END
 };

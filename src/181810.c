@@ -506,7 +506,7 @@ s32 is_actor_hp_bar_visible(Actor* actor) {
     }
 
     flags = get_global_byte((actor->actorType >> 3) + 365);
-    if (actor->flags & ACTOR_FLAG_1000) {
+    if (actor->flags & ACTOR_FLAG_TYPE_CHANGED) {
         flags |= battleStatus->tattleFlags[actor->actorType >> 3];
     }
     return (flags >> (actor->actorType & 7)) & 1;

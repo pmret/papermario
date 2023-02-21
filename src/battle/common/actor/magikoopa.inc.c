@@ -139,7 +139,7 @@ ActorPartBlueprint N(parts_flying)[] = {
         .opacity = 255,
         .idleAnimations = N(idleAnimations_flying),
         .defenseTable = N(defenseTable_flying),
-        .eventFlags = ACTOR_EVENT_FLAG_800000,
+        .eventFlags = ACTOR_EVENT_FLAG_RIDING_BROOMSTICK,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
     },
@@ -359,7 +359,7 @@ EvtScript N(knockOff) = {
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_MAGIKOOPA)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable)))
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 32)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_1000, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(GetIndexFromPos, ACTOR_SELF, LVar0)
     EVT_MOD(LVar0, 4)
@@ -488,9 +488,9 @@ EvtScript N(removeClone) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_CLONE_ID), -1)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, ACTOR_FLAG_FLYING)
-        EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_400000, FALSE)
+        EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
     EVT_ELSE
-        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, FALSE)
+        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
     EVT_END_IF
     EVT_CALL(GetActorPos, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(RemoveActor, LVar0)
@@ -1476,9 +1476,9 @@ EvtScript N(makeClone) = {
     EVT_CALL(ForceHomePos, LVar9, LVar0, LVar1, LVar2)
     EVT_CALL(HPBarToHome, LVar9)
     EVT_IF_EQ(LocalFlag(0), 0)
-        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, TRUE)
+        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ATTACK_CHARGED, TRUE)
     EVT_ELSE
-        EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_400000, TRUE)
+        EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_ATTACK_CHARGED, TRUE)
     EVT_END_IF
     EVT_IF_EQ(LocalFlag(0), 0)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Magikoopa_Anim01)

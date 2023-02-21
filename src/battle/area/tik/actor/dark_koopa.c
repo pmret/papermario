@@ -399,7 +399,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_flipped)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
-            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, TRUE)
+            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Hurt)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
             EVT_THREAD
@@ -831,7 +831,7 @@ EvtScript N(standUp) = {
         EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable)))
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 32)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -4)
-        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_400, FALSE)
+        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
         EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
         EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
         EVT_SWITCH(LVar0)

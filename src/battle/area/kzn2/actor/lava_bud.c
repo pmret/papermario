@@ -689,7 +689,7 @@ EvtScript N(onDeath) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, 5, 2)
         EVT_EXEC_WAIT(N(8022630C))
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET, TRUE)
-        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_40000, TRUE)
+        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HIDE_HP_BAR, TRUE)
     EVT_ELSE
         EVT_EXEC_WAIT(N(onHit))
         EVT_RETURN

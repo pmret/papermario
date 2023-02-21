@@ -136,7 +136,7 @@ ActorPartBlueprint N(parts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_40000,
+    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_HIDE_HP_BAR,
     .type = ACTOR_TYPE_TOY_TANK,
     .level = 0,
     .maxHP = 30,
@@ -715,7 +715,7 @@ EvtScript N(start_battle_with_tank) = {
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, 1, ACTOR_PART_FLAG_20000000, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY2, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY1, 2, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY1, ACTOR_FLAG_40000, FALSE)
+    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY1, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
     EVT_CALL(HPBarToHome, ACTOR_ENEMY1)
     EVT_CALL(SetActorVar, ACTOR_ENEMY0, 0, 1)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim02)
