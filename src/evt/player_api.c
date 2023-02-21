@@ -265,7 +265,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
             } else {
                 anim = ANIM_MarioW3_8bit_Jump;
             }
-            suggest_player_anim_clearUnkFlag(anim);
+            suggest_player_anim_allow_backward(anim);
             sfx_play_sound_at_player(SOUND_JUMP_2081, SOUND_SPACE_MODE_0);
         }
         script->functionTemp[0] = 1;
@@ -286,7 +286,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
         } else {
             anim = ANIM_MarioW3_8bit_Jump;
         }
-        suggest_player_anim_clearUnkFlag(anim);
+        suggest_player_anim_allow_backward(anim);
     }
 
     playerStatus->position.x = playerNpc->pos.x;
@@ -312,7 +312,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
             } else {
                 anim = ANIM_Mario1_TiredIdle;
             }
-            suggest_player_anim_clearUnkFlag(anim);
+            suggest_player_anim_allow_backward(anim);
             func_8003D660(playerNpc, 2);
         }
 

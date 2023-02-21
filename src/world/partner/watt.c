@@ -495,7 +495,7 @@ void func_802BE014_31DB84(void) {
     } else {
         anim = ANIM_MarioW1_PlaceRecord;
     }
-    suggest_player_anim_clearUnkFlag(anim);
+    suggest_player_anim_allow_backward(anim);
 }
 
 void world_watt_sync_held_position(void) {

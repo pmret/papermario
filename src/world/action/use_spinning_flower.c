@@ -75,7 +75,7 @@ void action_update_use_spinning_flower(void) {
             SpinningFlower_EntityIndex = -1;
         }
         if (!(playerStatus->animFlags & (PA_FLAG_USING_WATT | PA_FLAG_WATT_IN_HANDS))) {
-            suggest_player_anim_clearUnkFlag(ANIM_Mario1_Flail);
+            suggest_player_anim_allow_backward(ANIM_Mario1_Flail);
         }
     }
 
@@ -131,7 +131,7 @@ void action_update_use_spinning_flower(void) {
             }
             if (gGameStatusPtr->pressedButtons[0] & BUTTON_Z &&
                 !(playerStatus->animFlags & (PA_FLAG_USING_WATT | PA_FLAG_WATT_IN_HANDS))) {
-                suggest_player_anim_setUnkFlag(ANIM_Mario1_Jump);
+                suggest_player_anim_always_forward(ANIM_Mario1_Jump);
                 playerStatus->actionSubstate = SUBSTATE_SPIN_UP;
                 playerStatus->currentStateTime = 30;
                 D_802B6EE0 = 0.0f;

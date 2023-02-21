@@ -797,7 +797,10 @@ s32 get_overriding_player_anim(s32 anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-    if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER && anim != ANIM_Mario1_Flail && anim != ANIM_Mario1_Jump) {
+    if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER
+        && anim != ANIM_Mario1_Flail
+        && anim != ANIM_Mario1_Jump
+    ) {
         return -1;
     }
 
@@ -806,10 +809,12 @@ s32 get_overriding_player_anim(s32 anim) {
             anim = ANIM_MarioW2_RideLaki;
         }
 
-        if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_BOW) {
-            if (anim != ANIM_Mario1_Crouch && anim != ANIM_Mario1_Idle) {
-                    return -1;
-            }
+        if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE
+            && partnerActionStatus->actingPartner == PARTNER_BOW
+            && anim != ANIM_Mario1_Crouch
+            && anim != ANIM_Mario1_Idle
+        ) {
+            return -1;
         }
     }
 
@@ -842,7 +847,7 @@ s32 get_overriding_player_anim(s32 anim) {
     return anim;
 }
 
-void suggest_player_anim_clearUnkFlag(AnimID anim) {
+void suggest_player_anim_allow_backward(AnimID anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     AnimID newAnim = get_overriding_player_anim(anim);
 
@@ -861,7 +866,7 @@ void force_player_anim(AnimID anim) {
     playerStatus->flags &= ~PS_FLAG_FACE_FORWARDS;
 }
 
-void suggest_player_anim_setUnkFlag(AnimID anim) {
+void suggest_player_anim_always_forward(AnimID anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     AnimID newAnim = get_overriding_player_anim(anim);
 
@@ -1366,20 +1371,20 @@ void player_update_sprite(void) {
         if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP && !(playerStatus->flags & PS_FLAG_ROTATION_LOCKED)) {
             playerStatus->spriteFacingAngle = angle + D_800F7B48;
             trueAnim = playerStatus->anim;
-            if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS) &&
-                (sprIndex == SPR_Mario1 || sprIndex == SPR_MarioW1 || sprIndex == SPR_Peach1) &&
-                fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) < 60.0f)
-            {
+            if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS)
+                && (sprIndex == SPR_Mario1 || sprIndex == SPR_MarioW1 || sprIndex == SPR_Peach1)
+                && fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) < 60.0f
+            ) {
                 trueAnim = get_player_back_anim(trueAnim);
             }
             playerStatus->trueAnimation = trueAnim;
             playerStatus->currentYaw = playerStatus->targetYaw;
         } else {
             trueAnim = playerStatus->anim;
-            if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS) &&
-                (sprIndex == SPR_Mario1 || sprIndex == SPR_MarioW1 || sprIndex == SPR_Peach1) &&
-                playerStatus->spriteFacingAngle < 350.0f && playerStatus->spriteFacingAngle > 190.0f)
-            {
+            if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS)
+                && (sprIndex == SPR_Mario1 || sprIndex == SPR_MarioW1 || sprIndex == SPR_Peach1)
+                && playerStatus->spriteFacingAngle < 350.0f && playerStatus->spriteFacingAngle > 190.0f
+            ) {
                 trueAnim = get_player_back_anim(trueAnim);
             }
             playerStatus->trueAnimation = trueAnim;

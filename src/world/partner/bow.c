@@ -250,7 +250,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             bow->duration = 5;
             bow->yaw = atan2(bow->pos.x, bow->pos.z, playerStatus->position.x, playerStatus->position.z);
             set_action_state(ACTION_STATE_RIDE);
-            suggest_player_anim_clearUnkFlag(ANIM_Mario1_Idle);
+            suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
             script->functionTemp[0]++;
             break;
         case 21:
@@ -268,7 +268,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                 if (bow->duration == 0) {
                     bow->yaw = playerStatus->targetYaw;
                     func_8003D624(bow, 7, playerStatus->alpha1, 0, 0, 0, 0);
-                    suggest_player_anim_setUnkFlag(ANIM_Mario1_Crouch);
+                    suggest_player_anim_always_forward(ANIM_Mario1_Crouch);
                     sfx_play_sound_at_npc(SOUND_BOW_VANISH, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     script->functionTemp[0] = 1;
                 }

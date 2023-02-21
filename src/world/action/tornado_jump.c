@@ -38,7 +38,7 @@ void action_update_tornado_jump(void) {
         playerStatus->gravityIntegrator[1] = -7.38624f;
         playerStatus->gravityIntegrator[2] = 3.44694f;
         playerStatus->gravityIntegrator[3] = -0.75f;
-        suggest_player_anim_setUnkFlag(ANIM_MarioW2_Carried);
+        suggest_player_anim_always_forward(ANIM_MarioW2_Carried);
         disable_player_input();
         playerStatus->flags |= PS_FLAG_SPECIAL_JUMP;
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;

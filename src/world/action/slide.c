@@ -55,7 +55,7 @@ void action_update_sliding(void) {
         D_802B6794 = 0.0f;
         D_802B6798 = 0.0f;
         D_802B679C = 0;
-        suggest_player_anim_clearUnkFlag(ANIM_Mario1_Sit);
+        suggest_player_anim_allow_backward(ANIM_Mario1_Sit);
         sfx_play_sound_at_player(SOUND_167, SOUND_SPACE_MODE_0);
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
     }
@@ -120,7 +120,7 @@ void action_update_sliding(void) {
                 playerStatus->currentSpeed -= speed;
                 if (playerStatus->currentSpeed <= 0.0f) {
                     sfx_play_sound_at_player(SOUND_DUST_OFF, SOUND_SPACE_MODE_0);
-                    suggest_player_anim_setUnkFlag(ANIM_Mario1_DustOff);
+                    suggest_player_anim_always_forward(ANIM_Mario1_DustOff);
                     playerStatus->actionSubstate = SUBSTATE_DUST_OFF;
                     playerStatus->currentStateTime = 15;
                     playerStatus->currentSpeed = 0.0f;
@@ -148,7 +148,7 @@ void action_update_sliding(void) {
             playerStatus->position.y = player_check_collision_below(player_fall_distance(), &hitID);
             if (hitID >= 0) {
                 SlideLaunchSpeed = -1;
-                suggest_player_anim_setUnkFlag(ANIM_MarioW2_Collapse);
+                suggest_player_anim_always_forward(ANIM_MarioW2_Collapse);
                 sfx_play_sound_at_player(SOUND_162, SOUND_SPACE_MODE_0);
                 playerStatus->actionSubstate++; // SUBSTATE_CRASH
             }
@@ -159,7 +159,7 @@ void action_update_sliding(void) {
                 playerStatus->currentSpeed = 0.0f;
             }
             if (playerStatus->animNotifyValue != 0) {
-                suggest_player_anim_setUnkFlag(ANIM_Mario1_GetUp);
+                suggest_player_anim_always_forward(ANIM_Mario1_GetUp);
                 playerStatus->actionSubstate++; // SUBSTATE_GET_UP
             }
             break;
@@ -169,7 +169,7 @@ void action_update_sliding(void) {
                 playerStatus->currentSpeed = 0.0f;
             }
             if (playerStatus->animNotifyValue != 0) {
-                suggest_player_anim_setUnkFlag(ANIM_Mario1_DustOff);
+                suggest_player_anim_always_forward(ANIM_Mario1_DustOff);
                 sfx_play_sound_at_player(SOUND_DUST_OFF, SOUND_SPACE_MODE_0);
                 playerStatus->currentStateTime = 15;
                 playerStatus->actionSubstate++; // SUBSTATE_DUST_OFF

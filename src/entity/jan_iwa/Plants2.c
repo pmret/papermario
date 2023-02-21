@@ -149,7 +149,7 @@ void func_802BC2B4_E2EBE4(Entity* entity) {
     gPlayerStatus.prevActionState = 0;
     gPlayerStatus.actionState = 0;
     gPlayerStatus.flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
-    suggest_player_anim_setUnkFlag(ANIM_MarioW2_FlailArms);
+    suggest_player_anim_always_forward(ANIM_MarioW2_FlailArms);
 }
 
 void func_802BC308_E2EC38(Entity* entity) {

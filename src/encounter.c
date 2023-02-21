@@ -1691,7 +1691,7 @@ void update_encounters_post_battle(void) {
                 }
             }
             if (!(currentEncounter->flags & ENCOUNTER_STATUS_FLAG_1) && !D_8009A63C && currentEncounter->battleStartCountdown == 0 && D_8009A670 == 0) {
-                suggest_player_anim_clearUnkFlag(0x10032);
+                suggest_player_anim_allow_backward(0x10032);
             }
             gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_WON_WAIT;
             break;
@@ -1728,7 +1728,7 @@ void update_encounters_post_battle(void) {
             }
             if (!hasDefeatScript) {
                 if (!(currentEncounter->flags & ENCOUNTER_STATUS_FLAG_1) && !D_8009A63C && currentEncounter->battleStartCountdown == 1) {
-                    suggest_player_anim_clearUnkFlag(ANIM_Mario1_ThumbsUp);
+                    suggest_player_anim_allow_backward(ANIM_Mario1_ThumbsUp);
                 }
                 encounter = currentEncounter->currentEncounter;
                 for (i = 0; i < encounter->count; i++) {
@@ -1790,7 +1790,7 @@ void update_encounters_post_battle(void) {
             enable_player_input();
             partner_enable_input();
             if (!D_8009A63C) {
-                suggest_player_anim_clearUnkFlag(ANIM_Mario1_Idle);
+                suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
             }
             set_screen_overlay_params_front(255, -1.0f);
             resume_all_group(EVT_GROUP_10);
@@ -1924,7 +1924,7 @@ void update_encounters_post_battle(void) {
                 }
             }
             if (!D_8009A63C && playerStatus->anim == ANIM_MarioB3_Hustled) {
-                suggest_player_anim_clearUnkFlag(ANIM_Mario1_Idle);
+                suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
             }
             resume_all_group(EVT_GROUP_10);
             gEncounterState = ENCOUNTER_STATE_NEUTRAL;
@@ -1932,7 +1932,7 @@ void update_encounters_post_battle(void) {
             gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL;
             break;
         case ENCOUNTER_SUBSTATE_POST_BATTLE_LOST_INIT:
-            suggest_player_anim_clearUnkFlag(ANIM_MarioW2_LayingDown);
+            suggest_player_anim_allow_backward(ANIM_MarioW2_LayingDown);
             encounter = currentEncounter->currentEncounter;
             for (i = 0; i < encounter->count; i++) {
                 enemy = encounter->enemy[i];

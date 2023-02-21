@@ -43,7 +43,7 @@ void action_update_land(void) {
             anim = ANIM_MarioW1_LandWatt;
         }
 
-        suggest_player_anim_clearUnkFlag(anim);
+        suggest_player_anim_allow_backward(anim);
         sfx_play_sound_at_player(SOUND_161 | SOUND_ID_STOP, SOUND_SPACE_MODE_0);
         sfx_play_sound_at_player(SOUND_SOFT_LAND, SOUND_SPACE_MODE_0);
 

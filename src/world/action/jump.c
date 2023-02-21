@@ -31,7 +31,7 @@ void initialize_jump(void) {
     } else {
         anim = ANIM_MarioW1_JumpWatt;
     }
-    suggest_player_anim_clearUnkFlag(anim);
+    suggest_player_anim_allow_backward(anim);
 
     collisionStatus->lastTouchedFloor = collisionStatus->currentFloor;
     collisionStatus->currentFloor = -1;
@@ -68,7 +68,7 @@ void action_update_jump(void) {
     } else {
         anim = ANIM_MarioW1_JumpWatt;
     }
-    suggest_player_anim_clearUnkFlag(anim);
+    suggest_player_anim_allow_backward(anim);
 
     playerStatus->timeInAir++;
 }
@@ -104,7 +104,7 @@ void action_update_landing_on_switch(void) {
             anim = ANIM_MarioW1_FallWatt;
         }
 
-        suggest_player_anim_clearUnkFlag(anim);
+        suggest_player_anim_allow_backward(anim);
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
     }
 
@@ -132,7 +132,7 @@ void action_update_falling(void) {
         } else {
             anim = ANIM_MarioW1_FallWatt;
         }
-        suggest_player_anim_clearUnkFlag(anim);
+        suggest_player_anim_allow_backward(anim);
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
     }
     playerStatus->timeInAir++;
@@ -189,7 +189,7 @@ void action_update_peach_falling(void) {
             anim = ANIM_Peach_A0006;
         }
 
-        suggest_player_anim_clearUnkFlag(anim);
+        suggest_player_anim_allow_backward(anim);
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
     }
     playerStatus->timeInAir++;
@@ -205,7 +205,7 @@ void action_update_peach_step_down(void) {
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
 
         if (playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS) {
-            suggest_player_anim_clearUnkFlag(ANIM_Peach_A0006);
+            suggest_player_anim_allow_backward(ANIM_Peach_A0006);
         }
     }
     playerStatus->timeInAir++;

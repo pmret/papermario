@@ -22,7 +22,7 @@ void action_update_use_tweester(void) {
         disable_player_static_collisions();
         disable_player_input();
         playerStatus->flags |= (PS_FLAG_ROTATION_LOCKED | PS_FLAG_FLYING);
-        suggest_player_anim_clearUnkFlag(ANIM_MarioW2_FlailArms);
+        suggest_player_anim_allow_backward(ANIM_MarioW2_FlailArms);
         playerStatus->actionSubstate = SUBSTATE_LAUNCH;
         mem_clear(PlayerTweesterPhysics, sizeof(*PlayerTweesterPhysics));
         PlayerTweesterPhysics->radius = fabsf(dist2D(playerStatus->position.x, playerStatus->position.z, entity->position.x, entity->position.z));

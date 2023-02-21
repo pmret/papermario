@@ -7,7 +7,7 @@ API_CALLABLE(N(AwaitPlayerFallDist)) {
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
-        suggest_player_anim_clearUnkFlag(ANIM_Mario1_Jump);
+        suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
     }
 
     fallSpeed = player_fall_distance();

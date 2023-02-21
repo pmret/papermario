@@ -156,7 +156,7 @@ void handle_switch_hit(void) {
             } else {
                 anim = ANIM_MarioW1_LandWatt;
             }
-            suggest_player_anim_clearUnkFlag(anim);
+            suggest_player_anim_allow_backward(anim);
             enable_player_input();
             phys_player_land();
         }

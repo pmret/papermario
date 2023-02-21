@@ -264,7 +264,7 @@ void action_update_hammer(void) {
             }
         }
 
-        suggest_player_anim_clearUnkFlag(anim);
+        suggest_player_anim_allow_backward(anim);
         sfx_play_sound_at_player(soundID, SOUND_SPACE_MODE_0);
         HammerHit->unk_0C = 0;
         HammerHit->unk_14 = 0;
