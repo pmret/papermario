@@ -369,7 +369,7 @@ HitResult calc_partner_damage_enemy(void) {
             gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
         }
 
-        if (targetPart->eventFlags & (ACTOR_EVENT_FLAG_GIANT_BOWSER_ENCHANTED | ACTOR_EVENT_FLAG_ENCHANTED)) {
+        if (targetPart->eventFlags & (ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED | ACTOR_EVENT_FLAG_ENCHANTED)) {
             battleStatus->currentAttackElement &= ~DAMAGE_TYPE_IGNORE_DEFENSE;
         }
 

@@ -12,7 +12,7 @@ s32 has_enchanted_part(Actor* actor) {
     s32 ret = FALSE;
 
     while (partIt != NULL) {
-        if (partIt->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_GIANT_BOWSER_ENCHANTED)) {
+        if (partIt->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)) {
             ret = TRUE;
             break;
         } else {

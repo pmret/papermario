@@ -139,7 +139,7 @@ HitResult calc_item_damage_enemy(void) {
         partImmuneToElement = FALSE;
     }
 
-    if (targetPart->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_GIANT_BOWSER_ENCHANTED)) {
+    if (targetPart->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)) {
         battleStatus->currentAttackElement &= ~DAMAGE_TYPE_IGNORE_DEFENSE;
     }
 
@@ -230,7 +230,7 @@ HitResult calc_item_damage_enemy(void) {
                 dispatchEvent = EVENT_STAR_BEAM;
                 wasStatusInflicted = TRUE;
             }
-            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_GIANT_BOWSER_ENCHANTED) {
+            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED) {
                 dispatchEvent = EVENT_1D;
             }
             hitResult = HIT_RESULT_HIT;
@@ -269,7 +269,7 @@ HitResult calc_item_damage_enemy(void) {
                 dispatchEvent = EVENT_PEACH_BEAM;
                 wasStatusInflicted = TRUE;
             }
-            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_GIANT_BOWSER_ENCHANTED) {
+            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED) {
                 dispatchEvent = EVENT_PEACH_BEAM;
                 wasStatusInflicted = TRUE;
             }
@@ -301,7 +301,7 @@ HitResult calc_item_damage_enemy(void) {
 
     if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
         && (battleStatus->currentAttackElement & DAMAGE_TYPE_POW)
-        && (targetPart->eventFlags & ACTOR_EVENT_FLAG_BROOMSTICK)
+        && (targetPart->eventFlags & ACTOR_EVENT_FLAG_RIDING_BROOMSTICK)
     ) {
         if (dispatchEvent == EVENT_HIT) {
             dispatchEvent = EVENT_FALL_TRIGGER;

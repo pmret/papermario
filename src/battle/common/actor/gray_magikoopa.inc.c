@@ -111,7 +111,7 @@ ActorPartBlueprint N(parts_flying)[] = {
         .opacity = 255,
         .idleAnimations = N(idleAnimations2),
         .defenseTable = N(defenseTable_flying),
-        .eventFlags = ACTOR_EVENT_FLAG_BROOMSTICK,
+        .eventFlags = ACTOR_EVENT_FLAG_RIDING_BROOMSTICK,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
     },

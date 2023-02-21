@@ -1065,13 +1065,13 @@ EvtScript N(attackHeavyJump) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Land)
     EVT_CALL(GetPartEventFlags, ACTOR_SELF, 1, LVar1)
-    EVT_IF_FLAG(LVar1, ACTOR_EVENT_FLAG_GIANT_BOWSER_ENCHANTED)//@bug checks wrong event flag, never uses 12 damage attack
+    EVT_IF_FLAG(LVar1, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)//@bug checks wrong event flag, never uses 12 damage attack
         EVT_SET(LVar0, 12)
     EVT_ELSE
         EVT_SET(LVar0, 6)
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarF)
-    EVT_IF_NOT_FLAG(LVarF, ACTOR_EVENT_FLAG_GIANT_BOWSER_ENCHANTED)
+    EVT_IF_NOT_FLAG(LVarF, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
         EVT_CALL(func_80269EAC, 24)
     EVT_END_IF
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)

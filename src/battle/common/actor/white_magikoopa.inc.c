@@ -108,7 +108,7 @@ ActorPartBlueprint N(partsTable_80223CB4)[] = {
         .opacity = 255,
         .idleAnimations = N(idleAnimations_80223DBC),
         .defenseTable = N(defenseTable_80223B2C),
-        .eventFlags = ACTOR_EVENT_FLAG_BROOMSTICK,
+        .eventFlags = ACTOR_EVENT_FLAG_RIDING_BROOMSTICK,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
     },

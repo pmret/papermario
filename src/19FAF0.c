@@ -432,7 +432,7 @@ HitResult calc_player_damage_enemy(void) {
             sp20 = TRUE;
         }
 
-        if (targetPart->eventFlags & (ACTOR_EVENT_FLAG_GIANT_BOWSER_ENCHANTED | ACTOR_EVENT_FLAG_ENCHANTED)) {
+        if (targetPart->eventFlags & (ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED | ACTOR_EVENT_FLAG_ENCHANTED)) {
             battleStatus->currentAttackElement &= ~DAMAGE_TYPE_IGNORE_DEFENSE;
         }
 

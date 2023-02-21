@@ -3783,11 +3783,11 @@ enum ActorEventFlags {
     ACTOR_EVENT_FLAG_SPIKY_FRONT            = 0x00010000, ///< Player takes spike damage from hammer attacks.
     ACTOR_EVENT_FLAG_20000                  = 0x00020000,
     ACTOR_EVENT_FLAG_ENCHANTED              = 0x00040000, ///< Actor glows and listens for the Star Beam event.
-    ACTOR_EVENT_FLAG_GIANT_BOWSER_ENCHANTED = 0x00080000, ///< Actor has giant Bowser's Star Rod effect.
+    ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED     = 0x00080000, ///< Actor glows and listens for Star Beam and Peach Beam events.
     ACTOR_EVENT_FLAG_POWER_BOUNCE           = 0x00100000, ///< Actor listens for Power Bounce events.
     ACTOR_EVENT_FLAG_200000                 = 0x00200000,
     ACTOR_EVENT_FLAG_ATTACK_CHARGED         = 0x00400000, ///< Actor has charged an attack that can be removed with Star Beam.
-    ACTOR_EVENT_FLAG_BROOMSTICK             = 0x00800000, ///< Actor is on Magikoopa Broomstick, effect seems to be redundant.
+    ACTOR_EVENT_FLAG_RIDING_BROOMSTICK      = 0x00800000, ///< Actor is on Magikoopa Broomstick, effect seems to be redundant.
     ACTOR_EVENT_FLAG_1000000                = 0x01000000,
     ACTOR_EVENT_FLAG_2000000                = 0x02000000,
     ACTOR_EVENT_FLAG_4000000                = 0x04000000,
