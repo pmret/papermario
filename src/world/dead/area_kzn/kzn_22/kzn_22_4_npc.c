@@ -36,7 +36,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     // start scene (but wait for player to stop being hurt if they fell in the lava)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(GetPlayerAnimation, LVar0)
-    EVT_IF_EQ(LVar0, ANIM_Mario_8001A)
+    EVT_IF_EQ(LVar0, ANIM_MarioW2_Thrown)
         EVT_WAIT(35)
     EVT_END_IF
     EVT_WAIT(10)
@@ -215,7 +215,7 @@ EvtScript N(EVS_Scene_Misstar) = {
         EVT_END_IF
     EVT_SET(AF_KZN23_GrabbedPlayer, TRUE)
     EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80000)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Carried)
     EVT_THREAD
         EVT_WAIT(25)
         EVT_SET(AF_KZN22_FlewAway, TRUE)

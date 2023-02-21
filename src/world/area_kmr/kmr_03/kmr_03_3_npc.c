@@ -89,7 +89,7 @@ EvtScript N(EVS_NpcAI_Goompa) = {
             EVT_WAIT(30)
             EVT_CALL(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00A7)
             EVT_WAIT(5)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
+            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
             EVT_WAIT(30)
             EVT_CALL(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00A8)
             EVT_CALL(N(ChangeNpcToPartner), 0, 5)

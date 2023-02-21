@@ -15,7 +15,7 @@ EvtScript N(EVS_Scene_MeetBow) = {
         EVT_CALL(SetPlayerPos, -180, 0, 344)
         EVT_CALL(SetNpcPos, NPC_PARTNER, -180, 20, 344)
         EVT_CALL(PlayerMoveTo, 0, 190, 60)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001E)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_JoltAwake)
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_CALL(SetCamType, CAM_DEFAULT, 4, TRUE)
@@ -30,7 +30,7 @@ EvtScript N(EVS_Scene_MeetBow) = {
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH3_0042, 160, 40)
     EVT_KILL_THREAD(LVarA)
     EVT_CALL(InterpPlayerYaw, 40, 0)
-    EVT_CALL(SetPlayerAnimation, SPRITE_ID_BACK_FACING | ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, SPRITE_ID_BACK_FACING | ANIM_Mario1_Idle)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(4.0), EVT_FLOAT(-9.0))
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 400)

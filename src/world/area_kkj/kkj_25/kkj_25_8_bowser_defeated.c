@@ -305,7 +305,7 @@ EvtScript N(EVS_Scene_BowserDefeated) = {
     EVT_CALL(NpcJump0, NPC_StarRod, 190, 18, 0, 20)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_6000C)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_Lift)
     EVT_END_THREAD
     EVT_CALL(NpcJump0, NPC_StarRod, 150, 60, 0, 15)
     EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 14, 150, 60, 0, 1, 330)
@@ -313,7 +313,7 @@ EvtScript N(EVS_Scene_BowserDefeated) = {
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH8_00AA, 160, 40)
     EVT_CALL(PlaySound, SOUND_22D)
     EVT_CALL(RemoveNpc, NPC_StarRod)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_ThumbsUp)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_ThumbsUp)
     EVT_CALL(GetCurrentPartnerID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PARTNER_GOOMBARIO)
@@ -347,7 +347,7 @@ EvtScript N(EVS_Scene_BowserDefeated) = {
     EVT_END_SWITCH
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_Peach_02, ANIM_Peach_C0000, ANIM_Peach_A0001, 0, MSG_CH8_00AB)
     EVT_THREAD

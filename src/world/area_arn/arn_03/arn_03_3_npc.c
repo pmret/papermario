@@ -26,9 +26,9 @@ EvtScript N(EVS_NpcInteract_Boo_01) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0077)
         EVT_CASE_GE(STORY_CH5_STAR_SPRIT_DEPARTED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0078)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
             EVT_WAIT(10)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
+            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
             EVT_WAIT(20)
             EVT_CALL(EndSpeech, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0)
     EVT_END_SWITCH
@@ -247,7 +247,7 @@ EvtScript N(80242C60) = {
     EVT_SET(MV_Unk_03, 0)
     EVT_THREAD
         EVT_WAIT(25)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Flail)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Boo_Tan_Cower)
         EVT_LOOP(0)
             EVT_IF_EQ(MV_Unk_02, 1)
@@ -255,7 +255,7 @@ EvtScript N(80242C60) = {
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Boo_Tan_Idle)
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_Boo_05, ANIM_Boo_Tan_Spook)

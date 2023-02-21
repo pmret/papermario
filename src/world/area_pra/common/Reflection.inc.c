@@ -28,7 +28,7 @@ s32 N(reflection_unk_resolve_anim)(s32 playerAnim) {
 
     //TODO write with sensibile logic based on spriteIDs
     playerAnim &= ~SPRITE_ID_BACK_FACING;
-    temp = playerAnim + ~ANIM_Mario_6000B;
+    temp = playerAnim + ~ANIM_MarioW1_LandWatt;
     if (temp < 16 && temp & 1) {
         playerAnim--;
     }
@@ -42,12 +42,12 @@ s32 N(reflection_unk_change_anim_facing)(s32 playerAnim) {
 
     switch (sprIndex) {
         case SPR_Mario1:
-            if (playerAnim > ANIM_Mario_1000C) {
+            if (playerAnim > ANIM_Mario1_SpinFall) {
                 return playerAnim;
             }
             break;
         case SPR_MarioW1:
-            temp = playerAnim + ~ANIM_Mario_6000B;
+            temp = playerAnim + ~ANIM_MarioW1_LandWatt;
             if (temp < 16) {
                 if (temp & 1) {
                     return playerAnim;

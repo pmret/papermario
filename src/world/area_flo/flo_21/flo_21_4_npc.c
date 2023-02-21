@@ -60,7 +60,7 @@ EvtScript N(EVS_HuffNPuff_JumpOut) = {
         EVT_CALL(NpcJump0, NPC_HuffNPuff_03, 650, 150, 0, 10)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Flail)
         EVT_CALL(LoadPath, 30, EVT_PTR(N(Path_JumpOut)), ARRAY_COUNT(N(Path_JumpOut)), EASING_LINEAR)
         EVT_LABEL(0)
         EVT_CALL(GetNextPathPos)
@@ -70,7 +70,7 @@ EvtScript N(EVS_HuffNPuff_JumpOut) = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
     EVT_RETURN
     EVT_END
 };
@@ -91,7 +91,7 @@ EvtScript N(EVS_Scene_HuffNPuffAmbush) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(InterpPlayerYaw, 90, 1)
     EVT_WAIT(5)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
     EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)

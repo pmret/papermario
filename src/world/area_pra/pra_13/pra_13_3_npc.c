@@ -90,7 +90,7 @@ EvtScript N(EVS_Scene_ImpostersCaught) = {
             EVT_WAIT(15)
             EVT_CALL(GetNpcPos, NPC_FakeMario, LVar0, LVar1, LVar2)
             EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(5.0), LVar0, LVar1, LVar2, EVT_FLOAT(350.0), EVT_FLOAT(12.0), EVT_FLOAT(-7.0))
-            EVT_CALL(SpeakToPlayer, NPC_FakeMario, ANIM_Mario_1002B, ANIM_Mario_1002B, 0, MSG_CH7_0139)
+            EVT_CALL(SpeakToPlayer, NPC_FakeMario, ANIM_Mario1_Flail, ANIM_Mario1_Flail, 0, MSG_CH7_0139)
             EVT_CALL(SpeakToPlayer, NPC_FakeBombette, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH7_013A)
             EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(6.0))
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
@@ -165,7 +165,7 @@ EvtScript N(EVS_Scene_DefeatImposters) = {
 
 EvtScript N(EVS_NpcInit_FakeMario) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mario_10002)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mario1_Idle)
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, pra_13_ENTRY_2)
         EVT_IF_LT(GB_StoryProgress, STORY_CH7_DEFEATED_MIRROR_DUPLIGHOSTS)

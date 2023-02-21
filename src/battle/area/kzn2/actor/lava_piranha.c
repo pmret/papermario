@@ -1484,7 +1484,7 @@ EvtScript N(onDeath) = {
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 300)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002A)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
         EVT_WAIT(20)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_263)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1508,7 +1508,7 @@ EvtScript N(onDeath) = {
         EVT_WAIT(40)
         EVT_THREAD
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002B)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Flail)
             EVT_WAIT(40)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
         EVT_END_THREAD

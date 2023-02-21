@@ -113,7 +113,7 @@ EvtScript N(EVS_PullVine_Manage) = {
             EVT_END_IF
             EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
             EVT_WAIT(1)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000D)
+            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_HoldOnto)
             EVT_LOOP(50)
                 EVT_CALL(N(PullVine_UpdatePosition), LVar0, EVT_FLOAT(-15.0), LVar2)
                 EVT_ADDF(LVar1, LVar2)

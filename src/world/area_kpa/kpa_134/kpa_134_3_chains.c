@@ -87,7 +87,7 @@ EvtScript N(EVS_SetupLowerChain) = {
         EVT_CALL(PlaySoundAtPlayer, SOUND_229, SOUND_SPACE_MODE_0)
         EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
         EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000D)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_HoldOnto)
         EVT_THREAD
             EVT_SET(LVar0, 150)
             EVT_SET(LVar1, 30)
@@ -334,7 +334,7 @@ EvtScript N(EVS_SetupUpperChain) = {
         EVT_CALL(PlaySoundAtPlayer, SOUND_229, SOUND_SPACE_MODE_0)
         EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
         EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000D)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_HoldOnto)
         EVT_THREAD
             EVT_SET(LVar0, 275)
             EVT_SET(LVar1, 0)

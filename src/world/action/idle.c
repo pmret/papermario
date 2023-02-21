@@ -60,13 +60,13 @@ void action_update_idle(void) {
         playerStatus->pitch = 0.0f;
 
         if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
-            anim = ANIM_Mario_90002;
+            anim = ANIM_MarioW3_8bit_Still;
         } else if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
-            anim = ANIM_Mario_10002;
+            anim = ANIM_Mario1_Idle;
         } else if (playerStatus->prevActionState == ACTION_STATE_IDLE) {
-            anim = ANIM_Mario_60005;
+            anim = ANIM_MarioW1_TakeItem;
         } else {
-            anim = ANIM_Mario_60007;
+            anim = ANIM_MarioW1_PlaceRecord;
         }
         suggest_player_anim_clearUnkFlag(anim);
     }

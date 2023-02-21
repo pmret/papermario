@@ -119,11 +119,11 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                                     EVT_CALL(ShakeCam, CAM_DEFAULT, 1, 4, EVT_FLOAT(1.0))
                                 EVT_END_THREAD
                                 EVT_WAIT(3)
-                                EVT_CALL(SetPlayerAnimation, ANIM_Mario_RunPanic)
+                                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_PanicRun)
                                 EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
                                 EVT_CALL(PlaySound, SOUND_3EE)
                                 EVT_CALL(PlayerJump1, LVar0, LVar1, LVar2, 15)
-                                EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+                                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
                             EVT_ELSE
                                 EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
                                 EVT_CALL(NpcJump0, NPC_SELF, LVar3, LVar4, LVar5, 10)

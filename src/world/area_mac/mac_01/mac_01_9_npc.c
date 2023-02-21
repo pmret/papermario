@@ -411,7 +411,7 @@ EvtScript N(EVS_MerlonBargeOut) = {
         EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
         EVT_CALL(InterpPlayerYaw, 270, 0)
         EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_FallBack)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Hurt)
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
         EVT_CALL(PlayerJump1, -222, 20, -158, 8)
         EVT_WAIT(5)
@@ -490,15 +490,15 @@ EvtScript N(EVS_MerlonBargeOut) = {
     EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0023)
     EVT_CALL(N(func_802447E0_805060))
     EVT_WAIT(60)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001D)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
     EVT_THREAD
         EVT_CALL(N(func_80244848_8050C8))
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_CALL(ContinueSpeech, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0024)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001E)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_JoltAwake)
     EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001C)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_NodYesTwice)
     EVT_WAIT(50)
     EVT_CALL(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamType, CAM_DEFAULT, 0, FALSE)
@@ -825,7 +825,7 @@ EvtScript N(EVS_NpcInteract_Merlon) = {
                     EVT_END_IF
                 EVT_END_IF
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, LVar0)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
                 EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
                 EVT_CALL(GetNpcPos, NPC_Merlon, LVar3, LVar4, LVar5)
                 EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1775,12 +1775,12 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
     EVT_CALL(PlayerMoveTo, 580, -210, 20)
     EVT_CALL(InterpPlayerYaw, 263, 1)
     EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
     EVT_CALL(func_802D286C, 0x800)
-    EVT_CALL(func_802D2520, ANIM_Mario_10002, 5, 7, 1, 1, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario1_Idle, 5, 7, 1, 1, 0)
     EVT_THREAD
         EVT_WAIT(60)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001D)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
     EVT_END_THREAD
     EVT_WAIT(20)
     EVT_THREAD
@@ -1798,7 +1798,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_CALL(func_802D2520, ANIM_Mario_10002, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario1_Idle, 0, 0, 0, 0, 0)
     EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
     EVT_CALL(SetPlayerPos, 568, 20, -186)
     EVT_CALL(PlayerMoveTo, 525, -168, 20)
@@ -1981,22 +1981,22 @@ EvtScript N(EVS_NpcIdle_Twink) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(3.0), -10, -300, 15, -9)
     EVT_CALL(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_MAC_Plaza_00DC)
     EVT_WAIT(5)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_WAIT(15)
     EVT_CALL(SetNpcJumpscale, NPC_Twink, EVT_FLOAT(1.0))
     EVT_CALL(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_Twink, LVar0, LVar1, LVar2, 10)
     EVT_CALL(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_MAC_Plaza_00DD)
     EVT_WAIT(5)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002D)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Chuckle)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(3.0), -40, -200, 15, -15)
     EVT_CALL(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_MAC_Plaza_00DE)
     EVT_WAIT(5)
@@ -2018,7 +2018,7 @@ EvtScript N(EVS_NpcIdle_Twink) = {
     EVT_CALL(SetNpcPos, NPC_Twink, NPC_DISPOSE_LOCATION)
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_SET(GB_StoryProgress, STORY_CH1_RETURNED_TO_TOAD_TOWN)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END

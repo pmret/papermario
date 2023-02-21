@@ -53,7 +53,7 @@ EvtScript N(EVS_Scene_ToadTownGreeting) = {
     EVT_WAIT(50)
     EVT_THREAD
         EVT_WAIT(20)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
     EVT_END_THREAD
     EVT_CALL(SpeakToPlayer, NPC_Toad_04, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MAC_Gate_007E)
     EVT_CALL(DisablePlayerInput, FALSE)

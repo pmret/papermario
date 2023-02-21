@@ -175,7 +175,7 @@ EvtScript N(EVS_Lakilulu_SpinyToss) = {
     EVT_CALL(SetNpcPos, NPC_Lakilulu_Spiny, LVar1, LVar2, LVar3)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
     EVT_END_THREAD
     EVT_CALL(ContinueSpeech, NPC_Lakilulu, -1, -1, SPEECH_FLAG_200, MSG_CH6_00A8)
     EVT_THREAD
@@ -206,7 +206,7 @@ EvtScript N(EVS_Lakilulu_SpinyToss) = {
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(2.0))
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtPlayer, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_FallBack)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Hurt)
     EVT_SET(LVar0, 90)
     EVT_LOOP(20)
         EVT_ADD(LVar0, 144)
@@ -216,7 +216,7 @@ EvtScript N(EVS_Lakilulu_SpinyToss) = {
         EVT_CALL(InterpPlayerYaw, LVar0, 1)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
     EVT_CALL(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_Idle)
     EVT_RETURN
     EVT_END
@@ -232,13 +232,13 @@ EvtScript N(EVS_NpcIdle_Lakilester) = {
     EVT_CALL(SetMusicTrack, 0, SONG_LAKILESTER_THEME, 0, 8)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH6_00A0, 160, 40)
     EVT_CALL(InterruptUsePartner)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_WAIT(20)
     EVT_CALL(InterpPlayerYaw, 270, 1)
     EVT_WAIT(20)
     EVT_CALL(InterpPlayerYaw, 90, 1)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
     EVT_CALL(func_802CF56C, 2)
     EVT_CALL(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Run)
     EVT_THREAD
@@ -353,7 +353,7 @@ EvtScript N(EVS_Scene_LakilesterDefeated) = {
     EVT_THREAD
         EVT_WAIT(10)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Idle)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
         EVT_WAIT(20)
         EVT_CALL(InterpPlayerYaw, 270, 1)
     EVT_END_THREAD
@@ -390,7 +390,7 @@ EvtScript N(EVS_Scene_LakilesterDefeated) = {
     EVT_END_IF
     EVT_KILL_THREAD(LVar9)
     EVT_CALL(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_ConcernedNod)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
     EVT_WAIT(20)
     EVT_CALL(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
@@ -437,9 +437,9 @@ EvtScript N(EVS_Scene_LakilesterDefeated) = {
     EVT_ELSE
         EVT_CALL(ContinueSpeech, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_00A9)
         EVT_CALL(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_Idle)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
         EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
         EVT_WAIT(20)
         EVT_CALL(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 20)

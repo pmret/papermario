@@ -186,7 +186,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
                 EVT_CALL(DisablePlayerPhysics, TRUE)
                 EVT_CALL(PlaySoundAtPlayer, SOUND_398, 0)
                 EVT_CALL(InterpPlayerYaw, 90, 0)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001A)
+                EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Thrown)
                 EVT_SET(MF_Unk_01, FALSE)
                 EVT_LOOP(0)
                     EVT_IF_EQ(MF_Unk_01, TRUE)
@@ -208,7 +208,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             EVT_SET(MF_Unk_01, TRUE)
             EVT_CALL(StopSound, SOUND_398)
             EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Idle)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_80016)
+            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Surprise)
             EVT_CALL(SpeakToPlayer, NPC_PenguinPatrol, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00B8)
             EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Walk)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -223,7 +223,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             EVT_THREAD
                 EVT_SET(MV_ThrownOut, 1)
                 EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001A)
+                EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Thrown)
                 EVT_CALL(PlayerJump1, -680, 50, 0, 30)
             EVT_END_THREAD
             EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Idle)
@@ -306,7 +306,7 @@ EvtScript N(EVS_DamageFrozenPond_After) = {
     EVT_IF_EQ(LVarA, 1)
         EVT_THREAD
             EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.5))
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_80024)
+            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SitIdle)
             EVT_CALL(PlayerJump1, 247, 0, 225, 30)
             EVT_CALL(PlayerJump1, 257, 0, 225, 8)
         EVT_END_THREAD
@@ -371,13 +371,13 @@ EvtScript N(EVS_DamageFrozenPond_After) = {
     EVT_SET(GB_SAM11_FrozenPondDamage, 4)
     EVT_SET(GB_StoryProgress, STORY_CH7_SHATTERED_FROZEN_POND)
     EVT_IF_EQ(LVarA, 1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_DustOff)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_DustOff)
         EVT_WAIT(7)
         EVT_CALL(PlaySoundAtPlayer, SOUND_DUST_OFF, 0)
         EVT_WAIT(8)
         EVT_CALL(PlaySoundAtPlayer, SOUND_DUST_OFF, 0)
         EVT_WAIT(15)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_WAIT(1)
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)

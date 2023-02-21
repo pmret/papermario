@@ -232,7 +232,7 @@ EvtScript N(EVS_NpcDefeat_Fuzzipede) = {
         EVT_WAIT(20)
         EVT_CALL(HidePlayerShadow, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_PARTNER, FALSE)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Flail)
         EVT_CALL(GetPlayerPos, LVar1, LVar0, LVar3)
         EVT_LOOP(150)
             EVT_ADD(LVar0, 1)

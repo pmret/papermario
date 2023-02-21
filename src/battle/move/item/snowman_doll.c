@@ -101,7 +101,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(30)
     EVT_CALL(N(func_802A13B8_71C1E8))
     EVT_EXEC_WAIT(N(PlayerGoHome))

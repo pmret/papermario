@@ -282,19 +282,19 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
         EVT_CALL(N(AddFP), LVar3)
         EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_ThumbsUp)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_ThumbsUp)
         EVT_WAIT(30)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GotItem)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
     EVT_ELSE
         EVT_SET_CONST(LVarA, ITEM_STRANGE_CAKE)
         EVT_SET(LVar1, 0)
         EVT_EXEC_WAIT(N(UseItemWithEffect))
         EVT_EXEC_WAIT(N(EatItem))
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GotItem)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
     EVT_END_IF
     EVT_WAIT(10)
     EVT_THREAD
@@ -318,7 +318,7 @@ EvtScript N(EVS_UseItem) = {
 };
 
 EvtScript N(script7) = {
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_PLAY_EFFECT(EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0)
@@ -331,7 +331,7 @@ EvtScript N(script7) = {
 };
 
 EvtScript N(script8) = {
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 6, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0)
@@ -344,7 +344,7 @@ EvtScript N(script8) = {
 };
 
 EvtScript N(script9) = {
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30004)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Sleep)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_EXEC(DoSleepHit)

@@ -104,7 +104,7 @@ EvtScript N(EVS_SpawnMerlarSparkles) = {
 };
 
 EvtScript N(EVS_MarioSleeping) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001D)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
     EVT_LOOP(0)
         EVT_CALL(PlaySoundAtPlayer, SOUND_32F, 0)
         EVT_WAIT(60)
@@ -191,11 +191,11 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
     EVT_CALL(RemoveEffect, LVar7)
     EVT_KILL_THREAD(LVarA)
     EVT_CALL(PlaySoundAtPlayer, SOUND_2F1, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001E)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_JoltAwake)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
     EVT_WAIT(30)
     EVT_CALL(GetNpcPos, NPC_Merlar, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)

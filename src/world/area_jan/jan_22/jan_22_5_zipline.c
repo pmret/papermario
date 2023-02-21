@@ -120,7 +120,7 @@ EvtScript N(EVS_RideZipline) = {
     EVT_CALL(PlayerJump, ArrayVar(3), ArrayVar(4), ArrayVar(5), 7)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
     EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000D)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_HoldOnto)
     EVT_WAIT(10)
     EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
     EVT_CALL(PlaySound, SOUND_80000019)

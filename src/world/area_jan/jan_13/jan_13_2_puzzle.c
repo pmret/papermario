@@ -537,10 +537,10 @@ EvtScript N(EVS_ManageGeyserPlayerPhysics) = {
                 EVT_DIVF(LVar3, 11)
                 EVT_DIVF(LVar5, 11)
                 EVT_CALL(SetPlayerPos, LVar3, LVar4, LVar5)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002E)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_FallBack)
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
             EVT_CALL(DisablePlayerInput, FALSE)
         EVT_END_IF
         EVT_WAIT(1)

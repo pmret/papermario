@@ -65,7 +65,7 @@ EvtScript N(EVS_UseMove0) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_156)
         EVT_WAIT(8)
     EVT_END_CHILD_THREAD
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_ReadyJump)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_JumpStance)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(N(UnkMoveFunc2), LVar0, LVar1, LVar2, EVT_FLOAT(1.2))
     EVT_WAIT(3)
@@ -86,12 +86,12 @@ EvtScript N(EVS_UseMove0) = {
         EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(1.0))
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidair, ANIM_Mario_10009)
+        EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(func_80273444, 20, 0, 0)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Land)
         EVT_WAIT(4)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
         EVT_CALL(N(func_802A133C_75CCBC))
         EVT_CALL(ShowVariableMessageBox, LVar0, 60, 2)
@@ -107,9 +107,9 @@ EvtScript N(EVS_UseMove0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_RETURN
     EVT_END
 };

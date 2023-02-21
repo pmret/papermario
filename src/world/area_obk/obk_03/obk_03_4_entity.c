@@ -72,14 +72,14 @@ EvtScript N(EVS_SecondSwitch_JumpToSafety) = {
     EVT_IF_GE(LVar2, -85)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001F)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_FlailArms)
     EVT_WAIT(8)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_WAIT(2)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(2.0))
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
     EVT_CALL(PlayerJump1, 330, -210, -49, 10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(5)
     EVT_RETURN
     EVT_END
@@ -100,14 +100,14 @@ EvtScript N(EVS_ThirdSwitch_JumpToSafety) = {
     EVT_IF_GE(LVar2, -62)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001F)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_FlailArms)
     EVT_WAIT(8)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_WAIT(2)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(2.0))
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
     EVT_CALL(PlayerJump1, 352, -210, -5, 10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(5)
     EVT_RETURN
     EVT_END

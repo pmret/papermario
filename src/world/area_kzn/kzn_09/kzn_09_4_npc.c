@@ -158,19 +158,19 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     EVT_WAIT(5)
     EVT_CALL(SetSelfVar, 0, 1)
     EVT_THREAD
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_ShockStill)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_VacantStare)
         EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_Running)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Run)
         EVT_CALL(SetPlayerSpeed, EVT_FLOAT(4.0))
         EVT_CALL(PlayerMoveTo, -360, 0, 0)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1000C)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_SpinFall)
         EVT_LABEL(5)
         EVT_CALL(GetSelfVar, 0, LVar0)
         EVT_IF_EQ(LVar0, 1)
             EVT_WAIT(1)
             EVT_GOTO(5)
         EVT_END_IF
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00F5, 160, 40)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_162, SOUND_SPACE_MODE_0)

@@ -331,7 +331,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_CALL(SetNpcAnimation, NPC_JrTroopa, ANIM_JrTroopa_ChargeArmsUp)
     EVT_CALL(SetNpcSpeed, NPC_JrTroopa, EVT_FLOAT(8.0))
     EVT_THREAD
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
         EVT_LOOP(0)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_CALL(GetNpcPos, NPC_JrTroopa, LVar3, LVar4, LVar5)
@@ -353,7 +353,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_END_LOOP
         EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_ROTATION_LOCKED | PS_FLAG_FACE_FORWARDS, FALSE)
         EVT_CALL(InterpPlayerYaw, 90, 0)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_SET(LVar0, NPC_KoopaBrosRed)
     EVT_EXEC_GET_TID(N(EVS_KoopaBros_Hop), MV_KoopaBrosRed_HopScript)

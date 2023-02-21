@@ -393,7 +393,7 @@ s32 WattPutAway(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         world_watt_dispose_static_effect();
         partner_init_put_away(watt);
-        force_player_anim(ANIM_Mario_10002);
+        force_player_anim(ANIM_Mario1_Idle);
         wattActionStatus->actingPartner = PARTNER_NONE;
         wattActionStatus->partnerActionState = PARTNER_ACTION_NONE;
         playerStatus->animFlags &= ~(PA_FLAG_WATT_IN_HANDS | PA_FLAG_USING_WATT);
@@ -489,11 +489,11 @@ void func_802BE014_31DB84(void) {
     AnimID anim;
 
     if (playerStatus->runSpeed <= currentSpeed) {
-        anim = ANIM_Mario_60002;
+        anim = ANIM_MarioW1_CarryRun;
     } else if (playerStatus->walkSpeed <= currentSpeed) {
-        anim = ANIM_Mario_60000;
+        anim = ANIM_MarioW1_Carry;
     } else {
-        anim = ANIM_Mario_60007;
+        anim = ANIM_MarioW1_PlaceRecord;
     }
     suggest_player_anim_clearUnkFlag(anim);
 }

@@ -220,9 +220,9 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_LOOP(2)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_60003)
+            EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_CarryAboveRun)
             EVT_WAIT(15)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_Running)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Run)
             EVT_WAIT(15)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -366,7 +366,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     EVT_EXEC_WAIT(N(EVS_FocusCam_Everyone))
     EVT_WAIT(5)
     EVT_CALL(PlayerMoveTo, 660, 0, 15)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_BeforeJump)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
     EVT_WAIT(15)
     EVT_CALL(SpeakToPlayer, NPC_Bowser_Body, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, MSG_Intro_0053)
     EVT_CALL(SpeakToPlayer, NPC_Peach, ANIM_Peach_C0013, ANIM_Peach_C0012, 5, MSG_Intro_0054)
@@ -394,7 +394,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
     EVT_CALL(SetPlayerPos, 660, 0, 15)
     EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_FallDown)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_FallDown)
     EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach_C0006)
     EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_RearUpLaugh)
     EVT_EXEC_WAIT(N(EVS_FocusCam_OnPeach))
@@ -440,7 +440,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     EVT_PLAY_EFFECT(EFFECT_LIGHTNING, 4, LVar0, LVar1, LVar2, 0, 0)
     EVT_THREAD
         EVT_CALL(PlaySoundAtPlayer, SOUND_390, 0)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_FallBack)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Hurt)
         EVT_CALL(LoadPath, 30, EVT_PTR(N(PlayerThrownPath)), ARRAY_COUNT(N(PlayerThrownPath)), EASING_LINEAR)
         EVT_SET(LVar4, 0)
         EVT_LOOP(0)

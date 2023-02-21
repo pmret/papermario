@@ -52,13 +52,13 @@ void action_update_walk(void) {
         }
 
         if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
-            anim = ANIM_Mario_90003;
+            anim = ANIM_MarioW3_8bit_Run;
         }
         else if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
-            anim = ANIM_Mario_Walking;
+            anim = ANIM_Mario1_Walk;
         }
         else {
-            anim = ANIM_Mario_60000;
+            anim = ANIM_MarioW1_Carry;
         }
         suggest_player_anim_clearUnkFlag(anim);
     }
@@ -137,12 +137,12 @@ void action_update_run(void) {
             playerStatus->currentSpeed = playerStatus->runSpeed;
         }
         if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
-            anim = ANIM_Mario_90003;
+            anim = ANIM_MarioW3_8bit_Run;
         } else {
             if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
-                anim = ANIM_Mario_Running;
+                anim = ANIM_Mario1_Run;
             } else {
-                anim = ANIM_Mario_60002;
+                anim = ANIM_MarioW1_CarryRun;
             }
         }
         suggest_player_anim_clearUnkFlag(anim);

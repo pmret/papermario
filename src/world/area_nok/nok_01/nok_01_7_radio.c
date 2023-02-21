@@ -93,11 +93,11 @@ EvtScript N(EVS_InitiateTradingEvent) = {
 
 EvtScript N(EVS_Interact_Radio) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(2)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000E)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_RideLaki)
     EVT_WAIT(7)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_ADD(AB_NOK_0, 1)
     EVT_IF_GE(AB_NOK_0, 4)
         EVT_SET(AB_NOK_0, 0)

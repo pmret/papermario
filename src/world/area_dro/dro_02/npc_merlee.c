@@ -724,7 +724,7 @@ EvtScript N(EVS_PerformRitual) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPlayerPos, RITUAL_VAR_POS_X, RITUAL_VAR_POS_Y, RITUAL_VAR_POS_Z)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GotItem)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_UsePower)
     EVT_WAIT(1)
     EVT_CALL(SetPlayerPos, RITUAL_VAR_POS_X, RITUAL_VAR_POS_Y, RITUAL_VAR_POS_Z)
     EVT_WAIT(1)

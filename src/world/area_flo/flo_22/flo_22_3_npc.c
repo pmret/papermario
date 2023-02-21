@@ -10,7 +10,7 @@ EvtScript N(EVS_NpcIdle_Bzzap) = {
         EVT_SWITCH(MV_Bzzap_State)
             EVT_CASE_EQ(0)
             EVT_CASE_EQ(1)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002E)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_FallBack)
                 EVT_SET(MV_Bzzap_State, 0)
                 EVT_CALL(StartBattle)
         EVT_END_SWITCH
@@ -57,7 +57,7 @@ EvtScript N(EVS_NpcIdle_Dayzee) = {
         EVT_SWITCH(MV_Dayzee_State)
             EVT_CASE_EQ(0)
             EVT_CASE_EQ(1)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002E)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_FallBack)
                 EVT_SET(MV_Dayzee_State, 0)
                 EVT_CALL(StartBattle)
         EVT_END_SWITCH

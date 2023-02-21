@@ -797,27 +797,27 @@ s32 get_overriding_player_anim(s32 anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-    if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER && anim != ANIM_Mario_1002B && anim != ANIM_Mario_AnimMidairStill) {
+    if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER && anim != ANIM_Mario1_Flail && anim != ANIM_Mario1_Jump) {
         return -1;
     }
 
     if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
-        if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER && anim == ANIM_Mario_10002) {
-            anim = ANIM_Mario_8000E;
+        if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER && anim == ANIM_Mario1_Idle) {
+            anim = ANIM_MarioW2_RideLaki;
         }
 
         if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_BOW) {
-            if (anim != ANIM_Mario_Crouch && anim != ANIM_Mario_10002) {
+            if (anim != ANIM_Mario1_Crouch && anim != ANIM_Mario1_Idle) {
                     return -1;
             }
         }
     }
 
-    if (anim == ANIM_Mario_ThumbsUp && partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
+    if (anim == ANIM_Mario1_ThumbsUp && partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
         return -1;
     }
 
-    if (anim == ANIM_Mario_6000C || anim == ANIM_Peach_C0010 || anim == ANIM_Mario_10002) {
+    if (anim == ANIM_MarioW1_Lift || anim == ANIM_Peach_C0010 || anim == ANIM_Mario1_Idle) {
         if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
             if (!func_800DFCF4()) {
                 return -1;
@@ -835,7 +835,7 @@ s32 get_overriding_player_anim(s32 anim) {
         }
     }
 
-    if (anim == ANIM_Mario_80003) {
+    if (anim == ANIM_MarioW2_Collapse) {
         exec_ShakeCam1(0, 0, 2);
     }
 
@@ -1407,33 +1407,33 @@ s32 get_player_back_anim(s32 anim) {
         }
 
         if (sprIndex == SPR_Mario1) {
-            if (anim > ANIM_Mario_1000C) {
+            if (anim > ANIM_Mario1_SpinFall) {
                 return anim;
             }
         } else if (sprIndex == SPR_MarioW1) {
-            if (anim == ANIM_Mario_6000C) {
-                outAnim = ANIM_Mario_6000D;
-            } else if (anim == ANIM_Mario_6000E) {
-                outAnim = ANIM_Mario_6000F;
-            } else if (anim == ANIM_Mario_60010) {
-                outAnim = ANIM_Mario_60011;
-            } else if (anim == ANIM_Mario_60012) {
-                outAnim = ANIM_Mario_60013;
-            } else if (anim == ANIM_Mario_60014) {
-                outAnim = ANIM_Mario_60015;
-            } else if (anim == ANIM_Mario_60016) {
-                outAnim = ANIM_Mario_60017;
-            } else if (anim == ANIM_Mario_60018) {
-                outAnim = ANIM_Mario_60019;
-            } else if (anim == ANIM_Mario_6001A) {
-                outAnim = ANIM_Mario_6001B;
+            if (anim == ANIM_MarioW1_Lift) {
+                outAnim = ANIM_MarioW1_LiftBack;
+            } else if (anim == ANIM_MarioW1_Toss) {
+                outAnim = ANIM_MarioW1_Toss_Back;
+            } else if (anim == ANIM_MarioW1_Smash1_Miss) {
+                outAnim = ANIM_MarioW1_Smash1_Miss_Back;
+            } else if (anim == ANIM_MarioW1_Smash1_Hit) {
+                outAnim = ANIM_MarioW1_Smash1_Hit_Back;
+            } else if (anim == ANIM_MarioW1_Smash2_Miss) {
+                outAnim = ANIM_MarioW1_Smash2_Miss_Back;
+            } else if (anim == ANIM_MarioW1_Smash2_Hit) {
+                outAnim = ANIM_MarioW1_Smash2_Hit_Back;
+            } else if (anim == ANIM_MarioW1_Smash3_Miss) {
+                outAnim = ANIM_MarioW1_Smash3_Miss_Back;
+            } else if (anim == ANIM_MarioW1_Smash3_Hit) {
+                outAnim = ANIM_MarioW1_Smash3_Hit_Back;
             }
         } else if (sprIndex == SPR_Peach1) {
             if (anim > ANIM_Peach_A0006) {
                 outAnim = anim + 1;
             }
         }
-    } else if (anim > ANIM_Mario_1000C) {
+    } else if (anim > ANIM_Mario1_SpinFall) {
         return anim;
     }
 

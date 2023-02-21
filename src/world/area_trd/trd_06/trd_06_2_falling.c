@@ -323,7 +323,7 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
     EVT_CALL(PlayerJump, LVar0, 0, LVar2, 10)
     EVT_WAIT(15)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_BOMBETTE_JOINED_PARTY)
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, 3)
@@ -341,9 +341,9 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
         EVT_CALL(SpeakToPlayer, NPC_Bombette, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_00D9)
         EVT_THREAD
             EVT_WAIT(5)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
+            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
             EVT_WAIT(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_END_THREAD
         EVT_CALL(EndSpeech, NPC_Bombette, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)

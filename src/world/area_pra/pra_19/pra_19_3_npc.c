@@ -408,7 +408,7 @@ EvtScript N(EVS_PreventPlayerLeaving) = {
     EVT_SET(LVar4, ANIM_WorldKooper_Run)
     EVT_EXEC_WAIT(N(EVS_Imposter_ChaseDownPlayer))
     EVT_CALL(InterpPlayerYaw, 90, 3)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80009)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_LayingDown)
     EVT_CALL(GetNpcPos, NPC_FakeKooper, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 30)
     EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
@@ -513,9 +513,9 @@ EvtScript N(EVS_Example_UseKooper) = {
         EVT_CALL(SetNpcAnimation, NPC_ExampleKooper, ANIM_WorldKooper_SpinShell)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario_AnimMidairStill)
+        EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario1_Jump)
         EVT_WAIT(10)
-        EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario_10009)
+        EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario1_Land)
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_ExamplePlayer, EVT_FLOAT(2.0))
     EVT_CALL(GetNpcPos, NPC_ExamplePlayer, LVar0, LVar1, LVar2)
@@ -529,9 +529,9 @@ EvtScript N(EVS_Example_UseKooper) = {
         EVT_CALL(N(UpdateExampleKooperMotion), NPC_ExampleKooper, LVar0, 1)
         EVT_CALL(SetNpcAnimation, NPC_ExampleKooper, ANIM_WorldKooper_StillShell)
         EVT_THREAD
-            EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario_AnimMidairStill)
+            EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario1_Jump)
             EVT_WAIT(10)
-            EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario_10009)
+            EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario1_Land)
         EVT_END_THREAD
         EVT_CALL(SetNpcJumpscale, NPC_ExamplePlayer, EVT_FLOAT(2.0))
         EVT_CALL(GetNpcPos, NPC_ExamplePlayer, LVar0, LVar1, LVar2)
@@ -569,7 +569,7 @@ EvtScript N(EVS_ManageImpostersScene) = {
         EVT_GOTO(20)
     EVT_END_IF
     EVT_LABEL(0)
-        EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario_10002)
+        EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario1_Idle)
         EVT_CALL(SetNpcPos, NPC_ExamplePlayer, 53, 0, -75)
         EVT_CALL(SetNpcAnimation, NPC_ExampleKooper, ANIM_WorldKooper_Idle)
         EVT_CALL(SetNpcPos, NPC_ExampleKooper, 23, 0, -75)
@@ -580,7 +580,7 @@ EvtScript N(EVS_ManageImpostersScene) = {
                 EVT_GOTO(1)
             EVT_END_IF
         EVT_CALL(SetNpcSpeed, NPC_ExamplePlayer, EVT_FLOAT(3.0))
-        EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario_Walking)
+        EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario1_Walk)
         EVT_THREAD
             EVT_CALL(SetNpcSpeed, NPC_ExampleKooper, EVT_FLOAT(3.0))
             EVT_CALL(SetNpcAnimation, NPC_ExampleKooper, ANIM_WorldKooper_Walk)
@@ -588,11 +588,11 @@ EvtScript N(EVS_ManageImpostersScene) = {
             EVT_CALL(SetNpcAnimation, NPC_ExampleKooper, ANIM_WorldKooper_Idle)
         EVT_END_THREAD
         EVT_CALL(NpcMoveTo, NPC_ExamplePlayer, 415, -75, 0)
-        EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario_10002)
+        EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario1_Idle)
         EVT_SET(GB_PRA19_TutorialState, 1)
         EVT_GOTO(11)
     EVT_LABEL(10)
-        EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario_10002)
+        EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario1_Idle)
         EVT_CALL(SetNpcPos, NPC_ExamplePlayer, 415, 0, -75)
         EVT_CALL(SetNpcAnimation, NPC_ExampleKooper, ANIM_WorldKooper_Idle)
         EVT_CALL(SetNpcPos, NPC_ExampleKooper, 385, 0, -75)
@@ -606,7 +606,7 @@ EvtScript N(EVS_ManageImpostersScene) = {
         EVT_SET(GB_PRA19_TutorialState, 2)
         EVT_GOTO(21)
     EVT_LABEL(20)
-    EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario_10002)
+    EVT_CALL(SetNpcAnimation, NPC_ExamplePlayer, ANIM_Mario1_Idle)
     EVT_CALL(SetNpcPos, NPC_ExamplePlayer, 415, 0, -75)
     EVT_CALL(SetNpcAnimation, NPC_ExampleKooper, ANIM_WorldKooper_Idle)
     EVT_CALL(SetNpcPos, NPC_ExampleKooper, 385, 0, -75)
@@ -626,11 +626,11 @@ EvtScript N(EVS_ManageImpostersScene) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, TRUE)
     EVT_WAIT(60)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Question)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Question)
     EVT_CALL(PlaySoundAtPlayer, SOUND_263, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(35)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o1054, SOUND_1E4, SOUND_SPACE_MODE_0)
     EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 34, 22, 1, 10, 30)
     EVT_CALL(EnableModel, MODEL_o1024, FALSE)
@@ -684,7 +684,7 @@ EvtScript N(EVS_ManageImpostersScene) = {
     EVT_END_THREAD
     EVT_WAIT(60)
     EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(10)
     // kolorado imposter speaks
     EVT_CALL(GetNpcPos, NPC_FakeKolorado, LVar0, LVar1, LVar2)
@@ -794,7 +794,7 @@ EvtScript N(EVS_ManageImpostersScene) = {
                 EVT_EXEC_WAIT(N(EVS_FocusCam_OnPosition))
                 EVT_CALL(SpeakToPlayer, NPC_FakeKooper, ANIM_WorldKooper_Hurt, ANIM_WorldKooper_Hurt, 0, MSG_CH7_0162)
                 EVT_EXEC_WAIT(N(EVS_FocusCam_StartBattle))
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
                 EVT_EXEC_WAIT(N(EVS_RevealEveryImposter))
                 EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
                 EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -961,7 +961,7 @@ EvtScript N(EVS_NpcInit_FakeKolorado) = {
 
 EvtScript N(EVS_NpcInit_ExamplePlayer) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_10000000, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mario_10002)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mario1_Idle)
     EVT_MALLOC_ARRAY(16, LVarA)
     EVT_CALL(N(CreateExamplePlayerRenderer))
     EVT_RETURN

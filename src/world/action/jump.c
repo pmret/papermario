@@ -25,11 +25,11 @@ void initialize_jump(void) {
     phys_init_integrator_for_current_state();
 
     if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
-        anim = ANIM_Mario_90005;
+        anim = ANIM_MarioW3_8bit_Jump;
     } else if (!(playerStatus->animFlags & (PA_FLAG_USING_WATT | PA_FLAG_WATT_IN_HANDS))) {
-        anim = ANIM_Mario_AnimMidairStill;
+        anim = ANIM_Mario1_Jump;
     } else {
-        anim = ANIM_Mario_60009;
+        anim = ANIM_MarioW1_JumpWatt;
     }
     suggest_player_anim_clearUnkFlag(anim);
 
@@ -62,11 +62,11 @@ void action_update_jump(void) {
     }
 
     if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
-        anim = ANIM_Mario_90005;
+        anim = ANIM_MarioW3_8bit_Jump;
     } else if (!(playerStatus->animFlags & (PA_FLAG_USING_WATT | PA_FLAG_WATT_IN_HANDS))) {
-        anim = ANIM_Mario_AnimMidairStill;
+        anim = ANIM_Mario1_Jump;
     } else {
-        anim = ANIM_Mario_60009;
+        anim = ANIM_MarioW1_JumpWatt;
     }
     suggest_player_anim_clearUnkFlag(anim);
 
@@ -99,9 +99,9 @@ void action_update_landing_on_switch(void) {
         playerStatus->flags |= PS_FLAG_FALLING;
 
         if (!(playerStatus->animFlags & (PA_FLAG_USING_WATT | PA_FLAG_WATT_IN_HANDS))) {
-            anim = ANIM_Mario_AnimMidair;
+            anim = ANIM_Mario1_Fall;
         } else {
-            anim = ANIM_Mario_6000A;
+            anim = ANIM_MarioW1_FallWatt;
         }
 
         suggest_player_anim_clearUnkFlag(anim);
@@ -126,11 +126,11 @@ void action_update_falling(void) {
         playerStatus->flags |= PS_FLAG_FALLING;
 
         if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
-            anim = ANIM_Mario_90005;
+            anim = ANIM_MarioW3_8bit_Jump;
         } else  if (!(playerStatus->animFlags & (PA_FLAG_USING_WATT | PA_FLAG_WATT_IN_HANDS))) {
-            anim = ANIM_Mario_AnimMidair;
+            anim = ANIM_Mario1_Fall;
         } else {
-            anim = ANIM_Mario_6000A;
+            anim = ANIM_MarioW1_FallWatt;
         }
         suggest_player_anim_clearUnkFlag(anim);
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
@@ -184,7 +184,7 @@ void action_update_peach_falling(void) {
         playerStatus->flags |= PS_FLAG_FALLING;
 
         if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
-            anim = ANIM_Mario_AnimMidair;
+            anim = ANIM_Mario1_Fall;
         } else {
             anim = ANIM_Peach_A0006;
         }

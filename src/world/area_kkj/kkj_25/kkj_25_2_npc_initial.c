@@ -62,7 +62,7 @@ EvtScript N(EVS_NpcIdle_Kammy_Broom) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(func_802D286C, 0x2000)
-    EVT_CALL(func_802D2520, ANIM_Mario_10002, 8, 0, 0, 0, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario1_Idle, 8, 0, 0, 0, 0)
     EVT_CALL(HidePlayerShadow, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_WAIT(1)

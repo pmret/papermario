@@ -67,7 +67,7 @@ void action_update_hit_lava(void) {
             if (playerStatus->hazardType == HAZARD_TYPE_LAVA) {
                 fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 1.0f, 40);
             }
-            suggest_player_anim_setUnkFlag(ANIM_Mario_80002);
+            suggest_player_anim_setUnkFlag(ANIM_MarioW2_TouchedLava);
             playerStatus->gravityIntegrator[1] = 0.0f;
             playerStatus->timeInAir = 0;
             playerStatus->peakJumpTime = 0;
@@ -174,7 +174,7 @@ void action_update_hit_lava(void) {
                 phys_adjust_cam_on_landing();
                 gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_FLAG_2;
                 sfx_play_sound_at_player(SOUND_3FB, SOUND_SPACE_MODE_0);
-                suggest_player_anim_setUnkFlag(ANIM_Mario_8001A);
+                suggest_player_anim_setUnkFlag(ANIM_MarioW2_Thrown);
                 playerStatus->flags &= ~PS_FLAG_HIT_FIRE;
                 playerStatus->flags &= ~PS_FLAG_FLYING;
                 playerStatus->hazardType = HAZARD_TYPE_NONE;

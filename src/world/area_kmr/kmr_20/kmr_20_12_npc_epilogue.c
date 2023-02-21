@@ -150,7 +150,7 @@ EvtScript N(EVS_Player_EnterPipe_Epilogue) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(func_802D286C, 0x00000800)
-    EVT_CALL(func_802D2520, ANIM_Mario_10002, FOLD_TYPE_5, 2, 1, 1, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario1_Idle, FOLD_TYPE_5, 2, 1, 1, 0)
     EVT_WAIT(25)
     EVT_RETURN
     EVT_END
@@ -189,7 +189,7 @@ EvtScript N(EVS_Luigi_EnterPipe_Epilogue) = {
 EvtScript N(EVS_Scene_BeginEpilogue) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(N(SetAmbienceVolumeHalf_Epilogue))
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80024)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SitIdle)
     EVT_CALL(SetPlayerPos, 95, 44, -40)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 150, 44, -40)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 150, 44, -40)
@@ -198,7 +198,7 @@ EvtScript N(EVS_Scene_BeginEpilogue) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(30)
     EVT_CALL(SpeakToPlayer, NPC_Luigi_1, ANIM_Luigi_TalkSit, ANIM_Luigi_IdleSit, 0, MSG_Outro_000D)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80025)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SitNodYes)
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_Luigi_1, ANIM_Luigi_TalkSit, ANIM_Luigi_IdleSit, 0, MSG_Outro_000E)
     EVT_WAIT(30)
@@ -212,7 +212,7 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(N(SetAmbienceVolumeHalf_Epilogue))
     EVT_CALL(SetPlayerPos, 95, 44, -40)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80024)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SitIdle)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 150, 44, -40)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 150, 44, -40)
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-6.0))

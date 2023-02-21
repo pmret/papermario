@@ -5397,7 +5397,7 @@ EvtScript N(attackTuffPuffs) = {
                         EVT_END_LOOP
                         EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
                     EVT_END_THREAD
-                    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_AnimMidairStill, ANIM_Mario_AnimMidairStill, ANIM_Mario_10009)
+                    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_Land)
                     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.5))
                     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
                     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)

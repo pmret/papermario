@@ -38,9 +38,9 @@ void action_update_step_up(void) {
         phys_adjust_cam_on_landing();
         if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
             if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
-                anim = ANIM_Mario_Walking;
+                anim = ANIM_Mario1_Walk;
             } else {
-                anim = ANIM_Mario_60000;
+                anim = ANIM_MarioW1_Carry;
             }
             suggest_player_anim_clearUnkFlag(anim);
         } else {

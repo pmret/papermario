@@ -29,7 +29,7 @@ void action_update_use_munchlesia(void) {
 
     switch (playerStatus->actionSubstate) {
         case SUBSTATE_INIT:
-            suggest_player_anim_clearUnkFlag(ANIM_Mario_1002E);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario1_FallBack);
             D_802B62E0 = 32;
             Munchlesia_LaunchVelocity = 16.0f;
             Munchlesia_LateralVelocity = 4.0f;
@@ -59,7 +59,7 @@ void action_update_use_munchlesia(void) {
             hitPosY = player_check_collision_below(Munchlesia_LaunchVelocity, &colliderID);
             if (colliderID >= 0) {
                 sfx_play_sound_at_player(SOUND_162, SOUND_SPACE_MODE_0);
-                suggest_player_anim_setUnkFlag(ANIM_Mario_80003);
+                suggest_player_anim_setUnkFlag(ANIM_MarioW2_Collapse);
                 playerStatus->position.y = hitPosY;
                 D_802B62E0 = 10;
                 playerStatus->actionSubstate++; // SUBSTATE_CRASH
@@ -67,7 +67,7 @@ void action_update_use_munchlesia(void) {
             break;
         case SUBSTATE_CRASH:
             if (playerStatus->animNotifyValue != 0) {
-                suggest_player_anim_setUnkFlag(ANIM_Mario_GetUp);
+                suggest_player_anim_setUnkFlag(ANIM_Mario1_GetUp);
                 playerStatus->actionSubstate = SUBSTATE_GET_UP;
                 playerStatus->currentStateTime = 15;
                 break;

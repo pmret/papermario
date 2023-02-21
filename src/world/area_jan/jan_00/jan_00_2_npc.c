@@ -312,9 +312,9 @@ EvtScript N(D_80242FA8_B234E8) = {
     EVT_CALL(PlayerMoveTo, LVar0, LVar2, 15)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
     EVT_CALL(PlayerJump, 224, 0, 20, 20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Walk)
     EVT_CALL(PlayerMoveTo, 260, 20, 15)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(func_80240B4C_B2108C, 3, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
     EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 20)
@@ -430,7 +430,7 @@ EvtScript N(EVS_NpcInteract_Kolorado_01) = {
     EVT_CALL(func_80240B4C_B2108C, 0, LVar0, LVar1, LVar2)
     EVT_CALL(PlayerMoveTo, LVar0, LVar2, 10)
     EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_THREAD
         EVT_CALL(N(func_80240CF8_B21238), 0)
     EVT_END_THREAD

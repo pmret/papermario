@@ -584,7 +584,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
                 npc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
                 set_action_state(ACTION_STATE_RIDE);
-                suggest_player_anim_setUnkFlag(ANIM_Mario_8000E);
+                suggest_player_anim_setUnkFlag(ANIM_MarioW2_RideLaki);
                 npc->currentAnim = ANIM_WorldLakilester_Walk;
                 D_802BFF0C = 1;
                 npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
@@ -600,7 +600,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 npc->moveSpeed = 3.0f;
                 npc->jumpScale = 0.0f;
                 npc->yaw = playerStatus->targetYaw;
-                suggest_player_anim_setUnkFlag(ANIM_Mario_8000E);
+                suggest_player_anim_setUnkFlag(ANIM_MarioW2_RideLaki);
                 set_action_state(ACTION_STATE_RIDE);
                 disable_player_static_collisions();
                 D_802BFF08 = 1;
@@ -702,12 +702,12 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             npc->currentAnim = ANIM_WorldLakilester_Walk;
             npc->jumpVelocity = 8.0f;
             npc->jumpScale = 1.4f;
-            suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario1_BeforeJump);
             D_802BFF14 = 101;
             break;
         case 101:
             sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_MODE_0, NPC_PARTNER);
-            suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario1_Jump);
             /* fallthrough */
         case 102:
             D_802BFF14++;
@@ -725,7 +725,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 npc->jumpVelocity -= npc->jumpScale;
 
                 if (npc->jumpVelocity <= 0.0f) {
-                    suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidair);
+                    suggest_player_anim_clearUnkFlag(ANIM_Mario1_Fall);
                 }
 
                 npc->duration--;
@@ -742,7 +742,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                     npc->yaw = playerStatus->targetYaw;
                     npc->duration = 3;
                     set_action_state(ACTION_STATE_RIDE);
-                    suggest_player_anim_setUnkFlag(ANIM_Mario_8000E);
+                    suggest_player_anim_setUnkFlag(ANIM_MarioW2_RideLaki);
                     disable_player_shadow();
                     partnerActionStatus->actingPartner = PARTNER_LAKILESTER;
                     partnerActionStatus->partnerActionState = PARTNER_ACTION_LAKILESTER_1;
@@ -829,11 +829,11 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             }
 
             npc->moveSpeed = sp2C / npc->duration;
-            suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario1_BeforeJump);
             D_802BFF14 += 1;
             break;
         case 4:
-            suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario1_Jump);
             D_802BFF14++;
             /* fallthrough */
         case 5:
@@ -964,11 +964,11 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
             lakilester->moveSpeed = sp2C / lakilester->duration;
             lakilester->yaw = atan2(playerStatus->position.x, playerStatus->position.z,
                                  lakilester->moveToPos.x, lakilester->moveToPos.z);
-            suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario1_BeforeJump);
             D_802BFF00++;
             break;
         case 1:
-            suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
+            suggest_player_anim_clearUnkFlag(ANIM_Mario1_Jump);
             D_802BFF00++;
         case 2:
             playerStatus->position.y += lakilester->jumpVelocity;
@@ -1151,7 +1151,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
             }
 
             sfx_play_sound_at_npc(SOUND_295, SOUND_SPACE_MODE_0, NPC_PARTNER);
-            playerStatus->anim = ANIM_Mario_8000E;
+            playerStatus->anim = ANIM_MarioW2_RideLaki;
             playerStatus->animNotifyValue = 0;
             playerStatus->flags |= PS_FLAG_FACE_FORWARDS;
             func_802BFB44_323694(2.0f);

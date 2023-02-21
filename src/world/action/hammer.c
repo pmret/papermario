@@ -30,12 +30,12 @@ s32 action_hammer_is_swinging_away(s32 animID) {
 
     // back facing swing anims
     switch (animID) {
-        case ANIM_Mario_60011:
-        case ANIM_Mario_60013:
-        case ANIM_Mario_60015:
-        case ANIM_Mario_60017:
-        case ANIM_Mario_60019:
-        case ANIM_Mario_6001B:
+        case ANIM_MarioW1_Smash1_Miss_Back:
+        case ANIM_MarioW1_Smash1_Hit_Back:
+        case ANIM_MarioW1_Smash2_Miss_Back:
+        case ANIM_MarioW1_Smash2_Hit_Back:
+        case ANIM_MarioW1_Smash3_Miss_Back:
+        case ANIM_MarioW1_Smash3_Hit_Back:
             return TRUE;
     }
     return FALSE;
@@ -243,24 +243,24 @@ void action_update_hammer(void) {
 
         if (gPlayerData.hammerLevel == 2) {
             soundID = SOUND_2117;
-            anim = ANIM_Mario_6001A;
+            anim = ANIM_MarioW1_Smash3_Hit;
             if (HammerHit->hitID < 0) {
                 soundID = SOUND_2117;
-                anim = ANIM_Mario_60018;
+                anim = ANIM_MarioW1_Smash3_Miss;
             }
         } else if (gPlayerData.hammerLevel == 1) {
             soundID = SOUND_2116;
-            anim = ANIM_Mario_60016;
+            anim = ANIM_MarioW1_Smash2_Hit;
             if (HammerHit->hitID < 0) {
                 soundID = SOUND_2116;
-                anim = ANIM_Mario_60014;
+                anim = ANIM_MarioW1_Smash2_Miss;
             }
         } else {
             soundID = SOUND_2115;
-            anim = ANIM_Mario_60012;
+            anim = ANIM_MarioW1_Smash1_Hit;
             if (HammerHit->hitID < 0) {
                 soundID = SOUND_2115;
-                anim = ANIM_Mario_60010;
+                anim = ANIM_MarioW1_Smash1_Miss;
             }
         }
 

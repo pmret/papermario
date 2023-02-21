@@ -38,7 +38,7 @@ EvtScript N(EVS_MoveToBattlePositions) = {
     EVT_THREAD
         EVT_CALL(SetNpcPos, NPC_Bowser_Prop, NPC_DISPOSE_LOCATION)
         EVT_CALL(PlayerMoveTo, 525, 0, 50)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_BeforeJump)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 600, 0, 0)
@@ -218,9 +218,9 @@ EvtScript N(EVS_BowserFliesAway) = {
     EVT_EXEC(N(EVS_UpdatePropellerSounds))
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
         EVT_WAIT(20)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_CALL(InterpPlayerYaw, 0, 1)
     EVT_END_THREAD
     EVT_CALL(LoadPath, 25, EVT_PTR(N(ToWindowPath)), ARRAY_COUNT(N(ToWindowPath)), EASING_LINEAR)

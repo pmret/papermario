@@ -44,9 +44,9 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     EVT_CALL(SetNpcPos, NPC_Tutankoopa_01, 410, -1300, 410)
     EVT_THREAD
         EVT_WAIT(50)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
         EVT_WAIT(30)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_CALL(func_802CFD30, NPC_Tutankoopa_02, FOLD_TYPE_7, 0, 0, 0, 0)
     EVT_CALL(SetNpcPos, NPC_Tutankoopa_02, 410, -905, 410)
@@ -73,7 +73,7 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_THREAD
         EVT_WAIT(30)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_END_THREAD
     EVT_CALL(GetNpcPos, NPC_Tutankoopa_02, LVar2, LVar3, LVar4)
     EVT_CALL(MakeLerp, 0, 110, 100, EASING_COS_IN_OUT)
@@ -217,18 +217,18 @@ EvtScript N(EVS_Scene_TutankoopaDefeated) = {
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim02)
         EVT_CALL(SetNpcSpeed, NPC_Tutankoopa_01, EVT_FLOAT(8.0))
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_80022)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_LookAround)
         EVT_LOOP(2)
             EVT_CALL(NpcMoveTo, NPC_Tutankoopa_01, 304, 434, 0)
             EVT_CALL(NpcMoveTo, NPC_Tutankoopa_01, 444, 316, 0)
             EVT_CALL(NpcMoveTo, NPC_Tutankoopa_01, 473, 337, 0)
             EVT_CALL(NpcMoveTo, NPC_Tutankoopa_01, 318, 460, 0)
         EVT_END_LOOP
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
         EVT_CALL(NpcMoveTo, NPC_Tutankoopa_01, 259, 522, 0)
         EVT_CALL(SetNpcPos, NPC_Tutankoopa_01, 0, -1500, 0)
         EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_CALL(SetSelfVar, 1, 0)
     EVT_END_THREAD
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH2_00EA, 160, 40)

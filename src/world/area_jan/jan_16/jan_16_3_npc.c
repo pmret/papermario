@@ -116,9 +116,9 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_18A, 0)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 50, EVT_FLOAT(1.0))
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
     EVT_THREAD
         EVT_WAIT(20)
         EVT_LOOP(10)

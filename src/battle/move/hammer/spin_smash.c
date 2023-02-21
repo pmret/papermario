@@ -67,14 +67,14 @@ EvtScript N(EVS_UseMove1_Impl) = {
     EVT_LOOP(10)
         EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
         EVT_IF_EQ(LVar0, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
         EVT_ADD(LVar1, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40000)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash1_Begin)
     EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40000)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash1_Begin)
     EVT_SWITCH(LVar1)
         EVT_CASE_LT(3)
             EVT_WAIT(4)
@@ -93,9 +93,9 @@ EvtScript N(EVS_UseMove1_Impl) = {
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40001)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash1_Raise)
     EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash1_Hold1)
     EVT_CALL(N(ShouldMovesAutoSucceed))
     EVT_IF_EQ(LVar0, HIT_RESULT_HIT)
         EVT_LOOP(45)
@@ -114,7 +114,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
         EVT_CALL(GetActionResult, LVar0)
         EVT_IF_NE(LVar0, 0)
             EVT_IF_NE(LVar1, 1)
-                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40003)
+                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash1_Hold2)
                 EVT_SET(LVar1, 1)
             EVT_END_IF
         EVT_END_IF
@@ -129,9 +129,9 @@ EvtScript N(EVS_UseMove1_Impl) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40004)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash1_PreSwing)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40005)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash1_Swing)
     EVT_WAIT(3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_46)
     EVT_CALL(StartRumble, 7)
@@ -139,7 +139,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_WAIT(25)
         EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
         EVT_RETURN
@@ -157,7 +157,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_WAIT(10)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_B))
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -174,7 +174,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
     EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_B))
     EVT_RETURN
@@ -190,14 +190,14 @@ EvtScript N(EVS_UseMove2_Impl) = {
     EVT_LOOP(10)
         EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
         EVT_IF_EQ(LVar0, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
         EVT_ADD(LVar1, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40006)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash2_Begin)
     EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40006)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash2_Begin)
     EVT_SWITCH(LVar1)
         EVT_CASE_LT(3)
             EVT_WAIT(4)
@@ -215,9 +215,9 @@ EvtScript N(EVS_UseMove2_Impl) = {
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40007)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash2_Raise)
     EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40008)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash2_Hold1)
     EVT_CALL(N(ShouldMovesAutoSucceed))
     EVT_IF_EQ(LVar0, FALSE)
         EVT_LOOP(45)
@@ -236,7 +236,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
         EVT_CALL(GetActionResult, LVar0)
         EVT_IF_NE(LVar0, 0)
             EVT_IF_NE(LVar1, 1)
-                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40009)
+                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash2_Hold2)
                 EVT_SET(LVar1, 1)
             EVT_END_IF
         EVT_END_IF
@@ -251,9 +251,9 @@ EvtScript N(EVS_UseMove2_Impl) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_4000A)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash2_PreSwing)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_4000B)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash2_Swing)
     EVT_WAIT(3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_46)
     EVT_CALL(StartRumble, 8)
@@ -261,7 +261,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_WAIT(25)
         EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
         EVT_RETURN
@@ -279,7 +279,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_WAIT(10)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_B))
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -297,7 +297,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_B))
     EVT_RETURN
     EVT_END
@@ -312,14 +312,14 @@ EvtScript N(EVS_UseMove3_Impl) = {
     EVT_LOOP(10)
         EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
         EVT_IF_EQ(LVar0, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
         EVT_ADD(LVar1, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_4000C)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash3_Begin)
     EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_4000C)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash3_Begin)
     EVT_SWITCH(LVar1)
         EVT_CASE_LT(3)
             EVT_WAIT(4)
@@ -335,9 +335,9 @@ EvtScript N(EVS_UseMove3_Impl) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_4000D)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash3_Raise)
     EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_4000E)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash3_Hold1)
     EVT_CALL(N(ShouldMovesAutoSucceed))
     EVT_IF_EQ(LVar0, FALSE)
         EVT_LOOP(45)
@@ -356,7 +356,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
         EVT_CALL(GetActionResult, LVar0)
         EVT_IF_NE(LVar0, 0)
             EVT_IF_NE(LVar1, 1)
-                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_4000F)
+                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash3_Hold2)
                 EVT_SET(LVar1, 1)
             EVT_END_IF
         EVT_END_IF
@@ -371,9 +371,9 @@ EvtScript N(EVS_UseMove3_Impl) = {
         EVT_IF_EQ(LVar0, 0)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40010)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash3_PreSwing)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_40011)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash3_Swing)
     EVT_WAIT(3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_46)
     EVT_CALL(StartRumble, 9)
@@ -381,7 +381,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_WAIT(25)
         EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
         EVT_RETURN
@@ -399,7 +399,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_WAIT(10)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_B))
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -417,7 +417,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_B))
     EVT_RETURN
     EVT_END

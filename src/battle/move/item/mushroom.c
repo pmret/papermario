@@ -105,10 +105,10 @@ EvtScript N(script6) = {
     EVT_SET(LVar1, LVarF)
     EVT_EXEC_WAIT(N(UseItem))
     EVT_SET(LVarE, LVarA)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Throw)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Throw)
     EVT_THREAD
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(D_80283EE8))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -182,7 +182,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(EatItem))
     EVT_IF_EQ(LVarF, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_StickOutTongue)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_StickOutTongue)
     EVT_END_IF
     EVT_IF_GT(LVarB, 0)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -207,14 +207,14 @@ EvtScript N(EVS_UseItem) = {
     EVT_END_IF
     EVT_IF_EQ(LVarF, 0)
         EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_ThumbsUp)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_ThumbsUp)
         EVT_WAIT(30)
     EVT_ELSE
         EVT_WAIT(30)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(20)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN

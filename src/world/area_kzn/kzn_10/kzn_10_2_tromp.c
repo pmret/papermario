@@ -138,9 +138,9 @@ EvtScript N(EVS_SetupSpinyTromp) = {
                 EVT_CALL(InterpPlayerYaw, 270, 0)
                 EVT_IF_NE(LVar0, PARTNER_LAKILESTER)
                     EVT_WAIT(3)
-                    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+                    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
                     EVT_WAIT(10)
-                    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+                    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
                 EVT_END_IF
         EVT_END_SWITCH
     EVT_END_THREAD

@@ -302,7 +302,7 @@ EvtScript N(EVS_OnHitTrapTrigger) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(InterpPlayerYaw, 270, 1)
     EVT_WAIT(10)
     EVT_CALL(InterpPlayerYaw, 90, 1)
@@ -314,7 +314,7 @@ EvtScript N(EVS_OnHitTrapTrigger) = {
     EVT_CALL(InterpPlayerYaw, 270, 1)
     EVT_WAIT(3)
     EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Flail)
     EVT_WAIT(5)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_HURT)
     EVT_WAIT(15)

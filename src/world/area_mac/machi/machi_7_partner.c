@@ -18,7 +18,7 @@ Vec3f N(FlightPath)[] = {
 };
 
 EvtScript N(EVS_ChasePartner) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Running)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Run)
     EVT_LABEL(0)
         EVT_CALL(GetAngleToNPC, NPC_PARTNER, LVar0)
         EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)

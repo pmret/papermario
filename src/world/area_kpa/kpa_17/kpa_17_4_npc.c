@@ -21,7 +21,7 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
         EVT_CALL(func_802CF56C, 1)
     EVT_END_IF
     EVT_CALL(PlaySoundAtPlayer, SOUND_161, SOUND_SPACE_MODE_0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80018)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_LOOP(0)
         EVT_SUB(LVar1, 16)
@@ -33,13 +33,13 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80018)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(0.6))
     EVT_END_THREAD
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
     EVT_CALL(PlayerJump1, 1030, 30, -496, 10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(1)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_WAIT(1)
@@ -47,10 +47,10 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
     EVT_WAIT(5)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_WAIT(1)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH8_0007, 1000, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(10)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)

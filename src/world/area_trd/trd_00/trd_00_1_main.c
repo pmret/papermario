@@ -47,11 +47,11 @@ EvtScript N(D_80240B34_99A7A4) = {
     EVT_END_THREAD
     EVT_WAIT(82)
     EVT_CALL(SetPlayerPos, -1041, 0, 204)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Walk)
     EVT_CALL(SetNpcPos, NPC_PARTNER, -1041, 0, 204)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(PlayerMoveTo, -900, 200, 30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
