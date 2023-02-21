@@ -1559,10 +1559,6 @@ void close_message(MessagePrintState* msgPrintState) {
     msgPrintState->stateFlags &= ~MSG_STATE_FLAG_40;
 }
 
-#if VERSION_CN
-s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
-INCLUDE_ASM(s32, "msg", msg_get_print_char_width);
-#else
 s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags) {
     f32 charWidth;
 
@@ -1572,6 +1568,13 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgS
             && character != MSG_CHAR_READ_HALF_SPACE)) {
         return 0;
     }
+
+#if VERSION_CN
+    if (character >= 0x5F && character<=0x8F) {
+        charWidth = 16.0;
+        return charWidth * msgScale;
+    }
+#endif
 
     if (overrideCharWidth != 0) {
         charWidth = overrideCharWidth;
@@ -1605,7 +1608,6 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgS
     }
     return charWidth * msgScale;
 }
-#endif
 
 s32 msg_get_draw_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u16 flags) {
     f32 baseWidth;
