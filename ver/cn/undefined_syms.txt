@@ -599,15 +599,10 @@ tst_11_settings = 0x80240780; // segment:tst_11
 tst_12_settings = 0x80240010; // segment:tst_12
 tst_13_settings = 0x802403D0; // segment:tst_13
 tst_20_settings = 0x80240010; // segment:tst_20
-end_00_settings = 0x80242B50; // segment:end_00
-end_00_map_init = 0x80240000; // segment:end_00
-end_01_settings = 0x80243000; // segment:end_01
-end_01_map_init = 0x80240000; // segment:end_01
 mgm_00_settings = 0x80241810; // segment:mgm_00
 mgm_01_settings = 0x802417C0; // segment:mgm_01
 mgm_02_settings = 0x80242410; // segment:mgm_02
 mgm_03_settings = 0x80240010; // segment:mgm_03
-gv_01_settings = 0x802407D0; // segment:gv_01
 
 
 b_area_kmr_part_1_Formations = 0x802194D4; // segment:battle_area_kmr_part_1
@@ -790,7 +785,6 @@ gPlayerStatus = 0x8010d3a8;
 update_player = 0x800ddb20;
 D_802D9D70 = 0x802d9d70;
 D_802D9D71 = 0x802d9d71;
-update_camera_zone_interp = 0x80030b44;
 
 gPlayerStatusPtr = 0x800f5f10;
 hud_element_set_aux_cache = 0x80143a78;
@@ -921,37 +915,20 @@ _load_model_textures = 0x80113f24;
 calculate_model_sizes = 0x8011450c;
 sfx_get_reverb_mode = 0x80147fb8;
 bgm_quiet_max_volume = 0x801493ec;
-pause_init = 0x80244060;
-pause_handle_input = 0x80244424;
 init_sprite_shading_data = 0x80146880;
 init_entity_models = 0x8011f038;
 init_worker_list = 0x801214f4;
 init_item_entity_list = 0x8012f85c;
 bgm_reset_max_volume = 0x80149400;
 
-filemenu_init = 0x802448e0;
-filemenu_update = 0x802431a0;
 set_map_transition_effect = 0x80136a30;
 bgm_set_song = 0x801490a8;
-filemenu_cleanup = 0x80244b00;
 status_menu_respond_to_changes = 0x800e7ca4;
 enable_player_input = 0x800de584;
 update_exit_map_screen_overlay = 0x80136a3c;
 update_enter_map_screen_overlay = 0x80136d64;
 gWindows = 0x8015c0d0;
 does_script_exist = 0x802c4164;
-
-
-filemenu_BSS_END = 0x8024cee0;
-filemenu_BSS_START = 0x8024c440;
-filemenu_DATA_START = 0x80249f60;
-filemenu_RODATA_END = 0x8024c440;
-filemenu_ROM_END = 0x001b59a0;
-filemenu_TEXT_END = 0x80249f60;
-filemenu_TEXT_START = 0x80242ba0;
-
-pause_cleanup = 0x80244708;
-
 appendGfx_background_texture = 0x80144650;
 bgm_pop_battle_song = 0x801495fc;
 bgm_push_battle_song = 0x80149688;
@@ -973,7 +950,6 @@ func_8011BAE8 = 0x80119ec8;
 func_8013A6E8 = 0x80138e78;
 func_802DE894 = 0x802de894;
 func_802DDEC4 = 0x802ddec4;
-func_80244BC4 = 0x80244bc4;
 game_mode_set_fpDrawAuxUI = 0x80111164;
 gBackgroundFogModePtr = 0x8014fa80;
 gBackgroundImage = 0x80200000;
