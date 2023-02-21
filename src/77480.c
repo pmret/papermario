@@ -1412,7 +1412,7 @@ s32 get_player_back_anim(s32 anim) {
             }
         } else if (sprIndex == SPR_MarioW1) {
             if (anim == ANIM_MarioW1_Lift) {
-                outAnim = ANIM_MarioW1_LiftBack;
+                outAnim = ANIM_MarioW1_Lift_Back;
             } else if (anim == ANIM_MarioW1_Toss) {
                 outAnim = ANIM_MarioW1_Toss_Back;
             } else if (anim == ANIM_MarioW1_Smash1_Miss) {

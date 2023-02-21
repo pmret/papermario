@@ -300,7 +300,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(1000)
-        EVT_CASE_EQ(EVENT_1D)
+        EVT_CASE_EQ(EVENT_INVUNERABLE_TAUNT)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
             EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
                 EVT_SET(LVar3, 60)

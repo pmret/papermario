@@ -435,7 +435,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_WAIT(1000)
-        EVT_CASE_EQ(EVENT_1D)
+        EVT_CASE_EQ(EVENT_INVUNERABLE_TAUNT)
             EVT_SET(LVar1, ANIM_BattleBowser_Idle)
             EVT_EXEC_WAIT(N(onImmune))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Idle)
