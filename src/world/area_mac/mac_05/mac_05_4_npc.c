@@ -392,7 +392,7 @@ EvtScript N(EVS_80248878) = {
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.5))
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
         EVT_CALL(SetPlayerPos, -120, 24, 375)
         EVT_CALL(PlaySoundAtPlayer, SOUND_44, SOUND_SPACE_MODE_0)
         EVT_CALL(PlayerJump1, -310, -10, 372, 80)
@@ -560,9 +560,9 @@ EvtScript N(EVS_80248878) = {
 };
 
 EvtScript N(D_802496C0_85B830) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimMidairStill)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Jump)
     EVT_WAIT(5)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimMidair)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Fall)
     EVT_RETURN
     EVT_END
 };
@@ -607,7 +607,7 @@ EvtScript N(EVS_802496FC) = {
     EVT_EXEC(N(D_802496C0_85B830))
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
     EVT_CALL(PlayerJump, LVar0, LVar1, LVar2, 20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
     EVT_CALL(N(func_80242A90_854C00), 4, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(1.0))
@@ -647,7 +647,7 @@ EvtScript N(EVS_802496FC) = {
 EvtScript N(D_80249C34_85BDA4) = {
     EVT_THREAD
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
         EVT_CALL(PlayerJump1, -310, -10, 372, 30)
         EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
         EVT_CALL(PlayerFaceNpc, NPC_Whale, FALSE)
@@ -746,9 +746,9 @@ EvtScript N(D_80249E84_85BFF4) = {
                     EVT_THREAD
                         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
                         EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-                        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+                        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
                         EVT_CALL(PlayerJump1, LVar2, LVar3, LVar4, 10)
-                        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+                        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
                     EVT_END_THREAD
                     EVT_CALL(PlaySoundAt, SOUND_41, SOUND_SPACE_MODE_0, 0, 0, 480)
                     EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_Panic)
@@ -998,7 +998,7 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
     EVT_EXEC(N(D_802496C0_85B830))
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
     EVT_CALL(PlayerJump, LVar0, LVar1, LVar2, 20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_THREAD
         EVT_CALL(N(func_80242C78_854DE8), 0)
@@ -1146,9 +1146,9 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
             EVT_END_IF
         EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
             EVT_CALL(SpeakToPlayer, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Port_0095)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
             EVT_WAIT(10)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
+            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
             EVT_WAIT(30)
             EVT_CALL(SpeakToPlayer, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Port_0096)
         EVT_CASE_LT(STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
@@ -1246,7 +1246,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa_01) = {
         EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
         EVT_WAIT(20)
         EVT_CALL(PlaySoundAtPlayer, SOUND_262, SOUND_SPACE_MODE_0)
-        EVT_CALL(ShowEmote, NPC_Whale, EMOTE_EXCLAMATION, 0, 30, FALSE, 0, 0, 0, 0)
+        EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
         EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_262, SOUND_SPACE_MODE_0)
         EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
     EVT_END_THREAD
@@ -1842,7 +1842,7 @@ EvtScript N(EVS_NpcInteract_ArtistToad) = {
                 EVT_CALL(InterpNpcYaw, NPC_ArtistToad, 270, 0)
                 EVT_WAIT(60)
                 EVT_EXEC(N(EVS_802442C4))
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimPray)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Pray)
                 EVT_CALL(SetNpcAnimation, NPC_Toad_02, ANIM_Toad_Red_Disappointed)
                 EVT_CALL(SetNpcAnimation, NPC_ArtistToad, ANIM_Musician_Poet_Pensive)
                 EVT_WAIT(30)
@@ -1862,7 +1862,7 @@ EvtScript N(EVS_NpcInteract_ArtistToad) = {
                 EVT_WAIT(40)
                 EVT_CALL(SetNpcAnimation, NPC_Toad_02, ANIM_Toad_Red_Idle)
                 EVT_CALL(SetNpcAnimation, NPC_ArtistToad, ANIM_Musician_Poet_Idle)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
                 EVT_WAIT(30)
                 EVT_EXEC(N(EVS_802442E8))
                 EVT_THREAD

@@ -309,7 +309,7 @@ void entity_CymbalPlant_idle(Entity* entity) {
             if (--data->timer == 0) {
                 data->state++;
                 func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 0, 0, 0, 0, 0, 0);
-                func_802DDFF8(ANIM_Mario_10002, 5, 19, 1, 1, 0, 0);
+                func_802DDFF8(ANIM_Mario1_Idle, 5, 19, 1, 1, 0, 0);
             }
             break;
         case 3:

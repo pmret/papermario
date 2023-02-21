@@ -20,13 +20,13 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH2_000E, 320, 150)
     EVT_THREAD
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
         EVT_CALL(PlaySoundAtPlayer, SOUND_263, SOUND_SPACE_MODE_0)
-        EVT_CALL(ShowEmote, NPC_TrainToad_01, EMOTE_QUESTION, 0, 20, FALSE, 0, 0, 0, 0)
+        EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(3.0), 30, 300, EVT_FLOAT(15.0), EVT_FLOAT(-9.5))
     EVT_THREAD
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_80022)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_LookAround)
         EVT_WAIT(20)
         EVT_CALL(InterpPlayerYaw, 270, 0)
         EVT_WAIT(55)
@@ -70,7 +70,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_FallBack)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Hurt)
     EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_HurtStill)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(2.0))
@@ -112,7 +112,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
     EVT_CALL(InterpPlayerYaw, 270, 0)
     EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_DeadStill)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Fallen)
     EVT_CALL(PlayerJump1, LVar0, LVar1, LVar2, 8)
     EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
     EVT_THREAD
@@ -120,7 +120,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_END_THREAD
     EVT_WAIT(20)
     EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Parakarry, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GetUp)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_GetUp)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Idle)
     EVT_CALL(GetNpcPos, NPC_Parakarry, LVar0, LVar1, LVar2)
@@ -128,7 +128,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_CALL(NpcJump1, NPC_Parakarry, LVar0, LVar1, LVar2, 8)
     EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, FALSE)
     EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(30)
     EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(3.0), 35, 255, EVT_FLOAT(17.5), EVT_FLOAT(-11.5))
     EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Walk)
@@ -143,9 +143,9 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_CALL(GetNpcPos, NPC_Parakarry, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_Parakarry, LVar0, LVar1, LVar2, 10)
     EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH2_0010)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH2_0011)
     EVT_SET(GB_StoryProgress, STORY_CH2_SPOKE_WITH_PARAKARRY)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0))
@@ -225,9 +225,9 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
                     EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH2_0016)
                 EVT_CASE_EQ(3)
                     EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Celebrate, ANIM_WorldParakarry_Idle, 0, MSG_CH2_0018)
-                    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Question)
+                    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Question)
                     EVT_WAIT(30)
-                    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+                    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
                     EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH2_0019)
                     EVT_CALL(ShowChoice, MSG_Choice_000F)
                     EVT_IF_NE(LVar0, 0)

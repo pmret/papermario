@@ -163,7 +163,7 @@ EvtScript N(EVS_Scene_SnowmenSpeak) = {
     EVT_THREAD
         EVT_WAIT(22)
         EVT_CALL(DisablePlayerPhysics, TRUE)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(N(SetAngleClamped), LVar3, LVar0, LVar2, 0, 0)
         EVT_CALL(GetDist2D, LVar4, LVar0, LVar2, 0, 0)
@@ -183,7 +183,7 @@ EvtScript N(EVS_Scene_SnowmenSpeak) = {
         EVT_END_LOOP
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(2.0))
         EVT_CALL(PlayerJump1, 0, 0, 0, 16)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_CALL(InterpPlayerYaw, 0, 0)
         EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_END_THREAD

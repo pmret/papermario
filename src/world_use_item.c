@@ -106,7 +106,7 @@ ApiStatus WorldItem_ConsumeItem(Evt* script, s32 isInitialCall) {
 
 EvtScript EVS_WorldItem_ShowUsedItem = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GotItem)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_UsePower)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 45)
     EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
@@ -127,7 +127,7 @@ EvtScript EVS_WorldItem_PlayEatingSounds = {
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Eat)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Eat)
     EVT_WAIT(45)
     EVT_RETURN
     EVT_END
@@ -140,7 +140,7 @@ EvtScript EVS_WorldItem_PlayDrinkingSounds = {
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Drink)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Drink)
     EVT_WAIT(45)
     EVT_RETURN
     EVT_END
@@ -163,7 +163,7 @@ EvtScript EVS_World_UseItem = {
         EVT_EXEC_WAIT(EVS_WorldItem_PlayDrinkingSounds)
     EVT_END_IF
     EVT_IF_EQ(LVarF, 1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_StickOutTongue)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_StickOutTongue)
     EVT_END_IF
     EVT_IF_GT(LVarB, 0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -188,14 +188,14 @@ EvtScript EVS_World_UseItem = {
     EVT_END_IF
     EVT_IF_EQ(LVarF, 0)
         EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_ThumbsUp)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_ThumbsUp)
         EVT_WAIT(30)
     EVT_ELSE
         EVT_WAIT(30)
     EVT_END_IF
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(20)
     EVT_CALL(WorldItem_ConsumeItem)
     EVT_CALL(DisablePlayerInput, FALSE)

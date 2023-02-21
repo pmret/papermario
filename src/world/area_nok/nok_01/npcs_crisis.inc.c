@@ -175,9 +175,9 @@ EvtScript N(EVS_Scene_KooverGetsMugged) = {
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, 1)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000A)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Shocked)
         EVT_WAIT(30)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtNpc, NPC_FuzzyWithShell, SOUND_331, 0)
     EVT_CALL(SetNpcSprite, NPC_Koover, ANIM_KoopaWithoutShell_Idle)
@@ -238,12 +238,12 @@ EvtScript N(EVS_NpcInteract_Koover_Crisis) = {
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_Koover, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0000)
     EVT_CALL(InterpPlayerYaw, 227, 5)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Thinking)
     EVT_CALL(EndSpeech, NPC_Koover, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0)
     EVT_CALL(InterpPlayerYaw, 47, 5)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(EndSpeech, NPC_Koover, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
     EVT_WAIT(15)
     EVT_CALL(EndSpeech, NPC_Koover, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0)
     EVT_EXEC_WAIT(N(EVS_Scene_KooverGetsMugged))

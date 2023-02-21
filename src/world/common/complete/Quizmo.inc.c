@@ -647,7 +647,7 @@ EvtScript N(EVS_Quizmo_MovePlayerToPodium) = {
     EVT_END_THREAD
     EVT_CALL(N(Quizmo_SpinPlayer))
     EVT_CALL(FacePlayerTowardPoint, QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -710,7 +710,7 @@ EvtScript N(EVS_Quizmo_SetCharacterPositons) = {
 
 EvtScript N(EVS_Quizmo_PlayerThinking) = {
     EVT_LOOP(0)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_Question)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Question)
         EVT_WAIT(20)
     EVT_END_LOOP
     EVT_RETURN
@@ -718,20 +718,20 @@ EvtScript N(EVS_Quizmo_PlayerThinking) = {
 };
 
 EvtScript N(EVS_Quizmo_PlayerHitBuzzer) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Throw)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Throw)
     EVT_WAIT(15)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_Quizmo_PlayerReaction_RightAnswer) = {
     EVT_LOOP(0)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_BeforeJump)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
         EVT_WAIT(2)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimMidairStill)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Jump)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 3)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
@@ -757,7 +757,7 @@ EvtScript N(EVS_Quizmo_PlayerReaction_RightAnswer) = {
         EVT_ADD(LVar1, 0)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimMidair)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Fall)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 0)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
@@ -780,12 +780,12 @@ EvtScript N(EVS_Quizmo_PlayerReaction_RightAnswer) = {
         EVT_ADD(LVar1, -3)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10009)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Land)
         EVT_WAIT(2)
         EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_BeforeJump)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
         EVT_WAIT(2)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimMidairStill)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Jump)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 3)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
@@ -811,7 +811,7 @@ EvtScript N(EVS_Quizmo_PlayerReaction_RightAnswer) = {
         EVT_ADD(LVar1, 0)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimMidair)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Fall)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 0)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
@@ -834,12 +834,12 @@ EvtScript N(EVS_Quizmo_PlayerReaction_RightAnswer) = {
         EVT_ADD(LVar1, -3)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10009)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Land)
         EVT_WAIT(2)
         EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_BeforeJump)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
         EVT_WAIT(2)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimMidairStill)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Jump)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 3)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
@@ -865,7 +865,7 @@ EvtScript N(EVS_Quizmo_PlayerReaction_RightAnswer) = {
         EVT_ADD(LVar1, 0)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_AnimMidair)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Fall)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 0)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
@@ -888,10 +888,10 @@ EvtScript N(EVS_Quizmo_PlayerReaction_RightAnswer) = {
         EVT_ADD(LVar1, -3)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10009)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Land)
         EVT_WAIT(2)
     EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(SetPlayerPos, LVar0, QUIZ_ARRAY_ORIGIN_Y, LVar2)
     EVT_WAIT(1)
     EVT_RETURN
@@ -899,7 +899,7 @@ EvtScript N(EVS_Quizmo_PlayerReaction_RightAnswer) = {
 };
 
 EvtScript N(EVS_Quizmo_PlayerReaction_WrongAnswer) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_ShockStill)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_VacantStare)
     EVT_LOOP(0)
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -1009,7 +1009,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
     EVT_SET(LVar0, MSG_QuizQuestion_01)
     EVT_ADD(LVar0, GB_CompletedQuizzes)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_OpenHat, ANIM_ChuckQuizmo_CloseHat, 0, LVar0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Question)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Question)
     EVT_SET(LVar0, MSG_QuizChoice_01)
     EVT_ADD(LVar0, GB_CompletedQuizzes)
     EVT_CALL(PlaySound, 142)

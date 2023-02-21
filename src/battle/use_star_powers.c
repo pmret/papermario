@@ -42,10 +42,10 @@ BattleMoveEntry StarPowersTable[] = {
 
 s32 D_8029C890[][5] = {
     [PARTNER_NONE] {
-        ANIM_Mario_GotItem,
-        ANIM_Mario_AnimPray,
-        ANIM_Mario_1002A,
-        ANIM_Mario_Running,
+        ANIM_Mario1_UsePower,
+        ANIM_Mario1_Pray,
+        ANIM_Mario1_LookUp,
+        ANIM_Mario1_Run,
         0,
     },
     [PARTNER_GOOMBARIO] {

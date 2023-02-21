@@ -55,9 +55,9 @@ EvtScript N(EVS_KeyItemChoicePopup) = {
             EVT_CALL(N(AddPlayerHandsOffset), LVar3, LVar4, LVar5)
             EVT_BITWISE_OR_CONST(LVar0, ITEM_VIS_GROUP(ITEM_NONE, 5))
             EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, ITEM_SPAWN_MODE_DECORATION, 0)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_60005)
+            EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
             EVT_WAIT(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
             EVT_CALL(RemoveItemEntity, LVar0)
     EVT_END_SWITCH
     EVT_CALL(N(ItemChoice_SaveSelected), LVarA)

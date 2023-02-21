@@ -40,7 +40,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
         EVT_WAIT(1)
     EVT_END_THREAD
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH0_00BB, 320, 60)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80022)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_LookAround)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 360, 80, 35)
@@ -68,7 +68,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
     EVT_CALL(SetNpcAnimation, NPC_GoombaBros_Blue, ANIM_GoombaBros_Blue_Idle)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_CALL(SpeakToPlayer, NPC_GoombaBros_Red, ANIM_GoombaBros_Red_Talk, ANIM_GoombaBros_Red_Idle, 0, MSG_CH0_00BC)
     EVT_WAIT(10)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 270, 80, 45)
@@ -87,7 +87,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
         EVT_CALL(SetNpcAnimation, NPC_GoombaBros_Blue, ANIM_GoombaBros_Blue_Walk)
         EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Blue, SOUND_10F, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_GoombaBros_Blue, 267, 0, 28, 30)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcJumpscale, NPC_GoombaBros_Red, EVT_FLOAT(0.8))
@@ -96,7 +96,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
         EVT_CALL(NpcJump0, NPC_GoombaBros_Red, 276, 0, 55, 30)
     EVT_END_THREAD
     EVT_WAIT(15)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(5)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(DisablePlayerInput, FALSE)

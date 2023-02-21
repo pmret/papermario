@@ -135,7 +135,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_BeforeJump)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
     EVT_CALL(GetCurrentPartnerID, LVar0)
     EVT_IF_NE(LVar0, PARTNER_NONE)
         EVT_CALL(DisablePartnerAI, 0)

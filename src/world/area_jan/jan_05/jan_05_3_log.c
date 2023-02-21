@@ -46,7 +46,7 @@ EvtScript N(EVS_LogAnim_RiseUp) = {
 EvtScript N(EVS_LogAnim_FallDown) = {
     EVT_THREAD
         EVT_WAIT(17)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
         EVT_CALL(N(UpdateLogShadow), MODEL_o147, MF_KillLogShadow)
     EVT_END_THREAD
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o94, COLLIDER_FLAGS_UPPER_MASK)
@@ -71,7 +71,7 @@ EvtScript N(EVS_LogAnim_FallDown) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o94, SOUND_209D, 0)
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, -185, 0, 320, 0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 2, 3, 1)

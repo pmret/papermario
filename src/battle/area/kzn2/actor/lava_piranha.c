@@ -1484,7 +1484,7 @@ EvtScript N(onDeath) = {
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 300)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002A)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
         EVT_WAIT(20)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_263)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1508,7 +1508,7 @@ EvtScript N(onDeath) = {
         EVT_WAIT(40)
         EVT_THREAD
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002B)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Flail)
             EVT_WAIT(40)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
         EVT_END_THREAD
@@ -1935,8 +1935,8 @@ EvtScript N(ignite) = {
             EVT_CALL(SetDefenseTable, ACTOR_ENEMY0, 2, EVT_PTR(N(defenseTable_fiery)))
             EVT_CALL(SetPartEventBits, ACTOR_ENEMY0, 1, ACTOR_EVENT_FLAG_FIREY, TRUE)
             EVT_CALL(SetPartEventBits, ACTOR_ENEMY0, 2, ACTOR_EVENT_FLAG_FIREY, TRUE)
-            EVT_CALL(SetActorVar, ACTOR_ENEMY0, 7, 0x00790004)
-            EVT_CALL(SetActorVar, ACTOR_ENEMY0, 8, 0x0079000A)
+            EVT_CALL(SetActorVar, ACTOR_ENEMY0, 7, ANIM_LavaPiranha_Anim04)
+            EVT_CALL(SetActorVar, ACTOR_ENEMY0, 8, ANIM_LavaPiranha_Anim0A)
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 5, 1)
             EVT_CALL(ForceHomePos, ACTOR_SELF, 61, 61, 0)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_40000, FALSE)

@@ -82,7 +82,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_WAIT(5)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(30)
     EVT_CALL(battle_item_thunder_bolt_func_802A1420_722F60)
     EVT_EXEC_WAIT(battle_item_thunder_bolt_PlayerGoHome)

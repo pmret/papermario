@@ -1050,7 +1050,7 @@ void btl_state_update_celebration(void) {
                     break;
             }
 
-            set_animation(0, 0, ANIM_Mario_30009);
+            set_animation(0, 0, ANIM_MarioB1_AdjustCap);
 
             if (partner != NULL) {
                 script = start_script(partner->takeTurnSource, EVT_PRIORITY_A, 0);
@@ -1148,7 +1148,7 @@ void btl_state_update_celebration(void) {
                 }
                 bFadeToBlackAmt = 0;
                 btl_cam_set_params(1, 270, 100, 8, 0, 0x2400, 0, 100);
-                set_animation(0, 0, ANIM_Mario_30009);
+                set_animation(0, 0, ANIM_MarioB1_AdjustCap);
                 if (partner != NULL) {
                     set_animation(ACTOR_PARTNER, 0, D_80284154[playerData->currentPartner]);
                 }
@@ -1161,7 +1161,7 @@ void btl_state_update_celebration(void) {
             if (CelebrateSubstateTime != 0) {
                 CelebrateSubstateTime--;
                 if (CelebrateSubstateTime == 0) {
-                    set_animation(0, 0, ANIM_Mario_Walking);
+                    set_animation(0, 0, ANIM_Mario1_Walk);
                 }
             } else {
                 player->yaw = 0.0f;

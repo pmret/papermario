@@ -34,9 +34,9 @@ EvtScript N(EVS_Scene_MeetingPeach) = {
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach_C0026)
     EVT_CALL(SpeakToPlayer, NPC_Peach, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_Intro_004C)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_Peach, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_Intro_004D)
     EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach_C0002)
@@ -120,9 +120,9 @@ EvtScript N(EVS_Scene_Ascending) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_LOOP(0)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_Running)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Run)
             EVT_WAIT(15)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_60003)
+            EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_CarryAboveRun)
             EVT_WAIT(15)
         EVT_END_LOOP
     EVT_END_THREAD

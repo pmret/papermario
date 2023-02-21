@@ -255,7 +255,7 @@ void func_802BD414_31E184(Npc* npc) {
                              (OriginalPlayerY - npc->moveToPos.y) - (npc->collisionHeight * 0.5f));
         }
         if (bss_802BFEE8 == 1) {
-            suggest_player_anim_setUnkFlag(ANIM_Mario_80010);
+            suggest_player_anim_always_forward(ANIM_MarioW2_DiveSushie);
             npc->currentAnim = ANIM_WorldSushie_Ride;
         }
         if (bss_802BFEF4 == 0 && (playerStatus->position.y + (playerStatus->colliderHeight * 0.5f) < OriginalPlayerY)) {
@@ -294,13 +294,13 @@ void func_802BD414_31E184(Npc* npc) {
         if ((OriginalPlayerY - npc->moveToPos.y) - (npc->collisionHeight * 0.5f) <= 0.0f) {
             if (bss_802BFEF4 != 0) {
                 bss_802BFEF4 = 0;
-                func_802DDFF8(ANIM_Mario_10002, 0, 0, 0, 0, 0, 0);
+                func_802DDFF8(ANIM_Mario1_Idle, 0, 0, 0, 0, 0, 0);
                 func_8003D624(npc, 0, 0, 0, 0, 0, 0);
             }
             bss_802BFEE4 = 0;
             npc->currentAnim = ANIM_WorldSushie_Ride;
             npc->moveToPos.y = OriginalPlayerY - (npc->collisionHeight * 0.5f);
-            suggest_player_anim_setUnkFlag(ANIM_Mario_8000F);
+            suggest_player_anim_always_forward(ANIM_MarioW2_RideSushie);
         }
     }
 }
@@ -372,7 +372,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_8;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
-            suggest_player_anim_setUnkFlag(ANIM_Mario_8000F);
+            suggest_player_anim_always_forward(ANIM_MarioW2_RideSushie);
             disable_player_shadow();
             disable_npc_shadow(npc);
             func_8003D624(npc, 4, 2, 0, 0, 0, 0);
@@ -422,7 +422,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                     npc->currentAnim = ANIM_WorldSushie_Run;
                     npc->duration = 12;
                     npc->moveToPos.y = y - (npc->collisionHeight * 0.5f);
-                    suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
+                    suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
                     script->functionTemp[0]++;
                     break;
                 }
@@ -436,7 +436,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             if (npc->duration != 0) {
                 if (npc->duration == 2) {
                     sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                    suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
+                    suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
                 }
                 break;
             }
@@ -454,7 +454,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             npc->duration = (2.0f * npc->jumpVelocity) / 0.6f;
             npc->moveSpeed = dist / npc->duration;
             npc->jumpVelocity += y / npc->duration;
-            suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
+            suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
             script->functionTemp[0]++;
             fx_rising_bubble(0, npc->pos.x, npc->moveToPos.y + (npc->collisionHeight * 0.5f), npc->pos.z, 0.0f);
             return 0;
@@ -470,7 +470,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             npc->jumpVelocity -= npc->jumpScale;
             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, npc->moveSpeed, npc->yaw);
             if (npc->jumpVelocity <= 0.0f) {
-                suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidair);
+                suggest_player_anim_allow_backward(ANIM_Mario1_Fall);
             }
             gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
@@ -480,7 +480,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                 set_action_state(ACTION_STATE_RIDE);
                 disable_player_shadow();
                 playerStatus->flags &= ~PS_FLAG_MOVEMENT_LOCKED;
-                suggest_player_anim_setUnkFlag(ANIM_Mario_8000F);
+                suggest_player_anim_always_forward(ANIM_MarioW2_RideSushie);
                 sfx_play_sound_at_npc(SOUND_2013, SOUND_SPACE_MODE_0, NPC_PARTNER);
                 playerStatus->position.x = npc->pos.x;
                 playerStatus->position.y = npc->pos.y;
@@ -599,7 +599,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                         npc->moveSpeed = dist / npc->duration;
                         npc->jumpVelocity += (npc->moveToPos.y - playerStatus->position.y) / npc->duration;
                         sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                        suggest_player_anim_clearUnkFlag(ANIM_Mario_BeforeJump);
+                        suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
                         enable_player_shadow();
                         playerStatus->flags |= PS_FLAG_MOVEMENT_LOCKED;
                         script->functionTemp[0] = 3;
@@ -608,12 +608,12 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             }
             break;
         case 3:
-            suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidairStill);
+            suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
             script->functionTemp[0]++;
             // fallthrough
         case 4:
             if (npc->jumpVelocity <= 0.0f) {
-                suggest_player_anim_clearUnkFlag(ANIM_Mario_AnimMidair);
+                suggest_player_anim_allow_backward(ANIM_Mario1_Fall);
                 script->functionTemp[0]++;
             }
             // fallthrough
@@ -621,7 +621,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             if (npc->jumpVelocity <= 0.0f) {
                 playerStatus->position.y = y = player_check_collision_below(npc->jumpVelocity, &collider);
                 if (collider > 0) {
-                    suggest_player_anim_clearUnkFlag(ANIM_Mario_10009);
+                    suggest_player_anim_allow_backward(ANIM_Mario1_Land);
                 }
             } else {
                 playerStatus->position.y += npc->jumpVelocity;
@@ -637,7 +637,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             }
             if (collider >= 0) {
                 playerStatus->flags &= ~PS_FLAG_MOVEMENT_LOCKED;
-                suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
+                suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
                 npc->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
                 dist = dist2D(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z) +
                             (playerStatus->colliderDiameter * 0.5f);
@@ -668,7 +668,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
                 partnerActionStatus->actingPartner = 0;
-                func_802DDFF8(ANIM_Mario_10002, 0, 0, 0, 0, 0, 0);
+                func_802DDFF8(ANIM_Mario1_Idle, 0, 0, 0, 0, 0, 0);
                 func_8003D624(npc, 0, 0, 0, 0, 0, 0);
                 return ApiStatus_DONE1;
             }
@@ -885,7 +885,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             if (script->varTable[12] == 0) {
                 partner_kill_ability_script();
             } else {
-                suggest_player_anim_setUnkFlag(ANIM_Mario_8000F);
+                suggest_player_anim_always_forward(ANIM_MarioW2_RideSushie);
                 if ((partnerNPC->yaw >= 0.0f) && (partnerNPC->yaw <= 180.0f)) {
                     partnerNPC->yawCamOffset = partnerNPC->yaw;
                     partnerNPC->isFacingAway = 1;

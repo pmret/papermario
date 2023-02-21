@@ -15,7 +15,7 @@ void action_update_knockback(void) {
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
 
-        suggest_player_anim_setUnkFlag(ANIM_Mario_FallBack);
+        suggest_player_anim_always_forward(ANIM_Mario1_Hurt);
 
         playerStatus->flags |= PS_FLAG_FLYING;
 

@@ -66,7 +66,7 @@ EvtScript N(EVS_UpdateEruption) = {
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 25, EVT_FLOAT(2.0))
         EVT_CALL(InterpPlayerYaw, 270, 0)
         EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
         EVT_EXEC(N(EVS_CrackFloor))
         EVT_CALL(MakeLerp, 200, 50, 75, EASING_LINEAR)
         EVT_LOOP(0)

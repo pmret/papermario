@@ -36,14 +36,14 @@ void action_update_land(void) {
         playerStatus->landPos.z = playerStatus->position.z;
 
         if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
-            anim = ANIM_Mario_90002;
+            anim = ANIM_MarioW3_8bit_Still;
         } else if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
-            anim = ANIM_Mario_10009;
+            anim = ANIM_Mario1_Land;
         } else {
-            anim = ANIM_Mario_6000B;
+            anim = ANIM_MarioW1_LandWatt;
         }
 
-        suggest_player_anim_clearUnkFlag(anim);
+        suggest_player_anim_allow_backward(anim);
         sfx_play_sound_at_player(SOUND_161 | SOUND_ID_STOP, SOUND_SPACE_MODE_0);
         sfx_play_sound_at_player(SOUND_SOFT_LAND, SOUND_SPACE_MODE_0);
 

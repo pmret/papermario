@@ -209,7 +209,7 @@ EvtScript N(EVS_Scene_Misstar) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_80000)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Carried)
     EVT_END_THREAD
     // fly out of the volcano shaft
     EVT_THREAD

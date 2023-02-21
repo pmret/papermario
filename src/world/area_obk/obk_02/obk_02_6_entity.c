@@ -29,11 +29,11 @@ EvtScript N(EVS_ChestTrap) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(2)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001F)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_FlailArms)
     EVT_WAIT(48)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_SET(GF_OBK02_TriggeredChestTrap, TRUE)
     EVT_WAIT(5)
     EVT_RETURN

@@ -437,7 +437,7 @@ EvtScript N(leechAttack) = {
         EVT_SET(LVarD, 0)
         EVT_LOOP(5)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000C)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Leeching)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Jungle_Bite)
             EVT_SET(LocalFlag(0), 0)

@@ -60,11 +60,11 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
     EVT_END_THREAD
     EVT_CALL(FadeOutMusic, 0, 500)
     EVT_LOOP(3)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001E)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_JoltAwake)
         EVT_CALL(PlaySoundAt, SOUND_20F6, SOUND_SPACE_MODE_0, 382, 0, 218)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
         EVT_WAIT(20)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_WAIT(10)
     EVT_END_LOOP
     EVT_LOOP(2)
@@ -82,7 +82,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
     EVT_CALL(SetNpcPos, NPC_PARTNER, 765, 0, 180)
     EVT_CALL(InterpPlayerYaw, 270, 0)
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_8000C)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_LookClosely)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LOOP(0)

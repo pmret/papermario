@@ -53,7 +53,7 @@ EvtScript N(EVS_OnInteract_WaterStoneSocket) = {
                 EVT_WAIT(10)
                 EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(1.0), 0, 450, EVT_FLOAT(25.0), EVT_FLOAT(-6.0))
                 EVT_WAIT(10)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario_60006)
+                EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_PlaceItem)
                 EVT_CALL(RemoveKeyItemAt, LVar1)
                 EVT_CALL(MakeItemEntity, ITEM_WATER_STONE, 0, -60, 6, ITEM_SPAWN_MODE_DECORATION, 0)
                 EVT_SET(LVarA, LVar0)

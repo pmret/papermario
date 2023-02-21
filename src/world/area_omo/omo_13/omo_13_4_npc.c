@@ -29,9 +29,9 @@ EvtScript N(EVS_NpcInteract_AntiGuy) = {
     EVT_IF_EQ(LVar0, -1)
         EVT_THREAD
             EVT_WAIT(10)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_80011)
+            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_TouchNose)
             EVT_WAIT(20)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_END_THREAD
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0046)
         EVT_CALL(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim13, ANIM_ShyGuy_Black_Anim01, 0)
@@ -56,9 +56,9 @@ EvtScript N(EVS_NpcInteract_AntiGuy) = {
         EVT_WAIT(30)
         EVT_CALL(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0)
         EVT_WAIT(15)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001E)
+        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_JoltAwake)
         EVT_WAIT(15)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
         EVT_WAIT(15)
         EVT_CALL(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0)
         EVT_SET(LVar0, EVT_PTR(N(BribeItemList)))

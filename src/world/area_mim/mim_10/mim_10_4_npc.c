@@ -87,10 +87,10 @@ EvtScript N(EVS_Bootler_SpookPlayer) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
     EVT_WAIT(5)
     EVT_CALL(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Spook, ANIM_Bootler_Spook, 0, MSG_CH3_0002)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -111,11 +111,11 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_SET(MV_Unk_00, TRUE)
     EVT_CALL(SetMusicTrack, 0, SONG_BOOS_MANSION, 0, 8)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80022)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_LookAround)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_WAIT(10)
     EVT_CALL(InterpPlayerYaw, 270, 0)
     EVT_WAIT(20)

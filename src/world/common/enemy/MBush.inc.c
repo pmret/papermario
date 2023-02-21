@@ -50,7 +50,7 @@ EvtScript N(EVS_NpcAI_MBush) = {
     EVT_WAIT(4)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim07)
     EVT_WAIT(2)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(StartBattle)

@@ -23,7 +23,7 @@ EvtScript N(EVS_SniffleHint) = {
 };
 
 EvtScript N(EVS_TossItemIntoWell) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_6000E)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_Toss)
     EVT_THREAD
         EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
         EVT_SET(LVar6, 35)
@@ -46,7 +46,7 @@ EvtScript N(EVS_TossItemIntoWell) = {
     EVT_WAIT(10)
     EVT_CALL(PlaySoundAt, SOUND_302, SOUND_SPACE_MODE_0, 35, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(10)
     EVT_RETURN
     EVT_END

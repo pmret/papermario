@@ -52,7 +52,7 @@ void N(appendGfx_FallingSprite)(void) {
     
     //TODO use SPR_RASTER_Mario8_XYZ here once they are defined
     if (!falling->animationEnabled) {
-        falling->playerSpriteID = SPR_Mario_8;
+        falling->playerSpriteID = SPR_MarioW2;
         animFrame = gGameStatusPtr->frameCounter % 4;
         if (animFrame == 0) {
             falling->rasterID = 37;
@@ -153,7 +153,7 @@ API_CALLABLE(N(InitializeFallingPartner)) {
 API_CALLABLE(N(InitializeGetUp)) {
     FallingSprite* falling = &N(Falling);
     
-    falling->playerSpriteID = SPR_Mario_1;
+    falling->playerSpriteID = SPR_Mario1;
     falling->rasterID = 0;
     return ApiStatus_DONE2;
 }
@@ -323,7 +323,7 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
     EVT_CALL(PlayerJump, LVar0, 0, LVar2, 10)
     EVT_WAIT(15)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_IF_LT(GB_StoryProgress, STORY_CH1_BOMBETTE_JOINED_PARTY)
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, 3)
@@ -341,9 +341,9 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
         EVT_CALL(SpeakToPlayer, NPC_Bombette, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_00D9)
         EVT_THREAD
             EVT_WAIT(5)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
+            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
             EVT_WAIT(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_END_THREAD
         EVT_CALL(EndSpeech, NPC_Bombette, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)

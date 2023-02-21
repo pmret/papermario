@@ -69,7 +69,7 @@ EvtScript N(EVS_CrushPlayer) = {
     EVT_END_THREAD
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_WAIT(8)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
     EVT_WAIT(13)
     EVT_CALL(GetPlayerPos, MV_KnockdownPosX, MV_KnockdownPosY, MV_KnockdownPosZ)
     EVT_CALL(N(KnockDownPlayerB), 1, 37)
@@ -92,7 +92,7 @@ EvtScript N(EVS_CrushPlayer) = {
 };
 
 EvtScript N(EVS_RestorePlayer) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(InterpPlayerYaw, 270, 0)
     EVT_WAIT(15)
     EVT_SUB(MV_KnockdownPosY, 3)
@@ -108,9 +108,9 @@ EvtScript N(EVS_RestorePlayer) = {
     EVT_CALL(N(KnockDownPlayerC))
     EVT_CALL(SetPlayerPos, MV_KnockdownPosX, MV_KnockdownPosY, MV_KnockdownPosZ)
     EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_90001)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW3_ShakeHeadHard)
     EVT_WAIT(25)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_RETURN

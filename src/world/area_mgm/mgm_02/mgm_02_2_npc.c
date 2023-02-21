@@ -481,7 +481,7 @@ API_CALLABLE(N(RunMinigame)) {
                     npc->duration = 8;
                     sfx_play_sound(enemy->varTable[8]);
                     data->box[i].state = BOX_STATE_FUZZY_ATTACH;
-                    gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
+                    gPlayerStatusPtr->anim = ANIM_Mario1_TiredStill;
                     npc->currentAnim = ANIM_Fuzzy_Run;
                     get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                     npc->pos.x = centerX;
@@ -506,11 +506,11 @@ API_CALLABLE(N(RunMinigame)) {
                     npc->pos.x = update_lerp(EASING_LINEAR, (f32)enemy->varTable[1] / 10.0, (f32)enemy->varTable[4] / 10.0, enemy->varTable[7], 8);
                     npc->pos.y = update_lerp(EASING_LINEAR, (f32)enemy->varTable[2] / 10.0, (f32)enemy->varTable[5] / 10.0, enemy->varTable[7], 8);
                     npc->pos.z = update_lerp(EASING_LINEAR, (f32)enemy->varTable[3] / 10.0, (f32)enemy->varTable[6] / 10.0, enemy->varTable[7], 8);
-                    gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
+                    gPlayerStatusPtr->anim = ANIM_Mario1_TiredStill;
                     npc->duration--;
                     if (npc->duration <= 0) {
                         npc->currentAnim = ANIM_Fuzzy_Stunned;
-                        gPlayerStatusPtr->anim = ANIM_Mario_RunPanic;
+                        gPlayerStatusPtr->anim = ANIM_Mario1_PanicRun;
                         data->mashProgress = 0;
                         npc->pos.x = gPlayerStatusPtr->position.x;
                         npc->pos.y = gPlayerStatusPtr->position.y + 28.0;
@@ -522,12 +522,12 @@ API_CALLABLE(N(RunMinigame)) {
                     }
                     break;
                 case BOX_STATE_FUZZY_GRAB:
-                    gPlayerStatusPtr->anim = ANIM_Mario_RunPanic;
+                    gPlayerStatusPtr->anim = ANIM_Mario1_PanicRun;
                     if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
                         data->mashProgress++;
                     }
                     if (data->mashProgress >= 12) {
-                        gPlayerStatusPtr->anim = ANIM_Mario_10002;
+                        gPlayerStatusPtr->anim = ANIM_Mario1_Idle;
                         data->stunFlags &= ~STUN_FLAG_STUNNED;
                         data->stunFlags |= STUN_FLAG_CHANGED;
                         data->box[i].state = BOX_STATE_FUZZY_DETACH;
@@ -616,7 +616,7 @@ API_CALLABLE(N(RunMinigame)) {
                         gPlayerStatusPtr->targetYaw = 265.0f;
                     }
                     // rest of case could simply use fallthough, but wouldnt match
-                    gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
+                    gPlayerStatusPtr->anim = ANIM_Mario1_TiredStill;
                     npc->duration--;
                     if (npc->duration <= 0) {
                         fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
@@ -627,7 +627,7 @@ API_CALLABLE(N(RunMinigame)) {
                     }
                     break;
                 case BOX_STATE_BOMB_ATTACK:
-                    gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
+                    gPlayerStatusPtr->anim = ANIM_Mario1_TiredStill;
                     npc->duration--;
                     if (npc->duration <= 0) {
                         fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
@@ -640,10 +640,10 @@ API_CALLABLE(N(RunMinigame)) {
                 case BOX_STATE_BOMB_STUN:
                     npc->duration--;
                     if (npc->duration == 25) {
-                        gPlayerStatusPtr->anim = ANIM_Mario_Charred;
+                        gPlayerStatusPtr->anim = ANIM_Mario1_Burnt;
                     }
                     if (npc->duration <= 0) {
-                        gPlayerStatusPtr->anim = ANIM_Mario_10002;
+                        gPlayerStatusPtr->anim = ANIM_Mario1_Idle;
                         data->stunFlags &= ~STUN_FLAG_STUNNED;
                         data->stunFlags |= STUN_FLAG_CHANGED;
                         data->box[i].state = BOX_STATE_BOMB_DONE;
@@ -814,10 +814,10 @@ API_CALLABLE(N(RunMinigame)) {
         gPlayerStatusPtr->targetYaw = 180.0;
         if (data->timeLeft == 0) {
             sfx_play_sound(SOUND_MENU_ERROR);
-            gPlayerStatusPtr->anim = ANIM_Mario_10002;
+            gPlayerStatusPtr->anim = ANIM_Mario1_Idle;
         } else {
             sfx_play_sound(SOUND_D4);
-            gPlayerStatusPtr->anim = ANIM_Mario_10002;
+            gPlayerStatusPtr->anim = ANIM_Mario1_Idle;
         }
 
         return ApiStatus_DONE2;

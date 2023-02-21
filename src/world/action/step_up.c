@@ -38,11 +38,11 @@ void action_update_step_up(void) {
         phys_adjust_cam_on_landing();
         if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
             if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
-                anim = ANIM_Mario_Walking;
+                anim = ANIM_Mario1_Walk;
             } else {
-                anim = ANIM_Mario_60000;
+                anim = ANIM_MarioW1_Carry;
             }
-            suggest_player_anim_clearUnkFlag(anim);
+            suggest_player_anim_allow_backward(anim);
         } else {
             func_802B6198_E24768();
         }
@@ -79,9 +79,9 @@ void action_update_step_up(void) {
 void func_802B6198_E24768(void) {
     if (!(gPlayerStatus.animFlags & PA_FLAG_INVISIBLE)) {
         if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DEPRESSED)) {
-            suggest_player_anim_clearUnkFlag(StepUpPeachAnims[gGameStatusPtr->peachBakingIngredient]);
+            suggest_player_anim_allow_backward(StepUpPeachAnims[gGameStatusPtr->peachBakingIngredient]);
         } else {
-            suggest_player_anim_clearUnkFlag(ANIM_Peach_D000D);
+            suggest_player_anim_allow_backward(ANIM_Peach_D000D);
         }
     } else {
         peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].walk);
@@ -93,7 +93,7 @@ void action_update_step_up_peach(void) {
 
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
-        suggest_player_anim_clearUnkFlag(ANIM_Peach_A0005);
+        suggest_player_anim_allow_backward(ANIM_Peach_A0005);
         playerStatus->currentStateTime = 8;
     }
 

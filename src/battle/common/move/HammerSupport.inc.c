@@ -14,7 +14,7 @@ EvtScript N(EVS_HammerSupport_A) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     EVT_CALL(PlayerRunToGoal, 0)
     EVT_RETURN
     EVT_END
@@ -24,7 +24,7 @@ EvtScript N(EVS_HammerSupport_B) = {
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, -33, 0, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     EVT_CALL(PlayerRunToGoal, 0)
     EVT_RETURN
     EVT_END
@@ -37,14 +37,14 @@ EvtScript N(EVS_HammerSupport_C) = {
     EVT_LOOP(10)
         EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
         EVT_IF_EQ(LVar0, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
         EVT_ADD(LVar1, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000D)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Begin)
     EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000D)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Begin)
     EVT_SWITCH(LVar1)
         EVT_CASE_LT(3)
             EVT_WAIT(4)
@@ -68,14 +68,14 @@ EvtScript N(EVS_HammerSupport_D) = {
     EVT_LOOP(10)
         EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
         EVT_IF_EQ(LVar0, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
         EVT_ADD(LVar1, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30014)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_Begin)
     EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30014)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_Begin)
     EVT_SWITCH(LVar1)
         EVT_CASE_LT(3)
             EVT_WAIT(4)
@@ -99,14 +99,14 @@ EvtScript N(EVS_HammerSupport_E) = {
     EVT_LOOP(10)
         EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
         EVT_IF_EQ(LVar0, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
         EVT_ADD(LVar1, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001B)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_Begin)
     EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001B)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_Begin)
     EVT_SWITCH(LVar1)
         EVT_CASE_LT(3)
             EVT_WAIT(4)
@@ -128,18 +128,18 @@ EvtScript N(EVS_HammerSupport_F) = {
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000E)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_PullBack)
     EVT_WAIT(4)
     EVT_CALL(action_command_hammer_start, 0, 36, 3)
     EVT_CALL(SetActionResult, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000F)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Hold1)
     EVT_SET(LVar1, 0)
     EVT_LOOP(30)
         EVT_WAIT(1)
         EVT_CALL(GetActionResult, LVar0)
         EVT_IF_NE(LVar0, 0)
             EVT_IF_NE(LVar1, 1)
-                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30010)
+                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Hold2)
                 EVT_SET(LVar1, 1)
             EVT_END_IF
         EVT_END_IF
@@ -154,9 +154,9 @@ EvtScript N(EVS_HammerSupport_F) = {
         EVT_IF_EQ(LVar0, TRUE)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30011)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_PreSwing)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30012)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Swing)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
     EVT_RETURN
     EVT_END
@@ -169,13 +169,13 @@ EvtScript N(EVS_Hammer_ReturnHome_A) = {
     EVT_CALL(func_802693F0)
     EVT_WAIT(20)
     EVT_CALL(EnablePlayerBlur, -1)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(5)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -185,13 +185,13 @@ EvtScript N(EVS_Hammer_ReturnHome_B) = {
     EVT_CALL(func_802693F0)
     EVT_WAIT(20)
     EVT_CALL(EnablePlayerBlur, -1)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(5)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -202,13 +202,13 @@ EvtScript N(EVS_Hammer_ReturnHome_C) = {
     EVT_CALL(func_802693F0)
     EVT_WAIT(20)
     EVT_CALL(EnablePlayerBlur, -1)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(5)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -225,11 +225,11 @@ EvtScript N(EVS_UseBasicHammer) = {
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000E)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_PullBack)
     EVT_WAIT(4)
     EVT_CALL(N(IsBerserkerEquipped))
     EVT_IF_NE(LVar0, HIT_RESULT_HIT)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000F)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Hold1)
         EVT_CALL(GetActionCommandMode, LVar0)
         EVT_IF_LT(LVar0, 2)
             EVT_CALL(N(ShouldMovesAutoSucceed))
@@ -252,7 +252,7 @@ EvtScript N(EVS_UseBasicHammer) = {
             EVT_CALL(GetActionResult, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_IF_NE(LVar1, 1)
-                    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30010)
+                    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Hold2)
                     EVT_SET(LVar1, 1)
                 EVT_END_IF
             EVT_END_IF
@@ -273,10 +273,10 @@ EvtScript N(EVS_UseBasicHammer) = {
     EVT_ELSE
         EVT_CALL(action_command_hammer_start, 0, LVar1, 3)
         EVT_CALL(SetActionResult, 0)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000F)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Hold1)
         EVT_SUB(LVar1, 10)
         EVT_WAIT(LVar1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30010)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Hold2)
         EVT_WAIT(5)
     EVT_END_IF
     EVT_CALL(GetActionCommandMode, LVar0)
@@ -290,10 +290,10 @@ EvtScript N(EVS_UseBasicHammer) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30011)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_PreSwing)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2115)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30012)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Swing)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2118)
     EVT_RETURN
     EVT_END
@@ -311,11 +311,11 @@ EvtScript N(EVS_UseSuperHammer) = {
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30015)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_PullBack)
     EVT_WAIT(4)
     EVT_CALL(N(IsBerserkerEquipped))
     EVT_IF_EQ(LVar0, TRUE)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30016)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_Hold1)
         EVT_CALL(N(ShouldMovesAutoSucceed))
         EVT_IF_EQ(LVar0, HIT_RESULT_HIT)
             EVT_LOOP(45)
@@ -335,7 +335,7 @@ EvtScript N(EVS_UseSuperHammer) = {
             EVT_CALL(GetActionResult, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_IF_NE(LVar1, 1)
-                    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30017)
+                    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_Hold2)
                     EVT_SET(LVar1, 1)
                 EVT_END_IF
             EVT_END_IF
@@ -353,16 +353,16 @@ EvtScript N(EVS_UseSuperHammer) = {
     EVT_ELSE
         EVT_CALL(action_command_hammer_start, 0, LVar1, 3)
         EVT_CALL(SetActionResult, 0)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30016)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_Hold1)
         EVT_SUB(LVar1, 10)
         EVT_WAIT(LVar1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30017)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_Hold2)
         EVT_WAIT(5)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30018)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_PreSwing)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2116)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30019)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_Swing)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2119)
     EVT_RETURN
     EVT_END
@@ -380,11 +380,11 @@ EvtScript N(EVS_UseUltraHammer) = {
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001C)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_PullBack)
     EVT_WAIT(4)
     EVT_CALL(N(IsBerserkerEquipped))
     EVT_IF_EQ(LVar0, TRUE)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001D)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_Hold1)
         EVT_CALL(N(ShouldMovesAutoSucceed))
         EVT_IF_EQ(LVar0, HIT_RESULT_HIT)
             EVT_LOOP(45)
@@ -404,7 +404,7 @@ EvtScript N(EVS_UseUltraHammer) = {
             EVT_CALL(GetActionResult, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_IF_NE(LVar1, 1)
-                    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001E)
+                    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_Hold2)
                     EVT_SET(LVar1, 1)
                 EVT_END_IF
             EVT_END_IF
@@ -422,16 +422,16 @@ EvtScript N(EVS_UseUltraHammer) = {
     EVT_ELSE
         EVT_CALL(action_command_hammer_start, 0, LVar1, 3)
         EVT_CALL(SetActionResult, 0)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001D)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_Hold1)
         EVT_SUB(LVar1, 10)
         EVT_WAIT(LVar1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001E)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_Hold2)
         EVT_WAIT(5)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001F)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_PreSwing)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2117)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30020)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_Swing)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_211A)
     EVT_RETURN
     EVT_END
@@ -449,9 +449,9 @@ EvtScript N(EVS_Hammer_UseBasicQuake) = {
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000E)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_PullBack)
     EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000F)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Hold1)
     EVT_CALL(N(ShouldMovesAutoSucceed))
     EVT_IF_EQ(LVar0, 0)
         EVT_LOOP(45)
@@ -471,7 +471,7 @@ EvtScript N(EVS_Hammer_UseBasicQuake) = {
         EVT_CALL(GetActionResult, LVar0)
         EVT_IF_NE(LVar0, 0)
             EVT_IF_NE(LVar1, 1)
-                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30010)
+                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Hold2)
                 EVT_SET(LVar1, 1)
             EVT_END_IF
         EVT_END_IF
@@ -487,9 +487,9 @@ EvtScript N(EVS_Hammer_UseBasicQuake) = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2115)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30011)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_PreSwing)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30012)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Swing)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2118)
     EVT_RETURN
     EVT_END
@@ -507,9 +507,9 @@ EvtScript N(EVS_Hammer_UseSuperQuake) = {
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30015)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_PullBack)
     EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30016)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_Hold1)
     EVT_CALL(N(ShouldMovesAutoSucceed))
     EVT_IF_EQ(LVar0, 0)
         EVT_LOOP(45)
@@ -536,9 +536,9 @@ EvtScript N(EVS_Hammer_UseSuperQuake) = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2116)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30018)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_PreSwing)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30019)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_Swing)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2119)
     EVT_RETURN
     EVT_END
@@ -556,9 +556,9 @@ EvtScript N(EVS_Hammer_UseUltraQuake) = {
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001C)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_PullBack)
     EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001D)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_Hold1)
     EVT_CALL(N(ShouldMovesAutoSucceed))
     EVT_IF_EQ(LVar0, 0)
         EVT_LOOP(45)
@@ -585,9 +585,9 @@ EvtScript N(EVS_Hammer_UseUltraQuake) = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2117)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001F)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_PreSwing)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30020)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_Swing)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_211A)
     EVT_RETURN
     EVT_END

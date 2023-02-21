@@ -79,18 +79,18 @@ void action_update_spin(void) {
         }
 
         effectType = -1;
-        anim = ANIM_Mario_10010;
+        anim = ANIM_Mario1_Spin;
 
         if (spinFlags) {
             if (spinFlags & SPIN_TYPE_ATTACK) {
                 effectType = 2;
-                anim = ANIM_Mario_Flailing;
+                anim = ANIM_Mario1_SpinAttack;
             } else if (spinFlags & SPIN_TYPE_DIZZY) {
                 effectType = 4;
-                anim = ANIM_Mario_10010;
+                anim = ANIM_Mario1_Spin;
             } else if (spinFlags & SPIN_TYPE_SPEEDY) {
                 effectType = 0;
-                anim = ANIM_Mario_Spinning;
+                anim = ANIM_Mario1_SpeedySpin;
             }
         }
 
@@ -108,7 +108,7 @@ void action_update_spin(void) {
         }
 
         sfx_play_sound_at_player(playerSpinState->spinSoundID, SOUND_SPACE_MODE_0);
-        suggest_player_anim_setUnkFlag(anim);
+        suggest_player_anim_always_forward(anim);
 
         if ((clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw) <= 180.0f)) {
             playerStatus->spinRate = playerSpinState->spinRate;
@@ -256,21 +256,21 @@ void action_update_spin(void) {
             playerStatus->currentStateTime = 2;
             playerStatus->actionSubstate = SUBSTATE_SPIN_2;
             playerStatus->flags &= ~PS_FLAG_SPINNING;
-            suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
+            suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
         } else if (angle < playerStatus->spriteFacingAngle) {
             if (playerStatus->spriteFacingAngle >= 180.0f && angle < 180.0f) {
                 playerStatus->spriteFacingAngle = 180.0f;
                 playerStatus->currentStateTime = 2;
                 playerStatus->actionSubstate = SUBSTATE_SPIN_2;
                 playerStatus->flags &= ~PS_FLAG_SPINNING;
-                suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
+                suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
             }
         } else if (playerStatus->spriteFacingAngle <= 0.0f && angle < 90.0f) {
             playerStatus->spriteFacingAngle = 0.0f;
             playerStatus->currentStateTime = 2;
             playerStatus->actionSubstate = SUBSTATE_SPIN_2;
             playerStatus->flags &= ~PS_FLAG_SPINNING;
-            suggest_player_anim_clearUnkFlag(ANIM_Mario_10002);
+            suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
         }
         playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle);
     }

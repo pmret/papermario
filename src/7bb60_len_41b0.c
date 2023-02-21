@@ -152,11 +152,11 @@ void handle_switch_hit(void) {
         playerStatus->position.y = groundPosY;
         if (colliderID >= 0) {
             if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
-                anim = ANIM_Mario_10009;
+                anim = ANIM_Mario1_Land;
             } else {
-                anim = ANIM_Mario_6000B;
+                anim = ANIM_MarioW1_LandWatt;
             }
-            suggest_player_anim_clearUnkFlag(anim);
+            suggest_player_anim_allow_backward(anim);
             enable_player_input();
             phys_player_land();
         }

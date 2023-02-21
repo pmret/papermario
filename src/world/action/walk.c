@@ -52,15 +52,15 @@ void action_update_walk(void) {
         }
 
         if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
-            anim = ANIM_Mario_90003;
+            anim = ANIM_MarioW3_8bit_Run;
         }
         else if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
-            anim = ANIM_Mario_Walking;
+            anim = ANIM_Mario1_Walk;
         }
         else {
-            anim = ANIM_Mario_60000;
+            anim = ANIM_MarioW1_Carry;
         }
-        suggest_player_anim_clearUnkFlag(anim);
+        suggest_player_anim_allow_backward(anim);
     }
 
     if (playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT) {
@@ -137,15 +137,15 @@ void action_update_run(void) {
             playerStatus->currentSpeed = playerStatus->runSpeed;
         }
         if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
-            anim = ANIM_Mario_90003;
+            anim = ANIM_MarioW3_8bit_Run;
         } else {
             if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
-                anim = ANIM_Mario_Running;
+                anim = ANIM_Mario1_Run;
             } else {
-                anim = ANIM_Mario_60002;
+                anim = ANIM_MarioW1_CarryRun;
             }
         }
-        suggest_player_anim_clearUnkFlag(anim);
+        suggest_player_anim_allow_backward(anim);
     }
 
     if (playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT) {
@@ -207,10 +207,10 @@ void action_update_run(void) {
 void func_802B6550_E23C30(void) {
     if (!(gPlayerStatus.animFlags & PA_FLAG_INVISIBLE)) {
         if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DEPRESSED)) {
-            suggest_player_anim_clearUnkFlag(WalkPeachAnims[gGameStatusPtr->peachBakingIngredient]);
+            suggest_player_anim_allow_backward(WalkPeachAnims[gGameStatusPtr->peachBakingIngredient]);
             return;
         }
-        suggest_player_anim_clearUnkFlag(ANIM_Peach_D000D);
+        suggest_player_anim_allow_backward(ANIM_Peach_D000D);
         return;
     }
     peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].walk);
@@ -269,12 +269,12 @@ static void action_update_run_peach(void) {
             gameStatus = gGameStatusPtr;
             if (!(gameStatus->peachFlags & PEACH_STATUS_FLAG_DEPRESSED)) {
                 if (!gameStatus->peachBakingIngredient) {
-                    suggest_player_anim_clearUnkFlag(ANIM_Peach_A0003);
+                    suggest_player_anim_allow_backward(ANIM_Peach_A0003);
                 } else {
-                    suggest_player_anim_clearUnkFlag(WalkPeachAnims[gameStatus->peachBakingIngredient]);
+                    suggest_player_anim_allow_backward(WalkPeachAnims[gameStatus->peachBakingIngredient]);
                 }
             } else {
-                suggest_player_anim_clearUnkFlag(ANIM_Peach_D000D);
+                suggest_player_anim_allow_backward(ANIM_Peach_D000D);
             }
         } else {
             peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].run);

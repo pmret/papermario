@@ -6,7 +6,7 @@ EvtScript N(UseItemWithEffect) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
         EVT_WAIT(10)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208D)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GotItem)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 18)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
@@ -27,7 +27,7 @@ EvtScript N(UseItemWithEffect) = {
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208D)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GotItem)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
         EVT_WAIT(4)
         EVT_ADD(LVar1, 45)
         EVT_SET(LVar3, LVar1)
@@ -50,7 +50,7 @@ EvtScript N(UseItem) = {
     EVT_CALL(SetBattleCamZoom, 248)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GotItem)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 45)
     EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_DECORATION, 0)
@@ -68,9 +68,9 @@ EvtScript N(PlayerGoHome) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_RETURN
     EVT_END
@@ -83,7 +83,7 @@ EvtScript N(EatItem) = {
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Eat)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Eat)
     EVT_WAIT(45)
     EVT_RETURN
     EVT_END
@@ -96,7 +96,7 @@ EvtScript N(DrinkItem) = {
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Drink)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Drink)
     EVT_WAIT(45)
     EVT_RETURN
     EVT_END

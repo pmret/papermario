@@ -156,7 +156,7 @@ void action_update_first_strike(void) {
         playerStatus->peakJumpTime = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
-        suggest_player_anim_setUnkFlag(ANIM_Mario_FallBack);
+        suggest_player_anim_always_forward(ANIM_Mario1_Hurt);
         playerStatus->currentStateTime = 30;
     }
 
@@ -177,7 +177,7 @@ void action_update_raise_arms(void) {
         playerStatus->actionSubstate = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
-        suggest_player_anim_setUnkFlag(ANIM_Mario_GotItem);
+        suggest_player_anim_always_forward(ANIM_Mario1_UsePower);
     }
 
     if (!(playerStatus->animFlags & PA_FLAG_RAISED_ARMS)) {
@@ -200,9 +200,9 @@ void action_update_pushing_block(void) {
         player_input_to_move_vector(&angle, &magnitude);
 
         if (((angle >= 45.0f) && (angle <= 135.0f)) || ((angle >= 225.0f) && (angle <= 315.0f))) {
-            suggest_player_anim_setUnkFlag(ANIM_Mario_80020);
+            suggest_player_anim_always_forward(ANIM_MarioW2_PushSide);
         } else {
-            suggest_player_anim_clearUnkFlag(ANIM_Mario_60004);
+            suggest_player_anim_allow_backward(ANIM_MarioW1_PushToward);
         }
     }
 
@@ -227,10 +227,10 @@ void action_update_talk(void) {
         playerStatus->unk_60 = 0;
 
         if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
-            suggest_player_anim_setUnkFlag(ANIM_Mario_80007);
+            suggest_player_anim_always_forward(ANIM_MarioW2_SpeakUp);
         } else if (playerStatus->peachItemHeld == 0) {
             if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
-                suggest_player_anim_setUnkFlag(ANIM_Peach_C0000);
+                suggest_player_anim_always_forward(ANIM_Peach_C0000);
             } else {
                 peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].talk);
             }
@@ -243,7 +243,7 @@ void action_update_talk(void) {
             playerStatus->currentStateTime--;
         } else if (playerStatus->peachItemHeld == 0) {
             if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
-                suggest_player_anim_setUnkFlag(ANIM_Peach_A0001);
+                suggest_player_anim_always_forward(ANIM_Peach_A0001);
             } else {
                 peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].idle);
             }

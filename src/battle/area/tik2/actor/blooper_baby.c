@@ -477,7 +477,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(action_command_stop_leech_start, 0, 32767, 3)
     EVT_LOOP(5)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000C)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Leeching)
         EVT_SET(LocalFlag(0), 0)
         EVT_LOOP(10)
             EVT_CALL(GetActionSuccessCopy, LVar1)

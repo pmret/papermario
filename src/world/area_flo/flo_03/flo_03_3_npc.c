@@ -153,7 +153,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             EVT_EXEC_WAIT(N(EVS_FocusCamBetween))
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0050)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Petunia_Angry)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
             EVT_WAIT(20)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0051)
             EVT_CALL(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim12)

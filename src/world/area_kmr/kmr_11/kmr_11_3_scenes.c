@@ -176,14 +176,14 @@ EvtScript N(EVS_FortressCollapse_PlayFX) = {
 EvtScript N(EVS_FortressCollapse_PlayerReactions) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_WAIT(37)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001F)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_FlailArms)
     EVT_WAIT(60)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.8))
     EVT_CALL(PlayerJump1, LVar0, LVar1, LVar2, 10)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_Running)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Run)
     EVT_CALL(SetPlayerSpeed, EVT_FLOAT(6.0))
     EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(6.0))
     EVT_THREAD
@@ -191,7 +191,7 @@ EvtScript N(EVS_FortressCollapse_PlayerReactions) = {
     EVT_END_THREAD
     EVT_CALL(PlayerMoveTo, -547, 147, 0)
     EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(EnablePartnerAI)
     EVT_WAIT(100)
     EVT_RETURN
@@ -240,7 +240,7 @@ EvtScript N(EVS_Scene_SelfDestruct) = {
     EVT_END_LOOP
     EVT_CALL(SetNpcPos, NPC_GoombaKing, -303, 286, -120)
     EVT_CALL(FadeOutMusic, 0, 1000)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_ShockStill)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_VacantStare)
     EVT_WAIT(30)
     EVT_KILL_THREAD(LVarA)
     EVT_THREAD

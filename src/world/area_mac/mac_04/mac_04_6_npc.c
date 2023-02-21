@@ -44,9 +44,9 @@ EvtScript N(EVS_TossTrainInToybox) = {
         EVT_END_LOOP
         EVT_CALL(RemoveItemEntity, LVar7)
     EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_60005)
+    EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(10)
     EVT_RETURN
     EVT_END

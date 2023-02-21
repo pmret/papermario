@@ -149,7 +149,7 @@ EvtScript N(EVS_KoloradoBurned_PlayerReaction) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002A)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetNpcPos, NPC_Kolorado, LVar0, LVar1, LVar2)
@@ -157,7 +157,7 @@ EvtScript N(EVS_KoloradoBurned_PlayerReaction) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -244,9 +244,9 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                 EVT_CALL(SetMusicTrack, 0, SONG_VOLCANO_ESCAPE, 0, 8)
                 EVT_WAIT(20)
                 EVT_THREAD
-                    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+                    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
                     EVT_WAIT(60)
-                    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+                    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
                 EVT_END_THREAD
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Yell)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_010D)

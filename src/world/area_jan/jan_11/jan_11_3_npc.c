@@ -62,7 +62,7 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
     EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Green_SadTalk, ANIM_YoshiKid_Green_SadIdle, 0, MSG_CH5_00AE)
     EVT_CALL(EndSpeech, NPC_SELF, ANIM_YoshiKid_Green_Talk, ANIM_YoshiKid_Green_Idle, 0)
@@ -84,10 +84,10 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
     EVT_IF_EQ(LVar0, 5)
         EVT_CALL(SetMusicTrack, 0, SONG_YOSHI_KIDS_FOUND, 0, 8)
         EVT_SET(GB_StoryProgress, STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_ThumbsUp)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_ThumbsUp)
         EVT_WAIT(120)
         EVT_EXEC(N(EVS_SetupMusic))
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_ELSE
         EVT_WAIT(35)
     EVT_END_IF

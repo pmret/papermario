@@ -18,7 +18,7 @@ EvtScript N(EVS_NpcAI_HurtPlant) = {
     EVT_WAIT(15)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_209A, 0)
     EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
     EVT_WAIT(5)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HurtPlant_Anim02)
     EVT_CALL(DisablePlayerInput, FALSE)
