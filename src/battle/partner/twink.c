@@ -146,19 +146,19 @@ EvtScript N(handleEvent) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach_C0005)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach2_Gasp)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Twink_Hurt)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach_A0002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach1_Walk)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach_C0005)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach2_Gasp)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Twink_Angry)
             EVT_EXEC_WAIT(DoImmune)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach_A0002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach1_Walk)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)

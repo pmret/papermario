@@ -230,7 +230,7 @@ void action_update_talk(void) {
             suggest_player_anim_always_forward(ANIM_MarioW2_SpeakUp);
         } else if (playerStatus->peachItemHeld == 0) {
             if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
-                suggest_player_anim_always_forward(ANIM_Peach_C0000);
+                suggest_player_anim_always_forward(ANIM_Peach2_RaiseArms);
             } else {
                 peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].talk);
             }
@@ -243,7 +243,7 @@ void action_update_talk(void) {
             playerStatus->currentStateTime--;
         } else if (playerStatus->peachItemHeld == 0) {
             if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
-                suggest_player_anim_always_forward(ANIM_Peach_A0001);
+                suggest_player_anim_always_forward(ANIM_Peach1_Idle);
             } else {
                 peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].idle);
             }

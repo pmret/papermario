@@ -162,7 +162,7 @@ EvtScript N(EVS_NpcInit_Peach) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Peach)))
     EVT_CALL(SetNpcYaw, NPC_SELF, 90)
     EVT_CALL(SetNpcPos, NPC_Peach, 278, 50, -253)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach_C001E)
+    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach2_TiedIdle)
     EVT_RETURN
     EVT_END
 };

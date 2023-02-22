@@ -4550,14 +4550,14 @@ void btl_state_update_peach_menu(void) {
             gBattleSubState = BTL_SUBSTATE_PEACH_MENU_CHOOSE_CATEGORY;
             break;
         case BTL_SUBSTATE_PEACH_MENU_CHOOSE_CATEGORY:
-            set_animation(ACTOR_PLAYER, 0, ANIM_Peach_C0009);
+            set_animation(ACTOR_PLAYER, 0, ANIM_Peach2_Delighted);
             selectedOption = btl_main_menu_update();
             if (D_802ACC60 != 0) {
                 D_802ACC60--;
                 break;
             }
             if (selectedOption != 0) {
-                set_animation(ACTOR_PLAYER, 0, ANIM_Peach_A0002);
+                set_animation(ACTOR_PLAYER, 0, ANIM_Peach1_Walk);
                 battleStatus->currentSubmenu = battle_menu_submenuIDs[selectedOption - 1];
                 func_802A1030();
                 D_802ACC60 = 8;

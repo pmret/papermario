@@ -2,25 +2,25 @@
 #include "world/actions.h"
 
 AnimID StepUpPeachAnims[] = {
-    ANIM_Peach_A0002, // none
-    ANIM_Peach_A002B, // cream
-    ANIM_Peach_A002D, // strawberry
-    ANIM_Peach_A002F, // butter
-    ANIM_Peach_A0031, // cleanser
-    ANIM_Peach_A0033, // water
-    ANIM_Peach_A0035, // milk
-    ANIM_Peach_A0037, // flour
-    ANIM_Peach_A0039, // egg
-    ANIM_Peach_A003B, // complete cake
-    ANIM_Peach_A003D, // cake bowl
-    ANIM_Peach_A003F, // cake mixed
-    ANIM_Peach_A0041, // cake pan
-    ANIM_Peach_A0043, // cake batter
-    ANIM_Peach_A0045, // cake bare
-    ANIM_Peach_A0047, // salt
-    ANIM_Peach_A0049, // sugar
-    ANIM_Peach_A004B, // cake with icing
-    ANIM_Peach_A004D, // cake with berries
+    ANIM_Peach1_Walk, // none
+    ANIM_Peach1_CarryCream, // cream
+    ANIM_Peach1_CarryStrawberry, // strawberry
+    ANIM_Peach1_CarryButter, // butter
+    ANIM_Peach1_CarryCleanser, // cleanser
+    ANIM_Peach1_CarryWater, // water
+    ANIM_Peach1_CarryMilk, // milk
+    ANIM_Peach1_CarryFlour, // flour
+    ANIM_Peach1_CarryEgg, // egg
+    ANIM_Peach1_CarryCompleteCake, // complete cake
+    ANIM_Peach1_CarryCakeBowl, // cake bowl
+    ANIM_Peach1_CarryCakeMixed, // cake mixed
+    ANIM_Peach1_CarryCakePan, // cake pan
+    ANIM_Peach1_CarryCakeBatter, // cake batter
+    ANIM_Peach1_CarryBareCake, // cake bare
+    ANIM_Peach1_CarrySalt, // salt
+    ANIM_Peach1_CarrySugar, // sugar
+    ANIM_Peach1_CarryIcingCake, // cake with icing
+    ANIM_Peach1_CarryBerryCake, // cake with berries
     0x00000000
 };
 
@@ -81,7 +81,7 @@ void func_802B6198_E24768(void) {
         if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DEPRESSED)) {
             suggest_player_anim_allow_backward(StepUpPeachAnims[gGameStatusPtr->peachBakingIngredient]);
         } else {
-            suggest_player_anim_allow_backward(ANIM_Peach_D000D);
+            suggest_player_anim_allow_backward(ANIM_Peach3_WalkSad);
         }
     } else {
         peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].walk);
@@ -93,7 +93,7 @@ void action_update_step_up_peach(void) {
 
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
-        suggest_player_anim_allow_backward(ANIM_Peach_A0005);
+        suggest_player_anim_allow_backward(ANIM_Peach1_StepUp);
         playerStatus->currentStateTime = 8;
     }
 

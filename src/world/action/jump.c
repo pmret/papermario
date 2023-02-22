@@ -186,7 +186,7 @@ void action_update_peach_falling(void) {
         if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
             anim = ANIM_Mario1_Fall;
         } else {
-            anim = ANIM_Peach_A0006;
+            anim = ANIM_Peach1_StepDown;
         }
 
         suggest_player_anim_allow_backward(anim);
@@ -205,7 +205,7 @@ void action_update_peach_step_down(void) {
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
 
         if (playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS) {
-            suggest_player_anim_allow_backward(ANIM_Peach_A0006);
+            suggest_player_anim_allow_backward(ANIM_Peach1_StepDown);
         }
     }
     playerStatus->timeInAir++;

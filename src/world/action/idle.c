@@ -2,25 +2,25 @@
 #include "../actions.h"
 
 AnimID IdlePeachAnims[] = {
-    ANIM_Peach_A0001, // none
-    ANIM_Peach_A0007, // cream
-    ANIM_Peach_A0009, // strawberry
-    ANIM_Peach_A000B, // butter
-    ANIM_Peach_A000D, // cleanser
-    ANIM_Peach_A000F, // water
-    ANIM_Peach_A0011, // milk
-    ANIM_Peach_A0013, // flour
-    ANIM_Peach_A0015, // egg
-    ANIM_Peach_A0017, // complete cake
-    ANIM_Peach_A0019, // cake bowl
-    ANIM_Peach_A001B, // cake mixed
-    ANIM_Peach_A001D, // cake pan
-    ANIM_Peach_A001F, // cake batter
-    ANIM_Peach_A0021, // cake bare
-    ANIM_Peach_A0023, // salt
-    ANIM_Peach_A0025, // sugar
-    ANIM_Peach_A0027, // cake with icing
-    ANIM_Peach_A0029, // cake with berries
+    ANIM_Peach1_Idle, // none
+    ANIM_Peach1_HoldCream, // cream
+    ANIM_Peach1_HoldStrawberry, // strawberry
+    ANIM_Peach1_HoldButter, // butter
+    ANIM_Peach1_HoldCleanser, // cleanser
+    ANIM_Peach1_HoldWater, // water
+    ANIM_Peach1_HoldMilk, // milk
+    ANIM_Peach1_HoldFlour, // flour
+    ANIM_Peach1_HoldEgg, // egg
+    ANIM_Peach1_HoldCompleteCake, // complete cake
+    ANIM_Peach1_HoldCakeBowl, // cake bowl
+    ANIM_Peach1_HoldCakeMixed, // cake mixed
+    ANIM_Peach1_HoldCakePan, // cake pan
+    ANIM_Peach1_HoldCakeBatter, // cake batter
+    ANIM_Peach1_HoldBareCake, // cake bare
+    ANIM_Peach1_HoldSalt, // salt
+    ANIM_Peach1_HoldSugar, // sugar
+    ANIM_Peach1_HoldIcingCake, // cake with icing
+    ANIM_Peach1_HoldBerryCake, // cake with berries
     0x00000000,
 };
 
@@ -114,7 +114,7 @@ void action_update_idle_peach(void) {
             if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DEPRESSED)) {
                 suggest_player_anim_allow_backward(IdlePeachAnims[gGameStatusPtr->peachBakingIngredient]);
             } else {
-                suggest_player_anim_allow_backward(ANIM_Peach_C000E);
+                suggest_player_anim_allow_backward(ANIM_Peach2_SadStill);
             }
         } else {
             peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].idle);
@@ -129,7 +129,7 @@ void action_update_idle_peach(void) {
                     if (playerStatus->currentStateTime > 1800) {
                         // begin first yawm
                         playerStatus->actionSubstate++;
-                        suggest_player_anim_allow_backward(ANIM_Peach_C0003);
+                        suggest_player_anim_allow_backward(ANIM_Peach2_Yawn);
                         return;
                     }
                     playerStatus->currentStateTime++;
@@ -140,7 +140,7 @@ void action_update_idle_peach(void) {
                 if (playerStatus->animNotifyValue != 0) {
                     playerStatus->actionSubstate++;
                     playerStatus->currentStateTime = 0;
-                    suggest_player_anim_allow_backward(ANIM_Peach_A0001);
+                    suggest_player_anim_allow_backward(ANIM_Peach1_Idle);
                 }
                 break;
             case SUBSTATE_DELAY_SLEEP:
@@ -148,16 +148,16 @@ void action_update_idle_peach(void) {
                 playerStatus->currentStateTime++;
                 if (playerStatus->currentStateTime > 200) {
                     playerStatus->actionSubstate++;
-                    suggest_player_anim_allow_backward(ANIM_Peach_C0003);
+                    suggest_player_anim_allow_backward(ANIM_Peach2_Yawn);
                 }
                 break;
             case SUBSTATE_IDLE_SLEEP:
                 // peach is asleep
                 if (playerStatus->flags & (PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_INPUT_DISABLED)) {
-                    suggest_player_anim_allow_backward(ANIM_Peach_A0001);
+                    suggest_player_anim_allow_backward(ANIM_Peach1_Idle);
                     playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
                 } else if (playerStatus->animNotifyValue != 0) {
-                    suggest_player_anim_allow_backward(ANIM_Peach_C0004);
+                    suggest_player_anim_allow_backward(ANIM_Peach2_Sleep);
                 }
                 break;
         }

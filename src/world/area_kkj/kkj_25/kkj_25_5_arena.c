@@ -332,7 +332,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
         EVT_CALL(NpcJump0, NPC_Peach_01, LVar0, LVar1, LVar2, 7)
         EVT_WAIT(10)
     EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_Peach_01, ANIM_Peach_D000A, ANIM_Peach_C001E, 0, MSG_CH8_007F)
+    EVT_CALL(SpeakToPlayer, NPC_Peach_01, ANIM_Peach3_TiedShout, ANIM_Peach2_TiedIdle, 0, MSG_CH8_007F)
     EVT_WAIT(15)
     EVT_CALL(SpeakToPlayer, NPC_Kammy_01, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim04, 512, MSG_CH8_0080)
     EVT_WAIT(15)

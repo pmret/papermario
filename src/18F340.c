@@ -36,7 +36,7 @@ void func_80260A60(void) {
 
     if (battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE) {
         actorPart->idleAnimations = bPeachIdleAnims;
-        set_animation(0, 0, ANIM_Peach_A0002);
+        set_animation(0, 0, ANIM_Peach1_Walk);
     } else if (!battleStatus->outtaSightActive) {
         actorPart->idleAnimations = bMarioIdleAnims;
     }
@@ -717,9 +717,9 @@ EvtScript EVS_PeachEnterStage = {
     EVT_SUB(LVar0, 100)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Peach_A0003)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Peach1_Run)
     EVT_CALL(PlayerRunToGoal, 40)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Peach_A0002)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Peach1_Walk)
     EVT_WAIT(15)
     EVT_CALL(func_8026BF48, 0)
     EVT_RETURN
