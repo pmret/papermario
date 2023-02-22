@@ -70,7 +70,7 @@ EvtScript N(EVS_Scene_PeachBreaksFree) = {
     EVT_CALL(SetNpcPos, NPC_Bowser_01, 200, 0, 0)
     EVT_CALL(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_Idle)
     EVT_CALL(SetNpcPos, NPC_Peach_01, 475, 0, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach_C001E)
+    EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach2_TiedIdle)
     EVT_CALL(SetNpcPos, NPC_Kammy_01, 550, 10, -50)
     EVT_CALL(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_Anim04)
     EVT_CALL(SetNpcDecoration, NPC_Bowser_01, 0, NPC_DECORATION_BOWSER_AURA)
@@ -101,7 +101,7 @@ EvtScript N(EVS_Scene_PeachBreaksFree) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_Peach_01, ANIM_Peach_D000A, ANIM_Peach_C001E, 0, MSG_CH8_008E)
+    EVT_CALL(SpeakToPlayer, NPC_Peach_01, ANIM_Peach3_TiedShout, ANIM_Peach2_TiedIdle, 0, MSG_CH8_008E)
     EVT_WAIT(10)
     EVT_CALL(GetNpcPos, NPC_Peach_01, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
@@ -189,8 +189,8 @@ EvtScript N(EVS_Scene_PeachBreaksFree) = {
             EVT_WAIT(3)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_Peach_01, ANIM_Peach_D0009, ANIM_Peach_D000B, 5, MSG_CH8_0091)
-    EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach_D000B)
+    EVT_CALL(SpeakToPlayer, NPC_Peach_01, ANIM_Peach3_TiedTalk, ANIM_Peach3_TiedLaugh, 5, MSG_CH8_0091)
+    EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach3_TiedLaugh)
     EVT_SET(LVar2, 12)
     EVT_LOOP(4)
         EVT_CALL(MakeLerp, 90, 450, LVar2, EASING_LINEAR)
@@ -209,7 +209,7 @@ EvtScript N(EVS_Scene_PeachBreaksFree) = {
         EVT_SUB(LVar2, 2)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar3, LVar4, LVar5, 0)
     EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach_A0001)
+    EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach1_Idle)
     EVT_CALL(SetNpcAnimation, NPC_Twink_01, ANIM_Twink_Idle)
     EVT_WAIT(20)
     EVT_SET(LVar0, MV_OrbitingEffectAIdx)

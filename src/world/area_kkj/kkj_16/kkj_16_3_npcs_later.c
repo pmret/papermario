@@ -75,7 +75,7 @@ EvtScript N(EVS_CapturePeach) = {
     EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
     EVT_WAIT(20)
     EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0005)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Gasp)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0174)
     EVT_CALL(N(ApproachPlayer50Units), -1, LVar3, LVar0, LVar2)
@@ -86,7 +86,7 @@ EvtScript N(EVS_CapturePeach) = {
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0175)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0017)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_ForwardSad)
     EVT_WAIT(20)
     EVT_CALL(GotoMapSpecial, EVT_PTR("kkj_14"), kkj_14_ENTRY_B, TRANSITION_13)
     EVT_WAIT(100)

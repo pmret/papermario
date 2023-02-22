@@ -161,7 +161,7 @@ s32 setup_item_popup(PopupMenu* menu) {
             ItemData* item = &gItemTable[itemIdx];
             IconHudScriptPair* itemScripts = &gItemHudScripts[item->hudElemID];
 
-            if (item->typeFlags & 1) {
+            if (item->typeFlags & ITEM_TYPE_FLAG_WORLD_USABLE) {
                 menu->ptrIcon[optionCount] = itemScripts->enabled;
                 menu->userIndex[optionCount] = i;
                 menu->enabled[optionCount] = 1;

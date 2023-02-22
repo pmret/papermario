@@ -170,7 +170,7 @@ s32 find_item(s32 itemID) {
     ItemData* item = &gItemTable[itemID];
     s32 i;
 
-    if ((item->typeFlags & 8) != 0) {
+    if ((item->typeFlags & ITEM_TYPE_FLAG_KEY) != 0) {
         for (i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
             if (playerData->keyItems[i] == itemID) {
                 break;
@@ -221,7 +221,7 @@ s32 add_badge(s32 itemID) {
     ItemData* item = &gItemTable[itemID];
     s32 i;
 
-    if ((item->typeFlags & 0x40) == 0) {
+    if ((item->typeFlags & ITEM_TYPE_FLAG_BADGE) == 0) {
         return add_item(itemID);
     }
 

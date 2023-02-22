@@ -2280,8 +2280,8 @@ s32 bMarioHideAnims[] = {
 };
 
 s32 bPeachIdleAnims[] = {
-    STATUS_NORMAL,          ANIM_Peach_A0002,
-    STATUS_TURN_DONE,       ANIM_Peach_C0028,
+    STATUS_NORMAL,          ANIM_Peach1_Walk,
+    STATUS_TURN_DONE,       ANIM_Peach2_Inert,
     STATUS_END
 };
 

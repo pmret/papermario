@@ -77,7 +77,7 @@ EvtScript N(EVS_Scene_MarioConfrontsBowser) = {
     EVT_CALL(SetNpcPos, NPC_Bowser_Body, 725, 210, -25)
     EVT_CALL(SetNpcPos, NPC_Bowser_Prop, 725, 210, -25)
     EVT_EXEC(N(EVS_UpdatePropellerSounds))
-    EVT_CALL(SpeakToPlayer, NPC_CaptivePeach, ANIM_Peach_C001C, ANIM_Peach_C001B, 0, MSG_CH8_006F)
+    EVT_CALL(SpeakToPlayer, NPC_CaptivePeach, ANIM_Peach2_TiedHangStruggle, ANIM_Peach2_TiedHangIdle, 0, MSG_CH8_006F)
     EVT_CALL(EnableNpcShadow, NPC_Bowser_Body, FALSE)
     EVT_CALL(SetCamType, CAM_DEFAULT, 1, FALSE)
     EVT_SET(LVar0, 725)
@@ -123,7 +123,7 @@ EvtScript N(EVS_Scene_MarioConfrontsBowser) = {
     EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(170.0), EVT_FLOAT(240.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, NPC_CaptivePeach, ANIM_Peach_C001C, ANIM_Peach_C001B, 0, MSG_CH8_0071)
+    EVT_CALL(SpeakToPlayer, NPC_CaptivePeach, ANIM_Peach2_TiedHangStruggle, ANIM_Peach2_TiedHangIdle, 0, MSG_CH8_0071)
     EVT_WAIT(20)
     EVT_CALL(SetPlayerPos, 400, 0, -15)
     EVT_CALL(PartnerIsFlying, LVar0)
@@ -264,8 +264,8 @@ EvtScript N(EVS_Scene_BowserDefeated) = {
     EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_Walk)
     EVT_CALL(NpcMoveTo, NPC_Bowser_Body, 800, 0, 20)
     EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarIdle)
-    EVT_CALL(SetNpcAnimation, NPC_CaptivePeach, ANIM_Peach_C001E)
-    EVT_CALL(SpeakToPlayer, NPC_CaptivePeach, ANIM_Peach_C001C, ANIM_Peach_C001B, 0, MSG_CH8_0079)
+    EVT_CALL(SetNpcAnimation, NPC_CaptivePeach, ANIM_Peach2_TiedIdle)
+    EVT_CALL(SpeakToPlayer, NPC_CaptivePeach, ANIM_Peach2_TiedHangStruggle, ANIM_Peach2_TiedHangIdle, 0, MSG_CH8_0079)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(PlayerMoveTo, 580, 0, 10)
     EVT_EXEC_WAIT(N(EVS_BowserFliesAway))
@@ -320,7 +320,7 @@ EvtScript N(EVS_NpcInit_CaptivePeach) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetNpcPos, NPC_CaptivePeach, 775, 90, 0)
-    EVT_CALL(SetNpcAnimation, NPC_CaptivePeach, ANIM_Peach_C001C)
+    EVT_CALL(SetNpcAnimation, NPC_CaptivePeach, ANIM_Peach2_TiedHangStruggle)
     EVT_RETURN
     EVT_END
 };

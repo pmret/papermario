@@ -529,7 +529,7 @@ void func_802552EC(s32 arg0, Actor* actor) {
                 phi_s6 = 15;
             }
 
-            if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+            if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                 guTranslateF(mtxPivotOn, -pivotX, -pivotY, 0.0f);
                 guTranslateF(mtxPivotOff, pivotX, pivotY, 0.0f);
             } else {
@@ -612,7 +612,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
 
             actor->renderMode = RENDER_MODE_ALPHATEST;
             x1 = actor->currentPos.x + actor->headOffset.x;
-            if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+            if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                 y1 = actor->currentPos.y + actor->headOffset.y;
             } else {
                 y1 = actor->currentPos.y - actor->headOffset.y;
@@ -631,7 +631,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
 
                     if (!(actorPart->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
                         x2 = x1 + actorPart->partOffset.x + actorPart->visualOffset.x;
-                        if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                        if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                             y2 = y1 + actorPart->partOffset.y + actorPart->visualOffset.y;
                         } else {
                             y2 = y1 - actorPart->partOffset.y - actorPart->visualOffset.y;
@@ -652,7 +652,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                         shadow = get_shadow_by_index(actorPart->shadowIndex);
                         shadow->flags &= ~ENTITY_FLAG_HIDDEN;
                         x1 = actorPart->currentPos.x;
-                        if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                        if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                             y1 = actorPart->currentPos.y + 12.0;
                         } else {
                             y1 = actorPart->currentPos.y - 12.0;
@@ -685,7 +685,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
             }
 
             x1 = actor->currentPos.x + actor->headOffset.x;
-            if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+            if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                 y1 = actor->currentPos.y + actor->headOffset.y + 12.0;
             } else {
                 y1 = actor->currentPos.y - actor->headOffset.y + 12.0;
@@ -749,7 +749,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         actor = battleStatus->partnerActor;
     }
     actorPosX = actor->currentPos.x + actor->headOffset.x;
-    if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+    if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
         actorPosY = actor->currentPos.y + actor->headOffset.y + actor->verticalRenderOffset;
     } else {
         actorPosY = actor->currentPos.y - actor->headOffset.y + actor->verticalRenderOffset;
@@ -798,7 +798,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         (actor->actorBlueprint->statusMessageOffset.x + actor->unk_196) * actor->scalingFactor,
         (actor->actorBlueprint->statusMessageOffset.y + actor->unk_197) * actor->scalingFactor);
 
-    if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+    if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
         set_status_icons_offset(actor->hudElementDataIndex,
             actor->size.y * actor->scalingFactor,
             actor->size.x * actor->scalingFactor);
@@ -816,7 +816,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         }
     } while (0); // required to match
 
-    if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+    if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
         guTranslateF(mtxPivotOn,
             -actor->rotationPivotOffset.x * actor->scalingFactor,
             -actor->rotationPivotOffset.y * actor->scalingFactor,
@@ -855,7 +855,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
     for (i = 0; i < numParts; i++) {
         if (!(part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
             partPosX = actorPosX + part->partOffset.x + part->visualOffset.x;
-            if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+            if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                 partPosY = actorPosY + part->partOffset.y + part->visualOffset.y;
             } else {
                 partPosY = (actorPosY - part->partOffset.y) - part->visualOffset.y;
@@ -1068,7 +1068,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
                 part->animNotifyValue = spr_get_notify_value(part->spriteInstanceID);
             }
         }
-        if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+        if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
             guTranslateF(mtxPivotOn,
                 -part->rotationPivotOffset.x * actor->scalingFactor,
                 -part->rotationPivotOffset.y * actor->scalingFactor,
@@ -1143,14 +1143,14 @@ void func_802571F0(s32 flipYaw, Actor* actor) {
     s32 i;
 
     actorPosX = actor->currentPos.x + actor->headOffset.x;
-    if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+    if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
         actorPosY = actor->currentPos.y + actor->headOffset.y;
     } else {
         actorPosY = actor->currentPos.y - actor->headOffset.y;
     }
     actorPosZ = actor->currentPos.z + actor->headOffset.z - 5.0f;
 
-    if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+    if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
         guTranslateF(mtxPivotOn,
             -actor->rotationPivotOffset.x * actor->scalingFactor,
             -actor->rotationPivotOffset.y * actor->scalingFactor,
@@ -1191,7 +1191,7 @@ void func_802571F0(s32 flipYaw, Actor* actor) {
         // determine part position
         if (!(part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
             partPosX = actorPosX + part->partOffset.x + part->visualOffset.x;
-            if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+            if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                 partPosY = actorPosY + part->partOffset.y + part->visualOffset.y;
             } else {
                 partPosY = actorPosY - part->partOffset.y - part->visualOffset.y;
@@ -1218,7 +1218,7 @@ void func_802571F0(s32 flipYaw, Actor* actor) {
             continue;
         }
 
-        if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+        if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
             guTranslateF(mtxPivotOn,
                 -part->rotationPivotOffset.x * actor->scalingFactor,
                 -part->rotationPivotOffset.y * actor->scalingFactor,

@@ -75,14 +75,14 @@ EvtScript N(EVS_PickUpPeach) = {
         EVT_CALL(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 5)
     EVT_END_THREAD
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0005)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Gasp)
     EVT_WAIT(1)
     EVT_LOOP(4)
         EVT_ADD(LVar1, 2)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0018)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Carried)
     EVT_ADD(LVar0, 10)
     EVT_LOOP(5)
         EVT_ADD(LVar1, 4)
@@ -160,11 +160,11 @@ EvtScript N(EVS_ManageSneakingScenes) = {
         EVT_WAIT(3)
         EVT_CALL(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, 4)
     EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C000D)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Startle)
     EVT_CALL(PlaySoundAtPlayer, SOUND_262, 0)
     EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_A0001)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach1_Idle)
     EVT_THREAD
         EVT_CALL(NpcFlyTo, NPC_PARTNER, -776, 50, -65, 10, 0, EASING_LINEAR)
     EVT_END_THREAD
@@ -190,7 +190,7 @@ EvtScript N(EVS_ManageSneakingScenes) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_BattleBow_Talk, ANIM_Peach_A0001, 5, MSG_Peach_0077)
+    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_BattleBow_Talk, ANIM_Peach1_Idle, 5, MSG_Peach_0077)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 5, MSG_Peach_0078)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_0079)
@@ -223,7 +223,7 @@ EvtScript N(EVS_ManageSneakingScenes) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0005)
+        EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Gasp)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
         EVT_CALL(PlayerJump1, LVar0, LVar1, LVar2, 10)
@@ -234,7 +234,7 @@ EvtScript N(EVS_ManageSneakingScenes) = {
     EVT_EXEC_WAIT(N(EVS_ApproachPeach))
     EVT_EXEC_WAIT(N(EVS_PickUpPeach))
     EVT_EXEC_WAIT(N(EVS_CarryPeachAway))
-    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach_C0018, ANIM_Peach_C0018, 5, MSG_Peach_007D)
+    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_Carried, ANIM_Peach2_Carried, 5, MSG_Peach_007D)
     EVT_WAIT(10)
     EVT_CALL(LoadPath, 40, EVT_PTR(N(TwinkFollowPath1)), ARRAY_COUNT(N(TwinkFollowPath1)), EASING_LINEAR)
     EVT_LOOP(0)

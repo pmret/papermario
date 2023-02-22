@@ -61,7 +61,7 @@ ActorPartBlueprint N(partsTable_80219E24)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_HP_OFFSET_BELOW,
+    .flags = ACTOR_FLAG_UPSIDE_DOWN,
     .type = ACTOR_TYPE_CHAN,
     .level = 0,
     .maxHP = 15,
@@ -137,7 +137,7 @@ EvtScript N(80219F4C) = {
         EVT_CALL(N(UnkBattleFunc1), -10, 0, 10, 0)
         EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021B81C)))
         EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021A560)))
-        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, 0x00001000, FALSE)
+        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, FALSE)
     EVT_ELSE
         EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 16)
@@ -145,8 +145,8 @@ EvtScript N(80219F4C) = {
         EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_Chan)))
         EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021AAB8)))
         EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219E70)))
-        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, FALSE)
-        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, 0x00001000, TRUE)
+        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
+        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
     EVT_END_IF
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -171,9 +171,9 @@ EvtScript N(8021A12C) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 9, 1)
     EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_80219D6C)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219F08)))
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, FALSE)
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, 16, FALSE)
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, 0x00001000, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
+    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
+    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Chan_ToppledHurt)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
@@ -556,8 +556,8 @@ EvtScript N(takeTurn_8021B81C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_Chan)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021AAB8)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219E70)))
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, FALSE)
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, 0x00001000, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
+    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
     EVT_CALL(GetIndexFromPos, ACTOR_SELF, LVar0)
     EVT_MOD(LVar0, 4)
     EVT_CALL(SetGoalToIndex, ACTOR_SELF, LVar0)

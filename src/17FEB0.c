@@ -199,7 +199,8 @@ HitResult calc_item_damage_enemy(void) {
         sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         return HIT_RESULT_NO_DAMAGE;
     }
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_2000) {
+    
+    if (battleStatus->currentAttackElement & DAMAGE_TYPE_DEATH) {
         battleStatus->lastAttackDamage = 0;
         dispatchEvent = EVENT_DEATH;
         hitResult = HIT_RESULT_HIT;

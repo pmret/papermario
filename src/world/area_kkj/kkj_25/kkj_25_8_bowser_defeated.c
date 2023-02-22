@@ -349,11 +349,11 @@ EvtScript N(EVS_Scene_BowserDefeated) = {
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, NPC_Peach_02, ANIM_Peach_C0000, ANIM_Peach_A0001, 0, MSG_CH8_00AB)
+    EVT_CALL(SpeakToPlayer, NPC_Peach_02, ANIM_Peach2_RaiseArms, ANIM_Peach1_Idle, 0, MSG_CH8_00AB)
     EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Peach_02, ANIM_Peach_A0002)
+        EVT_CALL(SetNpcAnimation, NPC_Peach_02, ANIM_Peach1_Walk)
         EVT_CALL(NpcMoveTo, NPC_Peach_02, 200, 0, 85)
-        EVT_CALL(SetNpcAnimation, NPC_Peach_02, ANIM_Peach_A0001)
+        EVT_CALL(SetNpcAnimation, NPC_Peach_02, ANIM_Peach1_Idle)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -367,7 +367,7 @@ EvtScript N(EVS_Scene_BowserDefeated) = {
     EVT_END_THREAD
     EVT_CALL(NpcMoveTo, NPC_Twink_02, 230, 30, 85)
     EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_Peach_02, ANIM_Peach_C0000, ANIM_Peach_A0001, 0, MSG_CH8_00AC)
+    EVT_CALL(SpeakToPlayer, NPC_Peach_02, ANIM_Peach2_RaiseArms, ANIM_Peach1_Idle, 0, MSG_CH8_00AC)
     EVT_WAIT(20)
     EVT_CALL(PlaySound, SOUND_8000006B)
     EVT_SET(MV_DestructState, DESTRUCT_STATE_1)
@@ -402,7 +402,7 @@ EvtScript N(EVS_Scene_BowserDefeated) = {
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-10.5))
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(SetNpcAnimation, NPC_Peach_02, ANIM_Peach_C0006)
+    EVT_CALL(SetNpcAnimation, NPC_Peach_02, ANIM_Peach2_GaspStill)
     EVT_CALL(SetNpcAnimation, NPC_Twink_02, ANIM_Twink_Cringe)
     EVT_CALL(SetNpcAnimation, NPC_Bowser_03, ANIM_WorldBowser_Shock)
     EVT_CALL(SetNpcJumpscale, NPC_Bowser_03, EVT_FLOAT(1.0))
