@@ -48,6 +48,7 @@ pipeline {
 
                         if (message != "\n\n") {
                             if (comment_id == -1) {
+                                echo message
                                 pullRequest.comment(message)
                             } else {
                                 pullRequest.editComment(comment_id, message)
