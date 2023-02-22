@@ -3364,7 +3364,7 @@ enum DamageTypes {
     DAMAGE_TYPE_POW                        = 0x00000400,
     DAMAGE_TYPE_QUAKE                      = 0x00000800,
     DAMAGE_TYPE_FEAR                       = 0x00001000,
-    DAMAGE_TYPE_2000                       = 0x00002000,
+    DAMAGE_TYPE_DEATH                      = 0x00002000,
     DAMAGE_TYPE_4000                       = 0x00004000,
     DAMAGE_TYPE_AIR_LIFT                   = 0x00008000,
     DAMAGE_TYPE_SPINY_SURGE                = 0x00010000,
@@ -3704,7 +3704,7 @@ enum ActorFlags {
     ACTOR_FLAG_100               = 0x00000100,
     ACTOR_FLAG_FLYING            = 0x00000200, ///< Quake Hammer can't hit.
     ACTOR_FLAG_FLIPPED           = 0x00000400, ///< Actor has been flipped over.
-    ACTOR_FLAG_HP_OFFSET_BELOW   = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down). Is this just UPSIDE_DOWN? FLIPPED? TOPPLED?
+    ACTOR_FLAG_UPSIDE_DOWN       = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down).
     ACTOR_FLAG_TYPE_CHANGED      = 0x00001000, ///< Indicates actors type has changed, triggers recheck for if HP bar should be shown based on tattle status.
     ACTOR_FLAG_2000              = 0x00002000,
     ACTOR_FLAG_TARGET_ONLY       = 0x00004000, ///< Battle ends even if undefeated. No turn.

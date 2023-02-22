@@ -1133,7 +1133,7 @@ EvtScript D_80298E20 = {
         EVT_MULF(LVar3, EVT_FLOAT(0.4))
     EVT_END_IF
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar6)
-    EVT_IF_FLAG(LVar6, ACTOR_FLAG_HP_OFFSET_BELOW)
+    EVT_IF_FLAG(LVar6, ACTOR_FLAG_UPSIDE_DOWN)
         EVT_CALL(GetActorSize, ACTOR_SELF, LVar7, LVar8)
         EVT_SUB(LVar1, LVar7)
     EVT_END_IF
@@ -1497,7 +1497,7 @@ EvtScript DoBurnHit = {
                 EVT_END_IF
                 EVT_DIVF(LVar3, EVT_FLOAT(2.0))
                 EVT_CALL(GetActorFlags, ACTOR_SELF, LVar5)
-                EVT_IF_FLAG(LVar5, ACTOR_FLAG_HP_OFFSET_BELOW)
+                EVT_IF_FLAG(LVar5, ACTOR_FLAG_UPSIDE_DOWN)
                     EVT_SUBF(LVar1, LVar3)
                 EVT_ELSE
                     EVT_ADDF(LVar1, LVar3)

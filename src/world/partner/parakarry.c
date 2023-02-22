@@ -539,7 +539,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
             parakarry->currentAnim = ANIM_WorldParakarry_Idle;
             D_802BEBB0 = 0;
             parakarry->jumpVelocity = 0.0f;
-            parakarry->flags &= ~ACTOR_FLAG_HP_OFFSET_BELOW;
+            parakarry->flags &= ~NPC_FLAG_JUMPING;
             parakarry->animationSpeed = 1.0f;
             partner_clear_player_tracking(parakarry);
             partnerActionStatus->actingPartner = PARTNER_NONE;

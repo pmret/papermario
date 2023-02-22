@@ -190,7 +190,7 @@ EvtScript N(init) = {
 EVT_END_IF
 EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
 EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
-EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, FALSE)
+EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
 EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
 EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
 EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
@@ -864,7 +864,7 @@ EvtScript N(8021B7C8) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
     EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_flipped)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_flipped)))
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, FALSE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)

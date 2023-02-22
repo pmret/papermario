@@ -966,7 +966,7 @@ EvtScript N(powerShock) = {
     EVT_SET(LocalFlag(15), 0)
     EVT_CALL(GetOwnerTarget, LVarA, LVarB)
     EVT_CALL(GetActorFlags, LVarA, LVar0)
-    EVT_IF_FLAG(LVar0, ACTOR_FLAG_HP_OFFSET_BELOW)
+    EVT_IF_FLAG(LVar0, ACTOR_FLAG_UPSIDE_DOWN)
         EVT_SET(LocalFlag(15), 1)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_47)

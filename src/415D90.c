@@ -4979,7 +4979,7 @@ void btl_state_update_select_target(void) {
                     actorFlags = get_actor(target->actorID)->flags;
                     id = D_802ACC70[0];
 
-                    if (actorFlags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+                    if (actorFlags & ACTOR_FLAG_UPSIDE_DOWN) {
                         hud_element_set_script(id, &HES_HandPointLeftLoop);
                     } else {
                         hud_element_set_script(id, &HES_HandPointDownLoop);
@@ -5095,7 +5095,7 @@ void btl_state_draw_select_target(void) {
             targetY = target->pos.y;
             targetZ = target->pos.z;
 
-            if (anotherActor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+            if (anotherActor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
                 xOffset = 16;
                 yOffset = 2;
                 if (hud_element_get_script(id) != &HES_HandPointLeftLoop) {
@@ -5122,7 +5122,7 @@ void btl_state_draw_select_target(void) {
                 targetX = target->pos.x;
                 targetY = target->pos.y;
                 targetZ = target->pos.z;
-                if (anotherActor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+                if (anotherActor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
                     xOffset = 16;
                     yOffset = 2;
                     if (hud_element_get_script(id) != &HES_HandPointLeftLoop) {

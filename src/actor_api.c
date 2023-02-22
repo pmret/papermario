@@ -1936,7 +1936,7 @@ ApiStatus HPBarToHome(Evt* script, s32 isInitialCall) {
     actor->healthBarPosition.y = actor->homePos.y + actor->actorBlueprint->hpBarOffset.y;
     actor->healthBarPosition.z = actor->homePos.z;
 
-    if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+    if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
         actor->healthBarPosition.y = actor->homePos.y - actor->size.y - actor->actorBlueprint->hpBarOffset.y;
     }
 
@@ -1959,7 +1959,7 @@ ApiStatus HPBarToCurrent(Evt* script, s32 isInitialCall) {
     actor->healthBarPosition.y = actor->currentPos.y + actor->actorBlueprint->hpBarOffset.y;
     actor->healthBarPosition.z = actor->currentPos.z;
 
-    if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+    if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
         actor->healthBarPosition.y = actor->currentPos.y - actor->size.y - actor->actorBlueprint->hpBarOffset.y;
     }
 
@@ -2002,7 +2002,7 @@ ApiStatus func_8026D940(Evt* script, s32 isInitialCall) {
     actor->healthBarPosition.y = actor->homePos.y + actor->actorBlueprint->hpBarOffset.y + actor->unk_198.y;
     actor->healthBarPosition.z = actor->homePos.z;
 
-    if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+    if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
         actor->healthBarPosition.y = actor->homePos.y - actor->size.y;
     }
 
@@ -3186,7 +3186,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
         btl_cam_set_zoom(250);
         btl_cam_move(10);
         func_8024E60C();
-        if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
             btl_cam_set_zoffset(0);
         }
         D_8029FBD4 = 1;
@@ -3199,7 +3199,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
 
     flags = actor->flags;
     x1 = actor->currentPos.x + actor->headOffset.x;
-    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+    if (flags & ACTOR_FLAG_UPSIDE_DOWN) {
         y1 = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
     } else if (!(flags & ACTOR_FLAG_8000)) {
         y1 = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
@@ -3210,7 +3210,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
 
     flags2 = actor->flags;
     x2 = actor->currentPos.x + actor->headOffset.x + actor->size.x / 2;
-    if (flags2 & ACTOR_FLAG_HP_OFFSET_BELOW) {
+    if (flags2 & ACTOR_FLAG_UPSIDE_DOWN) {
         y2 = actor->currentPos.y + actor->headOffset.y - actor->size.y;
     } else if (!(flags2 & ACTOR_FLAG_8000)) {
         y2 = actor->currentPos.y + actor->headOffset.y + actor->size.y;
@@ -3309,7 +3309,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
         btl_cam_set_zoom(250);
         btl_cam_move(10);
         func_8024E60C();
-        if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
             btl_cam_set_zoffset(0);
         }
 
@@ -3323,7 +3323,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
 
     flags = actor->flags;
     x1 = actor->currentPos.x + actor->headOffset.x;
-    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+    if (flags & ACTOR_FLAG_UPSIDE_DOWN) {
         y1 = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
     } else if (!(flags & ACTOR_FLAG_8000)) {
         y1 = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
@@ -3334,7 +3334,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
 
     flags2 = actor->flags;
     x2 = actor->currentPos.x + actor->headOffset.x + actor->size.x / 2;
-    if (flags2 & ACTOR_FLAG_HP_OFFSET_BELOW) {
+    if (flags2 & ACTOR_FLAG_UPSIDE_DOWN) {
         y2 = actor->currentPos.y + actor->headOffset.y - actor->size.y;
     } else if (!(flags2 & ACTOR_FLAG_8000)) {
         y2 = actor->currentPos.y + actor->headOffset.y + actor->size.y;
@@ -3431,7 +3431,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
         btl_cam_set_zoom(250);
         btl_cam_move(10);
         func_8024E60C();
-        if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
             btl_cam_set_zoffset(0);
         }
 
@@ -3445,7 +3445,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
 
     flags = actor->flags;
     x = actor->currentPos.x + actor->headOffset.x;
-    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+    if (flags & ACTOR_FLAG_UPSIDE_DOWN) {
         y = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
     } else if (!(flags & ACTOR_FLAG_8000)) {
         y = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
@@ -3537,7 +3537,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
         btl_cam_set_zoom(250);
         btl_cam_move(10);
         func_8024E60C();
-        if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
             btl_cam_set_zoffset(0);
         }
 
@@ -3551,7 +3551,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
 
     flags = actor->flags;
     x = actor->currentPos.x + actor->headOffset.x;
-    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+    if (flags & ACTOR_FLAG_UPSIDE_DOWN) {
         y = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
     } else if (!(flags & ACTOR_FLAG_8000)) {
         y = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
@@ -3657,7 +3657,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
 
     flags = actor->flags;
     x1 = actor->currentPos.x + actor->headOffset.x;
-    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+    if (flags & ACTOR_FLAG_UPSIDE_DOWN) {
         y1 = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
     } else if (!(flags & ACTOR_FLAG_8000)) {
         y1 = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
@@ -3668,7 +3668,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
 
     flags2 = actor->flags;
     x2 = actor->currentPos.x + actor->headOffset.x + actor->size.x / 2;
-    if (flags2 & ACTOR_FLAG_HP_OFFSET_BELOW) {
+    if (flags2 & ACTOR_FLAG_UPSIDE_DOWN) {
         y2 = actor->currentPos.y + actor->headOffset.y - actor->size.y;
     } else if (!(flags2 & ACTOR_FLAG_8000)) {
         y2 = actor->currentPos.y + actor->headOffset.y + actor->size.y;
