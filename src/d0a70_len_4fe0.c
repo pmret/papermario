@@ -4,7 +4,7 @@
 
 #if VERSION_CN
 // TODO: remove if section is split in iQue release
-extern Addr _24B7F0_ROM_START;
+extern Addr fold_gfx_data_ROM_START;
 #endif
 
 typedef struct {
