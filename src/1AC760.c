@@ -78,7 +78,7 @@ HitResult calc_partner_test_enemy(void) {
     // check partner jumping on top-spiky enemy (cannot be suppressed)
     if ((battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP)
         && (part->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP)
-        && !(target->flags2 & ACTOR_FLAG_HP_OFFSET_BELOW)
+        && !(target->flags2 & ACTOR_FLAG_UPSIDE_DOWN)
     ) {
         sfx_play_sound_at_position(SOUND_108, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         return HIT_RESULT_LANDED_ON_SPIKE;
@@ -112,7 +112,7 @@ HitResult calc_partner_test_enemy(void) {
         // check partner airlifting top-spiky enemy
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)) {
             if ((part->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP)
-                && !(target->flags & ACTOR_FLAG_HP_OFFSET_BELOW)
+                && !(target->flags & ACTOR_FLAG_UPSIDE_DOWN)
                 && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SPIKY_TOP)
             ) {
                 sfx_play_sound_at_position(SOUND_108, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -123,7 +123,7 @@ HitResult calc_partner_test_enemy(void) {
 
             if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
                 && (part->eventFlags & ACTOR_EVENT_FLAG_200000)
-                && !(target->flags & ACTOR_FLAG_HP_OFFSET_BELOW)
+                && !(target->flags & ACTOR_FLAG_UPSIDE_DOWN)
                 && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_FLAG_80)
             ) {
                 sfx_play_sound_at_position(SOUND_108, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -292,7 +292,7 @@ HitResult calc_partner_damage_enemy(void) {
         // unknown alternate spiky #1
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
             && targetPart->eventFlags & ACTOR_EVENT_FLAG_200000
-            && !(target->flags & ACTOR_FLAG_HP_OFFSET_BELOW)
+            && !(target->flags & ACTOR_FLAG_UPSIDE_DOWN)
             && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_FLAG_80)
         ) {
             sfx_play_sound_at_position(SOUND_108, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -304,7 +304,7 @@ HitResult calc_partner_damage_enemy(void) {
         // unknown alternate spiky top
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
             && targetPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP
-            && !(target->flags & ACTOR_FLAG_HP_OFFSET_BELOW)
+            && !(target->flags & ACTOR_FLAG_UPSIDE_DOWN)
             && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SPIKY_TOP)
         ) {
             sfx_play_sound_at_position(SOUND_108, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -454,7 +454,11 @@ HitResult calc_partner_damage_enemy(void) {
             dispatchEvent = EVENT_HIT_COMBO;
             retVal = 0;
 
-            if (!(targetPart->flags & ACTOR_PART_FLAG_2000) && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE) && !partImmuneToElement && !(targetPart->targetFlags & ACTOR_PART_FLAG_4)) {
+            if (!(targetPart->flags & ACTOR_PART_FLAG_2000)
+                && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE)
+                && !partImmuneToElement
+                && !(targetPart->targetFlags & ACTOR_PART_FLAG_4)
+            ) {
                 target->currentHP -= damageDealt;
 
                 if (target->currentHP < 1) {

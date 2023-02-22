@@ -70,7 +70,7 @@ EvtScript N(EVS_NpcAux_Kammy_Broom) = {
 
 EvtScript N(EVS_NpcInit_Peach) = {
     EVT_CALL(SetNpcPos, NPC_Peach_01, 475, 0, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach_A0001)
+    EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach1_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -174,14 +174,14 @@ AnimID N(ExtraAnims_Bowser)[] = {
 };
 
 AnimID N(ExtraAnims_Peach)[] = {
-    ANIM_Peach_A0001,
-    ANIM_Peach_A0002,
-    ANIM_Peach_C0000,
-    ANIM_Peach_C0006,
-    ANIM_Peach_C001E,
-    ANIM_Peach_D0009,
-    ANIM_Peach_C0026,
-    ANIM_Peach_D000F,
+    ANIM_Peach1_Idle,
+    ANIM_Peach1_Walk,
+    ANIM_Peach2_RaiseArms,
+    ANIM_Peach2_GaspStill,
+    ANIM_Peach2_TiedIdle,
+    ANIM_Peach3_TiedTalk,
+    ANIM_Peach2_TalkIdle,
+    ANIM_Peach3_Pray,
     ANIM_LIST_END
 };
 

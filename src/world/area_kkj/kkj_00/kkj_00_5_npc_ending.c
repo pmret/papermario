@@ -47,15 +47,15 @@ EvtScript N(EVS_NpcInit_ToadGuard_03) = {
 };
 
 AnimID N(ExtraAnims_Peach)[] = {
-    ANIM_Peach_A0000,
-    ANIM_Peach_A0001,
-    ANIM_Peach_C0026,
-    ANIM_Peach_C0000,
-    ANIM_Peach_C0001,
-    ANIM_Peach_C0002,
-    ANIM_Peach_A0002,
-    ANIM_Peach_C0010,
-    ANIM_Peach_D000F,
+    ANIM_Peach1_Still,
+    ANIM_Peach1_Idle,
+    ANIM_Peach2_TalkIdle,
+    ANIM_Peach2_RaiseArms,
+    ANIM_Peach2_Talk,
+    ANIM_Peach2_LowerArms,
+    ANIM_Peach1_Walk,
+    ANIM_Peach2_SpreadArms,
+    ANIM_Peach3_Pray,
     ANIM_LIST_END
 };
 

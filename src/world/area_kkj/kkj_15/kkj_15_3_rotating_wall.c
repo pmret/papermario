@@ -29,7 +29,7 @@ EvtScript N(EVS_AnimateRotatingWall_AlmostCaught) = {
     EVT_CALL(GetNpcPos, NPC_PARTNER, LVar9, LVar0, LVarA)
     EVT_THREAD
         EVT_WAIT(180)
-        EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0011)
+        EVT_CALL(SetPlayerAnimation, ANIM_Peach2_LookAround)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAt, SOUND_93, 0, 50, 5, -200)
     EVT_CALL(MakeLerp, 0, -1800, 360, EASING_LINEAR)

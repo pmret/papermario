@@ -27,7 +27,7 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetMusicTrack, 0, SONG_PEACH_CAUGHT, 0, 8)
     EVT_CALL(SetPlayerPos, -480, 30, -30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0018)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Carried)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcPos, NPC_PARTNER, -480, 30, -30)
     EVT_CALL(SetNpcPos, NPC_Koopatrol_Guard_01, -492, 0, -30)
@@ -91,7 +91,7 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
     EVT_CALL(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Anim12)
     EVT_CALL(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Anim12)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0019)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Thrown)
     EVT_CALL(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Anim15)
     EVT_CALL(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Anim15)
     EVT_CALL(LoadPath, 15, EVT_PTR(N(PeachTossPath)), ARRAY_COUNT(N(PeachTossPath)), EASING_LINEAR)
@@ -104,7 +104,7 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(PlaySoundAtPlayer, SOUND_162, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C001A)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Land)
     EVT_THREAD
         EVT_ADD(LVar1, 10)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar1, LVar2, LVar3, 0)
@@ -154,10 +154,10 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_A0001)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach1_Idle)
     EVT_IF_EQ(GB_StoryProgress, STORY_CH6_BEGAN_PEACH_MISSION)
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0159)
-        EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach_C0013, ANIM_Peach_C0012, 5, MSG_Peach_015A)
+        EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_ArmsCrossedTalk, ANIM_Peach2_ArmsCrossedIdle, 5, MSG_Peach_015A)
         EVT_IF_LT(GB_KKJ_CaughtCount, 3)
             EVT_IF_EQ(AF_KKJ_13, FALSE)
                 EVT_SET(LVar0, MSG_Peach_015B)
@@ -170,7 +170,7 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, LVar0)
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0176)
-        EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach_C0013, ANIM_Peach_C0012, 5, MSG_Peach_0177)
+        EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_ArmsCrossedTalk, ANIM_Peach2_ArmsCrossedIdle, 5, MSG_Peach_0177)
         EVT_IF_LT(GB_KKJ_CaughtCount, 3)
             EVT_IF_EQ(AF_KKJ_13, FALSE)
                 EVT_SET(LVar0, MSG_Peach_0178)

@@ -470,7 +470,7 @@ s32 func_80263064(Actor* actor0, Actor* actor1, s32 unused) {
                     z = actor1->currentPos.z;
 
                     x += part->partOffset.x;
-                    if (!(actor1->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                    if (!(actor1->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                         y += part->partOffset.y;
                     } else {
                         y -= part->partOffset.y;
@@ -478,7 +478,7 @@ s32 func_80263064(Actor* actor0, Actor* actor1, s32 unused) {
                     z += part->partOffset.z;
 
                     x += part->targetOffset.x;
-                    if (!(actor1->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                    if (!(actor1->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                         y += part->targetOffset.y;
                     } else {
                         y -= part->targetOffset.y;
@@ -489,7 +489,7 @@ s32 func_80263064(Actor* actor0, Actor* actor1, s32 unused) {
                     z = part->absolutePosition.z;
 
                     x += part->targetOffset.x;
-                    if (!(actor1->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                    if (!(actor1->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                         y += part->targetOffset.y;
                     } else {
                         y -= part->targetOffset.y;
@@ -1727,7 +1727,7 @@ Actor* create_actor(Formation formation) {
     actor->healthBarPosition.x = actor->currentPos.x + formationActor->hpBarOffset.x;
     actor->healthBarPosition.y = actor->currentPos.y + formationActor->hpBarOffset.y;
     actor->healthBarPosition.z = actor->currentPos.z;
-    if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+    if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
         actor->healthBarPosition.y = actor->currentPos.y - actor->size.y - formationActor->hpBarOffset.y;
     }
 
@@ -2309,7 +2309,7 @@ void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage) {
 
     do {
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
-            fx_ring_blast(0, x, y, z, 1.0f, 0x18);
+            fx_ring_blast(0, x, y, z, 1.0f, 24);
         } else if (battleStatus->currentAttackElement & DAMAGE_TYPE_SHOCK) {
             apply_shock_effect(actor);
         } else if (battleStatus->currentAttackElement & DAMAGE_TYPE_WATER) {

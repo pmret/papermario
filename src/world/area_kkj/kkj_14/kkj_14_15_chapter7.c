@@ -102,10 +102,10 @@ EvtScript N(EVS_TiePeachUp) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0005)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Gasp)
     EVT_WAIT(10)
     EVT_THREAD
-        EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0006)
+        EVT_CALL(SetPlayerAnimation, ANIM_Peach2_GaspStill)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(ShowMessageAtWorldPos, MSG_Peach_016D, LVar0, LVar1, LVar2)
     EVT_END_THREAD
@@ -117,7 +117,7 @@ EvtScript N(EVS_TiePeachUp) = {
         EVT_ADD(LVar1, 2)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C001E)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_TiedIdle)
     EVT_LOOP(20)
         EVT_CALL(InterpPlayerYaw, LVar0, 0)
         EVT_ADD(LVar0, LVar1)
@@ -149,7 +149,7 @@ EvtScript N(EVS_PickUpPeach) = {
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_D0008)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach3_TiedSideways)
     EVT_LOOP(5)
         EVT_ADD(LVar1, 4)
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
@@ -299,18 +299,18 @@ EvtScript N(EVS_Scene_Chapter7) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SpeakToPlayer, NPC_Ch7_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, MSG_Peach_0162)
     EVT_CALL(InterpPlayerYaw, 90, 5)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0012)
-    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach_C0013, ANIM_Peach_C0012, 5, MSG_Peach_0163)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_ArmsCrossedIdle)
+    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_ArmsCrossedTalk, ANIM_Peach2_ArmsCrossedIdle, 5, MSG_Peach_0163)
     EVT_CALL(SpeakToPlayer, NPC_Ch7_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 5, MSG_Peach_0164)
     EVT_CALL(InterpPlayerYaw, 270, 5)
     EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach_C0013, ANIM_Peach_C0012, 5, MSG_Peach_0165)
+    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_ArmsCrossedTalk, ANIM_Peach2_ArmsCrossedIdle, 5, MSG_Peach_0165)
     EVT_CALL(SpeakToPlayer, NPC_Ch7_Bowser, ANIM_WorldBowser_TalkEyesClosed, ANIM_WorldBowser_TalkEyesClosed, 5, MSG_Peach_0166)
     EVT_CALL(SetNpcAnimation, NPC_Ch7_Bowser, ANIM_WorldBowser_Idle)
     EVT_CALL(EndSpeech, NPC_Ch7_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 5)
-    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach_C0013, ANIM_Peach_C0012, 5, MSG_Peach_0167)
+    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_ArmsCrossedTalk, ANIM_Peach2_ArmsCrossedIdle, 5, MSG_Peach_0167)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_A0001)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach1_Idle)
     EVT_EXEC_WAIT(N(EVS_FocusCam_Door_Ch7))
     EVT_EXEC(N(EVS_OpenDoor_Ch7))
     EVT_CALL(SetNpcAnimation, NPC_Ch7_Kammy, ANIM_WorldKammy_Anim03)
@@ -413,7 +413,7 @@ EvtScript N(EVS_Scene_Chapter7) = {
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(7.5))
     EVT_CALL(NpcFlyTo, NPC_PARTNER, 500, 130, 10, 0, 0, EASING_LINEAR)
-    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach_C001E, ANIM_Peach_C001E, 5, MSG_Peach_0171)
+    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_TiedIdle, ANIM_Peach2_TiedIdle, 5, MSG_Peach_0171)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_Ch7_Bowser, ANIM_WorldBowser_Idle)
     EVT_CALL(SpeakToPlayer, NPC_Ch7_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 5, MSG_Peach_0172)
@@ -425,7 +425,7 @@ EvtScript N(EVS_Scene_Chapter7) = {
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_EXEC_WAIT(N(EVS_PickUpPeach))
-    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach_D0008, ANIM_Peach_D0008, 5, MSG_Peach_0173)
+    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach3_TiedSideways, ANIM_Peach3_TiedSideways, 5, MSG_Peach_0173)
     EVT_EXEC_WAIT(N(EVS_CarryPeachAway))
     EVT_WAIT(30)
     EVT_EXEC_WAIT(N(EVS_EndPeachChapter7))

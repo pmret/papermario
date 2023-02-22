@@ -323,7 +323,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
         }
         get_actor_part(target, player->targetPartIndex);
         targetPosX = target->currentPos.x + target->headOffset.x;
-        if (target->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        if (target->flags & ACTOR_FLAG_UPSIDE_DOWN) {
             targetPosY = target->currentPos.y + target->headOffset.y - target->size.y;
         } else if (!(target->flags & ACTOR_FLAG_8000)) {
             targetPosY = target->currentPos.y + target->headOffset.y + target->size.y;

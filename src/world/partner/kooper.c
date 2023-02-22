@@ -331,7 +331,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 
                     if (!(kooper->jumpVelocity > 0.0f) && (playerStatus->position.y < kooper->moveToPos.z)) {
                         D_802BEC5C = 0;
-                        kooper->flags &= ~ACTOR_FLAG_100;
+                        kooper->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
                         partnerActionStatus->actingPartner = PARTNER_KOOPER;
                         partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_2;
                         kooper->rotation.z = 0.0f;

@@ -822,21 +822,21 @@ s32 get_overriding_player_anim(s32 anim) {
         return -1;
     }
 
-    if (anim == ANIM_MarioW1_Lift || anim == ANIM_Peach_C0010 || anim == ANIM_Mario1_Idle) {
+    if (anim == ANIM_MarioW1_Lift || anim == ANIM_Peach2_SpreadArms || anim == ANIM_Mario1_Idle) {
         if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
             if (!func_800DFCF4()) {
                 return -1;
             }
         } else if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
-            anim = ANIM_Peach_C0010;
+            anim = ANIM_Peach2_SpreadArms;
         } else {
             peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].hold);
             return -1;
         }
     } else if (playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS) {
         if ((playerStatus->peachItemHeld != 0)
-        && (anim == ANIM_Peach_C0000 || anim == ANIM_Peach_C0001 || anim == ANIM_Peach_C0002)) {
-            anim = ANIM_Peach_D0000;
+        && (anim == ANIM_Peach2_RaiseArms || anim == ANIM_Peach2_Talk || anim == ANIM_Peach2_LowerArms)) {
+            anim = ANIM_Peach3_PresentCompleteCake;
         }
     }
 
@@ -1434,7 +1434,7 @@ s32 get_player_back_anim(s32 anim) {
                 outAnim = ANIM_MarioW1_Smash3_Hit_Back;
             }
         } else if (sprIndex == SPR_Peach1) {
-            if (anim > ANIM_Peach_A0006) {
+            if (anim > ANIM_Peach1_StepDown) {
                 outAnim = anim + 1;
             }
         }

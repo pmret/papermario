@@ -45,7 +45,7 @@ EvtScript N(EVS_NpcInit_Bowser_03) = {
 EvtScript N(EVS_NpcInit_Peach) = {
     EVT_CALL(SetNpcCollisionSize, NPC_Peach_02, 48, 24)
     EVT_CALL(SetNpcPos, NPC_Peach_02, 400, 0, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Peach_02, ANIM_Peach_A0001)
+    EVT_CALL(SetNpcAnimation, NPC_Peach_02, ANIM_Peach1_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -75,10 +75,10 @@ AnimID N(ExtraAnims_Bowser)[] = {
 };
 
 AnimID N(ExtraAnims_Peach)[] = {
-    ANIM_Peach_A0001,
-    ANIM_Peach_A0002,
-    ANIM_Peach_C0000,
-    ANIM_Peach_C0006,
+    ANIM_Peach1_Idle,
+    ANIM_Peach1_Walk,
+    ANIM_Peach2_RaiseArms,
+    ANIM_Peach2_GaspStill,
     ANIM_LIST_END
 };
 

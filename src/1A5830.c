@@ -564,7 +564,6 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         isFire = TRUE;
     }
 
-
     if (gBattleStatus.flags1 & BS_FLAGS1_ATK_BLOCKED) {
         if (event == EVENT_HIT_COMBO) {
             event = EVENT_18;
@@ -2673,7 +2672,7 @@ ApiStatus DropStarPoints(Evt* script, s32 isInitialCall) {
         s32 spawnMode;
         s32 i;
 
-        if (dropper->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        if (dropper->flags & ACTOR_FLAG_UPSIDE_DOWN) {
             spawnMode = ITEM_SPAWN_MODE_TOSS_FADE3;
         } else {
             spawnMode = ITEM_SPAWN_MODE_TOSS_FADE1;
