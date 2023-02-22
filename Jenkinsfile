@@ -46,7 +46,7 @@ pipeline {
 
                         def message = "${us_progress}\n${jp_progress}\n${cn_progress}\n${warnings}"
 
-                        if (message != "\n\n") {
+                        if (message != "\n\n\n") {
                             if (comment_id == -1) {
                                 echo message
                                 pullRequest.comment(message)
