@@ -788,6 +788,42 @@ BSS f32 N(HoldStarRodCamX);
 BSS f32 N(HoldStarRodCamY);
 BSS f32 N(HoldStarRodCamZ);
 
+BSS f32 N(FlyToBowserStartX);
+BSS f32 N(FlyToBowserStartZ);
+
+BSS f32 N(D_8024F2FC);
+BSS f32 N(D_8024F300);
+BSS f32 N(D_8024F304);
+BSS f32 N(D_8024F308);
+BSS f32 N(D_8024F30C);
+BSS f32 N(D_8024F310);
+BSS char N(D_8024F314)[0x4];
+
+BSS f32 N(StarSpiritsPosX)[7];
+BSS char N(D_8024F334)[0x4];
+
+BSS f32 N(StarSpiritsPosY)[7];
+BSS char N(D_8024F354)[0x4];
+
+BSS f32 N(StarSpiritsPosZ)[7];
+
+BSS f32 N(AnimBowser_FlyOff_InitialY);
+BSS f32 N(AnimKammy_FlyOff_InitialY);
+BSS char N(D_8024F37C)[0x4];
+BSS s32 N(D_8024F380);
+BSS char N(D_8024F384)[0x74];
+
+typedef struct UnkHos05Struct {
+    /* 0x00 */ Vec3f unk_00;
+    /* 0x0C */ Vec3f unk_0C;
+    /* 0x18 */ Vec3f unk_18;
+    /* 0x24 */ f32 unk_24;
+} UnkHos05Struct; // size = 0x28
+
+BSS UnkHos05Struct N(D_8024F3F8)[7];
+
+BSS StoryGraphicData N(StoryGraphics);
+
 API_CALLABLE(N(CamPullBack_BowserHoldingStarRod)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
@@ -863,182 +899,166 @@ API_CALLABLE(N(CamMove_OrbitKammy)) {
     }
 }
 
-// lotta work to do
+// float regalloc stuff
 #ifdef WIP
-API_CALLABLE(func_802428C8_A2CB08) {
+ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 temp_s6 = evt_get_variable(script, *args++);
-    f32 sp10 = evt_get_float_variable(script, *args++);
-    f32 temp_f28 = evt_get_float_variable(script, *args++);
-    EffectInstance* effect = evt_get_variable(script, ArrayVar(0));
-    f32 temp_f20;
-    f32 temp_f20_2;
-    f32 temp_f20_3;
-    f32 temp_f20_4;
+    f32 sp10;
+    f32 temp_f28;
+    EffectInstance* temp_a0;
+    f32 xPos, yPos, zPos;
     f32 temp_f24;
-    f32 temp_f24_2;
-    f32 var_f0_2;
-    f32 var_f0_3;
-    f32 var_f20_2;
-    f32 var_f26;
-    f32 var_f2_2;
-    f64 var_f20;
-    f64 var_f2;
-    f64 var_f2_3;
-    f64 var_f2_4;
-    f64 var_f2_5;
-    f64 var_f2_6;
-    f64 var_f2_7;
-    f64 var_f2_8;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-    s32 temp_v0_5;
-    s32 temp_v0_6;
-    s32 temp_v0_7;
+    EffectInstance* effect;
+    UnkHos05Struct* unkData;
+    Vec3f* vec01; // vectors 0, 1
+    Vec3f* vec2; // vector 2
+    f32 angle;
+    s32 s4;
+    s32 s5;
 
-    f32* temp_s1_2;
-    f32* temp_s2;
-    f32* var_s0;
-    f32* var_s2;
+
+    sp10 = evt_get_float_variable(script, *args++);
+    temp_f28 = evt_get_float_variable(script, *args++);
+    temp_a0 = evt_get_variable(script, ArrayVar(0));
+
+
+    effect = temp_a0;
 
     switch (temp_s6) {
         case 1:
-            var_s0 = N(D_8024F3F8);
-            var_s2 = N(D_8024F3F8);
-            temp_v0 = effect->data.somethingRotating->unk_14 + 30;
-            var_f2 = temp_v0;
-            if (temp_v0 < 0) {
-                var_f2 += 4294967296.0;
-            }
-            var_f20 = var_f2 * 4.0f;
-            temp_f20 = var_f20 + 51.43;
-            temp_f24 = sin_deg(temp_f20);
-            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24);
-            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20) * 50.0f);
-            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24;
-            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            unkData = &N(D_8024F3F8)[0];
+            vec01 = &unkData->unk_00;
+            s5 = 30;
+            s4 = 3;
+            angle = 90.0f;
+            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
+            yPos = yPos * 4.0f;
+            temp_f24 = sin_deg(yPos + 51.43);
+            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
+            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 51.43) * 50.0f);
+            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
+            unkData->unk_18.x = xPos;
+            unkData->unk_18.y = yPos;
+            unkData->unk_18.z = zPos;
             break;
         case 2:
-            var_s0 = N(D_8024F420);
-            var_s2 = N(D_8024F420);
-            temp_v0_2 = effect->data.somethingRotating->unk_14 + 30;
-            var_f2_3 = temp_v0_2;
-            if (temp_v0_2 < 0) {
-                var_f2_3 += 4294967296.0;
-            }
-            var_f20 = (var_f2_3 * 4.0f);
-            temp_f20 = var_f20 + 360.01;
-            temp_f24 = sin_deg(temp_f20);
-            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24);
-            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20) * 50.0f);
-            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24;
-            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            unkData = &N(D_8024F3F8)[1];
+            vec01 = &unkData->unk_00;
+            s5 = 30;
+            s4 = 3;
+            angle = 90.0f;
+            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
+            yPos = yPos * 4.0f;
+            temp_f24 = sin_deg(yPos + 360.01);
+            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
+            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 360.01) * 50.0f);
+            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
+            unkData->unk_18.x = xPos;
+            unkData->unk_18.y = yPos;
+            unkData->unk_18.z = zPos;
             break;
         case 3:
-            var_s0 = N(D_8024F448);
-            var_s2 = N(D_8024F448);
-            temp_v0_3 = effect->data.somethingRotating->unk_14 + 30;
-            var_f2_4 = temp_v0_3;
-            if (temp_v0_3 < 0) {
-                var_f2_4 += 4294967296.0;
-            }
-            var_f20 = var_f2_4 * 4.0f;
-            temp_f20 = var_f20 + 154.29;
-            temp_f24 = sin_deg(temp_f20);
-            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24);
-            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20) * 50.0f);
-            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24;
-            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            unkData = &N(D_8024F3F8)[2];
+            vec01 = &unkData->unk_00;
+            s5 = 30;
+            s4 = 3;
+            angle = 90.0f;
+            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
+            yPos = yPos * 4.0f;
+            temp_f24 = sin_deg(yPos + 154.29);
+            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
+            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 154.29) * 50.0f);
+            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
+            unkData->unk_18.x = xPos;
+            unkData->unk_18.y = yPos;
+            unkData->unk_18.z = zPos;
             break;
         case 4:
-            var_s0 = N(D_8024F470);
-            temp_v0_4 = effect->data.somethingRotating->unk_14 + 30;
-            var_f2_5 = temp_v0_4;
-            var_s2 = N(D_8024F470);
-            if (temp_v0_4 < 0) {
-                var_f2_5 += 4294967296.0;
-            }
-            temp_f20_2 = (var_f2_5 * 4.0f) + 205.72;
-            temp_f24_2 = sin_deg(temp_f20_2);
-            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24_2);
-            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20_2) * 50.0f);
-            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24_2;
-            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            unkData = &N(D_8024F3F8)->unk_18;
+            vec01 = &unkData->unk_00;
+            s5 = 30;
+            angle = 90.0f;
+            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
+            s4 = 3;
+            yPos = yPos * 4.0f;
+            temp_f24 = sin_deg(yPos + 205.72);
+            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
+            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 205.72) * 50.0f);
+            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
+            unkData->unk_18.x = xPos;
+            unkData->unk_18.y = yPos;
+            unkData->unk_18.z = zPos;
             break;
         case 5:
-            var_s0 = N(D_8024F498);
-            var_s2 = N(D_8024F498);
-            temp_v0_5 = effect->data.somethingRotating->unk_14 + 30;
-            var_f2_6 = temp_v0_5;
-            if (temp_v0_5 < 0) {
-                var_f2_6 += 4294967296.0;
-            }
-            var_f20 = var_f2_6 * 4.0f;
-            temp_f20 = var_f20 + 308.58;
-            temp_f24 = sin_deg(temp_f20);
-            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24);
-            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20) * 50.0f);
-            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24;
-            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            unkData = &N(D_8024F3F8)[4];
+            vec01 = &unkData->unk_00;
+            s5 = 30;
+            s4 = 3;
+            angle = 90.0f;
+            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
+            yPos = yPos * 4.0f;
+            temp_f24 = sin_deg(yPos + 308.58);
+            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
+            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 308.58) * 50.0f);
+            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
+            unkData->unk_18.x = xPos;
+            unkData->unk_18.y = yPos;
+            unkData->unk_18.z = zPos;
             break;
         case 6:
-            var_s0 = N(D_8024F4C0);
-            var_s2 = N(D_8024F4C0);
-            temp_v0_6 = effect->data.somethingRotating->unk_14 + 30;
-            var_f2_7 = temp_v0_6;
-            if (temp_v0_6 < 0) {
-                var_f2_7 += 4294967296.0;
-            }
-            var_f20 = var_f2_7 * 4.0f;
-            temp_f20 = var_f20 + 102.86;
-            temp_f24 = sin_deg(temp_f20);
-            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24);
-            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20) * 50.0f);
-            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24;
-            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            unkData = &N(D_8024F3F8)[5];
+            vec01 = &unkData->unk_00;
+            s5 = 30;
+            s4 = 3;
+            angle = 90.0f;
+            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
+            yPos = yPos * 4.0f;
+            temp_f24 = sin_deg(yPos + 102.86);
+            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
+            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 102.86) * 50.0f);
+            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
+            unkData->unk_18.x = xPos;
+            unkData->unk_18.y = yPos;
+            unkData->unk_18.z = zPos;
             break;
         default:
-            var_s0 = N(D_8024F4E8);
-            var_s2 = N(D_8024F4E8);
-            temp_v0_7 = effect->data.somethingRotating->unk_14 + 30;
-            var_f2_8 = temp_v0_7;
-            if (temp_v0_7 < 0) {
-                var_f2_8 += 4294967296.0;
-            }
-            var_f20 = (var_f2_8 * 4.0f);
-            temp_f20 = var_f20 + 257.15;
-            temp_f24 = sin_deg(temp_f20);
-            var_f26 = effect->data.somethingRotating->unk_04 + (sin_deg(90.0f) * 50.0f * temp_f24);
-            var_f20_2 = effect->data.somethingRotating->unk_08 + (cos_deg(temp_f20) * 50.0f);
-            var_f0_2 = sin_deg(90.0f) * 50.0f * temp_f24;
-            var_f2_2 = effect->data.somethingRotating->unk_0C;
+            unkData = &N(D_8024F3F8)[6];
+            vec01 = &unkData->unk_00;
+            s5 = 30;
+            s4 = 3;
+            angle = 90.0f;
+            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
+            yPos = yPos * 4.0f;
+            temp_f24 = sin_deg(yPos + 257.15);
+            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
+            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 257.15) * 50.0f);
+            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
+            unkData->unk_18.x = xPos;
+            unkData->unk_18.y = yPos;
+            unkData->unk_18.z = zPos;
             break;
     }
-    var_s0[6] = var_f26;
-    var_s0[7] = var_f20_2;
-    var_s0[8] = var_f2_2 + var_f0_2;
-    var_s2[0] = evt_get_float_variable(script, LocalVar(0));
-    var_s2[1] = evt_get_float_variable(script, LocalVar(1));
-    temp_s1_2 = var_s2 + 0x18;
-    var_s2[4] = evt_get_float_variable(script, LocalVar(2));
-    temp_s2 = var_s2 + 0xC;
+
+    vec01->x = evt_get_float_variable(script, LocalVar(0));
+    vec01->y = evt_get_float_variable(script, LocalVar(1));
+    vec01->z = evt_get_float_variable(script, LocalVar(2));
+
+    vec2 = &vec01[2];
+    vec01++;
+
     if (temp_s6 != 2) {
-        temp_f20_3 = 1.0f - temp_f28;
-        temp_s2[0] =  (evt_get_float_variable(script, LocalVar(0)) * temp_f28) + (temp_s1_2[0] * temp_f20_3);
-        temp_s2[1] = (evt_get_float_variable(script, LocalVar(1)) * temp_f28) + (temp_s1_2[1] * temp_f20_3) + sp10;
-        var_f0_3 = (evt_get_float_variable(script, LocalVar(2)) * temp_f28) + (temp_s1_2[2] * temp_f20_3);
+        vec01->x = (evt_get_float_variable(script, LocalVar(0)) * temp_f28) + (vec2->x * (1.0f - temp_f28));
+        vec01->y = (evt_get_float_variable(script, LocalVar(1)) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
+        vec01->z = (evt_get_float_variable(script, LocalVar(2)) * temp_f28) + (vec2->z * (1.0f - temp_f28));
     } else {
-        temp_f20_4 = 1.0f - temp_f28;
-        temp_s2[0] = ((evt_get_float_variable(script, LocalVar(0)) * temp_f28) + (temp_s1_2[0] * temp_f20_4)) - 50.0f;
-        temp_s2[1] = (evt_get_float_variable(script, LocalVar(1)) * temp_f28) + (temp_s1_2[1] * temp_f20_4) + sp10;
-        var_f0_3 = ((evt_get_float_variable(script, LocalVar(2)) * temp_f28) + (temp_s1_2[2] * temp_f20_4)) - 50.0f;
+        vec01->x = ((evt_get_float_variable(script, LocalVar(0)) * temp_f28) + (vec2->x * (1.0f - temp_f28))) - 50.0f;
+        vec01->y = (evt_get_float_variable(script, LocalVar(1)) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
+        vec01->z = ((evt_get_float_variable(script, LocalVar(2)) * temp_f28) + (vec2->z * (1.0f - temp_f28))) - 50.0f;
     }
-    temp_s2[2] = var_f0_3;
-    script->varTable[0] = 30;
-    script->varTable[1] = var_s0;
-    script->varTable[2] = 3;
+    script->varTable[0] = s5;
+    script->varTablePtr[1] = unkData;
+    script->varTable[2] = s4;
     return ApiStatus_DONE2;
 }
 #else
@@ -1249,9 +1269,6 @@ API_CALLABLE(N(CamPullBack_Final)) {
 
 s32 N(FlyToBowserTime) = 0;
 
-BSS f32 N(FlyToBowserStartX);
-BSS f32 N(FlyToBowserStartZ);
-
 API_CALLABLE(N(KammyFlyToBowser)) {
     Npc* kammy = resolve_npc(script, NPC_Kammy);
 
@@ -1271,36 +1288,6 @@ API_CALLABLE(N(KammyFlyToBowser)) {
     }
     return ApiStatus_DONE1;
 }
-
-BSS f32 N(D_8024F2FC);
-BSS f32 N(D_8024F300);
-BSS f32 N(D_8024F304);
-BSS f32 N(D_8024F308);
-BSS f32 N(D_8024F30C);
-BSS f32 N(D_8024F310);
-BSS char N(D_8024F314)[0x4];
-
-BSS f32 N(StarSpiritsPosX)[7];
-BSS char N(D_8024F334)[0x4];
-
-BSS f32 N(StarSpiritsPosY)[7];
-BSS char N(D_8024F354)[0x4];
-
-BSS f32 N(StarSpiritsPosZ)[7];
-
-BSS f32 N(AnimBowser_FlyOff_InitialY);
-BSS f32 N(AnimKammy_FlyOff_InitialY);
-BSS char N(D_8024F37C)[0x4];
-BSS s32 N(D_8024F380);
-BSS char N(D_8024F384)[0x74];
-BSS s32 N(D_8024F3F8)[10];
-BSS s32 N(D_8024F420)[10];
-BSS s32 N(D_8024F448)[10];
-BSS s32 N(D_8024F470)[10];
-BSS s32 N(D_8024F498)[10];
-BSS s32 N(D_8024F4C0)[10];
-BSS s32 N(D_8024F4E8)[10];
-BSS StoryGraphicData N(StoryGraphics);
 
 void N(appendGfx_image_strips)(
     s32 baseX, s32 baseY,

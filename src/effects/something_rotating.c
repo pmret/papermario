@@ -106,9 +106,9 @@ EffectInstance* something_rotating_main(
     } else {
         part->unk_10 = arg5;
     }
-    part->unk_04 = arg1;
-    part->unk_08 = arg2;
-    part->unk_0C = arg3;
+    part->pos.x = arg1;
+    part->pos.y = arg2;
+    part->pos.z = arg3;
     part->unk_18 = arg4;
     part->unk_1C = 30.0f;
     part->unk_20 = 0;
@@ -135,9 +135,9 @@ void something_rotating_init(EffectInstance* effect) {
 
 void something_rotating_update(EffectInstance* effect) {
     SomethingRotatingFXData* part = effect->data.somethingRotating;
-    f32 unk_04 = part->unk_04;
-    f32 unk_08 = part->unk_08;
-    f32 unk_0C = part->unk_0C;
+    f32 x = part->pos.x;
+    f32 y = part->pos.y;
+    f32 z = part->pos.z;
     s32 unk_14;
     s32 unk_14_2;
     f32 factor;
@@ -170,9 +170,9 @@ void something_rotating_update(EffectInstance* effect) {
         f32 temp_f24 = shim_sin_deg(angle2);
         f32 temp_f22 = part->unk_2C;
 
-        part->unk_04 = unk_04 + temp_f22 * shim_sin_deg(angle1) * temp_f24;
-        part->unk_08 = unk_08 + temp_f22 * shim_cos_deg(angle2);
-        part->unk_0C = unk_0C + temp_f22 * shim_cos_deg(angle1) * temp_f24;
+        part->pos.x = x + temp_f22 * shim_sin_deg(angle1) * temp_f24;
+        part->pos.y = y + temp_f22 * shim_cos_deg(angle2);
+        part->pos.z = z + temp_f22 * shim_cos_deg(angle1) * temp_f24;
 
         switch (part->state) {
             case 1:
@@ -264,9 +264,9 @@ void func_E01166E8(s32 arg0, SomethingRotatingFXData* part) {
     }
 
     shim_guPositionF(sp20, 0.0f, part->unk_20 - temp, 0.0f, part->unk_18,
-        part->unk_04 + 2.0f,
-        part->unk_08,
-        part->unk_0C + 2.0f
+        part->pos.x + 2.0f,
+        part->pos.y,
+        part->pos.z + 2.0f
     );
     shim_guRotateF(sp60, part->unk_1C, 0.0f, 0.0f, 1.0f);
     shim_guMtxCatF(sp60, sp20, sp20);

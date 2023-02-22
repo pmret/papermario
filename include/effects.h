@@ -2448,9 +2448,7 @@ typedef struct LilOinkFXData {
 
 typedef struct SomethingRotatingFXData {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ f32 unk_18;

@@ -6,7 +6,7 @@
 
 extern u8 MessagePlural[];
 extern u8 MessageSingular[];
-extern HudScript* HES_Item_Coin;
+extern HudScript HES_Item_Coin;
 
 API_CALLABLE(func_802803C8);
 API_CALLABLE(func_80280410);
@@ -861,9 +861,6 @@ void draw_shop_items(void) {
     }
 }
 
-// This should be equivalent to the original code but there is some funny business with
-// the evt_get_variable's at the beginning that makes absolutely no sense.
-#ifdef NON_MATCHING
 API_CALLABLE(MakeShop) {
     Bytecode* args = script->ptrReadPos;
     ShopItemLocation* itemDataPositions;
@@ -876,14 +873,23 @@ API_CALLABLE(MakeShop) {
     f32 centerX;
     f32 centerY;
     f32 centerZ;
+    s32 var1;
+    s32 var2;
+    s32 var3;
+    s32 var4;
     f32 sizeX;
     f32 sizeY;
     f32 sizeZ;
 
-    itemDataPositions = evt_get_variable(script, *args++);
-    inventory = evt_get_variable(script, *args++);
-    prices = evt_get_variable(script, *args++);
-    inventoryItemFlags = evt_get_variable(script, *args++);
+    var1 = evt_get_variable(script, *args++);
+    var2 = evt_get_variable(script, *args++);
+    var3 = evt_get_variable(script, *args++);
+    var4 = evt_get_variable(script, *args++);
+
+    itemDataPositions = (ShopItemLocation*) var1;
+    inventory = (ShopItemData*) var2;
+    prices = (ShopSellPriceData*) var3;
+    inventoryItemFlags = var4;
 
     shop = heap_malloc(sizeof(*shop));
 
@@ -894,7 +900,7 @@ API_CALLABLE(MakeShop) {
     shop->inventoryItemFlags = inventoryItemFlags;
 
     numShopItems = 0;
-    while (inventory->itemID != 0) {
+    while (inventory->itemID != ITEM_NONE) {
         numShopItems++;
         inventory++;
     }
@@ -902,7 +908,7 @@ API_CALLABLE(MakeShop) {
 
     numShopItems = 0;
     if (prices != NULL) {
-        while (prices->itemID != 0) {
+        while (prices->itemID != ITEM_NONE) {
             numShopItems++;
             prices++;
         }
@@ -926,9 +932,9 @@ API_CALLABLE(MakeShop) {
         model->flags |= MODEL_FLAG_FLAG_4;
         gGameStatusPtr->shopItemEntities[numShopItems].index =
             make_item_entity_nodelay(inventory->itemID | shop->inventoryItemFlags, centerX, centerY, centerZ, 1, 0);
-        set_item_entity_flags(gGameStatusPtr->shopItemEntities[numShopItems].index, 0x4000);
-        bind_trigger_1(D_80283F58_7E4DD8, 0x80, itemDataPositions->triggerColliderID, numShopItems, 0, 3);
-        bind_trigger_1(D_80283F58_7E4DD8, 0x800, itemDataPositions->triggerColliderID, numShopItems, 0, 3);
+        set_item_entity_flags(gGameStatusPtr->shopItemEntities[numShopItems].index, ITEM_ENTITY_RESIZABLE);
+        bind_trigger_1(&D_80283F58_7E4DD8, TRIGGER_FLOOR_TOUCH, itemDataPositions->triggerColliderID, numShopItems, 0, 3);
+        bind_trigger_1(&D_80283F58_7E4DD8, TRIGGER_FLOOR_PRESS_A, itemDataPositions->triggerColliderID, numShopItems, 0, 3);
         itemDataPositions++;
         inventory++;
         numShopItems++;
@@ -949,9 +955,6 @@ API_CALLABLE(MakeShop) {
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(ApiStatus, "world/script_api/shops", MakeShop, Evt* script, s32 isInitialCall);
-#endif
 
 API_CALLABLE(MakeShopOwner) {
     Shop* mapShop = gGameStatusPtr->mapShop;
