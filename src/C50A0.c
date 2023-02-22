@@ -771,7 +771,7 @@ void item_entity_load(ItemEntity* item) {
     s32 cond;
     s32 raster;
     s32 palette;
-    s32 capacity;
+    s32 size;
     s32 i;
 
     item->savedReadPos = item->readPos = pos = gItemEntityScripts[item->itemID];
@@ -791,7 +791,9 @@ void item_entity_load(ItemEntity* item) {
                 pos++;
                 raster = *pos++;
                 palette = *pos++;
-                capacity = (item->flags & ITEM_ENTITY_FLAG_40000) ? 0x200 : 0x120;
+
+                // 32x32 or 24x24 (divided by 2 because these are ci4 iamges)
+                size = (item->flags & ITEM_ENTITY_FLAG_40000) ? (32 * 32 / 2) : (24 * 24 / 2);
 
                 entry = gHudElementCacheTableRaster;
                 i = 0;
@@ -800,9 +802,9 @@ void item_entity_load(ItemEntity* item) {
                         entry->id = raster;
                         entry->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
 
-                        ASSERT(*gHudElementCacheSize + capacity < 0x11000);
-                        nuPiReadRom((s32)icon_present_ROM_START + raster, entry->data, capacity);
-                        *gHudElementCacheSize += capacity;
+                        ASSERT(*gHudElementCacheSize + size < 0x11000);
+                        nuPiReadRom((s32)icon_present_ROM_START + raster, entry->data, size);
+                        *gHudElementCacheSize += size;
                         if (!gGameStatusPtr->isBattle) {
                             *pos = i;
                         } else {
