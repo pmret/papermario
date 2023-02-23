@@ -352,7 +352,7 @@ dlabel gBattleNpcList
 dlabel gCurrentNpcListPtr
 .space 4
 
-dlabel D_800A0B94
+dlabel gNpcCollisionsEnabled
 .space 12
 
 dlabel D_800A0BA0

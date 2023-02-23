@@ -174,7 +174,7 @@ API_CALLABLE(func_80282E30) {
     zThing /= BLOCK_GRID_SIZE;
 
     varX = xThing;
-    varZ = zThing;
+    varZ = entityZ = zThing;
 
     xThing *= BLOCK_GRID_SIZE;
     yThing *= BLOCK_GRID_SIZE;
@@ -188,15 +188,14 @@ API_CALLABLE(func_80282E30) {
     script->varTable[4] = yThing = entity->position.y;
     script->varTable[5] = entityZ = entity->position.z;
 
-    xThing = (xThing - grid->centerPos.x);
+    xThing = xThing - grid->centerPos.x;
+    entityZ = entityZ - grid->centerPos.z;
     xThing /= BLOCK_GRID_SIZE;
     var_a1 = xThing - varX;
-    entityZ = (entityZ - grid->centerPos.z);
     entityZ /= BLOCK_GRID_SIZE;
     var_a0_2 = entityZ - varZ;
     if (var_a1 != 0 && var_a0_2 != 0) {
-        var_a0_2 = 0;
-        var_a1 = 0;
+        var_a0_2 = var_a1 = 0;
     }
     script->varTable[6] = var_a1;
     script->varTable[7] = 0;
@@ -250,14 +249,14 @@ API_CALLABLE(CanPlayerPushBlock) {
     if ((gCollisionStatus.pushingAgainstWall == blockCollider)
         && (playerStatus->actionState == ACTION_STATE_PUSHING_BLOCK
         || playerStatus->actionState == ACTION_STATE_WALK
-        || playerStatus->actionState == ACTION_STATE_RUN) 
+        || playerStatus->actionState == ACTION_STATE_RUN)
         && !(playerStatus->animFlags & PA_FLAG_USING_WATT))
     {
         script->varTable[13] = TRUE;
     } else {
         script->varTable[13] = FALSE;
     }
-    
+
     return ApiStatus_DONE2;
 }
 

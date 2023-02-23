@@ -103,7 +103,7 @@ extern s16 D_800A095E;
 extern u8 D_800A095F;
 extern s32 D_800A0960;
 extern s32 D_800A0964;
-extern s8 D_800A0B94;
+extern s8 gNpcCollisionsEnabled;
 extern s16 D_800A0BB8;
 
 extern SpriteShadingProfile* gAuxSpriteShadingProfile;

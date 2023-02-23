@@ -436,7 +436,7 @@ dlabel gBattleNpcList
 dlabel gCurrentNpcListPtr
 .space 4
 
-dlabel D_800A0B94
+dlabel gNpcCollisionsEnabled
 .space 4
 
 dlabel D_800A0B98
