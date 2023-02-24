@@ -65,7 +65,7 @@ void clear_npcs(void) {
     }
 
     gNpcCount = 0;
-    gNpcCollisionsEnabled = TRUE;
+    gNpcPlayerCollisionsEnabled = TRUE;
 }
 
 void init_npc_list(void) {
@@ -76,7 +76,7 @@ void init_npc_list(void) {
     }
 
     gNpcCount = 0;
-    gNpcCollisionsEnabled = TRUE;
+    gNpcPlayerCollisionsEnabled = TRUE;
 }
 
 void npc_iter_no_op(void) {
@@ -466,7 +466,7 @@ s32 npc_do_player_collision(Npc* npc) {
         return FALSE;
     }
 
-    if (!gNpcCollisionsEnabled) {
+    if (!gNpcPlayerCollisionsEnabled) {
         return FALSE;
     }
 
@@ -520,7 +520,7 @@ s32 npc_do_player_collision(Npc* npc) {
             wPartnerNpc->pos.z -= playerZ * 0.5f;
         }
     } else {
-        if (playerStatus->flags & (4 | 2)) {
+        if (playerStatus->flags & (PS_FLAG_JUMPING | PS_FLAG_FALLING)) {
             playerStatus->position.x -= temp_f24 * 0.4f;
             playerStatus->position.z -= playerZ * 0.4f;
         } else if (fabsf(get_clamped_angle_diff(temp_f0, temp_f28)) < 45.0f) {
@@ -1193,11 +1193,11 @@ void appendGfx_npc_blur(void* data) {
 }
 
 void npc_enable_collisions(void) {
-    gNpcCollisionsEnabled = TRUE;
+    gNpcPlayerCollisionsEnabled = TRUE;
 }
 
 void npc_disable_collisions(void) {
-    gNpcCollisionsEnabled = FALSE;
+    gNpcPlayerCollisionsEnabled = FALSE;
 }
 
 void func_8003B1A8(void) {

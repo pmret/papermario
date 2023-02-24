@@ -27,8 +27,8 @@ glabel npc_do_player_collision
 /* 1472C 8003932C 0800E597 */  j         .L8003965C
 /* 14730 80039330 0000102D */   daddu    $v0, $zero, $zero
 .L80039334:
-/* 14734 80039334 3C02800A */  lui       $v0, %hi(gNpcCollisionsEnabled)
-/* 14738 80039338 80420B94 */  lb        $v0, %lo(gNpcCollisionsEnabled)($v0)
+/* 14734 80039334 3C02800A */  lui       $v0, %hi(gNpcPlayerCollisionsEnabled)
+/* 14738 80039338 80420B94 */  lb        $v0, %lo(gNpcPlayerCollisionsEnabled)($v0)
 /* 1473C 8003933C 504000C7 */  beql      $v0, $zero, .L8003965C
 /* 14740 80039340 0000102D */   daddu    $v0, $zero, $zero
 /* 14744 80039344 860200B0 */  lh        $v0, 0xb0($s0)
