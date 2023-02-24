@@ -1770,11 +1770,14 @@ API_CALLABLE(N(ForceStarRodAlwaysFaceCamera)) {
     return ApiStatus_BLOCK;
 }
 
-#ifdef NON_MATCHING
 API_CALLABLE(func_80244550_A2E790) {
     Npc* kammy = resolve_npc(script, NPC_Kammy);
-    EffectInstance* effect = evt_get_variable(script, ArrayVar(0));
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, ArrayVar(0));
+    Npc* npc2;
     f32 x, y, z;
+    f32* x2;
+    f32* y2;
+    f32* z2;
     s32 i;
 
     if (isInitialCall) {
@@ -1783,40 +1786,42 @@ API_CALLABLE(func_80244550_A2E790) {
         N(D_8024F304) = kammy->pos.z;
 
         for (i = NPC_Eldstar; i < ARRAY_COUNT(N(StarSpiritsPosX)); i++) {
-            Npc* npc2 = resolve_npc(script, i);
+            npc2 = resolve_npc(script, i);
 
             N(StarSpiritsPosX)[i] = npc2->pos.x;
             N(StarSpiritsPosY)[i] = npc2->pos.y;
             N(StarSpiritsPosZ)[i] = npc2->pos.z;
         }
-        N(D_8024F308) = effect->data.somethingRotating->unk_04;
-        N(D_8024F30C) = effect->data.somethingRotating->unk_08;
-        N(D_8024F310) = effect->data.somethingRotating->unk_0C;
+        N(D_8024F308) = effect->data.somethingRotating->pos.x;
+        N(D_8024F30C) = effect->data.somethingRotating->pos.y;
+        N(D_8024F310) = effect->data.somethingRotating->pos.z;
     }
 
     x = kammy->pos.x - N(D_8024F2FC);
     y = kammy->pos.y - N(D_8024F300);
     z = kammy->pos.z - N(D_8024F304);
 
-    for (i = 0; i < ARRAY_COUNT(N(StarSpiritsPosX)); i++) {
-        Npc* npc2 = resolve_npc(script, i);
+    i = 0;
+    z2 = N(StarSpiritsPosZ);
+    y2 = N(StarSpiritsPosY);
+    x2 = N(StarSpiritsPosX);
+    for (; i < ARRAY_COUNT(N(StarSpiritsPosX)); ) {
+        npc2 = resolve_npc(script, i);
+        i++;
+        npc2->pos.x = *x2++ + x;
+        npc2->pos.y = *y2++ + y;
+        npc2->pos.z = *z2++ + z;
 
-        npc2->pos.x = N(StarSpiritsPosX)[i] + x;
-        npc2->pos.y = N(StarSpiritsPosY)[i] + y;
-        npc2->pos.z = N(StarSpiritsPosZ)[i] + z;
         npc2->colliderPos.x = npc2->pos.x;
         npc2->colliderPos.y = npc2->pos.y;
         npc2->colliderPos.z = npc2->pos.z;
     }
-    effect->data.somethingRotating->unk_04 = N(D_8024F308) + x;
-    effect->data.somethingRotating->unk_08 = N(D_8024F30C) + y;
-    effect->data.somethingRotating->unk_0C = N(D_8024F310) + z;
+
+    effect->data.somethingRotating->pos.x = N(D_8024F308) + x;
+    effect->data.somethingRotating->pos.y = N(D_8024F30C) + y;
+    effect->data.somethingRotating->pos.z = N(D_8024F310) + z;
     return ApiStatus_BLOCK;
 }
-#else
-API_CALLABLE(func_80244550_A2E790);
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80244550_A2E790);
-#endif
 
 extern EvtScript N(EVS_Scene_IntroStory);
 

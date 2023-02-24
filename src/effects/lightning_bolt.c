@@ -214,12 +214,12 @@ void lightning_bolt_appendGfx(void* effect) {
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->outerColor.r, data->outerColor.g, data->outerColor.b, temp_s3);
-    gDPSetEnvColor(gMasterGfxPos++, data->innerColor.r, data->innerColor.g, data->innerColor.b, 0x80);
+    gDPSetEnvColor(gMasterGfxPos++, data->innerColor.r, data->innerColor.g, data->innerColor.b, 128);
     gSPDisplayList(gMasterGfxPos++, D_09001000_3BBEA0);
 
     temp_a0 = temp_s7 - 1;
     if (temp_s6 != 2) {
-        if (temp_a0 < 0xB) {
+        if (temp_a0 <= 10) {
             var_s2 = &D_E00BCE40[temp_s6][temp_a0];
         } else {
             var_s2 = &D_E00BCE40[temp_s6][10];
@@ -235,7 +235,7 @@ void lightning_bolt_appendGfx(void* effect) {
     for (i = 0; i < 12; i++) {
         temp_f24 = (data->endPos.x - data->startPos.x) * (1 / 11.0f);
         temp_f22 = (data->endPos.y - data->startPos.y) * (1 / 11.0f);
-        temp_f28 = (data->unk_110 + (i - temp_s7) * 0xA) % 120 - 0x3C;
+        temp_f28 = (data->unk_110 + (i - temp_s7) * 10) % 120 - 60;
         temp_f26 = var_s2->unk_00[i];
 
         temp_f20 = shim_sin_deg(temp_f28) * temp_f26 * 0.04;
@@ -262,17 +262,20 @@ void lightning_bolt_appendGfx(void* effect) {
             var_f22 = -shim_atan2(data->unk_80[1], -data->unk_50[1], data->unk_80[0], -data->unk_50[0]);
         } else {
             temp_fs2 = 8.0f;
-            if (i == 0xB) {
+            if (i == 11) {
                 var_f22 = -90.0f;
             } else {
                 var_f20 = -shim_atan2(data->unk_80[i + 1], -data->unk_50[i + 1], data->unk_80[i], -data->unk_50[i]);
                 var_f2 = -shim_atan2(data->unk_80[i], -data->unk_50[i], data->unk_80[i - 1], -data->unk_50[i - 1]);
-                if (var_f2 - var_f20 > 180.0f) {
+                var_f22 = var_f2 - var_f20;
+                if (var_f22 > 180.0f) {
                     var_f20 += 360.0f;
-                } else if (var_f2 - var_f20 < -180.0f) {
+                } else if (var_f22 < -180.0f) {
                     var_f2 += 360.0f;
                 }
-                var_f22 = (var_f20 + var_f2) * 0.5;
+                //var_f22 = (var_f20 + var_f2) * 0.5;
+                var_f22 = (var_f20 + var_f2);
+                var_f22 /= 2.0;
             }
         }
 
