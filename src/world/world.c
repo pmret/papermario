@@ -142,10 +142,10 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         decode_yay0(yay0Asset, shapeFile);
         general_heap_free(yay0Asset);
 
-        mapSettings->modelTreeRoot = shapeFile->root;
-        mapSettings->modelNameList = shapeFile->modelNames;
-        mapSettings->colliderNameList = shapeFile->colliderNames;
-        mapSettings->zoneNameList = shapeFile->zoneNames;
+        mapSettings->modelTreeRoot = shapeFile->header.root;
+        mapSettings->modelNameList = shapeFile->header.modelNames;
+        mapSettings->colliderNameList = shapeFile->header.colliderNames;
+        mapSettings->zoneNameList = shapeFile->header.zoneNames;
     }
 
     if (mapConfig->bgName != NULL) {
