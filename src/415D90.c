@@ -416,7 +416,7 @@ BSS s32 D_802AD6A8[6];
 BSS s32 D_802AD6C0[5];
 BSS s32 D_802AD6D4;
 
-void func_800F513C(PopupMenu* popup);
+void create_battle_popup_menu(PopupMenu* popup);
 
 s32 func_80265D44(s32 animID);
 void func_802A3C98(void* data, s32 x, s32 y);
@@ -2896,13 +2896,13 @@ void btl_state_update_player_menu(void) {
             popup->numEntries = entryIdx;
             initialPos = battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_DIP];
             popup->initialPos = initialPos;
-            func_800F513C(popup);
+            create_battle_popup_menu(popup);
             func_800F52BC();
             gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_DIPPING_CHOOSE_TARGET;
             break;
         case BTL_SUBSTATE_PLAYER_MENU_DIPPING_CHOOSE_TARGET:
-            if (popup->result != 0) {
-                if (popup->result == 255) {
+            if (popup->result != POPUP_RESULT_CHOOSING) {
+                if (popup->result == POPUP_RESULT_CANCEL) {
                     func_802A2910();
                     battleStatus->selectedMoveID = 0;
                     battleStatus->itemUsesLeft = 0;
@@ -2926,7 +2926,7 @@ void btl_state_update_player_menu(void) {
             }
             break;
         case BTL_SUBSTATE_PLAYER_MENU_UNKNOWN_3:
-            if ((battleStatus->currentButtonsPressed & BUTTON_B) && popup->result == 0) {
+            if ((battleStatus->currentButtonsPressed & BUTTON_B) && popup->result == POPUP_RESULT_CHOOSING) {
                 func_800F16CC();
                 func_802A2C58();
                 func_802A1098();
@@ -2993,13 +2993,13 @@ void btl_state_update_player_menu(void) {
             popup->dipMode = 0;
             popup->titleNumber = 0;
             popup->initialPos = initialPos;
-            func_800F513C(popup);
+            create_battle_popup_menu(popup);
             func_800F52BC();
             gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_ITEMS_2;
             break;
         case BTL_SUBSTATE_PLAYER_MENU_ITEMS_2:
-            if (popup->result != 0) {
-                if (popup->result == 255) {
+            if (popup->result != POPUP_RESULT_CHOOSING) {
+                if (popup->result == POPUP_RESULT_CANCEL) {
                     func_802A1050();
                     D_802ACC60 = 8;
                     D_802ACC6C = 4;
@@ -3023,7 +3023,7 @@ void btl_state_update_player_menu(void) {
             }
             break;
         case BTL_SUBSTATE_PLAYER_MENU_ITEMS_3:
-            if ((battleStatus->currentButtonsPressed & BUTTON_B) && popup->result == 0) {
+            if ((battleStatus->currentButtonsPressed & BUTTON_B) && popup->result == POPUP_RESULT_CHOOSING) {
                 func_800F16CC();
                 func_802A1098();
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_ITEMS_4;
@@ -3204,15 +3204,15 @@ void btl_state_update_player_menu(void) {
                     popup->numEntries = entryIdx;
                     initialPos = battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_DIP];
                     popup->initialPos = initialPos;
-                    func_800F513C(popup);
+                    create_battle_popup_menu(popup);
                     func_800F52BC();
                     gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_DIPPING_2;
                 }
             }
             break;
         case BTL_SUBSTATE_PLAYER_MENU_DIPPING_2:
-            if (popup->result != 0) {
-                if (popup->result == 255) {
+            if (popup->result != POPUP_RESULT_CHOOSING) {
+                if (popup->result == POPUP_RESULT_CANCEL) {
                     battleStatus->itemUsesLeft = 1;
                     btl_set_state(BATTLE_STATE_END_PLAYER_TURN);
                 } else {
@@ -3456,15 +3456,15 @@ void btl_state_update_player_menu(void) {
             popup->initialPos = D_8008EEF0[playerData->currentPartner] - 1;
             popup->dipMode = 0;
             popup->titleNumber = 0;
-            func_800F513C(popup);
+            create_battle_popup_menu(popup);
             func_800F52BC();
             gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_2;
             break;
         case BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_2:
-            if (popup->result == -1) {
+            if (popup->result == POPUP_RESULT_MINUS_1) {
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_7;
-            } else if (popup->result != 0) {
-                if (popup->result == 255) {
+            } else if (popup->result != POPUP_RESULT_CHOOSING) {
+                if (popup->result == POPUP_RESULT_CANCEL) {
                     func_802A47E0();
                     gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_2;
                     btl_state_update_player_menu();
@@ -3486,7 +3486,7 @@ void btl_state_update_player_menu(void) {
             }
             break;
         case BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_3:
-            if ((battleStatus->currentButtonsPressed & BUTTON_B) && popup->result == 0) {
+            if ((battleStatus->currentButtonsPressed & BUTTON_B) && popup->result == POPUP_RESULT_CHOOSING) {
                 func_800F16CC();
                 func_802A4A10();
                 func_802A1098();
@@ -3520,7 +3520,7 @@ void btl_state_update_player_menu(void) {
         case BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_7:
             set_window_update(WINDOW_ID_6, WINDOW_UPDATE_HIDE);
             set_window_update(WINDOW_ID_7, WINDOW_UPDATE_HIDE);
-            if (popup->result != -1) {
+            if (popup->result != POPUP_RESULT_MINUS_1) {
                 set_window_update(WINDOW_ID_6, WINDOW_UPDATE_9);
                 set_window_update(WINDOW_ID_7, WINDOW_UPDATE_9);
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_2;
@@ -3969,13 +3969,13 @@ void btl_state_update_partner_menu(void) {
         popupMenu->titleNumber = 0;
         initialPos = battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_PARTNER_ITEM];
         popupMenu->initialPos = initialPos;
-        func_800F513C(popupMenu);
+        create_battle_popup_menu(popupMenu);
         func_800F52BC();
         gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_ITEMS_2;
         break;
     case BTL_SUBSTATE_PARTNER_MENU_ITEMS_2:
-        if (popupMenu->result != 0) {
-            if (popupMenu->result == 255) {
+        if (popupMenu->result != POPUP_RESULT_CHOOSING) {
+            if (popupMenu->result == POPUP_RESULT_CANCEL) {
                 func_802A1050();
                 D_802ACC60 = 8;
                 D_802ACC6C = 4;
@@ -3998,7 +3998,7 @@ void btl_state_update_partner_menu(void) {
         }
         break;
     case BTL_SUBSTATE_PARTNER_MENU_ITEMS_3:
-        if ((battleStatus->currentButtonsPressed & BUTTON_B) && popupMenu->result == 0) {
+        if ((battleStatus->currentButtonsPressed & BUTTON_B) && popupMenu->result == POPUP_RESULT_CHOOSING) {
             func_800F16CC();
             func_802A1098();
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_ITEMS_4;
@@ -4047,15 +4047,15 @@ void btl_state_update_partner_menu(void) {
         popupMenu->initialPos = D_8008EEF0[playerData->currentPartner] - 1;
         popupMenu->dipMode = 0;
         popupMenu->titleNumber = 0;
-        func_800F513C(popupMenu);
+        create_battle_popup_menu(popupMenu);
         func_800F52BC();
         gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_2;
         break;
     case BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_2:
-        if (popupMenu->result == -1) {
+        if (popupMenu->result == POPUP_RESULT_MINUS_1) {
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_7;
-        } else if (popupMenu->result != 0) {
-            if (popupMenu->result == 255) {
+        } else if (popupMenu->result != POPUP_RESULT_CHOOSING) {
+            if (popupMenu->result == POPUP_RESULT_CANCEL) {
                 func_802A1050();
                 D_802ACC60 = 8;
                 D_802ACC6C = 4;
@@ -4078,7 +4078,7 @@ void btl_state_update_partner_menu(void) {
         }
         break;
     case BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_3:
-        if ((battleStatus->currentButtonsPressed & BUTTON_B) && (popupMenu->result == 0)) {
+        if ((battleStatus->currentButtonsPressed & BUTTON_B) && (popupMenu->result == POPUP_RESULT_CHOOSING)) {
             func_800F16CC();
             func_802A1098();
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_4;
@@ -4103,7 +4103,7 @@ void btl_state_update_partner_menu(void) {
         btl_main_menu_destroy();
         break;
     case BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_7:
-        if (popupMenu->result != -1) {
+        if (popupMenu->result != POPUP_RESULT_MINUS_1) {
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_2;
         }
         break;
@@ -4321,15 +4321,15 @@ void btl_state_update_partner_menu(void) {
         popupMenu->initialPos = D_8008EEF0[playerData->currentPartner] - 1;
         popupMenu->dipMode = 0;
         popupMenu->titleNumber = 0;
-        func_800F513C(popupMenu);
+        create_battle_popup_menu(popupMenu);
         func_800F52BC();
         gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_2;
         break;
     case BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_2:
-        if (popupMenu->result == -1) {
+        if (popupMenu->result == POPUP_RESULT_MINUS_1) {
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_7;
-        } else if (popupMenu->result != 0) {
-            if (popupMenu->result == 255) {
+        } else if (popupMenu->result != POPUP_RESULT_CHOOSING) {
+            if (popupMenu->result == POPUP_RESULT_CANCEL) {
                 func_802A47E0();
                 gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_2;
                 btl_state_update_partner_menu();
@@ -4351,7 +4351,7 @@ void btl_state_update_partner_menu(void) {
         }
         break;
     case BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_3:
-        if ((battleStatus->currentButtonsPressed & BUTTON_B) && popupMenu->result == 0) {
+        if ((battleStatus->currentButtonsPressed & BUTTON_B) && popupMenu->result == POPUP_RESULT_CHOOSING) {
             func_800F16CC();
             func_802A4A10();
             func_802A1098();
@@ -4385,7 +4385,7 @@ void btl_state_update_partner_menu(void) {
     case BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_7:
         set_window_update(WINDOW_ID_6, WINDOW_UPDATE_HIDE);
         set_window_update(WINDOW_ID_7, WINDOW_UPDATE_HIDE);
-        if (popupMenu->result != -1) {
+        if (popupMenu->result != POPUP_RESULT_MINUS_1) {
             set_window_update(WINDOW_ID_6, WINDOW_UPDATE_9);
             set_window_update(WINDOW_ID_7, WINDOW_UPDATE_9);
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_2;

@@ -2800,7 +2800,7 @@ block_47: // TODO required to match
                 menu->popupType = POPUP_MENU_THROW_AWAY_ITEM;
                 menu->numEntries = numEntries;
                 menu->initialPos = 0;
-                create_popup_menu(menu);
+                create_standard_popup_menu(menu);
                 set_window_update(WINDOW_ID_12, (s32) basic_hidden_window_update);
                 set_window_update(WINDOW_ID_17, (s32) basic_hidden_window_update);
                 D_801568E4 = 0;
