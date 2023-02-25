@@ -2957,28 +2957,28 @@ void func_801363A0(ItemEntity* itemEntity) {
                     !(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) &&
                     !(itemEntity->pickupMsgFlags & 0x30)) {
                 set_window_properties(WINDOW_ID_12, s1, s3 - 24 + temp, offsetY,
-                                    temp2, 0, func_8013673C, itemEntity, -1);
+                                    temp2, WINDOW_PRIORITY_0, func_8013673C, itemEntity, -1);
             } else if (gItemTable[itemEntity->itemID].typeFlags & 1){
                 set_window_properties(WINDOW_ID_12, s1, s3 - 24 + temp, offsetY,
-                                    temp2, 0, func_8013673C, itemEntity, -1);
+                                    temp2, WINDOW_PRIORITY_0, func_8013673C, itemEntity, -1);
             } else {
                 set_window_properties(WINDOW_ID_12, s1, s3 - 24 + temp, offsetY,
-                                    temp2, 0, func_8013673C, itemEntity, -1);
+                                    temp2, WINDOW_PRIORITY_0, func_8013673C, itemEntity, -1);
             }
             if (itemEntity->itemID != ITEM_STAR_PIECE && itemEntity->itemID != ITEM_COIN) {
-                set_window_properties(WINDOW_ID_19, 20, 186, 280, 32, NULL, func_80136A08, itemEntity, -1);
+                set_window_properties(WINDOW_ID_19, 20, 186, 280, 32, WINDOW_PRIORITY_0, func_80136A08, itemEntity, -1);
             }
             if (itemEntity->state != 2) {
                 offsetY = get_msg_width(MSG_Menus_0060, 0) + 0x18;
                 s1 = 160 - offsetY / 2;
-                set_window_properties(WINDOW_ID_17, 160 - offsetY / 2, 36, offsetY, 40, NULL, func_801369D0, itemEntity, -1);
+                set_window_properties(WINDOW_ID_17, 160 - offsetY / 2, 36, offsetY, 40, WINDOW_PRIORITY_0, func_801369D0, itemEntity, -1);
             }
             break;
         case 12:
             set_message_msg(itemData->nameMsg, 0);
             offsetY = get_msg_width(MSG_Menus_005F, 0) + 0x36;
             s1 = 160 - offsetY / 2;
-            set_window_properties(WINDOW_ID_12, 160 - offsetY / 2, 76, offsetY, 40, NULL, func_8013673C, itemEntity, -1);
+            set_window_properties(WINDOW_ID_12, 160 - offsetY / 2, 76, offsetY, 40, WINDOW_PRIORITY_0, func_8013673C, itemEntity, -1);
             break;
     }
 }

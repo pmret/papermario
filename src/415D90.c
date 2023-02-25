@@ -2892,7 +2892,7 @@ void btl_state_update_player_menu(void) {
             if (battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_DIP] < 0) {
                 battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_DIP] = 0;
             }
-            popup->popupType = 0;
+            popup->popupType = POPUP_MENU_USE_ITEM;
             popup->numEntries = entryIdx;
             initialPos = battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_DIP];
             popup->initialPos = initialPos;
@@ -2988,7 +2988,7 @@ void btl_state_update_player_menu(void) {
                 battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_DIP] = 0;
             }
             initialPos = battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_DIP];
-            popup->popupType = 0;
+            popup->popupType = POPUP_MENU_USE_ITEM;
             popup->numEntries = entryIdx;
             popup->dipMode = 0;
             popup->titleNumber = 0;
@@ -3187,7 +3187,7 @@ void btl_state_update_player_menu(void) {
                     battleStatus->itemUsesLeft = 1;
                     btl_set_state(BATTLE_STATE_END_PLAYER_TURN);
                 } else {
-                    popup->popupType = 0;
+                    popup->popupType = POPUP_MENU_USE_ITEM;
                     if (battleStatus->selectedMoveID == MOVE_DOUBLE_DIP) {
                         popup->popupType += POPUP_MENU_DOUBLE_DIP;
                         popup->dipMode = 1;
@@ -3451,7 +3451,7 @@ void btl_state_update_player_menu(void) {
             if (battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_PARTNER] < 0) {
                 battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_PARTNER] = 0;
             }
-            popup->popupType = 1;
+            popup->popupType = POPUP_MENU_SWITCH_PARTNER;
             popup->numEntries = entryIdx;
             popup->initialPos = D_8008EEF0[playerData->currentPartner] - 1;
             popup->dipMode = 0;

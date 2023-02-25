@@ -177,7 +177,7 @@ API_CALLABLE(N(func_8024522C_805AAC)) {
                 numEntries++;
             }
         }
-        menu->popupType = 8;
+        menu->popupType = POPUP_MENU_READ_LETTER;
         menu->numEntries = numEntries;
         menu->initialPos = 0;
         create_popup_menu(menu);

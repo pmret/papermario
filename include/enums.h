@@ -3633,6 +3633,39 @@ enum PopupType {
     POPUP_MENU_TRIPLE_DIP           = 200,
 };
 
+enum PopupState {
+    POPUP_STATE_10          = 10,
+    POPUP_STATE_11          = 11,
+    POPUP_STATE_MINUS_1     = -1,
+    POPUP_STATE_MINUS_2     = -2,
+    POPUP_STATE_MINUS_3     = -3,
+    POPUP_STATE_MINUS_4     = -4,
+    POPUP_STATE_MINUS_5     = -5,
+    POPUP_STATE_MINUS_6     = -6,
+    POPUP_STATE_MINUS_7     = -7,
+    POPUP_STATE_MINUS_8     = -8,
+    POPUP_STATE_0           = 0,
+    POPUP_STATE_1           = 1,
+    POPUP_STATE_30          = 30,
+    POPUP_STATE_31          = 31,
+    POPUP_STATE_32          = 32,
+    POPUP_STATE_20          = 20,
+    POPUP_STATE_100         = 100,
+    POPUP_STATE_101         = 101,
+    POPUP_STATE_102         = 102,
+    POPUP_STATE_103         = 103,
+    POPUP_STATE_104         = 104,
+    POPUP_STATE_105         = 105,
+};
+
+enum WindowPriority {
+    WINDOW_PRIORITY_0               = 0,
+    WINDOW_PRIORITY_10              = 10,
+    WINDOW_PRIORITY_19              = 19,
+    WINDOW_PRIORITY_20              = 20,
+    WINDOW_PRIORITY_21              = 21,
+};
+
 /// not really
 enum RenderMode {
     RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0          = 0x00000000,
@@ -6025,9 +6058,10 @@ enum DrawMsgStyleFlags {
 
 // used with draw_number
 enum DrawNumberStyleFlags {
-    DRAW_NUMBER_STYLE_ALIGN_RIGHT   = 1, ///< drawn to the left of posX
-    DRAW_NUMBER_STYLE_MONOSPACE     = 2,
-    DRAW_NUMBER_STYLE_DROP_SHADOW   = 4,
+    DRAW_NUMBER_STYLE_ALIGN_RIGHT       = 1, ///< drawn to the left of posX
+    DRAW_NUMBER_STYLE_MONOSPACE         = 2,
+    DRAW_NUMBER_STYLE_MONOSPACE_RIGHT   = 3, // combination of MONOSPACE and ALIGN_RIGHT
+    DRAW_NUMBER_STYLE_DROP_SHADOW       = 4,
 };
 
 enum DrawNumberCharsets {

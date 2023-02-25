@@ -64,7 +64,7 @@ dlabel D_8010D000
 dlabel D_8010D004
 .space 0x63C
 
-dlabel D_8010D640
+dlabel gPopupState
 .space 4
 
 dlabel D_8010D644

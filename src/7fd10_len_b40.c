@@ -249,7 +249,7 @@ block_17:
                                 return;
                             }
                             popup->numEntries = numEntries;
-                            popup->popupType = 1;
+                            popup->popupType = POPUP_MENU_SWITCH_PARTNER;
                             popup->initialPos = D_8008EEF0[playerData->currentPartner] - 1;
                             break;
                         }
@@ -259,7 +259,7 @@ block_17:
                         if (numEntries == 0) {
                             return;
                         }
-                        popup->popupType = 0;
+                        popup->popupType = POPUP_MENU_USE_ITEM;
                         popup->numEntries = numEntries;
                         popup->initialPos = 0;
                         break;
