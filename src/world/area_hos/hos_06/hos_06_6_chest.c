@@ -91,14 +91,14 @@ API_CALLABLE(N(ChestItemPrompt)) {
 
         menu->numEntries = menuIdx;
         menu->initialPos = 0;
-        create_popup_menu(menu);
+        create_standard_popup_menu(menu);
         script->functionTemp[0] = 0;
     }
 
     menu = script->functionTempPtr[2];
     if (script->functionTemp[0] == 0) {
         script->functionTemp[1] = menu->result;
-        if (script->functionTemp[1] == 0) {
+        if (script->functionTemp[1] == POPUP_RESULT_CHOOSING) {
             return ApiStatus_BLOCK;
         }
         hide_popup_menu();
@@ -111,7 +111,7 @@ API_CALLABLE(N(ChestItemPrompt)) {
 
     destroy_popup_menu();
 
-    if (script->functionTemp[1] == 255) {
+    if (script->functionTemp[1] == POPUP_RESULT_CANCEL) {
         script->varTable[0] = -1;
     } else {
         selectIdx = menu->userIndex[script->functionTemp[1] - 1];

@@ -363,7 +363,7 @@ API_CALLABLE(ShowShopPurchaseDialog) {
     return ApiStatus_BLOCK;
 }
 
-void func_800F4FC4(PopupMenu* popup);
+void create_shop_popup_menu(PopupMenu* popup);
 
 // almost
 #ifdef NON_EQUIVALENT
@@ -421,7 +421,7 @@ void shop_open_item_select_popup(s32 mode) {
     menu->popupType = popupType;
     menu->numEntries = numEntries;
     menu->initialPos = 0;
-    func_800F4FC4(menu);
+    create_shop_popup_menu(menu);
     status_menu_ignore_changes();
     func_800E98EC();
     open_status_menu_short();
@@ -435,13 +435,13 @@ s32 shop_update_item_select_popup(s32* selectedIndex) {
     PopupMenu* menu = &shop->itemSelectMenu;
     s16 menuResult = shop->itemSelectMenu.result;
 
-    if (menuResult == 0) {
+    if (menuResult == POPUP_RESULT_CHOOSING) {
         return 0;
     }
 
     hide_popup_menu();
 
-    if (menuResult == 0xFF) {
+    if (menuResult == POPUP_RESULT_CANCEL) {
         *selectedIndex = -1;
     } else {
         *selectedIndex = menu->userIndex[menuResult - 1];

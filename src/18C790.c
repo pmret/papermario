@@ -971,7 +971,7 @@ void btl_state_update_celebration(void) {
                 hud_element_set_tint(id, 128, 128, 128);
                 x = 20;
                 y = 186;
-                set_window_properties(WINDOW_ID_8, 20, 186, 280, 32, 20, draw_content_level_up_textbox, NULL, -1);
+                set_window_properties(WINDOW_ID_8, 20, 186, 280, 32, WINDOW_PRIORITY_20, draw_content_level_up_textbox, NULL, -1);
                 set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CHOOSE;
             }
@@ -1122,7 +1122,7 @@ void btl_state_update_celebration(void) {
             width = get_msg_width(MSG_Menus_CantIncrease, 0) + 31;
             x = 160 - (width / 2);
             y = 80;
-            set_window_properties(WINDOW_ID_BATTLE_POPUP, x, y, width, 28, 10, draw_content_cant_increase_popup, NULL, -1);
+            set_window_properties(WINDOW_ID_BATTLE_POPUP, x, y, width, 28, WINDOW_PRIORITY_10, draw_content_cant_increase_popup, NULL, -1);
             set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
             CelebrateSubstateTime = 60;
             gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_INVALID_DELAY;

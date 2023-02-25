@@ -158,7 +158,7 @@ API_CALLABLE(N(SuperBlock_ShowSelectPartnerMenu)) {
         popupMenu->popupType = POPUP_MENU_UPGRADE_PARTNER;
         popupMenu->numEntries = entryIndex;
         popupMenu->initialPos = 0;
-        create_popup_menu(popupMenu);
+        create_standard_popup_menu(popupMenu);
         script->functionTemp[0] = 0;
     }
 
@@ -166,7 +166,7 @@ API_CALLABLE(N(SuperBlock_ShowSelectPartnerMenu)) {
     popupMenu = script->functionTempPtr[2];
     if (script->functionTemp[0] == 0) {
         script->functionTemp[1] = popupMenu->result;
-        if (script->functionTemp[1] == 0) {
+        if (script->functionTemp[1] == POPUP_RESULT_CHOOSING) {
             return ApiStatus_BLOCK;
         }
         hide_popup_menu();
@@ -179,7 +179,7 @@ API_CALLABLE(N(SuperBlock_ShowSelectPartnerMenu)) {
     }
     destroy_popup_menu();
 
-    if (script->functionTemp[1] != 255) {
+    if (script->functionTemp[1] != POPUP_RESULT_CANCEL) {
         script->varTable[0] = gPartnerPopupProperties[popupMenu->userIndex[script->functionTemp[1] - 1]].nameMsg;
         script->varTable[1] = popupMenu->userIndex[script->functionTemp[1] - 1];
     } else {

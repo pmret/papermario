@@ -113,14 +113,14 @@ API_CALLABLE(N(Merlow_ShopBadgesPopup)) {
         menu->popupType = POPUP_MENU_TRADE_FOR_BADGE;
         menu->numEntries = menuPos;
         menu->initialPos = 0;
-        create_popup_menu(menu);
+        create_standard_popup_menu(menu);
         script->functionTemp[0] = 0;
     }
 
     menu = script->functionTempPtr[2];
     if (script->functionTemp[0] == 0) {
         script->functionTemp[1] = menu->result;
-        if (script->functionTemp[1] != 0) {
+        if (script->functionTemp[1] != POPUP_RESULT_CHOOSING) {
             hide_popup_menu();
         } else {
             return ApiStatus_BLOCK;
@@ -133,7 +133,7 @@ API_CALLABLE(N(Merlow_ShopBadgesPopup)) {
 
     destroy_popup_menu();
     selected = script->functionTemp[1];
-    if (selected != 0xFF) {
+    if (selected != POPUP_RESULT_CANCEL) {
         ShopItemData* selectedItem;
         i = menu->userIndex[selected - 1];
         selectedItem = &N(MerlowBadgeInventory)[i];

@@ -191,7 +191,7 @@ API_CALLABLE(N(ReadLetters)){
             menu->popupType = POPUP_MENU_READ_POSTCARD;
             menu->numEntries = numEntries;
             menu->initialPos = script->functionTemp[3];
-            create_popup_menu(menu);
+            create_standard_popup_menu(menu);
             status_menu_respond_to_changes();
             close_status_menu();
             script->functionTemp[1] = 0;
@@ -200,7 +200,7 @@ API_CALLABLE(N(ReadLetters)){
         case 1:
             if (script->functionTemp[1] == 0) {
                 script->functionTemp[2] = menu->result;
-                if (script->functionTemp[2] != 0) {
+                if (script->functionTemp[2] != POPUP_RESULT_CHOOSING) {
                     hide_popup_menu();
                 } else {
                     break;
@@ -210,7 +210,7 @@ API_CALLABLE(N(ReadLetters)){
             script->functionTemp[1]++;
             if (script->functionTemp[1] >= 15) {
                 destroy_popup_menu();
-                if (script->functionTemp[2] == 255) {
+                if (script->functionTemp[2] == POPUP_RESULT_CANCEL) {
                     script->varTable[0] = -1;
                     return ApiStatus_DONE2;
                 }
@@ -372,7 +372,7 @@ API_CALLABLE(N(ReadDiary)){
             menu->popupType = POPUP_MENU_READ_DIARY_PAGE;
             menu->numEntries = numEntries;
             menu->initialPos = script->functionTemp[3];
-            create_popup_menu(menu);
+            create_standard_popup_menu(menu);
             status_menu_respond_to_changes();
             close_status_menu();
             script->functionTemp[1] = 0;
@@ -381,7 +381,7 @@ API_CALLABLE(N(ReadDiary)){
         case 1:
             if (script->functionTemp[1] == 0) {
                 script->functionTemp[2] = menu->result;
-                if (script->functionTemp[2] != 0) {
+                if (script->functionTemp[2] != POPUP_RESULT_CHOOSING) {
                     hide_popup_menu();
                 } else {
                     break;
@@ -390,7 +390,7 @@ API_CALLABLE(N(ReadDiary)){
             script->functionTemp[1]++;
             if (script->functionTemp[1] >= 15) {
                 destroy_popup_menu();
-                if (script->functionTemp[2] == 255) {
+                if (script->functionTemp[2] == POPUP_RESULT_CANCEL) {
                     script->varTable[0] = -1;
                     return ApiStatus_DONE2;
                 }
