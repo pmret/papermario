@@ -18,7 +18,7 @@ CameraControlSettings N(CamSettings_PreHeist) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 700,
     .boomPitch = -0.9,
-    .points = { .raw = { 0.0,   -1.0, 0.0, 500.0, -1.0, 0.0 }},
+    .points = { .two = { 0.0, -1.0, 0.0, 500.0, -1.0, 0.0 }},
     .viewPitch = -17.4,
     .flag = FALSE,
 };
@@ -27,7 +27,7 @@ CameraControlSettings N(CamSettings_PostHeist) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 665,
     .boomPitch = -0.9,
-    .points = { .raw = { 0.0,   -1.0, 0.0, 500.0, -1.0, 0.0 }},
+    .points = { .two = { 0.0, -1.0, 0.0, 500.0, -1.0, 0.0 }},
     .viewPitch = -17.4,
     .flag = FALSE,
 };

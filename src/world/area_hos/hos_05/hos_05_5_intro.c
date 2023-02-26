@@ -56,7 +56,7 @@ CameraControlSettings N(IntroCamSettings0) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 130.4,
     .boomPitch = 12.4,
-    .points = { .raw = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
     .viewPitch = -16.8,
     .flag = FALSE,
 };
@@ -65,7 +65,7 @@ CameraControlSettings N(IntroCamSettings1) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 130.4,
     .boomPitch = 12.4,
-    .points = { .raw = {  0.0, -1.0, 0.0, -433.0127, -1.0, -250.0 }},
+    .points = { .two = {  0.0, -1.0, 0.0, -433.0127, -1.0, -250.0 }},
     .viewPitch = -16.8,
     .flag = FALSE,
 };
@@ -74,7 +74,7 @@ CameraControlSettings N(IntroCamSettings2) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 400.0,
     .boomPitch = 2.7,
-    .points = { .raw = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
     .viewPitch = -7.4,
     .flag = FALSE,
 };
@@ -83,7 +83,7 @@ CameraControlSettings N(IntroCamSettings3) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 274.4,
     .boomPitch = -9.3,
-    .points = { .raw = {  0.0, -1.0, 0.0, 114.3, -1.0, 500.0 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 114.3, -1.0, 500.0 }},
     .viewPitch = 0.7,
     .flag = FALSE,
 };
@@ -92,7 +92,7 @@ CameraControlSettings N(IntroCamSettings4) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 274.4,
     .boomPitch = -9.3,
-    .points = { .raw = {  0.0, -1.0, 0.0, 114.3, -1.0, 500.0 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 114.3, -1.0, 500.0 }},
     .viewPitch = 0.7,
     .flag = FALSE,
 };
@@ -101,7 +101,7 @@ CameraControlSettings N(IntroCamSettings5) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 243.3,
     .boomPitch = 16.0,
-    .points = { .raw = {  0.0, -1.0, 0.0, 56.1, -1.0, -1.1 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 56.1, -1.0, -1.1 }},
     .viewPitch = -3.0,
     .flag = FALSE,
 };
@@ -110,7 +110,7 @@ CameraControlSettings N(IntroCamSettings6) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 192.5,
     .boomPitch = 12.4,
-    .points = { .raw = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
     .viewPitch = -10.7,
     .flag = FALSE,
 };
@@ -119,7 +119,7 @@ CameraControlSettings N(IntroCamSettings7) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 467.0,
     .boomPitch = 21.0,
-    .points = { .raw = {  0.0, -1.0, 0.0, 71.3, -1.0, 154.3 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 71.3, -1.0, 154.3 }},
     .viewPitch = -3.0,
     .flag = FALSE,
 };
@@ -128,7 +128,7 @@ CameraControlSettings N(IntroCamSettings8) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 121.6,
     .boomPitch = 0.0,
-    .points = { .raw = {  0.0, -1.0, 0.0, 24.4, -1.0, 154.3 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 24.4, -1.0, 154.3 }},
     .viewPitch = 0.0,
     .flag = FALSE,
 };
@@ -137,7 +137,7 @@ CameraControlSettings N(IntroCamSettings9) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 474.7,
     .boomPitch = 0.0,
-    .points = { .raw = {  0.0, -1.0, 0.0, 24.4, -1.0, 154.3 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 24.4, -1.0, 154.3 }},
     .viewPitch = 0.0,
     .flag = FALSE,
 };
@@ -146,7 +146,7 @@ CameraControlSettings N(IntroCamSettings10) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 225.7,
     .boomPitch = 9.7,
-    .points = { .raw = {  0.0, -1.0, 0.0, 6.9, -1.0, 168.8 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 6.9, -1.0, 168.8 }},
     .viewPitch = -3.0,
     .flag = FALSE,
 };
@@ -155,7 +155,7 @@ CameraControlSettings N(IntroCamSettings11) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 130.0,
     .boomPitch = 9.8,
-    .points = { .raw = {  0.0, -1.0, 0.0, 40.0, -1.0, 168.8 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 40.0, -1.0, 168.8 }},
     .viewPitch = -9.3,
     .flag = FALSE,
 };
@@ -164,7 +164,7 @@ CameraControlSettings N(IntroCamSettings12) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 270.0,
     .boomPitch = 9.8,
-    .points = { .raw = {  0.0, -1.0, 0.0, 40.0, -1.0, 168.8 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 40.0, -1.0, 168.8 }},
     .viewPitch = -9.3,
     .flag = FALSE,
 };
@@ -173,7 +173,7 @@ CameraControlSettings N(IntroCamSettings13) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 246.1,
     .boomPitch = -1.3,
-    .points = { .raw = {  0.0, -1.0, 0.0, 500.0, -1.0, 500.0 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 500.0, -1.0, 500.0 }},
     .viewPitch = 0.5,
     .flag = FALSE,
 };
@@ -182,7 +182,7 @@ CameraControlSettings N(IntroCamSettings14) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 180.0,
     .boomPitch = -1.3,
-    .points = { .raw = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
     .viewPitch = 0.5,
     .flag = FALSE,
 };
@@ -191,7 +191,7 @@ CameraControlSettings N(IntroCamSettings15) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 90.0,
     .boomPitch = 5.4,
-    .points = { .raw = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
     .viewPitch = -6.9,
     .flag = FALSE,
 };
@@ -200,7 +200,7 @@ CameraControlSettings N(IntroCamSettings16) = {
     .type = CAMERA_SETTINGS_TYPE_0,
     .boomLength = 445.8,
     .boomPitch = 5.4,
-    .points = { .raw = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
+    .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
     .viewPitch = -6.9,
     .flag = FALSE,
 };

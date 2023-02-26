@@ -742,7 +742,6 @@ typedef struct CameraControlSettings {
     /* 0x04 */ f32 boomLength;
     /* 0x08 */ f32 boomPitch;
     union {
-        f32 raw[6]; //TODO temporary
         struct {
             f32 Ax;
             f32 Ay;
