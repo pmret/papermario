@@ -19,7 +19,7 @@ CameraControlSettings* test_ray_zone(f32 posX, f32 posY, f32 posZ, Collider** zo
     }
 }
 
-s32 calculate_segment_intersection(f32 x1, f32 z1, f32 x2, f32 z2, f32 x3, f32 z3, f32 x4, f32 z4, f32* interX, f32* interZ, f32* squared_dist) {
+s32 calculate_segment_intersection(f32 A1x, f32 A1z, f32 A2x, f32 A2z, f32 B1x, f32 B1z, f32 B2x, f32 B2z, f32* interX, f32* interZ, f32* squared_dist) {
     f32 dx14;
     f32 dx13;
     f32 dz;
@@ -29,26 +29,26 @@ s32 calculate_segment_intersection(f32 x1, f32 z1, f32 x2, f32 z2, f32 x3, f32 z
     f32 dx;
     f32 alpha;
     f32 minus_dz12;
-    f32 p4_side;
+    f32 B2_side;
     f32 x;
-    f32 p3_side;
+    f32 B1_side;
     f32 z;
     f32 dx12_copy;
     f32 dz13;
     f32 dz14;
     f32 dz34;
-    f32 p3_side_;
+    f32 B1_side_;
 
-    dx12_copy = x2 - x1;
+    dx12_copy = A2x - A1x;
     dx12 = dx12_copy;
-    dz12 = z2 - z1;
-    dx13 = x3 - x1;
-    dz13 = z3 - z1;
-    dx14 = x4 - x1;
-    dz14 = z4 - z1;
+    dz12 = A2z - A1z;
+    dx13 = B1x - A1x;
+    dz13 = B1z - A1z;
+    dx14 = B2x - A1x;
+    dz14 = B2z - A1z;
     minus_dz12 = -dz12;
-    dx34 = x4 - x3;
-    dz34 = z4 - z3;
+    dx34 = B2x - B1x;
+    dz34 = B2z - B1z;
 
     // if distance between points on the line is 0
     if (dx12_copy == 0.0f && dz12 == 0.0f) {
@@ -59,83 +59,83 @@ s32 calculate_segment_intersection(f32 x1, f32 z1, f32 x2, f32 z2, f32 x3, f32 z
         return FALSE;
     }
 
-    p3_side_ = minus_dz12 * dx13 + dx12_copy * dz13;
-    if (p3_side_ < 0.0f) {
-        p3_side = -1.0f;
-    } else if (p3_side_ > 0.0f) {
-        p3_side = 1.0f;
+    B1_side_ = minus_dz12 * dx13 + dx12_copy * dz13;
+    if (B1_side_ < 0.0f) {
+        B1_side = -1.0f;
+    } else if (B1_side_ > 0.0f) {
+        B1_side = 1.0f;
     } else {
-        p3_side = 0.0f;
+        B1_side = 0.0f;
     }
-    p3_side_ = p3_side;
+    B1_side_ = B1_side;
 
     dx = minus_dz12 * dx14 + dx12_copy * dz14;
     if (dx < 0.0f) {
-        p4_side = -1.0f;
+        B2_side = -1.0f;
     } else if (dx > 0.0f) {
-        p4_side = 1.0f;
+        B2_side = 1.0f;
     } else {
-        p4_side = 0.0f;
+        B2_side = 0.0f;
     }
 
-    // P3 and P4 are on the same side relative to the line: no intersection
-    if (p3_side_ == p4_side) {
+    // B1 and B2 are on the same side relative to the line: no intersection
+    if (B1_side_ == B2_side) {
         return FALSE;
     }
 
     if (fabsf(dx12) > fabsf(dx34)) {
         /*
-        We represent intersection point P as P = P3 + alpha * (P4 - P3)
-        and solve the equation (P - P1) x (P2 - P1) = 0, where 'x' is cross product, P1 and P2 are points on the line
-        and P3 and P4 are the ends of the segment.
-        So, (P3 - P1 + alpha * (P4 - P3)) x (P2 - P1) = 0,
-        alpha = [-(P3 - P1) x (P2 - P1)] / [(P4 - P3) x (P2 - P1)]
+        We represent intersection point P as P = B1 + alpha * (B2 - B1)
+        and solve the equation (P - A1) x (A2 - A1) = 0, where 'x' is cross product, A1 and A2 are points on the line
+        and B1 and B2 are the ends of the segment.
+        So, (B1 - A1 + alpha * (B2 - B1)) x (A2 - A1) = 0,
+        alpha = [-(B1 - A1) x (A2 - A1)] / [(B2 - B1) x (A2 - A1)]
         */
-        // same as -(P3 - P1) x (P2 - P1)
-        alpha = x1 * dz12 - z1 * dx12 + dx12 * z3 - dz12 * x3;
-        // divide by (P4 - P3) x (P2 - P1)
+        // same as -(B1 - A1) x (A2 - A1)
+        alpha = A1x * dz12 - A1z * dx12 + dx12 * B1z - dz12 * B1x;
+        // divide by (B2 - B1) x (A2 - A1)
         alpha /= dz12 * dx34 - dx12 * dz34;
         /*
-            Now we represent P as P = P1 + beta * (P2 - P1), and we are to find beta.
-            P3 + alpha * (P4 - P3) = P1 + beta * (P2 - P1)
-            beta * (P2 - P1) = P3 + alpha * (P4 - P3) - P1
+            Now we represent P as P = A1 + beta * (A2 - A1), and we are to find beta.
+            B1 + alpha * (B2 - B1) = A1 + beta * (A2 - A1)
+            beta * (A2 - A1) = B1 + alpha * (B2 - B1) - A1
             We use only 'x' part of this equation to find beta.
 
-            Actually this step could be omitted and we calculate intersection directly as P3 + alpha * (P4 - P3).
+            Actually this step could be omitted and we calculate intersection directly as B1 + alpha * (B2 - B1).
             Don't know why it's done this way.
         */
-        alpha = (x3 + dx34 * alpha - x1) / dx12;
-        x = x1 + dx12 * alpha;
-        z = z1 + dz12 * alpha;
+        alpha = (B1x + dx34 * alpha - A1x) / dx12;
+        x = A1x + dx12 * alpha;
+        z = A1z + dz12 * alpha;
     } else {
         /*
-        We represent intersection point P as P = P1 + alpha * (P2 - P1)
-        and solve the equation (P4 - P3) x (P - P3) = 0
+        We represent intersection point P as P = A1 + alpha * (A2 - A1)
+        and solve the equation (B2 - B1) x (P - B1) = 0
         */
-        // same as (P4 - P3) x (P3 - P1)
-        alpha = z3 * dx34 + x1 * dz34 - z3 * dz34 - z1 * dx34;
-        // divide by (P4 - P3) x (P2 - P1)
+        // same as (B2 - B1) x (B1 - A1)
+        alpha = B1z * dx34 + A1x * dz34 - B1z * dz34 - A1z * dx34;
+        // divide by (B2 - B1) x (A2 - A1)
         alpha /= dz12 * dx34 - dx12 * dz34;
-        // Now we represent P as P = P3 + beta * (P4 - P3) and find beta
-        alpha = (x1 + dx12 * alpha - x3) / dx34;
-        x = x3 + dx34 * alpha;
-        z = z3 + dz34 * alpha;
+        // Now we represent P as P = B1 + beta * (B2 - B1) and find beta
+        alpha = (A1x + dx12 * alpha - B1x) / dx34;
+        x = B1x + dx34 * alpha;
+        z = B1z + dz34 * alpha;
     }
-    // (P - P1) * (P - P2) > 0 when P is outside of segment P1-P2
-    if ((x - x1) * (x - x2) + (z - z1) * (z - z2) > 0.0f) {
+    // (P - A1) * (P - A2) > 0 when P is outside of segment A1-A2
+    if ((x - A1x) * (x - A2x) + (z - A1z) * (z - A2z) > 0.0f) {
         return FALSE;
     }
 
-    dx = x - x3;
-    dz = z - z3;
+    dx = x - B1x;
+    dz = z - B1z;
     *interX = x;
     *interZ = z;
-    // distance between P and P3
+    // distance between P and B1
     *squared_dist = SQ(dx) + SQ(dz);
     return TRUE;
 }
 
-s32 calculate_line_segment_intersection(f32 x1, f32 z1, f32 x2, f32 z2, f32 x3, f32 z3, f32 x4, f32 z4, f32* interX, f32* interZ, f32* squared_dist) {
+s32 calculate_line_segment_intersection(f32 A1x, f32 A1z, f32 A2x, f32 A2z, f32 B1x, f32 B1z, f32 B2x, f32 B2z, f32* interX, f32* interZ, f32* squared_dist) {
     f32 dx14;
     f32 dx13;
     f32 dz;
@@ -145,26 +145,26 @@ s32 calculate_line_segment_intersection(f32 x1, f32 z1, f32 x2, f32 z2, f32 x3, 
     f32 dx;
     f32 alpha;
     f32 minus_dz12;
-    f32 p4_side;
+    f32 B2_side;
     f32 x;
-    f32 p3_side;
+    f32 B1_side;
     f32 z;
     f32 dx12_copy;
     f32 dz13;
     f32 dz14;
     f32 dz34;
-    f32 p3_side_;
+    f32 B1_side_;
 
-    dx12_copy = x2 - x1;
+    dx12_copy = A2x - A1x;
     dx12 = dx12_copy;
-    dz12 = z2 - z1;
-    dx13 = x3 - x1;
-    dz13 = z3 - z1;
-    dx14 = x4 - x1;
-    dz14 = z4 - z1;
+    dz12 = A2z - A1z;
+    dx13 = B1x - A1x;
+    dz13 = B1z - A1z;
+    dx14 = B2x - A1x;
+    dz14 = B2z - A1z;
     minus_dz12 = -dz12;
-    dx34 = x4 - x3;
-    dz34 = z4 - z3;
+    dx34 = B2x - B1x;
+    dz34 = B2z - B1z;
 
     if (dx12_copy == 0.0f && dz12 == 0.0f) {
         return FALSE;
@@ -173,45 +173,45 @@ s32 calculate_line_segment_intersection(f32 x1, f32 z1, f32 x2, f32 z2, f32 x3, 
         return FALSE;
     }
 
-    p3_side_ = minus_dz12 * dx13 + dx12_copy * dz13;
-    if (p3_side_ < 0.0f) {
-        p3_side = -1.0f;
-    } else if (p3_side_ > 0.0f) {
-        p3_side = 1.0f;
+    B1_side_ = minus_dz12 * dx13 + dx12_copy * dz13;
+    if (B1_side_ < 0.0f) {
+        B1_side = -1.0f;
+    } else if (B1_side_ > 0.0f) {
+        B1_side = 1.0f;
     } else {
-        p3_side = 0.0f;
+        B1_side = 0.0f;
     }
-    p3_side_ = p3_side;
+    B1_side_ = B1_side;
 
     dx = minus_dz12 * dx14 + dx12_copy * dz14;
     if (dx < 0.0f) {
-        p4_side = -1.0f;
+        B2_side = -1.0f;
     } else if (dx > 0.0f) {
-        p4_side = 1.0f;
+        B2_side = 1.0f;
     } else {
-        p4_side = 0.0f;
+        B2_side = 0.0f;
     }
 
-    if (p3_side_ == p4_side) {
+    if (B1_side_ == B2_side) {
         return FALSE;
     }
 
     if (fabsf(dx12) > fabsf(dx34)) {
-        alpha = x1 * dz12 - z1 * dx12 + dx12 * z3 - dz12 * x3;
+        alpha = A1x * dz12 - A1z * dx12 + dx12 * B1z - dz12 * B1x;
         alpha /= dz12 * dx34 - dx12 * dz34;
-        alpha = (x3 + dx34 * alpha - x1) / dx12;
-        x = x1 + dx12 * alpha;
-        z = z1 + dz12 * alpha;
+        alpha = (B1x + dx34 * alpha - A1x) / dx12;
+        x = A1x + dx12 * alpha;
+        z = A1z + dz12 * alpha;
     } else {
-        alpha = z3 * dx34 + x1 * dz34 - z3 * dz34 - z1 * dx34;
+        alpha = B1z * dx34 + A1x * dz34 - B1z * dz34 - A1z * dx34;
         alpha /= dz12 * dx34 - dx12 * dz34;
-        alpha = (x1 + dx12 * alpha - x3) / dx34;
-        x = x3 + dx34 * alpha;
-        z = z3 + dz34 * alpha;
+        alpha = (A1x + dx12 * alpha - B1x) / dx34;
+        x = B1x + dx34 * alpha;
+        z = B1z + dz34 * alpha;
     }
 
-    dx = x - x3;
-    dz = z - z3;
+    dx = x - B1x;
+    dz = z - B1z;
     *interX = x;
     *interZ = z;
     *squared_dist = SQ(dx) + SQ(dz);
@@ -429,7 +429,7 @@ void func_80032C64(Camera* camera) {
     if (settings != NULL) {
         if (settings->type == CAMERA_SETTINGS_TYPE_2 || settings->type == CAMERA_SETTINGS_TYPE_5 || func_800328A4(camera->aabbForZoneBelow, newPosX, newPosZ) != 0) {
             cond = TRUE;
-            dist = 1000000.0f;
+            dist = SQ(1000.0f);
             if (camera->aabbForZoneBelow != NULL && camera->aabbForZoneBelow->type == CAMERA_SETTINGS_TYPE_6) {
                 settings2 = camera->aabbForZoneBelow;
                 cond = FALSE;
@@ -438,7 +438,7 @@ void func_80032C64(Camera* camera) {
                 deltaPosZ = settings2->posB.z - settings2->posA.z;
 
                 if (calculate_line_segment_intersection(settings2->posA.x, settings2->posA.z, settings2->posA.x - deltaPosZ, settings2->posA.z + deltaPosX,
-                                  camera->targetPos.x, camera->targetPos.z, newPosX, newPosZ, &sp44, &sp48, &sp4C) && sp4C < 1000000.0f) {
+                                  camera->targetPos.x, camera->targetPos.z, newPosX, newPosZ, &sp44, &sp48, &sp4C) && sp4C < SQ(1000.0f)) {
                     dist = sp4C;
                 }
                 do {
@@ -468,7 +468,7 @@ void func_80032C64(Camera* camera) {
                 }
             }
 
-            if (dist == 1000000.0f || dist == 0) {
+            if (dist == SQ(1000.0f) || dist == 0) {
                 camera->leadAmount = 0.0f;
             } else {
                 camera->leadAmount = (camera->leadAmount > 0.0f) ? sqrtf(dist) : -sqrtf(dist);
