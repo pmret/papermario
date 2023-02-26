@@ -457,8 +457,8 @@ ApiStatus SetCamPosA(Evt* script, s32 isInitialCall) {
     f32 x = evt_get_float_variable(script, *args++);
     f32 z = evt_get_float_variable(script, *args++);
 
-    camera->controlSettings.posA.x = x;
-    camera->controlSettings.posA.z = z;
+    camera->controlSettings.points.two.Ax = x;
+    camera->controlSettings.points.two.Az = z;
     return ApiStatus_DONE2;
 }
 
@@ -469,8 +469,8 @@ ApiStatus SetCamPosB(Evt* script, s32 isInitialCall) {
     f32 x = evt_get_float_variable(script, *args++);
     f32 z = evt_get_float_variable(script, *args++);
 
-    camera->controlSettings.posB.x = x;
-    camera->controlSettings.posB.z = z;
+    camera->controlSettings.points.two.Bx = x;
+    camera->controlSettings.points.two.Bz = z;
     return ApiStatus_DONE2;
 }
 
@@ -481,8 +481,8 @@ ApiStatus SetCamPosC(Evt* script, s32 isInitialCall) {
     f32 y1 = evt_get_float_variable(script, *args++);
     f32 y2 = evt_get_float_variable(script, *args++);
 
-    camera->controlSettings.posA.y = y1;
-    camera->controlSettings.posB.y = y2;
+    camera->controlSettings.points.two.Ay = y1;
+    camera->controlSettings.points.two.By = y2;
     return ApiStatus_DONE2;
 }
 
@@ -552,8 +552,8 @@ ApiStatus GetCamPosA(Evt* script, s32 isInitialCall) {
     Bytecode outVar2 = *args++;
     Camera* camera = &gCameras[id];
 
-    evt_set_float_variable(script, outVar1, camera->controlSettings.posA.x);
-    evt_set_float_variable(script, outVar2, camera->controlSettings.posA.z);
+    evt_set_float_variable(script, outVar1, camera->controlSettings.points.two.Ax);
+    evt_set_float_variable(script, outVar2, camera->controlSettings.points.two.Az);
     return ApiStatus_DONE2;
 }
 
@@ -564,8 +564,8 @@ ApiStatus GetCamPosB(Evt* script, s32 isInitialCall) {
     Bytecode outVar2 = *args++;
     Camera* camera = &gCameras[id];
 
-    evt_set_float_variable(script, outVar1, camera->controlSettings.posB.x);
-    evt_set_float_variable(script, outVar2, camera->controlSettings.posB.z);
+    evt_set_float_variable(script, outVar1, camera->controlSettings.points.two.Bx);
+    evt_set_float_variable(script, outVar2, camera->controlSettings.points.two.Bz);
     return ApiStatus_DONE2;
 }
 
@@ -576,8 +576,8 @@ ApiStatus GetCamPosC(Evt* script, s32 isInitialCall) {
     Bytecode outVar2 = *args++;
     Camera* camera = &gCameras[id];
 
-    evt_set_float_variable(script, outVar1, camera->controlSettings.posA.y);
-    evt_set_float_variable(script, outVar2, camera->controlSettings.posB.y);
+    evt_set_float_variable(script, outVar1, camera->controlSettings.points.two.Ay);
+    evt_set_float_variable(script, outVar2, camera->controlSettings.points.two.By);
     return ApiStatus_DONE2;
 }
 

@@ -741,8 +741,25 @@ typedef struct CameraControlSettings {
     /* 0x00 */ s32 type;
     /* 0x04 */ f32 boomLength;
     /* 0x08 */ f32 boomPitch;
-    /* 0x0C */ Vec3f posA;
-    /* 0x18 */ Vec3f posB;
+    union {
+        f32 raw[6]; //TODO temporary
+        struct {
+            f32 Ax;
+            f32 Ay;
+            f32 Az;
+            f32 Bx;
+            f32 By;
+            f32 Bz;
+        } two;
+        struct {
+            f32 Ax;
+            f32 Cx;
+            f32 Az;
+            f32 Bx;
+            f32 Cz;
+            f32 Bz;
+        } three;
+    } points;
     /* 0x24 */ f32 viewPitch;
     /* 0x28 */ s32 flag;
 } CameraControlSettings; // size = 0x2C

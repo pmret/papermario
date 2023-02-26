@@ -229,17 +229,17 @@ s32 func_800328A4(CameraControlSettings* camSettings, f32 x, f32 z) {
     if (camSettings->type != CAMERA_SETTINGS_TYPE_6) {
         return 0;
     }
-    delta = x - camSettings->posA.x;
-    p1 = (camSettings->posB.x - camSettings->posA.x) * delta;
+    delta = x - camSettings->points.two.Ax;
+    p1 = (camSettings->points.two.Bx - camSettings->points.two.Ax) * delta;
 
-    delta = z - camSettings->posA.z;
-    p2 = (camSettings->posB.z - camSettings->posA.z) * delta;
+    delta = z - camSettings->points.two.Az;
+    p2 = (camSettings->points.two.Bz - camSettings->points.two.Az) * delta;
 
-    delta = x - camSettings->posB.x;
-    p3 = (camSettings->posB.x - camSettings->posA.x) * delta;
+    delta = x - camSettings->points.two.Bx;
+    p3 = (camSettings->points.two.Bx - camSettings->points.two.Ax) * delta;
 
-    delta = z - camSettings->posB.z;
-    p4 = (camSettings->posB.z - camSettings->posA.z) * delta;
+    delta = z - camSettings->points.two.Bz;
+    p4 = (camSettings->points.two.Bz - camSettings->points.two.Az) * delta;
 
     product1 = p1 + p2;
     product2 = p3 + p4;
@@ -434,15 +434,15 @@ void func_80032C64(Camera* camera) {
                 settings2 = camera->aabbForZoneBelow;
                 cond = FALSE;
 
-                deltaPosX = settings2->posB.x - settings2->posA.x;
-                deltaPosZ = settings2->posB.z - settings2->posA.z;
+                deltaPosX = settings2->points.two.Bx - settings2->points.two.Ax;
+                deltaPosZ = settings2->points.two.Bz - settings2->points.two.Az;
 
-                if (calculate_line_segment_intersection(settings2->posA.x, settings2->posA.z, settings2->posA.x - deltaPosZ, settings2->posA.z + deltaPosX,
+                if (calculate_line_segment_intersection(settings2->points.two.Ax, settings2->points.two.Az, settings2->points.two.Ax - deltaPosZ, settings2->points.two.Az + deltaPosX,
                                   camera->targetPos.x, camera->targetPos.z, newPosX, newPosZ, &sp44, &sp48, &sp4C) && sp4C < SQ(1000.0f)) {
                     dist = sp4C;
                 }
                 do {
-                    if (calculate_line_segment_intersection(settings2->posB.x, settings2->posB.z, settings2->posB.x - deltaPosZ, settings2->posB.z + deltaPosX,
+                    if (calculate_line_segment_intersection(settings2->points.two.Bx, settings2->points.two.Bz, settings2->points.two.Bx - deltaPosZ, settings2->points.two.Bz + deltaPosX,
                                   camera->targetPos.x, camera->targetPos.z, newPosX, newPosZ, &sp44, &sp48, &sp4C) && sp4C < dist) {
                         dist = sp4C;
                     }
