@@ -11,8 +11,9 @@
 extern Addr MapTextureMemory;
 
 #ifdef SHIFT
+extern Addr WorldEntityHeapBottom;
 extern Addr WorldEntityHeapBase;
-#define WORLD_ENTITY_HEAP_BOTTOM 0x80650000 // TODO shiftability (used only for munchlesia, hacky as hell)
+#define WORLD_ENTITY_HEAP_BOTTOM (s32) WorldEntityHeapBottom
 #define WORLD_ENTITY_HEAP_BASE (s32) WorldEntityHeapBase
 // TODO this only refers to one of 3 overlays which happen to share the same address space
 // but don't necessarily have to
@@ -1890,7 +1891,7 @@ void clear_entity_data(s32 arg0) {
         gEntityHeapBottom = WORLD_ENTITY_HEAP_BOTTOM;
         gEntityHeapBase = WORLD_ENTITY_HEAP_BASE;
     } else {
-        gEntityHeapBottom = (s32)BattleEntityHeapBottom;
+        gEntityHeapBottom = (s32) BattleEntityHeapBottom;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
 
@@ -1917,7 +1918,7 @@ void init_entity_data(void) {
         for (i = 0; i < 4; i++) {
             bEntityBlueprint[i] = 0;
         }
-        gEntityHeapBottom = (s32)BattleEntityHeapBottom;
+        gEntityHeapBottom = (s32) BattleEntityHeapBottom;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
     gCurrentEntityListPtr = get_entity_list();
@@ -3650,6 +3651,8 @@ void appendGfx_model(void* data) {
 }
 
 void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, s32 mainSize, s32 mainPalSize, s32 auxSize, s32 auxPalSize) {
+    Gfx** temp;
+
     handle->raster = (IMG_PTR) mdl_nextTextureAddress;
     if (mainPalSize != 0) {
         handle->palette = (PAL_PTR) (mdl_nextTextureAddress + mainSize);
@@ -3677,12 +3680,8 @@ void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, 
     memcpy(&handle->header, header, sizeof(*header));
     func_801180E8(header, (Gfx**)&mdl_nextTextureAddress, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
 
-    #ifndef OLD_GCC
-    gSPEndDisplayList(mdl_nextTextureAddress);
-    mdl_nextTextureAddress += 8;
-    #else
-    gSPEndDisplayList(((Gfx*)mdl_nextTextureAddress)++);
-    #endif
+    temp = (Gfx**) &mdl_nextTextureAddress;
+    gSPEndDisplayList((*temp)++);
 }
 
 void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) {

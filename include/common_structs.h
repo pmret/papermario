@@ -1044,7 +1044,7 @@ typedef struct CollisionData {
 } CollisionData; // size = 0x10
 
 typedef struct ModelGroupData {
-    /* 0x00 */ UNK_PTR transformMatrix;
+    /* 0x00 */ Mtx* transformMatrix;
     /* 0x04 */ Lightsn* lightingGroup;
     /* 0x08 */ s32 numLights;
     /* 0x0C */ s32 numChildren;
@@ -2210,6 +2210,8 @@ typedef struct {
 
 #if VERSION_JP
 #define DISPLAYCONTEXT_GFX_COUNT 0x2000
+#elif VERSION_CN
+#define DISPLAYCONTEXT_GFX_COUNT 0x2200
 #else
 #define DISPLAYCONTEXT_GFX_COUNT 0x2080
 #endif

@@ -56,8 +56,14 @@ void state_step_battle(void) {
             func_8003B1A8();
             gGameStatusPtr->isBattle = TRUE;
             backup_map_collision_data();
+
+#if VERSION_CN
+            battle_heap_create();
+#else
             load_obfuscation_shims();
             shim_battle_heap_create_obfuscated();
+#endif
+
             sfx_clear_env_sounds(0);
 
             currentBattleSelection = UNPACK_BTL_AREA(gCurrentBattleID);

@@ -2280,8 +2280,8 @@ s32 bMarioHideAnims[] = {
 };
 
 s32 bPeachIdleAnims[] = {
-    STATUS_NORMAL,          ANIM_Peach_A0002,
-    STATUS_TURN_DONE,       ANIM_Peach_C0028,
+    STATUS_NORMAL,          ANIM_Peach1_Walk,
+    STATUS_TURN_DONE,       ANIM_Peach2_Inert,
     STATUS_END
 };
 
@@ -3904,7 +3904,7 @@ void btl_show_message_popup(void* data) {
                 width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
                 height = bMsgHeights[numLines];
-                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, 0, func_80250818, popup, -1);
+                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, func_80250818, popup, -1);
                 set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
             }
             break;
@@ -3921,7 +3921,7 @@ void btl_show_message_popup(void* data) {
                 posX = 160 - (msgWidth / 2);
                 width = msgWidth;
                 height = 40;
-                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, 0, func_80250818, popup, -1);
+                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, func_80250818, popup, -1);
                 set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
             }
             break;
@@ -3946,7 +3946,7 @@ void btl_show_message_popup(void* data) {
                 width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
                 height = bMsgHeights[numLines];
-                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, 0, func_80250818, popup, -1);
+                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, func_80250818, popup, -1);
                 set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
             }
             break;
@@ -3962,7 +3962,7 @@ void btl_show_message_popup(void* data) {
                 width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
                 height = bMsgHeights[numLines];
-                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, 0, func_80250818, popup, -1);
+                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, func_80250818, popup, -1);
                 set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
             }
             break;
@@ -4006,7 +4006,7 @@ void btl_show_message_popup(void* data) {
                 D_8029F650 = D_802835D8[numLines];
 
                 posY = D_8029F64E + D_8029F650;
-                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, 0, func_80250818, popup, -1);
+                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, func_80250818, popup, -1);
                 if (popup->messageIndex == BTL_MSG_3B) {
                     set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
                 } else {

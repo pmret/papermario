@@ -380,7 +380,7 @@ segments:
     type: code
     start: 0x759B0
     vram: 0x800DC500
-    vram_of_symbol: D_804DC500
+    vram_of_symbol: overlays_start
     #follows_vram: main
     subsegments:
     - [0x759B0, hasm, bss2]
@@ -2596,7 +2596,7 @@ segments:
   - [0x2435F0, ia8,     title/tape, 128, 128]
   - [0x2475F0, ci8,     title/bowser_silhouette, 128, 128]
   - [0x24B5F0, palette, title/bowser_silhouette]
-  - [0x24B7F0, bin]
+  - [0x24B7F0, bin, fold_gfx_data] # TODO extract into better format?
   - [0x315B80, pm_sprite_shading_profiles, sprite_shading_profiles]
   - type: code
     start: 0x3169F0

@@ -15,11 +15,11 @@ API_CALLABLE(N(UpdateFollowerPosition)) {
 
     npc->pos.x = (s32)(((s32)playerStatus->position.x - 700) * 0.85) + 765;
     if (playerStatus->currentSpeed == 0.0f) {
-        animID = ANIM_Peach_A0001;
+        animID = ANIM_Peach1_Idle;
     } else if (playerStatus->currentSpeed < 2.0f) {
-        animID = ANIM_Peach_A0002;
+        animID = ANIM_Peach1_Walk;
     } else {
-        animID = ANIM_Peach_A0003;
+        animID = ANIM_Peach1_Run;
     }
     npc->currentAnim = animID;
     evt_set_variable(script, outVar, playerStatus->targetYaw);
@@ -135,50 +135,50 @@ EvtScript N(EVS_NpcInit_Duplighost) = {
 };
 
 EvtScript N(EVS_NpcInteract_Follower_FirstTime) = {
-    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_C0000)
+    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach2_RaiseArms)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_C0026)
+    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach2_TalkIdle)
     EVT_CALL(GetSelfVar, 0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_CH8_0023)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_0023)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
             EVT_WAIT(1)
             EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
             EVT_WAIT(35)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_CH8_0024)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_0024)
             EVT_SET(GF_KPA53_Met_PeachImposter, TRUE)
             EVT_CALL(SetSelfVar, 0, 1)
             EVT_CALL(SetSelfVar, 1, 1)
         EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_CH8_0025)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_0025)
             EVT_CALL(SetSelfVar, 0, 2)
         EVT_CASE_EQ(2)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_CH8_0026)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_0026)
             EVT_CALL(SetSelfVar, 0, 1)
     EVT_END_SWITCH
-    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_C0002)
+    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach2_LowerArms)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_A0001)
+    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach1_Idle)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcInteract_Follower) = {
-    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_C0000)
+    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach2_RaiseArms)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_C0026)
+    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach2_TalkIdle)
     EVT_CALL(GetSelfVar, 0, LVar0)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_CH8_0027)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_0027)
         EVT_CALL(SetSelfVar, 0, 1)
         EVT_CALL(SetSelfVar, 1, 1)
     EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_CH8_0028)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_0028)
     EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_C0002)
+    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach2_LowerArms)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_A0001)
+    EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach1_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -192,13 +192,13 @@ EvtScript N(EVS_NpcHit_Guardian_FirstTime) = {
             EVT_CALL(DisablePlayerInput, TRUE)
             EVT_CALL(SetNpcVar, NPC_Follower, 2, 1)
             EVT_CALL(InterpNpcYaw, NPC_Follower, 270, 0)
-            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_C0000)
+            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach2_RaiseArms)
             EVT_WAIT(10)
-            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_C0026)
-            EVT_CALL(SpeakToPlayer, NPC_Follower, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_CH8_0029)
-            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_C0002)
+            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach2_TalkIdle)
+            EVT_CALL(SpeakToPlayer, NPC_Follower, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_0029)
+            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach2_LowerArms)
             EVT_WAIT(10)
-            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_A0001)
+            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach1_Idle)
             EVT_CALL(SetNpcVar, NPC_Follower, 2, 0)
             EVT_CALL(DisablePlayerInput, FALSE)
         EVT_END_CASE_GROUP
@@ -216,30 +216,30 @@ EvtScript N(EVS_NpcHit_Guardian) = {
             EVT_CALL(DisablePlayerInput, TRUE)
             EVT_CALL(SetNpcVar, NPC_Follower, 2, 1)
             EVT_CALL(InterpNpcYaw, NPC_Follower, 270, 0)
-            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_C0000)
+            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach2_RaiseArms)
             EVT_WAIT(10)
-            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_C0026)
+            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach2_TalkIdle)
             EVT_CALL(GetSelfVar, 0, LVar1)
             EVT_SWITCH(LVar1)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_Follower, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_CH8_002A)
+                    EVT_CALL(SpeakToPlayer, NPC_Follower, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_002A)
                     EVT_CALL(SetSelfVar, 0, 1)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_Follower, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_CH8_002B)
+                    EVT_CALL(SpeakToPlayer, NPC_Follower, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_002B)
                     EVT_CALL(SetSelfVar, 0, 2)
                 EVT_CASE_EQ(2)
                     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
                     EVT_IF_LT(LVar0, 270)
-                        EVT_CALL(SpeakToPlayer, NPC_Follower, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_CH8_002B)
+                        EVT_CALL(SpeakToPlayer, NPC_Follower, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_002B)
                     EVT_ELSE
-                        EVT_CALL(SpeakToPlayer, NPC_Follower, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, MSG_CH8_002C)
+                        EVT_CALL(SpeakToPlayer, NPC_Follower, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_002C)
                         EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
                         EVT_CALL(BindNpcAI, NPC_Duplighost, EVT_PTR(N(EVS_NpcAI_Duplighost_Caught)))
                     EVT_END_IF
             EVT_END_SWITCH
-            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_C0002)
+            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach2_LowerArms)
             EVT_WAIT(10)
-            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach_A0001)
+            EVT_CALL(SetNpcAnimation, NPC_Follower, ANIM_Peach1_Idle)
             EVT_CALL(SetNpcVar, NPC_Follower, 2, 0)
             EVT_CALL(DisablePlayerInput, FALSE)
         EVT_END_CASE_GROUP
@@ -278,7 +278,7 @@ EvtScript N(EVS_NpcIdle_Follower) = {
                 EVT_CALL(InterpNpcYaw, NPC_Guardian, LVar0, 0)
                 EVT_CALL(SetNpcPos, NPC_Guardian, LVar1, LVar2, LVar3)
                 EVT_IF_LE(LVar1, 100)
-                    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Peach_A0001)
+                    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Peach1_Idle)
                     EVT_CALL(SetNpcPos, NPC_SELF, 765, 0, -30)
                     EVT_CALL(SetNpcPos, NPC_Guardian, 765, 0, -30)
                     EVT_CALL(SetNpcPos, NPC_Duplighost, 150, 0, -30)
@@ -291,7 +291,7 @@ EvtScript N(EVS_NpcIdle_Follower) = {
                     EVT_SET(LVarF, 2)
                 EVT_END_IF
                 EVT_IF_GE(LVar1, 765)
-                    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Peach_A0001)
+                    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Peach1_Idle)
                     EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
                     EVT_SET(LVarF, 0)
                 EVT_END_IF

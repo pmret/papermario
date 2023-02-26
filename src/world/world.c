@@ -79,8 +79,14 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
 
     gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_MARIO_WORLD;
+
+#if VERSION_CN
+    general_heap_create();
+#else
     load_obfuscation_shims();
     shim_general_heap_create_obfuscated();
+#endif
+
 #if VERSION_JP
     reset_max_rumble_duration();
 #endif
@@ -136,18 +142,23 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         decode_yay0(yay0Asset, shapeFile);
         general_heap_free(yay0Asset);
 
-        mapSettings->modelTreeRoot = shapeFile->root;
-        mapSettings->modelNameList = shapeFile->modelNames;
-        mapSettings->colliderNameList = shapeFile->colliderNames;
-        mapSettings->zoneNameList = shapeFile->zoneNames;
+        mapSettings->modelTreeRoot = shapeFile->header.root;
+        mapSettings->modelNameList = shapeFile->header.modelNames;
+        mapSettings->colliderNameList = shapeFile->header.colliderNames;
+        mapSettings->zoneNameList = shapeFile->header.zoneNames;
     }
 
     if (mapConfig->bgName != NULL) {
         load_map_bg(wMapBgName);
     }
 
+#if VERSION_CN
+    general_heap_create();
+#else
     load_obfuscation_shims();
     shim_general_heap_create_obfuscated();
+#endif
+
     sfx_clear_env_sounds(0);
     clear_worker_list();
     clear_script_list();

@@ -8,12 +8,6 @@ extern SpriteShadingProfile wSpriteShadingProfileAux;
 extern SpriteShadingProfile bSpriteShadingProfileAux;
 extern s8 D_80159880[0x20];
 
-extern int ENVIRONMENT;
-extern int COMBINED;
-extern int COMBINED_ALPHA;
-extern int SHADE;
-extern int TEXEL0_ALPHA;
-
 void appendGfx_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s32 alpha,
                              f32 shadowX, f32 shadowY, f32 shadowZ,
                              s32 shadowR, s32 shadowG, s32 shadowB,
@@ -279,7 +273,7 @@ void appendGfx_shading_palette(
 {
     Camera* camera = &gCameras[gCurrentCameraID];
     f32 temp_f0;
-    f32 asdasdasd;
+    f32 temp_f1;
     f32 temp_f2;
     f32 var_f26;
     f32 temp_f28 = 0;
@@ -288,12 +282,12 @@ void appendGfx_shading_palette(
     f32 var_f12;
     f32 var_f12_2;
     f32 var_f20;
-    f32 var_f2;
     f32 var_f30;
-    f32 var_f8;
     f32 abc;
     f32 ex, ey, ez;
-    f32 t1;
+    f32 s1, s2, s3;
+
+    f32 new_var;
 
     var_f12 = (shadowX * shadowX) + (shadowY * shadowY) + (shadowZ * shadowZ);
 
@@ -323,27 +317,34 @@ void appendGfx_shading_palette(
         ez = mtx[2][2];
     }
 
-    temp_f6 = ex * shadowX;
-    temp_f6_2 = (shadowX * -camera->perspectiveMatrix[2][2]) + (shadowZ * camera->perspectiveMatrix[0][2]);
-    t1 = temp_f6 + (ey * shadowY) + (ez * shadowZ);
-    if (t1 > 0.0f) {
+    s1 = ex * shadowX;
+
+    new_var = (s1 + (ey * shadowY)) + (ez * shadowZ);
+    ex = camera->perspectiveMatrix[2][2];
+    //temp_f6_2 = (shadowX * (-ex)) + (shadowZ * camera->perspectiveMatrix[0][2]);
+    temp_f2 = -ex;
+    temp_f1 = shadowX;
+    temp_f6_2 = (temp_f1 * temp_f2) + (shadowZ * camera->perspectiveMatrix[0][2]);
+
+    if (new_var > 0.0f) {
         var_f26 = ambientPower * temp_f6_2;
     } else {
         var_f26 = ambientPower;
-        var_f26 = ambientPower * temp_f6_2;
+        var_f26 = var_f26 * temp_f6_2;
     }
-    var_f20 = SQ(shadowX) + SQ(shadowZ);
+    var_f20 = SQ(temp_f1) + SQ(shadowZ);
     if (var_f20 != 0.0f) {
         var_f20 = sqrtf(var_f20);
     }
     temp_f0 = -mtx[0][1];
-    asdasdasd = mtx[1][1];
+    temp_f1 = mtx[1][1];
     temp_f2 = mtx[2][1];
     var_f12_2 = SQ(temp_f0) + SQ(temp_f2);
     if (var_f12_2 != 0.0f) {
         var_f12_2 = sqrtf(var_f12_2);
     }
-    temp_f28 = -((var_f20 * var_f12_2) + (shadowY * asdasdasd)) * ambientPower;
+    temp_f28 = -((var_f20 * var_f12_2) + (shadowY * temp_f1)) * ambientPower;
+
     if (shadowR > 255) {
         shadowR = 255;
     }

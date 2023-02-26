@@ -224,7 +224,7 @@ void btl_state_update_normal_start(void) {
 
             ASSERT(size <= 0x8000);
 
-            model = gMapShapeData.root;
+            model = gMapShapeData.header.root;
             textureRom = get_asset_offset(stage->texture, &size);
             if (model != NULL) {
                 load_data_for_models(model, textureRom, size);

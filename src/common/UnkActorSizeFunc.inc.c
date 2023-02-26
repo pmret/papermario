@@ -7,7 +7,7 @@ API_CALLABLE(N(UnkActorSizeFunc)) {
     u8 targetActorSizeY;
     u8 targetActorLargerDimension;
 
-    if (!(targetActor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+    if (!(targetActor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
         script->varTable[1] += targetActor->size.y / 2;
         script->varTable[1] += targetActor->size.y / 4;
     } else {

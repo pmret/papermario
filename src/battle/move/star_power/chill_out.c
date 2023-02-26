@@ -42,8 +42,12 @@ API_CALLABLE(func_802A163C_79070C) {
 
     script->varTable[0] = 0;
 
-    if ((target->flags & ACTOR_FLAG_TARGET_ONLY) || (target->flags & flag1) || (target->flags & ACTOR_FLAG_2000) ||
-        (part->eventFlags & ACTOR_EVENT_FLAG_ENCHANTED) || (part->eventFlags & flag2)) {
+    if ((target->flags & ACTOR_FLAG_TARGET_ONLY)
+        || (target->flags & flag1)
+        || (target->flags & ACTOR_FLAG_2000)
+        || (part->eventFlags & ACTOR_EVENT_FLAG_ENCHANTED)
+        || (part->eventFlags & flag2)
+    ) {
         return ApiStatus_DONE2;
     }
 
@@ -83,7 +87,7 @@ API_CALLABLE(func_802A16F4_7907C4) {
     dispatch_damage_event_actor_0(target, 0, 10);
 
     x = target->currentPos.x + target->headOffset.x + (target->size.x / 2);
-    if (target->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+    if (target->flags & ACTOR_FLAG_UPSIDE_DOWN) {
         y = target->currentPos.y + target->headOffset.y - target->size.y;
     } else if (!(target->flags & ACTOR_FLAG_8000)) {
         y = target->currentPos.y + target->headOffset.y + target->size.y;

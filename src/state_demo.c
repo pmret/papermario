@@ -144,6 +144,8 @@ DemoSceneData DemoScenes[] = {
 char versionString[] = "Prg Ver.00/07/06 22:22";
 #elif VERSION_US
 char versionString[] = "Prg Ver.00/12/05 16:54";
+#elif VERSION_CN
+char versionString[] = "Prg Ver.04/05/18 10:52";
 #else
 char versionString[] = "Prg Ver.??/??/?? ??:??";
 #endif

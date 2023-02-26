@@ -1947,7 +1947,7 @@ typedef struct Effect65FXData {
     /* 0x0C8 */ f32 unk_C8[30];
     /* 0x140 */ f32 unk_140[30];
     /* 0x1B8 */ s32 unk_1B8[30];
-    /* 0x230 */ s32 unk_230[30];
+    /* 0x230 */ s32 unk_230[30]; // a bool
     /* 0x2A8 */ s32 unk_2A8;
     /* 0x2AC */ f32 unk_2AC[30];
 } Effect65FXData; // size = 0x324
@@ -2448,9 +2448,7 @@ typedef struct LilOinkFXData {
 
 typedef struct SomethingRotatingFXData {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ f32 unk_18;

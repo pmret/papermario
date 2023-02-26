@@ -32,14 +32,14 @@ UnkBulbGlow D_E0078918[] = {
 
 s32 D_E00789A8 = 0;
 
-u8 D_E00789AC[] = {
-    255, 255, 255,
-    255, 255, 128,
-    255, 128, 255,
-    128, 255, 255,
-    255, 128, 128,
-    128, 255, 128,
-    128, 128, 255,
+Color_RGB8 D_E00789AC[] = {
+    {255, 255, 255},
+    {255, 255, 128},
+    {255, 128, 255},
+    {128, 255, 255},
+    {255, 128, 128},
+    {128, 255, 128},
+    {128, 128, 255},
 };
 
 void bulb_glow_init(EffectInstance* effect);
@@ -151,116 +151,142 @@ void bulb_glow_render(EffectInstance* effect) {
 void func_E0078274(void) {
 }
 
+#define TMEM_ADDR(x) (x / sizeof(u64))
+
 // wip
 #ifdef WIP
 void bulb_glow_appendGfx(void* effect) {
-    f32 sp18;
-    f32 sp1C;
-    s32 sp20;
-    s32 sp28;
-    s32 sp30;
-    BulbGlowFXData* data = ((EffectInstance*) effect)->data.bulbGlow;
-    s32 unk_10;
-    s32 unk_00;
+    BulbGlowFXData* data = ((EffectInstance*) effect)->data.bulbGlow; //s0
+    f32 centerX;
+    f32 centerY;
+    s32 xMin;
+    s32 numRects;
+    s32 yMin;
+    s32 temp_s2;
+    s32 rectHeight;
+    s32 glowExtent;
+    s32 colorScale;
+    s32 brightness;
+    s32 xMax;
+    s32 yMax;
+    s32 xStart;
+    s32 isPointVisible;
+    s32 yStart;
     UnkBulbGlow* temp_s1;
-    s32 temp_s3;
-    s32 temp_s6;
+    Color_RGB8* temp_v0;
+
     s32 i;
     s32 j;
+    s32 r, g, b;
 
-    f32 temp_f0;
-    f32 temp_f4;
-    s32 temp_a0_2;
-    s32 temp_f6;
-    s32 temp_lo;
-    s32 temp_s0_2;
-    s32 temp_s2_2;
-    s32 temp_t0;
-    s32 temp_t5;
-    s32 var_t2;
-    s32 var_t4;
-    s32 var_t5;
-    s32 var_t7;
-    s32 var_v1;
-    s32 var_v1_2;
-    u32 temp_t6;
-    u8* temp_v0;
-
-
-    unk_10 = data->unk_10;
-    unk_00 = data->unk_00;
-    if (unk_10 > 127) {
-        unk_10 = 127;
+    brightness = data->unk_10;
+    temp_s2 = data->unk_00;
+    if (brightness > 0x7F) {
+        brightness = 0x7F;
     }
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    temp_s1 = &D_E0078918[unk_00];
-    temp_s6 = temp_s1->unk_10;
-    temp_s3 = temp_s1->unk_14;
+    temp_s1 = &D_E0078918[temp_s2];
+    glowExtent = temp_s1->unk_10;
+    rectHeight = temp_s1->unk_14;
 
-    var_v1 = shim_is_point_visible(data->pos.x, data->pos.y, data->pos.z, data->unk_1C, &sp18, &sp1C);
-    if (unk_00 == 5) {
-        var_v1 = 1;
+    isPointVisible = shim_is_point_visible(data->pos.x, data->pos.y, data->pos.z, data->unk_1C, &centerX, &centerY);
+
+    // There are 6 UnkStruct entries in the array at E0078918, so this refers to the last one
+    if (temp_s2 == 5) {
+        isPointVisible = TRUE;
     }
-    if ((var_v1 != 0) && !(sp18 < 0.0f) && !(sp1C < 0.0f) && !(sp18 >= 320.0f) && !(sp1C >= 240.0f)) {
-        u8 r, g, b;
 
-        gSPDisplayList(gMasterGfxPos++, D_E0078900[unk_00]);
+    if (!isPointVisible || centerX < 0.0f || centerY < 0.0f || centerX >= SCREEN_WIDTH || centerY >= SCREEN_HEIGHT) {
+        return;
+    }
 
-        temp_v0 = &D_E00789AC[data->unk_20 * 3];
-        temp_t0 = unk_10 * 2;
+    gSPDisplayList(gMasterGfxPos++, D_E0078900[temp_s2]);
+    temp_v0 = &D_E00789AC[data->unk_20];
+    colorScale = (brightness * 2);
+    r = temp_v0->r * colorScale / 255;
+    g = temp_v0->g * colorScale / 255;
+    b = temp_v0->b * colorScale / 255;
 
-        r = temp_v0[0] * temp_t0 / 255;
-        g = temp_v0[1] * temp_t0 / 255;
-        b = temp_v0[2] * temp_t0 / 255;
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, r, g, b, 0x7F);
 
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, r, g, b, 127);
+    // temp_s1 = E0078948
+    //   unk_00 = 64
+    //   unk_04 = 64
+    //   unk_08 = 1.0f
+    //   unk_0C = 1.0f
+    //   unk_10 = 64 (glow_extent)
+    //   unk_14 = 8 (rect_height)
 
-        sp20 = sp18 - temp_s6;
-        var_t7 = sp20 + temp_s6 * 2;
-        temp_f6 = sp1C - temp_s6;
-        var_t4 = temp_f6 + temp_s6 * 2;
+    // x_center = 247
+    // y_center = 107
+    // glow_extent = 64
+    // x_min = 183
+    // x_max = 311
+    // y_min = 43
+    // y_max = 171
 
-        var_t5 = 0;
-        if (sp20 < 0) {
-            var_t5 = -sp20;
-        }
-        var_v1_2 = 0;
-        if (temp_f6 < 0) {
-            var_v1_2 = -temp_f6;
-        }
-        if (var_t7 > 320) {
-            var_t7 = 319;
-        }
-        if (var_t4 > 240) {
-            var_t4 = 239;
-        }
-        temp_lo = (s32) (var_t4 - temp_f6) / temp_s3;
+    xMin = centerX - glowExtent;
+    xMax = xMin + glowExtent * 2;
+    yMin = centerY - glowExtent;
+    yMax = yMin + glowExtent * 2;
 
-        for (i = var_v1_2 / temp_s3; i < temp_lo; i++) {
-            if ((i + 1) * temp_s3 + temp_f6 >= 240) {
-                break;
-            }
+    xStart = 0;
+    if (xMin < 0) {
+        xStart = -xMin;
+    }
+    yStart = 0;
+    if (yMin < 0) {
+        yStart = -yMin;
+    }
+    if (xMax > SCREEN_WIDTH) {
+        xMax = SCREEN_WIDTH - 1;
+    }
+    if (yMax > SCREEN_HEIGHT) {
+        yMax = SCREEN_HEIGHT - 1;
+    }
 
-            gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE,
-                (s32) (sp20 * temp_s1->unk_08) * 4,
-                (s32) (temp_s1->unk_04 * 0x14 - i * temp_s1->unk_14 * temp_s1->unk_0C) * 4,
-                (s32) (sp20 * temp_s1->unk_08 + temp_s1->unk_00) * 4,
-                (s32) (temp_s1->unk_04 * 0x15 - i * temp_s1->unk_14 * temp_s1->unk_0C) * 4);
+    numRects = (yMax - yMin) / rectHeight;
 
-            for (j = 0; j < 1; j++) {
-                gDPLoadMultiTile(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(nuGfxCfb_ptr + (i * temp_s3 + temp_f6) * 0x280),
-                    0x0100, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 0, sp20 + var_t5, 0, var_t7 - 1, temp_s3 - 1,
-                    0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 9, 8, G_TX_NOLOD, G_TX_NOLOD);
-                gSPTextureRectangle(gMasterGfxPos++, (sp20 + var_t5) * 4, (i * temp_s3 + temp_f6) * 4, var_t7 * 4, ((i + 1) * temp_s3 + temp_f6) * 4, G_TX_RENDERTILE, sp20 + var_t5, 0, 0x0400, 0x0400);
-                gDPPipeSync(gMasterGfxPos++);
-            }
+    for (i = yStart / rectHeight; i < numRects && (i + 1) * rectHeight + yMin < SCREEN_HEIGHT; i++) {
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE,
+            // uls = 183 << 2
+            (s32) (xMin * temp_s1->unk_08) << 2,
+            // This code is correct due to being masked to 12 bits
+            // However, the wrapping may not be intended from the developer's perspective so it may be a bug
+            // ult = (256 << 2, 248 << 2, 240 << 2, ...)
+            (s32) (temp_s1->unk_04 * 20 - i * temp_s1->unk_14 * temp_s1->unk_0C) << 2,
+            // lrs = 247 << 2
+            (s32) (xMin * temp_s1->unk_08 + temp_s1->unk_00) << 2,
+            // This code is correct as well, same as above
+            // lrt = (320 << 2, 312 << 2, 304 << 2, ...)
+            (s32) (temp_s1->unk_04 * 21 - i * temp_s1->unk_14 * temp_s1->unk_0C) << 2);
+
+        for (j = 0; j < 1; j++) {
+            gDPLoadMultiTile(gMasterGfxPos++,
+                // Offset the image to the rows being loaded
+                VIRTUAL_TO_PHYSICAL(nuGfxCfb_ptr + (i * rectHeight + yMin) * (SCREEN_WIDTH * sizeof(u16))),
+                TMEM_ADDR(TMEM_SIZE/2), G_TX_RENDERTILE + 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, 0,
+                // uls = 183, ult = 0
+                (xMin + xStart), 0,
+                // lrs = 311 - 1, lrt = 8 - 1
+                xMax - 1, rectHeight - 1,
+                0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 9, 8, G_TX_NOLOD, G_TX_NOLOD);
+            gSPTextureRectangle(gMasterGfxPos++,
+                // xl = 183 << 2, yl = (43 << 2, 51 << 2, 59 << 2, ...)
+                (xMin + xStart) << 2, (i * rectHeight + yMin) << 2,
+                // xr = 311 << 2, yh = (51 << 2, 59 << 2, 67 << 2, ...)
+                xMax << 2, ((i + 1) * rectHeight + yMin) << 2,
+                G_TX_RENDERTILE,
+                // s = 183 << 5, t = 0
+                ((xMin + xStart) & 0x1FF) << 5, 0,
+                1 << 10, 1 << 10);
+            gDPPipeSync(gMasterGfxPos++);
         }
     }
 }
-
 #else
 INCLUDE_ASM(s32, "effects/bulb_glow", bulb_glow_appendGfx);
 #endif

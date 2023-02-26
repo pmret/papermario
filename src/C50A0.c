@@ -765,40 +765,35 @@ void init_item_entity_list(void) {
 
 extern s32* gItemEntityScripts[];
 
-void item_entity_load(ItemEntity* item);
-
-// WIP
-#ifdef NON_MATCHING
 void item_entity_load(ItemEntity* item) {
     s32* pos;
     HudCacheEntry* entry;
     s32 cond;
     s32 raster;
     s32 palette;
-    s32 capacity;
+    s32 size;
     s32 i;
 
-    pos = gItemEntityScripts[item->itemID];
-    item->readPos = pos;
-    item->savedReadPos = pos;
+    item->savedReadPos = item->readPos = pos = gItemEntityScripts[item->itemID];
 
     while (TRUE) {
         switch (*pos++) {
+            case ITEM_SCRIPT_OP_End:
+                break;
             case ITEM_SCRIPT_OP_Restart:
             case ITEM_SCRIPT_OP_Loop:
-                break;
+            default:
+                continue;
             case ITEM_SCRIPT_OP_RandomRestart:
                 pos += 2;
-                break;
+                continue;
             case ITEM_SCRIPT_OP_SetImage:
                 pos++;
                 raster = *pos++;
                 palette = *pos++;
-                if (item->flags & ITEM_ENTITY_FLAG_40000) {
-                    capacity = 0x200;
-                } else {
-                    capacity = 0x120;
-                }
+
+                // 32x32 or 24x24 (divided by 2 because these are ci4 iamges)
+                size = (item->flags & ITEM_ENTITY_FLAG_40000) ? (32 * 32 / 2) : (24 * 24 / 2);
 
                 entry = gHudElementCacheTableRaster;
                 i = 0;
@@ -807,11 +802,9 @@ void item_entity_load(ItemEntity* item) {
                         entry->id = raster;
                         entry->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
 
-                        ASSERT(*gHudElementCacheSize + capacity < 0x11000);
-                        do {
-                            nuPiReadRom((s32)icon_present_ROM_START + raster, entry->data, capacity);
-                        } while (0); // TODO required to match
-                            *gHudElementCacheSize += capacity;
+                        ASSERT(*gHudElementCacheSize + size < 0x11000);
+                        nuPiReadRom((s32)icon_present_ROM_START + raster, entry->data, size);
+                        *gHudElementCacheSize += size;
                         if (!gGameStatusPtr->isBattle) {
                             *pos = i;
                         } else {
@@ -820,8 +813,8 @@ void item_entity_load(ItemEntity* item) {
                         pos++;
                         break;
                     } else {
-                        cond = entry->id == raster;
-                        if (cond) { // TODO required to match
+                        cond = entry->id == raster;  // TODO required to match
+                        if (cond) {
                             if (!gGameStatusPtr->isBattle) {
                                 *pos = i;
                             } else {
@@ -864,16 +857,12 @@ void item_entity_load(ItemEntity* item) {
                     entry++;
                     i++;
                 }
-                break;
-            case ITEM_SCRIPT_OP_End:
-                item_entity_update(item);
-                return;
+                continue;
         }
+        break;
     }
+    item_entity_update(item);
 }
-#else
-INCLUDE_ASM(s32, "C50A0", item_entity_load);
-#endif
 
 s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupFlagIndex) {
     s32 i;
@@ -2811,7 +2800,7 @@ block_47: // TODO required to match
                 menu->popupType = POPUP_MENU_THROW_AWAY_ITEM;
                 menu->numEntries = numEntries;
                 menu->initialPos = 0;
-                create_popup_menu(menu);
+                create_standard_popup_menu(menu);
                 set_window_update(WINDOW_ID_12, (s32) basic_hidden_window_update);
                 set_window_update(WINDOW_ID_17, (s32) basic_hidden_window_update);
                 D_801568E4 = 0;
@@ -2968,28 +2957,28 @@ void func_801363A0(ItemEntity* itemEntity) {
                     !(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) &&
                     !(itemEntity->pickupMsgFlags & 0x30)) {
                 set_window_properties(WINDOW_ID_12, s1, s3 - 24 + temp, offsetY,
-                                    temp2, 0, func_8013673C, itemEntity, -1);
+                                    temp2, WINDOW_PRIORITY_0, func_8013673C, itemEntity, -1);
             } else if (gItemTable[itemEntity->itemID].typeFlags & 1){
                 set_window_properties(WINDOW_ID_12, s1, s3 - 24 + temp, offsetY,
-                                    temp2, 0, func_8013673C, itemEntity, -1);
+                                    temp2, WINDOW_PRIORITY_0, func_8013673C, itemEntity, -1);
             } else {
                 set_window_properties(WINDOW_ID_12, s1, s3 - 24 + temp, offsetY,
-                                    temp2, 0, func_8013673C, itemEntity, -1);
+                                    temp2, WINDOW_PRIORITY_0, func_8013673C, itemEntity, -1);
             }
             if (itemEntity->itemID != ITEM_STAR_PIECE && itemEntity->itemID != ITEM_COIN) {
-                set_window_properties(WINDOW_ID_19, 20, 186, 280, 32, NULL, func_80136A08, itemEntity, -1);
+                set_window_properties(WINDOW_ID_19, 20, 186, 280, 32, WINDOW_PRIORITY_0, func_80136A08, itemEntity, -1);
             }
             if (itemEntity->state != 2) {
                 offsetY = get_msg_width(MSG_Menus_0060, 0) + 0x18;
                 s1 = 160 - offsetY / 2;
-                set_window_properties(WINDOW_ID_17, 160 - offsetY / 2, 36, offsetY, 40, NULL, func_801369D0, itemEntity, -1);
+                set_window_properties(WINDOW_ID_17, 160 - offsetY / 2, 36, offsetY, 40, WINDOW_PRIORITY_0, func_801369D0, itemEntity, -1);
             }
             break;
         case 12:
             set_message_msg(itemData->nameMsg, 0);
             offsetY = get_msg_width(MSG_Menus_005F, 0) + 0x36;
             s1 = 160 - offsetY / 2;
-            set_window_properties(WINDOW_ID_12, 160 - offsetY / 2, 76, offsetY, 40, NULL, func_8013673C, itemEntity, -1);
+            set_window_properties(WINDOW_ID_12, 160 - offsetY / 2, 76, offsetY, 40, WINDOW_PRIORITY_0, func_8013673C, itemEntity, -1);
             break;
     }
 }

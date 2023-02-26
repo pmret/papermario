@@ -25,6 +25,28 @@ extern HudScript HES_OptionMonoOff;
 extern HudScript HES_OptionStereoOn;
 extern HudScript HES_OptionStereoOff;
 
+BSS u8 filemenu_filename[8];
+
+#if VERSION_CN
+#define OFFSET_WIDTH        5
+#define DELETE_OFFSET_X     9
+#define CENTER_CANCEL_X     30
+#define RIGHT_CANCEL_X      24
+#define FILE_X              4
+#define FILE_NUMBER_X       36
+#define FILE_NAME_X         48
+#define NUMBER_OFFSET_Y     1
+#else
+#define OFFSET_WIDTH        0
+#define DELETE_OFFSET_X     8
+#define CENTER_CANCEL_X     18
+#define RIGHT_CANCEL_X      20
+#define FILE_X              5
+#define FILE_NUMBER_X       33
+#define FILE_NAME_X         46
+#define NUMBER_OFFSET_Y     0
+#endif
+
 HudScript* filemenu_main_hudElemScripts[] = {
     &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
     &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
@@ -143,7 +165,7 @@ MenuWindowBP filemenu_main_windowBPs[] = {
         .windowID = WINDOW_ID_FILEMENU_FILE2_TITLE,
         .unk_01 = 0,
         .pos = { .x = 3, .y = -8 },
-        .width = 124,
+        .width = 124 + OFFSET_WIDTH,
         .height = 15,
         .priority = 0,
         .fpDrawContents = &filemenu_draw_contents_file_2_title ,
@@ -171,7 +193,7 @@ MenuWindowBP filemenu_main_windowBPs[] = {
         .windowID = WINDOW_ID_FILEMENU_FILE3_TITLE,
         .unk_01 = 0,
         .pos = { .x = 3, .y = -8 },
-        .width = 124,
+        .width = 124 + OFFSET_WIDTH,
         .height = 15,
         .priority = 0,
         .fpDrawContents = &filemenu_draw_contents_file_3_title,
@@ -185,7 +207,7 @@ MenuWindowBP filemenu_main_windowBPs[] = {
         .windowID = WINDOW_ID_FILEMENU_FILE0_INFO,
         .unk_01 = 0,
         .pos = { .x = 9, .y = 41 },
-        .width = 130,
+        .width = 130 + OFFSET_WIDTH,
         .height = 54,
         .priority = 0,
         .fpDrawContents = &filemenu_draw_contents_file_0_info,
@@ -199,7 +221,7 @@ MenuWindowBP filemenu_main_windowBPs[] = {
         .windowID = WINDOW_ID_FILEMENU_FILE0_TITLE,
         .unk_01 = 0,
         .pos = { .x = 3, .y = -8 },
-        .width = 124,
+        .width = 124 + OFFSET_WIDTH,
         .height = 15,
         .priority = 0,
         .fpDrawContents = &filemenu_draw_contents_file_0_title,
@@ -227,7 +249,7 @@ MenuWindowBP filemenu_main_windowBPs[] = {
         .windowID = WINDOW_ID_FILEMENU_FILE1_TITLE,
         .unk_01 = 0,
         .pos = { .x = 3, .y = -8 },
-        .width = 124,
+        .width = 124 + OFFSET_WIDTH,
         .height = 15,
         .priority = 0,
         .fpDrawContents = &filemenu_draw_contents_file_1_title,
@@ -273,7 +295,7 @@ void filemenu_draw_contents_title(
             break;
         case 1:
             msgIdx = FILE_MESSAGE_SELECT_FILE_TO_DELETE;
-            xOffset = 8;
+            xOffset = DELETE_OFFSET_X;
             yOffset = 4;
             break;
         case 3:
@@ -337,7 +359,7 @@ void filemenu_draw_contents_option_left(
         if (menu->col == 0 && menu->row == 2) {
             filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_LEFT, baseX, baseY + 8);
         }
-        filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + 8, baseY + 2, 255, 0, 1);
+        filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + 8 + OFFSET_WIDTH, baseY + 2, 255, 0, 1);
     }
 }
 
@@ -357,10 +379,10 @@ void filemenu_draw_contents_option_center(
         case 3:
         case 4:
             msgIdx = FILE_MESSAGE_CANCEL;
-            xOffset = 18;
+            xOffset = CENTER_CANCEL_X;
             yOffset = 0;
             if (menu->col == 1 && menu->row == 2) {
-                filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_CENTER, baseX + 8, baseY + 8);
+                filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_CENTER, baseX + CENTER_CANCEL_X - 10, baseY + 8);
             }
             break;
         default:
@@ -386,7 +408,7 @@ void filemenu_draw_contents_option_right(
         if (menu->col == 2 && menu->row == 2) {
             filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_RIGHT, baseX + 8, baseY + 8);
         }
-        filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_CANCEL), baseX + 20, baseY + 2, 255, 0, 1);
+        filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_CANCEL), baseX + RIGHT_CANCEL_X, baseY + 2, 255, 0, 1);
     }
 }
 
@@ -419,8 +441,8 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_LEVEL), baseX + 0x22, baseY + 10, 0xFF, 0xA, 1);
     temp_s3_2 = save->level;
     temp_s3 = temp_s3_2;
-    draw_number(temp_s3 / 10, baseX + 79, baseY + 10, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
-    draw_number(temp_s3 % 10, baseX + 88, baseY + 10, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number(temp_s3 / 10, baseX + 79, baseY + 10 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number(temp_s3 % 10, baseX + 88, baseY + 10 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PLAY_TIME), baseX + 11, baseY + 24, 0xFF, 0xA, 1);
 
     temp_s3_2 = save->timePlayed;
@@ -428,14 +450,14 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
         temp_s3_2 = MAX_DISPLAYED_TIME;
     }
 
-    draw_number((temp_s3_2 / 2160000) % 10, baseX + 76, baseY + 24, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number((temp_s3_2 / 2160000) % 10, baseX + 76, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
     temp_s1_2 = temp_s3_2 / 216000;
-    draw_number(temp_s1_2 - ((temp_s3_2 / 2160000) * 10), baseX + 85, baseY + 24, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number(temp_s1_2 - ((temp_s3_2 / 2160000) * 10), baseX + 85, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 95, baseY + 23, 0xFF, 0xA, 1);
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 95, baseY + 18, 0xFF, 0xA, 1);
     temp_s0_3 = temp_s3_2 / 36000;
-    draw_number(temp_s0_3 - (temp_s1_2 * 6), baseX + 100, baseY + 24, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
-    draw_number((temp_s3_2 / 3600) - (temp_s0_3 * 10), baseX + 109, baseY + 24, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number(temp_s0_3 - (temp_s1_2 * 6), baseX + 100, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number((temp_s3_2 / 3600) - (temp_s0_3 * 10), baseX + 109, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
 
     for (i = 0; i < 7; i++) {
         if (i < gSaveSlotMetadata[fileIdx].spiritsRescued) {
@@ -463,16 +485,16 @@ void filemenu_draw_contents_file_title(
         filemenu_set_cursor_goal_pos(fileIdx + 60, baseX - 3, baseY + 8);
     }
 
-    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 5, baseY + 1, 255, 0, 1);
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + FILE_X, baseY + 1, 255, 0, 1);
 
     if (!gSaveSlotHasData[fileIdx]) {
-        draw_number(fileIdx + 1, baseX + 33, baseY + 1, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+        draw_number(fileIdx + 1, baseX + FILE_NUMBER_X, baseY + 1 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE);
     } else {
-        draw_number(fileIdx + 1, baseX + 33, baseY + 1, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+        draw_number(fileIdx + 1, baseX + FILE_NUMBER_X, baseY + 1 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE);
         filemenu_draw_file_name(
             gSaveSlotMetadata[fileIdx].filename,
             ARRAY_COUNT(gSaveSlotMetadata[fileIdx].filename),
-            baseX + 46, baseY + 1, 255, 0, 1, 9);
+            baseX + FILE_NAME_X, baseY + 1, 255, 0, 1, 9);
     }
 }
 

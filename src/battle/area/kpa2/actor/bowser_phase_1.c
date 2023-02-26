@@ -1631,7 +1631,7 @@ EvtScript N(onBurnHit) = {
                 EVT_END_IF
                 EVT_DIVF(LVar3, EVT_FLOAT(2.0))
                 EVT_CALL(GetActorFlags, ACTOR_SELF, LVar5)
-                EVT_IF_FLAG(LVar5, ACTOR_FLAG_HP_OFFSET_BELOW)
+                EVT_IF_FLAG(LVar5, ACTOR_FLAG_UPSIDE_DOWN)
                     EVT_SUBF(LVar1, LVar3)
                 EVT_ELSE
                     EVT_ADDF(LVar1, LVar3)

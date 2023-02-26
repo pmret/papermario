@@ -114,7 +114,7 @@ API_CALLABLE(N(func_80245028_8058A8)) {
         menu->popupType = POPUP_MENU_POST_OFFICE;
         menu->numEntries = numEntries;
         menu->initialPos = D_80262F68;
-        create_popup_menu(menu);
+        create_standard_popup_menu(menu);
         status_menu_respond_to_changes();
         close_status_menu();
         script->functionTemp[0] = 0;
@@ -177,10 +177,10 @@ API_CALLABLE(N(func_8024522C_805AAC)) {
                 numEntries++;
             }
         }
-        menu->popupType = 8;
+        menu->popupType = POPUP_MENU_READ_LETTER;
         menu->numEntries = numEntries;
         menu->initialPos = 0;
-        create_popup_menu(menu);
+        create_standard_popup_menu(menu);
         status_menu_respond_to_changes();
         close_status_menu();
         script->functionTemp[0] = 0;

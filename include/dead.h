@@ -101,7 +101,7 @@
 #define fx_motion_blur_flame dead_fx_motion_blur_flame
 #define wPartnerHudScripts dead_wPartnerHudScripts
 #define wDisabledPartnerHudScripts dead_wDisabledPartnerHudScripts
-#define create_popup_menu dead_create_popup_menu
+#define create_standard_popup_menu dead_create_standard_popup_menu
 #define hide_popup_menu dead_hide_popup_menu
 #define destroy_popup_menu dead_destroy_popup_menu
 #define heap_free dead_heap_free

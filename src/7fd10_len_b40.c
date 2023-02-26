@@ -161,7 +161,7 @@ s32 setup_item_popup(PopupMenu* menu) {
             ItemData* item = &gItemTable[itemIdx];
             IconHudScriptPair* itemScripts = &gItemHudScripts[item->hudElemID];
 
-            if (item->typeFlags & 1) {
+            if (item->typeFlags & ITEM_TYPE_FLAG_WORLD_USABLE) {
                 menu->ptrIcon[optionCount] = itemScripts->enabled;
                 menu->userIndex[optionCount] = i;
                 menu->enabled[optionCount] = 1;
@@ -249,7 +249,7 @@ block_17:
                                 return;
                             }
                             popup->numEntries = numEntries;
-                            popup->popupType = 1;
+                            popup->popupType = POPUP_MENU_SWITCH_PARTNER;
                             popup->initialPos = D_8008EEF0[playerData->currentPartner] - 1;
                             break;
                         }
@@ -259,7 +259,7 @@ block_17:
                         if (numEntries == 0) {
                             return;
                         }
-                        popup->popupType = 0;
+                        popup->popupType = POPUP_MENU_USE_ITEM;
                         popup->numEntries = numEntries;
                         popup->initialPos = 0;
                         break;
@@ -301,7 +301,7 @@ block_17:
                 D_8010CD00 = 10;
                 return;
             }
-            create_popup_menu(popup);
+            create_standard_popup_menu(popup);
             set_time_freeze_mode(TIME_FREEZE_POPUP_MENU);
             if (*partnerActionState == PARTNER_ACTION_NONE) {
                 set_action_state(ACTION_STATE_IDLE);
@@ -309,9 +309,9 @@ block_17:
             D_8010CD00++;
             break;
         case 3:
-            if (popup->result != -1) {
+            if (popup->result != POPUP_RESULT_MINUS_1) {
                 D_8010CCFC = popup->result;
-                if (D_8010CCFC != 0) {
+                if (D_8010CCFC != POPUP_RESULT_CHOOSING) {
                     hide_popup_menu();
                     D_8010CCFA = 15;
                     D_8010CD00++;
@@ -325,9 +325,9 @@ block_17:
                 D_8010CD00 = 0;
                 enable_player_input();
                 partner_enable_input();
-                if (D_8010CCFC == -2) {
+                if (D_8010CCFC == POPUP_RESULT_MINUS_2) {
                     if ((setup_partner_popup(popup) == 0) || (setup_item_popup(popup) == 0)) {
-                        D_8010CCFC = 0xFF;
+                        D_8010CCFC = POPUP_RESULT_CANCEL;
                     } else {
                         switch (D_8010CCF8) {
                             case 0:
@@ -342,7 +342,7 @@ block_17:
                     }
                 }
 
-                if (D_8010CCFC != 0xFF) {
+                if (D_8010CCFC != POPUP_RESULT_CANCEL) {
                     switch (D_8010CCF8) {
                         case 0:
                             switch_to_partner(popup->userIndex[D_8010CCFC - 1]);

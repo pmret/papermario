@@ -93,13 +93,23 @@ void blast_render(EffectInstance* effect) {
 }
 
 #ifdef NON_MATCHING
-void blast_appendGfx(void* effect) {
-    Matrix4f sp18, sp58, sp98;
-    BlastFXData* data = ((EffectInstance*)effect)->data.blast;
-    Gfx* dlist = D_090017B0_37F180;
-    s32 unk_20 = data->unk_20;
-    f32 unk_20f = unk_20;
-    s32 envAlpha = (unk_20f - unk_20) * 256.0f;
+void blast_appendGfx(void *effect) {
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+    BlastFXData* data;
+    Gfx* dlist;
+    f32 unk_20f;
+    s32 unk_20;
+    s32 envAlpha;
+    f32 two_fifty_six;
+
+    data = ((EffectInstance*) effect)->data.blast;
+    dlist = D_090017B0_37F180;
+    two_fifty_six = 256.0f;
+    unk_20 = data->unk_20;
+    unk_20f = unk_20;
+    envAlpha = (unk_20f - unk_20) * two_fifty_six;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
@@ -117,6 +127,7 @@ void blast_appendGfx(void* effect) {
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
     if (data->unk_20 > 4.0f) {
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, 127);
     } else {

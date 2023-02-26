@@ -329,13 +329,13 @@ EvtScript N(EVS_Scene_ReturnStarRod) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Outro_000A)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach_C0000)
+    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach2_RaiseArms)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach_C0026)
-    EVT_CALL(SpeakToPlayer, NPC_Peach, ANIM_Peach_C0001, ANIM_Peach_C0026, 5, MSG_Outro_000B)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach_C0002)
+    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach2_TalkIdle)
+    EVT_CALL(SpeakToPlayer, NPC_Peach, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 5, MSG_Outro_000B)
+    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach2_LowerArms)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach_A0001)
+    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Idle)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Disappointed)
     EVT_CALL(SpeakToPlayer, NPC_Twink, ANIM_Twink_Disappointed, ANIM_Twink_Disappointed, 0, MSG_Outro_000C)
@@ -345,9 +345,9 @@ EvtScript N(EVS_Scene_ReturnStarRod) = {
     EVT_EXEC(N(EVS_Twink_FlyAway))
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_WAIT(250)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach_A0002)
+    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Walk)
     EVT_CALL(NpcMoveTo, NPC_Peach, -10, 30, 40)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach_A0001)
+    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Idle)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(InterpPlayerYaw, 270, 0)
     EVT_WAIT(60)
@@ -466,14 +466,14 @@ EvtScript N(EVS_NpcInit_StarRod) = {
 };
 
 AnimID N(ExtraAnims_Peach)[] = {
-    ANIM_Peach_A0001,
-    ANIM_Peach_A0002,
-    ANIM_Peach_C0000,
-    ANIM_Peach_C0001,
-    ANIM_Peach_C0002,
-    ANIM_Peach_C0006,
-    ANIM_Peach_C001E,
-    ANIM_Peach_C0026,
+    ANIM_Peach1_Idle,
+    ANIM_Peach1_Walk,
+    ANIM_Peach2_RaiseArms,
+    ANIM_Peach2_Talk,
+    ANIM_Peach2_LowerArms,
+    ANIM_Peach2_GaspStill,
+    ANIM_Peach2_TiedIdle,
+    ANIM_Peach2_TalkIdle,
     ANIM_LIST_END
 };
 

@@ -92,14 +92,14 @@ EffectInstance* fx_65_main(
     data->pos.z = arg3;
 
     for (i = 0; i < ARRAY_COUNT(data->unk_230); i++) {
-        data->unk_230[i] = 0;
+        data->unk_230[i] = FALSE;
     }
 
     data->unk_2A8 = 0;
     data->unk_50[0] = arg1;
     data->unk_C8[0] = arg2;
     data->unk_140[0] = arg3;
-    data->unk_230[0] = 1;
+    data->unk_230[0] = TRUE;
     data->unk_1B8[0] = 0;
     data->unk_2AC[0] = 0;
     data->unk_44 = shim_rand_int(30) + 10;
@@ -165,7 +165,7 @@ void fx_65_update(EffectInstance* effect) {
     tempY = data->unk_C8[idx];
     tempZ = data->unk_140[idx];
 
-    if ((posX != tempX) || (posY != tempY) || (posZ != tempZ)) {
+    if (posX != tempX || posY != tempY || posZ != tempZ) {
         unk_2AC = data->unk_2AC[idx];
 
         data->unk_2A8++;
@@ -175,7 +175,7 @@ void fx_65_update(EffectInstance* effect) {
 
         idx = data->unk_2A8;
 
-        data->unk_230[idx] = 1;
+        data->unk_230[idx] = TRUE;
         data->unk_50[idx] = posX;
         data->unk_C8[idx] = posY;
         data->unk_140[idx] = posZ;
@@ -206,42 +206,43 @@ void fx_65_render(EffectInstance* effect) {
 // floats and more
 #ifdef NON_MATCHING
 void fx_65_appendGfx(void* effect) {
-    Effect65FXData* data = ((EffectInstance*)effect)->data.unk_65;
+    Effect65FXData* data = ((EffectInstance*)effect)->data.unk_65; //s6
     Matrix4f sp10;
+    f32 padding[2];
     s32 sp50;
     s32 sp54;
-    f32 sp58;
-    Gfx* vtxBuffer;
+    Vtx_t* sp5C;
+    Vtx_t* vtx;
     s32 sp60;
     s32 sp64;
     s32 sp68;
-    s32 idx;
-    s32 idx2;
-    f32 posX, posY, posZ;
-    f32 deltaX, deltaY;
-    Vtx_t* vtx;
-    s32 i;
-
+    f32 temp_f0;
+    f32 temp_f20;
+    f32 sp58;
     f32 temp_f22;
+    f32 temp_f24;
+    f32 temp_f26;
+    f32 temp_f28;
     f32 temp_f2;
     f32 var_f12;
     f32 var_f20;
     f32 var_f30;
-    s32 temp_fp;
-    s32 temp_s1;
-    s32 temp_s5;
+    s32 primAlpha;
     s32 temp_s5_2;
-    s32 temp_v0;
-    s32 temp_v1_2;
     s32 var_fp;
-    s32 vtxG;
-    s32 var_s1;
-    s32 vtxB;
-    s32 vtxR;
-    s32 vtxA;
+    s32 temp_s1;
+    s32 a;
+    s32 r, g, b;
 
+    s32 idx; //s3
+    s32 next; //v1
+    s32 prev;
+    s32 i;
+
+    float new_var;
+
+    primAlpha = data->unk_24;
     sp50 = data->unk_14;
-    temp_s5 = data->unk_24;
     sp54 = data->unk_00;
     sp58 = data->unk_34;
 
@@ -257,124 +258,134 @@ void fx_65_appendGfx(void* effect) {
     if (sp54 >= 2) {
         gDPSetCombineLERP(gMasterGfxPos++, SHADE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, COMBINED, COMBINED, 0, PRIMITIVE, 0);
     }
-    var_fp = 0;
+
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, primAlpha);
+    gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, 0);
+    gSPBranchList(gMasterGfxPos, gMasterGfxPos + 0x79);
+
+    sp5C = (Vtx_t*) (gMasterGfxPos + 1);
     sp60 = -1;
     sp64 = (sp50 & 0x3F) << 5;
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, temp_s5);
-    gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, 0);
-    gSPBranchList(gMasterGfxPos, &gMasterGfxPos[121]);
+    gMasterGfxPos += 0x79;
 
-    vtxBuffer = (Vtx_t*) (gMasterGfxPos + 1);
-    gMasterGfxPos = &gMasterGfxPos[121];
-
-    for (i = 1; i < 30; i++) {
-        if (data->unk_230[(data->unk_2A8 + i) % 30] != 0) {
-            var_fp += 1;
+    // use i in iteration?
+    var_fp = 0;
+    for (i = 0; i < 30; i++) {
+        s32 a1 = i + 1;
+        s32 idx = (data->unk_2A8 + a1) % 30;
+        if (data->unk_230[idx]) {
+            var_fp++;
         }
     }
 
-    temp_fp = var_fp - 1;
-    i = 0;
-    if (temp_fp > 0) {
+    var_fp--;
+    if (var_fp > 0) {
         sp68 = 0;
-
-        for (; i < 30; i++) {
-            Vtx_t* vtx = &vtxBuffer[i * 2];
-
-            idx2 = (data->unk_2A8 + (i + 1)) % 30;
-            vtxA = shim_sin_deg((f32) (sp68 / temp_fp)) * 255.0f;
-            if (vtxA > 200) {
-                vtxA = 200;
+        for (i = 0; i < 30; i++) {
+            s32 a1 = i + 1;
+            vtx = &sp5C[i * 2];
+            prev = sp68 / var_fp;
+            idx = (data->unk_2A8 + a1) % 30;
+            a = shim_sin_deg(prev) * 255.0f;
+            if (a > 200) {
+                a = 200;
             }
-            if (data->unk_230[idx2] != 0) {
+
+            if (data->unk_230[idx]) {
                 if (sp60 == -1) {
-                    idx = idx2 + 1;
-                    if (idx >= 30) {
-                        idx = 0;
-                    }
-                    sp60 = i;
-                    var_f30 = -shim_atan2(data->unk_C8[idx], -data->unk_50[idx], data->unk_C8[idx2], -data->unk_50[idx2]);
+                    do {
+                        next = idx + 1;
+                        if (next >= 30) {
+                            next = 0;
+                        }
+                        sp60 = i;
+                        var_f30 = -shim_atan2(data->unk_C8[next], -data->unk_50[next], data->unk_C8[idx], -data->unk_50[idx]);
+                    } while (0); // TODO required to match
                 } else {
-                    idx = idx2 + 1;
-                    if (i != 0x1D) {
-                        var_s1 = idx2 - 1;
-                        if (idx >= 30) {
-                            idx = 0;
+                    if (i != 29) {
+                        next = idx + 1;
+                        prev = idx - 1;
+                        if (next >= 30) {
+                            next = 0;
                         }
-                        if (var_s1 < 0) {
-                            var_s1 = 29;
+                        if (prev < 0) {
+                            prev = 29;
                         }
-                        var_f20 = -shim_atan2(data->unk_C8[idx], -data->unk_50[idx], data->unk_C8[idx2], -data->unk_50[idx2]);
-                        var_f12 = -shim_atan2(data->unk_C8[idx2], -data->unk_50[idx2], data->unk_C8[var_s1], -data->unk_50[var_s1]);
+                        var_f20 = -shim_atan2(data->unk_C8[next], -data->unk_50[next], data->unk_C8[idx], -data->unk_50[idx]);
+                        var_f12 = -shim_atan2(data->unk_C8[idx], -data->unk_50[idx], data->unk_C8[prev], -data->unk_50[prev]);
                         temp_f2 = var_f12 - var_f20;
                         if (temp_f2 > 180.0f) {
                             var_f20 += 360.0f;
                         } else if (temp_f2 < -180.0f) {
                             var_f12 += 360.0f;
                         }
-                        var_f30 = (f64) (var_f20 + var_f12) * 0.5;
+                        var_f30 = (var_f20 + var_f12);
+                        var_f30 *= 0.5;
                     }
                 }
-                temp_v1_2 = data->unk_1B8[idx2];
-                posX = data->unk_50[idx2];
-                posY = data->unk_C8[idx2];
-                posZ = data->unk_140[idx2];
-                temp_s1 = sp50 - temp_v1_2;
-                //temp_f22 = ((shim_sin_deg(((sp50 - (temp_v1_2 * 80)) * 4)) * 3.0f) + 16.0f + temp_s1) * sp58;
-                temp_f22 = ((shim_sin_deg((sp50 - (temp_v1_2 * 80)) * 4) * 3.0f) + 16.0f) + temp_s1;
-                temp_f22 = temp_f22 * sp58;
-                temp_s5_2 = (data->unk_2AC[idx2] * 24.0f) + sp64;
+                temp_f24 = data->unk_50[idx];
+                temp_f26 = data->unk_C8[idx];
+                temp_f28 = data->unk_140[idx];
+                new_var = 24.0f;
+                //temp_v1 = data->unk_1B8[idx];
+                temp_s1 = sp50 - data->unk_1B8[idx];
+                temp_f22 = (shim_sin_deg((sp50 - data->unk_1B8[idx] * 80) * 4) * 3.0f + 16.0f + temp_s1) * sp58;
+                temp_s5_2 = sp64;
+                temp_s5_2 = (data->unk_2AC[idx] * new_var) + temp_s5_2;
 
-                do {
-                    vtxR = 0xFF;
-                    vtxG = 0xFF;
-                    vtxB = 0xFF - (temp_s1 * 100);
-                    if (vtxB < 0) {
-                        vtxG = ((f32) vtxB * 0.8) + 255.0;
-                        vtxB = 0;
-                        if (vtxG < 0) {
-                            vtxR = ((f32) vtxG * 0.4) + 255.0;
-                            vtxG = 0;
-                            if (vtxR < 0) {
-                                vtxR = 0;
-                            }
+                do {} while (0);
+
+                r = 255;
+                g = 255;
+                b = 255 - temp_s1 * 100;
+                if (b < 0) {
+                    g = (f32) b * 0.8 + 255.0;
+                    b = 0;
+                    if (g < 0) {
+                        r = (f32) g * 0.4 + 255.0;
+                        g = 0;
+                        sp54 = r < 0;
+                        if (sp54) {
+                            r = 0;
                         }
                     }
-                } while (0);
+                }
 
-                deltaX = temp_f22 * shim_sin_deg(var_f30);
-                deltaY = temp_f22 * shim_cos_deg(var_f30);
-                sp68 += 180;
+                temp_f20 = temp_f22 * shim_sin_deg(var_f30);
+                temp_f0 = temp_f22 * shim_cos_deg(var_f30);
 
-                vtx->ob[0] = posX + deltaX;
-                vtx->ob[1] = posY + deltaY;
-                vtx->ob[2] = posZ + 0.0f;
+                vtx->ob[0] = temp_f24 + temp_f20;
+                vtx->ob[1] = temp_f26 + temp_f0;
+                vtx->ob[2] = temp_f28 + 0.0f;
                 vtx->tc[0] = temp_s5_2;
                 vtx->tc[1] = 0x400;
-                vtx->cn[0] = vtxR;
-                vtx->cn[1] = vtxG;
-                vtx->cn[2] = vtxB;
-                vtx->cn[3] = vtxA;
+                vtx->cn[0] = r;
+                vtx->cn[1] = g;
+                vtx->cn[2] = b;
+                vtx->cn[3] = a;
                 vtx++;
 
-                vtx->ob[0] = posX - deltaX;
-                vtx->ob[1] = posY - deltaY;
-                vtx->ob[2] = posZ + 0.0f;
+                vtx->ob[0] = temp_f24 - temp_f20;
+                vtx->ob[1] = temp_f26 - temp_f0;
+                vtx->ob[2] = temp_f28 + 0.0f;
                 vtx->tc[0] = temp_s5_2;
                 vtx->tc[1] = 0;
-                vtx->cn[0] = vtxR;
-                vtx->cn[1] = vtxG;
-                vtx->cn[2] = vtxB;
-                vtx->cn[3] = vtxA;
+                vtx->cn[0] = r;
+                vtx->cn[1] = g;
+                vtx->cn[2] = b;
+                vtx->cn[3] = a;
                 vtx++;
+
+                sp68 += 180;
             }
         }
 
         for (i = sp60; i < 29; i++) {
-            gSPVertex(gMasterGfxPos++, &vtxBuffer[i * 4], 4, 0);
+            gSPVertex(gMasterGfxPos++, &sp5C[i * 2], 4, 0);
             gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
         }
     }
+
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
 #else

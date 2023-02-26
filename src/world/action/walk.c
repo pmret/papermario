@@ -2,25 +2,25 @@
 #include "world/actions.h"
 
 AnimID WalkPeachAnims[] = {
-    ANIM_Peach_A0002, // none
-    ANIM_Peach_A002B, // cream
-    ANIM_Peach_A002D, // strawberry
-    ANIM_Peach_A002F, // butter
-    ANIM_Peach_A0031, // cleanser
-    ANIM_Peach_A0033, // water
-    ANIM_Peach_A0035, // milk
-    ANIM_Peach_A0037, // flour
-    ANIM_Peach_A0039, // egg
-    ANIM_Peach_A003B, // complete cake
-    ANIM_Peach_A003D, // cake bowl
-    ANIM_Peach_A003F, // cake mixed
-    ANIM_Peach_A0041, // cake pan
-    ANIM_Peach_A0043, // cake batter
-    ANIM_Peach_A0045, // cake bare
-    ANIM_Peach_A0047, // salt
-    ANIM_Peach_A0049, // sugar
-    ANIM_Peach_A004B, // cake with icing
-    ANIM_Peach_A004D, // cake with berries
+    ANIM_Peach1_Walk, // none
+    ANIM_Peach1_CarryCream, // cream
+    ANIM_Peach1_CarryStrawberry, // strawberry
+    ANIM_Peach1_CarryButter, // butter
+    ANIM_Peach1_CarryCleanser, // cleanser
+    ANIM_Peach1_CarryWater, // water
+    ANIM_Peach1_CarryMilk, // milk
+    ANIM_Peach1_CarryFlour, // flour
+    ANIM_Peach1_CarryEgg, // egg
+    ANIM_Peach1_CarryCompleteCake, // complete cake
+    ANIM_Peach1_CarryCakeBowl, // cake bowl
+    ANIM_Peach1_CarryCakeMixed, // cake mixed
+    ANIM_Peach1_CarryCakePan, // cake pan
+    ANIM_Peach1_CarryCakeBatter, // cake batter
+    ANIM_Peach1_CarryBareCake, // cake bare
+    ANIM_Peach1_CarrySalt, // salt
+    ANIM_Peach1_CarrySugar, // sugar
+    ANIM_Peach1_CarryIcingCake, // cake with icing
+    ANIM_Peach1_CarryBerryCake, // cake with berries
     0x00000000
 };
 
@@ -210,7 +210,7 @@ void func_802B6550_E23C30(void) {
             suggest_player_anim_allow_backward(WalkPeachAnims[gGameStatusPtr->peachBakingIngredient]);
             return;
         }
-        suggest_player_anim_allow_backward(ANIM_Peach_D000D);
+        suggest_player_anim_allow_backward(ANIM_Peach3_WalkSad);
         return;
     }
     peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].walk);
@@ -269,12 +269,12 @@ static void action_update_run_peach(void) {
             gameStatus = gGameStatusPtr;
             if (!(gameStatus->peachFlags & PEACH_STATUS_FLAG_DEPRESSED)) {
                 if (!gameStatus->peachBakingIngredient) {
-                    suggest_player_anim_allow_backward(ANIM_Peach_A0003);
+                    suggest_player_anim_allow_backward(ANIM_Peach1_Run);
                 } else {
                     suggest_player_anim_allow_backward(WalkPeachAnims[gameStatus->peachBakingIngredient]);
                 }
             } else {
-                suggest_player_anim_allow_backward(ANIM_Peach_D000D);
+                suggest_player_anim_allow_backward(ANIM_Peach3_WalkSad);
             }
         } else {
             peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].run);

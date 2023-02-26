@@ -64,13 +64,13 @@ dlabel D_8010D000
 dlabel D_8010D004
 .space 0x63C
 
-dlabel D_8010D640
+dlabel gPopupState
 .space 4
 
 dlabel D_8010D644
 .space 4
 
-dlabel D_8010D648
+dlabel PopupSelectedIdx
 .space 4
 
 dlabel D_8010D64C
@@ -145,7 +145,7 @@ dlabel D_8010D68A
 dlabel D_8010D68C
 .space 2
 
-dlabel D_8010D68E
+dlabel PopupNotBattle
 .space 1
 
 dlabel D_8010D68F
@@ -163,13 +163,13 @@ dlabel D_8010D692
 dlabel D_8010D693
 .space 1
 
-dlabel D_8010D694
+dlabel gPopupWorker
 .space 4
 
-dlabel D_8010D698
+dlabel PopupNotDipping
 .space 1
 
-dlabel D_8010D699
+dlabel PopupDipMode
 .space 1
 
 dlabel D_8010D69A

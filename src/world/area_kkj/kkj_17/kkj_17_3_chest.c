@@ -89,14 +89,14 @@ API_CALLABLE(N(ChestItemPrompt)) {
 
         menu->numEntries = menuIdx;
         menu->initialPos = 0;
-        create_popup_menu(menu);
+        create_standard_popup_menu(menu);
         script->functionTemp[0] = 0;
     }
 
     menu = script->functionTempPtr[2];
     if (script->functionTemp[0] == 0) {
         script->functionTemp[1] = menu->result;
-        if (script->functionTemp[1] == 0) {
+        if (script->functionTemp[1] == POPUP_RESULT_CHOOSING) {
             return ApiStatus_BLOCK;
         }
         hide_popup_menu();
@@ -109,7 +109,7 @@ API_CALLABLE(N(ChestItemPrompt)) {
 
     destroy_popup_menu();
 
-    if (script->functionTemp[1] == 255) {
+    if (script->functionTemp[1] == POPUP_RESULT_CANCEL) {
         script->varTable[0] = -1;
     } else {
         selectIdx = menu->userIndex[script->functionTemp[1] - 1];
@@ -178,17 +178,17 @@ EvtScript N(EVS_CloseChest) = {
 
 EvtScript N(EVS_FindMagicChest) = {
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_018E)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0000)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_RaiseArms)
     EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0026)
-    EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, NPC_PARTNER, MSG_Peach_018F)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_TalkIdle)
+    EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_018F)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0190)
-    EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, NPC_PARTNER, MSG_Peach_0191)
+    EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_0191)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0192)
-    EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, NPC_PARTNER, MSG_Peach_0193)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0002)
+    EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_0193)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_LowerArms)
     EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach_A0001)
+    EVT_CALL(SetPlayerAnimation, ANIM_Peach1_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -201,15 +201,15 @@ EvtScript N(EVS_UseMagicChest_Peach) = {
         EVT_CASE_EQ(0)
             EVT_WAIT(10)
             EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0194)
-            EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0000)
+            EVT_CALL(SetPlayerAnimation, ANIM_Peach2_RaiseArms)
             EVT_WAIT(10)
-            EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0026)
-            EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, NPC_PARTNER, MSG_Peach_0195)
+            EVT_CALL(SetPlayerAnimation, ANIM_Peach2_TalkIdle)
+            EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_0195)
             EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0196)
-            EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach_C0001, ANIM_Peach_C0026, 0, NPC_PARTNER, MSG_Peach_0197)
-            EVT_CALL(SetPlayerAnimation, ANIM_Peach_C0002)
+            EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_0197)
+            EVT_CALL(SetPlayerAnimation, ANIM_Peach2_LowerArms)
             EVT_WAIT(10)
-            EVT_CALL(SetPlayerAnimation, ANIM_Peach_A0001)
+            EVT_CALL(SetPlayerAnimation, ANIM_Peach1_Idle)
         EVT_CASE_DEFAULT
             EVT_WAIT(10)
             EVT_SET(LVar9, LVar0)
