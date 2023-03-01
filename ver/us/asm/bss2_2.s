@@ -70,22 +70,22 @@ dlabel gPopupState
 dlabel D_8010D644
 .space 4
 
-dlabel PopupSelectedIdx
+dlabel PopupMenu_SelectedIndex
 .space 4
 
-dlabel D_8010D64C
+dlabel PopupMenu_PrevSelectedIndex
 .space 4
 
-dlabel D_8010D650
+dlabel PopupMenu_Alpha
 .space 4
 
-dlabel D_8010D654
+dlabel PopupMenu_FirstDisplayIndex
 .space 1
 
-dlabel D_8010D655
+dlabel PopupMenu_LastDisplayIndex
 .space 1
 
-dlabel D_8010D656
+dlabel PopupMenu_DisplayedEntryCount
 .space 2
 
 dlabel D_8010D658
@@ -94,28 +94,28 @@ dlabel D_8010D658
 dlabel D_8010D65A
 .space 2
 
-dlabel D_8010D65C
+dlabel PopupMenu_EmptybarHEID
 .space 4
 
-dlabel D_8010D660
+dlabel PopupMenu_TitleIconHEID
 .space 4
 
-dlabel D_8010D664
+dlabel PopupMenu_TimesHEID
 .space 4
 
-dlabel D_8010D668
+dlabel PopupMenu_PartnerLevelHEID
 .space 4
 
-dlabel D_8010D66C
+dlabel PopupMenu_CursorHEID
 .space 4
 
-dlabel D_8010D670
+dlabel PopupMenu_UpArrowHEID
 .space 4
 
-dlabel D_8010D674
+dlabel PopupMenu_DownArrowHEID
 .space 4
 
-dlabel D_8010D678
+dlabel PopupMenu_EntryIconHEID
 .space 4
 
 dlabel D_8010D67C
@@ -136,10 +136,10 @@ dlabel D_8010D684
 dlabel D_8010D686
 .space 2
 
-dlabel D_8010D688
+dlabel PopupMenu_StarPieceCounterPosX
 .space 2
 
-dlabel D_8010D68A
+dlabel PopupMenu_StarPieceCounterPosY
 .space 2
 
 dlabel D_8010D68C
@@ -148,7 +148,7 @@ dlabel D_8010D68C
 dlabel PopupNotBattle
 .space 1
 
-dlabel D_8010D68F
+dlabel PopupMenu_MaxDisplayableEntryCount
 .space 1
 
 dlabel D_8010D690
