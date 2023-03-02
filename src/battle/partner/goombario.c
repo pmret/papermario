@@ -1441,7 +1441,7 @@ EvtScript N(tattle) = {
     EVT_WAIT(12)
     EVT_CALL(SetCamEnabled, CAM_TATTLE, TRUE)
     EVT_CALL(SetCamFlag80, CAM_TATTLE, FALSE)
-    EVT_CALL(SetCamPerspective, CAM_TATTLE, 6, 25, 16, 1024)
+    EVT_CALL(SetCamPerspective, CAM_TATTLE, CAM_UPDATE_MODE_6, 25, 16, 1024)
     EVT_CALL(SetCamViewport, CAM_TATTLE, 137, 95, 138, 99)
     EVT_CALL(GetOwnerTarget, LVarA, LVarB)
     EVT_CALL(GetActorPos, LVarA, LVar0, LVar1, LVar2)

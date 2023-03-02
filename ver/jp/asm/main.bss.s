@@ -205,7 +205,7 @@ dlabel GfxTaskMgrStack
 dlabel D_8009E6D0
 .space 0x00000020
 
-dlabel blendedCamSettings
+dlabel gCurrentCamConfiguration
 .space 0x0000001C
 
 dlabel D_800A08DC
