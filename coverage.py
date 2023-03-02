@@ -78,3 +78,4 @@ def stuff(version):
 
 stuff("us")
 stuff("jp")
+stuff("cn")
