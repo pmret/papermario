@@ -139,7 +139,7 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(SetNpcPos, NPC_PARTNER, NPC_DISPOSE_LOCATION)
     EVT_END_IF
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 25, 16, 4096)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, CAM_DEFAULT, 208, 208, 208)
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)

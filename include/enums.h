@@ -5367,29 +5367,50 @@ enum CameraMoveFlags {
 };
 
 enum CameraUpdateType {
-    CAMERA_UPDATE_TYPE_0            = 0,
-    CAMERA_UPDATE_TYPE_1            = 1,
-    CAMERA_UPDATE_TYPE_2            = 2,
-    CAMERA_UPDATE_TYPE_3            = 3,
-    CAMERA_UPDATE_TYPE_4            = 4,
-    CAMERA_UPDATE_TYPE_5            = 5,
-    CAMERA_UPDATE_TYPE_6            = 6,
+    CAM_UPDATE_MODE_0               = 0,
+    CAM_UPDATE_MODE_1               = 1,
+    CAM_UPDATE_MODE_2               = 2,
+    CAM_UPDATE_MODE_3               = 3,
+    CAM_UPDATE_MODE_4               = 4,
+    CAM_UPDATE_MODE_5               = 5,
+    CAM_UPDATE_MODE_6               = 6,
 };
 
 enum CameraSettingsType {
-    CAMERA_SETTINGS_TYPE_0          = 0,
-    CAMERA_SETTINGS_TYPE_1          = 1,
-    CAMERA_SETTINGS_TYPE_2          = 2,
-    CAMERA_SETTINGS_TYPE_3          = 3,
-    CAMERA_SETTINGS_TYPE_4          = 4,
-    CAMERA_SETTINGS_TYPE_5          = 5,
-    CAMERA_SETTINGS_TYPE_6          = 6,
-};
+    // Camera follows the player, using a fixed yaw position.
+    // Uses: A/B as 2D points
+    // Yaw is defined by the line segment AB
+    // flag 0 = free forward movement (follow player)
+	// flag 1 = lock forward movement (must intersect B)
+    CAM_CONTROL_FIXED_ORIENTATION   = 0,
 
-enum CameraSettingsPtrType {
-    CAMERA_SETTINGS_PTR_MINUS_2      = -2,
-    CAMERA_SETTINGS_PTR_MINUS_1      = -1,
-    CAMERA_SETTINGS_PTR_NULL         = 0,
+    // Camera faces toward or away from a point with the player in the center of the frame.
+    // Use a negative boom length to look away from a point.
+    // flag 1 = Constrain to Fixed Radius
+    CAM_CONTROL_LOOK_AT_POINT       = 1,
+
+    // Camera is contrained to a point along the line segment BC.
+    // Use these near exits to stop camera movement.
+    // Uses: A/B/C as 2D points
+    // The target position is found by projecting player position onto BC along a
+    // line orthogonal to AB. If posA == posB, the projection axis will be along
+    // BC, i.e., the projection will be along a line orthogonal to BC.
+    // flag 1 = Freeze Camera Position
+    CAM_CONTROL_CONSTRAIN_TO_LINE   = 2,
+
+    // Follows the player using whatever yaw value the camera initially possessed.
+    CAM_CONTROL_FOLLOW_PLAYER       = 3,
+
+    // Both position and yaw are fixed.
+    CAM_CONTROL_FIXED_POS_AND_ORIENTATION       = 4,
+
+    // Look Toward Point, Constrain to Line
+    // flag 1 = Freeze Target at Point
+    CAM_CONTROL_LOOK_AT_POINT_CONSTAIN_TO_LINE  = 5,
+
+    // Camera position is contrained to a line segment, with yaw perpendicular to the line segment.
+    // flag 1 = Disable Forward Motion
+    CAM_CONTROL_CONSTAIN_BETWEEN_POINTS         = 6,
 };
 
 enum BtlCameraPreset {

@@ -50,11 +50,12 @@ ApiStatus SetCamPerspective(Evt* script, s32 isInitialCall) {
     s16 farClip = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
 
-    camera->farClip = farClip;
     camera->updateMode = mode;
     camera->unk_06 = TRUE;
     camera->isChangingMap = TRUE;
+
     camera->vfov = vfov;
+    camera->farClip = farClip;
     camera->nearClip = nearClip;
     return ApiStatus_DONE2;
 }
@@ -79,7 +80,7 @@ ApiStatus func_802CA988(Evt* script, s32 isInitialCall) {
     Bytecode outVar4 = *args++;
     f32 dx, dy, dz;
 
-    gCameras[id].updateMode = 2;
+    gCameras[id].updateMode = CAM_UPDATE_MODE_2;
     gCameras[id].unk_06 = FALSE;
     gCameras[id].auxPitch = -round(gCameras[id].currentPitch);
     gCameras[id].auxBoomLength = -gCameras[id].currentBlendedYawNegated;

@@ -24,25 +24,25 @@ void update_cameras(void) {
             gCurrentCamID = i;
 
             switch (cam->updateMode) {
-                case 3:
+                case CAM_UPDATE_MODE_3:
                     update_camera_zone_interp(cam);
                     break;
-                case 0:
+                case CAM_UPDATE_MODE_0:
                     update_camera_mode_0(cam);
                     break;
-                case 1:
+                case CAM_UPDATE_MODE_1:
                     update_camera_mode_1(cam);
                     break;
-                case 2:
+                case CAM_UPDATE_MODE_2:
                     update_camera_mode_2(cam);
                     break;
-                case 4:
+                case CAM_UPDATE_MODE_4:
                     update_camera_mode_4(cam);
                     break;
-                case 5:
+                case CAM_UPDATE_MODE_5:
                     update_camera_mode_5(cam);
                     break;
-                case 6:
+                case CAM_UPDATE_MODE_6:
                 default:
                     update_camera_mode_6(cam);
                     break;
@@ -237,7 +237,7 @@ void create_cameras_a(void) {
     }
 
     camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->type = 0;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 0;
@@ -248,7 +248,7 @@ void create_cameras_a(void) {
     initialize_next_camera(camDataPtr);
 
     camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->type = 0;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 160;
@@ -259,7 +259,7 @@ void create_cameras_a(void) {
     initialize_next_camera(camDataPtr);
 
     camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->type = 0;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 0;
@@ -270,7 +270,7 @@ void create_cameras_a(void) {
     initialize_next_camera(camDataPtr);
 
     camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->type = 0;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 160;
@@ -291,7 +291,7 @@ void create_cameras_b(void) {
     }
 
     camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->type = 0;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 0;
@@ -302,7 +302,7 @@ void create_cameras_b(void) {
     initialize_next_camera(camDataPtr);
 
     camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->type = 0;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 160;
@@ -313,7 +313,7 @@ void create_cameras_b(void) {
     initialize_next_camera(camDataPtr);
 
     camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->type = 0;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 0;
@@ -324,7 +324,7 @@ void create_cameras_b(void) {
     initialize_next_camera(camDataPtr);
 
     camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->type = 0;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 160;
@@ -363,7 +363,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->trueRotation.x = 0.0f;
     camera->trueRotation.y = 0.0f;
     camera->trueRotation.z = 0.0f;
-    camera->updateMode = initData->type;
+    camera->updateMode = initData->updateMode;
     camera->unk_06 = TRUE;
     camera->nearClip = initData->nearClip;
     camera->farClip = initData->farClip;

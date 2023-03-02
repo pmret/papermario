@@ -1,6 +1,6 @@
 #include "common.h"
 
-extern CamPosSettings blendedCamSettings;
+extern CamConfiguration gCurrentCamConfiguration;
 extern f32 D_800A08DC;
 extern f32 D_800A08E0;
 extern f32 D_800A08E4;
@@ -80,6 +80,8 @@ void update_camera_mode_unused(Camera* camera) {
     camera->currentBlendedYawNegated = -atan2(0.0f, 0.0f, deltaX, deltaZ);
     camera->currentPitch = atan2(0.0f, 0.0f, deltaY, -sqrtf(SQ(deltaX) + SQ(deltaZ)));
 }
+
+//TODO CODE SPLIT?
 
 void update_camera_mode_5(Camera* camera) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -179,6 +181,8 @@ void func_8003034C(Camera* camera) {
     }
 }
 
+//TODO CODE SPLIT?
+
 void func_80030450(Camera* camera) {
 }
 
@@ -195,21 +199,24 @@ CameraControlSettings* test_ray_zone_aabb(f32 x, f32 y, f32 z) {
     return gZoneCollisionData.colliderList[zoneID].camSettings;
 }
 
+enum CameraSettingsPtrType {
+    CAMERA_SETTINGS_PTR_MINUS_2     = -2,
+    CAMERA_SETTINGS_PTR_MINUS_1     = -1,
+    CAMERA_SETTINGS_PTR_NULL        = 0,
+};
+
 void update_camera_from_controller(
     Camera* camera,
-    CamPosSettings* oldSettings, CameraControlSettings** prevController,
-    CamPosSettings* newSettings, CameraControlSettings** newController,
+    CamConfiguration* oldConfiguration, CameraControlSettings** prevController,
+    CamConfiguration* newConfiguration, CameraControlSettings** newController,
     f32 x1, f32 y1, f32 z1,
     f32 tX, f32 tY, f32 tZ, s32 changingMap,
     f32* interpAlpha, s32 changingZone)
 {
     CameraControlSettings* prevSettings;
     CameraControlSettings* controller;
-    CamPosSettings* camPos;
-    f32 posAx;
-    f32 posAz;
-    f32 posBx;
-    f32 posBz;
+    CamConfiguration* configuration;
+
     f32 boomLength;
 
     f32 temp_f18;
@@ -231,17 +238,9 @@ void update_camera_from_controller(
     f32 dz;
     f32 dx;
 
-    f32 sp10;
-    f32 sp20;
-
     f32 x, y, z;
-    f32 f4_1;
-    f32 f22_1;
-    f32 f14_1;
-    f32 f4_2;
-    f32 f12_1;
     
-    camPos = oldSettings;
+    configuration = oldConfiguration;
     controller = *prevController;
     x = x1;
     y = y1;
@@ -249,12 +248,12 @@ void update_camera_from_controller(
     
     if ((s32)controller != CAMERA_SETTINGS_PTR_MINUS_2 && (s32)controller != CAMERA_SETTINGS_PTR_MINUS_1) {
         if (controller == CAMERA_SETTINGS_PTR_NULL) {
-            camPos->pos.x = x;
-            camPos->pos.y = y;
-            camPos->pos.z = z;
+            configuration->targetPos.x = x;
+            configuration->targetPos.y = y;
+            configuration->targetPos.z = z;
         } else {
             switch (controller->type) {
-                case 0:
+                case CAM_CONTROL_FIXED_ORIENTATION:
                     if (controller->flag != 0) {
                         f32 temp_f10 = -(controller->points.two.Az - controller->points.two.Bz) + controller->points.two.Bx;
                         f32 temp_f6 = (controller->points.two.Ax - controller->points.two.Bx) + controller->points.two.Bz;
@@ -265,16 +264,16 @@ void update_camera_from_controller(
                         f32 temp_f4 = (SQ(temp_f8) + SQ(temp_f12_2));
                         temp_f4 = (((x - temp_f10) * temp_f8) + ((z - temp_f6) * temp_f12_2)) / temp_f4;
                         
-                        camPos->pos.x = temp_f4 * temp_f8 + temp_f10;
-                        camPos->pos.y = y;
-                        camPos->pos.z = temp_f4 * temp_f12_2 + temp_f6;
+                        configuration->targetPos.x = temp_f4 * temp_f8 + temp_f10;
+                        configuration->targetPos.y = y;
+                        configuration->targetPos.z = temp_f4 * temp_f12_2 + temp_f6;
                     } else {
-                        camPos->pos.x = x;
-                        camPos->pos.y = y;
-                        camPos->pos.z = z;
+                        configuration->targetPos.x = x;
+                        configuration->targetPos.y = y;
+                        configuration->targetPos.z = z;
                     }
                     break;
-                case 6:
+                case CAM_CONTROL_CONSTAIN_BETWEEN_POINTS:
                     {
                         f32 ax, az, bx, bz, temp_f8_2, temp_f6_2;
                         f32 f22_1, f4_2, sp10, sp20, f14_1, f12_1;
@@ -325,12 +324,12 @@ void update_camera_from_controller(
                             var_f16 += temp_f20;
                             var_f10 += temp_f18;
                         }
-                        camPos->pos.x = var_f16;
-                        camPos->pos.y = y;
-                        camPos->pos.z = var_f10;
+                        configuration->targetPos.x = var_f16;
+                        configuration->targetPos.y = y;
+                        configuration->targetPos.z = var_f10;
                     }
                     break;
-                case 1:
+                case CAM_CONTROL_LOOK_AT_POINT:
                     if (controller->flag != 0) {
                         dx = x - controller->points.two.Ax;
                         dz = z - controller->points.two.Az;
@@ -340,71 +339,73 @@ void update_camera_from_controller(
                             temp_f2 = sqrtf(SQ(controller->points.two.Bx - controller->points.two.Ax) + SQ(controller->points.two.Bz - controller->points.two.Az));
                             temp_f2_2 = dx * temp_f2 * f24;
                             temp_f4_4 = dz * temp_f2 * f24;
-                            camPos->pos.x = controller->points.two.Ax + temp_f2_2;
-                            camPos->pos.y = y;
-                            camPos->pos.z = controller->points.two.Az + temp_f4_4;
+                            configuration->targetPos.x = controller->points.two.Ax + temp_f2_2;
+                            configuration->targetPos.y = y;
+                            configuration->targetPos.z = controller->points.two.Az + temp_f4_4;
                         }
                     } else {
-                        camPos->pos.x = x;
-                        camPos->pos.y = y;
-                        camPos->pos.z = z;
+                        configuration->targetPos.x = x;
+                        configuration->targetPos.y = y;
+                        configuration->targetPos.z = z;
                     }
                     break;
-                case 2:
-                case 5:
+                case CAM_CONTROL_CONSTRAIN_TO_LINE:
+                case CAM_CONTROL_LOOK_AT_POINT_CONSTAIN_TO_LINE:
                     *prevController = (CameraControlSettings*) CAMERA_SETTINGS_PTR_MINUS_1;
                     break;
-                case 3:
-                    camPos->pos.x = x;
-                    camPos->pos.y = y;
-                    camPos->pos.z = z;
+                case CAM_CONTROL_FOLLOW_PLAYER:
+                    configuration->targetPos.x = x;
+                    configuration->targetPos.y = y;
+                    configuration->targetPos.z = z;
                     break;
-                case 4:
+                case CAM_CONTROL_FIXED_POS_AND_ORIENTATION:
                     break;
             }
         }
     }
     
-    camPos = newSettings;
+    configuration = newConfiguration;
     controller = *newController;
     x = tX;
     y = tY;
     z = tZ;
     
     if (controller == NULL) {
-        camPos->pos.x = x;
-        camPos->pos.y = y;
-        camPos->pos.z = z;
+        configuration->targetPos.x = x;
+        configuration->targetPos.y = y;
+        configuration->targetPos.z = z;
     } else {
         switch (controller->type) {
-            case 0:
+            case CAM_CONTROL_FIXED_ORIENTATION:
                 dx = controller->points.two.Bx - controller->points.two.Ax;
                 dz = controller->points.two.Bz - controller->points.two.Az;
-                camPos->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
                 boomLength = controller->boomLength;
                 if (boomLength < 0.0f) {
                     boomLength = -boomLength;
                 }
-                camPos->boomLength = boomLength;
-                camPos->boomPitch = controller->boomPitch;
-                camPos->viewPitch = controller->viewPitch;
-                if (controller->flag != 0) {
-                    f32 temp_f10 = -(controller->points.two.Az - controller->points.two.Bz) + controller->points.two.Bx;
-                    f32 temp_f6 = (controller->points.two.Ax - controller->points.two.Bx) + controller->points.two.Bz;
+                configuration->boomLength = boomLength;
+                configuration->boomPitch = controller->boomPitch;
+                configuration->viewPitch = controller->viewPitch;
+                if (controller->flag) {
+                    f32 ABx = controller->points.two.Ax - controller->points.two.Bx;
+                    f32 ABz = controller->points.two.Az - controller->points.two.Bz;
+                    f32 temp_f10 = -ABz + controller->points.two.Bx;
+                    f32 temp_f6 = ABx + controller->points.two.Bz;
                     
                     f32 temp_f8 = controller->points.two.Bx - temp_f10;
                     f32 temp_f12_2 = controller->points.two.Bz - temp_f6;
 
-                    f32 temp_f4 = (SQ(temp_f8) + SQ(temp_f12_2));
+                    f32 temp_f4 = SQ(temp_f8) + SQ(temp_f12_2);
                     temp_f4 = (((x - temp_f10) * temp_f8) + ((z - temp_f6) * temp_f12_2)) / temp_f4;
                     
-                    camPos->pos.x = temp_f4 * temp_f8 + temp_f10;
-                    camPos->pos.y = y;
-                    camPos->pos.z = temp_f4 * temp_f12_2 + temp_f6;
+                    configuration->targetPos.x = temp_f4 * temp_f8 + temp_f10;
+                    configuration->targetPos.y = y;
+                    configuration->targetPos.z = temp_f4 * temp_f12_2 + temp_f6;
                 } else {
-                    camPos->pos.x = x;
-                    camPos->pos.y = y;
-                    camPos->pos.z = z;
+                    configuration->targetPos.x = x;
+                    configuration->targetPos.y = y;
+                    configuration->targetPos.z = z;
                 }
 
                 if (changingZone && *interpAlpha != 1.0f) {
@@ -422,17 +423,17 @@ void update_camera_from_controller(
                     }
                 }
                 break;
-            case 6:
+            case CAM_CONTROL_CONSTAIN_BETWEEN_POINTS:
                 dx = controller->points.two.Bx - controller->points.two.Ax;
                 dz = controller->points.two.Bz - controller->points.two.Az;
-                camPos->boomYaw = atan2(0.0f, 0.0f, dz, -dx);
+                configuration->boomYaw = atan2(0.0f, 0.0f, dz, -dx);
                 boomLength = controller->boomLength;
                 if (boomLength < 0.0f) {
                     boomLength = -boomLength;
                 }
-                camPos->boomLength = boomLength;
-                camPos->boomPitch = controller->boomPitch;
-                camPos->viewPitch = controller->viewPitch;
+                configuration->boomLength = boomLength;
+                configuration->boomPitch = controller->boomPitch;
+                configuration->viewPitch = controller->viewPitch;
                 {
                     f32 ax, az, bx, bz, temp_f8_2, temp_f6_2;
                     f32 f22_1, f4_2, sp10, sp20, f14_1, f12_1;
@@ -483,9 +484,9 @@ void update_camera_from_controller(
                         var_f16 += temp_f20;
                         var_f10 += temp_f18;
                     }
-                    camPos->pos.x = var_f16;
-                    camPos->pos.y = y;
-                    camPos->pos.z = var_f10;
+                    configuration->targetPos.x = var_f16;
+                    configuration->targetPos.y = y;
+                    configuration->targetPos.z = var_f10;
                 }
                 if (changingZone) {
                     if (*interpAlpha != 1.0f) {
@@ -504,21 +505,20 @@ void update_camera_from_controller(
                     }
                 }
                 break;
-            case 1:
-                // Camera faces toward or away from point A with the player in the center of the frame
+            case CAM_CONTROL_LOOK_AT_POINT:
                 if (controller->boomLength < 0.0f) {
                     // negative boom length means look *away* from point
                     dx = x - controller->points.two.Ax;
                     dz = z - controller->points.two.Az;
-                    camPos->boomLength = -controller->boomLength;
+                    configuration->boomLength = -controller->boomLength;
                 } else {
                     dx = controller->points.two.Ax - x;
                     dz = controller->points.two.Az - z;
-                    camPos->boomLength = controller->boomLength;
+                    configuration->boomLength = controller->boomLength;
                 }
-                camPos->boomYaw = atan2(0.0f, 0.0f, dx, dz);
-                camPos->boomPitch = controller->boomPitch;
-                camPos->viewPitch = controller->viewPitch;
+                configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                configuration->boomPitch = controller->boomPitch;
+                configuration->viewPitch = controller->viewPitch;
                 if (controller->flag != 0) {
                     // constrain to fixed radius
                     dx = x - controller->points.two.Ax;
@@ -529,14 +529,14 @@ void update_camera_from_controller(
                         temp_f2_3 = sqrtf(SQ(controller->points.two.Bx - controller->points.two.Ax) + SQ(controller->points.two.Bz - controller->points.two.Az));
                         temp_f2_4 = dx * temp_f2_3 * f24;
                         temp_f4_9 = dz * temp_f2_3 * f24;
-                        camPos->pos.x = controller->points.two.Ax + temp_f2_4;
-                        camPos->pos.y = y;
-                        camPos->pos.z = controller->points.two.Az + temp_f4_9;
+                        configuration->targetPos.x = controller->points.two.Ax + temp_f2_4;
+                        configuration->targetPos.y = y;
+                        configuration->targetPos.z = controller->points.two.Az + temp_f4_9;
                     }
                 } else {
-                    camPos->pos.x = x;
-                    camPos->pos.y = y;
-                    camPos->pos.z = z;
+                    configuration->targetPos.x = x;
+                    configuration->targetPos.y = y;
+                    configuration->targetPos.z = z;
                 }
 
                 if (changingZone) {
@@ -559,12 +559,8 @@ void update_camera_from_controller(
                     break;
                 }
                 break;
-            case 2:
+            case CAM_CONTROL_CONSTRAIN_TO_LINE:
                 if (controller->flag == 0) {
-                    // Camera is contrained to a point along the line segment BC.
-                    // The target position is found by projecting player position onto BC along a
-                    // line orthogonal to AB. If posA == posB, the projection axis will be along
-                    // BC, i.e., the projection will be along a line orthogonal to BC.
                     f32 posAx;
                     f32 posBx;
                     f32 posCx;
@@ -608,45 +604,45 @@ void update_camera_from_controller(
                         Tx = ABz * V / Q + x;
                         Tz = BAx * V / Q + z;
                     }
-                    camPos->pos.x = Tx;
-                    camPos->pos.y = y;                    
-                    camPos->pos.z = Tz;
+                    configuration->targetPos.x = Tx;
+                    configuration->targetPos.y = y;                    
+                    configuration->targetPos.z = Tz;
 
                     if (changingMap) {
                         dx = controller->points.two.Bx - controller->points.two.Ax;
                         dz = controller->points.two.Bz - controller->points.two.Az;
-                        camPos->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                        configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
                         boomLength = controller->boomLength;
                         if (boomLength < 0.0f) {
                             boomLength = -boomLength;
                         }
-                        camPos->boomLength = boomLength;
-                        camPos->boomPitch = controller->boomPitch;
-                        camPos->viewPitch = controller->viewPitch;
+                        configuration->boomLength = boomLength;
+                        configuration->boomPitch = controller->boomPitch;
+                        configuration->viewPitch = controller->viewPitch;
                     }
                 } else {
                     if (changingMap) {
                         dx = controller->points.two.Bx - controller->points.two.Ax;
                         dz = controller->points.two.Bz - controller->points.two.Az;
-                        camPos->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                        configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
                         boomLength = controller->boomLength;
                         if (boomLength < 0.0f) {
                             boomLength = -boomLength;
                         }
-                        camPos->boomLength = boomLength;
-                        camPos->boomPitch = controller->boomPitch;
-                        camPos->viewPitch = controller->viewPitch;
-                        camPos->pos.x = controller->points.two.Bx;
-                        camPos->pos.z = controller->points.two.Bz;
+                        configuration->boomLength = boomLength;
+                        configuration->boomPitch = controller->boomPitch;
+                        configuration->viewPitch = controller->viewPitch;
+                        configuration->targetPos.x = controller->points.two.Bx;
+                        configuration->targetPos.z = controller->points.two.Bz;
                     } else if (changingZone) {
-                        camPos->pos.x = oldSettings->pos.x;
-                        camPos->pos.z = oldSettings->pos.z;
+                        configuration->targetPos.x = oldConfiguration->targetPos.x;
+                        configuration->targetPos.z = oldConfiguration->targetPos.z;
                     }
-                    camPos->pos.y = y;
+                    configuration->targetPos.y = y;
                 }
                 *prevController = (CameraControlSettings*) CAMERA_SETTINGS_PTR_MINUS_1;
                 break;
-            case 5:
+            case CAM_CONTROL_LOOK_AT_POINT_CONSTAIN_TO_LINE:
                 if (controller->flag == 0) {
                     f32 var3 = x - controller->points.three.Cx;
                     f32 var4 = z - controller->points.three.Cz;
@@ -657,81 +653,81 @@ void update_camera_from_controller(
                     temp_f2_7 = temp_f4_13 * var1 + controller->points.three.Cx;
                     temp_f4_14 = temp_f4_13 * var2 + controller->points.three.Cz;
                     
-                    camPos->pos.x = temp_f2_7;
-                    camPos->pos.y = y;                    
-                    camPos->pos.z = temp_f4_14;
+                    configuration->targetPos.x = temp_f2_7;
+                    configuration->targetPos.y = y;                    
+                    configuration->targetPos.z = temp_f4_14;
                     
                     if (controller->boomLength < 0.0f) {
                         dx = temp_f2_7 - controller->points.three.Ax;
                         dz = temp_f4_14 - controller->points.three.Az;
-                        camPos->boomLength = -controller->boomLength;
+                        configuration->boomLength = -controller->boomLength;
                     } else {
                         dx = controller->points.three.Ax - temp_f2_7;
                         dz = controller->points.three.Az - temp_f4_14;
-                        camPos->boomLength = controller->boomLength;
+                        configuration->boomLength = controller->boomLength;
                     }
-                    camPos->boomYaw = atan2(0.0f, 0.0f, dx, dz);
-                    camPos->boomPitch = controller->boomPitch;
-                    camPos->viewPitch = controller->viewPitch;
+                    configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                    configuration->boomPitch = controller->boomPitch;
+                    configuration->viewPitch = controller->viewPitch;
                 } else {
                     if (changingMap) {
                         if (controller->boomLength < 0.0f) {
                             dx = controller->points.three.Bx - controller->points.three.Ax;
                             dz = controller->points.three.Bz - controller->points.three.Az;
-                            camPos->boomLength = -controller->boomLength;
+                            configuration->boomLength = -controller->boomLength;
                         } else {
                             dx = controller->points.three.Ax - controller->points.three.Bx;
                             dz = controller->points.three.Az - controller->points.three.Bz;
-                            camPos->boomLength = controller->boomLength;
+                            configuration->boomLength = controller->boomLength;
                         }
-                        camPos->boomYaw = atan2(0.0f, 0.0f, dx, dz);
-                        camPos->boomPitch = controller->boomPitch;
-                        camPos->viewPitch = controller->viewPitch;
-                        camPos->pos.x = controller->points.three.Bx;
-                        camPos->pos.z = controller->points.three.Bz;
+                        configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                        configuration->boomPitch = controller->boomPitch;
+                        configuration->viewPitch = controller->viewPitch;
+                        configuration->targetPos.x = controller->points.three.Bx;
+                        configuration->targetPos.z = controller->points.three.Bz;
                     } else if (changingZone) {
-                        camPos->pos.x = controller->points.three.Bx;
-                        camPos->pos.z = controller->points.three.Bz;
+                        configuration->targetPos.x = controller->points.three.Bx;
+                        configuration->targetPos.z = controller->points.three.Bz;
                     }
-                    camPos->pos.y = y;
+                    configuration->targetPos.y = y;
                 }
                 *prevController = (CameraControlSettings*) CAMERA_SETTINGS_PTR_MINUS_1;
                 break;
-            case 3:
-                camPos->pos.x = x;
-                camPos->pos.y = y;
-                camPos->pos.z = z;
+            case CAM_CONTROL_FOLLOW_PLAYER:
+                configuration->targetPos.x = x;
+                configuration->targetPos.y = y;
+                configuration->targetPos.z = z;
                 break;
-            case 4:
+            case CAM_CONTROL_FIXED_POS_AND_ORIENTATION:
                 do {
                 dx = controller->points.two.Bx - controller->points.two.Ax;
                 dz = controller->points.two.Bz - controller->points.two.Az;
                 
-                camPos->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
                 } while (0);
                 boomLength = controller->boomLength;
                 if (boomLength < 0.0f) {
                     boomLength = -boomLength;
                 }
-                camPos->boomLength = boomLength;
-                camPos->boomPitch = controller->boomPitch;
-                camPos->viewPitch = controller->viewPitch;
-                camPos->pos.x = controller->points.two.Bx;
-                camPos->pos.y = controller->points.two.By;
-                camPos->pos.z = controller->points.two.Bz;
+                configuration->boomLength = boomLength;
+                configuration->boomPitch = controller->boomPitch;
+                configuration->viewPitch = controller->viewPitch;
+                configuration->targetPos.x = controller->points.two.Bx;
+                configuration->targetPos.y = controller->points.two.By;
+                configuration->targetPos.z = controller->points.two.Bz;
                 *prevController = (CameraControlSettings*) CAMERA_SETTINGS_PTR_MINUS_2;
                 break;
         }
 
         if (changingZone
-            && ((controller->type == 5) || (oldSettings->boomYaw != newSettings->boomYaw))
-            && (fabsf(oldSettings->boomYaw - newSettings->boomYaw) < 3.0f)
-            && (fabsf(oldSettings->boomLength - newSettings->boomLength) < 10.0f)
-            && (fabsf(oldSettings->boomPitch - newSettings->boomPitch) < 1.0f)
-            && (fabsf(oldSettings->viewPitch - newSettings->viewPitch) < 1.0f)
-            && (fabsf(oldSettings->pos.x - newSettings->pos.x) < 10.0f)
-            && (fabsf(oldSettings->pos.y - newSettings->pos.y) < 10.0f)
-            && (fabsf(oldSettings->pos.z - newSettings->pos.z) < 10.0f)
+            && ((controller->type == CAM_CONTROL_LOOK_AT_POINT_CONSTAIN_TO_LINE) || (oldConfiguration->boomYaw != newConfiguration->boomYaw))
+            && (fabsf(oldConfiguration->boomYaw - newConfiguration->boomYaw) < 3.0f)
+            && (fabsf(oldConfiguration->boomLength - newConfiguration->boomLength) < 10.0f)
+            && (fabsf(oldConfiguration->boomPitch - newConfiguration->boomPitch) < 1.0f)
+            && (fabsf(oldConfiguration->viewPitch - newConfiguration->viewPitch) < 1.0f)
+            && (fabsf(oldConfiguration->targetPos.x - newConfiguration->targetPos.x) < 10.0f)
+            && (fabsf(oldConfiguration->targetPos.y - newConfiguration->targetPos.y) < 10.0f)
+            && (fabsf(oldConfiguration->targetPos.z - newConfiguration->targetPos.z) < 10.0f)
         ) {
             *interpAlpha = 1.0f;
         }
@@ -739,13 +735,13 @@ void update_camera_from_controller(
 
     if (*prevController == (CameraControlSettings*) CAMERA_SETTINGS_PTR_MINUS_1) {
         if (changingZone) {
-            D_800A08E4 = oldSettings->pos.x - newSettings->pos.x;
-            D_800A08E8 = oldSettings->pos.y - newSettings->pos.y;
-            D_800A08EC = oldSettings->pos.z - newSettings->pos.z;
+            D_800A08E4 = oldConfiguration->targetPos.x - newConfiguration->targetPos.x;
+            D_800A08E8 = oldConfiguration->targetPos.y - newConfiguration->targetPos.y;
+            D_800A08EC = oldConfiguration->targetPos.z - newConfiguration->targetPos.z;
         }
-        oldSettings->pos.x = newSettings->pos.x + D_800A08E4;
-        oldSettings->pos.y = newSettings->pos.y + D_800A08E8;
-        oldSettings->pos.z = newSettings->pos.z + D_800A08EC;
+        oldConfiguration->targetPos.x = newConfiguration->targetPos.x + D_800A08E4;
+        oldConfiguration->targetPos.y = newConfiguration->targetPos.y + D_800A08E8;
+        oldConfiguration->targetPos.z = newConfiguration->targetPos.z + D_800A08EC;
     }
 }
 
@@ -759,14 +755,14 @@ void update_camera_zone_interp(Camera* camera) {
     f32 deltaX;
     f32 deltaY;
     f32 deltaZ;
-    f32 boomYawDiff;
-    f32 settingDiff;
+    f32 maxDelta;
+    f32 delta;
     f32 deltaSqSum;
     f32 panPhase;
     f32 temp_f20_2;
     f32 panRad;
-    f32 cosViewPitch;
-    f32 sinViewPitch;
+    f32 cosAngle;
+    f32 sinAngle;
     f32 temp_f24;
     f32 temp_f24_2;
     f32 temp_f26;
@@ -800,9 +796,9 @@ void update_camera_zone_interp(Camera* camera) {
         camera->savedTargetY = targetY;
         camera->unk_98 = 0;
         camera->unk_9C = 0;
-        camera->unk_4A4 = 0.0f;
-        camera->unk_4A8 = 0.0f;
-        camera->unk_4AC = 0.0f;
+        camera->prevTargetPos.x = 0.0f;
+        camera->prevTargetPos.y = 0.0f;
+        camera->prevTargetPos.z = 0.0f;
         camera->prevPrevFollowFlags = 0;
         camera->prevFollowFlags = 0;
         camera->panPhase = 0.0f;
@@ -843,8 +839,12 @@ void update_camera_zone_interp(Camera* camera) {
     }
 
     tempZ = targetZ;
-    if (camera->panActive || camera->unk_4A4 != targetX || camera->unk_4A8 != targetY ||
-        camera->unk_4AC != targetZ || camera->isChangingMap) {
+    if (camera->panActive
+        || camera->prevTargetPos.x != targetX
+        || camera->prevTargetPos.y != targetY
+        || camera->prevTargetPos.z != targetZ
+        || camera->isChangingMap
+    ) {
 
         if (camera->followPlayer) {
             cs = &camera->controlSettings;
@@ -864,7 +864,7 @@ void update_camera_zone_interp(Camera* camera) {
             && cs->viewPitch == currentController->viewPitch
         ) {
             switch (cs->type) {
-                case 0:
+                case CAM_CONTROL_FIXED_ORIENTATION:
                     if (cs->points.two.Ax == currentController->points.two.Ax
                         && cs->points.two.Az == currentController->points.two.Az
                         && cs->points.two.Bx == currentController->points.two.Bx
@@ -873,7 +873,7 @@ void update_camera_zone_interp(Camera* camera) {
                         cond2 = TRUE;
                     }
                     break;
-                case 1:
+                case CAM_CONTROL_LOOK_AT_POINT:
                     switch (cs->flag){
                         case 0:
                             if (cs->points.two.Ax == currentController->points.two.Ax
@@ -913,9 +913,8 @@ void update_camera_zone_interp(Camera* camera) {
             } else {
                 camera->prevController = (CameraControlSettings*) CAMERA_SETTINGS_PTR_MINUS_1;
             }
-
-            camera->oldCameraSettings = blendedCamSettings;
             changingZone = TRUE;
+            camera->prevConfiguration = gCurrentCamConfiguration;
             camera->currentController = cs;
             camera->interpAlpha = 0.0f;
             camera->linearInterp = 0.0f;
@@ -931,7 +930,6 @@ void update_camera_zone_interp(Camera* camera) {
             camera->prevMovePos.z = camera->movePos.z;
         }
     }
-
     
     if (camera->prevPrevFollowFlags) {
         posX = camera->prevPrevMovePos.x;
@@ -954,87 +952,87 @@ void update_camera_zone_interp(Camera* camera) {
         tZ = tempZ;
     }
 
-    update_camera_from_controller(camera, &camera->oldCameraSettings, &camera->prevController,
-                                  &camera->newCameraSettings, &camera->currentController, posX, posY, posZ, tX, tY, tZ,
+    update_camera_from_controller(camera, &camera->prevConfiguration, &camera->prevController,
+                                  &camera->goalConfiguration, &camera->currentController, posX, posY, posZ, tX, tY, tZ,
                                   camera->isChangingMap, &camera->interpAlpha, changingZone);
 
     if (camera->isChangingMap) {
-        camera->oldCameraSettings = camera->newCameraSettings;
+        camera->prevConfiguration = camera->goalConfiguration;
         camera->isChangingMap = FALSE;
         camera->interpAlpha = 1.0f;
     }
 
-    if (camera->oldCameraSettings.boomYaw - camera->newCameraSettings.boomYaw > 180.0f) {
-        camera->oldCameraSettings.boomYaw -= 360.0f;
+    if (camera->prevConfiguration.boomYaw - camera->goalConfiguration.boomYaw > 180.0f) {
+        camera->prevConfiguration.boomYaw -= 360.0f;
     }
-    if (camera->oldCameraSettings.boomYaw - camera->newCameraSettings.boomYaw < -180.0f) {
-        camera->oldCameraSettings.boomYaw += 360.0f;
-    }
-
-    settingDiff = camera->oldCameraSettings.boomYaw - camera->newCameraSettings.boomYaw;
-    if (settingDiff < 0.0f) {
-        settingDiff = -settingDiff;
-    }
-    if (settingDiff > 180.0f) {
-        settingDiff = 360.0f - settingDiff;
+    if (camera->prevConfiguration.boomYaw - camera->goalConfiguration.boomYaw < -180.0f) {
+        camera->prevConfiguration.boomYaw += 360.0f;
     }
 
-    boomYawDiff = settingDiff;
-    settingDiff = camera->oldCameraSettings.boomPitch - camera->newCameraSettings.boomPitch;
-    if (settingDiff < 0.0f) {
-        settingDiff = -settingDiff;
+    delta = camera->prevConfiguration.boomYaw - camera->goalConfiguration.boomYaw;
+    if (delta < 0.0f) {
+        delta = -delta;
     }
-    if (settingDiff > 180.0f) {
-        settingDiff = 360.0f - settingDiff;
+    if (delta > 180.0f) {
+        delta = 360.0f - delta;
     }
-    if (boomYawDiff < settingDiff) {
-        boomYawDiff = settingDiff;
+    maxDelta = delta;
+
+    delta = camera->prevConfiguration.boomPitch - camera->goalConfiguration.boomPitch;
+    if (delta < 0.0f) {
+        delta = -delta;
+    }
+    if (delta > 180.0f) {
+        delta = 360.0f - delta;
+    }
+    if (maxDelta < delta) {
+        maxDelta = delta;
     }
 
-    settingDiff = camera->oldCameraSettings.viewPitch - camera->newCameraSettings.viewPitch;
-    if (settingDiff < 0.0f) {
-        settingDiff = -settingDiff;
+    delta = camera->prevConfiguration.viewPitch - camera->goalConfiguration.viewPitch;
+    if (delta < 0.0f) {
+        delta = -delta;
     }
-    if (settingDiff > 180.0f) {
-        settingDiff = 360.0f - settingDiff;
+    if (delta > 180.0f) {
+        delta = 360.0f - delta;
     }
-    if (boomYawDiff < settingDiff) {
-        boomYawDiff = settingDiff;
-    }
-
-    settingDiff = camera->oldCameraSettings.boomLength - camera->newCameraSettings.boomLength;
-    if (settingDiff < 0.0f) {
-        settingDiff = -settingDiff;
-    }
-    if (boomYawDiff < settingDiff) {
-        boomYawDiff = settingDiff;
+    if (maxDelta < delta) {
+        maxDelta = delta;
     }
 
-    deltaX = camera->oldCameraSettings.pos.x - camera->newCameraSettings.pos.x;
-    deltaY = camera->oldCameraSettings.pos.y - camera->newCameraSettings.pos.y;
-    deltaZ = camera->oldCameraSettings.pos.z - camera->newCameraSettings.pos.z;
-    settingDiff = SQ(deltaX);
-    settingDiff += SQ(deltaY);
-    settingDiff += SQ(deltaZ);
-
-    if (settingDiff != 0.0f) {
-        settingDiff = sqrtf(settingDiff) * 0.2;
+    delta = camera->prevConfiguration.boomLength - camera->goalConfiguration.boomLength;
+    if (delta < 0.0f) {
+        delta = -delta;
+    }
+    if (maxDelta < delta) {
+        maxDelta = delta;
     }
 
-    if (boomYawDiff < settingDiff) {
-        boomYawDiff = settingDiff;
-        settingDiff++;
-        settingDiff--;
-    }
-    if (boomYawDiff > 90.0f) {
-        boomYawDiff = 90.0f;
-    }
-    if (boomYawDiff < 20.0f) {
-        boomYawDiff = 20.0f;
+    deltaX = camera->prevConfiguration.targetPos.x - camera->goalConfiguration.targetPos.x;
+    deltaY = camera->prevConfiguration.targetPos.y - camera->goalConfiguration.targetPos.y;
+    deltaZ = camera->prevConfiguration.targetPos.z - camera->goalConfiguration.targetPos.z;
+    delta = SQ(deltaX);
+    delta += SQ(deltaY);
+    delta += SQ(deltaZ);
+
+    if (delta != 0.0f) {
+        delta = sqrtf(delta) * 0.2;
     }
 
-    if (boomYawDiff != 0.0f) {
-        camera->linearInterp += (1.0f / boomYawDiff) * camera->linearInterpScale;
+    if (maxDelta < delta) {
+        maxDelta = delta;
+        delta++;
+        delta--;
+    }
+    if (maxDelta > 90.0f) {
+        maxDelta = 90.0f;
+    }
+    if (maxDelta < 20.0f) {
+        maxDelta = 20.0f;
+    }
+
+    if (maxDelta != 0.0f) {
+        camera->linearInterp += (1.0f / maxDelta) * camera->linearInterpScale;
         if (camera->linearInterp > 1.0f) {
             camera->linearInterp = 1.0f;
         }
@@ -1045,9 +1043,9 @@ void update_camera_zone_interp(Camera* camera) {
         panRad = panPhase * PI_D;
         temp_f24 = 2.0f / (cos_rad(panRad) + 1.0f);
         temp_f22_2 = cos_rad((camera->linearInterp * PI_D * (1.0f - panPhase)) + panRad);
-        cosViewPitch = (temp_f22_2 + (1.0 - cos_rad(panRad)) * 0.5) * temp_f24;
-        cosViewPitch = (2.0f - (cosViewPitch + 1.0f)) * 0.5001;
-        camera->interpAlpha = cosViewPitch;
+        cosAngle = (temp_f22_2 + (1.0 - cos_rad(panRad)) * 0.5) * temp_f24;
+        cosAngle = (2.0f - (cosAngle + 1.0f)) * 0.5001;
+        camera->interpAlpha = cosAngle;
     }
 
     if (camera->interpAlpha >= 1.0f) {
@@ -1055,55 +1053,56 @@ void update_camera_zone_interp(Camera* camera) {
         camera->linearInterp = 0.0f;
     }
 
+    camera->prevTargetPos.x = targetX;
+    camera->prevTargetPos.y = targetY;
+    camera->prevTargetPos.z = targetZ;
+
     interpAlpha = camera->interpAlpha;
     interpAlphaInv = 1.0f - interpAlpha;
-    camera->unk_4A4 = targetX;
-    camera->unk_4A8 = targetY;
-    camera->unk_4AC = targetZ;
-    blendedCamSettings.boomYaw = (camera->oldCameraSettings.boomYaw * interpAlphaInv) + (camera->newCameraSettings.boomYaw * interpAlpha);
-    blendedCamSettings.boomLength = (camera->oldCameraSettings.boomLength * interpAlphaInv) + (camera->newCameraSettings.boomLength * interpAlpha);
-    blendedCamSettings.boomPitch = (camera->oldCameraSettings.boomPitch * interpAlphaInv) + (camera->newCameraSettings.boomPitch * interpAlpha);
-    blendedCamSettings.viewPitch = (camera->oldCameraSettings.viewPitch * interpAlphaInv) + (camera->newCameraSettings.viewPitch * interpAlpha);
-    blendedCamSettings.pos.x = (camera->oldCameraSettings.pos.x * interpAlphaInv) + (camera->newCameraSettings.pos.x * interpAlpha);
-    blendedCamSettings.pos.y = (camera->oldCameraSettings.pos.y * interpAlphaInv) + (camera->newCameraSettings.pos.y * interpAlpha);
-    blendedCamSettings.pos.z = (camera->oldCameraSettings.pos.z * interpAlphaInv) + (camera->newCameraSettings.pos.z * interpAlpha);
-    blendedCamSettings.boomLength *= camera->zoomPercent;
-    blendedCamSettings.boomLength *= 0.01;
+    gCurrentCamConfiguration.boomYaw = (camera->prevConfiguration.boomYaw * interpAlphaInv) + (camera->goalConfiguration.boomYaw * interpAlpha);
+    gCurrentCamConfiguration.boomLength = (camera->prevConfiguration.boomLength * interpAlphaInv) + (camera->goalConfiguration.boomLength * interpAlpha);
+    gCurrentCamConfiguration.boomPitch = (camera->prevConfiguration.boomPitch * interpAlphaInv) + (camera->goalConfiguration.boomPitch * interpAlpha);
+    gCurrentCamConfiguration.viewPitch = (camera->prevConfiguration.viewPitch * interpAlphaInv) + (camera->goalConfiguration.viewPitch * interpAlpha);
+    gCurrentCamConfiguration.targetPos.x = (camera->prevConfiguration.targetPos.x * interpAlphaInv) + (camera->goalConfiguration.targetPos.x * interpAlpha);
+    gCurrentCamConfiguration.targetPos.y = (camera->prevConfiguration.targetPos.y * interpAlphaInv) + (camera->goalConfiguration.targetPos.y * interpAlpha);
+    gCurrentCamConfiguration.targetPos.z = (camera->prevConfiguration.targetPos.z * interpAlphaInv) + (camera->goalConfiguration.targetPos.z * interpAlpha);
+    gCurrentCamConfiguration.boomLength *= camera->zoomPercent;
+    gCurrentCamConfiguration.boomLength *= 0.01;
 
     func_80030450(camera);
-    temp_f20_2 = blendedCamSettings.boomYaw + D_800A08E0;
+    temp_f20_2 = gCurrentCamConfiguration.boomYaw + D_800A08E0;
     temp_f26 = sin_deg(temp_f20_2);
     temp_f24_2 = -cos_deg(temp_f20_2);
-    cosViewPitch = cos_deg(blendedCamSettings.boomPitch + D_800A08DC);
-    sinViewPitch = sin_deg(blendedCamSettings.boomPitch + D_800A08DC);
+    cosAngle = cos_deg(gCurrentCamConfiguration.boomPitch + D_800A08DC);
+    sinAngle = sin_deg(gCurrentCamConfiguration.boomPitch + D_800A08DC);
 
     if (!(camera->moveFlags & CAMERA_MOVE_FLAG_2)) {
-        camera->lookAt_eye.y = blendedCamSettings.pos.y + (blendedCamSettings.boomLength * sinViewPitch);
+        camera->lookAt_eye.y = gCurrentCamConfiguration.targetPos.y + (gCurrentCamConfiguration.boomLength * sinAngle);
     }
 
-    camera->lookAt_eye.x = blendedCamSettings.pos.x - (temp_f26 * blendedCamSettings.boomLength * cosViewPitch);
-    camera->lookAt_eye.z = blendedCamSettings.pos.z - (temp_f24_2 * blendedCamSettings.boomLength * cosViewPitch);
-    cosViewPitch = cos_deg(-blendedCamSettings.viewPitch);
-    sinViewPitch = sin_deg(-blendedCamSettings.viewPitch);
+    camera->lookAt_eye.x = gCurrentCamConfiguration.targetPos.x - (temp_f26 * gCurrentCamConfiguration.boomLength * cosAngle);
+    camera->lookAt_eye.z = gCurrentCamConfiguration.targetPos.z - (temp_f24_2 * gCurrentCamConfiguration.boomLength * cosAngle);
+    cosAngle = cos_deg(-gCurrentCamConfiguration.viewPitch);
+    sinAngle = sin_deg(-gCurrentCamConfiguration.viewPitch);
 
-    if (camera->lookAt_eye.x == blendedCamSettings.pos.x && camera->lookAt_eye.z == blendedCamSettings.pos.z) {
+    if (camera->lookAt_eye.x == gCurrentCamConfiguration.targetPos.x && camera->lookAt_eye.z == gCurrentCamConfiguration.targetPos.z) {
         dist = 0.0f;
     } else {
-        dist = dist2D(camera->lookAt_eye.x, camera->lookAt_eye.z, blendedCamSettings.pos.x, blendedCamSettings.pos.z);
+        dist = dist2D(camera->lookAt_eye.x, camera->lookAt_eye.z, gCurrentCamConfiguration.targetPos.x, gCurrentCamConfiguration.targetPos.z);
     }
 
-    temp_f8_2 = blendedCamSettings.pos.y - camera->lookAt_eye.y;
+    temp_f8_2 = gCurrentCamConfiguration.targetPos.y - camera->lookAt_eye.y;
     if (!(camera->moveFlags & CAMERA_MOVE_FLAG_2)) {
-        camera->lookAt_obj.y = camera->lookAt_eye.y + ((dist * sinViewPitch) + (temp_f8_2 * cosViewPitch));
+        camera->lookAt_obj.y = camera->lookAt_eye.y + ((dist * sinAngle) + (temp_f8_2 * cosAngle));
     }
-    temp_f4_4 = (dist * cosViewPitch) - (temp_f8_2 * sinViewPitch);
+    temp_f4_4 = (dist * cosAngle) - (temp_f8_2 * sinAngle);
     camera->lookAt_obj.x = camera->lookAt_eye.x + (temp_f26 * temp_f4_4);
     camera->lookAt_obj.z = camera->lookAt_eye.z + (temp_f24_2 * temp_f4_4);
-    camera->currentYaw = blendedCamSettings.boomYaw + D_800A08E0;
+    camera->currentYaw = gCurrentCamConfiguration.boomYaw + D_800A08E0;
     camera->trueRotation.x = camera->currentYaw;
-    camera->currentBoomLength = blendedCamSettings.boomLength;
-    camera->currentBlendedYawNegated = -blendedCamSettings.boomYaw;
-    camera->currentPitch = -blendedCamSettings.boomPitch - blendedCamSettings.viewPitch;
+    camera->currentBoomLength = gCurrentCamConfiguration.boomLength;
+    camera->currentBlendedYawNegated = -gCurrentCamConfiguration.boomYaw;
+    camera->currentPitch = -gCurrentCamConfiguration.boomPitch - gCurrentCamConfiguration.viewPitch;
     camera->lookAt_obj_target.x = camera->lookAt_obj.x;
     camera->lookAt_obj_target.y = camera->lookAt_obj.y;
     camera->lookAt_obj_target.z = camera->lookAt_obj.z;

@@ -97,7 +97,7 @@ EvtScript N(EVS_Bootler_SpookPlayer) = {
 
 EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_CALL(N(AwaitPlayerApproachForest))
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 25, 16, 650)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 25, 16, 650)
     EVT_CALL(N(InitializeLightingBright))
     EVT_THREAD
         EVT_CALL(N(ReduceFogEndDist))

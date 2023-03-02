@@ -53,7 +53,7 @@ s32 N(D_802495DC_A3381C) = 0;
 s32 N(D_802495E0_A33820) = 0;
 
 CameraControlSettings N(IntroCamSettings0) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 130.4,
     .boomPitch = 12.4,
     .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
@@ -62,7 +62,7 @@ CameraControlSettings N(IntroCamSettings0) = {
 };
 
 CameraControlSettings N(IntroCamSettings1) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 130.4,
     .boomPitch = 12.4,
     .points = { .two = {  0.0, -1.0, 0.0, -433.0127, -1.0, -250.0 }},
@@ -71,7 +71,7 @@ CameraControlSettings N(IntroCamSettings1) = {
 };
 
 CameraControlSettings N(IntroCamSettings2) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 400.0,
     .boomPitch = 2.7,
     .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
@@ -80,7 +80,7 @@ CameraControlSettings N(IntroCamSettings2) = {
 };
 
 CameraControlSettings N(IntroCamSettings3) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 274.4,
     .boomPitch = -9.3,
     .points = { .two = {  0.0, -1.0, 0.0, 114.3, -1.0, 500.0 }},
@@ -89,7 +89,7 @@ CameraControlSettings N(IntroCamSettings3) = {
 };
 
 CameraControlSettings N(IntroCamSettings4) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 274.4,
     .boomPitch = -9.3,
     .points = { .two = {  0.0, -1.0, 0.0, 114.3, -1.0, 500.0 }},
@@ -98,7 +98,7 @@ CameraControlSettings N(IntroCamSettings4) = {
 };
 
 CameraControlSettings N(IntroCamSettings5) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 243.3,
     .boomPitch = 16.0,
     .points = { .two = {  0.0, -1.0, 0.0, 56.1, -1.0, -1.1 }},
@@ -107,7 +107,7 @@ CameraControlSettings N(IntroCamSettings5) = {
 };
 
 CameraControlSettings N(IntroCamSettings6) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 192.5,
     .boomPitch = 12.4,
     .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
@@ -116,7 +116,7 @@ CameraControlSettings N(IntroCamSettings6) = {
 };
 
 CameraControlSettings N(IntroCamSettings7) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 467.0,
     .boomPitch = 21.0,
     .points = { .two = {  0.0, -1.0, 0.0, 71.3, -1.0, 154.3 }},
@@ -125,7 +125,7 @@ CameraControlSettings N(IntroCamSettings7) = {
 };
 
 CameraControlSettings N(IntroCamSettings8) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 121.6,
     .boomPitch = 0.0,
     .points = { .two = {  0.0, -1.0, 0.0, 24.4, -1.0, 154.3 }},
@@ -134,7 +134,7 @@ CameraControlSettings N(IntroCamSettings8) = {
 };
 
 CameraControlSettings N(IntroCamSettings9) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 474.7,
     .boomPitch = 0.0,
     .points = { .two = {  0.0, -1.0, 0.0, 24.4, -1.0, 154.3 }},
@@ -143,7 +143,7 @@ CameraControlSettings N(IntroCamSettings9) = {
 };
 
 CameraControlSettings N(IntroCamSettings10) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 225.7,
     .boomPitch = 9.7,
     .points = { .two = {  0.0, -1.0, 0.0, 6.9, -1.0, 168.8 }},
@@ -152,7 +152,7 @@ CameraControlSettings N(IntroCamSettings10) = {
 };
 
 CameraControlSettings N(IntroCamSettings11) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 130.0,
     .boomPitch = 9.8,
     .points = { .two = {  0.0, -1.0, 0.0, 40.0, -1.0, 168.8 }},
@@ -161,7 +161,7 @@ CameraControlSettings N(IntroCamSettings11) = {
 };
 
 CameraControlSettings N(IntroCamSettings12) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 270.0,
     .boomPitch = 9.8,
     .points = { .two = {  0.0, -1.0, 0.0, 40.0, -1.0, 168.8 }},
@@ -170,7 +170,7 @@ CameraControlSettings N(IntroCamSettings12) = {
 };
 
 CameraControlSettings N(IntroCamSettings13) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 246.1,
     .boomPitch = -1.3,
     .points = { .two = {  0.0, -1.0, 0.0, 500.0, -1.0, 500.0 }},
@@ -179,7 +179,7 @@ CameraControlSettings N(IntroCamSettings13) = {
 };
 
 CameraControlSettings N(IntroCamSettings14) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 180.0,
     .boomPitch = -1.3,
     .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
@@ -188,7 +188,7 @@ CameraControlSettings N(IntroCamSettings14) = {
 };
 
 CameraControlSettings N(IntroCamSettings15) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 90.0,
     .boomPitch = 5.4,
     .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
@@ -197,7 +197,7 @@ CameraControlSettings N(IntroCamSettings15) = {
 };
 
 CameraControlSettings N(IntroCamSettings16) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 445.8,
     .boomPitch = 5.4,
     .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},

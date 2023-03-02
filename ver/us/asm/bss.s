@@ -260,7 +260,7 @@ dlabel siMgrThread
 dlabel siMgrStack
 .space 0x2000
 
-dlabel blendedCamSettings
+dlabel gCurrentCamConfiguration
 .space 0x0000001c
 
 dlabel D_800A08DC
