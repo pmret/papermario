@@ -64,7 +64,7 @@ MenuWindowBP gPauseBadgesWindowBPs[] = {
         .pos = { .x = 3, .y = 16 },
         .width = 289,
         .height = 154,
-        .priority = 1,
+        .priority = WINDOW_PRIORITY_1,
         .fpDrawContents = &pause_badges_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,

@@ -108,7 +108,7 @@ def main(args):
     total_size = sum(sizes.values())
     # TODO hack for now since non-jp roms aren't mapped out
     if args.version != "us":
-        total_size = 3718668
+        total_size = 3718664
     all_funcs = set(sizes.keys())
 
     nonmatching_funcs = get_nonmatching_funcs()
@@ -162,7 +162,10 @@ def main(args):
             print(f"{'🚀' * funcs_delta} This PR matches {funcs_delta} function{s} (+{ ratio_delta:.2f}%) on `{args.version}`.")
     else:
         if matching_size + nonmatching_size != total_size:
-            print("Warning: category/total size mismatch!\n")
+            print(f"Warning: category/total size mismatch on version {args.version}!\n")
+            print("Matching size: " + str(matching_size))
+            print("Nonmatching size: " + str(nonmatching_size))
+            print("Sum: " + str(matching_size + nonmatching_size) + " (should be " + str(total_size) + ")")
         print(f"{len(matching_funcs)} matched functions / {len(all_funcs)} total ({funcs_matching_ratio:.2f}%)")
         print(f"{matching_size} matching bytes / {total_size} total ({matching_ratio:.2f}%)")
 

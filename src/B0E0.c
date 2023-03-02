@@ -10,26 +10,21 @@ extern f32 D_800A08EC;
 void cam_interp_lookat_pos(Camera* camera, f32 arg1, f32 arg2, s16 arg3);
 void func_8003034C(Camera* camera);
 
-void update_camera_mode_unused(Camera* camera);
-// Issues with zero float temp?
-#ifdef NON_EQUIVALENT
 void update_camera_mode_unused(Camera* camera) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 temp_f30;
-    f32 temp_f24_2;
-    f32 theta;
-    f32 sinTheta1;
-    f32 cosTheta1;
-    f32 sinTheta2;
-    f32 cosTheta2;
-    f32 lookXDelta;
-    f32 lookYDelta;
-    f32 lookZDelta;
-    f32 zero;
+    f32 sinBoom;
+    f32 cosBoom;
+    f32 deltaX;
+    f32 deltaY;
+    f32 deltaZ;
+    f32 deltaX2;
+    f32 deltaY2;
+    f32 deltaZ2;
+    f32 boomYaw;
 
-    if (camera->unk_06 != 0 || camera->changingMap) {
-        camera->unk_06 = 0;
-        camera->changingMap = FALSE;
+    if (camera->unk_06 || camera->isChangingMap) {
+        camera->unk_06 = FALSE;
+        camera->isChangingMap = FALSE;
         camera->auxPitch = 0;
         camera->auxBoomLength = 100;
         camera->lookAt_dist = 100;
@@ -43,51 +38,48 @@ void update_camera_mode_unused(Camera* camera) {
     if (!(playerStatus->flags & (PS_FLAG_FALLING | PS_FLAG_JUMPING))) {
         camera->lookAt_obj_target.y = playerStatus->position.y + 60.0f;
     }
-
     camera->lookAt_obj_target.x = playerStatus->position.x;
     camera->lookAt_obj_target.z = playerStatus->position.z + 400.0f;
 
     if (camera->auxPitch == 0) {
-        s32 fovTemp = 10000 / camera->lookAt_dist;
-
         camera->lookAt_obj.x = camera->lookAt_obj_target.x;
         camera->lookAt_obj.y = camera->lookAt_obj_target.y;
         camera->lookAt_obj.z = camera->lookAt_obj_target.z;
         camera->trueRotation.x = camera->auxBoomYaw;
         camera->currentBoomYaw = camera->auxBoomPitch;
         camera->currentBoomLength = camera->auxBoomLength;
-
-        if (fovTemp < 0) {
-            fovTemp += 3;
-        }
-        camera->vfov = fovTemp >> 2;
-
-        zero = camera->currentBoomYaw;
-
-        theta = DEG_TO_RAD(camera->currentBoomYaw);
-        sinTheta1 = sin_rad(theta);
-        cosTheta1 = cos_rad(theta);
-        temp_f30 = (zero * cosTheta1) + (camera->currentBoomLength * sinTheta1);
-        temp_f24_2 = ( -zero * sinTheta1) + (camera->currentBoomLength * cosTheta1);
-
-        theta = DEG_TO_RAD(camera->trueRotation.x);
-        sinTheta2 = sin_rad(theta);
-        cosTheta2 = cos_rad(theta);
-        camera->lookAt_eye.x = camera->lookAt_obj.x + ((cosTheta2 * zero) - (temp_f24_2 * sinTheta2));
-        camera->lookAt_eye.y = camera->lookAt_obj.y + temp_f30;
-        camera->lookAt_eye.z = camera->lookAt_obj.z + ((sinTheta2 * zero) + (temp_f24_2 * cosTheta2));
+        camera->vfov = (10000 / camera->lookAt_dist) / 4;
+        boomYaw = DEG_TO_RAD(camera->currentBoomYaw);
+        sinBoom = sin_rad(boomYaw);
+        cosBoom = cos_rad(boomYaw);
+        deltaX = 0.0f;
+        deltaY = 0.0f;
+        deltaZ = camera->currentBoomLength;
+        deltaX2 = deltaX;
+        deltaY2 = deltaY;
+        boomYaw = deltaX = -deltaY2;
+        deltaZ2 = deltaZ;
+        deltaX = deltaX2;
+        deltaY = cosBoom * deltaY2 + deltaZ2 * sinBoom;
+        deltaZ = sinBoom * boomYaw + deltaZ2 * cosBoom;
+        boomYaw = DEG_TO_RAD(camera->trueRotation.x);
+        sinBoom = sin_rad(boomYaw);
+        cosBoom = cos_rad(boomYaw);
+        deltaZ2 = cosBoom * deltaX - deltaZ * sinBoom;
+        deltaX2 = cosBoom * deltaX - deltaZ * sinBoom;
+        deltaY2 = deltaY;
+        deltaZ2 = sinBoom * deltaX + deltaZ * cosBoom;
+        camera->lookAt_eye.x = camera->lookAt_obj.x + deltaX2;
+        camera->lookAt_eye.y = camera->lookAt_obj.y + deltaY2;
+        camera->lookAt_eye.z = camera->lookAt_obj.z + deltaZ2;
     }
-
     camera->currentYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
-    lookXDelta = camera->lookAt_obj.x - camera->lookAt_eye.x;
-    lookYDelta = camera->lookAt_obj.y - camera->lookAt_eye.y;
-    lookZDelta = camera->lookAt_obj.z - camera->lookAt_eye.z;
-    camera->currentBlendedYawNegated = -atan2(zero, zero, lookXDelta, lookZDelta);
-    camera->currentPitch = atan2(zero, zero, lookYDelta, -sqrtf(SQ(lookXDelta) + SQ(lookZDelta)));
+    deltaX = camera->lookAt_obj.x - camera->lookAt_eye.x;
+    deltaY = camera->lookAt_obj.y - camera->lookAt_eye.y;
+    deltaZ = camera->lookAt_obj.z - camera->lookAt_eye.z;
+    camera->currentBlendedYawNegated = -atan2(0.0f, 0.0f, deltaX, deltaZ);
+    camera->currentPitch = atan2(0.0f, 0.0f, deltaY, -sqrtf(SQ(deltaX) + SQ(deltaZ)));
 }
-#else
-INCLUDE_ASM(void, "B0E0", update_camera_mode_unused, Camera* camera);
-#endif
 
 void update_camera_mode_5(Camera* camera) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -210,12 +202,13 @@ void update_camera_from_controller(
     Camera* camera,
     CamPosSettings* oldSettings, CameraControlSettings** prevController,
     CamPosSettings* newSettings, CameraControlSettings** newController,
-    f32 x, f32 y, f32 z,
+    f32 x1, f32 y1, f32 z1,
     f32 tX, f32 tY, f32 tZ, s32 changingMap,
     f32* interpAlpha, s32 changingZone)
 {
     CameraControlSettings* prevSettings;
-    CameraControlSettings* settings;
+    CameraControlSettings* controller;
+    CamPosSettings* s1;
     f32 posAx;
     f32 posAz;
     f32 posAy;
@@ -224,155 +217,143 @@ void update_camera_from_controller(
     f32 posBz;
     f32 boomLength;
 
-    f32 temp_f0_2;
-    f32 temp_f0_4;
-    f32 temp_f0_5;
-    f32 temp_f0_6;
     f32 temp_f10;
-    f32 temp_f10_2;
-    f32 temp_f10_3;
-    f32 temp_f12_2;
-    f32 temp_f12_5;
-    f32 temp_f18;
-    f32 temp_f18_2;
     f32 temp_f20;
-    f32 temp_f20_2;
-    f32 temp_f20_3;
-    f32 temp_f20_4;
-    f32 temp_f22;
-    f32 temp_f22_2;
-    f32 temp_f24;
-    f32 temp_f24_2;
-    f32 temp_f24_3;
-    f32 temp_f24_4;
+    f32 f24_inv;
     f32 temp_f2;
     f32 temp_f2_2;
     f32 temp_f2_3;
     f32 temp_f2_4;
-    f32 temp_f2_5;
-    f32 temp_f2_6;
     f32 temp_f2_7;
     f32 temp_f4;
-    f32 temp_f4_11;
-    f32 temp_f4_12;
     f32 temp_f4_13;
     f32 temp_f4_14;
-    f32 temp_f4_2;
-    f32 temp_f4_3;
     f32 temp_f4_4;
-    f32 temp_f4_5;
-    f32 temp_f4_6;
-    f32 temp_f4_8;
     f32 temp_f4_9;
     f32 temp_f6;
-    f32 temp_f6_2;
-    f32 temp_f6_3;
-    f32 temp_f6_4;
-    f32 temp_f6_5;
-    f32 temp_f6_6;
-    f32 temp_f6_7;
-    f32 temp_f6_8;
-    f32 temp_f6_9;
     f32 temp_f8;
-    f32 temp_f8_2;
-    f32 temp_f8_3;
-    f32 temp_f8_4;
-    f32 temp_f8_5;
-    f32 temp_f8_6;
-    f32 temp_f8_7;
-    f32 temp_f8_8;
-    f32 temp_f8_9;
-    f32 var_f0_3;
-    f32 var_f10;
-    f32 var_f10_2;
-    f32 var_f16;
-    f32 var_f16_2;
-    f32 var_f20;
-    f32 var_f20_2;
-    f32 var_f20_3;
-    f32 var_f22;
-    f32 var_f22_2;
-    f32 var_f22_3;
-    f32 var_f6;
-    f32 var_f6_2;
-    f32 var_f8;
+    f32 dz;
+    f32 dx;
 
-    settings = *prevController;
-    if ((u32) (settings) + 2 >= 2U) {
-        if (settings == NULL) {
-            oldSettings->position.x = x;
-            oldSettings->position.y = y;
-            oldSettings->position.z = z;
+    f32 sp10;
+    f32 sp20;
+
+    f32 x, y, z;
+    f32 temp2;
+    f32 temp7;
+
+    /*
+    x  f24
+    y  f30
+    z  f26
+    */
+
+    s1 = oldSettings;
+    controller = *prevController;
+    x = x1;
+    y = y1;
+    z = z1;
+    if ((s32)controller != -2 && (s32)controller != -1) {
+        if (controller == NULL) {
+            s1->pos.x = x;
+            s1->pos.y = y;
+            s1->pos.z = z;
         } else {
-            switch (settings->type) {
+            switch (controller->type) {
                 case 0:
-                    if (settings->flag != 0) {
-                        posBx = settings->points.two.Bx;
-                        posBz = settings->points.two.Bz;
-                        temp_f10 = -(settings->points.two.Az - posBz) + posBx;
-                        temp_f8 = posBx - temp_f10;
-                        temp_f6 = (settings->points.two.Ax - posBx) + posBz;
-                        temp_f12_2 = posBz - temp_f6;
-                        temp_f4 = (((x - temp_f10) * temp_f8) + ((z - temp_f6) * temp_f12_2)) / (SQ(temp_f8) + SQ(temp_f12_2));
-                        oldSettings->position.x = (temp_f4 * temp_f8) + temp_f10;
-                        oldSettings->position.y = y;
-                        oldSettings->position.z = (temp_f4 * temp_f12_2) + temp_f6;
-                        break;
+                    if (controller->flag != 0) {
+                        f32 temp_f10 = -(controller->posA.z - controller->posB.z) + controller->posB.x;
+                        f32 temp_f6 = (controller->posA.x - controller->posB.x) + controller->posB.z;
+
+                        f32 temp_f8 = controller->posB.x - temp_f10;
+                        f32 temp_f12_2 = controller->posB.z - temp_f6;
+
+                        f32 temp_f4 = (SQ(temp_f8) + SQ(temp_f12_2));
+                        temp_f4 = (((x - temp_f10) * temp_f8) + ((z - temp_f6) * temp_f12_2)) / temp_f4;
+
+                        s1->pos.x = temp_f4 * temp_f8 + temp_f10;
+                        s1->pos.y = y;
+                        s1->pos.z = temp_f4 * temp_f12_2 + temp_f6;
+                    } else {
+                        s1->pos.x = x;
+                        s1->pos.y = y;
+                        s1->pos.z = z;
                     }
-                    oldSettings->position.x = x;
-                    oldSettings->position.y = y;
-                    oldSettings->position.z = z;
                     break;
                 case 6:
-                    posAx = settings->points.two.Ax;
-                    posBx = settings->points.two.Bx;
-                    temp_f8_2 = posBx - posAx;
-                    posAz = settings->points.two.Az;
-                    posBz = settings->points.two.Bz;
-                    temp_f6_2 = posBz - posAz;
-                    temp_f4_2 = (((x - posAx) * temp_f8_2) + ((z - posAz) * temp_f6_2)) / ((temp_f8_2 * temp_f8_2) + (temp_f6_2 * temp_f6_2));
-                    var_f16 = (temp_f4_2 * temp_f8_2) + posAx;
-                    temp_f8_3 = var_f16 - posAx;
-                    var_f10 = (temp_f4_2 * temp_f6_2) + posAz;
-                    temp_f6_3 = var_f10 - posAz;
-                    temp_f20 = x - var_f16;
-                    temp_f18 = z - var_f10;
-                    if (((temp_f8_2 * temp_f8_3) + (temp_f6_2 * temp_f6_3)) < 0.0f) {
-                        var_f16 = posAx;
-                        var_f10 = posAz;
-                    } else if (((temp_f8_2 * temp_f8_2) + (temp_f6_2 * temp_f6_2)) < ((temp_f8_3 * temp_f8_3) + (temp_f6_3 * temp_f6_3))) {
-                        var_f16 = posBx;
-                        var_f10 = posBz;
+                    {
+                        f32 ax, az, bx, bz, temp_f8_2, temp_f6_2;
+                        f32 f22_1, f4_2, sp10, sp20, f14_1, f12_1;
+                        f32 temp_f20, temp_f18;
+                        f32 var1, var2;
+                        f32 f4_1;
+                        f32 var_f16, var_f10, temp_f8_3, temp_f6_3;
+                        ax = controller->posA.x;
+                        az = controller->posA.z;
+                        bx = controller->posB.x;
+                        bz = controller->posB.z;
+                        temp_f8_2 = bx - ax;
+                        temp_f6_2 = bz - az;
+                        var1 = x - ax;
+                        var2 = z - az;
+
+                        temp_f20 = temp_f8_2 * temp_f8_2;
+                        temp_f18 = temp_f6_2 * temp_f6_2;
+
+                        f4_1 = temp_f20 + temp_f18;
+                        f4_1 = (var1 * temp_f8_2 + var2 * temp_f6_2) / f4_1;
+
+                        var_f16 = f4_1 * temp_f8_2 + ax;
+                        var_f10 = f4_1 * temp_f6_2 + az;
+
+                        f22_1 = controller->posA.x;
+                        f4_2 = controller->posA.z;
+                        sp10 = controller->posB.x;
+                        sp20 = controller->posB.z;
+
+                        ax = sp10 - f22_1;
+                        az = sp20 - f4_2;
+
+                        temp_f8_2 = var_f16 - f22_1;
+                        temp_f6_2 = var_f10 - f4_2;
+
+                        temp_f20 = x - var_f16;
+                        temp_f18 = z - var_f10;
+
+                        if (ax * temp_f8_2 + az * temp_f6_2 < 0.0f) {
+                            var_f16 = f22_1;
+                            var_f10 = f4_2;
+                        } else if (SQ(temp_f8_2) + SQ(temp_f6_2) > SQ(ax) + SQ(az)) {
+                            var_f16 = sp10;
+                            var_f10 = sp20;
+                        }
+                        if (controller->flag == 0) {
+                            var_f16 += temp_f20;
+                            var_f10 += temp_f18;
+                        }
+                        s1->pos.x = var_f16;
+                        s1->pos.y = y;
+                        s1->pos.z = var_f10;
                     }
-                    if (settings->flag == 0) {
-                        var_f16 += temp_f20;
-                        var_f10 += temp_f18;
-                    }
-                    oldSettings->position.x = var_f16;
-                    oldSettings->position.y = y;
-                    oldSettings->position.z = var_f10;
                     break;
                 case 1:
-                    if (settings->flag != 0) {
-                        temp_f22 = x - settings->points.two.Ax;
-                        temp_f20_2 = z - settings->points.two.Az;
-                        temp_f24 = (temp_f22 * temp_f22) + (temp_f20_2 * temp_f20_2);
-                        if (temp_f24 != 0.0f) {
-                            var_f6 = sqrtf(temp_f24);
-                            temp_f4_3 = settings->points.two.Bx - settings->points.two.Ax;
-                            temp_f0_2 = settings->points.two.Bz - settings->points.two.Az;
-                            temp_f24_2 = 1.0f / var_f6;
-                            temp_f2 = sqrtf(SQ(temp_f4_3) + SQ(temp_f0_2));
-                            temp_f2_2 = settings->points.two.Ax + (temp_f22 * temp_f2 * temp_f24_2);
-                            temp_f4_4 = temp_f20_2 * temp_f2 * temp_f24_2;
-                            oldSettings->position.x = temp_f2_2;
-                            oldSettings->position.y = y;
-                            oldSettings->position.z = settings->points.two.Az + temp_f4_4;
+                    if (controller->flag != 0) {
+                        dx = x - controller->posA.x;
+                        dz = z - controller->posA.z;
+                        x = SQ(dx) + SQ(dz);
+                        if (x != 0.0f) {
+                            f24_inv = 1.0f / sqrtf(x);
+                            temp_f2 = sqrtf(SQ(controller->posB.x - controller->posA.x) + SQ(controller->posB.z - controller->posA.z));
+                            temp_f2_2 = dx * temp_f2 * f24_inv;
+                            temp_f4_4 = dz * temp_f2 * f24_inv;
+                            s1->pos.x = controller->posA.x + temp_f2_2;
+                            s1->pos.y = y;
+                            s1->pos.z = controller->posA.z + temp_f4_4;
                         }
                     } else {
-                        oldSettings->position.x = x;
-                        oldSettings->position.y = y;
-                        oldSettings->position.z = z;
+                        s1->pos.x = x;
+                        s1->pos.y = y;
+                        s1->pos.z = z;
                     }
                     break;
                 case 2:
@@ -380,56 +361,65 @@ void update_camera_from_controller(
                     *prevController = (CameraControlSettings* )-1;
                     break;
                 case 3:
-                    oldSettings->position.x = x;
-                    oldSettings->position.y = y;
-                    oldSettings->position.z = z;
+                    s1->pos.x = x;
+                    s1->pos.y = y;
+                    s1->pos.z = z;
+                    break;
+                case 4:
                     break;
             }
         }
     }
 
-    settings = *newController;
-    if (settings == NULL) {
-        newSettings->position.x = tX;
-        newSettings->position.y = tY;
-        newSettings->position.z = tZ;
+    s1 = newSettings;
+    controller = *newController;
+    x = tX;
+    y = tY;
+    z = tZ;
+
+    if (controller == NULL) {
+        s1->pos.x = x;
+        s1->pos.y = y;
+        s1->pos.z = z;
     } else {
-        switch (settings->type) {
+        switch (controller->type) {
             case 0:
-                newSettings->boomYaw = atan2(0.0f, 0.0f, settings->points.two.Bx - settings->points.two.Ax, settings->points.two.Bz - settings->points.two.Az);
-                boomLength = settings->boomLength;
+                s1->boomYaw = atan2(0.0f, 0.0f, controller->posB.x - controller->posA.x, controller->posB.z - controller->posA.z);
+                boomLength = controller->boomLength;
                 if (boomLength < 0.0f) {
                     boomLength = -boomLength;
                 }
-                newSettings->boomLength = boomLength;
-                newSettings->boomPitch = settings->boomPitch;
-                newSettings->viewPitch = settings->viewPitch;
-                if (settings->flag != 0) {
-                    posBz = settings->points.two.Bz;
-                    posBx = settings->points.two.Bx;
-                    temp_f10_2 = -(settings->points.two.Az - posBz) + posBx;
-                    temp_f8_4 = posBx - temp_f10_2;
-                    temp_f6_4 = (settings->points.two.Ax - posBx) + posBz;
-                    temp_f12_5 = posBz - temp_f6_4;
-                    temp_f4_5 = (((tX - temp_f10_2) * temp_f8_4) + ((tZ - temp_f6_4) * temp_f12_5)) / ((temp_f8_4 * temp_f8_4) + (temp_f12_5 * temp_f12_5));
-                    newSettings->position.y = tY;
-                    newSettings->position.x = (temp_f4_5 * temp_f8_4) + temp_f10_2;
-                    newSettings->position.z = (temp_f4_5 * temp_f12_5) + temp_f6_4;
+                s1->boomLength = boomLength;
+                s1->boomPitch = controller->boomPitch;
+                s1->viewPitch = controller->viewPitch;
+                if (controller->flag != 0) {
+                    f32 temp_f10 = -(controller->posA.z - controller->posB.z) + controller->posB.x;
+                    f32 temp_f6 = (controller->posA.x - controller->posB.x) + controller->posB.z;
+
+                    f32 temp_f8 = controller->posB.x - temp_f10;
+                    f32 temp_f12_2 = controller->posB.z - temp_f6;
+
+                    f32 temp_f4 = (SQ(temp_f8) + SQ(temp_f12_2));
+                    temp_f4 = (((x - temp_f10) * temp_f8) + ((z - temp_f6) * temp_f12_2)) / temp_f4;
+
+                    s1->pos.x = temp_f4 * temp_f8 + temp_f10;
+                    s1->pos.y = y;
+                    s1->pos.z = temp_f4 * temp_f12_2 + temp_f6;
                 } else {
-                    newSettings->position.x = tX;
-                    newSettings->position.y = tY;
-                    newSettings->position.z = tZ;
+                    s1->pos.x = x;
+                    s1->pos.y = y;
+                    s1->pos.z = z;
                 }
 
                 if (changingZone) {
                     if (*interpAlpha != 1.0f) {
                         prevSettings = *prevController;
-                        if (((u32) (prevSettings + 2) >= 3U) &&
-                            prevSettings->type == settings->type &&
-                            prevSettings->boomLength == settings->boomLength &&
-                            prevSettings->boomPitch == settings->boomPitch &&
-                            prevSettings->viewPitch == settings->viewPitch &&
-                            prevSettings->flag != settings->flag)
+                        if (((s32)prevSettings != -2 && (s32)prevSettings != -1 && (s32)prevSettings != NULL) &&
+                            prevSettings->type == controller->type &&
+                            prevSettings->boomLength == controller->boomLength &&
+                            prevSettings->boomPitch == controller->boomPitch &&
+                            prevSettings->viewPitch == controller->viewPitch &&
+                            prevSettings->flag != controller->flag)
                         {
                             *interpAlpha = 1.0f;
                         }
@@ -437,50 +427,79 @@ void update_camera_from_controller(
                 }
                 break;
             case 6:
-                newSettings->boomYaw = atan2(0.0f, 0.0f, settings->points.two.Bz - settings->points.two.Az, -(settings->points.two.Bx - settings->points.two.Ax));
-                boomLength = settings->boomLength;
+                temp7 = controller->posB.z - controller->posA.z;
+                dx = controller->posB.x - controller->posA.x;
+                s1->boomYaw = atan2(0.0f, 0.0f, temp7, -dx);
+                boomLength = controller->boomLength;
                 if (boomLength < 0.0f) {
                     boomLength = -boomLength;
                 }
-                newSettings->boomLength = boomLength;
-                newSettings->boomPitch = settings->boomPitch;
-                newSettings->viewPitch = settings->viewPitch;
-                posAx = settings->points.two.Ax;
-                posBx = settings->points.two.Bx;
-                temp_f8_5 = posBx - posAx;
-                posAz = settings->points.two.Az;
-                posBz = settings->points.two.Bz;
-                temp_f6_5 = posBz - posAz;
-                temp_f4_6 = (((tX - posAx) * temp_f8_5) + ((tZ - posAz) * temp_f6_5)) / ((temp_f8_5 * temp_f8_5) + (temp_f6_5 * temp_f6_5));
-                var_f16_2 = (temp_f4_6 * temp_f8_5) + posAx;
-                temp_f8_6 = var_f16_2 - posAx;
-                var_f10_2 = (temp_f4_6 * temp_f6_5) + posAz;
-                temp_f6_6 = var_f10_2 - posAz;
-                temp_f20_3 = tX - var_f16_2;
-                temp_f18_2 = tZ - var_f10_2;
-                if (((temp_f8_5 * temp_f8_6) + (temp_f6_5 * temp_f6_6)) < 0.0f) {
-                    var_f16_2 = posAx;
-                    var_f10_2 = posAz;
-                } else if (((temp_f8_5 * temp_f8_5) + SQ(temp_f6_5)) < (SQ(temp_f8_6) + SQ(temp_f6_6))) {
-                    var_f16_2 = posBx;
-                    var_f10_2 = posBz;
+                s1->boomLength = boomLength;
+                s1->boomPitch = controller->boomPitch;
+                s1->viewPitch = controller->viewPitch;
+                {
+                    f32 ax, az, bx, bz, temp_f8_2, temp_f6_2;
+                    f32 f22_1, f4_2, sp10, sp20, f14_1, f12_1;
+                    f32 temp_f20, temp_f18;
+                    f32 var1, var2;
+                    f32 f4_1;
+                    f32 var_f16, var_f10, temp_f8_3, temp_f6_3;
+                    ax = controller->posA.x;
+                    az = controller->posA.z;
+                    bx = controller->posB.x;
+                    bz = controller->posB.z;
+                    temp_f8_2 = bx - ax;
+                    temp_f6_2 = bz - az;
+                    var1 = x - ax;
+                    var2 = z - az;
+
+                    temp_f20 = temp_f8_2 * temp_f8_2;
+                    temp_f18 = temp_f6_2 * temp_f6_2;
+
+                    f4_1 = temp_f20 + temp_f18;
+                    f4_1 = (var1 * temp_f8_2 + var2 * temp_f6_2) / f4_1;
+
+                    var_f16 = f4_1 * temp_f8_2 + ax;
+                    var_f10 = f4_1 * temp_f6_2 + az;
+
+                    f22_1 = controller->posA.x;
+                    f4_2 = controller->posA.z;
+                    sp10 = controller->posB.x;
+                    sp20 = controller->posB.z;
+
+                    ax = sp10 - f22_1;
+                    az = sp20 - f4_2;
+
+                    temp_f8_2 = var_f16 - f22_1;
+                    temp_f6_2 = var_f10 - f4_2;
+
+                    temp_f20 = x - var_f16;
+                    temp_f18 = z - var_f10;
+
+                    if (ax * temp_f8_2 + az * temp_f6_2 < 0.0f) {
+                        var_f16 = f22_1;
+                        var_f10 = f4_2;
+                    } else if (SQ(temp_f8_2) + SQ(temp_f6_2) > SQ(ax) + SQ(az)) {
+                        var_f16 = sp10;
+                        var_f10 = sp20;
+                    }
+                    if (controller->flag == 0) {
+                        var_f16 += temp_f20;
+                        var_f10 += temp_f18;
+                    }
+                    s1->pos.x = var_f16;
+                    s1->pos.y = y;
+                    s1->pos.z = var_f10;
                 }
-                if (settings->flag == 0) {
-                    var_f16_2 += temp_f20_3;
-                    var_f10_2 += temp_f18_2;
-                }
-                newSettings->position.x = var_f16_2;
-                newSettings->position.y = tY;
-                newSettings->position.z = var_f10_2;
                 if (changingZone) {
                     if (*interpAlpha != 1.0f) {
                         prevSettings = *prevController;
-                        if (((u32) (prevSettings + 2) >= 3U) &&
-                            (prevSettings->type == settings->type) &&
-                            (prevSettings->boomLength == settings->boomLength) &&
-                            (prevSettings->boomPitch == settings->boomPitch) &&
-                            (prevSettings->viewPitch == settings->viewPitch) &&
-                            (prevSettings->flag != settings->flag))
+                        if (((s32)prevSettings != -2 && (s32)prevSettings != -1 && (s32)prevSettings != NULL) &&
+                            (prevSettings->type == controller->type) &&
+                            (prevSettings->boomLength == controller->boomLength) &&
+                            (prevSettings->boomPitch == controller->boomPitch) &&
+                            (prevSettings->viewPitch == controller->viewPitch) &&
+                            (prevSettings->flag != controller->flag))
                         {
                             *interpAlpha = 1.0f;
                         }
@@ -488,51 +507,51 @@ void update_camera_from_controller(
                 }
                 break;
             case 1:
-                if (settings->boomLength < 0.0f) {
-                    var_f22 = tX - settings->points.two.Ax;
-                    newSettings->boomLength = -settings->boomLength;
-                    var_f20 = tZ - settings->points.two.Az;
+                // Camera faces toward or away from point A with the player in the center of the frame
+                if (controller->boomLength < 0.0f) {
+                    // negative boom length means look *away* from point
+                    dx = x - controller->posA.x;
+                    dz = z - controller->posA.z;
+                    s1->boomLength = -controller->boomLength;
                 } else {
-                    var_f22 = settings->points.two.Ax - tX;
-                    newSettings->boomLength = settings->boomLength;
-                    var_f20 = settings->points.two.Az - tZ;
+                    dx = controller->posA.x - x;
+                    dz = controller->posA.z - z;
+                    s1->boomLength = controller->boomLength;
                 }
-                newSettings->boomYaw = atan2(0.0f, 0.0f, var_f22, var_f20);
-                newSettings->boomPitch = settings->boomPitch;
-                newSettings->viewPitch = settings->viewPitch;
-                if (settings->flag != 0) {
-                    temp_f22_2 = tX - settings->points.two.Ax;
-                    temp_f20_4 = tZ - settings->points.two.Az;
-                    temp_f24_3 = SQ(temp_f22_2) + SQ(temp_f20_4);
-                    if (temp_f24_3 != 0.0f) {
-                        var_f6_2 = sqrtf(temp_f24_3);
-                        temp_f4_8 = settings->points.two.Bx - settings->points.two.Ax;
-                        temp_f0_4 = settings->points.two.Bz - settings->points.two.Az;
-                        temp_f24_4 = 1.0f / var_f6_2;
-                        temp_f2_3 = sqrtf((temp_f4_8 * temp_f4_8) + (temp_f0_4 * temp_f0_4));
-                        temp_f2_4 = settings->points.two.Ax + (temp_f22_2 * temp_f2_3 * temp_f24_4);
-                        temp_f4_9 = temp_f20_4 * temp_f2_3 * temp_f24_4;
-                        newSettings->position.y = tY;
-                        newSettings->position.x = temp_f2_4;
-                        newSettings->position.z = settings->points.two.Az + temp_f4_9;
+                s1->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                s1->boomPitch = controller->boomPitch;
+                s1->viewPitch = controller->viewPitch;
+                if (controller->flag != 0) {
+                    // constrain to fixed radius
+                    dx = x - controller->posA.x;
+                    dz = z - controller->posA.z;
+                    x = SQ(dx) + SQ(dz);
+                    if (x != 0.0f) {
+                        f24_inv = 1.0f / sqrtf(x);
+                        temp_f2_3 = sqrtf(SQ(controller->posB.x - controller->posA.x) + SQ(controller->posB.z - controller->posA.z));
+                        temp_f2_4 = dx * temp_f2_3 * f24_inv;
+                        temp_f4_9 = dz * temp_f2_3 * f24_inv;
+                        s1->pos.x = controller->posA.x + temp_f2_4;
+                        s1->pos.y = y;
+                        s1->pos.z = controller->posA.z + temp_f4_9;
                     }
                 } else {
-                    newSettings->position.x = tX;
-                    newSettings->position.y = tY;
-                    newSettings->position.z = tZ;
+                    s1->pos.x = x;
+                    s1->pos.y = y;
+                    s1->pos.z = z;
                 }
 
                 if (changingZone) {
                     if (*interpAlpha != 1.0f) {
                         prevSettings = *prevController;
-                        if (((u32) (prevSettings + 2) >= 3U) &&
-                            (prevSettings->type == settings->type) &&
-                            (prevSettings->boomLength == settings->boomLength) &&
-                            (prevSettings->boomPitch == settings->boomPitch) &&
-                            (prevSettings->viewPitch == settings->viewPitch) &&
-                            (prevSettings->flag != settings->flag) &&
-                            (prevSettings->points.two.Ax == settings->points.two.Ax) &&
-                            (prevSettings->points.two.Az == settings->points.two.Az))
+                        if (((s32)prevSettings != -2 && (s32)prevSettings != -1 && (s32)prevSettings != NULL) &&
+                            (prevSettings->type == controller->type) &&
+                            (prevSettings->boomLength == controller->boomLength) &&
+                            (prevSettings->boomPitch == controller->boomPitch) &&
+                            (prevSettings->viewPitch == controller->viewPitch) &&
+                            (prevSettings->flag != controller->flag) &&
+                            (prevSettings->posA.x == controller->posA.x) &&
+                            (prevSettings->posA.z == controller->posA.z))
                         {
                             *interpAlpha = 1.0f;
                         }
@@ -541,147 +560,190 @@ void update_camera_from_controller(
                 }
                 break;
             case 2:
-                if (settings->flag == 0) {
-                    posAx = settings->points.two.Ax;
-                    posBx = settings->points.two.Bx;
-                    posAz = settings->points.two.Az;
-                    posBz = settings->points.two.Bz;
-                    posAy = settings->points.two.Ay;
-                    posBy = settings->points.two.By;
-                    temp_f8_7 = posBx - posAy;
-                    if ((posAx == posBx) && (posAz == posBz)) {
-                        posAx = posAy;
-                        posAz = posBy;
+                if (controller->flag == 0) {
+
+                    // Camera is prevented from moving past a fixed line
+                    f32 posAx; // 18
+                    f32 posBx; // 16
+                    f32 posCx; //  4
+                    f32 posCz; // 14
+                    f32 posAz; // 10
+                    f32 posBz; // 12
+                    f32 Tx, Tz;
+
+                    posAx = controller->posA.x; // 18
+                    posAz = controller->posA.z; // 10
+
+                    posBx = controller->posB.x; // 16
+                    posBz = controller->posB.z; // 12
+
+                    posCx = controller->posA.y; //  4
+                    posCz = controller->posB.y; // 14
+
+                    if (posAx == posBx && posAz == posBz) {
+                        posAx = posCx;
+                        posAz = posCz;
                     }
-                    if (temp_f8_7 != 0.0f) {
-                        temp_f6_7 = posAz - posBz;
-                        temp_f2_5 = posBz - posBy;
-                        temp_f2_6 = (tZ - posBz) + (((posBx - tX) * temp_f2_5) / temp_f8_7);
-                        temp_f0_5 = posBx - posAx;
-                        temp_f4_11 = ((temp_f6_7 * temp_f2_5) / temp_f8_7) - temp_f0_5;
-                        var_f8 = ((temp_f6_7 * temp_f2_6) / temp_f4_11) + tX;
-                        var_f0_3 = ((temp_f0_5 * temp_f2_6) / temp_f4_11) + tZ;
+
+                    if ((posBx - posCx) == 0.0f) {
+                        f32 BAx;
+                        f32 BCx;
+                        f32 BCz;
+                        f32 ABz;
+                        f32 Q;
+                        f32 V;
+                        f32 var1;
+                        f32 var2;
+
+                        BAx = posBx - posAx;
+                        BCx = posBx - posCx;
+                        BCz = posBz - posCz;
+                        ABz = posAz - posBz;
+                        var1 = BCx * BAx;
+                        var2 = (posBz - z) * BCx;
+
+                        Q = var1 / BCz - ABz;
+                        V = (x - posBx) + var2 / BCz;
+                        Tx = ABz * V / Q + x;
+                        Tz = BAx * V / Q + z;
                     } else {
-                        temp_f6_8 = posBx - posAx;
-                        temp_f10_3 = posAz - posBz;
-                        temp_f8_8 = posBz - posBy;
-                        temp_f0_6 = (tX - posBx) + (((posBz - tZ) * temp_f8_7) / temp_f8_8);
-                        temp_f4_12 = ((temp_f8_7 * temp_f6_8) / temp_f8_8) - temp_f10_3;
-                        var_f8 = ((temp_f10_3 * temp_f0_6) / temp_f4_12) + tX;
-                        var_f0_3 = ((temp_f6_8 * temp_f0_6) / temp_f4_12) + tZ;
+                        f32 BAx;
+                        f32 BCx;
+                        f32 BCz;
+                        f32 ABz;
+                        f32 Q;
+                        f32 V;
+                        f32 var1;
+                        f32 var2;
+
+                        BAx = posBx - posAx;
+                        BCx = posBx - posCx;
+                        ABz = posAz - posBz;
+                        BCz = posBz - posCz;
+                        var1 = ABz * BCz;
+                        var2 = (posBx - x) * BCz;
+
+                        Q = var1 / BCx - BAx;
+                        V = (z - posBz) + var2 / BCx;
+                        Tx = ABz * V / Q;
+                        Tx += x; // permuter idea (score 15 -> 10)
+                        Tz = BAx * V / Q + z;
                     }
-                    newSettings->position.x = var_f8;
-                    newSettings->position.y = tY;
-                    newSettings->position.z = var_f0_3;
+                    s1->pos.x = Tx;
+                    s1->pos.y = y;
+                    s1->pos.z = Tz;
 
                     if (changingMap) {
-                        newSettings->boomYaw = atan2(0.0f, 0.0f, settings->points.two.Bx - settings->points.two.Ax, settings->points.two.Bz - settings->points.two.Az);
-                        boomLength = settings->boomLength;
+                        s1->boomYaw = atan2(0.0f, 0.0f, controller->posB.x - controller->posA.x, controller->posB.z - controller->posA.z);
+                        boomLength = controller->boomLength;
                         if (boomLength < 0.0f) {
                             boomLength = -boomLength;
                         }
-                        newSettings->boomLength = boomLength;
-                        newSettings->boomPitch = settings->boomPitch;
-                        newSettings->viewPitch = settings->viewPitch;
+                        s1->boomLength = boomLength;
+                        s1->boomPitch = controller->boomPitch;
+                        s1->viewPitch = controller->viewPitch;
                     }
                 } else {
                     if (changingMap) {
-                        newSettings->boomYaw = atan2(0.0f, 0.0f, settings->points.two.Bx - settings->points.two.Ax, settings->points.two.Bz - settings->points.two.Az);
-                        boomLength = settings->boomLength;
+                        s1->boomYaw = atan2(0.0f, 0.0f, controller->posB.x - controller->posA.x, controller->posB.z - controller->posA.z);
+                        boomLength = controller->boomLength;
                         if (boomLength < 0.0f) {
                             boomLength = -boomLength;
                         }
-                        newSettings->boomLength = boomLength;
-                        newSettings->boomPitch = settings->boomPitch;
-                        newSettings->viewPitch = settings->viewPitch;
-                        newSettings->position.x = settings->points.two.Bx;
-                        newSettings->position.z = settings->points.two.Bz;
+                        s1->boomLength = boomLength;
+                        s1->boomPitch = controller->boomPitch;
+                        s1->viewPitch = controller->viewPitch;
+                        s1->pos.x = controller->posB.x;
+                        s1->pos.z = controller->posB.z;
                     } else if (changingZone) {
-                        newSettings->position.x = oldSettings->position.x;
-                        newSettings->position.z = oldSettings->position.z;
+                        s1->pos.x = oldSettings->pos.x;
+                        s1->pos.z = oldSettings->pos.z;
                     }
-                    newSettings->position.y = tY;
+                    s1->pos.y = y;
                 }
                 *prevController = (CameraControlSettings*) -1;
                 break;
             case 5:
-                if (settings->flag == 0) {
-                    posAy = settings->points.two.Ay;
-                    temp_f6_9 = settings->points.two.Bx - posAy;
-                    posBy = settings->points.two.By;
-                    temp_f8_9 = settings->points.two.Bz - posBy;
-                    temp_f4_13 = (((tX - posAy) * temp_f6_9) + ((tZ - posBy) * temp_f8_9)) / ((temp_f6_9 * temp_f6_9) + (temp_f8_9 * temp_f8_9));
-                    temp_f2_7 = (temp_f4_13 * temp_f6_9) + posAy;
-                    temp_f4_14 = (temp_f4_13 * temp_f8_9) + posBy;
-                    newSettings->position.y = tY;
-                    newSettings->position.x = temp_f2_7;
-                    newSettings->position.z = temp_f4_14;
-                    if (settings->boomLength < 0.0f) {
-                        var_f22_2 = temp_f2_7 - settings->points.two.Ax;
-                        newSettings->boomLength = -settings->boomLength;
-                        var_f20_2 = temp_f4_14 - settings->points.two.Az;
+                if (controller->flag == 0) {
+                    f32 var3 = x - controller->posA.y;
+                    f32 var4 = z - controller->posB.y;
+                    f32 var1 = controller->posB.x - controller->posA.y;
+                    f32 var2 = controller->posB.z - controller->posB.y;
+                    temp_f4_13 = SQ(var1) + SQ(var2);
+                    temp_f4_13 = (var3 * var1 + var4 * var2) / temp_f4_13;
+                    temp_f2_7 = temp_f4_13 * var1 + controller->posA.y;
+                    temp_f4_14 = temp_f4_13 * var2 + controller->posB.y;
+
+                    s1->pos.x = temp_f2_7;
+                    s1->pos.y = y;
+                    s1->pos.z = temp_f4_14;
+
+                    if (controller->boomLength < 0.0f) {
+                        dx = temp_f2_7 - controller->posA.x;
+                        dz = temp_f4_14 - controller->posA.z;
+                        s1->boomLength = -controller->boomLength;
                     } else {
-                        var_f22_2 = settings->points.two.Ax - temp_f2_7;
-                        newSettings->boomLength = settings->boomLength;
-                        var_f20_2 = settings->points.two.Az - temp_f4_14;
+                        dx = controller->posA.x - temp_f2_7;
+                        dz = controller->posA.z - temp_f4_14;
+                        s1->boomLength = controller->boomLength;
                     }
-                    newSettings->boomYaw = atan2(0.0f, 0.0f, var_f22_2, var_f20_2);
-                    newSettings->boomPitch = settings->boomPitch;
-                    newSettings->viewPitch = settings->viewPitch;
+                    s1->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                    s1->boomPitch = controller->boomPitch;
+                    s1->viewPitch = controller->viewPitch;
                 } else {
                     if (changingMap) {
-                        if (settings->boomLength < 0.0f) {
-                            var_f22_3 = settings->points.two.Bx - settings->points.two.Ax;
-                            newSettings->boomLength = -settings->boomLength;
-                            var_f20_3 = settings->points.two.Bz - settings->points.two.Az;
+                        if (controller->boomLength < 0.0f) {
+                            dx = controller->posB.x - controller->posA.x;
+                            dz = controller->posB.z - controller->posA.z;
+                            s1->boomLength = -controller->boomLength;
                         } else {
-                            var_f22_3 = settings->points.two.Ax - settings->points.two.Bx;
-                            newSettings->boomLength = settings->boomLength;
-                            var_f20_3 = settings->points.two.Az - settings->points.two.Bz;
+                            dx = controller->posA.x - controller->posB.x;
+                            dz = controller->posA.z - controller->posB.z;
+                            s1->boomLength = controller->boomLength;
                         }
-                        newSettings->boomYaw = atan2(0.0f, 0.0f, var_f22_3, var_f20_3);
-                        newSettings->boomPitch = settings->boomPitch;
-                        newSettings->viewPitch = settings->viewPitch;
-                        newSettings->position.x = settings->points.two.Bx;
-                        newSettings->position.z = settings->points.two.Bz;
+                        s1->boomYaw = atan2(0.0f, 0.0f, dx, dz);
+                        s1->boomPitch = controller->boomPitch;
+                        s1->viewPitch = controller->viewPitch;
+                        s1->pos.x = controller->posB.x;
+                        s1->pos.z = controller->posB.z;
                     } else if (changingZone) {
-                        newSettings->position.x = settings->points.two.Bx;
-                        newSettings->position.z = settings->points.two.Bz;
+                        s1->pos.x = controller->posB.x;
+                        s1->pos.z = controller->posB.z;
                     }
-                    newSettings->position.y = tY;
+                    s1->pos.y = y;
                 }
                 *prevController = (CameraControlSettings*) -1;
                 break;
             case 3:
-                newSettings->position.x = tX;
-                newSettings->position.y = tY;
-                newSettings->position.z = tZ;
+                s1->pos.x = x;
+                s1->pos.y = y;
+                s1->pos.z = z;
                 break;
             case 4:
-                newSettings->boomYaw = atan2(0.0f, 0.0f, settings->points.two.Bx - settings->points.two.Ax, settings->points.two.Bz - settings->points.two.Az);
-                boomLength = settings->boomLength;
+                s1->boomYaw = atan2(0.0f, 0.0f, controller->posB.x - controller->posA.x, controller->posB.z - controller->posA.z);
+                boomLength = controller->boomLength;
                 if (boomLength < 0.0f) {
                     boomLength = -boomLength;
                 }
-                newSettings->boomLength = boomLength;
-                newSettings->boomPitch = settings->boomPitch;
-                newSettings->viewPitch = settings->viewPitch;
-                newSettings->position.x = settings->points.two.Bx;
-                newSettings->position.y = settings->points.two.By;
-                newSettings->position.z = settings->points.two.Bz;
+                s1->boomLength = boomLength;
+                s1->boomPitch = controller->boomPitch;
+                s1->viewPitch = controller->viewPitch;
+                s1->pos.x = controller->posB.x;
+                s1->pos.y = controller->posB.y;
+                s1->pos.z = controller->posB.z;
                 *prevController = (CameraControlSettings*) -2;
                 break;
         }
 
         if (changingZone &&
-            ((settings->type == 5) || (oldSettings->boomYaw != newSettings->boomYaw)) &&
+            ((controller->type == 5) || (oldSettings->boomYaw != newSettings->boomYaw)) &&
             (fabsf(oldSettings->boomYaw - newSettings->boomYaw) < 3.0f) &&
             (fabsf(oldSettings->boomLength - newSettings->boomLength) < 10.0f) &&
             (fabsf(oldSettings->boomPitch - newSettings->boomPitch) < 1.0f) &&
             (fabsf(oldSettings->viewPitch - newSettings->viewPitch) < 1.0f) &&
-            (fabsf(oldSettings->position.x - newSettings->position.x) < 10.0f) &&
-            (fabsf(oldSettings->position.y - newSettings->position.y) < 10.0f) &&
-            (fabsf(oldSettings->position.z - newSettings->position.z) < 10.0f))
+            (fabsf(oldSettings->pos.x - newSettings->pos.x) < 10.0f) &&
+            (fabsf(oldSettings->pos.y - newSettings->pos.y) < 10.0f) &&
+            (fabsf(oldSettings->pos.z - newSettings->pos.z) < 10.0f))
         {
             *interpAlpha = 1.0f;
         }
@@ -689,13 +751,13 @@ void update_camera_from_controller(
 
     if (*prevController == (CameraControlSettings* )-1) {
         if (changingZone) {
-            D_800A08E4 = oldSettings->position.x - newSettings->position.x;
-            D_800A08E8 = oldSettings->position.y - newSettings->position.y;
-            D_800A08EC = oldSettings->position.z - newSettings->position.z;
+            D_800A08E4 = oldSettings->pos.x - newSettings->pos.x;
+            D_800A08E8 = oldSettings->pos.y - newSettings->pos.y;
+            D_800A08EC = oldSettings->pos.z - newSettings->pos.z;
         }
-        oldSettings->position.x = newSettings->position.x + D_800A08E4;
-        oldSettings->position.y = newSettings->position.y + D_800A08E8;
-        oldSettings->position.z = newSettings->position.z + D_800A08EC;
+        oldSettings->pos.x = newSettings->pos.x + D_800A08E4;
+        oldSettings->pos.y = newSettings->pos.y + D_800A08E8;
+        oldSettings->pos.z = newSettings->pos.z + D_800A08EC;
     }
 }
 #else

@@ -1180,7 +1180,7 @@ s32 btl_submenu_moves_update(void) {
 
             moveX = 20;
             moveY = BattleMenu_Moves_PosY;
-            set_window_properties(8, moveX, 186, 280, 32, 20, func_802A4494, NULL, -1);
+            set_window_properties(8, moveX, 186, 280, 32, WINDOW_PRIORITY_20, func_802A4494, NULL, -1);
             set_window_update(WINDOW_ID_1, WINDOW_UPDATE_SHOW);
             if (!BattleMenu_UsingSpiritsSubmenu) {
                 set_window_update(WINDOW_ID_2, WINDOW_UPDATE_SHOW);
@@ -1808,7 +1808,7 @@ s32 func_802A4A54(void) {
             set_window_properties(WINDOW_ID_7, x + 18, y - 6, 108, 16, 1, func_802A56F8, NULL, -1);
             x = 20;
             y = 186;
-            set_window_properties(WINDOW_ID_8, x, y, 280, 32, 20, func_802A5738, NULL, -1);
+            set_window_properties(WINDOW_ID_8, x, y, 280, 32, WINDOW_PRIORITY_20, func_802A5738, NULL, -1);
             set_window_update(WINDOW_ID_6, WINDOW_UPDATE_SHOW);
             set_window_update(WINDOW_ID_7, WINDOW_UPDATE_SHOW);
             set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
