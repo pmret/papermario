@@ -35,7 +35,7 @@ void update_camera_mode_unused(Camera* camera) {
         camera->lookAt_obj.z = camera->lookAt_obj_target.z;
     }
 
-    if (!(playerStatus->flags & (4 | 2))) {
+    if (!(playerStatus->flags & (PS_FLAG_FALLING | PS_FLAG_JUMPING))) {
         camera->lookAt_obj_target.y = playerStatus->position.y + 60.0f;
     }
     camera->lookAt_obj_target.x = playerStatus->position.x;
