@@ -5376,7 +5376,7 @@ enum CameraUpdateType {
     CAM_UPDATE_MODE_6               = 6,
 };
 
-enum CameraSettingsType {
+enum CameraControlType {
     // Camera follows the player, using a fixed yaw position.
     // Uses: A/B as 2D points
     // Yaw is defined by the line segment AB
