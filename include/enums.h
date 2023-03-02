@@ -5366,14 +5366,30 @@ enum CameraMoveFlags {
     CAMERA_MOVE_FLAG_4              = 0x00000004,
 };
 
+enum CameraUpdateType {
+    CAMERA_UPDATE_TYPE_0            = 0,
+    CAMERA_UPDATE_TYPE_1            = 1,
+    CAMERA_UPDATE_TYPE_2            = 2,
+    CAMERA_UPDATE_TYPE_3            = 3,
+    CAMERA_UPDATE_TYPE_4            = 4,
+    CAMERA_UPDATE_TYPE_5            = 5,
+    CAMERA_UPDATE_TYPE_6            = 6,
+};
+
 enum CameraSettingsType {
-    CAMERA_SETTINGS_TYPE_0  = 0,
-    CAMERA_SETTINGS_TYPE_1  = 1,
-    CAMERA_SETTINGS_TYPE_2  = 2,
-    CAMERA_SETTINGS_TYPE_3  = 3,
-    CAMERA_SETTINGS_TYPE_4  = 4,
-    CAMERA_SETTINGS_TYPE_5  = 5,
-    CAMERA_SETTINGS_TYPE_6  = 6,
+    CAMERA_SETTINGS_TYPE_0          = 0,
+    CAMERA_SETTINGS_TYPE_1          = 1,
+    CAMERA_SETTINGS_TYPE_2          = 2,
+    CAMERA_SETTINGS_TYPE_3          = 3,
+    CAMERA_SETTINGS_TYPE_4          = 4,
+    CAMERA_SETTINGS_TYPE_5          = 5,
+    CAMERA_SETTINGS_TYPE_6          = 6,
+};
+
+enum CameraSettingsPtrType {
+    CAMERA_SETTINGS_PTR_MINUS_2      = -2,
+    CAMERA_SETTINGS_PTR_MINUS_1      = -1,
+    CAMERA_SETTINGS_PTR_NULL         = 0,
 };
 
 enum BtlCameraPreset {
