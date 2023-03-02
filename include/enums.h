@@ -3667,10 +3667,12 @@ enum PopupResult {
 
 enum WindowPriority {
     WINDOW_PRIORITY_0               = 0,
+    WINDOW_PRIORITY_1               = 1,
     WINDOW_PRIORITY_10              = 10,
     WINDOW_PRIORITY_19              = 19,
     WINDOW_PRIORITY_20              = 20,
     WINDOW_PRIORITY_21              = 21,
+    WINDOW_PRIORITY_64              = 64,
 };
 
 /// not really
@@ -5361,7 +5363,7 @@ enum CameraFlags {
 enum CameraMoveFlags {
     CAMERA_MOVE_IGNORE_PLAYER_Y     = 0x00000001,
     CAMERA_MOVE_FLAG_2              = 0x00000002,
-    CAMERA_MOVE_FLAG_4              = 0x00000004
+    CAMERA_MOVE_FLAG_4              = 0x00000004,
 };
 
 enum CameraSettingsType {
@@ -5943,7 +5945,7 @@ enum WindowId {
     WINDOW_ID_17                                = 17,
     WINDOW_ID_18                                = 18,
     WINDOW_ID_19                                = 19,
-    WINDOW_ID_20                                = 20,
+    WINDOW_ID_CURRENCY_COUNTER                  = 20,
     WINDOW_ID_21                                = 21,
     WINDOW_ID_PAUSE_MAIN                        = 22,
     WINDOW_ID_PAUSE_DECRIPTION                  = 23,

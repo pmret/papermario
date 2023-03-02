@@ -39,12 +39,14 @@ HudScript* gPausePartnersIconScripts[] = {
     &HES_FPCost, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
     &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
 };
+
 Vp gPausePartnersViewport = {
     .vp = {
         .vscale = { 640, 480, 511, 0 },
         .vtrans = { 640, 480, 511, 0 },
     }
 };
+
 s32 gPausePartnersSpriteAnims[][4] = {
     {
         ANIM_WorldGoombario_Still,
@@ -95,18 +97,57 @@ s32 gPausePartnersSpriteAnims[][4] = {
         ANIM_LIST_END
     }
 };
-s32 gPausePartnersPartnerIDs[] = { 1, 2, 3, 4, 9, 6, 7, 8};
-s32 gPausePartnersMessages[] = {
-    MSG_PartnerDesc_Goombario_Pause, MSG_PartnerDesc_Kooper_Pause, MSG_PartnerDesc_Bombette_Pause, MSG_PartnerDesc_Parakarry_Pause,
-    MSG_PartnerDesc_Bow_Pause, MSG_PartnerDesc_Watt_Pause, MSG_PartnerDesc_Sushie_Pause, MSG_PartnerDesc_Lakilester_Pause
+
+s32 gPausePartnersPartnerIDs[] = {
+    PARTNER_GOOMBARIO,
+    PARTNER_KOOPER,
+    PARTNER_BOMBETTE,
+    PARTNER_PARAKARRY,
+    PARTNER_BOW,
+    PARTNER_WATT,
+    PARTNER_SUSHIE,
+    PARTNER_LAKILESTER,
 };
-s32 gPausePartnersMoveBase[] = { MOVE_HEADBONK1, MOVE_SHELL_TOSS1, MOVE_BODY_SLAM1, MOVE_SKY_DIVE1,
-                                 MOVE_SMACK1, MOVE_ELECTRO_DASH1, MOVE_BELLY_FLOP1, MOVE_SPINY_FLIP1 };
+
+s32 gPausePartnersMessages[] = {
+    MSG_PartnerDesc_Goombario_Pause,
+    MSG_PartnerDesc_Kooper_Pause,
+    MSG_PartnerDesc_Bombette_Pause,
+    MSG_PartnerDesc_Parakarry_Pause,
+    MSG_PartnerDesc_Bow_Pause,
+    MSG_PartnerDesc_Watt_Pause,
+    MSG_PartnerDesc_Sushie_Pause,
+    MSG_PartnerDesc_Lakilester_Pause
+};
+
+s32 gPausePartnersMoveBase[] = {
+    MOVE_HEADBONK1,
+    MOVE_SHELL_TOSS1,
+    MOVE_BODY_SLAM1,
+    MOVE_SKY_DIVE1,
+    MOVE_SMACK1,
+    MOVE_ELECTRO_DASH1,
+    MOVE_BELLY_FLOP1,
+    MOVE_SPINY_FLIP1
+};
+
 s8 gPausePartnersGridData[] = {
     4, 5, 6, 7,
     0, 1, 2, 3
 };
-char* gPausePartnersAssetNames[] = { "party_kurio", "party_kameki", "party_pinki", "party_pareta", "party_resa",  "party_akari", "party_opuku", "party_pokopi", "letter_peach" };
+
+char* gPausePartnersAssetNames[] = {
+    "party_kurio",
+    "party_kameki",
+    "party_pinki",
+    "party_pareta",
+    "party_resa",
+    "party_akari",
+    "party_opuku",
+    "party_pokopi",
+    "letter_peach"
+};
+
 s8* gPausePartnersImageBuffers[] = { gPauseBufferImg1, gPauseBufferImg2 };
 s8* gPausePartnersPaletteBuffers[] = { gPauseBufferPal1, gPauseBufferPal2 };
 s32 D_8024F74C = 0;
@@ -135,7 +176,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .pos = { .x = 3, .y = 16 },
         .width = 289,
         .height = 154,
-        .priority = 1,
+        .priority = WINDOW_PRIORITY_1,
         .fpDrawContents = &pause_partners_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
@@ -148,7 +189,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .pos = { .x = 8, .y = 103 },
         .width = 112,
         .height = 20,
-        .priority = 0,
+        .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_partners_draw_title,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_PARTNERS,
@@ -161,7 +202,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .pos = { .x = 133, .y = 36 },
         .width = 140,
         .height = 80,
-        .priority = 0,
+        .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_partners_draw_movelist,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_PARTNERS,
@@ -174,7 +215,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .pos = { .x = 12, .y = -6 },
         .width = 80,
         .height = 16,
-        .priority = 0,
+        .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_partners_draw_movelist_title,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
@@ -187,7 +228,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .pos = { .x = 102, .y = -12 },
         .width = 32,
         .height = 32,
-        .priority = 0,
+        .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_partners_draw_movelist_flower,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
@@ -546,6 +587,7 @@ void pause_partners_init(MenuPanel* panel) {
 void pause_partners_handle_input(MenuPanel* panel) {
     s32 delta;
     s32 level, level2;
+    s32 partnerID;
     s32 oldPos;
 
     if (gPausePartnersNumPartners >= 2 && (gPausePartnersLevel == 0 || (gPauseHeldButtons & (BUTTON_Z | BUTTON_R)))) {
