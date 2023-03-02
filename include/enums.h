@@ -5392,9 +5392,9 @@ enum CameraControlType {
     // Camera is contrained to a point along the line segment BC.
     // Use these near exits to stop camera movement.
     // Uses: A/B/C as 2D points
-    // The target position is found by projecting player position onto BC along a
-    // line orthogonal to AB. If posA == posB, the projection axis will be along
-    // BC, i.e., the projection will be along a line orthogonal to BC.
+    // The target position is found by projecting player position onto BC along a line orthogonal to AB.
+    // If posA == posB, AB is ignored and the projection axis will be along a line orthogonal to BC with
+    // the resulting position being the closest point on BC to the player.
     // flag 1 = Freeze Camera Position
     CAM_CONTROL_CONSTRAIN_TO_LINE   = 2,
 
