@@ -231,7 +231,7 @@ void lightning_bolt_appendGfx(void* effect) {
         preset = &D_E00BCE40[0][10];
     }
 
-    for (i = 0; i < ARRAY_COUNT(data->sparkleX); i++) {
+    for (i = 0; i < ARRAY_COUNT(data->boltVertexPosX); i++) {
         avgDeltaX = (data->endPos.x - data->startPos.x) * (1 / 11.0f);
         avgDeltaY = (data->endPos.y - data->startPos.y) * (1 / 11.0f);
         theta = (data->unk_110 + (i - lifetime) * 10) % 120 - 60;
@@ -244,10 +244,10 @@ void lightning_bolt_appendGfx(void* effect) {
         deltaY = avgDeltaX * sinAngle + avgDeltaY * cosAngle;
         deltaZ = 0.0f;
 
-        data->sparkleX[i] = data->startPos.x + (data->endPos.x - data->startPos.x) * i * (1 / 11.0f) + deltaX;
-        data->sparkleY[i] = data->startPos.y + (data->endPos.y - data->startPos.y) * i * (1 / 11.0f) + deltaY;
-        data->sparkleZ[i] = data->startPos.z + (data->endPos.z - data->startPos.z) * i * (1 / 11.0f) + deltaZ;
-        data->sparkleWidth[i] = (f32) preset->width[i] * 0.1;
+        data->boltVertexPosX[i] = data->startPos.x + (data->endPos.x - data->startPos.x) * i * (1 / 11.0f) + deltaX;
+        data->boltVertexPosY[i] = data->startPos.y + (data->endPos.y - data->startPos.y) * i * (1 / 11.0f) + deltaY;
+        data->boltVertexPosZ[i] = data->startPos.z + (data->endPos.z - data->startPos.z) * i * (1 / 11.0f) + deltaZ;
+        data->edgeLength[i] = (f32) preset->width[i] * 0.1;
     }
 
     vtxBuffer = (Vtx_t*) (gMasterGfxPos + 1);
@@ -255,17 +255,17 @@ void lightning_bolt_appendGfx(void* effect) {
     gSPBranchList(gMasterGfxPos, gMasterGfxPos + 0x31);
     gMasterGfxPos += 0x31;
 
-    for (i = 0; i < ARRAY_COUNT(data->sparkleX); i++) {
+    for (i = 0; i < ARRAY_COUNT(data->boltVertexPosX); i++) {
         if (i == 0) {
             edgeLength = 8.0f;
-            edgeAngle = -shim_atan2(data->sparkleY[1], -data->sparkleX[1], data->sparkleY[0], -data->sparkleX[0]);
+            edgeAngle = -shim_atan2(data->boltVertexPosY[1], -data->boltVertexPosX[1], data->boltVertexPosY[0], -data->boltVertexPosX[0]);
         } else {
             edgeLength = 8.0f;
-            if (i == ARRAY_COUNT(data->sparkleX) - 1) {
+            if (i == ARRAY_COUNT(data->boltVertexPosX) - 1) {
                 edgeAngle = -90.0f;
             } else {
-                nextAngle = -shim_atan2(data->sparkleY[i + 1], -data->sparkleX[i + 1], data->sparkleY[i], -data->sparkleX[i]);
-                prevAngle = -shim_atan2(data->sparkleY[i], -data->sparkleX[i], data->sparkleY[i - 1], -data->sparkleX[i - 1]);
+                nextAngle = -shim_atan2(data->boltVertexPosY[i + 1], -data->boltVertexPosX[i + 1], data->boltVertexPosY[i], -data->boltVertexPosX[i]);
+                prevAngle = -shim_atan2(data->boltVertexPosY[i], -data->boltVertexPosX[i], data->boltVertexPosY[i - 1], -data->boltVertexPosX[i - 1]);
                 if (prevAngle - nextAngle > 180.0f) {
                     nextAngle += 360.0f;
                 } else if (prevAngle - nextAngle < -180.0f) {
@@ -281,15 +281,15 @@ void lightning_bolt_appendGfx(void* effect) {
             }
         }
 
-        edgeLength *= (widthScale * data->sparkleWidth[i]);
+        edgeLength *= (widthScale * data->edgeLength[i]);
         texOffsetX = (128 - i * 12) * 32;
         edgeDeltaX = edgeLength  * shim_sin_deg(edgeAngle);
         edgeDeltaY = edgeLength * shim_cos_deg(edgeAngle);
         edgeDeltaZ = 0.0f;
 
-        vtx->ob[0] = (data->sparkleX[i] + edgeDeltaX) * 10.0f;
-        vtx->ob[1] = (data->sparkleY[i] + edgeDeltaY) * 10.0f;
-        vtx->ob[2] = (data->sparkleZ[i] + edgeDeltaZ) * 10.0f;
+        vtx->ob[0] = (data->boltVertexPosX[i] + edgeDeltaX) * 10.0f;
+        vtx->ob[1] = (data->boltVertexPosY[i] + edgeDeltaY) * 10.0f;
+        vtx->ob[2] = (data->boltVertexPosZ[i] + edgeDeltaZ) * 10.0f;
         vtx->tc[0] = texOffsetX;
         vtx->tc[1] = 0;
         vtx->cn[0] = i * 50;
@@ -297,9 +297,9 @@ void lightning_bolt_appendGfx(void* effect) {
         vtx->cn[2] = i * 30;
         vtx++;
 
-        vtx->ob[0] = (data->sparkleX[i] - edgeDeltaX) * 10.0f;
-        vtx->ob[1] = (data->sparkleY[i] - edgeDeltaY) * 10.0f;
-        vtx->ob[2] = (data->sparkleZ[i] + edgeDeltaZ) * 10.0f;
+        vtx->ob[0] = (data->boltVertexPosX[i] - edgeDeltaX) * 10.0f;
+        vtx->ob[1] = (data->boltVertexPosY[i] - edgeDeltaY) * 10.0f;
+        vtx->ob[2] = (data->boltVertexPosZ[i] + edgeDeltaZ) * 10.0f;
         vtx->tc[0] = texOffsetX;
         vtx->tc[1] = 0x400;
         vtx->cn[0] = i * 50;
