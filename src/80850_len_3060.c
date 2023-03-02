@@ -1106,7 +1106,7 @@ void update_coin_counter(void) {
         if ((uiStatus->displayCoins == playerData->coins) || (uiStatus->unk_6C[0] <= 30)) {
             uiStatus->unk_6C[0] -= 1;
             if (uiStatus->unk_6C[0] == 0) {
-                set_window_update(WINDOW_ID_20, (s32)basic_hidden_window_update);
+                set_window_update(WINDOW_ID_CURRENCY_COUNTER, (s32)basic_hidden_window_update);
                 uiStatus->unk_6C[1] = 15;
                 D_8010CD10 = 0;
                 D_8010CD12 = 1;
@@ -1127,7 +1127,7 @@ void show_coin_counter(void) {
     s32 index;
 
     if ((D_8010CD10 != 0) || (D_8010CD12 != 0)) {
-        set_window_update(WINDOW_ID_20, WINDOW_UPDATE_HIDE);
+        set_window_update(WINDOW_ID_CURRENCY_COUNTER, WINDOW_UPDATE_HIDE);
         if (uiStatus->iconIndex12 > -1) {
             hud_element_free(uiStatus->iconIndex10);
             hud_element_free(uiStatus->iconIndex11);
@@ -1140,8 +1140,8 @@ void show_coin_counter(void) {
     }
 
     if (uiStatus->unk_6C[0] == 0) {
-        set_window_properties(WINDOW_ID_20, 32, 164, 64, 20, 0x15, coin_counter_draw_content, 0, -1);
-        set_window_update(WINDOW_ID_20, (s32)basic_window_update);
+        set_window_properties(WINDOW_ID_CURRENCY_COUNTER, 32, 164, 64, 20, WINDOW_PRIORITY_21, coin_counter_draw_content, 0, -1);
+        set_window_update(WINDOW_ID_CURRENCY_COUNTER, (s32)basic_window_update);
         index = hud_element_create(&HES_MenuTimes);
         uiStatus->iconIndex10 = index;
         hud_element_set_flags(index, HUD_ELEMENT_FLAG_80);

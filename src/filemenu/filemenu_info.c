@@ -21,7 +21,7 @@ MenuWindowBP filemenu_info_windowBPs[] = {
         .pos = { .x = 0, .y = 0 },
         .width = 0,
         .height = 0,
-        .priority = 64,
+        .priority = WINDOW_PRIORITY_64,
         .fpDrawContents = &filemenu_info_draw_message_contents,
         .tab = NULL,
         .parentID = -1,

@@ -123,7 +123,7 @@ EvtScript N(EVS_Scene_CastleDestruction) = {
     EVT_EXEC(N(EVS_AnimateSpinningRing))
     EVT_EXEC(N(EVS_UpdateCamShaking))
     EVT_EXEC_GET_TID(N(EVS_PlayExplosionFX), LVar9)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, 22, 16, 4096)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 22, 16, 4096)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
     EVT_CALL(SetCamType, CAM_DEFAULT, 1, TRUE)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -60, 0, 0)
@@ -150,7 +150,7 @@ EvtScript N(EVS_Scene_CastleDestruction) = {
         EVT_CALL(UpdateLerp)
         EVT_SETF(LVar2, LVar0)
         EVT_DIVF(LVar2, 10)
-        EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, LVar2, 16, 4096)
+        EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, LVar2, 16, 4096)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
@@ -161,7 +161,7 @@ EvtScript N(EVS_Scene_CastleDestruction) = {
         EVT_CALL(UpdateLerp)
         EVT_SETF(LVar2, LVar0)
         EVT_DIVF(LVar2, 10)
-        EVT_CALL(SetCamPerspective, CAM_DEFAULT, 3, LVar2, 1, 4096)
+        EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, LVar2, 1, 4096)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP

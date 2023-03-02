@@ -122,10 +122,10 @@ EvtScript CamPreset_A = {
 };
 
 EvtScript EVS_OnBattleInit = {
-    EVT_CALL(SetCamPerspective, 1, 6, 25, 16, 1024)
-    EVT_CALL(SetCamViewport, 1, 12, 20, 296, 200)
-    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
-    EVT_CALL(SetCamEnabled, 1, 1)
+    EVT_CALL(SetCamPerspective, CAM_BATTLE, CAM_UPDATE_MODE_6, 25, 16, 1024)
+    EVT_CALL(SetCamViewport, CAM_BATTLE, 12, 20, 296, 200)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    EVT_CALL(SetCamEnabled, CAM_BATTLE, TRUE)
     EVT_WAIT(1)
     EVT_CALL(InitVirtualEntityList)
     EVT_CALL(InitAnimatedModels)

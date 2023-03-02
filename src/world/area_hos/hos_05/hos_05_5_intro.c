@@ -53,171 +53,154 @@ s32 N(D_802495DC_A3381C) = 0;
 s32 N(D_802495E0_A33820) = 0;
 
 CameraControlSettings N(IntroCamSettings0) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 130.4,
     .boomPitch = 12.4,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 0.0, -1.0, -500.0 },
+    .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
     .viewPitch = -16.8,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings1) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 130.4,
     .boomPitch = 12.4,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { -433.0127, -1.0, -250.0 },
+    .points = { .two = {  0.0, -1.0, 0.0, -433.0127, -1.0, -250.0 }},
     .viewPitch = -16.8,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings2) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 400.0,
     .boomPitch = 2.7,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 0.0, -1.0, -500.0 },
+    .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
     .viewPitch = -7.4,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings3) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 274.4,
     .boomPitch = -9.3,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 114.3, -1.0, 500.0 },
+    .points = { .two = {  0.0, -1.0, 0.0, 114.3, -1.0, 500.0 }},
     .viewPitch = 0.7,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings4) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 274.4,
     .boomPitch = -9.3,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 114.3, -1.0, 500.0 },
+    .points = { .two = {  0.0, -1.0, 0.0, 114.3, -1.0, 500.0 }},
     .viewPitch = 0.7,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings5) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 243.3,
     .boomPitch = 16.0,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 56.1, -1.0, -1.1 },
+    .points = { .two = {  0.0, -1.0, 0.0, 56.1, -1.0, -1.1 }},
     .viewPitch = -3.0,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings6) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 192.5,
     .boomPitch = 12.4,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 0.0, -1.0, 500.0 },
+    .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
     .viewPitch = -10.7,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings7) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 467.0,
     .boomPitch = 21.0,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 71.3, -1.0, 154.3 },
+    .points = { .two = {  0.0, -1.0, 0.0, 71.3, -1.0, 154.3 }},
     .viewPitch = -3.0,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings8) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 121.6,
     .boomPitch = 0.0,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 24.4, -1.0, 154.3 },
+    .points = { .two = {  0.0, -1.0, 0.0, 24.4, -1.0, 154.3 }},
     .viewPitch = 0.0,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings9) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 474.7,
     .boomPitch = 0.0,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 24.4, -1.0, 154.3 },
+    .points = { .two = {  0.0, -1.0, 0.0, 24.4, -1.0, 154.3 }},
     .viewPitch = 0.0,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings10) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 225.7,
     .boomPitch = 9.7,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 6.9, -1.0, 168.8 },
+    .points = { .two = {  0.0, -1.0, 0.0, 6.9, -1.0, 168.8 }},
     .viewPitch = -3.0,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings11) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 130.0,
     .boomPitch = 9.8,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 40.0, -1.0, 168.8 },
+    .points = { .two = {  0.0, -1.0, 0.0, 40.0, -1.0, 168.8 }},
     .viewPitch = -9.3,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings12) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 270.0,
     .boomPitch = 9.8,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 40.0, -1.0, 168.8 },
+    .points = { .two = {  0.0, -1.0, 0.0, 40.0, -1.0, 168.8 }},
     .viewPitch = -9.3,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings13) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 246.1,
     .boomPitch = -1.3,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 500.0, -1.0, 500.0 },
+    .points = { .two = {  0.0, -1.0, 0.0, 500.0, -1.0, 500.0 }},
     .viewPitch = 0.5,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings14) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 180.0,
     .boomPitch = -1.3,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 0.0, -1.0, -500.0 },
+    .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
     .viewPitch = 0.5,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings15) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 90.0,
     .boomPitch = 5.4,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 0.0, -1.0, 500.0 },
+    .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
     .viewPitch = -6.9,
     .flag = FALSE,
 };
 
 CameraControlSettings N(IntroCamSettings16) = {
-    .type = CAMERA_SETTINGS_TYPE_0,
+    .type = CAM_CONTROL_FIXED_ORIENTATION,
     .boomLength = 445.8,
     .boomPitch = 5.4,
-    .posA = { 0.0, -1.0, 0.0 },
-    .posB = { 0.0, -1.0, 500.0 },
+    .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
     .viewPitch = -6.9,
     .flag = FALSE,
 };
@@ -381,8 +364,8 @@ API_CALLABLE(N(InitializeStoryCamera)) {
     camera->controlSettings.boomLength = IntroCamStateA_BoomLength;
     camera->controlSettings.boomPitch = IntroCamStateA_BoomPitch;
     camera->controlSettings.viewPitch = IntroCamStateA_ViewPitch;
-    camera->controlSettings.posB.x = sin_deg(N(StoryCameraAngle)) * 500.0f;
-    camera->controlSettings.posB.z = cos_deg(N(StoryCameraAngle)) * -500.0f;
+    camera->controlSettings.points.two.Bx = sin_deg(N(StoryCameraAngle)) * 500.0f;
+    camera->controlSettings.points.two.Bz = cos_deg(N(StoryCameraAngle)) * -500.0f;
     camera->panActive = TRUE;
     return ApiStatus_DONE2;
 }
@@ -412,8 +395,8 @@ API_CALLABLE(N(UnusedInitializeStoryCamera)) {
     camera->controlSettings.boomLength = IntroCamStateB_BoomLength;
     camera->controlSettings.boomPitch = IntroCamStateB_BoomPitch;
     camera->controlSettings.viewPitch = IntroCamStateB_ViewPitch;
-    camera->controlSettings.posB.x = sin_deg(N(StoryCameraAngle)) * 500.0f;
-    camera->controlSettings.posB.z = cos_deg(N(StoryCameraAngle)) * -500.0f;
+    camera->controlSettings.points.two.Bx = sin_deg(N(StoryCameraAngle)) * 500.0f;
+    camera->controlSettings.points.two.Bz = cos_deg(N(StoryCameraAngle)) * -500.0f;
     camera->panActive = TRUE;
     N(D_802498FC_A33B3C)++;
     if (N(StoryCameraAngle) == 0.0f) {
@@ -861,8 +844,8 @@ API_CALLABLE(N(CamPanAcrossRoom)) {
     camera->panActive = TRUE;
     camera->movePos.x = N(PanAcrossRoomCamX);
     camera->movePos.z = N(PanAcrossRoomCamZ);
-    camera->controlSettings.posB.x = sin_deg(N(PanAcrossRoomAngle)) * 500.0f;
-    camera->controlSettings.posB.z = cos_deg(N(PanAcrossRoomAngle)) * 500.0f;
+    camera->controlSettings.points.two.Bx = sin_deg(N(PanAcrossRoomAngle)) * 500.0f;
+    camera->controlSettings.points.two.Bz = cos_deg(N(PanAcrossRoomAngle)) * 500.0f;
 
     N(PanAcrossRoomTime)++;
     if (N(PanAcrossRoomTime) == 170) {
@@ -884,8 +867,8 @@ API_CALLABLE(N(CamMove_OrbitKammy)) {
     N(interp_value_with_easing)(INTRO_MATH_EASING_COS_IN_OUT,  50.0f,  35.0f, N(OrbitKammyTime), 30.0f, &N(OrbitKammyFov));
     N(interp_value_with_easing)(INTRO_MATH_EASING_COS_IN_OUT, 246.1f, 180.0f, N(OrbitKammyTime), 30.0f, &N(OrbitKammyBoomLength));
     N(interp_value_with_easing)(INTRO_MATH_EASING_COS_IN_OUT, 200.0f, 220.0f, N(OrbitKammyTime), 30.0f, &N(OrbitKammyCamY));
-    camera->controlSettings.posB.x = sin_deg(N(OrbitKammyAngle)) * 500.0f;
-    camera->controlSettings.posB.z = cos_deg(N(OrbitKammyAngle)) * 500.0f;
+    camera->controlSettings.points.two.Bx = sin_deg(N(OrbitKammyAngle)) * 500.0f;
+    camera->controlSettings.points.two.Bz = cos_deg(N(OrbitKammyAngle)) * 500.0f;
     N(adjust_cam_vfov)(CAM_DEFAULT, N(OrbitKammyFov));
     camera->panActive = TRUE;
     camera->controlSettings.boomLength = N(OrbitKammyBoomLength);

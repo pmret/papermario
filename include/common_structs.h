@@ -131,13 +131,13 @@ typedef struct Matrix4s {
     /* 0x20 */ s16 frac[4][4];
 } Matrix4s; // size = 0x40
 
-typedef struct CamPosSettings {
+typedef struct CamConfiguration {
     /* 0x00 */ f32 boomYaw;
     /* 0x04 */ f32 boomLength;
     /* 0x08 */ f32 boomPitch;
     /* 0x0C */ f32 viewPitch;
-    /* 0x10 */ Vec3f pos;
-} CamPosSettings; // size = 0x1C
+    /* 0x10 */ Vec3f targetPos;
+} CamConfiguration; // size = 0x1C
 
 typedef struct DmaTable {
     /* 0x00 */ u8* start;
@@ -716,7 +716,7 @@ typedef struct UiStatus {
 
 typedef struct CameraInitData {
     /* 0x00 */ s16 flags;
-    /* 0x02 */ s8 type;
+    /* 0x02 */ s8 updateMode;
     /* 0x03 */ char unk_03;
     /* 0x04 */ s16 viewWidth;
     /* 0x06 */ s16 viewHeight;
@@ -741,8 +741,24 @@ typedef struct CameraControlSettings {
     /* 0x00 */ s32 type;
     /* 0x04 */ f32 boomLength;
     /* 0x08 */ f32 boomPitch;
-    /* 0x0C */ Vec3f posA;
-    /* 0x18 */ Vec3f posB;
+    union {
+        struct {
+            f32 Ax;
+            f32 Ay;
+            f32 Az;
+            f32 Bx;
+            f32 By;
+            f32 Bz;
+        } two;
+        struct {
+            f32 Ax;
+            f32 Cx;
+            f32 Az;
+            f32 Bx;
+            f32 Cz;
+            f32 Bz;
+        } three;
+    } points;
     /* 0x24 */ f32 viewPitch;
     /* 0x28 */ s32 flag;
 } CameraControlSettings; // size = 0x2C
@@ -808,8 +824,8 @@ typedef struct Camera {
     /* 0x214 */ CameraUnk unk_214[4];
     /* 0x444 */ CameraControlSettings* prevController;
     /* 0x448 */ CameraControlSettings* currentController;
-    /* 0x44C */ CamPosSettings oldCameraSettings;
-    /* 0x468 */ CamPosSettings newCameraSettings;
+    /* 0x44C */ CamConfiguration prevConfiguration;
+    /* 0x468 */ CamConfiguration goalConfiguration;
     /* 0x484 */ f32 interpAlpha;
     /* 0x488 */ f32 linearInterp;
     /* 0x48C */ f32 linearInterpScale; /* 3.0? */
@@ -818,9 +834,7 @@ typedef struct Camera {
     /* 0x498 */ f32 unk_498;
     /* 0x49C */ f32 unk_49C;
     /* 0x4A0 */ f32 savedTargetY;
-    /* 0x4A4 */ f32 unk_4A4;
-    /* 0x4A8 */ f32 unk_4A8;
-    /* 0x4AC */ f32 unk_4AC;
+    /* 0x4A4 */ Vec3f prevTargetPos;
     /* 0x4B0 */ Vec3f movePos;
     /* 0x4BC */ Vec3f prevPrevMovePos;
     /* 0x4C8 */ Vec3f prevMovePos;
