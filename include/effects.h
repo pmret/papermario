@@ -1775,11 +1775,11 @@ typedef struct LightningBoltFXData {
     /* 0x02C */ s32 lifetime;
     /* 0x030 */ Color4i outerColor;
     /* 0x040 */ Color3i innerColor;
-    /* 0x04C */ f32 unk_4C;
-    /* 0x050 */ f32 unk_50[12];
-    /* 0x080 */ f32 unk_80[12];
-    /* 0x0B0 */ f32 unk_B0[12];
-    /* 0x0E0 */ f32 unk_E0[12];
+    /* 0x04C */ f32 widthScale;
+    /* 0x050 */ f32 sparkleX[12];
+    /* 0x080 */ f32 sparkleY[12];
+    /* 0x0B0 */ f32 sparkleZ[12];
+    /* 0x0E0 */ f32 sparkleWidth[12];
     /* 0x110 */ s32 unk_110;
     /* 0x114 */ f32 unk_114;
 } LightningBoltFXData; // size = 0x118

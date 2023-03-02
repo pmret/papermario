@@ -1,12 +1,12 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct UnkStruct {
-    /* 0x00 */ u8 unk_00[0xC];
-    /* 0x0C */ u8 unk_0C[0xC];
-} UnkStruct; // size = 0x18
+typedef struct LightningPreset {
+    /* 0x00 */ u8 offset[12];
+    /* 0x0C */ u8 width[12];
+} LightningPreset; // size = 0x18
 
-UnkStruct D_E00BCC30[] = {
+LightningPreset D_E00BCC30[] = {
     {{5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5}, {10, 9, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0}},
     {{5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5}, {8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 0, 0}},
     {{35, 5, 25, 5, 0, 25, 35, 5, 15, 0, 0, 0}, {10, 13, 15, 12, 11, 13, 10, 12, 5, 1, 0, 0}},
@@ -20,7 +20,7 @@ UnkStruct D_E00BCC30[] = {
     {{27, 27, 22, 22, 32, 17, 12, 7, 12, 12, 2, 0}, {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0}},
 };
 
-UnkStruct D_E00BCD38[] = {
+LightningPreset D_E00BCD38[] = {
     {{25, 25, 25, 5, 25, 5, 25, 25, 5, 25, 25, 25}, {4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0}},
     {{15, 15, 15, 25, 15, 15, 5, 25, 25, 15, 25, 25}, {4, 4, 4, 4, 4, 3, 2, 1, 0, 0, 0, 0}},
     {{25, 25, 25, 5, 15, 25, 5, 5, 15, 5, 5, 0}, {4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 0, 0}},
@@ -34,7 +34,7 @@ UnkStruct D_E00BCD38[] = {
     {{30, 30, 25, 25, 35, 20, 15, 10, 15, 15, 5, 0}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 0}},
 };
 
-UnkStruct* D_E00BCE40[] = { D_E00BCC30, D_E00BCD38 };
+LightningPreset* D_E00BCE40[] = { D_E00BCC30, D_E00BCD38 };
 
 extern Gfx D_09001000_3BBEA0[];
 
@@ -89,7 +89,7 @@ EffectInstance* lightning_bolt_main(
     data->tipPos.x = startX;
     data->tipPos.y = startY;
     data->tipPos.z = startZ;
-    data->unk_4C = scale;
+    data->widthScale = scale;
 
     temp = SQ(startX - endX) + SQ(startY - endY) + SQ(startZ - endZ);
 
@@ -169,42 +169,41 @@ void lightning_bolt_render(EffectInstance *effect) {
 void func_E00BC36C(void) {
 }
 
-// float
-#ifdef NON_MATCHING
 void lightning_bolt_appendGfx(void* effect) {
-    Vtx_t* sp90;
-    f32 sp94;
-    f32 temp_f0;
-    f32 temp_f0_2;
-    f32 temp_f20;
-    f32 temp_f20_2;
-    f32 temp_f22;
-    f32 temp_f24;
-    f32 temp_f26;
-    f32 temp_f28;
-    f32 var_f20;
-    f32 var_f22;
-    f32 var_f2;
-    s16 temp_s0_2;
+    Vtx_t* vtxBuffer;
+    f32 widthScale;
+    f32 cosAngle;
+    f32 edgeDeltaY;
+    f32 temp;
+    f32 sinAngle;
+    f32 edgeDeltaX;
+    f32 avgDeltaY;
+    f32 avgDeltaX;
+    f32 deltaPos;
+    f32 theta;
+    f32 nextAngle;
+    f32 edgeAngle;
+    f32 prevAngle;
+    s16 texOffsetX;
     s32 temp_a0;
-    s32 temp_s3;
-    s32 temp_s6;
-    s32 temp_s7;
-    s32 temp_t3;
-    UnkStruct* var_s2;
+    s32 alpha;
+    s32 type;
+    s32 lifetime;
+    s32 quadCount;
+    LightningPreset* preset;
     Vtx_t* vtx;
-    f32 zero;
-    f32 t1, t2, t3, t4;
+    f32 edgeDeltaZ;
+    f32 deltaX, deltaY, deltaZ;
     LightningBoltFXData* data = ((EffectInstance*)effect)->data.lightningBolt;
     Matrix4f sp10;
     Matrix4f unused;
     s32 i;
-    f32 temp_fs2;
+    f32 edgeLength;
 
-    temp_s7 = data->lifetime;
-    temp_s3 = data->outerColor.a;
-    temp_s6 = data->type;
-    sp94 = data->unk_4C;
+    lifetime = data->lifetime;
+    alpha = data->outerColor.a;
+    type = data->type;
+    widthScale = data->widthScale;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
@@ -213,92 +212,95 @@ void lightning_bolt_appendGfx(void* effect) {
     shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->outerColor.r, data->outerColor.g, data->outerColor.b, temp_s3);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->outerColor.r, data->outerColor.g, data->outerColor.b, alpha);
     gDPSetEnvColor(gMasterGfxPos++, data->innerColor.r, data->innerColor.g, data->innerColor.b, 128);
     gSPDisplayList(gMasterGfxPos++, D_09001000_3BBEA0);
 
-    temp_a0 = temp_s7 - 1;
-    if (temp_s6 != 2) {
+    temp_a0 = lifetime - 1;
+    if (type != 2) {
         if (temp_a0 <= 10) {
-            var_s2 = &D_E00BCE40[temp_s6][temp_a0];
+            preset = &D_E00BCE40[type][temp_a0];
         } else {
-            var_s2 = &D_E00BCE40[temp_s6][10];
+            preset = &D_E00BCE40[type][10];
         }
     } else if (temp_a0 < 8) {
-        var_s2 = &D_E00BCE40[0][temp_a0];
+        preset = &D_E00BCE40[0][temp_a0];
     } else if (temp_a0 < 0x24) {
-        var_s2 = &D_E00BCE40[0][temp_a0 % 6 + 2];
+        preset = &D_E00BCE40[0][temp_a0 % 6 + 2];
     } else {
-        var_s2 = &D_E00BCE40[0][10];
+        preset = &D_E00BCE40[0][10];
     }
 
-    for (i = 0; i < 12; i++) {
-        temp_f24 = (data->endPos.x - data->startPos.x) * (1 / 11.0f);
-        temp_f22 = (data->endPos.y - data->startPos.y) * (1 / 11.0f);
-        temp_f28 = (data->unk_110 + (i - temp_s7) * 10) % 120 - 60;
-        temp_f26 = var_s2->unk_00[i];
+    for (i = 0; i < ARRAY_COUNT(data->sparkleX); i++) {
+        avgDeltaX = (data->endPos.x - data->startPos.x) * (1 / 11.0f);
+        avgDeltaY = (data->endPos.y - data->startPos.y) * (1 / 11.0f);
+        theta = (data->unk_110 + (i - lifetime) * 10) % 120 - 60;
+        deltaPos = preset->offset[i];
 
-        temp_f20 = shim_sin_deg(temp_f28) * temp_f26 * 0.04;
-        temp_f0 = shim_cos_deg(temp_f28) * temp_f26 * 0.04;
+        sinAngle = shim_sin_deg(theta) * deltaPos * 0.04;
+        cosAngle = shim_cos_deg(theta) * deltaPos * 0.04;
 
-        t1 = (temp_f24 * temp_f0 - temp_f22 * temp_f20);
-        t2 = (temp_f24 * temp_f20 + temp_f22 * temp_f0);
-        t3 = 0.0f;
+        deltaX = avgDeltaX * cosAngle - avgDeltaY * sinAngle;
+        deltaY = avgDeltaX * sinAngle + avgDeltaY * cosAngle;
+        deltaZ = 0.0f;
 
-        data->unk_50[i] = data->startPos.x + (data->endPos.x - data->startPos.x) * i * (1 / 11.0f) + t1;
-        data->unk_80[i] = data->startPos.y + (data->endPos.y - data->startPos.y) * i * (1 / 11.0f) + t2;
-        data->unk_B0[i] = data->startPos.z + (data->endPos.z - data->startPos.z) * i * (1 / 11.0f) + t3;
-        data->unk_E0[i] = (f32) var_s2->unk_0C[i] * 0.1;
+        data->sparkleX[i] = data->startPos.x + (data->endPos.x - data->startPos.x) * i * (1 / 11.0f) + deltaX;
+        data->sparkleY[i] = data->startPos.y + (data->endPos.y - data->startPos.y) * i * (1 / 11.0f) + deltaY;
+        data->sparkleZ[i] = data->startPos.z + (data->endPos.z - data->startPos.z) * i * (1 / 11.0f) + deltaZ;
+        data->sparkleWidth[i] = (f32) preset->width[i] * 0.1;
     }
 
-    sp90 = (Vtx_t*) (gMasterGfxPos + 1);
+    vtxBuffer = (Vtx_t*) (gMasterGfxPos + 1);
     vtx = (Vtx_t*) (gMasterGfxPos + 1);
     gSPBranchList(gMasterGfxPos, gMasterGfxPos + 0x31);
     gMasterGfxPos += 0x31;
 
-    for (i = 0; i < 12; i++) { //s2: i
+    for (i = 0; i < ARRAY_COUNT(data->sparkleX); i++) {
         if (i == 0) {
-            temp_fs2 = 8.0f;
-            var_f22 = -shim_atan2(data->unk_80[1], -data->unk_50[1], data->unk_80[0], -data->unk_50[0]);
+            edgeLength = 8.0f;
+            edgeAngle = -shim_atan2(data->sparkleY[1], -data->sparkleX[1], data->sparkleY[0], -data->sparkleX[0]);
         } else {
-            temp_fs2 = 8.0f;
-            if (i == 11) {
-                var_f22 = -90.0f;
+            edgeLength = 8.0f;
+            if (i == ARRAY_COUNT(data->sparkleX) - 1) {
+                edgeAngle = -90.0f;
             } else {
-                var_f20 = -shim_atan2(data->unk_80[i + 1], -data->unk_50[i + 1], data->unk_80[i], -data->unk_50[i]);
-                var_f2 = -shim_atan2(data->unk_80[i], -data->unk_50[i], data->unk_80[i - 1], -data->unk_50[i - 1]);
-                var_f22 = var_f2 - var_f20;
-                if (var_f22 > 180.0f) {
-                    var_f20 += 360.0f;
-                } else if (var_f22 < -180.0f) {
-                    var_f2 += 360.0f;
+                nextAngle = -shim_atan2(data->sparkleY[i + 1], -data->sparkleX[i + 1], data->sparkleY[i], -data->sparkleX[i]);
+                prevAngle = -shim_atan2(data->sparkleY[i], -data->sparkleX[i], data->sparkleY[i - 1], -data->sparkleX[i - 1]);
+                if (prevAngle - nextAngle > 180.0f) {
+                    nextAngle += 360.0f;
+                } else if (prevAngle - nextAngle < -180.0f) {
+                    prevAngle += 360.0f;
                 }
-                //var_f22 = (var_f20 + var_f2) * 0.5;
-                var_f22 = (var_f20 + var_f2);
-                var_f22 /= 2.0;
+                temp = nextAngle + prevAngle; // required to match
+                edgeAngle = temp;
+                edgeAngle *= 0.5;
+
+                if (prevAngle + nextAngle < 0.0f) { // required to match
+                    nextAngle += 360.0f;
+                }
             }
         }
 
-        temp_fs2 *= (sp94 * data->unk_E0[i]);
-        temp_s0_2 = (128 - i * 12) * 32;
-        temp_f20_2 = temp_fs2  * shim_sin_deg(var_f22);
-        temp_f0_2 = temp_fs2 * shim_cos_deg(var_f22);
-        zero = 0.0f;
+        edgeLength *= (widthScale * data->sparkleWidth[i]);
+        texOffsetX = (128 - i * 12) * 32;
+        edgeDeltaX = edgeLength  * shim_sin_deg(edgeAngle);
+        edgeDeltaY = edgeLength * shim_cos_deg(edgeAngle);
+        edgeDeltaZ = 0.0f;
 
-        vtx->ob[0] = (data->unk_50[i] + temp_f20_2) * 10.0f;
-        vtx->ob[1] = (data->unk_80[i] + temp_f0_2) * 10.0f;
-        vtx->ob[2] = (data->unk_B0[i] + zero) * 10.0f; // 0.0f: fs4 (fs5)
-        vtx->tc[0] = temp_s0_2;
+        vtx->ob[0] = (data->sparkleX[i] + edgeDeltaX) * 10.0f;
+        vtx->ob[1] = (data->sparkleY[i] + edgeDeltaY) * 10.0f;
+        vtx->ob[2] = (data->sparkleZ[i] + edgeDeltaZ) * 10.0f;
+        vtx->tc[0] = texOffsetX;
         vtx->tc[1] = 0;
-        vtx->cn[0] = i * 50; //s6
-        vtx->cn[1] = i * 120; //s7
-        vtx->cn[2] = i * 30; //s8
+        vtx->cn[0] = i * 50;
+        vtx->cn[1] = i * 120;
+        vtx->cn[2] = i * 30;
         vtx++;
 
-        vtx->ob[0] = (data->unk_50[i] - temp_f20_2) * 10.0f;
-        vtx->ob[1] = (data->unk_80[i] - temp_f0_2) * 10.0f;
-        vtx->ob[2] = (data->unk_B0[i] + zero) * 10.0f;
-        vtx->tc[0] = temp_s0_2;
+        vtx->ob[0] = (data->sparkleX[i] - edgeDeltaX) * 10.0f;
+        vtx->ob[1] = (data->sparkleY[i] - edgeDeltaY) * 10.0f;
+        vtx->ob[2] = (data->sparkleZ[i] + edgeDeltaZ) * 10.0f;
+        vtx->tc[0] = texOffsetX;
         vtx->tc[1] = 0x400;
         vtx->cn[0] = i * 50;
         vtx->cn[1] = i * 120;
@@ -306,17 +308,15 @@ void lightning_bolt_appendGfx(void* effect) {
         vtx++;
     }
 
-    temp_t3 = i;
+    quadCount = i;
 
-    gSPVertex(gMasterGfxPos++, sp90, i * 2, 0);
+    gSPVertex(gMasterGfxPos++, vtxBuffer, i * 2, 0);
     gSPClearGeometryMode(gMasterGfxPos++, G_SHADING_SMOOTH);
 
-    for (i = 0; i < temp_t3 - 1; i++) {
-        gSP2Triangles(gMasterGfxPos++, i * 2 + 1, i * 2, i * 2 + 2, 0, i * 2 + 1, i * 2 + 2, i * 2 + 3, 0);
+    for (i = 0; i < quadCount - 1; i++) {
+        gSP2Triangles(gMasterGfxPos++, i * 2 + 1, i * 2 + 0, i * 2 + 2, 0,
+                                       i * 2 + 1, i * 2 + 2, i * 2 + 3, 0);
     }
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
-#else
-INCLUDE_ASM(s32, "effects/lightning_bolt", lightning_bolt_appendGfx);
-#endif
