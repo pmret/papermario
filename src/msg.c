@@ -2,8 +2,12 @@
 #include "ld_addrs.h"
 #include "message_ids.h"
 #include "sprite.h"
+
+#if !VERSION_CN
+// TODO: remove if assets are dumped in iQue release
 #include "charset/postcard.png.h"
 #include "charset/letter_content_1.png.h"
+#endif
 
 #if VERSION_CN
 // TODO: remove if section is split in iQue release
@@ -674,6 +678,9 @@ extern s32 D_802EB5C0[];
 extern s32 D_802EB5F0[];
 extern struct_D_802EB620 D_802EB620[];
 
+#if VERSION_CN
+INCLUDE_ASM(s32, "msg", msg_copy_to_print_buffer);
+#else
 void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     u8 arg;
     u8 argQ;
@@ -1308,6 +1315,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->srcBufferPos = (u16)(s32)(srcBuf - (s32)printer->srcBuffer);
     *printBuf = MSG_CHAR_PRINT_END;
 }
+#endif
 
 void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     s32 i;
