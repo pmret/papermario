@@ -39,8 +39,8 @@ void update_camera_mode_4(Camera* camera) {
     camera->trueRotation.x = camera->unk_70;
     camera->currentBoomLength = camera->lookAt_dist * D_8009A5EC;
     camera->currentYOffset = camera->auxBoomPitch * D_8009A5EC;
-    if (camera->unk_06 != 0) {
-        camera->unk_06 = 0;
+    if (camera->unk_06) {
+        camera->unk_06 = FALSE;
         camera->unk_98 = 0.0f;
         camera->unk_9C = 0.0f;
         camera->lookAt_obj.x = camera->lookAt_obj_target.x;

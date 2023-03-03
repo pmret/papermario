@@ -239,13 +239,13 @@ void update_camera_from_controller(
     f32 dx;
 
     f32 x, y, z;
-    
+
     configuration = oldConfiguration;
     controller = *prevController;
     x = x1;
     y = y1;
     z = z1;
-    
+
     if ((s32)controller != CAMERA_SETTINGS_PTR_MINUS_2 && (s32)controller != CAMERA_SETTINGS_PTR_MINUS_1) {
         if (controller == CAMERA_SETTINGS_PTR_NULL) {
             configuration->targetPos.x = x;
@@ -257,13 +257,13 @@ void update_camera_from_controller(
                     if (controller->flag != 0) {
                         f32 temp_f10 = -(controller->points.two.Az - controller->points.two.Bz) + controller->points.two.Bx;
                         f32 temp_f6 = (controller->points.two.Ax - controller->points.two.Bx) + controller->points.two.Bz;
-                        
+
                         f32 temp_f8 = controller->points.two.Bx - temp_f10;
                         f32 temp_f12_2 = controller->points.two.Bz - temp_f6;
 
                         f32 temp_f4 = (SQ(temp_f8) + SQ(temp_f12_2));
                         temp_f4 = (((x - temp_f10) * temp_f8) + ((z - temp_f6) * temp_f12_2)) / temp_f4;
-                        
+
                         configuration->targetPos.x = temp_f4 * temp_f8 + temp_f10;
                         configuration->targetPos.y = y;
                         configuration->targetPos.z = temp_f4 * temp_f12_2 + temp_f6;
@@ -289,30 +289,30 @@ void update_camera_from_controller(
                         temp_f6_2 = bz - az;
                         var1 = x - ax;
                         var2 = z - az;
-                                                
+
                         temp_f20 = SQ(temp_f8_2);
                         temp_f18 = SQ(temp_f6_2);
-                        
+
                         f4_1 = temp_f20 + temp_f18;
                         f4_1 = (var1 * temp_f8_2 + var2 * temp_f6_2) / f4_1;
-                        
+
                         var_f16 = f4_1 * temp_f8_2 + ax;
-                        var_f10 = f4_1 * temp_f6_2 + az;      
+                        var_f10 = f4_1 * temp_f6_2 + az;
 
                         f22_1 = controller->points.two.Ax;
                         f4_2 = controller->points.two.Az;
                         sp10 = controller->points.two.Bx;
                         sp20 = controller->points.two.Bz;
-                        
+
                         ax = sp10 - f22_1;
                         az = sp20 - f4_2;
-                        
+
                         temp_f8_2 = var_f16 - f22_1;
                         temp_f6_2 = var_f10 - f4_2;
-                        
+
                         temp_f20 = x - var_f16;
-                        temp_f18 = z - var_f10;                    
-                        
+                        temp_f18 = z - var_f10;
+
                         if (ax * temp_f8_2 + az * temp_f6_2 < 0.0f) {
                             var_f16 = f22_1;
                             var_f10 = f4_2;
@@ -335,7 +335,7 @@ void update_camera_from_controller(
                         dz = z - controller->points.two.Az;
                         f24 = SQ(dx) + SQ(dz);
                         if (f24 != 0.0f) {
-                            f24 = 1.0f / sqrtf(f24);                            
+                            f24 = 1.0f / sqrtf(f24);
                             temp_f2 = sqrtf(SQ(controller->points.two.Bx - controller->points.two.Ax) + SQ(controller->points.two.Bz - controller->points.two.Az));
                             temp_f2_2 = dx * temp_f2 * f24;
                             temp_f4_4 = dz * temp_f2 * f24;
@@ -363,13 +363,13 @@ void update_camera_from_controller(
             }
         }
     }
-    
+
     configuration = newConfiguration;
     controller = *newController;
     x = tX;
     y = tY;
     z = tZ;
-    
+
     if (controller == NULL) {
         configuration->targetPos.x = x;
         configuration->targetPos.y = y;
@@ -392,13 +392,13 @@ void update_camera_from_controller(
                     f32 ABz = controller->points.two.Az - controller->points.two.Bz;
                     f32 temp_f10 = -ABz + controller->points.two.Bx;
                     f32 temp_f6 = ABx + controller->points.two.Bz;
-                    
+
                     f32 temp_f8 = controller->points.two.Bx - temp_f10;
                     f32 temp_f12_2 = controller->points.two.Bz - temp_f6;
 
                     f32 temp_f4 = SQ(temp_f8) + SQ(temp_f12_2);
                     temp_f4 = (((x - temp_f10) * temp_f8) + ((z - temp_f6) * temp_f12_2)) / temp_f4;
-                    
+
                     configuration->targetPos.x = temp_f4 * temp_f8 + temp_f10;
                     configuration->targetPos.y = y;
                     configuration->targetPos.z = temp_f4 * temp_f12_2 + temp_f6;
@@ -449,30 +449,30 @@ void update_camera_from_controller(
                     temp_f6_2 = bz - az;
                     var1 = x - ax;
                     var2 = z - az;
-                                            
+
                     temp_f20 = temp_f8_2 * temp_f8_2;
                     temp_f18 = temp_f6_2 * temp_f6_2;
-                    
+
                     f4_1 = temp_f20 + temp_f18;
                     f4_1 = (var1 * temp_f8_2 + var2 * temp_f6_2) / f4_1;
-                    
+
                     var_f16 = f4_1 * temp_f8_2 + ax;
-                    var_f10 = f4_1 * temp_f6_2 + az;      
+                    var_f10 = f4_1 * temp_f6_2 + az;
 
                     f22_1 = controller->points.two.Ax;
                     f4_2 = controller->points.two.Az;
                     sp10 = controller->points.two.Bx;
                     sp20 = controller->points.two.Bz;
-                    
+
                     ax = sp10 - f22_1;
                     az = sp20 - f4_2;
-                    
+
                     temp_f8_2 = var_f16 - f22_1;
                     temp_f6_2 = var_f10 - f4_2;
-                    
+
                     temp_f20 = x - var_f16;
-                    temp_f18 = z - var_f10;                    
-                    
+                    temp_f18 = z - var_f10;
+
                     if (ax * temp_f8_2 + az * temp_f6_2 < 0.0f) {
                         var_f16 = f22_1;
                         var_f10 = f4_2;
@@ -493,10 +493,10 @@ void update_camera_from_controller(
                         prevSettings = *prevController;
                         if (((s32)prevSettings != CAMERA_SETTINGS_PTR_MINUS_2
                                 && (s32)prevSettings != CAMERA_SETTINGS_PTR_MINUS_1
-                                && (s32)prevSettings != CAMERA_SETTINGS_PTR_NULL) 
-                            && (prevSettings->type == controller->type) 
-                            && (prevSettings->boomLength == controller->boomLength) 
-                            && (prevSettings->boomPitch == controller->boomPitch) 
+                                && (s32)prevSettings != CAMERA_SETTINGS_PTR_NULL)
+                            && (prevSettings->type == controller->type)
+                            && (prevSettings->boomLength == controller->boomLength)
+                            && (prevSettings->boomPitch == controller->boomPitch)
                             && (prevSettings->viewPitch == controller->viewPitch)
                             && (prevSettings->flag != controller->flag)
                         ) {
@@ -545,12 +545,12 @@ void update_camera_from_controller(
                         if (((s32)prevSettings != CAMERA_SETTINGS_PTR_MINUS_2
                                 && (s32)prevSettings != CAMERA_SETTINGS_PTR_MINUS_1
                                 && (s32)prevSettings != CAMERA_SETTINGS_PTR_NULL)
-                            && (prevSettings->type == controller->type) 
-                            && (prevSettings->boomLength == controller->boomLength) 
-                            && (prevSettings->boomPitch == controller->boomPitch) 
-                            && (prevSettings->viewPitch == controller->viewPitch) 
-                            && (prevSettings->flag != controller->flag) 
-                            && (prevSettings->points.two.Ax == controller->points.two.Ax) 
+                            && (prevSettings->type == controller->type)
+                            && (prevSettings->boomLength == controller->boomLength)
+                            && (prevSettings->boomPitch == controller->boomPitch)
+                            && (prevSettings->viewPitch == controller->viewPitch)
+                            && (prevSettings->flag != controller->flag)
+                            && (prevSettings->points.two.Ax == controller->points.two.Ax)
                             && (prevSettings->points.two.Az == controller->points.two.Az)
                         ) {
                             *interpAlpha = 1.0f;
@@ -571,26 +571,26 @@ void update_camera_from_controller(
 
                     posAx = controller->points.three.Ax;
                     posAz = controller->points.three.Az;
-                    
+
                     posBx = controller->points.three.Bx;
                     posBz = controller->points.three.Bz;
-                    
+
                     posCx = controller->points.three.Cx;
-                    posCz = controller->points.three.Cz;                    
+                    posCz = controller->points.three.Cz;
 
                     if (posAx == posBx && posAz == posBz) {
                         posAx = posCx;
                         posAz = posCz;
                     }
-                    
+
                     if ((posBx - posCx) == 0.0f) {
                         f32 BAx = posBx - posAx;
                         f32 BCx = posBx - posCx;
                         f32 BCz = posBz - posCz;
-                        f32 ABz = posAz - posBz;                        
+                        f32 ABz = posAz - posBz;
                         f32 Q = BCx * BAx / BCz - ABz;
                         f32 V = (x - posBx) + (posBz - z) * BCx / BCz;
-                        
+
                         Tx = ABz * V / Q + x;
                         Tz = BAx * V / Q + z;
                     } else {
@@ -600,12 +600,12 @@ void update_camera_from_controller(
                         f32 BCz = posBz - posCz;
                         f32 Q = ABz * BCz / BCx - BAx;
                         f32 V = (z - posBz) + (posBx - x) * BCz / BCx;
-                        
+
                         Tx = ABz * V / Q + x;
                         Tz = BAx * V / Q + z;
                     }
                     configuration->targetPos.x = Tx;
-                    configuration->targetPos.y = y;                    
+                    configuration->targetPos.y = y;
                     configuration->targetPos.z = Tz;
 
                     if (changingMap) {
@@ -652,11 +652,11 @@ void update_camera_from_controller(
                     temp_f4_13 = (var3 * var1 + var4 * var2) / temp_f4_13;
                     temp_f2_7 = temp_f4_13 * var1 + controller->points.three.Cx;
                     temp_f4_14 = temp_f4_13 * var2 + controller->points.three.Cz;
-                    
+
                     configuration->targetPos.x = temp_f2_7;
-                    configuration->targetPos.y = y;                    
+                    configuration->targetPos.y = y;
                     configuration->targetPos.z = temp_f4_14;
-                    
+
                     if (controller->boomLength < 0.0f) {
                         dx = temp_f2_7 - controller->points.three.Ax;
                         dz = temp_f4_14 - controller->points.three.Az;
@@ -702,7 +702,7 @@ void update_camera_from_controller(
                 do {
                 dx = controller->points.two.Bx - controller->points.two.Ax;
                 dz = controller->points.two.Bz - controller->points.two.Az;
-                
+
                 configuration->boomYaw = atan2(0.0f, 0.0f, dx, dz);
                 } while (0);
                 boomLength = controller->boomLength;
@@ -894,11 +894,11 @@ void update_camera_zone_interp(Camera* camera) {
                     }
                     break;
                 default:
-                    if (cs2->points.two.Ax == currentController->points.two.Ax 
-                        && cs2->points.two.Az == currentController->points.two.Az 
-                        && cs2->points.two.Ay == currentController->points.two.Ay 
-                        && cs2->points.two.By == currentController->points.two.By 
-                        && cs2->points.two.Bx == currentController->points.two.Bx 
+                    if (cs2->points.two.Ax == currentController->points.two.Ax
+                        && cs2->points.two.Az == currentController->points.two.Az
+                        && cs2->points.two.Ay == currentController->points.two.Ay
+                        && cs2->points.two.By == currentController->points.two.By
+                        && cs2->points.two.Bx == currentController->points.two.Bx
                         && cs2->points.two.Bz == currentController->points.two.Bz
                     ) {
                         cond2 = TRUE;
@@ -930,7 +930,7 @@ void update_camera_zone_interp(Camera* camera) {
             camera->prevMovePos.z = camera->movePos.z;
         }
     }
-    
+
     if (camera->prevPrevFollowFlags) {
         posX = camera->prevPrevMovePos.x;
         posY = camera->prevPrevMovePos.y;

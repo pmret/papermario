@@ -1192,7 +1192,7 @@ typedef struct ItemEntity {
 
 typedef struct MessagePrintState {
     /* 0x000 */ u8* srcBuffer;
-    /* 0x004 */ s16 printBufferPos;
+    /* 0x004 */ u16 printBufferPos;
     /* 0x006 */ char unk_06[2];
     /* 0x008 */ s32 msgID;
     /* 0x00C */ u16 srcBufferPos;
@@ -1204,13 +1204,13 @@ typedef struct MessagePrintState {
     /* 0x455 */ u8 fontVariant;
     /* 0x456 */ Vec2s windowOffsetPos; // offset from baseWindowPos. used to animated window pos?
     /* 0x45A */ Vec2s windowBasePos; // ex: set by the parameters for choice style
-    /* 0x45E */ s8 printDelayTime; // delay to print each chunk
+    /* 0x45E */ u8 printDelayTime; // delay to print each chunk
     /* 0x45F */ u8 charsPerChunk; // how many chars to print at once
     /* 0x460 */ s32 curLinePos; // position along current line
     /* 0x464 */ u8 unk_464;
     /* 0x465 */ char unk_465;
     /* 0x466 */ u16 nextLinePos; // ?
-    /* 0x468 */ s8 lineCount;
+    /* 0x468 */ u8 lineCount;
     /* 0x469 */ char unk_469[0x3];
     /* 0x46C */ s32 unk_46C;
     /* 0x470 */ u8 currentAnimFrame[4];
@@ -1260,7 +1260,7 @@ typedef struct MessagePrintState {
     /* 0x51E */ char unk_51E[0x2];
     /* 0x520 */ s32 speedSoundIDA;
     /* 0x524 */ s32 speedSoundIDB;
-    /* 0x528 */ s16 varBufferReadPos;
+    /* 0x528 */ u16 varBufferReadPos;
     /* 0x52A */ s8 unk_52A;
     /* 0x52B */ u8 currentImageIndex;
     /* 0x52C */ Vec2su varImageScreenPos; // in addition, posX=0 is taken as 'dont draw'

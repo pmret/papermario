@@ -1783,6 +1783,7 @@ s32 test_item_player_collision(ItemEntity* item) {
     f32 playerZ;
 
     f32 sp10;
+    f32 new_var2;
     f32 sp14;
     f32 sp1C;
     f32 sp20;
@@ -1793,7 +1794,6 @@ s32 test_item_player_collision(ItemEntity* item) {
     f32 angle;
     s32 cond;
     f32 f1;
-
 
     actionState = playerStatus->actionState;
 
@@ -1818,11 +1818,12 @@ s32 test_item_player_collision(ItemEntity* item) {
         return FALSE;
     }
 
-    if (item->flags & ITEM_ENTITY_FLAG_HIDDEN) {
+    cond = item->flags;
+    if (cond & ITEM_ENTITY_FLAG_HIDDEN) {
         return FALSE;
     }
 
-    if (get_time_freeze_mode() != 0) {
+    if (get_time_freeze_mode() != TIME_FREEZE_NORMAL) {
         return FALSE;
     }
 
@@ -1834,7 +1835,7 @@ s32 test_item_player_collision(ItemEntity* item) {
         return FALSE;
     }
 
-    if (gOverrideFlags & GLOBAL_OVERRIDES_200000) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS) {
         return FALSE;
     }
 
@@ -1850,6 +1851,8 @@ s32 test_item_player_collision(ItemEntity* item) {
     } else {
         temp_f14 = clamp_angle(camera->currentYaw + 90.0f);
     }
+
+    new_var2 = playerY;
     sp10 = playerX;
     sp24 = playerY;
     sp14 = playerZ;
@@ -1868,12 +1871,12 @@ s32 test_item_player_collision(ItemEntity* item) {
     itemX = item->position.x;
     itemY = item->position.y;
     itemZ = item->position.z;
-    t = 13.5f;
     xDiff = itemX - playerX;
     zDiff = itemZ - playerZ;
+    t = 13.5f;
     f1 = sqrtf(SQ(xDiff) + SQ(zDiff));
     if (!(sp20 + t <= f1) &&
-        !(itemY + 27.0f < playerY) &&
+        !(itemY + 27.0f < new_var2) &&
         !(playerY + sp1C < itemY))
     {
         cond = TRUE;
@@ -1885,7 +1888,7 @@ s32 test_item_player_collision(ItemEntity* item) {
         f1 = sqrtf(SQ(xDiff) + SQ(zDiff));
         if (!(14.0f + t <= f1) &&
             !(itemY + 27.0f < sp24) &&
-            !(sp24 + 18.0f < itemY))
+            !(playerY + 18.0f < itemY))
         {
             cond = TRUE;
         }

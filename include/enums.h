@@ -667,6 +667,7 @@ enum SoundIDs {
     SOUND_MENU_CHANGE_TAB           = 0x000000C8,
     SOUND_MENU_NEXT                 = 0x000000C9,
     SOUND_MENU_BACK                 = 0x000000CA,
+    SOUND_CB                        = 0x000000CB,
     SOUND_CC                        = 0x000000CC,
     SOUND_CD                        = 0x000000CD,
     SOUND_CE                        = 0x000000CE,
@@ -6580,12 +6581,15 @@ enum MsgStateFlags {
     MSG_STATE_FLAG_80               = 0x000080,
     MSG_STATE_FLAG_PRINT_QUICKLY    = 0x000100,
     MSG_STATE_FLAG_400              = 0x000400,
+    MSG_STATE_FLAG_800              = 0x000800,
+    MSG_STATE_FLAG_1000             = 0x001000,
     MSG_STATE_FLAG_4000             = 0x004000,
     MSG_STATE_FLAG_8000             = 0x008000,
     MSG_STATE_FLAG_10000            = 0x010000,
     MSG_STATE_FLAG_20000            = 0x020000,
     MSG_STATE_FLAG_40000            = 0x040000,
     MSG_STATE_FLAG_80000            = 0x080000,
+    MSG_STATE_FLAG_100000           = 0x100000,
     MSG_STATE_FLAG_800000           = 0x800000,
 };
 
